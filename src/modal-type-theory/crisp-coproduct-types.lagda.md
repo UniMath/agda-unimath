@@ -41,21 +41,21 @@ This is Theorem 5.4 of _Brouwer's fixed-point theorem in real-cohesive homotopy
 type theory_, although the proof is much simpler.
 
 ```agda
-crisp-ind-coprod :
+crisp-ind-coproduct :
   {@♭ l1 l2 l3 : Level}
   {@♭ A : UU l1} {@♭ B : UU l2} {@♭ C : @♭ A + B → UU l3} →
   @♭ ((@♭ x : A) → C (inl x)) →
   @♭ ((@♭ y : B) → C (inr y)) →
   ((@♭ u : A + B) → C u)
-crisp-ind-coprod f g (inl x) = f x
-crisp-ind-coprod f g (inr y) = g y
+crisp-ind-coproduct f g (inl x) = f x
+crisp-ind-coproduct f g (inr y) = g y
 
-crisp-rec-coprod :
+crisp-rec-coproduct :
   {@♭ l1 l2 l3 : Level} {@♭ A : UU l1} {@♭ B : UU l2} {@♭ C : UU l3} →
   @♭ ((@♭ x : A) → C) →
   @♭ ((@♭ y : B) → C) →
   (@♭ (A + B) → C)
-crisp-rec-coprod = crisp-ind-coprod
+crisp-rec-coproduct = crisp-ind-coproduct
 ```
 
 ## Properties
@@ -70,45 +70,45 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  map-distributive-flat-coprod : ♭ (A + B) → (♭ A) + (♭ B)
-  map-distributive-flat-coprod (cons-flat (inl x)) = inl (cons-flat x)
-  map-distributive-flat-coprod (cons-flat (inr x)) = inr (cons-flat x)
+  map-distributive-flat-coproduct : ♭ (A + B) → (♭ A) + (♭ B)
+  map-distributive-flat-coproduct (cons-flat (inl x)) = inl (cons-flat x)
+  map-distributive-flat-coproduct (cons-flat (inr x)) = inr (cons-flat x)
 
-  map-inv-distributive-flat-coprod : (♭ A) + (♭ B) → ♭ (A + B)
-  map-inv-distributive-flat-coprod (inl (cons-flat x)) = cons-flat (inl x)
-  map-inv-distributive-flat-coprod (inr (cons-flat x)) = cons-flat (inr x)
+  map-inv-distributive-flat-coproduct : (♭ A) + (♭ B) → ♭ (A + B)
+  map-inv-distributive-flat-coproduct (inl (cons-flat x)) = cons-flat (inl x)
+  map-inv-distributive-flat-coproduct (inr (cons-flat x)) = cons-flat (inr x)
 
-  is-section-map-distributive-flat-coprod :
-    is-section map-inv-distributive-flat-coprod map-distributive-flat-coprod
-  is-section-map-distributive-flat-coprod (cons-flat (inl x)) = refl
-  is-section-map-distributive-flat-coprod (cons-flat (inr x)) = refl
+  is-section-map-distributive-flat-coproduct :
+    is-section map-inv-distributive-flat-coproduct map-distributive-flat-coproduct
+  is-section-map-distributive-flat-coproduct (cons-flat (inl x)) = refl
+  is-section-map-distributive-flat-coproduct (cons-flat (inr x)) = refl
 
-  is-retraction-map-distributive-flat-coprod :
-    is-retraction map-inv-distributive-flat-coprod map-distributive-flat-coprod
-  is-retraction-map-distributive-flat-coprod (inl (cons-flat x)) = refl
-  is-retraction-map-distributive-flat-coprod (inr (cons-flat x)) = refl
+  is-retraction-map-distributive-flat-coproduct :
+    is-retraction map-inv-distributive-flat-coproduct map-distributive-flat-coproduct
+  is-retraction-map-distributive-flat-coproduct (inl (cons-flat x)) = refl
+  is-retraction-map-distributive-flat-coproduct (inr (cons-flat x)) = refl
 
-  section-distributive-flat-coprod : section map-distributive-flat-coprod
-  pr1 section-distributive-flat-coprod = map-inv-distributive-flat-coprod
-  pr2 section-distributive-flat-coprod =
-    is-retraction-map-distributive-flat-coprod
+  section-distributive-flat-coproduct : section map-distributive-flat-coproduct
+  pr1 section-distributive-flat-coproduct = map-inv-distributive-flat-coproduct
+  pr2 section-distributive-flat-coproduct =
+    is-retraction-map-distributive-flat-coproduct
 
-  retraction-distributive-flat-coprod : retraction map-distributive-flat-coprod
-  pr1 retraction-distributive-flat-coprod = map-inv-distributive-flat-coprod
-  pr2 retraction-distributive-flat-coprod =
-    is-section-map-distributive-flat-coprod
+  retraction-distributive-flat-coproduct : retraction map-distributive-flat-coproduct
+  pr1 retraction-distributive-flat-coproduct = map-inv-distributive-flat-coproduct
+  pr2 retraction-distributive-flat-coproduct =
+    is-section-map-distributive-flat-coproduct
 
-  is-equiv-map-distributive-flat-coprod : is-equiv map-distributive-flat-coprod
-  pr1 is-equiv-map-distributive-flat-coprod = section-distributive-flat-coprod
-  pr2 is-equiv-map-distributive-flat-coprod =
-    retraction-distributive-flat-coprod
+  is-equiv-map-distributive-flat-coproduct : is-equiv map-distributive-flat-coproduct
+  pr1 is-equiv-map-distributive-flat-coproduct = section-distributive-flat-coproduct
+  pr2 is-equiv-map-distributive-flat-coproduct =
+    retraction-distributive-flat-coproduct
 
-  distributive-flat-coprod : ♭ (A + B) ≃ (♭ A) + (♭ B)
-  pr1 distributive-flat-coprod = map-distributive-flat-coprod
-  pr2 distributive-flat-coprod = is-equiv-map-distributive-flat-coprod
+  distributive-flat-coproduct : ♭ (A + B) ≃ (♭ A) + (♭ B)
+  pr1 distributive-flat-coproduct = map-distributive-flat-coproduct
+  pr2 distributive-flat-coproduct = is-equiv-map-distributive-flat-coproduct
 
-  inv-distributive-flat-coprod : (♭ A) + (♭ B) ≃ ♭ (A + B)
-  inv-distributive-flat-coprod = inv-equiv distributive-flat-coprod
+  inv-distributive-flat-coproduct : (♭ A) + (♭ B) ≃ ♭ (A + B)
+  inv-distributive-flat-coproduct = inv-equiv distributive-flat-coproduct
 ```
 
 ### Computing the flat counit on a coproduct type
@@ -121,14 +121,14 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  compute-counit-flat-coprod :
+  compute-counit-flat-coproduct :
     counit-flat {A = A + B} ~
-    ( ind-coprod _
+    ( ind-coproduct _
       ( λ where (cons-flat x) → inl x)
       ( λ where (cons-flat x) → inr x)) ∘
-    ( map-distributive-flat-coprod)
-  compute-counit-flat-coprod (cons-flat (inl x)) = refl
-  compute-counit-flat-coprod (cons-flat (inr x)) = refl
+    ( map-distributive-flat-coproduct)
+  compute-counit-flat-coproduct (cons-flat (inl x)) = refl
+  compute-counit-flat-coproduct (cons-flat (inr x)) = refl
 ```
 
 ### A crisp coproduct type is flat discrete if both summands are
@@ -138,20 +138,20 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  is-flat-discrete-crisp-coprod :
+  is-flat-discrete-crisp-coproduct :
     is-flat-discrete-crisp A →
     is-flat-discrete-crisp B →
     is-flat-discrete-crisp (A + B)
-  is-flat-discrete-crisp-coprod is-disc-A is-disc-B =
+  is-flat-discrete-crisp-coproduct is-disc-A is-disc-B =
     is-equiv-left-map-triangle
       ( counit-flat)
-      ( map-coprod counit-flat counit-flat)
-      ( map-distributive-flat-coprod)
+      ( map-coproduct counit-flat counit-flat)
+      ( map-distributive-flat-coproduct)
       ( λ where
         (cons-flat (inl x)) → refl
         (cons-flat (inr x)) → refl)
-      ( is-equiv-map-distributive-flat-coprod)
-      ( is-equiv-map-coprod is-disc-A is-disc-B)
+      ( is-equiv-map-distributive-flat-coproduct)
+      ( is-equiv-map-coproduct is-disc-A is-disc-B)
 ```
 
 ## References
