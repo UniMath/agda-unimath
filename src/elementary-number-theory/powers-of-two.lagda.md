@@ -203,6 +203,6 @@ is-equiv-pairing-map : is-equiv pairing-map
 is-equiv-pairing-map =
   is-equiv-is-split-surjective-is-injective
     pairing-map
-    is-injecitve-pairing-map
+    is-injective-pairing-map
     is-split-surjective-pairing-map
 ```

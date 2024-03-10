@@ -17,6 +17,7 @@ open import modal-type-theory.crisp-function-types public
 open import modal-type-theory.crisp-identity-types public
 open import modal-type-theory.crisp-injective-maps public
 open import modal-type-theory.crisp-law-of-excluded-middle public
+open import modal-type-theory.crisp-pullbacks public
 open import modal-type-theory.crisp-types public
 open import modal-type-theory.flat-action-on-homotopies public
 open import modal-type-theory.flat-discrete-crisp-types public
