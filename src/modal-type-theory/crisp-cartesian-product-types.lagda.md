@@ -51,27 +51,35 @@ module _
   pr2 (map-distributive-flat-product (cons-flat (x , y))) = cons-flat y
 
   map-inv-distributive-flat-product : (♭ A) × (♭ B) → ♭ (A × B)
-  map-inv-distributive-flat-product (cons-flat x , cons-flat y) = cons-flat (x , y)
+  map-inv-distributive-flat-product (cons-flat x , cons-flat y) =
+    cons-flat (x , y)
 
   is-section-map-distributive-flat-product :
     is-section map-inv-distributive-flat-product map-distributive-flat-product
   is-section-map-distributive-flat-product (cons-flat x) = refl
 
   is-retraction-map-distributive-flat-product :
-    is-retraction map-inv-distributive-flat-product map-distributive-flat-product
+    is-retraction
+      ( map-inv-distributive-flat-product)
+      ( map-distributive-flat-product)
   is-retraction-map-distributive-flat-product (cons-flat x , cons-flat y) = refl
 
   section-distributive-flat-product : section map-distributive-flat-product
   pr1 section-distributive-flat-product = map-inv-distributive-flat-product
-  pr2 section-distributive-flat-product = is-retraction-map-distributive-flat-product
+  pr2 section-distributive-flat-product =
+    is-retraction-map-distributive-flat-product
 
-  retraction-distributive-flat-product : retraction map-distributive-flat-product
+  retraction-distributive-flat-product :
+    retraction map-distributive-flat-product
   pr1 retraction-distributive-flat-product = map-inv-distributive-flat-product
-  pr2 retraction-distributive-flat-product = is-section-map-distributive-flat-product
+  pr2 retraction-distributive-flat-product =
+    is-section-map-distributive-flat-product
 
-  is-equiv-map-distributive-flat-product : is-equiv map-distributive-flat-product
+  is-equiv-map-distributive-flat-product :
+    is-equiv map-distributive-flat-product
   pr1 is-equiv-map-distributive-flat-product = section-distributive-flat-product
-  pr2 is-equiv-map-distributive-flat-product = retraction-distributive-flat-product
+  pr2 is-equiv-map-distributive-flat-product =
+    retraction-distributive-flat-product
 
   distributive-flat-product : ♭ (A × B) ≃ (♭ A) × (♭ B)
   pr1 distributive-flat-product = map-distributive-flat-product

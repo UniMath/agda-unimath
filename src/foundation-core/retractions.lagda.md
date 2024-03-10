@@ -222,6 +222,16 @@ module _
     is-retraction-map-retraction-left-map-triangle
 ```
 
+### If `f` has a retraction, then `f` is injective
+
+```agda
+abstract
+  is-injective-retraction :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    retraction f → {x y : A} → f x ＝ f y → x ＝ y
+  is-injective-retraction f (h , H) {x} {y} p = inv (H x) ∙ (ap h p ∙ H y)
+```
+
 ## See also
 
 - Retracts of types are defined in
