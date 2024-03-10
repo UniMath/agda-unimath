@@ -114,14 +114,20 @@ module _
   is-injective-equiv : (e : A ≃ B) → is-injective (map-equiv e)
   is-injective-equiv e = is-injective-is-equiv (is-equiv-map-equiv e)
 
+abstract
+  is-injective-map-inv-equiv :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
+    is-injective (map-inv-equiv e)
+  is-injective-map-inv-equiv e =
+    is-injective-is-equiv (is-equiv-map-inv-equiv e)
+```
+
+### Injective maps that have a section are equivalences
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-
-  abstract
-    is-injective-map-inv-equiv : (e : A ≃ B) → is-injective (map-inv-equiv e)
-    is-injective-map-inv-equiv e =
-      is-injective-is-equiv (is-equiv-map-inv-equiv e)
 
   is-equiv-is-injective : {f : A → B} → section f → is-injective f → is-equiv f
   is-equiv-is-injective {f} (pair g G) H =
