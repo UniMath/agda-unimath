@@ -69,9 +69,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-coinhabited-inv : is-coinhabited A B → is-coinhabited B A
-  is-coinhabited-inv = inv-iff
-```
+  is-symmetric-is-coinhabited : is-coinhabited A B → is-coinhabited B A
+  is-symmetric-is-coinhabited = inv-iff
 
 ### Forward and backward implications of coinhabited types
 
