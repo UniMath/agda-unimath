@@ -105,10 +105,9 @@ module _
       ( map-retraction i R)
       ( is-retraction-map-retraction i R)
 
-  retraction-ap :
-    retraction i → {x y : A} → retraction (ap i {x} {y})
-  pr1 (retraction-ap (pair r H)) = is-injective-retraction
-  pr2 (retraction-ap (pair r H)) = is-retraction-is-injective-retraction
+  retraction-ap : {x y : A} → retraction (ap i {x} {y})
+  pr1 retraction-ap = is-injective-retraction
+  pr2 retraction-ap = is-retraction-is-injective-retraction
 ```
 
 ### Composites of retractions are retractions
