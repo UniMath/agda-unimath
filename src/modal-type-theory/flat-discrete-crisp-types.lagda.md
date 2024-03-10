@@ -28,6 +28,7 @@ open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.retractions
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.unit-type
@@ -155,22 +156,36 @@ module _
 
   htpy-retraction-counit-flat-has-crisp-section : s ∘ counit-flat ~ id
   htpy-retraction-counit-flat-has-crisp-section (cons-flat x) =
-    inv (is-crisp-retraction-cons-flat (s x)) ∙ ap-flat-htpy H (cons-flat x)
+    inv (is-crisp-retraction-cons-flat (s x)) ∙ ap-htpy-flat H (cons-flat x)
 
   retraction-counit-flat-has-crisp-section : retraction (counit-flat {A = A})
   retraction-counit-flat-has-crisp-section =
     ( s , htpy-retraction-counit-flat-has-crisp-section)
 
   is-flat-discrete-crisp-has-crisp-section : is-flat-discrete-crisp A
-  pr1 is-flat-discrete-crisp-has-crisp-section = s , H
-  pr2 is-flat-discrete-crisp-has-crisp-section =
-    retraction-counit-flat-has-crisp-section
+  is-flat-discrete-crisp-has-crisp-section =
+    ( (s , H) , retraction-counit-flat-has-crisp-section)
 
 is-flat-discrete-crisp-crisp-section :
   {@♭ l : Level} {@♭ A : UU l} →
   @♭ section (counit-flat {A = A}) → is-flat-discrete-crisp A
 is-flat-discrete-crisp-crisp-section (s , H) =
   is-flat-discrete-crisp-has-crisp-section s H
+```
+
+### Flat discrete crisp types are closed under crisp equivalences
+
+```agda
+module _
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
+  where
+
+  is-flat-discrete-crisp-equiv :
+    @♭ A ≃ B → is-flat-discrete-crisp B → is-flat-discrete-crisp A
+  is-flat-discrete-crisp-equiv e bB =
+    is-equiv-htpy-equiv'
+      ( inv-equiv e ∘e (counit-flat , bB) ∘e ap-equiv-flat e)
+      ( λ where (cons-flat x) → is-retraction-map-inv-equiv e x)
 ```
 
 ### Types `♭ A` are flat discrete
