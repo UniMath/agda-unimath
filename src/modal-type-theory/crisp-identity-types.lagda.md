@@ -77,18 +77,9 @@ module _
 
 ```agda
 crisp-ap :
-  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {B : UU l2} {@♭ x y : A}
-  (f : @♭ A → B) → @♭ (x ＝ y) → f x ＝ f y
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {B : UU l2}
+  (f : @♭ A → B) {@♭ x y : A} → @♭ (x ＝ y) → f x ＝ f y
 crisp-ap f refl = refl
-```
-
-### Crisp transport along identifications
-
-```agda
-crisp-tr :
-  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (B : A → UU l2)
-  {@♭ x y : A} (@♭ p : x ＝ y) → B x → B y
-crisp-tr B refl x = x
 ```
 
 ## Properties
@@ -187,6 +178,10 @@ The following is Corollary 6.2 in {{#cite Shu17}}.
 
 ### Corollary 6.3
 
+While we record the constructions of Corollary 6.3 here, we note that the
+construction `crisp-ap cons-flat` is preferred due to its higher generality and
+better computational behaviour.
+
 ```agda
 module _
   {@♭ l : Level} {@♭ A : UU l}
@@ -207,5 +202,15 @@ module _
   compute-ap-counit-flat-eq-cons-flat-crisp-eq =
     crisp-ind-Id
       ( λ x y p → ap (counit-flat) (eq-cons-flat-crisp-eq p) ＝ p)
+      ( λ _ → refl)
+```
+
+```agda
+  is-crisp-section-crisp-ap-cons-flat :
+    {@♭ x y : A} (@♭ p : x ＝ y) →
+    ap (counit-flat) (crisp-ap cons-flat p) ＝ p
+  is-crisp-section-crisp-ap-cons-flat =
+    crisp-ind-Id
+      ( λ x y p → ap (counit-flat) (crisp-ap cons-flat p) ＝ p)
       ( λ _ → refl)
 ```
