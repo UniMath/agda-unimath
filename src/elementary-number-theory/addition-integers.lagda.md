@@ -26,7 +26,6 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundation.transport-along-identifications
 open import foundation.unit-type
 ```
 

@@ -14,22 +14,15 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.equality-coproduct-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.negated-equality
-open import foundation.negation
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
