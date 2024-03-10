@@ -76,11 +76,13 @@ equiv-is-prop-equiv {A = A} {B = B} e =
     ( is-prop-equiv e)
 ```
 
-## Operations on propositions
+## See also
+
+### Operations on propositions
 
 {{#include tables/operations-propositions.md}}
 
-## Table of files about propositional logic
+### Table of files about propositional logic
 
 The following table gives an overview of basic constructions in propositional
 logic and related considerations.
