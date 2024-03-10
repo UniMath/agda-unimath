@@ -9,6 +9,7 @@ module modal-type-theory.crisp-identity-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -32,27 +33,44 @@ We record here some basic facts about
 
 ## Definitions
 
-### Crisp identification induction
+### Weak crisp identification induction
 
 ```agda
-weak-crisp-ind-Id :
+weak-crisp-based-ind-Id :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {@♭ a : A} →
   (C : (@♭ y : A) → (a ＝ y) → UU l2) →
   C a refl →
   (@♭ y : A) (@♭ p : a ＝ y) → C y p
-weak-crisp-ind-Id C b _ refl = b
+weak-crisp-based-ind-Id C b _ refl = b
+```
 
+### Based crisp identification induction
+
+```agda
 -- TODO: this is how the principle is stated in Shu15. It can be proved with `pointwise-sharp` (except for any cohesive universe level)
+module _
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ x : A}
+  (@♭ C : (@♭ y : A) → @♭ (x ＝ y) → UU l2)
+  (@♭ d : (C x refl))
+  where
+
+  postulate
+    crisp-based-ind-Id : {@♭ y : A} (@♭ p : x ＝ y) → C y p
+    compute-crisp-based-ind-Id : crisp-based-ind-Id {x} refl ＝ d
+```
+
+```agda
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1}
   (@♭ C : (@♭ x y : A) → @♭ (x ＝ y) → UU l2)
   (@♭ d : ((@♭ x : A) → C x x refl))
   where
 
-  postulate
-    crisp-ind-Id : {@♭ x y : A} (@♭ p : x ＝ y) → C x y p
+  crisp-ind-Id : {@♭ x y : A} (@♭ p : x ＝ y) → C x y p
+  crisp-ind-Id {x} {y} p = crisp-based-ind-Id (λ y p → C x y p) (d x) {y} p
 
-    compute-crisp-ind-Id : (@♭ x : A) → crisp-ind-Id {x} refl ＝ d x
+  compute-crisp-ind-Id : (@♭ x : A) → crisp-ind-Id {x} refl ＝ d x
+  compute-crisp-ind-Id x = compute-crisp-based-ind-Id (λ y p → C x y p) (d x)
 ```
 
 ### Crisp action on identifications
@@ -112,9 +130,9 @@ The retraction part is easy:
   pr1 (pr2 (retract-Eq-flat u v)) = eq-Eq-flat u v
   pr2 (pr2 (retract-Eq-flat u v)) = is-retraction-eq-Eq-flat u v
 
-  is-injective-eq-Eq-flat :
+  is-injective-Eq-eq-flat :
     (u v : ♭ A) → is-injective (Eq-eq-flat u v)
-  is-injective-eq-Eq-flat u v =
+  is-injective-Eq-eq-flat u v =
     is-injective-retraction (Eq-eq-flat u v) (retraction-Eq-eq-flat u v)
 ```
 
@@ -137,13 +155,12 @@ induction principle, which we have only postulated so far.
 ```
 
 ```agda
-  abstract
-    is-equiv-Eq-eq-flat : (u v : ♭ A) → is-equiv (Eq-eq-flat u v)
-    is-equiv-Eq-eq-flat u v =
-      is-equiv-is-invertible
-        ( eq-Eq-flat u v)
-        ( is-section-eq-Eq-flat u v)
-        ( is-retraction-eq-Eq-flat u v)
+  is-equiv-Eq-eq-flat : (u v : ♭ A) → is-equiv (Eq-eq-flat u v)
+  is-equiv-Eq-eq-flat u v =
+    is-equiv-is-invertible
+      ( eq-Eq-flat u v)
+      ( is-section-eq-Eq-flat u v)
+      ( is-retraction-eq-Eq-flat u v)
 
   extensionality-flat : (u v : ♭ A) → (u ＝ v) ≃ Eq-flat u v
   pr1 (extensionality-flat u v) = Eq-eq-flat u v
@@ -166,4 +183,29 @@ The following is Corollary 6.2 in {{#cite Shu17}}.
     (@♭ u v : ♭ A) → (u ＝ v) ≃ ♭ (counit-flat u ＝ counit-flat v)
   crisp-flat-extensionality-flat (cons-flat x) (cons-flat y) =
     extensionality-flat (cons-flat x) (cons-flat y)
+```
+
+### Corollary 6.3
+
+```agda
+module _
+  {@♭ l : Level} {@♭ A : UU l}
+  where
+
+  eq-cons-flat-crisp-eq :
+    {@♭ x y : A} → @♭ (x ＝ y) → cons-flat x ＝ cons-flat y
+  eq-cons-flat-crisp-eq {x} {y} p =
+    eq-Eq-flat (cons-flat x) (cons-flat y) (cons-flat p)
+
+  compute-refl-eq-cons-flat-crisp-eq :
+    {@♭ x : A} → eq-cons-flat-crisp-eq (refl {x = x}) ＝ refl
+  compute-refl-eq-cons-flat-crisp-eq = refl
+
+  compute-ap-counit-flat-eq-cons-flat-crisp-eq :
+    {@♭ x y : A} (@♭ p : x ＝ y) →
+    ap (counit-flat) (eq-cons-flat-crisp-eq p) ＝ p
+  compute-ap-counit-flat-eq-cons-flat-crisp-eq =
+    crisp-ind-Id
+      ( λ x y p → ap (counit-flat) (eq-cons-flat-crisp-eq p) ＝ p)
+      ( λ _ → refl)
 ```
