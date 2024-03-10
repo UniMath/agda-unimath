@@ -47,8 +47,8 @@ module _
   {l : Level} (A : UU l)
   where
 
-  is-coinhabited-self : is-coinhabited A A
-  is-coinhabited-self = id-iff
+  refl-is-coinhabited : is-coinhabited A A
+  refl-is-coinhabited = id-iff
 ```
 
 ### Coinhabitedness is a transitive relation
