@@ -552,18 +552,3 @@ is-zero-right-add-ℤ :
 is-zero-right-add-ℤ x y H =
   is-zero-left-add-ℤ y x (commutative-add-ℤ y x ∙ H)
 ```
-
-### Adding negatives results in a negative
-
-```agda
-negatives-add-ℤ :
-  (x y : ℕ) → in-neg x +ℤ in-neg y ＝ in-neg (succ-ℕ (x +ℕ y))
-negatives-add-ℤ zero-ℕ y = ap (inl ∘ succ-ℕ) (inv (left-unit-law-add-ℕ y))
-negatives-add-ℤ (succ-ℕ x) y =
-  equational-reasoning
-    pred-ℤ (in-neg x +ℤ in-neg y)
-    ＝ pred-ℤ (in-neg (succ-ℕ (x +ℕ y)))
-      by ap pred-ℤ (negatives-add-ℤ x y)
-    ＝ (inl ∘ succ-ℕ) ((succ-ℕ x) +ℕ y)
-      by ap (inl ∘ succ-ℕ) (inv (left-successor-law-add-ℕ x y))
-```
