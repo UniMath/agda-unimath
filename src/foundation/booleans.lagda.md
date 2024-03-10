@@ -238,7 +238,7 @@ neq-neg-bool false ()
 ### Boolean negation is an involution
 
 ```agda
-neg-neg-bool : neg-bool ∘ neg-bool ~ id
+is-involution-neg-bool : is-involution neg-bool
 neg-neg-bool true = refl
 neg-neg-bool false = refl
 ```
