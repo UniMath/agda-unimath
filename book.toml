@@ -57,7 +57,7 @@ bibtex = "references.bib"
 backend_format = "html"
 citation_style = "alpha"
 citation_label_style = "alpha"
-before = [ "preprocessor.git-metadata" ]
+before = [ "git-metadata" ]
 
 [output.linkcheck]
 follow-web-links = false
