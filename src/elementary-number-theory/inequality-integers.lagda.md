@@ -139,34 +139,34 @@ concatenate-eq-leq-ℤ y refl H = H
 ### ℤ is an ordered ring
 
 ```agda
-preserves-order-add-ℤ' :
+preserves-leq-add-ℤ' :
   {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (x +ℤ z) (y +ℤ z)
-preserves-order-add-ℤ' {x} {y} z =
+preserves-leq-add-ℤ' {x} {y} z =
   is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ y x z))
 
-preserves-order-add-ℤ :
+preserves-leq-add-ℤ :
   {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (z +ℤ x) (z +ℤ y)
-preserves-order-add-ℤ {x} {y} z =
+preserves-leq-add-ℤ {x} {y} z =
   is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ y x z))
 
-preserves-leq-add-ℤ :
+preserves-leq-leq-add-ℤ :
   {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (a +ℤ c) (b +ℤ d)
-preserves-leq-add-ℤ {a} {b} {c} {d} H K =
+preserves-leq-leq-add-ℤ {a} {b} {c} {d} H K =
   transitive-leq-ℤ
     ( a +ℤ c)
     ( b +ℤ c)
     ( b +ℤ d)
-    ( preserves-order-add-ℤ' {a} {b} c H)
-    ( preserves-order-add-ℤ b K)
+    ( preserves-leq-add-ℤ' {a} {b} c H)
+    ( preserves-leq-add-ℤ b K)
 
-reflects-order-add-ℤ' :
-  {x y z : ℤ} → leq-ℤ (x +ℤ z) (y +ℤ z) → leq-ℤ x y
-reflects-order-add-ℤ' {x} {y} {z} =
+reflects-leq-add-ℤ' :
+  {x y : ℤ} (z : ℤ) → leq-ℤ (x +ℤ z) (y +ℤ z) → leq-ℤ x y
+reflects-leq-add-ℤ' {x} {y} z =
   is-nonnegative-eq-ℤ (right-translation-diff-ℤ y x z)
 
-reflects-order-add-ℤ :
-  {x y z : ℤ} → leq-ℤ (z +ℤ x) (z +ℤ y) → leq-ℤ x y
-reflects-order-add-ℤ {x} {y} {z} =
+reflects-leq-add-ℤ :
+  {x y : ℤ} (z : ℤ) → leq-ℤ (z +ℤ x) (z +ℤ y) → leq-ℤ x y
+reflects-leq-add-ℤ {x} {y} z =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
@@ -215,49 +215,47 @@ connected-le-ℤ x y H =
 le-pred-ℤ : (x : ℤ) → le-ℤ (pred-ℤ x) x
 le-pred-ℤ x =
   is-positive-eq-ℤ
-    ( inv
-      ( right-predecessor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
+    ( inv (right-predecessor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
     ( is-positive-int-positive-ℤ one-positive-ℤ)
 
 le-succ-ℤ : (x : ℤ) → le-ℤ x (succ-ℤ x)
 le-succ-ℤ x =
   is-positive-eq-ℤ
-    ( inv
-      ( left-successor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
+    ( inv (left-successor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
     ( is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
 ### Addition on the integers preserves and reflects the strict ordering
 
 ```agda
-preserves-strict-order-add-ℤ' :
+preserves-le-add-ℤ' :
   {x y : ℤ} (z : ℤ) → le-ℤ x y → le-ℤ (x +ℤ z) (y +ℤ z)
-preserves-strict-order-add-ℤ' {x} {y} z =
+preserves-le-add-ℤ' {x} {y} z =
   is-positive-eq-ℤ (inv (right-translation-diff-ℤ y x z))
 
-preserves-strict-order-add-ℤ :
+preserves-le-add-ℤ :
   {x y : ℤ} (z : ℤ) → le-ℤ x y → le-ℤ (z +ℤ x) (z +ℤ y)
-preserves-strict-order-add-ℤ {x} {y} z =
+preserves-le-add-ℤ {x} {y} z =
   is-positive-eq-ℤ (inv (left-translation-diff-ℤ y x z))
 
-preserves-le-add-ℤ :
+preserves-le-le-add-ℤ :
   {a b c d : ℤ} → le-ℤ a b → le-ℤ c d → le-ℤ (a +ℤ c) (b +ℤ d)
-preserves-le-add-ℤ {a} {b} {c} {d} H K =
+preserves-le-le-add-ℤ {a} {b} {c} {d} H K =
   transitive-le-ℤ
     ( a +ℤ c)
     ( b +ℤ c)
     ( b +ℤ d)
-    ( preserves-strict-order-add-ℤ' {a} {b} c H)
-    ( preserves-strict-order-add-ℤ b K)
+    ( preserves-le-add-ℤ' {a} {b} c H)
+    ( preserves-le-add-ℤ b K)
 
-reflects-strict-order-add-ℤ' :
-  {x y z : ℤ} → le-ℤ (x +ℤ z) (y +ℤ z) → le-ℤ x y
-reflects-strict-order-add-ℤ' {x} {y} {z} =
+reflects-le-add-ℤ' :
+  {x y : ℤ} (z : ℤ) → le-ℤ (x +ℤ z) (y +ℤ z) → le-ℤ x y
+reflects-le-add-ℤ' {x} {y} z =
   is-positive-eq-ℤ (right-translation-diff-ℤ y x z)
 
-reflects-strict-order-add-ℤ :
-  {x y z : ℤ} → le-ℤ (z +ℤ x) (z +ℤ y) → le-ℤ x y
-reflects-strict-order-add-ℤ {x} {y} {z} =
+reflects-le-add-ℤ :
+  {x y : ℤ} (z : ℤ) → le-ℤ (z +ℤ x) (z +ℤ y) → le-ℤ x y
+reflects-le-add-ℤ {x} {y} z =
   is-positive-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
