@@ -29,7 +29,6 @@ open import foundation.arithmetic-law-product-and-pi-decompositions public
 open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.bands public
-open import foundation.biimplication public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public
@@ -206,7 +205,6 @@ open import foundation.identity-truncated-types public
 open import foundation.identity-types public
 open import foundation.images public
 open import foundation.images-subtypes public
-open import foundation.implication public
 open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings-propositions public
 open import foundation.impredicative-universes public
@@ -246,6 +244,8 @@ open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
+open import foundation.mere-logical-consequences public
+open import foundation.mere-logical-equivalences public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public

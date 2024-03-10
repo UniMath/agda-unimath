@@ -9,8 +9,8 @@
 | Unit type                                            | [`foundation.unit-type`](foundation.unit-type.md)                                                                       |
 | Logical equivalences                                 | [`foundation.logical-equivalences`](foundation.logical-equivalences.md)                                                 |
 | Propositional extensionality                         | [`foundation.propositional-extensionality`](foundation.propositional-extensionality.md)                                 |
-| Implication of types                                 | [`foundation.implication`](foundation.implication.md)                                                                   |
-| Biimplication of types                               | [`foundation.biimplication`](foundation.biimplication.md)                                                               |
+| Mere logical consequences                            | [`foundation.mere-logical-consequences`](foundation.mere-logical-consequences.md)                                       |
+| Mere logical equivalences                            | [`foundation.mere-logical-equivalences`](foundation.mere-logical-equivalences.md)                                       |
 | Conjunction of types                                 | [`foundation.conjunction`](foundation.conjunction.md)                                                                   |
 | Conjunction of propositions                          | [`foundation.conjunction-propositions`](foundation.conjunction-propositions.md)                                         |
 | Disjunction of types                                 | [`foundation.disjunction`](foundation.disjunction.md)                                                                   |

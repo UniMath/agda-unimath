@@ -61,6 +61,7 @@ module _
   is-transitive-is-coinhabited :
     is-transitive-Large-Relation is-coinhabited
   is-transitive-is-coinhabited = _∘iff_
+```
 
 ### Coinhabitedness is a symmetric relation
 
@@ -71,6 +72,7 @@ module _
 
   is-symmetric-is-coinhabited : is-coinhabited A B → is-coinhabited B A
   is-symmetric-is-coinhabited = inv-iff
+```
 
 ### Forward and backward implications of coinhabited types
 
@@ -98,5 +100,5 @@ module _
 
 ## See also
 
-- [Biimplication of types](foundation.biimplication.md) is a related but
-  stronger notion than coinhabitedness.
+- [Mere logical equivalence of types](foundation.mere-logical-equivalences.md)
+  is a related but stronger notion than coinhabitedness.

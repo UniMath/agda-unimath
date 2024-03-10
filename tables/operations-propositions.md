@@ -28,8 +28,8 @@ operation on propositions in the first.
 | [Terminal object](foundation.unit-type.md)                             | `unit`            | `unit-Prop`                                  |
 | [Existential quantification](foundation.existential-quantification.md) | `∃`               | `∃₍₋₁₎`                                      |
 | [Universal quantification](foundation.universal-quantification.md)     | `∀'`              | `∀₍₋₁₎` (equivalent to `Π₍₋₁₎`)              |
-| [Implication](foundation.implication.md)                               | `⇒`               | `⇒₍₋₁₎` (equivalent to `→₍₋₁₎`)              |
-| [Biimplication](foundation.biimplication.md)                           | `⇔`               | `⇔₍₋₁₎` (equivalent to `↔₍₋₁₎`)              |
+| [Mere logical consequence](foundation.mere-logical-consequences.md)    | `⇒`               | `⇒₍₋₁₎` (equivalent to `→₍₋₁₎`)              |
+| [Mere logical equivalence](foundation.mere-logical-equivalences.md)    | `⇔`               | `⇔₍₋₁₎` (equivalent to `↔₍₋₁₎`)              |
 | [Conjunction](foundation.conjunction.md)                               | `∧`               | `∧₍₋₁₎` (equivalent to `×₍₋₁₎`)              |
 | [Disjunction](foundation.disjunction.md)                               | `∨`               | `∨₍₋₁₎` (equivalent to `*₍₋₁₎`)              |
 | [Exclusive disjunction](foundation.exclusive-disjunction.md)           | `⊻`               | `⊻₍₋₁₎` (equivalent to `exclusive-sum-Prop`) |

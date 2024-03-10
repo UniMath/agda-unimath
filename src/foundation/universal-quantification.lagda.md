@@ -82,5 +82,5 @@ module _
 
 ## See also
 
-- [Implication of types](foundation.implication.md) for the non-dependent
-  variant of universal quantification.
+- [Mere logical consequences](foundation.mere-logical-consequences.md) for the
+  non-dependent variant of universal quantification.

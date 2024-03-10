@@ -12,7 +12,7 @@ module
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
-open import foundation.implication
+open import foundation.mere-logical-consequences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
@@ -29,9 +29,10 @@ open import order-theory.preorders
 
 The {{#concept "homotopy preorder of types" Agda=Type-Large-Preorder}} is the
 [(large) preorder](order-theory.large-preorders.md) whose objects are types, and
-whose ordering relation is defined by [implications](foundation.implication.md),
-i.e. by the [propositional truncation](foundation.propositional-truncations.md)
-of the function types:
+whose ordering relation is defined by
+[mere logical consequences](foundation.mere-logical-consequences.md), i.e. by
+the [propositional truncation](foundation.propositional-truncations.md) of the
+function types:
 
 ```text
   A ≤ B := ║(A → B)║₋₁.
@@ -46,9 +47,9 @@ Homotopy-Type-Large-Preorder : Large-Preorder lsuc (_⊔_)
 Homotopy-Type-Large-Preorder =
   λ where
   .type-Large-Preorder l → UU l
-  .leq-prop-Large-Preorder → implication-prop
-  .refl-leq-Large-Preorder → id-implication
-  .transitive-leq-Large-Preorder X Y Z → comp-implication
+  .leq-prop-Large-Preorder → mere-consequence-prop
+  .refl-leq-Large-Preorder → refl-mere-consequence
+  .transitive-leq-Large-Preorder X Y Z → trans-mere-consequence
 ```
 
 ### The small homotopy preorder of types
