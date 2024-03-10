@@ -74,7 +74,7 @@ rec-flat :
 rec-flat C = ind-flat (λ _ → C)
 ```
 
-### Crisp assumptions are weaker
+### Crispening statements
 
 ```agda
 crispen :

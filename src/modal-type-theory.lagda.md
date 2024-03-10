@@ -9,6 +9,7 @@
 ```agda
 module modal-type-theory where
 
+open import modal-type-theory.action-on-identifications-crisp-functions public
 open import modal-type-theory.crisp-cartesian-product-types public
 open import modal-type-theory.crisp-coproduct-types public
 open import modal-type-theory.crisp-dependent-function-types public

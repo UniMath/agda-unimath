@@ -75,7 +75,7 @@ module _
 
 ### Crisp action on identifications
 
-```agda
+```text
 crisp-ap :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {B : UU l2}
   (f : @♭ A → B) {@♭ x y : A} → @♭ (x ＝ y) → f x ＝ f y
@@ -202,15 +202,5 @@ module _
   compute-ap-counit-flat-eq-cons-flat-crisp-eq =
     crisp-ind-Id
       ( λ x y p → ap (counit-flat) (eq-cons-flat-crisp-eq p) ＝ p)
-      ( λ _ → refl)
-```
-
-```agda
-  is-crisp-section-crisp-ap-cons-flat :
-    {@♭ x y : A} (@♭ p : x ＝ y) →
-    ap (counit-flat) (crisp-ap cons-flat p) ＝ p
-  is-crisp-section-crisp-ap-cons-flat =
-    crisp-ind-Id
-      ( λ x y p → ap (counit-flat) (crisp-ap cons-flat p) ＝ p)
       ( λ _ → refl)
 ```
