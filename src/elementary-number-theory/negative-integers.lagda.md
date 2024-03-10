@@ -115,9 +115,7 @@ eq-nat-negative-pred-negative-ℤ :
   (x : negative-ℤ) →
   nat-negative-ℤ (pred-negative-ℤ x) ＝ succ-ℕ (nat-negative-ℤ x)
 eq-nat-negative-pred-negative-ℤ (inl x , H) = refl
-```
 
-```agda
 is-section-nat-negative-ℤ :
   (x : negative-ℤ) → negative-int-ℕ (nat-negative-ℤ x) ＝ x
 is-section-nat-negative-ℤ (inl zero-ℕ , H) = refl

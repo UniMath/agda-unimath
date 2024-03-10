@@ -136,9 +136,7 @@ eq-nat-nonpositive-pred-nonpositive-ℤ :
   nat-nonpositive-ℤ (pred-nonpositive-ℤ x) ＝ succ-ℕ (nat-nonpositive-ℤ x)
 eq-nat-nonpositive-pred-nonpositive-ℤ (inl x , H) = refl
 eq-nat-nonpositive-pred-nonpositive-ℤ (inr (inl x) , H) = refl
-```
 
-```agda
 is-section-nat-nonpositive-ℤ :
   (x : nonpositive-ℤ) → nonpositive-int-ℕ (nat-nonpositive-ℤ x) ＝ x
 is-section-nat-nonpositive-ℤ (inl zero-ℕ , H) = refl

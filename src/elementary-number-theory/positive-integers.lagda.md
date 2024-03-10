@@ -129,9 +129,7 @@ eq-nat-positive-succ-positive-ℤ :
   (x : positive-ℤ) →
   nat-positive-ℤ (succ-positive-ℤ x) ＝ succ-ℕ (nat-positive-ℤ x)
 eq-nat-positive-succ-positive-ℤ (inr (inr x) , H) = refl
-```
 
-```agda
 is-section-nat-positive-ℤ :
   (x : positive-ℤ) → positive-int-ℕ (nat-positive-ℤ x) ＝ x
 is-section-nat-positive-ℤ (inr (inr zero-ℕ) , H) = refl
