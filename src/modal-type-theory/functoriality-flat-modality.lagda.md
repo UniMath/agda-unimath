@@ -59,7 +59,8 @@ module _
 
   ap-crisp-dependent-map-flat :
     {@♭ B : @♭ A → UU l2} →
-    @♭ ((@♭ x : A) → B x) → ((x : ♭ A) → flat-crisp-family B x)
+    @♭ ((@♭ x : A) → B x) →
+    ((x : ♭ A) → flat-crisp-family B x)
   ap-crisp-dependent-map-flat f (cons-flat x) = cons-flat (f x)
 
   ap-dependent-map-flat :
@@ -95,7 +96,7 @@ module _
 
 ## Properties
 
-### Naturality of the counit
+### Naturality of the flat counit
 
 The counit of the flat modality is natural with respect to the action on maps:
 we have [commuting squares](foundation-core.commuting-squares-of-maps.md)

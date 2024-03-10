@@ -44,9 +44,9 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2} {@♭ f g : (x : A) → B x}
   where
 
-  ap-flat-htpy :
+  ap-htpy-flat :
     @♭ f ~ g → ap-dependent-map-flat f ~ ap-dependent-map-flat g
-  ap-flat-htpy H (cons-flat x) = eq-cons-flat-crisp-eq (H x)
+  ap-htpy-flat H (cons-flat x) = crisp-ap cons-flat (H x)
 ```
 
 ## Properties
@@ -58,6 +58,6 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2} {@♭ f : (x : A) → B x}
   where
 
-  compute-ap-flat-refl-htpy : ap-flat-htpy (refl-htpy' f) ~ refl-htpy
+  compute-ap-flat-refl-htpy : ap-htpy-flat (refl-htpy' f) ~ refl-htpy
   compute-ap-flat-refl-htpy (cons-flat x) = compute-refl-eq-cons-flat-crisp-eq
 ```
