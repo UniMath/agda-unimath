@@ -42,14 +42,14 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  mere-iff-prop : Prop (l1 ⊔ l2)
-  mere-iff-prop = trunc-Prop (A ↔ B)
+  prop-mere-iff : Prop (l1 ⊔ l2)
+  prop-mere-iff = trunc-Prop (A ↔ B)
 
   mere-iff : UU (l1 ⊔ l2)
-  mere-iff = type-Prop mere-iff-prop
+  mere-iff = type-Prop prop-mere-iff
 
   is-prop-mere-iff : is-prop mere-iff
-  is-prop-mere-iff = is-prop-type-Prop mere-iff-prop
+  is-prop-mere-iff = is-prop-type-Prop prop-mere-iff
 
   infixr 5 _⇔_
   _⇔_ : UU (l1 ⊔ l2)
@@ -79,10 +79,10 @@ module _
   trans-mere-iff : B ⇔ C → A ⇔ B → A ⇔ C
   trans-mere-iff |g| =
     rec-trunc-Prop
-      ( mere-iff-prop A C)
+      ( prop-mere-iff A C)
       ( λ f →
         rec-trunc-Prop
-          ( mere-iff-prop A C)
+          ( prop-mere-iff A C)
           ( λ g → unit-trunc-Prop (g ∘iff f))
           ( |g|))
 ```
@@ -96,7 +96,7 @@ module _
 
   sym-mere-iff : A ⇔ B → B ⇔ A
   sym-mere-iff =
-    rec-trunc-Prop (mere-iff-prop B A) (unit-trunc-Prop ∘ inv-iff)
+    rec-trunc-Prop (prop-mere-iff B A) (unit-trunc-Prop ∘ inv-iff)
 ```
 
 ### Merely logically equivalent types are coinhabited
@@ -148,13 +148,13 @@ module _
   forward-mere-consequence-mere-iff : A ⇔ B → A ⇒ B
   forward-mere-consequence-mere-iff =
     rec-trunc-Prop
-      ( mere-consequence-prop A B)
+      ( prop-mere-consequence A B)
       ( unit-trunc-Prop ∘ forward-implication)
 
   backward-mere-consequence-mere-iff : A ⇔ B → B ⇒ A
   backward-mere-consequence-mere-iff =
     rec-trunc-Prop
-      ( mere-consequence-prop B A)
+      ( prop-mere-consequence B A)
       ( unit-trunc-Prop ∘ backward-implication)
 ```
 
@@ -180,10 +180,10 @@ module _
   mere-iff-mutual-mere-consequence : (A ⇒ B) × (B ⇒ A) → A ⇔ B
   mere-iff-mutual-mere-consequence (|f| , |g|) =
     rec-trunc-Prop
-      ( mere-iff-prop A B)
+      ( prop-mere-iff A B)
       ( λ f →
         rec-trunc-Prop
-          ( mere-iff-prop A B)
+          ( prop-mere-iff A B)
           ( λ g → unit-trunc-Prop (f , g))
           ( |g|))
       ( |f|)

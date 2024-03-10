@@ -89,11 +89,11 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  xor-prop : Prop (l1 ⊔ l2)
-  xor-prop = xor-Prop (trunc-Prop A) (trunc-Prop B)
+  prop-xor : Prop (l1 ⊔ l2)
+  prop-xor = xor-Prop (trunc-Prop A) (trunc-Prop B)
 
   xor : UU (l1 ⊔ l2)
-  xor = type-Prop xor-prop
+  xor = type-Prop prop-xor
 
   infixr 10 _⊻_
   _⊻_ : UU (l1 ⊔ l2)

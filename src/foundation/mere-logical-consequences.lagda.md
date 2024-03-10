@@ -36,14 +36,14 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  mere-consequence-prop : Prop (l1 ⊔ l2)
-  mere-consequence-prop = trunc-Prop (A → B)
+  prop-mere-consequence : Prop (l1 ⊔ l2)
+  prop-mere-consequence = trunc-Prop (A → B)
 
   mere-consequence : UU (l1 ⊔ l2)
-  mere-consequence = type-Prop mere-consequence-prop
+  mere-consequence = type-Prop prop-mere-consequence
 
   is-prop-mere-consequence : is-prop mere-consequence
-  is-prop-mere-consequence = is-prop-type-Prop mere-consequence-prop
+  is-prop-mere-consequence = is-prop-type-Prop prop-mere-consequence
 
   infixr 5 _⇒_
   _⇒_ : UU (l1 ⊔ l2)
@@ -90,10 +90,10 @@ module _
   trans-mere-consequence : B ⇒ C → A ⇒ B → A ⇒ C
   trans-mere-consequence |g| =
     rec-trunc-Prop
-      ( mere-consequence-prop A C)
+      ( prop-mere-consequence A C)
       ( λ f →
         rec-trunc-Prop
-          ( mere-consequence-prop A C)
+          ( prop-mere-consequence A C)
           ( λ g → unit-trunc-Prop (g ∘ f))
           ( |g|))
 ```

@@ -58,14 +58,14 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  conjunction-prop : Prop (l1 ⊔ l2)
-  conjunction-prop = trunc-Prop (A × B)
+  prop-conjunction : Prop (l1 ⊔ l2)
+  prop-conjunction = trunc-Prop (A × B)
 
   conjunction : UU (l1 ⊔ l2)
-  conjunction = type-Prop conjunction-prop
+  conjunction = type-Prop prop-conjunction
 
   is-prop-conjunction : is-prop conjunction
-  is-prop-conjunction = is-prop-type-Prop conjunction-prop
+  is-prop-conjunction = is-prop-type-Prop prop-conjunction
 
   infixr 15 _∧_
   _∧_ : UU (l1 ⊔ l2)
@@ -174,7 +174,7 @@ module _
     ((C → A) ∧ (C → B)) → (C → A ∧ B)
   map-distributive-conjunction =
     rec-trunc-Prop
-      ( function-Prop C (conjunction-prop A B))
+      ( function-Prop C (prop-conjunction A B))
       ( λ (f , g) x → unit-trunc-Prop (f x , g x))
 ```
 
@@ -187,7 +187,7 @@ general in an intuitionistic setting. However, we can say something weaker:
     (C → is-inhabited A) ∧ (C → is-inhabited B) → (C → A ∧ B)
   map-distributive-is-inhabited-conjunction =
     rec-trunc-Prop
-      ( function-Prop C (conjunction-prop A B))
+      ( function-Prop C (prop-conjunction A B))
       λ (f , g) x → map-inv-product-inhabited-conjunction (f x , g x)
 
   map-inv-distributive-is-inhabited-conjunction :

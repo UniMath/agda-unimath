@@ -44,7 +44,7 @@ is an [equivalence](foundation.logical-equivalences.md).
 
 ```agda
 disjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-disjunction-Prop P Q = disjunction-prop (type-Prop P) (type-Prop Q)
+disjunction-Prop P Q = prop-disjunction (type-Prop P) (type-Prop Q)
 
 type-disjunction-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 type-disjunction-Prop P Q = type-Prop (disjunction-Prop P Q)

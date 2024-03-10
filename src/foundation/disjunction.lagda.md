@@ -54,14 +54,14 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  disjunction-prop : Prop (l1 ⊔ l2)
-  disjunction-prop = trunc-Prop (A + B)
+  prop-disjunction : Prop (l1 ⊔ l2)
+  prop-disjunction = trunc-Prop (A + B)
 
   disjunction : UU (l1 ⊔ l2)
-  disjunction = type-Prop disjunction-prop
+  disjunction = type-Prop prop-disjunction
 
   is-prop-disjunction : is-prop disjunction
-  is-prop-disjunction = is-prop-type-Prop disjunction-prop
+  is-prop-disjunction = is-prop-type-Prop prop-disjunction
 
   infixr 10 _∨_
   _∨_ : UU (l1 ⊔ l2)

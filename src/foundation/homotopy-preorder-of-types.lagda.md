@@ -47,7 +47,7 @@ Homotopy-Type-Large-Preorder : Large-Preorder lsuc (_⊔_)
 Homotopy-Type-Large-Preorder =
   λ where
   .type-Large-Preorder l → UU l
-  .leq-prop-Large-Preorder → mere-consequence-prop
+  .leq-prop-Large-Preorder → prop-mere-consequence
   .refl-leq-Large-Preorder → refl-mere-consequence
   .transitive-leq-Large-Preorder X Y Z → trans-mere-consequence
 ```

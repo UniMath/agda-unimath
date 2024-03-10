@@ -43,7 +43,7 @@ module _
   where
 
   conjunction-Prop : Prop (l1 ⊔ l2)
-  conjunction-Prop = conjunction-prop (type-Prop P) (type-Prop Q)
+  conjunction-Prop = prop-conjunction (type-Prop P) (type-Prop Q)
 
   type-conjunction-Prop : UU (l1 ⊔ l2)
   type-conjunction-Prop = type-Prop conjunction-Prop

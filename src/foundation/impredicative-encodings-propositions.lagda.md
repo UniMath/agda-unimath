@@ -172,14 +172,14 @@ map-impredicative-neg-Prop A f Q a = ex-falso (f a)
 map-inv-impredicative-neg-Prop :
   {l : Level} (A : UU l) →
   type-impredicative-neg-Prop A → ¬ A
-map-inv-impredicative-neg-Prop A H a = H (neg-Prop' A) a a
+map-inv-impredicative-neg-Prop A H a = H (prop-neg A) a a
 
 equiv-impredicative-neg-Prop :
   {l : Level} (A : UU l) →
   ¬ A ≃ type-impredicative-neg-Prop A
 equiv-impredicative-neg-Prop A =
   equiv-iff
-    ( neg-Prop' A)
+    ( prop-neg A)
     ( impredicative-neg-Prop A)
     ( map-impredicative-neg-Prop A)
     ( map-inv-impredicative-neg-Prop A)
