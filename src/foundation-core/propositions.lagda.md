@@ -447,11 +447,13 @@ pr1 (is-prop-Prop A) = is-prop A
 pr2 (is-prop-Prop A) = is-prop-is-prop A
 ```
 
-## Operations on propositions
+## See also
+
+### Operations on propositions
 
 {{#include tables/operations-propositions.md}}
 
-## Table of files about propositional logic
+### Table of files about propositional logic
 
 The following table gives an overview of basic constructions in propositional
 logic and related considerations.
