@@ -17,6 +17,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
@@ -129,7 +130,7 @@ module _
     is-flat-discrete-crisp (A × B) → A → is-flat-discrete-crisp B
   is-flat-discrete-crisp-right-factor-product'
     is-disc-product-A-B x =
-    is-equiv-right-factor-is-equiv-map-product
+    is-equiv-right-factor-is-equiv-map-product'
       ( counit-flat)
       ( counit-flat)
       ( x)
@@ -145,7 +146,7 @@ module _
     is-flat-discrete-crisp (A × B) → B → is-flat-discrete-crisp A
   is-flat-discrete-crisp-left-factor-product'
     is-disc-product-A-B x =
-    is-equiv-left-factor-is-equiv-map-product
+    is-equiv-left-factor-is-equiv-map-product'
       ( counit-flat)
       ( counit-flat)
       ( x)
@@ -156,13 +157,6 @@ module _
         ( λ where (cons-flat _) → refl)
         ( is-disc-product-A-B)
         ( is-equiv-map-distributive-flat-product))
-
-  is-flat-discrete-crisp-right-factor-product :
-    is-flat-discrete-crisp (A × B) →
-    is-inhabited A →
-    is-flat-discrete-crisp B
-  is-flat-discrete-crisp-right-factor-product
-    is-disc-product-A-B |x| = ?
 ```
 
 ## References
