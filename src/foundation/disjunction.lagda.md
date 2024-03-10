@@ -40,7 +40,7 @@ of the disjunction states that, for every
 [proposition](foundation-core.propositions.md) `R`, the evaluation map
 
 ```text
-  ev : ((A ∨ B) → R) → ((A → R) ∧ (B → R))
+  ev : ((A ∨ B) → R) → ((A → R) × (B → R))
 ```
 
 is an [equivalence](foundation.logical-equivalences.md).
