@@ -60,11 +60,13 @@ module _
 The indexing $-1$ for the infix binary operator `∧₍₋₁₎` is part of a general
 scheme, where `∧₍ₙ₎` takes as inputs
 $n$-[types](foundation-core.truncated-types.md), and spits out the propositional
-conjunction of their underlying types. This is in contrast to the cartesian
-product `×₍ₙ₎`, which would take values in $n$-types.
+conjunction of their underlying types, as an $n$-type. This is in contrast to
+the cartesian product `×₍ₙ₎`, which will take values in $n$-types that are not
+generally $k$-truncated for any $k < n$.
 
 **Note**: The symbol used for the conjunction `_∧₍₋₁₎_` is the
-[logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` `\and`).
+[logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` or
+`\and`).
 
 ```agda
 module _

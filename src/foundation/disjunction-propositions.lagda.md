@@ -62,8 +62,9 @@ _∨₍₋₁₎_ = disjunction-Prop
 The indexing $-1$ for the infix binary operator `∨₍₋₁₎` is part of a general
 scheme, where `∨₍ₙ₎` takes as inputs
 $n$-[types](foundation-core.truncated-types.md), and spits out the propositional
-disjunction of their underlying types. This is in contrast to the coproduct
-`+₍ₙ₎`, which would take values in $n$-types.
+disjunction of their underlying types, as an $n$-type. This is in contrast to
+the coproduct `+₍ₙ₎`, which will take values in $n$-types that are not generally
+$k$-truncated for any $k < n$.
 
 **Notation.** The symbol used for the disjunction `_∨₍₋₁₎_` is the
 [logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`), and

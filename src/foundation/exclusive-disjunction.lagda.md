@@ -63,11 +63,21 @@ module _
 [symbol used for exclusive disjunction](https://codepoints.net/U+22BB?lang=en)
 `⊻` can be written with the escape sequence `\veebar`. Note that the index $-1$
 in `⊻₍₋₁₎` should be understood as part of a general scheme where `⊻₍ₙ₎` is the
-exclusive disjunction that takes in
-$n$-[types](foundation-core.truncated-types.md) as input and spits out the
-$n$-type whose underlying type is the exclusive disjunction (which is always a
-proposition). This is in contrast to the exclusive sum, which will in general
-only be $n$-truncated.
+operator of type
+
+```text
+_⊻₍ₙ₎_ : Truncated-Type l1 n → Truncated-Type l2 n → Truncated-Type (l1 ⊔ l2) n
+```
+
+that takes the exclusive disjunction of the underlying types, which will always
+be a proposition. This is in contrast to the exclusive sum operation on
+$n$-[truncated types](foundation-core.truncated-types.md), which has the same
+type signature, but
+
+Note in particular that `⊻₍ₙ₎` should be read differently from the exclusive sum
+operation on $n$-[truncated types](foundation-core.truncated-types.md), which
+has the same type signature, but whose underlying type is not generally
+$k$-truncated for any $k < n$.
 
 ### The exclusive disjunction of types
 

@@ -214,12 +214,15 @@ We also introduce the special notation `Σ₍₋₁₎` for `Σ-Prop`.
 Σ₍₋₁₎ = Σ-Prop
 ```
 
-This is part of a general scheme where `Σ₍ₙ₎` takes an indexing
-$n$-[type](foundation-core.truncated-types.md) and a family of $n$-types over it
-as inputs, and spits out the $n$-type of dependent pairs. Note in particular
-that `Σ₍ₙ₎` should be read differently from the
-[existential quantification](foundation.existential-quantification.md) `∃₍ₙ₎`,
-whose underlying type is a proposition irrespective of $n$.
+This is part of a general scheme where `Σ₍ₙ₎` is the operator of type
+
+```text
+Σ₍ₙ₎ :
+  (A : Truncated-Type l1 n) → (A → Truncated-Type l2 n) →
+  Truncated-Type (l1 ⊔ l2) n
+```
+
+that takes the dependent sum of the underlying types.
 
 ### Propositions are closed under cartesian product types
 
@@ -255,12 +258,16 @@ _×₍₋₁₎_ :
 _×₍₋₁₎_ = product-Prop
 ```
 
-This is part of a general scheme where `×₍ₙ₎` takes an indexing
-$n$-[type](foundation-core.truncated-types.md) and a family of $n$-types over it
-as inputs, and spits out the $n$-type of dependent pairs. Note in particular
+This is part of a general scheme where `×₍ₙ₎` is the operator of type
+
+```text
+_×₍ₙ₎_ : Truncated-Type l1 n → Truncated-Type l2 n → Truncated-Type (l1 ⊔ l2) n
+```
+
+that takes the cartesian product of the underlying types. Note in particular
 that `×₍ₙ₎` should be read differently from the
-[conjunction](foundation.conjunction.md) `∧₍ₙ₎`, whose underlying type is a
-proposition irrespective of $n$.
+[conjunction](foundation.conjunction.md) `∧₍ₙ₎` which has the same type
+signature, but whose underlying type is a proposition irrespective of $n$.
 
 ### Products of families of propositions are propositions
 
@@ -295,12 +302,13 @@ We also introduce the special notation `Π₍₋₁₎` for `Π-Prop`.
 Π₍₋₁₎ = Π-Prop
 ```
 
-This is part of a general scheme where `Π₍ₙ₎` takes an indexing type and a
-family of $n$-[types](foundation-core.truncated-types.md) over it as inputs, and
-spits out the $n$-type of dependent functions into the family. Note in
-particular that `Π₍ₙ₎` should be read differently from the
-[universal quantification](foundation.universal-quantification.md) `∀₍ₙ₎`, whose
-underlying type is a proposition irrespective of $n$.
+This is part of a general scheme where `Π₍ₙ₎` is the operator of type
+
+```text
+Π₍ₙ₎ : (A : UU l1) → (A → Truncated-Type l2 n) → Truncated-Type (l1 ⊔ l2) n
+```
+
+that takes the dependent product of the underlying types.
 
 We now repeat the above for implicit Π-types.
 
