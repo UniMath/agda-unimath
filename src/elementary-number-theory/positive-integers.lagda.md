@@ -131,6 +131,34 @@ positive-int-ℕ = rec-ℕ one-positive-ℤ (λ _ → succ-positive-ℤ)
 
 nat-positive-ℤ : positive-ℤ → ℕ
 nat-positive-ℤ (inr (inr x) , H) = x
+
+eq-nat-positive-succ-positive-ℤ :
+  (x : positive-ℤ) →
+  nat-positive-ℤ (succ-positive-ℤ x) ＝ succ-ℕ (nat-positive-ℤ x)
+eq-nat-positive-succ-positive-ℤ (inr (inr x) , H) = refl
 ```
 
-TODO
+```agda
+is-section-nat-positive-ℤ :
+  (x : positive-ℤ) → positive-int-ℕ (nat-positive-ℤ x) ＝ x
+is-section-nat-positive-ℤ (inr (inr zero-ℕ) , H) = refl
+is-section-nat-positive-ℤ (inr (inr (succ-ℕ x)) , H) =
+  ap succ-positive-ℤ (is-section-nat-positive-ℤ ( inr (inr x) , H))
+
+is-retraction-nat-positive-ℤ :
+  (n : ℕ) → nat-positive-ℤ (positive-int-ℕ n) ＝ n
+is-retraction-nat-positive-ℤ zero-ℕ = refl
+is-retraction-nat-positive-ℤ (succ-ℕ n) =
+  eq-nat-positive-succ-positive-ℤ (positive-int-ℕ n) ∙
+  ap succ-ℕ (is-retraction-nat-positive-ℤ n)
+
+is-equiv-positive-int-ℕ : is-equiv positive-int-ℕ
+pr1 (pr1 is-equiv-positive-int-ℕ) = nat-positive-ℤ
+pr2 (pr1 is-equiv-positive-int-ℕ) = is-section-nat-positive-ℤ
+pr1 (pr2 is-equiv-positive-int-ℕ) = nat-positive-ℤ
+pr2 (pr2 is-equiv-positive-int-ℕ) = is-retraction-nat-positive-ℤ
+
+equiv-positive-int-ℕ : ℕ ≃ positive-ℤ
+pr1 equiv-positive-int-ℕ = positive-int-ℕ
+pr2 equiv-positive-int-ℕ = is-equiv-positive-int-ℕ
+```

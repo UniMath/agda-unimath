@@ -137,6 +137,36 @@ nonpositive-int-ℕ = rec-ℕ zero-nonpositive-ℤ (λ _ → pred-nonpositive-�
 nat-nonpositive-ℤ : nonpositive-ℤ → ℕ
 nat-nonpositive-ℤ (inl x , H) = succ-ℕ x
 nat-nonpositive-ℤ (inr x , H) = zero-ℕ
+
+eq-nat-nonpositive-pred-nonpositive-ℤ :
+  (x : nonpositive-ℤ) →
+  nat-nonpositive-ℤ (pred-nonpositive-ℤ x) ＝ succ-ℕ (nat-nonpositive-ℤ x)
+eq-nat-nonpositive-pred-nonpositive-ℤ (inl x , H) = refl
+eq-nat-nonpositive-pred-nonpositive-ℤ (inr (inl x) , H) = refl
 ```
 
-TODO
+```agda
+is-section-nat-nonpositive-ℤ :
+  (x : nonpositive-ℤ) → nonpositive-int-ℕ (nat-nonpositive-ℤ x) ＝ x
+is-section-nat-nonpositive-ℤ (inl zero-ℕ , H) = refl
+is-section-nat-nonpositive-ℤ (inl (succ-ℕ x) , H) =
+  ap pred-nonpositive-ℤ (is-section-nat-nonpositive-ℤ (inl x , H))
+is-section-nat-nonpositive-ℤ (inr (inl x) , H) = refl
+
+is-retraction-nat-nonpositive-ℤ :
+  (n : ℕ) → nat-nonpositive-ℤ (nonpositive-int-ℕ n) ＝ n
+is-retraction-nat-nonpositive-ℤ zero-ℕ = refl
+is-retraction-nat-nonpositive-ℤ (succ-ℕ n) =
+  eq-nat-nonpositive-pred-nonpositive-ℤ (nonpositive-int-ℕ n) ∙
+  ap succ-ℕ (is-retraction-nat-nonpositive-ℤ n)
+
+is-equiv-nonpositive-int-ℕ : is-equiv nonpositive-int-ℕ
+pr1 (pr1 is-equiv-nonpositive-int-ℕ) = nat-nonpositive-ℤ
+pr2 (pr1 is-equiv-nonpositive-int-ℕ) = is-section-nat-nonpositive-ℤ
+pr1 (pr2 is-equiv-nonpositive-int-ℕ) = nat-nonpositive-ℤ
+pr2 (pr2 is-equiv-nonpositive-int-ℕ) = is-retraction-nat-nonpositive-ℤ
+
+equiv-nonpositive-int-ℕ : ℕ ≃ nonpositive-ℤ
+pr1 equiv-nonpositive-int-ℕ = nonpositive-int-ℕ
+pr2 equiv-nonpositive-int-ℕ = is-equiv-nonpositive-int-ℕ
+```

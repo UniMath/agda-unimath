@@ -143,6 +143,12 @@ nat-nonnegative-ℤ : nonnegative-ℤ → ℕ
 nat-nonnegative-ℤ (inr (inl x) , H) = zero-ℕ
 nat-nonnegative-ℤ (inr (inr x) , H) = succ-ℕ x
 
+eq-nat-nonnegative-succ-nonnnegative-ℤ :
+  (x : nonnegative-ℤ) →
+  nat-nonnegative-ℤ (succ-nonnegative-ℤ x) ＝ succ-ℕ (nat-nonnegative-ℤ x)
+eq-nat-nonnegative-succ-nonnnegative-ℤ (inr (inl x) , H) = refl
+eq-nat-nonnegative-succ-nonnnegative-ℤ (inr (inr x) , H) = refl
+
 is-section-nat-nonnegative-ℤ :
   (x : nonnegative-ℤ) → nonnegative-int-ℕ (nat-nonnegative-ℤ x) ＝ x
 is-section-nat-nonnegative-ℤ ((inr (inl star)) , H) = refl
