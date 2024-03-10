@@ -272,5 +272,5 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
   ( inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x)) ∙
     ( ap (_-ℤ (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
       ap ((int-ℕ (succ-ℕ y)) -ℤ_) (succ-int-ℕ x)))
-  (leq-int-ℕ x y H)
+  ( leq-int-ℕ x y H)
 ```
