@@ -79,12 +79,16 @@ module _
   map-inv-distributive-flat-coproduct (inr (cons-flat x)) = cons-flat (inr x)
 
   is-section-map-distributive-flat-coproduct :
-    is-section map-inv-distributive-flat-coproduct map-distributive-flat-coproduct
+    is-section
+      ( map-inv-distributive-flat-coproduct)
+      ( map-distributive-flat-coproduct)
   is-section-map-distributive-flat-coproduct (cons-flat (inl x)) = refl
   is-section-map-distributive-flat-coproduct (cons-flat (inr x)) = refl
 
   is-retraction-map-distributive-flat-coproduct :
-    is-retraction map-inv-distributive-flat-coproduct map-distributive-flat-coproduct
+    is-retraction
+      ( map-inv-distributive-flat-coproduct)
+      ( map-distributive-flat-coproduct)
   is-retraction-map-distributive-flat-coproduct (inl (cons-flat x)) = refl
   is-retraction-map-distributive-flat-coproduct (inr (cons-flat x)) = refl
 
@@ -93,13 +97,17 @@ module _
   pr2 section-distributive-flat-coproduct =
     is-retraction-map-distributive-flat-coproduct
 
-  retraction-distributive-flat-coproduct : retraction map-distributive-flat-coproduct
-  pr1 retraction-distributive-flat-coproduct = map-inv-distributive-flat-coproduct
+  retraction-distributive-flat-coproduct :
+    retraction map-distributive-flat-coproduct
+  pr1 retraction-distributive-flat-coproduct =
+    map-inv-distributive-flat-coproduct
   pr2 retraction-distributive-flat-coproduct =
     is-section-map-distributive-flat-coproduct
 
-  is-equiv-map-distributive-flat-coproduct : is-equiv map-distributive-flat-coproduct
-  pr1 is-equiv-map-distributive-flat-coproduct = section-distributive-flat-coproduct
+  is-equiv-map-distributive-flat-coproduct :
+    is-equiv map-distributive-flat-coproduct
+  pr1 is-equiv-map-distributive-flat-coproduct =
+    section-distributive-flat-coproduct
   pr2 is-equiv-map-distributive-flat-coproduct =
     retraction-distributive-flat-coproduct
 
