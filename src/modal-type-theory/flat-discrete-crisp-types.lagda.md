@@ -48,8 +48,8 @@ A crisp type is said to be
 if it is [flat](modal-type-theory.flat-modality.md) modal. I.e. if the flat
 counit is an [equivalence](foundation-core.equivalences.md) at that type.
 
-**Note:** In _Brouwer's fixed-point theorem in real-cohesive homotopy type
-theory_, this is called a _crisply discrete_ type.
+**Terminology:** In _Brouwer's fixed-point theorem in real-cohesive homotopy
+type theory_, this is called a _crisply discrete_ type.
 
 ## Definition
 
@@ -145,6 +145,8 @@ module _
 
 ### Types `♭ A` are flat discrete
 
+This is Theorem 6.18 of {{#cite Shu17}}.
+
 ```agda
 module _
   {@♭ l : Level} {@♭ A : UU l}
@@ -162,22 +164,19 @@ module _
 
 ```agda
 module _
+  {@♭ l : Level} {@♭ A : UU l} {@♭ x y : ♭ A}
+  where
+
+  is-flat-discrete-crisp-flat-Id-flat :
+    is-flat-discrete-crisp (x ＝ y)
+  is-flat-discrete-crisp-flat-Id-flat = {!   !}
+
+module _
   {@♭ l : Level} {@♭ A : UU l} {@♭ x y : A}
   where
 
-  map-is-flat-discrete-crisp-flat-Id :
-    (cons-flat x ＝ cons-flat y) → ♭ (cons-flat x ＝ cons-flat y)
-  map-is-flat-discrete-crisp-flat-Id p =
-    ap-crisp-map-flat
-      ( crisp-ap cons-flat)
-      ( Eq-eq-flat (cons-flat x) (cons-flat y) p)
-
-  is-section-map-is-flat-discrete-crisp-flat-Id :
-    is-section counit-flat map-is-flat-discrete-crisp-flat-Id
-  is-section-map-is-flat-discrete-crisp-flat-Id x = {!   !}
-
   is-flat-discrete-crisp-flat-Id :
-    is-flat-discrete-crisp (cons-flat x ＝ cons-flat y)
+    is-flat-discrete-crisp (x ＝ y)
   is-flat-discrete-crisp-flat-Id = {!   !}
 ```
 
@@ -195,12 +194,13 @@ is-retraction-map-is-flat-discrete-crisp-empty :
   is-retraction counit-flat map-is-flat-discrete-crisp-empty
 is-retraction-map-is-flat-discrete-crisp-empty (cons-flat ())
 
-is-flat-discrete-crisp-empty : is-flat-discrete-crisp empty
-is-flat-discrete-crisp-empty =
-  is-equiv-is-invertible
-    ( map-is-flat-discrete-crisp-empty)
-    ( is-section-map-is-flat-discrete-crisp-empty)
-    ( is-retraction-map-is-flat-discrete-crisp-empty)
+abstract
+  is-flat-discrete-crisp-empty : is-flat-discrete-crisp empty
+  is-flat-discrete-crisp-empty =
+    is-equiv-is-invertible
+      ( map-is-flat-discrete-crisp-empty)
+      ( is-section-map-is-flat-discrete-crisp-empty)
+      ( is-retraction-map-is-flat-discrete-crisp-empty)
 ```
 
 ### The unit type is flat discrete
@@ -217,12 +217,13 @@ is-retraction-map-is-flat-discrete-crisp-unit :
   is-retraction counit-flat map-is-flat-discrete-crisp-unit
 is-retraction-map-is-flat-discrete-crisp-unit (cons-flat _) = refl
 
-is-flat-discrete-crisp-unit : is-flat-discrete-crisp unit
-is-flat-discrete-crisp-unit =
-  is-equiv-is-invertible
-    ( map-is-flat-discrete-crisp-unit)
-    ( is-section-map-is-flat-discrete-crisp-unit)
-    ( is-retraction-map-is-flat-discrete-crisp-unit)
+abstract
+  is-flat-discrete-crisp-unit : is-flat-discrete-crisp unit
+  is-flat-discrete-crisp-unit =
+    is-equiv-is-invertible
+      ( map-is-flat-discrete-crisp-unit)
+      ( is-section-map-is-flat-discrete-crisp-unit)
+      ( is-retraction-map-is-flat-discrete-crisp-unit)
 ```
 
 ### The type of booleans is flat discrete
@@ -242,12 +243,13 @@ is-retraction-map-is-flat-discrete-crisp-bool :
 is-retraction-map-is-flat-discrete-crisp-bool (cons-flat true) = refl
 is-retraction-map-is-flat-discrete-crisp-bool (cons-flat false) = refl
 
-is-flat-discrete-crisp-bool : is-flat-discrete-crisp bool
-is-flat-discrete-crisp-bool =
-  is-equiv-is-invertible
-    ( map-is-flat-discrete-crisp-bool)
-    ( is-section-map-is-flat-discrete-crisp-bool)
-    ( is-retraction-map-is-flat-discrete-crisp-bool)
+abstract
+  is-flat-discrete-crisp-bool : is-flat-discrete-crisp bool
+  is-flat-discrete-crisp-bool =
+    is-equiv-is-invertible
+      ( map-is-flat-discrete-crisp-bool)
+      ( is-section-map-is-flat-discrete-crisp-bool)
+      ( is-retraction-map-is-flat-discrete-crisp-bool)
 ```
 
 ### The type of natural numbers is flat discrete
@@ -278,12 +280,13 @@ is-retraction-map-is-flat-discrete-crisp-ℕ :
 is-retraction-map-is-flat-discrete-crisp-ℕ (cons-flat x) =
   compute-map-is-flat-discrete-crisp-ℕ x
 
-is-flat-discrete-crisp-ℕ : is-flat-discrete-crisp ℕ
-is-flat-discrete-crisp-ℕ =
-  is-equiv-is-invertible
-    ( map-is-flat-discrete-crisp-ℕ)
-    ( is-section-map-is-flat-discrete-crisp-ℕ)
-    ( is-retraction-map-is-flat-discrete-crisp-ℕ)
+abstract
+  is-flat-discrete-crisp-ℕ : is-flat-discrete-crisp ℕ
+  is-flat-discrete-crisp-ℕ =
+    is-equiv-is-invertible
+      ( map-is-flat-discrete-crisp-ℕ)
+      ( is-section-map-is-flat-discrete-crisp-ℕ)
+      ( is-retraction-map-is-flat-discrete-crisp-ℕ)
 ```
 
 ## See also

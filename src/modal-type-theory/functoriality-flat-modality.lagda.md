@@ -101,14 +101,13 @@ The counit of the flat modality is natural with respect to the action on maps:
 we have [commuting squares](foundation-core.commuting-squares-of-maps.md)
 
 ```text
-          ♭ f
-   ♭ A --------> ♭ B
-    |             |
- counit         counit
-    |             |
-    v             v
-    A ----------> B.
-           f
+               ♭ f
+         ♭ A ------> ♭ B
+          |           |
+ counit-♭ |           | counit-♭
+          ∨           ∨
+          A --------> B.
+                f
 ```
 
 ```agda

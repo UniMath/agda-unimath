@@ -42,7 +42,7 @@ weak-crisp-ind-Id :
   (@♭ y : A) (@♭ p : a ＝ y) → C y p
 weak-crisp-ind-Id C b _ refl = b
 
--- TODO: this is how the principle is stated in Shu15. It can be proved with `pointwise-♯` (except for the universe level part)
+-- TODO: this is how the principle is stated in Shu15. It can be proved with `pointwise-sharp` (except for any cohesive universe level)
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1}
   (@♭ C : (@♭ x y : A) → @♭ (x ＝ y) → UU l2)
@@ -137,19 +137,33 @@ induction principle, which we have only postulated so far.
 ```
 
 ```agda
-  is-equiv-Eq-eq-flat : (u v : ♭ A) → is-equiv (Eq-eq-flat u v)
-  is-equiv-Eq-eq-flat u v =
-    is-equiv-is-invertible
-      ( eq-Eq-flat u v)
-      ( is-section-eq-Eq-flat u v)
-      ( is-retraction-eq-Eq-flat u v)
+  abstract
+    is-equiv-Eq-eq-flat : (u v : ♭ A) → is-equiv (Eq-eq-flat u v)
+    is-equiv-Eq-eq-flat u v =
+      is-equiv-is-invertible
+        ( eq-Eq-flat u v)
+        ( is-section-eq-Eq-flat u v)
+        ( is-retraction-eq-Eq-flat u v)
 
   extensionality-flat : (u v : ♭ A) → (u ＝ v) ≃ Eq-flat u v
   pr1 (extensionality-flat u v) = Eq-eq-flat u v
   pr2 (extensionality-flat u v) = is-equiv-Eq-eq-flat u v
+```
 
+The following is Theorem 6.1 in {{#cite Shu17}}.
+
+```agda
   crisp-extensionality-flat :
     (@♭ x y : A) → (cons-flat x ＝ cons-flat y) ≃ ♭ (x ＝ y)
   crisp-extensionality-flat x y =
+    extensionality-flat (cons-flat x) (cons-flat y)
+```
+
+The following is Corollary 6.2 in {{#cite Shu17}}.
+
+```agda
+  crisp-flat-extensionality-flat :
+    (@♭ u v : ♭ A) → (u ＝ v) ≃ ♭ (counit-flat u ＝ counit-flat v)
+  crisp-flat-extensionality-flat (cons-flat x) (cons-flat y) =
     extensionality-flat (cons-flat x) (cons-flat y)
 ```
