@@ -47,8 +47,8 @@ module _
   {l : Level} (A : UU l)
   where
 
-  refl-is-coinhabited : is-coinhabited A A
-  refl-is-coinhabited = id-iff
+  is-reflexive-is-coinhabited : is-coinhabited A A
+  is-reflexive-is-coinhabited = id-iff
 ```
 
 ### Coinhabitedness is a transitive relation
@@ -59,7 +59,7 @@ module _
   where
 
   is-transitive-is-coinhabited :
-    is-transitive-Large-Relation is-coinhabited
+    is-coinhabited B C → is-coinhabited A B → is-coinhabited A C
   is-transitive-is-coinhabited = _∘iff_
 ```
 
@@ -81,21 +81,21 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  forward-implication-is-coinhabited' : is-coinhabited A B → A → is-inhabited B
-  forward-implication-is-coinhabited' e a =
-    forward-implication e (unit-trunc-Prop a)
-
   forward-implication-is-coinhabited :
     is-coinhabited A B → is-inhabited A → is-inhabited B
   forward-implication-is-coinhabited = forward-implication
 
-  backward-implication-is-coinhabited' : is-coinhabited A B → B → is-inhabited A
-  backward-implication-is-coinhabited' e b =
-    backward-implication e (unit-trunc-Prop b)
+  forward-implication-is-coinhabited' : is-coinhabited A B → A → is-inhabited B
+  forward-implication-is-coinhabited' e a =
+    forward-implication e (unit-trunc-Prop a)
 
   backward-implication-is-coinhabited :
     is-coinhabited A B → is-inhabited B → is-inhabited A
   backward-implication-is-coinhabited = backward-implication
+
+  backward-implication-is-coinhabited' : is-coinhabited A B → B → is-inhabited A
+  backward-implication-is-coinhabited' e b =
+    backward-implication e (unit-trunc-Prop b)
 ```
 
 ## See also
