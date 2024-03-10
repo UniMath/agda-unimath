@@ -106,16 +106,14 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  abstract
-    is-injective-is-equiv : {f : A → B} → is-equiv f → is-injective f
-    is-injective-is-equiv H {x} {y} p =
-      ( inv (is-retraction-map-inv-is-equiv H x)) ∙
-      ( ( ap (map-inv-is-equiv H) p) ∙
-        ( is-retraction-map-inv-is-equiv H y))
+  is-injective-is-equiv : {f : A → B} → is-equiv f → is-injective f
+  is-injective-is-equiv H {x} {y} p =
+    ( inv (is-retraction-map-inv-is-equiv H x)) ∙
+    ( ( ap (map-inv-is-equiv H) p) ∙
+      ( is-retraction-map-inv-is-equiv H y))
 
-  abstract
-    is-injective-equiv : (e : A ≃ B) → is-injective (map-equiv e)
-    is-injective-equiv (pair f H) = is-injective-is-equiv H
+  is-injective-equiv : (e : A ≃ B) → is-injective (map-equiv e)
+  is-injective-equiv (pair f H) = is-injective-is-equiv H
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}

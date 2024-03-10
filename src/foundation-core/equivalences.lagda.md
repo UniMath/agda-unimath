@@ -688,7 +688,7 @@ module _
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
 
   map-inv-equiv-ap :
-    (e : A ≃ B) (x y : A) → (map-equiv e x ＝ map-equiv e y) → (x ＝ y)
+    (e : A ≃ B) (x y : A) → map-equiv e x ＝ map-equiv e y → x ＝ y
   map-inv-equiv-ap e x y = map-inv-equiv (equiv-ap e x y)
 ```
 

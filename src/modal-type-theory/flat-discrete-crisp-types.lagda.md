@@ -153,30 +153,36 @@ module _
   where
 
   is-flat-discrete-crisp-flat : is-flat-discrete-crisp (♭ A)
-  is-flat-discrete-crisp-flat =
-    is-equiv-is-invertible
-      ( diagonal-flat)
-      ( is-section-diagonal-flat)
-      ( is-retraction-diagonal-flat)
+  is-flat-discrete-crisp-flat = is-equiv-flat-counit-flat
 ```
 
 ### The identity types of `♭ A` are flat discrete
 
 ```agda
 module _
-  {@♭ l : Level} {@♭ A : UU l} {@♭ x y : ♭ A}
+  {@♭ l : Level} {@♭ A : UU l}
   where
 
+  equiv-is-flat-discrete-crisp-flat-Id-flat :
+    {@♭ x y : ♭ A} → (x ＝ y) ≃ ♭ (x ＝ y)
+  equiv-is-flat-discrete-crisp-flat-Id-flat {cons-flat x} {cons-flat y} =
+    ( crisp-extensionality-flat (cons-flat x) (cons-flat y)) ∘e
+    ( equiv-ap equiv-diagonal-flat (cons-flat x) (cons-flat y))
+
   is-flat-discrete-crisp-flat-Id-flat :
-    is-flat-discrete-crisp (x ＝ y)
-  is-flat-discrete-crisp-flat-Id-flat = {!   !}
+    {@♭ x y : ♭ A} → is-flat-discrete-crisp (x ＝ y)
+  is-flat-discrete-crisp-flat-Id-flat {cons-flat x} {cons-flat y} =
+    is-equiv-htpy-equiv
+      ( inv-equiv equiv-is-flat-discrete-crisp-flat-Id-flat)
+      ( λ where
+        (cons-flat p) →
+          crisp-ind-Id (λ u v p → p ＝ map-equiv (inv-equiv equiv-is-flat-discrete-crisp-flat-Id-flat) (cons-flat p)) (λ where (cons-flat x) → {! refl  !}) p)
 
 module _
   {@♭ l : Level} {@♭ A : UU l} {@♭ x y : A}
   where
 
-  is-flat-discrete-crisp-flat-Id :
-    is-flat-discrete-crisp (x ＝ y)
+  is-flat-discrete-crisp-flat-Id : is-flat-discrete-crisp (x ＝ y)
   is-flat-discrete-crisp-flat-Id = {!   !}
 ```
 

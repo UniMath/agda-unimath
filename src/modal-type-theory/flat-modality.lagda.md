@@ -99,6 +99,8 @@ module _
   is-crisp-retraction-cons-flat (cons-flat _) = refl
 ```
 
+#### The equivalence `♭ A ≃ ♭ (♭ A)`
+
 ```agda
 module _
   {@♭ l : Level} {@♭ A : UU l}
@@ -121,16 +123,34 @@ module _
   pr1 retraction-diagonal-flat = counit-flat
   pr2 retraction-diagonal-flat = is-section-diagonal-flat
 
-  is-equiv-diagonal-flat : is-equiv diagonal-flat
-  pr1 is-equiv-diagonal-flat = section-diagonal-flat
-  pr2 is-equiv-diagonal-flat = retraction-diagonal-flat
+  abstract
+    is-equiv-diagonal-flat : is-equiv diagonal-flat
+    pr1 is-equiv-diagonal-flat = section-diagonal-flat
+    pr2 is-equiv-diagonal-flat = retraction-diagonal-flat
 
   equiv-diagonal-flat : ♭ A ≃ ♭ (♭ A)
   pr1 equiv-diagonal-flat = diagonal-flat
   pr2 equiv-diagonal-flat = is-equiv-diagonal-flat
+```
 
-  inv-equiv-flat-counit-flat : ♭ (♭ A) ≃ ♭ A
-  inv-equiv-flat-counit-flat = inv-equiv equiv-diagonal-flat
+#### The equivalence `♭ (♭ A) ≃ ♭ A`
+
+```agda
+  section-flat-counit-flat : section (counit-flat {A = ♭ A})
+  pr1 section-flat-counit-flat = diagonal-flat
+  pr2 section-flat-counit-flat = is-section-diagonal-flat
+
+  retraction-flat-counit-flat : retraction (counit-flat {A = ♭ A})
+  pr1 retraction-flat-counit-flat = diagonal-flat
+  pr2 retraction-flat-counit-flat = is-retraction-diagonal-flat
+
+  abstract
+    is-equiv-flat-counit-flat : is-equiv (counit-flat {A = ♭ A})
+    pr1 is-equiv-flat-counit-flat = section-flat-counit-flat
+    pr2 is-equiv-flat-counit-flat = retraction-flat-counit-flat
+
+  equiv-flat-counit-flat : ♭ (♭ A) ≃ ♭ A
+  equiv-flat-counit-flat = inv-equiv equiv-diagonal-flat
 ```
 
 ## See also
