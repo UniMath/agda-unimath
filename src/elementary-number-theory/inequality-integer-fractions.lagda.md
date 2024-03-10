@@ -73,6 +73,16 @@ is-prop-le-fraction-ℤ x y = is-prop-type-Prop (le-fraction-ℤ-Prop x y)
 
 ## Properties
 
+### Strict inequality of integer fractions implies inequality
+
+```agda
+leq-le-fraction-ℤ : {x y : fraction-ℤ} → le-fraction-ℤ x y → leq-fraction-ℤ x y
+leq-le-fraction-ℤ {x} {y} =
+  leq-le-ℤ
+    { mul-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ y)}
+    { mul-ℤ (numerator-fraction-ℤ y) (denominator-fraction-ℤ x)}
+```
+
 ### Inequality on integer fractions is antisymmetric with respect to the similarity relation
 
 ```agda

@@ -77,6 +77,13 @@ is-prop-le-ℚ x y = is-prop-type-Prop (le-ℚ-Prop x y)
 
 ## Properties
 
+### Strict inequality on rationals implies inequality
+
+```agda
+leq-le-ℚ : {x y : ℚ} → le-ℚ x y → leq-ℚ x y
+leq-le-ℚ {x} {y} = leq-le-fraction-ℤ {fraction-ℚ x} {fraction-ℚ y}
+```
+
 ### Inequality on rational numbers is reflexive
 
 ```agda
