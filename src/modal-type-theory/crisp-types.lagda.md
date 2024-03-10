@@ -1,5 +1,9 @@
 # Crisp types
 
+```agda
+module modal-type-theory.crisp-types where
+```
+
 ## Idea
 
 A {{#concept "crisp type"}} is a type whose formation is done in a purely _crisp
@@ -26,4 +30,4 @@ assumed to be crisp. \[Remark 6.13, Shu15\]
 - [Flat Modality](https://agda.readthedocs.io/en/latest/language/flat.html) on
   the Agda documentation pages.
 - [spatial type theory](https://ncatlab.org/nlab/show/spatial+type+theory) at
-  $n$Lab
+  $n$Lab.
