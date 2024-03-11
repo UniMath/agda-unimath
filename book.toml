@@ -53,8 +53,7 @@ wikidata-template = "https://www.wikidata.org/entity/{wikidata_id}"
 
 [preprocessor.citations]
 command = "python3 ./scripts/preprocessor_citations.py"
-bibtex = "references.bib"
-backend_format = "html"
+bibtex_file = "references.bib"
 citation_style = "alpha"
 citation_label_style = "alpha"
 before = [ "git-metadata" ]
