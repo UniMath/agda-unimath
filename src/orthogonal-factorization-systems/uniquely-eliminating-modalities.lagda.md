@@ -204,7 +204,4 @@ The equivalent notions of
 
 ## References
 
-- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
-  theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
-  ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
-  [DOI:10.23638/LMCS-16(1:2)2020](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
+{{#bibliography}} {{#reference RSS20}}

@@ -139,6 +139,6 @@ is-left-adjoint-cofibonacci m n = {!!}
 -}
 ```
 
-## References
+## External links
 
 [1]: https://oeis.org/A001177

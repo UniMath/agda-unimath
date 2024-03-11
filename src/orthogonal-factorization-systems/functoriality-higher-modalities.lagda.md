@@ -191,5 +191,4 @@ module _
 
 ## References
 
-- Felix Cherubini, _DCHoTT-Agda_/Im.agda, file in GitHub repository
-  (<https://github.com/felixwellen/DCHoTT-Agda/blob/master/Im.agda>)
+{{#bibliography}} {{#reference Felixwellen/DCHoTT-Agda}}
