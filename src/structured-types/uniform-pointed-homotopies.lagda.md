@@ -36,7 +36,7 @@ homotopies `H` between two
 [pointed dependent functions](structured-types.pointed-dependent-functions.md)
 `f` and `g` is defined to be a pointed dependent functions of the
 [pointed type family](structured-types.pointed-families-of-types.md) of
-[identifications](foundation-core.identifications.md) between the values of `f`
+[identifications](foundation-core.identity-types.md) between the values of `f`
 and `g`. The main idea is that, since uniform pointed homotopies between pointed
 dependent functions are again pointed dependent functions, we can easily
 consider uniform pointed homotopies between uniform pointed homotopies and so
