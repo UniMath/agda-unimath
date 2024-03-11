@@ -1081,6 +1081,4 @@ module _
 
 ## References
 
-- Ulrik Buchholtz and Jonathan Weinberger, _Synthetic fibered (∞, 1)-category
-  theory_ (2023) ([arXiv:2105.01724](https://arxiv.org/abs/2105.01724),
-  [DOI:10.21136/HS.2023.04](https://articles.math.cas.cz/10.21136/HS.2023.04))
+{{#bibliography}} {{#reference BW23}}

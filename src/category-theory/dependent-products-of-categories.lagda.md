@@ -20,6 +20,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -75,6 +76,16 @@ module _
     hom-Π-Category x z
   comp-hom-Π-Category = comp-hom-Category Π-Category
 
+  involutive-eq-associative-comp-hom-Π-Category :
+    {x y z w : obj-Π-Category}
+    (h : hom-Π-Category z w)
+    (g : hom-Π-Category y z)
+    (f : hom-Π-Category x y) →
+    comp-hom-Π-Category (comp-hom-Π-Category h g) f ＝ⁱ
+    comp-hom-Π-Category h (comp-hom-Π-Category g f)
+  involutive-eq-associative-comp-hom-Π-Category =
+    involutive-eq-associative-comp-hom-Category Π-Category
+
   associative-comp-hom-Π-Category :
     {x y z w : obj-Π-Category}
     (h : hom-Π-Category z w)
@@ -84,16 +95,6 @@ module _
     comp-hom-Π-Category h (comp-hom-Π-Category g f)
   associative-comp-hom-Π-Category =
     associative-comp-hom-Category Π-Category
-
-  inv-associative-comp-hom-Π-Category :
-    {x y z w : obj-Π-Category}
-    (h : hom-Π-Category z w)
-    (g : hom-Π-Category y z)
-    (f : hom-Π-Category x y) →
-    comp-hom-Π-Category h (comp-hom-Π-Category g f) ＝
-    comp-hom-Π-Category (comp-hom-Π-Category h g) f
-  inv-associative-comp-hom-Π-Category =
-    inv-associative-comp-hom-Category Π-Category
 
   associative-composition-operation-Π-Category :
     associative-composition-operation-binary-family-Set hom-set-Π-Category

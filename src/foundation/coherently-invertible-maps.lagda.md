@@ -123,9 +123,7 @@ This remains to be formalized.
 
 ## References
 
-1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
-   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
-   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
+{{#bibliography}} {{#reference UF13}}
 
 ## See also
 

@@ -14,6 +14,7 @@ open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import order-theory.preorders
@@ -142,12 +143,10 @@ module _
     transitive-leq-Large-Preorder P x y z
   id-hom-Large-Precategory large-precategory-Large-Preorder {X = x} =
     refl-leq-Large-Preorder P x
-  associative-comp-hom-Large-Precategory large-precategory-Large-Preorder
+  involutive-eq-associative-comp-hom-Large-Precategory
+    large-precategory-Large-Preorder
     {X = x} {W = w} h g f =
-    eq-is-prop (is-prop-leq-Large-Preorder P x w)
-  inv-associative-comp-hom-Large-Precategory large-precategory-Large-Preorder
-    {X = x} {W = w} h g f =
-    eq-is-prop (is-prop-leq-Large-Preorder P x w)
+    involutive-eq-eq (eq-is-prop (is-prop-leq-Large-Preorder P x w))
   left-unit-law-comp-hom-Large-Precategory large-precategory-Large-Preorder
     {X = x} {y} f =
     eq-is-prop (is-prop-leq-Large-Preorder P x y)
