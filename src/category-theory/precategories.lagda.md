@@ -131,7 +131,7 @@ make-Precategory
     ( id) ,
     ( left-unit-comp-hom) ,
     ( right-unit-comp-hom))
-    
+
 {-# INLINE make-Precategory #-}
 
 module _
