@@ -522,4 +522,4 @@ A wikidata identifier for this concept is unavailable.
 
 ## References
 
-{{#bibliography}} {{#reference BW23}} {{#reference Rie22}}
+{{#bibliography}} {{#reference Rie22}}
