@@ -548,4 +548,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference DefinitionsEquivalenceSatisfying}}
+{{#bibliography}} {{#reference Esc19DefinitionsEquivalence}}
