@@ -77,6 +77,22 @@ is-prop-le-ℚ x y = is-prop-type-Prop (le-ℚ-Prop x y)
 
 ## Properties
 
+### Inequality of rational numbers is decidable
+
+```agda
+is-decidable-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + ¬ (leq-ℚ x y)
+is-decidable-leq-ℚ x y =
+  is-decidable-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+```
+
+### Strict inequality of rational numbers is decidable
+
+```agda
+is-decidable-le-ℚ : (x y : ℚ) → (le-ℚ x y) + ¬ (le-ℚ x y)
+is-decidable-le-ℚ x y =
+  is-decidable-le-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+```
+
 ### Strict inequality on rationals implies inequality
 
 ```agda

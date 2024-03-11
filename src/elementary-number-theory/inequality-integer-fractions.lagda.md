@@ -73,6 +73,28 @@ is-prop-le-fraction-ℤ x y = is-prop-type-Prop (le-fraction-ℤ-Prop x y)
 
 ## Properties
 
+### Inequality of integer fractions is decidable
+
+```agda
+is-decidable-leq-fraction-ℤ :
+  (x y : fraction-ℤ) → (leq-fraction-ℤ x y) + ¬ (leq-fraction-ℤ x y)
+is-decidable-leq-fraction-ℤ x y =
+  is-decidable-leq-ℤ
+    ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
+    ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x)
+```
+
+### Strict inequality of integer fractions is decidable
+
+```agda
+is-decidable-le-fraction-ℤ :
+  (x y : fraction-ℤ) → (le-fraction-ℤ x y) + ¬ (le-fraction-ℤ x y)
+is-decidable-le-fraction-ℤ x y =
+  is-decidable-le-ℤ
+    ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
+    ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x)
+```
+
 ### Strict inequality of integer fractions implies inequality
 
 ```agda

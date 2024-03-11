@@ -90,11 +90,18 @@ transitive-leq-ℤ k l m p q =
     ( is-nonnegative-add-ℤ q p)
 ```
 
+### The ordering of the integers is decidable
+
+```agda
+is-decidable-leq-ℤ : (x y : ℤ) → (leq-ℤ x y) + ¬ (leq-ℤ x y)
+is-decidable-leq-ℤ x y = is-decidable-is-nonnegative-ℤ (y -ℤ x)
+```
+
 ### The ordering of the integers is total
 
 ```agda
-decide-leq-ℤ : {x y : ℤ} → (leq-ℤ x y) + (leq-ℤ y x)
-decide-leq-ℤ {x} {y} =
+total-leq-ℤ : {x y : ℤ} → (leq-ℤ x y) + (leq-ℤ y x)
+total-leq-ℤ {x} {y} =
   map-coproduct
     ( λ H →
       is-nonnegative-is-positive-ℤ
@@ -168,6 +175,13 @@ reflects-leq-add-ℤ :
   {x y : ℤ} (z : ℤ) → leq-ℤ (z +ℤ x) (z +ℤ y) → leq-ℤ x y
 reflects-leq-add-ℤ {x} {y} z =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
+```
+
+### The strict ordering on the integers is decidable
+
+```agda
+is-decidable-le-ℤ : (x y : ℤ) → (le-ℤ x y) + ¬ (le-ℤ x y)
+is-decidable-le-ℤ x y = is-decidable-is-positive-ℤ (y -ℤ x)
 ```
 
 ### Strict inequality implies inequality
