@@ -530,7 +530,9 @@ over the pullbacks as in the following diagram
 Then the pasting `γ □ α` is a pullback if and only if `γ` is if and only if the
 pasting `γ □ β` is. And, in particular, we have the equivalence
 
-\[ (A ×_X B) ×_Y C ≃ A ×_X (B ×_Y C). \]
+$$
+(A ×_X B) ×_Y C ≃ A ×_X (B ×_Y C).
+$$
 
 ```agda
 module _

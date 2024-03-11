@@ -5,6 +5,7 @@ if (link) {
   const fileList = [
     'ART.md',
     'CITE-THIS-LIBRARY.md',
+    'CITING-SOURCES.md',
     'CODINGSTYLE.md',
     'CONTRIBUTING.md',
     'CONTRIBUTORS.md',

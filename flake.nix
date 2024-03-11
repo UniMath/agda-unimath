@@ -24,6 +24,7 @@
           python = pkgs.python38.withPackages (p: with p; [
             # Keep in sync with scripts/requirements.txt
             # pre-commit <- not installed as a Python package but as a binary below
+            pybtex
             requests
             tomli
           ]);

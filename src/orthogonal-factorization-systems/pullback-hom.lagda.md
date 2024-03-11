@@ -522,8 +522,4 @@ A wikidata identifier for this concept is unavailable.
 
 ## References
 
-- Emily Riehl and Dominic Verity. _Elements of `∞`-category theory_. Cambridge
-  Studies in Advanced Mathematics 194. Cambridge University Press,
-  Cambridge, 2022.
-  [doi:10.1017/9781108936880](https://doi.org/10.1017/9781108936880). ISBN:
-  978-1-108-83798-9.
+{{#bibliography}} {{#reference Rie22}}
