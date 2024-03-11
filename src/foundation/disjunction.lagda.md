@@ -36,30 +36,42 @@ The
 `P ∨ Q` of two [propositions](foundation-core.propositions.md) `P` and `Q` is
 the proposition that `P` holds or `Q` holds.
 
-The {{#concept "introduction rules" Disambiguation="disjunction of propositions"}} of `P ∨ Q` are two implications
+The
+{{#concept "introduction rules" Disambiguation="disjunction of propositions"}}
+of `P ∨ Q` are two implications
 
 ```text
   P ⇒ P ∨ Q
   Q ⇒ P ∨ Q.
 ```
 
-In other words, the basic way of showing that the proposition `P ∨ Q` holds is by showing that either `P` holds or that `Q` holds.
+In other words, the basic way of showing that the proposition `P ∨ Q` holds is
+by showing that either `P` holds or that `Q` holds.
 
-The {{#concept elimination rule" Disambiguation="disjunction of propositions"}} of `P ∨ Q` is that for any proposition `R` there is an implication
+The {{#concept elimination rule" Disambiguation="disjunction of propositions"}}
+of `P ∨ Q` is that for any proposition `R` there is an implication
 
 ```text
   (P ⇒ R) ∧ (Q ⇒ R) ⇒ (P ∨ Q ⇒ R).
 ```
 
-In other words, to show that `P ∨ Q` implies a proposition `R`, we have to show that both `P` implies `R` and `Q` implies `R`. Indeed, if we have an unknown proof `p` of the proposition `P ∨ Q` and we want to use it to conclude `R`, then `p` either comes from the proposition `P` or from the proposition `Q`. It therefore suffices to show that both `P ⇒ R` and `Q ⇒ R`.
+In other words, to show that `P ∨ Q` implies a proposition `R`, we have to show
+that both `P` implies `R` and `Q` implies `R`. Indeed, if we have an unknown
+proof `p` of the proposition `P ∨ Q` and we want to use it to conclude `R`, then
+`p` either comes from the proposition `P` or from the proposition `Q`. It
+therefore suffices to show that both `P ⇒ R` and `Q ⇒ R`.
 
-The disjunction of two propositions can be defined in several ways. The standard definition of the proposition `P ∨ Q` is as the [propositional truncation](foundation.propositional-truncations.md) of the [coproduct](foundation.coproduct-types.md) of `P` and `Q`, i.e.,
+The disjunction of two propositions can be defined in several ways. The standard
+definition of the proposition `P ∨ Q` is as the
+[propositional truncation](foundation.propositional-truncations.md) of the
+[coproduct](foundation.coproduct-types.md) of `P` and `Q`, i.e.,
 
 ```text
   P ∨ Q := ∥ P + Q ∥.
 ```
 
-However, one can also show that the [commuting square](foundation-core.commuting-squares-of-maps.md)
+However, one can also show that the
+[commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
             pr2
@@ -70,7 +82,10 @@ However, one can also show that the [commuting square](foundation-core.commuting
       P -----> P ∨ Q
 ```
 
-is a [pushout square](synthetic-homotopy-theory.pushouts.md). In other words, the disjunction `P ∨ Q` is the [join](synthetic-homotopy-theory.joins-of-types.md) of `P` and `Q`. Thus we could alternatively have defined
+is a [pushout square](synthetic-homotopy-theory.pushouts.md). In other words,
+the disjunction `P ∨ Q` is the
+[join](synthetic-homotopy-theory.joins-of-types.md) of `P` and `Q`. Thus we
+could alternatively have defined
 
 ```text
   P ∨ Q := P * Q.
@@ -84,7 +99,7 @@ is a [pushout square](synthetic-homotopy-theory.pushouts.md). In other words, th
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
-  
+
   disjunction-Prop : Prop (l1 ⊔ l2)
   disjunction-Prop = trunc-Prop (type-Prop P + type-Prop Q)
 
@@ -109,7 +124,7 @@ not the [latin small letter v](https://codepoints.net/U+0076) `v`.
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
-  
+
   inl-disjunction-Prop : type-hom-Prop P (disjunction-Prop P Q)
   inl-disjunction-Prop = unit-trunc-Prop ∘ inl
 
@@ -153,7 +168,7 @@ module _
 module _
   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3)
   where
-  
+
   ev-disjunction-Prop :
     type-hom-Prop
       ( hom-Prop (disjunction-Prop P Q) R)

@@ -17,8 +17,8 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.spans
 open import foundation.span-diagrams
+open import foundation.spans
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -106,7 +106,8 @@ module _
 
   equiv-universal-property-pushout-join :
     {l : Level} (X : UU l) → (A * B → X) ≃ cocone-span-diagram (span-diagram-join A B) X
-  equiv-universal-property-pushout-join = equiv-universal-property-pushout-standard-pushout (span-diagram-join A B)
+  equiv-universal-property-pushout-join =
+    equiv-universal-property-pushout-standard-pushout (span-diagram-join A B)
 
   inl-join : A → A * B
   inl-join = pr1 cocone-join
@@ -124,19 +125,22 @@ module _
   compute-inl-cogap-join :
     {l3 : Level} {X : UU l3} (c : cocone-span-diagram (span-diagram-join A B) X) →
     ( cogap-join X c ∘ inl-join) ~ left-map-cocone-span-diagram (span-diagram-join A B) c
-  compute-inl-cogap-join = compute-inl-cogap-cocone-span-diagram (span-diagram-join A B)
+  compute-inl-cogap-join =
+    compute-inl-cogap-cocone-span-diagram (span-diagram-join A B)
 
   compute-inr-cogap-join :
     {l3 : Level} {X : UU l3} (c : cocone-span-diagram (span-diagram-join A B) X) →
     ( cogap-join X c ∘ inr-join) ~ right-map-cocone-span-diagram (span-diagram-join A B) c
-  compute-inr-cogap-join = compute-inr-cogap-cocone-span-diagram (span-diagram-join A B)
+  compute-inr-cogap-join =
+    compute-inr-cogap-cocone-span-diagram (span-diagram-join A B)
 
   compute-glue-cogap-join :
     {l3 : Level} {X : UU l3} (c : cocone-span-diagram (span-diagram-join A B) X) →
     ( ( cogap-join X c ·l coherence-square-cocone-span-diagram (span-diagram-join A B) cocone-join) ∙h
       ( compute-inr-cogap-join c ·r pr2)) ~
     ( compute-inl-cogap-join c ·r pr1) ∙h coherence-square-cocone-span-diagram (span-diagram-join A B) c
-  compute-glue-cogap-join = compute-glue-cogap-cocone-span-diagram (span-diagram-join A B)
+  compute-glue-cogap-join =
+    compute-glue-cogap-cocone-span-diagram (span-diagram-join A B)
 ```
 
 ## Properties

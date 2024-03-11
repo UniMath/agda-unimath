@@ -11,10 +11,10 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences-arrows
 open import foundation.equivalences-span-diagrams
-open import foundation.operations-span-diagrams
 open import foundation.function-extensionality
 open import foundation.morphisms-arrows
 open import foundation.morphisms-span-diagrams
+open import foundation.operations-span-diagrams
 open import foundation.span-diagrams
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

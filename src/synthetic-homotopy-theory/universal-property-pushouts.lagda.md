@@ -21,7 +21,6 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.equivalences-span-diagrams
-open import foundation.operations-span-diagrams
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -29,6 +28,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.morphisms-span-diagrams
+open import foundation.operations-span-diagrams
 open import foundation.precomposition-functions
 open import foundation.pullbacks
 open import foundation.span-diagrams

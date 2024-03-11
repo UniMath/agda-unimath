@@ -124,4 +124,3 @@ module _
   pr2 equiv-transposition-cocone-span-diagram =
     is-equiv-transposition-cocone-span-diagram
 ```
-

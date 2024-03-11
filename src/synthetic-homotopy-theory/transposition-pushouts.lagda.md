@@ -40,7 +40,8 @@ If a [commuting square](foundation-core.commuting-squares-of-maps.md)
         i
 ```
 
-is a [pushout square](synthetic-homotopy-theory.pushouts.md), then so is the [transposed square](synthetic-homotopy-theory.transposition-cocones-under-span-diagrams.md)
+is a [pushout square](synthetic-homotopy-theory.pushouts.md), then so is the
+[transposed square](synthetic-homotopy-theory.transposition-cocones-under-span-diagrams.md)
 
 ```text
         f
@@ -99,4 +100,3 @@ module _
       ( universal-property-pushout-transposition-cocone-span-diagram-universal-property-pushout
         ( universal-property-pushout-is-pushout 𝒮 c H))
 ```
-

@@ -52,6 +52,7 @@ open import synthetic-homotopy-theory.equivalences-families-of-types-pushouts pu
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.families-of-types-equipped-with-descent-data-pushouts public
 open import synthetic-homotopy-theory.families-of-types-pushouts public
+open import synthetic-homotopy-theory.fibers-of-cogap-maps-pushouts public
 open import synthetic-homotopy-theory.flattening-families-of-types-pushouts public
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
 open import synthetic-homotopy-theory.flattening-lemma-pushouts public
@@ -78,8 +79,8 @@ open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-span-dia
 open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.multiplication-circle public
-open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams public
 open import synthetic-homotopy-theory.null-cocones-under-pointed-span-diagrams public
+open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams public
 open import synthetic-homotopy-theory.plus-principle public
 open import synthetic-homotopy-theory.powers-of-loops public
 open import synthetic-homotopy-theory.premanifolds public
@@ -103,6 +104,8 @@ open import synthetic-homotopy-theory.suspension-structures public
 open import synthetic-homotopy-theory.suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.tangent-spheres public
+open import synthetic-homotopy-theory.transposition-cocones-under-span-diagrams public
+open import synthetic-homotopy-theory.transposition-pushouts public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.truncated-acyclic-maps public
 open import synthetic-homotopy-theory.truncated-acyclic-types public

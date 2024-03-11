@@ -20,8 +20,8 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.spans
 open import foundation.span-diagrams
+open import foundation.spans
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
@@ -38,9 +38,9 @@ open import synthetic-homotopy-theory.cocones-under-span-diagrams
 The {{#concept "suspension" Disambiguation="of a type"}} of a type `X` is the
 [pushout](synthetic-homotopy-theory.pushouts.md) of the
 [span diagram](foundation.span-diagrams.md) `unit <-- X --> unit`. A
-[cocone](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md) under such a span
-is called a `suspension-cocone`. Explicitly, a suspension cocone with codomain `Y`
-consists of functions
+[cocone](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md)
+under such a span is called a `suspension-cocone`. Explicitly, a suspension
+cocone with codomain `Y` consists of functions
 
 ```text
 f : unit → Y
@@ -155,9 +155,12 @@ module _
 
   suspension-structure-cocone-span-diagram-suspension :
     cocone-span-diagram-suspension X Y → suspension-structure X Y
-  pr1 (suspension-structure-cocone-span-diagram-suspension (N , S , merid)) = N star
-  pr1 (pr2 (suspension-structure-cocone-span-diagram-suspension (N , S , merid))) = S star
-  pr2 (pr2 (suspension-structure-cocone-span-diagram-suspension (N , S , merid))) = merid
+  pr1 (suspension-structure-cocone-span-diagram-suspension (N , S , merid)) =
+    N star
+  pr1 (pr2 (suspension-structure-cocone-span-diagram-suspension (N , S , merid))) =
+    S star
+  pr2 (pr2 (suspension-structure-cocone-span-diagram-suspension (N , S , merid))) =
+    merid
 
   is-equiv-suspension-cocone-suspension-structure :
     is-equiv suspension-cocone-suspension-structure

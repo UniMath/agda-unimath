@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalences-arrows
 open import foundation.equivalences-span-diagrams
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
@@ -27,7 +28,6 @@ open import foundation.whiskering-homotopies-composition
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types

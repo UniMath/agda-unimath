@@ -16,13 +16,13 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-span-diagrams
 open import foundation.equivalences-spans
-open import foundation.operations-spans
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.operations-spans
 open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universal-property-dependent-pair-types
@@ -420,7 +420,8 @@ Furthermore, consider a type `X`, a type family `Y` over `X`, a cocone `c` on
         cocone 𝒯 Z ---------> dependent-cocone 𝒮 c (λ x → Y x → Z)
 ```
 
-in which the bottom map is an equivalence. Here, the type of cocones on `𝒯` is the type of triples
+in which the bottom map is an equivalence. Here, the type of cocones on `𝒯` is
+the type of triples
 
 ```text
   i' : (Σ (a : A), P a) → Z
@@ -436,7 +437,8 @@ and the type of dependent cocones on `𝒮` over `c` is the type of triples
   H" : (s : S) (y : Y (i (f s))) → i" (f s) y ＝ j" (g s) (tr Y (H s) y)
 ```
 
-**Proof.** Since the span diagram `𝒯` is equivalent to the flattening span diagram `Σ 𝒮 Y`
+**Proof.** Since the span diagram `𝒯` is equivalent to the flattening span
+diagram `Σ 𝒮 Y`
 
 ```text
   Σ (a : A), Y (i a) <----- Σ (s : S), Y (i (f s)) -----> Σ (b : B), Y (j b)

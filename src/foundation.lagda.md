@@ -125,6 +125,7 @@ open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
 open import foundation.disjunction public
+open import foundation.disjunction-decidable-propositions public
 open import foundation.double-negation public
 open import foundation.double-negation-modality public
 open import foundation.double-powersets public

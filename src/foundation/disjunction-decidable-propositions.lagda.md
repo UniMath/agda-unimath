@@ -38,7 +38,7 @@ module _
   is-prop-type-disjunction-Decidable-Prop =
     is-prop-type-disjunction-Prop
       ( prop-Decidable-Prop P)
-      ( prop-Decidable-Prop Q)   
+      ( prop-Decidable-Prop Q)
 
   is-decidable-type-disjunction-Decidable-Prop :
     is-decidable type-disjunction-Decidable-Prop
@@ -58,4 +58,3 @@ module _
   pr2 (pr2 disjunction-Decidable-Prop) =
     is-decidable-type-disjunction-Decidable-Prop
 ```
-

@@ -101,7 +101,8 @@ cocone-suspension X =
 cogap-suspension' :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   cocone-span-diagram (span-diagram-suspension X) Y → suspension X → Y
-cogap-suspension' {X = X} = cogap-cocone-span-diagram (span-diagram-suspension X)
+cogap-suspension' {X = X} =
+  cogap-cocone-span-diagram (span-diagram-suspension X)
 
 up-suspension' :
   {l1 : Level} (X : UU l1) →

@@ -19,7 +19,6 @@ open import foundation.whiskering-identifications-concatenation
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation.commuting-squares-of-identifications
 ```
 
 </details>

@@ -251,4 +251,3 @@ fibers.
         ( is-equiv-map-equiv j)
         ( is-equiv-map-equiv k)
 ```
-
