@@ -15,7 +15,7 @@ open import foundation.universe-levels
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.cocones-under-span-diagrams-of-pointed-types
+open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
 open import synthetic-homotopy-theory.pushouts
 ```
 
@@ -29,7 +29,7 @@ the (wild) category of [pointed types](structured-types.pointed-types.md).
 
 ## Definition
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level}
   {S : Pointed-Type l1} {A : Pointed-Type l2} {B : Pointed-Type l3}
@@ -50,7 +50,7 @@ module _
 
 ### The pushout of a pointed map along a pointed map is pointed
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level}
   {S : Pointed-Type l1} {A : Pointed-Type l2} {B : Pointed-Type l3}
@@ -82,7 +82,7 @@ module _
 
 ### The cogap map for pushouts of pointed types
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level}
   {S : Pointed-Type l1} {A : Pointed-Type l2} {B : Pointed-Type l3}
@@ -92,25 +92,25 @@ module _
     {l4 : Level}
     (f : S →∗ A) (g : S →∗ B) →
     {X : Pointed-Type l4} →
-    type-cocone-Pointed-Type f g X →
+    cocone-Pointed-Type f g X →
     type-Pointed-Type (pushout-Pointed-Type f g) → type-Pointed-Type X
   map-cogap-Pointed-Type f g c =
     cogap
       ( map-pointed-map f)
       ( map-pointed-map g)
-      ( cocone-type-cocone-Pointed-Type f g c)
+      ( cocone-cocone-Pointed-Type f g c)
 
   cogap-Pointed-Type :
     {l4 : Level}
     (f : S →∗ A) (g : S →∗ B) →
     {X : Pointed-Type l4} →
-    type-cocone-Pointed-Type f g X → pushout-Pointed-Type f g →∗ X
+    cocone-Pointed-Type f g X → pushout-Pointed-Type f g →∗ X
   pr1 (cogap-Pointed-Type f g c) = map-cogap-Pointed-Type f g c
   pr2 (cogap-Pointed-Type f g {X} c) =
     ( compute-inl-cogap
       ( map-pointed-map f)
       ( map-pointed-map g)
-      ( cocone-type-cocone-Pointed-Type f g c)
+      ( cocone-cocone-Pointed-Type f g c)
       ( point-Pointed-Type A)) ∙
     ( preserves-point-pointed-map
       ( horizontal-pointed-map-cocone-Pointed-Type f g c))
@@ -118,12 +118,12 @@ module _
 
 ### Computation with the cogap map for pointed types
 
-```agda
+```text
 module _
   { l1 l2 l3 l4 : Level}
   {S : Pointed-Type l1} {A : Pointed-Type l2} {B : Pointed-Type l3}
   ( f : S →∗ A) (g : S →∗ B)
-  { X : Pointed-Type l4} (c : type-cocone-Pointed-Type f g X)
+  { X : Pointed-Type l4} (c : cocone-Pointed-Type f g X)
   where
 
   compute-inl-cogap-Pointed-Type :
@@ -138,7 +138,7 @@ module _
     compute-inl-cogap
       ( map-pointed-map f)
       ( map-pointed-map g)
-      ( cocone-type-cocone-Pointed-Type f g c)
+      ( cocone-cocone-Pointed-Type f g c)
 
   compute-inr-cogap-Pointed-Type :
     ( y : type-Pointed-Type B) →
@@ -152,5 +152,5 @@ module _
     compute-inr-cogap
       ( map-pointed-map f)
       ( map-pointed-map g)
-      ( cocone-type-cocone-Pointed-Type f g c)
+      ( cocone-cocone-Pointed-Type f g c)
 ```

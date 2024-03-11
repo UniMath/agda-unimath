@@ -118,7 +118,7 @@ precise, asserting that under this mapping,
 [coequalizers](synthetic-homotopy-theory.coequalizers.md) correspond to
 [pushouts](synthetic-homotopy-theory.pushouts.md).
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f g : A → B)
   ( e : cofork f g X)
@@ -173,7 +173,7 @@ module _
 
 ### The universal property of coequalizers is equivalent to the dependent universal property of coequalizers
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
   ( e : cofork f g X)

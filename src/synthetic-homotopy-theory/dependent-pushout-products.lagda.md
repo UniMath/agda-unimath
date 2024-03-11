@@ -54,7 +54,7 @@ and `B` is a family of propositions.
 
 ### Dependent pushout-products
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {X : UU l2} {B : X → UU l3} {Y : X → UU l4}
   (f : A → X) (g : (x : X) → B x → Y x)

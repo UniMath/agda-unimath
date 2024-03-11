@@ -87,7 +87,7 @@ module _
 
 ### A map is `k`-acyclic if and only if it is an [epimorphism with respect to `k`-types](foundation.epimorphisms-with-respect-to-truncated-types.md)
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -139,7 +139,7 @@ More precisely, `A` is `k`-acyclic if and only if for all `k`-types `X`, the map
 
 is an embedding.
 
-```agda
+```text
 module _
   {l : Level} {k : 𝕋} (A : UU l)
   where
@@ -189,7 +189,7 @@ elements `x,y : X`, the map
 
 is an equivalence.
 
-```agda
+```text
 module _
   {l : Level} {k : 𝕋} (A : UU l)
   where
@@ -235,7 +235,7 @@ module _
 The proof is similar to that of dependent epimorphisms and
 [acyclic-maps](synthetic-homotopy-theory.acyclic-maps.md).
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -274,7 +274,7 @@ module _
 
 In particular, every `k`-epimorphism is actually a dependent `k`-epimorphism.
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -293,7 +293,7 @@ Since the `k`-acyclic maps are precisely the `k`-epimorphisms this follows from
 the corresponding facts about
 [`k`-epimorphisms](foundation.epimorphisms-with-respect-to-truncated-types.md).
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B)
@@ -347,7 +347,7 @@ is-truncated-acyclic-map-succ-unit-trunc {k = k} A =
 
 ### A type is `(k+1)`-acyclic if and only if its `k`-truncation is
 
-```agda
+```text
 module _
   {l : Level} {k : 𝕋} (A : UU l)
   where
@@ -380,7 +380,7 @@ module _
 
 ### Every `k`-equivalence is `k`-acyclic
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -429,7 +429,7 @@ module _
 
 ### `k`-acyclic types are closed under dependent pair types
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : A → UU l2)
   where
@@ -450,7 +450,7 @@ module _
 
 ### `k`-acyclic types are closed under binary products
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : UU l2)
   where
@@ -476,7 +476,7 @@ module _
 
 ### Inhabited, locally `k`-acyclic types are `k`-acyclic
 
-```agda
+```text
 module _
   {l : Level} {k : 𝕋} (A : UU l)
   where
@@ -557,7 +557,7 @@ following equivalences for that purpose:
                                ≃ (C → X)
 ```
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level} {k : 𝕋} {S : UU l1} {A : UU l2} {B : UU l3}
   {C : UU l4} (f : S → A) (g : S → B) (c : cocone f g C)

@@ -245,7 +245,7 @@ The type of dependent coforks on `P` over `e` is equivalent to the type of
 [dependent cocones](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md)
 on `P` over a cocone corresponding to `e` via `cocone-codiagonal-cofork`.
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
   ( e : cofork f g X)

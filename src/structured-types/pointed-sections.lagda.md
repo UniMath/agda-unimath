@@ -36,7 +36,6 @@ module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
   where
 
-
   is-pointed-section : (B →∗ A) → UU l2
   is-pointed-section g = f ∘∗ g ~∗ id-pointed-map
 ```

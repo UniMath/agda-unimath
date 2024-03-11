@@ -109,7 +109,7 @@ precise, asserting that under this mapping,
 [coequalizers](synthetic-homotopy-theory.coequalizers.md) correspond to
 [pushouts](synthetic-homotopy-theory.pushouts.md).
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f g : A → B)
   ( e : cofork f g X)
@@ -175,7 +175,7 @@ the three small squares, and a coherence datum expressing that the right square
 coequalizes the left squares in the category of arrows, we have that the top
 cofork is a coequalizer if and only if the bottom cofork is a coequalizer.
 
-```agda
+```text
 module _
   { l1 l2 l3 l4 l5 l6 : Level}
   { A : UU l1} {B : UU l2} {C : UU l3}

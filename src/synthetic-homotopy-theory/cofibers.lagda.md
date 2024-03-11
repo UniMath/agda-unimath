@@ -32,7 +32,7 @@ The **cofiber** of a map `f : A → B` is the
 
 ### The cofiber of a map
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
@@ -73,7 +73,7 @@ all contractible is an equivalence. For instance, the cofiber of `X → 1` where
 definition contractible. Examples of noncontractible acyclic types include
 [Hatcher's acyclic type](synthetic-homotopy-theory.hatchers-acyclic-type.md).
 
-```agda
+```text
 is-contr-cofiber-is-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   is-equiv f → is-contr (cofiber f)
@@ -92,7 +92,7 @@ is-contr-cofiber-is-equiv {A = A} f is-equiv-f =
 
 ### The cofiber of the point inclusion of `X` is equivalent to `X`
 
-```agda
+```text
 is-equiv-inl-cofiber-point :
   {l : Level} {B : UU l} (b : B) → is-equiv (inl-cofiber (point b))
 is-equiv-inl-cofiber-point {B = B} b =

@@ -7,29 +7,22 @@ module category-theory.indiscrete-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.fully-faithful-functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 open import category-theory.pregroupoids
 open import category-theory.preunivalent-categories
 open import category-theory.strict-categories
 open import category-theory.subterminal-precategories
-open import category-theory.terminal-category
 
-open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtype-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -98,35 +91,6 @@ module _
       ( comp-hom-indiscrete-Precategory {x} {y} {z} g f)
   associative-comp-hom-indiscrete-Precategory h g f = refl
 
-  inv-associative-comp-hom-indiscrete-Precategory :
-    {x y z w : obj-indiscrete-Precategory X} →
-    (h : hom-indiscrete-Precategory X z w)
-    (g : hom-indiscrete-Precategory X y z)
-    (f : hom-indiscrete-Precategory X x y) →
-    comp-hom-indiscrete-Precategory {x} {z} {w}
-      ( h)
-      ( comp-hom-indiscrete-Precategory {x} {y} {z} g f) ＝
-    comp-hom-indiscrete-Precategory {x} {y} {w}
-      ( comp-hom-indiscrete-Precategory {y} {z} {w} h g)
-      ( f)
-  inv-associative-comp-hom-indiscrete-Precategory h g f = refl
-
-  associative-composition-operation-indiscrete-Precategory :
-    associative-composition-operation-binary-family-Set
-      ( hom-set-indiscrete-Precategory X)
-  pr1 associative-composition-operation-indiscrete-Precategory {x} {y} {z} =
-    comp-hom-indiscrete-Precategory {x} {y} {z}
-  pr1
-    ( pr2
-        associative-composition-operation-indiscrete-Precategory
-          { x} {y} {z} {w} h g f) =
-    associative-comp-hom-indiscrete-Precategory {x} {y} {z} {w} h g f
-  pr2
-    ( pr2
-        associative-composition-operation-indiscrete-Precategory
-          { x} {y} {z} {w} h g f) =
-    inv-associative-comp-hom-indiscrete-Precategory {x} {y} {z} {w} h g f
-
   id-hom-indiscrete-Precategory :
     {x : obj-indiscrete-Precategory X} → hom-indiscrete-Precategory X x x
   id-hom-indiscrete-Precategory = star
@@ -149,24 +113,17 @@ module _
     f
   right-unit-law-comp-hom-indiscrete-Precategory f = refl
 
-  is-unital-composition-operation-indiscrete-Precategory :
-    is-unital-composition-operation-binary-family-Set
+  indiscrete-Precategory : Precategory l lzero
+  indiscrete-Precategory =
+    make-Precategory
+      ( obj-indiscrete-Precategory X)
       ( hom-set-indiscrete-Precategory X)
       ( λ {x} {y} {z} → comp-hom-indiscrete-Precategory {x} {y} {z})
-  pr1 is-unital-composition-operation-indiscrete-Precategory x =
-    id-hom-indiscrete-Precategory {x}
-  pr1 (pr2 is-unital-composition-operation-indiscrete-Precategory) {x} {y} =
-    left-unit-law-comp-hom-indiscrete-Precategory {x} {y}
-  pr2 (pr2 is-unital-composition-operation-indiscrete-Precategory) {x} {y} =
-    right-unit-law-comp-hom-indiscrete-Precategory {x} {y}
-
-  indiscrete-Precategory : Precategory l lzero
-  pr1 indiscrete-Precategory = obj-indiscrete-Precategory X
-  pr1 (pr2 indiscrete-Precategory) = hom-set-indiscrete-Precategory X
-  pr1 (pr2 (pr2 indiscrete-Precategory)) =
-    associative-composition-operation-indiscrete-Precategory
-  pr2 (pr2 (pr2 indiscrete-Precategory)) =
-    is-unital-composition-operation-indiscrete-Precategory
+      ( λ x → id-hom-indiscrete-Precategory {x})
+      ( λ {x} {y} {z} {w} →
+        associative-comp-hom-indiscrete-Precategory {x} {y} {z} {w})
+      ( λ {x} {y} → left-unit-law-comp-hom-indiscrete-Precategory {x} {y})
+      ( λ {x} {y} → right-unit-law-comp-hom-indiscrete-Precategory {x} {y})
 ```
 
 #### The pregroupoid structure of the indiscrete precategory associated to a type

@@ -8,9 +8,9 @@ module structured-types.commuting-squares-of-pointed-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
 open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-squares-of-maps
+open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -39,8 +39,9 @@ Consider a square of [pointed maps](structured-types.pointed-maps.md)
 ```
 
 Such a square is said to be a
-{{#concept "commuting square of pointed maps" Agda=coherence-square-pointed-maps}}
-if there is a [pointed homotopy](structured-types.pointed-homotopies.md)
+{{#concept "commuting square" Disambiguation="pointed maps" Agda=coherence-square-pointed-maps}}
+of pointed maps if there is a
+[pointed homotopy](structured-types.pointed-homotopies.md)
 
 ```text
   bottom ∘∗ left ~∗ right ∘∗ top.
@@ -193,7 +194,7 @@ with pointed homotopies
 
 ```text
   H : bottom-left ∘∗ left ~∗ middle ∘∗ top
-  K : bottom-right ∘∗ middle ~∗ right ∘∗ top-right
+  K : bottom-right ∘∗ middle ~∗ right ∘∗ top-right.
 ```
 
 The
@@ -222,7 +223,7 @@ obtained by concatenation of the following three pointed homotopies:
 
 The first and third homotopy in this concatenation are the whiskerings of
 coherences of
-[commuting triangles of pointed homotopies](structured-types.commuting-triangles-of-pointed-homotopies.md).
+[commuting triangles of pointed maps](structured-types.commuting-triangles-of-pointed-maps.md).
 
 ```agda
 module _
@@ -287,7 +288,7 @@ with pointed homotopies
 
 ```text
   H : middle ∘∗ top-left ~∗ top-right ∘∗ top
-  K : bottom ∘∗ bottom-left ~∗  bottom-right ∘∗ middle
+  K : bottom ∘∗ bottom-left ~∗  bottom-right ∘∗ middle.
 ```
 
 The
@@ -311,12 +312,12 @@ obtained by concatenation of the following three pointed homotopies:
   bottom ∘∗ (bottom-left ∘∗ top-left)
   ~∗ bottom-right ∘∗ (middle ∘∗ top-left)
   ~∗ (bottom-right ∘∗ middle) ∘∗ top-left
-  ~∗ (bottom-right ∘∗ top-right) ∘∗ top
+  ~∗ (bottom-right ∘∗ top-right) ∘∗ top.
 ```
 
 The first and third homotopy in this concatenation are the whiskerings of
 coherences of
-[commuting triangles of pointed homotopies](structured-types.commuting-triangles-of-pointed-homotopies.md).
+[commuting triangles of pointed maps](structured-types.commuting-triangles-of-pointed-maps.md).
 
 ```agda
 module _

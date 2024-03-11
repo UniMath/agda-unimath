@@ -8,7 +8,6 @@ module synthetic-homotopy-theory where
 open import synthetic-homotopy-theory.0-acyclic-maps public
 open import synthetic-homotopy-theory.0-acyclic-types public
 open import synthetic-homotopy-theory.1-acyclic-types public
-open import synthetic-homotopy-theory.26-descent public
 open import synthetic-homotopy-theory.26-id-pushout public
 open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams public
 open import synthetic-homotopy-theory.acyclic-maps public
@@ -17,9 +16,9 @@ open import synthetic-homotopy-theory.category-of-connected-set-bundles-circle p
 open import synthetic-homotopy-theory.cavallos-trick public
 open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cocartesian-morphisms-arrows public
+open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams public
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams public
 open import synthetic-homotopy-theory.cocones-under-span-diagrams public
-open import synthetic-homotopy-theory.cocones-under-span-diagrams-pointed-types public
 open import synthetic-homotopy-theory.codiagonals-of-maps public
 open import synthetic-homotopy-theory.coequalizers public
 open import synthetic-homotopy-theory.cofibers public
@@ -80,6 +79,7 @@ open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams public
+open import synthetic-homotopy-theory.null-cocones-under-pointed-span-diagrams public
 open import synthetic-homotopy-theory.plus-principle public
 open import synthetic-homotopy-theory.powers-of-loops public
 open import synthetic-homotopy-theory.premanifolds public

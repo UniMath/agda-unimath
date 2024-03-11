@@ -90,7 +90,7 @@ maps `f`, `g`, and `h` we have a [homotopy](foundation-core.homotopies.md)
 
 ### The pushout-product
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → X) (g : B → Y)

@@ -108,7 +108,7 @@ terminal maps in the square.
 
 ### The join of maps
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) (g : B → X)
   where

@@ -42,7 +42,7 @@ is a [pushout](synthetic-homotopy-theory.pushouts.md) square.
 
 ### The predicate of being a cocartesian morphism of arrows
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → B) (g : X → Y) (h : hom-arrow f g)
@@ -63,7 +63,7 @@ module _
 
 ### The type of cocartesian morphisms of arrows
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → B) (g : X → Y)

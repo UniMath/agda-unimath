@@ -639,7 +639,7 @@ module _
                   ( coherence-square-cocone-span-diagram
                     ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
                     ( d))))))
-          ( is-pullback-rectangle-is-pullback-top
+          ( is-pullback-rectangle-is-pullback-top-square
             ( precomp (left-map-span-diagram 𝒮) W)
             ( precomp (right-map-span-diagram 𝒮) W)
             ( precomp h W)
@@ -671,7 +671,7 @@ module _
       ( make-span-diagram (right-map-cocone-span-diagram 𝒮 c) h)
       ( d)
       ( λ W →
-        is-pullback-top-is-pullback-rectangle
+        is-pullback-top-square-is-pullback-rectangle
           ( precomp (left-map-span-diagram 𝒮) W)
           ( precomp (right-map-span-diagram 𝒮) W)
           ( precomp h W)

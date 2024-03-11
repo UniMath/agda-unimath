@@ -41,7 +41,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Section 19.1 Characterizing families of maps over pushouts
 
-```agda
+```text
 module hom-structure-type-family-pushout
   { l1 l2 l3 l4 l5 : Level}
   { S : UU l1}
@@ -64,7 +64,7 @@ module hom-structure-type-family-pushout
 
 ### Definition 19.1.1
 
-```agda
+```text
   hom-structure-type-family-pushout :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   hom-structure-type-family-pushout =
@@ -77,7 +77,7 @@ module hom-structure-type-family-pushout
 
 ### Remark 19.1.2 We characterize the identity type of `hom-structure-type-family-pushout`
 
-```agda
+```text
   htpy-hom-structure-type-family-pushout :
     ( h k : hom-structure-type-family-pushout) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   htpy-hom-structure-type-family-pushout h k =
@@ -136,7 +136,7 @@ open hom-structure-type-family-pushout public
 Given a cocone structure on `X` and a family of maps indexed by `X`, we obtain a
 morphism of descent data.
 
-```agda
+```text
 Naturality-fam-maps :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   ( f : (a : A) → B a → C a) {x x' : A} (p : Id x x') → UU (l2 ⊔ l3)
@@ -164,7 +164,7 @@ hom-structure-type-family-pushout-map {f = f} {g} c P Q h =
 
 ### Theorem 19.1.4 The function `hom-structure-type-family-pushout-map` is an equivalence
 
-```agda
+```text
 square-path-over-fam-maps :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   { x x' : A} (p : Id x x') (f : B x → C x) (f' : B x' → C x') →
@@ -275,7 +275,7 @@ equiv-hom-structure-type-family-pushout-map c up-X P Q =
 
 ### Definition 19.2.1 Universal families over spans
 
-```agda
+```text
 ev-point-hom-structure-type-family-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} (P : structure-type-family-pushout l4 f g) (Q : structure-type-family-pushout l5 f g)
@@ -292,7 +292,7 @@ is-universal-structure-type-family-pushout l {f = f} {g} P a p =
 
 ### Lemma 19.2.2 The descent data of the identity type is a universal family
 
-```agda
+```text
 triangle-is-universal-id-structure-type-family-pushout' :
   { l l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X)
@@ -347,7 +347,7 @@ is-universal-id-structure-type-family-pushout {S = S} {A} {B} {X} {f} {g} c up-X
 We construct the identity morphism and composition, and we show that morphisms
 equipped with two-sided inverses are equivalences.
 
-```agda
+```text
 id-hom-structure-type-family-pushout :
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} →

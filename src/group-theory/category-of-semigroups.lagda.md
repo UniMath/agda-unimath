@@ -36,9 +36,7 @@ category.
 is-large-category-Semigroup :
   is-large-category-Large-Precategory Semigroup-Large-Precategory
 is-large-category-Semigroup G =
-  fundamental-theorem-id
-    ( is-torsorial-iso-Semigroup G)
-    ( iso-eq-Semigroup G)
+  fundamental-theorem-id (is-torsorial-iso-Semigroup G) (iso-eq-Semigroup G)
 
 extensionality-Semigroup :
   {l : Level} (G H : Semigroup l) → Id G H ≃ iso-Semigroup G H

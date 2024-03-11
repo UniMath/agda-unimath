@@ -115,7 +115,7 @@ the top square is a pushout as well. The vertical maps of the cube are
 [equivalences](foundation.equivalences.md), so it follows that the bottom square
 is a pushout.
 
-```agda
+```text
 module _
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
   ( P : X → UU l4) (e : cofork f g X)

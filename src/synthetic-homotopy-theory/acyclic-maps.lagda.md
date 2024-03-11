@@ -80,7 +80,7 @@ module _
 
 ### A map is acyclic if and only if it is an [epimorphism](foundation.epimorphisms.md)
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -133,7 +133,7 @@ More precisely, `A` is acyclic if and only if for all types `X`, the map
 
 is an embedding.
 
-```agda
+```text
 module _
   {l : Level} (A : UU l)
   where
@@ -178,7 +178,7 @@ More precisely, `A` is acyclic if and only if for all types `X` and elements
 
 is an equivalence.
 
-```agda
+```text
 module _
   {l : Level} (A : UU l)
   where
@@ -233,7 +233,7 @@ The following diagram is a helpful illustration in the second proof:
 The left map is an embedding if f is an acyclic map, because const is an
 embedding in this case.
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -262,7 +262,7 @@ module _
 
 In particular, every epimorphism is actually a dependent epimorphism.
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -279,7 +279,7 @@ module _
 Since the acyclic maps are precisely the epimorphisms this follows from the
 corresponding facts about [epimorphisms](foundation.epimorphisms.md).
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B)
@@ -338,7 +338,7 @@ computes to the identity:
 Therefore, `cocone-map f (j ∘ g)` is an equivalence and the outer rectangle is
 indeed a pushout.
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   {C : UU l4} (f : S → A) (g : S → B) (c : cocone f g C)
@@ -457,7 +457,7 @@ module _
 
 ### Acyclic types are closed under dependent pair types
 
-```agda
+```text
 module _
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
   where
@@ -476,7 +476,7 @@ module _
 
 ### Acyclic types are closed under binary products
 
-```agda
+```text
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
@@ -500,7 +500,7 @@ module _
 
 ### Inhabited, locally acyclic types are acyclic
 
-```agda
+```text
 module _
   {l : Level} (A : UU l)
   where

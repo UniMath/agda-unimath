@@ -17,7 +17,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.pointed-unit-type
 
-open import synthetic-homotopy-theory.cocones-under-span-diagrams-of-pointed-types
+open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
 open import synthetic-homotopy-theory.cofibers
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.pushouts-of-pointed-types
@@ -44,7 +44,7 @@ and is thus canonically pointed at the identified image of `a` and `b`.
 
 ## Definition
 
-```agda
+```text
 wedge-Pointed-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
   Pointed-Type (l1 ⊔ l2)
@@ -104,7 +104,7 @@ indexed wedge sum, `⋁∗`, is the
 
 ### The images of the base points `a : A` and `b : B` are identified in `A ∨∗ B`
 
-```agda
+```text
 glue-wedge-Pointed-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
   map-inl-wedge-Pointed-Type A B (point-Pointed-Type A) ＝
@@ -124,13 +124,13 @@ defined by the cogap map induced by the canonical inclusions `A → A ×∗ B �
 Elements of the form `(x, b)` and `(a, y)`, where `b` and `a` are basepoints,
 lie in the image of the inclusion of the wedge sum into the pointed product.
 
-```agda
+```text
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
 
   cocone-product-wedge-Pointed-Type :
-    type-cocone-Pointed-Type
+    cocone-Pointed-Type
       ( inclusion-point-Pointed-Type A)
       ( inclusion-point-Pointed-Type B)
       ( A ×∗ B)

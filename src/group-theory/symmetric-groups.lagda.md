@@ -10,12 +10,9 @@ module group-theory.symmetric-groups where
 open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -64,7 +61,9 @@ pr2 (pr2 (is-unital-Semigroup-symmetric-Semigroup X)) = right-unit-law-equiv
 
 is-group-symmetric-Semigroup' :
   {l : Level} (X : Set l) →
-  is-group' (symmetric-Semigroup X) (is-unital-Semigroup-symmetric-Semigroup X)
+  is-group-is-unital-Semigroup
+    ( symmetric-Semigroup X)
+    ( is-unital-Semigroup-symmetric-Semigroup X)
 pr1 (is-group-symmetric-Semigroup' X) = inv-equiv
 pr1 (pr2 (is-group-symmetric-Semigroup' X)) = left-inverse-law-equiv
 pr2 (pr2 (is-group-symmetric-Semigroup' X)) = right-inverse-law-equiv

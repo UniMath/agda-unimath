@@ -217,7 +217,7 @@ span
 A <----- A + A -----> B.
 ```
 
-```agda
+```text
 module _
   { l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
   where

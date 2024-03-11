@@ -53,7 +53,7 @@ for every point `a` of `A` there will be a path from `f(a)` to `a` and to
 The construction from pushouts itself is an implementation detail, which is why
 the definition is marked abstract.
 
-```agda
+```text
 module _
   { l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
   where

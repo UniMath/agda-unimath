@@ -9,12 +9,13 @@ module structured-types.pointed-retractions where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation-core.retractions
 open import foundation.universe-levels
+
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
+open import foundation-core.retractions
 
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
@@ -40,7 +41,6 @@ module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
   where
 
-
   is-pointed-retraction : (B →∗ A) → UU l1
   is-pointed-retraction g = g ∘∗ f ~∗ id-pointed-map
 ```
@@ -57,15 +57,15 @@ module _
     Σ (B →∗ A) (is-pointed-retraction f)
 
   module _
-    (s : pointed-retraction)
+    (r : pointed-retraction)
     where
 
     pointed-map-pointed-retraction : B →∗ A
-    pointed-map-pointed-retraction = pr1 s
+    pointed-map-pointed-retraction = pr1 r
 
     is-pointed-retraction-pointed-retraction :
       is-pointed-retraction f pointed-map-pointed-retraction
-    is-pointed-retraction-pointed-retraction = pr2 s
+    is-pointed-retraction-pointed-retraction = pr2 r
 
     map-pointed-retraction : type-Pointed-Type B → type-Pointed-Type A
     map-pointed-retraction = map-pointed-map pointed-map-pointed-retraction
@@ -97,16 +97,19 @@ module _
 
 ### Any retraction of a pointed map preserves the base point in a unique way making the retracting homotopy pointed
 
-Consider a [retraction](foundation-core.retractions.md) `g : B → A` of a pointed map `f := (f₀ , f₁) : A →∗ B`. Then `g` is base point preserving.
+Consider a [retraction](foundation-core.retractions.md) `g : B → A` of a pointed
+map `f := (f₀ , f₁) : A →∗ B`. Then `g` is base point preserving.
 
-**Proof.** Our goal is to show that `g * ＝ *`. Since `f` is pointed, we have `f * ＝ *` and hence 
+**Proof.** Our goal is to show that `g * ＝ *`. Since `f` is pointed, we have
+`f * ＝ *` and hence
 
 ```text
        (ap g f₁)⁻¹              H *
   g * -------------> g (f₀ *) -------> *.
 ```
 
-In order to show that the retracting homotopy `H : g ∘ f₀ ~ id` is pointed, we have to show that the triangle of identifications
+In order to show that the retracting homotopy `H : g ∘ f₀ ~ id` is pointed, we
+have to show that the triangle of identifications
 
 ```text
                                    H *
@@ -118,9 +121,13 @@ In order to show that the retracting homotopy `H : g ∘ f₀ ~ id` is pointed, 
                                     *
 ```
 
-commutes. This follows by the fact that concatenating with an inverse identification is inverse to concatenating with the original identification, and the right unit law of concatenation.
+commutes. This follows by the fact that concatenating with an inverse
+identification is inverse to concatenating with the original identification, and
+the right unit law of concatenation.
 
-Note that the pointing of `g` chosen above is the unique way making the retracting homotopy pointed, because the map `p ↦ ap g f₁ ∙ p` is an equivalence with a contractible fiber at `H * ∙ refl`.
+Note that the pointing of `g` chosen above is the unique way making the
+retracting homotopy pointed, because the map `p ↦ ap g f₁ ∙ p` is an equivalence
+with a contractible fiber at `H * ∙ refl`.
 
 ```agda
 module _

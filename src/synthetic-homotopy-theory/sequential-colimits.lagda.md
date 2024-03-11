@@ -51,7 +51,7 @@ cocone. You may also see the colimit written as `colimₙ Aₙ`.
 
 ### Homotopies between maps out of sequential colimits
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2}
   ( c : cocone-sequential-diagram A X)
@@ -86,7 +86,7 @@ module _
 
 ### Components of a homotopy between maps out of sequential colimits
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2}
   { c : cocone-sequential-diagram A X}
@@ -111,7 +111,7 @@ that cocones of sequential diagrams correspond to a certain class of
 to sequential colimits. Since all coequalizers exist, we conclude that all
 sequential colimits exist.
 
-```agda
+```text
 abstract
   standard-sequential-colimit : {l : Level} (A : sequential-diagram l) → UU l
   standard-sequential-colimit A =
@@ -170,7 +170,7 @@ module _
 
 ### Corollaries of the universal property of sequential colimits
 
-```agda
+```text
 module _
   { l1 l2 : Level} {A : sequential-diagram l1}
   where
@@ -221,7 +221,7 @@ the assertion that the cogap map is an
 [the universal property](synthetic-homotopy-theory.universal-property-sequential-colimits.md)
 is a large proposition.
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
   (c : cocone-sequential-diagram A X)
@@ -245,7 +245,7 @@ Maps from the standard sequential colimit induce cocones under the sequential
 diagrams, and a [homotopy](foundation-core.homotopies.md) between the maps is
 exactly a homotopy of the cocones.
 
-```agda
+```text
 module _
   { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
   ( f g : standard-sequential-colimit A → X)
@@ -267,7 +267,7 @@ module _
 
 We may then obtain a homotopy of maps from a homotopy of their induced cocones.
 
-```agda
+```text
 module _
   { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
   { f g : standard-sequential-colimit A → X}
@@ -283,7 +283,7 @@ module _
 
 ### A type satisfies `is-sequential-colimit` if and only if it has the (dependent) universal property of sequential colimits
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
   (c : cocone-sequential-diagram A X)

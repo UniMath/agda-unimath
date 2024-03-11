@@ -252,7 +252,7 @@ module _
 
 ### The identity morphism induces the identity map
 
-```agda
+```text
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
   { c : cocone-sequential-diagram A X}
@@ -288,7 +288,7 @@ module _
 
 ### Composition of morphisms induces composition of functions
 
-```agda
+```text
 module _
   { l1 l2 l3 l4 l5 l6 : Level}
   { A : sequential-diagram l1} {B : sequential-diagram l2}
@@ -440,7 +440,7 @@ module _
 Additionally, the underlying map of the retraction is strictly equal to the map
 induced by the retraction of sequential diagrams.
 
-```agda
+```text
 module _
   { l1 l2 l3 l4 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
   { X : UU l3} {c : cocone-sequential-diagram A X}
@@ -509,7 +509,7 @@ diagrams, i.e. it is the unique map `g : Y → X` making the diagram
 
 commute.
 
-```agda
+```text
 module _
   { l1 l2 l3 l4 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
   { X : UU l3} {c : cocone-sequential-diagram A X}
@@ -577,7 +577,7 @@ denote the unique map `g` corresponding to a morphism of diagrams `f` by
 
 #### A morphism of sequential diagrams induces a map of standard sequential colimits
 
-```agda
+```text
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} (B : sequential-diagram l2)
   ( f : hom-sequential-diagram A B)
@@ -662,7 +662,7 @@ module _
 
 #### Homotopies between morphisms of sequential diagrams induce homotopies of maps of standard sequential colimits
 
-```agda
+```text
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
   { f g : hom-sequential-diagram A B} (H : htpy-hom-sequential-diagram B f g)
@@ -682,7 +682,7 @@ module _
 
 We have `id∞ ~ id : A∞ → A∞`.
 
-```agda
+```text
 module _
   { l1 : Level} {A : sequential-diagram l1}
   where
@@ -700,7 +700,7 @@ module _
 
 We have `(f ∘ g)∞ ~ (f∞ ∘ g∞) : A∞ → C∞`.
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
   { C : sequential-diagram l3}
@@ -727,7 +727,7 @@ Additionally, the underlying map of the inverse equivalence is definitionally
 equal to the map induced by the inverse of the equivalence of sequential
 diagrams, i.e. `(e∞)⁻¹ = (e⁻¹)∞`.
 
-```agda
+```text
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
   ( e : equiv-sequential-diagram A B)
@@ -763,7 +763,7 @@ module _
 Additionally, the underlying map of the retraction is definitionally equal to
 the map induced by the retraction of sequential diagrams.
 
-```agda
+```text
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
   ( R : A retract-of-sequential-diagram B)

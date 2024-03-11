@@ -9,6 +9,7 @@ module structured-types.commuting-squares-of-pointed-homotopies where
 ```agda
 open import foundation.universe-levels
 
+open import structured-types.pointed-2-homotopies
 open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-families-of-types
 open import structured-types.pointed-homotopies
@@ -31,10 +32,11 @@ A square of [pointed homotopies](structured-types.pointed-homotopies.md)
         bottom
 ```
 
-is said to be a {{#concept "commuting square" Disambiguation="pointed homotopies"}} of
-pointed homotopies if there is a pointed homotopy `left ∙h bottom ~∗ top ∙h right `. Such a
-pointed homotopy is called a
-{{#concept "coherence" Disambiguation="commuting square of homotopies" Agda=coherence-square-homotopies}}
+is said to be a
+{{#concept "commuting square" Disambiguation="pointed homotopies" Agda=coherence-square-pointed-homotopies}}
+of pointed homotopies if there is a pointed homotopy
+`left ∙h bottom ~∗ top ∙h right `. Such a pointed homotopy is called a
+{{#concept "coherence" Disambiguation="commuting square of homotopies" Agda=coherence-square-pointed-homotopies}}
 of the square.
 
 ## Definitions
@@ -47,7 +49,7 @@ module _
   {A : Pointed-Type l1} {B : Pointed-Fam l2 A} {f g h i : pointed-Π A B}
   (top : f ~∗ g) (left : f ~∗ h) (right : g ~∗ i) (bottom : h ~∗ i)
   where
-  
+
   coherence-square-pointed-homotopies : UU (l1 ⊔ l2)
   coherence-square-pointed-homotopies =
     pointed-2-htpy

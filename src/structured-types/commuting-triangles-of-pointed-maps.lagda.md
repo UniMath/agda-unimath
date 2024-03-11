@@ -80,7 +80,7 @@ Consider a commuting triangle of pointed maps
 ```
 
 and consider a pointed map `f : C →∗ X`. The
-{{#concept "left whiskering" Disambiguation="commuting triangles of pointed maps" Agda=left-whisker-comp-coherence-triangle-pointed-maps}}
+{{#concept "left whiskering" Disambiguation="commuting triangles of pointed maps" Agda=left-whisker-coherence-triangle-pointed-maps}}
 is a coherence of the triangle of pointed maps
 
 ```text
@@ -97,7 +97,7 @@ In other words, left whiskering of coherences of commuting triangles of pointed
 maps is an operation
 
 ```text
-  (left ~∗ right ∘∗ top) → (f ∘∗ left ~ ∗ (f ∘∗ right) ∘∗ top).
+  (left ~∗ right ∘∗ top) → (f ∘∗ left ~∗ (f ∘∗ right) ∘∗ top).
 ```
 
 ```agda
@@ -113,9 +113,7 @@ module _
     coherence-triangle-pointed-maps (f ∘∗ left) (f ∘∗ right) top
   left-whisker-coherence-triangle-pointed-maps H =
     concat-pointed-htpy
-      ( f ∘∗ left)
-      ( f ∘∗ (right ∘∗ top))
-      ( (f ∘∗ right) ∘∗ top)
       ( left-whisker-comp-pointed-htpy f left (right ∘∗ top) H)
-      {! inv-assoc-pointed-htpy!}
+      ( inv-pointed-htpy
+        ( associative-comp-pointed-map f right top))
 ```

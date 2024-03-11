@@ -55,7 +55,7 @@ complement.
 
 ### The predicate of having a tangent sphere
 
-```agda
+```text
 module _
   {l : Level} (n : ℕ) {X : UU l} (x : X)
   where

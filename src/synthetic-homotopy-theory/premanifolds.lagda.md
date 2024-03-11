@@ -34,7 +34,7 @@ comes equipped with a
 
 ### Premanifolds
 
-```agda
+```text
 Premanifold : (l : Level) (n : ℕ) → UU (lsuc l)
 Premanifold l n = Σ (UU l) (λ M → (x : M) → has-tangent-sphere n x)
 
