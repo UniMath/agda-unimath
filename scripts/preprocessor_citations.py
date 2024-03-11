@@ -4,8 +4,6 @@
 # and it adheres to the appropriate protocol; see
 # https://rust-lang.github.io/mdBook/for_developers/preprocessors.html#hooking-into-mdbook
 
-import pybtex.io
-from xml.sax.saxutils import escape
 import re
 import pybtex
 import pybtex.database
@@ -14,7 +12,6 @@ import pybtex.backends
 import pybtex.backends.html
 import pybtex.style.formatting
 import pybtex.style.formatting.alpha
-import pybtex.style.labels.alpha
 import pybtex.style.labels.alpha
 import sys
 import io
