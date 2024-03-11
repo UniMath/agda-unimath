@@ -155,10 +155,12 @@ int-ℤ-Mod-bounded :
   (k : ℕ) → (x : ℤ-Mod (succ-ℕ k)) →
   leq-ℤ (int-ℤ-Mod (succ-ℕ k) x) (int-ℕ (succ-ℕ k))
 int-ℤ-Mod-bounded zero-ℕ (inr x) = star
-int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-is-nonnegative-ℤ
-  (int-ℤ-Mod-bounded k x)
-int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-is-nonnegative-ℤ
-  (is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
+int-ℤ-Mod-bounded (succ-ℕ k) (inl x) =
+  is-nonnegative-succ-is-nonnegative-ℤ
+    ( int-ℤ-Mod-bounded k x)
+int-ℤ-Mod-bounded (succ-ℕ k) (inr x) =
+  is-nonnegative-succ-is-nonnegative-ℤ
+    ( is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
 ```
 
 ## The successor and predecessor functions on the integers modulo `k`
