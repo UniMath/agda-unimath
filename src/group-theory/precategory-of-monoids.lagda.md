@@ -29,7 +29,7 @@ of [monoids](group-theory.monoids.md) and
 
 ## Definitions
 
-### The precategory of monoids as a full subprecategory of the precategory of semigroups
+### The precategory of monoids as a subprecategory of the precategory of semigroups
 
 ```agda
 Monoid-Large-Subprecategory :
