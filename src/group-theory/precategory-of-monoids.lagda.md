@@ -8,50 +8,56 @@ module group-theory.precategory-of-monoids where
 
 ```agda
 open import category-theory.large-precategories
+open import category-theory.large-subprecategories
 open import category-theory.precategories
 
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
+open import group-theory.precategory-of-semigroups
 ```
 
 </details>
 
 ## Idea
 
-The **precategory of monoids** consists of monoids and homomorphisms of monoids.
+The {{#concept "precategory of monoids" Agda=Monoid-Large-Precategory}} consists
+of [monoids](group-theory.monoids.md) and
+[homomorphisms of monoids](group-theory.homomorphisms-monoids.md).
 
 ## Definitions
+
+### The precategory of monoids as a subprecategory of the precategory of semigroups
+
+```agda
+Monoid-Large-Subprecategory :
+  Large-Subprecategory (λ l → l) (λ l1 l2 → l2) Semigroup-Large-Precategory
+Monoid-Large-Subprecategory =
+  λ where
+    .subtype-obj-Large-Subprecategory l →
+      is-unital-prop-Semigroup {l}
+    .subtype-hom-Large-Subprecategory G H is-unital-G is-unital-H →
+      preserves-unit-hom-prop-Semigroup (G , is-unital-G) (H , is-unital-H)
+    .contains-id-Large-Subprecategory G is-unital-G →
+      preserves-unit-id-hom-Monoid (G , is-unital-G)
+    .is-closed-under-composition-Large-Subprecategory
+      G H K g f is-unital-G is-unital-H is-unital-K unit-g unit-f →
+      preserves-unit-comp-hom-Monoid
+        ( G , is-unital-G)
+        ( H , is-unital-H)
+        ( K , is-unital-K)
+        ( g , unit-g)
+        ( f , unit-f)
+```
 
 ### The large precategory of monoids
 
 ```agda
-Monoid-Large-Precategory : Large-Precategory lsuc _⊔_
-obj-Large-Precategory
-  Monoid-Large-Precategory =
-  Monoid
-hom-set-Large-Precategory
-  Monoid-Large-Precategory =
-  hom-set-Monoid
-comp-hom-Large-Precategory
-  Monoid-Large-Precategory {X = K} {L} {M} =
-  comp-hom-Monoid K L M
-id-hom-Large-Precategory
-  Monoid-Large-Precategory {X = M} =
-  id-hom-Monoid M
-associative-comp-hom-Large-Precategory
-  Monoid-Large-Precategory {X = K} {L} {M} {N} =
-  associative-comp-hom-Monoid K L M N
-inv-associative-comp-hom-Large-Precategory
-  Monoid-Large-Precategory {X = K} {L} {M} {N} =
-  inv-associative-comp-hom-Monoid K L M N
-left-unit-law-comp-hom-Large-Precategory
-  Monoid-Large-Precategory {X = M} {N} =
-  left-unit-law-comp-hom-Monoid M N
-right-unit-law-comp-hom-Large-Precategory
-  Monoid-Large-Precategory {X = M} {N} =
-  right-unit-law-comp-hom-Monoid M N
+Monoid-Large-Precategory : Large-Precategory lsuc (_⊔_)
+Monoid-Large-Precategory =
+  large-precategory-Large-Subprecategory Monoid-Large-Subprecategory
 ```
 
 ### The precategory of small monoids
