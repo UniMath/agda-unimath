@@ -75,6 +75,7 @@
               python
               # pre-commit checks
               pkgs.pre-commit
+              pkgs.nodejs
             ] ++ (with pkgs-mdbook; [
               # working on the website
               mdbook
