@@ -31,11 +31,22 @@ open import structured-types.pointed-types
 
 The concept of _uniform pointed homotopy_ is an
 [equivalent](foundation-core.equivalences.md) way of defining
-[pointed homotopies](structured-types.pointed-homotopies.md).
-A uniform pointed homotopies `H` between two [pointed dependent functions](structured-types.pointed-dependent-functions.md) `f` and `g` is defined to be a pointed dependent functions of the [pointed type family](structured-types.pointed-families-of-types.md) of [identifications](foundation-core.identifications.md) between the values of `f` and `g`. The main idea is that, since uniform pointed homotopies between pointed dependent functions are again pointed dependent functions, we can easily consider uniform pointed homotopies between uniform pointed homotopies and so on. The definition of uniform pointed homotopies is uniform in the sense that they can be iterated in this way. We now give a more detailed description of the definition.
+[pointed homotopies](structured-types.pointed-homotopies.md). A uniform pointed
+homotopies `H` between two
+[pointed dependent functions](structured-types.pointed-dependent-functions.md)
+`f` and `g` is defined to be a pointed dependent functions of the
+[pointed type family](structured-types.pointed-families-of-types.md) of
+[identifications](foundation-core.identifications.md) between the values of `f`
+and `g`. The main idea is that, since uniform pointed homotopies between pointed
+dependent functions are again pointed dependent functions, we can easily
+consider uniform pointed homotopies between uniform pointed homotopies and so
+on. The definition of uniform pointed homotopies is uniform in the sense that
+they can be iterated in this way. We now give a more detailed description of the
+definition.
 
-Consider two pointed dependent functions `f := (f₀ , f₁)` and `g := (g₀ , g₁)` in the pointed dependent function type `Π∗ A B`. Then the type family `x ↦ f₀ x ＝ g₀ x` over the base type `A` is a
-pointed type family, where the
+Consider two pointed dependent functions `f := (f₀ , f₁)` and `g := (g₀ , g₁)`
+in the pointed dependent function type `Π∗ A B`. Then the type family
+`x ↦ f₀ x ＝ g₀ x` over the base type `A` is a pointed type family, where the
 base point is the
 
 ```text
@@ -45,8 +56,8 @@ base point is the
 A {{#concept "uniform pointed homotopy" Agda=uniform-pointed-htpy}} from `f` to
 `g` is defined to be a
 [pointed dependent function](structured-types.pointed-dependent-functions.md) of
-the pointed type family `x ↦ f₀ x ＝ g₀ x`. In other words, a pointed dependent function
-consists of an unpointed [homotopy](foundation-core.homotopies.md)
+the pointed type family `x ↦ f₀ x ＝ g₀ x`. In other words, a pointed dependent
+function consists of an unpointed [homotopy](foundation-core.homotopies.md)
 `H₀ : f₀ ~ g₀` between the underlying dependent functions and an identification
 witnessing that the triangle of identifications
 
@@ -62,11 +73,12 @@ witnessing that the triangle of identifications
 
 [commutes](foundation.commuting-triangles-of-identifications.md).
 
-Notice that in comparison to the pointed homotopies,
-the identification on the right in this triangle goes up, in the inverse
-direction of the identification `g₁`. This makes it slightly more complicated to construct an identification witnessing that the triangle commutes in the case of uniform
-pointed homotopies. Furthermore, this complication becomes more significant and
-bothersome when we are trying to construct a
+Notice that in comparison to the pointed homotopies, the identification on the
+right in this triangle goes up, in the inverse direction of the identification
+`g₁`. This makes it slightly more complicated to construct an identification
+witnessing that the triangle commutes in the case of uniform pointed homotopies.
+Furthermore, this complication becomes more significant and bothersome when we
+are trying to construct a
 [pointed `2`-homotopy](structured-types.pointed-2-homotopies.md).
 
 ## Definitions

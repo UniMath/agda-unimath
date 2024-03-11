@@ -26,10 +26,12 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The [whiskering operations](foundation.whiskering-operations.md) of [pointed `2`-homotopies](structured-types.pointed-2-homotopies.md) with respect to concatenation of
-[pointed homotopies](structured-types.pointed-homotopies.md) are two operations that produce pointed 2-homotopies between
-concatenations of pointed homotopies from either a pointed 2-homotopy on the left or on the
-right of the concatenations.
+The [whiskering operations](foundation.whiskering-operations.md) of
+[pointed `2`-homotopies](structured-types.pointed-2-homotopies.md) with respect
+to concatenation of [pointed homotopies](structured-types.pointed-homotopies.md)
+are two operations that produce pointed 2-homotopies between concatenations of
+pointed homotopies from either a pointed 2-homotopy on the left or on the right
+of the concatenations.
 
 - The
   {{#concept "left whiskering" Disambiguation="pointed `2`-homotopies with respect to concatenation" Agda=left-whisker-concat-pointed-2-htpy}}
