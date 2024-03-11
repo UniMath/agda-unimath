@@ -123,7 +123,8 @@ module _
     Id (add-Ring (add-Ring x y) z) (add-Ring x (add-Ring y z))
   associative-add-Ring = associative-add-Ab (ab-Ring R)
 
-  is-group-additive-semigroup-Ring : is-group (additive-semigroup-Ring R)
+  is-group-additive-semigroup-Ring :
+    is-group-Semigroup (additive-semigroup-Ring R)
   is-group-additive-semigroup-Ring = is-group-Ab (ab-Ring R)
 
   commutative-add-Ring : (x y : type-Ring R) → Id (add-Ring x y) (add-Ring y x)
@@ -289,7 +290,8 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  has-negatives-Ring : is-group' (additive-semigroup-Ring R) (has-zero-Ring R)
+  has-negatives-Ring :
+    is-group-is-unital-Semigroup (additive-semigroup-Ring R) (has-zero-Ring R)
   has-negatives-Ring = has-negatives-Ab (ab-Ring R)
 
   neg-Ring : type-Ring R → type-Ring R

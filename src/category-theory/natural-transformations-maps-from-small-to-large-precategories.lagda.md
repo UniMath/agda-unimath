@@ -22,6 +22,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -343,7 +344,7 @@ module _
           ( hom-natural-transformation-map-Small-Large-Precategory
             C D F G a x))
 
-  inv-associative-comp-natural-transformation-map-Small-Large-Precategory :
+  involutive-eq-associative-comp-natural-transformation-map-Small-Large-Precategory :
     {γF γG γH γI : Level}
     (F : map-Small-Large-Precategory C D γF)
     (G : map-Small-Large-Precategory C D γG)
@@ -352,22 +353,14 @@ module _
     (a : natural-transformation-map-Small-Large-Precategory C D F G)
     (b : natural-transformation-map-Small-Large-Precategory C D G H)
     (c : natural-transformation-map-Small-Large-Precategory C D H I) →
-    comp-natural-transformation-map-Small-Large-Precategory C D F H I c
-      ( comp-natural-transformation-map-Small-Large-Precategory
-        C D F G H b a) ＝
     comp-natural-transformation-map-Small-Large-Precategory C D F G I
       ( comp-natural-transformation-map-Small-Large-Precategory C D G H I c b)
-      ( a)
-  inv-associative-comp-natural-transformation-map-Small-Large-Precategory
+      ( a) ＝ⁱ
+    comp-natural-transformation-map-Small-Large-Precategory C D F H I c
+      ( comp-natural-transformation-map-Small-Large-Precategory C D F G H b a)
+  involutive-eq-associative-comp-natural-transformation-map-Small-Large-Precategory
     F G H I a b c =
-    eq-htpy-hom-natural-transformation-map-Small-Large-Precategory
-      C D F I _ _
-      ( λ x →
-        inv-associative-comp-hom-Large-Precategory D
-          ( hom-natural-transformation-map-Small-Large-Precategory
-            C D H I c x)
-          ( hom-natural-transformation-map-Small-Large-Precategory
-            C D G H b x)
-          ( hom-natural-transformation-map-Small-Large-Precategory
-            C D F G a x))
+    involutive-eq-eq
+      ( associative-comp-natural-transformation-map-Small-Large-Precategory
+          F G H I a b c)
 ```

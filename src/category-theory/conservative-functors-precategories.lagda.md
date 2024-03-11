@@ -29,7 +29,7 @@ isomorphism in `C`.
 
 ## Definitions
 
-### The predicate of being conservative
+### The predicate on functors of being conservative
 
 ```agda
 module _

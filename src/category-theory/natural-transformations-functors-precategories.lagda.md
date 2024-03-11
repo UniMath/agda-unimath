@@ -21,6 +21,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -243,17 +244,17 @@ module _
       ( map-functor-Precategory C D H)
       ( map-functor-Precategory C D I)
 
-  inv-associative-comp-natural-transformation-Precategory :
+  involutive-eq-associative-comp-natural-transformation-Precategory :
     (F G H I : functor-Precategory C D)
     (α : natural-transformation-Precategory C D F G)
     (β : natural-transformation-Precategory C D G H)
     (γ : natural-transformation-Precategory C D H I) →
-    comp-natural-transformation-Precategory C D F H I γ
-      ( comp-natural-transformation-Precategory C D F G H β α) ＝
     comp-natural-transformation-Precategory C D F G I
-      ( comp-natural-transformation-Precategory C D G H I γ β) α
-  inv-associative-comp-natural-transformation-Precategory F G H I =
-    inv-associative-comp-natural-transformation-map-Precategory C D
+      ( comp-natural-transformation-Precategory C D G H I γ β) α ＝ⁱ
+    comp-natural-transformation-Precategory C D F H I γ
+      ( comp-natural-transformation-Precategory C D F G H β α)
+  involutive-eq-associative-comp-natural-transformation-Precategory F G H I =
+    involutive-eq-associative-comp-natural-transformation-map-Precategory C D
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
       ( map-functor-Precategory C D H)
