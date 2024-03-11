@@ -562,11 +562,18 @@ abstract
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ x (i x)) e)))
       ( eq-htpy
         ( λ x →
-          ( inv (left-unit-G (i x))) ∙
-          ( ap (λ y → μ y (i x)) (inv (left-inv-i' x))) ∙
-          ( associative-G (i' x) x (i x)) ∙
-          ( ap (μ (i' x)) (right-inv-i x)) ∙
-          ( right-unit-G (i' x))))
+          equational-reasoning
+          i x
+          ＝ μ e (i x)
+            by inv (left-unit-G (i x))
+          ＝ μ (μ (i' x) x) (i x)
+            by ap (λ y → μ y (i x)) (inv (left-inv-i' x))
+          ＝ μ (i' x) (μ x (i x))
+            by associative-G (i' x) x (i x)
+          ＝ μ (i' x) e
+            by ap (μ (i' x)) (right-inv-i x)
+          ＝ i' x
+            by right-unit-G (i' x)))
 
 abstract
   is-prop-is-group-Semigroup :
