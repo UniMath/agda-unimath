@@ -61,7 +61,7 @@ A composition operation
   _∘_ : hom y z → hom x y → hom x z
 ```
 
- on a binary family of sets of morphisms is called
+on a binary family of sets of morphisms is called
 {{#concept "associative" Disambiguation="composition operation on a binary family of sets" Agda=is-associative-composition-operation-binary-family-Set}}
 if, for every triple of composable morphisms we have
 
@@ -74,9 +74,9 @@ We give a slightly nonstandard definition of associativity using the
 rather than the standard [identity types](foundation-core.identity-types.md).
 This is because, while the strictly involutive identity types are always
 [equivalent](foundation-core.equivalences.md) to the standard ones, they satisfy
-the computation rule `inv (inv p) ≐ p` which is practical in defining the
+the strict computation rule `inv (inv p) ≐ p` which is practical in defining the
 [opposite category](category-theory.opposite-categories.md), as this also makes
-the opposite construction strictly involutive: `(Cᵒᵖ)ᵒᵖ ≐ C`.
+the opposite construction strictly involutive: `(𝒞ᵒᵖ)ᵒᵖ ≐ 𝒞`.
 
 ```agda
 module _
