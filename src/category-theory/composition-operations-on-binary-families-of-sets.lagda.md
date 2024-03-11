@@ -55,13 +55,13 @@ module _
 
 ### Associative composition operations on binary families of sets
 
-A composition operation on a binary family of sets
+A composition operation
 
 ```text
   _∘_ : hom y z → hom x y → hom x z
 ```
 
-is called
+ on a binary family of sets of morphisms is called
 {{#concept "associative" Disambiguation="composition operation on a binary family of sets" Agda=is-associative-composition-operation-binary-family-Set}}
 if, for every triple of composable morphisms we have
 
