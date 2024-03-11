@@ -45,8 +45,7 @@ class CustomHtmlBackend(pybtex.backends.html.Backend):
         self.output('</dl>\n\n')
 
     def write_entry(self, key, label, text):
-        self.output(f'<dt class="reference-entry"><a name="reference-{
-            label}">&#91;{label}&#93;</a></dt>\n')
+        self.output(f'<dt class="reference-entry"><a name="reference-{label}">&#91;{label}&#93;</a></dt>\n')
         self.output(f'<dd>{text}</dd>\n')
 
 
@@ -102,8 +101,7 @@ def format_citation(
 
         return f'&#91;<a class="citation-link" href="#reference-{formatted_label}">{formatted_label}</a>&#93;'
     else:
-        eprint(f"Warning: Citation key '{
-               cite_key}' not found in bibliography.")
+        eprint(f"Warning: Citation key '{cite_key}' not found in bibliography.")
         # If the cite_key is not recognized, we make the following guess about how to format the citation instead of failing completely
         return f'&#91;{cite_key}&#93;'
 
@@ -133,8 +131,7 @@ def process_citations_chapter_rec_mut(
             cited_keys.add(cite_key)
             return ''
         else:
-            eprint(f"Warning: Citation key '{
-                cite_key}' was not found in the bibliography and will be ignored.")
+            eprint(f"Warning: Citation key '{cite_key}' was not found in the bibliography and will be ignored.")
             return m.group(0)
 
     new_content = REFERENCE_REGEX.sub(sub_reference_regex_lambda, new_content)
