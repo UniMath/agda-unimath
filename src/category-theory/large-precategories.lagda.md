@@ -151,6 +151,7 @@ make-Large-Precategory
       involutive-eq-eq (assoc-comp-hom h g f)
     .left-unit-law-comp-hom-Large-Precategory → left-unit-comp-hom
     .right-unit-law-comp-hom-Large-Precategory → right-unit-comp-hom
+    
 {-# INLINE make-Large-Precategory #-}
 ```
 
