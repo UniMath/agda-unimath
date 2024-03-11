@@ -32,7 +32,7 @@ module _
   discrete-precategory-Set =
     make-Precategory
       ( type-Set X)
-      ( λ x y → set-Prop (x ＝ y , is-set-type-Set X x y))
+      ( λ x y → set-Prop (Id-Prop X x y))
       ( λ p q → q ∙ p)
       ( λ x → refl)
       ( λ h g f → inv (assoc f g h))
