@@ -35,8 +35,8 @@ open import structured-types.pointed-2-homotopies
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
+open import structured-types.whiskering-pointed-2-homotopies-concatenation
 open import structured-types.whiskering-pointed-homotopies-composition
-open import structured-types.whiskering-pointed-homotopies-concatenation
 ```
 
 </details>
@@ -431,7 +431,7 @@ and a pointed `2`-homotopy `r₂` witnessing that the square of pointed homotopi
 
 commutes. Note that `r₁ ·r f ~∗ refl-pointed-htpy` and
 `g ·l r₀ ≐ refl-pointed-htpy`. By
-[whiskering of pointed `2`-homotopies](structured-types.whiskering-pointed-homotopies-concatenation.md)
+[whiskering of pointed `2`-homotopies](structured-types.whiskering-pointed-2-homotopies-concatenation.md)
 with respect to concatenation it follows that
 
 ```text

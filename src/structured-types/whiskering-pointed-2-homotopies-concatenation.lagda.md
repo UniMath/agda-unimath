@@ -1,7 +1,7 @@
 # Whiskering pointed homotopies with respect to concatenation
 
 ```agda
-module structured-types.whiskering-pointed-homotopies-concatenation where
+module structured-types.whiskering-pointed-2-homotopies-concatenation where
 ```
 
 <details><summary>Imports</summary>
