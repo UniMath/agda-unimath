@@ -24,7 +24,7 @@ DEFAULT_LABEL_CITATION_STYLE = 'alpha'
 
 # Regex to match citation macros
 CITE_REGEX = re.compile(r'\{\{#cite\s([^\}\s]+)(?:\s(.*))?\}\}')
-NO_REF_CITE_REGEX = re.compile(r'(?<!-)\bno-ref\b(?!-)')
+# NO_REF_CITE_REGEX = re.compile(r'(?<!-)\bno-ref\b(?!-)')
 REFERENCE_REGEX = re.compile(r'\{\{#reference\s([^\}\s]+)(?:\s(.*))?\}\}')
 BIBLIOGRAPHY_REGEX = re.compile(r'\{\{#bibliography(?:\s(.*))?\}\}')
 
@@ -61,8 +61,8 @@ def format_citation(bib_database: pybtex.database.BibliographyData, style: pybte
 
     # Function to format the citation and collect cited keys
     if cite_key in bib_database.entries:
-        if not match.group(2) or not NO_REF_CITE_REGEX.search(match.group(2)):
-            cited_keys.add(cite_key)
+        # if not match.group(2) or not NO_REF_CITE_REGEX.search(match.group(2)):
+        cited_keys.add(cite_key)
 
         cite_entry = bib_database.entries[cite_key]
 
