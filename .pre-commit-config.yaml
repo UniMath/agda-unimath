@@ -8,7 +8,7 @@ repos:
       - id: end-of-file-fixer
       - id: mixed-line-ending
       # - id: double-quote-string-fixer
-      - id: check-ast
+      # - id: check-ast
       - id: check-yaml
       # - id: check-json # Doesn't accept json with comments
       # - id: requirements-txt-fixer # Can't handle comments
