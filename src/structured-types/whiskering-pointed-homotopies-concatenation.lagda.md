@@ -26,43 +26,40 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The [whiskering operations](foundation.whiskering-operations.md) of
-[pointed homotopies](structured-types.pointed-homotopies.md) are operations that
-take a pointed `2`-homotopy between two pointed homotopies `H K : f ~∗ g`
-between [pointed maps](structured-types.pointed-maps.md) `f g : A →∗ B` and a
-pointed homotopy `α` either into `H` or out of `K` and return a pointed
-`2`-homotopy from the concatenation of `α` and `H` to the concatenation of `α`
-and `K`. There are two such operations: left whiskering and right whiskering.
+The [whiskering operations](foundation.whiskering-operations.md) of [pointed `2`-homotopies](structured-types.pointed-2-homotopies.md) with respect to concatenation of
+[pointed homotopies](structured-types.pointed-homotopies.md) are two operations that produce pointed 2-homotopies between
+concatenations of pointed homotopies from either a pointed 2-homotopy on the left or on the
+right of the concatenations.
 
-The
-{{#concept "left whiskering" Disambiguation="pointed `2`-homotopies with respect to concatenation" Agda=left-whisker-concat-pointed-2-htpy}}
-is an operation that takes a pointed homotopy `H : f ~∗ g` and a pointed
-`2`-homotopy `α : K ~∗ L` between two pointed homotopies `K L : g ~∗ h` as
-indicated in the diagram
+- The
+  {{#concept "left whiskering" Disambiguation="pointed `2`-homotopies with respect to concatenation" Agda=left-whisker-concat-pointed-2-htpy}}
+  is an operation that takes a pointed homotopy `H : f ~∗ g` and a pointed
+  `2`-homotopy `α : K ~∗ L` between two pointed homotopies `K L : g ~∗ h` as
+  indicated in the diagram
 
-```text
-               K
-      H      ----->
-  f -----> g -----> h,
-               L
-```
+  ```text
+                 K
+        H      ----->
+    f -----> g -----> h,
+                 L
+  ```
 
-and returns a pointed `2`-homotopy `H ∙h K ~∗ H ∙h K`.
+  and returns a pointed `2`-homotopy `H ∙h K ~∗ H ∙h K`.
 
-The
-{{#concept "right whiskering" Disambiguation="pointed `2`-homotopies with respect to concatenation" Agda=right-whisker-concat-pointed-2-htpy}}
-is an operation that takes a pointed `2`-homotopy `α : H ~∗ K` between two
-pointed homotopies `H K : f ~∗ g` and a pointed homotopy `L : g ~∗ h` as
-indicated in the diagram
+- The
+  {{#concept "right whiskering" Disambiguation="pointed `2`-homotopies with respect to concatenation" Agda=right-whisker-concat-pointed-2-htpy}}
+  is an operation that takes a pointed `2`-homotopy `α : H ~∗ K` between two
+  pointed homotopies `H K : f ~∗ g` and a pointed homotopy `L : g ~∗ h` as
+  indicated in the diagram
 
-```text
-      H
-    ----->
-  f -----> g -----> h,
-      K        L
-```
+  ```text
+        H
+      ----->
+    f -----> g -----> h,
+        K        L
+  ```
 
-and returns a pointed `2`-homotopy `H ∙h L ~∗ K ∙h L`.
+  and returns a pointed `2`-homotopy `H ∙h L ~∗ K ∙h L`.
 
 ## Definitions
 
@@ -200,12 +197,12 @@ the triangle
 
 ```text
            (H ∙h L)₁
-        f₁ --------> ((H₀ *) ∙ (L₀ *)) ∙ h₁
-           \       /
-  (K ∙h L)₁ \     / right-whisker (right-whisker (α₀ *) (L₀ *)) h₁
-             \   /
-              ∨ ∨
-    ((K₀ *) ∙ (L₀ *)) ∙ h₁
+         f₁ --------> ((H₀ *) ∙ (L₀ *)) ∙ h₁
+           \         /
+  (K ∙h L)₁ \       / right-whisker (right-whisker (α₀ *) (L₀ *)) h₁
+             \     /
+              ∨   ∨
+      ((K₀ *) ∙ (L₀ *)) ∙ h₁
 ```
 
 commutes. Here, the identifications `(H ∙h L)₁` and `(K ∙h L)₁` are the
@@ -272,7 +269,7 @@ module _
       ( htpy-pointed-2-htpy α (point-Pointed-Type A))
       ( coherence-point-pointed-2-htpy α)
 
-  right-whisker-concat-pointed-2-htpy
+  right-whisker-concat-pointed-2-htpy :
     concat-pointed-htpy H L ~²∗ concat-pointed-htpy K L
   pr1 right-whisker-concat-pointed-2-htpy =
     htpy-right-whisker-concat-pointed-2-htpy

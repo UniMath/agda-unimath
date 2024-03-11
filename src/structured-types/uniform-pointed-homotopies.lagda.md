@@ -29,13 +29,14 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The concept of uniform pointed homotopy is an
+The concept of _uniform pointed homotopy_ is an
 [equivalent](foundation-core.equivalences.md) way of defining
 [pointed homotopies](structured-types.pointed-homotopies.md).
+A uniform pointed homotopies `H` between two [pointed dependent functions](structured-types.pointed-dependent-functions.md) `f` and `g` is defined to be a pointed dependent functions of the [pointed type family](structured-types.pointed-families-of-types.md) of [identifications](foundation-core.identifications.md) between the values of `f` and `g`. The main idea is that, since uniform pointed homotopies between pointed dependent functions are again pointed dependent functions, we can easily consider uniform pointed homotopies between uniform pointed homotopies and so on. The definition of uniform pointed homotopies is uniform in the sense that they can be iterated in this way. We now give a more detailed description of the definition.
 
-Consider the type family `x ↦ f₀ x ＝ g₀ x` over the base type `A`. This is a
-[pointed type family](structured-types.pointed-families-of-types.md), where the
-base point is the [identification](foundation-core.identity-types.md)
+Consider two pointed dependent functions `f := (f₀ , f₁)` and `g := (g₀ , g₁)` in the pointed dependent function type `Π∗ A B`. Then the type family `x ↦ f₀ x ＝ g₀ x` over the base type `A` is a
+pointed type family, where the
+base point is the
 
 ```text
   f₁ ∙ inv g₁ : f₀ * ＝ g₀ *.
@@ -44,7 +45,7 @@ base point is the [identification](foundation-core.identity-types.md)
 A {{#concept "uniform pointed homotopy" Agda=uniform-pointed-htpy}} from `f` to
 `g` is defined to be a
 [pointed dependent function](structured-types.pointed-dependent-functions.md) of
-the pointed type family `x ↦ f₀ x ＝ g₀ x`. Such a pointed dependent function
+the pointed type family `x ↦ f₀ x ＝ g₀ x`. In other words, a pointed dependent function
 consists of an unpointed [homotopy](foundation-core.homotopies.md)
 `H₀ : f₀ ~ g₀` between the underlying dependent functions and an identification
 witnessing that the triangle of identifications
@@ -59,39 +60,14 @@ witnessing that the triangle of identifications
           *
 ```
 
-[commutes](foundation.commuting-triangles-of-identifications.md). Notice that
+[commutes](foundation.commuting-triangles-of-identifications.md).
+
+Notice that in comparison to the pointed homotopies,
 the identification on the right in this triangle goes up, in the inverse
-direction of the identification `g₁`.
-
-Note that in this equivalent definition we defined pointed homotopies between
-pointed dependent functions to be certain pointed dependent functions. This
-gives a uniform definition that can easily be iterated in order to consider
-pointed higher homotopies. For this reason, we call the second definition of
-pointed homotopies
-{{#concept "uniform pointed homotopies" Agda=uniform-pointed-htpy}}.
-
-A complication of this approach to the definition of pointed homotopies is that
-identifications witnessing the commutativity of the triangle in a pointed
-homotopy is slightly more complicated to construct a base point coherence
-
-```text
-        H₀ *
-  f₀ * ------> g₀ *
-      \       /
-    f₁ \     / g₁
-        \   /
-         ∨ ∨
-          *,
-```
-
-of the first definition, where the identification on the right goes down in the
-direction of `g₁`. This complication becomes more significant and bothersome
-when we are trying to construct a
-[pointed `2`-homotopy](structured-types.pointed-2-homotopies.md). For this
-reason, our first definition where pointed homotopies are defined to consist of
-unpointed homotopies and a base point coherence, is taken to be our main
-definition of pointed homotopy. The only disadvantage of the nonuniform
-definition of pointed homotopies is that it does not easily iterate.
+direction of the identification `g₁`. This makes it slightly more complicated to construct an identification witnessing that the triangle commutes in the case of uniform
+pointed homotopies. Furthermore, this complication becomes more significant and
+bothersome when we are trying to construct a
+[pointed `2`-homotopy](structured-types.pointed-2-homotopies.md).
 
 ## Definitions
 

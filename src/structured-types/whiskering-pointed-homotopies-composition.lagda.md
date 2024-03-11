@@ -29,32 +29,51 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The whiskering operations of pointed homotopies with respect to composition of
-pointed maps are two operations that produce pointed homotopies between
+The [whiskering operations](foundation.whiskering-operations.md) of [pointed homotopies](structured-types.pointed-homotopies.md) with respect to composition of
+[pointed maps](structured-types.pointed-maps.md) are two operations that produce pointed homotopies between
 composites of pointed maps from either a pointed homotopy on the left or on the
-right of the composition. There are two such whiskering operations.
+right of the composition.
 
-Consider a [pointed homotopy](structured-types.pointed-homotopies.md)
-`H : f ~∗ g` between [pointed maps](structured-types.pointed-maps.md)
-`f g : A →∗ B`, and consider a pointed map `h : B →∗ C`, as indicated in the
-diagram
+- Consider a pointed homotopy
+  `H : f ~∗ g` between pointed maps
+  `f g : A →∗ B`, and consider a pointed map `h : B →∗ C`, as indicated in the
+  diagram
 
-```text
-      f
-    ----->     h
-  A -----> B -----> C.
-      g
-```
+  ```text
+        f
+      ----->     h
+    A -----> B -----> C.
+        g
+  ```
 
-The
-{{#concept "left whiskering operation on pointed homotopies" Agda=left-whisker-comp-pointed-htpy}}
-takes a pointed homotopy `H` and a pointed map `f` and returns a pointed
-homotopy
+  The
+  {{#concept "left whiskering operation on pointed homotopies" Agda=left-whisker-comp-pointed-htpy}} of `h` and `H` is a pointed
+  homotopy
 
-```text
-  h ·l∗ H : h ∘∗ f ~∗ h ∘∗ g
-```
+  ```text
+    h ·l∗ H : h ∘∗ f ~∗ h ∘∗ g.
+  ```
 
+- Consider a pointed map `f : A →∗ B` and consider a pointed homotopy
+  `H : g ~∗ g` between tw pointed maps `g h : B →∗ C`, as indicated in the
+  diagram
+
+
+  ```text
+                 g
+        f      ----->
+    A -----> B -----> C.
+                 h
+  ```
+
+  The
+  {{#concept "right whiskering operation on pointed homotopies" Agda=right-whisker-comp-pointed-htpy}} of `H` and `f` is a pointed
+  homotopy
+
+  ```text
+    H ·r∗ f : g ∘∗ f ~∗ h ∘∗ f.
+  ```
+  
 ## Definitions
 
 ### Left whiskering of pointed homotopies
@@ -167,7 +186,7 @@ homotopy `H := (H₀ , H₁) : g ~∗ h`. Then we construct a pointed homotopy
   H ·r f : (g ∘∗ f) ~∗ (h ∘∗ f).
 ```
 
-**Construction.** The underlying homotopy of `H ·r f` is simply the homotopy
+**Construction.** The underlying homotopy of `H ·r f` is the homotopy
 
 ```text
   H₀ ·r f₀ : (g₀ ∘ f₀) ~ (h₀ ∘ f₀).
@@ -230,7 +249,7 @@ module _
 
 ## Properties
 
-### Computing left whiskering the reflexive pointed homotopy
+### Computing the left whiskering of the reflexive pointed homotopy
 
 ```agda
 module _
@@ -247,17 +266,17 @@ module _
     refl-pointed-2-htpy (refl-pointed-htpy (h ∘∗ f))
 ```
 
-### Computing right whiskering the reflexive pointed homotopy
+### Computing the right whiskering of the reflexive pointed homotopy
 
 Consider two pointed maps `f := (f₀ , f₁) : A →∗ B` and
-`g := (g₀ , g₁) : B →∗ C`. We will construct a pointed `2`-homotopy
+`g := (g₀ , g₁) : B →∗ C`. We are constructing a pointed `2`-homotopy
 
 ```text
   right-whisker-comp-pointed-htpy (refl-pointed-htpy h) f ~∗
   refl-pointed-htpy (g ∘∗ f)
 ```
 
-The underlying homotopy of this pointed `2`-homotopy is simply `refl-htpy`. The
+The underlying homotopy of this pointed `2`-homotopy is `refl-htpy`. The
 base point coherence of this homotopy is an identification witnessing that the
 triangle
 

@@ -96,7 +96,7 @@ homotopies between pointed dependent functions to be certain pointed dependent
 functions. This implies that the second definition is a uniform definition that
 can easily be iterated in order to consider pointed higher homotopies. For this
 reason, we call the second definition of pointed homotopies
-{{#concept "uniform pointed homotopies"}}.
+[uniform pointed homotopies](structured-types.uniform-pointed-homotopies.md).
 
 Note that the difference between our main definition of pointed homotopies and
 the uniform definition of pointed homotopies is the direction of the
