@@ -127,7 +127,7 @@ module _
   semigroup-Ab : Semigroup l
   semigroup-Ab = semigroup-Group group-Ab
 
-  is-group-Ab : is-group semigroup-Ab
+  is-group-Ab : is-group-Semigroup semigroup-Ab
   is-group-Ab = is-group-Group group-Ab
 
   has-zero-Ab : is-unital-Semigroup semigroup-Ab
@@ -154,7 +154,7 @@ module _
   right-unit-law-add-Ab : (x : type-Ab) → add-Ab x zero-Ab ＝ x
   right-unit-law-add-Ab = right-unit-law-mul-Group group-Ab
 
-  has-negatives-Ab : is-group' semigroup-Ab has-zero-Ab
+  has-negatives-Ab : is-group-is-unital-Semigroup semigroup-Ab has-zero-Ab
   has-negatives-Ab = has-inverses-Group group-Ab
 
   neg-Ab : type-Ab → type-Ab

@@ -10,13 +10,10 @@ module group-theory.category-of-abelian-groups where
 open import category-theory.categories
 open import category-theory.full-large-subcategories
 open import category-theory.functors-large-categories
-open import category-theory.functors-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.precategories
 
-open import foundation.function-types
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -38,7 +35,7 @@ The **category of abelian groups** is the
 ### The large category of abelian groups
 
 ```agda
-Ab-Large-Category : Large-Category lsuc _⊔_
+Ab-Large-Category : Large-Category lsuc (_⊔_)
 Ab-Large-Category =
   large-category-Full-Large-Subcategory
     ( Group-Large-Category)
@@ -48,7 +45,7 @@ Ab-Large-Category =
 ### The large precategory of abelian groups
 
 ```agda
-Ab-Large-Precategory : Large-Precategory lsuc _⊔_
+Ab-Large-Precategory : Large-Precategory lsuc (_⊔_)
 Ab-Large-Precategory =
   large-precategory-Large-Category Ab-Large-Category
 ```
