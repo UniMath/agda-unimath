@@ -174,4 +174,8 @@ module _
 
 ## References
 
+- Escardó's formalizations regarding this theorem can be found at
+  <https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.index.html>.
+  {{#cite TypeTopology}}
+
 {{#bibliography}}

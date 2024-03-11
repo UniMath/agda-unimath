@@ -262,8 +262,7 @@ module _
 
 ### The map on dependent pair types induced by the unit of the `(k+1)`-truncation is a `k`-equivalence
 
-This is an instance of Lemma 2.27 in Christensen, Opie, Rijke & Scoccola
-\[CORS'20\] listed below.
+This is an instance of Lemma 2.27 in {{#cite CORS20}} listed below.
 
 ```agda
 module _
@@ -295,7 +294,7 @@ module _
 
 ### There is an `k`-equivalence between the fiber of a map and the fiber of its `(k+1)`-truncation
 
-This is an instance of Corollary 2.29 in \[CORS'20\].
+This is an instance of Corollary 2.29 in {{#cite CORS20}}.
 
 We consider the following composition of maps
 
@@ -381,7 +380,7 @@ module _
 
 ### Every `(k+1)`-equivalence is `k`-connected
 
-This is an instance of Proposition 2.30 in \[CORS'20\].
+This is an instance of Proposition 2.30 in {{#cite CORS20}}.
 
 ```agda
 module _
@@ -398,7 +397,7 @@ module _
 
 ### The codomain of a `k`-connected map is `(k+1)`-connected if its domain is `(k+1)`-connected
 
-This follows part of the proof of Proposition 2.31 in \[CORS'20\].
+This follows part of the proof of Proposition 2.31 in {{#cite CORS20}}.
 
 ```agda
 module _
@@ -449,7 +448,7 @@ module _
 
 ### If `g ∘ f` is `(k+1)`-connected, then `f` is `k`-connected if and only if `g` is `(k+1)`-connected
 
-This is an instance of Proposition 2.31 in \[CORS'20\].
+This is an instance of Proposition 2.31 in {{#cite CORS20}}.
 
 ```agda
 module _

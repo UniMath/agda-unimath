@@ -278,6 +278,6 @@ is-locally-small-inhabited-subtype H =
 ## References
 
 - Theorem 4.6 in {{#cite Rij17}}.
-- Section 2.19 in {{#cite symmetryBook}}.
+- Section 2.19 in {{#cite SymmetryBook}}.
 
 {{#bibliography}}
