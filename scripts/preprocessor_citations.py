@@ -180,12 +180,12 @@ if __name__ == '__main__':
         backend: pybtex.backends.BaseBackend = \
             pybtex.plugin.find_plugin('pybtex.backends', 'html')()
 
-        # The following must be run in order to detect errors in the .bib file
+        # The following must be run in order to detect errors and missing fields in the bibtex file
         formatted_bibliography: pybtex.style.FormattedBibliography = \
             style.format_bibliography(bib_database)
-        output = io.StringIO()
-        backend.write_to_stream(formatted_bibliography, output)
-        # Optional: print to error stream
+        # # Optional: print to error stream
+        # output = io.StringIO()
+        # backend.write_to_stream(formatted_bibliography, output)
         # html = output.getvalue()
         # eprint(html)
 

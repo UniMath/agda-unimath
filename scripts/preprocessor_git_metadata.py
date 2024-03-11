@@ -232,7 +232,7 @@ if __name__ == '__main__':
                 for section in book['sections']
             ])
     else:
-        eprint('Skipping git metadata, enable option was',
+        eprint('Skipping git metadata, enable option was set to',
                metadata_config.get('enable'))
 
     # Pass the book back to mdbook
