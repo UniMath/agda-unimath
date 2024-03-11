@@ -152,13 +152,13 @@ module _
 
 ### Unital composition operations on binary families of sets
 
-A composition operation on a binary family of sets
+A composition operation
 
 ```text
   _∘_ : hom y z → hom x y → hom x z
 ```
 
-is called
+on a binary family of sets of morphisms is called
 {{#concept "unital" Disambiguation="composition operation on a binary family of sets" Agda=is-unital-composition-operation-binary-family-Set}}
 if there is a morphism `id_x : hom x x` for every element `x : A` such that
 
