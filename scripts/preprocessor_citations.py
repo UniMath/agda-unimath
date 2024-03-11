@@ -4,13 +4,17 @@
 # and it adheres to the appropriate protocol; see
 # https://rust-lang.github.io/mdBook/for_developers/preprocessors.html#hooking-into-mdbook
 
+import pybtex.io
+from xml.sax.saxutils import escape
 import re
 import pybtex
 import pybtex.database
 import pybtex.plugin
 import pybtex.backends
+import pybtex.backends.html
 import pybtex.style.formatting
 import pybtex.style.formatting.alpha
+import pybtex.style.labels.alpha
 import pybtex.style.labels.alpha
 import sys
 import io
@@ -20,7 +24,7 @@ import json
 
 CITEAS_FIELD = 'citeas'
 DEFAULT_CITATION_STYLE = 'alpha'
-DEFAULT_LABEL_CITATION_STYLE = 'alpha'
+DEFAULT_LABEL_CITATION_STYLE = 'custom_alpha'
 
 # Regex to match citation macros
 CITE_REGEX = re.compile(r'\{\{#cite\s([^\}\s]+)(?:\s(.*))?\}\}')
@@ -29,7 +33,50 @@ REFERENCE_REGEX = re.compile(r'\{\{#reference\s([^\}\s]+)(?:\s(.*))?\}\}')
 BIBLIOGRAPHY_REGEX = re.compile(r'\{\{#bibliography(?:\s(.*))?\}\}')
 
 
-def render_references(bib_database: pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle, backend: pybtex.backends.BaseBackend, cited_keys):
+class CustomHtmlBackend(pybtex.backends.html.Backend):
+    """
+    Custom pybtex plugin for the html backend that formats the bibliography as a
+    simple description list without formatting it as a complete HTML document.
+    It also encases labels in square brackets, and adds css class attributes and
+    anchors.
+    """
+
+    def write_prologue(self):
+        self.output('\n\n<dl class="bibliography">\n')
+
+    def write_epilogue(self):
+        self.output('</dl>\n\n')
+
+    def write_entry(self, key, label, text):
+        self.output(f'<dt class="reference-entry"><a name="reference-{
+            label}">&#91;{label}&#93;</a></dt>\n')
+        self.output(f'<dd>{text}</dd>\n')
+
+
+class CustomAlphaLabelStyle(pybtex.style.labels.alpha.LabelStyle):
+    """
+    Custom pybtex plugin for the alpha label style which overwrites it with the
+    contents of the 'citeas' field of a bibliography entry if present.
+    """
+
+    def format_label(self, entry):
+        if CITEAS_FIELD in entry.fields.keys():
+            return entry.fields[CITEAS_FIELD]
+        else:
+            return super().format_label(entry)
+
+
+# Register custom pybtex plugins
+pybtex.plugin.register_plugin(
+    'pybtex.backends', 'custom_html', CustomHtmlBackend)
+pybtex.plugin.register_plugin(
+    'pybtex.style.labels', 'custom_alpha', CustomAlphaLabelStyle)
+
+
+def render_references(
+        bib_database: pybtex.database.BibliographyData,
+        style: pybtex.style.formatting.BaseStyle,
+        backend: pybtex.backends.BaseBackend, cited_keys):
     formatted_bibliography = style.format_bibliography(
         bib_database, tuple(cited_keys))
 
@@ -37,26 +84,14 @@ def render_references(bib_database: pybtex.database.BibliographyData, style: pyb
     backend.write_to_stream(formatted_bibliography, output)
     html = output.getvalue()
 
-    for cite_key in cited_keys:
-        cite_entry = bib_database.entries[cite_key]
-        label = style.label_style.format_label(cite_entry)
-        formatted_label = format_label(bib_database.entries[cite_key], style)
-        html = html.replace(f'<dt>{label}</dt>', f'<dt class="reference-entry"><a name="reference-{
-                            formatted_label}">&#91;{formatted_label}&#93;</a></dt>')
-
-    html = html.replace("<body", "<body class='bibliography'")
-
     return html
 
 
-def format_label(entry: pybtex.database.Entry, style: pybtex.style.formatting.BaseStyle):
-    if CITEAS_FIELD in entry.fields.keys():
-        return entry.fields[CITEAS_FIELD]
-    else:
-        return style.label_style.format_label(entry)
-
-
-def format_citation(bib_database: pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle, match, cited_keys):
+def format_citation(
+        bib_database: pybtex.database.BibliographyData,
+        style: pybtex.style.formatting.BaseStyle,
+        match,
+        cited_keys):
     cite_key = match.group(1)
 
     # Function to format the citation and collect cited keys
@@ -66,21 +101,30 @@ def format_citation(bib_database: pybtex.database.BibliographyData, style: pybte
 
         cite_entry = bib_database.entries[cite_key]
 
-        formatted_label = format_label(cite_entry, style)
+        formatted_label = style.label_style.format_label(cite_entry)
 
         return f'&#91;<a class="citation-link" href="#reference-{formatted_label}">{formatted_label}</a>&#93;'
     else:
         eprint(f"Warning: Citation key '{
                cite_key}' not found in bibliography.")
+        # If the cite_key is not recognized, we make the following guess about how to format the citation instead of failing completely
         return f'&#91;{cite_key}&#93;'
 
 
-def generate_bibliography(bib_database: pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle, backend: pybtex.backends.BaseBackend, cited_keys):
+def generate_bibliography(
+        bib_database: pybtex.database.BibliographyData,
+        style: pybtex.style.formatting.BaseStyle,
+        backend: pybtex.backends.BaseBackend,
+        cited_keys):
     # Function to generate the bibliography section
     return render_references(bib_database, style, backend, cited_keys)
 
 
-def process_citations_chapter_rec_mut(chapter, bib_database: pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle, backend):
+def process_citations_chapter_rec_mut(
+        chapter,
+        bib_database: pybtex.database.BibliographyData,
+        style: pybtex.style.formatting.BaseStyle,
+        backend):
     cited_keys = set()  # Set to keep track of all cited keys
     content = chapter.get('content', '')
     new_content = CITE_REGEX.sub(lambda match: format_citation(
@@ -127,7 +171,11 @@ def insert_bibliography_at_correct_location(content, bibliography_section):
     return new_content
 
 
-def process_citations_sections_rec_mut(sections, bib_database, style: pybtex.style.formatting.BaseStyle, backend: pybtex.backends.BaseBackend):
+def process_citations_sections_rec_mut(
+        sections,
+        bib_database,
+        style: pybtex.style.formatting.BaseStyle,
+        backend: pybtex.backends.BaseBackend):
     for section in sections:
         chapter = section.get('Chapter')
         if chapter is None:
@@ -137,7 +185,11 @@ def process_citations_sections_rec_mut(sections, bib_database, style: pybtex.sty
             chapter, bib_database, style, backend)
 
 
-def process_citations_root_section(section, bib_database: pybtex.database.BibliographyData, style: pybtex.style.formatting.BaseStyle, backend: pybtex.backends.BaseBackend):
+def process_citations_root_section(
+        section,
+        bib_database: pybtex.database.BibliographyData,
+        style: pybtex.style.formatting.BaseStyle,
+        backend: pybtex.backends.BaseBackend):
     chapter = section.get('Chapter')
     if chapter is not None:
         process_citations_chapter_rec_mut(
@@ -167,18 +219,20 @@ if __name__ == '__main__':
         bib_database: pybtex.database.BibliographyData = pybtex.database.parse_file(
             citations_config.get('bibtex_file'))
 
+        # Config
         citation_style_config = citations_config.get(
             'citation_style', DEFAULT_CITATION_STYLE)
+        label_style_config = citations_config.get(
+            'citation_label_style', DEFAULT_LABEL_CITATION_STYLE)
+        backend_config = 'custom_html'
+
+        # Initialize pybtex classes
         style_class = pybtex.plugin.find_plugin(
             'pybtex.style.formatting', citation_style_config)
-
-        label_style_str = citations_config.get(
-            'citation_label_style', DEFAULT_LABEL_CITATION_STYLE)
         style: pybtex.style.formatting.BaseStyle = style_class(
-            label_style=pybtex.plugin.find_plugin('pybtex.style.labels', label_style_str))
-
-        backend: pybtex.backends.BaseBackend = \
-            pybtex.plugin.find_plugin('pybtex.backends', 'html')()
+            label_style=pybtex.plugin.find_plugin('pybtex.style.labels', label_style_config))
+        backend: pybtex.backends.BaseBackend = pybtex.plugin.find_plugin(
+            'pybtex.backends', backend_name)()
 
         # The following must be run in order to detect errors and missing fields in the bibtex file
         formatted_bibliography: pybtex.style.FormattedBibliography = \
