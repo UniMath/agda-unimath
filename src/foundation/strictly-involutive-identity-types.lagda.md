@@ -546,8 +546,8 @@ module _
 
 ## Operations
 
-We can define a range basic operations on the strictly involutive
-identifications that all enjoy strict computational properties.
+We define a range of basic operations on the strictly involutive identifications
+that all enjoy strict computational properties.
 
 ### Action of functions on strictly involutive identifications
 
