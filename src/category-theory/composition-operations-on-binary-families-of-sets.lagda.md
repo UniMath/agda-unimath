@@ -112,9 +112,11 @@ module _
     (g : type-Set (hom-set y z))
     (f : type-Set (hom-set x y)) →
     ( comp-hom-associative-composition-operation-binary-family-Set
-      ( comp-hom-associative-composition-operation-binary-family-Set h g) f) ＝ⁱ
+      ( comp-hom-associative-composition-operation-binary-family-Set h g)
+      ( f)) ＝ⁱ
     ( comp-hom-associative-composition-operation-binary-family-Set
-      ( h) (comp-hom-associative-composition-operation-binary-family-Set g f))
+      ( h)
+      ( comp-hom-associative-composition-operation-binary-family-Set g f))
   involutive-eq-associative-composition-operation-binary-family-Set = pr2 H
 
   witness-associative-composition-operation-binary-family-Set :
