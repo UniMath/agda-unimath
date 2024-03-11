@@ -232,7 +232,7 @@ if __name__ == '__main__':
         style: pybtex.style.formatting.BaseStyle = style_class(
             label_style=pybtex.plugin.find_plugin('pybtex.style.labels', label_style_config))
         backend: pybtex.backends.BaseBackend = pybtex.plugin.find_plugin(
-            'pybtex.backends', backend_name)()
+            'pybtex.backends', backend_config)()
 
         # The following must be run in order to detect errors and missing fields in the bibtex file
         formatted_bibliography: pybtex.style.FormattedBibliography = \
