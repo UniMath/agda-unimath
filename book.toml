@@ -56,6 +56,7 @@ command = "python3 ./scripts/preprocessor_citations.py"
 bibtex_file = "references.bib"
 citation_style = "alpha"
 citation_label_style = "custom_alpha"
+error_on_unmatched_keys = true
 before = [ "git-metadata" ]
 
 [output.linkcheck]

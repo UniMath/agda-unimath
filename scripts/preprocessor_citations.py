@@ -18,10 +18,11 @@ import io
 from utils import eprint
 import json
 
-
+# Defaults and other constants
 CITEAS_FIELD = 'citeas'
 DEFAULT_CITATION_STYLE = 'alpha'
 DEFAULT_LABEL_CITATION_STYLE = 'custom_alpha'
+DEFAULT_ERROR_ON_UNMATCHED_CITE_KEY = True
 
 # Regex to match citation macros
 CITE_REGEX = re.compile(r'\{\{#cite\s([^\}\s]+)(?:\s(.*))?\}\}')
@@ -72,7 +73,8 @@ pybtex.plugin.register_plugin(
 def render_references(
         bib_database: pybtex.database.BibliographyData,
         style: pybtex.style.formatting.BaseStyle,
-        backend: pybtex.backends.BaseBackend, cited_keys):
+        backend: pybtex.backends.BaseBackend,
+        cited_keys):
     formatted_bibliography = style.format_bibliography(
         bib_database, tuple(cited_keys))
 
@@ -87,7 +89,8 @@ def format_citation(
         bib_database: pybtex.database.BibliographyData,
         style: pybtex.style.formatting.BaseStyle,
         match,
-        cited_keys):
+        cited_keys: set,
+        unmatched_cite_keys: set):
     cite_key = match.group(1)
 
     # Function to format the citation and collect cited keys
@@ -101,7 +104,8 @@ def format_citation(
 
         return f'&#91;<a class="citation-link" href="#reference-{formatted_label}">{formatted_label}</a>&#93;'
     else:
-        eprint(f"Warning: Citation key '{cite_key}' not found in bibliography.")
+        eprint(f"Error! Citation key '{cite_key}' used in #cite macro was not found in bibliography.")
+        unmatched_cite_keys.add(cite_key)
         # If the cite_key is not recognized, we make the following guess about how to format the citation instead of failing completely
         return f'&#91;{cite_key}&#93;'
 
@@ -119,11 +123,12 @@ def process_citations_chapter_rec_mut(
         chapter,
         bib_database: pybtex.database.BibliographyData,
         style: pybtex.style.formatting.BaseStyle,
-        backend):
+        backend,
+        unmatched_cite_keys: set):
     cited_keys = set()  # Set to keep track of all cited keys
     content = chapter.get('content', '')
     new_content = CITE_REGEX.sub(lambda match: format_citation(
-        bib_database, style, match, cited_keys) or match.group(0), content)
+        bib_database, style, match, cited_keys, unmatched_cite_keys) or match.group(0), content)
 
     def sub_reference_regex_lambda(m):
         cite_key = m.group(1)
@@ -131,8 +136,9 @@ def process_citations_chapter_rec_mut(
             cited_keys.add(cite_key)
             return ''
         else:
-            eprint(f"Warning: Citation key '{cite_key}' was not found in the bibliography and will be ignored.")
-            return m.group(0)
+            eprint(f"Error! Citation key '{cite_key}' used in #reference macro was not found in bibliography.")
+            unmatched_cite_keys.add(cite_key)
+            return ''
 
     new_content = REFERENCE_REGEX.sub(sub_reference_regex_lambda, new_content)
 
@@ -146,7 +152,7 @@ def process_citations_chapter_rec_mut(
     chapter['content'] = new_content
 
     process_citations_sections_rec_mut(
-        chapter['sub_items'], bib_database, style, backend)
+        chapter['sub_items'], bib_database, style, backend, unmatched_cite_keys)
 
 
 def insert_bibliography_at_correct_location(content, bibliography_section):
@@ -169,25 +175,27 @@ def process_citations_sections_rec_mut(
         sections,
         bib_database,
         style: pybtex.style.formatting.BaseStyle,
-        backend: pybtex.backends.BaseBackend):
+        backend: pybtex.backends.BaseBackend,
+        unmatched_cite_keys: set):
     for section in sections:
         chapter = section.get('Chapter')
         if chapter is None:
             continue
 
         process_citations_chapter_rec_mut(
-            chapter, bib_database, style, backend)
+            chapter, bib_database, style, backend, unmatched_cite_keys)
 
 
 def process_citations_root_section(
         section,
         bib_database: pybtex.database.BibliographyData,
         style: pybtex.style.formatting.BaseStyle,
-        backend: pybtex.backends.BaseBackend):
+        backend: pybtex.backends.BaseBackend,
+        unmatched_cite_keys: set):
     chapter = section.get('Chapter')
     if chapter is not None:
         process_citations_chapter_rec_mut(
-            chapter, bib_database, style, backend)
+            chapter, bib_database, style, backend, unmatched_cite_keys)
 
     return section
 
@@ -208,6 +216,8 @@ if __name__ == '__main__':
 
     context, book = json.load(sys.stdin)
     citations_config = context['config']['preprocessor']['citations']
+
+    unmatched_cite_keys = set()
 
     if bool(citations_config.get('enable', True)):
         bib_database: pybtex.database.BibliographyData = pybtex.database.parse_file(
@@ -239,10 +249,16 @@ if __name__ == '__main__':
 
         book['sections'] = list(map(
             lambda s: process_citations_root_section(
-                s, bib_database, style, backend),
+                s, bib_database, style, backend, unmatched_cite_keys),
             book['sections']))
     else:
         eprint('Skipping citation insertion, enable option was set to',
                citations_config.get('enable'))
 
     json.dump(book, sys.stdout)
+
+    if unmatched_cite_keys:
+        eprint("The following unmatched bibliography keys were found while processing citations: ", ", ".join(sorted(unmatched_cite_keys)))
+
+        if citations_config.get('error_on_unmatched_keys', DEFAULT_ERROR_ON_UNMATCHED_CITE_KEY):
+            sys.exit(1)
