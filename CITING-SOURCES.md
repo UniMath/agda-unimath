@@ -6,6 +6,12 @@ a custom set of macros to work with them.
 
 The macros are as follows:
 
+<!--
+We have inserted an invisible whitespace character between the first and second
+opening curly braces in the below examples to block the citation preprocessor
+from detecting them as macros.
+-->
+
 - `{­{#cite referenceXYZ}}` will insert a citation to the reference labeled
   `referenceXYZ` (which must be defined in the `references.bib` file) at the
   current location, and add that reference to the current page's bibliography.
