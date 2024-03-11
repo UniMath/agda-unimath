@@ -17,6 +17,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
@@ -26,21 +27,38 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **precategory** in Homotopy Type Theory consists of:
+A {{#concept "precategory" Agda=Precategory}} `𝒞` in Homotopy Type Theory is the
+structure of an associative and unital
+[composition operation](category-theory.composition-operations-on-binary-families-of-sets.md)
+on a binary familiy of sets.
 
-- a type `A` of objects,
-- for each pair of objects `x y : A`, a [set](foundation-core.sets.md) of
-  morphisms `hom x y : Set`, together with a composition operation
-  `_∘_ : hom y z → hom x y → hom x z` such that:
-- `(h ∘ g) ∘ f = h ∘ (g ∘ f)` for any morphisms `h : hom z w`, `g : hom y z` and
-  `f : hom x y`,
-- for each object `x : A` there is a morphism `id_x : hom x x` such that
-  `id_x ∘ f = f` and `g ∘ id_x = g` for any morphisms `f : hom x y` and
-  `g : hom z x`.
+This means a precategory consists of:
 
-The reason this is called a *pre*category and not a category in Homotopy Type
-Theory is that we want to reserve that name for precategories where the
-identities between the objects are exactly the isomorphisms.
+- **Objects.** A type `Ob 𝒞` of _objects_.
+- **Morphisms.** For each pair of objects `x y : Ob 𝒞`, a
+  [set](foundation-core.sets.md) of _morphisms_ `hom 𝒞 x y : Set`.
+- **Composition.** For every triple of objects `x y z : Ob 𝒞` there is a
+  _composition operation_ on morphisms
+  ```text
+    _∘_ : hom 𝒞 y z → hom 𝒞 x y → hom 𝒞 x z.
+  ```
+- **Associativity.** For every triple of composable morphisms, we have
+  ```text
+    (h ∘ g) ∘ f ＝ h ∘ (g ∘ f).
+  ```
+- **Identity morphisms.** For every object `x : Ob 𝒞`, there is a distinguished
+  _identity_ morphism `id_x : hom 𝒞 x x`.
+- **Unitality.** The identity morphisms are two-sided units for the composition
+  operation, meaning that for every `f : hom 𝒞 x y` we have
+  ```text
+    id_y ∘ f ＝ f   and   f ∘ id_x ＝ f.
+  ```
+
+**Note.** The reason this is called a *pre*category and not a _category_ in
+Homotopy Type Theory is that we reserve that name for precategories where the
+[identity types](foundation-core.identity-types.md) of the type of objects are
+characterized by the
+[isomorphism sets](category-theory.isomorphisms-in-precategories.md).
 
 ## Definitions
 
@@ -88,6 +106,34 @@ Precategory l1 l2 =
                 ( hom-set)
                 ( comp-hom))))
 
+make-Precategory :
+  { l1 l2 : Level}
+  ( obj : UU l1)
+  ( hom-set : obj → obj → Set l2)
+  ( _∘_ : composition-operation-binary-family-Set hom-set)
+  ( id : (x : obj) → type-Set (hom-set x x))
+  ( assoc-comp-hom :
+    { x y z w : obj} →
+    ( h : type-Set (hom-set z w))
+    ( g : type-Set (hom-set y z))
+    ( f : type-Set (hom-set x y)) →
+    ( (h ∘ g) ∘ f ＝ h ∘ (g ∘ f)))
+  ( left-unit-comp-hom :
+    { x y : obj} (f : type-Set (hom-set x y)) → id y ∘ f ＝ f)
+  ( right-unit-comp-hom :
+    { x y : obj} (f : type-Set (hom-set x y)) → f ∘ id x ＝ f) →
+  Precategory l1 l2
+make-Precategory
+  obj hom-set _∘_ id assoc-comp-hom left-unit-comp-hom right-unit-comp-hom =
+  ( ( obj) ,
+    ( hom-set) ,
+    ( _∘_ , (λ h g f → involutive-eq-eq (assoc-comp-hom h g f))) ,
+    ( id) ,
+    ( left-unit-comp-hom) ,
+    ( right-unit-comp-hom))
+
+{-# INLINE make-Precategory #-}
+
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   where
@@ -126,6 +172,18 @@ module _
     hom-Precategory x z
   comp-hom-Precategory' f g = comp-hom-Precategory g f
 
+  involutive-eq-associative-comp-hom-Precategory :
+    {x y z w : obj-Precategory}
+    (h : hom-Precategory z w)
+    (g : hom-Precategory y z)
+    (f : hom-Precategory x y) →
+    ( comp-hom-Precategory (comp-hom-Precategory h g) f) ＝ⁱ
+    ( comp-hom-Precategory h (comp-hom-Precategory g f))
+  involutive-eq-associative-comp-hom-Precategory =
+    involutive-eq-associative-composition-operation-binary-family-Set
+      ( hom-set-Precategory)
+      ( associative-composition-operation-Precategory)
+
   associative-comp-hom-Precategory :
     {x y z w : obj-Precategory}
     (h : hom-Precategory z w)
@@ -135,18 +193,6 @@ module _
     ( comp-hom-Precategory h (comp-hom-Precategory g f))
   associative-comp-hom-Precategory =
     witness-associative-composition-operation-binary-family-Set
-      ( hom-set-Precategory)
-      ( associative-composition-operation-Precategory)
-
-  inv-associative-comp-hom-Precategory :
-    {x y z w : obj-Precategory}
-    (h : hom-Precategory z w)
-    (g : hom-Precategory y z)
-    (f : hom-Precategory x y) →
-    ( comp-hom-Precategory h (comp-hom-Precategory g f)) ＝
-    ( comp-hom-Precategory (comp-hom-Precategory h g) f)
-  inv-associative-comp-hom-Precategory =
-    inv-witness-associative-composition-operation-binary-family-Set
       ( hom-set-Precategory)
       ( associative-composition-operation-Precategory)
 
@@ -276,7 +322,7 @@ module _
 - [Functors between precategories](category-theory.categories.md) are
   [structure](foundation.structure.md)-preserving maps of precategories.
 - [Large precategories](category-theory.large-precategories.md) are
-  precategories whose collection of objects form a large type.
+  precategories whose collections of objects and morphisms form large types.
 
 ## External links
 

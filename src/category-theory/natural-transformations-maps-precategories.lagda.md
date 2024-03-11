@@ -21,6 +21,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -294,20 +295,17 @@ module _
         ( hom-family-natural-transformation-map-Precategory C D G H β x)
         ( hom-family-natural-transformation-map-Precategory C D F G α x))
 
-  inv-associative-comp-natural-transformation-map-Precategory :
+  involutive-eq-associative-comp-natural-transformation-map-Precategory :
     (F G H I : map-Precategory C D)
     (α : natural-transformation-map-Precategory C D F G)
     (β : natural-transformation-map-Precategory C D G H)
     (γ : natural-transformation-map-Precategory C D H I) →
-    comp-natural-transformation-map-Precategory C D F H I γ
-      ( comp-natural-transformation-map-Precategory C D F G H β α) ＝
     comp-natural-transformation-map-Precategory C D F G I
-      ( comp-natural-transformation-map-Precategory C D G H I γ β) α
-  inv-associative-comp-natural-transformation-map-Precategory F G H I α β γ =
-    eq-htpy-hom-family-natural-transformation-map-Precategory C D F I _ _
-    ( λ x →
-      inv-associative-comp-hom-Precategory D
-        ( hom-family-natural-transformation-map-Precategory C D H I γ x)
-        ( hom-family-natural-transformation-map-Precategory C D G H β x)
-        ( hom-family-natural-transformation-map-Precategory C D F G α x))
+      ( comp-natural-transformation-map-Precategory C D G H I γ β) α ＝ⁱ
+    comp-natural-transformation-map-Precategory C D F H I γ
+      ( comp-natural-transformation-map-Precategory C D F G H β α)
+  involutive-eq-associative-comp-natural-transformation-map-Precategory
+    F G H I α β γ =
+    involutive-eq-eq
+      ( associative-comp-natural-transformation-map-Precategory F G H I α β γ)
 ```

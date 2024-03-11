@@ -184,14 +184,16 @@ module _
     right-unit-law-mul-Concrete-Group
 
   is-group-Concrete-Group' :
-    is-group' semigroup-Concrete-Group is-unital-semigroup-Concrete-Group
+    is-group-is-unital-Semigroup
+      ( semigroup-Concrete-Group)
+      ( is-unital-semigroup-Concrete-Group)
   pr1 is-group-Concrete-Group' = inv-Concrete-Group
   pr1 (pr2 is-group-Concrete-Group') =
     left-inverse-law-mul-Concrete-Group
   pr2 (pr2 is-group-Concrete-Group') =
     right-inverse-law-mul-Concrete-Group
 
-  is-group-Concrete-Group : is-group semigroup-Concrete-Group
+  is-group-Concrete-Group : is-group-Semigroup semigroup-Concrete-Group
   pr1 is-group-Concrete-Group = is-unital-semigroup-Concrete-Group
   pr2 is-group-Concrete-Group = is-group-Concrete-Group'
 
@@ -215,7 +217,7 @@ module _
   is-unital-op-semigroup-Concrete-Group =
     is-unital-op-Group (group-Concrete-Group G)
 
-  is-group-op-Concrete-Group : is-group op-semigroup-Concrete-Group
+  is-group-op-Concrete-Group : is-group-Semigroup op-semigroup-Concrete-Group
   is-group-op-Concrete-Group = is-group-op-Group (group-Concrete-Group G)
 
   op-group-Concrete-Group : Group l

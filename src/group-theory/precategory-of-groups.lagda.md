@@ -7,37 +7,41 @@ module group-theory.precategory-of-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.full-large-subprecategories
 open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.universe-levels
 
 open import group-theory.groups
-open import group-theory.homomorphisms-groups
+open import group-theory.precategory-of-semigroups
 ```
 
 </details>
 
 ## Definition
 
+### The precategory of groups as a full subprecategory of the precategory of semigroups
+
 ```agda
-instance
-  Group-Large-Precategory : Large-Precategory lsuc (_⊔_)
-  obj-Large-Precategory Group-Large-Precategory = Group
-  hom-set-Large-Precategory Group-Large-Precategory = hom-set-Group
-  comp-hom-Large-Precategory Group-Large-Precategory {X = G} {H} {K} =
-    comp-hom-Group G H K
-  id-hom-Large-Precategory Group-Large-Precategory {X = G} =
-    id-hom-Group G
-  associative-comp-hom-Large-Precategory
-    Group-Large-Precategory {X = G} {H} {K} {L} =
-    associative-comp-hom-Group G H K L
-  inv-associative-comp-hom-Large-Precategory
-    Group-Large-Precategory {X = G} {H} {K} {L} =
-    inv-associative-comp-hom-Group G H K L
-  left-unit-law-comp-hom-Large-Precategory
-    Group-Large-Precategory {X = G} {H} =
-    left-unit-law-comp-hom-Group G H
-  right-unit-law-comp-hom-Large-Precategory
-    Group-Large-Precategory {X = G} {H} =
-    right-unit-law-comp-hom-Group G H
+Group-Full-Large-Subprecategory :
+  Full-Large-Subprecategory (λ l → l) Semigroup-Large-Precategory
+Group-Full-Large-Subprecategory = is-group-prop-Semigroup
+```
+
+### The large precategory of groups
+
+```agda
+Group-Large-Precategory : Large-Precategory lsuc (_⊔_)
+Group-Large-Precategory =
+  large-precategory-Full-Large-Subprecategory
+    ( Semigroup-Large-Precategory)
+    ( Group-Full-Large-Subprecategory)
+```
+
+### The small precategories of groups
+
+```agda
+Group-Precategory : (l : Level) → Precategory (lsuc l) l
+Group-Precategory = precategory-Large-Precategory Group-Large-Precategory
 ```
