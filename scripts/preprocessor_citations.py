@@ -90,7 +90,8 @@ def format_citation(
         style: pybtex.style.formatting.BaseStyle,
         match,
         cited_keys: set,
-        unmatched_cite_keys: set):
+        unmatched_cite_keys: set,
+        chapter):
     cite_key = match.group(1)
 
     # Function to format the citation and collect cited keys
@@ -104,7 +105,7 @@ def format_citation(
 
         return f'&#91;<a class="citation-link" href="#reference-{formatted_label}">{formatted_label}</a>&#93;'
     else:
-        eprint(f"Error! Citation key '{cite_key}' used in #cite macro was not found in bibliography.")
+        eprint(f"Error! Citation key '{cite_key}' used in #cite macro was not found in bibliography. File: '{chapter['path']}'")
         unmatched_cite_keys.add(cite_key)
         # If the cite_key is not recognized, we make the following guess about how to format the citation instead of failing completely
         return f'&#91;{cite_key}&#93;'
@@ -128,7 +129,7 @@ def process_citations_chapter_rec_mut(
     cited_keys = set()  # Set to keep track of all cited keys
     content = chapter.get('content', '')
     new_content = CITE_REGEX.sub(lambda match: format_citation(
-        bib_database, style, match, cited_keys, unmatched_cite_keys) or match.group(0), content)
+        bib_database, style, match, cited_keys, unmatched_cite_keys, chapter) or match.group(0), content)
 
     def sub_reference_regex_lambda(m):
         cite_key = m.group(1)
@@ -136,7 +137,7 @@ def process_citations_chapter_rec_mut(
             cited_keys.add(cite_key)
             return ''
         else:
-            eprint(f"Error! Citation key '{cite_key}' used in #reference macro was not found in bibliography.")
+            eprint(f"Error! Citation key '{cite_key}' used in #reference macro was not found in bibliography. File: '{chapter['path']}'")
             unmatched_cite_keys.add(cite_key)
             return ''
 
