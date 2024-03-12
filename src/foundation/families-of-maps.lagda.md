@@ -54,25 +54,27 @@ module _
   where
   
   equiv-fam-map-map-tot-space :
-    fam-map B C ≃ Σ (Σ A B → Σ A C) (λ f → pr1 ~ (pr1 ∘ f))
+    fam-map B C ≃ Σ (Σ A B → Σ A C) (λ f → pr1 ~ pr1 ∘ f)
   equiv-fam-map-map-tot-space =
     equivalence-reasoning
       fam-map B C
       ≃ (((x , _) : Σ A B) → C x)
-        by equiv-ind-Σ
+        by
+        equiv-ind-Σ
       ≃ (((x , _) : Σ A B) → Σ (Σ A (x ＝_)) (λ (x' , _) → C x'))
         by
         equiv-Π-equiv-family
           ( λ (x , _) →
-              inv-left-unit-law-Σ-is-contr
-                ( is-torsorial-Id x)
-                ( x , refl))
+            inv-left-unit-law-Σ-is-contr
+              ( is-torsorial-Id x)
+              ( x , refl))
       ≃ (((x , _) : Σ A B) →
-          Σ (Σ A C) (λ (x' , _) → x ＝ x'))
+        Σ (Σ A C) (λ (x' , _) → x ＝ x'))
         by
-        equiv-Π-equiv-family (λ (x , _) → equiv-right-swap-Σ)
-      ≃ Σ (Σ A B → Σ A C) (λ f → pr1 ~ (pr1 ∘ f))
-        by distributive-Π-Σ
+        equiv-Π-equiv-family (λ _ → equiv-right-swap-Σ)
+      ≃ Σ (Σ A B → Σ A C) (λ f → pr1 ~ pr1 ∘ f)
+        by
+        distributive-Π-Σ
 ```
 
 ### Families of equivalences are equivalent to equivalences of total spaces respecting the first coordinate
@@ -84,13 +86,14 @@ module _
   where
 
   equiv-fam-equiv-equiv-tot-space :
-    fam-equiv B C ≃ Σ (Σ A B ≃ Σ A C) (λ e → pr1 ~ (pr1 ∘ map-equiv e))
+    fam-equiv B C ≃ Σ (Σ A B ≃ Σ A C) (λ e → pr1 ~ pr1 ∘ map-equiv e)
   equiv-fam-equiv-equiv-tot-space =
     equivalence-reasoning
       fam-equiv B C
       ≃ fiberwise-equiv B C
-        by equiv-fiberwise-equiv-fam-equiv B C
-      ≃ Σ ( Σ ( Σ A B → Σ A C) (λ e → pr1 ~ (pr1 ∘ e)))
+        by
+        equiv-fiberwise-equiv-fam-equiv B C
+      ≃ Σ ( Σ ( Σ A B → Σ A C) (λ e → pr1 ~ pr1 ∘ e))
           ( λ (e , _) → is-equiv e)
         by
         equiv-subtype-equiv
@@ -99,6 +102,7 @@ module _
           ( λ (e , _) → is-equiv-Prop e)
           ( λ f →
             is-equiv-tot-is-fiberwise-equiv , is-fiberwise-equiv-is-equiv-tot)
-      ≃ Σ (Σ A B ≃ Σ A C) (λ e → pr1 ~ (pr1 ∘ map-equiv e))
-        by equiv-right-swap-Σ
+      ≃ Σ (Σ A B ≃ Σ A C) (λ e → pr1 ~ pr1 ∘ map-equiv e)
+        by
+        equiv-right-swap-Σ
 ```
