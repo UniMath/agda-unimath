@@ -37,8 +37,9 @@ by
   α x ↦ ap² h (α x).
 ```
 
-Similarly, the {{#concept "right whiskering" Disambiguation="2-homotopies with
-respect to composition" Agda=right-whisker-comp²}} is defined to be the operation
+Similarly, the
+{{#concept "right whiskering" Disambiguation="2-homotopies with respect to composition" Agda=right-whisker-comp²}}
+is defined to be the operation
 
 ```text
   (H ~ H') → (h : (x : A) → B x) → (H ·r h ~ H' ·r h)
