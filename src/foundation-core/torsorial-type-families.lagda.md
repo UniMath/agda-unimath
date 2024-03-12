@@ -31,6 +31,33 @@ word, a torsor is therefore a torsorial type family over a
 condition that they are defined over a pointed connected type, we get to the
 notion of 'torsor-like', or indeed 'torsorial' type families.
 
+The notion of torsoriality of type families is central in many
+charactereizations of identity types. Indeed, the
+[fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
+shows that for any type family `B` over `A` and any `a : A`, the type family `B`
+is torsorial if and only if every
+[family of maps](foundation.families-of-maps.md)
+
+```text
+  (x : A) → a ＝ x → B x
+```
+
+is a [family of equivalences](foundation.families-of-equivalences.md). Indeed,
+the principal example of a torsorial type family is the
+[identity type](foundation-core.identity-types.md) itself. More generally, any
+type family in the [connected component](foundation.connected-components.md) of
+the identity type `x ↦ a ＝ x` is torsorial. These include torsors of higher
+groups and [torsors](group-theory.torsors.md) of
+[concrete groups](group-theory.concrete-groups.md).
+
+Establishing torsoriality of type families is therefore one of the routine tasks
+in univalent mathematics. Some files that provide general tools for establishing
+torsoriality of type families include
+
+- [Equality of dependent function types](foundation.equality-dependent-function-types.md)
+- The [structure identity principle](foundation.structure-identity-principle.md)
+- The [subtype identity principle](foundation.subtype-identity-principle.md)
+
 ## Definition
 
 ### The predicate of being a torsorial type family
