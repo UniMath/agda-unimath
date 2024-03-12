@@ -55,7 +55,7 @@ module _
       fam-map
       ≃ (((x , _) : Σ A B) → C x)
         by equiv-ind-Σ
-      ≃ (((x , _) : Σ A B) → Σ (Σ A (x ＝_)) λ (x' , _) → C x')
+      ≃ (((x , _) : Σ A B) → Σ (Σ A (x ＝_)) (λ (x' , _) → C x'))
         by
         equiv-Π-equiv-family
           ( λ (x , _) →
@@ -63,7 +63,7 @@ module _
                 ( is-torsorial-Id x)
                 ( x , refl))
       ≃ (((x , _) : Σ A B) →
-          Σ (Σ A C) λ (x' , _) → x ＝ x')
+          Σ (Σ A C) (λ (x' , _) → x ＝ x'))
         by
         equiv-Π-equiv-family (λ (x , _) → equiv-right-swap-Σ)
       ≃ Σ (Σ A B → Σ A C) (λ f → pr1 ~ (pr1 ∘ f))
@@ -78,16 +78,17 @@ module _
   equiv-fam-equiv-equiv-tot-space =
     equivalence-reasoning
       fam-equiv B C
-      ≃ fiberwise-equiv B C by equiv-fiberwise-equiv-fam-equiv B C
-      ≃ Σ (Σ (Σ A B → Σ A C)
-            (λ e → pr1 ~ (pr1 ∘ e)))
-          (λ (e , _) → is-equiv e) by equiv-subtype-equiv
-                                        equiv-fam-map-map-tot-space
-                                        (λ f → Π-Prop A (is-equiv-Prop ∘ f))
-                                        (λ (e , _) → is-equiv-Prop e)
-                                        (λ f →
-                                          is-equiv-tot-is-fiberwise-equiv ,
-                                          is-fiberwise-equiv-is-equiv-tot)
-      ≃ Σ (Σ A B ≃ Σ A C)
-          (λ e → pr1 ~ (pr1 ∘ map-equiv e)) by equiv-right-swap-Σ
+      ≃ fiberwise-equiv B C
+        by equiv-fiberwise-equiv-fam-equiv B C
+      ≃ Σ ( Σ ( Σ A B → Σ A C) (λ e → pr1 ~ (pr1 ∘ e)))
+          ( λ (e , _) → is-equiv e)
+        by
+        equiv-subtype-equiv
+          ( equiv-fam-map-map-tot-space)
+          ( λ f → Π-Prop A (is-equiv-Prop ∘ f))
+          ( λ (e , _) → is-equiv-Prop e)
+          ( λ f →
+            is-equiv-tot-is-fiberwise-equiv , is-fiberwise-equiv-is-equiv-tot)
+      ≃ Σ (Σ A B ≃ Σ A C) (λ e → pr1 ~ (pr1 ∘ map-equiv e))
+        by equiv-right-swap-Σ
 ```
