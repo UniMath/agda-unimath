@@ -15,3 +15,4 @@ welcome contributions to the library about any topic in mathematics.
 1. [The agda-unimath website](https://unimath.github.io/agda-unimath/)
 2. [Discord](https://discord.gg/Zp2e8hYsuX)
 3. [Twitch](https://www.twitch.tv/agdaunimath)
+4. [Benchmarks](https://agda-unimath-benchmarks.netlify.app/)
