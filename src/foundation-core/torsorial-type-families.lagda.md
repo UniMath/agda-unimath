@@ -32,7 +32,7 @@ condition that they are defined over a pointed connected type, we get to the
 notion of 'torsor-like', or indeed 'torsorial' type families.
 
 The notion of torsoriality of type families is central in many
-charactereizations of identity types. Indeed, the
+characterizations of identity types. Indeed, the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
 shows that for any type family `B` over `A` and any `a : A`, the type family `B`
 is torsorial if and only if every
