@@ -71,7 +71,7 @@ is-torsorial E = is-contr (Σ _ E)
 
 ## Examples
 
-### The total space of the identity type based at a point is contractible
+### Identity types are torsorial
 
 We prove two variants of the claim that
 [identity types](foundation-core.identity-types.md) are torsorial:
