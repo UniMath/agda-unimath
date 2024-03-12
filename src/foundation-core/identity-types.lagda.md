@@ -128,8 +128,10 @@ ind-Id x B b y refl = b
 
 The identity types form a weak groupoidal structure on types. Thus they come
 equipped with
-{{#concept "concatenation" Disambiguation="identifications" Agda=concat]} `(x ＝ y) → (y ＝ z) → (x ＝ z)` and an
-{{#concept "inverse" Disambiguation="identification" Agda=inv}} operation `(x ＝ y) → (y ＝ x)`.
+{{#concept "concatenation" Disambiguation="identifications" Agda=concat}}
+`(x ＝ y) → (y ＝ z) → (x ＝ z)` and an
+{{#concept "inverse" Disambiguation="identification" Agda=inv}} operation
+`(x ＝ y) → (y ＝ x)`.
 
 There are many more operations on identity types. Some of them are defined in
 [path algebra](foundation.path-algebra.md) and
