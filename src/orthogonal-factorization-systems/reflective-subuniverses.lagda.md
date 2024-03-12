@@ -240,12 +240,4 @@ module _
 
 ## References
 
-1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
-   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
-   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
-2. Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
-   theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
-   ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
-   [DOI:10.23638/LMCS-16(1:2)2020](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
-3. Egbert Rijke, _Classifying Types_
-   ([arXiv:1906.09435](https://arxiv.org/abs/1906.09435))
+{{#bibliography}} {{#reference UF13}} {{#reference RSS20}} {{#reference Rij19}}

@@ -222,23 +222,6 @@ module _
       ( monoid-Commutative-Monoid L)
       ( monoid-Commutative-Monoid M)
       ( monoid-Commutative-Monoid N)
-
-  inv-associative-comp-hom-Commutative-Monoid :
-    (h : hom-Commutative-Monoid M N)
-    (g : hom-Commutative-Monoid L M)
-    (f : hom-Commutative-Monoid K L) →
-    comp-hom-Commutative-Monoid K M N
-      ( h)
-      ( comp-hom-Commutative-Monoid K L M g f) ＝
-    comp-hom-Commutative-Monoid K L N
-      ( comp-hom-Commutative-Monoid L M N h g)
-      ( f)
-  inv-associative-comp-hom-Commutative-Monoid =
-    inv-associative-comp-hom-Monoid
-      ( monoid-Commutative-Monoid K)
-      ( monoid-Commutative-Monoid L)
-      ( monoid-Commutative-Monoid M)
-      ( monoid-Commutative-Monoid N)
 ```
 
 ### The unit laws for composition of homomorphisms of commutative monoids

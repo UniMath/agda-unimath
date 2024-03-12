@@ -7,7 +7,6 @@ module foundation.yoneda-identity-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -719,7 +718,7 @@ on both arguments using one of the two sides in the Gray interchanger diagram
   ap (r ↦ f r y) p |                    | ap (r ↦ f r y') p
                    |                    |
                    ∨                    ∨
-                 f x' y ------------> f x' y'.
+                 f x' y ------------> f x' y'
                       ap (r ↦ f x' r) q
 ```
 
@@ -736,15 +735,15 @@ module _
   ap-binary-yoneda-Id {x} {x'} p {y} {y'} q =
     ap-yoneda-Id (λ z → f z y) p ∙ʸ ap-yoneda-Id (f x') q
 
-  left-unit-ap-binary-Id :
+  left-unit-ap-binary-yoneda-Id :
     {x : A} {y y' : B} (q : y ＝ʸ y') →
     ap-binary-yoneda-Id reflʸ q ＝ ap-yoneda-Id (f x) q
-  left-unit-ap-binary-Id q = refl
+  left-unit-ap-binary-yoneda-Id q = refl
 
-  right-unit-ap-binary-Id :
+  right-unit-ap-binary-yoneda-Id :
     {x x' : A} (p : x ＝ʸ x') {y : B} →
     ap-binary-yoneda-Id p reflʸ ＝ ap-yoneda-Id (λ z → f z y) p
-  right-unit-ap-binary-Id p = refl
+  right-unit-ap-binary-yoneda-Id p = refl
 ```
 
 ### Transport along Yoneda identifications
@@ -820,13 +819,13 @@ module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  left-whisker-concat-yoenda-Id :
+  left-whisker-concat-yoneda-Id :
     (p : x ＝ʸ y) {q r : y ＝ʸ z} → q ＝ʸ r → p ∙ʸ q ＝ʸ p ∙ʸ r
-  left-whisker-concat-yoenda-Id p β = ap-yoneda-Id (p ∙ʸ_) β
+  left-whisker-concat-yoneda-Id p β = ap-yoneda-Id (p ∙ʸ_) β
 
-  right-whisker-concat-yoenda-Id :
+  right-whisker-concat-yoneda-Id :
     {p q : x ＝ʸ y} → p ＝ʸ q → (r : y ＝ʸ z) → p ∙ʸ r ＝ʸ q ∙ʸ r
-  right-whisker-concat-yoenda-Id α r = ap-yoneda-Id (_∙ʸ r) α
+  right-whisker-concat-yoneda-Id α r = ap-yoneda-Id (_∙ʸ r) α
 ```
 
 ### Horizontal concatenation of Yoneda identifications
@@ -847,13 +846,13 @@ module _
   compute-left-horizontal-concat-yoneda-Id² :
     {p : x ＝ʸ y} {u v : y ＝ʸ z} (β : u ＝ʸ v) →
     horizontal-concat-yoneda-Id² reflʸ β ＝
-    left-whisker-concat-yoenda-Id p β
+    left-whisker-concat-yoneda-Id p β
   compute-left-horizontal-concat-yoneda-Id² β = refl
 
   compute-right-horizontal-concat-yoneda-Id² :
     {p q : x ＝ʸ y} (α : p ＝ʸ q) {u : y ＝ʸ z} →
     horizontal-concat-yoneda-Id² α (reflʸ {x = u}) ＝
-    right-whisker-concat-yoenda-Id α u
+    right-whisker-concat-yoneda-Id α u
   compute-right-horizontal-concat-yoneda-Id² α = refl
 
 module _
@@ -946,4 +945,4 @@ module _
 
 ## References
 
-- <https://groups.google.com/g/homotopytypetheory/c/FfiZj1vrkmQ/m/GJETdy0AAgAJ>
+{{#bibliography}} {{#reference Esc19DefinitionsEquivalence}}
