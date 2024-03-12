@@ -52,7 +52,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1}
   (B : A → UU l2) (C : A → UU l3)
   where
-  
+
   equiv-fam-map-map-tot-space :
     fam-map B C ≃ Σ (Σ A B → Σ A C) (λ f → pr1 ~ pr1 ∘ f)
   equiv-fam-map-map-tot-space =
