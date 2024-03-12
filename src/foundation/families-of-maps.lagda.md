@@ -78,6 +78,11 @@ module _
 ### Families of equivalences are equivalent to equivalences of total spaces respecting the first coordinate
 
 ```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  (B : A → UU l2) (C : A → UU l3)
+  where
+
   equiv-fam-equiv-equiv-tot-space :
     fam-equiv B C ≃ Σ (Σ A B ≃ Σ A C) (λ e → pr1 ~ (pr1 ∘ map-equiv e))
   equiv-fam-equiv-equiv-tot-space =
@@ -89,7 +94,7 @@ module _
           ( λ (e , _) → is-equiv e)
         by
         equiv-subtype-equiv
-          ( equiv-fam-map-map-tot-space)
+          ( equiv-fam-map-map-tot-space B C)
           ( λ f → Π-Prop A (is-equiv-Prop ∘ f))
           ( λ (e , _) → is-equiv-Prop e)
           ( λ f →
