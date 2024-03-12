@@ -22,6 +22,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 ```
 
@@ -52,17 +53,21 @@ module _
   equiv-fam-map-map-tot-space =
     equivalence-reasoning
       fam-map
-      ≃ (((x , _) : Σ A B) → C x) by equiv-ind-Σ
+      ≃ (((x , _) : Σ A B) → C x)
+        by equiv-ind-Σ
+      ≃ (((x , _) : Σ A B) → Σ (Σ A (x ＝_)) λ (x' , _) → C x')
+        by
+        equiv-Π-equiv-family
+          ( λ (x , _) →
+              inv-left-unit-law-Σ-is-contr
+                ( is-torsorial-Id x)
+                ( x , refl))
       ≃ (((x , _) : Σ A B) →
-          Σ (Σ A (x ＝_)) λ (x' , _) → C x') by equiv-Π-equiv-family (λ (x , _) →
-                                                  inv-left-unit-law-Σ-is-contr
-                                                    (is-torsorial-Id x)
-                                                    (x , refl))
-      ≃ (((x , _) : Σ A B) →
-          Σ (Σ A C) λ (x' , _) → x ＝ x') by equiv-Π-equiv-family (λ (x , _) →
-                                              equiv-right-swap-Σ)
-      ≃ Σ (Σ A B → Σ A C)
-          (λ f → pr1 ~ (pr1 ∘ f)) by distributive-Π-Σ
+          Σ (Σ A C) λ (x' , _) → x ＝ x')
+        by
+        equiv-Π-equiv-family (λ (x , _) → equiv-right-swap-Σ)
+      ≃ Σ (Σ A B → Σ A C) (λ f → pr1 ~ (pr1 ∘ f))
+        by distributive-Π-Σ
 ```
 
 ### Families of equivalences are equivalent to equivalences of total spaces respecting the first coordinate

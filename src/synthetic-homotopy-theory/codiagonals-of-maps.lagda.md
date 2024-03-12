@@ -13,6 +13,7 @@ open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.torsorial-type-families
 open import foundation.unit-type
 open import foundation.universe-levels
 
