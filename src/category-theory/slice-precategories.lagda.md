@@ -370,7 +370,7 @@ module _
       is-product-obj-Precategory
         (Slice-Precategory C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂)
     equiv-is-pullback-is-product-Slice-Precategory =
-      equiv-prop
+      equiv-is-prop
         ( is-prop-is-pullback-obj-Precategory C A X Y f g W p₁ p₂ α)
         ( is-prop-is-product-obj-Precategory
           (Slice-Precategory C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂))

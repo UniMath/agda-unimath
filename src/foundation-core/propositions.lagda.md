@@ -145,10 +145,24 @@ module _
         ( λ x → eq-is-prop is-prop-A)
 
   abstract
-    equiv-prop : is-prop A → is-prop B → (A → B) → (B → A) → A ≃ B
-    pr1 (equiv-prop is-prop-A is-prop-B f g) = f
-    pr2 (equiv-prop is-prop-A is-prop-B f g) =
+    equiv-is-prop : is-prop A → is-prop B → (A → B) → (B → A) → A ≃ B
+    pr1 (equiv-is-prop is-prop-A is-prop-B f g) = f
+    pr2 (equiv-is-prop is-prop-A is-prop-B f g) =
       is-equiv-is-prop is-prop-A is-prop-B g
+
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
+
+  is-equiv-Prop' :
+    {f : type-Prop P → type-Prop Q} → (type-Prop Q → type-Prop P) → is-equiv f
+  is-equiv-Prop' = is-equiv-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
+
+  equiv-Prop' :
+    (type-Prop P → type-Prop Q) →
+    (type-Prop Q → type-Prop P) →
+    type-Prop P ≃ type-Prop Q
+  equiv-Prop' = equiv-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```
 
 ### Propositions are closed under equivalences

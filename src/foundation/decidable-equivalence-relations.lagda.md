@@ -128,7 +128,7 @@ module _
     sim-Decidable-equivalence-relation x y ≃
     sim-Decidable-equivalence-relation y x
   equiv-symmetric-Decidable-equivalence-relation {x} {y} =
-    equiv-prop
+    equiv-is-prop
       ( is-prop-sim-Decidable-equivalence-relation x y)
       ( is-prop-sim-Decidable-equivalence-relation y x)
       ( symmetric-Decidable-equivalence-relation x y)

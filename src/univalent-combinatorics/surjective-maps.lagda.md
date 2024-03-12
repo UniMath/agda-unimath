@@ -119,7 +119,7 @@ module _
     is-finite X ≃
     ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
   is-finite-iff-∃-surjection-has-decidable-equality =
-    equiv-prop
+    equiv-is-prop
       ( is-prop-is-finite X)
       ( is-prop-product is-prop-has-decidable-equality is-prop-type-trunc-Prop)
       ( λ fin-X → is-finite-if-∃-surjection-has-decidable-equality fin-X)

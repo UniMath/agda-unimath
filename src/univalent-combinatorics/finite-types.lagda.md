@@ -510,7 +510,7 @@ compute-total-UU-Fin : {l : Level} → Σ ℕ (UU-Fin l) ≃ 𝔽 l
 compute-total-UU-Fin =
   ( equiv-tot
     ( λ X →
-      equiv-prop
+      equiv-is-prop
         ( is-prop-has-finite-cardinality)
         ( is-prop-is-finite X)
         ( is-finite-has-finite-cardinality)

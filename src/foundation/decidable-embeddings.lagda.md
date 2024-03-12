@@ -322,7 +322,7 @@ equiv-precomp-decidable-emb-equiv e C =
     ( is-decidable-emb)
     ( equiv-precomp e C)
     ( λ g →
-      equiv-prop
+      equiv-is-prop
         ( is-prop-is-decidable-emb g)
         ( is-prop-is-decidable-emb (g ∘ map-equiv e))
         ( is-decidable-emb-comp (is-decidable-emb-is-equiv (pr2 e)))
