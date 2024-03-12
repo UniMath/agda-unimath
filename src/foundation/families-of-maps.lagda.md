@@ -48,11 +48,16 @@ module _
 ### Families of maps are equivalent to maps of total spaces respecting the first coordinate
 
 ```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  (B : A → UU l2) (C : A → UU l3)
+  where
+  
   equiv-fam-map-map-tot-space :
-    fam-map ≃ Σ (Σ A B → Σ A C) (λ f → pr1 ~ (pr1 ∘ f))
+    fam-map B C ≃ Σ (Σ A B → Σ A C) (λ f → pr1 ~ (pr1 ∘ f))
   equiv-fam-map-map-tot-space =
     equivalence-reasoning
-      fam-map
+      fam-map B C
       ≃ (((x , _) : Σ A B) → C x)
         by equiv-ind-Σ
       ≃ (((x , _) : Σ A B) → Σ (Σ A (x ＝_)) (λ (x' , _) → C x'))
