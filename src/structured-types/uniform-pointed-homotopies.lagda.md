@@ -32,9 +32,9 @@ open import structured-types.pointed-types
 The concept of _uniform pointed homotopy_ is an
 [equivalent](foundation-core.equivalences.md) way of defining
 [pointed homotopies](structured-types.pointed-homotopies.md). A uniform pointed
-homotopies `H` between two
+homotopy `H` between two
 [pointed dependent functions](structured-types.pointed-dependent-functions.md)
-`f` and `g` is defined to be a pointed dependent functions of the
+`f` and `g` is defined to be a pointed dependent function of the
 [pointed type family](structured-types.pointed-families-of-types.md) of
 [identifications](foundation-core.identity-types.md) between the values of `f`
 and `g`. The main idea is that, since uniform pointed homotopies between pointed
@@ -47,7 +47,7 @@ definition.
 Consider two pointed dependent functions `f := (f₀ , f₁)` and `g := (g₀ , g₁)`
 in the pointed dependent function type `Π∗ A B`. Then the type family
 `x ↦ f₀ x ＝ g₀ x` over the base type `A` is a pointed type family, where the
-base point is the
+base point is the identification
 
 ```text
   f₁ ∙ inv g₁ : f₀ * ＝ g₀ *.
