@@ -104,26 +104,14 @@ module _
   is-prop-xor-Prop : is-prop type-xor-Prop
   is-prop-xor-Prop = is-prop-type-Prop xor-Prop
 
-  infixr 10 _⊻₍₋₁₎_
-  _⊻₍₋₁₎_ : Prop (l1 ⊔ l2)
-  _⊻₍₋₁₎_ = xor-Prop
+  infixr 10 _⊻_
+  _⊻_ : Prop (l1 ⊔ l2)
+  _⊻_ = xor-Prop
 ```
 
 **Notation.** The
 [symbol used for exclusive disjunction](https://codepoints.net/U+22BB?lang=en)
-`⊻` can be written with the escape sequence `\veebar`. Note that the index $-1$
-in `⊻₍₋₁₎` should be understood as part of a general scheme where `⊻₍ₙ₎` is the
-operator of type
-
-```text
-_⊻₍ₙ₎_ : Truncated-Type l1 n → Truncated-Type l2 n → Truncated-Type (l1 ⊔ l2) n
-```
-
-that takes the exclusive disjunction of the underlying types, which will always
-be a proposition. This is in contrast to the exclusive sum operation on
-$n$-[truncated types](foundation-core.truncated-types.md), which has the same
-type signature, but whose underlying type is not generally $k$-truncated for any
-$k < n$.
+`⊻` can be written with the escape sequence `\veebar`.
 
 ## Properties
 

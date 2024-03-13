@@ -82,19 +82,18 @@ module _
     is-prop type-conjunction-Prop
   is-prop-conjunction-Prop = is-prop-type-Prop conjunction-Prop
 
-  infixr 15 _∧₍₋₁₎_
-  _∧₍₋₁₎_ : Prop (l1 ⊔ l2)
-  _∧₍₋₁₎_ = conjunction-Prop
+  infixr 15 _∧_
+  _∧_ : Prop (l1 ⊔ l2)
+  _∧_ = conjunction-Prop
 ```
 
-The indexing $-1$ for the infix binary operator `∧₍₋₁₎` is part of a general
-scheme, because `∧₍₋₁₎` takes as inputs
-$-1$-[types](foundation-core.truncated-types.md), and spits out the
-propositional conjunction of their underlying types, as a $-1$-type. This is in
-contrast to the cartesian product `×₍ₙ₎`, which will take values in $n$-types
-that are not generally $k$-truncated for any $k < n$.
+The indexing $-1$ for the infix binary operator `∧` is part of a general scheme,
+because `∧` takes as inputs $-1$-[types](foundation-core.truncated-types.md),
+and spits out the propositional conjunction of their underlying types, as a
+$-1$-type. This is in contrast to the cartesian product `×₍ₙ₎`, which will take
+values in $n$-types that are not generally $k$-truncated for any $k < n$.
 
-**Note**: The symbol used for the conjunction `_∧₍₋₁₎_` is the
+**Note**: The symbol used for the conjunction `_∧_` is the
 [logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` or
 `\and`).
 
@@ -145,7 +144,7 @@ module _
   prop-recursion-principle-conjunction-Prop :
     {l : Level} (R : Prop l) → Prop (l1 ⊔ l2 ⊔ l)
   prop-recursion-principle-conjunction-Prop R =
-    ((P ∧₍₋₁₎ Q) →₍₋₁₎ R) ↔₍₋₁₎ (P →₍₋₁₎ Q →₍₋₁₎ R)
+    ((P ∧ Q) ⇒ R) ⇔ (P ⇒ Q ⇒ R)
 
   recursion-principle-conjunction-Prop : UUω
   recursion-principle-conjunction-Prop =
@@ -154,7 +153,7 @@ module _
 
   ev-conjunction-Prop :
     {l : Level} (R : Prop l) →
-    type-Prop (((P ∧₍₋₁₎ Q) →₍₋₁₎ R) →₍₋₁₎ P →₍₋₁₎ Q →₍₋₁₎ R)
+    type-Prop (((P ∧ Q) ⇒ R) ⇒ P ⇒ Q ⇒ R)
   ev-conjunction-Prop R = ev-pair
 ```
 
@@ -169,7 +168,7 @@ module _
 
   prop-rec-conjunction-Prop : {l : Level} (R : Prop l) → Prop (l1 ⊔ l2 ⊔ l)
   prop-rec-conjunction-Prop R =
-    (P →₍₋₁₎ Q →₍₋₁₎ R) →₍₋₁₎ (P ∧₍₋₁₎ Q) →₍₋₁₎ R
+    (P ⇒ Q ⇒ R) ⇒ (P ∧ Q) ⇒ R
 
   rec-conjunction-Prop :
     {l : Level} (R : Prop l) → type-Prop (prop-rec-conjunction-Prop R)
@@ -182,12 +181,12 @@ module _
 
   equiv-ev-conjunction-Prop :
     {l : Level} (R : Prop l) →
-    type-Prop (P ∧₍₋₁₎ Q →₍₋₁₎ R) ≃
-    type-Prop (P →₍₋₁₎ Q →₍₋₁₎ R)
+    type-Prop (P ∧ Q ⇒ R) ≃
+    type-Prop (P ⇒ Q ⇒ R)
   equiv-ev-conjunction-Prop R =
     equiv-iff'
-      ( P ∧₍₋₁₎ Q →₍₋₁₎ R)
-      ( P →₍₋₁₎ Q →₍₋₁₎ R)
+      ( P ∧ Q ⇒ R)
+      ( P ⇒ Q ⇒ R)
       ( recursion-principle-conjunction-Prop' R)
 ```
 
@@ -228,8 +227,8 @@ module _
   where
 
   is-greatest-lower-bound-conjunction-Prop :
-    type-Prop ((R →₍₋₁₎ P) ∧₍₋₁₎ (R →₍₋₁₎ Q)) ↔
-    type-Prop (R →₍₋₁₎ P ∧₍₋₁₎ Q)
+    type-Prop ((R ⇒ P) ∧ (R ⇒ Q)) ↔
+    type-Prop (R ⇒ P ∧ Q)
   is-greatest-lower-bound-conjunction-Prop =
     ( map-distributive-conjunction-Prop P Q (type-Prop R) ,
       map-inv-distributive-conjunction-Prop P Q (type-Prop R))

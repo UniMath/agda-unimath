@@ -74,8 +74,8 @@ module _
   exclusive-sum-Prop : Prop (l1 ⊔ l2)
   exclusive-sum-Prop =
     coproduct-Prop
-      ( P ∧₍₋₁₎ (¬₍₋₁₎ Q))
-      ( Q ∧₍₋₁₎ (¬₍₋₁₎ P))
+      ( P ∧ (¬' Q))
+      ( Q ∧ (¬' P))
       ( λ p q → pr2 q (pr1 p))
 
   type-exclusive-sum-Prop : UU (l1 ⊔ l2)
@@ -217,7 +217,7 @@ module _
 ```text
   eq-equiv-Prop
     ( ( ( equiv-coproduct
-          ( ( ( left-unit-law-coproduct (type-Prop (P ∧₍₋₁₎ (¬₍₋₁₎ Q)))) ∘e
+          ( ( ( left-unit-law-coproduct (type-Prop (P ∧ (¬' Q)))) ∘e
               ( equiv-coproduct
                 ( left-absorption-Σ
                   ( λ x →

@@ -37,7 +37,7 @@ is-dubuc-penon-compact-Prop l1 l2 X =
     ( λ P →
       ∀'
         ( subtype l2 X)
-        ( λ Q → (∀' X (λ x → P ∨₍₋₁₎ Q x)) →₍₋₁₎ (P ∨₍₋₁₎ (∀' X Q))))
+        ( λ Q → (∀' X (λ x → P ∨ Q x)) ⇒ (P ∨ (∀' X Q))))
 
 is-dubuc-penon-compact :
   {l : Level} (l1 l2 : Level) → UU l → UU (l ⊔ lsuc l1 ⊔ lsuc l2)

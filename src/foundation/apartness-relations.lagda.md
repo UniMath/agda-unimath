@@ -56,7 +56,7 @@ module _
 
   is-cotransitive-Prop : Prop (l1 ⊔ l2)
   is-cotransitive-Prop =
-    ∀' A (λ a → ∀' A (λ b → ∀' A (λ c → R a b →₍₋₁₎ (R a c ∨₍₋₁₎ R b c))))
+    ∀' A (λ a → ∀' A (λ b → ∀' A (λ c → R a b ⇒ (R a c ∨ R b c))))
 
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive = type-Prop is-cotransitive-Prop

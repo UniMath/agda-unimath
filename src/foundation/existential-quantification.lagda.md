@@ -114,8 +114,8 @@ module _
     is-prop-exists : is-prop exists
     is-prop-exists = is-prop-type-Prop exists-Prop
 
-  ∃₍₋₁₎ : Prop (l1 ⊔ l2)
-  ∃₍₋₁₎ = exists-Prop
+  ∃ : Prop (l1 ⊔ l2)
+  ∃ = exists-Prop
 ```
 
 ### The introduction rule for existential quantification
@@ -265,7 +265,7 @@ module _
     type-Prop P × exists-type-family A B
   map-inv-distributive-product-exists =
     elim-exists
-      ( P ∧₍₋₁₎ exists-type-family-Prop A B)
+      ( P ∧ exists-type-family-Prop A B)
       ( λ x (p , q) → (p , intro-exists x q))
 
   iff-distributive-product-exists :
@@ -276,11 +276,11 @@ module _
       map-inv-distributive-product-exists)
 
   eq-distributive-product-exists :
-    P ∧₍₋₁₎ exists-type-family-Prop A B ＝
+    P ∧ exists-type-family-Prop A B ＝
     exists-type-family-Prop A (λ x → type-Prop P × B x)
   eq-distributive-product-exists =
     eq-iff'
-      ( P ∧₍₋₁₎ exists-type-family-Prop A B)
+      ( P ∧ exists-type-family-Prop A B)
       ( exists-type-family-Prop A (λ x → type-Prop P × B x))
       ( iff-distributive-product-exists)
 ```
@@ -293,22 +293,22 @@ module _
   where
 
   map-distributive-conjunction-exists-Prop :
-    type-Prop (P ∧₍₋₁₎ (∃₍₋₁₎ A Q) →₍₋₁₎ ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x))
+    type-Prop (P ∧ (∃ A Q) ⇒ ∃ A (λ x → P ∧ Q x))
   map-distributive-conjunction-exists-Prop =
     map-distributive-product-exists P
 
   map-inv-distributive-conjunction-exists-Prop :
-    type-Prop (∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x) →₍₋₁₎ P ∧₍₋₁₎ (∃₍₋₁₎ A Q))
+    type-Prop (∃ A (λ x → P ∧ Q x) ⇒ P ∧ (∃ A Q))
   map-inv-distributive-conjunction-exists-Prop =
     map-inv-distributive-product-exists P
 
   iff-distributive-conjunction-exists-Prop :
-    type-Prop (P ∧₍₋₁₎ ∃₍₋₁₎ A Q ↔₍₋₁₎ ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x))
+    type-Prop (P ∧ ∃ A Q ⇔ ∃ A (λ x → P ∧ Q x))
   iff-distributive-conjunction-exists-Prop =
     iff-distributive-product-exists P
 
   eq-distributive-conjunction-exists-Prop :
-    P ∧₍₋₁₎ (∃₍₋₁₎ A Q) ＝ ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x)
+    P ∧ (∃ A Q) ＝ ∃ A (λ x → P ∧ Q x)
   eq-distributive-conjunction-exists-Prop =
     eq-distributive-product-exists P
 ```

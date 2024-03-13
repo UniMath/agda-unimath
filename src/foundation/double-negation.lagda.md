@@ -64,10 +64,10 @@ is-prop-double-negation :
   {l : Level} {A : UU l} → is-prop (¬¬ A)
 is-prop-double-negation = is-prop-neg
 
-infix 25 ¬¬₍₋₁₎_
+infix 25 ¬¬'_
 
-¬¬₍₋₁₎_ : {l : Level} (P : Prop l) → Prop l
-¬¬₍₋₁₎_ = double-negation-Prop
+¬¬'_ : {l : Level} (P : Prop l) → Prop l
+¬¬'_ = double-negation-Prop
 ```
 
 ### Double negations of classical laws

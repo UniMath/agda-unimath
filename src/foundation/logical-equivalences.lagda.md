@@ -77,10 +77,10 @@ module _
   pr1 iff-Prop = type-iff-Prop
   pr2 iff-Prop = is-prop-iff-Prop
 
-  infix 6 _↔₍₋₁₎_
+  infix 6 _⇔_
 
-  _↔₍₋₁₎_ : Prop (l1 ⊔ l2)
-  _↔₍₋₁₎_ = iff-Prop
+  _⇔_ : Prop (l1 ⊔ l2)
+  _⇔_ = iff-Prop
 ```
 
 ### The identity logical equivalence
@@ -146,7 +146,7 @@ module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  equiv-iff' : type-Prop (P ↔₍₋₁₎ Q) → (type-Prop P ≃ type-Prop Q)
+  equiv-iff' : type-Prop (P ⇔ Q) → (type-Prop P ≃ type-Prop Q)
   pr1 (equiv-iff' t) = pr1 t
   pr2 (equiv-iff' t) = is-equiv-is-prop (pr2 P) (pr2 Q) (pr2 t)
 
