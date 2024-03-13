@@ -7,11 +7,11 @@ module foundation.unique-existence where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import foundation.torsorial-type-families
-open import foundation-core.propositions
 open import foundation-core.function-types
+open import foundation-core.propositions
 ```
 
 </details>

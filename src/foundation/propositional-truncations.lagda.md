@@ -363,7 +363,7 @@ abstract
   is-equiv-map-distributive-trunc-product-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-equiv (map-distributive-trunc-product-Prop {A = A} {B = B})
-  is-equiv-map-distributive-trunc-product-Prop {l1} {l2} {A} {B} =
+  is-equiv-map-distributive-trunc-product-Prop =
     is-equiv-is-prop
       ( is-prop-type-trunc-Prop)
       ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
@@ -380,7 +380,7 @@ abstract
   is-equiv-map-inv-distributive-trunc-product-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-equiv (map-inv-distributive-trunc-product-Prop {A = A} {B = B})
-  is-equiv-map-inv-distributive-trunc-product-Prop {l1} {l2} {A} {B} =
+  is-equiv-map-inv-distributive-trunc-product-Prop =
     is-equiv-is-prop
       ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
       ( is-prop-type-trunc-Prop)
@@ -432,13 +432,13 @@ module _
         map-trunc-Prop-diagonal-coproduct
 
   equiv-trunc-Prop-diagonal-coproduct :
-    (type-trunc-Prop (A + A)) ≃ type-trunc-Prop A
+    type-trunc-Prop (A + A) ≃ type-trunc-Prop A
   pr1 equiv-trunc-Prop-diagonal-coproduct = map-trunc-Prop-diagonal-coproduct
   pr2 equiv-trunc-Prop-diagonal-coproduct =
     is-equiv-map-trunc-Prop-diagonal-coproduct
 
   inv-equiv-trunc-Prop-diagonal-coproduct :
-    (type-trunc-Prop A) ≃ type-trunc-Prop (A + A)
+    type-trunc-Prop A ≃ type-trunc-Prop (A + A)
   pr1 inv-equiv-trunc-Prop-diagonal-coproduct =
     map-inv-trunc-Prop-diagonal-coproduct
   pr2 inv-equiv-trunc-Prop-diagonal-coproduct =
@@ -451,3 +451,7 @@ The following table gives an overview of basic constructions in propositional
 logic and related considerations.
 
 {{#include tables/propositional-logic.md}}
+
+## External links
+
+- [bracket type](https://ncatlab.org/nlab/show/bracket+type) at $n$Lab
