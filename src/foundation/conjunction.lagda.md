@@ -258,3 +258,5 @@ logic and related considerations.
 
 - [logical conjunction](https://ncatlab.org/nlab/show/logical+conjunction) at
   $n$Lab
+- [Logical conjunction](https://en.wikipedia.org/wiki/Logical_conjunction) at
+  Wikipedia

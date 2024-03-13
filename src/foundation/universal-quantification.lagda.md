@@ -34,15 +34,6 @@ is the [proposition](foundation-core.propositions.md) that there
 [merely exists](foundation.inhabited-types.md) a proof of `P x` for every `x` in
 `A`.
 
-More generally, given any type family `B : A → 𝒰`, we can consider universally
-quantifying over it by reflecting into the
-[subuniverse](foundation.subuniverses.md) of propositions via the
-[propositional truncation](foundation.propositional-truncations.md)
-
-```text
-  ∀ (x : A) ║ B x ║₋₁ .
-```
-
 **Notation.** Because of syntactic limitations of the Agda language, we use the
 notation `∀'` for the universal quantification in formalizations.
 
@@ -66,37 +57,11 @@ module _
   is-prop-universal-quantification-Prop =
     is-prop-type-Prop universal-quantification-Prop
 
-  ∀-Prop : Prop (l1 ⊔ l2)
-  ∀-Prop = universal-quantification-Prop
-
   for-all : UU (l1 ⊔ l2)
   for-all = type-universal-quantification-Prop
 
   ∀₍₋₁₎ : Prop (l1 ⊔ l2)
   ∀₍₋₁₎ = universal-quantification-Prop
-```
-
-### Universal quantification over arbitrary type families
-
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
-  where
-
-  universal-quantification-prop-Type : Prop (l1 ⊔ l2)
-  universal-quantification-prop-Type =
-    universal-quantification-Prop A (trunc-Prop ∘ B)
-
-  universal-quantification-Type : UU (l1 ⊔ l2)
-  universal-quantification-Type = type-Prop universal-quantification-prop-Type
-
-  is-prop-universal-quantification-Type :
-    is-prop universal-quantification-Type
-  is-prop-universal-quantification-Type =
-    is-prop-type-Prop universal-quantification-prop-Type
-
-  ∀' : UU (l1 ⊔ l2)
-  ∀' = universal-quantification-Type
 ```
 
 ### The universal property of universal quantification
@@ -159,3 +124,5 @@ module _
 
 - [universal quantifier](https://ncatlab.org/nlab/show/universal+quantifier) at
   $n$Lab
+- [Universal quantification](https://en.wikipedia.org/wiki/Universal_quantification)
+  at Wikipedia

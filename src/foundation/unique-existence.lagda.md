@@ -22,8 +22,8 @@ open import foundation-core.propositions
 ## Idea
 
 Given a predicate `P` on `A` we say there
-{{#concept "uniquely exists" Disambiguation="in a subtype" Agda=∃!₍₋₁₎}} _an
-`x : A` such that `P x`_, if the [subtype](foundation-core.subtypes.md)
+{{#concept "uniquely exists" Disambiguation="in a subtype" WDID=Q2502253 Agda=∃!₍₋₁₎}}
+_an `x : A` such that `P x`_, if the [subtype](foundation-core.subtypes.md)
 `Σ (x : A), (P x)` is [contractible](foundation-core.contractible-types.md).
 
 More generally, given a type family `B : A → 𝒰` we say there
@@ -106,3 +106,5 @@ module _
 
 - [uniqueness quantifier](https://ncatlab.org/nlab/show/uniqueness+quantifier)
   at $n$Lab
+- [Uniqueness quantification](https://en.wikipedia.org/wiki/Uniqueness_quantification)
+  at Wikipedia

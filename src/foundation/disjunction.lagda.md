@@ -341,3 +341,9 @@ The following table gives an overview of basic constructions in propositional
 logic and related considerations.
 
 {{#include tables/propositional-logic.md}}
+
+## External links
+
+- [disjunction](https://ncatlab.org/nlab/show/disjunction) at $n$Lab
+- [Logical disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) at
+  Wikipedia
