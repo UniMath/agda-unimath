@@ -79,7 +79,7 @@ is-nilpotent-element-neg-Ring R {x} H =
   apply-universal-property-trunc-Prop H
     ( is-nilpotent-element-ring-Prop R (neg-Ring R x))
     ( λ (n , p) →
-      intro-∃ n
+      intro-exists n
         ( ( power-neg-Ring R n x) ∙
           ( ( ap (mul-Ring R (power-Ring R n (neg-one-Ring R))) p) ∙
             ( right-zero-law-mul-Ring R (power-Ring R n (neg-one-Ring R))))))

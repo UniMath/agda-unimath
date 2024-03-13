@@ -80,7 +80,8 @@ data
     {n : ℕ} {X : UU l} (Y : X → Bounded-𝕍 l n) → Bounded-𝕍 l (succ-ℕ n)
 
 Bounded-𝕍' : (l : Level) → UU (lsuc l)
-Bounded-𝕍' l = Σ (𝕍 l) (λ X → ∃ ℕ (λ n → is-of-natural-height-𝕍 n X))
+Bounded-𝕍' l =
+  Σ (𝕍 l) (λ X → exists-type-family ℕ (λ n → is-of-natural-height-𝕍 n X))
 ```
 
 ## Properties

@@ -13,6 +13,7 @@ open import elementary-number-theory.rational-numbers
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.complements-subtypes
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -128,13 +129,15 @@ module _
 
   is-rounded-lower-cut-ℝ :
     (q : ℚ) →
-    is-in-lower-cut-ℝ q ↔ ∃ ℚ (λ r → (le-ℚ q r) × (is-in-lower-cut-ℝ r))
+    is-in-lower-cut-ℝ q ↔
+    exists-type-family ℚ (λ r → (le-ℚ q r) × (is-in-lower-cut-ℝ r))
   is-rounded-lower-cut-ℝ =
     pr1 (pr1 (pr2 is-dedekind-cut-cut-ℝ))
 
   is-rounded-upper-cut-ℝ :
     (r : ℚ) →
-    is-in-upper-cut-ℝ r ↔ ∃ ℚ (λ q → (le-ℚ q r) × (is-in-upper-cut-ℝ q))
+    is-in-upper-cut-ℝ r ↔
+    exists-type-family ℚ (λ q → (le-ℚ q r) × (is-in-upper-cut-ℝ q))
   is-rounded-upper-cut-ℝ =
     pr2 (pr1 (pr2 is-dedekind-cut-cut-ℝ))
 
@@ -290,8 +293,7 @@ module _
   subset-lower-cut-lower-complement-upper-cut-ℝ :
     lower-complement-upper-cut-ℝ x ⊆ lower-cut-ℝ x
   subset-lower-cut-lower-complement-upper-cut-ℝ p =
-    elim-exists-Prop
-      ( is-lower-complement-upper-cut-ℝ-Prop x p)
+    elim-exists
       ( lower-cut-ℝ x p)
       ( λ q I →
         map-right-unit-law-disjunction-is-empty-Prop
@@ -303,12 +305,10 @@ module _
   subset-lower-complement-upper-cut-lower-cut-ℝ :
     lower-cut-ℝ x ⊆ lower-complement-upper-cut-ℝ x
   subset-lower-complement-upper-cut-lower-cut-ℝ p H =
-    elim-exists-Prop
-      ( λ q → (le-ℚ-Prop p q) ∧₍₋₁₎ (lower-cut-ℝ x q))
+    elim-exists
       ( lower-complement-upper-cut-ℝ x p)
       ( λ q I →
         intro-exists
-          ( is-lower-complement-upper-cut-ℝ-Prop x p)
           ( q)
           ( map-product
             ( id)
@@ -350,8 +350,7 @@ module _
   subset-upper-cut-upper-complement-lower-cut-ℝ :
     upper-complement-lower-cut-ℝ x ⊆ upper-cut-ℝ x
   subset-upper-cut-upper-complement-lower-cut-ℝ q =
-    elim-exists-Prop
-      ( is-upper-complement-lower-cut-ℝ-Prop x q)
+    elim-exists
       ( upper-cut-ℝ x q)
       ( λ p I →
         map-left-unit-law-disjunction-is-empty-Prop
@@ -363,12 +362,10 @@ module _
   subset-upper-complement-lower-cut-upper-cut-ℝ :
     upper-cut-ℝ x ⊆ upper-complement-lower-cut-ℝ x
   subset-upper-complement-lower-cut-upper-cut-ℝ q H =
-    elim-exists-Prop
-      ( λ p → (le-ℚ-Prop p q) ∧₍₋₁₎ (upper-cut-ℝ x p))
+    elim-exists
       ( upper-complement-lower-cut-ℝ x q)
       ( λ p I →
         intro-exists
-          ( is-upper-complement-lower-cut-ℝ-Prop x q)
           ( p)
           ( map-product
             ( id)
@@ -401,10 +398,9 @@ module _
       ( eq-lower-cut-lower-complement-upper-cut-ℝ x)
       ( eq-lower-cut-lower-complement-upper-cut-ℝ y)
       ( λ p →
-        elim-exists-Prop
-          ( is-lower-complement-upper-cut-ℝ-Prop x p)
+        elim-exists
           ( lower-complement-upper-cut-ℝ y p)
-          ( λ q → intro-∃ q ∘ tot (λ _ K → K ∘ H q)))
+          ( λ q → intro-exists q ∘ tot (λ _ K → K ∘ H q)))
 
   subset-upper-cut-lower-cut-ℝ :
     lower-cut-ℝ x ⊆ lower-cut-ℝ y → upper-cut-ℝ y ⊆ upper-cut-ℝ x
@@ -414,10 +410,9 @@ module _
       ( eq-upper-cut-upper-complement-lower-cut-ℝ y)
       ( eq-upper-cut-upper-complement-lower-cut-ℝ x)
       ( λ q →
-        elim-exists-Prop
-          ( is-upper-complement-lower-cut-ℝ-Prop y q)
+        elim-exists
           ( upper-complement-lower-cut-ℝ x q)
-          ( λ p → intro-∃ p ∘ tot (λ _ K → K ∘ H p)))
+          ( λ p → intro-exists p ∘ tot (λ _ K → K ∘ H p)))
 
 module _
   {l : Level} (x y : ℝ l)

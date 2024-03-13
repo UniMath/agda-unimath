@@ -169,7 +169,8 @@ module _
   is-equivalence-class-Decidable-equivalence-relation :
     decidable-subtype l2 X → UU (l1 ⊔ lsuc l2)
   is-equivalence-class-Decidable-equivalence-relation P =
-    ∃ X (λ x → P ＝ decidable-relation-Decidable-equivalence-relation R x)
+    exists-type-family X
+      ( λ x → P ＝ decidable-relation-Decidable-equivalence-relation R x)
 
   equivalence-class-Decidable-equivalence-relation : UU (l1 ⊔ lsuc l2)
   equivalence-class-Decidable-equivalence-relation =
@@ -180,7 +181,7 @@ module _
   pr1 (class-Decidable-equivalence-relation x) =
     decidable-relation-Decidable-equivalence-relation R x
   pr2 (class-Decidable-equivalence-relation x) =
-    intro-∃ x refl
+    intro-exists x refl
 
   emb-equivalence-class-Decidable-equivalence-relation :
     equivalence-class-Decidable-equivalence-relation ↪ decidable-subtype l2 X

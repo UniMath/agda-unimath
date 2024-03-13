@@ -49,7 +49,7 @@ module _
 
   is-nontrivial-prop-Group : Prop l1
   is-nontrivial-prop-Group =
-    ∃-Prop (type-Group G) (λ g → unit-Group G ≠ g)
+    exists-type-family-Prop (type-Group G) (λ g → unit-Group G ≠ g)
 
   is-nontrivial-Group : UU l1
   is-nontrivial-Group =

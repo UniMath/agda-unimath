@@ -59,14 +59,12 @@ is-dedekind-cut-le-ℚ x =
   ( left-∃-le-ℚ x , right-∃-le-ℚ x) ,
   ( ( λ (q : ℚ) →
       dense-le-ℚ q x ,
-      elim-exists-Prop
-        ( λ r → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop r x))
+      elim-exists
         ( le-ℚ-Prop q x)
         ( λ r (H , H') → transitive-le-ℚ q r x H H')) ,
     ( λ (r : ℚ) →
       α x r ∘ dense-le-ℚ x r ,
-      elim-exists-Prop
-        ( λ q → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop x q))
+      elim-exists
         ( le-ℚ-Prop x r)
         ( λ q (H , H') → transitive-le-ℚ x q r H' H))) ,
   ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H') ,
@@ -74,20 +72,16 @@ is-dedekind-cut-le-ℚ x =
   where
     α :
       (a b : ℚ) →
-      ∃ ℚ (λ r → le-ℚ a r × le-ℚ r b) →
-      ∃ ℚ (λ r → le-ℚ r b × le-ℚ a r)
+      exists-type-family ℚ (λ r → le-ℚ a r × le-ℚ r b) →
+      exists-type-family ℚ (λ r → le-ℚ r b × le-ℚ a r)
     α a b =
-      elim-exists-Prop
-        ( ( λ r →
-            product-Prop
-              ( le-ℚ-Prop a r)
-              ( le-ℚ-Prop r b)))
+      elim-exists
         ( exists-Prop ℚ
           ( λ r →
             product-Prop
               ( le-ℚ-Prop r b)
               ( le-ℚ-Prop a r)))
-        ( λ r ( p , q) → intro-∃ r ( q , p))
+        ( λ r ( p , q) → intro-exists r ( q , p))
 ```
 
 ### The canonical map from `ℚ` to `ℝ`

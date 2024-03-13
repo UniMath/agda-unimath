@@ -512,9 +512,8 @@ module _
   share-common-element-block-partition-Prop :
     (C : block-partition P) → Prop (l1 ⊔ l2)
   share-common-element-block-partition-Prop C =
-    ∃-Prop A
-      ( λ a →
-        is-in-block-partition P B a × is-in-block-partition P C a)
+    exists-type-family-Prop A
+      ( λ a → is-in-block-partition P B a × is-in-block-partition P C a)
 
   share-common-element-block-partition :
     (C : block-partition P) → UU (l1 ⊔ l2)

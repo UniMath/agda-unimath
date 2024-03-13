@@ -29,7 +29,7 @@ An element `x` of a [group](group-theory.groups.md) `G` is said to be a
 **torsion element** if
 
 ```text
-  ∃ (k : nonzero-ℤ), xᵏ ＝ 1.
+  exists-type-family (k : nonzero-ℤ), xᵏ ＝ 1.
 ```
 
 Note that the condition of being a torsion element is slightly weaker than the
@@ -54,7 +54,7 @@ module _
 
   is-torsion-element-prop-Group : Prop l1
   is-torsion-element-prop-Group =
-    ∃-Prop
+    exists-type-family-Prop
       ( nonzero-ℤ)
       ( λ k → integer-power-Group G (int-nonzero-ℤ k) x ＝ unit-Group G)
 
@@ -88,7 +88,7 @@ module _
 
   is-torsion-element-unit-Group : is-torsion-element-Group G (unit-Group G)
   is-torsion-element-unit-Group =
-    intro-∃
+    intro-exists
       ( one-nonzero-ℤ)
       ( integer-power-unit-Group G one-ℤ)
 

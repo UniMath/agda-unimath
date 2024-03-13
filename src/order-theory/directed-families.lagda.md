@@ -38,7 +38,7 @@ is-directed-family-Poset-Prop P I x =
       Π-Prop
         ( type-Inhabited-Type I)
         ( λ j →
-          ∃-Prop
+          exists-type-family-Prop
             ( type-Inhabited-Type I)
             ( λ k → leq-Poset P (x i) (x k) × leq-Poset P (x j) (x k))))
 

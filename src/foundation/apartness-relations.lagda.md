@@ -155,7 +155,7 @@ module _
   rel-apart-function-into-Type-With-Apartness :
     Relation-Prop (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
   rel-apart-function-into-Type-With-Apartness f g =
-    ∃-Prop X (λ x → apart-Type-With-Apartness Y (f x) (g x))
+    exists-Prop X (λ x → rel-apart-Type-With-Apartness Y (f x) (g x))
 
   apart-function-into-Type-With-Apartness :
     Relation (l1 ⊔ l3) (X → type-Type-With-Apartness Y)

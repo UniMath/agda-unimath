@@ -179,7 +179,7 @@ is-generating-element-one-ℤ-Mod n =
 is-cyclic-ℤ-Mod-Group :
   ( n : ℕ) → is-cyclic-Group (ℤ-Mod-Group n)
 is-cyclic-ℤ-Mod-Group n =
-  intro-∃
+  intro-exists
     ( one-ℤ-Mod n)
     ( is-generating-element-one-ℤ-Mod n)
 

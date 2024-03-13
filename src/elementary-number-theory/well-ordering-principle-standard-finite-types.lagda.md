@@ -180,7 +180,7 @@ well-ordering-principle-Σ-Fin (succ-ℕ k) {P} d (pair (inr star) p)
 
 well-ordering-principle-∃-Fin :
   {l : Level} (k : ℕ) (P : decidable-subtype l (Fin k)) →
-  ∃ (Fin k) (is-in-decidable-subtype P) →
+  exists-type-family (Fin k) (is-in-decidable-subtype P) →
   minimal-element-Fin k (is-in-decidable-subtype P)
 well-ordering-principle-∃-Fin k P H =
   apply-universal-property-trunc-Prop H

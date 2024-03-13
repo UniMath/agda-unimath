@@ -56,7 +56,8 @@ module _
 
   is-equivalence-class-Prop : subtype l2 A → Prop (l1 ⊔ l2)
   is-equivalence-class-Prop P =
-    ∃-Prop A (λ x → has-same-elements-subtype P (prop-equivalence-relation R x))
+    exists-type-family-Prop A
+      ( λ x → has-same-elements-subtype P (prop-equivalence-relation R x))
 
   is-equivalence-class : subtype l2 A → UU (l1 ⊔ l2)
   is-equivalence-class P = type-Prop (is-equivalence-class-Prop P)
@@ -246,7 +247,7 @@ module _
   share-common-element-equivalence-class-Prop :
     (C D : equivalence-class R) → Prop (l1 ⊔ l2)
   share-common-element-equivalence-class-Prop C D =
-    ∃-Prop A
+    exists-type-family-Prop A
       ( λ x → is-in-equivalence-class R C x × is-in-equivalence-class R D x)
 
   share-common-element-equivalence-class :

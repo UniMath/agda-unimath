@@ -164,18 +164,12 @@ module _
           ( 𝕎 A B)
           ( λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → α b ≼-𝕎-Prop v))
       f (pair c K) =
-        intro-exists
-          ( λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → α b ≼-𝕎-Prop v))
-          ( β c)
-          ( intro-exists
-            ( λ hβc → α b ≼-𝕎-Prop β c)
-            ( pair c refl)
-            ( K))
+        intro-exists (β c) ( intro-exists (pair c refl) K)
 
   ≼-strong-≼-𝕎 : {x y : 𝕎 A B} → (x strong-≼-𝕎 y) → (x ≼-𝕎 y)
   ≼-strong-≼-𝕎 {tree-𝕎 x α} {tree-𝕎 y β} H b =
     apply-universal-property-trunc-Prop
-      ( H (α b) (pair b refl))
+      ( H (α b) (b , refl))
       ( exists-Prop (B y) (λ c → α b ≼-𝕎-Prop β c))
       ( f)
     where
@@ -188,8 +182,10 @@ module _
           ( exists-Prop (B y) (λ c → α b ≼-𝕎-Prop β c))
           ( g)
       where
-      g : (v ∈-𝕎 tree-𝕎 y β) × (α b ≼-𝕎 v) → ∃ (B y) (λ c → α b ≼-𝕎 β c)
-      g (pair (pair c p) M) = intro-∃ c (tr (λ t → α b ≼-𝕎 t) (inv p) M)
+      g :
+        (v ∈-𝕎 tree-𝕎 y β) × (α b ≼-𝕎 v) →
+        exists-type-family (B y) (λ c → α b ≼-𝕎 β c)
+      g (pair (pair c p) M) = intro-exists c (tr (λ t → α b ≼-𝕎 t) (inv p) M)
 ```
 
 ### If `x ∈ y` then the rank of `x` is at most the rank of `y`
@@ -202,7 +198,6 @@ module _
   ≼-∈-𝕎 : {x y : 𝕎 A B} → (x ∈-𝕎 y) → (x ≼-𝕎 y)
   ≼-∈-𝕎 {tree-𝕎 x α} {tree-𝕎 y β} (pair v p) u =
     intro-exists
-      ( λ z → α u ≼-𝕎-Prop β z)
       ( v)
       ( tr
         ( λ t → α u ≼-𝕎 t)
@@ -307,7 +302,6 @@ module _
       g : Σ (Σ (𝕎 A B) (λ w → w ∈-𝕎 z)) (λ t → y ≼-𝕎 pr1 t) → x ≺-𝕎 z
       g (pair (pair v P) Q) =
         intro-exists
-          ( λ t → x ≼-𝕎-Prop (pr1 t))
           ( pair v P)
           ( transitive-≼-𝕎 {x = x} {w} {v} M
             ( transitive-≼-𝕎 {x = w} {y} {v} (≼-∈-𝕎 L) Q))

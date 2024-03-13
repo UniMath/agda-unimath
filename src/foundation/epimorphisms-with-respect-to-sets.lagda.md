@@ -100,7 +100,7 @@ abstract
     g : B → Prop (l1 ⊔ l2)
     g y = raise-unit-Prop (l1 ⊔ l2)
     h : B → Prop (l1 ⊔ l2)
-    h y = ∃-Prop A (λ x → f x ＝ y)
+    h y = exists-type-family-Prop A (λ x → f x ＝ y)
 ```
 
 ### There is at most one extension of a map into a set along a surjection

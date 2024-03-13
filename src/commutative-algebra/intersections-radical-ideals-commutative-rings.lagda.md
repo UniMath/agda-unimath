@@ -177,7 +177,7 @@ module _
             ( intersection-ideal-Commutative-Ring A I J)
             ( x))
           ( λ (m , K') →
-            intro-∃
+            intro-exists
               ( add-ℕ n m)
               ( ( is-closed-under-eq-ideal-Commutative-Ring A I
                   ( is-closed-under-right-multiplication-ideal-Commutative-Ring
@@ -209,7 +209,8 @@ module _
         ( ideal-radical-of-ideal-Commutative-Ring A I)
         ( ideal-radical-of-ideal-Commutative-Ring A J)
         ( x))
-      ( λ (n , H' , K') → (intro-∃ n H' , intro-∃ n K'))
+      ( λ (n , H' , K') →
+        ( intro-exists n H' , intro-exists n K'))
 
   preserves-intersection-radical-of-ideal-Commutative-Ring :
     ( intersection-ideal-Commutative-Ring A

@@ -187,8 +187,8 @@ module _
   (x : ℚ)
   where
 
-  left-∃-le-ℚ : ∃ ℚ (λ q → le-ℚ q x)
-  left-∃-le-ℚ = intro-∃
+  left-∃-le-ℚ : exists-type-family ℚ (λ q → le-ℚ q x)
+  left-∃-le-ℚ = intro-exists
     ( in-fraction-ℤ frac)
     ( left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
       ( le-fraction-le-numerator-fraction-ℤ
@@ -200,8 +200,8 @@ module _
     frac : fraction-ℤ
     frac = pred-ℤ (numerator-ℚ x) , positive-denominator-ℚ x
 
-  right-∃-le-ℚ : ∃ ℚ (λ r → le-ℚ x r)
-  right-∃-le-ℚ = intro-∃
+  right-∃-le-ℚ : exists-type-family ℚ (λ r → le-ℚ x r)
+  right-∃-le-ℚ = intro-exists
     ( in-fraction-ℤ frac)
     ( right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
       ( le-fraction-le-numerator-fraction-ℤ
@@ -275,9 +275,9 @@ module _
   (x y : ℚ) (H : le-ℚ x y)
   where
 
-  dense-le-ℚ : ∃ ℚ (λ r → le-ℚ x r × le-ℚ r y)
+  dense-le-ℚ : exists-type-family ℚ (λ r → le-ℚ x r × le-ℚ r y)
   dense-le-ℚ =
-    intro-∃
+    intro-exists
       ( mediant-ℚ x y)
       ( le-left-mediant-ℚ x y H , le-right-mediant-ℚ x y H)
 ```
