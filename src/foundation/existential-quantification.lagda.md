@@ -7,6 +7,7 @@ module foundation.existential-quantification where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
@@ -14,6 +15,7 @@ open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
@@ -34,40 +36,42 @@ quantifications are interpreted as propositions.
 
 ## Definition
 
-### Existential quantification for families of propositions
+### Existential quantification on arbitrary type families
 
 ```agda
-exists-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
-exists-Prop {l1} {l2} A P = trunc-Prop (Σ A (λ x → type-Prop (P x)))
+module _
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
+  where
 
-exists :
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → UU (l1 ⊔ l2)
-exists A P = type-Prop (exists-Prop A P)
+  ∃-Prop : Prop (l1 ⊔ l2)
+  ∃-Prop = trunc-Prop (Σ A B)
 
-abstract
-  is-prop-exists :
-    {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → is-prop (exists A P)
-  is-prop-exists A P = is-prop-type-Prop (exists-Prop A P)
+  ∃ : UU (l1 ⊔ l2)
+  ∃ = type-Prop ∃-Prop
 
-∃₍₋₁₎ : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
-∃₍₋₁₎ = exists-Prop
+  is-prop-∃ : is-prop ∃
+  is-prop-∃ = is-prop-type-Prop ∃-Prop
 ```
 
-### Existential quantification of arbitrary type families
+### Existential quantification on predicates
 
 ```agda
-∃-Prop :
-  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → Prop (l1 ⊔ l2)
-∃-Prop A B = trunc-Prop (Σ A B)
+module _
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
+  where
 
-∃ :
-  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
-∃ A B = type-Prop (∃-Prop A B)
+  exists-Prop : Prop (l1 ⊔ l2)
+  exists-Prop = ∃-Prop A (type-Prop ∘ P)
 
-is-prop-∃ :
-  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → is-prop (∃ A B)
-is-prop-∃ A B = is-prop-type-Prop (∃-Prop A B)
+  exists : UU (l1 ⊔ l2)
+  exists = type-Prop exists-Prop
+
+  abstract
+    is-prop-exists : is-prop exists
+    is-prop-exists = is-prop-type-Prop exists-Prop
+
+  ∃₍₋₁₎ : Prop (l1 ⊔ l2)
+  ∃₍₋₁₎ = exists-Prop
 ```
 
 ## Properties
@@ -75,46 +79,50 @@ is-prop-∃ A B = is-prop-type-Prop (∃-Prop A B)
 ### The introduction rule for existential quantification
 
 ```agda
-intro-exists :
-  {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) →
-  (x : A) → type-Prop (P x) → exists A P
-intro-exists P x p = unit-trunc-Prop (pair x p)
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
 
-intro-∃ :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a) →
-  ∃ A B
-intro-∃ a b = unit-trunc-Prop (pair a b)
+  intro-∃ : {B : A → UU l2} (a : A) (b : B a) → ∃ A B
+  intro-∃ a b = unit-trunc-Prop (a , b)
+
+  intro-exists : (P : A → Prop l2) (x : A) → type-Prop (P x) → exists A P
+  intro-exists P = intro-∃
 ```
 
 ### The elimination rule and the universal property of existential quantification
 
+The
+{{#concept "universal property" Disambiguation="of existential quantification"}}
+of existential quantification states `∃ A P` is the least upper bound on the
+family `P` in the
+[poset of propositions](foundation.large-locale-of-propositions.md).
+
 ```agda
-ev-intro-exists-Prop :
-  {l1 l2 l3 : Level} {A : UU l1} (P : A → Prop l2) (Q : Prop l3) →
-  type-hom-Prop (exists-Prop A P) Q → (x : A) → type-hom-Prop (P x) Q
-ev-intro-exists-Prop P Q H x p = H (intro-exists P x p)
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (P : A → Prop l2) (Q : Prop l3)
+  where
 
-elim-exists-Prop :
-  {l1 l2 l3 : Level} {A : UU l1} (P : A → Prop l2) (Q : Prop l3) →
-  ((x : A) → type-hom-Prop (P x) Q) → type-hom-Prop (exists-Prop A P) Q
-elim-exists-Prop P Q f =
-  map-universal-property-trunc-Prop Q (ind-Σ f)
+  ev-intro-exists-Prop :
+    type-Prop (((∃₍₋₁₎ A P) →₍₋₁₎ Q) →₍₋₁₎ Π₍₋₁₎ A (λ x → (P x) →₍₋₁₎ Q))
+  ev-intro-exists-Prop H x p = H (intro-exists P x p)
 
-abstract
-  is-equiv-ev-intro-exists-Prop :
-    {l1 l2 l3 : Level} (A : UU l1) (P : A → Prop l2) (Q : Prop l3) →
-    is-equiv (ev-intro-exists-Prop P Q)
-  is-equiv-ev-intro-exists-Prop A P Q =
-    is-equiv-is-prop
-      ( is-prop-hom-Prop (exists-Prop A P) Q)
-      ( is-prop-Π ((λ x → is-prop-hom-Prop (P x) Q)))
-      ( elim-exists-Prop P Q)
+  elim-exists-Prop :
+    type-Prop (Π₍₋₁₎ A (λ x → (P x) →₍₋₁₎ Q) →₍₋₁₎ (∃₍₋₁₎ A P) →₍₋₁₎ Q)
+  elim-exists-Prop f =
+    map-universal-property-trunc-Prop Q (ind-Σ f)
 
-is-least-upper-bound-exists-Prop :
-  {l1 l2 l3 : Level} {A : UU l1} (P : A → Prop l2) (Q : Prop l3) →
-  ((a : A) → type-hom-Prop (P a) Q) ↔ type-hom-Prop (exists-Prop A P) Q
-pr1 (is-least-upper-bound-exists-Prop P Q) = elim-exists-Prop P Q
-pr2 (is-least-upper-bound-exists-Prop P Q) h a p = h (intro-∃ a p)
+  abstract
+    is-equiv-ev-intro-exists-Prop : is-equiv ev-intro-exists-Prop
+    is-equiv-ev-intro-exists-Prop =
+      is-equiv-Prop'
+        ( ∃₍₋₁₎ A P →₍₋₁₎ Q)
+        ( Π₍₋₁₎ A (λ x → P x →₍₋₁₎ Q))
+        ( elim-exists-Prop)
+
+  is-least-upper-bound-exists-Prop :
+    ((a : A) → type-hom-Prop (P a) Q) ↔ type-hom-Prop (exists-Prop A P) Q
+  is-least-upper-bound-exists-Prop = (elim-exists-Prop , ev-intro-exists-Prop)
 ```
 
 ### Conjunction distributes over existential quatification
@@ -124,28 +132,35 @@ module _
   {l1 l2 l3 : Level} (P : Prop l1) {A : UU l2} (Q : A → Prop l3)
   where
 
-  iff-distributive-product-exists-Prop :
-    type-iff-Prop
-      ( P ×₍₋₁₎ (∃₍₋₁₎ A Q))
-      ( ∃₍₋₁₎ A (λ a → P ×₍₋₁₎ Q a))
-  pr1 iff-distributive-product-exists-Prop (p , e) =
+  map-distributive-conjunction-exists-Prop :
+    type-Prop (P ∧₍₋₁₎ (∃₍₋₁₎ A Q) →₍₋₁₎ ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x))
+  map-distributive-conjunction-exists-Prop (p , e) =
     elim-exists-Prop Q
-      ( ∃₍₋₁₎ A (λ a → P ×₍₋₁₎ (Q a)))
+      ( ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x))
       ( λ x q → intro-∃ x (p , q))
       ( e)
-  pr2 iff-distributive-product-exists-Prop =
+
+  map-inv-distributive-conjunction-exists-Prop :
+    type-Prop (∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x) →₍₋₁₎ P ∧₍₋₁₎ (∃₍₋₁₎ A Q))
+  map-inv-distributive-conjunction-exists-Prop =
     elim-exists-Prop
-      ( λ x → P ×₍₋₁₎ Q x)
-      ( P ×₍₋₁₎ (∃₍₋₁₎ A Q))
+      ( λ x → P ∧₍₋₁₎ Q x)
+      ( P ∧₍₋₁₎ (∃₍₋₁₎ A Q))
       ( λ x (p , q) → (p , intro-∃ x q))
 
-  distributive-product-exists-Prop :
-    P ×₍₋₁₎ (∃₍₋₁₎ A Q) ＝ ∃₍₋₁₎ A (λ a → P ×₍₋₁₎ Q a)
-  distributive-product-exists-Prop =
+  iff-distributive-conjunction-exists-Prop :
+    type-Prop (P ∧₍₋₁₎ ∃₍₋₁₎ A Q ↔₍₋₁₎ ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x))
+  iff-distributive-conjunction-exists-Prop =
+    ( map-distributive-conjunction-exists-Prop ,
+      map-inv-distributive-conjunction-exists-Prop)
+
+  eq-distributive-conjunction-exists-Prop :
+    P ∧₍₋₁₎ (∃₍₋₁₎ A Q) ＝ ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x)
+  eq-distributive-conjunction-exists-Prop =
     eq-iff'
-      ( P ×₍₋₁₎ (∃₍₋₁₎ A Q))
-      ( ∃₍₋₁₎ A (λ a → P ×₍₋₁₎ Q a))
-      ( iff-distributive-product-exists-Prop)
+      ( P ∧₍₋₁₎ (∃₍₋₁₎ A Q))
+      ( ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x))
+      ( iff-distributive-conjunction-exists-Prop)
 ```
 
 ## Table of files about propositional logic
