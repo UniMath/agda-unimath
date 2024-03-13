@@ -210,8 +210,9 @@ module _
       ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
       ( inv (compute-swap-Fin-two-ℕ (one-Fin 1)))
       ( na)
+```
 
-{-
+```text
   eq-equiv-Prop
     ( ( ( equiv-coproduct
           ( ( ( left-unit-law-coproduct (type-Prop (P ×₍₋₁₎ (¬₍₋₁₎ Q)))) ∘e
@@ -283,7 +284,6 @@ module _
                   ( map-swap-2-Element-Type
                     ( pr1 (standard-unordered-pair P Q))
                     ( x)))))))))
--}
 ```
 
 ```agda

@@ -41,6 +41,27 @@ captured by the notion of [exclusive sum](foundation.exclusive-sum.md).
 
 ## Definitions
 
+### The exclusive disjunction of types
+
+We can generalize exclusive disjunction to arbitrary types, but in this case the
+"correct" definition requires us to propositionally truncate the types.
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  prop-xor : Prop (l1 ⊔ l2)
+  prop-xor = is-contr-Prop (A + B)
+
+  xor : UU (l1 ⊔ l2)
+  xor = type-Prop prop-xor
+
+  infixr 10 _⊻_
+  _⊻_ : UU (l1 ⊔ l2)
+  _⊻_ = xor
+```
+
 ### The exclusive disjunction of propositions
 
 ```agda
@@ -78,27 +99,6 @@ Note in particular that `⊻₍ₙ₎` should be read differently from the exclu
 operation on $n$-[truncated types](foundation-core.truncated-types.md), which
 has the same type signature, but whose underlying type is not generally
 $k$-truncated for any $k < n$.
-
-### The exclusive disjunction of types
-
-We can generalize exclusive disjunction to arbitrary types, but in this case the
-"correct" definition requires us to propositionally truncate the types.
-
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
-  where
-
-  prop-xor : Prop (l1 ⊔ l2)
-  prop-xor = xor-Prop (trunc-Prop A) (trunc-Prop B)
-
-  xor : UU (l1 ⊔ l2)
-  xor = type-Prop prop-xor
-
-  infixr 10 _⊻_
-  _⊻_ : UU (l1 ⊔ l2)
-  _⊻_ = xor
-```
 
 ## Properties
 
@@ -149,9 +149,19 @@ module _
       ( λ x → (y : type-Prop P + type-Prop Q) → x ＝ y))
 ```
 
+## See also
+
+- The indexed version of exclusive disjunction is
+  [unique existence](foundation.unique-existence.md).
+
 ## Table of files about propositional logic
 
 The following table gives an overview of basic constructions in propositional
 logic and related considerations.
 
 {{#include tables/propositional-logic.md}}
+
+## External links
+
+- [exclusive disjunction](https://ncatlab.org/nlab/show/exclusive+disjunction)
+  at $n$Lab
