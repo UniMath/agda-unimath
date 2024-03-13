@@ -17,7 +17,7 @@ open import commutative-algebra.subsets-commutative-rings
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.disjunction-propositions
+open import foundation.disjunction
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -164,9 +164,7 @@ is-radical-prime-ideal-Commutative-Ring R P x zero-ℕ p =
     ( p)
     ( x)
 is-radical-prime-ideal-Commutative-Ring R P x (succ-ℕ n) p =
-  rec-disjunction-Prop
-    ( subset-prime-ideal-Commutative-Ring R P (power-Commutative-Ring R n x))
-    ( subset-prime-ideal-Commutative-Ring R P x)
+  rec-disjunction
     ( subset-prime-ideal-Commutative-Ring R P x)
     ( is-radical-prime-ideal-Commutative-Ring R P x n)
     ( id)

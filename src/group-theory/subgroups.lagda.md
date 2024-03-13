@@ -13,7 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction-propositions
+open import foundation.disjunction
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -671,11 +671,7 @@ module _
 
   contains-unit-subgroup-Prop :
     contains-unit-subset-Group G subset-subgroup-Prop
-  contains-unit-subgroup-Prop =
-    inl-disjunction-Prop
-      ( Id-Prop (set-Group G) (unit-Group G) (unit-Group G))
-      ( P)
-      ( refl)
+  contains-unit-subgroup-Prop = inl-disjunction refl
 
   is-closed-under-multiplication-subgroup-Prop' :
     (x y : type-Group G) →

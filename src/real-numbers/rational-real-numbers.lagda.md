@@ -14,7 +14,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.disjunction-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
@@ -122,9 +121,7 @@ all-eq-is-rational-ℝ x p q H H' =
   left-case : le-ℚ p q → p ＝ q
   left-case I =
     ex-falso
-      ( rec-disjunction-Prop
-        ( lower-cut-ℝ x p)
-        ( upper-cut-ℝ x q)
+      ( rec-disjunction
         ( empty-Prop)
         ( pr1 H)
         ( pr2 H')
@@ -133,9 +130,7 @@ all-eq-is-rational-ℝ x p q H H' =
   right-case : le-ℚ q p → p ＝ q
   right-case I =
     ex-falso
-      ( rec-disjunction-Prop
-        ( lower-cut-ℝ x q)
-        ( upper-cut-ℝ x p)
+      ( rec-disjunction
         ( empty-Prop)
         ( pr1 H')
         ( pr2 H)
@@ -199,9 +194,7 @@ eq-real-rational-is-rational-ℝ x q H =
       ( λ r →
         pair
           ( λ I →
-            rec-disjunction-Prop
-              ( lower-cut-ℝ x r)
-              ( upper-cut-ℝ x q)
+            rec-disjunction
               ( lower-cut-ℝ x r)
               ( id)
               ( λ H' → ex-falso (pr2 H H'))

@@ -99,8 +99,8 @@ sup-has-least-upper-bound-family-of-elements-Large-Poset
   ( is-large-suplattice-Prop-Large-Locale {I = I} P) =
   exists-Prop I P
 is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
-  ( is-large-suplattice-Prop-Large-Locale {I = I} P) =
-  is-least-upper-bound-exists-Prop P
+  ( is-large-suplattice-Prop-Large-Locale {I = I} P) R =
+  inv-iff (up-exists R)
 ```
 
 ### The large frame of propositions

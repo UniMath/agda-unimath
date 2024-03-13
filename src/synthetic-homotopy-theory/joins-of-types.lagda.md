@@ -12,7 +12,6 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.disjunction-propositions
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -319,13 +318,13 @@ module _
   where
 
   cocone-disjunction : cocone pr1 pr2 (type-disjunction-Prop A B)
-  pr1 cocone-disjunction = inl-disjunction-Prop A B
-  pr1 (pr2 cocone-disjunction) = inr-disjunction-Prop A B
+  pr1 cocone-disjunction = inl-disjunction
+  pr1 (pr2 cocone-disjunction) = inr-disjunction
   pr2 (pr2 cocone-disjunction) (a , b) =
     eq-is-prop'
       ( is-prop-disjunction-Prop A B)
-      ( inl-disjunction-Prop A B a)
-      ( inr-disjunction-Prop A B b)
+      ( inl-disjunction a)
+      ( inr-disjunction b)
 
   map-disjunction-join-Prop : type-join-Prop A B → type-disjunction-Prop A B
   map-disjunction-join-Prop =
@@ -333,7 +332,7 @@ module _
 
   map-join-disjunction-Prop : type-disjunction-Prop A B → type-join-Prop A B
   map-join-disjunction-Prop =
-    rec-disjunction-Prop A B
+    rec-disjunction
       ( join-Prop A B)
       ( inl-join-Prop A B)
       ( inr-join-Prop A B)

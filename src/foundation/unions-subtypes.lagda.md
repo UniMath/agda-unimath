@@ -9,7 +9,7 @@ module foundation.unions-subtypes where
 ```agda
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
-open import foundation.disjunction-propositions
+open import foundation.disjunction
 open import foundation.large-locale-of-subtypes
 open import foundation.powersets
 open import foundation.propositional-truncations

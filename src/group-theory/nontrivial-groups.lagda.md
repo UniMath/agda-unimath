@@ -10,7 +10,7 @@ module group-theory.nontrivial-groups where
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction-propositions
+open import foundation.disjunction
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.existential-quantification
@@ -138,10 +138,7 @@ module _
                     ( f)
                     ( forward-implication
                       ( iff-eq (ap (λ T → subset-Subgroup G T x) α))
-                      ( inr-disjunction-Prop
-                        ( Id-Prop (set-Group G) _ _)
-                        ( P)
-                        ( p))))
+                      ( inr-disjunction p)))
                 ( λ q →
                   map-left-unit-law-disjunction-is-empty-Prop
                     ( Id-Prop (set-Group G) _ _)
@@ -149,10 +146,7 @@ module _
                     ( f)
                     ( backward-implication
                       ( iff-eq (ap (λ T → subset-Subgroup G T x) α))
-                      ( inr-disjunction-Prop
-                        ( Id-Prop (set-Group G) _ _)
-                        ( Q)
-                        ( q))))))
+                      ( inr-disjunction q)))))
 ```
 
 ### If the map `subgroup-Prop G : Prop lzero → Subgroup l1 G` is an embedding, then `G` is not a trivial group

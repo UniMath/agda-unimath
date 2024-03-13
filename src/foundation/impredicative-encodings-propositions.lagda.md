@@ -8,7 +8,7 @@ module foundation.impredicative-encodings-propositions where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.disjunction-propositions
+open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.homotopies
 open import foundation.logical-equivalences
@@ -136,9 +136,7 @@ map-inv-impredicative-disjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-impredicative-disjunction-Prop P1 P2 → type-disjunction-Prop P1 P2
 map-inv-impredicative-disjunction-Prop P1 P2 H =
-  H ( P1 ∨₍₋₁₎ P2)
-    ( inl-disjunction-Prop P1 P2)
-    ( inr-disjunction-Prop P1 P2)
+  H (P1 ∨₍₋₁₎ P2) (inl-disjunction) (inr-disjunction)
 
 equiv-impredicative-disjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →

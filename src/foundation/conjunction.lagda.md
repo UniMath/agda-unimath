@@ -26,7 +26,7 @@ open import foundation-core.propositions
 ## Idea
 
 The
-{{#concept "conjunction" Disambiguation="of propositions" Agda=conjunction-Prop}}
+{{#concept "conjunction" Disambiguation="of propositions" WDID=Q191081 Agda=conjunction-Prop}}
 `P ∧ Q` of two [propositions](foundation-core.propositions.md) `P` and `Q` is
 the proposition that both `P` and `Q` hold and thus defined by the
 [cartesian product](foundation-core.cartesian-product-types.md) of their
@@ -50,7 +50,8 @@ conjunction
   P <--- P ∧ Q ---> Q.
 ```
 
-In other words, we have an equivalence
+In other words, we have a
+[logical equivalence](foundation.logical-equivalences.md)
 
 $$
 (R → P) ∧ (R → Q) ↔ (R → P ∧ Q)

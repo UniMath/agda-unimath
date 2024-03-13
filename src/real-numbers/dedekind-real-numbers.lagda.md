@@ -17,7 +17,6 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.disjunction-propositions
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.existential-quantification
