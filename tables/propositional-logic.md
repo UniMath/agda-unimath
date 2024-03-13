@@ -11,12 +11,12 @@
 | Propositional extensionality                         | [`foundation.propositional-extensionality`](foundation.propositional-extensionality.md)                                 |
 | Mere logical consequences                            | [`foundation.mere-logical-consequences`](foundation.mere-logical-consequences.md)                                       |
 | Mere logical equivalences                            | [`foundation.mere-logical-equivalences`](foundation.mere-logical-equivalences.md)                                       |
-| Conjunction of types                                 | [`foundation.conjunction`](foundation.conjunction.md)                                                                   |
-| Conjunction of propositions                          | [`foundation.conjunction-propositions`](foundation.conjunction-propositions.md)                                         |
+| Conjunction                                          | [`foundation.conjunction`](foundation.conjunction.md)                                                                   |
 | Disjunction of types                                 | [`foundation.disjunction`](foundation.disjunction.md)                                                                   |
 | Disjunction of propositions                          | [`foundation.disjunction-propositions`](foundation.disjunction-propositions.md)                                         |
 | Exclusive disjunction                                | [`foundation.exclusive-disjunction`](foundation.exclusive-disjunction.md)                                               |
 | Existential quantification                           | [`foundation.existential-quantification`](foundation.existential-quantification.md)                                     |
+| Unique existence                                     | [`foundation.unique-existence`](foundation.unique-existence.md)                                                         |
 | Universal quantification                             | [`foundation.universal-quantification`](foundation.universal-quantification.md)                                         |
 | Negation                                             | [`foundation.negation`](foundation.negation.md)                                                                         |
 | Double negation                                      | [`foundation.double-negation`](foundation.double-negation.md)                                                           |

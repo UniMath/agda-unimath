@@ -27,6 +27,7 @@ operation on propositions in the first.
 | [Initial object](foundation-core.empty-types.md)                       | `empty`           | `empty-Prop`                                 |
 | [Terminal object](foundation.unit-type.md)                             | `unit`            | `unit-Prop`                                  |
 | [Existential quantification](foundation.existential-quantification.md) | `∃`               | `∃₍₋₁₎`                                      |
+| [Unique existential quantification](foundation.unique-existence.md)    | `∃!`              | `∃!₍₋₁₎`                                     |
 | [Universal quantification](foundation.universal-quantification.md)     | `∀'`              | `∀₍₋₁₎` (equivalent to `Π₍₋₁₎`)              |
 | [Mere logical consequence](foundation.mere-logical-consequences.md)    | `⇒`               | `⇒₍₋₁₎` (equivalent to `→₍₋₁₎`)              |
 | [Mere logical equivalence](foundation.mere-logical-equivalences.md)    | `⇔`               | `⇔₍₋₁₎` (equivalent to `↔₍₋₁₎`)              |
@@ -35,3 +36,14 @@ operation on propositions in the first.
 | [Exclusive disjunction](foundation.exclusive-disjunction.md)           | `⊻`               | `⊻₍₋₁₎` (equivalent to `exclusive-sum-Prop`) |
 | [Negation](foundation.negation.md)                                     | `¬`               | `¬₍₋₁₎`                                      |
 | [Double negation](foundation.double-negation.md)                       | `¬¬`              | `¬¬₍₋₁₎`                                     |
+
+There is another way to organize the these concepts
+
+| Name                       | Indexed | Binary          |
+| -------------------------- | ------- | --------------- |
+| Sum/constructive existence | `Σ`     | `+`             |
+| Existence                  | `∃`     | `∨`             |
+| Product                    | `Π`     | `×`             |
+| Conjunction                | `∀`     | `∧`             |
+| Unique existence           | `∃!`    | `⊻`             |
+| Exclusive sum              |         | `exclusive-sum` |
