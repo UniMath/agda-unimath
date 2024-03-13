@@ -172,6 +172,17 @@ pr1 raise-unit-Set = unit
 pr2 raise-unit-Set = is-set-unit
 ```
 
+### All parallel maps into `unit` are equal
+
+```agda
+module _
+  {l : Level} {A : UU l} {f g : A → unit}
+  where
+
+  eq-map-into-unit : f ＝ g
+  eq-map-into-unit = refl
+```
+
 ### The map `point x` is injective for every `x`
 
 ```agda

@@ -18,13 +18,13 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.factorization-operations-function-classes
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.factorizations-of-maps-function-classes
 open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.lifting-squares
+open import orthogonal-factorization-systems.lifting-structures-on-squares
 open import orthogonal-factorization-systems.wide-function-classes
 ```
 
@@ -61,9 +61,9 @@ module _
   is-prop-is-orthogonal-factorization-system :
     is-prop is-orthogonal-factorization-system
   is-prop-is-orthogonal-factorization-system =
-    is-prop-prod
+    is-prop-product
       ( is-prop-is-wide-function-class L)
-      ( is-prop-prod
+      ( is-prop-product
         ( is-prop-is-wide-function-class R)
         ( is-prop-unique-factorization-operation-function-class L R))
 
@@ -240,10 +240,7 @@ This remains to be shown.
 
 ## References
 
-- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
-  theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
-  ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
-  [DOI:10.23638/LMCS-16(1:2)2020](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
+{{#bibliography}} {{#reference RSS20}}
 
 ## External links
 

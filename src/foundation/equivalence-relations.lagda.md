@@ -126,24 +126,26 @@ module _
   is-block-partition-equivalence-relation Q =
     type-Prop (is-block-prop-partition-equivalence-relation Q)
 
-  is-partition-is-equivalence-class-inhabited-subtype-equivalence-relation :
-    is-partition (is-equivalence-class-inhabited-subtype-equivalence-relation R)
-  is-partition-is-equivalence-class-inhabited-subtype-equivalence-relation x =
-    is-contr-equiv
-      ( Σ ( Σ ( equivalence-class R)
-              ( λ C → is-in-equivalence-class R C x))
-          ( λ t → is-inhabited-subtype (subtype-equivalence-class R (pr1 t))))
-      ( ( equiv-right-swap-Σ) ∘e
-        ( equiv-Σ
-          ( λ Q → is-in-subtype (subtype-equivalence-class R (pr1 Q)) x)
-          ( equiv-right-swap-Σ)
-          ( λ Q → id-equiv)))
-      ( is-contr-Σ
-        ( is-torsorial-is-in-equivalence-class R x)
-        ( center-total-is-in-equivalence-class R x)
-        ( is-proof-irrelevant-is-prop
-          ( is-prop-type-trunc-Prop)
-          ( is-inhabited-subtype-equivalence-class R (class R x))))
+  abstract
+    is-partition-is-equivalence-class-inhabited-subtype-equivalence-relation :
+      is-partition
+        ( is-equivalence-class-inhabited-subtype-equivalence-relation R)
+    is-partition-is-equivalence-class-inhabited-subtype-equivalence-relation x =
+      is-contr-equiv
+        ( Σ ( Σ ( equivalence-class R)
+                ( λ C → is-in-equivalence-class R C x))
+            ( λ t → is-inhabited-subtype (subtype-equivalence-class R (pr1 t))))
+        ( ( equiv-right-swap-Σ) ∘e
+          ( equiv-Σ
+            ( λ Q → is-in-subtype (subtype-equivalence-class R (pr1 Q)) x)
+            ( equiv-right-swap-Σ)
+            ( λ Q → id-equiv)))
+        ( is-contr-Σ
+          ( is-torsorial-is-in-equivalence-class R x)
+          ( center-total-is-in-equivalence-class R x)
+          ( is-proof-irrelevant-is-prop
+            ( is-prop-type-trunc-Prop)
+            ( is-inhabited-subtype-equivalence-class R (class R x))))
 
   partition-equivalence-relation : partition l2 (l1 ⊔ l2) A
   pr1 partition-equivalence-relation =
@@ -333,79 +335,64 @@ module _
   {l1 l2 : Level} {A : UU l1} (P : partition l1 l2 A)
   where
 
-  is-block-is-equivalence-class-equivalence-relation-partition :
-    (Q : inhabited-subtype l1 A) →
-    is-equivalence-class
-      ( equivalence-relation-partition P)
-      ( subtype-inhabited-subtype Q) →
-    is-block-partition P Q
-  is-block-is-equivalence-class-equivalence-relation-partition Q H =
-    apply-universal-property-trunc-Prop H
-      ( subtype-partition P Q)
-      ( λ (a , K) →
-        tr
-          ( is-block-partition P)
-          ( inv
-            ( eq-has-same-elements-inhabited-subtype Q
-              ( inhabited-subtype-block-partition P (class-partition P a))
-              ( λ x →
-                logical-equivalence-reasoning
-                  is-in-inhabited-subtype Q x
-                    ↔ Σ ( block-partition P)
-                        ( λ B →
-                          is-in-block-partition P B a ×
-                          is-in-block-partition P B x)
-                      by K x
-                    ↔ is-in-block-partition P (class-partition P a) x
-                      by
-                      iff-equiv
-                        ( ( left-unit-law-Σ-is-contr
-                            ( is-contr-block-containing-element-partition P a)
-                            ( center-block-containing-element-partition P a)) ∘e
-                          ( inv-associative-Σ
-                            ( block-partition P)
-                            ( λ B → is-in-block-partition P B a)
-                            ( λ B → is-in-block-partition P (pr1 B) x))))))
-          ( is-block-class-partition P a))
-
-  is-equivalence-class-is-block-partition :
-    (Q : inhabited-subtype l1 A) →
-    is-block-partition P Q →
-    is-equivalence-class
-      ( equivalence-relation-partition P)
-      ( subtype-inhabited-subtype Q)
-  is-equivalence-class-is-block-partition Q H =
-    apply-universal-property-trunc-Prop
-      ( is-inhabited-subtype-inhabited-subtype Q)
-      ( is-equivalence-class-Prop
+  abstract
+    is-block-is-equivalence-class-equivalence-relation-partition :
+      (Q : inhabited-subtype l1 A) →
+      is-equivalence-class
         ( equivalence-relation-partition P)
-        ( subtype-inhabited-subtype Q))
-      ( λ (a , q) →
-        unit-trunc-Prop
-          ( pair
-            ( a)
-            ( λ x →
-              iff-equiv
-              ( equivalence-reasoning
-                is-in-inhabited-subtype Q x
-                  ≃ is-in-block-partition P (make-block-partition P Q H) x
-                    by
-                    compute-is-in-block-partition P Q H x
-                  ≃ Σ ( block-partition P)
-                      ( λ B →
-                        is-in-block-partition P B a ×
-                        is-in-block-partition P B x)
-                    by
-                    inv-equiv
-                      ( ( left-unit-law-Σ-is-contr
-                          ( is-contr-block-containing-element-partition P a)
-                          ( pair
-                            ( make-block-partition P Q H)
-                            ( make-is-in-block-partition P Q H a q))) ∘e
-                        ( inv-associative-Σ
-                          ( block-partition P)
-                          ( λ B → is-in-block-partition P B a)
-                          ( λ B → is-in-block-partition P (pr1 B) x)))))))
+        ( subtype-inhabited-subtype Q) →
+      is-block-partition P Q
+    is-block-is-equivalence-class-equivalence-relation-partition Q H =
+      apply-universal-property-trunc-Prop H
+        ( subtype-partition P Q)
+        ( λ (a , K) →
+          tr
+            ( is-block-partition P)
+            ( inv
+              ( eq-has-same-elements-inhabited-subtype Q
+                ( inhabited-subtype-block-partition P (class-partition P a))
+                ( λ x →
+                  ( iff-equiv
+                    ( ( left-unit-law-Σ-is-contr
+                        ( is-contr-block-containing-element-partition P a)
+                        ( center-block-containing-element-partition P a)) ∘e
+                      ( inv-associative-Σ
+                        ( block-partition P)
+                        ( λ B → is-in-block-partition P B a)
+                        ( λ B → is-in-block-partition P (pr1 B) x)))) ∘iff
+                  ( K x))))
+            ( is-block-class-partition P a))
+
+  abstract
+    is-equivalence-class-is-block-partition :
+      (Q : inhabited-subtype l1 A) →
+      is-block-partition P Q →
+      is-equivalence-class
+        ( equivalence-relation-partition P)
+        ( subtype-inhabited-subtype Q)
+    is-equivalence-class-is-block-partition Q H =
+      apply-universal-property-trunc-Prop
+        ( is-inhabited-subtype-inhabited-subtype Q)
+        ( is-equivalence-class-Prop
+          ( equivalence-relation-partition P)
+          ( subtype-inhabited-subtype Q))
+        ( λ (a , q) →
+          unit-trunc-Prop
+            ( pair
+              ( a)
+              ( λ x →
+                iff-equiv
+                ( ( inv-equiv
+                    ( ( left-unit-law-Σ-is-contr
+                        ( is-contr-block-containing-element-partition P a)
+                        ( pair
+                          ( make-block-partition P Q H)
+                          ( make-is-in-block-partition P Q H a q))) ∘e
+                      ( inv-associative-Σ
+                        ( block-partition P)
+                        ( λ B → is-in-block-partition P B a)
+                        ( λ B → is-in-block-partition P (pr1 B) x)))) ∘e
+                  ( compute-is-in-block-partition P Q H x)))))
 
   has-same-elements-partition-equivalence-relation-partition :
     has-same-elements-subtype
@@ -430,14 +417,15 @@ is-retraction-equivalence-relation-partition-equivalence-relation P =
 #### The map `equivalence-relation-partition` is an equivalence
 
 ```agda
-is-equiv-equivalence-relation-partition :
-  {l : Level} {A : UU l} →
-  is-equiv (equivalence-relation-partition {l} {l} {l} {A})
-is-equiv-equivalence-relation-partition =
-  is-equiv-is-invertible
-    partition-equivalence-relation
-    is-section-equivalence-relation-partition-equivalence-relation
-    is-retraction-equivalence-relation-partition-equivalence-relation
+abstract
+  is-equiv-equivalence-relation-partition :
+    {l : Level} {A : UU l} →
+    is-equiv (equivalence-relation-partition {l} {l} {l} {A})
+  is-equiv-equivalence-relation-partition =
+    is-equiv-is-invertible
+      partition-equivalence-relation
+      is-section-equivalence-relation-partition-equivalence-relation
+      is-retraction-equivalence-relation-partition-equivalence-relation
 
 equiv-equivalence-relation-partition :
   {l : Level} {A : UU l} → partition l l A ≃ equivalence-relation l A

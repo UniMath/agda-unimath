@@ -664,7 +664,7 @@ is-linear-combination-power-add-Semiring R n m x y H =
                       ( power-Semiring R
                         ( dist-ℕ u (n +ℕ m))
                         ( y))))
-                ( nat-inl-coprod-Fin n m i)) ∙
+                ( nat-inl-coproduct-Fin n m i)) ∙
               ( ( ( ap
                     ( mul-nat-scalar-Semiring R
                       ( binomial-coefficient-ℕ
@@ -739,7 +739,7 @@ is-linear-combination-power-add-Semiring R n m x y H =
                       ( power-Semiring R
                         ( dist-ℕ u (n +ℕ m))
                         ( y))))
-                ( nat-inr-coprod-Fin n (succ-ℕ m) i)) ∙
+                ( nat-inr-coproduct-Fin n (succ-ℕ m) i)) ∙
               ( ( ap
                   ( mul-nat-scalar-Semiring R
                     ( binomial-coefficient-ℕ

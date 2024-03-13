@@ -30,11 +30,13 @@ open import foundation.universe-levels
 ## Idea
 
 A [functor](category-theory.functors-precategories.md) between
-[precategories](category-theory.precategories.md) `C` and `D` is **pseudomonic**
+[precategories](category-theory.precategories.md) `C` and `D` is
+{{#concept "pseudomonic" Disambiguation="functor between precategories" Agda=is-pseudomonic-functor-Precategory}}
 if it is [faithful](category-theory.faithful-functors-precategories.md) on all
 morphism-[sets](foundation-core.sets.md) and full on
 [isomorphisms](category-theory.isomorphisms-in-precategories.md). In particular,
-this means it induces an equivalence on isomorphism-sets.
+this means it induces an [equivalence](foundation-core.equivalences.md) on
+isomorphism-sets.
 
 Pseudomonic functors present
 [replete subprecategories](category-theory.replete-subprecategories.md), which
@@ -43,7 +45,7 @@ invariance under equivalences_.
 
 ## Definition
 
-### The predicate of being full on isomorphisms
+### The predicate on isomorphisms of being full
 
 ```agda
 module _
@@ -83,7 +85,7 @@ module _
 
   is-pseudomonic-prop-functor-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
   is-pseudomonic-prop-functor-Precategory =
-    prod-Prop
+    product-Prop
       ( is-faithful-prop-functor-Precategory C D F)
       ( is-full-on-isos-prop-functor-Precategory C D F)
 
@@ -210,7 +212,7 @@ module _
     map-equiv inv-equiv-iso-is-pseudomonic-functor-Precategory
 ```
 
-The previous entry records what is also known as "essential injectivivty".
+The previous entry records what is also known as "essential injectivity".
 
 ```agda
 module _
@@ -247,7 +249,7 @@ module _
     map-equiv inv-equiv-iso-pseudomonic-functor-Precategory
 ```
 
-The previous entry records what is also known as "essential injectivivty".
+The previous entry records what is also known as "essential injectivity".
 
 ### Pseudomonic functors are conservative
 
@@ -291,7 +293,7 @@ module _
 
 - Pseudomonic functors present
   [replete subprecategories](category-theory.replete-subprecategories.md).
-- [Fully faithful functors between precategories](category-theory.pseudomonic-functors-precategories.md)
+- [Fully faithful functors between precategories](category-theory.fully-faithful-functors-precategories.md)
 
 ## External links
 

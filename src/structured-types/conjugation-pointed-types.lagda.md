@@ -97,9 +97,7 @@ module _
     {u : type-Pointed-Type B} (p : point-Pointed-Type B ＝ u) →
     conjugation-Ω p ~∗ action-on-loops-conjugation-Pointed-Type p
   compute-action-on-loops-conjugation-Pointed-Type p =
-    concat-htpy-pointed-map
-      ( conjugation-Ω p) (conjugation-Ω' p)
-      ( action-on-loops-conjugation-Pointed-Type p)
+    concat-pointed-htpy
       ( compute-conjugation-Ω p)
       ( compute-action-on-loops-conjugation-Pointed-Type' p)
 

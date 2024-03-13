@@ -20,6 +20,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
@@ -28,7 +29,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **category** in Homotopy Type Theory is a
+A {{#concept "category" Agda=Category}} in Homotopy Type Theory is a
 [precategory](category-theory.precategories.md) for which the
 [identifications](foundation-core.identity-types.md) between the objects are the
 [isomorphisms](category-theory.isomorphisms-in-precategories.md). More
@@ -105,15 +106,15 @@ module _
   associative-comp-hom-Category =
     associative-comp-hom-Precategory precategory-Category
 
-  inv-associative-comp-hom-Category :
+  involutive-eq-associative-comp-hom-Category :
     {x y z w : obj-Category}
     (h : hom-Category z w)
     (g : hom-Category y z)
     (f : hom-Category x y) →
-    comp-hom-Category h (comp-hom-Category g f) ＝
-    comp-hom-Category (comp-hom-Category h g) f
-  inv-associative-comp-hom-Category =
-    inv-associative-comp-hom-Precategory precategory-Category
+    comp-hom-Category (comp-hom-Category h g) f ＝ⁱ
+    comp-hom-Category h (comp-hom-Category g f)
+  involutive-eq-associative-comp-hom-Category =
+    involutive-eq-associative-comp-hom-Precategory precategory-Category
 
   associative-composition-operation-Category :
     associative-composition-operation-binary-family-Set hom-set-Category

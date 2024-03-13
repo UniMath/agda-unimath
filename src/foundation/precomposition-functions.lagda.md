@@ -11,21 +11,21 @@ open import foundation-core.precomposition-functions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.precomposition-dependent-functions
 open import foundation.sections
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -72,7 +72,7 @@ compute-concat-htpy-precomp :
 compute-concat-htpy-precomp H K C k =
   ( ap
     ( eq-htpy)
-    ( eq-htpy (distributive-left-whisk-concat-htpy k H K))) ∙
+    ( eq-htpy (distributive-left-whisker-comp-concat k H K))) ∙
   ( eq-htpy-concat-htpy (k ·l H) (k ·l K))
 ```
 
@@ -143,11 +143,73 @@ module _
   compute-fiber-precomp g = compute-coherence-triangle-fiber-precomp (g ∘ f)
 
   compute-total-fiber-precomp :
-    Σ ( B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃
+    Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃
     Σ (B → X) (λ u → Σ (B → X) (λ v → u ∘ f ~ v ∘ f))
   compute-total-fiber-precomp = equiv-tot compute-fiber-precomp
 
   diagonal-into-fibers-precomp :
     (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
   diagonal-into-fibers-precomp = map-section-family (λ g → g , refl)
+```
+
+### The action on identifications of precomposition by a map
+
+Consider a map `f : A → B` and two functions `g h : B → C`. Then the
+[action on identifications](foundation.action-on-identifications-functions.md)
+of `precomp f C` fits in a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
+
+```text
+                     ap (precomp f C)
+       (g = h) --------------------------> (g ∘ f = h ∘ f)
+          |                                       |
+  htpy-eq |                                       | htpy-eq
+          ∨                                       ∨
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f).
+                precomp f (eq-value g h)
+```
+
+Similarly, the action on identifications of `precomp f C` also fits in a
+commuting square
+
+```text
+                precomp f (eq-value g h)
+       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+          |                                       |
+  eq-htpy |                                       | eq-htpy
+          ∨                                       ∨
+       (g = h) --------------------------> (g ∘ f = h ∘ f).
+                     ap (precomp f C)
+```
+
+commutes.
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  (f : A → B) {g h : B → C}
+  where
+
+  compute-htpy-eq-ap-precomp :
+    coherence-square-maps
+      ( ap (precomp f C))
+      ( htpy-eq)
+      ( htpy-eq)
+      ( precomp-Π f (eq-value g h))
+  compute-htpy-eq-ap-precomp =
+    compute-htpy-eq-ap-precomp-Π f
+
+  compute-eq-htpy-ap-precomp :
+    coherence-square-maps
+      ( precomp-Π f (eq-value g h))
+      ( eq-htpy)
+      ( eq-htpy)
+      ( ap (precomp f C))
+  compute-eq-htpy-ap-precomp =
+    vertical-inv-equiv-coherence-square-maps
+      ( ap (precomp f C))
+      ( equiv-funext)
+      ( equiv-funext)
+      ( precomp-Π f (eq-value g h))
+      ( compute-htpy-eq-ap-precomp)
 ```

@@ -17,7 +17,7 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.pointed-unit-type
 
-open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types
+open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams
 open import synthetic-homotopy-theory.cofibers
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.pushouts-of-pointed-types
@@ -129,47 +129,47 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
 
-  cocone-prod-wedge-Pointed-Type :
-    type-cocone-Pointed-Type
+  cocone-product-wedge-Pointed-Type :
+    cocone-Pointed-Type
       ( inclusion-point-Pointed-Type A)
       ( inclusion-point-Pointed-Type B)
       ( A ×∗ B)
-  pr1 cocone-prod-wedge-Pointed-Type = inl-prod-Pointed-Type A B
-  pr1 (pr2 cocone-prod-wedge-Pointed-Type) = inr-prod-Pointed-Type A B
-  pr1 (pr2 (pr2 cocone-prod-wedge-Pointed-Type)) = refl-htpy
-  pr2 (pr2 (pr2 cocone-prod-wedge-Pointed-Type)) = refl
+  pr1 cocone-product-wedge-Pointed-Type = inl-product-Pointed-Type A B
+  pr1 (pr2 cocone-product-wedge-Pointed-Type) = inr-product-Pointed-Type A B
+  pr1 (pr2 (pr2 cocone-product-wedge-Pointed-Type)) = refl-htpy
+  pr2 (pr2 (pr2 cocone-product-wedge-Pointed-Type)) = refl
 
-  pointed-map-prod-wedge-Pointed-Type :
+  pointed-map-product-wedge-Pointed-Type :
     (A ∨∗ B) →∗ (A ×∗ B)
-  pointed-map-prod-wedge-Pointed-Type =
+  pointed-map-product-wedge-Pointed-Type =
     cogap-Pointed-Type
       ( inclusion-point-Pointed-Type A)
       ( inclusion-point-Pointed-Type B)
-      ( cocone-prod-wedge-Pointed-Type)
+      ( cocone-product-wedge-Pointed-Type)
 
-  map-prod-wedge-Pointed-Type :
+  map-product-wedge-Pointed-Type :
     type-Pointed-Type (A ∨∗ B) → type-Pointed-Type (A ×∗ B)
-  map-prod-wedge-Pointed-Type = pr1 pointed-map-prod-wedge-Pointed-Type
+  map-product-wedge-Pointed-Type = pr1 pointed-map-product-wedge-Pointed-Type
 
-  compute-inl-prod-wedge-Pointed-Type :
+  compute-inl-product-wedge-Pointed-Type :
     ( x : type-Pointed-Type A) →
-    ( map-prod-wedge-Pointed-Type (map-inl-wedge-Pointed-Type A B x)) ＝
+    ( map-product-wedge-Pointed-Type (map-inl-wedge-Pointed-Type A B x)) ＝
     ( x , point-Pointed-Type B)
-  compute-inl-prod-wedge-Pointed-Type =
+  compute-inl-product-wedge-Pointed-Type =
     compute-inl-cogap-Pointed-Type
       ( inclusion-point-Pointed-Type A)
       ( inclusion-point-Pointed-Type B)
-      ( cocone-prod-wedge-Pointed-Type)
+      ( cocone-product-wedge-Pointed-Type)
 
-  compute-inr-prod-wedge-Pointed-Type :
+  compute-inr-product-wedge-Pointed-Type :
     ( y : type-Pointed-Type B) →
-    ( map-prod-wedge-Pointed-Type (map-inr-wedge-Pointed-Type A B y)) ＝
+    ( map-product-wedge-Pointed-Type (map-inr-wedge-Pointed-Type A B y)) ＝
     ( point-Pointed-Type A , y)
-  compute-inr-prod-wedge-Pointed-Type =
+  compute-inr-product-wedge-Pointed-Type =
     compute-inr-cogap-Pointed-Type
       ( inclusion-point-Pointed-Type A)
       ( inclusion-point-Pointed-Type B)
-      ( cocone-prod-wedge-Pointed-Type)
+      ( cocone-product-wedge-Pointed-Type)
 ```
 
 ## See also

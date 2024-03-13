@@ -117,11 +117,14 @@ module _
     right-inverse-law-mul-core-Monoid (multiplicative-monoid-Ring R)
 
   is-group-group-of-units-Ring' :
-    is-group' semigroup-group-of-units-Ring is-unital-group-of-units-Ring
+    is-group-is-unital-Semigroup
+      ( semigroup-group-of-units-Ring)
+      ( is-unital-group-of-units-Ring)
   is-group-group-of-units-Ring' =
     is-group-core-Monoid' (multiplicative-monoid-Ring R)
 
-  is-group-group-of-units-Ring : is-group semigroup-group-of-units-Ring
+  is-group-group-of-units-Ring :
+    is-group-Semigroup semigroup-group-of-units-Ring
   is-group-group-of-units-Ring =
     is-group-core-Monoid (multiplicative-monoid-Ring R)
 

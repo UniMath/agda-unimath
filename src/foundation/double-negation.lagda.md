@@ -93,12 +93,12 @@ double-negation-linearity-implication {P = P} {Q = Q} f =
 double-negation-elim-neg : {l : Level} (P : UU l) → ¬¬¬ P → ¬ P
 double-negation-elim-neg P f p = f (λ g → g p)
 
-double-negation-elim-prod :
+double-negation-elim-product :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   ¬¬ ((¬¬ P) × (¬¬ Q)) → (¬¬ P) × (¬¬ Q)
-pr1 (double-negation-elim-prod {P = P} {Q = Q} f) =
+pr1 (double-negation-elim-product {P = P} {Q = Q} f) =
   double-negation-elim-neg (¬ P) (map-double-negation pr1 f)
-pr2 (double-negation-elim-prod {P = P} {Q = Q} f) =
+pr2 (double-negation-elim-product {P = P} {Q = Q} f) =
   double-negation-elim-neg (¬ Q) (map-double-negation pr2 f)
 
 double-negation-elim-exp :

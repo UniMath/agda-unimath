@@ -10,6 +10,7 @@ module foundation.epimorphisms-with-respect-to-sets where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
@@ -20,7 +21,6 @@ open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies

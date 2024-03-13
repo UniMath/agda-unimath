@@ -456,22 +456,23 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   where
 
-  is-surjective-map-prod :
+  is-surjective-map-product :
     {f : A → C} {g : B → D} →
-    is-surjective f → is-surjective g → is-surjective (map-prod f g)
-  is-surjective-map-prod {f} {g} s s' (c , d) =
+    is-surjective f → is-surjective g → is-surjective (map-product f g)
+  is-surjective-map-product {f} {g} s s' (c , d) =
     apply-twice-universal-property-trunc-Prop
       ( s c)
       ( s' d)
-      ( trunc-Prop (fiber (map-prod f g) (c , d)))
+      ( trunc-Prop (fiber (map-product f g) (c , d)))
       ( λ x y →
         unit-trunc-Prop ((pr1 x , pr1 y) , eq-pair (pr2 x) (pr2 y)))
 
-  surjection-prod :
+  surjection-product :
     (A ↠ C) → (B ↠ D) → ((A × B) ↠ (C × D))
-  pr1 (surjection-prod f g) = map-prod (map-surjection f) (map-surjection g)
-  pr2 (surjection-prod f g) =
-    is-surjective-map-prod
+  pr1 (surjection-product f g) =
+    map-product (map-surjection f) (map-surjection g)
+  pr2 (surjection-product f g) =
+    is-surjective-map-product
       ( is-surjective-map-surjection f)
       ( is-surjective-map-surjection g)
 ```
@@ -771,7 +772,7 @@ module _
               ( is-section-map-inv-is-equiv
                 ( K (i a) (j (f a)))
                 ( L a ∙ inv (M (f a))))) ∙
-            ( is-section-inv-concat' (g (i a)) (M (f a)) (L a)))))
+            ( is-section-inv-concat' (M (f a)) (L a)))))
     where
 
     J : (b : B) → fiber g (h b)

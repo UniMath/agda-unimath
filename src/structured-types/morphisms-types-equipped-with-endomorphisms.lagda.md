@@ -19,7 +19,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import structured-types.types-equipped-with-endomorphisms
 ```

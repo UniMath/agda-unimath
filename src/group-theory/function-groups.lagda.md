@@ -94,6 +94,6 @@ module _
   right-inverse-law-mul-function-Group =
     right-inverse-law-mul-Π-Group X (λ _ → G)
 
-  is-group-function-Group : is-group semigroup-function-Group
+  is-group-function-Group : is-group-Semigroup semigroup-function-Group
   is-group-function-Group = is-group-Π-Group X (λ _ → G)
 ```

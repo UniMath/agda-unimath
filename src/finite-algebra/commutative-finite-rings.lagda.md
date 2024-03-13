@@ -147,7 +147,7 @@ module _
   additive-semigroup-Commutative-Ring-𝔽 = semigroup-Ab ab-Commutative-Ring-𝔽
 
   is-group-additive-semigroup-Commutative-Ring-𝔽 :
-    is-group additive-semigroup-Commutative-Ring-𝔽
+    is-group-Semigroup additive-semigroup-Commutative-Ring-𝔽
   is-group-additive-semigroup-Commutative-Ring-𝔽 =
     is-group-Ab ab-Commutative-Ring-𝔽
 
@@ -258,7 +258,9 @@ module _
 
 ```agda
   has-negatives-Commutative-Ring-𝔽 :
-    is-group' additive-semigroup-Commutative-Ring-𝔽 has-zero-Commutative-Ring-𝔽
+    is-group-is-unital-Semigroup
+      ( additive-semigroup-Commutative-Ring-𝔽)
+      ( has-zero-Commutative-Ring-𝔽)
   has-negatives-Commutative-Ring-𝔽 = has-negatives-Ab ab-Commutative-Ring-𝔽
 
   neg-Commutative-Ring-𝔽 : type-Commutative-Ring-𝔽 → type-Commutative-Ring-𝔽
@@ -591,7 +593,7 @@ module _
     preserves-concat-add-list-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 ```
 
-### Equip a finite type with a structure of commutative finite ring
+### Equipping a finite type with the structure of a commutative finite ring
 
 ```agda
 module _
@@ -603,14 +605,14 @@ module _
     UU l1
   structure-commutative-ring-𝔽 =
     Σ ( structure-ring-𝔽 X)
-      ( λ r → is-commutative-Ring-𝔽 (compute-structure-ring-𝔽 X r))
+      ( λ r → is-commutative-Ring-𝔽 (finite-ring-structure-ring-𝔽 X r))
 
-  compute-structure-commutative-ring-𝔽 :
+  finite-commutative-ring-structure-commutative-ring-𝔽 :
     structure-commutative-ring-𝔽 →
     Commutative-Ring-𝔽 l1
-  pr1 (compute-structure-commutative-ring-𝔽 (r , c)) =
-    compute-structure-ring-𝔽 X r
-  pr2 (compute-structure-commutative-ring-𝔽 (r , c)) = c
+  pr1 (finite-commutative-ring-structure-commutative-ring-𝔽 (r , c)) =
+    finite-ring-structure-ring-𝔽 X r
+  pr2 (finite-commutative-ring-structure-commutative-ring-𝔽 (r , c)) = c
 
   is-finite-structure-commutative-ring-𝔽 :
     is-finite structure-commutative-ring-𝔽

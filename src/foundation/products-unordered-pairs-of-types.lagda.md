@@ -50,7 +50,7 @@ equiv-pr-product-unordered-pair-types :
   product-unordered-pair-types A ≃
   (element-unordered-pair A i × other-element-unordered-pair A i)
 equiv-pr-product-unordered-pair-types A i =
-  ( ( equiv-prod
+  ( ( equiv-product
       ( equiv-tr
         ( element-unordered-pair A)
         ( compute-map-equiv-point-2-Element-Type

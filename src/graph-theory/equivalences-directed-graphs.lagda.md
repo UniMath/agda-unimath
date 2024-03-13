@@ -24,6 +24,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence

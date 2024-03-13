@@ -143,7 +143,7 @@ module _
     (H : (a : A) → is-contr (B a)) →
     map-inv-right-unit-law-Σ-is-contr H ∘ pr1 ~ id
   is-retraction-map-inv-right-unit-law-Σ-is-contr H (a , b) =
-    eq-pair-Σ refl (eq-is-contr (H a))
+    eq-pair-eq-fiber (eq-is-contr (H a))
 
   is-equiv-map-inv-right-unit-law-Σ-is-contr :
     (H : (a : A) → is-contr (B a)) →
@@ -323,7 +323,7 @@ module _
     map-equiv interchange-Σ-Σ ((a , b) , x) ＝
     map-equiv interchange-Σ-Σ ((a , b) , y)
   eq-interchange-Σ-Σ-is-contr H =
-    ap (map-equiv interchange-Σ-Σ) (ap (pair _) (eq-is-contr H))
+    ap (map-equiv interchange-Σ-Σ) (eq-pair-eq-fiber (eq-is-contr H))
 ```
 
 ### Swapping the order of quantification in a Σ-type, on the left
@@ -404,16 +404,16 @@ module _
 ### Distributive laws of cartesian products over Σ
 
 ```agda
-left-distributive-prod-Σ :
+left-distributive-product-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
   (A × (Σ B C)) ≃ Σ B (λ b → A × (C b))
-left-distributive-prod-Σ =
+left-distributive-product-Σ =
   equiv-left-swap-Σ
 
-right-distributive-prod-Σ :
+right-distributive-product-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} →
   ((Σ A B) × C) ≃ Σ A (λ a → B a × C)
-right-distributive-prod-Σ {A} =
+right-distributive-product-Σ {A} =
   associative-Σ _ _ _
 ```
 
@@ -425,7 +425,6 @@ right-distributive-prod-Σ {A} =
   [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.md).
 - The universal property of dependent pair types is treated in
   [`foundation.universal-property-dependent-pair-types`](foundation.universal-property-dependent-pair-types.md).
-
 - Arithmetical laws involving cartesian product types are recorded in
   [`foundation.type-arithmetic-cartesian-product-types`](foundation.type-arithmetic-cartesian-product-types.md).
 - Arithmetical laws involving dependent product types are recorded in

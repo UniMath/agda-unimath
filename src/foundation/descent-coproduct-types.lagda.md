@@ -1,6 +1,8 @@
 # Descent for coproduct types
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module foundation.descent-coproduct-types where
 ```
 
@@ -13,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.coproduct-types
 open import foundation-core.equality-dependent-pair-types
@@ -38,27 +41,31 @@ module _
   (HA : αA ∘ f ~ h ∘ αA') (HB : αB ∘ g ~ h ∘ αB')
   where
 
-  triangle-descent-square-fiber-map-coprod-inl-fiber :
+  triangle-descent-square-fiber-map-coproduct-inl-fiber :
     (x : A) →
     ( map-fiber-vertical-map-cone αA h (f , αA' , HA) x) ~
-    ( map-fiber-vertical-map-cone (ind-coprod _ αA αB) h
-      ( map-coprod f g , ind-coprod _ αA' αB' , ind-coprod _ HA HB)
+    ( map-fiber-vertical-map-cone (ind-coproduct _ αA αB) h
+      ( map-coproduct f g , ind-coproduct _ αA' αB' , ind-coproduct _ HA HB)
       ( inl x)) ∘
-    ( fiber-map-coprod-inl-fiber f g x)
-  triangle-descent-square-fiber-map-coprod-inl-fiber x (a' , p) =
-    eq-pair-eq-pr2
-      ( ap (concat (inv (HA a')) (αA x)) (ap-comp (ind-coprod _ αA αB) inl p))
+    ( fiber-map-coproduct-inl-fiber f g x)
+  triangle-descent-square-fiber-map-coproduct-inl-fiber x (a' , p) =
+    eq-pair-eq-fiber
+      ( left-whisker-concat
+        ( inv (HA a'))
+        ( ap-comp (ind-coproduct _ αA αB) inl p))
 
-  triangle-descent-square-fiber-map-coprod-inr-fiber :
+  triangle-descent-square-fiber-map-coproduct-inr-fiber :
     (y : B) →
     ( map-fiber-vertical-map-cone αB h (g , αB' , HB) y) ~
-    ( map-fiber-vertical-map-cone (ind-coprod _ αA αB) h
-      ( map-coprod f g , ind-coprod _ αA' αB' , ind-coprod _ HA HB)
+    ( map-fiber-vertical-map-cone (ind-coproduct _ αA αB) h
+      ( map-coproduct f g , ind-coproduct _ αA' αB' , ind-coproduct _ HA HB)
       ( inr y)) ∘
-    ( fiber-map-coprod-inr-fiber f g y)
-  triangle-descent-square-fiber-map-coprod-inr-fiber y (b' , p) =
-    eq-pair-eq-pr2
-      ( ap (concat (inv (HB b')) (αB y)) (ap-comp (ind-coprod _ αA αB) inr p))
+    ( fiber-map-coproduct-inr-fiber f g y)
+  triangle-descent-square-fiber-map-coproduct-inr-fiber y (b' , p) =
+    eq-pair-eq-fiber
+      ( left-whisker-concat
+        ( inv (HB b'))
+        ( ap-comp (ind-coproduct _ αA αB) inr p))
 
 module _
   {l1 l2 l3 l1' l2' l3' : Level}
@@ -66,107 +73,116 @@ module _
   (f : A → X) (g : B → X) (i : X' → X)
   where
 
-  cone-descent-coprod :
+  cone-descent-coproduct :
     (cone-A' : cone f i A') (cone-B' : cone g i B') →
-    cone (ind-coprod _ f g) i (A' + B')
-  pr1 (cone-descent-coprod (h , f' , H) (k , g' , K)) = map-coprod h k
-  pr1 (pr2 (cone-descent-coprod (h , f' , H) (k , g' , K))) (inl a') = f' a'
-  pr1 (pr2 (cone-descent-coprod (h , f' , H) (k , g' , K))) (inr b') = g' b'
-  pr2 (pr2 (cone-descent-coprod (h , f' , H) (k , g' , K))) (inl a') = H a'
-  pr2 (pr2 (cone-descent-coprod (h , f' , H) (k , g' , K))) (inr b') = K b'
+    cone (ind-coproduct _ f g) i (A' + B')
+  pr1 (cone-descent-coproduct (h , f' , H) (k , g' , K)) = map-coproduct h k
+  pr1 (pr2 (cone-descent-coproduct (h , f' , H) (k , g' , K))) (inl a') = f' a'
+  pr1 (pr2 (cone-descent-coproduct (h , f' , H) (k , g' , K))) (inr b') = g' b'
+  pr2 (pr2 (cone-descent-coproduct (h , f' , H) (k , g' , K))) (inl a') = H a'
+  pr2 (pr2 (cone-descent-coproduct (h , f' , H) (k , g' , K))) (inr b') = K b'
 
   abstract
-    descent-coprod :
+    descent-coproduct :
       (cone-A' : cone f i A') (cone-B' : cone g i B') →
       is-pullback f i cone-A' →
       is-pullback g i cone-B' →
-      is-pullback (ind-coprod _ f g) i (cone-descent-coprod cone-A' cone-B')
-    descent-coprod (h , f' , H) (k , g' , K) is-pb-cone-A' is-pb-cone-B' =
-      is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
-        ( ind-coprod _ f g)
+      is-pullback
+        ( ind-coproduct _ f g)
         ( i)
-        ( cone-descent-coprod (h , f' , H) (k , g' , K))
+        ( cone-descent-coproduct cone-A' cone-B')
+    descent-coproduct (h , f' , H) (k , g' , K) is-pb-cone-A' is-pb-cone-B' =
+      is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
+        ( ind-coproduct _ f g)
+        ( i)
+        ( cone-descent-coproduct (h , f' , H) (k , g' , K))
         ( α)
       where
       α :
         is-fiberwise-equiv
           ( map-fiber-vertical-map-cone
-            ( ind-coprod (λ _ → X) f g)
+            ( ind-coproduct (λ _ → X) f g)
             ( i)
-            ( cone-descent-coprod (h , f' , H) (k , g' , K)))
+            ( cone-descent-coproduct (h , f' , H) (k , g' , K)))
       α (inl x) =
         is-equiv-right-map-triangle
           ( map-fiber-vertical-map-cone f i (h , f' , H) x)
-          ( map-fiber-vertical-map-cone (ind-coprod _ f g) i
-            ( cone-descent-coprod (h , f' , H) (k , g' , K))
+          ( map-fiber-vertical-map-cone (ind-coproduct _ f g) i
+            ( cone-descent-coproduct (h , f' , H) (k , g' , K))
             ( inl x))
-          ( fiber-map-coprod-inl-fiber h k x)
-          ( triangle-descent-square-fiber-map-coprod-inl-fiber
+          ( fiber-map-coproduct-inl-fiber h k x)
+          ( triangle-descent-square-fiber-map-coproduct-inl-fiber
             h k i f g f' g' H K x)
           ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback f i
             ( h , f' , H) is-pb-cone-A' x)
-          ( is-equiv-fiber-map-coprod-inl-fiber h k x)
+          ( is-equiv-fiber-map-coproduct-inl-fiber h k x)
       α (inr y) =
         is-equiv-right-map-triangle
           ( map-fiber-vertical-map-cone g i (k , g' , K) y)
           ( map-fiber-vertical-map-cone
-            ( ind-coprod _ f g) i
-            ( cone-descent-coprod (h , f' , H) (k , g' , K))
+            ( ind-coproduct _ f g) i
+            ( cone-descent-coproduct (h , f' , H) (k , g' , K))
             ( inr y))
-          ( fiber-map-coprod-inr-fiber h k y)
-          ( triangle-descent-square-fiber-map-coprod-inr-fiber
+          ( fiber-map-coproduct-inr-fiber h k y)
+          ( triangle-descent-square-fiber-map-coproduct-inr-fiber
             h k i f g f' g' H K y)
           ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback g i
             ( k , g' , K) is-pb-cone-B' y)
-          ( is-equiv-fiber-map-coprod-inr-fiber h k y)
+          ( is-equiv-fiber-map-coproduct-inr-fiber h k y)
 
   abstract
-    descent-coprod-inl :
+    descent-coproduct-inl :
       (cone-A' : cone f i A') (cone-B' : cone g i B') →
-      is-pullback (ind-coprod _ f g) i (cone-descent-coprod cone-A' cone-B') →
+      is-pullback
+        ( ind-coproduct _ f g)
+        ( i)
+        ( cone-descent-coproduct cone-A' cone-B') →
       is-pullback f i cone-A'
-    descent-coprod-inl (h , f' , H) (k , g' , K) is-pb-dsq =
+    descent-coproduct-inl (h , f' , H) (k , g' , K) is-pb-dsq =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone f i
         ( h , f' , H)
         ( λ a →
           is-equiv-left-map-triangle
           ( map-fiber-vertical-map-cone f i (h , f' , H) a)
-          ( map-fiber-vertical-map-cone (ind-coprod _ f g) i
-            ( cone-descent-coprod (h , f' , H) (k , g' , K))
+          ( map-fiber-vertical-map-cone (ind-coproduct _ f g) i
+            ( cone-descent-coproduct (h , f' , H) (k , g' , K))
             ( inl a))
-          ( fiber-map-coprod-inl-fiber h k a)
-          ( triangle-descent-square-fiber-map-coprod-inl-fiber
+          ( fiber-map-coproduct-inl-fiber h k a)
+          ( triangle-descent-square-fiber-map-coproduct-inl-fiber
             h k i f g f' g' H K a)
-          ( is-equiv-fiber-map-coprod-inl-fiber h k a)
+          ( is-equiv-fiber-map-coproduct-inl-fiber h k a)
           ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
-            ( ind-coprod _ f g)
+            ( ind-coproduct _ f g)
             ( i)
-            ( cone-descent-coprod ( h , f' , H) (k , g' , K))
+            ( cone-descent-coproduct ( h , f' , H) (k , g' , K))
             ( is-pb-dsq)
             ( inl a)))
 
   abstract
-    descent-coprod-inr :
+    descent-coproduct-inr :
       (cone-A' : cone f i A') (cone-B' : cone g i B') →
-      is-pullback (ind-coprod _ f g) i (cone-descent-coprod cone-A' cone-B') →
+      is-pullback
+        ( ind-coproduct _ f g)
+        ( i)
+        ( cone-descent-coproduct cone-A' cone-B') →
       is-pullback g i cone-B'
-    descent-coprod-inr (h , f' , H) (k , g' , K) is-pb-dsq =
+    descent-coproduct-inr (h , f' , H) (k , g' , K) is-pb-dsq =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone g i
         ( k , g' , K)
         ( λ b →
           is-equiv-left-map-triangle
           ( map-fiber-vertical-map-cone g i (k , g' , K) b)
-          ( map-fiber-vertical-map-cone (ind-coprod _ f g) i
-            ( cone-descent-coprod (h , f' , H) (k , g' , K))
+          ( map-fiber-vertical-map-cone (ind-coproduct _ f g) i
+            ( cone-descent-coproduct (h , f' , H) (k , g' , K))
             ( inr b))
-          ( fiber-map-coprod-inr-fiber h k b)
-          ( triangle-descent-square-fiber-map-coprod-inr-fiber
+          ( fiber-map-coproduct-inr-fiber h k b)
+          ( triangle-descent-square-fiber-map-coproduct-inr-fiber
             h k i f g f' g' H K b)
-          ( is-equiv-fiber-map-coprod-inr-fiber h k b)
+          ( is-equiv-fiber-map-coproduct-inr-fiber h k b)
           ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
-            ( ind-coprod _ f g)
+            ( ind-coproduct _ f g)
             ( i)
-            ( cone-descent-coprod (h , f' , H) (k , g' , K))
+            ( cone-descent-coproduct (h , f' , H) (k , g' , K))
             ( is-pb-dsq)
             ( inr b)))
 ```

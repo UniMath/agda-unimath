@@ -26,11 +26,12 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.precomposition-functions
 open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pullback-property-pushouts
@@ -248,8 +249,8 @@ triangle-pullback-property-pushout-universal-property-pushout :
   ( ( tot (λ i' → tot (λ j' → htpy-eq))) ∘
     ( gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y)))
 triangle-pullback-property-pushout-universal-property-pushout f g c Y h =
-    eq-pair-Σ refl
-      ( eq-pair-Σ refl
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( inv (is-section-eq-htpy (h ·l coherence-square-cocone f g c))))
 
 pullback-property-pushout-universal-property-pushout :
@@ -461,7 +462,7 @@ module _
                   ( horizontal-map-cocone (vertical-map-cocone f g c) k d)
                   ( coherence-square-cocone f g c)
                   ( coherence-square-cocone (vertical-map-cocone f g c) k d)))))
-          ( is-pullback-rectangle-is-pullback-top
+          ( is-pullback-rectangle-is-pullback-top-square
             ( precomp f W)
             ( precomp g W)
             ( precomp k W)
@@ -494,7 +495,7 @@ module _
       ( k)
       ( d)
       ( λ W →
-        is-pullback-top-is-pullback-rectangle
+        is-pullback-top-square-is-pullback-rectangle
           ( precomp f W)
           ( precomp g W)
           ( precomp k W)

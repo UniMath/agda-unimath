@@ -51,7 +51,7 @@ is-decidable-is-multiple-of-cofibonacci :
 is-decidable-is-multiple-of-cofibonacci m x =
   is-decidable-function-type
     ( is-decidable-is-nonzero-ℕ m)
-    ( is-decidable-prod
+    ( is-decidable-product
       ( is-decidable-is-nonzero-ℕ x)
       ( is-decidable-div-ℕ m (Fibonacci-ℕ x)))
 
@@ -139,6 +139,6 @@ is-left-adjoint-cofibonacci m n = {!!}
 -}
 ```
 
-## References
+## External links
 
 [1]: https://oeis.org/A001177

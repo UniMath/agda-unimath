@@ -67,7 +67,7 @@ the nonunital cyclic rings: Cyclic unital rings are
 [quotients](ring-theory.quotient-rings.md) of the
 [ring `ℤ` of integers](elementary-number-theory.ring-of-integers.md), whereas
 cyclic nonunital rings are isomorphic to [ideals](ring-theory.ideals-rings.md)
-of quotients of the ring `ℤ` \[1\].
+of quotients of the ring `ℤ`. {{#cite BSCS05}}
 
 Since cyclic rings are quotients of `ℤ`, it follows that quotients of cyclic
 rings are cyclic rings.
@@ -498,5 +498,4 @@ module _
 
 ## References
 
-- \[1\] Maria Balintne-Szendrei, Gabor Czedli, and Agnes Szendrei. _Absztrakt
-  algebrai feladatok (Exercises in Abstract Algebra)_. Polygon, Szeged, 2005.
+{{#bibliography}}

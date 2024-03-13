@@ -192,17 +192,6 @@ module _
       ( semigroup-Group H)
       ( semigroup-Group K)
       ( semigroup-Group L)
-
-  inv-associative-comp-hom-Group :
-    (h : hom-Group K L) (g : hom-Group H K) (f : hom-Group G H) →
-    comp-hom-Group G K L h (comp-hom-Group G H K g f) ＝
-    comp-hom-Group G H L (comp-hom-Group H K L h g) f
-  inv-associative-comp-hom-Group =
-    inv-associative-comp-hom-Semigroup
-      ( semigroup-Group G)
-      ( semigroup-Group H)
-      ( semigroup-Group K)
-      ( semigroup-Group L)
 ```
 
 ### The left and right unit laws for composition of group homomorphisms

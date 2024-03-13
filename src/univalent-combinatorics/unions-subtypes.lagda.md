@@ -39,8 +39,8 @@ module _
   count-union-subtypes-count-has-decidable-equalities dec-A count-P count-Q =
     count-decidable-emb
       ( decidable-emb-tot-trunc-Prop-count
-        ( count-fiber-count-Σ dec-A (count-Σ-coprod count-P count-Q)))
-      ( count-Σ-coprod count-P count-Q)
+        ( count-fiber-count-Σ dec-A (count-Σ-coproduct count-P count-Q)))
+      ( count-Σ-coproduct count-P count-Q)
 ```
 
 ### If `A` has decidable equalities and `P` and `Q` are both finite, then `P ∪ Q` is also finite

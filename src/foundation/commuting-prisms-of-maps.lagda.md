@@ -13,15 +13,16 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.composition-algebra
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.commuting-squares-of-homotopies
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
@@ -92,20 +93,29 @@ module _
         ( right-top)
         ( left-bottom)
         ( right-bottom))) ∙h
-    ( right-whisk-square-htpy
+    ( right-whisker-concat-coherence-square-homotopies
       ( front-bottom ·r hA)
       ( bottom ·r hA' ·r hA)
+      ( hC' ·l mid ·r hA)
+      ( ( pasting-horizontal-coherence-square-maps
+            h' g' hA' hB' hC' h'' g'' left-bottom right-bottom) ·r
+        ( hA))
+      ( prism-bottom ·r hA)
       ( hC' ·l ((g' ·l left-top) ∙h (right-top ·r h)))
-      ( prism-bottom ·r hA)) ∙h
+      ) ∙h
     ( ap-concat-htpy
       ( front-bottom ·r hA)
-      ( ( ap-left-whisk-coherence-square-homotopies hC'
+      ( ( map-coherence-square-homotopies hC'
           ( front-top)
           ( mid ·r hA)
+          (hC ·l top)
+          ( pasting-horizontal-coherence-square-maps h g hA hB hC h' g'
+            ( left-top)
+            ( right-top))
           ( prism-top)) ∙h
         ( ap-concat-htpy
           ( hC' ·l front-top)
-          ( associative-left-whisk-comp hC' hC top)))) ∙h
+          ( preserves-comp-left-whisker-comp hC' hC top)))) ∙h
     ( inv-htpy-assoc-htpy
       ( front-bottom ·r hA)
       ( hC' ·l front-top)

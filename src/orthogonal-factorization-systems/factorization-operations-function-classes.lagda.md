@@ -25,12 +25,12 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.factorizations-of-maps-function-classes
 open import orthogonal-factorization-systems.function-classes
-open import orthogonal-factorization-systems.lifting-squares
+open import orthogonal-factorization-systems.lifting-structures-on-squares
 ```
 
 </details>
@@ -153,10 +153,7 @@ module _
 
 ## References
 
-- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
-  theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
-  ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
-  [DOI:10.23638/LMCS-16(1:2)2020](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
+{{#bibliography}} {{#reference RSS20}}
 
 ## See also
 

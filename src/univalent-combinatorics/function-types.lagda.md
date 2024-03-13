@@ -58,7 +58,7 @@ abstract
     is-finite-Σ
       ( is-finite-function-type f g)
       ( λ h →
-        is-finite-prod
+        is-finite-product
           ( is-finite-Σ
             ( is-finite-function-type g f)
             ( λ k →

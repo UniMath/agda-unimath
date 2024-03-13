@@ -397,19 +397,6 @@ module _
       ( h)
       ( g)
       ( f)
-
-  inv-associative-comp-hom-Commutative-Ring :
-    comp-hom-Commutative-Ring A C D h (comp-hom-Commutative-Ring A B C g f) ＝
-    comp-hom-Commutative-Ring A B D (comp-hom-Commutative-Ring B C D h g) f
-  inv-associative-comp-hom-Commutative-Ring =
-    inv-associative-comp-hom-Ring
-      ( ring-Commutative-Ring A)
-      ( ring-Commutative-Ring B)
-      ( ring-Commutative-Ring C)
-      ( ring-Commutative-Ring D)
-      ( h)
-      ( g)
-      ( f)
 ```
 
 ### Unit laws for composition of homomorphisms of commutative rings

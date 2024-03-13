@@ -455,11 +455,11 @@ module _
   {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : UU l2)
   where
 
-  is-truncated-acyclic-prod :
+  is-truncated-acyclic-product :
     is-truncated-acyclic k A →
     is-truncated-acyclic k B →
     is-truncated-acyclic k (A × B)
-  is-truncated-acyclic-prod ac-A ac-B =
+  is-truncated-acyclic-product ac-A ac-B =
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map
       ( A × B)
       ( is-truncated-acyclic-map-comp
@@ -469,8 +469,8 @@ module _
         ( is-truncated-acyclic-map-horizontal-map-cone-is-pullback
           ( terminal-map A)
           ( terminal-map B)
-          ( cone-prod A B)
-          ( is-pullback-prod A B)
+          ( cone-cartesian-product A B)
+          ( is-pullback-cartesian-product A B)
           ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac-A)))
 ```
 

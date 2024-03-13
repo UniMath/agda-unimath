@@ -110,7 +110,7 @@ abstract
 is-decidable-is-exception-Maybe :
   {l : Level} {X : UU l} (x : Maybe X) → is-decidable (is-exception-Maybe x)
 is-decidable-is-exception-Maybe {l} {X} (inl x) =
-  inr (λ p → ex-falso (is-empty-eq-coprod-inl-inr x star p))
+  inr (λ p → ex-falso (is-empty-eq-coproduct-inl-inr x star p))
 is-decidable-is-exception-Maybe (inr star) = inl refl
 
 is-decidable-is-not-exception-Maybe :
@@ -155,7 +155,7 @@ is-value-is-not-exception-Maybe :
   {l1 : Level} {X : UU l1} (x : Maybe X) →
   is-not-exception-Maybe x → is-value-Maybe x
 is-value-is-not-exception-Maybe x H =
-  map-right-unit-law-coprod-is-empty
+  map-right-unit-law-coproduct-is-empty
     ( is-value-Maybe x)
     ( is-exception-Maybe x)
     ( H)

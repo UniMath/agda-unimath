@@ -28,14 +28,13 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
-  is-separated-family : (X → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
-  is-separated-family A = (x : X) (y z : A x) → is-local f (y ＝ z)
+  is-map-separated-family : (X → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  is-map-separated-family A = (x : X) (y z : A x) → is-local f (y ＝ z)
 
-  is-separated : UU l3 → UU (l1 ⊔ l2 ⊔ l3)
-  is-separated A = is-separated-family (λ _ → A)
+  is-map-separated : UU l3 → UU (l1 ⊔ l2 ⊔ l3)
+  is-map-separated A = is-map-separated-family (λ _ → A)
 ```
 
 ## References
 
-1. Egbert Rijke, _Classifying Types_
-   ([arXiv:1906.09435](https://arxiv.org/abs/1906.09435))
+{{#bibliography}} {{#reference Rij19}}

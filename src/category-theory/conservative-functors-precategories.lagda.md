@@ -29,7 +29,7 @@ isomorphism in `C`.
 
 ## Definitions
 
-### The predicate of being conservative
+### The predicate on functors of being conservative
 
 ```agda
 module _
@@ -102,7 +102,6 @@ module _
 ## See also
 
 - [Essentially injective functors](category-theory.essentially-injective-functors-precategories.md)
-
 - [Pseudomonic functors](category-theory.pseudomonic-functors-precategories.md)
   are conservative.
 - [Fully faithful functors](category-theory.fully-faithful-functors-precategories.md)

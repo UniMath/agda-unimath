@@ -205,7 +205,7 @@ module _
   is-prop-is-fibered-equiv-fibered-map :
     (ihH : fibered-map f g) → is-prop (is-fibered-equiv-fibered-map ihH)
   is-prop-is-fibered-equiv-fibered-map (i , h , H) =
-    is-prop-prod (is-property-is-equiv i) (is-property-is-equiv h)
+    is-prop-product (is-property-is-equiv i) (is-property-is-equiv h)
 
   is-fibered-equiv-fibered-map-Prop :
     fibered-map f g → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -391,3 +391,8 @@ module _
   pr1 (pr2 (id-fibered-equiv-htpy f g H)) = id-equiv
   pr2 (pr2 (id-fibered-equiv-htpy f g H)) = H
 ```
+
+## See also
+
+- [Equivalences of arrows](foundation.equivalences-arrows.md) for the same
+  concept under a different name.

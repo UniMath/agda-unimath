@@ -10,11 +10,11 @@ module foundation.isomorphisms-of-sets where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.sets
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -51,7 +51,7 @@ module _
   pr2 (is-proof-irrelevant-is-iso-Set f (g , p , q)) (g' , p' , q') =
     eq-type-subtype
       ( λ h →
-        prod-Prop
+        product-Prop
           ( Id-Prop (hom-set-Set B B) (f ∘ h) id)
           ( Id-Prop (hom-set-Set A A) (h ∘ f) id))
       ( ( ap (λ h → g ∘ h) (inv p')) ∙

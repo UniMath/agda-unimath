@@ -51,6 +51,14 @@ is-preunivalent {A = A} B = (x y : A) → is-emb (λ (p : x ＝ y) → equiv-tr 
 
 ## Properties
 
+### The preunivalence axiom states that the identity family `id : 𝒰 → 𝒰` is preunivalent
+
+```agda
+is-preunivalent-UU :
+  (l : Level) → is-preunivalent (id {A = UU l})
+is-preunivalent-UU l = preunivalence
+```
+
 ### Assuming the preunivalence axiom, type families are preunivalent if and only if they are faithful as maps
 
 **Proof:** We have the
@@ -175,3 +183,5 @@ is-preunivalent-inclusion-subuniverse S =
 
 - [Univalent type families](foundation.univalent-type-families.md)
 - [Transport-split type families](foundation.transport-split-type-families.md)
+- The [standard finite types](univalent-combinatorics.standard-finite-types.md)
+  is a type family which is preunivalent but not univalent.

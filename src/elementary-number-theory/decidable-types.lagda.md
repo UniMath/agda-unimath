@@ -66,7 +66,7 @@ is-decidable-bounded-Σ-ℕ m P Q dP dQ H =
   is-decidable-Σ-ℕ
     ( succ-ℕ m)
     ( λ x → (P x) × (Q x))
-    ( λ x → is-decidable-prod (dP x) (dQ x))
+    ( λ x → is-decidable-product (dP x) (dQ x))
     ( inr
       ( λ p →
         contradiction-leq-ℕ

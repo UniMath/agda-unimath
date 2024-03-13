@@ -12,6 +12,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -30,7 +31,6 @@ open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
-open import foundation.path-algebra
 open import foundation.preunivalent-type-families
 open import foundation.raising-universe-levels
 open import foundation.retractions
@@ -59,7 +59,7 @@ segment of `ℕ`.
 ```agda
 Fin-Set : ℕ → Set lzero
 Fin-Set zero-ℕ = empty-Set
-Fin-Set (succ-ℕ n) = coprod-Set (Fin-Set n) unit-Set
+Fin-Set (succ-ℕ n) = coproduct-Set (Fin-Set n) unit-Set
 
 Fin : ℕ → UU lzero
 Fin n = type-Set (Fin-Set n)
@@ -145,25 +145,25 @@ is-decidable-is-inl-Fin k (inr star) = inr α
 
 ```agda
 map-equiv-Fin-one-ℕ : Fin 1 → unit
-map-equiv-Fin-one-ℕ (inr star) = star
+map-equiv-Fin-one-ℕ (inr x) = x
 
-inv-map-equiv-Fin-one-ℕ : unit → Fin 1
-inv-map-equiv-Fin-one-ℕ star = inr star
+map-inv-equiv-Fin-one-ℕ : unit → Fin 1
+map-inv-equiv-Fin-one-ℕ x = inr x
 
-is-section-inv-map-equiv-Fin-one-ℕ :
-  ( map-equiv-Fin-one-ℕ ∘ inv-map-equiv-Fin-one-ℕ) ~ id
-is-section-inv-map-equiv-Fin-one-ℕ star = refl
+is-section-map-inv-equiv-Fin-one-ℕ :
+  ( map-equiv-Fin-one-ℕ ∘ map-inv-equiv-Fin-one-ℕ) ~ id
+is-section-map-inv-equiv-Fin-one-ℕ _ = refl
 
-is-retraction-inv-map-equiv-Fin-one-ℕ :
-  ( inv-map-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
-is-retraction-inv-map-equiv-Fin-one-ℕ (inr star) = refl
+is-retraction-map-inv-equiv-Fin-one-ℕ :
+  ( map-inv-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
+is-retraction-map-inv-equiv-Fin-one-ℕ (inr _) = refl
 
 is-equiv-map-equiv-Fin-one-ℕ : is-equiv map-equiv-Fin-one-ℕ
 is-equiv-map-equiv-Fin-one-ℕ =
   is-equiv-is-invertible
-    inv-map-equiv-Fin-one-ℕ
-    is-section-inv-map-equiv-Fin-one-ℕ
-    is-retraction-inv-map-equiv-Fin-one-ℕ
+    map-inv-equiv-Fin-one-ℕ
+    is-section-map-inv-equiv-Fin-one-ℕ
+    is-retraction-map-inv-equiv-Fin-one-ℕ
 
 equiv-Fin-one-ℕ : Fin 1 ≃ unit
 pr1 equiv-Fin-one-ℕ = map-equiv-Fin-one-ℕ

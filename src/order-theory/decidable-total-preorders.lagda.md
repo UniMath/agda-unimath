@@ -130,7 +130,7 @@ module _
           ( apply-universal-property-trunc-Prop
             ( is-total-Decidable-Total-Preorder y x)
             ( leq-Decidable-Total-Preorder-Prop y x)
-            ( ind-coprod
+            ( ind-coproduct
                 ( λ _ → leq-Decidable-Total-Preorder y x)
                 ( id)
                 ( ex-falso ∘ p))))

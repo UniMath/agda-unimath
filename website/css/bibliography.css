@@ -1,0 +1,30 @@
+/* Reset for any previous styles to ensure consistent starting point */
+.bibliography * {
+  box-sizing: border-box;
+}
+
+/* Container style to handle bibliography entries */
+.bibliography dl {
+  width: 100%;
+}
+
+/* Style for the label (dt) */
+.bibliography dt {
+  float: left; /* Float label to the left */
+  font-weight: bold; /* Make label bold */
+  width: 9ch; /* Set fixed width for label */
+  clear: both; /* Ensure label is on its own line and not affected by previous floats */
+  text-align: right;
+  padding-right: 0.5ch;
+}
+
+/* Style for the content (dd) */
+.bibliography dd {
+  margin-left: 9.5ch; /* Offset content to the right of the label */
+  padding-right: 1em; /* Provide some padding for legibility */
+}
+
+/* Specifically targets elements with the .citation-link class to style links */
+.citation-link {
+  text-decoration: none; /* Removes the underline from links */
+}

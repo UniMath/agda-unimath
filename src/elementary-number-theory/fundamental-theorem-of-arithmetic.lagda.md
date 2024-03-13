@@ -135,9 +135,9 @@ module _
   is-prop-is-prime-decomposition-list-ℕ :
     is-prop (is-prime-decomposition-list-ℕ)
   is-prop-is-prime-decomposition-list-ℕ =
-    is-prop-prod
+    is-prop-product
       ( is-prop-is-sorted-list ℕ-Decidable-Total-Order l)
-      ( is-prop-prod
+      ( is-prop-product
         ( is-prop-is-prime-list-ℕ l)
         ( is-prop-is-decomposition-list-ℕ))
 
@@ -168,7 +168,7 @@ pr2 (is-nontrivial-divisor-ℕ-Prop n x) = is-prop-is-nontrivial-divisor-ℕ n x
 is-decidable-is-nontrivial-divisor-ℕ :
   (n x : ℕ) → is-decidable (is-nontrivial-divisor-ℕ n x)
 is-decidable-is-nontrivial-divisor-ℕ n x =
-  is-decidable-prod (is-decidable-le-ℕ 1 x) (is-decidable-div-ℕ x n)
+  is-decidable-product (is-decidable-le-ℕ 1 x) (is-decidable-div-ℕ x n)
 
 is-nontrivial-divisor-diagonal-ℕ :
   (n : ℕ) → le-ℕ 1 n → is-nontrivial-divisor-ℕ n n
@@ -176,7 +176,7 @@ pr1 (is-nontrivial-divisor-diagonal-ℕ n H) = H
 pr2 (is-nontrivial-divisor-diagonal-ℕ n H) = refl-div-ℕ n
 ```
 
-If `l` is a prime decomposition of `n`, then `l` is a list of non-trivial
+If `l` is a prime decomposition of `n`, then `l` is a list of nontrivial
 divisors of `n`.
 
 ```agda
@@ -324,7 +324,7 @@ abstract
 is-prime-least-nontrivial-divisor-ℕ :
   (n : ℕ) (H : le-ℕ 1 n) → is-prime-ℕ (nat-least-nontrivial-divisor-ℕ n H)
 pr1 (is-prime-least-nontrivial-divisor-ℕ n H x) (K , L) =
-  map-right-unit-law-coprod-is-empty
+  map-right-unit-law-coproduct-is-empty
     ( is-one-ℕ x)
     ( le-ℕ 1 x)
     ( λ p →
@@ -701,11 +701,11 @@ pr1 (prime-decomposition-fundamental-theorem-arithmetic-list-ℕ x H) =
 pr2 (prime-decomposition-fundamental-theorem-arithmetic-list-ℕ x H) =
   is-prime-decomposition-list-fundamental-theorem-arithmetic-ℕ x H
 
-le-one-is-non-empty-prime-decomposition-list-ℕ :
+le-one-is-nonempty-prime-decomposition-list-ℕ :
   (x : ℕ) (H : leq-ℕ 1 x) (y : ℕ) (l : list ℕ) →
   is-prime-decomposition-list-ℕ x (cons y l) →
   le-ℕ 1 x
-le-one-is-non-empty-prime-decomposition-list-ℕ x H y l D =
+le-one-is-nonempty-prime-decomposition-list-ℕ x H y l D =
   concatenate-le-leq-ℕ
     {x = 1}
     {y = y}
@@ -748,7 +748,7 @@ is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H nil D y d p =
           ( 1)
           ( inv (is-decomposition-list-is-prime-decomposition-list-ℕ x nil D))))
 is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H (cons z l) D y d p =
-  rec-coprod
+  rec-coproduct
     ( λ e → tr (λ w → w ∈-list (cons z l)) (inv e) (is-head z l))
     ( λ e →
       is-in-tail
@@ -861,7 +861,7 @@ eq-prime-decomposition-list-ℕ x H (cons y l) nil I J =
     ( contradiction-le-ℕ
       ( 1)
       ( x)
-      ( le-one-is-non-empty-prime-decomposition-list-ℕ x H y l I)
+      ( le-one-is-nonempty-prime-decomposition-list-ℕ x H y l I)
       ( leq-eq-ℕ
         ( x)
         ( 1)
@@ -871,7 +871,7 @@ eq-prime-decomposition-list-ℕ x H nil (cons y l) I J =
     ( contradiction-le-ℕ
       ( 1)
       ( x)
-      ( le-one-is-non-empty-prime-decomposition-list-ℕ x H y l J)
+      ( le-one-is-nonempty-prime-decomposition-list-ℕ x H y l J)
       ( leq-eq-ℕ
         ( x)
         ( 1)

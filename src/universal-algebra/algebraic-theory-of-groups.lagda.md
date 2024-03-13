@@ -146,12 +146,12 @@ abstract
   pr1 equiv-group-Algebra-Group = group-Algebra-Group
   pr1 (pr1 (pr2 equiv-group-Algebra-Group)) = Group-group-Algebra
   pr2 (pr1 (pr2 equiv-group-Algebra-Group)) G =
-    eq-pair-Σ refl (eq-is-prop (is-prop-is-group (semigroup-Group G)))
+    eq-pair-eq-fiber
+      ( eq-is-prop (is-prop-is-group-Semigroup (semigroup-Group G)))
   pr1 (pr2 (pr2 equiv-group-Algebra-Group)) = Group-group-Algebra
   pr2 (pr2 (pr2 equiv-group-Algebra-Group)) A =
     eq-pair-Σ
-      ( eq-pair-Σ
-        ( refl)
+      ( eq-pair-eq-fiber
         ( eq-htpy
           ( λ where
             unit-group-op → eq-htpy (λ where empty-vec → refl)
