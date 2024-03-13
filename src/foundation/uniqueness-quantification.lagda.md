@@ -1,7 +1,7 @@
-# Unique existence
+# Uniqueness quantification
 
 ```agda
-module foundation.unique-existence where
+module foundation.uniqueness-quantification where
 ```
 
 <details><summary>Imports</summary>

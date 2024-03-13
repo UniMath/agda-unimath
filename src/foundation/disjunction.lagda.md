@@ -215,7 +215,7 @@ module _
   where
 
   forward-implication-iff-universal-property-disjunction :
-     disjunction-Type A B → type-Prop Q
+    disjunction-Type A B → type-Prop Q
   forward-implication-iff-universal-property-disjunction =
     rec-disjunction Q
       ( pr1 (forward-implication (up-Q Q) id))

@@ -64,9 +64,10 @@ of the types `A` and `B` is the proposition that their coproduct is contractible
 Note that unlike the case for [disjunction](foundation.disjunction.md) and
 [existential quantification](foundation.existential-quantification.md), but
 analogous to the case of
-[uniqueness quantification](foundation.unique-existence.md), the exclusive
-disjunction of types does _not_ coincide with the exclusive disjunction of the
-summands' [propositional reflections](foundation.propositional-truncations.md):
+[uniqueness quantification](foundation.uniqueness-quantification.md), the
+exclusive disjunction of types does _not_ coincide with the exclusive
+disjunction of the summands'
+[propositional reflections](foundation.propositional-truncations.md):
 
 ```text
   A ⊻ B ≠ ║ A ║₋₁ ⊻ ║ B ║₋₁.
@@ -185,7 +186,7 @@ module _
 ## See also
 
 - The indexed analogue of exclusive disjunction is
-  [unique existence](foundation.unique-existence.md).
+  [unique existence](foundation.uniqueness-quantification.md).
 
 ## Table of files about propositional logic
 

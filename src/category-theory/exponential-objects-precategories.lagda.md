@@ -13,7 +13,7 @@ open import category-theory.products-in-precategories
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.unique-existence
+open import foundation.uniqueness-quantification
 open import foundation.universe-levels
 ```
 

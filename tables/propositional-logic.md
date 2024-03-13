@@ -15,7 +15,7 @@
 | Disjunction                                          | [`foundation.disjunction`](foundation.disjunction.md)                                                                   |
 | Exclusive disjunction                                | [`foundation.exclusive-disjunction`](foundation.exclusive-disjunction.md)                                               |
 | Existential quantification                           | [`foundation.existential-quantification`](foundation.existential-quantification.md)                                     |
-| Unique existence                                     | [`foundation.unique-existence`](foundation.unique-existence.md)                                                         |
+| Uniqueness quantification                            | [`foundation.uniqueness-quantification`](foundation.uniqueness-quantification.md)                                       |
 | Universal quantification                             | [`foundation.universal-quantification`](foundation.universal-quantification.md)                                         |
 | Negation                                             | [`foundation.negation`](foundation.negation.md)                                                                         |
 | Double negation                                      | [`foundation.double-negation`](foundation.double-negation.md)                                                           |
