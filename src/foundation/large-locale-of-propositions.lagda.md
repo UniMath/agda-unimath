@@ -7,6 +7,7 @@ module foundation.large-locale-of-propositions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
 open import foundation.existential-quantification
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
@@ -60,9 +61,10 @@ antisymmetric-leq-Large-Poset Prop-Large-Poset P Q = eq-iff
 ```agda
 has-meets-Prop-Large-Locale :
   has-meets-Large-Poset Prop-Large-Poset
-meet-has-meets-Large-Poset has-meets-Prop-Large-Locale = product-Prop
+meet-has-meets-Large-Poset has-meets-Prop-Large-Locale = conjunction-Prop
 is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
-  has-meets-Prop-Large-Locale P Q R = inv-iff iff-up-product
+  has-meets-Prop-Large-Locale P Q R =
+  is-greatest-lower-bound-conjunction-Prop P Q R
 ```
 
 ### The largest element in the large poset of propositions
