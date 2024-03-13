@@ -171,7 +171,7 @@ Below, we outline a list of general rules when assigning associativities.
 | 36               | Subtractive arithmetic operators                                                                                                                                                            |
 | 35               | Additive arithmetic operators                                                                                                                                                               |
 | 30               | Relational arithmetic operators like`_≤-ℕ_` and `_<-ℕ_`                                                                                                                                     |
-| 25               | Parametric unary operators. This class is currently empty                                                                                                                                   |
+| 25               | Parametric unary operators like `¬_` and `¬¬_`                                                                                                                                              |
 | 20               | Parametric exponentiative operators. This class is currently empty                                                                                                                          |
 | 17               | Left homotopy whiskering `_·l_`                                                                                                                                                             |
 | 16               | Right homotopy whiskering `_·r_`                                                                                                                                                            |

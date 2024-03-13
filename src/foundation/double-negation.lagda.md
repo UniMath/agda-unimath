@@ -26,10 +26,12 @@ open import foundation-core.propositions
 We define double negation and triple negation
 
 ```agda
-¬¬ : {l : Level} → UU l → UU l
+infix 25 ¬¬_ ¬¬¬_
+
+¬¬_ : {l : Level} → UU l → UU l
 ¬¬ P = ¬ (¬ P)
 
-¬¬¬ : {l : Level} → UU l → UU l
+¬¬¬_ : {l : Level} → UU l → UU l
 ¬¬¬ P = ¬ (¬ (¬ P))
 ```
 
@@ -52,7 +54,7 @@ map-double-negation f = map-neg (map-neg f)
 ```agda
 prop-double-negation :
   {l : Level} (A : UU l) → Prop l
-prop-double-negation A = prop-neg (¬ A)
+prop-double-negation A = neg-prop-Type (¬ A)
 
 double-negation-Prop :
   {l : Level} (P : Prop l) → Prop l
@@ -62,8 +64,10 @@ is-prop-double-negation :
   {l : Level} {A : UU l} → is-prop (¬¬ A)
 is-prop-double-negation = is-prop-neg
 
-¬¬₍₋₁₎ : {l : Level} (P : Prop l) → Prop l
-¬¬₍₋₁₎ = double-negation-Prop
+infix 25 ¬¬₍₋₁₎_
+
+¬¬₍₋₁₎_ : {l : Level} (P : Prop l) → Prop l
+¬¬₍₋₁₎_ = double-negation-Prop
 ```
 
 ### Double negations of classical laws

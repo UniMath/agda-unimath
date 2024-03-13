@@ -34,18 +34,20 @@ type `A` is the type `A → empty`.
 is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
 is-prop-neg {A = A} = is-prop-function-type is-prop-empty
 
-prop-neg : {l1 : Level} → UU l1 → Prop l1
-pr1 (prop-neg A) = ¬ A
-pr2 (prop-neg A) = is-prop-neg
+neg-prop-Type : {l1 : Level} → UU l1 → Prop l1
+pr1 (neg-prop-Type A) = ¬ A
+pr2 (neg-prop-Type A) = is-prop-neg
 
 neg-Prop : {l1 : Level} → Prop l1 → Prop l1
-neg-Prop P = prop-neg (type-Prop P)
+neg-Prop P = neg-prop-Type (type-Prop P)
 
 type-neg-Prop : {l1 : Level} → Prop l1 → UU l1
 type-neg-Prop P = type-Prop (neg-Prop P)
 
-¬₍₋₁₎ : {l1 : Level} → Prop l1 → Prop l1
-¬₍₋₁₎ = neg-Prop
+infix 25 ¬₍₋₁₎_
+
+¬₍₋₁₎_ : {l1 : Level} → Prop l1 → Prop l1
+¬₍₋₁₎_ = neg-Prop
 ```
 
 The indexing $-1$ for the operator `¬₍₋₁₎` is part of a general scheme, where
@@ -67,8 +69,8 @@ equiv-neg :
   (X ≃ Y) → (¬ X ≃ ¬ Y)
 equiv-neg {l1} {l2} {X} {Y} e =
   equiv-iff'
-    ( prop-neg X)
-    ( prop-neg Y)
+    ( neg-prop-Type X)
+    ( neg-prop-Type Y)
     ( pair (map-neg (map-inv-equiv e)) (map-neg (map-equiv e)))
 ```
 
@@ -94,3 +96,8 @@ The following table gives an overview of basic constructions in propositional
 logic and related considerations.
 
 {{#include tables/propositional-logic.md}}
+
+## External links
+
+- [negation](https://ncatlab.org/nlab/show/negation) at $n$Lab
+- [Negation](https://en.wikipedia.org/wiki/Negation) at Wikipedia
