@@ -27,9 +27,9 @@ open import order-theory.preorders
 
 ## Idea
 
-The {{#concept "homotopy preorder of types" Agda=Type-Large-Preorder}} is the
-[(large) preorder](order-theory.large-preorders.md) whose objects are types, and
-whose ordering relation is defined by
+The {{#concept "homotopy preorder of types" Agda=Homotopy-Type-Large-Preorder}}
+is the [(large) preorder](order-theory.large-preorders.md) whose objects are
+types, and whose ordering relation is defined by
 [mere functions](foundation.mere-functions.md), i.e. by the
 [propositional truncation](foundation.propositional-truncations.md) of the
 function types:

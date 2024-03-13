@@ -70,8 +70,8 @@ module _
   for-all : UU (l1 ⊔ l2)
   for-all = type-for-all-Prop
 
-  ∀₍₋₁₎ : Prop (l1 ⊔ l2)
-  ∀₍₋₁₎ = for-all-Prop
+  ∀' : Prop (l1 ⊔ l2)
+  ∀' = for-all-Prop
 ```
 
 ### The universal property of universal quantification
@@ -101,7 +101,7 @@ module _
   universal-property-for-all : UUω
   universal-property-for-all =
     {l : Level} (R : Prop l) →
-    type-Prop ((∀₍₋₁₎ A (λ a → R →₍₋₁₎ P a)) ↔₍₋₁₎ (R →₍₋₁₎ ∀₍₋₁₎ A P))
+    type-Prop ((∀' A (λ a → R →₍₋₁₎ P a)) ↔₍₋₁₎ (R →₍₋₁₎ ∀' A P))
 ```
 
 ## Properties
@@ -122,8 +122,8 @@ module _
     {l : Level} {B : UU l} → is-equiv (ev-for-all A P {B = B})
   is-equiv-ev-for-all {B = B} =
     is-equiv-Prop'
-      ( ∀₍₋₁₎ A (λ a → function-Prop B (P a)))
-      ( function-Prop B (∀₍₋₁₎ A P))
+      ( ∀' A (λ a → function-Prop B (P a)))
+      ( function-Prop B (∀' A P))
       ( map-up-for-all)
 
   up-for-all : universal-property-for-all A P

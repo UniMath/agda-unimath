@@ -11,11 +11,11 @@ of operations that generalize to give propositions for arbitrary types.
 | Name                                                        | Operator on types | Operator on propositions |
 | ----------------------------------------------------------- | ----------------- | ------------------------ |
 | [Dependent sum](foundation.dependent-pair-types.md)         | `Σ`               | `Σ₍₋₁₎`                  |
-| [Dependent product](foundation.dependent-function-types.md) | `Π`               | `Π₍₋₁₎`                  |
+| [Dependent product](foundation.dependent-function-types.md) | `Π`               | `∀'`                     |
 | [Functions](foundation-core.function-types.md)              | `→`               | `→₍₋₁₎`                  |
 | [Logical equivalence](foundation.logical-equivalences.md)   | `↔`               | `↔₍₋₁₎`                  |
-| [Product](foundation-core.cartesian-product-types.md)       | `×`               | `×₍₋₁₎`                  |
-| [Join](synthetic-homotopy-theory.joins-of-types.md)         | `*`               | `*₍₋₁₎`                  |
+| [Product](foundation-core.cartesian-product-types.md)       | `×`               |                          |
+| [Join](synthetic-homotopy-theory.joins-of-types.md)         | `*`               |                          |
 | [Exclusive sum](foundation.exclusive-sum.md)                | `exclusive-sum`   | `exclusive-sum-Prop`     |
 | [Coproduct](foundation-core.coproduct-types.md)             | `+`               | _N/A_                    |
 
@@ -28,10 +28,10 @@ operation on propositions in the first.
 | [Terminal object](foundation.unit-type.md)                                   | `unit`                        | `unit-Prop`                                  |
 | [Existential quantification](foundation.existential-quantification.md)       | `exists-type-family`          | `∃₍₋₁₎`                                      |
 | [Unique existential quantification](foundation.uniqueness-quantification.md) | `uniquely-exists-type-family` | `∃!₍₋₁₎`                                     |
-| [Universal quantification](foundation.universal-quantification.md)           |                               | `∀₍₋₁₎` (equivalent to `Π₍₋₁₎`)              |
-| [Conjunction](foundation.conjunction.md)                                     | `∧`                           | `∧₍₋₁₎` (equivalent to `×₍₋₁₎`)              |
-| [Disjunction](foundation.disjunction.md)                                     | `∨`                           | `∨₍₋₁₎` (equivalent to `*₍₋₁₎`)              |
-| [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `⊻`                           | `⊻₍₋₁₎` (equivalent to `exclusive-sum-Prop`) |
+| [Universal quantification](foundation.universal-quantification.md)           |                               | `∀'`                                         |
+| [Conjunction](foundation.conjunction.md)                                     |                               | `∧₍₋₁₎`                                      |
+| [Disjunction](foundation.disjunction.md)                                     | `disjunction-Type`            | `∨₍₋₁₎`                                      |
+| [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `xor-Type`                    | `⊻₍₋₁₎` (equivalent to `exclusive-sum-Prop`) |
 | [Negation](foundation.negation.md)                                           | `¬`                           | `¬₍₋₁₎`                                      |
 | [Double negation](foundation.double-negation.md)                             | `¬¬`                          | `¬¬₍₋₁₎`                                     |
 

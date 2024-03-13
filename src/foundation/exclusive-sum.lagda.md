@@ -7,12 +7,14 @@ module foundation.exclusive-sum where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.symmetric-operations
+open import foundation.universal-quantification
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
@@ -72,8 +74,8 @@ module _
   exclusive-sum-Prop : Prop (l1 ⊔ l2)
   exclusive-sum-Prop =
     coproduct-Prop
-      ( P ×₍₋₁₎ (¬₍₋₁₎ Q))
-      ( Q ×₍₋₁₎ (¬₍₋₁₎ P))
+      ( P ∧₍₋₁₎ (¬₍₋₁₎ Q))
+      ( Q ∧₍₋₁₎ (¬₍₋₁₎ P))
       ( λ p q → pr2 q (pr1 p))
 
   type-exclusive-sum-Prop : UU (l1 ⊔ l2)
@@ -215,7 +217,7 @@ module _
 ```text
   eq-equiv-Prop
     ( ( ( equiv-coproduct
-          ( ( ( left-unit-law-coproduct (type-Prop (P ×₍₋₁₎ (¬₍₋₁₎ Q)))) ∘e
+          ( ( ( left-unit-law-coproduct (type-Prop (P ∧₍₋₁₎ (¬₍₋₁₎ Q)))) ∘e
               ( equiv-coproduct
                 ( left-absorption-Σ
                   ( λ x →

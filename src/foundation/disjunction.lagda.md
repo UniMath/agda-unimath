@@ -100,10 +100,6 @@ module _
 
   is-prop-disjunction-Type : is-prop disjunction-Type
   is-prop-disjunction-Type = is-prop-type-Prop disjunction-prop-Type
-
-  infixr 10 _∨_
-  _∨_ : UU (l1 ⊔ l2)
-  _∨_ = disjunction-Type
 ```
 
 ### The disjunction
@@ -146,10 +142,10 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  inl-disjunction : A → A ∨ B
+  inl-disjunction : A → disjunction-Type A B
   inl-disjunction = unit-trunc-Prop ∘ inl
 
-  inr-disjunction : B → A ∨ B
+  inr-disjunction : B → disjunction-Type A B
   inr-disjunction = unit-trunc-Prop ∘ inr
 ```
 
@@ -158,7 +154,7 @@ module _
 ```agda
 ev-disjunction :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
-  (A ∨ B → C) → (A → C) × (B → C)
+  (disjunction-Type A B → C) → (A → C) × (B → C)
 pr1 (ev-disjunction h) = h ∘ inl-disjunction
 pr2 (ev-disjunction h) = h ∘ inr-disjunction
 
@@ -185,7 +181,8 @@ module _
 
   elim-disjunction :
     {l : Level} (R : Prop l) →
-    (A → type-Prop R) × (B → type-Prop R) → A ∨ B → type-Prop R
+    (A → type-Prop R) × (B → type-Prop R) →
+    disjunction-Type A B → type-Prop R
   elim-disjunction R (f , g) =
     map-universal-property-trunc-Prop R (rec-coproduct f g)
 
@@ -202,7 +199,8 @@ module _
   where
 
   rec-disjunction :
-    (A → type-Prop R) → (B → type-Prop R) → A ∨ B → type-Prop R
+    (A → type-Prop R) → (B → type-Prop R) →
+    disjunction-Type A B → type-Prop R
   rec-disjunction f g = elim-disjunction R (f , g)
 ```
 
@@ -261,12 +259,12 @@ module _
   where
 
   map-left-unit-law-disjunction-is-empty-Type :
-    is-empty A → A ∨ B → is-inhabited B
+    is-empty A → disjunction-Type A B → is-inhabited B
   map-left-unit-law-disjunction-is-empty-Type f =
     rec-disjunction (is-inhabited-Prop B) (ex-falso ∘ f) unit-trunc-Prop
 
   map-right-unit-law-disjunction-is-empty-Type :
-    is-empty B → A ∨ B → is-inhabited A
+    is-empty B → disjunction-Type A B → is-inhabited A
   map-right-unit-law-disjunction-is-empty-Type f =
     rec-disjunction (is-inhabited-Prop A) unit-trunc-Prop (ex-falso ∘ f)
 ```
@@ -305,7 +303,7 @@ module _
   where
 
   is-decidable-disjunction :
-    is-decidable A → is-decidable B → is-decidable (A ∨ B)
+    is-decidable A → is-decidable B → is-decidable (disjunction-Type A B)
   is-decidable-disjunction is-decidable-A is-decidable-B =
     is-decidable-trunc-Prop-is-merely-decidable
       ( A + B)

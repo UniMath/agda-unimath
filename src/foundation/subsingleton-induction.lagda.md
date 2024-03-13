@@ -21,7 +21,7 @@ open import foundation-core.sections
 
 ## Idea
 
-{{#concept "Subsingleton induction" Agda=ind-subsingleton"}} on a type `A` is a
+{{#concept "Subsingleton induction" Agda=ind-subsingleton}} on a type `A` is a
 slight variant of [singleton induction](foundation.singleton-induction.md) which
 in turn is a principle analogous to induction for the
 [unit type](foundation.unit-type.md). Subsingleton induction uses the

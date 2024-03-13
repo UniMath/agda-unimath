@@ -86,10 +86,6 @@ module _
 
   is-prop-xor-Type : is-prop xor-Type
   is-prop-xor-Type = is-prop-type-Prop xor-prop-Type
-
-  infixr 10 _⊻_
-  _⊻_ : UU (l1 ⊔ l2)
-  _⊻_ = xor-Type
 ```
 
 ### The exclusive disjunction

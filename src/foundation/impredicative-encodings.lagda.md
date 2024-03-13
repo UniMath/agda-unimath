@@ -7,6 +7,7 @@ module foundation.impredicative-encodings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -15,6 +16,7 @@ open import foundation.homotopies
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
@@ -82,7 +84,7 @@ equiv-impredicative-trunc-Prop A =
 impredicative-conjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
 impredicative-conjunction-Prop {l1} {l2} P1 P2 =
-  Π₍₋₁₎ (Prop (l1 ⊔ l2)) (λ Q → (P1 →₍₋₁₎ (P2 →₍₋₁₎ Q)) →₍₋₁₎ Q)
+  ∀' (Prop (l1 ⊔ l2)) (λ Q → (P1 →₍₋₁₎ (P2 →₍₋₁₎ Q)) →₍₋₁₎ Q)
 
 type-impredicative-conjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
@@ -97,14 +99,14 @@ map-product-impredicative-conjunction-Prop P1 P2 (p1 , p2) Q f = f p1 p2
 map-inv-product-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-impredicative-conjunction-Prop P1 P2 → type-product-Prop P1 P2
-map-inv-product-impredicative-conjunction-Prop P1 P2 H = H (P1 ×₍₋₁₎ P2) pair
+map-inv-product-impredicative-conjunction-Prop P1 P2 H = H (P1 ∧₍₋₁₎ P2) pair
 
 equiv-product-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
   type-product-Prop P1 P2 ≃ type-impredicative-conjunction-Prop P1 P2
 equiv-product-impredicative-conjunction-Prop P1 P2 =
   equiv-iff
-    ( P1 ×₍₋₁₎ P2)
+    ( P1 ∧₍₋₁₎ P2)
     ( impredicative-conjunction-Prop P1 P2)
     ( map-product-impredicative-conjunction-Prop P1 P2)
     ( map-inv-product-impredicative-conjunction-Prop P1 P2)
@@ -116,7 +118,7 @@ equiv-product-impredicative-conjunction-Prop P1 P2 =
 impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (lsuc (l1 ⊔ l2))
 impredicative-disjunction-Prop {l1} {l2} P1 P2 =
-  Π₍₋₁₎ (Prop (l1 ⊔ l2)) (λ Q → (P1 →₍₋₁₎ Q) →₍₋₁₎ ((P2 →₍₋₁₎ Q) →₍₋₁₎ Q))
+  ∀' (Prop (l1 ⊔ l2)) (λ Q → (P1 →₍₋₁₎ Q) →₍₋₁₎ ((P2 →₍₋₁₎ Q) →₍₋₁₎ Q))
 
 type-impredicative-disjunction-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (lsuc (l1 ⊔ l2))
@@ -154,7 +156,7 @@ equiv-impredicative-disjunction-Prop P1 P2 =
 
 ```agda
 impredicative-empty-Prop : (l : Level) → Prop (lsuc l)
-impredicative-empty-Prop l = Π₍₋₁₎ (Prop l) (λ P → P)
+impredicative-empty-Prop l = ∀' (Prop l) (λ P → P)
 
 type-impredicative-empty-Prop : (l : Level) → UU (lsuc l)
 type-impredicative-empty-Prop l = type-Prop (impredicative-empty-Prop l)
@@ -210,9 +212,9 @@ equiv-impredicative-neg-Prop A =
 impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) → Prop (lsuc (l1 ⊔ l2))
 impredicative-exists-Prop {l1} {l2} {A} P =
-  Π₍₋₁₎
+  ∀'
     ( Prop (l1 ⊔ l2))
-    ( λ Q → (Π₍₋₁₎ A (λ x → (P x) →₍₋₁₎ Q)) →₍₋₁₎ Q)
+    ( λ Q → (∀' A (λ x → (P x) →₍₋₁₎ Q)) →₍₋₁₎ Q)
 
 type-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) → UU (lsuc (l1 ⊔ l2))
@@ -250,7 +252,7 @@ equiv-impredicative-exists-Prop {A = A} P =
 impredicative-based-id-Prop :
   {l : Level} (A : Set l) (a x : type-Set A) → Prop (lsuc l)
 impredicative-based-id-Prop {l} A a x =
-  Π₍₋₁₎ (type-Set A → Prop l) (λ Q → (Q a) →₍₋₁₎ (Q x))
+  ∀' (type-Set A → Prop l) (λ Q → (Q a) →₍₋₁₎ (Q x))
 
 type-impredicative-based-id-Prop :
   {l : Level} (A : Set l) (a x : type-Set A) → UU (lsuc l)
@@ -285,9 +287,9 @@ equiv-impredicative-based-id-Prop A a x =
 impredicative-id-Prop :
   {l : Level} (A : Set l) (x y : type-Set A) → Prop (lsuc l)
 impredicative-id-Prop {l} A x y =
-  Π₍₋₁₎
+  ∀'
     ( type-Set A → type-Set A → Prop l)
-    ( λ Q → (Π₍₋₁₎ (type-Set A) (λ a → Q a a)) →₍₋₁₎ (Q x y))
+    ( λ Q → (∀' (type-Set A) (λ a → Q a a)) →₍₋₁₎ (Q x y))
 
 type-impredicative-id-Prop :
   {l : Level} (A : Set l) (x y : type-Set A) → UU (lsuc l)

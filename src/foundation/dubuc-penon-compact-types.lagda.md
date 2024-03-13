@@ -8,6 +8,7 @@ module foundation.dubuc-penon-compact-types where
 
 ```agda
 open import foundation.disjunction
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.propositions
@@ -31,12 +32,12 @@ either `P` is true or `Q` contains every element of `X`.
 is-dubuc-penon-compact-Prop :
   {l : Level} (l1 l2 : Level) → UU l → Prop (l ⊔ lsuc l1 ⊔ lsuc l2)
 is-dubuc-penon-compact-Prop l1 l2 X =
-  Π₍₋₁₎
+  ∀'
     ( Prop l1)
     ( λ P →
-      Π₍₋₁₎
+      ∀'
         ( subtype l2 X)
-        ( λ Q → (Π₍₋₁₎ X (λ x → P ∨₍₋₁₎ Q x)) →₍₋₁₎ (P ∨₍₋₁₎ (Π₍₋₁₎ X Q))))
+        ( λ Q → (∀' X (λ x → P ∨₍₋₁₎ Q x)) →₍₋₁₎ (P ∨₍₋₁₎ (∀' X Q))))
 
 is-dubuc-penon-compact :
   {l : Level} (l1 l2 : Level) → UU l → UU (l ⊔ lsuc l1 ⊔ lsuc l2)

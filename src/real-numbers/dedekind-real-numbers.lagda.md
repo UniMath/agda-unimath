@@ -32,6 +32,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.truncation-levels
@@ -77,13 +78,13 @@ module _
       ( (∃₍₋₁₎ ℚ L) ∧₍₋₁₎ (∃₍₋₁₎ ℚ U))
       ( conjunction-Prop
         ( conjunction-Prop
-          ( Π₍₋₁₎ ℚ ( λ q → L q ↔₍₋₁₎ ∃₍₋₁₎ ℚ (λ r → le-ℚ-Prop q r ∧₍₋₁₎ L r)))
-          ( Π₍₋₁₎ ℚ ( λ r → U r ↔₍₋₁₎ ∃₍₋₁₎ ℚ (λ q → le-ℚ-Prop q r ∧₍₋₁₎ U q))))
+          ( ∀' ℚ ( λ q → L q ↔₍₋₁₎ ∃₍₋₁₎ ℚ (λ r → le-ℚ-Prop q r ∧₍₋₁₎ L r)))
+          ( ∀' ℚ ( λ r → U r ↔₍₋₁₎ ∃₍₋₁₎ ℚ (λ q → le-ℚ-Prop q r ∧₍₋₁₎ U q))))
         ( conjunction-Prop
-          ( Π₍₋₁₎ ℚ (λ q → ¬₍₋₁₎ (L q ∧₍₋₁₎ U q)))
-          ( Π₍₋₁₎
+          ( ∀' ℚ (λ q → ¬₍₋₁₎ (L q ∧₍₋₁₎ U q)))
+          ( ∀'
             ( ℚ)
-            ( λ q → Π₍₋₁₎ ℚ (λ r → le-ℚ-Prop q r →₍₋₁₎ (L q ∨₍₋₁₎ U r))))))
+            ( λ q → ∀' ℚ (λ r → le-ℚ-Prop q r →₍₋₁₎ (L q ∨₍₋₁₎ U r))))))
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop
@@ -145,7 +146,8 @@ module _
     pr1 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 
   is-located-lower-upper-cut-ℝ :
-    (q r : ℚ) → le-ℚ q r → (is-in-lower-cut-ℝ q) ∨ (is-in-upper-cut-ℝ r)
+    (q r : ℚ) → le-ℚ q r →
+    disjunction-Type (is-in-lower-cut-ℝ q) (is-in-upper-cut-ℝ r)
   is-located-lower-upper-cut-ℝ =
     pr2 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 
@@ -171,16 +173,15 @@ abstract
     is-set-Σ
       ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
       ( λ x →
-        ( is-set-Σ
+        is-set-Σ
           ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
           ( λ y →
             ( is-set-is-prop
               ( is-prop-type-Prop
-                ( is-dedekind-cut-Prop x y))))))
+                ( is-dedekind-cut-Prop x y)))))
 
 ℝ-Set : (l : Level) → Set (lsuc l)
-pr1 (ℝ-Set l) = ℝ l
-pr2 (ℝ-Set l) = is-set-ℝ l
+ℝ-Set l = ℝ l , is-set-ℝ l
 ```
 
 ## Properties of lower/upper Dedekind cuts

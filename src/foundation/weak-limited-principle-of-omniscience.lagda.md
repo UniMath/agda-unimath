@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.disjunction
 open import foundation.negation
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.propositions
@@ -31,12 +32,12 @@ The {{#concept "Weak Limited Principle of Omniscience"}} asserts that for any
 ```agda
 WLPO-Prop : Prop lzero
 WLPO-Prop =
-  Π₍₋₁₎
+  ∀'
     ( ℕ → Fin 2)
     ( λ f →
       disjunction-Prop
-        ( Π₍₋₁₎ ℕ (λ n → Id₍₋₁₎ (Fin-Set 2) (f n) (zero-Fin 1)))
-        ( ¬₍₋₁₎ (Π₍₋₁₎ ℕ (λ n → Id₍₋₁₎ (Fin-Set 2) (f n) (zero-Fin 1)))))
+        ( ∀' ℕ (λ n → Id₍₋₁₎ (Fin-Set 2) (f n) (zero-Fin 1)))
+        ( ¬₍₋₁₎ (∀' ℕ (λ n → Id₍₋₁₎ (Fin-Set 2) (f n) (zero-Fin 1)))))
 
 WLPO : UU lzero
 WLPO = type-Prop WLPO-Prop

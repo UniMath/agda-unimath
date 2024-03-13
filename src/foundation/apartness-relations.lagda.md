@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.propositional-truncations
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -55,9 +56,7 @@ module _
 
   is-cotransitive-Prop : Prop (l1 ⊔ l2)
   is-cotransitive-Prop =
-    Π₍₋₁₎
-      ( A)
-      ( λ a → Π₍₋₁₎ A (λ b → Π₍₋₁₎ A (λ c → R a b →₍₋₁₎ (R a c ∨₍₋₁₎ R b c))))
+    ∀' A (λ a → ∀' A (λ b → ∀' A (λ c → R a b →₍₋₁₎ (R a c ∨₍₋₁₎ R b c))))
 
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive = type-Prop is-cotransitive-Prop

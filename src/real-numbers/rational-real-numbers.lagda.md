@@ -12,6 +12,7 @@ open import elementary-number-theory.rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.embeddings
@@ -103,7 +104,7 @@ module _
 
   is-rational-ℝ-Prop : Prop l
   is-rational-ℝ-Prop =
-    (¬₍₋₁₎ (lower-cut-ℝ x p)) ×₍₋₁₎ (¬₍₋₁₎ (upper-cut-ℝ x p))
+    (¬₍₋₁₎ (lower-cut-ℝ x p)) ∧₍₋₁₎ (¬₍₋₁₎ (upper-cut-ℝ x p))
 
   is-rational-ℝ : UU l
   is-rational-ℝ = type-Prop is-rational-ℝ-Prop

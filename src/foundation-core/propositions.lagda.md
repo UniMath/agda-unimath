@@ -262,27 +262,6 @@ module _
   product-Prop = (type-product-Prop , is-prop-product-Prop)
 ```
 
-We also introduce the special notation `×₍₋₁₎` for `product-Prop`.
-
-```agda
-infixr 15 _×₍₋₁₎_
-
-_×₍₋₁₎_ :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → Prop (l1 ⊔ l2)
-_×₍₋₁₎_ = product-Prop
-```
-
-This is part of a general scheme where `×₍ₙ₎` is the operator of type
-
-```text
-_×₍ₙ₎_ : Truncated-Type l1 n → Truncated-Type l2 n → Truncated-Type (l1 ⊔ l2) n
-```
-
-that takes the cartesian product of the underlying types. Note in particular
-that `×₍ₙ₎` should be read differently from the
-[conjunction](foundation.conjunction.md) `∧₍ₙ₎` which has the same type
-signature, but whose underlying type is a proposition irrespective of $n$.
-
 ### Products of families of propositions are propositions
 
 ```agda
@@ -308,21 +287,6 @@ module _
   pr1 Π-Prop = type-Π-Prop
   pr2 Π-Prop = is-prop-Π-Prop
 ```
-
-We also introduce the special notation `Π₍₋₁₎` for `Π-Prop`.
-
-```agda
-Π₍₋₁₎ : {l1 l2 : Level} (A : UU l1) (P : A → Prop l2) → Prop (l1 ⊔ l2)
-Π₍₋₁₎ = Π-Prop
-```
-
-This is part of a general scheme where `Π₍ₙ₎` is the operator of type
-
-```text
-Π₍ₙ₎ : (A : UU l1) → (A → Truncated-Type l2 n) → Truncated-Type (l1 ⊔ l2) n
-```
-
-that takes the dependent product of the underlying types.
 
 We now repeat the above for implicit Π-types.
 
