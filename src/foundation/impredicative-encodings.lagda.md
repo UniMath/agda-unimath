@@ -150,6 +150,26 @@ equiv-impredicative-disjunction-Prop P1 P2 =
     ( map-inv-impredicative-disjunction-Prop P1 P2)
 ```
 
+### The impredicative encoding of the empty type
+
+```agda
+impredicative-empty-Prop : (l : Level) → Prop (lsuc l)
+impredicative-empty-Prop l = Π₍₋₁₎ (Prop l) (λ P → P)
+
+type-impredicative-empty-Prop : (l : Level) → UU (lsuc l)
+type-impredicative-empty-Prop l = type-Prop (impredicative-empty-Prop l)
+
+is-empty-impredicative-empty-Prop :
+  {l : Level} → is-empty (type-impredicative-empty-Prop l)
+is-empty-impredicative-empty-Prop {l} e =
+  is-empty-raise-empty (e (raise-empty-Prop l))
+
+equiv-impredicative-empty-Prop :
+  {l : Level} → empty ≃ type-impredicative-empty-Prop l
+equiv-impredicative-empty-Prop =
+  equiv-is-empty id is-empty-impredicative-empty-Prop
+```
+
 ### The impredicative encoding of negation
 
 ```agda
