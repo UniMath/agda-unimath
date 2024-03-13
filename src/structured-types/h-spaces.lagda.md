@@ -19,11 +19,14 @@ open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.endomorphisms
 
 open import structured-types.magmas
 open import structured-types.noncoherent-h-spaces
+open import structured-types.pointed-homotopies
+open import structured-types.pointed-maps
 open import structured-types.pointed-sections
 open import structured-types.pointed-types
 ```
@@ -158,34 +161,22 @@ module _
   {l : Level} (A : Pointed-Type l)
   where
 
+  ev-endo-Pointed-Type : endo-Pointed-Type (type-Pointed-Type A) →∗ A
+  pr1 ev-endo-Pointed-Type = ev-point-Pointed-Type A
+  pr2 ev-endo-Pointed-Type = refl
+
   pointed-section-ev-point-Pointed-Type : UU l
   pointed-section-ev-point-Pointed-Type =
-    pointed-section-Pointed-Type
-      ( endo-Pointed-Type (type-Pointed-Type A))
-      ( A)
-      ( pair (ev-point-Pointed-Type A) refl)
+    pointed-section ev-endo-Pointed-Type
 
-compute-pointed-section-ev-point-Pointed-Type :
-  {l : Level} (A : Pointed-Type l) →
-  pointed-section-ev-point-Pointed-Type A ≃ coherent-unital-mul-Pointed-Type A
-compute-pointed-section-ev-point-Pointed-Type (pair A a) =
-  ( equiv-tot
-    ( λ μ →
-      ( equiv-Σ
-        ( λ p →
-          Σ ( (x : A) → μ x a ＝ x)
-            ( λ q → p a ＝ q a))
-        ( equiv-funext)
-        ( λ H →
-          equiv-tot
-            ( λ K →
-              equiv-inv (K a) (htpy-eq H a) ∘e
-              equiv-concat' (K a) right-unit ∘e
-              equiv-concat' (K a) right-unit))))) ∘e
-  ( associative-Σ
-    ( A → (A → A))
-    ( λ μ → μ a ＝ id)
-    ( λ μp →
-      Σ ( (x : A) → pr1 μp x a ＝ x)
-        ( λ H → H a ＝ ( ( ap (λ h → h a) (pr2 μp) ∙ refl) ∙ refl))))
+  compute-pointed-section-ev-point-Pointed-Type :
+    pointed-section-ev-point-Pointed-Type ≃ coherent-unital-mul-Pointed-Type A
+  compute-pointed-section-ev-point-Pointed-Type =
+    ( equiv-tot
+      ( λ _ →
+        equiv-Σ _
+          ( equiv-funext)
+          ( λ _ →
+            equiv-tot (λ _ → inv-equiv (equiv-right-whisker-concat refl))))) ∘e
+    ( associative-Σ _ _ _)
 ```

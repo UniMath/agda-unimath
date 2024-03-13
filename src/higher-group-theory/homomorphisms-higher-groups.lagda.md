@@ -75,7 +75,7 @@ module _
   where
 
   htpy-hom-∞-Group : (g : hom-∞-Group G H) → UU (l1 ⊔ l2)
-  htpy-hom-∞-Group = htpy-pointed-map f
+  htpy-hom-∞-Group = pointed-htpy f
 
   extensionality-hom-∞-Group :
     (g : hom-∞-Group G H) → (f ＝ g) ≃ htpy-hom-∞-Group g
