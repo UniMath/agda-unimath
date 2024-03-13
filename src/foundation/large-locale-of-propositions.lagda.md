@@ -31,8 +31,9 @@ open import order-theory.top-elements-large-posets
 
 ## Idea
 
-The types of [propositions](foundation-core.propositions.md) `Prop l` combined
-form a [large locale](order-theory.large-locales.md).
+the types of [propositions](foundation-core.propositions.md) `Prop l` combined
+form a [large locale](order-theory.large-locales.md) since we do not assume
+[propositional resizing](foundation.propositional-resizing.md).
 
 ## Definitions
 
@@ -113,7 +114,7 @@ is-large-meet-semilattice-Large-Frame Prop-Large-Frame =
 is-large-suplattice-Large-Frame Prop-Large-Frame =
   is-large-suplattice-Prop-Large-Locale
 distributive-meet-sup-Large-Frame Prop-Large-Frame =
-  distributive-product-exists-Prop
+  eq-distributive-conjunction-exists-Prop
 ```
 
 ### The large locale of propositions
@@ -122,3 +123,7 @@ distributive-meet-sup-Large-Frame Prop-Large-Frame =
 Prop-Large-Locale : Large-Locale lsuc (_⊔_) lzero
 Prop-Large-Locale = Prop-Large-Frame
 ```
+
+## See also
+
+- [Propositional resizing](foundation.propositional-resizing.md)

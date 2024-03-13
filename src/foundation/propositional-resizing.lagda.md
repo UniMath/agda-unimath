@@ -35,6 +35,10 @@ propositional-resizing l1 l2 =
     ( λ Ω → (P : Prop l2) → Σ (pr1 Ω) (λ u → type-equiv-Prop (pr2 Ω u) P))
 ```
 
+## See also
+
+- [The large locale of propositions](foundation.large-locale-of-propositions.md)
+
 ## Table of files about propositional logic
 
 The following table gives an overview of basic constructions in propositional
