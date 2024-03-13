@@ -22,28 +22,27 @@ of operations that generalize to give propositions for arbitrary types.
 Note that for many operations in the second section, there is an equivalent
 operation on propositions in the first.
 
-| Name                                                                   | Operator on types | Operator on propositions                     |
-| ---------------------------------------------------------------------- | ----------------- | -------------------------------------------- |
-| [Initial object](foundation-core.empty-types.md)                       | `empty`           | `empty-Prop`                                 |
-| [Terminal object](foundation.unit-type.md)                             | `unit`            | `unit-Prop`                                  |
-| [Existential quantification](foundation.existential-quantification.md) | `∃`               | `∃₍₋₁₎`                                      |
-| [Unique existential quantification](foundation.unique-existence.md)    | `∃!`              | `∃!₍₋₁₎`                                     |
-| [Universal quantification](foundation.universal-quantification.md)     | `∀'`              | `∀₍₋₁₎` (equivalent to `Π₍₋₁₎`)              |
-| [Mere logical consequence](foundation.mere-logical-consequences.md)    | `⇒`               | `⇒₍₋₁₎` (equivalent to `→₍₋₁₎`)              |
-| [Mere logical equivalence](foundation.mere-logical-equivalences.md)    | `⇔`               | `⇔₍₋₁₎` (equivalent to `↔₍₋₁₎`)              |
-| [Conjunction](foundation.conjunction.md)                               | `∧`               | `∧₍₋₁₎` (equivalent to `×₍₋₁₎`)              |
-| [Disjunction](foundation.disjunction.md)                               | `∨`               | `∨₍₋₁₎` (equivalent to `*₍₋₁₎`)              |
-| [Exclusive disjunction](foundation.exclusive-disjunction.md)           | `⊻`               | `⊻₍₋₁₎` (equivalent to `exclusive-sum-Prop`) |
-| [Negation](foundation.negation.md)                                     | `¬`               | `¬₍₋₁₎`                                      |
-| [Double negation](foundation.double-negation.md)                       | `¬¬`              | `¬¬₍₋₁₎`                                     |
+| Name                                                                         | Operator on types             | Operator on propositions                     |
+| ---------------------------------------------------------------------------- | ----------------------------- | -------------------------------------------- |
+| [Initial object](foundation-core.empty-types.md)                             | `empty`                       | `empty-Prop`                                 |
+| [Terminal object](foundation.unit-type.md)                                   | `unit`                        | `unit-Prop`                                  |
+| [Existential quantification](foundation.existential-quantification.md)       | `exists-type-family`          | `∃₍₋₁₎`                                      |
+| [Unique existential quantification](foundation.uniqueness-quantification.md) | `uniquely-exists-type-family` | `∃!₍₋₁₎`                                     |
+| [Universal quantification](foundation.universal-quantification.md)           |                               | `∀₍₋₁₎` (equivalent to `Π₍₋₁₎`)              |
+| [Mere logical equivalence](foundation.mere-logical-equivalences.md)          | `⇔`                           | `⇔₍₋₁₎` (equivalent to `↔₍₋₁₎`)              |
+| [Conjunction](foundation.conjunction.md)                                     | `∧`                           | `∧₍₋₁₎` (equivalent to `×₍₋₁₎`)              |
+| [Disjunction](foundation.disjunction.md)                                     | `∨`                           | `∨₍₋₁₎` (equivalent to `*₍₋₁₎`)              |
+| [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `⊻`                           | `⊻₍₋₁₎` (equivalent to `exclusive-sum-Prop`) |
+| [Negation](foundation.negation.md)                                           | `¬`                           | `¬₍₋₁₎`                                      |
+| [Double negation](foundation.double-negation.md)                             | `¬¬`                          | `¬¬₍₋₁₎`                                     |
 
-There is another way to organize the these concepts
+We can also organize these operations by indexed and binary variants, giving us
+the following table:
 
-| Name                       | Indexed | Binary          |
-| -------------------------- | ------- | --------------- |
-| Sum/constructive existence | `Σ`     | `+`             |
-| Existence                  | `∃`     | `∨`             |
-| Product                    | `Π`     | `×`             |
-| Conjunction                | `∀`     | `∧`             |
-| Unique existence           | `∃!`    | `⊻`             |
-| Exclusive sum              |         | `exclusive-sum` |
+| Name                   | Indexed | Binary |
+| ---------------------- | ------- | ------ |
+| Product                | `Π`     | `×`    |
+| Conjunction            | `∀`     | `∧`    |
+| Constructive existence | `Σ`     | `+`    |
+| Existence              | `∃`     | `∨`    |
+| Unique existence       | `∃!`    | `⊻`    |
