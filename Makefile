@@ -34,6 +34,7 @@ TIME ?= time
 METAFILES := \
 	ART.md \
 	CITE-THIS-LIBRARY.md \
+	CITING-SOURCES.md \
 	CODINGSTYLE.md \
 	CONTRIBUTING.md \
 	CONTRIBUTORS.md \
@@ -49,7 +50,7 @@ METAFILES := \
 	STATEMENT-OF-INCLUSION.md \
 	SUMMARY.md \
 	TEMPLATE.lagda.md \
-	USERS.md \
+	USERS.md
 
 .PHONY: agdaFiles
 agdaFiles:

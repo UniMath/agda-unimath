@@ -733,4 +733,4 @@ module _
 
 ## References
 
-- <https://groups.google.com/g/homotopytypetheory/c/FfiZj1vrkmQ/m/GJETdy0AAgAJ>
+{{#bibliography}} {{#reference Esc19DefinitionsEquivalence}}

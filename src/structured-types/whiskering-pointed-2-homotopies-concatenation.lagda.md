@@ -36,7 +36,7 @@ of the concatenations.
 - The
   {{#concept "left whiskering" Disambiguation="pointed `2`-homotopies with respect to concatenation" Agda=left-whisker-concat-pointed-2-htpy}}
   is an operation that takes a pointed homotopy `H : f ~∗ g` and a pointed
-  `2`-homotopy `α : K ~∗ L` between two pointed homotopies `K L : g ~∗ h` as
+  `2`-homotopy `α : K ~²∗ L` between two pointed homotopies `K L : g ~∗ h` as
   indicated in the diagram
 
   ```text
@@ -46,11 +46,11 @@ of the concatenations.
                  L
   ```
 
-  and returns a pointed `2`-homotopy `H ∙h K ~∗ H ∙h K`.
+  and returns a pointed `2`-homotopy `H ∙h K ~²∗ H ∙h L`.
 
 - The
   {{#concept "right whiskering" Disambiguation="pointed `2`-homotopies with respect to concatenation" Agda=right-whisker-concat-pointed-2-htpy}}
-  is an operation that takes a pointed `2`-homotopy `α : H ~∗ K` between two
+  is an operation that takes a pointed `2`-homotopy `α : H ~²∗ K` between two
   pointed homotopies `H K : f ~∗ g` and a pointed homotopy `L : g ~∗ h` as
   indicated in the diagram
 
@@ -61,7 +61,7 @@ of the concatenations.
         K        L
   ```
 
-  and returns a pointed `2`-homotopy `H ∙h L ~∗ K ∙h L`.
+  and returns a pointed `2`-homotopy `H ∙h L ~²∗ K ∙h L`.
 
 ## Definitions
 
@@ -69,7 +69,7 @@ of the concatenations.
 
 Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and
 `h := (h₀ , h₁)` from `A` to `B`, a pointed homotopy `H := (H₀ , H₁) : f ~∗ g`
-and a pointed `2`-homotopy `α := (α₀ , α₁) : K ~∗ L` between two pointed
+and a pointed `2`-homotopy `α := (α₀ , α₁) : K ~²∗ L` between two pointed
 homotopies `K := (K₀ , K₁)` and `L := (L₀ , L₁)` from `g` to `h` as indicated in
 the diagram
 
@@ -80,7 +80,7 @@ the diagram
                L
 ```
 
-The underlying homotopy of the left whiskering `H ·l α : H ∙h K ~∗ H ∙h L` is
+The underlying homotopy of the left whiskering `H ·l∗ α : H ∙h K ~²∗ H ∙h L` is
 the homotopy
 
 ```text
@@ -176,7 +176,7 @@ module _
 
 Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and
 `h := (h₀ , h₁)` from `A` to `B`, a pointed `2`-homotopy
-`α := (α₀ , α₁) : H ~∗ K` between two pointed homotopies `H := (H₀ , H₁)` and
+`α := (α₀ , α₁) : H ~²∗ K` between two pointed homotopies `H := (H₀ , H₁)` and
 `K := (K₀ , K₁)` from `f` to `g` and a pointed homotopy
 `L := (L₀ , L₁) : g ~∗ h` as indicated in the diagram
 
@@ -187,7 +187,7 @@ Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and
       K        L
 ```
 
-The underlying homotopy of the right whiskering `α ·r L : H ∙h L ~∗ K ∙h L` is
+The underlying homotopy of the right whiskering `α ·r∗ L : H ∙h L ~²∗ K ∙h L` is
 the homotopy
 
 ```text

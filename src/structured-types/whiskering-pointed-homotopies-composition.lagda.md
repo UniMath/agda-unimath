@@ -82,10 +82,10 @@ Consider two pointed maps `f := (f₀ , f₁) : A →∗ B` and
 `h := (h₀ , h₁) : B →∗ C`. Then we construct a pointed homotopy
 
 ```text
-  h ·l H : (h ∘∗ f) ~∗ (h ∘∗ g)
+  h ·l∗ H : (h ∘∗ f) ~∗ (h ∘∗ g).
 ```
 
-**Construction.** The underlying homotopy of `h ·l H` is the whiskered homotpy
+**Construction.** The underlying homotopy of `h ·l∗ H` is the whiskered homotpy
 
 ```text
   h₀ ·l H₀.
@@ -181,10 +181,10 @@ Consider a pointed map `f := (f₀ , f₁) : A →∗ B` and two pointed maps
 homotopy `H := (H₀ , H₁) : g ~∗ h`. Then we construct a pointed homotopy
 
 ```text
-  H ·r f : (g ∘∗ f) ~∗ (h ∘∗ f).
+  H ·r∗ f : (g ∘∗ f) ~∗ (h ∘∗ f).
 ```
 
-**Construction.** The underlying homotopy of `H ·r f` is the homotopy
+**Construction.** The underlying homotopy of `H ·r∗ f` is the homotopy
 
 ```text
   H₀ ·r f₀ : (g₀ ∘ f₀) ~ (h₀ ∘ f₀).

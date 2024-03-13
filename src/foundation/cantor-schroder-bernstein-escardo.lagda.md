@@ -30,11 +30,12 @@ open import foundation-core.negation
 ## Idea
 
 The classical Cantor–Schröder–Bernstein theorem asserts that from any pair of
-injective maps `f : A → B` and `g : B → A` we can construct a bijection between
-`A` and `B`. In a recent generalization, Escardó proved that a
-Cantor–Schröder–Bernstein theorem also holds for ∞-groupoids. His generalization
-asserts that given two types that embed into each other, then the types are
-equivalent.
+[injective maps](foundation-core.injective-maps.md) `f : A → B` and `g : B → A`
+we can construct a bijection between `A` and `B`. In a recent generalization,
+Escardó proved that a Cantor–Schröder–Bernstein theorem also holds for
+∞-groupoids. His generalization asserts that given two types that
+[embed](foundation-core.embeddings.md) into each other, then the types are
+[equivalent](foundation-core.equivalences.md). {{#cite Esc21}}
 
 ## Statement
 
@@ -173,8 +174,8 @@ module _
 
 ## References
 
-- Martín H. Escardó, _The Cantor–Schröder–Bernstein Theorem for ∞-groupoids_,
-  Journal of Homotopy and Related Structures, Volume 16, Issue 3, 2021
-  ([arXiv:2002.07079](https://arxiv.org/abs/2002.07079),[DOI:10.1007/S40062-021-00284-6](https://doi.org/10.1007/s40062-021-00284-6))
-  - <https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.md>
-  - <https://github.com/martinescardo/TypeTopology>
+- Escardó's formalizations regarding this theorem can be found at
+  <https://www.cs.bham.ac.uk/~mhe/TypeTopology/CantorSchroederBernstein.index.html>.
+  {{#cite TypeTopology}}
+
+{{#bibliography}}
