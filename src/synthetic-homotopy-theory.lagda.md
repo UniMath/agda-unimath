@@ -16,9 +16,9 @@ open import synthetic-homotopy-theory.category-of-connected-set-bundles-circle p
 open import synthetic-homotopy-theory.cavallos-trick public
 open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cocartesian-morphisms-arrows public
+open import synthetic-homotopy-theory.cocones-under-pointed-span-diagrams public
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams public
 open import synthetic-homotopy-theory.cocones-under-spans public
-open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types public
 open import synthetic-homotopy-theory.codiagonals-of-maps public
 open import synthetic-homotopy-theory.coequalizers public
 open import synthetic-homotopy-theory.cofibers public
@@ -70,6 +70,7 @@ open import synthetic-homotopy-theory.mere-spheres public
 open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.multiplication-circle public
+open import synthetic-homotopy-theory.null-cocones-under-pointed-span-diagrams public
 open import synthetic-homotopy-theory.plus-principle public
 open import synthetic-homotopy-theory.powers-of-loops public
 open import synthetic-homotopy-theory.premanifolds public
