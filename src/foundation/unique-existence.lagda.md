@@ -11,7 +11,10 @@ open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import foundation-core.function-types
+open import foundation.dependent-pair-types
 open import foundation-core.propositions
+open import foundation-core.identity-types
+open import foundation-core.contractible-types
 ```
 
 </details>
@@ -69,10 +72,35 @@ module _
   ∃!₍₋₁₎ = uniquely-exists-Prop
 ```
 
+### Components of unique existence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  pair-uniquely-exists : uniquely-exists-type-family A B → Σ A B
+  pair-uniquely-exists = center
+
+  pr1-uniquely-exists : uniquely-exists-type-family A B → A
+  pr1-uniquely-exists = pr1 ∘ pair-uniquely-exists
+
+  pr2-uniquely-exists :
+    (p : uniquely-exists-type-family A B) → B (pr1-uniquely-exists p)
+  pr2-uniquely-exists = pr2 ∘ pair-uniquely-exists
+
+  contraction-uniquely-exists :
+    (p : uniquely-exists-type-family A B) →
+    (q : Σ A B) → pair-uniquely-exists p ＝ q
+  contraction-uniquely-exists = contraction
+```
+
 ## See also
 
 - Unique existence is the indexed analogue of
   [exclusive disjunction](foundation.exclusive-disjunction.md).
+- A different name for _unique existence_ is
+  [torsoriality](foundation.torsorial-type-families.md).
 
 ## External links
 
