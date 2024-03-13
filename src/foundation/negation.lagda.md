@@ -35,8 +35,7 @@ is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
 is-prop-neg {A = A} = is-prop-function-type is-prop-empty
 
 neg-prop-Type : {l1 : Level} → UU l1 → Prop l1
-pr1 (neg-prop-Type A) = ¬ A
-pr2 (neg-prop-Type A) = is-prop-neg
+neg-prop-Type A = ¬ A , is-prop-neg
 
 neg-Prop : {l1 : Level} → Prop l1 → Prop l1
 neg-Prop P = neg-prop-Type (type-Prop P)
@@ -79,14 +78,12 @@ equiv-neg {l1} {l2} {X} {Y} e =
 ```agda
 no-fixed-points-neg :
   {l : Level} (A : UU l) → ¬ (A ↔ ¬ A)
-no-fixed-points-neg A (pair f g) =
+no-fixed-points-neg A (f , g) =
   ( λ (h : ¬ A) → h (g h)) (λ (a : A) → f a a)
-```
 
-```agda
 abstract
   no-fixed-points-neg-Prop :
-    {l1 : Level} (P : Prop l1) → ¬ (type-Prop (P ↔₍₋₁₎ ¬₍₋₁₎ P))
+    {l : Level} (P : Prop l) → ¬ (type-Prop P ↔ ¬ (type-Prop P))
   no-fixed-points-neg-Prop P = no-fixed-points-neg (type-Prop P)
 ```
 

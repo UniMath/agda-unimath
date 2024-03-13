@@ -10,7 +10,7 @@ module foundation.mere-logical-equivalences where
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
-open import foundation.mere-logical-consequences
+open import foundation.mere-functions
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
@@ -136,7 +136,7 @@ module _
     ( ev-forward-mere-iff |f| , ev-backward-mere-iff |f|)
 ```
 
-### Merely logically equivalent types are mutual logical consequences
+### Merely logically equivalent types have bidirectional mere functions
 
 If `A ⇔ B` then `A ⇒ B` and `B ⇒ A`.
 
@@ -145,20 +145,20 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  forward-mere-consequence-mere-iff : A ⇔ B → A ⇒ B
-  forward-mere-consequence-mere-iff =
+  forward-mere-function-mere-iff : A ⇔ B → A ⇒ B
+  forward-mere-function-mere-iff =
     rec-trunc-Prop
-      ( prop-mere-consequence A B)
+      ( prop-mere-function A B)
       ( unit-trunc-Prop ∘ forward-implication)
 
-  backward-mere-consequence-mere-iff : A ⇔ B → B ⇒ A
-  backward-mere-consequence-mere-iff =
+  backward-mere-function-mere-iff : A ⇔ B → B ⇒ A
+  backward-mere-function-mere-iff =
     rec-trunc-Prop
-      ( prop-mere-consequence B A)
+      ( prop-mere-function B A)
       ( unit-trunc-Prop ∘ backward-implication)
 ```
 
-### Mere logical equivalence is equivalent to mutual mere logical consequence
+### Mere logical equivalence is equivalent to having bidirectional mere functions
 
 For all types we have the equivalence
 
@@ -171,14 +171,14 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  mutual-mere-consequence-mere-iff : A ⇔ B → (A ⇒ B) × (B ⇒ A)
-  pr1 (mutual-mere-consequence-mere-iff |f|) =
-    forward-mere-consequence-mere-iff |f|
-  pr2 (mutual-mere-consequence-mere-iff |f|) =
-    backward-mere-consequence-mere-iff |f|
+  mutual-mere-function-mere-iff : A ⇔ B → (A ⇒ B) × (B ⇒ A)
+  pr1 (mutual-mere-function-mere-iff |f|) =
+    forward-mere-function-mere-iff |f|
+  pr2 (mutual-mere-function-mere-iff |f|) =
+    backward-mere-function-mere-iff |f|
 
-  mere-iff-mutual-mere-consequence : (A ⇒ B) × (B ⇒ A) → A ⇔ B
-  mere-iff-mutual-mere-consequence (|f| , |g|) =
+  mere-iff-mutual-mere-function : (A ⇒ B) × (B ⇒ A) → A ⇔ B
+  mere-iff-mutual-mere-function (|f| , |g|) =
     rec-trunc-Prop
       ( prop-mere-iff A B)
       ( λ f →
@@ -188,39 +188,39 @@ module _
           ( |g|))
       ( |f|)
 
-  is-equiv-mutual-mere-consequence-mere-iff :
-    is-equiv mutual-mere-consequence-mere-iff
-  is-equiv-mutual-mere-consequence-mere-iff =
+  is-equiv-mutual-mere-function-mere-iff :
+    is-equiv mutual-mere-function-mere-iff
+  is-equiv-mutual-mere-function-mere-iff =
     is-equiv-is-prop
       ( is-prop-mere-iff A B)
       ( is-prop-product
-        ( is-prop-mere-consequence A B)
-        ( is-prop-mere-consequence B A))
-      ( mere-iff-mutual-mere-consequence)
+        ( is-prop-mere-function A B)
+        ( is-prop-mere-function B A))
+      ( mere-iff-mutual-mere-function)
 
-  is-equiv-mere-iff-mutual-mere-consequence :
-    is-equiv mere-iff-mutual-mere-consequence
-  is-equiv-mere-iff-mutual-mere-consequence =
+  is-equiv-mere-iff-mutual-mere-function :
+    is-equiv mere-iff-mutual-mere-function
+  is-equiv-mere-iff-mutual-mere-function =
     is-equiv-is-prop
       ( is-prop-product
-        ( is-prop-mere-consequence A B)
-        ( is-prop-mere-consequence B A))
+        ( is-prop-mere-function A B)
+        ( is-prop-mere-function B A))
       ( is-prop-mere-iff A B)
-      ( mutual-mere-consequence-mere-iff)
+      ( mutual-mere-function-mere-iff)
 
-  equiv-mutual-mere-consequence-mere-iff : (A ⇔ B) ≃ ((A ⇒ B) × (B ⇒ A))
-  equiv-mutual-mere-consequence-mere-iff =
-    ( mutual-mere-consequence-mere-iff ,
-      is-equiv-mutual-mere-consequence-mere-iff)
+  equiv-mutual-mere-function-mere-iff : (A ⇔ B) ≃ ((A ⇒ B) × (B ⇒ A))
+  equiv-mutual-mere-function-mere-iff =
+    ( mutual-mere-function-mere-iff ,
+      is-equiv-mutual-mere-function-mere-iff)
 
-  equiv-mere-iff-mutual-mere-consequence : ((A ⇒ B) × (B ⇒ A)) ≃ (A ⇔ B)
-  equiv-mere-iff-mutual-mere-consequence =
-    ( mere-iff-mutual-mere-consequence ,
-      is-equiv-mere-iff-mutual-mere-consequence)
+  equiv-mere-iff-mutual-mere-function : ((A ⇒ B) × (B ⇒ A)) ≃ (A ⇔ B)
+  equiv-mere-iff-mutual-mere-function =
+    ( mere-iff-mutual-mere-function ,
+      is-equiv-mere-iff-mutual-mere-function)
 ```
 
 ## See also
 
-- [Mere logical consequences](foundation.mere-logical-consequences.md)
+- [Mere functions](foundation.mere-functions.md)
 - [Coinhabitedness](foundation.coinhabited-types.md) is a related but weaker
   notion than mere-iff.
