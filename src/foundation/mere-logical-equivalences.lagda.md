@@ -30,7 +30,7 @@ if the type of [logical equivalences](foundation.logical-equivalences.md)
 between `A` and `B` is [inhabited](foundation.inhabited-types.md).
 
 ```text
-  A ⇔ B := ║(A ↔ B)║₋₁
+  mere-iff A B := ║(A ↔ B)║₋₁
 ```
 
 ## Definitions
@@ -50,10 +50,6 @@ module _
 
   is-prop-mere-iff : is-prop mere-iff
   is-prop-mere-iff = is-prop-type-Prop prop-mere-iff
-
-  infixr 5 _⇔_
-  _⇔_ : UU (l1 ⊔ l2)
-  _⇔_ = mere-iff
 ```
 
 ## Properties
@@ -65,7 +61,7 @@ module _
   {l : Level} (A : UU l)
   where
 
-  refl-mere-iff : A ⇔ A
+  refl-mere-iff : mere-iff A A
   refl-mere-iff = unit-trunc-Prop id-iff
 ```
 
@@ -76,7 +72,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  trans-mere-iff : B ⇔ C → A ⇔ B → A ⇔ C
+  trans-mere-iff : mere-iff B C → mere-iff A B → mere-iff A C
   trans-mere-iff |g| =
     rec-trunc-Prop
       ( prop-mere-iff A C)
@@ -94,7 +90,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  sym-mere-iff : A ⇔ B → B ⇔ A
+  sym-mere-iff : mere-iff A B → mere-iff B A
   sym-mere-iff =
     rec-trunc-Prop (prop-mere-iff B A) (unit-trunc-Prop ∘ inv-iff)
 ```
@@ -109,49 +105,50 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  ev-forward-mere-iff' : A ⇔ B → A → is-inhabited B
+  ev-forward-mere-iff' : mere-iff A B → A → is-inhabited B
   ev-forward-mere-iff' |f| a =
     rec-trunc-Prop
       ( trunc-Prop B)
       ( λ f → unit-trunc-Prop (forward-implication f a))
       ( |f|)
 
-  ev-forward-mere-iff : A ⇔ B → is-inhabited A → is-inhabited B
+  ev-forward-mere-iff : mere-iff A B → is-inhabited A → is-inhabited B
   ev-forward-mere-iff |f| =
     rec-trunc-Prop (trunc-Prop B) (ev-forward-mere-iff' |f|)
 
-  ev-backward-mere-iff' : A ⇔ B → B → is-inhabited A
+  ev-backward-mere-iff' : mere-iff A B → B → is-inhabited A
   ev-backward-mere-iff' |f| b =
     rec-trunc-Prop
       ( trunc-Prop A)
       ( λ f → unit-trunc-Prop (backward-implication f b))
       ( |f|)
 
-  ev-backward-mere-iff : A ⇔ B → is-inhabited B → is-inhabited A
+  ev-backward-mere-iff : mere-iff A B → is-inhabited B → is-inhabited A
   ev-backward-mere-iff |f| =
     rec-trunc-Prop (trunc-Prop A) (ev-backward-mere-iff' |f|)
 
-  is-coinhabited-mere-iff : A ⇔ B → is-inhabited A ↔ is-inhabited B
+  is-coinhabited-mere-iff : mere-iff A B → is-inhabited A ↔ is-inhabited B
   is-coinhabited-mere-iff |f| =
     ( ev-forward-mere-iff |f| , ev-backward-mere-iff |f|)
 ```
 
 ### Merely logically equivalent types have bidirectional mere functions
 
-If `A ⇔ B` then `A ⇒ B` and `B ⇒ A`.
+If `A` and `B` are merely logically equivalent then we have a mere function from
+`A` to `B` and a mere function from `B` to `A`.
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  forward-mere-function-mere-iff : A ⇔ B → A ⇒ B
+  forward-mere-function-mere-iff : mere-iff A B → mere-function A B
   forward-mere-function-mere-iff =
     rec-trunc-Prop
       ( prop-mere-function A B)
       ( unit-trunc-Prop ∘ forward-implication)
 
-  backward-mere-function-mere-iff : A ⇔ B → B ⇒ A
+  backward-mere-function-mere-iff : mere-iff A B → mere-function B A
   backward-mere-function-mere-iff =
     rec-trunc-Prop
       ( prop-mere-function B A)
@@ -163,7 +160,7 @@ module _
 For all types we have the equivalence
 
 ```text
-  (A ⇔ B) ≃ (A ⇒ B) × (B ⇒ A).
+  (mere-iff A B) ≃ (mere-function A B × mere-function B A).
 ```
 
 ```agda
@@ -171,13 +168,15 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  mutual-mere-function-mere-iff : A ⇔ B → (A ⇒ B) × (B ⇒ A)
+  mutual-mere-function-mere-iff :
+    mere-iff A B → mere-function A B × mere-function B A
   pr1 (mutual-mere-function-mere-iff |f|) =
     forward-mere-function-mere-iff |f|
   pr2 (mutual-mere-function-mere-iff |f|) =
     backward-mere-function-mere-iff |f|
 
-  mere-iff-mutual-mere-function : (A ⇒ B) × (B ⇒ A) → A ⇔ B
+  mere-iff-mutual-mere-function :
+    mere-function A B × mere-function B A → mere-iff A B
   mere-iff-mutual-mere-function (|f| , |g|) =
     rec-trunc-Prop
       ( prop-mere-iff A B)
@@ -208,12 +207,14 @@ module _
       ( is-prop-mere-iff A B)
       ( mutual-mere-function-mere-iff)
 
-  equiv-mutual-mere-function-mere-iff : (A ⇔ B) ≃ ((A ⇒ B) × (B ⇒ A))
+  equiv-mutual-mere-function-mere-iff :
+    (mere-iff A B) ≃ (mere-function A B × mere-function B A)
   equiv-mutual-mere-function-mere-iff =
     ( mutual-mere-function-mere-iff ,
       is-equiv-mutual-mere-function-mere-iff)
 
-  equiv-mere-iff-mutual-mere-function : ((A ⇒ B) × (B ⇒ A)) ≃ (A ⇔ B)
+  equiv-mere-iff-mutual-mere-function :
+    (mere-function A B × mere-function B A) ≃ (mere-iff A B)
   equiv-mere-iff-mutual-mere-function =
     ( mere-iff-mutual-mere-function ,
       is-equiv-mere-iff-mutual-mere-function)

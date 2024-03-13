@@ -25,7 +25,7 @@ The type of
 of maps from `A` to `B`.
 
 ```text
-  A ⇒ B := ║(A → B)║₋₁
+  mere-function A B := ║(A → B)║₋₁
 ```
 
 ## Definitions
@@ -45,10 +45,6 @@ module _
 
   is-prop-mere-function : is-prop mere-function
   is-prop-mere-function = is-prop-type-Prop prop-mere-function
-
-  infixr 5 _⇒_
-  _⇒_ : UU (l1 ⊔ l2)
-  _⇒_ = mere-function
 ```
 
 ### The evaluation map on mere functions
@@ -61,11 +57,11 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  ev-mere-function' : (A ⇒ B) → A → ║ B ║₋₁
+  ev-mere-function' : (mere-function A B) → A → ║ B ║₋₁
   ev-mere-function' |f| a =
     rec-trunc-Prop (trunc-Prop B) (λ f → unit-trunc-Prop (f a)) |f|
 
-  ev-mere-function : (A ⇒ B) → ║ A ║₋₁ → ║ B ║₋₁
+  ev-mere-function : (mere-function A B) → ║ A ║₋₁ → ║ B ║₋₁
   ev-mere-function |f| |a| =
     rec-trunc-Prop (trunc-Prop B) (ev-mere-function' |f|) (|a|)
 ```
@@ -77,7 +73,7 @@ module _
   {l : Level} (A : UU l)
   where
 
-  refl-mere-function : A ⇒ A
+  refl-mere-function : mere-function A A
   refl-mere-function = unit-trunc-Prop id
 ```
 
@@ -88,7 +84,8 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  trans-mere-function : B ⇒ C → A ⇒ B → A ⇒ C
+  trans-mere-function :
+    mere-function B C → mere-function A B → mere-function A C
   trans-mere-function |g| =
     rec-trunc-Prop
       ( prop-mere-function A C)

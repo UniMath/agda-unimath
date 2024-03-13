@@ -29,7 +29,6 @@ operation on propositions in the first.
 | [Existential quantification](foundation.existential-quantification.md)       | `exists-type-family`          | `∃₍₋₁₎`                                      |
 | [Unique existential quantification](foundation.uniqueness-quantification.md) | `uniquely-exists-type-family` | `∃!₍₋₁₎`                                     |
 | [Universal quantification](foundation.universal-quantification.md)           |                               | `∀₍₋₁₎` (equivalent to `Π₍₋₁₎`)              |
-| [Mere logical equivalence](foundation.mere-logical-equivalences.md)          | `⇔`                           | `⇔₍₋₁₎` (equivalent to `↔₍₋₁₎`)              |
 | [Conjunction](foundation.conjunction.md)                                     | `∧`                           | `∧₍₋₁₎` (equivalent to `×₍₋₁₎`)              |
 | [Disjunction](foundation.disjunction.md)                                     | `∨`                           | `∨₍₋₁₎` (equivalent to `*₍₋₁₎`)              |
 | [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `⊻`                           | `⊻₍₋₁₎` (equivalent to `exclusive-sum-Prop`) |
