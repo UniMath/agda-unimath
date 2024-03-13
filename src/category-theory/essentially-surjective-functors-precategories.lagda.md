@@ -50,7 +50,8 @@ module _
   is-essentially-surjective-functor-Precategory : UU (l1 ⊔ l3 ⊔ l4)
   is-essentially-surjective-functor-Precategory =
     ( y : obj-Precategory D) →
-    exists-type-family ( obj-Precategory C)
+    exists-type-family
+      ( obj-Precategory C)
       ( λ x → iso-Precategory D (obj-functor-Precategory C D F x) y)
 
   is-prop-is-essentially-surjective-functor-Precategory :

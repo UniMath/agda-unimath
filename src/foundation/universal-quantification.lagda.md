@@ -27,12 +27,24 @@ the
 {{#concept "universal quantification" Disambiguation="of types" WDID=Q126695 Agda=∀'}}
 
 ```text
-  ∀ (x : A) (P x)
+  ∀ (x : A), (P x)
 ```
 
 is the [proposition](foundation-core.propositions.md) that there
 [merely exists](foundation.inhabited-types.md) a proof of `P x` for every `x` in
 `A`.
+
+The
+{{#concept "universal property" Disambiguation="of universal quantification" Agda=universal-property-for-all-Prop}}
+of universal quantification states that it is the greatest lower bound on the
+family of propositions `P` in the
+[poset of propositions](foundation.large-locale-of-propositions.md), by which we
+mean that for every proposition `Q` we have the
+[logical equivalence](foundation.logical-equivalences.md)
+
+```text
+  (∀ (a : A), (R → P a)) ↔ (R → ∀ (a : A), (P a))
+```
 
 **Notation.** Because of syntactic limitations of the Agda language, we use the
 notation `∀'` for the universal quantification in formalizations.
@@ -46,33 +58,31 @@ module _
   {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
   where
 
-  universal-quantification-Prop : Prop (l1 ⊔ l2)
-  universal-quantification-Prop = Π-Prop A P
+  for-all-Prop : Prop (l1 ⊔ l2)
+  for-all-Prop = Π-Prop A P
 
-  type-universal-quantification-Prop : UU (l1 ⊔ l2)
-  type-universal-quantification-Prop = type-Prop universal-quantification-Prop
+  type-for-all-Prop : UU (l1 ⊔ l2)
+  type-for-all-Prop = type-Prop for-all-Prop
 
-  is-prop-universal-quantification-Prop :
-    is-prop type-universal-quantification-Prop
-  is-prop-universal-quantification-Prop =
-    is-prop-type-Prop universal-quantification-Prop
+  is-prop-for-all-Prop : is-prop type-for-all-Prop
+  is-prop-for-all-Prop = is-prop-type-Prop for-all-Prop
 
   for-all : UU (l1 ⊔ l2)
-  for-all = type-universal-quantification-Prop
+  for-all = type-for-all-Prop
 
   ∀₍₋₁₎ : Prop (l1 ⊔ l2)
-  ∀₍₋₁₎ = universal-quantification-Prop
+  ∀₍₋₁₎ = for-all-Prop
 ```
 
 ### The universal property of universal quantification
 
 The
-{{#concept "universal property" Disambiguation="of universal quantification" Agda=universal-property-universal-quantification}}
-of the universal quantification `∀ (a : A), P a` states that for every
+{{#concept "universal property" Disambiguation="of universal quantification" Agda=universal-property-for-all}}
+of the universal quantification `∀ (a : A), (P a)` states that for every
 proposition `R`, the canonical map
 
 ```text
-  (R → ∀ (a : A), P a) → (∀ (a : A), R → P a)
+  (∀ (a : A), (R → P a)) ↔ (R → ∀ (a : A), (P a))
 ```
 
 is an [equivalence](foundation.logical-equivalences.md). Indeed, this holds for
@@ -83,15 +93,15 @@ module _
   {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
   where
 
-  ev-universal-quantification :
-    {l : Level} (B : UU l) →
+  ev-for-all :
+    {l : Level} {B : UU l} →
     for-all A (λ a → function-Prop B (P a)) → B → for-all A P
-  ev-universal-quantification R f r a = f a r
+  ev-for-all f r a = f a r
 
-  universal-property-universal-quantification : UUω
-  universal-property-universal-quantification =
+  universal-property-for-all : UUω
+  universal-property-for-all =
     {l : Level} (R : Prop l) →
-    is-equiv (ev-universal-quantification (type-Prop R))
+    type-Prop ((∀₍₋₁₎ A (λ a → R →₍₋₁₎ P a)) ↔₍₋₁₎ (R →₍₋₁₎ ∀₍₋₁₎ A P))
 ```
 
 ## Properties
@@ -103,21 +113,21 @@ module _
   {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
   where
 
-  map-up-universal-quantification :
+  map-up-for-all :
     {l : Level} {B : UU l} →
     (B → for-all A P) → for-all A (λ a → function-Prop B (P a))
-  map-up-universal-quantification f a r = f r a
+  map-up-for-all f a r = f r a
 
-  is-equiv-ev-universal-quantification :
-    {l : Level} {B : UU l} → is-equiv (ev-universal-quantification A P B)
-  is-equiv-ev-universal-quantification {B = B} =
+  is-equiv-ev-for-all :
+    {l : Level} {B : UU l} → is-equiv (ev-for-all A P {B = B})
+  is-equiv-ev-for-all {B = B} =
     is-equiv-Prop'
       ( ∀₍₋₁₎ A (λ a → function-Prop B (P a)))
       ( function-Prop B (∀₍₋₁₎ A P))
-      ( map-up-universal-quantification)
+      ( map-up-for-all)
 
-  up-universal-quantification : universal-property-universal-quantification A P
-  up-universal-quantification R = is-equiv-ev-universal-quantification
+  up-for-all : universal-property-for-all A P
+  up-for-all R = (ev-for-all A P , map-up-for-all)
 ```
 
 ## External links

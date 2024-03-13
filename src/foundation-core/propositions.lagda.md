@@ -25,7 +25,7 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-A type is a {{#concept "proposition"}} if its
+A type is a {{#concept "proposition" Agda=is-prop}} if its
 [identity types](foundation-core.identity-types.md) are
 [contractible](foundation-core.contractible-types.md). This condition is
 [equivalent](foundation-core.equivalences.md) to the condition that it has up to

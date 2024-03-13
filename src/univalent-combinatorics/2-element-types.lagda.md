@@ -526,7 +526,7 @@ abstract
           ( ¬ (pr1 X))
           ( apply-universal-property-trunc-Prop
             ( pr2 X)
-            ( prop-double-negation (pr1 X))
+            ( double-negation-prop-Type (pr1 X))
             ( λ e → intro-double-negation {l} (map-equiv e (zero-Fin 1))))
           ( d X))
 ```

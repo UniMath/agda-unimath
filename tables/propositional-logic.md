@@ -23,4 +23,4 @@
 | The induction principle of propositional truncations | [`foundation.induction-principle-propositional-truncation`](foundation.induction-principle-propositional-truncation.md) |
 | Functoriality of propositional truncations           | [`foundation.functoriality-propositional-truncations`](foundation.functoriality-propositional-truncation.md)            |
 | Propositional resizing                               | [`foundation.propositional-resizing`](foundation.propositional-resizing.md)                                             |
-| Impredicative encodings of the logical operations    | [`foundation.impredicative-encodings-propositions`](foundation.impredicative-encodings-propositions.md)                 |
+| Impredicative encodings of the logical operations    | [`foundation.impredicative-encodings`](foundation.impredicative-encodings.md)                                           |

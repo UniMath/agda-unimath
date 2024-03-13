@@ -28,7 +28,7 @@ open import foundation-core.propositions
 The
 {{#concept "conjunction" Disambiguation="of propositions" WDID=Q191081 Agda=conjunction-Prop}}
 `P ∧ Q` of two [propositions](foundation-core.propositions.md) `P` and `Q` is
-the proposition that both `P` and `Q` hold and thus defined by the
+the proposition that both `P` and `Q` hold and is thus defined by the
 [cartesian product](foundation-core.cartesian-product-types.md) of their
 underlying types
 
@@ -131,17 +131,9 @@ intro-conjunction-Prop P Q = pair
 
 ### The projections for the conjunction of propositions
 
-```agda
-module _
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
-  where
-
-  pr1-conjunction-Prop : type-conjunction-Prop P Q → type-Prop P
-  pr1-conjunction-Prop = pr1
-
-  pr2-conjunction-Prop : type-conjunction-Prop P Q → type-Prop Q
-  pr2-conjunction-Prop = pr2
-```
+We refrain from defining the basic projections of the conjunction, and advise
+users to utilize the standard projections of the dependent pair type `pr1` and
+`pr2`.
 
 ### The recursion principle of the conjunction
 
@@ -183,8 +175,10 @@ module _
     {l : Level} (R : Prop l) → type-Prop (prop-rec-conjunction-Prop R)
   rec-conjunction-Prop R f (p , q) = f p q
 
-  up-conjunction-Prop : recursion-principle-conjunction-Prop P Q
-  up-conjunction-Prop R = ev-conjunction-Prop P Q R , rec-conjunction-Prop R
+  recursion-principle-conjunction-Prop' :
+    recursion-principle-conjunction-Prop P Q
+  recursion-principle-conjunction-Prop' R =
+    ev-conjunction-Prop P Q R , rec-conjunction-Prop R
 
   equiv-ev-conjunction-Prop :
     {l : Level} (R : Prop l) →
@@ -194,7 +188,7 @@ module _
     equiv-iff'
       ( P ∧₍₋₁₎ Q →₍₋₁₎ R)
       ( P →₍₋₁₎ Q →₍₋₁₎ R)
-      ( up-conjunction-Prop R)
+      ( recursion-principle-conjunction-Prop' R)
 ```
 
 ### The conjunction is the meet in the poset of propositions
@@ -212,8 +206,7 @@ module _
   map-inv-distributive-conjunction-Prop :
     (C → type-conjunction-Prop P Q) →
     type-conjunction-Prop (function-Prop C P) (function-Prop C Q)
-  map-inv-distributive-conjunction-Prop f =
-      ( pr1-conjunction-Prop P Q ∘ f , pr2-conjunction-Prop P Q ∘ f)
+  map-inv-distributive-conjunction-Prop f = (pr1 ∘ f , pr2 ∘ f)
 
   is-equiv-map-distributive-conjunction-Prop :
     is-equiv map-distributive-conjunction-Prop

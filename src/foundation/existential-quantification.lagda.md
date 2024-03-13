@@ -166,12 +166,12 @@ module _
   where
 
   ev-intro-exists :
-    {C : UU l3} → (exists-type-family A B → C) → (x : A) → (B x) → C
+    {C : UU l3} → (exists-type-family A B → C) → (x : A) → B x → C
   ev-intro-exists H x p = H (intro-exists x p)
 
   elim-exists :
     (Q : Prop l3) →
-    ((x : A) → (B x) → type-Prop Q) → (exists-type-family A B → type-Prop Q)
+    ((x : A) → B x → type-Prop Q) → (exists-type-family A B → type-Prop Q)
   elim-exists Q f = map-universal-property-trunc-Prop Q (ind-Σ f)
 
   abstract

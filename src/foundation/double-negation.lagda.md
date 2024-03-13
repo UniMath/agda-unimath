@@ -43,7 +43,7 @@ intro-double-negation : {l : Level} {P : UU l} → P → ¬¬ P
 intro-double-negation p f = f p
 
 map-double-negation :
-  {l1 l2 : Level} {P : UU l1} {Q : UU l2} → (P → Q) → (¬¬ P → ¬¬ Q)
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2} → (P → Q) → ¬¬ P → ¬¬ Q
 map-double-negation f = map-neg (map-neg f)
 ```
 
@@ -52,13 +52,13 @@ map-double-negation f = map-neg (map-neg f)
 ### The double negation of a type is a proposition
 
 ```agda
-prop-double-negation :
+double-negation-prop-Type :
   {l : Level} (A : UU l) → Prop l
-prop-double-negation A = neg-prop-Type (¬ A)
+double-negation-prop-Type A = neg-prop-Type (¬ A)
 
 double-negation-Prop :
   {l : Level} (P : Prop l) → Prop l
-double-negation-Prop P = prop-double-negation (type-Prop P)
+double-negation-Prop P = double-negation-prop-Type (type-Prop P)
 
 is-prop-double-negation :
   {l : Level} {A : UU l} → is-prop (¬¬ A)
@@ -144,7 +144,7 @@ abstract
   double-negation-double-negation-type-trunc-Prop A =
     double-negation-extend
       ( map-universal-property-trunc-Prop
-        ( prop-double-negation A)
+        ( double-negation-prop-Type A)
         ( intro-double-negation))
 
 abstract
