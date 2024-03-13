@@ -38,14 +38,15 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
   where
 
-  ∃!-Prop : Prop (l1 ⊔ l2)
-  ∃!-Prop = is-torsorial-Prop B
+  uniquely-exists-type-family-Prop : Prop (l1 ⊔ l2)
+  uniquely-exists-type-family-Prop = is-torsorial-Prop B
 
-  ∃! : UU (l1 ⊔ l2)
-  ∃! = type-Prop ∃!-Prop
+  uniquely-exists-type-family : UU (l1 ⊔ l2)
+  uniquely-exists-type-family = type-Prop uniquely-exists-type-family-Prop
 
-  is-prop-∃! : is-prop ∃!
-  is-prop-∃! = is-prop-type-Prop ∃!-Prop
+  is-prop-uniquely-exists-type-family : is-prop uniquely-exists-type-family
+  is-prop-uniquely-exists-type-family =
+    is-prop-type-Prop uniquely-exists-type-family-Prop
 ```
 
 ### Unique existence in a subtype
@@ -56,7 +57,7 @@ module _
   where
 
   uniquely-exists-Prop : Prop (l1 ⊔ l2)
-  uniquely-exists-Prop = ∃!-Prop A (type-Prop ∘ P)
+  uniquely-exists-Prop = uniquely-exists-type-family-Prop A (type-Prop ∘ P)
 
   uniquely-exists : UU (l1 ⊔ l2)
   uniquely-exists = type-Prop uniquely-exists-Prop

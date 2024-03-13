@@ -47,7 +47,7 @@ module _
   is-exponential-obj-Precategory x y e ev =
     (z : obj-Precategory C)
     (f : hom-Precategory C (object-product-obj-Precategory C p z x) y) →
-    ∃!
+    uniquely-exists-type-family
       ( hom-Precategory C z e)
       ( λ g →
         comp-hom-Precategory C ev

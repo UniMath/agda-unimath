@@ -135,38 +135,38 @@ module _
   {l1 l2 l3 : Level} (P : Prop l1) {A : UU l2} {B : A → UU l3}
   where
 
-  map-distributive-conjunction-exists :
+  map-distributive-product-exists :
     type-Prop P × exists-type-family A B →
     exists-type-family A (λ x → type-Prop P × B x)
-  map-distributive-conjunction-exists (p , e) =
+  map-distributive-product-exists (p , e) =
     elim-exists
       ( exists-type-family-Prop A (λ x → type-Prop P × B x))
       ( λ x q → intro-exists x (p , q))
       ( e)
 
-  map-inv-distributive-conjunction-exists :
+  map-inv-distributive-product-exists :
     exists-type-family A (λ x → type-Prop P × B x) →
     type-Prop P × exists-type-family A B
-  map-inv-distributive-conjunction-exists =
+  map-inv-distributive-product-exists =
     elim-exists
       ( P ∧₍₋₁₎ exists-type-family-Prop A B)
       ( λ x (p , q) → (p , intro-exists x q))
 
-  iff-distributive-conjunction-exists :
+  iff-distributive-product-exists :
     ( type-Prop P × exists-type-family A B) ↔
     ( exists-type-family A (λ x → type-Prop P × B x))
-  iff-distributive-conjunction-exists =
-    ( map-distributive-conjunction-exists ,
-      map-inv-distributive-conjunction-exists)
+  iff-distributive-product-exists =
+    ( map-distributive-product-exists ,
+      map-inv-distributive-product-exists)
 
-  eq-distributive-conjunction-exists :
+  eq-distributive-product-exists :
     P ∧₍₋₁₎ exists-type-family-Prop A B ＝
     exists-type-family-Prop A (λ x → type-Prop P × B x)
-  eq-distributive-conjunction-exists =
+  eq-distributive-product-exists =
     eq-iff'
       ( P ∧₍₋₁₎ exists-type-family-Prop A B)
       ( exists-type-family-Prop A (λ x → type-Prop P × B x))
-      ( iff-distributive-conjunction-exists)
+      ( iff-distributive-product-exists)
 ```
 
 ### Conjunction distributes over existential quantification
@@ -179,22 +179,22 @@ module _
   map-distributive-conjunction-exists-Prop :
     type-Prop (P ∧₍₋₁₎ (∃₍₋₁₎ A Q) →₍₋₁₎ ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x))
   map-distributive-conjunction-exists-Prop =
-    map-distributive-conjunction-exists P
+    map-distributive-product-exists P
 
   map-inv-distributive-conjunction-exists-Prop :
     type-Prop (∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x) →₍₋₁₎ P ∧₍₋₁₎ (∃₍₋₁₎ A Q))
   map-inv-distributive-conjunction-exists-Prop =
-    map-inv-distributive-conjunction-exists P
+    map-inv-distributive-product-exists P
 
   iff-distributive-conjunction-exists-Prop :
     type-Prop (P ∧₍₋₁₎ ∃₍₋₁₎ A Q ↔₍₋₁₎ ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x))
   iff-distributive-conjunction-exists-Prop =
-    iff-distributive-conjunction-exists P
+    iff-distributive-product-exists P
 
   eq-distributive-conjunction-exists-Prop :
     P ∧₍₋₁₎ (∃₍₋₁₎ A Q) ＝ ∃₍₋₁₎ A (λ x → P ∧₍₋₁₎ Q x)
   eq-distributive-conjunction-exists-Prop =
-    eq-distributive-conjunction-exists P
+    eq-distributive-product-exists P
 ```
 
 ## Table of files about propositional logic

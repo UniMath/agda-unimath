@@ -734,11 +734,13 @@ needed.
       ( x : type-pseudo-cumulative-hierarchy V) →
       ( r : type-pseudo-cumulative-hierarchy V →
         type-pseudo-cumulative-hierarchy V) →
-      exists-type-family ( type-pseudo-cumulative-hierarchy V)
+      exists-type-family
+        ( type-pseudo-cumulative-hierarchy V)
         ( λ v →
           ( y : type-pseudo-cumulative-hierarchy V) →
           ∈-cumulative-hierarchy y v ↔
-          exists-type-family ( type-pseudo-cumulative-hierarchy V)
+          exists-type-family
+            ( type-pseudo-cumulative-hierarchy V)
             ( λ z → (∈-cumulative-hierarchy z x) × (y ＝ r z)))
     replacement-cumulative-hierarchy x r =
       map-universal-property-trunc-Prop

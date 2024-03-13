@@ -39,7 +39,7 @@ module _
     (z : obj-Precategory C)
     (f : hom-Precategory C x z) →
     (g : hom-Precategory C y z) →
-    ∃!
+    uniquely-exists-type-family
       ( hom-Precategory C p z)
       ( λ h →
         ( comp-hom-Precategory C h l ＝ f) ×

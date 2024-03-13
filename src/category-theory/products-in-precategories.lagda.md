@@ -52,8 +52,11 @@ module _
     (z : obj-Precategory C)
     (f : hom-Precategory C z x) →
     (g : hom-Precategory C z y) →
-    (∃! (hom-Precategory C z p) λ h →
-        (comp-hom-Precategory C l h ＝ f) × (comp-hom-Precategory C r h ＝ g))
+    ( uniquely-exists-type-family
+      ( hom-Precategory C z p)
+      ( λ h →
+        ( comp-hom-Precategory C l h ＝ f) ×
+        ( comp-hom-Precategory C r h ＝ g)))
 
   product-obj-Precategory : obj-Precategory C → obj-Precategory C → UU (l1 ⊔ l2)
   product-obj-Precategory x y =
