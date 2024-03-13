@@ -31,38 +31,67 @@ open import foundation-core.propositions
 
 ## Idea
 
-The {{#concept "exclusive disjunction"}} of two
-[propositions](foundation-core.propositions.md) `P` and `Q` is the
-[proposition](foundation-core.propositions.md) that the
-[coproduct](foundation-core.coproduct-types.md) `P + Q` has a
-[unique](foundation-core.contractible-types.md) element. This necessarily means
-that precisely one of the two propositions hold, and the other does not. This is
-captured by the notion of [exclusive sum](foundation.exclusive-sum.md).
+The
+{{#concept "exclusive disjunction" Disambiguation="of propositions" WDID=Q498186 Agda=xor-Prop}}
+of two [propositions](foundation-core.propositions.md) `P` and `Q` is the
+proposition that precisely one of `P` and `Q` holds, and is defined as the
+proposition that the [coproduct](foundation-core.coproduct-types.md) of their
+underlying types is contractible
+
+```text
+  P ⊻ Q := is-contr (P + Q)
+```
+
+It necessarily follows that precisely one of the two propositions hold, and the
+other does not. This is captured by the
+[exclusive sum](foundation.exclusive-sum.md).
 
 ## Definitions
 
-### The exclusive disjunction of types
+### The exclusive disjunction of arbitrary types
 
-We can generalize exclusive disjunction to arbitrary types, but in this case the
-"correct" definition requires us to propositionally truncate the types.
+The definition of exclusive sum is sometimes generalized to arbitrary types,
+which we record here for completeness.
+
+The
+{{#concept "exclusive disjunction" Disambiguation="of types" Agda=xor-prop-Type}}
+of the types `A` and `B` is the proposition that their coproduct is contractible
+
+```text
+  A ⊻ B := is-contr (A + B).
+```
+
+Note that unlike the case for [disjunction](foundation.disjunction.md) and
+[existential quantification](foundation.existential-quantification.md), but
+analogous to the case of
+[uniqueness quantification](foundation.unique-existence.md), the exclusive
+disjunction of types does _not_ coincide with the exclusive disjunction of the
+summands' [propositional reflections](foundation.propositional-truncations.md):
+
+```text
+  A ⊻ B ≠ ║ A ║₋₁ ⊻ ║ B ║₋₁.
+```
 
 ```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  prop-xor : Prop (l1 ⊔ l2)
-  prop-xor = is-contr-Prop (A + B)
+  xor-prop-Type : Prop (l1 ⊔ l2)
+  xor-prop-Type = is-contr-Prop (A + B)
 
-  xor : UU (l1 ⊔ l2)
-  xor = type-Prop prop-xor
+  xor-Type : UU (l1 ⊔ l2)
+  xor-Type = type-Prop xor-prop-Type
+
+  is-prop-xor-Type : is-prop xor-Type
+  is-prop-xor-Type = is-prop-type-Prop xor-prop-Type
 
   infixr 10 _⊻_
   _⊻_ : UU (l1 ⊔ l2)
-  _⊻_ = xor
+  _⊻_ = xor-Type
 ```
 
-### The exclusive disjunction of propositions
+### The exclusive disjunction
 
 ```agda
 module _
@@ -70,10 +99,13 @@ module _
   where
 
   xor-Prop : Prop (l1 ⊔ l2)
-  xor-Prop = is-contr-Prop (type-Prop P + type-Prop Q)
+  xor-Prop = xor-prop-Type (type-Prop P) (type-Prop Q)
 
   type-xor-Prop : UU (l1 ⊔ l2)
   type-xor-Prop = type-Prop xor-Prop
+
+  is-prop-xor-Prop : is-prop type-xor-Prop
+  is-prop-xor-Prop = is-prop-type-Prop xor-Prop
 
   infixr 10 _⊻₍₋₁₎_
   _⊻₍₋₁₎_ : Prop (l1 ⊔ l2)
@@ -93,14 +125,24 @@ _⊻₍ₙ₎_ : Truncated-Type l1 n → Truncated-Type l2 n → Truncated-Type 
 that takes the exclusive disjunction of the underlying types, which will always
 be a proposition. This is in contrast to the exclusive sum operation on
 $n$-[truncated types](foundation-core.truncated-types.md), which has the same
-type signature, but
-
-Note in particular that `⊻₍ₙ₎` should be read differently from the exclusive sum
-operation on $n$-[truncated types](foundation-core.truncated-types.md), which
-has the same type signature, but whose underlying type is not generally
-$k$-truncated for any $k < n$.
+type signature, but whose underlying type is not generally $k$-truncated for any
+$k < n$.
 
 ## Properties
+
+### The canonical map from the exclusive disjunction into the exclusive sum
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  map-exclusive-sum-xor : xor-Type A B → exclusive-sum A B
+  map-exclusive-sum-xor (inl a , H) =
+    inl (a , (λ b → is-empty-eq-coproduct-inl-inr a b (H (inr b))))
+  map-exclusive-sum-xor (inr b , H) =
+    inr (b , (λ a → is-empty-eq-coproduct-inr-inl b a (H (inl a))))
+```
 
 ### The exclusive disjunction of two propositions is equivalent to their exclusive sum
 
@@ -109,19 +151,12 @@ module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  map-equiv-xor-Prop : type-xor-Prop P Q → type-exclusive-sum-Prop P Q
-  map-equiv-xor-Prop (inl p , H) =
-    inl (p , (λ q → is-empty-eq-coproduct-inl-inr p q (H (inr q))))
-  map-equiv-xor-Prop (inr q , H) =
-    inr (q , (λ p → is-empty-eq-coproduct-inr-inl q p (H (inl p))))
-
-  equiv-xor-Prop : type-xor-Prop P Q ≃ type-exclusive-sum-Prop P Q
-  equiv-xor-Prop =
+  equiv-exclusive-sum-xor-Prop : type-xor-Prop P Q ≃ type-exclusive-sum-Prop P Q
+  equiv-exclusive-sum-xor-Prop =
     ( equiv-coproduct
       ( equiv-tot
         ( λ p →
-          ( ( equiv-Π-equiv-family
-              ( λ q → compute-eq-coproduct-inl-inr p q)) ∘e
+          ( ( equiv-Π-equiv-family (compute-eq-coproduct-inl-inr p)) ∘e
             ( left-unit-law-product-is-contr
               ( is-contr-Π
                 ( λ p' →
@@ -129,11 +164,10 @@ module _
                     ( p ＝ p')
                     ( equiv-ap-emb (emb-inl (type-Prop P) (type-Prop Q)))
                     ( is-prop-type-Prop P p p'))))) ∘e
-          ( equiv-dependent-universal-property-coproduct (λ x → inl p ＝ x))))
+          ( equiv-dependent-universal-property-coproduct (inl p ＝_))))
       ( equiv-tot
         ( λ q →
-          ( ( equiv-Π-equiv-family
-              ( λ p → compute-eq-coproduct-inr-inl q p)) ∘e
+          ( ( equiv-Π-equiv-family (compute-eq-coproduct-inr-inl q)) ∘e
             ( right-unit-law-product-is-contr
               ( is-contr-Π
                 ( λ q' →
@@ -141,8 +175,7 @@ module _
                     ( q ＝ q')
                     ( equiv-ap-emb (emb-inr (type-Prop P) (type-Prop Q)))
                     ( is-prop-type-Prop Q q q'))))) ∘e
-          ( equiv-dependent-universal-property-coproduct
-            ( λ x → inr q ＝ x))))) ∘e
+          ( equiv-dependent-universal-property-coproduct (inr q ＝_))))) ∘e
     ( right-distributive-Σ-coproduct
       ( type-Prop P)
       ( type-Prop Q)
@@ -151,7 +184,7 @@ module _
 
 ## See also
 
-- The indexed version of exclusive disjunction is
+- The indexed analogue of exclusive disjunction is
   [unique existence](foundation.unique-existence.md).
 
 ## Table of files about propositional logic
@@ -165,3 +198,5 @@ logic and related considerations.
 
 - [exclusive disjunction](https://ncatlab.org/nlab/show/exclusive+disjunction)
   at $n$Lab
+- [Exclusive disjunction](https://simple.wikipedia.org/wiki/Exclusive_disjunction)
+  at Wikipedia
