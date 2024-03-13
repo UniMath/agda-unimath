@@ -24,16 +24,17 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Statement
 
-The **limited principle of omniscience** (LPO) asserts that for every sequence
-`f : ℕ → Fin 2` there either exists an `n` such that `f n ＝ 1` or for all `n`
-we have `f n ＝ 0`.
+The {{#concept "limited principle of omniscience" WDID=Q6549544 Agda=LPO}} (LPO)
+asserts that for every [sequence](foundation.sequences.md) `f : ℕ → Fin 2` there
+either [exists](foundation.existential-quantification.md) an `n` such that
+`f n ＝ 1` or for all `n` we have `f n ＝ 0`.
 
 ```agda
 LPO : UU lzero
 LPO =
   (f : ℕ → Fin 2) →
   type-disjunction-Prop
-    ( exists-type-family-Prop ℕ (λ n → f n ＝ one-Fin 1))
+    ( exists-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (one-Fin 1)))
     ( Π-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1)))
 ```
 
