@@ -220,24 +220,6 @@ pr2 (Σ-Prop P Q) =
     ( λ p → is-prop-type-Prop (Q p))
 ```
 
-We also introduce the special notation `Σ₍₋₁₎` for `Σ-Prop`.
-
-```agda
-Σ₍₋₁₎ :
-  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2) → Prop (l1 ⊔ l2)
-Σ₍₋₁₎ = Σ-Prop
-```
-
-This is part of a general scheme where `Σ₍ₙ₎` is the operator of type
-
-```text
-Σ₍ₙ₎ :
-  (A : Truncated-Type l1 n) → (A → Truncated-Type l2 n) →
-  Truncated-Type (l1 ⊔ l2) n
-```
-
-that takes the dependent sum of the underlying types.
-
 ### Propositions are closed under cartesian product types
 
 ```agda
@@ -355,8 +337,8 @@ hom-Prop :
 pr1 (hom-Prop P Q) = type-hom-Prop P Q
 pr2 (hom-Prop P Q) = is-prop-hom-Prop P Q
 
-infixr 5 _→₍₋₁₎_
-_→₍₋₁₎_ = hom-Prop
+infixr 5 _⇒_
+_⇒_ = hom-Prop
 ```
 
 ### The type of equivalences between two propositions is a proposition

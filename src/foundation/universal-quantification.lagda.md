@@ -101,7 +101,7 @@ module _
   universal-property-for-all : UUω
   universal-property-for-all =
     {l : Level} (R : Prop l) →
-    type-Prop ((∀' A (λ a → R →₍₋₁₎ P a)) ↔₍₋₁₎ (R →₍₋₁₎ ∀' A P))
+    type-Prop ((∀' A (λ a → R ⇒ P a)) ⇔ (R ⇒ ∀' A P))
 ```
 
 ## Properties
@@ -129,6 +129,11 @@ module _
   up-for-all : universal-property-for-all A P
   up-for-all R = (ev-for-all A P , map-up-for-all)
 ```
+
+## See also
+
+- Universal quantification is the indexed analogue to
+  [conjunction](foundation.conjunction.md)
 
 ## External links
 

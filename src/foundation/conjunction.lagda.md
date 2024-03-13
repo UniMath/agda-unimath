@@ -87,12 +87,6 @@ module _
   _∧_ = conjunction-Prop
 ```
 
-The indexing $-1$ for the infix binary operator `∧` is part of a general scheme,
-because `∧` takes as inputs $-1$-[types](foundation-core.truncated-types.md),
-and spits out the propositional conjunction of their underlying types, as a
-$-1$-type. This is in contrast to the cartesian product `×₍ₙ₎`, which will take
-values in $n$-types that are not generally $k$-truncated for any $k < n$.
-
 **Note**: The symbol used for the conjunction `_∧_` is the
 [logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` or
 `\and`).

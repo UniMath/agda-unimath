@@ -22,12 +22,12 @@ open import foundation-core.propositions
 ## Idea
 
 Given a predicate `P` on `A` we say there
-{{#concept "uniquely exists" Disambiguation="in a subtype" WDID=Q2502253 Agda=∃!₍₋₁₎}}
+{{#concept "uniquely exists" Disambiguation="in a subtype" WDID=Q2502253 Agda=∃!}}
 _an `x : A` such that `P x`_, if the [subtype](foundation-core.subtypes.md)
 `Σ (x : A), (P x)` is [contractible](foundation-core.contractible-types.md).
 
 More generally, given a type family `B : A → 𝒰` we say there
-{{#concept "uniquely exists" Disambiguation="in a total type" Agda=∃!₍₋₁₎}} _an
+{{#concept "uniquely exists" Disambiguation="in a total type" Agda=∃!}} _an
 `x : A` and a `y : B x`_, if the
 [total type](foundation.dependent-pair-types.md) `Σ (x : A), (B x)` is
 contractible.
@@ -68,8 +68,8 @@ module _
   is-prop-uniquely-exists : is-prop uniquely-exists
   is-prop-uniquely-exists = is-prop-type-Prop uniquely-exists-Prop
 
-  ∃!₍₋₁₎ : Prop (l1 ⊔ l2)
-  ∃!₍₋₁₎ = uniquely-exists-Prop
+  ∃! : Prop (l1 ⊔ l2)
+  ∃! = uniquely-exists-Prop
 ```
 
 ### Components of unique existence

@@ -36,8 +36,8 @@ WLPO-Prop =
     ( ℕ → Fin 2)
     ( λ f →
       disjunction-Prop
-        ( ∀' ℕ (λ n → Id₍₋₁₎ (Fin-Set 2) (f n) (zero-Fin 1)))
-        ( ¬₍₋₁₎ (∀' ℕ (λ n → Id₍₋₁₎ (Fin-Set 2) (f n) (zero-Fin 1)))))
+        ( ∀' ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1)))
+        ( ¬' (∀' ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1)))))
 
 WLPO : UU lzero
 WLPO = type-Prop WLPO-Prop

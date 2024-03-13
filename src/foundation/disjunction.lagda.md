@@ -124,12 +124,6 @@ module _
   _∨_ = disjunction-Prop
 ```
 
-The indexing $-1$ for the infix binary operator `∨` is part of a general scheme,
-where `∨₍ₙ₎` takes as inputs $n$-[types](foundation-core.truncated-types.md),
-and spits out the propositional disjunction of their underlying types, as an
-$n$-type. This is in contrast to the coproduct `+₍ₙ₎`, which will take values in
-$n$-types that are not generally $k$-truncated for any $k < n$.
-
 **Notation.** The symbol used for the disjunction `_∨_` is the
 [logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`), and
 not the [latin small letter v](https://codepoints.net/U+0076) `v`.

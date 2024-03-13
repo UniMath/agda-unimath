@@ -43,15 +43,11 @@ neg-Prop P = neg-prop-Type (type-Prop P)
 type-neg-Prop : {l1 : Level} → Prop l1 → UU l1
 type-neg-Prop P = type-Prop (neg-Prop P)
 
-infix 25 ¬₍₋₁₎_
+infix 25 ¬'_
 
-¬₍₋₁₎_ : {l1 : Level} → Prop l1 → Prop l1
-¬₍₋₁₎_ = neg-Prop
+¬'_ : {l1 : Level} → Prop l1 → Prop l1
+¬'_ = neg-Prop
 ```
-
-The indexing $-1$ for the operator `¬₍₋₁₎` is part of a general scheme, where
-`¬₍ₙ₎` takes as input an $n$-[type](foundation-core.truncated-types.md) `X`, and
-spits out the $n$-type that is the negation of the underlying type of `X`.
 
 ### Reductio ad absurdum
 

@@ -75,16 +75,14 @@ module _
   is-dedekind-cut-Prop : Prop (l1 ⊔ l2)
   is-dedekind-cut-Prop =
     conjunction-Prop
-      ( (∃₍₋₁₎ ℚ L) ∧₍₋₁₎ (∃₍₋₁₎ ℚ U))
+      ( (∃ ℚ L) ∧ (∃ ℚ U))
       ( conjunction-Prop
         ( conjunction-Prop
-          ( ∀' ℚ ( λ q → L q ↔₍₋₁₎ ∃₍₋₁₎ ℚ (λ r → le-ℚ-Prop q r ∧₍₋₁₎ L r)))
-          ( ∀' ℚ ( λ r → U r ↔₍₋₁₎ ∃₍₋₁₎ ℚ (λ q → le-ℚ-Prop q r ∧₍₋₁₎ U q))))
+          ( ∀' ℚ ( λ q → L q ⇔ ∃ ℚ (λ r → le-ℚ-Prop q r ∧ L r)))
+          ( ∀' ℚ ( λ r → U r ⇔ ∃ ℚ (λ q → le-ℚ-Prop q r ∧ U q))))
         ( conjunction-Prop
-          ( ∀' ℚ (λ q → ¬₍₋₁₎ (L q ∧₍₋₁₎ U q)))
-          ( ∀'
-            ( ℚ)
-            ( λ q → ∀' ℚ (λ r → le-ℚ-Prop q r →₍₋₁₎ (L q ∨₍₋₁₎ U r))))))
+          ( ∀' ℚ (λ q → ¬' (L q ∧ U q)))
+          ( ∀' ℚ (λ q → ∀' ℚ (λ r → le-ℚ-Prop q r ⇒ (L q ∨ U r))))))
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop
@@ -278,11 +276,11 @@ module _
 
   is-lower-complement-upper-cut-ℝ-Prop : (p q : ℚ) → Prop l
   is-lower-complement-upper-cut-ℝ-Prop p q =
-    ( le-ℚ-Prop p q) ∧₍₋₁₎ (¬₍₋₁₎ (upper-cut-ℝ x q))
+    ( le-ℚ-Prop p q) ∧ (¬' (upper-cut-ℝ x q))
 
   lower-complement-upper-cut-ℝ : subtype l ℚ
   lower-complement-upper-cut-ℝ p =
-    ∃₍₋₁₎ ℚ (is-lower-complement-upper-cut-ℝ-Prop p)
+    ∃ ℚ (is-lower-complement-upper-cut-ℝ-Prop p)
 ```
 
 ```agda
@@ -335,11 +333,11 @@ module _
 
   is-upper-complement-lower-cut-ℝ-Prop : (q p : ℚ) → Prop l
   is-upper-complement-lower-cut-ℝ-Prop q p =
-    (le-ℚ-Prop p q) ∧₍₋₁₎ (¬₍₋₁₎ (lower-cut-ℝ x p))
+    (le-ℚ-Prop p q) ∧ (¬' (lower-cut-ℝ x p))
 
   upper-complement-lower-cut-ℝ : subtype l ℚ
   upper-complement-lower-cut-ℝ q =
-    ∃₍₋₁₎ ℚ (is-upper-complement-lower-cut-ℝ-Prop q)
+    ∃ ℚ (is-upper-complement-lower-cut-ℝ-Prop q)
 ```
 
 ```agda
