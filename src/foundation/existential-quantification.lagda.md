@@ -10,8 +10,10 @@ module foundation.existential-quantification where
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
+open import foundation.functoriality-propositional-truncation
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -75,8 +77,6 @@ module _
   ∃₍₋₁₎ = exists-Prop
 ```
 
-## Properties
-
 ### The introduction rule for existential quantification
 
 ```agda
@@ -88,7 +88,30 @@ module _
   intro-exists a b = unit-trunc-Prop (a , b)
 ```
 
-### The elimination rule and the universal property of existential quantification
+### The universal property of existential quantification
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (∃AB : Prop l3)
+  where
+
+  is-least-upper-bound-exists-type-family : UUω
+  is-least-upper-bound-exists-type-family =
+    {l : Level} (Q : Prop l) →
+    ((x : A) → B x → type-Prop Q) ↔ (type-Prop ∃AB → type-Prop Q)
+
+module _
+  {l1 l2 l3 : Level} (A : UU l1) (P : A → Prop l2) (∃AP : Prop l3)
+  where
+
+  is-least-upper-bound-exists-Prop : UUω
+  is-least-upper-bound-exists-Prop =
+    is-least-upper-bound-exists-type-family A (type-Prop ∘ P) ∃AP
+```
+
+## Properties
+
+### The elimination rule of existential quantification
 
 The
 {{#concept "universal property" Disambiguation="of existential quantification"}}
@@ -118,14 +141,66 @@ module _
         ( function-Prop (exists-type-family A B) Q)
         ( Π-Prop A (λ x → function-Prop (B x) Q))
         ( elim-exists Q)
+```
 
+### The existential quantification satisfies the universal property of existential quantification
+
+```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (P : A → Prop l2) (Q : Prop l3)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  is-least-upper-bound-exists-Prop :
-    type-Prop (Π₍₋₁₎ A (λ x → P x →₍₋₁₎ Q) ↔₍₋₁₎ ((∃₍₋₁₎ A P) →₍₋₁₎ Q))
-  is-least-upper-bound-exists-Prop = (elim-exists Q , ev-intro-exists)
+  up-exists :
+    is-least-upper-bound-exists-type-family A B (exists-type-family-Prop A B)
+  up-exists Q = (elim-exists Q , ev-intro-exists)
+```
+
+### Propositions that satisfy the existential quantification are equivalent to existential quantification
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (Q : Prop l3)
+  (up-Q : is-least-upper-bound-exists-type-family A B Q)
+  where
+
+  forward-implication-iff-is-least-upper-bound-exists :
+    type-Prop Q → exists-type-family A B
+  forward-implication-iff-is-least-upper-bound-exists =
+    forward-implication (up-Q (exists-type-family-Prop A B)) intro-exists
+
+  backward-implication-iff-is-least-upper-bound-exists :
+    exists-type-family A B → type-Prop Q
+  backward-implication-iff-is-least-upper-bound-exists =
+    elim-exists Q (backward-implication (up-Q Q) id)
+
+  iff-is-least-upper-bound-exists :
+    type-Prop Q ↔ exists-type-family A B
+  iff-is-least-upper-bound-exists =
+    ( forward-implication-iff-is-least-upper-bound-exists ,
+      backward-implication-iff-is-least-upper-bound-exists)
+```
+
+### Existential quantification over an arbitrary type family is the same as existential quantification over its propositional reflection
+
+We proceed by showing that the latter satisfies the universal property of the
+former.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  is-least-upper-bound-exists-type-family-exists-trunc :
+    is-least-upper-bound-exists-type-family A B (exists-Prop A (trunc-Prop ∘ B))
+  is-least-upper-bound-exists-type-family-exists-trunc Q =
+    ( λ f → rec-trunc-Prop Q (λ (a , |b|) → rec-trunc-Prop Q (f a) |b|)) ,
+    ( λ f a b → f (unit-trunc-Prop (a , unit-trunc-Prop b)))
+
+  iff-compute-exists-trunc : exists A (trunc-Prop ∘ B) ↔ exists-type-family A B
+  iff-compute-exists-trunc =
+    iff-is-least-upper-bound-exists
+      ( exists-Prop A (trunc-Prop ∘ B))
+      ( is-least-upper-bound-exists-type-family-exists-trunc)
 ```
 
 ### Taking the cartesian product with a proposition distributes over existential quantification on arbitrary type families
