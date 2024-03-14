@@ -93,17 +93,17 @@ type-impredicative-conjunction-Prop P1 P2 =
 
 map-product-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-product-Prop P1 P2 → type-impredicative-conjunction-Prop P1 P2
+  type-conjunction-Prop P1 P2 → type-impredicative-conjunction-Prop P1 P2
 map-product-impredicative-conjunction-Prop P1 P2 (p1 , p2) Q f = f p1 p2
 
 map-inv-product-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-impredicative-conjunction-Prop P1 P2 → type-product-Prop P1 P2
+  type-impredicative-conjunction-Prop P1 P2 → type-conjunction-Prop P1 P2
 map-inv-product-impredicative-conjunction-Prop P1 P2 H = H (P1 ∧ P2) pair
 
 equiv-product-impredicative-conjunction-Prop :
   {l1 l2 : Level} (P1 : Prop l1) (P2 : Prop l2) →
-  type-product-Prop P1 P2 ≃ type-impredicative-conjunction-Prop P1 P2
+  type-conjunction-Prop P1 P2 ≃ type-impredicative-conjunction-Prop P1 P2
 equiv-product-impredicative-conjunction-Prop P1 P2 =
   equiv-iff
     ( P1 ∧ P2)
@@ -233,14 +233,14 @@ map-inv-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) →
   type-impredicative-exists-Prop P → exists A P
 map-inv-impredicative-exists-Prop {A = A} P H =
-  H (exists-Prop A P) (λ x y → unit-trunc-Prop (x , y))
+  H (∃ A P) (λ x y → unit-trunc-Prop (x , y))
 
 equiv-impredicative-exists-Prop :
   {l1 l2 : Level} {A : UU l1} (P : A → Prop l2) →
   exists A P ≃ type-impredicative-exists-Prop P
 equiv-impredicative-exists-Prop {A = A} P =
   equiv-iff
-    ( exists-Prop A P)
+    ( ∃ A P)
     ( impredicative-exists-Prop P)
     ( map-impredicative-exists-Prop P)
     ( map-inv-impredicative-exists-Prop P)

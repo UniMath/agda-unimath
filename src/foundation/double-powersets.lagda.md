@@ -81,7 +81,7 @@ union-double-powerset :
   {l1 l2 l3 : Level} {A : UU l1} →
   double-powerset l2 l3 A → powerset (l1 ⊔ lsuc l2 ⊔ l3) A
 union-double-powerset F a =
-  exists-Prop (type-subtype F) (λ X → inclusion-subtype F X a)
+  ∃ (type-subtype F) (λ X → inclusion-subtype F X a)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} (F : double-powerset l2 l3 A)

@@ -76,11 +76,7 @@ is-dedekind-cut-le-ℚ x =
       exists ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r)
     α a b =
       elim-exists
-        ( exists-Prop ℚ
-          ( λ r →
-            product-Prop
-              ( le-ℚ-Prop r b)
-              ( le-ℚ-Prop a r)))
+        ( ∃ ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r))
         ( λ r ( p , q) → intro-exists r ( q , p))
 ```
 

@@ -82,8 +82,7 @@ module _
 
   subset-radical-of-ideal-Commutative-Ring : type-Commutative-Ring A → Prop l2
   subset-radical-of-ideal-Commutative-Ring f =
-    exists-Prop ℕ
-      ( λ n → subset-ideal-Commutative-Ring A I (power-Commutative-Ring A n f))
+    ∃ ℕ (λ n → subset-ideal-Commutative-Ring A I (power-Commutative-Ring A n f))
 
   is-in-radical-of-ideal-Commutative-Ring : type-Commutative-Ring A → UU l2
   is-in-radical-of-ideal-Commutative-Ring =

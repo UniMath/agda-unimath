@@ -34,5 +34,5 @@ module _
 
   has-set-presentation-Prop : Prop (l1 ⊔ l2)
   has-set-presentation-Prop =
-    exists-Prop (type-Set A → B) (λ f → is-equiv-Prop (unit-trunc-Set ∘ f))
+    ∃ (type-Set A → B) (λ f → is-equiv-Prop (unit-trunc-Set ∘ f))
 ```

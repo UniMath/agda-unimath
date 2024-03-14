@@ -34,7 +34,7 @@ LPO : UU lzero
 LPO =
   (f : ℕ → Fin 2) →
   type-disjunction-Prop
-    ( exists-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (one-Fin 1)))
+    ( ∃ ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (one-Fin 1)))
     ( Π-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1)))
 ```
 

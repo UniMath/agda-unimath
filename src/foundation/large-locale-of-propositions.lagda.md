@@ -99,7 +99,7 @@ is-large-suplattice-Prop-Large-Locale :
   is-large-suplattice-Large-Poset lzero Prop-Large-Poset
 sup-has-least-upper-bound-family-of-elements-Large-Poset
   ( is-large-suplattice-Prop-Large-Locale {I = I} P) =
-  exists-Prop I P
+  ∃ I P
 is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
   ( is-large-suplattice-Prop-Large-Locale {I = I} P) R =
   inv-iff (up-exists R)

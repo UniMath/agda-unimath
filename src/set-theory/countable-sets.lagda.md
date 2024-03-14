@@ -72,7 +72,7 @@ module _
 
   is-countable-Prop : Prop l
   is-countable-Prop =
-    exists-Prop (ℕ → Maybe (type-Set X)) (is-surjective-Prop)
+    ∃ (ℕ → Maybe (type-Set X)) (is-surjective-Prop)
 
   is-countable : UU l
   is-countable = type-Prop (is-countable-Prop)
@@ -114,7 +114,7 @@ surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
 ```agda
 is-directly-countable-Prop : {l : Level} → Set l → Prop l
 is-directly-countable-Prop X =
-  exists-Prop (ℕ → type-Set X) (is-surjective-Prop)
+  ∃ (ℕ → type-Set X) (is-surjective-Prop)
 
 is-directly-countable : {l : Level} → Set l → UU l
 is-directly-countable X = type-Prop (is-directly-countable-Prop X)
