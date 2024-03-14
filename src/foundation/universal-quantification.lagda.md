@@ -24,7 +24,7 @@ open import foundation-core.propositions
 
 Given a type `A` and a [subtype](foundation-core.subtypes.md) `P : A → Prop`,
 the
-{{#concept "universal quantification" Disambiguation="of types" WDID=Q126695 Agda=∀'}}
+{{#concept "universal quantification" Disambiguation="on a subtype" WDID=Q126695 Agda=∀'}}
 
 ```text
   ∀ (x : A), (P x)
