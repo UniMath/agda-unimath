@@ -24,7 +24,7 @@ open import synthetic-homotopy-theory.sequential-diagrams
 A **dependent sequential diagram** over a
 [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md) `(A, a)`
 is a [sequence](foundation.dependent-sequences.md) of families of types
-`B : (n : ℕ) → Aₙ → 𝓤` over the types in the base sequential diagram, equipped
+`B : (n : ℕ) → Aₙ → 𝒰` over the types in the base sequential diagram, equipped
 with fiberwise maps
 
 ```text

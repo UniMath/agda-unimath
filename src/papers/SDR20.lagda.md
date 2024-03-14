@@ -64,18 +64,18 @@ import synthetic-homotopy-theory.functoriality-sequential-colimits using
 Lemma 3.6: Dropping a head of a sequential diagram preserves the sequential
 colimit.
 
-TODO: the actual equivalence
-
 ```agda
 import synthetic-homotopy-theory.shifts-sequential-diagrams using
-  ( up-cocone-shift-sequential-diagram)
+  ( up-cocone-shift-sequential-diagram ;
+    compute-sequential-colimit-shift-sequential-diagram) -- apply to 1
 ```
 
 Lemma 3.7: Dropping finitely many objects from the head of a sequential diagram
 preserves the sequential colimit.
 
 ```agda
--- TODO
+import synthetic-homotopy-theory.shifts-sequential-diagrams using
+  ( compute-sequential-colimit-shift-sequential-diagram)
 ```
 
 Liftings?
