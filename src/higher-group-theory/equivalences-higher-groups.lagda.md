@@ -77,7 +77,7 @@ is-torsorial-equiv-∞-Group :
   is-torsorial (λ (H : ∞-Group l1) → equiv-∞-Group G H)
 is-torsorial-equiv-∞-Group G =
   is-torsorial-Eq-subtype
-    ( is-torsorial-equiv-Pointed-Type (classifying-pointed-type-∞-Group G))
+    ( is-torsorial-pointed-equiv (classifying-pointed-type-∞-Group G))
     ( λ X → is-prop-is-0-connected (type-Pointed-Type X))
     ( classifying-pointed-type-∞-Group G)
     ( id-pointed-equiv)

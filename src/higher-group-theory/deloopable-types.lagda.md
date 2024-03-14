@@ -17,6 +17,7 @@ open import higher-group-theory.small-higher-groups
 
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
+open import structured-types.small-pointed-types
 ```
 
 </details>
@@ -76,6 +77,10 @@ module _
     ∞-group-delooping-Level : ∞-Group l
     ∞-group-delooping-Level = pr1 Y
 
+    classifying-pointed-type-∞-group-delooping-Level : Pointed-Type l
+    classifying-pointed-type-∞-group-delooping-Level =
+      classifying-pointed-type-∞-Group ∞-group-delooping-Level
+
     classifying-type-∞-group-delooping-Level : UU l
     classifying-type-∞-group-delooping-Level =
       classifying-type-∞-Group ∞-group-delooping-Level
@@ -123,6 +128,15 @@ module _
       is-small-classifying-type-is-small-∞-Group
         ( ∞-group-delooping-Level X H)
         ( is-small-∞-group-delooping-Level)
+
+  abstract
+    is-pointedly-small-classifying-pointed-type-∞-group-delooping-Level :
+      is-pointedly-small-Pointed-Type l1
+        ( classifying-pointed-type-∞-group-delooping-Level X H)
+    is-pointedly-small-classifying-pointed-type-∞-group-delooping-Level =
+      is-pointedly-small-is-small-Pointed-Type
+        ( classifying-pointed-type-∞-group-delooping-Level X H)
+        ( is-small-classifying-type-∞-group-delooping-Level)
 ```
 
 ### If a pointed type in universe `𝒰` is deloopable in any universe, then it is deloopable in `𝒰`
@@ -133,5 +147,7 @@ module _
   where
 
   delooping-delooping-Level : delooping X
-  delooping-delooping-Level = {!!}
+  pr1 delooping-delooping-Level =
+    {!pointed-type-is-pointedly-small-Pointed-Type!}
+  pr2 delooping-delooping-Level = {!!}
 ```

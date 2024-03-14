@@ -8,11 +8,13 @@ module structured-types.pointed-equivalences where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-identifications
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
@@ -348,9 +350,8 @@ module _
   {l1 : Level} (A : Pointed-Type l1)
   where
 
-  is-torsorial-equiv-Pointed-Type :
-    is-torsorial (λ B → A ≃∗ B)
-  is-torsorial-equiv-Pointed-Type =
+  is-torsorial-pointed-equiv : is-torsorial (λ B → A ≃∗ B)
+  is-torsorial-pointed-equiv =
     is-torsorial-Eq-structure
       ( is-torsorial-equiv (type-Pointed-Type A))
       ( type-Pointed-Type A , id-equiv)
@@ -701,4 +702,59 @@ module _
       ( map-inv-is-equiv-postcomp-is-pointed-equiv X)
       ( is-section-map-inv-is-equiv-postcomp-is-pointed-equiv X)
       ( is-retraction-map-inv-is-equiv-postcomp-is-pointed-equiv X)
+
+equiv-postcomp-pointed-map :
+  {l1 l2 l3 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (C : Pointed-Type l3) → (A ≃∗ B) → (C →∗ A) ≃ (C →∗ B)
+pr1 (equiv-postcomp-pointed-map C e) =
+  postcomp-pointed-map (pointed-map-pointed-equiv e) C
+pr2 (equiv-postcomp-pointed-map C e) =
+  is-equiv-postcomp-is-pointed-equiv
+    ( pointed-map-pointed-equiv e)
+    ( is-pointed-equiv-pointed-equiv e)
+    ( C)
+```
+
+### The composition operation on pointed equivalences is a binary equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
+  where
+
+  is-equiv-comp-pointed-equiv :
+    (f : B ≃∗ C) → is-equiv (λ (e : A ≃∗ B) → comp-pointed-equiv f e)
+  is-equiv-comp-pointed-equiv f =
+    is-equiv-map-Σ _
+      ( is-equiv-postcomp-equiv-equiv (equiv-pointed-equiv f))
+      ( λ e →
+        is-equiv-comp _
+          ( ap (map-pointed-equiv f))
+          ( is-emb-is-equiv (is-equiv-map-pointed-equiv f) _ _)
+          ( is-equiv-concat' _ (preserves-point-pointed-equiv f)))
+
+  equiv-comp-pointed-equiv : (f : B ≃∗ C) → (A ≃∗ B) ≃ (A ≃∗ C)
+  pr1 (equiv-comp-pointed-equiv f) = comp-pointed-equiv f
+  pr2 (equiv-comp-pointed-equiv f) = is-equiv-comp-pointed-equiv f
+
+  is-equiv-comp-pointed-equiv' :
+    (e : A ≃∗ B) → is-equiv (λ (f : B ≃∗ C) → comp-pointed-equiv f e)
+  is-equiv-comp-pointed-equiv' e =
+    is-equiv-map-Σ _
+      ( is-equiv-precomp-equiv-equiv (equiv-pointed-equiv e))
+      ( λ f →
+        is-equiv-concat
+          ( ap (map-equiv f) (preserves-point-pointed-equiv e))
+          ( _))
+
+  equiv-comp-pointed-equiv' :
+    (e : A ≃∗ B) → (B ≃∗ C) ≃ (A ≃∗ C)
+  pr1 (equiv-comp-pointed-equiv' e) f = comp-pointed-equiv f e
+  pr2 (equiv-comp-pointed-equiv' e) = is-equiv-comp-pointed-equiv' e
+
+  is-binary-equiv-comp-pointed-equiv :
+    is-binary-equiv (λ (f : B ≃∗ C) (e : A ≃∗ B) → comp-pointed-equiv f e)
+  pr1 is-binary-equiv-comp-pointed-equiv = is-equiv-comp-pointed-equiv'
+  pr2 is-binary-equiv-comp-pointed-equiv = is-equiv-comp-pointed-equiv
 ```
