@@ -14,11 +14,9 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.transport-along-identifications
 open import foundation.locally-small-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-open import reflection.rewriting
 
 open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-induction
@@ -83,7 +81,7 @@ postulate
 ### Crisp induction for the sharp modality
 
 The
-{{# "crisp induction principle" Disambiguation="for the sharp modality" Agda=crisp-ind-sharp}}
+{{#concept "crisp induction principle" Disambiguation="for the sharp modality" Agda=crisp-ind-sharp}}
 for the sharp modality is the principle that sharp codiscrete types are local at
 the flat counit.
 
@@ -139,7 +137,7 @@ syntax elim-pointwise-sharp (λ γ → a) ctx = let♯ γ ::= ctx in♯ a ↓↓
 **Warning:** When normalizing `λ B x → unit-pointwise-sharp f x`, the rewrite
 `compute-unit-pointwise-sharp` will fire turning it into `unit-sharp (f x)`,
 which is ill-typed on cohesive `x : A` (and the typechecker complains).
-\[Myers\] (May be outdated info)
+{{#cite DavidJaz/Cohesion}} (May be outdated info)
 
 ```text
 postulate
@@ -386,8 +384,5 @@ ap-map-sharp f = rec-sharp (unit-sharp ∘ f)
 
 ## References
 
-- David Jaz Myers, _Cohesion_, GitHub repository
-  (<https://github.com/DavidJaz/Cohesion>)
-
 {{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}
-{{#reference Felixwellen/DCHoTT-Agda}}
+{{#reference Felixwellen/DCHoTT-Agda}} {{#reference DavidJaz/Cohesion}}

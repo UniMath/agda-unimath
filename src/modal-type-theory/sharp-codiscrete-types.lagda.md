@@ -105,8 +105,7 @@ module _
 
 ### Crisp induction for sharp codiscrete types
 
-The following is Theorem 3.3 in _Brouwer's fixed-point theorem in real-cohesive
-homotopy type theory_.
+The following is Theorem 3.3 in {{#cite Shu18}}.
 
 ```agda
 crisp-ind-sharp-codiscrete :

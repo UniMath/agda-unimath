@@ -179,5 +179,4 @@ module _
 
 ## References
 
-- Michael Shulman, _Brouwer's fixed-point theorem in real-cohesive homotopy type
-  theory_, 2015 ([arXiv:1509.07584](https://arxiv.org/abs/1509.07584))
+{{#bibliography}} {{#reference Shu18}}

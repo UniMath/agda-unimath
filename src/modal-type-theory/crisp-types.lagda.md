@@ -14,7 +14,7 @@ which are types that may be formed in arbitrary contexts.
 **Note:** The notion of being a crisp type is quite different to that of being
 [crisply flat discrete](modal-type-theory.flat-discrete-crisp-types.md).
 Essentially, a crisply flat discrete type is a type whose _elements_ may be
-assumed to be crisp. \[Remark 6.13, Shu15\]
+assumed to be crisp. {{#cite Shu18}}
 
 ## See also
 
@@ -22,8 +22,7 @@ assumed to be crisp. \[Remark 6.13, Shu15\]
 
 ## References
 
-- Michael Shulman, _Brouwer's fixed-point theorem in real-cohesive homotopy type
-  theory_, 2015 ([arXiv:1509.07584](https://arxiv.org/abs/1509.07584))
+{{#bibliography}}
 
 ## External links
 

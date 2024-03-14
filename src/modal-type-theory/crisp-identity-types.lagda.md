@@ -73,15 +73,6 @@ module _
   compute-crisp-ind-Id x = compute-crisp-based-ind-Id (λ y p → C x y p) (d x)
 ```
 
-### Crisp action on identifications
-
-```text
-crisp-ap :
-  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} {B : UU l2}
-  (f : @♭ A → B) {@♭ x y : A} → @♭ (x ＝ y) → f x ＝ f y
-crisp-ap f refl = refl
-```
-
 ## Properties
 
 ### Characterizing equality in the image of the flat modality
@@ -158,7 +149,7 @@ induction principle, which we have only postulated so far.
   pr2 (extensionality-flat u v) = is-equiv-Eq-eq-flat u v
 ```
 
-The following is Theorem 6.1 in {{#cite Shu17}}.
+The following is Theorem 6.1 in {{#cite Shu18}}.
 
 ```agda
   crisp-extensionality-flat :
@@ -167,7 +158,7 @@ The following is Theorem 6.1 in {{#cite Shu17}}.
     extensionality-flat (cons-flat x) (cons-flat y)
 ```
 
-The following is Corollary 6.2 in {{#cite Shu17}}.
+The following is Corollary 6.2 in {{#cite Shu18}}.
 
 ```agda
   crisp-flat-extensionality-flat :
@@ -178,9 +169,9 @@ The following is Corollary 6.2 in {{#cite Shu17}}.
 
 ### Corollary 6.3
 
-While we record the constructions of Corollary 6.3 here, we note that the
-construction `crisp-ap cons-flat` is preferred due to its higher generality and
-better computational behaviour.
+While we record the constructions of Corollary 6.3 {{#cite Shu18}} here, we note
+that the construction `crisp-ap cons-flat` is preferred due to its higher
+generality and better computational behaviour.
 
 ```agda
 module _

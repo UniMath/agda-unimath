@@ -83,8 +83,7 @@ universal-property-flat-discrete-crisp-type A =
 
 ### Flat discrete crisp types satisfy the universal property of flat discrete crisp types
 
-This is Corollary 6.15 of _Brouwer's fixed-point theorem in real-cohesive
-homotopy type theory_.
+This is Corollary 6.15 of {{#cite Shu18}}.
 
 ```agda
 module _
@@ -120,7 +119,4 @@ module _
 
 ## References
 
-- Michael Shulman, _Brouwer's fixed-point theorem in real-cohesive homotopy type
-  theory_, 2015 ([arXiv:1509.07584](https://arxiv.org/abs/1509.07584))
-- Dan Licata, _cohesion-agda_, GitHub repository
-  (<https://github.com/dlicata335/cohesion-agda>)
+{{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}

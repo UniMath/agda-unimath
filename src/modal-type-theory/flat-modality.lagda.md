@@ -38,11 +38,8 @@ data ♭ {@♭ l : Level} (@♭ A : UU l) : UU l where
 ### The flat counit
 
 ```agda
-counit-crisp : {@♭ l : Level} {@♭ A : UU l} → @♭ A → A
-counit-crisp x = x
-
 counit-flat : {@♭ l : Level} {@♭ A : UU l} → ♭ A → A
-counit-flat (cons-flat x) = counit-crisp x
+counit-flat (cons-flat x) = x
 ```
 
 ### Flat dependent elimination
