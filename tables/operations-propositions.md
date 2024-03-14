@@ -29,8 +29,8 @@ operation on propositions in the first.
 | [Unique existential quantification](foundation.uniqueness-quantification.md) | `uniquely-exists-type-family` | `∃!`                                     |
 | [Universal quantification](foundation.universal-quantification.md)           |                               | `∀'` (equivalent to `Π-Prop`)            |
 | [Conjunction](foundation.conjunction.md)                                     |                               | `∧` (equivalent to `product-Prop`)       |
-| [Disjunction](foundation.disjunction.md)                                     | `disjunction-Type`            | `∨` (equivalent to `join-Prop`)          |
-| [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `xor-Type`                    | `⊻` (equivalent to `exclusive-sum-Prop`) |
+| [Disjunction](foundation.disjunction.md)                                     | `disjunction-type`            | `∨` (equivalent to `join-Prop`)          |
+| [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `xor-type`                    | `⊻` (equivalent to `exclusive-sum-Prop`) |
 | [Negation](foundation.negation.md)                                           | `¬`                           | `¬'`                                     |
 | [Double negation](foundation.double-negation.md)                             | `¬¬`                          | `¬¬'`                                    |
 

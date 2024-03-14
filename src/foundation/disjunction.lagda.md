@@ -79,7 +79,7 @@ satisfies the universal property of
 
 and is thus equivalent to it. Therefore, we may reasonably call this
 construction the
-{{#concept "disjunction" Disambiguation="of types" Agda=disjunction-prop-Type}}
+{{#concept "disjunction" Disambiguation="of types" Agda=disjunction-prop-type}}
 of types. It is important to keep in mind that this is not a generalization of
 the concept but rather a conflation, and should be read as the statement _`A` or
 `B` is (merely) [inhabited](foundation.inhabited-types.md)_. Still, it is useful
@@ -92,14 +92,14 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  disjunction-prop-Type : Prop (l1 ⊔ l2)
-  disjunction-prop-Type = trunc-Prop (A + B)
+  disjunction-prop-type : Prop (l1 ⊔ l2)
+  disjunction-prop-type = trunc-Prop (A + B)
 
-  disjunction-Type : UU (l1 ⊔ l2)
-  disjunction-Type = type-Prop disjunction-prop-Type
+  disjunction-type : UU (l1 ⊔ l2)
+  disjunction-type = type-Prop disjunction-prop-type
 
-  is-prop-disjunction-Type : is-prop disjunction-Type
-  is-prop-disjunction-Type = is-prop-type-Prop disjunction-prop-Type
+  is-prop-disjunction-type : is-prop disjunction-type
+  is-prop-disjunction-type = is-prop-type-Prop disjunction-prop-type
 ```
 
 ### The disjunction
@@ -110,7 +110,7 @@ module _
   where
 
   disjunction-Prop : Prop (l1 ⊔ l2)
-  disjunction-Prop = disjunction-prop-Type (type-Prop P) (type-Prop Q)
+  disjunction-Prop = disjunction-prop-type (type-Prop P) (type-Prop Q)
 
   type-disjunction-Prop : UU (l1 ⊔ l2)
   type-disjunction-Prop = type-Prop disjunction-Prop
@@ -135,10 +135,10 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  inl-disjunction : A → disjunction-Type A B
+  inl-disjunction : A → disjunction-type A B
   inl-disjunction = unit-trunc-Prop ∘ inl
 
-  inr-disjunction : B → disjunction-Type A B
+  inr-disjunction : B → disjunction-type A B
   inr-disjunction = unit-trunc-Prop ∘ inr
 ```
 
@@ -147,20 +147,20 @@ module _
 ```agda
 ev-disjunction :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
-  (disjunction-Type A B → C) → (A → C) × (B → C)
+  (disjunction-type A B → C) → (A → C) × (B → C)
 pr1 (ev-disjunction h) = h ∘ inl-disjunction
 pr2 (ev-disjunction h) = h ∘ inr-disjunction
 
-universal-property-disjunction-Type :
+universal-property-disjunction-type :
   {l1 l2 l3 : Level} → UU l1 → UU l2 → Prop l3 → UUω
-universal-property-disjunction-Type A B A∨B =
+universal-property-disjunction-type A B A∨B =
   {l : Level} (R : Prop l) →
   (type-Prop A∨B → type-Prop R) ↔ ((A → type-Prop R) × (B → type-Prop R))
 
 universal-property-disjunction-Prop :
   {l1 l2 l3 : Level} → Prop l1 → Prop l2 → Prop l3 → UUω
 universal-property-disjunction-Prop P Q =
-  universal-property-disjunction-Type (type-Prop P) (type-Prop Q)
+  universal-property-disjunction-type (type-Prop P) (type-Prop Q)
 ```
 
 ## Properties
@@ -175,12 +175,12 @@ module _
   elim-disjunction :
     {l : Level} (R : Prop l) →
     (A → type-Prop R) × (B → type-Prop R) →
-    disjunction-Type A B → type-Prop R
+    disjunction-type A B → type-Prop R
   elim-disjunction R (f , g) =
     map-universal-property-trunc-Prop R (rec-coproduct f g)
 
   up-disjunction :
-    universal-property-disjunction-Type A B (disjunction-prop-Type A B)
+    universal-property-disjunction-type A B (disjunction-prop-type A B)
   up-disjunction R = ev-disjunction , elim-disjunction R
 ```
 
@@ -193,7 +193,7 @@ module _
 
   rec-disjunction :
     (A → type-Prop R) → (B → type-Prop R) →
-    disjunction-Type A B → type-Prop R
+    disjunction-type A B → type-Prop R
   rec-disjunction f g = elim-disjunction R (f , g)
 ```
 
@@ -202,25 +202,25 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (Q : Prop l3)
-  (up-Q : universal-property-disjunction-Type A B Q)
+  (up-Q : universal-property-disjunction-type A B Q)
   where
 
   forward-implication-iff-universal-property-disjunction :
-    disjunction-Type A B → type-Prop Q
+    disjunction-type A B → type-Prop Q
   forward-implication-iff-universal-property-disjunction =
     rec-disjunction Q
       ( pr1 (forward-implication (up-Q Q) id))
       ( pr2 (forward-implication (up-Q Q) id))
 
   backward-implication-iff-universal-property-disjunction :
-    type-Prop Q → disjunction-Type A B
+    type-Prop Q → disjunction-type A B
   backward-implication-iff-universal-property-disjunction =
     backward-implication
-      ( up-Q (disjunction-prop-Type A B))
+      ( up-Q (disjunction-prop-type A B))
       ( inl-disjunction , inr-disjunction)
 
   iff-universal-property-disjunction :
-    disjunction-Type A B ↔ type-Prop Q
+    disjunction-type A B ↔ type-Prop Q
   iff-universal-property-disjunction =
     ( forward-implication-iff-universal-property-disjunction ,
       backward-implication-iff-universal-property-disjunction)
@@ -251,14 +251,14 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  map-left-unit-law-disjunction-is-empty-Type :
-    is-empty A → disjunction-Type A B → is-inhabited B
-  map-left-unit-law-disjunction-is-empty-Type f =
+  map-left-unit-law-disjunction-is-empty-type :
+    is-empty A → disjunction-type A B → is-inhabited B
+  map-left-unit-law-disjunction-is-empty-type f =
     rec-disjunction (is-inhabited-Prop B) (ex-falso ∘ f) unit-trunc-Prop
 
-  map-right-unit-law-disjunction-is-empty-Type :
-    is-empty B → disjunction-Type A B → is-inhabited A
-  map-right-unit-law-disjunction-is-empty-Type f =
+  map-right-unit-law-disjunction-is-empty-type :
+    is-empty B → disjunction-type A B → is-inhabited A
+  map-right-unit-law-disjunction-is-empty-type f =
     rec-disjunction (is-inhabited-Prop A) unit-trunc-Prop (ex-falso ∘ f)
 ```
 
@@ -270,7 +270,7 @@ module _
   where
 
   universal-property-disjunction-trunc :
-    universal-property-disjunction-Type A B
+    universal-property-disjunction-type A B
       ( disjunction-Prop (trunc-Prop A) (trunc-Prop B))
   universal-property-disjunction-trunc R =
     ( λ f →
@@ -281,7 +281,7 @@ module _
         ( rec-coproduct (rec-trunc-Prop R f) (rec-trunc-Prop R g)))
 
   iff-compute-disjunction-trunc :
-    disjunction-Type A B ↔ type-disjunction-Prop (trunc-Prop A) (trunc-Prop B)
+    disjunction-type A B ↔ type-disjunction-Prop (trunc-Prop A) (trunc-Prop B)
   iff-compute-disjunction-trunc =
     iff-universal-property-disjunction
       ( disjunction-Prop (trunc-Prop A) (trunc-Prop B))
@@ -296,7 +296,7 @@ module _
   where
 
   is-decidable-disjunction :
-    is-decidable A → is-decidable B → is-decidable (disjunction-Type A B)
+    is-decidable A → is-decidable B → is-decidable (disjunction-type A B)
   is-decidable-disjunction is-decidable-A is-decidable-B =
     is-decidable-trunc-Prop-is-merely-decidable
       ( A + B)

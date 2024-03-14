@@ -143,7 +143,7 @@ all-elements-equal-type-symmetric-exclusive-sum-Prop (X , P) x y =
       ( eq-is-prop
         ( is-prop-product-Prop
           ( P (pr1 y))
-          ( neg-prop-Type
+          ( neg-prop-type
             ( other-element-unordered-pair
               ( map-unordered-pair (type-Prop) (X , P))
               ( pr1 y)))))

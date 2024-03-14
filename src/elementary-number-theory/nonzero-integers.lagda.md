@@ -38,7 +38,7 @@ holds.
 
 ```agda
 is-nonzero-prop-ℤ : ℤ → Prop lzero
-is-nonzero-prop-ℤ k = neg-prop-Type (k ＝ zero-ℤ)
+is-nonzero-prop-ℤ k = neg-prop-type (k ＝ zero-ℤ)
 
 is-nonzero-ℤ : ℤ → UU lzero
 is-nonzero-ℤ k = type-Prop (is-nonzero-prop-ℤ k)

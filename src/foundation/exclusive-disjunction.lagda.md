@@ -54,7 +54,7 @@ The definition of exclusive sum is sometimes generalized to arbitrary types,
 which we record here for completeness.
 
 The
-{{#concept "exclusive disjunction" Disambiguation="of types" Agda=xor-prop-Type}}
+{{#concept "exclusive disjunction" Disambiguation="of types" Agda=xor-prop-type}}
 of the types `A` and `B` is the proposition that their coproduct is contractible
 
 ```text
@@ -78,14 +78,14 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  xor-prop-Type : Prop (l1 ⊔ l2)
-  xor-prop-Type = is-contr-Prop (A + B)
+  xor-prop-type : Prop (l1 ⊔ l2)
+  xor-prop-type = is-contr-Prop (A + B)
 
-  xor-Type : UU (l1 ⊔ l2)
-  xor-Type = type-Prop xor-prop-Type
+  xor-type : UU (l1 ⊔ l2)
+  xor-type = type-Prop xor-prop-type
 
-  is-prop-xor-Type : is-prop xor-Type
-  is-prop-xor-Type = is-prop-type-Prop xor-prop-Type
+  is-prop-xor-type : is-prop xor-type
+  is-prop-xor-type = is-prop-type-Prop xor-prop-type
 ```
 
 ### The exclusive disjunction
@@ -96,7 +96,7 @@ module _
   where
 
   xor-Prop : Prop (l1 ⊔ l2)
-  xor-Prop = xor-prop-Type (type-Prop P) (type-Prop Q)
+  xor-Prop = xor-prop-type (type-Prop P) (type-Prop Q)
 
   type-xor-Prop : UU (l1 ⊔ l2)
   type-xor-Prop = type-Prop xor-Prop
@@ -122,7 +122,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  map-exclusive-sum-xor : xor-Type A B → exclusive-sum A B
+  map-exclusive-sum-xor : xor-type A B → exclusive-sum A B
   map-exclusive-sum-xor (inl a , H) =
     inl (a , (λ b → is-empty-eq-coproduct-inl-inr a b (H (inr b))))
   map-exclusive-sum-xor (inr b , H) =
