@@ -91,7 +91,7 @@ module _
   right-inverse-law-mul-Π-Group f =
     eq-htpy (λ x → right-inverse-law-mul-Group (G x) (f x))
 
-  is-group-Π-Group : is-group semigroup-Π-Group
+  is-group-Π-Group : is-group-Semigroup semigroup-Π-Group
   pr1 is-group-Π-Group = is-unital-Π-Group
   pr1 (pr2 is-group-Π-Group) = inv-Π-Group
   pr1 (pr2 (pr2 is-group-Π-Group)) = left-inverse-law-mul-Π-Group

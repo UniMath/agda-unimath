@@ -536,4 +536,18 @@ preserves-leq-right-mul-ℤ x y z H K =
     ( commutative-mul-ℤ x z)
     ( preserves-leq-left-mul-ℤ x y z H K)
     ( commutative-mul-ℤ z y)
+
+preserves-strict-order-mul-positive-ℤ' :
+  {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (x *ℤ z) (y *ℤ z)
+preserves-strict-order-mul-positive-ℤ' {x} {y} z H p =
+  is-positive-eq-ℤ
+    ( inv ( linear-diff-right-mul-ℤ y x z))
+    ( is-positive-mul-ℤ p H)
+
+preserves-strict-order-mul-positive-ℤ :
+  {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (z *ℤ x) (z *ℤ y)
+preserves-strict-order-mul-positive-ℤ {x} {y} z H p =
+  is-positive-eq-ℤ
+    ( inv ( linear-diff-left-mul-ℤ z y x))
+    ( is-positive-mul-ℤ H p)
 ```

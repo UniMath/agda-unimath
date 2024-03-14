@@ -75,6 +75,4 @@ module _
 
 ## References
 
-- Vladimir Voevodsky. _Unstable motivic homotopy categories in Nisnevich and
-  cdh-topologies_. Journal of Pure and Applied Algebra 214 8. 2010.
-  [arXiv:0805.4576](https://arxiv.org/abs/0805.4576)
+{{#bibliography}} {{#reference Voe10}}

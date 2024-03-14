@@ -247,6 +247,20 @@ module _
 
 ### Naturality of homotopies with respect to identifications
 
+Given two maps `f g : A → B` and a homotopy `H : f ~ g`, then for every
+identification `p : x ＝ y` in `A`, we have a
+[commuting square of identifications](foundation-core.commuting-squares-of-identifications.md)
+
+```text
+          ap f p
+     f x -------> f y
+      |            |
+  H x |            | H y
+      ∨            ∨
+     g x -------> g y.
+          ap g p
+```
+
 ```agda
 nat-htpy :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
@@ -259,6 +273,18 @@ inv-nat-htpy :
   {x y : A} (p : x ＝ y) →
   ap f p ∙ H y ＝ H x ∙ ap g p
 inv-nat-htpy H p = inv (nat-htpy H p)
+
+nat-refl-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  {x y : A} (p : x ＝ y) →
+  nat-htpy (refl-htpy' f) p ＝ inv right-unit
+nat-refl-htpy f refl = refl
+
+inv-nat-refl-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  {x y : A} (p : x ＝ y) →
+  inv-nat-htpy (refl-htpy' f) p ＝ right-unit
+inv-nat-refl-htpy f refl = refl
 
 nat-htpy-id :
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id)

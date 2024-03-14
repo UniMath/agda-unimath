@@ -221,8 +221,7 @@ if __name__ == '__main__':
     metadata_config['suppress_processing'] = metadata_config.get(
         'suppress_processing', [])
 
-    start = time.time()
-    if bool(metadata_config.get('enable')) == True:
+    if bool(metadata_config.get('enable')):
         # Split the work between PROCESS_COUNT processes
         with Pool(PROCESS_COUNT) as p:
             book['sections'] = p.starmap(add_author_info_to_root_section, [
@@ -230,11 +229,8 @@ if __name__ == '__main__':
                 for section in book['sections']
             ])
     else:
-        eprint('Skipping git metadata, enable option was',
+        eprint('Skipping git metadata, enable option was set to',
                metadata_config.get('enable'))
-
-    end = time.time()
-    eprint(end - start)
 
     # Pass the book back to mdbook
     json.dump(book, sys.stdout)

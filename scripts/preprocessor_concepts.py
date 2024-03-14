@@ -26,16 +26,18 @@ LINK_REGEX = re.compile(
     r'\[(.*?)\]\(.*\)')
 
 EXTERNAL_LINKS_REGEX = re.compile(
-    r'## External links\s+', re.MULTILINE)
+    r'## External links\s+')
+
+LEFTOVER_CONCEPT_REGEX = re.compile(r'\{\{#concept.*')
 
 
 def make_definition_regex(definition):
     return re.compile(
-        r'<a id="(\d+)" href="[^"]+" class="[^"]+">' + definition + r'</a>')
+        r'<a id="(\d+)" href="[^"]+" class="[^"]+">' + re.escape(definition) + r'</a>')
 
 
 def does_support(backend):
-    return backend == 'html'
+    return backend == 'html' or backend == 'linkcheck'
 
 
 def match_wikidata_id(meta_text):
@@ -82,7 +84,7 @@ def sup_link_reference(href, content, brackets=True, new_tab=False):
     return f'<sup>{brackets * "["}<a href="{href}"{link_target}>{content}</a>{brackets * "]"}</sup>'
 
 
-def sub_match_for_concept(m, mut_index, config, path, initial_content):
+def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initial_content):
     text = m.group(1)
     metadata = m.group(2)
     wikidata_id = match_wikidata_id(metadata)
@@ -118,8 +120,10 @@ def sub_match_for_concept(m, mut_index, config, path, initial_content):
             # TODO: decide if we want this
             # references.append(sup_link_reference(destination, 'AG'))
         else:
-            eprint('Concept definition not found:', plaintext,
-                   '; expected', agda_name, 'to exist in', path)
+            eprint('Warning: Concept definition not found:',
+                   plaintext, '; expected', agda_name, 'to exist in',
+                   path)
+            mut_error_locations.add(path)
     anchor += f'<a id="{target_id}" class="concept"></a>'
     index_entry['link'] = f'{url_path}#{target_id}'
     # For now the link is the best thing we have as an identifier
@@ -134,12 +138,19 @@ def sub_match_for_concept(m, mut_index, config, path, initial_content):
     return f'{anchor}<b>{text}</b>{"".join(reversed(references))}'
 
 
-def tag_concepts_chapter_rec_mut(chapter, config, mut_index):
+def tag_concepts_chapter_rec_mut(chapter, config, mut_index, mut_error_locations):
     mut_local_index = []
     chapter['content'] = CONCEPT_REGEX.sub(
         lambda m: sub_match_for_concept(
-            m, mut_local_index, config, chapter['path'], chapter['content']),
+            m, mut_local_index, mut_error_locations, config, chapter['path'], chapter['content']),
         chapter['content'])
+    leftover_concepts = LEFTOVER_CONCEPT_REGEX.findall(chapter['content'])
+    if len(leftover_concepts) != 0:
+        eprint(
+            f'Warning: the following concept invocations were not recognized in {chapter["path"]}:')
+        mut_error_locations.add(chapter['path'])
+        for line in leftover_concepts:
+            eprint('  ' + line)
     external_references = []
     for entry in mut_local_index:
         wikidata_label = entry.pop('__wikidata_label', None)
@@ -166,22 +177,25 @@ def tag_concepts_chapter_rec_mut(chapter, config, mut_index):
                 formatted_references + chapter['content'][insert_at:]
         else:
             chapter['content'] += f'\n## External links\n\n{formatted_references}'
-    tag_concepts_sections_rec_mut(chapter['sub_items'], config, mut_index)
+    tag_concepts_sections_rec_mut(
+        chapter['sub_items'], config, mut_index, mut_error_locations)
 
 
-def tag_concepts_sections_rec_mut(sections, config, mut_index):
+def tag_concepts_sections_rec_mut(sections, config, mut_index, mut_error_locations):
     for section in sections:
         chapter = section.get('Chapter')
         if chapter is None:
             continue
 
-        tag_concepts_chapter_rec_mut(chapter, config, mut_index)
+        tag_concepts_chapter_rec_mut(
+            chapter, config, mut_index, mut_error_locations)
 
 
-def tag_concepts_root_section(section, config, mut_index):
+def tag_concepts_root_section(section, config, mut_index, mut_error_locations):
     chapter = section.get('Chapter')
     if chapter is not None:
-        tag_concepts_chapter_rec_mut(chapter, config, mut_index)
+        tag_concepts_chapter_rec_mut(
+            chapter, config, mut_index, mut_error_locations)
 
     return section
 
@@ -203,17 +217,20 @@ if __name__ == '__main__':
 
     # Thread the index through execution
     mut_index = []
-    start = time.time()
+    mut_error_locations = set()
     if bool(concepts_config.get('enable', True)) == True:
         book['sections'] = list(map(
-            lambda s: tag_concepts_root_section(s, concepts_config, mut_index),
+            lambda s: tag_concepts_root_section(
+                s, concepts_config, mut_index, mut_error_locations),
             book['sections']))
+        if len(mut_error_locations) != 0:
+            eprint('The following files contain errors:')
+            for location in mut_error_locations:
+                eprint('  ' + location)
+            sys.exit(1)
     else:
-        eprint('Skipping concept tagging, enable option was',
+        eprint('Skipping concept tagging, enable option was set to',
                concepts_config.get('enable'))
-
-    end = time.time()
-    eprint(end - start)
 
     if mut_index != []:
         with open(concepts_config.get('output-file', 'concept_index.json'), 'w') as index_f:

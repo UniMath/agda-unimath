@@ -38,7 +38,7 @@ form a [large locale](order-theory.large-locales.md).
 ### The large preorder of propositions
 
 ```agda
-Prop-Large-Preorder : Large-Preorder lsuc _⊔_
+Prop-Large-Preorder : Large-Preorder lsuc (_⊔_)
 type-Large-Preorder Prop-Large-Preorder = Prop
 leq-prop-Large-Preorder Prop-Large-Preorder = hom-Prop
 refl-leq-Large-Preorder Prop-Large-Preorder P = id
@@ -48,7 +48,7 @@ transitive-leq-Large-Preorder Prop-Large-Preorder P Q R g f = g ∘ f
 ### The large poset of propositions
 
 ```agda
-Prop-Large-Poset : Large-Poset lsuc _⊔_
+Prop-Large-Poset : Large-Poset lsuc (_⊔_)
 large-preorder-Large-Poset Prop-Large-Poset = Prop-Large-Preorder
 antisymmetric-leq-Large-Poset Prop-Large-Poset P Q = eq-iff
 ```
@@ -105,7 +105,7 @@ is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
 ### The large frame of propositions
 
 ```agda
-Prop-Large-Frame : Large-Frame lsuc _⊔_ lzero
+Prop-Large-Frame : Large-Frame lsuc (_⊔_) lzero
 large-poset-Large-Frame Prop-Large-Frame =
   Prop-Large-Poset
 is-large-meet-semilattice-Large-Frame Prop-Large-Frame =
@@ -119,6 +119,6 @@ distributive-meet-sup-Large-Frame Prop-Large-Frame =
 ### The large locale of propositions
 
 ```agda
-Prop-Large-Locale : Large-Locale lsuc _⊔_ lzero
+Prop-Large-Locale : Large-Locale lsuc (_⊔_) lzero
 Prop-Large-Locale = Prop-Large-Frame
 ```

@@ -425,7 +425,6 @@ right-distributive-product-Σ {A} =
   [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.md).
 - The universal property of dependent pair types is treated in
   [`foundation.universal-property-dependent-pair-types`](foundation.universal-property-dependent-pair-types.md).
-
 - Arithmetical laws involving cartesian product types are recorded in
   [`foundation.type-arithmetic-cartesian-product-types`](foundation.type-arithmetic-cartesian-product-types.md).
 - Arithmetical laws involving dependent product types are recorded in

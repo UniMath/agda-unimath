@@ -235,11 +235,18 @@ module _
   {A : UU l1} {B : A → UU l2} {C : A → UU l3} {D : A → UU l4}
   where
 
+  inv-preserves-comp-left-whisker-comp :
+    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
+    ( H : f ~ g) →
+    (k ∘ h) ·l H ~ k ·l (h ·l H)
+  inv-preserves-comp-left-whisker-comp k h H x = ap-comp k h (H x)
+
   preserves-comp-left-whisker-comp :
     ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
     ( H : f ~ g) →
     k ·l (h ·l H) ~ (k ∘ h) ·l H
-  preserves-comp-left-whisker-comp k h H x = inv (ap-comp k h (H x))
+  preserves-comp-left-whisker-comp k h H =
+    inv-htpy (inv-preserves-comp-left-whisker-comp k h H)
 
 module _
   { l1 l2 l3 l4 : Level}
@@ -271,8 +278,8 @@ module _
   coh-htpy-id : H ·r f ~ f ·l H
   coh-htpy-id x = is-injective-concat' (H x) (nat-htpy-id H (H x))
 
-  inv-htpy-coh-htpy-id : f ·l H ~ H ·r f
-  inv-htpy-coh-htpy-id = inv-htpy coh-htpy-id
+  inv-coh-htpy-id : f ·l H ~ H ·r f
+  inv-coh-htpy-id = inv-htpy coh-htpy-id
 ```
 
 ## See also

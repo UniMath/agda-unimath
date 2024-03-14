@@ -55,7 +55,7 @@ modalities in their most general form only make sense for
 
 ### Closure under identity type formers
 
-We say that the [locally small type](foundation-core.identity-types.md) of a
+We say that the [identity types](foundation-core.identity-types.md) of a
 [locally small type](foundation.locally-small-types.md) are **modal** if their
 [small equivalent](foundation-core.small-types.md) is modal. We say that a
 modality is closed under [identity type](foundation-core.identity-types.md)
@@ -531,7 +531,4 @@ The equivalent notions of
 
 ## References
 
-- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
-  theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
-  ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
-  [DOI:10.23638/LMCS-16(1:2)2020](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
+{{#bibliography}} {{#reference RSS20}}

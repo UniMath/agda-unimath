@@ -15,6 +15,7 @@ open import category-theory.precategories
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -65,15 +66,15 @@ module _
   associative-comp-hom-function-Precategory =
     associative-comp-hom-Precategory function-Precategory
 
-  inv-associative-comp-hom-function-Precategory :
+  involutive-eq-associative-comp-hom-function-Precategory :
     {x y z w : obj-function-Precategory}
     (h : hom-function-Precategory z w)
     (g : hom-function-Precategory y z)
     (f : hom-function-Precategory x y) →
-    comp-hom-function-Precategory h (comp-hom-function-Precategory g f) ＝
-    comp-hom-function-Precategory (comp-hom-function-Precategory h g) f
-  inv-associative-comp-hom-function-Precategory =
-    inv-associative-comp-hom-Precategory function-Precategory
+    comp-hom-function-Precategory (comp-hom-function-Precategory h g) f ＝ⁱ
+    comp-hom-function-Precategory h (comp-hom-function-Precategory g f)
+  involutive-eq-associative-comp-hom-function-Precategory =
+    involutive-eq-associative-comp-hom-Precategory function-Precategory
 
   associative-composition-operation-function-Precategory :
     associative-composition-operation-binary-family-Set
