@@ -37,10 +37,10 @@ operation on propositions in the first.
 We can also organize these operations by indexed and binary variants, giving us
 the following table:
 
-| Name                   | Indexed | Binary |
-| ---------------------- | ------- | ------ |
-| Product                | `Π`     | `×`    |
-| Conjunction            | `∀'`    | `∧`    |
-| Constructive existence | `Σ`     | `+`    |
-| Existence              | `∃`     | `∨`    |
-| Unique existence       | `∃!`    | `⊻`    |
+| Name                   | Binary | Indexed |
+| ---------------------- | ------ | ------- |
+| Product                | `×`    | `Π`     |
+| Conjunction            | `∧`    | `∀'`    |
+| Constructive existence | `+`    | `Σ`     |
+| Existence              | `∨`    | `∃`     |
+| Unique existence       | `⊻`    | `∃!`    |
