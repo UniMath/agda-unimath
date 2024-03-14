@@ -32,11 +32,11 @@ a crisp context.
 
 ```agda
 module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : @♭ A → UU l2}
   where
 
-  map-crisp-distributive-flat-Π : ♭ ((x : A) → B x) → ((@♭ x : A) → ♭ (B x))
-  map-crisp-distributive-flat-Π (cons-flat f) x = cons-flat (f x)
+  map-distributive-flat-crisp-Π : ♭ ((@♭ x : A) → B x) → ((@♭ x : A) → ♭ (B x))
+  map-distributive-flat-crisp-Π (cons-flat f) x = cons-flat (f x)
 
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}

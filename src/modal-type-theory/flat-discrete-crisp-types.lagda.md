@@ -15,6 +15,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
@@ -36,6 +37,7 @@ open import foundation.univalence
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
+open import modal-type-theory.action-on-identifications-crisp-functions
 open import modal-type-theory.crisp-function-types
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-action-on-homotopies
@@ -55,7 +57,11 @@ counit is an [equivalence](foundation-core.equivalences.md) at that type.
 **Terminology:** In _Brouwer's fixed-point theorem in real-cohesive homotopy
 type theory_, this is called a _crisply discrete_ type.
 
-## Definition
+The
+{{#concept "universal property" Disambiguation="of flat discrete crisp types" Agda=universal-property-flat-discrete-crisp-type}}
+of flat discrete crisp types states that
+
+## Definitions
 
 ### Flat discrete crisp types
 
@@ -75,7 +81,7 @@ module _
   is-flat-discrete-crisp-Prop = is-equiv-Prop (counit-flat {l} {A})
 ```
 
-### Flat discrete crisp families
+### Flat discrete crisp type families
 
 ```agda
 module _
@@ -86,68 +92,11 @@ module _
   is-flat-discrete-crisp-family B = (@♭ x : A) → is-flat-discrete-crisp (B x)
 ```
 
-### The universal property of flat discrete crisp types
-
-```agda
-coev-flat :
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ B : UU l2) → ♭ (A → ♭ B) → ♭ (A → B)
-coev-flat {A = A} B (cons-flat f) = cons-flat (postcomp A counit-flat f)
-
-universal-property-flat-discrete-crisp-type :
-  {@♭ l1 : Level} (@♭ A : UU l1) → UUω
-universal-property-flat-discrete-crisp-type A =
-  {@♭ l : Level} {@♭ B : UU l} → is-equiv (coev-flat {A = A} B)
-```
-
-### The dependent universal property of flat discrete crisp types
-
-```agda
-dependent-coev-flat :
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ B : A → UU l2) →
-  ♭ ((@♭ x : A) → ♭ (B x)) → ♭ ((@♭ x : A) → B x)
-dependent-coev-flat B (cons-flat f) = cons-flat (λ x → counit-flat (f x))
-
-dependent-universal-property-flat-discrete-crisp-type :
-  {@♭ l1 : Level} (@♭ A : UU l1) → UUω
-dependent-universal-property-flat-discrete-crisp-type A =
-  {@♭ l : Level} {@♭ B : A → UU l} → is-equiv (dependent-coev-flat B)
-```
-
 ## Properties
 
-### Flat discrete crisp types satisfy the universal property of flat discrete crisp types
-
-This is Corollary 6.15 of _Brouwer's fixed-point theorem in real-cohesive
-homotopy type theory_.
-
-```agda
-module _
-  {@♭ l : Level} {@♭ A : UU l}
-  where
-
-  abstract
-    universal-property-flat-discrete-crisp-type-is-flat-discrete-crisp :
-      @♭ is-flat-discrete-crisp A →
-      universal-property-flat-discrete-crisp-type A
-    universal-property-flat-discrete-crisp-type-is-flat-discrete-crisp
-      is-disc-A {B = B} =
-      is-equiv-htpy-equiv
-        ( ( ap-equiv-flat
-            ( equiv-precomp (inv-equiv (counit-flat , is-disc-A)) B)) ∘e
-          ( equiv-ap-map-flat-postcomp-counit-flat) ∘e
-          ( ap-equiv-flat (equiv-precomp (counit-flat , is-disc-A) (♭ B))))
-        ( λ where
-          (cons-flat f) →
-            crisp-ap
-              ( cons-flat)
-              ( eq-htpy
-                ( λ x →
-                  ap
-                    ( counit-flat ∘ f)
-                    ( inv (is-section-map-inv-is-equiv is-disc-A x)))))
-```
-
 ### If the flat counit has a crisp section then it is an equivalence
+
+This is Lemma ??? in {{#cite Shu17}}.
 
 ```agda
 module _
@@ -173,7 +122,7 @@ is-flat-discrete-crisp-crisp-section (s , H) =
   is-flat-discrete-crisp-has-crisp-section s H
 ```
 
-### Flat discrete crisp types are closed under crisp equivalences
+### Flat discrete crisp types are closed under equivalences
 
 ```agda
 module _
@@ -181,8 +130,15 @@ module _
   where
 
   is-flat-discrete-crisp-equiv :
-    @♭ A ≃ B → is-flat-discrete-crisp B → is-flat-discrete-crisp A
+    @♭ A ≃ B → is-flat-discrete-crisp A → is-flat-discrete-crisp B
   is-flat-discrete-crisp-equiv e bB =
+    is-equiv-htpy-equiv'
+      ( e ∘e (counit-flat , bB) ∘e ap-equiv-flat (inv-equiv e))
+      ( λ where (cons-flat x) → is-section-map-inv-equiv e x)
+
+  is-flat-discrete-crisp-equiv' :
+    @♭ A ≃ B → is-flat-discrete-crisp B → is-flat-discrete-crisp A
+  is-flat-discrete-crisp-equiv' e bB =
     is-equiv-htpy-equiv'
       ( inv-equiv e ∘e (counit-flat , bB) ∘e ap-equiv-flat e)
       ( λ where (cons-flat x) → is-retraction-map-inv-equiv e x)
@@ -208,13 +164,13 @@ Given crisp elements `x` and `y` of `A` We have a
 
 ```text
                                ♭ (x ＝ y)
-                                  ⌝   |
-                     Eq-eq-flat /     |
+                                  ∧   |
+                     Eq-eq-flat /~    |
                               /       |
   (cons-flat x ＝ cons-flat y)        | counit-flat
                               \       |
                ap (counit-flat) \     |
-                                  ⌟   ∨
+                                  ∨   ∨
                                  (x ＝ y)
 ```
 

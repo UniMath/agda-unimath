@@ -21,6 +21,7 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
 
+open import modal-type-theory.action-on-identifications-crisp-functions
 open import modal-type-theory.crisp-dependent-function-types
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
@@ -44,12 +45,12 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  map-crisp-distributive-flat-function-types : ♭ (A → B) → (@♭ A → ♭ B)
-  map-crisp-distributive-flat-function-types = map-crisp-distributive-flat-Π
+  map-distributive-flat-crisp-function-types : ♭ (@♭ A → B) → (@♭ A → ♭ B)
+  map-distributive-flat-crisp-function-types = map-distributive-flat-crisp-Π
 
   map-distributive-flat-function-types : ♭ (A → B) → (♭ A → ♭ B)
   map-distributive-flat-function-types f (cons-flat x) =
-    map-crisp-distributive-flat-function-types f x
+    map-distributive-flat-Π f (cons-flat x)
 ```
 
 ### Postcomposition by the counit induces an equivalence `♭ (♭ B → ♭ A) ≃ ♭ (♭ B → A)`

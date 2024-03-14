@@ -1,0 +1,126 @@
+# The universal property of flat discrete crisp types
+
+```agda
+{-# OPTIONS --cohesion --flat-split #-}
+
+module modal-type-theory.universal-property-of-flat-discrete-crisp-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.action-on-identifications-functions
+open import foundation.booleans
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
+open import foundation.embeddings
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.postcomposition-dependent-functions
+open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.retracts-of-types
+open import foundation.sections
+open import foundation.transport-along-identifications
+open import foundation.unit-type
+open import foundation.univalence
+open import foundation.universal-property-equivalences
+open import foundation.universe-levels
+
+open import modal-type-theory.action-on-identifications-crisp-functions
+open import modal-type-theory.crisp-function-types
+open import modal-type-theory.crisp-identity-types
+open import modal-type-theory.flat-action-on-homotopies
+open import modal-type-theory.flat-discrete-crisp-types
+open import modal-type-theory.flat-modality
+open import modal-type-theory.functoriality-flat-modality
+```
+
+</details>
+
+## Idea
+
+The
+{{#concept "universal property" Disambiguation="of flat discrete crisp types" Agda=universal-property-flat-discrete-crisp-type}}
+of a [flat discrete crisp type](modal-type-theory.flat-discrete-crisp-types.md)
+`A` states that under the flat modality `♭`, `A` is colocal at the counit of
+`♭`.
+
+This means that for every crisp type `B` the map
+
+```text
+  coev-flat : ♭ (A → ♭ B) → ♭ (A → B)
+```
+
+is an [equivalence](foundation-core.equivalences.md).
+
+## Definitions
+
+### The universal property of flat discrete crisp types
+
+```agda
+coev-flat :
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2} → ♭ (A → ♭ B) → ♭ (A → B)
+coev-flat {A = A} (cons-flat f) = cons-flat (postcomp A counit-flat f)
+
+universal-property-flat-discrete-crisp-type :
+  {@♭ l1 : Level} (@♭ A : UU l1) → UUω
+universal-property-flat-discrete-crisp-type A =
+  {@♭ l : Level} {@♭ B : UU l} → is-equiv (coev-flat {A = A} {B = B})
+```
+
+## Properties
+
+### Flat discrete crisp types satisfy the universal property of flat discrete crisp types
+
+This is Corollary 6.15 of _Brouwer's fixed-point theorem in real-cohesive
+homotopy type theory_.
+
+```agda
+module _
+  {@♭ l : Level} {@♭ A : UU l}
+  where
+
+  abstract
+    universal-property-flat-discrete-crisp-type-is-flat-discrete-crisp :
+      @♭ is-flat-discrete-crisp A →
+      universal-property-flat-discrete-crisp-type A
+    universal-property-flat-discrete-crisp-type-is-flat-discrete-crisp
+      is-disc-A {B = B} =
+      is-equiv-htpy-equiv
+        ( ( ap-equiv-flat
+            ( equiv-precomp (inv-equiv (counit-flat , is-disc-A)) B)) ∘e
+          ( equiv-ap-map-flat-postcomp-counit-flat) ∘e
+          ( ap-equiv-flat (equiv-precomp (counit-flat , is-disc-A) (♭ B))))
+        ( λ where
+          (cons-flat f) →
+            crisp-ap
+              ( cons-flat)
+              ( eq-htpy
+                ( λ x →
+                  ap
+                    ( counit-flat ∘ f)
+                    ( inv (is-section-map-inv-is-equiv is-disc-A x)))))
+```
+
+## See also
+
+- [Sharp codiscrete types](modal-type-theory.sharp-codiscrete-types.md) for the
+  dual notion.
+
+## References
+
+- Michael Shulman, _Brouwer's fixed-point theorem in real-cohesive homotopy type
+  theory_, 2015 ([arXiv:1509.07584](https://arxiv.org/abs/1509.07584))
+- Dan Licata, _cohesion-agda_, GitHub repository
+  (<https://github.com/dlicata335/cohesion-agda>)
