@@ -18,8 +18,8 @@ open import foundation-core.empty-types
 
 The Curry-Howard interpretation of _negation_ in type theory is the
 interpretation of the proposition `P ⇒ ⊥` using propositions as types. Thus, the
-{{#concept "negation" Disambiguation="of a type" WDID=Q190558 Agda=¬_}} of a
-type `A` is the type `A → empty`.
+{{#concept "negation" Disambiguation="of a type" WDID=Q190558 WD="logical negation" Agda=¬_}}
+of a type `A` is the type `A → empty`.
 
 ## Definition
 

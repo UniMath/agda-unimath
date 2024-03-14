@@ -22,7 +22,7 @@ open import foundation-core.propositions
 ## Idea
 
 Given a predicate `P` on `A` we say there
-{{#concept "uniquely exists" Disambiguation="in a subtype" WDID=Q2502253 Agda=∃!}}
+{{#concept "uniquely exists" Disambiguation="in a subtype" WDID=Q2502253 WD="uniqueness quantification" Agda=∃!}}
 _an `x : A` such that `P x`_, if the [subtype](foundation-core.subtypes.md)
 `Σ (x : A), (P x)` is [contractible](foundation-core.contractible-types.md).
 

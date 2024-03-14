@@ -29,7 +29,7 @@ open import foundation-core.propositions
 ## Idea
 
 The
-{{#concept "disjunction" Disambiguation="of propositions" WDID=Q1651704 Agda=disjunction-Prop}}
+{{#concept "disjunction" Disambiguation="of propositions" WDID=Q1651704 WD="logical disjunction" Agda=disjunction-Prop}}
 of two [propositions](foundation-core.propositions.md) `P` and `Q` is the
 proposition that `P` holds or `Q` holds, and is defined as
 [propositional truncation](foundation.propositional-truncations.md) of the

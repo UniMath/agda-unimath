@@ -29,7 +29,7 @@ open import foundation-core.propositions
 
 Given a family of [propositions](foundation-core.propositions.md) `P` over `A`,
 the
-{{#concept "existential quantification" Disambiguation="on a subtype" WDID=Q773483 Agda=exists}}
+{{#concept "existential quantification" Disambiguation="on a subtype" WDID=Q773483 WD="existential quantification" Agda=exists}}
 of `P` over `A` is the proposition `∃ A P` asserting that there is an element
 `a : A` such that `P a` holds. We use the
 [propositional truncation](foundation.propositional-truncations.md) to define

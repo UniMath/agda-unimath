@@ -26,7 +26,7 @@ open import foundation-core.propositions
 ## Idea
 
 The
-{{#concept "conjunction" Disambiguation="of propositions" WDID=Q191081 Agda=conjunction-Prop}}
+{{#concept "conjunction" Disambiguation="of propositions" WDID=Q191081 WD="logical conjunction" Agda=conjunction-Prop}}
 `P ∧ Q` of two [propositions](foundation-core.propositions.md) `P` and `Q` is
 the proposition that both `P` and `Q` hold and is thus defined by the
 [cartesian product](foundation-core.cartesian-product-types.md) of their
@@ -113,20 +113,11 @@ module _
     is-decidable-conjunction-Decidable-Prop
 ```
 
-### The introduction rule for the conjunction of propositions
+### The introductino rule and projections for the conjunction of propositions
 
-```agda
-intro-conjunction-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  type-Prop P → type-Prop Q → type-conjunction-Prop P Q
-intro-conjunction-Prop P Q = pair
-```
-
-### The projections for the conjunction of propositions
-
-We refrain from defining the basic projections of the conjunction, and advise
-users to utilize the standard projections of the dependent pair type `pr1` and
-`pr2`.
+We refrain from defining the introduction rule and basic projections of the
+conjunction, and advise users to utilize the standard projections of the
+dependent pair type `pr1` and `pr2`.
 
 ### The recursion principle of the conjunction
 
@@ -231,7 +222,7 @@ module _
 ## See also
 
 - The indexed analogue of conjunction is
-  [universal quantification](foundation.universal-quantification).
+  [universal quantification](foundation.universal-quantification.md).
 
 ## Table of files about propositional logic
 

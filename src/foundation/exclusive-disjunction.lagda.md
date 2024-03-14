@@ -32,7 +32,7 @@ open import foundation-core.propositions
 ## Idea
 
 The
-{{#concept "exclusive disjunction" Disambiguation="of propositions" WDID=Q498186 Agda=xor-Prop}}
+{{#concept "exclusive disjunction" Disambiguation="of propositions" WDID=Q498186 WD="exclusive or" Agda=xor-Prop}}
 of two [propositions](foundation-core.propositions.md) `P` and `Q` is the
 proposition that precisely one of `P` and `Q` holds, and is defined as the
 proposition that the [coproduct](foundation-core.coproduct-types.md) of their

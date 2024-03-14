@@ -24,9 +24,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Statement
 
-The {{#concept "limited principle of omniscience" WDID=Q6549544 Agda=LPO}} (LPO)
-asserts that for every [sequence](foundation.sequences.md) `f : ℕ → Fin 2` there
-either [exists](foundation.existential-quantification.md) an `n` such that
+The
+{{#concept "limited principle of omniscience" WDID=Q6549544 WD="limited principle of omniscience" Agda=LPO}}
+(LPO) asserts that for every [sequence](foundation.sequences.md) `f : ℕ → Fin 2`
+there either [exists](foundation.existential-quantification.md) an `n` such that
 `f n ＝ 1` or for all `n` we have `f n ＝ 0`.
 
 ```agda
