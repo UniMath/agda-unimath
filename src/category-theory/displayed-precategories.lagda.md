@@ -33,26 +33,27 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a [precategory](category-theory.precategories.md) `C`, a **displayed
-precategory** over `C` is an associative and unital
+Given a [precategory](category-theory.precategories.md) `𝒞`, a
+{{#concept "displayed precategory" Agda=Displayed-Precategory}} over `𝒞` is an
+associative and unital
 [dependent composition structure](category-theory.dependent-composition-operations-over-precategories.md)
 over it.
 
-Thus, a displayed precategory `D` over `C` consists of
+Thus, a displayed precategory `𝒟` over `𝒞` consists of
 
-- a family of objects `ob D` indexed by `ob C`,
+- a family of objects `ob 𝒟` indexed by `ob 𝒞`,
 - a family of hom-[sets](foundation-core.sets.md)
 
   ```text
-  hom D : hom C x y → ob D x → ob D y → Set,
+  hom 𝒟 : hom 𝒞 x y → ob 𝒟 x → ob 𝒟 y → Set,
   ```
 
-  for every pair `x y : ob C`, and
+  for every pair `x y : ob 𝒞`, and
 
 - a dependent composition operation
 
   ```text
-    comp D : hom D g y' z' → hom D f x' y' → hom D (g ∘ f) x' z'
+    comp 𝒟 : hom 𝒟 g y' z' → hom 𝒟 f x' y' → hom 𝒟 (g ∘ f) x' z'
   ```
 
   such that
@@ -60,21 +61,21 @@ Thus, a displayed precategory `D` over `C` consists of
 - The dependent associativity condition
 
   ```text
-  comp D (comp D h' g') f' ＝ comp D h' (comp D g' f')
+  comp 𝒟 (comp 𝒟 h' g') f' ＝ comp 𝒟 h' (comp 𝒟 g' f')
   ```
 
-  over the associativity witness `(h ∘ g) ∘ f ＝ h ∘ (g ∘ f)` in `C` holds, and
+  over the associativity witness `(h ∘ g) ∘ f ＝ h ∘ (g ∘ f)` in `𝒞` holds, and
 
 - the composition operation is dependent unital, meaning there is a family of
   identity morphisms
 
   ```text
-    id D : (x : ob C) (x' : ob D x) → hom D (id C x) x' x'
+    id 𝒟 : (x : ob 𝒞) (x' : ob 𝒟 x) → hom 𝒟 (id 𝒞 x) x' x'
   ```
 
   which is a dependent left and right unit in the sense that the dependent
-  identities `comp D (id D) f ＝ f` and `comp D f (id D) ＝ f` hold over the
-  respective witnesses of left and right unitality in `C`.
+  identities `comp 𝒟 (id 𝒟) f ＝ f` and `comp 𝒟 f (id 𝒟) ＝ f` hold over the
+  respective witnesses of left and right unitality in `𝒞`.
 
 ## Definitions
 
@@ -82,94 +83,94 @@ Thus, a displayed precategory `D` over `C` consists of
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (C : Precategory l1 l2)
-  ( obj-D : obj-Precategory C → UU l3)
-  ( hom-set-D :
-    {x y : obj-Precategory C}
-    (f : hom-Precategory C x y) (x' : obj-D x) (y' : obj-D y) → Set l4)
-  ( comp-hom-D : dependent-composition-operation-Precategory C obj-D hom-set-D)
+  {l1 l2 l3 l4 : Level} (𝒞 : Precategory l1 l2)
+  ( obj-𝒟 : obj-Precategory 𝒞 → UU l3)
+  ( hom-set-𝒟 :
+    {x y : obj-Precategory 𝒞}
+    (f : hom-Precategory 𝒞 x y) (x' : obj-𝒟 x) (y' : obj-𝒟 y) → Set l4)
+  ( comp-hom-𝒟 : dependent-composition-operation-Precategory 𝒞 obj-𝒟 hom-set-𝒟)
   where
 
   is-displayed-precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-displayed-precategory =
-    ( is-associative-dependent-composition-operation-Precategory C
-        obj-D hom-set-D comp-hom-D) ×
-    ( is-unital-dependent-composition-operation-Precategory C
-        obj-D hom-set-D comp-hom-D)
+    ( is-associative-dependent-composition-operation-Precategory 𝒞
+        obj-𝒟 hom-set-𝒟 comp-hom-𝒟) ×
+    ( is-unital-dependent-composition-operation-Precategory 𝒞
+        obj-𝒟 hom-set-𝒟 comp-hom-𝒟)
 ```
 
 ### The type of displayed precategories over a precategory
 
 ```agda
 module _
-  {l1 l2 : Level} (l3 l4 : Level) (C : Precategory l1 l2)
+  {l1 l2 : Level} (l3 l4 : Level) (𝒞 : Precategory l1 l2)
   where
 
   Displayed-Precategory : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
   Displayed-Precategory =
-    Σ ( obj-Precategory C → UU l3)
-      ( λ obj-D →
-        Σ ( {x y : obj-Precategory C}
-            (f : hom-Precategory C x y) (x' : obj-D x) (y' : obj-D y) → Set l4)
-          ( λ hom-set-D →
-            Σ ( dependent-composition-operation-Precategory C obj-D hom-set-D)
-              ( is-displayed-precategory C obj-D hom-set-D)))
+    Σ ( obj-Precategory 𝒞 → UU l3)
+      ( λ obj-𝒟 →
+        Σ ( {x y : obj-Precategory 𝒞}
+            (f : hom-Precategory 𝒞 x y) (x' : obj-𝒟 x) (y' : obj-𝒟 y) → Set l4)
+          ( λ hom-set-𝒟 →
+            Σ ( dependent-composition-operation-Precategory 𝒞 obj-𝒟 hom-set-𝒟)
+              ( is-displayed-precategory 𝒞 obj-𝒟 hom-set-𝒟)))
 
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2) (D : Displayed-Precategory l3 l4 C)
+  (𝒞 : Precategory l1 l2) (𝒟 : Displayed-Precategory l3 l4 𝒞)
   where
 
-  obj-Displayed-Precategory : obj-Precategory C → UU l3
-  obj-Displayed-Precategory = pr1 D
+  obj-Displayed-Precategory : obj-Precategory 𝒞 → UU l3
+  obj-Displayed-Precategory = pr1 𝒟
 
   hom-set-Displayed-Precategory :
-    {x y : obj-Precategory C} (f : hom-Precategory C x y)
+    {x y : obj-Precategory 𝒞} (f : hom-Precategory 𝒞 x y)
     (x' : obj-Displayed-Precategory x) (y' : obj-Displayed-Precategory y) →
     Set l4
-  hom-set-Displayed-Precategory = pr1 (pr2 D)
+  hom-set-Displayed-Precategory = pr1 (pr2 𝒟)
 
   hom-Displayed-Precategory :
-    {x y : obj-Precategory C} (f : hom-Precategory C x y)
+    {x y : obj-Precategory 𝒞} (f : hom-Precategory 𝒞 x y)
     (x' : obj-Displayed-Precategory x) (y' : obj-Displayed-Precategory y) →
     UU l4
   hom-Displayed-Precategory f x' y' =
     type-Set (hom-set-Displayed-Precategory f x' y')
 
   is-set-hom-Displayed-Precategory :
-    {x y : obj-Precategory C} (f : hom-Precategory C x y)
+    {x y : obj-Precategory 𝒞} (f : hom-Precategory 𝒞 x y)
     (x' : obj-Displayed-Precategory x) (y' : obj-Displayed-Precategory y) →
     is-set (hom-Displayed-Precategory f x' y')
   is-set-hom-Displayed-Precategory f x' y' =
     is-set-type-Set (hom-set-Displayed-Precategory f x' y')
 
   comp-hom-Displayed-Precategory :
-    dependent-composition-operation-Precategory C
+    dependent-composition-operation-Precategory 𝒞
       ( obj-Displayed-Precategory)
       ( hom-set-Displayed-Precategory)
-  comp-hom-Displayed-Precategory = pr1 (pr2 (pr2 D))
+  comp-hom-Displayed-Precategory = pr1 (pr2 (pr2 𝒟))
 
   associative-comp-hom-Displayed-Precategory :
-    is-associative-dependent-composition-operation-Precategory C
+    is-associative-dependent-composition-operation-Precategory 𝒞
       ( obj-Displayed-Precategory)
       ( hom-set-Displayed-Precategory)
       ( comp-hom-Displayed-Precategory)
-  associative-comp-hom-Displayed-Precategory = pr1 (pr2 (pr2 (pr2 D)))
+  associative-comp-hom-Displayed-Precategory = pr1 (pr2 (pr2 (pr2 𝒟)))
 
   is-unital-comp-hom-Displayed-Precategory :
-    is-unital-dependent-composition-operation-Precategory C
+    is-unital-dependent-composition-operation-Precategory 𝒞
       ( obj-Displayed-Precategory)
       ( hom-set-Displayed-Precategory)
       ( comp-hom-Displayed-Precategory)
-  is-unital-comp-hom-Displayed-Precategory = pr2 (pr2 (pr2 (pr2 D)))
+  is-unital-comp-hom-Displayed-Precategory = pr2 (pr2 (pr2 (pr2 𝒟)))
 
   id-hom-Displayed-Precategory :
-    {x : obj-Precategory C} (x' : obj-Displayed-Precategory x) →
-    hom-Displayed-Precategory (id-hom-Precategory C) x' x'
+    {x : obj-Precategory 𝒞} (x' : obj-Displayed-Precategory x) →
+    hom-Displayed-Precategory (id-hom-Precategory 𝒞) x' x'
   id-hom-Displayed-Precategory = pr1 is-unital-comp-hom-Displayed-Precategory
 
   left-unit-law-comp-hom-Displayed-Precategory :
-    is-left-unit-dependent-composition-operation-Precategory C
+    is-left-unit-dependent-composition-operation-Precategory 𝒞
       obj-Displayed-Precategory
       hom-set-Displayed-Precategory
       comp-hom-Displayed-Precategory
@@ -178,7 +179,7 @@ module _
     pr1 (pr2 is-unital-comp-hom-Displayed-Precategory)
 
   right-unit-law-comp-hom-Displayed-Precategory :
-    is-right-unit-dependent-composition-operation-Precategory C
+    is-right-unit-dependent-composition-operation-Precategory 𝒞
       obj-Displayed-Precategory
       hom-set-Displayed-Precategory
       comp-hom-Displayed-Precategory
@@ -189,39 +190,39 @@ module _
 
 ### The total precategory associated to a displayed precategory
 
-Given a displayed precategory `D` over `C`, the total structure `∫D` whose
+Given a displayed precategory `𝒟` over `𝒞`, the total structure `∫D` whose
 objects are
 
 ```text
-  ob ∫D := Σ (x : ob C) (ob D x)
+  ob ∫D := Σ (x : ob 𝒞) (ob 𝒟 x)
 ```
 
 and hom-sets are
 
 ```text
-  hom ∫D (x , x') (y , y') := Σ (f : hom C x y) (hom D f x' y')
+  hom ∫D (x , x') (y , y') := Σ (f : hom 𝒞 x y) (hom 𝒟 f x' y')
 ```
 
 form a precategory called the
 {{#concept "total precategory" Disambiguation="of a displayed precategory" Agda=total-precategory-Displayed-Precategory}}
-of `D`.
+of `𝒟`.
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2) (D : Displayed-Precategory l3 l4 C)
+  (𝒞 : Precategory l1 l2) (𝒟 : Displayed-Precategory l3 l4 𝒞)
   where
 
   obj-total-precategory-Displayed-Precategory : UU (l1 ⊔ l3)
   obj-total-precategory-Displayed-Precategory =
-    Σ (obj-Precategory C) (obj-Displayed-Precategory C D)
+    Σ (obj-Precategory 𝒞) (obj-Displayed-Precategory 𝒞 𝒟)
 
   hom-set-total-precategory-Displayed-Precategory :
     (x y : obj-total-precategory-Displayed-Precategory) → Set (l2 ⊔ l4)
   hom-set-total-precategory-Displayed-Precategory (x , x') (y , y') =
     Σ-Set
-      ( hom-set-Precategory C x y)
-      ( λ f → hom-set-Displayed-Precategory C D f x' y')
+      ( hom-set-Precategory 𝒞 x y)
+      ( λ f → hom-set-Displayed-Precategory 𝒞 𝒟 f x' y')
 
   hom-total-precategory-Displayed-Precategory :
     (x y : obj-total-precategory-Displayed-Precategory) → UU (l2 ⊔ l4)
@@ -234,9 +235,9 @@ module _
     hom-total-precategory-Displayed-Precategory x y →
     hom-total-precategory-Displayed-Precategory x z
   pr1 (comp-hom-total-precategory-Displayed-Precategory (g , g') (f , f')) =
-    comp-hom-Precategory C g f
+    comp-hom-Precategory 𝒞 g f
   pr2 (comp-hom-total-precategory-Displayed-Precategory (g , g') (f , f')) =
-    comp-hom-Displayed-Precategory C D g f g' f'
+    comp-hom-Displayed-Precategory 𝒞 𝒟 g f g' f'
 
   associative-comp-hom-total-precategory-Displayed-Precategory :
     {x y z w : obj-total-precategory-Displayed-Precategory}
@@ -252,8 +253,8 @@ module _
   associative-comp-hom-total-precategory-Displayed-Precategory
     ( h , h') (g , g') (f , f') =
     eq-pair-Σ
-      ( associative-comp-hom-Precategory C h g f)
-      ( associative-comp-hom-Displayed-Precategory C D h g f h' g' f')
+      ( associative-comp-hom-Precategory 𝒞 h g f)
+      ( associative-comp-hom-Displayed-Precategory 𝒞 𝒟 h g f h' g' f')
 
   associative-composition-operation-total-precategory-Displayed-Precategory :
     associative-composition-operation-binary-family-Set
@@ -276,9 +277,9 @@ module _
     {x : obj-total-precategory-Displayed-Precategory} →
     hom-total-precategory-Displayed-Precategory x x
   pr1 (id-hom-total-precategory-Displayed-Precategory {x , x'}) =
-    id-hom-Precategory C
+    id-hom-Precategory 𝒞
   pr2 (id-hom-total-precategory-Displayed-Precategory {x , x'}) =
-    id-hom-Displayed-Precategory C D x'
+    id-hom-Displayed-Precategory 𝒞 𝒟 x'
 
   left-unit-law-comp-hom-total-precategory-Displayed-Precategory :
     {x y : obj-total-precategory-Displayed-Precategory} →
@@ -289,8 +290,8 @@ module _
     f
   left-unit-law-comp-hom-total-precategory-Displayed-Precategory (f , f') =
     eq-pair-Σ
-      ( left-unit-law-comp-hom-Precategory C f)
-      ( left-unit-law-comp-hom-Displayed-Precategory C D f f')
+      ( left-unit-law-comp-hom-Precategory 𝒞 f)
+      ( left-unit-law-comp-hom-Displayed-Precategory 𝒞 𝒟 f f')
 
   right-unit-law-comp-hom-total-precategory-Displayed-Precategory :
     {x y : obj-total-precategory-Displayed-Precategory} →
@@ -301,8 +302,8 @@ module _
     f
   right-unit-law-comp-hom-total-precategory-Displayed-Precategory (f , f') =
     eq-pair-Σ
-      ( right-unit-law-comp-hom-Precategory C f)
-      ( right-unit-law-comp-hom-Displayed-Precategory C D f f')
+      ( right-unit-law-comp-hom-Precategory 𝒞 f)
+      ( right-unit-law-comp-hom-Displayed-Precategory 𝒞 𝒟 f f')
 
   is-unital-composition-operation-total-precategory-Displayed-Precategory :
     is-unital-composition-operation-binary-family-Set
@@ -333,23 +334,23 @@ module _
 
 ### The fiber precategory of a displayed precategory over an object
 
-Given a displayed precategory `D` over `C`, the fiber of `D` over `x : ob C`
+Given a displayed precategory `𝒟` over `𝒞`, the fiber of `𝒟` over `x : ob 𝒞`
 defines a precategory.
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2) (D : Displayed-Precategory l3 l4 C)
-  (c : obj-Precategory C)
+  (𝒞 : Precategory l1 l2) (𝒟 : Displayed-Precategory l3 l4 𝒞)
+  (c : obj-Precategory 𝒞)
   where
 
   obj-fiber-precategory-Displayed-Precategory : UU l3
-  obj-fiber-precategory-Displayed-Precategory = obj-Displayed-Precategory C D c
+  obj-fiber-precategory-Displayed-Precategory = obj-Displayed-Precategory 𝒞 𝒟 c
 
   hom-set-fiber-precategory-Displayed-Precategory :
     (x y : obj-fiber-precategory-Displayed-Precategory) → Set l4
   hom-set-fiber-precategory-Displayed-Precategory =
-    hom-set-Displayed-Precategory C D (id-hom-Precategory C {c})
+    hom-set-Displayed-Precategory 𝒞 𝒟 (id-hom-Precategory 𝒞 {c})
 
   hom-fiber-precategory-Displayed-Precategory :
     (x y : obj-fiber-precategory-Displayed-Precategory) → UU l4
@@ -363,13 +364,13 @@ module _
     hom-fiber-precategory-Displayed-Precategory x z
   comp-hom-fiber-precategory-Displayed-Precategory {x} {y} {z} g f =
     tr
-      ( λ i → hom-Displayed-Precategory C D i x z)
-      ( left-unit-law-comp-hom-Precategory C (id-hom-Precategory C))
-      ( comp-hom-Displayed-Precategory C D
-        ( id-hom-Precategory C) (id-hom-Precategory C) g f)
+      ( λ i → hom-Displayed-Precategory 𝒞 𝒟 i x z)
+      ( left-unit-law-comp-hom-Precategory 𝒞 (id-hom-Precategory 𝒞))
+      ( comp-hom-Displayed-Precategory 𝒞 𝒟
+        ( id-hom-Precategory 𝒞) (id-hom-Precategory 𝒞) g f)
 ```
 
-By associativity in `D`, composition in the fiber is dependently associative
+By associativity in `𝒟`, composition in the fiber is dependently associative
 
 ```text
       f       g       h
@@ -392,11 +393,11 @@ By associativity in `D`, composition in the fiber is dependently associative
       ( comp-hom-fiber-precategory-Displayed-Precategory g f))
   associative-comp-hom-fiber-precategory-Displayed-Precategory
     {x} {y} {z} {w} h g f =
-      {! associative-comp-hom-Displayed-Precategory C D _ _ _ h g f  !} -- this is a dependent identification over `associative-comp-hom-Precategory C id-hom id-hom id-hom`. Can we show it's a
+      {! associative-comp-hom-Displayed-Precategory 𝒞 𝒟 _ _ _ h g f  !} -- this is a dependent identification over `associative-comp-hom-Precategory 𝒞 id-hom id-hom id-hom`. Can we show it's a
       -- equational-reasoning {! comp-hom-fiber-precategory-Displayed-Precategory (comp-hom-fiber-precategory-Displayed-Precategory h g) f !} ＝ {!   !} by {!   !}
       -- ind-subsingleton
-      --   ( is-set-hom-Displayed-Precategory C D
-      --     ( id-hom-Precategory C {c})
+      --   ( is-set-hom-Displayed-Precategory 𝒞 𝒟
+      --     ( id-hom-Precategory 𝒞 {c})
       --     ( x)
       --     ( w)
       --     ( comp-hom-fiber-precategory-Displayed-Precategory
@@ -405,21 +406,21 @@ By associativity in `D`, composition in the fiber is dependently associative
       --     ( comp-hom-fiber-precategory-Displayed-Precategory
       --       ( h)
       --       ( comp-hom-fiber-precategory-Displayed-Precategory g f)))
-      --   (associative-comp-hom-Displayed-Precategory C D
+      --   (associative-comp-hom-Displayed-Precategory 𝒞 𝒟
       --     {c} {c} {c} {c}
-      --     ( id-hom-Precategory C)
-      --     ( id-hom-Precategory C)
-      --     ( id-hom-Precategory C)
+      --     ( id-hom-Precategory 𝒞)
+      --     ( id-hom-Precategory 𝒞)
+      --     ( id-hom-Precategory 𝒞)
       --     {x} {y} {z} {w} h g f)
     -- tr
     --   (λ p → {!   !})
     --   ( eq-is-prop
     --     )
-    --   ( associative-comp-hom-Displayed-Precategory C D
+    --   ( associative-comp-hom-Displayed-Precategory 𝒞 𝒟
     --     {c} {c} {c} {c}
-    --     ( id-hom-Precategory C)
-    --     ( id-hom-Precategory C)
-    --     ( id-hom-Precategory C)
+    --     ( id-hom-Precategory 𝒞)
+    --     ( id-hom-Precategory 𝒞)
+    --     ( id-hom-Precategory 𝒞)
     --     {x} {y} {z} {w} h g f)
 
   -- associative-composition-operation-fiber-precategory-Displayed-Precategory :
@@ -436,7 +437,7 @@ By associativity in `D`, composition in the fiber is dependently associative
   --   {x : obj-fiber-precategory-Displayed-Precategory} →
   --   hom-fiber-precategory-Displayed-Precategory x x
   -- id-hom-fiber-precategory-Displayed-Precategory {x} =
-  --   id-hom-Displayed-Precategory C D x
+  --   id-hom-Displayed-Precategory 𝒞 𝒟 x
 
   -- left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory :
   --   {x y : obj-fiber-precategory-Displayed-Precategory} →
@@ -446,7 +447,7 @@ By associativity in `D`, composition in the fiber is dependently associative
   --     ( f) ＝
   --   f
   -- left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory =
-  --   left-unit-law-comp-hom-Displayed-Precategory C D (id-hom-Precategory C {c})
+  --   left-unit-law-comp-hom-Displayed-Precategory 𝒞 𝒟 (id-hom-Precategory 𝒞 {c})
 
   -- right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory :
   --   {x y : obj-fiber-precategory-Displayed-Precategory} →
@@ -456,7 +457,7 @@ By associativity in `D`, composition in the fiber is dependently associative
   --     ( id-hom-fiber-precategory-Displayed-Precategory) ＝
   --   f
   -- right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory =
-  --   right-unit-law-comp-hom-Displayed-Precategory C D (id-hom-Precategory C {c})
+  --   right-unit-law-comp-hom-Displayed-Precategory 𝒞 𝒟 (id-hom-Precategory 𝒞 {c})
 
   -- is-unital-composition-operation-fiber-precategory-Displayed-Precategory :
   --   is-unital-composition-operation-binary-family-Set
@@ -487,8 +488,7 @@ By associativity in `D`, composition in the fiber is dependently associative
 
 ## References
 
-1. Benedikt Ahrens and Peter LeFanu Lumsdaine, _Displayed Categories_ (2019)
-   ([arXiv:1705.04296](https://arxiv.org/abs/1705.04296))
+{{#bibliography}} {{#reference AL19}}
 
 ## External links
 
