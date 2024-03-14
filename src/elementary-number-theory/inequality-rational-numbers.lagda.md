@@ -19,6 +19,7 @@ open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -187,7 +188,7 @@ module _
   (x : ℚ)
   where
 
-  left-∃-le-ℚ : exists-type-family ℚ (λ q → le-ℚ q x)
+  left-∃-le-ℚ : exists ℚ (λ q → le-ℚ-Prop q x)
   left-∃-le-ℚ = intro-exists
     ( in-fraction-ℤ frac)
     ( left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
@@ -200,7 +201,7 @@ module _
     frac : fraction-ℤ
     frac = pred-ℤ (numerator-ℚ x) , positive-denominator-ℚ x
 
-  right-∃-le-ℚ : exists-type-family ℚ (λ r → le-ℚ x r)
+  right-∃-le-ℚ : exists ℚ (λ r → le-ℚ-Prop x r)
   right-∃-le-ℚ = intro-exists
     ( in-fraction-ℤ frac)
     ( right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
@@ -275,7 +276,7 @@ module _
   (x y : ℚ) (H : le-ℚ x y)
   where
 
-  dense-le-ℚ : exists-type-family ℚ (λ r → le-ℚ x r × le-ℚ r y)
+  dense-le-ℚ : exists ℚ (λ r → le-ℚ-Prop x r ∧ le-ℚ-Prop r y)
   dense-le-ℚ =
     intro-exists
       ( mediant-ℚ x y)
@@ -286,7 +287,7 @@ module _
 
 ```agda
 located-le-ℚ :
-  (x y z : ℚ) → le-ℚ y z → disjunction-Type (le-ℚ y x) (le-ℚ x z)
+  (x y z : ℚ) → le-ℚ y z → type-Prop ((le-ℚ-Prop y x) ∨ (le-ℚ-Prop x z))
 located-le-ℚ x y z H =
   unit-trunc-Prop
     ( map-coproduct

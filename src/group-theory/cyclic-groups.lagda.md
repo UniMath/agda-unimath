@@ -51,7 +51,7 @@ module _
 
   is-cyclic-prop-Group : Prop l1
   is-cyclic-prop-Group =
-    exists-type-family-Prop (type-Group G) (is-generating-element-Group G)
+    ∃ (type-Group G) (is-generating-element-prop-Group G)
 
   is-cyclic-Group : UU l1
   is-cyclic-Group = type-Prop is-cyclic-prop-Group

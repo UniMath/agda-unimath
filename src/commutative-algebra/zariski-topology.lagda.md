@@ -44,8 +44,7 @@ is-closed-subset-zariski-topology-Commutative-Ring :
 is-closed-subset-zariski-topology-Commutative-Ring {l1} {l2} {l3} A U =
   exists-type-family-Prop
     ( subtype l3 (type-Commutative-Ring A))
-    ( λ V →
-      standard-closed-subset-zariski-topology-Commutative-Ring A V ＝ U)
+    ( λ V → standard-closed-subset-zariski-topology-Commutative-Ring A V ＝ U)
 
 closed-subset-zariski-topology-Commutative-Ring :
   {l1 l2 : Level} (l3 : Level) (A : Commutative-Ring l1) →

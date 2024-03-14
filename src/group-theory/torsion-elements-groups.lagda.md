@@ -29,7 +29,7 @@ An element `x` of a [group](group-theory.groups.md) `G` is said to be a
 **torsion element** if
 
 ```text
-  exists-type-family (k : nonzero-ℤ), xᵏ ＝ 1.
+  ∃ (k : nonzero-ℤ), xᵏ ＝ 1.
 ```
 
 Note that the condition of being a torsion element is slightly weaker than the

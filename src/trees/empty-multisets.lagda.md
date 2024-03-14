@@ -10,6 +10,7 @@ module trees.empty-multisets where
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import trees.elementhood-relation-w-types
@@ -35,6 +36,12 @@ module _
 
   is-empty-𝕍 : 𝕍 l → UU l
   is-empty-𝕍 (tree-𝕎 X Y) = is-empty X
+
+  is-property-is-empty-𝕍 : (X : 𝕍 l) → is-prop (is-empty-𝕍 X)
+  is-property-is-empty-𝕍 (tree-𝕎 X Y) = is-property-is-empty
+
+  is-empty-prop-𝕍 : 𝕍 l → Prop l
+  is-empty-prop-𝕍 X = is-empty-𝕍 X , is-property-is-empty-𝕍 X
 ```
 
 ### The predicate of being a multiset with no elements

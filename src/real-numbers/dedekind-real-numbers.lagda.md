@@ -128,14 +128,14 @@ module _
   is-rounded-lower-cut-ℝ :
     (q : ℚ) →
     is-in-lower-cut-ℝ q ↔
-    exists-type-family ℚ (λ r → (le-ℚ q r) × (is-in-lower-cut-ℝ r))
+    exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-ℝ r))
   is-rounded-lower-cut-ℝ =
     pr1 (pr1 (pr2 is-dedekind-cut-cut-ℝ))
 
   is-rounded-upper-cut-ℝ :
     (r : ℚ) →
     is-in-upper-cut-ℝ r ↔
-    exists-type-family ℚ (λ q → (le-ℚ q r) × (is-in-upper-cut-ℝ q))
+    exists ℚ (λ q → (le-ℚ-Prop q r) ∧ (upper-cut-ℝ q))
   is-rounded-upper-cut-ℝ =
     pr2 (pr1 (pr2 is-dedekind-cut-cut-ℝ))
 

@@ -7,6 +7,7 @@ module foundation.equivalence-classes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.existential-quantification
@@ -247,8 +248,9 @@ module _
   share-common-element-equivalence-class-Prop :
     (C D : equivalence-class R) → Prop (l1 ⊔ l2)
   share-common-element-equivalence-class-Prop C D =
-    exists-type-family-Prop A
-      ( λ x → is-in-equivalence-class R C x × is-in-equivalence-class R D x)
+    ∃ ( A)
+      ( λ x →
+        is-in-equivalence-class-Prop R C x ∧ is-in-equivalence-class-Prop R D x)
 
   share-common-element-equivalence-class :
     (C D : equivalence-class R) → UU (l1 ⊔ l2)

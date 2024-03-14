@@ -72,8 +72,8 @@ is-dedekind-cut-le-ℚ x =
   where
     α :
       (a b : ℚ) →
-      exists-type-family ℚ (λ r → le-ℚ a r × le-ℚ r b) →
-      exists-type-family ℚ (λ r → le-ℚ r b × le-ℚ a r)
+      exists ℚ (λ r → le-ℚ-Prop a r ∧ le-ℚ-Prop r b) →
+      exists ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r)
     α a b =
       elim-exists
         ( exists-Prop ℚ

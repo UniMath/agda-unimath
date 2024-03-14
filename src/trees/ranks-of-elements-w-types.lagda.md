@@ -184,7 +184,7 @@ module _
       where
       g :
         (v ∈-𝕎 tree-𝕎 y β) × (α b ≼-𝕎 v) →
-        exists-type-family (B y) (λ c → α b ≼-𝕎 β c)
+        exists (B y) (λ c → α b ≼-𝕎-Prop β c)
       g (pair (pair c p) M) = intro-exists c (tr (λ t → α b ≼-𝕎 t) (inv p) M)
 ```
 

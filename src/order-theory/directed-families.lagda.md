@@ -8,6 +8,7 @@ module order-theory.directed-families where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.inhabited-types
@@ -38,9 +39,8 @@ is-directed-family-Poset-Prop P I x =
       Π-Prop
         ( type-Inhabited-Type I)
         ( λ j →
-          exists-type-family-Prop
-            ( type-Inhabited-Type I)
-            ( λ k → leq-Poset P (x i) (x k) × leq-Poset P (x j) (x k))))
+          ∃ ( type-Inhabited-Type I)
+            ( λ k → leq-Poset-Prop P (x i) (x k) ∧ leq-Poset-Prop P (x j) (x k))))
 
 is-directed-family-Poset :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
