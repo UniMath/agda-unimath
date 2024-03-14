@@ -37,7 +37,7 @@ open import synthetic-homotopy-theory.sequential-diagrams
 
 A **cocone under a
 [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
-`(A, a)`** with codomain `X : 𝓤` consists of a family of maps `iₙ : A n → C` and
+`(A, a)`** with codomain `X : 𝒰` consists of a family of maps `iₙ : A n → C` and
 a family of [homotopies](foundation.homotopies.md) `Hₙ` asserting that the
 triangles
 
@@ -152,6 +152,35 @@ module _
     coherence-htpy-cocone-sequential-diagram c c'
       ( htpy-htpy-cocone-sequential-diagram)
   coherence-htpy-htpy-cocone-sequential-diagram = pr2 H
+```
+
+### Concatenation of homotopies of cocones under a sequential diagram
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
+  {c c' c'' : cocone-sequential-diagram A X}
+  (H : htpy-cocone-sequential-diagram c c')
+  (K : htpy-cocone-sequential-diagram c' c'')
+  where
+
+  concat-htpy-cocone-sequential-diagram : htpy-cocone-sequential-diagram c c''
+  pr1 concat-htpy-cocone-sequential-diagram n =
+    ( htpy-htpy-cocone-sequential-diagram H n) ∙h
+    ( htpy-htpy-cocone-sequential-diagram K n)
+  pr2 concat-htpy-cocone-sequential-diagram n =
+    horizontal-pasting-coherence-square-homotopies
+      ( htpy-htpy-cocone-sequential-diagram H n)
+      ( htpy-htpy-cocone-sequential-diagram K n)
+      ( coherence-cocone-sequential-diagram c n)
+      ( coherence-cocone-sequential-diagram c' n)
+      ( coherence-cocone-sequential-diagram c'' n)
+      ( ( htpy-htpy-cocone-sequential-diagram H (succ-ℕ n)) ·r
+        ( map-sequential-diagram A n))
+      ( ( htpy-htpy-cocone-sequential-diagram K (succ-ℕ n)) ·r
+        ( map-sequential-diagram A n))
+      ( coherence-htpy-htpy-cocone-sequential-diagram H n)
+      ( coherence-htpy-htpy-cocone-sequential-diagram K n)
 ```
 
 ### Postcomposing cocones under a sequential diagram with a map
