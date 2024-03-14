@@ -184,8 +184,8 @@ is-split-surjective-pairing-map n =
 ### Pairing function is injective
 
 ```agda
-is-injecitve-pairing-map : is-injective pairing-map
-is-injecitve-pairing-map {u , v} {u' , v'} p =
+is-injective-pairing-map : is-injective pairing-map
+is-injective-pairing-map {u , v} {u' , v'} p =
   ( eq-pair' (is-pair-expansion-unique u u' v v' q))
   where
   r = is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v)
@@ -203,6 +203,6 @@ is-equiv-pairing-map : is-equiv pairing-map
 is-equiv-pairing-map =
   is-equiv-is-split-surjective-is-injective
     pairing-map
-    is-injecitve-pairing-map
+    is-injective-pairing-map
     is-split-surjective-pairing-map
 ```

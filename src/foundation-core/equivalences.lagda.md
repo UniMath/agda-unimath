@@ -212,21 +212,22 @@ module _
     is-coherently-invertible-is-equiv =
       is-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
 
-    is-equiv-is-coherently-invertible :
-      is-coherently-invertible f → is-equiv f
-    is-equiv-is-coherently-invertible H =
-      is-equiv-is-invertible' (is-invertible-is-coherently-invertible H)
-
+  abstract
     is-transpose-coherently-invertible-is-equiv :
       is-equiv f → is-transpose-coherently-invertible f
     is-transpose-coherently-invertible-is-equiv =
       is-transpose-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
 
-    is-equiv-is-transpose-coherently-invertible :
-      is-transpose-coherently-invertible f → is-equiv f
-    is-equiv-is-transpose-coherently-invertible H =
-      is-equiv-is-invertible'
-        ( is-invertible-is-transpose-coherently-invertible H)
+  is-equiv-is-coherently-invertible :
+    is-coherently-invertible f → is-equiv f
+  is-equiv-is-coherently-invertible H =
+    is-equiv-is-invertible' (is-invertible-is-coherently-invertible H)
+
+  is-equiv-is-transpose-coherently-invertible :
+    is-transpose-coherently-invertible f → is-equiv f
+  is-equiv-is-transpose-coherently-invertible H =
+    is-equiv-is-invertible'
+      ( is-invertible-is-transpose-coherently-invertible H)
 ```
 
 ### Structure obtained from being coherently invertible
@@ -421,10 +422,8 @@ module _
   abstract
     is-equiv-comp :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
-    pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) =
-      section-comp g h sh sg
-    pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) =
-      retraction-comp g h rg rh
+    pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) = section-comp g h sh sg
+    pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) = retraction-comp g h rg rh
 
   equiv-comp : B ≃ X → A ≃ B → A ≃ X
   pr1 (equiv-comp g h) = map-equiv g ∘ map-equiv h
@@ -688,7 +687,7 @@ module _
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
 
   map-inv-equiv-ap :
-    (e : A ≃ B) (x y : A) → (map-equiv e x ＝ map-equiv e y) → (x ＝ y)
+    (e : A ≃ B) (x y : A) → map-equiv e x ＝ map-equiv e y → x ＝ y
   map-inv-equiv-ap e x y = map-inv-equiv (equiv-ap e x y)
 ```
 

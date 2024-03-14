@@ -1,7 +1,7 @@
 # The sharp modality
 
 ```agda
-{-# OPTIONS --cohesion --flat-split #-}
+{-# OPTIONS --cohesion --flat-split --rewriting #-}
 
 module modal-type-theory.sharp-modality where
 ```
@@ -14,21 +14,26 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.transport-along-identifications
 open import foundation.locally-small-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import reflection.rewriting
 
 open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-induction
 open import orthogonal-factorization-systems.modal-subuniverse-induction
+
+open import reflection.rewriting
 ```
 
 </details>
 
 ## Idea
 
-The **sharp modality `♯`** is an axiomatized
-[monadic modality](orthogonal-factorization-systems.higher-modalities.md) we
-postulate as a right adjoint to the
+The {{#concept "sharp modality" Agda=♯}} `♯` is an axiomatized
+[monadic modality](orthogonal-factorization-systems.higher-modalities.md) that
+we postulate as a right adjoint to the
 [flat modality](modal-type-theory.flat-modality.md).
 
 In this file, we only postulate that `♯` is a
@@ -49,17 +54,186 @@ axioms, and they may be subject to change in the future.
 postulate
   ♯ : {l : Level} (A : UU l) → UU l
 
-  @♭ unit-sharp : {l : Level} {A : UU l} → A → ♯ A
+  unit-sharp : {l : Level} {A : UU l} → A → ♯ A
+```
 
+### Crisp elimination for the sharp modality
+
+```agda
+postulate
+  crisp-elim-sharp :
+    {@♭ l : Level} {@♭ A : UU l} → @♭ ♯ A → A
+
+  compute-crisp-elim-sharp :
+    {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) →
+    crisp-elim-sharp (unit-sharp x) ＝ x
+
+  uniqueness-crisp-elim-sharp :
+    {@♭ l : Level} {@♭ A : UU l} (@♭ x : ♯ A) →
+    unit-sharp (crisp-elim-sharp x) ＝ x
+
+  coherence-uniqueness-crisp-elim-sharp :
+    {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) →
+    ( uniqueness-crisp-elim-sharp (unit-sharp x)) ＝
+    ( ap unit-sharp (compute-crisp-elim-sharp x))
+
+  {-# REWRITE compute-crisp-elim-sharp uniqueness-crisp-elim-sharp #-}
+```
+
+### Crisp induction for the sharp modality
+
+The
+{{# "crisp induction principle" Disambiguation="for the sharp modality" Agda=crisp-ind-sharp}}
+for the sharp modality is the principle that sharp codiscrete types are local at
+the flat counit.
+
+```agda
+postulate
+  crisp-ind-sharp :
+    {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2) →
+    ((@♭ x : A) → C x) → (x : A) → ♯ (C x)
+
+  compute-crisp-ind-sharp :
+    {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2)
+    (f : (@♭ x : A) → C x) →
+    (@♭ x : A) → crisp-ind-sharp C f x ＝ unit-sharp (f x)
+
+  {-# REWRITE compute-crisp-ind-sharp #-}
+```
+
+### Recontextualizing
+
+```text
+postulate
+  pointwise-sharp :
+    {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} → (@♭ A → UU l2) → A → UU l2
+```
+
+```text
+postulate
+  unit-pointwise-sharp :
+    {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level}
+    {B : @♭ A → UU l2} (a : (@♭ x : A) → B x) →
+    (x : A) → pointwise-sharp B x
+
+  elim-pointwise-sharp :
+    {@♭ l1 l2 : Level} {@♭ A : UU l1} {B : @♭ A → UU l2}
+    (f : (@♭ x : A) → pointwise-sharp B x) → (@♭ x : A) → B x
+
+  compute-pointwise-sharp :
+    {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level}
+    (B : A → UU l2) (x : A) → pointwise-sharp (λ a → B a) x ＝ ♯ (B x)
+
+  {-# REWRITE compute-pointwise-sharp #-}
+
+  compute-unit-pointwise-sharp :
+    {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level}
+    {B : @♭ A → UU l2} (f : (@♭ x : A) → B x)
+    (@♭ x : A) → unit-pointwise-sharp f x ＝ unit-sharp (f x)
+
+  -- {-# REWRITE compute-unit-pointwise-sharp #-}
+
+syntax elim-pointwise-sharp (λ γ → a) ctx = let♯ γ ::= ctx in♯ a ↓↓♯
+```
+
+**Warning:** When normalizing `λ B x → unit-pointwise-sharp f x`, the rewrite
+`compute-unit-pointwise-sharp` will fire turning it into `unit-sharp (f x)`,
+which is ill-typed on cohesive `x : A` (and the typechecker complains).
+\[Myers\] (May be outdated info)
+
+```text
+postulate
+  compute-elim-pointwise-sharp :
+    {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : @♭ A → UU l2}
+    (@♭ f : (@♭ x : A) → pointwise-sharp B x)
+    (@♭ x : A) → elim-pointwise-sharp f x ＝ crisp-elim-sharp (f x)
+
+  {-# REWRITE compute-elim-pointwise-sharp #-}
+```
+
+### Uncrispening contexts
+
+```text
+record context-uncrisp-sharp {@♭ l1 l2 : Level} {@♭ A : UU l1} : UU (lsuc (l1 ⊔ l2)) where
+  constructor ctx
+  field
+    ᶜB : A → UU l2
+    ᶜf : (@♭ x : A) → ♯ (ᶜB x)
+    ᶜa : A
+
+open context-uncrisp-sharp
+
+module _
+  {@♭ l1 l2 : Level} {@♭ A : UU l1}
+  where
+
+  uncrisp-sharp : (B : A → UU l2) (f : (@♭ x : A) → ♯ (B x)) → (x : A) → ♯ (B x)
+  uncrisp-sharp B f x =
+    unit-pointwise-sharp (λ γ → crisp-elim-sharp ((ᶜf γ) (ᶜa γ))) (ctx B f x)
+
+  compute-uncrisp-sharp :
+    (@♭ B : A → UU l2) (@♭ f : (@♭ x : A) → ♯ (B x)) (@♭ x : A) →
+    uncrisp-sharp B f x ＝ f x
+  compute-uncrisp-sharp B f x =
+    compute-unit-pointwise-sharp
+      ( λ γ → crisp-elim-sharp ((ᶜf γ) (ᶜa γ)))
+      ( ctx B f x)
+
+module _
+  {@♭ l1 l2 l3 : Level}
+  {@♭ A : UU l1} {@♭ B : A → UU l2}
+  where
+
+  uncrisp-sharp² :
+    (C : (x : A) → B x → UU l3)
+    (f : (@♭ x : A) (@♭ y : B x) → ♯ (C x y))
+    (x : A) (y : B x) → ♯ (C x y)
+  uncrisp-sharp² C f x y =
+    uncrisp-sharp (λ (x , y) → C x y) (λ p → f (pr1 p) (pr2 p)) (x , y)
+
+  compute-uncrisp-sharp² :
+    (@♭ C : (x : A) → B x → UU l3)
+    (@♭ f : (@♭ x : A) (@♭ y : B x) → ♯ (C x y))
+    (@♭ x : A) (@♭ y : B x) → uncrisp-sharp² C f x y ＝ f x y
+  compute-uncrisp-sharp² C f x y =
+    compute-uncrisp-sharp (λ (x , y) → C x y) (λ p → f (pr1 p) (pr2 p)) (x , y)
+```
+
+### Sharp induction
+
+```agda
+module _
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ C : ♯ A → UU l2)
+  (@♭ f : ((x : A) → ♯ (C (unit-sharp x))))
+  where
+
+  ind-sharp' : (x : ♯ A) → ♯ (C x)
+  ind-sharp' =
+    crisp-ind-sharp C (λ x → crisp-elim-sharp (f (crisp-elim-sharp x)))
+
+  compute-ind-sharp' : (@♭ x : A) → ind-sharp' (unit-sharp x) ＝ f x
+  compute-ind-sharp' x =
+    compute-crisp-ind-sharp C
+      ( λ x → crisp-elim-sharp (f (crisp-elim-sharp x)))
+      ( unit-sharp x)
+
+-- TODO: replace this with the pointwise-sharp thing
+postulate
   ind-sharp :
     {l1 l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
     ((x : A) → ♯ (C (unit-sharp x))) →
-    ((x : ♯ A) → ♯ (C x))
+    (x : ♯ A) → ♯ (C x)
 
   compute-ind-sharp :
     {l1 l2 : Level} {A : UU l1} (C : ♯ A → UU l2)
     (f : (x : A) → ♯ (C (unit-sharp x))) →
-    (ind-sharp C f ∘ unit-sharp) ~ f
+    ind-sharp C f ∘ unit-sharp ~ f
+
+-- ind-sharp'' :
+--   {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ C : ♯ A → UU l2) →
+--   ((x : A) → ♯ (C (unit-sharp x))) →
+--   (x : ♯ A) → ♯ (C x)
+-- ind-sharp'' C f x = unit-pointwise-sharp {!   !} {!   !}
 ```
 
 ## Definitions
@@ -69,7 +243,7 @@ postulate
 ```agda
 sharp-locally-small-operator-modality :
   (l : Level) → locally-small-operator-modality l l l
-pr1 (sharp-locally-small-operator-modality l) = ♯ {l}
+pr1 (sharp-locally-small-operator-modality l) = ♯
 pr2 (sharp-locally-small-operator-modality l) A = is-locally-small' {l} {♯ A}
 ```
 
@@ -128,7 +302,7 @@ compute-ind-subuniverse-sharp =
     ( induction-principle-subuniverse-sharp)
 ```
 
-### Sharp recursion
+### The sharp recursion principle
 
 ```agda
 rec-sharp :
@@ -194,11 +368,11 @@ compute-rec-subuniverse-sharp =
     ( recursion-principle-subuniverse-sharp)
 ```
 
-### Action on maps
+### Sharp's action on maps
 
 ```agda
-ap-sharp : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
-ap-sharp f = rec-sharp (unit-sharp ∘ f)
+ap-map-sharp : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
+ap-map-sharp f = rec-sharp (unit-sharp ∘ f)
 ```
 
 ## See also
@@ -211,6 +385,9 @@ ap-sharp f = rec-sharp (unit-sharp ∘ f)
   [flat modality](modal-type-theory.flat-modality.md).
 
 ## References
+
+- David Jaz Myers, _Cohesion_, GitHub repository
+  (<https://github.com/DavidJaz/Cohesion>)
 
 {{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}
 {{#reference Felixwellen/DCHoTT-Agda}}
