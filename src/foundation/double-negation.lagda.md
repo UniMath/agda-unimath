@@ -116,10 +116,10 @@ double-negation-elim-exp {P = P} {Q = Q} f p =
     ( ¬ Q)
     ( map-double-negation (λ (g : P → ¬¬ Q) → g p) f)
 
-double-negation-elim-forall :
+double-negation-elim-for-all :
   {l1 l2 : Level} {P : UU l1} {Q : P → UU l2} →
   ¬¬ ((p : P) → ¬¬ (Q p)) → (p : P) → ¬¬ (Q p)
-double-negation-elim-forall {P = P} {Q = Q} f p =
+double-negation-elim-for-all {P = P} {Q = Q} f p =
   double-negation-elim-neg
     ( ¬ (Q p))
     ( map-double-negation (λ (g : (u : P) → ¬¬ (Q u)) → g p) f)
