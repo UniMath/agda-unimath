@@ -38,6 +38,7 @@ open import foundation-core.postcomposition-functions
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-identifications-concatenation
 ```

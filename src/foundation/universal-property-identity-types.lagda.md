@@ -28,6 +28,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 ```
 
