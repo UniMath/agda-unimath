@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.inhabited-types
 open import foundation.propositions
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import order-theory.posets
@@ -33,10 +34,10 @@ is-directed-family-Poset-Prop :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
   (x : type-Inhabited-Type I → type-Poset P) → Prop (l2 ⊔ l3)
 is-directed-family-Poset-Prop P I x =
-  Π-Prop
+  ∀'
     ( type-Inhabited-Type I)
     ( λ i →
-      Π-Prop
+      ∀'
         ( type-Inhabited-Type I)
         ( λ j →
           ∃ ( type-Inhabited-Type I)
