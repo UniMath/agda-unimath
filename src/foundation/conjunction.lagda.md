@@ -113,7 +113,7 @@ module _
     is-decidable-conjunction-Decidable-Prop
 ```
 
-### The introductino rule and projections for the conjunction of propositions
+### The introduction rule and projections for the conjunction of propositions
 
 We refrain from defining the introduction rule and basic projections of the
 conjunction, and advise users to utilize the standard projections of the
