@@ -35,7 +35,7 @@ is the [proposition](foundation-core.propositions.md) that there
 `A`.
 
 The
-{{#concept "universal property" Disambiguation="of universal quantification" Agda=universal-property-for-all-Prop}}
+{{#concept "universal property" Disambiguation="of universal quantification" Agda=universal-property-for-all}}
 of universal quantification states that it is the greatest lower bound on the
 family of propositions `P` in the
 [poset of propositions](foundation.large-locale-of-propositions.md), by which we
