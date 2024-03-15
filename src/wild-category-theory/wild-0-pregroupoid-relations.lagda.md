@@ -35,7 +35,7 @@ A {{#concept "wild 0-pregroupid relation" }} `R` on a type `A` is a wild
 that the relation is not required to be valued in
 [propositions](foundation-core.propositions.md).
 
-## Definition
+## Definitions
 
 ### The structure of a wild 0-pregroupoid on a relation
 
