@@ -27,6 +27,7 @@ open import foundation.sections
 open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
+open import modal-type-theory.action-on-identifications-crisp-functions
 open import modal-type-theory.crisp-dependent-pair-types
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-discrete-crisp-types
@@ -167,7 +168,7 @@ module _
     is-flat-discrete-crisp B →
     is-flat-discrete-crisp C
   is-flat-discrete-crisp-pullback-is-flat-discrete-crisp-factors c H bX bA bB =
-    is-flat-discrete-crisp-equiv
+    is-flat-discrete-crisp-equiv'
       ( gap f g c , H)
       ( is-flat-discrete-crisp-standard-pullback-is-flat-discrete-crisp-factors
         ( f)

@@ -1,7 +1,7 @@
 # Sharp codiscrete types
 
 ```agda
-{-# OPTIONS --cohesion --flat-split #-}
+{-# OPTIONS --cohesion --flat-split --rewriting #-}
 
 module modal-type-theory.sharp-codiscrete-types where
 ```

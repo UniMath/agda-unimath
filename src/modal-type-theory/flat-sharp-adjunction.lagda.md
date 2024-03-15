@@ -1,7 +1,7 @@
 # The flat-sharp adjunction
 
 ```agda
-{-# OPTIONS --cohesion --flat-split #-}
+{-# OPTIONS --cohesion --flat-split --rewriting #-}
 
 module modal-type-theory.flat-sharp-adjunction where
 ```
@@ -26,6 +26,7 @@ open import foundation.universe-levels
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 open import modal-type-theory.functoriality-flat-modality
+open import modal-type-theory.action-on-identifications-crisp-functions
 open import modal-type-theory.sharp-codiscrete-types
 open import modal-type-theory.sharp-modality
 

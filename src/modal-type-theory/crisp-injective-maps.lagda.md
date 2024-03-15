@@ -21,6 +21,7 @@ open import foundation.sections
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
+open import modal-type-theory.action-on-identifications-crisp-functions
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 ```
