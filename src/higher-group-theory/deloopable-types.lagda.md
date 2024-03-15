@@ -25,18 +25,19 @@ open import structured-types.small-pointed-types
 
 ## Idea
 
-Consider a [pointed type](structured-types.pointed types.md) `X` and a
-[pointed connected type](higher-group-theory.higher-groups.md) `Y`. We say that
-`Y` is a {{#concept "delooping" Agda=is-delooping}} of `X` if we have a
+Consider a [pointed type](structured-types.pointed types.md) `X` and a pointed
+[connected](foundation.0-connected-types.md) type `Y`. We say that `Y` is a
+{{#concept "delooping" Agda=is-delooping}} of `X` if we have a
 [pointed equivalence](structured-types.pointed-equivalences.md)
 
 ```text
   X ≃∗ Ω Y.
 ```
 
-Recall that a pointed connected type is an ∞-group. An ∞-group `G` is therefore
-a delooping of `X` if its underlying pointed type is pointed equivalent to `X`.
-A {{#concept "delooping" Disambiguation="pointed type" Agda=delooping}} of `X`
+Recall that a pointed connected type is an
+[∞-group](higher-group-theory.higher-groups.md). An ∞-group `G` is therefore a
+delooping of `X` if its underlying pointed type is pointed equivalent to `X`. A
+{{#concept "delooping" Disambiguation="pointed type" Agda=delooping}} of `X`
 therefore consist of an ∞-group `G` and a pointed equivalence
 
 ```text
