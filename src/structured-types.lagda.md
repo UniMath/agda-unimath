@@ -64,6 +64,7 @@ open import structured-types.pointed-universal-property-contractible-types publi
 open import structured-types.postcomposition-pointed-maps public
 open import structured-types.precomposition-pointed-maps public
 open import structured-types.sets-equipped-with-automorphisms public
+open import structured-types.small-pointed-types public
 open import structured-types.symmetric-elements-involutive-types public
 open import structured-types.symmetric-h-spaces public
 open import structured-types.transposition-pointed-span-diagrams public

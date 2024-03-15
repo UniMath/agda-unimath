@@ -33,17 +33,27 @@ open import structured-types.small-pointed-types
 
 ## Idea
 
-An [∞-group](higher-group-theory.higher-groups.md) `G` is said to be {{#concept "small" Disambiguation="∞-group" Agda=is-small-∞-Group}} with respect to a universe `𝒰` if its underlying type is `𝒰`-small. By the [type theoretic replacement principle](foundation.replacement.md) it follows that `G` is small if and only if its classifying type `BG` is small. This observation implies that an ∞-group
-`G` is small if and only if it is {{#concept "structurally small" Disambiguation="∞-group" Agda=is-structurally-small-∞-Group}} in the sense that it comes equipped with an element of type
+An [∞-group](higher-group-theory.higher-groups.md) `G` is said to be
+{{#concept "small" Disambiguation="∞-group" Agda=is-small-∞-Group}} with respect
+to a universe `𝒰` if its underlying type is `𝒰`-small. By the
+[type theoretic replacement principle](foundation.replacement.md) it follows
+that `G` is small if and only if its classifying type `BG` is small. This
+observation implies that an ∞-group `G` is small if and only if it is
+{{#concept "structurally small" Disambiguation="∞-group" Agda=is-structurally-small-∞-Group}}
+in the sense that it comes equipped with an element of type
 
 ```text
   Σ (H : ∞-Group), G ≃ H,
 ```
 
-where the type `G ≃ H` is the type of [equivalences of ∞-groups](higher-group-theory.equivalences-higher-groups.md).
+where the type `G ≃ H` is the type of
+[equivalences of ∞-groups](higher-group-theory.equivalences-higher-groups.md).
 
-Finally, we also introduce the notion of _pointedly small ∞-group_. An ∞-group `G` is said to be {{#concept "pointedly small" Disambiguation="∞-group" Agda=is-pointedly-small-∞-Group}} if its classifying [pointed type](structured-types.pointed-types.md) `BG` is [pointedly small](structured-types.small-pointed-types.md).
-
+Finally, we also introduce the notion of _pointedly small ∞-group_. An ∞-group
+`G` is said to be
+{{#concept "pointedly small" Disambiguation="∞-group" Agda=is-pointedly-small-∞-Group}}
+if its classifying [pointed type](structured-types.pointed-types.md) `BG` is
+[pointedly small](structured-types.small-pointed-types.md).
 
 ## Definitions
 
@@ -53,7 +63,7 @@ Finally, we also introduce the notion of _pointedly small ∞-group_. An ∞-gro
 module _
   {l1 : Level} (l2 : Level) (G : ∞-Group l1)
   where
-  
+
   is-small-prop-∞-Group : Prop (l1 ⊔ lsuc l2)
   is-small-prop-∞-Group = is-small-Prop l2 (type-∞-Group G)
 
@@ -61,7 +71,7 @@ module _
   is-small-∞-Group = is-small l2 (type-∞-Group G)
 
   is-prop-is-small-∞-Group : is-prop is-small-∞-Group
-  is-prop-is-small-∞-Group = is-prop-is-small l2 (type-∞-Group G)  
+  is-prop-is-small-∞-Group = is-prop-is-small l2 (type-∞-Group G)
 ```
 
 ### The predicate of being a structurally small ∞-group

@@ -24,13 +24,24 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A [pointed type](structured-types.pointed-types.md) is said to be {{#concept "small" Disambiguation="pointed type" Agda=is-small-Pointed-Type}} is its underlying type is [small](foundation.small-types.md). Equivalently, we say that a type is {{#concept "pointedly small" Agda=is-pointedly-small-Pointed-Type}} if it comes equipped with an element of type
+A [pointed type](structured-types.pointed-types.md) is said to be
+{{#concept "small" Disambiguation="pointed type" Agda=is-small-Pointed-Type}} is
+its underlying type is [small](foundation.small-types.md). Equivalently, we say
+that a type is
+{{#concept "pointedly small" Agda=is-pointedly-small-Pointed-Type}} if it comes
+equipped with an element of type
 
 ```text
   Σ (Y : Pointed-Type l), X ≃∗ Y
 ```
 
-The difference between small pointed types and pointedly small pointed types is that the notion of small pointed type is unpointed, and therefore potentially easier to establish. It is immediate that a pointedly small type is small. For the converse, note that if `X` is small, and `Y : 𝒰` comes equipped with an [equivalence](foundation-core.equivalences.md) `e : type-Pointed-Type X ≃ Y`, then we take `e * : Y` to be the base point, and it is immediate that `e` is a [pointed equivalence](structured-types.pointed-equivalences.md).
+The difference between small pointed types and pointedly small pointed types is
+that the notion of small pointed type is unpointed, and therefore potentially
+easier to establish. It is immediate that a pointedly small type is small. For
+the converse, note that if `X` is small, and `Y : 𝒰` comes equipped with an
+[equivalence](foundation-core.equivalences.md) `e : type-Pointed-Type X ≃ Y`,
+then we take `e * : Y` to be the base point, and it is immediate that `e` is a
+[pointed equivalence](structured-types.pointed-equivalences.md).
 
 ## Definitions
 
@@ -110,7 +121,7 @@ module _
 module _
   {l1 : Level} (l2 : Level) (X : Pointed-Type l1)
   where
-  
+
   is-pointedly-small-prop-Pointed-Type : Prop (l1 ⊔ lsuc l2)
   pr1 is-pointedly-small-prop-Pointed-Type =
     is-pointedly-small-Pointed-Type l2 X

@@ -45,7 +45,7 @@ module _
   module _
     (e : equiv-∞-Group)
     where
-    
+
     hom-equiv-∞-Group : hom-∞-Group G H
     hom-equiv-∞-Group = pointed-map-pointed-equiv e
 
