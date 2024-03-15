@@ -33,6 +33,7 @@ open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 ```
 
