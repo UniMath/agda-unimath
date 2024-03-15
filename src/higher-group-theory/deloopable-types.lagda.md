@@ -34,9 +34,16 @@ Consider a [pointed type](structured-types.pointed types.md) `X` and a
   X ≃∗ Ω Y.
 ```
 
-Recall that a pointed connected type is Similarly, we say that `X` is
-{{#concept "deloopable" Disambiguation="pointed type" Agda=delooping}} if there
-is an element of type
+Recall that a pointed connected type is an ∞-group. An ∞-group `G` is therefore
+a delooping of `X` if its underlying pointed type is pointed equivalent to `X`.
+A {{#concept "delooping" Disambiguation="pointed type" Agda=delooping}} of `X`
+therefore consist of an ∞-group `G` and a pointed equivalence
+
+```text
+  X ≃∗ type-∞-Group G
+```
+
+In other words, the type of deloopings of `X` is defined to be
 
 ```text
   delooping X := Σ (Y : ∞-Group), X ≃∗ Ω Y.
