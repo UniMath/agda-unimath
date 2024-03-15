@@ -147,7 +147,6 @@ module _
   where
 
   delooping-delooping-Level : delooping X
-  pr1 delooping-delooping-Level =
-    {!pointed-type-is-pointedly-small-Pointed-Type!}
+  pr1 delooping-delooping-Level = {!∞-group-is-small-∞-Group!}
   pr2 delooping-delooping-Level = {!!}
 ```

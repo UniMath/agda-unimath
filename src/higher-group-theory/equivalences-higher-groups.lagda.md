@@ -23,6 +23,8 @@ open import higher-group-theory.homomorphisms-higher-groups
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-isomorphisms
 open import structured-types.pointed-types
+
+open import synthetic-homotopy-theory.functoriality-loop-spaces
 ```
 
 </details>
@@ -40,12 +42,18 @@ module _
   equiv-∞-Group =
     classifying-pointed-type-∞-Group G ≃∗ classifying-pointed-type-∞-Group H
 
-  hom-equiv-∞-Group : equiv-∞-Group → hom-∞-Group G H
-  hom-equiv-∞-Group =
-    pointed-map-pointed-equiv
+  module _
+    (e : equiv-∞-Group)
+    where
+    
+    hom-equiv-∞-Group : hom-∞-Group G H
+    hom-equiv-∞-Group = pointed-map-pointed-equiv e
 
-  map-equiv-∞-Group : equiv-∞-Group → type-∞-Group G → type-∞-Group H
-  map-equiv-∞-Group = map-hom-∞-Group G H ∘ hom-equiv-∞-Group
+    map-equiv-∞-Group : type-∞-Group G → type-∞-Group H
+    map-equiv-∞-Group = map-hom-∞-Group G H hom-equiv-∞-Group
+
+    equiv-equiv-∞-Group : type-∞-Group G ≃ type-∞-Group H
+    equiv-equiv-∞-Group = equiv-map-Ω-pointed-equiv e
 ```
 
 ### The identity equivalence of higher groups

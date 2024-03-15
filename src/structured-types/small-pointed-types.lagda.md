@@ -82,6 +82,11 @@ module _
   pointed-equiv-is-pointedly-small-Pointed-Type :
     X ≃∗ pointed-type-is-pointedly-small-Pointed-Type
   pointed-equiv-is-pointedly-small-Pointed-Type = pr2 H
+
+  equiv-is-pointedly-small-Pointed-Type :
+    type-Pointed-Type X ≃ type-is-pointedly-small-Pointed-Type
+  equiv-is-pointedly-small-Pointed-Type =
+    equiv-pointed-equiv pointed-equiv-is-pointedly-small-Pointed-Type
 ```
 
 ## Properties
