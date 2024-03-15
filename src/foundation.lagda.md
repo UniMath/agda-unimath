@@ -187,7 +187,6 @@ open import foundation.homotopies public
 open import foundation.homotopies-morphisms-arrows public
 open import foundation.homotopy-algebra public
 open import foundation.homotopy-induction public
-open import foundation.identity-relations public
 open import foundation.identity-systems public
 open import foundation.identity-truncated-types public
 open import foundation.identity-types public
