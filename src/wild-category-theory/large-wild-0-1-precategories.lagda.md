@@ -11,7 +11,7 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import wild-category-theory.wild-0-pregroupoid-relations
+open import wild-category-theory.wild-0-pregroupoids
 ```
 
 </details>
@@ -65,7 +65,7 @@ record
         ( γ l1 l2)
         ( hom-Large-Wild-⟨0,1⟩-Precategory X Y)
 
-    is-wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
+    is-Wild-0-Pregroupoid-hom-Large-Wild-⟨0,1⟩-Precategory :
       {l1 l2 : Level}
       {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
       {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
@@ -76,15 +76,15 @@ record
 We also record a range of common projections.
 
 ```agda
-  wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
+  Wild-0-Pregroupoid-hom-Large-Wild-⟨0,1⟩-Precategory :
     {l1 l2 : Level}
     {X : obj-Large-Wild-⟨0,1⟩-Precategory l1}
     {Y : obj-Large-Wild-⟨0,1⟩-Precategory l2} →
-    Wild-0-Pregroupoid-Relation (γ l1 l2) (hom-Large-Wild-⟨0,1⟩-Precategory X Y)
-  pr1 wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
+    Wild-0-Pregroupoid (γ l1 l2) (hom-Large-Wild-⟨0,1⟩-Precategory X Y)
+  pr1 Wild-0-Pregroupoid-hom-Large-Wild-⟨0,1⟩-Precategory =
     relation-hom-Large-Wild-⟨0,1⟩-Precategory
-  pr2 wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
-    is-wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory
+  pr2 Wild-0-Pregroupoid-hom-Large-Wild-⟨0,1⟩-Precategory =
+    is-Wild-0-Pregroupoid-hom-Large-Wild-⟨0,1⟩-Precategory
 
   refl-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
     {l1 l2 : Level}
@@ -93,8 +93,8 @@ We also record a range of common projections.
     {f : hom-Large-Wild-⟨0,1⟩-Precategory X Y} →
     relation-hom-Large-Wild-⟨0,1⟩-Precategory f f
   refl-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
-    refl-Wild-0-Pregroupoid-Relation
-      ( wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory)
+    refl-Wild-0-Pregroupoid
+      ( Wild-0-Pregroupoid-hom-Large-Wild-⟨0,1⟩-Precategory)
 
   inv-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
     {l1 l2 : Level}
@@ -104,8 +104,8 @@ We also record a range of common projections.
     relation-hom-Large-Wild-⟨0,1⟩-Precategory f g →
     relation-hom-Large-Wild-⟨0,1⟩-Precategory g f
   inv-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
-    inv-Wild-0-Pregroupoid-Relation
-      ( wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory)
+    inv-Wild-0-Pregroupoid
+      ( Wild-0-Pregroupoid-hom-Large-Wild-⟨0,1⟩-Precategory)
 
   comp-relation-hom-Large-Wild-⟨0,1⟩-Precategory :
     {l1 l2 : Level}
@@ -116,8 +116,8 @@ We also record a range of common projections.
     relation-hom-Large-Wild-⟨0,1⟩-Precategory f g →
     relation-hom-Large-Wild-⟨0,1⟩-Precategory f h
   comp-relation-hom-Large-Wild-⟨0,1⟩-Precategory =
-    comp-Wild-0-Pregroupoid-Relation
-      ( wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory)
+    comp-Wild-0-Pregroupoid
+      ( Wild-0-Pregroupoid-hom-Large-Wild-⟨0,1⟩-Precategory)
 
 open Large-Wild-⟨0,1⟩-Precategory public
 ```

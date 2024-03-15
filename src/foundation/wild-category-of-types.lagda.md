@@ -14,7 +14,7 @@ open import foundation.universe-levels
 
 open import wild-category-theory.large-wild-0-1-precategories
 open import wild-category-theory.large-wild-1-precategories
-open import wild-category-theory.wild-0-pregroupoid-relations
+open import wild-category-theory.wild-0-pregroupoids
 ```
 
 </details>
@@ -41,7 +41,7 @@ id-hom-Large-Wild-⟨0,1⟩-Precategory UU-Large-Wild-⟨0,1⟩-Precategory =
 relation-hom-Large-Wild-⟨0,1⟩-Precategory
   UU-Large-Wild-⟨0,1⟩-Precategory =
   _~_
-is-wild-0-pregroupoid-relation-hom-Large-Wild-⟨0,1⟩-Precategory
+is-Wild-0-Pregroupoid-hom-Large-Wild-⟨0,1⟩-Precategory
   UU-Large-Wild-⟨0,1⟩-Precategory {Y = Y} =
   is-wild-0-pregroupoid-htpy (λ _ → Y)
 ```

@@ -141,7 +141,7 @@ module _
     id
 ```
 
-### Composition of maps of large wild (0,1)-precategories
+### Composition of functors of large wild (0,1)-precategories
 
 ```agda
 module _

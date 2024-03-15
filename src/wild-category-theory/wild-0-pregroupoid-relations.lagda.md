@@ -43,7 +43,7 @@ that the relation is not required to be valued in
 is-wild-0-pregroupoid :
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A) → UU (l1 ⊔ l2)
 is-wild-0-pregroupoid R =
-  is-reflexive R × is-symmetric R × is-transitive R
+  is-reflexive R × is-symmetric R × is-transitive R -- ! BAD! should already be reflexive
 
 module _
   {l1 l2 : Level} {A : UU l1} {R : Relation l2 A}
