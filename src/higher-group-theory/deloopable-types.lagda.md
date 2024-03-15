@@ -12,6 +12,7 @@ open import foundation.equivalences
 open import foundation.small-types
 open import foundation.universe-levels
 
+open import higher-group-theory.equivalences-higher-groups
 open import higher-group-theory.higher-groups
 open import higher-group-theory.small-higher-groups
 
@@ -141,12 +142,44 @@ module _
 
 ### If a pointed type in universe `𝒰` is deloopable in any universe, then it is deloopable in `𝒰`
 
+Suppose `X` is a pointed type of universe level `l1`, which is deloopable in universe level `l2`. Then there is an ∞-group `H` of universe level `l2` equipped with a pointed equivalence
+
+```text
+  X ≃∗ type-∞-Group H.
+```
+
+This implies that the ∞-group H is `l1`-small, because its underlying type is equivalent to the underlying type of `X`. Hence there is an ∞-group `K` equipped with an [equivalence of ∞-groups](higher-group-theory.equivalences-higher-groups.md)
+
+```text
+  H ≃ K
+```
+
 ```agda
 module _
   {l1 l2 : Level} (X : Pointed-Type l1) (H : delooping-Level X l2)
   where
 
+  ∞-group-delooping-delooping-level : ∞-Group l1
+  ∞-group-delooping-delooping-level =
+    ∞-group-is-small-∞-Group
+      ( ∞-group-delooping-Level X H)
+      ( type-Pointed-Type X ,
+        equiv-inv-pointed-equiv (is-delooping-delooping-Level X H))
+
+  is-delooping-delooping-delooping-Level :
+    is-delooping X ∞-group-delooping-delooping-level
+  is-delooping-delooping-delooping-Level =
+    comp-pointed-equiv
+      ( pointed-equiv-equiv-∞-Group
+        ( ∞-group-delooping-Level X H)
+        ( ∞-group-delooping-delooping-level)
+        ( equiv-∞-group-is-small-∞-Group
+          ( ∞-group-delooping-Level X H)
+          ( type-Pointed-Type X ,
+            equiv-inv-pointed-equiv (is-delooping-delooping-Level X H))))
+      ( is-delooping-delooping-Level X H)
+
   delooping-delooping-Level : delooping X
-  pr1 delooping-delooping-Level = {!∞-group-is-small-∞-Group!}
-  pr2 delooping-delooping-Level = {!!}
+  pr1 delooping-delooping-Level = ∞-group-delooping-delooping-level
+  pr2 delooping-delooping-Level = is-delooping-delooping-delooping-Level
 ```

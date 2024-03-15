@@ -358,9 +358,12 @@ module _
         ( is-retraction-map-inv-pointed-equiv e)
         ( is-section-map-inv-pointed-equiv e)
 
+  equiv-inv-pointed-equiv : type-Pointed-Type B ≃ type-Pointed-Type A
+  pr1 equiv-inv-pointed-equiv = map-inv-pointed-equiv e
+  pr2 equiv-inv-pointed-equiv = is-pointed-equiv-inv-pointed-equiv
+
   inv-pointed-equiv : B ≃∗ A
-  pr1 (pr1 inv-pointed-equiv) = map-inv-pointed-equiv e
-  pr2 (pr1 inv-pointed-equiv) = is-pointed-equiv-inv-pointed-equiv
+  pr1 inv-pointed-equiv = equiv-inv-pointed-equiv
   pr2 inv-pointed-equiv = preserves-point-map-inv-pointed-equiv e
 ```
 

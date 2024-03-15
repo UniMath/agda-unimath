@@ -52,6 +52,10 @@ module _
     map-equiv-∞-Group : type-∞-Group G → type-∞-Group H
     map-equiv-∞-Group = map-hom-∞-Group G H hom-equiv-∞-Group
 
+    pointed-equiv-equiv-∞-Group :
+      pointed-type-∞-Group G ≃∗ pointed-type-∞-Group H
+    pointed-equiv-equiv-∞-Group = pointed-equiv-Ω-pointed-equiv e
+
     equiv-equiv-∞-Group : type-∞-Group G ≃ type-∞-Group H
     equiv-equiv-∞-Group = equiv-map-Ω-pointed-equiv e
 ```

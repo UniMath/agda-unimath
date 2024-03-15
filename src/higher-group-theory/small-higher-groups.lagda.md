@@ -24,6 +24,7 @@ open import foundation.universe-levels
 open import higher-group-theory.equivalences-higher-groups
 open import higher-group-theory.higher-groups
 
+open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
 open import structured-types.small-pointed-types
 ```
@@ -238,6 +239,11 @@ module _
   pr2 (∞-group-is-small-∞-Group H) =
     is-0-connected-classifying-type-is-small-∞-Group H
 
+  pointed-type-∞-group-is-small-∞-Group :
+    is-small-∞-Group l2 G → Pointed-Type l2
+  pointed-type-∞-group-is-small-∞-Group H =
+    pointed-type-∞-Group (∞-group-is-small-∞-Group H)
+
   type-∞-group-is-small-∞-Group :
     is-small-∞-Group l2 G → UU l2
   type-∞-group-is-small-∞-Group H =
@@ -249,6 +255,14 @@ module _
     pointed-equiv-is-pointedly-small-Pointed-Type
       ( classifying-pointed-type-∞-Group G)
       ( is-pointedly-small-is-small-∞-Group G H)
+
+  pointed-equiv-equiv-∞-group-is-small-∞-Group :
+    (H : is-small-∞-Group l2 G) →
+    pointed-type-∞-Group G ≃∗ pointed-type-∞-group-is-small-∞-Group H
+  pointed-equiv-equiv-∞-group-is-small-∞-Group H =
+    pointed-equiv-equiv-∞-Group G
+      ( ∞-group-is-small-∞-Group H)
+      ( equiv-∞-group-is-small-∞-Group H)
 
   equiv-equiv-∞-group-is-small-∞-Group :
     (H : is-small-∞-Group l2 G) →
