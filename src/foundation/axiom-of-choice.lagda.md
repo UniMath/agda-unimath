@@ -10,6 +10,7 @@ module foundation.axiom-of-choice where
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.projective-types
 open import foundation.propositional-truncations
