@@ -276,7 +276,7 @@ module _
     (((y : Y) → A (f y)) → ((x : X) → A x)) →
     is-local-dependent-type f A
   is-local-dependent-type-is-prop A is-prop-A =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-Π is-prop-A)
       ( is-prop-Π (is-prop-A ∘ f))
 

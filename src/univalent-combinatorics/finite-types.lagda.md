@@ -510,7 +510,7 @@ compute-total-UU-Fin : {l : Level} → Σ ℕ (UU-Fin l) ≃ 𝔽 l
 compute-total-UU-Fin =
   ( equiv-tot
     ( λ X →
-      equiv-is-prop
+      equiv-iff-is-prop
         ( is-prop-has-finite-cardinality)
         ( is-prop-is-finite X)
         ( is-finite-has-finite-cardinality)
@@ -697,7 +697,7 @@ abstract
         ( has-finite-cardinality-is-finite H)
         ( pair n Q))
   pr2 (equiv-has-cardinality-id-number-of-elements-is-finite X H n) =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-type-trunc-Prop)
       ( is-set-ℕ (number-of-elements-is-finite H) n)
       ( λ p →

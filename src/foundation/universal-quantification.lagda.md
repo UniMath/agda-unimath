@@ -121,7 +121,7 @@ module _
   is-equiv-ev-for-all :
     {l : Level} {B : UU l} → is-equiv (ev-for-all A P {B = B})
   is-equiv-ev-for-all {B = B} =
-    is-equiv-Prop'
+    is-equiv-is-logical-equivalence-Prop
       ( ∀' A (λ a → function-Prop B (P a)))
       ( function-Prop B (∀' A P))
       ( map-up-for-all)

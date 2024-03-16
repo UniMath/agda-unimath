@@ -215,7 +215,7 @@ module _
     (f : hom-Π-Large-Precategory I C x y) →
     is-equiv (is-fiberwise-iso-is-iso-Π-Large-Precategory f)
   is-equiv-is-fiberwise-iso-is-iso-Π-Large-Precategory f =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-is-iso-Large-Precategory (Π-Large-Precategory I C) f)
       ( is-prop-Π (λ i → is-prop-is-iso-Large-Precategory (C i) (f i)))
       ( is-iso-is-fiberwise-iso-Π-Large-Precategory f)
@@ -233,7 +233,7 @@ module _
     (f : hom-Π-Large-Precategory I C x y) →
     is-equiv (is-iso-is-fiberwise-iso-Π-Large-Precategory f)
   is-equiv-is-iso-is-fiberwise-iso-Π-Large-Precategory f =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-Π (λ i → is-prop-is-iso-Large-Precategory (C i) (f i)))
       ( is-prop-is-iso-Large-Precategory (Π-Large-Precategory I C) f)
       ( is-fiberwise-iso-is-iso-Π-Large-Precategory f)

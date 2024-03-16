@@ -379,7 +379,7 @@ module _
   pr1 equiv-is-pointed-iso-is-pointed-equiv =
     is-pointed-iso-is-pointed-equiv f
   pr2 equiv-is-pointed-iso-is-pointed-equiv =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-property-is-equiv (map-pointed-map f))
       ( is-prop-is-pointed-iso f)
       ( is-pointed-equiv-is-pointed-iso f)

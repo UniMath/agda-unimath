@@ -195,7 +195,7 @@ module _
   is-equiv-map-distributive-conjunction-Prop :
     is-equiv map-distributive-conjunction-Prop
   is-equiv-map-distributive-conjunction-Prop =
-    is-equiv-Prop'
+    is-equiv-is-logical-equivalence-Prop
       ( conjunction-Prop (function-Prop C P) (function-Prop C Q))
       ( function-Prop C (conjunction-Prop P Q))
       ( map-inv-distributive-conjunction-Prop)

@@ -183,7 +183,7 @@ module _
     (f : hom-Π-Precategory I C x y) →
     is-equiv (is-fiberwise-iso-is-iso-Π-Precategory f)
   is-equiv-is-fiberwise-iso-is-iso-Π-Precategory f =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-is-iso-Precategory (Π-Precategory I C) f)
       ( is-prop-Π (λ i → is-prop-is-iso-Precategory (C i) (f i)))
       ( is-iso-is-fiberwise-iso-Π-Precategory f)
@@ -201,7 +201,7 @@ module _
     (f : hom-Π-Precategory I C x y) →
     is-equiv (is-iso-is-fiberwise-iso-Π-Precategory f)
   is-equiv-is-iso-is-fiberwise-iso-Π-Precategory f =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-Π (λ i → is-prop-is-iso-Precategory (C i) (f i)))
       ( is-prop-is-iso-Precategory (Π-Precategory I C) f)
       ( is-fiberwise-iso-is-iso-Π-Precategory f)

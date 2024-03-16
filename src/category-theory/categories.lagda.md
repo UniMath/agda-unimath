@@ -312,7 +312,7 @@ module _
   is-equiv-is-category-is-surjective-iso-eq-Preunivalent-Category :
     is-equiv is-category-is-surjective-iso-eq-Preunivalent-Category
   is-equiv-is-category-is-surjective-iso-eq-Preunivalent-Category =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-is-surjective-iso-eq-Precategory
         ( precategory-Preunivalent-Category C))
       ( is-prop-is-category-Precategory (precategory-Preunivalent-Category C))
@@ -321,7 +321,7 @@ module _
   is-equiv-is-surjective-iso-eq-is-category-Preunivalent-Category :
     is-equiv is-surjective-iso-eq-is-category-Preunivalent-Category
   is-equiv-is-surjective-iso-eq-is-category-Preunivalent-Category =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-is-category-Precategory (precategory-Preunivalent-Category C))
       ( is-prop-is-surjective-iso-eq-Precategory
         ( precategory-Preunivalent-Category C))

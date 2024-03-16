@@ -185,7 +185,7 @@ module _
     is-equiv-ev-intro-exists :
       (Q : Prop l3) → is-equiv (ev-intro-exists {type-Prop Q})
     is-equiv-ev-intro-exists Q =
-      is-equiv-Prop'
+      is-equiv-is-logical-equivalence-Prop
         ( function-Prop (exists-structure A B) Q)
         ( Π-Prop A (λ x → function-Prop (B x) Q))
         ( elim-exists Q)

@@ -437,7 +437,7 @@ module _
     type-Prop (is-finite-displayed-Σ-Decomposition A
       (map-equiv equiv-displayed-fibered-Σ-Decomposition D))
   equiv-is-finite-displayed-fibered-Σ-Decomposition =
-    equiv-is-prop
+    equiv-iff-is-prop
       ( is-prop-type-Prop (is-finite-fibered-Σ-Decomposition A D))
       ( is-prop-type-Prop
         ( is-finite-displayed-Σ-Decomposition A

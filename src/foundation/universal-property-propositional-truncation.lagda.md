@@ -165,7 +165,7 @@ abstract
     extension-property-propositional-truncation P f →
     is-propositional-truncation P f
   is-propositional-truncation-extension-property P f up-P Q =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-Π (λ x → is-prop-type-Prop Q))
       ( is-prop-Π (λ x → is-prop-type-Prop Q))
       ( up-P Q)
@@ -183,7 +183,7 @@ abstract
     is-propositional-truncation P' f' →
     is-equiv h
   is-equiv-is-ptruncation-is-ptruncation P P' f f' h H is-ptr-P is-ptr-P' =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-type-Prop P)
       ( is-prop-type-Prop P')
       ( map-inv-is-equiv (is-ptr-P' P) f)
@@ -278,7 +278,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     (g : type-Prop P → A) → is-propositional-truncation P f
   is-propositional-truncation-has-section {A = A} P f g Q =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-function-type (is-prop-type-Prop Q))
       ( is-prop-function-type (is-prop-type-Prop Q))
       ( λ h → h ∘ g)

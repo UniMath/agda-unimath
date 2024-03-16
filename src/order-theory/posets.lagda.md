@@ -155,7 +155,7 @@ module _
 
   is-category-precategory-Poset : is-category-Precategory precategory-Poset
   is-category-precategory-Poset x y =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-set-type-Poset X x y)
       ( is-prop-iso-is-prop-hom-Precategory precategory-Poset
         ( is-prop-leq-Poset X x y))

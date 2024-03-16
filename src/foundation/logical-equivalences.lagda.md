@@ -149,7 +149,8 @@ module _
 
   equiv-iff' : type-Prop (P ⇔ Q) → (type-Prop P ≃ type-Prop Q)
   pr1 (equiv-iff' t) = pr1 t
-  pr2 (equiv-iff' t) = is-equiv-is-prop (pr2 P) (pr2 Q) (pr2 t)
+  pr2 (equiv-iff' t) =
+    is-equiv-is-logical-equivalence-is-prop (pr2 P) (pr2 Q) (pr2 t)
 
   equiv-iff :
     (type-Prop P → type-Prop Q) → (type-Prop Q → type-Prop P) →
@@ -196,7 +197,7 @@ abstract
     {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
     is-equiv (equiv-iff' P Q)
   is-equiv-equiv-iff P Q =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-iff-Prop P Q)
       ( is-prop-type-equiv-Prop P Q)
       ( iff-equiv)

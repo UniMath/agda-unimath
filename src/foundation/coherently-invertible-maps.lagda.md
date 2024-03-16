@@ -111,7 +111,7 @@ module _
     is-equiv-is-coherently-invertible-is-equiv :
       is-equiv (is-coherently-invertible-is-equiv {f = f})
     is-equiv-is-coherently-invertible-is-equiv =
-      is-equiv-is-prop
+      is-equiv-is-logical-equivalence-is-prop
         ( is-property-is-equiv f)
         ( is-prop-is-coherently-invertible)
         ( is-equiv-is-coherently-invertible)

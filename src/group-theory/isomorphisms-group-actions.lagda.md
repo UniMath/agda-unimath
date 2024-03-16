@@ -196,7 +196,7 @@ module _
   is-equiv-is-equiv-hom-is-iso-action-Group :
     is-equiv is-equiv-hom-is-iso-action-Group
   is-equiv-is-equiv-hom-is-iso-action-Group =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-is-iso-Large-Precategory
         ( action-Group-Large-Precategory G) {X = X} {Y = Y} f)
       ( is-property-is-equiv (map-hom-action-Group G X Y f))
@@ -205,7 +205,7 @@ module _
   is-equiv-is-iso-is-equiv-hom-action-Group :
     is-equiv is-iso-is-equiv-hom-action-Group
   is-equiv-is-iso-is-equiv-hom-action-Group =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-property-is-equiv (map-hom-action-Group G X Y f))
       ( is-prop-is-iso-Large-Precategory
         ( action-Group-Large-Precategory G) {X = X} {Y = Y} f)

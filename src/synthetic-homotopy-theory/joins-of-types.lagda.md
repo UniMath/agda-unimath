@@ -339,7 +339,7 @@ module _
 
   is-equiv-map-disjunction-join-Prop : is-equiv map-disjunction-join-Prop
   is-equiv-map-disjunction-join-Prop =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-type-join-Prop A B)
       ( is-prop-disjunction-Prop A B)
       ( map-join-disjunction-Prop)
@@ -351,7 +351,7 @@ module _
 
   is-equiv-map-join-disjunction-Prop : is-equiv map-join-disjunction-Prop
   is-equiv-map-join-disjunction-Prop =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-disjunction-Prop A B)
       ( is-prop-type-join-Prop A B)
       ( map-disjunction-join-Prop)

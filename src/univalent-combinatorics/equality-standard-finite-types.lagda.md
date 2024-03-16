@@ -77,7 +77,7 @@ extensionality-Fin :
   (x ＝ y) ≃ (Eq-Fin k x y)
 pr1 (extensionality-Fin k x y) = Eq-Fin-eq k
 pr2 (extensionality-Fin k x y) =
-  is-equiv-is-prop
+  is-equiv-is-logical-equivalence-is-prop
     ( is-set-Fin k x y)
     ( is-prop-Eq-Fin k x y)
     ( eq-Eq-Fin k)

@@ -156,7 +156,7 @@ module _
   is-equiv-is-injective-hom-is-faithful-map-Precategory :
     is-equiv is-injective-hom-is-faithful-map-Precategory
   is-equiv-is-injective-hom-is-faithful-map-Precategory =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-is-faithful-map-Precategory C D F)
       ( is-prop-is-injective-hom-map-Precategory C D F)
       ( is-faithful-is-injective-hom-map-Precategory)
@@ -164,7 +164,7 @@ module _
   is-equiv-is-faithful-is-injective-hom-map-Precategory :
     is-equiv is-faithful-is-injective-hom-map-Precategory
   is-equiv-is-faithful-is-injective-hom-map-Precategory =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-is-injective-hom-map-Precategory C D F)
       ( is-prop-is-faithful-map-Precategory C D F)
       ( is-injective-hom-is-faithful-map-Precategory)

@@ -136,33 +136,36 @@ module _
   where
 
   abstract
-    is-equiv-is-prop :
+    is-equiv-is-logical-equivalence-is-prop :
       is-prop A → is-prop B → {f : A → B} → (B → A) → is-equiv f
-    is-equiv-is-prop is-prop-A is-prop-B {f} g =
+    is-equiv-is-logical-equivalence-is-prop is-prop-A is-prop-B {f} g =
       is-equiv-is-invertible
         ( g)
         ( λ y → eq-is-prop is-prop-B)
         ( λ x → eq-is-prop is-prop-A)
 
   abstract
-    equiv-is-prop : is-prop A → is-prop B → (A → B) → (B → A) → A ≃ B
-    pr1 (equiv-is-prop is-prop-A is-prop-B f g) = f
-    pr2 (equiv-is-prop is-prop-A is-prop-B f g) =
-      is-equiv-is-prop is-prop-A is-prop-B g
+    equiv-iff-is-prop : is-prop A → is-prop B → (A → B) → (B → A) → A ≃ B
+    pr1 (equiv-iff-is-prop is-prop-A is-prop-B f g) = f
+    pr2 (equiv-iff-is-prop is-prop-A is-prop-B f g) =
+      is-equiv-is-logical-equivalence-is-prop is-prop-A is-prop-B g
 
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  is-equiv-Prop' :
+  is-equiv-is-logical-equivalence-Prop :
     {f : type-Prop P → type-Prop Q} → (type-Prop Q → type-Prop P) → is-equiv f
-  is-equiv-Prop' = is-equiv-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
+  is-equiv-is-logical-equivalence-Prop =
+    is-equiv-is-logical-equivalence-is-prop
+      ( is-prop-type-Prop P)
+      ( is-prop-type-Prop Q)
 
-  equiv-Prop' :
+  equiv-iff-Prop :
     (type-Prop P → type-Prop Q) →
     (type-Prop Q → type-Prop P) →
     type-Prop P ≃ type-Prop Q
-  equiv-Prop' = equiv-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
+  equiv-iff-Prop = equiv-iff-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```
 
 ### Propositions are closed under equivalences

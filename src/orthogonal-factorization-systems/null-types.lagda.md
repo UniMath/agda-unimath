@@ -77,7 +77,7 @@ module _
 
   equiv-is-local-is-null : is-null Y A ≃ is-local (λ y → star) A
   equiv-is-local-is-null =
-    equiv-is-prop
+    equiv-iff-is-prop
       ( is-property-is-equiv (const Y A))
       ( is-property-is-equiv (precomp (λ y → star) A))
       ( is-local-is-null)

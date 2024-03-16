@@ -104,7 +104,7 @@ module _
 
   equiv-is-trunc-equiv : A ≃ B → is-trunc k A ≃ is-trunc k B
   equiv-is-trunc-equiv e =
-    equiv-is-prop
+    equiv-iff-is-prop
       ( is-prop-is-trunc k A)
       ( is-prop-is-trunc k B)
       ( is-trunc-equiv' k A e)

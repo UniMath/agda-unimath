@@ -116,7 +116,7 @@ abstract
     (A ≃ B) → (type-trunc-Prop A ≃ type-trunc-Prop B)
   pr1 (equiv-trunc-Prop e) = map-equiv-trunc-Prop e
   pr2 (equiv-trunc-Prop e) =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-type-trunc-Prop)
       ( is-prop-type-trunc-Prop)
       ( map-inv-equiv-trunc-Prop e)

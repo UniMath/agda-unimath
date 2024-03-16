@@ -123,7 +123,7 @@ is-closed-under-is-contr-subuniverse P =
 equiv-is-contr-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ≃ B → is-contr A ≃ is-contr B
 equiv-is-contr-equiv {A = A} {B = B} e =
-  equiv-is-prop
+  equiv-iff-is-prop
     ( is-property-is-contr)
     ( is-property-is-contr)
     ( is-contr-retract-of A

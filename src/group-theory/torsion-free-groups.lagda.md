@@ -158,7 +158,7 @@ module _
       fundamental-theorem-id'
         ( λ where x refl → is-torsion-element-unit-Group G)
         ( λ x →
-          is-equiv-is-prop
+          is-equiv-is-logical-equivalence-is-prop
             ( is-set-type-Group G (unit-Group G) x)
             ( is-prop-is-torsion-element-Group G x)
             ( elim-exists

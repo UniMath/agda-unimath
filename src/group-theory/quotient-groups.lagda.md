@@ -584,7 +584,7 @@ module _
           ( equivalence-relation-congruence-Normal-Subgroup G N)
           ( set-Group H))
         ( λ f →
-          is-equiv-is-prop
+          is-equiv-is-logical-equivalence-is-prop
             ( is-prop-preserves-mul-Group (quotient-Group G N) H f)
             ( is-prop-preserves-mul-Group G H
               ( f ∘ map-quotient-hom-Group G N))

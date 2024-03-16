@@ -252,7 +252,7 @@ module _
   abstract
     is-equiv-map-idempotent-trunc-Prop : is-equiv map-idempotent-trunc-Prop
     is-equiv-map-idempotent-trunc-Prop =
-      is-equiv-is-prop
+      is-equiv-is-logical-equivalence-is-prop
         ( is-prop-type-trunc-Prop)
         ( is-prop-type-trunc-Prop)
         ( unit-trunc-Prop)
@@ -266,7 +266,7 @@ module _
     is-equiv-map-inv-idempotent-trunc-Prop :
       is-equiv (unit-trunc-Prop {A = type-trunc-Prop A})
     is-equiv-map-inv-idempotent-trunc-Prop =
-      is-equiv-is-prop
+      is-equiv-is-logical-equivalence-is-prop
         ( is-prop-type-trunc-Prop)
         ( is-prop-type-trunc-Prop)
         ( map-idempotent-trunc-Prop)
@@ -364,7 +364,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-equiv (map-distributive-trunc-product-Prop {A = A} {B = B})
   is-equiv-map-distributive-trunc-product-Prop =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-type-trunc-Prop)
       ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
       ( map-inv-distributive-trunc-product-Prop)
@@ -381,7 +381,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-equiv (map-inv-distributive-trunc-product-Prop {A = A} {B = B})
   is-equiv-map-inv-distributive-trunc-product-Prop =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
       ( is-prop-type-trunc-Prop)
       ( map-distributive-trunc-product-Prop)
@@ -418,7 +418,7 @@ module _
     is-equiv-map-trunc-Prop-diagonal-coproduct :
       is-equiv map-trunc-Prop-diagonal-coproduct
     is-equiv-map-trunc-Prop-diagonal-coproduct =
-      is-equiv-is-prop
+      is-equiv-is-logical-equivalence-is-prop
         is-prop-type-trunc-Prop
         is-prop-type-trunc-Prop
         map-inv-trunc-Prop-diagonal-coproduct
@@ -426,7 +426,7 @@ module _
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct :
       is-equiv map-inv-trunc-Prop-diagonal-coproduct
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct =
-      is-equiv-is-prop
+      is-equiv-is-logical-equivalence-is-prop
         is-prop-type-trunc-Prop
         is-prop-type-trunc-Prop
         map-trunc-Prop-diagonal-coproduct

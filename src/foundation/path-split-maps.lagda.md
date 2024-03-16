@@ -47,7 +47,7 @@ module _
     is-equiv-is-path-split-is-equiv :
       (f : A → B) → is-equiv (is-path-split-is-equiv f)
     is-equiv-is-path-split-is-equiv f =
-      is-equiv-is-prop
+      is-equiv-is-logical-equivalence-is-prop
         ( is-property-is-equiv f)
         ( is-prop-is-path-split f)
         ( is-equiv-is-path-split f)
@@ -60,7 +60,7 @@ module _
     is-equiv-is-equiv-is-path-split :
       (f : A → B) → is-equiv (is-equiv-is-path-split f)
     is-equiv-is-equiv-is-path-split f =
-      is-equiv-is-prop
+      is-equiv-is-logical-equivalence-is-prop
         ( is-prop-is-path-split f)
         ( is-property-is-equiv f)
         ( is-path-split-is-equiv f)

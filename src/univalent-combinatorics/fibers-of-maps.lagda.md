@@ -146,7 +146,7 @@ equiv-is-finite-domain-is-finite-fiber :
   (B : 𝔽 l2) (f : A → (type-𝔽 B)) →
   ((b : type-𝔽 B) → is-finite (fiber f b)) ≃ is-finite A
 equiv-is-finite-domain-is-finite-fiber {A = A} B f =
-  equiv-is-prop
+  equiv-iff-is-prop
     ( is-prop-Π (λ b → is-prop-is-finite (fiber f b)))
     ( is-prop-is-finite A)
     ( λ P →

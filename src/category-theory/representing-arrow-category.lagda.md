@@ -118,7 +118,7 @@ representing-arrow-Precategory =
 is-category-representing-arrow-Category :
   is-category-Precategory representing-arrow-Precategory
 is-category-representing-arrow-Category true true =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
     ( is-set-bool true true)
     ( is-prop-type-subtype
       ( is-iso-prop-Precategory representing-arrow-Precategory {true} {true})
@@ -133,7 +133,7 @@ is-category-representing-arrow-Category false true =
     ( iso-eq-Precategory representing-arrow-Precategory false true)
     ( hom-inv-iso-Precategory representing-arrow-Precategory)
 is-category-representing-arrow-Category false false =
-  is-equiv-is-prop
+  is-equiv-is-logical-equivalence-is-prop
     ( is-set-bool false false)
     ( is-prop-type-subtype
       ( is-iso-prop-Precategory representing-arrow-Precategory {false} {false})

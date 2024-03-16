@@ -172,7 +172,7 @@ module _
   is-large-category-Large-Poset :
     is-large-category-Large-Precategory large-precategory-Large-Poset
   is-large-category-Large-Poset {l} x y =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-set-type-Large-Poset P x y)
       ( is-prop-iso-is-prop-hom-Precategory
         ( precategory-Large-Poset l)

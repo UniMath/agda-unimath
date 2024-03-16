@@ -233,7 +233,7 @@ module _
   is-equiv-has-identity-maps-has-equivalences-function-class :
     is-equiv has-identity-maps-has-equivalences-function-class
   is-equiv-has-identity-maps-has-equivalences-function-class =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-has-equivalences-function-class P)
       ( is-prop-has-identity-maps-function-class P)
       ( has-equivalences-has-identity-maps-function-class)
@@ -248,7 +248,7 @@ module _
   is-equiv-has-equivalences-has-identity-maps-function-class :
     is-equiv has-equivalences-has-identity-maps-function-class
   is-equiv-has-equivalences-has-identity-maps-function-class =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-has-identity-maps-function-class P)
       ( is-prop-has-equivalences-function-class P)
       ( has-identity-maps-has-equivalences-function-class)

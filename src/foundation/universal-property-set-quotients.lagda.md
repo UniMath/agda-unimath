@@ -838,7 +838,7 @@ module _
   pr1 equiv-equalizes-equal-values-extension-along-surjection-Set =
     equalizes-equal-values-extension-along-surjection-Set
   pr2 equiv-equalizes-equal-values-extension-along-surjection-Set =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-extension-along-surjection-Set f C g)
       ( is-prop-equalizes-equal-values-surjection-Set)
       ( extension-equalizes-equal-values-surjection-Set)

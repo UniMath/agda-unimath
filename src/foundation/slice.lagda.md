@@ -246,7 +246,7 @@ module _
       (h : hom-slice f g) →
       is-equiv (pr1 h) ≃
       is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
-    α h = equiv-is-prop
+    α h = equiv-iff-is-prop
       ( is-property-is-equiv _)
       ( is-prop-Π (λ _ → is-property-is-equiv _))
       ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice h)

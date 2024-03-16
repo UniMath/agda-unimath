@@ -199,7 +199,7 @@ module _
     (f : natural-transformation-map-Precategory C D F G) →
     is-equiv (is-iso-map-is-natural-isomorphism-map-Precategory f)
   is-equiv-is-iso-map-is-natural-isomorphism-map-Precategory f =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-is-natural-isomorphism-map-Precategory C D F G f)
       ( is-prop-is-iso-Precategory
         ( map-precategory-Precategory C D) {F} {G} f)
@@ -209,7 +209,7 @@ module _
     (f : natural-transformation-map-Precategory C D F G) →
     is-equiv (is-natural-isomorphism-map-is-iso-map-Precategory f)
   is-equiv-is-natural-isomorphism-map-is-iso-map-Precategory f =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-is-iso-Precategory
         ( map-precategory-Precategory C D) {F} {G} f)
       ( is-prop-is-natural-isomorphism-map-Precategory C D F G f)

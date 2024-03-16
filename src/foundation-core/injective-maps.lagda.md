@@ -154,7 +154,7 @@ abstract
     {B : UU l2} (is-set-B : is-set B) (f : A → B) →
     is-injective f → is-emb f
   is-emb-is-injective' is-set-A is-set-B f is-injective-f x y =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-set-A x y)
       ( is-set-B (f x) (f y))
       ( is-injective-f)

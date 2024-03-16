@@ -216,7 +216,7 @@ module _
   is-equiv-is-iso-is-iso-base-is-replete-Subprecategory :
     is-equiv is-iso-is-iso-base-is-replete-Subprecategory
   is-equiv-is-iso-is-iso-base-is-replete-Subprecategory =
-    is-equiv-is-prop
+    is-equiv-is-logical-equivalence-is-prop
       ( is-prop-is-iso-Precategory C (inclusion-hom-Subprecategory C P x y f))
       ( is-prop-is-iso-Subprecategory C P f)
       ( is-iso-base-is-iso-Subprecategory C P)
