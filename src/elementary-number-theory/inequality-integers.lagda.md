@@ -21,6 +21,7 @@ open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
@@ -30,6 +31,9 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>
@@ -83,11 +87,21 @@ antisymmetric-leq-ℤ {x} {y} H K =
     ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ K
       ( is-nonnegative-eq-ℤ (inv (distributive-neg-diff-ℤ x y)) H))
 
-transitive-leq-ℤ : (k l m : ℤ) → leq-ℤ k l → leq-ℤ l m → leq-ℤ k m
-transitive-leq-ℤ k l m p q =
+transitive-leq-ℤ : (k l m : ℤ) → leq-ℤ l m → leq-ℤ k l → leq-ℤ k m
+transitive-leq-ℤ k l m H K =
   is-nonnegative-eq-ℤ
     ( triangle-diff-ℤ m l k)
-    ( is-nonnegative-add-ℤ q p)
+    ( is-nonnegative-add-ℤ H K)
+
+trans-leq-ℤ : {k l m : ℤ} → leq-ℤ l m → leq-ℤ k l → leq-ℤ k m
+trans-leq-ℤ {k} {l} {m} = transitive-leq-ℤ k l m
+
+ℤ-Preorder : Preorder lzero lzero
+ℤ-Preorder =
+  ℤ , leq-ℤ-Prop , refl-leq-ℤ , transitive-leq-ℤ
+
+ℤ-Poset : Poset lzero lzero
+ℤ-Poset = ℤ-Preorder , λ x y → antisymmetric-leq-ℤ
 ```
 
 ### The ordering of the integers is decidable
@@ -124,7 +138,7 @@ succ-leq-ℤ k =
     ( star)
 
 leq-ℤ-succ-leq-ℤ : (k l : ℤ) → leq-ℤ k l → leq-ℤ k (succ-ℤ l)
-leq-ℤ-succ-leq-ℤ k l p = transitive-leq-ℤ k l (succ-ℤ l) p (succ-leq-ℤ l)
+leq-ℤ-succ-leq-ℤ k l = transitive-leq-ℤ k l (succ-ℤ l) (succ-leq-ℤ l)
 ```
 
 ### Chaining rules for equality and inequality
@@ -146,34 +160,34 @@ concatenate-eq-leq-ℤ y refl H = H
 ### ℤ is an ordered ring
 
 ```agda
-preserves-leq-add-ℤ' :
-  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (x +ℤ z) (y +ℤ z)
-preserves-leq-add-ℤ' {x} {y} z =
+preserves-leq-left-add-ℤ :
+  (z x y : ℤ) → leq-ℤ x y → leq-ℤ (x +ℤ z) (y +ℤ z)
+preserves-leq-left-add-ℤ z x y =
   is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ y x z))
 
-preserves-leq-add-ℤ :
-  {x y : ℤ} (z : ℤ) → leq-ℤ x y → leq-ℤ (z +ℤ x) (z +ℤ y)
-preserves-leq-add-ℤ {x} {y} z =
+preserves-leq-right-add-ℤ :
+  (z x y : ℤ) → leq-ℤ x y → leq-ℤ (z +ℤ x) (z +ℤ y)
+preserves-leq-right-add-ℤ z x y =
   is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ y x z))
 
-preserves-leq-leq-add-ℤ :
+preserves-leq-add-ℤ :
   {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (a +ℤ c) (b +ℤ d)
-preserves-leq-leq-add-ℤ {a} {b} {c} {d} H K =
+preserves-leq-add-ℤ {a} {b} {c} {d} H K =
   transitive-leq-ℤ
     ( a +ℤ c)
     ( b +ℤ c)
     ( b +ℤ d)
-    ( preserves-leq-add-ℤ' {a} {b} c H)
-    ( preserves-leq-add-ℤ b K)
+    ( preserves-leq-right-add-ℤ b c d K)
+    ( preserves-leq-left-add-ℤ c a b H)
 
-reflects-leq-add-ℤ' :
-  {x y : ℤ} (z : ℤ) → leq-ℤ (x +ℤ z) (y +ℤ z) → leq-ℤ x y
-reflects-leq-add-ℤ' {x} {y} z =
+reflects-leq-left-add-ℤ :
+  (z x y : ℤ) → leq-ℤ (x +ℤ z) (y +ℤ z) → leq-ℤ x y
+reflects-leq-left-add-ℤ z x y =
   is-nonnegative-eq-ℤ (right-translation-diff-ℤ y x z)
 
-reflects-leq-add-ℤ :
-  {x y : ℤ} (z : ℤ) → leq-ℤ (z +ℤ x) (z +ℤ y) → leq-ℤ x y
-reflects-leq-add-ℤ {x} {y} z =
+reflects-leq-right-add-ℤ :
+  (z x y : ℤ) → leq-ℤ (z +ℤ x) (z +ℤ y) → leq-ℤ x y
+reflects-leq-right-add-ℤ z x y =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
@@ -194,11 +208,11 @@ leq-le-ℤ {x} {y} = is-nonnegative-is-positive-ℤ
 ### Strict inequality on the integers is transitive and asymmetric
 
 ```agda
-transitive-le-ℤ : (k l m : ℤ) → le-ℤ k l → le-ℤ l m → le-ℤ k m
-transitive-le-ℤ k l m p q =
+transitive-le-ℤ : (k l m : ℤ) → le-ℤ l m → le-ℤ k l → le-ℤ k m
+transitive-le-ℤ k l m H K =
   is-positive-eq-ℤ
     ( triangle-diff-ℤ m l k)
-    ( is-positive-add-ℤ q p)
+    ( is-positive-add-ℤ H K)
 
 asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
 asymmetric-le-ℤ x y p =
@@ -242,14 +256,14 @@ le-succ-ℤ x =
 ### Addition on the integers preserves and reflects the strict ordering
 
 ```agda
-preserves-le-add-ℤ' :
-  {x y : ℤ} (z : ℤ) → le-ℤ x y → le-ℤ (x +ℤ z) (y +ℤ z)
-preserves-le-add-ℤ' {x} {y} z =
+preserves-le-left-add-ℤ :
+  (z x y : ℤ) → le-ℤ x y → le-ℤ (x +ℤ z) (y +ℤ z)
+preserves-le-left-add-ℤ z x y =
   is-positive-eq-ℤ (inv (right-translation-diff-ℤ y x z))
 
-preserves-le-add-ℤ :
-  {x y : ℤ} (z : ℤ) → le-ℤ x y → le-ℤ (z +ℤ x) (z +ℤ y)
-preserves-le-add-ℤ {x} {y} z =
+preserves-le-right-add-ℤ :
+  (z x y : ℤ) → le-ℤ x y → le-ℤ (z +ℤ x) (z +ℤ y)
+preserves-le-right-add-ℤ z x y =
   is-positive-eq-ℤ (inv (left-translation-diff-ℤ y x z))
 
 preserves-le-le-add-ℤ :
@@ -259,17 +273,17 @@ preserves-le-le-add-ℤ {a} {b} {c} {d} H K =
     ( a +ℤ c)
     ( b +ℤ c)
     ( b +ℤ d)
-    ( preserves-le-add-ℤ' {a} {b} c H)
-    ( preserves-le-add-ℤ b K)
+    ( preserves-le-right-add-ℤ b c d K)
+    ( preserves-le-left-add-ℤ c a b H)
 
-reflects-le-add-ℤ' :
-  {x y : ℤ} (z : ℤ) → le-ℤ (x +ℤ z) (y +ℤ z) → le-ℤ x y
-reflects-le-add-ℤ' {x} {y} z =
+reflects-le-left-add-ℤ :
+  (z x y : ℤ) → le-ℤ (x +ℤ z) (y +ℤ z) → le-ℤ x y
+reflects-le-left-add-ℤ z x y =
   is-positive-eq-ℤ (right-translation-diff-ℤ y x z)
 
-reflects-le-add-ℤ :
-  {x y : ℤ} (z : ℤ) → le-ℤ (z +ℤ x) (z +ℤ y) → le-ℤ x y
-reflects-le-add-ℤ {x} {y} z =
+reflects-le-right-add-ℤ :
+  (z x y : ℤ) → le-ℤ (z +ℤ x) (z +ℤ y) → le-ℤ x y
+reflects-le-right-add-ℤ z x y =
   is-positive-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 

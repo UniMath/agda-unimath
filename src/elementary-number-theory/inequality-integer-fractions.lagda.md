@@ -150,8 +150,8 @@ module _
 ```agda
 transitive-leq-fraction-ℤ :
   (p q r : fraction-ℤ) →
-  leq-fraction-ℤ p q →
   leq-fraction-ℤ q r →
+  leq-fraction-ℤ p q →
   leq-fraction-ℤ p r
 transitive-leq-fraction-ℤ p q r H H' =
   is-nonnegative-right-factor-mul-ℤ
@@ -161,11 +161,11 @@ transitive-leq-fraction-ℤ p q r H H' =
           ( is-nonnegative-mul-ℤ
             ( is-nonnegative-is-positive-ℤ
               ( is-positive-denominator-fraction-ℤ p))
-            ( H'))
+            ( H))
           ( is-nonnegative-mul-ℤ
             ( is-nonnegative-is-positive-ℤ
               ( is-positive-denominator-fraction-ℤ r))
-            ( H))))
+            ( H'))))
     ( is-positive-denominator-fraction-ℤ q)
 ```
 
@@ -174,8 +174,8 @@ transitive-leq-fraction-ℤ p q r H H' =
 ```agda
 transitive-le-fraction-ℤ :
   (p q r : fraction-ℤ) →
-  le-fraction-ℤ p q →
   le-fraction-ℤ q r →
+  le-fraction-ℤ p q →
   le-fraction-ℤ p r
 transitive-le-fraction-ℤ p q r H H' =
   is-positive-right-factor-mul-ℤ
@@ -184,10 +184,10 @@ transitive-le-fraction-ℤ p q r H H' =
       ( is-positive-add-ℤ
         ( is-positive-mul-ℤ
           ( is-positive-denominator-fraction-ℤ p)
-          ( H'))
+          ( H))
         ( is-positive-mul-ℤ
           ( is-positive-denominator-fraction-ℤ r)
-          ( H))))
+          ( H'))))
       ( is-positive-denominator-fraction-ℤ q)
 ```
 
@@ -286,10 +286,10 @@ module _
           ( numerator-fraction-ℤ x *ℤ k)
           ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x))
       ( H)
-      ( preserves-le-mul-positive-ℤ'
-        { numerator-fraction-ℤ x}
-        { numerator-fraction-ℤ y}
+      ( preserves-le-left-mul-positive-ℤ
         ( positive-denominator-fraction-ℤ x)
+        ( numerator-fraction-ℤ x)
+        ( numerator-fraction-ℤ y)
         ( H'))
 ```
 

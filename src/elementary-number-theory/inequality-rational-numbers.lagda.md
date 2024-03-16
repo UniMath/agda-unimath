@@ -146,14 +146,14 @@ module _
   (x y z : ℚ)
   where
 
-  transitive-leq-ℚ : leq-ℚ x y → leq-ℚ y z → leq-ℚ x z
+  transitive-leq-ℚ : leq-ℚ y z → leq-ℚ x y → leq-ℚ x z
   transitive-leq-ℚ =
     transitive-leq-fraction-ℤ
       ( fraction-ℚ x)
       ( fraction-ℚ y)
       ( fraction-ℚ z)
 
-  transitive-le-ℚ : le-ℚ x y → le-ℚ y z → le-ℚ x z
+  transitive-le-ℚ : le-ℚ y z → le-ℚ x y → le-ℚ x z
   transitive-le-ℚ =
     transitive-le-fraction-ℤ
       ( fraction-ℚ x)
