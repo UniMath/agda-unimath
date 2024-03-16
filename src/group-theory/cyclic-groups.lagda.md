@@ -135,12 +135,12 @@ module _
   is-cyclic-has-generating-element-Group :
     is-cyclic-Group G →
     {l : Level} →
-    exists-type-family
+    exists-structure
       ( type-Group G)
       ( λ g → is-emb-ev-element-hom-level-Group G g l)
   is-cyclic-has-generating-element-Group H {l} =
     apply-universal-property-trunc-Prop H
-      ( exists-type-family-Prop
+      ( exists-structure-Prop
         ( type-Group G)
         ( λ g → is-emb-ev-element-hom-level-Group G g l))
       ( λ (g , u) →

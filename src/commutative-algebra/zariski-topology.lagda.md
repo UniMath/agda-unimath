@@ -42,7 +42,7 @@ is-closed-subset-zariski-topology-Commutative-Ring :
   (U : subtype (l1 ⊔ l2 ⊔ l3) (prime-ideal-Commutative-Ring l2 A)) →
   Prop (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 is-closed-subset-zariski-topology-Commutative-Ring {l1} {l2} {l3} A U =
-  exists-type-family-Prop
+  exists-structure-Prop
     ( subtype l3 (type-Commutative-Ring A))
     ( λ V → standard-closed-subset-zariski-topology-Commutative-Ring A V ＝ U)
 

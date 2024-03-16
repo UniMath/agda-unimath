@@ -62,7 +62,7 @@ module _
     (p₁' : hom-Precategory C w' y) →
     (p₂' : hom-Precategory C w' z) →
     comp-hom-Precategory C f p₁' ＝ comp-hom-Precategory C g p₂' →
-    uniquely-exists-type-family
+    uniquely-exists-structure
       ( hom-Precategory C w' w)
       ( λ h →
         ( comp-hom-Precategory C p₁ h ＝ p₁') ×

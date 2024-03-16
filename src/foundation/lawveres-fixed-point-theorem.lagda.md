@@ -34,11 +34,11 @@ module _
 
   abstract
     fixed-point-theorem-Lawvere :
-      is-surjective f → (h : B → B) → exists-type-family B (λ b → h b ＝ b)
+      is-surjective f → (h : B → B) → exists-structure B (λ b → h b ＝ b)
     fixed-point-theorem-Lawvere H h =
       apply-universal-property-trunc-Prop
         ( H g)
-        ( exists-type-family-Prop B (λ b → h b ＝ b))
+        ( exists-structure-Prop B (λ b → h b ＝ b))
         ( λ (x , p) → intro-exists (f x x) (inv (htpy-eq p x)))
       where
       g : A → B

@@ -135,7 +135,7 @@ module _
     ( equivalence-relation-obj-left-adjoint-subst-action-Group X)
     ( h , x)
     ( h' , x') =
-    exists-type-family-Prop
+    exists-structure-Prop
       ( type-Group G)
       ( λ g →
         ( Id (mul-Group H (map-hom-Group G H f g) h) h') ×

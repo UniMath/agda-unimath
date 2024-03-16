@@ -527,7 +527,7 @@ module _
 
       P-Prop : (b : type-Set B) (x : type-Set X) → Prop (l1 ⊔ l3 ⊔ l)
       P-Prop b x =
-        exists-type-family-Prop A
+        exists-structure-Prop A
           ( λ a →
             ( map-reflecting-map-equivalence-relation R f a ＝ x) ×
             ( map-reflecting-map-equivalence-relation R q a ＝ b))

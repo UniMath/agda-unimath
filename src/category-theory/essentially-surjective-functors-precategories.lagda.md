@@ -43,14 +43,14 @@ module _
     Π-Prop
       ( obj-Precategory D)
       ( λ y →
-        exists-type-family-Prop
+        exists-structure-Prop
           ( obj-Precategory C)
           ( λ x → iso-Precategory D (obj-functor-Precategory C D F x) y))
 
   is-essentially-surjective-functor-Precategory : UU (l1 ⊔ l3 ⊔ l4)
   is-essentially-surjective-functor-Precategory =
     ( y : obj-Precategory D) →
-    exists-type-family
+    exists-structure
       ( obj-Precategory C)
       ( λ x → iso-Precategory D (obj-functor-Precategory C D F x) y)
 

@@ -44,7 +44,7 @@ because the Curry-Howard interpretation of the existential quantification as
 propositions.
 
 The
-{{#concept "universal property" Disambiguation="of existential quantification" Agda=universal-property-exists-Prop}}
+{{#concept "universal property" Disambiguation="of existential quantification" Agda=universal-property-exists}}
 of existential quantification states that it is the least upper bound on the
 family of propositions `P` in the
 [poset of propositions](foundation.large-locale-of-propositions.md), by which we
@@ -59,7 +59,8 @@ mean that for every proposition `Q` we have the
 
 ### Existence of structure
 
-Given a [structure](foundation.structure.md) `B : A → 𝒰` on a type `A`, the propositional truncation
+Given a [structure](foundation.structure.md) `B : A → 𝒰` on a type `A`, the
+propositional truncation
 
 ```text
   ║ Σ (x : A), (B x) ║₋₁
@@ -74,28 +75,33 @@ satisfies the universal property of the existential quantification
 and is thus equivalent to it. Therefore, we may reasonably call this
 construction the
 {{#concept "existential quantification" Disambiguation="structure" Agda=exists-structure-Prop}}
-of structure. It is important to keep in mind that this is not a
-generalization of the concept but rather a conflation, and should be read as the
-statement _the type of elements `x : A` equipped with `y : B x` is
+of structure. It is important to keep in mind that this is not a generalization
+of the concept but rather a conflation, and should be read as the statement _the
+type of elements `x : A` equipped with `y : B x` is
 [inhabited](foundation.inhabited-types.md)_.
 
-Existence of structure is a widely occurring notion in univalent mathematics. For instance, the condition that an element `y : B` is in the [image](foundation.images.md) of a map `f : A -> B` is formulated using existence of structure: The element `y` is in the image of `f` if the type of `x : A` equipped with an identification `f x = y` is inhabited.
+Existence of structure is a widely occurring notion in univalent mathematics.
+For instance, the condition that an element `y : B` is in the
+[image](foundation.images.md) of a map `f : A -> B` is formulated using
+existence of structure: The element `y` is in the image of `f` if the type of
+`x : A` equipped with an identification `f x = y` is inhabited.
 
-[A more concrete description of what you have in mind with "it enables the inference mechanism of Agda to do more work for us"]
+[A more concrete description of what you have in mind with "it enables the
+inference mechanism of Agda to do more work for us"]
 
 ```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
   where
 
-  exists-type-family-Prop : Prop (l1 ⊔ l2)
-  exists-type-family-Prop = trunc-Prop (Σ A B)
+  exists-structure-Prop : Prop (l1 ⊔ l2)
+  exists-structure-Prop = trunc-Prop (Σ A B)
 
-  exists-type-family : UU (l1 ⊔ l2)
-  exists-type-family = type-Prop exists-type-family-Prop
+  exists-structure : UU (l1 ⊔ l2)
+  exists-structure = type-Prop exists-structure-Prop
 
-  is-prop-exists-type-family : is-prop exists-type-family
-  is-prop-exists-type-family = is-prop-type-Prop exists-type-family-Prop
+  is-prop-exists-structure : is-prop exists-structure
+  is-prop-exists-structure = is-prop-type-Prop exists-structure-Prop
 ```
 
 ### Existential quantification
@@ -106,7 +112,7 @@ module _
   where
 
   exists-Prop : Prop (l1 ⊔ l2)
-  exists-Prop = exists-type-family-Prop A (type-Prop ∘ P)
+  exists-Prop = exists-structure-Prop A (type-Prop ∘ P)
 
   exists : UU (l1 ⊔ l2)
   exists = type-Prop exists-Prop
@@ -126,7 +132,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  intro-exists : (a : A) (b : B a) → exists-type-family A B
+  intro-exists : (a : A) (b : B a) → exists-structure A B
   intro-exists a b = unit-trunc-Prop (a , b)
 ```
 
@@ -134,21 +140,21 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (∃AB : Prop l3)
+  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (S : Prop l3)
   where
 
-  universal-property-exists-type-family : UUω
-  universal-property-exists-type-family =
+  universal-property-exists-structure : UUω
+  universal-property-exists-structure =
     {l : Level} (Q : Prop l) →
-    (type-Prop ∃AB → type-Prop Q) ↔ ((x : A) → B x → type-Prop Q)
+    (type-Prop S → type-Prop Q) ↔ ((x : A) → B x → type-Prop Q)
 
 module _
-  {l1 l2 l3 : Level} (A : UU l1) (P : A → Prop l2) (∃AP : Prop l3)
+  {l1 l2 l3 : Level} (A : UU l1) (P : A → Prop l2) (S : Prop l3)
   where
 
-  universal-property-exists-Prop : UUω
-  universal-property-exists-Prop =
-    universal-property-exists-type-family A (type-Prop ∘ P) ∃AP
+  universal-property-exists : UUω
+  universal-property-exists =
+    universal-property-exists-structure A (type-Prop ∘ P) S
 ```
 
 ## Properties
@@ -167,12 +173,12 @@ module _
   where
 
   ev-intro-exists :
-    {C : UU l3} → (exists-type-family A B → C) → (x : A) → B x → C
+    {C : UU l3} → (exists-structure A B → C) → (x : A) → B x → C
   ev-intro-exists H x p = H (intro-exists x p)
 
   elim-exists :
     (Q : Prop l3) →
-    ((x : A) → B x → type-Prop Q) → (exists-type-family A B → type-Prop Q)
+    ((x : A) → B x → type-Prop Q) → (exists-structure A B → type-Prop Q)
   elim-exists Q f = map-universal-property-trunc-Prop Q (ind-Σ f)
 
   abstract
@@ -180,7 +186,7 @@ module _
       (Q : Prop l3) → is-equiv (ev-intro-exists {type-Prop Q})
     is-equiv-ev-intro-exists Q =
       is-equiv-Prop'
-        ( function-Prop (exists-type-family A B) Q)
+        ( function-Prop (exists-structure A B) Q)
         ( Π-Prop A (λ x → function-Prop (B x) Q))
         ( elim-exists Q)
 ```
@@ -193,7 +199,7 @@ module _
   where
 
   up-exists :
-    universal-property-exists-type-family A B (exists-type-family-Prop A B)
+    universal-property-exists-structure A B (exists-structure-Prop A B)
   up-exists Q = ( ev-intro-exists , elim-exists Q)
 ```
 
@@ -202,21 +208,21 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (Q : Prop l3)
-  (up-Q : universal-property-exists-type-family A B Q)
+  (up-Q : universal-property-exists-structure A B Q)
   where
 
   forward-implication-iff-universal-property-exists :
-    exists-type-family A B → type-Prop Q
+    exists-structure A B → type-Prop Q
   forward-implication-iff-universal-property-exists =
     elim-exists Q (forward-implication (up-Q Q) id)
 
   backward-implication-iff-universal-property-exists :
-    type-Prop Q → exists-type-family A B
+    type-Prop Q → exists-structure A B
   backward-implication-iff-universal-property-exists =
-    backward-implication (up-Q (exists-type-family-Prop A B)) intro-exists
+    backward-implication (up-Q (exists-structure-Prop A B)) intro-exists
 
   iff-universal-property-exists :
-    exists-type-family A B ↔ type-Prop Q
+    exists-structure A B ↔ type-Prop Q
   iff-universal-property-exists =
     ( forward-implication-iff-universal-property-exists ,
       backward-implication-iff-universal-property-exists)
@@ -232,57 +238,57 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  universal-property-exists-type-family-exists-trunc :
-    universal-property-exists-type-family A B (exists-Prop A (trunc-Prop ∘ B))
-  universal-property-exists-type-family-exists-trunc Q =
+  universal-property-exists-structure-exists-trunc :
+    universal-property-exists-structure A B (exists-Prop A (trunc-Prop ∘ B))
+  universal-property-exists-structure-exists-trunc Q =
     ( λ f a b → f (unit-trunc-Prop (a , unit-trunc-Prop b))) ,
     ( λ f → rec-trunc-Prop Q (λ (a , |b|) → rec-trunc-Prop Q (f a) |b|))
 
-  iff-compute-exists-trunc : exists-type-family A B ↔ exists A (trunc-Prop ∘ B)
+  iff-compute-exists-trunc : exists-structure A B ↔ exists A (trunc-Prop ∘ B)
   iff-compute-exists-trunc =
     iff-universal-property-exists
       ( exists-Prop A (trunc-Prop ∘ B))
-      ( universal-property-exists-type-family-exists-trunc)
+      ( universal-property-exists-structure-exists-trunc)
 ```
 
-### Taking the cartesian product with a proposition distributes over existential quantification on arbitrary type families
+### Taking the cartesian product with a proposition distributes over existential quantification of structures
 
 ```agda
 module _
   {l1 l2 l3 : Level} (P : Prop l1) {A : UU l2} {B : A → UU l3}
   where
 
-  map-distributive-product-exists :
-    type-Prop P × exists-type-family A B →
-    exists-type-family A (λ x → type-Prop P × B x)
-  map-distributive-product-exists (p , e) =
+  map-distributive-product-exists-structure :
+    type-Prop P × exists-structure A B →
+    exists-structure A (λ x → type-Prop P × B x)
+  map-distributive-product-exists-structure (p , e) =
     elim-exists
-      ( exists-type-family-Prop A (λ x → type-Prop P × B x))
+      ( exists-structure-Prop A (λ x → type-Prop P × B x))
       ( λ x q → intro-exists x (p , q))
       ( e)
 
-  map-inv-distributive-product-exists :
-    exists-type-family A (λ x → type-Prop P × B x) →
-    type-Prop P × exists-type-family A B
-  map-inv-distributive-product-exists =
+  map-inv-distributive-product-exists-structure :
+    exists-structure A (λ x → type-Prop P × B x) →
+    type-Prop P × exists-structure A B
+  map-inv-distributive-product-exists-structure =
     elim-exists
-      ( P ∧ exists-type-family-Prop A B)
+      ( P ∧ exists-structure-Prop A B)
       ( λ x (p , q) → (p , intro-exists x q))
 
-  iff-distributive-product-exists :
-    ( type-Prop P × exists-type-family A B) ↔
-    ( exists-type-family A (λ x → type-Prop P × B x))
-  iff-distributive-product-exists =
+  iff-distributive-product-exists-structure :
+    ( type-Prop P × exists-structure A B) ↔
+    ( exists-structure A (λ x → type-Prop P × B x))
+  iff-distributive-product-exists-structure =
     ( map-distributive-product-exists ,
       map-inv-distributive-product-exists)
 
-  eq-distributive-product-exists :
-    P ∧ exists-type-family-Prop A B ＝
-    exists-type-family-Prop A (λ x → type-Prop P × B x)
-  eq-distributive-product-exists =
+  eq-distributive-product-exists-structure :
+    P ∧ exists-structure-Prop A B ＝
+    exists-structure-Prop A (λ x → type-Prop P × B x)
+  eq-distributive-product-exists-structure =
     eq-iff'
-      ( P ∧ exists-type-family-Prop A B)
-      ( exists-type-family-Prop A (λ x → type-Prop P × B x))
+      ( P ∧ exists-structure-Prop A B)
+      ( exists-structure-Prop A (λ x → type-Prop P × B x))
       ( iff-distributive-product-exists)
 ```
 
@@ -293,24 +299,24 @@ module _
   {l1 l2 l3 : Level} (P : Prop l1) {A : UU l2} (Q : A → Prop l3)
   where
 
-  map-distributive-conjunction-exists-Prop :
+  map-distributive-conjunction-exists :
     type-Prop (P ∧ (∃ A Q) ⇒ ∃ A (λ x → P ∧ Q x))
-  map-distributive-conjunction-exists-Prop =
+  map-distributive-conjunction-exists =
     map-distributive-product-exists P
 
-  map-inv-distributive-conjunction-exists-Prop :
+  map-inv-distributive-conjunction-exists :
     type-Prop (∃ A (λ x → P ∧ Q x) ⇒ P ∧ (∃ A Q))
-  map-inv-distributive-conjunction-exists-Prop =
+  map-inv-distributive-conjunction-exists =
     map-inv-distributive-product-exists P
 
-  iff-distributive-conjunction-exists-Prop :
+  iff-distributive-conjunction-exists :
     type-Prop (P ∧ ∃ A Q ⇔ ∃ A (λ x → P ∧ Q x))
-  iff-distributive-conjunction-exists-Prop =
+  iff-distributive-conjunction-exists =
     iff-distributive-product-exists P
 
-  eq-distributive-conjunction-exists-Prop :
+  eq-distributive-conjunction-exists :
     P ∧ (∃ A Q) ＝ ∃ A (λ x → P ∧ Q x)
-  eq-distributive-conjunction-exists-Prop =
+  eq-distributive-conjunction-exists =
     eq-distributive-product-exists P
 ```
 

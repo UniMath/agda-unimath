@@ -95,7 +95,7 @@ module _
 
   is-countable-Prop' : Prop (lsuc l ⊔ l)
   is-countable-Prop' =
-    exists-type-family-Prop
+    exists-structure-Prop
       ( decidable-subtype l ℕ)
       ( λ P → type-decidable-subtype P ↠ type-Set X)
 

@@ -21,18 +21,18 @@ $n$-[types](foundation-core.truncated-types.md).
 Note that for many operations in the second section, there is an equivalent
 operation on propositions in the first.
 
-| Name                                                                         | Operator on types             | Operator on propositions/subtypes        |
-| ---------------------------------------------------------------------------- | ----------------------------- | ---------------------------------------- |
-| [Initial object](foundation-core.empty-types.md)                             | `empty`                       | `empty-Prop`                             |
-| [Terminal object](foundation.unit-type.md)                                   | `unit`                        | `unit-Prop`                              |
-| [Existential quantification](foundation.existential-quantification.md)       | `exists-type-family`          | `∃`                                      |
-| [Unique existential quantification](foundation.uniqueness-quantification.md) | `uniquely-exists-type-family` | `∃!`                                     |
-| [Universal quantification](foundation.universal-quantification.md)           |                               | `∀'` (equivalent to `Π-Prop`)            |
-| [Conjunction](foundation.conjunction.md)                                     |                               | `∧` (equivalent to `product-Prop`)       |
-| [Disjunction](foundation.disjunction.md)                                     | `disjunction-type`            | `∨` (equivalent to `join-Prop`)          |
-| [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `xor-type`                    | `⊻` (equivalent to `exclusive-sum-Prop`) |
-| [Negation](foundation.negation.md)                                           | `¬`                           | `¬'`                                     |
-| [Double negation](foundation.double-negation.md)                             | `¬¬`                          | `¬¬'`                                    |
+| Name                                                                         | Operator on types           | Operator on propositions/subtypes        |
+| ---------------------------------------------------------------------------- | --------------------------- | ---------------------------------------- |
+| [Initial object](foundation-core.empty-types.md)                             | `empty`                     | `empty-Prop`                             |
+| [Terminal object](foundation.unit-type.md)                                   | `unit`                      | `unit-Prop`                              |
+| [Existential quantification](foundation.existential-quantification.md)       | `exists-structure`          | `∃`                                      |
+| [Unique existential quantification](foundation.uniqueness-quantification.md) | `uniquely-exists-structure` | `∃!`                                     |
+| [Universal quantification](foundation.universal-quantification.md)           |                             | `∀'` (equivalent to `Π-Prop`)            |
+| [Conjunction](foundation.conjunction.md)                                     |                             | `∧` (equivalent to `product-Prop`)       |
+| [Disjunction](foundation.disjunction.md)                                     | `disjunction-type`          | `∨` (equivalent to `join-Prop`)          |
+| [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `xor-type`                  | `⊻` (equivalent to `exclusive-sum-Prop`) |
+| [Negation](foundation.negation.md)                                           | `¬`                         | `¬'`                                     |
+| [Double negation](foundation.double-negation.md)                             | `¬¬`                        | `¬¬'`                                    |
 
 We can also organize these operations by indexed and binary variants, giving us
 the following table:

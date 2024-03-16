@@ -37,7 +37,7 @@ number `n` such that `x^n = 0`.
 is-nilpotent-element-semiring-Prop :
   {l : Level} (R : Semiring l) → type-Semiring R → Prop l
 is-nilpotent-element-semiring-Prop R x =
-  exists-type-family-Prop ℕ (λ n → power-Semiring R n x ＝ zero-Semiring R)
+  exists-structure-Prop ℕ (λ n → power-Semiring R n x ＝ zero-Semiring R)
 
 is-nilpotent-element-Semiring :
   {l : Level} (R : Semiring l) → type-Semiring R → UU l
