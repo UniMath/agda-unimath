@@ -188,28 +188,30 @@ module _
   (x : ℚ)
   where
 
-  left-∃-le-ℚ : exists ℚ (λ q → le-ℚ-Prop q x)
-  left-∃-le-ℚ = intro-exists
-    ( in-fraction-ℤ frac)
-    ( left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
-      ( le-fraction-le-numerator-fraction-ℤ
-        ( frac)
-        ( fraction-ℚ x)
-        ( refl)
-        ( le-pred-ℤ (numerator-ℚ x))))
+  exists-smaller-ℚ : exists ℚ (λ q → le-ℚ-Prop q x)
+  exists-smaller-ℚ =
+    intro-exists
+      ( in-fraction-ℤ frac)
+      ( left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
+        ( le-fraction-le-numerator-fraction-ℤ
+          ( frac)
+          ( fraction-ℚ x)
+          ( refl)
+          ( le-pred-ℤ (numerator-ℚ x))))
     where
     frac : fraction-ℤ
     frac = pred-ℤ (numerator-ℚ x) , positive-denominator-ℚ x
 
-  right-∃-le-ℚ : exists ℚ (λ r → le-ℚ-Prop x r)
-  right-∃-le-ℚ = intro-exists
-    ( in-fraction-ℤ frac)
-    ( right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
-      ( le-fraction-le-numerator-fraction-ℤ
-        ( fraction-ℚ x)
-        ( frac)
-        ( refl)
-        ( le-succ-ℤ (numerator-ℚ x))))
+  exists-larger-ℚ : exists ℚ (λ r → le-ℚ-Prop x r)
+  exists-larger-ℚ =
+    intro-exists
+      ( in-fraction-ℤ frac)
+      ( right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
+        ( le-fraction-le-numerator-fraction-ℤ
+          ( fraction-ℚ x)
+          ( frac)
+          ( refl)
+          ( le-succ-ℤ (numerator-ℚ x))))
     where
     frac : fraction-ℤ
     frac = succ-ℤ (numerator-ℚ x) , positive-denominator-ℚ x

@@ -56,7 +56,7 @@ is-dedekind-cut-le-ℚ :
     (λ (q : ℚ) → le-ℚ-Prop q x)
     (λ (r : ℚ) → le-ℚ-Prop x r)
 is-dedekind-cut-le-ℚ x =
-  ( left-∃-le-ℚ x , right-∃-le-ℚ x) ,
+  ( exists-smaller-ℚ x , exists-larger-ℚ x) ,
   ( ( λ (q : ℚ) →
       dense-le-ℚ q x ,
       elim-exists
