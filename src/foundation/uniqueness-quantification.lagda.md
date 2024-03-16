@@ -26,8 +26,8 @@ Given a predicate `P : A → Prop` we say there
 _an `x : A` such that `P x`_, if the [subtype](foundation-core.subtypes.md)
 `Σ (x : A), (P x)` is [contractible](foundation-core.contractible-types.md).
 
-More generally, given a type family `B : A → 𝒰` we say there
-{{#concept "uniquely exists" Disambiguation="in a total type" Agda=∃!}} _an
+More generally, given a [structure](foundation.structure.md) `B : A → 𝒰` we say there
+{{#concept "uniquely exists" Disambiguation="structure"}} _an
 `x : A` and a `y : B x`_, if the
 [total type](foundation.dependent-pair-types.md) `Σ (x : A), (B x)` is
 contractible.
