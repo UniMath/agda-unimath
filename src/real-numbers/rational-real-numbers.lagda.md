@@ -118,7 +118,7 @@ all-eq-is-rational-ℝ x p q H H' =
   left-case : le-ℚ p q → p ＝ q
   left-case I =
     ex-falso
-      ( rec-disjunction
+      ( elim-disjunction
         ( empty-Prop)
         ( pr1 H)
         ( pr2 H')
@@ -127,7 +127,7 @@ all-eq-is-rational-ℝ x p q H H' =
   right-case : le-ℚ q p → p ＝ q
   right-case I =
     ex-falso
-      ( rec-disjunction
+      ( elim-disjunction
         ( empty-Prop)
         ( pr1 H')
         ( pr2 H)
@@ -191,7 +191,7 @@ eq-real-rational-is-rational-ℝ x q H =
       ( λ r →
         pair
           ( λ I →
-            rec-disjunction
+            elim-disjunction
               ( lower-cut-ℝ x r)
               ( id)
               ( λ H' → ex-falso (pr2 H H'))

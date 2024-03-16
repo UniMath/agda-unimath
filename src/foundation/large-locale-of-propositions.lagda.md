@@ -64,7 +64,7 @@ has-meets-Prop-Large-Locale :
 meet-has-meets-Large-Poset has-meets-Prop-Large-Locale = conjunction-Prop
 is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
   has-meets-Prop-Large-Locale P Q R =
-  is-greatest-lower-bound-conjunction-Prop P Q R
+  is-greatest-binary-lower-bound-conjunction-Prop P Q R
 ```
 
 ### The largest element in the large poset of propositions
@@ -116,7 +116,7 @@ is-large-meet-semilattice-Large-Frame Prop-Large-Frame =
 is-large-suplattice-Large-Frame Prop-Large-Frame =
   is-large-suplattice-Prop-Large-Locale
 distributive-meet-sup-Large-Frame Prop-Large-Frame =
-  eq-distributive-conjunction-exists-Prop
+  eq-distributive-conjunction-exists
 ```
 
 ### The large locale of propositions

@@ -172,29 +172,29 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  elim-disjunction :
+  elim-disjunction' :
     {l : Level} (R : Prop l) →
     (A → type-Prop R) × (B → type-Prop R) →
     disjunction-type A B → type-Prop R
-  elim-disjunction R (f , g) =
+  elim-disjunction' R (f , g) =
     map-universal-property-trunc-Prop R (rec-coproduct f g)
 
   up-disjunction :
     universal-property-disjunction-type A B (disjunction-prop-type A B)
-  up-disjunction R = ev-disjunction , elim-disjunction R
+  up-disjunction R = ev-disjunction , elim-disjunction' R
 ```
 
-### The recursion principle of disjunctions
+### The elimination principle of disjunctions
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (R : Prop l3)
   where
 
-  rec-disjunction :
+  elim-disjunction :
     (A → type-Prop R) → (B → type-Prop R) →
     disjunction-type A B → type-Prop R
-  rec-disjunction f g = elim-disjunction R (f , g)
+  elim-disjunction f g = elim-disjunction' R (f , g)
 ```
 
 ### Propositions that satisfy the universal property of a disjunction are equivalent to the disjunction
@@ -208,7 +208,7 @@ module _
   forward-implication-iff-universal-property-disjunction :
     disjunction-type A B → type-Prop Q
   forward-implication-iff-universal-property-disjunction =
-    rec-disjunction Q
+    elim-disjunction Q
       ( pr1 (forward-implication (up-Q Q) id))
       ( pr2 (forward-implication (up-Q Q) id))
 
@@ -236,12 +236,12 @@ module _
   map-left-unit-law-disjunction-is-empty-Prop :
     is-empty (type-Prop P) → type-disjunction-Prop P Q → type-Prop Q
   map-left-unit-law-disjunction-is-empty-Prop f =
-    rec-disjunction Q (ex-falso ∘ f) id
+    elim-disjunction Q (ex-falso ∘ f) id
 
   map-right-unit-law-disjunction-is-empty-Prop :
     is-empty (type-Prop Q) → type-disjunction-Prop P Q → type-Prop P
   map-right-unit-law-disjunction-is-empty-Prop f =
-    rec-disjunction P id (ex-falso ∘ f)
+    elim-disjunction P id (ex-falso ∘ f)
 ```
 
 ### The unit laws for the disjunction of types
@@ -254,12 +254,12 @@ module _
   map-left-unit-law-disjunction-is-empty-type :
     is-empty A → disjunction-type A B → is-inhabited B
   map-left-unit-law-disjunction-is-empty-type f =
-    rec-disjunction (is-inhabited-Prop B) (ex-falso ∘ f) unit-trunc-Prop
+    elim-disjunction (is-inhabited-Prop B) (ex-falso ∘ f) unit-trunc-Prop
 
   map-right-unit-law-disjunction-is-empty-type :
     is-empty B → disjunction-type A B → is-inhabited A
   map-right-unit-law-disjunction-is-empty-type f =
-    rec-disjunction (is-inhabited-Prop A) unit-trunc-Prop (ex-falso ∘ f)
+    elim-disjunction (is-inhabited-Prop A) unit-trunc-Prop (ex-falso ∘ f)
 ```
 
 ### The disjunction of arbitrary types is the disjunction of inhabitedness proofs

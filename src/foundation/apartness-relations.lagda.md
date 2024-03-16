@@ -206,8 +206,8 @@ module _
               ( rel-apart-function-into-Type-With-Apartness X Y f h)
               ( rel-apart-function-into-Type-With-Apartness X Y g h))
             ( λ where
-              ( inl b) → inl-disjunction (unit-trunc-Prop (x , b))
-              ( inr b) → inr-disjunction (unit-trunc-Prop (x , b))))
+              ( inl b) → inl-disjunction (intro-exists x b)
+              ( inr b) → inr-disjunction (intro-exists x b)))
 
   exp-Type-With-Apartness : Type-With-Apartness (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 exp-Type-With-Apartness = X → type-Type-With-Apartness Y

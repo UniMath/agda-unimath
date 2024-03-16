@@ -60,7 +60,7 @@ $$
 for every proposition `R`. In fact, `R` can be any type.
 
 The
-{{#concept "recursion principle" Disambiguation"of the conjunction of propositions" Agda=recursion-principle-conjunction-Prop}}
+{{#concept "recursion principle" Disambiguation"of the conjunction of propositions" Agda=elimination-principle-conjunction-Prop}}
 of the conjunction of propositions states that to define a function `P ∧ Q → R`
 into a proposition `R`, or indeed any type, is equivalent to defining a function
 `P → Q → R`.
@@ -119,22 +119,22 @@ We refrain from defining the introduction rule and basic projections of the
 conjunction, and advise users to utilize the standard projections of the
 dependent pair type `pr1` and `pr2`.
 
-### The recursion principle of the conjunction
+### The elimination principle of the conjunction
 
 ```agda
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  prop-recursion-principle-conjunction-Prop :
+  elimination-principle-prop-conjunction-Prop :
     {l : Level} (R : Prop l) → Prop (l1 ⊔ l2 ⊔ l)
-  prop-recursion-principle-conjunction-Prop R =
+  elimination-principle-prop-conjunction-Prop R =
     ((P ∧ Q) ⇒ R) ⇔ (P ⇒ Q ⇒ R)
 
-  recursion-principle-conjunction-Prop : UUω
-  recursion-principle-conjunction-Prop =
+  elimination-principle-conjunction-Prop : UUω
+  elimination-principle-conjunction-Prop =
     {l : Level} (R : Prop l) →
-    type-Prop (prop-recursion-principle-conjunction-Prop R)
+    type-Prop (elimination-principle-prop-conjunction-Prop R)
 
   ev-conjunction-Prop :
     {l : Level} (R : Prop l) →
@@ -151,18 +151,18 @@ module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  prop-rec-conjunction-Prop : {l : Level} (R : Prop l) → Prop (l1 ⊔ l2 ⊔ l)
-  prop-rec-conjunction-Prop R =
+  prop-elim-conjunction-Prop : {l : Level} (R : Prop l) → Prop (l1 ⊔ l2 ⊔ l)
+  prop-elim-conjunction-Prop R =
     (P ⇒ Q ⇒ R) ⇒ (P ∧ Q) ⇒ R
 
-  rec-conjunction-Prop :
-    {l : Level} (R : Prop l) → type-Prop (prop-rec-conjunction-Prop R)
-  rec-conjunction-Prop R f (p , q) = f p q
+  elim-conjunction-Prop :
+    {l : Level} (R : Prop l) → type-Prop (prop-elim-conjunction-Prop R)
+  elim-conjunction-Prop R f (p , q) = f p q
 
-  recursion-principle-conjunction-Prop' :
-    recursion-principle-conjunction-Prop P Q
-  recursion-principle-conjunction-Prop' R =
-    ev-conjunction-Prop P Q R , rec-conjunction-Prop R
+  elimination-principle-conjunction-Prop' :
+    elimination-principle-conjunction-Prop P Q
+  elimination-principle-conjunction-Prop' R =
+    ev-conjunction-Prop P Q R , elim-conjunction-Prop R
 
   equiv-ev-conjunction-Prop :
     {l : Level} (R : Prop l) →
@@ -172,7 +172,7 @@ module _
     equiv-iff'
       ( P ∧ Q ⇒ R)
       ( P ⇒ Q ⇒ R)
-      ( recursion-principle-conjunction-Prop' R)
+      ( elimination-principle-conjunction-Prop' R)
 ```
 
 ### The conjunction is the meet in the poset of propositions
@@ -211,10 +211,10 @@ module _
   {l1 l2 l3 : Level} (P : Prop l1) (Q : Prop l2) (R : Prop l3)
   where
 
-  is-greatest-lower-bound-conjunction-Prop :
+  is-greatest-binary-lower-bound-conjunction-Prop :
     type-Prop ((R ⇒ P) ∧ (R ⇒ Q)) ↔
     type-Prop (R ⇒ P ∧ Q)
-  is-greatest-lower-bound-conjunction-Prop =
+  is-greatest-binary-lower-bound-conjunction-Prop =
     ( map-distributive-conjunction-Prop P Q (type-Prop R) ,
       map-inv-distributive-conjunction-Prop P Q (type-Prop R))
 ```

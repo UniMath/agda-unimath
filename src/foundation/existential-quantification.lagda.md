@@ -87,7 +87,7 @@ existence of structure: The element `y` is in the image of `f` if the type of
 `x : A` equipped with an identification `f x = y` is inhabited.
 
 [A more concrete description of what you have in mind with "it enables the
-inference mechanism of Agda to do more work for us"]
+inference mechanism of Agda to do more work for us"] TODO
 
 ```agda
 module _
@@ -279,8 +279,8 @@ module _
     ( type-Prop P × exists-structure A B) ↔
     ( exists-structure A (λ x → type-Prop P × B x))
   iff-distributive-product-exists-structure =
-    ( map-distributive-product-exists ,
-      map-inv-distributive-product-exists)
+    ( map-distributive-product-exists-structure ,
+      map-inv-distributive-product-exists-structure)
 
   eq-distributive-product-exists-structure :
     P ∧ exists-structure-Prop A B ＝
@@ -289,7 +289,7 @@ module _
     eq-iff'
       ( P ∧ exists-structure-Prop A B)
       ( exists-structure-Prop A (λ x → type-Prop P × B x))
-      ( iff-distributive-product-exists)
+      ( iff-distributive-product-exists-structure)
 ```
 
 ### Conjunction distributes over existential quantification
@@ -302,22 +302,22 @@ module _
   map-distributive-conjunction-exists :
     type-Prop (P ∧ (∃ A Q) ⇒ ∃ A (λ x → P ∧ Q x))
   map-distributive-conjunction-exists =
-    map-distributive-product-exists P
+    map-distributive-product-exists-structure P
 
   map-inv-distributive-conjunction-exists :
     type-Prop (∃ A (λ x → P ∧ Q x) ⇒ P ∧ (∃ A Q))
   map-inv-distributive-conjunction-exists =
-    map-inv-distributive-product-exists P
+    map-inv-distributive-product-exists-structure P
 
   iff-distributive-conjunction-exists :
     type-Prop (P ∧ ∃ A Q ⇔ ∃ A (λ x → P ∧ Q x))
   iff-distributive-conjunction-exists =
-    iff-distributive-product-exists P
+    iff-distributive-product-exists-structure P
 
   eq-distributive-conjunction-exists :
     P ∧ (∃ A Q) ＝ ∃ A (λ x → P ∧ Q x)
   eq-distributive-conjunction-exists =
-    eq-distributive-product-exists P
+    eq-distributive-product-exists-structure P
 ```
 
 ## Table of files about propositional logic
