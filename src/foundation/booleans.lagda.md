@@ -265,7 +265,7 @@ abstract
   no-section-const-bool false (g , G) = neq-false-true-bool (G true)
 
 abstract
-  no-equiv-const-bool :
+  is-not-equiv-const-bool :
     (b : bool) → ¬ (is-equiv (const bool bool b))
-  no-equiv-const-bool b e = no-section-const-bool b (section-is-equiv e)
+  is-not-equiv-const-bool b e = no-section-const-bool b (section-is-equiv e)
 ```

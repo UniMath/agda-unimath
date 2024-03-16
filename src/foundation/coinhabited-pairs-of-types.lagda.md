@@ -1,7 +1,7 @@
-# Coinhabited types
+# Coinhabited pairs of types
 
 ```agda
-module foundation.coinhabited-types where
+module foundation.coinhabited-pairs-of-types where
 ```
 
 <details><summary>Imports</summary>

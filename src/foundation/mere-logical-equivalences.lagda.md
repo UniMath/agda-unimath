@@ -98,7 +98,7 @@ module _
 ### Merely logically equivalent types are coinhabited
 
 If `A` and `B` are merely logically equivalent then they are
-[coinhabited](foundation.coinhabited-types.md).
+[coinhabited](foundation.coinhabited-pairs-of-types.md).
 
 ```agda
 module _
@@ -223,5 +223,5 @@ module _
 ## See also
 
 - [Mere functions](foundation.mere-functions.md)
-- [Coinhabitedness](foundation.coinhabited-types.md) is a related but weaker
-  notion than mere-iff.
+- [Coinhabitedness](foundation.coinhabited-pairs-of-types.md) is a related but
+  weaker notion than mere-iff.

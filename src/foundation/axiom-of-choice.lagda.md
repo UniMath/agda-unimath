@@ -44,8 +44,8 @@ The {{#concept "axiom of choice" Agda=AC-0}} asserts that for every family of
 AC-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 AC-Set l1 l2 =
   (A : Set l1) (B : type-Set A → Set l2) →
-  ((x : type-Set A) → ║ type-Set (B x) ║₋₁) →
-  ║ ((x : type-Set A) → type-Set (B x)) ║₋₁
+  ((x : type-Set A) → is-inhabited (type-Set (B x))) →
+  is-inhabited ((x : type-Set A) → type-Set (B x))
 ```
 
 ### The axiom of choice
@@ -54,8 +54,8 @@ AC-Set l1 l2 =
 AC-0 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 AC-0 l1 l2 =
   (A : Set l1) (B : type-Set A → UU l2) →
-  ((x : type-Set A) → ║ B x ║₋₁) →
-  ║ ((x : type-Set A) → B x) ║₋₁
+  ((x : type-Set A) → is-inhabited (B x)) →
+  is-inhabited ((x : type-Set A) → B x)
 ```
 
 ## Properties

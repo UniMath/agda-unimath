@@ -50,7 +50,7 @@ open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.codiagonal-maps-of-types public
 open import foundation.coherently-invertible-maps public
-open import foundation.coinhabited-types public
+open import foundation.coinhabited-pairs-of-types public
 open import foundation.commuting-cubes-of-maps public
 open import foundation.commuting-hexagons-of-identifications public
 open import foundation.commuting-pentagons-of-identifications public
