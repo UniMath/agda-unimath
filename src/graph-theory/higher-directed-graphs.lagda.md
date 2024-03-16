@@ -9,10 +9,12 @@ module graph-theory.higher-directed-graphs where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -22,28 +24,48 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-A {{#concept "directed `n`-graph" Agda=Directed-Higher-Graph}} consists of a
+A {{#concept "directed $n$-graph" Agda=Higher-Directed-Graph}} consists of a
 type of vertices equipped with a binary family of directed `n-1`-graphs on its
 edges, where a directed `0`-graph consists of just a type of vertices.
 
 ## Definition
 
+### The structure of a higher directed graph on a type of vertices
+
 ```agda
-Directed-Higher-Graph : (l : Level) (n : ℕ) → UU (lsuc l)
-Directed-Higher-Graph l 0 = UU l
-Directed-Higher-Graph l (succ-ℕ n) =
-  Σ (UU l) (λ V → V → V → Directed-Higher-Graph l n)
+is-higher-directed-graph-succ :
+  {l1 : Level} (l2 : Level) (n : ℕ) → UU l1 → UU (l1 ⊔ lsuc l2)
+is-higher-directed-graph-succ l2 zero-ℕ V =
+  Relation l2 V
+is-higher-directed-graph-succ l2 (succ-ℕ n) V =
+  Σ ( is-higher-directed-graph-succ l2 0 V)
+    ( λ E → (u v : V) → is-higher-directed-graph-succ l2 n (E u v))
 
-vertex-Directed-Higher-Graph :
-  {n : ℕ} {l : Level} → Directed-Higher-Graph l n → UU l
-vertex-Directed-Higher-Graph {0} G = G
-vertex-Directed-Higher-Graph {succ-ℕ n} = pr1
+edge-is-higher-directed-graph-succ :
+  {l1 l2 : Level} {n : ℕ} (V : UU l1) →
+  is-higher-directed-graph-succ l2 n V → Relation l2 V
+edge-is-higher-directed-graph-succ {n = zero-ℕ} V E = E
+edge-is-higher-directed-graph-succ {n = succ-ℕ n} V (E , _) = E
+```
 
-edge-Directed-Higher-Graph :
-  {n : ℕ} {l : Level} (G : Directed-Higher-Graph l (succ-ℕ n)) →
-  vertex-Directed-Higher-Graph G → vertex-Directed-Higher-Graph G → UU l
-edge-Directed-Higher-Graph {0} = pr2
-edge-Directed-Higher-Graph {succ-ℕ n} G x y = pr1 (pr2 G x y)
+### The type of higehr directed graphs
+
+```agda
+Higher-Directed-Graph : (l : Level) (n : ℕ) → UU (lsuc l)
+Higher-Directed-Graph l 0 = UU l
+Higher-Directed-Graph l (succ-ℕ n) =
+  Σ (UU l) (λ V → V → V → Higher-Directed-Graph l n)
+
+vertex-Higher-Directed-Graph :
+  {n : ℕ} {l : Level} → Higher-Directed-Graph l n → UU l
+vertex-Higher-Directed-Graph {0} G = G
+vertex-Higher-Directed-Graph {succ-ℕ n} = pr1
+
+edge-Higher-Directed-Graph :
+  {n : ℕ} {l : Level} (G : Higher-Directed-Graph l (succ-ℕ n)) →
+  vertex-Higher-Directed-Graph G → vertex-Higher-Directed-Graph G → UU l
+edge-Higher-Directed-Graph {0} = pr2
+edge-Higher-Directed-Graph {succ-ℕ n} G x y = pr1 (pr2 G x y)
 ```
 
 ## Properties
@@ -51,7 +73,7 @@ edge-Directed-Higher-Graph {succ-ℕ n} G x y = pr1 (pr2 G x y)
 ### Directed 1-graphs are just directed graphs
 
 ```agda
-eq-Directed-Graph-Directed-Higher-Graph-1 :
-  {l : Level} → Directed-Higher-Graph l 1 ＝ Directed-Graph l l
-eq-Directed-Graph-Directed-Higher-Graph-1 = refl
+eq-Directed-Graph-Higher-Directed-Graph-1 :
+  {l : Level} → Higher-Directed-Graph l 1 ＝ Directed-Graph l l
+eq-Directed-Graph-Higher-Directed-Graph-1 = refl
 ```

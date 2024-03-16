@@ -114,10 +114,6 @@ module _
   (R : Large-Relation α β A)
   where
 
-  is-reflexive-Large-Relation : UUω
-  is-reflexive-Large-Relation =
-    {l : Level} → is-reflexive (relation-Large-Relation A R l)
-
   is-symmetric-Large-Relation : UUω
   is-symmetric-Large-Relation =
     {l1 l2 : Level} (x : A l1) (y : A l2) → R x y → R y x
@@ -135,10 +131,6 @@ module _
   (A : (l : Level) → UU (α l))
   (R : Large-Relation-Prop α β A)
   where
-
-  is-reflexive-Large-Relation-Prop : UUω
-  is-reflexive-Large-Relation-Prop =
-    is-reflexive-Large-Relation A (type-Large-Relation-Prop A R)
 
   is-large-symmetric-Large-Relation-Prop : UUω
   is-large-symmetric-Large-Relation-Prop =

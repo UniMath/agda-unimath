@@ -30,6 +30,7 @@ open import graph-theory.finite-graphs public
 open import graph-theory.geometric-realizations-undirected-graphs public
 open import graph-theory.higher-directed-graphs public
 open import graph-theory.hypergraphs public
+open import graph-theory.large-higher-directed-graphs public
 open import graph-theory.large-reflexive-graphs public
 open import graph-theory.matchings public
 open import graph-theory.mere-equivalences-undirected-graphs public
