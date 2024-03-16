@@ -57,9 +57,9 @@ mean that for every proposition `Q` we have the
 
 ## Definitions
 
-### Existential quantification on arbitrary type families
+### Existence of structure
 
-Given an arbitrary type family `B : A → 𝒰`, the truncation
+Given a [structure](foundation.structure.md) `B : A → 𝒰` on a type `A`, the propositional truncation
 
 ```text
   ║ Σ (x : A), (B x) ║₋₁
@@ -73,14 +73,15 @@ satisfies the universal property of the existential quantification
 
 and is thus equivalent to it. Therefore, we may reasonably call this
 construction the
-{{#concept "existential quantification" Disambiguation="on a type family" Agda=exists-type-family-Prop}}
-on a type family. It is important to keep in mind that this is not a
+{{#concept "existential quantification" Disambiguation="structure" Agda=exists-structure-Prop}}
+of structure. It is important to keep in mind that this is not a
 generalization of the concept but rather a conflation, and should be read as the
-statement _there is some `x : A` such that `B x` is (merely)
-[inhabited](foundation.inhabited-types.md)_. Still, it is useful to begin by
-considering existential quantification on arbitrary type families, as many
-constructions pertaining to existential quantification apply in this context,
-and it enables the inference mechanism of Agda to do more work for us.
+statement _the type of elements `x : A` equipped with `y : B x` is
+[inhabited](foundation.inhabited-types.md)_.
+
+Existence of structure is a widely occurring notion in univalent mathematics. For instance, the condition that an element `y : B` is in the [image](foundation.images.md) of a map `f : A -> B` is formulated using existence of structure: The element `y` is in the image of `f` if the type of `x : A` equipped with an identification `f x = y` is inhabited.
+
+[A more concrete description of what you have in mind with "it enables the inference mechanism of Agda to do more work for us"]
 
 ```agda
 module _
