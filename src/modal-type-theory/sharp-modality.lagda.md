@@ -1,7 +1,7 @@
 # The sharp modality
 
 ```agda
-{-# OPTIONS --cohesion --flat-split --rewriting #-}
+{-# OPTIONS --cohesion --flat-split #-}
 
 module modal-type-theory.sharp-modality where
 ```
@@ -21,8 +21,6 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-induction
 open import orthogonal-factorization-systems.modal-subuniverse-induction
-
-open import reflection.rewriting
 ```
 
 </details>
@@ -74,7 +72,9 @@ postulate
     {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) →
     ( uniqueness-crisp-elim-sharp (unit-sharp x)) ＝
     ( ap unit-sharp (compute-crisp-elim-sharp x))
+```
 
+```text
   {-# REWRITE compute-crisp-elim-sharp uniqueness-crisp-elim-sharp #-}
 ```
 
@@ -95,7 +95,9 @@ postulate
     {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : A → UU l2)
     (f : (@♭ x : A) → C x) →
     (@♭ x : A) → crisp-ind-sharp C f x ＝ unit-sharp (f x)
+```
 
+```text
   {-# REWRITE compute-crisp-ind-sharp #-}
 ```
 
@@ -199,7 +201,9 @@ module _
 
 ### Sharp induction
 
-```agda
+The following relies on rewrite rules.
+
+```text
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ C : ♯ A → UU l2)
   (@♭ f : ((x : A) → ♯ (C (unit-sharp x))))

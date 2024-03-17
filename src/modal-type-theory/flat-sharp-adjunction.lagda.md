@@ -1,7 +1,7 @@
 # The flat-sharp adjunction
 
 ```agda
-{-# OPTIONS --cohesion --flat-split --rewriting #-}
+{-# OPTIONS --cohesion --flat-split #-}
 
 module modal-type-theory.flat-sharp-adjunction where
 ```
