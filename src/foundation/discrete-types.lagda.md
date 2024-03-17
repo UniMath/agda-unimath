@@ -39,7 +39,7 @@ module _
   where
 
   rel-apart-Discrete-Type : Relation-Prop l (type-Discrete-Type X)
-  rel-apart-Discrete-Type x y = neg-Prop' (x ＝ y)
+  rel-apart-Discrete-Type x y = neg-type-Prop (x ＝ y)
 
   apart-Discrete-Type : (x y : type-Discrete-Type X) → UU l
   apart-Discrete-Type x y = type-Prop (rel-apart-Discrete-Type x y)
