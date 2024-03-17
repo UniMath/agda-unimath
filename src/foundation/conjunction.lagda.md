@@ -65,7 +65,9 @@ of the conjunction of propositions states that to define a function `P ∧ Q →
 into a proposition `R`, or indeed any type, is equivalent to defining a function
 `P → Q → R`.
 
-## Definition
+## Definitions
+
+### The conjunction
 
 ```agda
 module _
@@ -91,6 +93,8 @@ module _
 [logical and](https://codepoints.net/U+2227) `∧` (agda-input: `\wedge` or
 `\and`).
 
+### The conjunction of decidable propositions
+
 ```agda
 module _
   {l1 l2 : Level} (P : Decidable-Prop l1) (Q : Decidable-Prop l2)
@@ -105,12 +109,10 @@ module _
       ( is-decidable-Decidable-Prop Q)
 
   conjunction-Decidable-Prop : Decidable-Prop (l1 ⊔ l2)
-  pr1 conjunction-Decidable-Prop =
-    type-conjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
-  pr1 (pr2 conjunction-Decidable-Prop) =
-    is-prop-conjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
-  pr2 (pr2 conjunction-Decidable-Prop) =
-    is-decidable-conjunction-Decidable-Prop
+  conjunction-Decidable-Prop =
+    ( type-conjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q) ,
+      is-prop-conjunction-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q) ,
+      is-decidable-conjunction-Decidable-Prop)
 ```
 
 ### The introduction rule and projections for the conjunction of propositions
@@ -142,8 +144,7 @@ module _
   where
 
   ev-conjunction-Prop :
-    {l : Level} (R : Prop l) →
-    type-Prop (((P ∧ Q) ⇒ R) ⇒ P ⇒ Q ⇒ R)
+    {l : Level} (R : Prop l) → type-Prop (((P ∧ Q) ⇒ R) ⇒ P ⇒ Q ⇒ R)
   ev-conjunction-Prop R = ev-pair
 
   elimination-principle-conjunction-Prop : UUω

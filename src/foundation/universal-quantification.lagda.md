@@ -84,26 +84,26 @@ of the universal quantification `∀ (a : A), (P a)` states that for every
 proposition `R`, the canonical map
 
 ```text
-  (∀ (a : A), (R → P a)) ↔ (R → ∀ (a : A), (P a))
+  (∀ (a : A), (R → P a)) → (R → ∀ (a : A), (P a))
 ```
 
-is an [equivalence](foundation.logical-equivalences.md). Indeed, this holds for
-any type `R`.
+is a [logical equivalence](foundation.logical-equivalences.md). Indeed, this
+holds for any type `R`.
 
 ```agda
 module _
   {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
   where
 
+  universal-property-for-all : {l3 : Level} (S : Prop l3) → UUω
+  universal-property-for-all S =
+    {l : Level} (R : Prop l) →
+    type-Prop ((∀' A (λ a → R ⇒ P a)) ⇔ (R ⇒ S))
+
   ev-for-all :
     {l : Level} {B : UU l} →
     for-all A (λ a → function-Prop B (P a)) → B → for-all A P
   ev-for-all f r a = f a r
-
-  universal-property-for-all : UUω
-  universal-property-for-all =
-    {l : Level} (R : Prop l) →
-    type-Prop ((∀' A (λ a → R ⇒ P a)) ⇔ (R ⇒ ∀' A P))
 ```
 
 ## Properties
@@ -128,7 +128,7 @@ module _
       ( function-Prop B (∀' A P))
       ( map-up-for-all)
 
-  up-for-all : universal-property-for-all A P
+  up-for-all : universal-property-for-all A P (∀' A P)
   up-for-all R = (ev-for-all A P , map-up-for-all)
 ```
 

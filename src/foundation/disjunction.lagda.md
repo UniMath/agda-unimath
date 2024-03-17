@@ -162,9 +162,9 @@ pr2 (ev-disjunction h) = h ∘ inr-disjunction
 
 universal-property-disjunction-type :
   {l1 l2 l3 : Level} → UU l1 → UU l2 → Prop l3 → UUω
-universal-property-disjunction-type A B A∨B =
+universal-property-disjunction-type A B S =
   {l : Level} (R : Prop l) →
-  (type-Prop A∨B → type-Prop R) ↔ ((A → type-Prop R) × (B → type-Prop R))
+  (type-Prop S → type-Prop R) ↔ ((A → type-Prop R) × (B → type-Prop R))
 
 universal-property-disjunction-Prop :
   {l1 l2 l3 : Level} → Prop l1 → Prop l2 → Prop l3 → UUω
