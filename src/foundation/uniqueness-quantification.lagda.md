@@ -35,14 +35,14 @@ contractible.
 
 Note that the unique existence of structure is defined in the exact same way as
 the concept of
-[torsorial type families](foundation-core.torsorial-type-familes.md). Whether to
-use the concept of unique existence of a structure or the concept of torsorial
-type family is dependent on the context. Torsoriality is used often to emphasize
-the relation of the type family to the identity type, whereas uniqueness of
-structure is used to emphasize the uniqueness of elements equipped with further
-structure. For example, we tend to use unique existence in combination with
-universal properties, in order to conclude that a certain map equipped with some
-homotopies exists uniquely.
+[torsorial type families](foundation-core.torsorial-type-families.md). Whether
+to use the concept of unique existence of a structure or the concept of
+torsorial type family is dependent on the context. Torsoriality is used often to
+emphasize the relation of the type family to the identity type, whereas
+uniqueness of structure is used to emphasize the uniqueness of elements equipped
+with further structure. For example, we tend to use unique existence in
+combination with universal properties, in order to conclude that a certain map
+equipped with some homotopies exists uniquely.
 
 ## Definitions
 

@@ -188,8 +188,8 @@ module _
   (x : ℚ)
   where
 
-  exists-smaller-ℚ : exists ℚ (λ q → le-ℚ-Prop q x)
-  exists-smaller-ℚ =
+  exists-lesser-ℚ : exists ℚ (λ q → le-ℚ-Prop q x)
+  exists-lesser-ℚ =
     intro-exists
       ( in-fraction-ℤ frac)
       ( left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
@@ -202,8 +202,8 @@ module _
     frac : fraction-ℤ
     frac = pred-ℤ (numerator-ℚ x) , positive-denominator-ℚ x
 
-  exists-larger-ℚ : exists ℚ (λ r → le-ℚ-Prop x r)
-  exists-larger-ℚ =
+  exists-greater-ℚ : exists ℚ (λ r → le-ℚ-Prop x r)
+  exists-greater-ℚ =
     intro-exists
       ( in-fraction-ℤ frac)
       ( right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac

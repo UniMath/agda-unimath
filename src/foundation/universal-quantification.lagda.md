@@ -36,10 +36,11 @@ is the [proposition](foundation-core.propositions.md) that there
 
 The
 {{#concept "universal property" Disambiguation="of universal quantification" Agda=universal-property-for-all}}
-of universal quantification states that it is the greatest lower bound on the
-family of propositions `P` in the
-[poset of propositions](foundation.large-locale-of-propositions.md), by which we
-mean that for every proposition `Q` we have the
+of universal quantification states that it is the
+[greatest lower bound](order-theory.greatest-lower-bounds-large-posets.md) on
+the family of propositions `P` in the
+[locale of propositions](foundation.large-locale-of-propositions.md), by which
+we mean that for every proposition `Q` we have the
 [logical equivalence](foundation.logical-equivalences.md)
 
 ```text

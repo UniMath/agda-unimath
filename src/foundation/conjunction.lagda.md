@@ -38,7 +38,7 @@ underlying types
 
 The conjunction of two propositions satisfies the universal property of the
 [meet](order-theory.greatest-lower-bounds-large-posets.md) in the
-[poset of propositions](foundation.large-locale-of-propositions.md). This means
+[locale of propositions](foundation.large-locale-of-propositions.md). This means
 that any span of propositions over `P` and `Q` factor (uniquely) through the
 conjunction
 
@@ -115,9 +115,20 @@ module _
 
 ### The introduction rule and projections for the conjunction of propositions
 
-We refrain from defining the introduction rule and basic projections of the
-conjunction, and advise users to utilize the standard projections of the
-dependent pair type `pr1` and `pr2`.
+```agda
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
+
+  intro-conjunction-Prop : type-Prop P → type-Prop Q → type-conjunction-Prop P Q
+  intro-conjunction-Prop = pair
+
+  pr1-conjunction-Prop : type-conjunction-Prop P Q → type-Prop P
+  pr1-conjunction-Prop = pr1
+
+  pr2-conjunction-Prop : type-conjunction-Prop P Q → type-Prop Q
+  pr2-conjunction-Prop = pr2
+```
 
 ### The elimination principle of the conjunction
 
@@ -126,20 +137,14 @@ module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  elimination-principle-prop-conjunction-Prop :
-    {l : Level} (R : Prop l) → Prop (l1 ⊔ l2 ⊔ l)
-  elimination-principle-prop-conjunction-Prop R =
-    ((P ∧ Q) ⇒ R) ⇔ (P ⇒ Q ⇒ R)
-
-  elimination-principle-conjunction-Prop : UUω
-  elimination-principle-conjunction-Prop =
-    {l : Level} (R : Prop l) →
-    type-Prop (elimination-principle-prop-conjunction-Prop R)
-
   ev-conjunction-Prop :
     {l : Level} (R : Prop l) →
     type-Prop (((P ∧ Q) ⇒ R) ⇒ P ⇒ Q ⇒ R)
   ev-conjunction-Prop R = ev-pair
+
+  elimination-principle-conjunction-Prop : UUω
+  elimination-principle-conjunction-Prop =
+    {l : Level} (R : Prop l) → is-logical-equivalence (ev-conjunction-Prop R)
 ```
 
 ## Properties
@@ -151,31 +156,11 @@ module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  prop-elim-conjunction-Prop : {l : Level} (R : Prop l) → Prop (l1 ⊔ l2 ⊔ l)
-  prop-elim-conjunction-Prop R =
-    (P ⇒ Q ⇒ R) ⇒ (P ∧ Q) ⇒ R
-
-  elim-conjunction-Prop :
-    {l : Level} (R : Prop l) → type-Prop (prop-elim-conjunction-Prop R)
+  elim-conjunction-Prop : elimination-principle-conjunction-Prop P Q
   elim-conjunction-Prop R f (p , q) = f p q
-
-  elimination-principle-conjunction-Prop' :
-    elimination-principle-conjunction-Prop P Q
-  elimination-principle-conjunction-Prop' R =
-    ev-conjunction-Prop P Q R , elim-conjunction-Prop R
-
-  equiv-ev-conjunction-Prop :
-    {l : Level} (R : Prop l) →
-    type-Prop (P ∧ Q ⇒ R) ≃
-    type-Prop (P ⇒ Q ⇒ R)
-  equiv-ev-conjunction-Prop R =
-    equiv-iff'
-      ( P ∧ Q ⇒ R)
-      ( P ⇒ Q ⇒ R)
-      ( elimination-principle-conjunction-Prop' R)
 ```
 
-### The conjunction is the meet in the poset of propositions
+### The conjunction is the meet in the locale of propositions
 
 ```agda
 module _
@@ -212,8 +197,7 @@ module _
   where
 
   is-greatest-binary-lower-bound-conjunction-Prop :
-    type-Prop ((R ⇒ P) ∧ (R ⇒ Q)) ↔
-    type-Prop (R ⇒ P ∧ Q)
+    type-Prop (((R ⇒ P) ∧ (R ⇒ Q)) ⇔ (R ⇒ P ∧ Q))
   is-greatest-binary-lower-bound-conjunction-Prop =
     ( map-distributive-conjunction-Prop P Q (type-Prop R) ,
       map-inv-distributive-conjunction-Prop P Q (type-Prop R))

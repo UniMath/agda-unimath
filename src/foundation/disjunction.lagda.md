@@ -49,7 +49,7 @@ of the disjunction states that, for every proposition `R`, the evaluation map
 
 is a [logical equivalence](foundation.logical-equivalences.md), and thus the
 disjunction is the least upper bound of `P` and `Q` in the
-[poset of propositions](foundation.large-locale-of-propositions.md): there is a
+[locale of propositions](foundation.large-locale-of-propositions.md): there is a
 pair of logical implications `P → R` and `Q → R`, if and only if `P ∨ Q` implies
 `R`
 

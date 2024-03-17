@@ -32,20 +32,44 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-**Logical equivalences** between two types `A` and `B` consist of a map `A → B`
-and a map `B → A`. The type of logical equivalences between types is the
-Curry-Howard interpretation of logical equivalences between
+{{#concept "Logical equivalences" Agda=}} between two types `A` and `B` consist
+of a map `A → B` and a map `B → A`. The type of logical equivalences between
+types is the Curry-Howard interpretation of logical equivalences between
 [propositions](foundation-core.propositions.md).
 
 ## Definition
 
+### The structure on a map of being a logical equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-logical-equivalence : (A → B) → UU (l1 ⊔ l2)
+  is-logical-equivalence f = B → A
+
+  is-prop-is-logical-equivalence :
+    is-prop A → (f : A → B) → is-prop (is-logical-equivalence f)
+  is-prop-is-logical-equivalence is-prop-A f = is-prop-function-type is-prop-A
+
+is-logical-equivalence-Prop :
+  {l1 l2 : Level} (A : Prop l1) {B : UU l2} → (type-Prop A → B) → Prop (l1 ⊔ l2)
+is-logical-equivalence-Prop A f =
+  ( is-logical-equivalence f ,
+    is-prop-is-logical-equivalence (is-prop-type-Prop A) f)
+```
+
 ### Logical equivalences between types
 
 ```agda
+iff : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+iff A B = Σ (A → B) is-logical-equivalence
+
 infix 6 _↔_
 
 _↔_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-A ↔ B = (A → B) × (B → A)
+_↔_ = iff
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : A ↔ B)

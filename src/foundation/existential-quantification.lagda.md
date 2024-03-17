@@ -45,14 +45,15 @@ propositions.
 
 The
 {{#concept "universal property" Disambiguation="of existential quantification" Agda=universal-property-exists}}
-of existential quantification states that it is the least upper bound on the
+of existential quantification states that it is the
+[least upper bound](order-theory.least-upper-bounds-large-posets.md) on the
 family of propositions `P` in the
-[poset of propositions](foundation.large-locale-of-propositions.md), by which we
-mean that for every proposition `Q` we have the
+[locale of propositions](foundation.large-locale-of-propositions.md), by which
+we mean that for every proposition `Q` we have the
 [logical equivalence](foundation.logical-equivalences.md)
 
 ```text
-  (∀ (x : A), (P x → Q)) ↔ ((∃ (x : A), (P x)) → Q).
+  (∀ (x : A), (P x ⇒ Q)) ⇔ ((∃ (x : A), (P x)) ⇒ Q).
 ```
 
 ## Definitions
@@ -82,12 +83,16 @@ type of elements `x : A` equipped with `y : B x` is
 
 Existence of structure is a widely occurring notion in univalent mathematics.
 For instance, the condition that an element `y : B` is in the
-[image](foundation.images.md) of a map `f : A -> B` is formulated using
-existence of structure: The element `y` is in the image of `f` if the type of
-`x : A` equipped with an identification `f x = y` is inhabited.
+[image](foundation.images.md) of a map `f : A → B` is formulated using existence
+of structure: The element `y` is in the image of `f` if the type of `x : A`
+equipped with an identification `f x = y` is inhabited.
 
-[A more concrete description of what you have in mind with "it enables the
-inference mechanism of Agda to do more work for us"] TODO
+Because subtypes are a special case of structure, and Agda can generally infer
+structures for us, we will continue to conflate the two in our formalizations
+for the benefit that we have to specify the subtype in our code less often. For
+instance, even though the introduction rule for existential quantification
+`intro-exists` is phrased in terms of existential quantification on structures,
+it equally applies to existential quantification on subtypes.
 
 ```agda
 module _
@@ -136,6 +141,12 @@ module _
   intro-exists a b = unit-trunc-Prop (a , b)
 ```
 
+**Note.** Even though the introduction rule is formalized in terms of
+existential quantification on structures, it equally applies to existential
+quantification on subtypes. This is because subtypes are a special case of
+structure. The benefit of this approach is that Agda can infer structures for
+us, but not generally subtypes.
+
 ### The universal property of existential quantification
 
 ```agda
@@ -164,8 +175,7 @@ module _
 The
 {{#concept "universal property" Disambiguation="of existential quantification"}}
 of existential quantification states `∃ A P` is the least upper bound on the
-predicate `P` in the
-[poset of propositions](foundation.large-locale-of-propositions.md).
+predicate `P` in the locale of propositions.
 
 ```agda
 module _
@@ -200,7 +210,7 @@ module _
 
   up-exists :
     universal-property-exists-structure A B (exists-structure-Prop A B)
-  up-exists Q = ( ev-intro-exists , elim-exists Q)
+  up-exists Q = (ev-intro-exists , elim-exists Q)
 ```
 
 ### Propositions that satisfy the universal property of a existential quantification are equivalent to the existential quantification
@@ -228,7 +238,7 @@ module _
       backward-implication-iff-universal-property-exists)
 ```
 
-### Existential quantification over an arbitrary type family is the same as existential quantification over its propositional reflection
+### Existential quantification of structure is the same as existential quantification over its propositional reflection
 
 We proceed by showing that the latter satisfies the universal property of the
 former.
@@ -238,17 +248,17 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  universal-property-exists-structure-exists-trunc :
+  universal-property-exists-structure-exists-trunc-Prop :
     universal-property-exists-structure A B (exists-Prop A (trunc-Prop ∘ B))
-  universal-property-exists-structure-exists-trunc Q =
+  universal-property-exists-structure-exists-trunc-Prop Q =
     ( λ f a b → f (unit-trunc-Prop (a , unit-trunc-Prop b))) ,
     ( λ f → rec-trunc-Prop Q (λ (a , |b|) → rec-trunc-Prop Q (f a) |b|))
 
-  iff-compute-exists-trunc : exists-structure A B ↔ exists A (trunc-Prop ∘ B)
-  iff-compute-exists-trunc =
+  compute-exists-trunc-Prop : exists-structure A B ↔ exists A (trunc-Prop ∘ B)
+  compute-exists-trunc-Prop =
     iff-universal-property-exists
       ( exists-Prop A (trunc-Prop ∘ B))
-      ( universal-property-exists-structure-exists-trunc)
+      ( universal-property-exists-structure-exists-trunc-Prop)
 ```
 
 ### Taking the cartesian product with a proposition distributes over existential quantification of structures
