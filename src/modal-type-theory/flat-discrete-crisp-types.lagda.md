@@ -44,10 +44,6 @@ counit is an [equivalence](foundation-core.equivalences.md) at that type.
 **Terminology:** In _Brouwer's fixed-point theorem in real-cohesive homotopy
 type theory_, this is called a _crisply discrete_ type.
 
-The
-{{#concept "universal property" Disambiguation="of flat discrete crisp types" Agda=universal-property-flat-discrete-crisp-type}}
-of flat discrete crisp types states that
-
 ## Definitions
 
 ### Flat discrete crisp types
@@ -321,6 +317,8 @@ abstract
 
 - [Sharp codiscrete types](modal-type-theory.sharp-codiscrete-types.md) for the
   dual notion.
+- [The universal property of flat discrete crisp types](modal-type-theory.universal-property-flat-discrete-crisp-types.md)
+- [The dependent universal property of flat discrete crisp types](modal-type-theory.dependent-universal-property-flat-discrete-crisp-types.md)
 
 ## References
 
