@@ -115,6 +115,10 @@ module _
 
 ### The introduction rule and projections for the conjunction of propositions
 
+While we define the introduction rule and projections for the conjunction below,
+we advice users to use the standard pairing and projection functions for the
+cartesian product types: `pair`, `pr1` and `pr2`.
+
 ```agda
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
