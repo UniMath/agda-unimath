@@ -28,7 +28,12 @@ A crisply defined function `f : @♭ A → B` preserves crisp
 [identifications](foundation-core.identity-types.md), in the sense that it maps
 a crisp identification `p : x ＝ y` in `A` to an identification
 `crisp-ap f p : f x ＝ f y` in `B`. This action on identifications can be
-thought of as the crisp functoriality of crisp identity types.
+understood as crisp functoriality of crisp identity types.
+
+Note that this is a strengthening of the
+[action on identifications of functions](foundation.action-on-identifications-functions.md)
+for crisp identifications, because the function `f : A → B` is allowed to be
+defined over only crisp elements of its domain.
 
 ## Definition
 
@@ -42,22 +47,6 @@ crisp-ap f refl = refl
 ```
 
 ## Properties
-
-### TODO
-
-```agda
-module _
-  {@♭ l : Level} {@♭ A : UU l}
-  where
-
-  is-crisp-section-crisp-ap-cons-flat :
-    {@♭ x y : A} (@♭ p : x ＝ y) →
-    ap (counit-flat) (crisp-ap cons-flat p) ＝ p
-  is-crisp-section-crisp-ap-cons-flat =
-    crisp-based-ind-Id
-      ( λ y p → ap (counit-flat) (crisp-ap cons-flat p) ＝ p)
-      ( refl)
-```
 
 ### The identity function acts trivially on identifications
 

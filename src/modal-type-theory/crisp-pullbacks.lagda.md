@@ -76,7 +76,7 @@ module _
       ( cons-flat)
       ( eq-pair-eq-fiber
         ( eq-pair-eq-fiber
-          ( is-crisp-section-crisp-ap-cons-flat p)))
+          ( is-crisp-section-ap-flat p)))
 
   is-crisp-retraction-map-distributive-flat-standard-pullback :
     (@♭ x : standard-pullback (ap-map-flat f) (ap-map-flat g)) →
@@ -126,7 +126,7 @@ module _
   compute-counit-flat-standard-pullback (cons-flat (x , y , p)) =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
-        ( right-unit ∙ is-crisp-section-crisp-ap-cons-flat p))
+        ( right-unit ∙ is-crisp-section-ap-flat p))
 ```
 
 ### A crisp standard pullback is flat discrete if its factors are

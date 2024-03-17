@@ -18,6 +18,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
@@ -105,7 +106,7 @@ module _
   compute-counit-flat-product (cons-flat x) = refl
 ```
 
-### A crisp cartesian product type is flat discrete if both factors are
+### Flat discrete crisp types are closed under cartesian products
 
 ```agda
 module _
@@ -124,7 +125,11 @@ module _
       ( λ where (cons-flat _) → refl)
       ( is-equiv-map-distributive-flat-product)
       ( is-equiv-map-product counit-flat counit-flat is-disc-A is-disc-B)
+```
 
+### A factor is crisply flat discrete if the cartesian product is crisply flat discrete and the other factor is inhabited
+
+```agda
   is-flat-discrete-crisp-right-factor-product' :
     is-flat-discrete-crisp (A × B) → A → is-flat-discrete-crisp B
   is-flat-discrete-crisp-right-factor-product'
@@ -141,6 +146,14 @@ module _
         ( is-disc-product-A-B)
         ( is-equiv-map-distributive-flat-product))
 
+  is-flat-discrete-crisp-right-factor-product :
+    is-flat-discrete-crisp (A × B) → is-inhabited A → is-flat-discrete-crisp B
+  is-flat-discrete-crisp-right-factor-product
+    is-disc-product-A-B =
+    rec-trunc-Prop
+      ( is-flat-discrete-crisp-Prop B)
+      ( is-flat-discrete-crisp-right-factor-product' is-disc-product-A-B)
+
   is-flat-discrete-crisp-left-factor-product' :
     is-flat-discrete-crisp (A × B) → B → is-flat-discrete-crisp A
   is-flat-discrete-crisp-left-factor-product'
@@ -156,6 +169,14 @@ module _
         ( λ where (cons-flat _) → refl)
         ( is-disc-product-A-B)
         ( is-equiv-map-distributive-flat-product))
+
+  is-flat-discrete-crisp-left-factor-product :
+    is-flat-discrete-crisp (A × B) → is-inhabited B → is-flat-discrete-crisp A
+  is-flat-discrete-crisp-left-factor-product
+    is-disc-product-A-B =
+    rec-trunc-Prop
+      ( is-flat-discrete-crisp-Prop A)
+      ( is-flat-discrete-crisp-left-factor-product' is-disc-product-A-B)
 ```
 
 ## References

@@ -28,7 +28,7 @@ a crisp context.
 
 ## Properties
 
-### Flat distributes over dependent function types
+### Flat distributes in one direction over dependent function types
 
 ```agda
 module _

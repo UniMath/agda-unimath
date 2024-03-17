@@ -46,8 +46,9 @@ weak-crisp-based-ind-Id C b _ refl = b
 
 ### Based crisp identification induction
 
+<!-- TODO: this is how the principle is stated in Shu15. It can be proved with `pointwise-sharp` (except for any cohesive universe level) -->
+
 ```agda
--- TODO: this is how the principle is stated in Shu15. It can be proved with `pointwise-sharp` (except for any cohesive universe level)
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ x : A}
   (@♭ C : (@♭ y : A) → @♭ (x ＝ y) → UU l2)
@@ -165,33 +166,4 @@ The following is Corollary 6.2 in {{#cite Shu18}}.
     (@♭ u v : ♭ A) → (u ＝ v) ≃ ♭ (counit-flat u ＝ counit-flat v)
   crisp-flat-extensionality-flat (cons-flat x) (cons-flat y) =
     extensionality-flat (cons-flat x) (cons-flat y)
-```
-
-### Corollary 6.3
-
-While we record the constructions of Corollary 6.3 {{#cite Shu18}} here, we note
-that the construction `crisp-ap cons-flat` is preferred due to its higher
-generality and better computational behaviour.
-
-```agda
-module _
-  {@♭ l : Level} {@♭ A : UU l}
-  where
-
-  eq-cons-flat-crisp-eq :
-    {@♭ x y : A} → @♭ (x ＝ y) → cons-flat x ＝ cons-flat y
-  eq-cons-flat-crisp-eq {x} {y} p =
-    eq-Eq-flat (cons-flat x) (cons-flat y) (cons-flat p)
-
-  compute-refl-eq-cons-flat-crisp-eq :
-    {@♭ x : A} → eq-cons-flat-crisp-eq (refl {x = x}) ＝ refl
-  compute-refl-eq-cons-flat-crisp-eq = refl
-
-  compute-ap-counit-flat-eq-cons-flat-crisp-eq :
-    {@♭ x y : A} (@♭ p : x ＝ y) →
-    ap (counit-flat) (eq-cons-flat-crisp-eq p) ＝ p
-  compute-ap-counit-flat-eq-cons-flat-crisp-eq =
-    crisp-ind-Id
-      ( λ x y p → ap (counit-flat) (eq-cons-flat-crisp-eq p) ＝ p)
-      ( λ _ → refl)
 ```

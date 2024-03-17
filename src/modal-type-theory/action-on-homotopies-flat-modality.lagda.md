@@ -1,9 +1,9 @@
-# The flat modality's action on homotopies
+# The action on homotopies of the flat modality
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.flat-action-on-homotopies where
+module modal-type-theory.action-on-homotopies-flat-modality where
 ```
 
 <details><summary>Imports</summary>
@@ -23,6 +23,7 @@ open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import modal-type-theory.action-on-identifications-crisp-functions
+open import modal-type-theory.action-on-identifications-flat-modality
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 open import modal-type-theory.functoriality-flat-modality
@@ -33,8 +34,10 @@ open import modal-type-theory.functoriality-flat-modality
 ## Idea
 
 Given a crisp [homotopy](foundation-core.homotopies.md) of maps `f ~ g`, then
-there is a homotopy `♭ f ~ ♭ g`. In particular, this construction does not rely
-on [function extensionality](foundation.function-extensionality.md).
+there is a homotopy `♭ f ~ ♭ g` where `♭ f` is the
+[functorial action of the flat modality on maps](modal-type-theory.functoriality-flat-modality.md).
+In particular, this construction does not rely on
+[function extensionality](foundation.function-extensionality.md).
 
 ## Definitions
 
@@ -47,7 +50,7 @@ module _
 
   ap-htpy-flat :
     @♭ f ~ g → ap-dependent-map-flat f ~ ap-dependent-map-flat g
-  ap-htpy-flat H (cons-flat x) = crisp-ap cons-flat (H x)
+  ap-htpy-flat H (cons-flat x) = ap-flat (H x)
 ```
 
 ## Properties
@@ -60,5 +63,5 @@ module _
   where
 
   compute-ap-flat-refl-htpy : ap-htpy-flat (refl-htpy' f) ~ refl-htpy
-  compute-ap-flat-refl-htpy (cons-flat x) = compute-refl-eq-cons-flat-crisp-eq
+  compute-ap-flat-refl-htpy (cons-flat x) = refl
 ```

@@ -68,11 +68,11 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  map-distributive-flat-coproduct : ♭ (A + B) → (♭ A) + (♭ B)
+  map-distributive-flat-coproduct : ♭ (A + B) → ♭ A + ♭ B
   map-distributive-flat-coproduct (cons-flat (inl x)) = inl (cons-flat x)
   map-distributive-flat-coproduct (cons-flat (inr x)) = inr (cons-flat x)
 
-  map-inv-distributive-flat-coproduct : (♭ A) + (♭ B) → ♭ (A + B)
+  map-inv-distributive-flat-coproduct : ♭ A + ♭ B → ♭ (A + B)
   map-inv-distributive-flat-coproduct (inl (cons-flat x)) = cons-flat (inl x)
   map-inv-distributive-flat-coproduct (inr (cons-flat x)) = cons-flat (inr x)
 
@@ -109,11 +109,11 @@ module _
   pr2 is-equiv-map-distributive-flat-coproduct =
     retraction-distributive-flat-coproduct
 
-  distributive-flat-coproduct : ♭ (A + B) ≃ (♭ A) + (♭ B)
+  distributive-flat-coproduct : ♭ (A + B) ≃ ♭ A + ♭ B
   pr1 distributive-flat-coproduct = map-distributive-flat-coproduct
   pr2 distributive-flat-coproduct = is-equiv-map-distributive-flat-coproduct
 
-  inv-distributive-flat-coproduct : (♭ A) + (♭ B) ≃ ♭ (A + B)
+  inv-distributive-flat-coproduct : ♭ A + ♭ B ≃ ♭ (A + B)
   inv-distributive-flat-coproduct = inv-equiv distributive-flat-coproduct
 ```
 
@@ -129,10 +129,7 @@ module _
 
   compute-counit-flat-coproduct :
     counit-flat {A = A + B} ~
-    ( ind-coproduct _
-      ( λ where (cons-flat x) → inl x)
-      ( λ where (cons-flat x) → inr x)) ∘
-    ( map-distributive-flat-coproduct)
+    map-coproduct counit-flat counit-flat ∘ map-distributive-flat-coproduct
   compute-counit-flat-coproduct (cons-flat (inl x)) = refl
   compute-counit-flat-coproduct (cons-flat (inr x)) = refl
 ```
@@ -144,20 +141,21 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  is-flat-discrete-crisp-coproduct :
-    is-flat-discrete-crisp A →
-    is-flat-discrete-crisp B →
-    is-flat-discrete-crisp (A + B)
-  is-flat-discrete-crisp-coproduct is-disc-A is-disc-B =
-    is-equiv-left-map-triangle
-      ( counit-flat)
-      ( map-coproduct counit-flat counit-flat)
-      ( map-distributive-flat-coproduct)
-      ( λ where
-        (cons-flat (inl x)) → refl
-        (cons-flat (inr x)) → refl)
-      ( is-equiv-map-distributive-flat-coproduct)
-      ( is-equiv-map-coproduct is-disc-A is-disc-B)
+  abstract
+    is-flat-discrete-crisp-coproduct :
+      is-flat-discrete-crisp A →
+      is-flat-discrete-crisp B →
+      is-flat-discrete-crisp (A + B)
+    is-flat-discrete-crisp-coproduct is-disc-A is-disc-B =
+      is-equiv-left-map-triangle
+        ( counit-flat)
+        ( map-coproduct counit-flat counit-flat)
+        ( map-distributive-flat-coproduct)
+        ( λ where
+          (cons-flat (inl x)) → refl
+          (cons-flat (inr x)) → refl)
+        ( is-equiv-map-distributive-flat-coproduct)
+        ( is-equiv-map-coproduct is-disc-A is-disc-B)
 ```
 
 ## References

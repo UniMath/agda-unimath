@@ -37,10 +37,10 @@ open import foundation.univalence
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
+open import modal-type-theory.action-on-homotopies-flat-modality
 open import modal-type-theory.action-on-identifications-crisp-functions
 open import modal-type-theory.crisp-function-types
 open import modal-type-theory.crisp-identity-types
-open import modal-type-theory.flat-action-on-homotopies
 open import modal-type-theory.flat-discrete-crisp-types
 open import modal-type-theory.flat-modality
 open import modal-type-theory.functoriality-flat-modality
