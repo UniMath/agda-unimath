@@ -187,7 +187,7 @@ module _
   pr2 (pr2 sharp-higher-modality) = is-higher-modality-sharp
 ```
 
-### Iterated crisp induction for the sharp codiscrete types
+### Iterated crisp induction for sharp codiscrete types
 
 ```agda
 module _

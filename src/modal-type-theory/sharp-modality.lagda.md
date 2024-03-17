@@ -31,6 +31,8 @@ The {{#concept "sharp modality" Agda=♯}} `♯` is an axiomatized
 we postulate as a right adjoint to the
 [flat modality](modal-type-theory.flat-modality.md).
 
+<!-- TODO update the prose below -->
+
 In this file, we only postulate that `♯` is a
 [modal operator](orthogonal-factorization-systems.modal-operators.md) that has a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
@@ -41,7 +43,7 @@ appropriate closure properties. In
 [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md), we
 postulate that it has the appropriate relation to the flat modality, making it a
 lex modality. Please note that there is some redundancy between the postulated
-axioms, and they may be subject to change in the future.
+axioms, and they are likely to change in the future.
 
 ## Postulates
 
