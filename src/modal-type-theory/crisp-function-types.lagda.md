@@ -37,9 +37,11 @@ We say a [function type](foundation-core.function-types.md) is
 {{#concept "crisp" Disambigiation="function type"}} if it is formed in a crisp
 context.
 
+<!-- TODO explain crisp function vs crisply defined function (nonstandard terminology, find better name) -->
+
 ## Properties
 
-### Flat distributes over dependent function types
+### Flat distributes in one direction over dependent function types
 
 ```agda
 module _
@@ -54,7 +56,7 @@ module _
     map-distributive-flat-Π f (cons-flat x)
 ```
 
-### Postcomposition by the counit induces an equivalence `♭ (♭ B → ♭ A) ≃ ♭ (♭ B → A)`
+### Postcomposition by the counit induces an equivalence `♭ (♭ A → ♭ B) ≃ ♭ (♭ A → B)`
 
 This is Theorem 6.14 in {{#cite Shu18}}.
 
@@ -63,20 +65,20 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  map-inv-ap-map-flat-postcomp-counit-flat : ♭ (♭ B → A) → ♭ (♭ B → ♭ A)
+  map-inv-ap-map-flat-postcomp-counit-flat : ♭ (♭ A → B) → ♭ (♭ A → ♭ B)
   map-inv-ap-map-flat-postcomp-counit-flat (cons-flat f) =
     cons-flat (λ where (cons-flat y) → cons-flat (f (cons-flat y)))
 
   is-section-map-inv-ap-map-flat-postcomp-counit-flat :
     is-section
-      ( ap-map-flat (postcomp (♭ B) counit-flat))
+      ( ap-map-flat (postcomp (♭ A) counit-flat))
       ( map-inv-ap-map-flat-postcomp-counit-flat)
   is-section-map-inv-ap-map-flat-postcomp-counit-flat (cons-flat f) =
     ap-flat (eq-htpy (λ where (cons-flat _) → refl))
 
   is-retraction-map-inv-ap-map-flat-postcomp-counit-flat :
     is-retraction
-      ( ap-map-flat (postcomp (♭ B) counit-flat))
+      ( ap-map-flat (postcomp (♭ A) counit-flat))
       ( map-inv-ap-map-flat-postcomp-counit-flat)
   is-retraction-map-inv-ap-map-flat-postcomp-counit-flat (cons-flat f) =
     ap-flat
@@ -85,14 +87,14 @@ module _
           (cons-flat x) → is-crisp-retraction-cons-flat (f (cons-flat x))))
 
   is-equiv-ap-map-flat-postcomp-counit-flat :
-    is-equiv (ap-map-flat (postcomp (♭ B) (counit-flat {A = A})))
+    is-equiv (ap-map-flat (postcomp (♭ A) (counit-flat {A = B})))
   is-equiv-ap-map-flat-postcomp-counit-flat =
     is-equiv-is-invertible
       ( map-inv-ap-map-flat-postcomp-counit-flat)
       ( is-section-map-inv-ap-map-flat-postcomp-counit-flat)
       ( is-retraction-map-inv-ap-map-flat-postcomp-counit-flat)
 
-  equiv-ap-map-flat-postcomp-counit-flat : ♭ (♭ B → ♭ A) ≃ ♭ (♭ B → A)
+  equiv-ap-map-flat-postcomp-counit-flat : ♭ (♭ A → ♭ B) ≃ ♭ (♭ A → B)
   pr1 equiv-ap-map-flat-postcomp-counit-flat =
     ap-map-flat (postcomp (♭ B) counit-flat)
   pr2 equiv-ap-map-flat-postcomp-counit-flat =
