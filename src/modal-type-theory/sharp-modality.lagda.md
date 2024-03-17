@@ -375,7 +375,8 @@ compute-rec-subuniverse-sharp =
 ### Sharp's action on maps
 
 ```agda
-action-sharp-map : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
+action-sharp-map :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
 action-sharp-map f = rec-sharp (unit-sharp ∘ f)
 ```
 
