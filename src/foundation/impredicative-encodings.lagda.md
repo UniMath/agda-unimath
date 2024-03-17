@@ -148,19 +148,18 @@ module _
 ### The impredicative encoding of the empty type
 
 ```agda
-impredicative-empty-Prop : (l : Level) → Prop (lsuc l)
-impredicative-empty-Prop l = ∀' (Prop l) (λ P → P)
+impredicative-empty-Prop : Prop (lsuc lzero)
+impredicative-empty-Prop = ∀' (Prop lzero) (λ P → P)
 
-type-impredicative-empty-Prop : (l : Level) → UU (lsuc l)
-type-impredicative-empty-Prop l = type-Prop (impredicative-empty-Prop l)
+type-impredicative-empty-Prop : UU (lsuc lzero)
+type-impredicative-empty-Prop = type-Prop impredicative-empty-Prop
 
 is-empty-impredicative-empty-Prop :
-  {l : Level} → is-empty (type-impredicative-empty-Prop l)
-is-empty-impredicative-empty-Prop {l} e =
-  is-empty-raise-empty (e (raise-empty-Prop l))
+  is-empty type-impredicative-empty-Prop
+is-empty-impredicative-empty-Prop e = e empty-Prop
 
 equiv-impredicative-empty-Prop :
-  {l : Level} → empty ≃ type-impredicative-empty-Prop l
+  empty ≃ type-impredicative-empty-Prop
 equiv-impredicative-empty-Prop =
   equiv-is-empty id is-empty-impredicative-empty-Prop
 ```
