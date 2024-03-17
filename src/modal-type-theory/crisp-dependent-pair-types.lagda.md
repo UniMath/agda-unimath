@@ -53,19 +53,19 @@ module _
   where
 
   map-distributive-flat-Σ : ♭ (Σ A B) → Σ-♭ A (λ x → B x)
-  pr1 (map-distributive-flat-Σ (cons-flat (x , y))) = cons-flat x
-  pr2 (map-distributive-flat-Σ (cons-flat (x , y))) = cons-flat y
+  pr1 (map-distributive-flat-Σ (intro-flat (x , y))) = intro-flat x
+  pr2 (map-distributive-flat-Σ (intro-flat (x , y))) = intro-flat y
 
   map-inv-distributive-flat-Σ : Σ-♭ A (λ x → B x) → ♭ (Σ A B)
-  map-inv-distributive-flat-Σ (cons-flat x , cons-flat y) = cons-flat (x , y)
+  map-inv-distributive-flat-Σ (intro-flat x , intro-flat y) = intro-flat (x , y)
 
   is-section-map-distributive-flat-Σ :
     is-section map-inv-distributive-flat-Σ map-distributive-flat-Σ
-  is-section-map-distributive-flat-Σ (cons-flat _) = refl
+  is-section-map-distributive-flat-Σ (intro-flat _) = refl
 
   is-retraction-map-distributive-flat-Σ :
     is-retraction map-inv-distributive-flat-Σ map-distributive-flat-Σ
-  is-retraction-map-distributive-flat-Σ (cons-flat _ , cons-flat _) = refl
+  is-retraction-map-distributive-flat-Σ (intro-flat _ , intro-flat _) = refl
 
   section-distributive-flat-Σ : section map-distributive-flat-Σ
   pr1 section-distributive-flat-Σ = map-inv-distributive-flat-Σ
@@ -99,9 +99,9 @@ module _
 
   compute-counit-flat-Σ :
     counit-flat {A = Σ A B} ~
-    ( map-Σ B counit-flat (λ where (cons-flat _) → counit-flat)) ∘
+    ( map-Σ B counit-flat (λ where (intro-flat _) → counit-flat)) ∘
     ( map-distributive-flat-Σ)
-  compute-counit-flat-Σ (cons-flat _) = refl
+  compute-counit-flat-Σ (intro-flat _) = refl
 ```
 
 ### A crisp dependent pair type over a flat discrete type is flat discrete if and only if the family is flat discrete
@@ -117,11 +117,11 @@ module _
   is-flat-discrete-crisp-Σ is-disc-B =
     is-equiv-left-map-triangle
       ( counit-flat)
-      ( map-Σ B counit-flat (λ where (cons-flat _) → counit-flat))
+      ( map-Σ B counit-flat (λ where (intro-flat _) → counit-flat))
       ( map-distributive-flat-Σ)
-      ( λ where (cons-flat _) → refl)
+      ( λ where (intro-flat _) → refl)
       ( is-equiv-map-distributive-flat-Σ)
-      ( is-equiv-map-Σ B is-disc-A (λ where (cons-flat x) → is-disc-B x))
+      ( is-equiv-map-Σ B is-disc-A (λ where (intro-flat x) → is-disc-B x))
 
   is-flat-discrete-crisp-family-is-flat-discrete-crisp-Σ :
     is-flat-discrete-crisp (Σ A B) → is-flat-discrete-crisp-family (λ x → B x)
@@ -129,16 +129,16 @@ module _
     is-fiberwise-equiv-is-equiv-map-Σ
       ( B)
       ( counit-flat)
-      ( λ where (cons-flat _) → counit-flat)
+      ( λ where (intro-flat _) → counit-flat)
       ( is-disc-A)
       ( is-equiv-right-map-triangle
         ( counit-flat)
         ( _)
         ( map-distributive-flat-Σ)
-        ( λ where (cons-flat _) → refl)
+        ( λ where (intro-flat _) → refl)
         ( is-disc-Σ-B)
         ( is-equiv-map-distributive-flat-Σ))
-      ( cons-flat x)
+      ( intro-flat x)
 ```
 
 ## References

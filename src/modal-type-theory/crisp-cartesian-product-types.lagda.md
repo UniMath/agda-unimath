@@ -48,22 +48,23 @@ module _
   where
 
   map-distributive-flat-product : ♭ (A × B) → ♭ A × ♭ B
-  pr1 (map-distributive-flat-product (cons-flat (x , y))) = cons-flat x
-  pr2 (map-distributive-flat-product (cons-flat (x , y))) = cons-flat y
+  pr1 (map-distributive-flat-product (intro-flat (x , y))) = intro-flat x
+  pr2 (map-distributive-flat-product (intro-flat (x , y))) = intro-flat y
 
   map-inv-distributive-flat-product : ♭ A × ♭ B → ♭ (A × B)
-  map-inv-distributive-flat-product (cons-flat x , cons-flat y) =
-    cons-flat (x , y)
+  map-inv-distributive-flat-product (intro-flat x , intro-flat y) =
+    intro-flat (x , y)
 
   is-section-map-distributive-flat-product :
     is-section map-inv-distributive-flat-product map-distributive-flat-product
-  is-section-map-distributive-flat-product (cons-flat x) = refl
+  is-section-map-distributive-flat-product (intro-flat x) = refl
 
   is-retraction-map-distributive-flat-product :
     is-retraction
       ( map-inv-distributive-flat-product)
       ( map-distributive-flat-product)
-  is-retraction-map-distributive-flat-product (cons-flat x , cons-flat y) = refl
+  is-retraction-map-distributive-flat-product (intro-flat x , intro-flat y) =
+    refl
 
   section-distributive-flat-product : section map-distributive-flat-product
   pr1 section-distributive-flat-product = map-inv-distributive-flat-product
@@ -103,7 +104,7 @@ module _
   compute-counit-flat-product :
     counit-flat {A = A × B} ~
     ( map-product counit-flat counit-flat ∘ map-distributive-flat-product)
-  compute-counit-flat-product (cons-flat x) = refl
+  compute-counit-flat-product (intro-flat x) = refl
 ```
 
 ### Flat discrete crisp types are closed under cartesian products
@@ -122,7 +123,7 @@ module _
       ( counit-flat)
       ( map-product counit-flat counit-flat)
       ( map-distributive-flat-product)
-      ( λ where (cons-flat _) → refl)
+      ( λ where (intro-flat _) → refl)
       ( is-equiv-map-distributive-flat-product)
       ( is-equiv-map-product counit-flat counit-flat is-disc-A is-disc-B)
 ```
@@ -142,7 +143,7 @@ module _
         counit-flat
         ( map-product counit-flat counit-flat)
         ( map-distributive-flat-product)
-        ( λ where (cons-flat _) → refl)
+        ( λ where (intro-flat _) → refl)
         ( is-disc-product-A-B)
         ( is-equiv-map-distributive-flat-product))
 
@@ -166,7 +167,7 @@ module _
         counit-flat
         ( map-product counit-flat counit-flat)
         ( map-distributive-flat-product)
-        ( λ where (cons-flat _) → refl)
+        ( λ where (intro-flat _) → refl)
         ( is-disc-product-A-B)
         ( is-equiv-map-distributive-flat-product))
 

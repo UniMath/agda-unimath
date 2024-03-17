@@ -50,7 +50,7 @@ module _
   ap-crisp-htpy-flat :
     @♭ ((@♭ x : A) → f x ＝ g x) →
     ap-crisp-dependent-map-flat f ~ ap-crisp-dependent-map-flat g
-  ap-crisp-htpy-flat H (cons-flat x) = ap-flat (H x)
+  ap-crisp-htpy-flat H (intro-flat x) = ap-flat (H x)
 ```
 
 ### The flat modality's action on homotopies
@@ -76,5 +76,5 @@ module _
 
   compute-ap-crisp-flat-refl-htpy :
     ap-crisp-htpy-flat (λ x → (refl {x = f x})) ~ refl-htpy
-  compute-ap-crisp-flat-refl-htpy (cons-flat x) = refl
+  compute-ap-crisp-flat-refl-htpy (intro-flat x) = refl
 ```

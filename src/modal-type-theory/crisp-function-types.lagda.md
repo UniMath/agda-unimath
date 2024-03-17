@@ -52,8 +52,8 @@ module _
   map-distributive-flat-crisp-function-types = map-distributive-flat-crisp-Π
 
   map-distributive-flat-function-types : ♭ (A → B) → (♭ A → ♭ B)
-  map-distributive-flat-function-types f (cons-flat x) =
-    map-distributive-flat-Π f (cons-flat x)
+  map-distributive-flat-function-types f (intro-flat x) =
+    map-distributive-flat-Π f (intro-flat x)
 ```
 
 ### Postcomposition by the counit induces an equivalence `♭ (♭ A → ♭ B) ≃ ♭ (♭ A → B)`
@@ -66,25 +66,25 @@ module _
   where
 
   map-inv-ap-map-flat-postcomp-counit-flat : ♭ (♭ A → B) → ♭ (♭ A → ♭ B)
-  map-inv-ap-map-flat-postcomp-counit-flat (cons-flat f) =
-    cons-flat (λ where (cons-flat y) → cons-flat (f (cons-flat y)))
+  map-inv-ap-map-flat-postcomp-counit-flat (intro-flat f) =
+    intro-flat (λ where (intro-flat y) → intro-flat (f (intro-flat y)))
 
   is-section-map-inv-ap-map-flat-postcomp-counit-flat :
     is-section
       ( ap-map-flat (postcomp (♭ A) counit-flat))
       ( map-inv-ap-map-flat-postcomp-counit-flat)
-  is-section-map-inv-ap-map-flat-postcomp-counit-flat (cons-flat f) =
-    ap-flat (eq-htpy (λ where (cons-flat _) → refl))
+  is-section-map-inv-ap-map-flat-postcomp-counit-flat (intro-flat f) =
+    ap-flat (eq-htpy (λ where (intro-flat _) → refl))
 
   is-retraction-map-inv-ap-map-flat-postcomp-counit-flat :
     is-retraction
       ( ap-map-flat (postcomp (♭ A) counit-flat))
       ( map-inv-ap-map-flat-postcomp-counit-flat)
-  is-retraction-map-inv-ap-map-flat-postcomp-counit-flat (cons-flat f) =
+  is-retraction-map-inv-ap-map-flat-postcomp-counit-flat (intro-flat f) =
     ap-flat
       ( eq-htpy
         ( λ where
-          (cons-flat x) → is-crisp-retraction-cons-flat (f (cons-flat x))))
+          (intro-flat x) → is-crisp-retraction-intro-flat (f (intro-flat x))))
 
   is-equiv-ap-map-flat-postcomp-counit-flat :
     is-equiv (ap-map-flat (postcomp (♭ A) (counit-flat {A = B})))

@@ -32,14 +32,14 @@ adjoin to our type theory by use of _crisp type theory_.
 
 ```agda
 data ♭ {@♭ l : Level} (@♭ A : UU l) : UU l where
-  cons-flat : @♭ A → ♭ A
+  intro-flat : @♭ A → ♭ A
 ```
 
 ### The flat counit
 
 ```agda
 counit-flat : {@♭ l : Level} {@♭ A : UU l} → ♭ A → A
-counit-flat (cons-flat x) = x
+counit-flat (intro-flat x) = x
 ```
 
 ### Flat dependent elimination
@@ -47,9 +47,9 @@ counit-flat (cons-flat x) = x
 ```agda
 ind-flat :
   {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level} (C : ♭ A → UU l2) →
-  ((@♭ u : A) → C (cons-flat u)) →
+  ((@♭ u : A) → C (intro-flat u)) →
   (x : ♭ A) → C x
-ind-flat C f (cons-flat x) = f x
+ind-flat C f (intro-flat x) = f x
 ```
 
 ### Flat elimination
@@ -75,7 +75,7 @@ crispen f x = f x
 ```agda
 family-over-flat :
   {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ P : @♭ A → UU l2) → ♭ A → UU l2
-family-over-flat P (cons-flat x) = P x
+family-over-flat P (intro-flat x) = P x
 ```
 
 ## Properties
@@ -87,11 +87,11 @@ module _
   {@♭ l : Level} {@♭ A : UU l}
   where
 
-  is-crisp-section-cons-flat : (@♭ x : A) → counit-flat (cons-flat x) ＝ x
-  is-crisp-section-cons-flat _ = refl
+  is-crisp-section-intro-flat : (@♭ x : A) → counit-flat (intro-flat x) ＝ x
+  is-crisp-section-intro-flat _ = refl
 
-  is-crisp-retraction-cons-flat : (@♭ x : ♭ A) → cons-flat (counit-flat x) ＝ x
-  is-crisp-retraction-cons-flat (cons-flat _) = refl
+  is-crisp-retraction-intro-flat : (@♭ x : ♭ A) → intro-flat (counit-flat x) ＝ x
+  is-crisp-retraction-intro-flat (intro-flat _) = refl
 ```
 
 #### The equivalence `♭ A ≃ ♭ (♭ A)`
@@ -102,13 +102,13 @@ module _
   where
 
   diagonal-flat : ♭ A → ♭ (♭ A)
-  diagonal-flat (cons-flat x) = cons-flat (cons-flat x)
+  diagonal-flat (intro-flat x) = intro-flat (intro-flat x)
 
   is-retraction-diagonal-flat : is-retraction counit-flat diagonal-flat
-  is-retraction-diagonal-flat (cons-flat (cons-flat _)) = refl
+  is-retraction-diagonal-flat (intro-flat (intro-flat _)) = refl
 
   is-section-diagonal-flat : is-section counit-flat diagonal-flat
-  is-section-diagonal-flat (cons-flat _) = refl
+  is-section-diagonal-flat (intro-flat _) = refl
 
   section-diagonal-flat : section diagonal-flat
   pr1 section-diagonal-flat = counit-flat

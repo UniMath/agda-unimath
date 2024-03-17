@@ -46,7 +46,7 @@ module _
   where
 
   action-flat-crisp-family : @♭ (@♭ A → UU l2) → ♭ A → UU l2
-  action-flat-crisp-family B (cons-flat x) = ♭ (B x)
+  action-flat-crisp-family B (intro-flat x) = ♭ (B x)
 
   action-flat-family : @♭ (A → UU l2) → ♭ A → UU l2
   action-flat-family B = action-flat-crisp-family (crispen B)
@@ -63,7 +63,7 @@ module _
     {@♭ B : @♭ A → UU l2} →
     @♭ ((@♭ x : A) → B x) →
     ((x : ♭ A) → action-flat-crisp-family B x)
-  ap-crisp-dependent-map-flat f (cons-flat x) = cons-flat (f x)
+  ap-crisp-dependent-map-flat f (intro-flat x) = intro-flat (f x)
 
   ap-dependent-map-flat :
     {@♭ B : A → UU l2} →
@@ -76,8 +76,8 @@ module _
   where
 
   ap-crisp-map-flat : @♭ (@♭ A → B) → (♭ A → ♭ B)
-  ap-crisp-map-flat f (cons-flat x) =
-    ap-crisp-dependent-map-flat f (cons-flat x)
+  ap-crisp-map-flat f (intro-flat x) =
+    ap-crisp-dependent-map-flat f (intro-flat x)
 
   ap-map-flat : @♭ (A → B) → (♭ A → ♭ B)
   ap-map-flat f = ap-crisp-map-flat (crispen f)
@@ -91,7 +91,7 @@ module _
   where
 
   coap-map-flat : (♭ A → ♭ B) → (@♭ A → B)
-  coap-map-flat f x = counit-flat (f (cons-flat x))
+  coap-map-flat f x = counit-flat (f (intro-flat x))
 
   is-crisp-retraction-coap-map-flat :
     (@♭ f : @♭ A → B) → coap-map-flat (ap-crisp-map-flat f) ＝ f
@@ -122,7 +122,7 @@ module _
 
   naturality-counit-flat :
     (@♭ f : A → B) → counit-flat ∘ ap-map-flat f ~ f ∘ counit-flat
-  naturality-counit-flat f (cons-flat x) = refl
+  naturality-counit-flat f (intro-flat x) = refl
 ```
 
 ### Functoriality of the action on maps
@@ -133,7 +133,7 @@ module _
   where
 
   preserves-id-ap-map-flat : ap-map-flat (id {A = A}) ~ id
-  preserves-id-ap-map-flat (cons-flat x) = refl
+  preserves-id-ap-map-flat (intro-flat x) = refl
 
 module _
   {@♭ l1 l2 l3 : Level} {@♭ A : UU l1} {@♭ B : UU l2} {@♭ C : UU l3}
@@ -142,7 +142,7 @@ module _
   preserves-comp-ap-map-flat :
     (@♭ f : A → B) (@♭ g : B → C) →
     ap-map-flat (g ∘ f) ~ ap-map-flat g ∘ ap-map-flat f
-  preserves-comp-ap-map-flat f g (cons-flat x) = refl
+  preserves-comp-ap-map-flat f g (intro-flat x) = refl
 ```
 
 ### The functorial action preserves equivalences
@@ -154,11 +154,11 @@ module _
 
   ap-section-flat : @♭ section f → section (ap-map-flat f)
   pr1 (ap-section-flat (g , H)) = ap-map-flat g
-  pr2 (ap-section-flat (g , H)) (cons-flat x) = ap-flat (H x)
+  pr2 (ap-section-flat (g , H)) (intro-flat x) = ap-flat (H x)
 
   ap-retraction-flat : @♭ retraction f → retraction (ap-map-flat f)
   pr1 (ap-retraction-flat (g , H)) = ap-map-flat g
-  pr2 (ap-retraction-flat (g , H)) (cons-flat x) = ap-flat (H x)
+  pr2 (ap-retraction-flat (g , H)) (intro-flat x) = ap-flat (H x)
 
   is-equiv-ap-is-equiv-map-flat : @♭ is-equiv f → is-equiv (ap-map-flat f)
   is-equiv-ap-is-equiv-map-flat (s , r) =

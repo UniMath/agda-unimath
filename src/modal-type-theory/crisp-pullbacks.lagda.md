@@ -60,14 +60,15 @@ module _
   map-distributive-flat-standard-pullback :
     ♭ (standard-pullback f g) →
     standard-pullback (ap-map-flat f) (ap-map-flat g)
-  map-distributive-flat-standard-pullback (cons-flat (x , y , p)) =
-    ( cons-flat x , cons-flat y , ap-flat p)
+  map-distributive-flat-standard-pullback (intro-flat (x , y , p)) =
+    ( intro-flat x , intro-flat y , ap-flat p)
 
   map-inv-distributive-flat-standard-pullback :
     @♭ standard-pullback (ap-map-flat f) (ap-map-flat g) →
     ♭ (standard-pullback f g)
-  map-inv-distributive-flat-standard-pullback (cons-flat x , cons-flat y , p) =
-    cons-flat (x , y , ap counit-flat p)
+  map-inv-distributive-flat-standard-pullback
+    (intro-flat x , intro-flat y , p) =
+    intro-flat (x , y , ap counit-flat p)
 
   is-crisp-section-map-distributive-flat-standard-pullback :
     (@♭ x : ♭ (standard-pullback f g)) →
@@ -75,9 +76,9 @@ module _
       ( map-distributive-flat-standard-pullback x) ＝
     ( x)
   is-crisp-section-map-distributive-flat-standard-pullback
-    ( cons-flat (x , y , p)) =
+    ( intro-flat (x , y , p)) =
     crisp-ap
-      ( cons-flat)
+      ( intro-flat)
       ( eq-pair-eq-fiber
         ( eq-pair-eq-fiber
           ( is-crisp-section-ap-flat p)))
@@ -88,12 +89,12 @@ module _
       ( map-inv-distributive-flat-standard-pullback x) ＝
     ( x)
   is-crisp-retraction-map-distributive-flat-standard-pullback
-    ( cons-flat x , cons-flat y , p) =
+    ( intro-flat x , intro-flat y , p) =
       eq-pair-eq-fiber
         ( eq-pair-eq-fiber
           ( crisp-based-ind-Id
             ( λ where
-              (cons-flat y) p → crisp-ap cons-flat (ap counit-flat p) ＝ p)
+              (intro-flat y) p → crisp-ap intro-flat (ap counit-flat p) ＝ p)
             ( refl)
             ( p)))
 ```
@@ -127,7 +128,7 @@ module _
       ( counit-flat-hom-cospan-diagram)) ∘
     ( map-distributive-flat-standard-pullback f g) ~
     counit-flat {A = standard-pullback f g}
-  compute-counit-flat-standard-pullback (cons-flat (x , y , p)) =
+  compute-counit-flat-standard-pullback (intro-flat (x , y , p)) =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
         ( right-unit ∙ is-crisp-section-ap-flat p))

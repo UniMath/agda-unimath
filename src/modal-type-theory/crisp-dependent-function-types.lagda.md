@@ -47,7 +47,7 @@ module _
   where
 
   map-distributive-flat-crisp-Π : ♭ ((@♭ x : A) → B x) → ((@♭ x : A) → ♭ (B x))
-  map-distributive-flat-crisp-Π (cons-flat f) x = cons-flat (f x)
+  map-distributive-flat-crisp-Π (intro-flat f) x = intro-flat (f x)
 
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
@@ -55,7 +55,7 @@ module _
 
   map-distributive-flat-Π :
     ♭ ((x : A) → B x) → ((x : ♭ A) → action-flat-family B x)
-  map-distributive-flat-Π (cons-flat f) (cons-flat x) = cons-flat (f x)
+  map-distributive-flat-Π (intro-flat f) (intro-flat x) = intro-flat (f x)
 ```
 
 ### Postcomposition by the counit induces an equivalence under the flat modality on dependent function types
@@ -70,32 +70,32 @@ module _
   map-ap-dependent-map-flat-postcomp-counit-flat :
     ♭ ((u : ♭ A) → action-flat-crisp-family B u) →
     ♭ ((u : ♭ A) → family-over-flat B u)
-  map-ap-dependent-map-flat-postcomp-counit-flat (cons-flat f) =
-    cons-flat (λ where (cons-flat x) → counit-flat (f (cons-flat x)))
+  map-ap-dependent-map-flat-postcomp-counit-flat (intro-flat f) =
+    intro-flat (λ where (intro-flat x) → counit-flat (f (intro-flat x)))
 
   map-inv-ap-dependent-map-flat-postcomp-counit-flat :
     ♭ ((u : ♭ A) → family-over-flat B u) →
     ♭ ((u : ♭ A) → action-flat-crisp-family B u)
-  map-inv-ap-dependent-map-flat-postcomp-counit-flat (cons-flat f) =
-    cons-flat (λ where (cons-flat y) → cons-flat (f (cons-flat y)))
+  map-inv-ap-dependent-map-flat-postcomp-counit-flat (intro-flat f) =
+    intro-flat (λ where (intro-flat y) → intro-flat (f (intro-flat y)))
 
   is-section-map-inv-ap-dependent-map-flat-postcomp-counit-flat :
     is-section
       ( map-ap-dependent-map-flat-postcomp-counit-flat)
       ( map-inv-ap-dependent-map-flat-postcomp-counit-flat)
-  is-section-map-inv-ap-dependent-map-flat-postcomp-counit-flat (cons-flat f) =
-    ap-flat (eq-htpy (λ where (cons-flat x) → refl))
+  is-section-map-inv-ap-dependent-map-flat-postcomp-counit-flat (intro-flat f) =
+    ap-flat (eq-htpy (λ where (intro-flat x) → refl))
 
   is-retraction-map-inv-ap-dependent-map-flat-postcomp-counit-flat :
     is-retraction
       ( map-ap-dependent-map-flat-postcomp-counit-flat)
       ( map-inv-ap-dependent-map-flat-postcomp-counit-flat)
   is-retraction-map-inv-ap-dependent-map-flat-postcomp-counit-flat
-    (cons-flat f) =
+    (intro-flat f) =
     ap-flat
       ( eq-htpy
         ( λ where
-          (cons-flat x) → is-crisp-retraction-cons-flat (f (cons-flat x))))
+          (intro-flat x) → is-crisp-retraction-intro-flat (f (intro-flat x))))
 
   is-equiv-ap-map-flat-postcomp-counit-flat :
     is-equiv map-ap-dependent-map-flat-postcomp-counit-flat

@@ -71,7 +71,7 @@ is an [equivalence](foundation-core.equivalences.md).
 ```agda
 coev-flat :
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2} → ♭ (A → ♭ B) → ♭ (A → B)
-coev-flat {A = A} (cons-flat f) = cons-flat (postcomp A counit-flat f)
+coev-flat {A = A} (intro-flat f) = intro-flat (postcomp A counit-flat f)
 
 universal-property-flat-discrete-crisp-type :
   {@♭ l1 : Level} (@♭ A : UU l1) → UUω
@@ -102,9 +102,9 @@ module _
           ( equiv-ap-map-flat-postcomp-counit-flat) ∘e
           ( ap-equiv-flat (equiv-precomp (counit-flat , is-disc-A) (♭ B))))
         ( λ where
-          (cons-flat f) →
+          (intro-flat f) →
             crisp-ap
-              ( cons-flat)
+              ( intro-flat)
               ( eq-htpy
                 ( λ x →
                   ap

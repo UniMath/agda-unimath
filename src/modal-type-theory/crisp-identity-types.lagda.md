@@ -85,16 +85,16 @@ module _
   where
 
   Eq-flat : ♭ A → ♭ A → UU l
-  Eq-flat (cons-flat x) (cons-flat y) = ♭ (x ＝ y)
+  Eq-flat (intro-flat x) (intro-flat y) = ♭ (x ＝ y)
 
   refl-Eq-flat : (u : ♭ A) → Eq-flat u u
-  refl-Eq-flat (cons-flat x) = cons-flat refl
+  refl-Eq-flat (intro-flat x) = intro-flat refl
 
   Eq-eq-flat : (u v : ♭ A) → u ＝ v → Eq-flat u v
   Eq-eq-flat u .u refl = refl-Eq-flat u
 
   eq-Eq-flat : (u v : ♭ A) → Eq-flat u v → u ＝ v
-  eq-Eq-flat (cons-flat x) (cons-flat .x) (cons-flat refl) = refl
+  eq-Eq-flat (intro-flat x) (intro-flat .x) (intro-flat refl) = refl
 ```
 
 The retraction part is easy:
@@ -102,7 +102,7 @@ The retraction part is easy:
 ```agda
   is-retraction-eq-Eq-flat :
     (u v : ♭ A) → is-retraction (Eq-eq-flat u v) (eq-Eq-flat u v)
-  is-retraction-eq-Eq-flat (cons-flat x) (cons-flat .x) refl = refl
+  is-retraction-eq-Eq-flat (intro-flat x) (intro-flat .x) refl = refl
 
   retraction-Eq-eq-flat : (u v : ♭ A) → retraction (Eq-eq-flat u v)
   pr1 (retraction-Eq-eq-flat u v) = eq-Eq-flat u v
@@ -126,14 +126,14 @@ induction principle, which we have only postulated so far.
 ```agda
   is-section-eq-Eq-flat :
     (u v : ♭ A) → is-section (Eq-eq-flat u v) (eq-Eq-flat u v)
-  is-section-eq-Eq-flat (cons-flat x) (cons-flat y) (cons-flat p) =
+  is-section-eq-Eq-flat (intro-flat x) (intro-flat y) (intro-flat p) =
     crisp-ind-Id
       ( λ x y p →
         ( Eq-eq-flat
-          ( cons-flat x)
-          ( cons-flat y)
-          ( eq-Eq-flat (cons-flat x) (cons-flat y) (cons-flat p))) ＝
-        ( cons-flat p))
+          ( intro-flat x)
+          ( intro-flat y)
+          ( eq-Eq-flat (intro-flat x) (intro-flat y) (intro-flat p))) ＝
+        ( intro-flat p))
       ( λ _ → refl)
       ( p)
 ```
@@ -155,9 +155,9 @@ The following is Theorem 6.1 in {{#cite Shu18}}.
 
 ```agda
   crisp-extensionality-flat :
-    (@♭ x y : A) → (cons-flat x ＝ cons-flat y) ≃ ♭ (x ＝ y)
+    (@♭ x y : A) → (intro-flat x ＝ intro-flat y) ≃ ♭ (x ＝ y)
   crisp-extensionality-flat x y =
-    extensionality-flat (cons-flat x) (cons-flat y)
+    extensionality-flat (intro-flat x) (intro-flat y)
 ```
 
 The following is Corollary 6.2 in {{#cite Shu18}}.
@@ -165,8 +165,8 @@ The following is Corollary 6.2 in {{#cite Shu18}}.
 ```agda
   crisp-flat-extensionality-flat :
     (@♭ u v : ♭ A) → (u ＝ v) ≃ ♭ (counit-flat u ＝ counit-flat v)
-  crisp-flat-extensionality-flat (cons-flat x) (cons-flat y) =
-    extensionality-flat (cons-flat x) (cons-flat y)
+  crisp-flat-extensionality-flat (intro-flat x) (intro-flat y) =
+    extensionality-flat (intro-flat x) (intro-flat y)
 ```
 
 ## See also

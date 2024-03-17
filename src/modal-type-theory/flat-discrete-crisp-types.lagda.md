@@ -104,8 +104,8 @@ module _
   where
 
   htpy-retraction-counit-flat-has-crisp-section : s ∘ counit-flat ~ id
-  htpy-retraction-counit-flat-has-crisp-section (cons-flat x) =
-    inv (is-crisp-retraction-cons-flat (s x)) ∙ ap-htpy-flat H (cons-flat x)
+  htpy-retraction-counit-flat-has-crisp-section (intro-flat x) =
+    inv (is-crisp-retraction-intro-flat (s x)) ∙ ap-htpy-flat H (intro-flat x)
 
   retraction-counit-flat-has-crisp-section : retraction (counit-flat {A = A})
   retraction-counit-flat-has-crisp-section =
@@ -134,14 +134,14 @@ module _
   is-flat-discrete-crisp-equiv e bB =
     is-equiv-htpy-equiv'
       ( e ∘e (counit-flat , bB) ∘e ap-equiv-flat (inv-equiv e))
-      ( λ where (cons-flat x) → is-section-map-inv-equiv e x)
+      ( λ where (intro-flat x) → is-section-map-inv-equiv e x)
 
   is-flat-discrete-crisp-equiv' :
     @♭ A ≃ B → is-flat-discrete-crisp B → is-flat-discrete-crisp A
   is-flat-discrete-crisp-equiv' e bB =
     is-equiv-htpy-equiv'
       ( inv-equiv e ∘e (counit-flat , bB) ∘e ap-equiv-flat e)
-      ( λ where (cons-flat x) → is-retraction-map-inv-equiv e x)
+      ( λ where (intro-flat x) → is-retraction-map-inv-equiv e x)
 ```
 
 ### Types `♭ A` are flat discrete
@@ -167,7 +167,7 @@ Given crisp elements `x` and `y` of `A` We have a
                                   ∧   |
                      Eq-eq-flat /~    |
                               /       |
-  (cons-flat x ＝ cons-flat y)        | counit-flat
+  (intro-flat x ＝ intro-flat y)        | counit-flat
                               \       |
                ap (counit-flat) \     |
                                   ∨   ∨
@@ -185,19 +185,19 @@ In particular, if `A` is crisply flat discrete then its identity types are too.
 module _
   {@♭ l : Level} {@♭ A : UU l}
   ( is-crisp-emb-counit-flat-A :
-    (@♭ x y : A) → is-equiv (ap (counit-flat) {cons-flat x} {cons-flat y}))
+    (@♭ x y : A) → is-equiv (ap (counit-flat) {intro-flat x} {intro-flat y}))
   {@♭ x y : A}
   where
 
   is-flat-discrete-crisp-Id' : is-flat-discrete-crisp (x ＝ y)
   is-flat-discrete-crisp-Id' =
     is-equiv-right-map-triangle
-      ( ap counit-flat {cons-flat x} {cons-flat y})
+      ( ap counit-flat {intro-flat x} {intro-flat y})
       ( counit-flat)
-      ( Eq-eq-flat (cons-flat x) (cons-flat y))
+      ( Eq-eq-flat (intro-flat x) (intro-flat y))
       ( λ where refl → refl)
       ( is-crisp-emb-counit-flat-A x y)
-      ( is-equiv-Eq-eq-flat (cons-flat x) (cons-flat y))
+      ( is-equiv-Eq-eq-flat (intro-flat x) (intro-flat y))
 
 module _
   {@♭ l : Level} {@♭ A : UU l}
@@ -208,7 +208,7 @@ module _
   is-flat-discrete-crisp-Id : is-flat-discrete-crisp (x ＝ y)
   is-flat-discrete-crisp-Id =
     is-flat-discrete-crisp-Id'
-      ( λ x y → is-emb-counit-flat-A (cons-flat x) (cons-flat y))
+      ( λ x y → is-emb-counit-flat-A (intro-flat x) (intro-flat y))
 
 module _
   {@♭ l : Level} {@♭ A : UU l}
@@ -216,7 +216,7 @@ module _
 
   is-flat-discrete-crisp-flat-Id :
     {@♭ u v : ♭ A} → is-flat-discrete-crisp (u ＝ v)
-  is-flat-discrete-crisp-flat-Id {cons-flat x} {cons-flat y} =
+  is-flat-discrete-crisp-flat-Id {intro-flat x} {intro-flat y} =
     is-flat-discrete-crisp-Id (is-emb-is-equiv is-flat-discrete-crisp-flat)
 ```
 
@@ -232,7 +232,7 @@ is-section-map-is-flat-discrete-crisp-empty ()
 
 is-retraction-map-is-flat-discrete-crisp-empty :
   is-retraction counit-flat map-is-flat-discrete-crisp-empty
-is-retraction-map-is-flat-discrete-crisp-empty (cons-flat ())
+is-retraction-map-is-flat-discrete-crisp-empty (intro-flat ())
 
 abstract
   is-flat-discrete-crisp-empty : is-flat-discrete-crisp empty
@@ -247,7 +247,7 @@ abstract
 
 ```agda
 map-is-flat-discrete-crisp-unit : unit → ♭ unit
-map-is-flat-discrete-crisp-unit star = cons-flat star
+map-is-flat-discrete-crisp-unit star = intro-flat star
 
 is-section-map-is-flat-discrete-crisp-unit :
   is-section counit-flat map-is-flat-discrete-crisp-unit
@@ -255,7 +255,7 @@ is-section-map-is-flat-discrete-crisp-unit _ = refl
 
 is-retraction-map-is-flat-discrete-crisp-unit :
   is-retraction counit-flat map-is-flat-discrete-crisp-unit
-is-retraction-map-is-flat-discrete-crisp-unit (cons-flat _) = refl
+is-retraction-map-is-flat-discrete-crisp-unit (intro-flat _) = refl
 
 abstract
   is-flat-discrete-crisp-unit : is-flat-discrete-crisp unit
@@ -270,8 +270,8 @@ abstract
 
 ```agda
 map-is-flat-discrete-crisp-bool : bool → ♭ bool
-map-is-flat-discrete-crisp-bool true = cons-flat true
-map-is-flat-discrete-crisp-bool false = cons-flat false
+map-is-flat-discrete-crisp-bool true = intro-flat true
+map-is-flat-discrete-crisp-bool false = intro-flat false
 
 is-section-map-is-flat-discrete-crisp-bool :
   is-section counit-flat map-is-flat-discrete-crisp-bool
@@ -280,8 +280,8 @@ is-section-map-is-flat-discrete-crisp-bool false = refl
 
 is-retraction-map-is-flat-discrete-crisp-bool :
   is-retraction counit-flat map-is-flat-discrete-crisp-bool
-is-retraction-map-is-flat-discrete-crisp-bool (cons-flat true) = refl
-is-retraction-map-is-flat-discrete-crisp-bool (cons-flat false) = refl
+is-retraction-map-is-flat-discrete-crisp-bool (intro-flat true) = refl
+is-retraction-map-is-flat-discrete-crisp-bool (intro-flat false) = refl
 
 abstract
   is-flat-discrete-crisp-bool : is-flat-discrete-crisp bool
@@ -296,12 +296,12 @@ abstract
 
 ```agda
 map-is-flat-discrete-crisp-ℕ : ℕ → ♭ ℕ
-map-is-flat-discrete-crisp-ℕ zero-ℕ = cons-flat zero-ℕ
+map-is-flat-discrete-crisp-ℕ zero-ℕ = intro-flat zero-ℕ
 map-is-flat-discrete-crisp-ℕ (succ-ℕ x) =
   ap-map-flat succ-ℕ (map-is-flat-discrete-crisp-ℕ x)
 
 compute-map-is-flat-discrete-crisp-ℕ :
-  (@♭ x : ℕ) → map-is-flat-discrete-crisp-ℕ x ＝ cons-flat x
+  (@♭ x : ℕ) → map-is-flat-discrete-crisp-ℕ x ＝ intro-flat x
 compute-map-is-flat-discrete-crisp-ℕ zero-ℕ =
   refl
 compute-map-is-flat-discrete-crisp-ℕ (succ-ℕ x) =
@@ -317,7 +317,7 @@ is-section-map-is-flat-discrete-crisp-ℕ (succ-ℕ x) =
 
 is-retraction-map-is-flat-discrete-crisp-ℕ :
   is-retraction counit-flat map-is-flat-discrete-crisp-ℕ
-is-retraction-map-is-flat-discrete-crisp-ℕ (cons-flat x) =
+is-retraction-map-is-flat-discrete-crisp-ℕ (intro-flat x) =
   compute-map-is-flat-discrete-crisp-ℕ x
 
 abstract

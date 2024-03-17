@@ -71,8 +71,8 @@ module _
   {@♭ l : Level} {@♭ A : UU l}
   where
 
-  is-crisp-injective-cons-flat : is-crisp-injective (cons-flat {A = A})
-  is-crisp-injective-cons-flat p = ap counit-flat p
+  is-crisp-injective-intro-flat : is-crisp-injective (intro-flat {A = A})
+  is-crisp-injective-intro-flat p = ap counit-flat p
 ```
 
 ### The flat counit is crisply injective
@@ -83,5 +83,5 @@ module _
   where
 
   is-crisply-injective-counit-flat : is-crisply-injective (counit-flat {A = A})
-  is-crisply-injective-counit-flat {cons-flat x} {cons-flat y} = ap-flat
+  is-crisply-injective-counit-flat {intro-flat x} {intro-flat y} = ap-flat
 ```

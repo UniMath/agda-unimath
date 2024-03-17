@@ -134,12 +134,12 @@ module _
 
   is-section-ap-map-flat-unit-sharp :
     is-section ap-map-flat-elim-sharp ap-map-flat-unit-sharp
-  is-section-ap-map-flat-unit-sharp (cons-flat x) =
+  is-section-ap-map-flat-unit-sharp (intro-flat x) =
     ap-flat (compute-crisp-elim-sharp x)
 
   is-retraction-ap-map-flat-unit-sharp :
     is-retraction ap-map-flat-elim-sharp ap-map-flat-unit-sharp
-  is-retraction-ap-map-flat-unit-sharp (cons-flat x) =
+  is-retraction-ap-map-flat-unit-sharp (intro-flat x) =
     ap-flat (uniqueness-crisp-elim-sharp x)
 
   is-equiv-ap-map-flat-elim-sharp : is-equiv ap-map-flat-elim-sharp
@@ -175,8 +175,8 @@ module _
   ap-sharp-counit-flat : ♯ (♭ A) → ♯ A
   ap-sharp-counit-flat = rec-sharp (unit-sharp ∘ counit-flat)
 
-  ap-sharp-cons-flat : ♯ A → ♯ (♭ A)
-  ap-sharp-cons-flat = rec-sharp (crisp-rec-sharp cons-flat)
+  ap-sharp-intro-flat : ♯ A → ♯ (♭ A)
+  ap-sharp-intro-flat = rec-sharp (crisp-rec-sharp intro-flat)
 ```
 
 It remains to show that these two are inverses to each other.

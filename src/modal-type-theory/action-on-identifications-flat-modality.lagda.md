@@ -32,7 +32,7 @@ open import modal-type-theory.flat-modality
 ## Idea
 
 Given a crisp [identification](foundation-core.identity-types.md) `x ＝ y` in
-`A`, then there is an identification `cons-flat x ＝ cons-flat y` in `♭ A`.
+`A`, then there is an identification `intro-flat x ＝ intro-flat y` in `♭ A`.
 
 ## Definitions
 
@@ -43,8 +43,8 @@ module _
   {@♭ l1 : Level} {@♭ A : UU l1} {@♭ x y : A}
   where
 
-  ap-flat : @♭ x ＝ y → cons-flat x ＝ cons-flat y
-  ap-flat = crisp-ap cons-flat
+  ap-flat : @♭ x ＝ y → intro-flat x ＝ intro-flat y
+  ap-flat = crisp-ap intro-flat
 ```
 
 ## Properties
@@ -86,9 +86,9 @@ module _
   where
 
   ap-flat' :
-    {@♭ x y : A} → @♭ (x ＝ y) → cons-flat x ＝ cons-flat y
+    {@♭ x y : A} → @♭ (x ＝ y) → intro-flat x ＝ intro-flat y
   ap-flat' {x} {y} p =
-    eq-Eq-flat (cons-flat x) (cons-flat y) (cons-flat p)
+    eq-Eq-flat (intro-flat x) (intro-flat y) (intro-flat p)
 
   compute-refl-ap-flat' :
     {@♭ x : A} → ap-flat' (refl {x = x}) ＝ refl

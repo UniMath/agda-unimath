@@ -69,26 +69,26 @@ module _
   where
 
   map-distributive-flat-coproduct : ♭ (A + B) → ♭ A + ♭ B
-  map-distributive-flat-coproduct (cons-flat (inl x)) = inl (cons-flat x)
-  map-distributive-flat-coproduct (cons-flat (inr x)) = inr (cons-flat x)
+  map-distributive-flat-coproduct (intro-flat (inl x)) = inl (intro-flat x)
+  map-distributive-flat-coproduct (intro-flat (inr x)) = inr (intro-flat x)
 
   map-inv-distributive-flat-coproduct : ♭ A + ♭ B → ♭ (A + B)
-  map-inv-distributive-flat-coproduct (inl (cons-flat x)) = cons-flat (inl x)
-  map-inv-distributive-flat-coproduct (inr (cons-flat x)) = cons-flat (inr x)
+  map-inv-distributive-flat-coproduct (inl (intro-flat x)) = intro-flat (inl x)
+  map-inv-distributive-flat-coproduct (inr (intro-flat x)) = intro-flat (inr x)
 
   is-section-map-distributive-flat-coproduct :
     is-section
       ( map-inv-distributive-flat-coproduct)
       ( map-distributive-flat-coproduct)
-  is-section-map-distributive-flat-coproduct (cons-flat (inl x)) = refl
-  is-section-map-distributive-flat-coproduct (cons-flat (inr x)) = refl
+  is-section-map-distributive-flat-coproduct (intro-flat (inl x)) = refl
+  is-section-map-distributive-flat-coproduct (intro-flat (inr x)) = refl
 
   is-retraction-map-distributive-flat-coproduct :
     is-retraction
       ( map-inv-distributive-flat-coproduct)
       ( map-distributive-flat-coproduct)
-  is-retraction-map-distributive-flat-coproduct (inl (cons-flat x)) = refl
-  is-retraction-map-distributive-flat-coproduct (inr (cons-flat x)) = refl
+  is-retraction-map-distributive-flat-coproduct (inl (intro-flat x)) = refl
+  is-retraction-map-distributive-flat-coproduct (inr (intro-flat x)) = refl
 
   section-distributive-flat-coproduct : section map-distributive-flat-coproduct
   pr1 section-distributive-flat-coproduct = map-inv-distributive-flat-coproduct
@@ -130,8 +130,8 @@ module _
   compute-counit-flat-coproduct :
     counit-flat {A = A + B} ~
     map-coproduct counit-flat counit-flat ∘ map-distributive-flat-coproduct
-  compute-counit-flat-coproduct (cons-flat (inl x)) = refl
-  compute-counit-flat-coproduct (cons-flat (inr x)) = refl
+  compute-counit-flat-coproduct (intro-flat (inl x)) = refl
+  compute-counit-flat-coproduct (intro-flat (inr x)) = refl
 ```
 
 ### A crisp coproduct type is flat discrete if both summands are
@@ -152,8 +152,8 @@ module _
         ( map-coproduct counit-flat counit-flat)
         ( map-distributive-flat-coproduct)
         ( λ where
-          (cons-flat (inl x)) → refl
-          (cons-flat (inr x)) → refl)
+          (intro-flat (inl x)) → refl
+          (intro-flat (inr x)) → refl)
         ( is-equiv-map-distributive-flat-coproduct)
         ( is-equiv-map-coproduct is-disc-A is-disc-B)
 ```

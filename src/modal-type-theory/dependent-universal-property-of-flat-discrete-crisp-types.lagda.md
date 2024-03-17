@@ -68,7 +68,7 @@ $$
 dependent-coev-flat :
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : @♭ A → UU l2} →
   ♭ ((@♭ x : A) → ♭ (B x)) → ♭ ((@♭ x : A) → B x)
-dependent-coev-flat (cons-flat f) = cons-flat (λ x → counit-flat (f x))
+dependent-coev-flat (intro-flat f) = intro-flat (λ x → counit-flat (f x))
 
 dependent-universal-property-flat-discrete-crisp-type :
   {@♭ l1 : Level} (@♭ A : UU l1) → UUω
