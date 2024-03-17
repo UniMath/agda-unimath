@@ -189,7 +189,7 @@ This remains to be formalized.
 
 ### Crisp identity induction
 
-```agda
+```text
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1}
   (@♭ C : (@♭ x y : A) → @♭ (x ＝ y) → UU l2)

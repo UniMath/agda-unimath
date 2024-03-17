@@ -214,8 +214,11 @@ module _
     compute-crisp-ind-sharp C
       ( λ x → crisp-elim-sharp (f (crisp-elim-sharp x)))
       ( unit-sharp x)
+```
 
--- TODO: replace this with the pointwise-sharp thing
+<!-- TODO: prove `ind-sharp` using `pointwise-sharp` -->
+
+```agda
 postulate
   ind-sharp :
     {l1 l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
