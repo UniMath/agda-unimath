@@ -41,8 +41,7 @@ A crisp type is said to be
 if it is [flat](modal-type-theory.flat-modality.md) modal. I.e. if the flat
 counit is an [equivalence](foundation-core.equivalences.md) at that type.
 
-**Terminology:** In _Brouwer's fixed-point theorem in real-cohesive homotopy
-type theory_, this is called a _crisply discrete_ type.
+**Terminology:** In {{#cite Shu18}}, this is called a _crisply discrete type_.
 
 ## Definitions
 
@@ -79,7 +78,7 @@ module _
 
 ### If the flat counit has a crisp section then it is an equivalence
 
-This is Lemma ??? in {{#cite Shu18}}.
+This is Lemma 6.17 in {{#cite Shu18}}.
 
 ```agda
 module _
@@ -151,7 +150,7 @@ Given crisp elements `x` and `y` of `A` We have a
                                   ∧   |
                      Eq-eq-flat /~    |
                               /       |
-  (intro-flat x ＝ intro-flat y)        | counit-flat
+  (intro-flat x ＝ intro-flat y)      | counit-flat
                               \       |
                ap (counit-flat) \     |
                                   ∨   ∨
@@ -160,10 +159,9 @@ Given crisp elements `x` and `y` of `A` We have a
 
 where the top-left map `Eq-eq-flat` is an equivalence. Thus, the right map is an
 equivalence and `x ＝ y` is crisply flat discrete for all `x` and `y` if and
-only if the flat counit of `A` is a crisp
-[embedding](foundation-core.embeddings.md).
-
-In particular, if `A` is crisply flat discrete then its identity types are too.
+only if the flat counit of `A` is an [embedding](foundation-core.embeddings.md)
+crisply. In particular, if `A` is crisply flat discrete then its identity types
+are too.
 
 ```agda
 module _

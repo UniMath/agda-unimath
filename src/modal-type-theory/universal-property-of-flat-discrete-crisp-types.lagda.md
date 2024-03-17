@@ -72,10 +72,10 @@ module _
   where
 
   abstract
-    universal-property-flat-discrete-crisp-type-is-flat-discrete-crisp :
+    universal-property-is-flat-discrete-crisp :
       @♭ is-flat-discrete-crisp A →
       universal-property-flat-discrete-crisp-type A
-    universal-property-flat-discrete-crisp-type-is-flat-discrete-crisp
+    universal-property-is-flat-discrete-crisp
       is-disc-A {B = B} =
       is-equiv-htpy-equiv
         ( ( action-flat-equiv
