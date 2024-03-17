@@ -51,13 +51,16 @@ open import modal-type-theory.functoriality-flat-modality
 ## Idea
 
 The
-{{#concept "dependent universal property" Disambiguation="of flat discrete crisp types" Agda=universal-property-flat-discrete-crisp-type}}
-of a flat discrete crisp type `A` states that for any crisply defined crisp type
-family `B : A → 𝒰`, postcomposition by the counit induces an equivalence under
-the flat modality
+{{#concept "dependent universal property" Disambiguation="of flat discrete crisp types" Agda=dependent-universal-property-flat-discrete-crisp-type}}
+of a [flat discrete crisp type](modal-type-theory.flat-discrete-crisp-types.md)
+`A` states that for any crisply defined
+[crisp type family](modal-type-theory.crisp-types.md) `B : A → 𝒰`,
+[postcomposition](foundation-core.postcomposition-functions.md) by the counit of
+the [flat modality](modal-type-theory.flat-modality.md) induces an
+[equivalence](foundation-core.equivalences.md) under the flat modality:
 
 $$
-♭ \left(Π_{x :: A} ♭ (B (x))\right) ≃ ♭ \left(Π_{x :: A} B (x)\right)
+♭ \left(Π_{x :: A} ♭ (B (x))\right) ≃ ♭ \left(Π_{x :: A} B (x)\right).
 $$
 
 ## Definitions
@@ -81,6 +84,10 @@ dependent-universal-property-flat-discrete-crisp-type A =
 ### Flat discrete crisp types satisfy the dependent universal property of flat discrete crisp types
 
 This is Theorem 6.16 of {{#cite Shu18}}, and remains to be formalized.
+
+## See also
+
+- [The universal property of flat discrete crisp types](modal-type-theory.universal-property-of-flat-discrete-crisp-types.md)
 
 ## References
 

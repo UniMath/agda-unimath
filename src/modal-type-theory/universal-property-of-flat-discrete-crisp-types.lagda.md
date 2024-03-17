@@ -53,10 +53,11 @@ open import modal-type-theory.functoriality-flat-modality
 The
 {{#concept "universal property" Disambiguation="of flat discrete crisp types" Agda=universal-property-flat-discrete-crisp-type}}
 of a [flat discrete crisp type](modal-type-theory.flat-discrete-crisp-types.md)
-`A` states that under the flat modality `♭`, `A` is colocal at the counit of
-`♭`.
+`A` states that under the [flat modality](modal-type-theory.flat-modality.md)
+`♭`, `A` is colocal at the counit of `♭`.
 
-This means that for every crisp type `B` the map
+By this we mean that for every [crisp type](modal-type-theory.crisp-types.md)
+`B` the map
 
 ```text
   coev-flat : ♭ (A → ♭ B) → ♭ (A → B)
@@ -114,9 +115,8 @@ module _
 
 ## See also
 
-- [Sharp codiscrete types](modal-type-theory.sharp-codiscrete-types.md) for the
-  dual notion.
+- [The dependent universal property of flat discrete crisp types](modal-type-theory.dependent-universal-property-of-flat-discrete-crisp-types.md)
 
 ## References
 
-{{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}
+{{#bibliography}} {{#reference Shu18}}
