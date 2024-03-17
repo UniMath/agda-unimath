@@ -97,10 +97,10 @@ module _
     universal-property-flat-discrete-crisp-type-is-flat-discrete-crisp
       is-disc-A {B = B} =
       is-equiv-htpy-equiv
-        ( ( ap-equiv-flat
+        ( ( action-flat-equiv
             ( equiv-precomp (inv-equiv (counit-flat , is-disc-A)) B)) ∘e
-          ( equiv-ap-map-flat-postcomp-counit-flat) ∘e
-          ( ap-equiv-flat (equiv-precomp (counit-flat , is-disc-A) (♭ B))))
+          ( equiv-action-flat-map-postcomp-counit-flat) ∘e
+          ( action-flat-equiv (equiv-precomp (counit-flat , is-disc-A) (♭ B))))
         ( λ where
           (intro-flat f) →
             crisp-ap

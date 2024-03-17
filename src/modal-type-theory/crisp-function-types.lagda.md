@@ -65,40 +65,40 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  map-inv-ap-map-flat-postcomp-counit-flat : ♭ (♭ A → B) → ♭ (♭ A → ♭ B)
-  map-inv-ap-map-flat-postcomp-counit-flat (intro-flat f) =
+  map-inv-action-flat-map-postcomp-counit-flat : ♭ (♭ A → B) → ♭ (♭ A → ♭ B)
+  map-inv-action-flat-map-postcomp-counit-flat (intro-flat f) =
     intro-flat (λ where (intro-flat y) → intro-flat (f (intro-flat y)))
 
-  is-section-map-inv-ap-map-flat-postcomp-counit-flat :
+  is-section-map-inv-action-flat-map-postcomp-counit-flat :
     is-section
-      ( ap-map-flat (postcomp (♭ A) counit-flat))
-      ( map-inv-ap-map-flat-postcomp-counit-flat)
-  is-section-map-inv-ap-map-flat-postcomp-counit-flat (intro-flat f) =
+      ( action-flat-map (postcomp (♭ A) counit-flat))
+      ( map-inv-action-flat-map-postcomp-counit-flat)
+  is-section-map-inv-action-flat-map-postcomp-counit-flat (intro-flat f) =
     ap-flat (eq-htpy (λ where (intro-flat _) → refl))
 
-  is-retraction-map-inv-ap-map-flat-postcomp-counit-flat :
+  is-retraction-map-inv-action-flat-map-postcomp-counit-flat :
     is-retraction
-      ( ap-map-flat (postcomp (♭ A) counit-flat))
-      ( map-inv-ap-map-flat-postcomp-counit-flat)
-  is-retraction-map-inv-ap-map-flat-postcomp-counit-flat (intro-flat f) =
+      ( action-flat-map (postcomp (♭ A) counit-flat))
+      ( map-inv-action-flat-map-postcomp-counit-flat)
+  is-retraction-map-inv-action-flat-map-postcomp-counit-flat (intro-flat f) =
     ap-flat
       ( eq-htpy
         ( λ where
           (intro-flat x) → is-crisp-retraction-intro-flat (f (intro-flat x))))
 
-  is-equiv-ap-map-flat-postcomp-counit-flat :
-    is-equiv (ap-map-flat (postcomp (♭ A) (counit-flat {A = B})))
-  is-equiv-ap-map-flat-postcomp-counit-flat =
+  is-equiv-action-flat-map-postcomp-counit-flat :
+    is-equiv (action-flat-map (postcomp (♭ A) (counit-flat {A = B})))
+  is-equiv-action-flat-map-postcomp-counit-flat =
     is-equiv-is-invertible
-      ( map-inv-ap-map-flat-postcomp-counit-flat)
-      ( is-section-map-inv-ap-map-flat-postcomp-counit-flat)
-      ( is-retraction-map-inv-ap-map-flat-postcomp-counit-flat)
+      ( map-inv-action-flat-map-postcomp-counit-flat)
+      ( is-section-map-inv-action-flat-map-postcomp-counit-flat)
+      ( is-retraction-map-inv-action-flat-map-postcomp-counit-flat)
 
-  equiv-ap-map-flat-postcomp-counit-flat : ♭ (♭ A → ♭ B) ≃ ♭ (♭ A → B)
-  pr1 equiv-ap-map-flat-postcomp-counit-flat =
-    ap-map-flat (postcomp (♭ B) counit-flat)
-  pr2 equiv-ap-map-flat-postcomp-counit-flat =
-    is-equiv-ap-map-flat-postcomp-counit-flat
+  equiv-action-flat-map-postcomp-counit-flat : ♭ (♭ A → ♭ B) ≃ ♭ (♭ A → B)
+  pr1 equiv-action-flat-map-postcomp-counit-flat =
+    action-flat-map (postcomp (♭ A) counit-flat)
+  pr2 equiv-action-flat-map-postcomp-counit-flat =
+    is-equiv-action-flat-map-postcomp-counit-flat
 ```
 
 ## See also

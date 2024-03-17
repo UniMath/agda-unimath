@@ -105,7 +105,8 @@ module _
 
   htpy-retraction-counit-flat-has-crisp-section : s ∘ counit-flat ~ id
   htpy-retraction-counit-flat-has-crisp-section (intro-flat x) =
-    inv (is-crisp-retraction-intro-flat (s x)) ∙ ap-htpy-flat H (intro-flat x)
+    inv (is-crisp-retraction-intro-flat (s x)) ∙
+    action-flat-htpy H (intro-flat x)
 
   retraction-counit-flat-has-crisp-section : retraction (counit-flat {A = A})
   retraction-counit-flat-has-crisp-section =
@@ -133,14 +134,14 @@ module _
     @♭ A ≃ B → is-flat-discrete-crisp A → is-flat-discrete-crisp B
   is-flat-discrete-crisp-equiv e bB =
     is-equiv-htpy-equiv'
-      ( e ∘e (counit-flat , bB) ∘e ap-equiv-flat (inv-equiv e))
+      ( e ∘e (counit-flat , bB) ∘e action-flat-equiv (inv-equiv e))
       ( λ where (intro-flat x) → is-section-map-inv-equiv e x)
 
   is-flat-discrete-crisp-equiv' :
     @♭ A ≃ B → is-flat-discrete-crisp B → is-flat-discrete-crisp A
   is-flat-discrete-crisp-equiv' e bB =
     is-equiv-htpy-equiv'
-      ( inv-equiv e ∘e (counit-flat , bB) ∘e ap-equiv-flat e)
+      ( inv-equiv e ∘e (counit-flat , bB) ∘e action-flat-equiv e)
       ( λ where (intro-flat x) → is-retraction-map-inv-equiv e x)
 ```
 
@@ -298,14 +299,14 @@ abstract
 map-is-flat-discrete-crisp-ℕ : ℕ → ♭ ℕ
 map-is-flat-discrete-crisp-ℕ zero-ℕ = intro-flat zero-ℕ
 map-is-flat-discrete-crisp-ℕ (succ-ℕ x) =
-  ap-map-flat succ-ℕ (map-is-flat-discrete-crisp-ℕ x)
+  action-flat-map succ-ℕ (map-is-flat-discrete-crisp-ℕ x)
 
 compute-map-is-flat-discrete-crisp-ℕ :
   (@♭ x : ℕ) → map-is-flat-discrete-crisp-ℕ x ＝ intro-flat x
 compute-map-is-flat-discrete-crisp-ℕ zero-ℕ =
   refl
 compute-map-is-flat-discrete-crisp-ℕ (succ-ℕ x) =
-  ap (ap-map-flat succ-ℕ) (compute-map-is-flat-discrete-crisp-ℕ x)
+  ap (action-flat-map succ-ℕ) (compute-map-is-flat-discrete-crisp-ℕ x)
 
 is-section-map-is-flat-discrete-crisp-ℕ :
   is-section counit-flat map-is-flat-discrete-crisp-ℕ

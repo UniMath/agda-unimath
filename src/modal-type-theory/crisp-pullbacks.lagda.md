@@ -59,12 +59,12 @@ module _
 
   map-distributive-flat-standard-pullback :
     ♭ (standard-pullback f g) →
-    standard-pullback (ap-map-flat f) (ap-map-flat g)
+    standard-pullback (action-flat-map f) (action-flat-map g)
   map-distributive-flat-standard-pullback (intro-flat (x , y , p)) =
     ( intro-flat x , intro-flat y , ap-flat p)
 
   map-inv-distributive-flat-standard-pullback :
-    @♭ standard-pullback (ap-map-flat f) (ap-map-flat g) →
+    @♭ standard-pullback (action-flat-map f) (action-flat-map g) →
     ♭ (standard-pullback f g)
   map-inv-distributive-flat-standard-pullback
     (intro-flat x , intro-flat y , p) =
@@ -84,7 +84,7 @@ module _
           ( is-crisp-section-ap-flat p)))
 
   is-crisp-retraction-map-distributive-flat-standard-pullback :
-    (@♭ x : standard-pullback (ap-map-flat f) (ap-map-flat g)) →
+    (@♭ x : standard-pullback (action-flat-map f) (action-flat-map g)) →
     map-distributive-flat-standard-pullback
       ( map-inv-distributive-flat-standard-pullback x) ＝
     ( x)
@@ -111,7 +111,7 @@ module _
   where
 
   counit-flat-hom-cospan-diagram :
-    hom-cospan-diagram (ap-map-flat f) (ap-map-flat g) f g
+    hom-cospan-diagram (action-flat-map f) (action-flat-map g) f g
   counit-flat-hom-cospan-diagram =
     ( counit-flat ,
       counit-flat ,
@@ -123,8 +123,8 @@ module _
     ( map-standard-pullback
       ( f)
       ( g)
-      ( ap-map-flat f)
-      ( ap-map-flat g)
+      ( action-flat-map f)
+      ( action-flat-map g)
       ( counit-flat-hom-cospan-diagram)) ∘
     ( map-distributive-flat-standard-pullback f g) ~
     counit-flat {A = standard-pullback f g}

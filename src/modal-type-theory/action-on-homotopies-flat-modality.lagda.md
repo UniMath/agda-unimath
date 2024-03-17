@@ -49,7 +49,7 @@ module _
 
   ap-crisp-htpy-flat :
     @♭ ((@♭ x : A) → f x ＝ g x) →
-    ap-crisp-dependent-map-flat f ~ ap-crisp-dependent-map-flat g
+    action-flat-crisp-dependent-map f ~ action-flat-crisp-dependent-map g
   ap-crisp-htpy-flat H (intro-flat x) = ap-flat (H x)
 ```
 
@@ -61,8 +61,9 @@ module _
   {@♭ f g : (x : A) → B x}
   where
 
-  ap-htpy-flat : @♭ f ~ g → ap-dependent-map-flat f ~ ap-dependent-map-flat g
-  ap-htpy-flat H = ap-crisp-htpy-flat (λ x → H x)
+  action-flat-htpy :
+    @♭ f ~ g → action-flat-dependent-map f ~ action-flat-dependent-map g
+  action-flat-htpy H = ap-crisp-htpy-flat (λ x → H x)
 ```
 
 ## Properties

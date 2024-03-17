@@ -59,28 +59,28 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1}
   where
 
-  ap-crisp-dependent-map-flat :
+  action-flat-crisp-dependent-map :
     {@♭ B : @♭ A → UU l2} →
     @♭ ((@♭ x : A) → B x) →
     ((x : ♭ A) → action-flat-crisp-family B x)
-  ap-crisp-dependent-map-flat f (intro-flat x) = intro-flat (f x)
+  action-flat-crisp-dependent-map f (intro-flat x) = intro-flat (f x)
 
-  ap-dependent-map-flat :
+  action-flat-dependent-map :
     {@♭ B : A → UU l2} →
     @♭ ((x : A) → B x) →
     ((x : ♭ A) → action-flat-family B x)
-  ap-dependent-map-flat f = ap-crisp-dependent-map-flat (crispen f)
+  action-flat-dependent-map f = action-flat-crisp-dependent-map (crispen f)
 
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  ap-crisp-map-flat : @♭ (@♭ A → B) → (♭ A → ♭ B)
-  ap-crisp-map-flat f (intro-flat x) =
-    ap-crisp-dependent-map-flat f (intro-flat x)
+  action-flat-crisp-map : @♭ (@♭ A → B) → (♭ A → ♭ B)
+  action-flat-crisp-map f (intro-flat x) =
+    action-flat-crisp-dependent-map f (intro-flat x)
 
-  ap-map-flat : @♭ (A → B) → (♭ A → ♭ B)
-  ap-map-flat f = ap-crisp-map-flat (crispen f)
+  action-flat-map : @♭ (A → B) → (♭ A → ♭ B)
+  action-flat-map f = action-flat-crisp-map (crispen f)
 ```
 
 ### The flat modality's coaction on maps
@@ -94,7 +94,7 @@ module _
   coap-map-flat f x = counit-flat (f (intro-flat x))
 
   is-crisp-retraction-coap-map-flat :
-    (@♭ f : @♭ A → B) → coap-map-flat (ap-crisp-map-flat f) ＝ f
+    (@♭ f : @♭ A → B) → coap-map-flat (action-flat-crisp-map f) ＝ f
   is-crisp-retraction-coap-map-flat _ = refl
 ```
 
@@ -121,7 +121,7 @@ module _
   where
 
   naturality-counit-flat :
-    (@♭ f : A → B) → counit-flat ∘ ap-map-flat f ~ f ∘ counit-flat
+    (@♭ f : A → B) → counit-flat ∘ action-flat-map f ~ f ∘ counit-flat
   naturality-counit-flat f (intro-flat x) = refl
 ```
 
@@ -132,17 +132,17 @@ module _
   {@♭ l1 : Level} {@♭ A : UU l1}
   where
 
-  preserves-id-ap-map-flat : ap-map-flat (id {A = A}) ~ id
-  preserves-id-ap-map-flat (intro-flat x) = refl
+  preserves-id-action-flat-map : action-flat-map (id {A = A}) ~ id
+  preserves-id-action-flat-map (intro-flat x) = refl
 
 module _
   {@♭ l1 l2 l3 : Level} {@♭ A : UU l1} {@♭ B : UU l2} {@♭ C : UU l3}
   where
 
-  preserves-comp-ap-map-flat :
+  preserves-comp-action-flat-map :
     (@♭ f : A → B) (@♭ g : B → C) →
-    ap-map-flat (g ∘ f) ~ ap-map-flat g ∘ ap-map-flat f
-  preserves-comp-ap-map-flat f g (intro-flat x) = refl
+    action-flat-map (g ∘ f) ~ action-flat-map g ∘ action-flat-map f
+  preserves-comp-action-flat-map f g (intro-flat x) = refl
 ```
 
 ### The functorial action preserves equivalences
@@ -152,27 +152,28 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2} {@♭ f : A → B}
   where
 
-  ap-section-flat : @♭ section f → section (ap-map-flat f)
-  pr1 (ap-section-flat (g , H)) = ap-map-flat g
-  pr2 (ap-section-flat (g , H)) (intro-flat x) = ap-flat (H x)
+  action-flat-section : @♭ section f → section (action-flat-map f)
+  pr1 (action-flat-section (g , H)) = action-flat-map g
+  pr2 (action-flat-section (g , H)) (intro-flat x) = ap-flat (H x)
 
-  ap-retraction-flat : @♭ retraction f → retraction (ap-map-flat f)
-  pr1 (ap-retraction-flat (g , H)) = ap-map-flat g
-  pr2 (ap-retraction-flat (g , H)) (intro-flat x) = ap-flat (H x)
+  action-flat-retraction : @♭ retraction f → retraction (action-flat-map f)
+  pr1 (action-flat-retraction (g , H)) = action-flat-map g
+  pr2 (action-flat-retraction (g , H)) (intro-flat x) = ap-flat (H x)
 
-  is-equiv-ap-is-equiv-map-flat : @♭ is-equiv f → is-equiv (ap-map-flat f)
+  is-equiv-ap-is-equiv-map-flat : @♭ is-equiv f → is-equiv (action-flat-map f)
   is-equiv-ap-is-equiv-map-flat (s , r) =
-    ( ap-section-flat s , ap-retraction-flat r)
+    ( action-flat-section s , action-flat-retraction r)
 
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  ap-retract-flat : @♭ (A retract-of B) → ♭ A retract-of ♭ B
-  ap-retract-flat (f , r) = (ap-map-flat f , ap-retraction-flat r)
+  action-flat-retract : @♭ (A retract-of B) → ♭ A retract-of ♭ B
+  action-flat-retract (f , r) = (action-flat-map f , action-flat-retraction r)
 
-  ap-equiv-flat : @♭ (A ≃ B) → ♭ A ≃ ♭ B
-  ap-equiv-flat (f , H) = (ap-map-flat f , is-equiv-ap-is-equiv-map-flat H)
+  action-flat-equiv : @♭ (A ≃ B) → ♭ A ≃ ♭ B
+  action-flat-equiv (f , H) =
+    (action-flat-map f , is-equiv-ap-is-equiv-map-flat H)
 ```
 
 ## See also

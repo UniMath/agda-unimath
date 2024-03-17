@@ -126,43 +126,45 @@ module _
   {@♭ l : Level} {@♭ A : UU l}
   where
 
-  ap-map-flat-elim-sharp : ♭ (♯ A) → ♭ A
-  ap-map-flat-elim-sharp = ap-crisp-map-flat crisp-elim-sharp
+  action-flat-map-elim-sharp : ♭ (♯ A) → ♭ A
+  action-flat-map-elim-sharp = action-flat-crisp-map crisp-elim-sharp
 
-  ap-map-flat-unit-sharp : ♭ A → ♭ (♯ A)
-  ap-map-flat-unit-sharp = ap-map-flat unit-sharp
+  action-flat-map-unit-sharp : ♭ A → ♭ (♯ A)
+  action-flat-map-unit-sharp = action-flat-map unit-sharp
 
-  is-section-ap-map-flat-unit-sharp :
-    is-section ap-map-flat-elim-sharp ap-map-flat-unit-sharp
-  is-section-ap-map-flat-unit-sharp (intro-flat x) =
+  is-section-action-flat-map-unit-sharp :
+    is-section action-flat-map-elim-sharp action-flat-map-unit-sharp
+  is-section-action-flat-map-unit-sharp (intro-flat x) =
     ap-flat (compute-crisp-elim-sharp x)
 
-  is-retraction-ap-map-flat-unit-sharp :
-    is-retraction ap-map-flat-elim-sharp ap-map-flat-unit-sharp
-  is-retraction-ap-map-flat-unit-sharp (intro-flat x) =
+  is-retraction-action-flat-map-unit-sharp :
+    is-retraction action-flat-map-elim-sharp action-flat-map-unit-sharp
+  is-retraction-action-flat-map-unit-sharp (intro-flat x) =
     ap-flat (uniqueness-crisp-elim-sharp x)
 
-  is-equiv-ap-map-flat-elim-sharp : is-equiv ap-map-flat-elim-sharp
-  pr1 (pr1 is-equiv-ap-map-flat-elim-sharp) = ap-map-flat-unit-sharp
-  pr2 (pr1 is-equiv-ap-map-flat-elim-sharp) = is-section-ap-map-flat-unit-sharp
-  pr1 (pr2 is-equiv-ap-map-flat-elim-sharp) = ap-map-flat-unit-sharp
-  pr2 (pr2 is-equiv-ap-map-flat-elim-sharp) =
-    is-retraction-ap-map-flat-unit-sharp
+  is-equiv-action-flat-map-elim-sharp : is-equiv action-flat-map-elim-sharp
+  pr1 (pr1 is-equiv-action-flat-map-elim-sharp) = action-flat-map-unit-sharp
+  pr2 (pr1 is-equiv-action-flat-map-elim-sharp) =
+    is-section-action-flat-map-unit-sharp
+  pr1 (pr2 is-equiv-action-flat-map-elim-sharp) = action-flat-map-unit-sharp
+  pr2 (pr2 is-equiv-action-flat-map-elim-sharp) =
+    is-retraction-action-flat-map-unit-sharp
 
-  equiv-ap-map-flat-elim-sharp : ♭ (♯ A) ≃ ♭ A
-  pr1 equiv-ap-map-flat-elim-sharp = ap-map-flat-elim-sharp
-  pr2 equiv-ap-map-flat-elim-sharp = is-equiv-ap-map-flat-elim-sharp
+  equiv-action-flat-map-elim-sharp : ♭ (♯ A) ≃ ♭ A
+  pr1 equiv-action-flat-map-elim-sharp = action-flat-map-elim-sharp
+  pr2 equiv-action-flat-map-elim-sharp = is-equiv-action-flat-map-elim-sharp
 
-  is-equiv-ap-map-flat-unit-sharp : is-equiv ap-map-flat-unit-sharp
-  pr1 (pr1 is-equiv-ap-map-flat-unit-sharp) = ap-map-flat-elim-sharp
-  pr2 (pr1 is-equiv-ap-map-flat-unit-sharp) =
-    is-retraction-ap-map-flat-unit-sharp
-  pr1 (pr2 is-equiv-ap-map-flat-unit-sharp) = ap-map-flat-elim-sharp
-  pr2 (pr2 is-equiv-ap-map-flat-unit-sharp) = is-section-ap-map-flat-unit-sharp
+  is-equiv-action-flat-map-unit-sharp : is-equiv action-flat-map-unit-sharp
+  pr1 (pr1 is-equiv-action-flat-map-unit-sharp) = action-flat-map-elim-sharp
+  pr2 (pr1 is-equiv-action-flat-map-unit-sharp) =
+    is-retraction-action-flat-map-unit-sharp
+  pr1 (pr2 is-equiv-action-flat-map-unit-sharp) = action-flat-map-elim-sharp
+  pr2 (pr2 is-equiv-action-flat-map-unit-sharp) =
+    is-section-action-flat-map-unit-sharp
 
-  equiv-ap-map-flat-unit-sharp : ♭ A ≃ ♭ (♯ A)
-  pr1 equiv-ap-map-flat-unit-sharp = ap-map-flat-unit-sharp
-  pr2 equiv-ap-map-flat-unit-sharp = is-equiv-ap-map-flat-unit-sharp
+  equiv-action-flat-map-unit-sharp : ♭ A ≃ ♭ (♯ A)
+  pr1 equiv-action-flat-map-unit-sharp = action-flat-map-unit-sharp
+  pr2 equiv-action-flat-map-unit-sharp = is-equiv-action-flat-map-unit-sharp
 ```
 
 ### Sharp after flat
