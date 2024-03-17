@@ -169,7 +169,7 @@ module _
 
 ## See also
 
-- The indexed analogue of exclusive disjunction is
+- The indexed counterpart to exclusive disjunction is
   [unique existence](foundation.uniqueness-quantification.md).
 
 ## Table of files about propositional logic

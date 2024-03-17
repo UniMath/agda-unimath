@@ -47,8 +47,9 @@ we mean that for every proposition `Q` we have the
   (∀ (a : A), (R → P a)) ↔ (R → ∀ (a : A), (P a))
 ```
 
-**Notation.** Because of syntactic limitations of the Agda language, we use the
-notation `∀'` for the universal quantification in formalizations.
+**Notation.** Because of syntactic limitations of the Agda language, we cannot
+use `∀` for the universal quantification in formalizations, and instead use
+`∀'`.
 
 ## Definitions
 
@@ -133,8 +134,15 @@ module _
 
 ## See also
 
-- Universal quantification is the indexed analogue to
-  [conjunction](foundation.conjunction.md)
+- Universal quantification is the indexed counterpart to
+  [conjunction](foundation.conjunction.md).
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}
 
 ## External links
 

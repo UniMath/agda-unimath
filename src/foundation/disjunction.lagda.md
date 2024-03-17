@@ -335,6 +335,11 @@ module _
         ( is-decidable-Decidable-Prop Q))
 ```
 
+## See also
+
+- The indexed counterpart to disjunction is
+  [existential quantification](foundation.existential-quantification.md).
+
 ## Table of files about propositional logic
 
 The following table gives an overview of basic constructions in propositional

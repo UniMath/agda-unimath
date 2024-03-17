@@ -209,7 +209,7 @@ module _
 
 ## See also
 
-- The indexed analogue of conjunction is
+- The indexed counterpart to conjunction is
   [universal quantification](foundation.universal-quantification.md).
 
 ## Table of files about propositional logic

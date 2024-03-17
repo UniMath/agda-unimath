@@ -330,6 +330,11 @@ module _
     eq-distributive-product-exists-structure P
 ```
 
+## See also
+
+- Existential quantification is the indexed counterpart to
+  [disjunction](foundation.disjunction.md)
+
 ## Table of files about propositional logic
 
 The following table gives an overview of basic constructions in propositional

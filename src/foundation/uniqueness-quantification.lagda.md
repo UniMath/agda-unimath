@@ -109,7 +109,7 @@ module _
 
 ## See also
 
-- Unique existence is the indexed analogue of
+- Unique existence is the indexed counterpart to
   [exclusive disjunction](foundation.exclusive-disjunction.md).
 - A different name for _unique existence_ is
   [torsoriality](foundation.torsorial-type-families.md).
