@@ -29,7 +29,7 @@ open import modal-type-theory.functoriality-flat-modality
 ## Idea
 
 We say a [dependent pair type](foundation.dependent-pair-types.md) is
-{{#concept "crisp" Disambigiation="dependent pair type"}} if it is formed in a
+{{#concept "crisp" Disambiguation="dependent pair type"}} if it is formed in a
 [crisp context](modal-type-theory.crisp-types.md). Here, we study the
 interactions between the [flat modality](modal-type-theory.flat-modality.md) and
 [dependent pair types](foundation.dependent-pair-types.md).

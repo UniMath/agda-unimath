@@ -143,7 +143,7 @@ module _
 ### The crisp identity types of flat discrete crisp types are flat discrete
 
 Given crisp elements `x` and `y` of `A` We have a
-[commuting triangle](foundation-core.commuting-triangles-maps.md)
+[commuting triangle](foundation-core.commuting-triangles-of-maps.md)
 
 ```text
                                ♭ (x ＝ y)

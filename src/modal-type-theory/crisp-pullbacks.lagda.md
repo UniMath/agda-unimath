@@ -37,7 +37,7 @@ open import modal-type-theory.functoriality-flat-modality
 ## Idea
 
 We say a [pullback](foundation-core.pullbacks.md) is
-{{#concept "crisp" Disambigiation="pullback"}} if it is formed in a
+{{#concept "crisp" Disambiguation="pullback"}} if it is formed in a
 [crisp context](modal-type-theory.crisp-types.md).
 
 **Remark.** The results in this file should hold more generally for crisp and

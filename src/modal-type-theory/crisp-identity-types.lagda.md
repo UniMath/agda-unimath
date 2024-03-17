@@ -44,7 +44,12 @@ weak-crisp-based-ind-Id C b _ refl = b
 
 ### Based crisp identification induction
 
-<!-- TODO: this is how the principle is stated in Shu15. It can be proved with `pointwise-sharp` (except for any cohesive universe level) -->
+Below we postulate the
+{{#concept "crisp identity induction principle" Agda=crisp-based-ind-Id}} as
+introduced in {{#cite Shu18}}. Note that this principle should follow from the
+flat modality's relation to the
+[sharp modality](modal-type-theory.sharp-modality.md), and the stronger
+`pointwise-sharp` construction as considered in {{#cite DavidJaz/Cohesion}}.
 
 ```agda
 module _

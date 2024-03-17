@@ -100,7 +100,7 @@ postulate
   {-# REWRITE compute-crisp-ind-sharp #-}
 ```
 
-### Recontextualizing
+### The sharp modality's action on "pointwise" type families
 
 ```text
 postulate
@@ -153,7 +153,10 @@ postulate
 ### Uncrispening contexts
 
 ```text
-record context-uncrisp-sharp {@♭ l1 l2 : Level} {@♭ A : UU l1} : UU (lsuc (l1 ⊔ l2)) where
+record
+  context-uncrisp-sharp
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} : UU (lsuc (l1 ⊔ l2))
+  where
   constructor ctx
   field
     ᶜB : A → UU l2
@@ -200,7 +203,7 @@ module _
 
 ### Sharp induction
 
-The following relies on rewrite rules.
+The following definitions rely on rewrite rules.
 
 ```text
 module _
@@ -219,7 +222,9 @@ module _
       ( unit-sharp x)
 ```
 
-<!-- TODO: prove `ind-sharp` using `pointwise-sharp` -->
+We postulate sharp's induction principle below. Note that it should also be
+possible to construct it from the more general `pointwise-sharp` considered
+above.
 
 ```agda
 postulate
@@ -232,12 +237,6 @@ postulate
     {l1 l2 : Level} {A : UU l1} (C : ♯ A → UU l2)
     (f : (x : A) → ♯ (C (unit-sharp x))) →
     ind-sharp C f ∘ unit-sharp ~ f
-
--- ind-sharp'' :
---   {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ C : ♯ A → UU l2) →
---   ((x : A) → ♯ (C (unit-sharp x))) →
---   (x : ♯ A) → ♯ (C x)
--- ind-sharp'' C f x = unit-pointwise-sharp {!   !} {!   !}
 ```
 
 ## Definitions

@@ -29,7 +29,7 @@ open import modal-type-theory.flat-modality
 ## Idea
 
 We say a [coproduct type](foundation-core.coproduct-types.md) is
-{{#concept "crisp" Disambigiation="coproduct type"}} if it is formed in a
+{{#concept "crisp" Disambiguation="coproduct type"}} if it is formed in a
 [crisp context](modal-type-theory.crisp-types.md).
 
 ## Definitions

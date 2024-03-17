@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.universal-property-of-flat-discrete-crisp-types where
+module modal-type-theory.universal-property-flat-discrete-crisp-types where
 ```
 
 <details><summary>Imports</summary>
@@ -95,7 +95,7 @@ module _
 
 ## See also
 
-- [The dependent universal property of flat discrete crisp types](modal-type-theory.dependent-universal-property-of-flat-discrete-crisp-types.md)
+- [The dependent universal property of flat discrete crisp types](modal-type-theory.dependent-universal-property-flat-discrete-crisp-types.md)
 
 ## References
 

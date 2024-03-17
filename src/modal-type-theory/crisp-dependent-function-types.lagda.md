@@ -27,7 +27,7 @@ open import modal-type-theory.functoriality-flat-modality
 ## Idea
 
 We say a dependent function type is
-{{#concept "crisp" Disambigiation="dependent function type"}} if it is formed in
+{{#concept "crisp" Disambiguation="dependent function type"}} if it is formed in
 a [crisp context](modal-type-theory.crisp-types.md).
 
 ## Properties

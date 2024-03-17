@@ -29,7 +29,7 @@ open import modal-type-theory.functoriality-flat-modality
 ## Idea
 
 We say a [function type](foundation-core.function-types.md) is
-{{#concept "crisp" Disambigiation="function type"}} if it is formed in a
+{{#concept "crisp" Disambiguation="function type"}} if it is formed in a
 [crisp context](modal-type-theory.crisp-types.md).
 
 <!-- TODO explain crisp function vs crisply defined function (nonstandard terminology, find better name) -->
