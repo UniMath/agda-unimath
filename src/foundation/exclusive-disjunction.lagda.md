@@ -54,7 +54,7 @@ The definition of exclusive sum is sometimes generalized to arbitrary types,
 which we record here for completeness.
 
 The
-{{#concept "exclusive disjunction" Disambiguation="of types" Agda=xor-prop-type}}
+{{#concept "exclusive disjunction" Disambiguation="of types" Agda=xor-type-Prop}}
 of the types `A` and `B` is the proposition that their coproduct is contractible
 
 ```text
@@ -78,14 +78,14 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  xor-prop-type : Prop (l1 ⊔ l2)
-  xor-prop-type = is-contr-Prop (A + B)
+  xor-type-Prop : Prop (l1 ⊔ l2)
+  xor-type-Prop = is-contr-Prop (A + B)
 
   xor-type : UU (l1 ⊔ l2)
-  xor-type = type-Prop xor-prop-type
+  xor-type = type-Prop xor-type-Prop
 
   is-prop-xor-type : is-prop xor-type
-  is-prop-xor-type = is-prop-type-Prop xor-prop-type
+  is-prop-xor-type = is-prop-type-Prop xor-type-Prop
 ```
 
 ### The exclusive disjunction
@@ -96,7 +96,7 @@ module _
   where
 
   xor-Prop : Prop (l1 ⊔ l2)
-  xor-Prop = xor-prop-type (type-Prop P) (type-Prop Q)
+  xor-Prop = xor-type-Prop (type-Prop P) (type-Prop Q)
 
   type-xor-Prop : UU (l1 ⊔ l2)
   type-xor-Prop = type-Prop xor-Prop

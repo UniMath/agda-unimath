@@ -145,7 +145,7 @@ module _
 
   is-located-lower-upper-cut-ℝ :
     (q r : ℚ) → le-ℚ q r →
-    disjunction-type (is-in-lower-cut-ℝ q) (is-in-upper-cut-ℝ r)
+    type-disjunction-Prop (lower-cut-ℝ q) (upper-cut-ℝ r)
   is-located-lower-upper-cut-ℝ =
     pr2 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 

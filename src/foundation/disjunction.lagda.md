@@ -55,8 +55,8 @@ pair of logical implications `P → R` and `Q → R`, if and only if `P ∨ Q` i
 
 ```text
 P ---> P ∨ Q <--- Q
-  \      :      /
-    \    :    /
+  \      ∶      /
+    \    ∶    /
       ∨  ∨  ∨
          R.
 ```
@@ -79,7 +79,7 @@ satisfies the universal property of
 
 and is thus equivalent to it. Therefore, we may reasonably call this
 construction the
-{{#concept "disjunction" Disambiguation="of types" Agda=disjunction-prop-type}}
+{{#concept "disjunction" Disambiguation="of types" Agda=disjunction-type-Prop}}
 of types. It is important to keep in mind that this is not a generalization of
 the concept but rather a conflation, and should be read as the statement _`A` or
 `B` is (merely) [inhabited](foundation.inhabited-types.md)_. Still, it is useful
@@ -92,14 +92,14 @@ module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  disjunction-prop-type : Prop (l1 ⊔ l2)
-  disjunction-prop-type = trunc-Prop (A + B)
+  disjunction-type-Prop : Prop (l1 ⊔ l2)
+  disjunction-type-Prop = trunc-Prop (A + B)
 
   disjunction-type : UU (l1 ⊔ l2)
-  disjunction-type = type-Prop disjunction-prop-type
+  disjunction-type = type-Prop disjunction-type-Prop
 
   is-prop-disjunction-type : is-prop disjunction-type
-  is-prop-disjunction-type = is-prop-type-Prop disjunction-prop-type
+  is-prop-disjunction-type = is-prop-type-Prop disjunction-type-Prop
 ```
 
 ### The disjunction
@@ -110,7 +110,7 @@ module _
   where
 
   disjunction-Prop : Prop (l1 ⊔ l2)
-  disjunction-Prop = disjunction-prop-type (type-Prop P) (type-Prop Q)
+  disjunction-Prop = disjunction-type-Prop (type-Prop P) (type-Prop Q)
 
   type-disjunction-Prop : UU (l1 ⊔ l2)
   type-disjunction-Prop = type-Prop disjunction-Prop
@@ -180,7 +180,7 @@ module _
     map-universal-property-trunc-Prop R (rec-coproduct f g)
 
   up-disjunction :
-    universal-property-disjunction-type A B (disjunction-prop-type A B)
+    universal-property-disjunction-type A B (disjunction-type-Prop A B)
   up-disjunction R = ev-disjunction , elim-disjunction' R
 ```
 
@@ -216,7 +216,7 @@ module _
     type-Prop Q → disjunction-type A B
   backward-implication-iff-universal-property-disjunction =
     backward-implication
-      ( up-Q (disjunction-prop-type A B))
+      ( up-Q (disjunction-type-Prop A B))
       ( inl-disjunction , inr-disjunction)
 
   iff-universal-property-disjunction :
