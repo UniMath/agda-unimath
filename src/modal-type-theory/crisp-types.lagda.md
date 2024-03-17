@@ -7,9 +7,18 @@ module modal-type-theory.crisp-types where
 ## Idea
 
 A {{#concept "crisp type"}} is a type whose formation is done in a purely _crisp
-context_. In Agda, we can assume a variable type `A` is crisp by writing
-`@♭ A : UU`. Crisp types stand in contrast to {{#concept "cohesive types"}}
-which are types that may be formed in arbitrary contexts.
+context_.
+
+<!--
+  TODO Explain what a crisp context is
+
+  - Comonadic modality
+  - How to interpret a crisp type
+-->
+
+In Agda, we can assume a variable type `A` is crisp by writing `@♭ A : UU`.
+Crisp types stand in contrast to {{#concept "cohesive types"}} which are types
+that may be formed in arbitrary contexts.
 
 **Note:** The notion of being a crisp type is quite different to that of being
 [crisply flat discrete](modal-type-theory.flat-discrete-crisp-types.md).

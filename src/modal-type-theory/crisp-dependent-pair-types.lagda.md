@@ -38,7 +38,7 @@ crisp context. Here, we study the interactions between the
 
 ```agda
 Σ-♭ : {@♭ l1 l2 : Level} (@♭ A : UU l1) (@♭ B : @♭ A → UU l2) → UU (l1 ⊔ l2)
-Σ-♭ A B = Σ (♭ A) (flat-crisp-family B)
+Σ-♭ A B = Σ (♭ A) (action-flat-crisp-family B)
 ```
 
 ## Properties

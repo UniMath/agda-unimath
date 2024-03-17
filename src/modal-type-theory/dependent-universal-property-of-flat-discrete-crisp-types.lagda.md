@@ -50,17 +50,15 @@ open import modal-type-theory.functoriality-flat-modality
 
 ## Idea
 
-A crisp type is said to be
-{{$concept "flat discrete" Disambiguation="crisp type" Agda=is-flat-discrete-crisp}}
-if it is [flat](modal-type-theory.flat-modality.md) modal. I.e. if the flat
-counit is an [equivalence](foundation-core.equivalences.md) at that type.
-
-**Terminology:** In _Brouwer's fixed-point theorem in real-cohesive homotopy
-type theory_, this is called a _crisply discrete_ type.
-
 The
-{{#concept "universal property" Disambiguation="of flat discrete crisp types" Agda=universal-property-flat-discrete-crisp-type}}
-of flat discrete crisp types states that
+{{#concept "dependent universal property" Disambiguation="of flat discrete crisp types" Agda=universal-property-flat-discrete-crisp-type}}
+of a flat discrete crisp type `A` states that for any crisply defined crisp type
+family `B : A → 𝒰`, postcomposition by the counit induces an equivalence under
+the flat modality
+
+$$
+♭ \left(Π_{x :: A} ♭ (B (x))\right) ≃ ♭ \left(Π_{x :: A} B (x)\right)
+$$
 
 ## Definitions
 
@@ -78,28 +76,11 @@ dependent-universal-property-flat-discrete-crisp-type A =
   {@♭ l : Level} {@♭ B : @♭ A → UU l} → is-equiv (dependent-coev-flat {B = B})
 ```
 
-<!-- TODO: is B : @♭ A → UU l correct? -->
-
 ## Properties
 
 ### Flat discrete crisp types satisfy the dependent universal property of flat discrete crisp types
 
-This is Corollary 6.15 of {{#cite Shu18}}.
-
-```agda
-module _
-  {@♭ l1 : Level} {@♭ A : UU l1} (@♭ is-disc-A : is-flat-discrete-crisp A)
-  where
-
-  abstract
-    dependent-universal-property-flat-discrete-crisp-type-is-flat-discrete-crisp :
-      dependent-universal-property-flat-discrete-crisp-type A
-    dependent-universal-property-flat-discrete-crisp-type-is-flat-discrete-crisp
-      {B = B} =
-      is-equiv-htpy-equiv
-        {!   !}
-        {!   !}
-```
+This is Theorem 6.16 of {{#cite Shu18}}, and remains to be formalized.
 
 ## References
 

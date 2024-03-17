@@ -22,6 +22,7 @@ open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import modal-type-theory.action-on-identifications-crisp-functions
+open import modal-type-theory.action-on-identifications-flat-modality
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 ```
@@ -30,12 +31,12 @@ open import modal-type-theory.flat-modality
 
 ## Idea
 
-A crisp map `f : @♭ A → B` is
+A crisp and crisply defined map `f : @♭ A → B` is
 {{#concept "crisp injective" Agda=is-crisp-injective}} if for all crisp `x` and
 `y` and crisp `f x ＝ f y` we can show that `x ＝ y`. This stands in contrast to
-{{#concept "crisply injective" Agda=is-crisply-injective}} maps, which are crisp
-maps `f : A → B` such that for all crisp `x` and `y` and crisp `f x ＝ f y` we
-can show that `x ＝ y`.
+{{#concept "crisply injective" Agda=is-crisply-injective}} maps, which are
+merely _crisp maps_ `f : A → B` such that for all crisp `x` and `y` and crisp
+`f x ＝ f y` we can show that `x ＝ y`.
 
 ## Definitions
 
@@ -58,12 +59,12 @@ module _
   where
 
   is-crisply-injective : (@♭ f : A → B) → UU (l1 ⊔ l2)
-  is-crisply-injective f = {@♭ x y : A} → @♭ f x ＝ f y → x ＝ y
+  is-crisply-injective f = is-crisp-injective (λ x → f x)
 ```
 
 ## Properties
 
-### The flat constructor is crisp injective
+### The constructor function of the flat modality is crisp injective
 
 ```agda
 module _
@@ -82,6 +83,5 @@ module _
   where
 
   is-crisply-injective-counit-flat : is-crisply-injective (counit-flat {A = A})
-  is-crisply-injective-counit-flat {cons-flat x} {cons-flat y} p =
-    crisp-ap cons-flat p
+  is-crisply-injective-counit-flat {cons-flat x} {cons-flat y} = ap-flat
 ```

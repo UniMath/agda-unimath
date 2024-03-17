@@ -41,8 +41,11 @@ open import modal-type-theory.functoriality-flat-modality
 ## Idea
 
 We say a [pullback](foundation-core.pullbacks.md) is
-{{#concept "crisp" Disambigiation="pullback"}} if it is formed in a crisp
-context.
+{{#concept "crisp" Disambigiation="pullback"}} if it is formed in a
+[crisp context](modal-type-theory.crisp-types.md).
+
+**Remark.** The results in this file should hold more generally for crisp and
+crisply defined maps `f : @♭ A → X` and `g : @♭ B → X`.
 
 ## Properties
 
@@ -90,7 +93,7 @@ module _
         ( eq-pair-eq-fiber
           ( crisp-based-ind-Id
             ( λ where
-              (cons-flat y) p → ap-flat (ap counit-flat p) ＝ p)
+              (cons-flat y) p → crisp-ap cons-flat (ap counit-flat p) ＝ p)
             ( refl)
             ( p)))
 ```

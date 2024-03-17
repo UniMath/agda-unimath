@@ -167,3 +167,11 @@ The following is Corollary 6.2 in {{#cite Shu18}}.
   crisp-flat-extensionality-flat (cons-flat x) (cons-flat y) =
     extensionality-flat (cons-flat x) (cons-flat y)
 ```
+
+## See also
+
+- We show that identity types between crisp elements of flat discrete crisp
+  types are flat discrete crisp in
+  [`modal-type-theory.flat-discrete-crisp-types`](modal-type-theory.flat-discrete-crisp-types.md).
+- [Action on identifications of crisp functions](modal-type-theory.action-on-identifications-crisp-functions.md)
+- [Transport along crisp identifications](modal-type-theory.transport-along-crisp-identifications.md)

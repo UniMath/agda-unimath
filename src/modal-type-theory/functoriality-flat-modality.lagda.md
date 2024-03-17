@@ -45,11 +45,11 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1}
   where
 
-  flat-crisp-family : @♭ (@♭ A → UU l2) → ♭ A → UU l2
-  flat-crisp-family B (cons-flat x) = ♭ (B x)
+  action-flat-crisp-family : @♭ (@♭ A → UU l2) → ♭ A → UU l2
+  action-flat-crisp-family B (cons-flat x) = ♭ (B x)
 
-  flat-family : @♭ (A → UU l2) → ♭ A → UU l2
-  flat-family B = flat-crisp-family (crispen B)
+  action-flat-family : @♭ (A → UU l2) → ♭ A → UU l2
+  action-flat-family B = action-flat-crisp-family (crispen B)
 ```
 
 ### The flat modality's action on maps
@@ -62,11 +62,13 @@ module _
   ap-crisp-dependent-map-flat :
     {@♭ B : @♭ A → UU l2} →
     @♭ ((@♭ x : A) → B x) →
-    ((x : ♭ A) → flat-crisp-family B x)
+    ((x : ♭ A) → action-flat-crisp-family B x)
   ap-crisp-dependent-map-flat f (cons-flat x) = cons-flat (f x)
 
   ap-dependent-map-flat :
-    {@♭ B : A → UU l2} → @♭ ((x : A) → B x) → ((x : ♭ A) → flat-family B x)
+    {@♭ B : A → UU l2} →
+    @♭ ((x : A) → B x) →
+    ((x : ♭ A) → action-flat-family B x)
   ap-dependent-map-flat f = ap-crisp-dependent-map-flat (crispen f)
 
 module _
