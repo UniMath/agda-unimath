@@ -23,8 +23,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **flat modality** is an axiomatized comonadic modality we adjoin to our type
-theory by use of _crisp type theory_.
+The {{#concept "flat modality" Agda=♭}} is an axiomatized comonadic modality we
+adjoin to our type theory by use of _crisp type theory_.
 
 ## Definition
 

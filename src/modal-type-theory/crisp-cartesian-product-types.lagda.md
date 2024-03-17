@@ -34,7 +34,7 @@ open import modal-type-theory.flat-modality
 
 We say a [cartesian product type](foundation-core.cartesian-product-types.md) is
 {{#concept "crisp" Disambigiation="cartesian product type"}} if it is formed in
-a crisp context.
+a [crisp context](modal-type-theory.crisp-types.md).
 
 ## Properties
 

@@ -29,7 +29,8 @@ open import modal-type-theory.flat-modality
 ## Idea
 
 We record here some basic facts about
-[identity types](foundation-core.identity-types.md) in crisp contexts.
+[identity types](foundation-core.identity-types.md) in
+[crisp contexts](modal-type-theory.crisp-types.md).
 
 ## Definitions
 
