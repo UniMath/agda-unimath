@@ -37,8 +37,8 @@ crisp context. Here, we study the interactions between the
 ## Definitions
 
 ```agda
-Σ-♭ : {@♭ l1 l2 : Level} (@♭ A : UU l1) (@♭ B : A → UU l2) → UU (l1 ⊔ l2)
-Σ-♭ A B = Σ (♭ A) (flat-family B)
+Σ-♭ : {@♭ l1 l2 : Level} (@♭ A : UU l1) (@♭ B : @♭ A → UU l2) → UU (l1 ⊔ l2)
+Σ-♭ A B = Σ (♭ A) (flat-crisp-family B)
 ```
 
 ## Properties
@@ -52,11 +52,11 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
   where
 
-  map-distributive-flat-Σ : ♭ (Σ A B) → Σ-♭ A B
+  map-distributive-flat-Σ : ♭ (Σ A B) → Σ-♭ A (λ x → B x)
   pr1 (map-distributive-flat-Σ (cons-flat (x , y))) = cons-flat x
   pr2 (map-distributive-flat-Σ (cons-flat (x , y))) = cons-flat y
 
-  map-inv-distributive-flat-Σ : Σ-♭ A B → ♭ (Σ A B)
+  map-inv-distributive-flat-Σ : Σ-♭ A (λ x → B x) → ♭ (Σ A B)
   map-inv-distributive-flat-Σ (cons-flat x , cons-flat y) = cons-flat (x , y)
 
   is-section-map-distributive-flat-Σ :
@@ -79,11 +79,11 @@ module _
   pr1 is-equiv-map-distributive-flat-Σ = section-distributive-flat-Σ
   pr2 is-equiv-map-distributive-flat-Σ = retraction-distributive-flat-Σ
 
-  distributive-flat-Σ : ♭ (Σ A B) ≃ Σ-♭ A B
+  distributive-flat-Σ : ♭ (Σ A B) ≃ Σ-♭ A (λ x → B x)
   pr1 distributive-flat-Σ = map-distributive-flat-Σ
   pr2 distributive-flat-Σ = is-equiv-map-distributive-flat-Σ
 
-  inv-distributive-flat-Σ : Σ-♭ A B ≃ ♭ (Σ A B)
+  inv-distributive-flat-Σ : Σ-♭ A (λ x → B x) ≃ ♭ (Σ A B)
   inv-distributive-flat-Σ = inv-equiv distributive-flat-Σ
 ```
 

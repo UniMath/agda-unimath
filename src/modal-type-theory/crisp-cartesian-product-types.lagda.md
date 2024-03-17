@@ -47,11 +47,11 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
-  map-distributive-flat-product : ♭ (A × B) → (♭ A) × (♭ B)
+  map-distributive-flat-product : ♭ (A × B) → ♭ A × ♭ B
   pr1 (map-distributive-flat-product (cons-flat (x , y))) = cons-flat x
   pr2 (map-distributive-flat-product (cons-flat (x , y))) = cons-flat y
 
-  map-inv-distributive-flat-product : (♭ A) × (♭ B) → ♭ (A × B)
+  map-inv-distributive-flat-product : ♭ A × ♭ B → ♭ (A × B)
   map-inv-distributive-flat-product (cons-flat x , cons-flat y) =
     cons-flat (x , y)
 
@@ -82,11 +82,11 @@ module _
   pr2 is-equiv-map-distributive-flat-product =
     retraction-distributive-flat-product
 
-  distributive-flat-product : ♭ (A × B) ≃ (♭ A) × (♭ B)
+  distributive-flat-product : ♭ (A × B) ≃ ♭ A × ♭ B
   pr1 distributive-flat-product = map-distributive-flat-product
   pr2 distributive-flat-product = is-equiv-map-distributive-flat-product
 
-  inv-distributive-flat-product : (♭ A) × (♭ B) ≃ ♭ (A × B)
+  inv-distributive-flat-product : ♭ A × ♭ B ≃ ♭ (A × B)
   inv-distributive-flat-product = inv-equiv distributive-flat-product
 ```
 

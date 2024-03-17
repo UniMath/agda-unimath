@@ -36,21 +36,33 @@ open import modal-type-theory.functoriality-flat-modality
 Given a crisp [homotopy](foundation-core.homotopies.md) of maps `f ~ g`, then
 there is a homotopy `♭ f ~ ♭ g` where `♭ f` is the
 [functorial action of the flat modality on maps](modal-type-theory.functoriality-flat-modality.md).
-In particular, this construction does not rely on
-[function extensionality](foundation.function-extensionality.md).
 
 ## Definitions
+
+### The flat modality's action on crisp homotopies
+
+```agda
+module _
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : @♭ A → UU l2}
+  {@♭ f g : (@♭ x : A) → B x}
+  where
+
+  ap-crisp-htpy-flat :
+    @♭ ((@♭ x : A) → f x ＝ g x) →
+    ap-crisp-dependent-map-flat f ~ ap-crisp-dependent-map-flat g
+  ap-crisp-htpy-flat H (cons-flat x) = ap-flat (H x)
+```
 
 ### The flat modality's action on homotopies
 
 ```agda
 module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2} {@♭ f g : (x : A) → B x}
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
+  {@♭ f g : (x : A) → B x}
   where
 
-  ap-htpy-flat :
-    @♭ f ~ g → ap-dependent-map-flat f ~ ap-dependent-map-flat g
-  ap-htpy-flat H (cons-flat x) = ap-flat (H x)
+  ap-htpy-flat : @♭ f ~ g → ap-dependent-map-flat f ~ ap-dependent-map-flat g
+  ap-htpy-flat H = ap-crisp-htpy-flat (λ x → H x)
 ```
 
 ## Properties
@@ -59,9 +71,10 @@ module _
 
 ```agda
 module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2} {@♭ f : (x : A) → B x}
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2} {@♭ f : (@♭ x : A) → B x}
   where
 
-  compute-ap-flat-refl-htpy : ap-htpy-flat (refl-htpy' f) ~ refl-htpy
-  compute-ap-flat-refl-htpy (cons-flat x) = refl
+  compute-ap-crisp-flat-refl-htpy :
+    ap-crisp-htpy-flat (λ x → (refl {x = f x})) ~ refl-htpy
+  compute-ap-crisp-flat-refl-htpy (cons-flat x) = refl
 ```

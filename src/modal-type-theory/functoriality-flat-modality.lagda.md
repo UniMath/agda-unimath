@@ -20,6 +20,7 @@ open import foundation.sections
 open import foundation.universe-levels
 
 open import modal-type-theory.action-on-identifications-crisp-functions
+open import modal-type-theory.action-on-identifications-flat-modality
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 ```
@@ -35,7 +36,7 @@ The [flat modality](modal-type-theory.flat-modality.md) is functorial.
   as `♭(g ∘ f) ~ ♭g ∘ ♭f`
 - The identity is mapped to the identity.
 
-## Definition
+## Definitions
 
 ### The flat modality's action on type families
 
@@ -151,27 +152,25 @@ module _
 
   ap-section-flat : @♭ section f → section (ap-map-flat f)
   pr1 (ap-section-flat (g , H)) = ap-map-flat g
-  pr2 (ap-section-flat (g , H)) (cons-flat x) = crisp-ap cons-flat (H x)
+  pr2 (ap-section-flat (g , H)) (cons-flat x) = ap-flat (H x)
 
   ap-retraction-flat : @♭ retraction f → retraction (ap-map-flat f)
   pr1 (ap-retraction-flat (g , H)) = ap-map-flat g
-  pr2 (ap-retraction-flat (g , H)) (cons-flat x) = crisp-ap cons-flat (H x)
+  pr2 (ap-retraction-flat (g , H)) (cons-flat x) = ap-flat (H x)
 
   is-equiv-ap-is-equiv-map-flat : @♭ is-equiv f → is-equiv (ap-map-flat f)
-  pr1 (is-equiv-ap-is-equiv-map-flat (s , r)) = ap-section-flat s
-  pr2 (is-equiv-ap-is-equiv-map-flat (s , r)) = ap-retraction-flat r
+  is-equiv-ap-is-equiv-map-flat (s , r) =
+    ( ap-section-flat s , ap-retraction-flat r)
 
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
   where
 
   ap-retract-flat : @♭ (A retract-of B) → ♭ A retract-of ♭ B
-  pr1 (ap-retract-flat (f , r)) = ap-map-flat f
-  pr2 (ap-retract-flat (f , r)) = ap-retraction-flat r
+  ap-retract-flat (f , r) = (ap-map-flat f , ap-retraction-flat r)
 
   ap-equiv-flat : @♭ (A ≃ B) → ♭ A ≃ ♭ B
-  pr1 (ap-equiv-flat (f , H)) = ap-map-flat f
-  pr2 (ap-equiv-flat (f , H)) = is-equiv-ap-is-equiv-map-flat H
+  ap-equiv-flat (f , H) = (ap-map-flat f , is-equiv-ap-is-equiv-map-flat H)
 ```
 
 ## See also

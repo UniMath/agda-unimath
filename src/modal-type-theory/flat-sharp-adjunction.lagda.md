@@ -24,6 +24,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import modal-type-theory.action-on-identifications-crisp-functions
+open import modal-type-theory.action-on-identifications-flat-modality
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 open import modal-type-theory.functoriality-flat-modality
@@ -134,12 +135,12 @@ module _
   is-section-ap-map-flat-unit-sharp :
     is-section ap-map-flat-elim-sharp ap-map-flat-unit-sharp
   is-section-ap-map-flat-unit-sharp (cons-flat x) =
-    crisp-ap cons-flat (compute-crisp-elim-sharp x)
+    ap-flat (compute-crisp-elim-sharp x)
 
   is-retraction-ap-map-flat-unit-sharp :
     is-retraction ap-map-flat-elim-sharp ap-map-flat-unit-sharp
   is-retraction-ap-map-flat-unit-sharp (cons-flat x) =
-    crisp-ap cons-flat (uniqueness-crisp-elim-sharp x)
+    ap-flat (uniqueness-crisp-elim-sharp x)
 
   is-equiv-ap-map-flat-elim-sharp : is-equiv ap-map-flat-elim-sharp
   pr1 (pr1 is-equiv-ap-map-flat-elim-sharp) = ap-map-flat-unit-sharp

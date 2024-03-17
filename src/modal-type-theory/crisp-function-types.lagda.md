@@ -22,6 +22,7 @@ open import foundation.sections
 open import foundation.universe-levels
 
 open import modal-type-theory.action-on-identifications-crisp-functions
+open import modal-type-theory.action-on-identifications-flat-modality
 open import modal-type-theory.crisp-dependent-function-types
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
@@ -71,14 +72,14 @@ module _
       ( ap-map-flat (postcomp (♭ B) counit-flat))
       ( map-inv-ap-map-flat-postcomp-counit-flat)
   is-section-map-inv-ap-map-flat-postcomp-counit-flat (cons-flat f) =
-    crisp-ap cons-flat (eq-htpy (λ where (cons-flat _) → refl))
+    ap-flat (eq-htpy (λ where (cons-flat _) → refl))
 
   is-retraction-map-inv-ap-map-flat-postcomp-counit-flat :
     is-retraction
       ( ap-map-flat (postcomp (♭ B) counit-flat))
       ( map-inv-ap-map-flat-postcomp-counit-flat)
   is-retraction-map-inv-ap-map-flat-postcomp-counit-flat (cons-flat f) =
-    crisp-ap cons-flat
+    ap-flat
       ( eq-htpy
         ( λ where
           (cons-flat x) → is-crisp-retraction-cons-flat (f (cons-flat x))))

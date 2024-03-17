@@ -28,6 +28,7 @@ open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import modal-type-theory.action-on-identifications-crisp-functions
+open import modal-type-theory.action-on-identifications-flat-modality
 open import modal-type-theory.crisp-dependent-pair-types
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-discrete-crisp-types
@@ -57,7 +58,7 @@ module _
     ♭ (standard-pullback f g) →
     standard-pullback (ap-map-flat f) (ap-map-flat g)
   map-distributive-flat-standard-pullback (cons-flat (x , y , p)) =
-    ( cons-flat x , cons-flat y , crisp-ap cons-flat p)
+    ( cons-flat x , cons-flat y , ap-flat p)
 
   map-inv-distributive-flat-standard-pullback :
     @♭ standard-pullback (ap-map-flat f) (ap-map-flat g) →
@@ -89,7 +90,7 @@ module _
         ( eq-pair-eq-fiber
           ( crisp-based-ind-Id
             ( λ where
-              (cons-flat y) p → crisp-ap cons-flat (ap counit-flat p) ＝ p)
+              (cons-flat y) p → ap-flat (ap counit-flat p) ＝ p)
             ( refl)
             ( p)))
 ```
