@@ -82,10 +82,14 @@ construction the
 {{#concept "disjunction" Disambiguation="of types" Agda=disjunction-type-Prop}}
 of types. It is important to keep in mind that this is not a generalization of
 the concept but rather a conflation, and should be read as the statement _`A` or
-`B` is (merely) [inhabited](foundation.inhabited-types.md)_. Still, it is useful
-to begin by considering disjunction on arbitrary types, as many constructions
-pertaining to disjunction apply in this context, and it enables the inference
-mechanism of Agda to do more work for us.
+`B` is (merely) [inhabited](foundation.inhabited-types.md)_.
+
+Because propositions are a special case of types, and Agda can generally infer
+types for us, we will continue to conflate the two in our formalizations for the
+benefit that we have to specify the propositions in our code less often. For
+instance, even though the introduction rules for disjunction are phrased in
+terms of disjunction of types, they equally apply to disjunction of
+propositions.
 
 ```agda
 module _
@@ -141,6 +145,11 @@ module _
   inr-disjunction : B → disjunction-type A B
   inr-disjunction = unit-trunc-Prop ∘ inr
 ```
+
+**Note.** Even though the introduction rules are formalized in terms of
+disjunction of types, it equally applies to disjunction of propositions. This is
+because propositions are a special case of types. The benefit of this approach
+is that Agda can infer types for us, but not generally propositions.
 
 ### The universal property of disjunctions
 
