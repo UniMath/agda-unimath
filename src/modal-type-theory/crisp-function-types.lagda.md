@@ -9,22 +9,17 @@ module modal-type-theory.crisp-function-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
 
-open import modal-type-theory.action-on-identifications-crisp-functions
 open import modal-type-theory.action-on-identifications-flat-modality
 open import modal-type-theory.crisp-dependent-function-types
-open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 open import modal-type-theory.functoriality-flat-modality
 ```

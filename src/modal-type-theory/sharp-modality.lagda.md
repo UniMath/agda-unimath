@@ -15,7 +15,6 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.locally-small-types
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.locally-small-modal-operators

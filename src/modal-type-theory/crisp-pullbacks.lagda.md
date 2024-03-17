@@ -15,15 +15,11 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-pullbacks
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.inhabited-types
 open import foundation.morphisms-cospan-diagrams
 open import foundation.pullbacks
-open import foundation.retractions
-open import foundation.sections
 open import foundation.standard-pullbacks
 open import foundation.universe-levels
 

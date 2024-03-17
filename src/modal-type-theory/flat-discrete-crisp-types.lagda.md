@@ -13,33 +13,20 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.postcomposition-dependent-functions
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.retractions
-open import foundation.retracts-of-types
 open import foundation.sections
-open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.univalence
-open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import modal-type-theory.action-on-homotopies-flat-modality
-open import modal-type-theory.action-on-identifications-crisp-functions
-open import modal-type-theory.crisp-function-types
 open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 open import modal-type-theory.functoriality-flat-modality

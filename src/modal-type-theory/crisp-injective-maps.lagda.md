@@ -10,20 +10,10 @@ module modal-type-theory.crisp-injective-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
 open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.retractions
-open import foundation.retracts-of-types
-open import foundation.sections
-open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import modal-type-theory.action-on-identifications-crisp-functions
 open import modal-type-theory.action-on-identifications-flat-modality
-open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 ```
 

@@ -14,7 +14,6 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
@@ -23,7 +22,6 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
 
-open import modal-type-theory.crisp-dependent-pair-types
 open import modal-type-theory.flat-discrete-crisp-types
 open import modal-type-theory.flat-modality
 ```

@@ -11,8 +11,6 @@ module modal-type-theory.flat-modality where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
 open import foundation.sections

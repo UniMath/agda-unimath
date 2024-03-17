@@ -14,7 +14,6 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
-open import foundation-core.negation
 open import foundation-core.propositions
 ```
 

@@ -9,31 +9,20 @@ module modal-type-theory.flat-sharp-adjunction where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.locally-small-types
-open import foundation.multivariable-sections
 open import foundation.retractions
 open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import modal-type-theory.action-on-identifications-crisp-functions
 open import modal-type-theory.action-on-identifications-flat-modality
-open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 open import modal-type-theory.functoriality-flat-modality
 open import modal-type-theory.sharp-codiscrete-types
 open import modal-type-theory.sharp-modality
-
-open import orthogonal-factorization-systems.locally-small-modal-operators
-open import orthogonal-factorization-systems.modal-induction
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
 </details>
