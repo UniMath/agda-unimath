@@ -86,12 +86,21 @@ module _
     inv-equiv equiv-funext
 
   map-compute-dependent-identification-function-type-fixed-codomain :
-    (p : x ＝ y) (f : B x → C) (g : B y → C) →
+    (p : x ＝ y) {f : B x → C} {g : B y → C} →
     ((b : B x) → f b ＝ g (tr B p b)) →
     dependent-identification (λ a → B a → C) p f g
-  map-compute-dependent-identification-function-type-fixed-codomain p f g =
+  map-compute-dependent-identification-function-type-fixed-codomain p {f} {g} =
     map-equiv
       ( compute-dependent-identification-function-type-fixed-codomain p f g)
+
+  compute-map-compute-dependent-identification-function-type-fixed-codomain :
+    (p : x ＝ y) (f : Σ A B → C) →
+    map-compute-dependent-identification-function-type-fixed-codomain p
+      (λ y → ap f (eq-pair-Σ p refl)) ＝
+    apd (ev-pair f) p
+  compute-map-compute-dependent-identification-function-type-fixed-codomain
+    refl f =
+    eq-htpy-refl-htpy _
 ```
 
 ### Relation between `compute-dependent-identification-function-type` and `preserves-tr`

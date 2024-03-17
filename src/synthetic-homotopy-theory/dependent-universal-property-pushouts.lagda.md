@@ -26,6 +26,7 @@ open import foundation.standard-pullbacks
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.action-dependent-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts

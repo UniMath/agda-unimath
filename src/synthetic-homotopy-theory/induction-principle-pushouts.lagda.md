@@ -14,6 +14,7 @@ open import foundation.sections
 open import foundation.span-diagrams
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.action-dependent-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 ```

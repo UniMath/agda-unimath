@@ -111,24 +111,6 @@ module _
     coherence-square-dependent-cocone-span-diagram = pr2 (pr2 d)
 ```
 
-### Postcomposing dependent cocones with maps
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
-  {X : UU l4} (c : cocone-span-diagram 𝒮 X) (P : X → UU l5)
-  where
-
-  dependent-cocone-map-span-diagram :
-    ((x : X) → P x) → dependent-cocone-span-diagram 𝒮 c P
-  pr1 (dependent-cocone-map-span-diagram h) a =
-    h (left-map-cocone-span-diagram 𝒮 c a)
-  pr1 (pr2 (dependent-cocone-map-span-diagram h)) b =
-    h (right-map-cocone-span-diagram 𝒮 c b)
-  pr2 (pr2 (dependent-cocone-map-span-diagram h)) s =
-    apd h (coherence-square-cocone-span-diagram 𝒮 c s)
-```
-
 ## Properties
 
 ### Characterization of identifications of dependent cocones

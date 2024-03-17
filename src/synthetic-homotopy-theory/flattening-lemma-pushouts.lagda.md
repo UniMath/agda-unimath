@@ -29,6 +29,7 @@ open import foundation.transport-along-identifications
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.action-dependent-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
@@ -37,6 +38,7 @@ open import synthetic-homotopy-theory.descent-property-families-of-types-pushout
 open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-span-diagrams
 open import synthetic-homotopy-theory.equivalences-families-of-types-pushouts
 open import synthetic-homotopy-theory.families-of-types-pushouts
+open import synthetic-homotopy-theory.families-of-types-equipped-with-descent-data-pushouts
 open import synthetic-homotopy-theory.flattening-families-of-types-pushouts
 open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.universal-property-pushouts
@@ -188,17 +190,33 @@ map of span diagrams:
 where the vertical maps are equivalences given fiberwise by the equivalence of
 descent data.
 
-```text
+```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  { l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
   { X : UU l4} (c : cocone-span-diagram 𝒮 X)
-  ( P : structure-type-family-pushout l5 𝒮)
-  ( Q : X → UU l5)
-  ( e :
-    equiv-structure-type-family-pushout 𝒮 P
-      ( descent-data-type-family-pushout 𝒮 c Q))
+  ( Y : family-with-descent-data-pushout l5 l6 𝒮 c)
   where
 
+  abstract
+    flattening-lemma-descent-data-pushout :
+      universal-property-pushout 𝒮 c →
+      universal-property-pushout
+        ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
+        ( cocone-flattening-structure-type-family-pushout 𝒮 c Y)
+    flattening-lemma-descent-data-pushout H = {!!}
+
+{-
+      universal-property-pushout-equiv-cocone-equiv-span-diagram
+        ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
+        ( cocone-flattening-structure-type-family-pushout 𝒮 c P Q e)
+        ( span-diagram-flattening-type-family-pushout 𝒮 c Q)
+        ( cocone-flattening-type-family-pushout 𝒮 c Q)
+        ( equiv-span-diagram-flattening-lemma-descent-data-pushout)
+        ( equiv-cocone-flattening-lemma-descent-data-pushout)
+        ( flattening-lemma-pushout 𝒮 c Q H) -}
+```
+
+```text
   equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
     domain-flattening-structure-type-family-pushout 𝒮 P ≃
     domain-flattening-type-family-pushout 𝒮 c Q
