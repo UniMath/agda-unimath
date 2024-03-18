@@ -216,7 +216,7 @@ cocone as displayed in the following commuting square:
   Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
            |                                                 |
            |                                                 |
-           V                                               ⌜ V
+           ∨                                               ⌜ ∨
   Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x).
 ```
 
@@ -411,24 +411,26 @@ module _
 
 ### Computation of cocones under the flattening span diagram of the structure of a type family of a pushout
 
-Consider a span diagram `𝒮 := (A <-f- S -g-> B)`, a cocone `c := (i , j , H)` under `𝒮` with codomain `X`, and a family `Y : X → 𝒰`. Let `𝒯` be the flattening span diagram of `𝒮` and the descent data of `Y`, i.e., `𝒯` is given by
+Consider a span diagram `𝒮 := (A <-f- S -g-> B)`, a cocone `c := (i , j , H)` under `𝒮` with codomain `X`, and a family `Y : X → 𝒰`. Let `Σ 𝒮 Y` be the flattening span diagram of `𝒮` and the descent data of `Y`, i.e., `Σ 𝒮 Y` is given by
 
 ```text
-  Σ (a : A), Y (i a) <-- Σ (s : S), Y (if s) --> Σ (s : S), Y (jg s) --> Σ (b : B), Y (j b).
+  Σ (a : A), Y (i a) <---- Σ (s : S), Y (if s) ----> Σ (b : B), Y (j b).
 ```
 
 Under these assumptions we claim that there is a commuting square
 
 ```text
-                          ev-pair
-  ((Σ (x : X), Y x) → Z) ---------> ((x : X) → Y x → Z)
-             |               ≃               |
-  cocone-map |                               | dependent-cocone-map
-             V         ≃                     V
-        cocone 𝒯 Z ---------> dependent-cocone 𝒮 c (λ x → Y x → Z)
+                               ev-pair
+  ((Σ (x : X), Y x) → Z) ----------------> ((x : X) → Y x → Z)
+             |                    ≃                 |
+  cocone-map |                                      | dependent-cocone-map
+             ∨                 ≃                    ∨
+     cocone (Σ 𝒮 Y) Z -------------------> dependent-cocone 𝒮 c (λ x → Y x → Z)
+                       currying-cocone
 ```
 
-in which the top and bottom maps are equivalences.
+in which the top and bottom maps are equivalences. The bottom map is so-called
+because we think of
 
 ```agda
 module _
@@ -481,11 +483,80 @@ module _
         ( refl-htpy) ,
         ( λ s →
           ( right-unit) ∙
-          ( compute-map-compute-dependent-identification-function-type-fixed-codomain
+          ( compute-compute-dependent-identification-function-type-fixed-codomain
             ( Y)
             ( Z)
             ( coherence-square-cocone-span-diagram 𝒮 c s)
             ( h))))
+```
+
+Similarly, we obtain a
+commuting square
+
+```text
+                                   ind-Σ
+             ((x : X) → Y x → Z) ---------> ((Σ (x : X), Y x) → Z)
+                      |               ≃                 |
+           cocone-map |                                 | dependent-cocone-map
+                      ∨                     ≃           ∨
+  dependent-cocone 𝒮 c (λ x → Y x → Z) ---------> cocone (Σ 𝒮 Y) Z
+```
+
+in which the top and bottom maps are again equivalences.
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
+  { X : UU l4} (c : cocone-span-diagram 𝒮 X) (Y : X → UU l5) (Z : UU l6)
+  where
+
+  inv-compute-cocone-flattening-type-family-pushout :
+    dependent-cocone-flattening-type-family-pushout 𝒮 c Y Z ≃
+    cocone-span-diagram (span-diagram-flattening-type-family-pushout 𝒮 c Y) Z
+  inv-compute-cocone-flattening-type-family-pushout =
+    equiv-Σ _
+      ( equiv-ind-Σ)
+      ( λ i' →
+        equiv-Σ _
+          ( equiv-ind-Σ)
+          ( λ j' →
+            ( equiv-ind-Σ) ∘e
+            ( equiv-Π-equiv-family
+              ( λ s →
+                inv-compute-dependent-identification-function-type-fixed-codomain
+                  ( Y)
+                  ( Z)
+                  ( coherence-square-cocone-span-diagram 𝒮 c s)
+                  ( i' (left-map-span-diagram 𝒮 s))
+                  ( j' (right-map-span-diagram 𝒮 s))))))
+
+  map-inv-compute-cocone-flattening-type-family-pushout :
+    dependent-cocone-flattening-type-family-pushout 𝒮 c Y Z →
+    cocone-span-diagram (span-diagram-flattening-type-family-pushout 𝒮 c Y) Z
+  map-inv-compute-cocone-flattening-type-family-pushout =
+    map-equiv inv-compute-cocone-flattening-type-family-pushout
+
+  square-inv-compute-cocone-flattening-type-family-pushout :
+    coherence-square-maps
+      ( ind-Σ)
+      ( dependent-cocone-map-span-diagram 𝒮 c (λ x → Y x → Z))
+      ( cocone-map-span-diagram
+        ( span-diagram-flattening-type-family-pushout 𝒮 c Y)
+        ( cocone-flattening-type-family-pushout 𝒮 c Y))
+      ( map-inv-compute-cocone-flattening-type-family-pushout)
+  square-inv-compute-cocone-flattening-type-family-pushout h =
+    eq-htpy-cocone-span-diagram
+      ( span-diagram-flattening-type-family-pushout 𝒮 c Y)
+      ( map-inv-compute-cocone-flattening-type-family-pushout
+        ( dependent-cocone-map-span-diagram 𝒮 c (λ x → Y x → Z) h))
+      ( cocone-map-span-diagram
+        ( span-diagram-flattening-type-family-pushout 𝒮 c Y)
+        ( cocone-flattening-type-family-pushout 𝒮 c Y)
+        ( ind-Σ h))
+      ( ( refl-htpy) ,
+        ( refl-htpy) ,
+        ( λ (s , y) →
+          {!!}))
 ```
 
 ### Computation of cocones under the flattening span diagram of the structure of a type family of a pushout
@@ -520,7 +591,7 @@ Under these assumptions we claim that there is a commuting square
   ((Σ (x : X), Y x) → Z) ---------> ((x : X) → Y x → Z)
              |               ≃               |
   cocone-map |                               | dependent-cocone-map
-             V         ≃                     V
+             ∨         ≃                     ∨
         cocone 𝒯 Z ---------> dependent-cocone 𝒮 c (λ x → Y x → Z)
 ```
 
@@ -555,8 +626,8 @@ Thus, we obtain by `comp-cocone-equiv-span-diagram 𝒮 𝒯 α` a commuting squ
   ((Σ (x : X), Y x) → Z) -----> ((Σ (x : x), Y x) → Z)
                |                             |
     cocone-map |                             | cocone-map
-               V             ≃               V
-          cocone 𝒯 Z -----------------> cocone (Σ 𝒮 Y) Z
+               ∨             ≃               ∨
+      cocone (Σ 𝒮 Y) Z -----------------> cocone 𝒯 Z
 ```
 
 Furthermore, it is straightforward to see that we have a commuting square
@@ -565,11 +636,11 @@ Furthermore, it is straightforward to see that we have a commuting square
   ((Σ (x : X), Y x) → Z) -------------> ((x : X) → Y x → Z)
                |                                 |
     cocone-map |                                 | dependent-cocone-map
-               V                ≃                V
+               ∨                ≃                ∨
           cocone (Σ 𝒮 Y) Z ----------> dependent-cocone 𝒮 (λ x → Y x → Z)
 ```
 
-The claim now follows by pasting these two commuting squares.
+Note that the left map in both these squares is the same.
 
 ```agda
 module _
@@ -664,6 +735,12 @@ module _
           ( descent-data-type-family-family-with-descent-data-pushout 𝒮 c Y)
           ( equiv-structure-type-family-family-with-descent-data-pushout 𝒮 c
             ( Y)))))
+
+  map-compute-cocone-flattening-family-with-descent-data-pushout :
+    cocone-flattening-family-with-descent-data-pushout →
+    dependent-cocone-flattening-family-with-descent-data-pushout
+  map-compute-cocone-flattening-family-with-descent-data-pushout =
+    map-equiv compute-cocone-flattening-family-with-descent-data-pushout    
 ```
 
 ```text

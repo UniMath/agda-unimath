@@ -201,3 +201,4 @@ module _
 - [Action of functions on identifications](foundation.action-on-identifications-functions.md)
 - [Action of functions on higher identifications](foundation.action-on-higher-identifications-functions.md).
 - [Action of dependent functions on identifications](foundation.action-on-identifications-dependent-functions.md).
+- [Action of binary dependent functions on identifications](foundation.action-on-identifications-binary-dependent-functions.md)

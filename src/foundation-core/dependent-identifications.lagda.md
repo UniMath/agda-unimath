@@ -49,7 +49,7 @@ refl-dependent-identification :
 refl-dependent-identification B = refl
 ```
 
-### Iterated dependent identifications
+### Dependent 2-identifications
 
 ```agda
 module _
@@ -64,4 +64,18 @@ module _
     UU l2
   dependent-identification² α {x'} {y'} p' q' =
     dependent-identification (λ t → dependent-identification B t x' y') α p' q'
+```
+
+### Double dependent identifications
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  where
+
+  double-dependent-identification :
+    {x x' : A} (p : x ＝ x') {y : B x} {y' : B x'} →
+    dependent-identification B p y y' → C x y → C x' y' → UU l3
+  double-dependent-identification refl q z z' =
+    dependent-identification (C _) q z z'
 ```

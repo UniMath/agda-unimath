@@ -203,7 +203,8 @@ module _
       universal-property-pushout
         ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
         ( cocone-flattening-structure-type-family-pushout 𝒮 c Y)
-    flattening-lemma-descent-data-pushout H = {!!}
+    flattening-lemma-descent-data-pushout H =
+      {!is-equiv-left-is-equiv-right-square!}
 
 {-
       universal-property-pushout-equiv-cocone-equiv-span-diagram
