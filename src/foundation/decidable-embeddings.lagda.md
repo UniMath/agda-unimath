@@ -17,6 +17,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.structured-type-duality
 open import foundation.subtype-identity-principle

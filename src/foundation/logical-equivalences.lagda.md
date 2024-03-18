@@ -46,25 +46,25 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-logical-equivalence : (A → B) → UU (l1 ⊔ l2)
-  is-logical-equivalence f = B → A
+  has-converse : (A → B) → UU (l1 ⊔ l2)
+  has-converse f = B → A
 
-  is-prop-is-logical-equivalence :
-    is-prop A → (f : A → B) → is-prop (is-logical-equivalence f)
-  is-prop-is-logical-equivalence is-prop-A f = is-prop-function-type is-prop-A
+  is-prop-has-converse :
+    is-prop A → (f : A → B) → is-prop (has-converse f)
+  is-prop-has-converse is-prop-A f = is-prop-function-type is-prop-A
 
-is-logical-equivalence-Prop :
+has-converse-Prop :
   {l1 l2 : Level} (A : Prop l1) {B : UU l2} → (type-Prop A → B) → Prop (l1 ⊔ l2)
-is-logical-equivalence-Prop A f =
-  ( is-logical-equivalence f ,
-    is-prop-is-logical-equivalence (is-prop-type-Prop A) f)
+has-converse-Prop A f =
+  ( has-converse f ,
+    is-prop-has-converse (is-prop-type-Prop A) f)
 ```
 
 ### Logical equivalences between types
 
 ```agda
 iff : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-iff A B = Σ (A → B) is-logical-equivalence
+iff A B = Σ (A → B) has-converse
 
 infix 6 _↔_
 
@@ -168,13 +168,43 @@ module _
 
 ```agda
 module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-equiv-has-converse-is-prop :
+      is-prop A → is-prop B → {f : A → B} → (B → A) → is-equiv f
+    is-equiv-has-converse-is-prop is-prop-A is-prop-B {f} g =
+      is-equiv-is-invertible
+        ( g)
+        ( λ y → eq-is-prop is-prop-B)
+        ( λ x → eq-is-prop is-prop-A)
+
+  abstract
+    equiv-iff-is-prop : is-prop A → is-prop B → (A → B) → (B → A) → A ≃ B
+    pr1 (equiv-iff-is-prop is-prop-A is-prop-B f g) = f
+    pr2 (equiv-iff-is-prop is-prop-A is-prop-B f g) =
+      is-equiv-has-converse-is-prop is-prop-A is-prop-B g
+
+module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
+  abstract
+    is-equiv-has-converse :
+      {f : type-Prop P → type-Prop Q} → (type-Prop Q → type-Prop P) → is-equiv f
+    is-equiv-has-converse =
+      is-equiv-has-converse-is-prop
+        ( is-prop-type-Prop P)
+        ( is-prop-type-Prop Q)
+
   equiv-iff' : type-Prop (P ⇔ Q) → (type-Prop P ≃ type-Prop Q)
-  pr1 (equiv-iff' t) = pr1 t
+  pr1 (equiv-iff' t) = forward-implication t
   pr2 (equiv-iff' t) =
-    is-equiv-is-logical-equivalence-is-prop (pr2 P) (pr2 Q) (pr2 t)
+    is-equiv-has-converse-is-prop
+      ( is-prop-type-Prop P)
+      ( is-prop-type-Prop Q)
+      ( backward-implication t)
 
   equiv-iff :
     (type-Prop P → type-Prop Q) → (type-Prop Q → type-Prop P) →
@@ -221,7 +251,7 @@ abstract
     {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
     is-equiv (equiv-iff' P Q)
   is-equiv-equiv-iff P Q =
-    is-equiv-is-logical-equivalence-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-iff-Prop P Q)
       ( is-prop-type-equiv-Prop P Q)
       ( iff-equiv)

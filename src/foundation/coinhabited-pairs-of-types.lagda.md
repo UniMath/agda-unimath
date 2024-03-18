@@ -40,6 +40,30 @@ module _
   is-coinhabited = type-Prop is-coinhabited-Prop
 ```
 
+### Forward and backward implications of coinhabited types
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  forward-implication-is-coinhabited :
+    is-coinhabited A B → is-inhabited A → is-inhabited B
+  forward-implication-is-coinhabited = forward-implication
+
+  forward-implication-is-coinhabited' : is-coinhabited A B → A → is-inhabited B
+  forward-implication-is-coinhabited' e a =
+    forward-implication e (unit-trunc-Prop a)
+
+  backward-implication-is-coinhabited :
+    is-coinhabited A B → is-inhabited B → is-inhabited A
+  backward-implication-is-coinhabited = backward-implication
+
+  backward-implication-is-coinhabited' : is-coinhabited A B → B → is-inhabited A
+  backward-implication-is-coinhabited' e b =
+    backward-implication e (unit-trunc-Prop b)
+```
+
 ### Every type is coinhabited with itself
 
 ```agda
@@ -72,30 +96,6 @@ module _
 
   is-symmetric-is-coinhabited : is-coinhabited A B → is-coinhabited B A
   is-symmetric-is-coinhabited = inv-iff
-```
-
-### Forward and backward implications of coinhabited types
-
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
-  where
-
-  forward-implication-is-coinhabited :
-    is-coinhabited A B → is-inhabited A → is-inhabited B
-  forward-implication-is-coinhabited = forward-implication
-
-  forward-implication-is-coinhabited' : is-coinhabited A B → A → is-inhabited B
-  forward-implication-is-coinhabited' e a =
-    forward-implication e (unit-trunc-Prop a)
-
-  backward-implication-is-coinhabited :
-    is-coinhabited A B → is-inhabited B → is-inhabited A
-  backward-implication-is-coinhabited = backward-implication
-
-  backward-implication-is-coinhabited' : is-coinhabited A B → B → is-inhabited A
-  backward-implication-is-coinhabited' e b =
-    backward-implication e (unit-trunc-Prop b)
 ```
 
 ## See also

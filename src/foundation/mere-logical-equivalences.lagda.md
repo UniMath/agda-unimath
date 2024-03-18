@@ -190,7 +190,7 @@ module _
   is-equiv-mutual-mere-function-mere-iff :
     is-equiv mutual-mere-function-mere-iff
   is-equiv-mutual-mere-function-mere-iff =
-    is-equiv-is-logical-equivalence-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-mere-iff A B)
       ( is-prop-product
         ( is-prop-mere-function A B)
@@ -200,7 +200,7 @@ module _
   is-equiv-mere-iff-mutual-mere-function :
     is-equiv mere-iff-mutual-mere-function
   is-equiv-mere-iff-mutual-mere-function =
-    is-equiv-is-logical-equivalence-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-product
         ( is-prop-mere-function A B)
         ( is-prop-mere-function B A))

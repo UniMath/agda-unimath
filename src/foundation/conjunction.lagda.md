@@ -53,9 +53,9 @@ conjunction
 In other words, we have a
 [logical equivalence](foundation.logical-equivalences.md)
 
-$$
-(R → P) ∧ (R → Q) ↔ (R → P ∧ Q)
-$$
+```text
+  (R → P) ∧ (R → Q) ↔ (R → P ∧ Q)
+```
 
 for every proposition `R`. In fact, `R` can be any type.
 
@@ -149,7 +149,7 @@ module _
 
   elimination-principle-conjunction-Prop : UUω
   elimination-principle-conjunction-Prop =
-    {l : Level} (R : Prop l) → is-logical-equivalence (ev-conjunction-Prop R)
+    {l : Level} (R : Prop l) → has-converse (ev-conjunction-Prop R)
 ```
 
 ## Properties
@@ -185,7 +185,7 @@ module _
   is-equiv-map-distributive-conjunction-Prop :
     is-equiv map-distributive-conjunction-Prop
   is-equiv-map-distributive-conjunction-Prop =
-    is-equiv-is-logical-equivalence-Prop
+    is-equiv-has-converse
       ( conjunction-Prop (function-Prop C P) (function-Prop C Q))
       ( function-Prop C (conjunction-Prop P Q))
       ( map-inv-distributive-conjunction-Prop)

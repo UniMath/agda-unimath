@@ -17,6 +17,7 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.singleton-subtypes
@@ -158,7 +159,7 @@ module _
       fundamental-theorem-id'
         ( λ where x refl → is-torsion-element-unit-Group G)
         ( λ x →
-          is-equiv-is-logical-equivalence-is-prop
+          is-equiv-has-converse-is-prop
             ( is-set-type-Group G (unit-Group G) x)
             ( is-prop-is-torsion-element-Group G x)
             ( elim-exists

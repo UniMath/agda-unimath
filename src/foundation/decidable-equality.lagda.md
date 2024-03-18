@@ -12,6 +12,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.injective-maps
 open import foundation.negation
 open import foundation.retracts-of-types
 open import foundation.sections
@@ -25,7 +26,6 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.transport-along-identifications

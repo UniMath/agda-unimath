@@ -20,7 +20,9 @@ open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.images
+open import foundation.injective-maps
 open import foundation.locally-small-types
+open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
@@ -43,7 +45,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.small-types
@@ -838,7 +839,7 @@ module _
   pr1 equiv-equalizes-equal-values-extension-along-surjection-Set =
     equalizes-equal-values-extension-along-surjection-Set
   pr2 equiv-equalizes-equal-values-extension-along-surjection-Set =
-    is-equiv-is-logical-equivalence-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-extension-along-surjection-Set f C g)
       ( is-prop-equalizes-equal-values-surjection-Set)
       ( extension-equalizes-equal-values-surjection-Set)

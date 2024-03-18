@@ -17,6 +17,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.maybe
 open import foundation.negated-equality
 open import foundation.negation
@@ -32,7 +33,6 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes

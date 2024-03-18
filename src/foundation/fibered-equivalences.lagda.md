@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibered-maps
+open import foundation.logical-equivalences
 open import foundation.pullbacks
 open import foundation.slice
 open import foundation.universe-levels

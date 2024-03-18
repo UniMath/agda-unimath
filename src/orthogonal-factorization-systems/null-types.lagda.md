@@ -11,6 +11,7 @@ open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.logical-equivalences
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.type-arithmetic-unit-type

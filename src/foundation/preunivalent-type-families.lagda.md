@@ -14,6 +14,7 @@ open import foundation.embeddings
 open import foundation.equivalence-injective-type-families
 open import foundation.faithful-maps
 open import foundation.function-types
+open import foundation.injective-maps
 open import foundation.preunivalence
 open import foundation.retractions
 open import foundation.subuniverses
@@ -22,7 +23,6 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.sets
 open import foundation-core.univalence
 ```

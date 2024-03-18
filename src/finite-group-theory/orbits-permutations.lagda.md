@@ -799,7 +799,7 @@ module _
             (pair k
               ( (equal-iterate-transposition-other-orbits k) ∙
                 ( p)))))
-        ( is-equiv-is-logical-equivalence-is-prop
+        ( is-equiv-has-converse-is-prop
           ( is-prop-type-trunc-Prop)
           ( is-prop-type-trunc-Prop)
           ( λ P' →
@@ -1128,7 +1128,7 @@ module _
           apply-universal-property-trunc-Prop T
             ( coproduct-sim-equivalence-relation-a-b-Prop g P x)
             (λ pa → lemma2 g (pair (pr1 pa) (inl (pr2 pa)))))
-        ( is-equiv-is-logical-equivalence-is-prop is-prop-type-trunc-Prop
+        ( is-equiv-has-converse-is-prop is-prop-type-trunc-Prop
           ( is-prop-type-Prop
             ( coproduct-sim-equivalence-relation-a-b-Prop g P x))
           ( λ where

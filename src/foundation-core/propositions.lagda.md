@@ -128,46 +128,6 @@ module _
     eq-is-proof-irrelevant = eq-is-prop' ∘ is-prop-is-proof-irrelevant
 ```
 
-### A map between propositions is an equivalence if there is a map in the reverse direction
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  abstract
-    is-equiv-is-logical-equivalence-is-prop :
-      is-prop A → is-prop B → {f : A → B} → (B → A) → is-equiv f
-    is-equiv-is-logical-equivalence-is-prop is-prop-A is-prop-B {f} g =
-      is-equiv-is-invertible
-        ( g)
-        ( λ y → eq-is-prop is-prop-B)
-        ( λ x → eq-is-prop is-prop-A)
-
-  abstract
-    equiv-iff-is-prop : is-prop A → is-prop B → (A → B) → (B → A) → A ≃ B
-    pr1 (equiv-iff-is-prop is-prop-A is-prop-B f g) = f
-    pr2 (equiv-iff-is-prop is-prop-A is-prop-B f g) =
-      is-equiv-is-logical-equivalence-is-prop is-prop-A is-prop-B g
-
-module _
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
-  where
-
-  is-equiv-is-logical-equivalence-Prop :
-    {f : type-Prop P → type-Prop Q} → (type-Prop Q → type-Prop P) → is-equiv f
-  is-equiv-is-logical-equivalence-Prop =
-    is-equiv-is-logical-equivalence-is-prop
-      ( is-prop-type-Prop P)
-      ( is-prop-type-Prop Q)
-
-  equiv-iff-Prop :
-    (type-Prop P → type-Prop Q) →
-    (type-Prop Q → type-Prop P) →
-    type-Prop P ≃ type-Prop Q
-  equiv-iff-Prop = equiv-iff-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
-```
-
 ### Propositions are closed under equivalences
 
 ```agda

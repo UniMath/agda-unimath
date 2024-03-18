@@ -11,6 +11,7 @@ open import foundation-core.propositions public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.retracts-of-types
 open import foundation.universe-levels
 

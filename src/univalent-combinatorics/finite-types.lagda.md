@@ -25,6 +25,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -697,7 +698,7 @@ abstract
         ( has-finite-cardinality-is-finite H)
         ( pair n Q))
   pr2 (equiv-has-cardinality-id-number-of-elements-is-finite X H n) =
-    is-equiv-is-logical-equivalence-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-type-trunc-Prop)
       ( is-set-ℕ (number-of-elements-is-finite H) n)
       ( λ p →

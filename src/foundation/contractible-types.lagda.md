@@ -12,6 +12,7 @@ open import foundation-core.contractible-types public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.logical-equivalences
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels

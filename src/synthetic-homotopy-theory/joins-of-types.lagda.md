@@ -17,6 +17,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -339,7 +340,7 @@ module _
 
   is-equiv-map-disjunction-join-Prop : is-equiv map-disjunction-join-Prop
   is-equiv-map-disjunction-join-Prop =
-    is-equiv-is-logical-equivalence-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-type-join-Prop A B)
       ( is-prop-disjunction-Prop A B)
       ( map-join-disjunction-Prop)
@@ -351,7 +352,7 @@ module _
 
   is-equiv-map-join-disjunction-Prop : is-equiv map-join-disjunction-Prop
   is-equiv-map-join-disjunction-Prop =
-    is-equiv-is-logical-equivalence-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-disjunction-Prop A B)
       ( is-prop-type-join-Prop A B)
       ( map-disjunction-join-Prop)

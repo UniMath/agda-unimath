@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
+open import foundation.logical-equivalences
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
