@@ -10,11 +10,19 @@ module commutative-algebra.trivial-commutative-rings where
 open import commutative-algebra.commutative-rings
 
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
+open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.identity-types
+
+open import group-theory.abelian-groups
+open import group-theory.trivial-groups
+
+open import ring-theory.rings
 open import ring-theory.trivial-rings
 ```
 
@@ -75,3 +83,26 @@ is-contr-is-trivial-Commutative-Ring :
 is-contr-is-trivial-Commutative-Ring A p =
   is-contr-is-trivial-Ring (ring-Commutative-Ring A) p
 ```
+
+### The type of zero commutative rings is contractible
+
+```agda
+0-ring : Ring lzero
+pr1 0-ring = ab-0-group
+pr1 (pr1 (pr2 0-ring)) = λ x y → star
+pr2 (pr1 (pr2 0-ring)) = λ x y z → refl
+pr1 (pr1 (pr2 (pr2 0-ring))) = star
+pr1 (pr2 (pr1 (pr2 (pr2 0-ring)))) star = refl
+pr2 (pr2 (pr1 (pr2 (pr2 0-ring)))) star = refl
+pr2 (pr2 (pr2 0-ring)) = (λ a b c → refl) , (λ a b c → refl)
+
+is-commutative-0-Ring : is-commutative-Ring 0-ring
+is-commutative-0-Ring = λ x y → refl
+
+0-cRing : Commutative-Ring lzero
+0-cRing = 0-ring , is-commutative-0-Ring
+```
+
+To-do: Show that 0-ring is an appropriate center of contraction for the type of
+trivial rings, and hence the type of trivial commutative rings. This requires
+classifying identity types of rings with the structure identity principle.
