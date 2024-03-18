@@ -61,8 +61,9 @@ is-inhabited-or-empty A = type-trunc-Prop A + is-empty A
 
 ### Merely decidable types
 
-A type `A` is said to be merely decidable if it comes equipped with an element
-of `║ is-decidable A ║₋₁`, or equivalently, the
+A type `A` is said to be
+{{#concept "merely decidable" Agda=is-merely-decidable}} if it comes equipped
+with an element of `║ is-decidable A ║₋₁`, or equivalently, the
 [disjunction](foundation.disjunction.md) `A ∨ ¬ A` holds.
 
 ```agda

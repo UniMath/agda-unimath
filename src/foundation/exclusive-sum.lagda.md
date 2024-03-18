@@ -38,9 +38,11 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The {{#concept "exclusive sum" Disambiguation="of types" Agda=exclusive-sum}} of
-two types `A` and `B`, is the type consisting of all of `A` if `B` is
-[empty](foundation-core.empty-types.md), or consisting of all of `B` if `A` is
-empty.
+two types `A` and `B`, is the type consisting of
+
+- Elements of `A` together with a proof that `B` is
+  [empty](foundation-core.empty-types.md), or
+- elements of `B` together with a proof that `A` is empty.
 
 The
 {{#concept "exclusive sum" Disambiguation="of propositions" Agda=exclusive-sum-Prop}}
