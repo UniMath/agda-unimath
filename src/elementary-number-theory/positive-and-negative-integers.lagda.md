@@ -56,7 +56,7 @@ is-nonzero-is-negative-ℤ : {x : ℤ} → is-negative-ℤ x → is-nonzero-ℤ 
 is-nonzero-is-negative-ℤ {inl x} H ()
 ```
 
-### Dichotomy properties
+### Dichotomies
 
 #### A nonzero integer is either negative or positive
 
