@@ -1,4 +1,4 @@
-# Non-contractible types
+# Noncontractible types
 
 ```agda
 module foundation.noncontractible-types where
