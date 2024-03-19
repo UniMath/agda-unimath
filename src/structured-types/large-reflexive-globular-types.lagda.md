@@ -22,7 +22,7 @@ open import structured-types.reflexive-globular-types
 
 A [large globular type](structured-types.large-globular-types.md) is
 {{#concept "reflexive" Disambiguation="large globular type" Agda=is-reflexive-large-globular-structure}}
-if every $n$-cell `x` comes with a choice of $n+1$-cell from `x` to `x`.
+if every $n$-cell `x` comes with a choice of $(n+1)$-cell from `x` to `x`.
 
 ## Definition
 

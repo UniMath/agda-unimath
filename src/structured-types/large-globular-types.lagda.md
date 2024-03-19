@@ -28,8 +28,8 @@ Thus, a large globular type consists of a base hierarchy of types indexed by
 universe levels `A` called the _$0$-cells_, and for every pair of $0$-cells, a
 type of $1$-cells, and for every pair of $1$-cells a type of $2$-cells, and so
 on _ad infinitum_. For every pair of $n$-cells `s` and `t`, there is a type of
-$n+1$-cells _from `s` to `t`_, and we say the $n+1$-cells have _source_ `s` and
-_target_ `t`.
+$(n+1)$-cells _from `s` to `t`_, and we say the $(n+1)$-cells have _source_ `s`
+and _target_ `t`.
 
 The standard interpretation of the higher cells of a large globular type is as
 arrows from their source to their target. For instance, given two $0$-cells `x`
@@ -38,13 +38,13 @@ from `f` to `g`, and a $3$-cell `H` from `α` to `β`, a common depiction would 
 
 ```text
             f
-        ---------
-      /  //   \\  \
-    /   //  H  \\   ∨
+       -----------
+     /  //     \\  \
+    /  //   H   \\  ∨
    x  α|| ≡≡≡≡> ||β  y.
-    \   \\     //   ∧
-      \   V   V   /
-        ---------
+    \  \\       //  ∧
+     \  V       V  /
+       -----------
             g
 ```
 

@@ -23,7 +23,7 @@ open import structured-types.globular-types
 
 A [globular type](structured-types.globular-types.md) is
 {{#concept "reflexive" Disambiguation="globular type" Agda=is-reflexive-globular-structure}}
-if every $n$-cell `x` comes with a choice of $n+1$-cell from `x` to `x`.
+if every $n$-cell `x` comes with a choice of $(n+1)$-cell from `x` to `x`.
 
 ## Definition
 
