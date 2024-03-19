@@ -91,9 +91,7 @@ is-decidable-is-positive-ℤ (inr (inr x)) = inl star
 ```agda
 is-set-positive-ℤ : is-set positive-ℤ
 is-set-positive-ℤ =
-  is-set-emb
-    ( emb-subtype subtype-positive-ℤ)
-    ( is-set-ℤ)
+  is-set-type-subtype subtype-positive-ℤ is-set-ℤ
 ```
 
 ### The successor of a positive integer is positive
