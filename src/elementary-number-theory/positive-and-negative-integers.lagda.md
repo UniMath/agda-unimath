@@ -42,7 +42,7 @@ is-zero-is-nonnegative-is-nonpositive-ℤ :
 is-zero-is-nonnegative-is-nonpositive-ℤ {inr (inl x)} H K = refl
 ```
 
-### Positive integers are `nonzero`
+### Positive integers are nonzero
 
 ```agda
 is-nonzero-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonzero-ℤ x
