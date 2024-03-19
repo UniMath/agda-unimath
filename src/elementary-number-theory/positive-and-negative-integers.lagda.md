@@ -196,7 +196,7 @@ is-negative-neg-is-positive-ℤ :
 is-negative-neg-is-positive-ℤ {inr (inr x)} H = H
 
 neg-positive-ℤ : positive-ℤ → negative-ℤ
-neg-positive-ℤ (x , H) = neg-ℤ x , is-negative-neg-is-positive-ℤ H
+neg-positive-ℤ (x , H) = (neg-ℤ x , is-negative-neg-is-positive-ℤ H)
 ```
 
 #### The negative of a negative integer is positive
