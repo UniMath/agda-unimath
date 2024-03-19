@@ -29,7 +29,7 @@ A {{#concept "globular type" Agda=Globular-Type}} is a type
 
 Thus, a globular type consists of a base type `A` which is called the type of
 _$0$-cells_, and for every pair of $0$-cells, a type of $1$-cells, and for every
-pair of $1$-cells a type of $2$-cells, and so on _ad infinitum_.For every pair
+pair of $1$-cells a type of $2$-cells, and so on _ad infinitum_. For every pair
 of $n$-cells `s` and `t`, there is a type of $n+1$-cells _from `s` to `t`_, and
 we say the $n+1$-cells have _source_ `s` and _target_ `t`.
 

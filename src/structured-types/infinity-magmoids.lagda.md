@@ -95,7 +95,7 @@ is-∞-magmoid A = Σ (globular-structure A) (is-∞-magmoid-globular-structure)
 
 ## Examples
 
-### The $∞$-magmoid structure given by concatenation of a types identifications
+### The $∞$-magmoid on a type given by its identity types
 
 ```agda
 is-∞-magmoid-globular-structure-Id :
