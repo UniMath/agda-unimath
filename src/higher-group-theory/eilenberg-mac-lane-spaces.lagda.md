@@ -24,15 +24,27 @@ open import structured-types.pointed-types
 
 ## Idea
 
-There are many ways to say what an _Eilenberg-Mac Lane space_ is. The basic idea is that a pointed connected type `X` is an Eilenberg-Mac Lane space if only one of its homotopy groups `π n X` is nontrivial. However, recall that the condition of being `n`-truncated is slightly stronger than the condition that the homotopy groups `π i X` are trivial for all `i > n`. Indeed, unlike in the setting of topological spaces or simplicial sets, univalent type theory allows for the possibility of `∞-connected types, i.e., types of which all homotopy groups are trivial. In order to avoid examples of Eilenberg-Mac Lane spaces involving such ∞-connected types, we will slightly strengthen the definition of Eilenberg-Mac Lane spaces. We say that a pointed type `X` is an {{#concept "Eilengberg-Mac Lane space"}} if `X` is `n-1`-connected and `n`-truncated. Under this definition there is an equivalence between the category of groups, resp. abelian groups, and the category of Eilenberg-Mac Lane spaces of dimension `1`, resp. `n ≥ 2`.
+There are many ways to say what an _Eilenberg-Mac Lane space_ is. The basic idea
+is that a pointed connected type `X` is an Eilenberg-Mac Lane space if only one
+of its homotopy groups `π n X` is nontrivial. However, recall that the condition
+of being `n`-truncated is slightly stronger than the condition that the homotopy
+groups `π i X` are trivial for all `i > n`. Indeed, unlike in the setting of
+topological spaces or simplicial sets, univalent type theory allows for the
+possibility of
+`∞-connected types, i.e., types of which all homotopy groups are trivial. In order to avoid examples of Eilenberg-Mac Lane spaces involving such ∞-connected types, we will slightly strengthen the definition of Eilenberg-Mac Lane spaces. We say that a pointed type `X`is an {{#concept "Eilengberg-Mac Lane space"}} if`X`is`n-1`-connected and `n`-truncated. Under this definition there is an equivalence between the category of groups, resp. abelian groups, and the category of Eilenberg-Mac Lane spaces of dimension `1`, resp. `n
+≥ 2`.
 
-Consider a [group](group-theory.groups.md) `G` and a natural number `n ≥ 1`. A pointed type `X` is said to be an Eilenberg-Mac Lane space of type `K G n` if `X` is `(n-1)`-connected and `n`-truncated, and moreover the `n`-th homotopy group `π n X` is isomorphic to `G`.
+Consider a [group](group-theory.groups.md) `G` and a natural number `n ≥ 1`. A
+pointed type `X` is said to be an Eilenberg-Mac Lane space of type `K G n` if
+`X` is `(n-1)`-connected and `n`-truncated, and moreover the `n`-th homotopy
+group `π n X` is isomorphic to `G`.
 
 There is also a recursive definition of what it means for a
-[pointed type](higher-group-theory.higher-groups.md) `X` to be an
-$n$-th {{#concept "Eilenberg-Mac Lane space" Agda=is-eilenberg-mac-lane-space}}:
+[pointed type](higher-group-theory.higher-groups.md) `X` to be an $n$-th
+{{#concept "Eilenberg-Mac Lane space" Agda=is-eilenberg-mac-lane-space}}:
 
-- We say that `X` is a **first Eilenberg-Mac Lane space** if `X` is `0`-connected and there is a
+- We say that `X` is a **first Eilenberg-Mac Lane space** if `X` is
+  `0`-connected and there is a
   [pointed equivalence](structured-types.pointed-equivalences.md)
 
   ```text
@@ -43,7 +55,8 @@ $n$-th {{#concept "Eilenberg-Mac Lane space" Agda=is-eilenberg-mac-lane-space}}:
   [loop space](synthetic-homotopy-theory.loop-spaces.md) `Ω X` to the group
   operation on `G`.
 
-- We say that `X` is an `(n+1)`-st Eilenberg-Mac Lane space if `X` is `0`-connected and `Ω X` is an `n`-th Eilenberg-Mac Lane space.
+- We say that `X` is an `(n+1)`-st Eilenberg-Mac Lane space if `X` is
+  `0`-connected and `Ω X` is an `n`-th Eilenberg-Mac Lane space.
 
 ## Definitions
 
@@ -74,7 +87,6 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (k : 𝕋) (X : Pointed-Type l2)
   where
-
 ```
 
 ### Recursive Eilenberg-Mac Lane spaces

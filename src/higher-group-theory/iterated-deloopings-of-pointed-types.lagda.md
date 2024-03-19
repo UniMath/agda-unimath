@@ -22,13 +22,15 @@ open import synthetic-homotopy-theory.iterated-loop-spaces
 
 ## Idea
 
-The type of {{#concept "`n`-fold deloopings" Disambiguation="pointed type"}} of a [pointed type](structured-types.pointed-types.md) `X` is the type
+The type of {{#concept "`n`-fold deloopings" Disambiguation="pointed type"}} of
+a [pointed type](structured-types.pointed-types.md) `X` is the type
 
 ```text
   Σ (Y : Pointed-Type), Ωⁿ X ≃∗ Y.
 ```
 
-Here, the pointed type `Ωⁿ X` is the `n`-th [iterated loop space](synthetic-homotopy-theory.iterated-loop-spaces.md) of `X`.
+Here, the pointed type `Ωⁿ X` is the `n`-th
+[iterated loop space](synthetic-homotopy-theory.iterated-loop-spaces.md) of `X`.
 
 ## Definitions
 
