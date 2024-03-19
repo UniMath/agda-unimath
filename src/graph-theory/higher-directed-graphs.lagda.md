@@ -48,7 +48,7 @@ edge-is-higher-directed-graph-succ {n = zero-ℕ} V E = E
 edge-is-higher-directed-graph-succ {n = succ-ℕ n} V (E , _) = E
 ```
 
-### The type of higehr directed graphs
+### The type of higher directed graphs
 
 ```agda
 Higher-Directed-Graph : (l : Level) (n : ℕ) → UU (lsuc l)
