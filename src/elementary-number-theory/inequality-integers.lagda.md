@@ -266,9 +266,9 @@ preserves-le-right-add-ℤ :
 preserves-le-right-add-ℤ z x y =
   is-positive-eq-ℤ (inv (left-translation-diff-ℤ y x z))
 
-preserves-le-le-add-ℤ :
+preserves-le-add-ℤ :
   {a b c d : ℤ} → le-ℤ a b → le-ℤ c d → le-ℤ (a +ℤ c) (b +ℤ d)
-preserves-le-le-add-ℤ {a} {b} {c} {d} H K =
+preserves-le-add-ℤ {a} {b} {c} {d} H K =
   transitive-le-ℤ
     ( a +ℤ c)
     ( b +ℤ c)
