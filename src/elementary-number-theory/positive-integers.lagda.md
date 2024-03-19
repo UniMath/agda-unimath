@@ -72,7 +72,7 @@ module _
 
 ```agda
 one-positive-ℤ : positive-ℤ
-one-positive-ℤ = one-ℤ , star
+one-positive-ℤ = (one-ℤ , star)
 ```
 
 ## Properties
