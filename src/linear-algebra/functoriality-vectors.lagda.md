@@ -1,4 +1,4 @@
-# Functoriality of vectors
+# Functoriality of the type of vectors
 
 ```agda
 module linear-algebra.functoriality-vectors where
