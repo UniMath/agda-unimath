@@ -9,6 +9,7 @@ open import foundation-core.function-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-dependent-functions
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -210,11 +211,10 @@ Given an identification `p : a ＝ b` and a map `f : Σ A B → C`, we can compu
   α p (λ y → ap f (eq-pair-Σ p refl)) ＝ apd (ev-pair f) p
 ```
 
-Furthermore, given an identification `p : a ＝ b` and a family of maps `f : (x : A) → B x → C` with fixed codomain `C`, we can compute `α⁻¹ p` to the [action on identifications of binary dependent functions](foundation.action-on-identifications-binary-dependent-functions.md) of `f`:
+Furthermore, given an identification `p : a ＝ b` and a family of maps `f : (x : A) → B x → C` with fixed codomain `C`, we can compute `α⁻¹ p` to the action on identifications of the map `ind-Σ f : Σ A B → C`:
 
 ```text
-  α⁻¹ p (apd f p) y ＝
-  action-on-identifications-binary-dependent-function f p refl.
+  α⁻¹ p (apd f p) y ＝ ap (ind-Σ f) (eq-pair-Σ p refl).
 ```
 
 ```agda
@@ -254,12 +254,14 @@ module _
       ( compute-dependent-identification-function-type-fixed-codomain p f g)
 
   compute-inv-compute-dependent-identification-function-type-fixed-codomain :
-    (p : a ＝ b) (f : (x : A) → B x → C) →
+    (p : a ＝ b) (f : (x : A) → B x → C) (y : B a) →
     map-inv-compute-dependent-identification-function-type-fixed-codomain p
-      ( eq-htpy ( λ y → {!!})) ＝
-    {!ap (ind-Σ f) ?!}
-  compute-inv-compute-dependent-identification-function-type-fixed-codomain =
-    {!!}
+      ( apd f p)
+      ( y) ＝
+    ap (ind-Σ f) (eq-pair-Σ p refl)
+  compute-inv-compute-dependent-identification-function-type-fixed-codomain
+    refl f =
+    refl-htpy
 
   compute-compute-dependent-identification-function-type-fixed-codomain :
     (p : a ＝ b) (f : Σ A B → C) →

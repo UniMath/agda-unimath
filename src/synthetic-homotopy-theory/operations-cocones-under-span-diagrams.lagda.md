@@ -420,7 +420,11 @@ module _
         ( left-map-span-diagram 𝒮')
         ( left-hom-arrow-hom-span-diagram 𝒮' 𝒮 h)
         ( c))
+```
 
+### Composition of cocones and equivalences of span diagrams
+
+```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   (𝒮' : span-diagram l1 l2 l3) (𝒮 : span-diagram l4 l5 l6)

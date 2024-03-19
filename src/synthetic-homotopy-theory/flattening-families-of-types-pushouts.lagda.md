@@ -28,6 +28,7 @@ open import foundation.transport-along-identifications
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.action-dependent-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
@@ -38,6 +39,7 @@ open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sp
 open import synthetic-homotopy-theory.equivalences-families-of-types-pushouts
 open import synthetic-homotopy-theory.families-of-types-equipped-with-descent-data-pushouts
 open import synthetic-homotopy-theory.families-of-types-pushouts
+open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.sections-families-of-types-pushouts
 ```
 
@@ -141,11 +143,11 @@ module _
   (Y : family-with-descent-data-pushout l5 l6 𝒮 c)
   where
 
-  left-map-cocone-flattening-structure-type-family-pushout :
+  left-map-cocone-flattening-family-with-descent-data-pushout :
     domain-flattening-structure-type-family-pushout 𝒮
       ( structure-type-family-family-with-descent-data-pushout 𝒮 c Y) →
     Σ X (type-family-family-with-descent-data-pushout 𝒮 c Y)
-  left-map-cocone-flattening-structure-type-family-pushout =
+  left-map-cocone-flattening-family-with-descent-data-pushout =
     map-Σ _
       ( left-map-cocone-span-diagram 𝒮 c)
       ( map-left-equiv-equiv-structure-type-family-pushout 𝒮
@@ -153,11 +155,11 @@ module _
         ( descent-data-type-family-family-with-descent-data-pushout 𝒮 c Y)
         ( equiv-structure-type-family-family-with-descent-data-pushout 𝒮 c Y))
 
-  right-map-cocone-flattening-structure-type-family-pushout :
+  right-map-cocone-flattening-family-with-descent-data-pushout :
     codomain-flattening-structure-type-family-pushout 𝒮
       ( structure-type-family-family-with-descent-data-pushout 𝒮 c Y) →
     Σ X (type-family-family-with-descent-data-pushout 𝒮 c Y)
-  right-map-cocone-flattening-structure-type-family-pushout =
+  right-map-cocone-flattening-family-with-descent-data-pushout =
     map-Σ _
       ( right-map-cocone-span-diagram 𝒮 c)
       ( map-right-equiv-equiv-structure-type-family-pushout 𝒮
@@ -165,15 +167,15 @@ module _
         ( descent-data-type-family-family-with-descent-data-pushout 𝒮 c Y)
         ( equiv-structure-type-family-family-with-descent-data-pushout 𝒮 c Y))
 
-  coherence-square-cocone-flattening-structure-type-family-pushout :
+  coherence-square-cocone-flattening-family-with-descent-data-pushout :
     coherence-square-maps
       ( right-map-flattening-structure-type-family-pushout 𝒮
         ( structure-type-family-family-with-descent-data-pushout 𝒮 c Y))
       ( left-map-flattening-structure-type-family-pushout 𝒮
         ( structure-type-family-family-with-descent-data-pushout 𝒮 c Y))
-      ( right-map-cocone-flattening-structure-type-family-pushout)
-      ( left-map-cocone-flattening-structure-type-family-pushout)
-  coherence-square-cocone-flattening-structure-type-family-pushout =
+      ( right-map-cocone-flattening-family-with-descent-data-pushout)
+      ( left-map-cocone-flattening-family-with-descent-data-pushout)
+  coherence-square-cocone-flattening-family-with-descent-data-pushout =
     htpy-map-Σ _
       ( coherence-square-cocone-span-diagram 𝒮 c)
       ( λ x →
@@ -191,17 +193,17 @@ module _
               ( Y))
             ( x)))
 
-  cocone-flattening-structure-type-family-pushout :
+  cocone-flattening-family-with-descent-data-pushout :
     cocone-span-diagram
       ( span-diagram-flattening-structure-type-family-pushout 𝒮
         ( structure-type-family-family-with-descent-data-pushout 𝒮 c Y))
       ( Σ X (type-family-family-with-descent-data-pushout 𝒮 c Y))
-  pr1 cocone-flattening-structure-type-family-pushout =
-    left-map-cocone-flattening-structure-type-family-pushout
-  pr1 (pr2 cocone-flattening-structure-type-family-pushout) =
-    right-map-cocone-flattening-structure-type-family-pushout
-  pr2 (pr2 cocone-flattening-structure-type-family-pushout) =
-    coherence-square-cocone-flattening-structure-type-family-pushout
+  pr1 cocone-flattening-family-with-descent-data-pushout =
+    left-map-cocone-flattening-family-with-descent-data-pushout
+  pr1 (pr2 cocone-flattening-family-with-descent-data-pushout) =
+    right-map-cocone-flattening-family-with-descent-data-pushout
+  pr2 (pr2 cocone-flattening-family-with-descent-data-pushout) =
+    coherence-square-cocone-flattening-family-with-descent-data-pushout
 ```
 
 ### Flattening families of types over pushouts
@@ -277,7 +279,7 @@ module _
   left-map-cocone-flattening-type-family-pushout :
     domain-flattening-type-family-pushout → Σ X Y
   left-map-cocone-flattening-type-family-pushout =
-    left-map-cocone-flattening-structure-type-family-pushout 𝒮 c
+    left-map-cocone-flattening-family-with-descent-data-pushout 𝒮 c
       ( ( Y) ,
         ( descent-data-type-family-pushout 𝒮 c Y) ,
         ( id-equiv-structure-type-family-pushout 𝒮
@@ -286,7 +288,7 @@ module _
   right-map-cocone-flattening-type-family-pushout :
     codomain-flattening-type-family-pushout → Σ X Y
   right-map-cocone-flattening-type-family-pushout =
-    right-map-cocone-flattening-structure-type-family-pushout 𝒮 c
+    right-map-cocone-flattening-family-with-descent-data-pushout 𝒮 c
       ( ( Y) ,
         ( descent-data-type-family-pushout 𝒮 c Y) ,
         ( id-equiv-structure-type-family-pushout 𝒮
@@ -299,7 +301,7 @@ module _
       ( right-map-cocone-flattening-type-family-pushout)
       ( left-map-cocone-flattening-type-family-pushout)
   coherence-square-cocone-flattening-type-family-pushout =
-    coherence-square-cocone-flattening-structure-type-family-pushout 𝒮 c
+    coherence-square-cocone-flattening-family-with-descent-data-pushout 𝒮 c
       ( ( Y) ,
         ( descent-data-type-family-pushout 𝒮 c Y) ,
         ( id-equiv-structure-type-family-pushout 𝒮
@@ -308,7 +310,7 @@ module _
   cocone-flattening-type-family-pushout :
     cocone-span-diagram span-diagram-flattening-type-family-pushout (Σ X Y)
   cocone-flattening-type-family-pushout =
-    cocone-flattening-structure-type-family-pushout 𝒮 c
+    cocone-flattening-family-with-descent-data-pushout 𝒮 c
       ( ( Y) ,
         ( descent-data-type-family-pushout 𝒮 c Y) ,
         ( id-equiv-structure-type-family-pushout 𝒮
@@ -545,18 +547,17 @@ module _
         ( cocone-flattening-type-family-pushout 𝒮 c Y))
       ( map-inv-compute-cocone-flattening-type-family-pushout)
   square-inv-compute-cocone-flattening-type-family-pushout h =
-    eq-htpy-cocone-span-diagram
-      ( span-diagram-flattening-type-family-pushout 𝒮 c Y)
-      ( map-inv-compute-cocone-flattening-type-family-pushout
-        ( dependent-cocone-map-span-diagram 𝒮 c (λ x → Y x → Z) h))
-      ( cocone-map-span-diagram
-        ( span-diagram-flattening-type-family-pushout 𝒮 c Y)
-        ( cocone-flattening-type-family-pushout 𝒮 c Y)
-        ( ind-Σ h))
+    eq-htpy-cocone-span-diagram _ _ _
       ( ( refl-htpy) ,
         ( refl-htpy) ,
         ( λ (s , y) →
-          {!!}))
+          ( right-unit) ∙
+          ( compute-inv-compute-dependent-identification-function-type-fixed-codomain
+            ( Y)
+            ( Z)
+            ( coherence-square-cocone-span-diagram 𝒮 c s)
+            ( h)
+            ( y))))
 ```
 
 ### Computation of cocones under the flattening span diagram of the structure of a type family of a pushout
@@ -587,16 +588,26 @@ Let `𝒯` be the flattening span diagram of `𝒮` and the structure `(P , Q , 
 Under these assumptions we claim that there is a commuting square
 
 ```text
+                                   ind-Σ
+           ((x : X) → Y x → Z) -------------> ((Σ (x : X), Y x) → Z)
+                       |                                 |
+  dependent-cocone-map |                                 | cocone-map
+                       ∨                     ≃            ∨
+    dependent-cocone 𝒮 (λ x → Y x → Z) -----------> cocone 𝒯 Z
+```
+
+in which the top and bottom maps are equivalences. Equivalently, we obtain a commuting square
+
+```text
                           ev-pair
   ((Σ (x : X), Y x) → Z) ---------> ((x : X) → Y x → Z)
              |               ≃               |
   cocone-map |                               | dependent-cocone-map
              ∨         ≃                     ∨
-        cocone 𝒯 Z ---------> dependent-cocone 𝒮 c (λ x → Y x → Z)
+        cocone 𝒯 Z ---------> dependent-cocone 𝒮 c (λ x → Y x → Z).
 ```
 
-in which the top and bottom maps are equivalences. Here, the type of cocones on `𝒯` is
-the type of triples
+Here, the type of cocones on `𝒯` is the type of triples
 
 ```text
   i' : (Σ (a : A), P a) → Z
@@ -630,14 +641,37 @@ Thus, we obtain by `comp-cocone-equiv-span-diagram 𝒮 𝒯 α` a commuting squ
       cocone (Σ 𝒮 Y) Z -----------------> cocone 𝒯 Z
 ```
 
-Furthermore, it is straightforward to see that we have a commuting square
+Furthermore, we have previously seen that we have a commuting square
 
 ```text
+                                   ind-Σ
+           ((x : X) → Y x → Z) -------------> ((Σ (x : X), Y x) → Z)
+                       |                                 |
+  dependent-cocone-map |                                 | cocone-map
+                       ∨                    ≃            ∨
+    dependent-cocone 𝒮 (λ x → Y x → Z) ----------> cocone (Σ 𝒮 Y) Z
+```
+
+By pasting these two squares together we obtain a commuting square
+
+```text
+                                   ind-Σ
+           ((x : X) → Y x → Z) -------------> ((Σ (x : X), Y x) → Z)
+                       |                                 |
+  dependent-cocone-map |                                 | cocone-map
+                       ∨                     ≃            ∨
+    dependent-cocone 𝒮 (λ x → Y x → Z) -----------> cocone 𝒯 Z
+```
+
+Since `ev-pair` is inverse to `ind-Σ`, we also obtain a commuting square
+
+```text
+                             ev-pair
   ((Σ (x : X), Y x) → Z) -------------> ((x : X) → Y x → Z)
                |                                 |
     cocone-map |                                 | dependent-cocone-map
-               ∨                ≃                ∨
-          cocone (Σ 𝒮 Y) Z ----------> dependent-cocone 𝒮 (λ x → Y x → Z)
+               ∨            ≃                    ∨
+          cocone 𝒯 Z -------------> dependent-cocone 𝒮 (λ x → Y x → Z).
 ```
 
 Note that the left map in both these squares is the same.
@@ -668,43 +702,48 @@ module _
   (Z : UU l7)
   where
 
-  cocone-flattening-family-with-descent-data-pushout :
-    UU (l1 ⊔ l2 ⊔ l3 ⊔ l6 ⊔ l7)
-  cocone-flattening-family-with-descent-data-pushout =
-    cocone-span-diagram
-      ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
-      ( Z)
-
-  cocone-flattening-family-with-descent-data-pushout' :
-    UU (l1 ⊔ l2 ⊔ l3 ⊔ l5 ⊔ l7)
-  cocone-flattening-family-with-descent-data-pushout' =
+  compute-cocone-flattening-family-with-descent-data-pushout' :
+    dependent-cocone-flattening-type-family-pushout 𝒮 c
+      ( type-family-family-with-descent-data-pushout 𝒮 c Y)
+      ( Z) ≃
     cocone-span-diagram
       ( span-diagram-flattening-family-with-descent-data-pushout' 𝒮 c Y)
       ( Z)
+  compute-cocone-flattening-family-with-descent-data-pushout' =
+    inv-compute-cocone-flattening-type-family-pushout 𝒮 c
+      ( type-family-family-with-descent-data-pushout 𝒮 c Y)
+      ( Z)
 
-  dependent-cocone-flattening-family-with-descent-data-pushout :
-    UU (l1 ⊔ l2 ⊔ l3 ⊔ l5 ⊔ l7)
-  dependent-cocone-flattening-family-with-descent-data-pushout =
+{-
+  square-cocone-map-flattening-family-with-descent-data-pushout :
+    coherence-square-maps
+      ( ind-Σ)
+      ( dependent-cocone-map-span-diagram 𝒮 c
+       ( λ x → type-family-family-with-descent-data-pushout 𝒮 c Y x → Z))
+      ( cocone-map-span-diagram
+        ( span-diagram-flattening-family-with-descent-data-pushout' 𝒮 c Y)
+        ( cocone-flattening-type-family-pushout 𝒮 c
+          ( type-family-family-with-descent-data-pushout 𝒮 c Y)))
+      ( map-equiv compute-cocone-flattening-family-with-descent-data-pushout')
+  square-cocone-map-flattening-family-with-descent-data-pushout =
+    square-inv-compute-cocone-flattening-type-family-pushout 𝒮 c
+      ( type-family-family-with-descent-data-pushout 𝒮 c Y)
+      ( Z)
+-}
+
+  map-compute-cocone-flattening-family-with-descent-data-pushout' :
+    cocone-span-diagram
+      ( span-diagram-flattening-family-with-descent-data-pushout' 𝒮 c Y)
+      ( Z) →
     dependent-cocone-flattening-type-family-pushout 𝒮 c
       ( type-family-family-with-descent-data-pushout 𝒮 c Y)
       ( Z)
-
-  compute-cocone-flattening-family-with-descent-data-pushout' :
-    cocone-flattening-family-with-descent-data-pushout' ≃
-    dependent-cocone-flattening-family-with-descent-data-pushout
-  compute-cocone-flattening-family-with-descent-data-pushout' =
-    compute-cocone-flattening-type-family-pushout 𝒮 c
-      ( type-family-family-with-descent-data-pushout 𝒮 c Y)
-      ( Z)
-      
-  map-compute-cocone-flattening-family-with-descent-data-pushout' :
-    cocone-flattening-family-with-descent-data-pushout' →
-    dependent-cocone-flattening-family-with-descent-data-pushout
   map-compute-cocone-flattening-family-with-descent-data-pushout' =
     map-compute-cocone-flattening-type-family-pushout 𝒮 c
       ( type-family-family-with-descent-data-pushout 𝒮 c Y)
       ( Z)
 
+{-
   square-compute-cocone-flattening-family-with-descent-data-pushout' :
     coherence-square-maps
       ( ev-pair)
@@ -719,14 +758,73 @@ module _
     square-compute-cocone-flattening-type-family-pushout 𝒮 c
       ( type-family-family-with-descent-data-pushout 𝒮 c Y)
       ( Z)
+-}
 
   compute-cocone-flattening-family-with-descent-data-pushout :
-    cocone-flattening-family-with-descent-data-pushout ≃
-    dependent-cocone-flattening-family-with-descent-data-pushout
+    dependent-cocone-flattening-type-family-pushout 𝒮 c
+      ( type-family-family-with-descent-data-pushout 𝒮 c Y)
+      ( Z) ≃
+    cocone-span-diagram
+      ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
+      ( Z)
   compute-cocone-flattening-family-with-descent-data-pushout =
-    ( compute-cocone-flattening-family-with-descent-data-pushout') ∘e
-    ( inv-equiv
-      ( compute-cocone-equiv-span-diagram
+    ( compute-cocone-equiv-span-diagram
+      ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
+      ( span-diagram-flattening-family-with-descent-data-pushout' 𝒮 c Y)
+      ( equiv-span-diagram-flattening-equiv-structure-type-family-pushout
+        ( 𝒮)
+        ( structure-type-family-family-with-descent-data-pushout 𝒮 c Y)
+        ( descent-data-type-family-family-with-descent-data-pushout 𝒮 c Y)
+        ( equiv-structure-type-family-family-with-descent-data-pushout 𝒮 c
+          ( Y)))) ∘e
+    ( compute-cocone-flattening-family-with-descent-data-pushout')
+    
+  map-compute-cocone-flattening-family-with-descent-data-pushout :
+    dependent-cocone-flattening-type-family-pushout 𝒮 c
+      ( type-family-family-with-descent-data-pushout 𝒮 c Y)
+      ( Z) →
+    cocone-span-diagram
+      ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
+      ( Z)
+  map-compute-cocone-flattening-family-with-descent-data-pushout =
+    map-equiv compute-cocone-flattening-family-with-descent-data-pushout
+
+  square-cocone-map-flattening-family-with-descent-data-pushout :
+    coherence-square-maps
+      ( ev-pair)
+      ( cocone-map-span-diagram
+        ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
+        ( cocone-flattening-family-with-descent-data-pushout 𝒮 c Y))
+      ( dependent-cocone-map-span-diagram 𝒮 c
+        ( λ x → type-family-family-with-descent-data-pushout 𝒮 c Y x → Z))
+      ( {!!})
+  square-cocone-map-flattening-family-with-descent-data-pushout =
+    {!!}
+
+{-
+  square-cocone-map-flattening-family-with-descent-data-pushout :
+    coherence-square-maps
+      ( ind-Σ)
+      ( dependent-cocone-map-span-diagram 𝒮 c
+        ( λ x → type-family-family-with-descent-data-pushout 𝒮 c Y x → Z))
+      ( cocone-map-span-diagram
+        ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
+        ( cocone-flattening-family-with-descent-data-pushout 𝒮 c Y))
+      ( map-compute-cocone-flattening-family-with-descent-data-pushout)
+  square-cocone-map-flattening-family-with-descent-data-pushout =
+    pasting-horizontal-coherence-square-maps
+      ( ind-Σ)
+      ( id)
+      ( dependent-cocone-map-span-diagram 𝒮 c
+        ( λ x → type-family-family-with-descent-data-pushout 𝒮 c Y x → Z))
+      ( cocone-map-span-diagram
+        ( span-diagram-flattening-family-with-descent-data-pushout' 𝒮 c Y)
+        {!!})
+      ( cocone-map-span-diagram
+        ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
+        {!!})
+      ( map-equiv compute-cocone-flattening-family-with-descent-data-pushout')
+      ( map-compute-cocone-equiv-span-diagram
         ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
         ( span-diagram-flattening-family-with-descent-data-pushout' 𝒮 c Y)
         ( equiv-span-diagram-flattening-equiv-structure-type-family-pushout
@@ -734,14 +832,34 @@ module _
           ( structure-type-family-family-with-descent-data-pushout 𝒮 c Y)
           ( descent-data-type-family-family-with-descent-data-pushout 𝒮 c Y)
           ( equiv-structure-type-family-family-with-descent-data-pushout 𝒮 c
-            ( Y)))))
-
-  map-compute-cocone-flattening-family-with-descent-data-pushout :
-    cocone-flattening-family-with-descent-data-pushout →
-    dependent-cocone-flattening-family-with-descent-data-pushout
-  map-compute-cocone-flattening-family-with-descent-data-pushout =
-    map-equiv compute-cocone-flattening-family-with-descent-data-pushout    
+            ( Y))))
+      ( square-inv-compute-cocone-flattening-type-family-pushout 𝒮 c
+        ( type-family-family-with-descent-data-pushout 𝒮 c Y)
+        ( Z))
+      ( coherence-square-cocone-map-equiv-cocone-equiv-span-diagram
+        ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
+        {! !}
+        ( span-diagram-flattening-family-with-descent-data-pushout' 𝒮 c Y)
+        {!!}
+        {! equiv-span-diagram-flattening-equiv-structure-type-family-pushout
+          ( 𝒮)
+          ( structure-type-family-family-with-descent-data-pushout 𝒮 c Y)
+          ( descent-data-type-family-family-with-descent-data-pushout 𝒮 c Y)
+          ( equiv-structure-type-family-family-with-descent-data-pushout 𝒮 c
+            ( Y))!}
+        {!!})
+        -}
 ```
+
+```text
+                                   ind-Σ
+           ((x : X) → Y x → Z) -------------> ((Σ (x : X), Y x) → Z)
+                       |                                 |
+  dependent-cocone-map |                                 | cocone-map
+                       ∨                     ≃           ∨
+    dependent-cocone 𝒮 (λ x → Y x → Z) -----------> cocone 𝒯 Z
+```
+
 
 ```text
 module _
