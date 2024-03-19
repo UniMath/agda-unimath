@@ -207,7 +207,7 @@ is-positive-neg-is-negative-ℤ :
 is-positive-neg-is-negative-ℤ {inl x} H = H
 
 neg-negative-ℤ : negative-ℤ → positive-ℤ
-neg-negative-ℤ (x , H) = neg-ℤ x , is-positive-neg-is-negative-ℤ H
+neg-negative-ℤ (x , H) = (neg-ℤ x , is-positive-neg-is-negative-ℤ H)
 ```
 
 ### Negated properties
