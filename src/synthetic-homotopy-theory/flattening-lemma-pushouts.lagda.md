@@ -1,6 +1,7 @@
 # The flattening lemma for pushouts
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
 module synthetic-homotopy-theory.flattening-lemma-pushouts where
 ```
 
@@ -202,7 +203,7 @@ module _
       universal-property-pushout 𝒮 c →
       universal-property-pushout
         ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
-        ( cocone-flattening-structure-type-family-pushout 𝒮 c Y)
+        ( cocone-flattening-family-with-descent-data-pushout 𝒮 c Y)
     flattening-lemma-descent-data-pushout H =
       {!is-equiv-left-is-equiv-right-square!}
 
