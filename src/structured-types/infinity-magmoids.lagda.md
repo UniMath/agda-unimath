@@ -28,11 +28,11 @@ open import structured-types.globular-types
 ## Idea
 
 An {{#concept "$∞$-magmoid" Agda=∞-Magmoid}} is a
-[globular type](structured-types.md) `A` [equipped](foundation.structure.md)
-with a binary operator
+[globular type](structured-types.globular-types.md) `A`
+[equipped](foundation.structure.md) with a binary operator
 
 ```text
-  - * - : 𝓃-Cell A y z → 𝓃-Cell A x y → 𝓃-Cell A x z
+  - * - : (𝓃 + 1)-Cell A y z → (𝓃 + 1)-Cell A x y → (𝓃 + 1)-Cell A x z
 ```
 
 at every level $n$.
