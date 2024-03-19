@@ -30,7 +30,7 @@ maps between general types it is recommended to use the notion of
 
 ## Definitions
 
-### Non-injective maps
+### Noninjective maps
 
 ```agda
 module _
