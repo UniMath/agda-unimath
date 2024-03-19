@@ -77,7 +77,7 @@ pr2 one-nonzero-ℤ = is-nonzero-one-ℤ
 
 ## Properties
 
-### The integer image of a nonzero natural is nonzero
+### The integer image of a nonzero natural number is nonzero
 
 ```agda
 is-nonzero-int-ℕ : (n : ℕ) → is-nonzero-ℕ n → is-nonzero-ℤ (int-ℕ n)
