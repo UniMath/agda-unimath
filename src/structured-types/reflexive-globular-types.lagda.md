@@ -42,9 +42,9 @@ record
   where
   coinductive
   field
-    is-reflexive-1-cell-globular-structure :
+    is-reflexive-1-cell-is-reflexive-globular-structure :
       is-reflexive (1-cell-globular-structure G)
-    is-reflexive-globular-structure-1-cell-globular-structure :
+    is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure :
       (x y : A) →
       is-reflexive-globular-structure
         ( globular-structure-1-cell-globular-structure G x y)
@@ -59,14 +59,17 @@ module _
   refl-1-cell-is-reflexive-globular-structure :
     {x : A} → 1-cell-globular-structure G x x
   refl-1-cell-is-reflexive-globular-structure {x} =
-    is-reflexive-1-cell-globular-structure r x
+    is-reflexive-1-cell-is-reflexive-globular-structure r x
 
   refl-2-cell-is-reflexive-globular-structure :
     {x y : A} {f : 1-cell-globular-structure G x y} →
     2-cell-globular-structure G f f
   refl-2-cell-is-reflexive-globular-structure {x} {y} {f} =
-    is-reflexive-1-cell-globular-structure
-      ( is-reflexive-globular-structure-1-cell-globular-structure r x y)
+    is-reflexive-1-cell-is-reflexive-globular-structure
+      ( is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+        ( r)
+        ( x)
+        ( y))
       ( f)
 ```
 
@@ -88,8 +91,8 @@ is-reflexive-globular-structure-Id :
   is-reflexive-globular-structure (globular-structure-Id A)
 is-reflexive-globular-structure-Id A =
   λ where
-  .is-reflexive-1-cell-globular-structure x →
+  .is-reflexive-1-cell-is-reflexive-globular-structure x →
     refl
-  .is-reflexive-globular-structure-1-cell-globular-structure x y →
+  .is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure x y →
     is-reflexive-globular-structure-Id (x ＝ y)
 ```
