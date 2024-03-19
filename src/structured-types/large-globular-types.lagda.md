@@ -68,7 +68,7 @@ record
   field
     1-cell-large-globular-structure :
       {l1 l2 : Level} (x : A l1) (y : A l2) → UU (β l1 l2)
-    higher-large-globular-structure :
+    globular-structure-1-cell-large-globular-structure :
       {l1 l2 : Level} (x : A l1) (y : A l2) →
       globular-structure (1-cell-large-globular-structure x y)
 
@@ -108,7 +108,7 @@ module _
     (y : 0-cell-Large-Globular-Type A l2) →
     globular-structure (1-cell-Large-Globular-Type x y)
   globular-structure-1-cell-Large-Globular-Type =
-    higher-large-globular-structure
+    globular-structure-1-cell-large-globular-structure
       ( globular-structure-0-cell-Large-Globular-Type A)
 
   globular-type-1-cell-Large-Globular-Type :

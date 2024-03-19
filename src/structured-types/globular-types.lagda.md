@@ -61,7 +61,7 @@ record globular-structure {l : Level} (A : UU l) : UU (lsuc l)
   field
     1-cell-globular-structure :
       (x y : A) → UU l
-    higher-globular-structure :
+    globular-structure-1-cell-globular-structure :
       (x y : A) → globular-structure (1-cell-globular-structure x y)
 
 open globular-structure public
@@ -92,7 +92,8 @@ module _
     (x y : 0-cell-Globular-Type) →
     globular-structure (1-cell-Globular-Type x y)
   globular-structure-1-cell-Globular-Type =
-    higher-globular-structure globular-structure-0-cell-Globular-Type
+    globular-structure-1-cell-globular-structure
+      ( globular-structure-0-cell-Globular-Type)
 
   globular-type-1-cell-Globular-Type :
     (x y : 0-cell-Globular-Type) → Globular-Type l
@@ -115,6 +116,6 @@ module _
 globular-structure-Id : {l : Level} (A : UU l) → globular-structure A
 1-cell-globular-structure (globular-structure-Id A) x y =
   x ＝ y
-higher-globular-structure (globular-structure-Id A) x y =
+globular-structure-1-cell-globular-structure (globular-structure-Id A) x y =
   globular-structure-Id (x ＝ y)
 ```
