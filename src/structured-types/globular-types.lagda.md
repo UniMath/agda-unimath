@@ -25,12 +25,32 @@ open import foundation.universe-levels
 
 A {{#concept "globular type" Agda=Globular-Type}} is a type
 [equipped](foundation.structure.md) with a
-[binary relation](foundation.binary-relations.md) valued in globular types _ad
-infinitum_.
+[binary relation](foundation.binary-relations.md) valued in globular types.
 
 Thus, a globular type consists of a base type `A` which is called the type of
-_$0$-cells_, and for every pair of $0$-cells, there is a type of $1$-cells and
-so in. For every pair of $n$-cells, there is a type of $n+1$-cells.
+_$0$-cells_, and for every pair of $0$-cells, there is a type of $1$-cells.
+Moreover, for every pair of $1$-cells there is a type of $2$-cells, and so on
+_ad infinitum_. For every pair `s` and `t` of $n$-cells, there is a type of
+$n+1$-cells. In this scenario we say the $n+1$-cells have _source_ `s` and
+_target_ `t`. Collectively, `s` and `t` form the _endpoints_ of the $n+1$-cells
+between them.
+
+The standard interpretation of the higher cells of a globluar type is as arrows
+between their endpoints. For instance, given two $0$-cells `x` and `y`, two
+$1$-cells `f` and `g` from `x` to `y`, two $2$-cells `α` and `β` from `f` to
+`g`, and a $3$-cell `H` from `α` to `β`, a common depiction would be
+
+```text
+            f
+        ---------
+      /  //   \\  \
+    /   //  H  \\   ∨
+   x  α|| ≡≡≡≡> ||β  y.
+    \   \\     //   ∧
+      \   V   V   /
+        ---------
+            g
+```
 
 ## Definition
 
