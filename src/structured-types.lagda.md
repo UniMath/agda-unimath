@@ -75,6 +75,7 @@ open import structured-types.precomposition-pointed-maps public
 open import structured-types.reflexive-globular-types public
 open import structured-types.sets-equipped-with-automorphisms public
 open import structured-types.symmetric-elements-involutive-types public
+open import structured-types.symmetric-globular-types public
 open import structured-types.symmetric-h-spaces public
 open import structured-types.transposition-pointed-span-diagrams public
 open import structured-types.types-equipped-with-automorphisms public
