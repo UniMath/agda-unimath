@@ -7,11 +7,14 @@ module foundation.strictly-involutive-identity-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.function-extensionality
 open import foundation.multivariable-homotopies
 open import foundation.strictly-right-unital-concatenation-identifications
+open import foundation.univalence
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
@@ -19,11 +22,14 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -538,6 +544,185 @@ module _
         ( left-unit-right-strict-concat))
 ```
 
+## Operations
+
+We define a range of basic operations on the strictly involutive identifications
+that all enjoy strict computational properties.
+
+### Action of functions on strictly involutive identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  eq-ap-involutive-Id : {x y : A} → x ＝ⁱ y → f x ＝ f y
+  eq-ap-involutive-Id = ap f ∘ eq-involutive-eq
+
+  ap-involutive-Id : {x y : A} → x ＝ⁱ y → f x ＝ⁱ f y
+  ap-involutive-Id = involutive-eq-eq ∘ eq-ap-involutive-Id
+
+  compute-ap-refl-involutive-Id :
+    {x : A} → ap-involutive-Id (reflⁱ {x = x}) ＝ reflⁱ
+  compute-ap-refl-involutive-Id = refl
+
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  compute-ap-id-involutive-Id :
+    {x y : A} (p : x ＝ⁱ y) → ap-involutive-Id id p ＝ p
+  compute-ap-id-involutive-Id (z , q , refl) =
+    eq-pair-eq-fiber (eq-pair (ap-id q) refl)
+```
+
+### Action of binary functions on strictly involutive identifications
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
+  where
+
+  ap-binary-involutive-Id :
+    {x x' : A} (p : x ＝ⁱ x') {y y' : B} (q : y ＝ⁱ y') → f x y ＝ⁱ f x' y'
+  ap-binary-involutive-Id (z , p1 , p2) (w , q1 , q2) =
+    ( f z w , ap-binary f p1 q1 , ap-binary f p2 q2)
+
+  left-unit-ap-binary-involutive-Id :
+    {x : A} {y y' : B} (q : y ＝ⁱ y') →
+    ap-binary-involutive-Id reflⁱ q ＝ ap-involutive-Id (f x) q
+  left-unit-ap-binary-involutive-Id (z , p , refl) = refl
+
+  right-unit-ap-binary-involutive-Id :
+    {x x' : A} (p : x ＝ⁱ x') {y : B} →
+    ap-binary-involutive-Id p reflⁱ ＝ ap-involutive-Id (λ z → f z y) p
+  right-unit-ap-binary-involutive-Id {.z} {x'} (z , p , refl) {y} =
+    eq-pair-eq-fiber (eq-pair right-unit refl)
+```
+
+### Transport along strictly involutive identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
+
+  tr-involutive-Id : {x y : A} → x ＝ⁱ y → B x → B y
+  tr-involutive-Id = tr B ∘ eq-involutive-eq
+
+  compute-tr-refl-involutive-Id :
+    {x : A} → tr-involutive-Id (reflⁱ {x = x}) ＝ id
+  compute-tr-refl-involutive-Id = refl
+```
+
+### Function extensionality with respect to strictly involutive identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  where
+
+  htpy-involutive-eq : f ＝ⁱ g → f ~ g
+  htpy-involutive-eq = htpy-eq ∘ eq-involutive-eq
+
+  involutive-eq-htpy : f ~ g → f ＝ⁱ g
+  involutive-eq-htpy = involutive-eq-eq ∘ eq-htpy
+
+  equiv-htpy-involutive-eq : (f ＝ⁱ g) ≃ (f ~ g)
+  equiv-htpy-involutive-eq = equiv-funext ∘e equiv-eq-involutive-eq
+
+  equiv-involutive-eq-htpy : (f ~ g) ≃ (f ＝ⁱ g)
+  equiv-involutive-eq-htpy = equiv-involutive-eq-eq ∘e equiv-eq-htpy
+
+  funext-involutive-Id : is-equiv htpy-involutive-eq
+  funext-involutive-Id = is-equiv-map-equiv equiv-htpy-involutive-eq
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  where
+
+  involutive-htpy-involutive-eq : f ＝ⁱ g → (x : A) → f x ＝ⁱ g x
+  involutive-htpy-involutive-eq (h , p , q) x =
+    ( h x , htpy-eq p x , htpy-eq q x)
+
+  involutive-eq-involutive-htpy : ((x : A) → f x ＝ⁱ g x) → f ＝ⁱ g
+  involutive-eq-involutive-htpy H =
+    ( pr1 ∘ H , eq-htpy (pr1 ∘ (pr2 ∘ H)) , eq-htpy (pr2 ∘ (pr2 ∘ H)))
+```
+
+It remains to show that these maps are part of an equivalence.
+
+### Standard univalence with respect to strictly involutive identifications
+
+```agda
+module _
+  {l1 : Level} {A B : UU l1}
+  where
+
+  map-involutive-eq : A ＝ⁱ B → A → B
+  map-involutive-eq = map-eq ∘ eq-involutive-eq
+
+  equiv-involutive-eq : A ＝ⁱ B → A ≃ B
+  equiv-involutive-eq = equiv-eq ∘ eq-involutive-eq
+
+  involutive-eq-equiv : A ≃ B → A ＝ⁱ B
+  involutive-eq-equiv = involutive-eq-eq ∘ eq-equiv
+
+  equiv-equiv-involutive-eq : (A ＝ⁱ B) ≃ (A ≃ B)
+  equiv-equiv-involutive-eq = equiv-univalence ∘e equiv-eq-involutive-eq
+
+  is-equiv-equiv-involutive-eq : is-equiv equiv-involutive-eq
+  is-equiv-equiv-involutive-eq = is-equiv-map-equiv equiv-equiv-involutive-eq
+
+  equiv-involutive-eq-equiv : (A ≃ B) ≃ (A ＝ⁱ B)
+  equiv-involutive-eq-equiv = equiv-involutive-eq-eq ∘e equiv-eq-equiv A B
+
+  is-equiv-involutive-eq-equiv : is-equiv involutive-eq-equiv
+  is-equiv-involutive-eq-equiv = is-equiv-map-equiv equiv-involutive-eq-equiv
+```
+
+### Whiskering of strictly involutive identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  left-whisker-concat-involutive-Id :
+    (p : x ＝ⁱ y) {q r : y ＝ⁱ z} → q ＝ⁱ r → p ∙ⁱ q ＝ⁱ p ∙ⁱ r
+  left-whisker-concat-involutive-Id p β = ap-involutive-Id (p ∙ⁱ_) β
+
+  right-whisker-concat-involutive-Id :
+    {p q : x ＝ⁱ y} → p ＝ⁱ q → (r : y ＝ⁱ z) → p ∙ⁱ r ＝ⁱ q ∙ⁱ r
+  right-whisker-concat-involutive-Id α r = ap-involutive-Id (_∙ⁱ r) α
+```
+
+### Horizontal concatenation of strictly involutive identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  horizontal-concat-involutive-Id² :
+    {p q : x ＝ⁱ y} → p ＝ⁱ q → {u v : y ＝ⁱ z} → u ＝ⁱ v → p ∙ⁱ u ＝ⁱ q ∙ⁱ v
+  horizontal-concat-involutive-Id² = ap-binary-involutive-Id (_∙ⁱ_)
+```
+
+### Vertical concatenation of strictly involutive identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  vertical-concat-involutive-Id² :
+    {p q r : x ＝ⁱ y} → p ＝ⁱ q → q ＝ⁱ r → p ＝ⁱ r
+  vertical-concat-involutive-Id² α β = α ∙ⁱ β
+```
+
 ## See also
 
 - [The Yoneda identity types](foundation.yoneda-identity-types.md) for an
@@ -548,4 +733,4 @@ module _
 
 ## References
 
-- <https://groups.google.com/g/homotopytypetheory/c/FfiZj1vrkmQ/m/GJETdy0AAgAJ>
+{{#bibliography}} {{#reference Esc19DefinitionsEquivalence}}

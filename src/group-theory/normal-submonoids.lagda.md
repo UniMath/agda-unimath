@@ -576,5 +576,4 @@ pr2 (equiv-normal-submonoid-saturated-congruence-Monoid l2 M) =
 
 ## References
 
-- S. Margolis and J.-É. Pin, Inverse semigroups and extensions of groups by
-  semilattices, J. of Algebra 110 (1987), 277-297.
+{{#bibliography}} {{#reference MP87}}

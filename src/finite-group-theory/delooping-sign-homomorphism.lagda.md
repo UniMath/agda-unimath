@@ -85,7 +85,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Ideas
 
 The delooping of a group homomorphism `f : G → H` is a pointed map
-`Bf : BG → BH` equiped with a homotopy witnessing that the following square
+`Bf : BG → BH` equipped with a homotopy witnessing that the following square
 commutes :
 
 ```text
@@ -1598,5 +1598,4 @@ module _
 
 ## References
 
-- Mangel É. and Rijke E.
-  ["Delooping the sign homomorphism in univalent mathematics"](https://arxiv.org/abs/2301.10011).
+{{#bibliography}} {{#reference MR23}}

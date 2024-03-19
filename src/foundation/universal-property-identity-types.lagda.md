@@ -28,6 +28,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 ```
 
@@ -223,3 +224,5 @@ module _
   `Id : A → (A → 𝒰)` is an embedding was first observed and formalized by Martín
   Escardó,
   [https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html](https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html).
+
+{{#bibliography}} {{#reference TypeTopology}}

@@ -189,7 +189,7 @@ module _
         ( horizontal-map-cone f g c)
         ( h)
         ( d)
-        ( is-pullback-top-is-pullback-rectangle f g h c d
+        ( is-pullback-top-square-is-pullback-rectangle f g h c d
           ( is-pullback-universal-property-pullback f g c up-pb-c)
           ( is-pullback-universal-property-pullback f (g ∘ h)
             ( pasting-vertical-cone f g h c d)
@@ -207,7 +207,7 @@ module _
         ( f)
         ( g ∘ h)
         ( pasting-vertical-cone f g h c d)
-        ( is-pullback-rectangle-is-pullback-top f g h c d
+        ( is-pullback-rectangle-is-pullback-top-square f g h c d
           ( is-pullback-universal-property-pullback f g c up-pb-c)
           ( is-pullback-universal-property-pullback
             ( horizontal-map-cone f g c)

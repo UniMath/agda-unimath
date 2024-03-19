@@ -420,7 +420,7 @@ module _
     is-orthogonal-pullback-condition f g →
     is-orthogonal-pullback-condition f (h ∘ g)
   is-orthogonal-pullback-condition-right-comp =
-    is-pullback-rectangle-is-pullback-top
+    is-pullback-rectangle-is-pullback-top-square
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
@@ -452,7 +452,7 @@ module _
     is-orthogonal-pullback-condition f (h ∘ g) →
     is-orthogonal-pullback-condition f g
   is-orthogonal-pullback-condition-right-right-factor =
-    is-pullback-top-is-pullback-rectangle
+    is-pullback-top-square-is-pullback-rectangle
       ( precomp f Z)
       ( postcomp A h)
       ( postcomp A g)
@@ -1081,6 +1081,4 @@ module _
 
 ## References
 
-- Ulrik Buchholtz and Jonathan Weinberger, _Synthetic fibered (∞, 1)-category
-  theory_ (2023) ([arXiv:2105.01724](https://arxiv.org/abs/2105.01724),
-  [DOI:10.21136/HS.2023.04](https://articles.math.cas.cz/10.21136/HS.2023.04))
+{{#bibliography}} {{#reference BW23}}

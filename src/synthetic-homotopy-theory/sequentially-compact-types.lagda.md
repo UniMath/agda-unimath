@@ -49,5 +49,4 @@ module _
 
 ## References
 
-- <a name="classifying-types"></a>Egbert Rijke, _Classifying Types_
-  ([arXiv:1906.09435](https://arxiv.org/abs/1906.09435))
+{{#bibliography}} {{#reference Rij19}}
