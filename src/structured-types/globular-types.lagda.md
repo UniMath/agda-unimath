@@ -59,10 +59,10 @@ record globular-structure {l : Level} (A : UU l) : UU (lsuc l)
   where
   coinductive
   field
-    cells-globular-structure :
+    0-cell-globular-structure :
       (x y : A) → UU l
     higher-globular-structure :
-      (x y : A) → globular-structure (cells-globular-structure x y)
+      (x y : A) → globular-structure (0-cell-globular-structure x y)
 
 open globular-structure public
 ```
@@ -77,34 +77,34 @@ module _
   {l : Level} (A : Globular-Type l)
   where
 
-  0-cells-Globular-Type : UU l
-  0-cells-Globular-Type = pr1 A
+  0-cell-Globular-Type : UU l
+  0-cell-Globular-Type = pr1 A
 
-  globular-structure-0-cells-Globular-Type :
-    globular-structure 0-cells-Globular-Type
-  globular-structure-0-cells-Globular-Type = pr2 A
+  globular-structure-0-cell-Globular-Type :
+    globular-structure 0-cell-Globular-Type
+  globular-structure-0-cell-Globular-Type = pr2 A
 
-  1-cells-Globular-Type : (x y : 0-cells-Globular-Type) → UU l
-  1-cells-Globular-Type =
-    cells-globular-structure globular-structure-0-cells-Globular-Type
+  1-cell-Globular-Type : (x y : 0-cell-Globular-Type) → UU l
+  1-cell-Globular-Type =
+    0-cell-globular-structure globular-structure-0-cell-Globular-Type
 
-  globular-structure-1-cells-Globular-Type :
-    (x y : 0-cells-Globular-Type) →
-    globular-structure (1-cells-Globular-Type x y)
-  globular-structure-1-cells-Globular-Type =
-    higher-globular-structure globular-structure-0-cells-Globular-Type
+  globular-structure-1-cell-Globular-Type :
+    (x y : 0-cell-Globular-Type) →
+    globular-structure (1-cell-Globular-Type x y)
+  globular-structure-1-cell-Globular-Type =
+    higher-globular-structure globular-structure-0-cell-Globular-Type
 
-  globular-type-1-cells-Globular-Type :
-    (x y : 0-cells-Globular-Type) → Globular-Type l
-  pr1 (globular-type-1-cells-Globular-Type x y) =
-    1-cells-Globular-Type x y
-  pr2 (globular-type-1-cells-Globular-Type x y) =
-    globular-structure-1-cells-Globular-Type x y
+  globular-type-1-cell-Globular-Type :
+    (x y : 0-cell-Globular-Type) → Globular-Type l
+  pr1 (globular-type-1-cell-Globular-Type x y) =
+    1-cell-Globular-Type x y
+  pr2 (globular-type-1-cell-Globular-Type x y) =
+    globular-structure-1-cell-Globular-Type x y
 
-  2-cells-Globular-Type :
-    {x y : 0-cells-Globular-Type} (p q : 1-cells-Globular-Type x y) → UU l
-  2-cells-Globular-Type {x} {y} =
-    cells-globular-structure (globular-structure-1-cells-Globular-Type x y)
+  2-cell-Globular-Type :
+    {x y : 0-cell-Globular-Type} (p q : 1-cell-Globular-Type x y) → UU l
+  2-cell-Globular-Type {x} {y} =
+    0-cell-globular-structure (globular-structure-1-cell-Globular-Type x y)
 ```
 
 ## Examples
@@ -113,7 +113,7 @@ module _
 
 ```agda
 globular-structure-Id : {l : Level} (A : UU l) → globular-structure A
-cells-globular-structure (globular-structure-Id A) x y =
+0-cell-globular-structure (globular-structure-Id A) x y =
   x ＝ y
 higher-globular-structure (globular-structure-Id A) x y =
   globular-structure-Id (x ＝ y)
