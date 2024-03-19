@@ -560,8 +560,8 @@ unique-reduce-fraction-ℤ x y H =
       ( unique-numerator-reduce-fraction-ℤ x y H)
       ( eq-pair-Σ'
         ( pair
-          (unique-denominator-reduce-fraction-ℤ x y H)
-          (eq-is-prop
+          ( unique-denominator-reduce-fraction-ℤ x y H)
+          ( eq-is-prop
             ( is-prop-is-in-subtype
               ( subtype-positive-ℤ)
               ( int-reduce-denominator-fraction-ℤ y))))))
