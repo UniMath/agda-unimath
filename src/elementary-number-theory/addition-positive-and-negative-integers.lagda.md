@@ -157,7 +157,7 @@ is-nonpositive-add-ℤ {x} {y} H K =
     ( neg-neg-ℤ (x +ℤ y))
     ( is-nonpositive-neg-is-nonnegative-ℤ
       ( is-nonnegative-eq-ℤ
-        ( inv ( distributive-neg-add-ℤ x y))
+        ( inv (distributive-neg-add-ℤ x y))
         ( is-nonnegative-add-ℤ
           ( is-nonnegative-neg-is-nonpositive-ℤ H)
           ( is-nonnegative-neg-is-nonpositive-ℤ K))))
