@@ -42,6 +42,7 @@ open import structured-types.iterated-pointed-cartesian-product-types public
 open import structured-types.large-globular-types public
 open import structured-types.large-infinity-magmoids public
 open import structured-types.large-reflexive-globular-types public
+open import structured-types.large-symmetric-globular-types public
 open import structured-types.magmas public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-h-spaces public
