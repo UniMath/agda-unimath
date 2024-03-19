@@ -122,7 +122,7 @@ is-nonpositive-is-negative-ℤ : {x : ℤ} → is-negative-ℤ x → is-nonposit
 is-nonpositive-is-negative-ℤ {inl x} H = H
 ```
 
-### Relations with `succ-ℤ`
+### Determining the sign of the successor of an integer
 
 #### The successor of a nonnegative integer is positive
 
@@ -142,7 +142,7 @@ is-nonpositive-succ-is-negative-ℤ {inl zero-ℕ} H = H
 is-nonpositive-succ-is-negative-ℤ {inl (succ-ℕ x)} H = H
 ```
 
-### Relations with `pred-ℤ`
+### Determining the sign of the predecessor of an integer
 
 #### The predecessor of a positive integer is nonnegative
 
@@ -162,7 +162,7 @@ is-negative-pred-is-nonpositive-ℤ {inl x} H = H
 is-negative-pred-is-nonpositive-ℤ {inr (inl x)} H = H
 ```
 
-### Relations with `neg-ℤ`
+### Determining the sign of the negative of an integer
 
 #### The negative of a nonnegative integer is nonpositive
 
