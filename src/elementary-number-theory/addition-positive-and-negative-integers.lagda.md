@@ -52,7 +52,7 @@ the following rules:
 
 where ?? marks undetermined cases.
 
-## Properties
+## Lemmas
 
 ### The sum of two positive integers is positive
 
