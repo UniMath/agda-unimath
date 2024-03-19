@@ -10,6 +10,8 @@ module structured-types.pointed-span-diagrams where
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.morphisms-arrows
+open import foundation.span-diagrams
+open import foundation.spans
 open import foundation.universe-levels
 
 open import structured-types.morphisms-pointed-arrows
@@ -141,6 +143,17 @@ module _
   preserves-point-right-map-pointed-span-diagram =
     preserves-point-right-map-pointed-span
       ( pointed-span-pointed-span-diagram)
+
+  span-pointed-span-diagram :
+    span l3 domain-pointed-span-diagram codomain-pointed-span-diagram
+  span-pointed-span-diagram =
+    span-pointed-span pointed-span-pointed-span-diagram
+
+  span-diagram-pointed-span-diagram : span-diagram l1 l2 l3
+  span-diagram-pointed-span-diagram =
+    make-span-diagram
+      ( left-map-pointed-span-diagram)
+      ( right-map-pointed-span-diagram)
 ```
 
 ### The pointed span diagram obtained from a morphism of pointed arrows
