@@ -36,10 +36,10 @@ module _
   {@♭ f g : (@♭ x : A) → B x}
   where
 
-  ap-crisp-htpy-flat :
+  action-flat-crisp-htpy :
     @♭ ((@♭ x : A) → f x ＝ g x) →
     action-flat-crisp-dependent-map f ~ action-flat-crisp-dependent-map g
-  ap-crisp-htpy-flat H (intro-flat x) = ap-flat (H x)
+  action-flat-crisp-htpy H (intro-flat x) = ap-flat (H x)
 ```
 
 ### The flat modality's action on homotopies
@@ -52,7 +52,7 @@ module _
 
   action-flat-htpy :
     @♭ f ~ g → action-flat-dependent-map f ~ action-flat-dependent-map g
-  action-flat-htpy H = ap-crisp-htpy-flat (λ x → H x)
+  action-flat-htpy H = action-flat-crisp-htpy (λ x → H x)
 ```
 
 ## Properties
@@ -64,7 +64,7 @@ module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2} {@♭ f : (@♭ x : A) → B x}
   where
 
-  compute-ap-crisp-flat-refl-htpy :
-    ap-crisp-htpy-flat (λ x → (refl {x = f x})) ~ refl-htpy
-  compute-ap-crisp-flat-refl-htpy (intro-flat x) = refl
+  compute-action-flat-refl-htpy :
+    action-flat-crisp-htpy (λ x → (refl {x = f x})) ~ refl-htpy
+  compute-action-flat-refl-htpy (intro-flat x) = refl
 ```

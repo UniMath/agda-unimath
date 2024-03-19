@@ -37,9 +37,9 @@ crisp elimination principle and a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
 
 - In the file about
-  [codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we currently
-  postulate that the [subuniverse](foundation.subuniverses.md) of sharp modal
-  types has appropriate closure properties.
+  [sharp codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we
+  currently postulate that the [subuniverse](foundation.subuniverses.md) of
+  sharp modal types has appropriate closure properties.
 - In [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md), we
   postulate that it has the appropriate relation to the flat modality, making it
   a lex modality.
@@ -51,13 +51,12 @@ that they are likely to change in the future.
 
 ```agda
 postulate
-  sharp : {l : Level} (A : UU l) → UU l
+  ♯ : {l : Level} (A : UU l) → UU l
 
-♯ : {l : Level} (A : UU l) → UU l
-♯ = sharp
-
-postulate
   unit-sharp : {l : Level} {A : UU l} → A → ♯ A
+
+sharp : {l : Level} (A : UU l) → UU l
+sharp = ♯
 ```
 
 ### Crisp elimination for the sharp modality
@@ -143,8 +142,9 @@ postulate
 
 ### The sharp modality's action on "pointwise" type families
 
-**TODO.** The below is unfinished work that is not typechecked as part of the
-library. This code is included as notes for future work.
+**TODO.** This section consists entirely of unfinished work that is not
+typechecked as part of the library. This code is included as notes for future
+work.
 
 ```text
 postulate
@@ -277,7 +277,7 @@ pr1 (sharp-locally-small-operator-modality l) = ♯
 pr2 (sharp-locally-small-operator-modality l) A = is-locally-small' {l} {♯ A}
 ```
 
-### The sharp induction principle
+### The sharp modality's induction principle
 
 ```agda
 induction-principle-sharp :
@@ -332,7 +332,7 @@ compute-ind-subuniverse-sharp =
     ( induction-principle-subuniverse-sharp)
 ```
 
-### The sharp recursion principle
+### The sharp modality's recursion principle
 
 ```agda
 rec-sharp :
@@ -397,15 +397,6 @@ compute-rec-subuniverse-sharp =
     ( unit-sharp)
     ( recursion-principle-subuniverse-sharp)
 ```
-
-## See also
-
-- In [codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we
-  postulate that the sharp modality is a
-  [higher modality](orthogonal-factorization-systems.higher-modalities.md).
-- and in [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md)
-  we moreover postulate that the sharp modality is right adjoint to the
-  [flat modality](modal-type-theory.flat-modality.md).
 
 ## References
 

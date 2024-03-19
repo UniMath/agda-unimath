@@ -26,7 +26,7 @@ a crisp identification `p : x ＝ y` in `A` to an identification
 `crisp-ap f p : f x ＝ f y` in `B`. This action on identifications can be
 understood as crisp functoriality of crisp identity types.
 
-Note that this is a strengthening of the
+This is a strengthening of the
 [action on identifications of functions](foundation.action-on-identifications-functions.md)
 for crisp identifications, because the function `f : A → B` is allowed to be
 defined over only crisp elements of its domain.

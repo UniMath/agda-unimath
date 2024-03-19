@@ -41,7 +41,13 @@ A crisp type is said to be
 if it is [flat](modal-type-theory.flat-modality.md) modal. I.e. if the flat
 counit is an [equivalence](foundation-core.equivalences.md) at that type.
 
-**Terminology:** In {{#cite Shu18}}, this is called a _crisply discrete type_.
+**Terminology.** In {{#cite Shu18}} this is called a _crisply discrete type_. We
+add "flat" as a descriptor to disambiguate from other possible notions of
+"discrete types", such as
+[types with decidable equality `foundation.discrete-types`](foundation.discrete-types.md).
+Moreover, we prefer "discrete crisp type" over "crisply discrete type", as the
+former suggests that we assume that the type is crisp, and not that the proof
+that it is discrete itself is crisp.
 
 ## Definitions
 

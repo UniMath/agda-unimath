@@ -262,5 +262,5 @@ is-sharp-codiscrete-sharp {l} =
 
 ## See also
 
-- [Flat discrete types](modal-type-theory.flat-discrete-crisp-types.md) for the
-  dual notion.
+- [Flat discrete crisp types](modal-type-theory.flat-discrete-crisp-types.md)
+  for a partial dual notion.

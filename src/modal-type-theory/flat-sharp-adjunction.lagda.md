@@ -108,7 +108,7 @@ ind-crisp-ind-sharp-codiscrete {A = A} C is-codisc-C f x' =
 
 The accompanying computation principle remains to be fully formalized.
 
-### Flat after sharp
+### Flat eats sharp
 
 ```agda
 module _
@@ -156,7 +156,7 @@ module _
   pr2 equiv-action-flat-map-unit-sharp = is-equiv-action-flat-map-unit-sharp
 ```
 
-### Sharp after flat
+### Sharp eats flat
 
 ```agda
 module _
@@ -176,34 +176,9 @@ It remains to show that these two are inverses to each other.
 
 This remains to be formalized.
 
-### Crisp identity induction
-
-```text
-module _
-  {@♭ l1 l2 : Level} {@♭ A : UU l1}
-  (@♭ C : (@♭ x y : A) → @♭ (x ＝ y) → UU l2)
-  (@♭ d : ((@♭ x : A) → C x x refl))
-  where
-
-  crisp-ind-Id'' :
-    {@♭ x y : A} (@♭ p : x ＝ y) → {!   !} -- C x y p
-  crisp-ind-Id'' {x} {y} p =
-    (ind-Id
-      ( x)
-      ( λ y p →
-        type-Sharp-Codiscrete-Type
-          ( crisp-binary-ind-sharp-codiscrete
-            ( λ _ _ → Sharp-Codiscrete-Type l2)
-            ( λ _ _ → is-sharp-codiscrete-Sharp-Codiscrete-Type l2)
-            ( λ y p → (♯ (C x y p) , is-sharp-codiscrete-sharp (C x y p))) y p))
-      {! unit-sharp ?  !}
-      {!   !}
-      p)
-```
-
 ## See also
 
-- In [codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we
+- In [sharp codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we
   postulate that the sharp modality is a
   [higher modality](orthogonal-factorization-systems.higher-modalities.md).
 

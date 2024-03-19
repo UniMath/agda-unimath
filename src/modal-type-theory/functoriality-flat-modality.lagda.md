@@ -179,8 +179,8 @@ module _
 - In [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md) we
   postulate that the flat modality is left adjoint to the
   [sharp modality](modal-type-theory.sharp-modality.md).
-- [Flat discrete types](modal-type-theory.flat-discrete-crisp-types.md) for
-  types that are flat modal.
+- [Flat discrete crisp types](modal-type-theory.flat-discrete-crisp-types.md)
+  for crisp types that are flat modal.
 
 ## References
 

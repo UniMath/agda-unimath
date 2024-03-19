@@ -40,7 +40,7 @@ We say a [pullback](foundation-core.pullbacks.md) is
 {{#concept "crisp" Disambiguation="pullback"}} if it is formed in a
 [crisp context](modal-type-theory.crisp-types.md).
 
-**Remark.** The results in this file should hold more generally for crisp and
+**Comment.** The results in this file should hold more generally for crisp and
 crisply defined maps `f : @♭ A → X` and `g : @♭ B → X`.
 
 ## Properties

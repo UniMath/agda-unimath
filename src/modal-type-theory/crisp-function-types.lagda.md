@@ -98,8 +98,8 @@ module _
 
 ## See also
 
-- [Flat discrete types](modal-type-theory.flat-discrete-crisp-types.md) for
-  types that are flat modal.
+- [Flat discrete crisp types](modal-type-theory.flat-discrete-crisp-types.md)
+  for crisp types that are flat modal.
 
 ## References
 

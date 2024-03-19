@@ -27,7 +27,7 @@ crisp element `b : B x`, we can
 the element `b` along the crisp identification `p` to obtain an element
 `crisp-tr B p b : B y`.
 
-Note that this is a strengthening of
+This is a strengthening of
 [transport along identifications](foundation.transport-along-identifications.md)
 for crisp identifications, because the type family `B` is allowed to depend only
 crisply on the base type `A`.
