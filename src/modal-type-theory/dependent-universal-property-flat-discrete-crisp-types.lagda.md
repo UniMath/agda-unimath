@@ -20,7 +20,7 @@ open import modal-type-theory.flat-modality
 ## Idea
 
 The
-{{#concept "dependent universal property" Disambiguation="of flat discrete crisp types" Agda=dependent-universal-property-flat-discrete-crisp-type}}
+{{#concept "dependent universal property" Disambiguation="of flat discrete crisp types"}}
 of a [flat discrete crisp type](modal-type-theory.flat-discrete-crisp-types.md)
 `A` states that for any crisply defined
 [crisp type family](modal-type-theory.crisp-types.md) `B : A → 𝒰`,
