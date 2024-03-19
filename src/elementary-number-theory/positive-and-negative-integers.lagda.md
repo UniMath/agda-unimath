@@ -49,7 +49,7 @@ is-nonzero-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonzero-ℤ 
 is-nonzero-is-positive-ℤ {inr (inr x)} H ()
 ```
 
-### Negative integers are `nonzero`
+### Negative integers are nonzero
 
 ```agda
 is-nonzero-is-negative-ℤ : {x : ℤ} → is-negative-ℤ x → is-nonzero-ℤ x
