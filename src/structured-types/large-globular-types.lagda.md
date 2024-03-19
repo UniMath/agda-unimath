@@ -55,7 +55,7 @@ from `f` to `g`, and a $3$-cell `H` from `α` to `β`, a common depiction would 
             g
 ```
 
-## Definition
+## Definitions
 
 ### The structure of a large globular type
 
@@ -73,6 +73,70 @@ record
       globular-structure (1-cell-large-globular-structure x y)
 
 open large-globular-structure public
+```
+
+#### Iterated projections for large globular structures
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  {A : (l : Level) → UU (α l)}
+  (G : large-globular-structure β A)
+  {l1 l2 : Level} {x : A l1} {y : A l2}
+  (f g : 1-cell-large-globular-structure G x y)
+  where
+
+  2-cell-large-globular-structure : UU (β l1 l2)
+  2-cell-large-globular-structure =
+    1-cell-globular-structure
+      ( globular-structure-1-cell-large-globular-structure G x y) f g
+
+  globular-structure-2-cell-large-globular-structure :
+    globular-structure 2-cell-large-globular-structure
+  globular-structure-2-cell-large-globular-structure =
+    globular-structure-1-cell-globular-structure
+      ( globular-structure-1-cell-large-globular-structure G x y) f g
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  {A : (l : Level) → UU (α l)}
+  (G : large-globular-structure β A)
+  {l1 l2 : Level} {x : A l1} {y : A l2}
+  {f g : 1-cell-large-globular-structure G x y}
+  (p q : 2-cell-large-globular-structure G f g)
+  where
+
+  3-cell-large-globular-structure : UU (β l1 l2)
+  3-cell-large-globular-structure =
+    1-cell-globular-structure
+      ( globular-structure-2-cell-large-globular-structure G f g) p q
+
+  globular-structure-3-cell-large-globular-structure :
+    globular-structure 3-cell-large-globular-structure
+  globular-structure-3-cell-large-globular-structure =
+    globular-structure-1-cell-globular-structure
+      ( globular-structure-2-cell-large-globular-structure G f g) p q
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  {A : (l : Level) → UU (α l)}
+  (G : large-globular-structure β A)
+  {l1 l2 : Level} {x : A l1} {y : A l2}
+  {f g : 1-cell-large-globular-structure G x y}
+  {p q : 2-cell-large-globular-structure G f g}
+  (H K : 3-cell-large-globular-structure G p q)
+  where
+
+  4-cell-large-globular-structure : UU (β l1 l2)
+  4-cell-large-globular-structure =
+    1-cell-globular-structure
+      ( globular-structure-3-cell-large-globular-structure G p q) H K
+
+  globular-structure-4-cell-large-globular-structure :
+    globular-structure 4-cell-large-globular-structure
+  globular-structure-4-cell-large-globular-structure =
+    globular-structure-1-cell-globular-structure
+      ( globular-structure-3-cell-large-globular-structure G p q) H K
 ```
 
 ### The type of large globular types
@@ -128,4 +192,24 @@ module _
   2-cell-Large-Globular-Type {x = x} {y} =
     1-cell-globular-structure
       ( globular-structure-1-cell-Large-Globular-Type x y)
+
+  globular-structure-2-cell-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    (f g : 1-cell-Large-Globular-Type x y) →
+    globular-structure (2-cell-Large-Globular-Type f g)
+  globular-structure-2-cell-Large-Globular-Type =
+    globular-structure-2-cell-large-globular-structure
+      ( globular-structure-0-cell-Large-Globular-Type A)
+
+  globular-type-2-cell-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    (f g : 1-cell-Large-Globular-Type x y) →
+    Globular-Type (β l1 l2)
+  globular-type-2-cell-Large-Globular-Type f g =
+    ( 2-cell-Large-Globular-Type f g ,
+      globular-structure-2-cell-Large-Globular-Type f g)
 ```

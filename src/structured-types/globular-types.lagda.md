@@ -50,7 +50,7 @@ from their source to their target. For instance, given two $0$-cells `x` and
             g
 ```
 
-## Definition
+## Definitions
 
 ### The structure of a globular type
 
@@ -65,6 +65,61 @@ record globular-structure {l : Level} (A : UU l) : UU (lsuc l)
       (x y : A) → globular-structure (1-cell-globular-structure x y)
 
 open globular-structure public
+```
+
+#### Iterated projections for globular structures
+
+```agda
+module _
+  {l : Level} {A : UU l} (G : globular-structure A)
+  {x y : A} (f g : 1-cell-globular-structure G x y)
+  where
+
+  2-cell-globular-structure : UU l
+  2-cell-globular-structure =
+    1-cell-globular-structure
+      ( globular-structure-1-cell-globular-structure G x y) f g
+
+  globular-structure-2-cell-globular-structure :
+    globular-structure 2-cell-globular-structure
+  globular-structure-2-cell-globular-structure =
+    globular-structure-1-cell-globular-structure
+    ( globular-structure-1-cell-globular-structure G x y) f g
+
+module _
+  {l : Level} {A : UU l} (G : globular-structure A)
+  {x y : A} {f g : 1-cell-globular-structure G x y}
+  (p q : 2-cell-globular-structure G f g)
+  where
+
+  3-cell-globular-structure : UU l
+  3-cell-globular-structure =
+    1-cell-globular-structure
+      ( globular-structure-2-cell-globular-structure G f g) p q
+
+  globular-structure-3-cell-globular-structure :
+    globular-structure 3-cell-globular-structure
+  globular-structure-3-cell-globular-structure =
+    globular-structure-1-cell-globular-structure
+    ( globular-structure-2-cell-globular-structure G f g) p q
+
+module _
+  {l : Level} {A : UU l} (G : globular-structure A)
+  {x y : A} {f g : 1-cell-globular-structure G x y}
+  {p q : 2-cell-globular-structure G f g}
+  (H K : 3-cell-globular-structure G p q)
+  where
+
+  4-cell-globular-structure : UU l
+  4-cell-globular-structure =
+    1-cell-globular-structure
+      ( globular-structure-3-cell-globular-structure G p q) H K
+
+  globular-structure-4-cell-globular-structure :
+    globular-structure 4-cell-globular-structure
+  globular-structure-4-cell-globular-structure =
+    globular-structure-1-cell-globular-structure
+    ( globular-structure-3-cell-globular-structure G p q) H K
 ```
 
 ### The type of globular types
@@ -97,15 +152,26 @@ module _
 
   globular-type-1-cell-Globular-Type :
     (x y : 0-cell-Globular-Type) → Globular-Type l
-  pr1 (globular-type-1-cell-Globular-Type x y) =
-    1-cell-Globular-Type x y
-  pr2 (globular-type-1-cell-Globular-Type x y) =
-    globular-structure-1-cell-Globular-Type x y
+  globular-type-1-cell-Globular-Type x y =
+    ( 1-cell-Globular-Type x y , globular-structure-1-cell-Globular-Type x y)
 
   2-cell-Globular-Type :
-    {x y : 0-cell-Globular-Type} (p q : 1-cell-Globular-Type x y) → UU l
-  2-cell-Globular-Type {x} {y} =
-    1-cell-globular-structure (globular-structure-1-cell-Globular-Type x y)
+    {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) → UU l
+  2-cell-Globular-Type =
+    2-cell-globular-structure globular-structure-0-cell-Globular-Type
+
+  globular-structure-2-cell-Globular-Type :
+    {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) →
+    globular-structure (2-cell-Globular-Type f g)
+  globular-structure-2-cell-Globular-Type =
+    globular-structure-2-cell-globular-structure
+      ( globular-structure-0-cell-Globular-Type)
+
+  globular-type-2-cell-Globular-Type :
+    {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) →
+    Globular-Type l
+  globular-type-2-cell-Globular-Type f g =
+    ( 2-cell-Globular-Type f g , globular-structure-2-cell-Globular-Type f g)
 ```
 
 ## Examples
