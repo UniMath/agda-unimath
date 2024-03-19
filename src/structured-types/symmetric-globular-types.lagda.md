@@ -9,15 +9,9 @@ module structured-types.symmetric-globular-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
-
 open import foundation.binary-relations
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.iterated-dependent-product-types
-open import foundation.telescopes
 open import foundation.universe-levels
 
 open import structured-types.globular-types
