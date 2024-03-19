@@ -59,10 +59,10 @@ record globular-structure {l : Level} (A : UU l) : UU (lsuc l)
   where
   coinductive
   field
-    0-cell-globular-structure :
+    1-cell-globular-structure :
       (x y : A) → UU l
     higher-globular-structure :
-      (x y : A) → globular-structure (0-cell-globular-structure x y)
+      (x y : A) → globular-structure (1-cell-globular-structure x y)
 
 open globular-structure public
 ```
@@ -86,7 +86,7 @@ module _
 
   1-cell-Globular-Type : (x y : 0-cell-Globular-Type) → UU l
   1-cell-Globular-Type =
-    0-cell-globular-structure globular-structure-0-cell-Globular-Type
+    1-cell-globular-structure globular-structure-0-cell-Globular-Type
 
   globular-structure-1-cell-Globular-Type :
     (x y : 0-cell-Globular-Type) →
@@ -104,7 +104,7 @@ module _
   2-cell-Globular-Type :
     {x y : 0-cell-Globular-Type} (p q : 1-cell-Globular-Type x y) → UU l
   2-cell-Globular-Type {x} {y} =
-    0-cell-globular-structure (globular-structure-1-cell-Globular-Type x y)
+    1-cell-globular-structure (globular-structure-1-cell-Globular-Type x y)
 ```
 
 ## Examples
@@ -113,7 +113,7 @@ module _
 
 ```agda
 globular-structure-Id : {l : Level} (A : UU l) → globular-structure A
-0-cell-globular-structure (globular-structure-Id A) x y =
+1-cell-globular-structure (globular-structure-Id A) x y =
   x ＝ y
 higher-globular-structure (globular-structure-Id A) x y =
   globular-structure-Id (x ＝ y)

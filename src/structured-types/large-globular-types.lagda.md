@@ -66,11 +66,11 @@ record
   : UUω
   where
   field
-    0-cell-large-globular-structure :
+    1-cell-large-globular-structure :
       {l1 l2 : Level} (x : A l1) (y : A l2) → UU (β l1 l2)
     higher-large-globular-structure :
       {l1 l2 : Level} (x : A l1) (y : A l2) →
-      globular-structure (0-cell-large-globular-structure x y)
+      globular-structure (1-cell-large-globular-structure x y)
 
 open large-globular-structure public
 ```
@@ -99,7 +99,7 @@ module _
     (y : 0-cell-Large-Globular-Type A l2) →
     UU (β l1 l2)
   1-cell-Large-Globular-Type =
-    0-cell-large-globular-structure
+    1-cell-large-globular-structure
       ( globular-structure-0-cell-Large-Globular-Type A)
 
   globular-structure-1-cell-Large-Globular-Type :
@@ -116,10 +116,9 @@ module _
     (x : 0-cell-Large-Globular-Type A l1)
     (y : 0-cell-Large-Globular-Type A l2) →
     Globular-Type (β l1 l2)
-  pr1 (globular-type-1-cell-Large-Globular-Type x y) =
-    1-cell-Large-Globular-Type x y
-  pr2 (globular-type-1-cell-Large-Globular-Type x y) =
-    globular-structure-1-cell-Large-Globular-Type x y
+  globular-type-1-cell-Large-Globular-Type x y =
+    ( 1-cell-Large-Globular-Type x y ,
+      globular-structure-1-cell-Large-Globular-Type x y)
 
   2-cell-Large-Globular-Type :
     {l1 l2 : Level}
@@ -127,6 +126,6 @@ module _
     {y : 0-cell-Large-Globular-Type A l2}
     (p q : 1-cell-Large-Globular-Type x y) → UU (β l1 l2)
   2-cell-Large-Globular-Type {x = x} {y} =
-    cells-globular-structure
+    1-cell-globular-structure
       ( globular-structure-1-cell-Large-Globular-Type x y)
 ```
