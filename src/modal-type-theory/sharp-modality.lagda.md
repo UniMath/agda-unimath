@@ -31,30 +31,41 @@ The {{#concept "sharp modality" Agda=♯}} `♯` is an axiomatized
 we postulate as a right adjoint to the
 [flat modality](modal-type-theory.flat-modality.md).
 
-<!-- TODO update the prose below -->
-
-In this file, we only postulate that `♯` is a
-[modal operator](orthogonal-factorization-systems.modal-operators.md) that has a
+In this file, we postulate that `♯` is a
+[modal operator](orthogonal-factorization-systems.modal-operators.md) with a
+crisp elimination principle and a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
-In the file about
-[codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we postulate
-that the [subuniverse](foundation.subuniverses.md) of sharp modal types has
-appropriate closure properties. In
-[the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md), we
-postulate that it has the appropriate relation to the flat modality, making it a
-lex modality. Please note that there is some redundancy between the postulated
-axioms, and they are likely to change in the future.
+
+- In the file about
+  [codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we currently
+  postulate that the [subuniverse](foundation.subuniverses.md) of sharp modal
+  types has appropriate closure properties.
+- In [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md), we
+  postulate that it has the appropriate relation to the flat modality, making it
+  a lex modality.
+
+Please note that there is some redundancy between the postulated axioms, and
+that they are likely to change in the future.
 
 ## Postulates
 
 ```agda
 postulate
-  ♯ : {l : Level} (A : UU l) → UU l
+  sharp : {l : Level} (A : UU l) → UU l
 
+♯ : {l : Level} (A : UU l) → UU l
+♯ = sharp
+
+postulate
   unit-sharp : {l : Level} {A : UU l} → A → ♯ A
 ```
 
 ### Crisp elimination for the sharp modality
+
+Given a crisp element `x :: ♯ A` we recover an element of `A`. We postulate that
+this construction is a crisp
+[coherent inverse](foundation-core.coherently-invertible-maps.md) to the sharp
+unit.
 
 ```agda
 postulate
@@ -75,6 +86,9 @@ postulate
     ( ap unit-sharp (compute-crisp-elim-sharp x))
 ```
 
+**Rewriting.** In the future we may enable rewrite rules for the computation and
+uniqueness property of the crisp elimination principle for the sharp modality.
+
 ```text
   {-# REWRITE compute-crisp-elim-sharp uniqueness-crisp-elim-sharp #-}
 ```
@@ -83,8 +97,8 @@ postulate
 
 The
 {{#concept "crisp induction principle" Disambiguation="for the sharp modality" Agda=crisp-ind-sharp}}
-for the sharp modality is the principle that sharp codiscrete types are local at
-the flat counit.
+for the sharp modality is a crisp version of the principle that sharp codiscrete
+types are local at the flat counit.
 
 ```agda
 postulate
@@ -98,11 +112,39 @@ postulate
     (@♭ x : A) → crisp-ind-sharp C f x ＝ unit-sharp (f x)
 ```
 
+**Rewriting.** In the future, we may enable a rewriting for the computation rule
+of the crisp induction principle for the sharp modality.
+
 ```text
   {-# REWRITE compute-crisp-ind-sharp #-}
 ```
 
+### Modal induction for the sharp modality
+
+We postulate that sharp satisfies a
+[modal induction principle](orthogonal-factorization-systems.modal-induction.md)
+below.
+
+**Note.** It should also be possible to construct it from the more general
+`pointwise-sharp` considered below, but we leave this for future work.
+
+```agda
+postulate
+  ind-sharp :
+    {l1 l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
+    ((x : A) → ♯ (C (unit-sharp x))) →
+    (x : ♯ A) → ♯ (C x)
+
+  compute-ind-sharp :
+    {l1 l2 : Level} {A : UU l1} (C : ♯ A → UU l2)
+    (f : (x : A) → ♯ (C (unit-sharp x))) →
+    ind-sharp C f ∘ unit-sharp ~ f
+```
+
 ### The sharp modality's action on "pointwise" type families
+
+**TODO.** The below is unfinished work that is not typechecked as part of the
+library. This code is included as notes for future work.
 
 ```text
 postulate
@@ -152,7 +194,7 @@ postulate
   {-# REWRITE compute-elim-pointwise-sharp #-}
 ```
 
-### Uncrispening contexts
+#### Uncrispening contexts
 
 ```text
 record
@@ -203,14 +245,14 @@ module _
     compute-uncrisp-sharp (λ (x , y) → C x y) (λ p → f (pr1 p) (pr2 p)) (x , y)
 ```
 
-### Sharp induction
+#### Sharp induction revisited
 
 The following definitions rely on rewrite rules.
 
 ```text
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} (@♭ C : ♯ A → UU l2)
-  (@♭ f : ((x : A) → ♯ (C (unit-sharp x))))
+  (@♭ f : (x : A) → ♯ (C (unit-sharp x)))
   where
 
   ind-sharp' : (x : ♯ A) → ♯ (C x)
@@ -222,23 +264,6 @@ module _
     compute-crisp-ind-sharp C
       ( λ x → crisp-elim-sharp (f (crisp-elim-sharp x)))
       ( unit-sharp x)
-```
-
-We postulate sharp's induction principle below. Note that it should also be
-possible to construct it from the more general `pointwise-sharp` considered
-above.
-
-```agda
-postulate
-  ind-sharp :
-    {l1 l2 : Level} {A : UU l1} (C : ♯ A → UU l2) →
-    ((x : A) → ♯ (C (unit-sharp x))) →
-    (x : ♯ A) → ♯ (C x)
-
-  compute-ind-sharp :
-    {l1 l2 : Level} {A : UU l1} (C : ♯ A → UU l2)
-    (f : (x : A) → ♯ (C (unit-sharp x))) →
-    ind-sharp C f ∘ unit-sharp ~ f
 ```
 
 ## Definitions
@@ -371,14 +396,6 @@ compute-rec-subuniverse-sharp =
   compute-rec-recursion-principle-subuniverse-modality
     ( unit-sharp)
     ( recursion-principle-subuniverse-sharp)
-```
-
-### Sharp's action on maps
-
-```agda
-action-sharp-map :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
-action-sharp-map f = rec-sharp (unit-sharp ∘ f)
 ```
 
 ## See also
