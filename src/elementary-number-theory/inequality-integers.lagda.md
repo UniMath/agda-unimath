@@ -126,7 +126,7 @@ total-leq-ℤ {x} {y} =
     ( decide-is-negative-is-nonnegative-ℤ)
 ```
 
-### An integer is inferior to its successor
+### An integer is lesser than its successor
 
 ```agda
 succ-leq-ℤ : (k : ℤ) → leq-ℤ k (succ-ℤ k)
