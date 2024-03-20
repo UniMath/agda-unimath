@@ -10,6 +10,7 @@ module structured-types.morphisms-h-spaces where
 open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.function-types
@@ -42,42 +43,40 @@ unital binary operation
 and which furthermore comes equipped with the following structure, witnessing
 that the unit laws are preserved:
 
-- For each `x' : X` an identification `α₁ x'` witnessing that the diagram
+- For each `x' : X` an identification `α₁ x'` witnessing that the triangle
 
   ```text
-                         f (μ * x')
-                            |   \
-                            |    \ α * x'
-                            |     ∨
-                            |  μ (f *) (f x')
-                            |      |
-    ap f (left-unit-law x') |      | ap (μ - (f x')) f₁
-                            |      ∨
-                            |    μ * (f x')
-                            |     /
-                            |    / left-unit-law (f x')
-                            ∨   ∨
-                            f x'
+                              α * x'
+                  f (μ * x') -------> μ (f *) (f x')
+                        \                 /
+                         \               / ap (μ - (f x')) f₁
+                          \             /
+                           \           ∨
+    ap f (left-unit-law x') \       μ * (f x')
+                             \       /
+                              \     / left-unit-law (f x')
+                               \   /
+                                ∨ ∨
+                                f x'
   ```
 
   commutes.
 
-- For each `x : X` an identification `α₂ x` witnessing that the diagram
+- For each `x : X` an identification `α₂ x` witnessing that the triangle
 
   ```text
-                         f (μ x *)
-                           /    |
-                    α x * /     |
-                         ∨      |
-                μ (f x) (f *)   |
-                        |       |
-      ap (μ (f x) -) f₁ |       | ap f (right-unit-law x)
-                        ∨       |
-                  μ * (f x)     |
-                         \      |
-     right-unit-law (f x) \     |
-                           ∨    ∨
-                             f x
+                              α x *
+                  f (μ x *) --------> μ (f x) (f *)
+                        \                 /
+                         \               / ap (μ (f x) -) f₁
+                          \             /
+                           \           ∨
+    ap f (right-unit-law x) \       μ (f x) *
+                             \       /
+                              \     / right-unit-law (f x)
+                               \   /
+                                ∨ ∨
+                                f x
   ```
 
   commutes.
@@ -115,15 +114,15 @@ that the unit laws are preserved:
 
   ```text
                                ap (μ (f *)) f₁
-                μ (f *) (f *) -----------------> μ (f *) * ------> f *
-                      |                               |             |
-    ap (μ - (f *)) f₁ |                 ap (μ - *) f₁ |             |
-                      ∨                               ∨             ∨
-                   μ * (f *) ---------------------> μ * * --------> *
-                      |            ap (μ *) f₁        |             |
-                      |                               | coh ·r refl | refl
-                      ∨                               ∨             ∨
-                     f * ---------------------------> * ----------> *
+                μ (f *) (f *) -----------------> μ (f *) * --------> f *
+                      |                               |               |
+    ap (μ - (f *)) f₁ |                 ap (μ - *) f₁ |               |
+                      ∨                               ∨               ∨
+                   μ * (f *) ---------------------> μ * * ----------> *
+                      |            ap (μ *) f₁        |               |
+                      |                               |  coh ·r refl  | refl
+                      ∨                               ∨               ∨
+                     f * ---------------------------> * ------------> *
                                        f₁                  refl
   ```
 
@@ -176,7 +175,7 @@ module _
       ( μf)
 ```
 
-### The predicate of preserving the coherence between unit laws
+### The predicate of preserving H-space structure on a pointed type
 
 ```agda
 module _
@@ -210,173 +209,104 @@ module _
       ( right-unit-law-mul-H-Space M)
       ( right-unit-law-mul-H-Space N)
 
+  coherence-square-unit-laws-preserves-point-pointed-map-H-Space :
+    (f : pointed-type-H-Space M →∗ pointed-type-H-Space N) →
+    coherence-square-identifications
+      ( ap
+        ( mul-H-Space N (map-pointed-map f (unit-H-Space M)))
+        ( preserves-point-pointed-map f))
+      ( ap
+        ( mul-H-Space' N (map-pointed-map f (unit-H-Space M)))
+        ( preserves-point-pointed-map f))
+      ( right-unit-law-mul-H-Space N (map-pointed-map f (unit-H-Space M)))
+      ( left-unit-law-mul-H-Space N (map-pointed-map f (unit-H-Space M)))
+  coherence-square-unit-laws-preserves-point-pointed-map-H-Space (f , refl) =
+    coh-unit-laws-mul-H-Space N
+
   preserves-coherence-unit-laws-mul-pointed-map-H-Space :
     (f : pointed-type-H-Space M →∗ pointed-type-H-Space N) →
     (μ : preserves-mul-pointed-map-H-Space f) →
     (ν : preserves-left-unit-law-mul-pointed-map-H-Space f μ) →
-    (ρ : preserves-right-unit-law-mul-pointed-map-H-Space f μ) → UU {!!}
-  preserves-coherence-unit-laws-mul-pointed-map-H-Space (f , refl) μ ν ρ =
-    {!coherence-square-identifications!}
+    (ρ : preserves-right-unit-law-mul-pointed-map-H-Space f μ) → UU l2
+  preserves-coherence-unit-laws-mul-pointed-map-H-Space f μ ν ρ =
+    coherence-square-identifications
+      ( ν (unit-H-Space M))
+      ( ap² (map-pointed-map f) (coh-unit-laws-mul-H-Space M))
+      ( left-whisker-concat
+        ( μ)
+        ( coherence-square-unit-laws-preserves-point-pointed-map-H-Space f))
+      ( ρ (unit-H-Space M))
+
+  preserves-unital-mul-pointed-map-H-Space :
+    (f : pointed-type-H-Space M →∗ pointed-type-H-Space N) →
+    UU (l1 ⊔ l2)
+  preserves-unital-mul-pointed-map-H-Space f =
+    Σ ( preserves-mul-pointed-map-H-Space f)
+      ( λ μ →
+        Σ ( preserves-left-unit-law-mul-pointed-map-H-Space f μ)
+          ( λ ν →
+            Σ ( preserves-right-unit-law-mul-pointed-map-H-Space f μ)
+              ( preserves-coherence-unit-laws-mul-pointed-map-H-Space f μ ν)))
 ```
 
-### The predicate of preserving H-space structure on a pointed type
+### Morphisms of H-spaces
 
 ```agda
 module _
   {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2)
-  (f : pointed-type-H-Space M →∗ pointed-type-H-Space N)
+  where
+  
+  hom-H-Space : UU (l1 ⊔ l2)
+  hom-H-Space =
+    Σ ( pointed-type-H-Space M →∗ pointed-type-H-Space N)
+      ( preserves-unital-mul-pointed-map-H-Space M N)
+
+module _
+  {l1 l2 : Level} {M : H-Space l1} {N : H-Space l2} (f : hom-H-Space M N)
   where
 
-preserves-coh-unit-laws-mul :
-  {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2) →
-  ( f : pointed-type-H-Space M →∗ pointed-type-H-Space N) →
-  ( μf :
-    preserves-mul (mul-H-Space M) (mul-H-Space N) (pr1 f)) →
-  preserves-left-unit-law-mul f
-    ( mul-H-Space M)
-    ( mul-H-Space N)
-    ( μf)
-    ( left-unit-law-mul-H-Space M)
-    ( left-unit-law-mul-H-Space N) →
-  preserves-right-unit-law-mul f
-    ( mul-H-Space M)
-    ( mul-H-Space N)
-    ( μf)
-    ( right-unit-law-mul-H-Space M)
-    ( right-unit-law-mul-H-Space N) →
-  UU l2
-preserves-coh-unit-laws-mul M
-  (pair (pair N ._) μ)
-  (pair f refl) μf lf rf =
-  Id (ap² f cM ∙ rf eM) (lf eM ∙ ap (concat μf (f eM)) cN)
-  where
-  eM = unit-H-Space M
-  cM = coh-unit-laws-mul-H-Space M
-  cN = pr2 (pr2 (pr2 μ))
-```
+  pointed-map-hom-H-Space : pointed-type-H-Space M →∗ pointed-type-H-Space N
+  pointed-map-hom-H-Space = pr1 f
 
-### Second description of preservation of the coherent unit laws
+  map-hom-H-Space : type-H-Space M → type-H-Space N
+  map-hom-H-Space = map-pointed-map pointed-map-hom-H-Space
 
-```agda
-preserves-coh-unit-laws-mul' :
-  {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2) →
-  ( f : pointed-type-H-Space M →∗ pointed-type-H-Space N) →
-  ( μf :
-    preserves-mul (mul-H-Space M) (mul-H-Space N) (pr1 f)) →
-  preserves-left-unit-law-mul f
-    ( mul-H-Space M)
-    ( mul-H-Space N)
-    ( μf)
-    ( left-unit-law-mul-H-Space M)
-    ( left-unit-law-mul-H-Space N) →
-  preserves-right-unit-law-mul f
-    ( mul-H-Space M)
-    ( mul-H-Space N)
-    ( μf)
-    ( right-unit-law-mul-H-Space M)
-    ( right-unit-law-mul-H-Space N) →
-  UU l2
-preserves-coh-unit-laws-mul' M N f μf lf rf =
-  Id
-    { A =
-      Id (ap (pr1 f) (lM eM) ∙ ef) ((μf ∙ ap-binary μN ef ef) ∙ rN eN)}
-    ( ( horizontal-concat-Id² (lf eM) (inv (ap-id ef))) ∙
-      ( ( right-whisker-concat
-          ( inv
-            ( assoc
-              ( μf)
-              ( ap (mul-H-Space' N (pr1 f eM)) ef)
-              ( lN (pr1 f eM))))
-          ( ap id ef)) ∙
-        ( ( assoc
-            ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
-            ( lN (pr1 f eM))
-            ( ap id ef)) ∙
-          ( ( left-whisker-concat
-              ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
-              ( nat-htpy lN ef)) ∙
-            ( ( inv
-                ( assoc
-                  ( μf ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
-                  ( ap (μN eN) ef)
-                  ( lN eN))) ∙
-              ( ( ap
-                  ( λ t → t ∙ lN eN)
-                  ( assoc
-                    ( μf)
-                    ( ap (mul-H-Space' N (pr1 f eM)) ef)
-                    ( ap (μN eN) ef))) ∙
-                ( horizontal-concat-Id²
-                  ( left-whisker-concat
-                    ( μf)
-                    ( inv (triangle-ap-binary μN ef ef)))
-                  ( cN))))))))
-    ( ( right-whisker-concat (ap² (pr1 f) cM) ef) ∙
-      ( ( horizontal-concat-Id² (rf eM) (inv (ap-id ef))) ∙
-        ( ( right-whisker-concat
-            ( inv
-              ( assoc
-                ( μf) (ap (μN (pr1 f eM)) ef) (rN (pr1 f eM))))
-            ( ap id ef)) ∙
-          ( ( assoc
-              ( μf ∙ ap (μN (pr1 f eM)) ef)
-              ( rN (pr1 f eM))
-              ( ap id ef)) ∙
-            ( ( left-whisker-concat
-                ( μf ∙ ap (μN (pr1 f eM)) ef)
-                ( nat-htpy rN ef)) ∙
-              ( ( inv
-                  ( assoc
-                    ( μf ∙ ap (μN (pr1 f eM)) ef)
-                    ( ap (mul-H-Space' N eN) ef)
-                    ( rN eN))) ∙
-                ( ap
-                  ( λ t → t ∙ rN eN)
-                  ( ( assoc
-                      ( μf)
-                      ( ap (μN (pr1 f eM)) ef)
-                      ( ap (mul-H-Space' N eN) ef)) ∙
-                    ( left-whisker-concat
-                      ( μf)
-                      ( inv (triangle-ap-binary' μN ef ef)))))))))))
-  where
-  eM = unit-H-Space M
-  μM = mul-H-Space M
-  lM = left-unit-law-mul-H-Space M
-  rM = right-unit-law-mul-H-Space M
-  cM = coh-unit-laws-mul-H-Space M
-  eN = unit-H-Space N
-  μN = mul-H-Space N
-  lN = left-unit-law-mul-H-Space N
-  rN = right-unit-law-mul-H-Space N
-  cN = coh-unit-laws-mul-H-Space N
-  ef = pr2 f
+  preserves-unit-hom-H-Space :
+    map-hom-H-Space (unit-H-Space M) ＝ unit-H-Space N
+  preserves-unit-hom-H-Space =
+    preserves-point-pointed-map pointed-map-hom-H-Space
 
-preserves-unital-mul :
-  {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2) →
-  (f : pointed-type-H-Space M →∗ pointed-type-H-Space N) →
-  UU (l1 ⊔ l2)
-preserves-unital-mul M N f =
-  Σ ( preserves-mul μM μN (pr1 f))
-    ( λ μ11 →
-      Σ ( preserves-left-unit-law-mul f μM μN μ11 lM lN)
-        ( λ μ01 →
-          Σ ( preserves-right-unit-law-mul f μM μN μ11 rM rN)
-            ( λ μ10 → preserves-coh-unit-laws-mul M N f μ11 μ01 μ10)))
-  where
-  μM = mul-H-Space M
-  lM = left-unit-law-mul-H-Space M
-  rM = right-unit-law-mul-H-Space M
-  μN = mul-H-Space N
-  lN = left-unit-law-mul-H-Space N
-  rN = right-unit-law-mul-H-Space N
+  preserves-unital-mul-hom-H-Space :
+    preserves-unital-mul-pointed-map-H-Space M N pointed-map-hom-H-Space
+  preserves-unital-mul-hom-H-Space = pr2 f
 
-hom-H-Space :
-  {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2) →
-  UU (l1 ⊔ l2)
-hom-H-Space M N =
-  Σ ( pointed-type-H-Space M →∗ pointed-type-H-Space N)
-    ( preserves-unital-mul M N)
+  preserves-mul-hom-H-Space :
+    preserves-mul-pointed-map-H-Space M N pointed-map-hom-H-Space
+  preserves-mul-hom-H-Space =
+    pr1 preserves-unital-mul-hom-H-Space
+
+  preserves-left-unit-law-mul-hom-H-Space :
+    preserves-left-unit-law-mul-pointed-map-H-Space M N
+      ( pointed-map-hom-H-Space)
+      ( preserves-mul-hom-H-Space)
+  preserves-left-unit-law-mul-hom-H-Space =
+    pr1 (pr2 preserves-unital-mul-hom-H-Space)
+
+  preserves-right-unit-law-mul-hom-H-Space :
+    preserves-right-unit-law-mul-pointed-map-H-Space M N
+      ( pointed-map-hom-H-Space)
+      ( preserves-mul-hom-H-Space)
+  preserves-right-unit-law-mul-hom-H-Space =
+    pr1 (pr2 (pr2 preserves-unital-mul-hom-H-Space))
+
+  preserves-coherence-unit-laws-mul-hom-H-Space :
+    preserves-coherence-unit-laws-mul-pointed-map-H-Space M N
+      ( pointed-map-hom-H-Space)
+      ( preserves-mul-hom-H-Space)
+      ( preserves-left-unit-law-mul-hom-H-Space)
+      ( preserves-right-unit-law-mul-hom-H-Space)
+  preserves-coherence-unit-laws-mul-hom-H-Space =
+    pr2 (pr2 (pr2 preserves-unital-mul-hom-H-Space))
 ```
 
 ### Homotopies of morphisms of H-spaces
