@@ -75,24 +75,39 @@ identifications.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  (r : B → A) (H : r ∘ i ~ id)
   where
 
-  ap-retraction :
-    (i : A → B) (r : B → A) (H : r ∘ i ~ id)
-    (x y : A) → i x ＝ i y → x ＝ y
-  ap-retraction i r H x y p =
-      ( inv (H x)) ∙ ((ap r p) ∙ (H y))
+  is-injective-has-retraction :
+    {x y : A} → i x ＝ i y → x ＝ y
+  is-injective-has-retraction {x} {y} p = inv (H x) ∙ (ap r p ∙ H y)
 
-  is-retraction-ap-retraction :
-    (i : A → B) (r : B → A) (H : r ∘ i ~ id)
-    (x y : A) → ((ap-retraction i r H x y) ∘ (ap i {x} {y})) ~ id
-  is-retraction-ap-retraction i r H x .x refl = left-inv (H x)
+  is-retraction-is-injective-has-retraction :
+    {x y : A} → is-injective-has-retraction ∘ ap i {x} {y} ~ id
+  is-retraction-is-injective-has-retraction {x} refl = left-inv (H x)
 
-  retraction-ap :
-    (i : A → B) → retraction i → (x y : A) → retraction (ap i {x} {y})
-  pr1 (retraction-ap i (pair r H) x y) = ap-retraction i r H x y
-  pr2 (retraction-ap i (pair r H) x y) = is-retraction-ap-retraction i r H x y
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (i : A → B) (R : retraction i)
+  where
+
+  is-injective-retraction :
+    {x y : A} → i x ＝ i y → x ＝ y
+  is-injective-retraction =
+    is-injective-has-retraction i
+      ( map-retraction i R)
+      ( is-retraction-map-retraction i R)
+
+  is-retraction-is-injective-retraction :
+    {x y : A} → is-injective-retraction ∘ ap i {x} {y} ~ id
+  is-retraction-is-injective-retraction =
+    is-retraction-is-injective-has-retraction i
+      ( map-retraction i R)
+      ( is-retraction-map-retraction i R)
+
+  retraction-ap : {x y : A} → retraction (ap i {x} {y})
+  pr1 retraction-ap = is-injective-retraction
+  pr2 retraction-ap = is-retraction-is-injective-retraction
 ```
 
 ### Composites of retractions are retractions
