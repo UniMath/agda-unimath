@@ -174,15 +174,11 @@ module _
   where
 
   is-equiv-is-invertible' : is-invertible f → is-equiv f
-  pr1 (pr1 (is-equiv-is-invertible' (g , H , K))) = g
-  pr2 (pr1 (is-equiv-is-invertible' (g , H , K))) = H
-  pr1 (pr2 (is-equiv-is-invertible' (g , H , K))) = g
-  pr2 (pr2 (is-equiv-is-invertible' (g , H , K))) = K
+  is-equiv-is-invertible' (g , H , K) = ((g , H) , (g , K))
 
   is-equiv-is-invertible :
     (g : B → A) (H : f ∘ g ~ id) (K : g ∘ f ~ id) → is-equiv f
-  is-equiv-is-invertible g H K =
-    is-equiv-is-invertible' (g , H , K)
+  is-equiv-is-invertible g H K = is-equiv-is-invertible' (g , H , K)
 
   is-retraction-map-section-is-equiv :
     (H : is-equiv f) → is-retraction f (map-section-is-equiv H)
@@ -206,6 +202,22 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
+  is-equiv-is-coherently-invertible :
+    is-coherently-invertible f → is-equiv f
+  is-equiv-is-coherently-invertible H =
+    is-equiv-is-invertible' (is-invertible-is-coherently-invertible H)
+
+  is-equiv-is-transpose-coherently-invertible :
+    is-transpose-coherently-invertible f → is-equiv f
+  is-equiv-is-transpose-coherently-invertible H =
+    is-equiv-is-invertible'
+      ( is-invertible-is-transpose-coherently-invertible H)
+```
+
+The following maps are not simple constructions and should not be computed with.
+Therefore, we mark them as `abstract`.
+
+```agda
   abstract
     is-coherently-invertible-is-equiv :
       is-equiv f → is-coherently-invertible f
@@ -217,17 +229,6 @@ module _
       is-equiv f → is-transpose-coherently-invertible f
     is-transpose-coherently-invertible-is-equiv =
       is-transpose-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
-
-  is-equiv-is-coherently-invertible :
-    is-coherently-invertible f → is-equiv f
-  is-equiv-is-coherently-invertible H =
-    is-equiv-is-invertible' (is-invertible-is-coherently-invertible H)
-
-  is-equiv-is-transpose-coherently-invertible :
-    is-transpose-coherently-invertible f → is-equiv f
-  is-equiv-is-transpose-coherently-invertible H =
-    is-equiv-is-invertible'
-      ( is-invertible-is-transpose-coherently-invertible H)
 ```
 
 ### Structure obtained from being coherently invertible
