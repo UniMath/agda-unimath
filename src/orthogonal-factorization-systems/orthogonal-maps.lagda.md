@@ -19,6 +19,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-products-pullbacks
 open import foundation.dependent-sums-pullbacks
 open import foundation.equivalences
+open import foundation.equivalences-arrows
 open import foundation.fibered-maps
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
@@ -26,15 +27,18 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.postcomposition-pullbacks
+open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.products-pullbacks
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.type-arithmetic-dependent-function-types
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-coproduct-types
@@ -64,7 +68,7 @@ The map `f : A → B` is said to be
    [lifting operation](orthogonal-factorization-systems.lifting-operations.md)
    between `f` and `g`.
 
-3. The following is a [pullback](foundation.pullbacks.md) square:
+3. The following is a [pullback](foundation-core.pullbacks.md) square:
 
    ```text
                 - ∘ f
@@ -76,7 +80,15 @@ The map `f : A → B` is said to be
                 - ∘ f
    ```
 
-4. The [fibers](foundation-core.fibers-of-maps.md) of `g` are
+4. The induced dependent precomposition map
+
+   ```text
+     - ∘ f : ((x : B) → fiber g (h x)) --> ((x : A) → fiber g (h (f x)))
+   ```
+
+   is an equivalence for every `h : B → Y`.
+
+5. The [fibers](foundation-core.fibers-of-maps.md) of `g` are
    [`f`-local](orthogonal-factorization-systems.local-types.md), i.e., `g` is an
    [`f`-local map](orthogonal-factorization-systems.local-maps.md).
 
@@ -188,6 +200,38 @@ module _
       ( cone-pullback-hom f g)
 ```
 
+### The fiber condition for orthogonal maps
+
+The maps `f` and `g` are orthogonal if and only if the induced family of maps on
+fibers
+
+```text
+                           (- ∘ f)
+   ((x : B) → fiber g (h x)) --> ((x : A) → fiber g (h (f x)))
+                      |               |
+                      |               |
+                      ∨    (- ∘ f)    ∨
+                   (B → X) ------> (A → X)
+                      |               |
+              (g ∘ -) |               | (g ∘ -)
+                      ∨    (- ∘ f)    ∨
+               h ∈ (B → Y) ------> (A → Y)
+```
+
+is an equivalence for every `h : B → Y`.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-fiber-condition-right-map : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-orthogonal-fiber-condition-right-map =
+    (h : B → Y) → is-equiv (precomp-Π f (fiber g ∘ h))
+```
+
 ## Properties
 
 ### Being orthogonal means that the type of lifting squares is contractible
@@ -275,6 +319,68 @@ module _
         ( precomp f Y)
         ( postcomp A g)
         ( cone-pullback-hom f g)
+        ( H))
+```
+
+### Being orthogonal means satisfying the fiber condition for orthogonal maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-orthogonal-fiber-condition-right-map-is-orthogonal-pullback-condition :
+    is-orthogonal-pullback-condition f g →
+    is-orthogonal-fiber-condition-right-map f g
+  is-orthogonal-fiber-condition-right-map-is-orthogonal-pullback-condition H h =
+    is-equiv-source-is-equiv-target-equiv-arrow
+      ( precomp-Π f (fiber g ∘ h))
+      ( map-fiber-vertical-map-cone
+        ( precomp f Y)
+        ( postcomp A g)
+        ( cone-pullback-hom f g)
+        ( h))
+      ( compute-map-fiber-vertical-pullback-hom f g h)
+      ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
+        ( precomp f Y)
+        ( postcomp A g)
+        ( cone-pullback-hom f g)
+        ( H)
+        ( h))
+
+  is-orthogonal-fiber-condition-right-map-is-orthogonal :
+    is-orthogonal f g →
+    is-orthogonal-fiber-condition-right-map f g
+  is-orthogonal-fiber-condition-right-map-is-orthogonal H =
+    is-orthogonal-fiber-condition-right-map-is-orthogonal-pullback-condition
+      ( is-orthogonal-pullback-condition-is-orthogonal f g H)
+
+  is-orthogonal-pullback-condition-is-orthogonal-fiber-condition-right-map :
+    is-orthogonal-fiber-condition-right-map f g →
+    is-orthogonal-pullback-condition f g
+  is-orthogonal-pullback-condition-is-orthogonal-fiber-condition-right-map H =
+    is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-pullback-hom f g)
+      ( λ h →
+        is-equiv-target-is-equiv-source-equiv-arrow
+          ( precomp-Π f (fiber g ∘ h))
+          ( map-fiber-vertical-map-cone
+            ( precomp f Y)
+            ( postcomp A g)
+            ( cone-pullback-hom f g)
+            ( h))
+          ( compute-map-fiber-vertical-pullback-hom f g h)
+          ( H h))
+
+  is-orthogonal-is-orthogonal-fiber-condition-right-map :
+    is-orthogonal-fiber-condition-right-map f g →
+    is-orthogonal f g
+  is-orthogonal-is-orthogonal-fiber-condition-right-map H =
+    is-orthogonal-is-orthogonal-pullback-condition f g
+      ( is-orthogonal-pullback-condition-is-orthogonal-fiber-condition-right-map
         ( H))
 ```
 
@@ -988,7 +1094,7 @@ module _
         ( is-orthogonal-pullback-condition-is-orthogonal f g G))
 ```
 
-### A type is `f`-local if and only if the terminal map is `f`-orthogonal
+### A type is `f`-local if and only if its terminal map is `f`-orthogonal
 
 **Proof (forward direction):** If the terminal map is right orthogonal to `f`,
 that means we have a pullback square

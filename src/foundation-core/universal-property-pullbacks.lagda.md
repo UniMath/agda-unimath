@@ -59,6 +59,59 @@ module _
 
 ## Properties
 
+### The homotopy of cones obtained from the universal property of pullbacks
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) {C : UU l4}
+  (c : cone f g C) (up : universal-property-pullback f g c)
+  {l5 : Level} {C' : UU l5} (c' : cone f g C')
+  where
+
+  htpy-cone-map-universal-property-pullback :
+    htpy-cone f g
+      ( cone-map f g c (map-universal-property-pullback f g c up c'))
+      ( c')
+  htpy-cone-map-universal-property-pullback =
+    htpy-eq-cone f g
+      ( cone-map f g c (map-universal-property-pullback f g c up c'))
+      ( c')
+      ( compute-map-universal-property-pullback f g c up c')
+
+  htpy-vertical-map-map-universal-property-pullback :
+    vertical-map-cone f g
+      ( cone-map f g c (map-universal-property-pullback f g c up c')) ~
+      vertical-map-cone f g c'
+  htpy-vertical-map-map-universal-property-pullback =
+    htpy-vertical-map-htpy-cone f g
+      ( cone-map f g c (map-universal-property-pullback f g c up c'))
+      ( c')
+      ( htpy-cone-map-universal-property-pullback)
+
+  htpy-horizontal-map-map-universal-property-pullback :
+    horizontal-map-cone f g
+      ( cone-map f g c (map-universal-property-pullback f g c up c')) ~
+      horizontal-map-cone f g c'
+  htpy-horizontal-map-map-universal-property-pullback =
+    htpy-horizontal-map-htpy-cone f g
+      ( cone-map f g c (map-universal-property-pullback f g c up c'))
+      ( c')
+      ( htpy-cone-map-universal-property-pullback)
+
+  coh-htpy-cone-map-universal-property-pullback :
+    coherence-htpy-cone f g
+      ( cone-map f g c (map-universal-property-pullback f g c up c'))
+      ( c')
+      ( htpy-vertical-map-map-universal-property-pullback)
+      ( htpy-horizontal-map-map-universal-property-pullback)
+  coh-htpy-cone-map-universal-property-pullback =
+    coh-htpy-cone f g
+      ( cone-map f g c (map-universal-property-pullback f g c up c'))
+      ( c')
+      ( htpy-cone-map-universal-property-pullback)
+```
+
 ### 3-for-2 property of pullbacks
 
 Given two cones `c` and `c'` over a common cospan `f : A → X ← B : g`, and a map
@@ -70,7 +123,7 @@ between them `h` such that the diagram
         /   \   /   \
       /      / \      \
     /   /          \    \
-   v v                 v v
+   ∨ ∨                 ∨ ∨
   A --------> X <-------- B
         f           g
 ```
