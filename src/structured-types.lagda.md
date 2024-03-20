@@ -33,7 +33,6 @@ open import structured-types.function-magmas public
 open import structured-types.function-wild-monoids public
 open import structured-types.globular-types public
 open import structured-types.h-spaces public
-open import structured-types.infinity-magmoids public
 open import structured-types.initial-pointed-type-equipped-with-automorphism public
 open import structured-types.involutive-type-of-h-space-structures public
 open import structured-types.involutive-types public
@@ -78,6 +77,7 @@ open import structured-types.sets-equipped-with-automorphisms public
 open import structured-types.symmetric-elements-involutive-types public
 open import structured-types.symmetric-globular-types public
 open import structured-types.symmetric-h-spaces public
+open import structured-types.transitive-globular-types public
 open import structured-types.transposition-pointed-span-diagrams public
 open import structured-types.types-equipped-with-automorphisms public
 open import structured-types.types-equipped-with-endomorphisms public
