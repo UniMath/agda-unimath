@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.function-extensionality
@@ -20,10 +21,9 @@ open import foundation.identity-types
 open import foundation.postcomposition-dependent-functions
 open import foundation.postcomposition-functions
 open import foundation.propositions
-open import foundation.empty-types
-open import foundation.unit-type
 open import foundation.retracts-of-maps
 open import foundation.retracts-of-types
+open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
