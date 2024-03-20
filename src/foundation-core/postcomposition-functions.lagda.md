@@ -9,7 +9,7 @@ module foundation-core.postcomposition-functions where
 ```agda
 open import foundation.universe-levels
 
-open import foundation-core.postcomposition-families-of-maps
+open import foundation-core.postcomposition-dependent-functions
 ```
 
 </details>
