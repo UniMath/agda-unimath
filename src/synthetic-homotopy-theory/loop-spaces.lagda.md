@@ -73,20 +73,22 @@ module _
   {l : Level} (A : Pointed-Type l)
   where
 
-  left-unit-law-mul-Ω :
-    (x : type-Ω A) → Id (mul-Ω A (refl-Ω A) x) x
+  left-unit-law-mul-Ω : (x : type-Ω A) → mul-Ω A (refl-Ω A) x ＝ x
   left-unit-law-mul-Ω x = left-unit
 
-  right-unit-law-mul-Ω :
-    (x : type-Ω A) → Id (mul-Ω A x (refl-Ω A)) x
+  right-unit-law-mul-Ω : (x : type-Ω A) → mul-Ω A x (refl-Ω A) ＝ x
   right-unit-law-mul-Ω x = right-unit
+
+  coherence-unit-laws-mul-Ω :
+    left-unit-law-mul-Ω refl ＝ right-unit-law-mul-Ω refl
+  coherence-unit-laws-mul-Ω = refl
 
   Ω-H-Space : H-Space l
   pr1 Ω-H-Space = Ω A
   pr1 (pr2 Ω-H-Space) = mul-Ω A
   pr1 (pr2 (pr2 Ω-H-Space)) = left-unit-law-mul-Ω
   pr1 (pr2 (pr2 (pr2 Ω-H-Space))) = right-unit-law-mul-Ω
-  pr2 (pr2 (pr2 (pr2 Ω-H-Space))) = refl
+  pr2 (pr2 (pr2 (pr2 Ω-H-Space))) = coherence-unit-laws-mul-Ω
 ```
 
 ### The wild quasigroup of loops on a pointed space

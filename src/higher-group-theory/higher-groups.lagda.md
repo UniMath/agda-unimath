@@ -19,6 +19,7 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import structured-types.h-spaces
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
@@ -95,6 +96,9 @@ module _
         shape-∞-Group
         is-0-connected-classifying-type-∞-Group
 
+  h-space-∞-Group : H-Space l
+  h-space-∞-Group = Ω-H-Space classifying-pointed-type-∞-Group
+
   pointed-type-∞-Group : Pointed-Type l
   pointed-type-∞-Group = Ω classifying-pointed-type-∞-Group
 
@@ -125,10 +129,10 @@ module _
     right-unit-law-mul-Ω classifying-pointed-type-∞-Group
 
   coherence-unit-laws-mul-∞-Group :
-    Id
-      ( left-unit-law-mul-∞-Group unit-∞-Group)
-      ( right-unit-law-mul-∞-Group unit-∞-Group)
-  coherence-unit-laws-mul-∞-Group = refl
+    left-unit-law-mul-∞-Group unit-∞-Group ＝
+    right-unit-law-mul-∞-Group unit-∞-Group
+  coherence-unit-laws-mul-∞-Group =
+    coherence-unit-laws-mul-Ω classifying-pointed-type-∞-Group
 
   inv-∞-Group : type-∞-Group → type-∞-Group
   inv-∞-Group = inv-Ω classifying-pointed-type-∞-Group
