@@ -7,7 +7,13 @@ module higher-group-theory.deloopable-h-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
+open import higher-group-theory.higher-groups
+
+open import structured-types.h-spaces
+open import structured-types.equivalences-h-spaces
 ```
 
 </details>
@@ -29,4 +35,18 @@ of an ∞-group `G` and an equivalence of H-spaces
 
 ```text
   X ≃ h-space-∞-Group G.
+```
+
+## Definitions
+
+### Deloopings of H-spaces
+
+```agda
+module _
+  {l1 : Level} (l2 : Level) (A : H-Space l1)
+  where
+
+  delooping-H-Space-Level : UU (l1 ⊔ lsuc l2)
+  delooping-H-Space-Level =
+    Σ (∞-Group l2) (λ G → equiv-H-Space A (h-space-∞-Group G))
 ```
