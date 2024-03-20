@@ -25,7 +25,7 @@ An {{#concept "$∞$-magmoid" Agda=∞-Magmoid}} is a
 [equipped](foundation.structure.md) with a binary operator
 
 ```text
-  - * - : (𝓃 + 1)-Cell A y z → (𝓃 + 1)-Cell A x y → (𝓃 + 1)-Cell A x z
+  - * - : (𝑛+1)-Cell A y z → (𝑛+1)-Cell A x y → (𝑛+1)-Cell A x z
 ```
 
 at every level $n$.
