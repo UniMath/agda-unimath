@@ -238,14 +238,14 @@ module _
 Consider a commuting diagram of maps
 
 ```text
-       i
-    A ---> X
-    |    ∧ |
-    |   /  |
-  f |  h   | g
-    V /    V
-    B ---> Y
-       j
+         i
+    A ------> X
+    |       ∧ |
+  f |     /   | g
+    |   h     |
+    ∨ /       ∨
+    B ------> Y.
+         j
 ```
 
 The **6-for-2 property of equivalences** asserts that if `i` and `j` are
