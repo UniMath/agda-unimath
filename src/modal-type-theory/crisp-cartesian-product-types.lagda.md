@@ -126,7 +126,7 @@ module _
       ( is-equiv-map-product counit-flat counit-flat is-disc-A is-disc-B)
 ```
 
-### A factor is crisply flat discrete if the cartesian product is crisply flat discrete and the other factor is inhabited
+### A factor is a flat discrete crisp type if the cartesian product is a flat discrete crisp type and the other factor is inhabited
 
 ```agda
   is-flat-discrete-crisp-right-factor-product' :

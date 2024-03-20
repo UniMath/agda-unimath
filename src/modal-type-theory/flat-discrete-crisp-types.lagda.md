@@ -164,10 +164,10 @@ Given crisp elements `x` and `y` of `A` We have a
 ```
 
 where the top-left map `Eq-eq-flat` is an equivalence. Thus, the right map is an
-equivalence and `x ＝ y` is crisply flat discrete for all `x` and `y` if and
-only if the flat counit of `A` is an [embedding](foundation-core.embeddings.md)
-crisply. In particular, if `A` is crisply flat discrete then its identity types
-are too.
+equivalence and `x ＝ y` is a flat discrete crisp type for all crisp `x` and `y`
+if and only if the flat counit of `A` is an
+[embedding](foundation-core.embeddings.md) on crisp elements. In particular, if
+`A` is a flat discrete crisp type then its crisp identity types are too.
 
 ```agda
 module _

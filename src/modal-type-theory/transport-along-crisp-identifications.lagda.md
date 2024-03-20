@@ -20,9 +20,10 @@ open import modal-type-theory.crisp-identity-types
 
 ## Idea
 
-Given a crisp type family `B` that depend crisply on `A`, a crisp
-[identification](foundation-core.identity-types.md) `p : x ＝ y` in `A` and a
-crisp element `b : B x`, we can
+Given a [crisp](modal-type-theory.crisp-types.md) type family `B` that is
+[defined on crisp elements](modal-type-theory.crisp-function-types.md) of `A`, a
+crisp [identification](foundation-core.identity-types.md) `p : x ＝ y` in `A`
+and a crisp element `b : B x`, we can
 {{#concept "transport" Disambiguation="along crisp identifications" Agda=crisp-tr}}
 the element `b` along the crisp identification `p` to obtain an element
 `crisp-tr B p b : B y`.

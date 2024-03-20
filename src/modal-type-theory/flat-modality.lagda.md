@@ -71,7 +71,7 @@ crispen :
 crispen f x = f x
 ```
 
-### The associated family over `♭ A` to a crisply defined family over `A`
+### The associated family over `♭ A` to a type family defined on crisp elements of `A`
 
 ```agda
 family-over-flat :

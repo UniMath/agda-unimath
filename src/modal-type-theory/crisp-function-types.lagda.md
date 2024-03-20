@@ -32,11 +32,32 @@ We say a [function type](foundation-core.function-types.md) is
 {{#concept "crisp" Disambiguation="function type"}} if it is formed in a
 [crisp context](modal-type-theory.crisp-types.md).
 
-<!-- TODO explain crisp function vs crisply defined function (nonstandard terminology, find better name) -->
+A function `f` from `A` to `B` may be assumed to be a
+{{#concept "crisp function" Disambiguation="of crisp types"}} given that its
+domain and codomain are crisp. By this we mean it is a crisp element of its
+type, written `@♭ f : A → B`. We may also assume that a function is
+{{#concept "defined on crisp elements" Disambiguation="function on a crisp type"}}
+if its definition assumes that the elements of its domain are crisp, written
+`f : @♭ A → B`. Being crisp, and being defined on crisp elements are independent
+properties. A function may be crisp and defined on cohesive elements, and it may
+be cohesive but defined on crisp elements. Indeed, all configurations are
+possible when both `A` and `B` are crisp:
+
+|                              |  Crisp function | Cohesive function |
+| ---------------------------: | --------------: | ----------------: |
+|    Defined on crisp elements | `@♭ (@♭ A → B)` |        `@♭ A → B` |
+| Defined on cohesive elements |    `@♭ (A → B)` |           `A → B` |
+
+Note, since assuming that a hypothesis is crisp is _less_ general, assuming that
+a hypothesis assumes that a hypothesis is crisp is _more_ general. Hence
+assuming the function is cohesive and defined on crisp elements `f : @♭ A → B`
+is the _weakest_ assumption one can make given that `A` is crisp, while assuming
+it is crisp and defined on cohesive elements `@♭ f : A → B` is the strongest,
+given that `B` is also crisp.
 
 ## Properties
 
-### Flat distributes in one direction over dependent function types
+### Flat distributes in one direction over function types
 
 ```agda
 module _
@@ -51,7 +72,7 @@ module _
     map-distributive-flat-Π f (intro-flat x)
 ```
 
-### Postcomposition by the counit induces an equivalence `♭ (♭ A → ♭ B) ≃ ♭ (♭ A → B)`
+### Postcomposition by the flat counit induces an equivalence `♭ (♭ A → ♭ B) ≃ ♭ (♭ A → B)`
 
 This is Theorem 6.14 in {{#cite Shu18}}.
 

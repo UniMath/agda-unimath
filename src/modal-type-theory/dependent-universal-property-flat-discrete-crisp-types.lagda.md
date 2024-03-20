@@ -22,8 +22,9 @@ open import modal-type-theory.flat-modality
 The
 {{#concept "dependent universal property" Disambiguation="of flat discrete crisp types"}}
 of a [flat discrete crisp type](modal-type-theory.flat-discrete-crisp-types.md)
-`A` states that for any crisply defined
-[crisp type family](modal-type-theory.crisp-types.md) `B : A → 𝒰`,
+`A` states that for any [crisp](modal-type-theory.crisp-types.md) type family
+[defined on crisp elements](modal-type-theory.crisp-function-types.md)
+`@♭ B : @♭ A → 𝒰`,
 [postcomposition](foundation-core.postcomposition-functions.md) by the counit of
 the [flat modality](modal-type-theory.flat-modality.md) induces an
 [equivalence](foundation-core.equivalences.md) under the flat modality.

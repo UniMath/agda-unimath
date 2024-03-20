@@ -60,6 +60,7 @@ trivial in this sense is captured by
 
 ## See also
 
+- [Crisp function types](modal-type-theory.crisp-function-types.md)
 - [The flat modality](modal-type-theory.flat-modality.md)
 
 ## References

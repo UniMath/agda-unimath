@@ -20,7 +20,8 @@ open import modal-type-theory.crisp-identity-types
 
 ## Idea
 
-A crisply defined function `f : @♭ A → B` preserves crisp
+A function defined on [crisp elements](modal-type-theory.crisp-types.md)
+`f : @♭ A → B` preserves crisp
 [identifications](foundation-core.identity-types.md), in the sense that it maps
 a crisp identification `p : x ＝ y` in `A` to an identification
 `crisp-ap f p : f x ＝ f y` in `B`. This action on identifications can be
