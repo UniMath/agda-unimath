@@ -47,7 +47,7 @@ from their source to their target. For instance, given two $0$-cells `x` and
 We follow the conventional approach of the library and start by defining the
 globular [structure](foundation.structure.md) on a type, and then define a
 globular type to be a type equipped with such structure. Note that we could
-equivalently have started by defining globluar types, and then define globular
+equivalently have started by defining globular types, and then define globular
 structures on a type as binary families of globular types on it, but this is a
 special property of globular types.
 
