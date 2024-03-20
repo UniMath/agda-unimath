@@ -1,7 +1,7 @@
-# Postcomposition of dependent functions
+# Postcomposition of families of maps
 
 ```agda
-module foundation-core.postcomposition-dependent-functions where
+module foundation-core.postcomposition-families-of-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -16,8 +16,8 @@ open import foundation-core.function-types
 
 ## Idea
 
-Given a type `A` and a dependent map `f : {a : A} → X a → Y a`, the
-{{#concept "dependent postcomposition function" Agda=postcomp-Π}}
+Given a type `A` and a family of maps `f : {a : A} → X a → Y a`, the
+{{#concept "postcomposition function" Disambiguation="by a family of maps" Agda=postcomp-Π}}
 
 ```text
   f ∘ - : ((a : A) → X a) → ((a : A) → Y a)
@@ -27,10 +27,10 @@ is defined by `λ h x → f (h x)`.
 
 Note that, as opposed to
 [precomposition of dependent functions](foundation-core.precomposition-dependent-functions.md),
-the use-case for postcomposition of dependent functions is very limited, since
-the definition of `f` depends on the particular choice of `A`. Once we allow `A`
-to vary while keeping `f` fixed, we reduce to the case of
-[postcomposition of (nondependent) functions](foundation-core.postcomposition-functions.md).
+the use-case for postcomposition of families of maps is very limited, since the
+definition of `f` depends on the particular choice of `A`. Once we allow `A` to
+vary while keeping `f` fixed, we reduce to the case of
+[postcomposition of functions](foundation-core.postcomposition-functions.md).
 
 ## Definitions
 

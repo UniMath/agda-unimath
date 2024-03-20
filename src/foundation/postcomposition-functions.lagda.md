@@ -12,7 +12,7 @@ open import foundation-core.postcomposition-functions public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.postcomposition-dependent-functions
+open import foundation.postcomposition-families-of-maps
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 

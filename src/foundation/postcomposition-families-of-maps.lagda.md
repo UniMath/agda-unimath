@@ -1,9 +1,9 @@
-# Postcomposition of dependent functions
+# Postcomposition of families of maps
 
 ```agda
-module foundation.postcomposition-dependent-functions where
+module foundation.postcomposition-families-of-maps where
 
-open import foundation-core.postcomposition-dependent-functions public
+open import foundation-core.postcomposition-families-of-maps public
 ```
 
 <details><summary>Imports</summary>
@@ -23,8 +23,8 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Given a type `A` and a dependent map `f : {a : A} → X a → Y a`, the
-{{#concept "dependent postcomposition function" Agda=postcomp-Π}}
+Given a type `A` and a family of maps `f : {a : A} → X a → Y a`, the
+{{#concept "postcomposition function" Disambiguation="by a family of maps" Agda=postcomp-Π}}
 
 ```text
   f ∘ - : ((a : A) → X a) → ((a : A) → Y a)
@@ -34,14 +34,14 @@ is defined by `λ h x → f (h x)`.
 
 Note that, as opposed to
 [precomposition of dependent functions](foundation-core.precomposition-dependent-functions.md),
-the use-case for postcomposition of dependent functions is very limited, since
-the definition of `f` depends on the particular choice of `A`. Once we allow `A`
-to vary while keeping `f` fixed, we reduce to the case of
-[postcomposition of (nondependent) functions](foundation-core.postcomposition-functions.md).
+the use-case for postcomposition of families of maps is very limited, since the
+definition of the family `f` depends on the particular choice of `A`. Once we
+allow `A` to vary while keeping `f` fixed, we reduce to the case of
+[postcomposition of functions](foundation-core.postcomposition-functions.md).
 
 ## Properties
 
-### The action on identifications of postcomposition by a map
+### The action on identifications of postcomposition by a family map
 
 Consider a map `f : {x : A} → B x → C x` and two functions
 `g h : (x : A) → B x`. Then the
@@ -51,24 +51,24 @@ Consider a map `f : {x : A} → B x → C x` and two functions
 
 ```text
                    ap (postcomp-Π A f)
-       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+       (g ＝ h) -------------------------> (f ∘ g ＝ f ∘ h)
           |                                       |
   htpy-eq |                                       | htpy-eq
           V                                       V
-       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f).
+       (g ~ h) --------------------------> (f ∘ g ~ f ∘ h).
                           f ·l_
 ```
 
-Similarly, the action on identifications `ap (postcomp-Π A f)` also fits in a
+Similarly, the action on identifications `ap (postcomp-Π A f)` fits in a
 commuting square
 
 ```text
                     ap (postcomp-Π A f)
-       (g ＝ h) -------------------------> (g ∘ f ＝ h ∘ f)
+       (g ＝ h) -------------------------> (f ∘ g ＝ f ∘ h)
           ^                                       ^
   eq-htpy |                                       | eq-htpy
           |                                       |
-       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f).
+       (g ~ h) --------------------------> (f ∘ g ~ f ∘ h).
                           f ·l_
 ```
 
