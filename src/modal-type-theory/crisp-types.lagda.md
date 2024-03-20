@@ -26,8 +26,8 @@ restrictions on the contexts in which they may be formed.
 hypotheses that are "indifferent" to the cohesive structure on types, and may
 only be judged in contexts made entirely out of crisp hypotheses, called _crisp
 contexts_. The indifference to cohesion is made concrete by the
-[flat](modal-type-theories.flat-modality.md) and
-[sharp](modal-type-theories.sharp-modality.md) modalities.
+[flat](modal-type-theory.flat-modality.md) and
+[sharp](modal-type-theory.sharp-modality.md) modalities.
 
 For instance, in the framework of real-cohesive type theory, where every type is
 endowed with real topological structure, a cohesive variable is understood as
