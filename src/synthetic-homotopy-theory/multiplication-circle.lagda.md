@@ -75,15 +75,7 @@ dependent-identification-Mul-Π-𝕊¹ :
   (H : pr1 q ~ pr1 r) → Id (pr2 q ∙ p) (H base-𝕊¹ ∙ pr2 r) →
   Id (tr Mul-Π-𝕊¹ p q) r
 dependent-identification-Mul-Π-𝕊¹ {x} refl q r H u =
-  eq-htpy-pointed-map
-    ( q)
-    ( r)
-    ( ( H) ,
-      (right-transpose-eq-concat
-        ( H base-𝕊¹)
-        ( pr2 r)
-        ( pr2 q)
-        ( inv (inv right-unit ∙ u))))
+  eq-pointed-htpy q r (H , inv right-unit ∙ u)
 
 eq-id-id-𝕊¹-Pointed-Type :
   Id (tr Mul-Π-𝕊¹ loop-𝕊¹ id-pointed-map) id-pointed-map

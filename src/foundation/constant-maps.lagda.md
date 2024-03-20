@@ -268,3 +268,7 @@ module _
       hom-retraction-const-retract ,
       is-retraction-hom-retraction-const-retract)
 ```
+
+## See also
+
+- [Constant pointed maps](structured-types.constant-pointed-maps.md)

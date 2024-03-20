@@ -906,10 +906,7 @@ module _
 
 ## References
 
-1. Section 4.7 of Univalent Foundations Project, _Homotopy Type Theory –
-   Univalent Foundations of Mathematics_ (2013)
-   ([website](https://homotopytypetheory.org/book/),
-   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
+{{#bibliography}} {{#reference UF13}}
 
 ## External links
 

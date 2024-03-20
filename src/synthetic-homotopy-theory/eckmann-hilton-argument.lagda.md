@@ -298,13 +298,13 @@ module _
 
   3-loop-eckmann-hilton-Ω² : type-Ω³ a
   3-loop-eckmann-hilton-Ω² =
-    map-equiv-pointed-equiv
+    map-pointed-equiv
       ( pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s))
       ( eckmann-hilton-Ω² s s)
 
   inv-3-loop-eckmann-hilton-Ω² : type-Ω³ a
   inv-3-loop-eckmann-hilton-Ω² =
-    map-equiv-pointed-equiv
+    map-pointed-equiv
       ( pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s))
       ( inv-eckmann-hilton-Ω² s s)
 ```

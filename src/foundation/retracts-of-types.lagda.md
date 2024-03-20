@@ -92,10 +92,8 @@ module _
 
   retract-eq :
     (x ＝ y) retract-of (inclusion-retract R x ＝ inclusion-retract R y)
-  pr1 retract-eq =
-    ap (inclusion-retract R)
-  pr2 retract-eq =
-    retraction-ap (inclusion-retract R) (retraction-retract R) x y
+  pr1 retract-eq = ap (inclusion-retract R)
+  pr2 retract-eq = retraction-ap (inclusion-retract R) (retraction-retract R)
 ```
 
 ### If `A` is a retract of `B` then `A → S` is a retract of `B → S` via precomposition

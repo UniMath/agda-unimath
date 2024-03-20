@@ -27,9 +27,9 @@ family of maps `h : (x : A) → B x → C x`. Then we obtain a map
 ```
 
 This operation is called the
-{{#concept "left whiskering" Disambiguation="2-homotopies with respect to composition" Agda=left-whisker-comp²}}.
-Alternatively the left whiskering operation of 2-homotopies can be defined using
-the
+{{#concept "left whiskering" Disambiguation="`2`-homotopies with respect to composition" Agda=left-whisker-comp²}}.
+Alternatively the left whiskering operation of `2`-homotopies can be defined
+using the
 [action on higher identifications of functions](foundation.action-on-higher-identifications-functions.md)
 by
 
@@ -37,8 +37,9 @@ by
   α x ↦ ap² h (α x).
 ```
 
-Similarly, the {{#concept "right whiskering" Disambiguation="2-homotopies with
-respect to composition" Agda=right-whisker-comp²}} is defined to be the operation
+Similarly, the
+{{#concept "right whiskering" Disambiguation="2-homotopies with respect to composition" Agda=right-whisker-comp²}}
+is defined to be the operation
 
 ```text
   (H ~ H') → (h : (x : A) → B x) → (H ·r h ~ H' ·r h)

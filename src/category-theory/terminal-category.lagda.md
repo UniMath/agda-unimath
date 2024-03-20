@@ -8,7 +8,6 @@ module category-theory.terminal-category where
 
 ```agda
 open import category-theory.categories
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.constant-functors
 open import category-theory.functors-categories
 open import category-theory.functors-precategories
@@ -75,24 +74,6 @@ associative-comp-hom-terminal-Category :
   comp-hom-terminal-Category {x} h (comp-hom-terminal-Category {x} g f)
 associative-comp-hom-terminal-Category h g f = refl
 
-inv-associative-comp-hom-terminal-Category :
-  {x y z w : obj-terminal-Category} →
-  (h : hom-terminal-Category z w)
-  (g : hom-terminal-Category y z)
-  (f : hom-terminal-Category x y) →
-  comp-hom-terminal-Category {x} h (comp-hom-terminal-Category {x} g f) ＝
-  comp-hom-terminal-Category {x} (comp-hom-terminal-Category {y} h g) f
-inv-associative-comp-hom-terminal-Category h g f = refl
-
-associative-composition-operation-terminal-Category :
-  associative-composition-operation-binary-family-Set hom-set-terminal-Category
-pr1 associative-composition-operation-terminal-Category =
-  comp-hom-terminal-Category
-pr1 (pr2 associative-composition-operation-terminal-Category h g f) =
-  associative-comp-hom-terminal-Category h g f
-pr2 (pr2 associative-composition-operation-terminal-Category h g f) =
-  inv-associative-comp-hom-terminal-Category h g f
-
 id-hom-terminal-Category :
   {x : obj-terminal-Category} → hom-terminal-Category x x
 id-hom-terminal-Category = star
@@ -109,24 +90,16 @@ right-unit-law-comp-hom-terminal-Category :
   comp-hom-terminal-Category {x} f (id-hom-terminal-Category {x}) ＝ f
 right-unit-law-comp-hom-terminal-Category f = refl
 
-is-unital-composition-operation-terminal-Category :
-  is-unital-composition-operation-binary-family-Set
-    ( hom-set-terminal-Category)
-    ( λ {x} {y} {z} → comp-hom-terminal-Category {x} {y} {z})
-pr1 is-unital-composition-operation-terminal-Category _ =
-  id-hom-terminal-Category
-pr1 (pr2 is-unital-composition-operation-terminal-Category) =
-  left-unit-law-comp-hom-terminal-Category
-pr2 (pr2 is-unital-composition-operation-terminal-Category) =
-  right-unit-law-comp-hom-terminal-Category
-
 terminal-Precategory : Precategory lzero lzero
-pr1 terminal-Precategory = obj-terminal-Category
-pr1 (pr2 terminal-Precategory) = hom-set-terminal-Category
-pr1 (pr2 (pr2 terminal-Precategory)) =
-  associative-composition-operation-terminal-Category
-pr2 (pr2 (pr2 terminal-Precategory)) =
-  is-unital-composition-operation-terminal-Category
+terminal-Precategory =
+  make-Precategory
+    ( obj-terminal-Category)
+    ( hom-set-terminal-Category)
+    ( comp-hom-terminal-Category)
+    ( λ x → id-hom-terminal-Category {x})
+    ( associative-comp-hom-terminal-Category)
+    ( left-unit-law-comp-hom-terminal-Category)
+    ( right-unit-law-comp-hom-terminal-Category)
 ```
 
 ### The terminal category

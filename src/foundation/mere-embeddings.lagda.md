@@ -54,7 +54,7 @@ transitive-mere-emb g f =
         ( mere-emb-Prop _ _)
         ( λ f' → unit-trunc-Prop (comp-emb g' f')))
 
-mere-emb-Large-Preorder : Large-Preorder lsuc _⊔_
+mere-emb-Large-Preorder : Large-Preorder lsuc (_⊔_)
 type-Large-Preorder mere-emb-Large-Preorder l = UU l
 leq-prop-Large-Preorder mere-emb-Large-Preorder = mere-emb-Prop
 refl-leq-Large-Preorder mere-emb-Large-Preorder = refl-mere-emb
@@ -67,12 +67,12 @@ transitive-leq-Large-Preorder mere-emb-Large-Preorder X Y Z =
 ```agda
 antisymmetric-mere-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-  (LEM (l1 ⊔ l2)) → mere-emb X Y → mere-emb Y X → mere-equiv X Y
+  LEM (l1 ⊔ l2) → mere-emb X Y → mere-emb Y X → mere-equiv X Y
 antisymmetric-mere-emb lem f g =
   apply-universal-property-trunc-Prop f
-    (mere-equiv-Prop _ _)
-    λ f' →
+    ( mere-equiv-Prop _ _)
+    ( λ f' →
       apply-universal-property-trunc-Prop g
-      (mere-equiv-Prop _ _)
-      λ g' → unit-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem f' g')
+        ( mere-equiv-Prop _ _)
+        ( λ g' → unit-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem f' g')))
 ```

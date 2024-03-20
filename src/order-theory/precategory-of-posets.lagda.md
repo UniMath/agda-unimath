@@ -20,8 +20,8 @@ open import order-theory.posets
 
 ## Idea
 
-The **(large) precategory of posets** consists of
-[posets](order-theory.posets.md) and
+The {{#concept "(large) precategory of posets" Agda=Poset-Large-Precategory}}
+consists of [posets](order-theory.posets.md) and
 [order preserving maps](order-theory.order-preserving-maps-posets.md).
 
 ## Definitions
@@ -36,14 +36,16 @@ parametric-Poset-Large-Precategory :
     ( λ l1 l2 → α l1 ⊔ β l1 ⊔ α l2 ⊔ β l2)
 parametric-Poset-Large-Precategory α β =
   λ where
-    .obj-Large-Precategory l → Poset (α l) (β l)
-    .hom-set-Large-Precategory → hom-set-Poset
-    .comp-hom-Large-Precategory {X = X} {Y} {Z} → comp-hom-Poset X Y Z
-    .id-hom-Large-Precategory {X = X} → id-hom-Poset X
-    .associative-comp-hom-Large-Precategory {X = X} {Y} {Z} {W} →
-      associative-comp-hom-Poset X Y Z W
-    .inv-associative-comp-hom-Large-Precategory {X = X} {Y} {Z} {W} →
-      inv-associative-comp-hom-Poset X Y Z W
+    .obj-Large-Precategory l →
+      Poset (α l) (β l)
+    .hom-set-Large-Precategory →
+      hom-set-Poset
+    .comp-hom-Large-Precategory {X = X} {Y} {Z} →
+      comp-hom-Poset X Y Z
+    .id-hom-Large-Precategory {X = X} →
+      id-hom-Poset X
+    .involutive-eq-associative-comp-hom-Large-Precategory {X = X} {Y} {Z} {W} →
+      involutive-eq-associative-comp-hom-Poset X Y Z W
     .left-unit-law-comp-hom-Large-Precategory {X = X} {Y} →
       left-unit-law-comp-hom-Poset X Y
     .right-unit-law-comp-hom-Large-Precategory {X = X} {Y} →
