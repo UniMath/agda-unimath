@@ -25,6 +25,7 @@ open import foundation-core.identity-types
 
 Given a type `A` and a family of maps `f : {a : A} → X a → Y a`, the
 {{#concept "postcomposition function" Disambiguation="of dependent functions by a family of maps" Agda=postcomp-Π}}
+of dependent functions `(a : A) → X a` by the family of maps `f`
 
 ```text
   postcomp-Π A f : ((a : A) → X a) → ((a : A) → Y a)
