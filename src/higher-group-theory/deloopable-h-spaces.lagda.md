@@ -6,7 +6,7 @@ module higher-group-theory.deloopable-h-spaces where
 
 <details><summary>Imports</summary>
 
-<details>
+</details>
 
 ## Idea
 
