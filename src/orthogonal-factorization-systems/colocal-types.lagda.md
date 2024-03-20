@@ -20,6 +20,8 @@ open import foundation.identity-types
 open import foundation.postcomposition-dependent-functions
 open import foundation.postcomposition-functions
 open import foundation.propositions
+open import foundation.empty-types
+open import foundation.unit-type
 open import foundation.retracts-of-maps
 open import foundation.retracts-of-types
 open import foundation.universal-property-equivalences
@@ -249,4 +251,12 @@ module _
 
 ### A type that is colocal at the unique map `empty → unit` is empty
 
-This remains to be formalized.
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
+  is-empty-is-colocal-map-unit-empty :
+    is-colocal (λ (_ : empty) → star) A → is-empty A
+  is-empty-is-colocal-map-unit-empty H = map-inv-is-equiv H (terminal-map A)
+```
