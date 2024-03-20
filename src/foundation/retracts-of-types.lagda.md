@@ -13,6 +13,7 @@ open import foundation.function-extensionality
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.postcomposition-functions
 open import foundation-core.precomposition-functions
@@ -116,7 +117,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (R : A retract-of B) (S : UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (S : UU l3) (R : A retract-of B)
   where
 
   retract-postcomp :
