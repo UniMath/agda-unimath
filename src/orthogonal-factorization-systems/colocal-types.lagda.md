@@ -120,8 +120,8 @@ module _
   is-colocal-htpy : (H : f ~ f') → is-colocal f' A → is-colocal f A
   is-colocal-htpy H = is-equiv-htpy (postcomp A f') (htpy-postcomp A H)
 
-  is-colocal-htpy' : (H : f ~ f') → is-colocal f A → is-colocal f' A
-  is-colocal-htpy' H = is-equiv-htpy' (postcomp A f) (htpy-postcomp A H)
+  is-colocal-inv-htpy : (H : f ~ f') → is-colocal f A → is-colocal f' A
+  is-colocal-inv-htpy H = is-equiv-htpy' (postcomp A f) (htpy-postcomp A H)
 ```
 
 ### If `S` is `f`-colocal then `S` is colocal at every retract of `f`
@@ -129,15 +129,15 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (R : f retract-of-map g) (S : UU l5)
+  (f : A → B) (g : X → Y) (R : g retract-of-map f) (S : UU l5)
   where
 
-  is-colocal-retract-map-is-colocal : is-colocal g S → is-colocal f S
+  is-colocal-retract-map-is-colocal : is-colocal f S → is-colocal g S
   is-colocal-retract-map-is-colocal =
     is-equiv-retract-map-is-equiv
-      ( postcomp S f)
       ( postcomp S g)
-      ( retract-map-postcomp-retract-map f g R S)
+      ( postcomp S f)
+      ( retract-map-postcomp-retract-map g f R S)
 ```
 
 In fact, the higher coherence of the retract is not needed:
@@ -145,38 +145,38 @@ In fact, the higher coherence of the retract is not needed:
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (R₀ : A retract-of X) (R₁ : B retract-of Y)
-  (i : coherence-square-maps' (inclusion-retract R₀) f g (inclusion-retract R₁))
+  (f : A → B) (g : X → Y) (R₀ : X retract-of A) (R₁ : Y retract-of B)
+  (i : coherence-square-maps' (inclusion-retract R₀) g f (inclusion-retract R₁))
   (r :
     coherence-square-maps'
       ( map-retraction-retract R₀)
-      ( g)
       ( f)
+      ( g)
       ( map-retraction-retract R₁))
   (S : UU l5)
   where
 
-  is-colocal-retract-map-is-colocal' : is-colocal g S → is-colocal f S
+  is-colocal-retract-map-is-colocal' : is-colocal f S → is-colocal g S
   is-colocal-retract-map-is-colocal' =
     is-equiv-retract-map-is-equiv'
-      ( postcomp S f)
       ( postcomp S g)
+      ( postcomp S f)
       ( retract-postcomp S R₀)
       ( retract-postcomp S R₁)
       ( inv-htpy
         ( postcomp-coherence-square-maps
-          ( f)
+          ( g)
           ( inclusion-retract R₀)
           ( inclusion-retract R₁)
-          ( g)
+          ( f)
           ( S)
           ( i)))
       ( inv-htpy
         ( postcomp-coherence-square-maps
-          ( g)
+          ( f)
           ( map-retraction-retract R₀)
           ( map-retraction-retract R₁)
-          ( f)
+          ( g)
           ( S)
           ( r)))
 ```
