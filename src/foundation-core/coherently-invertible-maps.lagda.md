@@ -65,8 +65,7 @@ We will colloquially refer to invertible maps equipped with this coherence as
 _transpose coherently invertible maps_.
 
 **Note.** Coherently invertible maps are referred to as
-{{#concept "half adjoint equivalences"}} in _Homotopy Type Theory – Univalent
-Foundations of Mathematics_.
+{{#concept "half adjoint equivalences"}} in {{#cite UF13}}.
 
 On this page we will prove that every two-sided inverse `g` of `f` can be
 promoted to a coherent two-sided inverse. Thus, for most properties of

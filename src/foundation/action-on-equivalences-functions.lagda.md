@@ -24,11 +24,11 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Assume given a map between universes `f : 𝒰 → 𝒱`. Applying the
+Given a map between universes `f : 𝒰 → 𝒱`, then applying the
 [action on identifications](foundation.action-on-identifications-functions.md)
 to [identifications](foundation-core.identity-types.md) arising from the
-[univalence axiom](foundation.univalence.md) gives us the {{#concept "action on
-equivalences" Agda=action-equiv-function}}
+[univalence axiom](foundation.univalence.md) gives us the
+{{#concept "action on equivalences" Agda=action-equiv-function}}
 
 ```text
   action-equiv-function f : X ≃ Y → f X ≃ f Y.
@@ -37,8 +37,9 @@ equivalences" Agda=action-equiv-function}}
 Alternatively, one can apply
 [transport along identifications](foundation-core.transport-along-identifications.md)
 to get
-[transport along equivalences](foundation.transport-along-equivalences.md), and
-by uniqueness these two constructions coincide.
+[transport along equivalences](foundation.transport-along-equivalences.md).
+However, by univalence such an action must also be unique, hence these two
+constructions coincide.
 
 ## Definition
 

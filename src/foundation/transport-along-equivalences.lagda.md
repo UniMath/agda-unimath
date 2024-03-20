@@ -45,8 +45,9 @@ to [identifications](foundation-core.identity-types.md) arising from the
 Alternatively, we could apply the
 [action on identifications](foundation.action-on-identifications-functions.md)
 to get another
-[action on equivalences](foundation.action-on-equivalences-functions.md), and by
-uniqueness these two constructions coincide.
+[action on equivalences](foundation.action-on-equivalences-functions.md).
+However, by univalence such a map must also be unique, hence these two
+constructions coincide.
 
 ## Definitions
 

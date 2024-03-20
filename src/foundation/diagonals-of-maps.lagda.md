@@ -21,6 +21,8 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -57,12 +59,12 @@ module _
 
   abstract
     is-section-fiber-diagonal-map-fiber-ap :
-      fiber-ap-fiber-diagonal-map ∘ fiber-diagonal-map-fiber-ap ~ id
+      is-section fiber-ap-fiber-diagonal-map fiber-diagonal-map-fiber-ap
     is-section-fiber-diagonal-map-fiber-ap (refl , refl) = refl
 
   abstract
     is-retraction-fiber-diagonal-map-fiber-ap :
-      fiber-diagonal-map-fiber-ap ∘ fiber-ap-fiber-diagonal-map ~ id
+      is-retraction fiber-ap-fiber-diagonal-map fiber-diagonal-map-fiber-ap
     is-retraction-fiber-diagonal-map-fiber-ap (x , refl) = refl
 
   abstract
