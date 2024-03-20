@@ -202,7 +202,7 @@ module _
   is-equiv-const-Id-is-acyclic-Truncated-Type ac X x y =
     is-equiv-htpy
       ( htpy-eq ∘ ap (const A (type-Truncated-Type X)) {x} {y})
-      ( compute-htpy-eq-ap-const A x y)
+      ( inv-compute-htpy-eq-ap-const A x y)
       ( is-equiv-comp
         ( htpy-eq)
         ( ap (const A (type-Truncated-Type X)))
@@ -227,7 +227,7 @@ module _
               ( const A (type-Truncated-Type X) y))
             ( is-equiv-htpy
               ( const A (x ＝ y))
-              ( htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
+              ( compute-htpy-eq-ap-const A x y)
               ( h X x y))))
 ```
 
