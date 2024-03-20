@@ -35,8 +35,8 @@ open import structured-types.pointed-types
 
 Consider two [H-spaces](structured-types.h-spaces.md) `X` and `Y`. A
 {{#concept "morphism of H-spaces"}} from `X` to `Y` consists of a
-[pointed map](structured-types.pointed-maps.md) `e : X ≃∗ Y` that preserves the
-unital binary operation
+[pointed equivalence](structured-types.pointed-equivalences.md) `e : X ≃∗ Y`
+that preserves the unital binary operation
 
 ```text
   α : (x x' : X) → e (μ x x') ＝ μ (e x) (e x')
@@ -188,7 +188,7 @@ module _
 module _
   {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2)
   where
-  
+
   equiv-H-Space : UU (l1 ⊔ l2)
   equiv-H-Space =
     Σ ( pointed-type-H-Space M ≃∗ pointed-type-H-Space N)

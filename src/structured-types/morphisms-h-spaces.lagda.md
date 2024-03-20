@@ -255,7 +255,7 @@ module _
 module _
   {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2)
   where
-  
+
   hom-H-Space : UU (l1 ⊔ l2)
   hom-H-Space =
     Σ ( pointed-type-H-Space M →∗ pointed-type-H-Space N)
