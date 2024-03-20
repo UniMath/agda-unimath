@@ -8,6 +8,7 @@ module higher-group-theory where
 open import higher-group-theory.cartesian-products-higher-groups public
 open import higher-group-theory.conjugation public
 open import higher-group-theory.cyclic-higher-groups public
+open import higher-group-theory.deloopable-groups public
 open import higher-group-theory.deloopable-h-spaces public
 open import higher-group-theory.deloopable-types public
 open import higher-group-theory.eilenberg-mac-lane-spaces public

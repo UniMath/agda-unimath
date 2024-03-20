@@ -9,15 +9,22 @@ module higher-group-theory.eilenberg-mac-lane-spaces where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.0-connected-types
 open import foundation.cartesian-product-types
 open import foundation.connected-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
+open import group-theory.abelian-groups
 open import group-theory.groups
 
+open import structured-types.equivalences-h-spaces
+open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
+
+open import synthetic-homotopy-theory.iterated-loop-spaces
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 </details>
@@ -88,12 +95,33 @@ module _
       ( X)
 ```
 
-### Eilenberg-Mac Lane spaces
+### Eilenberg-Mac Lane spaces specified by groups
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (k : 𝕋) (X : Pointed-Type l2)
+  {l1 l2 : Level} (G : Group l1)
   where
+
+  is-eilenberg-mac-lane-space-Group :
+    (n : ℕ) (X : Pointed-Type l2) → UU (l1 ⊔ l2)
+  is-eilenberg-mac-lane-space-Group 0 X =
+    pointed-type-Group G ≃∗ X
+  is-eilenberg-mac-lane-space-Group (succ-ℕ n) X =
+    is-connected (truncation-level-ℕ n) (type-Pointed-Type X) ×
+    equiv-H-Space (h-space-Group G) (iterated-loop-space-H-Space n X)
+```
+
+### Eilenberg-Mac Lane spaces specified by abelian groups
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1)
+  where
+
+  is-eilenberg-mac-lane-space-Ab :
+    (n : ℕ) (X : Pointed-Type l2) → UU (l1 ⊔ l2)
+  is-eilenberg-mac-lane-space-Ab =
+    is-eilenberg-mac-lane-space-Group (group-Ab A)
 ```
 
 ### Recursive Eilenberg-Mac Lane spaces

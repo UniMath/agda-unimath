@@ -9,7 +9,10 @@ module higher-group-theory.iterated-deloopings-of-pointed-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.cartesian-product-types
+open import foundation.connected-types
 open import foundation.dependent-pair-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import structured-types.pointed-equivalences
@@ -26,7 +29,7 @@ The type of {{#concept "`n`-fold deloopings" Disambiguation="pointed type"}} of
 a [pointed type](structured-types.pointed-types.md) `X` is the type
 
 ```text
-  Σ (Y : Pointed-Type), Ωⁿ X ≃∗ Y.
+  Σ (Y : Pointed-Type), is-connected (n-1) Y × (Ωⁿ X ≃∗ Y).
 ```
 
 Here, the pointed type `Ωⁿ X` is the `n`-th
@@ -43,7 +46,10 @@ module _
 
   iterated-delooping-Level : UU (l1 ⊔ lsuc l2)
   iterated-delooping-Level =
-    Σ (Pointed-Type l2) (λ Y → iterated-loop-space n X ≃∗ Y)
+    Σ ( Pointed-Type l2)
+      ( λ Y →
+        ( is-connected (truncation-level-minus-one-ℕ n) (type-Pointed-Type Y)) ×
+        ( iterated-loop-space n X ≃∗ Y))
 ```
 
 ### The type of `n`-fold deloopings of a pointed type

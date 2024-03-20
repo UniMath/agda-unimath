@@ -39,7 +39,7 @@ of an ∞-group `G` and an equivalence of H-spaces
 
 ## Definitions
 
-### Deloopings of H-spaces
+### Deloopings of H-spaces of a given universe level
 
 ```agda
 module _
@@ -50,3 +50,18 @@ module _
   delooping-H-Space-Level =
     Σ (∞-Group l2) (λ G → equiv-H-Space A (h-space-∞-Group G))
 ```
+
+### Deloopings of H-spaces
+
+```agda
+module _
+  {l1 : Level} (A : H-Space l1)
+  where
+
+  delooping-H-Space : UU (lsuc l1)
+  delooping-H-Space = delooping-H-Space-Level l1 A
+```
+
+## See also
+
+- [Deloopable groups](higher-group-theory.deloopable-groups.md)

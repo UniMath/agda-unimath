@@ -224,3 +224,4 @@ module _
 ## See also
 
 - [Deloopable H-spaces](higher-group-theory.deloopable-h-spaces.md)
+- [Deloopable groups](higher-group-theory.deloopable-groups.md)
