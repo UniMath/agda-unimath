@@ -11,8 +11,8 @@ module structured-types.large-transitive-globular-types where
 ```agda
 open import foundation.universe-levels
 
-open import structured-types.transitive-globular-types
 open import structured-types.large-globular-types
+open import structured-types.transitive-globular-types
 ```
 
 </details>
