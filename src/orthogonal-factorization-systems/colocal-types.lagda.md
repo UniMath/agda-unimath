@@ -9,8 +9,10 @@ module orthogonal-factorization-systems.colocal-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-arrows
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -206,7 +208,44 @@ module _
 
 ### A contractible type is `f`-colocal if and only if `f` is an equivalence
 
-This remains to be formalized.
+**Proof.** We have a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
+
+```text
+  X ----> (A → X)
+  |          |
+  |          |
+  ∨          ∨
+  Y ----> (A → Y)
+```
+
+If `A` is contractible, then the top and bottom map are equivalences so the left
+map is an equivalence if and only if the right map is.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
+  (A : UU l3) (is-contr-A : is-contr A)
+  where
+
+  is-equiv-is-colocal-is-contr : is-colocal f A → is-equiv f
+  is-equiv-is-colocal-is-contr =
+    is-equiv-source-is-equiv-target-equiv-arrow
+      ( f)
+      ( postcomp A f)
+      ( equiv-const-is-contr X is-contr-A ,
+        equiv-const-is-contr Y is-contr-A ,
+        refl-htpy)
+
+  is-colocal-is-equiv-is-contr : is-equiv f → is-colocal f A
+  is-colocal-is-equiv-is-contr =
+    is-equiv-target-is-equiv-source-equiv-arrow
+      ( f)
+      ( postcomp A f)
+      ( equiv-const-is-contr X is-contr-A ,
+        equiv-const-is-contr Y is-contr-A ,
+        refl-htpy)
+```
 
 ### A type that is colocal at the unique map `empty → unit` is empty
 

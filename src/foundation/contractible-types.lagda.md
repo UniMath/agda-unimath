@@ -162,7 +162,7 @@ module _
       ( f x y)
 ```
 
-### The diagonal of contractible types
+### The constant map at contractible types
 
 ```agda
 module _
@@ -170,10 +170,10 @@ module _
   where
 
   abstract
-    is-equiv-self-diagonal-is-equiv-diagonal :
+    is-equiv-self-const-is-equiv-const :
       ({l : Level} (X : UU l) → is-equiv (λ x → const A X x)) →
       is-equiv (λ x → const A A x)
-    is-equiv-self-diagonal-is-equiv-diagonal H = H A
+    is-equiv-self-const-is-equiv-const H = H A
 
   abstract
     is-contr-is-equiv-self-diagonal :
@@ -182,24 +182,24 @@ module _
       tot (λ x → htpy-eq) (center (is-contr-map-is-equiv H id))
 
   abstract
-    is-contr-is-equiv-diagonal :
+    is-contr-is-equiv-const :
       ({l : Level} (X : UU l) → is-equiv (λ x → const A X x)) → is-contr A
-    is-contr-is-equiv-diagonal H =
+    is-contr-is-equiv-const H =
       is-contr-is-equiv-self-diagonal
-        ( is-equiv-self-diagonal-is-equiv-diagonal H)
+        ( is-equiv-self-const-is-equiv-const H)
 
   abstract
-    is-equiv-diagonal-is-contr :
+    is-equiv-const-is-contr :
       is-contr A →
       {l : Level} (X : UU l) → is-equiv (const A X)
-    is-equiv-diagonal-is-contr H X =
+    is-equiv-const-is-contr H X =
       is-equiv-is-invertible
         ( ev-point' (center H))
         ( λ f → eq-htpy (λ x → ap f (contraction H x)))
         ( λ x → refl)
 
-  equiv-diagonal-is-contr :
+  equiv-const-is-contr :
     {l : Level} (X : UU l) → is-contr A → X ≃ (A → X)
-  pr1 (equiv-diagonal-is-contr X H) = const A X
-  pr2 (equiv-diagonal-is-contr X H) = is-equiv-diagonal-is-contr H X
+  pr1 (equiv-const-is-contr X H) = const A X
+  pr2 (equiv-const-is-contr X H) = is-equiv-const-is-contr H X
 ```

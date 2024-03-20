@@ -323,7 +323,7 @@ module _
           ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y))
           ( is-equiv-map-Π-is-fiberwise-equiv
             ( λ y →
-              is-equiv-diagonal-is-contr
+              is-equiv-const-is-contr
                 ( is-proof-irrelevant-is-prop
                   ( is-prop-type-trunc-Prop)
                   ( is-surj-f y))
