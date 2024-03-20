@@ -11,30 +11,44 @@ open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.identity-types
+open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universal-property-equivalences
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.local-maps
 open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.orthogonal-maps
 ```
 
 </details>
 
 ## Idea
 
-A type `A` is said to be **null at** `Y`, or **`Y`-null**, if the constant map
+A type `A` is said to be
+{{#concept "null at" Disambiguation="type" Agda=is-null}} `Y`, or
+{{#concept "`Y`-null" Disambiguation="type" Agda=is-null}}, if the
+[constant map](foundation-core.constant-maps.md)
 
 ```text
   const : A → (Y → A)
 ```
 
-is an equivalence. The idea is that _`A` observes the type `Y` to be
-contractible_.
+is an [equivalence](foundation-core.equivalences.md). The idea is that "`A`
+observes the type `Y` to be
+[contractible](foundation-core.contractible-types.md)".
 
-## Definition
+## Definitions
+
+### The predicate on a type of being `Y`-null
 
 ```agda
 module _
@@ -54,6 +68,39 @@ module _
 
 ## Properties
 
+### `Y`-null types are closed under equivalences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4}
+  where
+
+  is-null-equiv : (e : X ≃ Y) (f : B ≃ A) → is-null Y A → is-null X B
+  is-null-equiv e f H =
+    is-equiv-htpy-equiv
+      ( equiv-precomp e B ∘e equiv-postcomp Y (inv-equiv f) ∘e (_ , H) ∘e f)
+      ( λ b → eq-htpy (λ _ → inv (is-retraction-map-inv-equiv f b)))
+
+  is-null-equiv-exponent : (e : X ≃ Y) → is-null Y A → is-null X A
+  is-null-equiv-exponent e H =
+    is-equiv-comp
+      ( precomp (map-equiv e) A)
+      ( const Y A)
+      ( H)
+      ( is-equiv-precomp-equiv e A)
+```
+
+### `Y`-null types are closed under retracts
+
+```agda
+  is-null-retract : (f : B retract-of A) → is-null Y A → is-null Y B
+  is-null-retract f =
+    is-equiv-retract-map-is-equiv
+      ( const Y B)
+      ( const Y A)
+      ( retract-map-const-retract Y f)
+```
+
 ### A type is `Y`-null if and only if it is local at the terminal projection `Y → unit`
 
 ```agda
@@ -61,31 +108,50 @@ module _
   {l1 l2 : Level} (Y : UU l1) (A : UU l2)
   where
 
-  is-local-is-null : is-null Y A → is-local (λ y → star) A
-  is-local-is-null =
+  is-local-terminal-map-is-null : is-null Y A → is-local (terminal-map Y) A
+  is-local-terminal-map-is-null =
     is-equiv-comp
       ( const Y A)
       ( map-left-unit-law-function-type A)
       ( is-equiv-map-left-unit-law-function-type A)
 
-  is-null-is-local : is-local (λ y → star) A → is-null Y A
-  is-null-is-local =
+  is-null-is-local-terminal-map : is-local (terminal-map Y) A → is-null Y A
+  is-null-is-local-terminal-map =
     is-equiv-comp
-      ( precomp (λ y → star) A)
+      ( precomp (terminal-map Y) A)
       ( map-inv-left-unit-law-function-type A)
       ( is-equiv-map-inv-left-unit-law-function-type A)
 
-  equiv-is-local-is-null : is-null Y A ≃ is-local (λ y → star) A
-  equiv-is-local-is-null =
+  equiv-is-local-terminal-map-is-null :
+    is-null Y A ≃ is-local (terminal-map Y) A
+  equiv-is-local-terminal-map-is-null =
     equiv-prop
       ( is-property-is-equiv (const Y A))
-      ( is-property-is-equiv (precomp (λ y → star) A))
-      ( is-local-is-null)
-      ( is-null-is-local)
+      ( is-property-is-equiv (precomp (terminal-map Y) A))
+      ( is-local-terminal-map-is-null)
+      ( is-null-is-local-terminal-map)
 
-  equiv-is-null-is-local : is-local (λ y → star) A ≃ is-null Y A
-  equiv-is-null-is-local = inv-equiv equiv-is-local-is-null
+  equiv-is-null-is-local-terminal-map :
+    is-local (terminal-map Y) A ≃ is-null Y A
+  equiv-is-null-is-local-terminal-map =
+    inv-equiv equiv-is-local-terminal-map-is-null
 ```
+
+### A type is `Y`-null if and only if the terminal projection of `Y` is orthogonal to the terminal projection of `A`
+
+```agda
+module _
+  {l1 l2 : Level} (Y : UU l1) (A : UU l2)
+  where
+
+  is-null-is-orthogonal-terminal-maps :
+    is-orthogonal (terminal-map Y) (terminal-map A) → is-null Y A
+  is-null-is-orthogonal-terminal-maps H =
+    is-null-is-local-terminal-map Y A
+      ( is-local-is-orthogonal-terminal-map (terminal-map Y) H)
+```
+
+The converse remains to be formalized.
 
 ### A type is `f`-local if it is null at every fiber of `f`
 
