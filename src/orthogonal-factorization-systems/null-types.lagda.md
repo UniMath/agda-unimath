@@ -35,7 +35,8 @@ open import orthogonal-factorization-systems.orthogonal-maps
 
 A type `A` is said to be
 {{#concept "null at" Disambiguation="type" Agda=is-null}} `Y`, or
-{{#concept "`Y`-null" Disambiguation="type" Agda=is-null}}, if the constant map
+{{#concept "`Y`-null" Disambiguation="type" Agda=is-null}}, if the
+[constant map](foundation-core.constant-maps.md)
 
 ```text
   const : A → (Y → A)
@@ -45,7 +46,9 @@ is an [equivalence](foundation-core.equivalences.md). The idea is that "`A`
 observes the type `Y` to be
 [contractible](foundation-core.contractible-types.md)".
 
-## Definition
+## Definitions
+
+### The predicate on a type of being `Y`-null
 
 ```agda
 module _
@@ -65,7 +68,7 @@ module _
 
 ## Properties
 
-### Null types are closed under equivalences
+### `Y`-null types are closed under equivalences
 
 ```agda
 module _

@@ -41,9 +41,9 @@ open import orthogonal-factorization-systems.orthogonal-maps
 ## Idea
 
 A map `f : A → B` is said to be
-{{#concept "null at" Disambiguation="type" Agda=is-null-map}} `Y`, or
-{{#concept "`Y`-null" Disambiguation="type" Agda=is-null-map}} if its
-[fibers](foundation-core.fibers-of-maps.md) are
+{{#concept "null" Disambiguation="function at a type" Agda=is-null-map}} at `Y`,
+or {{#concept "`Y`-null" Disambiguation="function at a type" Agda=is-null-map}}
+if its [fibers](foundation-core.fibers-of-maps.md) are
 `Y`-[null](orthogonal-factorization-systems.null-types.md), or equivalently, if
 the square
 
@@ -59,7 +59,7 @@ the square
 
 is a [pullback](foundation-core.pullbacks.md).
 
-## Definition
+## Definitions
 
 ### The fiber condition for `Y`-null maps
 
