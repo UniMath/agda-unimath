@@ -1,4 +1,4 @@
-# Functoriality of matrices
+# Functoriality of the type of matrices
 
 ```agda
 module linear-algebra.functoriality-matrices where
@@ -19,7 +19,7 @@ open import linear-algebra.matrices
 
 ## Idea
 
-An map `f : A → B` induces a map `matrix A m n → matrix B m n`.
+Any map `f : A → B` induces a map `matrix A m n → matrix B m n`.
 
 ## Definition
 

@@ -165,6 +165,7 @@ open import foundation.extensions-types public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
 open import foundation.families-of-maps public
+open import foundation.families-over-telescopes public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
