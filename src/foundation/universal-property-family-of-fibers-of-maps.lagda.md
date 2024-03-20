@@ -403,10 +403,16 @@ module _
     pr2 extension-by-fiberwise-equiv-universal-property-family-of-fibers
 ```
 
-### A type family `C` over `B` satisfies the universal property of the family of fibers of a map `f : A → B` if and only if the diagonal map `C b → (fiber f b → C b)` is an equivalence for every `b : B`
+### A type family `C` over `B` satisfies the universal property of the family of fibers of a map `f : A → B` if and only if the constant map `C b → (fiber f b → C b)` is an equivalence for every `b : B`
 
-This condition simplifies, for example, the proof that connected maps satisfy a
-dependent universal property.
+In other words, the dependent type `C` is
+`f`-[local](orthogonal-factorization-systems.local-types.md) if its fiber over
+`b` is `fiber f b`-[null](orthogonal-factorization-systems.null-types.md) for
+every `b : B`.
+
+This condition simplifies, for example, the proof that
+[connected maps](foundation.connected-maps.md) satisfy a dependent universal
+property.
 
 ```agda
 module _
@@ -420,7 +426,7 @@ module _
   is-equiv-precomp-Π-fiber-condition {l3} {C} H =
     is-equiv-comp
       ( ev-lift-family-of-elements-fiber f (λ b _ → C b))
-      ( map-Π (λ b u _ → u))
+      ( map-Π (λ b → const (fiber f b) (C b)))
       ( is-equiv-map-Π-is-fiberwise-equiv H)
       ( universal-property-family-of-fibers-fiber f C)
 ```
