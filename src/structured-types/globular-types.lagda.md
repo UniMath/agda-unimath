@@ -18,8 +18,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "globular type" Agda=Globular-Type}} is a type
-[equipped](foundation.structure.md) with a
+A {{#concept "globular type" Agda=Globular-Type}} is a type equipped with a
 [binary relation](foundation.binary-relations.md) valued in globular types.
 
 Thus, a globular type consists of a base type `A` which is called the type of
@@ -44,6 +43,13 @@ from their source to their target. For instance, given two $0$-cells `x` and
        -----------
             g
 ```
+
+We follow the conventional approach of the library and start by defining the
+globular [structure](foundation.structure.md) on a type, and then define a
+globular type to be a type equipped with such structure. Note that we could
+equivalently have started by defining globluar types, and then define globular
+structures on a type as binary families of globular types on it, but this is a
+special property of globular types.
 
 ## Definitions
 
