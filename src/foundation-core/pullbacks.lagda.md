@@ -425,7 +425,7 @@ module _
 
 ### The vertical pullback pasting property
 
-Given a diagram as follows where the bottom square is a pullback
+Given a diagram as follows where the lower square is a pullback
 
 ```text
   ∙ -------> ∙
@@ -439,7 +439,7 @@ Given a diagram as follows where the bottom square is a pullback
   ∙ -------> ∙,
 ```
 
-then the top square is a pullback if and only if the composite square is.
+then the upper square is a pullback if and only if the composite square is.
 
 ```agda
 module _
@@ -451,11 +451,10 @@ module _
 
   abstract
     is-pullback-top-square-is-pullback-rectangle :
-      (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
       is-pullback f g c →
       is-pullback f (g ∘ h) (pasting-vertical-cone f g h c d) →
       is-pullback (horizontal-map-cone f g c) h d
-    is-pullback-top-square-is-pullback-rectangle c d pb-c pb-dc =
+    is-pullback-top-square-is-pullback-rectangle pb-c pb-dc =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( horizontal-map-cone f g c)
         ( h)
@@ -509,11 +508,10 @@ module _
 
   abstract
     is-pullback-rectangle-is-pullback-top-square :
-      (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
       is-pullback f g c →
       is-pullback (horizontal-map-cone f g c) h d →
       is-pullback f (g ∘ h) (pasting-vertical-cone f g h c d)
-    is-pullback-rectangle-is-pullback-top-square c d pb-c pb-d =
+    is-pullback-rectangle-is-pullback-top-square pb-c pb-d =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( f)
         ( g ∘ h)
@@ -566,135 +564,6 @@ module _
                   ( d)
                   ( pb-d)
                   ( pr1 t))))
-```
-
-### The horizontal pullback homotopy pasting property
-
-Given a coherent diagram of the form
-
-```text
-    ∙ ----------> ∙
-   | |\         ∧ |
-   | |  \     /   |
-   | |    ∨ /     |
-   | |     ∙ ⌟    |
-   | ∨     |      |
-   ∨       |      ∨
-    ∙ ---- | ---> ∙
-      \    |     ∧
-        \  |   /
-          ∨∨ /
-           ∙
-```
-
-where the front right square is a pullback. Then the front left square is a
-pullback if and only if the back square is.
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  (bottom-left : X → Y) (bottom-right : Y → Z)
-  (right : C → Z) (bottom-back : X → Z)
-  (c : cone bottom-right right B)
-  (d : cone bottom-left (vertical-map-cone bottom-right right c) A)
-  (e : cone bottom-back right A)
-  (bottom-triangle :
-    coherence-triangle-maps bottom-back bottom-right bottom-left)
-  (K :
-    htpy-parallel-cone bottom-triangle
-      ( refl-htpy' right)
-      ( e)
-      ( pasting-horizontal-cone bottom-left bottom-right right c d))
-  where
-
-  abstract
-    is-pullback-left-square-is-pullback-rectangle-htpy :
-      is-pullback bottom-right right c →
-      is-pullback bottom-back right e →
-      is-pullback bottom-left (vertical-map-cone bottom-right right c) d
-    is-pullback-left-square-is-pullback-rectangle-htpy pb-c pb-e =
-      is-pullback-left-square-is-pullback-rectangle
-        ( bottom-left)
-        ( bottom-right)
-        ( right)
-        ( c)
-        ( d)
-        ( pb-c)
-        ( is-pullback-htpy' bottom-triangle refl-htpy e K pb-e)
-
-    is-pullback-rectangle-is-pullback-left-square-htpy :
-      is-pullback bottom-right right c →
-      is-pullback bottom-left (vertical-map-cone bottom-right right c) d →
-      is-pullback bottom-back right e
-    is-pullback-rectangle-is-pullback-left-square-htpy pb-c pb-dc =
-      is-pullback-htpy
-        ( bottom-triangle)
-        ( refl-htpy)
-        ( pasting-horizontal-cone bottom-left bottom-right right c d)
-        ( K)
-        ( is-pullback-rectangle-is-pullback-left-square
-          ( bottom-left)
-          ( bottom-right)
-          ( right)
-          ( c)
-          ( d)
-          ( pb-c)
-          ( pb-dc))
-```
-
-### The vertical pullback homotopy pasting property
-
-Given a coherent diagram of the form
-
-```text
-  ∙ ---------> ∙
-  |\ --------->|\
-  | \          | \
-  |  \         |  \
-  |   ∨        |   ∨
-  |    ∙ ---------> ∙
-  |   /  ⌟     |   /
-  |  /         |  /
-  | /          | /
-  ∨∨           ∨∨
-  ∙ ---------> ∙
-```
-
-where the bottom front square is a pullback square, then the top front square is
-a pullback if and only if the back rectangle is.
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  (f : C → Z) (g : Y → Z) (h : X → Y) (i : X → Z)
-  (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) (e : cone f i A)
-  (H : coherence-triangle-maps i g h)
-  (K : htpy-parallel-cone (refl-htpy' f) H e (pasting-vertical-cone f g h c d))
-  where
-
-  abstract
-    is-pullback-top-square-is-pullback-rectangle-htpy :
-      is-pullback f g c →
-      is-pullback f i e →
-      is-pullback (horizontal-map-cone f g c) h d
-    is-pullback-top-square-is-pullback-rectangle-htpy pb-c pb-e =
-      is-pullback-top-is-pullback-rectangle f g h c d
-        ( pb-c)
-        ( is-pullback-htpy' refl-htpy H e K pb-e)
-
-    is-pullback-rectangle-is-pullback-top-square-htpy :
-      is-pullback f g c →
-      is-pullback (horizontal-map-cone f g c) h d →
-      is-pullback f i e
-    is-pullback-rectangle-is-pullback-top-square-htpy pb-c pb-dc =
-      is-pullback-htpy
-        ( refl-htpy)
-        ( H)
-        ( pasting-vertical-cone f g h c d)
-        ( K)
-        ( is-pullback-rectangle-is-pullback-top f g h c d pb-c pb-dc)
 ```
 
 ### Pullbacks are associative
