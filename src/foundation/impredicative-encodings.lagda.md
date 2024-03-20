@@ -182,12 +182,12 @@ module _
   map-impredicative-neg-Prop f Q a = ex-falso (f a)
 
   map-inv-impredicative-neg-Prop : type-impredicative-neg-Prop → ¬ A
-  map-inv-impredicative-neg-Prop H a = H (neg-type-Prop A) a a
+  map-inv-impredicative-neg-Prop H a = H (neg-Prop' A) a a
 
   equiv-impredicative-neg-Prop : ¬ A ≃ type-impredicative-neg-Prop
   equiv-impredicative-neg-Prop =
     equiv-iff
-      ( neg-type-Prop A)
+      ( neg-Prop' A)
       ( impredicative-neg-Prop)
       ( map-impredicative-neg-Prop)
       ( map-inv-impredicative-neg-Prop)

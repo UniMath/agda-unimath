@@ -70,7 +70,7 @@ module _
 
   is-not-trivial-prop-Group : Prop l1
   is-not-trivial-prop-Group =
-    neg-type-Prop ((x : type-Group G) → unit-Group G ＝ x)
+    neg-Prop' ((x : type-Group G) → unit-Group G ＝ x)
 
   is-not-trivial-Group : UU l1
   is-not-trivial-Group =

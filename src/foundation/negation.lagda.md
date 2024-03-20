@@ -34,11 +34,11 @@ type `A` is the type `A → empty`.
 is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
 is-prop-neg {A = A} = is-prop-function-type is-prop-empty
 
-neg-type-Prop : {l1 : Level} → UU l1 → Prop l1
-neg-type-Prop A = ¬ A , is-prop-neg
+neg-Prop' : {l1 : Level} → UU l1 → Prop l1
+neg-Prop' A = ¬ A , is-prop-neg
 
 neg-Prop : {l1 : Level} → Prop l1 → Prop l1
-neg-Prop P = neg-type-Prop (type-Prop P)
+neg-Prop P = neg-Prop' (type-Prop P)
 
 type-neg-Prop : {l1 : Level} → Prop l1 → UU l1
 type-neg-Prop P = type-Prop (neg-Prop P)
@@ -64,8 +64,8 @@ equiv-neg :
   (X ≃ Y) → (¬ X ≃ ¬ Y)
 equiv-neg {l1} {l2} {X} {Y} e =
   equiv-iff'
-    ( neg-type-Prop X)
-    ( neg-type-Prop Y)
+    ( neg-Prop' X)
+    ( neg-Prop' Y)
     ( pair (map-neg (map-inv-equiv e)) (map-neg (map-equiv e)))
 ```
 

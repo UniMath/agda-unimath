@@ -54,7 +54,7 @@ map-double-negation f = map-neg (map-neg f)
 ```agda
 double-negation-type-Prop :
   {l : Level} (A : UU l) → Prop l
-double-negation-type-Prop A = neg-type-Prop (¬ A)
+double-negation-type-Prop A = neg-Prop' (¬ A)
 
 double-negation-Prop :
   {l : Level} (P : Prop l) → Prop l
