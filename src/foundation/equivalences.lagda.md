@@ -244,7 +244,7 @@ Consider a commuting diagram of maps
   f |     /   | g
     |   h     |
     ∨ /       ∨
-    B ------> Y
+    B ------> Y.
          j
 ```
 
