@@ -31,17 +31,17 @@ on _ad infinitum_. For every pair of $n$-cells `s` and `t`, there is a type of
 $(n+1)$-cells _from `s` to `t`_, and we say the $(n+1)$-cells have _source_ `s`
 and _target_ `t`.
 
-The standard interpretation of the higher cells of a large globular type is as
-arrows from their source to their target. For instance, given two $0$-cells `x`
-and `y`, two $1$-cells `f` and `g` from `x` to `y`, two $2$-cells `α` and `β`
-from `f` to `g`, and a $3$-cell `H` from `α` to `β`, a common depiction would be
+The standard interpretation of the higher cells of a globular type is as arrows
+from their source to their target. For instance, given two $0$-cells `x` and
+`y`, two $1$-cells `f` and `g` from `x` to `y`, two $2$-cells `H` and `K` from
+`f` to `g`, and a $3$-cell `α` from `H` to `K`, a common depiction would be
 
 ```text
             f
        -----------
      /  //     \\  \
-    /  //   H   \\  ∨
-   x  α|| ≡≡≡≡> ||β  y.
+    /  //   α   \\  ∨
+   x  H|| ≡≡≡≡> ||K  y.
     \  \\       //  ∧
      \  V       V  /
        -----------

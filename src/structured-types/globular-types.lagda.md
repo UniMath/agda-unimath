@@ -23,22 +23,22 @@ A {{#concept "globular type" Agda=Globular-Type}} is a type
 [binary relation](foundation.binary-relations.md) valued in globular types.
 
 Thus, a globular type consists of a base type `A` which is called the type of
-_$0$-cells_, and for every pair of $0$-cells, a type of $1$-cells, and for every
+$0$-cells, and for every pair of $0$-cells, a type of $1$-cells, and for every
 pair of $1$-cells a type of $2$-cells, and so on _ad infinitum_. For every pair
 of $n$-cells `s` and `t`, there is a type of $(n+1)$-cells _from `s` to `t`_,
 and we say the $(n+1)$-cells have _source_ `s` and _target_ `t`.
 
 The standard interpretation of the higher cells of a globular type is as arrows
 from their source to their target. For instance, given two $0$-cells `x` and
-`y`, two $1$-cells `f` and `g` from `x` to `y`, two $2$-cells `α` and `β` from
-`f` to `g`, and a $3$-cell `H` from `α` to `β`, a common depiction would be
+`y`, two $1$-cells `f` and `g` from `x` to `y`, two $2$-cells `H` and `K` from
+`f` to `g`, and a $3$-cell `α` from `H` to `K`, a common depiction would be
 
 ```text
             f
        -----------
      /  //     \\  \
-    /  //   H   \\  ∨
-   x  α|| ≡≡≡≡> ||β  y.
+    /  //   α   \\  ∨
+   x  H|| ≡≡≡≡> ||K  y.
     \  \\       //  ∧
      \  V       V  /
        -----------
@@ -79,7 +79,7 @@ module _
     globular-structure 2-cell-globular-structure
   globular-structure-2-cell-globular-structure =
     globular-structure-1-cell-globular-structure
-    ( globular-structure-1-cell-globular-structure G x y) f g
+      ( globular-structure-1-cell-globular-structure G x y) f g
 
 module _
   {l : Level} {A : UU l} (G : globular-structure A)
@@ -96,7 +96,7 @@ module _
     globular-structure 3-cell-globular-structure
   globular-structure-3-cell-globular-structure =
     globular-structure-1-cell-globular-structure
-    ( globular-structure-2-cell-globular-structure G f g) p q
+      ( globular-structure-2-cell-globular-structure G f g) p q
 
 module _
   {l : Level} {A : UU l} (G : globular-structure A)
@@ -114,7 +114,7 @@ module _
     globular-structure 4-cell-globular-structure
   globular-structure-4-cell-globular-structure =
     globular-structure-1-cell-globular-structure
-    ( globular-structure-3-cell-globular-structure G p q) H K
+      ( globular-structure-3-cell-globular-structure G p q) H K
 ```
 
 ### The type of globular types
@@ -175,8 +175,10 @@ module _
 
 ```agda
 globular-structure-Id : {l : Level} (A : UU l) → globular-structure A
-1-cell-globular-structure (globular-structure-Id A) x y =
-  x ＝ y
-globular-structure-1-cell-globular-structure (globular-structure-Id A) x y =
-  globular-structure-Id (x ＝ y)
+globular-structure-Id A =
+  λ where
+  .1-cell-globular-structure x y →
+    x ＝ y
+  .globular-structure-1-cell-globular-structure x y →
+    globular-structure-Id (x ＝ y)
 ```

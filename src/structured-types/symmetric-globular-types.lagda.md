@@ -89,7 +89,8 @@ is-symmetric-globular-structure-Id :
   is-symmetric-globular-structure (globular-structure-Id A)
 is-symmetric-globular-structure-Id A =
   λ where
-  .is-symmetric-1-cell-is-symmetric-globular-structure x y → inv
+  .is-symmetric-1-cell-is-symmetric-globular-structure x y →
+    inv
   .is-symmetric-globular-structure-1-cell-is-symmetric-globular-structure x y →
     is-symmetric-globular-structure-Id (x ＝ y)
 ```
