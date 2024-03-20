@@ -12,8 +12,8 @@ open import foundation.universe-levels
 
 open import higher-group-theory.higher-groups
 
-open import structured-types.h-spaces
 open import structured-types.equivalences-h-spaces
+open import structured-types.h-spaces
 ```
 
 </details>
