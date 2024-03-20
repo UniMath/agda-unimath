@@ -225,7 +225,7 @@ module _
       is-pullback f g c
     is-pullback-left-factor-is-inhabited-standard-pullback-right-factor-is-pullback-product'
       H t =
-      is-equiv-left-factor-is-equiv-map-product-is-inhabited-right-factor'
+      is-equiv-left-factor-is-equiv-map-product'
         ( gap f g c)
         ( gap f' g' c')
         ( t)
@@ -290,7 +290,7 @@ module _
       is-pullback f' g' c'
     is-pullback-right-factor-is-inhabited-standard-pullback-left-factor-is-pullback-product'
       H t =
-      is-equiv-right-factor-is-equiv-map-product-is-inhabited-left-factor'
+      is-equiv-right-factor-is-equiv-map-product'
         ( gap f g c)
         ( gap f' g' c')
         ( t)

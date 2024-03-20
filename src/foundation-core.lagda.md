@@ -40,6 +40,7 @@ open import foundation-core.negation public
 open import foundation-core.operations-span-diagrams public
 open import foundation-core.operations-spans public
 open import foundation-core.path-split-maps public
+open import foundation-core.postcomposition-dependent-functions public
 open import foundation-core.postcomposition-functions public
 open import foundation-core.precomposition-dependent-functions public
 open import foundation-core.precomposition-functions public
