@@ -85,7 +85,7 @@ Therefore we see that a lifting square consists of a
 [homotopy of morphisms of arrows](foundation.homotopies-morphisms-arrows.md)
 `pullback-hom f g j ~ α`.
 
-**Note.** In the literature, a lifting structure on a square is more commonly
+**Terminology.** In the literature, a lifting structure on a square is commonly
 referred to as a _solution to the lifting problem_ `α`.
 
 ## Definitions
