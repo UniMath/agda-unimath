@@ -74,7 +74,7 @@ module _
         ( y))
 ```
 
-### The type of $∞$-magmoid structures on a type
+### The type of transitive globular structures on a type
 
 ```agda
 transitive-globular-structure : {l : Level} (A : UU l) → UU (lsuc l)
@@ -82,7 +82,7 @@ transitive-globular-structure A =
   Σ (globular-structure A) (is-transitive-globular-structure)
 ```
 
-### The type of $∞$-magmoids
+### The type of transitive globular types
 
 ```agda
 Transitive-Globular-Type : (l : Level) → UU (lsuc l)
@@ -91,7 +91,7 @@ Transitive-Globular-Type l = Σ (UU l) (transitive-globular-structure)
 
 ## Examples
 
-### The $∞$-magmoid on a type given by its identity types
+### The transitive globular structure on a type given by its identity types
 
 ```agda
 is-transitive-globular-structure-Id :
@@ -99,7 +99,9 @@ is-transitive-globular-structure-Id :
   is-transitive-globular-structure (globular-structure-Id A)
 is-transitive-globular-structure-Id A =
   λ where
-  .comp-1-cell-is-transitive-globular-structure p q → q ∙ p
+  .comp-1-cell-is-transitive-globular-structure
+    p q →
+    q ∙ p
   .is-transitive-globular-structure-1-cell-is-transitive-globular-structure
     x y →
     is-transitive-globular-structure-Id (x ＝ y)
