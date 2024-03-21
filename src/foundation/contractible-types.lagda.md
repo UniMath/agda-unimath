@@ -162,7 +162,7 @@ module _
       ( f x y)
 ```
 
-### The ⧄ contractible types
+### The diagonal of contractible types
 
 ```agda
 module _
@@ -170,10 +170,10 @@ module _
   where
 
   abstract
-    is-equiv-self-diagonal-is-equiv-const :
+    is-equiv-self-diagonal-is-equiv-diagonal :
       ({l : Level} (X : UU l) → is-equiv (λ x → const A X x)) →
       is-equiv (λ x → const A A x)
-    is-equiv-self-diagonal-is-equiv-const H = H A
+    is-equiv-self-diagonal-is-equiv-diagonal H = H A
 
   abstract
     is-contr-is-equiv-self-diagonal :
@@ -186,7 +186,7 @@ module _
       ({l : Level} (X : UU l) → is-equiv (λ x → const A X x)) → is-contr A
     is-contr-is-equiv-diagonal H =
       is-contr-is-equiv-self-diagonal
-        ( is-equiv-self-diagonal-is-equiv-const H)
+        ( is-equiv-self-diagonal-is-equiv-diagonal H)
 
   abstract
     is-equiv-diagonal-is-contr :
