@@ -25,7 +25,7 @@ open import structured-types.small-pointed-types
 
 ## Idea
 
-Consider a [pointed type](structured-types.pointed types.md) `X` and a pointed
+Consider a [pointed type](structured-types.pointed-types.md) `X` and a pointed
 [connected](foundation.0-connected-types.md) type `Y`. We say that `Y` is a
 {{#concept "delooping" Agda=is-delooping}} of `X` if we have a
 [pointed equivalence](structured-types.pointed-equivalences.md)
