@@ -409,8 +409,8 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
   (f : A → B) (g : X → Y) (h : U → V)
-  (top : hom-arrow f g) (left : hom-arrow f h) (right : hom-arrow g h)
-  (H : coherence-triangle-hom-arrow f g h top left right)
+  (left : hom-arrow f h) (right : hom-arrow g h) (top : hom-arrow f g)
+  (H : coherence-triangle-hom-arrow f g h left right top)
   where
 
   abstract
@@ -434,9 +434,9 @@ module _
   (right : cartesian-hom-arrow g h)
   (H :
     coherence-triangle-hom-arrow f g h
-      ( hom-arrow-cartesian-hom-arrow f g top)
       ( left)
-      ( hom-arrow-cartesian-hom-arrow g h right))
+      ( hom-arrow-cartesian-hom-arrow g h right)
+      ( hom-arrow-cartesian-hom-arrow f g top))
   where
 
   abstract
@@ -444,9 +444,9 @@ module _
       is-cartesian-hom-arrow f h left
     is-cartesian-left-cartesian-hom-arrow-triangle =
       is-cartesian-left-hom-arrow-triangle f g h
-        ( hom-arrow-cartesian-hom-arrow f g top)
         ( left)
         ( hom-arrow-cartesian-hom-arrow g h right)
+        ( hom-arrow-cartesian-hom-arrow f g top)
         ( H)
         ( is-cartesian-cartesian-hom-arrow g h right)
         ( is-cartesian-cartesian-hom-arrow f g top)
@@ -459,12 +459,12 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
   (f : A → B) (g : X → Y) (h : U → V)
-  (top : hom-arrow f g) (left : hom-arrow f h) (right : hom-arrow g h)
+  (left : hom-arrow f h) (right : hom-arrow g h) (top : hom-arrow f g)
   where
 
   abstract
     is-cartesian-top-hom-arrow-triangle' :
-      (H : coherence-triangle-hom-arrow' f g h top left right) →
+      (H : coherence-triangle-hom-arrow' f g h left right top) →
       is-cartesian-hom-arrow g h right →
       is-cartesian-hom-arrow f h left →
       is-cartesian-hom-arrow f g top
@@ -478,7 +478,7 @@ module _
 
   abstract
     is-cartesian-top-hom-arrow-triangle :
-      (H : coherence-triangle-hom-arrow f g h top left right) →
+      (H : coherence-triangle-hom-arrow f g h left right top) →
       is-cartesian-hom-arrow g h right →
       is-cartesian-hom-arrow f h left →
       is-cartesian-hom-arrow f g top
@@ -499,15 +499,15 @@ module _
     is-cartesian-top-cartesian-hom-arrow-triangle' :
       (H :
         coherence-triangle-hom-arrow' f g h
-          ( top)
           ( hom-arrow-cartesian-hom-arrow f h left)
-          ( hom-arrow-cartesian-hom-arrow g h right)) →
+          ( hom-arrow-cartesian-hom-arrow g h right)
+          ( top)) →
       is-cartesian-hom-arrow f g top
     is-cartesian-top-cartesian-hom-arrow-triangle' H =
       is-cartesian-top-hom-arrow-triangle' f g h
-        ( top)
         ( hom-arrow-cartesian-hom-arrow f h left)
         ( hom-arrow-cartesian-hom-arrow g h right)
+        ( top)
         ( H)
         ( is-cartesian-cartesian-hom-arrow g h right)
         ( is-cartesian-cartesian-hom-arrow f h left)
@@ -516,15 +516,15 @@ module _
     is-cartesian-top-cartesian-hom-arrow-triangle :
       (H :
         coherence-triangle-hom-arrow f g h
-          ( top)
           ( hom-arrow-cartesian-hom-arrow f h left)
-          ( hom-arrow-cartesian-hom-arrow g h right)) →
+          ( hom-arrow-cartesian-hom-arrow g h right)
+          ( top)) →
       is-cartesian-hom-arrow f g top
     is-cartesian-top-cartesian-hom-arrow-triangle H =
       is-cartesian-top-hom-arrow-triangle f g h
-        ( top)
         ( hom-arrow-cartesian-hom-arrow f h left)
         ( hom-arrow-cartesian-hom-arrow g h right)
+        ( top)
         ( H)
         ( is-cartesian-cartesian-hom-arrow g h right)
         ( is-cartesian-cartesian-hom-arrow f h left)
@@ -909,9 +909,9 @@ module _
   abstract
     inv-coherence-triangle-hom-arrow-lift-map-codomain-cartesian-hom-arrow :
       coherence-triangle-hom-arrow' f g h
-        ( hom-arrow-lift-map-codomain-cartesian-hom-arrow)
         ( α)
         ( hom-arrow-cartesian-hom-arrow g h β)
+        ( hom-arrow-lift-map-codomain-cartesian-hom-arrow)
     inv-coherence-triangle-hom-arrow-lift-map-codomain-cartesian-hom-arrow =
       ( htpy-horizontal-map-gap-is-pullback
           ( map-codomain-cartesian-hom-arrow g h β)
@@ -985,9 +985,9 @@ module _
 
   coherence-triangle-hom-arrow-lift-map-codomain-cartesian-hom-arrow :
     coherence-triangle-hom-arrow f g h
-      ( hom-arrow-lift-map-codomain-cartesian-hom-arrow)
       ( α)
       ( hom-arrow-cartesian-hom-arrow g h β)
+      ( hom-arrow-lift-map-codomain-cartesian-hom-arrow)
   coherence-triangle-hom-arrow-lift-map-codomain-cartesian-hom-arrow =
     inv-htpy-hom-arrow f h
       ( comp-hom-arrow f g h

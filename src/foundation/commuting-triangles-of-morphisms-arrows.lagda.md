@@ -69,7 +69,7 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} {C : UU l5} {C' : UU l6}
   (f : A → A') (g : B → B') (h : C → C')
-  (top : hom-arrow f g) (left : hom-arrow f h) (right : hom-arrow g h)
+  (left : hom-arrow f h) (right : hom-arrow g h) (top : hom-arrow f g)
   where
 
   coherence-triangle-hom-arrow : UU (l1 ⊔ l2 ⊔ l5 ⊔ l6)

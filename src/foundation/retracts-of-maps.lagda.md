@@ -106,7 +106,7 @@ module _
   where
 
   is-retraction-hom-arrow : UU (l1 ⊔ l2)
-  is-retraction-hom-arrow = coherence-triangle-hom-arrow' f g f i id-hom-arrow r
+  is-retraction-hom-arrow = coherence-triangle-hom-arrow' f g f id-hom-arrow r i
 ```
 
 ### The type of retractions of a morphism of arrows
