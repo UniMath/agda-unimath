@@ -69,7 +69,7 @@ module _
   where
 
   htpy-eq : {f g : (x : A) → B x} → f ＝ g → f ~ g
-  htpy-eq p x = ap (ev x) p
+  htpy-eq p a = ap (ev a) p
 
   compute-htpy-eq-refl : {f : (x : A) → B x} → htpy-eq refl ＝ refl-htpy' f
   compute-htpy-eq-refl = refl
@@ -140,7 +140,7 @@ module _
   pr1 (equiv-funext) = htpy-eq
   pr2 (equiv-funext {f} {g}) = funext f g
 
-  eq-htpy : {f g : (x : A) → B x} → (f ~ g) → f ＝ g
+  eq-htpy : {f g : (x : A) → B x} → f ~ g → f ＝ g
   eq-htpy {f} {g} = map-inv-is-equiv (funext f g)
 
   abstract
@@ -160,9 +160,9 @@ module _
       (f : (x : A) → B x) → eq-htpy (refl-htpy {f = f}) ＝ refl
     eq-htpy-refl-htpy f = is-retraction-eq-htpy refl
 
-    equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ (f ＝ g)
-    pr1 (equiv-eq-htpy {f} {g}) = eq-htpy
-    pr2 (equiv-eq-htpy {f} {g}) = is-equiv-eq-htpy f g
+  equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ (f ＝ g)
+  pr1 (equiv-eq-htpy {f} {g}) = eq-htpy
+  pr2 (equiv-eq-htpy {f} {g}) = is-equiv-eq-htpy f g
 ```
 
 ### Function extensionality for implicit functions
