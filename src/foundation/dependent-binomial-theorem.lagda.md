@@ -124,7 +124,7 @@ module _
             ( λ x →
               ( equiv-universal-property-coproduct
                 ( fam-coproduct (A x) (B x) (f x))) ∘e
-              ( equiv-const-is-contr
+              ( equiv-diagonal-is-contr
                 ( fam-coproduct (A x) (B x) (f x))
                 ( is-contr-is-zero-or-one-Fin-two-ℕ (f x))))))) ∘e
       ( distributive-Π-Σ)) ∘e

@@ -235,8 +235,8 @@ module _
     is-equiv-source-is-equiv-target-equiv-arrow
       ( f)
       ( postcomp A f)
-      ( equiv-const-is-contr X is-contr-A ,
-        equiv-const-is-contr Y is-contr-A ,
+      ( equiv-diagonal-is-contr X is-contr-A ,
+        equiv-diagonal-is-contr Y is-contr-A ,
         refl-htpy)
 
   is-colocal-is-equiv-is-contr : is-equiv f → is-colocal f A
@@ -244,8 +244,8 @@ module _
     is-equiv-target-is-equiv-source-equiv-arrow
       ( f)
       ( postcomp A f)
-      ( equiv-const-is-contr X is-contr-A ,
-        equiv-const-is-contr Y is-contr-A ,
+      ( equiv-diagonal-is-contr X is-contr-A ,
+        equiv-diagonal-is-contr Y is-contr-A ,
         refl-htpy)
 ```
 

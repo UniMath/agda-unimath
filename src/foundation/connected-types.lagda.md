@@ -69,7 +69,7 @@ is-equiv-diagonal-is-connected B H =
   is-equiv-comp
     ( precomp unit-trunc (type-Truncated-Type B))
     ( λ b → const _ _ b)
-    ( is-equiv-const-is-contr H (type-Truncated-Type B))
+    ( is-equiv-diagonal-is-contr H (type-Truncated-Type B))
     ( is-truncation-trunc B)
 
 is-connected-is-equiv-diagonal :
@@ -97,7 +97,7 @@ module _
   is-connected-is-contr : is-contr A → is-connected k A
   is-connected-is-contr H =
     is-connected-is-equiv-diagonal
-      ( λ B → is-equiv-const-is-contr H (type-Truncated-Type B))
+      ( λ B → is-equiv-diagonal-is-contr H (type-Truncated-Type B))
 ```
 
 ### A type that is `(k+1)`-connected is `k`-connected
