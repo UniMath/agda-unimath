@@ -41,24 +41,17 @@ module _
   iterated-loop-space n = iterate n Ω
 ```
 
-### Iterated loop spaces as H-spaces
-
-Note that the indexing is off by one in the following definition. That is, the
-[H-space](structured-types.h-spaces.md)
-
-```text
-  iterated-loop-space-H-Space n X
-```
-
-is the H-space `Ωⁿ⁺¹ X`.
+### Iterated loop spaces of H-spaces
 
 ```agda
 module _
   {l : Level}
   where
 
-  iterated-loop-space-H-Space : ℕ → Pointed-Type l → H-Space l
-  iterated-loop-space-H-Space n X = Ω-H-Space (iterated-loop-space n X)
+  iterated-loop-space-H-Space : ℕ → H-Space l → H-Space l
+  iterated-loop-space-H-Space zero-ℕ X = X
+  iterated-loop-space-H-Space (succ-ℕ n) X =
+    Ω-H-Space (iterated-loop-space n (pointed-type-H-Space X))
 ```
 
 ## See also

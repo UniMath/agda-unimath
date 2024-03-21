@@ -108,7 +108,7 @@ module _
     pointed-type-Group G ≃∗ X
   is-eilenberg-mac-lane-space-Group (succ-ℕ n) X =
     is-connected (truncation-level-ℕ n) (type-Pointed-Type X) ×
-    equiv-H-Space (h-space-Group G) (iterated-loop-space-H-Space n X)
+    equiv-H-Space (h-space-Group G) (Ω-H-Space (iterated-loop-space n X))
 ```
 
 ### Eilenberg-Mac Lane spaces specified by abelian groups
