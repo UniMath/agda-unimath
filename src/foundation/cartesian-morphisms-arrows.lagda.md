@@ -309,12 +309,12 @@ module _
   where
 
   abstract
-    is-cartesian-hom-arrow-htpy-hom-arrow :
+    is-cartesian-htpy-hom-arrow :
       (α β : hom-arrow f g)
       (H : htpy-hom-arrow f g β α) →
       is-cartesian-hom-arrow f g α →
       is-cartesian-hom-arrow f g β
-    is-cartesian-hom-arrow-htpy-hom-arrow α β H =
+    is-cartesian-htpy-hom-arrow α β H =
       is-pullback-htpy
         ( htpy-codomain-htpy-hom-arrow f g β α H)
         ( refl-htpy)
@@ -329,13 +329,15 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
+  is-cartesian-id-hom-arrow : is-cartesian-hom-arrow f f id-hom-arrow
+  is-cartesian-id-hom-arrow =
+    is-pullback-is-equiv-horizontal-maps id f
+      ( f , id , refl-htpy)
+      ( is-equiv-id)
+      ( is-equiv-id)
+
   id-cartesian-hom-arrow : cartesian-hom-arrow f f
-  id-cartesian-hom-arrow =
-    ( id-hom-arrow ,
-      is-pullback-is-equiv-horizontal-maps id f
-        ( f , id , refl-htpy)
-        ( is-equiv-id)
-        ( is-equiv-id))
+  id-cartesian-hom-arrow = (id-hom-arrow , is-cartesian-id-hom-arrow)
 ```
 
 ### Composition of cartesian morphisms of arrows
@@ -347,11 +349,11 @@ module _
   (f : A → B) (g : X → Y) (h : U → V) (b : hom-arrow g h) (a : hom-arrow f g)
   where
 
-  is-cartesian-hom-arrow-comp :
+  is-cartesian-comp-hom-arrow :
     is-cartesian-hom-arrow g h b →
     is-cartesian-hom-arrow f g a →
     is-cartesian-hom-arrow f h (comp-hom-arrow f g h b a)
-  is-cartesian-hom-arrow-comp =
+  is-cartesian-comp-hom-arrow =
     is-pullback-rectangle-is-pullback-left-square
       ( map-codomain-hom-arrow f g a)
       ( map-codomain-hom-arrow g h b)
@@ -371,7 +373,7 @@ module _
     ( ( comp-hom-arrow f g h
         ( hom-arrow-cartesian-hom-arrow g h b)
         ( hom-arrow-cartesian-hom-arrow f g a)) ,
-      ( is-cartesian-hom-arrow-comp f g h
+      ( is-cartesian-comp-hom-arrow f g h
         ( hom-arrow-cartesian-hom-arrow g h b)
         ( hom-arrow-cartesian-hom-arrow f g a)
         ( is-cartesian-cartesian-hom-arrow g h b)
@@ -417,11 +419,11 @@ module _
       is-cartesian-hom-arrow f g top →
       is-cartesian-hom-arrow f h left
     is-cartesian-left-hom-arrow-triangle R T =
-      is-cartesian-hom-arrow-htpy-hom-arrow f h
+      is-cartesian-htpy-hom-arrow f h
         ( comp-hom-arrow f g h right top)
         ( left)
         ( H)
-        ( is-cartesian-hom-arrow-comp f g h right top R T)
+        ( is-cartesian-comp-hom-arrow f g h right top R T)
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -468,7 +470,7 @@ module _
       is-cartesian-hom-arrow f g top
     is-cartesian-top-hom-arrow-triangle' H R L =
       is-cartesian-hom-arrow-right-factor f g h right top R
-        ( is-cartesian-hom-arrow-htpy-hom-arrow f h
+        ( is-cartesian-htpy-hom-arrow f h
           ( left)
           ( comp-hom-arrow f g h right top)
           ( H)
@@ -527,10 +529,6 @@ module _
         ( is-cartesian-cartesian-hom-arrow g h right)
         ( is-cartesian-cartesian-hom-arrow f h left)
 ```
-
-### The top morphism in a commuting triangle of morphisms of arrows is cartesian if the other two are
-
-TODO
 
 ### Dependent products of cartesian morphisms of arrows
 

@@ -304,25 +304,6 @@ module _
     htpy-map-Π (λ i → coh-hom-arrow (f i) (g i) (α i))
 ```
 
-### Dependent sums of morphisms of arrows
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 : Level}
-  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
-  (f : (i : I) → A i → B i) (g : (i : I) → X i → Y i)
-  (α : (i : I) → hom-arrow (f i) (g i))
-  where
-
-  tot-hom-arrow : hom-arrow (tot f) (tot g)
-  pr1 tot-hom-arrow =
-    tot (λ i → map-domain-hom-arrow (f i) (g i) (α i))
-  pr1 (pr2 tot-hom-arrow) =
-    tot (λ i → map-codomain-hom-arrow (f i) (g i) (α i))
-  pr2 (pr2 tot-hom-arrow) =
-    tot-htpy (λ i → coh-hom-arrow (f i) (g i) (α i))
-```
-
 ### Morphisms of arrows give morphisms of precomposition arrows
 
 A morphism of arrows `α : f → g` gives a morphism of precomposition arrows

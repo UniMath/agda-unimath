@@ -21,7 +21,7 @@ open import foundation-core.homotopies
 
 ## Idea
 
-Consider a triangle of morphisms of arrows
+Consider a triangle of [morphisms of arrows](foundation.morphisms-arrows.md)
 
 ```text
         top
@@ -35,7 +35,8 @@ Consider a triangle of morphisms of arrows
 then we can ask that the triangle
 {{#concept "commutes" Disambiguation="triangle of morphisms of arrows"}}
 
-by asking for a homotopy
+by asking for a [homotopy](foundation.homotopies-morphisms-arrows.md) of
+morphisms of arrows
 
 ```text
   left ~ right ∘ top.

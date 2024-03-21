@@ -46,15 +46,15 @@ equivalence. The map `htpy-eq` is the unique map that fits in a
               htpy-eq
     (f ＝ g) ----------> (f ~ g)
            \            /
-  ap (ev a) \          / ev a
+  ap (ev x) \          / ev x
              ∨        ∨
-            (f a ＝ g a)
+            (f x ＝ g x)
 ```
 
 In other words, we define
 
 ```text
-  htpy-eq p a := ap (ev a) p.
+  htpy-eq p x := ap (ev x) p.
 ```
 
 It follows from this definition that `htpy-eq refl ≐ refl-htpy`, as expected.
@@ -69,7 +69,7 @@ module _
   where
 
   htpy-eq : {f g : (x : A) → B x} → f ＝ g → f ~ g
-  htpy-eq p a = ap (ev a) p
+  htpy-eq p x = ap (ev x) p
 
   compute-htpy-eq-refl : {f : (x : A) → B x} → htpy-eq refl ＝ refl-htpy' f
   compute-htpy-eq-refl = refl
