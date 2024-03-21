@@ -22,6 +22,7 @@ open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 
+open import synthetic-homotopy-theory.action-dependent-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams

@@ -54,11 +54,7 @@ module _
 
   make-span-diagram :
     (S → A) → (S → B) → span-diagram l2 l3 l1
-  pr1 (make-span-diagram f g) = A
-  pr1 (pr2 (make-span-diagram f g)) = B
-  pr1 (pr2 (pr2 (make-span-diagram f g))) = S
-  pr1 (pr2 (pr2 (pr2 (make-span-diagram f g)))) = f
-  pr2 (pr2 (pr2 (pr2 (make-span-diagram f g)))) = g
+  make-span-diagram f g = ( A , B , make-span f g )
 
 module _
   {l1 l2 l3 : Level} (𝒮 : span-diagram l1 l2 l3)
