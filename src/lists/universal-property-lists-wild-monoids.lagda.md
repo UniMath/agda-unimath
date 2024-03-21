@@ -22,6 +22,8 @@ open import lists.lists
 open import structured-types.h-spaces
 open import structured-types.morphisms-h-spaces
 open import structured-types.morphisms-wild-monoids
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
 open import structured-types.wild-monoids
 ```
 
@@ -34,19 +36,24 @@ map from `X` into it.
 
 ## Definition
 
+### The pointed type of lists of elements of `X`
+
+```agda
+list-pointed-type : {l : Level} → UU l → Pointed-Type l
+pr1 (list-pointed-type X) = list X
+pr2 (list-pointed-type X) = nil
+```
+
 ### The H-space of lists of elements of `X`
 
 ```agda
 list-H-Space :
   {l : Level} (X : UU l) → H-Space l
-list-H-Space X =
-  pair
-    ( pair (list X) nil)
-    ( pair
-      ( concat-list)
-      ( pair
-        ( left-unit-law-concat-list)
-        ( pair right-unit-law-concat-list refl)))
+pr1 (list-H-Space X) = list-pointed-type X
+pr1 (pr2 (list-H-Space X)) = concat-list
+pr1 (pr2 (pr2 (list-H-Space X))) = left-unit-law-concat-list
+pr1 (pr2 (pr2 (pr2 (list-H-Space X)))) = right-unit-law-concat-list
+pr2 (pr2 (pr2 (pr2 (list-H-Space X)))) = refl
 ```
 
 ### The wild monoid of lists of elements of `X`
@@ -140,6 +147,13 @@ module _
     Id (map-elim-list-Wild-Monoid nil) (unit-Wild-Monoid M)
   preserves-unit-map-elim-list-Wild-Monoid = refl
 
+  pointed-map-elim-list-Wild-Monoid :
+    list-pointed-type X →∗ pointed-type-Wild-Monoid M
+  pr1 pointed-map-elim-list-Wild-Monoid =
+    map-elim-list-Wild-Monoid
+  pr2 pointed-map-elim-list-Wild-Monoid =
+    preserves-unit-map-elim-list-Wild-Monoid
+
   preserves-mul-map-elim-list-Wild-Monoid :
     preserves-mul'
       ( concat-list)
@@ -157,14 +171,10 @@ module _
         ( map-elim-list-Wild-Monoid y)))
 
   preserves-left-unit-law-map-elim-list-Wild-Monoid :
-    preserves-left-unit-law-mul
-      ( concat-list)
-      { nil}
-      ( left-unit-law-concat-list)
-      ( mul-Wild-Monoid M)
-      ( left-unit-law-mul-Wild-Monoid M)
-      ( map-elim-list-Wild-Monoid)
-      ( preserves-unit-map-elim-list-Wild-Monoid)
+    preserves-left-unit-law-mul-pointed-map-H-Space
+      ( list-H-Space X)
+      ( h-space-Wild-Monoid M)
+      ( pointed-map-elim-list-Wild-Monoid)
       ( λ {x} {y} → preserves-mul-map-elim-list-Wild-Monoid x y)
   preserves-left-unit-law-map-elim-list-Wild-Monoid x =
     inv
@@ -172,14 +182,10 @@ module _
         ( left-unit-law-mul-Wild-Monoid M (map-elim-list-Wild-Monoid x)))
 
   preserves-right-unit-law-map-elim-list-Wild-Monoid :
-    preserves-right-unit-law-mul
-      ( concat-list)
-      { nil}
-      ( right-unit-law-concat-list)
-      ( mul-Wild-Monoid M)
-      ( right-unit-law-mul-Wild-Monoid M)
-      ( map-elim-list-Wild-Monoid)
-      ( preserves-unit-map-elim-list-Wild-Monoid)
+    preserves-right-unit-law-mul-pointed-map-H-Space
+      ( list-H-Space X)
+      ( h-space-Wild-Monoid M)
+      ( pointed-map-elim-list-Wild-Monoid)
       ( λ {x} {y} → preserves-mul-map-elim-list-Wild-Monoid x y)
   preserves-right-unit-law-map-elim-list-Wild-Monoid nil =
     ( inv (left-inv (left-unit-law-mul-Wild-Monoid M (unit-Wild-Monoid M)))) ∙
@@ -270,10 +276,10 @@ module _
 preserves-coh-unit-laws-map-elim-list-Wild-Monoid :
   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
   (f : X → type-Wild-Monoid M) →
-  preserves-coh-unit-laws-mul
+  preserves-coherence-unit-laws-mul-pointed-map-H-Space
     ( list-H-Space X)
     ( h-space-Wild-Monoid M)
-    ( pair (map-elim-list-Wild-Monoid M f) refl)
+    ( pointed-map-elim-list-Wild-Monoid M f)
     ( λ {x} {y} → preserves-mul-map-elim-list-Wild-Monoid M f x y)
     ( preserves-left-unit-law-map-elim-list-Wild-Monoid M f)
     ( preserves-right-unit-law-map-elim-list-Wild-Monoid M f)

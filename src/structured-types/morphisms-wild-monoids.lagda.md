@@ -59,53 +59,47 @@ module _
 
   preserves-unital-mul-map-hom-Wild-Monoid :
     (f : hom-Wild-Monoid) →
-    preserves-unital-mul
+    preserves-unital-mul-pointed-map-H-Space
       ( h-space-Wild-Monoid M)
       ( h-space-Wild-Monoid N)
       ( pointed-map-hom-Wild-Monoid f)
   preserves-unital-mul-map-hom-Wild-Monoid f = pr2 f
 
-  preserves-mul-map-hom-Wild-Monoid :
+  preserves-mul-hom-Wild-Monoid :
     (f : hom-Wild-Monoid) →
     preserves-mul
       ( mul-Wild-Monoid M)
       ( mul-Wild-Monoid N)
       ( map-hom-Wild-Monoid f)
-  preserves-mul-map-hom-Wild-Monoid f = pr1 (pr2 f)
+  preserves-mul-hom-Wild-Monoid f = pr1 (pr2 f)
 
   preserves-left-unit-law-mul-map-hom-Wild-Monoid :
     ( f : hom-Wild-Monoid) →
-    preserves-left-unit-law-mul
-      ( mul-Wild-Monoid M)
-      ( left-unit-law-mul-Wild-Monoid M)
-      ( mul-Wild-Monoid N)
-      ( left-unit-law-mul-Wild-Monoid N)
-      ( map-hom-Wild-Monoid f)
-      ( preserves-unit-map-hom-Wild-Monoid f)
-      ( preserves-mul-map-hom-Wild-Monoid f)
+    preserves-left-unit-law-mul-pointed-map-H-Space
+      ( h-space-Wild-Monoid M)
+      ( h-space-Wild-Monoid N)
+      ( pointed-map-hom-Wild-Monoid f)
+      ( preserves-mul-hom-Wild-Monoid f)
   preserves-left-unit-law-mul-map-hom-Wild-Monoid f =
     pr1 (pr2 (pr2 f))
 
   preserves-right-unit-law-mul-map-hom-Wild-Monoid :
     (f : hom-Wild-Monoid) →
-    preserves-right-unit-law-mul
-      ( mul-Wild-Monoid M)
-      ( right-unit-law-mul-Wild-Monoid M)
-      ( mul-Wild-Monoid N)
-      ( right-unit-law-mul-Wild-Monoid N)
-      ( map-hom-Wild-Monoid f)
-      ( preserves-unit-map-hom-Wild-Monoid f)
-      ( preserves-mul-map-hom-Wild-Monoid f)
+    preserves-right-unit-law-mul-pointed-map-H-Space
+      ( h-space-Wild-Monoid M)
+      ( h-space-Wild-Monoid N)
+      ( pointed-map-hom-Wild-Monoid f)
+      ( preserves-mul-hom-Wild-Monoid f)
   preserves-right-unit-law-mul-map-hom-Wild-Monoid f =
     pr1 (pr2 (pr2 (pr2 f)))
 
   preserves-coh-unit-laws-map-hom-Wild-Monoid :
     (f : hom-Wild-Monoid) →
-    preserves-coh-unit-laws-mul
+    preserves-coherence-unit-laws-mul-pointed-map-H-Space
       ( h-space-Wild-Monoid M)
       ( h-space-Wild-Monoid N)
       ( pointed-map-hom-Wild-Monoid f)
-      ( preserves-mul-map-hom-Wild-Monoid f)
+      ( preserves-mul-hom-Wild-Monoid f)
       ( preserves-left-unit-law-mul-map-hom-Wild-Monoid f)
       ( preserves-right-unit-law-mul-map-hom-Wild-Monoid f)
   preserves-coh-unit-laws-map-hom-Wild-Monoid f =

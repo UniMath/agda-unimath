@@ -123,12 +123,3 @@ module _
   is-eilenberg-mac-lane-space-Ab =
     is-eilenberg-mac-lane-space-Group (group-Ab A)
 ```
-
-### Recursive Eilenberg-Mac Lane spaces
-
-```agda
-is-degree-one-recursive-eilenberg-mac-lane-space :
-  {l1 : Level} (X : Pointed-Type l1) → UU {!!}
-is-degree-one-recursive-eilenberg-mac-lane-space X =
-  {!!}
-```
