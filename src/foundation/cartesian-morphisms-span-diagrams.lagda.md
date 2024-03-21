@@ -109,7 +109,6 @@ module _
 
 ### Cartesian morphisms of span diagrams
 
-
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
