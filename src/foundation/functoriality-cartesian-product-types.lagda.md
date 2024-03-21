@@ -258,6 +258,10 @@ module _
 
 ### The functorial action of products on arrows
 
+Given a pair of [morphisms of arrows](foundation.morphisms-arrows.md)
+`α : f → g` and `β : h → i`, there is an induced morphism of arrows
+`α × β : f × h → g × i` and this construction is functorial.
+
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
