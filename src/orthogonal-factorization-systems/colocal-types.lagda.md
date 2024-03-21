@@ -249,14 +249,18 @@ module _
         refl-htpy)
 ```
 
-### A type that is colocal at the unique map `empty → unit` is empty
+### A type `A` that is colocal at the initial map `empty → A` or `empty → unit` is empty
 
 ```agda
 module _
   {l : Level} (A : UU l)
   where
 
+  is-empty-is-colocal-initial-map :
+    is-colocal (initial-map A) A → is-empty A
+  is-empty-is-colocal-initial-map H = map-inv-is-equiv H id
+
   is-empty-is-colocal-map-unit-empty :
-    is-colocal (λ (_ : empty) → star) A → is-empty A
+    is-colocal (initial-map unit) A → is-empty A
   is-empty-is-colocal-map-unit-empty H = map-inv-is-equiv H (terminal-map A)
 ```
