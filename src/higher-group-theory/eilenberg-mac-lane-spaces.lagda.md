@@ -53,7 +53,7 @@ group `π n X` is isomorphic to `G`.
 
 There is also a recursive definition of what it means for a
 [pointed type](higher-group-theory.higher-groups.md) `X` to be an $n$-th
-{{#concept "Eilenberg-Mac Lane space" Agda=is-eilenberg-mac-lane-space}}:
+{{#concept "Eilenberg-Mac Lane space" Agda=is-eilenberg-mac-lane-space-Group}}:
 
 - We say that `X` is a **first Eilenberg-Mac Lane space** if `X` is
   `0`-connected and there is a
