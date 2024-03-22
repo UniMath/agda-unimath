@@ -66,8 +66,8 @@ alternative would be to shift all data using
 numbers.
 
 However, addition computes only on one side, so we have a choice to make: given
-a shift `k`, do we define the `n`-th level of the shifted structure to be
-the `n+k`-th or `k+n`-th level of the original?
+a shift `k`, do we define the `n`-th level of the shifted structure to be the
+`n+k`-th or `k+n`-th level of the original?
 
 The former runs into issues already when defining the shifted sequence, since
 `aₙ₊ₖ : Aₙ₊ₖ → A₍ₙ₊₁₎₊ₖ`, but we need a map of type `Aₙ₊ₖ → A₍ₙ₊ₖ₎₊₁`, which
@@ -557,13 +557,17 @@ module _
       ( c)
       ( unshift-once-cocone-sequential-diagram A
         ( shift-once-cocone-sequential-diagram c))
-  pr1 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c) zero-ℕ =
+  pr1 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c)
+    zero-ℕ =
     coherence-cocone-sequential-diagram c zero-ℕ
-  pr1 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c) (succ-ℕ n) =
+  pr1 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c)
+    (succ-ℕ n) =
     refl-htpy
-  pr2 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c) zero-ℕ =
+  pr2 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c)
+    zero-ℕ =
     refl-htpy
-  pr2 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c) (succ-ℕ n) =
+  pr2 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c)
+    (succ-ℕ n) =
     right-unit-htpy
 
 module _
