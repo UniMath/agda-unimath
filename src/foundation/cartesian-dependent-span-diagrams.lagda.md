@@ -1,7 +1,7 @@
 # Cartesian dependent span diagrams
 
 ```agda
-module foundation.cartesian-dependent-span-diagrams
+module foundation.cartesian-dependent-span-diagrams where
 ```
 
 <details><summary>Imports</summary>
@@ -42,3 +42,7 @@ Notice that in the definition of cartesian dependent span diagrams, the type of 
 ```
 
 We will show that the type of cartesian dependent span diagrams over `𝒮` is equivalent to the type of base changes of `𝒮`.
+
+## Definitions
+
+### The predicate of being a cartesian dependent span diagram

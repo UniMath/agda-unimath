@@ -10,6 +10,7 @@ module foundation.dependent-span-diagrams where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.span-diagrams
+open import foundation.spans
 open import foundation.universe-levels
 ```
 
@@ -80,4 +81,57 @@ module _
     spanning-type-dependent-span-diagram s →
     codomain-dependent-span-diagram (right-map-span-diagram 𝒮 s)
   right-map-dependent-span-diagram = pr2 (pr2 (pr2 (pr2 𝒯)))
+```
+
+### Display span diagrams of dependent span diagrams
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (𝒮 : span-diagram l1 l2 l3) (𝒯 : dependent-span-diagram l4 l5 l6 𝒮)
+  (s : spanning-type-span-diagram 𝒮)
+  where
+
+  domain-display-dependent-span-diagram : UU l4
+  domain-display-dependent-span-diagram =
+    domain-dependent-span-diagram 𝒯 (left-map-span-diagram 𝒮 s)
+
+  codomain-display-dependent-span-diagram : UU l5
+  codomain-display-dependent-span-diagram =
+    codomain-dependent-span-diagram 𝒯 (right-map-span-diagram 𝒮 s)
+
+  spanning-type-display-dependent-span-diagram : UU l6
+  spanning-type-display-dependent-span-diagram =
+    spanning-type-dependent-span-diagram 𝒯 s
+
+  left-map-display-dependent-span-diagram :
+    spanning-type-display-dependent-span-diagram →
+    domain-display-dependent-span-diagram
+  left-map-display-dependent-span-diagram =
+    left-map-dependent-span-diagram 𝒯 s
+
+  right-map-display-dependent-span-diagram :
+    spanning-type-display-dependent-span-diagram →
+    codomain-display-dependent-span-diagram
+  right-map-display-dependent-span-diagram =
+    right-map-dependent-span-diagram 𝒯 s
+
+  span-display-dependent-span-diagram :
+    span l6
+      ( domain-display-dependent-span-diagram)
+      ( codomain-display-dependent-span-diagram)
+  pr1 span-display-dependent-span-diagram =
+    spanning-type-display-dependent-span-diagram
+  pr1 (pr2 span-display-dependent-span-diagram) =
+    left-map-display-dependent-span-diagram
+  pr2 (pr2 span-display-dependent-span-diagram) =
+    right-map-display-dependent-span-diagram
+
+  display-dependent-span-diagram : span-diagram l4 l5 l6
+  pr1 display-dependent-span-diagram =
+    domain-display-dependent-span-diagram
+  pr1 (pr2 display-dependent-span-diagram) =
+    codomain-display-dependent-span-diagram
+  pr2 (pr2 display-dependent-span-diagram) =
+    span-display-dependent-span-diagram
 ```
