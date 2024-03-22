@@ -32,16 +32,16 @@ open import synthetic-homotopy-theory.loop-spaces
 ## Idea
 
 There are many ways to say what an _Eilenberg-Mac Lane space_ is. The basic idea
-is that a pointed connected type `X` is an Eilenberg-Mac Lane space if only one
-of its homotopy groups `π n X` is nontrivial. However, recall that the condition
-of being `n`-truncated is slightly stronger than the condition that the homotopy
-groups `π i X` are trivial for all `i > n`. Indeed, unlike in the setting of
+is that a [pointed](structured-types.pointed-types.md) [connected](foundation.0-connected-types.md) type `X` is an Eilenberg-Mac Lane space if only one
+of its homotopy groups `π n X` is [nontrivial](group-theory.nontrivial-groups.md). However, recall that the condition
+of being [`n`-truncated](foundation-core.truncated-types.md) is slightly stronger than the condition that the homotopy
+groups `π i X` are [trivial](group-theory.trivial-groups.md) for all `i > n`. Indeed, unlike in the setting of
 topological spaces or simplicial sets, univalent type theory allows for the
 possibility of ∞-connected types, i.e., types of which all homotopy groups are
 trivial. In order to avoid examples of Eilenberg-Mac Lane spaces involving such
 ∞-connected types, we will slightly strengthen the definition of Eilenberg-Mac
 Lane spaces. We say that a pointed type `X`is an
-{{#concept "Eilengberg-Mac Lane space"}} if`X`is`n-1`-connected and
+{{#concept "Eilenberg-Mac Lane space"}} if`X`is`n-1`-connected and
 `n`-truncated. Under this definition there is an equivalence between the
 category of groups, resp. abelian groups, and the category of Eilenberg-Mac Lane
 spaces of dimension `1`, resp. `n ≥ 2`.

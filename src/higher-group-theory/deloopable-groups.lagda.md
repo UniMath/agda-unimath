@@ -23,9 +23,9 @@ A {{#concept "delooping" Disambiguation="group"}} of a
 [group](group-theory.groups.md) `G` is a
 [delooping](higher-group-theory.deloopable-h-spaces.md) of the underlying
 [H-space](structured-types.h-spaces.md) of `G`. In other words, a delooping of a
-group `G` is a [higher group](higher-group-theory.higher-groups.md) `H` equipped
+group `G` consists of a [higher group](higher-group-theory.higher-groups.md) `H`, which is defined to be a [pointed](structured-types.pointed-types.md) [connected](foundation.0-connected-types.md) type, equipped
 with an [equivalence of H-spaces](structured-types.equivalences-h-spaces.md)
-`G ≃ H` from `G` to the underlying H-space of `H`.
+`G ≃ h-space-∞-Group H` from `G` to the underlying H-space of `H`.
 
 ## Definitions
 
@@ -53,4 +53,4 @@ module _
 
 ## See also
 
-- [Eileberg-Mac Lane spaces](higher-group-theory.eilenberg-mac-lane-spaces.md)
+- [Eilenberg-Mac Lane spaces](higher-group-theory.eilenberg-mac-lane-spaces.md)
