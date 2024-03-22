@@ -26,8 +26,12 @@ A
 is a
 [displayed large reflexive graph](graph-theory.displayed-large-reflexive-graphs.md)
 over a base [large reflexive graph](graph-theory.large-reflexive-graphs.md) `G`
-whose fibers over the vertices are
-[contractible](foundation-core.contractible-types.md).
+that does not add structure on the vertices, but only the edges.
+
+**Terminology.** The use of the term "wide" here is motivated by the idea that a
+"wide displayed graph" should generalize "wide subgraphs", i.e., a subgraph
+which contains all vertices, in the same way "displayed graphs" generalize
+"subgraphs".
 
 ## Definitions
 
@@ -104,7 +108,7 @@ module _
     refl-total-large-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph
 ```
 
-### The fiber reflexive graph of a displayed large reflexive graph over a vertex
+### The fiber reflexive graph of a wide displayed large reflexive graph over a vertex
 
 ```agda
 module _
