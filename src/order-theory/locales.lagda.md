@@ -10,9 +10,7 @@ module order-theory.locales where
 open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.reflexive-relations
 open import foundation.sets
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import order-theory.frames

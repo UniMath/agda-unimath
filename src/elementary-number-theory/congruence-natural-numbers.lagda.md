@@ -19,8 +19,6 @@ open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.reflexive-relations
-open import foundation.transitive-binary-relations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 

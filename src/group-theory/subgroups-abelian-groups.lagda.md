@@ -14,12 +14,8 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.large-reflexive-relations
-open import foundation.large-transitive-binary-relations
 open import foundation.propositions
-open import foundation.reflexive-relations
 open import foundation.sets
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups

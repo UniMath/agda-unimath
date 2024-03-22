@@ -12,7 +12,6 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.powersets
 open import foundation.propositions
-open import foundation.reflexive-relations
 open import foundation.subtypes
 open import foundation.universe-levels
 

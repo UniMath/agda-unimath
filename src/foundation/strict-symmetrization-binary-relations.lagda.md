@@ -10,8 +10,6 @@ module foundation.strict-symmetrization-binary-relations where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.outer-2-horn-filler-conditions-binary-relations
-open import foundation.reflexive-relations
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -34,8 +32,7 @@ of `R`. This is a relation `Rˢ` on `A` that is strictly
   sym (sym r) ≐ r.
 ```
 
-If the underlying binary relation is
-[reflexive](foundation.reflexive-relations.md), then this construction has a
+If the underlying binary relation is reflexive, then this construction has a
 unit map `R → Rˢ`. If the binary relation satisfies an
 [outer horn filler condition](foundation.outer-2-horn-filler-conditions-binary-relations.md),
 then it has a counit map `Rˢ → R`.

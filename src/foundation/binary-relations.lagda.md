@@ -69,6 +69,35 @@ total-space-Relation-Prop {A = A} R =
   Σ (A × A) λ (a , a') → type-Relation-Prop R a a'
 ```
 
+### The predicate of being a reflexive relation
+
+A relation `R` on a type `A` is said to be **reflexive** if it comes equipped
+with a function `(x : A) → R x x`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
+  is-reflexive : UU (l1 ⊔ l2)
+  is-reflexive = (x : A) → R x x
+```
+
+### The predicate of being a reflexive relation valued in propositions
+
+A relation `R` on a type `A` valued in propositions is said to be **reflexive**
+if its underlying relation is reflexive
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
+  is-reflexive-Relation-Prop : UU (l1 ⊔ l2)
+  is-reflexive-Relation-Prop = is-reflexive (type-Relation-Prop R)
+  is-prop-is-reflexive-Relation-Prop : is-prop is-reflexive-Relation-Prop
+  is-prop-is-reflexive-Relation-Prop =
+    is-prop-Π (λ x → is-prop-type-Relation-Prop R x x)
+```
+
 ### The predicate of being a symmetric relation
 
 A relation `R` on a type `A` is said to be **symmetric** if it comes equipped
@@ -100,6 +129,38 @@ module _
   is-prop-is-symmetric-Relation-Prop =
     is-prop-iterated-Π 3
       ( λ x y r → is-prop-type-Relation-Prop R y x)
+```
+
+### The predicate of being a transitive relation
+
+A relation `R` on a type `A` is said to be **transitive** if it comes equipped
+with a function `(x y z : A) → R y z → R x y → R x z`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
+  is-transitive : UU (l1 ⊔ l2)
+  is-transitive = (x y z : A) → R y z → R x y → R x z
+```
+
+### The predicate of being a transitive relation valued in propositions
+
+A relation `R` on a type `A` valued in propositions is said to be **transitive**
+if its underlying relation is transitive.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
+  is-transitive-Relation-Prop : UU (l1 ⊔ l2)
+  is-transitive-Relation-Prop = is-transitive (type-Relation-Prop R)
+  is-prop-is-transitive-Relation-Prop : is-prop is-transitive-Relation-Prop
+  is-prop-is-transitive-Relation-Prop =
+    is-prop-iterated-Π 3
+      ( λ x y z →
+        is-prop-function-type
+          ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))
 ```
 
 ### The predicate of being an irreflexive relation

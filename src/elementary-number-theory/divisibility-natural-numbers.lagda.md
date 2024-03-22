@@ -24,8 +24,6 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
-open import foundation.reflexive-relations
-open import foundation.transitive-binary-relations
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type

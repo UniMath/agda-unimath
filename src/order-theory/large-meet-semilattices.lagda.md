@@ -11,8 +11,6 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.large-reflexive-relations
-open import foundation.large-transitive-binary-relations
 open import foundation.sets
 open import foundation.universe-levels
 

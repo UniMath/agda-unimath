@@ -18,7 +18,6 @@ open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.propositions
 open import foundation.sets
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import order-theory.decidable-preorders

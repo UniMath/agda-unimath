@@ -15,7 +15,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import univalent-combinatorics.fibers-of-maps

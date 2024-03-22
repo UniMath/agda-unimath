@@ -13,9 +13,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.reflexive-relations
 open import foundation.torsorial-type-families
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-semigroups

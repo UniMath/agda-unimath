@@ -15,10 +15,8 @@ open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.reflexive-relations
 open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-monoids

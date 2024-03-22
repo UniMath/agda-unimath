@@ -230,7 +230,6 @@ open import foundation.large-homotopies public
 open import foundation.large-identity-types public
 open import foundation.large-locale-of-propositions public
 open import foundation.large-locale-of-subtypes public
-open import foundation.large-reflexive-relations public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
@@ -312,7 +311,6 @@ open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
-open import foundation.reflexive-relations public
 open import foundation.regensburg-extension-fundamental-theorem-of-identity-types public
 open import foundation.relaxed-sigma-decompositions public
 open import foundation.repetitions-of-values public
@@ -374,7 +372,6 @@ open import foundation.torsorial-type-families public
 open import foundation.total-partial-elements public
 open import foundation.total-partial-functions public
 open import foundation.transfinite-cocomposition-of-maps public
-open import foundation.transitive-binary-relations public
 open import foundation.transport-along-equivalences public
 open import foundation.transport-along-higher-identifications public
 open import foundation.transport-along-homotopies public

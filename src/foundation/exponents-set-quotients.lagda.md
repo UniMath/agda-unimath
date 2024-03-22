@@ -15,10 +15,8 @@ open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
 open import foundation.postcomposition-functions
 open import foundation.reflecting-maps-equivalence-relations
-open import foundation.reflexive-relations
 open import foundation.set-quotients
 open import foundation.sets
-open import foundation.transitive-binary-relations
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

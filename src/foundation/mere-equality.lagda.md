@@ -13,8 +13,6 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
-open import foundation.reflexive-relations
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.equivalence-relations

@@ -20,10 +20,9 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.binary-relations
 open import foundation.function-types
 open import foundation.identity-types
-open import foundation.reflexive-relations
-open import foundation.transitive-binary-relations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```

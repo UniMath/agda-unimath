@@ -22,10 +22,8 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.reflexive-relations
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.transitive-binary-relations
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

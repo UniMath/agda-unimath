@@ -9,8 +9,6 @@ module order-theory.large-subposets where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.large-binary-relations
-open import foundation.large-reflexive-relations
-open import foundation.large-transitive-binary-relations
 open import foundation.logical-equivalences
 open import foundation.subtypes
 open import foundation.universe-levels

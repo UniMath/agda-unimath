@@ -21,13 +21,11 @@ open import foundation.logical-equivalences
 open import foundation.partitions
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
-open import foundation.reflexive-relations
 open import foundation.set-quotients
 open import foundation.sigma-decompositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.transitive-binary-relations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-set-quotients

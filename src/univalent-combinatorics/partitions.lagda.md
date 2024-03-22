@@ -21,10 +21,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.reflexive-relations
 open import foundation.sets
 open import foundation.structure-identity-principle
-open import foundation.transitive-binary-relations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universe-levels
 

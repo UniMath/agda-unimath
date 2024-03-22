@@ -9,7 +9,6 @@ module foundation.large-binary-relations where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.reflexive-relations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -111,9 +110,16 @@ module _
   (R : Large-Relation β A)
   where
 
+  is-reflexive-Large-Relation : UUω
+  is-reflexive-Large-Relation = {l : Level} (x : A l) → R x x
+
   is-symmetric-Large-Relation : UUω
   is-symmetric-Large-Relation =
     {l1 l2 : Level} (x : A l1) (y : A l2) → R x y → R y x
+
+  is-transitive-Large-Relation : UUω
+  is-transitive-Large-Relation =
+    {l1 l2 l3 : Level} (x : A l1) (y : A l2) (z : A l3) → R y z → R x y → R x z
 
   is-antisymmetric-Large-Relation : UUω
   is-antisymmetric-Large-Relation =
@@ -125,9 +131,17 @@ module _
   (R : Large-Relation-Prop β A)
   where
 
-  is-large-symmetric-Large-Relation-Prop : UUω
-  is-large-symmetric-Large-Relation-Prop =
+  is-reflexive-Large-Relation-Prop : UUω
+  is-reflexive-Large-Relation-Prop =
+    is-reflexive-Large-Relation A (large-relation-Large-Relation-Prop A R)
+
+  is-symmetric-Large-Relation-Prop : UUω
+  is-symmetric-Large-Relation-Prop =
     is-symmetric-Large-Relation A (large-relation-Large-Relation-Prop A R)
+
+  is-transitive-Large-Relation-Prop : UUω
+  is-transitive-Large-Relation-Prop =
+    is-transitive-Large-Relation A (large-relation-Large-Relation-Prop A R)
 
   is-antisymmetric-Large-Relation-Prop : UUω
   is-antisymmetric-Large-Relation-Prop =

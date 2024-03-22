@@ -11,7 +11,6 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import order-theory.least-upper-bounds-posets

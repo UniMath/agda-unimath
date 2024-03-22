@@ -13,7 +13,6 @@ open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.large-reflexive-relations
 open import foundation.law-of-excluded-middle
 open import foundation.mere-embeddings
 open import foundation.mere-equivalences

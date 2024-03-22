@@ -10,8 +10,6 @@ module foundation.outer-2-horn-filler-conditions-binary-relations where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.iterated-dependent-product-types
-open import foundation.reflexive-relations
-open import foundation.transitive-binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.propositions
@@ -29,8 +27,7 @@ if for every triple `x y z : A`, there is a binary operation
   R x z → R y z → R x y.
 ```
 
-Relations with lifts are closely related to
-[transitive relations](foundation.transitive-binary-relations.md). But, instead
+Relations with lifts are closely related to transitive relations. But, instead
 of giving for every diagram
 
 ```text
