@@ -35,8 +35,9 @@ A
 {{#concept "shift" Disambiguation="sequential diagram" Agda=shift-sequential-diagram}}
 of a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md) is a
 sequential diagram consisting of the types and maps shifted by one. It is also
-denoted `A[1]`. This shifting can be iterated for any natural number `k`; then
-the resulting sequential diagram is denoted `A[k]`.
+denoted `A[1]`. This shifting can be iterated for any
+[natural number](elementary-number-theory.natural-numbers.md) `k`; then the
+resulting sequential diagram is denoted `A[k]`.
 
 Similarly, a
 {{#concept "shift" Disambiguation="morphism of sequential diagrams" Agda=shift-hom-sequential-diagram}}
@@ -45,32 +46,43 @@ of a
 is a morphism from the shifted domain into the shifted codomain. In symbols,
 given a morphism `f : A → B`, we have `f[k] : A[k] → B[k]`.
 
-We also define shifts of cocones and homotopies of cocones, which can
-additionally be unshifted.
+We also define shifts of
+[cocones](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md) and
+[homotopies of cocones](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md),
+which can additionally be unshifted.
 
-Importantly the type of cocones under a sequential diagram is equivalent to the
-type of cocones under its shift, which implies that the sequential colimit of a
+Importantly the type of cocones under a sequential diagram is
+[equivalent](foundation-core.equivalences.md) to the type of cocones under its
+shift, which implies that the
+[sequential colimit](synthetic-homotopy-theory.sequential-colimits.md) of a
 shifted sequential diagram is equivalent to the colimit of the original diagram.
 
 ## Definitions
 
 _Implementation note_: the constructions are defined by first defining a shift
 by one, and then recursively shifting by one according to the argument. An
-alternative would be to shift all data using addition on the natural numbers.
+alternative would be to shift all data using
+[addition](elementary-number-theory.addition-natural-numbers.md) on the natural
+numbers.
 
 However, addition computes only on one side, so we have a choice to make: given
 a shift `k`, do we define the `n`-th level of the shifted structure to be
-`n+k`-th or `k+n`-th level of the original?
+the `n+k`-th or `k+n`-th level of the original?
 
 The former runs into issues already when defining the shifted sequence, since
-`aₙ₊ₖ : Aₙ₊ₖ → A₍ₙ₊₁₎`, but we need a map of type `Aₙ₊ₖ → A₍ₙ₊ₖ₎₊₁`, which
-forces us to introduce a transport.
+`aₙ₊ₖ : Aₙ₊ₖ → A₍ₙ₊₁₎₊ₖ`, but we need a map of type `Aₙ₊ₖ → A₍ₙ₊ₖ₎₊₁`, which
+forces us to introduce a
+[transport](foundation-core.transport-along-identifications.md).
 
 On the other hand, the latter requires transport when proving anything by
 induction on `k` and doesn't satisfy the judgmental equality `A[0] ≐ A`, because
 `A₍ₖ₊₁₎₊ₙ` is not `A₍ₖ₊ₙ₎₊₁` and `A₀₊ₙ` is not `Aₙ`, and it requires more
 infrastructure for working with horizontal compositions in sequential colimit to
 be formalized in terms of addition.
+
+To contrast, defining the operations by induction does satisfy `A[0] ≐ A`, it
+computes when proving properties by induction, which is the expected primary
+use-case, and no further infrastructure is necessary.
 
 ### Shifts of sequential diagrams
 
