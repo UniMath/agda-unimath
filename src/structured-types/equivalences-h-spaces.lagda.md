@@ -86,13 +86,13 @@ that the unit laws are preserved:
 - An identification `α₃` witnessing that the square
 
   ```text
-                                                    α₁ _
+                                                     α₁
      α₀ * * ∙ (ap (μ - (e *)) e₁ ∙ left-unit-law *) ---> ap e (left-unit-law *)
                        |                                         |
          (α₀ * *) ·l β |                                         |
                        ∨                                         ∨
     α₀ * * ∙ (ap (μ (e *) -) e₁ ∙ right-unit-law *) ---> ap e (right-unit-law *)
-                                                    α₂ _
+                                                     α₂
   ```
 
   Here, the identification on the left is obtained by left whiskering the
