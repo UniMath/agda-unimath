@@ -36,7 +36,9 @@ if the [commuting square](foundation-core.commuting-squares-of-maps.md)
         j
 ```
 
-is a [pushout](synthetic-homotopy-theory.pushouts.md) square.
+is a [pushout](synthetic-homotopy-theory.pushouts.md) square. In this instance,
+we also say that `g` is a
+{{#concept "cobase change" Disambiguation="maps of types"}} of `f`.
 
 ## Definitions
 
