@@ -19,6 +19,9 @@ WIKIDATA_ID_REGEX = re.compile(
 WIKIDATA_LABEL_REGEX = re.compile(
     r'WD="([^\n"]+)"')
 
+DISAMBIGUATION_REGEX = re.compile(
+    r'Disambiguation="([^\n"]+)"')
+
 AGDA_REGEX = re.compile(
     r'Agda=(\S+)')
 
@@ -70,6 +73,13 @@ def match_wikidata_label(meta_text):
     return m.group(1)
 
 
+def match_disambiguation(meta_text):
+    m = DISAMBIGUATION_REGEX.search(meta_text)
+    if m is None:
+        return None
+    return m.group(1)
+
+
 def match_agda_name(meta_text):
     m = AGDA_REGEX.search(meta_text)
     if m is None:
@@ -82,7 +92,6 @@ def get_definition_id(name, content):
     m = definition_regex.search(content)
     if m is None:
         return None
-
     return m.group(1)
 
 
@@ -90,7 +99,6 @@ def slugify_markdown(md):
     text = md.replace(' ', '-')
     for markup_char in ['*', '_', '~', '(', ')']:
         text = text.replace(markup_char, '')
-
     return text
 
 
@@ -105,11 +113,15 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
     metadata = m.group(2)
     wikidata_id = match_wikidata_id(metadata)
     wikidata_label = match_wikidata_label(metadata)
+    disambiguation = match_disambiguation(metadata)
     agda_name = match_agda_name(metadata)
     plaintext = LINK_REGEX.sub(r'\1', text)
     url_path = path[:-2] + 'html'
+    entry_name = plaintext
+    if disambiguation is not None:
+        entry_name += ' (' + disambiguation + ')'
     index_entry = {
-        'name': plaintext,
+        'name': entry_name,
         'text': text
     }
     anchor = ''
