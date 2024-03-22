@@ -78,6 +78,7 @@ with a function `(x : A) → R x x`.
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
+
   is-reflexive : UU (l1 ⊔ l2)
   is-reflexive = (x : A) → R x x
 ```
