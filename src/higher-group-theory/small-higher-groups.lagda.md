@@ -49,11 +49,11 @@ in the sense that it comes equipped with an element of type
 where the type `G ≃ H` is the type of
 [equivalences of ∞-groups](higher-group-theory.equivalences-higher-groups.md).
 
-Finally, we also introduce the notion of _pointedly small ∞-group_. An ∞-group
-`G` is said to be
-{{#concept "pointedly small" Disambiguation="∞-group" Agda=is-pointedly-small-∞-Group}}
+Finally, we also introduce the notion of _pointed small ∞-group_. An ∞-group `G`
+is said to be
+{{#concept "pointed small" Disambiguation="∞-group" Agda=is-pointed-small-∞-Group}}
 if its classifying [pointed type](structured-types.pointed-types.md) `BG` is
-[pointedly small](structured-types.small-pointed-types.md).
+[pointed small](structured-types.small-pointed-types.md).
 
 ## Definitions
 
@@ -92,7 +92,7 @@ module _
       is-prop-equiv
         ( equiv-right-swap-Σ)
         ( is-prop-Σ
-          ( is-prop-is-pointedly-small-Pointed-Type
+          ( is-prop-is-pointed-small-Pointed-Type
             ( classifying-pointed-type-∞-Group G))
           ( λ H → is-prop-is-0-connected _))
 
@@ -123,24 +123,24 @@ module _
       ( equiv-∞-group-is-structurally-small-∞-Group)
 ```
 
-### The predicate of being a pointedly small ∞-group
+### The predicate of being a pointed small ∞-group
 
 ```agda
 module _
   {l1 : Level} (l2 : Level) (G : ∞-Group l1)
   where
 
-  is-pointedly-small-prop-∞-Group : Prop (l1 ⊔ lsuc l2)
-  is-pointedly-small-prop-∞-Group =
-    is-pointedly-small-prop-Pointed-Type l2 (classifying-pointed-type-∞-Group G)
+  is-pointed-small-prop-∞-Group : Prop (l1 ⊔ lsuc l2)
+  is-pointed-small-prop-∞-Group =
+    is-pointed-small-prop-Pointed-Type l2 (classifying-pointed-type-∞-Group G)
 
-  is-pointedly-small-∞-Group : UU (l1 ⊔ lsuc l2)
-  is-pointedly-small-∞-Group =
-    is-pointedly-small-Pointed-Type l2 (classifying-pointed-type-∞-Group G)
+  is-pointed-small-∞-Group : UU (l1 ⊔ lsuc l2)
+  is-pointed-small-∞-Group =
+    is-pointed-small-Pointed-Type l2 (classifying-pointed-type-∞-Group G)
 
-  is-prop-is-pointedly-small-∞-Group : is-prop is-pointedly-small-∞-Group
-  is-prop-is-pointedly-small-∞-Group =
-    is-prop-is-pointedly-small-Pointed-Type (classifying-pointed-type-∞-Group G)
+  is-prop-is-pointed-small-∞-Group : is-prop is-pointed-small-∞-Group
+  is-prop-is-pointed-small-∞-Group =
+    is-prop-is-pointed-small-Pointed-Type (classifying-pointed-type-∞-Group G)
 ```
 
 ## Properties
@@ -196,7 +196,7 @@ module _
       is-locally-small-is-small H (shape-∞-Group G) (shape-∞-Group G)
 ```
 
-### An ∞-group is small if and only if it is pointedly small
+### An ∞-group is small if and only if it is pointed small
 
 ```agda
 module _
@@ -204,10 +204,10 @@ module _
   where
 
   abstract
-    is-pointedly-small-is-small-∞-Group :
-      is-small-∞-Group l2 G → is-pointedly-small-∞-Group l2 G
-    is-pointedly-small-is-small-∞-Group H =
-      is-pointedly-small-is-small-Pointed-Type
+    is-pointed-small-is-small-∞-Group :
+      is-small-∞-Group l2 G → is-pointed-small-∞-Group l2 G
+    is-pointed-small-is-small-∞-Group H =
+      is-pointed-small-is-small-Pointed-Type
         ( classifying-pointed-type-∞-Group G)
         ( is-small-classifying-type-is-small-∞-Group G H)
 ```
@@ -222,15 +222,15 @@ module _
   classifying-pointed-type-is-small-∞-Group :
     is-small-∞-Group l2 G → Pointed-Type l2
   classifying-pointed-type-is-small-∞-Group H =
-    pointed-type-is-pointedly-small-Pointed-Type
+    pointed-type-is-pointed-small-Pointed-Type
       ( classifying-pointed-type-∞-Group G)
-      ( is-pointedly-small-is-small-∞-Group G H)
+      ( is-pointed-small-is-small-∞-Group G H)
 
   classifying-type-is-small-∞-Group : is-small-∞-Group l2 G → UU l2
   classifying-type-is-small-∞-Group H =
-    type-is-pointedly-small-Pointed-Type
+    type-is-pointed-small-Pointed-Type
       ( classifying-pointed-type-∞-Group G)
-      ( is-pointedly-small-is-small-∞-Group G H)
+      ( is-pointed-small-is-small-∞-Group G H)
 
   abstract
     is-0-connected-classifying-type-is-small-∞-Group :
@@ -238,9 +238,9 @@ module _
       is-0-connected (classifying-type-is-small-∞-Group H)
     is-0-connected-classifying-type-is-small-∞-Group H =
       is-0-connected-equiv'
-        ( equiv-is-pointedly-small-Pointed-Type
+        ( equiv-is-pointed-small-Pointed-Type
           ( classifying-pointed-type-∞-Group G)
-          ( is-pointedly-small-is-small-∞-Group G H))
+          ( is-pointed-small-is-small-∞-Group G H))
         ( is-0-connected-classifying-type-∞-Group G)
 
   ∞-group-is-small-∞-Group : is-small-∞-Group l2 G → ∞-Group l2
@@ -262,9 +262,9 @@ module _
   equiv-∞-group-is-small-∞-Group :
     (H : is-small-∞-Group l2 G) → equiv-∞-Group G (∞-group-is-small-∞-Group H)
   equiv-∞-group-is-small-∞-Group H =
-    pointed-equiv-is-pointedly-small-Pointed-Type
+    pointed-equiv-is-pointed-small-Pointed-Type
       ( classifying-pointed-type-∞-Group G)
-      ( is-pointedly-small-is-small-∞-Group G H)
+      ( is-pointed-small-is-small-∞-Group G H)
 
   pointed-equiv-equiv-∞-group-is-small-∞-Group :
     (H : is-small-∞-Group l2 G) →

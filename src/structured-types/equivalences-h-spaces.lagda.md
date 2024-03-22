@@ -33,8 +33,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Consider two [H-spaces](structured-types.h-spaces.md) `X` and `Y`. A
-{{#concept "morphism of H-spaces"}} from `X` to `Y` consists of a
+Consider two [H-spaces](structured-types.h-spaces.md) `X` and `Y`. An
+{{#concept "equivalence of H-spaces"}} from `X` to `Y` consists of a
 [pointed equivalence](structured-types.pointed-equivalences.md) `e : X ≃∗ Y`
 that preserves the unital binary operation
 
@@ -182,7 +182,7 @@ module _
     preserves-unital-mul-pointed-map-H-Space M N (pointed-map-pointed-equiv e)
 ```
 
-### Morphisms of H-spaces
+### Equivalences of H-spaces
 
 ```agda
 module _

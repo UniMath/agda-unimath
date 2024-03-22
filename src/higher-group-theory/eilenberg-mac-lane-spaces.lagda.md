@@ -32,27 +32,35 @@ open import synthetic-homotopy-theory.loop-spaces
 ## Idea
 
 There are many ways to say what an _Eilenberg-Mac Lane space_ is. The basic idea
-is that a [pointed](structured-types.pointed-types.md) [connected](foundation.0-connected-types.md) type `X` is an Eilenberg-Mac Lane space if only one
-of its homotopy groups `π n X` is [nontrivial](group-theory.nontrivial-groups.md). However, recall that the condition
-of being [`n`-truncated](foundation-core.truncated-types.md) is slightly stronger than the condition that the homotopy
-groups `π i X` are [trivial](group-theory.trivial-groups.md) for all `i > n`. Indeed, unlike in the setting of
-topological spaces or simplicial sets, univalent type theory allows for the
-possibility of ∞-connected types, i.e., types of which all homotopy groups are
-trivial. In order to avoid examples of Eilenberg-Mac Lane spaces involving such
-∞-connected types, we will slightly strengthen the definition of Eilenberg-Mac
-Lane spaces. We say that a pointed type `X`is an
+is that a [pointed](structured-types.pointed-types.md)
+[connected](foundation.0-connected-types.md) type `X` is an Eilenberg-Mac Lane
+space if only one of its homotopy groups `π n X` is
+[nontrivial](group-theory.nontrivial-groups.md). However, recall that the
+condition of being [`n`-truncated](foundation-core.truncated-types.md) is
+slightly stronger than the condition that the homotopy groups `π i X` are
+[trivial](group-theory.trivial-groups.md) for all `i > n`. Indeed, unlike in the
+setting of topological spaces or simplicial sets, univalent type theory allows
+for the possibility of ∞-connected types, i.e., types of which all homotopy
+groups are trivial. In order to avoid examples of Eilenberg-Mac Lane spaces
+possibly involving nontrivial ∞-connected types, we will slightly strengthen the
+definition of Eilenberg-Mac Lane spaces. We say that a pointed type `X`is an
 {{#concept "Eilenberg-Mac Lane space"}} if`X`is`n-1`-connected and
-`n`-truncated. Under this definition there is an equivalence between the
-category of groups, resp. abelian groups, and the category of Eilenberg-Mac Lane
-spaces of dimension `1`, resp. `n ≥ 2`.
+`n`-truncated. Under this definition there is an
+[equivalence](category-theory.equivalences-of-categories.md) between the
+[category of groups](group-theory.category-of-groups.md), resp. the
+[category of abelian groups](group-theory.category-of-abelian-groups.md), and
+the category of Eilenberg-Mac Lane spaces of dimension `1`, resp. `n ≥ 2`.
 
-Consider a [group](group-theory.groups.md) `G` and a natural number `n ≥ 1`. A
-pointed type `X` is said to be an Eilenberg-Mac Lane space of type `K G n` if
-`X` is `(n-1)`-connected and `n`-truncated, and moreover the `n`-th homotopy
-group `π n X` is isomorphic to `G`.
+Consider a [group](group-theory.groups.md) `G` and a
+[natural number](elementary-number-theory.natural-numbers.md) `n ≥ 1`. A pointed
+type `X` is said to be an Eilenberg-Mac Lane space of type `K G n` if `X` is
+[`(n-1)`-connected](foundation.connected-types.md) and
+[`n`-truncated](foundation-core.truncated-types.md), and moreover the `n`-th
+homotopy group `π n X` is [isomorphic](group-theory.isomorphisms-groups.md) to
+`G`.
 
-There is also a recursive definition of what it means for a
-[pointed type](higher-group-theory.higher-groups.md) `X` to be an $n$-th
+There is also a recursive definition of what it means for a pointed type `X` to
+be an $n$-th
 {{#concept "Eilenberg-Mac Lane space" Agda=is-eilenberg-mac-lane-space-Group}}:
 
 - We say that `X` is a **first Eilenberg-Mac Lane space** if `X` is
@@ -72,15 +80,21 @@ There is also a recursive definition of what it means for a
 
 ## Definitions
 
-### Unspecified Eilenberg-Mac Lane spaces
+### Eilenberg-Mac Lane spaces
+
+We introduce the most general notion of an (unspecified) Eilenberg-Mac Lane
+space to be a pointed `n`-connected `(n+1)`-truncated type. Eilenberg-Mac Lane
+spaces in this definition aren't equipped with a group isomorphism from their
+nontrivial homotopy group to a given group `G`, so in this sense they are
+"unspecified".
 
 ```agda
 module _
   {l1 : Level} (k : 𝕋) (X : Pointed-Type l1)
   where
 
-  is-unspecified-eilenberg-mac-lane-space-𝕋 : UU l1
-  is-unspecified-eilenberg-mac-lane-space-𝕋 =
+  is-eilenberg-mac-lane-space-𝕋 : UU l1
+  is-eilenberg-mac-lane-space-𝕋 =
     is-connected k (type-Pointed-Type X) ×
     is-trunc (succ-𝕋 k) (type-Pointed-Type X)
 
@@ -88,9 +102,9 @@ module _
   {l1 : Level} (n : ℕ) (X : Pointed-Type l1)
   where
 
-  is-unspecified-eilenberg-mac-lane-space : UU l1
-  is-unspecified-eilenberg-mac-lane-space =
-    is-unspecified-eilenberg-mac-lane-space-𝕋
+  is-eilenberg-mac-lane-space : UU l1
+  is-eilenberg-mac-lane-space =
+    is-eilenberg-mac-lane-space-𝕋
       ( truncation-level-minus-one-ℕ n)
       ( X)
 ```

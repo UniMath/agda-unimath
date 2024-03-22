@@ -27,8 +27,8 @@ open import structured-types.small-pointed-types
 
 Consider a [pointed type](structured-types.pointed-types.md) `X` and a pointed
 [connected](foundation.0-connected-types.md) type `Y`. We say that `Y` is a
-{{#concept "delooping" Agda=is-delooping}} of `X` if we have a
-[pointed equivalence](structured-types.pointed-equivalences.md)
+{{#concept "delooping" Disambiguation="pointed type" Agda=is-delooping}} of `X`
+if we have a [pointed equivalence](structured-types.pointed-equivalences.md)
 
 ```text
   X ≃∗ Ω Y.
@@ -75,7 +75,7 @@ Note that there is a small question about universe levels in the definition of
 being a deloopable type. We say that a type is deloopable in a universe `𝒰` if
 there is an ∞-group `Y` in the universe `𝒰` that is a delooping of `X`. However,
 by the [type theoretic replacement principle](foundation.replacement.md) it
-folows that any delooping of `X` is always [small](foundation.small-types.md)
+follows that any delooping of `X` is always [small](foundation.small-types.md)
 with respect to the universe of `X` itself. Therefore we simply say that `X` is
 deloopable, i.e., without reference to any universes, if `X` is deloopable in
 its own universe.
@@ -163,16 +163,16 @@ module _
         ( is-small-∞-group-delooping-Level)
 
   abstract
-    is-pointedly-small-classifying-pointed-type-∞-group-delooping-Level :
-      is-pointedly-small-Pointed-Type l1
+    is-pointed-small-classifying-pointed-type-∞-group-delooping-Level :
+      is-pointed-small-Pointed-Type l1
         ( classifying-pointed-type-∞-group-delooping-Level X H)
-    is-pointedly-small-classifying-pointed-type-∞-group-delooping-Level =
-      is-pointedly-small-is-small-Pointed-Type
+    is-pointed-small-classifying-pointed-type-∞-group-delooping-Level =
+      is-pointed-small-is-small-Pointed-Type
         ( classifying-pointed-type-∞-group-delooping-Level X H)
         ( is-small-classifying-type-∞-group-delooping-Level)
 ```
 
-### If a pointed type in universe `𝒰` is deloopable in any universe, then it is deloopable in `𝒰`
+### If a pointed type in universe `𝒰 l1` is deloopable in any universe, then it is deloopable in `𝒰 l1`
 
 Suppose `X` is a pointed type of universe level `l1`, which is deloopable in
 universe level `l2`. Then there is an ∞-group `H` of universe level `l2`
@@ -182,13 +182,13 @@ equipped with a pointed equivalence
   X ≃∗ type-∞-Group H.
 ```
 
-This implies that the ∞-group H is `l1`-small, because its underlying type is
+This implies that the ∞-group `H` is `l1`-small, because its underlying type is
 equivalent to the underlying type of `X`. Hence there is an ∞-group `K` equipped
 with an
 [equivalence of ∞-groups](higher-group-theory.equivalences-higher-groups.md)
 
 ```text
-  H ≃ K
+  H ≃ K.
 ```
 
 ```agda

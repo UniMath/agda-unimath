@@ -31,7 +31,8 @@ multiplication `μ` satisfying
 ```
 
 A {{#concept "delooping" Disambiguation="H-space"}} of the H-space `X` consists
-of an ∞-group `G` and an equivalence of H-spaces
+of an [∞-group](higher-group-theory.higher-groups.md) `G` and an
+[equivalence of H-spaces](structured-types.equivalences-h-spaces.md)
 
 ```text
   X ≃ h-space-∞-Group G.

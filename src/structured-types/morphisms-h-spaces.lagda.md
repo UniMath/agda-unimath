@@ -32,9 +32,9 @@ open import structured-types.pointed-types
 ## Idea
 
 Consider two [H-spaces](structured-types.h-spaces.md) `X` and `Y`. A
-{{#concept "morphism of H-spaces"}} from `X` to `Y` consists of a
-[pointed map](structured-types.pointed-maps.md) `f : X →∗ Y` that preserves the
-unital binary operation
+{{#concept "morphism of H-spaces" Agda=hom-H-Space}} from `X` to `Y` consists of
+a [pointed map](structured-types.pointed-maps.md) `f : X →∗ Y` that preserves
+the unital binary operation
 
 ```text
   α : (x x' : X) → f (μ x x') ＝ μ (f x) (f x')

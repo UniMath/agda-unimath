@@ -65,6 +65,11 @@ H-Space : (l : Level) → UU (lsuc l)
 H-Space l =
   Σ ( Pointed-Type l) coherent-unital-mul-Pointed-Type
 
+make-H-Space :
+  {l : Level} →
+  (X : Pointed-Type l) → coherent-unital-mul-Pointed-Type X → H-Space l
+make-H-Space X μ = (X , μ)
+
 module _
   {l : Level} (M : H-Space l)
   where
