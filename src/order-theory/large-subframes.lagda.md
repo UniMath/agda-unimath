@@ -12,6 +12,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-reflexive-relations
+open import foundation.large-transitive-binary-relations
 open import foundation.subtypes
 open import foundation.universe-levels
 

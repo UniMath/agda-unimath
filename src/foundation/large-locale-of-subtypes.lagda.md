@@ -10,6 +10,7 @@ module foundation.large-locale-of-subtypes where
 open import foundation.large-binary-relations
 open import foundation.large-locale-of-propositions
 open import foundation.large-reflexive-relations
+open import foundation.large-transitive-binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.identity-types

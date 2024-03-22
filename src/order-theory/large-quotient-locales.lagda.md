@@ -10,6 +10,7 @@ module order-theory.large-quotient-locales where
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-reflexive-relations
+open import foundation.large-transitive-binary-relations
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets

@@ -10,6 +10,7 @@ module order-theory.powers-of-large-locales where
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.large-reflexive-relations
+open import foundation.large-transitive-binary-relations
 open import foundation.sets
 open import foundation.universe-levels
 
