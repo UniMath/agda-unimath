@@ -193,7 +193,7 @@ def tag_concepts_chapter_rec_mut(chapter, config, mut_index, mut_error_locations
             mathswitch_link = config.get(
                 'mathswitch-template').format(wikidata_id=wikidata_id)
             external_references.append(
-                f'<a href="{mathswitch_link}">{wikidata_label}</a> at Mathswitch')
+                f'<a href="{mathswitch_link}">{wikidata_label.capitalize()}</a> at Mathswitch')
             wikidata_link = config.get(
                 'wikidata-template').format(wikidata_id=wikidata_id)
             # TODO: Decide if we want this
