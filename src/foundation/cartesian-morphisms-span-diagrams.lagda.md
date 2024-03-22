@@ -7,8 +7,8 @@ module foundation.cartesian-morphisms-span-diagrams where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cartesian-product-types
 open import foundation.cartesian-morphisms-arrows
+open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.morphisms-arrows
@@ -21,7 +21,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A [morphism](foundation.morphisms-span-diagrams.md) `α : 𝒮 → 𝒯` of [span diagrams](foundation.span-diagrams.md) is said to be {{#concept "cartesian" Disambiguation="morphism of span diagrams"}} if the two squares in the diagram
+A [morphism](foundation.morphisms-span-diagrams.md) `α : 𝒮 → 𝒯` of
+[span diagrams](foundation.span-diagrams.md) is said to be
+{{#concept "cartesian" Disambiguation="morphism of span diagrams"}} if the two
+squares in the diagram
 
 ```text
        h       k
@@ -114,7 +117,7 @@ module _
       hom-arrow (right-map-span-diagram 𝒮) (right-map-span-diagram 𝒯)
     right-hom-arrow-left-cartesian-hom-span-diagram =
       right-hom-arrow-hom-span-diagram 𝒮 𝒯 hom-left-cartesian-hom-span-diagram
-    
+
     is-left-cartesian-left-cartesian-hom-span-diagram :
       is-left-cartesian-hom-span-diagram 𝒮 𝒯 hom-left-cartesian-hom-span-diagram
     is-left-cartesian-left-cartesian-hom-span-diagram = pr2 h
@@ -197,7 +200,7 @@ module _
       hom-arrow (right-map-span-diagram 𝒮) (right-map-span-diagram 𝒯)
     right-hom-arrow-right-cartesian-hom-span-diagram =
       right-hom-arrow-hom-span-diagram 𝒮 𝒯 hom-right-cartesian-hom-span-diagram
-    
+
     is-right-cartesian-right-cartesian-hom-span-diagram :
       is-right-cartesian-hom-span-diagram 𝒮 𝒯
         ( hom-right-cartesian-hom-span-diagram)
@@ -279,7 +282,7 @@ module _
       hom-arrow (right-map-span-diagram 𝒮) (right-map-span-diagram 𝒯)
     right-hom-arrow-cartesian-hom-span-diagram =
       right-hom-arrow-hom-span-diagram 𝒮 𝒯 hom-cartesian-hom-span-diagram
-    
+
     is-cartesian-cartesian-hom-span-diagram :
       is-cartesian-hom-span-diagram 𝒮 𝒯 hom-cartesian-hom-span-diagram
     is-cartesian-cartesian-hom-span-diagram = pr2 h
