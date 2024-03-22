@@ -205,7 +205,11 @@ open import synthetic-homotopy-theory.total-sequential-diagrams using
   )
 ```
 
-TODO: (C∞, c∞).
+**Construction.** The equifibered family associated to a fibered sequence.
+
+```agda
+-- TODO
+```
 
 ## 5 Colimits and Sums
 

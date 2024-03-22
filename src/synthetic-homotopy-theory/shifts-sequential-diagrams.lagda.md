@@ -95,9 +95,9 @@ module _
   {l1 : Level} (A : sequential-diagram l1)
   where
 
-  shift-sequential-diagram-once : sequential-diagram l1
-  pr1 shift-sequential-diagram-once n = family-sequential-diagram A (succ-ℕ n)
-  pr2 shift-sequential-diagram-once n = map-sequential-diagram A (succ-ℕ n)
+  shift-once-sequential-diagram : sequential-diagram l1
+  pr1 shift-once-sequential-diagram n = family-sequential-diagram A (succ-ℕ n)
+  pr2 shift-once-sequential-diagram n = map-sequential-diagram A (succ-ℕ n)
 
 module _
   {l1 : Level}
@@ -106,7 +106,7 @@ module _
   shift-sequential-diagram : ℕ → sequential-diagram l1 → sequential-diagram l1
   shift-sequential-diagram zero-ℕ A = A
   shift-sequential-diagram (succ-ℕ k) A =
-    shift-sequential-diagram-once (shift-sequential-diagram k A)
+    shift-once-sequential-diagram (shift-sequential-diagram k A)
 ```
 
 ### Shifts of morphisms of sequential diagrams
@@ -118,7 +118,7 @@ Given a morphism of sequential diagrams `f : A → B`
     A₀ ---> A₁ ---> A₂ ---> ⋯
     |       |       |
  f₀ |       | f₁    | f₂
-    v       v       v
+    ∨       ∨       ∨
     B₀ ---> B₁ ---> B₂ ---> ⋯ ,
         b₀      b₁
 ```
@@ -130,7 +130,7 @@ we can drop the first square to get the morphism
     A₁ ---> A₂ ---> ⋯
     |       |
  f₁ |       | f₂
-    v       v
+    ∨       ∨
     B₁ ---> B₂ ---> ⋯ ,
         b₁
 ```
@@ -143,13 +143,13 @@ module _
   (f : hom-sequential-diagram A B)
   where
 
-  shift-hom-sequential-diagram-once :
+  shift-once-hom-sequential-diagram :
     hom-sequential-diagram
-      ( shift-sequential-diagram-once A)
-      ( shift-sequential-diagram-once B)
-  pr1 shift-hom-sequential-diagram-once n =
+      ( shift-once-sequential-diagram A)
+      ( shift-once-sequential-diagram B)
+  pr1 shift-once-hom-sequential-diagram n =
     map-hom-sequential-diagram B f (succ-ℕ n)
-  pr2 shift-hom-sequential-diagram-once n =
+  pr2 shift-once-hom-sequential-diagram n =
     naturality-map-hom-sequential-diagram B f (succ-ℕ n)
 
 module _
@@ -164,7 +164,7 @@ module _
       ( shift-sequential-diagram k B)
   shift-hom-sequential-diagram zero-ℕ f = f
   shift-hom-sequential-diagram (succ-ℕ k) f =
-    shift-hom-sequential-diagram-once
+    shift-once-hom-sequential-diagram
       ( shift-sequential-diagram k B)
       ( shift-hom-sequential-diagram k f)
 ```
@@ -180,7 +180,7 @@ Given a cocone `c`
     \     |     /
   i₀ \    | i₁ / i₂
       \   |   /
-       V  V  V
+       ∨  ∨  ∨
           X
 ```
 
@@ -193,7 +193,7 @@ under `A`, we may forget the first injection and homotopy to get the cocone
      |     /
   i₁ |    / i₂
      |   /
-     V  V
+     ∨  ∨
      X
 ```
 
@@ -206,11 +206,11 @@ module _
   {X : UU l2} (c : cocone-sequential-diagram A X)
   where
 
-  shift-cocone-sequential-diagram-once :
-    cocone-sequential-diagram (shift-sequential-diagram-once A) X
-  pr1 shift-cocone-sequential-diagram-once n =
+  shift-once-cocone-sequential-diagram :
+    cocone-sequential-diagram (shift-once-sequential-diagram A) X
+  pr1 shift-once-cocone-sequential-diagram n =
     map-cocone-sequential-diagram c (succ-ℕ n)
-  pr2 shift-cocone-sequential-diagram-once n =
+  pr2 shift-once-cocone-sequential-diagram n =
     coherence-cocone-sequential-diagram c (succ-ℕ n)
 
 module _
@@ -225,7 +225,7 @@ module _
   shift-cocone-sequential-diagram zero-ℕ c =
     c
   shift-cocone-sequential-diagram (succ-ℕ k) c =
-    shift-cocone-sequential-diagram-once
+    shift-once-cocone-sequential-diagram
       ( shift-cocone-sequential-diagram k c)
 ```
 
@@ -240,7 +240,7 @@ Conversely, given a cocone `c`
      |     /
   i₁ |    / i₂
      |   /
-     V  V
+     ∨  ∨
      X
 ```
 
@@ -253,7 +253,7 @@ under `A[1]`, we may prepend a map
          \     |     /
   i₁ ∘ a₀ \    | i₁ / i₂
            \   |   /
-            V  V  V
+            ∨  ∨  ∨
                X
 ```
 
@@ -274,18 +274,18 @@ then we can unshift by `k` to get `c[-1][-k]` under `A`.
 module _
   {l1 l2 : Level} (A : sequential-diagram l1)
   {X : UU l2}
-  (c : cocone-sequential-diagram (shift-sequential-diagram-once A) X)
+  (c : cocone-sequential-diagram (shift-once-sequential-diagram A) X)
   where
 
-  cocone-unshift-sequential-diagram-once :
+  unshift-once-cocone-sequential-diagram :
     cocone-sequential-diagram A X
-  pr1 cocone-unshift-sequential-diagram-once zero-ℕ =
+  pr1 unshift-once-cocone-sequential-diagram zero-ℕ =
     map-cocone-sequential-diagram c zero-ℕ ∘ map-sequential-diagram A zero-ℕ
-  pr1 cocone-unshift-sequential-diagram-once (succ-ℕ n) =
+  pr1 unshift-once-cocone-sequential-diagram (succ-ℕ n) =
     map-cocone-sequential-diagram c n
-  pr2 cocone-unshift-sequential-diagram-once zero-ℕ =
+  pr2 unshift-once-cocone-sequential-diagram zero-ℕ =
     refl-htpy
-  pr2 cocone-unshift-sequential-diagram-once (succ-ℕ n) =
+  pr2 unshift-once-cocone-sequential-diagram (succ-ℕ n) =
     coherence-cocone-sequential-diagram c n
 
 module _
@@ -293,15 +293,15 @@ module _
   {X : UU l2}
   where
 
-  cocone-unshift-sequential-diagram :
+  unshift-cocone-sequential-diagram :
     (k : ℕ) →
     cocone-sequential-diagram (shift-sequential-diagram k A) X →
     cocone-sequential-diagram A X
-  cocone-unshift-sequential-diagram zero-ℕ c =
+  unshift-cocone-sequential-diagram zero-ℕ c =
     c
-  cocone-unshift-sequential-diagram (succ-ℕ k) c =
-    cocone-unshift-sequential-diagram k
-      ( cocone-unshift-sequential-diagram-once
+  unshift-cocone-sequential-diagram (succ-ℕ k) c =
+    unshift-cocone-sequential-diagram k
+      ( unshift-once-cocone-sequential-diagram
         ( shift-sequential-diagram k A)
         ( c))
 ```
@@ -320,13 +320,13 @@ module _
   (H : htpy-cocone-sequential-diagram c c')
   where
 
-  shift-htpy-cocone-sequential-diagram-once :
+  shift-once-htpy-cocone-sequential-diagram :
     htpy-cocone-sequential-diagram
-      ( shift-cocone-sequential-diagram-once c)
-      ( shift-cocone-sequential-diagram-once c')
-  pr1 shift-htpy-cocone-sequential-diagram-once n =
+      ( shift-once-cocone-sequential-diagram c)
+      ( shift-once-cocone-sequential-diagram c')
+  pr1 shift-once-htpy-cocone-sequential-diagram n =
     htpy-htpy-cocone-sequential-diagram H (succ-ℕ n)
-  pr2 shift-htpy-cocone-sequential-diagram-once n =
+  pr2 shift-once-htpy-cocone-sequential-diagram n =
     coherence-htpy-htpy-cocone-sequential-diagram
       ( H)
       ( succ-ℕ n)
@@ -345,7 +345,7 @@ module _
   shift-htpy-cocone-sequential-diagram zero-ℕ H =
     H
   shift-htpy-cocone-sequential-diagram (succ-ℕ k) H =
-    shift-htpy-cocone-sequential-diagram-once
+    shift-once-htpy-cocone-sequential-diagram
       ( shift-htpy-cocone-sequential-diagram k H)
 ```
 
@@ -362,7 +362,7 @@ coherence to unshift a homotopy of cocones. Given two cocones `c`, `c'` under
      |     /                |     /
   i₁ |    / i₂     ~    i'₁ |    / i'₂
      |   /                  |   /
-     V  V                   V  V
+     ∨  ∨                   ∨  ∨
      X                      X
 ```
 
@@ -374,22 +374,22 @@ Inductively, we define `H[-(k + 1)] ≐ H[-1][-k]`.
 ```agda
 module _
   {l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
-  {c c' : cocone-sequential-diagram (shift-sequential-diagram-once A) X}
+  {c c' : cocone-sequential-diagram (shift-once-sequential-diagram A) X}
   (H : htpy-cocone-sequential-diagram c c')
   where
 
-  unshift-htpy-cocone-sequential-diagram-once :
+  unshift-once-htpy-cocone-sequential-diagram :
     htpy-cocone-sequential-diagram
-      ( cocone-unshift-sequential-diagram-once A c)
-      ( cocone-unshift-sequential-diagram-once A c')
-  pr1 unshift-htpy-cocone-sequential-diagram-once zero-ℕ =
+      ( unshift-once-cocone-sequential-diagram A c)
+      ( unshift-once-cocone-sequential-diagram A c')
+  pr1 unshift-once-htpy-cocone-sequential-diagram zero-ℕ =
     ( htpy-htpy-cocone-sequential-diagram H zero-ℕ) ·r
     ( map-sequential-diagram A zero-ℕ)
-  pr1 unshift-htpy-cocone-sequential-diagram-once (succ-ℕ n) =
+  pr1 unshift-once-htpy-cocone-sequential-diagram (succ-ℕ n) =
     htpy-htpy-cocone-sequential-diagram H n
-  pr2 unshift-htpy-cocone-sequential-diagram-once zero-ℕ =
+  pr2 unshift-once-htpy-cocone-sequential-diagram zero-ℕ =
     inv-htpy-right-unit-htpy
-  pr2 unshift-htpy-cocone-sequential-diagram-once (succ-ℕ n) =
+  pr2 unshift-once-htpy-cocone-sequential-diagram (succ-ℕ n) =
     coherence-htpy-htpy-cocone-sequential-diagram H n
 
 module _
@@ -401,13 +401,13 @@ module _
     {c c' : cocone-sequential-diagram (shift-sequential-diagram k A) X} →
     htpy-cocone-sequential-diagram c c' →
     htpy-cocone-sequential-diagram
-      ( cocone-unshift-sequential-diagram A k c)
-      ( cocone-unshift-sequential-diagram A k c')
+      ( unshift-cocone-sequential-diagram A k c)
+      ( unshift-cocone-sequential-diagram A k c')
   unshift-htpy-cocone-sequential-diagram zero-ℕ H =
     H
   unshift-htpy-cocone-sequential-diagram (succ-ℕ k) H =
     unshift-htpy-cocone-sequential-diagram k
-      (unshift-htpy-cocone-sequential-diagram-once H)
+      (unshift-once-htpy-cocone-sequential-diagram H)
 ```
 
 ### Morphisms from sequential diagrams into their shifts
@@ -419,7 +419,7 @@ The morphism is obtained by observing that the squares in the diagram
     A₀ ---> A₁ ---> A₂ ---> ⋯
     |       |       |
  a₀ |       | a₁    | a₂
-    v       v       v
+    ∨       ∨       ∨
     A₁ ---> A₂ ---> A₃ ---> ⋯
         a₁      a₂
 ```
@@ -431,12 +431,12 @@ module _
   {l1 : Level} (A : sequential-diagram l1)
   where
 
-  hom-shift-sequential-diagram-once :
+  hom-shift-once-sequential-diagram :
     hom-sequential-diagram
       ( A)
-      ( shift-sequential-diagram-once A)
-  pr1 hom-shift-sequential-diagram-once = map-sequential-diagram A
-  pr2 hom-shift-sequential-diagram-once n = refl-htpy
+      ( shift-once-sequential-diagram A)
+  pr1 hom-shift-once-sequential-diagram = map-sequential-diagram A
+  pr2 hom-shift-once-sequential-diagram n = refl-htpy
 
 module _
   {l1 : Level} (A : sequential-diagram l1)
@@ -453,7 +453,7 @@ module _
       ( A)
       ( shift-sequential-diagram k A)
       ( shift-sequential-diagram (succ-ℕ k) A)
-      ( hom-shift-sequential-diagram-once
+      ( hom-shift-once-sequential-diagram
         ( shift-sequential-diagram k A))
       ( hom-shift-sequential-diagram k)
 ```
@@ -478,47 +478,47 @@ module _
   {X : UU l2}
   where
 
-  htpy-is-section-cocone-unshift-sequential-diagram :
-    (c : cocone-sequential-diagram (shift-sequential-diagram-once A) X) →
+  htpy-is-section-unshift-once-cocone-sequential-diagram :
+    (c : cocone-sequential-diagram (shift-once-sequential-diagram A) X) →
     htpy-cocone-sequential-diagram
-      ( shift-cocone-sequential-diagram-once
-        ( cocone-unshift-sequential-diagram-once A c))
+      ( shift-once-cocone-sequential-diagram
+        ( unshift-once-cocone-sequential-diagram A c))
       ( c)
-  htpy-is-section-cocone-unshift-sequential-diagram c =
-    refl-htpy-cocone-sequential-diagram (shift-sequential-diagram-once A) c
+  htpy-is-section-unshift-once-cocone-sequential-diagram c =
+    refl-htpy-cocone-sequential-diagram (shift-once-sequential-diagram A) c
 
 module _
   {l1 l2 : Level} {A : sequential-diagram l1}
   {X : UU l2}
   where
 
-  htpy-is-section-cocone-unshift-sequential-diagram' :
+  htpy-is-section-unshift-cocone-sequential-diagram :
     (k : ℕ) →
     (c : cocone-sequential-diagram (shift-sequential-diagram k A) X) →
     htpy-cocone-sequential-diagram
       ( shift-cocone-sequential-diagram k
-        ( cocone-unshift-sequential-diagram A k c))
+        ( unshift-cocone-sequential-diagram A k c))
       ( c)
-  htpy-is-section-cocone-unshift-sequential-diagram' zero-ℕ c =
+  htpy-is-section-unshift-cocone-sequential-diagram zero-ℕ c =
     refl-htpy-cocone-sequential-diagram A c
-  htpy-is-section-cocone-unshift-sequential-diagram' (succ-ℕ k) c =
-    shift-htpy-cocone-sequential-diagram-once
-      ( htpy-is-section-cocone-unshift-sequential-diagram' k
-        ( cocone-unshift-sequential-diagram-once
+  htpy-is-section-unshift-cocone-sequential-diagram (succ-ℕ k) c =
+    shift-once-htpy-cocone-sequential-diagram
+      ( htpy-is-section-unshift-cocone-sequential-diagram k
+        ( unshift-once-cocone-sequential-diagram
           ( shift-sequential-diagram k A)
           ( c)))
 
-  is-section-cocone-unshift-sequential-diagram :
+  is-section-unshift-cocone-sequential-diagram :
     (k : ℕ) →
     is-section
       ( shift-cocone-sequential-diagram k)
-      ( cocone-unshift-sequential-diagram A {X} k)
-  is-section-cocone-unshift-sequential-diagram k c =
+      ( unshift-cocone-sequential-diagram A {X} k)
+  is-section-unshift-cocone-sequential-diagram k c =
     eq-htpy-cocone-sequential-diagram
       ( shift-sequential-diagram k A)
       ( _)
       ( _)
-      ( htpy-is-section-cocone-unshift-sequential-diagram' k c)
+      ( htpy-is-section-unshift-cocone-sequential-diagram k c)
 ```
 
 For the other direction, we need to show that the synthesized data, namely the
@@ -539,19 +539,19 @@ module _
   {X : UU l2}
   where
 
-  inv-htpy-is-retraction-cocone-sequential-diagram :
+  inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram :
     (c : cocone-sequential-diagram A X) →
     htpy-cocone-sequential-diagram
       ( c)
-      ( cocone-unshift-sequential-diagram-once A
-        ( shift-cocone-sequential-diagram-once c))
-  pr1 (inv-htpy-is-retraction-cocone-sequential-diagram c) zero-ℕ =
+      ( unshift-once-cocone-sequential-diagram A
+        ( shift-once-cocone-sequential-diagram c))
+  pr1 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c) zero-ℕ =
     coherence-cocone-sequential-diagram c zero-ℕ
-  pr1 (inv-htpy-is-retraction-cocone-sequential-diagram c) (succ-ℕ n) =
+  pr1 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c) (succ-ℕ n) =
     refl-htpy
-  pr2 (inv-htpy-is-retraction-cocone-sequential-diagram c) zero-ℕ =
+  pr2 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c) zero-ℕ =
     refl-htpy
-  pr2 (inv-htpy-is-retraction-cocone-sequential-diagram c) (succ-ℕ n) =
+  pr2 (inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c) (succ-ℕ n) =
     right-unit-htpy
 
 module _
@@ -559,33 +559,31 @@ module _
   {X : UU l2}
   where
 
-  inv-htpy-is-retraction-cocone-sequential-diagram' :
+  inv-htpy-is-retraction-unshift-cocone-sequential-diagram :
     (k : ℕ) →
     (c : cocone-sequential-diagram A X) →
     htpy-cocone-sequential-diagram
       ( c)
-      ( cocone-unshift-sequential-diagram A k
+      ( unshift-cocone-sequential-diagram A k
         ( shift-cocone-sequential-diagram k c))
-  inv-htpy-is-retraction-cocone-sequential-diagram' zero-ℕ c =
+  inv-htpy-is-retraction-unshift-cocone-sequential-diagram zero-ℕ c =
     refl-htpy-cocone-sequential-diagram A c
-  inv-htpy-is-retraction-cocone-sequential-diagram' (succ-ℕ k) c =
+  inv-htpy-is-retraction-unshift-cocone-sequential-diagram (succ-ℕ k) c =
     concat-htpy-cocone-sequential-diagram
-      ( inv-htpy-is-retraction-cocone-sequential-diagram' k c)
+      ( inv-htpy-is-retraction-unshift-cocone-sequential-diagram k c)
       ( unshift-htpy-cocone-sequential-diagram k
-        ( inv-htpy-is-retraction-cocone-sequential-diagram
+        ( inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram
           ( shift-cocone-sequential-diagram k c)))
 
-  is-retraction-cocone-unshift-sequential-diagram :
+  is-retraction-unshift-cocone-sequential-diagram :
     (k : ℕ) →
     is-retraction
       ( shift-cocone-sequential-diagram k)
-      ( cocone-unshift-sequential-diagram A {X} k)
-  is-retraction-cocone-unshift-sequential-diagram k c =
-    inv (eq-htpy-cocone-sequential-diagram
-      ( A)
-      ( _)
-      ( _)
-      ( inv-htpy-is-retraction-cocone-sequential-diagram' k c))
+      ( unshift-cocone-sequential-diagram A {X} k)
+  is-retraction-unshift-cocone-sequential-diagram k c =
+    inv
+      ( eq-htpy-cocone-sequential-diagram A _ _
+        ( inv-htpy-is-retraction-unshift-cocone-sequential-diagram k c))
 
 module _
   {l1 l2 : Level} {A : sequential-diagram l1}
@@ -597,17 +595,17 @@ module _
     is-equiv (shift-cocone-sequential-diagram {X = X} k)
   is-equiv-shift-cocone-sequential-diagram k =
     is-equiv-is-invertible
-      ( cocone-unshift-sequential-diagram A k)
-      ( is-section-cocone-unshift-sequential-diagram k)
-      ( is-retraction-cocone-unshift-sequential-diagram k)
+      ( unshift-cocone-sequential-diagram A k)
+      ( is-section-unshift-cocone-sequential-diagram k)
+      ( is-retraction-unshift-cocone-sequential-diagram k)
 
-  equiv-cocone-shift-unshift-sequential-diagram :
+  equiv-shift-cocone-sequential-diagram :
     (k : ℕ) →
     cocone-sequential-diagram A X ≃
     cocone-sequential-diagram (shift-sequential-diagram k A) X
-  pr1 (equiv-cocone-shift-unshift-sequential-diagram k) =
+  pr1 (equiv-shift-cocone-sequential-diagram k) =
     shift-cocone-sequential-diagram k
-  pr2 (equiv-cocone-shift-unshift-sequential-diagram k) =
+  pr2 (equiv-shift-cocone-sequential-diagram k) =
     is-equiv-shift-cocone-sequential-diagram k
 ```
 
@@ -627,7 +625,7 @@ there is a commuting triangle
       X → Y ------------> cocone A Y
             \           /
   cocone-map  \       /
-                V   V
+                ∨   ∨
              cocone A[1] Y.
 ```
 
@@ -639,12 +637,12 @@ Inductively, we compose this triangle in the following way
             \⟍             |
              \ ⟍           |
               \  ⟍         |
-               \   ⟍       V
+               \   ⟍       ∨
                 \    > cocone A[k] Y
      cocone-map  \       /
                   \     /
                    \   /
-                    V V
+                    ∨ ∨
              cocone A[k + 1] Y,
 ```
 
@@ -658,7 +656,7 @@ This gives us the commuting triangle
       X → Y ------------> cocone A Y
             \     ≃     /
   cocone-map  \       / ≃
-                V   V
+                ∨   ∨
              cocone A[k] Y,
 ```
 
@@ -673,22 +671,22 @@ module _
   {X : UU l2} (c : cocone-sequential-diagram A X)
   where
 
-  triangle-cocone-map-shift-sequential-diagram-once :
+  triangle-cocone-map-shift-once-cocone-sequential-diagram :
     {l : Level} (Y : UU l) →
     coherence-triangle-maps
       ( cocone-map-sequential-diagram
-        ( shift-cocone-sequential-diagram-once c)
+        ( shift-once-cocone-sequential-diagram c)
         { Y = Y})
-      ( shift-cocone-sequential-diagram-once)
+      ( shift-once-cocone-sequential-diagram)
       ( cocone-map-sequential-diagram c)
-  triangle-cocone-map-shift-sequential-diagram-once Y = refl-htpy
+  triangle-cocone-map-shift-once-cocone-sequential-diagram Y = refl-htpy
 
 module _
   {l1 l2 : Level} {A : sequential-diagram l1}
   {X : UU l2} (c : cocone-sequential-diagram A X)
   where
 
-  triangle-cocone-map-shift-sequential-diagram :
+  triangle-cocone-map-shift-cocone-sequential-diagram :
     (k : ℕ) →
     {l : Level} (Y : UU l) →
     coherence-triangle-maps
@@ -696,31 +694,31 @@ module _
         ( shift-cocone-sequential-diagram k c))
       ( shift-cocone-sequential-diagram k)
       ( cocone-map-sequential-diagram c)
-  triangle-cocone-map-shift-sequential-diagram zero-ℕ Y =
+  triangle-cocone-map-shift-cocone-sequential-diagram zero-ℕ Y =
     refl-htpy
-  triangle-cocone-map-shift-sequential-diagram (succ-ℕ k) Y =
-    ( triangle-cocone-map-shift-sequential-diagram-once
+  triangle-cocone-map-shift-cocone-sequential-diagram (succ-ℕ k) Y =
+    ( triangle-cocone-map-shift-once-cocone-sequential-diagram
       ( shift-cocone-sequential-diagram k c)
       ( Y)) ∙h
-    ( ( shift-cocone-sequential-diagram-once) ·l
-      ( triangle-cocone-map-shift-sequential-diagram k Y))
+    ( ( shift-once-cocone-sequential-diagram) ·l
+      ( triangle-cocone-map-shift-cocone-sequential-diagram k Y))
 
 module _
   {l1 l2 : Level} {A : sequential-diagram l1}
   {X : UU l2} {c : cocone-sequential-diagram A X}
   where
 
-  up-cocone-shift-sequential-diagram :
+  up-shift-cocone-sequential-diagram :
     (k : ℕ) →
     universal-property-sequential-colimit c →
     universal-property-sequential-colimit (shift-cocone-sequential-diagram k c)
-  up-cocone-shift-sequential-diagram k up-c Y =
+  up-shift-cocone-sequential-diagram k up-c Y =
     is-equiv-left-map-triangle
       ( cocone-map-sequential-diagram
         ( shift-cocone-sequential-diagram k c))
       ( shift-cocone-sequential-diagram k)
       ( cocone-map-sequential-diagram c)
-      ( triangle-cocone-map-shift-sequential-diagram c k Y)
+      ( triangle-cocone-map-shift-cocone-sequential-diagram c k Y)
       ( up-c Y)
       ( is-equiv-shift-cocone-sequential-diagram k)
 ```
@@ -744,5 +742,5 @@ module _
         ( cocone-standard-sequential-colimit A))
   pr2 (compute-sequential-colimit-shift-sequential-diagram k) =
     is-sequential-colimit-universal-property _
-      ( up-cocone-shift-sequential-diagram k up-standard-sequential-colimit)
+      ( up-shift-cocone-sequential-diagram k up-standard-sequential-colimit)
 ```
