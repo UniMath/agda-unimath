@@ -88,7 +88,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  (𝒮 : span-diagram l1 l2 l3) (𝒯 : dependent-span-diagram l4 l5 l6 𝒮)
+  {𝒮 : span-diagram l1 l2 l3} (𝒯 : dependent-span-diagram l4 l5 l6 𝒮)
   (s : spanning-type-span-diagram 𝒮)
   where
 

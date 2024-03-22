@@ -7,7 +7,10 @@ module foundation.cartesian-dependent-span-diagrams where
 <details><summary>Imports</summary>
 
 ```agda
-
+open import foundation.constant-span-diagrams
+open import foundation.dependent-span-diagrams
+open import foundation.span-diagrams
+open import foundation.universe-levels
 ```
 
 </details>
@@ -21,7 +24,12 @@ A [dependent span diagram](foundation.dependent-span-diagrams.md) `𝒯` over a 
   𝒯₂ s → 𝒯₁ (g s)
 ```
 
-are [equivalences](foundation-core.equivalences.md) for each `s : S`. The condition of being a cartesian dependent span diagram is equivalent to the condition that the [flattening](foundation.flattening-dependent-span-diagrams.md)
+are [equivalences](foundation-core.equivalences.md) for each `s : S`. In other
+words, a dependent span diagram `𝒯` over `𝒮` is cartesian if the display span
+diagram `𝒯 s` is [constant](foundation.constant-span-diagrams.md) for every
+`s : S`.
+
+The condition of being a cartesian dependent span diagram is equivalent to the condition that the [flattening](foundation.flattening-dependent-span-diagrams.md)
 
 ```text
   Σ (a : A), 𝒯₀ a <----- Σ (s : S), 𝒯₂ s -----> Σ (b : B), 𝒯₁ b
@@ -46,3 +54,15 @@ We will show that the type of cartesian dependent span diagrams over `𝒮` is e
 ## Definitions
 
 ### The predicate of being a cartesian dependent span diagram
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (𝒮 : span-diagram l1 l2 l3) (𝒯 : dependent-span-diagram l4 l5 l6 𝒮)
+  where
+
+  is-cartesian-dependent-span-diagram : UU (l3 ⊔ l4 ⊔ l5 ⊔ l6)
+  is-cartesian-dependent-span-diagram =
+    (s : spanning-type-span-diagram 𝒮) →
+    is-constant-span-diagram (display-dependent-span-diagram 𝒯 s)
+```
