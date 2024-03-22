@@ -99,26 +99,28 @@ module _
     Σ (type-subuniverse P) (λ Y → inclusion-subuniverse P Y ≃ X)
 
   is-prop-is-essentially-in-subuniverse :
+    (univalence : univalence-axiom)
     {l3 : Level} (X : UU l3) → is-prop (is-essentially-in-subuniverse X)
-  is-prop-is-essentially-in-subuniverse X =
+  is-prop-is-essentially-in-subuniverse univalence X =
     is-prop-is-proof-irrelevant
       ( λ ((X' , p) , e) →
         is-torsorial-Eq-subtype
           ( is-contr-equiv'
             ( Σ (UU _) (λ T → T ≃ X'))
             ( equiv-tot (equiv-postcomp-equiv e))
-            ( is-torsorial-equiv' X'))
+            ( is-torsorial-equiv' univalence X'))
           ( is-prop-is-in-subuniverse P)
           ( X')
           ( e)
           ( p))
 
   is-essentially-in-subuniverse-Prop :
+    (univalence : univalence-axiom)
     {l3 : Level} (X : UU l3) → Prop (lsuc l1 ⊔ l2 ⊔ l3)
-  pr1 (is-essentially-in-subuniverse-Prop X) =
+  pr1 (is-essentially-in-subuniverse-Prop univalence X) =
     is-essentially-in-subuniverse X
-  pr2 (is-essentially-in-subuniverse-Prop X) =
-    is-prop-is-essentially-in-subuniverse X
+  pr2 (is-essentially-in-subuniverse-Prop univalence X) =
+    is-prop-is-essentially-in-subuniverse univalence X
 ```
 
 ## Properties
@@ -131,12 +133,16 @@ module _
   where
 
   is-in-subuniverse-equiv :
+    (univalence : univalence-axiom) →
     X ≃ Y → is-in-subuniverse P X → is-in-subuniverse P Y
-  is-in-subuniverse-equiv e = tr (is-in-subuniverse P) (eq-equiv e)
+  is-in-subuniverse-equiv univalence e =
+    tr (is-in-subuniverse P) (eq-equiv univalence e)
 
   is-in-subuniverse-equiv' :
+    (univalence : univalence-axiom) →
     X ≃ Y → is-in-subuniverse P Y → is-in-subuniverse P X
-  is-in-subuniverse-equiv' e = tr (is-in-subuniverse P) (inv (eq-equiv e))
+  is-in-subuniverse-equiv' univalence e =
+    tr (is-in-subuniverse P) (inv (eq-equiv univalence e))
 ```
 
 ### Characterization of the identity type of subuniverses
@@ -153,13 +159,17 @@ module _
     (X Y : type-subuniverse P) → X ＝ Y → equiv-subuniverse X Y
   equiv-eq-subuniverse X .X refl = id-equiv
 
+module _
+  {l1 l2 : Level} (univalence : univalence-axiom) (P : subuniverse l1 l2)
+  where
+
   abstract
     is-torsorial-equiv-subuniverse :
       (X : type-subuniverse P) →
-      is-torsorial (λ Y → equiv-subuniverse X Y)
+      is-torsorial (λ Y → equiv-subuniverse P X Y)
     is-torsorial-equiv-subuniverse (X , p) =
       is-torsorial-Eq-subtype
-        ( is-torsorial-equiv X)
+        ( is-torsorial-equiv univalence X)
         ( is-subtype-subuniverse P)
         ( X)
         ( id-equiv)
@@ -167,10 +177,10 @@ module _
 
     is-torsorial-equiv-subuniverse' :
       (X : type-subuniverse P) →
-      is-torsorial (λ Y → equiv-subuniverse Y X)
+      is-torsorial (λ Y → equiv-subuniverse P Y X)
     is-torsorial-equiv-subuniverse' (X , p) =
       is-torsorial-Eq-subtype
-        ( is-torsorial-equiv' X)
+        ( is-torsorial-equiv' univalence X)
         ( is-subtype-subuniverse P)
         ( X)
         ( id-equiv)
@@ -178,19 +188,20 @@ module _
 
   abstract
     is-equiv-equiv-eq-subuniverse :
-      (X Y : type-subuniverse P) → is-equiv (equiv-eq-subuniverse X Y)
+      (X Y : type-subuniverse P) → is-equiv (equiv-eq-subuniverse P X Y)
     is-equiv-equiv-eq-subuniverse X =
       fundamental-theorem-id
         ( is-torsorial-equiv-subuniverse X)
-        ( equiv-eq-subuniverse X)
+        ( equiv-eq-subuniverse P X)
 
   extensionality-subuniverse :
-    (X Y : type-subuniverse P) → (X ＝ Y) ≃ equiv-subuniverse X Y
-  pr1 (extensionality-subuniverse X Y) = equiv-eq-subuniverse X Y
-  pr2 (extensionality-subuniverse X Y) = is-equiv-equiv-eq-subuniverse X Y
+    (X Y : type-subuniverse P) → (X ＝ Y) ≃ equiv-subuniverse P X Y
+  pr1 (extensionality-subuniverse X Y) = equiv-eq-subuniverse P X Y
+  pr2 (extensionality-subuniverse X Y) =
+    is-equiv-equiv-eq-subuniverse X Y
 
   eq-equiv-subuniverse :
-    {X Y : type-subuniverse P} → equiv-subuniverse X Y → X ＝ Y
+    {X Y : type-subuniverse P} → equiv-subuniverse P X Y → X ＝ Y
   eq-equiv-subuniverse {X} {Y} =
     map-inv-is-equiv (is-equiv-equiv-eq-subuniverse X Y)
 
@@ -222,32 +233,37 @@ module _
   id-equiv-fam-subuniverse Y x = id-equiv
 
   is-torsorial-equiv-fam-subuniverse :
+    (univalence : univalence-axiom)
     (Y : fam-subuniverse P X) →
     is-torsorial (equiv-fam-subuniverse Y)
-  is-torsorial-equiv-fam-subuniverse Y =
-    is-torsorial-Eq-Π (λ x → is-torsorial-equiv-subuniverse P (Y x))
+  is-torsorial-equiv-fam-subuniverse univalence Y =
+    is-torsorial-Eq-Π (λ x → is-torsorial-equiv-subuniverse univalence P (Y x))
 
   equiv-eq-fam-subuniverse :
     (Y Z : fam-subuniverse P X) → Y ＝ Z → equiv-fam-subuniverse Y Z
   equiv-eq-fam-subuniverse Y .Y refl = id-equiv-fam-subuniverse Y
 
   is-equiv-equiv-eq-fam-subuniverse :
+    (univalence : univalence-axiom)
     (Y Z : fam-subuniverse P X) → is-equiv (equiv-eq-fam-subuniverse Y Z)
-  is-equiv-equiv-eq-fam-subuniverse Y =
+  is-equiv-equiv-eq-fam-subuniverse univalence Y =
     fundamental-theorem-id
-      ( is-torsorial-equiv-fam-subuniverse Y)
+      ( is-torsorial-equiv-fam-subuniverse univalence Y)
       ( equiv-eq-fam-subuniverse Y)
 
   extensionality-fam-subuniverse :
+    (univalence : univalence-axiom)
     (Y Z : fam-subuniverse P X) → (Y ＝ Z) ≃ equiv-fam-subuniverse Y Z
-  pr1 (extensionality-fam-subuniverse Y Z) = equiv-eq-fam-subuniverse Y Z
-  pr2 (extensionality-fam-subuniverse Y Z) =
-    is-equiv-equiv-eq-fam-subuniverse Y Z
+  pr1 (extensionality-fam-subuniverse univalence Y Z) =
+    equiv-eq-fam-subuniverse Y Z
+  pr2 (extensionality-fam-subuniverse univalence Y Z) =
+    is-equiv-equiv-eq-fam-subuniverse univalence Y Z
 
   eq-equiv-fam-subuniverse :
+    (univalence : univalence-axiom)
     (Y Z : fam-subuniverse P X) → equiv-fam-subuniverse Y Z → (Y ＝ Z)
-  eq-equiv-fam-subuniverse Y Z =
-    map-inv-is-equiv (is-equiv-equiv-eq-fam-subuniverse Y Z)
+  eq-equiv-fam-subuniverse univalence Y Z =
+    map-inv-is-equiv (is-equiv-equiv-eq-fam-subuniverse univalence Y Z)
 ```
 
 ## See also

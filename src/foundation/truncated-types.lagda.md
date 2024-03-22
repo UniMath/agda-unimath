@@ -33,39 +33,44 @@ open import foundation-core.torsorial-type-families
 
 ```agda
 is-torsorial-equiv-Truncated-Type :
+  (univalence : univalence-axiom)
   {l : Level} {k : 𝕋} (A : Truncated-Type l k) →
   is-torsorial (type-equiv-Truncated-Type A)
-is-torsorial-equiv-Truncated-Type A =
+is-torsorial-equiv-Truncated-Type univalence A =
   is-torsorial-Eq-subtype
-    ( is-torsorial-equiv (type-Truncated-Type A))
+    ( is-torsorial-equiv univalence (type-Truncated-Type A))
     ( is-prop-is-trunc _)
     ( type-Truncated-Type A)
     ( id-equiv)
     ( is-trunc-type-Truncated-Type A)
 
 extensionality-Truncated-Type :
+  (univalence : univalence-axiom)
   {l : Level} {k : 𝕋} (A B : Truncated-Type l k) →
   (A ＝ B) ≃ type-equiv-Truncated-Type A B
-extensionality-Truncated-Type A =
+extensionality-Truncated-Type univalence A =
   extensionality-type-subtype
     ( is-trunc-Prop _)
     ( is-trunc-type-Truncated-Type A)
     ( id-equiv)
-    ( λ X → equiv-univalence)
+    ( λ X → equiv-univalence univalence)
 
 abstract
   is-trunc-Truncated-Type :
+    (univalence : univalence-axiom)
     {l : Level} (k : 𝕋) → is-trunc (succ-𝕋 k) (Truncated-Type l k)
-  is-trunc-Truncated-Type k X Y =
+  is-trunc-Truncated-Type univalence k X Y =
     is-trunc-equiv k
       ( type-equiv-Truncated-Type X Y)
-      ( extensionality-Truncated-Type X Y)
+      ( extensionality-Truncated-Type univalence X Y)
       ( is-trunc-type-equiv-Truncated-Type X Y)
 
 Truncated-Type-Truncated-Type :
+  (univalence : univalence-axiom)
   (l : Level) (k : 𝕋) → Truncated-Type (lsuc l) (succ-𝕋 k)
-pr1 (Truncated-Type-Truncated-Type l k) = Truncated-Type l k
-pr2 (Truncated-Type-Truncated-Type l k) = is-trunc-Truncated-Type k
+pr1 (Truncated-Type-Truncated-Type univalence l k) = Truncated-Type l k
+pr2 (Truncated-Type-Truncated-Type univalence l k) =
+  is-trunc-Truncated-Type univalence k
 ```
 
 ### The embedding of the subuniverse of truncated types into the universe
