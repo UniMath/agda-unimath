@@ -34,7 +34,7 @@ An **algebra** over a [ring](ring-theory.rings.md) `R` consists of an
 
 ## Definitions
 
-### Non-unital algebras over a ring
+### Nonunital algebras over a ring
 
 ```agda
 has-bilinear-mul-left-module-Ring :

@@ -79,7 +79,7 @@ abstract
 
 equiv-Π-equiv-family :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (e : (i : I) → (A i) ≃ (B i)) → ((i : I) → A i) ≃ ((i : I) → B i)
+  (e : (i : I) → A i ≃ B i) → ((i : I) → A i) ≃ ((i : I) → B i)
 pr1 (equiv-Π-equiv-family e) =
   map-Π (λ i → map-equiv (e i))
 pr2 (equiv-Π-equiv-family e) =

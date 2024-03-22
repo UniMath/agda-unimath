@@ -62,6 +62,7 @@ open import foundation.commuting-tetrahedra-of-maps public
 open import foundation.commuting-triangles-of-homotopies public
 open import foundation.commuting-triangles-of-identifications public
 open import foundation.commuting-triangles-of-maps public
+open import foundation.commuting-triangles-of-morphisms-arrows public
 open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.composite-maps-in-inverse-sequential-diagrams public
@@ -163,6 +164,7 @@ open import foundation.extensions-types public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
 open import foundation.families-of-maps public
+open import foundation.families-over-telescopes public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public

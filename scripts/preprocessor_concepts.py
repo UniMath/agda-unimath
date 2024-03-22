@@ -33,7 +33,7 @@ LEFTOVER_CONCEPT_REGEX = re.compile(r'\{\{#concept.*')
 
 def make_definition_regex(definition):
     return re.compile(
-        r'<a id="(\d+)" href="[^"]+" class="[^"]+">' + definition + r'</a>')
+        r'<a id="(\d+)" href="[^"]+" class="[^"]+">' + re.escape(definition) + r'</a>')
 
 
 def does_support(backend):

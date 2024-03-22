@@ -32,19 +32,22 @@ open import foundation-core.sections
 
 ## Idea
 
-Applying
+Given a map between universes `f : 𝒰 → 𝒱`, applying
 [transport along identifications](foundation-core.transport-along-identifications.md)
 to [identifications](foundation-core.identity-types.md) arising from the
 [univalence axiom](foundation.univalence.md) gives us
-{{#concept "transport along equivalences" Agda=tr-equiv}}.
+{{#concept "transport along equivalences" Agda=tr-equiv}}:
 
-Since transport defines [equivalences](foundation-core.equivalences.md) of
-[fibers](foundation-core.fibers-of-maps.md), this gives us an _action on
-equivalences_. Alternatively, we could apply the
+```text
+  tr-equiv f : X ≃ Y → f X ≃ f Y.
+```
+
+Alternatively, we could apply the
 [action on identifications](foundation.action-on-identifications-functions.md)
 to get another
-[action on equivalences](foundation.action-on-equivalences-functions.md), but
-luckily, these two notions coincide.
+[action on equivalences](foundation.action-on-equivalences-functions.md).
+However, by univalence such a map must also be unique, hence these two
+constructions coincide.
 
 ## Definitions
 

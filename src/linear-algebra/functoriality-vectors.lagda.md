@@ -28,7 +28,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Any map `f : A → B` determines a map `vec n A → vec n B` for every `n`.
+Any map `f : A → B` determines a map `vec A n → vec B n` for every `n`.
 
 ## Definition
 

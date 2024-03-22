@@ -21,6 +21,7 @@ open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels

@@ -49,10 +49,10 @@ module _
     (e : C ≃ A) → is-in-subtype P (f ∘ map-equiv e)
 
   is-closed-under-equiv-postcomp-function-classes :
-    (l1 l2 l3 : Level) → UU (β l1 l2 ⊔ β l3 l2 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
+    (l1 l2 l3 : Level) → UU (β l1 l2 ⊔ β l1 l3 ⊔ lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   is-closed-under-equiv-postcomp-function-classes l1 l2 l3 =
     {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B) → is-in-subtype P f →
-    (e : C ≃ A) → is-in-subtype P (f ∘ map-equiv e)
+    (e : B ≃ C) → is-in-subtype P (map-equiv e ∘ f)
 ```
 
 ### The large type of global function classes
@@ -222,9 +222,9 @@ module _
     has-identity-maps-global-function-class P →
     has-equivalences-global-function-class P
   has-equivalences-has-identity-maps-global-function-class'
-    has-id-P {B = B} f f' =
+    has-id-P {A = A} f f' =
     is-closed-under-equiv-postcomp-global-function-class
-      P id (has-id-P B) (f , f')
+      P id (has-id-P A) (f , f')
 
   has-identity-maps-has-equivalences-global-function-class :
     has-equivalences-global-function-class P →

@@ -26,6 +26,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
