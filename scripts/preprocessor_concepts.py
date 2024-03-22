@@ -11,13 +11,13 @@ import time
 from utils import eprint
 
 CONCEPT_REGEX = re.compile(
-    r'\{\{#concept "([^"]+)"(.*?)\}\}')
+    r'\{\{#concept "([^\n"]+)"(.*?)\}\}')
 
 WIKIDATA_ID_REGEX = re.compile(
     r'WDID=(\S+)')
 
 WIKIDATA_LABEL_REGEX = re.compile(
-    r'WD="([^"]+)"')
+    r'WD="([^\n"]+)"')
 
 AGDA_REGEX = re.compile(
     r'Agda=(\S+)')
