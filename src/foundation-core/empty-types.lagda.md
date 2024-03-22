@@ -48,13 +48,6 @@ is-nonempty : {l : Level} → UU l → UU l
 is-nonempty A = is-empty (is-empty A)
 ```
 
-### The initial map into a type
-
-```agda
-initial-map : {l : Level} (A : UU l) → empty → A
-initial-map A = ex-falso
-```
-
 ## Properties
 
 ### The map `ex-falso` is an embedding

@@ -24,6 +24,7 @@ open import foundation.propositions
 open import foundation.retracts-of-maps
 open import foundation.retracts-of-types
 open import foundation.unit-type
+open import foundation.universal-property-empty-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
