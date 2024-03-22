@@ -9,6 +9,7 @@ module order-theory.finite-preorders where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions

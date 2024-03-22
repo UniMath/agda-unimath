@@ -91,8 +91,10 @@ if its underlying relation is reflexive
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
   where
+
   is-reflexive-Relation-Prop : UU (l1 ⊔ l2)
   is-reflexive-Relation-Prop = is-reflexive (type-Relation-Prop R)
+
   is-prop-is-reflexive-Relation-Prop : is-prop is-reflexive-Relation-Prop
   is-prop-is-reflexive-Relation-Prop =
     is-prop-Π (λ x → is-prop-type-Relation-Prop R x x)
@@ -140,6 +142,7 @@ with a function `(x y z : A) → R y z → R x y → R x z`.
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
+
   is-transitive : UU (l1 ⊔ l2)
   is-transitive = (x y z : A) → R y z → R x y → R x z
 ```
@@ -153,8 +156,10 @@ if its underlying relation is transitive.
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
   where
+
   is-transitive-Relation-Prop : UU (l1 ⊔ l2)
   is-transitive-Relation-Prop = is-transitive (type-Relation-Prop R)
+
   is-prop-is-transitive-Relation-Prop : is-prop is-transitive-Relation-Prop
   is-prop-is-transitive-Relation-Prop =
     is-prop-iterated-Π 3

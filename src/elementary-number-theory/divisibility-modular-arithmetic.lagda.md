@@ -12,6 +12,7 @@ open import elementary-number-theory.divisibility-standard-finite-types
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-relations
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types

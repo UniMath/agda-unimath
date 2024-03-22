@@ -7,6 +7,7 @@ module order-theory.total-preorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.propositions
