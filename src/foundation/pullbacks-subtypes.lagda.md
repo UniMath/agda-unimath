@@ -24,8 +24,9 @@ open import order-theory.order-preserving-maps-large-preorders
 ## Idea
 
 Consider a [subtype](foundation-core.subtypes.md) `T` of a type `B` and a map
-`f : A → B`. Then the **pullback subtype** `pullback f T` of `A` is defined to
-be `T ∘ f`. This fits in a [pullback diagram](foundation-core.pullbacks.md)
+`f : A → B`. Then the {{#concept "pullback subtype" Agda=pullback-subtype}}
+`pullback f T` of `A` is defined to be `T ∘ f`. This fits in a
+[pullback diagram](foundation-core.pullbacks.md)
 
 ```text
                  π₂

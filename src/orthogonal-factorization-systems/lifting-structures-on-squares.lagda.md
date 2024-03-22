@@ -72,17 +72,21 @@ consists of a
          i
 ```
 
-commutes. We note that there is a canonical map
+commutes. We refer to a square equipped with a lifting structure as a
+{{#concept "lifting square"}}. Observe that there is a canonical map
 
 ```text
-  pullback-hom : (B → X) → hom-arrow f g.
+  pullback-hom f g : (B → X) → hom-arrow f g.
 ```
 
 Therefore we see that a lifting square consists of a
 [morphism of arrows](foundation.morphisms-arrows.md) `α : hom-arrow f g` from
 `f` to `g`, a map `j : B → X`, and a
 [homotopy of morphisms of arrows](foundation.homotopies-morphisms-arrows.md)
-`pullback-hom f ~ α`.
+`pullback-hom f g j ~ α`.
+
+**Terminology.** In the literature, a lifting structure on a square is commonly
+referred to as a _solution to the lifting problem_ `α`.
 
 ## Definitions
 
@@ -358,3 +362,7 @@ module _
   eq-htpy-lifting-structure-square k =
     map-inv-equiv (extensionality-lifting-structure-square k)
 ```
+
+## External links
+
+- [lift](https://ncatlab.org/nlab/show/lift) at $n$Lab.

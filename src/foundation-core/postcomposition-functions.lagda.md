@@ -7,10 +7,9 @@ module foundation-core.postcomposition-functions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.postcomposition-dependent-functions
 open import foundation.universe-levels
 
-open import foundation-core.function-types
+open import foundation-core.postcomposition-dependent-functions
 ```
 
 </details>

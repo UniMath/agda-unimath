@@ -34,6 +34,7 @@ open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
+open import foundation.torsorial-type-families
 open import foundation.truncated-types
 open import foundation.truncation-equivalences
 open import foundation.truncation-levels
@@ -469,8 +470,8 @@ module _
         ( is-truncated-acyclic-map-horizontal-map-cone-is-pullback
           ( terminal-map A)
           ( terminal-map B)
-          ( cone-product A B)
-          ( is-pullback-product A B)
+          ( cone-cartesian-product A B)
+          ( is-pullback-cartesian-product A B)
           ( is-truncated-acyclic-map-terminal-map-is-truncated-acyclic A ac-A)))
 ```
 

@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **magma** is a type equipped with a binary operation.
+A {{#concept "magma" Agda=Magma}} is a type [equipped](foundation.structure.md)
+with a binary operation.
 
 ## Definition
 

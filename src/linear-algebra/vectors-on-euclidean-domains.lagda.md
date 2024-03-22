@@ -316,7 +316,7 @@ module _
     right-unit-law-add-vec-Euclidean-Domain R
 
   is-group-vec-Euclidean-Domain :
-    (n : ℕ) → is-group (vec-Euclidean-Domain-Semigroup R n)
+    (n : ℕ) → is-group-Semigroup (vec-Euclidean-Domain-Semigroup R n)
   pr1 (is-group-vec-Euclidean-Domain n) = is-unital-vec-Euclidean-Domain n
   pr1 (pr2 (is-group-vec-Euclidean-Domain n)) = neg-vec-Euclidean-Domain
   pr1 (pr2 (pr2 (is-group-vec-Euclidean-Domain n))) =

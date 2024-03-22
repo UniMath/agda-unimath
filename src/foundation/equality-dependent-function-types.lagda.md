@@ -28,7 +28,9 @@ Given a family of types `B` over `A`, if we can characterize the
 [identity types](foundation-core.identity-types.md) of each `B x`, then we can
 characterize the identity types of `(x : A) → B x`.
 
-### Contractibility
+## Properties
+
+### Torsoriality
 
 ```agda
 module _
@@ -96,6 +98,5 @@ module _
   [`foundation.equality-cartesian-product-types`](foundation.equality-cartesian-product-types.md).
 - Equality proofs in dependent pair types are characterized in
   [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.md).
-
 - Function extensionality is postulated in
   [`foundation.function-extensionality`](foundation.function-extensionality.md).

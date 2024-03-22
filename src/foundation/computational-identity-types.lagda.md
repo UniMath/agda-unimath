@@ -53,13 +53,13 @@ but using the [Yoneda identity types](foundation.yoneda-identity-types.md)
 (`_＝ʸ_`) as the underlying identity types:
 
 ```text
-  (x ＝ʲ y) := Σ (z : A) ((z ＝ʸ y) × (z ＝ʸ x))
+  (x ＝ʸ y) := (z : A) → (z ＝ x) → (z ＝ y),
 ```
 
-The Yoneda identity types are defined as
+hence, their definition is
 
 ```text
-  (x ＝ʸ y) := (z : A) → (z ＝ x) → (z ＝ y).
+  (x ＝ʲ y) := Σ (z : A) ((z ＝ʸ y) × (z ＝ʸ x)).
 ```
 
 The Yoneda identity types are [equivalent](foundation-core.equivalences.md) to
@@ -71,23 +71,22 @@ laws
 
 - `(p ∙ʲ q) ∙ʲ r ≐ p ∙ʲ (q ∙ʲ r)`
 - `reflʲ ∙ʲ p ≐ p` or `p ∙ʲ reflʲ ≐ p`
-- `inv (inv p) ≐ p`
-- `inv reflʲ ≐ reflʲ`.
+- `invʲ (invʲ p) ≐ p`
+- `invʲ reflʲ ≐ reflʲ`.
 
 While the last three equalities hold by the same computations as for the
-strictly involutive identity types using the fact that `inv reflʸ ≐ reflʸ`,
+strictly involutive identity types using the fact that `invʸ reflʸ ≐ reflʸ`,
 strict associativity relies on the strict associativity of the underlying Yoneda
 identity types. See the file about strictly involutive identity types for
-further details on these computations.
-
-In addition to these strict algebraic laws, we also define a recursion principle
+further details on computations related to the last three equalities. In
+addition to these strict algebraic laws, we also define a recursion principle
 for the computational identity types that computes strictly.
 
 **Note.** The computational identity types do _not_ satisfy the strict laws
 
 - `reflʲ ∙ʲ p ≐ p` and `p ∙ʲ reflʲ ≐ p` simultaneously,
-- `inv p ∙ʲ p ≐ reflʲ`, or
-- `p ∙ʲ inv p ≐ reflʲ`,
+- `invʲ p ∙ʲ p ≐ reflʲ`, or
+- `p ∙ʲ invʲ p ≐ reflʲ`,
 
 and they do not have a strict computation property for their induction
 principle. This boils down to the fact that the Yoneda identity types do not
@@ -116,7 +115,8 @@ module _
 
 ### The computational identity types are equivalent to the Yoneda identity types
 
-Similarly to the strictly involutive identity types, this equivalence is a
+The computational identity types are equivalent to the Yoneda identity types,
+and similarly to the strictly involutive identity types, this equivalence is a
 strict [retraction](foundation-core.retractions.md) and preserves the
 reflexivities strictly.
 
@@ -129,7 +129,7 @@ module _
   computational-eq-yoneda-eq {x} f = (x , f , reflʸ)
 
   yoneda-eq-computational-eq : {x y : A} → x ＝ʲ y → x ＝ʸ y
-  yoneda-eq-computational-eq (z , p , q) = inv-yoneda-Id q ∙ʸ p
+  yoneda-eq-computational-eq (z , p , q) = invʸ q ∙ʸ p
 
   is-retraction-yoneda-eq-computational-eq :
     {x y : A} →
@@ -196,8 +196,9 @@ module _
 
 ### The computational identity types are equivalent to the standard identity types
 
-We define the equivalence as the composite `(x ＝ y) ≃ (x ＝ʸ y) ≃ (x ＝ʲ y)`.
-Since each of these equivalences preserve the groupoid structure weakly so does
+By the composite equivalence `(x ＝ y) ≃ (x ＝ʸ y) ≃ (x ＝ʲ y)`, the
+computational identity types are equivalent to the standard identity types.
+Since each of these equivalences preserve the groupoid structure weakly, so does
 the composite. For the same reason, it preserves the reflexivities strictly.
 
 ```agda
@@ -326,6 +327,8 @@ module _
       ( dependent-universal-property-identity-system-computational-Id B)
 ```
 
+### The strict recursion principle for the computational identity types
+
 Using the fact that the recusion principles of both the Yoneda identity types
 and the strictly involutive identity types can be defined to compute strictly,
 we obtain a strictly computing recursion principle for the computational
@@ -363,8 +366,8 @@ structure satisfies the following algebraic laws strictly
 
 - `(p ∙ʲ q) ∙ʲ r ≐ p ∙ʲ (q ∙ʲ r)`
 - `reflʲ ∙ʲ p ≐ p` or `p ∙ʲ reflʲ ≐ p`
-- `inv (inv p) ≐ p`
-- `inv reflʲ ≐ reflʲ`.
+- `invʲ (invʲ p) ≐ p`
+- `invʲ reflʲ ≐ reflʲ`.
 
 ### Inverting computational identifications
 
@@ -381,18 +384,16 @@ module _
   {l : Level} {A : UU l}
   where
 
-  inv-computational-Id : {x y : A} → x ＝ʲ y → y ＝ʲ x
-  inv-computational-Id (z , p , q) = (z , q , p)
+  invʲ : {x y : A} → x ＝ʲ y → y ＝ʲ x
+  invʲ (z , p , q) = (z , q , p)
 
-  compute-inv-computational-Id-refl :
-    {x : A} →
-    inv-computational-Id (reflʲ {x = x}) ＝
-    reflʲ
-  compute-inv-computational-Id-refl = refl
+  compute-inv-refl-computational-Id :
+    {x : A} → invʲ (reflʲ {x = x}) ＝ reflʲ
+  compute-inv-refl-computational-Id = refl
 
   inv-inv-computational-Id :
     {x y : A} (p : x ＝ʲ y) →
-    inv-computational-Id (inv-computational-Id p) ＝ p
+    invʲ (invʲ p) ＝ p
   inv-inv-computational-Id p = refl
 ```
 
@@ -406,12 +407,12 @@ module _
 
   preserves-inv-computational-eq-eq :
     (p : x ＝ y) →
-    computational-eq-eq (inv p) ＝ inv-computational-Id (computational-eq-eq p)
+    computational-eq-eq (inv p) ＝ invʲ (computational-eq-eq p)
   preserves-inv-computational-eq-eq refl = refl
 
   preserves-inv-eq-computational-eq :
     (p : x ＝ʲ y) →
-    eq-computational-eq (inv-computational-Id p) ＝ inv (eq-computational-eq p)
+    eq-computational-eq (invʲ p) ＝ inv (eq-computational-eq p)
   preserves-inv-eq-computational-eq (z , f , g) =
     ( ap (g y) (left-unit-right-strict-concat)) ∙
     ( distributive-inv-Id-yoneda-Id g f) ∙
@@ -421,14 +422,12 @@ module _
 ### The concatenation operations on computational identifications
 
 There is both a strictly left unital and a strictly right unital concatenation
-operation, while both are strictly associative.
-
-The strict one-sided unitality follows in both cases from the strict right
-unitality of the concatenation operation on the Yoneda identifications,
-following the same computation as for the strictly involutive identity types.
-
-For associativity on the other hand, we must use the strict associativity of the
-Yoneda identity types. We will write out the explicit computation later.
+operation, while both are strictly associative. The strict one-sided unitality
+follows in both cases from the strict right unitality of the concatenation
+operation on the Yoneda identifications, following the same computation as for
+the strictly involutive identity types. For associativity on the other hand, we
+must use the strict associativity of the Yoneda identity types. We will write
+out the explicit computation later.
 
 **Observation.** Since the concatenation operations are strictly associative,
 every string of concatenations containing reflexivities will reduce aside from
@@ -442,7 +441,7 @@ the strictly left unital concatenation operation for the strictly involutive
 identity types
 
 ```text
-  (w , p , q) ∙ʲ (w' , p' , q') := (w' , p' , q' ∙ʸ inv-yoneda-Id p ∙ʸ q)
+  (w , p , q) ∙ʲ (w' , p' , q') := (w' , p' , q' ∙ʸ invʸ p ∙ʸ q)
 ```
 
 ```agda
@@ -452,7 +451,7 @@ module _
 
   infixl 15 _∙ʲ_
   _∙ʲ_ : {x y z : A} → x ＝ʲ y → y ＝ʲ z → x ＝ʲ z
-  (w , p , q) ∙ʲ (w' , p' , q') = (w' , p' , q' ∙ʸ inv-yoneda-Id p ∙ʸ q)
+  (w , p , q) ∙ʲ (w' , p' , q') = (w' , p' , q' ∙ʸ invʸ p ∙ʸ q)
 
   concat-computational-Id : {x y : A} → x ＝ʲ y → (z : A) → y ＝ʲ z → x ＝ʲ z
   concat-computational-Id p z q = p ∙ʲ q
@@ -517,7 +516,7 @@ module _
 
   infixl 15 _∙ᵣʲ_
   _∙ᵣʲ_ : {x y z : A} → x ＝ʲ y → y ＝ʲ z → x ＝ʲ z
-  (w , p , q) ∙ᵣʲ (w' , p' , q') = (w , p ∙ʸ inv-yoneda-Id q' ∙ʸ p' , q)
+  (w , p , q) ∙ᵣʲ (w' , p' , q') = (w , p ∙ʸ invʸ q' ∙ʸ p' , q)
 
   right-strict-concat-computational-Id :
     {x y : A} → x ＝ʲ y → (z : A) → y ＝ʲ z → x ＝ʲ z
@@ -572,11 +571,11 @@ To see that `_∙ʲ_` is strictly associative, we unfold both `(P ∙ʲ Q) ∙ʲ
 ```text
   (P ∙ʲ Q) ∙ʲ R
   ≐ ((u , p , p') ∙ʲ (v , q , q')) ∙ʲ (w , r , r')
-  ≐ ((v , q , (q' ∙ʸ inv p) ∙ʸ p')) ∙ʲ (w , r , r')
-  ≐ (w , r , (r' ∙ʸ inv q) ∙ʸ ((q' ∙ʸ inv p) ∙ʸ p'))
+  ≐ ((v , q , (q' ∙ʸ invʸ p) ∙ʸ p')) ∙ʲ (w , r , r')
+  ≐ (w , r , (r' ∙ʸ invʸ q) ∙ʸ ((q' ∙ʸ invʸ p) ∙ʸ p'))
 
-  ≐ (w , r , (((r' ∙ʸ inv q) ∙ʸ q') ∙ʸ inv p) ∙ʸ p')
-  ≐ (u , p , p') ∙ʲ ((w , r , (r' ∙ʸ inv q) ∙ʸ q'))
+  ≐ (w , r , (((r' ∙ʸ invʸ q) ∙ʸ q') ∙ʸ invʸ p) ∙ʸ p')
+  ≐ (u , p , p') ∙ʲ ((w , r , (r' ∙ʸ invʸ q) ∙ʸ q'))
   ≐ (u , p , p') ∙ʲ ((v , q , q') ∙ʲ (w , r , r'))
   ≐ P ∙ʲ (Q ∙ʲ R).
 ```
@@ -608,35 +607,35 @@ module _
       ( p)
 
   left-inv-concat-computational-Id :
-    (p : x ＝ʲ y) → inv-computational-Id p ∙ʲ p ＝ reflʲ
+    (p : x ＝ʲ y) → invʲ p ∙ʲ p ＝ reflʲ
   left-inv-concat-computational-Id (z , p , q) =
     ind-yoneda-Id
       ( λ _ p →
-        ( inv-computational-Id (z , p , q) ∙ʲ (z , p , q)) ＝
+        ( invʲ (z , p , q) ∙ʲ (z , p , q)) ＝
         ( reflʲ))
       ( eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-yoneda-Id q)))
       ( p)
 
   right-inv-concat-computational-Id :
-    (p : x ＝ʲ y) → p ∙ʲ inv-computational-Id p ＝ reflʲ
+    (p : x ＝ʲ y) → p ∙ʲ invʲ p ＝ reflʲ
   right-inv-concat-computational-Id (z , p , q) =
     ind-yoneda-Id
       ( λ _ q →
-        ( (z , p , q) ∙ʲ inv-computational-Id (z , p , q)) ＝
+        ( (z , p , q) ∙ʲ invʲ (z , p , q)) ＝
         ( reflʲ))
       ( eq-pair-eq-fiber (eq-pair-eq-fiber (right-inv-yoneda-Id p)))
       ( q)
 
   distributive-inv-concat-computational-Id :
     (p : x ＝ʲ y) {z : A} (q : y ＝ʲ z) →
-    inv-computational-Id (p ∙ʲ q) ＝
-    inv-computational-Id q ∙ʲ inv-computational-Id p
+    invʲ (p ∙ʲ q) ＝
+    invʲ q ∙ʲ invʲ p
   distributive-inv-concat-computational-Id p =
     ind-computational-Id
       ( λ _ q →
-        inv-computational-Id (p ∙ʲ q) ＝
-        inv-computational-Id q ∙ʲ inv-computational-Id p)
-      ( ap inv-computational-Id (right-unit-concat-computational-Id))
+        invʲ (p ∙ʲ q) ＝
+        invʲ q ∙ʲ invʲ p)
+      ( ap invʲ (right-unit-concat-computational-Id))
 ```
 
 #### The groupoidal laws for the strictly right unital concatenation operation
@@ -666,28 +665,21 @@ module _
   left-unit-right-strict-concat-computational-Id :
     {p : x ＝ʲ y} → reflʲ ∙ᵣʲ p ＝ p
   left-unit-right-strict-concat-computational-Id {z , p , q} =
-    ind-yoneda-Id
-      ( λ _ q → reflʲ ∙ᵣʲ (z , p , q) ＝ (z , p , q))
-      ( refl)
-      ( q)
+    ind-yoneda-Id (λ _ q → reflʲ ∙ᵣʲ (z , p , q) ＝ (z , p , q)) refl q
 
   left-inv-right-strict-concat-computational-Id :
-    (p : x ＝ʲ y) → inv-computational-Id p ∙ᵣʲ p ＝ reflʲ
+    (p : x ＝ʲ y) → invʲ p ∙ᵣʲ p ＝ reflʲ
   left-inv-right-strict-concat-computational-Id (z , p , q) =
     ind-yoneda-Id
-      ( λ _ p →
-        ( inv-computational-Id (z , p , q) ∙ᵣʲ (z , p , q)) ＝
-        ( reflʲ))
+      ( λ _ p → invʲ (z , p , q) ∙ᵣʲ (z , p , q) ＝ reflʲ)
       ( eq-pair-eq-fiber (eq-pair (right-inv-yoneda-Id q) refl))
       ( p)
 
   right-inv-right-strict-concat-computational-Id :
-    (p : x ＝ʲ y) → p ∙ᵣʲ inv-computational-Id p ＝ reflʲ
+    (p : x ＝ʲ y) → p ∙ᵣʲ invʲ p ＝ reflʲ
   right-inv-right-strict-concat-computational-Id (z , p , q) =
     ind-yoneda-Id
-      ( λ _ q →
-        ( (z , p , q) ∙ᵣʲ inv-computational-Id (z , p , q)) ＝
-        ( reflʲ))
+      ( λ _ q → (z , p , q) ∙ᵣʲ invʲ (z , p , q) ＝ reflʲ)
       ( eq-pair-eq-fiber (eq-pair (right-inv-yoneda-Id p) refl))
       ( q)
 
@@ -696,14 +688,10 @@ module _
   where
 
   distributive-inv-right-strict-concat-computational-Id :
-    (p : x ＝ʲ y) {z : A} (q : y ＝ʲ z) →
-    inv-computational-Id (p ∙ᵣʲ q) ＝
-    inv-computational-Id q ∙ᵣʲ inv-computational-Id p
+    (p : x ＝ʲ y) {z : A} (q : y ＝ʲ z) → invʲ (p ∙ᵣʲ q) ＝ invʲ q ∙ᵣʲ invʲ p
   distributive-inv-right-strict-concat-computational-Id p =
     ind-computational-Id
-      ( λ _ q →
-        inv-computational-Id (p ∙ᵣʲ q) ＝
-        inv-computational-Id q ∙ᵣʲ inv-computational-Id p)
+      ( λ _ q → invʲ (p ∙ᵣʲ q) ＝ invʲ q ∙ᵣʲ invʲ p)
       ( inv left-unit-right-strict-concat-computational-Id)
 ```
 
@@ -726,10 +714,10 @@ module _
   ap-computational-Id =
     computational-eq-yoneda-eq ∘ ap-yoneda-Id f ∘ yoneda-eq-computational-eq
 
-  compute-ap-reflʲ :
+  compute-ap-refl-computational-Id :
     {x : A} →
     ap-computational-Id (reflʲ {x = x}) ＝ reflʲ
-  compute-ap-reflʲ = refl
+  compute-ap-refl-computational-Id = refl
 
 module _
   {l1 : Level} {A : UU l1}
@@ -754,9 +742,9 @@ module _
   tr-computational-Id : {x y : A} → x ＝ʲ y → B x → B y
   tr-computational-Id = tr B ∘ eq-computational-eq
 
-  compute-tr-reflʲ :
+  compute-tr-refl-computational-Id :
     {x : A} → tr-computational-Id (reflʲ {x = x}) ＝ id
-  compute-tr-reflʲ = refl
+  compute-tr-refl-computational-Id = refl
 ```
 
 ### Function extensionality with respect to computational identifications

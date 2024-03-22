@@ -91,7 +91,7 @@ module _
       ( eq-htpy)
       ( ap (precomp-Π f C) {g} {h})
   compute-eq-htpy-ap-precomp-Π =
-    coherence-square-maps-inv-equiv-vertical
+    vertical-inv-equiv-coherence-square-maps
       ( ap (precomp-Π f C))
       ( equiv-funext)
       ( equiv-funext)

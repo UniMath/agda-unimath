@@ -120,7 +120,7 @@ tr-Id-left refl p = refl
 tr-Id-right :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
   tr (a ＝_) q p ＝ (p ∙ q)
-tr-Id-right refl refl = refl
+tr-Id-right refl p = inv right-unit
 ```
 
 ### Substitution law for transport

@@ -143,7 +143,7 @@ module _
   compute-fiber-precomp g = compute-coherence-triangle-fiber-precomp (g ∘ f)
 
   compute-total-fiber-precomp :
-    Σ ( B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃
+    Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃
     Σ (B → X) (λ u → Σ (B → X) (λ v → u ∘ f ~ v ∘ f))
   compute-total-fiber-precomp = equiv-tot compute-fiber-precomp
 
@@ -206,7 +206,7 @@ module _
       ( eq-htpy)
       ( ap (precomp f C))
   compute-eq-htpy-ap-precomp =
-    coherence-square-maps-inv-equiv-vertical
+    vertical-inv-equiv-coherence-square-maps
       ( ap (precomp f C))
       ( equiv-funext)
       ( equiv-funext)

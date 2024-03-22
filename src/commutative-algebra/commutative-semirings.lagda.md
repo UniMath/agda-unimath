@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -26,27 +27,38 @@ open import ring-theory.semirings
 
 ## Idea
 
-A semiring `A` is said to be **commutative** if its multiplicative operation is
-commutative, i.e., if `xy = yx` for all `x, y ∈ A`.
+A [semiring](ring-theory.semirings.md) `A` is said to be
+{{#concept "commutative" Disambiguation="semiring" Agda=is-commutative-Semiring}}
+if its multiplicative operation is commutative, i.e., if `xy = yx` for all
+`x, y ∈ A`.
 
-## Definition
+## Definitions
 
-### Main definition
+### The predicate on semirings of being commutative
 
 ```agda
-is-commutative-Semiring : {l : Level} → Semiring l → UU l
-is-commutative-Semiring A =
-  (x y : type-Semiring A) → mul-Semiring A x y ＝ mul-Semiring A y x
+module _
+  {l : Level} (A : Semiring l)
+  where
 
-is-prop-is-commutative-Semiring :
-  { l : Level} (A : Semiring l) → is-prop (is-commutative-Semiring A)
-is-prop-is-commutative-Semiring A =
-  is-prop-Π
-    ( λ x →
-      is-prop-Π
-      ( λ y →
-        is-set-type-Semiring A (mul-Semiring A x y) (mul-Semiring A y x)))
+  is-commutative-Semiring : UU l
+  is-commutative-Semiring =
+    (x y : type-Semiring A) → mul-Semiring A x y ＝ mul-Semiring A y x
 
+  is-prop-is-commutative-Semiring : is-prop is-commutative-Semiring
+  is-prop-is-commutative-Semiring =
+    is-prop-iterated-Π 2
+      ( λ x y →
+        is-set-type-Semiring A (mul-Semiring A x y) (mul-Semiring A y x))
+
+  is-commutative-prop-Semiring : Prop l
+  is-commutative-prop-Semiring =
+    ( is-commutative-Semiring , is-prop-is-commutative-Semiring)
+```
+
+### The type of commutative semirings
+
+```agda
 Commutative-Semiring :
   ( l : Level) → UU (lsuc l)
 Commutative-Semiring l = Σ (Semiring l) is-commutative-Semiring

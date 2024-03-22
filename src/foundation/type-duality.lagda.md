@@ -31,6 +31,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.small-types
+open import foundation-core.torsorial-type-families
 
 open import trees.polynomial-endofunctors
 ```

@@ -128,8 +128,10 @@ ind-Id x B b y refl = b
 
 The identity types form a weak groupoidal structure on types. Thus they come
 equipped with
-{{#concept "concatenation" Disambiguation="identifications" Agda=concat]} `(x ＝ y) → (y ＝ z) → (x ＝ z)` and an
-{{#concept "inverse" Disambiguation="identification" Agda=inv}} operation `(x ＝ y) → (y ＝ x)`.
+{{#concept "concatenation" Disambiguation="identifications" Agda=concat}}
+`(x ＝ y) → (y ＝ z) → (x ＝ z)` and an
+{{#concept "inverse" Disambiguation="identification" Agda=inv}} operation
+`(x ＝ y) → (y ＝ x)`.
 
 There are many more operations on identity types. Some of them are defined in
 [path algebra](foundation.path-algebra.md) and
@@ -229,6 +231,8 @@ use of the fact that the identity types are defined _for all types_. In other
 words, since identity types are themselves types, we can consider identity types
 of identity types, and so on.
 
+#### Associators
+
 ```agda
 module _
   {l : Level} {A : UU l}
@@ -262,6 +266,21 @@ module _
   {l : Level} {A : UU l}
   where
 
+  double-assoc :
+    {x y z w v : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) (s : w ＝ v) →
+    (((p ∙ q) ∙ r) ∙ s) ＝ p ∙ (q ∙ (r ∙ s))
+  double-assoc refl q r s = assoc q r s
+
+  triple-assoc :
+    {x y z w v u : A}
+    (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) (s : w ＝ v) (t : v ＝ u) →
+    ((((p ∙ q) ∙ r) ∙ s) ∙ t) ＝ p ∙ (q ∙ (r ∙ (s ∙ t)))
+  triple-assoc refl q r s t = double-assoc q r s t
+```
+
+#### Unit laws
+
+```agda
   left-unit : {x y : A} {p : x ＝ y} → refl ∙ p ＝ p
   left-unit = refl
 
@@ -385,10 +404,20 @@ module _
     p ∙ q ＝ r → q ＝ inv p ∙ r
   left-transpose-eq-concat refl q r s = s
 
+  inv-left-transpose-eq-concat :
+    {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z) (r : x ＝ z) →
+    q ＝ inv p ∙ r → p ∙ q ＝ r
+  inv-left-transpose-eq-concat refl q r s = s
+
   right-transpose-eq-concat :
     {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z) (r : x ＝ z) →
     p ∙ q ＝ r → p ＝ r ∙ inv q
   right-transpose-eq-concat p refl r s = (inv right-unit ∙ s) ∙ inv right-unit
+
+  inv-right-transpose-eq-concat :
+    {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z) (r : x ＝ z) →
+    p ＝ r ∙ inv q → p ∙ q ＝ r
+  inv-right-transpose-eq-concat p refl r s = right-unit ∙ (s ∙ right-unit)
 
   double-transpose-eq-concat :
     {x y u v : A} (r : x ＝ u) (p : x ＝ y) (s : u ＝ v) (q : y ＝ v) →

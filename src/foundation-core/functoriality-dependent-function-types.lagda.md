@@ -79,7 +79,7 @@ abstract
 
 equiv-Π-equiv-family :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (e : (i : I) → (A i) ≃ (B i)) → ((i : I) → A i) ≃ ((i : I) → B i)
+  (e : (i : I) → A i ≃ B i) → ((i : I) → A i) ≃ ((i : I) → B i)
 pr1 (equiv-Π-equiv-family e) =
   map-Π (λ i → map-equiv (e i))
 pr2 (equiv-Π-equiv-family e) =
@@ -133,7 +133,6 @@ module _
   [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.md).
 - Equality proofs in dependent function types are characterized in
   [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
-
 - Functorial properties of function types are recorded in
   [`foundation.functoriality-function-types`](foundation.functoriality-function-types.md).
 - Functorial properties of dependent pair types are recorded in

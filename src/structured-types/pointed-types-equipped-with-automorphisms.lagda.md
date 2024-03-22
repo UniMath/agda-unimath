@@ -66,18 +66,18 @@ module _
     type-Pointed-Type-With-Aut → type-Pointed-Type-With-Aut
   map-aut-Pointed-Type-With-Aut = map-equiv aut-Pointed-Type-With-Aut
 
-  inv-map-aut-Pointed-Type-With-Aut :
+  map-inv-aut-Pointed-Type-With-Aut :
     type-Pointed-Type-With-Aut → type-Pointed-Type-With-Aut
-  inv-map-aut-Pointed-Type-With-Aut = map-inv-equiv aut-Pointed-Type-With-Aut
+  map-inv-aut-Pointed-Type-With-Aut = map-inv-equiv aut-Pointed-Type-With-Aut
 
-  is-section-inv-map-aut-Pointed-Type-With-Aut :
-    (map-aut-Pointed-Type-With-Aut ∘ inv-map-aut-Pointed-Type-With-Aut) ~ id
-  is-section-inv-map-aut-Pointed-Type-With-Aut =
+  is-section-map-inv-aut-Pointed-Type-With-Aut :
+    (map-aut-Pointed-Type-With-Aut ∘ map-inv-aut-Pointed-Type-With-Aut) ~ id
+  is-section-map-inv-aut-Pointed-Type-With-Aut =
     is-section-map-inv-equiv aut-Pointed-Type-With-Aut
 
-  is-retraction-inv-map-aut-Pointed-Type-With-Aut :
-    (inv-map-aut-Pointed-Type-With-Aut ∘ map-aut-Pointed-Type-With-Aut) ~ id
-  is-retraction-inv-map-aut-Pointed-Type-With-Aut =
+  is-retraction-map-inv-aut-Pointed-Type-With-Aut :
+    (map-inv-aut-Pointed-Type-With-Aut ∘ map-aut-Pointed-Type-With-Aut) ~ id
+  is-retraction-map-inv-aut-Pointed-Type-With-Aut =
     is-retraction-map-inv-equiv aut-Pointed-Type-With-Aut
 ```
 

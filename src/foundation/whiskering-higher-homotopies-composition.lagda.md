@@ -27,9 +27,9 @@ family of maps `h : (x : A) → B x → C x`. Then we obtain a map
 ```
 
 This operation is called the
-{{#concept "left whiskering" Disambiguation="2-homotopies with respect to composition" Agda=left-whisker-comp²}}.
-Alternatively the left whiskering operation of 2-homotopies can be defined using
-the
+{{#concept "left whiskering" Disambiguation="`2`-homotopies with respect to composition" Agda=left-whisker-comp²}}.
+Alternatively the left whiskering operation of `2`-homotopies can be defined
+using the
 [action on higher identifications of functions](foundation.action-on-higher-identifications-functions.md)
 by
 
@@ -37,9 +37,9 @@ by
   α x ↦ ap² h (α x).
 ```
 
-Similarly, the {{#concept "right whiskering" Disambiguation="2-homotopies with
-respect to composition" Agda=right-whisker-comp²]} is defined to be the
-operation
+Similarly, the
+{{#concept "right whiskering" Disambiguation="2-homotopies with respect to composition" Agda=right-whisker-comp²}}
+is defined to be the operation
 
 ```text
   (H ~ H') → (h : (x : A) → B x) → (H ·r h ~ H' ·r h)
@@ -80,4 +80,21 @@ module _
   right-whisker-comp² :
     (α : {x : A} → H {x} ~ H' {x}) (h : (x : A) → B x) → H ·r h ~ H' ·r h
   right-whisker-comp² α h = α ·r h
+```
+
+### Double whiskering higher homotopies
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}
+  {C : (x : A) → B x → UU l3} {D : (x : A) → B x → UU l4}
+  {f g : {x : A} (y : B x) → C x y} {H H' : {x : A} → f {x} ~ g {x}}
+  where
+
+  double-whisker-comp² :
+    (left : {x : A} {y : B x} → C x y → D x y)
+    (α : {x : A} → H {x} ~ H' {x})
+    (right : (x : A) → B x) →
+    left ·l H ·r right ~ left ·l H' ·r right
+  double-whisker-comp² left α right = double-whisker-comp (ap left) α right
 ```

@@ -53,23 +53,32 @@ commutative, i.e., if `xy = yx` for all `x, y ∈ A`.
 
 ## Definition
 
+### The predicate on rings of being commutative
+
+```agda
+module _
+  {l : Level} (A : Ring l)
+  where
+
+  is-commutative-Ring : UU l
+  is-commutative-Ring =
+    (x y : type-Ring A) → mul-Ring A x y ＝ mul-Ring A y x
+
+  is-prop-is-commutative-Ring : is-prop is-commutative-Ring
+  is-prop-is-commutative-Ring =
+    is-prop-Π
+      ( λ x →
+        is-prop-Π
+        ( λ y →
+          is-set-type-Ring A (mul-Ring A x y) (mul-Ring A y x)))
+
+  is-commutative-prop-Ring : Prop l
+  is-commutative-prop-Ring = is-commutative-Ring , is-prop-is-commutative-Ring
+```
+
 ### Commutative rings
 
 ```agda
-is-commutative-Ring :
-  { l : Level} → Ring l → UU l
-is-commutative-Ring A =
-  (x y : type-Ring A) → mul-Ring A x y ＝ mul-Ring A y x
-
-is-prop-is-commutative-Ring :
-  { l : Level} (A : Ring l) → is-prop (is-commutative-Ring A)
-is-prop-is-commutative-Ring A =
-  is-prop-Π
-    ( λ x →
-      is-prop-Π
-      ( λ y →
-        is-set-type-Ring A (mul-Ring A x y) (mul-Ring A y x)))
-
 Commutative-Ring :
   ( l : Level) → UU (lsuc l)
 Commutative-Ring l = Σ (Ring l) is-commutative-Ring
@@ -127,7 +136,7 @@ module _
   additive-semigroup-Commutative-Ring = semigroup-Ab ab-Commutative-Ring
 
   is-group-additive-semigroup-Commutative-Ring :
-    is-group additive-semigroup-Commutative-Ring
+    is-group-Semigroup additive-semigroup-Commutative-Ring
   is-group-additive-semigroup-Commutative-Ring =
     is-group-Ab ab-Commutative-Ring
 
@@ -278,7 +287,9 @@ module _
 
 ```agda
   has-negatives-Commutative-Ring :
-    is-group' additive-semigroup-Commutative-Ring has-zero-Commutative-Ring
+    is-group-is-unital-Semigroup
+      ( additive-semigroup-Commutative-Ring)
+      ( has-zero-Commutative-Ring)
   has-negatives-Commutative-Ring = has-negatives-Ab ab-Commutative-Ring
 
   neg-Commutative-Ring : type-Commutative-Ring → type-Commutative-Ring

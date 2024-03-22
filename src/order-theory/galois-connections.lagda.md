@@ -545,5 +545,4 @@ module _
 
 ## References
 
-- Erné, Koslowski, Melton, Strecker. _A primer on Galois connections_. Annals
-  New York Academy of Sciences 704 (1993)
+{{#bibliography}} {{#reference EKMS93}}
