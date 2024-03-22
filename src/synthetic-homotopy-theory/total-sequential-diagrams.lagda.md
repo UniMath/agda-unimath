@@ -1,4 +1,4 @@
-# Total diagrams of dependent sequential diagrams
+# Total sequential diagrams of dependent sequential diagrams
 
 ```agda
 module synthetic-homotopy-theory.total-sequential-diagrams where
@@ -27,13 +27,17 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits
 
 ## Idea
 
-The {{#concept "total diagram" Disambiguation="dependent sequential diagrams"}}
-of a dependent sequential diagram `B : (A, a) → 𝒰` is the sequential diagram
-consisting of total spaces `Σ Aₙ Bₙ`.
+The
+{{#concept "total diagram" Disambiguation="dependent sequential diagrams" Agda=total-sequential-diagram}}
+of a
+[dependent sequential diagram](synthetic-homotopy-theory.dependent-sequential-diagrams.md)
+`B : (A, a) → 𝒰` is the
+[sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
+consisting of [total spaces](foundation.dependent-pair-types.md) `Σ Aₙ Bₙ`.
 
 ## Definitions
 
-### Total sequential diagram of a dependent sequential diagram
+### The total sequential diagram of a dependent sequential diagram
 
 ```agda
 module _

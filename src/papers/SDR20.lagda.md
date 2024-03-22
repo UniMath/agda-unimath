@@ -69,13 +69,12 @@ open import foundation.connected-maps using
 
 ## 3 Sequences and Sequential Colimits
 
-The third section defines what one might call the (wild) category of sequences
-(which are called _sequential diagrams_ in agda-unimath) and the colimiting
-functor. It concludes by defining shifts of sequences, showing that they induce
-equivalences on sequential colimits, and defines lifts of elements in a
-sequential diagram.
+The third section defines categorical properties of sequences (which are called
+_sequential diagrams_ in agda-unimath) and the colimiting functor. It concludes
+by defining shifts of sequences, showing that they induce equivalences on
+sequential colimits, and defines lifts of elements in a sequential diagram.
 
-**Definition 3.1**: Sequences.
+**Definition 3.1.** Sequences.
 
 ```agda
 open import synthetic-homotopy-theory.sequential-diagrams using
@@ -83,7 +82,7 @@ open import synthetic-homotopy-theory.sequential-diagrams using
   )
 ```
 
-**Definition 3.2**: Sequential colimits and their induction and recursion
+**Definition 3.2.** Sequential colimits and their induction and recursion
 principles.
 
 Induction and recursion are given by the dependent and non-dependent universal
@@ -106,7 +105,7 @@ open import synthetic-homotopy-theory.sequential-colimits using
   )
 ```
 
-**Lemma 3.3**: Uniqueness property of the sequential colimit.
+**Lemma 3.3.** Uniqueness property of the sequential colimit.
 
 The data of a homotopy between two functions out of the standard sequential
 colimit is specified by the type `htpy-out-of-standard-sequential-colimit`,
@@ -119,7 +118,7 @@ open import synthetic-homotopy-theory.sequential-colimits using
   )
 ```
 
-**Definition 3.4**: Natural transformations and natural equivalences between
+**Definition 3.4.** Natural transformations and natural equivalences between
 sequential diagrams.
 
 We call natural transformations _morphisms of sequential diagrams_, and natural
@@ -136,7 +135,7 @@ open import synthetic-homotopy-theory.equivalences-sequential-diagrams using
   )
 ```
 
-**Lemma 3.5**: Functoriality of the Sequential Colimit.
+**Lemma 3.5.** Functoriality of the Sequential Colimit.
 
 ```agda
 open import synthetic-homotopy-theory.functoriality-sequential-colimits using
@@ -148,10 +147,10 @@ open import synthetic-homotopy-theory.functoriality-sequential-colimits using
   )
 ```
 
-**Lemma 3.6**: Dropping a head of a sequential diagram preserves the sequential
+**Lemma 3.6.** Dropping a head of a sequential diagram preserves the sequential
 colimit.
 
-**Lemma 3.7**: Dropping finitely many vertices from the beginning of a
+**Lemma 3.7.** Dropping finitely many vertices from the beginning of a
 sequential diagram preserves the sequential colimit.
 
 Denoting by `A[k]` the sequence `A` with the first `k` vertices removed, we show
@@ -179,7 +178,7 @@ interplay between Σ and taking the colimit.
 The paper defines fibered sequences as a family over the total space
 `B : Σ ℕ A → 𝒰`, but we use the curried definition `B : (n : ℕ) → A(n) → 𝒰`.
 
-**Definition 4.1**: Fibered sequences. Equifibered sequences.
+**Definition 4.1.** Fibered sequences. Equifibered sequences.
 
 ```agda
 open import synthetic-homotopy-theory.dependent-sequential-diagrams using
@@ -187,7 +186,7 @@ open import synthetic-homotopy-theory.dependent-sequential-diagrams using
   )
 ```
 
-**Lemma 4.2**: The type of families over a colimit is equivalent to the type of
+**Lemma 4.2.** The type of families over a colimit is equivalent to the type of
 equifibered sequences.
 
 This property is also called the _descent property of sequential colimits_,
@@ -197,7 +196,7 @@ because it characterizes families over a sequential colimit.
 -- TODO
 ```
 
-**Definition 4.3**: Σ of a fibered sequence.
+**Definition 4.3.** Σ of a fibered sequence.
 
 ```agda
 open import synthetic-homotopy-theory.total-sequential-diagrams using
@@ -210,7 +209,7 @@ TODO: (C∞, c∞).
 
 ## 5 Colimits and Sums
 
-**Theorem 5.1**: Interaction between `colim` and `Σ`.
+**Theorem 5.1.** Interaction between `colim` and `Σ`.
 
 ```agda
 -- TODO
@@ -224,19 +223,19 @@ TODO: (C∞, c∞).
 
 ## 7 Applications of the Main Theorem
 
-**Lemma 7.1**: TODO description.
+**Lemma 7.1.** TODO description.
 
 ```agda
 -- TODO
 ```
 
-**Lemma 7.2**: Colimit of the terminal sequential diagram is contractible.
+**Lemma 7.2.** Colimit of the terminal sequential diagram is contractible.
 
 ```agda
 -- TODO
 ```
 
-**Lemma 7.3**: Encode-decode.
+**Lemma 7.3.** Encode-decode.
 
 This principle is called the _Fundamental theorem of identity types_ in the
 library.
@@ -246,21 +245,21 @@ open import foundation.fundamental-theorem-of-identity-types using
   ( fundamental-theorem-id)
 ```
 
-**Lemma 7.4**: Characterization of path spaces of images of the canonical maps
+**Lemma 7.4.** Characterization of path spaces of images of the canonical maps
 into the sequential colimit.
 
 ```agda
 -- TODO
 ```
 
-**Corollary 7.5**: The loop space of a sequential colimit is the sequential
+**Corollary 7.5.** The loop space of a sequential colimit is the sequential
 colimit of loop spaces.
 
 ```agda
 -- TODO
 ```
 
-**Corollary 7.6**: For a morphism of sequential diagrams, the fibers of the
+**Corollary 7.6.** For a morphism of sequential diagrams, the fibers of the
 induced map between sequential colimits are characterized as sequential colimits
 of the fibers.
 
@@ -268,28 +267,28 @@ of the fibers.
 -- TODO
 ```
 
-**Corollary 7.7.1**: If each type in a sequential diagram is `k`-truncated, then
+**Corollary 7.7.1.** If each type in a sequential diagram is `k`-truncated, then
 the colimit is `k`-truncated.
 
 ```agda
 -- TODO
 ```
 
-**Corollary 7.7.2**: The `k`-truncation of a sequential colimit is the
+**Corollary 7.7.2.** The `k`-truncation of a sequential colimit is the
 sequential colimit of `k`-truncations.
 
 ```agda
 -- TODO
 ```
 
-**Corollary 7.7.3**: If each type in a sequential diagram is `k`-connected, then
+**Corollary 7.7.3.** If each type in a sequential diagram is `k`-connected, then
 the colimit is `k`-connected.
 
 ```agda
 -- TODO
 ```
 
-**Corollary 7.7.4**: If each component of a morphism between sequential diagrams
+**Corollary 7.7.4.** If each component of a morphism between sequential diagrams
 is `k`-truncated/`k`-connected, then the induced map of sequential colimits is
 `k`-truncated/`k`-connected.
 
@@ -297,7 +296,7 @@ is `k`-truncated/`k`-connected, then the induced map of sequential colimits is
 -- TODO
 ```
 
-**Corollary 7.7.5**: If each map in a sequential diagram is
+**Corollary 7.7.5.** If each map in a sequential diagram is
 `k`-truncated/`k`-connected, then the first injection into the colimit is
 `k`-truncated/`k`-connected.
 
