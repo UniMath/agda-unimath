@@ -42,7 +42,7 @@ module _
 ### The predicate of being a reflexive relation valued in propositions
 
 A relation `R` on a type `A` valued in propositions is said to be _reflexive_ if
-its underlying relation is reflexive
+its underlying relation is reflexive.
 
 ```agda
 module _
