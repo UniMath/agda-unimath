@@ -75,7 +75,6 @@ open import foundation.constant-span-diagrams public
 open import foundation.constant-type-families public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
-open import foundation.contratransitive-binary-relations public
 open import foundation.copartial-elements public
 open import foundation.copartial-functions public
 open import foundation.coproduct-decompositions public
@@ -255,6 +254,7 @@ open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public
 open import foundation.operations-spans-families-of-types public
 open import foundation.opposite-spans public
+open import foundation.outer-2-horn-filler-conditions-binary-relations public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
 open import foundation.partial-functions public
