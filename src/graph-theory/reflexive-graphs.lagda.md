@@ -40,10 +40,6 @@ module _
   refl-Reflexive-Graph = pr2 (pr2 G)
 ```
 
-## See also
-
-- [Large reflexive graphs](graph-theory.large-reflexive-graphs.md)
-
 ## External links
 
 - [Reflexive graph](https://ncatlab.org/nlab/show/reflexive+graph) at $n$Lab
