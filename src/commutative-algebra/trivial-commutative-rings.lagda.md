@@ -8,12 +8,14 @@ module commutative-algebra.trivial-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.isomorphisms-commutative-rings
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
+open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -101,8 +103,11 @@ is-commutative-0-Ring = λ x y → refl
 
 0-cRing : Commutative-Ring lzero
 0-cRing = 0-ring , is-commutative-0-Ring
+
+is-trivial-0-cRing : is-trivial-Commutative-Ring 0-cRing
+is-trivial-0-cRing = refl
 ```
 
-To-do: Show that 0-ring is an appropriate center of contraction for the type of
-trivial rings, and hence the type of trivial commutative rings. This requires
-classifying identity types of rings with the structure identity principle.
+To-do: complete proof of uniqueness of the zero ring using SIP, ideally refactor
+code to do zero algebras all along the chain to prettify and streamline future
+work
