@@ -132,6 +132,14 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
         index_entry['wikidata'] = wikidata_id
         # index_entry['link'] = f'{url_path}#{wikidata_id}'
         target_id = wikidata_id
+
+        if wikidata_label is not None:
+            index_entry['__wikidata_label'] = wikidata_label
+        else:
+            eprint('Warning: Wikidata identifier', wikidata_id,
+                   'provided for "' + entry_name + '"',
+                   'without a corresponding label in', path)
+            mut_error_locations.add(path)
         # Useful if we wanted to link to a concept by WDID and give information
         # to scrapers; currently we don't really want either
         # anchor += f'<a id="{target_id}" class="wikidata"><span style="display:none">{plaintext}</span></a>'
@@ -160,8 +168,6 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
     #   as we can get
     index_entry['id'] = index_entry['link']
     references.append(sup_link_reference(f'#{target_id}', '¶', False))
-    if wikidata_label is not None:
-        index_entry['__wikidata_label'] = wikidata_label
     mut_index.append(index_entry)
     return f'{anchor}<b>{text}</b>{"".join(reversed(references))}'
 
