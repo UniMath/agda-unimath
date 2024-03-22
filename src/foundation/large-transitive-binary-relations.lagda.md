@@ -1,4 +1,4 @@
-# Large ransitive binary relations
+# Large transitive binary relations
 
 ```agda
 module foundation.large-transitive-binary-relations where
