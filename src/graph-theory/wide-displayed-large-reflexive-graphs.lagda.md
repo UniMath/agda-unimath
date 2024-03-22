@@ -22,7 +22,7 @@ open import graph-theory.reflexive-graphs
 ## Idea
 
 A
-{{#concept "'wide' displayed large reflexive graph" Agda=Wide-Displayed-Large-Reflexive-Graph}}
+{{#concept "wide displayed large reflexive graph" Agda=Wide-Displayed-Large-Reflexive-Graph}}
 is a
 [displayed large reflexive graph](graph-theory.displayed-large-reflexive-graphs.md)
 over a base [large reflexive graph](graph-theory.large-reflexive-graphs.md) `G`
