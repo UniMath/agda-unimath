@@ -83,7 +83,9 @@ module _
 
   refl-total-large-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph :
     {l : Level}
-    (x : vertex-total-large-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph l) →
+    (x :
+      vertex-total-large-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph
+        l) →
     edge-total-large-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph x x
   refl-total-large-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph x =
     ( refl-Large-Reflexive-Graph G x ,
@@ -115,8 +117,10 @@ module _
   fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph :
     Reflexive-Graph lzero (β2 l l)
   pr1 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph = unit
-  pr1 (pr2 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph) _ _ =
+  pr1 (pr2 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph)
+    _ _ =
     edge-Wide-Displayed-Large-Reflexive-Graph H (refl-Large-Reflexive-Graph G x)
-  pr2 (pr2 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph) _ =
+  pr2 (pr2 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph)
+    _ =
     refl-Wide-Displayed-Large-Reflexive-Graph H x
 ```
