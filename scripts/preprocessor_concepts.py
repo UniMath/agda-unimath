@@ -30,10 +30,26 @@ EXTERNAL_LINKS_REGEX = re.compile(
 
 LEFTOVER_CONCEPT_REGEX = re.compile(r'\{\{#concept.*')
 
+# Python's html.escape transforms a single quote into &#x27;, but Agda
+# transforms it into &#39;, so we just rewrite the replacement ourselves.
+#
+# https://github.com/jaspervdj/blaze-markup/blob/master/src/Text/Blaze/Renderer/String.hs#L25
+ESCAPE_TRANSLATION_TABLE = str.maketrans({
+    '<': '&lt;',
+    '>': '&gt;',
+    '&': '&amp;',
+    '"': '&quot;',
+    "'": '&#39;'
+})
+
+
+def agda_escape_html(string):
+    return string.translate(ESCAPE_TRANSLATION_TABLE)
+
 
 def make_definition_regex(definition):
     return re.compile(
-        r'<a id="(\d+)" href="[^"]+" class="[^"]+">' + re.escape(definition) + r'</a>')
+        r'<a id="(\d+)" href="[^"]+" class="[^"]+">' + re.escape(agda_escape_html(definition)) + r'</a>')
 
 
 def does_support(backend):
