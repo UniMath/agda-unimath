@@ -128,12 +128,16 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
     target = ''
     target_id = f'concept-{slugify_markdown(plaintext)}'
     references = []
-    if wikidata_id is not None and wikidata_id != 'NA':
+
+    has_wikidata_id = wikidata_id is not None and wikidata_id != 'NA'
+    has_wikidata_label = wikidata_label is not None
+
+    if has_wikidata_id:
         index_entry['wikidata'] = wikidata_id
         # index_entry['link'] = f'{url_path}#{wikidata_id}'
         target_id = wikidata_id
 
-        if wikidata_label is not None:
+        if has_wikidata_label:
             index_entry['__wikidata_label'] = wikidata_label
         else:
             eprint('Warning: Wikidata identifier', wikidata_id,
@@ -147,6 +151,12 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
         # TODO: decide if we want this
         # references.append(sup_link_reference(config.get(
         #     'mathswitch-template').format(wikidata_id=wikidata_id), 'WD', True, True))
+    else:
+        if has_wikidata_label:
+            eprint('Warning: Wikidata label', wikidata_label,
+                   'provided for "' + entry_name + '"',
+                   'without a corresponding identifier in', path)
+            mut_error_locations.add(path)
     if agda_name is not None:
         target_id = f'concept-{agda_name}'
         agda_id = get_definition_id(agda_name, initial_content)
