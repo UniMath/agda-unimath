@@ -8,6 +8,7 @@ module order-theory.dependent-products-large-meet-semilattices where
 
 ```agda
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -111,7 +112,6 @@ module _
 
   leq-Π-Large-Meet-Semilattice :
     Large-Relation
-      ( λ l1 → α l1 ⊔ l)
       ( λ l1 l2 → β l1 l2 ⊔ l)
       ( type-Π-Large-Meet-Semilattice)
   leq-Π-Large-Meet-Semilattice =

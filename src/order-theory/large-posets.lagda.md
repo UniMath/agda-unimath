@@ -16,6 +16,7 @@ open import category-theory.precategories
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -58,10 +59,10 @@ module _
   type-Large-Poset : (l : Level) → UU (α l)
   type-Large-Poset = type-Large-Preorder (large-preorder-Large-Poset X)
 
-  leq-prop-Large-Poset : Large-Relation-Prop α β (type-Large-Poset)
+  leq-prop-Large-Poset : Large-Relation-Prop β (type-Large-Poset)
   leq-prop-Large-Poset = leq-prop-Large-Preorder (large-preorder-Large-Poset X)
 
-  leq-Large-Poset : Large-Relation α β (type-Large-Poset)
+  leq-Large-Poset : Large-Relation β (type-Large-Poset)
   leq-Large-Poset = leq-Large-Preorder (large-preorder-Large-Poset X)
 
   is-prop-leq-Large-Poset :

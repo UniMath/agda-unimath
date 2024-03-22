@@ -10,6 +10,7 @@ module structured-types.large-reflexive-globular-types where
 
 ```agda
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.universe-levels
 
 open import structured-types.large-globular-types

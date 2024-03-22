@@ -21,6 +21,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations

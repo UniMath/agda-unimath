@@ -9,6 +9,7 @@ module order-theory.powers-of-large-locales where
 ```agda
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -61,7 +62,6 @@ module _
 
   leq-prop-power-Large-Locale :
     Large-Relation-Prop
-      ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-power-Large-Locale)
   leq-prop-power-Large-Locale =
@@ -69,7 +69,6 @@ module _
 
   leq-power-Large-Locale :
     Large-Relation
-      ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-power-Large-Locale)
   leq-power-Large-Locale =

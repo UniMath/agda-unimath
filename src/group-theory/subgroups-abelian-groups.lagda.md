@@ -14,6 +14,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.propositions
 open import foundation.reflexive-relations
 open import foundation.sets

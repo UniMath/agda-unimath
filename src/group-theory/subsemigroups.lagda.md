@@ -12,6 +12,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets

@@ -12,6 +12,7 @@ module structured-types.reflexive-globular-types where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.reflexive-relations
 open import foundation.universe-levels
 
 open import structured-types.globular-types

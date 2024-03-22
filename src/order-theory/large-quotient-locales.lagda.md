@@ -9,6 +9,7 @@ module order-theory.large-quotient-locales where
 ```agda
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
@@ -103,12 +104,12 @@ module _
     type-Large-Subframe L Q
 
   leq-prop-Large-Quotient-Locale :
-    Large-Relation-Prop (λ l → α l ⊔ δ l) β type-Large-Quotient-Locale
+    Large-Relation-Prop β type-Large-Quotient-Locale
   leq-prop-Large-Quotient-Locale =
     leq-prop-Large-Subframe L Q
 
   leq-Large-Quotient-Locale :
-    Large-Relation (λ l → α l ⊔ δ l) β type-Large-Quotient-Locale
+    Large-Relation β type-Large-Quotient-Locale
   leq-Large-Quotient-Locale =
     leq-Large-Subframe L Q
 

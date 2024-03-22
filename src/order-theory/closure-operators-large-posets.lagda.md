@@ -9,6 +9,7 @@ module order-theory.closure-operators-large-posets where
 ```agda
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -162,13 +163,13 @@ module _
       ( large-subposet-closure-operator-Large-Poset)
 
   leq-prop-closed-element-closure-operator-Large-Poset :
-    Large-Relation-Prop α β closed-element-closure-operator-Large-Poset
+    Large-Relation-Prop β closed-element-closure-operator-Large-Poset
   leq-prop-closed-element-closure-operator-Large-Poset =
     leq-prop-Large-Subposet P
       ( large-subposet-closure-operator-Large-Poset)
 
   leq-closed-element-closure-operator-Large-Poset :
-    Large-Relation α β closed-element-closure-operator-Large-Poset
+    Large-Relation β closed-element-closure-operator-Large-Poset
   leq-closed-element-closure-operator-Large-Poset =
     leq-Large-Subposet P
       ( large-subposet-closure-operator-Large-Poset)

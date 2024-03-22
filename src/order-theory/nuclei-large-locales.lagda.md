@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -212,14 +213,14 @@ module _
       ( large-subposet-nucleus-Large-Locale)
 
   leq-prop-closed-element-nucleus-Large-Locale :
-    Large-Relation-Prop α β closed-element-nucleus-Large-Locale
+    Large-Relation-Prop β closed-element-nucleus-Large-Locale
   leq-prop-closed-element-nucleus-Large-Locale =
     leq-prop-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
   leq-closed-element-nucleus-Large-Locale :
-    Large-Relation α β closed-element-nucleus-Large-Locale
+    Large-Relation β closed-element-nucleus-Large-Locale
   leq-closed-element-nucleus-Large-Locale =
     leq-Large-Subposet
       ( large-poset-Large-Locale L)

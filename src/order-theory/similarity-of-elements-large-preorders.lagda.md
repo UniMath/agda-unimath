@@ -10,6 +10,7 @@ module order-theory.similarity-of-elements-large-preorders where
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.propositions
 open import foundation.universe-levels
 

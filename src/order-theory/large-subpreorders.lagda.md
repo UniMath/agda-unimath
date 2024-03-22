@@ -9,6 +9,7 @@ module order-theory.large-subpreorders where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -60,12 +61,12 @@ module _
   type-Large-Subpreorder l1 = type-subtype (S {l1})
 
   leq-prop-Large-Subpreorder :
-    Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subpreorder
+    Large-Relation-Prop β type-Large-Subpreorder
   leq-prop-Large-Subpreorder x y =
     leq-prop-Large-Preorder P (pr1 x) (pr1 y)
 
   leq-Large-Subpreorder :
-    Large-Relation (λ l → α l ⊔ γ l) β type-Large-Subpreorder
+    Large-Relation β type-Large-Subpreorder
   leq-Large-Subpreorder x y = type-Prop (leq-prop-Large-Subpreorder x y)
 
   is-prop-leq-Large-Subpreorder :

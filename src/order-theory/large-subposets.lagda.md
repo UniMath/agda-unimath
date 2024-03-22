@@ -9,6 +9,7 @@ module order-theory.large-subposets where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.logical-equivalences
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -97,14 +98,14 @@ module _
       ( large-subpreorder-Large-Subposet S)
 
   leq-prop-Large-Subposet :
-    Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subposet
+    Large-Relation-Prop β type-Large-Subposet
   leq-prop-Large-Subposet =
     leq-prop-Large-Subpreorder
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
   leq-Large-Subposet :
-    Large-Relation (λ l → α l ⊔ γ l) β type-Large-Subposet
+    Large-Relation β type-Large-Subposet
   leq-Large-Subposet =
     leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)

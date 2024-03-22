@@ -10,6 +10,7 @@ module order-theory.large-frames where
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -91,10 +92,10 @@ module _
   is-set-type-Large-Frame =
     is-set-type-Large-Poset (large-poset-Large-Frame L)
 
-  leq-prop-Large-Frame : Large-Relation-Prop α β type-Large-Frame
+  leq-prop-Large-Frame : Large-Relation-Prop β type-Large-Frame
   leq-prop-Large-Frame = leq-prop-Large-Poset (large-poset-Large-Frame L)
 
-  leq-Large-Frame : Large-Relation α β type-Large-Frame
+  leq-Large-Frame : Large-Relation β type-Large-Frame
   leq-Large-Frame = leq-Large-Poset (large-poset-Large-Frame L)
 
   is-prop-leq-Large-Frame :

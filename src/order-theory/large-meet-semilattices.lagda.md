@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -149,7 +150,7 @@ module _
   is-set-type-Large-Meet-Semilattice =
     is-set-type-Large-Poset (large-poset-Large-Meet-Semilattice L)
 
-  leq-Large-Meet-Semilattice : Large-Relation α β type-Large-Meet-Semilattice
+  leq-Large-Meet-Semilattice : Large-Relation β type-Large-Meet-Semilattice
   leq-Large-Meet-Semilattice =
     leq-Large-Poset (large-poset-Large-Meet-Semilattice L)
 

@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.large-binary-relations
 open import foundation.binary-relations
 open import foundation.reflexive-relations
+open import foundation.large-reflexive-relations
 open import foundation.transitive-binary-relations
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -109,12 +110,12 @@ module _
     is-set-type-Large-Poset (large-poset-Large-Suplattice L)
 
   leq-prop-Large-Suplattice :
-    Large-Relation-Prop α β type-Large-Suplattice
+    Large-Relation-Prop β type-Large-Suplattice
   leq-prop-Large-Suplattice =
     leq-prop-Large-Poset (large-poset-Large-Suplattice L)
 
   leq-Large-Suplattice :
-    Large-Relation α β type-Large-Suplattice
+    Large-Relation β type-Large-Suplattice
   leq-Large-Suplattice = leq-Large-Poset (large-poset-Large-Suplattice L)
 
   is-prop-leq-Large-Suplattice :

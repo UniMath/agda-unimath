@@ -9,6 +9,7 @@ module order-theory.large-meet-subsemilattices where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
@@ -147,14 +148,14 @@ module _
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   leq-prop-Large-Meet-Subsemilattice :
-    Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Meet-Subsemilattice
+    Large-Relation-Prop β type-Large-Meet-Subsemilattice
   leq-prop-Large-Meet-Subsemilattice =
     leq-prop-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   leq-Large-Meet-Subsemilattice :
-    Large-Relation (λ l → α l ⊔ γ l) β type-Large-Meet-Subsemilattice
+    Large-Relation β type-Large-Meet-Subsemilattice
   leq-Large-Meet-Subsemilattice =
     leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)

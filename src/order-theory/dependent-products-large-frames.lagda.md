@@ -10,6 +10,7 @@ module order-theory.dependent-products-large-frames where
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.large-reflexive-relations
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -76,7 +77,6 @@ module _
 
   leq-prop-Π-Large-Frame :
     Large-Relation-Prop
-      ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-Π-Large-Frame)
   leq-prop-Π-Large-Frame =
@@ -84,7 +84,6 @@ module _
 
   leq-Π-Large-Frame :
     Large-Relation
-      ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-Π-Large-Frame)
   leq-Π-Large-Frame = leq-Large-Poset large-poset-Π-Large-Frame
