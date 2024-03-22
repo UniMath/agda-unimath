@@ -17,6 +17,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopy-induction
+open import foundation.morphisms-arrows
 open import foundation.negated-equality
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
@@ -537,6 +538,53 @@ module _
       map-inv-mutually-exclusive-coproduct
       is-retraction-map-inv-mutually-exclusive-coproduct
       is-section-map-inv-mutually-exclusive-coproduct
+```
+
+### The functorial action of coproducts on arrows
+
+Given a pair of [morphisms of arrows](foundation.morphisms-arrows.md)
+`α : f → g` and `β : h → i`, there is an induced morphism of arrows
+`α + β : f + h → g + i` and this construction is functorial.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {C : UU l5} {D : UU l6} {Z : UU l7} {W : UU l8}
+  (f : A → B) (g : X → Y) (h : C → D) (i : Z → W)
+  (α : hom-arrow f g) (β : hom-arrow h i)
+  where
+
+  map-domain-coproduct-hom-arrow : A + C → X + Z
+  map-domain-coproduct-hom-arrow =
+    map-coproduct (map-domain-hom-arrow f g α) (map-domain-hom-arrow h i β)
+
+  map-codomain-coproduct-hom-arrow : B + D → Y + W
+  map-codomain-coproduct-hom-arrow =
+    map-coproduct (map-codomain-hom-arrow f g α) (map-codomain-hom-arrow h i β)
+
+  coh-coproduct-hom-arrow :
+    coherence-hom-arrow
+      ( map-coproduct f h)
+      ( map-coproduct g i)
+      ( map-domain-coproduct-hom-arrow)
+      ( map-codomain-coproduct-hom-arrow)
+  coh-coproduct-hom-arrow =
+    ( inv-htpy
+      ( preserves-comp-map-coproduct
+        ( f)
+        ( map-codomain-hom-arrow f g α)
+        ( h)
+        ( map-codomain-hom-arrow h i β))) ∙h
+    ( htpy-map-coproduct (coh-hom-arrow f g α) (coh-hom-arrow h i β)) ∙h
+    ( preserves-comp-map-coproduct
+      ( map-domain-hom-arrow f g α) g (map-domain-hom-arrow h i β) i)
+
+  coproduct-hom-arrow : hom-arrow (map-coproduct f h) (map-coproduct g i)
+  coproduct-hom-arrow =
+    ( map-domain-coproduct-hom-arrow ,
+      map-codomain-coproduct-hom-arrow ,
+      coh-coproduct-hom-arrow)
 ```
 
 ## See also
