@@ -21,7 +21,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider a [span diagram](foundation.span-diagrams.md) `𝒮 := (A <-f- S -g-> B)`. A {{#concept "base change" Disambiguation="span diagram"}} of `𝒮` consists of a span diagram `𝒯` and a [cartesian morphism](foundation.cartesian-morphisms-span-diagrams.md) of span diagrams `𝒯 →ₓ 𝒮`.
+Consider a [span diagram](foundation.span-diagrams.md) `𝒮 := (A <-f- S -g-> B)`.
+A {{#concept "base change" Disambiguation="span diagram"}} of `𝒮` consists of a
+span diagram `𝒯` and a
+[cartesian morphism](foundation.cartesian-morphisms-span-diagrams.md) of span
+diagrams `𝒯 →ₓ 𝒮`.
 
 ## Definitions
 
@@ -151,7 +155,7 @@ module _
       ( span-diagram-base-change-span-diagram)
       ( 𝒮)
       ( hom-cartesian-hom-base-change-span-diagram)
-    
+
   is-cartesian-cartesian-hom-base-change-span-diagram :
     is-cartesian-hom-span-diagram
       ( span-diagram-base-change-span-diagram)
