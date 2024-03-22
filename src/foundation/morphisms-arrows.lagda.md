@@ -15,6 +15,8 @@ open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.postcomposition-functions
@@ -72,92 +74,7 @@ module _
   coh-hom-arrow = pr2 ∘ pr2
 ```
 
-### Transposing morphisms of arrows
-
-The {{#concept "transposition" Disambiguation="morphism of arrows"}} of a
-morphism of arrows
-
-```text
-        i
-    A -----> X
-    |        |
-  f |        | g
-    V        V
-    B -----> Y
-        j
-```
-
-is the morphism of arrows
-
-```text
-        f
-    A -----> B
-    |        |
-  i |        | j
-    V        V
-    X -----> Y.
-        g
-```
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : hom-arrow f g)
-  where
-
-  map-domain-transpose-hom-arrow : A → B
-  map-domain-transpose-hom-arrow = f
-
-  map-codomain-transpose-hom-arrow : X → Y
-  map-codomain-transpose-hom-arrow = g
-
-  coh-transpose-hom-arrow :
-    coherence-hom-arrow
-      ( map-domain-hom-arrow f g α)
-      ( map-codomain-hom-arrow f g α)
-      ( map-domain-transpose-hom-arrow)
-      ( map-codomain-transpose-hom-arrow)
-  coh-transpose-hom-arrow =
-    inv-htpy (coh-hom-arrow f g α)
-
-  transpose-hom-arrow :
-    hom-arrow (map-domain-hom-arrow f g α) (map-codomain-hom-arrow f g α)
-  pr1 transpose-hom-arrow = map-domain-transpose-hom-arrow
-  pr1 (pr2 transpose-hom-arrow) = map-codomain-transpose-hom-arrow
-  pr2 (pr2 transpose-hom-arrow) = coh-transpose-hom-arrow
-```
-
-### Morphisms of arrows obtained from cones over cospans
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (f : A → X) (g : B → X) (c : cone f g C)
-  where
-
-  hom-arrow-cone : hom-arrow (vertical-map-cone f g c) g
-  pr1 hom-arrow-cone = horizontal-map-cone f g c
-  pr1 (pr2 hom-arrow-cone) = f
-  pr2 (pr2 hom-arrow-cone) = coherence-square-cone f g c
-
-  hom-arrow-cone' : hom-arrow (horizontal-map-cone f g c) f
-  hom-arrow-cone' =
-    transpose-hom-arrow (vertical-map-cone f g c) g hom-arrow-cone
-```
-
-### Cones over cospans obtained from morphisms of arrows
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (h : hom-arrow f g)
-  where
-
-  cone-hom-arrow : cone (map-codomain-hom-arrow f g h) g A
-  pr1 cone-hom-arrow = f
-  pr1 (pr2 cone-hom-arrow) = map-domain-hom-arrow f g h
-  pr2 (pr2 cone-hom-arrow) = coh-hom-arrow f g h
-```
+## Operations
 
 ### The identity morphism of arrows
 
@@ -258,6 +175,135 @@ module _
     coh-comp-hom-arrow
 ```
 
+### Transposing morphisms of arrows
+
+The {{#concept "transposition" Disambiguation="morphism of arrows"}} of a
+morphism of arrows
+
+```text
+        i
+    A -----> X
+    |        |
+  f |        | g
+    V        V
+    B -----> Y
+        j
+```
+
+is the morphism of arrows
+
+```text
+        f
+    A -----> B
+    |        |
+  i |        | j
+    V        V
+    X -----> Y.
+        g
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  where
+
+  map-domain-transpose-hom-arrow : A → B
+  map-domain-transpose-hom-arrow = f
+
+  map-codomain-transpose-hom-arrow : X → Y
+  map-codomain-transpose-hom-arrow = g
+
+  coh-transpose-hom-arrow :
+    coherence-hom-arrow
+      ( map-domain-hom-arrow f g α)
+      ( map-codomain-hom-arrow f g α)
+      ( map-domain-transpose-hom-arrow)
+      ( map-codomain-transpose-hom-arrow)
+  coh-transpose-hom-arrow =
+    inv-htpy (coh-hom-arrow f g α)
+
+  transpose-hom-arrow :
+    hom-arrow (map-domain-hom-arrow f g α) (map-codomain-hom-arrow f g α)
+  pr1 transpose-hom-arrow = map-domain-transpose-hom-arrow
+  pr1 (pr2 transpose-hom-arrow) = map-codomain-transpose-hom-arrow
+  pr2 (pr2 transpose-hom-arrow) = coh-transpose-hom-arrow
+```
+
+### Morphisms of arrows obtained from cones over cospans
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C)
+  where
+
+  hom-arrow-cone : hom-arrow (vertical-map-cone f g c) g
+  pr1 hom-arrow-cone = horizontal-map-cone f g c
+  pr1 (pr2 hom-arrow-cone) = f
+  pr2 (pr2 hom-arrow-cone) = coherence-square-cone f g c
+
+  hom-arrow-cone' : hom-arrow (horizontal-map-cone f g c) f
+  hom-arrow-cone' =
+    transpose-hom-arrow (vertical-map-cone f g c) g hom-arrow-cone
+```
+
+### Cones over cospans obtained from morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (h : hom-arrow f g)
+  where
+
+  cone-hom-arrow : cone (map-codomain-hom-arrow f g h) g A
+  pr1 cone-hom-arrow = f
+  pr1 (pr2 cone-hom-arrow) = map-domain-hom-arrow f g h
+  pr2 (pr2 cone-hom-arrow) = coh-hom-arrow f g h
+```
+
+### Morphisms of arrows are preserved under homotopies
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  where
+
+  hom-arrow-htpy-source :
+    {f f' : A → B} (F' : f' ~ f) (g : X → Y) →
+    hom-arrow f g → hom-arrow f' g
+  hom-arrow-htpy-source F' g (i , j , H) = (i , j , (j ·l F') ∙h H)
+
+  hom-arrow-htpy-target :
+    (f : A → B) {g g' : X → Y} (G : g ~ g') →
+    hom-arrow f g → hom-arrow f g'
+  hom-arrow-htpy-target f G (i , j , H) = (i , j , H ∙h (G ·r i))
+
+  hom-arrow-htpy :
+    {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g') →
+    hom-arrow f g → hom-arrow f' g'
+  hom-arrow-htpy F' G (i , j , H) = (i , j , (j ·l F') ∙h H ∙h (G ·r i))
+```
+
+### Dependent products of morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
+  (f : (i : I) → A i → B i) (g : (i : I) → X i → Y i)
+  (α : (i : I) → hom-arrow (f i) (g i))
+  where
+
+  Π-hom-arrow : hom-arrow (map-Π f) (map-Π g)
+  pr1 Π-hom-arrow =
+    map-Π (λ i → map-domain-hom-arrow (f i) (g i) (α i))
+  pr1 (pr2 Π-hom-arrow) =
+    map-Π (λ i → map-codomain-hom-arrow (f i) (g i) (α i))
+  pr2 (pr2 Π-hom-arrow) =
+    htpy-map-Π (λ i → coh-hom-arrow (f i) (g i) (α i))
+```
+
 ### Morphisms of arrows give morphisms of precomposition arrows
 
 A morphism of arrows `α : f → g` gives a morphism of precomposition arrows
@@ -270,13 +316,13 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  hom-arrow-precomp-hom-arrow :
+  precomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (precomp g S) (precomp f S)
-  pr1 (hom-arrow-precomp-hom-arrow S) =
+  pr1 (precomp-hom-arrow S) =
     precomp (map-codomain-hom-arrow f g α) S
-  pr1 (pr2 (hom-arrow-precomp-hom-arrow S)) =
+  pr1 (pr2 (precomp-hom-arrow S)) =
     precomp (map-domain-hom-arrow f g α) S
-  pr2 (pr2 (hom-arrow-precomp-hom-arrow S)) h =
+  pr2 (pr2 (precomp-hom-arrow S)) h =
     inv (eq-htpy (h ·l coh-hom-arrow f g α))
 ```
 
@@ -292,13 +338,13 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  hom-arrow-postcomp-hom-arrow :
+  postcomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (postcomp S f) (postcomp S g)
-  pr1 (hom-arrow-postcomp-hom-arrow S) =
+  pr1 (postcomp-hom-arrow S) =
     postcomp S (map-domain-hom-arrow f g α)
-  pr1 (pr2 (hom-arrow-postcomp-hom-arrow S)) =
+  pr1 (pr2 (postcomp-hom-arrow S)) =
     postcomp S (map-codomain-hom-arrow f g α)
-  pr2 (pr2 (hom-arrow-postcomp-hom-arrow S)) h =
+  pr2 (pr2 (postcomp-hom-arrow S)) h =
     eq-htpy (coh-hom-arrow f g α ·r h)
 ```
 
