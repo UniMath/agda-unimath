@@ -306,7 +306,7 @@ module _
       ( λ (h : (y : B) → type-Prop (P y)) x → h (f x)) ~
       ( ( λ h x → h (f x) (x , refl)) ∘
         ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
-        ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y)))
+        ( λ h y → const (type-trunc-Prop (fiber f y)) (h y)))
     square-dependent-universal-property-surj P = refl-htpy
 
   abstract
@@ -317,13 +317,13 @@ module _
         ( λ h x → h (f x) (x , refl))
         ( ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
           ( λ h y →
-            const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y)))
+            const (type-trunc-Prop (fiber f y)) (h y)))
         ( is-equiv-comp
           ( λ h y → (h y) ∘ unit-trunc-Prop)
-          ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y))
+          ( λ h y → const (type-trunc-Prop (fiber f y)) (h y))
           ( is-equiv-map-Π-is-fiberwise-equiv
             ( λ y →
-              is-equiv-diagonal-is-contr
+              is-equiv-diagonal-exponential-is-contr
                 ( is-proof-irrelevant-is-prop
                   ( is-prop-type-trunc-Prop)
                   ( is-surj-f y))

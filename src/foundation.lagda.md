@@ -118,6 +118,7 @@ open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
 open import foundation.descent-equivalences public
 open import foundation.diagonal-maps-cartesian-products-of-types public
+open import foundation.diagonal-maps-of-types public
 open import foundation.diagonal-span-diagrams public
 open import foundation.diagonals-of-maps public
 open import foundation.diagonals-of-morphisms-arrows public

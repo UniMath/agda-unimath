@@ -27,8 +27,11 @@ open import foundation-core.sections
 
 ## Idea
 
-The diagonal map `δ : A → A × A` of `A` is the map that includes `A` as the
-diagonal into `A × A`.
+The
+{{#concept "diagonal map" Disambiguation="of a type into its cartesian product" Agda=diagonal-product}}
+that includes a type `A` into its
+[cartesian product](foundation-core.cartesian-product-types.md) `A × A` is the
+map that maps `x` to the pair `x , x`.
 
 ## Definition
 
@@ -75,7 +78,7 @@ module _
   pr2 (equiv-diagonal-product-is-prop is-prop-A) =
     is-equiv-is-invertible
       ( pr1)
-      ( λ pair-a → eq-pair (eq-is-prop is-prop-A) (eq-is-prop is-prop-A))
+      ( λ _ → eq-pair (eq-is-prop is-prop-A) (eq-is-prop is-prop-A))
       ( λ a → eq-is-prop is-prop-A)
 ```
 
