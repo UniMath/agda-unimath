@@ -84,13 +84,6 @@ transitive-leq-ℤ k l m H K =
 
 trans-leq-ℤ : {k l m : ℤ} → leq-ℤ l m → leq-ℤ k l → leq-ℤ k m
 trans-leq-ℤ {k} {l} {m} = transitive-leq-ℤ k l m
-
-ℤ-Preorder : Preorder lzero lzero
-ℤ-Preorder =
-  (ℤ , leq-ℤ-Prop , refl-leq-ℤ , transitive-leq-ℤ)
-
-ℤ-Poset : Poset lzero lzero
-ℤ-Poset = (ℤ-Preorder , λ x y → antisymmetric-leq-ℤ)
 ```
 
 ### The ordering of the integers is decidable
@@ -200,4 +193,15 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
     ( ap (_-ℤ (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
       ap ((int-ℕ (succ-ℕ y)) -ℤ_) (succ-int-ℕ x)))
   ( leq-int-ℕ x y H)
+```
+
+### The partially ordered Set of integers
+
+```agda
+ℤ-Preorder : Preorder lzero lzero
+ℤ-Preorder =
+  (ℤ , leq-ℤ-Prop , refl-leq-ℤ , transitive-leq-ℤ)
+
+ℤ-Poset : Poset lzero lzero
+ℤ-Poset = (ℤ-Preorder , λ x y → antisymmetric-leq-ℤ)
 ```
