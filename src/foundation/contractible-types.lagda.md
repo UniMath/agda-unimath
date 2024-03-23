@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.subuniverses
 open import foundation.unit-type
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
@@ -64,27 +65,30 @@ equiv-eq-Contr X Y = equiv-eq-subuniverse is-contr-Prop X Y
 
 abstract
   is-equiv-equiv-eq-Contr :
+    (u : univalence-axiom)
     {l1 : Level} (X Y : Contr l1) → is-equiv (equiv-eq-Contr X Y)
-  is-equiv-equiv-eq-Contr X Y =
-    is-equiv-equiv-eq-subuniverse is-contr-Prop X Y
+  is-equiv-equiv-eq-Contr u X Y =
+    is-equiv-equiv-eq-subuniverse u is-contr-Prop X Y
 
 eq-equiv-Contr :
+  (u : univalence-axiom)
   {l1 : Level} {X Y : Contr l1} → equiv-Contr X Y → X ＝ Y
-eq-equiv-Contr = eq-equiv-subuniverse is-contr-Prop
+eq-equiv-Contr u = eq-equiv-subuniverse u is-contr-Prop
 
 abstract
   center-Contr : (l : Level) → Contr l
   center-Contr l = pair (raise-unit l) is-contr-raise-unit
 
   contraction-Contr :
+    (u : univalence-axiom)
     {l : Level} (A : Contr l) → center-Contr l ＝ A
-  contraction-Contr A =
-    eq-equiv-Contr
+  contraction-Contr u A =
+    eq-equiv-Contr u
       ( equiv-is-contr is-contr-raise-unit (is-contr-type-Contr A))
 
 abstract
-  is-contr-Contr : (l : Level) → is-contr (Contr l)
-  is-contr-Contr l = pair (center-Contr l) contraction-Contr
+  is-contr-Contr : (u : univalence-axiom) (l : Level) → is-contr (Contr l)
+  is-contr-Contr u l = pair (center-Contr l) (contraction-Contr u)
 ```
 
 ### The predicate that a subuniverse contains any contractible types

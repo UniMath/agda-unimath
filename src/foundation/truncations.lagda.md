@@ -15,6 +15,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.truncated-types
+open import foundation.univalence
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -177,12 +178,13 @@ module _
 
 ```agda
 unique-truncated-fam-trunc :
+  (u : univalence-axiom) →
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} →
   (B : A → Truncated-Type l2 k) →
   is-contr
     ( Σ ( type-trunc (succ-𝕋 k) A → Truncated-Type l2 k)
         ( λ C → (x : A) → type-equiv-Truncated-Type (B x) (C (unit-trunc x))))
-unique-truncated-fam-trunc {l1} {l2} {k} {A} B =
+unique-truncated-fam-trunc u {l1} {l2} {k} {A} B =
   is-contr-equiv'
     ( Σ ( type-trunc (succ-𝕋 k) A → Truncated-Type l2 k)
         ( λ C → (C ∘ unit-trunc) ~ B))
@@ -190,21 +192,23 @@ unique-truncated-fam-trunc {l1} {l2} {k} {A} B =
       ( λ C →
         equiv-Π-equiv-family
           ( λ x →
-            ( extensionality-Truncated-Type (B x) (C (unit-trunc x))) ∘e
+            ( extensionality-Truncated-Type u (B x) (C (unit-trunc x))) ∘e
             ( equiv-inv (C (unit-trunc x)) (B x)))))
     ( universal-property-trunc
       ( succ-𝕋 k)
       ( A)
-      ( Truncated-Type-Truncated-Type l2 k)
+      ( Truncated-Type-Truncated-Type u l2 k)
       ( B))
 
 module _
+  (u : univalence-axiom)
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : A → Truncated-Type l2 k)
   where
 
-  truncated-fam-trunc : type-trunc (succ-𝕋 k) A → Truncated-Type l2 k
+  truncated-fam-trunc :
+    type-trunc (succ-𝕋 k) A → Truncated-Type l2 k
   truncated-fam-trunc =
-    pr1 (center (unique-truncated-fam-trunc B))
+    pr1 (center (unique-truncated-fam-trunc u B))
 
   fam-trunc : type-trunc (succ-𝕋 k) A → UU l2
   fam-trunc = type-Truncated-Type ∘ truncated-fam-trunc
@@ -213,7 +217,7 @@ module _
     (x : A) →
     type-equiv-Truncated-Type (B x) (truncated-fam-trunc (unit-trunc x))
   compute-truncated-fam-trunc =
-    pr2 (center (unique-truncated-fam-trunc B))
+    pr2 (center (unique-truncated-fam-trunc u B))
 
   map-compute-truncated-fam-trunc :
     (x : A) → type-Truncated-Type (B x) → (fam-trunc (unit-trunc x))
@@ -224,22 +228,26 @@ module _
   total-truncated-fam-trunc = Σ (type-trunc (succ-𝕋 k) A) fam-trunc
 
 module _
+  (univalence : univalence-axiom)
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} (B : A → Truncated-Type l2 k)
-  ( C : total-truncated-fam-trunc B → Truncated-Type l3 k)
+  ( C : total-truncated-fam-trunc univalence B → Truncated-Type l3 k)
   ( f :
     ( x : A)
     ( y : type-Truncated-Type (B x)) →
     type-Truncated-Type
-      ( C (unit-trunc x , map-equiv (compute-truncated-fam-trunc B x) y)))
+      ( C ( unit-trunc x ,
+            map-equiv (compute-truncated-fam-trunc univalence B x) y)))
   where
 
   dependent-universal-property-total-truncated-fam-trunc :
     is-contr
-      ( Σ ( (t : total-truncated-fam-trunc B) → type-Truncated-Type (C t))
+      ( Σ ( (t : total-truncated-fam-trunc univalence B) →
+            type-Truncated-Type (C t))
           ( λ h →
             (x : A) (y : type-Truncated-Type (B x)) →
             Id
-              ( h (unit-trunc x , map-compute-truncated-fam-trunc B x y))
+              ( h ( unit-trunc x ,
+                    map-compute-truncated-fam-trunc univalence B x y))
               ( f x y)))
   dependent-universal-property-total-truncated-fam-trunc =
     is-contr-equiv _
@@ -250,7 +258,7 @@ module _
             ( g (unit-trunc x))
             ( map-equiv-Π
               ( λ u → type-Truncated-Type (C (unit-trunc x , u)))
-              ( compute-truncated-fam-trunc B x)
+              ( compute-truncated-fam-trunc univalence B x)
               ( λ u → id-equiv)
               ( f x)))
         ( equiv-ev-pair)
@@ -265,18 +273,20 @@ module _
                     ( map-equiv-Π
                       ( λ u →
                         type-Truncated-Type (C (unit-trunc x , u)))
-                      ( compute-truncated-fam-trunc B x)
+                      ( compute-truncated-fam-trunc univalence B x)
                       ( λ u → id-equiv)
                       ( f x)
                       ( y)))
-                ( compute-truncated-fam-trunc B x)
+                ( compute-truncated-fam-trunc univalence B x)
                 ( λ y →
                   equiv-concat'
-                    ( g (unit-trunc x , map-compute-truncated-fam-trunc B x y))
+                    ( g
+                      ( unit-trunc x ,
+                        map-compute-truncated-fam-trunc univalence B x y))
                     ( inv
                       ( compute-map-equiv-Π
                         ( λ u → type-Truncated-Type (C (unit-trunc x , u)))
-                        ( compute-truncated-fam-trunc B x)
+                        ( compute-truncated-fam-trunc univalence B x)
                         ( λ y → id-equiv)
                         ( f x)
                         ( y))))))))
@@ -284,17 +294,17 @@ module _
         ( λ y →
           truncated-type-succ-Truncated-Type k
             ( Π-Truncated-Type k
-              ( truncated-fam-trunc B y)
+              ( truncated-fam-trunc univalence B y)
               ( λ u → C (y , u))))
         ( λ y →
           map-equiv-Π
             ( λ u → type-Truncated-Type (C (unit-trunc y , u)))
-            ( compute-truncated-fam-trunc B y)
+            ( compute-truncated-fam-trunc univalence B y)
             ( λ u → id-equiv)
             ( f y)))
 
   function-dependent-universal-property-total-truncated-fam-trunc :
-    (t : total-truncated-fam-trunc B) → type-Truncated-Type (C t)
+    (t : total-truncated-fam-trunc univalence B) → type-Truncated-Type (C t)
   function-dependent-universal-property-total-truncated-fam-trunc =
     pr1 (center dependent-universal-property-total-truncated-fam-trunc)
 
@@ -302,7 +312,7 @@ module _
     (x : A) (y : type-Truncated-Type (B x)) →
     Id
       ( function-dependent-universal-property-total-truncated-fam-trunc
-        ( unit-trunc x , map-compute-truncated-fam-trunc B x y))
+        ( unit-trunc x , map-compute-truncated-fam-trunc univalence B x y))
       ( f x y)
   htpy-dependent-universal-property-total-truncated-fam-trunc =
     pr2 (center dependent-universal-property-total-truncated-fam-trunc)
@@ -381,17 +391,20 @@ module _
 
 ```agda
 module _
+  (univalence : univalence-axiom)
   {l : Level} (k : 𝕋) {A : UU l} (a : A)
   where
 
   Eq-trunc-Truncated-Type : type-trunc (succ-𝕋 k) A → Truncated-Type l k
-  Eq-trunc-Truncated-Type = truncated-fam-trunc (λ y → trunc k (a ＝ y))
+  Eq-trunc-Truncated-Type =
+    truncated-fam-trunc univalence (λ y → trunc k (a ＝ y))
 
   Eq-trunc : type-trunc (succ-𝕋 k) A → UU l
   Eq-trunc x = type-Truncated-Type (Eq-trunc-Truncated-Type x)
 
   compute-Eq-trunc : (x : A) → type-trunc k (a ＝ x) ≃ Eq-trunc (unit-trunc x)
-  compute-Eq-trunc = compute-truncated-fam-trunc (λ y → trunc k (a ＝ y))
+  compute-Eq-trunc =
+    compute-truncated-fam-trunc univalence (λ y → trunc k (a ＝ y))
 
   map-compute-Eq-trunc :
     (x : A) → type-trunc k (a ＝ x) → Eq-trunc (unit-trunc x)
@@ -409,6 +422,7 @@ module _
   pr2 (pr1 is-torsorial-Eq-trunc) = refl-Eq-trunc
   pr2 is-torsorial-Eq-trunc =
     function-dependent-universal-property-total-truncated-fam-trunc
+      ( univalence)
       ( λ y → trunc k (a ＝ y))
       ( Id-Truncated-Type
           ( Σ-Truncated-Type
