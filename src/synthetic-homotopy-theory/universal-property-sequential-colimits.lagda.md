@@ -156,8 +156,7 @@ module _
   universal-property-sequential-colimit-universal-property-coequalizer :
     ( {l : Level} →
       universal-property-coequalizer l
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c)) →
     universal-property-sequential-colimit c
   universal-property-sequential-colimit-universal-property-coequalizer
@@ -167,8 +166,7 @@ module _
       ( cocone-map-sequential-diagram c)
       ( cocone-sequential-diagram-cofork A)
       ( cofork-map
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c))
       ( triangle-cocone-sequential-diagram-cofork A c)
       ( up-cofork Y)
@@ -178,8 +176,7 @@ module _
     universal-property-sequential-colimit c →
     ( {l : Level} →
       universal-property-coequalizer l
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c))
   universal-property-coequalizer-universal-property-sequential-colimit
     ( up-sequential-colimit)
@@ -188,8 +185,7 @@ module _
       ( cocone-map-sequential-diagram c)
       ( cocone-sequential-diagram-cofork A)
       ( cofork-map
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c))
       ( triangle-cocone-sequential-diagram-cofork A c)
       ( is-equiv-cocone-sequential-diagram-cofork A)
