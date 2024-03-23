@@ -106,11 +106,11 @@ leq-ℤ-Decidable-Prop x y =
     is-decidable-leq-ℤ x y)
 ```
 
-### The ordering of the integers is total
+### The ordering of the integers is linear
 
 ```agda
-total-leq-ℤ : {x y : ℤ} → (leq-ℤ x y) + (leq-ℤ y x)
-total-leq-ℤ {x} {y} =
+linear-leq-ℤ : (x y : ℤ) → (leq-ℤ x y) + (leq-ℤ y x)
+linear-leq-ℤ x y =
   map-coproduct
     ( λ H →
       is-nonnegative-is-positive-ℤ
