@@ -70,6 +70,8 @@ make-H-Space :
   (X : Pointed-Type l) → coherent-unital-mul-Pointed-Type X → H-Space l
 make-H-Space X μ = (X , μ)
 
+{-# INLINE make-H-Space #-}
+
 module _
   {l : Level} (M : H-Space l)
   where
