@@ -17,6 +17,7 @@ open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
+open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

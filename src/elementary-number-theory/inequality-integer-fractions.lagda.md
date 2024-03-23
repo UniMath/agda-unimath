@@ -21,6 +21,7 @@ open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
+open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
