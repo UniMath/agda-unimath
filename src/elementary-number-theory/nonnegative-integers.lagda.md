@@ -33,8 +33,21 @@ open import foundation.universe-levels
 
 ## Idea
 
-The {{#concept "nonnegative" Disambiguation="integers" Agda=is-nonnegative-ℤ}}
-integers are `zero-ℤ` and its successors.
+The [integers](elementary-number-theory.integers.md) are defined as a
+[disjoint sum](foundation-core.coproduct-types.md) of three components. A single
+element component containing the integer _zero_, and two copies of the
+[natural numbers](elementary-number-theory.natural-numbers.md), one copy for the
+[negative integers](elementary-number-theory.negative-integers.md) and one copy
+for the [positive integers](elementary-number-theory.positive-integers).
+Arranged on a number line, we have
+
+```text
+  ⋯  -4  -3  -2  -1   0   1   2   3   4   ⋯
+  <---+---+---+---]   |   [---+---+---+--->
+```
+
+The {{#concept "nonnegative" Disambiguation="integer" Agda=is-nonnegative-ℤ}}
+integers are `zero-ℤ` and the positive component of the integers.
 
 ## Definitions
 

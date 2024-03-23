@@ -33,10 +33,23 @@ open import foundation.universe-levels
 
 ## Idea
 
-The {{#concept "positive" Disambiguation="integers" Agda=is-positive-ℤ}}
-integers are `one-ℤ` and its successors.
+The [integers](elementary-number-theory.integers.md) are defined as a
+[disjoint sum](foundation-core.coproduct-types.md) of three components. A single
+element component containing the integer _zero_, and two copies of the
+[natural numbers](elementary-number-theory.natural-numbers.md), one copy for the
+[negative integers](elementary-number-theory.negative-integers.md) and one copy
+for the _positive integers_. Arranged on a number line, we have
 
-## Defintions
+```text
+  ⋯  -4  -3  -2  -1   0   1   2   3   4   ⋯
+  <---+---+---+---]   |   [---+---+---+--->
+```
+
+We say an integer is
+{{#concept "positive" Disambiguation="integer" Agda=is-positive-ℤ}} if it is an
+element of the positive component of the integers.
+
+## Definitions
 
 ### Positive integers
 

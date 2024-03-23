@@ -33,10 +33,24 @@ open import foundation.universe-levels
 
 ## Idea
 
-The {{#concept "negative" Disambiguation="integers" Agda=is-negative-ℤ}}
-integers are `neg-one-ℤ` and its predecessors.
+The [integers](elementary-number-theory.integers.md) are defined as a
+[disjoint sum](foundation-core.coproduct-types.md) of three components. A single
+element component containing the integer _zero_, and two copies of the
+[natural numbers](elementary-number-theory.natural-numbers.md), one copy for the
+_negative integers_ and one copy for the
+[positive integers](elementary-number-theory.positive-integers.md). Arranged on
+a number line, we have
 
-## Defintions
+```text
+  ⋯  -4  -3  -2  -1   0   1   2   3   4   ⋯
+  <---+---+---+---]   |   [---+---+---+--->
+```
+
+We say an integer is
+{{#concept "negative" Disambiguation="integer" Agda=is-negative-ℤ}} if it is an
+element of the negative component of the integers.
+
+## Definitions
 
 ### Negative integers
 
