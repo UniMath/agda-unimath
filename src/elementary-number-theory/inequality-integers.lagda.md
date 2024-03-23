@@ -21,6 +21,7 @@ open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
@@ -98,10 +99,10 @@ trans-leq-ℤ {k} {l} {m} = transitive-leq-ℤ k l m
 
 ℤ-Preorder : Preorder lzero lzero
 ℤ-Preorder =
-  ℤ , leq-ℤ-Prop , refl-leq-ℤ , transitive-leq-ℤ
+  (ℤ , leq-ℤ-Prop , refl-leq-ℤ , transitive-leq-ℤ)
 
 ℤ-Poset : Poset lzero lzero
-ℤ-Poset = ℤ-Preorder , λ x y → antisymmetric-leq-ℤ
+ℤ-Poset = (ℤ-Preorder , λ x y → antisymmetric-leq-ℤ)
 ```
 
 ### The ordering of the integers is decidable
@@ -109,6 +110,12 @@ trans-leq-ℤ {k} {l} {m} = transitive-leq-ℤ k l m
 ```agda
 is-decidable-leq-ℤ : (x y : ℤ) → (leq-ℤ x y) + ¬ (leq-ℤ x y)
 is-decidable-leq-ℤ x y = is-decidable-is-nonnegative-ℤ (y -ℤ x)
+
+leq-ℤ-Decidable-Prop : (x y : ℤ) → Decidable-Prop lzero
+leq-ℤ-Decidable-Prop x y =
+  ( leq-ℤ x y ,
+    is-prop-leq-ℤ x y ,
+    is-decidable-leq-ℤ x y)
 ```
 
 ### The ordering of the integers is total
@@ -196,6 +203,12 @@ reflects-leq-right-add-ℤ z x y =
 ```agda
 is-decidable-le-ℤ : (x y : ℤ) → (le-ℤ x y) + ¬ (le-ℤ x y)
 is-decidable-le-ℤ x y = is-decidable-is-positive-ℤ (y -ℤ x)
+
+le-ℤ-Decidable-Prop : (x y : ℤ) → Decidable-Prop lzero
+le-ℤ-Decidable-Prop x y =
+  ( le-ℤ x y ,
+    is-prop-le-ℤ x y ,
+    is-decidable-le-ℤ x y)
 ```
 
 ### Strict inequality implies inequality
@@ -216,7 +229,7 @@ transitive-le-ℤ k l m H K =
 
 asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
 asymmetric-le-ℤ x y p =
-  not-is-positive-is-nonpositive-ℤ
+  is-not-positive-is-nonpositive-ℤ
     ( is-nonpositive-eq-ℤ
       ( distributive-neg-diff-ℤ y x)
       ( is-nonpositive-neg-is-nonnegative-ℤ
@@ -237,7 +250,7 @@ connected-le-ℤ x y H =
     ( decide-sign-nonzero-ℤ (H ∘ eq-diff-ℤ))
 ```
 
-### Predecessor and successor relations with the strict ordering
+### An integer is strictly greater than its predecessor
 
 ```agda
 le-pred-ℤ : (x : ℤ) → le-ℤ (pred-ℤ x) x
@@ -245,7 +258,11 @@ le-pred-ℤ x =
   is-positive-eq-ℤ
     ( inv (right-predecessor-law-diff-ℤ x x ∙ ap succ-ℤ (is-zero-diff-ℤ' x)))
     ( is-positive-int-positive-ℤ one-positive-ℤ)
+```
 
+### An integer is strictly lesser than its successor
+
+```agda
 le-succ-ℤ : (x : ℤ) → le-ℤ x (succ-ℤ x)
 le-succ-ℤ x =
   is-positive-eq-ℤ

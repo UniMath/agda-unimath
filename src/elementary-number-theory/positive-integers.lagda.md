@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -23,6 +24,7 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -49,13 +51,13 @@ is-prop-is-positive-ℤ (inr (inl x)) = is-prop-empty
 is-prop-is-positive-ℤ (inr (inr x)) = is-prop-unit
 
 subtype-positive-ℤ : subtype lzero ℤ
-subtype-positive-ℤ x = is-positive-ℤ x , is-prop-is-positive-ℤ x
+subtype-positive-ℤ x = (is-positive-ℤ x , is-prop-is-positive-ℤ x)
 
 positive-ℤ : UU lzero
 positive-ℤ = type-subtype subtype-positive-ℤ
 
 is-positive-eq-ℤ : {x y : ℤ} → x ＝ y → is-positive-ℤ x → is-positive-ℤ y
-is-positive-eq-ℤ {x} refl = id
+is-positive-eq-ℤ = tr is-positive-ℤ
 
 module _
   (p : positive-ℤ)
@@ -84,6 +86,12 @@ is-decidable-is-positive-ℤ : is-decidable-fam is-positive-ℤ
 is-decidable-is-positive-ℤ (inl x) = inr id
 is-decidable-is-positive-ℤ (inr (inl x)) = inr id
 is-decidable-is-positive-ℤ (inr (inr x)) = inl star
+
+decidable-subtype-positive-ℤ : decidable-subtype lzero ℤ
+decidable-subtype-positive-ℤ x =
+  ( is-positive-ℤ x ,
+    is-prop-is-positive-ℤ x ,
+    is-decidable-is-positive-ℤ x)
 ```
 
 ### The positive integers are a `Set`

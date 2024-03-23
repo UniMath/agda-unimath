@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -23,6 +24,7 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -47,13 +49,13 @@ is-prop-is-negative-ℤ (inl x) = is-prop-unit
 is-prop-is-negative-ℤ (inr x) = is-prop-empty
 
 subtype-negative-ℤ : subtype lzero ℤ
-subtype-negative-ℤ x = is-negative-ℤ x , is-prop-is-negative-ℤ x
+subtype-negative-ℤ x = (is-negative-ℤ x , is-prop-is-negative-ℤ x)
 
 negative-ℤ : UU lzero
 negative-ℤ = type-subtype subtype-negative-ℤ
 
 is-negative-eq-ℤ : {x y : ℤ} → x ＝ y → is-negative-ℤ x → is-negative-ℤ y
-is-negative-eq-ℤ {x} refl = id
+is-negative-eq-ℤ = tr is-negative-ℤ
 
 module _
   (p : negative-ℤ)
@@ -70,7 +72,7 @@ module _
 
 ```agda
 neg-one-negative-ℤ : negative-ℤ
-neg-one-negative-ℤ = neg-one-ℤ , star
+neg-one-negative-ℤ = (neg-one-ℤ , star)
 ```
 
 ## Properties
@@ -81,6 +83,12 @@ neg-one-negative-ℤ = neg-one-ℤ , star
 is-decidable-is-negative-ℤ : is-decidable-fam is-negative-ℤ
 is-decidable-is-negative-ℤ (inl x) = inl star
 is-decidable-is-negative-ℤ (inr x) = inr id
+
+decidable-subtype-negative-ℤ : decidable-subtype lzero ℤ
+decidable-subtype-negative-ℤ x =
+  ( is-negative-ℤ x ,
+    is-prop-is-negative-ℤ x ,
+    is-decidable-is-negative-ℤ x)
 ```
 
 ### The negative integers are a `Set`
@@ -99,7 +107,7 @@ is-negative-pred-is-negative-ℤ :
 is-negative-pred-is-negative-ℤ {inl x} H = H
 
 pred-negative-ℤ : negative-ℤ → negative-ℤ
-pred-negative-ℤ (x , H) = pred-ℤ x , is-negative-pred-is-negative-ℤ H
+pred-negative-ℤ (x , H) = (pred-ℤ x , is-negative-pred-is-negative-ℤ H)
 ```
 
 ### The canonical equivalence between natural numbers and negative integers

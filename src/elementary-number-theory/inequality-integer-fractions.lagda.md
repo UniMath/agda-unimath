@@ -25,6 +25,7 @@ open import elementary-number-theory.positive-integers
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -82,6 +83,12 @@ is-decidable-leq-fraction-ℤ x y =
   is-decidable-leq-ℤ
     ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
     ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x)
+
+leq-fraction-ℤ-Decidable-Prop : (x y : fraction-ℤ) → Decidable-Prop lzero
+leq-fraction-ℤ-Decidable-Prop x y =
+  ( leq-fraction-ℤ x y ,
+    is-prop-leq-fraction-ℤ x y ,
+    is-decidable-leq-fraction-ℤ x y)
 ```
 
 ### Strict inequality of integer fractions is decidable
@@ -93,6 +100,12 @@ is-decidable-le-fraction-ℤ x y =
   is-decidable-le-ℤ
     ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
     ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x)
+
+le-fraction-ℤ-Decidable-Prop : (x y : fraction-ℤ) → Decidable-Prop lzero
+le-fraction-ℤ-Decidable-Prop x y =
+  ( le-fraction-ℤ x y ,
+    is-prop-le-fraction-ℤ x y ,
+    is-decidable-le-fraction-ℤ x y)
 ```
 
 ### Strict inequality of integer fractions implies inequality

@@ -24,6 +24,7 @@ open import elementary-number-theory.reduced-integer-fractions
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
@@ -83,6 +84,12 @@ is-prop-le-ℚ x y = is-prop-type-Prop (le-ℚ-Prop x y)
 is-decidable-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + ¬ (leq-ℚ x y)
 is-decidable-leq-ℚ x y =
   is-decidable-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+
+leq-ℚ-Decidable-Prop : (x y : ℚ) → Decidable-Prop lzero
+leq-ℚ-Decidable-Prop x y =
+  ( leq-ℚ x y ,
+    is-prop-leq-ℚ x y ,
+    is-decidable-leq-ℚ x y)
 ```
 
 ### Strict inequality of rational numbers is decidable
@@ -91,6 +98,12 @@ is-decidable-leq-ℚ x y =
 is-decidable-le-ℚ : (x y : ℚ) → (le-ℚ x y) + ¬ (le-ℚ x y)
 is-decidable-le-ℚ x y =
   is-decidable-le-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+
+le-ℚ-Decidable-Prop : (x y : ℚ) → Decidable-Prop lzero
+le-ℚ-Decidable-Prop x y =
+  ( le-ℚ x y ,
+    is-prop-le-ℚ x y ,
+    is-decidable-le-ℚ x y)
 ```
 
 ### Strict inequality on rationals implies inequality

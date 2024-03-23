@@ -562,7 +562,5 @@ unique-reduce-fraction-ℤ x y H =
         ( pair
           ( unique-denominator-reduce-fraction-ℤ x y H)
           ( eq-is-prop
-            ( is-prop-is-in-subtype
-              ( subtype-positive-ℤ)
-              ( int-reduce-denominator-fraction-ℤ y))))))
+            ( is-prop-is-positive-ℤ (int-reduce-denominator-fraction-ℤ y))))))
 ```

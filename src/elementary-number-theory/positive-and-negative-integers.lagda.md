@@ -106,20 +106,24 @@ decide-is-nonpositive-is-nonpositive-neg-ℤ {inr (inl x)} = inl star
 decide-is-nonpositive-is-nonpositive-neg-ℤ {inr (inr x)} = inr star
 ```
 
-### Inclusion properties
-
-#### Positive integers are nonnegative
+### Positive integers are nonnegative
 
 ```agda
 is-nonnegative-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonnegative-ℤ x
 is-nonnegative-is-positive-ℤ {inr (inr x)} H = H
+
+nonnegative-positive-ℤ : positive-ℤ → nonnegative-ℤ
+nonnegative-positive-ℤ (x , H) = (x , is-nonnegative-is-positive-ℤ H)
 ```
 
-#### Negative integers are nonpositive
+### Negative integers are nonpositive
 
 ```agda
 is-nonpositive-is-negative-ℤ : {x : ℤ} → is-negative-ℤ x → is-nonpositive-ℤ x
 is-nonpositive-is-negative-ℤ {inl x} H = H
+
+nonpositive-negative-ℤ : negative-ℤ → nonpositive-ℤ
+nonpositive-negative-ℤ (x , H) = (x , is-nonpositive-is-negative-ℤ H)
 ```
 
 ### Determining the sign of the successor of an integer
@@ -215,14 +219,14 @@ neg-negative-ℤ (x , H) = (neg-ℤ x , is-positive-neg-is-negative-ℤ H)
 #### Nonpositivity is negated positivity
 
 ```agda
-not-is-positive-is-nonpositive-ℤ :
+is-not-positive-is-nonpositive-ℤ :
   {x : ℤ} → is-nonpositive-ℤ x → ¬ (is-positive-ℤ x)
-not-is-positive-is-nonpositive-ℤ {inr (inl x)} _ q = q
-not-is-positive-is-nonpositive-ℤ {inr (inr x)} p _ = p
+is-not-positive-is-nonpositive-ℤ {inr (inl x)} _ q = q
+is-not-positive-is-nonpositive-ℤ {inr (inr x)} p _ = p
 
-is-nonpositive-not-is-positive-ℤ :
+is-nonpositive-is-not-positive-ℤ :
   {x : ℤ} → ¬ (is-positive-ℤ x) → is-nonpositive-ℤ x
-is-nonpositive-not-is-positive-ℤ {x} H =
+is-nonpositive-is-not-positive-ℤ {x} H =
   rec-coproduct
     ( λ K → ex-falso (H K))
     ( id)
@@ -232,16 +236,16 @@ is-nonpositive-not-is-positive-ℤ {x} H =
 #### Nonnegativity is negated negativity
 
 ```agda
-not-is-negative-is-nonnegative-ℤ :
+is-not-negative-is-nonnegative-ℤ :
   {x : ℤ} → is-nonnegative-ℤ x → ¬ (is-negative-ℤ x)
-not-is-negative-is-nonnegative-ℤ {x} H K =
-  not-is-positive-is-nonpositive-ℤ
+is-not-negative-is-nonnegative-ℤ {x} H K =
+  is-not-positive-is-nonpositive-ℤ
     ( is-nonpositive-neg-is-nonnegative-ℤ H)
     ( is-positive-neg-is-negative-ℤ K)
 
-is-nonnegative-not-is-negative-ℤ :
+is-nonnegative-is-not-negative-ℤ :
   {x : ℤ} → ¬ (is-negative-ℤ x) → is-nonnegative-ℤ x
-is-nonnegative-not-is-negative-ℤ {x} H =
+is-nonnegative-is-not-negative-ℤ {x} H =
   rec-coproduct
     ( λ K → ex-falso (H K))
     ( id)

@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -23,6 +24,7 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -47,14 +49,14 @@ is-prop-is-nonnegative-ℤ (inl x) = is-prop-empty
 is-prop-is-nonnegative-ℤ (inr x) = is-prop-unit
 
 subtype-nonnegative-ℤ : subtype lzero ℤ
-subtype-nonnegative-ℤ x = is-nonnegative-ℤ x , is-prop-is-nonnegative-ℤ x
+subtype-nonnegative-ℤ x = (is-nonnegative-ℤ x , is-prop-is-nonnegative-ℤ x)
 
 nonnegative-ℤ : UU lzero
 nonnegative-ℤ = type-subtype subtype-nonnegative-ℤ
 
 is-nonnegative-eq-ℤ :
   {x y : ℤ} → x ＝ y → is-nonnegative-ℤ x → is-nonnegative-ℤ y
-is-nonnegative-eq-ℤ refl = id
+is-nonnegative-eq-ℤ = tr is-nonnegative-ℤ
 
 module _
   (p : nonnegative-ℤ)
@@ -71,10 +73,10 @@ module _
 
 ```agda
 zero-nonnegative-ℤ : nonnegative-ℤ
-zero-nonnegative-ℤ = zero-ℤ , star
+zero-nonnegative-ℤ = (zero-ℤ , star)
 
 one-nonnegative-ℤ : nonnegative-ℤ
-one-nonnegative-ℤ = one-ℤ , star
+one-nonnegative-ℤ = (one-ℤ , star)
 ```
 
 ## Properties
@@ -85,6 +87,12 @@ one-nonnegative-ℤ = one-ℤ , star
 is-decidable-is-nonnegative-ℤ : is-decidable-fam is-nonnegative-ℤ
 is-decidable-is-nonnegative-ℤ (inl x) = inr id
 is-decidable-is-nonnegative-ℤ (inr x) = inl star
+
+decidable-subtype-nonnegative-ℤ : decidable-subtype lzero ℤ
+decidable-subtype-nonnegative-ℤ x =
+  ( is-nonnegative-ℤ x ,
+    is-prop-is-nonnegative-ℤ x ,
+    is-decidable-is-nonnegative-ℤ x)
 ```
 
 ### The nonnegative integers are a `Set`
