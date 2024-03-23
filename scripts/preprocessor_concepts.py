@@ -11,16 +11,16 @@ import time
 from utils import eprint
 
 CONCEPT_REGEX = re.compile(
-    r'\{\{#concept "([^\n"]+)"(.*?)\}\}')
+    r'\{\{#concept "([^=\n"]+)"(.*?)\}\}')
 
 WIKIDATA_ID_REGEX = re.compile(
     r'WDID=(\S+)')
 
 WIKIDATA_LABEL_REGEX = re.compile(
-    r'WD="([^\n"]+)"')
+    r'WD="([^=\n"]+)"')
 
 DISAMBIGUATION_REGEX = re.compile(
-    r'Disambiguation="([^\n"]+)"')
+    r'Disambiguation="([^=\n"]+)"')
 
 AGDA_REGEX = re.compile(
     r'Agda=(\S+)')
