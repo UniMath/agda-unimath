@@ -203,7 +203,7 @@ module _
   is-equiv-diagonal-exponential-Id-is-acyclic-Truncated-Type ac X x y =
     is-equiv-htpy
       ( htpy-eq ∘ ap (diagonal-exponential (type-Truncated-Type X) A) {x} {y})
-      ( htpy-ap-diagonal-exponential-htpy-eq-diagonal-exponential-Id A x y)
+      ( htpy-ap-diagonal-exponential-htpy-eq-diagonal-exponential-Id x y A)
       ( is-equiv-comp
         ( htpy-eq)
         ( ap (diagonal-exponential (type-Truncated-Type X) A))
@@ -233,9 +233,9 @@ module _
           ( is-equiv-htpy
             ( diagonal-exponential (x ＝ y) A)
             ( htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq
-              ( A)
               ( x)
-              ( y))
+              ( y)
+              ( A))
             ( h X x y)))
 ```
 

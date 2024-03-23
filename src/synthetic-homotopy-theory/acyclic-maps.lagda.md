@@ -191,7 +191,7 @@ module _
   is-equiv-diagonal-exponential-Id-is-acyclic ac {X = X} x y =
     is-equiv-htpy
       ( htpy-eq ∘ ap (diagonal-exponential X A) {x} {y})
-      ( htpy-ap-diagonal-exponential-htpy-eq-diagonal-exponential-Id A x y)
+      ( htpy-ap-diagonal-exponential-htpy-eq-diagonal-exponential-Id x y A)
       ( is-equiv-comp
         ( htpy-eq)
         ( ap (diagonal-exponential X A))
@@ -212,9 +212,9 @@ module _
           ( is-equiv-htpy
             ( diagonal-exponential (x ＝ y) A)
             ( htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq
-              ( A)
               ( x)
-              ( y))
+              ( y)
+              ( A))
             ( h x y)))
 ```
 
@@ -225,11 +225,11 @@ The following diagram is a helpful illustration in the second proof:
 ```text
                         precomp f
        (b : B) → C b ------------- > (a : A) → C (f a)
-             |                               ^
+             |                               ∧
              |                               |
      map-Π Δ |                               | ≃ [precomp with the equivalence
              |                               |        A ≃ Σ B (fiber f)     ]
-             v               ind-Σ           |
+             ∨               ind-Σ           |
  ((b : B) → fiber f b → C b) ----> (s : Σ B (fiber f)) → C (pr1 s)
                               ≃
                           [currying]

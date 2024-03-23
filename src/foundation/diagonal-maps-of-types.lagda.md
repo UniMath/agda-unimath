@@ -30,8 +30,10 @@ open import foundation-core.sections
 
 ## Idea
 
-The {{#concept "diagonal map" Agda=diagonal-exponential}} of a type `A` is the
-map that includes the points of `A` into the exponential `X → A`.
+The
+{{#concept "diagonal map" Disambiguation="of a type into exponentials" Agda=diagonal-exponential}}
+of a type `A` is the map that includes the points of `A` into the exponential
+`X → A`.
 
 ## Definitions
 
@@ -50,15 +52,15 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B)
+  {l1 l2 : Level} {A : UU l1} (x y : A) (B : UU l2)
   where
 
   htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq :
-    htpy-eq ∘ ap (diagonal-exponential B A) ~ diagonal-exponential (x ＝ y) A
+    htpy-eq ∘ ap (diagonal-exponential A B) ~ diagonal-exponential (x ＝ y) B
   htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq refl = refl
 
   htpy-ap-diagonal-exponential-htpy-eq-diagonal-exponential-Id :
-    diagonal-exponential (x ＝ y) A ~ htpy-eq ∘ ap (diagonal-exponential B A)
+    diagonal-exponential (x ＝ y) B ~ htpy-eq ∘ ap (diagonal-exponential A B)
   htpy-ap-diagonal-exponential-htpy-eq-diagonal-exponential-Id =
     inv-htpy htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq
 ```
