@@ -56,11 +56,10 @@ As a consequence, multiplication by a positive integer preserves and reflects
 strict inequality and multiplication by a nonpositive integer preserves
 inequality.
 
-## Properties
+## Lemmas
 
-### Signed product rules
 
-#### The product of two positive integers is positive
+### The product of two positive integers is positive
 
 ```agda
 is-positive-mul-ℤ :
@@ -70,7 +69,7 @@ is-positive-mul-ℤ {inr (inr (succ-ℕ x))} {y} H K =
   is-positive-add-ℤ K (is-positive-mul-ℤ {inr (inr x)} H K)
 ```
 
-#### The product of a positive and a nonnegative integer is nonnegative
+### The product of a positive and a nonnegative integer is nonnegative
 
 ```agda
 is-nonnegative-mul-positive-nonnegative-ℤ :
@@ -81,7 +80,7 @@ is-nonnegative-mul-positive-nonnegative-ℤ {inr (inr (succ-ℕ x))} {y} H K =
     ( is-nonnegative-mul-positive-nonnegative-ℤ {inr (inr x)} H K)
 ```
 
-#### The product of a positive and a negative integer is negative
+### The product of a positive and a negative integer is negative
 
 ```agda
 is-negative-mul-positive-negative-ℤ :
@@ -95,7 +94,7 @@ is-negative-mul-positive-negative-ℤ {x} {y} H K =
         ( is-positive-mul-ℤ H (is-positive-neg-is-negative-ℤ K))))
 ```
 
-#### The product of a positive and a nonpositive integer is nonpositive
+### The product of a positive and a nonpositive integer is nonpositive
 
 ```agda
 is-nonpositive-mul-positive-nonpositive-ℤ :
@@ -110,7 +109,7 @@ is-nonpositive-mul-positive-nonpositive-ℤ {x} {y} H K =
           ( is-nonnegative-neg-is-nonpositive-ℤ K))))
 ```
 
-#### The product of a nonnegative integer and a positive integer is nonnegative
+### The product of a nonnegative integer and a positive integer is nonnegative
 
 ```agda
 is-nonnegative-mul-nonnegative-positive-ℤ :
@@ -121,7 +120,7 @@ is-nonnegative-mul-nonnegative-positive-ℤ {x} {y} H K =
     ( is-nonnegative-mul-positive-nonnegative-ℤ K H)
 ```
 
-#### The product of two nonnegative integers is nonnegative
+### The product of two nonnegative integers is nonnegative
 
 ```agda
 is-nonnegative-mul-ℤ :
@@ -134,7 +133,7 @@ is-nonnegative-mul-ℤ {inr (inr x)} {inr (inr y)} H K =
   is-nonnegative-eq-ℤ (inv (compute-mul-ℤ (inr (inr x)) (inr (inr y)))) star
 ```
 
-#### The product of a nonnegative and a negative integer is nonpositive
+### The product of a nonnegative and a negative integer is nonpositive
 
 ```agda
 is-nonpositive-mul-nonnegative-negative-ℤ :
@@ -149,7 +148,7 @@ is-nonpositive-mul-nonnegative-negative-ℤ {x} {y} H K =
           ( is-positive-neg-is-negative-ℤ K))))
 ```
 
-#### The product of a nonnegative and a nonpositive integer is nonpositive
+### The product of a nonnegative and a nonpositive integer is nonpositive
 
 ```agda
 is-nonpositive-mul-nonnegative-nonpositive-ℤ :
@@ -165,7 +164,7 @@ is-nonpositive-mul-nonnegative-nonpositive-ℤ {x} {y} H K =
           ( is-nonnegative-neg-is-nonpositive-ℤ K))))
 ```
 
-#### The product of a negative and a positive integer is negative
+### The product of a negative and a positive integer is negative
 
 ```agda
 is-negative-mul-negative-positive-ℤ :
@@ -176,7 +175,7 @@ is-negative-mul-negative-positive-ℤ {x} {y} H K =
     ( is-negative-mul-positive-negative-ℤ K H)
 ```
 
-#### The product of a negative and a nonnegative integer is nonpositive
+### The product of a negative and a nonnegative integer is nonpositive
 
 ```agda
 is-nonpositive-mul-negative-nonnegative-ℤ :
@@ -187,7 +186,7 @@ is-nonpositive-mul-negative-nonnegative-ℤ {x} {y} H K =
     ( is-nonpositive-mul-nonnegative-negative-ℤ K H)
 ```
 
-#### The product of two negative integers is positive
+### The product of two negative integers is positive
 
 ```agda
 is-positive-mul-negative-ℤ :
@@ -200,7 +199,7 @@ is-positive-mul-negative-ℤ {x} {y} H K =
       ( is-positive-neg-is-negative-ℤ K))
 ```
 
-#### The product of a negative and a nonpositive integer is nonnegative
+### The product of a negative and a nonpositive integer is nonnegative
 
 ```agda
 is-nonnegative-mul-negative-nonpositive-ℤ :
@@ -213,7 +212,7 @@ is-nonnegative-mul-negative-nonpositive-ℤ {x} {y} H K =
       ( is-nonnegative-neg-is-nonpositive-ℤ K))
 ```
 
-#### The product of a nonpositive and a positive integer is nonpositive
+### The product of a nonpositive and a positive integer is nonpositive
 
 ```agda
 is-nonpositive-mul-nonpositive-positive-ℤ :
@@ -224,7 +223,7 @@ is-nonpositive-mul-nonpositive-positive-ℤ {x} {y} H K =
     ( is-nonpositive-mul-positive-nonpositive-ℤ K H)
 ```
 
-#### The product of a nonpositive and a nonnegative integer is nonpositive
+### The product of a nonpositive and a nonnegative integer is nonpositive
 
 ```agda
 is-nonpositive-mul-nonpositive-nonnegative-ℤ :
@@ -236,7 +235,7 @@ is-nonpositive-mul-nonpositive-nonnegative-ℤ {x} {y} H K =
     ( is-nonpositive-mul-nonnegative-nonpositive-ℤ K H)
 ```
 
-#### The product of a nonpositive integer and a negative integer is nonnegative
+### The product of a nonpositive integer and a negative integer is nonnegative
 
 ```agda
 is-nonnegative-mul-nonpositive-negative-ℤ :
@@ -247,7 +246,7 @@ is-nonnegative-mul-nonpositive-negative-ℤ {x} {y} H K =
     ( is-nonnegative-mul-negative-nonpositive-ℤ K H)
 ```
 
-#### The product of two nonpositive integers is nonnegative
+### The product of two nonpositive integers is nonnegative
 
 ```agda
 is-nonnegative-mul-nonpositive-ℤ :
@@ -261,9 +260,7 @@ is-nonnegative-mul-nonpositive-ℤ {x} {y} H K =
       ( is-nonnegative-neg-is-nonpositive-ℤ K))
 ```
 
-### Factorization rules
-
-#### The left factor of a positive product with a positive right factor is positive
+### The left factor of a positive product with a positive right factor is positive
 
 ```agda
 is-positive-left-factor-mul-ℤ :
@@ -275,7 +272,7 @@ is-positive-left-factor-mul-ℤ {inr (inl star)} {inr (inr y)} H K =
 is-positive-left-factor-mul-ℤ {inr (inr x)} {inr (inr y)} H K = star
 ```
 
-#### The right factor of a positive product with a positive left factor is positive
+### The right factor of a positive product with a positive left factor is positive
 
 ```agda
 is-positive-right-factor-mul-ℤ :
@@ -284,7 +281,7 @@ is-positive-right-factor-mul-ℤ {x} {y} H =
   is-positive-left-factor-mul-ℤ (is-positive-eq-ℤ (commutative-mul-ℤ x y) H)
 ```
 
-#### The left factor of a nonnegative product with a positive right factor is nonnegative
+### The left factor of a nonnegative product with a positive right factor is nonnegative
 
 ```agda
 is-nonnegative-left-factor-mul-ℤ :
@@ -294,7 +291,7 @@ is-nonnegative-left-factor-mul-ℤ {inl x} {inr (inr y)} H K =
 is-nonnegative-left-factor-mul-ℤ {inr x} {inr y} H K = star
 ```
 
-#### The right factor of a nonnegative product with a positive left factor is nonnegative
+### The right factor of a nonnegative product with a positive left factor is nonnegative
 
 ```agda
 is-nonnegative-right-factor-mul-ℤ :
@@ -363,7 +360,7 @@ mul-nonpositive-ℤ (x , H) (y , K) =
   mul-ℤ x y , is-nonnegative-mul-nonpositive-ℤ H K
 ```
 
-## Rules for inequalities
+## Properties
 
 ### Multiplication by a positive integer preserves and reflects the strict ordering
 
