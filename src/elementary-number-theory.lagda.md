@@ -33,6 +33,7 @@ open import elementary-number-theory.cubes-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.decidable-total-order-integers public
 open import elementary-number-theory.decidable-total-order-natural-numbers public
+open import elementary-number-theory.decidable-total-order-rational-numbers public
 open import elementary-number-theory.decidable-total-order-standard-finite-types public
 open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public

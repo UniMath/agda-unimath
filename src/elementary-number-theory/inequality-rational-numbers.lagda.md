@@ -8,6 +8,7 @@ module elementary-number-theory.inequality-rational-numbers where
 
 ```agda
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
+open import elementary-number-theory.difference-integers
 open import elementary-number-theory.inequality-integer-fractions
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integer-fractions
@@ -36,6 +37,9 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
+
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>
@@ -137,6 +141,21 @@ antisymmetric-leq-ℚ x y H H' =
       ( H)
       ( H'))) ∙
   ( in-fraction-fraction-ℚ y)
+```
+
+### The ordering of the rational numbers is linear
+
+```agda
+linear-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + (leq-ℚ y x)
+linear-leq-ℚ x y =
+  map-coproduct
+    ( id)
+    ( is-nonnegative-eq-ℤ
+      (distributive-neg-diff-ℤ
+        ( numerator-ℚ y *ℤ denominator-ℚ x)
+        ( numerator-ℚ x *ℤ denominator-ℚ y)))
+    ( decide-is-nonnegative-is-nonnegative-neg-ℤ
+      { cross-mul-diff-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)})
 ```
 
 ### Strict inequality on rationals is asymmetric
@@ -332,4 +351,15 @@ located-le-ℚ x y z H =
       ( id)
       ( λ p → concatenate-leq-le-ℚ x y z p H)
       ( decide-le-leq-ℚ y x))
+```
+
+### The partially ordered set of rational numbers
+
+```agda
+ℚ-Preorder : Preorder lzero lzero
+ℚ-Preorder =
+  (ℚ , leq-ℚ-Prop , refl-leq-ℚ , transitive-leq-ℚ)
+
+ℚ-Poset : Poset lzero lzero
+ℚ-Poset = (ℚ-Preorder , antisymmetric-leq-ℚ)
 ```
