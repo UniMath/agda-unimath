@@ -34,9 +34,9 @@ open import structured-types.pointed-types
 ## Idea
 
 Consider two [H-spaces](structured-types.h-spaces.md) `X` and `Y`. An
-{{#concept "equivalence of H-spaces"}} from `X` to `Y` consists of a
-[pointed equivalence](structured-types.pointed-equivalences.md) `e : X ≃∗ Y`
-that preserves the unital binary operation
+{{#concept "equivalence of H-spaces" Agda=equiv-H-Space}} from `X` to `Y`
+consists of a [pointed equivalence](structured-types.pointed-equivalences.md)
+`e : X ≃∗ Y` that preserves the unital binary operation
 
 ```text
   α : (x x' : X) → e (μ x x') ＝ μ (e x) (e x')
