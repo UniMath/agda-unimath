@@ -58,7 +58,6 @@ inequality.
 
 ## Lemmas
 
-
 ### The product of two positive integers is positive
 
 ```agda
