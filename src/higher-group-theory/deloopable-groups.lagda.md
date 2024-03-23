@@ -19,7 +19,7 @@ open import higher-group-theory.deloopable-h-spaces
 
 ## Idea
 
-A {{#concept "delooping" Disambiguation="group"}} of a
+A {{#concept "delooping" Disambiguation="group" Agda=delooping-Group}} of a
 [group](group-theory.groups.md) `G` is a
 [delooping](higher-group-theory.deloopable-h-spaces.md) of the underlying
 [H-space](structured-types.h-spaces.md) of `G`. In other words, a delooping of a
