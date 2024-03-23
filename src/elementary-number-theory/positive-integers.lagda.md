@@ -159,3 +159,9 @@ equiv-positive-int-ℕ : ℕ ≃ positive-ℤ
 pr1 equiv-positive-int-ℕ = positive-int-ℕ
 pr2 equiv-positive-int-ℕ = is-equiv-positive-int-ℕ
 ```
+
+## See also
+
+- The relations between positive and nonnegative, negative and nonnpositive
+  integers are derived in
+  [`positive-and-negative-integers`](elementary-number-theory.positive-and-negative-integers.md)

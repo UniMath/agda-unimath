@@ -287,6 +287,14 @@ is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
 
 ## See also
 
+- The type of positive integers is defined in
+  [`positive-integers`](elementary-number-theory.positive-integers.md)
+- The type of nonnegative integers is defined in
+  [`nonnegative-integers`](elementary-number-theory.nonnegative-integers.md)
+- The type of negative integers is defined in
+  [`negative-integers`](elementary-number-theory.negative-integers.md)
+- The type of nonpositive integers is defined in
+  [`nonpositive-integers`](elementary-number-theory.nonpositive-integers.md)
 - We show in
   [`structured-types.initial-pointed-type-equipped-with-automorphism`](structured-types.initial-pointed-type-equipped-with-automorphism.md)
   that ℤ is the initial pointed type equipped with an automorphism.

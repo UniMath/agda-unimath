@@ -169,3 +169,9 @@ equiv-nonpositive-int-ℕ : ℕ ≃ nonpositive-ℤ
 pr1 equiv-nonpositive-int-ℕ = nonpositive-int-ℕ
 pr2 equiv-nonpositive-int-ℕ = is-equiv-nonpositive-int-ℕ
 ```
+
+## See also
+
+- The relations between nonpositive and positive, nonnegative and negative
+  integers are derived in
+  [`positive-and-negative-integers`](elementary-number-theory.positive-and-negative-integers.md)
