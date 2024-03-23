@@ -1709,13 +1709,13 @@ remainder-min-dist-succ-x-is-distance x y =
               (int-ℕ s)) (neg-ℤ one-ℤ)))
             (succ-ℕ x))
 
-remainder-min-dist-succ-x-not-is-nonzero :
+remainder-min-dist-succ-x-is-not-nonzero :
   (x y : ℕ) →
   ¬ ( is-nonzero-ℕ
       ( remainder-euclidean-division-ℕ
         ( minimal-positive-distance (succ-ℕ x) y)
         ( succ-ℕ x)))
-remainder-min-dist-succ-x-not-is-nonzero x y nonzero =
+remainder-min-dist-succ-x-is-not-nonzero x y nonzero =
   contradiction-le-ℕ
     ( remainder-euclidean-division-ℕ
       ( minimal-positive-distance (succ-ℕ x) y)
@@ -1771,8 +1771,8 @@ remainder-min-dist-succ-x-is-zero x y =
         ( remainder-euclidean-division-ℕ
           (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
   is-zero-case-split (inl z) = z
-  is-zero-case-split (inr nz) = ex-falso
-    (remainder-min-dist-succ-x-not-is-nonzero x y nz)
+  is-zero-case-split (inr nz) =
+    ex-falso (remainder-min-dist-succ-x-is-not-nonzero x y nz)
 
 minimal-positive-distance-div-fst :
   (x y : ℕ) → div-ℕ (minimal-positive-distance x y) x
