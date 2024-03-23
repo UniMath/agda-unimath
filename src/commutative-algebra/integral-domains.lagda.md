@@ -141,7 +141,7 @@ module _
   additive-semigroup-Integral-Domain = semigroup-Ab ab-Integral-Domain
 
   is-group-additive-semigroup-Integral-Domain :
-    is-group additive-semigroup-Integral-Domain
+    is-group-Semigroup additive-semigroup-Integral-Domain
   is-group-additive-semigroup-Integral-Domain =
     is-group-Ab ab-Integral-Domain
 
@@ -251,7 +251,9 @@ module _
 
 ```agda
   has-negatives-Integral-Domain :
-    is-group' additive-semigroup-Integral-Domain has-zero-Integral-Domain
+    is-group-is-unital-Semigroup
+      ( additive-semigroup-Integral-Domain)
+      ( has-zero-Integral-Domain)
   has-negatives-Integral-Domain = has-negatives-Ab ab-Integral-Domain
 
   neg-Integral-Domain : type-Integral-Domain → type-Integral-Domain

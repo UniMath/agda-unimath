@@ -14,6 +14,7 @@ open import category-theory.large-precategories
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -24,7 +25,7 @@ open import foundation.universe-levels
 Given a type `I` and a
 [large precategory](category-theory.large-precategories.md) `C`, the **large
 function pre-category** `Cᴵ` consists of `I`-indexed families of objects of `C`
-and `I`-indexed familis of morphisms between them.
+and `I`-indexed families of morphisms between them.
 
 ## Definition
 
@@ -88,7 +89,7 @@ module _
   associative-comp-hom-Large-Function-Precategory =
     associative-comp-hom-Π-Large-Precategory I (λ _ → C)
 
-  inv-associative-comp-hom-Large-Function-Precategory :
+  involutive-eq-associative-comp-hom-Large-Function-Precategory :
     {l2 l3 l4 l5 : Level}
     {x : obj-Large-Function-Precategory l2}
     {y : obj-Large-Function-Precategory l3}
@@ -98,13 +99,13 @@ module _
     (g : hom-Large-Function-Precategory y z)
     (f : hom-Large-Function-Precategory x y) →
     comp-hom-Large-Function-Precategory
-      ( h)
-      ( comp-hom-Large-Function-Precategory g f) ＝
-    comp-hom-Large-Function-Precategory
       ( comp-hom-Large-Function-Precategory h g)
-      ( f)
-  inv-associative-comp-hom-Large-Function-Precategory =
-    inv-associative-comp-hom-Π-Large-Precategory I (λ _ → C)
+      ( f) ＝ⁱ
+    comp-hom-Large-Function-Precategory
+      ( h)
+      ( comp-hom-Large-Function-Precategory g f)
+  involutive-eq-associative-comp-hom-Large-Function-Precategory =
+    involutive-eq-associative-comp-hom-Π-Large-Precategory I (λ _ → C)
 
   id-hom-Large-Function-Precategory :
     {l2 : Level} {x : obj-Large-Function-Precategory l2} →

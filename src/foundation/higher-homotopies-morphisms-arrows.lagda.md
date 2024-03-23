@@ -36,7 +36,7 @@ Consider two [morphisms of arrows](foundation.morphisms-arrows.md)
 `α := (i , j , H)` and `α' := (i' , j' , H')` and two
 [homotopies of morphisms of arrows](foundation.homotopies-morphisms-arrows.md)
 `β := (I , J , K)` and `β' : (I' , J' , K')` between them. A
-{{#concept "2-homotopy of morphisms of arrows" Agda=htpy-htpy-hom-arrow}} is a
+{{#concept "`2`-homotopy of morphisms of arrows" Agda=htpy-htpy-hom-arrow}} is a
 triple `(γ₀, γ₁ , γ₂)` consisting of [homotopies](foundation-core.homotopies.md)
 
 ```text

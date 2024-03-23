@@ -159,12 +159,6 @@ module _
       ( comp-hom-Large-Preorder P Q S (comp-hom-Large-Preorder Q R S h g) f)
       ( comp-hom-Large-Preorder P R S h (comp-hom-Large-Preorder P Q R g f))
   associative-comp-hom-Large-Preorder = refl-htpy
-
-  inv-associative-comp-hom-Large-Preorder :
-    htpy-hom-Large-Preorder P S
-      ( comp-hom-Large-Preorder P R S h (comp-hom-Large-Preorder P Q R g f))
-      ( comp-hom-Large-Preorder P Q S (comp-hom-Large-Preorder Q R S h g) f)
-  inv-associative-comp-hom-Large-Preorder = refl-htpy
 ```
 
 ### Composition of order preserving maps satisfies left and right unit laws

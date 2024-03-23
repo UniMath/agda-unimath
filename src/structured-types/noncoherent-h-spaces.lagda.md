@@ -1,4 +1,4 @@
-# Non-coherent H-spaces
+# Noncoherent H-spaces
 
 ```agda
 module structured-types.noncoherent-h-spaces where
@@ -43,7 +43,7 @@ unital-mul-Pointed-Type A =
     ( unit-laws-mul-Pointed-Type A)
 ```
 
-### Non-coherent Noncoherent-H-Spaces
+### Noncoherent H-Spaces
 
 ```agda
 noncoherent-h-space-structure :

@@ -69,7 +69,9 @@ module _
   pr2 (pr2 is-unital-Semigroup-loop-semigroup-Set) x = right-unit
 
   is-group-loop-semigroup-Set' :
-    is-group' loop-semigroup-Set is-unital-Semigroup-loop-semigroup-Set
+    is-group-is-unital-Semigroup
+      ( loop-semigroup-Set)
+      ( is-unital-Semigroup-loop-semigroup-Set)
   pr1 is-group-loop-semigroup-Set' = inv
   pr1 (pr2 is-group-loop-semigroup-Set') = left-inv
   pr2 (pr2 is-group-loop-semigroup-Set') = right-inv

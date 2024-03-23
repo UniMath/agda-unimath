@@ -82,7 +82,7 @@ module _
     (f : type-Π-Ab) → add-Π-Ab f (neg-Π-Ab f) ＝ zero-Π-Ab
   right-inverse-law-add-Π-Ab = right-inverse-law-mul-Group group-Π-Ab
 
-  is-group-Π-Ab : is-group semigroup-Π-Ab
+  is-group-Π-Ab : is-group-Semigroup semigroup-Π-Ab
   is-group-Π-Ab = is-group-Group group-Π-Ab
 
   commutative-add-Π-Ab :

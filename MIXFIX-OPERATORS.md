@@ -125,7 +125,7 @@ Below, we outline a list of general rules when assigning associativities.
   [function composition `_∘_`](foundation-core.function-types.md), can be
   assigned _any associativity_.
 
-- **Non-parametric arithmetic operators** are often naturally computed from left
+- **Nonparametric arithmetic operators** are often naturally computed from left
   to right. For instance, the expression `1 - 2 - 3` is computed as
   `(1 - 2) - 3 = -1 - 3 = -4`, hence should be _left associative_. This applies
   to addition, subtraction, multiplication, and division. Note that for

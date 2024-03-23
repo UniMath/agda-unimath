@@ -172,7 +172,7 @@ module _
   additive-semigroup-Euclidean-Domain = semigroup-Ab ab-Euclidean-Domain
 
   is-group-additive-semigroup-Euclidean-Domain :
-    is-group additive-semigroup-Euclidean-Domain
+    is-group-Semigroup additive-semigroup-Euclidean-Domain
   is-group-additive-semigroup-Euclidean-Domain =
     is-group-Ab ab-Euclidean-Domain
 
@@ -282,7 +282,9 @@ module _
 
 ```agda
   has-negatives-Euclidean-Domain :
-    is-group' additive-semigroup-Euclidean-Domain has-zero-Euclidean-Domain
+    is-group-is-unital-Semigroup
+      ( additive-semigroup-Euclidean-Domain)
+      ( has-zero-Euclidean-Domain)
   has-negatives-Euclidean-Domain = has-negatives-Ab ab-Euclidean-Domain
 
   neg-Euclidean-Domain : type-Euclidean-Domain → type-Euclidean-Domain

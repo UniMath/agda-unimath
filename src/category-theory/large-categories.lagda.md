@@ -18,6 +18,7 @@ open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -117,6 +118,21 @@ module _
   id-hom-Large-Category =
     id-hom-Large-Precategory (large-precategory-Large-Category C)
 
+  involutive-eq-associative-comp-hom-Large-Category :
+    {l1 l2 l3 l4 : Level}
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
+    {Z : obj-Large-Category l3}
+    {W : obj-Large-Category l4} →
+    (h : hom-Large-Category Z W)
+    (g : hom-Large-Category Y Z)
+    (f : hom-Large-Category X Y) →
+    ( comp-hom-Large-Category (comp-hom-Large-Category h g) f) ＝ⁱ
+    ( comp-hom-Large-Category h (comp-hom-Large-Category g f))
+  involutive-eq-associative-comp-hom-Large-Category =
+    involutive-eq-associative-comp-hom-Large-Precategory
+      ( large-precategory-Large-Category C)
+
   associative-comp-hom-Large-Category :
     {l1 l2 l3 l4 : Level}
     {X : obj-Large-Category l1}
@@ -130,21 +146,6 @@ module _
     ( comp-hom-Large-Category h (comp-hom-Large-Category g f))
   associative-comp-hom-Large-Category =
     associative-comp-hom-Large-Precategory (large-precategory-Large-Category C)
-
-  inv-associative-comp-hom-Large-Category :
-    {l1 l2 l3 l4 : Level}
-    {X : obj-Large-Category l1}
-    {Y : obj-Large-Category l2}
-    {Z : obj-Large-Category l3}
-    {W : obj-Large-Category l4} →
-    (h : hom-Large-Category Z W)
-    (g : hom-Large-Category Y Z)
-    (f : hom-Large-Category X Y) →
-    ( comp-hom-Large-Category h (comp-hom-Large-Category g f)) ＝
-    ( comp-hom-Large-Category (comp-hom-Large-Category h g) f)
-  inv-associative-comp-hom-Large-Category =
-    inv-associative-comp-hom-Large-Precategory
-      ( large-precategory-Large-Category C)
 
   left-unit-law-comp-hom-Large-Category :
     {l1 l2 : Level}

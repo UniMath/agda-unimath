@@ -16,7 +16,6 @@ open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.decidable-equality
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
@@ -79,7 +78,7 @@ usual algebraic sense, i.e., it consists of a
 ```agda
 is-group-𝔽 :
   {l : Level} (G : Semigroup-𝔽 l) → UU l
-is-group-𝔽 G = is-group (semigroup-Semigroup-𝔽 G)
+is-group-𝔽 G = is-group-Semigroup (semigroup-Semigroup-𝔽 G)
 ```
 
 ### The type of finite groups
@@ -100,7 +99,7 @@ module _
   semigroup-Group-𝔽 =
     semigroup-Semigroup-𝔽 finite-semigroup-Group-𝔽
 
-  is-group-Group-𝔽 : is-group semigroup-Group-𝔽
+  is-group-Group-𝔽 : is-group-Semigroup semigroup-Group-𝔽
   is-group-Group-𝔽 = pr2 G
 
   group-Group-𝔽 : Group l
@@ -199,7 +198,7 @@ module _
   pointed-type-Group-𝔽 = pointed-type-Group group-Group-𝔽
 
   has-inverses-Group-𝔽 :
-    is-group' semigroup-Group-𝔽 is-unital-Group-𝔽
+    is-group-is-unital-Semigroup semigroup-Group-𝔽 is-unital-Group-𝔽
   has-inverses-Group-𝔽 = has-inverses-Group group-Group-𝔽
 
   inv-Group-𝔽 : type-Group-𝔽 → type-Group-𝔽
@@ -333,13 +332,13 @@ Group-of-Order l n = Σ (Group l) (λ G → mere-equiv (Fin n) (type-Group G))
 
 ## Properties
 
-### The type `is-group G` is finite for any semigroup of fixed finite order
+### The type `is-group-Semigroup G` is finite for any semigroup of fixed finite order
 
 ```agda
-is-finite-is-group :
+is-finite-is-group-Semigroup :
   {l : Level} (n : ℕ) (G : Semigroup-of-Order l n) →
-  is-finite {l} (is-group (pr1 G))
-is-finite-is-group {l} n G =
+  is-finite {l} (is-group-Semigroup (pr1 G))
+is-finite-is-group-Semigroup {l} n G =
   apply-universal-property-trunc-Prop
     ( pr2 G)
     ( is-finite-Prop _)
@@ -393,11 +392,11 @@ is-π-finite-Group-of-Order {l} k n =
       ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
       ( λ X →
         is-π-finite-is-finite k
-          ( is-finite-is-group n X)))
+          ( is-finite-is-group-Semigroup n X)))
   where
   e :
     Group-of-Order l n ≃
-    Σ (Semigroup-of-Order l n) (λ X → is-group (pr1 X))
+    Σ (Semigroup-of-Order l n) (λ X → is-group-Semigroup (pr1 X))
   e = equiv-right-swap-Σ
 
 number-of-groups-of-order : ℕ → ℕ

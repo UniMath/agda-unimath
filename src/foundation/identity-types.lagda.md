@@ -82,10 +82,24 @@ module _
         ( is-section-inv-concat p)
         ( is-retraction-inv-concat p)
 
+  abstract
+    is-equiv-inv-concat :
+      {x y : A} (p : x ＝ y) (z : A) → is-equiv (inv-concat p z)
+    is-equiv-inv-concat p z =
+      is-equiv-is-invertible
+        ( concat p z)
+        ( is-retraction-inv-concat p)
+        ( is-section-inv-concat p)
+
   equiv-concat :
     {x y : A} (p : x ＝ y) (z : A) → (y ＝ z) ≃ (x ＝ z)
   pr1 (equiv-concat p z) = concat p z
   pr2 (equiv-concat p z) = is-equiv-concat p z
+
+  equiv-inv-concat :
+    {x y : A} (p : x ＝ y) (z : A) → (x ＝ z) ≃ (y ＝ z)
+  pr1 (equiv-inv-concat p z) = inv-concat p z
+  pr2 (equiv-inv-concat p z) = is-equiv-inv-concat p z
 
   map-equiv-concat-equiv :
     {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) → (x' ＝ x)
@@ -124,10 +138,24 @@ module _
         ( is-section-inv-concat' q)
         ( is-retraction-inv-concat' q)
 
+  abstract
+    is-equiv-inv-concat' :
+      (x : A) {y z : A} (q : y ＝ z) → is-equiv (inv-concat' x q)
+    is-equiv-inv-concat' x q =
+      is-equiv-is-invertible
+        ( concat' x q)
+        ( is-retraction-inv-concat' q)
+        ( is-section-inv-concat' q)
+
   equiv-concat' :
     (x : A) {y z : A} (q : y ＝ z) → (x ＝ y) ≃ (x ＝ z)
   pr1 (equiv-concat' x q) = concat' x q
   pr2 (equiv-concat' x q) = is-equiv-concat' x q
+
+  equiv-inv-concat' :
+    (x : A) {y z : A} (q : y ＝ z) → (x ＝ z) ≃ (x ＝ y)
+  pr1 (equiv-inv-concat' x q) = inv-concat' x q
+  pr2 (equiv-inv-concat' x q) = is-equiv-inv-concat' x q
 
 is-binary-equiv-concat :
   {l : Level} {A : UU l} {x y z : A} →

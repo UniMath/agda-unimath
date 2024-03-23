@@ -45,8 +45,8 @@ In one direction, our proof relies on the following group-theoretic fact: the
 map of [generators](group-theory.generating-elements-groups.md) from a
 [set](foundation-core.sets.md) `X` to the free group on `X` is
 [injective](foundation-core.injective-maps.md). This is proved constructively in
-\[MRR88\] by Mines, Richman and Ruitenburg, and carried out in HoTT/UF and
-formalized in Agda in \[BCDE21\] by Bezem, Coquand, Dybjer and Escardó.
+{{#cite MRR88}} by Mines, Richman and Ruitenburg, and carried out in HoTT/UF and
+formalized in Agda in {{#cite BCDE21}} by Bezem, Coquand, Dybjer, and Escardó.
 
 Translated to [concrete groups](group-theory.concrete-groups.md) this means that
 for every set `X`, we have a [pointed](structured-types.pointed-types.md)
@@ -55,7 +55,7 @@ for every set `X`, we have a [pointed](structured-types.pointed-types.md)
 this in our proof below.)
 
 A construction on the level of concrete groups can be found in the recent
-preprint \[Wär23\] by David Wärn.
+preprint by David Wärn {{#cite Warn23draft}}.
 
 For the time being, we haven't formalized this group-theoretic fact; instead we
 label it as an explicit assumption of our proof.
@@ -153,14 +153,7 @@ module _
 
 ## References
 
-- \[BCDE21\]: Marc Bezem, Thierry Coquand, Peter Dybjer and Martín Escardó. Free
-  groups in HoTT/UF in Agda.
-  <https://www.cs.bham.ac.uk/~mhe/TypeTopology/Groups.Free.html>. 2021.
-- \[MRR88\]: Ray Mines, Fred Richman and Wim Ruitenburg. A Course in
-  Constructive Algebra. Universitext. Springer, 1988.
-  [doi:10.1007/978-1-4419-8640-5](https://doi.org/10.1007/978-1-4419-8640-5).
-- \[Wär23\]: David Wärn. Path spaces of pushouts. Preprint.
-  <https://dwarn.se/po-paths.pdf>. 2023.
+{{#bibliography}}
 
 ## See also
 

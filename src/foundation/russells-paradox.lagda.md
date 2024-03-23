@@ -17,6 +17,7 @@ open import foundation.negation
 open import foundation.small-types
 open import foundation.small-universes
 open import foundation.surjective-maps
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-equivalences

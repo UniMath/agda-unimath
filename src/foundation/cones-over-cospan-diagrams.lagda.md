@@ -99,7 +99,7 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
     ( PC x)
 ```
 
-### Identifications of cones over cospan diagrams
+### Characterizing identifications of cones over cospan diagrams
 
 ```agda
 module _
@@ -121,6 +121,23 @@ module _
       ( λ K →
         Σ ( horizontal-map-cone f g c ~ horizontal-map-cone f g c')
           ( coherence-htpy-cone c c' K))
+
+  htpy-vertical-map-htpy-cone :
+    (c c' : cone f g C) (H : htpy-cone c c') →
+    vertical-map-cone f g c ~ vertical-map-cone f g c'
+  htpy-vertical-map-htpy-cone c c' H = pr1 H
+
+  htpy-horizontal-map-htpy-cone :
+    (c c' : cone f g C) (H : htpy-cone c c') →
+    horizontal-map-cone f g c ~ horizontal-map-cone f g c'
+  htpy-horizontal-map-htpy-cone c c' H = pr1 (pr2 H)
+
+  coh-htpy-cone :
+    (c c' : cone f g C) (H : htpy-cone c c') →
+    coherence-htpy-cone c c'
+      ( htpy-vertical-map-htpy-cone c c' H)
+      ( htpy-horizontal-map-htpy-cone c c' H)
+  coh-htpy-cone c c' H = pr2 (pr2 H)
 
   refl-htpy-cone : (c : cone f g C) → htpy-cone c c
   pr1 (refl-htpy-cone c) = refl-htpy
@@ -274,9 +291,7 @@ module _
 
 ```agda
 id-cone : {l : Level} (A : UU l) → cone (id {A = A}) (id {A = A}) A
-pr1 (id-cone A) = id
-pr1 (pr2 (id-cone A)) = id
-pr2 (pr2 (id-cone A)) = refl-htpy
+id-cone A = (id , id , refl-htpy)
 ```
 
 ## Properties

@@ -21,6 +21,7 @@ open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -67,20 +68,20 @@ module _
     associative-comp-natural-transformation-Precategory
       C D F G H I f g h
 
-  inv-associative-comp-hom-functor-precategory-Precategory :
+  involutive-eq-associative-comp-hom-functor-precategory-Precategory :
     {F G H I : functor-Precategory C D}
     (h : natural-transformation-Precategory C D H I)
     (g : natural-transformation-Precategory C D G H)
     (f : natural-transformation-Precategory C D F G) →
-    comp-natural-transformation-Precategory C D F H I
-      ( h)
-      ( comp-natural-transformation-Precategory C D F G H g f) ＝
     comp-natural-transformation-Precategory C D F G I
       ( comp-natural-transformation-Precategory C D G H I h g)
-      ( f)
-  inv-associative-comp-hom-functor-precategory-Precategory
+      ( f) ＝ⁱ
+    comp-natural-transformation-Precategory C D F H I
+      ( h)
+      ( comp-natural-transformation-Precategory C D F G H g f)
+  involutive-eq-associative-comp-hom-functor-precategory-Precategory
     { F} {G} {H} {I} h g f =
-    inv-associative-comp-natural-transformation-Precategory
+    involutive-eq-associative-comp-natural-transformation-Precategory
       C D F G H I f g h
 
   associative-composition-operation-functor-precategory-Precategory :
@@ -89,16 +90,10 @@ module _
   pr1 associative-composition-operation-functor-precategory-Precategory
     {F} {G} {H} =
     comp-hom-functor-precategory-Precategory {F} {G} {H}
-  pr1
-    ( pr2
-        associative-composition-operation-functor-precategory-Precategory
-          { F} {G} {H} {I} h g f) =
-    associative-comp-hom-functor-precategory-Precategory {F} {G} {H} {I} h g f
   pr2
-    ( pr2
-        associative-composition-operation-functor-precategory-Precategory
-          { F} {G} {H} {I} h g f) =
-    inv-associative-comp-hom-functor-precategory-Precategory
+    associative-composition-operation-functor-precategory-Precategory
+      { F} {G} {H} {I} h g f =
+    involutive-eq-associative-comp-hom-functor-precategory-Precategory
       { F} {G} {H} {I} h g f
 
   id-hom-functor-precategory-Precategory :

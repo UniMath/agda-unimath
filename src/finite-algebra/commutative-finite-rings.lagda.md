@@ -147,7 +147,7 @@ module _
   additive-semigroup-Commutative-Ring-𝔽 = semigroup-Ab ab-Commutative-Ring-𝔽
 
   is-group-additive-semigroup-Commutative-Ring-𝔽 :
-    is-group additive-semigroup-Commutative-Ring-𝔽
+    is-group-Semigroup additive-semigroup-Commutative-Ring-𝔽
   is-group-additive-semigroup-Commutative-Ring-𝔽 =
     is-group-Ab ab-Commutative-Ring-𝔽
 
@@ -258,7 +258,9 @@ module _
 
 ```agda
   has-negatives-Commutative-Ring-𝔽 :
-    is-group' additive-semigroup-Commutative-Ring-𝔽 has-zero-Commutative-Ring-𝔽
+    is-group-is-unital-Semigroup
+      ( additive-semigroup-Commutative-Ring-𝔽)
+      ( has-zero-Commutative-Ring-𝔽)
   has-negatives-Commutative-Ring-𝔽 = has-negatives-Ab ab-Commutative-Ring-𝔽
 
   neg-Commutative-Ring-𝔽 : type-Commutative-Ring-𝔽 → type-Commutative-Ring-𝔽

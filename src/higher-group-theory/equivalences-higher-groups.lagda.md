@@ -21,6 +21,7 @@ open import higher-group-theory.higher-groups
 open import higher-group-theory.homomorphisms-higher-groups
 
 open import structured-types.pointed-equivalences
+open import structured-types.pointed-isomorphisms
 open import structured-types.pointed-types
 ```
 
@@ -63,7 +64,7 @@ module _
   where
 
   is-iso-∞-Group : hom-∞-Group G H → UU (l1 ⊔ l2)
-  is-iso-∞-Group = is-iso-pointed-map
+  is-iso-∞-Group = is-pointed-iso
 ```
 
 ## Properties

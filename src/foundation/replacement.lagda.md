@@ -56,9 +56,7 @@ replacement' f = replacement f is-small'
 
 ## References
 
-- Egbert Rijke, Theorem 4.6 in _The join construction_, 2017
-  ([arXiv:1701.07538](https://arxiv.org/abs/1701.07538))
-- Marc Bezem, Ulrik Buchholtz, Pierre Cagne, Bjørn Ian Dundas, and Daniel R.
-  Grayson, Section 2.19 of _Symmetry_
-  ([newest version](https://unimath.github.io/SymmetryBook/book.pdf),
-  [GitHub](https://github.com/UniMath/SymmetryBook))
+- Theorem 4.6 in {{#cite Rij17}}.
+- Section 2.19 in {{#cite SymmetryBook}}.
+
+{{#bibliography}}

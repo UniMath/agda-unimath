@@ -13,19 +13,27 @@ open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-arrows
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-fibers-of-maps
 open import foundation.higher-homotopies-morphisms-arrows
 open import foundation.homotopies
 open import foundation.homotopies-morphisms-arrows
 open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
+open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.pullbacks
 open import foundation.retractions
 open import foundation.sections
 open import foundation.standard-pullbacks
+open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -508,6 +516,36 @@ module _
   compute-pullback-hom-comp-left = refl-htpy
 ```
 
+### Computing the fiber map between the vertical maps in the pullback-hom square
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  compute-map-fiber-vertical-pullback-hom :
+    (h : B → Y) →
+    equiv-arrow
+      ( precomp-Π f (fiber g ∘ h))
+      ( map-fiber-vertical-map-cone
+        ( precomp f Y)
+        ( postcomp A g)
+        ( cone-pullback-hom f g)
+        ( h))
+  pr1 (compute-map-fiber-vertical-pullback-hom h) =
+    compute-Π-fiber-postcomp B g h
+  pr1 (pr2 (compute-map-fiber-vertical-pullback-hom h)) =
+    compute-Π-fiber-postcomp A g (h ∘ f)
+  pr2 (pr2 (compute-map-fiber-vertical-pullback-hom h)) H =
+    eq-Eq-fiber
+      ( postcomp A g)
+      ( precomp f Y h)
+      ( refl)
+      ( compute-eq-htpy-ap-precomp f (pr2 (map-distributive-Π-Σ H)))
+```
+
 ## Table of files about pullbacks
 
 The following table lists files that are about pullbacks as a general concept.
@@ -522,8 +560,4 @@ A wikidata identifier for this concept is unavailable.
 
 ## References
 
-- Emily Riehl and Dominic Verity. _Elements of `∞`-category theory_. Cambridge
-  Studies in Advanced Mathematics 194. Cambridge University Press,
-  Cambridge, 2022.
-  [doi:10.1017/9781108936880](https://doi.org/10.1017/9781108936880). ISBN:
-  978-1-108-83798-9.
+{{#bibliography}} {{#reference Rie22}}

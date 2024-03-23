@@ -84,3 +84,4 @@ module _
 - [Cospans](foundation.cospans.md)
 - [Span diagrams](foundation.span-diagrams.md)
 - [Spans of families of types](foundation.spans-families-of-types.md)
+- [Spans of pointed types](structured-types.pointed-spans.md)

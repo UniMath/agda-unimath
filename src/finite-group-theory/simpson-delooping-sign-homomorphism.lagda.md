@@ -800,5 +800,4 @@ module _
 
 ## References
 
-- Mangel É. and Rijke E.
-  ["Delooping the sign homomorphism in univalent mathematics"](https://arxiv.org/abs/2301.10011).
+{{#bibliography}} {{#reference MR23}}

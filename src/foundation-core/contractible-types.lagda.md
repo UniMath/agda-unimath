@@ -62,39 +62,6 @@ abstract
   coh-contraction (pair c C) = left-inv (C c)
 ```
 
-## Examples
-
-### The total space of the identity type based at a point is contractible
-
-Type families of which the total space is contractible are also called
-[torsorial](foundation-core.torsorial-type-families.md). This terminology
-originates from higher group theory, where a
-[higher group action](higher-group-theory.higher-group-actions.md) is torsorial
-if its type of [orbits](higher-group-theory.orbits-higher-group-actions.md),
-i.e., its total space, is contractible.
-
-We prove two variants of the claim that the total space of the identity type is
-contractible: the first version keeps the left-hand side fixed, and the second
-version keeps the right-hand side fixed.
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  abstract
-    is-torsorial-Id : (a : A) → is-contr (Σ A (λ x → a ＝ x))
-    pr1 (pr1 (is-torsorial-Id a)) = a
-    pr2 (pr1 (is-torsorial-Id a)) = refl
-    pr2 (is-torsorial-Id a) (pair .a refl) = refl
-
-  abstract
-    is-torsorial-Id' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
-    pr1 (pr1 (is-torsorial-Id' a)) = a
-    pr2 (pr1 (is-torsorial-Id' a)) = refl
-    pr2 (is-torsorial-Id' a) (pair .a refl) = refl
-```
-
 ## Properties
 
 ### Retracts of contractible types are contractible

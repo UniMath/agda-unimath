@@ -9,6 +9,7 @@ module foundation.functoriality-cartesian-product-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -224,9 +225,9 @@ module _
   (f : A → C) (g : B → D)
   where
 
-  is-equiv-left-factor-is-equiv-map-product-is-inhabited-right-factor' :
-    (d : D) → is-equiv (map-product f g) → is-equiv f
-  is-equiv-left-factor-is-equiv-map-product-is-inhabited-right-factor'
+  is-equiv-left-factor-is-equiv-map-product' :
+    D → is-equiv (map-product f g) → is-equiv f
+  is-equiv-left-factor-is-equiv-map-product'
     d is-equiv-fg =
     is-equiv-is-contr-map
       ( λ x →
@@ -239,9 +240,9 @@ module _
             ( is-equiv-map-compute-fiber-map-product f g (x , d))
             ( is-contr-map-is-equiv is-equiv-fg (x , d))))
 
-  is-equiv-right-factor-is-equiv-map-product-is-inhabited-left-factor' :
-    (c : C) → is-equiv (map-product f g) → is-equiv g
-  is-equiv-right-factor-is-equiv-map-product-is-inhabited-left-factor'
+  is-equiv-right-factor-is-equiv-map-product' :
+    C → is-equiv (map-product f g) → is-equiv g
+  is-equiv-right-factor-is-equiv-map-product'
     c is-equiv-fg =
     is-equiv-is-contr-map
       ( λ y →
@@ -253,6 +254,34 @@ module _
             ( map-compute-fiber-map-product f g (c , y))
             ( is-equiv-map-compute-fiber-map-product f g (c , y))
             ( is-contr-map-is-equiv is-equiv-fg (c , y))))
+```
+
+### The functorial action of products on arrows
+
+Given a pair of [morphisms of arrows](foundation.morphisms-arrows.md)
+`α : f → g` and `β : h → i`, there is an induced morphism of arrows
+`α × β : f × h → g × i` and this construction is functorial.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {C : UU l5} {D : UU l6} {Z : UU l7} {W : UU l8}
+  (f : A → B) (g : X → Y) (h : C → D) (i : Z → W)
+  (α : hom-arrow f g) (β : hom-arrow h i)
+  where
+
+  product-hom-arrow : hom-arrow (map-product f h) (map-product g i)
+  product-hom-arrow =
+    ( ( map-product
+        ( map-domain-hom-arrow f g α)
+        ( map-domain-hom-arrow h i β)) ,
+      ( map-product
+        ( map-codomain-hom-arrow f g α)
+        ( map-codomain-hom-arrow h i β)) ,
+      ( htpy-map-product
+        ( coh-hom-arrow f g α)
+        ( coh-hom-arrow h i β)))
 ```
 
 ## See also

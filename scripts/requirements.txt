@@ -1,4 +1,5 @@
 # * Keep in sync with the `flake.nix` file
 pre-commit
+pybtex
 requests
 tomli

@@ -39,11 +39,11 @@ coherence condition between the homotopies of the inverse, asking that the
 following diagram commmutes
 
 ```text
-               S ·r f
-             --------->
-  f ∘ g ∘ f             f.
-             --------->
-               f ·l R
+              S ·r f
+            --------->
+  f ∘ g ∘ f            f.
+            --------->
+              f ·l R
 ```
 
 We call such data a
@@ -54,19 +54,18 @@ and this additional coherence.
 There is also the alternative coherence condition we could add
 
 ```text
-               R ·r g
-             --------->
-  g ∘ f ∘ g             g.
-             --------->
-               g ·l S
+              R ·r g
+            --------->
+  g ∘ f ∘ g            g.
+            --------->
+              g ·l S
 ```
 
-We will colloquially refer to invertible maps equipped with this coherence for
+We will colloquially refer to invertible maps equipped with this coherence as
 _transpose coherently invertible maps_.
 
 **Note.** Coherently invertible maps are referred to as
-{{#concept "half adjoint equivalences"}} in _Homotopy Type Theory – Univalent
-Foundations of Mathematics_.
+{{#concept "half adjoint equivalences"}} in {{#cite UF13}}.
 
 On this page we will prove that every two-sided inverse `g` of `f` can be
 promoted to a coherent two-sided inverse. Thus, for most properties of
@@ -459,8 +458,7 @@ module _
 
 This result is known as
 [Vogt's lemma](https://ncatlab.org/nlab/show/homotopy+equivalence#vogts_lemma)
-in point-set topology. The construction follows Lemma 10.4.5 in _Introduction to
-Homotopy Type Theory_.
+in point-set topology. The construction follows Lemma 10.4.5 in {{#cite Rij22}}.
 
 ```agda
 module _
@@ -624,8 +622,7 @@ module _
 
 ### Coherently invertible maps are transpose coherently invertible
 
-The proof follows Lemma 4.2.2 in _Homotopy Type Theory – Univalent Foundations
-of Mathematics_.
+The proof follows Lemma 4.2.2 in {{#cite UF13}}.
 
 **Proof.** By naturality of homotopies we have
 
@@ -835,11 +832,11 @@ We begin by observing that `C` fits somewhere along the diagonal of this square
 via the composite
 
 ```text
-                       Sf
-           HgH       ------>    H⁻¹
-    f'gf' -----> fgf    C    f ----> f'.
-                     ------>
-                       fR
+                        Sf
+            HgH       ------>     H⁻¹
+    f'gf' ------> fgf    C    f ------> f'.
+                      ------>
+                        fR
 ```
 
 ```agda
@@ -878,7 +875,7 @@ squares
       |             |            |             |
   Sf' |             | Sf     f'R |             | fR
       ∨             ∨            ∨             ∨
-      f' ---------> f            f' ---------> f
+      f' ---------> f            f' ---------> f.
              H                          H
 ```
 
@@ -1387,11 +1384,7 @@ module _
 
 ## References
 
-1. Egbert Rijke, _Introduction to Homotopy Type Theory_ (2022)
-   ([arXiv:2212.11082](https://arxiv.org/abs/2212.11082))
-2. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
-   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
-   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
+{{#bibliography}}
 
 ## See also
 

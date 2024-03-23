@@ -14,6 +14,7 @@ open import category-theory.large-categories
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -22,8 +23,9 @@ open import foundation.universe-levels
 ## Idea
 
 Given a type `I` and a [large category](category-theory.large-categories.md)
-`C`, the **large function category** `Cᴵ` consists of `I`-indexed families of
-objects of `C` and `I`-indexed familis of morphisms between them.
+`C`, the {{#concept "large function category" Agda=Large-Function-Category}}
+`Cᴵ` consists of `I`-indexed families of objects of `C` and `I`-indexed families
+of morphisms between them.
 
 ## Definition
 
@@ -83,7 +85,7 @@ module _
   associative-comp-hom-Large-Function-Category =
     associative-comp-hom-Π-Large-Category I (λ _ → C)
 
-  inv-associative-comp-hom-Large-Function-Category :
+  involutive-eq-associative-comp-hom-Large-Function-Category :
     {l2 l3 l4 l5 : Level}
     {x : obj-Large-Function-Category l2}
     {y : obj-Large-Function-Category l3}
@@ -92,10 +94,14 @@ module _
     (h : hom-Large-Function-Category z w)
     (g : hom-Large-Function-Category y z)
     (f : hom-Large-Function-Category x y) →
-    comp-hom-Large-Function-Category h (comp-hom-Large-Function-Category g f) ＝
-    comp-hom-Large-Function-Category (comp-hom-Large-Function-Category h g) f
-  inv-associative-comp-hom-Large-Function-Category =
-    inv-associative-comp-hom-Π-Large-Category I (λ _ → C)
+    comp-hom-Large-Function-Category
+      ( comp-hom-Large-Function-Category h g)
+      ( f) ＝ⁱ
+    comp-hom-Large-Function-Category
+      ( h)
+      ( comp-hom-Large-Function-Category g f)
+  involutive-eq-associative-comp-hom-Large-Function-Category =
+    involutive-eq-associative-comp-hom-Π-Large-Category I (λ _ → C)
 
   id-hom-Large-Function-Category :
     {l2 : Level} {x : obj-Large-Function-Category l2} →

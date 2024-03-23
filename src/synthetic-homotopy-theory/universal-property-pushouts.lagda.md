@@ -462,7 +462,7 @@ module _
                   ( horizontal-map-cocone (vertical-map-cocone f g c) k d)
                   ( coherence-square-cocone f g c)
                   ( coherence-square-cocone (vertical-map-cocone f g c) k d)))))
-          ( is-pullback-rectangle-is-pullback-top
+          ( is-pullback-rectangle-is-pullback-top-square
             ( precomp f W)
             ( precomp g W)
             ( precomp k W)
@@ -495,7 +495,7 @@ module _
       ( k)
       ( d)
       ( λ W →
-        is-pullback-top-is-pullback-rectangle
+        is-pullback-top-square-is-pullback-rectangle
           ( precomp f W)
           ( precomp g W)
           ( precomp k W)

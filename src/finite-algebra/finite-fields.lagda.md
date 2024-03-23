@@ -126,7 +126,7 @@ module _
   additive-semigroup-Field-𝔽 = semigroup-Ab ab-Field-𝔽
 
   is-group-additive-semigroup-Field-𝔽 :
-    is-group additive-semigroup-Field-𝔽
+    is-group-Semigroup additive-semigroup-Field-𝔽
   is-group-additive-semigroup-Field-𝔽 =
     is-group-Ab ab-Field-𝔽
 
@@ -230,7 +230,7 @@ module _
 
 ```agda
   has-negatives-Field-𝔽 :
-    is-group' additive-semigroup-Field-𝔽 has-zero-Field-𝔽
+    is-group-is-unital-Semigroup additive-semigroup-Field-𝔽 has-zero-Field-𝔽
   has-negatives-Field-𝔽 = has-negatives-Ab ab-Field-𝔽
 
   neg-Field-𝔽 : type-Field-𝔽 → type-Field-𝔽

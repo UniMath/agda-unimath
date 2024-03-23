@@ -44,7 +44,7 @@ precisely the types in the reflective subuniverse.
 
 ```agda
 is-reflective-subuniverse :
-  {l1 l2 : Level} (P : UU l1 → Prop l2) → UU (lsuc l1 ⊔ l2)
+  {l1 l2 : Level} (P : subuniverse l1 l2) → UU (lsuc l1 ⊔ l2)
 is-reflective-subuniverse {l1} P =
   Σ ( operator-modality l1 l1)
     ( λ ○ →
@@ -86,7 +86,7 @@ module _
 ```agda
 reflective-subuniverse : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 reflective-subuniverse l1 l2 =
-  Σ (UU l1 → Prop l2) (is-reflective-subuniverse)
+  Σ (subuniverse l1 l2) (is-reflective-subuniverse)
 ```
 
 ```agda
@@ -182,8 +182,8 @@ module _
     is-in-subuniverse-subuniverse-localization P (L A)
   pr2 (pr2 (pr2 is-reflective-has-all-localizations-subuniverse))
     A B is-in-subuniverse-A =
-      is-local-at-unit-is-in-subuniverse-subuniverse-localization
-        P (L B) A is-in-subuniverse-A
+    is-local-at-unit-is-in-subuniverse-subuniverse-localization
+      P (L B) A is-in-subuniverse-A
 ```
 
 ## Recursion for reflective subuniverses
@@ -240,12 +240,4 @@ module _
 
 ## References
 
-1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
-   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
-   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
-2. Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
-   theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
-   ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
-   [DOI:10.23638/LMCS-16(1:2)2020](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
-3. Egbert Rijke, _Classifying Types_
-   ([arXiv:1906.09435](https://arxiv.org/abs/1906.09435))
+{{#bibliography}} {{#reference UF13}} {{#reference RSS20}} {{#reference Rij19}}

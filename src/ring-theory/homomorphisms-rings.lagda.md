@@ -355,15 +355,6 @@ module _
       ( comp-hom-Ring R S U (comp-hom-Ring S T U h g) f)
       ( comp-hom-Ring R T U h (comp-hom-Ring R S T g f))
       ( refl-htpy)
-
-  inv-associative-comp-hom-Ring :
-    comp-hom-Ring R T U h (comp-hom-Ring R S T g f) ＝
-    comp-hom-Ring R S U (comp-hom-Ring S T U h g) f
-  inv-associative-comp-hom-Ring =
-    eq-htpy-hom-Ring R U
-      ( comp-hom-Ring R T U h (comp-hom-Ring R S T g f))
-      ( comp-hom-Ring R S U (comp-hom-Ring S T U h g) f)
-      ( refl-htpy)
 ```
 
 ### Unit laws for composition of ring homomorphisms

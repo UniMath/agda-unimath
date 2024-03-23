@@ -165,8 +165,4 @@ module _
 
 ## References
 
-1. Kristina Sojakova, Floris van Doorn, and Egbert Rijke. 2020. Sequential
-   Colimits in Homotopy Type Theory. In Proceedings of the 35th Annual ACM/IEEE
-   Symposium on Logic in Computer Science (LICS '20). Association for Computing
-   Machinery, New York, NY, USA, 845–858,
-   [DOI:10.1145](https://doi.org/10.1145/3373718.3394801)
+{{#bibliography}} {{#reference SDR20}}

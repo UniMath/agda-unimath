@@ -17,8 +17,8 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -96,15 +96,16 @@ module _
   associative-comp-hom-opposite-Category =
     associative-comp-hom-opposite-Precategory (precategory-Category C)
 
-  inv-associative-comp-hom-opposite-Category :
+  involutive-eq-associative-comp-hom-opposite-Category :
     {x y z w : obj-opposite-Category}
     (h : hom-opposite-Category z w)
     (g : hom-opposite-Category y z)
     (f : hom-opposite-Category x y) →
-    comp-hom-opposite-Category h (comp-hom-opposite-Category g f) ＝
-    comp-hom-opposite-Category (comp-hom-opposite-Category h g) f
-  inv-associative-comp-hom-opposite-Category =
-    inv-associative-comp-hom-opposite-Precategory (precategory-Category C)
+    comp-hom-opposite-Category (comp-hom-opposite-Category h g) f ＝ⁱ
+    comp-hom-opposite-Category h (comp-hom-opposite-Category g f)
+  involutive-eq-associative-comp-hom-opposite-Category =
+    involutive-eq-associative-comp-hom-opposite-Precategory
+      ( precategory-Category C)
 
   id-hom-opposite-Category :
     {x : obj-opposite-Category} → hom-opposite-Category x x

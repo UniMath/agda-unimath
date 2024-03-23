@@ -37,7 +37,9 @@ homotopy is called a
 {{#concept "coherence" Disambiguation="commuting square of homotopies" Agda=coherence-square-homotopies}}
 of the square.
 
-## Definition
+## Definitions
+
+### Commuting squares of homotopies
 
 ```agda
 module _

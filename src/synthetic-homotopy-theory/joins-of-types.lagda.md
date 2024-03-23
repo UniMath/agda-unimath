@@ -391,5 +391,4 @@ module _
 
 ## References
 
-- Egbert Rijke, _The join construction_, 2017
-  ([arXiv:1701.07538](https://arxiv.org/abs/1701.07538))
+{{#bibliography}} {{#reference Rij17}}

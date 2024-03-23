@@ -140,7 +140,8 @@ module _
     Id (add-Ring-𝔽 (add-Ring-𝔽 x y) z) (add-Ring-𝔽 x (add-Ring-𝔽 y z))
   associative-add-Ring-𝔽 = associative-add-Ring (ring-Ring-𝔽 R)
 
-  is-group-additive-semigroup-Ring-𝔽 : is-group (additive-semigroup-Ring-𝔽 R)
+  is-group-additive-semigroup-Ring-𝔽 :
+    is-group-Semigroup (additive-semigroup-Ring-𝔽 R)
   is-group-additive-semigroup-Ring-𝔽 =
     is-group-additive-semigroup-Ring (ring-Ring-𝔽 R)
 
@@ -232,7 +233,9 @@ module _
   where
 
   has-negatives-Ring-𝔽 :
-    is-group' (additive-semigroup-Ring-𝔽 R) (has-zero-Ring-𝔽 R)
+    is-group-is-unital-Semigroup
+      ( additive-semigroup-Ring-𝔽 R)
+      ( has-zero-Ring-𝔽 R)
   has-negatives-Ring-𝔽 = has-negatives-Ring (ring-Ring-𝔽 R)
 
   neg-Ring-𝔽 : type-Ring-𝔽 R → type-Ring-𝔽 R

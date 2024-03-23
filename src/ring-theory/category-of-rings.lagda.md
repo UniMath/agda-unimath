@@ -34,7 +34,7 @@ is-large-category-Ring-Large-Category :
 is-large-category-Ring-Large-Category =
   is-equiv-iso-eq-Ring
 
-Ring-Large-Category : Large-Category lsuc _⊔_
+Ring-Large-Category : Large-Category lsuc (_⊔_)
 large-precategory-Large-Category Ring-Large-Category =
   Ring-Large-Precategory
 is-large-category-Large-Category Ring-Large-Category =

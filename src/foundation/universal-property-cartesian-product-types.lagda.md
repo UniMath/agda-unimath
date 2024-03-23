@@ -44,12 +44,16 @@ Observe that the universal property of cartesian products as limits can be
 understood as a categorified version of the familiar distributivity of exponents
 over products
 
-\[ (A × B)^X ≃ A^X × B^X, \]
+$$
+(A × B)^X ≃ A^X × B^X,
+$$
 
 while the universal property of cartesian products as colimits are a
 categorified version of the identity
 
-\[ X^{(A × B)} ≃ {(X^B)}^A. \]
+$$
+X^{(A × B)} ≃ {(X^B)}^A.
+$$
 
 ## Theorems
 

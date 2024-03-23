@@ -16,6 +16,7 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
@@ -95,13 +96,13 @@ module _
   associative-comp-hom-Pregroupoid =
     associative-comp-hom-Precategory precategory-Pregroupoid
 
-  inv-associative-comp-hom-Pregroupoid :
+  involutive-eq-associative-comp-hom-Pregroupoid :
     {x y z w : obj-Pregroupoid} (h : hom-Pregroupoid z w)
     (g : hom-Pregroupoid y z) (f : hom-Pregroupoid x y) →
-    comp-hom-Pregroupoid h (comp-hom-Pregroupoid g f) ＝
-    comp-hom-Pregroupoid (comp-hom-Pregroupoid h g) f
-  inv-associative-comp-hom-Pregroupoid =
-    inv-associative-comp-hom-Precategory precategory-Pregroupoid
+    comp-hom-Pregroupoid (comp-hom-Pregroupoid h g) f ＝ⁱ
+    comp-hom-Pregroupoid h (comp-hom-Pregroupoid g f)
+  involutive-eq-associative-comp-hom-Pregroupoid =
+    involutive-eq-associative-comp-hom-Precategory precategory-Pregroupoid
 
   left-unit-law-comp-hom-Pregroupoid :
     {x y : obj-Pregroupoid} (f : hom-Pregroupoid x y) →

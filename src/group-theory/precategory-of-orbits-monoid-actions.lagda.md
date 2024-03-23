@@ -1,13 +1,12 @@
 # The precategory of orbits of a monoid action
 
 ```agda
-module group-theory.orbits-monoid-actions where
+module group-theory.precategory-of-orbits-monoid-actions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.precategories
 
 open import foundation.contractible-types
@@ -179,19 +178,13 @@ module _
       ( right-unit-law-mul-Monoid M (element-hom-orbit-action-Monoid f))
 
   orbit-monoid-action-Precategory : Precategory l2 (l1 ⊔ l2)
-  pr1 orbit-monoid-action-Precategory = type-action-Monoid M X
-  pr1 (pr2 orbit-monoid-action-Precategory) = hom-orbit-monoid-action-Set
-  pr1 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
-    comp-hom-orbit-action-Monoid
-  pr2 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
-    is-associative-witness-associative-composition-operation-binary-family-Set
+  orbit-monoid-action-Precategory =
+    make-Precategory
+      ( type-action-Monoid M X)
       ( hom-orbit-monoid-action-Set)
       ( comp-hom-orbit-action-Monoid)
+      ( id-hom-orbit-action-Monoid)
       ( associative-comp-hom-orbit-action-Monoid)
-  pr1 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory))) =
-    id-hom-orbit-action-Monoid
-  pr1 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
-    left-unit-law-comp-hom-orbit-action-Monoid
-  pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
-    right-unit-law-comp-hom-orbit-action-Monoid
+      ( left-unit-law-comp-hom-orbit-action-Monoid)
+      ( right-unit-law-comp-hom-orbit-action-Monoid)
 ```

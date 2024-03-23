@@ -28,9 +28,7 @@ open import group-theory.precategory-of-groups
 is-large-category-Group :
   is-large-category-Large-Precategory Group-Large-Precategory
 is-large-category-Group G =
-  fundamental-theorem-id
-    ( is-torsorial-iso-Group G)
-    ( iso-eq-Group G)
+  fundamental-theorem-id (is-torsorial-iso-Group G) (iso-eq-Group G)
 
 eq-iso-Group : {l : Level} (G H : Group l) → iso-Group G H → Id G H
 eq-iso-Group G H = map-inv-is-equiv (is-large-category-Group G H)

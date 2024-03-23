@@ -47,27 +47,6 @@ to a square
 
 ## Properties
 
-### The homotopy of cones obtained from the universal property of pullbacks
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) {C : UU l4}
-  where
-
-  htpy-cone-map-universal-property-pullback :
-    (c : cone f g C) (up : universal-property-pullback f g c) →
-    {l5 : Level} {C' : UU l5} (c' : cone f g C') →
-    htpy-cone f g
-      ( cone-map f g c (map-universal-property-pullback f g c up c'))
-      ( c')
-  htpy-cone-map-universal-property-pullback c up c' =
-    htpy-eq-cone f g
-      ( cone-map f g c (map-universal-property-pullback f g c up c'))
-      ( c')
-      ( compute-map-universal-property-pullback f g c up c')
-```
-
 ### Unique uniqueness of pullbacks
 
 ```agda
@@ -189,7 +168,7 @@ module _
         ( horizontal-map-cone f g c)
         ( h)
         ( d)
-        ( is-pullback-top-is-pullback-rectangle f g h c d
+        ( is-pullback-top-square-is-pullback-rectangle f g h c d
           ( is-pullback-universal-property-pullback f g c up-pb-c)
           ( is-pullback-universal-property-pullback f (g ∘ h)
             ( pasting-vertical-cone f g h c d)
@@ -207,7 +186,7 @@ module _
         ( f)
         ( g ∘ h)
         ( pasting-vertical-cone f g h c d)
-        ( is-pullback-rectangle-is-pullback-top f g h c d
+        ( is-pullback-rectangle-is-pullback-top-square f g h c d
           ( is-pullback-universal-property-pullback f g c up-pb-c)
           ( is-pullback-universal-property-pullback
             ( horizontal-map-cone f g c)

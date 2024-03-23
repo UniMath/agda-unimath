@@ -17,6 +17,7 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -54,6 +55,18 @@ module _
     hom-Π-Precategory x z
   comp-hom-Π-Precategory f g i = comp-hom-Precategory (C i) (f i) (g i)
 
+  involutive-eq-associative-comp-hom-Π-Precategory :
+    {x y z w : obj-Π-Precategory}
+    (h : hom-Π-Precategory z w)
+    (g : hom-Π-Precategory y z)
+    (f : hom-Π-Precategory x y) →
+    ( comp-hom-Π-Precategory (comp-hom-Π-Precategory h g) f) ＝ⁱ
+    ( comp-hom-Π-Precategory h (comp-hom-Π-Precategory g f))
+  involutive-eq-associative-comp-hom-Π-Precategory h g f =
+    involutive-eq-involutive-htpy
+      ( λ i →
+        involutive-eq-associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
+
   associative-comp-hom-Π-Precategory :
     {x y z w : obj-Π-Precategory}
     (h : hom-Π-Precategory z w)
@@ -62,25 +75,13 @@ module _
     ( comp-hom-Π-Precategory (comp-hom-Π-Precategory h g) f) ＝
     ( comp-hom-Π-Precategory h (comp-hom-Π-Precategory g f))
   associative-comp-hom-Π-Precategory h g f =
-    eq-htpy (λ i → associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
-
-  inv-associative-comp-hom-Π-Precategory :
-    {x y z w : obj-Π-Precategory}
-    (h : hom-Π-Precategory z w)
-    (g : hom-Π-Precategory y z)
-    (f : hom-Π-Precategory x y) →
-    ( comp-hom-Π-Precategory h (comp-hom-Π-Precategory g f)) ＝
-    ( comp-hom-Π-Precategory (comp-hom-Π-Precategory h g) f)
-  inv-associative-comp-hom-Π-Precategory h g f =
-    eq-htpy (λ i → inv-associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
+    eq-involutive-eq (involutive-eq-associative-comp-hom-Π-Precategory h g f)
 
   associative-composition-operation-Π-Precategory :
     associative-composition-operation-binary-family-Set hom-set-Π-Precategory
   pr1 associative-composition-operation-Π-Precategory = comp-hom-Π-Precategory
-  pr1 (pr2 associative-composition-operation-Π-Precategory h g f) =
-    associative-comp-hom-Π-Precategory h g f
-  pr2 (pr2 associative-composition-operation-Π-Precategory h g f) =
-    inv-associative-comp-hom-Π-Precategory h g f
+  pr2 associative-composition-operation-Π-Precategory =
+    involutive-eq-associative-comp-hom-Π-Precategory
 
   id-hom-Π-Precategory : {x : obj-Π-Precategory} → hom-Π-Precategory x x
   id-hom-Π-Precategory i = id-hom-Precategory (C i)

@@ -212,9 +212,5 @@ ap-sharp f = rec-sharp (unit-sharp ∘ f)
 
 ## References
 
-- Michael Shulman, _Brouwer's fixed-point theorem in real-cohesive homotopy type
-  theory_, 2015 ([arXiv:1509.07584](https://arxiv.org/abs/1509.07584))
-- Dan Licata, _cohesion-agda_, GitHub repository
-  (<https://github.com/dlicata335/cohesion-agda>)
-- Felix Cherubini, _DCHoTT-Agda_/Im.agda, file in GitHub repository
-  (<https://github.com/felixwellen/DCHoTT-Agda/blob/master/Im.agda>)
+{{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}
+{{#reference Felixwellen/DCHoTT-Agda}}

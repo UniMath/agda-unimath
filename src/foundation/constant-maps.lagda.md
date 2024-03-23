@@ -193,3 +193,7 @@ htpy-ap-diagonal-htpy-eq-diagonal-Id :
 htpy-ap-diagonal-htpy-eq-diagonal-Id A x y =
   inv-htpy (htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
 ```
+
+## See also
+
+- [Constant pointed maps](structured-types.constant-pointed-maps.md)

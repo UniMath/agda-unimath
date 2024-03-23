@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.interchange-law
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
@@ -24,18 +25,36 @@ open import group-theory.semigroups
 
 ## Idea
 
-A commutative monoid is a monoid `M` in which `xy = yx` holds for all `x y : M`.
+A {{#concept "commutative monoid" Agda=Commutative-Monoid}} is a
+[monoid](group-theory.monoids.md) `M` in which `xy = yx` holds for all
+`x y : M`.
 
-## Definition
+## Definitions
+
+### The predicate on monoids of being commutative
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  is-commutative-Monoid : UU l
+  is-commutative-Monoid =
+    (x y : type-Monoid M) → mul-Monoid M x y ＝ mul-Monoid M y x
+
+  is-prop-is-commutative-Monoid : is-prop is-commutative-Monoid
+  is-prop-is-commutative-Monoid =
+    is-prop-iterated-Π 2
+      ( λ x y → is-set-type-Monoid M (mul-Monoid M x y) (mul-Monoid M y x))
+
+  is-commutative-prop-Monoid : Prop l
+  is-commutative-prop-Monoid =
+    ( is-commutative-Monoid , is-prop-is-commutative-Monoid)
+```
 
 ### Commutative monoids
 
 ```agda
-is-commutative-Monoid :
-  {l : Level} (M : Monoid l) → UU l
-is-commutative-Monoid M =
-  (x y : type-Monoid M) → Id (mul-Monoid M x y) (mul-Monoid M y x)
-
 Commutative-Monoid : (l : Level) → UU (lsuc l)
 Commutative-Monoid l = Σ (Monoid l) is-commutative-Monoid
 
