@@ -186,7 +186,7 @@ More precisely, `A` is `k`-acyclic if and only if for all `k`-types `X` and
 elements `x,y : X`, the map
 
 ```text
- Δ : (x ＝ y) → (A → x ＝ y)
+  Δ : (x ＝ y) → (A → x ＝ y)
 ```
 
 is an equivalence.
@@ -259,9 +259,10 @@ module _
     is-truncated-acyclic-map k f → is-dependent-epimorphism-Truncated-Type k f
   is-dependent-epimorphism-is-truncated-acyclic-map-Truncated-Type ac C =
     is-emb-comp
-      ( precomp-Π
-        ( map-inv-equiv-total-fiber f)
-        ( type-Truncated-Type ∘ C ∘ pr1) ∘ ind-Σ)
+      ( ( precomp-Π
+          ( map-inv-equiv-total-fiber f)
+          ( type-Truncated-Type ∘ C ∘ pr1)) ∘
+        ( ind-Σ))
       ( map-Π
         ( λ b → diagonal-exponential (type-Truncated-Type (C b)) (fiber f b)))
       ( is-emb-comp
