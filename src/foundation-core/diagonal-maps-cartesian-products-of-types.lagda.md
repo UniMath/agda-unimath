@@ -31,7 +31,7 @@ The
 {{#concept "diagonal map" Disambiguation="of a type into its cartesian product" Agda=diagonal-product}}
 that includes a type `A` into its
 [cartesian product](foundation-core.cartesian-product-types.md) `A × A` is the
-map that maps `x` to the pair `x , x`.
+map that maps `x` to the pair `(x , x)`.
 
 ## Definition
 
