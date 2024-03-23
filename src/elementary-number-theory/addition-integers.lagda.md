@@ -33,9 +33,14 @@ open import foundation.unit-type
 
 ## Idea
 
-We introduce addition on the integers and derive its basic properties with
-respect to `succ-ℤ` and `neg-ℤ`. Properties of addition with respect to
-inequality are derived in `inequality-integers`.
+We introduce {{#concept "addition" Agda=add-ℤ}} on the integers and derive its
+basic properties with respect to `succ-ℤ` and `neg-ℤ`. Properties of addition
+with respect to positivity, nonnegativity, negativity and nonnpositivity are
+derived in
+[`addition-positive-and-negative-integers`](elementary-number-theory.addition-positive-and-negative-integers.md).
+Properties of addition with respect to inequality are derived in
+[`inequality-integers`](elementary-number-theory.inequality-integers.md) and
+[`strict-inequality-integers`](elementary-number-theory.strict-inequality-integers.md).
 
 ## Definition
 
