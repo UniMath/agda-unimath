@@ -14,8 +14,8 @@ open import foundation.binary-homotopies
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
+open import foundation.double-arrows
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -348,35 +348,27 @@ module _
       ( succ-ℕ)
       ( map-sequential-diagram A)
 
+  double-arrow-sequential-diagram : double-arrow l1 l1
+  double-arrow-sequential-diagram =
+    make-double-arrow
+      ( bottom-map-cofork-cocone-sequential-diagram)
+      ( top-map-cofork-cocone-sequential-diagram)
+
   module _
     { l2 : Level} {X : UU l2}
     where
 
     cocone-sequential-diagram-cofork :
-      cofork
-        ( bottom-map-cofork-cocone-sequential-diagram)
-        ( top-map-cofork-cocone-sequential-diagram)
-        ( X) →
+      cofork double-arrow-sequential-diagram X →
       cocone-sequential-diagram A X
     pr1 (cocone-sequential-diagram-cofork e) =
-      ev-pair
-        ( map-cofork
-          ( bottom-map-cofork-cocone-sequential-diagram)
-          ( top-map-cofork-cocone-sequential-diagram)
-          ( e))
+      ev-pair (map-cofork double-arrow-sequential-diagram e)
     pr2 (cocone-sequential-diagram-cofork e) =
-      ev-pair
-        ( coherence-cofork
-          ( bottom-map-cofork-cocone-sequential-diagram)
-          ( top-map-cofork-cocone-sequential-diagram)
-          ( e))
+      ev-pair (coh-cofork double-arrow-sequential-diagram e)
 
     cofork-cocone-sequential-diagram :
       cocone-sequential-diagram A X →
-      cofork
-        ( bottom-map-cofork-cocone-sequential-diagram)
-        ( top-map-cofork-cocone-sequential-diagram)
-        ( X)
+      cofork double-arrow-sequential-diagram X
     pr1 (cofork-cocone-sequential-diagram c) =
       ind-Σ (map-cocone-sequential-diagram c)
     pr2 (cofork-cocone-sequential-diagram c) =
@@ -387,8 +379,7 @@ module _
         cofork-cocone-sequential-diagram ∘ cocone-sequential-diagram-cofork ~ id
       is-section-cocone-sequential-diagram-cofork e =
         eq-htpy-cofork
-          ( bottom-map-cofork-cocone-sequential-diagram)
-          ( top-map-cofork-cocone-sequential-diagram)
+          ( double-arrow-sequential-diagram)
           ( cofork-cocone-sequential-diagram
             ( cocone-sequential-diagram-cofork e))
           ( e)
@@ -413,10 +404,7 @@ module _
         ( is-section-cocone-sequential-diagram-cofork)
 
     equiv-cocone-sequential-diagram-cofork :
-      cofork
-        ( bottom-map-cofork-cocone-sequential-diagram)
-        ( top-map-cofork-cocone-sequential-diagram)
-        ( X) ≃
+      cofork double-arrow-sequential-diagram X ≃
       cocone-sequential-diagram A X
     pr1 equiv-cocone-sequential-diagram-cofork =
       cocone-sequential-diagram-cofork
@@ -430,16 +418,14 @@ module _
       ( cocone-map-sequential-diagram c {Y = Y})
       ( cocone-sequential-diagram-cofork)
       ( cofork-map
-        ( bottom-map-cofork-cocone-sequential-diagram)
-        ( top-map-cofork-cocone-sequential-diagram)
+        ( double-arrow-sequential-diagram)
         ( cofork-cocone-sequential-diagram c))
   triangle-cocone-sequential-diagram-cofork c h =
     eq-htpy-cocone-sequential-diagram A
       ( cocone-map-sequential-diagram c h)
       ( cocone-sequential-diagram-cofork
         ( cofork-map
-          ( bottom-map-cofork-cocone-sequential-diagram)
-          ( top-map-cofork-cocone-sequential-diagram)
+          ( double-arrow-sequential-diagram)
           ( cofork-cocone-sequential-diagram c)
           ( h)))
       ( ev-pair refl-htpy ,
