@@ -22,7 +22,7 @@ open import graph-theory.undirected-graphs
 ## Idea
 
 A
-{{#concept "cycle" Agda=cycle-Undirected-Graph Disambiguation="undirected graph" WD="Cycle" WDID=Q245595}}
+{{#concept "cycle" Agda=cycle-Undirected-Graph Disambiguation="undirected graph" WD="cycle" WDID=Q245595}}
 in an [undirected graph](graph-theory.undirected-graphs.md) `G` consists of a
 [`k`-gon](graph-theory.polygons.md) `H` equipped with an
 [embedding of graphs](graph-theory.embeddings-undirected-graphs.md) from `H`

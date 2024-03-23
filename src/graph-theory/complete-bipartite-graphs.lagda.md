@@ -27,7 +27,7 @@ open import univalent-combinatorics.finite-types
 
 Consider two [finite sets](univalent-combinatorics.finite-types.md) `X` and `Y`.
 The
-{{#concept "complete bipartite graph" Agda=complete-bipartite-Undirected-Graph-𝔽 WDID=Q913598 WD="Complete bipartite graph"}}
+{{#concept "complete bipartite graph" Agda=complete-bipartite-Undirected-Graph-𝔽 WDID=Q913598 WD="complete bipartite graph"}}
 on `X` and `Y` is the [undirected finite graph](graph-theory.finite-graphs.md)
 consisting of:
 

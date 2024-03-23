@@ -60,10 +60,26 @@ coherent-unital-mul-Pointed-Type A =
 
 ### H-spaces
 
+An H-space consists of a pointed type `X` and a coherent unital multiplication
+on `X`. The entry `make-H-Space` is provided to break up the construction of an
+H-space into two components: the construction of its underlying pointed type and
+the construction of the coherently unital multiplication on this pointed type.
+Furthermore, this definition suggests that any construction of an H-space should
+be refactored by first defining its underlying pointed type, then defining its
+coherently unital multiplication, and finally combining those two constructions
+using `make-H-Space`.
+
 ```agda
 H-Space : (l : Level) → UU (lsuc l)
 H-Space l =
   Σ ( Pointed-Type l) coherent-unital-mul-Pointed-Type
+
+make-H-Space :
+  {l : Level} →
+  (X : Pointed-Type l) → coherent-unital-mul-Pointed-Type X → H-Space l
+make-H-Space X μ = (X , μ)
+
+{-# INLINE make-H-Space #-}
 
 module _
   {l : Level} (M : H-Space l)
