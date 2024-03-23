@@ -33,7 +33,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The negative integers are `neg-one-ℤ` and its predecessors.
+The {{#concept "negative" Disambiguation="integers" Agda=is-negative-ℤ}}
+integers are `neg-one-ℤ` and its predecessors.
 
 ## Defintions
 

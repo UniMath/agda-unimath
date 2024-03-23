@@ -39,9 +39,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-We introduce the {{#concept "multiplication" Agda=mul-ℤ}} of integers and derive
-its basic properties with respect to `succ-ℤ`, `pred-ℤ`, `neg-ℤ` and `add-ℤ`.
-Properties of multiplication with respect to inequality and positivity,
+We introduce the
+{{#concept "multiplication" Disambiguation="integers" Agda=mul-ℤ}} of integers
+and derive its basic properties with respect to `succ-ℤ`, `pred-ℤ`, `neg-ℤ` and
+`add-ℤ`. Properties of multiplication with respect to inequality and positivity,
 nonnegativity, negativity and nonnpositivity of integers are derived in
 [`multiplication-positive-and-negative-integers`](elementary-number-theory.multiplication-positive-and-negative-integers.md).
 

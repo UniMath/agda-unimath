@@ -42,8 +42,8 @@ open import order-theory.preorders
 
 ## Idea
 
-The strict comparison of two integers is given by the positivity of their
-difference.
+The {{#concept "strict ordering" Disambiguation="integers" Agda=le-ℤ}} of two
+integers is given by the positivity of their difference.
 
 ## Definition
 

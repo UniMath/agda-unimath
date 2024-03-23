@@ -33,7 +33,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The nonnegative integers are `zero-ℤ` and its successors.
+The {{#concept "nonnegative" Disambiguation="integers" Agda=is-nonnegative-ℤ}}
+integers are `zero-ℤ` and its successors.
 
 ## Definitions
 

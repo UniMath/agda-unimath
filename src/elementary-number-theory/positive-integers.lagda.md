@@ -33,7 +33,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The positive integers are `one-ℤ` and its successors.
+The {{#concept "positive" Disambiguation="integers" Agda=is-positive-ℤ}}
+integers are `one-ℤ` and its successors.
 
 ## Defintions
 

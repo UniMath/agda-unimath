@@ -41,8 +41,8 @@ open import order-theory.preorders
 
 ## Idea
 
-The comparison of two integers is given by the nonnegativity of their
-difference.
+The {{#concept "ordering" Disambiguation="integers" Agda=leq-ℤ}} of two integers
+is given by the nonnegativity of their difference.
 
 ## Definition
 
@@ -205,3 +205,10 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
 ℤ-Poset : Poset lzero lzero
 ℤ-Poset = (ℤ-Preorder , λ x y → antisymmetric-leq-ℤ)
 ```
+
+## See also
+
+- The decidable total order on the integers is defined in
+  [`decidable-total-order-integers`](elementary-number-theory.decidable-total-order-integers.md)
+- Strict inequality on the integers is defined in
+  [`strict-inequality-integers`](elementary-number-theory.strict-inequality-integers.md)

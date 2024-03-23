@@ -33,7 +33,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The nonpositive integers are `zero-ℤ` and its predecessors.
+The {{#concept "nonpositive" Disambiguation="integers" Agda=is-nonpositive-ℤ}}
+integers are `zero-ℤ` and its predecessors.
 
 ## Defintions
 

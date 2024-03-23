@@ -363,3 +363,8 @@ located-le-ℚ x y z H =
 ℚ-Poset : Poset lzero lzero
 ℚ-Poset = (ℚ-Preorder , antisymmetric-leq-ℚ)
 ```
+
+## See also
+
+- The decidable total order on the rational numbers is defined in
+  [`decidable-total-order-rational-numbers](elementary-number-theory.decidable-total-order-rational-numbers.md)
