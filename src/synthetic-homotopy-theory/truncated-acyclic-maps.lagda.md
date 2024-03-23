@@ -148,7 +148,7 @@ module _
   is-emb-const-is-truncated-acyclic-Truncated-Type :
     is-truncated-acyclic k A →
     {l' : Level} (X : Truncated-Type l' k) →
-    is-emb (const A (type-Truncated-Type X))
+    is-emb (const' A (type-Truncated-Type X))
   is-emb-const-is-truncated-acyclic-Truncated-Type ac X =
     is-emb-comp
       ( precomp (terminal-map A) (type-Truncated-Type X))
@@ -162,7 +162,7 @@ module _
 
   is-truncated-acyclic-is-emb-const-Truncated-Type :
     ({l' : Level} (X : Truncated-Type l' k) →
-    is-emb (const A (type-Truncated-Type X))) →
+    is-emb (const' A (type-Truncated-Type X))) →
     is-truncated-acyclic k A
   is-truncated-acyclic-is-emb-const-Truncated-Type e =
     is-truncated-acyclic-is-truncated-acyclic-map-terminal-map A
@@ -170,7 +170,7 @@ module _
         ( terminal-map A)
         ( λ X →
           is-emb-triangle-is-equiv'
-            ( const A (type-Truncated-Type X))
+            ( const' A (type-Truncated-Type X))
             ( precomp (terminal-map A) (type-Truncated-Type X))
             ( map-inv-left-unit-law-function-type (type-Truncated-Type X))
             ( refl-htpy)
@@ -198,22 +198,20 @@ module _
   is-equiv-const-Id-is-acyclic-Truncated-Type :
     is-truncated-acyclic k A →
     {l' : Level} (X : Truncated-Type l' k) (x y : type-Truncated-Type X) →
-    is-equiv (const A (x ＝ y))
+    is-equiv (const' A (x ＝ y))
   is-equiv-const-Id-is-acyclic-Truncated-Type ac X x y =
     is-equiv-htpy
-      ( htpy-eq ∘ ap (const A (type-Truncated-Type X)) {x} {y})
+      ( htpy-eq ∘ ap const {x} {y})
       ( htpy-ap-diagonal-htpy-eq-diagonal-Id A x y)
       ( is-equiv-comp
         ( htpy-eq)
-        ( ap (const A (type-Truncated-Type X)))
+        ( ap const)
         ( is-emb-const-is-truncated-acyclic-Truncated-Type A ac X x y)
-        ( funext
-          ( const A (type-Truncated-Type X) x)
-          ( const A (type-Truncated-Type X) y)))
+        ( funext (const x) (const y)))
 
   is-truncated-acyclic-is-equiv-const-Id-Truncated-Type :
     ( {l' : Level} (X : Truncated-Type l' k) (x y : type-Truncated-Type X) →
-      is-equiv (const A (x ＝ y))) →
+      is-equiv (const' A (x ＝ y))) →
     is-truncated-acyclic k A
   is-truncated-acyclic-is-equiv-const-Id-Truncated-Type h =
     is-truncated-acyclic-is-emb-const-Truncated-Type A
@@ -221,12 +219,10 @@ module _
         ( λ x y →
           is-equiv-right-factor
             ( htpy-eq)
-            ( ap (const A (type-Truncated-Type X)))
-            ( funext
-              ( const A (type-Truncated-Type X) x)
-              ( const A (type-Truncated-Type X) y))
+            ( ap const)
+            ( funext (const x) (const y))
             ( is-equiv-htpy
-              ( const A (x ＝ y))
+              ( const)
               ( htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
               ( h X x y))))
 ```
@@ -254,7 +250,7 @@ module _
       ( precomp-Π
         ( map-inv-equiv-total-fiber f)
         ( type-Truncated-Type ∘ C ∘ pr1) ∘ ind-Σ)
-      ( map-Π (λ b → const (fiber f b) (type-Truncated-Type (C b))))
+      ( map-Π (λ b → const))
       ( is-emb-comp
         ( precomp-Π
           ( map-inv-equiv-total-fiber f)

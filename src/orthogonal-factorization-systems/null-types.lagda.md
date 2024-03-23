@@ -42,10 +42,10 @@ module _
   where
 
   is-null : UU (l1 ⊔ l2)
-  is-null = is-equiv (const Y A)
+  is-null = is-equiv (const' Y A)
 
   is-prop-is-null : is-prop is-null
-  is-prop-is-null = is-property-is-equiv (const Y A)
+  is-prop-is-null = is-property-is-equiv (const' Y A)
 
   is-null-Prop : Prop (l1 ⊔ l2)
   pr1 is-null-Prop = is-null
@@ -64,7 +64,7 @@ module _
   is-local-is-null : is-null Y A → is-local (λ y → star) A
   is-local-is-null =
     is-equiv-comp
-      ( const Y A)
+      ( const)
       ( map-left-unit-law-function-type A)
       ( is-equiv-map-left-unit-law-function-type A)
 
@@ -78,7 +78,7 @@ module _
   equiv-is-local-is-null : is-null Y A ≃ is-local (λ y → star) A
   equiv-is-local-is-null =
     equiv-prop
-      ( is-property-is-equiv (const Y A))
+      ( is-property-is-equiv const)
       ( is-property-is-equiv (precomp (λ y → star) A))
       ( is-local-is-null)
       ( is-null-is-local)

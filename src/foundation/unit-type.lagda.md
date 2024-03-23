@@ -54,7 +54,7 @@ module _
   where
 
   terminal-map : A → unit
-  terminal-map = const A unit star
+  terminal-map = const star
 ```
 
 ### Points as maps out of the unit type
@@ -65,7 +65,7 @@ module _
   where
 
   point : A → (unit → A)
-  point = const unit A
+  point a = const a
 ```
 
 ### Raising the universe level of the unit type
@@ -78,7 +78,7 @@ raise-star : {l : Level} → raise l unit
 raise-star = map-raise star
 
 raise-terminal-map : {l1 l2 : Level} (A : UU l1) → A → raise-unit l2
-raise-terminal-map {l2 = l2} A = const A (raise-unit l2) raise-star
+raise-terminal-map {l2 = l2} A = const raise-star
 
 compute-raise-unit : (l : Level) → unit ≃ raise-unit l
 compute-raise-unit l = compute-raise l unit

@@ -131,7 +131,7 @@ compute-action-equiv-family-id e =
 ```agda
 compute-action-equiv-family-const :
   {l1 l2 : Level} (B : UU l2) {X Y : UU l1}
-  (e : X ≃ Y) → (action-equiv-family (const (UU l1) (UU l2) B) e) ＝ id-equiv
+  (e : X ≃ Y) → (action-equiv-family (const B) e) ＝ id-equiv
 compute-action-equiv-family-const B {X} {Y} e =
   ap equiv-eq (compute-action-equiv-function-const B e)
 ```

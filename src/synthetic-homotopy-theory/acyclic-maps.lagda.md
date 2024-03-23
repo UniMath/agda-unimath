@@ -140,7 +140,7 @@ module _
 
   is-emb-const-is-acyclic :
     is-acyclic A →
-    {l' : Level} (X : UU l') → is-emb (const A X)
+    {l' : Level} (X : UU l') → is-emb (const' A X)
   is-emb-const-is-acyclic ac X =
     is-emb-comp
       ( precomp (terminal-map A) X)
@@ -151,7 +151,7 @@ module _
       ( is-emb-is-equiv (is-equiv-map-inv-left-unit-law-function-type X))
 
   is-acyclic-is-emb-const :
-    ({l' : Level} (X : UU l') → is-emb (const A X)) →
+    ({l' : Level} (X : UU l') → is-emb (const' A X)) →
     is-acyclic A
   is-acyclic-is-emb-const e =
     is-acyclic-is-acyclic-map-terminal-map A
@@ -159,7 +159,7 @@ module _
         ( terminal-map A)
         ( λ X →
           is-emb-triangle-is-equiv'
-            ( const A X)
+            ( const)
             ( precomp (terminal-map A) X)
             ( map-inv-left-unit-law-function-type X)
             ( refl-htpy)
@@ -185,19 +185,19 @@ module _
 
   is-equiv-const-Id-is-acyclic :
     is-acyclic A →
-    {l' : Level} {X : UU l'} (x y : X) → is-equiv (const A (x ＝ y))
+    {l' : Level} {X : UU l'} (x y : X) → is-equiv (const' A (x ＝ y))
   is-equiv-const-Id-is-acyclic ac {X = X} x y =
     is-equiv-htpy
-      ( htpy-eq ∘ ap (const A X) {x} {y})
+      ( htpy-eq ∘ ap const {x} {y})
       ( htpy-ap-diagonal-htpy-eq-diagonal-Id A x y)
       ( is-equiv-comp
         ( htpy-eq)
-        ( ap (const A X))
+        ( ap const)
         ( is-emb-const-is-acyclic A ac X x y)
-        ( funext (const A X x) (const A X y)))
+        ( funext (const x) (const y)))
 
   is-acyclic-is-equiv-const-Id :
-    ({l' : Level} {X : UU l'} (x y : X) → is-equiv (const A (x ＝ y))) →
+    ({l' : Level} {X : UU l'} (x y : X) → is-equiv (const' A (x ＝ y))) →
     is-acyclic A
   is-acyclic-is-equiv-const-Id h =
     is-acyclic-is-emb-const A
@@ -205,10 +205,10 @@ module _
         ( λ x y →
           is-equiv-right-factor
             ( htpy-eq)
-            ( ap (const A X))
-            ( funext (const A X x) (const A X y))
+            ( ap const)
+            ( funext (const x) (const y))
             ( is-equiv-htpy
-              ( const A (x ＝ y))
+              ( const)
               ( htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
               ( h x y))))
 ```
@@ -249,7 +249,7 @@ module _
   is-dependent-epimorphism-is-acyclic-map ac C =
     is-emb-comp
       ( precomp-Π (map-inv-equiv-total-fiber f) (C ∘ pr1) ∘ ind-Σ)
-      ( map-Π (λ b → const (fiber f b) (C b)))
+      ( map-Π (λ b → const))
       ( is-emb-comp
         ( precomp-Π (map-inv-equiv-total-fiber f) (C ∘ pr1))
         ( ind-Σ)

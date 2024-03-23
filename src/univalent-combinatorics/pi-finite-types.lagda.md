@@ -761,7 +761,7 @@ is-0-connected-unit =
 abstract
   is-contr-im :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) {f : A → type-Set B}
-    (a : A) (H : f ~ const A (type-Set B) (f a)) → is-contr (im f)
+    (a : A) (H : f ~ const (f a)) → is-contr (im f)
   pr1 (is-contr-im B {f} a H) = map-unit-im f a
   pr2 (is-contr-im B {f} a H) (x , u) =
     apply-dependent-universal-property-trunc-Prop

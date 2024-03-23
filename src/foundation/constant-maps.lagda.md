@@ -51,7 +51,7 @@ module _
 
   compute-action-htpy-function-const :
     (c : C) (H : f ~ g) →
-    action-htpy-function (const ((x : A) → B x) C c) H ＝ refl
+    action-htpy-function (const c) H ＝ refl
   compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
 ```
 
@@ -170,12 +170,12 @@ pr2 (point-faithful-map A x) =
 
 ```agda
 is-injective-const :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → is-injective (const A B)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → is-injective (const' A B)
 is-injective-const A B a p = htpy-eq p a
 
 const-injection :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → injection B (A → B)
-pr1 (const-injection A B a) = const A B
+pr1 (const-injection A B a) = const
 pr2 (const-injection A B a) = is-injective-const A B a
 ```
 
@@ -184,12 +184,12 @@ pr2 (const-injection A B a) = is-injective-const A B a
 ```agda
 htpy-diagonal-Id-ap-diagonal-htpy-eq :
   {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B) →
-  htpy-eq ∘ ap (const A B) ~ const A (x ＝ y)
+  htpy-eq ∘ ap (const' A B) ~ const' A (x ＝ y)
 htpy-diagonal-Id-ap-diagonal-htpy-eq A x y refl = refl
 
 htpy-ap-diagonal-htpy-eq-diagonal-Id :
   {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B) →
-  const A (x ＝ y) ~ htpy-eq ∘ ap (const A B)
+  const' A (x ＝ y) ~ htpy-eq ∘ ap (const' A B)
 htpy-ap-diagonal-htpy-eq-diagonal-Id A x y =
   inv-htpy (htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
 ```

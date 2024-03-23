@@ -116,7 +116,7 @@ abstract
   is-equiv-diagonal-is-equiv-point :
     {l1 : Level} {X : UU l1} (x : X) →
     is-equiv (point x) →
-    ({l2 : Level} (Y : UU l2) → is-equiv (λ y → const X Y y))
+    ({l2 : Level} (Y : UU l2) → is-equiv (const' X Y))
   is-equiv-diagonal-is-equiv-point {X = X} x is-equiv-point Y =
     is-equiv-is-section
       ( universal-property-unit-is-equiv-point x is-equiv-point Y)

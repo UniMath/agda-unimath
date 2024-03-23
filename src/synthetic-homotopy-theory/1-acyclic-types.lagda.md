@@ -127,13 +127,13 @@ module _
               ( Id)
               ( htpy-eq
                 ( is-section-map-inv-equiv
-                  ( const A (type-Ω (pair (type-Truncated-Type BG) pt)) ,
+                  ( const ,
                     is-equiv-const-Id-is-acyclic-Truncated-Type A ac BG pt pt)
                   ( gen))
                 ( x))
               ( htpy-eq
                 ( is-section-map-inv-equiv
-                  ( const A (type-Ω (pair (type-Truncated-Type BG) pt)) ,
+                  ( const ,
                     is-equiv-const-Id-is-acyclic-Truncated-Type A ac BG pt pt)
                   ( gen))
                 ( y))

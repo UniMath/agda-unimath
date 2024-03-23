@@ -64,18 +64,18 @@ is-neg-two-connected A = is-trunc-type-trunc
 is-equiv-diagonal-is-connected :
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 k) →
   is-connected k A →
-  is-equiv (const A (type-Truncated-Type B))
+  is-equiv (const' A (type-Truncated-Type B))
 is-equiv-diagonal-is-connected B H =
   is-equiv-comp
     ( precomp unit-trunc (type-Truncated-Type B))
-    ( λ b → const _ _ b)
+    ( λ b → const b)
     ( is-equiv-diagonal-is-contr H (type-Truncated-Type B))
     ( is-truncation-trunc B)
 
 is-connected-is-equiv-diagonal :
   {l1 : Level} {k : 𝕋} {A : UU l1} →
   ({l2 : Level} (B : Truncated-Type l2 k) →
-  is-equiv (const A (type-Truncated-Type B))) →
+  is-equiv (const' A (type-Truncated-Type B))) →
   is-connected k A
 is-connected-is-equiv-diagonal {k = k} {A = A} H =
   tot

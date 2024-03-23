@@ -115,10 +115,7 @@ module _
                 ( pr2 (pr2 μ)))
               ( map-equiv-symmetric-Id
                 ( equiv-concat
-                  ( H ( const
-                        ( type-2-Element-Type X)
-                        ( type-Pointed-Type A)
-                        ( point-Pointed-Type A)))
+                  ( H ( const (point-Pointed-Type A)))
                   ( point-Pointed-Type A))
                 ( ( X) ,
                   ( λ x →

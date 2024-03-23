@@ -179,7 +179,7 @@ module _
   compute-const-ap² :
     (b : B) →
     coherence-square-identifications
-      ( ap² (const A B b) α)
+      ( ap² (const b) α)
       ( ap-const b p)
       ( ap-const b q)
       ( refl)

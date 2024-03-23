@@ -171,19 +171,19 @@ module _
 
   abstract
     is-equiv-self-diagonal-is-equiv-diagonal :
-      ({l : Level} (X : UU l) → is-equiv (λ x → const A X x)) →
-      is-equiv (λ x → const A A x)
+      ({l : Level} (X : UU l) → is-equiv (λ x → const' A X x)) →
+      is-equiv (λ x → const' A A x)
     is-equiv-self-diagonal-is-equiv-diagonal H = H A
 
   abstract
     is-contr-is-equiv-self-diagonal :
-      is-equiv (λ x → const A A x) → is-contr A
+      is-equiv (λ x → const' A A x) → is-contr A
     is-contr-is-equiv-self-diagonal H =
       tot (λ x → htpy-eq) (center (is-contr-map-is-equiv H id))
 
   abstract
     is-contr-is-equiv-diagonal :
-      ({l : Level} (X : UU l) → is-equiv (λ x → const A X x)) → is-contr A
+      ({l : Level} (X : UU l) → is-equiv (λ x → const' A X x)) → is-contr A
     is-contr-is-equiv-diagonal H =
       is-contr-is-equiv-self-diagonal
         ( is-equiv-self-diagonal-is-equiv-diagonal H)
@@ -191,7 +191,7 @@ module _
   abstract
     is-equiv-diagonal-is-contr :
       is-contr A →
-      {l : Level} (X : UU l) → is-equiv (const A X)
+      {l : Level} (X : UU l) → is-equiv (const' A X)
     is-equiv-diagonal-is-contr H X =
       is-equiv-is-invertible
         ( ev-point' (center H))
@@ -200,6 +200,6 @@ module _
 
   equiv-diagonal-is-contr :
     {l : Level} (X : UU l) → is-contr A → X ≃ (A → X)
-  pr1 (equiv-diagonal-is-contr X H) = const A X
+  pr1 (equiv-diagonal-is-contr X H) = const' A X
   pr2 (equiv-diagonal-is-contr X H) = is-equiv-diagonal-is-contr H X
 ```

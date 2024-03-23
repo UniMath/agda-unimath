@@ -585,7 +585,7 @@ module _
         ( λ y →
           is-torsorial-fiber-Id
             ( λ y' →
-              ( const X (y ＝ y') ,
+              ( const ,
                 is-equiv-diagonal-is-connected (Id-Truncated-Type Y y y') c))))
 
   is-connected-succ-suspension-is-connected :
@@ -598,7 +598,7 @@ module _
             ( ev-suspension
               ( suspension-structure-suspension X)
               ( type-Truncated-Type Y)))
-          ( const (suspension X) (type-Truncated-Type Y))
+          ( const)
           ( is-equiv-north-suspension-ev-suspension-is-connected-Truncated-Type
               ( c)
               ( Y))
