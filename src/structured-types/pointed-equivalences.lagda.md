@@ -8,11 +8,13 @@ module structured-types.pointed-equivalences where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-identifications
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
@@ -339,6 +341,32 @@ module _
       ( pointed-map-pointed-equiv e)
 ```
 
+### Inverses of pointed equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (e : A ≃∗ B)
+  where
+
+  abstract
+    is-pointed-equiv-inv-pointed-equiv :
+      is-pointed-equiv (pointed-map-inv-pointed-equiv e)
+    is-pointed-equiv-inv-pointed-equiv =
+      is-equiv-is-invertible
+        ( map-pointed-equiv e)
+        ( is-retraction-map-inv-pointed-equiv e)
+        ( is-section-map-inv-pointed-equiv e)
+
+  equiv-inv-pointed-equiv : type-Pointed-Type B ≃ type-Pointed-Type A
+  pr1 equiv-inv-pointed-equiv = map-inv-pointed-equiv e
+  pr2 equiv-inv-pointed-equiv = is-pointed-equiv-inv-pointed-equiv
+
+  inv-pointed-equiv : B ≃∗ A
+  pr1 inv-pointed-equiv = equiv-inv-pointed-equiv
+  pr2 inv-pointed-equiv = preserves-point-map-inv-pointed-equiv e
+```
+
 ## Properties
 
 ### Extensionality of the universe of pointed types
@@ -348,13 +376,14 @@ module _
   {l1 : Level} (A : Pointed-Type l1)
   where
 
-  is-torsorial-equiv-Pointed-Type :
-    is-torsorial (λ B → A ≃∗ B)
-  is-torsorial-equiv-Pointed-Type =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv (type-Pointed-Type A))
-      ( type-Pointed-Type A , id-equiv)
-      ( is-torsorial-Id (point-Pointed-Type A))
+  abstract
+    is-torsorial-pointed-equiv :
+      is-torsorial (λ (B : Pointed-Type l1) → A ≃∗ B)
+    is-torsorial-pointed-equiv =
+      is-torsorial-Eq-structure
+        ( is-torsorial-equiv (type-Pointed-Type A))
+        ( type-Pointed-Type A , id-equiv)
+        ( is-torsorial-Id (point-Pointed-Type A))
 
   extensionality-Pointed-Type : (B : Pointed-Type l1) → (A ＝ B) ≃ (A ≃∗ B)
   extensionality-Pointed-Type =
@@ -441,12 +470,13 @@ module _
     htpy-pointed-htpy
       ( is-pointed-section-pointed-map-inv-is-pointed-equiv-universal-property-pointed-equiv)
 
-  is-pointed-equiv-universal-property-pointed-equiv : is-pointed-equiv f
-  is-pointed-equiv-universal-property-pointed-equiv =
-    is-equiv-is-invertible
-      ( map-inv-is-pointed-equiv-universal-property-pointed-equiv)
-      ( is-section-map-inv-is-pointed-equiv-universal-property-pointed-equiv)
-      ( is-retraction-map-inv-is-pointed-equiv-universal-property-pointed-equiv)
+  abstract
+    is-pointed-equiv-universal-property-pointed-equiv : is-pointed-equiv f
+    is-pointed-equiv-universal-property-pointed-equiv =
+      is-equiv-is-invertible
+        ( map-inv-is-pointed-equiv-universal-property-pointed-equiv)
+        ( is-section-map-inv-is-pointed-equiv-universal-property-pointed-equiv)
+        ( is-retraction-map-inv-is-pointed-equiv-universal-property-pointed-equiv)
 ```
 
 ### Any pointed equivalence satisfies the universal property of pointed equivalences
@@ -528,13 +558,14 @@ module _
       ( H)
       ( C)
 
-  universal-property-pointed-equiv-is-pointed-equiv :
-    is-pointed-equiv f →
-    universal-property-pointed-equiv f
-  pr1 (universal-property-pointed-equiv-is-pointed-equiv H C) =
-    section-universal-property-pointed-equiv-is-pointed-equiv H C
-  pr2 (universal-property-pointed-equiv-is-pointed-equiv H C) =
-    retraction-universal-property-pointed-equiv-is-pointed-equiv H C
+  abstract
+    universal-property-pointed-equiv-is-pointed-equiv :
+      is-pointed-equiv f →
+      universal-property-pointed-equiv f
+    pr1 (universal-property-pointed-equiv-is-pointed-equiv H C) =
+      section-universal-property-pointed-equiv-is-pointed-equiv H C
+    pr2 (universal-property-pointed-equiv-is-pointed-equiv H C) =
+      retraction-universal-property-pointed-equiv-is-pointed-equiv H C
 
 equiv-precomp-pointed-map :
   {l1 l2 l3 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
@@ -631,12 +662,13 @@ module _
     htpy-pointed-htpy
       ( is-pointed-retraction-pointed-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
 
-  is-pointed-equiv-is-equiv-postcomp-pointed-map : is-pointed-equiv f
-  is-pointed-equiv-is-equiv-postcomp-pointed-map =
-    is-equiv-is-invertible
-      ( map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
-      ( is-section-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
-      ( is-retraction-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+  abstract
+    is-pointed-equiv-is-equiv-postcomp-pointed-map : is-pointed-equiv f
+    is-pointed-equiv-is-equiv-postcomp-pointed-map =
+      is-equiv-is-invertible
+        ( map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+        ( is-section-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
+        ( is-retraction-map-inv-is-pointed-equiv-is-equiv-postcomp-pointed-map)
 ```
 
 #### Any pointed equivalence is an equivalence by postcomposition
@@ -695,10 +727,69 @@ module _
             ( h))
           ( left-unit-law-comp-pointed-map h)))
 
-  is-equiv-postcomp-is-pointed-equiv : is-equiv-postcomp-pointed-map f
-  is-equiv-postcomp-is-pointed-equiv X =
-    is-equiv-is-invertible
-      ( map-inv-is-equiv-postcomp-is-pointed-equiv X)
-      ( is-section-map-inv-is-equiv-postcomp-is-pointed-equiv X)
-      ( is-retraction-map-inv-is-equiv-postcomp-is-pointed-equiv X)
+  abstract
+    is-equiv-postcomp-is-pointed-equiv : is-equiv-postcomp-pointed-map f
+    is-equiv-postcomp-is-pointed-equiv X =
+      is-equiv-is-invertible
+        ( map-inv-is-equiv-postcomp-is-pointed-equiv X)
+        ( is-section-map-inv-is-equiv-postcomp-is-pointed-equiv X)
+        ( is-retraction-map-inv-is-equiv-postcomp-is-pointed-equiv X)
+
+equiv-postcomp-pointed-map :
+  {l1 l2 l3 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (C : Pointed-Type l3) → (A ≃∗ B) → (C →∗ A) ≃ (C →∗ B)
+pr1 (equiv-postcomp-pointed-map C e) =
+  postcomp-pointed-map (pointed-map-pointed-equiv e) C
+pr2 (equiv-postcomp-pointed-map C e) =
+  is-equiv-postcomp-is-pointed-equiv
+    ( pointed-map-pointed-equiv e)
+    ( is-pointed-equiv-pointed-equiv e)
+    ( C)
+```
+
+### The composition operation on pointed equivalences is a binary equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
+  where
+
+  abstract
+    is-equiv-comp-pointed-equiv :
+      (f : B ≃∗ C) → is-equiv (λ (e : A ≃∗ B) → comp-pointed-equiv f e)
+    is-equiv-comp-pointed-equiv f =
+      is-equiv-map-Σ _
+        ( is-equiv-postcomp-equiv-equiv (equiv-pointed-equiv f))
+        ( λ e →
+          is-equiv-comp _
+            ( ap (map-pointed-equiv f))
+            ( is-emb-is-equiv (is-equiv-map-pointed-equiv f) _ _)
+            ( is-equiv-concat' _ (preserves-point-pointed-equiv f)))
+
+  equiv-comp-pointed-equiv : (f : B ≃∗ C) → (A ≃∗ B) ≃ (A ≃∗ C)
+  pr1 (equiv-comp-pointed-equiv f) = comp-pointed-equiv f
+  pr2 (equiv-comp-pointed-equiv f) = is-equiv-comp-pointed-equiv f
+
+  abstract
+    is-equiv-comp-pointed-equiv' :
+      (e : A ≃∗ B) → is-equiv (λ (f : B ≃∗ C) → comp-pointed-equiv f e)
+    is-equiv-comp-pointed-equiv' e =
+      is-equiv-map-Σ _
+        ( is-equiv-precomp-equiv-equiv (equiv-pointed-equiv e))
+        ( λ f →
+          is-equiv-concat
+            ( ap (map-equiv f) (preserves-point-pointed-equiv e))
+            ( _))
+
+  equiv-comp-pointed-equiv' :
+    (e : A ≃∗ B) → (B ≃∗ C) ≃ (A ≃∗ C)
+  pr1 (equiv-comp-pointed-equiv' e) f = comp-pointed-equiv f e
+  pr2 (equiv-comp-pointed-equiv' e) = is-equiv-comp-pointed-equiv' e
+
+  abstract
+    is-binary-equiv-comp-pointed-equiv :
+      is-binary-equiv (λ (f : B ≃∗ C) (e : A ≃∗ B) → comp-pointed-equiv f e)
+    pr1 is-binary-equiv-comp-pointed-equiv = is-equiv-comp-pointed-equiv'
+    pr2 is-binary-equiv-comp-pointed-equiv = is-equiv-comp-pointed-equiv
 ```

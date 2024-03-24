@@ -45,6 +45,10 @@ module _
   graph-Reflexive-Graph = vertex-Reflexive-Graph , edge-Reflexive-Graph
 ```
 
+## See also
+
+- [Large reflexive graphs](graph-theory.large-reflexive-graphs.md)
+
 ## External links
 
 - [Reflexive graph](https://ncatlab.org/nlab/show/reflexive+graph) at $n$Lab
