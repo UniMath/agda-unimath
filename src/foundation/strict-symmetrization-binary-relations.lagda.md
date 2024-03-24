@@ -36,7 +36,8 @@ If the underlying binary relation is
 [reflexive](foundation.reflexive-relations.md), then this construction has a
 unit map `R → Rˢ`. If the binary relation satisfies an
 [outer horn filler condition](foundation.outer-2-horn-filler-conditions-binary-relations.md),
-then it has a counit map `Rˢ → R`.
+then it has a counit map `Rˢ → R`. Note that we do not mean to imply that these
+maps are components of an adjunction.
 
 An essential fact about the strict symmetrization of a relation is that the
 strict symmetrization of an identity relation is equivalent to the identity
