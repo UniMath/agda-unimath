@@ -46,10 +46,10 @@ record
       Set (β l1 l2)
 
   hom-Large-Precategory :
-      {l1 l2 : Level} →
-      obj-Large-Precategory l1 →
-      obj-Large-Precategory l2 →
-      UU (β l1 l2)
+    {l1 l2 : Level} →
+    obj-Large-Precategory l1 →
+    obj-Large-Precategory l2 →
+    UU (β l1 l2)
   hom-Large-Precategory X Y = type-Set (hom-set-Large-Precategory X Y)
 
   is-set-hom-Large-Precategory :

@@ -121,6 +121,7 @@ open import foundation.diagonal-maps-of-types public
 open import foundation.diagonal-span-diagrams public
 open import foundation.diagonals-of-maps public
 open import foundation.diagonals-of-morphisms-arrows public
+open import foundation.discrete-relations public
 open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
@@ -310,6 +311,7 @@ open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
+open import foundation.reflexive-relations public
 open import foundation.regensburg-extension-fundamental-theorem-of-identity-types public
 open import foundation.relaxed-sigma-decompositions public
 open import foundation.repetitions-of-values public
