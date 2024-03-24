@@ -25,7 +25,7 @@ open import graph-theory.reflexive-graphs
 A [reflexive graph](graph-theory.reflexive-graphs.md) `G = (V , E)` is said to
 be
 {{#concept "discrete" Disambiguation="reflexive graph" Agda=is-discrete-Reflexive-Graph}}
-if, for every vertex `x`, the type family if edges with source `x`, `E x`, is
+if, for every vertex `x`, the type family of edges with source `x`, `E x`, is
 [torsorial](foundation-core.torsorial-type-families.md). In other words, the
 [dependent sum](foundation.dependent-pair-types.md) `Σ (y : V), (E x y)` is
 [contractible](foundation-core.contractible-types.md) for every `x`. The
