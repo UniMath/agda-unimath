@@ -84,9 +84,9 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  trans-mere-function :
+  transitive-mere-function :
     mere-function B C → mere-function A B → mere-function A C
-  trans-mere-function |g| =
+  transitive-mere-function |g| =
     rec-trunc-Prop
       ( prop-mere-function A C)
       ( λ f →
