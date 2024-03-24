@@ -90,8 +90,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  sym-mere-iff : mere-iff A B → mere-iff B A
-  sym-mere-iff =
+  symmetric-mere-iff : mere-iff A B → mere-iff B A
+  symmetric-mere-iff =
     rec-trunc-Prop (prop-mere-iff B A) (unit-trunc-Prop ∘ inv-iff)
 ```
 
