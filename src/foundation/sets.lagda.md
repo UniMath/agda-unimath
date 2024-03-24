@@ -11,6 +11,7 @@ open import foundation-core.sets public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.univalent-type-families
@@ -21,6 +22,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.precomposition-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
@@ -262,4 +264,61 @@ abstract
 ```agda
 is-univalent-type-Set : {l : Level} → is-univalent (type-Set {l})
 is-univalent-type-Set = is-univalent-inclusion-subuniverse is-set-Prop
+```
+
+### Any injective map between sets is an embedding
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-emb-is-injective' :
+      (is-set-A : is-set A) (is-set-B : is-set B) (f : A → B) →
+      is-injective f → is-emb f
+    is-emb-is-injective' is-set-A is-set-B f is-injective-f x y =
+      is-equiv-has-converse-is-prop
+        ( is-set-A x y)
+        ( is-set-B (f x) (f y))
+        ( is-injective-f)
+
+    is-set-is-injective :
+      {f : A → B} → is-set B → is-injective f → is-set A
+    is-set-is-injective {f} H I =
+      is-set-prop-in-id
+        ( λ x y → f x ＝ f y)
+        ( λ x y → H (f x) (f y))
+        ( λ x → refl)
+        ( λ x y → I)
+
+    is-emb-is-injective :
+      {f : A → B} → is-set B → is-injective f → is-emb f
+    is-emb-is-injective {f} H I =
+      is-emb-is-injective' (is-set-is-injective H I) H f I
+
+    is-prop-map-is-injective :
+      {f : A → B} → is-set B → is-injective f → is-prop-map f
+    is-prop-map-is-injective {f} H I =
+      is-prop-map-is-emb (is-emb-is-injective H I)
+```
+
+### For a map between sets, being injective is a property
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-prop-is-injective :
+    is-set A → (f : A → B) → is-prop (is-injective f)
+  is-prop-is-injective H f =
+    is-prop-implicit-Π
+      ( λ x →
+        is-prop-implicit-Π
+          ( λ y → is-prop-function-type (H x y)))
+
+  is-injective-Prop : is-set A → (A → B) → Prop (l1 ⊔ l2)
+  pr1 (is-injective-Prop H f) = is-injective f
+  pr2 (is-injective-Prop H f) = is-prop-is-injective H f
 ```

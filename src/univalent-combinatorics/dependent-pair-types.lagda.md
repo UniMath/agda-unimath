@@ -155,7 +155,7 @@ abstract
       ( ( right-unit-law-Σ-is-contr
           ( λ x →
             is-proof-irrelevant-is-prop
-              ( is-prop-is-inhabited-or-empty (B x))
+              ( is-property-is-inhabited-or-empty (B x))
               ( is-inhabited-or-empty-is-finite (g x)))) ∘e
         ( inv-equiv
           ( left-distributive-Σ-coproduct A

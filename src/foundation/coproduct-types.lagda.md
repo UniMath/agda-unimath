@@ -214,7 +214,8 @@ module _
 coproduct-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   (type-Prop P → ¬ (type-Prop Q)) → Prop (l1 ⊔ l2)
-pr1 (coproduct-Prop P Q H) = type-Prop P + type-Prop Q
+pr1 (coproduct-Prop P Q H) =
+  type-Prop P + type-Prop Q
 pr2 (coproduct-Prop P Q H) =
   is-prop-coproduct H (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```

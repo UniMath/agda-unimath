@@ -182,7 +182,7 @@ module _
               ( J))
             ( mul-Commutative-Ring A x y))
           ( λ (n , p) →
-            intro-∃
+            intro-exists
               ( succ-ℕ n)
               ( is-closed-under-eq-ideal-Commutative-Ring' A
                 ( product-ideal-Commutative-Ring A

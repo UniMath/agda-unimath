@@ -157,7 +157,7 @@ has-unique-proper-divisor-is-prime-ℕ n H =
   fundamental-theorem-id'
     ( λ x p → pr2 (H x) (inv p))
     ( λ x →
-      is-equiv-is-prop
+      is-equiv-has-converse-is-prop
         ( is-set-ℕ 1 x)
         ( is-prop-is-proper-divisor-ℕ n x)
         ( λ p → inv (pr1 (H x) p)))

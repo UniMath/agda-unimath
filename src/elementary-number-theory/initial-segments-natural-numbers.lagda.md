@@ -38,7 +38,7 @@ holds for every `n : ℕ`.
 ```agda
 is-initial-segment-subset-ℕ-Prop : {l : Level} (P : subtype l ℕ) → Prop l
 is-initial-segment-subset-ℕ-Prop P =
-  Π-Prop ℕ (λ n → implication-Prop (P (succ-ℕ n)) (P n))
+  Π-Prop ℕ (λ n → hom-Prop (P (succ-ℕ n)) (P n))
 
 is-initial-segment-subset-ℕ : {l : Level} (P : subtype l ℕ) → UU l
 is-initial-segment-subset-ℕ P = type-Prop (is-initial-segment-subset-ℕ-Prop P)

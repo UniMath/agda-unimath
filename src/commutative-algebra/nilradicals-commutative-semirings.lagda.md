@@ -42,7 +42,7 @@ contains-zero-nilradical-Commutative-Semiring :
   {l : Level} (A : Commutative-Semiring l) →
   contains-zero-subset-Commutative-Semiring A
     ( subset-nilradical-Commutative-Semiring A)
-contains-zero-nilradical-Commutative-Semiring A = intro-∃ 1 refl
+contains-zero-nilradical-Commutative-Semiring A = intro-exists 1 refl
 ```
 
 ### The nilradical is closed under addition

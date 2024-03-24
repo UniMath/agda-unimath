@@ -107,7 +107,9 @@ module _
 is-in-unordered-pair-Prop :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → Prop l
 is-in-unordered-pair-Prop p a =
-  ∃-Prop (type-unordered-pair p) (λ x → element-unordered-pair p x ＝ a)
+  exists-structure-Prop
+    ( type-unordered-pair p)
+    ( λ x → element-unordered-pair p x ＝ a)
 
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l

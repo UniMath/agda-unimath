@@ -17,9 +17,11 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.maybe
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.sets
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -32,9 +34,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
@@ -214,7 +214,7 @@ module _
 is-prop-is-isolated :
   {l1 : Level} {A : UU l1} (a : A) → is-prop (is-isolated a)
 is-prop-is-isolated a =
-  is-prop-is-inhabited
+  is-prop-has-element
     ( λ H → is-prop-Π (is-prop-is-decidable ∘ is-prop-eq-isolated-element a H))
 
 is-isolated-Prop :
@@ -257,7 +257,7 @@ module _
       ( is-emb-inclusion-isolated-element A)
       ( is-emb-is-injective
         ( is-set-isolated-element A)
-        ( λ {star} {star} p → refl))
+        ( λ p → refl))
 
   emb-point-isolated-element : unit ↪ A
   pr1 emb-point-isolated-element = point-isolated-element

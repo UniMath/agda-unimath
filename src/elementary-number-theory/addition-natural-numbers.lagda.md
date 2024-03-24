@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.negated-equality
+open import foundation.sets
 ```
 
 </details>

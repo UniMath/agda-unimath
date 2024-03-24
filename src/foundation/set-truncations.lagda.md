@@ -49,21 +49,21 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-The **set truncation** of a type `A` is a map `η : A → trunc-Set A` that
-satisfies
+The {{#concept "set truncation" Agda=trunc-Set}} of a type `A` is a map
+`η : A → trunc-Set A` that satisfies
 [the universal property of set truncations](foundation.universal-property-set-truncation.md).
 
-## Definition
+## Definitions
 
 ```agda
+trunc-Set : {l : Level} → UU l → Set l
+trunc-Set = trunc zero-𝕋
+
 type-trunc-Set : {l : Level} → UU l → UU l
 type-trunc-Set = type-trunc zero-𝕋
 
 is-set-type-trunc-Set : {l : Level} {A : UU l} → is-set (type-trunc-Set A)
 is-set-type-trunc-Set = is-trunc-type-trunc
-
-trunc-Set : {l : Level} → UU l → Set l
-trunc-Set = trunc zero-𝕋
 
 unit-trunc-Set : {l : Level} {A : UU l} → A → type-trunc-Set A
 unit-trunc-Set = unit-trunc
@@ -71,7 +71,15 @@ unit-trunc-Set = unit-trunc
 is-set-truncation-trunc-Set :
   {l1 : Level} (A : UU l1) → is-set-truncation (trunc-Set A) unit-trunc-Set
 is-set-truncation-trunc-Set A = is-truncation-trunc
+
+║_║₀ : {l : Level} → UU l → UU l
+║_║₀ = type-trunc-Set
 ```
+
+**Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
+symbol `║` in the set truncation notation `║_║₀` can be inserted with
+`agda-input` using the escape sequence `\--=` and selecting the second item in
+the list.
 
 ## Properties
 

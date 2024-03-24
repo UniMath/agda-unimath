@@ -82,8 +82,7 @@ module _
 
   subset-radical-of-ideal-Commutative-Ring : type-Commutative-Ring A → Prop l2
   subset-radical-of-ideal-Commutative-Ring f =
-    ∃-Prop ℕ
-      ( λ n → is-in-ideal-Commutative-Ring A I (power-Commutative-Ring A n f))
+    ∃ ℕ (λ n → subset-ideal-Commutative-Ring A I (power-Commutative-Ring A n f))
 
   is-in-radical-of-ideal-Commutative-Ring : type-Commutative-Ring A → UU l2
   is-in-radical-of-ideal-Commutative-Ring =
@@ -93,7 +92,7 @@ module _
     (f : type-Commutative-Ring A) →
     is-in-ideal-Commutative-Ring A I f →
     is-in-radical-of-ideal-Commutative-Ring f
-  contains-ideal-radical-of-ideal-Commutative-Ring f H = intro-∃ 1 H
+  contains-ideal-radical-of-ideal-Commutative-Ring f H = intro-exists 1 H
 
   contains-zero-radical-of-ideal-Commutative-Ring :
     is-in-radical-of-ideal-Commutative-Ring (zero-Commutative-Ring A)
@@ -113,7 +112,7 @@ module _
           ( subset-radical-of-ideal-Commutative-Ring
             ( add-Commutative-Ring A x y))
           ( λ (m , q) →
-            intro-∃
+            intro-exists
               ( n +ℕ m)
               ( is-closed-under-eq-ideal-Commutative-Ring' A I
                 ( is-closed-under-addition-ideal-Commutative-Ring A I
@@ -138,7 +137,7 @@ module _
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (neg-Commutative-Ring A x))
       ( λ (n , p) →
-        intro-∃ n
+        intro-exists n
           ( is-closed-under-eq-ideal-Commutative-Ring' A I
             ( is-closed-under-left-multiplication-ideal-Commutative-Ring A I _
               ( power-Commutative-Ring A n x)
@@ -152,7 +151,7 @@ module _
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (mul-Commutative-Ring A x y))
       ( λ (n , p) →
-        intro-∃ n
+        intro-exists n
           ( is-closed-under-eq-ideal-Commutative-Ring' A I
             ( is-closed-under-right-multiplication-ideal-Commutative-Ring A I
               ( power-Commutative-Ring A n x)
@@ -167,7 +166,7 @@ module _
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring (mul-Commutative-Ring A x y))
       ( λ (n , p) →
-        intro-∃ n
+        intro-exists n
           ( is-closed-under-eq-ideal-Commutative-Ring' A I
             ( is-closed-under-left-multiplication-ideal-Commutative-Ring A I
               ( power-Commutative-Ring A n x)
@@ -190,7 +189,7 @@ module _
     apply-universal-property-trunc-Prop H
       ( subset-radical-of-ideal-Commutative-Ring x)
       ( λ (m , K) →
-        intro-∃
+        intro-exists
           ( mul-ℕ n m)
           ( is-closed-under-eq-ideal-Commutative-Ring' A I K
             ( power-mul-Commutative-Ring A n m)))

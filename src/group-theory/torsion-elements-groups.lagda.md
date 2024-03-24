@@ -54,7 +54,7 @@ module _
 
   is-torsion-element-prop-Group : Prop l1
   is-torsion-element-prop-Group =
-    ∃-Prop
+    exists-structure-Prop
       ( nonzero-ℤ)
       ( λ k → integer-power-Group G (int-nonzero-ℤ k) x ＝ unit-Group G)
 
@@ -88,7 +88,7 @@ module _
 
   is-torsion-element-unit-Group : is-torsion-element-Group G (unit-Group G)
   is-torsion-element-unit-Group =
-    intro-∃
+    intro-exists
       ( one-nonzero-ℤ)
       ( integer-power-unit-Group G one-ℤ)
 

@@ -799,13 +799,17 @@ module _
             (pair k
               ( (equal-iterate-transposition-other-orbits k) ∙
                 ( p)))))
-        ( is-equiv-is-prop is-prop-type-trunc-Prop is-prop-type-trunc-Prop
-          ( λ P' → apply-universal-property-trunc-Prop P'
-            ( prop-equivalence-relation (same-orbits-permutation-count g) x y)
-            ( λ (pair k p) → unit-trunc-Prop
-              ( pair k
-                ( (inv (equal-iterate-transposition-other-orbits k)) ∙
-                  ( p))))))
+        ( is-equiv-has-converse-is-prop
+          ( is-prop-type-trunc-Prop)
+          ( is-prop-type-trunc-Prop)
+          ( λ P' →
+            apply-universal-property-trunc-Prop P'
+              ( prop-equivalence-relation (same-orbits-permutation-count g) x y)
+              ( λ (pair k p) →
+                unit-trunc-Prop
+                  ( ( k) ,
+                    ( (inv (equal-iterate-transposition-other-orbits k)) ∙
+                      ( p))))))
       where
       equal-iterate-transposition-other-orbits :
         (k : ℕ) →
@@ -1124,7 +1128,7 @@ module _
           apply-universal-property-trunc-Prop T
             ( coproduct-sim-equivalence-relation-a-b-Prop g P x)
             (λ pa → lemma2 g (pair (pr1 pa) (inl (pr2 pa)))))
-        ( is-equiv-is-prop is-prop-type-trunc-Prop
+        ( is-equiv-has-converse-is-prop is-prop-type-trunc-Prop
           ( is-prop-type-Prop
             ( coproduct-sim-equivalence-relation-a-b-Prop g P x))
           ( λ where

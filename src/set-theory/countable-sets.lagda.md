@@ -71,7 +71,8 @@ module _
   is-surjective-map-enumeration E = pr2 E
 
   is-countable-Prop : Prop l
-  is-countable-Prop = ∃-Prop (ℕ → Maybe (type-Set X)) is-surjective
+  is-countable-Prop =
+    ∃ (ℕ → Maybe (type-Set X)) (is-surjective-Prop)
 
   is-countable : UU l
   is-countable = type-Prop (is-countable-Prop)
@@ -94,7 +95,7 @@ module _
 
   is-countable-Prop' : Prop (lsuc l ⊔ l)
   is-countable-Prop' =
-    ∃-Prop
+    exists-structure-Prop
       ( decidable-subtype l ℕ)
       ( λ P → type-decidable-subtype P ↠ type-Set X)
 
@@ -113,7 +114,7 @@ surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
 ```agda
 is-directly-countable-Prop : {l : Level} → Set l → Prop l
 is-directly-countable-Prop X =
-  ∃-Prop (ℕ → type-Set X) is-surjective
+  ∃ (ℕ → type-Set X) (is-surjective-Prop)
 
 is-directly-countable : {l : Level} → Set l → UU l
 is-directly-countable X = type-Prop (is-directly-countable-Prop X)

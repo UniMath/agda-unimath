@@ -32,6 +32,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.truncation-levels
@@ -73,29 +74,15 @@ module _
 
   is-dedekind-cut-Prop : Prop (l1 ⊔ l2)
   is-dedekind-cut-Prop =
-    product-Prop
-      ( product-Prop (exists-Prop ℚ L) (exists-Prop ℚ U))
-      ( product-Prop
-        ( product-Prop
-          ( Π-Prop ℚ
-            ( λ q →
-              iff-Prop
-                ( L q)
-                ( exists-Prop ℚ (λ r → product-Prop (le-ℚ-Prop q r) (L r)))))
-          ( Π-Prop ℚ
-            ( λ r →
-              iff-Prop
-                ( U r)
-                ( exists-Prop ℚ (λ q → product-Prop (le-ℚ-Prop q r) (U q))))))
-        ( product-Prop
-          ( Π-Prop ℚ (λ q → neg-Prop (product-Prop (L q) (U q))))
-          ( Π-Prop ℚ
-            ( λ q →
-              Π-Prop ℚ
-                ( λ r →
-                  implication-Prop
-                    ( le-ℚ-Prop q r)
-                    ( disjunction-Prop (L q) (U r)))))))
+    conjunction-Prop
+      ( (∃ ℚ L) ∧ (∃ ℚ U))
+      ( conjunction-Prop
+        ( conjunction-Prop
+          ( ∀' ℚ ( λ q → L q ⇔ ∃ ℚ (λ r → le-ℚ-Prop q r ∧ L r)))
+          ( ∀' ℚ ( λ r → U r ⇔ ∃ ℚ (λ q → le-ℚ-Prop q r ∧ U q))))
+        ( conjunction-Prop
+          ( ∀' ℚ (λ q → ¬' (L q ∧ U q)))
+          ( ∀' ℚ (λ q → ∀' ℚ (λ r → le-ℚ-Prop q r ⇒ (L q ∨ U r))))))
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop
@@ -140,13 +127,15 @@ module _
 
   is-rounded-lower-cut-ℝ :
     (q : ℚ) →
-    is-in-lower-cut-ℝ q ↔ ∃ ℚ (λ r → (le-ℚ q r) × (is-in-lower-cut-ℝ r))
+    is-in-lower-cut-ℝ q ↔
+    exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-ℝ r))
   is-rounded-lower-cut-ℝ =
     pr1 (pr1 (pr2 is-dedekind-cut-cut-ℝ))
 
   is-rounded-upper-cut-ℝ :
     (r : ℚ) →
-    is-in-upper-cut-ℝ r ↔ ∃ ℚ (λ q → (le-ℚ q r) × (is-in-upper-cut-ℝ q))
+    is-in-upper-cut-ℝ r ↔
+    exists ℚ (λ q → (le-ℚ-Prop q r) ∧ (upper-cut-ℝ q))
   is-rounded-upper-cut-ℝ =
     pr2 (pr1 (pr2 is-dedekind-cut-cut-ℝ))
 
@@ -155,7 +144,8 @@ module _
     pr1 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 
   is-located-lower-upper-cut-ℝ :
-    (q r : ℚ) → le-ℚ q r → (lower-cut-ℝ q) ∨ (upper-cut-ℝ r)
+    (q r : ℚ) → le-ℚ q r →
+    type-disjunction-Prop (lower-cut-ℝ q) (upper-cut-ℝ r)
   is-located-lower-upper-cut-ℝ =
     pr2 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
 
@@ -181,16 +171,15 @@ abstract
     is-set-Σ
       ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
       ( λ x →
-        ( is-set-Σ
+        is-set-Σ
           ( is-set-function-type (is-trunc-Truncated-Type neg-one-𝕋))
           ( λ y →
             ( is-set-is-prop
               ( is-prop-type-Prop
-                ( is-dedekind-cut-Prop x y))))))
+                ( is-dedekind-cut-Prop x y)))))
 
 ℝ-Set : (l : Level) → Set (lsuc l)
-pr1 (ℝ-Set l) = ℝ l
-pr2 (ℝ-Set l) = is-set-ℝ l
+ℝ-Set l = ℝ l , is-set-ℝ l
 ```
 
 ## Properties of lower/upper Dedekind cuts
@@ -287,13 +276,11 @@ module _
 
   is-lower-complement-upper-cut-ℝ-Prop : (p q : ℚ) → Prop l
   is-lower-complement-upper-cut-ℝ-Prop p q =
-    product-Prop
-      ( le-ℚ-Prop p q)
-      ( neg-Prop ( upper-cut-ℝ x q))
+    ( le-ℚ-Prop p q) ∧ (¬' (upper-cut-ℝ x q))
 
   lower-complement-upper-cut-ℝ : subtype l ℚ
   lower-complement-upper-cut-ℝ p =
-    exists-Prop ℚ (is-lower-complement-upper-cut-ℝ-Prop p)
+    ∃ ℚ (is-lower-complement-upper-cut-ℝ-Prop p)
 ```
 
 ```agda
@@ -304,8 +291,7 @@ module _
   subset-lower-cut-lower-complement-upper-cut-ℝ :
     lower-complement-upper-cut-ℝ x ⊆ lower-cut-ℝ x
   subset-lower-cut-lower-complement-upper-cut-ℝ p =
-    elim-exists-Prop
-      ( is-lower-complement-upper-cut-ℝ-Prop x p)
+    elim-exists
       ( lower-cut-ℝ x p)
       ( λ q I →
         map-right-unit-law-disjunction-is-empty-Prop
@@ -317,12 +303,10 @@ module _
   subset-lower-complement-upper-cut-lower-cut-ℝ :
     lower-cut-ℝ x ⊆ lower-complement-upper-cut-ℝ x
   subset-lower-complement-upper-cut-lower-cut-ℝ p H =
-    elim-exists-Prop
-      ( λ q → product-Prop (le-ℚ-Prop p q) (lower-cut-ℝ x q))
+    elim-exists
       ( lower-complement-upper-cut-ℝ x p)
       ( λ q I →
         intro-exists
-          ( is-lower-complement-upper-cut-ℝ-Prop x p)
           ( q)
           ( map-product
             ( id)
@@ -349,13 +333,11 @@ module _
 
   is-upper-complement-lower-cut-ℝ-Prop : (q p : ℚ) → Prop l
   is-upper-complement-lower-cut-ℝ-Prop q p =
-    product-Prop
-      ( le-ℚ-Prop p q)
-      ( neg-Prop ( lower-cut-ℝ x p))
+    (le-ℚ-Prop p q) ∧ (¬' (lower-cut-ℝ x p))
 
   upper-complement-lower-cut-ℝ : subtype l ℚ
   upper-complement-lower-cut-ℝ q =
-    exists-Prop ℚ (is-upper-complement-lower-cut-ℝ-Prop q)
+    ∃ ℚ (is-upper-complement-lower-cut-ℝ-Prop q)
 ```
 
 ```agda
@@ -366,8 +348,7 @@ module _
   subset-upper-cut-upper-complement-lower-cut-ℝ :
     upper-complement-lower-cut-ℝ x ⊆ upper-cut-ℝ x
   subset-upper-cut-upper-complement-lower-cut-ℝ q =
-    elim-exists-Prop
-      ( is-upper-complement-lower-cut-ℝ-Prop x q)
+    elim-exists
       ( upper-cut-ℝ x q)
       ( λ p I →
         map-left-unit-law-disjunction-is-empty-Prop
@@ -379,12 +360,10 @@ module _
   subset-upper-complement-lower-cut-upper-cut-ℝ :
     upper-cut-ℝ x ⊆ upper-complement-lower-cut-ℝ x
   subset-upper-complement-lower-cut-upper-cut-ℝ q H =
-    elim-exists-Prop
-      ( λ p → product-Prop (le-ℚ-Prop p q) (upper-cut-ℝ x p))
+    elim-exists
       ( upper-complement-lower-cut-ℝ x q)
       ( λ p I →
         intro-exists
-          ( is-upper-complement-lower-cut-ℝ-Prop x q)
           ( p)
           ( map-product
             ( id)
@@ -417,10 +396,9 @@ module _
       ( eq-lower-cut-lower-complement-upper-cut-ℝ x)
       ( eq-lower-cut-lower-complement-upper-cut-ℝ y)
       ( λ p →
-        elim-exists-Prop
-          ( is-lower-complement-upper-cut-ℝ-Prop x p)
+        elim-exists
           ( lower-complement-upper-cut-ℝ y p)
-          ( λ q → intro-∃ q ∘ tot (λ _ K → K ∘ H q)))
+          ( λ q → intro-exists q ∘ tot (λ _ K → K ∘ H q)))
 
   subset-upper-cut-lower-cut-ℝ :
     lower-cut-ℝ x ⊆ lower-cut-ℝ y → upper-cut-ℝ y ⊆ upper-cut-ℝ x
@@ -430,10 +408,9 @@ module _
       ( eq-upper-cut-upper-complement-lower-cut-ℝ y)
       ( eq-upper-cut-upper-complement-lower-cut-ℝ x)
       ( λ q →
-        elim-exists-Prop
-          ( is-upper-complement-lower-cut-ℝ-Prop y q)
+        elim-exists
           ( upper-complement-lower-cut-ℝ x q)
-          ( λ p → intro-∃ p ∘ tot (λ _ K → K ∘ H p)))
+          ( λ p → intro-exists p ∘ tot (λ _ K → K ∘ H p)))
 
 module _
   {l : Level} (x y : ℝ l)

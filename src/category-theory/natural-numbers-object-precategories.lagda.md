@@ -14,7 +14,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.unique-existence
+open import foundation.uniqueness-quantification
 open import foundation.universe-levels
 ```
 
@@ -43,7 +43,7 @@ module _
     (x : obj-Precategory C)
     (q : hom-Precategory C t x)
     (f : hom-Precategory C x x) →
-    ∃!
+    uniquely-exists-structure
       ( hom-Precategory C n x)
       ( λ u →
         ( comp-hom-Precategory C u z ＝ q) ×

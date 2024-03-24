@@ -47,10 +47,9 @@ module _
 
   has-finite-order-element-prop-Group : Prop l1
   has-finite-order-element-prop-Group =
-    ∃-Prop
-      ( nonzero-ℤ)
+    ∃ ( nonzero-ℤ)
       ( λ k →
-        has-same-elements-Subgroup ℤ-Group
+        has-same-elements-prop-Subgroup ℤ-Group
           ( subgroup-element-Group ℤ-Group (int-nonzero-ℤ k))
           ( subgroup-order-element-Group G x))
 ```

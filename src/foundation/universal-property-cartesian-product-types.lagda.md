@@ -9,6 +9,7 @@ module foundation.universal-property-cartesian-product-types where
 ```agda
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.standard-pullbacks
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
@@ -73,6 +74,10 @@ module _
     (((x : X) → A x) × ((x : X) → B x)) → (x : X) → A x × B x
   pr1 (map-inv-up-product (f , g) x) = f x
   pr2 (map-inv-up-product (f , g) x) = g x
+
+  iff-up-product :
+    ((x : X) → A x × B x) ↔ ((x : X) → A x) × ((x : X) → B x)
+  iff-up-product = (map-up-product , map-inv-up-product)
 
   up-product : is-equiv map-up-product
   up-product =

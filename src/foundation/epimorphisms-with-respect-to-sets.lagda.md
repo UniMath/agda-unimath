@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.sets
@@ -24,7 +25,6 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.injective-maps
 open import foundation-core.precomposition-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
@@ -100,7 +100,7 @@ abstract
     g : B → Prop (l1 ⊔ l2)
     g y = raise-unit-Prop (l1 ⊔ l2)
     h : B → Prop (l1 ⊔ l2)
-    h y = ∃-Prop A (λ x → f x ＝ y)
+    h y = exists-structure-Prop A (λ x → f x ＝ y)
 ```
 
 ### There is at most one extension of a map into a set along a surjection

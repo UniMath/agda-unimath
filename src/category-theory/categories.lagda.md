@@ -18,6 +18,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
@@ -312,7 +313,7 @@ module _
   is-equiv-is-category-is-surjective-iso-eq-Preunivalent-Category :
     is-equiv is-category-is-surjective-iso-eq-Preunivalent-Category
   is-equiv-is-category-is-surjective-iso-eq-Preunivalent-Category =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-surjective-iso-eq-Precategory
         ( precategory-Preunivalent-Category C))
       ( is-prop-is-category-Precategory (precategory-Preunivalent-Category C))
@@ -321,7 +322,7 @@ module _
   is-equiv-is-surjective-iso-eq-is-category-Preunivalent-Category :
     is-equiv is-surjective-iso-eq-is-category-Preunivalent-Category
   is-equiv-is-surjective-iso-eq-is-category-Preunivalent-Category =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-category-Precategory (precategory-Preunivalent-Category C))
       ( is-prop-is-surjective-iso-eq-Precategory
         ( precategory-Preunivalent-Category C))

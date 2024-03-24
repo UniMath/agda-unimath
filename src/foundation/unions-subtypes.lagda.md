@@ -37,7 +37,7 @@ module _
   where
 
   union-subtype : subtype l1 X → subtype l2 X → subtype (l1 ⊔ l2) X
-  union-subtype P Q x = disjunction-Prop (P x) (Q x)
+  union-subtype P Q x = (P x) ∨ (Q x)
 ```
 
 ### Unions of decidable subtypes

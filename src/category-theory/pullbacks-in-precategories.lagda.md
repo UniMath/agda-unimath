@@ -16,7 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
-open import foundation.unique-existence
+open import foundation.uniqueness-quantification
 open import foundation.universe-levels
 ```
 
@@ -62,7 +62,7 @@ module _
     (p₁' : hom-Precategory C w' y) →
     (p₂' : hom-Precategory C w' z) →
     comp-hom-Precategory C f p₁' ＝ comp-hom-Precategory C g p₂' →
-    ∃!
+    uniquely-exists-structure
       ( hom-Precategory C w' w)
       ( λ h →
         ( comp-hom-Precategory C p₁ h ＝ p₁') ×

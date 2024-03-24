@@ -16,7 +16,9 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.injective-maps
 open import foundation.iterated-dependent-product-types
+open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 ```
 
@@ -156,7 +158,7 @@ module _
   is-equiv-is-injective-hom-is-faithful-map-Precategory :
     is-equiv is-injective-hom-is-faithful-map-Precategory
   is-equiv-is-injective-hom-is-faithful-map-Precategory =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-faithful-map-Precategory C D F)
       ( is-prop-is-injective-hom-map-Precategory C D F)
       ( is-faithful-is-injective-hom-map-Precategory)
@@ -164,7 +166,7 @@ module _
   is-equiv-is-faithful-is-injective-hom-map-Precategory :
     is-equiv is-faithful-is-injective-hom-map-Precategory
   is-equiv-is-faithful-is-injective-hom-map-Precategory =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-injective-hom-map-Precategory C D F)
       ( is-prop-is-faithful-map-Precategory C D F)
       ( is-injective-hom-is-faithful-map-Precategory)

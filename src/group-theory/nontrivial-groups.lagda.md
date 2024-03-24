@@ -49,7 +49,7 @@ module _
 
   is-nontrivial-prop-Group : Prop l1
   is-nontrivial-prop-Group =
-    ∃-Prop (type-Group G) (λ g → unit-Group G ≠ g)
+    exists-structure-Prop (type-Group G) (λ g → unit-Group G ≠ g)
 
   is-nontrivial-Group : UU l1
   is-nontrivial-Group =
@@ -70,7 +70,7 @@ module _
 
   is-not-trivial-prop-Group : Prop l1
   is-not-trivial-prop-Group =
-    neg-Prop' ((x : type-Group G) → unit-Group G ＝ x)
+    neg-type-Prop ((x : type-Group G) → unit-Group G ＝ x)
 
   is-not-trivial-Group : UU l1
   is-not-trivial-Group =
@@ -138,10 +138,7 @@ module _
                     ( f)
                     ( forward-implication
                       ( iff-eq (ap (λ T → subset-Subgroup G T x) α))
-                      ( inr-disjunction-Prop
-                        ( Id-Prop (set-Group G) _ _)
-                        ( P)
-                        ( p))))
+                      ( inr-disjunction p)))
                 ( λ q →
                   map-left-unit-law-disjunction-is-empty-Prop
                     ( Id-Prop (set-Group G) _ _)
@@ -149,10 +146,7 @@ module _
                     ( f)
                     ( backward-implication
                       ( iff-eq (ap (λ T → subset-Subgroup G T x) α))
-                      ( inr-disjunction-Prop
-                        ( Id-Prop (set-Group G) _ _)
-                        ( Q)
-                        ( q))))))
+                      ( inr-disjunction q)))))
 ```
 
 ### If the map `subgroup-Prop G : Prop lzero → Subgroup l1 G` is an embedding, then `G` is not a trivial group

@@ -11,6 +11,7 @@ open import foundation-core.propositions public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.retracts-of-types
 open import foundation.universe-levels
 
@@ -69,9 +70,22 @@ abstract
 equiv-is-prop-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   A ≃ B → is-prop A ≃ is-prop B
 equiv-is-prop-equiv {A = A} {B = B} e =
-  equiv-prop
-    (is-prop-is-prop A)
-    (is-prop-is-prop B)
-    (is-prop-equiv' e)
-    (is-prop-equiv e)
+  equiv-iff-is-prop
+    ( is-prop-is-prop A)
+    ( is-prop-is-prop B)
+    ( is-prop-equiv' e)
+    ( is-prop-equiv e)
 ```
+
+## See also
+
+### Operations on propositions
+
+{{#include tables/operations-propositions.md}}
+
+### Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

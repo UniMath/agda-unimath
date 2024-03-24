@@ -58,7 +58,7 @@ module _
 
   is-power-of-element-prop-Monoid : (x y : type-Monoid M) → Prop l
   is-power-of-element-prop-Monoid x y =
-    ∃-Prop ℕ (λ n → power-Monoid M n x ＝ y)
+    exists-structure-Prop ℕ (λ n → power-Monoid M n x ＝ y)
 
   is-power-of-element-Monoid : (x y : type-Monoid M) → UU l
   is-power-of-element-Monoid x y =

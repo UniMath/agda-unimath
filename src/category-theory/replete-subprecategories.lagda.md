@@ -18,6 +18,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.iterated-dependent-product-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subsingleton-induction
 open import foundation.subtypes
@@ -216,7 +217,7 @@ module _
   is-equiv-is-iso-is-iso-base-is-replete-Subprecategory :
     is-equiv is-iso-is-iso-base-is-replete-Subprecategory
   is-equiv-is-iso-is-iso-base-is-replete-Subprecategory =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-iso-Precategory C (inclusion-hom-Subprecategory C P x y f))
       ( is-prop-is-iso-Subprecategory C P f)
       ( is-iso-base-is-iso-Subprecategory C P)

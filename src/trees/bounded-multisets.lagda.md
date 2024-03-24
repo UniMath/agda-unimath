@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import trees.empty-multisets
@@ -51,6 +52,16 @@ module _
     is-empty-𝕍 X
   is-of-natural-height-𝕍 (succ-ℕ n) (tree-𝕎 X Y) =
     (x : X) → is-of-natural-height-𝕍 n (Y x)
+
+  is-prop-is-of-natural-height-𝕍 :
+    (n : ℕ) (X : 𝕍 l) → is-prop (is-of-natural-height-𝕍 n X)
+  is-prop-is-of-natural-height-𝕍 zero-ℕ = is-property-is-empty-𝕍
+  is-prop-is-of-natural-height-𝕍 (succ-ℕ n) (tree-𝕎 X Y) =
+    is-prop-Π (λ x → is-prop-is-of-natural-height-𝕍 n (Y x))
+
+  is-of-natural-height-prop-𝕍 : ℕ → 𝕍 l → Prop l
+  is-of-natural-height-prop-𝕍 n X =
+    ( is-of-natural-height-𝕍 n X , is-prop-is-of-natural-height-𝕍 n X)
 ```
 
 ### Explicitly bounded multisets
@@ -80,7 +91,8 @@ data
     {n : ℕ} {X : UU l} (Y : X → Bounded-𝕍 l n) → Bounded-𝕍 l (succ-ℕ n)
 
 Bounded-𝕍' : (l : Level) → UU (lsuc l)
-Bounded-𝕍' l = Σ (𝕍 l) (λ X → ∃ ℕ (λ n → is-of-natural-height-𝕍 n X))
+Bounded-𝕍' l =
+  Σ (𝕍 l) (λ X → exists ℕ (λ n → is-of-natural-height-prop-𝕍 n X))
 ```
 
 ## Properties

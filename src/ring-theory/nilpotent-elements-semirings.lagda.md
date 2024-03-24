@@ -37,7 +37,7 @@ number `n` such that `x^n = 0`.
 is-nilpotent-element-semiring-Prop :
   {l : Level} (R : Semiring l) → type-Semiring R → Prop l
 is-nilpotent-element-semiring-Prop R x =
-  ∃-Prop ℕ (λ n → power-Semiring R n x ＝ zero-Semiring R)
+  exists-structure-Prop ℕ (λ n → power-Semiring R n x ＝ zero-Semiring R)
 
 is-nilpotent-element-Semiring :
   {l : Level} (R : Semiring l) → type-Semiring R → UU l
@@ -59,7 +59,7 @@ is-prop-is-nilpotent-element-Semiring R x =
 is-nilpotent-zero-Semiring :
   {l : Level} (R : Semiring l) →
   is-nilpotent-element-Semiring R (zero-Semiring R)
-is-nilpotent-zero-Semiring R = intro-∃ 1 refl
+is-nilpotent-zero-Semiring R = intro-exists 1 refl
 ```
 
 ### If `x` and `y` commute and are both nilpotent, then `x + y` is nilpotent
@@ -77,7 +77,7 @@ is-nilpotent-add-Semiring R x y H f h =
       apply-universal-property-trunc-Prop h
         ( is-nilpotent-element-semiring-Prop R (add-Semiring R x y))
         ( λ (m , q) →
-          intro-∃
+          intro-exists
             ( n +ℕ m)
             ( ( is-linear-combination-power-add-Semiring R n m x y H) ∙
               ( ( ap-add-Semiring R
@@ -104,7 +104,7 @@ module _
     apply-universal-property-trunc-Prop f
       ( is-nilpotent-element-semiring-Prop R (mul-Semiring R x y))
       ( λ (n , p) →
-        intro-∃ n
+        intro-exists n
           ( ( distributive-power-mul-Semiring R n H) ∙
             ( ( ap (mul-Semiring' R (power-Semiring R n y)) p) ∙
               ( left-zero-law-mul-Semiring R

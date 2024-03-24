@@ -55,13 +55,13 @@ numbers.
 ### For any decidable family `P` over `Fin n`, if `P x` doesn't hold for all `x` then there exists an `x` for which `P x` is false
 
 ```agda
-exists-not-not-forall-Fin :
+exists-not-not-for-all-Fin :
   {l : Level} (k : ℕ) {P : Fin k → UU l} → (is-decidable-fam P) →
   ¬ ((x : Fin k) → P x) → Σ (Fin k) (λ x → ¬ (P x))
-exists-not-not-forall-Fin {l} zero-ℕ d H = ex-falso (H ind-empty)
-exists-not-not-forall-Fin {l} (succ-ℕ k) {P} d H with d (inr star)
+exists-not-not-for-all-Fin {l} zero-ℕ d H = ex-falso (H ind-empty)
+exists-not-not-for-all-Fin {l} (succ-ℕ k) {P} d H with d (inr star)
 ... | inl p =
-  T ( exists-not-not-forall-Fin k
+  T ( exists-not-not-for-all-Fin k
       ( λ x → d (inl x))
       ( λ f → H (ind-coproduct P f (ind-unit p))))
   where
@@ -69,13 +69,13 @@ exists-not-not-forall-Fin {l} (succ-ℕ k) {P} d H with d (inr star)
   T z = pair (inl (pr1 z)) (pr2 z)
 ... | inr f = pair (inr star) f
 
-exists-not-not-forall-count :
+exists-not-not-for-all-count :
   {l1 l2 : Level} {X : UU l1} (P : X → UU l2) →
   (is-decidable-fam P) → count X →
   ¬ ((x : X) → P x) → Σ X (λ x → ¬ (P x))
-exists-not-not-forall-count {l1} {l2} {X} P p e =
+exists-not-not-for-all-count {l1} {l2} {X} P p e =
   ( g) ∘
-  ( ( exists-not-not-forall-Fin
+  ( ( exists-not-not-for-all-Fin
       ( number-of-elements-count e)
       ( p ∘ map-equiv-count e)) ∘ f)
   where
@@ -180,7 +180,7 @@ well-ordering-principle-Σ-Fin (succ-ℕ k) {P} d (pair (inr star) p)
 
 well-ordering-principle-∃-Fin :
   {l : Level} (k : ℕ) (P : decidable-subtype l (Fin k)) →
-  ∃ (Fin k) (is-in-decidable-subtype P) →
+  exists (Fin k) (subtype-decidable-subtype P) →
   minimal-element-Fin k (is-in-decidable-subtype P)
 well-ordering-principle-∃-Fin k P H =
   apply-universal-property-trunc-Prop H

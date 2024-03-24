@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.sets
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting

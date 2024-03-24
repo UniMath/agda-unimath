@@ -21,6 +21,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
@@ -77,7 +78,7 @@ extensionality-Fin :
   (x ＝ y) ≃ (Eq-Fin k x y)
 pr1 (extensionality-Fin k x y) = Eq-Fin-eq k
 pr2 (extensionality-Fin k x y) =
-  is-equiv-is-prop
+  is-equiv-has-converse-is-prop
     ( is-set-Fin k x y)
     ( is-prop-Eq-Fin k x y)
     ( eq-Eq-Fin k)

@@ -19,6 +19,7 @@ open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
@@ -187,28 +188,30 @@ module _
   (x : ℚ)
   where
 
-  left-∃-le-ℚ : ∃ ℚ (λ q → le-ℚ q x)
-  left-∃-le-ℚ = intro-∃
-    ( in-fraction-ℤ frac)
-    ( left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
-      ( le-fraction-le-numerator-fraction-ℤ
-        ( frac)
-        ( fraction-ℚ x)
-        ( refl)
-        ( le-pred-ℤ (numerator-ℚ x))))
+  exists-lesser-ℚ : exists ℚ (λ q → le-ℚ-Prop q x)
+  exists-lesser-ℚ =
+    intro-exists
+      ( in-fraction-ℤ frac)
+      ( left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
+        ( le-fraction-le-numerator-fraction-ℤ
+          ( frac)
+          ( fraction-ℚ x)
+          ( refl)
+          ( le-pred-ℤ (numerator-ℚ x))))
     where
     frac : fraction-ℤ
     frac = pred-ℤ (numerator-ℚ x) , positive-denominator-ℚ x
 
-  right-∃-le-ℚ : ∃ ℚ (λ r → le-ℚ x r)
-  right-∃-le-ℚ = intro-∃
-    ( in-fraction-ℤ frac)
-    ( right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
-      ( le-fraction-le-numerator-fraction-ℤ
-        ( fraction-ℚ x)
-        ( frac)
-        ( refl)
-        ( le-succ-ℤ (numerator-ℚ x))))
+  exists-greater-ℚ : exists ℚ (λ r → le-ℚ-Prop x r)
+  exists-greater-ℚ =
+    intro-exists
+      ( in-fraction-ℤ frac)
+      ( right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
+        ( le-fraction-le-numerator-fraction-ℤ
+          ( fraction-ℚ x)
+          ( frac)
+          ( refl)
+          ( le-succ-ℤ (numerator-ℚ x))))
     where
     frac : fraction-ℤ
     frac = succ-ℤ (numerator-ℚ x) , positive-denominator-ℚ x
@@ -275,9 +278,9 @@ module _
   (x y : ℚ) (H : le-ℚ x y)
   where
 
-  dense-le-ℚ : ∃ ℚ (λ r → le-ℚ x r × le-ℚ r y)
+  dense-le-ℚ : exists ℚ (λ r → le-ℚ-Prop x r ∧ le-ℚ-Prop r y)
   dense-le-ℚ =
-    intro-∃
+    intro-exists
       ( mediant-ℚ x y)
       ( le-left-mediant-ℚ x y H , le-right-mediant-ℚ x y H)
 ```
@@ -285,7 +288,8 @@ module _
 ### The strict order on the rationals is located
 
 ```agda
-located-le-ℚ : (x y z : ℚ) → le-ℚ y z → (le-ℚ-Prop y x) ∨ (le-ℚ-Prop x z)
+located-le-ℚ :
+  (x y z : ℚ) → le-ℚ y z → type-disjunction-Prop (le-ℚ-Prop y x) (le-ℚ-Prop x z)
 located-le-ℚ x y z H =
   unit-trunc-Prop
     ( map-coproduct

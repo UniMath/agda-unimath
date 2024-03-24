@@ -76,8 +76,8 @@ module _
     {x y : type-Poset P} →
     is-least-binary-upper-bound-Poset P a b x →
     is-binary-upper-bound-Poset P a b y → leq-Poset P x y
-  forward-implication-is-least-binary-upper-bound-Poset H =
-    forward-implication (H _)
+  forward-implication-is-least-binary-upper-bound-Poset {x} {y} H =
+    forward-implication (H y)
 
   backward-implication-is-least-binary-upper-bound-Poset :
     {x y : type-Poset P} →
@@ -100,9 +100,9 @@ module _
     {x : type-Poset P} →
     is-least-binary-upper-bound-Poset P a b x →
     is-binary-upper-bound-Poset P a b x
-  is-binary-upper-bound-is-least-binary-upper-bound-Poset H =
+  is-binary-upper-bound-is-least-binary-upper-bound-Poset {x} H =
     backward-implication-is-least-binary-upper-bound-Poset H
-      ( refl-leq-Poset P _)
+      ( refl-leq-Poset P x)
 
   leq-left-is-least-binary-upper-bound-Poset :
     {x : type-Poset P} →
@@ -209,23 +209,23 @@ module _
     {x y : type-Poset P} →
     is-least-upper-bound-family-of-elements-Poset P a x →
     is-upper-bound-family-of-elements-Poset P a y → leq-Poset P x y
-  forward-implication-is-least-upper-bound-family-of-elements-Poset H =
-    forward-implication (H _)
+  forward-implication-is-least-upper-bound-family-of-elements-Poset {x} {y} H =
+    forward-implication (H y)
 
   backward-implication-is-least-upper-bound-family-of-elements-Poset :
     {x y : type-Poset P} →
     is-least-upper-bound-family-of-elements-Poset P a x →
     leq-Poset P x y → is-upper-bound-family-of-elements-Poset P a y
-  backward-implication-is-least-upper-bound-family-of-elements-Poset H =
-    backward-implication (H _)
+  backward-implication-is-least-upper-bound-family-of-elements-Poset {x} {y} H =
+    backward-implication (H y)
 
   is-upper-bound-is-least-upper-bound-family-of-elements-Poset :
     {x : type-Poset P} →
     is-least-upper-bound-family-of-elements-Poset P a x →
     is-upper-bound-family-of-elements-Poset P a x
-  is-upper-bound-is-least-upper-bound-family-of-elements-Poset H =
+  is-upper-bound-is-least-upper-bound-family-of-elements-Poset {x} H =
     backward-implication-is-least-upper-bound-family-of-elements-Poset H
-      ( refl-leq-Poset P _)
+      ( refl-leq-Poset P x)
 ```
 
 ### The proposition that a family of elements has a least upper bound
@@ -280,12 +280,12 @@ module _
     is-least-upper-bound-family-of-elements-Poset P a x →
     is-least-upper-bound-family-of-elements-Poset P a y →
     x ＝ y
-  eq-is-least-upper-bound-family-of-elements-Poset H K =
+  eq-is-least-upper-bound-family-of-elements-Poset {x} {y} H K =
     ap
       ( pr1)
       ( all-elements-equal-has-least-upper-bound-family-of-elements-Poset
         ( P)
         ( a)
-        ( _ , H)
-        ( _ , K))
+        ( x , H)
+        ( y , K))
 ```

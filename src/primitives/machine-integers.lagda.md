@@ -32,5 +32,5 @@ primitive
   primWord64ToNat : Word64 → ℕ
   primWord64FromNat : ℕ → Word64
   primWord64ToNatInjective :
-    ∀ a b → primWord64ToNat a ＝ primWord64ToNat b → a ＝ b
+    (a b : Word64) → primWord64ToNat a ＝ primWord64ToNat b → a ＝ b
 ```

@@ -9,10 +9,17 @@ open import foundation-core.injective-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.universe-levels
 
+open import foundation-core.embeddings
 open import foundation-core.empty-types
+open import foundation-core.identity-types
 open import foundation-core.negation
+open import foundation-core.propositional-maps
+open import foundation-core.propositions
+open import foundation-core.sets
 ```
 
 </details>

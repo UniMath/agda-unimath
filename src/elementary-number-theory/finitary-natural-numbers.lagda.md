@@ -21,6 +21,7 @@ open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.sets
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
