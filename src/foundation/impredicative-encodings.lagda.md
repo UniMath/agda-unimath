@@ -302,7 +302,7 @@ logic and related considerations.
 
 {{#include tables/propositional-logic.md}}
 
-## External
+## External links
 
 - [Constructing coproduct types and boolean types from universes](https://mathoverflow.net/questions/457904/constructing-coproduct-types-and-boolean-types-from-universes)
   at mathoverflow
