@@ -7,6 +7,7 @@ module foundation.mere-logical-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
@@ -168,56 +169,9 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  mutual-mere-function-mere-iff :
-    mere-iff A B → mere-function A B × mere-function B A
-  pr1 (mutual-mere-function-mere-iff |f|) =
-    forward-mere-function-mere-iff |f|
-  pr2 (mutual-mere-function-mere-iff |f|) =
-    backward-mere-function-mere-iff |f|
-
-  mere-iff-mutual-mere-function :
-    mere-function A B × mere-function B A → mere-iff A B
-  mere-iff-mutual-mere-function (|f| , |g|) =
-    rec-trunc-Prop
-      ( prop-mere-iff A B)
-      ( λ f →
-        rec-trunc-Prop
-          ( prop-mere-iff A B)
-          ( λ g → unit-trunc-Prop (f , g))
-          ( |g|))
-      ( |f|)
-
-  is-equiv-mutual-mere-function-mere-iff :
-    is-equiv mutual-mere-function-mere-iff
-  is-equiv-mutual-mere-function-mere-iff =
-    is-equiv-has-converse-is-prop
-      ( is-prop-mere-iff A B)
-      ( is-prop-product
-        ( is-prop-mere-function A B)
-        ( is-prop-mere-function B A))
-      ( mere-iff-mutual-mere-function)
-
-  is-equiv-mere-iff-mutual-mere-function :
-    is-equiv mere-iff-mutual-mere-function
-  is-equiv-mere-iff-mutual-mere-function =
-    is-equiv-has-converse-is-prop
-      ( is-prop-product
-        ( is-prop-mere-function A B)
-        ( is-prop-mere-function B A))
-      ( is-prop-mere-iff A B)
-      ( mutual-mere-function-mere-iff)
-
-  equiv-mutual-mere-function-mere-iff :
-    (mere-iff A B) ≃ (mere-function A B × mere-function B A)
-  equiv-mutual-mere-function-mere-iff =
-    ( mutual-mere-function-mere-iff ,
-      is-equiv-mutual-mere-function-mere-iff)
-
-  equiv-mere-iff-mutual-mere-function :
-    (mere-function A B × mere-function B A) ≃ (mere-iff A B)
-  equiv-mere-iff-mutual-mere-function =
-    ( mere-iff-mutual-mere-function ,
-      is-equiv-mere-iff-mutual-mere-function)
+  compute-mere-iff :
+    mere-iff A B ≃ mere-function A B × mere-function B A
+  compute-mere-iff = equiv-product-trunc-Prop (A → B) (B → A)
 ```
 
 ## See also

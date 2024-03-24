@@ -26,6 +26,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
+open import foundation.sets
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels

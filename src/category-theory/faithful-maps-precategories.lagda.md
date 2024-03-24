@@ -18,6 +18,7 @@ open import foundation.injective-maps
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 ```
 

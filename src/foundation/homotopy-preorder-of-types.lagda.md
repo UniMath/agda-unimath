@@ -49,7 +49,7 @@ Homotopy-Type-Large-Preorder =
   .type-Large-Preorder l → UU l
   .leq-prop-Large-Preorder → prop-mere-function
   .refl-leq-Large-Preorder → refl-mere-function
-  .transitive-leq-Large-Preorder X Y Z → trans-mere-function
+  .transitive-leq-Large-Preorder X Y Z → transitive-mere-function
 ```
 
 ### The small homotopy preorder of types

@@ -21,7 +21,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.sets
 ```
 
 </details>

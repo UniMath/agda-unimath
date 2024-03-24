@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.disjunction
 open import foundation.existential-quantification
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
