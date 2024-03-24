@@ -238,7 +238,7 @@ compute-fiber-iff-equiv {A = A} {B} (f , g) =
 ### Two equal propositions are logically equivalent
 
 ```agda
-iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → type-Prop P ↔ type-Prop Q
+iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → type-Prop (P ⇔ Q)
 pr1 (iff-eq refl) = id
 pr2 (iff-eq refl) = id
 ```

@@ -32,8 +32,17 @@ open import order-theory.top-elements-large-posets
 
 ## Idea
 
-the types of [propositions](foundation-core.propositions.md) `Prop l` combined
-form a [large locale](order-theory.large-locales.md) since we do not assume
+The [large locale](order-theory.large-locales.md) of
+[propositions](foundation-core.propositions.md) consists of all the propositions
+of any [universe level](foundation.universe-levels.md) and is ordered by the
+[implications](foundation.implication.md) between them.
+[Conjunction](foundation.conjunction.md) gives this
+[large poset](order-theory.large-posets.md) the structure of a
+[large meet-semilattice](order-theory.large-meet-semilattices.md), and
+[existential quantification](foundation.existential-quantification.md) gives it
+the structure of a [large suplattice](forder-theory.large-suplattices.md).
+
+**Note.** The collection of all propositions is large because we do not assume
 [propositional resizing](foundation.propositional-resizing.md).
 
 ## Definitions

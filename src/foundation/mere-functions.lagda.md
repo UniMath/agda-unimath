@@ -66,7 +66,7 @@ module _
     rec-trunc-Prop (trunc-Prop B) (ev-mere-function' |f|) (|a|)
 ```
 
-### Mere functions give a reflexive relation
+### Mere functions form a reflexive relation
 
 ```agda
 module _
@@ -77,7 +77,7 @@ module _
   refl-mere-function = unit-trunc-Prop id
 ```
 
-### Mere functions five a transitive relation
+### Mere functions form a transitive relation
 
 ```agda
 module _

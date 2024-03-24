@@ -40,7 +40,7 @@ open import univalent-combinatorics.standard-finite-types
 The {{#concept "exclusive sum" Disambiguation="of types" Agda=exclusive-sum}} of
 two types `A` and `B`, is the type consisting of
 
-- Elements of `A` together with a proof that `B` is
+- elements of `A` together with a proof that `B` is
   [empty](foundation-core.empty-types.md), or
 - elements of `B` together with a proof that `A` is empty.
 

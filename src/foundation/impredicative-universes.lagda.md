@@ -27,9 +27,6 @@ is-impredicative-UU : (l : Level) → UU (lsuc l)
 is-impredicative-UU l = is-small l (Prop l)
 ```
 
-## Table of files about propositional logic
+## See also
 
-The following table gives an overview of basic constructions in propositional
-logic and related considerations.
-
-{{#include tables/propositional-logic.md}}
+- [Impredicative encodings of the logical operations](foundation.impredicative-encodings.md)
