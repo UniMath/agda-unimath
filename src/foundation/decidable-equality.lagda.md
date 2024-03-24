@@ -16,6 +16,7 @@ open import foundation.injective-maps
 open import foundation.negation
 open import foundation.retracts-of-types
 open import foundation.sections
+open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -27,7 +28,6 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation.sets
 open import foundation-core.transport-along-identifications
 ```
 

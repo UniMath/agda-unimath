@@ -17,13 +17,13 @@ open import foundation.function-types
 open import foundation.injective-maps
 open import foundation.preunivalence
 open import foundation.retractions
+open import foundation.sets
 open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.identity-types
-open import foundation.sets
 open import foundation-core.univalence
 ```
 
