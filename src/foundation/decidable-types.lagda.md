@@ -237,9 +237,9 @@ idempotent-is-decidable P (inr np) = inr (λ p → np (inl p))
 
 ```agda
 abstract
-  is-prop-is-inhabited-or-empty :
+  is-property-is-inhabited-or-empty :
     {l1 : Level} (A : UU l1) → is-prop (is-inhabited-or-empty A)
-  is-prop-is-inhabited-or-empty A =
+  is-property-is-inhabited-or-empty A =
     is-prop-coproduct
       ( λ t → apply-universal-property-trunc-Prop t empty-Prop)
       ( is-prop-type-trunc-Prop)
@@ -247,7 +247,7 @@ abstract
 
 is-inhabited-or-empty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-inhabited-or-empty-Prop A) = is-inhabited-or-empty A
-pr2 (is-inhabited-or-empty-Prop A) = is-prop-is-inhabited-or-empty A
+pr2 (is-inhabited-or-empty-Prop A) = is-property-is-inhabited-or-empty A
 ```
 
 ### Any inhabited type is a fixed point for `is-decidable`
