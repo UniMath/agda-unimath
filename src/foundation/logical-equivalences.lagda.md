@@ -112,7 +112,7 @@ module _
 
 ```agda
 id-iff : {l1 : Level} {A : UU l1} → A ↔ A
-id-iff = id , id
+id-iff = (id , id)
 ```
 
 ### Composition of logical equivalences
