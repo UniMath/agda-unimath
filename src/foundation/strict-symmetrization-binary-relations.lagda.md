@@ -32,18 +32,24 @@ of `R`. This is a relation `Rˢ` on `A` that is strictly
   sym (sym r) ≐ r.
 ```
 
-If the underlying binary relation is reflexive, then this construction has a
+If the underlying binary relation is
+[reflexive](foundation.reflexive-relations.md), then this construction has a
 unit map `R → Rˢ`. If the binary relation satisfies an
 [outer horn filler condition](foundation.outer-2-horn-filler-conditions-binary-relations.md),
 then it has a counit map `Rˢ → R`.
 
 An essential fact about the strict symmetrization of a relation is that the
 strict symmetrization of an identity relation is equivalent to the identity
-relation.
+relation. We consider the strict symmetrization if the standard identity
+relation in
+[`foundation.strictly-involutive-identity-types`](foundation.strictly-involutive-identity-types.md).
 
 **Warning.** The strict symmetrization is not the symmetric closure in general.
-For instance, if the underlying relation has an initial element then the strict
-symmetrization will be reflexive, while the symmetric closure need not be.
+For instance, if the underlying relation has an initial element, i.e., there is
+an element `a` such that `R a x` is
+[contractible](foundation-core.contractible-types.md) for every `x`, then the
+strict symmetrization will be reflexive, while the symmetric closure need not
+be.
 
 ## Definition
 
@@ -179,7 +185,3 @@ module _
       ( counit-strict-symmetrization-Relation R H {x} {y})
   is-retraction-counit-strict-symmetrization-Relation s = s
 ```
-
-## See also
-
-- [Strictly involutive identity types](foundation.strictly-involutive-identity-types.md)
