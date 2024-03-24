@@ -17,8 +17,6 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.propositional-maps
-open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 ```

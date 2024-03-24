@@ -27,7 +27,7 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.sets
+open import foundation.sets
 open import foundation-core.transport-along-identifications
 ```
 

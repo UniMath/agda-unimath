@@ -34,7 +34,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation-core.sets
+open import foundation.sets
 open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
@@ -257,7 +257,7 @@ module _
       ( is-emb-inclusion-isolated-element A)
       ( is-emb-is-injective
         ( is-set-isolated-element A)
-        ( λ {star} {star} p → refl))
+        ( λ p → refl))
 
   emb-point-isolated-element : unit ↪ A
   pr1 emb-point-isolated-element = point-isolated-element

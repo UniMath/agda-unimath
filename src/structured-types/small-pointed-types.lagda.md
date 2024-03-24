@@ -13,6 +13,7 @@ open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.inhabited-types
 open import foundation.small-types
 open import foundation.universe-levels
 
@@ -112,7 +113,7 @@ module _
   is-prop-is-pointed-small-Pointed-Type :
     is-prop (is-pointed-small-Pointed-Type l2 X)
   is-prop-is-pointed-small-Pointed-Type =
-    is-prop-is-inhabited
+    is-property-is-inhabited
       ( λ (Y , e) →
         is-prop-equiv'
           ( equiv-tot (λ Z → equiv-comp-pointed-equiv' e))

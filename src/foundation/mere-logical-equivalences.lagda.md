@@ -178,4 +178,4 @@ module _
 
 - [Mere functions](foundation.mere-functions.md)
 - [Coinhabitedness](foundation.coinhabited-pairs-of-types.md) is a related but
-  weaker notion than mere-iff.
+  weaker notion than mere logical equivalence.
