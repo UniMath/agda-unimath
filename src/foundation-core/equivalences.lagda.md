@@ -174,15 +174,11 @@ module _
   where
 
   is-equiv-is-invertible' : is-invertible f → is-equiv f
-  pr1 (pr1 (is-equiv-is-invertible' (g , H , K))) = g
-  pr2 (pr1 (is-equiv-is-invertible' (g , H , K))) = H
-  pr1 (pr2 (is-equiv-is-invertible' (g , H , K))) = g
-  pr2 (pr2 (is-equiv-is-invertible' (g , H , K))) = K
+  is-equiv-is-invertible' (g , H , K) = ((g , H) , (g , K))
 
   is-equiv-is-invertible :
     (g : B → A) (H : f ∘ g ~ id) (K : g ∘ f ~ id) → is-equiv f
-  is-equiv-is-invertible g H K =
-    is-equiv-is-invertible' (g , H , K)
+  is-equiv-is-invertible g H K = is-equiv-is-invertible' (g , H , K)
 
   is-retraction-map-section-is-equiv :
     (H : is-equiv f) → is-retraction f (map-section-is-equiv H)
@@ -206,27 +202,33 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
+  is-equiv-is-coherently-invertible :
+    is-coherently-invertible f → is-equiv f
+  is-equiv-is-coherently-invertible H =
+    is-equiv-is-invertible' (is-invertible-is-coherently-invertible H)
+
+  is-equiv-is-transpose-coherently-invertible :
+    is-transpose-coherently-invertible f → is-equiv f
+  is-equiv-is-transpose-coherently-invertible H =
+    is-equiv-is-invertible'
+      ( is-invertible-is-transpose-coherently-invertible H)
+```
+
+The following maps are not simple constructions and should not be computed with.
+Therefore, we mark them as `abstract`.
+
+```agda
   abstract
     is-coherently-invertible-is-equiv :
       is-equiv f → is-coherently-invertible f
     is-coherently-invertible-is-equiv =
       is-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
 
-    is-equiv-is-coherently-invertible :
-      is-coherently-invertible f → is-equiv f
-    is-equiv-is-coherently-invertible H =
-      is-equiv-is-invertible' (is-invertible-is-coherently-invertible H)
-
+  abstract
     is-transpose-coherently-invertible-is-equiv :
       is-equiv f → is-transpose-coherently-invertible f
     is-transpose-coherently-invertible-is-equiv =
       is-transpose-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
-
-    is-equiv-is-transpose-coherently-invertible :
-      is-transpose-coherently-invertible f → is-equiv f
-    is-equiv-is-transpose-coherently-invertible H =
-      is-equiv-is-invertible'
-        ( is-invertible-is-transpose-coherently-invertible H)
 ```
 
 ### Structure obtained from being coherently invertible
@@ -421,10 +423,8 @@ module _
   abstract
     is-equiv-comp :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
-    pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) =
-      section-comp g h sh sg
-    pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) =
-      retraction-comp g h rg rh
+    pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) = section-comp g h sh sg
+    pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) = retraction-comp g h rg rh
 
   equiv-comp : B ≃ X → A ≃ B → A ≃ X
   pr1 (equiv-comp g h) = map-equiv g ∘ map-equiv h
@@ -688,7 +688,7 @@ module _
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
 
   map-inv-equiv-ap :
-    (e : A ≃ B) (x y : A) → (map-equiv e x ＝ map-equiv e y) → (x ＝ y)
+    (e : A ≃ B) (x y : A) → map-equiv e x ＝ map-equiv e y → x ＝ y
   map-inv-equiv-ap e x y = map-inv-equiv (equiv-ap e x y)
 ```
 

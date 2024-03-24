@@ -19,6 +19,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.sets
 ```
@@ -106,25 +107,27 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  abstract
-    is-injective-is-equiv : {f : A → B} → is-equiv f → is-injective f
-    is-injective-is-equiv H {x} {y} p =
-      ( inv (is-retraction-map-inv-is-equiv H x)) ∙
-      ( ( ap (map-inv-is-equiv H) p) ∙
-        ( is-retraction-map-inv-is-equiv H y))
+  is-injective-is-equiv : {f : A → B} → is-equiv f → is-injective f
+  is-injective-is-equiv {f} H =
+    is-injective-retraction f (retraction-is-equiv H)
 
-  abstract
-    is-injective-equiv : (e : A ≃ B) → is-injective (map-equiv e)
-    is-injective-equiv (pair f H) = is-injective-is-equiv H
+  is-injective-equiv : (e : A ≃ B) → is-injective (map-equiv e)
+  is-injective-equiv e = is-injective-is-equiv (is-equiv-map-equiv e)
 
+abstract
+  is-injective-map-inv-equiv :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
+    is-injective (map-inv-equiv e)
+  is-injective-map-inv-equiv e =
+    is-injective-is-equiv (is-equiv-map-inv-equiv e)
+```
+
+### Injective maps that have a section are equivalences
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-
-  abstract
-    is-injective-map-inv-equiv : (e : A ≃ B) → is-injective (map-inv-equiv e)
-    is-injective-map-inv-equiv e =
-      is-injective-is-equiv (is-equiv-map-inv-equiv e)
 
   is-equiv-is-injective : {f : A → B} → section f → is-injective f → is-equiv f
   is-equiv-is-injective {f} (pair g G) H =

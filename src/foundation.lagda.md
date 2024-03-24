@@ -63,6 +63,7 @@ open import foundation.commuting-tetrahedra-of-maps public
 open import foundation.commuting-triangles-of-homotopies public
 open import foundation.commuting-triangles-of-identifications public
 open import foundation.commuting-triangles-of-maps public
+open import foundation.commuting-triangles-of-morphisms-arrows public
 open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.composite-maps-in-inverse-sequential-diagrams public

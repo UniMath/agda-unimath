@@ -15,8 +15,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **reflexive graph** is a [directed graph](graph-theory.directed-graphs.md)
-such that there is an loop edge at every vertex.
+A {{#concept "reflexive graph" Agda=Reflexive-Graph}} is a
+[directed graph](graph-theory.directed-graphs.md)
+[equipped](foundation.structure.md) with a loop edge at every vertex.
 
 ## Definition
 
@@ -38,6 +39,10 @@ module _
   refl-Reflexive-Graph : (x : vertex-Reflexive-Graph) → edge-Reflexive-Graph x x
   refl-Reflexive-Graph = pr2 (pr2 G)
 ```
+
+## See also
+
+- [Large reflexive graphs](graph-theory.large-reflexive-graphs.md)
 
 ## External links
 

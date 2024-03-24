@@ -319,15 +319,12 @@ repeat the proof to avoid cyclic dependencies.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
-  (H : is-invertible f) {x y : A}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-invertible f)
   where
 
-  is-injective-is-invertible : f x ＝ f y → x ＝ y
-  is-injective-is-invertible p =
-    ( inv (is-retraction-map-inv-is-invertible H x)) ∙
-    ( ( ap (map-inv-is-invertible H) p) ∙
-      ( is-retraction-map-inv-is-invertible H y))
+  is-injective-is-invertible : {x y : A} → f x ＝ f y → x ＝ y
+  is-injective-is-invertible =
+    is-injective-retraction f (retraction-is-invertible H)
 ```
 
 ## See also
