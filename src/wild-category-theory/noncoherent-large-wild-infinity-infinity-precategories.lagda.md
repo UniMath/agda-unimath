@@ -30,7 +30,14 @@ open import structured-types.large-transitive-globular-types
 
 ## Idea
 
-A {{#concept "noncoherent large wild $(∞,∞)$-precategory"}} is... 🥁🥁🥁
+A
+{{#concept "noncoherent large wild $(∞,∞)$-precategory" Agda=Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory}}
+is a [reflexive](structured-types.large-reflexive-globular-types.md) and
+[transitive](structured-types.large-transitive-globular-types.md)
+[large globular type](structured-types.large-globular-types.md). We call the
+0-cells the _objects_, the 1-cells the _morphisms_ and the higher cells the
+_$n$-morphisms_. The reflexivities are called the _identity morphisms_, and the
+transitivity operations are branded as _composition of morphisms_.
 
 ## Definitions
 
@@ -161,4 +168,8 @@ $(∞,∞)$-precategories.
   comp-3-hom-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory =
     comp-3-cell-is-transitive-large-globular-structure
       ( comp-hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory)
+```
+
+```agda
+open Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory public
 ```
