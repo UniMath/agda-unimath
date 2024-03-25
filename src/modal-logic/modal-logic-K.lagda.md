@@ -27,7 +27,6 @@ open import modal-logic.axioms
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
 open import modal-logic.logic-syntax
-open import modal-logic.modal-logic-IK
 open import modal-logic.soundness
 
 open import univalent-combinatorics.finite-types
@@ -46,80 +45,122 @@ module _
   {l : Level} (i : Set l)
   where
 
-  modal-logic-K : formulas l i
-  modal-logic-K =
-    modal-logic (union-subtype (modal-logic-IK i) (ax-dn i))
+  modal-logic-K-axioms : formulas l i
+  modal-logic-K-axioms = ax-k i ∪ ax-s i ∪ ax-n i ∪ ax-dn i
 
-  IK-subset-K : modal-logic-IK i ⊆ modal-logic-K
-  IK-subset-K =
+  modal-logic-K : formulas l i
+  modal-logic-K = modal-logic modal-logic-K-axioms
+
+  K-axioms-contains-ax-k : ax-k i ⊆ modal-logic-K-axioms
+  K-axioms-contains-ax-k =
     transitive-leq-subtype
-      ( modal-logic-IK i)
-      ( union-subtype (modal-logic-IK i) (ax-dn i))
-      ( modal-logic-K)
-      ( axioms-subset-modal-logic _)
-      ( subtype-union-left (modal-logic-IK i) (ax-dn i))
+      ( ax-k i)
+      ( ax-k i ∪ ax-s i)
+      ( modal-logic-K-axioms)
+      ( transitive-leq-subtype
+        ( ax-k i ∪ ax-s i)
+        ( ax-k i ∪ ax-s i ∪ ax-n i)
+        ( modal-logic-K-axioms)
+        ( subtype-union-left (ax-k i ∪ ax-s i ∪ ax-n i) (ax-dn i))
+        ( subtype-union-left (ax-k i ∪ ax-s i) (ax-n i)))
+      ( subtype-union-left (ax-k i) (ax-s i))
+
+  K-axioms-contains-ax-s : ax-s i ⊆ modal-logic-K-axioms
+  K-axioms-contains-ax-s =
+    transitive-leq-subtype
+      ( ax-s i)
+      ( ax-k i ∪ ax-s i)
+      ( modal-logic-K-axioms)
+      ( transitive-leq-subtype
+        ( ax-k i ∪ ax-s i)
+        ( ax-k i ∪ ax-s i ∪ ax-n i)
+        ( modal-logic-K-axioms)
+        ( subtype-union-left (ax-k i ∪ ax-s i ∪ ax-n i) (ax-dn i))
+        ( subtype-union-left (ax-k i ∪ ax-s i) (ax-n i)))
+      ( subtype-union-right (ax-k i) (ax-s i))
+
+  K-axioms-contains-ax-n : ax-n i ⊆ modal-logic-K-axioms
+  K-axioms-contains-ax-n =
+    transitive-leq-subtype
+      ( ax-n i)
+      ( ax-k i ∪ ax-s i ∪ ax-n i)
+      ( modal-logic-K-axioms)
+      ( subtype-union-left (ax-k i ∪ ax-s i ∪ ax-n i) (ax-dn i))
+      ( subtype-union-right (ax-k i ∪ ax-s i) (ax-n i))
+
+  K-axioms-contains-ax-dn : ax-dn i ⊆ modal-logic-K-axioms
+  K-axioms-contains-ax-dn =
+    subtype-union-right (ax-k i ∪ ax-s i ∪ ax-n i) (ax-dn i)
 
   K-contains-ax-k : ax-k i ⊆ modal-logic-K
   K-contains-ax-k =
     transitive-leq-subtype
       ( ax-k i)
-      ( modal-logic-IK i)
+      ( modal-logic-K-axioms)
       ( modal-logic-K)
-      ( IK-subset-K)
-      ( IK-contains-ax-k i)
+      ( axioms-subset-modal-logic modal-logic-K-axioms)
+      ( K-axioms-contains-ax-k)
 
   K-contains-ax-s : ax-s i ⊆ modal-logic-K
   K-contains-ax-s =
     transitive-leq-subtype
       ( ax-s i)
-      ( modal-logic-IK i)
+      ( modal-logic-K-axioms)
       ( modal-logic-K)
-      ( IK-subset-K)
-      ( IK-contains-ax-s i)
+      ( axioms-subset-modal-logic modal-logic-K-axioms)
+      ( K-axioms-contains-ax-s)
 
   K-contains-ax-n : ax-n i ⊆ modal-logic-K
   K-contains-ax-n =
     transitive-leq-subtype
       ( ax-n i)
-      ( modal-logic-IK i)
+      ( modal-logic-K-axioms)
       ( modal-logic-K)
-      ( IK-subset-K)
-      ( IK-contains-ax-n i)
+      ( axioms-subset-modal-logic modal-logic-K-axioms)
+      ( K-axioms-contains-ax-n)
 
   K-contains-ax-dn : ax-dn i ⊆ modal-logic-K
   K-contains-ax-dn =
     transitive-leq-subtype
       ( ax-dn i)
-      ( union-subtype (modal-logic-IK i) (ax-dn i))
-      ( modal-logic (union-subtype (modal-logic-IK i) (ax-dn i)))
-      ( axioms-subset-modal-logic
-        ( union-subtype (modal-logic-IK i) (ax-dn i)))
-      ( subtype-union-right (modal-logic-IK i) (ax-dn i))
+      ( modal-logic-K-axioms)
+      ( modal-logic-K)
+      ( axioms-subset-modal-logic modal-logic-K-axioms)
+      ( K-axioms-contains-ax-dn)
 
 module _
-  {l1 l2 l3 l4 : Level}
-  (i : Set l1) (w : UU l2)
+  {l1 l2 l3 l4 : Level} (i : Set l1)
   where
 
-  soundness-K : soundness (modal-logic-K i) (decidable-models w l3 i l4)
+  soundness-K : soundness (modal-logic-K i) (decidable-models l2 l3 i l4)
   soundness-K =
     soundness-modal-logic-union-subclass-right-sublevels
-      ( modal-logic-IK i)
+      ( ax-k i ∪ ax-s i ∪ ax-n i)
       ( ax-dn i)
       ( l1 ⊔ l2 ⊔ l3 ⊔ l4)
-      ( all-models w l3 i l4)
-      ( decidable-models w l3 i l4)
-      ( soundness-IK i w l3 l4)
-      ( ax-dn-soundness i w l3 l4)
-      ( all-models-is-largest-class w l3 i l4 (decidable-models w l3 i l4))
+      ( all-models l2 l3 i l4)
+      ( decidable-models l2 l3 i l4)
+      ( soundness-union-same-class
+        ( ax-k i ∪ ax-s i)
+        ( ax-n i)
+        ( all-models l2 l3 i l4)
+        ( soundness-union-same-class
+          ( ax-k i)
+          ( ax-s i)
+          ( all-models l2 l3 i l4)
+          ( ax-k-soundness i l3 l4)
+          ( ax-s-soundness i l3 l4))
+        ( ax-n-soundness i l3 l4))
+      ( ax-dn-soundness i l3 l4)
+      ( all-models-is-largest-class l2 l3 i l4 (decidable-models l2 l3 i l4))
 
-  soundness-K-finite : soundness (modal-logic-K i) (finite-models w l3 i l4)
+  soundness-K-finite : soundness (modal-logic-K i) (finite-models l2 l3 i l4)
   soundness-K-finite =
     soundness-subclass
       ( modal-logic-K i)
-      ( decidable-models w l3 i l4)
-      ( finite-models w l3 i l4)
-      ( finite-models-subclass-decidable-models w l3 i l4)
+      ( decidable-models l2 l3 i l4)
+      ( finite-models l2 l3 i l4)
+      ( finite-models-subclass-decidable-models l2 l3 i l4)
       ( soundness-K)
 
 module _
@@ -131,11 +172,11 @@ module _
     map-inv-raise
       ( soundness-K-finite
         ( i)
-        ( unit)
         ( ⊥)
         ( bot-in-logic)
+        ( unit)
         ( pair
-          ( (unit-trunc-Prop star) , (λ _ _ → empty-Prop))
+          ( pair (unit-trunc-Prop star) (λ _ _ → empty-Prop))
           ( λ _ _ → empty-Prop))
         ( triple
           ( is-finite-unit)

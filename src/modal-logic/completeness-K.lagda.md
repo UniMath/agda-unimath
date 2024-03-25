@@ -38,7 +38,6 @@ open import modal-logic.completeness
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
 open import modal-logic.logic-syntax
-open import modal-logic.modal-logic-IK
 open import modal-logic.modal-logic-K
 open import modal-logic.soundness
 open import modal-logic.weak-deduction
@@ -64,15 +63,14 @@ module _
   (prop-resize : propositional-resizing l1 (lsuc l1))
   where
 
-  completeness-K :
-    completeness (modal-logic-K i) (lsuc l1) (λ w → all-models w l1 i l1)
-  completeness-K a in-kripke-logic with lem ((modal-logic-K i) a)
+  completeness-K : completeness (modal-logic-K i) (all-models (lsuc l1) l1 i l1)
+  completeness-K a in-kripke-logic with lem (modal-logic-K i a)
   ... | inl in-logic = in-logic
   ... | inr not-in-logic =
     ex-falso
       ( forward-implication
         ( canonical-model-theorem'
-          ( union-subtype (modal-logic-IK i) (ax-dn i))
+          ( modal-logic-K-axioms i)
           ( zorn)
           ( prop-resize)
           ( is-consistent-K i)

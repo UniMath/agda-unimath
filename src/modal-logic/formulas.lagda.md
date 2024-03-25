@@ -81,6 +81,9 @@ module _
 
   eq-box : {a b : formula i} → □ a ＝ □ b → a ＝ b
   eq-box refl = refl
+
+  eq-diamond : {a b : formula i} → ◇ a ＝ ◇ b → a ＝ b
+  eq-diamond refl = refl
 ```
 
 ## Properties

@@ -113,34 +113,49 @@ module _
       ( eq-implication-right ∘ eq-box ∘ eq-implication-left)
 
   ax-dn : formulas l i
-  ax-dn = ax-1-parameter ( λ a → ~~ a →ₘ a) ( eq-implication-right)
+  ax-dn = ax-1-parameter ( λ a → ~~ a →ₘ a) eq-implication-right
+
+  ax-m : formulas l i
+  ax-m = ax-1-parameter (λ a → □ a →ₘ a) eq-implication-right
+
+  ax-b : formulas l i
+  ax-b = ax-1-parameter (λ a → a →ₘ □ ◇ a) eq-implication-left
+
+  ax-d : formulas l i
+  ax-d = ax-1-parameter (λ a → □ a →ₘ ◇ a) (eq-box ∘ eq-implication-left)
+
+  ax-4 : formulas l i
+  ax-4 = ax-1-parameter (λ a → □ a →ₘ □ □ a) (eq-box ∘ eq-implication-left)
+
+  ax-5 : formulas l i
+  ax-5 =
+    ax-1-parameter ( λ a → ◇ a →ₘ □ ◇ a) ( eq-diamond ∘ eq-implication-left)
 
 module _
   {l1 l2 : Level}
   (i : Set l1)
-  (w : UU l2)
   (l3 l4 : Level)
   where
 
-  ax-k-soundness : soundness (ax-k i) (all-models w l3 i l4)
-  ax-k-soundness (a →ₘ b →ₘ a) (_ , _ , refl) M _ x fa _ = fa
+  ax-k-soundness : soundness (ax-k i) (all-models l2 l3 i l4)
+  ax-k-soundness (a →ₘ b →ₘ a) (_ , _ , refl) w M _ x fa _ = fa
 
-  ax-n-soundness : soundness (ax-n i) (all-models w l3 i l4)
+  ax-n-soundness : soundness (ax-n i) (all-models l2 l3 i l4)
   ax-n-soundness
     (□ (a →ₘ b) →ₘ □ a →ₘ □ b)
     (_ , _ , refl)
-    M in-class x fab fa y r =
+    w M in-class x fab fa y r =
       fab y r (fa y r)
 
-  ax-s-soundness : soundness (ax-s i) (all-models w l3 i l4)
+  ax-s-soundness : soundness (ax-s i) (all-models l2 l3 i l4)
   ax-s-soundness
     ((a →ₘ b →ₘ c) →ₘ (a →ₘ b) →ₘ a →ₘ c)
     (_ , _ , _ , refl)
-    M in-class x fabc fab fa =
+    w M in-class x fabc fab fa =
       fabc fa (fab fa)
 
-  ax-dn-soundness : soundness (ax-dn i) (decidable-models w l3 i l4)
-  ax-dn-soundness (((a →ₘ ⊥) →ₘ ⊥) →ₘ a) (_ , refl) _ is-dec x f
+  ax-dn-soundness : soundness (ax-dn i) (decidable-models l2 l3 i l4)
+  ax-dn-soundness .(~~ a →ₘ a) (a , refl) w M is-dec x f
     with (is-dec a x)
   ... | inl fa = fa
   ... | inr fna = raise-ex-falso _ (f (λ fa -> map-raise (fna fa)))

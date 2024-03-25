@@ -44,17 +44,13 @@ TODO
 --   completeness = class-modal-logic C ⊆ logic
 
 module _
-  {l1 l2 l3 l4 l5 : Level}
+  {l1 l2 l3 l4 l5 l6 : Level}
   {i : Set l1} (logic : formulas l2 i)
-  (l6 : Level) (C : (w : UU l6) → model-class w l3 i l4 l5)
+  (C : model-class l3 l4 i l5 l6)
   where
 
-  completeness : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ l5 ⊔ lsuc l6)
-  -- completeness = (w : UU l6) → class-modal-logic (C w) ⊆ logic
-  completeness =
-    (a : formula i) →
-    ( (w : UU l6) → is-in-subtype (class-modal-logic (C w)) a) →
-    is-in-subtype logic a
+  completeness : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6)
+  completeness = class-modal-logic C ⊆ logic
 ```
 
 ## Properties

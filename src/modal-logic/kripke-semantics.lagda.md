@@ -73,8 +73,24 @@ module _
   kripke-model : UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4)
   kripke-model = kripke-frame w l2 × (type-Set i → w → Prop l4)
 
-  model-class : (l5 : Level) → UU (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ lsuc l5)
-  model-class l5 = subtype l5 kripke-model
+module _
+  (l1 l2 : Level)
+  {l3 : Level} (i : Set l3)
+  (l4 : Level)
+  where
+
+  model-with-world : UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4)
+  model-with-world = Σ (UU l1) (λ w → kripke-model w l2 i l4)
+
+  world-model-with-world : model-with-world → UU l1
+  world-model-with-world = pr1
+
+  model-with-world-model :
+    (M : model-with-world) → kripke-model (world-model-with-world M) l2 i l4
+  model-with-world-model = pr2
+
+  model-class : (l5 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ lsuc l5)
+  model-class l5 = subtype l5 model-with-world
 
   all-models : model-class lzero
   all-models _ = unit-Prop
@@ -90,8 +106,7 @@ module _
   model-frame : kripke-model w l2 i l4 → kripke-frame w l2
   model-frame = pr1
 
-  model-valuate :
-    kripke-model w l2 i l4 → type-Set i → w → Prop l4
+  model-valuate : kripke-model w l2 i l4 → type-Set i → w → Prop l4
   model-valuate = pr2
 
   model-relation-Prop : kripke-model w l2 i l4 → Relation-Prop l2 w
@@ -130,62 +145,63 @@ module _
   _⊭M_ : kripke-model w l2 i l4 → formula i → Prop l
   M ⊭M a = neg-Prop (M ⊨M a)
 
-  decidable-class : model-class w l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  decidable-class M = Π-Prop (formula i) (λ a → M ⊨M a)
-
 module _
-  {l1 l2 l3 l4 : Level} {w : UU l1} {i : Set l3}
+  {l1 l2 l3 l4 : Level} {i : Set l3}
   where
 
   _⊨C_ :
     {l5 : Level} →
-    model-class w l2 i l4 l5 →
+    model-class l1 l2 i l4 l5 →
     formula i →
-    Prop (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5)
+    Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5)
   C ⊨C a =
     Π-Prop
-      ( kripke-model w l2 i l4)
-      ( λ M → function-Prop (is-in-subtype C M) (M ⊨M a))
+      ( UU l1)
+      ( λ w →
+        ( Π-Prop
+          ( kripke-model w l2 i l4))
+          ( λ M → function-Prop (is-in-subtype C (w , M)) (M ⊨M a)))
 
   class-modal-logic :
     {l5 : Level} →
-    model-class w l2 i l4 l5 →
-    formulas (l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5) i
+    model-class l1 l2 i l4 l5 →
+    formulas (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5) i
   class-modal-logic C a = C ⊨C a
 
   -- TODO: rename
   class-modal-logic-monotic :
     {l5 l6 : Level}
-    (C₁ : model-class w l2 i l4 l5)
-    (C₂ : model-class w l2 i l4 l6) →
+    (C₁ : model-class l1 l2 i l4 l5)
+    (C₂ : model-class l1 l2 i l4 l6) →
     C₁ ⊆ C₂ →
     class-modal-logic C₂ ⊆ class-modal-logic C₁
-  class-modal-logic-monotic C₁ C₂ sub _ in-modal-logic-C₂ M in-C₁ =
-    in-modal-logic-C₂ M (sub M in-C₁)
+  class-modal-logic-monotic C₁ C₂ sub _ in-modal-logic-C₂ w M in-C₁ =
+    in-modal-logic-C₂ w M (sub (w , M) in-C₁)
 
 module _
-  {l1 : Level} (w : UU l1)
-  (l2 : Level)
+  (l1 l2 : Level)
   {l3 : Level} (i : Set l3)
   (l4 : Level)
   where
 
-  decidable-models : model-class w l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  decidable-models M =
+  decidable-models : model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  decidable-models (w , M) =
     Π-Prop
       ( formula i)
-      ( λ a → (Π-Prop w (λ x → is-decidable-Prop ((M , x) ⊨ a))))
+      (λ a → Π-Prop w (λ x → is-decidable-Prop ((M , x) ⊨ a)))
+      -- (λ a → is-decidable-Prop (M ⊨M a))
 
-  finite-models : model-class w l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  finite-models M =
+  finite-models : model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  finite-models (w , M) =
     product-Prop
       ( is-finite-Prop w)
       ( product-Prop
         ( Π-Prop
           ( w)
           ( λ x →
-            ( Π-Prop ( w)
-            ( λ y → is-decidable-Prop (model-relation-Prop i M x y)))))
+            ( Π-Prop
+              ( w)
+              ( λ y → is-decidable-Prop (model-relation-Prop i M x y)))))
         ( Π-Prop
           ( w)
           ( λ x →
@@ -193,21 +209,21 @@ module _
               ( type-Set i)
               ( λ n → is-decidable-Prop (model-valuate i M n x))))))
 
-  finite-models-subclass-decidable-models : finite-models ⊆ decidable-models
-  finite-models-subclass-decidable-models M (_ , _ , dec-v) (var n) x =
-    is-decidable-raise (l1 ⊔ l2 ⊔ l4) _ (dec-v x n)
-  finite-models-subclass-decidable-models M _ ⊥ x =
-    inr map-inv-raise
-  finite-models-subclass-decidable-models M is-fin (a →ₘ b) x =
-    is-decidable-function-type
-      ( finite-models-subclass-decidable-models M is-fin a x)
-      ( finite-models-subclass-decidable-models M is-fin b x)
-  finite-models-subclass-decidable-models
-    M is-fin@(w-is-fin , dec-r , dec-v) (□ a) x =
+  finite-models-subclass-decidable-models :
+    finite-models ⊆ decidable-models
+  finite-models-subclass-decidable-models (w , M) (w-is-fin , dec-r , dec-v) =
+    lemma
+    where
+    lemma :
+      (a : formula i) (x : w) → is-decidable (type-Prop ((M , x) ⊨ a))
+    lemma (var n) x =
+      is-decidable-raise (l1 ⊔ l2 ⊔ l4) _ (dec-v x n)
+    lemma ⊥ x =
+      inr map-inv-raise
+    lemma (a →ₘ b) x =
+      is-decidable-function-type (lemma a x) (lemma b x)
+    lemma (□ a) x =
       is-decidable-Π-is-finite
         ( w-is-fin)
-        ( λ y →
-          ( is-decidable-function-type
-            ( dec-r x y)
-            ( finite-models-subclass-decidable-models M is-fin a y)))
+        ( λ y → is-decidable-function-type (dec-r x y) (lemma a y))
 ```
