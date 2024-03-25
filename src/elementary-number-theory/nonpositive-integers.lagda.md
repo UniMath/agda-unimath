@@ -38,7 +38,7 @@ The [integers](elementary-number-theory.integers.md) are defined as a
 element component containing the integer _zero_, and two copies of the
 [natural numbers](elementary-number-theory.natural-numbers.md), one copy for the
 [negative integers](elementary-number-theory.negative-integers.md) and one copy
-for the [positive integers](elementary-number-theory.positive-integers).
+for the [positive integers](elementary-number-theory.positive-integers.md).
 Arranged on a number line, we have
 
 ```text
