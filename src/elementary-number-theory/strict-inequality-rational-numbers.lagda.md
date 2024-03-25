@@ -22,6 +22,7 @@ open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.strict-inequality-integer-fractions
 open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.binary-relations
