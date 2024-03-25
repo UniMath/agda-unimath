@@ -1,7 +1,7 @@
-# Outer 2-horn filler conditions for binary relations
+# Binary relations with extensions
 
 ```agda
-module foundation.outer-2-horn-filler-conditions-binary-relations where
+module foundation.binary-relations-with-extensions where
 ```
 
 <details><summary>Imports</summary>
@@ -19,85 +19,48 @@ open import foundation-core.propositions
 
 ## Idea
 
-We say a [relation](foundation.binary-relations.md) `R` has
-{{#concept "lifts" Disambiguation="binary relations of types" Agda=has-lifts-Relation}}
-if for every triple `x y z : A`, there is a binary operation
-
-```text
-  R x z → R y z → R x y.
-```
-
-Relations with lifts are closely related to transitive relations. But, instead
-of giving for every diagram
-
-```text
-        y
-       ∧ \
-     /    \
-    /      ∨
-  x         z
-```
-
-a horizontal arrow
-
-```text
-        y
-       ∧ \
-     /    \
-    /      ∨
-  x - - - > z,
-```
-
-a binary relation with lifts gives for every cospan
-
-```text
-        y
-         \
-          \
-           ∨
-  x ------> z
-```
-
-a lift
-
-```text
-        y
-       ∧ \
-      ⋰   \
-    ⋰      ∨
-  x ------> z.
-```
-
-**Note.** By symmetry it also gives a lift in the opposite direction
-
-```text
-        y
-      ⋰ \
-    ⋰    \
-   ∨       ∨
-  x ------> z.
-```
-
-Dually, a relation `R` has
-{{#concept "extensions" Disambiguation="binary relations of types"  Agda=has-extensions-Relation}}
+We say a [relation](foundation.binary-relations.md) `R`
+{{#concept "has extensions" Disambiguation="binary relations of types" Agda=has-extensions-Relation}}
 if for every triple `x y z : A`, there is a binary operation
 
 ```text
   R x y → R x z → R y z.
 ```
 
-## Definition
+Relations with extensions are closely related to transitive relations. But,
+instead of giving for every diagram
 
-### The structure on relations of having lifts
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
-  where
-
-  has-lifts-Relation : UU (l1 ⊔ l2)
-  has-lifts-Relation = {x y z : A} → R x z → R y z → R x y
+```text
+       y
+      ∧ \
+     /   \
+    /     ∨
+  x        z
 ```
+
+a horizontal arrow `x → z`, a binary relation with extensions gives, for every
+span
+
+```text
+       y
+      ∧
+     /
+    /
+  x -----> z,
+```
+
+an _extension_ `y → z`. By symmetry it also gives an extension in the opposite
+direction `z → y`.
+
+Dually, a relation `R`
+[has lifts](foundation.binary-relations-with-extensions.md) if for every triple
+`x y z : A`, there is a binary operation
+
+```text
+  R x z → R y z → R x y.
+```
+
+## Definition
 
 ### The structure on relations of having extensions
 

@@ -37,6 +37,8 @@ open import foundation.binary-homotopies public
 open import foundation.binary-operations-unordered-pairs-of-types public
 open import foundation.binary-reflecting-maps-equivalence-relations public
 open import foundation.binary-relations public
+open import foundation.binary-relations-with-extensions public
+open import foundation.binary-relations-with-lifts public
 open import foundation.binary-transport public
 open import foundation.binary-type-duality public
 open import foundation.booleans public
@@ -266,7 +268,6 @@ open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public
 open import foundation.operations-spans-families-of-types public
 open import foundation.opposite-spans public
-open import foundation.outer-2-horn-filler-conditions-binary-relations public
 open import foundation.pairs-of-distinct-elements public
 open import foundation.partial-elements public
 open import foundation.partial-functions public

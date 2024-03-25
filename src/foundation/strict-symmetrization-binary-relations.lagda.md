@@ -8,8 +8,9 @@ module foundation.strict-symmetrization-binary-relations where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.binary-relations-with-extensions
+open import foundation.binary-relations-with-lifts
 open import foundation.dependent-pair-types
-open import foundation.outer-2-horn-filler-conditions-binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
