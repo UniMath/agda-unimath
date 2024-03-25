@@ -24,7 +24,7 @@ open import graph-theory.reflexive-graphs
 
 ## Idea
 
-A [graph](graph-theory.graphs.md) `G ≐ (V , E)` is said to be
+A [directed graph](graph-theory.directed-graphs.md) `G ≐ (V , E)` is said to be
 {{#concept "discrete" Disambiguation="graph" Agda=is-discrete-Graph}} if, for
 every vertex `x : V`, the type family of edges with source `x`, `E x`, is
 [torsorial](foundation-core.torsorial-type-families.md). In other words, the
