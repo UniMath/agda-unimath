@@ -11,6 +11,7 @@ module wild-category-theory.maps-noncoherent-large-wild-infinity-infinity-precat
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.function-types
 open import foundation.universe-levels
 
 open import structured-types.globular-types
@@ -96,4 +97,49 @@ module _
   2-hom-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory =
     1-cell-map-Globular-Type
       ( hom-globular-type-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory F)
+```
+
+### The identity map on a noncoherent large wild $(∞,∞)$-precategory
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (𝒜 : Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory α β)
+  where
+
+  id-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory :
+    map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory (λ l → l) 𝒜 𝒜
+  id-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory =
+    λ where
+    .obj-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory →
+      id
+    .hom-globular-type-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory →
+      id-map-Globular-Type _
+```
+
+### Composition of maps of noncoherent large wild $(∞,∞)$-precategories
+
+```agda
+module _
+  {α1 α2 α3 : Level → Level}
+  {β1 β2 β3 : Level → Level → Level}
+  {δ1 δ2 : Level → Level}
+  {𝒜 : Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory α1 β1}
+  {ℬ : Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory α2 β2}
+  {𝒞 : Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory α3 β3}
+  (G : map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory δ2 ℬ 𝒞)
+  (F : map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory δ1 𝒜 ℬ)
+  where
+
+  comp-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory :
+    map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory (λ l → δ2 (δ1 l)) 𝒜 𝒞
+  comp-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory =
+    λ where
+    .obj-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory →
+      obj-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory G ∘
+      obj-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory F
+    .hom-globular-type-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory →
+      comp-map-Globular-Type
+        ( hom-globular-type-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory G)
+        ( hom-globular-type-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory F)
 ```
