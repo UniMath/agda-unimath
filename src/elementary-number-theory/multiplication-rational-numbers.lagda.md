@@ -53,7 +53,7 @@ left-unit-law-mul-ℚ x =
 
 right-unit-law-mul-ℚ : (x : ℚ) → x *ℚ one-ℚ ＝ x
 right-unit-law-mul-ℚ x =
-  ( eq-ℚ-sim-fractions-ℤ
+  ( eq-ℚ-sim-fraction-ℤ
     ( mul-fraction-ℤ (fraction-ℚ x) one-fraction-ℤ)
     ( fraction-ℚ x)
     ( right-unit-law-mul-fraction-ℤ (fraction-ℚ x))) ∙
