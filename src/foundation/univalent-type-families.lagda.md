@@ -79,7 +79,7 @@ univalent-type-family l2 A = Σ (A → UU l2) is-univalent
 
 ### The univalence axiom states that the identity family `id : 𝒰 → 𝒰` is univalent
 
-```agda
+```text
 is-univalent-UU :
   (l : Level) → is-univalent (id {A = UU l})
 is-univalent-UU l = univalence
@@ -105,7 +105,7 @@ map is an equivalence if and only if the left map is.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (u : univalence-axiom) {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   abstract
@@ -117,7 +117,7 @@ module _
         ( equiv-eq)
         ( ap B)
         ( λ where refl → refl)
-        ( univalence (B x) (B y))
+        ( u (B x) (B y))
         ( U x y)
 
     is-univalent-is-emb :
@@ -129,7 +129,7 @@ module _
         ( ap B)
         ( λ where refl → refl)
         ( is-emb-B x y)
-        ( univalence (B x) (B y))
+        ( u (B x) (B y))
 ```
 
 ### Univalent type families satisfy equivalence induction
@@ -156,16 +156,14 @@ module _
 
 ### Inclusions of subuniverses into the universe are univalent
 
-**Note.** This proof relies on essential use of the univalence axiom.
-
 ```agda
 module _
-  {l1 l2 : Level} (S : subuniverse l1 l2)
+  (u : univalence-axiom) {l1 l2 : Level} (S : subuniverse l1 l2)
   where
 
   is-univalent-inclusion-subuniverse : is-univalent (inclusion-subuniverse S)
   is-univalent-inclusion-subuniverse =
-    is-univalent-is-emb (is-emb-inclusion-subuniverse S)
+    is-univalent-is-emb u (is-emb-inclusion-subuniverse S)
 ```
 
 ## See also

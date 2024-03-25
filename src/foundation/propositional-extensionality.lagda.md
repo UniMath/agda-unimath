@@ -46,6 +46,7 @@ asserts that for any two propositions `P` and `Q`, we have `Id P Q ≃ (P ⇔ Q)
 
 ```agda
 module _
+  (univalence : univalence-axiom)
   {l1 : Level}
   where
 
@@ -57,7 +58,7 @@ module _
         ( Σ (Prop l1) (λ Q → type-Prop P ≃ type-Prop Q))
         ( equiv-tot (equiv-equiv-iff P))
         ( is-torsorial-Eq-subtype
-          ( is-torsorial-equiv (type-Prop P))
+          ( is-torsorial-equiv univalence (type-Prop P))
           ( is-prop-is-prop)
           ( type-Prop P)
           ( id-equiv)
@@ -105,24 +106,26 @@ module _
 ### The type of propositions is a set
 
 ```agda
-is-set-type-Prop : {l : Level} → is-set (Prop l)
-is-set-type-Prop {l} P Q =
+is-set-type-Prop :
+  (univalence : univalence-axiom) {l : Level} → is-set (Prop l)
+is-set-type-Prop univalence {l} P Q =
   is-prop-equiv
-    ( propositional-extensionality P Q)
+    ( propositional-extensionality univalence P Q)
     ( is-prop-iff-Prop P Q)
 
-Prop-Set : (l : Level) → Set (lsuc l)
-pr1 (Prop-Set l) = Prop l
-pr2 (Prop-Set l) = is-set-type-Prop
+Prop-Set : (univalence : univalence-axiom) (l : Level) → Set (lsuc l)
+pr1 (Prop-Set univalence l) = Prop l
+pr2 (Prop-Set univalence l) = is-set-type-Prop univalence
 ```
 
 ### The canonical type family over `Prop` is univalent
 
 ```agda
-is-univalent-type-Prop : {l : Level} → is-univalent (type-Prop {l})
-is-univalent-type-Prop {l} P =
+is-univalent-type-Prop :
+  (univalence : univalence-axiom) {l : Level} → is-univalent (type-Prop {l})
+is-univalent-type-Prop univalence {l} P =
   fundamental-theorem-id
-    ( is-torsorial-equiv-Prop P)
+    ( is-torsorial-equiv-Prop univalence P)
     ( λ Q → equiv-tr type-Prop)
 ```
 
@@ -131,8 +134,9 @@ is-univalent-type-Prop {l} P =
 ```agda
 abstract
   is-torsorial-true-Prop :
+    (univalence : univalence-axiom)
     {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop P)
-  is-torsorial-true-Prop {l1} =
+  is-torsorial-true-Prop univalence {l1} =
     is-contr-equiv
       ( Σ (Prop l1) (λ P → raise-unit-Prop l1 ⇔ P))
       ( equiv-tot
@@ -148,7 +152,7 @@ abstract
                     is-proof-irrelevant-is-prop
                       ( is-prop-raise-unit)
                       ( raise-star)))))))
-      ( is-torsorial-iff (raise-unit-Prop l1))
+      ( is-torsorial-iff univalence (raise-unit-Prop l1))
 ```
 
 ### The type of false propositions is contractible
@@ -156,8 +160,9 @@ abstract
 ```agda
 abstract
   is-torsorial-false-Prop :
+    (univalence : univalence-axiom) →
     {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop (neg-Prop P))
-  is-torsorial-false-Prop {l1} =
+  is-torsorial-false-Prop univalence {l1} =
     is-contr-equiv
       ( Σ (Prop l1) (λ P → raise-empty-Prop l1 ⇔ P))
       ( equiv-tot
@@ -170,5 +175,5 @@ abstract
                   ( raise-empty l1)
                   ( is-empty-raise-empty)
                   ( type-Prop P))))))
-      ( is-torsorial-iff (raise-empty-Prop l1))
+      ( is-torsorial-iff univalence (raise-empty-Prop l1))
 ```

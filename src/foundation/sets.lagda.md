@@ -13,6 +13,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.truncated-types
+open import foundation.univalence
 open import foundation.univalent-type-families
 open import foundation.universe-levels
 
@@ -36,12 +37,12 @@ open import foundation-core.truncation-levels
 ### The type of all sets in a universe is a 1-type
 
 ```agda
-is-1-type-Set : {l : Level} → is-1-type (Set l)
-is-1-type-Set = is-trunc-Truncated-Type zero-𝕋
+is-1-type-Set : (u : univalence-axiom) → {l : Level} → is-1-type (Set l)
+is-1-type-Set u = is-trunc-Truncated-Type u zero-𝕋
 
-Set-1-Type : (l : Level) → 1-Type (lsuc l)
-pr1 (Set-1-Type l) = Set l
-pr2 (Set-1-Type l) = is-1-type-Set
+Set-1-Type : (u : univalence-axiom) → (l : Level) → 1-Type (lsuc l)
+pr1 (Set-1-Type u l) = Set l
+pr2 (Set-1-Type u l) = is-1-type-Set u
 ```
 
 ### Any contractible type is a set
@@ -186,20 +187,24 @@ module _
   equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
 
   abstract
-    is-torsorial-equiv-Set : is-torsorial (λ (Y : Set l) → equiv-Set X Y)
-    is-torsorial-equiv-Set =
-      is-torsorial-equiv-subuniverse is-set-Prop X
+    is-torsorial-equiv-Set :
+      (u : univalence-axiom) → is-torsorial (λ (Y : Set l) → equiv-Set X Y)
+    is-torsorial-equiv-Set u =
+      is-torsorial-equiv-subuniverse u is-set-Prop X
 
   abstract
-    is-equiv-equiv-eq-Set : (Y : Set l) → is-equiv (equiv-eq-Set Y)
-    is-equiv-equiv-eq-Set = is-equiv-equiv-eq-subuniverse is-set-Prop X
+    is-equiv-equiv-eq-Set :
+      (u : univalence-axiom) → (Y : Set l) → is-equiv (equiv-eq-Set Y)
+    is-equiv-equiv-eq-Set u = is-equiv-equiv-eq-subuniverse u is-set-Prop X
 
-  eq-equiv-Set : (Y : Set l) → equiv-Set X Y → X ＝ Y
-  eq-equiv-Set Y = eq-equiv-subuniverse is-set-Prop
+  eq-equiv-Set :
+    (u : univalence-axiom) → (Y : Set l) → equiv-Set X Y → X ＝ Y
+  eq-equiv-Set u Y = eq-equiv-subuniverse u is-set-Prop
 
-  extensionality-Set : (Y : Set l) → (X ＝ Y) ≃ equiv-Set X Y
-  pr1 (extensionality-Set Y) = equiv-eq-Set Y
-  pr2 (extensionality-Set Y) = is-equiv-equiv-eq-Set Y
+  extensionality-Set :
+    (u : univalence-axiom) → (Y : Set l) → (X ＝ Y) ≃ equiv-Set X Y
+  pr1 (extensionality-Set u Y) = equiv-eq-Set Y
+  pr2 (extensionality-Set u Y) = is-equiv-equiv-eq-Set u Y
 ```
 
 ### If a type embeds into a set, then it is a set
@@ -260,6 +265,7 @@ abstract
 ### The canonical type family over `Set` is univalent
 
 ```agda
-is-univalent-type-Set : {l : Level} → is-univalent (type-Set {l})
-is-univalent-type-Set = is-univalent-inclusion-subuniverse is-set-Prop
+is-univalent-type-Set :
+  (u : univalence-axiom) → {l : Level} → is-univalent (type-Set {l})
+is-univalent-type-Set u = is-univalent-inclusion-subuniverse u is-set-Prop
 ```

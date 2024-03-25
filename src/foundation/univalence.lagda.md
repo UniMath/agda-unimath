@@ -41,7 +41,7 @@ In this file we postulate the univalence axiom. Its statement is defined in
 
 ## Postulate
 
-```agda
+```text
 postulate
   univalence : univalence-axiom
 ```
@@ -50,6 +50,7 @@ postulate
 
 ```agda
 module _
+  (univalence : univalence-axiom)
   {l : Level} {A B : UU l}
   where
 
@@ -69,17 +70,18 @@ module _
       is-retraction-map-inv-is-equiv (univalence A B)
 
 module _
+  (univalence : univalence-axiom)
   {l : Level}
   where
 
-  is-equiv-eq-equiv : (A B : UU l) → is-equiv (eq-equiv)
+  is-equiv-eq-equiv : (A B : UU l) → is-equiv (eq-equiv univalence)
   is-equiv-eq-equiv A B = is-equiv-map-inv-is-equiv (univalence A B)
 
-  compute-eq-equiv-id-equiv : (A : UU l) → eq-equiv {A = A} id-equiv ＝ refl
-  compute-eq-equiv-id-equiv A = is-retraction-eq-equiv refl
+  compute-eq-equiv-id-equiv : (A : UU l) → eq-equiv univalence {A = A} id-equiv ＝ refl
+  compute-eq-equiv-id-equiv A = is-retraction-eq-equiv univalence refl
 
   equiv-eq-equiv : (A B : UU l) → (A ≃ B) ≃ (A ＝ B)
-  pr1 (equiv-eq-equiv A B) = eq-equiv
+  pr1 (equiv-eq-equiv A B) = eq-equiv univalence
   pr2 (equiv-eq-equiv A B) = is-equiv-eq-equiv A B
 ```
 
@@ -97,6 +99,7 @@ succinctly as the claim that the family of equivalences out of `A` is torsorial.
 
 ```agda
 module _
+  (univalence : univalence-axiom)
   {l : Level}
   where
 
@@ -111,7 +114,7 @@ module _
     is-torsorial-equiv' A =
       is-contr-equiv'
         ( Σ (UU l) (λ X → X ＝ A))
-        ( equiv-tot (λ X → equiv-univalence))
+        ( equiv-tot (λ X → equiv-univalence univalence))
         ( is-torsorial-Id' A)
 ```
 
@@ -133,27 +136,32 @@ equiv-eq-fam B .B refl = id-equiv-fam B
 
 abstract
   is-torsorial-equiv-fam :
+    (univalence : univalence-axiom)
     {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
     is-torsorial (λ (C : A → UU l2) → equiv-fam B C)
-  is-torsorial-equiv-fam B =
-    is-torsorial-Eq-Π (λ x → is-torsorial-equiv (B x))
+  is-torsorial-equiv-fam univalence B =
+    is-torsorial-Eq-Π (λ x → is-torsorial-equiv univalence (B x))
 
 abstract
   is-equiv-equiv-eq-fam :
+    (univalence : univalence-axiom)
     {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → is-equiv (equiv-eq-fam B C)
-  is-equiv-equiv-eq-fam B =
+  is-equiv-equiv-eq-fam univalence B =
     fundamental-theorem-id
-      ( is-torsorial-equiv-fam B)
+      ( is-torsorial-equiv-fam univalence B)
       ( equiv-eq-fam B)
 
 extensionality-fam :
+  (univalence : univalence-axiom)
   {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → (B ＝ C) ≃ equiv-fam B C
-pr1 (extensionality-fam B C) = equiv-eq-fam B C
-pr2 (extensionality-fam B C) = is-equiv-equiv-eq-fam B C
+pr1 (extensionality-fam univalence B C) = equiv-eq-fam B C
+pr2 (extensionality-fam univalence B C) = is-equiv-equiv-eq-fam univalence B C
 
 eq-equiv-fam :
+  (univalence : univalence-axiom)
   {l1 l2 : Level} {A : UU l1} {B C : A → UU l2} → equiv-fam B C → B ＝ C
-eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
+eq-equiv-fam univalence {B = B} {C} =
+  map-inv-is-equiv (is-equiv-equiv-eq-fam univalence B C)
 ```
 
 ### Computations with univalence
@@ -165,21 +173,22 @@ compute-equiv-eq-concat :
 compute-equiv-eq-concat refl refl = eq-equiv-eq-map-equiv refl
 
 compute-eq-equiv-comp-equiv :
+  (univalence : univalence-axiom)
   {l : Level} {A B C : UU l} (f : A ≃ B) (g : B ≃ C) →
-  eq-equiv f ∙ eq-equiv g ＝ eq-equiv (g ∘e f)
-compute-eq-equiv-comp-equiv f g =
+  eq-equiv univalence f ∙ eq-equiv univalence g ＝ eq-equiv univalence (g ∘e f)
+compute-eq-equiv-comp-equiv univalence f g =
   is-injective-equiv
-    ( equiv-univalence)
-    ( ( inv ( compute-equiv-eq-concat (eq-equiv f) (eq-equiv g))) ∙
+    ( equiv-univalence univalence)
+    ( ( inv ( compute-equiv-eq-concat (eq-equiv univalence f) (eq-equiv univalence g))) ∙
       ( ( ap
-          ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv f)))
-          ( right-inverse-law-equiv equiv-univalence)) ∙
+          ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv univalence f)))
+          ( right-inverse-law-equiv (equiv-univalence univalence))) ∙
         ( ( ap
             ( λ e → g ∘e map-equiv e f)
-            ( right-inverse-law-equiv equiv-univalence)) ∙
+            ( right-inverse-law-equiv (equiv-univalence univalence))) ∙
           ( ap
             ( λ e → map-equiv e (g ∘e f))
-            ( inv (right-inverse-law-equiv equiv-univalence))))))
+            ( inv (right-inverse-law-equiv (equiv-univalence univalence)))))))
 
 compute-map-eq-ap-inv :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : x ＝ y) →
@@ -192,16 +201,17 @@ commutativity-inv-equiv-eq :
 commutativity-inv-equiv-eq refl = eq-equiv-eq-map-equiv refl
 
 commutativity-inv-eq-equiv :
+  (univalence : univalence-axiom)
   {l : Level} {A B : UU l} (f : A ≃ B) →
-  inv (eq-equiv f) ＝ eq-equiv (inv-equiv f)
-commutativity-inv-eq-equiv f =
+  inv (eq-equiv univalence f) ＝ eq-equiv univalence (inv-equiv f)
+commutativity-inv-eq-equiv univalence f =
   is-injective-equiv
-    ( equiv-univalence)
-    ( ( inv (commutativity-inv-equiv-eq (eq-equiv f))) ∙
+    ( equiv-univalence univalence)
+    ( ( inv (commutativity-inv-equiv-eq (eq-equiv univalence f))) ∙
       ( ( ap
           ( λ e → (inv-equiv (map-equiv e f)))
-          ( right-inverse-law-equiv equiv-univalence)) ∙
+          ( right-inverse-law-equiv (equiv-univalence univalence))) ∙
         ( ap
           ( λ e → map-equiv e (inv-equiv f))
-          ( inv (right-inverse-law-equiv equiv-univalence)))))
+          ( inv (right-inverse-law-equiv (equiv-univalence univalence))))))
 ```

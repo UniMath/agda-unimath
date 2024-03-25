@@ -152,12 +152,15 @@ abstract
 
 ```agda
 is-contr-type-is-empty :
+  (univalence : univalence-axiom)
   (l : Level) →
   is-contr (type-subuniverse is-empty-Prop)
-pr1 (is-contr-type-is-empty l) = raise-empty l , is-empty-raise-empty
-pr2 (is-contr-type-is-empty l) x =
+pr1 (is-contr-type-is-empty univalence l) =
+  raise-empty l , is-empty-raise-empty
+pr2 (is-contr-type-is-empty univalence l) x =
   eq-pair-Σ
     ( eq-equiv
+      ( univalence)
       ( equiv-is-empty
         ( is-empty-raise-empty)
         ( is-in-subuniverse-inclusion-subuniverse is-empty-Prop x)))
