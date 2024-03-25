@@ -15,6 +15,7 @@ open import reflection.literals public
 open import reflection.metavariables public
 open import reflection.names public
 open import reflection.precategory-solver public
+open import reflection.rewriting public
 open import reflection.terms public
 open import reflection.type-checking-monad public
 ```

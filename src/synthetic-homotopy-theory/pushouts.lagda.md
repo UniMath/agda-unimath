@@ -1,6 +1,8 @@
 # Pushouts
 
 ```agda
+{-# OPTIONS --rewriting #-}
+
 module synthetic-homotopy-theory.pushouts where
 ```
 
@@ -20,6 +22,8 @@ open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
+
+open import reflection.rewriting
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -275,6 +279,20 @@ module _
       ( cocone-pushout f g)
       ( up-pushout f g)
       ( c)
+```
+
+### Rewrite rules
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  ( f : S → A) (g : S → B)
+  { X : UU l4} (c : cocone f g X)
+  where
+
+  rewrite-inl-cogap :
+    ( a : A) → cogap f g c (inl-pushout f g a) ＝ horizontal-map-cocone f g c a
+
 ```
 
 ### Fibers of the cogap map
