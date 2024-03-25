@@ -109,7 +109,7 @@ $(∞,∞)$-precategories.
     {l1 l2 : Level}
     (x : obj-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory l1)
     (y : obj-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory l2) →
-    Globular-Type (β l1 l2)
+    Globular-Type (β l1 l2) (β l1 l2)
   pr1 (hom-globular-type-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory x y) =
     hom-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory x y
   pr2 (hom-globular-type-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory x y) =

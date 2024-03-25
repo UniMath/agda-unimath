@@ -56,14 +56,14 @@ special property of globular types.
 ### The structure of a globular type
 
 ```agda
-record globular-structure {l : Level} (A : UU l) : UU (lsuc l)
+record globular-structure {l1 : Level} (l2 : Level) (A : UU l1) : UU (l1 ⊔ lsuc l2)
   where
   coinductive
   field
     1-cell-globular-structure :
-      (x y : A) → UU l
+      (x y : A) → UU l2
     globular-structure-1-cell-globular-structure :
-      (x y : A) → globular-structure (1-cell-globular-structure x y)
+      (x y : A) → globular-structure l2 (1-cell-globular-structure x y)
 
 open globular-structure public
 ```
@@ -72,52 +72,52 @@ open globular-structure public
 
 ```agda
 module _
-  {l : Level} {A : UU l} (G : globular-structure A)
+  {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A)
   {x y : A} (f g : 1-cell-globular-structure G x y)
   where
 
-  2-cell-globular-structure : UU l
+  2-cell-globular-structure : UU l2
   2-cell-globular-structure =
     1-cell-globular-structure
       ( globular-structure-1-cell-globular-structure G x y) f g
 
   globular-structure-2-cell-globular-structure :
-    globular-structure 2-cell-globular-structure
+    globular-structure l2 2-cell-globular-structure
   globular-structure-2-cell-globular-structure =
     globular-structure-1-cell-globular-structure
       ( globular-structure-1-cell-globular-structure G x y) f g
 
 module _
-  {l : Level} {A : UU l} (G : globular-structure A)
+  {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A)
   {x y : A} {f g : 1-cell-globular-structure G x y}
   (p q : 2-cell-globular-structure G f g)
   where
 
-  3-cell-globular-structure : UU l
+  3-cell-globular-structure : UU l2
   3-cell-globular-structure =
     1-cell-globular-structure
       ( globular-structure-2-cell-globular-structure G f g) p q
 
   globular-structure-3-cell-globular-structure :
-    globular-structure 3-cell-globular-structure
+    globular-structure l2 3-cell-globular-structure
   globular-structure-3-cell-globular-structure =
     globular-structure-1-cell-globular-structure
       ( globular-structure-2-cell-globular-structure G f g) p q
 
 module _
-  {l : Level} {A : UU l} (G : globular-structure A)
+  {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A)
   {x y : A} {f g : 1-cell-globular-structure G x y}
   {p q : 2-cell-globular-structure G f g}
   (H K : 3-cell-globular-structure G p q)
   where
 
-  4-cell-globular-structure : UU l
+  4-cell-globular-structure : UU l2
   4-cell-globular-structure =
     1-cell-globular-structure
       ( globular-structure-3-cell-globular-structure G p q) H K
 
   globular-structure-4-cell-globular-structure :
-    globular-structure 4-cell-globular-structure
+    globular-structure l2 4-cell-globular-structure
   globular-structure-4-cell-globular-structure =
     globular-structure-1-cell-globular-structure
       ( globular-structure-3-cell-globular-structure G p q) H K
@@ -126,63 +126,63 @@ module _
 ### The type of globular types
 
 ```agda
-Globular-Type : (l : Level) → UU (lsuc l)
-Globular-Type l = Σ (UU l) globular-structure
+Globular-Type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Globular-Type l1 l2 = Σ (UU l1) (globular-structure l2)
 
 module _
-  {l : Level} (A : Globular-Type l)
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
   where
 
-  0-cell-Globular-Type : UU l
+  0-cell-Globular-Type : UU l1
   0-cell-Globular-Type = pr1 A
 
   globular-structure-0-cell-Globular-Type :
-    globular-structure 0-cell-Globular-Type
+    globular-structure l2 0-cell-Globular-Type
   globular-structure-0-cell-Globular-Type = pr2 A
 
-  1-cell-Globular-Type : (x y : 0-cell-Globular-Type) → UU l
+  1-cell-Globular-Type : (x y : 0-cell-Globular-Type) → UU l2
   1-cell-Globular-Type =
     1-cell-globular-structure globular-structure-0-cell-Globular-Type
 
   globular-structure-1-cell-Globular-Type :
     (x y : 0-cell-Globular-Type) →
-    globular-structure (1-cell-Globular-Type x y)
+    globular-structure l2 (1-cell-Globular-Type x y)
   globular-structure-1-cell-Globular-Type =
     globular-structure-1-cell-globular-structure
       ( globular-structure-0-cell-Globular-Type)
 
   globular-type-1-cell-Globular-Type :
-    (x y : 0-cell-Globular-Type) → Globular-Type l
+    (x y : 0-cell-Globular-Type) → Globular-Type l2 l2
   globular-type-1-cell-Globular-Type x y =
     ( 1-cell-Globular-Type x y , globular-structure-1-cell-Globular-Type x y)
 
   2-cell-Globular-Type :
-    {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) → UU l
+    {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) → UU l2
   2-cell-Globular-Type =
     2-cell-globular-structure globular-structure-0-cell-Globular-Type
 
   globular-structure-2-cell-Globular-Type :
     {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) →
-    globular-structure (2-cell-Globular-Type f g)
+    globular-structure l2 (2-cell-Globular-Type f g)
   globular-structure-2-cell-Globular-Type =
     globular-structure-2-cell-globular-structure
       ( globular-structure-0-cell-Globular-Type)
 
   globular-type-2-cell-Globular-Type :
     {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) →
-    Globular-Type l
+    Globular-Type l2 l2
   globular-type-2-cell-Globular-Type f g =
     ( 2-cell-Globular-Type f g , globular-structure-2-cell-Globular-Type f g)
 
   3-cell-Globular-Type :
     {x y : 0-cell-Globular-Type} {f g : 1-cell-Globular-Type x y}
-    (H K : 2-cell-Globular-Type f g) → UU l
+    (H K : 2-cell-Globular-Type f g) → UU l2
   3-cell-Globular-Type =
     3-cell-globular-structure globular-structure-0-cell-Globular-Type
 
   4-cell-Globular-Type :
     {x y : 0-cell-Globular-Type} {f g : 1-cell-Globular-Type x y}
-    {H K : 2-cell-Globular-Type f g} (α β : 3-cell-Globular-Type H K) → UU l
+    {H K : 2-cell-Globular-Type f g} (α β : 3-cell-Globular-Type H K) → UU l2
   4-cell-Globular-Type =
     4-cell-globular-structure globular-structure-0-cell-Globular-Type
 ```
@@ -192,7 +192,7 @@ module _
 ### The globular structure on a type given by its identity types
 
 ```agda
-globular-structure-Id : {l : Level} (A : UU l) → globular-structure A
+globular-structure-Id : {l : Level} (A : UU l) → globular-structure l A
 globular-structure-Id A =
   λ where
   .1-cell-globular-structure x y →

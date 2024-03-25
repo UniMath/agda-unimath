@@ -38,7 +38,8 @@ $(n+1)$-cells
 ```agda
 record
   map-Globular-Type
-  {l1 l2 : Level} (A : Globular-Type l1) (B : Globular-Type l2) : UU (l1 ⊔ l2)
+  {l1 l2 l3 l4 : Level} (A : Globular-Type l1 l2) (B : Globular-Type l3 l4)
+  : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   where
   coinductive
   field
@@ -56,8 +57,8 @@ record
 open map-Globular-Type public
 
 module _
-  {l1 l2 : Level}
-  {A : Globular-Type l1} {B : Globular-Type l2}
+  {l1 l2 l3 l4 : Level}
+  {A : Globular-Type l1 l2} {B : Globular-Type l3 l4}
   (F : map-Globular-Type A B)
   where
 
@@ -71,8 +72,8 @@ module _
     0-cell-map-Globular-Type (globular-type-1-cell-map-Globular-Type F)
 
 module _
-  {l1 l2 : Level}
-  {A : Globular-Type l1} {B : Globular-Type l2}
+  {l1 l2 l3 l4 : Level}
+  {A : Globular-Type l1 l2} {B : Globular-Type l3 l4}
   (F : map-Globular-Type A B)
   where
 
@@ -87,8 +88,8 @@ module _
     1-cell-map-Globular-Type (globular-type-1-cell-map-Globular-Type F)
 
 module _
-  {l1 l2 : Level}
-  {A : Globular-Type l1} {B : Globular-Type l2}
+  {l1 l2 l3 l4 : Level}
+  {A : Globular-Type l1 l2} {B : Globular-Type l3 l4}
   (F : map-Globular-Type A B)
   where
 
@@ -108,7 +109,7 @@ module _
 
 ```agda
 id-map-Globular-Type :
-  {l : Level} (A : Globular-Type l) → map-Globular-Type A A
+  {l1 l2 : Level} (A : Globular-Type l1 l2) → map-Globular-Type A A
 id-map-Globular-Type A =
   λ where
   .0-cell-map-Globular-Type → id
@@ -120,8 +121,8 @@ id-map-Globular-Type A =
 
 ```agda
 comp-map-Globular-Type :
-  {l1 l2 l3 : Level}
-  {A : Globular-Type l1} {B : Globular-Type l2} {C : Globular-Type l3} →
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : Globular-Type l1 l2} {B : Globular-Type l3 l4} {C : Globular-Type l5 l6} →
   map-Globular-Type B C → map-Globular-Type A B → map-Globular-Type A C
 comp-map-Globular-Type g f =
   λ where
