@@ -56,7 +56,8 @@ special property of globular types.
 ### The structure of a globular type
 
 ```agda
-record globular-structure {l1 : Level} (l2 : Level) (A : UU l1) : UU (l1 ⊔ lsuc l2)
+record
+  globular-structure {l1 : Level} (l2 : Level) (A : UU l1) : UU (l1 ⊔ lsuc l2)
   where
   coinductive
   field

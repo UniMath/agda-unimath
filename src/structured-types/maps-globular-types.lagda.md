@@ -122,7 +122,9 @@ id-map-Globular-Type A =
 ```agda
 comp-map-Globular-Type :
   {l1 l2 l3 l4 l5 l6 : Level}
-  {A : Globular-Type l1 l2} {B : Globular-Type l3 l4} {C : Globular-Type l5 l6} →
+  {A : Globular-Type l1 l2}
+  {B : Globular-Type l3 l4}
+  {C : Globular-Type l5 l6} →
   map-Globular-Type B C → map-Globular-Type A B → map-Globular-Type A C
 comp-map-Globular-Type g f =
   λ where
