@@ -44,7 +44,7 @@ record
   map-Noncoherent-Wild-⟨∞,∞⟩-Precategory
   {l1 l2 l3 l4 : Level}
   (𝒜 : Noncoherent-Wild-⟨∞,∞⟩-Precategory l1 l2)
-  (ℬ : Noncoherent-Wild-⟨∞,∞⟩-Precategory l3 l4) : UUω
+  (ℬ : Noncoherent-Wild-⟨∞,∞⟩-Precategory l3 l4) : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   where
   field
     obj-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory :
@@ -88,6 +88,26 @@ module _
   2-hom-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory =
     1-cell-map-Globular-Type
       ( hom-globular-type-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory F)
+
+  hom-noncoherent-wild-⟨∞,∞⟩-precategory-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory :
+    (x y : obj-Noncoherent-Wild-⟨∞,∞⟩-Precategory 𝒜) →
+    map-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+      ( hom-noncoherent-wild-⟨∞,∞⟩-precategory-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+        ( 𝒜)
+        ( x)
+        ( y))
+      ( hom-noncoherent-wild-⟨∞,∞⟩-precategory-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+        ( ℬ)
+        ( obj-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory F x)
+        ( obj-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory F y))
+  hom-noncoherent-wild-⟨∞,∞⟩-precategory-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+    x y =
+    λ where
+    .obj-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory →
+      hom-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+    .hom-globular-type-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory →
+      globular-type-1-cell-map-Globular-Type
+        ( hom-globular-type-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory F)
 ```
 
 ### The identity map on a noncoherent wild $(∞,∞)$-precategory
@@ -107,7 +127,7 @@ module _
       id-map-Globular-Type _
 ```
 
-### Composition of maps of noncoherent wild $(∞,∞)$-precategories
+### Composition of maps between noncoherent wild $(∞,∞)$-precategories
 
 ```agda
 module _

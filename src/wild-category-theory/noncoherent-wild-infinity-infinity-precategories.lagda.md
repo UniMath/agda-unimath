@@ -55,6 +55,21 @@ Noncoherent-Wild-⟨∞,∞⟩-Precategory l1 l2 =
           ( is-transitive-globular-structure
             ( hom-globular-structure-Noncoherent-Wild-⟨∞,∞⟩-Precategory))))
 
+make-Noncoherent-Wild-⟨∞,∞⟩-Precategory :
+  {l1 l2 : Level} →
+  (obj-Noncoherent-Wild-⟨∞,∞⟩-Precategory : UU l1)
+  (hom-globular-structure-Noncoherent-Wild-⟨∞,∞⟩-Precategory :
+    globular-structure l2 obj-Noncoherent-Wild-⟨∞,∞⟩-Precategory) →
+  ( is-reflexive-globular-structure
+    hom-globular-structure-Noncoherent-Wild-⟨∞,∞⟩-Precategory) →
+  ( is-transitive-globular-structure
+    hom-globular-structure-Noncoherent-Wild-⟨∞,∞⟩-Precategory) →
+  Noncoherent-Wild-⟨∞,∞⟩-Precategory l1 l2
+make-Noncoherent-Wild-⟨∞,∞⟩-Precategory obj hom id comp =
+  ( obj , hom , id , comp)
+
+{-# INLINE make-Noncoherent-Wild-⟨∞,∞⟩-Precategory #-}
+
 module _
   {l1 l2 : Level} (𝒞 : Noncoherent-Wild-⟨∞,∞⟩-Precategory l1 l2)
   where
@@ -122,6 +137,26 @@ We record some common projections for noncoherent wild $(∞,∞)$-precategories
       ( hom-globular-structure-Noncoherent-Wild-⟨∞,∞⟩-Precategory)
       ( x)
       ( y)
+
+  hom-noncoherent-wild-⟨∞,∞⟩-precategory-Noncoherent-Wild-⟨∞,∞⟩-Precategory :
+    (x y : obj-Noncoherent-Wild-⟨∞,∞⟩-Precategory) →
+    Noncoherent-Wild-⟨∞,∞⟩-Precategory l2 l2
+  hom-noncoherent-wild-⟨∞,∞⟩-precategory-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+    x y =
+    make-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+      ( hom-Noncoherent-Wild-⟨∞,∞⟩-Precategory x y)
+      ( globular-structure-1-cell-globular-structure
+        ( hom-globular-structure-Noncoherent-Wild-⟨∞,∞⟩-Precategory)
+        ( x)
+        ( y))
+      ( is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+        ( id-hom-globular-structure-Noncoherent-Wild-⟨∞,∞⟩-Precategory)
+        ( x)
+        ( y))
+      ( is-transitive-globular-structure-1-cell-is-transitive-globular-structure
+        ( comp-hom-globular-structure-Noncoherent-Wild-⟨∞,∞⟩-Precategory)
+        ( x)
+        ( y))
 ```
 
 ```agda
