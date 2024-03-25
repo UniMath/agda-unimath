@@ -205,4 +205,14 @@ module _
   globular-type-2-cell-Large-Globular-Type f g =
     ( 2-cell-Large-Globular-Type f g ,
       globular-structure-2-cell-Large-Globular-Type f g)
+
+  3-cell-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    {p q : 1-cell-Large-Globular-Type x y}
+    (H K : 2-cell-Large-Globular-Type p q) → UU (β l1 l2)
+  3-cell-Large-Globular-Type {x = x} {y} =
+    2-cell-globular-structure
+      ( globular-structure-1-cell-Large-Globular-Type x y)
 ```

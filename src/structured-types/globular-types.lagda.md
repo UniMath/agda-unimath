@@ -173,6 +173,18 @@ module _
     Globular-Type l
   globular-type-2-cell-Globular-Type f g =
     ( 2-cell-Globular-Type f g , globular-structure-2-cell-Globular-Type f g)
+
+  3-cell-Globular-Type :
+    {x y : 0-cell-Globular-Type} {f g : 1-cell-Globular-Type x y}
+    (H K : 2-cell-Globular-Type f g) → UU l
+  3-cell-Globular-Type =
+    3-cell-globular-structure globular-structure-0-cell-Globular-Type
+
+  4-cell-Globular-Type :
+    {x y : 0-cell-Globular-Type} {f g : 1-cell-Globular-Type x y}
+    {H K : 2-cell-Globular-Type f g} (α β : 3-cell-Globular-Type H K) → UU l
+  4-cell-Globular-Type =
+    4-cell-globular-structure globular-structure-0-cell-Globular-Type
 ```
 
 ## Examples

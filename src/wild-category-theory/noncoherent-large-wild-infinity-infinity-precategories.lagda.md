@@ -62,6 +62,15 @@ record
     comp-hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory :
       is-transitive-large-globular-structure
         ( hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory)
+
+  large-globular-type-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory :
+    Large-Globular-Type α β
+  large-globular-type-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory =
+    λ where
+    .0-cell-Large-Globular-Type →
+      obj-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory
+    .globular-structure-0-cell-Large-Globular-Type →
+      hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory
 ```
 
 We record some common projections for noncoherent large wild

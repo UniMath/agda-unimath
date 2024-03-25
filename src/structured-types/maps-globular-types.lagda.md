@@ -1,0 +1,104 @@
+# Maps between globular types
+
+```agda
+{-# OPTIONS --guardedness #-}
+
+module structured-types.maps-globular-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
+
+open import structured-types.globular-types
+```
+
+</details>
+
+## Idea
+
+A
+{{#concept "map" Disambiguation="between globular types" Agda=map-Globular-Type}}
+`f` between [globular types](structured-types.globular-types.md) `A` and `B` is
+a map `f₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`, a map of
+$(n+1)$-cells
+
+```text
+  fₙ₊₁ : 𝑛-Cell A x y → 𝑛-Cell B (fₙ x) (fₙ y).
+```
+
+## Definitions
+
+### Maps between globular types
+
+```agda
+record
+  map-Globular-Type
+  {l1 l2 : Level} (A : Globular-Type l1) (B : Globular-Type l2) : UU (l1 ⊔ l2)
+  where
+  coinductive
+  field
+    0-cell-map-Globular-Type :
+      0-cell-Globular-Type A → 0-cell-Globular-Type B
+
+    globular-type-1-cell-map-Globular-Type :
+      {x y : 0-cell-Globular-Type A} →
+      map-Globular-Type
+        ( globular-type-1-cell-Globular-Type A x y)
+        ( globular-type-1-cell-Globular-Type B
+          ( 0-cell-map-Globular-Type x)
+          ( 0-cell-map-Globular-Type y))
+
+open map-Globular-Type public
+
+module _
+  {l1 l2 : Level}
+  {A : Globular-Type l1} {B : Globular-Type l2}
+  (F : map-Globular-Type A B)
+  where
+
+  1-cell-map-Globular-Type :
+    {x y : 0-cell-Globular-Type A} →
+    1-cell-Globular-Type A x y →
+    1-cell-Globular-Type B
+      ( 0-cell-map-Globular-Type F x)
+      ( 0-cell-map-Globular-Type F y)
+  1-cell-map-Globular-Type =
+    0-cell-map-Globular-Type (globular-type-1-cell-map-Globular-Type F)
+
+module _
+  {l1 l2 : Level}
+  {A : Globular-Type l1} {B : Globular-Type l2}
+  (F : map-Globular-Type A B)
+  where
+
+  2-cell-map-Globular-Type :
+    {x y : 0-cell-Globular-Type A}
+    {f g : 1-cell-Globular-Type A x y} →
+    2-cell-Globular-Type A f g →
+    2-cell-Globular-Type B
+      ( 1-cell-map-Globular-Type F f)
+      ( 1-cell-map-Globular-Type F g)
+  2-cell-map-Globular-Type =
+    1-cell-map-Globular-Type (globular-type-1-cell-map-Globular-Type F)
+
+module _
+  {l1 l2 : Level}
+  {A : Globular-Type l1} {B : Globular-Type l2}
+  (F : map-Globular-Type A B)
+  where
+
+  3-cell-map-Globular-Type :
+    {x y : 0-cell-Globular-Type A}
+    {f g : 1-cell-Globular-Type A x y} →
+    {H K : 2-cell-Globular-Type A f g} →
+    3-cell-Globular-Type A H K →
+    3-cell-Globular-Type B
+      ( 2-cell-map-Globular-Type F H)
+      ( 2-cell-map-Globular-Type F K)
+  3-cell-map-Globular-Type =
+    2-cell-map-Globular-Type (globular-type-1-cell-map-Globular-Type F)
+```
