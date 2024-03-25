@@ -53,7 +53,7 @@ module _
 
 ### A map is `0`-acyclic if and only if it is surjective
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where

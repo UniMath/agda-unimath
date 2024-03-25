@@ -8,25 +8,29 @@ module synthetic-homotopy-theory.cocones-under-pointed-span-diagrams where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.commuting-squares-of-pointed-maps
+open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
+open import structured-types.pointed-span-diagrams
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 ```
 
 </details>
 
 ## Idea
 
-A [cocone under a span](synthetic-homotopy-theory.cocones-under-spans.md) of
-[pointed types](structured-types.pointed-types.md) is a **pointed cocone** if it
-consists of [pointed maps](structured-types.pointed-maps.md) equipped with a
+A
+[cocone under a span](synthetic-homotopy-theory.cocones-under-span-diagrams.md)
+of [pointed types](structured-types.pointed-types.md) is a **pointed cocone** if
+it consists of [pointed maps](structured-types.pointed-maps.md) equipped with a
 [pointed homotopy](structured-types.pointed-homotopies.md) witnessing that the
 naturality square
 [commutes](structured-types.commuting-squares-of-pointed-maps.md).
@@ -39,18 +43,21 @@ pointed at the constant cocone, with `refl` as coherence proof.
 ```agda
 module _
   {l1 l2 l3 : Level}
-  {S : Pointed-Type l1} {A : Pointed-Type l2}
-  {B : Pointed-Type l3}
-  (f : S →∗ A) (g : S →∗ B)
+  (𝒮 : pointed-span-diagram l1 l2 l3)
   where
 
-  cocone-Pointed-Type :
+  cocone-pointed-span-diagram :
     {l4 : Level} → Pointed-Type l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  cocone-Pointed-Type X =
-    Σ ( A →∗ X)
+  cocone-pointed-span-diagram X =
+    Σ ( pointed-domain-pointed-span-diagram 𝒮 →∗ X)
       ( λ i →
-        Σ ( B →∗ X)
-          ( λ j → coherence-square-pointed-maps g f j i))
+        Σ ( pointed-codomain-pointed-span-diagram 𝒮 →∗ X)
+          ( λ j →
+            coherence-square-pointed-maps
+              ( right-pointed-map-pointed-span-diagram 𝒮)
+              ( left-pointed-map-pointed-span-diagram 𝒮)
+              ( j)
+              ( i)))
 ```
 
 ### Components of a cocone of pointed types
@@ -58,40 +65,85 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  {S : Pointed-Type l1} {A : Pointed-Type l2}
-  {B : Pointed-Type l3} {X : Pointed-Type l4}
-  (f : S →∗ A) (g : S →∗ B) (c : cocone-Pointed-Type f g X)
+  {X : Pointed-Type l4}
+  (𝒮 : pointed-span-diagram l1 l2 l3)
+  (c : cocone-pointed-span-diagram 𝒮 X)
   where
 
-  horizontal-pointed-map-cocone-Pointed-Type : A →∗ X
-  horizontal-pointed-map-cocone-Pointed-Type = pr1 c
+  left-pointed-map-cocone-pointed-span-diagram :
+    pointed-domain-pointed-span-diagram 𝒮 →∗ X
+  left-pointed-map-cocone-pointed-span-diagram = pr1 c
 
-  horizontal-map-cocone-Pointed-Type :
-    type-Pointed-Type A → type-Pointed-Type X
-  horizontal-map-cocone-Pointed-Type =
-    pr1 horizontal-pointed-map-cocone-Pointed-Type
+  left-map-cocone-pointed-span-diagram :
+    domain-pointed-span-diagram 𝒮 → type-Pointed-Type X
+  left-map-cocone-pointed-span-diagram =
+    map-pointed-map left-pointed-map-cocone-pointed-span-diagram
 
-  vertical-pointed-map-cocone-Pointed-Type : B →∗ X
-  vertical-pointed-map-cocone-Pointed-Type = pr1 (pr2 c)
+  preserves-point-left-map-cocone-pointed-span-diagram :
+    left-map-cocone-pointed-span-diagram
+      ( point-domain-pointed-span-diagram 𝒮) ＝
+    point-Pointed-Type X
+  preserves-point-left-map-cocone-pointed-span-diagram =
+    preserves-point-pointed-map left-pointed-map-cocone-pointed-span-diagram
 
-  vertical-map-cocone-Pointed-Type :
-    type-Pointed-Type B → type-Pointed-Type X
-  vertical-map-cocone-Pointed-Type =
-    pr1 vertical-pointed-map-cocone-Pointed-Type
+  right-pointed-map-cocone-pointed-span-diagram :
+    pointed-codomain-pointed-span-diagram 𝒮 →∗ X
+  right-pointed-map-cocone-pointed-span-diagram = pr1 (pr2 c)
 
-  coherence-square-cocone-Pointed-Type :
+  right-map-cocone-pointed-span-diagram :
+    codomain-pointed-span-diagram 𝒮 → type-Pointed-Type X
+  right-map-cocone-pointed-span-diagram =
+    map-pointed-map right-pointed-map-cocone-pointed-span-diagram
+
+  preserves-point-right-map-cocone-pointed-span-diagram :
+    right-map-cocone-pointed-span-diagram
+      ( point-codomain-pointed-span-diagram 𝒮) ＝
+    point-Pointed-Type X
+  preserves-point-right-map-cocone-pointed-span-diagram =
+    preserves-point-pointed-map right-pointed-map-cocone-pointed-span-diagram
+
+  coherence-square-cocone-pointed-span-diagram :
     coherence-square-pointed-maps
-      ( g)
-      ( f)
-      ( vertical-pointed-map-cocone-Pointed-Type)
-      ( horizontal-pointed-map-cocone-Pointed-Type)
-  coherence-square-cocone-Pointed-Type = pr2 (pr2 c)
+      ( right-pointed-map-pointed-span-diagram 𝒮)
+      ( left-pointed-map-pointed-span-diagram 𝒮)
+      ( right-pointed-map-cocone-pointed-span-diagram)
+      ( left-pointed-map-cocone-pointed-span-diagram)
+  coherence-square-cocone-pointed-span-diagram = pr2 (pr2 c)
 
-  cocone-cocone-Pointed-Type : cocone (pr1 f) (pr1 g) (pr1 X)
-  pr1 cocone-cocone-Pointed-Type = horizontal-map-cocone-Pointed-Type
-  pr1 (pr2 cocone-cocone-Pointed-Type) = vertical-map-cocone-Pointed-Type
-  pr2 (pr2 cocone-cocone-Pointed-Type) =
-    pr1 coherence-square-cocone-Pointed-Type
+  htpy-coherence-square-cocone-pointed-span-diagram :
+    coherence-square-maps
+      ( right-map-pointed-span-diagram 𝒮)
+      ( left-map-pointed-span-diagram 𝒮)
+      ( right-map-cocone-pointed-span-diagram)
+      ( left-map-cocone-pointed-span-diagram)
+  htpy-coherence-square-cocone-pointed-span-diagram =
+    coherence-square-maps-coherence-square-pointed-maps
+      ( right-pointed-map-pointed-span-diagram 𝒮)
+      ( left-pointed-map-pointed-span-diagram 𝒮)
+      ( right-pointed-map-cocone-pointed-span-diagram)
+      ( left-pointed-map-cocone-pointed-span-diagram)
+      ( coherence-square-cocone-pointed-span-diagram)
+
+  coherence-point-coherence-square-cocone-pointed-span-diagram :
+    coherence-point-unpointed-htpy-pointed-Π
+      ( ( left-pointed-map-cocone-pointed-span-diagram) ∘∗
+        ( left-pointed-map-pointed-span-diagram 𝒮))
+      ( ( right-pointed-map-cocone-pointed-span-diagram) ∘∗
+        ( right-pointed-map-pointed-span-diagram 𝒮))
+      ( htpy-coherence-square-cocone-pointed-span-diagram)
+  coherence-point-coherence-square-cocone-pointed-span-diagram =
+    coherence-point-pointed-htpy coherence-square-cocone-pointed-span-diagram
+
+  cocone-cocone-pointed-span-diagram :
+    cocone-span-diagram
+      ( span-diagram-pointed-span-diagram 𝒮)
+      ( type-Pointed-Type X)
+  pr1 cocone-cocone-pointed-span-diagram =
+    left-map-cocone-pointed-span-diagram
+  pr1 (pr2 cocone-cocone-pointed-span-diagram) =
+    right-map-cocone-pointed-span-diagram
+  pr2 (pr2 cocone-cocone-pointed-span-diagram) =
+    htpy-coherence-square-cocone-pointed-span-diagram
 ```
 
 ## See also

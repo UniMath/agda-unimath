@@ -14,7 +14,7 @@ open import foundation.homotopies
 open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -108,7 +108,7 @@ terminal maps in the square.
 
 ### The join of maps
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) (g : B → X)
   where
@@ -151,7 +151,7 @@ module _
         ( cocone-pushout
           ( vertical-map-standard-pullback)
           ( horizontal-map-standard-pullback))
-        ( up-pushout _ _)
+        ( universal-property-pushout-standard-pushout _ _)
         ( cocone-join-maps)
 
   abstract

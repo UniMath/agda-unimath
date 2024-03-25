@@ -109,3 +109,4 @@ ap-const b refl = refl
 - [Action of functions on higher identifications](foundation.action-on-higher-identifications-functions.md).
 - [Action of binary functions on identifications](foundation.action-on-identifications-binary-functions.md).
 - [Action of dependent functions on identifications](foundation.action-on-identifications-dependent-functions.md).
+- [Action of binary dependent functions on identifications](foundation.action-on-identifications-binary-dependent-functions.md)

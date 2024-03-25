@@ -139,7 +139,7 @@ implies that the bottom cofork is a coequalizer, which in turn implies that the
 top cofork is a coequalizer, hence the flattening of the original cocone is a
 sequential colimit.
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2}
   ( c : cocone-sequential-diagram A X)

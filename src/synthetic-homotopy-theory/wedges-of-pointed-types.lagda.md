@@ -14,6 +14,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-cartesian-product-types
 open import structured-types.pointed-maps
+open import structured-types.pointed-span-diagrams
 open import structured-types.pointed-types
 open import structured-types.pointed-unit-type
 
@@ -33,11 +34,11 @@ defined by the following
 [pointed pushout](synthetic-homotopy-theory.pushouts-of-pointed-types.md):
 
 ```text
-  unit ------> A
+  unit ------> B
     |          |
     |          |
     v        ⌜ v
-    B -----> A ∨∗ B,
+    A -----> A ∨∗ B,
 ```
 
 and is thus canonically pointed at the identified image of `a` and `b`.
@@ -45,51 +46,59 @@ and is thus canonically pointed at the identified image of `a` and `b`.
 ## Definition
 
 ```agda
-wedge-Pointed-Type :
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
-  Pointed-Type (l1 ⊔ l2)
-wedge-Pointed-Type A B =
-  pushout-Pointed-Type
-    ( inclusion-point-Pointed-Type A)
-    ( inclusion-point-Pointed-Type B)
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  where
 
-infixr 10 _∨∗_
-_∨∗_ = wedge-Pointed-Type
+  pointed-span-diagram-pointed-wedge : pointed-span-diagram l1 l2 lzero
+  pointed-span-diagram-pointed-wedge =
+    make-pointed-span-diagram
+      ( inclusion-point-Pointed-Type A)
+      ( inclusion-point-Pointed-Type B)
 
 module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
 
-  inl-wedge-Pointed-Type : A →∗ (A ∨∗ B)
-  inl-wedge-Pointed-Type =
-    inl-pushout-Pointed-Type
-      ( inclusion-point-Pointed-Type A)
-      ( inclusion-point-Pointed-Type B)
+  pointed-wedge : Pointed-Type (l1 ⊔ l2)
+  pointed-wedge =
+    standard-pointed-pushout (pointed-span-diagram-pointed-wedge A B)
 
-  map-inl-wedge-Pointed-Type :
+  infixr 10 _∨∗_
+  _∨∗_ = pointed-wedge
+
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  where
+
+  inl-pointed-wedge : A →∗ (A ∨∗ B)
+  inl-pointed-wedge =
+    inl-standard-pointed-pushout
+      ( pointed-span-diagram-pointed-wedge A B)
+
+  map-inl-pointed-wedge :
     type-Pointed-Type A → type-Pointed-Type (A ∨∗ B)
-  map-inl-wedge-Pointed-Type =
-    map-pointed-map inl-wedge-Pointed-Type
+  map-inl-pointed-wedge =
+    map-pointed-map inl-pointed-wedge
 
-  inr-wedge-Pointed-Type : B →∗ A ∨∗ B
-  inr-wedge-Pointed-Type =
-    inr-pushout-Pointed-Type
-      ( inclusion-point-Pointed-Type A)
-      ( inclusion-point-Pointed-Type B)
+  inr-pointed-wedge : B →∗ A ∨∗ B
+  inr-pointed-wedge =
+    inr-standard-pointed-pushout
+      ( pointed-span-diagram-pointed-wedge A B)
 
-  map-inr-wedge-Pointed-Type :
+  map-inr-pointed-wedge :
     type-Pointed-Type B → type-Pointed-Type (A ∨∗ B)
-  map-inr-wedge-Pointed-Type =
-    map-pointed-map inr-wedge-Pointed-Type
+  map-inr-pointed-wedge =
+    map-pointed-map inr-pointed-wedge
 
-indexed-wedge-Pointed-Type :
+indexed-pointed-wedge :
   {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
-pr1 (indexed-wedge-Pointed-Type I A) =
+pr1 (indexed-pointed-wedge I A) =
   cofiber (λ i → (i , point-Pointed-Type (A i)))
-pr2 (indexed-wedge-Pointed-Type I A) =
+pr2 (indexed-pointed-wedge I A) =
   point-cofiber (λ i → (i , point-Pointed-Type (A i)))
 
-⋁∗ = indexed-wedge-Pointed-Type
+⋁∗ = indexed-pointed-wedge
 ```
 
 **Note**: the symbols used for the wedge sum `_∨∗_` are the
@@ -105,14 +114,14 @@ indexed wedge sum, `⋁∗`, is the
 ### The images of the base points `a : A` and `b : B` are identified in `A ∨∗ B`
 
 ```agda
-glue-wedge-Pointed-Type :
+glue-pointed-wedge :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
-  map-inl-wedge-Pointed-Type A B (point-Pointed-Type A) ＝
-  map-inr-wedge-Pointed-Type A B (point-Pointed-Type B)
-glue-wedge-Pointed-Type A B =
-  glue-pushout
-    ( map-pointed-map (inclusion-point-Pointed-Type A))
-    ( map-pointed-map (inclusion-point-Pointed-Type B))
+  map-inl-pointed-wedge A B (point-Pointed-Type A) ＝
+  map-inr-pointed-wedge A B (point-Pointed-Type B)
+glue-pointed-wedge A B =
+  glue-standard-pushout
+    ( span-diagram-pointed-span-diagram
+      ( pointed-span-diagram-pointed-wedge A B))
     ( point-Pointed-Type unit-Pointed-Type)
 ```
 
@@ -129,47 +138,43 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
   where
 
-  cocone-product-wedge-Pointed-Type :
-    cocone-Pointed-Type
-      ( inclusion-point-Pointed-Type A)
-      ( inclusion-point-Pointed-Type B)
+  cocone-product-pointed-wedge :
+    cocone-pointed-span-diagram
+      ( pointed-span-diagram-pointed-wedge A B)
       ( A ×∗ B)
-  pr1 cocone-product-wedge-Pointed-Type = inl-product-Pointed-Type A B
-  pr1 (pr2 cocone-product-wedge-Pointed-Type) = inr-product-Pointed-Type A B
-  pr1 (pr2 (pr2 cocone-product-wedge-Pointed-Type)) = refl-htpy
-  pr2 (pr2 (pr2 cocone-product-wedge-Pointed-Type)) = refl
+  pr1 cocone-product-pointed-wedge = inl-product-Pointed-Type A B
+  pr1 (pr2 cocone-product-pointed-wedge) = inr-product-Pointed-Type A B
+  pr1 (pr2 (pr2 cocone-product-pointed-wedge)) = refl-htpy
+  pr2 (pr2 (pr2 cocone-product-pointed-wedge)) = refl
 
-  pointed-map-product-wedge-Pointed-Type :
+  pointed-map-product-pointed-wedge :
     (A ∨∗ B) →∗ (A ×∗ B)
-  pointed-map-product-wedge-Pointed-Type =
-    cogap-Pointed-Type
-      ( inclusion-point-Pointed-Type A)
-      ( inclusion-point-Pointed-Type B)
-      ( cocone-product-wedge-Pointed-Type)
+  pointed-map-product-pointed-wedge =
+    cogap-cocone-pointed-span-diagram
+      ( pointed-span-diagram-pointed-wedge A B)
+      ( cocone-product-pointed-wedge)
 
-  map-product-wedge-Pointed-Type :
+  map-product-pointed-wedge :
     type-Pointed-Type (A ∨∗ B) → type-Pointed-Type (A ×∗ B)
-  map-product-wedge-Pointed-Type = pr1 pointed-map-product-wedge-Pointed-Type
+  map-product-pointed-wedge = map-pointed-map pointed-map-product-pointed-wedge
 
-  compute-inl-product-wedge-Pointed-Type :
+  compute-inl-product-pointed-wedge :
     ( x : type-Pointed-Type A) →
-    ( map-product-wedge-Pointed-Type (map-inl-wedge-Pointed-Type A B x)) ＝
+    ( map-product-pointed-wedge (map-inl-pointed-wedge A B x)) ＝
     ( x , point-Pointed-Type B)
-  compute-inl-product-wedge-Pointed-Type =
-    compute-inl-cogap-Pointed-Type
-      ( inclusion-point-Pointed-Type A)
-      ( inclusion-point-Pointed-Type B)
-      ( cocone-product-wedge-Pointed-Type)
+  compute-inl-product-pointed-wedge =
+    htpy-compute-inl-cogap-cocone-pointed-span-diagram
+      ( pointed-span-diagram-pointed-wedge A B)
+      ( cocone-product-pointed-wedge)
 
-  compute-inr-product-wedge-Pointed-Type :
+  compute-inr-product-pointed-wedge :
     ( y : type-Pointed-Type B) →
-    ( map-product-wedge-Pointed-Type (map-inr-wedge-Pointed-Type A B y)) ＝
+    ( map-product-pointed-wedge (map-inr-pointed-wedge A B y)) ＝
     ( point-Pointed-Type A , y)
-  compute-inr-product-wedge-Pointed-Type =
-    compute-inr-cogap-Pointed-Type
-      ( inclusion-point-Pointed-Type A)
-      ( inclusion-point-Pointed-Type B)
-      ( cocone-product-wedge-Pointed-Type)
+  compute-inr-product-pointed-wedge =
+    htpy-compute-inr-cogap-cocone-pointed-span-diagram
+      ( pointed-span-diagram-pointed-wedge A B)
+      ( cocone-product-pointed-wedge)
 ```
 
 ## See also

@@ -16,7 +16,8 @@ open import foundation.homotopies
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.action-dependent-functions-cocones-under-span-diagrams
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-suspension-structures
 open import synthetic-homotopy-theory.suspension-structures
 ```
@@ -67,9 +68,8 @@ module _
     (B : Y → UU l3) →
     ( ( map-equiv
         ( equiv-dependent-suspension-structure-suspension-cocone s B)) ∘
-      ( dependent-cocone-map
-        ( terminal-map X)
-        ( terminal-map X)
+      ( dependent-cocone-map-span-diagram
+        ( span-diagram-suspension X)
         ( suspension-cocone-suspension-structure s)
         ( B))) ~
     ( dependent-ev-suspension s B)

@@ -25,7 +25,7 @@ type `B x` while `f y` is an element of type `B y`. However, we can
 along `p` to obtain an element of type `B y` that is comparable to the value
 `f y`. In other words, we can consider the type of
 [dependent identifications](foundation-core.dependent-identifications.md) over
-`p` from `f x` to `f y`. The **dependent action on identifications** of `f` on
+`p` from `f x` to `f y`. The {{#concept "action on identifications" Disambiguation="dependent functions"}} of `f` on
 `p` is a dependent identification
 
 ```text
@@ -34,13 +34,15 @@ along `p` to obtain an element of type `B y` that is comparable to the value
 
 ## Definition
 
-### Functorial action of dependent functions on identity types
+### The action of dependent functions on identifications
 
 ```agda
-apd :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) {x y : A}
-  (p : x ＝ y) → dependent-identification B p (f x) (f y)
-apd f refl = refl
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x)
+  where
+  
+  apd : {x y : A} (p : x ＝ y) → dependent-identification B p (f x) (f y)
+  apd refl = refl
 ```
 
 ## See also
@@ -48,3 +50,4 @@ apd f refl = refl
 - [Action of functions on identifications](foundation.action-on-identifications-functions.md)
 - [Action of functions on higher identifications](foundation.action-on-higher-identifications-functions.md).
 - [Action of binary functions on identifications](foundation.action-on-identifications-binary-functions.md).
+- [Action of binary dependent functions on identifications](foundation.action-on-identifications-binary-dependent-functions.md)

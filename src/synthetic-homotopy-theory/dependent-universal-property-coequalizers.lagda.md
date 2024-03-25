@@ -16,7 +16,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-coforks
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.universal-property-coequalizers
@@ -118,7 +118,7 @@ precise, asserting that under this mapping,
 [coequalizers](synthetic-homotopy-theory.coequalizers.md) correspond to
 [pushouts](synthetic-homotopy-theory.pushouts.md).
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f g : A → B)
   ( e : cofork f g X)
@@ -133,7 +133,7 @@ module _
     ( {l : Level} →
       dependent-universal-property-coequalizer l f g e)
   dependent-universal-property-coequalizer-dependent-universal-property-pushout
-    ( dup-pushout)
+    ( dependent-universal-property-pushout-standard-pushout)
     ( P) =
     is-equiv-left-map-triangle
       ( dependent-cofork-map f g e)
@@ -144,7 +144,7 @@ module _
         ( cocone-codiagonal-cofork f g e)
         ( P))
       ( triangle-dependent-cofork-dependent-cocone-codiagonal f g e P)
-      ( dup-pushout P)
+      ( dependent-universal-property-pushout-standard-pushout P)
       ( is-equiv-dependent-cofork-dependent-cocone-codiagonal f g e P)
 
   dependent-universal-property-pushout-dependent-universal-property-coequalizer :
@@ -173,7 +173,7 @@ module _
 
 ### The universal property of coequalizers is equivalent to the dependent universal property of coequalizers
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
   ( e : cofork f g X)

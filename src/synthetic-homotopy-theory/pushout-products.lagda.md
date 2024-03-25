@@ -15,7 +15,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -90,7 +90,7 @@ maps `f`, `g`, and `h` we have a [homotopy](foundation-core.homotopies.md)
 
 ### The pushout-product
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → X) (g : B → Y)
@@ -124,7 +124,7 @@ module _
         ( map-product id g)
         ( map-product f id)
         ( cocone-pushout (map-product id g) (map-product f id))
-        ( up-pushout (map-product id g) (map-product f id))
+        ( universal-property-pushout-standard-pushout (map-product id g) (map-product f id))
         ( cocone-pushout-product)
 
   abstract

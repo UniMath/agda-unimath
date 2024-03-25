@@ -14,7 +14,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -54,7 +54,7 @@ and `B` is a family of propositions.
 
 ### Dependent pushout-products
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {X : UU l2} {B : X → UU l3} {Y : X → UU l4}
   (f : A → X) (g : (x : X) → B x → Y x)
@@ -96,7 +96,7 @@ module _
         ( map-Σ (Y ∘ f) id (g ∘ f))
         ( map-Σ B f (λ a → id))
         ( cocone-pushout (map-Σ (Y ∘ f) id (g ∘ f)) (map-Σ B f (λ a → id)))
-        ( up-pushout (map-Σ (Y ∘ f) id (g ∘ f)) (map-Σ B f (λ a → id)))
+        ( universal-property-pushout-standard-pushout (map-Σ (Y ∘ f) id (g ∘ f)) (map-Σ B f (λ a → id)))
         ( cocone-dependent-pushout-product)
 
   abstract

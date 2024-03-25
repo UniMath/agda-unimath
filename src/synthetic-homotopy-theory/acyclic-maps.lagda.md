@@ -42,7 +42,7 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.acyclic-types
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspensions-of-types
@@ -80,7 +80,7 @@ module _
 
 ### A map is acyclic if and only if it is an [epimorphism](foundation.epimorphisms.md)
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -133,7 +133,7 @@ More precisely, `A` is acyclic if and only if for all types `X`, the map
 
 is an embedding.
 
-```agda
+```text
 module _
   {l : Level} (A : UU l)
   where
@@ -178,7 +178,7 @@ More precisely, `A` is acyclic if and only if for all types `X` and elements
 
 is an equivalence.
 
-```agda
+```text
 module _
   {l : Level} (A : UU l)
   where
@@ -233,7 +233,7 @@ The following diagram is a helpful illustration in the second proof:
 The left map is an embedding if f is an acyclic map, because const is an
 embedding in this case.
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -262,7 +262,7 @@ module _
 
 In particular, every epimorphism is actually a dependent epimorphism.
 
-```agda
+```text
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -279,7 +279,7 @@ module _
 Since the acyclic maps are precisely the epimorphisms this follows from the
 corresponding facts about [epimorphisms](foundation.epimorphisms.md).
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B)
@@ -338,20 +338,20 @@ computes to the identity:
 Therefore, `cocone-map f (j ∘ g)` is an equivalence and the outer rectangle is
 indeed a pushout.
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   {C : UU l4} (f : S → A) (g : S → B) (c : cocone f g C)
   where
 
-  equiv-cocone-postcomp-vertical-map-cocone :
+  equiv-cocone-postcomp-right-map-cocone :
     is-acyclic-map f →
     {l5 : Level} (X : UU l5) →
-    cocone f (vertical-map-cocone f g c ∘ g) X ≃ (C → X)
-  equiv-cocone-postcomp-vertical-map-cocone ac X =
+    cocone f (right-map-cocone f g c ∘ g) X ≃ (C → X)
+  equiv-cocone-postcomp-right-map-cocone ac X =
     equivalence-reasoning
-        cocone f (vertical-map-cocone f g c ∘ g) X
-      ≃ cocone f (horizontal-map-cocone f g c ∘ f) X
+        cocone f (right-map-cocone f g c ∘ g) X
+      ≃ cocone f (left-map-cocone f g c ∘ f) X
         by
           equiv-tot
           ( λ u →
@@ -362,49 +362,49 @@ module _
                   ( λ s → ap v (inv-htpy (coherence-square-cocone f g c) s))))
       ≃ Σ ( A → X)
           ( λ u →
-            Σ (C → X) (λ v → u ∘ f ＝ v ∘ horizontal-map-cocone f g c ∘ f))
+            Σ (C → X) (λ v → u ∘ f ＝ v ∘ left-map-cocone f g c ∘ f))
         by equiv-tot ( λ u → equiv-tot ( λ v → equiv-eq-htpy))
-      ≃ Σ (A → X) (λ u → Σ (C → X) (λ v → u ＝ v ∘ horizontal-map-cocone f g c))
+      ≃ Σ (A → X) (λ u → Σ (C → X) (λ v → u ＝ v ∘ left-map-cocone f g c))
         by
           equiv-tot
           ( λ u →
             equiv-tot
               ( λ v →
                 inv-equiv-ap-is-emb (is-epimorphism-is-acyclic-map f ac X)))
-      ≃ Σ (C → X) (λ v → Σ (A → X) (λ u → u ＝ v ∘ horizontal-map-cocone f g c))
+      ≃ Σ (C → X) (λ v → Σ (A → X) (λ u → u ＝ v ∘ left-map-cocone f g c))
         by
           equiv-left-swap-Σ
       ≃ (C → X)
         by
-          equiv-pr1 (λ v → is-torsorial-Id' (v ∘ horizontal-map-cocone f g c))
+          equiv-pr1 (λ v → is-torsorial-Id' (v ∘ left-map-cocone f g c))
 
-  is-acyclic-map-vertical-map-cocone-is-pushout :
+  is-acyclic-map-right-map-cocone-is-pushout :
     is-pushout f g c →
     is-acyclic-map f →
-    is-acyclic-map (vertical-map-cocone f g c)
-  is-acyclic-map-vertical-map-cocone-is-pushout po ac =
+    is-acyclic-map (right-map-cocone f g c)
+  is-acyclic-map-right-map-cocone-is-pushout po ac =
     is-acyclic-map-is-epimorphism
-      ( vertical-map-cocone f g c)
+      ( right-map-cocone f g c)
       ( is-epimorphism-universal-property-pushout
-        ( vertical-map-cocone f g c)
+        ( right-map-cocone f g c)
         ( universal-property-pushout-right-universal-property-pushout-rectangle
           ( f)
           ( g)
-          ( vertical-map-cocone f g c)
+          ( right-map-cocone f g c)
           ( c)
-          ( cocone-codiagonal-map (vertical-map-cocone f g c))
+          ( cocone-codiagonal-map (right-map-cocone f g c))
           ( universal-property-pushout-is-pushout f g c po)
           ( λ X →
             is-equiv-right-factor
-              ( map-equiv (equiv-cocone-postcomp-vertical-map-cocone ac X))
+              ( map-equiv (equiv-cocone-postcomp-right-map-cocone ac X))
               ( cocone-map f
-                ( vertical-map-cocone f g c ∘ g)
+                ( right-map-cocone f g c ∘ g)
                 ( cocone-comp-horizontal f g
-                  ( vertical-map-cocone f g c)
+                  ( right-map-cocone f g c)
                   ( c)
-                  ( cocone-codiagonal-map (vertical-map-cocone f g c))))
+                  ( cocone-codiagonal-map (right-map-cocone f g c))))
               ( is-equiv-map-equiv
-                ( equiv-cocone-postcomp-vertical-map-cocone ac X))
+                ( equiv-cocone-postcomp-right-map-cocone ac X))
               ( is-equiv-id))))
 
 module _
@@ -412,12 +412,12 @@ module _
   {C : UU l4} (f : S → A) (g : S → B) (c : cocone f g C)
   where
 
-  is-acyclic-map-horizontal-map-cocone-is-pushout :
+  is-acyclic-map-left-map-cocone-is-pushout :
     is-pushout f g c →
     is-acyclic-map g →
-    is-acyclic-map (horizontal-map-cocone f g c)
-  is-acyclic-map-horizontal-map-cocone-is-pushout po =
-    is-acyclic-map-vertical-map-cocone-is-pushout g f
+    is-acyclic-map (left-map-cocone f g c)
+  is-acyclic-map-left-map-cocone-is-pushout po =
+    is-acyclic-map-right-map-cocone-is-pushout g f
       ( swap-cocone f g C c)
       ( is-pushout-swap-cocone-is-pushout f g C c po)
 ```
@@ -457,7 +457,7 @@ module _
 
 ### Acyclic types are closed under dependent pair types
 
-```agda
+```text
 module _
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
   where
@@ -476,7 +476,7 @@ module _
 
 ### Acyclic types are closed under binary products
 
-```agda
+```text
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
@@ -500,7 +500,7 @@ module _
 
 ### Inhabited, locally acyclic types are acyclic
 
-```agda
+```text
 module _
   {l : Level} (A : UU l)
   where

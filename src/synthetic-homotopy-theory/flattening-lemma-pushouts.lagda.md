@@ -1,6 +1,7 @@
 # The flattening lemma for pushouts
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
 module synthetic-homotopy-theory.flattening-lemma-pushouts where
 ```
 
@@ -9,25 +10,38 @@ module synthetic-homotopy-theory.flattening-lemma-pushouts where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-cubes-of-maps
+open import foundation.commuting-hexagons-of-identifications
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-span-diagrams
+open import foundation.equivalences-spans
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.operations-spans
+open import foundation.span-diagrams
 open import foundation.transport-along-identifications
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.26-descent
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.action-dependent-functions-cocones-under-span-diagrams
+open import synthetic-homotopy-theory.action-functions-cocones-under-span-diagrams
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
+open import synthetic-homotopy-theory.descent-property-families-of-types-pushouts
+open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-span-diagrams
+open import synthetic-homotopy-theory.equivalences-families-of-types-pushouts
+open import synthetic-homotopy-theory.families-of-types-pushouts
+open import synthetic-homotopy-theory.families-of-types-equipped-with-descent-data-pushouts
+open import synthetic-homotopy-theory.flattening-families-of-types-pushouts
+open import synthetic-homotopy-theory.operations-cocones-under-span-diagrams
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -35,23 +49,24 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The **flattening lemma** for [pushouts](synthetic-homotopy-theory.pushouts.md)
-states that pushouts commute with
-[dependent pair types](foundation.dependent-pair-types.md). More precisely,
+The {{#concept "flattening lemma" Disambiguation="pushouts"}} for
+[pushouts](synthetic-homotopy-theory.pushouts.md) states that pushouts commute
+with [dependent pair types](foundation.dependent-pair-types.md). More precisely,
 given a pushout square
 
 ```text
-      g
-  S -----> B
-  |        |
- f|        |j
-  V      ⌜ V
-  A -----> X
-      i
+        g
+    S -----> B
+    |        |
+  f |        | j
+    V      ⌜ V
+    A -----> X
+        i
 ```
 
-with homotopy `H : i ∘ f ~ j ∘ g`, and for any type family `P` over `X`, the
-commuting square
+with [homotopy](foundation-core.homotopies.md) `H : i ∘ f ~ j ∘ g`, and for any
+type family `P` over `X`, the
+[commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
   Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
@@ -61,189 +76,40 @@ commuting square
   Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x)
 ```
 
-is again a pushout square.
+is again a pushout square. The [span diagram](foundation.span-diagrams.md) in
+this square is the
+[flattening](synthetic-homotopy-theory.flattening-families-of-types-pushouts.md)
+of the type family `P` over `X`.
 
-## Definitions
+## Theorems
 
-### The statement of the flattening lemma for pushouts
+### The flattening lemma for pushouts
 
-```agda
+The proof uses the theorem that maps from `Σ`-types are equivalent to dependent
+maps over the index type, for which we can invoke the dependent universal
+property of the indexing pushout.
+
+```text
 module _
-  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  { X : UU l4} (P : X → UU l5)
-  ( f : S → A) (g : S → B) (c : cocone f g X)
+  { l1 l2 l3 l4 l5 : Level} (𝒮 : span-diagram l1 l2 l3)
+  { X : UU l4} (c : cocone-span-diagram 𝒮 X) (P : X → UU l5)
   where
 
-  vertical-map-span-flattening-pushout :
-    Σ S (P ∘ horizontal-map-cocone f g c ∘ f) →
-    Σ A (P ∘ horizontal-map-cocone f g c)
-  vertical-map-span-flattening-pushout =
-    map-Σ-map-base f (P ∘ horizontal-map-cocone f g c)
-
-  horizontal-map-span-flattening-pushout :
-    Σ S (P ∘ horizontal-map-cocone f g c ∘ f) →
-    Σ B (P ∘ vertical-map-cocone f g c)
-  horizontal-map-span-flattening-pushout =
-    map-Σ
-      ( P ∘ vertical-map-cocone f g c)
-      ( g)
-      ( λ s → tr P (coherence-square-cocone f g c s))
-
-  horizontal-map-cocone-flattening-pushout :
-    Σ A (P ∘ horizontal-map-cocone f g c) → Σ X P
-  horizontal-map-cocone-flattening-pushout =
-    map-Σ-map-base (horizontal-map-cocone f g c) P
-
-  vertical-map-cocone-flattening-pushout :
-    Σ B (P ∘ vertical-map-cocone f g c) → Σ X P
-  vertical-map-cocone-flattening-pushout =
-    map-Σ-map-base (vertical-map-cocone f g c) P
-
-  coherence-square-cocone-flattening-pushout :
-    coherence-square-maps
-      ( horizontal-map-span-flattening-pushout)
-      ( vertical-map-span-flattening-pushout)
-      ( vertical-map-cocone-flattening-pushout)
-      ( horizontal-map-cocone-flattening-pushout)
-  coherence-square-cocone-flattening-pushout =
-    coherence-square-maps-map-Σ-map-base P g f
-      ( vertical-map-cocone f g c)
-      ( horizontal-map-cocone f g c)
-      ( coherence-square-cocone f g c)
-
-  cocone-flattening-pushout :
-    cocone
-      ( vertical-map-span-flattening-pushout)
-      ( horizontal-map-span-flattening-pushout)
-      ( Σ X P)
-  pr1 cocone-flattening-pushout =
-    horizontal-map-cocone-flattening-pushout
-  pr1 (pr2 cocone-flattening-pushout) =
-    vertical-map-cocone-flattening-pushout
-  pr2 (pr2 cocone-flattening-pushout) =
-    coherence-square-cocone-flattening-pushout
-
-  flattening-lemma-pushout-statement : UUω
-  flattening-lemma-pushout-statement =
-    ( {l : Level} → dependent-universal-property-pushout l f g c) →
-    { l : Level} →
-    universal-property-pushout l
-      ( vertical-map-span-flattening-pushout)
-      ( horizontal-map-span-flattening-pushout)
-      ( cocone-flattening-pushout)
-```
-
-### The statement of the flattening lemma for pushouts, phrased using descent data
-
-The above statement of the flattening lemma works with a provided type family
-over the pushout. We can instead accept a definition of this family via descent
-data for the pushout.
-
-```agda
-module _
-  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  ( f : S → A) (g : S → B) (c : cocone f g X)
-  ( P : Fam-pushout l5 f g)
-  ( Q : X → UU l5)
-  ( e : equiv-Fam-pushout P (desc-fam c Q))
-  where
-
-  vertical-map-span-flattening-descent-data-pushout :
-    Σ S (pr1 P ∘ f) → Σ A (pr1 P)
-  vertical-map-span-flattening-descent-data-pushout =
-    map-Σ-map-base f (pr1 P)
-
-  horizontal-map-span-flattening-descent-data-pushout :
-    Σ S (pr1 P ∘ f) → Σ B (pr1 (pr2 P))
-  horizontal-map-span-flattening-descent-data-pushout =
-    map-Σ (pr1 (pr2 P)) g (λ s → map-equiv (pr2 (pr2 P) s))
-
-  horizontal-map-cocone-flattening-descent-data-pushout :
-    Σ A (pr1 P) → Σ X Q
-  horizontal-map-cocone-flattening-descent-data-pushout =
-    map-Σ Q
-      ( horizontal-map-cocone f g c)
-      ( λ a → map-equiv (pr1 e a))
-
-  vertical-map-cocone-flattening-descent-data-pushout :
-    Σ B (pr1 (pr2 P)) → Σ X Q
-  vertical-map-cocone-flattening-descent-data-pushout =
-    map-Σ Q
-      ( vertical-map-cocone f g c)
-      ( λ b → map-equiv (pr1 (pr2 e) b))
-
-  coherence-square-cocone-flattening-descent-data-pushout :
-    coherence-square-maps
-      ( horizontal-map-span-flattening-descent-data-pushout)
-      ( vertical-map-span-flattening-descent-data-pushout)
-      ( vertical-map-cocone-flattening-descent-data-pushout)
-      ( horizontal-map-cocone-flattening-descent-data-pushout)
-  coherence-square-cocone-flattening-descent-data-pushout =
-    htpy-map-Σ Q
-      ( coherence-square-cocone f g c)
-      ( λ s → map-equiv (pr1 e (f s)))
-      ( λ s → inv-htpy (pr2 (pr2 e) s))
-
-  cocone-flattening-descent-data-pushout :
-    cocone
-      ( vertical-map-span-flattening-descent-data-pushout)
-      ( horizontal-map-span-flattening-descent-data-pushout)
-      ( Σ X Q)
-  pr1 cocone-flattening-descent-data-pushout =
-    horizontal-map-cocone-flattening-descent-data-pushout
-  pr1 (pr2 cocone-flattening-descent-data-pushout) =
-    vertical-map-cocone-flattening-descent-data-pushout
-  pr2 (pr2 cocone-flattening-descent-data-pushout) =
-    coherence-square-cocone-flattening-descent-data-pushout
-
-  flattening-lemma-descent-data-pushout-statement : UUω
-  flattening-lemma-descent-data-pushout-statement =
-    ( {l : Level} → dependent-universal-property-pushout l f g c) →
-    { l : Level} →
-    universal-property-pushout l
-      ( vertical-map-span-flattening-descent-data-pushout)
-      ( horizontal-map-span-flattening-descent-data-pushout)
-      ( cocone-flattening-descent-data-pushout)
-```
-
-## Properties
-
-### Proof of the flattening lemma for pushouts
-
-The proof uses the theorem that maps from sigma types are equivalent to
-dependent maps over the index type, for which we can invoke the dependent
-universal property of the indexing pushout.
-
-```agda
-module _
-  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  { X : UU l4} (P : X → UU l5)
-  ( f : S → A) (g : S → B) (c : cocone f g X)
-  where
-
-  cocone-map-flattening-pushout :
-    { l : Level} (Y : UU l) →
-    ( Σ X P → Y) →
-    cocone
-      ( vertical-map-span-flattening-pushout P f g c)
-      ( horizontal-map-span-flattening-pushout P f g c)
-      ( Y)
-  cocone-map-flattening-pushout Y =
-    cocone-map
-      ( vertical-map-span-flattening-pushout P f g c)
-      ( horizontal-map-span-flattening-pushout P f g c)
-      ( cocone-flattening-pushout P f g c)
+  cocone-map-flattening-type-family-pushout :
+    {l : Level} (Y : UU l) →
+    (Σ X P → Y) →
+    cocone-span-diagram (span-diagram-flattening-type-family-pushout 𝒮 c P) Y
+  cocone-map-flattening-type-family-pushout Y =
+    cocone-map-span-diagram
+      ( span-diagram-flattening-type-family-pushout 𝒮 c P)
+      ( cocone-flattening-type-family-pushout 𝒮 c P)
 
   comparison-dependent-cocone-ind-Σ-cocone :
     { l : Level} (Y : UU l) →
-    Σ ( (a : A) → P (horizontal-map-cocone f g c a) → Y)
-      ( λ k →
-        Σ ( (b : B) → P (vertical-map-cocone f g c b) → Y)
-          ( λ l →
-            ( s : S) (t : P (horizontal-map-cocone f g c (f s))) →
-            ( k (f s) t) ＝
-            ( l (g s) (tr P (coherence-square-cocone f g c s) t)))) ≃
-    dependent-cocone f g c (λ x → P x → Y)
+    cocone-flattening-structure-type-family-pushout 𝒮
+      ( descent-data-type-family-pushout 𝒮 c P)
+      ( Y) ≃
+    dependent-cocone-span-diagram 𝒮 c (λ x → P x → Y)
   comparison-dependent-cocone-ind-Σ-cocone Y =
     equiv-tot
       ( λ k →
@@ -252,16 +118,18 @@ module _
             equiv-Π-equiv-family
               ( equiv-htpy-dependent-function-dependent-identification-function-type
                 ( Y)
-                ( coherence-square-cocone f g c)
-                ( k ∘ f)
-                ( l ∘ g))))
+                ( coherence-square-cocone-span-diagram 𝒮 c)
+                ( k ∘ left-map-span-diagram 𝒮)
+                ( l ∘ right-map-span-diagram 𝒮))))
 
   triangle-comparison-dependent-cocone-ind-Σ-cocone :
     { l : Level} (Y : UU l) →
     coherence-triangle-maps
-      ( dependent-cocone-map f g c (λ x → P x → Y))
+      ( dependent-cocone-map-span-diagram 𝒮 c (λ x → P x → Y))
       ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
-      ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-pushout Y ∘ ind-Σ)
+      ( map-equiv equiv-ev-pair³ ∘
+        cocone-map-flattening-type-family-pushout Y ∘
+        ind-Σ)
   triangle-comparison-dependent-cocone-ind-Σ-cocone Y h =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
@@ -269,40 +137,48 @@ module _
           ( inv-htpy
             ( compute-equiv-htpy-dependent-function-dependent-identification-function-type
               ( Y)
-              ( coherence-square-cocone f g c)
+              ( coherence-square-cocone-span-diagram 𝒮 c)
               ( h)))))
 
-  flattening-lemma-pushout :
-    flattening-lemma-pushout-statement P f g c
-  flattening-lemma-pushout dup-pushout Y =
-    is-equiv-left-factor
-      ( cocone-map-flattening-pushout Y)
-      ( ind-Σ)
-      ( is-equiv-right-factor
-        ( map-equiv equiv-ev-pair³)
-        ( cocone-map-flattening-pushout Y ∘ ind-Σ)
-        ( is-equiv-map-equiv equiv-ev-pair³)
-        ( is-equiv-top-map-triangle
-          ( dependent-cocone-map f g c (λ x → P x → Y))
-          ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
-          ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-pushout Y ∘ ind-Σ)
-          ( triangle-comparison-dependent-cocone-ind-Σ-cocone Y)
-          ( is-equiv-map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
-          ( dup-pushout (λ x → P x → Y))))
-      ( is-equiv-ind-Σ)
+  abstract
+    flattening-lemma-pushout :
+      universal-property-pushout 𝒮 c →
+      universal-property-pushout
+        ( span-diagram-flattening-type-family-pushout 𝒮 c P)
+        ( cocone-flattening-type-family-pushout 𝒮 c P)
+    flattening-lemma-pushout U Y =
+      is-equiv-left-factor
+        ( cocone-map-flattening-type-family-pushout Y)
+        ( ind-Σ)
+        ( is-equiv-right-factor
+          ( map-equiv equiv-ev-pair³)
+          ( cocone-map-flattening-type-family-pushout Y ∘ ind-Σ)
+          ( is-equiv-map-equiv equiv-ev-pair³)
+          ( is-equiv-top-map-triangle
+            ( dependent-cocone-map-span-diagram 𝒮 c (λ x → P x → Y))
+            ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
+            ( map-equiv equiv-ev-pair³ ∘
+              cocone-map-flattening-type-family-pushout Y ∘
+              ind-Σ)
+            ( triangle-comparison-dependent-cocone-ind-Σ-cocone Y)
+            ( is-equiv-map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
+            ( dependent-universal-property-universal-property-pushout 𝒮 c U
+              ( λ x → P x → Y))))
+        ( is-equiv-ind-Σ)
 ```
 
-### Proof of the descent data statement of the flattening lemma
+### The flattening lemma with descent data
 
 The proof is carried out by constructing a commuting cube, which has
-equivalences for vertical maps, the `cocone-flattening-pushout` square for the
-bottom, and the `cocone-flattening-descent-data-pushout` square for the top.
+equivalences for vertical maps, the `cocone-flattening-type-family-pushout`
+square for the bottom, and the `cocone-flattening-structure-type-family-pushout`
+square for the top.
 
 The bottom is a pushout by the above flattening lemma, which implies that the
 top is also a pushout.
 
 The other parts of the cube are defined naturally, and come from the following
-map of spans:
+map of span diagrams:
 
 ```text
   Σ (a : A) (PA a) <------- Σ (s : S) (PA (f s)) -----> Σ (b : B) (PB b)
@@ -317,89 +193,226 @@ descent data.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  ( f : S → A) (g : S → B) (c : cocone f g X)
-  ( P : Fam-pushout l5 f g)
-  ( Q : X → UU l5)
-  ( e : equiv-Fam-pushout P (desc-fam c Q))
+  { l1 l2 l3 l4 l5 l6 : Level} (𝒮 : span-diagram l1 l2 l3)
+  { X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  ( Y : family-with-descent-data-pushout l5 l6 𝒮 c)
   where
 
-  coherence-cube-flattening-lemma-descent-data-pushout :
-    coherence-cube-maps
-      ( vertical-map-span-flattening-pushout Q f g c)
-      ( horizontal-map-span-flattening-pushout Q f g c)
-      ( horizontal-map-cocone-flattening-pushout Q f g c)
-      ( vertical-map-cocone-flattening-pushout Q f g c)
-      ( vertical-map-span-flattening-descent-data-pushout f g c P Q e)
-      ( horizontal-map-span-flattening-descent-data-pushout f g c P Q e)
-      ( horizontal-map-cocone-flattening-descent-data-pushout f g c P Q e)
-      ( vertical-map-cocone-flattening-descent-data-pushout f g c P Q e)
-      ( tot (λ s → map-equiv (pr1 e (f s))))
-      ( tot (λ a → map-equiv (pr1 e a)))
-      ( tot (λ b → map-equiv (pr1 (pr2 e) b)))
-      ( id)
-      ( coherence-square-cocone-flattening-descent-data-pushout f g c P Q e)
-      ( refl-htpy)
-      ( htpy-map-Σ
-        ( Q ∘ vertical-map-cocone f g c)
-        ( refl-htpy)
-        ( λ s →
-          tr Q (coherence-square-cocone f g c s) ∘ (map-equiv (pr1 e (f s))))
-        ( λ s → inv-htpy (pr2 (pr2 e) s)))
-      ( refl-htpy)
-      ( refl-htpy)
-      ( coherence-square-cocone-flattening-pushout Q f g c)
-  coherence-cube-flattening-lemma-descent-data-pushout (s , t) =
-    ( ap-id
-      ( coherence-square-cocone-flattening-descent-data-pushout f g c P Q e
-        ( s , t))) ∙
-    ( triangle-eq-pair-Σ Q
-      ( coherence-square-cocone f g c s)
-      ( inv (pr2 (pr2 e) s t))) ∙
-    ( ap
-      ( eq-pair-Σ (coherence-square-cocone f g c s) refl ∙_)
-      ( inv
-        ( ( right-unit) ∙
-          ( compute-ap-map-Σ-map-base-eq-pair-Σ
-            ( vertical-map-cocone f g c)
-            ( Q)
-            ( refl)
-            ( inv (pr2 (pr2 e) s t))))))
+  abstract
+    flattening-lemma-descent-data-pushout :
+      universal-property-pushout 𝒮 c →
+      universal-property-pushout
+        ( span-diagram-flattening-family-with-descent-data-pushout 𝒮 c Y)
+        ( cocone-flattening-family-with-descent-data-pushout 𝒮 c Y)
+    flattening-lemma-descent-data-pushout H =
+      {!is-equiv-left-is-equiv-right-square!}
 
-  flattening-lemma-descent-data-pushout :
-    flattening-lemma-descent-data-pushout-statement f g c P Q e
-  flattening-lemma-descent-data-pushout dup-pushout =
-    universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
-      ( vertical-map-span-flattening-pushout Q f g c)
-      ( horizontal-map-span-flattening-pushout Q f g c)
-      ( horizontal-map-cocone-flattening-pushout Q f g c)
-      ( vertical-map-cocone-flattening-pushout Q f g c)
-      ( vertical-map-span-flattening-descent-data-pushout f g c P Q e)
-      ( horizontal-map-span-flattening-descent-data-pushout f g c P Q e)
-      ( horizontal-map-cocone-flattening-descent-data-pushout f g c P Q e)
-      ( vertical-map-cocone-flattening-descent-data-pushout f g c P Q e)
-      ( tot (λ s → map-equiv (pr1 e (f s))))
-      ( tot (λ a → map-equiv (pr1 e a)))
-      ( tot (λ b → map-equiv (pr1 (pr2 e) b)))
-      ( id)
-      ( coherence-square-cocone-flattening-descent-data-pushout f g c P Q e)
-      ( refl-htpy)
-      ( htpy-map-Σ
-        ( Q ∘ vertical-map-cocone f g c)
-        ( refl-htpy)
-        ( λ s →
-          tr Q (coherence-square-cocone f g c s) ∘ (map-equiv (pr1 e (f s))))
-        ( λ s → inv-htpy (pr2 (pr2 e) s)))
-      ( refl-htpy)
-      ( refl-htpy)
-      ( coherence-square-cocone-flattening-pushout Q f g c)
-      ( coherence-cube-flattening-lemma-descent-data-pushout)
-      ( is-equiv-tot-is-fiberwise-equiv
-        ( λ s → is-equiv-map-equiv (pr1 e (f s))))
-      ( is-equiv-tot-is-fiberwise-equiv
-        ( λ a → is-equiv-map-equiv (pr1 e a)))
-      ( is-equiv-tot-is-fiberwise-equiv
-        ( λ b → is-equiv-map-equiv (pr1 (pr2 e) b)))
-      ( is-equiv-id)
-      ( flattening-lemma-pushout Q f g c dup-pushout)
+{-
+      universal-property-pushout-equiv-cocone-equiv-span-diagram
+        ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
+        ( cocone-flattening-structure-type-family-pushout 𝒮 c P Q e)
+        ( span-diagram-flattening-type-family-pushout 𝒮 c Q)
+        ( cocone-flattening-type-family-pushout 𝒮 c Q)
+        ( equiv-span-diagram-flattening-lemma-descent-data-pushout)
+        ( equiv-cocone-flattening-lemma-descent-data-pushout)
+        ( flattening-lemma-pushout 𝒮 c Q H) -}
+```
+
+```text
+  equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    domain-flattening-structure-type-family-pushout 𝒮 P ≃
+    domain-flattening-type-family-pushout 𝒮 c Q
+  equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    equiv-tot
+      ( left-equiv-equiv-structure-type-family-pushout 𝒮 P
+        ( descent-data-type-family-pushout 𝒮 c Q)
+        ( e))
+
+  map-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    domain-flattening-structure-type-family-pushout 𝒮 P →
+    domain-flattening-type-family-pushout 𝒮 c Q
+  map-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    map-equiv
+      equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout
+
+  equiv-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    codomain-flattening-structure-type-family-pushout 𝒮 P ≃
+    codomain-flattening-type-family-pushout 𝒮 c Q
+  equiv-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    equiv-tot
+      ( right-equiv-equiv-structure-type-family-pushout 𝒮 P
+        ( descent-data-type-family-pushout 𝒮 c Q)
+        ( e))
+
+  map-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    codomain-flattening-structure-type-family-pushout 𝒮 P →
+    codomain-flattening-type-family-pushout 𝒮 c Q
+  map-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    map-equiv
+      equiv-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout
+
+  spanning-equiv-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    spanning-type-flattening-structure-type-family-pushout 𝒮 P ≃
+    spanning-type-flattening-type-family-pushout 𝒮 c Q
+  spanning-equiv-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    equiv-tot
+      ( λ x →
+        left-equiv-equiv-structure-type-family-pushout 𝒮 P
+          ( descent-data-type-family-pushout 𝒮 c Q)
+          ( e)
+          ( left-map-span-diagram 𝒮 x))
+
+  spanning-map-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    spanning-type-flattening-structure-type-family-pushout 𝒮 P →
+    spanning-type-flattening-type-family-pushout 𝒮 c Q
+  spanning-map-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    map-equiv
+      ( spanning-equiv-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+
+  left-square-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    coherence-square-maps
+      ( spanning-map-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+      ( left-map-flattening-structure-type-family-pushout 𝒮 P)
+      ( left-map-flattening-type-family-pushout 𝒮 c Q)
+      ( map-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+  left-square-equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    refl-htpy
+
+  right-square-equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    coherence-square-maps
+      ( spanning-map-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+      ( right-map-flattening-structure-type-family-pushout 𝒮 P)
+      ( right-map-flattening-type-family-pushout 𝒮 c Q)
+      ( map-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+  right-square-equiv-span-diagram-flattening-lemma-descent-data-pushout
+    (x , t) =
+    eq-pair-Σ
+      ( refl)
+      ( coherence-equiv-structure-type-family-pushout 𝒮 P
+        ( descent-data-type-family-pushout 𝒮 c Q)
+        ( e)
+        ( x)
+        ( t))
+
+  equiv-span-flattening-lemma-descent-data-pushout :
+    equiv-span
+      ( extend-span
+        ( span-flattening-structure-type-family-pushout 𝒮 P)
+        ( map-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout)
+        ( map-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout))
+      ( span-flattening-type-family-pushout 𝒮 c Q)
+  pr1 equiv-span-flattening-lemma-descent-data-pushout =
+    spanning-equiv-equiv-span-diagram-flattening-lemma-descent-data-pushout
+  pr1 (pr2 equiv-span-flattening-lemma-descent-data-pushout) =
+    left-square-equiv-span-diagram-flattening-lemma-descent-data-pushout
+  pr2 (pr2 equiv-span-flattening-lemma-descent-data-pushout) =
+    right-square-equiv-span-diagram-flattening-lemma-descent-data-pushout
+
+  equiv-span-diagram-flattening-lemma-descent-data-pushout :
+    equiv-span-diagram
+      ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
+      ( span-diagram-flattening-type-family-pushout 𝒮 c Q)
+  pr1 equiv-span-diagram-flattening-lemma-descent-data-pushout =
+    equiv-domain-equiv-span-diagram-flattening-lemma-descent-data-pushout
+  pr1 (pr2 equiv-span-diagram-flattening-lemma-descent-data-pushout) =
+    equiv-codomain-equiv-span-diagram-flattening-lemma-descent-data-pushout
+  pr2 (pr2 equiv-span-diagram-flattening-lemma-descent-data-pushout) =
+    equiv-span-flattening-lemma-descent-data-pushout
+
+  left-square-equiv-cocone-flattening-lemma-descent-data-pushout :
+    left-coherence-square-equiv-cocone-equiv-span-diagram
+      ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
+      ( cocone-flattening-structure-type-family-pushout 𝒮 c P Q e)
+      ( span-diagram-flattening-type-family-pushout 𝒮 c Q)
+      ( cocone-flattening-type-family-pushout 𝒮 c Q)
+      ( equiv-span-diagram-flattening-lemma-descent-data-pushout)
+      ( id-equiv)
+  left-square-equiv-cocone-flattening-lemma-descent-data-pushout =
+    refl-htpy
+
+  right-square-equiv-cocone-flattening-lemma-descent-data-pushout :
+    right-coherence-square-equiv-cocone-equiv-span-diagram
+      ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
+      ( cocone-flattening-structure-type-family-pushout 𝒮 c P Q e)
+      ( span-diagram-flattening-type-family-pushout 𝒮 c Q)
+      ( cocone-flattening-type-family-pushout 𝒮 c Q)
+      ( equiv-span-diagram-flattening-lemma-descent-data-pushout)
+      ( id-equiv)
+  right-square-equiv-cocone-flattening-lemma-descent-data-pushout =
+    refl-htpy
+
+  cube-equiv-cocone-flattening-lemma-descent-data-pushout :
+    coherence-cube-equiv-cocone-equiv-span-diagram
+      ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
+      ( cocone-flattening-structure-type-family-pushout 𝒮 c P Q e)
+      ( span-diagram-flattening-type-family-pushout 𝒮 c Q)
+      ( cocone-flattening-type-family-pushout 𝒮 c Q)
+      ( equiv-span-diagram-flattening-lemma-descent-data-pushout)
+      ( id-equiv)
+      ( left-square-equiv-cocone-flattening-lemma-descent-data-pushout)
+      ( right-square-equiv-cocone-flattening-lemma-descent-data-pushout)
+  cube-equiv-cocone-flattening-lemma-descent-data-pushout (x , t) =
+    ( ap-id _) ∙
+    ( triangle-eq-pair-Σ Q
+      ( coherence-square-cocone-span-diagram 𝒮 c x)
+      ( inv
+        ( coherence-equiv-structure-type-family-pushout 𝒮 P
+          ( descent-data-type-family-pushout 𝒮 c Q)
+          ( e)
+          ( x)
+          ( t)))) ∙
+    ( ap
+      ( concat (eq-pair-Σ (coherence-square-cocone-span-diagram 𝒮 c x) refl) _)
+      ( ( ( inv
+            ( compute-ap-map-Σ-map-base-eq-pair-Σ
+              ( right-map-cocone-span-diagram 𝒮 c)
+              ( Q)
+              ( refl)
+              ( inv
+                ( coherence-equiv-structure-type-family-pushout 𝒮 P
+                  ( descent-data-type-family-pushout 𝒮 c Q)
+                  ( e)
+                  ( x)
+                  ( t))))) ∙
+          ( ap
+            ( ap (map-Σ-map-base _ Q))
+            ( inv
+              ( distributive-inv-eq-pair-Σ-refl
+                ( coherence-equiv-structure-type-family-pushout 𝒮 P
+                  ( descent-data-type-family-pushout 𝒮 c Q)
+                  ( e)
+                  ( x)
+                  ( t)))))) ∙
+        ( inv right-unit)))
+
+  equiv-cocone-flattening-lemma-descent-data-pushout :
+    equiv-cocone-equiv-span-diagram
+      ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
+      ( cocone-flattening-structure-type-family-pushout 𝒮 c P Q e)
+      ( span-diagram-flattening-type-family-pushout 𝒮 c Q)
+      ( cocone-flattening-type-family-pushout 𝒮 c Q)
+      ( equiv-span-diagram-flattening-lemma-descent-data-pushout)
+  pr1 equiv-cocone-flattening-lemma-descent-data-pushout = id-equiv
+  pr1 (pr2 equiv-cocone-flattening-lemma-descent-data-pushout) =
+    left-square-equiv-cocone-flattening-lemma-descent-data-pushout
+  pr1 (pr2 (pr2 equiv-cocone-flattening-lemma-descent-data-pushout)) =
+    right-square-equiv-cocone-flattening-lemma-descent-data-pushout
+  pr2 (pr2 (pr2 equiv-cocone-flattening-lemma-descent-data-pushout)) =
+    cube-equiv-cocone-flattening-lemma-descent-data-pushout
+
+  abstract
+    flattening-lemma-descent-data-pushout :
+      universal-property-pushout 𝒮 c →
+      universal-property-pushout
+        ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
+        ( cocone-flattening-structure-type-family-pushout 𝒮 c P Q e)
+    flattening-lemma-descent-data-pushout H =
+      universal-property-pushout-equiv-cocone-equiv-span-diagram
+        ( span-diagram-flattening-structure-type-family-pushout 𝒮 P)
+        ( cocone-flattening-structure-type-family-pushout 𝒮 c P Q e)
+        ( span-diagram-flattening-type-family-pushout 𝒮 c Q)
+        ( cocone-flattening-type-family-pushout 𝒮 c Q)
+        ( equiv-span-diagram-flattening-lemma-descent-data-pushout)
+        ( equiv-cocone-flattening-lemma-descent-data-pushout)
+        ( flattening-lemma-pushout 𝒮 c Q H)
 ```

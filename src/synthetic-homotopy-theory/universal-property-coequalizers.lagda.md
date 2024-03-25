@@ -21,7 +21,7 @@ open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -109,7 +109,7 @@ precise, asserting that under this mapping,
 [coequalizers](synthetic-homotopy-theory.coequalizers.md) correspond to
 [pushouts](synthetic-homotopy-theory.pushouts.md).
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f g : A → B)
   ( e : cofork f g X)
@@ -123,7 +123,7 @@ module _
         ( cocone-codiagonal-cofork f g e)) →
     ( {l : Level} →
       universal-property-coequalizer l f g e)
-  universal-property-coequalizer-universal-property-pushout up-pushout Y =
+  universal-property-coequalizer-universal-property-pushout U Y =
     is-equiv-left-map-triangle
       ( cofork-map f g e)
       ( cofork-cocone-codiagonal f g)
@@ -132,7 +132,7 @@ module _
         ( horizontal-map-span-cocone-cofork f g)
         ( cocone-codiagonal-cofork f g e))
       ( triangle-cofork-cocone f g e)
-      ( up-pushout Y)
+      ( U Y)
       ( is-equiv-cofork-cocone-codiagonal f g)
 
   universal-property-pushout-universal-property-coequalizer :
@@ -175,7 +175,7 @@ the three small squares, and a coherence datum expressing that the right square
 coequalizes the left squares in the category of arrows, we have that the top
 cofork is a coequalizer if and only if the bottom cofork is a coequalizer.
 
-```agda
+```text
 module _
   { l1 l2 l3 l4 l5 l6 : Level}
   { A : UU l1} {B : UU l2} {C : UU l3}
@@ -215,16 +215,16 @@ module _
         ( horizontal-map-span-cocone-cofork
           ( map-codomain-hom-arrow hA hB f)
           ( map-codomain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
+        ( left-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
+        ( right-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
         ( vertical-map-span-cocone-cofork
           ( map-domain-hom-arrow hA hB f)
           ( map-domain-hom-arrow hA hB g))
         ( horizontal-map-span-cocone-cofork
           ( map-domain-hom-arrow hA hB f)
           ( map-domain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ top-cofork-hom-arrow)
+        ( left-map-cocone-cofork _ _ top-cofork-hom-arrow)
+        ( right-map-cocone-cofork _ _ top-cofork-hom-arrow)
         ( map-coproduct hA hA)
         ( hA)
         ( hB)
@@ -258,16 +258,16 @@ module _
         ( horizontal-map-span-cocone-cofork
           ( map-codomain-hom-arrow hA hB f)
           ( map-codomain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
+        ( left-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
+        ( right-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
         ( vertical-map-span-cocone-cofork
           ( map-domain-hom-arrow hA hB f)
           ( map-domain-hom-arrow hA hB g))
         ( horizontal-map-span-cocone-cofork
           ( map-domain-hom-arrow hA hB f)
           ( map-domain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ top-cofork-hom-arrow)
+        ( left-map-cocone-cofork _ _ top-cofork-hom-arrow)
+        ( right-map-cocone-cofork _ _ top-cofork-hom-arrow)
         ( map-coproduct hA hA)
         ( hA)
         ( hB)

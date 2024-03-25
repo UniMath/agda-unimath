@@ -115,7 +115,7 @@ the top square is a pushout as well. The vertical maps of the cube are
 [equivalences](foundation.equivalences.md), so it follows that the bottom square
 is a pushout.
 
-```agda
+```text
 module _
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
   ( P : X → UU l4) (e : cofork f g X)
@@ -136,11 +136,11 @@ module _
           ( horizontal-map-span-cocone-cofork
             ( bottom-map-cofork-flattening-lemma-coequalizer f g P e)
             ( top-map-cofork-flattening-lemma-coequalizer f g P e))
-          ( horizontal-map-cocone-flattening-pushout P
+          ( left-map-cocone-flattening-pushout P
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
-          ( vertical-map-cocone-flattening-pushout P
+          ( right-map-cocone-flattening-pushout P
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
@@ -152,18 +152,18 @@ module _
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
-          ( horizontal-map-cocone-flattening-pushout P
+          ( left-map-cocone-flattening-pushout P
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
-          ( vertical-map-cocone-flattening-pushout P
+          ( right-map-cocone-flattening-pushout P
             ( vertical-map-span-cocone-cofork f g)
             ( horizontal-map-span-cocone-cofork f g)
             ( cocone-codiagonal-cofork f g e))
           ( map-equiv
             ( right-distributive-Σ-coproduct A A
               ( ( P) ∘
-                ( horizontal-map-cocone-cofork f g e) ∘
+                ( left-map-cocone-cofork f g e) ∘
                 ( vertical-map-span-cocone-cofork f g))))
           ( id)
           ( id)
@@ -187,7 +187,7 @@ module _
           ( is-equiv-map-equiv
             ( right-distributive-Σ-coproduct A A
               ( ( P) ∘
-                ( horizontal-map-cocone-cofork f g e) ∘
+                ( left-map-cocone-cofork f g e) ∘
                 ( vertical-map-span-cocone-cofork f g))))
           ( is-equiv-id)
           ( is-equiv-id)

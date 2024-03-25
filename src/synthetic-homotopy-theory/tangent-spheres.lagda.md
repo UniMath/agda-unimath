@@ -15,7 +15,7 @@ open import foundation.mere-equivalences
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.mere-spheres
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.spheres
@@ -55,7 +55,7 @@ complement.
 
 ### The predicate of having a tangent sphere
 
-```agda
+```text
 module _
   {l : Level} (n : ℕ) {X : UU l} (x : X)
   where

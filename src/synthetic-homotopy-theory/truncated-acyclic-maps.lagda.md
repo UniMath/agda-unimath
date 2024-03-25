@@ -46,7 +46,7 @@ open import foundation.universal-property-cartesian-product-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.cocones-under-span-diagrams
 open import synthetic-homotopy-theory.codiagonals-of-maps
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspensions-of-types
@@ -88,7 +88,7 @@ module _
 
 ### A map is `k`-acyclic if and only if it is an [epimorphism with respect to `k`-types](foundation.epimorphisms-with-respect-to-truncated-types.md)
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -140,7 +140,7 @@ More precisely, `A` is `k`-acyclic if and only if for all `k`-types `X`, the map
 
 is an embedding.
 
-```agda
+```text
 module _
   {l : Level} {k : 𝕋} (A : UU l)
   where
@@ -190,7 +190,7 @@ elements `x,y : X`, the map
 
 is an equivalence.
 
-```agda
+```text
 module _
   {l : Level} {k : 𝕋} (A : UU l)
   where
@@ -236,7 +236,7 @@ module _
 The proof is similar to that of dependent epimorphisms and
 [acyclic-maps](synthetic-homotopy-theory.acyclic-maps.md).
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -275,7 +275,7 @@ module _
 
 In particular, every `k`-epimorphism is actually a dependent `k`-epimorphism.
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -294,7 +294,7 @@ Since the `k`-acyclic maps are precisely the `k`-epimorphisms this follows from
 the corresponding facts about
 [`k`-epimorphisms](foundation.epimorphisms-with-respect-to-truncated-types.md).
 
-```agda
+```text
 module _
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B)
@@ -348,7 +348,7 @@ is-truncated-acyclic-map-succ-unit-trunc {k = k} A =
 
 ### A type is `(k+1)`-acyclic if and only if its `k`-truncation is
 
-```agda
+```text
 module _
   {l : Level} {k : 𝕋} (A : UU l)
   where
@@ -381,7 +381,7 @@ module _
 
 ### Every `k`-equivalence is `k`-acyclic
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -430,7 +430,7 @@ module _
 
 ### `k`-acyclic types are closed under dependent pair types
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : A → UU l2)
   where
@@ -451,7 +451,7 @@ module _
 
 ### `k`-acyclic types are closed under binary products
 
-```agda
+```text
 module _
   {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : UU l2)
   where
@@ -477,7 +477,7 @@ module _
 
 ### Inhabited, locally `k`-acyclic types are `k`-acyclic
 
-```agda
+```text
 module _
   {l : Level} {k : 𝕋} (A : UU l)
   where
@@ -529,11 +529,11 @@ For this, we use the following commutative diagram
    (∙ → X) ------------------------> cocone f (j ∘ g) X
       |      (by pushout pasting)            |
       |                                      |
-    ≃ | (universal                           | vertical-map-cocone
+    ≃ | (universal                           | right-map-cocone
       |  property)                           | (second projection)
       v                                      v
  cocone j j X --------------------------> (C → X)
-                 vertical-map-cocone
+                 right-map-cocone
                  (second projection)
 ```
 
@@ -558,21 +558,21 @@ following equivalences for that purpose:
                                ≃ (C → X)
 ```
 
-```agda
+```text
 module _
   {l1 l2 l3 l4 : Level} {k : 𝕋} {S : UU l1} {A : UU l2} {B : UU l3}
   {C : UU l4} (f : S → A) (g : S → B) (c : cocone f g C)
   where
 
-  equiv-cocone-postcomp-vertical-map-cocone-Truncated-Type :
+  equiv-cocone-postcomp-right-map-cocone-Truncated-Type :
     is-truncated-acyclic-map k f →
     {l5 : Level} (X : Truncated-Type l5 k) →
-    cocone f (vertical-map-cocone f g c ∘ g) (type-Truncated-Type X) ≃
+    cocone f (right-map-cocone f g c ∘ g) (type-Truncated-Type X) ≃
     (C → type-Truncated-Type X)
-  equiv-cocone-postcomp-vertical-map-cocone-Truncated-Type ac X =
+  equiv-cocone-postcomp-right-map-cocone-Truncated-Type ac X =
     equivalence-reasoning
-        cocone f (vertical-map-cocone f g c ∘ g) (type-Truncated-Type X)
-      ≃ cocone f (horizontal-map-cocone f g c ∘ f) (type-Truncated-Type X)
+        cocone f (right-map-cocone f g c ∘ g) (type-Truncated-Type X)
+      ≃ cocone f (left-map-cocone f g c ∘ f) (type-Truncated-Type X)
         by
           equiv-tot
           ( λ u →
@@ -584,12 +584,12 @@ module _
       ≃ Σ ( A → type-Truncated-Type X)
           ( λ u →
             Σ ( C → type-Truncated-Type X)
-              ( λ v → u ∘ f ＝ v ∘ horizontal-map-cocone f g c ∘ f))
+              ( λ v → u ∘ f ＝ v ∘ left-map-cocone f g c ∘ f))
         by equiv-tot ( λ u → equiv-tot ( λ v → equiv-eq-htpy))
       ≃ Σ ( A → type-Truncated-Type X)
           ( λ u →
             Σ ( C → type-Truncated-Type X)
-              ( λ v → u ＝ v ∘ horizontal-map-cocone f g c))
+              ( λ v → u ＝ v ∘ left-map-cocone f g c))
         by
           equiv-tot
           ( λ u →
@@ -603,62 +603,62 @@ module _
       ≃ Σ ( C → type-Truncated-Type X)
           ( λ v →
             Σ ( A → type-Truncated-Type X)
-              ( λ u → u ＝ v ∘ horizontal-map-cocone f g c))
+              ( λ u → u ＝ v ∘ left-map-cocone f g c))
         by
           equiv-left-swap-Σ
       ≃ (C → type-Truncated-Type X)
         by
-          equiv-pr1 (λ v → is-torsorial-Id' (v ∘ horizontal-map-cocone f g c))
+          equiv-pr1 (λ v → is-torsorial-Id' (v ∘ left-map-cocone f g c))
 
-  is-truncated-acyclic-map-vertical-map-cocone-is-pushout :
+  is-truncated-acyclic-map-right-map-cocone-is-pushout :
     is-pushout f g c →
     is-truncated-acyclic-map k f →
-    is-truncated-acyclic-map k (vertical-map-cocone f g c)
-  is-truncated-acyclic-map-vertical-map-cocone-is-pushout po ac =
+    is-truncated-acyclic-map k (right-map-cocone f g c)
+  is-truncated-acyclic-map-right-map-cocone-is-pushout po ac =
     is-truncated-acyclic-map-is-epimorphism-Truncated-Type
-      ( vertical-map-cocone f g c)
-      ( is-epimorphism-is-equiv-vertical-map-cocone-Truncated-Type k
-        ( vertical-map-cocone f g c)
+      ( right-map-cocone f g c)
+      ( is-epimorphism-is-equiv-right-map-cocone-Truncated-Type k
+        ( right-map-cocone f g c)
         ( λ X →
           is-equiv-bottom-is-equiv-top-square
             ( cocone-map
-              ( vertical-map-cocone f g c)
-              ( vertical-map-cocone f g c)
+              ( right-map-cocone f g c)
+              ( right-map-cocone f g c)
               ( cocone-pushout
-                ( vertical-map-cocone f g c)
-                ( vertical-map-cocone f g c)))
+                ( right-map-cocone f g c)
+                ( right-map-cocone f g c)))
             ( map-equiv
-              ( equiv-cocone-postcomp-vertical-map-cocone-Truncated-Type ac X))
+              ( equiv-cocone-postcomp-right-map-cocone-Truncated-Type ac X))
             ( cocone-map f
-              ( vertical-map-cocone f g c ∘ g)
+              ( right-map-cocone f g c ∘ g)
               ( cocone-comp-horizontal f g
-                ( vertical-map-cocone f g c)
+                ( right-map-cocone f g c)
                 ( c)
                 ( cocone-pushout
-                  ( vertical-map-cocone f g c)
-                  ( vertical-map-cocone f g c))))
-            ( vertical-map-cocone
-              ( vertical-map-cocone f g c)
-              ( vertical-map-cocone f g c))
+                  ( right-map-cocone f g c)
+                  ( right-map-cocone f g c))))
+            ( right-map-cocone
+              ( right-map-cocone f g c)
+              ( right-map-cocone f g c))
             ( refl-htpy)
-            ( up-pushout
-              ( vertical-map-cocone f g c)
-              ( vertical-map-cocone f g c)
+            ( universal-property-pushout-standard-pushout
+              ( right-map-cocone f g c)
+              ( right-map-cocone f g c)
               ( type-Truncated-Type X))
             ( is-equiv-map-equiv
-              ( equiv-cocone-postcomp-vertical-map-cocone-Truncated-Type ac X))
+              ( equiv-cocone-postcomp-right-map-cocone-Truncated-Type ac X))
             ( universal-property-pushout-rectangle-universal-property-pushout-right
               ( f)
               ( g)
-              ( vertical-map-cocone f g c)
+              ( right-map-cocone f g c)
               ( c)
               ( cocone-pushout
-                ( vertical-map-cocone f g c)
-                ( vertical-map-cocone f g c))
+                ( right-map-cocone f g c)
+                ( right-map-cocone f g c))
               ( universal-property-pushout-is-pushout f g c po)
-              ( up-pushout
-                ( vertical-map-cocone f g c)
-                ( vertical-map-cocone f g c))
+              ( universal-property-pushout-standard-pushout
+                ( right-map-cocone f g c)
+                ( right-map-cocone f g c))
               ( type-Truncated-Type X))))
 
 module _
@@ -666,12 +666,12 @@ module _
   {C : UU l4} (f : S → A) (g : S → B) (c : cocone f g C)
   where
 
-  is-truncated-acyclic-map-horizontal-map-cocone-is-pushout :
+  is-truncated-acyclic-map-left-map-cocone-is-pushout :
     is-pushout f g c →
     is-truncated-acyclic-map k g →
-    is-truncated-acyclic-map k (horizontal-map-cocone f g c)
-  is-truncated-acyclic-map-horizontal-map-cocone-is-pushout po =
-    is-truncated-acyclic-map-vertical-map-cocone-is-pushout g f
+    is-truncated-acyclic-map k (left-map-cocone f g c)
+  is-truncated-acyclic-map-left-map-cocone-is-pushout po =
+    is-truncated-acyclic-map-right-map-cocone-is-pushout g f
       ( swap-cocone f g C c)
       ( is-pushout-swap-cocone-is-pushout f g C c po)
 ```

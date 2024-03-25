@@ -56,7 +56,7 @@ module _
 
 ### A type is `0`-acyclic if and only if it is inhabited
 
-```agda
+```text
 module _
   {l : Level} {A : UU l}
   where

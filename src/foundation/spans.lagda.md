@@ -51,6 +51,15 @@ span :
 span l A B = Σ (UU l) (λ X → (X → A) × (X → B))
 
 module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {S : UU l3}
+  where
+
+  make-span : (S → A) → (S → B) → span l3 A B
+  pr1 (make-span f g) = S
+  pr1 (pr2 (make-span f g)) = f
+  pr2 (pr2 (make-span f g)) = g
+
+module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
   (c : span l3 A B)
   where

@@ -195,7 +195,7 @@ module _
 
 ### The nondependent and dependent universal properties of sequential colimits are logically equivalent
 
-```agda
+```text
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
   ( c : cocone-sequential-diagram A X)
@@ -240,7 +240,7 @@ universal property of sequential colimits, and a map between their vertices, we
 prove that the other has the dependent universal property if and only if the map
 is an [equivalence](foundation.equivalences.md).
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : sequential-diagram l1} {X : UU l2} {Y : UU l3}
   ( c : cocone-sequential-diagram A X)

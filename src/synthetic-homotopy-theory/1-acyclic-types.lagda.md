@@ -95,7 +95,7 @@ module _
 As explained at the top "Idea" section, we turn the necessary group-theoretic
 fact into an explicit assumption of our proof.
 
-```agda
+```text
 private
   record
     concrete-group-assumption' {l : Level} (A : UU l) : UU (lsuc l)

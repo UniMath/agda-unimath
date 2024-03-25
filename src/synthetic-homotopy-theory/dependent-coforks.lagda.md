@@ -29,7 +29,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-identifications-concatenation
 
 open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-span-diagrams
 ```
 
 </details>
@@ -56,7 +56,7 @@ and a family of
 ```
 
 Dependent coforks are an analogue of
-[dependent cocones under spans](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
+[dependent cocones under spans](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md)
 for parallel pairs.
 
 ## Definitions
@@ -242,10 +242,10 @@ module _
 ### Dependent coforks are special cases of dependent cocones under spans
 
 The type of dependent coforks on `P` over `e` is equivalent to the type of
-[dependent cocones](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
+[dependent cocones](synthetic-homotopy-theory.dependent-cocones-under-span-diagrams.md)
 on `P` over a cocone corresponding to `e` via `cocone-codiagonal-cofork`.
 
-```agda
+```text
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
   ( e : cofork f g X)
