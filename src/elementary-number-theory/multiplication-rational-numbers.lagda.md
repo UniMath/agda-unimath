@@ -45,7 +45,7 @@ _*ℚ_ = mul-ℚ
 ```agda
 left-unit-law-mul-ℚ : (x : ℚ) → one-ℚ *ℚ x ＝ x
 left-unit-law-mul-ℚ x =
-  ( eq-ℚ-sim-fractions-ℤ
+  ( eq-ℚ-sim-fraction-ℤ
     ( mul-fraction-ℤ one-fraction-ℤ (fraction-ℚ x))
     ( fraction-ℚ x)
     ( left-unit-law-mul-fraction-ℤ (fraction-ℚ x))) ∙

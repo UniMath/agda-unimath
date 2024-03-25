@@ -92,7 +92,7 @@ refl-leq-ℚ x =
 antisymmetric-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ y x → x ＝ y
 antisymmetric-leq-ℚ x y H H' =
   ( inv (in-fraction-fraction-ℚ x)) ∙
-  ( eq-ℚ-sim-fractions-ℤ
+  ( eq-ℚ-sim-fraction-ℤ
     ( fraction-ℚ x)
     ( fraction-ℚ y)
     ( is-sim-antisymmetric-leq-fraction-ℤ

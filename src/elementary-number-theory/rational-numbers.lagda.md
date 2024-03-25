@@ -119,13 +119,13 @@ mediant-ℚ x y =
 
 ## Properties
 
-### If two fractions are related by `sim-fraction-ℤ`, then their embeddings into `ℚ` are equal
+### The rational images of two similar integer fractions are equal
 
 ```agda
-eq-ℚ-sim-fractions-ℤ :
+eq-ℚ-sim-fraction-ℤ :
   (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
   in-fraction-ℤ x ＝ in-fraction-ℤ y
-eq-ℚ-sim-fractions-ℤ x y H =
+eq-ℚ-sim-fraction-ℤ x y H =
   eq-pair-Σ'
     ( pair
       ( unique-reduce-fraction-ℤ x y H)
@@ -162,5 +162,5 @@ in-fraction-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
 reflecting-map-sim-fraction :
   reflecting-map-equivalence-relation equivalence-relation-sim-fraction-ℤ ℚ
 pr1 reflecting-map-sim-fraction = in-fraction-ℤ
-pr2 reflecting-map-sim-fraction {x} {y} H = eq-ℚ-sim-fractions-ℤ x y H
+pr2 reflecting-map-sim-fraction {x} {y} H = eq-ℚ-sim-fraction-ℤ x y H
 ```
