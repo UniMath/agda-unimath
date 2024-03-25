@@ -33,16 +33,32 @@ of `R`. This is a relation `Rˢ` on `A` that is strictly
   sym (sym r) ≐ r.
 ```
 
+We define the strict symmetrization of `R` as
+
+```text
+  Rˢ x y := Σ (z : A), (R z x) × (R z y).
+```
+
 If the underlying binary relation is
 [reflexive](foundation.reflexive-relations.md), then this construction has a
-unit map `R → Rˢ`. If the binary relation satisfies an
-[outer horn filler condition](foundation.outer-2-horn-filler-conditions-binary-relations.md),
-then it has a counit map `Rˢ → R`. Note that we do not mean to imply that these
-maps are components of an adjunction.
+unit map `R → Rˢ`. If the binary relation has
+[extensions](foundation.binary-relations-with-extensions.md), then it has a
+counit map `Rˢ → R`. Note that we do not mean to imply that these maps are
+components of an adjunction.
+
+There is also a dual notion of strict symmetrization of binary relations defined
+by
+
+```text
+  Rˢ-dual x y := Σ (z : A), (R x z) × (R y z).
+```
+
+The dual has a counit map if the binary relation has
+[lifts](foundation.binary-relations-with-lifts.md) rather than extensions.
 
 An essential fact about the strict symmetrization of a relation is that the
 strict symmetrization of an identity relation is equivalent to the identity
-relation. We consider the strict symmetrization if the standard identity
+relation. We consider the strict symmetrization of the standard identity
 relation in
 [`foundation.strictly-involutive-identity-types`](foundation.strictly-involutive-identity-types.md).
 
@@ -53,7 +69,7 @@ an element `a` such that `R a x` is
 strict symmetrization will be reflexive, while the symmetric closure need not
 be.
 
-## Definition
+## Definitions
 
 ### Strict symmetrization of binary relations
 
@@ -63,8 +79,7 @@ module _
   where
 
   strict-symmetrization-Relation : Relation (l1 ⊔ l2) A
-  strict-symmetrization-Relation x y =
-    Σ A (λ z → R z x × R z y)
+  strict-symmetrization-Relation x y = Σ A (λ z → R z x × R z y)
 
   symmetric-strict-symmetrization-Relation :
     is-symmetric strict-symmetrization-Relation
@@ -96,8 +111,7 @@ module _
   where
 
   dual-strict-symmetrization-Relation : Relation (l1 ⊔ l2) A
-  dual-strict-symmetrization-Relation x y =
-    Σ A (λ z → R x z × R y z)
+  dual-strict-symmetrization-Relation x y = Σ A (λ z → R x z × R y z)
 
   symmetric-dual-strict-symmetrization-Relation :
     is-symmetric dual-strict-symmetrization-Relation
@@ -138,8 +152,7 @@ module _
   refl-strict-symmetrization-Relation' :
     ((x : A) → Σ A (λ y → R y x)) →
     is-reflexive (strict-symmetrization-Relation R)
-  refl-strict-symmetrization-Relation' r x =
-    (pr1 (r x) , pr2 (r x) , pr2 (r x))
+  refl-strict-symmetrization-Relation' r x = (pr1 (r x) , pr2 (r x) , pr2 (r x))
 
   refl-strict-symmetrization-Relation :
     is-reflexive R →

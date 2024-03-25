@@ -109,11 +109,10 @@ module _
 
   is-symmetric-is-reflexive-has-extensions-Relation :
     is-reflexive R → is-symmetric R
-  is-symmetric-is-reflexive-has-extensions-Relation r x y p =
-    H p (r x)
+  is-symmetric-is-reflexive-has-extensions-Relation r x y p = H p (r x)
 ```
 
-### Reflexive relations with extensions satisfy all 2-horn filler conditions
+### Reflexive relations with extensions are transitive
 
 ```agda
 module _
@@ -123,8 +122,7 @@ module _
 
   is-transitive-is-symmetric-has-extensions-Relation :
     is-symmetric R → is-transitive R
-  is-transitive-is-symmetric-has-extensions-Relation s x y z p q =
-    H (s x y q) p
+  is-transitive-is-symmetric-has-extensions-Relation s x y z p q = H (s x y q) p
 
   is-transitive-is-reflexive-has-extensions-Relation :
     is-reflexive R → is-transitive R

@@ -111,7 +111,7 @@ module _
   is-symmetric-is-reflexive-has-lifts-Relation r x y p = H (r y) p
 ```
 
-### Reflexive relations with lifts satisfy all 2-horn filler conditions
+### Reflexive relations with lifts are transitive
 
 ```agda
 module _
