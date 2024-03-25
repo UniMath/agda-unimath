@@ -23,11 +23,11 @@ open import structured-types.globular-types
 A
 {{#concept "map" Disambiguation="between globular types" Agda=map-Globular-Type}}
 `f` between [globular types](structured-types.globular-types.md) `A` and `B` is
-a map `f₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`, a map of
+a map `F₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`, a map of
 $(n+1)$-cells
 
 ```text
-  fₙ₊₁ : 𝑛-Cell A x y → 𝑛-Cell B (fₙ x) (fₙ y).
+  Fₙ₊₁ : 𝑛-Cell A x y → 𝑛-Cell B (Fₙ x) (Fₙ y).
 ```
 
 ## Definitions

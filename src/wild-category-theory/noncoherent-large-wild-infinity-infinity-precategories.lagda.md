@@ -104,6 +104,19 @@ $(∞,∞)$-precategories.
   comp-hom-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory =
     comp-1-cell-is-transitive-large-globular-structure
       ( comp-hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory)
+
+  hom-globular-type-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory :
+    {l1 l2 : Level}
+    (x : obj-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory l1)
+    (y : obj-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory l2) →
+    Globular-Type (β l1 l2)
+  pr1 (hom-globular-type-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory x y) =
+    hom-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory x y
+  pr2 (hom-globular-type-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory x y) =
+    globular-structure-1-cell-large-globular-structure
+      ( hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory)
+      ( x)
+      ( y)
 ```
 
 ```agda

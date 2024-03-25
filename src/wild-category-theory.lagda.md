@@ -9,5 +9,6 @@
 ```agda
 module wild-category-theory where
 
+open import wild-category-theory.maps-noncoherent-large-wild-infinity-infinity-precategories public
 open import wild-category-theory.noncoherent-large-wild-infinity-infinity-precategories public
 ```
