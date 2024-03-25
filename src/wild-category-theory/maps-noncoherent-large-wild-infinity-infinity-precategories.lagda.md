@@ -33,7 +33,7 @@ A
 pair of $n$-morphisms `f` and `g`, a map of $(n+1)$-morphisms
 
 ```text
-  Fₙ₊₁ : 𝑛-hom 𝒞 f g → 𝑛-hom 𝒟 (Fₙ f) (Fₙ g).
+  Fₙ₊₁ : (𝑛+1)-hom 𝒞 f g → (𝑛+1)-hom 𝒟 (Fₙ f) (Fₙ g).
 ```
 
 ## Definitions
