@@ -112,7 +112,7 @@ module _
 
 ## Properties
 
-### If there is an element that relates to `y` then `y` relates to `y`
+### If there is an element that relates to `y` and the relation has extensions, then `y` relates to `y`
 
 ```agda
 module _
