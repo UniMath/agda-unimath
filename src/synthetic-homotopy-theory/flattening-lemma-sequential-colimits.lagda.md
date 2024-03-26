@@ -199,11 +199,9 @@ module _
     flattening-lemma-sequential-colimit dup-c =
       universal-property-sequential-colimit-universal-property-coequalizer
         ( cocone-sequential-diagram-flattening-lemma c P)
-        ( universal-property-coequalizer-top-universal-property-coequalizer-bottom-hom-arrow-is-equiv
-          ( _)
+        ( universal-property-coequalizer-equiv-cofork
           ( cofork-cocone-sequential-diagram _
             ( cocone-sequential-diagram-flattening-lemma c P))
-          ( _)
           ( cofork-flattening-lemma-coequalizer _
             ( P)
             ( cofork-cocone-sequential-diagram A c))

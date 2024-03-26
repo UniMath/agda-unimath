@@ -28,10 +28,11 @@ open import synthetic-homotopy-theory.universal-property-coequalizers
 ## Idea
 
 The **dependent universal property of coequalizers** is a property of
-[coequalizers](synthetic-homotopy-theory.coequalizers.md) of a parallel pair
-`f, g : A → B`, asserting that for any type family `P : X → 𝓤` over the
-coequalizer `e : B → X`, there is an equivalence between sections of `P` and
-dependent cocones on `P` over `e`, given by the map
+[coequalizers](synthetic-homotopy-theory.coequalizers.md) of a
+[double arrow](foundation.double-arrows.md) `f, g : A → B`, asserting that for
+any type family `P : X → 𝒰` over the coequalizer `e : B → X`, there is an
+equivalence between sections of `P` and dependent cocones on `P` over `e`, given
+by the map
 
 ```text
 dependent-cofork-map : ((x : X) → P x) → dependent-cocone e P.
@@ -113,9 +114,9 @@ module _
 
 ### A cofork has the dependent universal property of coequalizers if and only if the corresponding cocone has the dependent universal property of pushouts
 
-As mentioned in [coforks](synthetic-homotopy-theory.coforks.md), coforks can be
-thought of as special cases of cocones under spans. This theorem makes it more
-precise, asserting that under this mapping,
+As mentioned in [`coforks`](synthetic-homotopy-theory.coforks.md), coforks can
+be thought of as special cases of cocones under spans. This theorem makes it
+more precise, asserting that under this mapping,
 [coequalizers](synthetic-homotopy-theory.coequalizers.md) correspond to
 [pushouts](synthetic-homotopy-theory.pushouts.md).
 

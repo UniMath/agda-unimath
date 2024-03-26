@@ -24,16 +24,17 @@ A {{#concept "double arrow" Agda=double-arrow}} is a
 We draw a double arrow as
 
 ```text
-     g
-   ----->
- A -----> B ,
-     f
+     A
+    | |
+  f | | g
+    | |
+    ∨ ∨
+     B
 ```
 
 where `f` is the first map in the structure and `g` is the second map in the
-structure. We also call `f` the _bottom map_ and `g` the _top map_. By
-convention, [homotopies](foundation-core.homotopies.md) go from the bottom map
-to the top map.
+structure. We also call `f` the _left map_ and `g` the _right map_. By
+convention, [homotopies](foundation-core.homotopies.md) go from left to right.
 
 ## Definitions
 
@@ -68,11 +69,11 @@ module _
   codomain-double-arrow : UU l2
   codomain-double-arrow = pr1 (pr2 a)
 
-  bottom-map-double-arrow : domain-double-arrow → codomain-double-arrow
-  bottom-map-double-arrow = pr1 (pr2 (pr2 a))
+  left-map-double-arrow : domain-double-arrow → codomain-double-arrow
+  left-map-double-arrow = pr1 (pr2 (pr2 a))
 
-  top-map-double-arrow : domain-double-arrow → codomain-double-arrow
-  top-map-double-arrow = pr2 (pr2 (pr2 a))
+  right-map-double-arrow : domain-double-arrow → codomain-double-arrow
+  right-map-double-arrow = pr2 (pr2 (pr2 a))
 ```
 
 ## See also
