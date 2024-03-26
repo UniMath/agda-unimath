@@ -24,6 +24,8 @@ open import structured-types.globular-types
 open import structured-types.large-globular-types
 open import structured-types.large-reflexive-globular-types
 open import structured-types.large-transitive-globular-types
+
+open import wild-category-theory.noncoherent-wild-infinity-infinity-precategories
 ```
 
 </details>
@@ -117,6 +119,28 @@ $(∞,∞)$-precategories.
       ( hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory)
       ( x)
       ( y)
+
+  hom-noncoherent-wild-⟨∞,∞⟩-precategory-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory :
+    {l1 l2 : Level}
+    (x : obj-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory l1)
+    (y : obj-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory l2) →
+    Noncoherent-Wild-⟨∞,∞⟩-Precategory (β l1 l2) (β l1 l2)
+  hom-noncoherent-wild-⟨∞,∞⟩-precategory-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory
+    x y =
+    make-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+      ( hom-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory x y)
+      ( globular-structure-1-cell-large-globular-structure
+        ( hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory)
+        ( x)
+        ( y))
+      ( is-reflexive-globular-structure-1-cell-is-reflexive-large-globular-structure
+        ( id-hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory)
+        ( x)
+        ( y))
+      ( is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
+        ( comp-hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory)
+        ( x)
+        ( y))
 ```
 
 ```agda

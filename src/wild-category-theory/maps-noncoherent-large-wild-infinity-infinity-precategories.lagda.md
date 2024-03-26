@@ -19,7 +19,9 @@ open import structured-types.large-globular-types
 open import structured-types.maps-globular-types
 open import structured-types.maps-large-globular-types
 
+open import wild-category-theory.maps-noncoherent-wild-infinity-infinity-precategories
 open import wild-category-theory.noncoherent-large-wild-infinity-infinity-precategories
+open import wild-category-theory.noncoherent-wild-infinity-infinity-precategories
 ```
 
 </details>
@@ -97,6 +99,28 @@ module _
   2-hom-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory =
     1-cell-map-Globular-Type
       ( hom-globular-type-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory F)
+
+  hom-noncoherent-wild-⟨∞,∞⟩-precategory-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory :
+    {l1 l2 : Level}
+    (x : obj-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory 𝒜 l1)
+    (y : obj-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory 𝒜 l2) →
+    map-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+      ( hom-noncoherent-wild-⟨∞,∞⟩-precategory-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory
+        ( 𝒜)
+        ( x)
+        ( y))
+      ( hom-noncoherent-wild-⟨∞,∞⟩-precategory-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory
+        ( ℬ)
+        ( obj-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory F x)
+        ( obj-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory F y))
+  hom-noncoherent-wild-⟨∞,∞⟩-precategory-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory
+    x y =
+    λ where
+    .obj-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory →
+      hom-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory
+    .hom-globular-type-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory →
+      globular-type-1-cell-map-Globular-Type
+        ( hom-globular-type-map-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory F)
 ```
 
 ### The identity map on a noncoherent large wild $(∞,∞)$-precategory
