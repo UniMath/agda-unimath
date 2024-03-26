@@ -13,7 +13,6 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.universe-levels
 
-open import foundation-core.function-types
 open import foundation-core.negation
 open import foundation-core.propositions
 ```

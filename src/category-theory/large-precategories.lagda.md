@@ -34,6 +34,7 @@ be done with Σ-types, we must use a record type.)
 ```agda
 record
   Large-Precategory (α : Level → Level) (β : Level → Level → Level) : UUω where
+
   field
     obj-Large-Precategory :
       (l : Level) → UU (α l)
@@ -45,9 +46,9 @@ record
       Set (β l1 l2)
 
   hom-Large-Precategory :
-    {l1 l2 : Level}
-    (X : obj-Large-Precategory l1)
-    (Y : obj-Large-Precategory l2) →
+    {l1 l2 : Level} →
+    obj-Large-Precategory l1 →
+    obj-Large-Precategory l2 →
     UU (β l1 l2)
   hom-Large-Precategory X Y = type-Set (hom-set-Large-Precategory X Y)
 

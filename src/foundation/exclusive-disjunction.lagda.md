@@ -146,7 +146,7 @@ pr1 (symmetric-xor-Prop E) = type-symmetric-xor-Prop E
 pr2 (symmetric-xor-Prop E) = is-prop-type-symmetric-xor-Prop E
 ```
 
-### Second definition of exclusiove disjunction
+### Second definition of exclusive disjunction
 
 ```agda
 module _

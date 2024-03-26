@@ -41,7 +41,7 @@ record
     make-Large-Preorder
   field
     type-Large-Preorder : (l : Level) → UU (α l)
-    leq-prop-Large-Preorder : Large-Relation-Prop α β type-Large-Preorder
+    leq-prop-Large-Preorder : Large-Relation-Prop β type-Large-Preorder
     refl-leq-Large-Preorder :
       is-reflexive-Large-Relation-Prop
         ( type-Large-Preorder)
@@ -57,16 +57,16 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (X : Large-Preorder α β)
   where
 
-  leq-Large-Preorder : Large-Relation α β (type-Large-Preorder X)
+  leq-Large-Preorder : Large-Relation β (type-Large-Preorder X)
   leq-Large-Preorder =
-    type-Large-Relation-Prop
+    large-relation-Large-Relation-Prop
       ( type-Large-Preorder X)
       ( leq-prop-Large-Preorder X)
 
   is-prop-leq-Large-Preorder :
     is-prop-Large-Relation (type-Large-Preorder X) (leq-Large-Preorder)
   is-prop-leq-Large-Preorder =
-    is-prop-type-Large-Relation-Prop
+    is-prop-large-relation-Large-Relation-Prop
       ( type-Large-Preorder X)
       ( leq-prop-Large-Preorder X)
 

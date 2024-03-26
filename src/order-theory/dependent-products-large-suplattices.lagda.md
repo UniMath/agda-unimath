@@ -74,7 +74,6 @@ module _
 
   leq-prop-Π-Large-Suplattice :
     Large-Relation-Prop
-      ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-Π-Large-Suplattice)
   leq-prop-Π-Large-Suplattice =

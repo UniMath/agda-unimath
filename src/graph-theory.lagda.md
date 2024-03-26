@@ -15,6 +15,7 @@ open import graph-theory.connected-undirected-graphs public
 open import graph-theory.cycles-undirected-graphs public
 open import graph-theory.directed-graph-structures-on-standard-finite-sets public
 open import graph-theory.directed-graphs public
+open import graph-theory.discrete-graphs public
 open import graph-theory.displayed-large-reflexive-graphs public
 open import graph-theory.edge-coloured-undirected-graphs public
 open import graph-theory.embeddings-directed-graphs public

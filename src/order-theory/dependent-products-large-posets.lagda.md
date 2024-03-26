@@ -42,7 +42,6 @@ module _
 
   leq-prop-Π-Large-Poset :
     Large-Relation-Prop
-      ( λ l1 → α l1 ⊔ l)
       ( λ l1 l2 → β l1 l2 ⊔ l)
       ( type-Π-Large-Poset)
   leq-prop-Π-Large-Poset =
@@ -50,7 +49,6 @@ module _
 
   leq-Π-Large-Poset :
     Large-Relation
-      ( λ l1 → α l1 ⊔ l)
       ( λ l1 l2 → β l1 l2 ⊔ l)
       ( type-Π-Large-Poset)
   leq-Π-Large-Poset =

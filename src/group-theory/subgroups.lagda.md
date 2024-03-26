@@ -18,7 +18,6 @@ open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.large-binary-relations
