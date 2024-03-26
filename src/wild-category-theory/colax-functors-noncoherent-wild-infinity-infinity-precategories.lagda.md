@@ -232,9 +232,11 @@ is-functor-id-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory :
     ( id-map-Noncoherent-Wild-⟨∞,∞⟩-Precategory 𝒜)
 is-functor-id-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory 𝒜 =
   λ where
-    .preserves-id-hom-is-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory x →
+    .preserves-id-hom-is-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+      x →
       id-2-hom-Noncoherent-Wild-⟨∞,∞⟩-Precategory 𝒜
-    .preserves-comp-hom-is-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory g f →
+    .preserves-comp-hom-is-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory
+      g f →
       id-2-hom-Noncoherent-Wild-⟨∞,∞⟩-Precategory 𝒜
     .is-functor-map-hom-Noncoherent-Wild-⟨∞,∞⟩-Precategory x y →
       is-functor-id-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory
