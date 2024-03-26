@@ -288,7 +288,8 @@ is-functor-comp-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory {𝒞 =
       ( preserves-id-hom-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory G
         ( obj-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory F x))
       ( 2-hom-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory G
-        ( preserves-id-hom-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory F x))
+        ( preserves-id-hom-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory F
+          ( x)))
   .preserves-comp-hom-is-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory g f →
     comp-2-hom-Noncoherent-Wild-⟨∞,∞⟩-Precategory 𝒞
       ( preserves-comp-hom-colax-functor-Noncoherent-Wild-⟨∞,∞⟩-Precategory G
