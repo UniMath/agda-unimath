@@ -27,6 +27,7 @@ open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
 open import synthetic-homotopy-theory.coforks
@@ -37,12 +38,13 @@ open import synthetic-homotopy-theory.dependent-cocones-under-spans
 
 ## Idea
 
-Given a parallel pair `f, g : A → B`, a
+Given a [double arrow](foundation.double-arrows.md) `f, g : A → B`, a
 [cofork](synthetic-homotopy-theory.coforks.md) `e : B → X` with vertex `X`, and
-a type family `P : X → 𝓤` over `X`, we may construct _dependent_ coforks on `P`
+a type family `P : X → 𝒰` over `X`, we may construct _dependent_ coforks on `P`
 over `e`.
 
-A **dependent cofork** on `P` over `e` consists of a dependent map
+A {{#concept "dependent cofork" Agda=dependent-cofork}} on `P` over `e` consists
+of a dependent map
 
 ```text
 k : (b : B) → P (e b)
@@ -58,7 +60,7 @@ and a family of
 
 Dependent coforks are an analogue of
 [dependent cocones under spans](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
-for parallel pairs.
+for double arrows.
 
 ## Definitions
 
@@ -77,8 +79,8 @@ module _
         (x : domain-double-arrow a) →
         dependent-identification P
           ( coh-cofork a e x)
-          ( k (bottom-map-double-arrow a x))
-          ( k (top-map-double-arrow a x)))
+          ( k (left-map-double-arrow a x))
+          ( k (right-map-double-arrow a x)))
 
 module _
   {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
@@ -93,8 +95,8 @@ module _
     (x : domain-double-arrow a) →
     dependent-identification P
       ( coh-cofork a e x)
-      ( map-dependent-cofork (bottom-map-double-arrow a x))
-      ( map-dependent-cofork (top-map-double-arrow a x))
+      ( map-dependent-cofork (left-map-double-arrow a x))
+      ( map-dependent-cofork (right-map-double-arrow a x))
   coherence-dependent-cofork = pr2 k
 ```
 
@@ -114,10 +116,9 @@ module _
     (K : map-dependent-cofork a P k ~ map-dependent-cofork a P k') →
     UU (l1 ⊔ l4)
   coherence-htpy-dependent-cofork k k' K =
-    (x : domain-double-arrow a) →
-    ( ( coherence-dependent-cofork a P k x) ∙ (K (top-map-double-arrow a x))) ＝
-    ( ( ap (tr P (coh-cofork a e x)) (K (bottom-map-double-arrow a x))) ∙
-      ( coherence-dependent-cofork a P k' x))
+    ( (coherence-dependent-cofork a P k) ∙h (K ·r right-map-double-arrow a)) ~
+    ( ( (λ {x} → tr P (coh-cofork a e x)) ·l (K ·r left-map-double-arrow a)) ∙h
+      ( coherence-dependent-cofork a P k'))
 
   htpy-dependent-cofork :
     (k k' : dependent-cofork a e P) →
@@ -198,7 +199,7 @@ module _
     map-inv-is-equiv (is-equiv-htpy-dependent-cofork-eq k k')
 ```
 
-### Dependent coforks on constant type families are equivalent to regular coforks
+### Dependent coforks on constant type families are equivalent to nondependent coforks
 
 ```agda
 module _
@@ -217,8 +218,8 @@ module _
               ( inv
                 ( tr-constant-type-family
                   ( coh-cofork a e x)
-                  ( h (bottom-map-double-arrow a x))))
-              ( h (top-map-double-arrow a x))))
+                  ( h (left-map-double-arrow a x))))
+              ( h (right-map-double-arrow a x))))
 
   map-compute-dependent-cofork-constant-family :
     dependent-cofork a e (λ _ → Y) → cofork a Y
@@ -299,7 +300,7 @@ module _
         ( cocone-codiagonal-cofork a e)
         ( P)
     pr1 (dependent-cocone-codiagonal-dependent-cofork k) =
-      map-dependent-cofork a P k ∘ bottom-map-double-arrow a
+      map-dependent-cofork a P k ∘ left-map-double-arrow a
     pr1 (pr2 (dependent-cocone-codiagonal-dependent-cofork k)) =
       map-dependent-cofork a P k
     pr2 (pr2 (dependent-cocone-codiagonal-dependent-cofork k)) (inl a) =

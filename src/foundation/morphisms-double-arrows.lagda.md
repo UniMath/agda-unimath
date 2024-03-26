@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.double-arrows
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.morphisms-arrows
 open import foundation.universe-levels
 ```
 
@@ -20,7 +21,28 @@ open import foundation.universe-levels
 
 ## Idea
 
-TODO
+A {{#concept "morphism of double arrows" Agda=hom-double-arrow}} from a
+[double arrow](foundation.double-arrows.md) `f, g : A → B` to a double arrow
+`h, k : X → Y` is a pair of maps `i : A → X` and `j : B → Y`, such that the two
+squares in
+
+```text
+           i
+     A --------> X
+    | |         | |
+  f | | g     h | | k
+    | |         | |
+    ∨ ∨         ∨ ∨
+     B --------> Y
+           j
+```
+
+[commute](foundation-core.commuting-squares-of-maps.md). The map `i` is referred
+to as the _domain map_, and the `j` as the _codomain map_.
+
+Alternatively, a morphism of double arrows is a pair of
+[morphisms of arrows](foundation.morphisms-arrows.md) `f → h` and `g → k` that
+share the underlying maps.
 
 ## Definitions
 
@@ -31,27 +53,27 @@ module _
   {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) (a' : double-arrow l3 l4)
   where
 
-  bottom-coherence-hom-double-arrow :
+  left-coherence-hom-double-arrow :
     (domain-double-arrow a → domain-double-arrow a') →
     (codomain-double-arrow a → codomain-double-arrow a') →
     UU (l1 ⊔ l4)
-  bottom-coherence-hom-double-arrow hA hB =
-    coherence-square-maps'
-      ( bottom-map-double-arrow a)
+  left-coherence-hom-double-arrow hA hB =
+    coherence-square-maps
       ( hA)
+      ( left-map-double-arrow a)
+      ( left-map-double-arrow a')
       ( hB)
-      ( bottom-map-double-arrow a')
 
-  top-coherence-hom-double-arrow :
+  right-coherence-hom-double-arrow :
     (domain-double-arrow a → domain-double-arrow a') →
     (codomain-double-arrow a → codomain-double-arrow a') →
     UU (l1 ⊔ l4)
-  top-coherence-hom-double-arrow hA hB =
-    coherence-square-maps'
-      ( top-map-double-arrow a)
+  right-coherence-hom-double-arrow hA hB =
+    coherence-square-maps
       ( hA)
+      ( right-map-double-arrow a)
+      ( right-map-double-arrow a')
       ( hB)
-      ( top-map-double-arrow a')
 
   hom-double-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-double-arrow =
@@ -59,8 +81,8 @@ module _
       ( λ hA →
         Σ ( codomain-double-arrow a → codomain-double-arrow a')
           ( λ hB →
-            bottom-coherence-hom-double-arrow hA hB ×
-            top-coherence-hom-double-arrow hA hB))
+            left-coherence-hom-double-arrow hA hB ×
+            right-coherence-hom-double-arrow hA hB))
 ```
 
 ### Components of a morphism of double arrows
@@ -78,17 +100,35 @@ module _
     codomain-double-arrow a → codomain-double-arrow a'
   codomain-map-hom-double-arrow = pr1 (pr2 h)
 
-  bottom-coherence-square-hom-double-arrow :
-    bottom-coherence-hom-double-arrow a a'
+  left-square-hom-double-arrow :
+    left-coherence-hom-double-arrow a a'
       ( domain-map-hom-double-arrow)
       ( codomain-map-hom-double-arrow)
-  bottom-coherence-square-hom-double-arrow = pr1 (pr2 (pr2 h))
+  left-square-hom-double-arrow = pr1 (pr2 (pr2 h))
 
-  top-coherence-square-hom-double-arrow :
-    top-coherence-hom-double-arrow a a'
+  left-hom-arrow-hom-double-arrow :
+    hom-arrow (left-map-double-arrow a) (left-map-double-arrow a')
+  pr1 left-hom-arrow-hom-double-arrow =
+    domain-map-hom-double-arrow
+  pr1 (pr2 left-hom-arrow-hom-double-arrow) =
+    codomain-map-hom-double-arrow
+  pr2 (pr2 left-hom-arrow-hom-double-arrow) =
+    left-square-hom-double-arrow
+
+  right-square-hom-double-arrow :
+    right-coherence-hom-double-arrow a a'
       ( domain-map-hom-double-arrow)
       ( codomain-map-hom-double-arrow)
-  top-coherence-square-hom-double-arrow = pr2 (pr2 (pr2 h))
+  right-square-hom-double-arrow = pr2 (pr2 (pr2 h))
+
+  right-hom-arrow-hom-double-arrow :
+    hom-arrow (right-map-double-arrow a) (right-map-double-arrow a')
+  pr1 right-hom-arrow-hom-double-arrow =
+    domain-map-hom-double-arrow
+  pr1 (pr2 right-hom-arrow-hom-double-arrow) =
+    codomain-map-hom-double-arrow
+  pr2 (pr2 right-hom-arrow-hom-double-arrow) =
+    right-square-hom-double-arrow
 ```
 
 ### The identity morphism of double arrows
@@ -123,37 +163,29 @@ module _
   codomain-map-comp-hom-double-arrow =
     codomain-map-hom-double-arrow b c g ∘ codomain-map-hom-double-arrow a b f
 
-  bottom-coherence-square-comp-hom-double-arrow :
-    bottom-coherence-hom-double-arrow a c
+  left-square-comp-hom-double-arrow :
+    left-coherence-hom-double-arrow a c
       ( domain-map-comp-hom-double-arrow)
       ( codomain-map-comp-hom-double-arrow)
-  bottom-coherence-square-comp-hom-double-arrow =
-    pasting-horizontal-coherence-square-maps
-      ( domain-map-hom-double-arrow a b f)
-      ( domain-map-hom-double-arrow b c g)
-      ( bottom-map-double-arrow a)
-      ( bottom-map-double-arrow b)
-      ( bottom-map-double-arrow c)
-      ( codomain-map-hom-double-arrow a b f)
-      ( codomain-map-hom-double-arrow b c g)
-      ( bottom-coherence-square-hom-double-arrow a b f)
-      ( bottom-coherence-square-hom-double-arrow b c g)
+  left-square-comp-hom-double-arrow =
+    coh-comp-hom-arrow
+      ( left-map-double-arrow a)
+      ( left-map-double-arrow b)
+      ( left-map-double-arrow c)
+      ( left-hom-arrow-hom-double-arrow b c g)
+      ( left-hom-arrow-hom-double-arrow a b f)
 
-  top-coherence-square-comp-hom-double-arrow :
-    top-coherence-hom-double-arrow a c
+  right-square-comp-hom-double-arrow :
+    right-coherence-hom-double-arrow a c
       ( domain-map-comp-hom-double-arrow)
       ( codomain-map-comp-hom-double-arrow)
-  top-coherence-square-comp-hom-double-arrow =
-    pasting-horizontal-coherence-square-maps
-      ( domain-map-hom-double-arrow a b f)
-      ( domain-map-hom-double-arrow b c g)
-      ( top-map-double-arrow a)
-      ( top-map-double-arrow b)
-      ( top-map-double-arrow c)
-      ( codomain-map-hom-double-arrow a b f)
-      ( codomain-map-hom-double-arrow b c g)
-      ( top-coherence-square-hom-double-arrow a b f)
-      ( top-coherence-square-hom-double-arrow b c g)
+  right-square-comp-hom-double-arrow =
+    coh-comp-hom-arrow
+      ( right-map-double-arrow a)
+      ( right-map-double-arrow b)
+      ( right-map-double-arrow c)
+      ( right-hom-arrow-hom-double-arrow b c g)
+      ( right-hom-arrow-hom-double-arrow a b f)
 
   comp-hom-double-arrow : hom-double-arrow a c
   pr1 comp-hom-double-arrow =
@@ -161,7 +193,7 @@ module _
   pr1 (pr2 comp-hom-double-arrow) =
     codomain-map-comp-hom-double-arrow
   pr1 (pr2 (pr2 comp-hom-double-arrow)) =
-    bottom-coherence-square-comp-hom-double-arrow
+    left-square-comp-hom-double-arrow
   pr2 (pr2 (pr2 comp-hom-double-arrow)) =
-    top-coherence-square-comp-hom-double-arrow
+    right-square-comp-hom-double-arrow
 ```

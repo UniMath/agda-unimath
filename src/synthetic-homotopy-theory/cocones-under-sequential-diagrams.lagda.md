@@ -336,13 +336,13 @@ module _
   { l1 : Level} (A : sequential-diagram l1)
   where
 
-  bottom-map-cofork-cocone-sequential-diagram :
+  left-map-cofork-cocone-sequential-diagram :
     Σ ℕ (family-sequential-diagram A) → Σ ℕ (family-sequential-diagram A)
-  bottom-map-cofork-cocone-sequential-diagram = id
+  left-map-cofork-cocone-sequential-diagram = id
 
-  top-map-cofork-cocone-sequential-diagram :
+  right-map-cofork-cocone-sequential-diagram :
     Σ ℕ (family-sequential-diagram A) → Σ ℕ (family-sequential-diagram A)
-  top-map-cofork-cocone-sequential-diagram =
+  right-map-cofork-cocone-sequential-diagram =
     map-Σ
       ( family-sequential-diagram A)
       ( succ-ℕ)
@@ -351,8 +351,8 @@ module _
   double-arrow-sequential-diagram : double-arrow l1 l1
   double-arrow-sequential-diagram =
     make-double-arrow
-      ( bottom-map-cofork-cocone-sequential-diagram)
-      ( top-map-cofork-cocone-sequential-diagram)
+      ( left-map-cofork-cocone-sequential-diagram)
+      ( right-map-cofork-cocone-sequential-diagram)
 
   module _
     { l2 : Level} {X : UU l2}

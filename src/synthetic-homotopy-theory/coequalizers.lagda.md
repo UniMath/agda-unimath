@@ -24,16 +24,17 @@ open import synthetic-homotopy-theory.universal-property-coequalizers
 
 ## Idea
 
-The **coequalizer** of a parallel pair `f, g : A → B` is the colimiting
-[cofork](synthetic-homotopy-theory.coforks.md), i.e. a cofork with the
+The **coequalizer** of a [double arrow](foundation.double-arrows.md)
+`f, g : A → B` is the colimiting [cofork](synthetic-homotopy-theory.coforks.md),
+i.e. a cofork with the
 [universal property of coequalizers](synthetic-homotopy-theory.universal-property-coequalizers.md).
 
 ## Properties
 
-### All parallel pairs admit a coequalizer
+### All double arrows admit a coequalizer
 
-The **canonical coequalizer** may be obtained as a
-[pushout](synthetic-homotopy-theory.pushouts.md) of the span
+The {{#concept "canonical coequalizer" Agda=canonical-coequalizer}} may be
+obtained as a [pushout](synthetic-homotopy-theory.pushouts.md) of the span
 
 ```text
      ∇         [f,g]

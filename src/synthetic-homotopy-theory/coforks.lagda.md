@@ -55,7 +55,7 @@ which looks like a fork if you flip the arrows, hence a cofork.
 
 Coforks are an analogue of
 [cocones under spans](synthetic-homotopy-theory.cocones-under-spans.md) for
-parallel pairs. The universal cofork of a pair is their
+double arrows. The universal cofork of a double arrow is their
 [coequalizer](synthetic-homotopy-theory.coequalizers.md).
 
 ## Definitions
@@ -69,8 +69,8 @@ module _
 
   coherence-cofork : {X : UU l3} → (codomain-double-arrow a → X) → UU (l1 ⊔ l3)
   coherence-cofork e =
-    e ∘ bottom-map-double-arrow a ~
-    e ∘ top-map-double-arrow a
+    e ∘ left-map-double-arrow a ~
+    e ∘ right-map-double-arrow a
 
   cofork : UU l3 → UU (l1 ⊔ l2 ⊔ l3)
   cofork X =
@@ -103,8 +103,8 @@ module _
     (K : map-cofork a e ~ map-cofork a e') →
     UU (l1 ⊔ l3)
   coherence-htpy-cofork e e' K =
-    ( (coh-cofork a e) ∙h (K ·r top-map-double-arrow a)) ~
-    ( (K ·r bottom-map-double-arrow a) ∙h (coh-cofork a e'))
+    ( (coh-cofork a e) ∙h (K ·r right-map-double-arrow a)) ~
+    ( (K ·r left-map-double-arrow a) ∙h (coh-cofork a e'))
 
   htpy-cofork : cofork a X → cofork a X → UU (l1 ⊔ l2 ⊔ l3)
   htpy-cofork e e' =
@@ -223,8 +223,8 @@ module _
 
 ### Coforks are special cases of cocones under spans
 
-The type of coforks of parallel pairs is equivalent to the type of
-[cocones](synthetic-homotopy-theory.cocones-under-spans.md) under the span
+The type of coforks of a double arrow `f, g : A → B` is equivalent to the type
+of [cocones](synthetic-homotopy-theory.cocones-under-spans.md) under the span
 
 ```text
      ∇         [f,g]
@@ -242,8 +242,8 @@ module _
 
   horizontal-map-span-cocone-cofork :
     domain-double-arrow a + domain-double-arrow a → codomain-double-arrow a
-  horizontal-map-span-cocone-cofork (inl x) = bottom-map-double-arrow a x
-  horizontal-map-span-cocone-cofork (inr x) = top-map-double-arrow a x
+  horizontal-map-span-cocone-cofork (inl x) = left-map-double-arrow a x
+  horizontal-map-span-cocone-cofork (inr x) = right-map-double-arrow a x
 
   span-diagram-cofork : span-diagram l1 l2 l1
   span-diagram-cofork =
@@ -252,7 +252,7 @@ module _
       ( horizontal-map-span-cocone-cofork)
 
   module _
-    { l3 : Level} {X : UU l3}
+    {l3 : Level} {X : UU l3}
     where
 
     cofork-cocone-codiagonal :
@@ -280,13 +280,13 @@ module _
         ( inr))
 
     horizontal-map-cocone-cofork : cofork a X → domain-double-arrow a → X
-    horizontal-map-cocone-cofork e = map-cofork a e ∘ bottom-map-double-arrow a
+    horizontal-map-cocone-cofork e = map-cofork a e ∘ left-map-double-arrow a
 
     vertical-map-cocone-cofork : cofork a X → codomain-double-arrow a → X
     vertical-map-cocone-cofork e = map-cofork a e
 
     coherence-square-cocone-cofork :
-      ( e : cofork a X) →
+      (e : cofork a X) →
       coherence-square-maps
         ( horizontal-map-span-cocone-cofork)
         ( vertical-map-span-cocone-cofork)
@@ -356,8 +356,8 @@ module _
     pr2 equiv-cocone-codiagonal-cofork = is-equiv-cofork-cocone-codiagonal
 
   triangle-cofork-cocone :
-    { l3 l4 : Level} {X : UU l3} {Y : UU l4} →
-    ( e : cofork a X) →
+    {l3 l4 : Level} {X : UU l3} {Y : UU l4} →
+    (e : cofork a X) →
     coherence-triangle-maps
       ( cofork-map a e {Y = Y})
       ( cofork-cocone-codiagonal)
@@ -378,12 +378,37 @@ module _
         right-unit-htpy)
 ```
 
-### Morphisms between double arrows create morphisms between cofork span diagrams
+### Morphisms between double arrows induce morphisms between cofork span diagrams
+
+A [morphism of double arrows](foundation.morphisms-double-arrows.md)
+
+```text
+           i
+     A --------> X
+    | |         | |
+  f | | g     h | | k
+    | |         | |
+    ∨ ∨         ∨ ∨
+     B --------> Y
+           j
+```
+
+induces a [morphism of span diagrams](foundation.morphisms-span-diagrams.md)
+
+```text
+         ∇            [f,g]
+    A <------- A + A -------> B
+    |            |            |
+  i |            | i + i      | j
+    V            V            V
+    X <------- X + X -------> Y
+         ∇            [h,k]
+```
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) (a' : double-arrow l3 l4)
-  ( h : hom-double-arrow a a')
+  (h : hom-double-arrow a a')
   where
 
   spanning-map-hom-span-diagram-cofork-hom-double-arrow :
@@ -411,8 +436,8 @@ module _
       ( horizontal-map-span-cocone-cofork a')
   right-square-hom-span-diagram-cofork-hom-double-arrow =
     ind-coproduct _
-      ( bottom-coherence-square-hom-double-arrow a a' h)
-      ( top-coherence-square-hom-double-arrow a a' h)
+      ( left-square-hom-double-arrow a a' h)
+      ( right-square-hom-double-arrow a a' h)
 
   hom-span-diagram-cofork-hom-double-arrow :
     hom-span-diagram
@@ -430,7 +455,33 @@ module _
     right-square-hom-span-diagram-cofork-hom-double-arrow
 ```
 
-### Equivalences between double arrows create equivalences between cofork span diagrams
+### Equivalences between double arrows induce equivalences between cofork span diagrams
+
+An [equivalence of double arrows](foundation.equivalences-double-arrows.md)
+
+```text
+           i
+     A --------> X
+    | |    ≃    | |
+  f | | g     h | | k
+    | |         | |
+    ∨ ∨    ≃    ∨ ∨
+     B --------> Y
+           j
+```
+
+induces an
+[equivalence of span diagrams](foundation.equivalences-span-diagrams.md)
+
+```text
+         ∇            [f,g]
+    A <------- A + A -------> B
+    |            |            |
+  i | ≃        ≃ | i + i    ≃ | j
+    V            V            V
+    X <------- X + X -------> Y
+         ∇            [h,k]
+```
 
 ```agda
 module _
@@ -446,6 +497,26 @@ module _
       ( domain-equiv-equiv-double-arrow a a' e)
       ( domain-equiv-equiv-double-arrow a a' e)
 
+  left-square-equiv-span-diagram-cofork-equiv-double-arrow :
+    coherence-square-maps'
+      ( vertical-map-span-cocone-cofork a)
+      ( map-equiv spanning-equiv-equiv-span-diagram-cofork-equiv-double-arrow)
+      ( domain-map-equiv-double-arrow a a' e)
+      ( vertical-map-span-cocone-cofork a')
+  left-square-equiv-span-diagram-cofork-equiv-double-arrow =
+    ind-coproduct _ refl-htpy refl-htpy
+
+  right-square-equiv-span-diagram-cofork-equiv-double-arrow :
+    coherence-square-maps'
+      ( horizontal-map-span-cocone-cofork a)
+      ( map-equiv spanning-equiv-equiv-span-diagram-cofork-equiv-double-arrow)
+      ( codomain-map-equiv-double-arrow a a' e)
+      ( horizontal-map-span-cocone-cofork a')
+  right-square-equiv-span-diagram-cofork-equiv-double-arrow =
+    ind-coproduct _
+      ( left-square-equiv-double-arrow a a' e)
+      ( right-square-equiv-double-arrow a a' e)
+
   equiv-span-diagram-cofork-equiv-double-arrow :
     equiv-span-diagram
       ( span-diagram-cofork a)
@@ -457,9 +528,7 @@ module _
   pr1 (pr2 (pr2 (equiv-span-diagram-cofork-equiv-double-arrow))) =
     spanning-equiv-equiv-span-diagram-cofork-equiv-double-arrow
   pr1 (pr2 (pr2 (pr2 (equiv-span-diagram-cofork-equiv-double-arrow)))) =
-    ind-coproduct _ refl-htpy refl-htpy
+    left-square-equiv-span-diagram-cofork-equiv-double-arrow
   pr2 (pr2 (pr2 (pr2 (equiv-span-diagram-cofork-equiv-double-arrow)))) =
-    ind-coproduct _
-      ( bottom-coherence-square-equiv-double-arrow a a' e)
-      ( top-coherence-square-equiv-double-arrow a a' e)
+    right-square-equiv-span-diagram-cofork-equiv-double-arrow
 ```
