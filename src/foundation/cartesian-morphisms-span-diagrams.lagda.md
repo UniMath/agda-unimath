@@ -23,7 +23,7 @@ open import foundation.universe-levels
 
 A [morphism](foundation.morphisms-span-diagrams.md) `α : 𝒮 → 𝒯` of
 [span diagrams](foundation.span-diagrams.md) is said to be
-{{#concept "cartesian" Disambiguation="morphism of span diagrams"}} if the two
+{{#concept "cartesian" Disambiguation="morphism of span diagrams" Agda=is-cartesian-hom-span-diagram}} if the two
 squares in the diagram
 
 ```text
