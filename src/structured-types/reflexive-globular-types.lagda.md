@@ -32,7 +32,7 @@ if every $n$-cell `x` comes with a choice of $(n+1)$-cell from `x` to `x`.
 ```agda
 record
   is-reflexive-globular-structure
-  {l : Level} {A : UU l} (G : globular-structure A) : UU l
+  {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A) : UU (l1 ⊔ l2)
   where
   coinductive
   field
@@ -46,7 +46,7 @@ record
 open is-reflexive-globular-structure public
 
 module _
-  {l : Level} {A : UU l} {G : globular-structure A}
+  {l1 l2 : Level} {A : UU l1} {G : globular-structure l2 A}
   (r : is-reflexive-globular-structure G)
   where
 
@@ -65,14 +65,40 @@ module _
         ( x)
         ( y))
       ( f)
+
+  is-reflexive-globular-structure-2-cell-is-reflexive-globular-structure :
+    {x y : A}
+    (f g : 1-cell-globular-structure G x y) →
+    is-reflexive-globular-structure
+      ( globular-structure-2-cell-globular-structure G f g)
+  is-reflexive-globular-structure-2-cell-is-reflexive-globular-structure
+    { x} {y} =
+    is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+      ( is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+        ( r)
+        ( x)
+        ( y))
+
+  refl-3-cell-is-reflexive-globular-structure :
+    {x y : A}
+    {f g : 1-cell-globular-structure G x y}
+    {H : 2-cell-globular-structure G f g} →
+    3-cell-globular-structure G H H
+  refl-3-cell-is-reflexive-globular-structure {x} {y} {f} {g} {H} =
+    is-reflexive-1-cell-is-reflexive-globular-structure
+      ( is-reflexive-globular-structure-2-cell-is-reflexive-globular-structure
+        ( f)
+        ( g))
+      ( H)
 ```
 
 ### The type of reflexive globular structures
 
 ```agda
-reflexive-globular-structure : {l : Level} (A : UU l) → UU (lsuc l)
-reflexive-globular-structure A =
-  Σ (globular-structure A) (is-reflexive-globular-structure)
+reflexive-globular-structure :
+  {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
+reflexive-globular-structure l2 A =
+  Σ (globular-structure l2 A) (is-reflexive-globular-structure)
 ```
 
 ## Examples

@@ -39,7 +39,7 @@ at every level $n$.
 ```agda
 record
   is-transitive-globular-structure
-  {l : Level} {A : UU l} (G : globular-structure A) : UU l
+  {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A) : UU (l1 ⊔ l2)
   where
   coinductive
   field
@@ -57,7 +57,7 @@ record
 open is-transitive-globular-structure public
 
 module _
-  {l : Level} {A : UU l} {G : globular-structure A}
+  {l1 l2 : Level} {A : UU l1} {G : globular-structure l2 A}
   (r : is-transitive-globular-structure G)
   where
 
@@ -72,21 +72,46 @@ module _
         ( r)
         ( x)
         ( y))
+
+  is-transitive-globular-structure-2-cell-is-transitive-globular-structure :
+    {x y : A} (f g : 1-cell-globular-structure G x y) →
+    is-transitive-globular-structure
+      ( globular-structure-2-cell-globular-structure G f g)
+  is-transitive-globular-structure-2-cell-is-transitive-globular-structure
+    { x} {y} =
+    is-transitive-globular-structure-1-cell-is-transitive-globular-structure
+      ( is-transitive-globular-structure-1-cell-is-transitive-globular-structure
+        ( r)
+        ( x)
+        ( y))
+
+  comp-3-cell-is-transitive-globular-structure :
+    {x y : A} {f g : 1-cell-globular-structure G x y}
+    {H K L : 2-cell-globular-structure G f g} →
+    3-cell-globular-structure G K L →
+    3-cell-globular-structure G H K →
+    3-cell-globular-structure G H L
+  comp-3-cell-is-transitive-globular-structure {x} {y} {f} {g} =
+    comp-1-cell-is-transitive-globular-structure
+      ( is-transitive-globular-structure-2-cell-is-transitive-globular-structure
+        ( f)
+        ( g))
 ```
 
 ### The type of transitive globular structures on a type
 
 ```agda
-transitive-globular-structure : {l : Level} (A : UU l) → UU (lsuc l)
-transitive-globular-structure A =
-  Σ (globular-structure A) (is-transitive-globular-structure)
+transitive-globular-structure :
+  {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
+transitive-globular-structure l2 A =
+  Σ (globular-structure l2 A) (is-transitive-globular-structure)
 ```
 
 ### The type of transitive globular types
 
 ```agda
-Transitive-Globular-Type : (l : Level) → UU (lsuc l)
-Transitive-Globular-Type l = Σ (UU l) (transitive-globular-structure)
+Transitive-Globular-Type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Transitive-Globular-Type l1 l2 = Σ (UU l1) (transitive-globular-structure l2)
 ```
 
 ## Examples
@@ -107,7 +132,7 @@ is-transitive-globular-structure-Id A =
     is-transitive-globular-structure-Id (x ＝ y)
 
 transitive-globular-structure-Id :
-  {l : Level} (A : UU l) → transitive-globular-structure A
+  {l : Level} (A : UU l) → transitive-globular-structure l A
 transitive-globular-structure-Id A =
   ( globular-structure-Id A , is-transitive-globular-structure-Id A)
 ```
