@@ -108,7 +108,7 @@ decidable-subtype-positive-ℤ x =
     is-decidable-is-positive-ℤ x)
 ```
 
-### The positive integers are a `Set`
+### The positive integers form a set
 
 ```agda
 is-set-positive-ℤ : is-set positive-ℤ
