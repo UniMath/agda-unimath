@@ -39,10 +39,8 @@ open import order-theory.preorders
 
 ## Idea
 
-The {{#concept "ordering" Disambiguation="rational numbers" Agda=leq-ℚ}} of two
-rational numbers is given by the ordering of their underlying integer fractions
-as defined in
-[`inequality-integer-fractions`](elementary-number-theory.inequality-integer-fractions.md).
+The {{#concept "standard ordering" Disambiguation="rational numbers" Agda=leq-ℚ}} on the
+[rational numbers](elementary-number-theory.rational-numbers.md) is inherited from the [standard ordering](elementary-number-theory.inequality-integer-fractions.md) on [integer fractions](elementary-number-theory.integer-fractions.md): the rational number `m / n` is _less than or equal to_ `m' / n'` if the [integer product](elementary-number-theory.multiplication-integers.md) `m * n'` is [less than or equal](elementary-number-theory.inequality-integers.md) to `m' * n`.
 
 ## Definition
 
@@ -103,7 +101,7 @@ antisymmetric-leq-ℚ x y H H' =
   ( in-fraction-fraction-ℚ y)
 ```
 
-### The ordering of the rational numbers is linear
+### The standard ordering on rational numbers is linear
 
 ```agda
 linear-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + (leq-ℚ y x)
@@ -133,7 +131,7 @@ module _
       ( fraction-ℚ z)
 ```
 
-### The partially ordered set of rational numbers
+### The partially ordered set of rational numbers given by the standard ordering
 
 ```agda
 ℚ-Preorder : Preorder lzero lzero
