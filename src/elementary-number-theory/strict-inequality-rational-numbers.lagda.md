@@ -228,7 +228,7 @@ trichotomy-le-ℚ x y left eq right with decide-le-leq-ℚ x y | decide-le-leq-�
 ... | inr I | inr I' = eq (antisymmetric-leq-ℚ x y I' I)
 ```
 
-### The mediant of two rationals is between them
+### The mediant of two distinct rationals is strictly between them
 
 ```agda
 module _
