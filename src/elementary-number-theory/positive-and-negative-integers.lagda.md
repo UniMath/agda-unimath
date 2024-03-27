@@ -34,7 +34,7 @@ nonnegative, and positive integers.
 
 ## Properties
 
-### The only nonnegative and nonpositive integer is `zero-ℤ`
+### The only nonnegative and nonpositive integer is zero
 
 ```agda
 is-zero-is-nonnegative-is-nonpositive-ℤ :
