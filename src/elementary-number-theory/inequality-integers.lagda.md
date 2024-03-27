@@ -45,7 +45,7 @@ An [integer](elementary-number-theory.integers.md) `x` is _less than or equal_ t
 
 ## Definition
 
-### The ordering on ℤ
+### The standard ordering on ℤ
 
 ```agda
 leq-ℤ-Prop : ℤ → ℤ → Prop lzero
@@ -141,7 +141,7 @@ concatenate-eq-leq-ℤ :
 concatenate-eq-leq-ℤ y refl H = H
 ```
 
-### ℤ is an ordered ring
+### Addition on ℤ preserves and reflects inequality
 
 ```agda
 preserves-leq-left-add-ℤ :
@@ -191,7 +191,7 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
   ( leq-int-ℕ x y H)
 ```
 
-### The partially ordered Set of integers
+### The partially ordered set of integers ordered by inequality
 
 ```agda
 ℤ-Preorder : Preorder lzero lzero

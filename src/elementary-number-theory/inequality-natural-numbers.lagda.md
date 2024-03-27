@@ -287,7 +287,7 @@ contradiction-leq-ℕ' : (m n : ℕ) → (succ-ℕ n) ≤-ℕ m → ¬ (m ≤-�
 contradiction-leq-ℕ' m n K H = contradiction-leq-ℕ m n H K
 ```
 
-### Addition preserves inequality
+### Addition preserves inequality of natural numbers
 
 ```agda
 preserves-leq-left-add-ℕ :
@@ -313,7 +313,7 @@ preserves-leq-add-ℕ {m} {m'} {n} {n'} H K =
     ( preserves-leq-left-add-ℕ n m m' H)
 ```
 
-### Addition reflects the ordering on ℕ
+### Addition reflects inequality of natural numbers
 
 ```agda
 reflects-leq-left-add-ℕ :
@@ -400,7 +400,7 @@ preserves-leq-mul-ℕ m m' n n' H K =
     ( preserves-leq-left-mul-ℕ n m m' H)
 ```
 
-### Multiplication by a nonzero element reflects the ordering on ℕ
+### Multiplication by a nonzero element reflects inequality of natural numbers
 
 ```agda
 reflects-order-mul-ℕ :
