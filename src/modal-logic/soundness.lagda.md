@@ -56,10 +56,10 @@ module _
   soundness-axioms :
     soundness axioms C → {a : formula i} → axioms ⊢ a → type-Prop (C ⊨C a)
   soundness-axioms H (ax x) = H _ x
-  soundness-axioms H (mp dab da) w M in-class x =
-    soundness-axioms H dab w M in-class x (soundness-axioms H da w M in-class x)
-  soundness-axioms H (nec d) w M in-class _ y _ =
-    soundness-axioms H d w M in-class y
+  soundness-axioms H (mp dab da) M in-class x =
+    soundness-axioms H dab M in-class x (soundness-axioms H da M in-class x)
+  soundness-axioms H (nec d) M in-class _ y _ =
+    soundness-axioms H d M in-class y
 
   soundness-modal-logic : soundness axioms C → soundness (modal-logic axioms) C
   soundness-modal-logic H a =
@@ -87,24 +87,23 @@ module _
   where
 
   forces-in-intersection :
-    (w : UU l4)
-    (M : kripke-model w l5 i l6) →
-    is-in-subtype (intersection-subtype C₁ C₂) (w , M) →
+    (M : kripke-model l4 l5 i l6) →
+    is-in-subtype (intersection-subtype C₁ C₂) M →
     (a : formula i) →
     is-in-subtype ax₁ a + is-in-subtype ax₂ a →
     type-Prop (M ⊨M a)
-  forces-in-intersection w M in-class a (inl d) =
-    sound₁ a d w M (subtype-intersection-left C₁ C₂ (w , M) in-class)
-  forces-in-intersection w M in-class a (inr d) =
-    sound₂ a d w M (subtype-intersection-right C₁ C₂ (w , M) in-class)
+  forces-in-intersection M in-class a (inl d) =
+    sound₁ a d M (subtype-intersection-left C₁ C₂ M in-class)
+  forces-in-intersection M in-class a (inr d) =
+    sound₂ a d M (subtype-intersection-right C₁ C₂ M in-class)
 
   soundness-union :
     soundness (union-subtype ax₁ ax₂) (intersection-subtype C₁ C₂)
-  soundness-union a is-ax w M in-class =
+  soundness-union a is-ax M in-class =
     apply-universal-property-trunc-Prop
       ( is-ax)
       ( M ⊨M a)
-      ( forces-in-intersection w M in-class a)
+      ( forces-in-intersection M in-class a)
 
   soundness-modal-logic-union :
     soundness (modal-logic (union-subtype ax₁ ax₂)) (intersection-subtype C₁ C₂)
@@ -115,6 +114,32 @@ module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
   {i : Set l1} (ax₁ : formulas l2 i) (ax₂ : formulas l3 i)
   where
+
+  soundness-union-subclass-left-sublevels :
+    (l8 : Level)
+    (C₁ : model-class l4 l5 i l6 (l7 ⊔ l8)) (C₂ : model-class l4 l5 i l6 l7)
+    (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
+    C₁ ⊆ C₂ →
+    soundness (union-subtype ax₁ ax₂) C₁
+  soundness-union-subclass-left-sublevels
+    l8 C₁ C₂ sound₁ sound₂ C₁-sub-C₂ =
+      tr
+        ( soundness (union-subtype ax₁ ax₂))
+        ( intersection-subtype-left-sublevels l8 C₁ C₂ C₁-sub-C₂)
+        ( soundness-union ax₁ ax₂ C₁ C₂ sound₁ sound₂)
+
+  soundness-union-subclass-right-sublevels :
+    (l8 : Level)
+    (C₁ : model-class l4 l5 i l6 l7) (C₂ : model-class l4 l5 i l6 (l7 ⊔ l8))
+    (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
+    C₂ ⊆ C₁ →
+    soundness (union-subtype ax₁ ax₂) C₂
+  soundness-union-subclass-right-sublevels
+    l8 C₁ C₂ sound₁ sound₂ C₂-sub-C₁ =
+      tr
+        ( soundness (union-subtype ax₁ ax₂))
+        ( intersection-subtype-right-sublevels l8 C₁ C₂ C₂-sub-C₁)
+        ( soundness-union ax₁ ax₂ C₁ C₂ sound₁ sound₂)
 
   soundness-modal-logic-union-subclass-left-sublevels :
     (l8 : Level)

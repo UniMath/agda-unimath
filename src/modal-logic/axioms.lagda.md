@@ -138,25 +138,48 @@ module _
   where
 
   ax-k-soundness : soundness (ax-k i) (all-models l2 l3 i l4)
-  ax-k-soundness (a →ₘ b →ₘ a) (_ , _ , refl) w M _ x fa _ = fa
+  ax-k-soundness (a →ₘ b →ₘ a) (_ , _ , refl) M _ x fa _ = fa
 
   ax-n-soundness : soundness (ax-n i) (all-models l2 l3 i l4)
   ax-n-soundness
     (□ (a →ₘ b) →ₘ □ a →ₘ □ b)
     (_ , _ , refl)
-    w M in-class x fab fa y r =
+    M in-class x fab fa y r =
       fab y r (fa y r)
 
   ax-s-soundness : soundness (ax-s i) (all-models l2 l3 i l4)
   ax-s-soundness
     ((a →ₘ b →ₘ c) →ₘ (a →ₘ b) →ₘ a →ₘ c)
     (_ , _ , _ , refl)
-    w M in-class x fabc fab fa =
+    M in-class x fabc fab fa =
       fabc fa (fab fa)
 
   ax-dn-soundness : soundness (ax-dn i) (decidable-models l2 l3 i l4)
-  ax-dn-soundness .(~~ a →ₘ a) (a , refl) w M is-dec x f
+  ax-dn-soundness .(~~ a →ₘ a) (a , refl) M is-dec x f
     with (is-dec a x)
   ... | inl fa = fa
   ... | inr fna = raise-ex-falso _ (f (λ fa -> map-raise (fna fa)))
+
+  ax-m-soundness : soundness (ax-m i) (reflexive-class l2 l3 i l4)
+  ax-m-soundness (□ a →ₘ a) (_ , refl) M is-refl x fa = fa x (is-refl x)
+
+  ax-b-soundness : soundness (ax-b i) (symmetry-class l2 l3 i l4)
+  ax-b-soundness .(a →ₘ □ ◇ a) (a , refl) M is-sym x fa y r contra =
+    contra x (is-sym x y r) fa
+
+  ax-d-soundness : soundness (ax-d i) (serial-class l2 l3 i l4)
+  ax-d-soundness .(□ a →ₘ ◇ a) (a , refl) M is-serial x fa contra =
+    map-raise
+      ( apply-universal-property-trunc-Prop
+        ( is-serial x)
+        ( empty-Prop)
+        ( λ (y , r) → map-inv-raise (contra y r (fa y r))))
+
+  ax-4-soundness : soundness (ax-4 i) (transitivity-class l2 l3 i l4)
+  ax-4-soundness .(□ a →ₘ □ □ a) (a , refl) M is-trans x fa y r-xy z r-yz =
+    fa z (is-trans x y z r-yz r-xy)
+
+  ax-5-sooundness : soundness (ax-5 i) (euclidean-class l2 l3 i l4)
+  ax-5-sooundness .(◇ a →ₘ □ ◇ a) (a , refl) M is-eucl x fa y r-xy contra =
+    fa (λ z r-xz → contra z (is-eucl x y z r-xy r-xz))
 ```

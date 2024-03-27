@@ -693,8 +693,9 @@ module _
       ( λ x → unit-trunc-Prop ((pr1 (pr1 x)) , ((pr2 (pr1 x)) , (pr2 (pr2 x)))))
 
   canonical-kripke-model :
-    kripke-model (canonical-kripke-model-world-type) (l1 ⊔ l2) i (l1 ⊔ l2)
-  pr1 (pr1 canonical-kripke-model) =
+    kripke-model (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) i (l1 ⊔ l2)
+  pr1 (pr1 (pr1 canonical-kripke-model)) = canonical-kripke-model-world-type
+  pr2 (pr1 (pr1 canonical-kripke-model)) =
     is-inhabited-canonical-kripke-model-world
   pr2 (pr1 canonical-kripke-model) x y =
     Π-Prop
@@ -709,7 +710,7 @@ module _
     (a : formula i) →
     ( (y : formulas (l1 ⊔ l2) i) →
       (is-canonical : is-in-subtype canonical-worlds y) →
-      model-relation i canonical-kripke-model
+      relation-kripke-model i canonical-kripke-model
         ( pr1 x , pr2 x , is-comp)
         ( y , is-canonical) →
       is-in-subtype y a) →

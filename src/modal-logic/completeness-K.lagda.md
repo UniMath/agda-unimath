@@ -78,5 +78,5 @@ module _
           ( lem)
           ( a))
         ( not-in-logic)
-        ( in-kripke-logic _ _ star))
+        ( in-kripke-logic _ star))
 ```
