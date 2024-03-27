@@ -166,26 +166,26 @@ is-nonpositive-add-ℤ {x} {y} H K =
 
 ```agda
 add-positive-ℤ : positive-ℤ → positive-ℤ → positive-ℤ
-add-positive-ℤ (x , H) (y , K) = add-ℤ x y , is-positive-add-ℤ H K
+add-positive-ℤ (x , H) (y , K) = (add-ℤ x y , is-positive-add-ℤ H K)
 ```
 
 ### Addition of nonnegative integers
 
 ```agda
 add-nonnegative-ℤ : nonnegative-ℤ → nonnegative-ℤ → nonnegative-ℤ
-add-nonnegative-ℤ (x , H) (y , K) = add-ℤ x y , is-nonnegative-add-ℤ H K
+add-nonnegative-ℤ (x , H) (y , K) = (add-ℤ x y , is-nonnegative-add-ℤ H K)
 ```
 
 ### Addition of negative integers
 
 ```agda
 add-negative-ℤ : negative-ℤ → negative-ℤ → negative-ℤ
-add-negative-ℤ (x , H) (y , K) = add-ℤ x y , is-negative-add-ℤ H K
+add-negative-ℤ (x , H) (y , K) = (add-ℤ x y , is-negative-add-ℤ H K)
 ```
 
 ### Addition of nonpositive integers
 
 ```agda
 add-nonpositive-ℤ : nonpositive-ℤ → nonpositive-ℤ → nonpositive-ℤ
-add-nonpositive-ℤ (x , H) (y , K) = add-ℤ x y , is-nonpositive-add-ℤ H K
+add-nonpositive-ℤ (x , H) (y , K) = (add-ℤ x y , is-nonpositive-add-ℤ H K)
 ```
