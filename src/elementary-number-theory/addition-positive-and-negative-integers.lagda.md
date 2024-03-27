@@ -34,22 +34,20 @@ When we have information about the sign of the summands, we can in many cases de
 | :---------: | :---------: | :---------: | ------------------- |
 |  positive   |  positive   |  positive   | `add-positive-ℤ`    |
 |  positive   | nonnegative |  positive   |                     |
-|  positive   |  negative   |     ??      |                     |
-|  positive   | nonpositive |     ??      |                     |
+|  positive   |  negative   |             |                     |
+|  positive   | nonpositive |             |                     |
 | nonnegative |  positive   |  positive   |                     |
 | nonnegative | nonnegative | nonnegative | `add-nonnegative-ℤ` |
-| nonnegative |  negative   |     ??      |                     |
-| nonnegative | nonpositive |     ??      |                     |
-|  negative   |  positive   |     ??      |                     |
-|  negative   | nonnegative |     ??      |                     |
+| nonnegative |  negative   |             |                     |
+| nonnegative | nonpositive |             |                     |
+|  negative   |  positive   |             |                     |
+|  negative   | nonnegative |             |                     |
 |  negative   |  negative   |  negative   | `add-negative-ℤ`    |
 |  negative   | nonpositive |  negative   |                     |
-| nonpositive |  positive   |     ??      |                     |
-| nonpositive | nonnegative |     ??      |                     |
+| nonpositive |  positive   |             |                     |
+| nonpositive | nonnegative |             |                     |
 | nonpositive |  negative   |  negative   |                     |
 | nonpositive | nonpositive | nonpositive | `add-nonpositive-ℤ` |
-
-where ?? marks undetermined cases.
 
 ## Lemmas
 
