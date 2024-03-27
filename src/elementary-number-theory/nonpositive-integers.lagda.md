@@ -112,7 +112,7 @@ decidable-subtype-nonpositive-ℤ x =
     is-decidable-is-nonpositive-ℤ x)
 ```
 
-### The nonpositive integers are a `Set`
+### The nonpositive integers form a set
 
 ```agda
 is-set-nonpositive-ℤ : is-set nonpositive-ℤ
@@ -122,7 +122,7 @@ is-set-nonpositive-ℤ =
     ( is-set-ℤ)
 ```
 
-### The only nonpositive integer with a nonpositive negative is zero-ℤ
+### The only nonpositive integer with a nonpositive negative is zero
 
 ```agda
 is-zero-is-nonpositive-neg-is-nonpositive-ℤ :

@@ -106,7 +106,7 @@ decidable-subtype-negative-ℤ x =
     is-decidable-is-negative-ℤ x)
 ```
 
-### The negative integers are a `Set`
+### The negative integers form a set
 
 ```agda
 is-set-negative-ℤ : is-set negative-ℤ

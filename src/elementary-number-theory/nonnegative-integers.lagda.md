@@ -109,7 +109,7 @@ decidable-subtype-nonnegative-ℤ x =
     is-decidable-is-nonnegative-ℤ x)
 ```
 
-### The nonnegative integers are a `Set`
+### The nonnegative integers form a set
 
 ```agda
 is-set-nonnegative-ℤ : is-set nonnegative-ℤ
