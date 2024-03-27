@@ -401,7 +401,7 @@ module _
       ( is-positive-int-positive-ℤ z)
 ```
 
-### Multiplication by a nonnegative integer preserves the ordering
+### Multiplication by a nonnegative integer preserves inequality
 
 ```agda
 module _
