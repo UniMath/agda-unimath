@@ -81,9 +81,6 @@ transitive-leq-ℤ k l m H K =
   is-nonnegative-eq-ℤ
     ( triangle-diff-ℤ m l k)
     ( is-nonnegative-add-ℤ H K)
-
-trans-leq-ℤ : {k l m : ℤ} → leq-ℤ l m → leq-ℤ k l → leq-ℤ k m
-trans-leq-ℤ {k} {l} {m} = transitive-leq-ℤ k l m
 ```
 
 ### The ordering of the integers is decidable
