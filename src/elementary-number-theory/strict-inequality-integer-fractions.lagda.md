@@ -232,7 +232,7 @@ module _
         ( H'))
 ```
 
-### The mediant of two fractions is between them
+### The mediant of two distinct fractions lies strictly between them
 
 ```agda
 module _
