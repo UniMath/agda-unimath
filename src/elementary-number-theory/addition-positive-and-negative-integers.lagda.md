@@ -28,7 +28,9 @@ open import foundation.unit-type
 
 ## Idea
 
-When we have information about the sign of the summands, we can in many cases deduce the sign of their sum too. The table below tabulates all such cases and displays the corresponding Agda definition.
+When we have information about the sign of the summands, we can in many cases
+deduce the sign of their sum too. The table below tabulates all such cases and
+displays the corresponding Agda definition.
 
 |     `p`     |     `q`     |  `p +ℤ q`   | operation           |
 | :---------: | :---------: | :---------: | ------------------- |

@@ -30,7 +30,10 @@ open import foundation.unit-type
 
 ## Idea
 
-When we have information about the sign of the factors of an [integer product](elementary-number-theory.multiplication-integers.md), we can deduce the sign of their product too. The table below tabulates every case and displays the corresponding Agda definition.
+When we have information about the sign of the factors of an
+[integer product](elementary-number-theory.multiplication-integers.md), we can
+deduce the sign of their product too. The table below tabulates every case and
+displays the corresponding Agda definition.
 
 |     `p`     |     `q`     |  `p *ℤ q`   | operation           |
 | :---------: | :---------: | :---------: | ------------------- |

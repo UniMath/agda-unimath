@@ -41,7 +41,13 @@ open import order-theory.preorders
 
 ## Idea
 
-An [integer](elementary-number-theory.integers.md) `x` is _less than or equal_ to the integer `y` if the [difference](elementary-number-theory.difference-integers.md) `y - x` is [nonnegative](elementary-number-theory.nonnegative-integers.md). This relation defines the {{#concept "standard ordering" Disambiguation="integers" Agda=leq-ℤ}} on the integers.
+An [integer](elementary-number-theory.integers.md) `x` is _less than or equal_
+to the integer `y` if the
+[difference](elementary-number-theory.difference-integers.md) `y - x` is
+[nonnegative](elementary-number-theory.nonnegative-integers.md). This relation
+defines the
+{{#concept "standard ordering" Disambiguation="integers" Agda=leq-ℤ}} on the
+integers.
 
 ## Definition
 

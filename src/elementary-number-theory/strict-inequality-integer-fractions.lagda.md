@@ -41,8 +41,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-An [integer fraction](elementary-number-theory.integer-fractions.md) `m/n` is _strictly less than_ the fraction `m'/n'` if the [integer product](elementary-number-theory.multiplication-integers.md) `m * n'` is
-[strictly less](elementary-number-theory.strict-inequality-integers.md) than `m' * n`.
+An [integer fraction](elementary-number-theory.integer-fractions.md) `m/n` is
+_strictly less than_ the fraction `m'/n'` if the
+[integer product](elementary-number-theory.multiplication-integers.md) `m * n'`
+is [strictly less](elementary-number-theory.strict-inequality-integers.md) than
+`m' * n`.
 
 ## Definition
 
