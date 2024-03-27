@@ -41,8 +41,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A fraction `m/n` is strictly less than a fraction `m'/n'` iff `m * n'` is
-strictly less than `m' * n`.
+An [integer fraction](elementary-number-theory.integer-fractions.md) `m/n` is _strictly less than_ the fraction `m'/n'` if the [integer product](elementary-number-theory.multiplication-integers.md) `m * n'` is
+[strictly less](elementary-number-theory.strict-inequality-integers.md) than `m' * n`.
 
 ## Definition
 
