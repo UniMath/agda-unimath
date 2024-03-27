@@ -34,7 +34,7 @@ open import foundation.unit-type
 ## Idea
 
 We introduce {{#concept "addition" Disambiguation="integers" Agda=add-ℤ}} on the
-integers and derive its basic properties with respect to `succ-ℤ` and `neg-ℤ`.
+[integers](elementary-number-theory.integers.md) and derive its basic properties with respect to `succ-ℤ` and `neg-ℤ`.
 Properties of addition with respect to positivity, nonnegativity, negativity and
 nonnpositivity are derived in
 [`addition-positive-and-negative-integers`](elementary-number-theory.addition-positive-and-negative-integers.md).
