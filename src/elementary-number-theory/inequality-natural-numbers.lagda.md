@@ -365,7 +365,7 @@ leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p =
   leq-subtraction-ℕ n m l (is-injective-succ-ℕ p)
 ```
 
-### Multiplication preserves the ordering on ℕ
+### Multiplication preserves inequality of natural numbers
 
 ```agda
 preserves-leq-left-mul-ℕ :
