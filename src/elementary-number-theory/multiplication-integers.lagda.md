@@ -42,9 +42,7 @@ open import foundation.universe-levels
 We introduce the
 {{#concept "multiplication" Disambiguation="integers" Agda=mul-ℤ}} of integers
 and derive its basic properties with respect to `succ-ℤ`, `pred-ℤ`, `neg-ℤ` and
-`add-ℤ`. Properties of multiplication with respect to inequality and positivity,
-nonnegativity, negativity and nonnpositivity of integers are derived in
-[`multiplication-positive-and-negative-integers`](elementary-number-theory.multiplication-positive-and-negative-integers.md).
+`add-ℤ`.
 
 ## Definitions
 
@@ -476,3 +474,9 @@ is-emb-right-mul-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-emb (_*ℤ x)
 is-emb-right-mul-ℤ x f =
   is-emb-is-injective is-set-ℤ (is-injective-right-mul-ℤ x f)
 ```
+
+## See also
+
+- Properties of multiplication with respect to inequality and positivity,
+  nonnegativity, negativity and nonnpositivity of integers are derived in
+  [`multiplication-positive-and-negative-integers`](elementary-number-theory.multiplication-positive-and-negative-integers.md)

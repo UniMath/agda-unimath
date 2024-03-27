@@ -35,12 +35,7 @@ open import foundation.unit-type
 
 We introduce {{#concept "addition" Disambiguation="integers" Agda=add-ℤ}} on the
 [integers](elementary-number-theory.integers.md) and derive its basic properties
-with respect to `succ-ℤ` and `neg-ℤ`. Properties of addition with respect to
-positivity, nonnegativity, negativity and nonnpositivity are derived in
-[`addition-positive-and-negative-integers`](elementary-number-theory.addition-positive-and-negative-integers.md).
-Properties of addition with respect to inequality are derived in
-[`inequality-integers`](elementary-number-theory.inequality-integers.md) and
-[`strict-inequality-integers`](elementary-number-theory.strict-inequality-integers.md).
+with respect to `succ-ℤ` and `neg-ℤ`.
 
 ## Definition
 
@@ -556,3 +551,15 @@ is-zero-right-add-ℤ :
 is-zero-right-add-ℤ x y H =
   is-zero-left-add-ℤ y x (commutative-add-ℤ y x ∙ H)
 ```
+
+## See also
+
+- Properties of addition with respect to positivity, nonnegativity, negativity
+  and nonnpositivity are derived in
+  [`addition-positive-and-negative-integers`](elementary-number-theory.addition-positive-and-negative-integers.md)
+- Properties of addition with respect to the standard ordering on the integers
+  are derived in
+  [`inequality-integers`](elementary-number-theory.inequality-integers.md)
+- Properties of addition with respect to the standard strict ordering on the
+  integers are derived in
+  [`strict-inequality-integers`](elementary-number-theory.strict-inequality-integers.md)
