@@ -237,3 +237,8 @@ github = "wrest64"
 displayName = "Ulrik Buchholtz"
 usernames = [ "Ulrik Buchholtz" ]
 github = "UlrikBuchholtz"
+
+[[contributors]]
+displayName = "Garrett Figueroa"
+usernames = [ "Garrett Figueroa", "djspacewhale" ]
+github = "djspacewhale"
