@@ -28,8 +28,7 @@ open import foundation.unit-type
 
 ## Idea
 
-Addition of positive, negative, nonnegative and nonpositive integers satisfies
-the following rules:
+When we have information about the sign of the summands, we can in many cases deduce the sign of their sum too. The table below tabulates all such cases and displays the corresponding Agda definition.
 
 |     `p`     |     `q`     |  `p +ℤ q`   | operation           |
 | :---------: | :---------: | :---------: | ------------------- |
