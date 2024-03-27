@@ -29,9 +29,13 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -80,6 +84,17 @@ le-fraction-ℤ-Decidable-Prop x y =
   ( le-fraction-ℤ x y ,
     is-prop-le-fraction-ℤ x y ,
     is-decidable-le-fraction-ℤ x y)
+
+decide-le-leq-fraction-ℤ :
+  (x y : fraction-ℤ) → le-fraction-ℤ x y + leq-fraction-ℤ y x
+decide-le-leq-fraction-ℤ x y =
+  map-coproduct
+    ( id)
+    ( λ H →
+      is-nonnegative-eq-ℤ
+        ( skew-commutative-cross-mul-diff-fraction-ℤ x y)
+        ( is-nonnegative-neg-is-nonpositive-ℤ H))
+    ( decide-is-positive-is-nonpositive-ℤ)
 ```
 
 ### Strict inequality of integer fractions implies inequality
@@ -253,4 +268,36 @@ module _
     le-fraction-ℤ (mediant-fraction-ℤ x y) y
   le-right-mediant-fraction-ℤ =
     is-positive-eq-ℤ (cross-mul-diff-right-mediant-fraction-ℤ x y)
+```
+
+### Strict inequality on integer fractions is dense
+
+```agda
+module _
+  (x y : fraction-ℤ) (H : le-fraction-ℤ x y)
+  where
+
+  dense-le-fraction-ℤ :
+    ∃ fraction-ℤ (λ r → le-fraction-ℤ x r × le-fraction-ℤ r y)
+  dense-le-fraction-ℤ =
+    intro-∃
+      ( mediant-fraction-ℤ x y)
+      ( le-left-mediant-fraction-ℤ x y H , le-right-mediant-fraction-ℤ x y H)
+```
+
+### The strict order on integer fractions is located
+
+```agda
+module _
+  (x y z : fraction-ℤ)
+  where
+
+  located-le-fraction-ℤ :
+    le-fraction-ℤ y z → (le-fraction-ℤ-Prop y x) ∨ (le-fraction-ℤ-Prop x z)
+  located-le-fraction-ℤ H =
+    unit-trunc-Prop
+      ( map-coproduct
+        ( id)
+        ( λ p → concatenate-leq-le-fraction-ℤ x y z p H)
+        ( decide-le-leq-fraction-ℤ y x))
 ```
