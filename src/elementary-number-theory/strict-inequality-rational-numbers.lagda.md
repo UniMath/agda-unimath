@@ -181,7 +181,7 @@ module _
         ( le-pred-ℤ (numerator-ℚ x))))
     where
     frac : fraction-ℤ
-    frac = pred-ℤ (numerator-ℚ x) , positive-denominator-ℚ x
+    frac = (pred-ℤ (numerator-ℚ x) , positive-denominator-ℚ x)
 
   right-∃-le-ℚ : ∃ ℚ (λ r → le-ℚ x r)
   right-∃-le-ℚ = intro-∃
@@ -194,7 +194,7 @@ module _
         ( le-succ-ℤ (numerator-ℚ x))))
     where
     frac : fraction-ℤ
-    frac = succ-ℤ (numerator-ℚ x) , positive-denominator-ℚ x
+    frac = (succ-ℤ (numerator-ℚ x) , positive-denominator-ℚ x)
 ```
 
 ### Decidability of strict inequality on the rationals
