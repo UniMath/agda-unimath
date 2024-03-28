@@ -72,6 +72,9 @@ zero-ℤ = inr (inl star)
 
 is-zero-ℤ : ℤ → UU lzero
 is-zero-ℤ x = (x ＝ zero-ℤ)
+
+eq-is-zero-ℤ : {a b : ℤ} → is-zero-ℤ a → is-zero-ℤ b → a ＝ b
+eq-is-zero-ℤ {a} {b} H K = H ∙ inv K
 ```
 
 ### Inclusion of the positive integers
@@ -260,221 +263,14 @@ pred-neg-ℤ (inr (inl star)) = refl
 pred-neg-ℤ (inr (inr x)) = refl
 ```
 
-### Nonnegative integers
+### The negative function is injective
 
 ```agda
-is-nonnegative-ℤ : ℤ → UU lzero
-is-nonnegative-ℤ (inl x) = empty
-is-nonnegative-ℤ (inr k) = unit
-
-is-nonnegative-eq-ℤ :
-  {x y : ℤ} → x ＝ y → is-nonnegative-ℤ x → is-nonnegative-ℤ y
-is-nonnegative-eq-ℤ refl = id
-
-is-zero-is-nonnegative-ℤ :
-  {x : ℤ} → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
-is-zero-is-nonnegative-ℤ {inr (inl star)} H K = refl
-
-is-nonnegative-succ-ℤ :
-  (k : ℤ) → is-nonnegative-ℤ k → is-nonnegative-ℤ (succ-ℤ k)
-is-nonnegative-succ-ℤ (inr (inl star)) p = star
-is-nonnegative-succ-ℤ (inr (inr x)) p = star
-
-is-prop-is-nonnegative-ℤ : (x : ℤ) → is-prop (is-nonnegative-ℤ x)
-is-prop-is-nonnegative-ℤ (inl x) = is-prop-empty
-is-prop-is-nonnegative-ℤ (inr x) = is-prop-unit
-
-is-nonnegative-ℤ-Prop : ℤ → Prop lzero
-pr1 (is-nonnegative-ℤ-Prop x) = is-nonnegative-ℤ x
-pr2 (is-nonnegative-ℤ-Prop x) = is-prop-is-nonnegative-ℤ x
+is-injective-neg-ℤ : is-injective neg-ℤ
+is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ ap neg-ℤ p ∙ neg-neg-ℤ y
 ```
 
-### The positive integers
-
-```agda
-is-positive-ℤ : ℤ → UU lzero
-is-positive-ℤ (inl x) = empty
-is-positive-ℤ (inr (inl x)) = empty
-is-positive-ℤ (inr (inr x)) = unit
-
-is-prop-is-positive-ℤ : (x : ℤ) → is-prop (is-positive-ℤ x)
-is-prop-is-positive-ℤ (inl x) = is-prop-empty
-is-prop-is-positive-ℤ (inr (inl x)) = is-prop-empty
-is-prop-is-positive-ℤ (inr (inr x)) = is-prop-unit
-
-is-positive-ℤ-Prop : ℤ → Prop lzero
-pr1 (is-positive-ℤ-Prop x) = is-positive-ℤ x
-pr2 (is-positive-ℤ-Prop x) = is-prop-is-positive-ℤ x
-
-is-set-is-positive-ℤ : (x : ℤ) → is-set (is-positive-ℤ x)
-is-set-is-positive-ℤ (inl x) = is-set-empty
-is-set-is-positive-ℤ (inr (inl x)) = is-set-empty
-is-set-is-positive-ℤ (inr (inr x)) = is-set-unit
-
-is-positive-ℤ-Set : ℤ → Set lzero
-pr1 (is-positive-ℤ-Set z) = is-positive-ℤ z
-pr2 (is-positive-ℤ-Set z) = is-set-is-positive-ℤ z
-
-positive-ℤ : UU lzero
-positive-ℤ = Σ ℤ is-positive-ℤ
-
-is-set-positive-ℤ : is-set positive-ℤ
-is-set-positive-ℤ = is-set-Σ is-set-ℤ is-set-is-positive-ℤ
-
-positive-ℤ-Set : Set lzero
-pr1 positive-ℤ-Set = positive-ℤ
-pr2 positive-ℤ-Set = is-set-positive-ℤ
-
-int-positive-ℤ : positive-ℤ → ℤ
-int-positive-ℤ = pr1
-
-is-positive-int-positive-ℤ :
-  (x : positive-ℤ) → is-positive-ℤ (int-positive-ℤ x)
-is-positive-int-positive-ℤ = pr2
-
-is-nonnegative-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonnegative-ℤ x
-is-nonnegative-is-positive-ℤ {inr (inr x)} H = H
-
-is-positive-eq-ℤ : {x y : ℤ} → x ＝ y → is-positive-ℤ x → is-positive-ℤ y
-is-positive-eq-ℤ {x} refl = id
-
-is-positive-one-ℤ : is-positive-ℤ one-ℤ
-is-positive-one-ℤ = star
-
-one-positive-ℤ : positive-ℤ
-pr1 one-positive-ℤ = one-ℤ
-pr2 one-positive-ℤ = is-positive-one-ℤ
-
-is-positive-succ-ℤ : {x : ℤ} → is-nonnegative-ℤ x → is-positive-ℤ (succ-ℤ x)
-is-positive-succ-ℤ {inr (inl star)} H = is-positive-one-ℤ
-is-positive-succ-ℤ {inr (inr x)} H = star
-
-is-positive-int-ℕ :
-  (x : ℕ) → is-nonzero-ℕ x → is-positive-ℤ (int-ℕ x)
-is-positive-int-ℕ zero-ℕ H = ex-falso (H refl)
-is-positive-int-ℕ (succ-ℕ x) H = star
-```
-
-### Properties of nonnegative integers
-
-```agda
-nonnegative-ℤ : UU lzero
-nonnegative-ℤ = Σ ℤ is-nonnegative-ℤ
-
-int-nonnegative-ℤ : nonnegative-ℤ → ℤ
-int-nonnegative-ℤ = pr1
-
-is-nonnegative-int-nonnegative-ℤ :
-  (x : nonnegative-ℤ) → is-nonnegative-ℤ (int-nonnegative-ℤ x)
-is-nonnegative-int-nonnegative-ℤ = pr2
-
-is-injective-int-nonnegative-ℤ : is-injective int-nonnegative-ℤ
-is-injective-int-nonnegative-ℤ {pair (inr x) star} {pair (inr .x) star} refl =
-  refl
-
-is-nonnegative-int-ℕ : (n : ℕ) → is-nonnegative-ℤ (int-ℕ n)
-is-nonnegative-int-ℕ zero-ℕ = star
-is-nonnegative-int-ℕ (succ-ℕ n) = star
-
-nonnegative-int-ℕ : ℕ → nonnegative-ℤ
-pr1 (nonnegative-int-ℕ n) = int-ℕ n
-pr2 (nonnegative-int-ℕ n) = is-nonnegative-int-ℕ n
-
-nat-nonnegative-ℤ : nonnegative-ℤ → ℕ
-nat-nonnegative-ℤ (pair (inr (inl x)) H) = zero-ℕ
-nat-nonnegative-ℤ (pair (inr (inr x)) H) = succ-ℕ x
-
-is-section-nat-nonnegative-ℤ :
-  (x : nonnegative-ℤ) → nonnegative-int-ℕ (nat-nonnegative-ℤ x) ＝ x
-is-section-nat-nonnegative-ℤ (pair (inr (inl star)) star) = refl
-is-section-nat-nonnegative-ℤ (pair (inr (inr x)) star) = refl
-
-is-retraction-nat-nonnegative-ℤ :
-  (n : ℕ) → nat-nonnegative-ℤ (nonnegative-int-ℕ n) ＝ n
-is-retraction-nat-nonnegative-ℤ zero-ℕ = refl
-is-retraction-nat-nonnegative-ℤ (succ-ℕ n) = refl
-
-is-equiv-nat-nonnegative-ℤ : is-equiv nat-nonnegative-ℤ
-pr1 (pr1 is-equiv-nat-nonnegative-ℤ) = nonnegative-int-ℕ
-pr2 (pr1 is-equiv-nat-nonnegative-ℤ) = is-retraction-nat-nonnegative-ℤ
-pr1 (pr2 is-equiv-nat-nonnegative-ℤ) = nonnegative-int-ℕ
-pr2 (pr2 is-equiv-nat-nonnegative-ℤ) = is-section-nat-nonnegative-ℤ
-
-is-equiv-nonnegative-int-ℕ : is-equiv nonnegative-int-ℕ
-pr1 (pr1 is-equiv-nonnegative-int-ℕ) = nat-nonnegative-ℤ
-pr2 (pr1 is-equiv-nonnegative-int-ℕ) = is-section-nat-nonnegative-ℤ
-pr1 (pr2 is-equiv-nonnegative-int-ℕ) = nat-nonnegative-ℤ
-pr2 (pr2 is-equiv-nonnegative-int-ℕ) = is-retraction-nat-nonnegative-ℤ
-
-equiv-nonnegative-int-ℕ : ℕ ≃ nonnegative-ℤ
-pr1 equiv-nonnegative-int-ℕ = nonnegative-int-ℕ
-pr2 equiv-nonnegative-int-ℕ = is-equiv-nonnegative-int-ℕ
-
-is-injective-nonnegative-int-ℕ : is-injective nonnegative-int-ℕ
-is-injective-nonnegative-int-ℕ {x} {y} p =
-  ( inv (is-retraction-nat-nonnegative-ℤ x)) ∙
-  ( ap nat-nonnegative-ℤ p) ∙
-  ( is-retraction-nat-nonnegative-ℤ y)
-
-decide-is-nonnegative-ℤ :
-  {x : ℤ} → (is-nonnegative-ℤ x) + (is-nonnegative-ℤ (neg-ℤ x))
-decide-is-nonnegative-ℤ {inl x} = inr star
-decide-is-nonnegative-ℤ {inr x} = inl star
-
-is-zero-is-nonnegative-neg-is-nonnegative-ℤ :
-  (x : ℤ) → is-nonnegative-ℤ x → is-nonnegative-ℤ (neg-ℤ x) → is-zero-ℤ x
-is-zero-is-nonnegative-neg-is-nonnegative-ℤ (inr (inl star)) nonneg nonpos =
-  refl
-```
-
-### Properties of positive integers
-
-#### The positivity predicate on integers is decidable
-
-```agda
-decide-is-positive-ℤ : {x : ℤ} → (is-positive-ℤ x) + is-nonnegative-ℤ (neg-ℤ x)
-decide-is-positive-ℤ {inl x} = inr star
-decide-is-positive-ℤ {inr (inl x)} = inr star
-decide-is-positive-ℤ {inr (inr x)} = inl star
-
-decide-is-positive-is-nonzero-ℤ :
-  (x : ℤ) → (x ≠ zero-ℤ) →
-  (is-positive-ℤ x) + is-positive-ℤ (neg-ℤ x)
-decide-is-positive-is-nonzero-ℤ (inl x) H = inr star
-decide-is-positive-is-nonzero-ℤ (inr (inl x)) H = ex-falso (H refl)
-decide-is-positive-is-nonzero-ℤ (inr (inr x)) H = inl star
-```
-
-This remains to be fully formalized.
-
-### The nonpositive integers
-
-```agda
-is-nonpositive-ℤ : ℤ → UU lzero
-is-nonpositive-ℤ x = is-nonnegative-ℤ (neg-ℤ x)
-```
-
-#### Positive integers are not nonpositive
-
-```agda
-not-is-nonpositive-is-positive-ℤ :
-  (x : ℤ) → is-positive-ℤ x → ¬ (is-nonpositive-ℤ x)
-not-is-nonpositive-is-positive-ℤ (inr (inl x)) x-is-pos _ = x-is-pos
-not-is-nonpositive-is-positive-ℤ (inr (inr x)) x-is-pos neg-x-is-nonneg =
-  neg-x-is-nonneg
-```
-
-#### An integer that is not positive is nonpositive
-
-```agda
-is-nonpositive-not-is-positive-ℤ :
-  (x : ℤ) → ¬ (is-positive-ℤ x) → is-nonpositive-ℤ x
-is-nonpositive-not-is-positive-ℤ x H with decide-is-positive-ℤ {x}
-... | inl K = ex-falso (H K)
-... | inr K = K
-```
-
-#### Relation between successors of natural numbers and integers
+### The integer successor of a natural number is the successor of the natural number
 
 ```agda
 succ-int-ℕ : (x : ℕ) → succ-ℤ (int-ℕ x) ＝ int-ℕ (succ-ℕ x)
@@ -482,14 +278,7 @@ succ-int-ℕ zero-ℕ = refl
 succ-int-ℕ (succ-ℕ x) = refl
 ```
 
-#### The negative function is injective
-
-```agda
-is-injective-neg-ℤ : is-injective neg-ℤ
-is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ ap neg-ℤ p ∙ neg-neg-ℤ y
-```
-
-#### An integer is zero if its negative is zero
+### An integer is zero if its negative is zero
 
 ```agda
 is-zero-is-zero-neg-ℤ : (x : ℤ) → is-zero-ℤ (neg-ℤ x) → is-zero-ℤ x

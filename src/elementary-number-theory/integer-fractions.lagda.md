@@ -11,6 +11,8 @@ open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
@@ -103,9 +105,7 @@ is-one-fraction-ℤ x = (x ＝ one-fraction-ℤ)
 is-nonzero-denominator-fraction-ℤ :
   (x : fraction-ℤ) → is-nonzero-ℤ (denominator-fraction-ℤ x)
 is-nonzero-denominator-fraction-ℤ x =
-  is-nonzero-is-positive-ℤ
-    ( denominator-fraction-ℤ x)
-    ( is-positive-denominator-fraction-ℤ x)
+  is-nonzero-is-positive-ℤ (is-positive-denominator-fraction-ℤ x)
 ```
 
 ### The type of fractions is a set
@@ -207,7 +207,5 @@ is-nonzero-gcd-numerator-denominator-fraction-ℤ :
   (x : fraction-ℤ) →
   is-nonzero-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
 is-nonzero-gcd-numerator-denominator-fraction-ℤ x =
-  is-nonzero-is-positive-ℤ
-    ( gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
-    ( is-positive-gcd-numerator-denominator-fraction-ℤ x)
+  is-nonzero-is-positive-ℤ (is-positive-gcd-numerator-denominator-fraction-ℤ x)
 ```
