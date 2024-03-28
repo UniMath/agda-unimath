@@ -177,12 +177,12 @@ module _
 
   eq-ℚ : x ＝ y
   eq-ℚ =
-    inv (in-fraction-fraction-ℚ x) ∙
-    eq-ℚ-sim-fraction-ℤ
+    ( inv (in-fraction-fraction-ℚ x)) ∙
+    ( eq-ℚ-sim-fraction-ℤ
       ( fraction-ℚ x)
       ( fraction-ℚ y)
-      ( ap-mul-ℤ H (inv K)) ∙
-    in-fraction-fraction-ℚ y
+      ( ap-mul-ℤ H (inv K))) ∙
+    ( in-fraction-fraction-ℚ y)
 ```
 
 ### A rational number is zero if and only if its numerator is zero
