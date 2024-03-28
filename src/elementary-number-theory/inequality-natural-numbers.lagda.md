@@ -40,7 +40,7 @@ less than any natural number, and such that `m+1 ≤ n+1` is equivalent to
 
 ## Definitions
 
-### The standard inequality on the natural numbers
+### Inequality on the natural numbers
 
 ```agda
 leq-ℕ : ℕ → ℕ → UU lzero
@@ -52,7 +52,7 @@ infix 30 _≤-ℕ_
 _≤-ℕ_ = leq-ℕ
 ```
 
-### Alternative definition of the standard inequality on the natural numbers
+### Alternative definition of the inequality on the natural numbers
 
 ```agda
 data leq-ℕ' : ℕ → ℕ → UU lzero where
@@ -133,7 +133,7 @@ antisymmetric-leq-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (antisymmetric-leq-ℕ m n p q)
 ```
 
-### The partially ordered set of natural numbers ordered by the standard inequality
+### The partially ordered set of natural numbers ordered by the inequality
 
 ```agda
 ℕ-Preorder : Preorder lzero lzero

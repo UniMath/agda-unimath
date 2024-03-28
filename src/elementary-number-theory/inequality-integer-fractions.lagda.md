@@ -47,7 +47,7 @@ is [less or equal](elementary-number-theory.inequality-integers.md) to `m' * n`.
 
 ## Definition
 
-### The standard inequality on integer fractions
+### Inequality on integer fractions
 
 ```agda
 leq-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero

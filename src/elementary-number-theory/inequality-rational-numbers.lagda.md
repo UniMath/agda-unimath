@@ -52,7 +52,7 @@ is [less than or equal](elementary-number-theory.inequality-integers.md) to
 
 ## Definition
 
-### The standard inequality on the rational numbers
+### Inequality on the rational numbers
 
 ```agda
 leq-ℚ-Prop : ℚ → ℚ → Prop lzero
@@ -139,7 +139,7 @@ module _
       ( fraction-ℚ z)
 ```
 
-### The partially ordered set of rational numbers ordered by the standard inequality
+### The partially ordered set of rational numbers ordered by the inequality
 
 ```agda
 ℚ-Preorder : Preorder lzero lzero
