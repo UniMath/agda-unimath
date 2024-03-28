@@ -80,7 +80,7 @@ pr2 (in-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
 
 ```agda
 rational-ℤ : ℤ → ℚ
-rational-ℤ x = pair (pair x one-positive-ℤ) (is-one-gcd-one-ℤ' x)
+rational-ℤ x = (x , one-positive-ℤ , is-one-gcd-one-ℤ' x)
 ```
 
 ### Negative one, zero and one
