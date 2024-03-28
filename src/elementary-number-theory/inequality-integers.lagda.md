@@ -185,7 +185,7 @@ reflects-leq-right-add-ℤ z x y =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
-### Inclusion of ℕ into ℤ preserves inequality
+### The inclusion of ℕ into ℤ preserves inequality
 
 ```agda
 leq-int-ℕ : (x y : ℕ) → leq-ℕ x y → leq-ℤ (int-ℕ x) (int-ℕ y)

@@ -133,7 +133,7 @@ antisymmetric-leq-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (antisymmetric-leq-ℕ m n p q)
 ```
 
-### The partially ordered set of natural numbers ordered by the inequality
+### The partially ordered set of natural numbers ordered by inequality
 
 ```agda
 ℕ-Preorder : Preorder lzero lzero
@@ -229,7 +229,7 @@ succ-leq-ℕ zero-ℕ = star
 succ-leq-ℕ (succ-ℕ n) = succ-leq-ℕ n
 ```
 
-### Any natural number less than `n+1` is either less than `n` or it is `n+1`
+### Any natural number less than or equal to `n+1` is either less than or equal to `n` or it is `n+1`
 
 ```agda
 decide-leq-succ-ℕ :

@@ -139,7 +139,7 @@ module _
       ( fraction-ℚ z)
 ```
 
-### The partially ordered set of rational numbers ordered by the inequality
+### The partially ordered set of rational numbers ordered by inequality
 
 ```agda
 ℚ-Preorder : Preorder lzero lzero

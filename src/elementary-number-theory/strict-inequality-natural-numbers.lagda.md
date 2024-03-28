@@ -1,4 +1,4 @@
-# Strict inequality on natural numbers
+# Strict inequality on the natural numbers
 
 ```agda
 module elementary-number-theory.strict-inequality-natural-numbers where

@@ -1,4 +1,4 @@
-# Strict inequality on integer fractions
+# Strict inequality on the integer fractions
 
 ```agda
 module elementary-number-theory.strict-inequality-integer-fractions where
