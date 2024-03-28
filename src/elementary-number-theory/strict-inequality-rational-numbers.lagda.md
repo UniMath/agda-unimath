@@ -45,10 +45,16 @@ open import foundation.universe-levels
 
 ## Idea
 
-The {{#concept "strict ordering" Disambiguation="rational numbers" Agda=le-ℚ}}
-of two rational numbers is given by the strict ordering of their underlying
-integer fractions as defined in
-[`inequality-integer-fractions`](elementary-number-theory.inequality-integer-fractions.md).
+The
+{{#concept "standard strict ordering" Disambiguation="rational numbers" Agda=le-ℚ}}
+on the [rational numbers](elementary-number-theory.rational-numbers.md) is
+inherited from the
+[standard strict ordering](elementary-number-theory.strict-inequality-integer-fractions.md)
+on [integer fractions](elementary-number-theory.integer-fractions.md): the
+rational number `m / n` is _strictly less than_ `m' / n'` if the
+[integer product](elementary-number-theory.multiplication-integers.md) `m * n'`
+is [strictly less](elementary-number-theory.strict-inequality-integers.md) than
+`m' * n`.
 
 ## Definition
 
