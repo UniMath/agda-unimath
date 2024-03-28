@@ -59,7 +59,7 @@ gcd-ℤ x y = int-ℕ (nat-gcd-ℤ x y)
 
 ## Properties
 
-### The greatest common divisor is invariant by neg-ℤ
+### The greatest common divisor is invariant under negatives
 
 ```agda
 module _
