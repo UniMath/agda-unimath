@@ -201,14 +201,14 @@ module _
   is-zero-is-zero-numerator-ℚ :
     is-zero-ℤ (numerator-ℚ x) → is-zero-ℚ x
   is-zero-is-zero-numerator-ℚ H =
-    inv (rational-fraction-fraction-ℚ x) ∙
-    eq-ℚ-sim-fraction-ℤ
+    ( inv (rational-fraction-fraction-ℚ x)) ∙
+    ( eq-ℚ-sim-fraction-ℤ
       ( fraction-ℚ x)
       ( fraction-ℚ zero-ℚ)
       ( eq-is-zero-ℤ
         ( ap (mul-ℤ' one-ℤ) H ∙ right-zero-law-mul-ℤ one-ℤ)
-        ( left-zero-law-mul-ℤ (denominator-ℚ x))) ∙
-    rational-fraction-fraction-ℚ zero-ℚ
+        ( left-zero-law-mul-ℤ (denominator-ℚ x)))) ∙
+    ( rational-fraction-fraction-ℚ zero-ℚ)
 ```
 
 ### The rational image of the negative of an integer is the rational negative of its image
