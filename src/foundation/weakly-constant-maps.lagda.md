@@ -8,6 +8,7 @@ module foundation.weakly-constant-maps where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -19,8 +20,9 @@ open import foundation-core.sets
 
 ## Idea
 
-A map `f : A → B` is said to be weakly constant if any two elements in `A` are
-mapped to identical elements in `B`.
+A map `f : A → B` is said to be
+{{#concept "weakly constant" Agda=is-weakly-constant-map}} if any two elements
+in `A` are mapped to identical elements in `B`.
 
 ## Definition
 
@@ -36,7 +38,7 @@ module _
   abstract
     is-prop-is-weakly-constant-map-Set : is-prop (is-weakly-constant-map f)
     is-prop-is-weakly-constant-map-Set =
-      is-prop-Π (λ x → is-prop-Π (λ y → is-set-type-Set B (f x) (f y)))
+      is-prop-iterated-Π 2 (λ x y → is-set-type-Set B (f x) (f y))
 
   is-weakly-constant-map-Prop : Prop (l1 ⊔ l2)
   pr1 is-weakly-constant-map-Prop = is-weakly-constant-map f

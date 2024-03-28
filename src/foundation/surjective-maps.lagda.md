@@ -11,12 +11,14 @@ open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.postcomposition-dependent-functions
 open import foundation.propositional-truncations
 open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
@@ -305,8 +307,12 @@ module _
       {l3 : Level} (P : B → Prop l3) →
       ( λ (h : (y : B) → type-Prop (P y)) x → h (f x)) ~
       ( ( λ h x → h (f x) (x , refl)) ∘
-        ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
-        ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y)))
+        ( λ h y → h y ∘ unit-trunc-Prop) ∘
+        ( postcomp-Π _
+          ( λ {y} →
+            diagonal-exponential
+              ( type-Prop (P y))
+              ( type-trunc-Prop (fiber f y)))))
     square-dependent-universal-property-surj P = refl-htpy
 
   abstract
@@ -315,15 +321,24 @@ module _
     dependent-universal-property-surj-is-surjective is-surj-f P =
       is-equiv-comp
         ( λ h x → h (f x) (x , refl))
-        ( ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
-          ( λ h y →
-            const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y)))
+        ( ( λ h y → h y ∘ unit-trunc-Prop) ∘
+          ( postcomp-Π
+            ( B)
+            ( λ {y} →
+              diagonal-exponential
+                ( type-Prop (P y))
+                ( type-trunc-Prop (fiber f y)))))
         ( is-equiv-comp
-          ( λ h y → (h y) ∘ unit-trunc-Prop)
-          ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y))
+          ( λ h y → h y ∘ unit-trunc-Prop)
+          ( postcomp-Π
+            ( B)
+            ( λ {y} →
+              diagonal-exponential
+                ( type-Prop (P y))
+                ( type-trunc-Prop (fiber f y))))
           ( is-equiv-map-Π-is-fiberwise-equiv
             ( λ y →
-              is-equiv-diagonal-is-contr
+              is-equiv-diagonal-exponential-is-contr
                 ( is-proof-irrelevant-is-prop
                   ( is-prop-type-trunc-Prop)
                   ( is-surj-f y))

@@ -8,6 +8,7 @@ module foundation.universal-property-unit-type where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.unit-type
 open import foundation.universal-property-contractible-types
 open import foundation.universal-property-equivalences
@@ -113,11 +114,11 @@ abstract
       ( is-equiv-point-is-contr x is-contr-X)
 
 abstract
-  is-equiv-diagonal-is-equiv-point :
+  is-equiv-diagonal-exponential-is-equiv-point :
     {l1 : Level} {X : UU l1} (x : X) →
     is-equiv (point x) →
-    ({l2 : Level} (Y : UU l2) → is-equiv (λ y → const X Y y))
-  is-equiv-diagonal-is-equiv-point {X = X} x is-equiv-point Y =
+    ({l2 : Level} (Y : UU l2) → is-equiv (diagonal-exponential Y X))
+  is-equiv-diagonal-exponential-is-equiv-point x is-equiv-point Y =
     is-equiv-is-section
       ( universal-property-unit-is-equiv-point x is-equiv-point Y)
       ( refl-htpy)

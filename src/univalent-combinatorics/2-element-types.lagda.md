@@ -891,7 +891,7 @@ This remains to be shown.
   is-constant-is-not-equiv-2-Element-Type :
     (f : type-2-Element-Type X → type-2-Element-Type Y) →
     ¬ (is-equiv f) →
-    Σ (type-2-Element-Type Y) (λ y → f ~ const _ _ y)
+    Σ (type-2-Element-Type Y) (λ y → f ~ const _ y)
   pr1 (is-constant-is-not-equiv-2-Element-Type f H) = {!!}
   pr2 (is-constant-is-not-equiv-2-Element-Type f H) = {!!}
   -}

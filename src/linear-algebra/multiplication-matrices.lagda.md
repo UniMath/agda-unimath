@@ -21,7 +21,7 @@ module linear-algebra.multiplication-matrices where
 mul-vector-matrix : {l : Level} → {K : UU l} → {m n : ℕ} →
                      (K → K → K) → (K → K → K) → K →
                      vec K m → Mat K m n → vec K n
-mul-vector-matrix _ _ zero empty-vec empty-vec = diagonal zero
+mul-vector-matrix _ _ zero empty-vec empty-vec = diagonal-product zero
 mul-vector-matrix mulK addK zero (x ∷ xs) (v ∷ vs) =
   add-vec addK (mul-scalar-vector mulK x v)
                (mul-vector-matrix mulK addK zero xs vs)
@@ -71,8 +71,8 @@ module _
 
   left-distributive-vector-matrix :
     {n m : ℕ} →
-    ({l : ℕ} →  Id (diagonal {n = l} zero)
-    (add-vec addK (diagonal zero) (diagonal zero))) →
+    ({l : ℕ} →  Id (diagonal-product {n = l} zero)
+    (add-vec addK (diagonal-product zero) (diagonal-product zero))) →
     ((x y z : K) → (Id (mulK x (addK y z)) (addK (mulK x y) (mulK x z)))) →
     ((x y : K) → Id (addK x y) (addK y x)) →
     ((x y z : K) → Id (addK x (addK y z)) (addK (addK x y) z)) →
@@ -120,8 +120,8 @@ module _
     {n m p : ℕ} →
     ({l : ℕ} →
       Id
-        (diagonal {n = l} zero)
-        (add-vec addK (diagonal zero) (diagonal zero))) →
+        (diagonal-product {n = l} zero)
+        (add-vec addK (diagonal-product zero) (diagonal-product zero))) →
     ((x y z : K) → (Id (mulK x (addK y z)) (addK (mulK x y) (mulK x z)))) →
     ((x y : K) → Id (addK x y) (addK y x)) →
     ((x y z : K) → Id (addK x (addK y z)) (addK (addK x y) z)) →
@@ -145,8 +145,8 @@ module _
     {n m p : ℕ} →
     ({l : ℕ} →
       Id
-        (diagonal {n = l} zero)
-        (add-vec addK (diagonal zero) (diagonal zero))) →
+        (diagonal-product {n = l} zero)
+        (add-vec addK (diagonal-product zero) (diagonal-product zero))) →
     ((x y z : K) → (Id (mulK (addK x y) z) (addK (mulK x z) (mulK y z)))) →
     ((x y : K) → Id (addK x y) (addK y x)) →
     ((x y z : K) → Id (addK x (addK y z)) (addK (addK x y) z)) →

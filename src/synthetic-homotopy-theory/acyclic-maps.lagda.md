@@ -16,6 +16,7 @@ open import foundation.contractible-types
 open import foundation.dependent-epimorphisms
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
+open import foundation.diagonal-maps-of-types
 open import foundation.embeddings
 open import foundation.epimorphisms
 open import foundation.equivalences
@@ -128,7 +129,7 @@ module _
 More precisely, `A` is acyclic if and only if for all types `X`, the map
 
 ```text
- const : X → (A → X)
+  Δ : X → (A → X)
 ```
 
 is an embedding.
@@ -138,10 +139,10 @@ module _
   {l : Level} (A : UU l)
   where
 
-  is-emb-const-is-acyclic :
+  is-emb-diagonal-exponential-is-acyclic :
     is-acyclic A →
-    {l' : Level} (X : UU l') → is-emb (const A X)
-  is-emb-const-is-acyclic ac X =
+    {l' : Level} (X : UU l') → is-emb (diagonal-exponential X A)
+  is-emb-diagonal-exponential-is-acyclic ac X =
     is-emb-comp
       ( precomp (terminal-map A) X)
       ( map-inv-left-unit-law-function-type X)
@@ -150,16 +151,16 @@ module _
         ( X))
       ( is-emb-is-equiv (is-equiv-map-inv-left-unit-law-function-type X))
 
-  is-acyclic-is-emb-const :
-    ({l' : Level} (X : UU l') → is-emb (const A X)) →
+  is-acyclic-is-emb-diagonal-exponential :
+    ({l' : Level} (X : UU l') → is-emb (diagonal-exponential X A)) →
     is-acyclic A
-  is-acyclic-is-emb-const e =
+  is-acyclic-is-emb-diagonal-exponential e =
     is-acyclic-is-acyclic-map-terminal-map A
       ( is-acyclic-map-is-epimorphism
         ( terminal-map A)
         ( λ X →
           is-emb-triangle-is-equiv'
-            ( const A X)
+            ( diagonal-exponential X A)
             ( precomp (terminal-map A) X)
             ( map-inv-left-unit-law-function-type X)
             ( refl-htpy)
@@ -173,7 +174,7 @@ More precisely, `A` is acyclic if and only if for all types `X` and elements
 `x,y : X`, the map
 
 ```text
- const : (x ＝ y) → (A → x ＝ y)
+  Δ : (x ＝ y) → (A → x ＝ y)
 ```
 
 is an equivalence.
@@ -183,34 +184,38 @@ module _
   {l : Level} (A : UU l)
   where
 
-  is-equiv-const-Id-is-acyclic :
+  is-equiv-diagonal-exponential-Id-is-acyclic :
     is-acyclic A →
-    {l' : Level} {X : UU l'} (x y : X) → is-equiv (const A (x ＝ y))
-  is-equiv-const-Id-is-acyclic ac {X = X} x y =
+    {l' : Level} {X : UU l'} (x y : X) →
+    is-equiv (diagonal-exponential (x ＝ y) A)
+  is-equiv-diagonal-exponential-Id-is-acyclic ac {X = X} x y =
     is-equiv-htpy
-      ( htpy-eq ∘ ap (const A X) {x} {y})
-      ( htpy-ap-diagonal-htpy-eq-diagonal-Id A x y)
+      ( htpy-eq ∘ ap (diagonal-exponential X A) {x} {y})
+      ( htpy-ap-diagonal-exponential-htpy-eq-diagonal-exponential-Id x y A)
       ( is-equiv-comp
         ( htpy-eq)
-        ( ap (const A X))
-        ( is-emb-const-is-acyclic A ac X x y)
-        ( funext (const A X x) (const A X y)))
+        ( ap (diagonal-exponential X A))
+        ( is-emb-diagonal-exponential-is-acyclic A ac X x y)
+        ( funext (diagonal-exponential X A x) (diagonal-exponential X A y)))
 
-  is-acyclic-is-equiv-const-Id :
-    ({l' : Level} {X : UU l'} (x y : X) → is-equiv (const A (x ＝ y))) →
+  is-acyclic-is-equiv-diagonal-exponential-Id :
+    ( {l' : Level} {X : UU l'} (x y : X) →
+      is-equiv (diagonal-exponential (x ＝ y) A)) →
     is-acyclic A
-  is-acyclic-is-equiv-const-Id h =
-    is-acyclic-is-emb-const A
-      ( λ X →
-        ( λ x y →
-          is-equiv-right-factor
-            ( htpy-eq)
-            ( ap (const A X))
-            ( funext (const A X x) (const A X y))
-            ( is-equiv-htpy
-              ( const A (x ＝ y))
-              ( htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
-              ( h x y))))
+  is-acyclic-is-equiv-diagonal-exponential-Id h =
+    is-acyclic-is-emb-diagonal-exponential A
+      ( λ X x y →
+        is-equiv-right-factor
+          ( htpy-eq)
+          ( ap (diagonal-exponential X A))
+          ( funext (diagonal-exponential X A x) (diagonal-exponential X A y))
+          ( is-equiv-htpy
+            ( diagonal-exponential (x ＝ y) A)
+            ( htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq
+              ( x)
+              ( y)
+              ( A))
+            ( h x y)))
 ```
 
 ### A map is acyclic if and only if it is an [dependent epimorphism](foundation.dependent-epimorphisms.md)
@@ -220,18 +225,18 @@ The following diagram is a helpful illustration in the second proof:
 ```text
                         precomp f
        (b : B) → C b ------------- > (a : A) → C (f a)
-             |                               ^
+             |                               ∧
              |                               |
- map-Π const |                               | ≃ [precomp with the equivalence
+     map-Π Δ |                               | ≃ [precomp with the equivalence
              |                               |        A ≃ Σ B (fiber f)     ]
-             v               ind-Σ           |
+             ∨               ind-Σ           |
  ((b : B) → fiber f b → C b) ----> (s : Σ B (fiber f)) → C (pr1 s)
                               ≃
                           [currying]
 ```
 
-The left map is an embedding if f is an acyclic map, because const is an
-embedding in this case.
+The left map is an embedding if `f` is an acyclic map, because the diagonal is
+an embedding in this case.
 
 ```agda
 module _
@@ -249,7 +254,7 @@ module _
   is-dependent-epimorphism-is-acyclic-map ac C =
     is-emb-comp
       ( precomp-Π (map-inv-equiv-total-fiber f) (C ∘ pr1) ∘ ind-Σ)
-      ( map-Π (λ b → const (fiber f b) (C b)))
+      ( map-Π (λ b → diagonal-exponential (C b) (fiber f b)))
       ( is-emb-comp
         ( precomp-Π (map-inv-equiv-total-fiber f) (C ∘ pr1))
         ( ind-Σ)
@@ -257,7 +262,9 @@ module _
           ( is-equiv-precomp-Π-is-equiv
             ( is-equiv-map-inv-equiv-total-fiber f) (C ∘ pr1)))
         ( is-emb-is-equiv is-equiv-ind-Σ))
-      ( is-emb-map-Π (λ b → is-emb-const-is-acyclic (fiber f b) (ac b) (C b)))
+      ( is-emb-map-Π
+        ( λ b →
+          is-emb-diagonal-exponential-is-acyclic (fiber f b) (ac b) (C b)))
 ```
 
 In particular, every epimorphism is actually a dependent epimorphism.

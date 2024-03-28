@@ -305,7 +305,7 @@ module _
     is-connected-map k f → dependent-universal-property-connected-map k f
   dependent-universal-property-is-connected-map H P =
     is-equiv-precomp-Π-fiber-condition
-      ( λ b → is-equiv-diagonal-is-connected (P b) (H b))
+      ( λ b → is-equiv-diagonal-exponential-is-connected (P b) (H b))
 
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : connected-map k A B)

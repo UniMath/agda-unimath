@@ -45,7 +45,7 @@ pr1 (constant-suspension-structure-Pointed-Type X Y) =
 pr1 (pr2 (constant-suspension-structure-Pointed-Type X Y)) =
   point-Pointed-Type Y
 pr2 (pr2 (constant-suspension-structure-Pointed-Type X Y)) =
-  const X (point-Pointed-Type Y ＝ point-Pointed-Type Y) refl
+  const X refl
 ```
 
 #### Suspension structure induced by a map into a loop space

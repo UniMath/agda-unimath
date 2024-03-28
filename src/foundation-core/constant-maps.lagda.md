@@ -26,8 +26,8 @@ function
 ## Definition
 
 ```agda
-const : {l1 l2 : Level} (A : UU l1) (B : UU l2) → B → A → B
-const A B b x = b
+const : {l1 l2 : Level} (A : UU l1) {B : UU l2} → B → A → B
+const A b x = b
 ```
 
 ## See also

@@ -12,6 +12,7 @@ open import foundation.binary-transport
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
@@ -127,14 +128,28 @@ module _
               ( Id)
               ( htpy-eq
                 ( is-section-map-inv-equiv
-                  ( const A (type-Ω (pair (type-Truncated-Type BG) pt)) ,
-                    is-equiv-const-Id-is-acyclic-Truncated-Type A ac BG pt pt)
+                  ( ( diagonal-exponential
+                      ( type-Ω (type-Truncated-Type BG , pt))
+                      ( A)) ,
+                    ( is-equiv-diagonal-exponential-Id-is-acyclic-Truncated-Type
+                      ( A)
+                      ( ac)
+                      ( BG)
+                      ( pt)
+                      ( pt)))
                   ( gen))
                 ( x))
               ( htpy-eq
                 ( is-section-map-inv-equiv
-                  ( const A (type-Ω (pair (type-Truncated-Type BG) pt)) ,
-                    is-equiv-const-Id-is-acyclic-Truncated-Type A ac BG pt pt)
+                  ( ( diagonal-exponential
+                      ( type-Ω (type-Truncated-Type BG , pt))
+                      ( A)) ,
+                    ( is-equiv-diagonal-exponential-Id-is-acyclic-Truncated-Type
+                      ( A)
+                      ( ac)
+                      ( BG)
+                      ( pt)
+                      ( pt)))
                   ( gen))
                 ( y))
               ( refl))))
