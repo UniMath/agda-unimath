@@ -39,7 +39,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A fraction `m/n` is
+An [integer fraction](elementary-number-theory.integer-fractions.md) `m/n` is
 {{#concept "less or equal" Disambiguation="integer fracion" Agda=leq-fraction-ℤ}}
 to a fraction `m'/n'` if the [integer product](elementary-number-theory.multiplication-integers.md) `m * n'` is
 [less or equal](elementary-number-theory.inequality-integers.md) to `m' * n`.
