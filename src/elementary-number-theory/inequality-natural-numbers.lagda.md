@@ -40,7 +40,7 @@ less than any natural number, and such that `m+1 ≤ n+1` is equivalent to
 
 ## Definitions
 
-### The partial ordering on ℕ
+### The standard inequality on the natural numbers
 
 ```agda
 leq-ℕ : ℕ → ℕ → UU lzero
@@ -52,7 +52,7 @@ infix 30 _≤-ℕ_
 _≤-ℕ_ = leq-ℕ
 ```
 
-### Alternative definition of the partial ordering on ℕ
+### Alternative definition of the standard inequality on the natural numbers
 
 ```agda
 data leq-ℕ' : ℕ → ℕ → UU lzero where
@@ -62,7 +62,7 @@ data leq-ℕ' : ℕ → ℕ → UU lzero where
 
 ## Properties
 
-### Inequality on ℕ is a proposition
+### Inequality on the natural numbers is a proposition
 
 ```agda
 is-prop-leq-ℕ :
@@ -77,7 +77,7 @@ pr1 (leq-ℕ-Prop m n) = leq-ℕ m n
 pr2 (leq-ℕ-Prop m n) = is-prop-leq-ℕ m n
 ```
 
-### The partial ordering on the natural numbers is decidable
+### Inequality on the natural numbers is decidable
 
 ```agda
 is-decidable-leq-ℕ :
@@ -88,7 +88,7 @@ is-decidable-leq-ℕ (succ-ℕ m) zero-ℕ = inr id
 is-decidable-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-leq-ℕ m n
 ```
 
-### The partial ordering on ℕ is a congruence
+### Inequality on the natural numbers is a congruence
 
 ```agda
 concatenate-eq-leq-eq-ℕ :
@@ -104,7 +104,7 @@ concatenate-eq-leq-ℕ :
 concatenate-eq-leq-ℕ n refl H = H
 ```
 
-### Reflexivity
+### Inequality on the natural numbers is reflexive
 
 ```agda
 refl-leq-ℕ : (n : ℕ) → n ≤-ℕ n
@@ -115,7 +115,7 @@ leq-eq-ℕ : (m n : ℕ) → m ＝ n → m ≤-ℕ n
 leq-eq-ℕ m .m refl = refl-leq-ℕ m
 ```
 
-### Transitivity
+### Inequality on the natural numbers is transitive
 
 ```agda
 transitive-leq-ℕ : is-transitive leq-ℕ
@@ -124,7 +124,7 @@ transitive-leq-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-leq-ℕ n m l p q
 ```
 
-### Antisymmetry
+### Inequality on the natural numbers is antisymmetric
 
 ```agda
 antisymmetric-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → n ≤-ℕ m → m ＝ n
@@ -133,7 +133,7 @@ antisymmetric-leq-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (antisymmetric-leq-ℕ m n p q)
 ```
 
-### The poset of natural numbers
+### The partially ordered set of natural numbers ordered by the standard inequality
 
 ```agda
 ℕ-Preorder : Preorder lzero lzero
@@ -229,7 +229,7 @@ succ-leq-ℕ zero-ℕ = star
 succ-leq-ℕ (succ-ℕ n) = succ-leq-ℕ n
 ```
 
-### An natural number less than `n+1` is either less than `n` or it is `n+1`
+### Any natural number less than `n+1` is either less than `n` or it is `n+1`
 
 ```agda
 decide-leq-succ-ℕ :
@@ -384,11 +384,7 @@ preserves-leq-right-mul-ℕ k m n H =
     ( commutative-mul-ℕ k m)
     ( preserves-leq-left-mul-ℕ k m n H)
     ( commutative-mul-ℕ n k)
-```
 
-### Multiplication preserves inequality
-
-```agda
 preserves-leq-mul-ℕ :
   (m m' n n' : ℕ) → m ≤-ℕ m' → n ≤-ℕ n' → (m *ℕ n) ≤-ℕ (m' *ℕ n')
 preserves-leq-mul-ℕ m m' n n' H K =
@@ -400,7 +396,7 @@ preserves-leq-mul-ℕ m m' n n' H K =
     ( preserves-leq-left-mul-ℕ n m m' H)
 ```
 
-### Multiplication by a nonzero element reflects inequality of natural numbers
+### Multiplication by a nonzero natural number reflects inequality of natural numbers
 
 ```agda
 reflects-order-mul-ℕ :

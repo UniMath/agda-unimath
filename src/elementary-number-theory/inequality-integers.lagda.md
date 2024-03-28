@@ -51,7 +51,7 @@ integers.
 
 ## Definition
 
-### The standard ordering on ℤ
+### The standard inequality on the integers
 
 ```agda
 leq-ℤ-Prop : ℤ → ℤ → Prop lzero
@@ -88,7 +88,7 @@ transitive-leq-ℤ k l m H K =
     ( is-nonnegative-add-ℤ H K)
 ```
 
-### The ordering of the integers is decidable
+### Inequality on the integers is decidable
 
 ```agda
 is-decidable-leq-ℤ : (x y : ℤ) → (leq-ℤ x y) + ¬ (leq-ℤ x y)
@@ -101,7 +101,7 @@ leq-ℤ-Decidable-Prop x y =
     is-decidable-leq-ℤ x y)
 ```
 
-### The ordering of the integers is linear
+### Inequality on the integers is linear
 
 ```agda
 linear-leq-ℤ : (x y : ℤ) → (leq-ℤ x y) + (leq-ℤ y x)
@@ -147,7 +147,7 @@ concatenate-eq-leq-ℤ :
 concatenate-eq-leq-ℤ y refl H = H
 ```
 
-### Addition on ℤ preserves and reflects inequality
+### Addition on the integers preserves inequality
 
 ```agda
 preserves-leq-left-add-ℤ :
@@ -169,7 +169,11 @@ preserves-leq-add-ℤ {a} {b} {c} {d} H K =
     ( b +ℤ d)
     ( preserves-leq-right-add-ℤ b c d K)
     ( preserves-leq-left-add-ℤ c a b H)
+```
 
+### Addition on the integers reflects inequality
+
+```agda
 reflects-leq-left-add-ℤ :
   (z x y : ℤ) → leq-ℤ (x +ℤ z) (y +ℤ z) → leq-ℤ x y
 reflects-leq-left-add-ℤ z x y =
@@ -181,7 +185,7 @@ reflects-leq-right-add-ℤ z x y =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
-### Inclusion of ℕ into ℤ preserves order
+### Inclusion of ℕ into ℤ preserves standard inequality
 
 ```agda
 leq-int-ℕ : (x y : ℕ) → leq-ℕ x y → leq-ℤ (int-ℕ x) (int-ℕ y)
@@ -197,7 +201,7 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
   ( leq-int-ℕ x y H)
 ```
 
-### The partially ordered set of integers ordered by inequality
+### The partially ordered set of integers ordered by the standard inequality
 
 ```agda
 ℤ-Preorder : Preorder lzero lzero

@@ -1,4 +1,4 @@
-# Strict inequality natural numbers
+# Strict inequality on natural numbers
 
 ```agda
 module elementary-number-theory.strict-inequality-natural-numbers where
@@ -32,7 +32,7 @@ open import foundation.universe-levels
 
 ## Definition
 
-### The strict ordering of the natural numbers
+### The standard strict inequality on the natural numbers
 
 ```agda
 le-ℕ-Prop : ℕ → ℕ → Prop lzero
@@ -68,7 +68,7 @@ concatenate-le-eq-ℕ :
 concatenate-le-eq-ℕ p refl = p
 ```
 
-### Strict inequality is decidable
+### Strict inequality on the natural numbers is decidable
 
 ```agda
 is-decidable-le-ℕ :
@@ -112,7 +112,7 @@ contradiction-le-one-ℕ zero-ℕ ()
 contradiction-le-one-ℕ (succ-ℕ n) ()
 ```
 
-### The strict ordering of the natural numbers is anti-reflexive
+### The strict inequality on the natural numbers is anti-reflexive
 
 ```agda
 anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n <-ℕ n)
@@ -128,7 +128,7 @@ neq-le-ℕ {zero-ℕ} {succ-ℕ y} H = is-nonzero-succ-ℕ y ∘ inv
 neq-le-ℕ {succ-ℕ x} {succ-ℕ y} H p = neq-le-ℕ H (is-injective-succ-ℕ p)
 ```
 
-### Strict inequality is antisymmetric
+### The strict inequality on the natural numbers is antisymmetric
 
 ```agda
 antisymmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → m ＝ n
@@ -136,7 +136,7 @@ antisymmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (antisymmetric-le-ℕ m n p q)
 ```
 
-### The strict ordering of the natural numbers is transitive
+### The strict inequality on the natural numbers is transitive
 
 ```agda
 transitive-le-ℕ : (n m l : ℕ) → (le-ℕ n m) → (le-ℕ m l) → (le-ℕ n l)
@@ -161,7 +161,7 @@ transitive-le-ℕ' (succ-ℕ k) (succ-ℕ l) (succ-ℕ m) t s =
   transitive-le-ℕ' k l m t s
 ```
 
-### Strict inequality is linear
+### The strict inequality on the natural numbers is linear
 
 ```agda
 linear-le-ℕ : (x y : ℕ) → (le-ℕ x y) + ((x ＝ y) + (le-ℕ y x))

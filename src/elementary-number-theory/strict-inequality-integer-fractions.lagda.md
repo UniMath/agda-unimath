@@ -53,7 +53,7 @@ is [strictly less](elementary-number-theory.strict-inequality-integers.md) than
 
 ## Definition
 
-### Strict inequality of integer fractions
+### The standard strict inequality on the integer fractions
 
 ```agda
 le-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
@@ -69,7 +69,7 @@ is-prop-le-fraction-ℤ x y = is-prop-type-Prop (le-fraction-ℤ-Prop x y)
 
 ## Properties
 
-### Strict inequality of integer fractions is decidable
+### Strict inequality on the integer fractions is decidable
 
 ```agda
 is-decidable-le-fraction-ℤ :
@@ -97,7 +97,7 @@ decide-le-leq-fraction-ℤ x y =
     ( decide-is-positive-is-nonpositive-ℤ)
 ```
 
-### Strict inequality of integer fractions implies inequality
+### Strict inequality on the integer fractions implies inequality
 
 ```agda
 leq-le-fraction-ℤ : {x y : fraction-ℤ} → le-fraction-ℤ x y → leq-fraction-ℤ x y
@@ -107,7 +107,7 @@ leq-le-fraction-ℤ {x} {y} =
     { mul-ℤ (numerator-fraction-ℤ y) (denominator-fraction-ℤ x)}
 ```
 
-### Strict inequality on integer fractions is asymmetric
+### Strict inequality on the integer fractions is asymmetric
 
 ```agda
 module _
@@ -126,7 +126,7 @@ module _
         ( denominator-fraction-ℤ x))
 ```
 
-### Strict inequality on integer fractions is transitive
+### Strict inequality on the integer fractions is transitive
 
 ```agda
 transitive-le-fraction-ℤ :
@@ -148,7 +148,7 @@ transitive-le-fraction-ℤ p q r H H' =
       ( is-positive-denominator-fraction-ℤ q)
 ```
 
-### Chaining rules for inequality and strict inequality on integer fractions
+### Chaining rules for inequality and strict inequality on the integer fractions
 
 ```agda
 module _
@@ -192,7 +192,7 @@ module _
       ( is-positive-denominator-fraction-ℤ q)
 ```
 
-### Chaining rules for similarity and strict inequality on integer fractions
+### Chaining rules for similarity and strict inequality on the integer fractions
 
 ```agda
 module _
@@ -270,7 +270,7 @@ module _
     is-positive-eq-ℤ (cross-mul-diff-right-mediant-fraction-ℤ x y)
 ```
 
-### Strict inequality on integer fractions is dense
+### Strict inequality on the integer fractions is dense
 
 ```agda
 module _
@@ -285,7 +285,7 @@ module _
       ( le-left-mediant-fraction-ℤ x y H , le-right-mediant-fraction-ℤ x y H)
 ```
 
-### The strict order on integer fractions is located
+### Strict inequality on the integer fractions is located
 
 ```agda
 module _

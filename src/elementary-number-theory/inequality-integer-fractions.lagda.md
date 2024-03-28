@@ -39,12 +39,14 @@ open import foundation.universe-levels
 
 ## Idea
 
-A fraction `m/n` is less or equal to a fraction `m'/n'` iff `m * n'` is less or
-equal to `m' * n`.
+A fraction `m/n` is
+{{#concept "less or equal" Disambiguation="integer fracion" Agda=leq-fraction-ℤ}}
+to a fraction `m'/n'` iff `m * n'` is
+[less or equal](elementary-number-theory.inequality-integers.md) to `m' * n`.
 
 ## Definition
 
-### Inequality of integer fractions
+### The standard inequality on integer fractions
 
 ```agda
 leq-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero
@@ -60,7 +62,7 @@ is-prop-leq-fraction-ℤ x y = is-prop-type-Prop (leq-fraction-ℤ-Prop x y)
 
 ## Properties
 
-### Inequality of integer fractions is decidable
+### Inequality on integer fractions is decidable
 
 ```agda
 is-decidable-leq-fraction-ℤ :

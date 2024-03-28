@@ -58,7 +58,7 @@ is [strictly less](elementary-number-theory.strict-inequality-integers.md) than
 
 ## Definition
 
-### Strict inequality on the rational numbers
+### The standard strict inequality on the rational numbers
 
 ```agda
 le-ℚ-Prop : ℚ → ℚ → Prop lzero
@@ -73,7 +73,7 @@ is-prop-le-ℚ x y = is-prop-type-Prop (le-ℚ-Prop x y)
 
 ## Properties
 
-### Strict inequality of rational numbers is decidable
+### Strict inequality on the rational numbers is decidable
 
 ```agda
 is-decidable-le-ℚ : (x y : ℚ) → (le-ℚ x y) + ¬ (le-ℚ x y)
@@ -87,14 +87,14 @@ le-ℚ-Decidable-Prop x y =
     is-decidable-le-ℚ x y)
 ```
 
-### Strict inequality on rational numbers implies inequality
+### Strict inequality on the rational numbers implies inequality
 
 ```agda
 leq-le-ℚ : {x y : ℚ} → le-ℚ x y → leq-ℚ x y
 leq-le-ℚ {x} {y} = leq-le-fraction-ℤ {fraction-ℚ x} {fraction-ℚ y}
 ```
 
-### Strict inequality on rationals is asymmetric
+### Strict inequality on the rationals is asymmetric
 
 ```agda
 asymmetric-le-ℚ : (x y : ℚ) → le-ℚ x y → ¬ (le-ℚ y x)
@@ -108,7 +108,7 @@ irreflexive-le-ℚ =
   is-irreflexive-is-asymmetric le-ℚ asymmetric-le-ℚ
 ```
 
-### Transitivity properties
+### Strict inequality on the rationals is transitive
 
 ```agda
 module _
@@ -121,6 +121,14 @@ module _
       ( fraction-ℚ x)
       ( fraction-ℚ y)
       ( fraction-ℚ z)
+```
+
+### Concatenation rules for inequality and strict inequality on the rational numbers
+
+```
+module _
+  (x y z : ℚ)
+  where
 
   concatenate-le-leq-ℚ : le-ℚ x y → leq-ℚ y z → le-ℚ x z
   concatenate-le-leq-ℚ =
@@ -137,7 +145,7 @@ module _
       ( fraction-ℚ z)
 ```
 
-### Strict inequality on the rational numbers reflects strict inequality on the underlying fractions
+### Strict inequality on the rational numbers reflects the strict inequality of their underlying fractions
 
 ```agda
 module _
@@ -203,7 +211,7 @@ module _
     frac = (succ-ℤ (numerator-ℚ x) , positive-denominator-ℚ x)
 ```
 
-### Decidability of strict inequality on the rationals
+### For any two rational numbers `x` and `y`, either `x < y` or `y ≤ x`
 
 ```agda
 decide-le-leq-ℚ : (x y : ℚ) → le-ℚ x y + leq-ℚ y x
@@ -254,7 +262,7 @@ module _
       ( le-right-mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y) H)
 ```
 
-### Strict inequality on the rationals is dense
+### Strict inequality on the rational numbers is dense
 
 ```agda
 module _
@@ -268,7 +276,7 @@ module _
       ( le-left-mediant-ℚ x y H , le-right-mediant-ℚ x y H)
 ```
 
-### The strict order on the rationals is located
+### Strict inequality on the rational numbers is located
 
 ```agda
 located-le-ℚ : (x y z : ℚ) → le-ℚ y z → (le-ℚ-Prop y x) ∨ (le-ℚ-Prop x z)

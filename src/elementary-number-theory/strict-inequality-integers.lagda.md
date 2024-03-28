@@ -51,7 +51,7 @@ on the integers.
 
 ## Definition
 
-### The strict ordering on ℤ
+### The standard strict ordering on the integers
 
 ```agda
 le-ℤ-Prop : ℤ → ℤ → Prop lzero
@@ -66,14 +66,14 @@ is-prop-le-ℤ x y = is-prop-type-Prop (le-ℤ-Prop x y)
 
 ## Properties
 
-### Strict inequality implies inequality
+### Strict inequality on the integers implies inequality
 
 ```agda
 leq-le-ℤ : {x y : ℤ} → le-ℤ x y → leq-ℤ x y
 leq-le-ℤ {x} {y} = is-nonnegative-is-positive-ℤ
 ```
 
-### The strict ordering on the integers is decidable
+### Strict inequality on the integers is decidable
 
 ```agda
 is-decidable-le-ℤ : (x y : ℤ) → (le-ℤ x y) + ¬ (le-ℤ x y)
@@ -86,7 +86,7 @@ le-ℤ-Decidable-Prop x y =
     is-decidable-le-ℤ x y)
 ```
 
-### Strict inequality on the integers is transitive and asymmetric
+### Strict inequality on the integers is transitive
 
 ```agda
 transitive-le-ℤ : (k l m : ℤ) → le-ℤ l m → le-ℤ k l → le-ℤ k m
@@ -94,7 +94,11 @@ transitive-le-ℤ k l m H K =
   is-positive-eq-ℤ
     ( triangle-diff-ℤ m l k)
     ( is-positive-add-ℤ H K)
+```
 
+### Strict inequality on the integers is asymmetric
+
+```agda
 asymmetric-le-ℤ : (x y : ℤ) → le-ℤ x y → ¬ (le-ℤ y x)
 asymmetric-le-ℤ x y p =
   is-not-positive-is-nonpositive-ℤ
@@ -104,7 +108,7 @@ asymmetric-le-ℤ x y p =
         ( is-nonnegative-is-positive-ℤ p)))
 ```
 
-### The strict ordering on the integers is connected
+### Strict inequality on the integers is connected
 
 ```agda
 connected-le-ℤ : (x y : ℤ) → x ≠ y → le-ℤ x y + le-ℤ y x
@@ -118,7 +122,7 @@ connected-le-ℤ x y H =
     ( decide-sign-nonzero-ℤ (H ∘ eq-diff-ℤ))
 ```
 
-### An integer is strictly greater than its predecessor
+### Any integer is strictly greater than its predecessor
 
 ```agda
 le-pred-ℤ : (x : ℤ) → le-ℤ (pred-ℤ x) x
@@ -128,7 +132,7 @@ le-pred-ℤ x =
     ( is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
-### An integer is strictly lesser than its successor
+### Any integer is strictly lesser than its successor
 
 ```agda
 le-succ-ℤ : (x : ℤ) → le-ℤ x (succ-ℤ x)
@@ -138,7 +142,7 @@ le-succ-ℤ x =
     ( is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
-### Addition on the integers preserves and reflects the strict ordering
+### Addition on the integers preserves strict inequality
 
 ```agda
 preserves-le-left-add-ℤ :
@@ -160,7 +164,11 @@ preserves-le-add-ℤ {a} {b} {c} {d} H K =
     ( b +ℤ d)
     ( preserves-le-right-add-ℤ b c d K)
     ( preserves-le-left-add-ℤ c a b H)
+```
 
+### Addition on the integers reflects strict inequality
+
+```agda
 reflects-le-left-add-ℤ :
   (z x y : ℤ) → le-ℤ (x +ℤ z) (y +ℤ z) → le-ℤ x y
 reflects-le-left-add-ℤ z x y =

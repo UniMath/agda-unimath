@@ -52,7 +52,7 @@ is [less than or equal](elementary-number-theory.inequality-integers.md) to
 
 ## Definition
 
-### Inequality on the rational numbers
+### The standard inequality on the rational numbers
 
 ```agda
 leq-ℚ-Prop : ℚ → ℚ → Prop lzero
@@ -70,7 +70,7 @@ _≤-ℚ_ = leq-ℚ
 
 ## Properties
 
-### Inequality of rational numbers is decidable
+### Inequality on the rational numbers is decidable
 
 ```agda
 is-decidable-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + ¬ (leq-ℚ x y)
@@ -84,7 +84,7 @@ leq-ℚ-Decidable-Prop x y =
     is-decidable-leq-ℚ x y)
 ```
 
-### Inequality on rational numbers is reflexive
+### Inequality on the rational numbers is reflexive
 
 ```agda
 refl-leq-ℚ : (x : ℚ) → leq-ℚ x x
@@ -92,7 +92,7 @@ refl-leq-ℚ x =
   refl-leq-ℤ (numerator-ℚ x *ℤ denominator-ℚ x)
 ```
 
-### Inequality on rational numbers is antisymmetric
+### Inequality on the rational numbers is antisymmetric
 
 ```agda
 antisymmetric-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ y x → x ＝ y
@@ -109,7 +109,7 @@ antisymmetric-leq-ℚ x y H H' =
   ( in-fraction-fraction-ℚ y)
 ```
 
-### The standard ordering on rational numbers is linear
+### Inequality on the rational numbers is linear
 
 ```agda
 linear-leq-ℚ : (x y : ℚ) → (leq-ℚ x y) + (leq-ℚ y x)
@@ -124,7 +124,7 @@ linear-leq-ℚ x y =
       { cross-mul-diff-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)})
 ```
 
-### Transitivity properties
+### Inequality on the rational numbers is transitive
 
 ```agda
 module _
@@ -139,7 +139,7 @@ module _
       ( fraction-ℚ z)
 ```
 
-### The partially ordered set of rational numbers given by the standard ordering
+### The partially ordered set of rational numbers ordered by the standard inequality
 
 ```agda
 ℚ-Preorder : Preorder lzero lzero
