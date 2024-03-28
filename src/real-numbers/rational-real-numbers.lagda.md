@@ -93,8 +93,8 @@ is-dedekind-cut-le-ℚ x =
 ### The canonical map from `ℚ` to `ℝ`
 
 ```agda
-real-rational : ℚ → ℝ lzero
-real-rational x =
+real-ℚ : ℚ → ℝ lzero
+real-ℚ x =
   real-dedekind-cut
     ( λ (q : ℚ) → le-ℚ-Prop q x)
     ( λ (r : ℚ) → le-ℚ-Prop x r)
@@ -186,18 +186,18 @@ module _
 ### The real embedding of a rational number is rational
 
 ```agda
-is-rational-real-rational : (p : ℚ) → is-rational-ℝ (real-rational p) p
-is-rational-real-rational p = irreflexive-le-ℚ p , irreflexive-le-ℚ p
+is-rational-real-ℚ : (p : ℚ) → is-rational-ℝ (real-ℚ p) p
+is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
 ```
 
 ### Rational real numbers are embedded rationals
 
 ```agda
 eq-real-rational-is-rational-ℝ :
-  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-rational q ＝ x
+  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-ℚ q ＝ x
 eq-real-rational-is-rational-ℝ x q H =
   eq-eq-lower-cut-ℝ
-    ( real-rational q)
+    ( real-ℚ q)
     ( x)
     ( eq-has-same-elements-subtype
       ( λ p → le-ℚ-Prop p q)
@@ -220,7 +220,7 @@ eq-real-rational-is-rational-ℝ x q H =
 
 ```agda
 rational-ℝ-rational : ℚ → Rational-ℝ lzero
-rational-ℝ-rational q = real-rational q , q , is-rational-real-rational q
+rational-ℝ-rational q = (real-ℚ q , q , is-rational-real-ℚ q)
 ```
 
 ### The rationals and rational reals are equivalent
@@ -237,7 +237,7 @@ is-retraction-rational-ℝ-rational :
 is-retraction-rational-ℝ-rational (x , q , H) =
   eq-type-subtype
     subtype-rational-real
-    ( ap real-rational α ∙ eq-real-rational-is-rational-ℝ x q H)
+    ( ap real-ℚ α ∙ eq-real-rational-is-rational-ℝ x q H)
   where
     α : rational-rational-ℝ (x , q , H) ＝ q
     α = refl
