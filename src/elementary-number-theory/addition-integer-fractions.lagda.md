@@ -9,10 +9,12 @@ module elementary-number-theory.addition-integer-fractions where
 ```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
 
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 ```
@@ -182,4 +184,22 @@ commutative-add-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) =
   ap-mul-ℤ
     ( commutative-add-ℤ (nx *ℤ dy) (ny *ℤ dx))
     ( commutative-mul-ℤ dy dx)
+```
+
+### The numerator of the sum of an integer fraction and its negative is zero
+
+```agda
+is-zero-numerator-add-left-neg-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-zero-ℤ (numerator-fraction-ℤ (add-fraction-ℤ (neg-fraction-ℤ x) x))
+is-zero-numerator-add-left-neg-fraction-ℤ (p , q , H) =
+  ap (_+ℤ (p *ℤ q)) (left-negative-law-mul-ℤ p q) ∙
+  left-inverse-law-add-ℤ (p *ℤ q)
+
+is-zero-numerator-add-right-neg-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-zero-ℤ (numerator-fraction-ℤ (add-fraction-ℤ x (neg-fraction-ℤ x)))
+is-zero-numerator-add-right-neg-fraction-ℤ (p , q , H) =
+  ap ((p *ℤ q) +ℤ_) (left-negative-law-mul-ℤ p q) ∙
+  right-inverse-law-add-ℤ (p *ℤ q)
 ```

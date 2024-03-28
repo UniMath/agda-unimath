@@ -97,6 +97,13 @@ is-one-fraction-ℤ : fraction-ℤ → UU lzero
 is-one-fraction-ℤ x = (x ＝ one-fraction-ℤ)
 ```
 
+### The negative of an integer fraction
+
+```agda
+neg-fraction-ℤ : fraction-ℤ → fraction-ℤ
+neg-fraction-ℤ (d , n) = (neg-ℤ d , n)
+```
+
 ## Properties
 
 ### Denominators are nonzero
@@ -189,6 +196,22 @@ pr1 equivalence-relation-sim-fraction-ℤ = sim-fraction-ℤ-Prop
 pr1 (pr2 equivalence-relation-sim-fraction-ℤ) = refl-sim-fraction-ℤ
 pr1 (pr2 (pr2 equivalence-relation-sim-fraction-ℤ)) = symmetric-sim-fraction-ℤ
 pr2 (pr2 (pr2 equivalence-relation-sim-fraction-ℤ)) = transitive-sim-fraction-ℤ
+```
+
+### Two integer fractions with zero numerator are similar
+
+```agda
+sim-is-zero-numerator-fraction-ℤ :
+  (x y : fraction-ℤ) →
+  is-zero-ℤ (numerator-fraction-ℤ x) →
+  is-zero-ℤ (numerator-fraction-ℤ y) →
+  sim-fraction-ℤ x y
+sim-is-zero-numerator-fraction-ℤ x y H K =
+  eq-is-zero-ℤ
+  ( ap (_*ℤ (denominator-fraction-ℤ y)) H ∙
+    left-zero-law-mul-ℤ (denominator-fraction-ℤ y))
+  ( ap (_*ℤ (denominator-fraction-ℤ x)) K ∙
+    left-zero-law-mul-ℤ (denominator-fraction-ℤ x))
 ```
 
 ### The greatest common divisor of the numerator and a denominator of a fraction is always a positive integer

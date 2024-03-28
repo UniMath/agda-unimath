@@ -12,10 +12,12 @@ open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.mediant-integer-fractions
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.reduced-integer-fractions
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
@@ -106,6 +108,14 @@ is-one-ℚ : ℚ → UU lzero
 is-one-ℚ x = (x ＝ one-ℚ)
 ```
 
+### The negative of a rational number
+
+```agda
+neg-ℚ : ℚ → ℚ
+pr1 (neg-ℚ (x , H)) = neg-fraction-ℤ x
+pr2 (neg-ℚ (x , H)) = is-reduced-neg-is-reduced-fraction-ℤ x H
+```
+
 ### The mediant of two rationals
 
 ```agda
@@ -156,7 +166,66 @@ in-fraction-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
     ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (m , n , n-pos)))
 ```
 
-### The reflecting map from ℤ to ℚ
+### Two fractions with the same numerator and same denominator are equal
+
+```agda
+module _
+  ( x y : ℚ)
+  ( H : numerator-ℚ x ＝ numerator-ℚ y)
+  ( K : denominator-ℚ x ＝ denominator-ℚ y)
+  where
+
+  eq-ℚ : x ＝ y
+  eq-ℚ =
+    inv (in-fraction-fraction-ℚ x) ∙
+    eq-ℚ-sim-fraction-ℤ
+      ( fraction-ℚ x)
+      ( fraction-ℚ y)
+      ( ap-mul-ℤ H (inv K)) ∙
+    in-fraction-fraction-ℚ y
+```
+
+### A rational number is zero if and only if its numerator is zero
+
+```agda
+module _
+  (x : ℚ)
+  where
+
+  is-zero-numerator-is-zero-ℚ :
+    is-zero-ℚ x → is-zero-ℤ (numerator-ℚ x)
+  is-zero-numerator-is-zero-ℚ = ap numerator-ℚ
+
+  is-zero-is-zero-numerator-ℚ :
+    is-zero-ℤ (numerator-ℚ x) → is-zero-ℚ x
+  is-zero-is-zero-numerator-ℚ H =
+    inv (in-fraction-fraction-ℚ x) ∙
+    eq-ℚ-sim-fraction-ℤ
+      ( fraction-ℚ x)
+      ( fraction-ℚ zero-ℚ)
+      ( eq-is-zero-ℤ
+        ( ap (mul-ℤ' one-ℤ) H ∙ right-zero-law-mul-ℤ one-ℤ)
+        ( left-zero-law-mul-ℤ (denominator-ℚ x))) ∙
+    in-fraction-fraction-ℚ zero-ℚ
+```
+
+### The rational image of the negative of an integer is the rational negative of its image
+
+```agda
+neg-ℚ-in-int-neg-ℤ : (k : ℤ) → in-int (neg-ℤ k) ＝ neg-ℚ (in-int k)
+neg-ℚ-in-int-neg-ℤ k =
+  eq-ℚ (in-int (neg-ℤ k)) (neg-ℚ (in-int k)) refl refl
+```
+
+### The negative function on the rational numbers is an involution
+
+```agda
+neg-neg-ℚ : (x : ℚ) → neg-ℚ (neg-ℚ x) ＝ x
+neg-neg-ℚ x =
+  eq-ℚ (neg-ℚ (neg-ℚ x)) x (neg-neg-ℤ (numerator-ℚ x)) refl
+```
+
+### The reflecting map from fraction-ℤ to ℚ
 
 ```agda
 reflecting-map-sim-fraction :

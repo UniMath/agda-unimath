@@ -103,3 +103,23 @@ commutative-add-ℚ (x , px) (y , py) =
     ( add-fraction-ℤ y x)
     ( commutative-add-fraction-ℤ x y)
 ```
+
+### The negative of a rational number is its additive inverse
+
+```agda
+left-inverse-law-add-ℚ : (x : ℚ) → (neg-ℚ x) +ℚ x ＝ zero-ℚ
+left-inverse-law-add-ℚ x =
+  eq-ℚ-sim-fraction-ℤ
+    ( add-fraction-ℤ (neg-fraction-ℤ (fraction-ℚ x)) (fraction-ℚ x))
+    ( fraction-ℚ zero-ℚ)
+    ( sim-is-zero-numerator-fraction-ℤ
+      ( add-fraction-ℤ (neg-fraction-ℤ (fraction-ℚ x)) (fraction-ℚ x))
+      ( fraction-ℚ zero-ℚ)
+      ( is-zero-numerator-add-left-neg-fraction-ℤ (fraction-ℚ x))
+      ( refl)) ∙
+  in-fraction-fraction-ℚ zero-ℚ
+
+right-inverse-law-add-ℚ : (x : ℚ) → x +ℚ (neg-ℚ x) ＝ zero-ℚ
+right-inverse-law-add-ℚ x =
+  commutative-add-ℚ x (neg-ℚ x) ∙ left-inverse-law-add-ℚ x
+```

@@ -64,6 +64,22 @@ is-prop-is-reduced-fraction-ℤ x =
     ( denominator-fraction-ℤ x)
 ```
 
+### The negative of a reduced integer fraction is reduced
+
+```agda
+is-reduced-neg-is-reduced-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-reduced-fraction-ℤ x →
+  is-reduced-fraction-ℤ (neg-fraction-ℤ x)
+is-reduced-neg-is-reduced-fraction-ℤ x =
+  tr
+    ( is-one-ℤ)
+    ( inv
+      ( preserves-gcd-left-neg-ℤ
+        ( numerator-fraction-ℤ x)
+        ( denominator-fraction-ℤ x)))
+```
+
 ### Any fraction can be reduced
 
 ```agda
