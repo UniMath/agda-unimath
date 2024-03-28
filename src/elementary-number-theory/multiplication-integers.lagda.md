@@ -313,7 +313,8 @@ right-negative-law-mul-ℤ k l =
     ( left-negative-law-mul-ℤ l k)) ∙
   ( ap neg-ℤ (commutative-mul-ℤ l k))
 
-interchange-law-mul-mul-ℤ : interchange-law mul-ℤ mul-ℤ
+interchange-law-mul-mul-ℤ :
+  (x y u v : ℤ) → (x *ℤ y) *ℤ (u *ℤ v) ＝ (x *ℤ u) *ℤ (y *ℤ v)
 interchange-law-mul-mul-ℤ =
   interchange-law-commutative-and-associative
     mul-ℤ

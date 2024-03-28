@@ -146,7 +146,8 @@ commutative-mul-ℚ x y =
 ### Interchange law
 
 ```agda
-interchange-law-mul-mul-ℚ : interchange-law mul-ℚ mul-ℚ
+interchange-law-mul-mul-ℚ :
+  (x y u v : ℚ) → (x *ℚ y) *ℚ (u *ℚ v) ＝ (x *ℚ u) *ℚ (y *ℚ v)
 interchange-law-mul-mul-ℚ =
   interchange-law-commutative-and-associative
     mul-ℚ
