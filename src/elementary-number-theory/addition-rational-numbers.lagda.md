@@ -23,9 +23,10 @@ open import foundation.identity-types
 
 ## Idea
 
-We introduce addition on the rationals and derive its basic properties.
-Properties of addition with respect to inequality are derived in
-`inequality-rationals`.
+We introduce
+{{#concept "addition" Disambiguation="rational numbers" Agda=add-ℚ}} on the
+[rational numbers](elementary-number-theory.rational-numbers.md) and derive its
+basic properties.
 
 ## Definition
 
@@ -123,3 +124,8 @@ right-inverse-law-add-ℚ : (x : ℚ) → x +ℚ (neg-ℚ x) ＝ zero-ℚ
 right-inverse-law-add-ℚ x =
   commutative-add-ℚ x (neg-ℚ x) ∙ left-inverse-law-add-ℚ x
 ```
+
+## See also
+
+- The additive group structure on the rational numbers is defined in
+  [elementary-number-theory.group-of-rational-numbers.md].
