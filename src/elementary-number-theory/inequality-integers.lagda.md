@@ -51,7 +51,7 @@ integers.
 
 ## Definition
 
-### The standard inequality on the integers
+### Inequality on the integers
 
 ```agda
 leq-ℤ-Prop : ℤ → ℤ → Prop lzero
@@ -185,7 +185,7 @@ reflects-leq-right-add-ℤ z x y =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
-### Inclusion of ℕ into ℤ preserves standard inequality
+### Inclusion of ℕ into ℤ preserves inequality
 
 ```agda
 leq-int-ℕ : (x y : ℕ) → leq-ℕ x y → leq-ℤ (int-ℕ x) (int-ℕ y)
@@ -201,7 +201,7 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
   ( leq-int-ℕ x y H)
 ```
 
-### The partially ordered set of integers ordered by the standard inequality
+### The partially ordered set of integers ordered by inequality
 
 ```agda
 ℤ-Preorder : Preorder lzero lzero

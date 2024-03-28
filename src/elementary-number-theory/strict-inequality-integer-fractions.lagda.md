@@ -53,7 +53,7 @@ is [strictly less](elementary-number-theory.strict-inequality-integers.md) than
 
 ## Definition
 
-### The standard strict inequality on the integer fractions
+### Strict inequality on the integer fractions
 
 ```agda
 le-fraction-ℤ-Prop : fraction-ℤ → fraction-ℤ → Prop lzero

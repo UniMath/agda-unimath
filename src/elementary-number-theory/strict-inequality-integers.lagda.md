@@ -51,7 +51,7 @@ on the integers.
 
 ## Definition
 
-### The standard strict ordering on the integers
+### Strict inequality on the integers
 
 ```agda
 le-ℤ-Prop : ℤ → ℤ → Prop lzero

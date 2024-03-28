@@ -125,7 +125,7 @@ module _
 
 ### Concatenation rules for inequality and strict inequality on the rational numbers
 
-```
+```agda
 module _
   (x y z : ℚ)
   where
