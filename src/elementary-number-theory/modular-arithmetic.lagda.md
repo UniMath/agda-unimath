@@ -406,12 +406,12 @@ right-distributive-mul-add-ℤ-Mod (succ-ℕ k) =
 
 is-left-mul-neg-one-neg-ℤ-Mod :
   (k : ℕ) (x : ℤ-Mod k) → neg-ℤ-Mod k x ＝ mul-ℤ-Mod k (neg-one-ℤ-Mod k) x
-is-left-mul-neg-one-neg-ℤ-Mod zero-ℕ = is-left-mul-neg-one-neg-ℤ
+is-left-mul-neg-one-neg-ℤ-Mod zero-ℕ = inv ∘ left-neg-unit-law-mul-ℤ
 is-left-mul-neg-one-neg-ℤ-Mod (succ-ℕ k) = is-mul-neg-one-neg-Fin k
 
 is-left-mul-neg-one-neg-ℤ-Mod' :
   (k : ℕ) (x : ℤ-Mod k) → neg-ℤ-Mod k x ＝ mul-ℤ-Mod k x (neg-one-ℤ-Mod k)
-is-left-mul-neg-one-neg-ℤ-Mod' zero-ℕ = is-right-mul-neg-one-neg-ℤ
+is-left-mul-neg-one-neg-ℤ-Mod' zero-ℕ = inv ∘ right-neg-unit-law-mul-ℤ
 is-left-mul-neg-one-neg-ℤ-Mod' (succ-ℕ k) = is-mul-neg-one-neg-Fin' k
 ```
 

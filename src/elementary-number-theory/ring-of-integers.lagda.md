@@ -59,7 +59,7 @@ is-mul-integer-multiple-ℤ-Ring :
   (k l : ℤ) → integer-multiple-Ring ℤ-Ring k l ＝ mul-ℤ k l
 is-mul-integer-multiple-ℤ-Ring (inl zero-ℕ) l =
   ( integer-multiple-neg-one-Ring ℤ-Ring l) ∙
-  ( is-left-mul-neg-one-neg-ℤ l)
+  ( inv (left-neg-unit-law-mul-ℤ l))
 is-mul-integer-multiple-ℤ-Ring (inl (succ-ℕ k)) l =
   ( integer-multiple-pred-Ring ℤ-Ring (inl k) l) ∙
   ( ap
