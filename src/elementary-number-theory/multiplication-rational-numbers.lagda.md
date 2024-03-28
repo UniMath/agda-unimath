@@ -176,7 +176,7 @@ module _
 
 negative-law-mul-ℚ : (x y : ℚ) → (neg-ℚ x) *ℚ (neg-ℚ y) ＝ x *ℚ y
 negative-law-mul-ℚ x y =
-  left-negative-law-mul-ℚ x (neg-ℚ y) ∙
-  ap neg-ℚ (right-negative-law-mul-ℚ x y) ∙
-  neg-neg-ℚ (x *ℚ y)
+  ( left-negative-law-mul-ℚ x (neg-ℚ y)) ∙
+  ( ap neg-ℚ (right-negative-law-mul-ℚ x y)) ∙
+  ( neg-neg-ℚ (x *ℚ y))
 ```
