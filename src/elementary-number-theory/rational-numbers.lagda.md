@@ -71,16 +71,18 @@ module _
 ### Inclusion of fractions
 
 ```agda
-in-fraction-ℤ : fraction-ℤ → ℚ
-pr1 (in-fraction-ℤ x) = reduce-fraction-ℤ x
-pr2 (in-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
+rational-fraction-ℤ : fraction-ℤ → ℚ
+pr1 (rational-fraction-ℤ x) = reduce-fraction-ℤ x
+pr2 (rational-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
 ```
 
 ### Inclusion of the integers
 
 ```agda
 rational-ℤ : ℤ → ℚ
-rational-ℤ x = (x , one-positive-ℤ , is-one-gcd-one-ℤ' x)
+pr1 (pr1 (rational-ℤ x)) = x
+pr2 (pr1 (rational-ℤ x)) = one-positive-ℤ
+pr2 (rational-ℤ x) = is-one-gcd-one-ℤ' x
 ```
 
 ### Negative one, zero and one
@@ -121,7 +123,7 @@ pr2 (neg-ℚ (x , H)) = is-reduced-neg-is-reduced-fraction-ℤ x H
 ```agda
 mediant-ℚ : ℚ → ℚ → ℚ
 mediant-ℚ x y =
-  in-fraction-ℤ
+  rational-fraction-ℤ
     ( mediant-fraction-ℤ
       ( fraction-ℚ x)
       ( fraction-ℚ y))
@@ -134,7 +136,7 @@ mediant-ℚ x y =
 ```agda
 eq-ℚ-sim-fraction-ℤ :
   (x y : fraction-ℤ) → (H : sim-fraction-ℤ x y) →
-  in-fraction-ℤ x ＝ in-fraction-ℤ y
+  rational-fraction-ℤ x ＝ rational-fraction-ℤ y
 eq-ℚ-sim-fraction-ℤ x y H =
   eq-pair-Σ'
     ( pair
@@ -155,8 +157,8 @@ is-set-ℚ =
 pr1 ℚ-Set = ℚ
 pr2 ℚ-Set = is-set-ℚ
 
-in-fraction-fraction-ℚ : (x : ℚ) → in-fraction-ℤ (fraction-ℚ x) ＝ x
-in-fraction-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
+rational-fraction-fraction-ℚ : (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
+rational-fraction-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
   eq-pair-Σ
     ( eq-pair
       ( eq-quotient-div-is-one-ℤ _ _ p (div-left-gcd-ℤ m n))
@@ -177,12 +179,12 @@ module _
 
   eq-ℚ : x ＝ y
   eq-ℚ =
-    ( inv (in-fraction-fraction-ℚ x)) ∙
+    ( inv (rational-fraction-fraction-ℚ x)) ∙
     ( eq-ℚ-sim-fraction-ℤ
       ( fraction-ℚ x)
       ( fraction-ℚ y)
       ( ap-mul-ℤ H (inv K))) ∙
-    ( in-fraction-fraction-ℚ y)
+    ( rational-fraction-fraction-ℚ y)
 ```
 
 ### A rational number is zero if and only if its numerator is zero
@@ -199,14 +201,14 @@ module _
   is-zero-is-zero-numerator-ℚ :
     is-zero-ℤ (numerator-ℚ x) → is-zero-ℚ x
   is-zero-is-zero-numerator-ℚ H =
-    inv (in-fraction-fraction-ℚ x) ∙
+    inv (rational-fraction-fraction-ℚ x) ∙
     eq-ℚ-sim-fraction-ℤ
       ( fraction-ℚ x)
       ( fraction-ℚ zero-ℚ)
       ( eq-is-zero-ℤ
         ( ap (mul-ℤ' one-ℤ) H ∙ right-zero-law-mul-ℤ one-ℤ)
         ( left-zero-law-mul-ℤ (denominator-ℚ x))) ∙
-    in-fraction-fraction-ℚ zero-ℚ
+    rational-fraction-fraction-ℚ zero-ℚ
 ```
 
 ### The rational image of the negative of an integer is the rational negative of its image
@@ -230,6 +232,6 @@ neg-neg-ℚ x =
 ```agda
 reflecting-map-sim-fraction :
   reflecting-map-equivalence-relation equivalence-relation-sim-fraction-ℤ ℚ
-pr1 reflecting-map-sim-fraction = in-fraction-ℤ
+pr1 reflecting-map-sim-fraction = rational-fraction-ℤ
 pr2 reflecting-map-sim-fraction {x} {y} H = eq-ℚ-sim-fraction-ℤ x y H
 ```

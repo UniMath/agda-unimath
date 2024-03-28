@@ -32,7 +32,7 @@ basic properties.
 
 ```agda
 add-ℚ : ℚ → ℚ → ℚ
-add-ℚ (x , p) (y , q) = in-fraction-ℤ (add-fraction-ℤ x y)
+add-ℚ (x , p) (y , q) = rational-fraction-ℤ (add-fraction-ℤ x y)
 
 add-ℚ' : ℚ → ℚ → ℚ
 add-ℚ' x y = add-ℚ y x
@@ -56,7 +56,7 @@ left-unit-law-add-ℚ (x , p) =
     ( add-fraction-ℤ zero-fraction-ℤ x)
     ( x)
     ( left-unit-law-add-fraction-ℤ x) ∙
-  in-fraction-fraction-ℚ (x , p)
+  rational-fraction-fraction-ℚ (x , p)
 
 right-unit-law-add-ℚ : (x : ℚ) → x +ℚ zero-ℚ ＝ x
 right-unit-law-add-ℚ (x , p) =
@@ -64,7 +64,7 @@ right-unit-law-add-ℚ (x , p) =
     ( add-fraction-ℤ x zero-fraction-ℤ)
     ( x)
     ( right-unit-law-add-fraction-ℤ x) ∙
-  in-fraction-fraction-ℚ (x , p)
+  rational-fraction-fraction-ℚ (x , p)
 ```
 
 ### Addition is associative
@@ -75,17 +75,18 @@ associative-add-ℚ :
   (x +ℚ y) +ℚ z ＝ x +ℚ (y +ℚ z)
 associative-add-ℚ (x , px) (y , py) (z , pz) =
   equational-reasoning
-    in-fraction-ℤ (add-fraction-ℤ (pr1 (in-fraction-ℤ (add-fraction-ℤ x y))) z)
-    ＝ in-fraction-ℤ (add-fraction-ℤ (add-fraction-ℤ x y) z)
+    rational-fraction-ℤ
+      (add-fraction-ℤ (pr1 (rational-fraction-ℤ (add-fraction-ℤ x y))) z)
+    ＝ rational-fraction-ℤ (add-fraction-ℤ (add-fraction-ℤ x y) z)
       by eq-ℚ-sim-fraction-ℤ _ _
         ( sim-fraction-add-fraction-ℤ
           ( symmetric-sim-fraction-ℤ _ _
             ( sim-reduced-fraction-ℤ (add-fraction-ℤ x y)))
           ( refl-sim-fraction-ℤ z))
-    ＝ in-fraction-ℤ (add-fraction-ℤ x (add-fraction-ℤ y z))
+    ＝ rational-fraction-ℤ (add-fraction-ℤ x (add-fraction-ℤ y z))
       by eq-ℚ-sim-fraction-ℤ _ _ (associative-add-fraction-ℤ x y z)
-    ＝ in-fraction-ℤ
-        ( add-fraction-ℤ x (pr1 (in-fraction-ℤ (add-fraction-ℤ y z))))
+    ＝ rational-fraction-ℤ
+        ( add-fraction-ℤ x (pr1 (rational-fraction-ℤ (add-fraction-ℤ y z))))
       by eq-ℚ-sim-fraction-ℤ _ _
         ( sim-fraction-add-fraction-ℤ
           ( refl-sim-fraction-ℤ x)
@@ -118,7 +119,7 @@ left-inverse-law-add-ℚ x =
       ( fraction-ℚ zero-ℚ)
       ( is-zero-numerator-add-left-neg-fraction-ℤ (fraction-ℚ x))
       ( refl)) ∙
-  in-fraction-fraction-ℚ zero-ℚ
+  rational-fraction-fraction-ℚ zero-ℚ
 
 right-inverse-law-add-ℚ : (x : ℚ) → x +ℚ (neg-ℚ x) ＝ zero-ℚ
 right-inverse-law-add-ℚ x =

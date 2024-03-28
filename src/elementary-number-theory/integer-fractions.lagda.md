@@ -67,22 +67,22 @@ is-positive-denominator-fraction-ℤ x = pr2 (positive-denominator-fraction-ℤ 
 ### Inclusion of the integers
 
 ```agda
-in-fraction-ℤ-ℤ : ℤ → fraction-ℤ
-pr1 (in-fraction-ℤ-ℤ x) = x
-pr2 (in-fraction-ℤ-ℤ x) = one-positive-ℤ
+rational-fraction-ℤ-ℤ : ℤ → fraction-ℤ
+pr1 (rational-fraction-ℤ-ℤ x) = x
+pr2 (rational-fraction-ℤ-ℤ x) = one-positive-ℤ
 ```
 
 ### Negative one, zero and one
 
 ```agda
 neg-one-fraction-ℤ : fraction-ℤ
-neg-one-fraction-ℤ = in-fraction-ℤ-ℤ neg-one-ℤ
+neg-one-fraction-ℤ = rational-fraction-ℤ-ℤ neg-one-ℤ
 
 is-neg-one-fraction-ℤ : fraction-ℤ → UU lzero
 is-neg-one-fraction-ℤ x = (x ＝ neg-one-fraction-ℤ)
 
 zero-fraction-ℤ : fraction-ℤ
-zero-fraction-ℤ = in-fraction-ℤ-ℤ zero-ℤ
+zero-fraction-ℤ = rational-fraction-ℤ-ℤ zero-ℤ
 
 is-zero-fraction-ℤ : fraction-ℤ → UU lzero
 is-zero-fraction-ℤ x = (x ＝ zero-fraction-ℤ)
@@ -91,7 +91,7 @@ is-nonzero-fraction-ℤ : fraction-ℤ → UU lzero
 is-nonzero-fraction-ℤ k = ¬ (is-zero-fraction-ℤ k)
 
 one-fraction-ℤ : fraction-ℤ
-one-fraction-ℤ = in-fraction-ℤ-ℤ one-ℤ
+one-fraction-ℤ = rational-fraction-ℤ-ℤ one-ℤ
 
 is-one-fraction-ℤ : fraction-ℤ → UU lzero
 is-one-fraction-ℤ x = (x ＝ one-fraction-ℤ)
