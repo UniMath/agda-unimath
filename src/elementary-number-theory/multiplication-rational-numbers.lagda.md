@@ -170,9 +170,9 @@ module _
 
   right-negative-law-mul-ℚ : x *ℚ (neg-ℚ y) ＝ neg-ℚ (x *ℚ y)
   right-negative-law-mul-ℚ =
-    ap ( x *ℚ_) (inv (right-neg-unit-law-mul-ℚ y)) ∙
-    inv (associative-mul-ℚ x y neg-one-ℚ) ∙
-    right-neg-unit-law-mul-ℚ (x *ℚ y)
+    ( ap ( x *ℚ_) (inv (right-neg-unit-law-mul-ℚ y))) ∙
+    ( inv (associative-mul-ℚ x y neg-one-ℚ)) ∙
+    ( right-neg-unit-law-mul-ℚ (x *ℚ y))
 
 negative-law-mul-ℚ : (x y : ℚ) → (neg-ℚ x) *ℚ (neg-ℚ y) ＝ x *ℚ y
 negative-law-mul-ℚ x y =
