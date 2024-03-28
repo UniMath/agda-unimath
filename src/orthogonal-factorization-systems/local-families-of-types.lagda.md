@@ -23,15 +23,15 @@ open import orthogonal-factorization-systems.orthogonal-maps
 
 A family of types `B : A → UU l` is said to be
 {{#concept "local" Disambiguation="family of types" Agda=is-local-family}} at
-`f : Y → X`, or **`f`-local**, if every
+`f : X → Y`, or **`f`-local**, if every
 [fiber](foundation-core.fibers-of-maps.md) is.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {Y : UU l1} {X : UU l2}
-  (f : Y → X) {A : UU l3} (B : A → UU l4)
+  {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2}
+  (f : X → Y) {A : UU l3} (B : A → UU l4)
   where
 
   is-local-family : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)

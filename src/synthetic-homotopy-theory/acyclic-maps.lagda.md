@@ -189,7 +189,7 @@ module _
   is-equiv-const-Id-is-acyclic ac {X = X} x y =
     is-equiv-htpy
       ( htpy-eq ∘ ap (const A X) {x} {y})
-      ( htpy-ap-diagonal-htpy-eq-diagonal-Id A x y)
+      ( inv-compute-htpy-eq-ap-const A x y)
       ( is-equiv-comp
         ( htpy-eq)
         ( ap (const A X))
@@ -209,7 +209,7 @@ module _
             ( funext (const A X x) (const A X y))
             ( is-equiv-htpy
               ( const A (x ＝ y))
-              ( htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
+              ( compute-htpy-eq-ap-const A x y)
               ( h x y))))
 ```
 

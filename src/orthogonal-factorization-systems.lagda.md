@@ -42,6 +42,8 @@ open import orthogonal-factorization-systems.mere-lifting-properties public
 open import orthogonal-factorization-systems.modal-induction public
 open import orthogonal-factorization-systems.modal-operators public
 open import orthogonal-factorization-systems.modal-subuniverse-induction public
+open import orthogonal-factorization-systems.null-families-of-types public
+open import orthogonal-factorization-systems.null-maps public
 open import orthogonal-factorization-systems.null-types public
 open import orthogonal-factorization-systems.open-modalities public
 open import orthogonal-factorization-systems.orthogonal-factorization-systems public

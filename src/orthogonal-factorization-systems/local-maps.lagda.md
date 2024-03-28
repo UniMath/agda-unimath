@@ -7,34 +7,54 @@ module orthogonal-factorization-systems.local-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
+open import foundation.cones-over-cospan-diagrams
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.equivalences-arrows
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-fibers-of-maps
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.pullbacks
 open import foundation.unit-type
+open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-families-of-types
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.orthogonal-maps
+open import orthogonal-factorization-systems.pullback-hom
 ```
 
 </details>
 
 ## Idea
 
-A map `g : A → B` is said to be
+A map `g : X → Y` is said to be
 {{#concept "local" Disambiguation="maps of types" Agda=is-local-map}} at
-`f : Y → X`, or
+`f : A → B`, or
 {{#concept "`f`-local" Disambiguation="maps of types" Agda=is-local-map}}, if
 all its [fibers](foundation-core.fibers-of-maps.md) are
 [`f`-local types](orthogonal-factorization-systems.local-types.md).
+
+Equivalently, the map `g` is `f`-local if and only if `f` is
+[orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to `g`.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {Y : UU l1} {X : UU l2} {A : UU l3} {B : UU l4}
-  (f : Y → X) (g : A → B)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
   where
 
   is-local-map : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -51,17 +71,17 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} {B : UU l3}
-  (f : Y → X)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {Y : UU l3}
+  (f : A → B)
   where
 
   is-local-is-local-terminal-map :
-    is-local-map f (terminal-map B) → is-local f B
+    is-local-map f (terminal-map Y) → is-local f Y
   is-local-is-local-terminal-map H =
     is-local-equiv f (inv-equiv-fiber-terminal-map star) (H star)
 
   is-local-terminal-map-is-local :
-    is-local f B → is-local-map f (terminal-map B)
+    is-local f Y → is-local-map f (terminal-map Y)
   is-local-terminal-map-is-local H u =
     is-local-equiv f (equiv-fiber-terminal-map u) H
 ```
@@ -70,8 +90,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {X' : UU l5} {Y' : UU l6}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → B) (g : X → Y)
   where
 
