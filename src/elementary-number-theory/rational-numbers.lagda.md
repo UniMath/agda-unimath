@@ -79,21 +79,21 @@ pr2 (in-fraction-ℤ x) = is-reduced-reduce-fraction-ℤ x
 ### Inclusion of the integers
 
 ```agda
-in-int : ℤ → ℚ
-in-int x = pair (pair x one-positive-ℤ) (is-one-gcd-one-ℤ' x)
+rational-ℤ : ℤ → ℚ
+rational-ℤ x = pair (pair x one-positive-ℤ) (is-one-gcd-one-ℤ' x)
 ```
 
 ### Negative one, zero and one
 
 ```agda
 neg-one-ℚ : ℚ
-neg-one-ℚ = in-int neg-one-ℤ
+neg-one-ℚ = rational-ℤ neg-one-ℤ
 
 is-neg-one-ℚ : ℚ → UU lzero
 is-neg-one-ℚ x = (x ＝ neg-one-ℚ)
 
 zero-ℚ : ℚ
-zero-ℚ = in-int zero-ℤ
+zero-ℚ = rational-ℤ zero-ℤ
 
 is-zero-ℚ : ℚ → UU lzero
 is-zero-ℚ x = (x ＝ zero-ℚ)
@@ -102,7 +102,7 @@ is-nonzero-ℚ : ℚ → UU lzero
 is-nonzero-ℚ k = ¬ (is-zero-ℚ k)
 
 one-ℚ : ℚ
-one-ℚ = in-int one-ℤ
+one-ℚ = rational-ℤ one-ℤ
 
 is-one-ℚ : ℚ → UU lzero
 is-one-ℚ x = (x ＝ one-ℚ)
@@ -212,9 +212,9 @@ module _
 ### The rational image of the negative of an integer is the rational negative of its image
 
 ```agda
-neg-ℚ-in-int-neg-ℤ : (k : ℤ) → in-int (neg-ℤ k) ＝ neg-ℚ (in-int k)
-neg-ℚ-in-int-neg-ℤ k =
-  eq-ℚ (in-int (neg-ℤ k)) (neg-ℚ (in-int k)) refl refl
+neg-ℚ-rational-ℤ-neg-ℤ : (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
+neg-ℚ-rational-ℤ-neg-ℤ k =
+  eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
 ```
 
 ### The negative function on the rational numbers is an involution
