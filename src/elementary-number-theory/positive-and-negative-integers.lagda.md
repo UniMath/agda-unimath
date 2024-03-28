@@ -46,9 +46,9 @@ is-zero-is-nonnegative-is-nonpositive-ℤ {inr (inl x)} H K = refl
 ### No integer is both positive and negative
 
 ```agda
-not-is-negative-is-positive-ℤ : (x : ℤ) → ¬ (is-negative-ℤ x × is-positive-ℤ x)
-not-is-negative-is-positive-ℤ (inl x) (H , K) = K
-not-is-negative-is-positive-ℤ (inr x) (H , K) = H
+is-not-negative-and-positive-ℤ : (x : ℤ) → ¬ (is-negative-ℤ x × is-positive-ℤ x)
+is-not-negative-and-positive-ℤ (inl x) (H , K) = K
+is-not-negative-and-positive-ℤ (inr x) (H , K) = H
 ```
 
 ### Dichotomies
