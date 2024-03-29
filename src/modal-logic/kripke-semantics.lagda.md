@@ -62,6 +62,10 @@ module _
   {l1 l2 : Level}
   where
 
+  -- TODO: replace with theorem
+  postulate
+    is-set-kripke-frame : is-set (kripke-frame l1 l2)
+
   type-kripke-frame : kripke-frame l1 l2 → UU l1
   type-kripke-frame = type-Inhabited-Type ∘ pr1
 
@@ -181,40 +185,41 @@ module _
   --     ( relation-property-class (intersection-subtype R₁ R₂))
   -- intersection-relation-property-class R₁ R₂ = refl
 
-  reflexive-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  reflexive-class =
+  reflexive-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
+  reflexive-kripke-class =
     relation-property-class
       ( λ x →
         ( is-reflexive-Relation-Prop x , is-prop-is-reflexive-Relation-Prop x))
 
-  symmetry-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  symmetry-class =
+  symmetry-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
+  symmetry-kripke-class =
     relation-property-class
       ( λ x →
         ( is-symmetric-Relation-Prop x , is-prop-is-symmetric-Relation-Prop x))
 
-  transitivity-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  transitivity-class =
+  transitivity-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
+  transitivity-kripke-class =
     relation-property-class
       ( λ x →
         ( pair
           ( is-transitive-Relation-Prop x)
           ( is-prop-is-transitive-Relation-Prop x)))
 
-  serial-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  serial-class =
+  serial-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
+  serial-kripke-class =
     relation-property-class
       ( λ x →
         ( is-serial-Relation-Prop x , is-prop-is-serial-Relation-Prop x))
 
-  euclidean-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  euclidean-class =
+  euclidean-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
+  euclidean-kripke-class =
     relation-property-class
       ( λ x →
         ( is-euclidean-Relation-Prop x , is-prop-is-euclidean-Relation-Prop x))
 
-  equivalence-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  equivalence-class = relation-property-class is-equivalence-relation-Prop
+  equivalence-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
+  equivalence-kripke-class =
+    relation-property-class is-equivalence-relation-Prop
 
 module _
   {l1 l2 l3 l4 : Level} {i : Set l3}
@@ -263,7 +268,7 @@ module _
     {l5 : Level} →
     model-class l1 l2 i l4 l5 →
     formulas (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5) i
-  class-modal-logic C a = C ⊨C a
+  class-modal-logic = _⊨C_
 
   -- TODO: rename
   class-modal-logic-monotic :
@@ -274,6 +279,28 @@ module _
     class-modal-logic C₂ ⊆ class-modal-logic C₁
   class-modal-logic-monotic C₁ C₂ sub _ in-modal-logic-C₂ M in-C₁ =
     in-modal-logic-C₂ M (sub M in-C₁)
+
+module _
+  {l1 l2 : Level}
+  {l3 : Level} (i : Set l3)
+  (l4 : Level)
+  where
+
+  kripke-frame-model-class :
+    kripke-frame l1 l2 →
+    model-class l1 l2 i l4 (lsuc l1 ⊔ lsuc l2)
+  pr1 (kripke-frame-model-class F M) =
+    kripke-frame-kripke-model i M ＝ F
+  pr2 (kripke-frame-model-class F M) =
+    is-set-kripke-frame (kripke-frame-kripke-model i M) F
+
+  -- frame-modal-logic :
+  --   kripke-frame l1 l2 →
+  --   formulas (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4) i
+  -- frame-modal-logic F a =
+  --   Π-Prop
+  --     ( type-Set i → type-kripke-frame F → Prop l4)
+  --     ( λ v → (F , v) ⊨M a)
 
 module _
   (l1 l2 : Level)
@@ -338,4 +365,10 @@ module _
     model-class l1 l2 i l4 l5 →
     model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   decidable-subclass C = intersection-subtype (decidable-models l1 l2 i l4) C
+
+  finite-subclass :
+    {l5 : Level} →
+    model-class l1 l2 i l4 l5 →
+    model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  finite-subclass C = intersection-subtype (finite-models l1 l2 i l4) C
 ```

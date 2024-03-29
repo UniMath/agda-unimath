@@ -40,6 +40,7 @@ open import lists.reversing-lists
 open import modal-logic.axioms
 open import modal-logic.completeness
 open import modal-logic.formulas
+open import modal-logic.formulas-deduction
 open import modal-logic.kripke-semantics
 open import modal-logic.logic-syntax
 open import modal-logic.modal-logic-K
@@ -72,44 +73,45 @@ module _
   (contains-K : modal-logic-K i ⊆ modal-logic axioms)
   where
 
-  logic : formulas (l1 ⊔ l2) i
-  logic = modal-logic axioms
+  private
+    logic : formulas (l1 ⊔ l2) i
+    logic = modal-logic axioms
 
-  contains-ax-k : ax-k i ⊆ logic
-  contains-ax-k =
-    transitive-leq-subtype
-      ( ax-k i)
-      ( modal-logic-K i)
-      ( logic)
-      ( contains-K)
-      ( K-contains-ax-k i)
+    contains-ax-k : ax-k i ⊆ logic
+    contains-ax-k =
+      transitive-leq-subtype
+        ( ax-k i)
+        ( modal-logic-K i)
+        ( logic)
+        ( contains-K)
+        ( K-contains-ax-k i)
 
-  contains-ax-s : ax-s i ⊆ logic
-  contains-ax-s =
-    transitive-leq-subtype
-      ( ax-s i)
-      ( modal-logic-K i)
-      ( logic)
-      ( contains-K)
-      ( K-contains-ax-s i)
+    contains-ax-s : ax-s i ⊆ logic
+    contains-ax-s =
+      transitive-leq-subtype
+        ( ax-s i)
+        ( modal-logic-K i)
+        ( logic)
+        ( contains-K)
+        ( K-contains-ax-s i)
 
-  contains-ax-n : ax-n i ⊆ logic
-  contains-ax-n =
-    transitive-leq-subtype
-      ( ax-n i)
-      ( modal-logic-K i)
-      ( logic)
-      ( contains-K)
-      ( K-contains-ax-n i)
+    contains-ax-n : ax-n i ⊆ logic
+    contains-ax-n =
+      transitive-leq-subtype
+        ( ax-n i)
+        ( modal-logic-K i)
+        ( logic)
+        ( contains-K)
+        ( K-contains-ax-n i)
 
-  contains-ax-dn : ax-dn i ⊆ logic
-  contains-ax-dn =
-    transitive-leq-subtype
-      ( ax-dn i)
-      ( modal-logic-K i)
-      ( logic)
-      ( contains-K)
-      ( K-contains-ax-dn i)
+    contains-ax-dn : ax-dn i ⊆ logic
+    contains-ax-dn =
+      transitive-leq-subtype
+        ( ax-dn i)
+        ( modal-logic-K i)
+        ( logic)
+        ( contains-K)
+        ( K-contains-ax-dn i)
 
   is-L-consistent-theory-Prop : formulas (l1 ⊔ l2) i → Prop (l1 ⊔ l2)
   is-L-consistent-theory-Prop t =
@@ -293,6 +295,61 @@ module _
                           ( wd-bot))))))))
             ( subtype-union-right (Id-formula-Prop (~ a)) (pr1 x)))
           ( subtype-union-left (Id-formula-Prop (~ a)) (pr1 x) (~ a) refl)))
+
+  -- postulate
+  --   helper : (a : formula i) → ◇ (~ a) → ~ □ a
+
+  -- TODO: rename
+  lemma-box-diamond :
+    LEM (l1 ⊔ l2) →
+    (x : L-consistent-theory) → is-L-complete-theory x →
+    (y : L-consistent-theory) → is-L-complete-theory y →
+    (λ a →
+      ( exists-Prop
+        ( formula i)
+        ( λ b → product-Prop (Id-formula-Prop a (◇ b)) ( pr1 y b)))) ⊆ pr1 x →
+    (λ a → pr1 x (□ a)) ⊆ pr1 y
+  lemma-box-diamond lem x x-is-comp y y-is-comp sub a box-a-in-x =
+    apply-universal-property-trunc-Prop
+      ( complete-theory-contains-all-formulas lem y y-is-comp a)
+      ( pr1 y a)
+      ( λ
+        { (inl a-in-y) → a-in-y
+        ; (inr not-a-in-y) →
+          ( ex-falso
+            ( pr2 x
+              ( weak-modal-logic-mp
+                ( weak-modal-logic-diamond-negate
+                  ( i)
+                  ( modal-logic axioms ∪ pr1 x)
+                  ( transitive-leq-subtype
+                    ( modal-logic-K i)
+                    ( modal-logic axioms ∪ pr1 x)
+                    ( weak-modal-logic (modal-logic axioms ∪ pr1 x))
+                    ( axioms-subset-weak-modal-logic
+                      ( modal-logic axioms ∪ pr1 x))
+                    ( transitive-leq-subtype
+                      ( modal-logic-K i)
+                      ( modal-logic axioms)
+                      ( modal-logic axioms ∪ pr1 x)
+                      ( subtype-union-left (modal-logic axioms) (pr1 x))
+                      ( contains-K)))
+                  ( axioms-subset-weak-modal-logic
+                    ( modal-logic axioms ∪ pr1 x)
+                    ( ◇ ~ a)
+                    ( subtype-union-right
+                      ( modal-logic axioms)
+                      ( pr1 x)
+                      ( ◇ ~ a)
+                      ( sub (◇ ~ a) (intro-∃ (~ a) (refl , not-a-in-y))))))
+                ( axioms-subset-weak-modal-logic
+                  ( modal-logic axioms ∪ pr1 x)
+                  ( □ a)
+                  ( subtype-union-right
+                    ( modal-logic axioms)
+                    ( pr1 x)
+                    ( □ a)
+                    ( box-a-in-x))))))})
 
   complete-theory-implication :
     LEM (l1 ⊔ l2) →
@@ -692,15 +749,17 @@ module _
       ( is-inhabited-Prop canonical-kripke-model-world-type)
       ( λ x → unit-trunc-Prop ((pr1 (pr1 x)) , ((pr2 (pr1 x)) , (pr2 (pr2 x)))))
 
-  canonical-kripke-model :
-    kripke-model (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) i (l1 ⊔ l2)
-  pr1 (pr1 (pr1 canonical-kripke-model)) = canonical-kripke-model-world-type
-  pr2 (pr1 (pr1 canonical-kripke-model)) =
-    is-inhabited-canonical-kripke-model-world
-  pr2 (pr1 canonical-kripke-model) x y =
+  canonical-kripke-frame : kripke-frame (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2)
+  pr1 (pr1 canonical-kripke-frame) = canonical-kripke-model-world-type
+  pr2 (pr1 canonical-kripke-frame) = is-inhabited-canonical-kripke-model-world
+  pr2 canonical-kripke-frame x y =
     Π-Prop
       ( formula i)
       ( λ a → hom-Prop (pr1 x (□ a)) (pr1 y a))
+
+  canonical-kripke-model :
+    kripke-model (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) i (l1 ⊔ l2)
+  pr1 canonical-kripke-model = canonical-kripke-frame
   pr2 canonical-kripke-model n x = pr1 x (var n)
 
   complete-theory-box :

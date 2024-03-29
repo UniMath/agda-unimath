@@ -40,6 +40,9 @@ module _
   formulas : UU (l1 ⊔ lsuc l2)
   formulas = subtype l2 (formula i)
 
+  modal-theory : UU (l1 ⊔ lsuc l2)
+  modal-theory = formulas
+
 module _
   {l1 l2 : Level} {i : Set l1}
   where
