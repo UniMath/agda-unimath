@@ -226,15 +226,15 @@ rational-real-ℚ q = (real-ℚ q , q , is-rational-real-ℚ q)
 ### The rationals and rational reals are equivalent
 
 ```agda
-is-section-rational-ℝ-rational :
+is-section-rational-real-ℚ :
   (q : ℚ) →
   rational-rational-ℝ (rational-real-ℚ q) ＝ q
-is-section-rational-ℝ-rational q = refl
+is-section-rational-real-ℚ q = refl
 
-is-retraction-rational-ℝ-rational :
+is-retraction-rational-real-ℚ :
   (x : Rational-ℝ lzero) →
   rational-real-ℚ (rational-rational-ℝ x) ＝ x
-is-retraction-rational-ℝ-rational (x , q , H) =
+is-retraction-rational-real-ℚ (x , q , H) =
   eq-type-subtype
     subtype-rational-real
     ( ap real-ℚ α ∙ eq-real-rational-is-rational-ℝ x q H)
@@ -249,9 +249,9 @@ pr2 equiv-rational-real =
   where
   section-rational-rational-ℝ : section rational-rational-ℝ
   section-rational-rational-ℝ =
-    (rational-real-ℚ , is-section-rational-ℝ-rational)
+    (rational-real-ℚ , is-section-rational-real-ℚ)
 
   retraction-rational-rational-ℝ : retraction rational-rational-ℝ
   retraction-rational-rational-ℝ =
-    (rational-real-ℚ , is-retraction-rational-ℝ-rational)
+    (rational-real-ℚ , is-retraction-rational-real-ℚ)
 ```
