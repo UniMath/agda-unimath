@@ -97,7 +97,7 @@ refl-leq-ℚ x =
 ```agda
 antisymmetric-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ y x → x ＝ y
 antisymmetric-leq-ℚ x y H H' =
-  ( inv (rational-fraction-fraction-ℚ x)) ∙
+  ( inv (is-retraction-rational-fraction-ℚ x)) ∙
   ( eq-ℚ-sim-fraction-ℤ
     ( fraction-ℚ x)
     ( fraction-ℚ y)
@@ -106,7 +106,7 @@ antisymmetric-leq-ℚ x y H H' =
       ( fraction-ℚ y)
       ( H)
       ( H'))) ∙
-  ( rational-fraction-fraction-ℚ y)
+  ( is-retraction-rational-fraction-ℚ y)
 ```
 
 ### Inequality on the rational numbers is linear

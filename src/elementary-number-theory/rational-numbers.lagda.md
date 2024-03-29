@@ -157,8 +157,9 @@ is-set-ℚ =
 pr1 ℚ-Set = ℚ
 pr2 ℚ-Set = is-set-ℚ
 
-rational-fraction-fraction-ℚ : (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
-rational-fraction-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
+is-retraction-rational-fraction-ℚ :
+  (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
+is-retraction-rational-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
   eq-pair-Σ
     ( eq-pair
       ( eq-quotient-div-is-one-ℤ _ _ p (div-left-gcd-ℤ m n))
@@ -179,12 +180,12 @@ module _
 
   eq-ℚ : x ＝ y
   eq-ℚ =
-    ( inv (rational-fraction-fraction-ℚ x)) ∙
+    ( inv (is-retraction-rational-fraction-ℚ x)) ∙
     ( eq-ℚ-sim-fraction-ℤ
       ( fraction-ℚ x)
       ( fraction-ℚ y)
       ( ap-mul-ℤ H (inv K))) ∙
-    ( rational-fraction-fraction-ℚ y)
+    ( is-retraction-rational-fraction-ℚ y)
 ```
 
 ### A rational number is zero if and only if its numerator is zero
@@ -201,14 +202,14 @@ module _
   is-zero-is-zero-numerator-ℚ :
     is-zero-ℤ (numerator-ℚ x) → is-zero-ℚ x
   is-zero-is-zero-numerator-ℚ H =
-    ( inv (rational-fraction-fraction-ℚ x)) ∙
+    ( inv (is-retraction-rational-fraction-ℚ x)) ∙
     ( eq-ℚ-sim-fraction-ℤ
       ( fraction-ℚ x)
       ( fraction-ℚ zero-ℚ)
       ( eq-is-zero-ℤ
         ( ap (mul-ℤ' one-ℤ) H ∙ right-zero-law-mul-ℤ one-ℤ)
         ( left-zero-law-mul-ℤ (denominator-ℚ x)))) ∙
-    ( rational-fraction-fraction-ℚ zero-ℚ)
+    ( is-retraction-rational-fraction-ℚ zero-ℚ)
 ```
 
 ### The rational image of the negative of an integer is the rational negative of its image

@@ -59,7 +59,7 @@ left-unit-law-mul-ℚ x =
     ( mul-fraction-ℤ one-fraction-ℤ (fraction-ℚ x))
     ( fraction-ℚ x)
     ( left-unit-law-mul-fraction-ℤ (fraction-ℚ x))) ∙
-  ( rational-fraction-fraction-ℚ x)
+  ( is-retraction-rational-fraction-ℚ x)
 
 right-unit-law-mul-ℚ : (x : ℚ) → x *ℚ one-ℚ ＝ x
 right-unit-law-mul-ℚ x =
@@ -67,7 +67,7 @@ right-unit-law-mul-ℚ x =
     ( mul-fraction-ℤ (fraction-ℚ x) one-fraction-ℤ)
     ( fraction-ℚ x)
     ( right-unit-law-mul-fraction-ℤ (fraction-ℚ x))) ∙
-  ( rational-fraction-fraction-ℚ x)
+  ( is-retraction-rational-fraction-ℚ x)
 ```
 
 ### Negative unit laws
@@ -81,7 +81,7 @@ left-neg-unit-law-mul-ℚ x =
     ( ap-mul-ℤ
       ( left-neg-unit-law-mul-ℤ (numerator-ℚ x))
       ( inv (left-unit-law-mul-ℤ (denominator-ℚ x)))) ∙
-  ( rational-fraction-fraction-ℚ (neg-ℚ x))
+  ( is-retraction-rational-fraction-ℚ (neg-ℚ x))
 
 right-neg-unit-law-mul-ℚ : (x : ℚ) → x *ℚ neg-one-ℚ ＝ neg-ℚ x
 right-neg-unit-law-mul-ℚ x =
@@ -91,7 +91,7 @@ right-neg-unit-law-mul-ℚ x =
     ( ap-mul-ℤ
       ( right-neg-unit-law-mul-ℤ (numerator-ℚ x))
       ( inv (right-unit-law-mul-ℤ (denominator-ℚ x)))) ∙
-  ( rational-fraction-fraction-ℚ (neg-ℚ x))
+  ( is-retraction-rational-fraction-ℚ (neg-ℚ x))
 ```
 
 ### Multiplication of rational numbers is associative

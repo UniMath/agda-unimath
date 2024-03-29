@@ -56,7 +56,7 @@ left-unit-law-add-ℚ (x , p) =
     ( add-fraction-ℤ zero-fraction-ℤ x)
     ( x)
     ( left-unit-law-add-fraction-ℤ x) ∙
-  rational-fraction-fraction-ℚ (x , p)
+  is-retraction-rational-fraction-ℚ (x , p)
 
 right-unit-law-add-ℚ : (x : ℚ) → x +ℚ zero-ℚ ＝ x
 right-unit-law-add-ℚ (x , p) =
@@ -64,7 +64,7 @@ right-unit-law-add-ℚ (x , p) =
     ( add-fraction-ℤ x zero-fraction-ℤ)
     ( x)
     ( right-unit-law-add-fraction-ℤ x) ∙
-  rational-fraction-fraction-ℚ (x , p)
+  is-retraction-rational-fraction-ℚ (x , p)
 ```
 
 ### Addition is associative
@@ -119,7 +119,7 @@ left-inverse-law-add-ℚ x =
       ( fraction-ℚ zero-ℚ)
       ( is-zero-numerator-add-left-neg-fraction-ℤ (fraction-ℚ x))
       ( refl)) ∙
-  rational-fraction-fraction-ℚ zero-ℚ
+  is-retraction-rational-fraction-ℚ zero-ℚ
 
 right-inverse-law-add-ℚ : (x : ℚ) → x +ℚ (neg-ℚ x) ＝ zero-ℚ
 right-inverse-law-add-ℚ x =
