@@ -15,8 +15,10 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.interchange-law
 ```
 
 </details>
@@ -106,6 +108,18 @@ commutative-add-ℚ (x , px) (y , py) =
     ( commutative-add-fraction-ℤ x y)
 ```
 
+### Interchange law for addition with respect to addition
+
+```agda
+interchange-law-add-add-ℚ :
+  (x y u v : ℚ) → (x +ℚ y) +ℚ (u +ℚ v) ＝ (x +ℚ u) +ℚ (y +ℚ v)
+interchange-law-add-add-ℚ =
+  interchange-law-commutative-and-associative
+    add-ℚ
+    commutative-add-ℚ
+    associative-add-ℚ
+```
+
 ### The negative of a rational number is its additive inverse
 
 ```agda
@@ -124,6 +138,19 @@ left-inverse-law-add-ℚ x =
 right-inverse-law-add-ℚ : (x : ℚ) → x +ℚ (neg-ℚ x) ＝ zero-ℚ
 right-inverse-law-add-ℚ x =
   commutative-add-ℚ x (neg-ℚ x) ∙ left-inverse-law-add-ℚ x
+```
+
+### The negatives of rational numbers distribute over addition
+
+```agda
+distributive-neg-add-ℚ :
+  (x y : ℚ) → neg-ℚ (x +ℚ y) ＝ neg-ℚ x +ℚ neg-ℚ y
+distributive-neg-add-ℚ (x , dxp) (y , dyp) =
+  ( inv (eq-neg-rational-fraction-ℤ (x +fraction-ℤ y))) ∙
+  ( eq-ℚ-sim-fraction-ℤ
+    ( neg-fraction-ℤ (x +fraction-ℤ y))
+    ( add-fraction-ℤ (neg-fraction-ℤ x) (neg-fraction-ℤ y))
+    ( distributive-neg-add-fraction-ℤ x y))
 ```
 
 ## See also

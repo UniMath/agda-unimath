@@ -215,9 +215,26 @@ module _
 ### The rational image of the negative of an integer is the rational negative of its image
 
 ```agda
-neg-ℚ-rational-ℤ-neg-ℤ : (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
-neg-ℚ-rational-ℤ-neg-ℤ k =
+neg-rational-ℤ-neg-ℤ : (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
+neg-rational-ℤ-neg-ℤ k =
   eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
+```
+
+### The reduced fraction of the negative of an integer fraction is the negative of the reduced fraction
+
+```agda
+eq-neg-rational-fraction-ℤ :
+  (x : fraction-ℤ) →
+  rational-fraction-ℤ (neg-fraction-ℤ x) ＝ neg-ℚ (rational-fraction-ℤ x)
+eq-neg-rational-fraction-ℤ x =
+  ( eq-ℚ-sim-fraction-ℤ
+    ( neg-fraction-ℤ x)
+    ( fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
+    ( sim-neg-sim-fraction-ℤ
+      ( x)
+      ( reduce-fraction-ℤ x)
+      ( sim-reduced-fraction-ℤ x))) ∙
+  ( is-retraction-rational-fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
 ```
 
 ### The negative function on the rational numbers is an involution

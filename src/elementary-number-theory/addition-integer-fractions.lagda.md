@@ -203,3 +203,20 @@ is-zero-numerator-add-right-neg-fraction-ℤ (p , q , H) =
   ap ((p *ℤ q) +ℤ_) (left-negative-law-mul-ℤ p q) ∙
   right-inverse-law-add-ℤ (p *ℤ q)
 ```
+
+### Distributivity of negatives over addition on the integer fractions
+
+```agda
+distributive-neg-add-fraction-ℤ :
+  (x y : fraction-ℤ) →
+  sim-fraction-ℤ
+    (neg-fraction-ℤ (x +fraction-ℤ y))
+    (neg-fraction-ℤ x +fraction-ℤ neg-fraction-ℤ y)
+distributive-neg-add-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) =
+  ap
+    ( _*ℤ (dx *ℤ dy))
+    ( ( distributive-neg-add-ℤ (nx *ℤ dy) (ny *ℤ dx)) ∙
+      ( ap-add-ℤ
+        ( inv (left-negative-law-mul-ℤ nx dy))
+        ( inv (left-negative-law-mul-ℤ ny dx))))
+```

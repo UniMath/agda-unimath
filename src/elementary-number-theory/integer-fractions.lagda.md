@@ -198,6 +198,26 @@ pr1 (pr2 (pr2 equivalence-relation-sim-fraction-ℤ)) = symmetric-sim-fraction-�
 pr2 (pr2 (pr2 equivalence-relation-sim-fraction-ℤ)) = transitive-sim-fraction-ℤ
 ```
 
+### The negatives of two similar integer fractions are similar
+
+```agda
+module _
+  (x y : fraction-ℤ)
+  where
+
+  sim-neg-sim-fraction-ℤ :
+    sim-fraction-ℤ x y → sim-fraction-ℤ (neg-fraction-ℤ x) (neg-fraction-ℤ y)
+  sim-neg-sim-fraction-ℤ H =
+    ( left-negative-law-mul-ℤ
+      ( numerator-fraction-ℤ x)
+      ( denominator-fraction-ℤ y)) ∙
+    ( ap neg-ℤ H) ∙
+    ( inv
+      ( left-negative-law-mul-ℤ
+        ( numerator-fraction-ℤ y)
+        ( denominator-fraction-ℤ x)))
+```
+
 ### Two integer fractions with zero numerator are similar
 
 ```agda
