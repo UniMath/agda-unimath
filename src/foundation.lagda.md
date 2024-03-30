@@ -174,6 +174,7 @@ open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
 open import foundation.finitely-coherent-equivalences public
 open import foundation.finitely-coherently-invertible-maps public
+open import foundation.fixed-points-endofunctions public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.function-types public
@@ -310,6 +311,7 @@ open import foundation.propositional-truncations public
 open import foundation.propositions public
 open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
+open import foundation.quasiidempotent-maps public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public
@@ -345,6 +347,7 @@ open import foundation.span-diagrams public
 open import foundation.span-diagrams-families-of-types public
 open import foundation.spans public
 open import foundation.spans-families-of-types public
+open import foundation.split-idempotent-maps public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
 open import foundation.standard-pullbacks public

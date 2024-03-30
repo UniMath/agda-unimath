@@ -388,13 +388,16 @@ module _
     eq-is-prop (is-prop-fixed-point-is-weakly-constant-map W)
 
   retraction-is-split-idempotent-is-weakly-constant-is-preidempotent-map :
-    retraction (inclusion-is-split-idempotent-is-weakly-constant-is-preidempotent-map)
+    retraction
+      ( inclusion-is-split-idempotent-is-weakly-constant-is-preidempotent-map)
   retraction-is-split-idempotent-is-weakly-constant-is-preidempotent-map =
     ( map-retraction-is-split-idempotent-is-weakly-constant-is-preidempotent-map ,
       is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-is-preidempotent-map)
 
   retract-is-split-idempotent-is-weakly-constant-is-preidempotent-map :
-    splitting-type-is-split-idempotent-is-weakly-constant-is-preidempotent-map retract-of A
+    retract
+      ( A)
+      ( splitting-type-is-split-idempotent-is-weakly-constant-is-preidempotent-map)
   retract-is-split-idempotent-is-weakly-constant-is-preidempotent-map =
     ( inclusion-is-split-idempotent-is-weakly-constant-is-preidempotent-map ,
       retraction-is-split-idempotent-is-weakly-constant-is-preidempotent-map)
@@ -520,13 +523,13 @@ module _
       ( lemma1-lemma2-is-retraction-map-retraction-is-split-idempotent-is-quasiidempotent-map
         ( a , α))
       ( λ n →
-         inv
-         (pr1 H
-          (inclusion-is-split-idempotent-is-quasiidempotent-map (a , α))))
+        inv
+          ( pr1 H
+            ( inclusion-is-split-idempotent-is-quasiidempotent-map (a , α))))
       ( λ n → ap (f ∘ f) (α (succ-ℕ n)))
       ( λ n →
-         ap f
-         ( ( lemma1-lemma2-is-retraction-map-retraction-is-split-idempotent-is-quasiidempotent-map
+        ap f
+          ( ( lemma1-lemma2-is-retraction-map-retraction-is-split-idempotent-is-quasiidempotent-map
               ( a , α)
               ( n)) ∙
             ( pr1 H (a (succ-ℕ n))) ∙
@@ -572,7 +575,11 @@ module _
       ＝ {!   !} by {! !}
       ＝ {! !} by {! !}
       ＝ {! !} by {! !}
-      ＝ (lemma1-lemma2-is-retraction-map-retraction-is-split-idempotent-is-quasiidempotent-map (a , α) (succ-ℕ n) ∙ (ap (f ∘ f) (α (succ-ℕ (succ-ℕ n))))) by {! !}
+      ＝
+        ( lemma1-lemma2-is-retraction-map-retraction-is-split-idempotent-is-quasiidempotent-map
+          ( a , α)
+          ( succ-ℕ n) ∙
+          ( ap (f ∘ f) (α (succ-ℕ (succ-ℕ n))))) by {! !}
 
   lemma2-is-retraction-map-retraction-is-split-idempotent-is-quasiidempotent-map :
     ((a , α) :
