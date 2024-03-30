@@ -75,22 +75,22 @@ right-unit-law-mul-ℚ x =
 ```agda
 left-neg-unit-law-mul-ℚ : (x : ℚ) → neg-one-ℚ *ℚ x ＝ neg-ℚ x
 left-neg-unit-law-mul-ℚ x =
-  eq-ℚ-sim-fraction-ℤ
+  ( eq-ℚ-sim-fraction-ℤ
     ( mul-fraction-ℤ (fraction-ℚ neg-one-ℚ) (fraction-ℚ x))
     ( neg-fraction-ℤ (fraction-ℚ x))
     ( ap-mul-ℤ
       ( left-neg-unit-law-mul-ℤ (numerator-ℚ x))
-      ( inv (left-unit-law-mul-ℤ (denominator-ℚ x)))) ∙
+      ( inv (left-unit-law-mul-ℤ (denominator-ℚ x))))) ∙
   ( is-retraction-rational-fraction-ℚ (neg-ℚ x))
 
 right-neg-unit-law-mul-ℚ : (x : ℚ) → x *ℚ neg-one-ℚ ＝ neg-ℚ x
 right-neg-unit-law-mul-ℚ x =
-  eq-ℚ-sim-fraction-ℤ
+  ( eq-ℚ-sim-fraction-ℤ
     ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ neg-one-ℚ))
     ( neg-fraction-ℤ (fraction-ℚ x))
     ( ap-mul-ℤ
       ( right-neg-unit-law-mul-ℤ (numerator-ℚ x))
-      ( inv (right-unit-law-mul-ℤ (denominator-ℚ x)))) ∙
+      ( inv (right-unit-law-mul-ℤ (denominator-ℚ x))))) ∙
   ( is-retraction-rational-fraction-ℚ (neg-ℚ x))
 ```
 
