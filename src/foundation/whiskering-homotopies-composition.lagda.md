@@ -200,6 +200,37 @@ module _
   right-whisker-inv-htpy = refl-htpy
 ```
 
+### Inverse laws for whiskering homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f f' : (x : A) → B x} (g : {x : A} → B x → C x) (H : f ~ f')
+  where
+
+  left-inv-htpy-left-whisker : g ·l (inv-htpy H) ∙h g ·l H ~ refl-htpy
+  left-inv-htpy-left-whisker =
+    ( ap-concat-htpy' (g ·l H) (left-whisker-inv-htpy g H)) ∙h
+    ( left-inv-htpy (g ·l H))
+
+  right-inv-htpy-left-whisker : g ·l H ∙h g ·l (inv-htpy H) ~ refl-htpy
+  right-inv-htpy-left-whisker =
+    ( ap-concat-htpy (g ·l H) (left-whisker-inv-htpy g H)) ∙h
+    ( right-inv-htpy (g ·l H))
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  {g g' : {x : A} (y : B x) → C x y} (H : {x : A} → g {x} ~ g' {x})
+  (f : (x : A) → B x)
+  where
+
+  left-inv-htpy-right-whisker : (inv-htpy H) ·r f ∙h H ·r f ~ refl-htpy
+  left-inv-htpy-right-whisker = left-inv-htpy (H ·r f)
+
+  right-inv-htpy-right-whisker : H ·r f ∙h (inv-htpy H) ·r f ~ refl-htpy
+  right-inv-htpy-right-whisker = right-inv-htpy (H ·r f)
+```
+
 ### Distributivity of whiskering over concatenation of homotopies
 
 ```agda

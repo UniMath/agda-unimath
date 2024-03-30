@@ -11,11 +11,11 @@ open import foundation-core.propositions public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.retracts-of-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

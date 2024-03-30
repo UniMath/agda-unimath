@@ -227,6 +227,18 @@ module _
   inv-htpy-right-inv-htpy = inv-htpy right-inv-htpy
 ```
 
+### Inverting homotopies is an involution
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {f g : (x : A) → B x} (H : f ~ g)
+  where
+
+  inv-inv-htpy : inv-htpy (inv-htpy H) ~ H
+  inv-inv-htpy = inv-inv ∘ H
+```
+
 ### Distributivity of `inv` over `concat` for homotopies
 
 ```agda

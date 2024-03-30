@@ -90,3 +90,59 @@ module _
     horizontal-concat-htpy' G F ~ horizontal-concat-htpy G F
   coh-horizontal-concat-htpy = nat-htpy G ·r F
 ```
+
+### Second-order inverse laws for left whiskered homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  right-right-inv-htpy : (p : f ~ g) (q : g ~ h) → (p ∙h q) ∙h inv-htpy q ~ p
+  right-right-inv-htpy p q =
+    ( assoc-htpy p q (inv-htpy q)) ∙h
+    ( ap-concat-htpy p (right-inv-htpy q)) ∙h
+    ( right-unit-htpy)
+
+  left-right-inv-htpy : (p : f ~ g) (q : f ~ g) → p ∙h (inv-htpy p ∙h q) ~ q
+  left-right-inv-htpy p q =
+    ( inv-htpy (assoc-htpy p (inv-htpy p) q)) ∙h
+    ( ap-concat-htpy' q (right-inv-htpy p))
+
+  right-left-inv-htpy : (p : f ~ g) (q : h ~ g) → (p ∙h inv-htpy q) ∙h q ~ p
+  right-left-inv-htpy p q =
+    ( assoc-htpy p (inv-htpy q) q) ∙h
+    ( ap-concat-htpy p (left-inv-htpy q)) ∙h
+    ( right-unit-htpy)
+
+  left-left-inv-htpy : (p : f ~ g) (q : g ~ h) → inv-htpy p ∙h (p ∙h q) ~ q
+  left-left-inv-htpy p q =
+    ( inv-htpy (assoc-htpy (inv-htpy p) p q)) ∙h
+    ( ap-concat-htpy' q (left-inv-htpy p))
+```
+
+### Second-order associativity laws for homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h i j : (x : A) → B x}
+  (p : f ~ g) (q : g ~ h) (r : h ~ i) (s : i ~ j)
+  where
+
+  assoc-htpy?² : ((p ∙h q) ∙h r) ∙h s ~ p ∙h ((q ∙h r) ∙h s)
+  assoc-htpy?² = ap-concat-htpy' s (assoc-htpy p q r) ∙h assoc-htpy p (q ∙h r) s
+
+  assoc-htpy??² : (p ∙h (q ∙h r)) ∙h s ~ p ∙h (q ∙h (r ∙h s))
+  assoc-htpy??² = assoc-htpy p (q ∙h r) s ∙h ap-concat-htpy p (assoc-htpy q r s)
+
+  assoc-htpy???² : ((p ∙h q) ∙h r) ∙h s ~ p ∙h (q ∙h (r ∙h s))
+  assoc-htpy???² = assoc-htpy (p ∙h q) r s ∙h assoc-htpy p q (r ∙h s)
+
+  assoc-htpy????² : (p ∙h q) ∙h (r ∙h s) ~ p ∙h ((q ∙h r) ∙h s)
+  assoc-htpy????² =
+    assoc-htpy p q (r ∙h s) ∙h ap-concat-htpy p (inv-htpy (assoc-htpy q r s))
+
+  assoc-htpy?????² : (p ∙h q) ∙h (r ∙h s) ~ (p ∙h (q ∙h r)) ∙h s
+  assoc-htpy?????² =
+    inv-htpy (assoc-htpy (p ∙h q) r s) ∙h ap-concat-htpy' s (assoc-htpy p q r)
+```

@@ -133,7 +133,7 @@ abstract
       ( map-universal-property-set-quotient-trunc-Prop' B)) ~ id
   is-section-map-universal-property-set-quotient-trunc-Prop B (f , H) =
     eq-type-subtype
-      ( is-weakly-constant-map-Prop B)
+      ( is-weakly-constant-map-prop-Set B)
       ( eq-htpy (htpy-universal-property-set-quotient-trunc-Prop B f H))
 
   is-retraction-map-universal-property-set-quotient-trunc-Prop :

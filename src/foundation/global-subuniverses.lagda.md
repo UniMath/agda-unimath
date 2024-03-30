@@ -22,11 +22,13 @@ open import foundation-core.propositions
 
 ## Idea
 
-**Global subuniverses** are [subtypes](foundation-core.subtypes.md) of the large
-universe that are defined at every level, and are closed under
+{{#concept "Global subuniverses" Agda=global-subuniverse}} are
+[subtypes](foundation-core.subtypes.md) of the large universe that are defined
+at every level, and are closed under
 [equivalences of types](foundation-core.equivalences.md). This does not follow
-from [univalence](foundation.univalence.md), as equivalence induction only holds
-for homogeneous equivalences, i.e. equivalences in a single universe.
+from [univalence](foundation.univalence.md), as
+[equivalence induction](foundation.equivalence-induction.md) does not hold for
+equivalences between types in different universes.
 
 ## Definitions
 
@@ -38,21 +40,31 @@ module _
   (l1 l2 : Level)
   where
 
-  is-closed-under-equiv-subuniverses : UU (α l1 ⊔ α l2 ⊔ lsuc l1 ⊔ lsuc l2)
-  is-closed-under-equiv-subuniverses =
+  instance-is-closed-under-equiv-subuniverses :
+    UU (α l1 ⊔ α l2 ⊔ lsuc l1 ⊔ lsuc l2)
+  instance-is-closed-under-equiv-subuniverses =
     (X : UU l1) (Y : UU l2) → X ≃ Y → type-Prop (P l1 X) → type-Prop (P l2 Y)
 
-  is-prop-is-closed-under-equiv-subuniverses :
-    is-prop is-closed-under-equiv-subuniverses
-  is-prop-is-closed-under-equiv-subuniverses =
+  is-prop-instance-is-closed-under-equiv-subuniverses :
+    is-prop instance-is-closed-under-equiv-subuniverses
+  is-prop-instance-is-closed-under-equiv-subuniverses =
     is-prop-iterated-Π 4 (λ X Y e x → is-prop-type-Prop (P l2 Y))
 
-  is-closed-under-equiv-subuniverses-Prop :
+  instance-is-closed-under-equiv-subuniverses-Prop :
     Prop (α l1 ⊔ α l2 ⊔ lsuc l1 ⊔ lsuc l2)
-  pr1 is-closed-under-equiv-subuniverses-Prop =
-    is-closed-under-equiv-subuniverses
-  pr2 is-closed-under-equiv-subuniverses-Prop =
-    is-prop-is-closed-under-equiv-subuniverses
+  pr1 instance-is-closed-under-equiv-subuniverses-Prop =
+    instance-is-closed-under-equiv-subuniverses
+  pr2 instance-is-closed-under-equiv-subuniverses-Prop =
+    is-prop-instance-is-closed-under-equiv-subuniverses
+
+module _
+  (α : Level → Level) (P : (l : Level) → subuniverse l (α l))
+  where
+
+  is-closed-under-equiv-subuniverses : UUω
+  is-closed-under-equiv-subuniverses =
+    {l1 l2 : Level} (X : UU l1) (Y : UU l2) →
+    X ≃ Y → type-Prop (P l1 X) → type-Prop (P l2 Y)
 ```
 
 ### The global type of global subuniverses
@@ -60,12 +72,10 @@ module _
 ```agda
 record global-subuniverse (α : Level → Level) : UUω where
   field
-    subuniverse-global-subuniverse :
-      (l : Level) → subuniverse l (α l)
+    subuniverse-global-subuniverse : (l : Level) → subuniverse l (α l)
 
     is-closed-under-equiv-global-subuniverse :
-      (l1 l2 : Level) →
-      is-closed-under-equiv-subuniverses α subuniverse-global-subuniverse l1 l2
+      is-closed-under-equiv-subuniverses α subuniverse-global-subuniverse
 
 open global-subuniverse public
 
