@@ -330,7 +330,8 @@ abstract
 ### Interchange law for addition with respect to addition
 
 ```agda
-interchange-law-add-add-ℤ : interchange-law add-ℤ add-ℤ
+interchange-law-add-add-ℤ :
+  (x y u v : ℤ) → (x +ℤ y) +ℤ (u +ℤ v) ＝ (x +ℤ u) +ℤ (y +ℤ v)
 interchange-law-add-add-ℤ =
   interchange-law-commutative-and-associative
     add-ℤ
@@ -545,7 +546,11 @@ is-zero-left-add-ℤ x y H =
       by ap (_+ℤ (neg-ℤ y)) H
     ＝ zero-ℤ
       by right-inverse-law-add-ℤ y
+```
 
+### If `x + y = x` then `y = 0`
+
+```agda
 is-zero-right-add-ℤ :
   (x y : ℤ) → x +ℤ y ＝ x → is-zero-ℤ y
 is-zero-right-add-ℤ x y H =

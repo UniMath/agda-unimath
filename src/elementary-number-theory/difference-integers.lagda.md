@@ -44,10 +44,10 @@ ap-diff-ℤ p q = ap-binary diff-ℤ p q
 eq-diff-ℤ : {x y : ℤ} → is-zero-ℤ (x -ℤ y) → x ＝ y
 eq-diff-ℤ {x} {y} H =
   ( inv (right-unit-law-add-ℤ x)) ∙
-  ( ( ap (x +ℤ_) (inv (left-inverse-law-add-ℤ y))) ∙
-    ( ( inv (associative-add-ℤ x (neg-ℤ y) y)) ∙
-      ( ( ap (_+ℤ y) H) ∙
-        ( left-unit-law-add-ℤ y))))
+  ( ap (x +ℤ_) (inv (left-inverse-law-add-ℤ y))) ∙
+  ( inv (associative-add-ℤ x (neg-ℤ y) y)) ∙
+  ( ap (_+ℤ y) H) ∙
+  ( left-unit-law-add-ℤ y)
 
 is-zero-diff-ℤ' : (x : ℤ) → is-zero-ℤ (x -ℤ x)
 is-zero-diff-ℤ' = right-inverse-law-add-ℤ
@@ -97,12 +97,14 @@ distributive-neg-diff-ℤ x y =
   ( ( ap ((neg-ℤ x) +ℤ_) (neg-neg-ℤ y)) ∙
     ( commutative-add-ℤ (neg-ℤ x) y))
 
-interchange-law-add-diff-ℤ : interchange-law add-ℤ diff-ℤ
+interchange-law-add-diff-ℤ :
+  (x y u v : ℤ) → (x -ℤ y) +ℤ (u -ℤ v) ＝ (x +ℤ u) -ℤ (y +ℤ v)
 interchange-law-add-diff-ℤ x y u v =
   ( interchange-law-add-add-ℤ x (neg-ℤ y) u (neg-ℤ v)) ∙
   ( ap ((x +ℤ u) +ℤ_) (inv (distributive-neg-add-ℤ y v)))
 
-interchange-law-diff-add-ℤ : interchange-law diff-ℤ add-ℤ
+interchange-law-diff-add-ℤ :
+  (x y u v : ℤ) → (x +ℤ y) -ℤ (u +ℤ v) ＝ (x -ℤ u) +ℤ (y -ℤ v)
 interchange-law-diff-add-ℤ x y u v = inv (interchange-law-add-diff-ℤ x u y v)
 
 left-translation-diff-ℤ :
