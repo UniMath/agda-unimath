@@ -350,7 +350,7 @@ right-negative-law-mul-ℤ k l =
   ( ap neg-ℤ (commutative-mul-ℤ l k))
 ```
 
-### The multiplication of the negatives of two integers is equal to their product
+### The multiplication of the negatives of two integers is equal to their multiplication
 
 ```agda
 double-negative-law-mul-ℤ : (k l : ℤ) → (neg-ℤ k) *ℤ (neg-ℤ l) ＝ k *ℤ l

@@ -100,7 +100,7 @@ triangle-diff-ℚ x y z =
         ( left-unit-law-add-ℚ (neg-ℚ z)))))
 ```
 
-### The negative of the difference of `x` and `y` is the difference of `y` and `x`
+### The negative of the difference of two rational numbers `x` and `y` is the difference of `y` and `x`
 
 ```agda
 distributive-neg-diff-ℚ :

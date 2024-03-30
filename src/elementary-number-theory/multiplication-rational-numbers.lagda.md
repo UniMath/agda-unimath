@@ -50,7 +50,7 @@ _*ℚ_ = mul-ℚ
 
 ## Properties
 
-### Unit laws
+### Unit laws for multiplication on rational numbers
 
 ```agda
 left-unit-law-mul-ℚ : (x : ℚ) → one-ℚ *ℚ x ＝ x
@@ -70,7 +70,7 @@ right-unit-law-mul-ℚ x =
   ( is-retraction-rational-fraction-ℚ x)
 ```
 
-### Negative unit laws
+### Negative unit laws for multiplication on rational numbers
 
 ```agda
 left-neg-unit-law-mul-ℚ : (x : ℚ) → neg-one-ℚ *ℚ x ＝ neg-ℚ x
@@ -143,7 +143,7 @@ commutative-mul-ℚ x y =
     ( commutative-mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
 ```
 
-### Interchange law
+### Interchange law for multiplication on rational numbers with itself
 
 ```agda
 interchange-law-mul-mul-ℚ :
@@ -155,7 +155,7 @@ interchange-law-mul-mul-ℚ =
     associative-mul-ℚ
 ```
 
-### Negative laws
+### Negative laws for multiplication on rational numbers
 
 ```agda
 module _
