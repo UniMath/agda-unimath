@@ -24,16 +24,35 @@ open import foundation-core.sets
 ## Idea
 
 A {{#concept "preidempotent map" Agda=is-preidempotent-map}} is a map
-`f : A → A` equipped with a homotopy `f ∘ f ~ f`.
+`f : A → A` [equipped](foundation.structure.md) with a
+[homotopy](foundation-core.homotopy-md) `f ∘ f ~ f`.
 
 ## Definitions
+
+### The structure on a map of preidempotence
 
 ```agda
 is-preidempotent-map : {l : Level} {A : UU l} → (A → A) → UU l
 is-preidempotent-map f = (f ∘ f) ~ f
+```
 
+### The type of preidempotent maps
+
+```agda
 preidempotent-map : {l : Level} (A : UU l) → UU l
 preidempotent-map A = Σ (A → A) (is-preidempotent-map)
+
+module _
+  {l : Level} {A : UU l} (f : preidempotent-map A)
+  where
+
+  map-preidempotent-map : A → A
+  map-preidempotent-map = pr1 f
+
+
+  is-preidempotent-preidempotent-map :
+    is-preidempotent-map map-preidempotent-map
+  is-preidempotent-preidempotent-map = pr2 f
 ```
 
 ## Properties

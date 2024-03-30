@@ -29,8 +29,16 @@ open import foundation-core.sets
 
 A {{#concept "quasiidempotent map" Agda=is-quasiidempotent-map}} is a map
 `f : A → A` [equipped](foundation.structure.md) with a
-[homotopy](foundation-core.homotopies.md) `I : f ∘ f ~ f` and a second-order
-coherence `f ·l I ~ I ·r f`.
+[homotopy](foundation-core.homotopies.md) `I : f ∘ f ~ f` and a coherence
+
+```text
+  f ·l I ~ I ·r f.
+```
+
+While this data is not enough to capture a fully coherent idempotent map, it is
+sufficient for showing that `f` can be made to be fully coherent. This is in
+contrast to [preidempotent maps](foundation.preidempotent-maps.md), which may in
+general fail to be coherent.
 
 ## Definitions
 
@@ -259,8 +267,8 @@ module _
 
 ### Realigning the quasiidempotence coherence
 
-Given a quasiidempotent `f` then any other preidempotence proof `H` that is
-homotopic to the coherent one is also coherent.
+Given a quasiidempotent `f` then any other preidempotence homotopy
+`H : f ∘ f ~ f` that is homotopic to the coherent one is also coherent.
 
 ```agda
 module _
