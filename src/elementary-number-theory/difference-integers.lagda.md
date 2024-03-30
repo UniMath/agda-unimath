@@ -33,14 +33,16 @@ diff-ℤ x y = x +ℤ (neg-ℤ y)
 
 infixl 36 _-ℤ_
 _-ℤ_ = diff-ℤ
+
+ap-diff-ℤ : {x x' y y' : ℤ} → x ＝ x' → y ＝ y' → x -ℤ y ＝ x' -ℤ y'
+ap-diff-ℤ p q = ap-binary diff-ℤ p q
 ```
 
 ## Properties
 
-```agda
-ap-diff-ℤ : {x x' y y' : ℤ} → x ＝ x' → y ＝ y' → x -ℤ y ＝ x' -ℤ y'
-ap-diff-ℤ p q = ap-binary diff-ℤ p q
+### Two integers with a difference equal to zero are equal
 
+```agda
 eq-diff-ℤ : {x y : ℤ} → is-zero-ℤ (x -ℤ y) → x ＝ y
 eq-diff-ℤ {x} {y} H =
   ( inv (right-unit-law-add-ℤ x)) ∙
@@ -48,20 +50,40 @@ eq-diff-ℤ {x} {y} H =
   ( inv (associative-add-ℤ x (neg-ℤ y) y)) ∙
   ( ap (_+ℤ y) H) ∙
   ( left-unit-law-add-ℤ y)
+```
 
+### The difference of an integer with itself is zero
+
+```agda
 is-zero-diff-ℤ' : (x : ℤ) → is-zero-ℤ (x -ℤ x)
 is-zero-diff-ℤ' = right-inverse-law-add-ℤ
+```
 
+### The difference of two equal integers is zero
+
+```agda
 is-zero-diff-ℤ :
   {x y : ℤ} → x ＝ y → is-zero-ℤ (x -ℤ y)
 is-zero-diff-ℤ {x} {.x} refl = is-zero-diff-ℤ' x
+```
 
+### The difference of zero and an integer is its negative
+
+```agda
 left-zero-law-diff-ℤ : (x : ℤ) → zero-ℤ -ℤ x ＝ neg-ℤ x
 left-zero-law-diff-ℤ x = left-unit-law-add-ℤ (neg-ℤ x)
+```
 
+### The difference of an integer with zero is itself
+
+```agda
 right-zero-law-diff-ℤ : (x : ℤ) → x -ℤ zero-ℤ ＝ x
 right-zero-law-diff-ℤ x = right-unit-law-add-ℤ x
+```
 
+### Differences with the predecessor or successor of an integer
+
+```agda
 left-successor-law-diff-ℤ :
   (x y : ℤ) → (succ-ℤ x) -ℤ y ＝ succ-ℤ (x -ℤ y)
 left-successor-law-diff-ℤ x y = left-successor-law-add-ℤ x (neg-ℤ y)
@@ -79,7 +101,11 @@ right-predecessor-law-diff-ℤ :
   (x y : ℤ) → x -ℤ (pred-ℤ y) ＝ succ-ℤ (x -ℤ y)
 right-predecessor-law-diff-ℤ x y =
   ap (x +ℤ_) (neg-pred-ℤ y) ∙ right-successor-law-add-ℤ x (neg-ℤ y)
+```
 
+### Triangular identity for addition and difference of integers
+
+```agda
 triangle-diff-ℤ :
   (x y z : ℤ) → (x -ℤ y) +ℤ (y -ℤ z) ＝ x -ℤ z
 triangle-diff-ℤ x y z =
@@ -89,14 +115,22 @@ triangle-diff-ℤ x y z =
     ( ( inv (associative-add-ℤ (neg-ℤ y) y (neg-ℤ z))) ∙
       ( ( ap (_+ℤ (neg-ℤ z)) (left-inverse-law-add-ℤ y)) ∙
         ( left-unit-law-add-ℤ (neg-ℤ z)))))
+```
 
+### The negative of the difference of two integers `x` and `y` is the difference of `y` and `x`
+
+```agda
 distributive-neg-diff-ℤ :
   (x y : ℤ) → neg-ℤ (x -ℤ y) ＝ y -ℤ x
 distributive-neg-diff-ℤ x y =
   ( distributive-neg-add-ℤ x (neg-ℤ y)) ∙
   ( ( ap ((neg-ℤ x) +ℤ_) (neg-neg-ℤ y)) ∙
     ( commutative-add-ℤ (neg-ℤ x) y))
+```
 
+### Interchange laws for addition and difference of integers
+
+```agda
 interchange-law-add-diff-ℤ :
   (x y u v : ℤ) → (x -ℤ y) +ℤ (u -ℤ v) ＝ (x +ℤ u) -ℤ (y +ℤ v)
 interchange-law-add-diff-ℤ x y u v =
@@ -106,7 +140,11 @@ interchange-law-add-diff-ℤ x y u v =
 interchange-law-diff-add-ℤ :
   (x y u v : ℤ) → (x +ℤ y) -ℤ (u +ℤ v) ＝ (x -ℤ u) +ℤ (y -ℤ v)
 interchange-law-diff-add-ℤ x y u v = inv (interchange-law-add-diff-ℤ x u y v)
+```
 
+### The difference of integers is invariant by translation
+
+```agda
 left-translation-diff-ℤ :
   (x y z : ℤ) → (z +ℤ x) -ℤ (z +ℤ y) ＝ x -ℤ y
 left-translation-diff-ℤ x y z =
@@ -120,6 +158,8 @@ right-translation-diff-ℤ x y z =
   ( ap-diff-ℤ (commutative-add-ℤ x z) (commutative-add-ℤ y z)) ∙
   ( left-translation-diff-ℤ x y z)
 ```
+
+### The difference of the successors of two integers is their difference
 
 ```agda
 diff-succ-ℤ : (x y : ℤ) → (succ-ℤ x) -ℤ (succ-ℤ y) ＝ x -ℤ y
