@@ -25,7 +25,7 @@ open import foundation-core.sets
 
 A {{#concept "preidempotent map" Agda=is-preidempotent-map}} is a map
 `f : A → A` [equipped](foundation.structure.md) with a
-[homotopy](foundation-core.homotopy-md) `f ∘ f ~ f`.
+[homotopy](foundation-core.homotopy.md) `f ∘ f ~ f`.
 
 ## Definitions
 
