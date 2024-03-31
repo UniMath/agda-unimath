@@ -128,6 +128,26 @@ module _
   unit-law-assoc-110' refl refl = refl
 ```
 
+### Second-order inverse laws
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  right-right-inv : (p : x ＝ y) (q : y ＝ z) → (p ∙ q) ∙ inv q ＝ p
+  right-right-inv p q = assoc p q (inv q) ∙ ap (p ∙_) (right-inv q) ∙ right-unit
+
+  left-right-inv : (p : x ＝ y) (q : x ＝ y) → p ∙ (inv p ∙ q) ＝ q
+  left-right-inv p q = inv (assoc p (inv p) q) ∙ ap (_∙ q) (right-inv p)
+
+  right-left-inv : (p : x ＝ y) (q : z ＝ y) → (p ∙ inv q) ∙ q ＝ p
+  right-left-inv p q = assoc p (inv q) q ∙ ap (p ∙_) (left-inv q) ∙ right-unit
+
+  left-left-inv : (p : x ＝ y) (q : y ＝ z) → inv p ∙ (p ∙ q) ＝ q
+  left-left-inv p q = inv (assoc (inv p) p q) ∙ ap (_∙ q) (left-inv p)
+```
+
 ## Properties of 2-paths
 
 ### Definition of vertical and horizontal concatenation in identity types of identity types (a type of 2-paths)
