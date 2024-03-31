@@ -21,6 +21,7 @@ open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.inverse-sequential-diagrams
 open import foundation.path-algebra
+open import foundation-core.small-types
 open import foundation.preidempotent-maps
 open import foundation.quasiidempotent-maps
 open import foundation.retracts-of-types
@@ -1019,33 +1020,43 @@ module _
       ( is-quasiidempotent-quasiidempotent-map f)
 ```
 
-### The structure of split idempotence of a map is a retract of the structure of quasiidempotence
+### Small types are closed under retracts
+
+<!-- TODO: move this somewhere more fitting. Currently moving it to foundation.small-types introduces cyclic dependencies -->
+
+This is Theorem 2.13 of {{#cite JE23}}. Note in particular that it does not rely
+on univalence.
+
+**Proof:** Given an inclusion-retraction pair `i , r` that displays `B` as a
+retract of `A` where `A` is a small type, then we have two candidates for the
+splitting type of `i ∘ r`, the first is `B` and the other is the splitting type
+constructed for
 
 ```text
+  is-split-idempotent-is-quasiidempotent-map
+    ( is-quasiidempotent-inclusion-retraction i r ...).
+```
+
+The latter is a small sequential limit, and by essential uniqueness of splitting
+types they are equivalent so we are done.
+
+```agda
 module _
-  {l : Level} {A : UU l} {f : A → A}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-retraction-is-split-idempotent-quasiidempotent-map :
-    is-retraction
-      (is-quasiidempotent-is-split-idempotent-map {f = f})
-      (is-split-idempotent-is-quasiidempotent-map {f = f})
-  is-retraction-is-split-idempotent-quasiidempotent-map x =
-    eq-equiv-is-split-idempotent-map
+  is-small-retract' : B retract-of A → is-small l1 B
+  pr1 (is-small-retract' R) =
+    splitting-type-is-quasiidempotent-map'
+      ( inclusion-retract R ∘ map-retraction-retract R)
+  pr2 (is-small-retract' R) =
+    essentially-unique-splitting-type-is-split-idempotent-map
+      ( B , R , refl-htpy)
       ( is-split-idempotent-is-quasiidempotent-map
-        ( is-quasiidempotent-is-split-idempotent-map x))
-      ( x)
-      ( essentially-unique-splitting-type-is-split-idempotent-map
-        ( is-split-idempotent-is-quasiidempotent-map
-          ( is-quasiidempotent-is-split-idempotent-map x))
-        ( x) ,
-        ( ( homotopy-reasoning
-            ( λ a → pr1 a 0) ~
-            ( λ a → pr1 (pr1 (pr2 x)) (pr1 (pr2 (pr1 (pr2 x))) (pr1 a 0)))
-            by {!  !}) ,
-            ( homotopy-reasoning {! λ x₁ →   pr1   (pr2    (pr1     (pr2      (is-split-idempotent-is-quasiidempotent-map       (is-quasiidempotent-is-split-idempotent-map x)))))   x₁ !} ~ {!   !} by {!   !}) ,
-            {!   !}) ,
-        {!   !})
+        ( is-quasiidempotent-inclusion-retraction
+          ( inclusion-retract R)
+          ( map-retraction-retract R)
+          ( is-retraction-map-retraction-retract R)))
 ```
 
 ## References

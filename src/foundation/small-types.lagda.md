@@ -37,16 +37,7 @@ is-small-is-surjective {f = f} H K L =
   is-small-equiv'
     ( im f)
     ( equiv-equiv-slice-uniqueness-im f id-emb
-      ( pair f refl-htpy)
-      ( is-image-is-surjective f id-emb (pair f refl-htpy) H))
+      ( f , refl-htpy)
+      ( is-image-is-surjective f id-emb (f , refl-htpy) H))
     ( replacement f K L)
-```
-
-### Small types are closed under retracts
-
-```agda
-
-
-
-
 ```
