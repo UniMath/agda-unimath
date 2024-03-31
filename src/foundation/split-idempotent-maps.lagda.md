@@ -602,65 +602,76 @@ Then we show that `r ∘ i` is homotopic to this operation. This time we proceed
 by induction on `n`.
 
 ```agda
-  ξ :
+  htpy-sequence-compute-retraction-is-split-idempotent-is-quasiidempotent-map :
     ( (a , α) :
       standard-sequential-limit
-        ( inverse-sequential-diagram-is-split-idempotent-is-quasiidempotent-map' f)) →
+        ( inverse-sequential-diagram-is-split-idempotent-is-quasiidempotent-map'
+          ( f))) →
     ( λ _ → f (inclusion-is-split-idempotent-is-quasiidempotent-map (a , α))) ~
     ( f ∘ f ∘ a ∘ succ-ℕ)
-  ξ (a , α) 0 = ap f (α 0)
-  ξ (a , α) (succ-ℕ n) =
-    ( ξ ( a , α) n) ∙
+  htpy-sequence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
+    ( a , α) 0 = ap f (α 0)
+  htpy-sequence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
+    ( a , α) (succ-ℕ n) =
+    ( htpy-sequence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
+      ( a , α) n) ∙
     ( is-preidempotent-is-quasiidempotent-map H (a (succ-ℕ n))) ∙
     ( ap f (α (succ-ℕ n)))
 
   abstract
-    Ξ :
+    htpy-coherence-compute-retraction-is-split-idempotent-is-quasiidempotent-map :
       ((a , α) :
         standard-sequential-limit
           ( inverse-sequential-diagram-is-split-idempotent-is-quasiidempotent-map)) →
       coherence-square-homotopies
-        ( ξ
+        ( htpy-sequence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
           ( a , α))
         ( λ n →
           inv
-            ( pr1 H
+            ( is-preidempotent-is-quasiidempotent-map H
               ( inclusion-is-split-idempotent-is-quasiidempotent-map (a , α))))
         ( λ n → ap (f ∘ f) (α (succ-ℕ n)))
         ( λ n →
           ap f
-            ( ( ξ
+            ( ( htpy-sequence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
                 ( a , α)
                 ( n)) ∙
-              ( pr1 H (a (succ-ℕ n))) ∙
+              ( is-preidempotent-is-quasiidempotent-map H (a (succ-ℕ n))) ∙
               ( ap f (α (succ-ℕ n)))))
-    Ξ
+    htpy-coherence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
       ( a , α) 0 =
       ( ap
-        ( inv (pr1 H (a 0)) ∙_)
+        ( inv (is-preidempotent-is-quasiidempotent-map H (a 0)) ∙_)
         ( ( ap-concat f
-            ( ap f (α 0) ∙ pr1 H (a 1))
+            ( ap f (α 0) ∙ is-preidempotent-is-quasiidempotent-map H (a 1))
             ( ap f (α 1))) ∙
           ( ap-binary (_∙_)
-            ( ap-concat f (ap f (α 0)) (pr1 H (a 1)))
+            ( ap-concat f
+              ( ap f (α 0))
+              ( is-preidempotent-is-quasiidempotent-map H (a 1)))
             ( inv (ap-comp f f (α 1)))))) ∙
       ( inv
           ( assoc
-            ( inv (pr1 H (a 0)))
-            ( ap f (ap f (α 0)) ∙ ap f (pr1 H (a 1)))
+            ( inv (is-preidempotent-is-quasiidempotent-map H (a 0)))
+            ( ap f (ap f (α 0)) ∙
+              ap f (is-preidempotent-is-quasiidempotent-map H (a 1)))
             ( ap (f ∘ f) (α 1)))) ∙
       ( ap
         ( _∙ ap (f ∘ f) (α 1))
         ( ap
-          ( inv (pr1 H (a 0)) ∙_)
+          ( inv (is-preidempotent-is-quasiidempotent-map H (a 0)) ∙_)
           ( ( ap-binary (_∙_)
               ( inv (ap-comp f f (α 0)))
               ( coh-is-quasiidempotent-map H (a 1))) ∙
-            ( inv (nat-htpy (pr1 H) (α 0)))) ∙
-          ( left-left-inv (pr1 H (a 0)) (ap f (α 0)))))
+            ( inv
+              ( nat-htpy (is-preidempotent-is-quasiidempotent-map H) (α 0)))) ∙
+          ( left-left-inv
+            ( is-preidempotent-is-quasiidempotent-map H (a 0))
+            ( ap f (α 0)))))
 ```
 
-Now for the inductive case we proceed by using the following diagram
+Now for the inductive case we proceed by using the following diagram following
+the notation of {{#cite Shu17}}:
 
 ```text
                   ξₙ₊₁                I aₙ₊₁             f (αₙ₊₁)⁻¹
@@ -674,47 +685,58 @@ Now for the inductive case we proceed by using the following diagram
 ```
 
 ```agda
-    Ξ
+    htpy-coherence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
       ( a , α) (succ-ℕ n) =
-      ap
-        ( inv (pr1 H (a 0)) ∙_)
+      ( ap
+        ( inv (I (a 0)) ∙_)
         ( ( ap-concat f
-            ( ξ (a , α) (succ-ℕ n) ∙ pr1 H (a (second-succ-ℕ n)))
+            ( ξ (succ-ℕ n) ∙ I (a (second-succ-ℕ n)))
             ( ap f (α (second-succ-ℕ n)))) ∙
           ( ap-binary (_∙_)
-            ( ap-concat f (ξ (a , α) (succ-ℕ n)) (pr1 H (a (second-succ-ℕ n))))
-            ( inv (ap-comp f f (α (second-succ-ℕ n)))))) ∙
-      inv
+            ( ap-concat f (ξ (succ-ℕ n)) (I (a (second-succ-ℕ n))))
+            ( inv (ap-comp f f (α (second-succ-ℕ n))))))) ∙
+      ( inv
         ( assoc
-          ( inv (pr1 H (a 0)))
-          ( ap f (ξ (a , α) n ∙ pr1 H (a (succ-ℕ n)) ∙ ap f (α (succ-ℕ n))) ∙
-            ap f (pr1 H (a (second-succ-ℕ n))))
-          ( ap (f ∘ f) (α (second-succ-ℕ n)))) ∙
-      ap
+          ( inv (I (a 0)))
+          ( ap f
+            ( ξ n ∙
+              I (a (succ-ℕ n)) ∙
+              ap f (α (succ-ℕ n))) ∙
+              ap f (I (a (second-succ-ℕ n))))
+          ( ap (f ∘ f) (α (second-succ-ℕ n))))) ∙
+      ( ap
         ( _∙ ap (f ∘ f) (α (second-succ-ℕ n)))
-        ( equational-reasoning
-            _
-          ＝ _
-          by inv (assoc (inv (pr1 H (a 0))) (ap f (ξ (a , α) n ∙ pr1 H (a (succ-ℕ n)) ∙ ap f (α (succ-ℕ n)))) (ap f (pr1 H (a (second-succ-ℕ n)))))
-          ＝ ξ (a , α) n ∙ (ap (f ∘ f) (α (succ-ℕ n))) ∙ ap f (pr1 H (a (second-succ-ℕ n)))
-          by ap (_∙ ap f (pr1 H (a (second-succ-ℕ n)))) (Ξ (a , α) n)
-          ＝
-            ( ξ (a , α) n) ∙
-            ( ap (f ∘ f) (α (succ-ℕ n)) ∙ ap f (pr1 H (a (second-succ-ℕ n))))
-          by
-            assoc
-              ( ξ (a , α) n)
+        ( ( inv
+            ( assoc
+              ( inv (I (a 0)))
+              ( ap f (ξ n ∙ I (a (succ-ℕ n)) ∙ ap f (α (succ-ℕ n))))
+              ( ap f (I (a (second-succ-ℕ n)))))) ∙
+          ( ap
+            ( _∙ ap f (I ( a (second-succ-ℕ n))))
+            ( htpy-coherence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
+              ( a , α)
+              ( n))) ∙
+          ( assoc
+              ( ξ n)
               ( ap (f ∘ f) (α (succ-ℕ n)))
-              ( ap f (pr1 H (a (second-succ-ℕ n))))
-          ＝ ξ (a , α) n ∙ (pr1 H (a (succ-ℕ n)) ∙ ap f (α (succ-ℕ n)))
-          by
-            ap
-              ( ξ (a , α) n ∙_)
-              (ap (ap (f ∘ f) (α (succ-ℕ n)) ∙_) (coh-is-quasiidempotent-map H (a (succ-ℕ (succ-ℕ n)))) ∙ inv (nat-htpy (pr1 H) (α (succ-ℕ n))))
-          ＝ ξ (a , α) n ∙ pr1 H (a (succ-ℕ n)) ∙ ap f (α (succ-ℕ n))
-          by
-            ( inv
-              ( assoc (ξ (a , α) n) (pr1 H (a (succ-ℕ n))) (ap f (α (succ-ℕ n))))))
+              ( ap f (I (a (second-succ-ℕ n))))) ∙
+          ( ap
+            ( ξ n ∙_)
+            ( ap
+              ( ap (f ∘ f) (α (succ-ℕ n)) ∙_)
+              ( coh-is-quasiidempotent-map H (a (succ-ℕ (succ-ℕ n)))) ∙
+            ( inv (nat-htpy I (α (succ-ℕ n)))))) ∙
+          ( inv (assoc (ξ n) (I (a (succ-ℕ n))) (ap f (α (succ-ℕ n)))))))
+      where
+        ξ :
+          ( λ _ →
+            f (inclusion-is-split-idempotent-is-quasiidempotent-map (a , α))) ~
+          ( f ∘ f ∘ a ∘ succ-ℕ)
+        ξ =
+          htpy-sequence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
+            ( a , α)
+        I : is-preidempotent-map f
+        I = pr1 H
 
   compute-retraction-is-split-idempotent-is-quasiidempotent-map :
     map-retraction-is-split-idempotent-is-quasiidempotent-map ∘
@@ -728,7 +750,10 @@ Now for the inductive case we proceed by using the following diagram
         ( inclusion-is-split-idempotent-is-quasiidempotent-map x))
       ( shift-retraction-is-split-idempotent-is-quasiidempotent-map
         ( x))
-      ( ξ x , Ξ x)
+      ( htpy-sequence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
+          ( x) ,
+        htpy-coherence-compute-retraction-is-split-idempotent-is-quasiidempotent-map
+          ( x))
 
   is-retraction-map-retraction-is-split-idempotent-is-quasiidempotent-map :
     is-retraction
