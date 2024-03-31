@@ -261,26 +261,28 @@ module _
 
 ### Split idempotent maps are quasiidempotent
 
-This is Lemma 3.6 in {{#cite Shu17}}, and remains to be formalized.
+This is Lemma 3.6 in {{#cite Shu17}}. We follow a slightly different route as we
+have already shown that quasiidempotents are closed under homotopy.
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {f : A → A} (H : is-split-idempotent-map l2 f)
   where
 
-  coherence-is-quasiidempotent-is-split-idempotent-map :
-    coherence-is-quasiidempotent-map f
-      ( is-preidempotent-is-split-idempotent-map H)
-  coherence-is-quasiidempotent-is-split-idempotent-map =
-    coherence-is-quasiidempotent-is-preidempotent-map-htpy
-      ( is-quasiidempotent-map-inv-htpy
-        ( is-quasiidempotent-inclusion-retraction
-          ( inclusion-is-split-idempotent-map H)
-          ( map-retraction-is-split-idempotent-map H)
-          (is-retraction-map-retraction-is-split-idempotent-map H))
-        ( htpy-is-split-idempotent-map H))
-      ( is-preidempotent-is-split-idempotent-map H)
-      ( ap-concat-htpy _ (inv-inv-htpy (htpy-is-split-idempotent-map H)))
+  abstract
+    coherence-is-quasiidempotent-is-split-idempotent-map :
+      coherence-is-quasiidempotent-map f
+        ( is-preidempotent-is-split-idempotent-map H)
+    coherence-is-quasiidempotent-is-split-idempotent-map =
+      coherence-is-quasiidempotent-is-preidempotent-map-htpy
+        ( is-quasiidempotent-map-inv-htpy
+          ( is-quasiidempotent-inclusion-retraction
+            ( inclusion-is-split-idempotent-map H)
+            ( map-retraction-is-split-idempotent-map H)
+            (is-retraction-map-retraction-is-split-idempotent-map H))
+          ( htpy-is-split-idempotent-map H))
+        ( is-preidempotent-is-split-idempotent-map H)
+        ( ap-concat-htpy _ (inv-inv-htpy (htpy-is-split-idempotent-map H)))
 
   is-quasiidempotent-is-split-idempotent-map : is-quasiidempotent-map f
   is-quasiidempotent-is-split-idempotent-map =
@@ -377,7 +379,7 @@ module _
     A →
     splitting-type-is-split-idempotent-is-weakly-constant-is-preidempotent-map
   map-retraction-is-split-idempotent-is-weakly-constant-is-preidempotent-map x =
-    (f x , H x)
+    ( f x , H x)
 
   is-retraction-map-retraction-is-split-idempotent-is-weakly-constant-is-preidempotent-map :
     is-retraction
@@ -420,7 +422,7 @@ module _
 
 This is Theorem 5.3 of {{#cite Shu17}}.
 
-```agda
+```text
 module _
   {l : Level} {A : UU l} {f : A → A}
   (H : is-quasiidempotent-map f)

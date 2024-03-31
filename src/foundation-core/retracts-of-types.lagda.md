@@ -52,7 +52,7 @@ We also introduce more intuitive infix notation `A retract-of B` to assert that
 
 ```agda
 retract : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-retract B A = Σ (A → B) retraction
+retract B A = Σ (A → B) (retraction)
 
 infix 6 _retract-of_
 
