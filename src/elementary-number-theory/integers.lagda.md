@@ -54,11 +54,11 @@ negative whole numbers.
 ### Inclusion of the negative integers
 
 ```agda
-in-neg : ℕ → ℤ
-in-neg n = inl n
+in-neg-ℤ : ℕ → ℤ
+in-neg-ℤ n = inl n
 
 neg-one-ℤ : ℤ
-neg-one-ℤ = in-neg zero-ℕ
+neg-one-ℤ = in-neg-ℤ zero-ℕ
 
 is-neg-one-ℤ : ℤ → UU lzero
 is-neg-one-ℤ x = (x ＝ neg-one-ℤ)
@@ -80,11 +80,11 @@ eq-is-zero-ℤ {a} {b} H K = H ∙ inv K
 ### Inclusion of the positive integers
 
 ```agda
-in-pos : ℕ → ℤ
-in-pos n = inr (inr n)
+in-pos-ℤ : ℕ → ℤ
+in-pos-ℤ n = inr (inr n)
 
 one-ℤ : ℤ
-one-ℤ = in-pos zero-ℕ
+one-ℤ = in-pos-ℤ zero-ℕ
 
 is-one-ℤ : ℤ → UU lzero
 is-one-ℤ x = (x ＝ one-ℤ)
@@ -95,7 +95,7 @@ is-one-ℤ x = (x ＝ one-ℤ)
 ```agda
 int-ℕ : ℕ → ℤ
 int-ℕ zero-ℕ = zero-ℤ
-int-ℕ (succ-ℕ n) = in-pos n
+int-ℕ (succ-ℕ n) = in-pos-ℤ n
 
 is-injective-int-ℕ : is-injective int-ℕ
 is-injective-int-ℕ {zero-ℕ} {zero-ℕ} refl = refl

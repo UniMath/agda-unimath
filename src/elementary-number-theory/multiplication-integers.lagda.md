@@ -169,9 +169,9 @@ left-predecessor-law-mul-ℤ (inr (inr zero-ℕ)) l =
   inv (left-inverse-law-add-ℤ l)
 left-predecessor-law-mul-ℤ (inr (inr (succ-ℕ x))) l =
   ( ap
-    ( _+ℤ ((in-pos x) *ℤ l))
+    ( _+ℤ ((in-pos-ℤ x) *ℤ l))
     ( inv (left-inverse-law-add-ℤ l))) ∙
-  ( associative-add-ℤ (neg-ℤ l) l ((in-pos x) *ℤ l))
+  ( associative-add-ℤ (neg-ℤ l) l ((in-pos-ℤ x) *ℤ l))
 
 right-successor-law-mul-ℤ :
   (k l : ℤ) → k *ℤ (succ-ℤ l) ＝ k +ℤ (k *ℤ l)
@@ -199,16 +199,16 @@ right-successor-law-mul-ℤ (inl (succ-ℕ n)) l =
 right-successor-law-mul-ℤ (inr (inl star)) l = refl
 right-successor-law-mul-ℤ (inr (inr zero-ℕ)) l = refl
 right-successor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
-  ( left-successor-law-mul-ℤ (in-pos n) (succ-ℤ l)) ∙
+  ( left-successor-law-mul-ℤ (in-pos-ℤ n) (succ-ℤ l)) ∙
   ( ( ap ((succ-ℤ l) +ℤ_) (right-successor-law-mul-ℤ (inr (inr n)) l)) ∙
-    ( ( inv (associative-add-ℤ (succ-ℤ l) (in-pos n) ((in-pos n) *ℤ l))) ∙
+    ( ( inv (associative-add-ℤ (succ-ℤ l) (in-pos-ℤ n) ((in-pos-ℤ n) *ℤ l))) ∙
       ( ( ap
-          ( _+ℤ ((in-pos n) *ℤ l))
-          { x = (succ-ℤ l) +ℤ (in-pos n)}
-          { y = (in-pos (succ-ℕ n)) +ℤ l}
-          ( ( left-successor-law-add-ℤ l (in-pos n)) ∙
-            ( ( ap succ-ℤ (commutative-add-ℤ l (in-pos n))) ∙
-              ( inv (left-successor-law-add-ℤ (in-pos n) l))))) ∙
+          ( _+ℤ ((in-pos-ℤ n) *ℤ l))
+          { x = (succ-ℤ l) +ℤ (in-pos-ℤ n)}
+          { y = (in-pos-ℤ (succ-ℕ n)) +ℤ l}
+          ( ( left-successor-law-add-ℤ l (in-pos-ℤ n)) ∙
+            ( ( ap succ-ℤ (commutative-add-ℤ l (in-pos-ℤ n))) ∙
+              ( inv (left-successor-law-add-ℤ (in-pos-ℤ n) l))))) ∙
         ( associative-add-ℤ (inr (inr (succ-ℕ n))) l ((inr (inr n)) *ℤ l)))))
 
 right-predecessor-law-mul-ℤ :
@@ -220,26 +220,26 @@ right-predecessor-law-mul-ℤ (inl (succ-ℕ n)) l =
   ( left-predecessor-law-mul-ℤ (inl n) (pred-ℤ l)) ∙
   ( ( ap ((neg-ℤ (pred-ℤ l)) +ℤ_) (right-predecessor-law-mul-ℤ (inl n) l)) ∙
     ( ( inv
-        ( associative-add-ℤ (neg-ℤ (pred-ℤ l)) (in-pos n) ((inl n) *ℤ l))) ∙
+        ( associative-add-ℤ (neg-ℤ (pred-ℤ l)) (in-pos-ℤ n) ((inl n) *ℤ l))) ∙
       ( ( ap
           ( _+ℤ ((inl n) *ℤ l))
           { x = (neg-ℤ (pred-ℤ l)) +ℤ (inr (inr n))}
           { y = (neg-ℤ (inl (succ-ℕ n))) +ℤ (neg-ℤ l)}
-          ( ( ap (_+ℤ (in-pos n)) (neg-pred-ℤ l)) ∙
-            ( ( left-successor-law-add-ℤ (neg-ℤ l) (in-pos n)) ∙
-              ( ( ap succ-ℤ (commutative-add-ℤ (neg-ℤ l) (in-pos n))) ∙
-                ( inv (left-successor-law-add-ℤ (in-pos n) (neg-ℤ l))))))) ∙
-        ( associative-add-ℤ (in-pos (succ-ℕ n)) (neg-ℤ l) ((inl n) *ℤ l)))))
+          ( ( ap (_+ℤ (in-pos-ℤ n)) (neg-pred-ℤ l)) ∙
+            ( ( left-successor-law-add-ℤ (neg-ℤ l) (in-pos-ℤ n)) ∙
+              ( ( ap succ-ℤ (commutative-add-ℤ (neg-ℤ l) (in-pos-ℤ n))) ∙
+                ( inv (left-successor-law-add-ℤ (in-pos-ℤ n) (neg-ℤ l))))))) ∙
+        ( associative-add-ℤ (in-pos-ℤ (succ-ℕ n)) (neg-ℤ l) ((inl n) *ℤ l)))))
 right-predecessor-law-mul-ℤ (inr (inl star)) l = refl
 right-predecessor-law-mul-ℤ (inr (inr zero-ℕ)) l = refl
 right-predecessor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
-  ( left-successor-law-mul-ℤ (in-pos n) (pred-ℤ l)) ∙
+  ( left-successor-law-mul-ℤ (in-pos-ℤ n) (pred-ℤ l)) ∙
   ( ( ap ((pred-ℤ l) +ℤ_) (right-predecessor-law-mul-ℤ (inr (inr n)) l)) ∙
     ( ( inv (associative-add-ℤ (pred-ℤ l) (inl n) ((inr (inr n)) *ℤ l))) ∙
       ( ( ap
-          ( _+ℤ ((in-pos n) *ℤ l))
+          ( _+ℤ ((in-pos-ℤ n) *ℤ l))
           { x = (pred-ℤ l) +ℤ (inl n)}
-          { y = (neg-ℤ (in-pos (succ-ℕ n))) +ℤ l}
+          { y = (neg-ℤ (in-pos-ℤ (succ-ℕ n))) +ℤ l}
           ( ( left-predecessor-law-add-ℤ l (inl n)) ∙
             ( ( ap pred-ℤ (commutative-add-ℤ l (inl n))) ∙
               ( inv (left-predecessor-law-add-ℤ (inl n) l))))) ∙
@@ -266,9 +266,9 @@ right-distributive-mul-add-ℤ (inr (inl star)) l m = refl
 right-distributive-mul-add-ℤ (inr (inr zero-ℕ)) l m =
   left-successor-law-mul-ℤ l m
 right-distributive-mul-add-ℤ (inr (inr (succ-ℕ n))) l m =
-  ( left-successor-law-mul-ℤ ((in-pos n) +ℤ l) m) ∙
+  ( left-successor-law-mul-ℤ ((in-pos-ℤ n) +ℤ l) m) ∙
   ( ( ap (m +ℤ_) (right-distributive-mul-add-ℤ (inr (inr n)) l m)) ∙
-    ( inv (associative-add-ℤ m ((in-pos n) *ℤ m) (l *ℤ m))))
+    ( inv (associative-add-ℤ m ((in-pos-ℤ n) *ℤ m) (l *ℤ m))))
 ```
 
 ### Left multiplication by the negative of an integer is the negative of the multiplication
@@ -289,7 +289,7 @@ left-negative-law-mul-ℤ (inr (inr zero-ℕ)) l = refl
 left-negative-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( left-predecessor-law-mul-ℤ (inl n) l) ∙
   ( ( ap ((neg-ℤ l) +ℤ_) (left-negative-law-mul-ℤ (inr (inr n)) l)) ∙
-    ( inv (distributive-neg-add-ℤ l ((in-pos n) *ℤ l))))
+    ( inv (distributive-neg-add-ℤ l ((in-pos-ℤ n) *ℤ l))))
 ```
 
 ### Multiplication on the integers is associative
@@ -308,7 +308,7 @@ associative-mul-ℤ (inl (succ-ℕ n)) l m =
 associative-mul-ℤ (inr (inl star)) l m = refl
 associative-mul-ℤ (inr (inr zero-ℕ)) l m = refl
 associative-mul-ℤ (inr (inr (succ-ℕ n))) l m =
-  ( right-distributive-mul-add-ℤ l ((in-pos n) *ℤ l) m) ∙
+  ( right-distributive-mul-add-ℤ l ((in-pos-ℤ n) *ℤ l) m) ∙
   ( ap ((l *ℤ m) +ℤ_) (associative-mul-ℤ (inr (inr n)) l m))
 ```
 
@@ -325,7 +325,7 @@ commutative-mul-ℤ (inr (inl star)) l = inv (right-zero-law-mul-ℤ l)
 commutative-mul-ℤ (inr (inr zero-ℕ)) l = inv (right-unit-law-mul-ℤ l)
 commutative-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( ap (l +ℤ_) (commutative-mul-ℤ (inr (inr n)) l)) ∙
-  ( inv (right-successor-law-mul-ℤ l (in-pos n)))
+  ( inv (right-successor-law-mul-ℤ l (in-pos-ℤ n)))
 ```
 
 ### Multiplication on the integers distributes on the left over addition

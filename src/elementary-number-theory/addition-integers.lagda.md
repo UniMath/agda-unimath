@@ -467,9 +467,9 @@ right-negative-law-add-ℤ (inr (inr zero-ℕ)) l =
   inv (neg-pred-ℤ l)
 right-negative-law-add-ℤ (inr (inr (succ-ℕ n))) l =
   equational-reasoning
-    succ-ℤ (in-pos n) +ℤ neg-ℤ l
-    ＝ succ-ℤ (in-pos n +ℤ neg-ℤ l)
-      by left-successor-law-add-ℤ (in-pos n) (neg-ℤ l)
+    succ-ℤ (in-pos-ℤ n) +ℤ neg-ℤ l
+    ＝ succ-ℤ (in-pos-ℤ n +ℤ neg-ℤ l)
+      by left-successor-law-add-ℤ (in-pos-ℤ n) (neg-ℤ l)
     ＝ succ-ℤ (neg-ℤ (neg-ℤ (inr (inr n)) +ℤ l))
       by ap succ-ℤ (right-negative-law-add-ℤ (inr (inr n)) l)
     ＝ neg-ℤ (pred-ℤ ((inl n) +ℤ l))
@@ -503,9 +503,9 @@ distributive-neg-add-ℤ (inr (inr zero-ℕ)) l =
   inv (pred-neg-ℤ l)
 distributive-neg-add-ℤ (inr (inr (succ-ℕ n))) l =
   equational-reasoning
-    neg-ℤ (succ-ℤ (in-pos n +ℤ l))
-    ＝ pred-ℤ (neg-ℤ (in-pos n +ℤ l))
-      by inv (pred-neg-ℤ (in-pos n +ℤ l))
+    neg-ℤ (succ-ℤ (in-pos-ℤ n +ℤ l))
+    ＝ pred-ℤ (neg-ℤ (in-pos-ℤ n +ℤ l))
+      by inv (pred-neg-ℤ (in-pos-ℤ n +ℤ l))
     ＝ pred-ℤ (neg-ℤ (inr (inr n)) +ℤ neg-ℤ l)
       by ap pred-ℤ (distributive-neg-add-ℤ (inr (inr n)) l)
 ```
