@@ -441,8 +441,8 @@ abstract
   is-injective-right-add-ℤ : (x : ℤ) → is-injective (_+ℤ x)
   is-injective-right-add-ℤ x = is-injective-is-emb (is-emb-right-add-ℤ x)
 
-  is-injective-add-ℤ : (x : ℤ) → is-injective (x +ℤ_)
-  is-injective-add-ℤ x = is-injective-is-emb (is-emb-left-add-ℤ x)
+  is-injective-left-add-ℤ : (x : ℤ) → is-injective (x +ℤ_)
+  is-injective-left-add-ℤ x = is-injective-is-emb (is-emb-left-add-ℤ x)
 ```
 
 ### Negative laws for addition

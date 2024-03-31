@@ -241,7 +241,7 @@ pr1 (equiv-add-ℤ-Mod' k x) = add-ℤ-Mod' k x
 pr2 (equiv-add-ℤ-Mod' k x) = is-equiv-add-ℤ-Mod' k x
 
 is-injective-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → is-injective (add-ℤ-Mod k x)
-is-injective-add-ℤ-Mod zero-ℕ = is-injective-add-ℤ
+is-injective-add-ℤ-Mod zero-ℕ = is-injective-left-add-ℤ
 is-injective-add-ℤ-Mod (succ-ℕ k) = is-injective-add-Fin (succ-ℕ k)
 
 is-injective-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → is-injective (add-ℤ-Mod' k x)

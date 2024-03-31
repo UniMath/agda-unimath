@@ -1,8 +1,6 @@
 # The difference between integers
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module elementary-number-theory.difference-integers where
 ```
 

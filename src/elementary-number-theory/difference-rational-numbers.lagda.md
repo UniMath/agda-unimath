@@ -1,6 +1,8 @@
 # The difference between rational numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.difference-rational-numbers where
 ```
 
