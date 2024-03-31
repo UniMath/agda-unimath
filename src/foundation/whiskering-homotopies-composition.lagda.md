@@ -200,7 +200,7 @@ module _
   right-whisker-inv-htpy = refl-htpy
 ```
 
-### Inverse laws for whiskering homotopies
+### Inverse laws for whiskered homotopies
 
 ```agda
 module _

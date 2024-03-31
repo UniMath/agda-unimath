@@ -49,7 +49,6 @@ module _
   map-preidempotent-map : A → A
   map-preidempotent-map = pr1 f
 
-
   is-preidempotent-preidempotent-map :
     is-preidempotent-map map-preidempotent-map
   is-preidempotent-preidempotent-map = pr2 f

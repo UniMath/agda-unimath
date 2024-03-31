@@ -78,7 +78,7 @@ module _
   pr2 is-weakly-constant-map-prop-Set = is-prop-is-weakly-constant-map-Set
 ```
 
-### The action on identifications of weakly constant maps is weakly constant
+### The action on identifications of a weakly constant map is weakly constant
 
 This is Auxiliary Lemma 4.3 of {{#cite KECA17}}.
 
