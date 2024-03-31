@@ -46,9 +46,9 @@ eq-diff-ℚ : {x y : ℚ} → is-zero-ℚ (x -ℚ y) → x ＝ y
 eq-diff-ℚ {x} {y} H =
   ( inv (right-unit-law-add-ℚ x)) ∙
   ( ap (x +ℚ_) (inv (left-inverse-law-add-ℚ y))) ∙
-  ( inv (associative-add-ℚ x (neg-ℚ y) y) ∙
+  ( inv (associative-add-ℚ x (neg-ℚ y) y)) ∙
   ( ap (_+ℚ y) H) ∙
-  ( left-unit-law-add-ℚ y))
+  ( left-unit-law-add-ℚ y)
 ```
 
 ### The difference of a rational number with itself is zero
@@ -61,16 +61,15 @@ is-zero-diff-ℚ' = right-inverse-law-add-ℚ
 ### The difference of two equal rational numbers is zero
 
 ```agda
-is-zero-diff-ℚ :
-  {x y : ℚ} → x ＝ y → is-zero-ℚ (x -ℚ y)
-is-zero-diff-ℚ {x} {.x} refl = is-zero-diff-ℚ' x
+is-zero-diff-ℚ : {x y : ℚ} → x ＝ y → is-zero-ℚ (x -ℚ y)
+is-zero-diff-ℚ {x} refl = is-zero-diff-ℚ' x
 ```
 
 ### The difference of a rational number with zero is itself
 
 ```agda
 right-zero-law-diff-ℚ : (x : ℚ) → x -ℚ zero-ℚ ＝ x
-right-zero-law-diff-ℚ x = right-unit-law-add-ℚ x
+right-zero-law-diff-ℚ = right-unit-law-add-ℚ
 ```
 
 ### The difference of zero and a rational number is its negative
@@ -97,7 +96,7 @@ abstract
             (_+ℚ (neg-ℚ z))
             { neg-ℚ y +ℚ y}
             { zero-ℚ}
-            (left-inverse-law-add-ℚ y)) ∙
+            ( left-inverse-law-add-ℚ y)) ∙
           ( left-unit-law-add-ℚ (neg-ℚ z)))))
 ```
 

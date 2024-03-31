@@ -165,7 +165,7 @@ right-translation-diff-ℤ x y z =
 diff-succ-ℤ : (x y : ℤ) → (succ-ℤ x) -ℤ (succ-ℤ y) ＝ x -ℤ y
 diff-succ-ℤ x y =
   ( ap ((succ-ℤ x) +ℤ_) (neg-succ-ℤ y)) ∙
-  ( ( left-successor-law-add-ℤ x (pred-ℤ (neg-ℤ y))) ∙
-    ( ( ap succ-ℤ (right-predecessor-law-add-ℤ x (neg-ℤ y))) ∙
-      ( is-section-pred-ℤ (x -ℤ y))))
+  ( left-successor-law-add-ℤ x (pred-ℤ (neg-ℤ y))) ∙
+  ( ap succ-ℤ (right-predecessor-law-add-ℤ x (neg-ℤ y))) ∙
+  ( is-section-pred-ℤ (x -ℤ y))
 ```
