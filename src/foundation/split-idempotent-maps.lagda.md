@@ -21,7 +21,6 @@ open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.inverse-sequential-diagrams
 open import foundation.path-algebra
-open import foundation-core.small-types
 open import foundation.preidempotent-maps
 open import foundation.quasiidempotent-maps
 open import foundation.retracts-of-types
@@ -42,6 +41,7 @@ open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.sets
+open import foundation-core.small-types
 open import foundation-core.torsorial-type-families
 ```
 
@@ -210,7 +210,8 @@ module _
 
 ### The splitting type of a split idempotent map is essentially unique
 
-This is Lemma 3.4 in {{#cite Shu17}} and does not require any postulates.
+This is Lemma 3.4 in {{#cite Shu17}}. Note that it does not require any
+postulates.
 
 ```agda
 module _
@@ -420,8 +421,8 @@ module _
 
 ### Split idempotent maps are quasiidempotent
 
-This is Lemma 3.6 in {{#cite Shu17}}. We follow a slightly different route as we
-have already shown that quasiidempotents are closed under homotopy.
+This is Lemma 3.6 in {{#cite Shu17}}. We follow a more direct route as we have
+already shown that quasiidempotents are closed under homotopy.
 
 ```agda
 module _
@@ -665,7 +666,7 @@ module _
       ( is-preidempotent-is-quasiidempotent-map H)
 ```
 
-To construct the desired retracting homotopy
+Now, to construct the desired retracting homotopy
 
 ```text
   r ∘ i ~ id
@@ -675,7 +676,7 @@ we subdivide the problem into two. First, we show that shifting the sequence and
 whiskering by `f ∘ f` is homotopic to the identity
 
 ```text
-  ((f (f a₍₋₎₊₁)) , (f ∘ f) ·l α₍₋₎₊₁) ＝ (a , α).
+  ((f (f a₍₋₎₊₁)) , (f ∘ f) ·l α₍₋₎₊₁) ~ (a , α).
 ```
 
 ```agda
@@ -829,13 +830,13 @@ by induction on `n`.
             ( ap f (α 0)))))
 ```
 
-Now for the inductive case we fill the following diagram as prescribed, in the
+For the inductive step we fill the following diagram as prescribed, in the
 notation of {{#cite Shu17}}:
 
 ```text
               ξₙ₊₁               I aₙ₊₁             f (αₙ₊₁)⁻¹
     f a₀ ------------> f (f aₙ₊₁) ---> f aₙ₊₁ --------------------> f (f aₙ₊₂)
-     |                    |                  [nat-htpy]   -- refl--/   |
+     |                    |                  [nat-htpy]  ___ refl__/   |
   (I⁻¹ a₀)    [Ξₙ]        |       I (f aₙ₊₂)            /         (f ∘ f)(αₙ₊₂)
      ∨                    ∨        ------->           /                ∨
   f (f a₀) --------> f (f (f aₙ₊₂))   [J]   f (f aₙ₊₂) ----------> f (f (f aₙ₊₃))
@@ -851,6 +852,8 @@ J = coh-is-quasiidempotent-map H
 ξ = htpy-sequence-compute-retraction-splitting-type-is-quasiidempotent-map (a , α)
 Ξ = htpy-coherence-compute-retraction-splitting-type-is-quasiidempotent-map (a , α).
 ```
+
+In particular, the left-hand square is the inductive hypothesis.
 
 ```agda
     htpy-coherence-compute-retraction-splitting-type-is-quasiidempotent-map

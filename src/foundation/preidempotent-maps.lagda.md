@@ -115,6 +115,11 @@ module _
     horizontal-concat-htpy (inv-htpy H) (inv-htpy H) ∙h F ∙h H
 ```
 
+## See also
+
+- [Quasiidempotent maps](foundation.quasiidempotent-maps.md)
+- [Split idempotent maps](foundation.split-idempotent-maps.md)
+
 ## References
 
 {{#bibliography}} {{#reference Shu17}} {{#reference Shu14SplittingIdempotents}}

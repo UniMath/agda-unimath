@@ -40,11 +40,11 @@ general fail to be coherent.
 
 ## Definitions
 
-### The structure on maps of quasiidempotence
+### The structure of quasiidempotence on maps
 
 ```agda
 coherence-is-quasiidempotent-map :
-  {l : Level} {A : UU l} (f : A → A) (I : f ∘ f ~ f) → UU l
+  {l : Level} {A : UU l} (f : A → A) → f ∘ f ~ f → UU l
 coherence-is-quasiidempotent-map f I = f ·l I ~ I ·r f
 
 is-quasiidempotent-map : {l : Level} {A : UU l} → (A → A) → UU l
@@ -246,7 +246,7 @@ module _
                   ( right-right-inv-htpy (f ·l H ·r g) ((f ∘ f) ·l H)))) ∙h
               ( nat-htpy H ∘ (H ·r g))))))
 
-  is-quasiidempotent-map-htpy : (H : g ~ f) → is-quasiidempotent-map g
+  is-quasiidempotent-map-htpy : g ~ f → is-quasiidempotent-map g
   pr1 (is-quasiidempotent-map-htpy H) =
     is-preidempotent-map-htpy
       ( is-preidempotent-is-quasiidempotent-map F)
@@ -254,7 +254,7 @@ module _
   pr2 (is-quasiidempotent-map-htpy H) =
     coherence-is-quasiidempotent-map-htpy H
 
-  is-quasiidempotent-map-inv-htpy : (H : f ~ g) → is-quasiidempotent-map g
+  is-quasiidempotent-map-inv-htpy : f ~ g → is-quasiidempotent-map g
   pr1 (is-quasiidempotent-map-inv-htpy H) =
     is-preidempotent-map-htpy
       ( is-preidempotent-is-quasiidempotent-map F)
@@ -274,33 +274,39 @@ module _
   where
 
   coherence-is-quasiidempotent-is-preidempotent-map-htpy :
-    (H : f ∘ f ~ f) (α : is-preidempotent-is-quasiidempotent-map F ~ H) →
-    coherence-is-quasiidempotent-map f H
-  coherence-is-quasiidempotent-is-preidempotent-map-htpy H α =
+    (I : f ∘ f ~ f) → is-preidempotent-is-quasiidempotent-map F ~ I →
+    coherence-is-quasiidempotent-map f I
+  coherence-is-quasiidempotent-is-preidempotent-map-htpy I α =
     ( left-whisker-comp² f (inv-htpy α)) ∙h
     ( coh-is-quasiidempotent-map F) ∙h
     ( right-whisker-comp² α f)
 
   coherence-is-quasiidempotent-is-preidempotent-map-inv-htpy :
-    (H : f ∘ f ~ f) (α : H ~ is-preidempotent-is-quasiidempotent-map F) →
-    coherence-is-quasiidempotent-map f H
-  coherence-is-quasiidempotent-is-preidempotent-map-inv-htpy H α =
+    (I : f ∘ f ~ f) → I ~ is-preidempotent-is-quasiidempotent-map F →
+    coherence-is-quasiidempotent-map f I
+  coherence-is-quasiidempotent-is-preidempotent-map-inv-htpy I α =
     ( left-whisker-comp² f α) ∙h
     ( coh-is-quasiidempotent-map F) ∙h
     ( right-whisker-comp² (inv-htpy α) f)
 
   is-quasiidempotent-is-preidempotent-map-htpy :
-    (H : f ∘ f ~ f) (α : is-preidempotent-is-quasiidempotent-map F ~ H) →
+    (I : f ∘ f ~ f) → is-preidempotent-is-quasiidempotent-map F ~ I →
     is-quasiidempotent-map f
-  is-quasiidempotent-is-preidempotent-map-htpy H α =
-    ( H , coherence-is-quasiidempotent-is-preidempotent-map-htpy H α)
+  is-quasiidempotent-is-preidempotent-map-htpy I α =
+    ( I , coherence-is-quasiidempotent-is-preidempotent-map-htpy I α)
 
   is-quasiidempotent-is-preidempotent-map-inv-htpy :
-    (H : f ∘ f ~ f) (α : H ~ is-preidempotent-is-quasiidempotent-map F) →
+    (I : f ∘ f ~ f) → I ~ is-preidempotent-is-quasiidempotent-map F →
     is-quasiidempotent-map f
-  is-quasiidempotent-is-preidempotent-map-inv-htpy H α =
-    ( H , coherence-is-quasiidempotent-is-preidempotent-map-inv-htpy H α)
+  is-quasiidempotent-is-preidempotent-map-inv-htpy I α =
+    ( I , coherence-is-quasiidempotent-is-preidempotent-map-inv-htpy I α)
 ```
+
+## See also
+
+- In [`foundation.split-idempotent-maps`](foundation.split-idempotent-maps.md)
+  we show that every quasiidempotent splits. In fact, split idempotents are a
+  retract of quasiidempotents.
 
 ## References
 
