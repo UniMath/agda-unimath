@@ -33,6 +33,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.retractions
+open import foundation-core.retracts-of-types
 open import foundation-core.sections
 open import foundation-core.subtypes
 open import foundation-core.truncation-levels
@@ -132,6 +133,20 @@ module _
         ( Σ (B → A) (λ h → h ∘ f ＝ id))
         ( equiv-tot (λ h → equiv-funext))
         ( is-contr-map-is-equiv (is-equiv-precomp-is-equiv f is-equiv-f A) id)
+```
+
+### The underlying retract of an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
+  retract-equiv : A retract-of B
+  retract-equiv = (map-equiv e , retraction-map-equiv e)
+
+  retract-inv-equiv : B retract-of A
+  retract-inv-equiv = (map-inv-equiv e , retraction-map-equiv (inv-equiv e))
 ```
 
 ### Being an equivalence is a property

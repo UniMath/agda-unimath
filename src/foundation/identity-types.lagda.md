@@ -219,6 +219,20 @@ module _
         ( ( ap (concat' _ s) (right-inv right-unit))))
 ```
 
+### Applying the right unit law on one side of a higher identification is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  equiv-right-unit : (p : x ＝ y) (q : x ＝ y) → (p ＝ q) ≃ (p ∙ refl ＝ q)
+  equiv-right-unit p = equiv-concat right-unit
+
+  equiv-right-unit' : (p : x ＝ y) (q : x ＝ y) → (p ＝ q ∙ refl) ≃ (p ＝ q)
+  equiv-right-unit' p q = equiv-concat' p right-unit
+```
+
 ### Reassociating one side of a higher identification is an equivalence
 
 ```agda

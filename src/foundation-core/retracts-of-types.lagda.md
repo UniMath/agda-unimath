@@ -10,7 +10,6 @@ module foundation-core.retracts-of-types where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.homotopy-algebra
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -83,6 +82,40 @@ module _
   pr2 section-retract = is-retraction-map-retraction-retract
 ```
 
+### The type of retracts of a type
+
+```agda
+retracts : {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
+retracts l2 A = Σ (UU l2) (_retract-of A)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : retracts l2 A)
+  where
+
+  type-retracts : UU l2
+  type-retracts = pr1 R
+
+  retract-retracts : type-retracts retract-of A
+  retract-retracts = pr2 R
+
+  inclusion-retracts : type-retracts → A
+  inclusion-retracts = inclusion-retract retract-retracts
+
+  retraction-retracts : retraction inclusion-retracts
+  retraction-retracts = retraction-retract retract-retracts
+
+  map-retraction-retracts : A → type-retracts
+  map-retraction-retracts = map-retraction-retract retract-retracts
+
+  is-retraction-map-retraction-retracts :
+    is-section map-retraction-retracts inclusion-retracts
+  is-retraction-map-retraction-retracts =
+    is-retraction-map-retraction-retract retract-retracts
+
+  section-retracts : section map-retraction-retracts
+  section-retracts = section-retract retract-retracts
+```
+
 ## Properties
 
 ### If `A` is a retract of `B` with inclusion `i : A → B`, then `x ＝ y` is a retract of `i x ＝ i y` for any two elements `x y : A`
@@ -130,6 +163,24 @@ module _
     postcomp S (map-retraction-retract R)
   pr2 (pr2 retract-postcomp) h =
     eq-htpy (is-retraction-map-retraction-retract R ·r h)
+```
+
+### Composition of retracts
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  comp-retract : B retract-of C → A retract-of B → A retract-of C
+  pr1 (comp-retract r r') =
+    inclusion-retract r ∘ inclusion-retract r'
+  pr2 (comp-retract r r') =
+    retraction-comp
+      ( inclusion-retract r)
+      ( inclusion-retract r')
+      ( retraction-retract r)
+      ( retraction-retract r')
 ```
 
 ## See also

@@ -11,17 +11,21 @@ open import foundation-core.retracts-of-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
+open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.equivalences
+open import foundation-core.contractible-types
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.postcomposition-functions
 open import foundation-core.precomposition-functions
@@ -99,6 +103,71 @@ module _
 
   eq-htpy-retract : (R S : A retract-of B) → htpy-retract R S → R ＝ S
   eq-htpy-retract R S = map-inv-is-equiv (is-equiv-htpy-eq-retract R S)
+```
+
+### Characterizing equality of the total type of retracts
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  equiv-retracts :
+    {l3 : Level} (R : retracts l2 A) (S : retracts l3 A) → UU (l1 ⊔ l2 ⊔ l3)
+  equiv-retracts R S =
+    Σ ( type-retracts R ≃ type-retracts S)
+      ( λ e →
+        htpy-retract
+          ( retract-retracts R)
+          ( comp-retract (retract-retracts S) (retract-equiv e)))
+
+  refl-equiv-retracts : (R : retracts l2 A) → equiv-retracts R R
+  refl-equiv-retracts R =
+    ( id-equiv ,
+      refl-htpy ,
+      refl-htpy ,
+      ( ( inv-htpy
+          ( left-unit-law-left-whisker-comp
+            ( is-retraction-map-retraction-retracts R))) ∙h
+        ( inv-htpy-right-unit-htpy)))
+
+  equiv-eq-retracts : (R S : retracts l2 A) → R ＝ S → equiv-retracts R S
+  equiv-eq-retracts R .R refl = refl-equiv-retracts R
+
+  is-torsorial-equiv-retracts :
+    (R : retracts l2 A) → is-torsorial (equiv-retracts R)
+  is-torsorial-equiv-retracts R =
+    is-torsorial-Eq-structure
+      ( is-torsorial-equiv (type-retracts R))
+      ( type-retracts R , id-equiv)
+      ( is-contr-equiv
+        ( Σ (retract A (type-retracts R)) (htpy-retract (retract-retracts R)))
+        ( equiv-tot
+          ( λ S →
+            equiv-tot
+              ( λ I →
+                equiv-tot
+                  ( λ J →
+                    equiv-concat-htpy'
+                      ( is-retraction-map-retraction-retracts R)
+                      ( ap-concat-htpy
+                        ( horizontal-concat-htpy J I)
+                        ( right-unit-htpy ∙h
+                          left-unit-law-left-whisker-comp
+                            ( is-retraction-map-retraction-retract S)))))))
+        ( is-torsorial-htpy-retract (retract-retracts R)))
+
+  is-equiv-equiv-eq-retracts :
+    (R S : retracts l2 A) → is-equiv (equiv-eq-retracts R S)
+  is-equiv-equiv-eq-retracts R =
+    fundamental-theorem-id (is-torsorial-equiv-retracts R) (equiv-eq-retracts R)
+
+  equiv-equiv-eq-retracts : (R S : retracts l2 A) → (R ＝ S) ≃ equiv-retracts R S
+  equiv-equiv-eq-retracts R S =
+    ( equiv-eq-retracts R S , is-equiv-equiv-eq-retracts R S)
+
+  eq-equiv-retracts : (R S : retracts l2 A) → equiv-retracts R S → R ＝ S
+  eq-equiv-retracts R S = map-inv-is-equiv (is-equiv-equiv-eq-retracts R S)
 ```
 
 ## See also
