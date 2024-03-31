@@ -147,26 +147,28 @@ eq-ℚ-sim-fraction-ℤ x y H =
 ### The type of rationals is a set
 
 ```agda
-is-set-ℚ : is-set ℚ
-is-set-ℚ =
-  is-set-Σ
-    ( is-set-fraction-ℤ)
-    ( λ x → is-set-is-prop (is-prop-is-reduced-fraction-ℤ x))
+abstract
+  is-set-ℚ : is-set ℚ
+  is-set-ℚ =
+    is-set-Σ
+      ( is-set-fraction-ℤ)
+      ( λ x → is-set-is-prop (is-prop-is-reduced-fraction-ℤ x))
 
 ℚ-Set : Set lzero
 pr1 ℚ-Set = ℚ
 pr2 ℚ-Set = is-set-ℚ
 
-is-retraction-rational-fraction-ℚ :
-  (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
-is-retraction-rational-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
-  eq-pair-Σ
-    ( eq-pair
-      ( eq-quotient-div-is-one-ℤ _ _ p (div-left-gcd-ℤ m n))
-      ( eq-pair-Σ
-        ( eq-quotient-div-is-one-ℤ _ _ p (div-right-gcd-ℤ m n))
-        ( eq-is-prop (is-prop-is-positive-ℤ n))))
-    ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (m , n , n-pos)))
+abstract
+  is-retraction-rational-fraction-ℚ :
+    (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
+  is-retraction-rational-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
+    eq-pair-Σ
+      ( eq-pair
+        ( eq-quotient-div-is-one-ℤ _ _ p (div-left-gcd-ℤ m n))
+        ( eq-pair-Σ
+          ( eq-quotient-div-is-one-ℤ _ _ p (div-right-gcd-ℤ m n))
+          ( eq-is-prop (is-prop-is-positive-ℤ n))))
+      ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (m , n , n-pos)))
 ```
 
 ### Two fractions with the same numerator and same denominator are equal
@@ -178,14 +180,15 @@ module _
   ( K : denominator-ℚ x ＝ denominator-ℚ y)
   where
 
-  eq-ℚ : x ＝ y
-  eq-ℚ =
-    ( inv (is-retraction-rational-fraction-ℚ x)) ∙
-    ( eq-ℚ-sim-fraction-ℤ
-      ( fraction-ℚ x)
-      ( fraction-ℚ y)
-      ( ap-mul-ℤ H (inv K))) ∙
-    ( is-retraction-rational-fraction-ℚ y)
+  abstract
+    eq-ℚ : x ＝ y
+    eq-ℚ =
+      ( inv (is-retraction-rational-fraction-ℚ x)) ∙
+      ( eq-ℚ-sim-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ y)
+        ( ap-mul-ℤ H (inv K))) ∙
+      ( is-retraction-rational-fraction-ℚ y)
 ```
 
 ### A rational number is zero if and only if its numerator is zero
@@ -195,54 +198,57 @@ module _
   (x : ℚ)
   where
 
-  is-zero-numerator-is-zero-ℚ :
-    is-zero-ℚ x → is-zero-ℤ (numerator-ℚ x)
-  is-zero-numerator-is-zero-ℚ = ap numerator-ℚ
+  abstract
+    is-zero-numerator-is-zero-ℚ :
+      is-zero-ℚ x → is-zero-ℤ (numerator-ℚ x)
+    is-zero-numerator-is-zero-ℚ = ap numerator-ℚ
 
-  is-zero-is-zero-numerator-ℚ :
-    is-zero-ℤ (numerator-ℚ x) → is-zero-ℚ x
-  is-zero-is-zero-numerator-ℚ H =
-    ( inv (is-retraction-rational-fraction-ℚ x)) ∙
-    ( eq-ℚ-sim-fraction-ℤ
-      ( fraction-ℚ x)
-      ( fraction-ℚ zero-ℚ)
-      ( eq-is-zero-ℤ
-        ( ap (mul-ℤ' one-ℤ) H ∙ right-zero-law-mul-ℤ one-ℤ)
-        ( left-zero-law-mul-ℤ (denominator-ℚ x)))) ∙
-    ( is-retraction-rational-fraction-ℚ zero-ℚ)
+    is-zero-is-zero-numerator-ℚ :
+      is-zero-ℤ (numerator-ℚ x) → is-zero-ℚ x
+    is-zero-is-zero-numerator-ℚ H =
+      ( inv (is-retraction-rational-fraction-ℚ x)) ∙
+      ( eq-ℚ-sim-fraction-ℤ
+        ( fraction-ℚ x)
+        ( fraction-ℚ zero-ℚ)
+        ( eq-is-zero-ℤ
+          ( ap (mul-ℤ' one-ℤ) H ∙ right-zero-law-mul-ℤ one-ℤ)
+          ( left-zero-law-mul-ℤ (denominator-ℚ x)))) ∙
+      ( is-retraction-rational-fraction-ℚ zero-ℚ)
 ```
 
 ### The rational image of the negative of an integer is the rational negative of its image
 
 ```agda
-neg-rational-ℤ-neg-ℤ : (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
-neg-rational-ℤ-neg-ℤ k =
-  eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
+abstract
+  neg-rational-ℤ-neg-ℤ : (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
+  neg-rational-ℤ-neg-ℤ k =
+    eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
 ```
 
 ### The reduced fraction of the negative of an integer fraction is the negative of the reduced fraction
 
 ```agda
-eq-neg-rational-fraction-ℤ :
-  (x : fraction-ℤ) →
-  rational-fraction-ℤ (neg-fraction-ℤ x) ＝ neg-ℚ (rational-fraction-ℤ x)
-eq-neg-rational-fraction-ℤ x =
-  ( eq-ℚ-sim-fraction-ℤ
-    ( neg-fraction-ℤ x)
-    ( fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
-    ( sim-neg-sim-fraction-ℤ
-      ( x)
-      ( reduce-fraction-ℤ x)
-      ( sim-reduced-fraction-ℤ x))) ∙
-  ( is-retraction-rational-fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
+abstract
+  eq-neg-rational-fraction-ℤ :
+    (x : fraction-ℤ) →
+    rational-fraction-ℤ (neg-fraction-ℤ x) ＝ neg-ℚ (rational-fraction-ℤ x)
+  eq-neg-rational-fraction-ℤ x =
+    ( eq-ℚ-sim-fraction-ℤ
+      ( neg-fraction-ℤ x)
+      ( fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
+      ( sim-neg-sim-fraction-ℤ
+        ( x)
+        ( reduce-fraction-ℤ x)
+        ( sim-reduced-fraction-ℤ x))) ∙
+    ( is-retraction-rational-fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
 ```
 
 ### The negative function on the rational numbers is an involution
 
 ```agda
-neg-neg-ℚ : (x : ℚ) → neg-ℚ (neg-ℚ x) ＝ x
-neg-neg-ℚ x =
-  eq-ℚ (neg-ℚ (neg-ℚ x)) x (neg-neg-ℤ (numerator-ℚ x)) refl
+abstract
+  neg-neg-ℚ : (x : ℚ) → neg-ℚ (neg-ℚ x) ＝ x
+  neg-neg-ℚ x = eq-ℚ (neg-ℚ (neg-ℚ x)) x (neg-neg-ℤ (numerator-ℚ x)) refl
 ```
 
 ### The reflecting map from fraction-ℤ to ℚ
