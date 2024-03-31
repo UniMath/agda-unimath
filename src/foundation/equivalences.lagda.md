@@ -139,14 +139,15 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  retract-equiv : A retract-of B
-  retract-equiv = (map-equiv e , retraction-map-equiv e)
+  retract-equiv : A ≃ B → A retract-of B
+  retract-equiv e =
+    ( map-equiv e , map-inv-equiv e , is-retraction-map-inv-equiv e)
 
-  retract-inv-equiv : B retract-of A
-  retract-inv-equiv = (map-inv-equiv e , retraction-map-equiv (inv-equiv e))
+  retract-inv-equiv : B ≃ A → A retract-of B
+  retract-inv-equiv = retract-equiv ∘ inv-equiv
 ```
 
 ### Being an equivalence is a property
