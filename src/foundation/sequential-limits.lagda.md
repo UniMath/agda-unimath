@@ -22,8 +22,6 @@ open import foundation.universal-property-sequential-limits
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-homotopies
-open import foundation-core.contractible-types
-open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions

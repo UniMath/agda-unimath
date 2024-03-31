@@ -12,18 +12,13 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fixed-points-endofunctions
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
-open import foundation.identity-types
 open import foundation.inverse-sequential-diagrams
 open import foundation.path-algebra
 open import foundation.preidempotent-maps
@@ -36,9 +31,12 @@ open import foundation.universe-levels
 open import foundation.weakly-constant-maps
 open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.cartesian-product-types
-open import foundation-core.fibers-of-maps
+open import foundation-core.commuting-squares-of-homotopies
+open import foundation-core.contractible-types
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
@@ -1019,6 +1017,35 @@ module _
   is-split-idempotent-quasiidempotent-map =
     is-split-idempotent-is-quasiidempotent-map
       ( is-quasiidempotent-quasiidempotent-map f)
+```
+
+### The structure of split idempotence of a map is a retract of the structure of quasiidempotence
+
+```text
+module _
+  {l : Level} {A : UU l} {f : A → A}
+  where
+
+  is-retraction-is-split-idempotent-quasiidempotent-map :
+    is-retraction
+      (is-quasiidempotent-is-split-idempotent-map {f = f})
+      (is-split-idempotent-is-quasiidempotent-map {f = f})
+  is-retraction-is-split-idempotent-quasiidempotent-map x =
+    eq-equiv-is-split-idempotent-map
+      ( is-split-idempotent-is-quasiidempotent-map
+        ( is-quasiidempotent-is-split-idempotent-map x))
+      ( x)
+      ( essentially-unique-splitting-type-is-split-idempotent-map
+        ( is-split-idempotent-is-quasiidempotent-map
+          ( is-quasiidempotent-is-split-idempotent-map x))
+        ( x) ,
+        ( ( homotopy-reasoning
+            ( λ a → pr1 a 0) ~
+            ( λ a → pr1 (pr1 (pr2 x)) (pr1 (pr2 (pr1 (pr2 x))) (pr1 a 0)))
+            by {!  !}) ,
+            ( homotopy-reasoning {! λ x₁ →   pr1   (pr2    (pr1     (pr2      (is-split-idempotent-is-quasiidempotent-map       (is-quasiidempotent-is-split-idempotent-map x)))))   x₁ !} ~ {!   !} by {!   !}) ,
+            {!   !}) ,
+        {!   !})
 ```
 
 ## References

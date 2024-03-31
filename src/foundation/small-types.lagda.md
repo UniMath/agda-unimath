@@ -41,3 +41,12 @@ is-small-is-surjective {f = f} H K L =
       ( is-image-is-surjective f id-emb (pair f refl-htpy) H))
     ( replacement f K L)
 ```
+
+### Small types are closed under retracts
+
+```agda
+
+
+
+
+```

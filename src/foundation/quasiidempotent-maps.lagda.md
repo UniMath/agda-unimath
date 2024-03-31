@@ -7,7 +7,6 @@ module foundation.quasiidempotent-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.homotopy-algebra
 open import foundation.preidempotent-maps
@@ -17,7 +16,6 @@ open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sets

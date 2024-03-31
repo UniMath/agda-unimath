@@ -8,10 +8,9 @@ module foundation.fixed-points-endofunctions where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.universe-levels
 
-open import foundation-core.fibers-of-maps
+open import foundation-core.identity-types
 ```
 
 </details>
