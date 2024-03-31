@@ -164,16 +164,23 @@ module _
   {l : Level} (A : inverse-sequential-diagram l)
   where
 
+  coherence-Eq-standard-sequential-limit :
+    (s t : standard-sequential-limit A)
+    (H :
+      sequence-standard-sequential-limit A s ~
+      sequence-standard-sequential-limit A t) → UU l
+  coherence-Eq-standard-sequential-limit s t H =
+    coherence-square-homotopies
+      ( H)
+      ( coherence-standard-sequential-limit A s)
+      ( coherence-standard-sequential-limit A t)
+      ( λ n → ap (map-inverse-sequential-diagram A n) (H (succ-ℕ n)))
+
   Eq-standard-sequential-limit : (s t : standard-sequential-limit A) → UU l
   Eq-standard-sequential-limit s t =
     Σ ( sequence-standard-sequential-limit A s ~
         sequence-standard-sequential-limit A t)
-      ( λ H →
-        coherence-square-homotopies
-          ( H)
-          ( coherence-standard-sequential-limit A s)
-          ( coherence-standard-sequential-limit A t)
-          ( λ n → ap (map-inverse-sequential-diagram A n) (H (succ-ℕ n))))
+      ( coherence-Eq-standard-sequential-limit s t)
 
   refl-Eq-standard-sequential-limit :
     (s : standard-sequential-limit A) → Eq-standard-sequential-limit s s

@@ -33,7 +33,7 @@ A {{#concept "preidempotent map" Agda=is-preidempotent-map}} is a map
 
 ```agda
 is-preidempotent-map : {l : Level} {A : UU l} → (A → A) → UU l
-is-preidempotent-map f = (f ∘ f) ~ f
+is-preidempotent-map f = f ∘ f ~ f
 ```
 
 ### The type of preidempotent maps
