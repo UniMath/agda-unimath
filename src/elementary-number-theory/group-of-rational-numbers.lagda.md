@@ -1,6 +1,8 @@
 # The additive group of rational numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.group-of-rational-numbers where
 ```
 
