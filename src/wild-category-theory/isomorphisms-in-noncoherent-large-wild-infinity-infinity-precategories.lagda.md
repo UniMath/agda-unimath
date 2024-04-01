@@ -1,4 +1,4 @@
-# Isomorphisms in noncoherent large wild (∞,∞)-categories
+# Isomorphisms in noncoherent large wild (∞,∞)-precategories
 
 ```agda
 {-# OPTIONS --guardedness #-}
@@ -38,7 +38,7 @@ in 𝒞 is a morphism `f : x → y` in 𝒞 [equipped](foundation.structure.md) 
 - a proof `is-iso-is-split-mono : is-iso is-split-mono`.
 
 This definition of an isomorphism mirrors the definition of
-[biinvertable maps](foundation-core.equivalences.md) between types.
+[biinvertible maps](foundation-core.equivalences.md) between types.
 
 It would be in the spirit of the library to first define what split epimorphisms
 and split monomorphisms are, and then define isomorphisms as those morphisms
@@ -117,7 +117,7 @@ iso-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory 𝒞 x y =
     ( is-iso-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory 𝒞)
 ```
 
-### Components of an isomorphism in a noncoherent large wild (∞,∞)-precategory
+### Components of an isomorphism in a noncoherent large wild $(∞,∞)$-precategory
 
 ```agda
 module _
