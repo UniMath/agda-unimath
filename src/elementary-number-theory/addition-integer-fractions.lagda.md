@@ -10,6 +10,7 @@ module elementary-number-theory.addition-integer-fractions where
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types

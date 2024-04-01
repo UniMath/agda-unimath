@@ -21,7 +21,11 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -194,10 +198,11 @@ bezouts-lemma-refactor-hypotheses x y H K =
   x-product-nonneg :
     is-nonnegative-ℤ
       ( int-ℕ (minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ x)
-  x-product-nonneg = is-nonnegative-mul-ℤ
-    (is-nonnegative-int-ℕ
-      ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P))
-    (is-nonnegative-is-positive-ℤ H)
+  x-product-nonneg =
+    is-nonnegative-mul-ℤ
+      ( is-nonnegative-int-ℕ
+        ( minimal-positive-distance-x-coeff (abs-ℤ x) (abs-ℤ y) P))
+      ( is-nonnegative-is-positive-ℤ H)
   y-product-nonneg :
     is-nonnegative-ℤ
       ( int-ℕ (minimal-positive-distance-y-coeff (abs-ℤ x) (abs-ℤ y) P) *ℤ y)
@@ -212,7 +217,7 @@ bezouts-lemma-pos-ints :
   Σ ℤ (λ s → Σ ℤ (λ t → (s *ℤ x) +ℤ (t *ℤ y) ＝ gcd-ℤ x y))
 bezouts-lemma-pos-ints x y H K =
   sx-ty-nonneg-case-split
-    ( decide-is-nonnegative-ℤ {(s *ℤ x) -ℤ (t *ℤ y)})
+    ( decide-is-nonnegative-is-nonnegative-neg-ℤ {(s *ℤ x) -ℤ (t *ℤ y)})
   where
   s : ℤ
   s = int-ℕ (minimal-positive-distance-x-coeff

@@ -51,7 +51,7 @@ ap-add-ℚ p q = ap-binary add-ℚ p q
 ```agda
 left-unit-law-add-ℚ : (x : ℚ) → zero-ℚ +ℚ x ＝ x
 left-unit-law-add-ℚ (x , p) =
-  eq-ℚ-sim-fractions-ℤ
+  eq-ℚ-sim-fraction-ℤ
     ( add-fraction-ℤ zero-fraction-ℤ x)
     ( x)
     ( left-unit-law-add-fraction-ℤ x) ∙
@@ -59,7 +59,7 @@ left-unit-law-add-ℚ (x , p) =
 
 right-unit-law-add-ℚ : (x : ℚ) → x +ℚ zero-ℚ ＝ x
 right-unit-law-add-ℚ (x , p) =
-  eq-ℚ-sim-fractions-ℤ
+  eq-ℚ-sim-fraction-ℤ
     ( add-fraction-ℤ x zero-fraction-ℤ)
     ( x)
     ( right-unit-law-add-fraction-ℤ x) ∙
@@ -76,16 +76,16 @@ associative-add-ℚ (x , px) (y , py) (z , pz) =
   equational-reasoning
     in-fraction-ℤ (add-fraction-ℤ (pr1 (in-fraction-ℤ (add-fraction-ℤ x y))) z)
     ＝ in-fraction-ℤ (add-fraction-ℤ (add-fraction-ℤ x y) z)
-      by eq-ℚ-sim-fractions-ℤ _ _
+      by eq-ℚ-sim-fraction-ℤ _ _
         ( sim-fraction-add-fraction-ℤ
           ( symmetric-sim-fraction-ℤ _ _
             ( sim-reduced-fraction-ℤ (add-fraction-ℤ x y)))
           ( refl-sim-fraction-ℤ z))
     ＝ in-fraction-ℤ (add-fraction-ℤ x (add-fraction-ℤ y z))
-      by eq-ℚ-sim-fractions-ℤ _ _ (associative-add-fraction-ℤ x y z)
+      by eq-ℚ-sim-fraction-ℤ _ _ (associative-add-fraction-ℤ x y z)
     ＝ in-fraction-ℤ
         ( add-fraction-ℤ x (pr1 (in-fraction-ℤ (add-fraction-ℤ y z))))
-      by eq-ℚ-sim-fractions-ℤ _ _
+      by eq-ℚ-sim-fraction-ℤ _ _
         ( sim-fraction-add-fraction-ℤ
           ( refl-sim-fraction-ℤ x)
           ( sim-reduced-fraction-ℤ (add-fraction-ℤ y z)))
@@ -98,7 +98,7 @@ commutative-add-ℚ :
   (x y : ℚ) →
   x +ℚ y ＝ y +ℚ x
 commutative-add-ℚ (x , px) (y , py) =
-  eq-ℚ-sim-fractions-ℤ
+  eq-ℚ-sim-fraction-ℤ
     ( add-fraction-ℤ x y)
     ( add-fraction-ℤ y x)
     ( commutative-add-fraction-ℤ x y)
