@@ -39,6 +39,13 @@ pair of $n$-morphisms `f` and `g`, a map of $(n+1)$-morphisms
   Fₙ₊₁ : (𝑛+1)-hom 𝒞 f g → (𝑛+1)-hom 𝒟 (Fₙ f) (Fₙ g).
 ```
 
+A map between noncoherent large wild $(∞,∞)$-precategories does not have to
+preserve the identities or composition in any shape or form, and is the least
+structured notion of a "morphism" between noncoherent wild
+$(∞,∞)$-precategories. For a notion of "morphism" between noncoherent large wild
+$(∞,∞)$-precategories that in one sense preserves this additional structure, see
+[colax functors between noncoherent large wild $(∞,∞)$-precategories](wild-category-theory.colax-functors-noncoherent-large-wild-infinity-infinity-precategories.md).
+
 ## Definitions
 
 ### Maps between noncoherent large wild $(∞,∞)$-precategories

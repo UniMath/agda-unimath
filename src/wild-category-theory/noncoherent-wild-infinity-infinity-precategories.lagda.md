@@ -30,14 +30,37 @@ open import structured-types.transitive-globular-types
 
 ## Idea
 
-A
+It is a important open problem known as the _coherence problem_ to define a
+fully coherent notion of $∞$-category in univalent type theory. The subject of
+_wild category theory_ attempts to recover some of the benefits of $∞$-category
+theory without tackling this problem. We introduce, as one of our basic building
+blocks in this subject, the notion of a _noncoherent wild $(∞,∞)$-precategory_.
+
+A _noncoherent wild $(∞,∞)$-precategory_ `𝒞` is a structure that attempts at
+capturing the structure of an $(∞,∞)$-precategory to the $0$'th order. It
+consists of in some sense all of the operations and none of the coherence of an
+$(∞,∞)$-precategory. Thus, it is defined as a
+[globular type](structured-types.globular-types.md) with families of
+$n$-morphisms labeled as "identities"
+
+```text
+  id-hom : (x : 𝑛-Cell 𝒞) → (𝑛+1)-Cell 𝒞 x x
+```
+
+and a composition operation at every dimension
+
+```text
+  comp-hom :
+    {x y z : 𝑛-Cell 𝒞} → (𝑛+1)-Cell 𝒞 y z → (𝑛+1)-Cell 𝒞 x y → (𝑛+1)-Cell 𝒞 x z.
+```
+
+Entirely concretely, we define a
 {{#concept "noncoherent wild $(∞,∞)$-precategory" Agda=Noncoherent-Wild-⟨∞,∞⟩-Precategory}}
-is a [reflexive](structured-types.reflexive-globular-types.md) and
-[transitive](structured-types.transitive-globular-types.md)
-[globular type](structured-types.globular-types.md). We call the 0-cells the
-_objects_, the 1-cells the _morphisms_ and the higher cells the _$n$-morphisms_.
-The reflexivities are called the _identity morphisms_, and the transitivity
-operations are branded as _composition of morphisms_.
+to be a [reflexive](structured-types.reflexive-globular-types.md) and
+[transitive](structured-types.transitive-globular-types.md) globular type. We
+call the 0-cells the _objects_, the 1-cells the _morphisms_ and the higher cells
+the _$n$-morphisms_. The reflexivities are called the _identity morphisms_, and
+the transitivity operations are branded as _composition of morphisms_.
 
 ## Definitions
 
