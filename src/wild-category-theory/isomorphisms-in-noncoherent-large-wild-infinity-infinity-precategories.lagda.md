@@ -51,7 +51,6 @@ because of the missing coherences, we cannot show any of the expected
 properties. For example we cannot show that all identities are isomorphisms, or
 that isomorphisms compose.
 
-
 ## Definitions
 
 ### The predicate on morphisms of being an isomorphism
@@ -66,7 +65,6 @@ record
   (f : hom-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory 𝒞 x y)
   : UU (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
   where
-  coinductive
   field
     hom-section-is-iso-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory :
       hom-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory 𝒞 y x
@@ -103,7 +101,7 @@ record
 open is-iso-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory public
 ```
 
-### Isomorphisms in a noncoherent large wild (∞,∞)-precategory
+### Isomorphisms in a noncoherent large wild $(∞,∞)$-precategory
 
 ```agda
 iso-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory :
