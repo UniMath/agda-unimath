@@ -43,8 +43,9 @@ Given a [double arrow](foundation.double-arrows.md) `f, g : A → B`, a
 a type family `P : X → 𝒰` over `X`, we may construct _dependent_ coforks on `P`
 over `e`.
 
-A {{#concept "dependent cofork" Agda=dependent-cofork}} on `P` over `e` consists
-of a dependent map
+A
+{{#concept "dependent cofork" Disambiguation="of types" Agda=dependent-cofork}}
+on `P` over `e` consists of a dependent map
 
 ```text
 k : (b : B) → P (e b)

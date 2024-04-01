@@ -158,7 +158,7 @@ module _
       ( up-coequalizer Y)
 ```
 
-### In an equivalences of coforks, one cofork is a coequalizer if and only if the other is
+### In an equivalence of coforks, one cofork is a coequalizer if and only if the other is
 
 In other words, given two coforks connected vertically with equivalences, as in
 the following diagram:

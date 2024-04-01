@@ -33,8 +33,10 @@ i.e. a cofork with the
 
 ### All double arrows admit a coequalizer
 
-The {{#concept "canonical coequalizer" Agda=canonical-coequalizer}} may be
-obtained as a [pushout](synthetic-homotopy-theory.pushouts.md) of the span
+The
+{{#concept "canonical coequalizer" Disambiguation="of types" Agda=canonical-coequalizer}}
+may be obtained as a [pushout](synthetic-homotopy-theory.pushouts.md) of the
+span
 
 ```text
      ∇         [f,g]

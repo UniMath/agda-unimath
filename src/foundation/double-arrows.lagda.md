@@ -16,8 +16,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "double arrow" Agda=double-arrow}} is a
-[pair](foundation.dependent-pair-types.md) of types `A`, `B`
+A {{#concept "double arrow" Disambiguation="between types" Agda=double-arrow}}
+is a [pair](foundation.dependent-pair-types.md) of types `A`, `B`
 [equipped](foundation.structure.md) with a pair of
 [maps](foundation.function-types.md) `f, g : A → B`.
 
@@ -79,4 +79,4 @@ module _
 ## See also
 
 - Colimits of double arrows are
-  [coqualizers](synthetic-homotopy-theory.coequalizers.md)
+  [coequalizers](synthetic-homotopy-theory.coequalizers.md)

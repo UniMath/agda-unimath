@@ -29,9 +29,11 @@ Consider two [double arrows](foundation.double-arrows.md) `f, g : A → B` and
 [morphism of double arrows](foundation.morphisms-double-arrows.md)
 `e : (f, g) → (h, k)`.
 
-Then a {{#concept "morphism of coforks" Agda=hom-cofork}} over `e` is a triple
-`(m, H, K)`, with `m : X → Y` a map of vertices of the coforks, `H` a
-[homotopy](foundation-core.homotopies.md) witnessing that the bottom square in
+Then a
+{{#concept "morphism of coforks" Disambiguation="of types" Agda=hom-cofork}}
+over `e` is a triple `(m, H, K)`, with `m : X → Y` a map of vertices of the
+coforks, `H` a [homotopy](foundation-core.homotopies.md) witnessing that the
+bottom square in
 
 ```text
            i
@@ -68,9 +70,44 @@ datum filling the inside --- we have two stacks of squares
            m                        m
 ```
 
-glued along `i` and the bottom square, with the coherences of `c` and `c'`
-filling the sides, which give us two homotopies `m ∘ c ∘ f ~ c' ∘ k ∘ i`, and we
-need to ensure these are homotopic.
+which share the top map `i` and the bottom square, and the coherences of `c` and
+`c'` filling the sides; that gives us the homotopies
+
+```text
+                                                i                 i
+     A                  A                 A --------> U     A --------> U
+     |                  |                             |                 |
+   f |                f |                             | h               | k
+     |                  |                             |                 |
+     ∨                  ∨     j                       ∨                 ∨
+     B         ~        B --------> V       ~         V        ~        V
+     |                              |                 |                 |
+   c |                              | c'              | c'              | c'
+     |                              |                 |                 |
+     ∨                              ∨                 ∨                 ∨
+     X --------> Y                  Y                 Y                 Y
+           m
+```
+
+and
+
+```text
+                                                                  i
+     A                 A               A                    A --------> U
+     |                 |               |                                |
+   f |               g |             g |                                | k
+     |                 |               |                                |
+     ∨                 ∨               ∨     j                          ∨
+     B         ~       B       ~       B --------> V           ~        V
+     |                 |                           |                    |
+   c |               c |                           | c'                 | c'
+     |                 |                           |                    |
+     ∨                 ∨                           ∨                    ∨
+     X --------> Y     X --------> Y               Y                    Y ,
+           m                 m
+```
+
+which we require to be homotopic.
 
 ## Definitions
 

@@ -22,20 +22,22 @@ open import foundation.universe-levels
 
 ## Idea
 
-An {{#concept "equivalence of double arrows" Agda=equiv-double-arrow}} from a
-[double arrow](foundation.double-arrows.md) `f, g : A → B` to a double arrow
-`h, k : X → Y` is a pair of [equivalences](foundation-core.equivalences.md)
-`i : A ≃ X` and `j : B ≃ Y`, such that the two squares in
+An
+{{#concept "equivalence of double arrows" Disambiguation="between types" Agda=equiv-double-arrow}}
+from a [double arrow](foundation.double-arrows.md) `f, g : A → B` to a double
+arrow `h, k : X → Y` is a pair of
+[equivalences](foundation-core.equivalences.md) `i : A ≃ X` and `j : B ≃ Y`,
+such that the squares
 
 ```text
-           i
-     A --------> X
-    | |    ≃    | |
-  f | | g     h | | k
-    | |         | |
-    ∨ ∨    ≃    ∨ ∨
-     B --------> Y
-           j
+           i                   i
+     A --------> X       A --------> X
+     |     ≃     |       |     ≃     |
+   f |           | h   g |           | k
+     |           |       |           |
+     ∨     ≃     ∨       ∨     ≃     ∨
+     B --------> Y       B --------> Y
+           j                   j
 ```
 
 [commute](foundation-core.commuting-squares-of-maps.md). The equivalence `i` is

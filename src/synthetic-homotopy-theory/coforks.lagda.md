@@ -39,7 +39,7 @@ open import synthetic-homotopy-theory.cocones-under-spans
 
 ## Idea
 
-A {{#concept "cofork" Agda=cofork}} of a
+A {{#concept "cofork" Disambiguation="of types" Agda=cofork}} of a
 [double arrow](foundation.double-arrows.md) `f, g : A → B` with vertext `X` is a
 map `e : B → X` together with a [homotopy](foundation.homotopies.md)
 `H : e ∘ f ~ e ∘ g`. The name comes from the diagram
@@ -396,13 +396,13 @@ A [morphism of double arrows](foundation.morphisms-double-arrows.md)
 induces a [morphism of span diagrams](foundation.morphisms-span-diagrams.md)
 
 ```text
-         ∇            [f,g]
+          ∇           [f,g]
     A <------- A + A -------> B
     |            |            |
   i |            | i + i      | j
-    V            V            V
+    ∨            ∨            ∨
     X <------- X + X -------> Y
-         ∇            [h,k]
+          ∇           [h,k]
 ```
 
 ```agda
@@ -474,13 +474,13 @@ induces an
 [equivalence of span diagrams](foundation.equivalences-span-diagrams.md)
 
 ```text
-         ∇            [f,g]
+          ∇           [f,g]
     A <------- A + A -------> B
     |            |            |
   i | ≃        ≃ | i + i    ≃ | j
-    V            V            V
+    ∨            ∨            ∨
     X <------- X + X -------> Y
-         ∇            [h,k]
+          ∇           [h,k]
 ```
 
 ```agda
