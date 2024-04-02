@@ -445,7 +445,7 @@ compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
     ( ap int-ℕ (commutative-add-ℕ (succ-ℕ y) ((succ-ℕ x) *ℕ (succ-ℕ y)))))
 ```
 
-### Linearity of the difference
+### Linearity of the difference on integers
 
 ```agda
 linear-diff-left-mul-ℤ :
