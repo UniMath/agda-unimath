@@ -445,20 +445,20 @@ compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
     ( ap int-ℕ (commutative-add-ℕ (succ-ℕ y) ((succ-ℕ x) *ℕ (succ-ℕ y)))))
 ```
 
-### Linearity of the difference on integers
+### Multiplication on integers distributes over the difference
 
 ```agda
-linear-diff-left-mul-ℤ :
-  (z x y : ℤ) → (z *ℤ x) -ℤ (z *ℤ y) ＝ z *ℤ (x -ℤ y)
-linear-diff-left-mul-ℤ z x y =
-  ( ap ((z *ℤ x) +ℤ_) (inv (right-negative-law-mul-ℤ z y))) ∙
-  ( inv (left-distributive-mul-add-ℤ z x (neg-ℤ y)))
+left-distributive-mul-diff-ℤ :
+  (z x y : ℤ) → z *ℤ (x -ℤ y) ＝ (z *ℤ x) -ℤ (z *ℤ y)
+left-distributive-mul-diff-ℤ z x y =
+  ( left-distributive-mul-add-ℤ z x (neg-ℤ y)) ∙
+  ( ap ((z *ℤ x) +ℤ_) (right-negative-law-mul-ℤ z y))
 
-linear-diff-right-mul-ℤ :
-  (x y z : ℤ) → (x *ℤ z) -ℤ (y *ℤ z) ＝ (x -ℤ y) *ℤ z
-linear-diff-right-mul-ℤ x y z =
-  ( ap ((x *ℤ z) +ℤ_) (inv (left-negative-law-mul-ℤ y z))) ∙
-  ( inv (right-distributive-mul-add-ℤ x (neg-ℤ y) z))
+right-distributive-mul-diff-ℤ :
+  (x y z : ℤ) → (x -ℤ y) *ℤ z ＝ (x *ℤ z) -ℤ (y *ℤ z)
+right-distributive-mul-diff-ℤ x y z =
+  ( right-distributive-mul-add-ℤ x (neg-ℤ y) z) ∙
+  ( ap ((x *ℤ z) +ℤ_) (left-negative-law-mul-ℤ y z))
 ```
 
 ### If the product of two integers is zero, one of the factors is zero
@@ -492,7 +492,7 @@ is-injective-left-mul-ℤ x f {y} {z} p =
       ( f)
       ( is-zero-is-zero-mul-ℤ x
         ( y -ℤ z)
-        ( inv (linear-diff-left-mul-ℤ x y z) ∙ is-zero-diff-ℤ p)))
+        ( left-distributive-mul-diff-ℤ x y z ∙ is-zero-diff-ℤ p)))
 
 is-injective-right-mul-ℤ :
   (x : ℤ) → is-nonzero-ℤ x → is-injective (_*ℤ x)
