@@ -212,6 +212,39 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
 ℤ-Poset = (ℤ-Preorder , λ x y → antisymmetric-leq-ℤ)
 ```
 
+### An integer `x` is nonnegative if and only if `leq-ℤ zero-ℤ x`
+
+```agda
+module _
+  (x : ℤ)
+  where
+
+  leq-zero-is-nonnegative-ℤ : is-nonnegative-ℤ x → leq-ℤ zero-ℤ x
+  leq-zero-is-nonnegative-ℤ =
+    is-nonnegative-eq-ℤ (inv (right-zero-law-diff-ℤ x))
+
+  is-nonnegative-leq-zero-ℤ : leq-ℤ zero-ℤ x → is-nonnegative-ℤ x
+  is-nonnegative-leq-zero-ℤ =
+    is-nonnegative-eq-ℤ (right-zero-law-diff-ℤ x)
+```
+
+### An integer `x` is nonpositive if and only if `leq-ℤ x zero-ℤ`
+
+```agda
+module _
+  (x : ℤ)
+  where
+
+  leq-zero-is-nonpositive-ℤ : is-nonpositive-ℤ x → leq-ℤ x zero-ℤ
+  leq-zero-is-nonpositive-ℤ = is-nonnegative-neg-is-nonpositive-ℤ
+
+  is-nonpositive-leq-zero-ℤ : leq-ℤ x zero-ℤ → is-nonpositive-ℤ x
+  is-nonpositive-leq-zero-ℤ H =
+    is-nonpositive-eq-ℤ
+      ( neg-neg-ℤ x)
+      ( is-nonpositive-neg-is-nonnegative-ℤ H)
+```
+
 ## See also
 
 - The decidable total order on the integers is defined in
