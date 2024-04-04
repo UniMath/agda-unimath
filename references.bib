@@ -37,21 +37,6 @@
   keywords    = {Computer Science - Logic in Computer Science,Mathematics - Algebraic Topology,Mathematics - Logic}
 }
 
-@online{BDR18,
-  title       = {Higher {{Groups}} in {{Homotopy Type Theory}}},
-  author      = {Buchholtz, Ulrik and {{van}} Doorn, Floris and Rijke, Egbert},
-  citeas      = {BDR18},
-  date        = {2018-02-12},
-  year        = {2018},
-  month       = {02},
-  eprint      = {1802.04315},
-  eprinttype  = {arxiv},
-  eprintclass = {cs, math},
-  abstract    = {We present a development of the theory of higher groups, including infinity groups and connective spectra, in homotopy type theory. An infinity group is simply the loops in a pointed, connected type, where the group structure comes from the structure inherent in the identity types of Martin-L\"of type theory. We investigate ordinary groups from this viewpoint, as well as higher dimensional groups and groups that can be delooped more than once. A major result is the stabilization theorem, which states that if an $n$-type can be delooped $n+2$ times, then it is an infinite loop type. Most of the results have been formalized in the Lean proof assistant.},
-  pubstate    = {preprint},
-  keywords    = {03B15,Computer Science - Logic in Computer Science,F.4.1,Mathematics - Algebraic Topology,Mathematics - Logic}
-}
-
 @online{BdJR24,
   title       = {Epimorphisms and {{Acyclic Types}} in {{Univalent Mathematics}}},
   author      = {Buchholtz, Ulrik and {{de}} Jong, Tom and Rijke, Egbert},
@@ -65,6 +50,21 @@
   abstract    = {We characterize the epimorphisms in homotopy type theory (HoTT) as the fiberwise acyclic maps and develop a type-theoretic treatment of acyclic maps and types in the context of synthetic homotopy theory. We present examples and applications in group theory, such as the acyclicity of the Higman group, through the identification of groups with $0$-connected, pointed $1$-types. Many of our results are formalized as part of the agda-unimath library.},
   pubstate    = {preprint},
   keywords    = {Computer Science - Logic in Computer Science,Mathematics - Algebraic Topology,Mathematics - Category Theory}
+}
+
+@online{BDR18,
+  title       = {Higher {{Groups}} in {{Homotopy Type Theory}}},
+  author      = {Buchholtz, Ulrik and {{van}} Doorn, Floris and Rijke, Egbert},
+  citeas      = {BDR18},
+  date        = {2018-02-12},
+  year        = {2018},
+  month       = {02},
+  eprint      = {1802.04315},
+  eprinttype  = {arxiv},
+  eprintclass = {cs, math},
+  abstract    = {We present a development of the theory of higher groups, including infinity groups and connective spectra, in homotopy type theory. An infinity group is simply the loops in a pointed, connected type, where the group structure comes from the structure inherent in the identity types of Martin-L\"of type theory. We investigate ordinary groups from this viewpoint, as well as higher dimensional groups and groups that can be delooped more than once. A major result is the stabilization theorem, which states that if an $n$-type can be delooped $n+2$ times, then it is an infinite loop type. Most of the results have been formalized in the Lean proof assistant.},
+  pubstate    = {preprint},
+  keywords    = {03B15,Computer Science - Logic in Computer Science,F.4.1,Mathematics - Algebraic Topology,Mathematics - Logic}
 }
 
 @book{BSCS05,
@@ -136,6 +136,40 @@
   abstract    = {Any modality in homotopy type theory gives rise to an orthogonal factorization system of which the left class is stable under pullbacks. We show that there is a second orthogonal factorization system associated with any modality, of which the left class is the class of $○$-equivalences and the right class is the class of $○$-étale maps. This factorization system is called the modal reflective factorization system of a modality, and we give a precise characterization of the orthogonal factorization systems that arise as the modal reflective factorization system of a modality. In the special case of the $n$-truncation, the modal reflective factorization system has a simple description: we show that the $n$-étale maps are the maps that are right orthogonal to the map $\mathbf{1} \to \mathbf{S}^{n+1}$. We use the $○$-étale maps to prove a modal descent theorem: a map with modal fibers into $○X$ is the same thing as a $○$-étale map into a type $X$. We conclude with an application to real-cohesive homotopy type theory and remark how $○$-étale maps relate to the formally étale maps from algebraic geometry.},
   langid      = {english},
   keywords    = {algebraic geometry,cohesive homotopy type theory,factorization systems,Homotopy type theory,modal homotopy type theory}
+}
+
+@article{dJE23,
+  title       = {{On Small Types in Univalent Foundations}},
+  author      = {{{de}} Jong, Tom and  Escardó, Martín Hötzel},
+  url         = {https://lmcs.episciences.org/11270},
+  doi         = {10.46298/lmcs-19(2:8)2023},
+  journal     = {{Logical Methods in Computer Science}},
+  volume      = {19},
+  issue       = {2},
+  year        = {2023},
+  month       = {05},
+  keywords    = {Computer Science - Logic in Computer Science ; Mathematics - Logic},
+  eprint      = {2111.00482},
+  eprinttype  = {arxiv},
+  eprintclass = {cs},
+  citeas      = {dJE23}
+}
+
+@inproceedings{dJKFC23,
+  title       = {Set-{{Theoretic}} and {{Type-Theoretic Ordinals Coincide}}},
+  booktitle   = {2023 38th {{Annual ACM}}/{{IEEE Symposium}} on {{Logic}} in {{Computer Science}} ({{LICS}})},
+  author      = {{{de}} Jong, Tom and Kraus, Nicolai and Forsberg, Fredrik Nordvall and Xu, Chuangjie},
+  citeas      = {dJKFC23},
+  date        = {2023-06-26},
+  year        = {2023},
+  month       = {06},
+  eprint      = {2301.10696},
+  eprinttype  = {arxiv},
+  eprintclass = {cs, math},
+  pages       = {1--13},
+  doi         = {10.1109/LICS56636.2023.10175762},
+  abstract    = {In constructive set theory, an ordinal is a hereditarily transitive set. In homotopy type theory (HoTT), an ordinal is a type with a transitive, wellfounded, and extensional binary relation. We show that the two definitions are equivalent if we use (the HoTT refinement of) Aczel's interpretation of constructive set theory into type theory. Following this, we generalize the notion of a type-theoretic ordinal to capture all sets in Aczel's interpretation rather than only the ordinals. This leads to a natural class of ordered structures which contains the type-theoretic ordinals and realizes the higher inductive interpretation of set theory. All our results are formalized in Agda.},
+  keywords    = {Computer Science - Logic in Computer Science,Mathematics - Logic}
 }
 
 @online{Dlicata335/Cohesion-Agda,
@@ -214,40 +248,6 @@
   eprintclass = {cs, math},
   abstract    = {When working in Homotopy Type Theory and Univalent Foundations, the traditional role of the category of sets, Set, is replaced by the category hSet of homotopy sets (h-sets); types with h-propositional identity types. Many of the properties of Set hold for hSet ((co)completeness, exactness, local cartesian closure, etc.). Notably, however, the univalence axiom implies that Ob(hSet) is not itself an h-set, but an h-groupoid. This is expected in univalent foundations, but it is sometimes useful to also have a stricter universe of sets, for example when constructing internal models of type theory. In this work, we equip the type of iterative sets V0, due to Gylterud (2018) as a refinement of the pioneering work of Aczel (1978) on universes of sets in type theory, with the structure of a Tarski universe and show that it satisfies many of the good properties of h-sets. In particular, we organize V0 into a (non-univalent strict) category and prove that it is locally cartesian closed. This enables us to organize it into a category with families with the structure necessary to model extensional type theory internally in HoTT/UF. We do this in a rather minimal univalent type theory with W-types, in particular we do not rely on any HITs, or other complex extensions of type theory. Furthermore, the construction of V0 and the model is fully constructive and predicative, while still being very convenient to work with as the decoding from V0 into h-sets commutes definitionally for all type constructors. Almost all of the paper has been formalized in Agda using the agda-unimath library of univalent mathematics.},
   pubstate    = {preprint},
-  keywords    = {Computer Science - Logic in Computer Science,Mathematics - Logic}
-}
-
-@article{dJE23,
-  title       = {{On Small Types in Univalent Foundations}},
-  author      = {{{de}} Jong, Tom and  Escardó, Martín Hötzel},
-  url         = {https://lmcs.episciences.org/11270},
-  doi         = {10.46298/lmcs-19(2:8)2023},
-  journal     = {{Logical Methods in Computer Science}},
-  volume      = {19},
-  issue       = {2},
-  year        = {2023},
-  month       = {05},
-  keywords    = {Computer Science - Logic in Computer Science ; Mathematics - Logic},
-  eprint      = {2111.00482},
-  eprinttype  = {arxiv},
-  eprintclass = {cs},
-  citeas      = {dJE23}
-}
-
-@inproceedings{dJKFC23,
-  title       = {Set-{{Theoretic}} and {{Type-Theoretic Ordinals Coincide}}},
-  booktitle   = {2023 38th {{Annual ACM}}/{{IEEE Symposium}} on {{Logic}} in {{Computer Science}} ({{LICS}})},
-  author      = {{{de}} Jong, Tom and Kraus, Nicolai and Forsberg, Fredrik Nordvall and Xu, Chuangjie},
-  citeas      = {dJKFC23},
-  date        = {2023-06-26},
-  year        = {2023},
-  month       = {06},
-  eprint      = {2301.10696},
-  eprinttype  = {arxiv},
-  eprintclass = {cs, math},
-  pages       = {1--13},
-  doi         = {10.1109/LICS56636.2023.10175762},
-  abstract    = {In constructive set theory, an ordinal is a hereditarily transitive set. In homotopy type theory (HoTT), an ordinal is a type with a transitive, wellfounded, and extensional binary relation. We show that the two definitions are equivalent if we use (the HoTT refinement of) Aczel's interpretation of constructive set theory into type theory. Following this, we generalize the notion of a type-theoretic ordinal to capture all sets in Aczel's interpretation rather than only the ordinals. This leads to a natural class of ordered structures which contains the type-theoretic ordinals and realizes the higher inductive interpretation of set theory. All our results are formalized in Agda.},
   keywords    = {Computer Science - Logic in Computer Science,Mathematics - Logic}
 }
 
