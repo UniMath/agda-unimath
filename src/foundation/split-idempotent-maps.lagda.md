@@ -1027,8 +1027,8 @@ module _
 
 <!-- TODO: move this somewhere more fitting. Currently moving it to foundation.small-types introduces cyclic dependencies -->
 
-This is Theorem 2.13 of {{#cite JE23}}. Note in particular that it does not rely
-on univalence.
+This is Theorem 2.13 of {{#cite dJE23}}. Note in particular that it does not
+rely on univalence.
 
 **Proof:** Given an inclusion-retraction pair `i , r` that displays `B` as a
 retract of `A` where `A` is a small type, then we have two candidates for the
