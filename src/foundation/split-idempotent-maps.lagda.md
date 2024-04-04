@@ -1060,6 +1060,15 @@ module _
           ( inclusion-retract R)
           ( map-retraction-retract R)
           ( is-retraction-map-retraction-retract R)))
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-small-retract : is-small l3 A → B retract-of A → is-small l3 B
+  is-small-retract is-small-A r =
+    is-small-retract'
+      ( comp-retract (retract-equiv (equiv-is-small is-small-A)) r)
 ```
 
 ## References
