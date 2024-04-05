@@ -7,16 +7,21 @@ module foundation.law-of-excluded-middle where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.booleans
+open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
-open import foundation-core.decidable-propositions
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.equivalences
+open import foundation-core.identity-types
 open import foundation-core.negation
 
 open import univalent-combinatorics.2-element-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -59,6 +64,29 @@ decidable-prop-Prop :
 pr1 (decidable-prop-Prop lem P) = type-Prop P
 pr1 (pr2 (decidable-prop-Prop lem P)) = is-prop-type-Prop P
 pr2 (pr2 (decidable-prop-Prop lem P)) = lem P
+```
+
+### TODO: Given LEM, Prop equiv Decidable-Prop
+
+```agda
+prop-equiv-decidable-prop :
+  {l : Level} → LEM l → Prop l ≃ Decidable-Prop l
+prop-equiv-decidable-prop lem =
+  pair
+    ( decidable-prop-Prop lem)
+    ( is-equiv-is-invertible
+      ( prop-Decidable-Prop)
+      ( λ P →
+        ( eq-pair-Σ
+          ( refl)
+          ( eq-is-prop (is-prop-is-decidable-prop (type-Decidable-Prop P)))))
+      ( λ P → eq-pair-Σ refl (eq-is-prop (is-prop-is-prop (type-Prop P)))))
+
+is-finite-Prop-LEM : {l : Level} → LEM l → is-finite (Prop l)
+is-finite-Prop-LEM lem =
+  is-finite-equiv'
+    ( equiv-bool-Decidable-Prop ∘e prop-equiv-decidable-prop lem)
+    ( is-finite-bool)
 ```
 
 ### The unrestricted law of excluded middle does not hold

@@ -9,12 +9,16 @@ open import modal-logic.canonical-theories public
 open import modal-logic.completeness public
 open import modal-logic.completeness-K public
 open import modal-logic.completeness-S5 public
+open import modal-logic.finite-approximability public
 open import modal-logic.formulas public
 open import modal-logic.formulas-deduction public
+open import modal-logic.kripke-models-filtrations public
+open import modal-logic.kripke-models-filtrations-theorem public
 open import modal-logic.kripke-semantics public
 open import modal-logic.logic-syntax public
 open import modal-logic.modal-logic-K public
 open import modal-logic.modal-logic-S5 public
+open import modal-logic.modal-logic-decision public
 open import modal-logic.soundness public
 open import modal-logic.weak-deduction public
 ```

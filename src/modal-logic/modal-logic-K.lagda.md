@@ -165,7 +165,7 @@ module _
       ( modal-logic-K i)
       ( decidable-models l2 l3 i l4)
       ( finite-models l2 l3 i l4)
-      ( finite-models-subclass-decidable-models l2 l3 i l4)
+      ( finite-models-subclass-decidable-models i)
       ( soundness-K)
 
 module _

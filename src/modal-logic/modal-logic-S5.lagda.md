@@ -191,7 +191,7 @@ module _
           ( finite-subclass i (equivalence-kripke-class l2 l3 i l4))
           ( finite-models l2 l3 i l4)
           ( decidable-models l2 l3 i l4)
-          ( finite-models-subclass-decidable-models l2 l3 i l4)
+          ( finite-models-subclass-decidable-models i)
           ( subtype-intersection-left
             ( finite-models l2 l3 i l4)
             ( equivalence-kripke-class l2 l3 i l4)))

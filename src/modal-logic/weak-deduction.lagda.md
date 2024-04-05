@@ -259,6 +259,28 @@ in-concat-lists-union l1 l2 a =
     ( in-list (concat-list l1 l2) a)
     ( in-concat-list-sum-Prop l1 l2 a)
 
+subset-in-concat-left :
+  {l : Level} {A : UU l} (l1 l2 : list A) →
+  in-list l1 ⊆ in-list (concat-list l1 l2)
+subset-in-concat-left l1 l2 =
+  transitive-leq-subtype
+    ( in-list l1)
+    ( union-subtype (in-list l1) (in-list l2))
+    ( in-list (concat-list l1 l2))
+    ( in-concat-lists-union l1 l2)
+    ( subtype-union-left (in-list l1) (in-list l2))
+
+subset-in-concat-right :
+  {l : Level} {A : UU l} (l1 l2 : list A) →
+  in-list l2 ⊆ in-list (concat-list l1 l2)
+subset-in-concat-right l1 l2 =
+  transitive-leq-subtype
+    ( in-list l2)
+    ( union-subtype (in-list l1) (in-list l2))
+    ( in-list (concat-list l1 l2))
+    ( in-concat-lists-union l1 l2)
+    ( subtype-union-right (in-list l1) (in-list l2))
+
 empty-in-list-nil :
   {l : Level} {A : UU l} {x : A} → is-in-subtype (in-list nil) x → empty
 empty-in-list-nil = map-universal-property-trunc-Prop empty-Prop ( λ ())

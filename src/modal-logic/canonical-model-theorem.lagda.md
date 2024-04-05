@@ -812,7 +812,6 @@ module _
                                   ( b)
                                   ( box-in-logic))))))))))))})
     where
-
     list-to-implications :
       formula i →
       (l : list (formula i)) →
