@@ -44,41 +44,46 @@ ap-diff-ℚ p q = ap-binary diff-ℚ p q
 ### Two rational numbers with a difference equal to zero are equal
 
 ```agda
-eq-diff-ℚ : {x y : ℚ} → is-zero-ℚ (x -ℚ y) → x ＝ y
-eq-diff-ℚ {x} {y} H =
-  ( inv (right-unit-law-add-ℚ x)) ∙
-  ( ap (x +ℚ_) (inv (left-inverse-law-add-ℚ y))) ∙
-  ( inv (associative-add-ℚ x (neg-ℚ y) y)) ∙
-  ( ap (_+ℚ y) H) ∙
-  ( left-unit-law-add-ℚ y)
+abstract
+  eq-diff-ℚ : {x y : ℚ} → is-zero-ℚ (x -ℚ y) → x ＝ y
+  eq-diff-ℚ {x} {y} H =
+    ( inv (right-unit-law-add-ℚ x)) ∙
+    ( ap (x +ℚ_) (inv (left-inverse-law-add-ℚ y))) ∙
+    ( inv (associative-add-ℚ x (neg-ℚ y) y)) ∙
+    ( ap (_+ℚ y) H) ∙
+    ( left-unit-law-add-ℚ y)
 ```
 
 ### The difference of a rational number with itself is zero
 
 ```agda
-is-zero-diff-ℚ' : (x : ℚ) → is-zero-ℚ (x -ℚ x)
-is-zero-diff-ℚ' = right-inverse-law-add-ℚ
+abstract
+  is-zero-diff-ℚ' : (x : ℚ) → is-zero-ℚ (x -ℚ x)
+  is-zero-diff-ℚ' = right-inverse-law-add-ℚ
 ```
 
 ### The difference of two equal rational numbers is zero
 
 ```agda
-is-zero-diff-ℚ : {x y : ℚ} → x ＝ y → is-zero-ℚ (x -ℚ y)
-is-zero-diff-ℚ {x} refl = is-zero-diff-ℚ' x
+abstract
+  is-zero-diff-ℚ : {x y : ℚ} → x ＝ y → is-zero-ℚ (x -ℚ y)
+  is-zero-diff-ℚ {x} refl = is-zero-diff-ℚ' x
 ```
 
 ### The difference of a rational number with zero is itself
 
 ```agda
-right-zero-law-diff-ℚ : (x : ℚ) → x -ℚ zero-ℚ ＝ x
-right-zero-law-diff-ℚ = right-unit-law-add-ℚ
+abstract
+  right-zero-law-diff-ℚ : (x : ℚ) → x -ℚ zero-ℚ ＝ x
+  right-zero-law-diff-ℚ = right-unit-law-add-ℚ
 ```
 
 ### The difference of zero and a rational number is its negative
 
 ```agda
-left-zero-law-diff-ℚ : (x : ℚ) → zero-ℚ -ℚ x ＝ neg-ℚ x
-left-zero-law-diff-ℚ x = left-unit-law-add-ℚ (neg-ℚ x)
+abstract
+  left-zero-law-diff-ℚ : (x : ℚ) → zero-ℚ -ℚ x ＝ neg-ℚ x
+  left-zero-law-diff-ℚ x = left-unit-law-add-ℚ (neg-ℚ x)
 ```
 
 ### Triangular identity for addition and difference of rational numbers
