@@ -84,62 +84,66 @@ left-zero-law-diff-ℚ x = left-unit-law-add-ℚ (neg-ℚ x)
 ### Triangular identity for addition and difference of rational numbers
 
 ```agda
-triangle-diff-ℚ :
-  (x y z : ℚ) → (x -ℚ y) +ℚ (y -ℚ z) ＝ x -ℚ z
-triangle-diff-ℚ x y z =
-  ( associative-add-ℚ x (neg-ℚ y) (y -ℚ z)) ∙
-  ( ap
-    ( x +ℚ_)
-    { neg-ℚ y +ℚ y -ℚ z}
-    { neg-ℚ z}
-    ( ( inv (associative-add-ℚ (neg-ℚ y) y (neg-ℚ z))) ∙
-      ( ( ap
-          (_+ℚ (neg-ℚ z))
-          { neg-ℚ y +ℚ y}
-          { zero-ℚ}
-          ( left-inverse-law-add-ℚ y)) ∙
-        ( left-unit-law-add-ℚ (neg-ℚ z)))))
+abstract
+  triangle-diff-ℚ :
+    (x y z : ℚ) → (x -ℚ y) +ℚ (y -ℚ z) ＝ x -ℚ z
+  triangle-diff-ℚ x y z =
+    ( associative-add-ℚ x (neg-ℚ y) (y -ℚ z)) ∙
+    ( ap
+      ( x +ℚ_)
+      { neg-ℚ y +ℚ y -ℚ z}
+      { neg-ℚ z}
+      ( ( inv (associative-add-ℚ (neg-ℚ y) y (neg-ℚ z))) ∙
+        ( ( ap
+            (_+ℚ (neg-ℚ z))
+            { neg-ℚ y +ℚ y}
+            { zero-ℚ}
+            ( left-inverse-law-add-ℚ y)) ∙
+          ( left-unit-law-add-ℚ (neg-ℚ z)))))
 ```
 
 ### The negative of the difference of two rational numbers `x` and `y` is the difference of `y` and `x`
 
 ```agda
-distributive-neg-diff-ℚ :
-  (x y : ℚ) → neg-ℚ (x -ℚ y) ＝ y -ℚ x
-distributive-neg-diff-ℚ x y =
-  ( distributive-neg-add-ℚ x (neg-ℚ y)) ∙
-  ( ap ((neg-ℚ x) +ℚ_) (neg-neg-ℚ y)) ∙
-  ( commutative-add-ℚ (neg-ℚ x) y)
+abstract
+  distributive-neg-diff-ℚ :
+    (x y : ℚ) → neg-ℚ (x -ℚ y) ＝ y -ℚ x
+  distributive-neg-diff-ℚ x y =
+    ( distributive-neg-add-ℚ x (neg-ℚ y)) ∙
+    ( ap ((neg-ℚ x) +ℚ_) (neg-neg-ℚ y)) ∙
+    ( commutative-add-ℚ (neg-ℚ x) y)
 ```
 
 ### Interchange laws for addition and difference on rational numbers
 
 ```agda
-interchange-law-diff-add-ℚ :
-  (x y u v : ℚ) → (x +ℚ y) -ℚ (u +ℚ v) ＝ (x -ℚ u) +ℚ (y -ℚ v)
-interchange-law-diff-add-ℚ x y u v =
-  ( ap ((x +ℚ y) +ℚ_) (distributive-neg-add-ℚ u v)) ∙
-  ( interchange-law-add-add-ℚ x y (neg-ℚ u) (neg-ℚ v))
+abstract
+  interchange-law-diff-add-ℚ :
+    (x y u v : ℚ) → (x +ℚ y) -ℚ (u +ℚ v) ＝ (x -ℚ u) +ℚ (y -ℚ v)
+  interchange-law-diff-add-ℚ x y u v =
+    ( ap ((x +ℚ y) +ℚ_) (distributive-neg-add-ℚ u v)) ∙
+    ( interchange-law-add-add-ℚ x y (neg-ℚ u) (neg-ℚ v))
 
-interchange-law-add-diff-ℚ :
-  (x y u v : ℚ) → (x -ℚ y) +ℚ (u -ℚ v) ＝ (x +ℚ u) -ℚ (y +ℚ v)
-interchange-law-add-diff-ℚ x y u v =
-  inv (interchange-law-diff-add-ℚ x u y v)
+  interchange-law-add-diff-ℚ :
+    (x y u v : ℚ) → (x -ℚ y) +ℚ (u -ℚ v) ＝ (x +ℚ u) -ℚ (y +ℚ v)
+  interchange-law-add-diff-ℚ x y u v =
+    inv (interchange-law-diff-add-ℚ x u y v)
 ```
 
 ### The difference of rational numbers is invariant by translation
 
 ```agda
-left-translation-diff-ℚ :
-  (x y z : ℚ) → (z +ℚ x) -ℚ (z +ℚ y) ＝ x -ℚ y
-left-translation-diff-ℚ x y z =
-  ( interchange-law-diff-add-ℚ z x z y) ∙
-  ( ap (_+ℚ (x -ℚ y)) (right-inverse-law-add-ℚ z)) ∙
-  ( left-unit-law-add-ℚ (x -ℚ y))
+abstract
+  left-translation-diff-ℚ :
+    (x y z : ℚ) → (z +ℚ x) -ℚ (z +ℚ y) ＝ x -ℚ y
+  left-translation-diff-ℚ x y z =
+    ( interchange-law-diff-add-ℚ z x z y) ∙
+    ( ap (_+ℚ (x -ℚ y)) (right-inverse-law-add-ℚ z)) ∙
+    ( left-unit-law-add-ℚ (x -ℚ y))
 
-right-translation-diff-ℚ :
-  (x y z : ℚ) → (x +ℚ z) -ℚ (y +ℚ z) ＝ x -ℚ y
-right-translation-diff-ℚ x y z =
-  ( ap-diff-ℚ (commutative-add-ℚ x z) (commutative-add-ℚ y z)) ∙
-  ( left-translation-diff-ℚ x y z)
+  right-translation-diff-ℚ :
+    (x y z : ℚ) → (x +ℚ z) -ℚ (y +ℚ z) ＝ x -ℚ y
+  right-translation-diff-ℚ x y z =
+    ( ap-diff-ℚ (commutative-add-ℚ x z) (commutative-add-ℚ y z)) ∙
+    ( left-translation-diff-ℚ x y z)
 ```
