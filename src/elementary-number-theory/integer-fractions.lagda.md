@@ -109,19 +109,17 @@ neg-fraction-ℤ (d , n) = (neg-ℤ d , n)
 ### Denominators are nonzero
 
 ```agda
-abstract
-  is-nonzero-denominator-fraction-ℤ :
-    (x : fraction-ℤ) → is-nonzero-ℤ (denominator-fraction-ℤ x)
-  is-nonzero-denominator-fraction-ℤ x =
-    is-nonzero-is-positive-ℤ (is-positive-denominator-fraction-ℤ x)
+is-nonzero-denominator-fraction-ℤ :
+  (x : fraction-ℤ) → is-nonzero-ℤ (denominator-fraction-ℤ x)
+is-nonzero-denominator-fraction-ℤ x =
+  is-nonzero-is-positive-ℤ (is-positive-denominator-fraction-ℤ x)
 ```
 
 ### The type of fractions is a set
 
 ```agda
-abstract
-  is-set-fraction-ℤ : is-set fraction-ℤ
-  is-set-fraction-ℤ = is-set-Σ is-set-ℤ (λ _ → is-set-positive-ℤ)
+is-set-fraction-ℤ : is-set fraction-ℤ
+is-set-fraction-ℤ = is-set-Σ is-set-ℤ λ _ → is-set-positive-ℤ
 ```
 
 ```agda
@@ -143,56 +141,55 @@ refl-sim-fraction-ℤ x = refl
 symmetric-sim-fraction-ℤ : is-symmetric sim-fraction-ℤ
 symmetric-sim-fraction-ℤ x y r = inv r
 
-abstract
-  transitive-sim-fraction-ℤ : is-transitive sim-fraction-ℤ
-  transitive-sim-fraction-ℤ x y z s r =
-    is-injective-right-mul-ℤ
-      ( denominator-fraction-ℤ y)
-      ( is-nonzero-denominator-fraction-ℤ y)
-      ( ( associative-mul-ℤ
-          ( numerator-fraction-ℤ x)
+transitive-sim-fraction-ℤ : is-transitive sim-fraction-ℤ
+transitive-sim-fraction-ℤ x y z s r =
+  is-injective-right-mul-ℤ
+    ( denominator-fraction-ℤ y)
+    ( is-nonzero-denominator-fraction-ℤ y)
+    ( ( associative-mul-ℤ
+        ( numerator-fraction-ℤ x)
+        ( denominator-fraction-ℤ z)
+        ( denominator-fraction-ℤ y)) ∙
+      ( ap
+        ( (numerator-fraction-ℤ x) *ℤ_)
+        ( commutative-mul-ℤ
           ( denominator-fraction-ℤ z)
-          ( denominator-fraction-ℤ y)) ∙
-        ( ap
-          ( (numerator-fraction-ℤ x) *ℤ_)
-          ( commutative-mul-ℤ
-            ( denominator-fraction-ℤ z)
-            ( denominator-fraction-ℤ y))) ∙
-        ( inv
-          ( associative-mul-ℤ
-            ( numerator-fraction-ℤ x)
-            ( denominator-fraction-ℤ y)
-            ( denominator-fraction-ℤ z))) ∙
-        ( ap ( _*ℤ (denominator-fraction-ℤ z)) r) ∙
+          ( denominator-fraction-ℤ y))) ∙
+      ( inv
+        ( associative-mul-ℤ
+          ( numerator-fraction-ℤ x)
+          ( denominator-fraction-ℤ y)
+          ( denominator-fraction-ℤ z))) ∙
+      ( ap ( _*ℤ (denominator-fraction-ℤ z)) r) ∙
+      ( associative-mul-ℤ
+        ( numerator-fraction-ℤ y)
+        ( denominator-fraction-ℤ x)
+        ( denominator-fraction-ℤ z)) ∙
+      ( ap
+        ( (numerator-fraction-ℤ y) *ℤ_)
+        ( commutative-mul-ℤ
+          ( denominator-fraction-ℤ x)
+          ( denominator-fraction-ℤ z))) ∙
+      ( inv
         ( associative-mul-ℤ
           ( numerator-fraction-ℤ y)
-          ( denominator-fraction-ℤ x)
-          ( denominator-fraction-ℤ z)) ∙
-        ( ap
-          ( (numerator-fraction-ℤ y) *ℤ_)
-          ( commutative-mul-ℤ
-            ( denominator-fraction-ℤ x)
-            ( denominator-fraction-ℤ z))) ∙
-        ( inv
-          ( associative-mul-ℤ
-            ( numerator-fraction-ℤ y)
-            ( denominator-fraction-ℤ z)
-            ( denominator-fraction-ℤ x))) ∙
-        ( ap (_*ℤ (denominator-fraction-ℤ x)) s) ∙
+          ( denominator-fraction-ℤ z)
+          ( denominator-fraction-ℤ x))) ∙
+      ( ap (_*ℤ (denominator-fraction-ℤ x)) s) ∙
+      ( associative-mul-ℤ
+        ( numerator-fraction-ℤ z)
+        ( denominator-fraction-ℤ y)
+        ( denominator-fraction-ℤ x)) ∙
+      ( ap
+        ( (numerator-fraction-ℤ z) *ℤ_)
+        ( commutative-mul-ℤ
+          ( denominator-fraction-ℤ y)
+          ( denominator-fraction-ℤ x))) ∙
+      ( inv
         ( associative-mul-ℤ
           ( numerator-fraction-ℤ z)
-          ( denominator-fraction-ℤ y)
-          ( denominator-fraction-ℤ x)) ∙
-        ( ap
-          ( (numerator-fraction-ℤ z) *ℤ_)
-          ( commutative-mul-ℤ
-            ( denominator-fraction-ℤ y)
-            ( denominator-fraction-ℤ x))) ∙
-        ( inv
-          ( associative-mul-ℤ
-            ( numerator-fraction-ℤ z)
-            ( denominator-fraction-ℤ x)
-            ( denominator-fraction-ℤ y))))
+          ( denominator-fraction-ℤ x)
+          ( denominator-fraction-ℤ y))))
 
 equivalence-relation-sim-fraction-ℤ : equivalence-relation lzero fraction-ℤ
 pr1 equivalence-relation-sim-fraction-ℤ = sim-fraction-ℤ-Prop
@@ -208,55 +205,50 @@ module _
   (x y : fraction-ℤ)
   where
 
-  abstract
-    sim-neg-sim-fraction-ℤ :
-      sim-fraction-ℤ x y → sim-fraction-ℤ (neg-fraction-ℤ x) (neg-fraction-ℤ y)
-    sim-neg-sim-fraction-ℤ H =
+  sim-neg-sim-fraction-ℤ :
+    sim-fraction-ℤ x y → sim-fraction-ℤ (neg-fraction-ℤ x) (neg-fraction-ℤ y)
+  sim-neg-sim-fraction-ℤ H =
+    ( left-negative-law-mul-ℤ
+      ( numerator-fraction-ℤ x)
+      ( denominator-fraction-ℤ y)) ∙
+    ( ap neg-ℤ H) ∙
+    ( inv
       ( left-negative-law-mul-ℤ
-        ( numerator-fraction-ℤ x)
-        ( denominator-fraction-ℤ y)) ∙
-      ( ap neg-ℤ H) ∙
-      ( inv
-        ( left-negative-law-mul-ℤ
-          ( numerator-fraction-ℤ y)
-          ( denominator-fraction-ℤ x)))
+        ( numerator-fraction-ℤ y)
+        ( denominator-fraction-ℤ x)))
 ```
 
 ### Two integer fractions with zero numerator are similar
 
 ```agda
-abstract
-  sim-is-zero-numerator-fraction-ℤ :
-    (x y : fraction-ℤ) →
-    is-zero-ℤ (numerator-fraction-ℤ x) →
-    is-zero-ℤ (numerator-fraction-ℤ y) →
-    sim-fraction-ℤ x y
-  sim-is-zero-numerator-fraction-ℤ x y H K =
-    eq-is-zero-ℤ
-    ( ap (_*ℤ (denominator-fraction-ℤ y)) H ∙
-      left-zero-law-mul-ℤ (denominator-fraction-ℤ y))
-    ( ap (_*ℤ (denominator-fraction-ℤ x)) K ∙
-      left-zero-law-mul-ℤ (denominator-fraction-ℤ x))
+sim-is-zero-numerator-fraction-ℤ :
+  (x y : fraction-ℤ) →
+  is-zero-ℤ (numerator-fraction-ℤ x) →
+  is-zero-ℤ (numerator-fraction-ℤ y) →
+  sim-fraction-ℤ x y
+sim-is-zero-numerator-fraction-ℤ x y H K =
+  eq-is-zero-ℤ
+  ( ap (_*ℤ (denominator-fraction-ℤ y)) H ∙
+    left-zero-law-mul-ℤ (denominator-fraction-ℤ y))
+  ( ap (_*ℤ (denominator-fraction-ℤ x)) K ∙
+    left-zero-law-mul-ℤ (denominator-fraction-ℤ x))
 ```
 
 ### The greatest common divisor of the numerator and a denominator of a fraction is always a positive integer
 
 ```agda
-abstract
-  is-positive-gcd-numerator-denominator-fraction-ℤ :
-    (x : fraction-ℤ) →
-    is-positive-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
-  is-positive-gcd-numerator-denominator-fraction-ℤ x =
-    is-positive-gcd-is-positive-right-ℤ
-      ( numerator-fraction-ℤ x)
-      ( denominator-fraction-ℤ x)
-      ( is-positive-denominator-fraction-ℤ x)
+is-positive-gcd-numerator-denominator-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-positive-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+is-positive-gcd-numerator-denominator-fraction-ℤ x =
+  is-positive-gcd-is-positive-right-ℤ
+    ( numerator-fraction-ℤ x)
+    ( denominator-fraction-ℤ x)
+    ( is-positive-denominator-fraction-ℤ x)
 
-abstract
-  is-nonzero-gcd-numerator-denominator-fraction-ℤ :
-    (x : fraction-ℤ) →
-    is-nonzero-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
-  is-nonzero-gcd-numerator-denominator-fraction-ℤ x =
-    is-nonzero-is-positive-ℤ
-      ( is-positive-gcd-numerator-denominator-fraction-ℤ x)
+is-nonzero-gcd-numerator-denominator-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-nonzero-ℤ (gcd-ℤ (numerator-fraction-ℤ x) (denominator-fraction-ℤ x))
+is-nonzero-gcd-numerator-denominator-fraction-ℤ x =
+  is-nonzero-is-positive-ℤ (is-positive-gcd-numerator-denominator-fraction-ℤ x)
 ```

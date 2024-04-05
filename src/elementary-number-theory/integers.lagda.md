@@ -154,9 +154,8 @@ neg-ℤ (inr (inr x)) = inl x
 ### The type of integers is a set
 
 ```agda
-abstract
-  is-set-ℤ : is-set ℤ
-  is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
+is-set-ℤ : is-set ℤ
+is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
 
 ℤ-Set : Set lzero
 pr1 ℤ-Set = ℤ
@@ -207,25 +206,23 @@ pr2 equiv-pred-ℤ = is-equiv-pred-ℤ
 ### The successor function on ℤ is injective and has no fixed points
 
 ```agda
-abstract
-  is-injective-succ-ℤ : is-injective succ-ℤ
-  is-injective-succ-ℤ {x} {y} p =
-    inv (is-retraction-pred-ℤ x) ∙ ap pred-ℤ p ∙ is-retraction-pred-ℤ y
+is-injective-succ-ℤ : is-injective succ-ℤ
+is-injective-succ-ℤ {x} {y} p =
+  inv (is-retraction-pred-ℤ x) ∙ ap pred-ℤ p ∙ is-retraction-pred-ℤ y
 
-  has-no-fixed-points-succ-ℤ : (x : ℤ) → succ-ℤ x ≠ x
-  has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
-  has-no-fixed-points-succ-ℤ (inl (succ-ℕ x)) ()
-  has-no-fixed-points-succ-ℤ (inr (inl star)) ()
+has-no-fixed-points-succ-ℤ : (x : ℤ) → succ-ℤ x ≠ x
+has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
+has-no-fixed-points-succ-ℤ (inl (succ-ℕ x)) ()
+has-no-fixed-points-succ-ℤ (inr (inl star)) ()
 ```
 
 ### The negative function is an involution
 
 ```agda
-abstract
-  neg-neg-ℤ : neg-ℤ ∘ neg-ℤ ~ id
-  neg-neg-ℤ (inl n) = refl
-  neg-neg-ℤ (inr (inl star)) = refl
-  neg-neg-ℤ (inr (inr n)) = refl
+neg-neg-ℤ : neg-ℤ ∘ neg-ℤ ~ id
+neg-neg-ℤ (inl n) = refl
+neg-neg-ℤ (inr (inl star)) = refl
+neg-neg-ℤ (inr (inr n)) = refl
 
 abstract
   is-equiv-neg-ℤ : is-equiv neg-ℤ
@@ -246,50 +243,46 @@ emb-neg-ℤ : ℤ ↪ ℤ
 pr1 emb-neg-ℤ = neg-ℤ
 pr2 emb-neg-ℤ = is-emb-neg-ℤ
 
-abstract
-  neg-pred-ℤ : (k : ℤ) → neg-ℤ (pred-ℤ k) ＝ succ-ℤ (neg-ℤ k)
-  neg-pred-ℤ (inl x) = refl
-  neg-pred-ℤ (inr (inl star)) = refl
-  neg-pred-ℤ (inr (inr zero-ℕ)) = refl
-  neg-pred-ℤ (inr (inr (succ-ℕ x))) = refl
+neg-pred-ℤ : (k : ℤ) → neg-ℤ (pred-ℤ k) ＝ succ-ℤ (neg-ℤ k)
+neg-pred-ℤ (inl x) = refl
+neg-pred-ℤ (inr (inl star)) = refl
+neg-pred-ℤ (inr (inr zero-ℕ)) = refl
+neg-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
-  neg-succ-ℤ : (x : ℤ) → neg-ℤ (succ-ℤ x) ＝ pred-ℤ (neg-ℤ x)
-  neg-succ-ℤ (inl zero-ℕ) = refl
-  neg-succ-ℤ (inl (succ-ℕ x)) = refl
-  neg-succ-ℤ (inr (inl star)) = refl
-  neg-succ-ℤ (inr (inr x)) = refl
+neg-succ-ℤ : (x : ℤ) → neg-ℤ (succ-ℤ x) ＝ pred-ℤ (neg-ℤ x)
+neg-succ-ℤ (inl zero-ℕ) = refl
+neg-succ-ℤ (inl (succ-ℕ x)) = refl
+neg-succ-ℤ (inr (inl star)) = refl
+neg-succ-ℤ (inr (inr x)) = refl
 
-  pred-neg-ℤ :
-    (k : ℤ) → pred-ℤ (neg-ℤ k) ＝ neg-ℤ (succ-ℤ k)
-  pred-neg-ℤ (inl zero-ℕ) = refl
-  pred-neg-ℤ (inl (succ-ℕ x)) = refl
-  pred-neg-ℤ (inr (inl star)) = refl
-  pred-neg-ℤ (inr (inr x)) = refl
+pred-neg-ℤ :
+  (k : ℤ) → pred-ℤ (neg-ℤ k) ＝ neg-ℤ (succ-ℤ k)
+pred-neg-ℤ (inl zero-ℕ) = refl
+pred-neg-ℤ (inl (succ-ℕ x)) = refl
+pred-neg-ℤ (inr (inl star)) = refl
+pred-neg-ℤ (inr (inr x)) = refl
 ```
 
 ### The negative function is injective
 
 ```agda
-abstract
-  is-injective-neg-ℤ : is-injective neg-ℤ
-  is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ ap neg-ℤ p ∙ neg-neg-ℤ y
+is-injective-neg-ℤ : is-injective neg-ℤ
+is-injective-neg-ℤ {x} {y} p = inv (neg-neg-ℤ x) ∙ ap neg-ℤ p ∙ neg-neg-ℤ y
 ```
 
 ### The integer successor of a natural number is the successor of the natural number
 
 ```agda
-abstract
-  succ-int-ℕ : (x : ℕ) → succ-ℤ (int-ℕ x) ＝ int-ℕ (succ-ℕ x)
-  succ-int-ℕ zero-ℕ = refl
-  succ-int-ℕ (succ-ℕ x) = refl
+succ-int-ℕ : (x : ℕ) → succ-ℤ (int-ℕ x) ＝ int-ℕ (succ-ℕ x)
+succ-int-ℕ zero-ℕ = refl
+succ-int-ℕ (succ-ℕ x) = refl
 ```
 
 ### An integer is zero if its negative is zero
 
 ```agda
-abstract
-  is-zero-is-zero-neg-ℤ : (x : ℤ) → is-zero-ℤ (neg-ℤ x) → is-zero-ℤ x
-  is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
+is-zero-is-zero-neg-ℤ : (x : ℤ) → is-zero-ℤ (neg-ℤ x) → is-zero-ℤ x
+is-zero-is-zero-neg-ℤ (inr (inl star)) H = refl
 ```
 
 ## See also
