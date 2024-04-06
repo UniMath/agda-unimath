@@ -7,22 +7,24 @@ module synthetic-homotopy-theory.universal-property-coequalizers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-cubes-of-maps
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.double-arrows
 open import foundation.equivalences
+open import foundation.equivalences-double-arrows
 open import foundation.fibers-of-maps
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
-open import foundation.homotopies-morphisms-arrows
-open import foundation.identity-types
-open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.coforks
+open import synthetic-homotopy-theory.equivalences-coforks
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -30,8 +32,8 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-Given a parallel pair `f, g : A → B`, consider a
-[cofork](synthetic-homotopy-theory.coforks.md) `e : B → X` with vertex X. The
+Given a [double arrow](foundation.double-arrows.md) `f, g : A → B`, consider a
+[cofork](synthetic-homotopy-theory.coforks.md) `e : B → X` with vertex `X`. The
 **universal property of coequalizers** is the statement that the cofork
 postcomposition map
 
@@ -47,21 +49,21 @@ is an [equivalence](foundation.equivalences.md).
 
 ```agda
 module _
-  { l1 l2 l3 : Level} (l : Level) {A : UU l1} {B : UU l2} (f g : A → B)
-  { X : UU l3} (e : cofork f g X)
+  {l1 l2 l3 : Level} (l : Level) (a : double-arrow l1 l2) {X : UU l3}
+  (e : cofork a X)
   where
 
   universal-property-coequalizer : UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
   universal-property-coequalizer =
-    ( Y : UU l) → is-equiv (cofork-map f g e {Y = Y})
+    (Y : UU l) → is-equiv (cofork-map a e {Y = Y})
 
 module _
-  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
-  ( e : cofork f g X) {Y : UU l4}
-  ( up-coequalizer : universal-property-coequalizer l4 f g e)
+  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  (e : cofork a X) {Y : UU l4}
+  (up-coequalizer : universal-property-coequalizer l4 a e)
   where
 
-  map-universal-property-coequalizer : cofork f g Y → (X → Y)
+  map-universal-property-coequalizer : cofork a Y → (X → Y)
   map-universal-property-coequalizer = map-inv-is-equiv (up-coequalizer Y)
 ```
 
@@ -71,219 +73,289 @@ module _
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
-  ( e : cofork f g X) {Y : UU l4}
-  ( up-coequalizer : universal-property-coequalizer l4 f g e)
-  ( e' : cofork f g Y)
+  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  (e : cofork a X) {Y : UU l4}
+  (up-coequalizer : universal-property-coequalizer l4 a e)
+  (e' : cofork a Y)
   where
 
   htpy-cofork-map-universal-property-coequalizer :
-    htpy-cofork f g
-      ( cofork-map f g e
-        ( map-universal-property-coequalizer f g e up-coequalizer e'))
+    htpy-cofork a
+      ( cofork-map a e
+        ( map-universal-property-coequalizer a e up-coequalizer e'))
       ( e')
   htpy-cofork-map-universal-property-coequalizer =
-    htpy-cofork-eq f g
-      ( cofork-map f g e
-        ( map-universal-property-coequalizer f g e up-coequalizer e'))
+    htpy-cofork-eq a
+      ( cofork-map a e
+        ( map-universal-property-coequalizer a e up-coequalizer e'))
       ( e')
       ( is-section-map-inv-is-equiv (up-coequalizer Y) e')
 
   abstract
     uniqueness-map-universal-property-coequalizer :
-      is-contr (Σ (X → Y) (λ h → htpy-cofork f g (cofork-map f g e h) e'))
+      is-contr (Σ (X → Y) (λ h → htpy-cofork a (cofork-map a e h) e'))
     uniqueness-map-universal-property-coequalizer =
       is-contr-is-equiv'
-        ( fiber (cofork-map f g e) e')
-        ( tot (λ h → htpy-cofork-eq f g (cofork-map f g e h) e'))
+        ( fiber (cofork-map a e) e')
+        ( tot (λ h → htpy-cofork-eq a (cofork-map a e h) e'))
         ( is-equiv-tot-is-fiberwise-equiv
-          ( λ h → is-equiv-htpy-cofork-eq f g (cofork-map f g e h) e'))
+          ( λ h → is-equiv-htpy-cofork-eq a (cofork-map a e h) e'))
         ( is-contr-map-is-equiv (up-coequalizer Y) e')
 ```
 
 ### A cofork has the universal property of coequalizers if and only if the corresponding cocone has the universal property of pushouts
 
-As mentioned in [coforks](synthetic-homotopy-theory.coforks.md), coforks can be
-thought of as special cases of cocones under spans. This theorem makes it more
-precise, asserting that under this mapping,
+As mentioned in [`coforks`](synthetic-homotopy-theory.coforks.md), coforks can
+be thought of as special cases of cocones under spans. This theorem makes it
+more precise, asserting that under this mapping,
 [coequalizers](synthetic-homotopy-theory.coequalizers.md) correspond to
 [pushouts](synthetic-homotopy-theory.pushouts.md).
 
 ```agda
 module _
-  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f g : A → B)
-  ( e : cofork f g X)
+  {l1 l2 l3 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  (e : cofork a X)
   where
 
   universal-property-coequalizer-universal-property-pushout :
-    ( {l : Level} →
+    ({l : Level} →
       universal-property-pushout l
-        ( vertical-map-span-cocone-cofork f g)
-        ( horizontal-map-span-cocone-cofork f g)
-        ( cocone-codiagonal-cofork f g e)) →
-    ( {l : Level} →
-      universal-property-coequalizer l f g e)
+        ( vertical-map-span-cocone-cofork a)
+        ( horizontal-map-span-cocone-cofork a)
+        ( cocone-codiagonal-cofork a e)) →
+    ({l : Level} →
+      universal-property-coequalizer l a e)
   universal-property-coequalizer-universal-property-pushout up-pushout Y =
     is-equiv-left-map-triangle
-      ( cofork-map f g e)
-      ( cofork-cocone-codiagonal f g)
+      ( cofork-map a e)
+      ( cofork-cocone-codiagonal a)
       ( cocone-map
-        ( vertical-map-span-cocone-cofork f g)
-        ( horizontal-map-span-cocone-cofork f g)
-        ( cocone-codiagonal-cofork f g e))
-      ( triangle-cofork-cocone f g e)
+        ( vertical-map-span-cocone-cofork a)
+        ( horizontal-map-span-cocone-cofork a)
+        ( cocone-codiagonal-cofork a e))
+      ( triangle-cofork-cocone a e)
       ( up-pushout Y)
-      ( is-equiv-cofork-cocone-codiagonal f g)
+      ( is-equiv-cofork-cocone-codiagonal a)
 
   universal-property-pushout-universal-property-coequalizer :
-    ( {l : Level} →
-      universal-property-coequalizer l f g e) →
-    ( {l : Level} →
+    ({l : Level} →
+      universal-property-coequalizer l a e) →
+    ({l : Level} →
       universal-property-pushout l
-        ( vertical-map-span-cocone-cofork f g)
-        ( horizontal-map-span-cocone-cofork f g)
-        ( cocone-codiagonal-cofork f g e))
+        ( vertical-map-span-cocone-cofork a)
+        ( horizontal-map-span-cocone-cofork a)
+        ( cocone-codiagonal-cofork a e))
   universal-property-pushout-universal-property-coequalizer up-coequalizer Y =
     is-equiv-top-map-triangle
-      ( cofork-map f g e)
-      ( cofork-cocone-codiagonal f g)
+      ( cofork-map a e)
+      ( cofork-cocone-codiagonal a)
       ( cocone-map
-        ( vertical-map-span-cocone-cofork f g)
-        ( horizontal-map-span-cocone-cofork f g)
-        ( cocone-codiagonal-cofork f g e))
-      ( triangle-cofork-cocone f g e)
-      ( is-equiv-cofork-cocone-codiagonal f g)
+        ( vertical-map-span-cocone-cofork a)
+        ( horizontal-map-span-cocone-cofork a)
+        ( cocone-codiagonal-cofork a e))
+      ( triangle-cofork-cocone a e)
+      ( is-equiv-cofork-cocone-codiagonal a)
       ( up-coequalizer Y)
 ```
 
-### In a cofork on equivalences in the category of arrows, the domain cofork is a coequalizer if and only if the codomain cofork is a coequalizer
+### In an equivalence of coforks, one cofork is a coequalizer if and only if the other is
 
 In other words, given two coforks connected vertically with equivalences, as in
 the following diagram:
 
+Given an
+[equivalence of coforks](synthetic-homotopy-theory.equivalences-coforks.md)
+between coforks `c` and `c'`
+
 ```text
-    ----->
-  A -----> B -----> C
-  |        |        |
- ≃|        |≃       |≃
-  V  ----> V        V
-  A' ----> B' ----> C' ,
+           ≃
+     A --------> A'
+    | |         | |
+  f | | g    f' | | g'
+    | |         | |
+    ∨ ∨         ∨ ∨
+     B --------> B'
+     |     ≃     |
+   c |           | c'
+     |           |
+     ∨           ∨
+     X --------> Y ,
+           ≃
 ```
 
-equipped with [commuting squares](foundation.commuting-squares-of-maps.md) for
-the three small squares, and a coherence datum expressing that the right square
-coequalizes the left squares in the category of arrows, we have that the top
-cofork is a coequalizer if and only if the bottom cofork is a coequalizer.
+we have that the left cofork is a coequalizer if and only if the right cofork is
+a coequalizer.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 l6 : Level}
-  { A : UU l1} {B : UU l2} {C : UU l3}
-  { A' : UU l4} {B' : UU l5} {C' : UU l6}
-  ( hA : A → A') (hB : B → B') (hC : C → C')
-  ( f : hom-arrow hA hB) (g : hom-arrow hA hB) (c : hom-arrow hB hC)
-  ( H :
-    htpy-hom-arrow hA hC
-      ( comp-hom-arrow hA hB hC c f)
-      ( comp-hom-arrow hA hB hC c g))
-  ( is-equiv-hA : is-equiv hA) (is-equiv-hB : is-equiv hB)
-  ( is-equiv-hC : is-equiv hC)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {a : double-arrow l1 l2} {X : UU l3} (c : cofork a X)
+  {a' : double-arrow l4 l5} {Y : UU l6} (c' : cofork a' Y)
+  (e : equiv-double-arrow a a') (e' : equiv-cofork c c' e)
   where
 
-  top-cofork-hom-arrow :
-    cofork (map-domain-hom-arrow hA hB f) (map-domain-hom-arrow hA hB g) C
-  pr1 top-cofork-hom-arrow = map-domain-hom-arrow hB hC c
-  pr2 top-cofork-hom-arrow = htpy-domain-htpy-hom-arrow hA hC _ _ H
-
-  bottom-cofork-hom-arrow :
-    cofork (map-codomain-hom-arrow hA hB f) (map-codomain-hom-arrow hA hB g) C'
-  pr1 bottom-cofork-hom-arrow = map-codomain-hom-arrow hB hC c
-  pr2 bottom-cofork-hom-arrow = htpy-codomain-htpy-hom-arrow hA hC _ _ H
-
-  universal-property-coequalizer-top-universal-property-coequalizer-bottom-hom-arrow-is-equiv :
-    ({l : Level} →
-      universal-property-coequalizer l _ _ bottom-cofork-hom-arrow) →
-    ({l : Level} → universal-property-coequalizer l _ _ top-cofork-hom-arrow)
-  universal-property-coequalizer-top-universal-property-coequalizer-bottom-hom-arrow-is-equiv
-    ( up-c') =
-    universal-property-coequalizer-universal-property-pushout _ _
-      ( top-cofork-hom-arrow)
+  universal-property-coequalizer-equiv-cofork :
+    ({l : Level} → universal-property-coequalizer l a' c') →
+    ({l : Level} → universal-property-coequalizer l a c)
+  universal-property-coequalizer-equiv-cofork up-c' =
+    universal-property-coequalizer-universal-property-pushout a c
       ( universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
-        ( vertical-map-span-cocone-cofork
-          ( map-codomain-hom-arrow hA hB f)
-          ( map-codomain-hom-arrow hA hB g))
-        ( horizontal-map-span-cocone-cofork
-          ( map-codomain-hom-arrow hA hB f)
-          ( map-codomain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( vertical-map-span-cocone-cofork
-          ( map-domain-hom-arrow hA hB f)
-          ( map-domain-hom-arrow hA hB g))
-        ( horizontal-map-span-cocone-cofork
-          ( map-domain-hom-arrow hA hB f)
-          ( map-domain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( map-coproduct hA hA)
-        ( hA)
-        ( hB)
-        ( hC)
-        ( coherence-square-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( ind-coproduct _ refl-htpy refl-htpy)
-        ( ind-coproduct _ (coh-hom-arrow hA hB f) (coh-hom-arrow hA hB g))
-        ( coh-comp-hom-arrow hA hB hC c f)
-        ( coh-hom-arrow hB hC c)
-        ( coherence-square-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( ind-coproduct _ (λ _ → right-unit) (coh-htpy-hom-arrow hA hC _ _ H))
-        ( is-equiv-map-coproduct is-equiv-hA is-equiv-hA)
-        ( is-equiv-hA)
-        ( is-equiv-hB)
-        ( is-equiv-hC)
-        ( universal-property-pushout-universal-property-coequalizer _ _
-          ( bottom-cofork-hom-arrow)
+        ( vertical-map-span-cocone-cofork a')
+        ( horizontal-map-span-cocone-cofork a')
+        ( horizontal-map-cocone-cofork a' c')
+        ( vertical-map-cocone-cofork a' c')
+        ( vertical-map-span-cocone-cofork a)
+        ( horizontal-map-span-cocone-cofork a)
+        ( horizontal-map-cocone-cofork a c)
+        ( vertical-map-cocone-cofork a c)
+        ( spanning-map-hom-span-diagram-cofork-hom-double-arrow a a'
+          ( hom-double-arrow-equiv-double-arrow a a' e))
+        ( domain-map-equiv-double-arrow a a' e)
+        ( codomain-map-equiv-double-arrow a a' e)
+        ( map-equiv-cofork c c' e e')
+        ( coherence-square-cocone-cofork a c)
+        ( inv-htpy
+          ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
+            ( hom-double-arrow-equiv-double-arrow a a' e)))
+        ( inv-htpy
+          ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
+            ( hom-double-arrow-equiv-double-arrow a a' e)))
+        ( inv-htpy
+          ( pasting-vertical-coherence-square-maps
+            ( domain-map-equiv-double-arrow a a' e)
+            ( left-map-double-arrow a)
+            ( left-map-double-arrow a')
+            ( codomain-map-equiv-double-arrow a a' e)
+            ( map-cofork a c)
+            ( map-cofork a' c')
+            ( map-equiv-cofork c c' e e')
+            ( left-square-equiv-double-arrow a a' e)
+            ( coh-map-cofork-equiv-cofork c c' e e')))
+        ( inv-htpy (coh-map-cofork-equiv-cofork c c' e e'))
+        ( coherence-square-cocone-cofork a' c')
+        ( coherence-cube-maps-rotate-120
+          ( horizontal-map-cocone-cofork a c)
+          ( domain-map-equiv-double-arrow a a' e)
+          ( map-equiv-cofork c c' e e')
+          ( horizontal-map-cocone-cofork a' c')
+          ( horizontal-map-span-cocone-cofork a)
+          ( spanning-map-hom-span-diagram-cofork-hom-double-arrow a a'
+            ( hom-double-arrow-equiv-double-arrow a a' e))
+          ( codomain-map-equiv-double-arrow a a' e)
+          ( horizontal-map-span-cocone-cofork a')
+          ( vertical-map-span-cocone-cofork a)
+          ( vertical-map-cocone-cofork a c)
+          ( vertical-map-span-cocone-cofork a')
+          ( vertical-map-cocone-cofork a' c')
+          ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
+            ( hom-double-arrow-equiv-double-arrow a a' e))
+          ( coherence-square-cocone-cofork a c)
+          ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
+            ( hom-double-arrow-equiv-double-arrow a a' e))
+          ( coh-map-cofork-equiv-cofork c c' e e')
+          ( coherence-square-cocone-cofork a' c')
+          ( pasting-vertical-coherence-square-maps
+            ( domain-map-equiv-double-arrow a a' e)
+            ( left-map-double-arrow a)
+            ( left-map-double-arrow a')
+            ( codomain-map-equiv-double-arrow a a' e)
+            ( map-cofork a c)
+            ( map-cofork a' c')
+            ( map-equiv-cofork c c' e e')
+            ( left-square-equiv-double-arrow a a' e)
+            ( coh-map-cofork-equiv-cofork c c' e e'))
+          ( inv-htpy
+            ( ind-coproduct _
+              ( right-unit-htpy)
+              ( coh-equiv-cofork c c' e e'))))
+        ( is-equiv-map-coproduct
+          ( is-equiv-domain-map-equiv-double-arrow a a' e)
+          ( is-equiv-domain-map-equiv-double-arrow a a' e))
+        ( is-equiv-domain-map-equiv-double-arrow a a' e)
+        ( is-equiv-codomain-map-equiv-double-arrow a a' e)
+        ( is-equiv-map-equiv-cofork c c' e e')
+        ( universal-property-pushout-universal-property-coequalizer a' c'
           ( up-c')))
 
-  universal-property-coequalizer-bottom-universal-property-coequalizer-top-hom-arrow-is-equiv :
-    ({l : Level} → universal-property-coequalizer l _ _ top-cofork-hom-arrow) →
-    ({l : Level} → universal-property-coequalizer l _ _ bottom-cofork-hom-arrow)
-  universal-property-coequalizer-bottom-universal-property-coequalizer-top-hom-arrow-is-equiv
-    ( up-c) =
-    universal-property-coequalizer-universal-property-pushout _ _
-      ( bottom-cofork-hom-arrow)
+  universal-property-coequalizer-equiv-cofork' :
+    ({l : Level} → universal-property-coequalizer l a c) →
+    ({l : Level} → universal-property-coequalizer l a' c')
+  universal-property-coequalizer-equiv-cofork' up-c =
+    universal-property-coequalizer-universal-property-pushout a' c'
       ( universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
-        ( vertical-map-span-cocone-cofork
-          ( map-codomain-hom-arrow hA hB f)
-          ( map-codomain-hom-arrow hA hB g))
-        ( horizontal-map-span-cocone-cofork
-          ( map-codomain-hom-arrow hA hB f)
-          ( map-codomain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( vertical-map-span-cocone-cofork
-          ( map-domain-hom-arrow hA hB f)
-          ( map-domain-hom-arrow hA hB g))
-        ( horizontal-map-span-cocone-cofork
-          ( map-domain-hom-arrow hA hB f)
-          ( map-domain-hom-arrow hA hB g))
-        ( horizontal-map-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( vertical-map-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( map-coproduct hA hA)
-        ( hA)
-        ( hB)
-        ( hC)
-        ( coherence-square-cocone-cofork _ _ top-cofork-hom-arrow)
-        ( ind-coproduct _ refl-htpy refl-htpy)
-        ( ind-coproduct _ (coh-hom-arrow hA hB f) (coh-hom-arrow hA hB g))
-        ( coh-comp-hom-arrow hA hB hC c f)
-        ( coh-hom-arrow hB hC c)
-        ( coherence-square-cocone-cofork _ _ bottom-cofork-hom-arrow)
-        ( ind-coproduct _ (λ _ → right-unit) (coh-htpy-hom-arrow hA hC _ _ H))
-        ( is-equiv-map-coproduct is-equiv-hA is-equiv-hA)
-        ( is-equiv-hA)
-        ( is-equiv-hB)
-        ( is-equiv-hC)
-        ( universal-property-pushout-universal-property-coequalizer _ _
-          ( top-cofork-hom-arrow)
-          ( up-c)))
+        ( vertical-map-span-cocone-cofork a')
+        ( horizontal-map-span-cocone-cofork a')
+        ( horizontal-map-cocone-cofork a' c')
+        ( vertical-map-cocone-cofork a' c')
+        ( vertical-map-span-cocone-cofork a)
+        ( horizontal-map-span-cocone-cofork a)
+        ( horizontal-map-cocone-cofork a c)
+        ( vertical-map-cocone-cofork a c)
+        ( spanning-map-hom-span-diagram-cofork-hom-double-arrow a a'
+          ( hom-double-arrow-equiv-double-arrow a a' e))
+        ( domain-map-equiv-double-arrow a a' e)
+        ( codomain-map-equiv-double-arrow a a' e)
+        ( map-equiv-cofork c c' e e')
+        ( coherence-square-cocone-cofork a c)
+        ( inv-htpy
+          ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
+            ( hom-double-arrow-equiv-double-arrow a a' e)))
+        ( inv-htpy
+          ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
+            ( hom-double-arrow-equiv-double-arrow a a' e)))
+        ( inv-htpy
+          ( pasting-vertical-coherence-square-maps
+            ( domain-map-equiv-double-arrow a a' e)
+            ( left-map-double-arrow a)
+            ( left-map-double-arrow a')
+            ( codomain-map-equiv-double-arrow a a' e)
+            ( map-cofork a c)
+            ( map-cofork a' c')
+            ( map-equiv-cofork c c' e e')
+            ( left-square-equiv-double-arrow a a' e)
+            ( coh-map-cofork-equiv-cofork c c' e e')))
+        ( inv-htpy (coh-map-cofork-equiv-cofork c c' e e'))
+        ( coherence-square-cocone-cofork a' c')
+        ( coherence-cube-maps-rotate-120
+          ( horizontal-map-cocone-cofork a c)
+          ( domain-map-equiv-double-arrow a a' e)
+          ( map-equiv-cofork c c' e e')
+          ( horizontal-map-cocone-cofork a' c')
+          ( horizontal-map-span-cocone-cofork a)
+          ( spanning-map-hom-span-diagram-cofork-hom-double-arrow a a'
+            ( hom-double-arrow-equiv-double-arrow a a' e))
+          ( codomain-map-equiv-double-arrow a a' e)
+          ( horizontal-map-span-cocone-cofork a')
+          ( vertical-map-span-cocone-cofork a)
+          ( vertical-map-cocone-cofork a c)
+          ( vertical-map-span-cocone-cofork a')
+          ( vertical-map-cocone-cofork a' c')
+          ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
+            ( hom-double-arrow-equiv-double-arrow a a' e))
+          ( coherence-square-cocone-cofork a c)
+          ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
+            ( hom-double-arrow-equiv-double-arrow a a' e))
+          ( coh-map-cofork-equiv-cofork c c' e e')
+          ( coherence-square-cocone-cofork a' c')
+          ( pasting-vertical-coherence-square-maps
+            ( domain-map-equiv-double-arrow a a' e)
+            ( left-map-double-arrow a)
+            ( left-map-double-arrow a')
+            ( codomain-map-equiv-double-arrow a a' e)
+            ( map-cofork a c)
+            ( map-cofork a' c')
+            ( map-equiv-cofork c c' e e')
+            ( left-square-equiv-double-arrow a a' e)
+            ( coh-map-cofork-equiv-cofork c c' e e'))
+          ( inv-htpy
+            ( ind-coproduct _
+              ( right-unit-htpy)
+              ( coh-equiv-cofork c c' e e'))))
+        ( is-equiv-map-coproduct
+          ( is-equiv-domain-map-equiv-double-arrow a a' e)
+          ( is-equiv-domain-map-equiv-double-arrow a a' e))
+        ( is-equiv-domain-map-equiv-double-arrow a a' e)
+        ( is-equiv-codomain-map-equiv-double-arrow a a' e)
+        ( is-equiv-map-equiv-cofork c c' e e')
+        ( universal-property-pushout-universal-property-coequalizer a c up-c))
 ```

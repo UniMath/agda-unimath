@@ -14,7 +14,10 @@ open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.relatively-prime-integers
 
 open import foundation.action-on-identifications-functions
@@ -26,6 +29,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -127,9 +131,10 @@ is-reduced-reduce-fraction-ℤ :
   (x : fraction-ℤ) → is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
 is-reduced-reduce-fraction-ℤ x =
   is-zero-gcd-case-split
-    (is-decidable-is-zero-ℤ
-      (gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
-        (denominator-fraction-ℤ (reduce-fraction-ℤ x))))
+    ( is-decidable-is-zero-ℤ
+      ( gcd-ℤ
+        ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
+        ( denominator-fraction-ℤ (reduce-fraction-ℤ x))))
   where
   is-zero-gcd-case-split :
     ( is-zero-ℤ
@@ -555,7 +560,7 @@ unique-reduce-fraction-ℤ x y H =
       ( unique-numerator-reduce-fraction-ℤ x y H)
       ( eq-pair-Σ'
         ( pair
-          (unique-denominator-reduce-fraction-ℤ x y H)
-          (eq-is-prop
+          ( unique-denominator-reduce-fraction-ℤ x y H)
+          ( eq-is-prop
             ( is-prop-is-positive-ℤ (int-reduce-denominator-fraction-ℤ y))))))
 ```

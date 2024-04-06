@@ -9,6 +9,7 @@ module real-numbers.rational-real-numbers where
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -61,12 +62,12 @@ is-dedekind-cut-le-ℚ x =
       dense-le-ℚ q x ,
       elim-exists
         ( le-ℚ-Prop q x)
-        ( λ r (H , H') → transitive-le-ℚ q r x H H')) ,
+        ( λ r (H , H') → transitive-le-ℚ q r x H' H)) ,
     ( λ (r : ℚ) →
       α x r ∘ dense-le-ℚ x r ,
       elim-exists
         ( le-ℚ-Prop x r)
-        ( λ q (H , H') → transitive-le-ℚ x q r H' H))) ,
+        ( λ q (H , H') → transitive-le-ℚ x q r H H'))) ,
   ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H') ,
   ( located-le-ℚ x)
   where

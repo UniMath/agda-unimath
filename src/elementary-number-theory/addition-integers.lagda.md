@@ -10,6 +10,9 @@ module elementary-number-theory.addition-integers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -31,9 +34,9 @@ open import foundation.unit-type
 
 ## Idea
 
-We introduce addition on the integers and derive its basic properties with
-respect to `succ-ℤ` and `neg-ℤ`. Properties of addition with respect to
-inequality are derived in `inequality-integers`.
+We introduce {{#concept "addition" Disambiguation="integers" Agda=add-ℤ}} on the
+[integers](elementary-number-theory.integers.md) and derive its basic properties
+with respect to `succ-ℤ` and `neg-ℤ`.
 
 ## Definition
 
@@ -507,52 +510,6 @@ distributive-neg-add-ℤ (inr (inr (succ-ℕ n))) l =
       by ap pred-ℤ (distributive-neg-add-ℤ (inr (inr n)) l)
 ```
 
-### Addition of nonnegative integers is nonnegative
-
-```agda
-is-nonnegative-add-ℤ :
-  (k l : ℤ) →
-  is-nonnegative-ℤ k → is-nonnegative-ℤ l → is-nonnegative-ℤ (k +ℤ l)
-is-nonnegative-add-ℤ (inr (inl star)) (inr (inl star)) p q = star
-is-nonnegative-add-ℤ (inr (inl star)) (inr (inr n)) p q = star
-is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inl star)) p q = star
-is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inl star)) star star =
-  is-nonnegative-succ-ℤ
-    ( (inr (inr n)) +ℤ (inr (inl star)))
-    ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inl star)) star star)
-is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inr m)) star star = star
-is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inr m)) star star =
-  is-nonnegative-succ-ℤ
-    ( (inr (inr n)) +ℤ (inr (inr m)))
-    ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inr m)) star star)
-```
-
-### Addition of positive integers is positive
-
-```agda
-is-positive-add-ℤ :
-  {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
-is-positive-add-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
-is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
-  is-positive-succ-ℤ
-    ( is-nonnegative-is-positive-ℤ
-      ( is-positive-add-ℤ {inr (inr x)} {inr (inr y)} star star))
-
-is-positive-add-nonnegative-positive-ℤ :
-  {x y : ℤ} → is-nonnegative-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
-is-positive-add-nonnegative-positive-ℤ {inr (inl x)} {y} H H' =
-  is-positive-eq-ℤ refl H'
-is-positive-add-nonnegative-positive-ℤ {inr (inr x)} {y} H H' =
-  is-positive-add-ℤ {inr (inr x)} {y} H H'
-
-is-positive-add-positive-nonnegative-ℤ :
-  {x y : ℤ} → is-positive-ℤ x → is-nonnegative-ℤ y → is-positive-ℤ (x +ℤ y)
-is-positive-add-positive-nonnegative-ℤ {x} {y} H H' =
-  is-positive-eq-ℤ
-    ( commutative-add-ℤ y x)
-    ( is-positive-add-nonnegative-positive-ℤ H' H)
-```
-
 ### The inclusion of ℕ into ℤ preserves addition
 
 ```agda
@@ -596,17 +553,14 @@ is-zero-right-add-ℤ x y H =
   is-zero-left-add-ℤ y x (commutative-add-ℤ y x ∙ H)
 ```
 
-### Adding negatives results in a negative
+## See also
 
-```agda
-negatives-add-ℤ :
-  (x y : ℕ) → in-neg x +ℤ in-neg y ＝ in-neg (succ-ℕ (x +ℕ y))
-negatives-add-ℤ zero-ℕ y = ap (inl ∘ succ-ℕ) (inv (left-unit-law-add-ℕ y))
-negatives-add-ℤ (succ-ℕ x) y =
-  equational-reasoning
-    pred-ℤ (in-neg x +ℤ in-neg y)
-    ＝ pred-ℤ (in-neg (succ-ℕ (x +ℕ y)))
-      by ap pred-ℤ (negatives-add-ℤ x y)
-    ＝ (inl ∘ succ-ℕ) ((succ-ℕ x) +ℕ y)
-      by ap (inl ∘ succ-ℕ) (inv (left-successor-law-add-ℕ x y))
-```
+- Properties of addition with respect to positivity, nonnegativity, negativity
+  and nonnpositivity are derived in
+  [`addition-positive-and-negative-integers`](elementary-number-theory.addition-positive-and-negative-integers.md)
+- Properties of addition with respect to the standard ordering on the integers
+  are derived in
+  [`inequality-integers`](elementary-number-theory.inequality-integers.md)
+- Properties of addition with respect to the standard strict ordering on the
+  integers are derived in
+  [`strict-inequality-integers`](elementary-number-theory.strict-inequality-integers.md)

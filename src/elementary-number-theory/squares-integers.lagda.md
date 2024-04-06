@@ -10,7 +10,11 @@ module elementary-number-theory.squares-integers where
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 open import elementary-number-theory.squares-natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -49,20 +53,12 @@ square-root-ℤ _ (root , _) = root
 ### Squares in ℤ are nonnegative
 
 ```agda
-is-decidable-is-nonnegative-square-ℤ :
-  (a : ℤ) →
-  (is-nonnegative-ℤ a) + (is-nonnegative-ℤ (neg-ℤ a)) →
-  is-nonnegative-ℤ (square-ℤ a)
-is-decidable-is-nonnegative-square-ℤ _ (inl x) = is-nonnegative-mul-ℤ x x
-is-decidable-is-nonnegative-square-ℤ a (inr x) =
-  tr
-    ( is-nonnegative-ℤ)
-    ( double-negative-law-mul-ℤ a a)
-    ( is-nonnegative-mul-ℤ x x)
-
 is-nonnegative-square-ℤ : (a : ℤ) → is-nonnegative-ℤ (square-ℤ a)
 is-nonnegative-square-ℤ a =
-  is-decidable-is-nonnegative-square-ℤ a decide-is-nonnegative-ℤ
+  rec-coproduct
+    ( λ H → is-nonnegative-is-positive-ℤ (is-positive-mul-negative-ℤ H H))
+    ( λ H → is-nonnegative-mul-ℤ H H)
+    ( decide-is-negative-is-nonnegative-ℤ {a})
 ```
 
 ### The squares in ℤ are exactly the squares in ℕ
