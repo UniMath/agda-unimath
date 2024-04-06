@@ -153,8 +153,7 @@ module _
   dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer :
     ( {l : Level} →
       dependent-universal-property-coequalizer l
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c)) →
     dependent-universal-property-sequential-colimit c
   dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
@@ -164,8 +163,7 @@ module _
       ( dependent-cocone-map-sequential-diagram c P)
       ( dependent-cocone-sequential-diagram-dependent-cofork c P)
       ( dependent-cofork-map
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c))
       ( triangle-dependent-cocone-sequential-diagram-dependent-cofork c P)
       ( dup-coequalizer P)
@@ -175,8 +173,7 @@ module _
     dependent-universal-property-sequential-colimit c →
     ( {l : Level} →
       dependent-universal-property-coequalizer l
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c))
   dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
     ( dup-c)
@@ -185,8 +182,7 @@ module _
       ( dependent-cocone-map-sequential-diagram c P)
       ( dependent-cocone-sequential-diagram-dependent-cofork c P)
       ( dependent-cofork-map
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c))
       ( triangle-dependent-cocone-sequential-diagram-dependent-cofork c P)
       ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork c P)
@@ -225,8 +221,7 @@ module _
     dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
       ( c)
       ( dependent-universal-property-universal-property-coequalizer
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c)
         ( universal-property-coequalizer-universal-property-sequential-colimit
           ( c)
