@@ -187,11 +187,12 @@ module _
   (x : ℤ)
   where
 
-  le-zero-is-positive-ℤ : is-positive-ℤ x → le-ℤ zero-ℤ x
-  le-zero-is-positive-ℤ = is-positive-eq-ℤ (inv (right-zero-law-diff-ℤ x))
+  abstract
+    le-zero-is-positive-ℤ : is-positive-ℤ x → le-ℤ zero-ℤ x
+    le-zero-is-positive-ℤ = is-positive-eq-ℤ (inv (right-zero-law-diff-ℤ x))
 
-  is-positive-le-zero-ℤ : le-ℤ zero-ℤ x → is-positive-ℤ x
-  is-positive-le-zero-ℤ = is-positive-eq-ℤ (right-zero-law-diff-ℤ x)
+    is-positive-le-zero-ℤ : le-ℤ zero-ℤ x → is-positive-ℤ x
+    is-positive-le-zero-ℤ = is-positive-eq-ℤ (right-zero-law-diff-ℤ x)
 ```
 
 ### An integer greater than a positive integer is positive
@@ -220,14 +221,15 @@ module _
   (x : ℤ)
   where
 
-  le-zero-is-negative-ℤ : is-negative-ℤ x → le-ℤ x zero-ℤ
-  le-zero-is-negative-ℤ = is-positive-neg-is-negative-ℤ
+  abstract
+    le-zero-is-negative-ℤ : is-negative-ℤ x → le-ℤ x zero-ℤ
+    le-zero-is-negative-ℤ = is-positive-neg-is-negative-ℤ
 
-  is-negative-le-zero-ℤ : le-ℤ x zero-ℤ → is-negative-ℤ x
-  is-negative-le-zero-ℤ H =
-    is-negative-eq-ℤ
-      ( neg-neg-ℤ x)
-      ( is-negative-neg-is-positive-ℤ H)
+    is-negative-le-zero-ℤ : le-ℤ x zero-ℤ → is-negative-ℤ x
+    is-negative-le-zero-ℤ H =
+      is-negative-eq-ℤ
+        ( neg-neg-ℤ x)
+        ( is-negative-neg-is-positive-ℤ H)
 ```
 
 ### An integer lower than a negative integer is negative
