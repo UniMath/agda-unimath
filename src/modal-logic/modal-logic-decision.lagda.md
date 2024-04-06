@@ -257,24 +257,25 @@ is-kuratowsky-finite-set-is-kuratowsky-finite-set' X =
                     ( inv
                       ( eq-component-list-index-in-list x l x-in-list))))))))))
 
-map-list :
+dependent-map-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (l : list A) (f : Σ A (λ a → a ∈-list l) → B) →
   list B
-map-list nil f = nil
-map-list {A = A} {B} (cons x l) f = cons (f (x , is-head x l)) (map-list l f')
+dependent-map-list nil f = nil
+dependent-map-list {A = A} {B} (cons x l) f =
+  cons (f (x , is-head x l)) (dependent-map-list l f')
   where
   f' : Σ A (λ a → a ∈-list l) → B
   f' (a , in-list) = f (a , is-in-tail a x l in-list)
 
-in-map-list :
+in-dependent-map-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   {l : list A} (f : Σ A (λ a → a ∈-list l) → B)
   {a : A} (a-in-l : a ∈-list l) →
-  f (a , a-in-l) ∈-list map-list l f
-in-map-list f (is-head _ l) = is-head _ _
-in-map-list {A = A} {B} f (is-in-tail _ x l a-in-l) =
-  is-in-tail _ _ _ (in-map-list _ a-in-l)
+  f (a , a-in-l) ∈-list dependent-map-list l f
+in-dependent-map-list f (is-head _ l) = is-head _ _
+in-dependent-map-list {A = A} {B} f (is-in-tail _ x l a-in-l) =
+  is-in-tail _ _ _ (in-dependent-map-list _ a-in-l)
 
 module _
   {l : Level} (i : Set l)
@@ -377,7 +378,7 @@ module _
 
   subformulas-Set-list : (a : formula i) → list (type-Set (subformulas-Set a))
   subformulas-Set-list a =
-    map-list
+    dependent-map-list
       ( subformulas-list a)
       ( λ (x , in-list) → x , unit-trunc-Prop in-list)
 
@@ -395,7 +396,7 @@ module _
               ( tr
                 ( λ i → (b , i) ∈-list subformulas-Set-list a)
                 ( eq-is-prop is-prop-type-trunc-Prop)
-                ( in-map-list
+                ( in-dependent-map-list
                   (λ (x , in-list) → x , unit-trunc-Prop in-list)
                   ( b-in-list)))))))
 
