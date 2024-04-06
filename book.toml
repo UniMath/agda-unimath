@@ -42,8 +42,7 @@ suppress_processing = [
   "USERS.md",
   "GRANT-ACKNOWLEDGEMENTS.md",
   "SUMMARY.md",
-  "ART.md",
-  "src/papers.md"
+  "ART.md"
 ]
 
 [preprocessor.concepts]
