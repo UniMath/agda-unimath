@@ -33,7 +33,8 @@ of a
 [dependent sequential diagram](synthetic-homotopy-theory.dependent-sequential-diagrams.md)
 `B : (A, a) → 𝒰` is the
 [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
-consisting of [total spaces](foundation.dependent-pair-types.md) `Σ Aₙ Bₙ`.
+consisting of [total spaces](foundation.dependent-pair-types.md) `Σ Aₙ Bₙ` and
+total maps.
 
 ## Definitions
 

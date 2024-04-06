@@ -196,7 +196,7 @@ Given a cocone `c`
           X
 ```
 
-under `A`, we may forget the first injection and homotopy to get the cocone
+under `A`, we may forget the first inclusion and homotopy to get the cocone
 
 ```text
          a₁
@@ -320,10 +320,22 @@ module _
 
 ### Shifts of homotopies of cocones under sequential diagrams
 
-Given cocones `c` and `c'` under `A`, and a homotopy `H : c ~ c'` between them,
-which I'm not sufficiently artistically equipped to put into an ASCII diagram,
-we can again forget the first homotopy of maps and coherence to get the homotopy
-`H[1] : c[1] ~ c'[1]`. Inductively, we define `H[k + 1] ≐ H[k][1]`.
+Given cocones `c` and `c'` under `A`
+
+```text
+     a₀      a₁                   a₀      a₁
+ A₀ ---> A₁ ---> A₂ ---> ⋯    A₀ ---> A₁ ---> A₂ ---> ⋯
+  \      |      /              \      |      /
+   \     | i₁  /                \     | i'₁ /
+ i₀ \    |    / i₂     ~     i'₀ \    |    / i'₂
+     \   |   /                    \   |   /
+      ∨  ∨  ∨                      ∨  ∨  ∨
+         X                            X
+```
+
+and a homotopy `H : c ~ c'` between them, we can again forget the first homotopy
+of maps and coherence to get the homotopy `H[1] : c[1] ~ c'[1]`. Inductively, we
+define `H[k + 1] ≐ H[k][1]`.
 
 ```agda
 module _
@@ -363,9 +375,8 @@ module _
 
 ### Unshifts of homotopies of cocones under sequential diagrams
 
-Similarly to unshifting cocones, we can synthesize the first homotopy and
-coherence to unshift a homotopy of cocones. Given two cocones `c`, `c'` under
-`A[1]`
+Similarly to unshifting cocones, we can recover the first homotopy and coherence
+to unshift a homotopy of cocones. Given two cocones `c`, `c'` under `A[1]`
 
 ```text
          a₁                     a₁
