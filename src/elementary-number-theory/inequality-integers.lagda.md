@@ -246,7 +246,6 @@ module _
         ( leq-zero-is-nonnegative-ℤ x H))
 ```
 
-
 ### An integer `x` is nonpositive if and only if `leq-ℤ x zero-ℤ`
 
 ```agda
@@ -281,7 +280,6 @@ module _
         ( leq-zero-is-nonpositive-ℤ y H)
         ( I))
 ```
-
 
 ## See also
 
