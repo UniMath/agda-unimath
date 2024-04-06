@@ -201,15 +201,16 @@ module _
   (x y : ℤ) (I : le-ℤ x y)
   where
 
-  is-positive-le-positive-ℤ : is-positive-ℤ x → is-positive-ℤ y
-  is-positive-le-positive-ℤ H =
-    is-positive-le-zero-ℤ y
-      ( transitive-le-ℤ
-        ( zero-ℤ)
-        ( x)
-        ( y)
-        ( I)
-        ( le-zero-is-positive-ℤ x H))
+  abstract
+    is-positive-le-positive-ℤ : is-positive-ℤ x → is-positive-ℤ y
+    is-positive-le-positive-ℤ H =
+      is-positive-le-zero-ℤ y
+        ( transitive-le-ℤ
+          ( zero-ℤ)
+          ( x)
+          ( y)
+          ( I)
+          ( le-zero-is-positive-ℤ x H))
 ```
 
 ### An integer `x` is negative if and only if `le-ℤ x zero-ℤ
@@ -236,13 +237,14 @@ module _
   (x y : ℤ) (I : le-ℤ x y)
   where
 
-  is-negative-le-negative-ℤ : is-negative-ℤ y → is-negative-ℤ x
-  is-negative-le-negative-ℤ H =
-    is-negative-le-zero-ℤ x
-      ( transitive-le-ℤ
-        ( x)
-        ( y)
-        ( zero-ℤ)
-        ( le-zero-is-negative-ℤ y H)
-        ( I))
+  abstract
+    is-negative-le-negative-ℤ : is-negative-ℤ y → is-negative-ℤ x
+    is-negative-le-negative-ℤ H =
+      is-negative-le-zero-ℤ x
+        ( transitive-le-ℤ
+          ( x)
+          ( y)
+          ( zero-ℤ)
+          ( le-zero-is-negative-ℤ y H)
+          ( I))
 ```

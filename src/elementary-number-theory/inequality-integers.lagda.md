@@ -235,15 +235,16 @@ module _
   (x y : ℤ) (I : leq-ℤ x y)
   where
 
-  is-nonnegative-leq-nonnegative-ℤ : is-nonnegative-ℤ x → is-nonnegative-ℤ y
-  is-nonnegative-leq-nonnegative-ℤ H =
-    is-nonnegative-leq-zero-ℤ y
-      ( transitive-leq-ℤ
-        ( zero-ℤ)
-        ( x)
-        ( y)
-        ( I)
-        ( leq-zero-is-nonnegative-ℤ x H))
+  abstract
+    is-nonnegative-leq-nonnegative-ℤ : is-nonnegative-ℤ x → is-nonnegative-ℤ y
+    is-nonnegative-leq-nonnegative-ℤ H =
+      is-nonnegative-leq-zero-ℤ y
+        ( transitive-leq-ℤ
+          ( zero-ℤ)
+          ( x)
+          ( y)
+          ( I)
+          ( leq-zero-is-nonnegative-ℤ x H))
 ```
 
 ### An integer `x` is nonpositive if and only if `leq-ℤ x zero-ℤ`
@@ -270,15 +271,16 @@ module _
   (x y : ℤ) (I : leq-ℤ x y)
   where
 
-  is-nonpositive-leq-nonpositive-ℤ : is-nonpositive-ℤ y → is-nonpositive-ℤ x
-  is-nonpositive-leq-nonpositive-ℤ H =
-    is-nonpositive-leq-zero-ℤ x
-      ( transitive-leq-ℤ
-        ( x)
-        ( y)
-        ( zero-ℤ)
-        ( leq-zero-is-nonpositive-ℤ y H)
-        ( I))
+  abstract
+    is-nonpositive-leq-nonpositive-ℤ : is-nonpositive-ℤ y → is-nonpositive-ℤ x
+    is-nonpositive-leq-nonpositive-ℤ H =
+      is-nonpositive-leq-zero-ℤ x
+        ( transitive-leq-ℤ
+          ( x)
+          ( y)
+          ( zero-ℤ)
+          ( leq-zero-is-nonpositive-ℤ y H)
+          ( I))
 ```
 
 ## See also
