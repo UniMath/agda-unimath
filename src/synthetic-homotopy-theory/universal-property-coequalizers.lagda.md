@@ -33,7 +33,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 ## Idea
 
 Given a [double arrow](foundation.double-arrows.md) `f, g : A → B`, consider a
-[cofork](synthetic-homotopy-theory.coforks.md) `e : B → X` with vertex X. The
+[cofork](synthetic-homotopy-theory.coforks.md) `e : B → X` with vertex `X`. The
 **universal property of coequalizers** is the statement that the cofork
 postcomposition map
 

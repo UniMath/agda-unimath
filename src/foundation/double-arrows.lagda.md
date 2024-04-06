@@ -50,10 +50,9 @@ module _
   where
 
   make-double-arrow : double-arrow l1 l2
-  pr1 make-double-arrow = A
-  pr1 (pr2 make-double-arrow) = B
-  pr1 (pr2 (pr2 make-double-arrow)) = f
-  pr2 (pr2 (pr2 make-double-arrow)) = g
+  make-double-arrow = (A , B , f , g)
+
+  {-# INLINE make-double-arrow #-}
 ```
 
 ### Components of a double arrow

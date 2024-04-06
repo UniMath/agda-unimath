@@ -33,7 +33,7 @@ Then a
 {{#concept "morphism of coforks" Disambiguation="of types" Agda=hom-cofork}}
 over `e` is a triple `(m, H, K)`, with `m : X → Y` a map of vertices of the
 coforks, `H` a [homotopy](foundation-core.homotopies.md) witnessing that the
-bottom square in
+bottom square in the diagram
 
 ```text
            i
@@ -52,7 +52,7 @@ bottom square in
 ```
 
 [commutes](foundation-core.commuting-squares-of-maps.md), and `K` a coherence
-datum filling the inside --- we have two stacks of squares
+datum "filling the inside" --- we have two stacks of squares
 
 ```text
            i                        i
@@ -71,7 +71,7 @@ datum filling the inside --- we have two stacks of squares
 ```
 
 which share the top map `i` and the bottom square, and the coherences of `c` and
-`c'` filling the sides; that gives us the homotopies
+`c'` filling the sides; that gives the homotopies
 
 ```text
                                                 i                 i
@@ -107,7 +107,7 @@ and
            m                 m
 ```
 
-which we require to be homotopic.
+which are required to be homotopic.
 
 ## Definitions
 
