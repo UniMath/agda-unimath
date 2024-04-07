@@ -220,8 +220,9 @@ module _
 
 ```agda
 abstract
-  neg-rational-ℤ-neg-ℤ : (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
-  neg-rational-ℤ-neg-ℤ k =
+  preserves-neg-rational-ℤ :
+    (k : ℤ) → rational-ℤ (neg-ℤ k) ＝ neg-ℚ (rational-ℤ k)
+  preserves-neg-rational-ℤ k =
     eq-ℚ (rational-ℤ (neg-ℤ k)) (neg-ℚ (rational-ℤ k)) refl refl
 ```
 
@@ -229,10 +230,10 @@ abstract
 
 ```agda
 abstract
-  eq-neg-rational-fraction-ℤ :
+  preserves-neg-rational-fraction-ℤ :
     (x : fraction-ℤ) →
     rational-fraction-ℤ (neg-fraction-ℤ x) ＝ neg-ℚ (rational-fraction-ℤ x)
-  eq-neg-rational-fraction-ℤ x =
+  preserves-neg-rational-fraction-ℤ x =
     ( eq-ℚ-sim-fraction-ℤ
       ( neg-fraction-ℤ x)
       ( fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
