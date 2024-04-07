@@ -180,7 +180,7 @@ reflects-le-right-add-ℤ z x y =
   is-positive-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
-### An integer `x` is positive if and only if `le-ℤ zero-ℤ x`
+### An integer `x` is positive if and only if `0 < x`
 
 ```agda
 module _
@@ -195,7 +195,7 @@ module _
     is-positive-le-zero-ℤ = is-positive-eq-ℤ (right-zero-law-diff-ℤ x)
 ```
 
-### An integer greater than a positive integer is positive
+### If an integer is greater than a positive integer it is positive
 
 ```agda
 module _
@@ -214,7 +214,7 @@ module _
           ( le-zero-is-positive-ℤ x H))
 ```
 
-### An integer `x` is negative if and only if `le-ℤ x zero-ℤ
+### An integer `x` is negative if and only if `x < 0`
 
 ```agda
 module _
@@ -232,7 +232,7 @@ module _
         ( is-negative-neg-is-positive-ℤ H)
 ```
 
-### An integer lower than a negative integer is negative
+### If an integer is lesser than a negative integer it is negative
 
 ```agda
 module _

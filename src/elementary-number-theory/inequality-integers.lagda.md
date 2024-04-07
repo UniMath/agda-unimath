@@ -212,7 +212,7 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
 ℤ-Poset = (ℤ-Preorder , λ x y → antisymmetric-leq-ℤ)
 ```
 
-### An integer `x` is nonnegative if and only if `leq-ℤ zero-ℤ x`
+### An integer `x` is nonnegative if and only if `0 ≤ x`
 
 ```agda
 module _
@@ -229,7 +229,7 @@ module _
       is-nonnegative-eq-ℤ (right-zero-law-diff-ℤ x)
 ```
 
-### An integer greater or equal to a nonnegative integer is nonnegative
+### An integer greater than or equal to a nonnegative integer is nonnegative
 
 ```agda
 module _
@@ -248,7 +248,7 @@ module _
           ( leq-zero-is-nonnegative-ℤ x H))
 ```
 
-### An integer `x` is nonpositive if and only if `leq-ℤ x zero-ℤ`
+### An integer `x` is nonpositive if and only if `x ≤ 0`
 
 ```agda
 module _
@@ -266,7 +266,7 @@ module _
         ( is-nonpositive-neg-is-nonnegative-ℤ H)
 ```
 
-### An integer lower or equal to a nonpositive integer is nonpositive
+### An integer less than or equal to a nonpositive integer is nonpositive
 
 ```agda
 module _
