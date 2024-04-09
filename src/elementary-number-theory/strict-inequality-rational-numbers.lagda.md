@@ -145,35 +145,48 @@ module _
       ( fraction-ℚ z)
 ```
 
-### Strict inequality on the rational numbers reflects the strict inequality of their underlying fractions
+### The canonical map from integer fractions to the rational numbers preserves strict inequality
 
 ```agda
+module _
+  (p q : fraction-ℤ)
+  where
+
+  preserves-le-rational-fraction-ℤ :
+    le-fraction-ℤ p q → le-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
+  preserves-le-rational-fraction-ℤ =
+    preserves-le-sim-fraction-ℤ
+      ( p)
+      ( q)
+      ( reduce-fraction-ℤ p)
+      ( reduce-fraction-ℤ q)
+      ( sim-reduced-fraction-ℤ p)
+      ( sim-reduced-fraction-ℤ q)
+
 module _
   (x : ℚ) (p : fraction-ℤ)
   where
 
-  right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ :
-    le-fraction-ℤ (fraction-ℚ x) p →
-    le-ℚ x (in-fraction-ℤ p)
-  right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ H =
+  preserves-le-right-rational-fraction-ℤ :
+    le-fraction-ℤ (fraction-ℚ x) p → le-ℚ x (rational-fraction-ℤ p)
+  preserves-le-right-rational-fraction-ℤ H =
     concatenate-le-sim-fraction-ℤ
       ( fraction-ℚ x)
       ( p)
-      ( fraction-ℚ ( in-fraction-ℤ p))
+      ( fraction-ℚ ( rational-fraction-ℤ p))
       ( H)
       ( sim-reduced-fraction-ℤ p)
 
-  left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ :
-    le-fraction-ℤ p (fraction-ℚ x) →
-    le-ℚ (in-fraction-ℤ p) x
-  left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ =
+  preserves-le-left-rational-fraction-ℤ :
+    le-fraction-ℤ p (fraction-ℚ x) → le-ℚ (rational-fraction-ℤ p) x
+  preserves-le-left-rational-fraction-ℤ =
     concatenate-sim-le-fraction-ℤ
-      ( fraction-ℚ ( in-fraction-ℤ p))
+      ( fraction-ℚ ( rational-fraction-ℤ p))
       ( p)
       ( fraction-ℚ x)
       ( symmetric-sim-fraction-ℤ
         ( p)
-        ( fraction-ℚ ( in-fraction-ℤ p))
+        ( fraction-ℚ ( rational-fraction-ℤ p))
         ( sim-reduced-fraction-ℤ p))
 ```
 
@@ -186,8 +199,8 @@ module _
 
   left-∃-le-ℚ : ∃ ℚ (λ q → le-ℚ q x)
   left-∃-le-ℚ = intro-∃
-    ( in-fraction-ℤ frac)
-    ( left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
+    ( rational-fraction-ℤ frac)
+    ( preserves-le-left-rational-fraction-ℤ x frac
       ( le-fraction-le-numerator-fraction-ℤ
         ( frac)
         ( fraction-ℚ x)
@@ -199,8 +212,8 @@ module _
 
   right-∃-le-ℚ : ∃ ℚ (λ r → le-ℚ x r)
   right-∃-le-ℚ = intro-∃
-    ( in-fraction-ℤ frac)
-    ( right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
+    ( rational-fraction-ℤ frac)
+    ( preserves-le-right-rational-fraction-ℤ x frac
       ( le-fraction-le-numerator-fraction-ℤ
         ( fraction-ℚ x)
         ( frac)
@@ -251,13 +264,13 @@ module _
 
   le-left-mediant-ℚ : le-ℚ x (mediant-ℚ x y)
   le-left-mediant-ℚ =
-    right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x
+    preserves-le-right-rational-fraction-ℤ x
       ( mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
       ( le-left-mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y) H)
 
   le-right-mediant-ℚ : le-ℚ (mediant-ℚ x y) y
   le-right-mediant-ℚ =
-    left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ y
+    preserves-le-left-rational-fraction-ℤ y
       ( mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
       ( le-right-mediant-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y) H)
 ```

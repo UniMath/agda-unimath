@@ -9,6 +9,7 @@ module elementary-number-theory.negative-integers where
 ```agda
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -104,6 +105,13 @@ decidable-subtype-negative-ℤ x =
   ( is-negative-ℤ x ,
     is-prop-is-negative-ℤ x ,
     is-decidable-is-negative-ℤ x)
+```
+
+### Negative integers are nonzero
+
+```agda
+is-nonzero-is-negative-ℤ : {x : ℤ} → is-negative-ℤ x → is-nonzero-ℤ x
+is-nonzero-is-negative-ℤ {inl x} H ()
 ```
 
 ### The negative integers form a set

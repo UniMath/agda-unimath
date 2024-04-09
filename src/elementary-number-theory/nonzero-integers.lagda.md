@@ -83,3 +83,10 @@ pr2 one-nonzero-ℤ = is-nonzero-one-ℤ
 is-nonzero-int-ℕ : (n : ℕ) → is-nonzero-ℕ n → is-nonzero-ℤ (int-ℕ n)
 is-nonzero-int-ℕ zero-ℕ H p = H refl
 ```
+
+### The negative of a nonzero integer is nonzero
+
+```agda
+is-nonzero-neg-nonzero-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-nonzero-ℤ (neg-ℤ x)
+is-nonzero-neg-nonzero-ℤ x H K = H (is-zero-is-zero-neg-ℤ x K)
+```

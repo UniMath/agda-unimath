@@ -226,6 +226,20 @@ module _
       ( is-positive-denominator-fraction-ℤ q)
 ```
 
+### The similarity of integer fractions preserves strict inequality
+
+```agda
+module _
+  (p q p' q' : fraction-ℤ) (H : sim-fraction-ℤ p p') (K : sim-fraction-ℤ q q')
+  where
+
+  preserves-le-sim-fraction-ℤ : le-fraction-ℤ p q → le-fraction-ℤ p' q'
+  preserves-le-sim-fraction-ℤ I =
+    concatenate-sim-le-fraction-ℤ p' p q'
+      ( symmetric-sim-fraction-ℤ p p' H)
+      ( concatenate-le-sim-fraction-ℤ p q q' I K)
+```
+
 ### Fractions with equal denominator compare the same as their numerators
 
 ```agda
