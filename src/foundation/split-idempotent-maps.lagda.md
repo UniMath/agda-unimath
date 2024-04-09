@@ -65,7 +65,7 @@ as a [retract](foundation-core.retracts-of-types.md) of `A`, and such that
 ```
 
 One important fact about split idempotent maps is that every
-[quasicoherently idempotent map](foundation.quasicoherently-idemportent-maps.md)
+[quasicoherently idempotent map](foundation.quasicoherently-idempotent-maps.md)
 splits, and conversely, every split idempotent map is quasicoherently
 idempotent. In fact, the type of proofs of split idempotence for an endomap `f`
 is a retract of the type of proofs of quasicoherent idempotence.
