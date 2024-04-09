@@ -26,7 +26,7 @@ open import foundation-core.sets
 ## Idea
 
 A
-{{#concept "quasicoherently idempotent map" Agda=is-quasicoherently-idempotent-map}}
+{{#concept "quasicoherently idempotent map" Agda=is-quasicoherently-idempotent}}
 is a map `f : A → A` [equipped](foundation.structure.md) with a
 [homotopy](foundation-core.homotopies.md) `I : f ∘ f ~ f` and a coherence
 
@@ -48,32 +48,32 @@ and {{#reference Shu14SplittingIdempotents}}.
 ### The structure of quasicoherent idempotence on maps
 
 ```agda
-coherence-is-quasicoherently-idempotent-map :
+coherence-is-quasicoherently-idempotent :
   {l : Level} {A : UU l} (f : A → A) → f ∘ f ~ f → UU l
-coherence-is-quasicoherently-idempotent-map f I = f ·l I ~ I ·r f
+coherence-is-quasicoherently-idempotent f I = f ·l I ~ I ·r f
 
-is-quasicoherently-idempotent-map : {l : Level} {A : UU l} → (A → A) → UU l
-is-quasicoherently-idempotent-map f =
-  Σ (f ∘ f ~ f) (coherence-is-quasicoherently-idempotent-map f)
+is-quasicoherently-idempotent : {l : Level} {A : UU l} → (A → A) → UU l
+is-quasicoherently-idempotent f =
+  Σ (f ∘ f ~ f) (coherence-is-quasicoherently-idempotent f)
 
 module _
-  {l : Level} {A : UU l} {f : A → A} (H : is-quasicoherently-idempotent-map f)
+  {l : Level} {A : UU l} {f : A → A} (H : is-quasicoherently-idempotent f)
   where
 
-  is-idempotent-is-quasicoherently-idempotent-map : is-idempotent-map f
-  is-idempotent-is-quasicoherently-idempotent-map = pr1 H
+  is-idempotent-is-quasicoherently-idempotent : is-idempotent f
+  is-idempotent-is-quasicoherently-idempotent = pr1 H
 
-  coh-is-quasicoherently-idempotent-map :
-    coherence-is-quasicoherently-idempotent-map f
-      ( is-idempotent-is-quasicoherently-idempotent-map)
-  coh-is-quasicoherently-idempotent-map = pr2 H
+  coh-is-quasicoherently-idempotent :
+    coherence-is-quasicoherently-idempotent f
+      ( is-idempotent-is-quasicoherently-idempotent)
+  coh-is-quasicoherently-idempotent = pr2 H
 ```
 
 ### The type of quasicoherently idempotent maps
 
 ```agda
 quasicoherently-idempotent-map : {l : Level} (A : UU l) → UU l
-quasicoherently-idempotent-map A = Σ (A → A) (is-quasicoherently-idempotent-map)
+quasicoherently-idempotent-map A = Σ (A → A) (is-quasicoherently-idempotent)
 
 module _
   {l : Level} {A : UU l} (H : quasicoherently-idempotent-map A)
@@ -83,21 +83,21 @@ module _
   map-quasicoherently-idempotent-map = pr1 H
 
   is-quasicoherently-idempotent-quasicoherently-idempotent-map :
-    is-quasicoherently-idempotent-map map-quasicoherently-idempotent-map
+    is-quasicoherently-idempotent map-quasicoherently-idempotent-map
   is-quasicoherently-idempotent-quasicoherently-idempotent-map = pr2 H
 
   is-idempotent-quasicoherently-idempotent-map :
-    is-idempotent-map map-quasicoherently-idempotent-map
+    is-idempotent map-quasicoherently-idempotent-map
   is-idempotent-quasicoherently-idempotent-map =
-    is-idempotent-is-quasicoherently-idempotent-map
+    is-idempotent-is-quasicoherently-idempotent
       ( is-quasicoherently-idempotent-quasicoherently-idempotent-map)
 
   coh-quasicoherently-idempotent-map :
-    coherence-is-quasicoherently-idempotent-map
+    coherence-is-quasicoherently-idempotent
       ( map-quasicoherently-idempotent-map)
       ( is-idempotent-quasicoherently-idempotent-map)
   coh-quasicoherently-idempotent-map =
-    coh-is-quasicoherently-idempotent-map
+    coh-is-quasicoherently-idempotent
       ( is-quasicoherently-idempotent-quasicoherently-idempotent-map)
 
   idempotent-map-quasicoherently-idempotent-map : idempotent-map A
@@ -115,9 +115,9 @@ module _
   {l : Level} {A : UU l} (is-set-A : is-set A) (f : A → A)
   where
 
-  is-prop-coherence-is-quasicoherently-idempotent-map-is-set :
-    (I : f ∘ f ~ f) → is-prop (coherence-is-quasicoherently-idempotent-map f I)
-  is-prop-coherence-is-quasicoherently-idempotent-map-is-set I =
+  is-prop-coherence-is-quasicoherently-idempotent-is-set :
+    (I : f ∘ f ~ f) → is-prop (coherence-is-quasicoherently-idempotent f I)
+  is-prop-coherence-is-quasicoherently-idempotent-is-set I =
     is-prop-Π
       ( λ x →
         is-set-is-prop
@@ -125,31 +125,31 @@ module _
           ( (f ·l I) x)
           ( (I ·r f) x))
 
-  is-prop-is-quasicoherently-idempotent-map-is-set :
-    is-prop (is-quasicoherently-idempotent-map f)
-  is-prop-is-quasicoherently-idempotent-map-is-set =
+  is-prop-is-quasicoherently-idempotent-is-set :
+    is-prop (is-quasicoherently-idempotent f)
+  is-prop-is-quasicoherently-idempotent-is-set =
     is-prop-Σ
-      ( is-prop-is-idempotent-map-is-set is-set-A f)
-      ( is-prop-coherence-is-quasicoherently-idempotent-map-is-set)
+      ( is-prop-is-idempotent-is-set is-set-A f)
+      ( is-prop-coherence-is-quasicoherently-idempotent-is-set)
 
-  is-quasicoherently-idempotent-map-is-set-Prop : Prop l
-  is-quasicoherently-idempotent-map-is-set-Prop =
-    ( is-quasicoherently-idempotent-map f ,
-      is-prop-is-quasicoherently-idempotent-map-is-set)
+  is-quasicoherently-idempotent-is-set-Prop : Prop l
+  is-quasicoherently-idempotent-is-set-Prop =
+    ( is-quasicoherently-idempotent f ,
+      is-prop-is-quasicoherently-idempotent-is-set)
 
 module _
   {l : Level} (A : Set l) (f : type-Set A → type-Set A)
   where
 
-  is-prop-is-quasicoherently-idempotent-map-Set :
-    is-prop (is-quasicoherently-idempotent-map f)
-  is-prop-is-quasicoherently-idempotent-map-Set =
-    is-prop-is-quasicoherently-idempotent-map-is-set (is-set-type-Set A) f
+  is-prop-is-quasicoherently-idempotent-Set :
+    is-prop (is-quasicoherently-idempotent f)
+  is-prop-is-quasicoherently-idempotent-Set =
+    is-prop-is-quasicoherently-idempotent-is-set (is-set-type-Set A) f
 
-  is-quasicoherently-idempotent-map-prop-Set : Prop l
-  is-quasicoherently-idempotent-map-prop-Set =
-    ( is-quasicoherently-idempotent-map f ,
-      is-prop-is-quasicoherently-idempotent-map-Set)
+  is-quasicoherently-idempotent-prop-Set : Prop l
+  is-quasicoherently-idempotent-prop-Set =
+    ( is-quasicoherently-idempotent f ,
+      is-prop-is-quasicoherently-idempotent-Set)
 ```
 
 ### Idempotent maps on sets are quasicoherently idempotent
@@ -159,10 +159,10 @@ module _
   {l : Level} {A : UU l} (is-set-A : is-set A) {f : A → A}
   where
 
-  is-quasicoherently-idempotent-is-idempotent-map-is-set :
-    is-idempotent-map f → is-quasicoherently-idempotent-map f
-  pr1 (is-quasicoherently-idempotent-is-idempotent-map-is-set I) = I
-  pr2 (is-quasicoherently-idempotent-is-idempotent-map-is-set I) x =
+  is-quasicoherently-idempotent-is-idempotent-is-set :
+    is-idempotent f → is-quasicoherently-idempotent f
+  pr1 (is-quasicoherently-idempotent-is-idempotent-is-set I) = I
+  pr2 (is-quasicoherently-idempotent-is-idempotent-is-set I) x =
     eq-is-prop (is-set-A ((f ∘ f ∘ f) x) ((f ∘ f) x))
 ```
 
@@ -175,7 +175,7 @@ module _
   where
 
   coherence-is-quasicoherently-idempotent-inclusion-retraction :
-    coherence-is-quasicoherently-idempotent-map (i ∘ r)
+    coherence-is-quasicoherently-idempotent (i ∘ r)
       ( is-idempotent-inclusion-retraction i r H)
   coherence-is-quasicoherently-idempotent-inclusion-retraction =
     ( inv-preserves-comp-left-whisker-comp i r (i ·l H ·r r)) ∙h
@@ -185,7 +185,7 @@ module _
       ( r))
 
   is-quasicoherently-idempotent-inclusion-retraction :
-    is-quasicoherently-idempotent-map (i ∘ r)
+    is-quasicoherently-idempotent (i ∘ r)
   is-quasicoherently-idempotent-inclusion-retraction =
     ( is-idempotent-inclusion-retraction i r H ,
       coherence-is-quasicoherently-idempotent-inclusion-retraction)
@@ -195,33 +195,33 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l} {f g : A → A} (F : is-quasicoherently-idempotent-map f)
+  {l : Level} {A : UU l} {f g : A → A} (F : is-quasicoherently-idempotent f)
   where
 
   abstract
-    coherence-is-quasicoherently-idempotent-map-htpy :
+    coherence-is-quasicoherently-idempotent-htpy :
       (H : g ~ f) →
-      coherence-is-quasicoherently-idempotent-map g
-        ( is-idempotent-map-htpy
-          ( is-idempotent-is-quasicoherently-idempotent-map F)
+      coherence-is-quasicoherently-idempotent g
+        ( is-idempotent-htpy
+          ( is-idempotent-is-quasicoherently-idempotent F)
           ( H))
-    coherence-is-quasicoherently-idempotent-map-htpy H =
+    coherence-is-quasicoherently-idempotent-htpy H =
       ( right-transpose-htpy-concat
         ( g ·l
-          is-idempotent-map-htpy
-            ( is-idempotent-is-quasicoherently-idempotent-map F)
+          is-idempotent-htpy
+            ( is-idempotent-is-quasicoherently-idempotent F)
             ( H))
         ( H ·r g)
         ( H ·r (g ∘ g) ∙h
           ( ( f) ·l
             ( g ·l H ∙h
               H ·r f ∙h
-              is-idempotent-is-quasicoherently-idempotent-map F ∙h inv-htpy H)))
+              is-idempotent-is-quasicoherently-idempotent F ∙h inv-htpy H)))
         ( inv-htpy
           ( ( nat-htpy H) ∘
             ( g ·l H ∙h
               H ·r f ∙h
-              is-idempotent-is-quasicoherently-idempotent-map F ∙h
+              is-idempotent-is-quasicoherently-idempotent F ∙h
               inv-htpy H)))) ∙h
       ( ap-concat-htpy'
         ( inv-htpy (H ·r g))
@@ -230,40 +230,40 @@ module _
             ( ( distributive-left-whisker-comp-concat f
                 ( g ·l H ∙h
                   H ·r f ∙h
-                  is-idempotent-is-quasicoherently-idempotent-map F)
+                  is-idempotent-is-quasicoherently-idempotent F)
                 ( inv-htpy H)) ∙h
               ( ap-concat-htpy'
                 ( f ·l inv-htpy H)
                 ( ( distributive-left-whisker-comp-concat f
                     ( g ·l H ∙h H ·r f)
-                    ( is-idempotent-is-quasicoherently-idempotent-map F)) ∙h
+                    ( is-idempotent-is-quasicoherently-idempotent F)) ∙h
                   ( ap-binary-concat-htpy
                     ( distributive-left-whisker-comp-concat f
                       ( g ·l H)
                       ( H ·r f))
-                    ( coh-is-quasicoherently-idempotent-map F)))) ∙h
+                    ( coh-is-quasicoherently-idempotent F)))) ∙h
               ( assoc-htpy
                 ( f ·l g ·l H ∙h f ·l H ·r f)
-                ( is-idempotent-is-quasicoherently-idempotent-map F ·r f)
+                ( is-idempotent-is-quasicoherently-idempotent F ·r f)
                 ( f ·l inv-htpy H)) ∙h
               ( ap-concat-htpy
                 ( f ·l g ·l H ∙h f ·l H ·r f)
                 ( ( nat-htpy
-                    ( is-idempotent-is-quasicoherently-idempotent-map F)) ∘
+                    ( is-idempotent-is-quasicoherently-idempotent F)) ∘
                   ( inv-htpy H))) ∙h
               ( inv-htpy
                 ( assoc-htpy
                   ( f ·l g ·l H ∙h f ·l H ·r f)
                   ( (f ∘ f) ·l inv-htpy H)
-                  ( is-idempotent-is-quasicoherently-idempotent-map F ·r
+                  ( is-idempotent-is-quasicoherently-idempotent F ·r
                     g))))) ∙h
           ( inv-htpy
             ( assoc-htpy
               ( H ·r (g ∘ g))
               ( f ·l g ·l H ∙h f ·l H ·r f ∙h (f ∘ f) ·l inv-htpy H)
-              ( is-idempotent-is-quasicoherently-idempotent-map F ·r g))) ∙h
+              ( is-idempotent-is-quasicoherently-idempotent F ·r g))) ∙h
           ( ap-concat-htpy'
-            ( is-idempotent-is-quasicoherently-idempotent-map F ·r g)
+            ( is-idempotent-is-quasicoherently-idempotent F ·r g)
             ( ( ap-concat-htpy
                 ( H ·r (g ∘ g))
                 ( ap-concat-htpy'
@@ -278,23 +278,23 @@ module _
                   ( right-right-inv-htpy (f ·l H ·r g) ((f ∘ f) ·l H)))) ∙h
               ( nat-htpy H ∘ (H ·r g))))))
 
-  is-quasicoherently-idempotent-map-htpy :
-    g ~ f → is-quasicoherently-idempotent-map g
-  pr1 (is-quasicoherently-idempotent-map-htpy H) =
-    is-idempotent-map-htpy
-      ( is-idempotent-is-quasicoherently-idempotent-map F)
+  is-quasicoherently-idempotent-htpy :
+    g ~ f → is-quasicoherently-idempotent g
+  pr1 (is-quasicoherently-idempotent-htpy H) =
+    is-idempotent-htpy
+      ( is-idempotent-is-quasicoherently-idempotent F)
       ( H)
-  pr2 (is-quasicoherently-idempotent-map-htpy H) =
-    coherence-is-quasicoherently-idempotent-map-htpy H
+  pr2 (is-quasicoherently-idempotent-htpy H) =
+    coherence-is-quasicoherently-idempotent-htpy H
 
-  is-quasicoherently-idempotent-map-inv-htpy :
-    f ~ g → is-quasicoherently-idempotent-map g
-  pr1 (is-quasicoherently-idempotent-map-inv-htpy H) =
-    is-idempotent-map-htpy
-      ( is-idempotent-is-quasicoherently-idempotent-map F)
+  is-quasicoherently-idempotent-inv-htpy :
+    f ~ g → is-quasicoherently-idempotent g
+  pr1 (is-quasicoherently-idempotent-inv-htpy H) =
+    is-idempotent-htpy
+      ( is-idempotent-is-quasicoherently-idempotent F)
       ( inv-htpy H)
-  pr2 (is-quasicoherently-idempotent-map-inv-htpy H) =
-    coherence-is-quasicoherently-idempotent-map-htpy (inv-htpy H)
+  pr2 (is-quasicoherently-idempotent-inv-htpy H) =
+    coherence-is-quasicoherently-idempotent-htpy (inv-htpy H)
 ```
 
 ### Realigning the coherence of quasicoherent idempotence
@@ -305,38 +305,38 @@ Given a quasicoherently idempotent `f` then any other idempotence homotopy
 ```agda
 module _
   {l : Level} {A : UU l} {f : A → A}
-  (F : is-quasicoherently-idempotent-map f)
+  (F : is-quasicoherently-idempotent f)
   (I : f ∘ f ~ f)
   where
 
-  coherence-is-quasicoherently-idempotent-is-idempotent-map-htpy :
-    is-idempotent-is-quasicoherently-idempotent-map F ~ I →
-    coherence-is-quasicoherently-idempotent-map f I
-  coherence-is-quasicoherently-idempotent-is-idempotent-map-htpy α =
+  coherence-is-quasicoherently-idempotent-is-idempotent-htpy :
+    is-idempotent-is-quasicoherently-idempotent F ~ I →
+    coherence-is-quasicoherently-idempotent f I
+  coherence-is-quasicoherently-idempotent-is-idempotent-htpy α =
     ( left-whisker-comp² f (inv-htpy α)) ∙h
-    ( coh-is-quasicoherently-idempotent-map F) ∙h
+    ( coh-is-quasicoherently-idempotent F) ∙h
     ( right-whisker-comp² α f)
 
-  coherence-is-quasicoherently-idempotent-is-idempotent-map-inv-htpy :
-    I ~ is-idempotent-is-quasicoherently-idempotent-map F →
-    coherence-is-quasicoherently-idempotent-map f I
-  coherence-is-quasicoherently-idempotent-is-idempotent-map-inv-htpy α =
+  coherence-is-quasicoherently-idempotent-is-idempotent-inv-htpy :
+    I ~ is-idempotent-is-quasicoherently-idempotent F →
+    coherence-is-quasicoherently-idempotent f I
+  coherence-is-quasicoherently-idempotent-is-idempotent-inv-htpy α =
     ( left-whisker-comp² f α) ∙h
-    ( coh-is-quasicoherently-idempotent-map F) ∙h
+    ( coh-is-quasicoherently-idempotent F) ∙h
     ( right-whisker-comp² (inv-htpy α) f)
 
-  is-quasicoherently-idempotent-is-idempotent-map-htpy :
-    is-idempotent-is-quasicoherently-idempotent-map F ~ I →
-    is-quasicoherently-idempotent-map f
-  is-quasicoherently-idempotent-is-idempotent-map-htpy α =
-    ( I , coherence-is-quasicoherently-idempotent-is-idempotent-map-htpy α)
+  is-quasicoherently-idempotent-is-idempotent-htpy :
+    is-idempotent-is-quasicoherently-idempotent F ~ I →
+    is-quasicoherently-idempotent f
+  is-quasicoherently-idempotent-is-idempotent-htpy α =
+    ( I , coherence-is-quasicoherently-idempotent-is-idempotent-htpy α)
 
-  is-quasicoherently-idempotent-is-idempotent-map-inv-htpy :
-    I ~ is-idempotent-is-quasicoherently-idempotent-map F →
-    is-quasicoherently-idempotent-map f
-  is-quasicoherently-idempotent-is-idempotent-map-inv-htpy α =
+  is-quasicoherently-idempotent-is-idempotent-inv-htpy :
+    I ~ is-idempotent-is-quasicoherently-idempotent F →
+    is-quasicoherently-idempotent f
+  is-quasicoherently-idempotent-is-idempotent-inv-htpy α =
     ( I ,
-      coherence-is-quasicoherently-idempotent-is-idempotent-map-inv-htpy α)
+      coherence-is-quasicoherently-idempotent-is-idempotent-inv-htpy α)
 ```
 
 ### Not every idempotent map is quasicoherently idempotent

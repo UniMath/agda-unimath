@@ -26,7 +26,7 @@ open import foundation-core.torsorial-type-families
 ## Idea
 
 A map `f : A → B` is said to be
-{{#concept "weakly constant" Disambiguation="map of types" Agda=is-weakly-constant-map}}
+{{#concept "weakly constant" Disambiguation="map of types" Agda=is-weakly-constant}}
 if any two elements in `A` are mapped to
 [identical elements](foundation-core.identity-types.md) in `B`.
 
@@ -35,16 +35,16 @@ if any two elements in `A` are mapped to
 ### The structure on a map of being weakly constant
 
 ```agda
-is-weakly-constant-map :
+is-weakly-constant :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-is-weakly-constant-map {A = A} f = (x y : A) → f x ＝ f y
+is-weakly-constant {A = A} f = (x y : A) → f x ＝ f y
 ```
 
 ### The type of weakly constant maps
 
 ```agda
 weakly-constant-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
-weakly-constant-map A B = Σ (A → B) (is-weakly-constant-map)
+weakly-constant-map A B = Σ (A → B) (is-weakly-constant)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : weakly-constant-map A B)
@@ -54,7 +54,7 @@ module _
   map-weakly-constant-map = pr1 f
 
   is-weakly-constant-weakly-constant-map :
-    is-weakly-constant-map map-weakly-constant-map
+    is-weakly-constant map-weakly-constant-map
   is-weakly-constant-weakly-constant-map = pr2 f
 ```
 
@@ -68,13 +68,13 @@ module _
   where
 
   abstract
-    is-prop-is-weakly-constant-map-Set : is-prop (is-weakly-constant-map f)
-    is-prop-is-weakly-constant-map-Set =
+    is-prop-is-weakly-constant-Set : is-prop (is-weakly-constant f)
+    is-prop-is-weakly-constant-Set =
       is-prop-iterated-Π 2 (λ x y → is-set-type-Set B (f x) (f y))
 
-  is-weakly-constant-map-prop-Set : Prop (l1 ⊔ l2)
-  pr1 is-weakly-constant-map-prop-Set = is-weakly-constant-map f
-  pr2 is-weakly-constant-map-prop-Set = is-prop-is-weakly-constant-map-Set
+  is-weakly-constant-prop-Set : Prop (l1 ⊔ l2)
+  pr1 is-weakly-constant-prop-Set = is-weakly-constant f
+  pr2 is-weakly-constant-prop-Set = is-prop-is-weakly-constant-Set
 ```
 
 ### The action on identifications of a weakly constant map is weakly constant
@@ -84,17 +84,17 @@ This is Auxiliary Lemma 4.3 of {{#cite KECA17}}.
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y}
-  (W : is-weakly-constant-map f)
+  (W : is-weakly-constant f)
   where
 
-  compute-ap-is-weakly-constant-map :
+  compute-ap-is-weakly-constant :
     {x y : X} (p : x ＝ y) → inv (W x x) ∙ W x y ＝ ap f p
-  compute-ap-is-weakly-constant-map {x} refl = left-inv (W x x)
+  compute-ap-is-weakly-constant {x} refl = left-inv (W x x)
 
-  is-weakly-constant-ap : {x y : X} → is-weakly-constant-map (ap f {x} {y})
+  is-weakly-constant-ap : {x y : X} → is-weakly-constant (ap f {x} {y})
   is-weakly-constant-ap {x} {y} p q =
-    ( inv (compute-ap-is-weakly-constant-map p)) ∙
-    ( compute-ap-is-weakly-constant-map q)
+    ( inv (compute-ap-is-weakly-constant p)) ∙
+    ( compute-ap-is-weakly-constant q)
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
@@ -118,21 +118,21 @@ Christian Sattler.
 
 ```agda
 module _
-  {l : Level} {A : UU l} {f : A → A} (W : is-weakly-constant-map f)
+  {l : Level} {A : UU l} {f : A → A} (W : is-weakly-constant f)
   where
 
-  is-proof-irrelevant-fixed-point-is-weakly-constant-map :
+  is-proof-irrelevant-fixed-point-is-weakly-constant :
     is-proof-irrelevant (fixed-point f)
-  is-proof-irrelevant-fixed-point-is-weakly-constant-map (x , p) =
+  is-proof-irrelevant-fixed-point-is-weakly-constant (x , p) =
     is-contr-equiv
       ( Σ A (λ z → f x ＝ z))
       ( equiv-tot (λ z → equiv-concat (W x z) z))
       ( is-torsorial-Id (f x))
 
-  is-prop-fixed-point-is-weakly-constant-map : is-prop (fixed-point f)
-  is-prop-fixed-point-is-weakly-constant-map =
+  is-prop-fixed-point-is-weakly-constant : is-prop (fixed-point f)
+  is-prop-fixed-point-is-weakly-constant =
     is-prop-is-proof-irrelevant
-      ( is-proof-irrelevant-fixed-point-is-weakly-constant-map)
+      ( is-proof-irrelevant-fixed-point-is-weakly-constant)
 ```
 
 ## References
