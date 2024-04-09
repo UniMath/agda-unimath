@@ -179,3 +179,74 @@ reflects-le-right-add-ℤ :
 reflects-le-right-add-ℤ z x y =
   is-positive-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
+
+### An integer `x` is positive if and only if `0 < x`
+
+```agda
+module _
+  (x : ℤ)
+  where
+
+  abstract
+    le-zero-is-positive-ℤ : is-positive-ℤ x → le-ℤ zero-ℤ x
+    le-zero-is-positive-ℤ = is-positive-eq-ℤ (inv (right-zero-law-diff-ℤ x))
+
+    is-positive-le-zero-ℤ : le-ℤ zero-ℤ x → is-positive-ℤ x
+    is-positive-le-zero-ℤ = is-positive-eq-ℤ (right-zero-law-diff-ℤ x)
+```
+
+### If an integer is greater than a positive integer it is positive
+
+```agda
+module _
+  (x y : ℤ) (I : le-ℤ x y)
+  where
+
+  abstract
+    is-positive-le-positive-ℤ : is-positive-ℤ x → is-positive-ℤ y
+    is-positive-le-positive-ℤ H =
+      is-positive-le-zero-ℤ y
+        ( transitive-le-ℤ
+          ( zero-ℤ)
+          ( x)
+          ( y)
+          ( I)
+          ( le-zero-is-positive-ℤ x H))
+```
+
+### An integer `x` is negative if and only if `x < 0`
+
+```agda
+module _
+  (x : ℤ)
+  where
+
+  abstract
+    le-zero-is-negative-ℤ : is-negative-ℤ x → le-ℤ x zero-ℤ
+    le-zero-is-negative-ℤ = is-positive-neg-is-negative-ℤ
+
+    is-negative-le-zero-ℤ : le-ℤ x zero-ℤ → is-negative-ℤ x
+    is-negative-le-zero-ℤ H =
+      is-negative-eq-ℤ
+        ( neg-neg-ℤ x)
+        ( is-negative-neg-is-positive-ℤ H)
+```
+
+### If an integer is lesser than a negative integer it is negative
+
+```agda
+module _
+  (x y : ℤ) (I : le-ℤ x y)
+  where
+
+  abstract
+    is-negative-le-negative-ℤ : is-negative-ℤ y → is-negative-ℤ x
+    is-negative-le-negative-ℤ H =
+      is-negative-le-zero-ℤ x
+        ( transitive-le-ℤ
+          ( x)
+          ( y)
+          ( zero-ℤ)
+          ( le-zero-is-negative-ℤ y H)
+          ( I))
+```

@@ -15,6 +15,7 @@ open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.nonzero-integers
 open import elementary-number-theory.positive-integers
 
+open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -42,18 +43,12 @@ is-zero-is-nonnegative-is-nonpositive-ℤ :
 is-zero-is-nonnegative-is-nonpositive-ℤ {inr (inl x)} H K = refl
 ```
 
-### Positive integers are nonzero
+### No integer is both positive and negative
 
 ```agda
-is-nonzero-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonzero-ℤ x
-is-nonzero-is-positive-ℤ {inr (inr x)} H ()
-```
-
-### Negative integers are nonzero
-
-```agda
-is-nonzero-is-negative-ℤ : {x : ℤ} → is-negative-ℤ x → is-nonzero-ℤ x
-is-nonzero-is-negative-ℤ {inl x} H ()
+is-not-negative-and-positive-ℤ : (x : ℤ) → ¬ (is-negative-ℤ x × is-positive-ℤ x)
+is-not-negative-and-positive-ℤ (inl x) (H , K) = K
+is-not-negative-and-positive-ℤ (inr x) (H , K) = H
 ```
 
 ### Dichotomies

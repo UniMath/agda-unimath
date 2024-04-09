@@ -37,6 +37,7 @@ open import elementary-number-theory.decidable-total-order-rational-numbers publ
 open import elementary-number-theory.decidable-total-order-standard-finite-types public
 open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
+open import elementary-number-theory.difference-rational-numbers public
 open import elementary-number-theory.dirichlet-convolution public
 open import elementary-number-theory.distance-integers public
 open import elementary-number-theory.distance-natural-numbers public
@@ -59,6 +60,7 @@ open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
 open import elementary-number-theory.group-of-integers public
+open import elementary-number-theory.group-of-rational-numbers public
 open import elementary-number-theory.half-integers public
 open import elementary-number-theory.hardy-ramanujan-number public
 open import elementary-number-theory.inequality-integer-fractions public
