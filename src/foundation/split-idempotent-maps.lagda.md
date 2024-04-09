@@ -64,6 +64,12 @@ type `B` and an inclusion-retraction pair `i , r` displaying `B` as a
   B ====== B.
 ```
 
+One important fact about split idempotent maps is that every
+[quasicoherently idempotent map](foundation.quasicoherently-idemportent-maps.md)
+splits, and conversely, every split idempotent map is quasicoherently
+idempotent. In fact, the type of proofs of split idempotence for an endomap `f`
+is a retract of the type of proofs of quasicoherent idempotence.
+
 ## Definitions
 
 ### The structure on a map of split idempotence
@@ -171,6 +177,22 @@ module _
 ```
 
 ## Properties
+
+### Split idempotence is closed under homotopies of functions
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {f g : A → A}
+  (H : f ~ g)
+  (S : is-split-idempotent-map l3 f)
+  where
+
+  is-split-idempotent-map-htpy : is-split-idempotent-map l3 g
+  is-split-idempotent-map-htpy =
+    ( splitting-type-is-split-idempotent-map S ,
+      retract-is-split-idempotent-map S ,
+      htpy-is-split-idempotent-map S ∙h H)
+```
 
 ### Split idempotence is closed under equivalences of splitting types
 
@@ -422,7 +444,7 @@ module _
 ### Split idempotent maps are quasicoherently idempotent
 
 This is Lemma 3.6 in {{#cite Shu17}}. We follow a more direct route as we have
-already shown that quasicoherently idempotents are closed under homotopy.
+already shown that quasicoherent idempotents are closed under homotopy.
 
 ```agda
 module _
@@ -629,7 +651,7 @@ module _
 ```
 
 To show that these maps form an inclusion-retraction pair, however, we use the
-coherence of quasicoherently idempotents as well as
+coherence of quasicoherent idempotents as well as
 [function extensionality](foundation.function-extensionality.md).
 
 ```agda
@@ -1035,6 +1057,20 @@ module _
   is-split-idempotent-quasicoherently-idempotent-map =
     is-split-idempotent-is-quasicoherently-idempotent-map
       ( is-quasicoherently-idempotent-quasicoherently-idempotent-map f)
+```
+
+### If a map is split idempotent at any universe level, it is split idempotent at its own universe level
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {f : A → A} (S : is-split-idempotent-map l2 f)
+  where
+
+  is-small-split-idempotent-is-split-idempotent-map :
+    is-split-idempotent-map l1 f
+  is-small-split-idempotent-is-split-idempotent-map =
+    is-split-idempotent-is-quasicoherently-idempotent-map
+      ( is-quasicoherently-idempotent-is-split-idempotent-map S)
 ```
 
 ### Small types are closed under retracts

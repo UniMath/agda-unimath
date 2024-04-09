@@ -349,8 +349,8 @@ more details. Note that the statement does not ask for the idempotence witness
 ## See also
 
 - In [`foundation.split-idempotent-maps`](foundation.split-idempotent-maps.md)
-  we show that every quasicoherently idempotent splits. In fact, split
-  idempotents are a retract of quasicoherently idempotents.
+  we show that every quasicoherently idempotent splits and that split
+  idempotents are a retract of quasicoherent idempotents.
 
 ## References
 
