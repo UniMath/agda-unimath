@@ -209,9 +209,9 @@ module _
   where
 
   abstract
-    sim-neg-sim-fraction-ℤ :
+    preserves-sim-neg-fraction-ℤ :
       sim-fraction-ℤ x y → sim-fraction-ℤ (neg-fraction-ℤ x) (neg-fraction-ℤ y)
-    sim-neg-sim-fraction-ℤ H =
+    preserves-sim-neg-fraction-ℤ H =
       ( left-negative-law-mul-ℤ
         ( numerator-fraction-ℤ x)
         ( denominator-fraction-ℤ y)) ∙

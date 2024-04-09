@@ -237,7 +237,7 @@ abstract
     ( eq-ℚ-sim-fraction-ℤ
       ( neg-fraction-ℤ x)
       ( fraction-ℚ (neg-ℚ (rational-fraction-ℤ x)))
-      ( sim-neg-sim-fraction-ℤ
+      ( preserves-sim-neg-fraction-ℤ
         ( x)
         ( reduce-fraction-ℤ x)
         ( sim-reduced-fraction-ℤ x))) ∙
