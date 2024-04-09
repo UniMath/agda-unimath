@@ -50,10 +50,11 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A map `f : A → A` is {{#concept "split idempotent" Agda=is-split-idempotent}} if
-there exists a type `B` and an inclusion-retraction pair `i , r` displaying `B`
-as a [retract](foundation-core.retracts-of-types.md) of `A`, and such that
-`i ∘ r ~ f`. In other words, if we have a commutative diagram
+An endomap `f : A → A` is
+{{#concept "split idempotent" Disambiguation="map of types" Agda=is-split-idempotent}}
+if there exists a type `B` and an inclusion-retraction pair `i , r` displaying
+`B` as a [retract](foundation-core.retracts-of-types.md) of `A`, and such that
+`H : i ∘ r ~ f`. In other words, if we have a commutative diagram
 
 ```text
            f
@@ -64,6 +65,16 @@ as a [retract](foundation-core.retracts-of-types.md) of `A`, and such that
   B ====== B.
 ```
 
+Observe that split idempotent maps are indeed
+[idempotent](foundation.idempotent-maps.md), as witnesses by the composite
+
+```text
+       (H◽H)⁻¹            iRr        H
+  f ∘ f  ~  i ∘ r ∘ i ∘ r  ~  i ∘ r  ~  f
+```
+
+where `H : i ∘ r ~ f` and `R : r ∘ i ~ id`.
+
 One important fact about split idempotent maps is that every
 [quasicoherently idempotent map](foundation.quasicoherently-idempotent-maps.md)
 splits, and conversely, every split idempotent map is quasicoherently
@@ -72,7 +83,7 @@ is a retract of the type of proofs of quasicoherent idempotence.
 
 ## Definitions
 
-### The structure on a map of split idempotence
+### The structure on a map of being split idempotent
 
 ```agda
 is-split-idempotent :
@@ -121,7 +132,7 @@ module _
   htpy-is-split-idempotent = pr2 (pr2 H)
 ```
 
-### The type of split idempotent maps
+### The type of split idempotent maps on a type
 
 ```agda
 split-idempotent-map : {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
@@ -658,9 +669,10 @@ module _
   inclusion-splitting-type-is-quasicoherently-idempotent' (a , α) = a 0
 ```
 
-Moreover, again by Remark 5.4 {{#cite Shu17}}, given the idempotence homotopy
-`f ∘ f ~ f`, we can construct the converse map to this inclusion and show that
-this gives a factorization of `f`. Indeed, this factorization is strict.
+Moreover, again by Remark 5.4 {{#cite Shu17}}, given only the idempotence
+homotopy `f ∘ f ~ f`, we can construct the converse map to this inclusion and
+show that this gives a factorization of `f`. Indeed, this factorization is
+strict.
 
 ```agda
 module _
@@ -680,9 +692,9 @@ module _
   htpy-is-split-idempotent-is-quasicoherently-idempotent' = refl-htpy
 ```
 
-To show that these maps form an inclusion-retraction pair, however, we use the
-coherence of quasicoherent idempotents as well as
-[function extensionality](foundation.function-extensionality.md).
+However, to show that these maps form an inclusion-retraction pair, we use the
+coherence of quasicoherent idempotents as well as the
+[function extensionality](foundation.function-extensionality.md) axiom.
 
 ```agda
 module _
@@ -915,7 +927,7 @@ J = coh-is-quasicoherently-idempotent H
 Ξ = htpy-coherence-compute-retraction-splitting-type-is-quasicoherently-idempotent (a , α).
 ```
 
-In particular, the left-hand square is the inductive hypothesis.
+Note, in particular, that the left-hand square is the inductive hypothesis.
 
 ```agda
     htpy-coherence-compute-retraction-splitting-type-is-quasicoherently-idempotent
@@ -1107,21 +1119,21 @@ module _
 
 <!-- TODO: move this somewhere more fitting. Currently moving it to foundation.small-types introduces cyclic dependencies -->
 
-This is Theorem 2.13 of {{#cite dJE23}}. Note in particular that it does not
+This is Theorem 2.13 of {{#cite dJE23}}. Note, in particular, that it does not
 rely on univalence.
 
-**Proof:** Given an inclusion-retraction pair `i , r` that displays `B` as a
-retract of `A` where `A` is a small type, then we have two candidates for the
-splitting type of `i ∘ r`, the first is `B` and the other is the splitting type
-constructed for
+**Proof:** Assume given an inclusion-retraction pair `i , r` that displays `B`
+as a retract of the small type `A`. By essential uniqueness of splitting types,
+`B` is equivalent to every other splitting type of `i ∘ r`. Now, another
+splitting type of `i ∘ r` is the splitting type as constructed for the witness
 
 ```text
   is-split-idempotent-is-quasicoherently-idempotent
-    ( is-quasicoherently-idempotent-inclusion-retraction i r ...).
+    ( is-quasicoherently-idempotent-inclusion-retraction i r ...),
 ```
 
-The latter is a small sequential limit, and by essential uniqueness of splitting
-types they are equivalent so we are done.
+and this is a small sequential limit. Hence `B` is equivalent to a small type,
+and is hence itself small.
 
 ```agda
 module _

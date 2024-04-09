@@ -41,3 +41,7 @@ is-small-is-surjective {f = f} H K L =
       ( is-image-is-surjective f id-emb (f , refl-htpy) H))
     ( replacement f K L)
 ```
+
+## See also
+
+- [Small maps](foundation.small-maps.md)

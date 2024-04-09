@@ -30,8 +30,11 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-We say that a type `A` is a **retract of** a type `B` if the types `A` and `B`
-come equipped with **retract data**, i.e., with maps
+We say that a type `A` is a
+{{#concept "retract" Disambiguation="of types" Agda=retract}} of a type `B` if
+the types `A` and `B` come equipped with
+{{#concept "retract data" Disambiguation="of types" Agda=retract}}, i.e., with
+maps
 
 ```text
       i        r

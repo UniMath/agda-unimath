@@ -20,7 +20,20 @@ open import foundation-core.small-types
 
 ## Idea
 
-A map is said to be small if its fibers are small.
+A map is said to be
+{{#concept "small" Disambiguation="map of types" Agda=is-small-map}} if its
+[fibers](foundation-core.fibers-of-maps.md) are
+[small](foundation-core.small-types.md).
+
+More specifically, a map `f : A → B` is said to be _small_ with respect to a
+universe `𝒰` if, for every `b : B`, the fiber of `f` over `y`
+
+```text
+  fiber f b ≐ Σ (x : A), (f x ＝ b),
+```
+
+is [equivalent](foundation-core.equivalences.md) to a type in `𝒰` that may vary
+depending on `b`.
 
 ## Definition
 
@@ -38,9 +51,9 @@ is-small-map l {B = B} f = (b : B) → is-small l (fiber f b)
 ```agda
 abstract
   is-small-fiber :
-    (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    {l l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-small l A → is-small l B → (b : B) → is-small l (fiber f b)
-  is-small-fiber l f H K b =
+  is-small-fiber f H K b =
     is-small-Σ H (λ a → is-locally-small-is-small K (f a) b)
 ```
 

@@ -33,14 +33,14 @@ a map `f : A → A` [equipped](foundation.structure.md) with a
 
 While this definition corresponds to the classical concept of an idempotent map
 in [set](foundation-core.sets.md)-level mathematics, a homotopy `I : f ∘ f ~ f`
-may fail to be coherent with itself in higher mathematics. For instance, one may
-ask for a second order coherence
+may fail to be coherent with itself in Homotopy Type Theory. For instance, one
+may ask for a second-order coherence
 
 ```text
   J : f ·r I ~ I ·l f
 ```
 
-leading to the definition of a
+giving the definition of a
 [quasicoherently idempotent map](foundation.quasicoherently-idempotent-maps.md).
 
 The situation may be compared against that of
@@ -54,9 +54,10 @@ additional coherence `f ·r R ~ S ·l f`.
 It is true that every invertible map is coherently invertible, but no such
 construction preserves both of the homotopies `S` and `R`. Likewise, every
 quasicoherently idempotent map is also coherently idempotent, although again the
-coherence `J` is replaced as part of this construction. On the other hand, not
-every idempotent map can be made to be fully coherent or even quasicoherent. For
-a counterexample see Section 4 of {{#cite Shu17}}.
+coherence `J` is replaced as part of this construction. On the other hand, in
+contrast to invertible maps, not every idempotent map can be made to be fully
+coherent or even quasicoherent. For a counterexample see Section 4 of
+{{#cite Shu17}}.
 
 **Terminology.** Our definition of an _idempotent map_ corresponds to the
 definition of a _preidempotent map_ in {{#reference Shu17}} and
@@ -73,7 +74,7 @@ is-idempotent : {l : Level} {A : UU l} → (A → A) → UU l
 is-idempotent f = f ∘ f ~ f
 ```
 
-### The type of idempotent maps
+### The type of idempotent maps on a type
 
 ```agda
 idempotent-map : {l : Level} (A : UU l) → UU l

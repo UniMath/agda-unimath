@@ -26,9 +26,10 @@ open import foundation-core.sets
 ## Idea
 
 A
-{{#concept "quasicoherently idempotent map" Agda=is-quasicoherently-idempotent}}
+{{#concept "quasicoherently idempotent map" Disambiguation="on a type" Agda=is-quasicoherently-idempotent}}
 is a map `f : A → A` [equipped](foundation.structure.md) with a
-[homotopy](foundation-core.homotopies.md) `I : f ∘ f ~ f` and a coherence
+[homotopy](foundation-core.homotopies.md) `I : f ∘ f ~ f` witnessing that `f` is
+[idempotent](foundation.idempotent-maps.md), and a coherence
 
 ```text
   f ·l I ~ I ·r f.
@@ -175,7 +176,8 @@ module _
   where
 
   coherence-is-quasicoherently-idempotent-inclusion-retraction :
-    coherence-is-quasicoherently-idempotent (i ∘ r)
+    coherence-is-quasicoherently-idempotent
+      ( i ∘ r)
       ( is-idempotent-inclusion-retraction i r H)
   coherence-is-quasicoherently-idempotent-inclusion-retraction =
     ( inv-preserves-comp-left-whisker-comp i r (i ·l H ·r r)) ∙h
@@ -248,15 +250,13 @@ module _
                 ( f ·l inv-htpy H)) ∙h
               ( ap-concat-htpy
                 ( f ·l g ·l H ∙h f ·l H ·r f)
-                ( ( nat-htpy
-                    ( is-idempotent-is-quasicoherently-idempotent F)) ∘
+                ( ( nat-htpy (is-idempotent-is-quasicoherently-idempotent F)) ∘
                   ( inv-htpy H))) ∙h
               ( inv-htpy
                 ( assoc-htpy
                   ( f ·l g ·l H ∙h f ·l H ·r f)
                   ( (f ∘ f) ·l inv-htpy H)
-                  ( is-idempotent-is-quasicoherently-idempotent F ·r
-                    g))))) ∙h
+                  ( is-idempotent-is-quasicoherently-idempotent F ·r g))))) ∙h
           ( inv-htpy
             ( assoc-htpy
               ( H ·r (g ∘ g))
@@ -297,9 +297,9 @@ module _
     coherence-is-quasicoherently-idempotent-htpy (inv-htpy H)
 ```
 
-### Realigning the coherence of quasicoherent idempotence
+### Realigning the coherence of a quasicoherent idempotence proof
 
-Given a quasicoherently idempotent `f` then any other idempotence homotopy
+Given a quasicoherently idempotent map `f`, any other idempotence homotopy
 `H : f ∘ f ~ f` that is homotopic to the coherent one is also coherent.
 
 ```agda
@@ -335,8 +335,7 @@ module _
     I ~ is-idempotent-is-quasicoherently-idempotent F →
     is-quasicoherently-idempotent f
   is-quasicoherently-idempotent-is-idempotent-inv-htpy α =
-    ( I ,
-      coherence-is-quasicoherently-idempotent-is-idempotent-inv-htpy α)
+    ( I , coherence-is-quasicoherently-idempotent-is-idempotent-inv-htpy α)
 ```
 
 ### Not every idempotent map is quasicoherently idempotent
@@ -349,8 +348,8 @@ more details. Note that the statement does not ask for the idempotence witness
 ## See also
 
 - In [`foundation.split-idempotent-maps`](foundation.split-idempotent-maps.md)
-  we show that every quasicoherently idempotent splits and that split
-  idempotents are a retract of quasicoherent idempotents.
+  we show that every quasicoherently idempotent map splits. Moreover, it is true
+  that split idempotent maps are a retract of quasicoherent idempotent maps.
 
 ## References
 
