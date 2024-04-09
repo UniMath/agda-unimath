@@ -200,6 +200,7 @@ open import foundation.homotopies public
 open import foundation.homotopies-morphisms-arrows public
 open import foundation.homotopy-algebra public
 open import foundation.homotopy-induction public
+open import foundation.idempotent-maps public
 open import foundation.identity-systems public
 open import foundation.identity-truncated-types public
 open import foundation.identity-types public
@@ -289,7 +290,6 @@ open import foundation.precomposition-dependent-functions public
 open import foundation.precomposition-functions public
 open import foundation.precomposition-functions-into-subuniverses public
 open import foundation.precomposition-type-families public
-open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public
 open import foundation.preunivalent-type-families public
