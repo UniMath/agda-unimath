@@ -311,7 +311,7 @@ open import foundation.propositional-truncations public
 open import foundation.propositions public
 open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
-open import foundation.quasiidempotent-maps public
+open import foundation.quasicoherently-idempotent-maps public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public

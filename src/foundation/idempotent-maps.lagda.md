@@ -126,7 +126,7 @@ module _
 
 ## See also
 
-- [Quasiidempotent maps](foundation.quasiidempotent-maps.md)
+- [Quasicoherently idempotent maps](foundation.quasicoherently-idempotent-maps.md)
 - [Split idempotent maps](foundation.split-idempotent-maps.md)
 
 ## References

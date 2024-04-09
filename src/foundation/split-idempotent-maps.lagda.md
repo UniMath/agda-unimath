@@ -22,7 +22,7 @@ open import foundation.homotopy-induction
 open import foundation.idempotent-maps
 open import foundation.inverse-sequential-diagrams
 open import foundation.path-algebra
-open import foundation.quasiidempotent-maps
+open import foundation.quasicoherently-idempotent-maps
 open import foundation.retracts-of-types
 open import foundation.sequential-limits
 open import foundation.structure-identity-principle
@@ -419,10 +419,10 @@ module _
       ( is-split-idempotent-split-idempotent-map H)
 ```
 
-### Split idempotent maps are quasiidempotent
+### Split idempotent maps are quasicoherently idempotent
 
 This is Lemma 3.6 in {{#cite Shu17}}. We follow a more direct route as we have
-already shown that quasiidempotents are closed under homotopy.
+already shown that quasicoherently idempotents are closed under homotopy.
 
 ```agda
 module _
@@ -430,13 +430,13 @@ module _
   where
 
   abstract
-    coherence-is-quasiidempotent-is-split-idempotent-map :
-      coherence-is-quasiidempotent-map f
+    coherence-is-quasicoherently-idempotent-is-split-idempotent-map :
+      coherence-is-quasicoherently-idempotent-map f
         ( is-idempotent-is-split-idempotent-map H)
-    coherence-is-quasiidempotent-is-split-idempotent-map =
-      coherence-is-quasiidempotent-is-idempotent-map-htpy
-        ( is-quasiidempotent-map-inv-htpy
-          ( is-quasiidempotent-inclusion-retraction
+    coherence-is-quasicoherently-idempotent-is-split-idempotent-map =
+      coherence-is-quasicoherently-idempotent-is-idempotent-map-htpy
+        ( is-quasicoherently-idempotent-map-inv-htpy
+          ( is-quasicoherently-idempotent-inclusion-retraction
             ( inclusion-is-split-idempotent-map H)
             ( map-retraction-is-split-idempotent-map H)
             (is-retraction-map-retraction-is-split-idempotent-map H))
@@ -444,19 +444,20 @@ module _
         ( is-idempotent-is-split-idempotent-map H)
         ( ap-concat-htpy _ (inv-inv-htpy (htpy-is-split-idempotent-map H)))
 
-  is-quasiidempotent-is-split-idempotent-map : is-quasiidempotent-map f
-  is-quasiidempotent-is-split-idempotent-map =
+  is-quasicoherently-idempotent-is-split-idempotent-map :
+    is-quasicoherently-idempotent-map f
+  is-quasicoherently-idempotent-is-split-idempotent-map =
     ( is-idempotent-is-split-idempotent-map H ,
-      coherence-is-quasiidempotent-is-split-idempotent-map)
+      coherence-is-quasicoherently-idempotent-is-split-idempotent-map)
 
 module _
   {l1 l2 : Level} {A : UU l1} (H : split-idempotent-map l2 A)
   where
 
-  is-quasiidempotent-split-idempotent-map :
-    is-quasiidempotent-map (map-split-idempotent-map H)
-  is-quasiidempotent-split-idempotent-map =
-    is-quasiidempotent-is-split-idempotent-map
+  is-quasicoherently-idempotent-split-idempotent-map :
+    is-quasicoherently-idempotent-map (map-split-idempotent-map H)
+  is-quasicoherently-idempotent-split-idempotent-map =
+    is-quasicoherently-idempotent-is-split-idempotent-map
       ( is-split-idempotent-split-idempotent-map H)
 ```
 
@@ -578,7 +579,7 @@ module _
       htpy-is-split-idempotent-is-weakly-constant-is-idempotent-map)
 ```
 
-### Quasiidempotent maps split
+### Quasicoherently idempotent maps split
 
 This is Theorem 5.3 of {{#cite Shu17}}.
 
@@ -590,19 +591,19 @@ module _
   {l : Level} {A : UU l} (f : A → A)
   where
 
-  inverse-sequential-diagram-splitting-type-is-quasiidempotent-map' :
+  inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map' :
     inverse-sequential-diagram l
-  inverse-sequential-diagram-splitting-type-is-quasiidempotent-map' =
+  inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map' =
     ( (λ _ → A) , (λ _ → f))
 
-  splitting-type-is-quasiidempotent-map' : UU l
-  splitting-type-is-quasiidempotent-map' =
+  splitting-type-is-quasicoherently-idempotent-map' : UU l
+  splitting-type-is-quasicoherently-idempotent-map' =
     standard-sequential-limit
-      ( inverse-sequential-diagram-splitting-type-is-quasiidempotent-map')
+      ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map')
 
-  inclusion-splitting-type-is-quasiidempotent-map' :
-    splitting-type-is-quasiidempotent-map' → A
-  inclusion-splitting-type-is-quasiidempotent-map' (a , α) = a 0
+  inclusion-splitting-type-is-quasicoherently-idempotent-map' :
+    splitting-type-is-quasicoherently-idempotent-map' → A
+  inclusion-splitting-type-is-quasicoherently-idempotent-map' (a , α) = a 0
 ```
 
 Moreover, again by Remark 5.4 {{#cite Shu17}}, given the idempotence homotopy
@@ -615,55 +616,56 @@ module _
   (I : is-idempotent-map f)
   where
 
-  map-retraction-splitting-type-is-quasiidempotent-map' :
-    A → splitting-type-is-quasiidempotent-map' f
-  map-retraction-splitting-type-is-quasiidempotent-map' x =
+  map-retraction-splitting-type-is-quasicoherently-idempotent-map' :
+    A → splitting-type-is-quasicoherently-idempotent-map' f
+  map-retraction-splitting-type-is-quasicoherently-idempotent-map' x =
     ( (λ _ → f x) , (λ _ → inv (I x)))
 
-  htpy-is-split-idempotent-is-quasiidempotent-map' :
-    inclusion-splitting-type-is-quasiidempotent-map' f ∘
-    map-retraction-splitting-type-is-quasiidempotent-map' ~
+  htpy-is-split-idempotent-is-quasicoherently-idempotent-map' :
+    inclusion-splitting-type-is-quasicoherently-idempotent-map' f ∘
+    map-retraction-splitting-type-is-quasicoherently-idempotent-map' ~
     f
-  htpy-is-split-idempotent-is-quasiidempotent-map' = refl-htpy
+  htpy-is-split-idempotent-is-quasicoherently-idempotent-map' = refl-htpy
 ```
 
 To show that these maps form an inclusion-retraction pair, however, we use the
-coherence of quasiidempotents as well as
+coherence of quasicoherently idempotents as well as
 [function extensionality](foundation.function-extensionality.md).
 
 ```agda
 module _
   {l : Level} {A : UU l} {f : A → A}
-  (H : is-quasiidempotent-map f)
+  (H : is-quasicoherently-idempotent-map f)
   where
 
-  inverse-sequential-diagram-splitting-type-is-quasiidempotent-map :
+  inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map :
     inverse-sequential-diagram l
-  inverse-sequential-diagram-splitting-type-is-quasiidempotent-map =
-    inverse-sequential-diagram-splitting-type-is-quasiidempotent-map' f
+  inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map =
+    inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map'
+      ( f)
 
-  splitting-type-is-quasiidempotent-map : UU l
-  splitting-type-is-quasiidempotent-map =
-    splitting-type-is-quasiidempotent-map' f
+  splitting-type-is-quasicoherently-idempotent-map : UU l
+  splitting-type-is-quasicoherently-idempotent-map =
+    splitting-type-is-quasicoherently-idempotent-map' f
 
-  inclusion-splitting-type-is-quasiidempotent-map :
-    splitting-type-is-quasiidempotent-map → A
-  inclusion-splitting-type-is-quasiidempotent-map =
-    inclusion-splitting-type-is-quasiidempotent-map' f
+  inclusion-splitting-type-is-quasicoherently-idempotent-map :
+    splitting-type-is-quasicoherently-idempotent-map → A
+  inclusion-splitting-type-is-quasicoherently-idempotent-map =
+    inclusion-splitting-type-is-quasicoherently-idempotent-map' f
 
-  map-retraction-splitting-type-is-quasiidempotent-map :
-    A → splitting-type-is-quasiidempotent-map
-  map-retraction-splitting-type-is-quasiidempotent-map =
-    map-retraction-splitting-type-is-quasiidempotent-map'
-      ( is-idempotent-is-quasiidempotent-map H)
+  map-retraction-splitting-type-is-quasicoherently-idempotent-map :
+    A → splitting-type-is-quasicoherently-idempotent-map
+  map-retraction-splitting-type-is-quasicoherently-idempotent-map =
+    map-retraction-splitting-type-is-quasicoherently-idempotent-map'
+      ( is-idempotent-is-quasicoherently-idempotent-map H)
 
-  htpy-is-split-idempotent-is-quasiidempotent-map :
-    inclusion-splitting-type-is-quasiidempotent-map ∘
-    map-retraction-splitting-type-is-quasiidempotent-map ~
+  htpy-is-split-idempotent-is-quasicoherently-idempotent-map :
+    inclusion-splitting-type-is-quasicoherently-idempotent-map ∘
+    map-retraction-splitting-type-is-quasicoherently-idempotent-map ~
     f
-  htpy-is-split-idempotent-is-quasiidempotent-map =
-    htpy-is-split-idempotent-is-quasiidempotent-map'
-      ( is-idempotent-is-quasiidempotent-map H)
+  htpy-is-split-idempotent-is-quasicoherently-idempotent-map =
+    htpy-is-split-idempotent-is-quasicoherently-idempotent-map'
+      ( is-idempotent-is-quasicoherently-idempotent-map H)
 ```
 
 Now, to construct the desired retracting homotopy
@@ -680,81 +682,84 @@ whiskering by `f ∘ f` is homotopic to the identity
 ```
 
 ```agda
-  shift-retraction-splitting-type-is-quasiidempotent-map :
+  shift-retraction-splitting-type-is-quasicoherently-idempotent-map :
     standard-sequential-limit
-      ( inverse-sequential-diagram-splitting-type-is-quasiidempotent-map) →
+      ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map) →
     standard-sequential-limit
-      ( inverse-sequential-diagram-splitting-type-is-quasiidempotent-map)
-  shift-retraction-splitting-type-is-quasiidempotent-map (a , α) =
+      ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map)
+  shift-retraction-splitting-type-is-quasicoherently-idempotent-map (a , α) =
     ((f ∘ f ∘ a ∘ succ-ℕ) , ( (f ∘ f) ·l (α ∘ succ-ℕ)))
 
-  htpy-sequence-shift-retraction-splitting-type-is-quasiidempotent-map :
+  htpy-sequence-shift-retraction-splitting-type-is-quasicoherently-idempotent-map :
     ((a , α) :
       standard-sequential-limit
-        ( inverse-sequential-diagram-splitting-type-is-quasiidempotent-map)) →
+        ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map)) →
     f ∘ f ∘ a ∘ succ-ℕ ~ a
-  htpy-sequence-shift-retraction-splitting-type-is-quasiidempotent-map
+  htpy-sequence-shift-retraction-splitting-type-is-quasicoherently-idempotent-map
     ( a , α) n =
-    is-idempotent-is-quasiidempotent-map H (a (succ-ℕ n)) ∙ inv (α n)
+    is-idempotent-is-quasicoherently-idempotent-map H (a (succ-ℕ n)) ∙ inv (α n)
 
   abstract
-    htpy-coherence-shift-retraction-splitting-type-is-quasiidempotent-map :
+    htpy-coherence-shift-retraction-splitting-type-is-quasicoherently-idempotent-map :
       (x :
         standard-sequential-limit
-          ( inverse-sequential-diagram-splitting-type-is-quasiidempotent-map)) →
+          ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map)) →
       coherence-Eq-standard-sequential-limit
-        ( inverse-sequential-diagram-splitting-type-is-quasiidempotent-map)
-        ( shift-retraction-splitting-type-is-quasiidempotent-map x)
+        ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map)
+        ( shift-retraction-splitting-type-is-quasicoherently-idempotent-map x)
         ( x)
-        ( htpy-sequence-shift-retraction-splitting-type-is-quasiidempotent-map
+        ( htpy-sequence-shift-retraction-splitting-type-is-quasicoherently-idempotent-map
           ( x))
-    htpy-coherence-shift-retraction-splitting-type-is-quasiidempotent-map
+    htpy-coherence-shift-retraction-splitting-type-is-quasicoherently-idempotent-map
       ( a , α) n =
       ( ap
         ( ap (f ∘ f) (α (succ-ℕ n)) ∙_)
         ( ( ap-concat f
-            ( is-idempotent-is-quasiidempotent-map H (a (second-succ-ℕ n)))
+            ( is-idempotent-is-quasicoherently-idempotent-map H
+              ( a (second-succ-ℕ n)))
             ( inv (α (succ-ℕ n)))) ∙
           ( ap
             ( _∙ ap f (inv (α (succ-ℕ n))))
-            ( coh-is-quasiidempotent-map H (a (second-succ-ℕ n)))))) ∙
+            ( coh-is-quasicoherently-idempotent-map H
+              ( a (second-succ-ℕ n)))))) ∙
       ( inv
         ( assoc
           ( ap (f ∘ f) (α (succ-ℕ n)))
-          ( is-idempotent-is-quasiidempotent-map H (f (a (second-succ-ℕ n))))
+          ( is-idempotent-is-quasicoherently-idempotent-map H
+            ( f (a (second-succ-ℕ n))))
           ( ap f (inv (α (succ-ℕ n)))))) ∙
       ( ap
         ( _∙ ap f (inv (α (succ-ℕ n))))
         ( inv
           ( nat-htpy
-            ( is-idempotent-is-quasiidempotent-map H)
+            ( is-idempotent-is-quasicoherently-idempotent-map H)
             ( α (succ-ℕ n))))) ∙
       ( assoc
-        ( is-idempotent-is-quasiidempotent-map H (a (succ-ℕ n)))
+        ( is-idempotent-is-quasicoherently-idempotent-map H (a (succ-ℕ n)))
         ( ap f (α (succ-ℕ n)))
         ( ap f (inv (α (succ-ℕ n))))) ∙
       ( ap
-        ( is-idempotent-is-quasiidempotent-map H (a (succ-ℕ n)) ∙_)
+        ( is-idempotent-is-quasicoherently-idempotent-map H (a (succ-ℕ n)) ∙_)
         ( ( inv (ap-concat f (α (succ-ℕ n)) (inv (α (succ-ℕ n))))) ∙
           ( ap² f (right-inv (α (succ-ℕ n)))) ∙
           inv (left-inv (α n)))) ∙
       ( inv
         ( assoc
-          ( is-idempotent-is-quasiidempotent-map H (a (succ-ℕ n)))
+          ( is-idempotent-is-quasicoherently-idempotent-map H (a (succ-ℕ n)))
           ( inv (α n))
           ( α n)))
 
-  compute-shift-retraction-splitting-type-is-quasiidempotent-map :
-    shift-retraction-splitting-type-is-quasiidempotent-map ~ id
-  compute-shift-retraction-splitting-type-is-quasiidempotent-map
+  compute-shift-retraction-splitting-type-is-quasicoherently-idempotent-map :
+    shift-retraction-splitting-type-is-quasicoherently-idempotent-map ~ id
+  compute-shift-retraction-splitting-type-is-quasicoherently-idempotent-map
     x =
     eq-Eq-standard-sequential-limit
-      ( inverse-sequential-diagram-splitting-type-is-quasiidempotent-map)
-      ( shift-retraction-splitting-type-is-quasiidempotent-map x)
+      ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map)
+      ( shift-retraction-splitting-type-is-quasicoherently-idempotent-map x)
       ( x)
-      ( ( htpy-sequence-shift-retraction-splitting-type-is-quasiidempotent-map
+      ( ( htpy-sequence-shift-retraction-splitting-type-is-quasicoherently-idempotent-map
           x) ,
-        ( htpy-coherence-shift-retraction-splitting-type-is-quasiidempotent-map
+        ( htpy-coherence-shift-retraction-splitting-type-is-quasicoherently-idempotent-map
           x))
 ```
 
@@ -762,71 +767,76 @@ Then we show that `r ∘ i` is homotopic to this operation. This time we proceed
 by induction on `n`.
 
 ```agda
-  htpy-sequence-compute-retraction-splitting-type-is-quasiidempotent-map :
+  htpy-sequence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map :
     ( (a , α) :
       standard-sequential-limit
-        ( inverse-sequential-diagram-splitting-type-is-quasiidempotent-map'
+        ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map'
           ( f))) →
-    ( λ _ → f (inclusion-splitting-type-is-quasiidempotent-map (a , α))) ~
+    ( λ _ →
+      f (inclusion-splitting-type-is-quasicoherently-idempotent-map (a , α))) ~
     ( f ∘ f ∘ a ∘ succ-ℕ)
-  htpy-sequence-compute-retraction-splitting-type-is-quasiidempotent-map
+  htpy-sequence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
     ( a , α) 0 = ap f (α 0)
-  htpy-sequence-compute-retraction-splitting-type-is-quasiidempotent-map
+  htpy-sequence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
     ( a , α) (succ-ℕ n) =
-    ( htpy-sequence-compute-retraction-splitting-type-is-quasiidempotent-map
+    ( htpy-sequence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
       ( a , α) n) ∙
-    ( is-idempotent-is-quasiidempotent-map H (a (succ-ℕ n))) ∙
+    ( is-idempotent-is-quasicoherently-idempotent-map H (a (succ-ℕ n))) ∙
     ( ap f (α (succ-ℕ n)))
 
   abstract
-    htpy-coherence-compute-retraction-splitting-type-is-quasiidempotent-map :
+    htpy-coherence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map :
       ((a , α) :
         standard-sequential-limit
-          ( inverse-sequential-diagram-splitting-type-is-quasiidempotent-map)) →
+          ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map)) →
       coherence-square-homotopies
-        ( htpy-sequence-compute-retraction-splitting-type-is-quasiidempotent-map
+        ( htpy-sequence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
           ( a , α))
         ( λ n →
           inv
-            ( is-idempotent-is-quasiidempotent-map H
-              ( inclusion-splitting-type-is-quasiidempotent-map (a , α))))
+            ( is-idempotent-is-quasicoherently-idempotent-map H
+              ( inclusion-splitting-type-is-quasicoherently-idempotent-map
+                ( a , α))))
         ( λ n → ap (f ∘ f) (α (succ-ℕ n)))
         ( λ n →
           ap f
-            ( ( htpy-sequence-compute-retraction-splitting-type-is-quasiidempotent-map
+            ( ( htpy-sequence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
                 ( a , α)
                 ( n)) ∙
-              ( is-idempotent-is-quasiidempotent-map H (a (succ-ℕ n))) ∙
+              ( is-idempotent-is-quasicoherently-idempotent-map H
+                ( a (succ-ℕ n))) ∙
               ( ap f (α (succ-ℕ n)))))
-    htpy-coherence-compute-retraction-splitting-type-is-quasiidempotent-map
+    htpy-coherence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
       ( a , α) 0 =
       ( ap
-        ( inv (is-idempotent-is-quasiidempotent-map H (a 0)) ∙_)
+        ( inv (is-idempotent-is-quasicoherently-idempotent-map H (a 0)) ∙_)
         ( ( ap-concat f
-            ( ap f (α 0) ∙ is-idempotent-is-quasiidempotent-map H (a 1))
+            ( ap f (α 0) ∙
+              is-idempotent-is-quasicoherently-idempotent-map H (a 1))
             ( ap f (α 1))) ∙
           ( ap-binary (_∙_)
             ( ap-concat f
               ( ap f (α 0))
-              ( is-idempotent-is-quasiidempotent-map H (a 1)))
+              ( is-idempotent-is-quasicoherently-idempotent-map H (a 1)))
             ( inv (ap-comp f f (α 1)))))) ∙
       ( inv
           ( assoc
-            ( inv (is-idempotent-is-quasiidempotent-map H (a 0)))
+            ( inv (is-idempotent-is-quasicoherently-idempotent-map H (a 0)))
             ( ap f (ap f (α 0)) ∙
-              ap f (is-idempotent-is-quasiidempotent-map H (a 1)))
+              ap f (is-idempotent-is-quasicoherently-idempotent-map H (a 1)))
             ( ap (f ∘ f) (α 1)))) ∙
       ( ap
         ( _∙ ap (f ∘ f) (α 1))
         ( ap
-          ( inv (is-idempotent-is-quasiidempotent-map H (a 0)) ∙_)
+          ( inv (is-idempotent-is-quasicoherently-idempotent-map H (a 0)) ∙_)
           ( ( ap-binary (_∙_)
               ( inv (ap-comp f f (α 0)))
-              ( coh-is-quasiidempotent-map H (a 1))) ∙
+              ( coh-is-quasicoherently-idempotent-map H (a 1))) ∙
             ( inv
-              ( nat-htpy (is-idempotent-is-quasiidempotent-map H) (α 0)))) ∙
+              ( nat-htpy
+                ( is-idempotent-is-quasicoherently-idempotent-map H) (α 0)))) ∙
           ( left-left-inv
-            ( is-idempotent-is-quasiidempotent-map H (a 0))
+            ( is-idempotent-is-quasicoherently-idempotent-map H (a 0))
             ( ap f (α 0)))))
 ```
 
@@ -847,16 +857,16 @@ notation of {{#cite Shu17}}:
 where the symbols translate to code as follows:
 
 ```text
-I = is-idempotent-is-quasiidempotent-map H
-J = coh-is-quasiidempotent-map H
-ξ = htpy-sequence-compute-retraction-splitting-type-is-quasiidempotent-map (a , α)
-Ξ = htpy-coherence-compute-retraction-splitting-type-is-quasiidempotent-map (a , α).
+I = is-idempotent-is-quasicoherently-idempotent-map H
+J = coh-is-quasicoherently-idempotent-map H
+ξ = htpy-sequence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map (a , α)
+Ξ = htpy-coherence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map (a , α).
 ```
 
 In particular, the left-hand square is the inductive hypothesis.
 
 ```agda
-    htpy-coherence-compute-retraction-splitting-type-is-quasiidempotent-map
+    htpy-coherence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
       ( a , α) (succ-ℕ n) =
       ( ap
         ( inv (I (a 0)) ∙_)
@@ -884,7 +894,7 @@ In particular, the left-hand square is the inductive hypothesis.
               ( ap f (I (a (second-succ-ℕ n)))))) ∙
           ( ap
             ( _∙ ap f (I ( a (second-succ-ℕ n))))
-            ( htpy-coherence-compute-retraction-splitting-type-is-quasiidempotent-map
+            ( htpy-coherence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
               ( a , α)
               ( n))) ∙
           ( assoc
@@ -895,132 +905,136 @@ In particular, the left-hand square is the inductive hypothesis.
             ( ξ n ∙_)
             ( ap
               ( ap (f ∘ f) (α (succ-ℕ n)) ∙_)
-              ( coh-is-quasiidempotent-map H (a (succ-ℕ (succ-ℕ n)))) ∙
+              ( coh-is-quasicoherently-idempotent-map H
+                ( a (succ-ℕ (succ-ℕ n)))) ∙
             ( inv (nat-htpy I (α (succ-ℕ n)))))) ∙
           ( inv (assoc (ξ n) (I (a (succ-ℕ n))) (ap f (α (succ-ℕ n)))))))
       where
         ξ :
           ( λ _ →
-            f (inclusion-splitting-type-is-quasiidempotent-map (a , α))) ~
+            f ( inclusion-splitting-type-is-quasicoherently-idempotent-map
+                ( a , α))) ~
           ( f ∘ f ∘ a ∘ succ-ℕ)
         ξ =
-          htpy-sequence-compute-retraction-splitting-type-is-quasiidempotent-map
+          htpy-sequence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
             ( a , α)
         I : is-idempotent-map f
         I = pr1 H
 
   abstract
-    compute-retraction-splitting-type-is-quasiidempotent-map :
-      map-retraction-splitting-type-is-quasiidempotent-map ∘
-      inclusion-splitting-type-is-quasiidempotent-map ~
-      shift-retraction-splitting-type-is-quasiidempotent-map
-    compute-retraction-splitting-type-is-quasiidempotent-map
+    compute-retraction-splitting-type-is-quasicoherently-idempotent-map :
+      map-retraction-splitting-type-is-quasicoherently-idempotent-map ∘
+      inclusion-splitting-type-is-quasicoherently-idempotent-map ~
+      shift-retraction-splitting-type-is-quasicoherently-idempotent-map
+    compute-retraction-splitting-type-is-quasicoherently-idempotent-map
       x =
       eq-Eq-standard-sequential-limit
-        ( inverse-sequential-diagram-splitting-type-is-quasiidempotent-map)
-        ( map-retraction-splitting-type-is-quasiidempotent-map
-          ( inclusion-splitting-type-is-quasiidempotent-map x))
-        ( shift-retraction-splitting-type-is-quasiidempotent-map
+        ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent-map)
+        ( map-retraction-splitting-type-is-quasicoherently-idempotent-map
+          ( inclusion-splitting-type-is-quasicoherently-idempotent-map x))
+        ( shift-retraction-splitting-type-is-quasicoherently-idempotent-map
           ( x))
-        ( htpy-sequence-compute-retraction-splitting-type-is-quasiidempotent-map
+        ( htpy-sequence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
             ( x) ,
-          htpy-coherence-compute-retraction-splitting-type-is-quasiidempotent-map
+          htpy-coherence-compute-retraction-splitting-type-is-quasicoherently-idempotent-map
             ( x))
 
-  is-retraction-map-retraction-splitting-type-is-quasiidempotent-map :
+  is-retraction-map-retraction-splitting-type-is-quasicoherently-idempotent-map :
     is-retraction
-      ( inclusion-splitting-type-is-quasiidempotent-map)
-      ( map-retraction-splitting-type-is-quasiidempotent-map)
-  is-retraction-map-retraction-splitting-type-is-quasiidempotent-map =
-    compute-retraction-splitting-type-is-quasiidempotent-map ∙h
-    compute-shift-retraction-splitting-type-is-quasiidempotent-map
+      ( inclusion-splitting-type-is-quasicoherently-idempotent-map)
+      ( map-retraction-splitting-type-is-quasicoherently-idempotent-map)
+  is-retraction-map-retraction-splitting-type-is-quasicoherently-idempotent-map =
+    compute-retraction-splitting-type-is-quasicoherently-idempotent-map ∙h
+    compute-shift-retraction-splitting-type-is-quasicoherently-idempotent-map
 
-  retraction-splitting-type-is-quasiidempotent-map :
-    retraction (inclusion-splitting-type-is-quasiidempotent-map)
-  retraction-splitting-type-is-quasiidempotent-map =
-    ( map-retraction-splitting-type-is-quasiidempotent-map ,
-      is-retraction-map-retraction-splitting-type-is-quasiidempotent-map)
+  retraction-splitting-type-is-quasicoherently-idempotent-map :
+    retraction (inclusion-splitting-type-is-quasicoherently-idempotent-map)
+  retraction-splitting-type-is-quasicoherently-idempotent-map =
+    ( map-retraction-splitting-type-is-quasicoherently-idempotent-map ,
+      is-retraction-map-retraction-splitting-type-is-quasicoherently-idempotent-map)
 
-  retract-splitting-type-is-quasiidempotent-map :
-    splitting-type-is-quasiidempotent-map retract-of A
-  retract-splitting-type-is-quasiidempotent-map =
-    ( inclusion-splitting-type-is-quasiidempotent-map ,
-      retraction-splitting-type-is-quasiidempotent-map)
+  retract-splitting-type-is-quasicoherently-idempotent-map :
+    splitting-type-is-quasicoherently-idempotent-map retract-of A
+  retract-splitting-type-is-quasicoherently-idempotent-map =
+    ( inclusion-splitting-type-is-quasicoherently-idempotent-map ,
+      retraction-splitting-type-is-quasicoherently-idempotent-map)
 
-  splitting-is-quasiidempotent-map : retracts l A
-  splitting-is-quasiidempotent-map =
-    ( splitting-type-is-quasiidempotent-map ,
-      retract-splitting-type-is-quasiidempotent-map)
+  splitting-is-quasicoherently-idempotent-map : retracts l A
+  splitting-is-quasicoherently-idempotent-map =
+    ( splitting-type-is-quasicoherently-idempotent-map ,
+      retract-splitting-type-is-quasicoherently-idempotent-map)
 
-  is-split-idempotent-is-quasiidempotent-map : is-split-idempotent-map l f
-  is-split-idempotent-is-quasiidempotent-map =
-    ( splitting-type-is-quasiidempotent-map ,
-      retract-splitting-type-is-quasiidempotent-map ,
-      htpy-is-split-idempotent-is-quasiidempotent-map)
+  is-split-idempotent-is-quasicoherently-idempotent-map :
+    is-split-idempotent-map l f
+  is-split-idempotent-is-quasicoherently-idempotent-map =
+    ( splitting-type-is-quasicoherently-idempotent-map ,
+      retract-splitting-type-is-quasicoherently-idempotent-map ,
+      htpy-is-split-idempotent-is-quasicoherently-idempotent-map)
 ```
 
-We record these same facts for the bundled data of a quasiidempotent map on `A`.
+We record these same facts for the bundled data of a quasicoherently idempotent
+map on `A`.
 
 ```agda
 module _
-  {l : Level} {A : UU l} (f : quasiidempotent-map A)
+  {l : Level} {A : UU l} (f : quasicoherently-idempotent-map A)
   where
 
-  splitting-type-quasiidempotent-map : UU l
-  splitting-type-quasiidempotent-map =
-    splitting-type-is-quasiidempotent-map
-      ( is-quasiidempotent-quasiidempotent-map f)
+  splitting-type-quasicoherently-idempotent-map : UU l
+  splitting-type-quasicoherently-idempotent-map =
+    splitting-type-is-quasicoherently-idempotent-map
+      ( is-quasicoherently-idempotent-quasicoherently-idempotent-map f)
 
-  inclusion-splitting-type-quasiidempotent-map :
-    splitting-type-quasiidempotent-map → A
-  inclusion-splitting-type-quasiidempotent-map =
-    inclusion-splitting-type-is-quasiidempotent-map
-      ( is-quasiidempotent-quasiidempotent-map f)
+  inclusion-splitting-type-quasicoherently-idempotent-map :
+    splitting-type-quasicoherently-idempotent-map → A
+  inclusion-splitting-type-quasicoherently-idempotent-map =
+    inclusion-splitting-type-is-quasicoherently-idempotent-map
+      ( is-quasicoherently-idempotent-quasicoherently-idempotent-map f)
 
-  map-retraction-splitting-type-quasiidempotent-map :
-    A → splitting-type-quasiidempotent-map
-  map-retraction-splitting-type-quasiidempotent-map =
-    map-retraction-splitting-type-is-quasiidempotent-map
-      ( is-quasiidempotent-quasiidempotent-map f)
+  map-retraction-splitting-type-quasicoherently-idempotent-map :
+    A → splitting-type-quasicoherently-idempotent-map
+  map-retraction-splitting-type-quasicoherently-idempotent-map =
+    map-retraction-splitting-type-is-quasicoherently-idempotent-map
+      ( is-quasicoherently-idempotent-quasicoherently-idempotent-map f)
 
-  is-retraction-map-retraction-splitting-type-quasiidempotent-map :
+  is-retraction-map-retraction-splitting-type-quasicoherently-idempotent-map :
     is-retraction
-      ( inclusion-splitting-type-quasiidempotent-map)
-      ( map-retraction-splitting-type-quasiidempotent-map)
-  is-retraction-map-retraction-splitting-type-quasiidempotent-map =
-    is-retraction-map-retraction-splitting-type-is-quasiidempotent-map
-      ( is-quasiidempotent-quasiidempotent-map f)
+      ( inclusion-splitting-type-quasicoherently-idempotent-map)
+      ( map-retraction-splitting-type-quasicoherently-idempotent-map)
+  is-retraction-map-retraction-splitting-type-quasicoherently-idempotent-map =
+    is-retraction-map-retraction-splitting-type-is-quasicoherently-idempotent-map
+      ( is-quasicoherently-idempotent-quasicoherently-idempotent-map f)
 
-  retraction-splitting-type-quasiidempotent-map :
-    retraction (inclusion-splitting-type-quasiidempotent-map)
-  retraction-splitting-type-quasiidempotent-map =
-    retraction-splitting-type-is-quasiidempotent-map
-      ( is-quasiidempotent-quasiidempotent-map f)
+  retraction-splitting-type-quasicoherently-idempotent-map :
+    retraction (inclusion-splitting-type-quasicoherently-idempotent-map)
+  retraction-splitting-type-quasicoherently-idempotent-map =
+    retraction-splitting-type-is-quasicoherently-idempotent-map
+      ( is-quasicoherently-idempotent-quasicoherently-idempotent-map f)
 
-  retract-splitting-type-quasiidempotent-map :
-    splitting-type-quasiidempotent-map retract-of A
-  retract-splitting-type-quasiidempotent-map =
-    retract-splitting-type-is-quasiidempotent-map
-      ( is-quasiidempotent-quasiidempotent-map f)
+  retract-splitting-type-quasicoherently-idempotent-map :
+    splitting-type-quasicoherently-idempotent-map retract-of A
+  retract-splitting-type-quasicoherently-idempotent-map =
+    retract-splitting-type-is-quasicoherently-idempotent-map
+      ( is-quasicoherently-idempotent-quasicoherently-idempotent-map f)
 
-  splitting-quasiidempotent-map : retracts l A
-  splitting-quasiidempotent-map =
-    splitting-is-quasiidempotent-map
-      ( is-quasiidempotent-quasiidempotent-map f)
+  splitting-quasicoherently-idempotent-map : retracts l A
+  splitting-quasicoherently-idempotent-map =
+    splitting-is-quasicoherently-idempotent-map
+      ( is-quasicoherently-idempotent-quasicoherently-idempotent-map f)
 
-  htpy-is-split-idempotent-quasiidempotent-map :
-    inclusion-splitting-type-quasiidempotent-map ∘
-    map-retraction-splitting-type-quasiidempotent-map ~
-    map-quasiidempotent-map f
-  htpy-is-split-idempotent-quasiidempotent-map =
-    htpy-is-split-idempotent-is-quasiidempotent-map
-      ( is-quasiidempotent-quasiidempotent-map f)
+  htpy-is-split-idempotent-quasicoherently-idempotent-map :
+    inclusion-splitting-type-quasicoherently-idempotent-map ∘
+    map-retraction-splitting-type-quasicoherently-idempotent-map ~
+    map-quasicoherently-idempotent-map f
+  htpy-is-split-idempotent-quasicoherently-idempotent-map =
+    htpy-is-split-idempotent-is-quasicoherently-idempotent-map
+      ( is-quasicoherently-idempotent-quasicoherently-idempotent-map f)
 
-  is-split-idempotent-quasiidempotent-map :
-    is-split-idempotent-map l (map-quasiidempotent-map f)
-  is-split-idempotent-quasiidempotent-map =
-    is-split-idempotent-is-quasiidempotent-map
-      ( is-quasiidempotent-quasiidempotent-map f)
+  is-split-idempotent-quasicoherently-idempotent-map :
+    is-split-idempotent-map l (map-quasicoherently-idempotent-map f)
+  is-split-idempotent-quasicoherently-idempotent-map =
+    is-split-idempotent-is-quasicoherently-idempotent-map
+      ( is-quasicoherently-idempotent-quasicoherently-idempotent-map f)
 ```
 
 ### Small types are closed under retracts
@@ -1036,8 +1050,8 @@ splitting type of `i ∘ r`, the first is `B` and the other is the splitting typ
 constructed for
 
 ```text
-  is-split-idempotent-is-quasiidempotent-map
-    ( is-quasiidempotent-inclusion-retraction i r ...).
+  is-split-idempotent-is-quasicoherently-idempotent-map
+    ( is-quasicoherently-idempotent-inclusion-retraction i r ...).
 ```
 
 The latter is a small sequential limit, and by essential uniqueness of splitting
@@ -1050,13 +1064,13 @@ module _
 
   is-small-retract' : B retract-of A → is-small l1 B
   pr1 (is-small-retract' R) =
-    splitting-type-is-quasiidempotent-map'
+    splitting-type-is-quasicoherently-idempotent-map'
       ( inclusion-retract R ∘ map-retraction-retract R)
   pr2 (is-small-retract' R) =
     essentially-unique-splitting-type-is-split-idempotent-map
       ( B , R , refl-htpy)
-      ( is-split-idempotent-is-quasiidempotent-map
-        ( is-quasiidempotent-inclusion-retraction
+      ( is-split-idempotent-is-quasicoherently-idempotent-map
+        ( is-quasicoherently-idempotent-inclusion-retraction
           ( inclusion-retract R)
           ( map-retraction-retract R)
           ( is-retraction-map-retraction-retract R)))
