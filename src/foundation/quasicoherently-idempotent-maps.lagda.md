@@ -39,9 +39,13 @@ sufficient for showing that `f` can be made to be fully coherent. This is in
 contrast to [idempotent maps](foundation.idempotent-maps.md), which may in
 general fail to be coherent.
 
+**Terminology.** Our definition of a _quasicoherently idempotent map_
+corresponds to the definition of a _quasiidempotent map_ in {{#reference Shu17}}
+and {{#reference Shu14SplittingIdempotents}}.
+
 ## Definitions
 
-### The structure of quasiidempotence on maps
+### The structure of quasicoherent idempotence on maps
 
 ```agda
 coherence-is-quasicoherently-idempotent-map :
@@ -148,6 +152,20 @@ module _
       is-prop-is-quasicoherently-idempotent-map-Set)
 ```
 
+### Idempotent maps on sets are quasicoherently idempotent
+
+```agda
+module _
+  {l : Level} {A : UU l} (is-set-A : is-set A) {f : A → A}
+  where
+
+  is-quasicoherently-idempotent-is-idempotent-map-is-set :
+    is-idempotent-map f → is-quasicoherently-idempotent-map f
+  pr1 (is-quasicoherently-idempotent-is-idempotent-map-is-set I) = I
+  pr2 (is-quasicoherently-idempotent-is-idempotent-map-is-set I) x =
+    eq-is-prop (is-set-A ((f ∘ f ∘ f) x) ((f ∘ f) x))
+```
+
 ### If `i` and `r` is an inclusion-retraction pair, then `i ∘ r` is quasicoherently idempotent
 
 ```agda
@@ -173,7 +191,7 @@ module _
       coherence-is-quasicoherently-idempotent-inclusion-retraction)
 ```
 
-### Quasiidempotence is preserved by homotopies
+### Quasicoherent idempotence is preserved by homotopies
 
 ```agda
 module _
@@ -279,45 +297,54 @@ module _
     coherence-is-quasicoherently-idempotent-map-htpy (inv-htpy H)
 ```
 
-### Realigning the quasiidempotence coherence
+### Realigning the coherence of quasicoherent idempotence
 
 Given a quasicoherently idempotent `f` then any other idempotence homotopy
 `H : f ∘ f ~ f` that is homotopic to the coherent one is also coherent.
 
 ```agda
 module _
-  {l : Level} {A : UU l} {f : A → A} (F : is-quasicoherently-idempotent-map f)
+  {l : Level} {A : UU l} {f : A → A}
+  (F : is-quasicoherently-idempotent-map f)
+  (I : f ∘ f ~ f)
   where
 
   coherence-is-quasicoherently-idempotent-is-idempotent-map-htpy :
-    (I : f ∘ f ~ f) → is-idempotent-is-quasicoherently-idempotent-map F ~ I →
+    is-idempotent-is-quasicoherently-idempotent-map F ~ I →
     coherence-is-quasicoherently-idempotent-map f I
-  coherence-is-quasicoherently-idempotent-is-idempotent-map-htpy I α =
+  coherence-is-quasicoherently-idempotent-is-idempotent-map-htpy α =
     ( left-whisker-comp² f (inv-htpy α)) ∙h
     ( coh-is-quasicoherently-idempotent-map F) ∙h
     ( right-whisker-comp² α f)
 
   coherence-is-quasicoherently-idempotent-is-idempotent-map-inv-htpy :
-    (I : f ∘ f ~ f) → I ~ is-idempotent-is-quasicoherently-idempotent-map F →
+    I ~ is-idempotent-is-quasicoherently-idempotent-map F →
     coherence-is-quasicoherently-idempotent-map f I
-  coherence-is-quasicoherently-idempotent-is-idempotent-map-inv-htpy I α =
+  coherence-is-quasicoherently-idempotent-is-idempotent-map-inv-htpy α =
     ( left-whisker-comp² f α) ∙h
     ( coh-is-quasicoherently-idempotent-map F) ∙h
     ( right-whisker-comp² (inv-htpy α) f)
 
   is-quasicoherently-idempotent-is-idempotent-map-htpy :
-    (I : f ∘ f ~ f) → is-idempotent-is-quasicoherently-idempotent-map F ~ I →
+    is-idempotent-is-quasicoherently-idempotent-map F ~ I →
     is-quasicoherently-idempotent-map f
-  is-quasicoherently-idempotent-is-idempotent-map-htpy I α =
-    ( I , coherence-is-quasicoherently-idempotent-is-idempotent-map-htpy I α)
+  is-quasicoherently-idempotent-is-idempotent-map-htpy α =
+    ( I , coherence-is-quasicoherently-idempotent-is-idempotent-map-htpy α)
 
   is-quasicoherently-idempotent-is-idempotent-map-inv-htpy :
-    (I : f ∘ f ~ f) → I ~ is-idempotent-is-quasicoherently-idempotent-map F →
+    I ~ is-idempotent-is-quasicoherently-idempotent-map F →
     is-quasicoherently-idempotent-map f
-  is-quasicoherently-idempotent-is-idempotent-map-inv-htpy I α =
+  is-quasicoherently-idempotent-is-idempotent-map-inv-htpy α =
     ( I ,
-      coherence-is-quasicoherently-idempotent-is-idempotent-map-inv-htpy I α)
+      coherence-is-quasicoherently-idempotent-is-idempotent-map-inv-htpy α)
 ```
+
+### Not every idempotent map is quasicoherently idempotent
+
+A counterexample can be constructed using the
+[cantor space](set-theory.cantor-space.md). See Section 4 of {{#cite Shu17}} for
+more details. Note that the statement does not ask for the idempotence witness
+`I : f ∘ f ~ f` to be preserved.
 
 ## See also
 

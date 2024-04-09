@@ -23,16 +23,44 @@ open import foundation-core.sets
 
 ## Idea
 
-An {{#concept "idempotent map" Agda=is-idempotent-map}} is a map `f : A → A`
-[equipped](foundation.structure.md) with a
+An
+{{#concept "idempotent map" Disambiguation="of types" Agda=is-idempotent-map}}
+is a map `f : A → A` [equipped](foundation.structure.md) with a
 [homotopy](foundation-core.homotopies.md)
 
 ```text
   f ∘ f ~ f.
 ```
 
-**Terminology.** Note that our definition of an _idempotent map_ corresponds to
-the definition of a _preidempotent map_ in {{#reference Shu17}} and
+While this definition corresponds to the classical concept of an idempotent map
+in [set](foundation-core.sets.md)-level mathematics, a homotopy `I : f ∘ f ~ f`
+may fail to be coherent with itself in higher mathematics. For instance, one may
+ask for a second order coherence
+
+```text
+  J : f ·r I ~ I ·l f
+```
+
+leading to the definition of a
+[quasicoherently idempotent map](foundation.quasicoherently-idempotent-maps.md).
+
+The situation may be compared against that of
+[invertible maps](foundation-core.invertible-maps.md) vs.
+[coherently invertible maps](foundation-core.coherently-invertible-maps.md).
+Recall that an _invertible map_ is a map `f : A → B` equipped with a converse
+map `g : B → A` and homotopies `S : f ∘ g ~ id` and `R : g ∘ f ~ id` witnessing
+that `g` is an _inverse_ of `f`, while a _coherently invertible map_ has an
+additional coherence `f ·r R ~ S ·l f`.
+
+It is true that every invertible map is coherently invertible, but no such
+construction preserves both of the homotopies `S` and `R`. Likewise, every
+quasicoherently idempotent map is also coherently idempotent, although again the
+coherence `J` is replaced as part of this construction. On the other hand, not
+every idempotent map can be made to be fully coherent or even quasicoherent. For
+a counterexample see Section 4 of {{#cite Shu17}}.
+
+**Terminology.** Our definition of an _idempotent map_ corresponds to the
+definition of a _preidempotent map_ in {{#reference Shu17}} and
 {{#reference Shu14SplittingIdempotents}}, while their definition of an
 _idempotent map_ corresponds in our terminology to a _coherently idempotent
 map_.
