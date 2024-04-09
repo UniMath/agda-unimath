@@ -126,7 +126,7 @@ right-unit-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   ap (one-ℤ +ℤ_) (right-unit-law-mul-ℤ (inr (inr n)))
 ```
 
-### Negative unit laws
+### Multiplication of an integer by `-1` is equal to the negative
 
 ```agda
 left-neg-unit-law-mul-ℤ : (k : ℤ) → neg-one-ℤ *ℤ k ＝ neg-ℤ k

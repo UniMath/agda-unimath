@@ -70,7 +70,7 @@ right-unit-law-mul-ℚ x =
   ( is-retraction-rational-fraction-ℚ x)
 ```
 
-### Negative unit laws for multiplication on rational numbers
+### Multiplication of a rational number by `-1` is equal to the negative
 
 ```agda
 left-neg-unit-law-mul-ℚ : (x : ℚ) → neg-one-ℚ *ℚ x ＝ neg-ℚ x
