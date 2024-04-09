@@ -252,7 +252,7 @@ abstract
   neg-neg-ℚ x = eq-ℚ (neg-ℚ (neg-ℚ x)) x (neg-neg-ℤ (numerator-ℚ x)) refl
 ```
 
-### The reflecting map from fraction-ℤ to ℚ
+### The reflecting map from `fraction-ℤ` to `ℚ`
 
 ```agda
 reflecting-map-sim-fraction :
