@@ -26,6 +26,7 @@ open import foundation.quasicoherently-idempotent-maps
 open import foundation.retracts-of-types
 open import foundation.sequential-limits
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.weakly-constant-maps
@@ -294,6 +295,36 @@ module _
       is-equiv-map-essentially-unique-splitting-type-is-split-idempotent-map
         ( H)
         ( H'))
+```
+
+### The type of split idempotent maps on `A` is equivalent to retracts of `A`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  compute-split-idempotent-map : split-idempotent-map l2 A ≃ retracts l2 A
+  compute-split-idempotent-map =
+    equivalence-reasoning
+    Σ ( A → A)
+      ( λ f →
+        Σ ( UU l2)
+          ( λ B →
+            Σ ( B retract-of A)
+              ( λ (i , r , R) → i ∘ r ~ f)))
+    ≃ Σ (A → A) (λ f → (Σ (retracts l2 A) (λ (B , i , r , R) → i ∘ r ~ f)))
+      by
+      equiv-tot
+        ( λ f →
+          inv-associative-Σ
+            ( UU l2)
+            ( _retract-of A)
+            ( λ (B , i , r , R) → i ∘ r ~ f))
+    ≃ Σ (retracts l2 A) (λ (B , i , r , R) → Σ (A → A) (λ f → i ∘ r ~ f))
+      by equiv-left-swap-Σ
+    ≃ retracts l2 A
+      by equiv-pr1 (λ (B , i , r , R) → is-torsorial-htpy (i ∘ r))
 ```
 
 ### Characterizing equality of split idempotence structures
