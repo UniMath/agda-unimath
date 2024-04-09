@@ -19,9 +19,9 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
+open import foundation.idempotent-maps
 open import foundation.inverse-sequential-diagrams
 open import foundation.path-algebra
-open import foundation.idempotent-maps
 open import foundation.quasiidempotent-maps
 open import foundation.retracts-of-types
 open import foundation.sequential-limits

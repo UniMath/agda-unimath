@@ -25,7 +25,17 @@ open import foundation-core.sets
 
 An {{#concept "idempotent map" Agda=is-idempotent-map}} is a map `f : A → A`
 [equipped](foundation.structure.md) with a
-[homotopy](foundation-core.homotopies.md) `f ∘ f ~ f`.
+[homotopy](foundation-core.homotopies.md)
+
+```text
+  f ∘ f ~ f.
+```
+
+**Terminology.** Note that our definition of an _idempotent map_ corresponds to
+the definition of a _preidempotent map_ in {{#reference Shu17}} and
+{{#reference Shu14SplittingIdempotents}}, while their definition of an
+_idempotent map_ corresponds in our terminology to a _coherently idempotent
+map_.
 
 ## Definitions
 
@@ -98,7 +108,7 @@ module _
 
 ### Idempotence is preserved by homotopies
 
-If a map `g` is homotopic to a idempotent map `f`, then `g` is also idempotent.
+If a map `g` is homotopic to an idempotent map `f`, then `g` is also idempotent.
 
 ```agda
 module _
