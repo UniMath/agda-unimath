@@ -115,7 +115,7 @@ is-one-ℚ x = (x ＝ one-ℚ)
 ```agda
 neg-ℚ : ℚ → ℚ
 pr1 (neg-ℚ (x , H)) = neg-fraction-ℤ x
-pr2 (neg-ℚ (x , H)) = is-reduced-neg-is-reduced-fraction-ℤ x H
+pr2 (neg-ℚ (x , H)) = is-reduced-neg-fraction-ℤ x H
 ```
 
 ### The mediant of two rationals
