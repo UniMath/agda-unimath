@@ -26,6 +26,15 @@ There is a unique map from the empty type into any type. Similarly, for any type
 family over an empty type, there is a unique dependent function taking values in
 this family.
 
+## Definitions
+
+### The initial map into a type
+
+```agda
+initial-map : {l : Level} (A : UU l) → empty → A
+initial-map A = ex-falso
+```
+
 ## Properties
 
 ```agda
