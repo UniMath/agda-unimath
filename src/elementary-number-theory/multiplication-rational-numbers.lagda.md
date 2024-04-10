@@ -85,9 +85,9 @@ module _
 ### If the product of two rational numbers is zero, the left or right factor is zero
 
 ```agda
-is-zero-is-zero-mul-ℚ :
+decide-is-zero-factor-is-zero-mul-ℚ :
   (x y : ℚ) → is-zero-ℚ (x *ℚ y) → (is-zero-ℚ x) + (is-zero-ℚ y)
-is-zero-is-zero-mul-ℚ x y H =
+decide-is-zero-factor-is-zero-mul-ℚ x y H =
   rec-coproduct
     ( inl ∘ is-zero-is-zero-numerator-ℚ x)
     ( inr ∘ is-zero-is-zero-numerator-ℚ y)
@@ -249,7 +249,7 @@ swap-neg-mul-ℚ x y =
 
 ```agda
 left-distributive-mul-add-ℚ :
-  (x y z : ℚ) → x *ℚ (y +ℚ z) ＝ x *ℚ y +ℚ x *ℚ z
+  (x y z : ℚ) → x *ℚ (y +ℚ z) ＝ (x *ℚ y) +ℚ (x *ℚ z)
 left-distributive-mul-add-ℚ x y z =
   eq-ℚ-sim-fraction-ℤ
     ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ (y +ℚ z)))
@@ -291,7 +291,7 @@ left-distributive-mul-add-ℚ x y z =
           ( refl-sim-fraction-ℤ (fraction-ℚ (y +ℚ z))))))
 
 right-distributive-mul-add-ℚ :
-  (x y z : ℚ) → (x +ℚ y) *ℚ z ＝ x *ℚ z +ℚ y *ℚ z
+  (x y z : ℚ) → (x +ℚ y) *ℚ z ＝ (x *ℚ z) +ℚ (y *ℚ z)
 right-distributive-mul-add-ℚ x y z =
   ( commutative-mul-ℚ (x +ℚ y) z) ∙
   ( left-distributive-mul-add-ℚ z x y) ∙
