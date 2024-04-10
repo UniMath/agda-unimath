@@ -1166,7 +1166,7 @@ splitting type of `i ∘ r` is the splitting type as constructed for the witness
 ```
 
 and this is a small sequential limit. Hence `B` is equivalent to a small type,
-and is hence itself small.
+and so is itself small.
 
 ```agda
 module _
