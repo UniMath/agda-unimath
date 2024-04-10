@@ -25,7 +25,7 @@ open import foundation.whiskering-homotopies-composition
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
-open import synthetic-homotopy-theory.equivalences-coforks
+open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers
 open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.universal-property-coequalizers
@@ -173,7 +173,7 @@ module _
     refl-htpy
 
   equiv-cofork-flattening-lemma-sequential-colimit :
-    equiv-cofork
+    equiv-cofork-equiv-double-arrow
       ( cofork-cocone-sequential-diagram _
         ( cocone-sequential-diagram-flattening-lemma c P))
       ( cofork-flattening-lemma-coequalizer
@@ -199,7 +199,7 @@ module _
     flattening-lemma-sequential-colimit dup-c =
       universal-property-sequential-colimit-universal-property-coequalizer
         ( cocone-sequential-diagram-flattening-lemma c P)
-        ( universal-property-coequalizer-equiv-cofork
+        ( universal-property-coequalizer-equiv-cofork-equiv-double-arrow
           ( cofork-cocone-sequential-diagram _
             ( cocone-sequential-diagram-flattening-lemma c P))
           ( cofork-flattening-lemma-coequalizer _

@@ -148,14 +148,14 @@ module _
   pr2 (pr2 right-equiv-arrow-equiv-double-arrow) =
     right-square-equiv-double-arrow
 
-  hom-double-arrow-equiv-double-arrow : hom-double-arrow a a'
-  pr1 hom-double-arrow-equiv-double-arrow =
+  hom-equiv-double-arrow : hom-double-arrow a a'
+  pr1 hom-equiv-double-arrow =
     domain-map-equiv-double-arrow
-  pr1 (pr2 hom-double-arrow-equiv-double-arrow) =
+  pr1 (pr2 hom-equiv-double-arrow) =
     codomain-map-equiv-double-arrow
-  pr1 (pr2 (pr2 hom-double-arrow-equiv-double-arrow)) =
+  pr1 (pr2 (pr2 hom-equiv-double-arrow)) =
     left-square-equiv-double-arrow
-  pr2 (pr2 (pr2 hom-double-arrow-equiv-double-arrow)) =
+  pr2 (pr2 (pr2 hom-equiv-double-arrow)) =
     right-square-equiv-double-arrow
 ```
 
@@ -183,16 +183,16 @@ module _
   (a : double-arrow l1 l2) (a' : double-arrow l3 l4)
   where
 
-  equiv-double-arrow-hom-double-arrow :
+  equiv-hom-double-arrow :
     (h : hom-double-arrow a a') →
     is-equiv (domain-map-hom-double-arrow a a' h) →
     is-equiv (codomain-map-hom-double-arrow a a' h) →
     equiv-double-arrow a a'
-  pr1 (equiv-double-arrow-hom-double-arrow h is-equiv-dom _) =
+  pr1 (equiv-hom-double-arrow h is-equiv-dom _) =
     (domain-map-hom-double-arrow a a' h , is-equiv-dom)
-  pr1 (pr2 (equiv-double-arrow-hom-double-arrow h _ is-equiv-cod)) =
+  pr1 (pr2 (equiv-hom-double-arrow h _ is-equiv-cod)) =
     codomain-map-hom-double-arrow a a' h , is-equiv-cod
-  pr2 (pr2 (equiv-double-arrow-hom-double-arrow h _ _)) =
+  pr2 (pr2 (equiv-hom-double-arrow h _ _)) =
     (left-square-hom-double-arrow a a' h , right-square-hom-double-arrow a a' h)
 ```
 
@@ -220,10 +220,10 @@ module _
 
   comp-equiv-double-arrow : equiv-double-arrow a c
   comp-equiv-double-arrow =
-    equiv-double-arrow-hom-double-arrow a c
+    equiv-hom-double-arrow a c
       ( comp-hom-double-arrow a b c
-        ( hom-double-arrow-equiv-double-arrow b c f)
-        ( hom-double-arrow-equiv-double-arrow a b e))
+        ( hom-equiv-double-arrow b c f)
+        ( hom-equiv-double-arrow a b e))
       ( is-equiv-comp _ _
         ( is-equiv-domain-map-equiv-double-arrow a b e)
         ( is-equiv-domain-map-equiv-double-arrow b c f))
