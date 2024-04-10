@@ -24,6 +24,7 @@ open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.coforks
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
 open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers
@@ -156,7 +157,7 @@ module _
       ( double-arrow-flattening-lemma-coequalizer
         ( double-arrow-sequential-diagram A)
         ( P)
-        ( cofork-cocone-sequential-diagram A c))
+        ( cofork-cocone-sequential-diagram c))
   pr1 equiv-double-arrow-flattening-lemma-sequential-colimit =
     inv-associative-Σ
       ( ℕ)
@@ -174,12 +175,12 @@ module _
 
   equiv-cofork-flattening-lemma-sequential-colimit :
     equiv-cofork-equiv-double-arrow
-      ( cofork-cocone-sequential-diagram _
+      ( cofork-cocone-sequential-diagram
         ( cocone-sequential-diagram-flattening-lemma c P))
       ( cofork-flattening-lemma-coequalizer
         ( double-arrow-sequential-diagram A)
         ( P)
-        ( cofork-cocone-sequential-diagram A c))
+        ( cofork-cocone-sequential-diagram c))
       ( equiv-double-arrow-flattening-lemma-sequential-colimit)
   pr1 equiv-cofork-flattening-lemma-sequential-colimit = id-equiv
   pr1 (pr2 equiv-cofork-flattening-lemma-sequential-colimit) =
@@ -190,7 +191,7 @@ module _
         ( right-unit-htpy) ∙h
         ( left-unit-law-left-whisker-comp
           ( coh-cofork _
-            ( cofork-cocone-sequential-diagram _
+            ( cofork-cocone-sequential-diagram
               ( cocone-sequential-diagram-flattening-lemma c P)))))
 
   abstract
@@ -200,16 +201,16 @@ module _
       universal-property-sequential-colimit-universal-property-coequalizer
         ( cocone-sequential-diagram-flattening-lemma c P)
         ( universal-property-coequalizer-equiv-cofork-equiv-double-arrow
-          ( cofork-cocone-sequential-diagram _
+          ( cofork-cocone-sequential-diagram
             ( cocone-sequential-diagram-flattening-lemma c P))
           ( cofork-flattening-lemma-coequalizer _
             ( P)
-            ( cofork-cocone-sequential-diagram A c))
+            ( cofork-cocone-sequential-diagram c))
           ( equiv-double-arrow-flattening-lemma-sequential-colimit)
           ( equiv-cofork-flattening-lemma-sequential-colimit)
           ( flattening-lemma-coequalizer _
             ( P)
-            ( cofork-cocone-sequential-diagram A c)
+            ( cofork-cocone-sequential-diagram c)
             ( dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
               ( c)
               ( dup-c))))

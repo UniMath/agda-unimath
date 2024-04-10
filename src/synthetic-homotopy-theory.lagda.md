@@ -23,6 +23,7 @@ open import synthetic-homotopy-theory.codiagonals-of-maps public
 open import synthetic-homotopy-theory.coequalizers public
 open import synthetic-homotopy-theory.cofibers public
 open import synthetic-homotopy-theory.coforks public
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams public
 open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.connected-set-bundles-circle public
 open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams public

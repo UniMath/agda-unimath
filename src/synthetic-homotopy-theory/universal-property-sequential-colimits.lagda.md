@@ -24,6 +24,7 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.coforks
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.universal-property-coequalizers
 ```
@@ -157,38 +158,38 @@ module _
     ( {l : Level} →
       universal-property-coequalizer l
         ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c)) →
+        ( cofork-cocone-sequential-diagram c)) →
     universal-property-sequential-colimit c
   universal-property-sequential-colimit-universal-property-coequalizer
     ( up-cofork)
     ( Y) =
     is-equiv-left-map-triangle
       ( cocone-map-sequential-diagram c)
-      ( cocone-sequential-diagram-cofork A)
+      ( cocone-sequential-diagram-cofork)
       ( cofork-map
         ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c))
-      ( triangle-cocone-sequential-diagram-cofork A c)
+        ( cofork-cocone-sequential-diagram c))
+      ( triangle-cocone-sequential-diagram-cofork c)
       ( up-cofork Y)
-      ( is-equiv-cocone-sequential-diagram-cofork A)
+      ( is-equiv-cocone-sequential-diagram-cofork)
 
   universal-property-coequalizer-universal-property-sequential-colimit :
     universal-property-sequential-colimit c →
     ( {l : Level} →
       universal-property-coequalizer l
         ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c))
+        ( cofork-cocone-sequential-diagram c))
   universal-property-coequalizer-universal-property-sequential-colimit
     ( up-sequential-colimit)
     ( Y) =
     is-equiv-top-map-triangle
       ( cocone-map-sequential-diagram c)
-      ( cocone-sequential-diagram-cofork A)
+      ( cocone-sequential-diagram-cofork)
       ( cofork-map
         ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c))
-      ( triangle-cocone-sequential-diagram-cofork A c)
-      ( is-equiv-cocone-sequential-diagram-cofork A)
+        ( cofork-cocone-sequential-diagram c))
+      ( triangle-cocone-sequential-diagram-cofork c)
+      ( is-equiv-cocone-sequential-diagram-cofork)
       ( up-sequential-colimit Y)
 ```
 

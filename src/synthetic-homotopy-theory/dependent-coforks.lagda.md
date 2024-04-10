@@ -163,16 +163,16 @@ module _
   {e : cofork a X} (P : X → UU l4)
   where
 
-  reflexive-htpy-dependent-cofork :
+  refl-htpy-dependent-cofork :
     (k : dependent-cofork a e P) →
     htpy-dependent-cofork a P k k
-  pr1 (reflexive-htpy-dependent-cofork k) = refl-htpy
-  pr2 (reflexive-htpy-dependent-cofork k) = right-unit-htpy
+  pr1 (refl-htpy-dependent-cofork k) = refl-htpy
+  pr2 (refl-htpy-dependent-cofork k) = right-unit-htpy
 
   htpy-dependent-cofork-eq :
     (k k' : dependent-cofork a e P) →
     (k ＝ k') → htpy-dependent-cofork a P k k'
-  htpy-dependent-cofork-eq k .k refl = reflexive-htpy-dependent-cofork k
+  htpy-dependent-cofork-eq k .k refl = refl-htpy-dependent-cofork k
 
   abstract
     is-torsorial-htpy-dependent-cofork :
