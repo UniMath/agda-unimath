@@ -86,27 +86,29 @@ is-contr-is-trivial-Commutative-Ring A p =
   is-contr-is-trivial-Ring (ring-Commutative-Ring A) p
 ```
 
-### The type of zero commutative rings is contractible
+### The trivial ring
 
 ```agda
-0-ring : Ring lzero
-pr1 0-ring = ab-0-group
-pr1 (pr1 (pr2 0-ring)) = λ x y → star
-pr2 (pr1 (pr2 0-ring)) = λ x y z → refl
-pr1 (pr1 (pr2 (pr2 0-ring))) = star
-pr1 (pr2 (pr1 (pr2 (pr2 0-ring)))) star = refl
-pr2 (pr2 (pr1 (pr2 (pr2 0-ring)))) star = refl
-pr2 (pr2 (pr2 0-ring)) = (λ a b c → refl) , (λ a b c → refl)
+trivial-Ring : Ring lzero
+pr1 trivial-Ring = trivial-Ab
+pr1 (pr1 (pr2 trivial-Ring)) x y = star
+pr2 (pr1 (pr2 trivial-Ring)) x y z = refl
+pr1 (pr1 (pr2 (pr2 trivial-Ring))) = star
+pr1 (pr2 (pr1 (pr2 (pr2 trivial-Ring)))) star = refl
+pr2 (pr2 (pr1 (pr2 (pr2 trivial-Ring)))) star = refl
+pr2 (pr2 (pr2 trivial-Ring)) = (λ a b c → refl) , (λ a b c → refl)
 
-is-commutative-0-Ring : is-commutative-Ring 0-ring
-is-commutative-0-Ring = λ x y → refl
+is-commutative-trivial-Ring : is-commutative-Ring trivial-Ring
+is-commutative-trivial-Ring x y = refl
 
-0-cRing : Commutative-Ring lzero
-0-cRing = 0-ring , is-commutative-0-Ring
+trivial-Commutative-Ring : Commutative-Ring lzero
+trivial-Commutative-Ring = (trivial-Ring , is-commutative-trivial-Ring)
 
-is-trivial-0-cRing : is-trivial-Commutative-Ring 0-cRing
-is-trivial-0-cRing = refl
+is-trivial-trivial-Commutative-Ring : is-trivial-Commutative-Ring trivial-Commutative-Ring
+is-trivial-trivial-Commutative-Ring = refl
 ```
+
+### The type of trivial rings is contractible
 
 To-do: complete proof of uniqueness of the zero ring using SIP, ideally refactor
 code to do zero algebras all along the chain to prettify and streamline future

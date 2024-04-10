@@ -10,11 +10,14 @@ module group-theory.trivial-groups where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.identity-types
 
 open import group-theory.abelian-groups
 open import group-theory.groups
@@ -44,60 +47,38 @@ module _
 
   is-trivial-Group : UU l1
   is-trivial-Group = type-Prop is-trivial-prop-Group
+```
 
-  is-prop-is-trivial-Group : is-prop is-trivial-Group
-  is-prop-is-trivial-Group = is-prop-type-Prop is-trivial-prop-Group
+### The type of trivial groups
 
-trivial-groups : {l : Level} → UU (lsuc l)
-trivial-groups = Σ (Group _) is-trivial-Group
+```agda
+Trivial-Group : (l : Level) → UU (lsuc l)
+Trivial-Group l = Σ (Group l) is-trivial-Group
+```
+
+### The trivial group
+
+```agda
+trivial-Group : Group lzero
+pr1 (pr1 trivial-Group) = unit-Set
+pr1 (pr2 (pr1 trivial-Group)) x y = star
+pr2 (pr2 (pr1 trivial-Group)) x y z = refl
+pr1 (pr2 trivial-Group) = (star , (refl-htpy , refl-htpy))
+pr2 (pr2 trivial-Group) = ((λ x → star) , refl-htpy , refl-htpy)
 ```
 
 ## Properties
 
 ### The type of subgroups of a trivial group is contractible
 
-```agda
-module _
-  {l1 : Level} (G : Group l1)
-  where
+This remains to be done.
 
-  abstract
-    is-contr-subgroup-is-trivial-Group :
-      is-trivial-Group G → is-contr (Subgroup l1 G)
-    pr1 (is-contr-subgroup-is-trivial-Group H) =
-      trivial-Subgroup G
-    pr2 (is-contr-subgroup-is-trivial-Group H) K =
-      eq-has-same-elements-Subgroup G
-        ( trivial-Subgroup G)
-        ( K)
-        ( λ x →
-          ( λ where refl → contains-unit-Subgroup G K) ,
-          ( λ _ →
-            is-closed-under-eq-Subgroup G
-              ( trivial-Subgroup G)
-              ( contains-unit-Subgroup G (trivial-Subgroup G))
-              ( eq-is-contr H)))
-```
-
-### "The" trivial group is abelian
+### The trivial group is abelian
 
 ```agda
-0-group : Group lzero
-pr1 (pr1 0-group) = unit-Set
-pr1 (pr2 (pr1 0-group)) = λ x y → star
-pr2 (pr2 (pr1 0-group)) = λ x y z → refl
-pr1 (pr2 0-group) = star , ((λ x → refl) , (λ x → refl))
-pr2 (pr2 0-group) = (λ x → star) , (λ x → refl) , (λ x → refl)
+is-abelian-trivial-Group : is-abelian-Group trivial-Group
+is-abelian-trivial-Group x y = refl
 
-is-abelian-0-group : is-abelian-Group 0-group
-is-abelian-0-group = λ x y → refl
-
-ab-0-group : Ab lzero
-ab-0-group = 0-group , is-abelian-0-group
+trivial-Ab : Ab lzero
+trivial-Ab = (trivial-Group , is-abelian-trivial-Group)
 ```
-
-### The type of trivial groups is contractible
-
-This remains to be done. It requires first classifying identity types of groups
-using the structure identity principle, shouldn't be too hard (perhaps it's
-already a lemma in the category-theory modules?) but needs to be done.
