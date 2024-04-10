@@ -159,6 +159,43 @@ module _
     right-square-equiv-double-arrow
 ```
 
+### Equivalences of double arrows induced by morphisms of double arrows whose maps are equivalences
+
+Given a [morphism of double arrows](foundation.morphisms-double-arrows.md)
+
+```text
+           i                   i
+     A --------> X       A --------> X
+     |           |       |           |
+   f |           | h   g |           | k
+     |           |       |           |
+     ∨           ∨       ∨           ∨
+     B --------> Y       B --------> Y ,
+           j                   j
+```
+
+it suffices to show that `i` and `j` are equivalences to obtain an equivalence
+of double arrows.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (a : double-arrow l1 l2) (a' : double-arrow l3 l4)
+  where
+
+  equiv-double-arrow-hom-double-arrow :
+    (h : hom-double-arrow a a') →
+    is-equiv (domain-map-hom-double-arrow a a' h) →
+    is-equiv (codomain-map-hom-double-arrow a a' h) →
+    equiv-double-arrow a a'
+  pr1 (equiv-double-arrow-hom-double-arrow h is-equiv-dom _) =
+    (domain-map-hom-double-arrow a a' h , is-equiv-dom)
+  pr1 (pr2 (equiv-double-arrow-hom-double-arrow h _ is-equiv-cod)) =
+    codomain-map-hom-double-arrow a a' h , is-equiv-cod
+  pr2 (pr2 (equiv-double-arrow-hom-double-arrow h _ _)) =
+    (left-square-hom-double-arrow a a' h , right-square-hom-double-arrow a a' h)
+```
+
 ### The identity equivalence of double arrows
 
 ```agda
@@ -181,45 +218,40 @@ module _
   (f : equiv-double-arrow b c) (e : equiv-double-arrow a b)
   where
 
+  comp-equiv-double-arrow : equiv-double-arrow a c
+  comp-equiv-double-arrow =
+    equiv-double-arrow-hom-double-arrow a c
+      ( comp-hom-double-arrow a b c
+        ( hom-double-arrow-equiv-double-arrow b c f)
+        ( hom-double-arrow-equiv-double-arrow a b e))
+      ( is-equiv-comp _ _
+        ( is-equiv-domain-map-equiv-double-arrow a b e)
+        ( is-equiv-domain-map-equiv-double-arrow b c f))
+      ( is-equiv-comp _ _
+        ( is-equiv-codomain-map-equiv-double-arrow a b e)
+        ( is-equiv-codomain-map-equiv-double-arrow b c f))
+
   domain-equiv-comp-equiv-double-arrow :
     domain-double-arrow a ≃ domain-double-arrow c
   domain-equiv-comp-equiv-double-arrow =
-    domain-equiv-equiv-double-arrow b c f ∘e
-    domain-equiv-equiv-double-arrow a b e
+    domain-equiv-equiv-double-arrow a c comp-equiv-double-arrow
 
   codomain-equiv-comp-equiv-double-arrow :
     codomain-double-arrow a ≃ codomain-double-arrow c
   codomain-equiv-comp-equiv-double-arrow =
-    codomain-equiv-equiv-double-arrow b c f ∘e
-    codomain-equiv-equiv-double-arrow a b e
+    codomain-equiv-equiv-double-arrow a c comp-equiv-double-arrow
 
   left-square-comp-equiv-double-arrow :
     left-coherence-equiv-double-arrow a c
       ( domain-equiv-comp-equiv-double-arrow)
       ( codomain-equiv-comp-equiv-double-arrow)
   left-square-comp-equiv-double-arrow =
-    coh-comp-equiv-arrow
-      ( left-map-double-arrow a)
-      ( left-map-double-arrow b)
-      ( left-map-double-arrow c)
-      ( left-equiv-arrow-equiv-double-arrow b c f)
-      ( left-equiv-arrow-equiv-double-arrow a b e)
+    left-square-equiv-double-arrow a c comp-equiv-double-arrow
 
   right-square-comp-equiv-double-arrow :
     right-coherence-equiv-double-arrow a c
       ( domain-equiv-comp-equiv-double-arrow)
       ( codomain-equiv-comp-equiv-double-arrow)
   right-square-comp-equiv-double-arrow =
-    coh-comp-equiv-arrow
-      ( right-map-double-arrow a)
-      ( right-map-double-arrow b)
-      ( right-map-double-arrow c)
-      ( right-equiv-arrow-equiv-double-arrow b c f)
-      ( right-equiv-arrow-equiv-double-arrow a b e)
-
-  comp-equiv-double-arrow : equiv-double-arrow a c
-  pr1 comp-equiv-double-arrow = domain-equiv-comp-equiv-double-arrow
-  pr1 (pr2 comp-equiv-double-arrow) = codomain-equiv-comp-equiv-double-arrow
-  pr1 (pr2 (pr2 comp-equiv-double-arrow)) = left-square-comp-equiv-double-arrow
-  pr2 (pr2 (pr2 comp-equiv-double-arrow)) = right-square-comp-equiv-double-arrow
+    right-square-equiv-double-arrow a c comp-equiv-double-arrow
 ```
