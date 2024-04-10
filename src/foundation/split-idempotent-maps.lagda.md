@@ -246,6 +246,21 @@ module _
 This is Lemma 3.4 in {{#cite Shu17}}. Note that it does not require any
 postulates.
 
+**Proof.** Given two splittings of an endomap `f : A → A`, with
+inclusion-retraction pairs `i , r` and `i' , r'`, we get mutual inverse maps
+between the splitting types
+
+```text
+  r' ∘ i : B → B'    and    r ∘ i' : B' → B.
+```
+
+The computation that they form mutual inverses is straightforward:
+
+```text
+                   rR'i        R
+  r ∘ i' ∘ r' ∘ i   ~   r ∘ i  ~  id.
+```
+
 ```agda
 module _
   {l1 : Level} {A : UU l1} {f : A → A}
@@ -309,6 +324,8 @@ module _
 
 ### The type of split idempotent maps on `A` is equivalent to retracts of `A`
 
+Note that the proof relies on the function extensionality axiom.
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1}
@@ -324,7 +341,7 @@ module _
             Σ ( B retract-of A)
               ( λ (i , r , R) → i ∘ r ~ f)))
     ≃ Σ (A → A) (λ f → (Σ (retracts l2 A) (λ (B , i , r , R) → i ∘ r ~ f)))
-      by
+    by
       equiv-tot
         ( λ f →
           inv-associative-Σ
@@ -332,12 +349,16 @@ module _
             ( _retract-of A)
             ( λ (B , i , r , R) → i ∘ r ~ f))
     ≃ Σ (retracts l2 A) (λ (B , i , r , R) → Σ (A → A) (λ f → i ∘ r ~ f))
-      by equiv-left-swap-Σ
+    by equiv-left-swap-Σ
     ≃ retracts l2 A
-      by equiv-pr1 (λ (B , i , r , R) → is-torsorial-htpy (i ∘ r))
+    by equiv-pr1 (λ (B , i , r , R) → is-torsorial-htpy (i ∘ r))
 ```
 
 ### Characterizing equality of split idempotence structures
+
+We characterize equality of witnesses that an endomap `f` is split idempotent as
+equivalences of splitting types such that the evident retracts are homotopic. In
+particular, this characterization relies on the univalence axiom.
 
 ```agda
 module _
@@ -457,6 +478,14 @@ module _
 
 This is Lemma 3.3 in {{#cite Shu17}}.
 
+**Proof.** Given a split idempotent map `f` with splitting `R : r ∘ i ~ id` and
+homotopy `H : i ∘ r ~ f`, then `f` is idempotent via the following witness
+
+```text
+       (H◽H)⁻¹            iRr        H
+  f ∘ f  ~  i ∘ r ∘ i ∘ r  ~  i ∘ r  ~  f.
+```
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {f : A → A} (H : is-split-idempotent l2 f)
@@ -486,6 +515,10 @@ module _
 
 This is Lemma 3.6 in {{#cite Shu17}}. We follow a more direct route as we have
 already shown that quasicoherent idempotents are closed under homotopy.
+
+**Proof.** We have already seen that inclusion-retraction composites are
+quasicoherently idempotent, and since every split idempotent is homotopic to an
+inclusion-retraction composite we are done.
 
 ```agda
 module _
