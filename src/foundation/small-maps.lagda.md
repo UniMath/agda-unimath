@@ -25,8 +25,8 @@ A map is said to be
 [fibers](foundation-core.fibers-of-maps.md) are
 [small](foundation-core.small-types.md).
 
-More specifically, a map `f : A → B` is said to be _small_ with respect to a
-universe `𝒰` if, for every `b : B`, the fiber of `f` over `y`
+More specifically, a map `f : A → B` is _small_ with respect to a universe `𝒰`
+if, for every `b : B`, the fiber of `f` over `y`
 
 ```text
   fiber f b ≐ Σ (x : A), (f x ＝ b),
@@ -60,16 +60,14 @@ abstract
 ### Being a small map is a property
 
 ```agda
-abstract
-  is-prop-is-small-map :
-    (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-prop (is-small-map l f)
-  is-prop-is-small-map l f =
-    is-prop-Π (λ x → is-prop-is-small l (fiber f x))
+module _
+  (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
 
-is-small-map-Prop :
-  (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  Prop (lsuc l ⊔ l1 ⊔ l2)
-pr1 (is-small-map-Prop l f) = is-small-map l f
-pr2 (is-small-map-Prop l f) = is-prop-is-small-map l f
+  abstract
+    is-prop-is-small-map : is-prop (is-small-map l f)
+    is-prop-is-small-map = is-prop-Π (λ x → is-prop-is-small l (fiber f x))
+
+  is-small-map-Prop : Prop (lsuc l ⊔ l1 ⊔ l2)
+  is-small-map-Prop = is-small-map l f , is-prop-is-small-map
 ```

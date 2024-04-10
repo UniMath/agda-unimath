@@ -943,11 +943,11 @@ notation of {{#cite Shu17}}:
 ```text
               ξₙ₊₁               I aₙ₊₁             f (αₙ₊₁)⁻¹
     f a₀ ------------> f (f aₙ₊₁) ---> f aₙ₊₁ --------------------> f (f aₙ₊₂)
-     |                    |                  [nat-htpy]  ___ refl__/   |
+     |                    |                  [nat-htpy]  ___refl___/   |
   (I⁻¹ a₀)    [Ξₙ]        |       I (f aₙ₊₂)            /         (f ∘ f)(αₙ₊₂)
-     ∨                    ∨        ------->           /                ∨
+     ∨                    ∨         ------>           /                ∨
   f (f a₀) --------> f (f (f aₙ₊₂))   [J]   f (f aₙ₊₂) ----------> f (f (f aₙ₊₃))
-     (f (ξₙ ∙ I aₙ₊₁ ∙ f αₙ₊₁))     ------->          (f ∘ f) (αₙ₊₂)
+     (f (ξₙ ∙ I aₙ₊₁ ∙ f αₙ₊₁))     ------>           (f ∘ f) (αₙ₊₂)
                                   f (I aₙ₊₂)
 ```
 
@@ -1017,7 +1017,11 @@ Note, in particular, that the left-hand square is the inductive hypothesis.
             ( a , α)
         I : is-idempotent f
         I = pr1 H
+```
 
+Now it only remains to put it all together.
+
+```agda
   abstract
     compute-retraction-splitting-type-is-quasicoherently-idempotent :
       map-retraction-splitting-type-is-quasicoherently-idempotent ∘
