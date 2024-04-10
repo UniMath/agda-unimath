@@ -130,8 +130,6 @@ module _
 
 ### Second-order inverse laws
 
-<!-- TODO these names may be reevaluated in the future -->
-
 ```agda
 module _
   {l : Level} {A : UU l} {x y z : A}

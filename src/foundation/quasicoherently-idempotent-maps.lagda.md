@@ -208,62 +208,53 @@ module _
           ( is-idempotent-is-quasicoherently-idempotent F)
           ( H))
     coherence-is-quasicoherently-idempotent-htpy H =
+      homotopy-reasoning
+      ( g ·l is-idempotent-htpy I H)
+      ~ ( H ·r (g ∘ g)) ∙h
+        ( f ·l (g ·l H ∙h H ·r f ∙h I ∙h inv-htpy H)) ∙h
+        ( inv-htpy (H ·r g))
+      by
       ( right-transpose-htpy-concat
-        ( g ·l
-          is-idempotent-htpy
-            ( is-idempotent-is-quasicoherently-idempotent F)
-            ( H))
+        ( g ·l is-idempotent-htpy I H)
         ( H ·r g)
-        ( H ·r (g ∘ g) ∙h
-          ( ( f) ·l
-            ( g ·l H ∙h
-              H ·r f ∙h
-              is-idempotent-is-quasicoherently-idempotent F ∙h inv-htpy H)))
-        ( inv-htpy
-          ( ( nat-htpy H) ∘
-            ( g ·l H ∙h
-              H ·r f ∙h
-              is-idempotent-is-quasicoherently-idempotent F ∙h
-              inv-htpy H)))) ∙h
+        ( H ·r (g ∘ g) ∙h (f ·l (g ·l H ∙h H ·r f ∙h I ∙h inv-htpy H)))
+        ( inv-htpy (nat-htpy H ∘ (g ·l H ∙h H ·r f ∙h I ∙h inv-htpy H))))
+      ~ g ·l H ·r g ∙h H ·r (f ∘ g) ∙h I ·r g ∙h inv-htpy (H ·r g)
+      by
       ( ap-concat-htpy'
         ( inv-htpy (H ·r g))
         ( ( ap-concat-htpy
             ( H ·r ((g ∘ g)))
             ( ( distributive-left-whisker-comp-concat f
-                ( g ·l H ∙h
-                  H ·r f ∙h
-                  is-idempotent-is-quasicoherently-idempotent F)
+                ( g ·l H ∙h H ·r f ∙h I)
                 ( inv-htpy H)) ∙h
               ( ap-concat-htpy'
                 ( f ·l inv-htpy H)
                 ( ( distributive-left-whisker-comp-concat f
-                    ( g ·l H ∙h H ·r f)
-                    ( is-idempotent-is-quasicoherently-idempotent F)) ∙h
+                    (g ·l H ∙h H ·r f)
+                    ( I)) ∙h
                   ( ap-binary-concat-htpy
-                    ( distributive-left-whisker-comp-concat f
-                      ( g ·l H)
-                      ( H ·r f))
+                    ( distributive-left-whisker-comp-concat f (g ·l H) (H ·r f))
                     ( coh-is-quasicoherently-idempotent F)))) ∙h
               ( assoc-htpy
                 ( f ·l g ·l H ∙h f ·l H ·r f)
-                ( is-idempotent-is-quasicoherently-idempotent F ·r f)
+                ( I ·r f)
                 ( f ·l inv-htpy H)) ∙h
               ( ap-concat-htpy
                 ( f ·l g ·l H ∙h f ·l H ·r f)
-                ( ( nat-htpy (is-idempotent-is-quasicoherently-idempotent F)) ∘
-                  ( inv-htpy H))) ∙h
+                ( nat-htpy I ∘ inv-htpy H)) ∙h
               ( inv-htpy
                 ( assoc-htpy
                   ( f ·l g ·l H ∙h f ·l H ·r f)
                   ( (f ∘ f) ·l inv-htpy H)
-                  ( is-idempotent-is-quasicoherently-idempotent F ·r g))))) ∙h
+                  ( I ·r g))))) ∙h
           ( inv-htpy
             ( assoc-htpy
               ( H ·r (g ∘ g))
               ( f ·l g ·l H ∙h f ·l H ·r f ∙h (f ∘ f) ·l inv-htpy H)
-              ( is-idempotent-is-quasicoherently-idempotent F ·r g))) ∙h
+              ( I ·r g))) ∙h
           ( ap-concat-htpy'
-            ( is-idempotent-is-quasicoherently-idempotent F ·r g)
+            ( I ·r g)
             ( ( ap-concat-htpy
                 ( H ·r (g ∘ g))
                 ( ap-concat-htpy'
@@ -277,6 +268,9 @@ module _
                     ( left-whisker-inv-htpy (f ∘ f) H)) ∙h
                   ( right-right-inv-htpy (f ·l H ·r g) ((f ∘ f) ·l H)))) ∙h
               ( nat-htpy H ∘ (H ·r g))))))
+      where
+        I : is-idempotent f
+        I = is-idempotent-is-quasicoherently-idempotent F
 
   is-quasicoherently-idempotent-htpy :
     g ~ f → is-quasicoherently-idempotent g

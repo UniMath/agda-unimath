@@ -93,8 +93,6 @@ module _
 
 ### Second-order inverse laws for left whiskered homotopies
 
-<!-- TODO these names may be reevaluated in the future -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
