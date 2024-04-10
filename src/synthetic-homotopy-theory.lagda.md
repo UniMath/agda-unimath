@@ -46,6 +46,7 @@ open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
+open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows public
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
@@ -69,6 +70,7 @@ open import synthetic-homotopy-theory.joins-of-types public
 open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.maps-of-prespectra public
 open import synthetic-homotopy-theory.mere-spheres public
+open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows public
 open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams public

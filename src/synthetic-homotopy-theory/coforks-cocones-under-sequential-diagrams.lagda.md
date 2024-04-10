@@ -29,7 +29,11 @@ open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-coforks
+open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams
+open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams
+open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams
+open import synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
 ```
@@ -107,6 +111,16 @@ In the dependent setting,
 over a cocone `c` correspond to
 [dependent coforks](synthetic-homotopy-theory.dependent-coforks.md) over the
 cofork induced by `c`.
+
+Additionally,
+[morphisms](synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams.md)
+of cocones under morphisms of sequential diagrams induce
+[morphisms](synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows.md)
+of coforks under the induced morphisms of double arrows. It follows that
+[equivalences](synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams.md)
+of cocones under equivalences of sequential diagrams induce
+[equivalences](synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows.md)
+of coforks under the induced equivalences of double arrows.
 
 ## Definitions
 
@@ -227,6 +241,114 @@ module _
     ind-Σ (map-dependent-cocone-sequential-diagram P d)
   pr2 (dependent-cofork-dependent-cocone-sequential-diagram d) =
     ind-Σ (coherence-triangle-dependent-cocone-sequential-diagram P d)
+```
+
+### Morphisms of coforks under morphisms of double arrows induced by morphisms of cocones under morphisms of sequential diagrams
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : sequential-diagram l1} {X : UU l2} (c : cocone-sequential-diagram A X)
+  {B : sequential-diagram l3} {Y : UU l4} (c' : cocone-sequential-diagram B Y)
+  (h : hom-sequential-diagram A B)
+  where
+
+  coh-map-hom-cofork-hom-cocone-hom-sequential-diagram :
+    (u : X → Y) →
+    coherence-map-cocone-hom-cocone-hom-sequential-diagram c c' h u →
+    coherence-map-cofork-hom-cofork-hom-double-arrow
+      ( cofork-cocone-sequential-diagram c)
+      ( cofork-cocone-sequential-diagram c')
+      ( hom-double-arrow-hom-sequential-diagram A B h)
+      ( u)
+  coh-map-hom-cofork-hom-cocone-hom-sequential-diagram u H =
+    inv-htpy (ind-Σ H)
+
+  coh-hom-cofork-hom-cocone-hom-sequential-diagram :
+    (u : X → Y) →
+    (H : coherence-map-cocone-hom-cocone-hom-sequential-diagram c c' h u) →
+    coherence-hom-cocone-hom-sequential-diagram c c' h u H →
+    coherence-hom-cofork-hom-double-arrow
+      ( cofork-cocone-sequential-diagram c)
+      ( cofork-cocone-sequential-diagram c')
+      ( hom-double-arrow-hom-sequential-diagram A B h)
+      ( u)
+      ( coh-map-hom-cofork-hom-cocone-hom-sequential-diagram u H)
+  coh-hom-cofork-hom-cocone-hom-sequential-diagram u H K =
+    ( right-whisker-concat-htpy
+      ( right-unit-htpy)
+      ( λ (n , a) →
+        coherence-cocone-sequential-diagram c' n
+          ( map-hom-sequential-diagram B h n a))) ∙h
+    ( ind-Σ
+      ( λ n →
+        ( vertical-coherence-prism-inv-squares-maps-vertical-coherence-prism-maps
+          ( map-cocone-sequential-diagram c n)
+          ( map-cocone-sequential-diagram c (succ-ℕ n))
+          ( map-sequential-diagram A n)
+          ( map-cocone-sequential-diagram c' n)
+          ( map-cocone-sequential-diagram c' (succ-ℕ n))
+          ( map-sequential-diagram B n)
+          ( map-hom-sequential-diagram B h n)
+          ( map-hom-sequential-diagram B h (succ-ℕ n))
+          ( u)
+          ( coherence-cocone-sequential-diagram c n)
+          ( H n)
+          ( H (succ-ℕ n))
+          ( naturality-map-hom-sequential-diagram B h n)
+          ( coherence-cocone-sequential-diagram c' n)
+          ( K n)) ∙h
+        ( inv-htpy-assoc-htpy
+          ( u ·l coherence-cocone-sequential-diagram c n)
+          ( inv-htpy (H (succ-ℕ n) ·r map-sequential-diagram A n))
+          ( ( map-cocone-sequential-diagram c' (succ-ℕ n)) ·l
+            ( inv-htpy (naturality-map-hom-sequential-diagram B h n)))) ∙h
+        ( left-whisker-concat-htpy _
+          ( inv-htpy
+            ( λ a →
+              compute-ap-ind-Σ-eq-pair-eq-fiber
+                ( map-cocone-sequential-diagram c')
+                ( inv-htpy (naturality-map-hom-sequential-diagram B h n) a))))))
+
+  hom-cofork-hom-cocone-hom-sequential-diagram :
+    hom-cocone-hom-sequential-diagram c c' h →
+    hom-cofork-hom-double-arrow
+      ( cofork-cocone-sequential-diagram c)
+      ( cofork-cocone-sequential-diagram c')
+      ( hom-double-arrow-hom-sequential-diagram A B h)
+  hom-cofork-hom-cocone-hom-sequential-diagram =
+    tot
+      ( λ u →
+        map-Σ _
+          ( coh-map-hom-cofork-hom-cocone-hom-sequential-diagram u)
+          ( coh-hom-cofork-hom-cocone-hom-sequential-diagram u))
+```
+
+### Equivalences of coforks under equivalences of double arrows induced by equivalences of cocones under equivalences of sequential diagrams
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : sequential-diagram l1} {X : UU l2} (c : cocone-sequential-diagram A X)
+  {B : sequential-diagram l3} {Y : UU l4} (c' : cocone-sequential-diagram B Y)
+  (e : equiv-sequential-diagram A B)
+  where
+
+  equiv-cofork-equiv-cocone-equiv-sequential-diagram :
+    equiv-cocone-equiv-sequential-diagram c c' e →
+    equiv-cofork-equiv-double-arrow
+      ( cofork-cocone-sequential-diagram c)
+      ( cofork-cocone-sequential-diagram c')
+      ( equiv-double-arrow-equiv-sequential-diagram A B e)
+  equiv-cofork-equiv-cocone-equiv-sequential-diagram e' =
+    equiv-hom-cofork-equiv-double-arrow
+      ( cofork-cocone-sequential-diagram c)
+      ( cofork-cocone-sequential-diagram c')
+      ( equiv-double-arrow-equiv-sequential-diagram A B e)
+      ( hom-cofork-hom-cocone-hom-sequential-diagram c c'
+        ( hom-equiv-sequential-diagram B e)
+        ( hom-equiv-cocone-equiv-sequential-diagram c c' e e'))
+      ( is-equiv-map-equiv-cocone-equiv-sequential-diagram c c' e e')
 ```
 
 ## Properties

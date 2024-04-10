@@ -334,7 +334,22 @@ module _
   compute-ap-map-Σ-map-base-eq-pair-Σ refl refl = refl
 ```
 
-#### Computing the inverse of `equiv-tot`
+### The action of `ind-Σ` on identifications in fibers of dependent pair types is given by the action of the fibers of the function with the first argument fixed
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : A → UU l2} {C : UU l3}
+  (f : (a : A) (b : B a) → C)
+  where
+
+  compute-ap-ind-Σ-eq-pair-eq-fiber :
+    {a : A} {b b' : B a} (p : b ＝ b') →
+    ap (ind-Σ f) (eq-pair-eq-fiber p) ＝ ap (f a) p
+  compute-ap-ind-Σ-eq-pair-eq-fiber refl = refl
+```
+
+### Computing the inverse of `equiv-tot`
 
 ```agda
 module _
