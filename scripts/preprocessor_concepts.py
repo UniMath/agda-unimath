@@ -11,13 +11,16 @@ import time
 from utils import eprint
 
 CONCEPT_REGEX = re.compile(
-    r'\{\{#concept "([^"]+)"(.*?)\}\}')
+    r'\{\{#concept "([^=\n"]+)"(.*?)\}\}')
 
 WIKIDATA_ID_REGEX = re.compile(
     r'WDID=(\S+)')
 
 WIKIDATA_LABEL_REGEX = re.compile(
-    r'WD="([^"]+)"')
+    r'WD="([^=\n"]+)"')
+
+DISAMBIGUATION_REGEX = re.compile(
+    r'Disambiguation="([^=\n"]+)"')
 
 AGDA_REGEX = re.compile(
     r'Agda=(\S+)')
@@ -30,10 +33,26 @@ EXTERNAL_LINKS_REGEX = re.compile(
 
 LEFTOVER_CONCEPT_REGEX = re.compile(r'\{\{#concept.*')
 
+# Python's html.escape transforms a single quote into &#x27;, but Agda
+# transforms it into &#39;, so we just rewrite the replacement ourselves.
+#
+# https://github.com/jaspervdj/blaze-markup/blob/master/src/Text/Blaze/Renderer/String.hs#L25
+ESCAPE_TRANSLATION_TABLE = str.maketrans({
+    '<': '&lt;',
+    '>': '&gt;',
+    '&': '&amp;',
+    '"': '&quot;',
+    "'": '&#39;'
+})
+
+
+def agda_escape_html(string):
+    return string.translate(ESCAPE_TRANSLATION_TABLE)
+
 
 def make_definition_regex(definition):
     return re.compile(
-        r'<a id="(\d+)" href="[^"]+" class="[^"]+">' + re.escape(definition) + r'</a>')
+        r'<a id="(\d+)" href="[^"]+" class="[^"]+">' + re.escape(agda_escape_html(definition)) + r'</a>')
 
 
 def does_support(backend):
@@ -54,6 +73,13 @@ def match_wikidata_label(meta_text):
     return m.group(1)
 
 
+def match_disambiguation(meta_text):
+    m = DISAMBIGUATION_REGEX.search(meta_text)
+    if m is None:
+        return None
+    return m.group(1)
+
+
 def match_agda_name(meta_text):
     m = AGDA_REGEX.search(meta_text)
     if m is None:
@@ -66,7 +92,6 @@ def get_definition_id(name, content):
     m = definition_regex.search(content)
     if m is None:
         return None
-
     return m.group(1)
 
 
@@ -74,7 +99,6 @@ def slugify_markdown(md):
     text = md.replace(' ', '-')
     for markup_char in ['*', '_', '~', '(', ')']:
         text = text.replace(markup_char, '')
-
     return text
 
 
@@ -89,21 +113,37 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
     metadata = m.group(2)
     wikidata_id = match_wikidata_id(metadata)
     wikidata_label = match_wikidata_label(metadata)
+    disambiguation = match_disambiguation(metadata)
     agda_name = match_agda_name(metadata)
     plaintext = LINK_REGEX.sub(r'\1', text)
     url_path = path[:-2] + 'html'
+    entry_name = plaintext
+    if disambiguation is not None:
+        entry_name += ' (' + disambiguation + ')'
     index_entry = {
-        'name': plaintext,
+        'name': entry_name,
         'text': text
     }
     anchor = ''
     target = ''
     target_id = f'concept-{slugify_markdown(plaintext)}'
     references = []
-    if wikidata_id is not None and wikidata_id != 'NA':
+
+    has_wikidata_id = wikidata_id is not None and wikidata_id != 'NA'
+    has_wikidata_label = wikidata_label is not None
+
+    if has_wikidata_id:
         index_entry['wikidata'] = wikidata_id
         # index_entry['link'] = f'{url_path}#{wikidata_id}'
         target_id = wikidata_id
+
+        if has_wikidata_label:
+            index_entry['__wikidata_label'] = wikidata_label
+        else:
+            eprint('Warning: Wikidata identifier', wikidata_id,
+                   'provided for "' + entry_name + '"',
+                   'without a corresponding label in', path)
+            mut_error_locations.add(path)
         # Useful if we wanted to link to a concept by WDID and give information
         # to scrapers; currently we don't really want either
         # anchor += f'<a id="{target_id}" class="wikidata"><span style="display:none">{plaintext}</span></a>'
@@ -111,6 +151,12 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
         # TODO: decide if we want this
         # references.append(sup_link_reference(config.get(
         #     'mathswitch-template').format(wikidata_id=wikidata_id), 'WD', True, True))
+    else:
+        if has_wikidata_label:
+            eprint('Warning: Wikidata label', wikidata_label,
+                   'provided for "' + entry_name + '"',
+                   'without a corresponding identifier in', path)
+            mut_error_locations.add(path)
     if agda_name is not None:
         target_id = f'concept-{agda_name}'
         agda_id = get_definition_id(agda_name, initial_content)
@@ -132,8 +178,6 @@ def sub_match_for_concept(m, mut_index, mut_error_locations, config, path, initi
     #   as we can get
     index_entry['id'] = index_entry['link']
     references.append(sup_link_reference(f'#{target_id}', '¶', False))
-    if wikidata_label is not None:
-        index_entry['__wikidata_label'] = wikidata_label
     mut_index.append(index_entry)
     return f'{anchor}<b>{text}</b>{"".join(reversed(references))}'
 
@@ -159,7 +203,7 @@ def tag_concepts_chapter_rec_mut(chapter, config, mut_index, mut_error_locations
             mathswitch_link = config.get(
                 'mathswitch-template').format(wikidata_id=wikidata_id)
             external_references.append(
-                f'<a href="{mathswitch_link}">{wikidata_label}</a> at Mathswitch')
+                f'<a href="{mathswitch_link}">{wikidata_label.capitalize()}</a> at Mathswitch')
             wikidata_link = config.get(
                 'wikidata-template').format(wikidata_id=wikidata_id)
             # TODO: Decide if we want this

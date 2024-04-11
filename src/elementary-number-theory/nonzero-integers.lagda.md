@@ -77,16 +77,16 @@ pr2 one-nonzero-ℤ = is-nonzero-one-ℤ
 
 ## Properties
 
-### The inclusion of natural numbers into integers maps nonzero natural numbers to nonzero integers
+### The integer image of a nonzero natural number is nonzero
 
 ```agda
 is-nonzero-int-ℕ : (n : ℕ) → is-nonzero-ℕ n → is-nonzero-ℤ (int-ℕ n)
 is-nonzero-int-ℕ zero-ℕ H p = H refl
 ```
 
-### Positive integers are nonzero
+### The negative of a nonzero integer is nonzero
 
 ```agda
-is-nonzero-is-positive-ℤ : (x : ℤ) → is-positive-ℤ x → is-nonzero-ℤ x
-is-nonzero-is-positive-ℤ (inr (inr x)) H ()
+is-nonzero-neg-nonzero-ℤ : (x : ℤ) → is-nonzero-ℤ x → is-nonzero-ℤ (neg-ℤ x)
+is-nonzero-neg-nonzero-ℤ x H K = H (is-zero-is-zero-neg-ℤ x K)
 ```

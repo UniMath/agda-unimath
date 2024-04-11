@@ -41,7 +41,7 @@ open import synthetic-homotopy-theory.sequential-diagrams
 Given a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
 `(A, a)`, a
 [cocone](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md) `c`
-with vertex `X` under it, and a type family `P : X → 𝓤`, we may construct
+with vertex `X` under it, and a type family `P : X → 𝒰`, we may construct
 _dependent_ cocones on `P` over `c`.
 
 A **dependent cocone under a
@@ -310,31 +310,27 @@ module _
 
     dependent-cocone-sequential-diagram-dependent-cofork :
       dependent-cofork
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c)
         ( P) →
       dependent-cocone-sequential-diagram c P
     pr1 (dependent-cocone-sequential-diagram-dependent-cofork e) =
       ev-pair
         ( map-dependent-cofork
-          ( bottom-map-cofork-cocone-sequential-diagram A)
-          ( top-map-cofork-cocone-sequential-diagram A)
+          ( double-arrow-sequential-diagram A)
           ( P)
           ( e))
     pr2 (dependent-cocone-sequential-diagram-dependent-cofork e) =
       ev-pair
         ( coherence-dependent-cofork
-          ( bottom-map-cofork-cocone-sequential-diagram A)
-          ( top-map-cofork-cocone-sequential-diagram A)
+          ( double-arrow-sequential-diagram A)
           ( P)
           ( e))
 
     dependent-cofork-dependent-cocone-sequential-diagram :
       dependent-cocone-sequential-diagram c P →
       dependent-cofork
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c)
         ( P)
     pr1 (dependent-cofork-dependent-cocone-sequential-diagram d) =
@@ -349,8 +345,7 @@ module _
         ( id)
       is-section-dependent-cocone-sequential-diagram-dependent-cofork e =
         eq-htpy-dependent-cofork
-          ( bottom-map-cofork-cocone-sequential-diagram A)
-          ( top-map-cofork-cocone-sequential-diagram A)
+          ( double-arrow-sequential-diagram A)
           ( P)
           ( dependent-cofork-dependent-cocone-sequential-diagram
             ( dependent-cocone-sequential-diagram-dependent-cofork e))
@@ -378,8 +373,7 @@ module _
 
     equiv-dependent-cocone-sequential-diagram-dependent-cofork :
       dependent-cofork
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c)
         ( P) ≃
       dependent-cocone-sequential-diagram c P
@@ -394,16 +388,14 @@ module _
       ( dependent-cocone-map-sequential-diagram c P)
       ( dependent-cocone-sequential-diagram-dependent-cofork P)
       ( dependent-cofork-map
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
+        ( double-arrow-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c))
   triangle-dependent-cocone-sequential-diagram-dependent-cofork P h =
     eq-htpy-dependent-cocone-sequential-diagram P
       ( dependent-cocone-map-sequential-diagram c P h)
       ( dependent-cocone-sequential-diagram-dependent-cofork P
         ( dependent-cofork-map
-          ( bottom-map-cofork-cocone-sequential-diagram A)
-          ( top-map-cofork-cocone-sequential-diagram A)
+          ( double-arrow-sequential-diagram A)
           ( cofork-cocone-sequential-diagram A c)
           ( h)))
       ( ev-pair refl-htpy , ev-pair right-unit-htpy)

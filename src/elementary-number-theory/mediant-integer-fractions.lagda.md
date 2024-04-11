@@ -8,6 +8,7 @@ module elementary-number-theory.mediant-integer-fractions where
 
 ```agda
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-positive-and-negative-integers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.integer-fractions
@@ -32,8 +33,7 @@ denominators.
 
 ```agda
 mediant-fraction-ℤ : fraction-ℤ → fraction-ℤ → fraction-ℤ
-mediant-fraction-ℤ (a , b , p) (c , d , q) =
-  (a +ℤ c , b +ℤ d , is-positive-add-ℤ p q)
+mediant-fraction-ℤ (a , b) (c , d) = (add-ℤ a c , add-positive-ℤ b d)
 ```
 
 ## Properties
