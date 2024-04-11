@@ -201,8 +201,8 @@ module _
   exists-lesser-ℚ : exists ℚ (λ q → le-ℚ-Prop q x)
   exists-lesser-ℚ =
     intro-exists
-      ( in-fraction-ℤ frac)
-      ( left-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
+      ( rational-fraction-ℤ frac)
+      ( preserves-le-left-rational-fraction-ℤ x frac
         ( le-fraction-le-numerator-fraction-ℤ
           ( frac)
           ( fraction-ℚ x)
@@ -215,8 +215,8 @@ module _
   exists-greater-ℚ : exists ℚ (λ r → le-ℚ-Prop x r)
   exists-greater-ℚ =
     intro-exists
-      ( in-fraction-ℤ frac)
-      ( right-le-ℚ-in-fraction-ℤ-le-fraction-ℤ x frac
+      ( rational-fraction-ℤ frac)
+      ( preserves-le-right-rational-fraction-ℤ x frac
         ( le-fraction-le-numerator-fraction-ℤ
           ( fraction-ℚ x)
           ( frac)
