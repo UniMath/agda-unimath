@@ -9,6 +9,7 @@ module real-numbers.rational-real-numbers where
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -61,13 +62,13 @@ is-dedekind-cut-le-ℚ x =
       elim-exists-Prop
         ( λ r → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop r x))
         ( le-ℚ-Prop q x)
-        ( λ r (H , H') → transitive-le-ℚ q r x H H')) ,
+        ( λ r (H , H') → transitive-le-ℚ q r x H' H)) ,
     ( λ (r : ℚ) →
       α x r ∘ dense-le-ℚ x r ,
       elim-exists-Prop
         ( λ q → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop x q))
         ( le-ℚ-Prop x r)
-        ( λ q (H , H') → transitive-le-ℚ x q r H' H))) ,
+        ( λ q (H , H') → transitive-le-ℚ x q r H H'))) ,
   ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H') ,
   ( located-le-ℚ x)
   where
@@ -92,8 +93,8 @@ is-dedekind-cut-le-ℚ x =
 ### The canonical map from `ℚ` to `ℝ`
 
 ```agda
-real-rational : ℚ → ℝ lzero
-real-rational x =
+real-ℚ : ℚ → ℝ lzero
+real-ℚ x =
   real-dedekind-cut
     ( λ (q : ℚ) → le-ℚ-Prop q x)
     ( λ (r : ℚ) → le-ℚ-Prop x r)
@@ -185,18 +186,18 @@ module _
 ### The real embedding of a rational number is rational
 
 ```agda
-is-rational-real-rational : (p : ℚ) → is-rational-ℝ (real-rational p) p
-is-rational-real-rational p = irreflexive-le-ℚ p , irreflexive-le-ℚ p
+is-rational-real-ℚ : (p : ℚ) → is-rational-ℝ (real-ℚ p) p
+is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
 ```
 
 ### Rational real numbers are embedded rationals
 
 ```agda
 eq-real-rational-is-rational-ℝ :
-  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-rational q ＝ x
+  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-ℚ q ＝ x
 eq-real-rational-is-rational-ℝ x q H =
   eq-eq-lower-cut-ℝ
-    ( real-rational q)
+    ( real-ℚ q)
     ( x)
     ( eq-has-same-elements-subtype
       ( λ p → le-ℚ-Prop p q)
@@ -218,25 +219,25 @@ eq-real-rational-is-rational-ℝ x q H =
 ### The cannonical map from rationals to rational reals
 
 ```agda
-rational-ℝ-rational : ℚ → Rational-ℝ lzero
-rational-ℝ-rational q = real-rational q , q , is-rational-real-rational q
+rational-real-ℚ : ℚ → Rational-ℝ lzero
+rational-real-ℚ q = (real-ℚ q , q , is-rational-real-ℚ q)
 ```
 
 ### The rationals and rational reals are equivalent
 
 ```agda
-is-section-rational-ℝ-rational :
+is-section-rational-real-ℚ :
   (q : ℚ) →
-  rational-rational-ℝ (rational-ℝ-rational q) ＝ q
-is-section-rational-ℝ-rational q = refl
+  rational-rational-ℝ (rational-real-ℚ q) ＝ q
+is-section-rational-real-ℚ q = refl
 
-is-retraction-rational-ℝ-rational :
+is-retraction-rational-real-ℚ :
   (x : Rational-ℝ lzero) →
-  rational-ℝ-rational (rational-rational-ℝ x) ＝ x
-is-retraction-rational-ℝ-rational (x , q , H) =
+  rational-real-ℚ (rational-rational-ℝ x) ＝ x
+is-retraction-rational-real-ℚ (x , q , H) =
   eq-type-subtype
     subtype-rational-real
-    ( ap real-rational α ∙ eq-real-rational-is-rational-ℝ x q H)
+    ( ap real-ℚ α ∙ eq-real-rational-is-rational-ℝ x q H)
   where
     α : rational-rational-ℝ (x , q , H) ＝ q
     α = refl
@@ -248,9 +249,9 @@ pr2 equiv-rational-real =
   where
   section-rational-rational-ℝ : section rational-rational-ℝ
   section-rational-rational-ℝ =
-    rational-ℝ-rational , is-section-rational-ℝ-rational
+    (rational-real-ℚ , is-section-rational-real-ℚ)
 
   retraction-rational-rational-ℝ : retraction rational-rational-ℝ
   retraction-rational-rational-ℝ =
-    rational-ℝ-rational , is-retraction-rational-ℝ-rational
+    (rational-real-ℚ , is-retraction-rational-real-ℚ)
 ```

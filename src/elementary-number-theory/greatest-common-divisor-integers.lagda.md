@@ -14,6 +14,9 @@ open import elementary-number-theory.equality-integers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -55,6 +58,22 @@ gcd-ℤ x y = int-ℕ (nat-gcd-ℤ x y)
 ```
 
 ## Properties
+
+### The greatest common divisor is invariant under negatives
+
+```agda
+module _
+  (x y : ℤ)
+  where
+
+  preserves-gcd-left-neg-ℤ : gcd-ℤ (neg-ℤ x) y ＝ gcd-ℤ x y
+  preserves-gcd-left-neg-ℤ =
+    ap (int-ℕ ∘ (λ z → gcd-ℕ z (abs-ℤ y))) (abs-neg-ℤ x)
+
+  preserves-gcd-right-neg-ℤ : gcd-ℤ x (neg-ℤ y) ＝ gcd-ℤ x y
+  preserves-gcd-right-neg-ℤ =
+    ap (int-ℕ ∘ (gcd-ℕ (abs-ℤ x))) (abs-neg-ℤ y)
+```
 
 ### A natural number `d` is a common divisor of two natural numbers `x` and `y` if and only if `int-ℕ d` is a common divisor of `int-ℕ x` and `ind-ℕ y`
 
@@ -234,7 +253,7 @@ div-gcd-is-common-divisor-ℤ x y k H =
 is-positive-gcd-is-positive-left-ℤ :
   (x y : ℤ) → is-positive-ℤ x → is-positive-ℤ (gcd-ℤ x y)
 is-positive-gcd-is-positive-left-ℤ x y H =
-  is-positive-int-ℕ
+  is-positive-int-is-nonzero-ℕ
     ( gcd-ℕ (abs-ℤ x) (abs-ℤ y))
     ( is-nonzero-gcd-ℕ
       ( abs-ℤ x)
@@ -247,7 +266,7 @@ is-positive-gcd-is-positive-left-ℤ x y H =
 is-positive-gcd-is-positive-right-ℤ :
   (x y : ℤ) → is-positive-ℤ y → is-positive-ℤ (gcd-ℤ x y)
 is-positive-gcd-is-positive-right-ℤ x y H =
-  is-positive-int-ℕ
+  is-positive-int-is-nonzero-ℕ
     ( gcd-ℕ (abs-ℤ x) (abs-ℤ y))
     ( is-nonzero-gcd-ℕ
       ( abs-ℤ x)

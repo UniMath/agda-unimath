@@ -9,6 +9,7 @@ module real-numbers.dedekind-real-numbers where
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
@@ -42,7 +43,7 @@ open import foundation-core.truncation-levels
 ## Idea
 
 A
-{{#concept "Dedekind cut" Agda=is-dedekind-cut WD="Dedekind cut" WDID=Q851333}}
+{{#concept "Dedekind cut" Agda=is-dedekind-cut WD="dedekind cut" WDID=Q851333}}
 consists of a [pair](foundation.dependent-pair-types.md) `(L , U)` of
 [subtypes](foundation-core.subtypes.md) of
 [the rational numbers](elementary-number-theory.rational-numbers.md) `ℚ`,

@@ -29,6 +29,7 @@ open import foundation.arithmetic-law-product-and-pi-decompositions public
 open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.bands public
+open import foundation.base-changes-span-diagrams public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public
@@ -43,6 +44,7 @@ open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-morphisms-arrows public
+open import foundation.cartesian-morphisms-span-diagrams public
 open import foundation.cartesian-product-types public
 open import foundation.cartesian-products-set-quotients public
 open import foundation.category-of-families-of-sets public
@@ -126,6 +128,7 @@ open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
 open import foundation.disjunction public
+open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-modality public
 open import foundation.double-powersets public
@@ -150,6 +153,7 @@ open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-arrows public
 open import foundation.equivalences-cospans public
+open import foundation.equivalences-double-arrows public
 open import foundation.equivalences-inverse-sequential-diagrams public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences-span-diagrams public
@@ -246,6 +250,7 @@ open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospan-diagrams public
 open import foundation.morphisms-cospans public
+open import foundation.morphisms-double-arrows public
 open import foundation.morphisms-inverse-sequential-diagrams public
 open import foundation.morphisms-span-diagrams public
 open import foundation.morphisms-spans public

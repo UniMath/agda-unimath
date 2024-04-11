@@ -34,6 +34,7 @@ open import group-theory.semigroups
 open import lists.concatenation-lists
 open import lists.lists
 
+open import structured-types.h-spaces
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
@@ -158,9 +159,21 @@ module _
     (x : type-Group) → Id (mul-Group x unit-Group) x
   right-unit-law-mul-Group = pr2 (pr2 is-unital-Group)
 
+  coherence-unit-laws-mul-Group :
+    left-unit-law-mul-Group unit-Group ＝ right-unit-law-mul-Group unit-Group
+  coherence-unit-laws-mul-Group =
+    eq-is-prop (is-set-type-Group _ _)
+
   pointed-type-Group : Pointed-Type l
   pr1 pointed-type-Group = type-Group
   pr2 pointed-type-Group = unit-Group
+
+  h-space-Group : H-Space l
+  pr1 h-space-Group = pointed-type-Group
+  pr1 (pr2 h-space-Group) = mul-Group
+  pr1 (pr2 (pr2 h-space-Group)) = left-unit-law-mul-Group
+  pr1 (pr2 (pr2 (pr2 h-space-Group))) = right-unit-law-mul-Group
+  pr2 (pr2 (pr2 (pr2 h-space-Group))) = coherence-unit-laws-mul-Group
 
   has-inverses-Group :
     is-group-is-unital-Semigroup semigroup-Group is-unital-Group
