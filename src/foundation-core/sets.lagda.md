@@ -167,3 +167,21 @@ module _
   pr2 equiv-set-Set =
     is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
 ```
+
+### If a type injects into a set, then it is a set
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-set-is-injective :
+      {f : A → B} → is-set B → is-injective f → is-set A
+    is-set-is-injective {f} H I =
+      is-set-prop-in-id
+        ( λ x y → f x ＝ f y)
+        ( λ x y → H (f x) (f y))
+        ( λ x → refl)
+        ( λ x y → I)
+```

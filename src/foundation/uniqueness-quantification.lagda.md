@@ -44,6 +44,17 @@ with further structure. For example, we tend to use unique existence in
 combination with universal properties, in order to conclude that a certain map
 equipped with some homotopies exists uniquely.
 
+As a special case of uniqueness quantification, we recover
+[exclusive disjunction](foundation.exclusive-disjunction.md) when the indexing
+type is a [2-element type](univalent-combinatorics.2-element-types.md).
+Concretely, we have the equivalence
+
+```text
+  ∃! (t : bool), (P t) ≐ is-contr (Σ (t : bool), (P t))
+                       ≃ is-contr ((P false) + (P true))
+                       ≐ P false ⊻ P true.
+```
+
 ## Definitions
 
 ### Unique existence of structure
