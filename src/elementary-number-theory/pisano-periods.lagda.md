@@ -25,6 +25,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.repetitions-sequences
+open import foundation.sets
 open import foundation.universe-levels
 
 open import univalent-combinatorics.cartesian-product-types

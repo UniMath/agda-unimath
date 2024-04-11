@@ -17,6 +17,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.structured-type-duality
 open import foundation.subtype-identity-principle
@@ -219,7 +220,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-prop (is-decidable-emb f)
   is-prop-is-decidable-emb f =
-    is-prop-is-inhabited
+    is-prop-has-element
       ( λ H →
         is-prop-product
           ( is-property-is-emb f)
@@ -322,7 +323,7 @@ equiv-precomp-decidable-emb-equiv e C =
     ( is-decidable-emb)
     ( equiv-precomp e C)
     ( λ g →
-      equiv-prop
+      equiv-iff-is-prop
         ( is-prop-is-decidable-emb g)
         ( is-prop-is-decidable-emb (g ∘ map-equiv e))
         ( is-decidable-emb-comp (is-decidable-emb-is-equiv (pr2 e)))

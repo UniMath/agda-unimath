@@ -21,6 +21,7 @@ open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types

@@ -143,9 +143,9 @@ mere-equiv-number-of-connected-components H =
 is-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 is-π-finite-Prop zero-ℕ X = has-finite-connected-components-Prop X
 is-π-finite-Prop (succ-ℕ k) X =
-  product-Prop ( is-π-finite-Prop zero-ℕ X)
-            ( Π-Prop X
-              ( λ x → Π-Prop X (λ y → is-π-finite-Prop k (Id x y))))
+  product-Prop
+    ( is-π-finite-Prop zero-ℕ X)
+    ( Π-Prop X (λ x → Π-Prop X (λ y → is-π-finite-Prop k (Id x y))))
 
 is-π-finite : {l : Level} (k : ℕ) → UU l → UU l
 is-π-finite k X = type-Prop (is-π-finite-Prop k X)
@@ -761,7 +761,7 @@ is-0-connected-unit =
 abstract
   is-contr-im :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) {f : A → type-Set B}
-    (a : A) (H : f ~ const A (type-Set B) (f a)) → is-contr (im f)
+    (a : A) (H : f ~ const A (f a)) → is-contr (im f)
   pr1 (is-contr-im B {f} a H) = map-unit-im f a
   pr2 (is-contr-im B {f} a H) (x , u) =
     apply-dependent-universal-property-trunc-Prop

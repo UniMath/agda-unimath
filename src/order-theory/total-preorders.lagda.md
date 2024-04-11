@@ -36,7 +36,7 @@ module _
 
   incident-Preorder-Prop : (x y : type-Preorder X) → Prop l2
   incident-Preorder-Prop x y =
-    disjunction-Prop (leq-Preorder-Prop X x y) (leq-Preorder-Prop X y x)
+    (leq-Preorder-Prop X x y) ∨ (leq-Preorder-Prop X y x)
 
   incident-Preorder : (x y : type-Preorder X) → UU l2
   incident-Preorder x y = type-Prop (incident-Preorder-Prop x y)

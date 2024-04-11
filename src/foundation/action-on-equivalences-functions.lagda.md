@@ -73,7 +73,7 @@ module _
 ```agda
 compute-action-equiv-function-const :
   {l1 l2 : Level} {B : UU l2} (b : B) {X Y : UU l1}
-  (e : X ≃ Y) → (action-equiv-function (const (UU l1) B b) e) ＝ refl
+  (e : X ≃ Y) → (action-equiv-function (const (UU l1) b) e) ＝ refl
 compute-action-equiv-function-const b e = ap-const b (eq-equiv e)
 ```
 

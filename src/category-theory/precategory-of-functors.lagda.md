@@ -20,6 +20,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
@@ -199,7 +200,7 @@ module _
     (f : natural-transformation-Precategory C D F G) →
     is-equiv (is-iso-functor-is-natural-isomorphism-Precategory f)
   is-equiv-is-iso-functor-is-natural-isomorphism-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-natural-isomorphism-Precategory C D F G f)
       ( is-prop-is-iso-Precategory
         ( functor-precategory-Precategory C D) {F} {G} f)
@@ -209,7 +210,7 @@ module _
     (f : natural-transformation-Precategory C D F G) →
     is-equiv (is-natural-isomorphism-is-iso-functor-Precategory f)
   is-equiv-is-natural-isomorphism-is-iso-functor-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-iso-Precategory
         ( functor-precategory-Precategory C D) {F} {G} f)
       ( is-prop-is-natural-isomorphism-Precategory C D F G f)

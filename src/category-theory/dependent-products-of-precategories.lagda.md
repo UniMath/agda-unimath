@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
@@ -183,7 +184,7 @@ module _
     (f : hom-Π-Precategory I C x y) →
     is-equiv (is-fiberwise-iso-is-iso-Π-Precategory f)
   is-equiv-is-fiberwise-iso-is-iso-Π-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-iso-Precategory (Π-Precategory I C) f)
       ( is-prop-Π (λ i → is-prop-is-iso-Precategory (C i) (f i)))
       ( is-iso-is-fiberwise-iso-Π-Precategory f)
@@ -201,7 +202,7 @@ module _
     (f : hom-Π-Precategory I C x y) →
     is-equiv (is-iso-is-fiberwise-iso-Π-Precategory f)
   is-equiv-is-iso-is-fiberwise-iso-Π-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-Π (λ i → is-prop-is-iso-Precategory (C i) (f i)))
       ( is-prop-is-iso-Precategory (Π-Precategory I C) f)
       ( is-fiberwise-iso-is-iso-Π-Precategory f)

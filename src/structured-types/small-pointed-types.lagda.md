@@ -112,7 +112,7 @@ module _
   is-prop-is-pointed-small-Pointed-Type :
     is-prop (is-pointed-small-Pointed-Type l2 X)
   is-prop-is-pointed-small-Pointed-Type =
-    is-prop-is-inhabited
+    is-prop-has-element
       ( λ (Y , e) →
         is-prop-equiv'
           ( equiv-tot (λ Z → equiv-comp-pointed-equiv' e))

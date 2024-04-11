@@ -37,7 +37,7 @@ the set-quotient of a standard finite type.
 ```agda
 is-kuratowsky-finite-set-Prop : {l : Level} → Set l → Prop l
 is-kuratowsky-finite-set-Prop X =
-  ∃-Prop ℕ (λ n → Fin n ↠ type-Set X)
+  exists-structure-Prop ℕ (λ n → Fin n ↠ type-Set X)
 
 is-kuratowsky-finite-set : {l : Level} → Set l → UU l
 is-kuratowsky-finite-set X = type-Prop (is-kuratowsky-finite-set-Prop X)

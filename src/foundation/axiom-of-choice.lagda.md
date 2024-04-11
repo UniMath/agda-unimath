@@ -10,6 +10,7 @@ module foundation.axiom-of-choice where
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
 open import foundation.postcomposition-functions
 open import foundation.projective-types
 open import foundation.propositional-truncations
@@ -17,7 +18,6 @@ open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -32,8 +32,10 @@ open import foundation-core.sets
 
 ## Idea
 
-The axiom of choice asserts that for every family of inhabited types indexed by
-a set, the type of sections of that family is inhabited.
+The {{#concept "axiom of choice" Agda=AC-0}} asserts that for every family of
+[inhabited](foundation.inhabited-types.md) types `B` indexed by a
+[set](foundation-core.sets.md) `A`, the type of sections of that family
+`(x : A) → B x` is inhabited.
 
 ## Definition
 
@@ -43,8 +45,8 @@ a set, the type of sections of that family is inhabited.
 AC-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 AC-Set l1 l2 =
   (A : Set l1) (B : type-Set A → Set l2) →
-  ((x : type-Set A) → type-trunc-Prop (type-Set (B x))) →
-  type-trunc-Prop ((x : type-Set A) → type-Set (B x))
+  ((x : type-Set A) → is-inhabited (type-Set (B x))) →
+  is-inhabited ((x : type-Set A) → type-Set (B x))
 ```
 
 ### The axiom of choice
@@ -53,8 +55,8 @@ AC-Set l1 l2 =
 AC-0 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 AC-0 l1 l2 =
   (A : Set l1) (B : type-Set A → UU l2) →
-  ((x : type-Set A) → type-trunc-Prop (B x)) →
-  type-trunc-Prop ((x : type-Set A) → B x)
+  ((x : type-Set A) → is-inhabited (B x)) →
+  is-inhabited ((x : type-Set A) → B x)
 ```
 
 ## Properties
