@@ -53,6 +53,7 @@ open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-se
 open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows public
 open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
+open import synthetic-homotopy-theory.families-descent-data-sequential-colimits public
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
 open import synthetic-homotopy-theory.flattening-lemma-pushouts public
 open import synthetic-homotopy-theory.flattening-lemma-sequential-colimits public
@@ -104,6 +105,7 @@ open import synthetic-homotopy-theory.suspension-structures public
 open import synthetic-homotopy-theory.suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.tangent-spheres public
+open import synthetic-homotopy-theory.total-cocones-families-sequential-diagrams public
 open import synthetic-homotopy-theory.total-sequential-diagrams public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.truncated-acyclic-maps public

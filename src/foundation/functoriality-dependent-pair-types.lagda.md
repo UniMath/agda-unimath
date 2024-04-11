@@ -301,6 +301,33 @@ module _
   coherence-square-maps-map-Σ-map-base H (a , p) = eq-pair-Σ (H a) refl
 ```
 
+### Commuting triangles of maps on total spaces
+
+#### Functoriality of `Σ` preserves commuting triangles of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {P : A → UU l2}
+  {B : UU l3} {Q : B → UU l4}
+  {C : UU l5} (R : C → UU l6)
+  {left' : A → C} {right' : B → C} {top' : A → B}
+  (left : (a : A) → P a → R (left' a))
+  (right : (b : B) → Q b → R (right' b))
+  (top : (a : A) → P a → Q (top' a))
+  where
+
+  coherence-triangle-maps-Σ :
+    {H' : coherence-triangle-maps left' right' top'} →
+    ( (a : A) (p : P a) →
+      dependent-identification R (H' a) (left _ p) (right _ (top _ p))) →
+    coherence-triangle-maps
+      ( map-Σ R left' left)
+      ( map-Σ R right' right)
+      ( map-Σ Q top' top)
+  coherence-triangle-maps-Σ {H'} H (a , p) = eq-pair-Σ (H' a) (H a p)
+```
+
 #### `map-Σ-map-base` preserves commuting triangles of maps
 
 ```agda
