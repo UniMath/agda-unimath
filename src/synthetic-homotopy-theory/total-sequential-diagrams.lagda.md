@@ -49,16 +49,16 @@ module _
   family-total-sequential-diagram : ℕ → UU (l1 ⊔ l2)
   family-total-sequential-diagram n =
     Σ (family-sequential-diagram A n)
-      (family-dependent-sequential-diagram A B n)
+      (family-dependent-sequential-diagram B n)
 
   map-total-sequential-diagram :
     (n : ℕ) → family-total-sequential-diagram n →
     family-total-sequential-diagram (succ-ℕ n)
   map-total-sequential-diagram n =
     map-Σ
-      ( family-dependent-sequential-diagram A B (succ-ℕ n))
+      ( family-dependent-sequential-diagram B (succ-ℕ n))
       ( map-sequential-diagram A n)
-      ( map-dependent-sequential-diagram A B n)
+      ( map-dependent-sequential-diagram B n)
 
   total-sequential-diagram : sequential-diagram (l1 ⊔ l2)
   pr1 total-sequential-diagram = family-total-sequential-diagram
