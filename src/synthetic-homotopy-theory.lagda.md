@@ -44,6 +44,8 @@ open import synthetic-homotopy-theory.descent-circle-dependent-pair-types public
 open import synthetic-homotopy-theory.descent-circle-equivalence-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
+open import synthetic-homotopy-theory.descent-data-sequential-colimits public
+open import synthetic-homotopy-theory.descent-property-sequential-colimits public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
 open import synthetic-homotopy-theory.equifibered-sequential-diagrams public

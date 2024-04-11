@@ -25,6 +25,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import synthetic-homotopy-theory.dependent-sequential-diagrams
+open import synthetic-homotopy-theory.equifibered-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
 ```
 
@@ -215,6 +217,58 @@ module _
     map-cocone-sequential-diagram c n (g x)
   pr2 cocone-postcomp-sequential-diagram n g =
     htpy-postcomp X (coherence-cocone-sequential-diagram c n) g
+```
+
+### Equifibered sequential diagrams induced by type families over cocones under sequential diagrams
+
+Given a sequential diagram `(A, a)` and a cocone `c` under it with vertex `X`,
+and a type family `P : X → 𝒰`, we may compose them together to get
+
+```text
+       aₙ
+ Aₙ ------> Aₙ₊₁
+   \       /
+    \  Hₙ /
+  iₙ \   / iₙ₊₁
+      ∨ ∨
+       X
+       | P
+       ∨
+       𝒰 ,
+```
+
+which gives us a collection of type families `Pₙ : Aₙ → 𝒰`, and a collection of
+equivalences `Pₙ a ≃ Pₙ₊₁ (aₙ a)` induced by
+[transporting](foundation-core.transport-along-identifications.md) in `P` along
+`Hₙ`. This data comes together to form an
+[equifibered sequential diagram](synthetic-homotopy-theory.equifibered-sequential-diagrams.md)
+over `A`.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : sequential-diagram l1}
+  {X : UU l2} (c : cocone-sequential-diagram A X)
+  (P : X → UU l3)
+  where
+
+  equifibered-sequential-diagram-family-cocone :
+    equifibered-sequential-diagram A l3
+  pr1 equifibered-sequential-diagram-family-cocone n a =
+    P (map-cocone-sequential-diagram c n a)
+  pr2 equifibered-sequential-diagram-family-cocone n a =
+    equiv-tr P (coherence-cocone-sequential-diagram c n a)
+
+  dependent-sequential-diagram-family-cocone : dependent-sequential-diagram A l3
+  dependent-sequential-diagram-family-cocone =
+    dependent-sequential-diagram-equifibered-sequential-diagram
+      ( equifibered-sequential-diagram-family-cocone)
+
+  is-equifibered-dependent-sequential-diagram-family-cocone :
+    is-equifibered-dependent-sequential-diagram
+      ( dependent-sequential-diagram-family-cocone)
+  is-equifibered-dependent-sequential-diagram-family-cocone =
+    is-equifibered-dependent-sequential-diagram-equifibered-sequential-diagram
+      ( equifibered-sequential-diagram-family-cocone)
 ```
 
 ## Properties
