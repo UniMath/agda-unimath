@@ -13,13 +13,13 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.structure-identity-principle
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.identity-types
-
 open import group-theory.abelian-groups
+open import group-theory.full-subgroups
 open import group-theory.groups
 open import group-theory.subgroups
 open import group-theory.trivial-subgroups
@@ -71,7 +71,28 @@ pr2 (pr2 trivial-Group) = ((λ x → star) , refl-htpy , refl-htpy)
 
 ### The type of subgroups of a trivial group is contractible
 
-This remains to be done.
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  abstract
+    is-contr-subgroup-is-trivial-Group :
+      is-trivial-Group G → is-contr (Subgroup l1 G)
+    pr1 (is-contr-subgroup-is-trivial-Group H) =
+      trivial-Subgroup G
+    pr2 (is-contr-subgroup-is-trivial-Group H) K =
+      eq-has-same-elements-Subgroup G
+        ( trivial-Subgroup G)
+        ( K)
+        ( λ x →
+          ( λ where refl → contains-unit-Subgroup G K) ,
+          ( λ _ →
+            is-closed-under-eq-Subgroup G
+              ( trivial-Subgroup G)
+              ( contains-unit-Subgroup G (trivial-Subgroup G))
+              ( eq-is-contr H)))
+```
 
 ### The trivial group is abelian
 

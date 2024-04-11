@@ -104,7 +104,8 @@ is-commutative-trivial-Ring x y = refl
 trivial-Commutative-Ring : Commutative-Ring lzero
 trivial-Commutative-Ring = (trivial-Ring , is-commutative-trivial-Ring)
 
-is-trivial-trivial-Commutative-Ring : is-trivial-Commutative-Ring trivial-Commutative-Ring
+is-trivial-trivial-Commutative-Ring :
+  is-trivial-Commutative-Ring trivial-Commutative-Ring
 is-trivial-trivial-Commutative-Ring = refl
 ```
 
