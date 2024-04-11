@@ -13,6 +13,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.embeddings
@@ -56,17 +57,15 @@ is-dedekind-cut-le-ℚ :
     (λ (q : ℚ) → le-ℚ-Prop q x)
     (λ (r : ℚ) → le-ℚ-Prop x r)
 is-dedekind-cut-le-ℚ x =
-  ( left-∃-le-ℚ x , right-∃-le-ℚ x) ,
+  ( exists-lesser-ℚ x , exists-greater-ℚ x) ,
   ( ( λ (q : ℚ) →
       dense-le-ℚ q x ,
-      elim-exists-Prop
-        ( λ r → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop r x))
+      elim-exists
         ( le-ℚ-Prop q x)
         ( λ r (H , H') → transitive-le-ℚ q r x H' H)) ,
     ( λ (r : ℚ) →
       α x r ∘ dense-le-ℚ x r ,
-      elim-exists-Prop
-        ( λ q → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop x q))
+      elim-exists
         ( le-ℚ-Prop x r)
         ( λ q (H , H') → transitive-le-ℚ x q r H H'))) ,
   ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H') ,
@@ -74,20 +73,12 @@ is-dedekind-cut-le-ℚ x =
   where
     α :
       (a b : ℚ) →
-      ∃ ℚ (λ r → le-ℚ a r × le-ℚ r b) →
-      ∃ ℚ (λ r → le-ℚ r b × le-ℚ a r)
+      exists ℚ (λ r → le-ℚ-Prop a r ∧ le-ℚ-Prop r b) →
+      exists ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r)
     α a b =
-      elim-exists-Prop
-        ( ( λ r →
-            product-Prop
-              ( le-ℚ-Prop a r)
-              ( le-ℚ-Prop r b)))
-        ( exists-Prop ℚ
-          ( λ r →
-            product-Prop
-              ( le-ℚ-Prop r b)
-              ( le-ℚ-Prop a r)))
-        ( λ r ( p , q) → intro-∃ r ( q , p))
+      elim-exists
+        ( ∃ ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r))
+        ( λ r ( p , q) → intro-exists r ( q , p))
 ```
 
 ### The canonical map from `ℚ` to `ℝ`
@@ -110,9 +101,7 @@ module _
 
   is-rational-ℝ-Prop : Prop l
   is-rational-ℝ-Prop =
-    product-Prop
-      ( neg-Prop (lower-cut-ℝ x p))
-      ( neg-Prop (upper-cut-ℝ x p))
+    (¬' (lower-cut-ℝ x p)) ∧ (¬' (upper-cut-ℝ x p))
 
   is-rational-ℝ : UU l
   is-rational-ℝ = type-Prop is-rational-ℝ-Prop
@@ -130,21 +119,19 @@ all-eq-is-rational-ℝ x p q H H' =
   left-case : le-ℚ p q → p ＝ q
   left-case I =
     ex-falso
-      ( elim-disjunction-Prop
-        ( lower-cut-ℝ x p)
-        ( upper-cut-ℝ x q)
+      ( elim-disjunction
         ( empty-Prop)
-        ( pr1 H , pr2 H')
+        ( pr1 H)
+        ( pr2 H')
         ( is-located-lower-upper-cut-ℝ x p q I))
 
   right-case : le-ℚ q p → p ＝ q
   right-case I =
     ex-falso
-      ( elim-disjunction-Prop
-        ( lower-cut-ℝ x q)
-        ( upper-cut-ℝ x p)
+      ( elim-disjunction
         ( empty-Prop)
-        ( pr1 H' , pr2 H)
+        ( pr1 H')
+        ( pr2 H)
         ( is-located-lower-upper-cut-ℝ x q p I))
 
 is-prop-rational-real : {l : Level} (x : ℝ l) → is-prop (Σ ℚ (is-rational-ℝ x))
@@ -204,12 +191,12 @@ eq-real-rational-is-rational-ℝ x q H =
       ( lower-cut-ℝ x)
       ( λ r →
         pair
-          ( λ I → elim-disjunction-Prop
-            ( lower-cut-ℝ x r)
-            ( upper-cut-ℝ x q)
-            ( lower-cut-ℝ x r)
-            ( id , λ H' → ex-falso (pr2 H H'))
-            ( is-located-lower-upper-cut-ℝ x r q I))
+          ( λ I →
+            elim-disjunction
+              ( lower-cut-ℝ x r)
+              ( id)
+              ( λ H' → ex-falso (pr2 H H'))
+              ( is-located-lower-upper-cut-ℝ x r q I))
           ( trichotomy-le-ℚ r q
             ( λ I _ → I)
             ( λ E H' → ex-falso (pr1 (tr (is-rational-ℝ x) (inv E) H) H'))

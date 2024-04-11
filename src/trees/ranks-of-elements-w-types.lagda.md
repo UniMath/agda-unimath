@@ -42,7 +42,7 @@ module _
 
   _≼-𝕎-Prop_ : 𝕎 A B → 𝕎 A B → Prop (l1 ⊔ l2)
   (tree-𝕎 x α) ≼-𝕎-Prop (tree-𝕎 y β) =
-    Π-Prop (B x) (λ b → exists-Prop (B y) (λ c → (α b) ≼-𝕎-Prop (β c)))
+    Π-Prop (B x) (λ b → ∃ (B y) (λ c → (α b) ≼-𝕎-Prop (β c)))
 
   _≼-𝕎_ : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
   x ≼-𝕎 y = type-Prop (x ≼-𝕎-Prop y)
@@ -63,7 +63,7 @@ module _
 
   _≺-𝕎-Prop_ : 𝕎 A B → 𝕎 A B → Prop (l1 ⊔ l2)
   x ≺-𝕎-Prop y =
-    exists-Prop (Σ (𝕎 A B) (λ w → w ∈-𝕎 y)) (λ t → x ≼-𝕎-Prop (pr1 t))
+    ∃ (Σ (𝕎 A B) (λ w → w ∈-𝕎 y)) (λ t → x ≼-𝕎-Prop (pr1 t))
 
   _≺-𝕎_ : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
   x ≺-𝕎 y = type-Prop (x ≺-𝕎-Prop y)
@@ -93,10 +93,9 @@ module _
         Π-Prop
           ( u ∈-𝕎 x)
           ( λ H →
-            exists-Prop
-              ( 𝕎 A B)
+            ∃ ( 𝕎 A B)
               ( λ v →
-                exists-Prop (v ∈-𝕎 y) (λ K → u ≼-𝕎-Prop v))))
+                ∃ (v ∈-𝕎 y) (λ K → u ≼-𝕎-Prop v))))
 
   _strong-≼-𝕎_ : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
   x strong-≼-𝕎 y = type-Prop (x strong-≼-𝕎-Prop y)
@@ -126,11 +125,11 @@ module _
   transitive-≼-𝕎 {tree-𝕎 x α} {tree-𝕎 y β} {tree-𝕎 z γ} H K a =
     apply-universal-property-trunc-Prop
       ( H a)
-      ( exists-Prop (B z) (λ c → (α a) ≼-𝕎-Prop (γ c)))
+      ( ∃ (B z) (λ c → (α a) ≼-𝕎-Prop (γ c)))
       ( λ t →
         apply-universal-property-trunc-Prop
           ( K (pr1 t))
-          ( exists-Prop (B z) (λ c → (α a) ≼-𝕎-Prop (γ c)))
+          ( ∃ (B z) (λ c → (α a) ≼-𝕎-Prop (γ c)))
           ( λ s →
             unit-trunc-Prop
               ( pair
@@ -153,30 +152,23 @@ module _
   strong-≼-≼-𝕎 : {x y : 𝕎 A B} → (x ≼-𝕎 y) → (x strong-≼-𝕎 y)
   strong-≼-≼-𝕎 {tree-𝕎 x α} {tree-𝕎 y β} H .(α b) (pair b refl) =
     apply-universal-property-trunc-Prop (H b)
-      ( exists-Prop
-        ( 𝕎 A B)
-        ( (λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → (α b) ≼-𝕎-Prop v))))
+      ( ∃ ( 𝕎 A B)
+          ( (λ v → ∃ (v ∈-𝕎 tree-𝕎 y β) (λ hv → (α b) ≼-𝕎-Prop v))))
       ( f)
       where
       f :
         Σ (B y) (λ c → pr1 (α b ≼-𝕎-Prop β c)) →
         exists
           ( 𝕎 A B)
-          ( λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → α b ≼-𝕎-Prop v))
+          ( λ v → ∃ (v ∈-𝕎 tree-𝕎 y β) (λ hv → α b ≼-𝕎-Prop v))
       f (pair c K) =
-        intro-exists
-          ( λ v → exists-Prop (v ∈-𝕎 tree-𝕎 y β) (λ hv → α b ≼-𝕎-Prop v))
-          ( β c)
-          ( intro-exists
-            ( λ hβc → α b ≼-𝕎-Prop β c)
-            ( pair c refl)
-            ( K))
+        intro-exists (β c) ( intro-exists (pair c refl) K)
 
   ≼-strong-≼-𝕎 : {x y : 𝕎 A B} → (x strong-≼-𝕎 y) → (x ≼-𝕎 y)
   ≼-strong-≼-𝕎 {tree-𝕎 x α} {tree-𝕎 y β} H b =
     apply-universal-property-trunc-Prop
-      ( H (α b) (pair b refl))
-      ( exists-Prop (B y) (λ c → α b ≼-𝕎-Prop β c))
+      ( H (α b) (b , refl))
+      ( ∃ (B y) (λ c → α b ≼-𝕎-Prop β c))
       ( f)
     where
     f :
@@ -185,11 +177,13 @@ module _
       exists (B y) (λ c → α b ≼-𝕎-Prop β c)
     f (pair v K) =
         apply-universal-property-trunc-Prop K
-          ( exists-Prop (B y) (λ c → α b ≼-𝕎-Prop β c))
+          ( ∃ (B y) (λ c → α b ≼-𝕎-Prop β c))
           ( g)
       where
-      g : (v ∈-𝕎 tree-𝕎 y β) × (α b ≼-𝕎 v) → ∃ (B y) (λ c → α b ≼-𝕎 β c)
-      g (pair (pair c p) M) = intro-∃ c (tr (λ t → α b ≼-𝕎 t) (inv p) M)
+      g :
+        (v ∈-𝕎 tree-𝕎 y β) × (α b ≼-𝕎 v) →
+        exists (B y) (λ c → α b ≼-𝕎-Prop β c)
+      g (pair (pair c p) M) = intro-exists c (tr (λ t → α b ≼-𝕎 t) (inv p) M)
 ```
 
 ### If `x ∈ y` then the rank of `x` is at most the rank of `y`
@@ -202,7 +196,6 @@ module _
   ≼-∈-𝕎 : {x y : 𝕎 A B} → (x ∈-𝕎 y) → (x ≼-𝕎 y)
   ≼-∈-𝕎 {tree-𝕎 x α} {tree-𝕎 y β} (pair v p) u =
     intro-exists
-      ( λ z → α u ≼-𝕎-Prop β z)
       ( v)
       ( tr
         ( λ t → α u ≼-𝕎 t)
@@ -307,7 +300,6 @@ module _
       g : Σ (Σ (𝕎 A B) (λ w → w ∈-𝕎 z)) (λ t → y ≼-𝕎 pr1 t) → x ≺-𝕎 z
       g (pair (pair v P) Q) =
         intro-exists
-          ( λ t → x ≼-𝕎-Prop (pr1 t))
           ( pair v P)
           ( transitive-≼-𝕎 {x = x} {w} {v} M
             ( transitive-≼-𝕎 {x = w} {y} {v} (≼-∈-𝕎 L) Q))

@@ -25,16 +25,24 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-A type is considered to be a proposition if its identity types are contractible.
-This condition is equivalent to the condition that it has up to identification
-at most one element.
+A type is a {{#concept "proposition" Agda=is-prop}} if its
+[identity types](foundation-core.identity-types.md) are
+[contractible](foundation-core.contractible-types.md). This condition is
+[equivalent](foundation-core.equivalences.md) to the condition that it has up to
+identification at most one element.
 
-## Definition
+## Definitions
+
+### The predicate of being a proposition
 
 ```agda
 is-prop : {l : Level} (A : UU l) → UU l
 is-prop A = (x y : A) → is-contr (x ＝ y)
+```
 
+### The type of propositions
+
+```agda
 Prop :
   (l : Level) → UU (lsuc l)
 Prop l = Σ (UU l) is-prop
@@ -56,20 +64,18 @@ module _
 We prove here only that any contractible type is a proposition. The fact that
 the empty type and the unit type are propositions can be found in
 
-```text
-foundation.empty-types
-foundation.unit-type
-```
+- [`foundation.empty-types`](foundation.empty-types.md), and
+- [`foundation.unit-type`](foundation.unit-type.md).
 
 ## Properties
 
-### To show that a type is a proposition, we may assume it is inhabited
+### To show that a type is a proposition we may assume it has an element
 
 ```agda
 abstract
-  is-prop-is-inhabited :
+  is-prop-has-element :
     {l1 : Level} {X : UU l1} → (X → is-prop X) → is-prop X
-  is-prop-is-inhabited f x y = f x x y
+  is-prop-has-element f x y = f x x y
 ```
 
 ### Equivalent characterizations of propositions
@@ -122,29 +128,6 @@ module _
     eq-is-proof-irrelevant = eq-is-prop' ∘ is-prop-is-proof-irrelevant
 ```
 
-### A map between propositions is an equivalence if there is a map in the reverse direction
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  abstract
-    is-equiv-is-prop :
-      is-prop A → is-prop B → {f : A → B} → (B → A) → is-equiv f
-    is-equiv-is-prop is-prop-A is-prop-B {f} g =
-      is-equiv-is-invertible
-        ( g)
-        ( λ y → eq-is-prop is-prop-B)
-        ( λ x → eq-is-prop is-prop-A)
-
-  abstract
-    equiv-prop : is-prop A → is-prop B → (A → B) → (B → A) → A ≃ B
-    pr1 (equiv-prop is-prop-A is-prop-B f g) = f
-    pr2 (equiv-prop is-prop-A is-prop-B f g) =
-      is-equiv-is-prop is-prop-A is-prop-B g
-```
-
 ### Propositions are closed under equivalences
 
 ```agda
@@ -192,8 +175,7 @@ abstract
         ( λ p → K (pr1 y) (tr _ p (pr2 x)) (pr2 y)))
 
 Σ-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2) →
-  Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2) → Prop (l1 ⊔ l2)
 pr1 (Σ-Prop P Q) = Σ (type-Prop P) (λ p → type-Prop (Q p))
 pr2 (Σ-Prop P Q) =
   is-prop-Σ
@@ -210,10 +192,19 @@ abstract
     is-prop A → is-prop B → is-prop (A × B)
   is-prop-product H K = is-prop-Σ H (λ x → K)
 
-product-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (product-Prop P Q) = type-Prop P × type-Prop Q
-pr2 (product-Prop P Q) =
-  is-prop-product (is-prop-type-Prop P) (is-prop-type-Prop Q)
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
+
+  type-product-Prop : UU (l1 ⊔ l2)
+  type-product-Prop = type-Prop P × type-Prop Q
+
+  is-prop-product-Prop : is-prop type-product-Prop
+  is-prop-product-Prop =
+    is-prop-product (is-prop-type-Prop P) (is-prop-type-Prop Q)
+
+  product-Prop : Prop (l1 ⊔ l2)
+  product-Prop = (type-product-Prop , is-prop-product-Prop)
 ```
 
 ### Products of families of propositions are propositions
@@ -234,15 +225,15 @@ module _
   type-Π-Prop : UU (l1 ⊔ l2)
   type-Π-Prop = (x : A) → type-Prop (P x)
 
-  is-prop-type-Π-Prop : is-prop type-Π-Prop
-  is-prop-type-Π-Prop = is-prop-Π (λ x → is-prop-type-Prop (P x))
+  is-prop-Π-Prop : is-prop type-Π-Prop
+  is-prop-Π-Prop = is-prop-Π (λ x → is-prop-type-Prop (P x))
 
   Π-Prop : Prop (l1 ⊔ l2)
   pr1 Π-Prop = type-Π-Prop
-  pr2 Π-Prop = is-prop-type-Π-Prop
+  pr2 Π-Prop = is-prop-Π-Prop
 ```
 
-We repeat the above for implicit Π-types.
+We now repeat the above for implicit Π-types.
 
 ```agda
 abstract
@@ -262,13 +253,13 @@ module _
   type-implicit-Π-Prop : UU (l1 ⊔ l2)
   type-implicit-Π-Prop = {x : A} → type-Prop (P x)
 
-  is-prop-type-implicit-Π-Prop : is-prop type-implicit-Π-Prop
-  is-prop-type-implicit-Π-Prop =
+  is-prop-implicit-Π-Prop : is-prop type-implicit-Π-Prop
+  is-prop-implicit-Π-Prop =
     is-prop-implicit-Π (λ x → is-prop-type-Prop (P x))
 
   implicit-Π-Prop : Prop (l1 ⊔ l2)
   pr1 implicit-Π-Prop = type-implicit-Π-Prop
-  pr2 implicit-Π-Prop = is-prop-type-implicit-Π-Prop
+  pr2 implicit-Π-Prop = is-prop-implicit-Π-Prop
 ```
 
 ### The type of functions into a proposition is a proposition
@@ -284,41 +275,33 @@ type-function-Prop :
   {l1 l2 : Level} → UU l1 → Prop l2 → UU (l1 ⊔ l2)
 type-function-Prop A P = A → type-Prop P
 
-is-prop-type-function-Prop :
-  {l1 l2 : Level} (A : UU l1) (P : Prop l2) →
+is-prop-function-Prop :
+  {l1 l2 : Level} {A : UU l1} (P : Prop l2) →
   is-prop (type-function-Prop A P)
-is-prop-type-function-Prop A P =
+is-prop-function-Prop P =
   is-prop-function-type (is-prop-type-Prop P)
 
 function-Prop :
   {l1 l2 : Level} → UU l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (function-Prop A P) = type-function-Prop A P
-pr2 (function-Prop A P) = is-prop-type-function-Prop A P
+pr2 (function-Prop A P) = is-prop-function-Prop P
 
 type-hom-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
 type-hom-Prop P = type-function-Prop (type-Prop P)
 
-is-prop-type-hom-Prop :
+is-prop-hom-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   is-prop (type-hom-Prop P Q)
-is-prop-type-hom-Prop P = is-prop-type-function-Prop (type-Prop P)
+is-prop-hom-Prop P = is-prop-function-Prop
 
 hom-Prop :
   {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 pr1 (hom-Prop P Q) = type-hom-Prop P Q
-pr2 (hom-Prop P Q) = is-prop-type-hom-Prop P Q
-
-implication-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-implication-Prop = hom-Prop
-
-type-implication-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
-type-implication-Prop = type-hom-Prop
+pr2 (hom-Prop P Q) = is-prop-hom-Prop P Q
 
 infixr 5 _⇒_
-_⇒_ = type-implication-Prop
+_⇒_ = hom-Prop
 ```
 
 ### The type of equivalences between two propositions is a proposition
@@ -386,3 +369,61 @@ is-prop-Prop : {l : Level} (A : UU l) → Prop l
 pr1 (is-prop-Prop A) = is-prop A
 pr2 (is-prop-Prop A) = is-prop-is-prop A
 ```
+
+## See also
+
+### Operations on propositions
+
+There is a wide range of operations on propositions due to the rich structure of
+intuitionistic logic. Below we give a structured overview of a notable selection
+of such operations and their notation in the library.
+
+The list is split into two sections, the first consists of operations that
+generalize to arbitrary types and even sufficiently nice
+[subuniverses](foundation.subuniverses.md), such as
+$n$-[types](foundation-core.truncated-types.md).
+
+| Name                                                        | Operator on types | Operator on propositions/subtypes |
+| ----------------------------------------------------------- | ----------------- | --------------------------------- |
+| [Dependent sum](foundation.dependent-pair-types.md)         | `Σ`               | `Σ-Prop`                          |
+| [Dependent product](foundation.dependent-function-types.md) | `Π`               | `Π-Prop`                          |
+| [Functions](foundation-core.function-types.md)              | `→`               | `⇒`                               |
+| [Logical equivalence](foundation.logical-equivalences.md)   | `↔`               | `⇔`                               |
+| [Product](foundation-core.cartesian-product-types.md)       | `×`               | `product-Prop`                    |
+| [Join](synthetic-homotopy-theory.joins-of-types.md)         | `*`               | `join-Prop`                       |
+| [Exclusive sum](foundation.exclusive-sum.md)                | `exclusive-sum`   | `exclusive-sum-Prop`              |
+| [Coproduct](foundation-core.coproduct-types.md)             | `+`               | _N/A_                             |
+
+Note that for many operations in the second section, there is an equivalent
+operation on propositions in the first.
+
+| Name                                                                         | Operator on types           | Operator on propositions/subtypes        |
+| ---------------------------------------------------------------------------- | --------------------------- | ---------------------------------------- |
+| [Initial object](foundation-core.empty-types.md)                             | `empty`                     | `empty-Prop`                             |
+| [Terminal object](foundation.unit-type.md)                                   | `unit`                      | `unit-Prop`                              |
+| [Existential quantification](foundation.existential-quantification.md)       | `exists-structure`          | `∃`                                      |
+| [Unique existential quantification](foundation.uniqueness-quantification.md) | `uniquely-exists-structure` | `∃!`                                     |
+| [Universal quantification](foundation.universal-quantification.md)           |                             | `∀'` (equivalent to `Π-Prop`)            |
+| [Conjunction](foundation.conjunction.md)                                     |                             | `∧` (equivalent to `product-Prop`)       |
+| [Disjunction](foundation.disjunction.md)                                     | `disjunction-type`          | `∨` (equivalent to `join-Prop`)          |
+| [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `xor-type`                  | `⊻` (equivalent to `exclusive-sum-Prop`) |
+| [Negation](foundation.negation.md)                                           | `¬`                         | `¬'`                                     |
+| [Double negation](foundation.double-negation.md)                             | `¬¬`                        | `¬¬'`                                    |
+
+We can also organize these operations by indexed and binary variants, giving us
+the following table:
+
+| Name                   | Binary | Indexed |
+| ---------------------- | ------ | ------- |
+| Product                | `×`    | `Π`     |
+| Conjunction            | `∧`    | `∀'`    |
+| Constructive existence | `+`    | `Σ`     |
+| Existence              | `∨`    | `∃`     |
+| Unique existence       | `⊻`    | `∃!`    |
+
+### Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

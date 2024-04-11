@@ -316,7 +316,11 @@ equiv-type-subtype :
 pr1 (equiv-type-subtype is-subtype-P is-subtype-Q f g) = tot f
 pr2 (equiv-type-subtype is-subtype-P is-subtype-Q f g) =
   is-equiv-tot-is-fiberwise-equiv {f = f}
-    ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q x) (g x))
+    ( λ x →
+      is-equiv-has-converse-is-prop
+        ( is-subtype-P x)
+        ( is-subtype-Q x)
+        ( g x))
 ```
 
 ### Equivalences of subtypes
@@ -342,7 +346,11 @@ abstract
     is-equiv f → ((x : A) → (Q (f x)) → P x) → is-equiv (map-Σ Q f g)
   is-equiv-subtype-is-equiv {Q = Q} is-subtype-P is-subtype-Q f g is-equiv-f h =
     is-equiv-map-Σ Q is-equiv-f
-      ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q (f x)) (h x))
+      ( λ x →
+        is-equiv-has-converse-is-prop
+          ( is-subtype-P x)
+          ( is-subtype-Q (f x))
+          ( h x))
 
 abstract
   is-equiv-subtype-is-equiv' :
@@ -356,6 +364,9 @@ abstract
   is-equiv-subtype-is-equiv' {P = P} {Q}
     is-subtype-P is-subtype-Q f g is-equiv-f h =
     is-equiv-map-Σ Q is-equiv-f
-      ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q (f x))
-        ( (tr P (is-retraction-map-inv-is-equiv is-equiv-f x)) ∘ (h (f x))))
+      ( λ x →
+        is-equiv-has-converse-is-prop
+          ( is-subtype-P x)
+          ( is-subtype-Q (f x))
+          ( (tr P (is-retraction-map-inv-is-equiv is-equiv-f x)) ∘ (h (f x))))
 ```

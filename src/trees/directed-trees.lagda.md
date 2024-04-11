@@ -178,7 +178,8 @@ module _
   where
 
   is-proper-node-Directed-Tree-Prop : node-Directed-Tree T → Prop l1
-  is-proper-node-Directed-Tree-Prop x = neg-Prop' (is-root-Directed-Tree T x)
+  is-proper-node-Directed-Tree-Prop x =
+    neg-type-Prop (is-root-Directed-Tree T x)
 
   is-proper-node-Directed-Tree : node-Directed-Tree T → UU l1
   is-proper-node-Directed-Tree x =

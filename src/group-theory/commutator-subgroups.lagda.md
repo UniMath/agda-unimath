@@ -129,7 +129,7 @@ module _
         ( generating-subset-commutator-subgroup-Group (conjugation-Group G x y))
         ( λ where
           ( (y , z) , refl) →
-            intro-∃
+            intro-exists
               ( conjugation-Group G x y , conjugation-Group G x z)
               ( inv (distributive-conjugation-commutator-Group G x y z)))
 

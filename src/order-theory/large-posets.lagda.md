@@ -16,6 +16,7 @@ open import category-theory.precategories
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -172,7 +173,7 @@ module _
   is-large-category-Large-Poset :
     is-large-category-Large-Precategory large-precategory-Large-Poset
   is-large-category-Large-Poset {l} x y =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-set-type-Large-Poset P x y)
       ( is-prop-iso-is-prop-hom-Precategory
         ( precategory-Large-Poset l)

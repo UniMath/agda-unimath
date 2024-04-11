@@ -671,11 +671,7 @@ module _
 
   contains-unit-subgroup-Prop :
     contains-unit-subset-Group G subset-subgroup-Prop
-  contains-unit-subgroup-Prop =
-    inl-disjunction-Prop
-      ( Id-Prop (set-Group G) (unit-Group G) (unit-Group G))
-      ( P)
-      ( refl)
+  contains-unit-subgroup-Prop = inl-disjunction refl
 
   is-closed-under-multiplication-subgroup-Prop' :
     (x y : type-Group G) →

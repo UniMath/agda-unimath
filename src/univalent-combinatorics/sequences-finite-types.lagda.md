@@ -24,6 +24,7 @@ open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions-of-values
 open import foundation.repetitions-sequences
 open import foundation.sequences
+open import foundation.sets
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
