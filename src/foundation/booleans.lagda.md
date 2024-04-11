@@ -256,16 +256,16 @@ pr1 equiv-neg-bool = neg-bool
 pr2 equiv-neg-bool = is-equiv-neg-bool
 ```
 
-### The constant function `const bool bool b` is not an equivalence
+### The constant function `const bool b` is not an equivalence
 
 ```agda
 abstract
-  no-section-const-bool : (b : bool) → ¬ (section (const bool bool b))
+  no-section-const-bool : (b : bool) → ¬ (section (const bool b))
   no-section-const-bool true (g , G) = neq-true-false-bool (G false)
   no-section-const-bool false (g , G) = neq-false-true-bool (G true)
 
 abstract
   is-not-equiv-const-bool :
-    (b : bool) → ¬ (is-equiv (const bool bool b))
+    (b : bool) → ¬ (is-equiv (const bool b))
   is-not-equiv-const-bool b e = no-section-const-bool b (section-is-equiv e)
 ```
