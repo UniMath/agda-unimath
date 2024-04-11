@@ -65,7 +65,7 @@ module _
     inv-htpy htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq
 ```
 
-### Given a term of the exponent the diagonal map is injective
+### Given an element of the exponent the diagonal map is injective
 
 ```agda
 module _
