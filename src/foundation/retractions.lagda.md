@@ -9,7 +9,6 @@ open import foundation-core.retractions public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.coslice
 open import foundation.dependent-pair-types
 open import foundation.retracts-of-types
@@ -20,7 +19,6 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 ```
 
 </details>

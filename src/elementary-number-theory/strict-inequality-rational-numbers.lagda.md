@@ -27,6 +27,7 @@ open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -197,28 +198,30 @@ module _
   (x : ℚ)
   where
 
-  left-∃-le-ℚ : ∃ ℚ (λ q → le-ℚ q x)
-  left-∃-le-ℚ = intro-∃
-    ( rational-fraction-ℤ frac)
-    ( preserves-le-left-rational-fraction-ℤ x frac
-      ( le-fraction-le-numerator-fraction-ℤ
-        ( frac)
-        ( fraction-ℚ x)
-        ( refl)
-        ( le-pred-ℤ (numerator-ℚ x))))
+  exists-lesser-ℚ : exists ℚ (λ q → le-ℚ-Prop q x)
+  exists-lesser-ℚ =
+    intro-exists
+      ( rational-fraction-ℤ frac)
+      ( preserves-le-left-rational-fraction-ℤ x frac
+        ( le-fraction-le-numerator-fraction-ℤ
+          ( frac)
+          ( fraction-ℚ x)
+          ( refl)
+          ( le-pred-ℤ (numerator-ℚ x))))
     where
     frac : fraction-ℤ
     frac = (pred-ℤ (numerator-ℚ x) , positive-denominator-ℚ x)
 
-  right-∃-le-ℚ : ∃ ℚ (λ r → le-ℚ x r)
-  right-∃-le-ℚ = intro-∃
-    ( rational-fraction-ℤ frac)
-    ( preserves-le-right-rational-fraction-ℤ x frac
-      ( le-fraction-le-numerator-fraction-ℤ
-        ( fraction-ℚ x)
-        ( frac)
-        ( refl)
-        ( le-succ-ℤ (numerator-ℚ x))))
+  exists-greater-ℚ : exists ℚ (λ r → le-ℚ-Prop x r)
+  exists-greater-ℚ =
+    intro-exists
+      ( rational-fraction-ℤ frac)
+      ( preserves-le-right-rational-fraction-ℤ x frac
+        ( le-fraction-le-numerator-fraction-ℤ
+          ( fraction-ℚ x)
+          ( frac)
+          ( refl)
+          ( le-succ-ℤ (numerator-ℚ x))))
     where
     frac : fraction-ℤ
     frac = (succ-ℤ (numerator-ℚ x) , positive-denominator-ℚ x)
@@ -282,9 +285,9 @@ module _
   (x y : ℚ) (H : le-ℚ x y)
   where
 
-  dense-le-ℚ : ∃ ℚ (λ r → le-ℚ x r × le-ℚ r y)
+  dense-le-ℚ : exists ℚ (λ r → le-ℚ-Prop x r ∧ le-ℚ-Prop r y)
   dense-le-ℚ =
-    intro-∃
+    intro-exists
       ( mediant-ℚ x y)
       ( le-left-mediant-ℚ x y H , le-right-mediant-ℚ x y H)
 ```
@@ -292,7 +295,8 @@ module _
 ### Strict inequality on the rational numbers is located
 
 ```agda
-located-le-ℚ : (x y z : ℚ) → le-ℚ y z → (le-ℚ-Prop y x) ∨ (le-ℚ-Prop x z)
+located-le-ℚ :
+  (x y z : ℚ) → le-ℚ y z → type-disjunction-Prop (le-ℚ-Prop y x) (le-ℚ-Prop x z)
 located-le-ℚ x y z H =
   unit-trunc-Prop
     ( map-coproduct

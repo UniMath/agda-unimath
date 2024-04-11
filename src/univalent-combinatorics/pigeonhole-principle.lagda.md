@@ -24,6 +24,7 @@ open import foundation.negation
 open import foundation.pairs-of-distinct-elements
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition

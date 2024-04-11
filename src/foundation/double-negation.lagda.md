@@ -26,10 +26,12 @@ open import foundation-core.propositions
 We define double negation and triple negation
 
 ```agda
-¬¬ : {l : Level} → UU l → UU l
+infix 25 ¬¬_ ¬¬¬_
+
+¬¬_ : {l : Level} → UU l → UU l
 ¬¬ P = ¬ (¬ P)
 
-¬¬¬ : {l : Level} → UU l → UU l
+¬¬¬_ : {l : Level} → UU l → UU l
 ¬¬¬ P = ¬ (¬ (¬ P))
 ```
 
@@ -41,7 +43,7 @@ intro-double-negation : {l : Level} {P : UU l} → P → ¬¬ P
 intro-double-negation p f = f p
 
 map-double-negation :
-  {l1 l2 : Level} {P : UU l1} {Q : UU l2} → (P → Q) → (¬¬ P → ¬¬ Q)
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2} → (P → Q) → ¬¬ P → ¬¬ Q
 map-double-negation f = map-neg (map-neg f)
 ```
 
@@ -50,17 +52,22 @@ map-double-negation f = map-neg (map-neg f)
 ### The double negation of a type is a proposition
 
 ```agda
-double-negation-Prop' :
+double-negation-type-Prop :
   {l : Level} (A : UU l) → Prop l
-double-negation-Prop' A = neg-Prop' (¬ A)
+double-negation-type-Prop A = neg-type-Prop (¬ A)
 
 double-negation-Prop :
   {l : Level} (P : Prop l) → Prop l
-double-negation-Prop P = double-negation-Prop' (type-Prop P)
+double-negation-Prop P = double-negation-type-Prop (type-Prop P)
 
 is-prop-double-negation :
   {l : Level} {A : UU l} → is-prop (¬¬ A)
 is-prop-double-negation = is-prop-neg
+
+infix 25 ¬¬'_
+
+¬¬'_ : {l : Level} (P : Prop l) → Prop l
+¬¬'_ = double-negation-Prop
 ```
 
 ### Double negations of classical laws
@@ -109,10 +116,10 @@ double-negation-elim-exp {P = P} {Q = Q} f p =
     ( ¬ Q)
     ( map-double-negation (λ (g : P → ¬¬ Q) → g p) f)
 
-double-negation-elim-forall :
+double-negation-elim-for-all :
   {l1 l2 : Level} {P : UU l1} {Q : P → UU l2} →
   ¬¬ ((p : P) → ¬¬ (Q p)) → (p : P) → ¬¬ (Q p)
-double-negation-elim-forall {P = P} {Q = Q} f p =
+double-negation-elim-for-all {P = P} {Q = Q} f p =
   double-negation-elim-neg
     ( ¬ (Q p))
     ( map-double-negation (λ (g : (u : P) → ¬¬ (Q u)) → g p) f)
@@ -137,7 +144,7 @@ abstract
   double-negation-double-negation-type-trunc-Prop A =
     double-negation-extend
       ( map-universal-property-trunc-Prop
-        ( double-negation-Prop' A)
+        ( double-negation-type-Prop A)
         ( intro-double-negation))
 
 abstract
@@ -146,3 +153,10 @@ abstract
   double-negation-type-trunc-Prop-double-negation =
     map-double-negation unit-trunc-Prop
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

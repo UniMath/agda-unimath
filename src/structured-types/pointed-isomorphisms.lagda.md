@@ -13,6 +13,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
@@ -379,7 +380,7 @@ module _
   pr1 equiv-is-pointed-iso-is-pointed-equiv =
     is-pointed-iso-is-pointed-equiv f
   pr2 equiv-is-pointed-iso-is-pointed-equiv =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-property-is-equiv (map-pointed-map f))
       ( is-prop-is-pointed-iso f)
       ( is-pointed-equiv-is-pointed-iso f)

@@ -271,7 +271,7 @@ abstract
                     ( pair (raise-empty-Prop _) map-inv-raise)))) ∘e
               ( right-distributive-Σ-coproduct
                 ( Σ (Prop _) type-Prop)
-                ( Σ (Prop _) (¬ ∘ type-Prop))
+                ( Σ (Prop _) (¬_ ∘ type-Prop))
                 ( ind-coproduct _
                   ( λ Q →
                     mere-equiv (Maybe B) ((Σ A _) + (type-Prop (pr1 Q))))

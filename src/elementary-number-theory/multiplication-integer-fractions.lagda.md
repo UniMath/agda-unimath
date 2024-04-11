@@ -7,11 +7,15 @@ module elementary-number-theory.multiplication-integer-fractions where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-integer-fractions
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
 
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 ```
@@ -107,4 +111,39 @@ commutative-mul-fraction-ℤ :
   (x y : fraction-ℤ) → sim-fraction-ℤ (x *fraction-ℤ y) (y *fraction-ℤ x)
 commutative-mul-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) =
   ap-mul-ℤ (commutative-mul-ℤ nx ny) (commutative-mul-ℤ dy dx)
+```
+
+### Multiplication on integer fractions distributes on the left over addition
+
+```agda
+left-distributive-mul-add-fraction-ℤ :
+  (x y z : fraction-ℤ) →
+  sim-fraction-ℤ
+    (mul-fraction-ℤ x (add-fraction-ℤ y z))
+    (add-fraction-ℤ (mul-fraction-ℤ x y) (mul-fraction-ℤ x z))
+left-distributive-mul-add-fraction-ℤ
+  (nx , dx , dxp) (ny , dy , dyp) (nz , dz , dzp) =
+    ( ap
+      ( ( nx *ℤ (ny *ℤ dz +ℤ nz *ℤ dy)) *ℤ_)
+      ( ( interchange-law-mul-mul-ℤ dx dy dx dz) ∙
+        ( associative-mul-ℤ dx dx (dy *ℤ dz)))) ∙
+    ( interchange-law-mul-mul-ℤ
+      ( nx)
+      ( ny *ℤ dz +ℤ nz *ℤ dy)
+      ( dx)
+      ( dx *ℤ (dy *ℤ dz))) ∙
+    ( inv
+      ( associative-mul-ℤ
+        ( nx *ℤ dx)
+        ( ny *ℤ dz +ℤ nz *ℤ dy)
+        ( dx *ℤ (dy *ℤ dz)))) ∙
+    ( ap
+      ( _*ℤ (dx *ℤ (dy *ℤ dz)))
+      ( ( left-distributive-mul-add-ℤ
+          ( nx *ℤ dx)
+          ( ny *ℤ dz)
+          ( nz *ℤ dy)) ∙
+        ( ap-add-ℤ
+          ( interchange-law-mul-mul-ℤ nx dx ny dz))
+          ( interchange-law-mul-mul-ℤ nx dx nz dy)))
 ```

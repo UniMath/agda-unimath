@@ -11,6 +11,7 @@ open import foundation-core.sets public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.univalent-type-families
@@ -21,6 +22,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.precomposition-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions

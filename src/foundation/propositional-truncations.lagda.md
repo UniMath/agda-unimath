@@ -10,6 +10,7 @@ module foundation.propositional-truncations where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.truncations
 open import foundation.universal-property-propositional-truncation
@@ -20,7 +21,6 @@ open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.precomposition-functions
@@ -59,7 +59,15 @@ all-elements-equal-type-trunc-Prop {l} {A} =
 
 trunc-Prop : {l : Level} → UU l → Prop l
 trunc-Prop = trunc neg-one-𝕋
+
+║_║₋₁ : {l : Level} → UU l → UU l
+║_║₋₁ = type-trunc-Prop
 ```
+
+**Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
+symbol `║` in the propositional truncation notation `║_║₋₁` can be inserted with
+`agda-input` using the escape sequence `\--=` and selecting the second item in
+the list.
 
 ## Properties
 
@@ -245,7 +253,7 @@ module _
   abstract
     is-equiv-map-idempotent-trunc-Prop : is-equiv map-idempotent-trunc-Prop
     is-equiv-map-idempotent-trunc-Prop =
-      is-equiv-is-prop
+      is-equiv-has-converse-is-prop
         ( is-prop-type-trunc-Prop)
         ( is-prop-type-trunc-Prop)
         ( unit-trunc-Prop)
@@ -259,7 +267,7 @@ module _
     is-equiv-map-inv-idempotent-trunc-Prop :
       is-equiv (unit-trunc-Prop {A = type-trunc-Prop A})
     is-equiv-map-inv-idempotent-trunc-Prop =
-      is-equiv-is-prop
+      is-equiv-has-converse-is-prop
         ( is-prop-type-trunc-Prop)
         ( is-prop-type-trunc-Prop)
         ( map-idempotent-trunc-Prop)
@@ -356,8 +364,8 @@ abstract
   is-equiv-map-distributive-trunc-product-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-equiv (map-distributive-trunc-product-Prop {A = A} {B = B})
-  is-equiv-map-distributive-trunc-product-Prop {l1} {l2} {A} {B} =
-    is-equiv-is-prop
+  is-equiv-map-distributive-trunc-product-Prop =
+    is-equiv-has-converse-is-prop
       ( is-prop-type-trunc-Prop)
       ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
       ( map-inv-distributive-trunc-product-Prop)
@@ -373,8 +381,8 @@ abstract
   is-equiv-map-inv-distributive-trunc-product-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-equiv (map-inv-distributive-trunc-product-Prop {A = A} {B = B})
-  is-equiv-map-inv-distributive-trunc-product-Prop {l1} {l2} {A} {B} =
-    is-equiv-is-prop
+  is-equiv-map-inv-distributive-trunc-product-Prop =
+    is-equiv-has-converse-is-prop
       ( is-prop-product is-prop-type-trunc-Prop is-prop-type-trunc-Prop)
       ( is-prop-type-trunc-Prop)
       ( map-distributive-trunc-product-Prop)
@@ -411,7 +419,7 @@ module _
     is-equiv-map-trunc-Prop-diagonal-coproduct :
       is-equiv map-trunc-Prop-diagonal-coproduct
     is-equiv-map-trunc-Prop-diagonal-coproduct =
-      is-equiv-is-prop
+      is-equiv-has-converse-is-prop
         is-prop-type-trunc-Prop
         is-prop-type-trunc-Prop
         map-inv-trunc-Prop-diagonal-coproduct
@@ -419,21 +427,32 @@ module _
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct :
       is-equiv map-inv-trunc-Prop-diagonal-coproduct
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct =
-      is-equiv-is-prop
+      is-equiv-has-converse-is-prop
         is-prop-type-trunc-Prop
         is-prop-type-trunc-Prop
         map-trunc-Prop-diagonal-coproduct
 
   equiv-trunc-Prop-diagonal-coproduct :
-    (type-trunc-Prop (A + A)) ≃ type-trunc-Prop A
+    type-trunc-Prop (A + A) ≃ type-trunc-Prop A
   pr1 equiv-trunc-Prop-diagonal-coproduct = map-trunc-Prop-diagonal-coproduct
   pr2 equiv-trunc-Prop-diagonal-coproduct =
     is-equiv-map-trunc-Prop-diagonal-coproduct
 
   inv-equiv-trunc-Prop-diagonal-coproduct :
-    (type-trunc-Prop A) ≃ type-trunc-Prop (A + A)
+    type-trunc-Prop A ≃ type-trunc-Prop (A + A)
   pr1 inv-equiv-trunc-Prop-diagonal-coproduct =
     map-inv-trunc-Prop-diagonal-coproduct
   pr2 inv-equiv-trunc-Prop-diagonal-coproduct =
     is-equiv-map-inv-trunc-Prop-diagonal-coproduct
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}
+
+## External links
+
+- [bracket type](https://ncatlab.org/nlab/show/bracket+type) at $n$Lab
