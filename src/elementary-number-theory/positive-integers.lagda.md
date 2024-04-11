@@ -9,6 +9,7 @@ module elementary-number-theory.positive-integers where
 ```agda
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -106,6 +107,13 @@ decidable-subtype-positive-ℤ x =
   ( is-positive-ℤ x ,
     is-prop-is-positive-ℤ x ,
     is-decidable-is-positive-ℤ x)
+```
+
+### Positive integers are nonzero
+
+```agda
+is-nonzero-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonzero-ℤ x
+is-nonzero-is-positive-ℤ {inr (inr x)} H ()
 ```
 
 ### The positive integers form a set

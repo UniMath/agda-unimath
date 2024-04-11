@@ -59,6 +59,22 @@ gcd-ℤ x y = int-ℕ (nat-gcd-ℤ x y)
 
 ## Properties
 
+### The greatest common divisor is invariant under negatives
+
+```agda
+module _
+  (x y : ℤ)
+  where
+
+  preserves-gcd-left-neg-ℤ : gcd-ℤ (neg-ℤ x) y ＝ gcd-ℤ x y
+  preserves-gcd-left-neg-ℤ =
+    ap (int-ℕ ∘ (λ z → gcd-ℕ z (abs-ℤ y))) (abs-neg-ℤ x)
+
+  preserves-gcd-right-neg-ℤ : gcd-ℤ x (neg-ℤ y) ＝ gcd-ℤ x y
+  preserves-gcd-right-neg-ℤ =
+    ap (int-ℕ ∘ (gcd-ℕ (abs-ℤ x))) (abs-neg-ℤ y)
+```
+
 ### A natural number `d` is a common divisor of two natural numbers `x` and `y` if and only if `int-ℕ d` is a common divisor of `int-ℕ x` and `ind-ℕ y`
 
 ```agda

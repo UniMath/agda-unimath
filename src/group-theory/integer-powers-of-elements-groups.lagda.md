@@ -159,13 +159,13 @@ module _
 
   integer-power-in-pos-Group :
     (n : ℕ) (g : type-Group G) →
-    integer-power-Group G (in-pos n) g ＝
+    integer-power-Group G (in-pos-ℤ n) g ＝
     power-Group G (succ-ℕ n) g
   integer-power-in-pos-Group n g = integer-power-int-Group (succ-ℕ n) g
 
   integer-power-in-neg-Group :
     (n : ℕ) (g : type-Group G) →
-    integer-power-Group G (in-neg n) g ＝
+    integer-power-Group G (in-neg-ℤ n) g ＝
     inv-Group G (power-Group G (succ-ℕ n) g)
   integer-power-in-neg-Group zero-ℕ g =
     right-unit-law-mul-Group G (inv-Group G g)
@@ -489,23 +489,23 @@ module _
         ( integer-power-one-Group G y)))
   distributive-integer-power-mul-Group (inr (inr (succ-ℕ k))) x y H =
     equational-reasoning
-      (x * y) ^ (succ-ℤ (in-pos k))
-      ＝ (x * y) ^ (in-pos k) * (x * y)
-        by integer-power-succ-Group G (in-pos k) (x * y)
-      ＝ (x ^ (in-pos k) * y ^ (in-pos k)) * (x * y)
+      (x * y) ^ (succ-ℤ (in-pos-ℤ k))
+      ＝ (x * y) ^ (in-pos-ℤ k) * (x * y)
+        by integer-power-succ-Group G (in-pos-ℤ k) (x * y)
+      ＝ (x ^ (in-pos-ℤ k) * y ^ (in-pos-ℤ k)) * (x * y)
         by
         ap
           ( _* (x * y))
           ( distributive-integer-power-mul-Group (inr (inr k)) x y H)
-      ＝ (x ^ (in-pos k) * x) * (y ^ (in-pos k) * y)
+      ＝ (x ^ (in-pos-ℤ k) * x) * (y ^ (in-pos-ℤ k) * y)
         by
         interchange-mul-mul-Group G
-          ( inv (commute-integer-powers-Group' G (in-pos k) H))
-      ＝ x ^ (succ-ℤ (in-pos k)) * y ^ (succ-ℤ (in-pos k))
+          ( inv (commute-integer-powers-Group' G (in-pos-ℤ k) H))
+      ＝ x ^ (succ-ℤ (in-pos-ℤ k)) * y ^ (succ-ℤ (in-pos-ℤ k))
         by
         ap-mul-Group G
-          ( inv (integer-power-succ-Group G (in-pos k) x))
-          ( inv (integer-power-succ-Group G (in-pos k) y))
+          ( inv (integer-power-succ-Group G (in-pos-ℤ k) x))
+          ( inv (integer-power-succ-Group G (in-pos-ℤ k) y))
 ```
 
 ### Powers by products of integers are iterated integer powers
@@ -557,18 +557,18 @@ module _
     ( inv (integer-power-one-Group G _))
   integer-power-mul-Group k (inr (inr (succ-ℕ l))) x =
     equational-reasoning
-      (x ^ (k * succ-ℤ (in-pos l)))
-      ＝ x ^ (k +ℤ k * (in-pos l))
-        by ap (x ^_) (right-successor-law-mul-ℤ k (in-pos l))
-      ＝ mul-Group G (x ^ k) (x ^ (k * in-pos l))
+      (x ^ (k * succ-ℤ (in-pos-ℤ l)))
+      ＝ x ^ (k +ℤ k * (in-pos-ℤ l))
+        by ap (x ^_) (right-successor-law-mul-ℤ k (in-pos-ℤ l))
+      ＝ mul-Group G (x ^ k) (x ^ (k * in-pos-ℤ l))
         by
-        distributive-integer-power-add-Group G x k (k * in-pos l)
-      ＝ mul-Group G (x ^ k) ((x ^ k) ^ (in-pos l))
+        distributive-integer-power-add-Group G x k (k * in-pos-ℤ l)
+      ＝ mul-Group G (x ^ k) ((x ^ k) ^ (in-pos-ℤ l))
         by
         ap (mul-Group G _) (integer-power-mul-Group k (inr (inr l)) x)
-      ＝ (x ^ k) ^ (succ-ℤ (in-pos l))
+      ＝ (x ^ k) ^ (succ-ℤ (in-pos-ℤ l))
         by
-        inv (integer-power-succ-Group' G (in-pos l) (x ^ k))
+        inv (integer-power-succ-Group' G (in-pos-ℤ l) (x ^ k))
 
   swap-integer-power-Group :
     (k l : ℤ) (x : type-Group G) →

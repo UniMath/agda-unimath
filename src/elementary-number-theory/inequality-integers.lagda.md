@@ -212,6 +212,79 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
 ℤ-Poset = (ℤ-Preorder , λ x y → antisymmetric-leq-ℤ)
 ```
 
+### An integer `x` is nonnegative if and only if `0 ≤ x`
+
+```agda
+module _
+  (x : ℤ)
+  where
+
+  abstract
+    leq-zero-is-nonnegative-ℤ : is-nonnegative-ℤ x → leq-ℤ zero-ℤ x
+    leq-zero-is-nonnegative-ℤ =
+      is-nonnegative-eq-ℤ (inv (right-zero-law-diff-ℤ x))
+
+    is-nonnegative-leq-zero-ℤ : leq-ℤ zero-ℤ x → is-nonnegative-ℤ x
+    is-nonnegative-leq-zero-ℤ =
+      is-nonnegative-eq-ℤ (right-zero-law-diff-ℤ x)
+```
+
+### An integer greater than or equal to a nonnegative integer is nonnegative
+
+```agda
+module _
+  (x y : ℤ) (I : leq-ℤ x y)
+  where
+
+  abstract
+    is-nonnegative-leq-nonnegative-ℤ : is-nonnegative-ℤ x → is-nonnegative-ℤ y
+    is-nonnegative-leq-nonnegative-ℤ H =
+      is-nonnegative-leq-zero-ℤ y
+        ( transitive-leq-ℤ
+          ( zero-ℤ)
+          ( x)
+          ( y)
+          ( I)
+          ( leq-zero-is-nonnegative-ℤ x H))
+```
+
+### An integer `x` is nonpositive if and only if `x ≤ 0`
+
+```agda
+module _
+  (x : ℤ)
+  where
+
+  abstract
+    leq-zero-is-nonpositive-ℤ : is-nonpositive-ℤ x → leq-ℤ x zero-ℤ
+    leq-zero-is-nonpositive-ℤ = is-nonnegative-neg-is-nonpositive-ℤ
+
+    is-nonpositive-leq-zero-ℤ : leq-ℤ x zero-ℤ → is-nonpositive-ℤ x
+    is-nonpositive-leq-zero-ℤ H =
+      is-nonpositive-eq-ℤ
+        ( neg-neg-ℤ x)
+        ( is-nonpositive-neg-is-nonnegative-ℤ H)
+```
+
+### An integer less than or equal to a nonpositive integer is nonpositive
+
+```agda
+module _
+  (x y : ℤ) (I : leq-ℤ x y)
+  where
+
+  abstract
+    is-nonpositive-leq-nonpositive-ℤ : is-nonpositive-ℤ y → is-nonpositive-ℤ x
+    is-nonpositive-leq-nonpositive-ℤ H =
+      is-nonpositive-leq-zero-ℤ x
+        ( transitive-leq-ℤ
+          ( x)
+          ( y)
+          ( zero-ℤ)
+          ( leq-zero-is-nonpositive-ℤ y H)
+          ( I))
+```
+
 ## See also
 
 - The decidable total order on the integers is defined in

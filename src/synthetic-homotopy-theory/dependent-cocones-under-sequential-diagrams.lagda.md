@@ -41,7 +41,7 @@ open import synthetic-homotopy-theory.sequential-diagrams
 Given a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
 `(A, a)`, a
 [cocone](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md) `c`
-with vertex `X` under it, and a type family `P : X → 𝓤`, we may construct
+with vertex `X` under it, and a type family `P : X → 𝒰`, we may construct
 _dependent_ cocones on `P` over `c`.
 
 A **dependent cocone under a

@@ -336,21 +336,21 @@ int-mul-nonpositive-ℤ' x y = y *ℤ int-nonpositive-ℤ x
 
 ```agda
 mul-positive-ℤ : positive-ℤ → positive-ℤ → positive-ℤ
-mul-positive-ℤ (x , H) (y , K) = mul-ℤ x y , is-positive-mul-ℤ H K
+mul-positive-ℤ (x , H) (y , K) = (mul-ℤ x y , is-positive-mul-ℤ H K)
 ```
 
 ### Multiplication of nonnegative integers
 
 ```agda
 mul-nonnegative-ℤ : nonnegative-ℤ → nonnegative-ℤ → nonnegative-ℤ
-mul-nonnegative-ℤ (x , H) (y , K) = mul-ℤ x y , is-nonnegative-mul-ℤ H K
+mul-nonnegative-ℤ (x , H) (y , K) = (mul-ℤ x y , is-nonnegative-mul-ℤ H K)
 ```
 
 ### Multiplication of negative integers
 
 ```agda
 mul-negative-ℤ : negative-ℤ → negative-ℤ → positive-ℤ
-mul-negative-ℤ (x , H) (y , K) = mul-ℤ x y , is-positive-mul-negative-ℤ H K
+mul-negative-ℤ (x , H) (y , K) = (mul-ℤ x y , is-positive-mul-negative-ℤ H K)
 ```
 
 ### Multiplication of nonpositive integers
@@ -358,7 +358,7 @@ mul-negative-ℤ (x , H) (y , K) = mul-ℤ x y , is-positive-mul-negative-ℤ H 
 ```agda
 mul-nonpositive-ℤ : nonpositive-ℤ → nonpositive-ℤ → nonnegative-ℤ
 mul-nonpositive-ℤ (x , H) (y , K) =
-  mul-ℤ x y , is-nonnegative-mul-nonpositive-ℤ H K
+  (mul-ℤ x y , is-nonnegative-mul-nonpositive-ℤ H K)
 ```
 
 ## Properties
@@ -374,14 +374,14 @@ module _
     le-ℤ x y → le-ℤ (int-mul-positive-ℤ z x) (int-mul-positive-ℤ z y)
   preserves-le-right-mul-positive-ℤ K =
     is-positive-eq-ℤ
-      ( inv (linear-diff-left-mul-ℤ (int-positive-ℤ z) y x))
+      ( left-distributive-mul-diff-ℤ (int-positive-ℤ z) y x)
       ( is-positive-mul-ℤ (is-positive-int-positive-ℤ z) K)
 
   preserves-le-left-mul-positive-ℤ :
     le-ℤ x y → le-ℤ (int-mul-positive-ℤ' z x) (int-mul-positive-ℤ' z y)
   preserves-le-left-mul-positive-ℤ K =
     is-positive-eq-ℤ
-      ( inv (linear-diff-right-mul-ℤ y x (int-positive-ℤ z)))
+      ( right-distributive-mul-diff-ℤ y x (int-positive-ℤ z))
       ( is-positive-mul-ℤ K (is-positive-int-positive-ℤ z))
 
   reflects-le-right-mul-positive-ℤ :
@@ -389,7 +389,7 @@ module _
   reflects-le-right-mul-positive-ℤ K =
     is-positive-right-factor-mul-ℤ
       ( is-positive-eq-ℤ
-        ( linear-diff-left-mul-ℤ (int-positive-ℤ z) y x)
+        ( inv (left-distributive-mul-diff-ℤ (int-positive-ℤ z) y x))
         ( K))
       ( is-positive-int-positive-ℤ z)
 
@@ -398,7 +398,7 @@ module _
   reflects-le-left-mul-positive-ℤ K =
     is-positive-left-factor-mul-ℤ
       ( is-positive-eq-ℤ
-        ( linear-diff-right-mul-ℤ y x (int-positive-ℤ z))
+      ( inv (right-distributive-mul-diff-ℤ y x (int-positive-ℤ z)))
         ( K))
       ( is-positive-int-positive-ℤ z)
 ```
@@ -414,13 +414,13 @@ module _
     leq-ℤ x y → leq-ℤ (int-mul-nonnegative-ℤ z x) (int-mul-nonnegative-ℤ z y)
   preserves-leq-right-mul-nonnegative-ℤ K =
     is-nonnegative-eq-ℤ
-      ( inv (linear-diff-left-mul-ℤ (int-nonnegative-ℤ z) y x))
+      ( left-distributive-mul-diff-ℤ (int-nonnegative-ℤ z) y x)
       ( is-nonnegative-mul-ℤ (is-nonnegative-int-nonnegative-ℤ z) K)
 
   preserves-leq-left-mul-nonnegative-ℤ :
     leq-ℤ x y → leq-ℤ (int-mul-nonnegative-ℤ' z x) (int-mul-nonnegative-ℤ' z y)
   preserves-leq-left-mul-nonnegative-ℤ K =
     is-nonnegative-eq-ℤ
-      ( inv (linear-diff-right-mul-ℤ y x (int-nonnegative-ℤ z)))
+      ( right-distributive-mul-diff-ℤ y x (int-nonnegative-ℤ z))
       ( is-nonnegative-mul-ℤ K (is-nonnegative-int-nonnegative-ℤ z))
 ```
