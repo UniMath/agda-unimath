@@ -38,9 +38,9 @@ equipped with
 a [commutative](commutative-algebra.commutative-rings.md)
 [ring](ring-theory.rings.md).
 
-## Lemmas
+## Definitions
 
-### The abelian group of rational numbers has a compatible multiplicative structure
+### The compatible multiplicative structure on the abelian group of rational numbers
 
 ```agda
 has-associative-mul-ℚ : has-associative-mul ℚ
@@ -52,21 +52,24 @@ pr1 is-unital-mul-ℚ = one-ℚ
 pr1 (pr2 is-unital-mul-ℚ) = left-unit-law-mul-ℚ
 pr2 (pr2 is-unital-mul-ℚ) = right-unit-law-mul-ℚ
 
-has-mul-Ab-ℚ : has-mul-Ab ℚ-Ab
-pr1 has-mul-Ab-ℚ = has-associative-mul-ℚ
-pr1 (pr2 has-mul-Ab-ℚ) = is-unital-mul-ℚ
-pr1 (pr2 (pr2 has-mul-Ab-ℚ)) = left-distributive-mul-add-ℚ
-pr2 (pr2 (pr2 has-mul-Ab-ℚ)) = right-distributive-mul-add-ℚ
+has-mul-ℚ-Ab : has-mul-Ab ℚ-Ab
+pr1 has-mul-ℚ-Ab = has-associative-mul-ℚ
+pr1 (pr2 has-mul-ℚ-Ab) = is-unital-mul-ℚ
+pr1 (pr2 (pr2 has-mul-ℚ-Ab)) = left-distributive-mul-add-ℚ
+pr2 (pr2 (pr2 has-mul-ℚ-Ab)) = right-distributive-mul-add-ℚ
 ```
 
-## Definitions
-
-### The commutative ring of rational numbers
+### The ring of rational numbers
 
 ```agda
 ℚ-Ring : Ring lzero
 pr1 ℚ-Ring = ℚ-Ab
-pr2 ℚ-Ring = has-mul-Ab-ℚ
+pr2 ℚ-Ring = has-mul-ℚ-Ab
+```
+
+### The commutative ring of rational numbers
+
+```agda
 
 ℚ-Commutative-Ring : Commutative-Ring lzero
 pr1 ℚ-Commutative-Ring = ℚ-Ring
