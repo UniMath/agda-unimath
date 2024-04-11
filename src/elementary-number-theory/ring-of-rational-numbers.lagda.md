@@ -35,8 +35,7 @@ The
 [commutative group of rational numbers](elementary-number-theory.group-of-rational-numbers.md)
 equipped with
 [multiplication](elementary-number-theory.multiplication-rational-numbers.md) is
-a [commutative](commutative-algebra.commutative-rings.md)
-[ring](ring-theory.rings.md).
+a [commutative ring](commutative-algebra.commutative-rings.md).
 
 ## Definitions
 
