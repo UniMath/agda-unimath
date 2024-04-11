@@ -78,7 +78,7 @@ module _
   is-integer-power-of-element-prop-Group :
     (x y : type-Group G) → Prop l
   is-integer-power-of-element-prop-Group x y =
-    ∃-Prop ℤ (λ k → integer-power-Group G k x ＝ y)
+    exists-structure-Prop ℤ (λ k → integer-power-Group G k x ＝ y)
 
   is-integer-power-of-element-Group :
     (x y : type-Group G) → UU l

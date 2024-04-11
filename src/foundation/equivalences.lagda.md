@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
+open import foundation.logical-equivalences
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
@@ -204,7 +205,7 @@ module _
     ( H : coherence-triangle-maps h (map-equiv e) f) →
     is-equiv f ≃ is-equiv h
   equiv-is-equiv-right-map-triangle {f} e h H =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-property-is-equiv f)
       ( is-property-is-equiv h)
       ( λ is-equiv-f →
@@ -231,7 +232,7 @@ module _
     ( H : coherence-triangle-maps h f (map-equiv e)) →
     is-equiv f ≃ is-equiv h
   equiv-is-equiv-top-map-triangle e {f} h H =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-property-is-equiv f)
       ( is-property-is-equiv h)
       ( is-equiv-left-map-triangle h f (map-equiv e) H (is-equiv-map-equiv e))
@@ -396,7 +397,7 @@ module _
     { f g : A → B} → (f ~ g) →
     is-equiv f ≃ is-equiv g
   equiv-is-equiv-htpy {f} {g} H =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-property-is-equiv f)
       ( is-property-is-equiv g)
       ( is-equiv-htpy f (inv-htpy H))

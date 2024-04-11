@@ -11,6 +11,8 @@ open import foundation-core.propositions public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
@@ -69,9 +71,67 @@ abstract
 equiv-is-prop-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   A ≃ B → is-prop A ≃ is-prop B
 equiv-is-prop-equiv {A = A} {B = B} e =
-  equiv-prop
-    (is-prop-is-prop A)
-    (is-prop-is-prop B)
-    (is-prop-equiv' e)
-    (is-prop-equiv e)
+  equiv-iff-is-prop
+    ( is-prop-is-prop A)
+    ( is-prop-is-prop B)
+    ( is-prop-equiv' e)
+    ( is-prop-equiv e)
 ```
+
+## See also
+
+### Operations on propositions
+
+There is a wide range of operations on propositions due to the rich structure of
+intuitionistic logic. Below we give a structured overview of a notable selection
+of such operations and their notation in the library.
+
+The list is split into two sections, the first consists of operations that
+generalize to arbitrary types and even sufficiently nice
+[subuniverses](foundation.subuniverses.md), such as
+$n$-[types](foundation-core.truncated-types.md).
+
+| Name                                                        | Operator on types | Operator on propositions/subtypes |
+| ----------------------------------------------------------- | ----------------- | --------------------------------- |
+| [Dependent sum](foundation.dependent-pair-types.md)         | `Σ`               | `Σ-Prop`                          |
+| [Dependent product](foundation.dependent-function-types.md) | `Π`               | `Π-Prop`                          |
+| [Functions](foundation-core.function-types.md)              | `→`               | `⇒`                               |
+| [Logical equivalence](foundation.logical-equivalences.md)   | `↔`               | `⇔`                               |
+| [Product](foundation-core.cartesian-product-types.md)       | `×`               | `product-Prop`                    |
+| [Join](synthetic-homotopy-theory.joins-of-types.md)         | `*`               | `join-Prop`                       |
+| [Exclusive sum](foundation.exclusive-sum.md)                | `exclusive-sum`   | `exclusive-sum-Prop`              |
+| [Coproduct](foundation-core.coproduct-types.md)             | `+`               | _N/A_                             |
+
+Note that for many operations in the second section, there is an equivalent
+operation on propositions in the first.
+
+| Name                                                                         | Operator on types           | Operator on propositions/subtypes        |
+| ---------------------------------------------------------------------------- | --------------------------- | ---------------------------------------- |
+| [Initial object](foundation-core.empty-types.md)                             | `empty`                     | `empty-Prop`                             |
+| [Terminal object](foundation.unit-type.md)                                   | `unit`                      | `unit-Prop`                              |
+| [Existential quantification](foundation.existential-quantification.md)       | `exists-structure`          | `∃`                                      |
+| [Unique existential quantification](foundation.uniqueness-quantification.md) | `uniquely-exists-structure` | `∃!`                                     |
+| [Universal quantification](foundation.universal-quantification.md)           |                             | `∀'` (equivalent to `Π-Prop`)            |
+| [Conjunction](foundation.conjunction.md)                                     |                             | `∧` (equivalent to `product-Prop`)       |
+| [Disjunction](foundation.disjunction.md)                                     | `disjunction-type`          | `∨` (equivalent to `join-Prop`)          |
+| [Exclusive disjunction](foundation.exclusive-disjunction.md)                 | `xor-type`                  | `⊻` (equivalent to `exclusive-sum-Prop`) |
+| [Negation](foundation.negation.md)                                           | `¬`                         | `¬'`                                     |
+| [Double negation](foundation.double-negation.md)                             | `¬¬`                        | `¬¬'`                                    |
+
+We can also organize these operations by indexed and binary variants, giving us
+the following table:
+
+| Name                   | Binary | Indexed |
+| ---------------------- | ------ | ------- |
+| Product                | `×`    | `Π`     |
+| Conjunction            | `∧`    | `∀'`    |
+| Constructive existence | `+`    | `Σ`     |
+| Existence              | `∨`    | `∃`     |
+| Unique existence       | `⊻`    | `∃!`    |
+
+### Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

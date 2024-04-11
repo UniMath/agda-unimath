@@ -12,8 +12,10 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.injective-maps
 open import foundation.negation
 open import foundation.sections
+open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -24,7 +26,6 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.retracts-of-types
 open import foundation-core.sets
@@ -223,7 +224,7 @@ abstract
   is-prop-has-decidable-equality :
     {l1 : Level} {X : UU l1} → is-prop (has-decidable-equality X)
   is-prop-has-decidable-equality {l1} {X} =
-    is-prop-is-inhabited
+    is-prop-has-element
       ( λ d →
         is-prop-Π
         ( λ x →

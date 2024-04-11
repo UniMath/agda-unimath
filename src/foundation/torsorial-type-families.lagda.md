@@ -110,3 +110,8 @@ module _
       ( λ u → is-torsorial-fiber-Id (pr2 u))
       ( fiber-Id-is-torsorial)
 ```
+
+### See also
+
+- [Discrete relations](foundation.discrete-relations.md) are binary torsorial
+  type families.

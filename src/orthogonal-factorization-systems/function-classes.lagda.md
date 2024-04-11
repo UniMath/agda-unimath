@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.pullbacks
 open import foundation.subtypes
@@ -233,7 +234,7 @@ module _
   is-equiv-has-identity-maps-has-equivalences-function-class :
     is-equiv has-identity-maps-has-equivalences-function-class
   is-equiv-has-identity-maps-has-equivalences-function-class =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-has-equivalences-function-class P)
       ( is-prop-has-identity-maps-function-class P)
       ( has-equivalences-has-identity-maps-function-class)
@@ -248,7 +249,7 @@ module _
   is-equiv-has-equivalences-has-identity-maps-function-class :
     is-equiv has-equivalences-has-identity-maps-function-class
   is-equiv-has-equivalences-has-identity-maps-function-class =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-has-identity-maps-function-class P)
       ( is-prop-has-equivalences-function-class P)
       ( has-identity-maps-has-equivalences-function-class)

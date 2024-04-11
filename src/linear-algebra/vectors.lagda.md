@@ -51,7 +51,7 @@ infixr 10 _∷_
 
 data vec {l : Level} (A : UU l) : ℕ → UU l where
   empty-vec : vec A zero-ℕ
-  _∷_ : ∀ {n} → A → vec A n → vec A (succ-ℕ n)
+  _∷_ : {n : ℕ} → A → vec A n → vec A (succ-ℕ n)
 
 module _
   {l : Level} {A : UU l}
