@@ -8,13 +8,23 @@ module commutative-algebra.trivial-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.isomorphisms-commutative-rings
 
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
+open import foundation.structure-identity-principle
+open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.identity-types
+
+open import group-theory.abelian-groups
+open import group-theory.trivial-groups
+
+open import ring-theory.rings
 open import ring-theory.trivial-rings
 ```
 
@@ -75,3 +85,32 @@ is-contr-is-trivial-Commutative-Ring :
 is-contr-is-trivial-Commutative-Ring A p =
   is-contr-is-trivial-Ring (ring-Commutative-Ring A) p
 ```
+
+### The trivial ring
+
+```agda
+trivial-Ring : Ring lzero
+pr1 trivial-Ring = trivial-Ab
+pr1 (pr1 (pr2 trivial-Ring)) x y = star
+pr2 (pr1 (pr2 trivial-Ring)) x y z = refl
+pr1 (pr1 (pr2 (pr2 trivial-Ring))) = star
+pr1 (pr2 (pr1 (pr2 (pr2 trivial-Ring)))) star = refl
+pr2 (pr2 (pr1 (pr2 (pr2 trivial-Ring)))) star = refl
+pr2 (pr2 (pr2 trivial-Ring)) = (λ a b c → refl) , (λ a b c → refl)
+
+is-commutative-trivial-Ring : is-commutative-Ring trivial-Ring
+is-commutative-trivial-Ring x y = refl
+
+trivial-Commutative-Ring : Commutative-Ring lzero
+trivial-Commutative-Ring = (trivial-Ring , is-commutative-trivial-Ring)
+
+is-trivial-trivial-Commutative-Ring :
+  is-trivial-Commutative-Ring trivial-Commutative-Ring
+is-trivial-trivial-Commutative-Ring = refl
+```
+
+### The type of trivial rings is contractible
+
+To-do: complete proof of uniqueness of the zero ring using SIP, ideally refactor
+code to do zero algebras all along the chain to prettify and streamline future
+work
