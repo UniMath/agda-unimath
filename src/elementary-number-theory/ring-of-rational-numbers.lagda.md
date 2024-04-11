@@ -19,7 +19,10 @@ open import elementary-number-theory.rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.unital-binary-operations
 open import foundation.universe-levels
+
+open import group-theory.semigroups
 
 open import ring-theory.rings
 ```
@@ -35,6 +38,27 @@ equipped with
 a [commutative](commutative-algebra.commutative-rings.md)
 [ring](ring-theory.rings.md).
 
+## Lemmas
+
+### The abelian group of rational numbers has a compatible multiplicative structure
+
+```agda
+has-associative-mul-ℚ : has-associative-mul ℚ
+pr1 has-associative-mul-ℚ = mul-ℚ
+pr2 has-associative-mul-ℚ = associative-mul-ℚ
+
+is-unital-mul-ℚ : is-unital mul-ℚ
+pr1 is-unital-mul-ℚ = one-ℚ
+pr1 (pr2 is-unital-mul-ℚ) = left-unit-law-mul-ℚ
+pr2 (pr2 is-unital-mul-ℚ) = right-unit-law-mul-ℚ
+
+has-mul-Ab-ℚ : has-mul-Ab ℚ-Ab
+pr1 has-mul-Ab-ℚ = has-associative-mul-ℚ
+pr1 (pr2 has-mul-Ab-ℚ) = is-unital-mul-ℚ
+pr1 (pr2 (pr2 has-mul-Ab-ℚ)) = left-distributive-mul-add-ℚ
+pr2 (pr2 (pr2 has-mul-Ab-ℚ)) = right-distributive-mul-add-ℚ
+```
+
 ## Definitions
 
 ### The commutative ring of rational numbers
@@ -42,13 +66,7 @@ a [commutative](commutative-algebra.commutative-rings.md)
 ```agda
 ℚ-Ring : Ring lzero
 pr1 ℚ-Ring = ℚ-Ab
-pr1 (pr1 (pr2 ℚ-Ring)) = mul-ℚ
-pr2 (pr1 (pr2 ℚ-Ring)) = associative-mul-ℚ
-pr1 (pr1 (pr2 (pr2 ℚ-Ring))) = one-ℚ
-pr1 (pr2 (pr1 (pr2 (pr2 ℚ-Ring)))) = left-unit-law-mul-ℚ
-pr2 (pr2 (pr1 (pr2 (pr2 ℚ-Ring)))) = right-unit-law-mul-ℚ
-pr1 (pr2 (pr2 (pr2 ℚ-Ring))) = left-distributive-mul-add-ℚ
-pr2 (pr2 (pr2 (pr2 ℚ-Ring))) = right-distributive-mul-add-ℚ
+pr2 ℚ-Ring = has-mul-Ab-ℚ
 
 ℚ-Commutative-Ring : Commutative-Ring lzero
 pr1 ℚ-Commutative-Ring = ℚ-Ring
