@@ -271,7 +271,7 @@ module _
     elim-disjunction (is-inhabited-Prop A) unit-trunc-Prop (ex-falso ∘ f)
 ```
 
-### The disjunction of arbitrary types is the disjunction of inhabitedness proofs
+### The disjunction of arbitrary types is the disjunction of inhabitedness propositions
 
 ```agda
 module _

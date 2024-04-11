@@ -36,7 +36,7 @@ The
 of two [propositions](foundation-core.propositions.md) `P` and `Q` is the
 proposition that precisely one of `P` and `Q` holds, and is defined as the
 proposition that the [coproduct](foundation-core.coproduct-types.md) of their
-underlying types is contractible
+underlying types is [contractible](foundation-core.contractible-types.md)
 
 ```text
   P ⊻ Q := is-contr (P + Q)

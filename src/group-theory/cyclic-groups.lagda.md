@@ -137,12 +137,12 @@ module _
     {l : Level} →
     exists-structure
       ( type-Group G)
-      ( λ g → is-emb-ev-element-hom-level-Group G g l)
+      ( λ g → is-emb-ev-element-hom-Group' G g l)
   is-cyclic-has-generating-element-Group H {l} =
     apply-universal-property-trunc-Prop H
       ( exists-structure-Prop
         ( type-Group G)
-        ( λ g → is-emb-ev-element-hom-level-Group G g l))
+        ( λ g → is-emb-ev-element-hom-Group' G g l))
       ( λ (g , u) →
         intro-exists g (is-emb-ev-element-is-generating-element-Group G g u))
 ```

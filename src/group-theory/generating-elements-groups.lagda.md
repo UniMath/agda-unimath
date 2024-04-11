@@ -159,13 +159,13 @@ module _
   {l1 : Level} (G : Group l1) (g : type-Group G)
   where
 
-  is-emb-ev-element-hom-level-Group : (l : Level) → UU (l1 ⊔ lsuc l)
-  is-emb-ev-element-hom-level-Group l =
+  is-emb-ev-element-hom-Group' : (l : Level) → UU (l1 ⊔ lsuc l)
+  is-emb-ev-element-hom-Group' l =
     (H : Group l) → is-emb (ev-element-hom-Group G H g)
 
   is-emb-ev-element-hom-Group : UUω
   is-emb-ev-element-hom-Group =
-    {l : Level} → is-emb-ev-element-hom-level-Group l
+    {l : Level} → is-emb-ev-element-hom-Group' l
 
   is-prop-map-ev-element-hom-Group : UUω
   is-prop-map-ev-element-hom-Group =

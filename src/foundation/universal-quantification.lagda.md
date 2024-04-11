@@ -30,9 +30,8 @@ the
   ∀ (x : A), (P x)
 ```
 
-is the [proposition](foundation-core.propositions.md) that there
-[merely exists](foundation.inhabited-types.md) a proof of `P x` for every `x` in
-`A`.
+is the [proposition](foundation-core.propositions.md) that there exists a proof
+of `P x` for every `x` in `A`.
 
 The
 {{#concept "universal property" Disambiguation="of universal quantification" Agda=universal-property-for-all}}
