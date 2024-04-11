@@ -9,6 +9,8 @@ module graph-theory.reflexive-graphs where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+
+open import graph-theory.directed-graphs
 ```
 
 </details>
@@ -38,6 +40,9 @@ module _
 
   refl-Reflexive-Graph : (x : vertex-Reflexive-Graph) → edge-Reflexive-Graph x x
   refl-Reflexive-Graph = pr2 (pr2 G)
+
+  graph-Reflexive-Graph : Directed-Graph l1 l2
+  graph-Reflexive-Graph = vertex-Reflexive-Graph , edge-Reflexive-Graph
 ```
 
 ## See also
