@@ -62,9 +62,9 @@ relation. We consider the strict symmetrization of the standard identity
 relation in
 [`foundation.strictly-involutive-identity-types`](foundation.strictly-involutive-identity-types.md).
 
-**Warning.** The strict symmetrization is not the symmetric closure in general.
-For instance, if the underlying relation has an initial element, i.e., there is
-an element `a` such that `R a x` is
+**Warning.** The strict symmetrization is not the symmetric closure. For
+instance, if the underlying relation has an initial element, i.e., there is an
+element `a` such that `R a x` is
 [contractible](foundation-core.contractible-types.md) for every `x`, then the
 strict symmetrization will be reflexive, while the symmetric closure need not
 be.
