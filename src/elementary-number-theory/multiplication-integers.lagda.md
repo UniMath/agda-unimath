@@ -9,13 +9,16 @@ module elementary-number-theory.multiplication-integers where
 ```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.addition-positive-and-negative-integers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonzero-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -26,12 +29,20 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
 </details>
+
+## Idea
+
+We introduce the
+{{#concept "multiplication" Disambiguation="integers" Agda=mul-ℤ}} of integers
+and derive its basic properties with respect to `succ-ℤ`, `pred-ℤ`, `neg-ℤ` and
+`add-ℤ`.
 
 ## Definitions
 
@@ -83,7 +94,7 @@ is-plus-or-minus-ℤ x y = (x ＝ y) + (neg-one-ℤ *ℤ x ＝ y)
 
 ## Properties
 
-### Laws for multiplication on ℤ
+### Multiplication by zero is zero
 
 ```agda
 left-zero-law-mul-ℤ : (k : ℤ) → zero-ℤ *ℤ k ＝ zero-ℤ
@@ -97,7 +108,11 @@ right-zero-law-mul-ℤ (inr (inl star)) = refl
 right-zero-law-mul-ℤ (inr (inr zero-ℕ)) = refl
 right-zero-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   right-zero-law-mul-ℤ (inr (inr n))
+```
 
+### Unit laws
+
+```agda
 left-unit-law-mul-ℤ : (k : ℤ) → one-ℤ *ℤ k ＝ k
 left-unit-law-mul-ℤ k = refl
 
@@ -109,7 +124,11 @@ right-unit-law-mul-ℤ (inr (inl star)) = refl
 right-unit-law-mul-ℤ (inr (inr zero-ℕ)) = refl
 right-unit-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   ap (one-ℤ +ℤ_) (right-unit-law-mul-ℤ (inr (inr n)))
+```
 
+### Multiplication of an integer by `-1` is equal to the negative
+
+```agda
 left-neg-unit-law-mul-ℤ : (k : ℤ) → neg-one-ℤ *ℤ k ＝ neg-ℤ k
 left-neg-unit-law-mul-ℤ k = refl
 
@@ -121,7 +140,11 @@ right-neg-unit-law-mul-ℤ (inr (inl star)) = refl
 right-neg-unit-law-mul-ℤ (inr (inr zero-ℕ)) = refl
 right-neg-unit-law-mul-ℤ (inr (inr (succ-ℕ n))) =
   ap (neg-one-ℤ +ℤ_) (right-neg-unit-law-mul-ℤ (inr (inr n)))
+```
 
+### Multiplication by the successor or the predecessor of an integer
+
+```agda
 left-successor-law-mul-ℤ :
   (k l : ℤ) → (succ-ℤ k) *ℤ l ＝ l +ℤ (k *ℤ l)
 left-successor-law-mul-ℤ (inl zero-ℕ) l =
@@ -146,9 +169,9 @@ left-predecessor-law-mul-ℤ (inr (inr zero-ℕ)) l =
   inv (left-inverse-law-add-ℤ l)
 left-predecessor-law-mul-ℤ (inr (inr (succ-ℕ x))) l =
   ( ap
-    ( _+ℤ ((in-pos x) *ℤ l))
+    ( _+ℤ ((in-pos-ℤ x) *ℤ l))
     ( inv (left-inverse-law-add-ℤ l))) ∙
-  ( associative-add-ℤ (neg-ℤ l) l ((in-pos x) *ℤ l))
+  ( associative-add-ℤ (neg-ℤ l) l ((in-pos-ℤ x) *ℤ l))
 
 right-successor-law-mul-ℤ :
   (k l : ℤ) → k *ℤ (succ-ℤ l) ＝ k +ℤ (k *ℤ l)
@@ -176,16 +199,16 @@ right-successor-law-mul-ℤ (inl (succ-ℕ n)) l =
 right-successor-law-mul-ℤ (inr (inl star)) l = refl
 right-successor-law-mul-ℤ (inr (inr zero-ℕ)) l = refl
 right-successor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
-  ( left-successor-law-mul-ℤ (in-pos n) (succ-ℤ l)) ∙
+  ( left-successor-law-mul-ℤ (in-pos-ℤ n) (succ-ℤ l)) ∙
   ( ( ap ((succ-ℤ l) +ℤ_) (right-successor-law-mul-ℤ (inr (inr n)) l)) ∙
-    ( ( inv (associative-add-ℤ (succ-ℤ l) (in-pos n) ((in-pos n) *ℤ l))) ∙
+    ( ( inv (associative-add-ℤ (succ-ℤ l) (in-pos-ℤ n) ((in-pos-ℤ n) *ℤ l))) ∙
       ( ( ap
-          ( _+ℤ ((in-pos n) *ℤ l))
-          { x = (succ-ℤ l) +ℤ (in-pos n)}
-          { y = (in-pos (succ-ℕ n)) +ℤ l}
-          ( ( left-successor-law-add-ℤ l (in-pos n)) ∙
-            ( ( ap succ-ℤ (commutative-add-ℤ l (in-pos n))) ∙
-              ( inv (left-successor-law-add-ℤ (in-pos n) l))))) ∙
+          ( _+ℤ ((in-pos-ℤ n) *ℤ l))
+          { x = (succ-ℤ l) +ℤ (in-pos-ℤ n)}
+          { y = (in-pos-ℤ (succ-ℕ n)) +ℤ l}
+          ( ( left-successor-law-add-ℤ l (in-pos-ℤ n)) ∙
+            ( ( ap succ-ℤ (commutative-add-ℤ l (in-pos-ℤ n))) ∙
+              ( inv (left-successor-law-add-ℤ (in-pos-ℤ n) l))))) ∙
         ( associative-add-ℤ (inr (inr (succ-ℕ n))) l ((inr (inr n)) *ℤ l)))))
 
 right-predecessor-law-mul-ℤ :
@@ -197,31 +220,35 @@ right-predecessor-law-mul-ℤ (inl (succ-ℕ n)) l =
   ( left-predecessor-law-mul-ℤ (inl n) (pred-ℤ l)) ∙
   ( ( ap ((neg-ℤ (pred-ℤ l)) +ℤ_) (right-predecessor-law-mul-ℤ (inl n) l)) ∙
     ( ( inv
-        ( associative-add-ℤ (neg-ℤ (pred-ℤ l)) (in-pos n) ((inl n) *ℤ l))) ∙
+        ( associative-add-ℤ (neg-ℤ (pred-ℤ l)) (in-pos-ℤ n) ((inl n) *ℤ l))) ∙
       ( ( ap
           ( _+ℤ ((inl n) *ℤ l))
           { x = (neg-ℤ (pred-ℤ l)) +ℤ (inr (inr n))}
           { y = (neg-ℤ (inl (succ-ℕ n))) +ℤ (neg-ℤ l)}
-          ( ( ap (_+ℤ (in-pos n)) (neg-pred-ℤ l)) ∙
-            ( ( left-successor-law-add-ℤ (neg-ℤ l) (in-pos n)) ∙
-              ( ( ap succ-ℤ (commutative-add-ℤ (neg-ℤ l) (in-pos n))) ∙
-                ( inv (left-successor-law-add-ℤ (in-pos n) (neg-ℤ l))))))) ∙
-        ( associative-add-ℤ (in-pos (succ-ℕ n)) (neg-ℤ l) ((inl n) *ℤ l)))))
+          ( ( ap (_+ℤ (in-pos-ℤ n)) (neg-pred-ℤ l)) ∙
+            ( ( left-successor-law-add-ℤ (neg-ℤ l) (in-pos-ℤ n)) ∙
+              ( ( ap succ-ℤ (commutative-add-ℤ (neg-ℤ l) (in-pos-ℤ n))) ∙
+                ( inv (left-successor-law-add-ℤ (in-pos-ℤ n) (neg-ℤ l))))))) ∙
+        ( associative-add-ℤ (in-pos-ℤ (succ-ℕ n)) (neg-ℤ l) ((inl n) *ℤ l)))))
 right-predecessor-law-mul-ℤ (inr (inl star)) l = refl
 right-predecessor-law-mul-ℤ (inr (inr zero-ℕ)) l = refl
 right-predecessor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
-  ( left-successor-law-mul-ℤ (in-pos n) (pred-ℤ l)) ∙
+  ( left-successor-law-mul-ℤ (in-pos-ℤ n) (pred-ℤ l)) ∙
   ( ( ap ((pred-ℤ l) +ℤ_) (right-predecessor-law-mul-ℤ (inr (inr n)) l)) ∙
     ( ( inv (associative-add-ℤ (pred-ℤ l) (inl n) ((inr (inr n)) *ℤ l))) ∙
       ( ( ap
-          ( _+ℤ ((in-pos n) *ℤ l))
+          ( _+ℤ ((in-pos-ℤ n) *ℤ l))
           { x = (pred-ℤ l) +ℤ (inl n)}
-          { y = (neg-ℤ (in-pos (succ-ℕ n))) +ℤ l}
+          { y = (neg-ℤ (in-pos-ℤ (succ-ℕ n))) +ℤ l}
           ( ( left-predecessor-law-add-ℤ l (inl n)) ∙
             ( ( ap pred-ℤ (commutative-add-ℤ l (inl n))) ∙
               ( inv (left-predecessor-law-add-ℤ (inl n) l))))) ∙
         ( associative-add-ℤ (inl (succ-ℕ n)) l ((inr (inr n)) *ℤ l)))))
+```
 
+### Multiplication on the integers distributes on the right over addition
+
+```agda
 right-distributive-mul-add-ℤ :
   (k l m : ℤ) → (k +ℤ l) *ℤ m ＝ (k *ℤ m) +ℤ (l *ℤ m)
 right-distributive-mul-add-ℤ (inl zero-ℕ) l m =
@@ -239,10 +266,14 @@ right-distributive-mul-add-ℤ (inr (inl star)) l m = refl
 right-distributive-mul-add-ℤ (inr (inr zero-ℕ)) l m =
   left-successor-law-mul-ℤ l m
 right-distributive-mul-add-ℤ (inr (inr (succ-ℕ n))) l m =
-  ( left-successor-law-mul-ℤ ((in-pos n) +ℤ l) m) ∙
+  ( left-successor-law-mul-ℤ ((in-pos-ℤ n) +ℤ l) m) ∙
   ( ( ap (m +ℤ_) (right-distributive-mul-add-ℤ (inr (inr n)) l m)) ∙
-    ( inv (associative-add-ℤ m ((in-pos n) *ℤ m) (l *ℤ m))))
+    ( inv (associative-add-ℤ m ((in-pos-ℤ n) *ℤ m) (l *ℤ m))))
+```
 
+### Left multiplication by the negative of an integer is the negative of the multiplication
+
+```agda
 left-negative-law-mul-ℤ :
   (k l : ℤ) → (neg-ℤ k) *ℤ l ＝ neg-ℤ (k *ℤ l)
 left-negative-law-mul-ℤ (inl zero-ℕ) l =
@@ -258,8 +289,12 @@ left-negative-law-mul-ℤ (inr (inr zero-ℕ)) l = refl
 left-negative-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( left-predecessor-law-mul-ℤ (inl n) l) ∙
   ( ( ap ((neg-ℤ l) +ℤ_) (left-negative-law-mul-ℤ (inr (inr n)) l)) ∙
-    ( inv (distributive-neg-add-ℤ l ((in-pos n) *ℤ l))))
+    ( inv (distributive-neg-add-ℤ l ((in-pos-ℤ n) *ℤ l))))
+```
 
+### Multiplication on the integers is associative
+
+```agda
 associative-mul-ℤ :
   (k l m : ℤ) → (k *ℤ l) *ℤ m ＝ k *ℤ (l *ℤ m)
 associative-mul-ℤ (inl zero-ℕ) l m =
@@ -273,9 +308,13 @@ associative-mul-ℤ (inl (succ-ℕ n)) l m =
 associative-mul-ℤ (inr (inl star)) l m = refl
 associative-mul-ℤ (inr (inr zero-ℕ)) l m = refl
 associative-mul-ℤ (inr (inr (succ-ℕ n))) l m =
-  ( right-distributive-mul-add-ℤ l ((in-pos n) *ℤ l) m) ∙
+  ( right-distributive-mul-add-ℤ l ((in-pos-ℤ n) *ℤ l) m) ∙
   ( ap ((l *ℤ m) +ℤ_) (associative-mul-ℤ (inr (inr n)) l m))
+```
 
+### Multiplication on the integers is commutative
+
+```agda
 commutative-mul-ℤ :
   (k l : ℤ) → k *ℤ l ＝ l *ℤ k
 commutative-mul-ℤ (inl zero-ℕ) l = inv (right-neg-unit-law-mul-ℤ l)
@@ -286,36 +325,34 @@ commutative-mul-ℤ (inr (inl star)) l = inv (right-zero-law-mul-ℤ l)
 commutative-mul-ℤ (inr (inr zero-ℕ)) l = inv (right-unit-law-mul-ℤ l)
 commutative-mul-ℤ (inr (inr (succ-ℕ n))) l =
   ( ap (l +ℤ_) (commutative-mul-ℤ (inr (inr n)) l)) ∙
-  ( inv (right-successor-law-mul-ℤ l (in-pos n)))
+  ( inv (right-successor-law-mul-ℤ l (in-pos-ℤ n)))
+```
 
+### Multiplication on the integers distributes on the left over addition
+
+```agda
 left-distributive-mul-add-ℤ :
   (m k l : ℤ) → m *ℤ (k +ℤ l) ＝ (m *ℤ k) +ℤ (m *ℤ l)
 left-distributive-mul-add-ℤ m k l =
   commutative-mul-ℤ m (k +ℤ l) ∙
     ( ( right-distributive-mul-add-ℤ k l m) ∙
       ( ap-add-ℤ (commutative-mul-ℤ k m) (commutative-mul-ℤ l m)))
+```
 
+### Right multiplication by the negative of an integer is the negative of the multiplication
+
+```agda
 right-negative-law-mul-ℤ :
   (k l : ℤ) → k *ℤ (neg-ℤ l) ＝ neg-ℤ (k *ℤ l)
 right-negative-law-mul-ℤ k l =
   ( ( commutative-mul-ℤ k (neg-ℤ l)) ∙
     ( left-negative-law-mul-ℤ l k)) ∙
   ( ap neg-ℤ (commutative-mul-ℤ l k))
+```
 
-interchange-law-mul-mul-ℤ : interchange-law mul-ℤ mul-ℤ
-interchange-law-mul-mul-ℤ =
-  interchange-law-commutative-and-associative
-    mul-ℤ
-    commutative-mul-ℤ
-    associative-mul-ℤ
+### The multiplication of the negatives of two integers is equal to their multiplication
 
-is-left-mul-neg-one-neg-ℤ : (x : ℤ) → neg-ℤ x ＝ neg-one-ℤ *ℤ x
-is-left-mul-neg-one-neg-ℤ x = refl
-
-is-right-mul-neg-one-neg-ℤ : (x : ℤ) → neg-ℤ x ＝ x *ℤ neg-one-ℤ
-is-right-mul-neg-one-neg-ℤ x =
-  is-left-mul-neg-one-neg-ℤ x ∙ commutative-mul-ℤ neg-one-ℤ x
-
+```agda
 double-negative-law-mul-ℤ : (k l : ℤ) → (neg-ℤ k) *ℤ (neg-ℤ l) ＝ k *ℤ l
 double-negative-law-mul-ℤ k l =
   equational-reasoning
@@ -328,15 +365,16 @@ double-negative-law-mul-ℤ k l =
       by neg-neg-ℤ (k *ℤ l)
 ```
 
-### Positivity of multiplication
+### Interchange law
 
 ```agda
-is-positive-mul-ℤ :
-  {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x *ℤ y)
-is-positive-mul-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
-is-positive-mul-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
-  is-positive-add-ℤ {inr (inr y)} K
-    ( is-positive-mul-ℤ {inr (inr x)} {inr (inr y)} H K)
+interchange-law-mul-mul-ℤ :
+  (x y u v : ℤ) → (x *ℤ y) *ℤ (u *ℤ v) ＝ (x *ℤ u) *ℤ (y *ℤ v)
+interchange-law-mul-mul-ℤ =
+  interchange-law-commutative-and-associative
+    mul-ℤ
+    commutative-mul-ℤ
+    associative-mul-ℤ
 ```
 
 ### Computing multiplication of integers that come from natural numbers
@@ -407,21 +445,23 @@ compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
     ( ap int-ℕ (commutative-add-ℕ (succ-ℕ y) ((succ-ℕ x) *ℕ (succ-ℕ y)))))
 ```
 
-### Linearity of the difference
+### Multiplication on integers distributes over the difference
 
 ```agda
-linear-diff-left-mul-ℤ :
-  (z x y : ℤ) → (z *ℤ x) -ℤ (z *ℤ y) ＝ z *ℤ (x -ℤ y)
-linear-diff-left-mul-ℤ z x y =
-  ( ap ((z *ℤ x) +ℤ_) (inv (right-negative-law-mul-ℤ z y))) ∙
-  ( inv (left-distributive-mul-add-ℤ z x (neg-ℤ y)))
+left-distributive-mul-diff-ℤ :
+  (z x y : ℤ) → z *ℤ (x -ℤ y) ＝ (z *ℤ x) -ℤ (z *ℤ y)
+left-distributive-mul-diff-ℤ z x y =
+  ( left-distributive-mul-add-ℤ z x (neg-ℤ y)) ∙
+  ( ap ((z *ℤ x) +ℤ_) (right-negative-law-mul-ℤ z y))
 
-linear-diff-right-mul-ℤ :
-  (x y z : ℤ) → (x *ℤ z) -ℤ (y *ℤ z) ＝ (x -ℤ y) *ℤ z
-linear-diff-right-mul-ℤ x y z =
-  ( ap ((x *ℤ z) +ℤ_) (inv (left-negative-law-mul-ℤ y z))) ∙
-  ( inv (right-distributive-mul-add-ℤ x (neg-ℤ y) z))
+right-distributive-mul-diff-ℤ :
+  (x y z : ℤ) → (x -ℤ y) *ℤ z ＝ (x *ℤ z) -ℤ (y *ℤ z)
+right-distributive-mul-diff-ℤ x y z =
+  ( right-distributive-mul-add-ℤ x (neg-ℤ y) z) ∙
+  ( ap ((x *ℤ z) +ℤ_) (left-negative-law-mul-ℤ y z))
 ```
+
+### If the product of two integers is zero, one of the factors is zero
 
 ```agda
 is-zero-is-zero-mul-ℤ :
@@ -439,7 +479,7 @@ is-zero-is-zero-mul-ℤ (inr (inr x)) (inr (inr y)) H =
   ex-falso (Eq-eq-ℤ (inv (compute-mul-ℤ (inr (inr x)) (inr (inr y))) ∙ H))
 ```
 
-### Injectivity of multiplication
+### Injectivity of multiplication by a nonzero integer
 
 ```agda
 is-injective-left-mul-ℤ :
@@ -452,7 +492,7 @@ is-injective-left-mul-ℤ x f {y} {z} p =
       ( f)
       ( is-zero-is-zero-mul-ℤ x
         ( y -ℤ z)
-        ( inv (linear-diff-left-mul-ℤ x y z) ∙ is-zero-diff-ℤ p)))
+        ( left-distributive-mul-diff-ℤ x y z ∙ is-zero-diff-ℤ p)))
 
 is-injective-right-mul-ℤ :
   (x : ℤ) → is-nonzero-ℤ x → is-injective (_*ℤ x)
@@ -475,79 +515,8 @@ is-emb-right-mul-ℤ x f =
   is-emb-is-injective is-set-ℤ (is-injective-right-mul-ℤ x f)
 ```
 
-```agda
-is-positive-left-factor-mul-ℤ :
-  {x y : ℤ} → is-positive-ℤ (x *ℤ y) → is-positive-ℤ y → is-positive-ℤ x
-is-positive-left-factor-mul-ℤ {inl x} {inr (inr y)} H K =
-  is-positive-eq-ℤ (compute-mul-ℤ (inl x) (inr (inr y))) H
-is-positive-left-factor-mul-ℤ {inr (inl star)} {inr (inr y)} H K =
-  is-positive-eq-ℤ (compute-mul-ℤ zero-ℤ (inr (inr y))) H
-is-positive-left-factor-mul-ℤ {inr (inr x)} {inr (inr y)} H K = star
+## See also
 
-is-positive-right-factor-mul-ℤ :
-  {x y : ℤ} → is-positive-ℤ (x *ℤ y) → is-positive-ℤ x → is-positive-ℤ y
-is-positive-right-factor-mul-ℤ {x} {y} H =
-  is-positive-left-factor-mul-ℤ (is-positive-eq-ℤ (commutative-mul-ℤ x y) H)
-```
-
-### Lemmas about nonnegative integers
-
-```agda
-is-nonnegative-mul-ℤ :
-  {x y : ℤ} → is-nonnegative-ℤ x → is-nonnegative-ℤ y →
-  is-nonnegative-ℤ (x *ℤ y)
-is-nonnegative-mul-ℤ {inr (inl star)} {y} H K = star
-is-nonnegative-mul-ℤ {inr (inr x)} {inr (inl star)} H K =
-  is-nonnegative-eq-ℤ (inv (right-zero-law-mul-ℤ (inr (inr x)))) star
-is-nonnegative-mul-ℤ {inr (inr x)} {inr (inr y)} H K =
-  is-nonnegative-eq-ℤ (inv (compute-mul-ℤ (inr (inr x)) (inr (inr y)))) star
-
-is-nonnegative-left-factor-mul-ℤ :
-  {x y : ℤ} →
-  is-nonnegative-ℤ (x *ℤ y) → is-positive-ℤ y → is-nonnegative-ℤ x
-is-nonnegative-left-factor-mul-ℤ {inl x} {inr (inr y)} H K =
-  ex-falso (is-nonnegative-eq-ℤ (compute-mul-ℤ (inl x) (inr (inr y))) H)
-is-nonnegative-left-factor-mul-ℤ {inr x} {inr y} H K = star
-
-is-nonnegative-right-factor-mul-ℤ :
-  {x y : ℤ} →
-  is-nonnegative-ℤ (x *ℤ y) → is-positive-ℤ x → is-nonnegative-ℤ y
-is-nonnegative-right-factor-mul-ℤ {x} {y} H =
-  is-nonnegative-left-factor-mul-ℤ
-    ( is-nonnegative-eq-ℤ (commutative-mul-ℤ x y) H)
-```
-
-```agda
-preserves-leq-left-mul-ℤ :
-  (x y z : ℤ) → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (z *ℤ x) (z *ℤ y)
-preserves-leq-left-mul-ℤ x y (inr (inl star)) star K = star
-preserves-leq-left-mul-ℤ x y (inr (inr zero-ℕ)) star K = K
-preserves-leq-left-mul-ℤ x y (inr (inr (succ-ℕ n))) star K =
-  preserves-leq-add-ℤ {x} {y}
-    { (inr (inr n)) *ℤ x}
-    { (inr (inr n)) *ℤ y}
-    ( K)
-    ( preserves-leq-left-mul-ℤ x y (inr (inr n)) star K)
-
-preserves-leq-right-mul-ℤ :
-  (x y z : ℤ) → is-nonnegative-ℤ z → leq-ℤ x y → leq-ℤ (x *ℤ z) (y *ℤ z)
-preserves-leq-right-mul-ℤ x y z H K =
-  concatenate-eq-leq-eq-ℤ
-    ( commutative-mul-ℤ x z)
-    ( preserves-leq-left-mul-ℤ x y z H K)
-    ( commutative-mul-ℤ z y)
-
-preserves-strict-order-mul-positive-ℤ' :
-  {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (x *ℤ z) (y *ℤ z)
-preserves-strict-order-mul-positive-ℤ' {x} {y} z H p =
-  is-positive-eq-ℤ
-    ( inv ( linear-diff-right-mul-ℤ y x z))
-    ( is-positive-mul-ℤ p H)
-
-preserves-strict-order-mul-positive-ℤ :
-  {x y : ℤ} (z : ℤ) → is-positive-ℤ z → le-ℤ x y → le-ℤ (z *ℤ x) (z *ℤ y)
-preserves-strict-order-mul-positive-ℤ {x} {y} z H p =
-  is-positive-eq-ℤ
-    ( inv ( linear-diff-left-mul-ℤ z y x))
-    ( is-positive-mul-ℤ H p)
-```
+- Properties of multiplication with respect to inequality and positivity,
+  nonnegativity, negativity and nonnpositivity of integers are derived in
+  [`multiplication-positive-and-negative-integers`](elementary-number-theory.multiplication-positive-and-negative-integers.md)

@@ -115,18 +115,14 @@ sequential colimits exist.
 abstract
   standard-sequential-colimit : {l : Level} (A : sequential-diagram l) → UU l
   standard-sequential-colimit A =
-    canonical-coequalizer
-      ( bottom-map-cofork-cocone-sequential-diagram A)
-      ( top-map-cofork-cocone-sequential-diagram A)
+    canonical-coequalizer (double-arrow-sequential-diagram A)
 
   cocone-standard-sequential-colimit :
     { l : Level} (A : sequential-diagram l) →
     cocone-sequential-diagram A (standard-sequential-colimit A)
   cocone-standard-sequential-colimit A =
     cocone-sequential-diagram-cofork A
-      ( cofork-canonical-coequalizer
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A))
+      ( cofork-canonical-coequalizer (double-arrow-sequential-diagram A))
 
   dup-standard-sequential-colimit :
     { l : Level} {A : sequential-diagram l} →
@@ -135,9 +131,7 @@ abstract
   dup-standard-sequential-colimit {A = A} =
     dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
       ( cocone-standard-sequential-colimit A)
-      ( dup-canonical-coequalizer
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A))
+      ( dup-canonical-coequalizer (double-arrow-sequential-diagram A))
 
   up-standard-sequential-colimit :
     { l : Level} {A : sequential-diagram l} →
