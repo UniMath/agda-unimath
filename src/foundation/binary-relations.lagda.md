@@ -150,7 +150,7 @@ module _
 
 ### The predicate of being a transitive relation valued in propositions
 
-A relation `R` on a type `A` valued in propositions is said to be \*\*transitive
+A relation `R` on a type `A` valued in propositions is said to be **transitive**
 if its underlying relation is transitive.
 
 ```agda

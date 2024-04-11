@@ -99,14 +99,14 @@ module _
 
   integer-multiple-in-pos-Commutative-Ring :
     (n : ℕ) (a : type-Commutative-Ring A) →
-    integer-multiple-Commutative-Ring A (in-pos n) a ＝
+    integer-multiple-Commutative-Ring A (in-pos-ℤ n) a ＝
     multiple-Commutative-Ring A (succ-ℕ n) a
   integer-multiple-in-pos-Commutative-Ring =
     integer-multiple-in-pos-Ring (ring-Commutative-Ring A)
 
   integer-multiple-in-neg-Commutative-Ring :
     (n : ℕ) (a : type-Commutative-Ring A) →
-    integer-multiple-Commutative-Ring A (in-neg n) a ＝
+    integer-multiple-Commutative-Ring A (in-neg-ℤ n) a ＝
     neg-Commutative-Ring A (multiple-Commutative-Ring A (succ-ℕ n) a)
   integer-multiple-in-neg-Commutative-Ring =
     integer-multiple-in-neg-Ring (ring-Commutative-Ring A)

@@ -122,14 +122,14 @@ module _
 
   integer-multiple-in-pos-Ring :
     (n : ℕ) (a : type-Ring R) →
-    integer-multiple-Ring R (in-pos n) a ＝
+    integer-multiple-Ring R (in-pos-ℤ n) a ＝
     multiple-Ring R (succ-ℕ n) a
   integer-multiple-in-pos-Ring =
     integer-multiple-in-pos-Ab (ab-Ring R)
 
   integer-multiple-in-neg-Ring :
     (n : ℕ) (a : type-Ring R) →
-    integer-multiple-Ring R (in-neg n) a ＝
+    integer-multiple-Ring R (in-neg-ℤ n) a ＝
     neg-Ring R (multiple-Ring R (succ-ℕ n) a)
   integer-multiple-in-neg-Ring =
     integer-multiple-in-neg-Ab (ab-Ring R)

@@ -162,13 +162,13 @@ module _
       ( large-subposet-closure-operator-Large-Poset)
 
   leq-prop-closed-element-closure-operator-Large-Poset :
-    Large-Relation-Prop α β closed-element-closure-operator-Large-Poset
+    Large-Relation-Prop β closed-element-closure-operator-Large-Poset
   leq-prop-closed-element-closure-operator-Large-Poset =
     leq-prop-Large-Subposet P
       ( large-subposet-closure-operator-Large-Poset)
 
   leq-closed-element-closure-operator-Large-Poset :
-    Large-Relation α β closed-element-closure-operator-Large-Poset
+    Large-Relation β closed-element-closure-operator-Large-Poset
   leq-closed-element-closure-operator-Large-Poset =
     leq-Large-Subposet P
       ( large-subposet-closure-operator-Large-Poset)

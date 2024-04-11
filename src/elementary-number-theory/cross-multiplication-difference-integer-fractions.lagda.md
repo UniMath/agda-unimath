@@ -108,8 +108,8 @@ lemma-add-cross-mul-diff-fraction-ℤ
       (dr *ℤ (nq *ℤ dp) -ℤ dr *ℤ (np *ℤ dq))
     by
       ap-add-ℤ
-        ( inv (linear-diff-left-mul-ℤ dp (nr *ℤ dq) (nq *ℤ dr)))
-        ( inv (linear-diff-left-mul-ℤ dr (nq *ℤ dp) (np *ℤ dq)))
+        ( left-distributive-mul-diff-ℤ dp (nr *ℤ dq) (nq *ℤ dr))
+        ( left-distributive-mul-diff-ℤ dr (nq *ℤ dp) (np *ℤ dq))
   ＝ diff-ℤ
       (dp *ℤ (nr *ℤ dq) +ℤ dr *ℤ (nq *ℤ dp))
       (dp *ℤ (nq *ℤ dr) +ℤ dr *ℤ (np *ℤ dq))
@@ -144,7 +144,7 @@ lemma-add-cross-mul-diff-fraction-ℤ
         (dq *ℤ (np *ℤ dr))
         (dr *ℤ (nq *ℤ dp))
   ＝ dq *ℤ (nr *ℤ dp -ℤ np *ℤ dr)
-    by linear-diff-left-mul-ℤ dq (nr *ℤ dp) (np *ℤ dr)
+    by inv (left-distributive-mul-diff-ℤ dq (nr *ℤ dp) (np *ℤ dr))
   where
   lemma-interchange-mul-ℤ : (a b c : ℤ) → (a *ℤ (b *ℤ c)) ＝ (c *ℤ (b *ℤ a))
   lemma-interchange-mul-ℤ a b c =
