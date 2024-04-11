@@ -46,6 +46,7 @@ open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
+open import synthetic-homotopy-theory.equifibered-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows public
 open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams public
