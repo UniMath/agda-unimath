@@ -123,6 +123,7 @@ open import elementary-number-theory.relatively-prime-natural-numbers public
 open import elementary-number-theory.repeating-element-standard-finite-type public
 open import elementary-number-theory.retracts-of-natural-numbers public
 open import elementary-number-theory.ring-of-integers public
+open import elementary-number-theory.ring-of-rational-numbers public
 open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.squares-integers public
