@@ -70,7 +70,6 @@ pr2 ℚ-Ring = has-mul-ℚ-Ab
 ### The commutative ring of rational numbers
 
 ```agda
-
 ℚ-Commutative-Ring : Commutative-Ring lzero
 pr1 ℚ-Commutative-Ring = ℚ-Ring
 pr2 ℚ-Commutative-Ring = commutative-mul-ℚ
