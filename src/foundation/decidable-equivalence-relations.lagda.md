@@ -128,7 +128,7 @@ module _
     sim-Decidable-equivalence-relation x y ≃
     sim-Decidable-equivalence-relation y x
   equiv-symmetric-Decidable-equivalence-relation {x} {y} =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-prop-sim-Decidable-equivalence-relation x y)
       ( is-prop-sim-Decidable-equivalence-relation y x)
       ( symmetric-Decidable-equivalence-relation x y)
@@ -169,7 +169,9 @@ module _
   is-equivalence-class-Decidable-equivalence-relation :
     decidable-subtype l2 X → UU (l1 ⊔ lsuc l2)
   is-equivalence-class-Decidable-equivalence-relation P =
-    ∃ X (λ x → P ＝ decidable-relation-Decidable-equivalence-relation R x)
+    exists-structure
+      ( X)
+      ( λ x → P ＝ decidable-relation-Decidable-equivalence-relation R x)
 
   equivalence-class-Decidable-equivalence-relation : UU (l1 ⊔ lsuc l2)
   equivalence-class-Decidable-equivalence-relation =
@@ -180,7 +182,7 @@ module _
   pr1 (class-Decidable-equivalence-relation x) =
     decidable-relation-Decidable-equivalence-relation R x
   pr2 (class-Decidable-equivalence-relation x) =
-    intro-∃ x refl
+    intro-exists x refl
 
   emb-equivalence-class-Decidable-equivalence-relation :
     equivalence-class-Decidable-equivalence-relation ↪ decidable-subtype l2 X

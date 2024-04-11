@@ -18,6 +18,7 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 

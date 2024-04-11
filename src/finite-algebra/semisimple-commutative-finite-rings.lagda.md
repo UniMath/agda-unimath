@@ -44,8 +44,7 @@ is-semisimple-Commutative-Ring-𝔽 l2 R =
   exists
     ( ℕ)
     ( λ n →
-      exists-Prop
-        ( Fin n → Field-𝔽 l2)
+      ∃ ( Fin n → Field-𝔽 l2)
         ( λ A →
           trunc-Prop
             ( hom-Commutative-Ring-𝔽

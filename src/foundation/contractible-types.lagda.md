@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.function-extensionality
+open import foundation.logical-equivalences
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -124,7 +125,7 @@ is-closed-under-is-contr-subuniverse P =
 equiv-is-contr-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ≃ B → is-contr A ≃ is-contr B
 equiv-is-contr-equiv {A = A} {B = B} e =
-  equiv-prop
+  equiv-iff-is-prop
     ( is-property-is-contr)
     ( is-property-is-contr)
     ( is-contr-retract-of A

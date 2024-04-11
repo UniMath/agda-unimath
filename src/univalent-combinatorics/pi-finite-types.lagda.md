@@ -143,9 +143,9 @@ mere-equiv-number-of-connected-components H =
 is-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 is-π-finite-Prop zero-ℕ X = has-finite-connected-components-Prop X
 is-π-finite-Prop (succ-ℕ k) X =
-  product-Prop ( is-π-finite-Prop zero-ℕ X)
-            ( Π-Prop X
-              ( λ x → Π-Prop X (λ y → is-π-finite-Prop k (Id x y))))
+  product-Prop
+    ( is-π-finite-Prop zero-ℕ X)
+    ( Π-Prop X (λ x → Π-Prop X (λ y → is-π-finite-Prop k (Id x y))))
 
 is-π-finite : {l : Level} (k : ℕ) → UU l → UU l
 is-π-finite k X = type-Prop (is-π-finite-Prop k X)

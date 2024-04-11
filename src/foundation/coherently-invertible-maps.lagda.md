@@ -13,6 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
@@ -111,7 +112,7 @@ module _
     is-equiv-is-coherently-invertible-is-equiv :
       is-equiv (is-coherently-invertible-is-equiv {f = f})
     is-equiv-is-coherently-invertible-is-equiv =
-      is-equiv-is-prop
+      is-equiv-has-converse-is-prop
         ( is-property-is-equiv f)
         ( is-prop-is-coherently-invertible)
         ( is-equiv-is-coherently-invertible)

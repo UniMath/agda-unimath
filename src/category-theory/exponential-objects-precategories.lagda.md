@@ -13,7 +13,7 @@ open import category-theory.products-in-precategories
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.unique-existence
+open import foundation.uniqueness-quantification
 open import foundation.universe-levels
 ```
 
@@ -47,7 +47,7 @@ module _
   is-exponential-obj-Precategory x y e ev =
     (z : obj-Precategory C)
     (f : hom-Precategory C (object-product-obj-Precategory C p z x) y) →
-    ∃!
+    uniquely-exists-structure
       ( hom-Precategory C z e)
       ( λ g →
         comp-hom-Precategory C ev

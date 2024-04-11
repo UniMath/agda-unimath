@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.logical-equivalences
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.type-arithmetic-unit-type
@@ -78,7 +79,7 @@ module _
 
   equiv-is-local-is-null : is-null Y A ≃ is-local (λ y → star) A
   equiv-is-local-is-null =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-property-is-equiv (diagonal-exponential A Y))
       ( is-property-is-equiv (precomp (λ y → star) A))
       ( is-local-is-null)

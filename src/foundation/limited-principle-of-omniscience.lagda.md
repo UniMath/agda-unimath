@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.disjunction
 open import foundation.existential-quantification
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -24,17 +25,19 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Statement
 
-The **limited principle of omniscience** (LPO) asserts that for every sequence
-`f : ℕ → Fin 2` there either exists an `n` such that `f n ＝ 1` or for all `n`
-we have `f n ＝ 0`.
+The
+{{#concept "limited principle of omniscience" WDID=Q6549544 WD="limited principle of omniscience" Agda=LPO}}
+(LPO) asserts that for every [sequence](foundation.sequences.md) `f : ℕ → Fin 2`
+there either [exists](foundation.existential-quantification.md) an `n` such that
+`f n ＝ 1` or for all `n` we have `f n ＝ 0`.
 
 ```agda
 LPO : UU lzero
 LPO =
   (f : ℕ → Fin 2) →
   type-disjunction-Prop
-    ( ∃-Prop ℕ (λ n → f n ＝ one-Fin 1))
-    ( Π-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1)))
+    ( ∃ ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (one-Fin 1)))
+    ( ∀' ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1)))
 ```
 
 ## See also
