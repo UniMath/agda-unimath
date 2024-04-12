@@ -19,7 +19,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A {{#concept "plane tree" Agda=full-binary-tree}} is a finite tree that can be drawn on a plane with the root at the bottom, and all branches directed upwards. More preciesly, a plane tree consists of a root and a family of plane trees indexed by a [standard finite type](univalent-combinatorics.standard-finite-types.md).
+A {{#concept "plane tree" Agda=full-binary-tree}} is a finite tree that can be
+drawn on a plane with the root at the bottom, and all branches directed upwards.
+More preciesly, a plane tree consists of a root and a family of plane trees
+indexed by a
+[standard finite type](univalent-combinatorics.standard-finite-types.md).
 
 ## Definitions
 
