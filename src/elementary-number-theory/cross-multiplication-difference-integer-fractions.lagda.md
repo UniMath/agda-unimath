@@ -62,26 +62,32 @@ skew-commutative-cross-mul-diff-fraction-ℤ x y =
 ### The cross multiplication difference of zero and an integer fraction is its numerator
 
 ```agda
-cross-mul-diff-zero-fraction-ℤ :
-  (x : fraction-ℤ) →
-  cross-mul-diff-fraction-ℤ zero-fraction-ℤ x ＝ numerator-fraction-ℤ x
-cross-mul-diff-zero-fraction-ℤ x =
-  ( right-unit-law-add-ℤ (numerator-fraction-ℤ x *ℤ one-ℤ)) ∙
-  ( right-unit-law-mul-ℤ (numerator-fraction-ℤ x))
+module _
+  (x : fraction-ℤ)
+  where
+
+  cross-mul-diff-zero-fraction-ℤ :
+    cross-mul-diff-fraction-ℤ zero-fraction-ℤ x ＝ numerator-fraction-ℤ x
+  cross-mul-diff-zero-fraction-ℤ =
+    ( right-unit-law-add-ℤ (numerator-fraction-ℤ x *ℤ one-ℤ)) ∙
+    ( right-unit-law-mul-ℤ (numerator-fraction-ℤ x))
 ```
 
 ### The cross multiplication difference of one and an integer fraction is the difference of its numerator and denominator
 
 ```agda
-cross-mul-diff-one-fraction-ℤ :
-  (x : fraction-ℤ) →
-  Id
-    (cross-mul-diff-fraction-ℤ one-fraction-ℤ x)
-    (numerator-fraction-ℤ x -ℤ denominator-fraction-ℤ x)
-cross-mul-diff-one-fraction-ℤ x =
-  ap-diff-ℤ
-    ( right-unit-law-mul-ℤ (numerator-fraction-ℤ x))
-    ( left-unit-law-mul-ℤ (denominator-fraction-ℤ x))
+module _
+  (x : fraction-ℤ)
+  where
+
+  cross-mul-diff-one-fraction-ℤ :
+    Id
+      (cross-mul-diff-fraction-ℤ one-fraction-ℤ x)
+      ((numerator-fraction-ℤ x) -ℤ (denominator-fraction-ℤ x))
+  cross-mul-diff-one-fraction-ℤ =
+    ap-diff-ℤ
+      ( right-unit-law-mul-ℤ (numerator-fraction-ℤ x))
+      ( left-unit-law-mul-ℤ (denominator-fraction-ℤ x))
 ```
 
 ### Two fractions are similar when their cross-multiplication difference is zero
