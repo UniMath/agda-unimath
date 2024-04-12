@@ -82,20 +82,12 @@ module _
 
   is-nonzero-numerator-is-nonzero-ℚ :
     is-nonzero-ℚ x → is-nonzero-ℤ (numerator-ℚ x)
-  is-nonzero-numerator-is-nonzero-ℚ H K =
-    H
-      ( ( inv (is-retraction-rational-fraction-ℚ x)) ∙
-        ( eq-ℚ-sim-fraction-ℤ
-          ( fraction-ℚ x)
-          ( fraction-ℚ zero-ℚ)
-          ( eq-is-zero-ℤ
-            ( ap (mul-ℤ' one-ℤ) K ∙ right-zero-law-mul-ℤ one-ℤ)
-            ( left-zero-law-mul-ℤ (denominator-ℚ x))) ∙
-        ( is-retraction-rational-fraction-ℚ zero-ℚ)))
+  is-nonzero-numerator-is-nonzero-ℚ H =
+    H ∘ (is-zero-is-zero-numerator-ℚ x)
 
   is-nonzero-is-nonzero-numerator-ℚ :
     is-nonzero-ℤ (numerator-ℚ x) → is-nonzero-ℚ x
-  is-nonzero-is-nonzero-numerator-ℚ H K = H (ap numerator-ℚ K)
+  is-nonzero-is-nonzero-numerator-ℚ H = H ∘ (ap numerator-ℚ)
 ```
 
 ### one-ℚ is nonzero
