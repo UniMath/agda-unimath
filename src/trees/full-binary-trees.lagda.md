@@ -20,11 +20,11 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 A
-{{#concept "full binary tree" Agda=full-binary-tree WD="full binary tree" WDID="Q29791667"}}
-is a finite [directed tree](trees.directed-trees.md) that can in which every
-non-leaf node has a specified left branch and a specified right branch. More
-preciesly, a full binary tree consists of a root, a left full binary subtree and
-a right full binary subtree.
+{{#concept "full binary tree" Agda=full-binary-tree WD="full binary tree" WDID=Q29791667}}
+is a finite [directed tree](trees.directed-trees.md) in which every non-leaf
+node has a specified left branch and a specified right branch. More precisely, a
+full binary tree consists of a root, a left full binary subtree and a right full
+binary subtree.
 
 ## Definitions
 
