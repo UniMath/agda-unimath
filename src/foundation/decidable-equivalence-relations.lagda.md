@@ -483,7 +483,7 @@ has-decidable-equality-type-Surjection-Into-Set :
     ( equivalence-relation-Surjection-Into-Set surj)) →
   has-decidable-equality (type-Surjection-Into-Set surj)
 has-decidable-equality-type-Surjection-Into-Set surj is-dec-rel x y =
-  apply-twice-dependent-universal-property-surj-is-surjective
+  apply-twice-dependent-universal-property-surjection-is-surjective
     ( map-Surjection-Into-Set surj)
     ( is-surjective-Surjection-Into-Set surj)
     ( λ (s t : (type-Surjection-Into-Set surj)) →
