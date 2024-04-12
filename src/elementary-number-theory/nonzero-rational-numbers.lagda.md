@@ -123,6 +123,13 @@ is-nonzero-neg-ℚ x H =
       ( is-nonzero-numerator-is-nonzero-ℚ x H))
 ```
 
+### The nonzero negative of a nonzero rational number
+
+```agda
+neg-ℚˣ : ℚˣ → ℚˣ
+neg-ℚˣ (x , H) = (neg-ℚ x , is-nonzero-neg-ℚ x H)
+```
+
 ### The product of two nonzero rational numbers is nonzero
 
 ```agda
