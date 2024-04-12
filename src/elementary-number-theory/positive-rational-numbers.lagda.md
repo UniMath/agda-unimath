@@ -198,20 +198,6 @@ nonzero-ℚ⁺ : positive-ℚ → nonzero-ℚ
 nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ x P)
 ```
 
-### Negative rational numbers are nonzero
-
-```agda
-is-nonzero-is-negative-ℚ :
-  (x : ℚ) → is-positive-ℚ (neg-ℚ x) → is-nonzero-ℚ x
-is-nonzero-is-negative-ℚ x H =
-  tr
-    ( is-nonzero-ℚ)
-    ( neg-neg-ℚ x)
-    ( is-nonzero-neg-ℚ
-      ( neg-ℚ x)
-      ( is-nonzero-is-positive-ℚ (neg-ℚ x) H))
-```
-
 ### The sum of two positive rational numbers is positive
 
 ```agda
