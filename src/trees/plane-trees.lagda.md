@@ -32,12 +32,14 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A {{#concept "plane tree" Agda=plane-tree}} is a finite [tree](trees.trees.md)
-that can be drawn on a plane with the root at the bottom, and all branches
-directed upwards. More preciesly, a plane tree consists of a root and a family
-of plane trees indexed by a
-[standard finite type](univalent-combinatorics.standard-finite-types.md). The
-type of plane trees can be defined in several equivalent ways:
+A {{#concept "plane tree" Agda=plane-tree WD="ordered tree" WDID="Q10396021"}}
+is a finite [directed tree](trees.directed-trees.md) that can be drawn on a
+plane with the root at the bottom, and all branches directed upwards. More
+preciesly, a plane tree consists of a root and a family of plane trees indexed
+by a [standard finite type](univalent-combinatorics.standard-finite-types.md).
+The concept of plane tree is also known as the concept of _ordered tree_.
+
+The type of plane trees can be defined in several equivalent ways:
 
 - The type of plane trees is the inductive type with constructor
 
