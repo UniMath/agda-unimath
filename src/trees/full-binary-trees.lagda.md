@@ -28,7 +28,7 @@ binary subtree.
 
 ## Definitions
 
-### Plane trees
+### Full binary trees
 
 ```agda
 data full-binary-tree : UU lzero where
