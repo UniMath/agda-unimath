@@ -563,7 +563,7 @@ module _
       α : (b : type-Set B) → Σ (type-Set X) (P b)
       α =
         map-inv-is-equiv
-          ( dependent-universal-property-surj-is-surjective
+          ( dependent-universal-property-surjection-is-surjective
             ( map-reflecting-map-equivalence-relation R q)
             ( pr1 E)
             ( λ b →
@@ -578,7 +578,7 @@ module _
         ( pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
       β = htpy-eq
             ( is-section-map-inv-is-equiv
-              ( dependent-universal-property-surj-is-surjective
+              ( dependent-universal-property-surjection-is-surjective
                 ( map-reflecting-map-equivalence-relation R q)
                 ( pr1 E)
                 ( λ b → pair (Σ (type-Set X) (P b)) (is-prop-total-P b)))
@@ -676,7 +676,7 @@ module _
     ((a : A) → type-Prop (P (map-reflecting-map-equivalence-relation R q a))) →
     ((x : type-Set Q) → type-Prop (P x))
   ind-is-set-quotient =
-    apply-dependent-universal-property-surj-is-surjective
+    apply-dependent-universal-property-surjection-is-surjective
       ( map-reflecting-map-equivalence-relation R q)
       ( is-surjective-is-set-quotient R Q q U)
 ```
