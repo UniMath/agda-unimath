@@ -53,22 +53,20 @@ is-nonzero-prop-ℚ x = (is-nonzero-ℚ x , is-prop-neg)
 nonzero-ℚ : UU lzero
 nonzero-ℚ = type-subtype is-nonzero-prop-ℚ
 
-ℚˣ : UU lzero
-ℚˣ = nonzero-ℚ
-
 module _
   (x : nonzero-ℚ)
   where
 
-  rational-ℚˣ : ℚ
-  rational-ℚˣ = pr1 x
+  rational-nonzero-ℚ : ℚ
+  rational-nonzero-ℚ = pr1 x
 
-  is-nonzero-rational-ℚˣ : is-nonzero-ℚ rational-ℚˣ
-  is-nonzero-rational-ℚˣ = pr2 x
+  is-nonzero-rational-nonzero-ℚ : is-nonzero-ℚ rational-nonzero-ℚ
+  is-nonzero-rational-nonzero-ℚ = pr2 x
 
 abstract
-  eq-ℚˣ : {x y : ℚˣ} → rational-ℚˣ x ＝ rational-ℚˣ y → x ＝ y
-  eq-ℚˣ {x} {y} = eq-type-subtype is-nonzero-prop-ℚ
+  eq-nonzero-ℚ :
+    {x y : nonzero-ℚ} → rational-nonzero-ℚ x ＝ rational-nonzero-ℚ y → x ＝ y
+  eq-nonzero-ℚ {x} {y} = eq-type-subtype is-nonzero-prop-ℚ
 ```
 
 ## Properties
@@ -99,8 +97,8 @@ is-nonzero-one-ℚ =
     ( one-ℚ)
     ( is-nonzero-one-ℤ)
 
-one-ℚˣ : nonzero-ℚ
-one-ℚˣ = (one-ℚ , is-nonzero-one-ℚ)
+one-nonzero-ℚ : nonzero-ℚ
+one-nonzero-ℚ = (one-ℚ , is-nonzero-one-ℚ)
 ```
 
 ### The negative of a nonzero rational number is nonzero
@@ -118,8 +116,8 @@ is-nonzero-neg-ℚ x H =
 ### The nonzero negative of a nonzero rational number
 
 ```agda
-neg-ℚˣ : ℚˣ → ℚˣ
-neg-ℚˣ (x , H) = (neg-ℚ x , is-nonzero-neg-ℚ x H)
+neg-nonzero-ℚ : nonzero-ℚ → nonzero-ℚ
+neg-nonzero-ℚ (x , H) = (neg-ℚ x , is-nonzero-neg-ℚ x H)
 ```
 
 ### The product of two nonzero rational numbers is nonzero
@@ -134,26 +132,25 @@ is-nonzero-mul-ℚ {x} {y} H K =
 ### The nonzero product of two nonzero rational numbers
 
 ```agda
-mul-ℚˣ : ℚˣ → ℚˣ → ℚˣ
-mul-ℚˣ (x , P) (y , Q) = (x *ℚ y , is-nonzero-mul-ℚ P Q)
-
-infixl 40 _*ℚˣ_
-_*ℚˣ_ = mul-ℚˣ
+mul-nonzero-ℚ : nonzero-ℚ → nonzero-ℚ → nonzero-ℚ
+mul-nonzero-ℚ (x , P) (y , Q) = (x *ℚ y , is-nonzero-mul-ℚ P Q)
 ```
 
 ### Unit laws for multiplication of nonzero rational numbers
 
 ```agda
 module _
-  (x : ℚˣ)
+  (x : nonzero-ℚ)
   where
 
   abstract
-    left-unit-law-mul-ℚˣ : one-ℚˣ *ℚˣ x ＝ x
-    left-unit-law-mul-ℚˣ = eq-ℚˣ (left-unit-law-mul-ℚ (rational-ℚˣ x))
+    left-unit-law-mul-nonzero-ℚ : mul-nonzero-ℚ one-nonzero-ℚ x ＝ x
+    left-unit-law-mul-nonzero-ℚ =
+      eq-nonzero-ℚ (left-unit-law-mul-ℚ (rational-nonzero-ℚ x))
 
-    right-unit-law-mul-ℚˣ : x *ℚˣ one-ℚˣ ＝ x
-    right-unit-law-mul-ℚˣ = eq-ℚˣ (right-unit-law-mul-ℚ (rational-ℚˣ x))
+    right-unit-law-mul-nonzero-ℚ : mul-nonzero-ℚ x one-nonzero-ℚ ＝ x
+    right-unit-law-mul-nonzero-ℚ =
+      eq-nonzero-ℚ (right-unit-law-mul-ℚ (rational-nonzero-ℚ x))
 ```
 
 ### The factors of a nonzero product of rational numbers are nonzero
