@@ -340,6 +340,46 @@ module _
   ap-inv-htpy K x = ap inv (K x)
 ```
 
+### Concatenating with an inverse homotopy is inverse to concatenating
+
+We show that the operation `K ↦ inv-htpy H ∙h K` is inverse to the operation
+`K ↦ H ∙h K` by constructing homotopies
+
+```text
+  inv-htpy H ∙h (H ∙h K) ~ K
+  H ∙h (inv H ∙h K) ~ K.
+```
+
+Similarly, we show that the operation `H ↦ H ∙h inv-htpy K` is inverse to the
+operation `H ↦ H ∙h K` by constructing homotopies
+
+```text
+  (H ∙h K) ∙h inv-htpy K ~ H
+  (H ∙h inv-htpy K) ∙h K ~ H.
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  is-retraction-inv-concat-htpy :
+    (H : f ~ g) (K : g ~ h) → inv-htpy H ∙h (H ∙h K) ~ K
+  is-retraction-inv-concat-htpy H K x = is-retraction-inv-concat (H x) (K x)
+
+  is-section-inv-concat-htpy :
+    (H : f ~ g) (L : f ~ h) → H ∙h (inv-htpy H ∙h L) ~ L
+  is-section-inv-concat-htpy H L x = is-section-inv-concat (H x) (L x)
+
+  is-retraction-inv-concat-htpy' :
+    (K : g ~ h) (H : f ~ g) → (H ∙h K) ∙h inv-htpy K ~ H
+  is-retraction-inv-concat-htpy' K H x = is-retraction-inv-concat' (K x) (H x)
+
+  is-section-inv-concat-htpy' :
+    (K : g ~ h) (L : f ~ h) → (L ∙h inv-htpy K) ∙h K ~ L
+  is-section-inv-concat-htpy' K L x = is-section-inv-concat' (K x) (L x)
+```
+
 ## Reasoning with homotopies
 
 Homotopies can be constructed by equational reasoning in the following way:

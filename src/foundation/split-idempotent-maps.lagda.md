@@ -52,8 +52,8 @@ open import foundation-core.torsorial-type-families
 
 An endomap `f : A → A` is
 {{#concept "split idempotent" Disambiguation="map of types" Agda=is-split-idempotent}}
-if there exists a type `B` and an inclusion-retraction pair `i , r` displaying
-`B` as a [retract](foundation-core.retracts-of-types.md) of `A`, and such that
+if there is a type `B` and an inclusion-retraction pair `i , r` displaying `B`
+as a [retract](foundation-core.retracts-of-types.md) of `A`, and such that
 `H : i ∘ r ~ f`. In other words, if we have a commutative diagram
 
 ```text
@@ -932,7 +932,7 @@ by induction on `n`.
             ( inv
               ( nat-htpy
                 ( is-idempotent-is-quasicoherently-idempotent H) (α 0)))) ∙
-          ( left-left-inv
+          ( is-retraction-inv-concat
             ( is-idempotent-is-quasicoherently-idempotent H (a 0))
             ( ap f (α 0)))))
 ```

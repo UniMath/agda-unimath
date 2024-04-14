@@ -266,7 +266,9 @@ module _
                   ( ap-concat-htpy
                     ( f ·l H ·r g ∙h (f ∘ f) ·l H)
                     ( left-whisker-inv-htpy (f ∘ f) H)) ∙h
-                  ( right-right-inv-htpy (f ·l H ·r g) ((f ∘ f) ·l H)))) ∙h
+                  ( is-retraction-inv-concat-htpy'
+                    ( (f ∘ f) ·l H)
+                    ( f ·l H ·r g)))) ∙h
               ( nat-htpy H ∘ (H ·r g))))))
       where
         I : is-idempotent f
