@@ -231,7 +231,7 @@ module _
               ( ap-concat-htpy'
                 ( f ·l inv-htpy H)
                 ( ( distributive-left-whisker-comp-concat f
-                    (g ·l H ∙h H ·r f)
+                    ( g ·l H ∙h H ·r f)
                     ( I)) ∙h
                   ( ap-binary-concat-htpy
                     ( distributive-left-whisker-comp-concat f (g ·l H) (H ·r f))

@@ -149,7 +149,7 @@ module _
   where
 
   left-unit-law-left-whisker-comp :
-    {f f' : (x : A) → B x} → (H : f ~ f') → id ·l H ~ H
+    {f f' : (x : A) → B x} (H : f ~ f') → id ·l H ~ H
   left-unit-law-left-whisker-comp H x = ap-id (H x)
 
 module _
@@ -175,7 +175,7 @@ module _
   where
 
   right-unit-law-right-whisker-comp :
-    {f f' : (x : A) → B x} → (H : f ~ f') → H ·r id ~ H
+    {f f' : (x : A) → B x} (H : f ~ f') → H ·r id ~ H
   right-unit-law-right-whisker-comp H = refl-htpy
 ```
 
