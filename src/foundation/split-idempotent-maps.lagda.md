@@ -557,7 +557,7 @@ module _
       ( is-split-idempotent-split-idempotent-map H)
 ```
 
-### Every idempotent on a set splits
+### Every idempotent map on a set splits
 
 This is Theorem 3.7 of {{#cite Shu17}}.
 
