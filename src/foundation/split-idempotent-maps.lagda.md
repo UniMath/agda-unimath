@@ -66,7 +66,7 @@ if there exists a type `B` and an inclusion-retraction pair `i , r` displaying
 ```
 
 Observe that split idempotent maps are indeed
-[idempotent](foundation.idempotent-maps.md), as witnesses by the composite
+[idempotent](foundation.idempotent-maps.md), as witnessed by the composite
 
 ```text
        (H◽H)⁻¹            iRr        H
