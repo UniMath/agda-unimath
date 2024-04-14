@@ -54,6 +54,13 @@ is an [equivalence](foundation-core.equivalences.md).
 We reserve the name `is-local` for when `A` does not vary over `Y`, and specify
 with `is-local-dependent-type` when it does.
 
+Note that a local dependent type is not the same as a
+[local family](orthogonal-factorization-systems.local-families.md). While a
+local family is a type family `P` on some other indexing type `A`, such that
+each fiber is local as a nondependent type over `Y`, a local dependent type is a
+local type that additionally may vary over `Y`. In particular, no specific fiber
+of a local dependent type need necessarily be local as a nondependent type.
+
 ## Definition
 
 ### Local dependent types
