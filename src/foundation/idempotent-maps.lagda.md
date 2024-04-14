@@ -94,7 +94,7 @@ module _
 
 ## Properties
 
-### Being idempotent over a set is a property
+### Being an idempotent operation on a set is a property
 
 ```agda
 module _
