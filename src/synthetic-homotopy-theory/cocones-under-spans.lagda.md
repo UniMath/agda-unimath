@@ -127,6 +127,30 @@ module _
     (c c' : cocone f g X) → c ＝ c' → htpy-cocone c c'
   htpy-eq-cocone c .c refl = reflexive-htpy-cocone c
 
+  module _
+    (c c' : cocone f g X)
+    (p : c ＝ c')
+    where
+
+    horizontal-htpy-eq-cocone :
+      horizontal-map-cocone f g c ~
+      horizontal-map-cocone f g c'
+    horizontal-htpy-eq-cocone =
+      pr1 (htpy-eq-cocone c c' p)
+
+    vertical-htpy-eq-cocone :
+      vertical-map-cocone f g c ~
+      vertical-map-cocone f g c'
+    vertical-htpy-eq-cocone =
+      pr1 (pr2 (htpy-eq-cocone c c' p))
+
+    coherence-square-htpy-eq-cocone :
+      statement-coherence-htpy-cocone c c'
+        ( horizontal-htpy-eq-cocone)
+        ( vertical-htpy-eq-cocone)
+    coherence-square-htpy-eq-cocone =
+      pr2 (pr2 (htpy-eq-cocone c c' p))
+
   is-torsorial-htpy-cocone :
     (c : cocone f g X) → is-torsorial (htpy-cocone c)
   is-torsorial-htpy-cocone c =
