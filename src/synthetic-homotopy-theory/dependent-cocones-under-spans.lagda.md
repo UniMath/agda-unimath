@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.dependent-cocones-under-spans where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.constant-type-families
 open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
@@ -225,4 +226,19 @@ module _
       ( eq-htpy-dependent-cocone d' ∘ htpy-eq-dependent-cocone d') ~ id
     is-retraction-eq-htpy-dependent-cocone d' =
       is-retraction-map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone d')
+```
+
+### Dependent cocones on constant type families
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  (f : S → A) (g : S → B) (c : cocone f g X) {Y : UU l5}
+  where
+
+  dependent-cocone-cocone : cocone f g Y → dependent-cocone f g c (λ _ → Y)
+  pr1 (dependent-cocone-cocone (f' , g' , H)) = f'
+  pr1 (pr2 (dependent-cocone-cocone (f' , g' , H))) = g'
+  pr2 (pr2 (dependent-cocone-cocone (f' , g' , H))) s =
+    tr-constant-type-family (coherence-square-cocone f g c s) (f' (f s)) ∙ H s
 ```
