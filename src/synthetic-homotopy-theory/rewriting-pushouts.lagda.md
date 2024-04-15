@@ -9,10 +9,11 @@ module synthetic-homotopy-theory.rewriting-pushouts where
 <details><summary>Imports</summary>
 
 ```agda
-open import reflection.rewriting
-open import foundation.universe-levels
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.universe-levels
+
+open import reflection.rewriting
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pushouts
