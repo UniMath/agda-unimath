@@ -10,7 +10,11 @@ module foundation.quasicoherently-idempotent-maps where
 open import foundation.dependent-pair-types
 open import foundation.homotopy-algebra
 open import foundation.idempotent-maps
+open import foundation.1-types
+open import foundation.negation
+open import foundation.equality-dependent-pair-types
 open import foundation.universe-levels
+open import synthetic-homotopy-theory.circle
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
 
@@ -151,6 +155,31 @@ module _
   is-quasicoherently-idempotent-prop-Set =
     ( is-quasicoherently-idempotent f ,
       is-prop-is-quasicoherently-idempotent-Set)
+```
+
+### Being quasicoherently idempotent is generally not a property
+
+Not even for [1-types](foundation.1-types.md): consider the identity function on
+the [circle](synthetic-homotopy-theory.circle.md)
+
+```text
+  id : 𝕊¹ → 𝕊¹.
+```
+
+Two distinct witnesses that it is idempotent are given by `t ↦ refl` and
+`t ↦ loop`. Both of these are quasicoherent, because
+
+```text
+  coherence-is-quasicoherently-idempotent id I ≐ (id ·l I ~ I ·r id) ≃ (I ~ I).
+```
+
+To formalize this result, we first need that the loop of the circle is
+nontrivial.
+
+```text
+is-not-prop-is-quasicoherently-idempotent-id-circle :
+  ¬ (is-prop (is-quasicoherently-idempotent (id {A = 𝕊¹})))
+is-not-prop-is-quasicoherently-idempotent-id-circle = ?
 ```
 
 ### Idempotent maps on sets are quasicoherently idempotent
