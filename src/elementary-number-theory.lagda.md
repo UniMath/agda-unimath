@@ -39,6 +39,7 @@ open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.difference-rational-numbers public
 open import elementary-number-theory.dirichlet-convolution public
+open import elementary-number-theory.discrete-field-of-rational-numbers public
 open import elementary-number-theory.distance-integers public
 open import elementary-number-theory.distance-natural-numbers public
 open import elementary-number-theory.divisibility-integers public
