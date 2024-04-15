@@ -238,7 +238,12 @@ module _
 
   cogap : cocone f g X → pushout f g → X
   cogap = dependent-cogap f g ∘ dependent-cocone-cocone f g (cocone-pushout f g)
+```
 
+We write out the section and retraction homotopy in full detail to ensure that
+the inverse of `cocone-map` computes to `cogap` judgmentally.
+
+```agda
   is-section-cogap : is-section (cocone-map f g (cocone-pushout f g)) cogap
   is-section-cogap =
     ( ( triangle-dependent-cocone-map-constant-type-family' f g
@@ -253,8 +258,8 @@ module _
     is-retraction (cocone-map f g (cocone-pushout f g)) cogap
   is-retraction-cogap =
     ( ( cogap) ·l
-      ( ( triangle-dependent-cocone-map-constant-type-family' f g
-          ( cocone-pushout f g)))) ∙h
+      ( triangle-dependent-cocone-map-constant-type-family' f g
+        ( cocone-pushout f g))) ∙h
     ( ( dependent-cogap f g) ·l
       ( is-section-map-inv-dependent-cocone-cocone f g (cocone-pushout f g)) ·r
       ( dependent-cocone-map f g (cocone-pushout f g) (λ _ → X))) ∙h
@@ -293,36 +298,28 @@ module _
   compute-inl-cogap :
     cogap f g c ∘ inl-pushout f g ~ horizontal-map-cocone f g c
   compute-inl-cogap =
-    horizontal-htpy-cocone-map-universal-property-pushout
-      ( f)
-      ( g)
-      ( cocone-pushout f g)
-      ( up-pushout f g)
-      ( c)
+    compute-inl-dependent-cogap f g
+      ( dependent-cocone-cocone f g (cocone-pushout f g) c)
 
   compute-inr-cogap :
     cogap f g c ∘ inr-pushout f g ~ vertical-map-cocone f g c
   compute-inr-cogap =
-    vertical-htpy-cocone-map-universal-property-pushout
-      ( f)
-      ( g)
-      ( cocone-pushout f g)
-      ( up-pushout f g)
-      ( c)
+    compute-inr-dependent-cogap f g
+      ( dependent-cocone-cocone f g (cocone-pushout f g) c)
 
-  compute-glue-cogap :
-    statement-coherence-htpy-cocone f g
-      ( cocone-map f g (cocone-pushout f g) (cogap f g c))
-      ( c)
-      ( compute-inl-cogap)
-      ( compute-inr-cogap)
-  compute-glue-cogap =
-    coherence-htpy-cocone-map-universal-property-pushout
-      ( f)
-      ( g)
-      ( cocone-pushout f g)
-      ( up-pushout f g)
-      ( c)
+  -- compute-glue-cogap :
+  --   statement-coherence-htpy-cocone f g
+  --     ( cocone-map f g (cocone-pushout f g) (cogap f g c))
+  --     ( c)
+  --     ( compute-inl-cogap)
+  --     ( compute-inr-cogap)
+  -- compute-glue-cogap =
+  --   coherence-htpy-cocone-map-universal-property-pushout
+  --     ( f)
+  --     ( g)
+  --     ( cocone-pushout f g)
+  --     ( up-pushout f g)
+  --     ( c)
 ```
 
 ### The small predicate of being a pushout cocone
