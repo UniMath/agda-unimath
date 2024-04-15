@@ -25,9 +25,7 @@ open import foundation.transport-along-identifications
 ## Idea
 
 [Positive integer fractions](elementary-number-theory.positive-integer-fractions.md)
-have a multiplicative
-{{#concept "inverse" Disambiguation="positive integer fraction" Agda=inv-is-positive-fraction-ℤ}}
-up to the canonical similarity relation on
+have a multiplicative inverse up to the canonical similarity relation on
 [integer fractions](elementary-number-theory.integer-fractions.md).
 
 ## Definitions

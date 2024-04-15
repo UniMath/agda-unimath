@@ -27,8 +27,7 @@ open import foundation.identity-types
 ## Idea
 
 [Positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-have a multiplicative
-{{#concept "inverse" Disambiguation="positive rational number" Agda=inv-is-positive-ℚ}}.
+have a multiplicative inverse.
 
 ## Definitions
 

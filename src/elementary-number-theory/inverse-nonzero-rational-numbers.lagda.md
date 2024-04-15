@@ -30,8 +30,7 @@ open import foundation.transport-along-identifications
 ## Idea
 
 [Nonzero rational numbers](elementary-number-theory.nonzero-rational-numbers.md)
-are
-{{#concept "invertible" Disambiguation="rational numbers" Agda=is-invertible-is-nonzero-ℚ}}.
+have a multiplicative inverse.
 
 ## Lemma
 
