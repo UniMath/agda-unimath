@@ -7,13 +7,16 @@ module foundation.functoriality-fibers-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
+open import foundation.homotopies-morphisms-arrows
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.commuting-squares-of-homotopies
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
@@ -21,7 +24,6 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -191,7 +193,7 @@ module _
         ( ap
           ( concat (inv (coh-hom-arrow g h β (pr1 α a))) _)
           ( inv
-            ( ( ap (ap (map-codomain-hom-arrow g h β)) right-unit) ∙
+            ( ( ap² (map-codomain-hom-arrow g h β) right-unit) ∙
               ( ap-inv
                 ( map-codomain-hom-arrow g h β)
                 ( coh-hom-arrow f g α a))))))
@@ -460,8 +462,8 @@ module _
     ( ( map-fiber-vertical-map-cone f (g ∘ h)
         ( pasting-vertical-cone f g h c d)
         ( x)) ∘
-      ( inv-map-compute-fiber-comp (pr1 c) (pr1 d) x)) ~
-    ( ( inv-map-compute-fiber-comp g h (f x)) ∘
+      ( map-inv-compute-fiber-comp (pr1 c) (pr1 d) x)) ~
+    ( ( map-inv-compute-fiber-comp g h (f x)) ∘
       ( map-Σ
         ( λ t → fiber h (pr1 t))
         ( map-fiber-vertical-map-cone f g c x)
@@ -470,7 +472,7 @@ module _
   preserves-pasting-vertical-map-fiber-vertical-map-cone
     (p , q , H) (p' , q' , H') .(p (p' a))
     ((.(p' a) , refl) , (a , refl)) =
-    eq-pair-eq-pr2
+    eq-pair-eq-fiber
       ( ( right-unit) ∙
         ( distributive-inv-concat (H (p' a)) (ap g (H' a))) ∙
         ( ap
@@ -484,7 +486,7 @@ module _
                 ( p (p' a))
                 ( p' a , refl))))
           ( ( inv (ap-inv g (H' a))) ∙
-            ( ap (ap g) (inv right-unit)))))
+            ( ap² g (inv right-unit)))))
 ```
 
 ## See also

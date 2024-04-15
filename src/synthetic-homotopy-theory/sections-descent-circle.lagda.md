@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.sections-descent-circle where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-identifications
 open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -205,13 +206,13 @@ module _
           ( ( inv (assoc (ap _ (inv is-section-inv-α)) _ _)) ∙
             ( horizontal-concat-Id²
               ( inv
-                ( ap-concat-eq
+                ( map-coherence-triangle-identifications
                   ( tr
                     ( family-family-with-descent-data-circle A)
                     ( loop-free-loop l))
-                  ( inv is-section-inv-α)
-                  ( is-section-inv-α)
                   ( refl)
+                  ( is-section-inv-α)
+                  ( inv is-section-inv-α)
                   ( inv (left-inv is-section-inv-α))))
               ( refl)))))
     where

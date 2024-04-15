@@ -9,7 +9,9 @@ module foundation.universal-property-family-of-fibers-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.families-of-equivalences
+open import foundation.function-extensionality
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
@@ -18,7 +20,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -403,24 +404,29 @@ module _
     pr2 extension-by-fiberwise-equiv-universal-property-family-of-fibers
 ```
 
-### A type family `C` over `B` satisfies the universal property of the family of fibers of a map `f : A → B` if and only if the diagonal map `C b → (fiber f b → C b)` is an equivalence for every `b : B`
+### A type family `C` over `B` satisfies the universal property of the family of fibers of a map `f : A → B` if and only if the constant map `C b → (fiber f b → C b)` is an equivalence for every `b : B`
 
-This condition simplifies, for example, the proof that connected maps satisfy a
-dependent universal property.
+In other words, the dependent type `C` is
+`f`-[local](orthogonal-factorization-systems.local-types.md) if its fiber over
+`b` is `fiber f b`-[null](orthogonal-factorization-systems.null-types.md) for
+every `b : B`.
+
+This condition simplifies, for example, the proof that
+[connected maps](foundation.connected-maps.md) satisfy a dependent universal
+property.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} {C : B → UU l3}
   where
 
   is-equiv-precomp-Π-fiber-condition :
-    {l3 : Level} {C : B → UU l3} →
-    ((b : B) → is-equiv (λ (c : C b) → const (fiber f b) (C b) c)) →
+    ((b : B) → is-equiv (diagonal-exponential (C b) (fiber f b))) →
     is-equiv (precomp-Π f C)
-  is-equiv-precomp-Π-fiber-condition {l3} {C} H =
+  is-equiv-precomp-Π-fiber-condition H =
     is-equiv-comp
       ( ev-lift-family-of-elements-fiber f (λ b _ → C b))
-      ( map-Π (λ b u _ → u))
+      ( map-Π (λ b → diagonal-exponential (C b) (fiber f b)))
       ( is-equiv-map-Π-is-fiberwise-equiv H)
       ( universal-property-family-of-fibers-fiber f C)
 ```

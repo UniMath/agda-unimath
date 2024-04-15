@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -119,7 +120,7 @@ module _
 
   is-subprecategory-Prop : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-subprecategory-Prop =
-    prod-Prop
+    product-Prop
       ( contains-id-prop-subtype-Precategory C P₀ P₁)
       ( is-closed-under-composition-prop-subtype-Precategory C P₀ P₁)
 
@@ -400,26 +401,19 @@ module _
         ( inclusion-hom-Subprecategory C P y z g)
         ( inclusion-hom-Subprecategory C P x y f))
 
-  inv-associative-comp-hom-Subprecategory :
+  involutive-eq-associative-comp-hom-Subprecategory :
     {x y z w : obj-Subprecategory C P}
     (h : hom-Subprecategory C P z w)
     (g : hom-Subprecategory C P y z)
     (f : hom-Subprecategory C P x y) →
-    ( comp-hom-Subprecategory {x} {z} {w} h
-      ( comp-hom-Subprecategory {x} {y} {z} g f)) ＝
-    ( comp-hom-Subprecategory {x} {y} {w}
-      ( comp-hom-Subprecategory {y} {z} {w} h g) f)
-  inv-associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f =
-    eq-type-subtype
-      ( subtype-hom-Subprecategory C P
-        ( inclusion-obj-Subprecategory C P x)
-        ( inclusion-obj-Subprecategory C P w)
-        ( is-in-obj-inclusion-obj-Subprecategory C P x)
-        ( is-in-obj-inclusion-obj-Subprecategory C P w))
-      ( inv-associative-comp-hom-Precategory C
-        ( inclusion-hom-Subprecategory C P z w h)
-        ( inclusion-hom-Subprecategory C P y z g)
-        ( inclusion-hom-Subprecategory C P x y f))
+    comp-hom-Subprecategory {x} {y} {w}
+      ( comp-hom-Subprecategory {y} {z} {w} h g)
+      ( f) ＝ⁱ
+    comp-hom-Subprecategory {x} {z} {w}
+      ( h)
+      ( comp-hom-Subprecategory {x} {y} {z} g f)
+  involutive-eq-associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f =
+    involutive-eq-eq (associative-comp-hom-Subprecategory h g f)
 
   left-unit-law-comp-hom-Subprecategory :
     {x y : obj-Subprecategory C P}
@@ -453,14 +447,8 @@ module _
     associative-composition-operation-binary-family-Set hom-set-Subprecategory
   pr1 associative-composition-operation-Subprecategory {x} {y} {z} =
     comp-hom-Subprecategory {x} {y} {z}
-  pr1
-    ( pr2
-      associative-composition-operation-Subprecategory {x} {y} {z} {w} h g f) =
-    associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f
-  pr2
-    ( pr2
-      associative-composition-operation-Subprecategory {x} {y} {z} {w} h g f) =
-    inv-associative-comp-hom-Subprecategory {x} {y} {z} {w} h g f
+  pr2 associative-composition-operation-Subprecategory =
+    involutive-eq-associative-comp-hom-Subprecategory
 
   is-unital-composition-operation-Subprecategory :
     is-unital-composition-operation-binary-family-Set

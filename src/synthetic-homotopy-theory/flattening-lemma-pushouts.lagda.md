@@ -263,10 +263,8 @@ module _
       ( map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
       ( map-equiv equiv-ev-pair³ ∘ cocone-map-flattening-pushout Y ∘ ind-Σ)
   triangle-comparison-dependent-cocone-ind-Σ-cocone Y h =
-    eq-pair-Σ
-      ( refl)
-      ( eq-pair-Σ
-        ( refl)
+    eq-pair-eq-fiber
+      ( eq-pair-eq-fiber
         ( eq-htpy
           ( inv-htpy
             ( compute-equiv-htpy-dependent-function-dependent-identification-function-type

@@ -29,7 +29,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import lists.functoriality-lists
 open import lists.lists
@@ -199,7 +199,7 @@ adjacent-transposition-Fin :
   (n : ℕ) → (k : Fin n) →
   Permutation (succ-ℕ n)
 adjacent-transposition-Fin (succ-ℕ n) (inl x) =
-  equiv-coprod (adjacent-transposition-Fin n x) id-equiv
+  equiv-coproduct (adjacent-transposition-Fin n x) id-equiv
 adjacent-transposition-Fin (succ-ℕ n) (inr x) =
   swap-two-last-elements-transposition-Fin n
 
@@ -212,19 +212,19 @@ map-adjacent-transposition-Fin n k = map-equiv (adjacent-transposition-Fin n k)
 #### `adjacent-transposition-Fin` is an instance of the definiton `transposition-Fin`
 
 ```agda
-cases-htpy-map-coprod-map-transposition-id-Fin :
+cases-htpy-map-coproduct-map-transposition-id-Fin :
   (n : ℕ) → (k l : Fin n) → (neq : k ≠ l) →
   (x : Fin (succ-ℕ n)) →
   (x ＝ inl-Fin n k) + (x ≠ inl-Fin n k) →
   (x ＝ inl-Fin n l) + (x ≠ inl-Fin n l) →
-  map-coprod (map-transposition-Fin n k l neq) id x ＝
+  map-coproduct (map-transposition-Fin n k l neq) id x ＝
   map-transposition-Fin
     ( succ-ℕ n)
     ( inl-Fin n k)
     ( inl-Fin n l)
     ( neq ∘ is-injective-inl-Fin n)
     ( x)
-cases-htpy-map-coprod-map-transposition-id-Fin n k l neq x (inl refl) _ =
+cases-htpy-map-coproduct-map-transposition-id-Fin n k l neq x (inl refl) _ =
   ( ( ap
       ( inl-Fin n)
       ( left-computation-transposition-Fin n k l neq)) ∙
@@ -234,7 +234,7 @@ cases-htpy-map-coprod-map-transposition-id-Fin n k l neq x (inl refl) _ =
         ( inl-Fin n k)
         ( inl-Fin n l)
         ( neq ∘ is-injective-inl-Fin n))))
-cases-htpy-map-coprod-map-transposition-id-Fin
+cases-htpy-map-coproduct-map-transposition-id-Fin
   ( n)
   ( k)
   ( l)
@@ -251,7 +251,7 @@ cases-htpy-map-coprod-map-transposition-id-Fin
         ( inl-Fin n k)
         ( inl-Fin n l)
         ( neq ∘ is-injective-inl-Fin n))))
-cases-htpy-map-coprod-map-transposition-id-Fin
+cases-htpy-map-coproduct-map-transposition-id-Fin
   ( n)
   ( k)
   ( l)
@@ -278,7 +278,7 @@ cases-htpy-map-coprod-map-transposition-id-Fin
         ( inl x)
         ( neqk ∘ inv)
         ( neql ∘ inv))))
-cases-htpy-map-coprod-map-transposition-id-Fin
+cases-htpy-map-coproduct-map-transposition-id-Fin
   ( n)
   ( k)
   ( l)
@@ -296,17 +296,17 @@ cases-htpy-map-coprod-map-transposition-id-Fin
       ( neqk ∘ inv)
       ( neql ∘ inv))
 
-htpy-map-coprod-map-transposition-id-Fin :
+htpy-map-coproduct-map-transposition-id-Fin :
   (n : ℕ) → (k l : Fin n) → (neq : k ≠ l) →
   htpy-equiv
-    ( equiv-coprod (transposition-Fin n k l neq) id-equiv)
+    ( equiv-coproduct (transposition-Fin n k l neq) id-equiv)
     ( transposition-Fin
       ( succ-ℕ n)
       ( inl-Fin n k)
       ( inl-Fin n l)
       ( neq ∘ is-injective-inl-Fin n))
-htpy-map-coprod-map-transposition-id-Fin n k l neq x =
-  cases-htpy-map-coprod-map-transposition-id-Fin
+htpy-map-coproduct-map-transposition-id-Fin n k l neq x =
+  cases-htpy-map-coproduct-map-transposition-id-Fin
     ( n)
     ( k)
     ( l)
@@ -341,8 +341,8 @@ htpy-adjacent-transposition-Fin :
       ( inr-Fin n k)
       ( neq-inl-Fin-inr-Fin n k))
 htpy-adjacent-transposition-Fin (succ-ℕ n) (inl x) =
-  ( ( htpy-map-coprod (htpy-adjacent-transposition-Fin n x) refl-htpy) ∙h
-    ( ( htpy-map-coprod-map-transposition-id-Fin
+  ( ( htpy-map-coproduct (htpy-adjacent-transposition-Fin n x) refl-htpy) ∙h
+    ( ( htpy-map-coproduct-map-transposition-id-Fin
         ( succ-ℕ n)
         ( inl-Fin n x)
         ( inr-Fin n x)
@@ -445,16 +445,11 @@ htpy-conjugate-transposition-Fin n x y z neqxy neqyz neqxz =
     ( neqxz)
 
 private
-  htpy-whisk-conjugate :
+  htpy-whisker-conjugate :
     {l1 : Level} {A : UU l1} {f f' : A → A} (g : A → A) →
     (f ~ f') → (f ∘ (g ∘ f)) ~ (f' ∘ (g ∘ f'))
-  htpy-whisk-conjugate {f = f} {f' = f'} g H x =
+  htpy-whisker-conjugate {f = f} {f' = f'} g H x =
     H (g ( f x)) ∙ ap (f' ∘ g) (H x)
-
-  htpy-whisk :
-    {l : Level} {A : UU l} (f : A → A) {g g' : A → A} →
-    g ~ g' → (f ∘ (g ∘ f)) ~ (f ∘ (g' ∘ f))
-  htpy-whisk f H x = ap f (H (f x))
 
 htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin :
   (n : ℕ) (x : Fin (succ-ℕ n)) (neq : x ≠ neg-one-Fin n) →
@@ -472,7 +467,7 @@ htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin :
       ( neg-one-Fin (succ-ℕ n))
       ( neq-inl-inr))
 htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin n x neq =
-  ( ( htpy-whisk-conjugate
+  ( ( htpy-whisker-conjugate
         ( map-transposition-Fin
           ( succ-ℕ (succ-ℕ n))
           ( inl-Fin (succ-ℕ n) x)
@@ -504,14 +499,15 @@ htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin' :
       ( inl-Fin (succ-ℕ n) x)
       ( neq-inr-inl))
 htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin' n x neq =
-  ( ( htpy-whisk
+  ( ( double-whisker-comp
       ( map-swap-two-last-elements-transposition-Fin n)
       ( ( htpy-transposition-Fin-transposition-swap-Fin
           ( succ-ℕ (succ-ℕ n))
           ( neg-two-Fin (succ-ℕ n))
           ( inl-Fin (succ-ℕ n) x)
           ( neq ∘ (is-injective-inl-Fin (succ-ℕ n) ∘ inv))) ∙h
-        htpy-same-transposition-Fin)) ∙h
+        htpy-same-transposition-Fin)
+      ( map-swap-two-last-elements-transposition-Fin n)) ∙h
       ( ( htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin
           ( n)
           ( x)
@@ -588,16 +584,16 @@ htpy-permutation-inl-list-adjacent-transpositions :
     ( permutation-list-adjacent-transpositions
       ( succ-ℕ n)
       ( map-list (inl-Fin n) l))
-    ( equiv-coprod
+    ( equiv-coproduct
       ( permutation-list-adjacent-transpositions n l)
       ( id-equiv))
 htpy-permutation-inl-list-adjacent-transpositions n nil =
-  inv-htpy (id-map-coprod (Fin (succ-ℕ n)) unit)
+  inv-htpy (id-map-coproduct (Fin (succ-ℕ n)) unit)
 htpy-permutation-inl-list-adjacent-transpositions n (cons x l) =
-  ( map-coprod (map-adjacent-transposition-Fin n x) id ·l
+  ( map-coproduct (map-adjacent-transposition-Fin n x) id ·l
     htpy-permutation-inl-list-adjacent-transpositions n l) ∙h
   ( inv-htpy
-      ( preserves-comp-map-coprod
+      ( preserves-comp-map-coproduct
         ( map-permutation-list-adjacent-transpositions n l)
         ( map-adjacent-transposition-Fin n x)
         ( id)
@@ -634,14 +630,14 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
   ( ( htpy-permutation-inl-list-adjacent-transpositions
       ( n)
       ( list-adjacent-transpositions-transposition-Fin n i j)) ∙h
-    ( ( htpy-map-coprod
+    ( ( htpy-map-coproduct
         ( htpy-permutation-list-adjacent-transpositions-transposition-Fin
           ( n)
           ( i)
           ( j)
           ( neq ∘ (ap (inl-Fin (succ-ℕ n)))))
         ( refl-htpy)) ∙h
-      ( ( htpy-map-coprod-map-transposition-id-Fin
+      ( ( htpy-map-coproduct-map-transposition-id-Fin
           ( succ-ℕ n)
           ( i)
           ( j)
@@ -662,7 +658,7 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
             ( inl i)
             ( inr star)))
         ( inr star)) ∙h
-    ( ( htpy-whisk
+    ( ( double-whisker-comp
         ( map-swap-two-last-elements-transposition-Fin n)
         ( ( htpy-permutation-inl-list-adjacent-transpositions
             ( n)
@@ -670,18 +666,19 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
               ( n)
               ( inl i)
               ( inr star))) ∙h
-          ( htpy-map-coprod
+          ( htpy-map-coproduct
             ( htpy-permutation-list-adjacent-transpositions-transposition-Fin
               ( n)
               ( inl i)
               ( inr star)
               ( neq-inl-inr))
             ( refl-htpy) ∙h
-            htpy-map-coprod-map-transposition-id-Fin
+            htpy-map-coproduct-map-transposition-id-Fin
               ( succ-ℕ n)
               ( inl i)
               ( inr star)
-              ( neq-inl-inr)))) ∙h
+              ( neq-inl-inr)))
+        ( map-swap-two-last-elements-transposition-Fin n)) ∙h
         ( htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin
           ( n)
           ( inl i)
@@ -709,7 +706,7 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
             ( inr star)
             ( inl j)))
         ( inr star)) ∙h
-    ( ( htpy-whisk
+    ( ( double-whisker-comp
         ( map-swap-two-last-elements-transposition-Fin n)
         ( ( htpy-permutation-inl-list-adjacent-transpositions
             ( n)
@@ -717,19 +714,20 @@ htpy-permutation-list-adjacent-transpositions-transposition-Fin
               ( n)
               ( inr star)
               ( inl j))) ∙h
-          ( ( htpy-map-coprod
+          ( ( htpy-map-coproduct
               ( htpy-permutation-list-adjacent-transpositions-transposition-Fin
                 ( n)
                 ( inr star)
                 ( inl j)
                 ( neq-inr-inl))
               ( refl-htpy)) ∙h
-            ( ( htpy-map-coprod-map-transposition-id-Fin
+            ( ( htpy-map-coproduct-map-transposition-id-Fin
                 ( succ-ℕ n)
                 ( inr star)
                 ( inl j)
                 ( neq-inr-inl)) ∙h
-              ( htpy-same-transposition-Fin))))) ∙h
+              ( htpy-same-transposition-Fin))))
+        ( map-swap-two-last-elements-transposition-Fin n)) ∙h
       ( ( htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin'
           ( n)
           ( inl j)

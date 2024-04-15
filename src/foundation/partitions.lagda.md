@@ -8,6 +8,7 @@ module foundation.partitions where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -286,40 +287,43 @@ will have no more use for the large type of blocks of a partition.
     is-prop-is-in-block-partition-Large-Type
       ( map-inv-compute-block-partition B)
 
-  compute-is-in-block-partition :
-    (B : inhabited-subtype l2 A) (H : is-block-partition B) (x : A) →
-    is-in-inhabited-subtype B x ≃
-    is-in-block-partition (make-block-partition B H) x
-  compute-is-in-block-partition B H x =
-    equiv-tr
-      ( λ C → is-in-block-partition-Large-Type C x)
-      ( inv (is-retraction-map-inv-compute-block-partition (B , H)))
+  abstract
+    compute-is-in-block-partition :
+      (B : inhabited-subtype l2 A) (H : is-block-partition B) (x : A) →
+      is-in-inhabited-subtype B x ≃
+      is-in-block-partition (make-block-partition B H) x
+    compute-is-in-block-partition B H x =
+      equiv-tr
+        ( λ C → is-in-block-partition-Large-Type C x)
+        ( inv (is-retraction-map-inv-compute-block-partition (B , H)))
 
-  make-is-in-block-partition :
-    (B : inhabited-subtype l2 A) (H : is-block-partition B) (x : A) →
-    is-in-inhabited-subtype B x →
-    is-in-block-partition (make-block-partition B H) x
-  make-is-in-block-partition B H x K =
-    map-equiv (compute-is-in-block-partition B H x) K
+  abstract
+    make-is-in-block-partition :
+      (B : inhabited-subtype l2 A) (H : is-block-partition B) (x : A) →
+      is-in-inhabited-subtype B x →
+      is-in-block-partition (make-block-partition B H) x
+    make-is-in-block-partition B H x K =
+      map-equiv (compute-is-in-block-partition B H x) K
 
   block-containing-element-partition : A → UU (l1 ⊔ l2)
   block-containing-element-partition a =
     Σ block-partition (λ B → is-in-block-partition B a)
 
-  is-contr-block-containing-element-partition :
-    (a : A) → is-contr (block-containing-element-partition a)
-  is-contr-block-containing-element-partition a =
-    is-contr-equiv'
-      ( Σ block-partition-Large-Type
-        ( λ B → is-in-block-partition-Large-Type B a))
-      ( equiv-Σ
-        ( λ B → is-in-block-partition B a)
-        ( compute-block-partition)
-        ( λ B →
-          equiv-tr
-            ( λ C → is-in-block-partition-Large-Type C a)
-            ( inv (is-retraction-map-inv-compute-block-partition B))))
-      ( is-partition-subtype-partition a)
+  abstract
+    is-contr-block-containing-element-partition :
+      (a : A) → is-contr (block-containing-element-partition a)
+    is-contr-block-containing-element-partition a =
+      is-contr-equiv'
+        ( Σ block-partition-Large-Type
+          ( λ B → is-in-block-partition-Large-Type B a))
+        ( equiv-Σ
+          ( λ B → is-in-block-partition B a)
+          ( compute-block-partition)
+          ( λ B →
+            equiv-tr
+              ( λ C → is-in-block-partition-Large-Type C a)
+              ( inv (is-retraction-map-inv-compute-block-partition B))))
+        ( is-partition-subtype-partition a)
 
   center-block-containing-element-partition :
     (a : A) → block-containing-element-partition a
@@ -415,22 +419,23 @@ module _
     refl-has-same-elements-inhabited-subtype
       ( inhabited-subtype-block-partition P B)
 
-  is-torsorial-has-same-elements-block-partition :
-    is-torsorial has-same-elements-block-partition
-  is-torsorial-has-same-elements-block-partition =
-    is-contr-equiv'
-      ( Σ ( block-partition P)
+  abstract
+    is-torsorial-has-same-elements-block-partition :
+      is-torsorial has-same-elements-block-partition
+    is-torsorial-has-same-elements-block-partition =
+      is-contr-equiv'
+        ( Σ ( block-partition P)
+            ( λ C →
+              inhabited-subtype-block-partition P B ＝
+              inhabited-subtype-block-partition P C))
+        ( equiv-tot
           ( λ C →
-            inhabited-subtype-block-partition P B ＝
-            inhabited-subtype-block-partition P C))
-      ( equiv-tot
-        ( λ C →
-          extensionality-inhabited-subtype
-            ( inhabited-subtype-block-partition P B)
-            ( inhabited-subtype-block-partition P C)))
-      ( fundamental-theorem-id'
-        ( λ C → ap (inhabited-subtype-block-partition P))
-        ( is-emb-inhabited-subtype-block-partition P B))
+            extensionality-inhabited-subtype
+              ( inhabited-subtype-block-partition P B)
+              ( inhabited-subtype-block-partition P C)))
+        ( fundamental-theorem-id'
+          ( λ C → ap (inhabited-subtype-block-partition P))
+          ( is-emb-inhabited-subtype-block-partition P B))
 
   has-same-elements-eq-block-partition :
     (C : block-partition P) → (B ＝ C) →
@@ -508,9 +513,7 @@ module _
   share-common-element-block-partition-Prop :
     (C : block-partition P) → Prop (l1 ⊔ l2)
   share-common-element-block-partition-Prop C =
-    ∃-Prop A
-      ( λ a →
-        is-in-block-partition P B a × is-in-block-partition P C a)
+    ∃ A (λ a → subtype-block-partition P B a ∧ subtype-block-partition P C a)
 
   share-common-element-block-partition :
     (C : block-partition P) → UU (l1 ⊔ l2)
@@ -615,50 +618,51 @@ module _
   pr2 (subtype-partition-Set-Indexed-Σ-Decomposition Q) =
     is-prop-is-block-partition-Set-Indexed-Σ-Decomposition Q
 
-  is-partition-subtype-partition-Set-Indexed-Σ-Decomposition :
-    is-partition (subtype-partition-Set-Indexed-Σ-Decomposition {l2})
-  is-partition-subtype-partition-Set-Indexed-Σ-Decomposition a =
-    is-contr-equiv
-      ( Σ ( inhabited-subtype l2 A)
-          ( has-same-elements-inhabited-subtype
-              ( pair
-                ( λ x →
-                  Id-Prop
-                    ( indexing-set-Set-Indexed-Σ-Decomposition D)
-                    ( index-Set-Indexed-Σ-Decomposition D x)
-                    ( index-Set-Indexed-Σ-Decomposition D a))
-                ( unit-trunc-Prop (pair a refl)))))
-      ( ( equiv-tot
-          ( λ Q →
-            ( ( ( equiv-Π-equiv-family
+  abstract
+    is-partition-subtype-partition-Set-Indexed-Σ-Decomposition :
+      is-partition (subtype-partition-Set-Indexed-Σ-Decomposition {l2})
+    is-partition-subtype-partition-Set-Indexed-Σ-Decomposition a =
+      is-contr-equiv
+        ( Σ ( inhabited-subtype l2 A)
+            ( has-same-elements-inhabited-subtype
+                ( pair
                   ( λ x →
-                    inv-equiv
-                      ( equiv-equiv-iff
-                        ( Id-Prop
-                          ( indexing-set-Set-Indexed-Σ-Decomposition D)
-                          ( index-Set-Indexed-Σ-Decomposition D x)
-                          ( index-Set-Indexed-Σ-Decomposition D a))
-                        ( subtype-inhabited-subtype Q x)) ∘e
-                    ( equiv-inv-equiv))) ∘e
-                ( left-unit-law-Σ-is-contr
-                  ( is-torsorial-Id (index-Set-Indexed-Σ-Decomposition D a))
-                  ( pair
-                    ( index-Set-Indexed-Σ-Decomposition D a)
-                    ( refl)))) ∘e
-              ( equiv-right-swap-Σ)) ∘e
-            ( equiv-tot (λ ie → pr2 ie a)))) ∘e
-        ( associative-Σ
-          ( inhabited-subtype l2 A)
-          ( is-block-partition-Set-Indexed-Σ-Decomposition)
-          ( λ B → is-in-inhabited-subtype (pr1 B) a)))
-      ( is-torsorial-has-same-elements-inhabited-subtype
-        ( pair
-          ( λ x →
-            Id-Prop
-              ( indexing-set-Set-Indexed-Σ-Decomposition D)
-              ( index-Set-Indexed-Σ-Decomposition D x)
-              ( index-Set-Indexed-Σ-Decomposition D a))
-          ( unit-trunc-Prop (pair a refl))))
+                    Id-Prop
+                      ( indexing-set-Set-Indexed-Σ-Decomposition D)
+                      ( index-Set-Indexed-Σ-Decomposition D x)
+                      ( index-Set-Indexed-Σ-Decomposition D a))
+                  ( unit-trunc-Prop (pair a refl)))))
+        ( ( equiv-tot
+            ( λ Q →
+              ( ( ( equiv-Π-equiv-family
+                    ( λ x →
+                      inv-equiv
+                        ( equiv-equiv-iff
+                          ( Id-Prop
+                            ( indexing-set-Set-Indexed-Σ-Decomposition D)
+                            ( index-Set-Indexed-Σ-Decomposition D x)
+                            ( index-Set-Indexed-Σ-Decomposition D a))
+                          ( subtype-inhabited-subtype Q x)) ∘e
+                      ( equiv-inv-equiv))) ∘e
+                  ( left-unit-law-Σ-is-contr
+                    ( is-torsorial-Id (index-Set-Indexed-Σ-Decomposition D a))
+                    ( pair
+                      ( index-Set-Indexed-Σ-Decomposition D a)
+                      ( refl)))) ∘e
+                ( equiv-right-swap-Σ)) ∘e
+              ( equiv-tot (λ ie → pr2 ie a)))) ∘e
+          ( associative-Σ
+            ( inhabited-subtype l2 A)
+            ( is-block-partition-Set-Indexed-Σ-Decomposition)
+            ( λ B → is-in-inhabited-subtype (pr1 B) a)))
+        ( is-torsorial-has-same-elements-inhabited-subtype
+          ( pair
+            ( λ x →
+              Id-Prop
+                ( indexing-set-Set-Indexed-Σ-Decomposition D)
+                ( index-Set-Indexed-Σ-Decomposition D x)
+                ( index-Set-Indexed-Σ-Decomposition D a))
+            ( unit-trunc-Prop (pair a refl))))
 
 partition-Set-Indexed-Σ-Decomposition :
   {l1 l2 l3 : Level} {A : UU l1} →

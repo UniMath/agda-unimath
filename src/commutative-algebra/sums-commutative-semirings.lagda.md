@@ -208,8 +208,8 @@ split-sum-Commutative-Semiring :
   (n m : ℕ) (f : functional-vec-Commutative-Semiring A (n +ℕ m)) →
   sum-Commutative-Semiring A (n +ℕ m) f ＝
   add-Commutative-Semiring A
-    ( sum-Commutative-Semiring A n (f ∘ inl-coprod-Fin n m))
-    ( sum-Commutative-Semiring A m (f ∘ inr-coprod-Fin n m))
+    ( sum-Commutative-Semiring A n (f ∘ inl-coproduct-Fin n m))
+    ( sum-Commutative-Semiring A m (f ∘ inr-coproduct-Fin n m))
 split-sum-Commutative-Semiring A =
   split-sum-Semiring (semiring-Commutative-Semiring A)
 ```

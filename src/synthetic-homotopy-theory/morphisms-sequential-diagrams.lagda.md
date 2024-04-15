@@ -23,7 +23,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.dependent-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
@@ -71,8 +71,8 @@ module _
 
   hom-sequential-diagram : UU (l1 ⊔ l2)
   hom-sequential-diagram =
-    section-dependent-sequential-diagram A
-      ( constant-dependent-sequential-diagram A B)
+    Σ ( (n : ℕ) → family-sequential-diagram A n → family-sequential-diagram B n)
+      ( naturality-hom-sequential-diagram)
 ```
 
 ### Components of morphisms of sequential diagrams
@@ -91,17 +91,11 @@ module _
 
   map-hom-sequential-diagram :
     ( n : ℕ) → family-sequential-diagram A n → family-sequential-diagram B n
-  map-hom-sequential-diagram =
-    map-section-dependent-sequential-diagram A
-      ( constant-dependent-sequential-diagram A B)
-      ( h)
+  map-hom-sequential-diagram = pr1 h
 
   naturality-map-hom-sequential-diagram :
     naturality-hom-sequential-diagram A B map-hom-sequential-diagram
-  naturality-map-hom-sequential-diagram =
-    naturality-map-section-dependent-sequential-diagram A
-      ( constant-dependent-sequential-diagram A B)
-      ( h)
+  naturality-map-hom-sequential-diagram = pr2 h
 ```
 
 ### The identity morphism of sequential diagrams

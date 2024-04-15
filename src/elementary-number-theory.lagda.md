@@ -10,6 +10,7 @@ open import elementary-number-theory.ackermann-function public
 open import elementary-number-theory.addition-integer-fractions public
 open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
+open import elementary-number-theory.addition-positive-and-negative-integers public
 open import elementary-number-theory.addition-rational-numbers public
 open import elementary-number-theory.arithmetic-functions public
 open import elementary-number-theory.based-induction-natural-numbers public
@@ -27,12 +28,16 @@ open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.commutative-semiring-of-natural-numbers public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
+open import elementary-number-theory.cross-multiplication-difference-integer-fractions public
 open import elementary-number-theory.cubes-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
+open import elementary-number-theory.decidable-total-order-integers public
 open import elementary-number-theory.decidable-total-order-natural-numbers public
+open import elementary-number-theory.decidable-total-order-rational-numbers public
 open import elementary-number-theory.decidable-total-order-standard-finite-types public
 open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
+open import elementary-number-theory.difference-rational-numbers public
 open import elementary-number-theory.dirichlet-convolution public
 open import elementary-number-theory.distance-integers public
 open import elementary-number-theory.distance-natural-numbers public
@@ -55,6 +60,7 @@ open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
 open import elementary-number-theory.group-of-integers public
+open import elementary-number-theory.group-of-rational-numbers public
 open import elementary-number-theory.half-integers public
 open import elementary-number-theory.hardy-ramanujan-number public
 open import elementary-number-theory.inequality-integer-fractions public
@@ -73,6 +79,7 @@ open import elementary-number-theory.legendre-symbol public
 open import elementary-number-theory.lower-bounds-natural-numbers public
 open import elementary-number-theory.maximum-natural-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
+open import elementary-number-theory.mediant-integer-fractions public
 open import elementary-number-theory.mersenne-primes public
 open import elementary-number-theory.minimum-natural-numbers public
 open import elementary-number-theory.minimum-standard-finite-types public
@@ -84,12 +91,16 @@ open import elementary-number-theory.multiplication-integer-fractions public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
+open import elementary-number-theory.multiplication-positive-and-negative-integers public
 open import elementary-number-theory.multiplication-rational-numbers public
 open import elementary-number-theory.multiplicative-monoid-of-natural-numbers public
 open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-standard-cyclic-rings public
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
+open import elementary-number-theory.negative-integers public
+open import elementary-number-theory.nonnegative-integers public
+open import elementary-number-theory.nonpositive-integers public
 open import elementary-number-theory.nonzero-integers public
 open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
@@ -97,6 +108,8 @@ open import elementary-number-theory.parity-natural-numbers public
 open import elementary-number-theory.peano-arithmetic public
 open import elementary-number-theory.pisano-periods public
 open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
+open import elementary-number-theory.positive-and-negative-integers public
+open import elementary-number-theory.positive-integers public
 open import elementary-number-theory.powers-integers public
 open import elementary-number-theory.powers-of-two public
 open import elementary-number-theory.prime-numbers public
@@ -110,6 +123,7 @@ open import elementary-number-theory.relatively-prime-natural-numbers public
 open import elementary-number-theory.repeating-element-standard-finite-type public
 open import elementary-number-theory.retracts-of-natural-numbers public
 open import elementary-number-theory.ring-of-integers public
+open import elementary-number-theory.ring-of-rational-numbers public
 open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.squares-integers public
@@ -118,7 +132,10 @@ open import elementary-number-theory.squares-natural-numbers public
 open import elementary-number-theory.standard-cyclic-groups public
 open import elementary-number-theory.standard-cyclic-rings public
 open import elementary-number-theory.stirling-numbers-of-the-second-kind public
+open import elementary-number-theory.strict-inequality-integer-fractions public
+open import elementary-number-theory.strict-inequality-integers public
 open import elementary-number-theory.strict-inequality-natural-numbers public
+open import elementary-number-theory.strict-inequality-rational-numbers public
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public
 open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.sums-of-natural-numbers public

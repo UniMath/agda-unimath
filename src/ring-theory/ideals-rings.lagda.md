@@ -56,9 +56,9 @@ is-prop-is-ideal-subset-Ring :
   {l1 l2 : Level} (R : Ring l1) (P : subset-Ring l2 R) →
   is-prop (is-ideal-subset-Ring R P)
 is-prop-is-ideal-subset-Ring R P =
-  is-prop-prod
+  is-prop-product
     ( is-prop-is-additive-subgroup-subset-Ring R P)
-    ( is-prop-prod
+    ( is-prop-product
       ( is-prop-is-closed-under-left-multiplication-subset-Ring R P)
       ( is-prop-is-closed-under-right-multiplication-subset-Ring R P))
 

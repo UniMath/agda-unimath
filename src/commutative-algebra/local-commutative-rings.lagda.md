@@ -23,10 +23,9 @@ open import ring-theory.rings
 ## Idea
 
 A **local ring** is a ring such that whenever a sum of elements is invertible,
-then one of its summands is invertible. This implies that the non-invertible
+then one of its summands is invertible. This implies that the noninvertible
 elements form an ideal. However, the law of excluded middle is needed to show
-that any ring of which the non-invertible elements form an ideal is a local
-ring.
+that any ring of which the noninvertible elements form an ideal is a local ring.
 
 ## Definition
 

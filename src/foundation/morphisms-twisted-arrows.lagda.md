@@ -49,9 +49,13 @@ module _
   (f : A → B) (g : X → Y)
   where
 
+  coherence-hom-twisted-arrow :
+    (X → A) → (B → Y) → UU (l3 ⊔ l4)
+  coherence-hom-twisted-arrow i j = j ∘ f ∘ i ~ g
+
   hom-twisted-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-twisted-arrow =
-    Σ (X → A) (λ i → Σ (B → Y) (λ j → j ∘ f ∘ i ~ g))
+    Σ (X → A) (λ i → Σ (B → Y) (coherence-hom-twisted-arrow i))
 
   module _
     (α : hom-twisted-arrow)

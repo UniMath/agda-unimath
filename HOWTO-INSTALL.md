@@ -21,8 +21,8 @@ In order to contribute to the `agda-unimath` library you will additionally need:
 1. `git`
 2. `make`
 3. `python` version 3.8 or newer
-4. The python libraries `pre-commit`, `requests` and `tomli`. Those can be
-   installed by running
+4. The python libraries `pre-commit`, `pybtex`, `requests` and `tomli`. Those
+   can be installed by running
    ```shell
    python3 -m pip install -r scripts/requirements.txt
    ```
@@ -259,7 +259,7 @@ To insert these symbols in the editor, follow these steps:
 2. When the symbol appears as a greyed-out character in your editor, press `TAB`
    to insert it.
 
-- `＝`: Type `Id` or `equals`
+- `＝`: Type `Id`
 - `ょ`: Type `yoneda`
 - `⧄`: Type `diagonal` or `lifting`
 

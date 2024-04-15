@@ -10,7 +10,6 @@ module category-theory.copresheaf-categories where
 open import category-theory.categories
 open import category-theory.category-of-functors-from-small-to-large-categories
 open import category-theory.functors-from-small-to-large-precategories
-open import category-theory.functors-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-functors-from-small-to-large-precategories
@@ -204,29 +203,6 @@ module _
       ( comp-hom-copresheaf-Precategory X Y Z g f)
   associative-comp-hom-copresheaf-Precategory X Y Z W =
     associative-comp-hom-Large-Precategory
-      ( copresheaf-large-precategory-Precategory)
-      { X = X}
-      { Y}
-      { Z}
-      { W}
-
-  inv-associative-comp-hom-copresheaf-Precategory :
-    {l3 l4 l5 l6 : Level}
-    (X : copresheaf-Precategory l3)
-    (Y : copresheaf-Precategory l4)
-    (Z : copresheaf-Precategory l5)
-    (W : copresheaf-Precategory l6)
-    (h : hom-copresheaf-Precategory Z W)
-    (g : hom-copresheaf-Precategory Y Z)
-    (f : hom-copresheaf-Precategory X Y) →
-    comp-hom-copresheaf-Precategory X Z W
-      ( h)
-      ( comp-hom-copresheaf-Precategory X Y Z g f) ＝
-    comp-hom-copresheaf-Precategory X Y W
-      ( comp-hom-copresheaf-Precategory Y Z W h g)
-      ( f)
-  inv-associative-comp-hom-copresheaf-Precategory X Y Z W =
-    inv-associative-comp-hom-Large-Precategory
       ( copresheaf-large-precategory-Precategory)
       { X = X}
       { Y}

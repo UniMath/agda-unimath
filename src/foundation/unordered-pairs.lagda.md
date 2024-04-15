@@ -14,6 +14,7 @@ open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.existential-quantification
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.mere-equivalences
@@ -24,12 +25,12 @@ open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-contractible-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-maps
 open import foundation-core.coproduct-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -39,7 +40,6 @@ open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types
@@ -107,7 +107,9 @@ module _
 is-in-unordered-pair-Prop :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → Prop l
 is-in-unordered-pair-Prop p a =
-  ∃-Prop (type-unordered-pair p) (λ x → element-unordered-pair p x ＝ a)
+  exists-structure-Prop
+    ( type-unordered-pair p)
+    ( λ x → element-unordered-pair p x ＝ a)
 
 is-in-unordered-pair :
   {l : Level} {A : UU l} (p : unordered-pair A) (a : A) → UU l

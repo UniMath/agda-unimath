@@ -19,13 +19,14 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 ```
 
 </details>
 
 ## Idea
 
-We introduce the cagegory of dependent type theories, following Voevodsky's
+We introduce the category of dependent type theories, following Voevodsky's
 notion of $B$-systems. The category of generalised algebraic theories is defined
 to be this category. It should be equivalent to the category of essentially
 algebraic theories.
@@ -333,7 +334,7 @@ We show that systems form a category.
       ( section-system.slice g ( section-system.type f X))
       ( section-system.slice f X)
 
-  left-whisker-htpy-hom-system' :
+  left-whisker-comp-hom-system' :
     {l1 l2 l3 l4 l5 l6 : Level} {A : system l1 l2} {B B' : system l3 l4}
     {C C' : system l5 l6} {g : hom-system B C} {g' : hom-system B' C'}
     (p : Id B B')
@@ -347,10 +348,10 @@ We show that systems form a category.
     htpy-section-system' p' f f' →
     htpy-section-system' q' (comp-hom-system g f) (comp-hom-system g' f')
   section-system.type
-    ( left-whisker-htpy-hom-system' {g = g} refl refl refl refl refl H) X =
+    ( left-whisker-comp-hom-system' {g = g} refl refl refl refl refl H) X =
     ap (section-system.type g) (section-system.type H X)
   section-system.element
-    ( left-whisker-htpy-hom-system'
+    ( left-whisker-comp-hom-system'
       {A = A} {B = B} {g = g} refl refl refl refl refl {f} {f'} H) {X} x =
     ( tr-ap
       ( section-system.type g)
@@ -359,9 +360,9 @@ We show that systems form a category.
       ( section-system.element f x)) ∙
     ( ap (section-system.element g) (section-system.element H x))
   section-system.slice
-    ( left-whisker-htpy-hom-system'
+    ( left-whisker-comp-hom-system'
       {A = A} {B = B} {C = C} {g = g} refl refl refl refl refl H) X =
-    left-whisker-htpy-hom-system'
+    left-whisker-comp-hom-system'
       ( ap (system.slice B) (section-system.type H X))
       ( inv
         ( ap-comp
@@ -394,15 +395,15 @@ We show that systems form a category.
             ( section-system.slice g Y')
       γ refl = refl
 
-  left-whisker-htpy-hom-system :
+  left-whisker-comp-hom-system :
     {l1 l2 l3 l4 l5 l6 : Level} {A : system l1 l2} {B : system l3 l4}
     {C : system l5 l6} (g : hom-system B C) {f f' : hom-system A B} →
     htpy-hom-system f f' →
     htpy-hom-system (comp-hom-system g f) (comp-hom-system g f')
-  left-whisker-htpy-hom-system g H =
-    left-whisker-htpy-hom-system' refl refl refl refl refl H
+  left-whisker-comp-hom-system g H =
+    left-whisker-comp-hom-system' refl refl refl refl refl H
 
-  right-whisker-htpy-hom-system' :
+  right-whisker-comp-hom-system' :
     {l1 l2 l3 l4 l5 l6 : Level} {A : system l1 l2} {B : system l3 l4}
     {C C' : system l5 l6} (p : Id C C') {g : hom-system B C}
     {g' : hom-system B C'}
@@ -413,15 +414,15 @@ We show that systems form a category.
     (H : htpy-section-system' p' g g') →
     (f : hom-system A B) →
     htpy-section-system' q' (comp-hom-system g f) (comp-hom-system g' f)
-  section-system.type (right-whisker-htpy-hom-system' refl refl refl H f) X =
+  section-system.type (right-whisker-comp-hom-system' refl refl refl H f) X =
     section-system.type H (section-system.type f X)
   section-system.element
-    ( right-whisker-htpy-hom-system' refl refl refl H f) x =
+    ( right-whisker-comp-hom-system' refl refl refl H f) x =
     section-system.element H (section-system.element f x)
   section-system.slice
-    ( right-whisker-htpy-hom-system'
+    ( right-whisker-comp-hom-system'
       {A = A} {B = B} {C = C} refl refl refl H f) X =
-    right-whisker-htpy-hom-system'
+    right-whisker-comp-hom-system'
       ( ap (system.slice C) (section-system.type H (section-system.type f X)))
       ( inv
         ( ap-comp
@@ -436,14 +437,14 @@ We show that systems form a category.
       ( section-system.slice H (section-system.type f X))
       ( section-system.slice f X)
 
-  right-whisker-htpy-hom-system :
+  right-whisker-comp-hom-system :
     {l1 l2 l3 l4 l5 l6 : Level} {A : system l1 l2} {B : system l3 l4}
     {C : system l5 l6} {g g' : hom-system B C}
     (H : htpy-section-system g g') →
     (f : hom-system A B) →
     htpy-section-system (comp-hom-system g f) (comp-hom-system g' f)
-  right-whisker-htpy-hom-system H f =
-    right-whisker-htpy-hom-system' refl refl refl H f
+  right-whisker-comp-hom-system H f =
+    right-whisker-comp-hom-system' refl refl refl H f
 ```
 
 ---
@@ -973,7 +974,7 @@ We introduce the slice of a dependent type theory.
         ( section-system.slice f X)
         ( weakening.type WA X))
       ( concat-htpy-hom-system
-        ( left-whisker-htpy-hom-system
+        ( left-whisker-comp-hom-system
           ( section-system.slice g (section-system.type f X))
           ( preserves-weakening.type Wf X))
         ( concat-htpy-hom-system
@@ -983,7 +984,7 @@ We introduce the slice of a dependent type theory.
               ( weakening.type WB (section-system.type f X))
               ( f)))
           ( concat-htpy-hom-system
-            ( right-whisker-htpy-hom-system
+            ( right-whisker-comp-hom-system
               ( preserves-weakening.type Wg (section-system.type f X))
               ( f))
             ( associative-comp-hom-system
@@ -1009,7 +1010,7 @@ We introduce the slice of a dependent type theory.
     concat-htpy-hom-system
       ( associative-comp-hom-system g f (substitution.type SA x))
       ( concat-htpy-hom-system
-        ( left-whisker-htpy-hom-system g
+        ( left-whisker-comp-hom-system g
           ( preserves-substitution.type Sf x))
         ( concat-htpy-hom-system
           ( inv-htpy-hom-system
@@ -1018,7 +1019,7 @@ We introduce the slice of a dependent type theory.
                 ( section-system.element f x))
               ( section-system.slice f X)))
           ( concat-htpy-hom-system
-            ( right-whisker-htpy-hom-system
+            ( right-whisker-comp-hom-system
               ( preserves-substitution.type Sg
                 ( section-system.element f x))
               ( section-system.slice f X))
@@ -1056,7 +1057,7 @@ We introduce the slice of a dependent type theory.
           ( section-system.element
             ( section-system.slice (comp-hom-system g f) X)
             ( generic-element.type δA X)))
-      ( ap (α ∙_) (right-unit))) ∙
+      ( left-whisker-concat α right-unit)) ∙
     ( ( tr-concat
         { B =
           system.element

@@ -9,6 +9,8 @@ module foundation.connected-types where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
+open import foundation.function-extensionality
 open import foundation.functoriality-truncation
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
@@ -21,7 +23,6 @@ open import foundation.universe-levels
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
@@ -61,23 +62,23 @@ is-neg-two-connected A = is-trunc-type-trunc
 ### A type `A` is `k`-connected if and only if the map `B → (A → B)` is an equivalence for every `k`-truncated type `B`
 
 ```agda
-is-equiv-diagonal-is-connected :
+is-equiv-diagonal-exponential-is-connected :
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 k) →
   is-connected k A →
-  is-equiv (const A (type-Truncated-Type B))
-is-equiv-diagonal-is-connected B H =
+  is-equiv (diagonal-exponential (type-Truncated-Type B) A)
+is-equiv-diagonal-exponential-is-connected {k = k} {A} B H =
   is-equiv-comp
     ( precomp unit-trunc (type-Truncated-Type B))
-    ( λ b → const _ _ b)
-    ( is-equiv-diagonal-is-contr H (type-Truncated-Type B))
+    ( diagonal-exponential (type-Truncated-Type B) (type-trunc k A))
+    ( is-equiv-diagonal-exponential-is-contr H (type-Truncated-Type B))
     ( is-truncation-trunc B)
 
-is-connected-is-equiv-diagonal :
+is-connected-is-equiv-diagonal-exponential :
   {l1 : Level} {k : 𝕋} {A : UU l1} →
-  ({l2 : Level} (B : Truncated-Type l2 k) →
-  is-equiv (const A (type-Truncated-Type B))) →
+  ( {l2 : Level} (B : Truncated-Type l2 k) →
+    is-equiv (diagonal-exponential (type-Truncated-Type B) A)) →
   is-connected k A
-is-connected-is-equiv-diagonal {k = k} {A = A} H =
+is-connected-is-equiv-diagonal-exponential {k = k} {A} H =
   tot
     ( λ x →
       function-dependent-universal-property-trunc
@@ -96,8 +97,8 @@ module _
 
   is-connected-is-contr : is-contr A → is-connected k A
   is-connected-is-contr H =
-    is-connected-is-equiv-diagonal
-      ( λ B → is-equiv-diagonal-is-contr H (type-Truncated-Type B))
+    is-connected-is-equiv-diagonal-exponential
+      ( λ B → is-equiv-diagonal-exponential-is-contr H (type-Truncated-Type B))
 ```
 
 ### A type that is `(k+1)`-connected is `k`-connected
@@ -107,9 +108,9 @@ is-connected-is-connected-succ-𝕋 :
   {l1 : Level} (k : 𝕋) {A : UU l1} →
   is-connected (succ-𝕋 k) A → is-connected k A
 is-connected-is-connected-succ-𝕋 k H =
-  is-connected-is-equiv-diagonal
+  is-connected-is-equiv-diagonal-exponential
     ( λ B →
-      is-equiv-diagonal-is-connected
+      is-equiv-diagonal-exponential-is-connected
         ( truncated-type-succ-Truncated-Type k B)
         ( H))
 ```

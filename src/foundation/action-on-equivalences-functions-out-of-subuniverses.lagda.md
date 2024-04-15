@@ -7,6 +7,7 @@ module foundation.action-on-equivalences-functions-out-of-subuniverses where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-induction
@@ -74,5 +75,5 @@ module _
     (X : type-subuniverse P) →
     action-equiv-function-subuniverse X X id-equiv ＝ refl
   compute-action-equiv-function-subuniverse-id-equiv X =
-    ap (ap f) (compute-eq-equiv-id-equiv-subuniverse P)
+    ap² f (compute-eq-equiv-id-equiv-subuniverse P)
 ```

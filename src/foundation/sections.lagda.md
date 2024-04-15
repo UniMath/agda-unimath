@@ -12,21 +12,22 @@ open import foundation-core.sections public
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.retracts-of-types
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -186,22 +187,4 @@ is-injective-map-section-family :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
   is-injective (map-section-family b)
 is-injective-map-section-family b = ap pr1
-```
-
-### Transposing identifications along sections
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  where
-
-  transpose-eq-section :
-    (g : B → A) (H : (f ∘ g) ~ id) {x : A} {y : B} →
-    x ＝ g y → f x ＝ y
-  transpose-eq-section g H refl = H _
-
-  transpose-eq-section' :
-    (g : B → A) (H : (f ∘ g) ~ id) {x : B} {y : A} →
-    g x ＝ y → x ＝ f y
-  transpose-eq-section' g H refl = inv (H _)
 ```

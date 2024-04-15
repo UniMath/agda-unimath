@@ -88,9 +88,4 @@ module _
 
 ## References
 
-1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
-   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
-   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
-2. Mike Shulman, _Universal properties without function extensionality_
-   (November 2014)
-   ([HoTT Blog](https://homotopytypetheory.org/2014/11/02/universal-properties-without-function-extensionality/))
+{{#bibliography}} {{#reference UF13}} {{#reference Shu14UniversalProperties}}

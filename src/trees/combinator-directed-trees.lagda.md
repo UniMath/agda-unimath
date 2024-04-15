@@ -508,8 +508,7 @@ module _
     ex-falso (H refl)
   is-section-map-inv-compute-proper-node-combinator-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree i x , H) =
-    eq-pair-Σ
-      ( refl)
+    eq-pair-eq-fiber
       ( eq-is-prop
         ( is-prop-is-proper-node-Directed-Tree
           ( combinator-Directed-Tree T)

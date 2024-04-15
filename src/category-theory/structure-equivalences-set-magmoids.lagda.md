@@ -55,7 +55,7 @@ module _
   is-prop-is-structure-equiv-functor-Set-Magmoid :
     is-prop is-structure-equiv-functor-Set-Magmoid
   is-prop-is-structure-equiv-functor-Set-Magmoid =
-    is-prop-prod
+    is-prop-product
       ( is-property-is-equiv (obj-functor-Set-Magmoid A B F))
       ( is-prop-iterated-implicit-Π 2
         ( λ x y → is-property-is-equiv (hom-functor-Set-Magmoid A B F {x} {y})))

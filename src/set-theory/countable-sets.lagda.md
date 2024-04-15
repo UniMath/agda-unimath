@@ -71,7 +71,8 @@ module _
   is-surjective-map-enumeration E = pr2 E
 
   is-countable-Prop : Prop l
-  is-countable-Prop = ∃-Prop (ℕ → Maybe (type-Set X)) is-surjective
+  is-countable-Prop =
+    ∃ (ℕ → Maybe (type-Set X)) (is-surjective-Prop)
 
   is-countable : UU l
   is-countable = type-Prop (is-countable-Prop)
@@ -94,7 +95,7 @@ module _
 
   is-countable-Prop' : Prop (lsuc l ⊔ l)
   is-countable-Prop' =
-    ∃-Prop
+    exists-structure-Prop
       ( decidable-subtype l ℕ)
       ( λ P → type-decidable-subtype P ↠ type-Set X)
 
@@ -113,7 +114,7 @@ surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
 ```agda
 is-directly-countable-Prop : {l : Level} → Set l → Prop l
 is-directly-countable-Prop X =
-  ∃-Prop (ℕ → type-Set X) is-surjective
+  ∃ (ℕ → type-Set X) (is-surjective-Prop)
 
 is-directly-countable : {l : Level} → Set l → UU l
 is-directly-countable X = type-Prop (is-directly-countable-Prop X)
@@ -297,18 +298,18 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  map-maybe-coprod : (Maybe A + Maybe B) → Maybe (A + B)
-  map-maybe-coprod (inl (inl x)) = inl (inl x)
-  map-maybe-coprod (inl (inr star)) = inr star
-  map-maybe-coprod (inr (inl x)) = inl (inr x)
-  map-maybe-coprod (inr (inr star)) = inr star
+  map-maybe-coproduct : (Maybe A + Maybe B) → Maybe (A + B)
+  map-maybe-coproduct (inl (inl x)) = inl (inl x)
+  map-maybe-coproduct (inl (inr star)) = inr star
+  map-maybe-coproduct (inr (inl x)) = inl (inr x)
+  map-maybe-coproduct (inr (inr star)) = inr star
 
-  is-surjective-map-maybe-coprod : is-surjective map-maybe-coprod
-  is-surjective-map-maybe-coprod (inl (inl x)) =
+  is-surjective-map-maybe-coproduct : is-surjective map-maybe-coproduct
+  is-surjective-map-maybe-coproduct (inl (inl x)) =
     unit-trunc-Prop ((inl (inl x)) , refl)
-  is-surjective-map-maybe-coprod (inl (inr x)) =
+  is-surjective-map-maybe-coproduct (inl (inr x)) =
     unit-trunc-Prop ((inr (inl x)) , refl)
-  is-surjective-map-maybe-coprod (inr star) =
+  is-surjective-map-maybe-coproduct (inr star) =
     unit-trunc-Prop ((inl (inr star)) , refl)
 ```
 
@@ -319,16 +320,16 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  map-maybe-prod : (Maybe A × Maybe B) → Maybe (A × B)
-  map-maybe-prod (inl a , inl b) = inl (a , b)
-  map-maybe-prod (inl a , inr star) = inr star
-  map-maybe-prod (inr star , inl b) = inr star
-  map-maybe-prod (inr star , inr star) = inr star
+  map-maybe-product : (Maybe A × Maybe B) → Maybe (A × B)
+  map-maybe-product (inl a , inl b) = inl (a , b)
+  map-maybe-product (inl a , inr star) = inr star
+  map-maybe-product (inr star , inl b) = inr star
+  map-maybe-product (inr star , inr star) = inr star
 
-  is-surjective-map-maybe-prod : is-surjective map-maybe-prod
-  is-surjective-map-maybe-prod (inl (a , b)) =
+  is-surjective-map-maybe-product : is-surjective map-maybe-product
+  is-surjective-map-maybe-product (inl (a , b)) =
     unit-trunc-Prop ((inl a , inl b) , refl)
-  is-surjective-map-maybe-prod (inr star) =
+  is-surjective-map-maybe-product (inr star) =
     unit-trunc-Prop ((inr star , inr star) , refl)
 ```
 
@@ -381,20 +382,20 @@ module _
   {l1 l2 : Level} (X : Set l1) (Y : Set l2)
   where
 
-  is-countable-coprod :
-    is-countable X → is-countable Y → is-countable (coprod-Set X Y)
-  is-countable-coprod H H' =
+  is-countable-coproduct :
+    is-countable X → is-countable Y → is-countable (coproduct-Set X Y)
+  is-countable-coproduct H H' =
     apply-twice-universal-property-trunc-Prop H' H
-      ( is-countable-Prop (coprod-Set X Y))
+      ( is-countable-Prop (coproduct-Set X Y))
       ( λ h' h →
         ( unit-trunc-Prop
           ( pair
-            ( map-maybe-coprod ∘
-              ( map-coprod (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ+ℕ))
+            ( map-maybe-coproduct ∘
+              ( map-coproduct (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ+ℕ))
             ( is-surjective-comp
-              ( is-surjective-map-maybe-coprod)
+              ( is-surjective-map-maybe-coproduct)
               ( is-surjective-comp
-                ( is-surjective-map-coprod (pr2 h) (pr2 h'))
+                ( is-surjective-map-coproduct (pr2 h) (pr2 h'))
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ+ℕ)))))))
 ```
 
@@ -405,39 +406,39 @@ module _
   {l1 l2 : Level} (X : Set l1) (Y : Set l2)
   where
 
-  is-countable-prod :
-    is-countable X → is-countable Y → is-countable (prod-Set X Y)
-  is-countable-prod H H' =
+  is-countable-product :
+    is-countable X → is-countable Y → is-countable (product-Set X Y)
+  is-countable-product H H' =
     apply-twice-universal-property-trunc-Prop H' H
-      ( is-countable-Prop (prod-Set X Y))
+      ( is-countable-Prop (product-Set X Y))
       ( λ h' h →
         ( unit-trunc-Prop
           ( pair
-            ( map-maybe-prod ∘
-              ( map-prod (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ×ℕ))
+            ( map-maybe-product ∘
+              ( map-product (pr1 h) (pr1 h') ∘ map-ℕ-to-ℕ×ℕ))
             ( is-surjective-comp
-              ( is-surjective-map-maybe-prod)
+              ( is-surjective-map-maybe-product)
               ( is-surjective-comp
-                ( is-surjective-map-prod (pr2 h) (pr2 h'))
+                ( is-surjective-map-product (pr2 h) (pr2 h'))
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ×ℕ)))))))
 ```
 
 In particular, the sets ℕ + ℕ, ℕ × ℕ, and ℤ are countable.
 
 ```agda
-is-countable-ℕ+ℕ : is-countable (coprod-Set ℕ-Set ℕ-Set)
+is-countable-ℕ+ℕ : is-countable (coproduct-Set ℕ-Set ℕ-Set)
 is-countable-ℕ+ℕ =
-  is-countable-coprod ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
+  is-countable-coproduct ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
 
-is-countable-ℕ×ℕ : is-countable (prod-Set ℕ-Set ℕ-Set)
+is-countable-ℕ×ℕ : is-countable (product-Set ℕ-Set ℕ-Set)
 is-countable-ℕ×ℕ =
-  is-countable-prod ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
+  is-countable-product ℕ-Set ℕ-Set is-countable-ℕ is-countable-ℕ
 
 is-countable-ℤ : is-countable (ℤ-Set)
 is-countable-ℤ =
-  is-countable-coprod (ℕ-Set) (coprod-Set unit-Set ℕ-Set)
+  is-countable-coproduct (ℕ-Set) (coproduct-Set unit-Set ℕ-Set)
     ( is-countable-ℕ)
-    ( is-countable-coprod (unit-Set) (ℕ-Set)
+    ( is-countable-coproduct (unit-Set) (ℕ-Set)
       ( is-countable-unit) (is-countable-ℕ))
 ```
 
@@ -447,6 +448,6 @@ All standart finite sets are countable.
 is-countable-Fin-Set : (n : ℕ) → is-countable (Fin-Set n)
 is-countable-Fin-Set zero-ℕ = is-countable-empty
 is-countable-Fin-Set (succ-ℕ n) =
-  is-countable-coprod (Fin-Set n) (unit-Set)
+  is-countable-coproduct (Fin-Set n) (unit-Set)
     ( is-countable-Fin-Set n) (is-countable-unit)
 ```

@@ -206,7 +206,7 @@ module _
   is-perfect-not-not-is-perfect-image :
     (a : A) → ¬ (is-not-perfect-image a) → is-perfect-image f g a
   is-perfect-not-not-is-perfect-image a nρ a₀ n p =
-    rec-coprod
+    rec-coproduct
       ( id)
       ( λ a₁ → ex-falso (nρ (a₀ , n , p , a₁)))
       ( lem (fiber g a₀ , is-prop-map-is-emb is-emb-g a₀))

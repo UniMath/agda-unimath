@@ -18,7 +18,7 @@ accepted notation for widely used operators.
 Mixfix operators can each be assigned a
 [precedence level](https://agda.readthedocs.io/en/latest/language/mixfix-operators.html#precedence).
 This can in principle be any signed fractional value, although we prefer them to
-be non-negative integral values. The higher this value is, the higher precedence
+be nonnegative integral values. The higher this value is, the higher precedence
 the operator has, meaning it is evaluated before operators with lower
 precedence. By default in Agda, an operator is assigned a precedence level of
 `20`.
@@ -47,7 +47,7 @@ By default, an operator does not associate to either side.
 
 We divide the different operators into broad classes, each assigned a range of
 possible precedence levels. In broad terms, we discern between _parametric_ and
-_non-parametric_ operators. The general rule is that non-parametric operator has
+_nonparametric_ operators. The general rule is that nonparametric operator has
 higher precedence than parametric operators. Parametric operators are operators
 that take a universe level as one of their arguments. We consider an operator to
 be parametric even if it only takes a universe level as an implicit argument.
@@ -55,7 +55,7 @@ Examples are the
 [cartesian product type former`_×_`](foundation-core.cartesian-product-types.md),
 the [identity type former `_＝_`](foundation-core.identity-types.md), and the
 [pairing operator `_,_`](foundation.dependent-pair-types.md). Examples of
-non-parametric operators are
+nonparametric operators are
 [difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md),
 [strict inequality on natural numbers `_<-ℕ_`](elementary-number-theory.strict-inequality-natural-numbers.md),
 and
@@ -121,15 +121,15 @@ operators, so that expressions like `a - b + c` are parsed as `(a - b) + c`.
 
 Below, we outline a list of general rules when assigning associativities.
 
-- **Definitionally associative operators**, e.g.
+- **Strictly associative operators**, e.g.
   [function composition `_∘_`](foundation-core.function-types.md), can be
   assigned _any associativity_.
 
-- **Non-parametric arithmetic operators** are often naturally computed from left
+- **Nonparametric arithmetic operators** are often naturally computed from left
   to right. For instance, the expression `1 - 2 - 3` is computed as
   `(1 - 2) - 3 = -1 - 3 = -4`, hence should be _left associative_. This applies
   to addition, subtraction, multiplication, and division. Note that for
-  non-parametric exponentiation, we compute from right to left. I.e. `2 ^ 3 ^ 4`
+  nonparametric exponentiation, we compute from right to left. I.e. `2 ^ 3 ^ 4`
   should compute as `2 ^ (3 ^ 4)`. Hence it will usually be _right associative_.
 
 - **Arithmetic type formers** such as
@@ -163,22 +163,22 @@ Below, we outline a list of general rules when assigning associativities.
 
 ## Full table of assigned precedences
 
-| Precedence level | Operators                                                                                                                                                                                   |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 50               | Unary non-parametric operators. This class is currently empty                                                                                                                               |
-| 45               | Exponentiative arithmetic operators                                                                                                                                                         |
-| 40               | Multiplicative arithmetic operators                                                                                                                                                         |
-| 36               | Subtractive arithmetic operators                                                                                                                                                            |
-| 35               | Additive arithmetic operators                                                                                                                                                               |
-| 30               | Relational arithmetic operators like`_≤-ℕ_` and `_<-ℕ_`                                                                                                                                     |
-| 25               | Parametric unary operators. This class is currently empty                                                                                                                                   |
-| 20               | Parametric exponentiative operators. This class is currently empty                                                                                                                          |
-| 17               | Left homotopy whiskering `_·l_`                                                                                                                                                             |
-| 16               | Right homotopy whiskering `_·r_`                                                                                                                                                            |
-| 15               | Parametric multiplicative operators like `_×_`,`_×∗_`, `_∧_`, `_∧∗_`, function composition operators like `_∘_`,`_∘∗_`, `_∘e_`, and `_∘iff_`, concatenation operators like `_∙_` and `_∙h_` |
-| 10               | Parametric additive operators like `_+_`, `_∨_`, `_∨∗_`, list concatenation, monadic bind operators for the type checking monad                                                             |
-| 6                | Parametric relational operators like `_＝_`, `_~_`, `_≃_`, and `_↔_`, elementhood relations, subtype relations                                                                              |
-| 5                | Directed function type-like formation operators, e.g. `_⇒_`, `_→∗_`, `_↠_`, `_↪_`, `_↪ᵈ_`, and `_⊆_`                                                                                        |
-| 3                | The pairing operators `_,_` and `_,ω_`                                                                                                                                                      |
-| 0-1              | Reasoning syntaxes                                                                                                                                                                          |
-| -∞               | Function type formation `_→_`                                                                                                                                                               |
+| Precedence level | Operators                                                                                                                                                                                          |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 50               | Unary nonparametric operators. This class is currently empty                                                                                                                                       |
+| 45               | Exponentiative arithmetic operators                                                                                                                                                                |
+| 40               | Multiplicative arithmetic operators                                                                                                                                                                |
+| 36               | Subtractive arithmetic operators                                                                                                                                                                   |
+| 35               | Additive arithmetic operators                                                                                                                                                                      |
+| 30               | Relational arithmetic operators like`_≤-ℕ_` and `_<-ℕ_`                                                                                                                                            |
+| 25               | Parametric unary operators like `¬_` and `¬¬_`                                                                                                                                                     |
+| 20               | Parametric exponentiative operators. This class is currently empty                                                                                                                                 |
+| 17               | Left homotopy whiskering `_·l_`                                                                                                                                                                    |
+| 16               | Right homotopy whiskering `_·r_`                                                                                                                                                                   |
+| 15               | Parametric multiplicative operators like `_×_`,`_×∗_`, `_∧_`, `_∧∗_`, `_*_`, function composition operators like `_∘_`,`_∘∗_`, `_∘e_`, and `_∘iff_`, concatenation operators like `_∙_` and `_∙h_` |
+| 10               | Parametric additive operators like `_+_`, `_∨_`, `_∨∗_`, list concatenation, monadic bind operators for the type checking monad                                                                    |
+| 6                | Parametric relational operators like `_＝_`, `_~_`, `_≃_`, `_⇔_`, and `_↔_`, elementhood relations, subtype relations                                                                              |
+| 5                | Directed function type-like formation operators, e.g. `_⇒_`, `_↪_`, `_→∗_`, `_↠_`, `_↪ᵈ_`, and `_⊆_`                                                                                               |
+| 3                | The pairing operators `_,_` and `_,ω_`                                                                                                                                                             |
+| 0-1              | Reasoning syntaxes                                                                                                                                                                                 |
+| -∞               | Function type formation `_→_`                                                                                                                                                                      |

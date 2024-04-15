@@ -125,17 +125,17 @@ module _
           ( v)
           ( compute-permute-vec-id-equiv n v))
 
-  compute-equiv-coprod-permutation-id-equiv-permute-vec :
+  compute-equiv-coproduct-permutation-id-equiv-permute-vec :
     (n : ℕ)
     (v : vec A n)
     (x : A)
     (t : Permutation n) →
-    permute-vec (succ-ℕ n) (x ∷ v) (equiv-coprod t id-equiv) ＝
+    permute-vec (succ-ℕ n) (x ∷ v) (equiv-coproduct t id-equiv) ＝
     (x ∷ permute-vec n v t)
-  compute-equiv-coprod-permutation-id-equiv-permute-vec n v x t =
+  compute-equiv-coproduct-permutation-id-equiv-permute-vec n v x t =
     eq-Eq-vec
       ( succ-ℕ n)
-      ( permute-vec (succ-ℕ n) (x ∷ v) (equiv-coprod t id-equiv))
+      ( permute-vec (succ-ℕ n) (x ∷ v) (equiv-coproduct t id-equiv))
       ( x ∷ permute-vec n v t)
       ( refl ,
         ( Eq-eq-vec
@@ -256,7 +256,7 @@ module _
     inv
       ( ap
         ( fold-vec b μ)
-        ( compute-equiv-coprod-permutation-id-equiv-permute-vec
+        ( compute-equiv-coproduct-permutation-id-equiv-permute-vec
           ( succ-ℕ n)
           ( v)
           ( x)

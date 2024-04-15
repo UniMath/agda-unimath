@@ -24,6 +24,7 @@
           python = pkgs.python38.withPackages (p: with p; [
             # Keep in sync with scripts/requirements.txt
             # pre-commit <- not installed as a Python package but as a binary below
+            pybtex
             requests
             tomli
           ]);
@@ -38,7 +39,7 @@
             # We can reference the directory since we're using flakes,
             # which copies the version-tracked files into the nix store
             # before evaluation, # so we don't run into the issue with
-            # non-reproducible source paths as outlined here:
+            # nonreproducible source paths as outlined here:
             # https://nix.dev/recipes/best-practices#reproducible-source-paths
             src = ./.;
 
@@ -74,6 +75,7 @@
               python
               # pre-commit checks
               pkgs.pre-commit
+              pkgs.nodejs
             ] ++ (with pkgs-mdbook; [
               # working on the website
               mdbook

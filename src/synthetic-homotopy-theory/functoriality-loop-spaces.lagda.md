@@ -137,7 +137,7 @@ module _
   equiv-map-Ω-pointed-equiv =
     equiv-map-Ω-is-emb
       ( pointed-map-pointed-equiv e)
-      ( is-emb-is-equiv (is-equiv-map-equiv-pointed-equiv e))
+      ( is-emb-is-equiv (is-equiv-map-pointed-equiv e))
 ```
 
 ### `pointed-map-Ω` preserves pointed equivalences

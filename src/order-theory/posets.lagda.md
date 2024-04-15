@@ -16,6 +16,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -93,7 +94,7 @@ module _
   is-set-type-Poset =
     is-set-prop-in-id
       ( λ x y → leq-Poset x y × leq-Poset y x)
-      ( λ x y → is-prop-prod (is-prop-leq-Poset x y) (is-prop-leq-Poset y x))
+      ( λ x y → is-prop-product (is-prop-leq-Poset x y) (is-prop-leq-Poset y x))
       ( λ x → refl-leq-Poset x , refl-leq-Poset x)
       ( λ x y (H , K) → antisymmetric-leq-Poset x y H K)
 
@@ -155,7 +156,7 @@ module _
 
   is-category-precategory-Poset : is-category-Precategory precategory-Poset
   is-category-precategory-Poset x y =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-set-type-Poset X x y)
       ( is-prop-iso-is-prop-hom-Precategory precategory-Poset
         ( is-prop-leq-Poset X x y))

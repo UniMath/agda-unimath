@@ -14,8 +14,10 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -62,6 +64,26 @@ module _
   comp-hom-Π-Large-Precategory f g i =
     comp-hom-Large-Precategory (C i) (f i) (g i)
 
+  involutive-eq-associative-comp-hom-Π-Large-Precategory :
+    {l2 l3 l4 l5 : Level}
+    {x : obj-Π-Large-Precategory l2}
+    {y : obj-Π-Large-Precategory l3}
+    {z : obj-Π-Large-Precategory l4}
+    {w : obj-Π-Large-Precategory l5} →
+    (h : hom-Π-Large-Precategory z w)
+    (g : hom-Π-Large-Precategory y z)
+    (f : hom-Π-Large-Precategory x y) →
+    ( comp-hom-Π-Large-Precategory (comp-hom-Π-Large-Precategory h g) f) ＝ⁱ
+    ( comp-hom-Π-Large-Precategory h (comp-hom-Π-Large-Precategory g f))
+  involutive-eq-associative-comp-hom-Π-Large-Precategory h g f =
+    involutive-eq-involutive-htpy
+      ( λ i →
+        involutive-eq-associative-comp-hom-Large-Precategory
+          ( C i)
+          ( h i)
+          ( g i)
+          ( f i))
+
   associative-comp-hom-Π-Large-Precategory :
     {l2 l3 l4 l5 : Level}
     {x : obj-Π-Large-Precategory l2}
@@ -74,24 +96,8 @@ module _
     ( comp-hom-Π-Large-Precategory (comp-hom-Π-Large-Precategory h g) f) ＝
     ( comp-hom-Π-Large-Precategory h (comp-hom-Π-Large-Precategory g f))
   associative-comp-hom-Π-Large-Precategory h g f =
-    eq-htpy
-      ( λ i → associative-comp-hom-Large-Precategory (C i) (h i) (g i) (f i))
-
-  inv-associative-comp-hom-Π-Large-Precategory :
-    {l2 l3 l4 l5 : Level}
-    {x : obj-Π-Large-Precategory l2}
-    {y : obj-Π-Large-Precategory l3}
-    {z : obj-Π-Large-Precategory l4}
-    {w : obj-Π-Large-Precategory l5} →
-    (h : hom-Π-Large-Precategory z w)
-    (g : hom-Π-Large-Precategory y z)
-    (f : hom-Π-Large-Precategory x y) →
-    ( comp-hom-Π-Large-Precategory h (comp-hom-Π-Large-Precategory g f)) ＝
-    ( comp-hom-Π-Large-Precategory (comp-hom-Π-Large-Precategory h g) f)
-  inv-associative-comp-hom-Π-Large-Precategory h g f =
-    eq-htpy
-      ( λ i →
-        inv-associative-comp-hom-Large-Precategory (C i) (h i) (g i) (f i))
+    eq-involutive-eq
+      ( involutive-eq-associative-comp-hom-Π-Large-Precategory h g f)
 
   id-hom-Π-Large-Precategory :
     {l2 : Level} {x : obj-Π-Large-Precategory l2} → hom-Π-Large-Precategory x x
@@ -125,10 +131,8 @@ module _
     comp-hom-Π-Large-Precategory
   id-hom-Large-Precategory Π-Large-Precategory =
     id-hom-Π-Large-Precategory
-  associative-comp-hom-Large-Precategory Π-Large-Precategory =
-    associative-comp-hom-Π-Large-Precategory
-  inv-associative-comp-hom-Large-Precategory Π-Large-Precategory =
-    inv-associative-comp-hom-Π-Large-Precategory
+  involutive-eq-associative-comp-hom-Large-Precategory Π-Large-Precategory =
+    involutive-eq-associative-comp-hom-Π-Large-Precategory
   left-unit-law-comp-hom-Large-Precategory Π-Large-Precategory =
     left-unit-law-comp-hom-Π-Large-Precategory
   right-unit-law-comp-hom-Large-Precategory Π-Large-Precategory =
@@ -212,7 +216,7 @@ module _
     (f : hom-Π-Large-Precategory I C x y) →
     is-equiv (is-fiberwise-iso-is-iso-Π-Large-Precategory f)
   is-equiv-is-fiberwise-iso-is-iso-Π-Large-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-iso-Large-Precategory (Π-Large-Precategory I C) f)
       ( is-prop-Π (λ i → is-prop-is-iso-Large-Precategory (C i) (f i)))
       ( is-iso-is-fiberwise-iso-Π-Large-Precategory f)
@@ -230,7 +234,7 @@ module _
     (f : hom-Π-Large-Precategory I C x y) →
     is-equiv (is-iso-is-fiberwise-iso-Π-Large-Precategory f)
   is-equiv-is-iso-is-fiberwise-iso-Π-Large-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-Π (λ i → is-prop-is-iso-Large-Precategory (C i) (f i)))
       ( is-prop-is-iso-Large-Precategory (Π-Large-Precategory I C) f)
       ( is-fiberwise-iso-is-iso-Π-Large-Precategory f)

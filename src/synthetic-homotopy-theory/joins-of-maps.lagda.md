@@ -11,7 +11,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -76,7 +76,7 @@ from the [fiber](foundation-core.fibers-of-maps.md) of `f * g` to the
 
 in which the top map is an equivalence. The join of maps is related to the
 [pushout-product](synthetic-homotopy-theory.pushout-products.md), because it
-fits in a [pullback diagram](foundation.pullback-squares.md)
+fits in a [pullback diagram](foundation.pullbacks.md)
 
 ```text
       A *_X B ------> (X × B) ⊔_{A × B} (A × X)

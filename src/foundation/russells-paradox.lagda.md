@@ -17,6 +17,7 @@ open import foundation.negation
 open import foundation.small-types
 open import foundation.small-universes
 open import foundation.surjective-maps
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-equivalences
@@ -134,8 +135,8 @@ paradox-Russell {l} H =
           ( ( inv-associative-Σ (𝕍 l) (_＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
             ( ( equiv-tot
                 ( λ t →
-                  ( commutative-prod) ∘e
-                  ( equiv-prod
+                  ( commutative-product) ∘e
+                  ( equiv-product
                     ( id-equiv)
                     ( inv-equiv
                       ( ( equiv-concat'

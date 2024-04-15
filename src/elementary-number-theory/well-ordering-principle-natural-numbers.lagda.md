@@ -51,7 +51,7 @@ module _
     (pair x (pair p l)) (pair y (pair q k)) =
     eq-type-subtype
       ( λ n →
-        prod-Prop
+        product-Prop
           ( pair _ (is-prop-type-Prop (P n)))
           ( is-lower-bound-ℕ-Prop n))
       ( antisymmetric-leq-ℕ x y (l y q) (k x p))

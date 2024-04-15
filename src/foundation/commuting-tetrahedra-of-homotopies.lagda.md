@@ -22,13 +22,15 @@ A
 is a commuting diagram of the form
 
 ```text
-  f ----------> g
-  |  \       ^  |
-  |    \   /    |
-  |      /      |
-  |    /   \    |
-  V  /       v  V
-  h ----------> i.
+             top
+       f ----------> g
+       |  \       ∧  |
+       |    \   /    |
+  left |      /      | right
+       |    /   \    |
+       ∨  /       ∨  ∨
+       h ----------> i.
+            bottom
 ```
 
 where `f`, `g`, `h`, and `i` are functions.
@@ -50,28 +52,36 @@ module _
   coherence-tetrahedron-homotopies : UU (l1 ⊔ l2)
   coherence-tetrahedron-homotopies =
     ( ( upper-right) ∙h
-      ( left-whisk-htpy-coherence-triangle-homotopies
+      ( right-whisker-concat-coherence-triangle-homotopies
+        ( top)
         ( diagonal-up)
-        ( right)
-        ( upper-left))) ~
+        ( left)
+        ( upper-left)
+        ( right))) ~
     ( ( lower-left) ∙h
-      ( right-whisk-htpy-coherence-triangle-homotopies
+      ( left-whisker-concat-coherence-triangle-homotopies
+        ( left)
+        ( bottom)
         ( right)
-        ( lower-right)
-        ( left)) ∙h
+        ( diagonal-up)
+        ( lower-right)) ∙h
       ( assoc-htpy left diagonal-up right))
 
   coherence-tetrahedron-homotopies' : UU (l1 ⊔ l2)
   coherence-tetrahedron-homotopies' =
     ( ( lower-left) ∙h
-      ( right-whisk-htpy-coherence-triangle-homotopies
-          ( right)
-          ( lower-right)
-          ( left)) ∙h
+      ( left-whisker-concat-coherence-triangle-homotopies
+        ( left)
+        ( bottom)
+        ( right)
+        ( diagonal-up)
+        ( lower-right)) ∙h
       ( assoc-htpy left diagonal-up right)) ~
     ( ( upper-right) ∙h
-      ( left-whisk-htpy-coherence-triangle-homotopies
+      ( right-whisker-concat-coherence-triangle-homotopies
+        ( top)
         ( diagonal-up)
-        ( right)
-        ( upper-left)))
+        ( left)
+        ( upper-left)
+        ( right)))
 ```

@@ -28,8 +28,9 @@ open import foundation-core.subtypes
 
 ## Idea
 
-A **decidable proposition** is a [proposition](foundation-core.propositions.md)
-that has a [decidable](foundation.decidable-types.md) underlying type.
+A {{#concept "decidable proposition" Agda=is-decidable-Prop}} is a
+[proposition](foundation-core.propositions.md) that has a
+[decidable](foundation.decidable-types.md) underlying type.
 
 ## Definition
 
@@ -42,7 +43,7 @@ is-decidable-prop A = is-prop A × is-decidable A
 is-prop-is-decidable :
   {l : Level} {A : UU l} → is-prop A → is-prop (is-decidable A)
 is-prop-is-decidable is-prop-A =
-  is-prop-coprod intro-double-negation is-prop-A is-prop-neg
+  is-prop-coproduct intro-double-negation is-prop-A is-prop-neg
 
 is-decidable-Prop :
   {l : Level} → Prop l → Prop l
@@ -52,9 +53,9 @@ pr2 (is-decidable-Prop P) = is-prop-is-decidable (is-prop-type-Prop P)
 is-prop-is-decidable-prop :
   {l : Level} (X : UU l) → is-prop (is-decidable-prop X)
 is-prop-is-decidable-prop X =
-  is-prop-is-inhabited
+  is-prop-has-element
     ( λ H →
-      is-prop-prod
+      is-prop-product
         ( is-prop-is-prop X)
         ( is-prop-is-decidable (pr1 H)))
 
@@ -121,6 +122,38 @@ pr1 unit-Decidable-Prop = unit
 pr2 unit-Decidable-Prop = is-decidable-prop-unit
 ```
 
+### The product of two decidable propositions is a decidable proposition
+
+```agda
+module _
+  {l1 l2 : Level} (P : Decidable-Prop l1) (Q : Decidable-Prop l2)
+  where
+
+  type-product-Decidable-Prop : UU (l1 ⊔ l2)
+  type-product-Decidable-Prop =
+    type-product-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
+
+  is-prop-product-Decidable-Prop : is-prop type-product-Decidable-Prop
+  is-prop-product-Decidable-Prop =
+    is-prop-product-Prop (prop-Decidable-Prop P) (prop-Decidable-Prop Q)
+
+  is-decidable-product-Decidable-Prop : is-decidable type-product-Decidable-Prop
+  is-decidable-product-Decidable-Prop =
+    is-decidable-product
+      ( is-decidable-Decidable-Prop P)
+      ( is-decidable-Decidable-Prop Q)
+
+  is-decidable-prop-product-Decidable-Prop :
+    is-decidable-prop type-product-Decidable-Prop
+  pr1 is-decidable-prop-product-Decidable-Prop = is-prop-product-Decidable-Prop
+  pr2 is-decidable-prop-product-Decidable-Prop =
+    is-decidable-product-Decidable-Prop
+
+  product-Decidable-Prop : Decidable-Prop (l1 ⊔ l2)
+  pr1 product-Decidable-Prop = type-product-Decidable-Prop
+  pr2 product-Decidable-Prop = is-decidable-prop-product-Decidable-Prop
+```
+
 ### Decidability of a propositional truncation
 
 ```agda
@@ -151,7 +184,7 @@ is-merely-decidable-is-decidable-trunc-Prop :
   is-decidable (type-trunc-Prop A) → is-merely-decidable A
 is-merely-decidable-is-decidable-trunc-Prop A (inl x) =
   apply-universal-property-trunc-Prop x
-    ( is-merely-Decidable-Prop A)
+    ( is-merely-decidable-Prop A)
     ( unit-trunc-Prop ∘ inl)
 is-merely-decidable-is-decidable-trunc-Prop A (inr f) =
   unit-trunc-Prop (inr (f ∘ unit-trunc-Prop))

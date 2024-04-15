@@ -7,21 +7,19 @@ module foundation-core.equivalences where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
-open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.invertible-maps
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -176,24 +174,19 @@ module _
   where
 
   is-equiv-is-invertible' : is-invertible f → is-equiv f
-  pr1 (pr1 (is-equiv-is-invertible' (g , H , K))) = g
-  pr2 (pr1 (is-equiv-is-invertible' (g , H , K))) = H
-  pr1 (pr2 (is-equiv-is-invertible' (g , H , K))) = g
-  pr2 (pr2 (is-equiv-is-invertible' (g , H , K))) = K
+  is-equiv-is-invertible' (g , H , K) = ((g , H) , (g , K))
 
   is-equiv-is-invertible :
-    (g : B → A) (H : (f ∘ g) ~ id) (K : (g ∘ f) ~ id) → is-equiv f
-  is-equiv-is-invertible g H K =
-    is-equiv-is-invertible' (g , H , K)
+    (g : B → A) (H : f ∘ g ~ id) (K : g ∘ f ~ id) → is-equiv f
+  is-equiv-is-invertible g H K = is-equiv-is-invertible' (g , H , K)
 
   is-retraction-map-section-is-equiv :
     (H : is-equiv f) → is-retraction f (map-section-is-equiv H)
   is-retraction-map-section-is-equiv H =
-    ( ( ( inv-htpy
-          ( ( is-retraction-map-retraction-is-equiv H) ·r
-            ( map-section-is-equiv H))) ∙h
-        ( map-retraction-is-equiv H ·l is-section-map-section-is-equiv H)) ·r
-      ( f)) ∙h
+    ( ( inv-htpy
+        ( ( is-retraction-map-retraction-is-equiv H) ·r
+          ( map-section-is-equiv H ∘ f))) ∙h
+      ( map-retraction-is-equiv H ·l is-section-map-section-is-equiv H ·r f)) ∙h
     ( is-retraction-map-retraction-is-equiv H)
 
   is-invertible-is-equiv : is-equiv f → is-invertible f
@@ -209,16 +202,33 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
+  is-equiv-is-coherently-invertible :
+    is-coherently-invertible f → is-equiv f
+  is-equiv-is-coherently-invertible H =
+    is-equiv-is-invertible' (is-invertible-is-coherently-invertible H)
+
+  is-equiv-is-transpose-coherently-invertible :
+    is-transpose-coherently-invertible f → is-equiv f
+  is-equiv-is-transpose-coherently-invertible H =
+    is-equiv-is-invertible'
+      ( is-invertible-is-transpose-coherently-invertible H)
+```
+
+The following maps are not simple constructions and should not be computed with.
+Therefore, we mark them as `abstract`.
+
+```agda
   abstract
-    is-coherently-invertible-is-equiv : is-equiv f → is-coherently-invertible f
+    is-coherently-invertible-is-equiv :
+      is-equiv f → is-coherently-invertible f
     is-coherently-invertible-is-equiv =
       is-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
 
   abstract
-    is-equiv-is-coherently-invertible :
-      is-coherently-invertible f → is-equiv f
-    is-equiv-is-coherently-invertible H =
-      is-equiv-is-invertible' (is-invertible-is-coherently-invertible H)
+    is-transpose-coherently-invertible-is-equiv :
+      is-equiv f → is-transpose-coherently-invertible f
+    is-transpose-coherently-invertible-is-equiv =
+      is-transpose-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
 ```
 
 ### Structure obtained from being coherently invertible
@@ -233,11 +243,13 @@ module _
 
   is-section-map-inv-is-equiv : is-section f map-inv-is-equiv
   is-section-map-inv-is-equiv =
-    is-section-map-inv-is-invertible (is-invertible-is-equiv H)
+    is-section-map-inv-is-coherently-invertible-is-invertible
+      ( is-invertible-is-equiv H)
 
   is-retraction-map-inv-is-equiv : is-retraction f map-inv-is-equiv
   is-retraction-map-inv-is-equiv =
-    is-retraction-map-inv-is-invertible (is-invertible-is-equiv H)
+    is-retraction-map-inv-is-coherently-invertible-is-invertible
+      ( is-invertible-is-equiv H)
 
   coherence-map-inv-is-equiv :
     coherence-is-coherently-invertible f
@@ -245,7 +257,7 @@ module _
       ( is-section-map-inv-is-equiv)
       ( is-retraction-map-inv-is-equiv)
   coherence-map-inv-is-equiv =
-    coherence-map-inv-is-invertible (is-invertible-is-equiv H)
+    coh-is-coherently-invertible-is-invertible (is-invertible-is-equiv H)
 
   is-equiv-map-inv-is-equiv : is-equiv map-inv-is-equiv
   is-equiv-map-inv-is-equiv =
@@ -353,7 +365,9 @@ module _
         ( pair
           ( section-right-map-triangle f g h H section-f)
           ( retraction-left-map-triangle g f sh
-            ( triangle-section f g h H (sh , is-section-sh))
+            ( inv-htpy
+              ( ( H ·r map-section h (sh , is-section-sh)) ∙h
+                ( g ·l is-section-map-section h (sh , is-section-sh))))
             ( retraction-f)
             ( h , is-section-sh)))
 ```
@@ -372,7 +386,9 @@ module _
     section-left-map-triangle h
       ( map-retraction-is-equiv G)
       ( f)
-      ( triangle-retraction f g h H (retraction-is-equiv G))
+      ( inv-htpy
+        ( ( map-retraction g (retraction-is-equiv G) ·l H) ∙h
+          ( is-retraction-map-retraction g (retraction-is-equiv G) ·r h)))
       ( section-is-equiv F)
       ( g , is-retraction-map-retraction-is-equiv G)
 
@@ -389,7 +405,9 @@ module _
       ( section-f , retraction-f) =
       ( pair
         ( section-left-map-triangle h rg f
-          ( triangle-retraction f g h H (rg , is-retraction-rg))
+          ( inv-htpy
+            ( ( map-retraction g (rg , is-retraction-rg) ·l H) ∙h
+              ( is-retraction-map-retraction g (rg , is-retraction-rg) ·r h)))
           ( section-f)
           ( g , is-retraction-rg))
         ( retraction-top-map-triangle f g h H retraction-f))
@@ -405,17 +423,15 @@ module _
   abstract
     is-equiv-comp :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
-    pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) =
-      section-comp g h sh sg
-    pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) =
-      retraction-comp g h rg rh
+    pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) = section-comp g h sh sg
+    pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) = retraction-comp g h rg rh
 
-  equiv-comp : (B ≃ X) → (A ≃ B) → (A ≃ X)
-  pr1 (equiv-comp g h) = (map-equiv g) ∘ (map-equiv h)
+  equiv-comp : B ≃ X → A ≃ B → A ≃ X
+  pr1 (equiv-comp g h) = map-equiv g ∘ map-equiv h
   pr2 (equiv-comp g h) = is-equiv-comp (pr1 g) (pr1 h) (pr2 h) (pr2 g)
 
   infixr 15 _∘e_
-  _∘e_ : (B ≃ X) → (A ≃ B) → (A ≃ X)
+  _∘e_ : B ≃ X → A ≃ B → A ≃ X
   _∘e_ = equiv-comp
 ```
 
@@ -478,14 +494,12 @@ module _
     is-equiv-htpy' (map-equiv e) H (is-equiv-map-equiv e)
 
   htpy-map-inv-is-equiv :
-    {f g : A → B} (G : f ~ g) (H : is-equiv f) (K : is-equiv g) →
-    map-inv-is-equiv H ~ map-inv-is-equiv K
-  htpy-map-inv-is-equiv G H K b =
-    ( inv
-      ( is-retraction-map-inv-is-equiv K (map-inv-is-equiv H b))) ∙
-    ( ap (map-inv-is-equiv K)
-      ( ( inv (G (map-inv-is-equiv H b))) ∙
-        ( is-section-map-inv-is-equiv H b)))
+    {f g : A → B} (H : f ~ g) (F : is-equiv f) (G : is-equiv g) →
+    map-inv-is-equiv F ~ map-inv-is-equiv G
+  htpy-map-inv-is-equiv H F G =
+    htpy-map-inv-is-invertible H
+      ( is-invertible-is-equiv F)
+      ( is-invertible-is-equiv G)
 ```
 
 ### Any retraction of an equivalence is an equivalence
@@ -518,16 +532,22 @@ module _
   where
 
   abstract
-    is-equiv-section-is-equiv :
-      ( section-f : section f) → is-equiv (pr1 section-f) → is-equiv f
-    is-equiv-section-is-equiv (g , is-section-g) is-equiv-section-f =
-      is-equiv-htpy h
-        ( ( f ·l (inv-htpy (is-section-map-inv-is-equiv is-equiv-section-f))) ∙h
-          ( htpy-right-whisk is-section-g h))
-        ( is-equiv-map-inv-is-equiv is-equiv-section-f)
-      where
-      h : A → B
-      h = map-inv-is-equiv is-equiv-section-f
+    is-equiv-is-equiv-section :
+      (s : section f) → is-equiv (map-section f s) → is-equiv f
+    is-equiv-is-equiv-section (g , G) S = is-equiv-is-retraction S G
+```
+
+### If a retraction of `f` is an equivalence, then `f` is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  abstract
+    is-equiv-is-equiv-retraction :
+      (r : retraction f) → is-equiv (map-retraction f r) → is-equiv f
+    is-equiv-is-equiv-retraction (g , G) R = is-equiv-is-section R G
 ```
 
 ### Any section of an equivalence is homotopic to its inverse
@@ -657,38 +677,10 @@ module _
   abstract
     is-emb-is-equiv :
       {f : A → B} → is-equiv f → (x y : A) → is-equiv (ap f {x} {y})
-    is-emb-is-equiv {f} H x y =
-      is-equiv-is-invertible
-        ( λ p →
-          ( inv (is-retraction-map-inv-is-equiv H x)) ∙
-          ( ( ap (map-inv-is-equiv H) p) ∙
-            ( is-retraction-map-inv-is-equiv H y)))
-        ( λ p →
-          ( ap-concat f
-            ( inv (is-retraction-map-inv-is-equiv H x))
-            ( ap (map-inv-is-equiv H) p ∙ is-retraction-map-inv-is-equiv H y)) ∙
-          ( ( ap-binary
-              ( λ u v → u ∙ v)
-              ( ap-inv f (is-retraction-map-inv-is-equiv H x))
-              ( ( ap-concat f
-                  ( ap (map-inv-is-equiv H) p)
-                  ( is-retraction-map-inv-is-equiv H y)) ∙
-                ( ap-binary
-                  ( λ u v → u ∙ v)
-                  ( inv (ap-comp f (map-inv-is-equiv H) p))
-                  ( inv (coherence-map-inv-is-equiv H y))))) ∙
-            ( inv
-              ( left-transpose-eq-concat
-                ( ap f (is-retraction-map-inv-is-equiv H x))
-                ( p)
-                ( ( ap (f ∘ map-inv-is-equiv H) p) ∙
-                  ( is-section-map-inv-is-equiv H (f y)))
-                ( ( ap-binary
-                    ( λ u v → u ∙ v)
-                    ( inv (coherence-map-inv-is-equiv H x))
-                    ( inv (ap-id p))) ∙
-                  ( nat-htpy (is-section-map-inv-is-equiv H) p))))))
-        ( λ where refl → left-inv (is-retraction-map-inv-is-equiv H x))
+    is-emb-is-equiv H x y =
+      is-equiv-is-invertible'
+        ( is-invertible-ap-is-coherently-invertible
+          ( is-coherently-invertible-is-equiv H))
 
   equiv-ap :
     (e : A ≃ B) (x y : A) → (x ＝ y) ≃ (map-equiv e x ＝ map-equiv e y)
@@ -696,7 +688,7 @@ module _
   pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
 
   map-inv-equiv-ap :
-    (e : A ≃ B) (x y : A) → (map-equiv e x ＝ map-equiv e y) → (x ＝ y)
+    (e : A ≃ B) (x y : A) → map-equiv e x ＝ map-equiv e y → x ＝ y
   map-inv-equiv-ap e x y = map-inv-equiv (equiv-ap e x y)
 ```
 
@@ -756,6 +748,12 @@ syntax step-equivalence-reasoning e Z f = e ≃ Z by f
   [`foundation.contractible-maps`](foundation.contractible-maps.md).
 - For the notion of path-split maps see
   [`foundation.path-split-maps`](foundation.path-split-maps.md).
+- For the notion of finitely coherent equivalence, see
+  [`foundation.finitely-coherent-equivalence`)(foundation.finitely-coherent-equivalence.md).
+- For the notion of finitely coherently invertible map, see
+  [`foundation.finitely-coherently-invertible-map`)(foundation.finitely-coherently-invertible-map.md).
+- For the notion of infinitely coherent equivalence, see
+  [`foundation.infinitely-coherent-equivalences`](foundation.infinitely-coherent-equivalences.md).
 
 ### Table of files about function types, composition, and equivalences
 

@@ -108,7 +108,7 @@ module _
 tot-htpy :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   {f g : (x : A) → B x → C x} → (H : (x : A) → f x ~ g x) → tot f ~ tot g
-tot-htpy H (pair x y) = eq-pair-Σ refl (H x y)
+tot-htpy H (pair x y) = eq-pair-eq-fiber (H x y)
 ```
 
 ### The map `tot` preserves identity maps
@@ -445,7 +445,6 @@ module _
   [`foundation.equality-dependent-pair-types`](foundation.equality-dependent-pair-types.md).
 - The universal property of dependent pair types is treated in
   [`foundation.universal-property-dependent-pair-types`](foundation.universal-property-dependent-pair-types.md).
-
 - Functorial properties of cartesian product types are recorded in
   [`foundation.functoriality-cartesian-product-types`](foundation.functoriality-cartesian-product-types.md).
 - Functorial properties of dependent product types are recorded in

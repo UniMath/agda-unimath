@@ -20,7 +20,9 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -67,19 +69,20 @@ module _
     associative-comp-natural-transformation-map-Precategory
       C D F G H I f g h
 
-  inv-associative-comp-hom-map-precategory-Precategory :
+  involutive-eq-associative-comp-hom-map-precategory-Precategory :
     {F G H I : map-Precategory C D}
     (h : natural-transformation-map-Precategory C D H I)
     (g : natural-transformation-map-Precategory C D G H)
     (f : natural-transformation-map-Precategory C D F G) →
-    comp-natural-transformation-map-Precategory C D F H I
-      ( h)
-      ( comp-natural-transformation-map-Precategory C D F G H g f) ＝
     comp-natural-transformation-map-Precategory C D F G I
       ( comp-natural-transformation-map-Precategory C D G H I h g)
-      ( f)
-  inv-associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I} h g f =
-    inv-associative-comp-natural-transformation-map-Precategory
+      ( f) ＝ⁱ
+    comp-natural-transformation-map-Precategory C D F H I
+      ( h)
+      ( comp-natural-transformation-map-Precategory C D F G H g f)
+  involutive-eq-associative-comp-hom-map-precategory-Precategory
+    { F} {G} {H} {I} h g f =
+    involutive-eq-associative-comp-natural-transformation-map-Precategory
       C D F G H I f g h
 
   associative-composition-operation-map-precategory-Precategory :
@@ -88,16 +91,11 @@ module _
   pr1 associative-composition-operation-map-precategory-Precategory
     {F} {G} {H} =
     comp-hom-map-precategory-Precategory {F} {G} {H}
-  pr1
-    ( pr2
-        associative-composition-operation-map-precategory-Precategory
-          { F} {G} {H} {I} h g f) =
-    associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I} h g f
   pr2
-    ( pr2
-        associative-composition-operation-map-precategory-Precategory
-          { F} {G} {H} {I} h g f) =
-    inv-associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I} h g f
+    associative-composition-operation-map-precategory-Precategory
+      {F} {G} {H} {I} h g f =
+    involutive-eq-associative-comp-hom-map-precategory-Precategory
+      { F} {G} {H} {I} h g f
 
   id-hom-map-precategory-Precategory :
     (F : map-Precategory C D) → natural-transformation-map-Precategory C D F F
@@ -202,7 +200,7 @@ module _
     (f : natural-transformation-map-Precategory C D F G) →
     is-equiv (is-iso-map-is-natural-isomorphism-map-Precategory f)
   is-equiv-is-iso-map-is-natural-isomorphism-map-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-natural-isomorphism-map-Precategory C D F G f)
       ( is-prop-is-iso-Precategory
         ( map-precategory-Precategory C D) {F} {G} f)
@@ -212,7 +210,7 @@ module _
     (f : natural-transformation-map-Precategory C D F G) →
     is-equiv (is-natural-isomorphism-map-is-iso-map-Precategory f)
   is-equiv-is-natural-isomorphism-map-is-iso-map-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-iso-Precategory
         ( map-precategory-Precategory C D) {F} {G} f)
       ( is-prop-is-natural-isomorphism-map-Precategory C D F G f)

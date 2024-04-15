@@ -51,25 +51,42 @@ hom-initial-Category x y = type-Set (hom-set-initial-Category x y)
 ### The underlying precategory of the initial category
 
 ```agda
-comp-hom-initial-Category =
-  comp-hom-indiscrete-Precategory empty
+comp-hom-initial-Category :
+  {x y z : obj-initial-Category} →
+  hom-initial-Category y z → hom-initial-Category x y → hom-initial-Category x z
+comp-hom-initial-Category {x} {y} {z} =
+  comp-hom-indiscrete-Precategory empty {x} {y} {z}
 
-associative-comp-hom-initial-Category =
-  associative-comp-hom-indiscrete-Precategory empty
+associative-comp-hom-initial-Category :
+  {x y z w : obj-initial-Category}
+  (h : hom-initial-Category z w)
+  (g : hom-initial-Category y z)
+  (f : hom-initial-Category x y) →
+  comp-hom-initial-Category {x} {y} {w}
+    ( comp-hom-initial-Category {y} {z} {w} h g)
+    ( f) ＝
+  comp-hom-initial-Category {x} {z} {w}
+    ( h)
+    ( comp-hom-initial-Category {x} {y} {z} g f)
+associative-comp-hom-initial-Category {x} {y} {z} {w} =
+  associative-comp-hom-indiscrete-Precategory empty {x} {y} {z} {w}
 
-associative-composition-operation-initial-Category =
-  associative-composition-operation-indiscrete-Precategory empty
+id-hom-initial-Category : {x : obj-initial-Category} → hom-initial-Category x x
+id-hom-initial-Category {x} = id-hom-indiscrete-Precategory empty {x}
 
-id-hom-initial-Category = id-hom-indiscrete-Precategory empty
+left-unit-law-comp-hom-initial-Category :
+  {x y : obj-initial-Category}
+  (f : hom-initial-Category x y) →
+  comp-hom-initial-Category {x} {y} {y} (id-hom-initial-Category {y}) f ＝ f
+left-unit-law-comp-hom-initial-Category {x} {y} =
+  left-unit-law-comp-hom-indiscrete-Precategory empty {x} {y}
 
-left-unit-law-comp-hom-initial-Category =
-  left-unit-law-comp-hom-indiscrete-Precategory empty
-
-right-unit-law-comp-hom-initial-Category =
-  right-unit-law-comp-hom-indiscrete-Precategory empty
-
-is-unital-composition-operation-initial-Category =
-  is-unital-composition-operation-indiscrete-Precategory empty
+right-unit-law-comp-hom-initial-Category :
+  {x y : obj-initial-Category}
+  (f : hom-initial-Category x y) →
+  comp-hom-initial-Category {x} {x} {y} f (id-hom-initial-Category {x}) ＝ f
+right-unit-law-comp-hom-initial-Category {x} {y} =
+  right-unit-law-comp-hom-indiscrete-Precategory empty {x} {y}
 
 initial-Precategory : Precategory lzero lzero
 initial-Precategory = indiscrete-Precategory empty

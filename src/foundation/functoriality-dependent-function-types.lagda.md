@@ -13,17 +13,17 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
-open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -33,7 +33,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -294,7 +293,6 @@ pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
   [`foundation.type-arithmetic-dependent-function-types`](foundation.type-arithmetic-dependent-function-types.md).
 - Equality proofs in dependent function types are characterized in
   [`foundation.equality-dependent-function-types`](foundation.equality-dependent-function-types.md).
-
 - Functorial properties of function types are recorded in
   [`foundation.functoriality-function-types`](foundation.functoriality-function-types.md).
 - Functorial properties of dependent pair types are recorded in

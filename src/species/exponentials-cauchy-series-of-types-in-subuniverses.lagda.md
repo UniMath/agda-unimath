@@ -72,7 +72,7 @@ module _
       ( S)
       ( X)
   equiv-exponential-cauchy-series-composition-unit-species-subuniverse =
-    equiv-tot (λ F → left-unit-law-prod-is-contr is-contr-unit)
+    equiv-tot (λ F → left-unit-law-product-is-contr is-contr-unit)
 ```
 
 ### The Cauchy series associated to the Cauchy exponential of `S` is equal to the exponential of its Cauchy series

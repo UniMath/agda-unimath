@@ -21,7 +21,10 @@ open import higher-group-theory.higher-groups
 open import higher-group-theory.homomorphisms-higher-groups
 
 open import structured-types.pointed-equivalences
+open import structured-types.pointed-isomorphisms
 open import structured-types.pointed-types
+
+open import synthetic-homotopy-theory.functoriality-loop-spaces
 ```
 
 </details>
@@ -39,12 +42,22 @@ module _
   equiv-∞-Group =
     classifying-pointed-type-∞-Group G ≃∗ classifying-pointed-type-∞-Group H
 
-  hom-equiv-∞-Group : equiv-∞-Group → hom-∞-Group G H
-  hom-equiv-∞-Group =
-    pointed-map-pointed-equiv
+  module _
+    (e : equiv-∞-Group)
+    where
 
-  map-equiv-∞-Group : equiv-∞-Group → type-∞-Group G → type-∞-Group H
-  map-equiv-∞-Group = map-hom-∞-Group G H ∘ hom-equiv-∞-Group
+    hom-equiv-∞-Group : hom-∞-Group G H
+    hom-equiv-∞-Group = pointed-map-pointed-equiv e
+
+    map-equiv-∞-Group : type-∞-Group G → type-∞-Group H
+    map-equiv-∞-Group = map-hom-∞-Group G H hom-equiv-∞-Group
+
+    pointed-equiv-equiv-∞-Group :
+      pointed-type-∞-Group G ≃∗ pointed-type-∞-Group H
+    pointed-equiv-equiv-∞-Group = pointed-equiv-Ω-pointed-equiv e
+
+    equiv-equiv-∞-Group : type-∞-Group G ≃ type-∞-Group H
+    equiv-equiv-∞-Group = equiv-map-Ω-pointed-equiv e
 ```
 
 ### The identity equivalence of higher groups
@@ -63,7 +76,7 @@ module _
   where
 
   is-iso-∞-Group : hom-∞-Group G H → UU (l1 ⊔ l2)
-  is-iso-∞-Group = is-iso-pointed-map
+  is-iso-∞-Group = is-pointed-iso
 ```
 
 ## Properties
@@ -76,7 +89,7 @@ is-torsorial-equiv-∞-Group :
   is-torsorial (λ (H : ∞-Group l1) → equiv-∞-Group G H)
 is-torsorial-equiv-∞-Group G =
   is-torsorial-Eq-subtype
-    ( is-torsorial-equiv-Pointed-Type (classifying-pointed-type-∞-Group G))
+    ( is-torsorial-pointed-equiv (classifying-pointed-type-∞-Group G))
     ( λ X → is-prop-is-0-connected (type-Pointed-Type X))
     ( classifying-pointed-type-∞-Group G)
     ( id-pointed-equiv)

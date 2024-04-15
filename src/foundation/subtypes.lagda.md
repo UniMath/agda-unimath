@@ -147,7 +147,7 @@ module _
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
     (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
   equiv-antisymmetric-leq-subtype P Q H K x =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-prop-is-in-subtype P x)
       ( is-prop-is-in-subtype Q x)
       ( H x)

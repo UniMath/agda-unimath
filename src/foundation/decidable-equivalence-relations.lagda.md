@@ -18,6 +18,7 @@ open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.existential-quantification
+open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.images
@@ -37,7 +38,6 @@ open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -128,7 +128,7 @@ module _
     sim-Decidable-equivalence-relation x y ≃
     sim-Decidable-equivalence-relation y x
   equiv-symmetric-Decidable-equivalence-relation {x} {y} =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-prop-sim-Decidable-equivalence-relation x y)
       ( is-prop-sim-Decidable-equivalence-relation y x)
       ( symmetric-Decidable-equivalence-relation x y)
@@ -169,7 +169,9 @@ module _
   is-equivalence-class-Decidable-equivalence-relation :
     decidable-subtype l2 X → UU (l1 ⊔ lsuc l2)
   is-equivalence-class-Decidable-equivalence-relation P =
-    ∃ X (λ x → P ＝ decidable-relation-Decidable-equivalence-relation R x)
+    exists-structure
+      ( X)
+      ( λ x → P ＝ decidable-relation-Decidable-equivalence-relation R x)
 
   equivalence-class-Decidable-equivalence-relation : UU (l1 ⊔ lsuc l2)
   equivalence-class-Decidable-equivalence-relation =
@@ -180,7 +182,7 @@ module _
   pr1 (class-Decidable-equivalence-relation x) =
     decidable-relation-Decidable-equivalence-relation R x
   pr2 (class-Decidable-equivalence-relation x) =
-    intro-∃ x refl
+    intro-exists x refl
 
   emb-equivalence-class-Decidable-equivalence-relation :
     equivalence-class-Decidable-equivalence-relation ↪ decidable-subtype l2 X
@@ -481,7 +483,7 @@ has-decidable-equality-type-Surjection-Into-Set :
     ( equivalence-relation-Surjection-Into-Set surj)) →
   has-decidable-equality (type-Surjection-Into-Set surj)
 has-decidable-equality-type-Surjection-Into-Set surj is-dec-rel x y =
-  apply-twice-dependent-universal-property-surj-is-surjective
+  apply-twice-dependent-universal-property-surjection-is-surjective
     ( map-Surjection-Into-Set surj)
     ( is-surjective-Surjection-Into-Set surj)
     ( λ (s t : (type-Surjection-Into-Set surj)) →
@@ -508,13 +510,13 @@ equiv-Surjection-Into-Set-Decidable-equivalence-relation {l1} A =
       ( λ z → (A ↠ z) × has-decidable-equality z)
       ( id-equiv)
       ( λ X →
-        ( equiv-prod
+        ( equiv-product
           ( id-equiv)
           ( inv-equiv
               ( equiv-add-redundant-prop
                 ( is-prop-is-set ( X))
                 ( is-set-has-decidable-equality)) ∘e
-            commutative-prod) ∘e
+            commutative-product) ∘e
         ( equiv-left-swap-Σ)))) ∘e
     ( ( associative-Σ
         ( UU l1)

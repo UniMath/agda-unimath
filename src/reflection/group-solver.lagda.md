@@ -35,33 +35,33 @@ way and removes units and inverses next to the original.
 The main entry-point is `solveExpr` below
 
 ```agda
-data Fin : ℕ → UU lzero where
-  zero-Fin : ∀ {n} → Fin (succ-ℕ n)
-  succ-Fin : ∀ {n} → Fin n → Fin (succ-ℕ n)
+data Inductive-Fin : ℕ → UU lzero where
+  zero-Inductive-Fin : {n : ℕ} → Inductive-Fin (succ-ℕ n)
+  succ-Inductive-Fin : {n : ℕ} → Inductive-Fin n → Inductive-Fin (succ-ℕ n)
 
-finEq : ∀ {n} → (a b : Fin n) → is-decidable (Id a b)
-finEq zero-Fin zero-Fin = inl refl
-finEq zero-Fin (succ-Fin b) = inr (λ ())
-finEq (succ-Fin a) zero-Fin = inr (λ ())
-finEq (succ-Fin a) (succ-Fin b) with finEq a b
-... | inl eq = inl (ap succ-Fin eq)
+finEq : {n : ℕ} → (a b : Inductive-Fin n) → is-decidable (Id a b)
+finEq zero-Inductive-Fin zero-Inductive-Fin = inl refl
+finEq zero-Inductive-Fin (succ-Inductive-Fin b) = inr (λ ())
+finEq (succ-Inductive-Fin a) zero-Inductive-Fin = inr (λ ())
+finEq (succ-Inductive-Fin a) (succ-Inductive-Fin b) with finEq a b
+... | inl eq = inl (ap succ-Inductive-Fin eq)
 ... | inr neq = inr (λ where refl → neq refl)
 
-getVec : ∀ {n} {l} {A : UU l} → vec A n → Fin n → A
-getVec (x ∷ v) zero-Fin = x
-getVec (x ∷ v) (succ-Fin k) = getVec v k
+getVec : {n : ℕ} {l : Level} {A : UU l} → vec A n → Inductive-Fin n → A
+getVec (x ∷ v) zero-Inductive-Fin = x
+getVec (x ∷ v) (succ-Inductive-Fin k) = getVec v k
 
 data GroupSyntax (n : ℕ) : UU where
   gUnit : GroupSyntax n
   gMul : GroupSyntax n → GroupSyntax n → GroupSyntax n
   gInv : GroupSyntax n → GroupSyntax n
-  inner : Fin n → GroupSyntax n
+  inner : Inductive-Fin n → GroupSyntax n
 
 data SimpleElem (n : ℕ) : UU where
-  inv-SE : Fin n → SimpleElem n
-  pure-SE : Fin n → SimpleElem n
+  inv-SE : Inductive-Fin n → SimpleElem n
+  pure-SE : Inductive-Fin n → SimpleElem n
 
-inv-SE' : ∀ {n} → SimpleElem n → SimpleElem n
+inv-SE' : {n : ℕ} → SimpleElem n → SimpleElem n
 inv-SE' (inv-SE k) = pure-SE k
 inv-SE' (pure-SE k) = inv-SE k
 
@@ -106,96 +106,134 @@ module _ {n : ℕ} where
 
   data GroupEqualityElem : GroupSyntax n → GroupSyntax n → UU where
     -- equivalence relation
-    xsym-GE : ∀ {x} {y} → GroupEqualityElem x y → GroupEqualityElem y x
+    xsym-GE :
+      {x y : GroupSyntax n} → GroupEqualityElem x y → GroupEqualityElem y x
 
     -- Variations on ap
-    -- xap-gMul : ∀ {x} {y} {z} {w} → GroupEqualityElem x y → GroupEqualityElem z w → GroupEqualityElem (gMul x z) (gMul y w)
+    -- xap-gMul :
+    --   {x y z w : GroupSyntax n} →
+    --   GroupEqualityElem x y → GroupEqualityElem z w →
+    --   GroupEqualityElem (gMul x z) (gMul y w)
     xap-gMul-l :
-      ∀ {x} {y} {z} →
+      {x y z : GroupSyntax n} →
       GroupEqualityElem x y → GroupEqualityElem (gMul x z) (gMul y z)
     xap-gMul-r :
-      ∀ {x} {y} {z} →
+      {x y z : GroupSyntax n} →
       GroupEqualityElem y z → GroupEqualityElem (gMul x y) (gMul x z)
     xap-gInv :
-      ∀ {x} {y} →
+      {x y : GroupSyntax n} →
       GroupEqualityElem x y → GroupEqualityElem (gInv x) (gInv y)
 
     -- Group laws
     xassoc-GE :
-      ∀ x y z → GroupEqualityElem (gMul (gMul x y) z) (gMul x (gMul y z))
-    xl-unit : ∀ x → GroupEqualityElem (gMul gUnit x) x
-    xr-unit : ∀ x → GroupEqualityElem (gMul x gUnit) x
-    xl-inv : ∀ x → GroupEqualityElem (gMul (gInv x) x) gUnit
-    xr-inv : ∀ x → GroupEqualityElem (gMul x (gInv x)) gUnit
+      (x y z : GroupSyntax n) →
+      GroupEqualityElem (gMul (gMul x y) z) (gMul x (gMul y z))
+    xl-unit :
+      (x : GroupSyntax n) → GroupEqualityElem (gMul gUnit x) x
+    xr-unit :
+      (x : GroupSyntax n) → GroupEqualityElem (gMul x gUnit) x
+    xl-inv :
+      (x : GroupSyntax n) → GroupEqualityElem (gMul (gInv x) x) gUnit
+    xr-inv :
+      (x : GroupSyntax n) → GroupEqualityElem (gMul x (gInv x)) gUnit
 
     -- Theorems that are provable from the others
-    xinv-unit-GE : GroupEqualityElem (gInv gUnit) gUnit
-    xinv-inv-GE : ∀ x → GroupEqualityElem (gInv (gInv x)) x
+    xinv-unit-GE :
+      GroupEqualityElem (gInv gUnit) gUnit
+    xinv-inv-GE :
+      (x : GroupSyntax n) → GroupEqualityElem (gInv (gInv x)) x
     xdistr-inv-mul-GE :
-      ∀ x y → GroupEqualityElem (gInv (gMul x y)) (gMul (gInv y) (gInv x))
+      (x y : GroupSyntax n) →
+      GroupEqualityElem (gInv (gMul x y)) (gMul (gInv y) (gInv x))
+
   data GroupEquality : GroupSyntax n → GroupSyntax n → UU where
-    refl-GE : ∀ {x} → GroupEquality x x
+    refl-GE :
+      {x : GroupSyntax n} → GroupEquality x x
     _∷GE_ :
-      ∀ {x} {y} {z} →
+      {x y z : GroupSyntax n} →
       GroupEqualityElem x y → GroupEquality y z → GroupEquality x z
 
   infixr 10 _∷GE_
 
   module _ where
     -- equivalence relation
-    singleton-GE : ∀ {x y} → GroupEqualityElem x y → GroupEquality x y
+    singleton-GE :
+      {x y : GroupSyntax n} → GroupEqualityElem x y → GroupEquality x y
     singleton-GE x = x ∷GE refl-GE
 
     _∙GE_ :
-      ∀ {x} {y} {z} → GroupEquality x y → GroupEquality y z → GroupEquality x z
+      {x y z : GroupSyntax n} →
+      GroupEquality x y → GroupEquality y z → GroupEquality x z
     refl-GE ∙GE b = b
     (x ∷GE a) ∙GE b = x ∷GE (a ∙GE b)
     infixr 15 _∙GE_
 
-    sym-GE : ∀ {x} {y} → GroupEquality x y → GroupEquality y x
+    sym-GE : {x y : GroupSyntax n} → GroupEquality x y → GroupEquality y x
     sym-GE refl-GE = refl-GE
     sym-GE (a ∷GE as) = sym-GE as ∙GE singleton-GE (xsym-GE a)
 
     -- Variations on ap
-    ap-gInv : ∀ {x} {y} → GroupEquality x y → GroupEquality (gInv x) (gInv y)
+    ap-gInv :
+      {x y : GroupSyntax n} →
+      GroupEquality x y → GroupEquality (gInv x) (gInv y)
     ap-gInv refl-GE = refl-GE
     ap-gInv (a ∷GE as) = xap-gInv a ∷GE ap-gInv as
+
     ap-gMul-l :
-      ∀ {x} {y} {z} → GroupEquality x y → GroupEquality (gMul x z) (gMul y z)
+      {x y z : GroupSyntax n} →
+      GroupEquality x y → GroupEquality (gMul x z) (gMul y z)
     ap-gMul-l refl-GE = refl-GE
     ap-gMul-l (x ∷GE xs) = xap-gMul-l x ∷GE ap-gMul-l xs
+
     ap-gMul-r :
-      ∀ {x} {y} {z} → GroupEquality y z → GroupEquality (gMul x y) (gMul x z)
+      {x y z : GroupSyntax n} →
+      GroupEquality y z → GroupEquality (gMul x y) (gMul x z)
     ap-gMul-r refl-GE = refl-GE
     ap-gMul-r (x ∷GE xs) = xap-gMul-r x ∷GE ap-gMul-r xs
+
     ap-gMul :
-      ∀ {x} {y} {z} {w} →
+      {x y z w : GroupSyntax n} →
       GroupEquality x y → GroupEquality z w →
       GroupEquality (gMul x z) (gMul y w)
     ap-gMul p q = ap-gMul-l p ∙GE ap-gMul-r q
 
     -- Group laws
-    assoc-GE : ∀ x y z → GroupEquality (gMul (gMul x y) z) (gMul x (gMul y z))
+    assoc-GE :
+      (x y z : GroupSyntax n) →
+      GroupEquality (gMul (gMul x y) z) (gMul x (gMul y z))
     assoc-GE x y z = singleton-GE (xassoc-GE x y z)
-    l-unit : ∀ x → GroupEquality (gMul gUnit x) x
+
+    l-unit :
+      (x : GroupSyntax n) → GroupEquality (gMul gUnit x) x
     l-unit x = singleton-GE (xl-unit x)
-    r-unit : ∀ x → GroupEquality (gMul x gUnit) x
+
+    r-unit :
+      (x : GroupSyntax n) → GroupEquality (gMul x gUnit) x
     r-unit x = singleton-GE (xr-unit x)
-    l-inv : ∀ x → GroupEquality (gMul (gInv x) x) gUnit
+
+    l-inv :
+      (x : GroupSyntax n) → GroupEquality (gMul (gInv x) x) gUnit
     l-inv x = singleton-GE (xl-inv x)
-    r-inv : ∀ x → GroupEquality (gMul x (gInv x)) gUnit
+
+    r-inv :
+      (x : GroupSyntax n) → GroupEquality (gMul x (gInv x)) gUnit
     r-inv x = singleton-GE (xr-inv x)
 
     -- Theorems that are provable from the others
     inv-unit-GE : GroupEquality (gInv gUnit) gUnit
     inv-unit-GE = singleton-GE (xinv-unit-GE)
-    inv-inv-GE : ∀ x → GroupEquality (gInv (gInv x)) x
+
+    inv-inv-GE : (x : GroupSyntax n) → GroupEquality (gInv (gInv x)) x
     inv-inv-GE x = singleton-GE (xinv-inv-GE x)
+
     distr-inv-mul-GE :
-      ∀ x y → GroupEquality (gInv (gMul x y)) (gMul (gInv y) (gInv x))
+      (x y : GroupSyntax n) →
+      GroupEquality (gInv (gMul x y)) (gMul (gInv y) (gInv x))
     distr-inv-mul-GE x y = singleton-GE (xdistr-inv-mul-GE x y)
 
-  assoc-GE' : ∀ x y z → GroupEquality (gMul x (gMul y z)) (gMul (gMul x y) z)
+  assoc-GE' :
+    (x y z : GroupSyntax n) →
+    GroupEquality (gMul x (gMul y z)) (gMul (gMul x y) z)
   assoc-GE' x y z = sym-GE (assoc-GE x y z)
 
   elim-inverses-remove-valid :
@@ -239,7 +277,7 @@ module _ {n : ℕ} where
     elim-inverses-valid x (elim-inverses y (concat-simplify a b))
 
   concat-simplify-valid :
-    ∀ (u w : Simple n) →
+    (u w : Simple n) →
     GroupEquality
       ( gMul (unquoteSimple w) (unquoteSimple u))
       ( unquoteSimple (concat-simplify u w))
@@ -247,7 +285,7 @@ module _ {n : ℕ} where
   concat-simplify-valid (cons x a) b = concat-simplify-nonempty-valid x a b
 
   inv-single-valid :
-    ∀ w →
+    (w : SimpleElem n) →
     GroupEquality
       ( gInv (unquoteSimpleElem w))
       ( unquoteSimpleElem (inv-SE' w))
@@ -280,7 +318,7 @@ module _ {n : ℕ} where
       ( unquoteSimple (concat-list xs (cons x nil)))
   gMul-concat-1 xs a = gMul-concat' xs (cons a nil)
 
-  -- inv-simplify-valid'-nonempty : ∀ (x : SimpleElem n) (xs : list (SimpleElem n)) →
+  -- inv-simplify-valid'-nonempty : (x : SimpleElem n) (xs : list (SimpleElem n)) →
   --                               GroupEquality (gInv (unquoteSimple (cons x xs)))
   --                               (unquoteSimple (reverse-list (map-list inv-SE' (cons x xs))))
   -- inv-simplify-valid'-nonempty x nil = inv-single-valid x
@@ -289,14 +327,14 @@ module _ {n : ℕ} where
   --   ap-gMul (inv-single-valid x) (inv-simplify-valid'-nonempty y xs) ∙GE
   --   gMul-concat-1 (concat-list (reverse-list (map-list inv-SE' xs)) (in-list (inv-SE' y))) (inv-SE' x)
 
-  -- inv-simplify-valid' : ∀ (w : list (SimpleElem n)) →
+  -- inv-simplify-valid' : (w : list (SimpleElem n)) →
   --                     GroupEquality (gInv (unquoteSimple w))
   --                     (unquoteSimple (reverse-list (map-list inv-SE' w)))
   -- inv-simplify-valid' nil = inv-unit-GE
   -- inv-simplify-valid' (cons x xs) =
   --   inv-simplify-valid'-nonempty x xs
 
-  -- simplifyValid : ∀ (g : GroupSyntax n) → GroupEquality g (unquoteSimple (simplifyGS g))
+  -- simplifyValid : (g : GroupSyntax n) → GroupEquality g (unquoteSimple (simplifyGS g))
   -- simplifyValid gUnit = refl-GE
   -- simplifyValid (gMul a b) =
   --   (ap-gMul (simplifyValid a) (simplifyValid b)) ∙GE
@@ -304,14 +342,14 @@ module _ {n : ℕ} where
   -- simplifyValid (gInv g) = ap-gInv (simplifyValid g) ∙GE inv-simplify-valid' (simplifyGS g)
   -- simplifyValid (inner _) = refl-GE
 
-  Env : ∀ {l} → ℕ → UU l → UU l
+  Env : {l : Level} → ℕ → UU l → UU l
   Env n A = vec A n
 
   module _
     {l : Level} (G : Group l)
     where
 
-    unQuoteGS : ∀ {n} → GroupSyntax n → Env n (type-Group G) → type-Group G
+    unQuoteGS : {n : ℕ} → GroupSyntax n → Env n (type-Group G) → type-Group G
     unQuoteGS gUnit e = unit-Group G
     unQuoteGS (gMul x y) e = mul-Group G (unQuoteGS x e) (unQuoteGS y e)
     unQuoteGS (gInv x) e = inv-Group G (unQuoteGS x e)
@@ -357,7 +395,7 @@ module _ {n : ℕ} where
       useGroupEqualityElem env x ∙ useGroupEquality env xs
 
     -- simplifyExpression :
-    --   ∀ (g : GroupSyntax n) (env : Env n (type-Group G)) →
+    --   (g : GroupSyntax n) (env : Env n (type-Group G)) →
     --   unQuoteGS g env ＝ unQuoteGS (unquoteSimple (simplifyGS g)) env
     -- simplifyExpression g env = useGroupEquality env (simplifyValid g)
 
@@ -366,46 +404,50 @@ module _ {n : ℕ} where
     n-args zero-ℕ A B = B
     n-args (succ-ℕ n) A B = A → n-args n A B
     map-n-args :
-      ∀ {A A' B : UU} (n : ℕ) → (A' → A) → n-args n A B → n-args n A' B
+      {A A' B : UU} (n : ℕ) → (A' → A) → n-args n A B → n-args n A' B
     map-n-args zero-ℕ f v = v
     map-n-args (succ-ℕ n) f v = λ x → map-n-args n f (v (f x))
-    apply-n-args-fin : ∀ {B : UU} (n : ℕ) → n-args n (Fin n) B → B
+    apply-n-args-fin : {B : UU} (n : ℕ) → n-args n (Inductive-Fin n) B → B
     apply-n-args-fin zero-ℕ f = f
     apply-n-args-fin (succ-ℕ n) f =
-      apply-n-args-fin n (map-n-args n succ-Fin (f zero-Fin))
-    apply-n-args : ∀ {B : UU} (n : ℕ) → n-args n (GroupSyntax n) B → B
+      apply-n-args-fin
+        ( n)
+        ( map-n-args n succ-Inductive-Fin (f zero-Inductive-Fin))
+    apply-n-args : {B : UU} (n : ℕ) → n-args n (GroupSyntax n) B → B
     apply-n-args n f = apply-n-args-fin n (map-n-args n inner f)
 
     -- A variation of simplifyExpression which takes a function from the free variables to expr
     -- simplifyExpr :
-    --   ∀ (env : Env n (type-Group G)) (g : n-args n (GroupSyntax n) (GroupSyntax n)) →
+    --   (env : Env n (type-Group G)) (g : n-args n (GroupSyntax n) (GroupSyntax n)) →
     --   unQuoteGS (apply-n-args n g) env ＝ unQuoteGS (unquoteSimple (simplifyGS (apply-n-args n g))) env
     -- simplifyExpr env g = simplifyExpression (apply-n-args n g) env
-
-    open import linear-algebra.vectors using (_∷_ ; empty-vec) public
 ```
 
-```agda
--- private _\*'_ : ∀ {n} → GroupSyntax n → GroupSyntax n → GroupSyntax n _\*'_ =
--- gMul x : GroupSyntax 2 x = inner (zero-Fin) y : GroupSyntax 2 y = inner
--- (succ-Fin zero-Fin)
+```text
+private
+    _*'_ : {n : ℕ} → GroupSyntax n → GroupSyntax n → GroupSyntax n
+    _*'_ = gMul
+    x : GroupSyntax 2
+    x = inner (zero-Inductive-Fin)
+    y : GroupSyntax 2
+    y = inner (succ-Inductive-Fin zero-Inductive-Fin)
 
---     infixl 40 _*'_
---     ex1 : GroupEquality {n = 2} (gInv (x *' y *' gInv x *' gInv y)) (y *' x *' gInv y *' gInv x)
---     ex1 = simplifyValid _
+    infixl 40 _*'_
+    ex1 : GroupEquality {n = 2} (gInv (x *' y *' gInv x *' gInv y)) (y *' x *' gInv y *' gInv x)
+    ex1 = simplifyValid _
 
---     ex2 : ∀ x y → (x * y * x ⁻¹ * y ⁻¹) ⁻¹ ＝ (y * x * y ⁻¹ * x ⁻¹)
---     ex2 x' y' = simplifyExpression (gInv (x *' y *' gInv x *' gInv y)) (x' ∷ y' ∷ empty-vec)
+    ex2 : ∀ x y → (x * y * x ⁻¹ * y ⁻¹) ⁻¹ ＝ (y * x * y ⁻¹ * x ⁻¹)
+    ex2 x' y' = simplifyExpression (gInv (x *' y *' gInv x *' gInv y)) (x' ∷ y' ∷ empty-vec)
 
---     _ : UU
---     -- _ = {!simplifyValid (y *' (x *' (gInv y *' (gInv x *' gUnit))))!}
---     _ = {!ex1!}
+    _ : UU
+    -- _ = {!simplifyValid (y *' (x *' (gInv y *' (gInv x *' gUnit))))!}
+    _ = {!ex1!}
 
---     ex3 : ∀ x y → (x * y) ⁻¹ ＝ (y ⁻¹ * x ⁻¹)
---     ex3 x' y' = {!simplifyExpression (gInv (x *' y)) (x' ∷ y' ∷ empty-vec)!}
+    ex3 : ∀ x y → (x * y) ⁻¹ ＝ (y ⁻¹ * x ⁻¹)
+    ex3 x' y' = {!simplifyExpression (gInv (x *' y)) (x' ∷ y' ∷ empty-vec)!}
 
---     _ : GroupEquality {n = 2} (y *' (x *' (gInv y *' (gInv x *' gUnit)))) (y *' (x *' (gInv y *' (gInv x *' gUnit))))
---     _ = {!simplifyValid (gInv x *' x *' y)!}
---     -- _ = {!simplifyValid (gUnit *' gUnit)!}
---     -- _ = {!simplifyValid (x *' gUnit)!}
+    _ : GroupEquality {n = 2} (y *' (x *' (gInv y *' (gInv x *' gUnit)))) (y *' (x *' (gInv y *' (gInv x *' gUnit))))
+    _ = {!simplifyValid (gInv x *' x *' y)!}
+    -- _ = {!simplifyValid (gUnit *' gUnit)!}
+    -- _ = {!simplifyValid (x *' gUnit)!}
 ```

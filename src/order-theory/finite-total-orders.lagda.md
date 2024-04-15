@@ -58,7 +58,7 @@ module _
 is-finite-total-order-Poset-Prop :
   {l1 l2 : Level} (P : Poset l1 l2) → Prop (l1 ⊔ l2)
 is-finite-total-order-Poset-Prop P =
-  prod-Prop
+  product-Prop
     ( is-total-Poset-Prop P)
     ( is-finite-Poset-Prop P)
 

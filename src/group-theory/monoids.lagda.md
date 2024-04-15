@@ -123,7 +123,7 @@ abstract
     ( e' , left-unit-e' , right-unit-e') =
     eq-type-subtype
       ( λ e →
-        prod-Prop
+        product-Prop
           ( Π-Prop (type-Set X) (λ y → Id-Prop X (μ e y) y))
           ( Π-Prop (type-Set X) (λ x → Id-Prop X (μ x e) x)))
       ( (inv (left-unit-e' e)) ∙ (right-unit-e e'))

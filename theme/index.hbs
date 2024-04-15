@@ -199,6 +199,7 @@
                         {{{ content }}}
                     </main>
 
+                    {{#if false}}
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         {{#previous}}
@@ -217,9 +218,11 @@
 
                         <div style="clear: both"></div>
                     </nav>
+                    {{/if}}
                 </div>
             </div>
 
+            {{#if false}}
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 {{#previous}}
                 <a rel="prev" href="{{ path_to_root }}{{link}}" class="nav-chapters previous" title="Previous chapter"
@@ -235,7 +238,7 @@
                 </a>
                 {{/next}}
             </nav>
-
+            {{/if}}
         </div>
 
         {{#if live_reload_endpoint}}
@@ -332,6 +335,8 @@
         {{/if}}
 
     </div>
+
+    <script data-goatcounter="https://agda-unimath.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 
 </html>

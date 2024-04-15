@@ -14,16 +14,16 @@ open import foundation.embeddings
 open import foundation.equivalence-injective-type-families
 open import foundation.faithful-maps
 open import foundation.function-types
+open import foundation.injective-maps
 open import foundation.preunivalence
 open import foundation.retractions
+open import foundation.sets
 open import foundation.subuniverses
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
-open import foundation-core.sets
 open import foundation-core.univalence
 ```
 
@@ -50,6 +50,14 @@ is-preunivalent {A = A} B = (x y : A) → is-emb (λ (p : x ＝ y) → equiv-tr 
 ```
 
 ## Properties
+
+### The preunivalence axiom states that the identity family `id : 𝒰 → 𝒰` is preunivalent
+
+```agda
+is-preunivalent-UU :
+  (l : Level) → is-preunivalent (id {A = UU l})
+is-preunivalent-UU l = preunivalence
+```
 
 ### Assuming the preunivalence axiom, type families are preunivalent if and only if they are faithful as maps
 
@@ -175,3 +183,5 @@ is-preunivalent-inclusion-subuniverse S =
 
 - [Univalent type families](foundation.univalent-type-families.md)
 - [Transport-split type families](foundation.transport-split-type-families.md)
+- The [standard finite types](univalent-combinatorics.standard-finite-types.md)
+  is a type family which is preunivalent but not univalent.

@@ -76,8 +76,7 @@ neighbor-id-equiv-Undirected-Graph :
   (G : Undirected-Graph l1 l2) (x : vertex-Undirected-Graph G) →
   neighbor-equiv-Undirected-Graph G G (id-equiv-Undirected-Graph G) x ~ id
 neighbor-id-equiv-Undirected-Graph G x (pair y e) =
-  eq-pair-Σ
-    ( refl)
+  eq-pair-eq-fiber
     ( edge-standard-unordered-pair-vertices-id-equiv-Undirected-Graph G x y e)
 ```
 

@@ -80,16 +80,16 @@ module _
   equiv-cauchy-series-composition-species-types =
     ( equiv-tot
       ( λ U →
-        ( equiv-prod
+        ( equiv-product
           ( id-equiv)
           ( inv-equiv distributive-Π-Σ)) ∘e
-        ( ( inv-equiv left-distributive-prod-Σ) ∘e
+        ( ( inv-equiv left-distributive-product-Σ) ∘e
           ( equiv-tot
             ( λ V →
-              ( equiv-prod
+              ( equiv-product
                 ( id-equiv)
                 ( ( inv-equiv equiv-up-product) ∘e
-                  ( equiv-prod id-equiv equiv-ev-pair))) ∘e
+                  ( equiv-product id-equiv equiv-ev-pair))) ∘e
               ( left-unit-law-Σ-is-contr
                 ( is-torsorial-equiv' (Σ U V))
                 ( Σ U V , id-equiv))))))) ∘e

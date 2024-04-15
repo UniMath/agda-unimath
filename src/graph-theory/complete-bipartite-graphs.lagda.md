@@ -27,7 +27,7 @@ open import univalent-combinatorics.finite-types
 
 Consider two [finite sets](univalent-combinatorics.finite-types.md) `X` and `Y`.
 The
-{{#concept "complete bipartite graph" Agda=complete-bipartite-Undirected-Graph-𝔽 WDID=Q913598 WD="Complete bipartite graph"}}
+{{#concept "complete bipartite graph" Agda=complete-bipartite-Undirected-Graph-𝔽 WDID=Q913598 WD="complete bipartite graph"}}
 on `X` and `Y` is the [undirected finite graph](graph-theory.finite-graphs.md)
 consisting of:
 
@@ -53,7 +53,7 @@ module _
   where
 
   vertex-finite-type-complete-bipartite-Undirected-Graph-𝔽 : 𝔽 (l1 ⊔ l2)
-  vertex-finite-type-complete-bipartite-Undirected-Graph-𝔽 = coprod-𝔽 X Y
+  vertex-finite-type-complete-bipartite-Undirected-Graph-𝔽 = coproduct-𝔽 X Y
 
   vertex-complete-bipartite-Undirected-Graph-𝔽 : UU (l1 ⊔ l2)
   vertex-complete-bipartite-Undirected-Graph-𝔽 =
@@ -67,19 +67,19 @@ module _
   edge-finite-type-complete-bipartite-Undirected-Graph-𝔽 :
     unordered-pair-vertices-complete-bipartite-Undirected-Graph-𝔽 → 𝔽 (l1 ⊔ l2)
   edge-finite-type-complete-bipartite-Undirected-Graph-𝔽 p =
-    prod-𝔽
+    product-𝔽
       ( Σ-𝔽 X
         ( λ x →
           fiber-𝔽
             ( finite-type-2-Element-Type (pr1 p))
-            ( coprod-𝔽 X Y)
+            ( coproduct-𝔽 X Y)
             ( element-unordered-pair p)
             ( inl x)))
       ( Σ-𝔽 Y
         ( λ y →
           fiber-𝔽
             ( finite-type-2-Element-Type (pr1 p))
-            ( coprod-𝔽 X Y)
+            ( coproduct-𝔽 X Y)
             ( element-unordered-pair p)
             ( inr y)))
 

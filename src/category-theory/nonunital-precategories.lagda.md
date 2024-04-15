@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
@@ -24,10 +25,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **nonunital precategory** is a [precategory](category-theory.precategories.md)
-that may not have identity maps. In other words, it is an associative
+A {{#concept "nonunital precategory" Agda=Nonunital-Precategory}} is a
+[precategory](category-theory.precategories.md) that may not have identity
+morphisms. In other words, it is an associative
 [composition operation on binary families of sets](category-theory.composition-operations-on-binary-families-of-sets.md).
-Such an object may also be called a **semiprecategory**.
+Such a structure may also be referred to as a _semiprecategory_.
+
+Perhaps surprisingly, there is [at most one](foundation.subterminal-types.md)
+way to equip nonunital precategories with identity morphisms, so precategories
+form a [subtype](foundation-core.subtypes.md) of nonunital precategories.
 
 ## Definition
 
@@ -94,15 +100,15 @@ module _
       ( hom-set-Nonunital-Precategory)
       ( associative-composition-operation-Nonunital-Precategory)
 
-  inv-associative-comp-hom-Nonunital-Precategory :
+  involutive-eq-associative-comp-hom-Nonunital-Precategory :
     {x y z w : obj-Nonunital-Precategory}
     (h : hom-Nonunital-Precategory z w)
     (g : hom-Nonunital-Precategory y z)
     (f : hom-Nonunital-Precategory x y) →
-    comp-hom-Nonunital-Precategory h (comp-hom-Nonunital-Precategory g f) ＝
-    comp-hom-Nonunital-Precategory (comp-hom-Nonunital-Precategory h g) f
-  inv-associative-comp-hom-Nonunital-Precategory =
-    inv-witness-associative-composition-operation-binary-family-Set
+    comp-hom-Nonunital-Precategory (comp-hom-Nonunital-Precategory h g) f ＝ⁱ
+    comp-hom-Nonunital-Precategory h (comp-hom-Nonunital-Precategory g f)
+  involutive-eq-associative-comp-hom-Nonunital-Precategory =
+    involutive-eq-associative-composition-operation-binary-family-Set
       ( hom-set-Nonunital-Precategory)
       ( associative-composition-operation-Nonunital-Precategory)
 ```
@@ -196,7 +202,7 @@ module _
 
 ## Properties
 
-### If the objects of a nonunital precategory are `k`-truncated for non-negative `k`, the total hom-type is `k`-truncated
+### If the objects of a nonunital precategory are `k`-truncated for nonnegative `k`, the total hom-type is `k`-truncated
 
 ```agda
 module _

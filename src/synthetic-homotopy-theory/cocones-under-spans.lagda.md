@@ -9,23 +9,23 @@ module synthetic-homotopy-theory.cocones-under-spans where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.morphisms-arrows
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -200,8 +200,8 @@ cocone-map-id :
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   Id (cocone-map f g c id) c
 cocone-map-id f g c =
-  eq-pair-eq-pr2
-    ( eq-pair-eq-pr2 (eq-htpy (ap-id ∘ coherence-square-cocone f g c)))
+  eq-pair-eq-fiber
+    ( eq-pair-eq-fiber (eq-htpy (ap-id ∘ coherence-square-cocone f g c)))
 
 cocone-map-comp :
   {l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -209,7 +209,7 @@ cocone-map-comp :
   {Y : UU l5} (h : X → Y) {Z : UU l6} (k : Y → Z) →
   cocone-map f g c (k ∘ h) ＝ cocone-map f g (cocone-map f g c h) k
 cocone-map-comp f g (i , j , H) h k =
-  eq-pair-eq-pr2 (eq-pair-eq-pr2 (eq-htpy (ap-comp k h ∘ H)))
+  eq-pair-eq-fiber (eq-pair-eq-fiber (eq-htpy (ap-comp k h ∘ H)))
 ```
 
 ### Horizontal composition of cocones

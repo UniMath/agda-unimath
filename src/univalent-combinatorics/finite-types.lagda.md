@@ -25,6 +25,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -242,7 +243,7 @@ pr2 unit-𝔽 = is-finite-unit
 
 unit-UU-Fin : UU-Fin lzero 1
 pr1 unit-UU-Fin = unit
-pr2 unit-UU-Fin = unit-trunc-Prop (left-unit-law-coprod unit)
+pr2 unit-UU-Fin = unit-trunc-Prop (left-unit-law-coproduct unit)
 ```
 
 ### Contractible types are finite
@@ -510,7 +511,7 @@ compute-total-UU-Fin : {l : Level} → Σ ℕ (UU-Fin l) ≃ 𝔽 l
 compute-total-UU-Fin =
   ( equiv-tot
     ( λ X →
-      equiv-prop
+      equiv-iff-is-prop
         ( is-prop-has-finite-cardinality)
         ( is-prop-is-finite X)
         ( is-finite-has-finite-cardinality)
@@ -548,7 +549,7 @@ is-inhabited-type-UU-Fin-succ-ℕ n A =
 is-decidable-type-trunc-Prop-is-finite :
   {l1 : Level} {A : UU l1} → is-finite A → is-decidable (type-trunc-Prop A)
 is-decidable-type-trunc-Prop-is-finite H =
-  map-coprod
+  map-coproduct
     ( id)
     ( map-universal-property-trunc-Prop empty-Prop)
       ( is-inhabited-or-empty-is-finite H)
@@ -697,7 +698,7 @@ abstract
         ( has-finite-cardinality-is-finite H)
         ( pair n Q))
   pr2 (equiv-has-cardinality-id-number-of-elements-is-finite X H n) =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-type-trunc-Prop)
       ( is-set-ℕ (number-of-elements-is-finite H) n)
       ( λ p →

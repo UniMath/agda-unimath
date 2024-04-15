@@ -38,7 +38,7 @@ module _
     (x : type-Large-Preorder P l1) (y : type-Large-Preorder P l2) →
     Prop (β l1 l2 ⊔ β l2 l1)
   sim-prop-Large-Preorder x y =
-    prod-Prop
+    product-Prop
       ( leq-prop-Large-Preorder P x y)
       ( leq-prop-Large-Preorder P y x)
 

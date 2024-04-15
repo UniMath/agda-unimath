@@ -282,7 +282,7 @@ module _
     is-root-Directed-Tree T (node-hom-Directed-Tree S T f x) →
     is-root-Directed-Tree S x
   is-root-is-root-node-hom-Directed-Tree x H =
-    map-right-unit-law-coprod-is-empty
+    map-right-unit-law-coproduct-is-empty
       ( is-root-Directed-Tree S x)
       ( Σ (node-Directed-Tree S) (edge-Directed-Tree S x))
       ( λ (y , e) →

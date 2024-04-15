@@ -18,7 +18,6 @@ open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.large-binary-relations
@@ -103,9 +102,9 @@ module _
 
   is-subgroup-prop-subset-Group : Prop (l1 ⊔ l2)
   is-subgroup-prop-subset-Group =
-    prod-Prop
+    product-Prop
       ( contains-unit-prop-subset-Group)
-      ( prod-Prop
+      ( product-Prop
         ( is-closed-under-multiplication-prop-subset-Group)
         ( is-closed-under-inverses-prop-subset-Group))
 
@@ -672,11 +671,7 @@ module _
 
   contains-unit-subgroup-Prop :
     contains-unit-subset-Group G subset-subgroup-Prop
-  contains-unit-subgroup-Prop =
-    inl-disjunction-Prop
-      ( Id-Prop (set-Group G) (unit-Group G) (unit-Group G))
-      ( P)
-      ( refl)
+  contains-unit-subgroup-Prop = inl-disjunction refl
 
   is-closed-under-multiplication-subgroup-Prop' :
     (x y : type-Group G) →

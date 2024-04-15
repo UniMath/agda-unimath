@@ -112,7 +112,7 @@ right-unit-law-cauchy-composition-species-types {l1} F A =
               ( cotype-Relaxed-Σ-Decomposition D y)) ×
             F ( indexing-type-Relaxed-Σ-Decomposition D))
         ( id-equiv)
-        ( λ _ → commutative-prod))))
+        ( λ _ → commutative-product))))
 ```
 
 ### Associativity of composition of species
@@ -139,7 +139,7 @@ module _
       ( _)
       ( id-equiv)
       ( λ D1 →
-        ( ( inv-equiv right-distributive-prod-Σ) ∘e
+        ( ( inv-equiv right-distributive-product-Σ) ∘e
         ( ( equiv-Σ
             ( _)
             ( id-equiv)
@@ -154,9 +154,9 @@ module _
             ( _)
             ( id-equiv)
             ( λ D2 →
-              ( equiv-prod
+              ( equiv-product
                 ( id-equiv)
-                ( ( equiv-prod
+                ( ( equiv-product
                     ( id-equiv)
                     ( ( inv-equiv
                         ( equiv-precomp-Π
@@ -185,11 +185,11 @@ module _
           ( ( equiv-Σ
               ( _)
               ( id-equiv)
-              ( λ D → left-distributive-prod-Σ)) ∘e
+              ( λ D → left-distributive-product-Σ)) ∘e
             ( ( equiv-Σ
                 ( _)
                 ( id-equiv)
-                ( λ D → equiv-prod id-equiv distributive-Π-Σ)))))))
+                ( λ D → equiv-product id-equiv distributive-Π-Σ)))))))
 
   htpy-associative-cauchy-composition-species-types :
     cauchy-composition-species-types

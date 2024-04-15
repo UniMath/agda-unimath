@@ -15,6 +15,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
@@ -209,12 +210,9 @@ module _
       ( comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f))
       ( refl-htpy)
 
-  inv-associative-comp-hom-Preorder :
-    comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f) ＝
-    comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f
-  inv-associative-comp-hom-Preorder =
-    eq-htpy-hom-Preorder P S
-      ( comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f))
-      ( comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f)
-      ( refl-htpy)
+  involutive-eq-associative-comp-hom-Preorder :
+    comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f ＝ⁱ
+    comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f)
+  involutive-eq-associative-comp-hom-Preorder =
+    involutive-eq-eq associative-comp-hom-Preorder
 ```

@@ -201,7 +201,7 @@ module _
     (g , p , q) (g' , p' , q') =
     eq-type-subtype
       ( λ g →
-        prod-Prop
+        product-Prop
           ( Id-Prop
             ( hom-set-Precategory C y y)
             ( comp-hom-Precategory C f g)
@@ -248,7 +248,7 @@ module _
 ### The type of isomorphisms form a set
 
 The type of isomorphisms between objects `x y : A` is a
-[subtype](foundation-core.subtypes.md) of the [foundation-core.sets.md)
+[subtype](foundation-core.subtypes.md) of the [set](foundation-core.sets.md)
 `hom x y` since being an isomorphism is a proposition.
 
 ```agda

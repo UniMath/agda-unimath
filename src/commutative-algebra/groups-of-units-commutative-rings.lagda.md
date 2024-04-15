@@ -151,14 +151,14 @@ module _
       ( commutative-mul-Commutative-Ring A (pr1 x) (pr1 y))
 
   is-group-group-of-units-Commutative-Ring' :
-    is-group'
+    is-group-is-unital-Semigroup
       ( semigroup-group-of-units-Commutative-Ring)
       ( is-unital-group-of-units-Commutative-Ring)
   is-group-group-of-units-Commutative-Ring' =
     is-group-group-of-units-Ring' (ring-Commutative-Ring A)
 
   is-group-group-of-units-Commutative-Ring :
-    is-group semigroup-group-of-units-Commutative-Ring
+    is-group-Semigroup semigroup-group-of-units-Commutative-Ring
   is-group-group-of-units-Commutative-Ring =
     is-group-group-of-units-Ring (ring-Commutative-Ring A)
 

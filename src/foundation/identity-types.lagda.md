@@ -14,11 +14,11 @@ open import foundation.binary-equivalences
 open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 ```
@@ -73,30 +73,33 @@ module _
   pr1 (equiv-inv x y) = inv
   pr2 (equiv-inv x y) = is-equiv-inv x y
 
-  inv-concat : {x y : A} (p : x ＝ y) (z : A) → x ＝ z → y ＝ z
-  inv-concat p = concat (inv p)
-
-  is-retraction-inv-concat :
-    {x y : A} (p : x ＝ y) (z : A) → (inv-concat p z ∘ concat p z) ~ id
-  is-retraction-inv-concat refl z q = refl
-
-  is-section-inv-concat :
-    {x y : A} (p : x ＝ y) (z : A) → (concat p z ∘ inv-concat p z) ~ id
-  is-section-inv-concat refl z refl = refl
-
   abstract
     is-equiv-concat :
       {x y : A} (p : x ＝ y) (z : A) → is-equiv (concat p z)
     is-equiv-concat p z =
       is-equiv-is-invertible
         ( inv-concat p z)
-        ( is-section-inv-concat p z)
-        ( is-retraction-inv-concat p z)
+        ( is-section-inv-concat p)
+        ( is-retraction-inv-concat p)
+
+  abstract
+    is-equiv-inv-concat :
+      {x y : A} (p : x ＝ y) (z : A) → is-equiv (inv-concat p z)
+    is-equiv-inv-concat p z =
+      is-equiv-is-invertible
+        ( concat p z)
+        ( is-retraction-inv-concat p)
+        ( is-section-inv-concat p)
 
   equiv-concat :
     {x y : A} (p : x ＝ y) (z : A) → (y ＝ z) ≃ (x ＝ z)
   pr1 (equiv-concat p z) = concat p z
   pr2 (equiv-concat p z) = is-equiv-concat p z
+
+  equiv-inv-concat :
+    {x y : A} (p : x ＝ y) (z : A) → (x ＝ z) ≃ (y ＝ z)
+  pr1 (equiv-inv-concat p z) = inv-concat p z
+  pr2 (equiv-inv-concat p z) = is-equiv-inv-concat p z
 
   map-equiv-concat-equiv :
     {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) → (x' ＝ x)
@@ -126,30 +129,33 @@ module _
   pr1 equiv-concat-equiv = map-equiv-concat-equiv
   pr2 equiv-concat-equiv = is-equiv-map-equiv-concat-equiv
 
-  inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
-  inv-concat' x q = concat' x (inv q)
-
-  is-retraction-inv-concat' :
-    (x : A) {y z : A} (q : y ＝ z) → (inv-concat' x q ∘ concat' x q) ~ id
-  is-retraction-inv-concat' x refl refl = refl
-
-  is-section-inv-concat' :
-    (x : A) {y z : A} (q : y ＝ z) → (concat' x q ∘ inv-concat' x q) ~ id
-  is-section-inv-concat' x refl refl = refl
-
   abstract
     is-equiv-concat' :
       (x : A) {y z : A} (q : y ＝ z) → is-equiv (concat' x q)
     is-equiv-concat' x q =
       is-equiv-is-invertible
         ( inv-concat' x q)
-        ( is-section-inv-concat' x q)
-        ( is-retraction-inv-concat' x q)
+        ( is-section-inv-concat' q)
+        ( is-retraction-inv-concat' q)
+
+  abstract
+    is-equiv-inv-concat' :
+      (x : A) {y z : A} (q : y ＝ z) → is-equiv (inv-concat' x q)
+    is-equiv-inv-concat' x q =
+      is-equiv-is-invertible
+        ( concat' x q)
+        ( is-retraction-inv-concat' q)
+        ( is-section-inv-concat' q)
 
   equiv-concat' :
     (x : A) {y z : A} (q : y ＝ z) → (x ＝ y) ≃ (x ＝ z)
   pr1 (equiv-concat' x q) = concat' x q
   pr2 (equiv-concat' x q) = is-equiv-concat' x q
+
+  equiv-inv-concat' :
+    (x : A) {y z : A} (q : y ＝ z) → (x ＝ z) ≃ (x ＝ y)
+  pr1 (equiv-inv-concat' x q) = inv-concat' x q
+  pr2 (equiv-inv-concat' x q) = is-equiv-inv-concat' x q
 
 is-binary-equiv-concat :
   {l : Level} {A : UU l} {x y z : A} →
@@ -213,7 +219,25 @@ module _
         ( ( ap (concat' _ s) (right-inv right-unit))))
 ```
 
-## Transposing inverses is an equivalence
+### Reassociating one side of a higher identification is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u : A}
+  where
+
+  equiv-concat-assoc :
+    (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) (s : x ＝ u) →
+    ((p ∙ q) ∙ r ＝ s) ≃ (p ∙ (q ∙ r) ＝ s)
+  equiv-concat-assoc p q r = equiv-concat (inv (assoc p q r))
+
+  equiv-concat-assoc' :
+    (s : x ＝ u) (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) →
+    (s ＝ (p ∙ q) ∙ r) ≃ (s ＝ p ∙ (q ∙ r))
+  equiv-concat-assoc' s p q r = equiv-concat' s (assoc p q r)
+```
+
+### Transposing inverses is an equivalence
 
 ```agda
 module _

@@ -22,6 +22,7 @@ open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
@@ -75,6 +76,14 @@ univalent-type-family l2 A = Σ (A → UU l2) is-univalent
 ```
 
 ## Properties
+
+### The univalence axiom states that the identity family `id : 𝒰 → 𝒰` is univalent
+
+```agda
+is-univalent-UU :
+  (l : Level) → is-univalent (id {A = UU l})
+is-univalent-UU l = univalence
+```
 
 ### Assuming the univalence axiom, type families are univalent if and only if they are embeddings as maps
 

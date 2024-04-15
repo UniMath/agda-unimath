@@ -189,7 +189,7 @@ extensionality-partition-𝔽 X P =
       ( extensionality-fam-𝔽 (finite-block-partition-𝔽 X P))
       ( λ α →
         ( ( extensionality-equiv (conversion-partition-𝔽 X P) (pr2 α)) ∘e
-          ( left-unit-law-prod-is-contr
+          ( left-unit-law-product-is-contr
             ( is-prop-Π
               ( λ _ → is-prop-type-trunc-Prop)
               ( is-inhabited-block-partition-𝔽 X P)

@@ -81,7 +81,7 @@ pr2 equiv-ℕ =
 
 ```agda
 succ-ℕ+ℕ : ℕ + ℕ → ℕ + ℕ
-succ-ℕ+ℕ = map-coprod succ-ℕ succ-ℕ
+succ-ℕ+ℕ = map-coproduct succ-ℕ succ-ℕ
 
 map-ℕ+ℕ-to-ℕ : ℕ + ℕ → ℕ
 map-ℕ+ℕ-to-ℕ (inl x) = 2 *ℕ x
@@ -162,7 +162,7 @@ equiv-iterated-coproduct-ℕ :
 equiv-iterated-coproduct-ℕ zero-ℕ = id-equiv
 equiv-iterated-coproduct-ℕ (succ-ℕ n) =
   ( ℕ+ℕ≃ℕ) ∘e
-    ( equiv-coprod id-equiv (equiv-iterated-coproduct-ℕ n))
+    ( equiv-coproduct id-equiv (equiv-iterated-coproduct-ℕ n))
 ```
 
 ### The product `ℕ × ℕ` is equivalent to `ℕ`
@@ -186,39 +186,39 @@ equiv-iterated-product-ℕ :
 equiv-iterated-product-ℕ zero-ℕ = id-equiv
 equiv-iterated-product-ℕ (succ-ℕ n) =
   ( ℕ×ℕ≃ℕ) ∘e
-    ( equiv-prod id-equiv (equiv-iterated-product-ℕ n))
+    ( equiv-product id-equiv (equiv-iterated-product-ℕ n))
 ```
 
 ### The coproduct `(Fin n) + ℕ` is equivalent to `N` for any standard finite `Fin n`
 
 ```agda
-equiv-coprod-Fin-ℕ : (n : ℕ) → ((Fin n) + ℕ) ≃ ℕ
-equiv-coprod-Fin-ℕ zero-ℕ = left-unit-law-coprod ℕ
-equiv-coprod-Fin-ℕ (succ-ℕ n) =
-  ( equiv-coprod-Fin-ℕ n) ∘e
-    ( equiv-coprod id-equiv (inv-equiv equiv-ℕ) ∘e
-      ( associative-coprod))
+equiv-coproduct-Fin-ℕ : (n : ℕ) → ((Fin n) + ℕ) ≃ ℕ
+equiv-coproduct-Fin-ℕ zero-ℕ = left-unit-law-coproduct ℕ
+equiv-coproduct-Fin-ℕ (succ-ℕ n) =
+  ( equiv-coproduct-Fin-ℕ n) ∘e
+    ( equiv-coproduct id-equiv (inv-equiv equiv-ℕ) ∘e
+      ( associative-coproduct))
 ```
 
 ### The product `(Fin n) × ℕ` is equivalent to `N` for any standard finite `Fin n` where n is nonzero
 
 ```agda
-equiv-prod-Fin-ℕ : (n : ℕ) → ((Fin (succ-ℕ n)) × ℕ) ≃ ℕ
-equiv-prod-Fin-ℕ zero-ℕ =
-  ( left-unit-law-coprod ℕ) ∘e
-    ( ( equiv-coprod (left-absorption-prod ℕ) left-unit-law-prod) ∘e
-      ( right-distributive-prod-coprod empty unit ℕ))
-equiv-prod-Fin-ℕ (succ-ℕ n) =
+equiv-product-Fin-ℕ : (n : ℕ) → ((Fin (succ-ℕ n)) × ℕ) ≃ ℕ
+equiv-product-Fin-ℕ zero-ℕ =
+  ( left-unit-law-coproduct ℕ) ∘e
+    ( ( equiv-coproduct (left-absorption-product ℕ) left-unit-law-product) ∘e
+      ( right-distributive-product-coproduct empty unit ℕ))
+equiv-product-Fin-ℕ (succ-ℕ n) =
   ( ℕ+ℕ≃ℕ) ∘e
-    ( ( equiv-coprod (equiv-prod-Fin-ℕ n) left-unit-law-prod) ∘e
-      ( right-distributive-prod-coprod (Fin (succ-ℕ n)) unit ℕ))
+    ( ( equiv-coproduct (equiv-product-Fin-ℕ n) left-unit-law-product) ∘e
+      ( right-distributive-product-coproduct (Fin (succ-ℕ n)) unit ℕ))
 ```
 
 ### The integers `ℤ` is equivalent to `ℕ`
 
 ```agda
 ℤ≃ℕ : ℤ ≃ ℕ
-ℤ≃ℕ = (ℕ+ℕ≃ℕ) ∘e (equiv-coprod id-equiv (inv-equiv equiv-ℕ))
+ℤ≃ℕ = (ℕ+ℕ≃ℕ) ∘e (equiv-coproduct id-equiv (inv-equiv equiv-ℕ))
 
 map-ℕ-to-ℤ : ℕ → ℤ
 map-ℕ-to-ℤ = map-inv-is-equiv (pr2 ℤ≃ℕ)

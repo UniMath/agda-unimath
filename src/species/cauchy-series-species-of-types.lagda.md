@@ -66,7 +66,7 @@ module _
   equiv-cauchy-series-equiv-species-types :
     cauchy-series-species-types S X ≃ cauchy-series-species-types T X
   equiv-cauchy-series-equiv-species-types =
-    equiv-tot λ X → equiv-prod (f X) id-equiv
+    equiv-tot λ X → equiv-product (f X) id-equiv
 ```
 
 ### Cauchy series of types are equivalence invariant
@@ -83,5 +83,5 @@ module _
   equiv-cauchy-series-species-types :
     cauchy-series-species-types S X ≃ cauchy-series-species-types S Y
   equiv-cauchy-series-species-types =
-    equiv-tot (λ F → equiv-prod id-equiv (equiv-postcomp F e))
+    equiv-tot (λ F → equiv-product id-equiv (equiv-postcomp F e))
 ```

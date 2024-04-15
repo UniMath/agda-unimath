@@ -111,12 +111,13 @@ module _
       ( subtype-core-Monoid)
       ( is-right-inverse-inv-is-invertible-element-Monoid M (pr2 x))
 
-  is-group-core-Monoid' : is-group' semigroup-core-Monoid is-unital-core-Monoid
+  is-group-core-Monoid' :
+    is-group-is-unital-Semigroup semigroup-core-Monoid is-unital-core-Monoid
   pr1 is-group-core-Monoid' = inv-core-Monoid
   pr1 (pr2 is-group-core-Monoid') = left-inverse-law-mul-core-Monoid
   pr2 (pr2 is-group-core-Monoid') = right-inverse-law-mul-core-Monoid
 
-  is-group-core-Monoid : is-group semigroup-core-Monoid
+  is-group-core-Monoid : is-group-Semigroup semigroup-core-Monoid
   pr1 is-group-core-Monoid = is-unital-core-Monoid
   pr2 is-group-core-Monoid = is-group-core-Monoid'
 

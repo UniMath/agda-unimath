@@ -8,7 +8,6 @@ module category-theory.representing-arrow-category where
 
 ```agda
 open import category-theory.categories
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
@@ -16,6 +15,7 @@ open import foundation.booleans
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -77,30 +77,6 @@ associative-comp-hom-representing-arrow-Category
   refl
 associative-comp-hom-representing-arrow-Category {false} h g f = refl
 
-inv-associative-comp-hom-representing-arrow-Category :
-  {x y z w : obj-representing-arrow-Category} →
-  (h : hom-representing-arrow-Category z w)
-  (g : hom-representing-arrow-Category y z)
-  (f : hom-representing-arrow-Category x y) →
-  ( comp-hom-representing-arrow-Category
-    { x} h (comp-hom-representing-arrow-Category {x} g f)) ＝
-  ( comp-hom-representing-arrow-Category
-    { x} (comp-hom-representing-arrow-Category {y} h g) f)
-inv-associative-comp-hom-representing-arrow-Category
-  { true} {true} {true} {true} h g f =
-  refl
-inv-associative-comp-hom-representing-arrow-Category {false} h g f = refl
-
-associative-composition-operation-representing-arrow-Category :
-  associative-composition-operation-binary-family-Set
-    ( hom-set-representing-arrow-Category)
-pr1 associative-composition-operation-representing-arrow-Category {x} =
-  comp-hom-representing-arrow-Category {x}
-pr1 (pr2 associative-composition-operation-representing-arrow-Category h g f) =
-  associative-comp-hom-representing-arrow-Category h g f
-pr2 (pr2 associative-composition-operation-representing-arrow-Category h g f) =
-  inv-associative-comp-hom-representing-arrow-Category h g f
-
 id-hom-representing-arrow-Category :
   {x : obj-representing-arrow-Category} → hom-representing-arrow-Category x x
 id-hom-representing-arrow-Category {true} = star
@@ -124,24 +100,17 @@ right-unit-law-comp-hom-representing-arrow-Category :
 right-unit-law-comp-hom-representing-arrow-Category {true} {true} f = refl
 right-unit-law-comp-hom-representing-arrow-Category {false} f = refl
 
-is-unital-composition-operation-representing-arrow-Category :
-  is-unital-composition-operation-binary-family-Set
+representing-arrow-Precategory : Precategory lzero lzero
+representing-arrow-Precategory =
+  make-Precategory
+    ( obj-representing-arrow-Category)
     ( hom-set-representing-arrow-Category)
     ( λ {x} {y} {z} → comp-hom-representing-arrow-Category {x} {y} {z})
-pr1 is-unital-composition-operation-representing-arrow-Category x =
-  id-hom-representing-arrow-Category {x}
-pr1 (pr2 is-unital-composition-operation-representing-arrow-Category) =
-  left-unit-law-comp-hom-representing-arrow-Category
-pr2 (pr2 is-unital-composition-operation-representing-arrow-Category) =
-  right-unit-law-comp-hom-representing-arrow-Category
-
-representing-arrow-Precategory : Precategory lzero lzero
-pr1 representing-arrow-Precategory = obj-representing-arrow-Category
-pr1 (pr2 representing-arrow-Precategory) = hom-set-representing-arrow-Category
-pr1 (pr2 (pr2 representing-arrow-Precategory)) =
-  associative-composition-operation-representing-arrow-Category
-pr2 (pr2 (pr2 representing-arrow-Precategory)) =
-  is-unital-composition-operation-representing-arrow-Category
+    ( λ x → id-hom-representing-arrow-Category {x})
+    ( λ {x} {y} {z} {w} →
+      associative-comp-hom-representing-arrow-Category {x} {y} {z} {w})
+    ( λ {x} {y} → left-unit-law-comp-hom-representing-arrow-Category {x} {y})
+    ( λ {x} {y} → right-unit-law-comp-hom-representing-arrow-Category {x} {y})
 ```
 
 ### The representing arrow category
@@ -150,7 +119,7 @@ pr2 (pr2 (pr2 representing-arrow-Precategory)) =
 is-category-representing-arrow-Category :
   is-category-Precategory representing-arrow-Precategory
 is-category-representing-arrow-Category true true =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
     ( is-set-bool true true)
     ( is-prop-type-subtype
       ( is-iso-prop-Precategory representing-arrow-Precategory {true} {true})
@@ -165,7 +134,7 @@ is-category-representing-arrow-Category false true =
     ( iso-eq-Precategory representing-arrow-Precategory false true)
     ( hom-inv-iso-Precategory representing-arrow-Precategory)
 is-category-representing-arrow-Category false false =
-  is-equiv-is-prop
+  is-equiv-has-converse-is-prop
     ( is-set-bool false false)
     ( is-prop-type-subtype
       ( is-iso-prop-Precategory representing-arrow-Precategory {false} {false})

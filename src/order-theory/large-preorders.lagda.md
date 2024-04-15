@@ -14,6 +14,7 @@ open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import order-theory.preorders
@@ -40,7 +41,7 @@ record
     make-Large-Preorder
   field
     type-Large-Preorder : (l : Level) → UU (α l)
-    leq-prop-Large-Preorder : Large-Relation-Prop α β type-Large-Preorder
+    leq-prop-Large-Preorder : Large-Relation-Prop β type-Large-Preorder
     refl-leq-Large-Preorder :
       is-reflexive-Large-Relation-Prop
         ( type-Large-Preorder)
@@ -56,16 +57,16 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (X : Large-Preorder α β)
   where
 
-  leq-Large-Preorder : Large-Relation α β (type-Large-Preorder X)
+  leq-Large-Preorder : Large-Relation β (type-Large-Preorder X)
   leq-Large-Preorder =
-    type-Large-Relation-Prop
+    large-relation-Large-Relation-Prop
       ( type-Large-Preorder X)
       ( leq-prop-Large-Preorder X)
 
   is-prop-leq-Large-Preorder :
     is-prop-Large-Relation (type-Large-Preorder X) (leq-Large-Preorder)
   is-prop-leq-Large-Preorder =
-    is-prop-type-Large-Relation-Prop
+    is-prop-large-relation-Large-Relation-Prop
       ( type-Large-Preorder X)
       ( leq-prop-Large-Preorder X)
 
@@ -142,12 +143,10 @@ module _
     transitive-leq-Large-Preorder P x y z
   id-hom-Large-Precategory large-precategory-Large-Preorder {X = x} =
     refl-leq-Large-Preorder P x
-  associative-comp-hom-Large-Precategory large-precategory-Large-Preorder
+  involutive-eq-associative-comp-hom-Large-Precategory
+    large-precategory-Large-Preorder
     {X = x} {W = w} h g f =
-    eq-is-prop (is-prop-leq-Large-Preorder P x w)
-  inv-associative-comp-hom-Large-Precategory large-precategory-Large-Preorder
-    {X = x} {W = w} h g f =
-    eq-is-prop (is-prop-leq-Large-Preorder P x w)
+    involutive-eq-eq (eq-is-prop (is-prop-leq-Large-Preorder P x w))
   left-unit-law-comp-hom-Large-Precategory large-precategory-Large-Preorder
     {X = x} {y} f =
     eq-is-prop (is-prop-leq-Large-Preorder P x y)

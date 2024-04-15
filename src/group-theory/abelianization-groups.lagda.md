@@ -24,7 +24,7 @@ open import foundation.identity-types
 open import foundation.set-quotients
 open import foundation.sets
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import group-theory.abelian-groups
 open import group-theory.category-of-abelian-groups

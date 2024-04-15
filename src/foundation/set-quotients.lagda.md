@@ -13,6 +13,7 @@ open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings
 open import foundation.equivalence-classes
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.reflecting-maps-equivalence-relations
@@ -23,16 +24,15 @@ open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalence-relations
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -264,7 +264,7 @@ module _
     ((y : set-quotient R) → type-Prop (P y)) ≃
     ((x : A) → type-Prop (P (quotient-map R x)))
   equiv-induction-set-quotient =
-    equiv-dependent-universal-property-surj-is-surjective
+    equiv-dependent-universal-property-surjection-is-surjective
       ( quotient-map R)
       ( is-surjective-quotient-map R)
 

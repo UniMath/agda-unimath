@@ -34,6 +34,7 @@ open import group-theory.semigroups
 open import lists.concatenation-lists
 open import lists.lists
 
+open import structured-types.h-spaces
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
 ```
@@ -59,9 +60,9 @@ an inverse operation `x ↦ x⁻¹` satisfying the group laws
 ### The condition that a semigroup is a group
 
 ```agda
-is-group' :
+is-group-is-unital-Semigroup :
   {l : Level} (G : Semigroup l) → is-unital-Semigroup G → UU l
-is-group' G is-unital-Semigroup-G =
+is-group-is-unital-Semigroup G is-unital-Semigroup-G =
   Σ ( type-Semigroup G → type-Semigroup G)
     ( λ i →
       ( (x : type-Semigroup G) →
@@ -69,10 +70,10 @@ is-group' G is-unital-Semigroup-G =
       ( (x : type-Semigroup G) →
         Id (mul-Semigroup G x (i x)) (pr1 is-unital-Semigroup-G)))
 
-is-group :
+is-group-Semigroup :
   {l : Level} (G : Semigroup l) → UU l
-is-group G =
-  Σ (is-unital-Semigroup G) (is-group' G)
+is-group-Semigroup G =
+  Σ (is-unital-Semigroup G) (is-group-is-unital-Semigroup G)
 ```
 
 ### The type of groups
@@ -80,7 +81,7 @@ is-group G =
 ```agda
 Group :
   (l : Level) → UU (lsuc l)
-Group l = Σ (Semigroup l) is-group
+Group l = Σ (Semigroup l) is-group-Semigroup
 
 module _
   {l : Level} (G : Group l)
@@ -117,7 +118,7 @@ module _
     Id (mul-Group (mul-Group x y) z) (mul-Group x (mul-Group y z))
   associative-mul-Group = pr2 has-associative-mul-Group
 
-  is-group-Group : is-group semigroup-Group
+  is-group-Group : is-group-Semigroup semigroup-Group
   is-group-Group = pr2 G
 
   is-unital-Group : is-unital-Semigroup semigroup-Group
@@ -158,11 +159,24 @@ module _
     (x : type-Group) → Id (mul-Group x unit-Group) x
   right-unit-law-mul-Group = pr2 (pr2 is-unital-Group)
 
+  coherence-unit-laws-mul-Group :
+    left-unit-law-mul-Group unit-Group ＝ right-unit-law-mul-Group unit-Group
+  coherence-unit-laws-mul-Group =
+    eq-is-prop (is-set-type-Group _ _)
+
   pointed-type-Group : Pointed-Type l
   pr1 pointed-type-Group = type-Group
   pr2 pointed-type-Group = unit-Group
 
-  has-inverses-Group : is-group' semigroup-Group is-unital-Group
+  h-space-Group : H-Space l
+  pr1 h-space-Group = pointed-type-Group
+  pr1 (pr2 h-space-Group) = mul-Group
+  pr1 (pr2 (pr2 h-space-Group)) = left-unit-law-mul-Group
+  pr1 (pr2 (pr2 (pr2 h-space-Group))) = right-unit-law-mul-Group
+  pr2 (pr2 (pr2 (pr2 h-space-Group))) = coherence-unit-laws-mul-Group
+
+  has-inverses-Group :
+    is-group-is-unital-Semigroup semigroup-Group is-unital-Group
   has-inverses-Group = pr2 is-group-Group
 
   inv-Group : type-Group → type-Group
@@ -216,12 +230,13 @@ module _
 structure-group :
   {l1 : Level} → UU l1 → UU l1
 structure-group X =
-  Σ (structure-semigroup X) (λ p → is-group (compute-structure-semigroup X p))
+  Σ ( structure-semigroup X)
+    ( λ p → is-group-Semigroup (semigroup-structure-semigroup X p))
 
-compute-structure-group :
+group-structure-group :
   {l1 : Level} → (X : UU l1) → structure-group X → Group l1
-pr1 (compute-structure-group X (p , q)) = compute-structure-semigroup X p
-pr2 (compute-structure-group X (p , q)) = q
+pr1 (group-structure-group X (p , q)) = semigroup-structure-semigroup X p
+pr2 (group-structure-group X (p , q)) = q
 ```
 
 ## Properties
@@ -545,21 +560,22 @@ module _
 
 ```agda
 abstract
-  all-elements-equal-is-group :
+  all-elements-equal-is-group-Semigroup :
     {l : Level} (G : Semigroup l) (e : is-unital-Semigroup G) →
-    all-elements-equal (is-group' G e)
-  all-elements-equal-is-group
+    all-elements-equal (is-group-is-unital-Semigroup G e)
+  all-elements-equal-is-group-Semigroup
     ( pair G (pair μ associative-G))
     ( pair e (pair left-unit-G right-unit-G))
     ( pair i (pair left-inv-i right-inv-i))
     ( pair i' (pair left-inv-i' right-inv-i')) =
     eq-type-subtype
       ( λ i →
-        prod-Prop
+        product-Prop
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ (i x) x) e))
           ( Π-Prop (type-Set G) (λ x → Id-Prop G (μ x (i x)) e)))
       ( eq-htpy
-        ( λ x → equational-reasoning
+        ( λ x →
+          equational-reasoning
           i x
           ＝ μ e (i x)
             by inv (left-unit-G (i x))
@@ -573,17 +589,17 @@ abstract
             by right-unit-G (i' x)))
 
 abstract
-  is-prop-is-group :
-    {l : Level} (G : Semigroup l) → is-prop (is-group G)
-  is-prop-is-group G =
+  is-prop-is-group-Semigroup :
+    {l : Level} (G : Semigroup l) → is-prop (is-group-Semigroup G)
+  is-prop-is-group-Semigroup G =
     is-prop-Σ
       ( is-prop-is-unital-Semigroup G)
       ( λ e →
-        is-prop-all-elements-equal (all-elements-equal-is-group G e))
+        is-prop-all-elements-equal (all-elements-equal-is-group-Semigroup G e))
 
 is-group-prop-Semigroup : {l : Level} (G : Semigroup l) → Prop l
-pr1 (is-group-prop-Semigroup G) = is-group G
-pr2 (is-group-prop-Semigroup G) = is-prop-is-group G
+pr1 (is-group-prop-Semigroup G) = is-group-Semigroup G
+pr2 (is-group-prop-Semigroup G) = is-prop-is-group-Semigroup G
 ```
 
 ### Any idempotent element in a group is the unit

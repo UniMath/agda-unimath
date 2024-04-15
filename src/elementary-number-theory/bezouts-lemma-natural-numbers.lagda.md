@@ -25,7 +25,10 @@ open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
@@ -282,7 +285,7 @@ If `x = 0`, then we can simply argue in `ℤ`. Otherwise, if `[y] | [z]` in
 `x > u ≥ 0`. Therefore, there exists some integer `a ≥ 0` such that
 `ax = uy - z`, or `ax = z - uy`. In the first case, we can extract the distance
 condition we desire. In the other case, we have that `ax + uy = z`. This can be
-written as `(a + y)x + (u - x)y = z`, so that the second term is non-positive.
+written as `(a + y)x + (u - x)y = z`, so that the second term is nonpositive.
 Then, in this case, we again can extract the distance condition we desire.
 
 ```agda
@@ -311,7 +314,7 @@ is-distance-between-multiples-div-mod-ℕ :
   (x y z : ℕ) →
   div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z) → is-distance-between-multiples-ℕ x y z
 is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p) =
-  u-nonneg-case-split (decide-is-nonnegative-ℤ {u})
+  u-nonneg-case-split (decide-is-nonnegative-is-nonnegative-neg-ℤ {u})
   where
   u-nonneg-case-split :
     (is-nonnegative-ℤ u + is-nonnegative-ℤ (neg-ℤ u)) →
@@ -331,7 +334,6 @@ is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p) =
       is-injective-int-ℕ
         ( inv
           ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
-            ( int-ℕ z)
             ( is-nonnegative-int-ℕ z)
             ( tr
               ( is-nonnegative-ℤ)
@@ -339,7 +341,7 @@ is-distance-between-multiples-div-mod-ℕ zero-ℕ y z (u , p) =
               ( is-nonnegative-mul-ℤ neg (is-nonnegative-int-ℕ y))))))
 
 is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
-  uy-z-case-split (decide-is-nonnegative-ℤ
+  uy-z-case-split (decide-is-nonnegative-is-nonnegative-neg-ℤ
     { ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) +ℤ (neg-ℤ (int-ℕ z))})
   where
   a : ℤ
@@ -714,31 +716,38 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
         ＝ z by abs-int-ℕ z))
     where
     neg-a-is-nonnegative-ℤ : is-nonnegative-ℤ (neg-ℤ a)
-    neg-a-is-nonnegative-ℤ = (is-nonnegative-left-factor-mul-ℤ
-      (tr is-nonnegative-ℤ
-      (equational-reasoning
-        neg-ℤ (((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) +ℤ
-          (neg-ℤ (int-ℕ z)))
-        ＝ (neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ
-          (neg-ℤ (neg-ℤ (int-ℕ z)))
-        by (distributive-neg-add-ℤ
-          ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))
-          (neg-ℤ (int-ℕ z)))
-        ＝ (neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ
-          (int-ℕ z)
-        by ap ((neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ_)
-          (neg-neg-ℤ (int-ℕ z))
-        ＝ add-ℤ (int-ℕ z)
-          (neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)))
-        by commutative-add-ℤ
-          (neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)))
-          (int-ℕ z)
-        ＝ (neg-ℤ a) *ℤ (int-ℕ (succ-ℕ x))
-        by inv (pr2
-          (symmetric-cong-ℤ (int-ℕ (succ-ℕ x))
-            ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) (int-ℕ z)
-            (cong-div-mod-ℤ (succ-ℕ x) y z (u , p)))))
-        z-uy) (is-nonnegative-int-ℕ (succ-ℕ x)))
+    neg-a-is-nonnegative-ℤ =
+      is-nonnegative-left-factor-mul-ℤ
+        ( tr is-nonnegative-ℤ
+          ( equational-reasoning
+            ( neg-ℤ (((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) +ℤ
+              ( neg-ℤ (int-ℕ z))))
+            ＝ ( neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ
+                ( neg-ℤ (neg-ℤ (int-ℕ z)))
+              by
+                ( distributive-neg-add-ℤ
+                  ( (int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))
+                  ( neg-ℤ (int-ℕ z)))
+            ＝ ( neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ
+                ( int-ℕ z)
+              by
+                ap
+                  ( (neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y))) +ℤ_)
+                  ( neg-neg-ℤ (int-ℕ z))
+            ＝ add-ℤ
+              ( int-ℕ z)
+              ( neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)))
+              by
+                commutative-add-ℤ
+                  ( neg-ℤ ((int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)))
+                  ( int-ℕ z)
+            ＝ (neg-ℤ a) *ℤ (int-ℕ (succ-ℕ x))
+              by inv (pr2
+                ( symmetric-cong-ℤ (int-ℕ (succ-ℕ x))
+                ( (int-ℤ-Mod (succ-ℕ x) u) *ℤ (int-ℕ y)) (int-ℕ z)
+                ( cong-div-mod-ℤ (succ-ℕ x) y z (u , p)))))
+          ( z-uy))
+          ( is-nonnegative-int-ℕ (succ-ℕ x))
 ```
 
 ### The type `is-distance-between-multiples-ℕ x y z` is decidable
@@ -789,7 +798,7 @@ minimal-pos-distance-between-multiples x y = well-ordering-principle-ℕ
   (pos-distance-between-multiples x y)
   (λ z → is-decidable-function-type
     (is-decidable-neg (is-decidable-is-zero-ℕ (x +ℕ y)))
-    (is-decidable-prod (is-decidable-neg (is-decidable-is-zero-ℕ z))
+    (is-decidable-product (is-decidable-neg (is-decidable-is-zero-ℕ z))
       (is-decidable-is-distance-between-multiples-ℕ x y z)))
   (is-inhabited-pos-distance-between-multiples x y)
 
@@ -1700,13 +1709,13 @@ remainder-min-dist-succ-x-is-distance x y =
               (int-ℕ s)) (neg-ℤ one-ℤ)))
             (succ-ℕ x))
 
-remainder-min-dist-succ-x-not-is-nonzero :
+remainder-min-dist-succ-x-is-not-nonzero :
   (x y : ℕ) →
   ¬ ( is-nonzero-ℕ
       ( remainder-euclidean-division-ℕ
         ( minimal-positive-distance (succ-ℕ x) y)
         ( succ-ℕ x)))
-remainder-min-dist-succ-x-not-is-nonzero x y nonzero =
+remainder-min-dist-succ-x-is-not-nonzero x y nonzero =
   contradiction-le-ℕ
     ( remainder-euclidean-division-ℕ
       ( minimal-positive-distance (succ-ℕ x) y)
@@ -1762,8 +1771,8 @@ remainder-min-dist-succ-x-is-zero x y =
         ( remainder-euclidean-division-ℕ
           (minimal-positive-distance (succ-ℕ x) y) (succ-ℕ x))
   is-zero-case-split (inl z) = z
-  is-zero-case-split (inr nz) = ex-falso
-    (remainder-min-dist-succ-x-not-is-nonzero x y nz)
+  is-zero-case-split (inr nz) =
+    ex-falso (remainder-min-dist-succ-x-is-not-nonzero x y nz)
 
 minimal-positive-distance-div-fst :
   (x y : ℕ) → div-ℕ (minimal-positive-distance x y) x

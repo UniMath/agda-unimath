@@ -108,8 +108,8 @@ structure-semigroup :
 structure-semigroup X =
   Σ (is-set X) (λ p → has-associative-mul-Set (X , p))
 
-compute-structure-semigroup :
+semigroup-structure-semigroup :
   {l1 : Level} → (X : UU l1) → structure-semigroup X → Semigroup l1
-pr1 (compute-structure-semigroup X (s , g)) = X , s
-pr2 (compute-structure-semigroup X (s , g)) = g
+pr1 (semigroup-structure-semigroup X (s , g)) = X , s
+pr2 (semigroup-structure-semigroup X (s , g)) = g
 ```

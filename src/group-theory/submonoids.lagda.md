@@ -39,7 +39,7 @@ is-submonoid-prop-subset-Monoid :
   {l1 l2 : Level} (M : Monoid l1) (P : subset-Monoid l2 M) →
   Prop (l1 ⊔ l2)
 is-submonoid-prop-subset-Monoid M P =
-  prod-Prop
+  product-Prop
     ( contains-unit-prop-subset-Monoid M P)
     ( is-closed-under-multiplication-prop-subset-Monoid M P)
 

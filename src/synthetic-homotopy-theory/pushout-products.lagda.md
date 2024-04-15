@@ -98,12 +98,12 @@ module _
 
   domain-pushout-product : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   domain-pushout-product =
-    pushout (map-prod id g) (map-prod f id)
+    pushout (map-product id g) (map-product f id)
 
-  cocone-pushout-product : cocone (map-prod id g) (map-prod f id) (X × Y)
-  pr1 cocone-pushout-product = map-prod f id
-  pr1 (pr2 cocone-pushout-product) = map-prod id g
-  pr2 (pr2 cocone-pushout-product) = coherence-square-map-prod f g
+  cocone-pushout-product : cocone (map-product id g) (map-product f id) (X × Y)
+  pr1 cocone-pushout-product = map-product f id
+  pr1 (pr2 cocone-pushout-product) = map-product id g
+  pr2 (pr2 cocone-pushout-product) = coherence-square-map-product f g
 
   abstract
     uniqueness-pushout-product :
@@ -111,20 +111,20 @@ module _
         ( Σ ( domain-pushout-product → X × Y)
             ( λ h →
               htpy-cocone
-                ( map-prod id g)
-                ( map-prod f id)
+                ( map-product id g)
+                ( map-product f id)
                 ( cocone-map
-                  ( map-prod id g)
-                  ( map-prod f id)
-                  ( cocone-pushout (map-prod id g) (map-prod f id))
+                  ( map-product id g)
+                  ( map-product f id)
+                  ( cocone-pushout (map-product id g) (map-product f id))
                   ( h))
                 ( cocone-pushout-product)))
     uniqueness-pushout-product =
       uniqueness-map-universal-property-pushout
-        ( map-prod id g)
-        ( map-prod f id)
-        ( cocone-pushout (map-prod id g) (map-prod f id))
-        ( up-pushout (map-prod id g) (map-prod f id))
+        ( map-product id g)
+        ( map-product f id)
+        ( cocone-pushout (map-product id g) (map-product f id))
+        ( up-pushout (map-product id g) (map-product f id))
         ( cocone-pushout-product)
 
   abstract
@@ -132,25 +132,25 @@ module _
     pushout-product = pr1 (center uniqueness-pushout-product)
 
     compute-inl-pushout-product :
-      pushout-product ∘ inl-pushout (map-prod id g) (map-prod f id) ~
-      map-prod f id
+      pushout-product ∘ inl-pushout (map-product id g) (map-product f id) ~
+      map-product f id
     compute-inl-pushout-product =
       pr1 (pr2 (center uniqueness-pushout-product))
 
     compute-inr-pushout-product :
-      pushout-product ∘ inr-pushout (map-prod id g) (map-prod f id) ~
-      map-prod id g
+      pushout-product ∘ inr-pushout (map-product id g) (map-product f id) ~
+      map-product id g
     compute-inr-pushout-product =
       pr1 (pr2 (pr2 (center uniqueness-pushout-product)))
 
     compute-glue-pushout-product :
       statement-coherence-htpy-cocone
-        ( map-prod id g)
-        ( map-prod f id)
+        ( map-product id g)
+        ( map-product f id)
         ( cocone-map
-          ( map-prod id g)
-          ( map-prod f id)
-          ( cocone-pushout (map-prod id g) (map-prod f id))
+          ( map-product id g)
+          ( map-product f id)
+          ( cocone-pushout (map-product id g) (map-product f id))
           ( pushout-product))
         ( cocone-pushout-product)
         ( compute-inl-pushout-product)

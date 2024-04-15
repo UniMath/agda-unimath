@@ -177,9 +177,9 @@ module _
   where
 
   abstract
-    is-not-contractible-coprod-is-contr :
+    is-not-contractible-coproduct-is-contr :
       is-contr A → is-contr B → is-not-contractible (A + B)
-    is-not-contractible-coprod-is-contr HA HB HAB =
+    is-not-contractible-coproduct-is-contr HA HB HAB =
       neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr HAB)
 ```
 
@@ -191,30 +191,31 @@ module _
   where
 
   abstract
-    all-elements-equal-coprod :
+    all-elements-equal-coproduct :
       (P → ¬ Q) → all-elements-equal P → all-elements-equal Q →
       all-elements-equal (P + Q)
-    all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inl p') =
+    all-elements-equal-coproduct f is-prop-P is-prop-Q (inl p) (inl p') =
       ap inl (is-prop-P p p')
-    all-elements-equal-coprod f is-prop-P is-prop-Q (inl p) (inr q') =
+    all-elements-equal-coproduct f is-prop-P is-prop-Q (inl p) (inr q') =
       ex-falso (f p q')
-    all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inl p') =
+    all-elements-equal-coproduct f is-prop-P is-prop-Q (inr q) (inl p') =
       ex-falso (f p' q)
-    all-elements-equal-coprod f is-prop-P is-prop-Q (inr q) (inr q') =
+    all-elements-equal-coproduct f is-prop-P is-prop-Q (inr q) (inr q') =
       ap inr (is-prop-Q q q')
 
   abstract
-    is-prop-coprod : (P → ¬ Q) → is-prop P → is-prop Q → is-prop (P + Q)
-    is-prop-coprod f is-prop-P is-prop-Q =
+    is-prop-coproduct : (P → ¬ Q) → is-prop P → is-prop Q → is-prop (P + Q)
+    is-prop-coproduct f is-prop-P is-prop-Q =
       is-prop-all-elements-equal
-        ( all-elements-equal-coprod f
+        ( all-elements-equal-coproduct f
           ( eq-is-prop' is-prop-P)
           ( eq-is-prop' is-prop-Q))
 
-coprod-Prop :
+coproduct-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
   (type-Prop P → ¬ (type-Prop Q)) → Prop (l1 ⊔ l2)
-pr1 (coprod-Prop P Q H) = type-Prop P + type-Prop Q
-pr2 (coprod-Prop P Q H) =
-  is-prop-coprod H (is-prop-type-Prop P) (is-prop-type-Prop Q)
+pr1 (coproduct-Prop P Q H) =
+  type-Prop P + type-Prop Q
+pr2 (coproduct-Prop P Q H) =
+  is-prop-coproduct H (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```

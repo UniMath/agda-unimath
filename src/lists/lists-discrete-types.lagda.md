@@ -46,7 +46,7 @@ has-decidable-equality-list d (cons x l) (cons x' l') =
   is-decidable-iff
     ( eq-Eq-list (cons x l) (cons x' l'))
     ( Eq-eq-list (cons x l) (cons x' l'))
-    ( is-decidable-prod
+    ( is-decidable-product
       ( d x x')
       ( is-decidable-iff
         ( Eq-eq-list l l')

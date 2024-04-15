@@ -216,7 +216,7 @@ abstract
 
 ### The universal property of the integers
 
-The non-dependent universal property of the integers is a special case of the
+The nondependent universal property of the integers is a special case of the
 dependent universal property applied to constant type families.
 
 ```agda

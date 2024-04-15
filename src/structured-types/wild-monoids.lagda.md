@@ -39,7 +39,7 @@ We call such an associator **unital**. It may be described as a coherence of the
 following diagram
 
 ```text
-          map-associative-prod
+          map-associative-product
      (A × A) × A ----> A × (A × A)
              |           |
   (_*_ , id) |           | (id, _*_)

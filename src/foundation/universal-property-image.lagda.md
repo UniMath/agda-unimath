@@ -17,6 +17,7 @@ open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
@@ -32,7 +33,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.subtypes
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -104,7 +104,7 @@ abstract
     { B : UU l3} (i : B ↪ X) (q : hom-slice f (map-emb i)) →
     is-image' f i q → is-image f i q
   is-image-is-image' f i q up' C j =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-hom-slice (map-emb i) j)
       ( is-prop-hom-slice f j)
       ( up' C j)
@@ -325,7 +325,7 @@ module _
             ( map-emb i)
             ( fiber (map-emb m)))) ∘e
         ( inv-equiv
-          ( equiv-dependent-universal-property-surj-is-surjective
+          ( equiv-dependent-universal-property-surjection-is-surjective
             ( pr1 q)
             ( H)
             ( λ b →

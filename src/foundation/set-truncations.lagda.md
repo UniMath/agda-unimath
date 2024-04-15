@@ -49,21 +49,21 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-The **set truncation** of a type `A` is a map `η : A → trunc-Set A` that
-satisfies
+The {{#concept "set truncation" Agda=trunc-Set}} of a type `A` is a map
+`η : A → trunc-Set A` that satisfies
 [the universal property of set truncations](foundation.universal-property-set-truncation.md).
 
-## Definition
+## Definitions
 
 ```agda
+trunc-Set : {l : Level} → UU l → Set l
+trunc-Set = trunc zero-𝕋
+
 type-trunc-Set : {l : Level} → UU l → UU l
 type-trunc-Set = type-trunc zero-𝕋
 
 is-set-type-trunc-Set : {l : Level} {A : UU l} → is-set (type-trunc-Set A)
 is-set-type-trunc-Set = is-trunc-type-trunc
-
-trunc-Set : {l : Level} → UU l → Set l
-trunc-Set = trunc zero-𝕋
 
 unit-trunc-Set : {l : Level} {A : UU l} → A → type-trunc-Set A
 unit-trunc-Set = unit-trunc
@@ -71,7 +71,15 @@ unit-trunc-Set = unit-trunc
 is-set-truncation-trunc-Set :
   {l1 : Level} (A : UU l1) → is-set-truncation (trunc-Set A) unit-trunc-Set
 is-set-truncation-trunc-Set A = is-truncation-trunc
+
+║_║₀ : {l : Level} → UU l → UU l
+║_║₀ = type-trunc-Set
 ```
+
+**Notation.** The [box drawings double vertical](https://codepoints.net/U+2551)
+symbol `║` in the set truncation notation `║_║₀` can be inserted with
+`agda-input` using the escape sequence `\--=` and selecting the second item in
+the list.
 
 ## Properties
 
@@ -421,50 +429,50 @@ module _
   where
 
   abstract
-    distributive-trunc-coprod-Set :
+    distributive-trunc-coproduct-Set :
       is-contr
         ( Σ ( equiv-Set
               ( trunc-Set (A + B))
-              ( coprod-Set (trunc-Set A) (trunc-Set B)))
+              ( coproduct-Set (trunc-Set A) (trunc-Set B)))
             ( λ e →
               ( map-equiv e ∘ unit-trunc-Set) ~
-              ( map-coprod unit-trunc-Set unit-trunc-Set)))
-    distributive-trunc-coprod-Set =
+              ( map-coproduct unit-trunc-Set unit-trunc-Set)))
+    distributive-trunc-coproduct-Set =
       uniqueness-trunc-Set
-        ( coprod-Set (trunc-Set A) (trunc-Set B))
-        ( map-coprod unit-trunc-Set unit-trunc-Set)
+        ( coproduct-Set (trunc-Set A) (trunc-Set B))
+        ( map-coproduct unit-trunc-Set unit-trunc-Set)
         ( λ {l} C →
           is-equiv-right-factor
             ( ev-inl-inr (λ x → type-Set C))
-            ( precomp-Set (map-coprod unit-trunc-Set unit-trunc-Set) C)
-            ( universal-property-coprod (type-Set C))
+            ( precomp-Set (map-coproduct unit-trunc-Set unit-trunc-Set) C)
+            ( universal-property-coproduct (type-Set C))
             ( is-equiv-comp
-              ( map-prod
+              ( map-product
                 ( precomp-Set unit-trunc-Set C)
                 ( precomp-Set unit-trunc-Set C))
               ( ev-inl-inr (λ x → type-Set C))
-              ( universal-property-coprod (type-Set C))
-              ( is-equiv-map-prod
+              ( universal-property-coproduct (type-Set C))
+              ( is-equiv-map-product
                 ( precomp-Set unit-trunc-Set C)
                 ( precomp-Set unit-trunc-Set C)
                 ( is-set-truncation-trunc-Set A C)
                 ( is-set-truncation-trunc-Set B C))))
 
-  equiv-distributive-trunc-coprod-Set :
-    equiv-Set (trunc-Set (A + B)) (coprod-Set (trunc-Set A) (trunc-Set B))
-  equiv-distributive-trunc-coprod-Set =
-    pr1 (center distributive-trunc-coprod-Set)
+  equiv-distributive-trunc-coproduct-Set :
+    equiv-Set (trunc-Set (A + B)) (coproduct-Set (trunc-Set A) (trunc-Set B))
+  equiv-distributive-trunc-coproduct-Set =
+    pr1 (center distributive-trunc-coproduct-Set)
 
-  map-equiv-distributive-trunc-coprod-Set :
-    hom-Set (trunc-Set (A + B)) (coprod-Set (trunc-Set A) (trunc-Set B))
-  map-equiv-distributive-trunc-coprod-Set =
-    map-equiv equiv-distributive-trunc-coprod-Set
+  map-equiv-distributive-trunc-coproduct-Set :
+    hom-Set (trunc-Set (A + B)) (coproduct-Set (trunc-Set A) (trunc-Set B))
+  map-equiv-distributive-trunc-coproduct-Set =
+    map-equiv equiv-distributive-trunc-coproduct-Set
 
-  triangle-distributive-trunc-coprod-Set :
-    ( map-equiv-distributive-trunc-coprod-Set ∘ unit-trunc-Set) ~
-    ( map-coprod unit-trunc-Set unit-trunc-Set)
-  triangle-distributive-trunc-coprod-Set =
-    pr2 (center distributive-trunc-coprod-Set)
+  triangle-distributive-trunc-coproduct-Set :
+    ( map-equiv-distributive-trunc-coproduct-Set ∘ unit-trunc-Set) ~
+    ( map-coproduct unit-trunc-Set unit-trunc-Set)
+  triangle-distributive-trunc-coproduct-Set =
+    pr2 (center distributive-trunc-coproduct-Set)
 ```
 
 ### Set truncations of Σ-types
@@ -515,20 +523,20 @@ module _
   where
 
   abstract
-    distributive-trunc-prod-Set :
+    distributive-trunc-product-Set :
       is-contr
         ( Σ ( type-trunc-Set (A × B) ≃ (type-trunc-Set A × type-trunc-Set B))
             ( λ e →
               ( map-equiv e ∘ unit-trunc-Set) ~
-              ( map-prod unit-trunc-Set unit-trunc-Set)))
-    distributive-trunc-prod-Set =
+              ( map-product unit-trunc-Set unit-trunc-Set)))
+    distributive-trunc-product-Set =
       uniqueness-trunc-Set
-        ( prod-Set (trunc-Set A) (trunc-Set B))
-        ( map-prod unit-trunc-Set unit-trunc-Set)
+        ( product-Set (trunc-Set A) (trunc-Set B))
+        ( map-product unit-trunc-Set unit-trunc-Set)
         ( λ {l} C →
           is-equiv-right-factor
             ( ev-pair)
-            ( precomp-Set (map-prod unit-trunc-Set unit-trunc-Set) C)
+            ( precomp-Set (map-product unit-trunc-Set unit-trunc-Set) C)
             ( is-equiv-ev-pair)
             ( is-equiv-htpy-equiv
               ( ( equiv-universal-property-trunc-Set (Π-Set' B (λ y → C))) ∘e
@@ -538,24 +546,24 @@ module _
                 ( equiv-ev-pair))
               ( refl-htpy)))
 
-  equiv-distributive-trunc-prod-Set :
+  equiv-distributive-trunc-product-Set :
     type-trunc-Set (A × B) ≃ (type-trunc-Set A × type-trunc-Set B)
-  equiv-distributive-trunc-prod-Set =
-    pr1 (center distributive-trunc-prod-Set)
+  equiv-distributive-trunc-product-Set =
+    pr1 (center distributive-trunc-product-Set)
 
-  map-equiv-distributive-trunc-prod-Set :
+  map-equiv-distributive-trunc-product-Set :
     type-trunc-Set (A × B) → type-trunc-Set A × type-trunc-Set B
-  map-equiv-distributive-trunc-prod-Set =
-    map-equiv equiv-distributive-trunc-prod-Set
+  map-equiv-distributive-trunc-product-Set =
+    map-equiv equiv-distributive-trunc-product-Set
 
-  map-inv-equiv-distributive-trunc-prod-Set :
+  map-inv-equiv-distributive-trunc-product-Set :
     type-trunc-Set A × type-trunc-Set B → type-trunc-Set (A × B)
-  map-inv-equiv-distributive-trunc-prod-Set =
-    map-inv-equiv equiv-distributive-trunc-prod-Set
+  map-inv-equiv-distributive-trunc-product-Set =
+    map-inv-equiv equiv-distributive-trunc-product-Set
 
-  triangle-distributive-trunc-prod-Set :
-    ( map-equiv-distributive-trunc-prod-Set ∘ unit-trunc-Set) ~
-    ( map-prod unit-trunc-Set unit-trunc-Set)
-  triangle-distributive-trunc-prod-Set =
-    pr2 (center distributive-trunc-prod-Set)
+  triangle-distributive-trunc-product-Set :
+    ( map-equiv-distributive-trunc-product-Set ∘ unit-trunc-Set) ~
+    ( map-product unit-trunc-Set unit-trunc-Set)
+  triangle-distributive-trunc-product-Set =
+    pr2 (center distributive-trunc-product-Set)
 ```

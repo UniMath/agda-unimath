@@ -10,6 +10,9 @@ module elementary-number-theory.addition-integers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.positive-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -23,6 +26,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
+open import foundation.sets
 open import foundation.unit-type
 ```
 
@@ -30,9 +34,9 @@ open import foundation.unit-type
 
 ## Idea
 
-We introduce addition on the integers and derive its basic properties with
-respect to `succ-ℤ` and `neg-ℤ`. Properties of addition with respect to
-inequality are derived in `inequality-integers`.
+We introduce {{#concept "addition" Disambiguation="integers" Agda=add-ℤ}} on the
+[integers](elementary-number-theory.integers.md) and derive its basic properties
+with respect to `succ-ℤ` and `neg-ℤ`.
 
 ## Definition
 
@@ -327,36 +331,39 @@ abstract
 ### Interchange law for addition with respect to addition
 
 ```agda
-interchange-law-add-add-ℤ : interchange-law add-ℤ add-ℤ
-interchange-law-add-add-ℤ =
-  interchange-law-commutative-and-associative
-    add-ℤ
-    commutative-add-ℤ
-    associative-add-ℤ
+abstract
+  interchange-law-add-add-ℤ :
+    (x y u v : ℤ) → (x +ℤ y) +ℤ (u +ℤ v) ＝ (x +ℤ u) +ℤ (y +ℤ v)
+  interchange-law-add-add-ℤ =
+    interchange-law-commutative-and-associative
+      add-ℤ
+      commutative-add-ℤ
+      associative-add-ℤ
 ```
 
 ### Addition by `x` is a binary equivalence
 
 ```agda
-is-section-left-add-neg-ℤ :
-  (x y : ℤ) → x +ℤ (neg-ℤ x +ℤ y) ＝ y
-is-section-left-add-neg-ℤ x y =
-  equational-reasoning
-    x +ℤ (neg-ℤ x +ℤ y)
-    ＝ (x +ℤ neg-ℤ x) +ℤ y
-      by inv (associative-add-ℤ x (neg-ℤ x) y)
-    ＝ y
-      by ap (_+ℤ y) (right-inverse-law-add-ℤ x)
+abstract
+  is-section-left-add-neg-ℤ :
+    (x y : ℤ) → x +ℤ (neg-ℤ x +ℤ y) ＝ y
+  is-section-left-add-neg-ℤ x y =
+    equational-reasoning
+      x +ℤ (neg-ℤ x +ℤ y)
+      ＝ (x +ℤ neg-ℤ x) +ℤ y
+        by inv (associative-add-ℤ x (neg-ℤ x) y)
+      ＝ y
+        by ap (_+ℤ y) (right-inverse-law-add-ℤ x)
 
-is-retraction-left-add-neg-ℤ :
-  (x y : ℤ) → (neg-ℤ x) +ℤ (x +ℤ y) ＝ y
-is-retraction-left-add-neg-ℤ x y =
-  equational-reasoning
-    neg-ℤ x +ℤ (x +ℤ y)
-    ＝ (neg-ℤ x +ℤ x) +ℤ y
-      by inv (associative-add-ℤ (neg-ℤ x) x y)
-    ＝ y
-      by ap (_+ℤ y) (left-inverse-law-add-ℤ x)
+  is-retraction-left-add-neg-ℤ :
+    (x y : ℤ) → (neg-ℤ x) +ℤ (x +ℤ y) ＝ y
+  is-retraction-left-add-neg-ℤ x y =
+    equational-reasoning
+      neg-ℤ x +ℤ (x +ℤ y)
+      ＝ (neg-ℤ x +ℤ x) +ℤ y
+        by inv (associative-add-ℤ (neg-ℤ x) x y)
+      ＝ y
+        by ap (_+ℤ y) (left-inverse-law-add-ℤ x)
 
 abstract
   is-equiv-left-add-ℤ : (x : ℤ) → is-equiv (x +ℤ_)
@@ -369,29 +376,30 @@ equiv-left-add-ℤ : ℤ → (ℤ ≃ ℤ)
 pr1 (equiv-left-add-ℤ x) = add-ℤ x
 pr2 (equiv-left-add-ℤ x) = is-equiv-left-add-ℤ x
 
-is-section-right-add-neg-ℤ :
-  (x y : ℤ) → (y +ℤ neg-ℤ x) +ℤ x ＝ y
-is-section-right-add-neg-ℤ x y =
-  equational-reasoning
-    (y +ℤ neg-ℤ x) +ℤ x
-    ＝ y +ℤ (neg-ℤ x +ℤ x)
-      by associative-add-ℤ y (neg-ℤ x) x
-    ＝ y +ℤ zero-ℤ
-      by ap (y +ℤ_) (left-inverse-law-add-ℤ x)
-    ＝ y
-      by right-unit-law-add-ℤ y
+abstract
+  is-section-right-add-neg-ℤ :
+    (x y : ℤ) → (y +ℤ neg-ℤ x) +ℤ x ＝ y
+  is-section-right-add-neg-ℤ x y =
+    equational-reasoning
+      (y +ℤ neg-ℤ x) +ℤ x
+      ＝ y +ℤ (neg-ℤ x +ℤ x)
+        by associative-add-ℤ y (neg-ℤ x) x
+      ＝ y +ℤ zero-ℤ
+        by ap (y +ℤ_) (left-inverse-law-add-ℤ x)
+      ＝ y
+        by right-unit-law-add-ℤ y
 
-is-retraction-right-add-neg-ℤ :
-  (x y : ℤ) → (y +ℤ x) +ℤ neg-ℤ x ＝ y
-is-retraction-right-add-neg-ℤ x y =
-  equational-reasoning
-    (y +ℤ x) +ℤ neg-ℤ x
-    ＝ y +ℤ (x +ℤ neg-ℤ x)
-      by associative-add-ℤ y x (neg-ℤ x)
-    ＝ y +ℤ zero-ℤ
-      by ap (y +ℤ_) (right-inverse-law-add-ℤ x)
-    ＝ y
-      by right-unit-law-add-ℤ y
+  is-retraction-right-add-neg-ℤ :
+    (x y : ℤ) → (y +ℤ x) +ℤ neg-ℤ x ＝ y
+  is-retraction-right-add-neg-ℤ x y =
+    equational-reasoning
+      (y +ℤ x) +ℤ neg-ℤ x
+      ＝ y +ℤ (x +ℤ neg-ℤ x)
+        by associative-add-ℤ y x (neg-ℤ x)
+      ＝ y +ℤ zero-ℤ
+        by ap (y +ℤ_) (right-inverse-law-add-ℤ x)
+      ＝ y
+        by right-unit-law-add-ℤ y
 
 abstract
   is-equiv-right-add-ℤ : (y : ℤ) → is-equiv (_+ℤ y)
@@ -412,186 +420,162 @@ pr2 is-binary-equiv-left-add-ℤ = is-equiv-left-add-ℤ
 ### Addition by an integer is a binary embedding
 
 ```agda
-is-emb-left-add-ℤ :
-  (x : ℤ) → is-emb (x +ℤ_)
-is-emb-left-add-ℤ x =
-  is-emb-is-equiv (is-equiv-left-add-ℤ x)
+abstract
+  is-emb-left-add-ℤ :
+    (x : ℤ) → is-emb (x +ℤ_)
+  is-emb-left-add-ℤ x =
+    is-emb-is-equiv (is-equiv-left-add-ℤ x)
 
-is-emb-right-add-ℤ :
-  (y : ℤ) → is-emb (_+ℤ y)
-is-emb-right-add-ℤ y = is-emb-is-equiv (is-equiv-right-add-ℤ y)
+  is-emb-right-add-ℤ :
+    (y : ℤ) → is-emb (_+ℤ y)
+  is-emb-right-add-ℤ y = is-emb-is-equiv (is-equiv-right-add-ℤ y)
 
-is-binary-emb-add-ℤ : is-binary-emb add-ℤ
-is-binary-emb-add-ℤ =
-  is-binary-emb-is-binary-equiv is-binary-equiv-left-add-ℤ
+  is-binary-emb-add-ℤ : is-binary-emb add-ℤ
+  is-binary-emb-add-ℤ =
+    is-binary-emb-is-binary-equiv is-binary-equiv-left-add-ℤ
 ```
 
 ### Addition by `x` is injective
 
 ```agda
-is-injective-right-add-ℤ : (x : ℤ) → is-injective (_+ℤ x)
-is-injective-right-add-ℤ x = is-injective-is-emb (is-emb-right-add-ℤ x)
+abstract
+  is-injective-right-add-ℤ : (x : ℤ) → is-injective (_+ℤ x)
+  is-injective-right-add-ℤ x = is-injective-is-emb (is-emb-right-add-ℤ x)
 
-is-injective-add-ℤ : (x : ℤ) → is-injective (x +ℤ_)
-is-injective-add-ℤ x = is-injective-is-emb (is-emb-left-add-ℤ x)
+  is-injective-left-add-ℤ : (x : ℤ) → is-injective (x +ℤ_)
+  is-injective-left-add-ℤ x = is-injective-is-emb (is-emb-left-add-ℤ x)
 ```
 
 ### Negative laws for addition
 
 ```agda
-right-negative-law-add-ℤ :
-  (k l : ℤ) → k +ℤ neg-ℤ l ＝ neg-ℤ (neg-ℤ k +ℤ l)
-right-negative-law-add-ℤ (inl zero-ℕ) l =
-  equational-reasoning
-    neg-one-ℤ +ℤ neg-ℤ l
-    ＝ pred-ℤ (zero-ℤ +ℤ neg-ℤ l)
-      by left-predecessor-law-add-ℤ zero-ℤ (neg-ℤ l)
-    ＝ neg-ℤ (succ-ℤ l)
-      by pred-neg-ℤ l
-right-negative-law-add-ℤ (inl (succ-ℕ x)) l =
-  equational-reasoning
-    pred-ℤ (inl x) +ℤ neg-ℤ l
-    ＝ pred-ℤ (inl x +ℤ neg-ℤ l)
-      by left-predecessor-law-add-ℤ (inl x) (neg-ℤ l)
-    ＝ pred-ℤ (neg-ℤ (neg-ℤ (inl x) +ℤ l))
-      by ap pred-ℤ (right-negative-law-add-ℤ (inl x) l)
-    ＝ neg-ℤ (succ-ℤ (inr (inr x) +ℤ l))
-      by pred-neg-ℤ (inr (inr x) +ℤ l)
-right-negative-law-add-ℤ (inr (inl star)) l =
-  refl
-right-negative-law-add-ℤ (inr (inr zero-ℕ)) l =
-  inv (neg-pred-ℤ l)
-right-negative-law-add-ℤ (inr (inr (succ-ℕ n))) l =
-  equational-reasoning
-    succ-ℤ (in-pos n) +ℤ neg-ℤ l
-    ＝ succ-ℤ (in-pos n +ℤ neg-ℤ l)
-      by left-successor-law-add-ℤ (in-pos n) (neg-ℤ l)
-    ＝ succ-ℤ (neg-ℤ (neg-ℤ (inr (inr n)) +ℤ l))
-      by ap succ-ℤ (right-negative-law-add-ℤ (inr (inr n)) l)
-    ＝ neg-ℤ (pred-ℤ ((inl n) +ℤ l))
-      by inv (neg-pred-ℤ ((inl n) +ℤ l))
+abstract
+  right-negative-law-add-ℤ :
+    (k l : ℤ) → k +ℤ neg-ℤ l ＝ neg-ℤ (neg-ℤ k +ℤ l)
+  right-negative-law-add-ℤ (inl zero-ℕ) l =
+    equational-reasoning
+      neg-one-ℤ +ℤ neg-ℤ l
+      ＝ pred-ℤ (zero-ℤ +ℤ neg-ℤ l)
+        by left-predecessor-law-add-ℤ zero-ℤ (neg-ℤ l)
+      ＝ neg-ℤ (succ-ℤ l)
+        by pred-neg-ℤ l
+  right-negative-law-add-ℤ (inl (succ-ℕ x)) l =
+    equational-reasoning
+      pred-ℤ (inl x) +ℤ neg-ℤ l
+      ＝ pred-ℤ (inl x +ℤ neg-ℤ l)
+        by left-predecessor-law-add-ℤ (inl x) (neg-ℤ l)
+      ＝ pred-ℤ (neg-ℤ (neg-ℤ (inl x) +ℤ l))
+        by ap pred-ℤ (right-negative-law-add-ℤ (inl x) l)
+      ＝ neg-ℤ (succ-ℤ (inr (inr x) +ℤ l))
+        by pred-neg-ℤ (inr (inr x) +ℤ l)
+  right-negative-law-add-ℤ (inr (inl star)) l =
+    refl
+  right-negative-law-add-ℤ (inr (inr zero-ℕ)) l =
+    inv (neg-pred-ℤ l)
+  right-negative-law-add-ℤ (inr (inr (succ-ℕ n))) l =
+    equational-reasoning
+      succ-ℤ (in-pos-ℤ n) +ℤ neg-ℤ l
+      ＝ succ-ℤ (in-pos-ℤ n +ℤ neg-ℤ l)
+        by left-successor-law-add-ℤ (in-pos-ℤ n) (neg-ℤ l)
+      ＝ succ-ℤ (neg-ℤ (neg-ℤ (inr (inr n)) +ℤ l))
+        by ap succ-ℤ (right-negative-law-add-ℤ (inr (inr n)) l)
+      ＝ neg-ℤ (pred-ℤ ((inl n) +ℤ l))
+        by inv (neg-pred-ℤ ((inl n) +ℤ l))
 ```
 
 ### Distributivity of negatives over addition
 
 ```agda
-distributive-neg-add-ℤ :
-  (k l : ℤ) → neg-ℤ (k +ℤ l) ＝ neg-ℤ k +ℤ neg-ℤ l
-distributive-neg-add-ℤ (inl zero-ℕ) l =
-  equational-reasoning
-    neg-ℤ (inl zero-ℕ +ℤ l)
-    ＝ neg-ℤ (pred-ℤ (zero-ℤ +ℤ l))
-      by ap neg-ℤ (left-predecessor-law-add-ℤ zero-ℤ l)
-    ＝ neg-ℤ (inl zero-ℕ) +ℤ neg-ℤ l
-      by neg-pred-ℤ l
-distributive-neg-add-ℤ (inl (succ-ℕ n)) l =
-  equational-reasoning
-    neg-ℤ (pred-ℤ (inl n +ℤ l))
-    ＝ succ-ℤ (neg-ℤ (inl n +ℤ l))
-      by neg-pred-ℤ (inl n +ℤ l)
-    ＝ succ-ℤ (neg-ℤ (inl n) +ℤ neg-ℤ l)
-      by ap succ-ℤ (distributive-neg-add-ℤ (inl n) l)
-    ＝ neg-ℤ (pred-ℤ (inl n)) +ℤ neg-ℤ l
-      by ap (_+ℤ (neg-ℤ l)) (inv (neg-pred-ℤ (inl n)))
-distributive-neg-add-ℤ (inr (inl star)) l =
-  refl
-distributive-neg-add-ℤ (inr (inr zero-ℕ)) l =
-  inv (pred-neg-ℤ l)
-distributive-neg-add-ℤ (inr (inr (succ-ℕ n))) l =
-  equational-reasoning
-    neg-ℤ (succ-ℤ (in-pos n +ℤ l))
-    ＝ pred-ℤ (neg-ℤ (in-pos n +ℤ l))
-      by inv (pred-neg-ℤ (in-pos n +ℤ l))
-    ＝ pred-ℤ (neg-ℤ (inr (inr n)) +ℤ neg-ℤ l)
-      by ap pred-ℤ (distributive-neg-add-ℤ (inr (inr n)) l)
-```
-
-### Addition of nonnegative integers is nonnegative
-
-```agda
-is-nonnegative-add-ℤ :
-  (k l : ℤ) →
-  is-nonnegative-ℤ k → is-nonnegative-ℤ l → is-nonnegative-ℤ (k +ℤ l)
-is-nonnegative-add-ℤ (inr (inl star)) (inr (inl star)) p q = star
-is-nonnegative-add-ℤ (inr (inl star)) (inr (inr n)) p q = star
-is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inl star)) p q = star
-is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inl star)) star star =
-  is-nonnegative-succ-ℤ
-    ( (inr (inr n)) +ℤ (inr (inl star)))
-    ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inl star)) star star)
-is-nonnegative-add-ℤ (inr (inr zero-ℕ)) (inr (inr m)) star star = star
-is-nonnegative-add-ℤ (inr (inr (succ-ℕ n))) (inr (inr m)) star star =
-  is-nonnegative-succ-ℤ
-    ( (inr (inr n)) +ℤ (inr (inr m)))
-    ( is-nonnegative-add-ℤ (inr (inr n)) (inr (inr m)) star star)
-```
-
-### Addition of positive integers is positive
-
-```agda
-is-positive-add-ℤ :
-  {x y : ℤ} → is-positive-ℤ x → is-positive-ℤ y → is-positive-ℤ (x +ℤ y)
-is-positive-add-ℤ {inr (inr zero-ℕ)} {inr (inr y)} H K = star
-is-positive-add-ℤ {inr (inr (succ-ℕ x))} {inr (inr y)} H K =
-  is-positive-succ-ℤ
-    ( is-nonnegative-is-positive-ℤ
-      ( is-positive-add-ℤ {inr (inr x)} {inr (inr y)} star star))
+abstract
+  distributive-neg-add-ℤ :
+    (k l : ℤ) → neg-ℤ (k +ℤ l) ＝ neg-ℤ k +ℤ neg-ℤ l
+  distributive-neg-add-ℤ (inl zero-ℕ) l =
+    equational-reasoning
+      neg-ℤ (inl zero-ℕ +ℤ l)
+      ＝ neg-ℤ (pred-ℤ (zero-ℤ +ℤ l))
+        by ap neg-ℤ (left-predecessor-law-add-ℤ zero-ℤ l)
+      ＝ neg-ℤ (inl zero-ℕ) +ℤ neg-ℤ l
+        by neg-pred-ℤ l
+  distributive-neg-add-ℤ (inl (succ-ℕ n)) l =
+    equational-reasoning
+      neg-ℤ (pred-ℤ (inl n +ℤ l))
+      ＝ succ-ℤ (neg-ℤ (inl n +ℤ l))
+        by neg-pred-ℤ (inl n +ℤ l)
+      ＝ succ-ℤ (neg-ℤ (inl n) +ℤ neg-ℤ l)
+        by ap succ-ℤ (distributive-neg-add-ℤ (inl n) l)
+      ＝ neg-ℤ (pred-ℤ (inl n)) +ℤ neg-ℤ l
+        by ap (_+ℤ (neg-ℤ l)) (inv (neg-pred-ℤ (inl n)))
+  distributive-neg-add-ℤ (inr (inl star)) l =
+    refl
+  distributive-neg-add-ℤ (inr (inr zero-ℕ)) l =
+    inv (pred-neg-ℤ l)
+  distributive-neg-add-ℤ (inr (inr (succ-ℕ n))) l =
+    equational-reasoning
+      neg-ℤ (succ-ℤ (in-pos-ℤ n +ℤ l))
+      ＝ pred-ℤ (neg-ℤ (in-pos-ℤ n +ℤ l))
+        by inv (pred-neg-ℤ (in-pos-ℤ n +ℤ l))
+      ＝ pred-ℤ (neg-ℤ (inr (inr n)) +ℤ neg-ℤ l)
+        by ap pred-ℤ (distributive-neg-add-ℤ (inr (inr n)) l)
 ```
 
 ### The inclusion of ℕ into ℤ preserves addition
 
 ```agda
-add-int-ℕ : (x y : ℕ) → (int-ℕ x) +ℤ (int-ℕ y) ＝ int-ℕ (x +ℕ y)
-add-int-ℕ x zero-ℕ = right-unit-law-add-ℤ (int-ℕ x)
-add-int-ℕ x (succ-ℕ y) =
-  equational-reasoning
-    int-ℕ x +ℤ int-ℕ (succ-ℕ y)
-    ＝ int-ℕ x +ℤ succ-ℤ (int-ℕ y)
-      by ap ((int-ℕ x) +ℤ_) (inv (succ-int-ℕ y))
-    ＝ succ-ℤ (int-ℕ x +ℤ int-ℕ y)
-      by right-successor-law-add-ℤ (int-ℕ x) (int-ℕ y)
-    ＝ succ-ℤ (int-ℕ (x +ℕ y))
-      by ap succ-ℤ (add-int-ℕ x y)
-    ＝ int-ℕ (succ-ℕ (x +ℕ y))
-      by succ-int-ℕ (x +ℕ y)
+abstract
+  add-int-ℕ : (x y : ℕ) → (int-ℕ x) +ℤ (int-ℕ y) ＝ int-ℕ (x +ℕ y)
+  add-int-ℕ x zero-ℕ = right-unit-law-add-ℤ (int-ℕ x)
+  add-int-ℕ x (succ-ℕ y) =
+    equational-reasoning
+      int-ℕ x +ℤ int-ℕ (succ-ℕ y)
+      ＝ int-ℕ x +ℤ succ-ℤ (int-ℕ y)
+        by ap ((int-ℕ x) +ℤ_) (inv (succ-int-ℕ y))
+      ＝ succ-ℤ (int-ℕ x +ℤ int-ℕ y)
+        by right-successor-law-add-ℤ (int-ℕ x) (int-ℕ y)
+      ＝ succ-ℤ (int-ℕ (x +ℕ y))
+        by ap succ-ℤ (add-int-ℕ x y)
+      ＝ int-ℕ (succ-ℕ (x +ℕ y))
+        by succ-int-ℕ (x +ℕ y)
 ```
 
 ### If `x + y = y` then `x = 0`
 
 ```agda
-is-zero-left-add-ℤ :
-  (x y : ℤ) → x +ℤ y ＝ y → is-zero-ℤ x
-is-zero-left-add-ℤ x y H =
-  equational-reasoning
-    x
-    ＝ x +ℤ zero-ℤ
-      by inv (right-unit-law-add-ℤ x)
-    ＝ x +ℤ (y +ℤ neg-ℤ y)
-      by inv (ap (x +ℤ_) (right-inverse-law-add-ℤ y))
-    ＝ (x +ℤ y) +ℤ neg-ℤ y
-      by inv (associative-add-ℤ x y (neg-ℤ y))
-    ＝ y +ℤ neg-ℤ y
-      by ap (_+ℤ (neg-ℤ y)) H
-    ＝ zero-ℤ
-      by right-inverse-law-add-ℤ y
-
-is-zero-right-add-ℤ :
-  (x y : ℤ) → x +ℤ y ＝ x → is-zero-ℤ y
-is-zero-right-add-ℤ x y H =
-  is-zero-left-add-ℤ y x (commutative-add-ℤ y x ∙ H)
+abstract
+  is-zero-left-add-ℤ :
+    (x y : ℤ) → x +ℤ y ＝ y → is-zero-ℤ x
+  is-zero-left-add-ℤ x y H =
+    equational-reasoning
+      x
+      ＝ x +ℤ zero-ℤ
+        by inv (right-unit-law-add-ℤ x)
+      ＝ x +ℤ (y +ℤ neg-ℤ y)
+        by inv (ap (x +ℤ_) (right-inverse-law-add-ℤ y))
+      ＝ (x +ℤ y) +ℤ neg-ℤ y
+        by inv (associative-add-ℤ x y (neg-ℤ y))
+      ＝ y +ℤ neg-ℤ y
+        by ap (_+ℤ (neg-ℤ y)) H
+      ＝ zero-ℤ
+        by right-inverse-law-add-ℤ y
 ```
 
-### Adding negatives results in a negative
+### If `x + y = x` then `y = 0`
 
 ```agda
-negatives-add-ℤ :
-  (x y : ℕ) → in-neg x +ℤ in-neg y ＝ in-neg (succ-ℕ (x +ℕ y))
-negatives-add-ℤ zero-ℕ y = ap (inl ∘ succ-ℕ) (inv (left-unit-law-add-ℕ y))
-negatives-add-ℤ (succ-ℕ x) y =
-  equational-reasoning
-    pred-ℤ (in-neg x +ℤ in-neg y)
-    ＝ pred-ℤ (in-neg (succ-ℕ (x +ℕ y)))
-      by ap pred-ℤ (negatives-add-ℤ x y)
-    ＝ (inl ∘ succ-ℕ) ((succ-ℕ x) +ℕ y)
-      by ap (inl ∘ succ-ℕ) (inv (left-successor-law-add-ℕ x y))
+abstract
+  is-zero-right-add-ℤ :
+    (x y : ℤ) → x +ℤ y ＝ x → is-zero-ℤ y
+  is-zero-right-add-ℤ x y H =
+    is-zero-left-add-ℤ y x (commutative-add-ℤ y x ∙ H)
 ```
+
+## See also
+
+- Properties of addition with respect to positivity, nonnegativity, negativity
+  and nonnpositivity are derived in
+  [`addition-positive-and-negative-integers`](elementary-number-theory.addition-positive-and-negative-integers.md)
+- Properties of addition with respect to the standard ordering on the integers
+  are derived in
+  [`inequality-integers`](elementary-number-theory.inequality-integers.md)
+- Properties of addition with respect to the standard strict ordering on the
+  integers are derived in
+  [`strict-inequality-integers`](elementary-number-theory.strict-inequality-integers.md)

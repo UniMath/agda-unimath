@@ -90,6 +90,13 @@ data telescope-Level (l : Level) : ℕ → UU (lsuc l)
     (X → telescope-Level l n) → telescope-Level l (succ-ℕ n)
 
 open telescope-Level public
+
+telescope-telescope-Level :
+  {l : Level} {n : ℕ} → telescope-Level l n → telescope l n
+telescope-telescope-Level (base-telescope-Level A) =
+  base-telescope A
+telescope-telescope-Level (cons-telescope-Level Γ) =
+  cons-telescope (λ x → telescope-telescope-Level (Γ x))
 ```
 
 ### Transformations on telescopes

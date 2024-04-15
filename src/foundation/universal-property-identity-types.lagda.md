@@ -13,6 +13,7 @@ open import foundation.dependent-universal-property-equivalences
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.full-subtypes
+open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -22,12 +23,12 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 ```
 
@@ -47,10 +48,15 @@ ev-refl :
   ((x : A) (p : a ＝ x) → B x p) → B a refl
 ev-refl a f = f a refl
 
+ev-refl' :
+  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → x ＝ a → UU l2} →
+  ((x : A) (p : x ＝ a) → B x p) → B a refl
+ev-refl' a f = f a refl
+
 abstract
   is-equiv-ev-refl :
     {l1 l2 : Level} {A : UU l1} (a : A)
-    {B : (x : A) → a ＝ x → UU l2} → is-equiv (ev-refl a {B = B})
+    {B : (x : A) → a ＝ x → UU l2} → is-equiv (ev-refl a {B})
   is-equiv-ev-refl a =
     is-equiv-is-invertible
       ( ind-Id a _)
@@ -73,6 +79,11 @@ equiv-ev-refl' :
 equiv-ev-refl' a {B} =
   ( equiv-ev-refl a) ∘e
   ( equiv-Π-equiv-family (λ x → equiv-precomp-Π (equiv-inv a x) (B x)))
+
+is-equiv-ev-refl' :
+  {l1 l2 : Level} {A : UU l1} (a : A)
+  {B : (x : A) → x ＝ a → UU l2} → is-equiv (ev-refl' a {B})
+is-equiv-ev-refl' a = is-equiv-map-equiv (equiv-ev-refl' a)
 ```
 
 ### `Id : A → (A → 𝒰)` is an embedding
@@ -213,3 +224,5 @@ module _
   `Id : A → (A → 𝒰)` is an embedding was first observed and formalized by Martín
   Escardó,
   [https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html](https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html).
+
+{{#bibliography}} {{#reference TypeTopology}}

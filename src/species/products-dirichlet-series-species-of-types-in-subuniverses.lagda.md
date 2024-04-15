@@ -156,7 +156,7 @@ module _
         ( λ A →
           equiv-tot
             ( λ B →
-              ( equiv-prod
+              ( equiv-product
                 ( id-equiv)
                 ( equiv-up-product ∘e equiv-postcomp X (C2 A B))) ∘e
               left-unit-law-Σ-is-contr

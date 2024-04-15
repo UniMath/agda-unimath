@@ -21,26 +21,26 @@ open import primitives.strings
 
 ## Idea
 
-The `Name` type represents quoted names, i.e. they are an abstract syntactic
-representation of terms. Agda provides primitive functions to manipulate them,
-giving them an equality and ordering. A closed term can be converted to a quoted
-name by means of the `quote` keyword, e.g. `quote bool`.
+The `Name-Agda` type represents quoted names, i.e. they are an abstract
+syntactic representation of terms. Agda provides primitive functions to
+manipulate them, giving them an equality and ordering. A closed term can be
+converted to a quoted name by means of the `quote` keyword, e.g. `quote bool`.
 
 ## Definition
 
 ```agda
 postulate
-  Name : UU lzero
+  Name-Agda : UU lzero
 
-{-# BUILTIN QNAME Name #-}
+{-# BUILTIN QNAME Name-Agda #-}
 
 primitive
-  primQNameEquality : Name → Name → bool
-  primQNameLess : Name → Name → bool
-  primShowQName : Name → String
-  primQNameToWord64s : Name → Word64 × Word64
+  primQNameEquality : Name-Agda → Name-Agda → bool
+  primQNameLess : Name-Agda → Name-Agda → bool
+  primShowQName : Name-Agda → String
+  primQNameToWord64s : Name-Agda → Word64 × Word64
   primQNameToWord64sInjective :
-    ∀ a b → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b
+    (a b : Name-Agda) → primQNameToWord64s a ＝ primQNameToWord64s b → a ＝ b
 ```
 
 ## Examples

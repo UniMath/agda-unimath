@@ -12,6 +12,7 @@ open import foundation.commuting-squares-of-maps
 open import foundation.connected-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.function-extensionality
 open import foundation.functoriality-truncation
 open import foundation.precomposition-functions
 open import foundation.sections
@@ -22,7 +23,6 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

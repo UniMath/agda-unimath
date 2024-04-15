@@ -568,7 +568,7 @@ module _
           ( vertex-hom-Directed-Graph G H f _)))
       ( vertex-hom-Directed-Graph G H f)
       ( λ z →
-        map-prod
+        map-product
           ( edge-hom-Directed-Graph G H f)
           ( walk-of-length-hom-Directed-Graph n))
 
@@ -611,7 +611,7 @@ equiv-walk-of-length-equiv-Directed-Graph G H f (succ-ℕ n) =
         ( vertex-equiv-Directed-Graph G H f _)))
     ( equiv-vertex-equiv-Directed-Graph G H f)
     ( λ z →
-      equiv-prod
+      equiv-product
         ( equiv-edge-equiv-Directed-Graph G H f _ _)
         ( equiv-walk-of-length-equiv-Directed-Graph G H f n))
 ```

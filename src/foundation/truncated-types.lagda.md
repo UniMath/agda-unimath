@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.logical-equivalences
 open import foundation.subtype-identity-principle
 open import foundation.truncation-levels
 open import foundation.univalence
@@ -104,7 +105,7 @@ module _
 
   equiv-is-trunc-equiv : A ≃ B → is-trunc k A ≃ is-trunc k B
   equiv-is-trunc-equiv e =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-prop-is-trunc k A)
       ( is-prop-is-trunc k B)
       ( is-trunc-equiv' k A e)

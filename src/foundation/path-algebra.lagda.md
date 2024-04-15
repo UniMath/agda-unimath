@@ -11,15 +11,16 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
-open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.constant-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -36,12 +37,12 @@ type is often called a _type of 2-paths_.
 
 Since 2-paths are just identifications, they have the usual operations and
 coherences on paths/identifications. In the context of 2-paths, this famliar
-concatination operation is called vertical concatination (see
+concatenation operation is called vertical concatenation (see
 `vertical-concat-Id²` below). However, 2-paths have novel operations and
 coherences derived from the operations and coherences of the boundary 1-paths
-(these are `p` and `q` in the example above). Since concatination of 1-paths is
+(these are `p` and `q` in the example above). Since concatenation of 1-paths is
 a functor, it has an induced action on paths. We call this operation horizontal
-concatination (see `horizontal-concat-Id²` below). It comes with the standard
+concatenation (see `horizontal-concat-Id²` below). It comes with the standard
 coherences of an action on paths function, as well as coherences induced by
 coherences on the boundary 1-paths.
 
@@ -59,61 +60,6 @@ module _
 
   htpy-right-unit : (λ (p : a0 ＝ a1) → p ∙ refl) ~ id
   htpy-right-unit p = right-unit
-```
-
-### Squares
-
-```agda
-horizontal-concat-square :
-  {l : Level} {A : UU l} {a b c d e f : A}
-  (p-lleft : a ＝ b) (p-lbottom : b ＝ d) (p-rbottom : d ＝ f)
-  (p-middle : c ＝ d) (p-ltop : a ＝ c) (p-rtop : c ＝ e) (p-rright : e ＝ f)
-  (s-left : coherence-square-identifications p-ltop p-lleft p-middle p-lbottom)
-  (s-right :
-    coherence-square-identifications p-rtop p-middle p-rright p-rbottom) →
-  coherence-square-identifications
-    (p-ltop ∙ p-rtop) p-lleft p-rright (p-lbottom ∙ p-rbottom)
-horizontal-concat-square {a = a} {f = f}
-  p-lleft p-lbottom p-rbottom p-middle p-ltop p-rtop p-rright s-left s-right =
-  ( inv (assoc p-lleft p-lbottom p-rbottom)) ∙
-  ( ( ap (concat' a p-rbottom) s-left) ∙
-    ( ( assoc p-ltop p-middle p-rbottom) ∙
-      ( ( ap (concat p-ltop f) s-right) ∙
-        ( inv (assoc p-ltop p-rtop p-rright)))))
-
-horizontal-unit-square :
-  {l : Level} {A : UU l} {a b : A} (p : a ＝ b) →
-  coherence-square-identifications refl p p refl
-horizontal-unit-square p = right-unit
-
-left-unit-law-horizontal-concat-square :
-  {l : Level} {A : UU l} {a b c d : A}
-  (p-left : a ＝ b) (p-bottom : b ＝ d) (p-top : a ＝ c) (p-right : c ＝ d) →
-  (s : coherence-square-identifications p-top p-left p-right p-bottom) →
-  ( horizontal-concat-square
-    p-left refl p-bottom p-left refl p-top p-right
-    ( horizontal-unit-square p-left)
-    ( s)) ＝
-  ( s)
-left-unit-law-horizontal-concat-square refl p-bottom p-top p-right s =
-  right-unit ∙ ap-id s
-
-vertical-concat-square :
-  {l : Level} {A : UU l} {a b c d e f : A}
-  (p-tleft : a ＝ b) (p-bleft : b ＝ c) (p-bbottom : c ＝ f)
-  (p-middle : b ＝ e) (p-ttop : a ＝ d) (p-tright : d ＝ e) (p-bright : e ＝ f)
-  (s-top : coherence-square-identifications p-ttop p-tleft p-tright p-middle)
-  (s-bottom :
-    coherence-square-identifications p-middle p-bleft p-bright p-bbottom) →
-  coherence-square-identifications
-    p-ttop (p-tleft ∙ p-bleft) (p-tright ∙ p-bright) p-bbottom
-vertical-concat-square {a = a} {f = f}
-  p-tleft p-bleft p-bbottom p-middle p-ttop p-tright p-bright s-top s-bottom =
-  ( assoc p-tleft p-bleft p-bbottom) ∙
-  ( ( ap (concat p-tleft f) s-bottom) ∙
-    ( ( inv (assoc p-tleft p-middle p-bright)) ∙
-      ( ( ap (concat' a p-bright) s-top) ∙
-        ( assoc p-ttop p-tright p-bright))))
 ```
 
 ### Unit laws for `assoc`
@@ -135,12 +81,13 @@ module _
 
   middle-unit-law-assoc :
     (p : x ＝ y) (q : y ＝ z) →
-    assoc p refl q ＝ ap (_∙ q) (right-unit)
+    assoc p refl q ＝ right-whisker-concat right-unit q
   middle-unit-law-assoc refl q = refl
 
   right-unit-law-assoc :
     (p : x ＝ y) (q : y ＝ z) →
-    assoc p q refl ＝ (right-unit ∙ ap (p ∙_) (inv right-unit))
+    assoc p q refl ＝
+      right-unit ∙ left-whisker-concat p (inv right-unit)
   right-unit-law-assoc refl refl = refl
 ```
 
@@ -164,56 +111,24 @@ module _
 
   unit-law-assoc-101 :
     (p : x ＝ y) (q : y ＝ z) →
-    assoc p refl q ＝ ap (_∙ q) (right-unit)
+    assoc p refl q ＝ right-whisker-concat right-unit q
   unit-law-assoc-101 refl q = refl
 
   unit-law-assoc-101' :
     (p : x ＝ y) (q : y ＝ z) →
-    inv (assoc p refl q) ＝ ap (_∙ q) (inv right-unit)
+    inv (assoc p refl q) ＝ right-whisker-concat (inv right-unit) q
   unit-law-assoc-101' refl q = refl
 
   unit-law-assoc-110 :
     (p : x ＝ y) (q : y ＝ z) →
-    (assoc p q refl ∙ ap (p ∙_) right-unit) ＝ right-unit
+    assoc p q refl ∙ left-whisker-concat p right-unit ＝ right-unit
   unit-law-assoc-110 refl refl = refl
 
   unit-law-assoc-110' :
     (p : x ＝ y) (q : y ＝ z) →
-    (inv right-unit ∙ assoc p q refl) ＝ ap (p ∙_) (inv right-unit)
+    inv right-unit ∙ assoc p q refl ＝
+    left-whisker-concat p (inv right-unit)
   unit-law-assoc-110' refl refl = refl
-```
-
-### Unit laws for `ap-concat-eq`
-
-```agda
-ap-concat-eq-inv-right-unit :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
-  (p : x ＝ y) → inv right-unit ＝ ap-concat-eq f p refl p (inv right-unit)
-ap-concat-eq-inv-right-unit f refl = refl
-```
-
-### Iterated inverse laws
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  is-section-left-concat-inv :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) → (inv p ∙ (p ∙ q)) ＝ q
-  is-section-left-concat-inv refl q = refl
-
-  is-retraction-left-concat-inv :
-    {x y z : A} (p : x ＝ y) (q : x ＝ z) → (p ∙ (inv p ∙ q)) ＝ q
-  is-retraction-left-concat-inv refl q = refl
-
-  is-section-right-concat-inv :
-    {x y z : A} (p : x ＝ y) (q : z ＝ y) → ((p ∙ inv q) ∙ q) ＝ p
-  is-section-right-concat-inv refl refl = refl
-
-  is-retraction-right-concat-inv :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) → ((p ∙ q) ∙ inv q) ＝ p
-  is-retraction-right-concat-inv refl refl = refl
 ```
 
 ## Properties of 2-paths
@@ -227,146 +142,8 @@ vertical-concat-Id² α β = α ∙ β
 
 horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z} →
-  p ＝ q → u ＝ v → (p ∙ u) ＝ (q ∙ v)
+  p ＝ q → u ＝ v → p ∙ u ＝ q ∙ v
 horizontal-concat-Id² α β = ap-binary (_∙_) α β
-```
-
-### Definition of identification whiskering
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y z : A}
-  where
-
-  identification-left-whisk :
-    (p : x ＝ y) {q q' : y ＝ z} → q ＝ q' → (p ∙ q) ＝ (p ∙ q')
-  identification-left-whisk p β = ap (p ∙_) β
-
-  identification-right-whisk :
-    {p p' : x ＝ y} → p ＝ p' → (q : y ＝ z) → (p ∙ q) ＝ (p' ∙ q)
-  identification-right-whisk α q = ap (_∙ q) α
-
-  htpy-identification-left-whisk :
-    {q q' : y ＝ z} → q ＝ q' → (_∙ q) ~ (_∙ q')
-  htpy-identification-left-whisk β p = identification-left-whisk p β
-```
-
-### Whiskerings of identifications are equivalences
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y z : A}
-  where
-
-  is-equiv-identification-left-whisk :
-    (p : x ＝ y) {q q' : y ＝ z} →
-    is-equiv (identification-left-whisk p {q} {q'})
-  is-equiv-identification-left-whisk p {q} {q'} =
-    is-emb-is-equiv (is-equiv-concat p z) q q'
-
-  equiv-identification-left-whisk :
-    (p : x ＝ y) {q q' : y ＝ z} →
-    (q ＝ q') ≃ (p ∙ q ＝ p ∙ q')
-  pr1 (equiv-identification-left-whisk p) = identification-left-whisk p
-  pr2 (equiv-identification-left-whisk p) = is-equiv-identification-left-whisk p
-
-  is-equiv-identification-right-whisk :
-    {p p' : x ＝ y} → (q : y ＝ z) →
-    is-equiv (λ (α : p ＝ p') → identification-right-whisk α q)
-  is-equiv-identification-right-whisk {p} {p'} q =
-    is-emb-is-equiv (is-equiv-concat' x q) p p'
-
-  equiv-identification-right-whisk :
-    {p p' : x ＝ y} → (q : y ＝ z) →
-    (p ＝ p') ≃ (p ∙ q ＝ p' ∙ q)
-  pr1 (equiv-identification-right-whisk q) α = identification-right-whisk α q
-  pr2 (equiv-identification-right-whisk q) =
-    is-equiv-identification-right-whisk q
-```
-
-### Reassociating one side of a higher identification is an equivalence
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y z u : A}
-  where
-
-  equiv-concat-assoc :
-    (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) (s : x ＝ u) →
-    ((p ∙ q) ∙ r ＝ s) ≃ (p ∙ (q ∙ r) ＝ s)
-  equiv-concat-assoc p q r = equiv-concat (inv (assoc p q r))
-
-  equiv-concat-assoc' :
-    (s : x ＝ u) (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) →
-    (s ＝ (p ∙ q) ∙ r) ≃ (s ＝ p ∙ (q ∙ r))
-  equiv-concat-assoc' s p q r = equiv-concat' s (assoc p q r)
-```
-
-### Whiskering of squares of identifications
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y z u v : A}
-  (p : x ＝ y) (p' : x ＝ z) {q : y ＝ u} {q' : z ＝ u} (r : u ＝ v)
-  where
-
-  equiv-right-whisk-square-identification :
-    ( coherence-square-identifications p p' q q') ≃
-    ( coherence-square-identifications p p' (q ∙ r) (q' ∙ r))
-  equiv-right-whisk-square-identification =
-    ( equiv-concat-assoc' (p' ∙ (q' ∙ r)) p q r) ∘e
-    ( equiv-concat-assoc p' q' r (p ∙ q ∙ r)) ∘e
-    ( equiv-identification-right-whisk r)
-
-  right-whisk-square-identification :
-    coherence-square-identifications p p' q q' →
-    coherence-square-identifications p p' (q ∙ r) (q' ∙ r)
-  right-whisk-square-identification =
-    map-equiv equiv-right-whisk-square-identification
-
-  right-unwhisk-square-identifications :
-    coherence-square-identifications p p' (q ∙ r) (q' ∙ r) →
-    coherence-square-identifications p p' q q'
-  right-unwhisk-square-identifications =
-    map-inv-equiv equiv-right-whisk-square-identification
-
-module _
-  {l : Level} {A : UU l} {x y z u v : A}
-  (p : v ＝ x) {q : x ＝ y} {q' : x ＝ z} {r : y ＝ u} {r' : z ＝ u}
-  where
-
-  equiv-left-whisk-square-identification :
-    ( coherence-square-identifications q q' r r') ≃
-    ( coherence-square-identifications (p ∙ q) (p ∙ q') r r')
-  equiv-left-whisk-square-identification =
-    ( inv-equiv (equiv-concat-assoc p q' r' (p ∙ q ∙ r))) ∘e
-    ( inv-equiv (equiv-concat-assoc' (p ∙ (q' ∙ r')) p q r)) ∘e
-    ( equiv-identification-left-whisk p)
-
-  left-whisk-square-identification :
-    coherence-square-identifications q q' r r' →
-    coherence-square-identifications (p ∙ q) (p ∙ q') r r'
-  left-whisk-square-identification =
-    map-equiv equiv-left-whisk-square-identification
-
-  left-unwhisk-square-identification :
-    coherence-square-identifications (p ∙ q) (p ∙ q') r r' →
-    coherence-square-identifications q q' r r'
-  left-unwhisk-square-identification =
-    map-inv-equiv equiv-left-whisk-square-identification
-
-module _
-  {l : Level} {A : UU l} {x y z u v w : A}
-  where
-
-  equiv-both-whisk-square-identifications :
-    (p : x ＝ y) {q : y ＝ z} {q' : y ＝ u} {r : z ＝ v} {r' : u ＝ v} →
-    (s : v ＝ w) →
-    ( coherence-square-identifications q q' r r') ≃
-    ( coherence-square-identifications (p ∙ q) (p ∙ q') (r ∙ s) (r' ∙ s))
-  equiv-both-whisk-square-identifications p {q} {q'} s =
-    ( equiv-left-whisk-square-identification p) ∘e
-    ( equiv-right-whisk-square-identification q q' s)
 ```
 
 ### Both horizontal and vertical concatenation of 2-paths are binary equivalences
@@ -397,20 +174,18 @@ right-unit-law-vertical-concat-Id² :
   vertical-concat-Id² α refl ＝ α
 right-unit-law-vertical-concat-Id² = right-unit
 
-left-unit-law-horizontal-concat-Id² :
+compute-left-refl-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p : x ＝ y} {u v : y ＝ z} (γ : u ＝ v) →
-  horizontal-concat-Id² (refl {x = p}) γ ＝
-  identification-left-whisk p γ
-left-unit-law-horizontal-concat-Id² = left-unit-ap-binary (_∙_)
+  horizontal-concat-Id² refl γ ＝ left-whisker-concat p γ
+compute-left-refl-horizontal-concat-Id² = left-unit-ap-binary (_∙_)
 
-right-unit-law-horizontal-concat-Id² :
+compute-right-refl-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
-  horizontal-concat-Id² α (refl {x = u}) ＝
-  identification-right-whisk α u
-right-unit-law-horizontal-concat-Id² = right-unit-ap-binary (_∙_)
+  horizontal-concat-Id² α refl ＝ right-whisker-concat α u
+compute-right-refl-horizontal-concat-Id² = right-unit-ap-binary (_∙_)
 ```
 
-Horizontal concatination satisfies an additional "2-dimensional" unit law (on
+Horizontal concatenation satisfies an additional "2-dimensional" unit law (on
 both the left and right) induced by the unit laws on the boundary 1-paths.
 
 ```agda
@@ -427,75 +202,20 @@ module _
   nat-sq-right-unit-Id² =
     ( ( horizontal-concat-Id² refl (inv (ap-id α))) ∙
       ( nat-htpy htpy-right-unit α)) ∙
-    ( horizontal-concat-Id² (inv (right-unit-law-horizontal-concat-Id² α)) refl)
+    ( horizontal-concat-Id²
+      ( inv (compute-right-refl-horizontal-concat-Id² α))
+      ( refl))
 
   nat-sq-left-unit-Id² :
     coherence-square-identifications
-      ( horizontal-concat-Id² (refl {x = refl}) α)
+      ( horizontal-concat-Id² refl α)
       ( left-unit)
       ( left-unit)
       ( α)
   nat-sq-left-unit-Id² =
     ( ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
-      ( inv (left-unit-law-horizontal-concat-Id² α))) ∙
+      ( inv (compute-left-refl-horizontal-concat-Id² α))) ∙
     ( inv right-unit)
-```
-
-### Unit laws for whiskering
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y : A}
-  where
-
-  left-unit-law-identification-left-whisk :
-    {p p' : x ＝ y} (α : p ＝ p') →
-    identification-left-whisk refl α ＝ α
-  left-unit-law-identification-left-whisk refl = refl
-
-  right-unit-law-identification-right-whisk :
-    {p p' : x ＝ y} (α : p ＝ p') →
-    identification-right-whisk α refl ＝
-    right-unit ∙ α ∙ inv right-unit
-  right-unit-law-identification-right-whisk {p = refl} refl = refl
-```
-
-### The whiskering operations allow us to commute higher identifications
-
-There are two natural ways to commute higher identifications: using whiskering
-on the left versus using whiskering on the right. These two ways "undo" each
-other.
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y z : A}
-  where
-
-  path-swap-nat-identification-left-whisk :
-    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
-    coherence-square-identifications
-      ( identification-right-whisk α q)
-      ( identification-left-whisk p β)
-      ( identification-left-whisk p' β)
-      ( identification-right-whisk α q')
-  path-swap-nat-identification-left-whisk β =
-    nat-htpy (htpy-identification-left-whisk β)
-
-  path-swap-nat-identification-right-whisk :
-    {p p' : x ＝ y} (α : p ＝ p') {q q' : y ＝ z} (β : q ＝ q') →
-    coherence-square-identifications
-      ( identification-left-whisk p β)
-      ( identification-right-whisk α q)
-      ( identification-right-whisk α q')
-      ( identification-left-whisk p' β)
-  path-swap-nat-identification-right-whisk α =
-    nat-htpy (identification-right-whisk α)
-
-  path-swap-right-undoes-path-swap-left :
-    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
-    inv (path-swap-nat-identification-right-whisk α β) ＝
-    (path-swap-nat-identification-left-whisk β α)
-  path-swap-right-undoes-path-swap-left refl refl = refl
 ```
 
 ### Definition of horizontal inverse
@@ -507,7 +227,7 @@ module _
   {l : Level} {A : UU l} {x y : A} {p p' : x ＝ y}
   where
 
-  horizontal-inv-Id² : p ＝ p' → (inv p) ＝ (inv p')
+  horizontal-inv-Id² : p ＝ p' → inv p ＝ inv p'
   horizontal-inv-Id² = ap inv
 ```
 
@@ -564,114 +284,49 @@ interchange-Id² :
   ( vertical-concat-Id²
     ( horizontal-concat-Id² α γ)
     ( horizontal-concat-Id² β δ))
-interchange-Id² refl refl refl refl = refl
+interchange-Id² refl _ refl _ = refl
+
+inner-interchange-Id² :
+  {l : Level} {A : UU l} {x y z : A} {p r : x ＝ y} {u v : y ＝ z}
+  (β : p ＝ r) (γ : u ＝ v) →
+  ( horizontal-concat-Id² β γ) ＝
+  ( vertical-concat-Id² (left-whisker-concat p γ) (right-whisker-concat β v))
+inner-interchange-Id² {u = refl} β refl =
+  compute-right-refl-horizontal-concat-Id² β
+
+outer-interchange-Id² :
+  {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u w : y ＝ z}
+  (α : p ＝ q) (δ : u ＝ w) →
+  ( horizontal-concat-Id² α δ) ＝
+  ( vertical-concat-Id² (right-whisker-concat α u) (left-whisker-concat q δ))
+outer-interchange-Id² {p = refl} refl δ =
+  compute-left-refl-horizontal-concat-Id² δ
 
 unit-law-α-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) (u : y ＝ z) →
   ( ( interchange-Id² α refl (refl {x = u}) refl) ∙
-    ( right-unit ∙ right-unit-law-horizontal-concat-Id² α)) ＝
-  ( ( right-unit-law-horizontal-concat-Id² (α ∙ refl)) ∙
-    ( ap (ap (concat' x u)) right-unit))
-unit-law-α-interchange-Id² refl u = refl
+    ( right-unit ∙ compute-right-refl-horizontal-concat-Id² α)) ＝
+  ( ( compute-right-refl-horizontal-concat-Id² (α ∙ refl)) ∙
+    ( ap (λ s → right-whisker-concat s u) right-unit))
+unit-law-α-interchange-Id² refl _ = refl
 
 unit-law-β-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (β : p ＝ q) (u : y ＝ z) →
   interchange-Id² refl β (refl {x = u}) refl ＝ refl
-unit-law-β-interchange-Id² refl u = refl
+unit-law-β-interchange-Id² refl _ = refl
 
 unit-law-γ-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} (p : x ＝ y) {u v : y ＝ z} (γ : u ＝ v) →
   ( ( interchange-Id² (refl {x = p}) refl γ refl) ∙
-    ( right-unit ∙ left-unit-law-horizontal-concat-Id² γ)) ＝
-  ( ( left-unit-law-horizontal-concat-Id² (γ ∙ refl)) ∙
-    ( ap (ap (concat p z)) right-unit))
-unit-law-γ-interchange-Id² p refl = refl
+    ( right-unit ∙ compute-left-refl-horizontal-concat-Id² γ)) ＝
+  ( ( compute-left-refl-horizontal-concat-Id² (γ ∙ refl)) ∙
+    ( ap (left-whisker-concat p) right-unit))
+unit-law-γ-interchange-Id² _ refl = refl
 
 unit-law-δ-interchange-Id² :
   {l : Level} {A : UU l} {x y z : A} (p : x ＝ y) {u v : y ＝ z} (δ : u ＝ v) →
   interchange-Id² (refl {x = p}) refl refl δ ＝ refl
-unit-law-δ-interchange-Id² p refl = refl
-```
-
-### Action on 2-paths of functors
-
-Functions have an induced action on 2-paths
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
-  {p p' : x ＝ y} (f : A → B) (α : p ＝ p')
-  where
-
-  ap² : (ap f p) ＝ (ap f p')
-  ap² = (ap (ap f)) α
-```
-
-Since this is define in terms of `ap`, it comes with the standard coherences. It
-also has induced cohereces.
-
-Inverse law.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
-  {p p' : x ＝ y} (f : A → B) (α : p ＝ p')
-  where
-
-  nat-sq-ap-inv-Id² :
-    coherence-square-identifications
-      ( ap² f (horizontal-inv-Id² α))
-      ( ap-inv f p)
-      ( ap-inv f p')
-      ( horizontal-inv-Id² (ap² f α))
-  nat-sq-ap-inv-Id² =
-    ( ( inv (horizontal-concat-Id² refl (ap-comp inv (ap f) α))) ∙
-      ( nat-htpy (ap-inv f) α)) ∙
-    ( horizontal-concat-Id² (ap-comp (ap f) inv α) refl)
-```
-
-Identity law and constant law.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
-  {p p' : x ＝ y} (α : p ＝ p')
-  where
-
-  nat-sq-ap-id-Id² :
-    coherence-square-identifications (ap² id α) (ap-id p) (ap-id p') α
-  nat-sq-ap-id-Id² =
-    ((horizontal-concat-Id² refl (inv (ap-id α))) ∙ (nat-htpy ap-id α))
-
-  nat-sq-ap-const-Id² :
-    (b : B) →
-    coherence-square-identifications
-      ( ap² (const A B b) α)
-      ( ap-const b p)
-      ( ap-const b p')
-      ( refl)
-  nat-sq-ap-const-Id² b =
-    ( inv (horizontal-concat-Id² refl (ap-const refl α))) ∙
-    ( nat-htpy (ap-const b) α)
-```
-
-Composition law
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {x y : A} {p p' : x ＝ y} (g : B → C) (f : A → B) (α : p ＝ p')
-  where
-
-  nat-sq-ap-comp-Id² :
-    coherence-square-identifications
-      ( ap² (g ∘ f) α)
-      ( ap-comp g f p)
-      ( ap-comp g f p')
-      ( (ap² g ∘ ap² f) α)
-  nat-sq-ap-comp-Id² =
-    (horizontal-concat-Id² refl (inv (ap-comp (ap g) (ap f) α)) ∙
-      (nat-htpy (ap-comp g f) α))
+unit-law-δ-interchange-Id² _ refl = refl
 ```
 
 ## Properties of 3-paths
@@ -679,7 +334,7 @@ module _
 3-paths are identifications of 2-paths. In symbols, a type of 3-paths is a type
 of the form `α ＝ β` where `α β : p ＝ q` and `p q : x ＝ y`.
 
-### Concatination in a type of 3-paths
+### Concatenation in a type of 3-paths
 
 Like with 2-paths, 3-paths have the standard operations on equalties, plus the
 operations induced by the operations on 1-paths. But 3-paths also have
@@ -688,7 +343,7 @@ in triple identity types. We name the three concatenations of triple identity
 types x-, y-, and z-concatenation, after the standard names for the three axis
 in 3-dimensional space.
 
-The x-concatenation operation corresponds the standard concatination of
+The x-concatenation operation corresponds the standard concatenation of
 equalities.
 
 ```agda
@@ -699,7 +354,7 @@ x-concat-Id³ σ τ = vertical-concat-Id² σ τ
 ```
 
 The y-concatenation operation corresponds the operation induced by the
-concatination on 1-paths.
+concatenation on 1-paths.
 
 ```agda
 y-concat-Id³ :
@@ -708,8 +363,8 @@ y-concat-Id³ :
 y-concat-Id³ = horizontal-concat-Id²
 ```
 
-The z-concatenation operation corresponds the concatination induced by the
-horizontal concatination on 2-paths.
+The z-concatenation operation corresponds the concatenation induced by the
+horizontal concatenation on 2-paths.
 
 ```agda
 z-concat-Id³ :
@@ -734,13 +389,15 @@ right-unit-law-x-concat-Id³ = right-unit-law-vertical-concat-Id²
 
 left-unit-law-y-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} {α : p ＝ q} {γ δ : q ＝ r}
-  {τ : γ ＝ δ} → y-concat-Id³ (refl {x = α}) τ ＝ ap (concat α r) τ
-left-unit-law-y-concat-Id³ {τ = τ} = left-unit-law-horizontal-concat-Id² τ
+  {τ : γ ＝ δ} →
+  y-concat-Id³ (refl {x = α}) τ ＝ left-whisker-concat α τ
+left-unit-law-y-concat-Id³ {τ = τ} = compute-left-refl-horizontal-concat-Id² τ
 
 right-unit-law-y-concat-Id³ :
   {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} {α β : p ＝ q} {γ : q ＝ r}
-  {σ : α ＝ β} → y-concat-Id³ σ (refl {x = γ}) ＝ ap (concat' p γ) σ
-right-unit-law-y-concat-Id³ {σ = σ} = right-unit-law-horizontal-concat-Id² σ
+  {σ : α ＝ β} →
+  y-concat-Id³ σ (refl {x = γ}) ＝ right-whisker-concat σ γ
+right-unit-law-y-concat-Id³ {σ = σ} = compute-right-refl-horizontal-concat-Id² σ
 
 left-unit-law-z-concat-Id³ :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z}
@@ -789,13 +446,13 @@ interchange-y-z-concat-Id³ refl refl refl refl = inv right-unit
 ## Properties of 4-paths
 
 The pattern for concatenation of 1, 2, and 3-paths continues. There are four
-ways to concatenate in quadruple identity types. We name the three non-standard
+ways to concatenate in quadruple identity types. We name the three nonstandard
 concatenations in quadruple identity types `i`-, `j`-, and `k`-concatenation,
 after the standard names for the quaternions `i`, `j`, and `k`.
 
 ### Concatenation of four paths
 
-#### The standard concatination
+#### The standard concatenation
 
 ```agda
 concat-Id⁴ :
@@ -804,7 +461,7 @@ concat-Id⁴ :
 concat-Id⁴ σ τ = x-concat-Id³ σ τ
 ```
 
-#### Concatination induced by concatination of boundary 1-paths
+#### Concatenation induced by concatenation of boundary 1-paths
 
 ```agda
 i-concat-Id⁴ :
@@ -814,7 +471,7 @@ i-concat-Id⁴ :
 i-concat-Id⁴ σ τ = y-concat-Id³ σ τ
 ```
 
-#### Concatination induced by concatination of boundary 2-paths
+#### Concatenation induced by concatenation of boundary 2-paths
 
 ```agda
 j-concat-Id⁴ :
@@ -824,7 +481,7 @@ j-concat-Id⁴ :
 j-concat-Id⁴ σ τ = z-concat-Id³ σ τ
 ```
 
-#### Concatination induced by concatination of boundary 3-paths
+#### Concatenation induced by concatenation of boundary 3-paths
 
 ```agda
 k-concat-Id⁴ :
@@ -841,7 +498,7 @@ module _
   {l : Level} {A : UU l} {x000 x001 x010 x100 x011 x101 x110 x111 : A}
   where
 
-  cube :
+  coherence-cube-identifications :
     (p000̂ : x000 ＝ x001) (p00̂0 : x000 ＝ x010) (p0̂00 : x000 ＝ x100)
     (p00̂1 : x001 ＝ x011) (p0̂01 : x001 ＝ x101) (p010̂ : x010 ＝ x011)
     (p0̂10 : x010 ＝ x110) (p100̂ : x100 ＝ x101) (p10̂0 : x100 ＝ x110)
@@ -852,20 +509,20 @@ module _
     (p0̂0̂1 : coherence-square-identifications p0̂01 p00̂1 p10̂1 p0̂11)
     (p0̂10̂ : coherence-square-identifications p0̂10 p010̂ p110̂ p0̂11)
     (p10̂0̂ : coherence-square-identifications p10̂0 p100̂ p110̂ p10̂1) → UU l
-  cube
+  coherence-cube-identifications
     p000̂ p00̂0 p0̂00 p00̂1 p0̂01 p010̂ p0̂10 p100̂ p10̂0 p0̂11 p10̂1 p110̂
     p00̂0̂ p0̂00̂ p0̂0̂0 p0̂0̂1 p0̂10̂ p10̂0̂ =
     Id
-      ( ( ap (concat' x000 p0̂11) p00̂0̂) ∙
+      ( ( right-whisker-concat p00̂0̂ p0̂11) ∙
         ( ( assoc p00̂0 p010̂ p0̂11) ∙
-          ( ( ap (concat p00̂0 x111) p0̂10̂) ∙
+          ( ( left-whisker-concat p00̂0 p0̂10̂) ∙
             ( ( inv (assoc p00̂0 p0̂10 p110̂)) ∙
-              ( ( ap (concat' x000 p110̂) p0̂0̂0) ∙
+              ( ( right-whisker-concat p0̂0̂0 p110̂) ∙
                 ( assoc p0̂00 p10̂0 p110̂))))))
       ( ( assoc p000̂ p00̂1 p0̂11) ∙
-        ( ( ap (concat p000̂ x111) p0̂0̂1) ∙
+        ( ( left-whisker-concat p000̂ p0̂0̂1) ∙
           ( ( inv (assoc p000̂ p0̂01 p10̂1)) ∙
-            ( ( ap (concat' x000 p10̂1) p0̂00̂) ∙
+            ( ( right-whisker-concat p0̂00̂ p10̂1) ∙
               ( ( assoc p0̂00 p100̂ p10̂1) ∙
-                ( ( ap (concat p0̂00 x111) p10̂0̂)))))))
+                ( ( left-whisker-concat p0̂00 p10̂0̂)))))))
 ```

@@ -122,7 +122,7 @@ module _
         ( λ x →
           ( map-aut-family-with-descent-data-circle A x ＝ x) ×
           ( is-in-subtype subtype-descent-data-circle-subtype x))
-      by equiv-tot (λ _ → commutative-prod)
+      by equiv-tot (λ _ → commutative-product)
     ≃ Σ ( fixpoint-descent-data-circle
           ( descent-data-family-with-descent-data-circle A))
         ( λ x → is-in-subtype subtype-descent-data-circle-subtype (pr1 x))

@@ -16,10 +16,13 @@ open import foundation.effective-maps-equivalence-relations
 open import foundation.epimorphisms-with-respect-to-sets
 open import foundation.equivalence-classes
 open import foundation.existential-quantification
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.images
+open import foundation.injective-maps
 open import foundation.locally-small-types
+open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
@@ -29,6 +32,7 @@ open import foundation.transport-along-identifications
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-image
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.commuting-triangles-of-maps
@@ -38,11 +42,9 @@ open import foundation-core.embeddings
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.small-types
@@ -50,7 +52,6 @@ open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
 open import foundation-core.univalence
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -527,7 +528,7 @@ module _
 
       P-Prop : (b : type-Set B) (x : type-Set X) → Prop (l1 ⊔ l3 ⊔ l)
       P-Prop b x =
-        ∃-Prop A
+        exists-structure-Prop A
           ( λ a →
             ( map-reflecting-map-equivalence-relation R f a ＝ x) ×
             ( map-reflecting-map-equivalence-relation R q a ＝ b))
@@ -562,7 +563,7 @@ module _
       α : (b : type-Set B) → Σ (type-Set X) (P b)
       α =
         map-inv-is-equiv
-          ( dependent-universal-property-surj-is-surjective
+          ( dependent-universal-property-surjection-is-surjective
             ( map-reflecting-map-equivalence-relation R q)
             ( pr1 E)
             ( λ b →
@@ -577,7 +578,7 @@ module _
         ( pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
       β = htpy-eq
             ( is-section-map-inv-is-equiv
-              ( dependent-universal-property-surj-is-surjective
+              ( dependent-universal-property-surjection-is-surjective
                 ( map-reflecting-map-equivalence-relation R q)
                 ( pr1 E)
                 ( λ b → pair (Σ (type-Set X) (P b)) (is-prop-total-P b)))
@@ -675,7 +676,7 @@ module _
     ((a : A) → type-Prop (P (map-reflecting-map-equivalence-relation R q a))) →
     ((x : type-Set Q) → type-Prop (P x))
   ind-is-set-quotient =
-    apply-dependent-universal-property-surj-is-surjective
+    apply-dependent-universal-property-surjection-is-surjective
       ( map-reflecting-map-equivalence-relation R q)
       ( is-surjective-is-set-quotient R Q q U)
 ```
@@ -838,7 +839,7 @@ module _
   pr1 equiv-equalizes-equal-values-extension-along-surjection-Set =
     equalizes-equal-values-extension-along-surjection-Set
   pr2 equiv-equalizes-equal-values-extension-along-surjection-Set =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-extension-along-surjection-Set f C g)
       ( is-prop-equalizes-equal-values-surjection-Set)
       ( extension-equalizes-equal-values-surjection-Set)

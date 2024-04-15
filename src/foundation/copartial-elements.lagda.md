@@ -39,7 +39,7 @@ if the proposition `Q` holds.
 
 In order to compare copartial elements with
 [partial elements](foundation.partial-elements.md), note that we have the
-following [pullback squares](foundation.pullback-squares.md)
+following [pullback](foundation.pullbacks.md) squares
 
 ```text
   A -----> Σ (Q : Prop), A * Q        1 -----> Σ (P : Prop), (P → A)

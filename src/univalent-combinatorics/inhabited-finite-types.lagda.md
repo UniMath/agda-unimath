@@ -68,12 +68,12 @@ module _
 compute-Inhabited-𝔽 :
   {l : Level} →
   Inhabited-𝔽 l ≃
-    Σ (Inhabited-Type l) (λ X → is-finite (type-Inhabited-Type X))
+  Σ (Inhabited-Type l) (λ X → is-finite (type-Inhabited-Type X))
 compute-Inhabited-𝔽 = equiv-right-swap-Σ
 
 is-finite-and-inhabited-Prop : {l : Level} → UU l → Prop l
 is-finite-and-inhabited-Prop X =
-  prod-Prop (is-finite-Prop X) (is-inhabited-Prop X)
+  product-Prop (is-finite-Prop X) (is-inhabited-Prop X)
 
 is-finite-and-inhabited : {l : Level} → UU l → UU l
 is-finite-and-inhabited X =
@@ -124,8 +124,8 @@ module _
 compute-Fam-Inhabited-𝔽 :
   {l1 l2 : Level} → (X : 𝔽 l1) →
   Fam-Inhabited-Types-𝔽 l2 X ≃
-    Σ ( Fam-Inhabited-Types l2 (type-𝔽 X))
-      ( λ Y → (x : type-𝔽 X) → is-finite (type-Inhabited-Type (Y x)))
+  Σ ( Fam-Inhabited-Types l2 (type-𝔽 X))
+    ( λ Y → (x : type-𝔽 X) → is-finite (type-Inhabited-Type (Y x)))
 compute-Fam-Inhabited-𝔽 X =
   ( distributive-Π-Σ) ∘e
   ( equiv-Π

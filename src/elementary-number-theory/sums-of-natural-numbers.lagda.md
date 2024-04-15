@@ -22,7 +22,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import lists.lists
 
@@ -97,14 +97,14 @@ abstract
 ```agda
 abstract
   constant-sum-Fin-ℕ :
-    (m n : ℕ) → sum-Fin-ℕ m (const (Fin m) ℕ n) ＝ m *ℕ n
+    (m n : ℕ) → sum-Fin-ℕ m (const (Fin m) n) ＝ m *ℕ n
   constant-sum-Fin-ℕ zero-ℕ n = refl
   constant-sum-Fin-ℕ (succ-ℕ m) n = ap (_+ℕ n) (constant-sum-Fin-ℕ m n)
 
 abstract
   constant-sum-count-ℕ :
     {l : Level} {A : UU l} (e : count A) (n : ℕ) →
-    sum-count-ℕ e (const A ℕ n) ＝ (number-of-elements-count e) *ℕ n
+    sum-count-ℕ e (const A n) ＝ (number-of-elements-count e) *ℕ n
   constant-sum-count-ℕ (pair m e) n = constant-sum-Fin-ℕ m n
 ```
 

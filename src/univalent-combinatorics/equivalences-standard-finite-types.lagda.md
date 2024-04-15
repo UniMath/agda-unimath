@@ -36,12 +36,12 @@ We construct **equivalences** between (types built out of)
 function-Fin :
   (k l : ℕ) → (Fin k → Fin l) ≃ Fin (exp-ℕ l k)
 function-Fin zero-ℕ l =
-  ( inv-left-unit-law-coprod unit) ∘e
+  ( inv-left-unit-law-coproduct unit) ∘e
   ( equiv-is-contr (universal-property-empty' (Fin l)) is-contr-unit)
 function-Fin (succ-ℕ k) l =
-  ( prod-Fin (exp-ℕ l k) l) ∘e
-  ( equiv-prod (function-Fin k l) (equiv-universal-property-unit (Fin l))) ∘e
-  ( equiv-universal-property-coprod (Fin l))
+  ( product-Fin (exp-ℕ l k) l) ∘e
+  ( equiv-product (function-Fin k l) (equiv-universal-property-unit (Fin l))) ∘e
+  ( equiv-universal-property-coproduct (Fin l))
 
 Fin-exp-ℕ : (k l : ℕ) → Fin (exp-ℕ l k) ≃ (Fin k → Fin l)
 Fin-exp-ℕ k l = inv-equiv (function-Fin k l)

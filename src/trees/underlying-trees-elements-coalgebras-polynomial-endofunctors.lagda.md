@@ -468,7 +468,7 @@ module _
     is-contr-equiv
       ( root-coalgebra w ＝
         root-coalgebra w)
-      ( right-unit-law-coprod-is-empty
+      ( right-unit-law-coproduct-is-empty
         ( root-coalgebra w ＝
           root-coalgebra w)
         ( Σ ( node-element-coalgebra X w)
@@ -484,7 +484,7 @@ module _
       ( Σ ( node-element-coalgebra X w)
           ( edge-element-coalgebra X w
             ( node-inclusion-element-coalgebra H x)))
-      ( left-unit-law-coprod-is-empty
+      ( left-unit-law-coproduct-is-empty
         ( root-coalgebra w ＝
           node-inclusion-element-coalgebra H x)
         ( Σ ( node-element-coalgebra X w)

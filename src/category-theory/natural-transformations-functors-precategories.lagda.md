@@ -21,6 +21,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -243,17 +244,17 @@ module _
       ( map-functor-Precategory C D H)
       ( map-functor-Precategory C D I)
 
-  inv-associative-comp-natural-transformation-Precategory :
+  involutive-eq-associative-comp-natural-transformation-Precategory :
     (F G H I : functor-Precategory C D)
     (α : natural-transformation-Precategory C D F G)
     (β : natural-transformation-Precategory C D G H)
     (γ : natural-transformation-Precategory C D H I) →
-    comp-natural-transformation-Precategory C D F H I γ
-      ( comp-natural-transformation-Precategory C D F G H β α) ＝
     comp-natural-transformation-Precategory C D F G I
-      ( comp-natural-transformation-Precategory C D G H I γ β) α
-  inv-associative-comp-natural-transformation-Precategory F G H I =
-    inv-associative-comp-natural-transformation-map-Precategory C D
+      ( comp-natural-transformation-Precategory C D G H I γ β) α ＝ⁱ
+    comp-natural-transformation-Precategory C D F H I γ
+      ( comp-natural-transformation-Precategory C D F G H β α)
+  involutive-eq-associative-comp-natural-transformation-Precategory F G H I =
+    involutive-eq-associative-comp-natural-transformation-map-Precategory C D
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
       ( map-functor-Precategory C D H)
@@ -277,12 +278,12 @@ transformation.
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  {C : Precategory l1 l2}
-  {D : Precategory l3 l4}
-  {E : Precategory l5 l6}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (E : Precategory l5 l6)
   where
 
-  whiskering-functor-natural-transformation-Precategory :
+  left-whisker-natural-transformation-Precategory :
     (F G : functor-Precategory C D)
     (H : functor-Precategory D E)
     (α : natural-transformation-Precategory C D F G) →
@@ -291,7 +292,7 @@ module _
       ( E)
       ( comp-functor-Precategory C D E H F)
       ( comp-functor-Precategory C D E H G)
-  whiskering-functor-natural-transformation-Precategory F G H α =
+  left-whisker-natural-transformation-Precategory F G H α =
     ( λ x → (pr1 (pr2 H)) ((pr1 α) x)) ,
     ( λ {x} {y} → λ f →
       inv
@@ -309,7 +310,7 @@ module _
         ( (pr1 α) y)
         ( (pr1 (pr2 F)) f)))
 
-  whiskering-natural-transformation-functor-Precategory :
+  right-whisker-natural-transformation-Precategory :
     (F G : functor-Precategory C D)
     (α : natural-transformation-Precategory C D F G)
     (K : functor-Precategory E C) →
@@ -318,7 +319,7 @@ module _
       ( D)
       ( comp-functor-Precategory E C D F K)
       ( comp-functor-Precategory E C D G K)
-  whiskering-natural-transformation-functor-Precategory F G α K =
+  right-whisker-natural-transformation-Precategory F G α K =
     (λ x → (pr1 α) ((pr1 K) x)) , (λ f → (pr2 α) ((pr1 (pr2 K)) f))
 ```
 
@@ -336,10 +337,11 @@ transformations obtained by whiskering.
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  {C : Precategory l1 l2}
-  {D : Precategory l3 l4}
-  {E : Precategory l5 l6}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (E : Precategory l5 l6)
   where
+
   horizontal-comp-natural-transformation-Precategory :
     (F G : functor-Precategory C D)
     (H I : functor-Precategory D E)
@@ -351,26 +353,10 @@ module _
       ( comp-functor-Precategory C D E H F)
       ( comp-functor-Precategory C D E I G)
   horizontal-comp-natural-transformation-Precategory F G H I β α =
-    comp-natural-transformation-Precategory
-      ( C)
-      ( E)
+    comp-natural-transformation-Precategory C E
       ( comp-functor-Precategory C D E H F)
       ( comp-functor-Precategory C D E H G)
       ( comp-functor-Precategory C D E I G)
-      ( whiskering-natural-transformation-functor-Precategory
-        {C = D}
-        {D = E}
-        {E = C}
-        ( H)
-        ( I)
-        ( β)
-        ( G))
-      ( whiskering-functor-natural-transformation-Precategory
-        {C = C}
-        {D = D}
-        {E = E}
-        ( F)
-        ( G)
-        ( H)
-        ( α))
+      ( right-whisker-natural-transformation-Precategory D E C H I β G)
+      ( left-whisker-natural-transformation-Precategory C D E F G H α)
 ```

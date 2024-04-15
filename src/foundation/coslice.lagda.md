@@ -9,15 +9,15 @@ module foundation.coslice where
 ```agda
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>

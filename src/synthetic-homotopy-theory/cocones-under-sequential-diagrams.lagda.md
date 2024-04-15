@@ -14,8 +14,8 @@ open import foundation.binary-homotopies
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
+open import foundation.double-arrows
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -25,7 +25,7 @@ open import foundation.postcomposition-functions
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.sequential-diagrams
@@ -35,10 +35,11 @@ open import synthetic-homotopy-theory.sequential-diagrams
 
 ## Idea
 
-A **cocone under a
-[sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
-`(A, a)`** with codomain `X : 𝓤` consists of a family of maps `iₙ : A n → C` and
-a family of [homotopies](foundation.homotopies.md) `Hₙ` asserting that the
+A
+{{#concept "cocone" Disambiguation="sequential diagram" Agda=cocone-sequential-diagram}}
+under a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
+`(A, a)` with codomain `X : 𝒰` consists of a family of maps `iₙ : A n → C` and a
+family of [homotopies](foundation.homotopies.md) `Hₙ` asserting that the
 triangles
 
 ```text
@@ -102,9 +103,9 @@ filling the "pinched cylinder" with the faces `Kₙ`, `Hₙ`, `Lₙ` and `Kₙ�
 
 The coherence datum may be better understood by viewing a cocone as a
 [morphism](synthetic-homotopy-theory.morphisms-sequential-diagrams.md) from
-`(A, a)` to the constant cocone `(n ↦ X, n ↦ id)` — the two types are
-definitionally equal. Then a homotopy of cocones is a regular homotopy of
-morphisms of sequential diagrams.
+`(A, a)` to the constant cocone `(n ↦ X, n ↦ id)` — the two types are strictly
+equal. Then a homotopy of cocones is a regular homotopy of morphisms of
+sequential diagrams.
 
 ```agda
 module _
@@ -152,6 +153,35 @@ module _
     coherence-htpy-cocone-sequential-diagram c c'
       ( htpy-htpy-cocone-sequential-diagram)
   coherence-htpy-htpy-cocone-sequential-diagram = pr2 H
+```
+
+### Concatenation of homotopies of cocones under a sequential diagram
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
+  {c c' c'' : cocone-sequential-diagram A X}
+  (H : htpy-cocone-sequential-diagram c c')
+  (K : htpy-cocone-sequential-diagram c' c'')
+  where
+
+  concat-htpy-cocone-sequential-diagram : htpy-cocone-sequential-diagram c c''
+  pr1 concat-htpy-cocone-sequential-diagram n =
+    ( htpy-htpy-cocone-sequential-diagram H n) ∙h
+    ( htpy-htpy-cocone-sequential-diagram K n)
+  pr2 concat-htpy-cocone-sequential-diagram n =
+    horizontal-pasting-coherence-square-homotopies
+      ( htpy-htpy-cocone-sequential-diagram H n)
+      ( htpy-htpy-cocone-sequential-diagram K n)
+      ( coherence-cocone-sequential-diagram c n)
+      ( coherence-cocone-sequential-diagram c' n)
+      ( coherence-cocone-sequential-diagram c'' n)
+      ( ( htpy-htpy-cocone-sequential-diagram H (succ-ℕ n)) ·r
+        ( map-sequential-diagram A n))
+      ( ( htpy-htpy-cocone-sequential-diagram K (succ-ℕ n)) ·r
+        ( map-sequential-diagram A n))
+      ( coherence-htpy-htpy-cocone-sequential-diagram H n)
+      ( coherence-htpy-htpy-cocone-sequential-diagram K n)
 ```
 
 ### Postcomposing cocones under a sequential diagram with a map
@@ -336,47 +366,39 @@ module _
   { l1 : Level} (A : sequential-diagram l1)
   where
 
-  bottom-map-cofork-cocone-sequential-diagram :
+  left-map-cofork-cocone-sequential-diagram :
     Σ ℕ (family-sequential-diagram A) → Σ ℕ (family-sequential-diagram A)
-  bottom-map-cofork-cocone-sequential-diagram = id
+  left-map-cofork-cocone-sequential-diagram = id
 
-  top-map-cofork-cocone-sequential-diagram :
+  right-map-cofork-cocone-sequential-diagram :
     Σ ℕ (family-sequential-diagram A) → Σ ℕ (family-sequential-diagram A)
-  top-map-cofork-cocone-sequential-diagram =
+  right-map-cofork-cocone-sequential-diagram =
     map-Σ
       ( family-sequential-diagram A)
       ( succ-ℕ)
       ( map-sequential-diagram A)
+
+  double-arrow-sequential-diagram : double-arrow l1 l1
+  double-arrow-sequential-diagram =
+    make-double-arrow
+      ( left-map-cofork-cocone-sequential-diagram)
+      ( right-map-cofork-cocone-sequential-diagram)
 
   module _
     { l2 : Level} {X : UU l2}
     where
 
     cocone-sequential-diagram-cofork :
-      cofork
-        ( bottom-map-cofork-cocone-sequential-diagram)
-        ( top-map-cofork-cocone-sequential-diagram)
-        ( X) →
+      cofork double-arrow-sequential-diagram X →
       cocone-sequential-diagram A X
     pr1 (cocone-sequential-diagram-cofork e) =
-      ev-pair
-        ( map-cofork
-          ( bottom-map-cofork-cocone-sequential-diagram)
-          ( top-map-cofork-cocone-sequential-diagram)
-          ( e))
+      ev-pair (map-cofork double-arrow-sequential-diagram e)
     pr2 (cocone-sequential-diagram-cofork e) =
-      ev-pair
-        ( coherence-cofork
-          ( bottom-map-cofork-cocone-sequential-diagram)
-          ( top-map-cofork-cocone-sequential-diagram)
-          ( e))
+      ev-pair (coh-cofork double-arrow-sequential-diagram e)
 
     cofork-cocone-sequential-diagram :
       cocone-sequential-diagram A X →
-      cofork
-        ( bottom-map-cofork-cocone-sequential-diagram)
-        ( top-map-cofork-cocone-sequential-diagram)
-        ( X)
+      cofork double-arrow-sequential-diagram X
     pr1 (cofork-cocone-sequential-diagram c) =
       ind-Σ (map-cocone-sequential-diagram c)
     pr2 (cofork-cocone-sequential-diagram c) =
@@ -387,8 +409,7 @@ module _
         cofork-cocone-sequential-diagram ∘ cocone-sequential-diagram-cofork ~ id
       is-section-cocone-sequential-diagram-cofork e =
         eq-htpy-cofork
-          ( bottom-map-cofork-cocone-sequential-diagram)
-          ( top-map-cofork-cocone-sequential-diagram)
+          ( double-arrow-sequential-diagram)
           ( cofork-cocone-sequential-diagram
             ( cocone-sequential-diagram-cofork e))
           ( e)
@@ -413,10 +434,7 @@ module _
         ( is-section-cocone-sequential-diagram-cofork)
 
     equiv-cocone-sequential-diagram-cofork :
-      cofork
-        ( bottom-map-cofork-cocone-sequential-diagram)
-        ( top-map-cofork-cocone-sequential-diagram)
-        ( X) ≃
+      cofork double-arrow-sequential-diagram X ≃
       cocone-sequential-diagram A X
     pr1 equiv-cocone-sequential-diagram-cofork =
       cocone-sequential-diagram-cofork
@@ -430,16 +448,14 @@ module _
       ( cocone-map-sequential-diagram c {Y = Y})
       ( cocone-sequential-diagram-cofork)
       ( cofork-map
-        ( bottom-map-cofork-cocone-sequential-diagram)
-        ( top-map-cofork-cocone-sequential-diagram)
+        ( double-arrow-sequential-diagram)
         ( cofork-cocone-sequential-diagram c))
   triangle-cocone-sequential-diagram-cofork c h =
     eq-htpy-cocone-sequential-diagram A
       ( cocone-map-sequential-diagram c h)
       ( cocone-sequential-diagram-cofork
         ( cofork-map
-          ( bottom-map-cofork-cocone-sequential-diagram)
-          ( top-map-cofork-cocone-sequential-diagram)
+          ( double-arrow-sequential-diagram)
           ( cofork-cocone-sequential-diagram c)
           ( h)))
       ( ev-pair refl-htpy ,
@@ -448,8 +464,4 @@ module _
 
 ## References
 
-1. Kristina Sojakova, Floris van Doorn, and Egbert Rijke. 2020. Sequential
-   Colimits in Homotopy Type Theory. In Proceedings of the 35th Annual ACM/IEEE
-   Symposium on Logic in Computer Science (LICS '20). Association for Computing
-   Machinery, New York, NY, USA, 845–858,
-   [DOI:10.1145](https://doi.org/10.1145/3373718.3394801)
+{{#bibliography}} {{#reference SDR20}}

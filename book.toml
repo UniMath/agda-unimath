@@ -26,7 +26,7 @@ assets_version = "1.2.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
 [preprocessor.git-metadata]
 command = "python3 ./scripts/preprocessor_git_metadata.py"
-# Disable by default - it takes a non-trivial amount of time
+# Disable by default - it takes a nontrivial amount of time
 # Can be overriden by running
 # `export MDBOOK_PREPROCESSOR__GIT_METADATA__ENABLE=true` in your shell
 enable = false
@@ -51,6 +51,14 @@ output-file = "docs/concept_index.json"
 mathswitch-template = "https://mathswitch.xyz/concept/Wd/{wikidata_id}"
 wikidata-template = "https://www.wikidata.org/entity/{wikidata_id}"
 
+[preprocessor.citations]
+command = "python3 ./scripts/preprocessor_citations.py"
+bibtex_file = "references.bib"
+citation_style = "alpha"
+citation_label_style = "custom_alpha"
+error_on_unmatched_keys = true
+before = [ "git-metadata" ]
+
 [output.linkcheck]
 follow-web-links = false
 
@@ -62,6 +70,7 @@ additional-css = [
   "website/css/Agda.css",
   "website/css/Agda-highlight.css",
   "website/css/agda-logo.css",
+  "website/css/bibliography.css",
   "theme/catppuccin.css",
   "theme/catppuccin-admonish.css",
   "theme/pagetoc.css",

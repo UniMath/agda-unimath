@@ -101,7 +101,7 @@ module _
       ( T)
       ( X)
   equiv-cauchy-series-equiv-species-subuniverse =
-    equiv-tot λ X → equiv-prod (f X) id-equiv
+    equiv-tot λ X → equiv-product (f X) id-equiv
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -119,5 +119,5 @@ module _
   equiv-cauchy-series-species-subuniverse =
     equiv-tot
       ( λ F →
-        equiv-prod id-equiv (equiv-postcomp (inclusion-subuniverse P F) e))
+        equiv-product id-equiv (equiv-postcomp (inclusion-subuniverse P F) e))
 ```

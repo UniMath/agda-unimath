@@ -9,8 +9,10 @@ module orthogonal-factorization-systems.null-types where
 ```agda
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.logical-equivalences
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.type-arithmetic-unit-type
@@ -25,10 +27,10 @@ open import orthogonal-factorization-systems.local-types
 
 ## Idea
 
-A type `A` is said to be **null at** `Y`, or **`Y`-null**, if the constant map
+A type `A` is said to be **null at** `Y`, or **`Y`-null**, if the diagonal map
 
 ```text
-  const : A → (Y → A)
+  Δ : A → (Y → A)
 ```
 
 is an equivalence. The idea is that _`A` observes the type `Y` to be
@@ -42,10 +44,10 @@ module _
   where
 
   is-null : UU (l1 ⊔ l2)
-  is-null = is-equiv (const Y A)
+  is-null = is-equiv (diagonal-exponential A Y)
 
   is-prop-is-null : is-prop is-null
-  is-prop-is-null = is-property-is-equiv (const Y A)
+  is-prop-is-null = is-property-is-equiv (diagonal-exponential A Y)
 
   is-null-Prop : Prop (l1 ⊔ l2)
   pr1 is-null-Prop = is-null
@@ -64,7 +66,7 @@ module _
   is-local-is-null : is-null Y A → is-local (λ y → star) A
   is-local-is-null =
     is-equiv-comp
-      ( const Y A)
+      ( diagonal-exponential A Y)
       ( map-left-unit-law-function-type A)
       ( is-equiv-map-left-unit-law-function-type A)
 
@@ -77,8 +79,8 @@ module _
 
   equiv-is-local-is-null : is-null Y A ≃ is-local (λ y → star) A
   equiv-is-local-is-null =
-    equiv-prop
-      ( is-property-is-equiv (const Y A))
+    equiv-iff-is-prop
+      ( is-property-is-equiv (diagonal-exponential A Y))
       ( is-property-is-equiv (precomp (λ y → star) A))
       ( is-local-is-null)
       ( is-null-is-local)

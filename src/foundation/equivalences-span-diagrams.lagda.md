@@ -64,9 +64,9 @@ module _
 
   is-equiv-prop-hom-span-diagram : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   is-equiv-prop-hom-span-diagram =
-    prod-Prop
+    product-Prop
       ( is-equiv-Prop (map-domain-hom-span-diagram 𝒮 𝒯 f))
-      ( prod-Prop
+      ( product-Prop
         ( is-equiv-Prop (map-codomain-hom-span-diagram 𝒮 𝒯 f))
         ( is-equiv-Prop (spanning-map-hom-span-diagram 𝒮 𝒯 f)))
 

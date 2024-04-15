@@ -23,6 +23,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -209,7 +210,7 @@ module _
       { Z}
       { W}
 
-  inv-associative-comp-hom-presheaf-Precategory :
+  involutive-eq-associative-comp-hom-presheaf-Precategory :
     {l3 l4 l5 l6 : Level}
     (X : presheaf-Precategory l3)
     (Y : presheaf-Precategory l4)
@@ -218,16 +219,18 @@ module _
     (h : hom-presheaf-Precategory Z W)
     (g : hom-presheaf-Precategory Y Z)
     (f : hom-presheaf-Precategory X Y) →
-    comp-hom-presheaf-Precategory X Z W
-      ( h)
-      ( comp-hom-presheaf-Precategory X Y Z g f) ＝
     comp-hom-presheaf-Precategory X Y W
       ( comp-hom-presheaf-Precategory Y Z W h g)
-      ( f)
-  inv-associative-comp-hom-presheaf-Precategory X Y Z W =
-    inv-associative-comp-hom-Large-Precategory
-      ( presheaf-large-precategory-Precategory)
-      { X = X} {Y} {Z} {W}
+      ( f) ＝ⁱ
+    comp-hom-presheaf-Precategory X Z W h
+      ( comp-hom-presheaf-Precategory X Y Z g f)
+  involutive-eq-associative-comp-hom-presheaf-Precategory X Y Z W =
+    involutive-eq-associative-comp-hom-Large-Category
+      ( presheaf-large-category-Precategory)
+      { X = X}
+      { Y}
+      { Z}
+      { W}
 
   left-unit-law-comp-hom-presheaf-Precategory :
     {l3 l4 : Level}

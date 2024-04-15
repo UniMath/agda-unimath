@@ -82,12 +82,12 @@ abstract
           ( is-equiv-comp
             ( precomp ev-Maybe (type-Set B))
             ( precomp
-              ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
+              ( map-product (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
               ( type-Set B))
             ( is-equiv-right-factor
               ( ev-pair)
               ( precomp
-                ( map-prod (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
+                ( map-product (map-Π (λ x → unit-trunc-Set)) unit-trunc-Set)
                 ( type-Set B))
               ( is-equiv-ev-pair)
               ( is-equiv-map-equiv

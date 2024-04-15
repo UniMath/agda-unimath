@@ -49,7 +49,7 @@ is-spectrum-Prop : {l : Level} → Prespectrum l → Prop l
 is-spectrum-Prop A =
   Π-Prop ℕ
     ( λ n →
-      is-equiv-pointed-map-Prop (pointed-adjoint-structure-map-Prespectrum A n))
+      is-pointed-equiv-Prop (pointed-adjoint-structure-map-Prespectrum A n))
 
 is-spectrum : {l : Level} → Prespectrum l → UU l
 is-spectrum = type-Prop ∘ is-spectrum-Prop
@@ -98,7 +98,7 @@ module _
     preserves-point-adjoint-structure-map-Prespectrum prespectrum-Spectrum
 
   is-equiv-pointed-adjoint-structure-map-Spectrum :
-    (n : ℕ) → is-equiv-pointed-map (pointed-adjoint-structure-map-Spectrum n)
+    (n : ℕ) → is-pointed-equiv (pointed-adjoint-structure-map-Spectrum n)
   is-equiv-pointed-adjoint-structure-map-Spectrum = pr2 A
 
   structure-equiv-Spectrum :
@@ -139,5 +139,4 @@ module _
 
 ## References
 
-- J. P. May, _A Concise Course in Algebraic Topology_, 1999
-  ([pdf](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf))
+{{#bibliography}} {{#reference May99}}

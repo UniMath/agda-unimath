@@ -19,7 +19,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.pullbacks
+open import foundation.standard-pullbacks
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -179,7 +179,7 @@ triangle-dependent-pullback-property-pushout :
       ( λ (h : (b : B) → P (j b)) → λ s → h (g s))
       ( cone-dependent-pullback-property-pushout f g c P)))
 triangle-dependent-pullback-property-pushout f g (pair i (pair j H)) P h =
-  eq-pair-Σ refl (eq-pair-Σ refl (inv (is-section-eq-htpy (apd h ∘ H))))
+  eq-pair-eq-fiber (eq-pair-eq-fiber (inv (is-section-eq-htpy (apd h ∘ H))))
 
 dependent-pullback-property-dependent-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -230,7 +230,7 @@ dependent-universal-property-dependent-pullback-property-pushout
           ( λ h' → funext (λ x → tr P (H x) (h (f x))) (h' ∘ g))))
 ```
 
-### The non-dependent and dependent universal property of pushouts are logically equivalent
+### The nondependent and dependent universal property of pushouts are logically equivalent
 
 This follows from the fact that the
 [dependent pullback property of pushouts](synthetic-homotopy-theory.dependent-pullback-property-pushouts.md)

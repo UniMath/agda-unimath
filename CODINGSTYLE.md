@@ -498,8 +498,8 @@ the story. Here's how we handle indentation and line breaks in the
 - Lastly, we recommend not naming constructions after infix notation of
   operations included in them. Preferring primary prefix notation over infix
   notation can help keep our code consistent. For example, it's preferred to use
-  `commutative-prod` instead of `commutative-×` for denoting the commutativity
-  of cartesian products.
+  `commutative-product` instead of `commutative-×` for denoting the
+  commutativity of cartesian products.
 
 These guidelines are here to make everyone's coding experience more enjoyable
 and productive. As always, your contributions to the `agda-unimath` library are

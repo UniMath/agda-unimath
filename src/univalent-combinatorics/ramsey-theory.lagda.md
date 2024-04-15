@@ -61,11 +61,11 @@ is-ramsey-set-Fin-r q .(q i) (pair i refl) c =
     R : subset-of-size (q i) (Fin-𝔽 (q i))
     R = pair
           ( full-subset (Fin (q i)))
-          ( unit-trunc-Prop (inv-equiv right-unit-law-prod))
+          ( unit-trunc-Prop (inv-equiv right-unit-law-product))
     {-
     ( pair
       ( pair ( full-subset (Fin {!!}))
-             ( unit-trunc-Prop (inv-equiv right-unit-law-prod)))
+             ( unit-trunc-Prop (inv-equiv right-unit-law-product)))
       ( λ Q H → {!!}))
 -}
 -}

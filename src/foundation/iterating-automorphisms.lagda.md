@@ -15,12 +15,12 @@ open import foundation.automorphisms
 open import foundation.equivalence-extensionality
 open import foundation.iterating-functions
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>

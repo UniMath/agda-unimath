@@ -9,6 +9,7 @@ open import foundation-core.transport-along-identifications public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
@@ -29,7 +30,7 @@ element `b : B x`, we can
 `b` along the identification `p` to obtain an element `tr B p b : B y`.
 
 The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
-recorded in this file.
+recorded on this page.
 
 ## Properties
 
@@ -43,10 +44,10 @@ module _
   inv-tr : x ＝ y → B y → B x
   inv-tr p = tr B (inv p)
 
-  is-retraction-inv-tr : (p : x ＝ y) → (inv-tr p ∘ tr B p) ~ id
+  is-retraction-inv-tr : (p : x ＝ y) → inv-tr p ∘ tr B p ~ id
   is-retraction-inv-tr refl b = refl
 
-  is-section-inv-tr : (p : x ＝ y) → (tr B p ∘ inv-tr p) ~ id
+  is-section-inv-tr : (p : x ＝ y) → tr B p ∘ inv-tr p ~ id
   is-section-inv-tr refl b = refl
 
   is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)

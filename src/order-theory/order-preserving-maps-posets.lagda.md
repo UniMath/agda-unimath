@@ -12,6 +12,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
@@ -197,12 +198,12 @@ module _
       ( preorder-Poset R)
       ( preorder-Poset S)
 
-  inv-associative-comp-hom-Poset :
+  involutive-eq-associative-comp-hom-Poset :
     (h : hom-Poset R S) (g : hom-Poset Q R) (f : hom-Poset P Q) →
-    comp-hom-Poset P R S h (comp-hom-Poset P Q R g f) ＝
-    comp-hom-Poset P Q S (comp-hom-Poset Q R S h g) f
-  inv-associative-comp-hom-Poset =
-    inv-associative-comp-hom-Preorder
+    comp-hom-Poset P Q S (comp-hom-Poset Q R S h g) f ＝ⁱ
+    comp-hom-Poset P R S h (comp-hom-Poset P Q R g f)
+  involutive-eq-associative-comp-hom-Poset =
+    involutive-eq-associative-comp-hom-Preorder
       ( preorder-Poset P)
       ( preorder-Poset Q)
       ( preorder-Poset R)

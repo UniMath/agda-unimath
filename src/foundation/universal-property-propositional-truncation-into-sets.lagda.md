@@ -9,13 +9,13 @@ module foundation.universal-property-propositional-truncation-into-sets where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 open import foundation.weakly-constant-maps
 
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

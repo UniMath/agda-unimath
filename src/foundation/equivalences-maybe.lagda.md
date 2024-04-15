@@ -43,7 +43,7 @@ For any two types `X` and `Y`, we have `(X ≃ Y) ↔ (Maybe X ≃ Maybe Y)`.
 ```agda
 equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) → Maybe X ≃ Maybe Y
-equiv-Maybe e = equiv-coprod e id-equiv
+equiv-Maybe e = equiv-coproduct e id-equiv
 ```
 
 ### Equivalences of Maybe-structures on a type
@@ -398,22 +398,22 @@ module _
     (type-Set X ≃ type-Set X) ≃
     ( Σ ( Maybe (type-Set X) ≃ Maybe (type-Set X))
         ( λ e → map-equiv e (inr star) ＝ inr star))
-  pr1 (pr1 extend-equiv-Maybe f) = equiv-coprod f id-equiv
+  pr1 (pr1 extend-equiv-Maybe f) = equiv-coproduct f id-equiv
   pr2 (pr1 extend-equiv-Maybe f) = refl
   pr2 extend-equiv-Maybe =
     is-equiv-is-invertible
-      ( λ f → pr1 (retraction-equiv-coprod (pr1 f) id-equiv (p f)))
+      ( λ f → pr1 (retraction-equiv-coproduct (pr1 f) id-equiv (p f)))
       ( λ f →
         ( eq-pair-Σ
           ( inv
             ( eq-htpy-equiv
-              ( pr2 (retraction-equiv-coprod (pr1 f) id-equiv (p f)))))
+              ( pr2 (retraction-equiv-coproduct (pr1 f) id-equiv (p f)))))
           ( eq-is-prop
             ( pr2
               ( Id-Prop
                 ( pair
                   ( Maybe (type-Set X))
-                  ( is-set-coprod (is-set-type-Set X) is-set-unit))
+                  ( is-set-coproduct (is-set-type-Set X) is-set-unit))
                 ( map-equiv (pr1 f) (inr star))
                 ( inr star))))))
       ( λ f → eq-equiv-eq-map-equiv refl)
@@ -448,5 +448,5 @@ module _
       ( ( pr1 (map-equiv extend-equiv-Maybe f)) ∘e
         ( pr1 (map-equiv extend-equiv-Maybe g)))
   comp-extend-equiv-Maybe f g =
-    preserves-comp-map-coprod (map-equiv g) (map-equiv f) id id
+    preserves-comp-map-coproduct (map-equiv g) (map-equiv f) id id
 ```

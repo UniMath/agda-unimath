@@ -9,6 +9,7 @@ module foundation.connected-maps where
 ```agda
 open import foundation.connected-types
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.precomposition-dependent-functions
@@ -25,7 +26,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -305,7 +305,7 @@ module _
     is-connected-map k f → dependent-universal-property-connected-map k f
   dependent-universal-property-is-connected-map H P =
     is-equiv-precomp-Π-fiber-condition
-      ( λ b → is-equiv-diagonal-is-connected (P b) (H b))
+      ( λ b → is-equiv-diagonal-exponential-is-connected (P b) (H b))
 
 module _
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : connected-map k A B)

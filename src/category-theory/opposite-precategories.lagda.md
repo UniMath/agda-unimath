@@ -7,18 +7,16 @@ module category-theory.opposite-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.involutions
-open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -54,6 +52,16 @@ module _
     hom-opposite-Precategory x z
   comp-hom-opposite-Precategory g f = comp-hom-Precategory C f g
 
+  involutive-eq-associative-comp-hom-opposite-Precategory :
+    {x y z w : obj-opposite-Precategory}
+    (h : hom-opposite-Precategory z w)
+    (g : hom-opposite-Precategory y z)
+    (f : hom-opposite-Precategory x y) →
+    ( comp-hom-opposite-Precategory (comp-hom-opposite-Precategory h g) f) ＝ⁱ
+    ( comp-hom-opposite-Precategory h (comp-hom-opposite-Precategory g f))
+  involutive-eq-associative-comp-hom-opposite-Precategory h g f =
+    invⁱ (involutive-eq-associative-comp-hom-Precategory C f g h)
+
   associative-comp-hom-opposite-Precategory :
     {x y z w : obj-opposite-Precategory}
     (h : hom-opposite-Precategory z w)
@@ -62,27 +70,8 @@ module _
     ( comp-hom-opposite-Precategory (comp-hom-opposite-Precategory h g) f) ＝
     ( comp-hom-opposite-Precategory h (comp-hom-opposite-Precategory g f))
   associative-comp-hom-opposite-Precategory h g f =
-    inv-witness-associative-composition-operation-binary-family-Set
-      ( hom-set-Precategory C)
-      ( associative-composition-operation-Precategory C)
-      ( f)
-      ( g)
-      ( h)
-
-  inv-associative-comp-hom-opposite-Precategory :
-    {x y z w : obj-opposite-Precategory}
-    (h : hom-opposite-Precategory z w)
-    (g : hom-opposite-Precategory y z)
-    (f : hom-opposite-Precategory x y) →
-    ( comp-hom-opposite-Precategory h (comp-hom-opposite-Precategory g f)) ＝
-    ( comp-hom-opposite-Precategory (comp-hom-opposite-Precategory h g) f)
-  inv-associative-comp-hom-opposite-Precategory h g f =
-    witness-associative-composition-operation-binary-family-Set
-      ( hom-set-Precategory C)
-      ( associative-composition-operation-Precategory C)
-      ( f)
-      ( g)
-      ( h)
+    eq-involutive-eq
+      ( involutive-eq-associative-comp-hom-opposite-Precategory h g f)
 
   id-hom-opposite-Precategory :
     {x : obj-opposite-Precategory} → hom-opposite-Precategory x x
@@ -105,10 +94,8 @@ module _
   pr1 opposite-Precategory = obj-opposite-Precategory
   pr1 (pr2 opposite-Precategory) = hom-set-opposite-Precategory
   pr1 (pr1 (pr2 (pr2 opposite-Precategory))) = comp-hom-opposite-Precategory
-  pr1 (pr2 (pr1 (pr2 (pr2 opposite-Precategory))) h g f) =
-    associative-comp-hom-opposite-Precategory h g f
-  pr2 (pr2 (pr1 (pr2 (pr2 opposite-Precategory))) h g f) =
-    inv-associative-comp-hom-opposite-Precategory h g f
+  pr2 (pr1 (pr2 (pr2 opposite-Precategory))) =
+    involutive-eq-associative-comp-hom-opposite-Precategory
   pr1 (pr2 (pr2 (pr2 opposite-Precategory))) x = id-hom-opposite-Precategory {x}
   pr1 (pr2 (pr2 (pr2 (pr2 opposite-Precategory)))) =
     left-unit-law-comp-hom-opposite-Precategory

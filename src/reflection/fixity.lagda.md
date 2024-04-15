@@ -30,40 +30,44 @@ The fixity of a quoted name is given by
 ## Definition
 
 ```agda
-data Associativity : UU lzero where
-  left-associative : Associativity
-  right-associative : Associativity
-  non-associative : Associativity
+data Associativity-Agda : UU lzero where
+  left-Associativity-Agda : Associativity-Agda
+  right-Associativity-Agda : Associativity-Agda
+  none-Associativity-Agda : Associativity-Agda
 
-data Precedence : UU lzero where
-  related : Float → Precedence
-  unrelated : Precedence
+data Precedence-Agda : UU lzero where
+  related-Precedence-Agda : Float → Precedence-Agda
+  unrelated-Precedence-Agda : Precedence-Agda
 
-data Fixity : UU lzero where
-  fixity : Associativity → Precedence → Fixity
+data Fixity-Agda : UU lzero where
+  cons-Fixity-Agda : Associativity-Agda → Precedence-Agda → Fixity-Agda
 
-{-# BUILTIN ASSOC Associativity #-}
-{-# BUILTIN ASSOCLEFT left-associative #-}
-{-# BUILTIN ASSOCRIGHT right-associative #-}
-{-# BUILTIN ASSOCNON non-associative #-}
+{-# BUILTIN ASSOC Associativity-Agda #-}
+{-# BUILTIN ASSOCLEFT left-Associativity-Agda #-}
+{-# BUILTIN ASSOCRIGHT right-Associativity-Agda #-}
+{-# BUILTIN ASSOCNON none-Associativity-Agda #-}
 
-{-# BUILTIN PRECEDENCE Precedence #-}
-{-# BUILTIN PRECRELATED related #-}
-{-# BUILTIN PRECUNRELATED unrelated #-}
+{-# BUILTIN PRECEDENCE Precedence-Agda #-}
+{-# BUILTIN PRECRELATED related-Precedence-Agda #-}
+{-# BUILTIN PRECUNRELATED unrelated-Precedence-Agda #-}
 
-{-# BUILTIN FIXITY Fixity #-}
-{-# BUILTIN FIXITYFIXITY fixity #-}
+{-# BUILTIN FIXITY Fixity-Agda #-}
+{-# BUILTIN FIXITYFIXITY cons-Fixity-Agda #-}
 
 primitive
-  primQNameFixity : Name → Fixity
+  primQNameFixity : Name-Agda → Fixity-Agda
 ```
 
 ## Examples
 
 ```agda
-_ : primQNameFixity (quote add-ℤ) ＝ fixity non-associative unrelated
+_ :
+  primQNameFixity (quote add-ℤ) ＝
+  cons-Fixity-Agda none-Associativity-Agda unrelated-Precedence-Agda
 _ = refl
 
-_ : primQNameFixity (quote (_+ℤ_)) ＝ fixity left-associative (related 35.0)
+_ :
+  primQNameFixity (quote (_+ℤ_)) ＝
+  cons-Fixity-Agda left-Associativity-Agda (related-Precedence-Agda 35.0)
 _ = refl
 ```

@@ -7,27 +7,20 @@ module foundation.morphisms-arrows where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
-open import foundation.commuting-squares-of-identifications
-open import foundation.commuting-triangles-of-identifications
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
-open import foundation.path-algebra
-open import foundation.postcomposition-functions
-open import foundation.structure-identity-principle
+open import foundation.function-extensionality
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
-open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.postcomposition-functions
 open import foundation-core.precomposition-functions
-open import foundation-core.torsorial-type-families
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -79,6 +72,107 @@ module _
     (h : hom-arrow) →
     coherence-hom-arrow (map-domain-hom-arrow h) (map-codomain-hom-arrow h)
   coh-hom-arrow = pr2 ∘ pr2
+```
+
+## Operations
+
+### The identity morphism of arrows
+
+The identity morphism of arrows is defined as
+
+```text
+        id
+    A -----> A
+    |        |
+  f |        | f
+    V        V
+    B -----> B
+        id
+```
+
+where the homotopy `id ∘ f ~ f ∘ id` is the reflexivity homotopy.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  id-hom-arrow : hom-arrow f f
+  pr1 id-hom-arrow = id
+  pr1 (pr2 id-hom-arrow) = id
+  pr2 (pr2 id-hom-arrow) = refl-htpy
+```
+
+### Composition of morphisms of arrows
+
+Consider a commuting diagram of the form
+
+```text
+        α₀       β₀
+    A -----> X -----> U
+    |        |        |
+  f |   α  g |   β    | h
+    V        V        V
+    B -----> Y -----> V.
+        α₁       β₁
+```
+
+Then the outer rectangle commutes by horizontal pasting of commuting squares of
+maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of
+`β : g → h` with `α : f → g` is therefore defined to be
+
+```text
+        β₀ ∘ α₀
+    A ----------> U
+    |             |
+  f |    α □ β    | h
+    V             V
+    B ----------> V.
+        β₁ ∘ α₁
+```
+
+**Note.** Associativity and the unit laws for composition of morphisms of arrows
+are proven in
+[Homotopies of morphisms of arrows](foundation.homotopies-morphisms-arrows.md).
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
+  (f : A → B) (g : X → Y) (h : U → V) (b : hom-arrow g h) (a : hom-arrow f g)
+  where
+
+  map-domain-comp-hom-arrow : A → U
+  map-domain-comp-hom-arrow =
+    map-domain-hom-arrow g h b ∘ map-domain-hom-arrow f g a
+
+  map-codomain-comp-hom-arrow : B → V
+  map-codomain-comp-hom-arrow =
+    map-codomain-hom-arrow g h b ∘ map-codomain-hom-arrow f g a
+
+  coh-comp-hom-arrow :
+    coherence-hom-arrow f h
+      ( map-domain-comp-hom-arrow)
+      ( map-codomain-comp-hom-arrow)
+  coh-comp-hom-arrow =
+    pasting-horizontal-coherence-square-maps
+      ( map-domain-hom-arrow f g a)
+      ( map-domain-hom-arrow g h b)
+      ( f)
+      ( g)
+      ( h)
+      ( map-codomain-hom-arrow f g a)
+      ( map-codomain-hom-arrow g h b)
+      ( coh-hom-arrow f g a)
+      ( coh-hom-arrow g h b)
+
+  comp-hom-arrow : hom-arrow f h
+  pr1 comp-hom-arrow =
+    map-domain-comp-hom-arrow
+  pr1 (pr2 comp-hom-arrow) =
+    map-codomain-comp-hom-arrow
+  pr2 (pr2 comp-hom-arrow) =
+    coh-comp-hom-arrow
 ```
 
 ### Transposing morphisms of arrows
@@ -136,359 +230,79 @@ module _
   pr2 (pr2 transpose-hom-arrow) = coh-transpose-hom-arrow
 ```
 
-### The identity morphism of arrows
-
-The identity morphism of arrows is defined as
-
-```text
-        id
-    A -----> A
-    |        |
-  f |        | f
-    V        V
-    B -----> B
-        id
-```
-
-where the homotopy `id ∘ f ~ f ∘ id` is the reflexivity homotopy.
+### Morphisms of arrows obtained from cones over cospans
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C)
   where
 
-  id-hom-arrow : hom-arrow f f
-  pr1 id-hom-arrow = id
-  pr1 (pr2 id-hom-arrow) = id
-  pr2 (pr2 id-hom-arrow) = refl-htpy
+  hom-arrow-cone : hom-arrow (vertical-map-cone f g c) g
+  pr1 hom-arrow-cone = horizontal-map-cone f g c
+  pr1 (pr2 hom-arrow-cone) = f
+  pr2 (pr2 hom-arrow-cone) = coherence-square-cone f g c
+
+  hom-arrow-cone' : hom-arrow (horizontal-map-cone f g c) f
+  hom-arrow-cone' =
+    transpose-hom-arrow (vertical-map-cone f g c) g hom-arrow-cone
 ```
 
-### Composition of morphisms of arrows
-
-Consider a commuting diagram of the form
-
-```text
-        α₀       β₀
-    A -----> X -----> U
-    |        |        |
-  f |   α  g |   β    | h
-    V        V        V
-    B -----> Y -----> V.
-        α₁       β₁
-```
-
-Then the outer rectangle commutes by horizontal pasting of commuting squares of
-maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of
-`β : g → h` with `α : f → g` is therefore defined to be
-
-```text
-        β₀ ∘ α₀
-    A ----------> U
-    |             |
-  f |    α □ β    | h
-    V             V
-    B ----------> V.
-        β₁ ∘ α₁
-```
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
-  (f : A → B) (g : X → Y) (h : U → V) (b : hom-arrow g h) (a : hom-arrow f g)
-  where
-
-  map-domain-comp-hom-arrow : A → U
-  map-domain-comp-hom-arrow =
-    map-domain-hom-arrow g h b ∘ map-domain-hom-arrow f g a
-
-  map-codomain-comp-hom-arrow : B → V
-  map-codomain-comp-hom-arrow =
-    map-codomain-hom-arrow g h b ∘ map-codomain-hom-arrow f g a
-
-  coh-comp-hom-arrow :
-    coherence-hom-arrow f h
-      ( map-domain-comp-hom-arrow)
-      ( map-codomain-comp-hom-arrow)
-  coh-comp-hom-arrow =
-    pasting-horizontal-coherence-square-maps
-      ( map-domain-hom-arrow f g a)
-      ( map-domain-hom-arrow g h b)
-      ( f)
-      ( g)
-      ( h)
-      ( map-codomain-hom-arrow f g a)
-      ( map-codomain-hom-arrow g h b)
-      ( coh-hom-arrow f g a)
-      ( coh-hom-arrow g h b)
-
-  comp-hom-arrow : hom-arrow f h
-  pr1 comp-hom-arrow =
-    map-domain-comp-hom-arrow
-  pr1 (pr2 comp-hom-arrow) =
-    map-codomain-comp-hom-arrow
-  pr2 (pr2 comp-hom-arrow) =
-    coh-comp-hom-arrow
-```
-
-### Homotopies of morphisms of arrows
-
-A {{#concept "homotopy of morphisms of arrows"}} from `(i , j , H)` to
-`(i' , j' , H')` is a triple `(I , J , K)` consisting of homotopies `I : i ~ i'`
-and `J : j ~ j'` and a homotopy `K` witnessing that the
-[square of homotopies](foundation.commuting-squares-of-homotopies.md)
-
-```text
-           J ·r f
-  (j ∘ f) --------> (j' ∘ f)
-     |                 |
-   H |                 | H'
-     V                 V
-  (g ∘ i) --------> (g ∘ i')
-           g ·l I
-```
-
-commutes.
+### Cones over cospans obtained from morphisms of arrows
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : hom-arrow f g)
+  (f : A → B) (g : X → Y) (h : hom-arrow f g)
   where
 
-  coherence-htpy-hom-arrow :
-    (β : hom-arrow f g)
-    (I : map-domain-hom-arrow f g α ~ map-domain-hom-arrow f g β)
-    (J : map-codomain-hom-arrow f g α ~ map-codomain-hom-arrow f g β) →
-    UU (l1 ⊔ l4)
-  coherence-htpy-hom-arrow β I J =
-    coherence-square-homotopies
-      ( J ·r f)
-      ( coh-hom-arrow f g α)
-      ( coh-hom-arrow f g β)
-      ( g ·l I)
-
-  htpy-hom-arrow :
-    (β : hom-arrow f g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  htpy-hom-arrow β =
-    Σ ( map-domain-hom-arrow f g α ~ map-domain-hom-arrow f g β)
-      ( λ I →
-        Σ ( map-codomain-hom-arrow f g α ~ map-codomain-hom-arrow f g β)
-          ( coherence-htpy-hom-arrow β I))
-
-  module _
-    (β : hom-arrow f g) (η : htpy-hom-arrow β)
-    where
-
-    htpy-domain-htpy-hom-arrow :
-      map-domain-hom-arrow f g α ~ map-domain-hom-arrow f g β
-    htpy-domain-htpy-hom-arrow = pr1 η
-
-    htpy-codomain-htpy-hom-arrow :
-      map-codomain-hom-arrow f g α ~ map-codomain-hom-arrow f g β
-    htpy-codomain-htpy-hom-arrow = pr1 (pr2 η)
-
-    coh-htpy-hom-arrow :
-      coherence-square-homotopies
-        ( htpy-codomain-htpy-hom-arrow ·r f)
-        ( coh-hom-arrow f g α)
-        ( coh-hom-arrow f g β)
-        ( g ·l htpy-domain-htpy-hom-arrow)
-    coh-htpy-hom-arrow = pr2 (pr2 η)
-
-  refl-htpy-hom-arrow : htpy-hom-arrow α
-  pr1 refl-htpy-hom-arrow = refl-htpy
-  pr1 (pr2 refl-htpy-hom-arrow) = refl-htpy
-  pr2 (pr2 refl-htpy-hom-arrow) = right-unit-htpy
-
-  is-torsorial-htpy-hom-arrow :
-    is-torsorial htpy-hom-arrow
-  is-torsorial-htpy-hom-arrow =
-    is-torsorial-Eq-structure
-      ( is-torsorial-htpy (map-domain-hom-arrow f g α))
-      ( map-domain-hom-arrow f g α , refl-htpy)
-      ( is-torsorial-Eq-structure
-        ( is-torsorial-htpy (map-codomain-hom-arrow f g α))
-        ( map-codomain-hom-arrow f g α , refl-htpy)
-        ( is-torsorial-htpy (coh-hom-arrow f g α ∙h refl-htpy)))
-
-  htpy-eq-hom-arrow : (β : hom-arrow f g) → (α ＝ β) → htpy-hom-arrow β
-  htpy-eq-hom-arrow β refl = refl-htpy-hom-arrow
-
-  is-equiv-htpy-eq-hom-arrow :
-    (β : hom-arrow f g) → is-equiv (htpy-eq-hom-arrow β)
-  is-equiv-htpy-eq-hom-arrow =
-    fundamental-theorem-id is-torsorial-htpy-hom-arrow htpy-eq-hom-arrow
-
-  extensionality-hom-arrow :
-    (β : hom-arrow f g) → (α ＝ β) ≃ htpy-hom-arrow β
-  pr1 (extensionality-hom-arrow β) = htpy-eq-hom-arrow β
-  pr2 (extensionality-hom-arrow β) = is-equiv-htpy-eq-hom-arrow β
-
-  eq-htpy-hom-arrow :
-    (β : hom-arrow f g) → htpy-hom-arrow β → α ＝ β
-  eq-htpy-hom-arrow β = map-inv-equiv (extensionality-hom-arrow β)
+  cone-hom-arrow : cone (map-codomain-hom-arrow f g h) g A
+  pr1 cone-hom-arrow = f
+  pr1 (pr2 cone-hom-arrow) = map-domain-hom-arrow f g h
+  pr2 (pr2 cone-hom-arrow) = coh-hom-arrow f g h
 ```
 
-### Concatenation of homotopies of morphisms of arrows
+### Morphisms of arrows are preserved under homotopies
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α β γ : hom-arrow f g)
-  (H : htpy-hom-arrow f g α β) (K : htpy-hom-arrow f g β γ)
   where
 
-  htpy-domain-concat-htpy-hom-arrow :
-    map-domain-hom-arrow f g α ~ map-domain-hom-arrow f g γ
-  htpy-domain-concat-htpy-hom-arrow =
-    htpy-domain-htpy-hom-arrow f g α β H ∙h
-    htpy-domain-htpy-hom-arrow f g β γ K
+  hom-arrow-htpy-source :
+    {f f' : A → B} (F' : f' ~ f) (g : X → Y) →
+    hom-arrow f g → hom-arrow f' g
+  hom-arrow-htpy-source F' g (i , j , H) = (i , j , (j ·l F') ∙h H)
 
-  htpy-codomain-concat-htpy-hom-arrow :
-    map-codomain-hom-arrow f g α ~ map-codomain-hom-arrow f g γ
-  htpy-codomain-concat-htpy-hom-arrow =
-    htpy-codomain-htpy-hom-arrow f g α β H ∙h
-    htpy-codomain-htpy-hom-arrow f g β γ K
+  hom-arrow-htpy-target :
+    (f : A → B) {g g' : X → Y} (G : g ~ g') →
+    hom-arrow f g → hom-arrow f g'
+  hom-arrow-htpy-target f G (i , j , H) = (i , j , H ∙h (G ·r i))
 
-  coh-concat-htpy-hom-arrow :
-    coherence-htpy-hom-arrow f g α γ
-      ( htpy-domain-concat-htpy-hom-arrow)
-      ( htpy-codomain-concat-htpy-hom-arrow)
-  coh-concat-htpy-hom-arrow a =
-    ( ap
-      ( concat (coh-hom-arrow f g α a) (g (map-domain-hom-arrow f g γ a)))
-      ( ap-concat g
-        ( htpy-domain-htpy-hom-arrow f g α β H a)
-        ( htpy-domain-htpy-hom-arrow f g β γ K a))) ∙
-    ( coherence-square-identifications-comp-horizontal
-      ( coh-hom-arrow f g α a)
-      ( coh-hom-arrow f g β a)
-      ( coh-hom-arrow f g γ a)
-      ( coh-htpy-hom-arrow f g α β H a)
-      ( coh-htpy-hom-arrow f g β γ K a))
-
-  concat-htpy-hom-arrow : htpy-hom-arrow f g α γ
-  pr1 concat-htpy-hom-arrow = htpy-domain-concat-htpy-hom-arrow
-  pr1 (pr2 concat-htpy-hom-arrow) = htpy-codomain-concat-htpy-hom-arrow
-  pr2 (pr2 concat-htpy-hom-arrow) = coh-concat-htpy-hom-arrow
+  hom-arrow-htpy :
+    {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g') →
+    hom-arrow f g → hom-arrow f' g'
+  hom-arrow-htpy F' G (i , j , H) = (i , j , (j ·l F') ∙h H ∙h (G ·r i))
 ```
 
-### Inverses of homotopies of morphisms of arrows
+### Dependent products of morphisms of arrows
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α β : hom-arrow f g) (H : htpy-hom-arrow f g α β)
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
+  (f : (i : I) → A i → B i) (g : (i : I) → X i → Y i)
+  (α : (i : I) → hom-arrow (f i) (g i))
   where
 
-  htpy-domain-inv-htpy-hom-arrow :
-    map-domain-hom-arrow f g β ~ map-domain-hom-arrow f g α
-  htpy-domain-inv-htpy-hom-arrow =
-    inv-htpy (htpy-domain-htpy-hom-arrow f g α β H)
-
-  htpy-codomain-inv-htpy-hom-arrow :
-    map-codomain-hom-arrow f g β ~ map-codomain-hom-arrow f g α
-  htpy-codomain-inv-htpy-hom-arrow =
-    inv-htpy (htpy-codomain-htpy-hom-arrow f g α β H)
-
-  coh-inv-htpy-hom-arrow :
-    coherence-htpy-hom-arrow f g β α
-      ( htpy-domain-inv-htpy-hom-arrow)
-      ( htpy-codomain-inv-htpy-hom-arrow)
-  coh-inv-htpy-hom-arrow a =
-    ( ap
-      ( concat (coh-hom-arrow f g β a) _)
-      ( ap-inv g (htpy-domain-htpy-hom-arrow f g α β H a))) ∙
-    ( double-transpose-eq-concat'
-      ( coh-hom-arrow f g α a)
-      ( htpy-codomain-htpy-hom-arrow f g α β H (f a))
-      ( ap g (htpy-domain-htpy-hom-arrow f g α β H a))
-      ( coh-hom-arrow f g β a)
-      ( inv (coh-htpy-hom-arrow f g α β H a)))
-
-  inv-htpy-hom-arrow : htpy-hom-arrow f g β α
-  pr1 inv-htpy-hom-arrow = htpy-domain-inv-htpy-hom-arrow
-  pr1 (pr2 inv-htpy-hom-arrow) = htpy-codomain-inv-htpy-hom-arrow
-  pr2 (pr2 inv-htpy-hom-arrow) = coh-inv-htpy-hom-arrow
+  Π-hom-arrow : hom-arrow (map-Π f) (map-Π g)
+  pr1 Π-hom-arrow =
+    map-Π (λ i → map-domain-hom-arrow (f i) (g i) (α i))
+  pr1 (pr2 Π-hom-arrow) =
+    map-Π (λ i → map-codomain-hom-arrow (f i) (g i) (α i))
+  pr2 (pr2 Π-hom-arrow) =
+    htpy-map-Π (λ i → coh-hom-arrow (f i) (g i) (α i))
 ```
-
-### Whiskering of homotopies of morphisms of arrows
-
-#### Left whiskering
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
-  (f : A → B) (g : X → Y) (h : U → V)
-  (γ : hom-arrow g h) (α β : hom-arrow f g) (H : htpy-hom-arrow f g α β)
-  where
-
-  htpy-domain-left-whisker-htpy-hom-arrow :
-    map-domain-comp-hom-arrow f g h γ α ~ map-domain-comp-hom-arrow f g h γ β
-  htpy-domain-left-whisker-htpy-hom-arrow =
-    map-domain-hom-arrow g h γ ·l htpy-domain-htpy-hom-arrow f g α β H
-
-  htpy-codomain-left-whisker-htpy-hom-arrow :
-    map-codomain-comp-hom-arrow f g h γ α ~
-    map-codomain-comp-hom-arrow f g h γ β
-  htpy-codomain-left-whisker-htpy-hom-arrow =
-    map-codomain-hom-arrow g h γ ·l htpy-codomain-htpy-hom-arrow f g α β H
-
-  coh-left-whisker-htpy-hom-arrow :
-    coherence-htpy-hom-arrow f h
-      ( comp-hom-arrow f g h γ α)
-      ( comp-hom-arrow f g h γ β)
-      ( htpy-domain-left-whisker-htpy-hom-arrow)
-      ( htpy-codomain-left-whisker-htpy-hom-arrow)
-  coh-left-whisker-htpy-hom-arrow a =
-    ( left-whisk-triangle-identifications'
-      ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
-      ( ( ap
-          ( coh-hom-arrow g h γ (map-domain-hom-arrow f g α a) ∙_)
-          ( inv
-            ( ap-comp h
-              ( map-domain-hom-arrow g h γ)
-              ( htpy-domain-htpy-hom-arrow f g α β H a)))) ∙
-        ( nat-htpy
-          ( coh-hom-arrow g h γ)
-          ( htpy-domain-htpy-hom-arrow f g α β H a)))) ∙
-    ( right-whisk-square-identification
-      ( ap
-        ( map-codomain-hom-arrow g h γ)
-        ( htpy-codomain-htpy-hom-arrow f g α β H (f a)))
-      ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a))
-      ( coh-hom-arrow g h γ (map-domain-hom-arrow f g β a))
-      ( ( ap
-          ( ap (map-codomain-hom-arrow g h γ) (coh-hom-arrow f g α a) ∙_)
-          ( ap-comp
-            ( map-codomain-hom-arrow g h γ)
-            ( g)
-            ( htpy-domain-htpy-hom-arrow f g α β H a))) ∙
-        ( coherence-square-identifications-ap
-          ( map-codomain-hom-arrow g h γ)
-          ( htpy-codomain-htpy-hom-arrow f g α β H (f a))
-          ( coh-hom-arrow f g α a)
-          ( coh-hom-arrow f g β a)
-          ( ap g (htpy-domain-htpy-hom-arrow f g α β H a))
-          ( coh-htpy-hom-arrow f g α β H a))))
-
-  left-whisker-htpy-hom-arrow :
-    htpy-hom-arrow f h
-      ( comp-hom-arrow f g h γ α)
-      ( comp-hom-arrow f g h γ β)
-  pr1 left-whisker-htpy-hom-arrow =
-    htpy-domain-left-whisker-htpy-hom-arrow
-  pr1 (pr2 left-whisker-htpy-hom-arrow) =
-    htpy-codomain-left-whisker-htpy-hom-arrow
-  pr2 (pr2 left-whisker-htpy-hom-arrow) =
-    coh-left-whisker-htpy-hom-arrow
-```
-
-#### Right whiskering
-
-Exercise for Fredrik.
 
 ### Morphisms of arrows give morphisms of precomposition arrows
 
@@ -502,13 +316,13 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  hom-arrow-precomp-hom-arrow :
+  precomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (precomp g S) (precomp f S)
-  pr1 (hom-arrow-precomp-hom-arrow S) =
+  pr1 (precomp-hom-arrow S) =
     precomp (map-codomain-hom-arrow f g α) S
-  pr1 (pr2 (hom-arrow-precomp-hom-arrow S)) =
+  pr1 (pr2 (precomp-hom-arrow S)) =
     precomp (map-domain-hom-arrow f g α) S
-  pr2 (pr2 (hom-arrow-precomp-hom-arrow S)) h =
+  pr2 (pr2 (precomp-hom-arrow S)) h =
     inv (eq-htpy (h ·l coh-hom-arrow f g α))
 ```
 
@@ -524,128 +338,14 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  hom-arrow-postcomp-hom-arrow :
+  postcomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (postcomp S f) (postcomp S g)
-  pr1 (hom-arrow-postcomp-hom-arrow S) =
+  pr1 (postcomp-hom-arrow S) =
     postcomp S (map-domain-hom-arrow f g α)
-  pr1 (pr2 (hom-arrow-postcomp-hom-arrow S)) =
+  pr1 (pr2 (postcomp-hom-arrow S)) =
     postcomp S (map-codomain-hom-arrow f g α)
-  pr2 (pr2 (hom-arrow-postcomp-hom-arrow S)) h =
+  pr2 (pr2 (postcomp-hom-arrow S)) h =
     eq-htpy (coh-hom-arrow f g α ·r h)
-```
-
-### Associativity of composition of morphisms of arrows
-
-Consider a commuting diagram of the form
-
-```text
-        α₀       β₀       γ₀
-    A -----> X -----> U -----> K
-    |        |        |        |
-  f |   α  g |   β  h |   γ    | i
-    V        V        V        V
-    B -----> Y -----> V -----> L
-        α₁       β₁       γ₁
-```
-
-Then associativity of composition of morphisms of arrows follows directly from
-associativity of horizontal pasting of commutative squares of maps.
-
-```agda
-module _
-  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
-  {K : UU l7} {L : UU l8} (f : A → B) (g : X → Y) (h : U → V) (i : K → L)
-  (γ : hom-arrow h i) (β : hom-arrow g h) (α : hom-arrow f g)
-  where
-
-  assoc-comp-hom-arrow :
-    htpy-hom-arrow f i
-      ( comp-hom-arrow f g i (comp-hom-arrow g h i γ β) α)
-      ( comp-hom-arrow f h i γ (comp-hom-arrow f g h β α))
-  pr1 assoc-comp-hom-arrow = refl-htpy
-  pr1 (pr2 assoc-comp-hom-arrow) = refl-htpy
-  pr2 (pr2 assoc-comp-hom-arrow) =
-    ( right-unit-htpy) ∙h
-    ( inv-htpy
-      ( assoc-pasting-horizontal-coherence-square-maps
-        ( map-domain-hom-arrow f g α)
-        ( map-domain-hom-arrow g h β)
-        ( map-domain-hom-arrow h i γ)
-        ( f)
-        ( g)
-        ( h)
-        ( i)
-        ( map-codomain-hom-arrow f g α)
-        ( map-codomain-hom-arrow g h β)
-        ( map-codomain-hom-arrow h i γ)
-        ( coh-hom-arrow f g α)
-        ( coh-hom-arrow g h β)
-        ( coh-hom-arrow h i γ)))
-
-  inv-assoc-comp-hom-arrow :
-    htpy-hom-arrow f i
-      ( comp-hom-arrow f h i γ (comp-hom-arrow f g h β α))
-      ( comp-hom-arrow f g i (comp-hom-arrow g h i γ β) α)
-  pr1 inv-assoc-comp-hom-arrow = refl-htpy
-  pr1 (pr2 inv-assoc-comp-hom-arrow) = refl-htpy
-  pr2 (pr2 inv-assoc-comp-hom-arrow) =
-    ( right-unit-htpy) ∙h
-    ( assoc-pasting-horizontal-coherence-square-maps
-      ( map-domain-hom-arrow f g α)
-      ( map-domain-hom-arrow g h β)
-      ( map-domain-hom-arrow h i γ)
-      ( f)
-      ( g)
-      ( h)
-      ( i)
-      ( map-codomain-hom-arrow f g α)
-      ( map-codomain-hom-arrow g h β)
-      ( map-codomain-hom-arrow h i γ)
-      ( coh-hom-arrow f g α)
-      ( coh-hom-arrow g h β)
-      ( coh-hom-arrow h i γ))
-```
-
-### The left unit law for composition of morphisms of arrows
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : hom-arrow f g)
-  where
-
-  left-unit-law-comp-hom-arrow :
-    htpy-hom-arrow f g
-      ( comp-hom-arrow f g g id-hom-arrow α)
-      ( α)
-  pr1 left-unit-law-comp-hom-arrow = refl-htpy
-  pr1 (pr2 left-unit-law-comp-hom-arrow) = refl-htpy
-  pr2 (pr2 left-unit-law-comp-hom-arrow) =
-    ( right-unit-htpy) ∙h
-    ( right-unit-law-pasting-horizontal-coherence-square-maps
-      ( map-domain-hom-arrow f g α)
-      ( f)
-      ( g)
-      ( map-codomain-hom-arrow f g α)
-      ( coh-hom-arrow f g α))
-```
-
-### The right unit law for composition of morphisms of arrows
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α : hom-arrow f g)
-  where
-
-  right-unit-law-comp-hom-arrow :
-    htpy-hom-arrow f g
-      ( comp-hom-arrow f f g α id-hom-arrow)
-      ( α)
-  pr1 right-unit-law-comp-hom-arrow = refl-htpy
-  pr1 (pr2 right-unit-law-comp-hom-arrow) = refl-htpy
-  pr2 (pr2 right-unit-law-comp-hom-arrow) = right-unit-htpy
 ```
 
 ## See also
@@ -654,3 +354,6 @@ module _
 - [Morphisms of twisted arrows](foundation.morphisms-twisted-arrows.md).
 - [Fibered maps](foundation.fibered-maps.md) for the same concept under a
   different name.
+- [The pullback-hom](orthogonal-factorization-systems.pullback-hom.md) is an
+  operation that returns a morphism of arrows from a diagonal map.
+- [Homotopies of morphisms of arrows](foundation.homotopies-morphisms-arrows.md)

@@ -91,7 +91,7 @@ module _
 
   is-functor-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
   is-functor-prop-map-Precategory =
-    prod-Prop
+    product-Prop
       preserves-comp-hom-prop-map-Precategory
       preserves-id-hom-prop-map-Precategory
 
@@ -532,13 +532,7 @@ module _
 
 ## References
 
-1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
-   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
-   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729))
-2. Benedikt Ahrens and Krzysztof Kapulkin and Michael Shulman, _Univalent
-   Categories and the Rezk completion_ (2015)
-   ([arXiv:1303.0584](https://arxiv.org/abs/1303.0584),
-   [DOI:10.1017/S0960129514000486](https://doi.org/10.1017/S0960129514000486))
+{{#bibliography}} {{#reference UF13}} {{#reference AKS15}}
 
 ## External links
 

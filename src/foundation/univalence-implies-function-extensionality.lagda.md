@@ -9,6 +9,7 @@ module foundation.univalence-implies-function-extensionality where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalence-induction
+open import foundation.function-extensionality
 open import foundation.postcomposition-functions
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -17,7 +18,6 @@ open import foundation.weak-function-extensionality
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

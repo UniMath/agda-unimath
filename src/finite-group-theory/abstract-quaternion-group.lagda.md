@@ -866,14 +866,14 @@ is-noncommutative-mul-Q8 :
 is-noncommutative-mul-Q8 f = Eq-eq-Q8 (f i-Q8 j-Q8)
 
 map-equiv-count-Q8 : Fin 8 → Q8
-map-equiv-count-Q8 (inl (inl (inl (inl (inl (inl (inl (inr star)))))))) = e-Q8
-map-equiv-count-Q8 (inl (inl (inl (inl (inl (inl (inr star))))))) = -e-Q8
-map-equiv-count-Q8 (inl (inl (inl (inl (inl (inr star)))))) = i-Q8
-map-equiv-count-Q8 (inl (inl (inl (inl (inr star))))) = -i-Q8
-map-equiv-count-Q8 (inl (inl (inl (inr star)))) = j-Q8
-map-equiv-count-Q8 (inl (inl (inr star))) = -j-Q8
-map-equiv-count-Q8 (inl (inr star)) = k-Q8
-map-equiv-count-Q8 (inr star) = -k-Q8
+map-equiv-count-Q8 (inl (inl (inl (inl (inl (inl (inl (inr _)))))))) = e-Q8
+map-equiv-count-Q8 (inl (inl (inl (inl (inl (inl (inr _))))))) = -e-Q8
+map-equiv-count-Q8 (inl (inl (inl (inl (inl (inr _)))))) = i-Q8
+map-equiv-count-Q8 (inl (inl (inl (inl (inr _))))) = -i-Q8
+map-equiv-count-Q8 (inl (inl (inl (inr _)))) = j-Q8
+map-equiv-count-Q8 (inl (inl (inr _))) = -j-Q8
+map-equiv-count-Q8 (inl (inr _)) = k-Q8
+map-equiv-count-Q8 (inr _) = -k-Q8
 
 map-inv-equiv-count-Q8 : Q8 → Fin 8
 map-inv-equiv-count-Q8 e-Q8 = inl (inl (inl (inl (inl (inl (inl (inr star)))))))
@@ -899,16 +899,16 @@ is-section-map-inv-equiv-count-Q8 -k-Q8 = refl
 is-retraction-map-inv-equiv-count-Q8 :
   ( map-inv-equiv-count-Q8 ∘ map-equiv-count-Q8) ~ id
 is-retraction-map-inv-equiv-count-Q8
-  (inl (inl (inl (inl (inl (inl (inl (inr star)))))))) = refl
+  (inl (inl (inl (inl (inl (inl (inl (inr _)))))))) = refl
 is-retraction-map-inv-equiv-count-Q8
-  (inl (inl (inl (inl (inl (inl (inr star))))))) = refl
-is-retraction-map-inv-equiv-count-Q8 (inl (inl (inl (inl (inl (inr star)))))) =
+  (inl (inl (inl (inl (inl (inl (inr _))))))) = refl
+is-retraction-map-inv-equiv-count-Q8 (inl (inl (inl (inl (inl (inr _)))))) =
   refl
-is-retraction-map-inv-equiv-count-Q8 (inl (inl (inl (inl (inr star))))) = refl
-is-retraction-map-inv-equiv-count-Q8 (inl (inl (inl (inr star)))) = refl
-is-retraction-map-inv-equiv-count-Q8 (inl (inl (inr star))) = refl
-is-retraction-map-inv-equiv-count-Q8 (inl (inr star)) = refl
-is-retraction-map-inv-equiv-count-Q8 (inr star) = refl
+is-retraction-map-inv-equiv-count-Q8 (inl (inl (inl (inl (inr _))))) = refl
+is-retraction-map-inv-equiv-count-Q8 (inl (inl (inl (inr _)))) = refl
+is-retraction-map-inv-equiv-count-Q8 (inl (inl (inr _))) = refl
+is-retraction-map-inv-equiv-count-Q8 (inl (inr _)) = refl
+is-retraction-map-inv-equiv-count-Q8 (inr _) = refl
 
 is-equiv-map-equiv-count-Q8 : is-equiv map-equiv-count-Q8
 is-equiv-map-equiv-count-Q8 =

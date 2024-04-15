@@ -122,7 +122,7 @@ module _
                                 equiv-tot
                                   ( λ B' →
                                     equiv-postcomp-equiv
-                                      ( equiv-coprod
+                                      ( equiv-coproduct
                                         ( inv-equiv (pr2 A'))
                                         ( inv-equiv (pr2 B')))
                                       ( X))) ∘e
@@ -134,11 +134,11 @@ module _
                                   ( Σ B YB , id-equiv)))))) ∘e
                     ( ( equiv-Σ-equiv-base
                           ( λ (YA , YB) → X ≃ (Σ A YA + Σ B YB))
-                          ( equiv-universal-property-coprod (UU l))) ∘e
+                          ( equiv-universal-property-coproduct (UU l))) ∘e
                       ( ( equiv-tot
                             ( λ Y →
                               equiv-postcomp-equiv
-                                ( right-distributive-Σ-coprod A B Y)
+                                ( right-distributive-Σ-coproduct A B Y)
                                 ( X))) ∘e
                           ( left-unit-law-Σ-is-contr
                               ( is-torsorial-equiv' (A + B))

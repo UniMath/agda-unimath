@@ -35,27 +35,27 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  Eq-prod : (s t : A × B) → UU (l1 ⊔ l2)
-  Eq-prod s t = ((pr1 s) ＝ (pr1 t)) × ((pr2 s) ＝ (pr2 t))
+  Eq-product : (s t : A × B) → UU (l1 ⊔ l2)
+  Eq-product s t = ((pr1 s) ＝ (pr1 t)) × ((pr2 s) ＝ (pr2 t))
 ```
 
 ## Properties
 
-### The type `Eq-prod s t` is equivalent to `Id s t`
+### The type `Eq-product s t` is equivalent to `Id s t`
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  eq-pair' : {s t : A × B} → Eq-prod s t → s ＝ t
+  eq-pair' : {s t : A × B} → Eq-product s t → s ＝ t
   eq-pair' {pair x y} {pair .x .y} (pair refl refl) = refl
 
   eq-pair :
     {s t : A × B} → (pr1 s) ＝ (pr1 t) → (pr2 s) ＝ (pr2 t) → s ＝ t
   eq-pair p q = eq-pair' (pair p q)
 
-  pair-eq : {s t : A × B} → s ＝ t → Eq-prod s t
+  pair-eq : {s t : A × B} → s ＝ t → Eq-product s t
   pr1 (pair-eq α) = ap pr1 α
   pr2 (pair-eq α) = ap pr2 α
 
@@ -74,7 +74,7 @@ module _
       is-equiv-is-invertible pair-eq is-section-pair-eq is-retraction-pair-eq
 
   equiv-eq-pair :
-    (s t : A × B) → Eq-prod s t ≃ (s ＝ t)
+    (s t : A × B) → Eq-product s t ≃ (s ＝ t)
   pr1 (equiv-eq-pair s t) = eq-pair'
   pr2 (equiv-eq-pair s t) = is-equiv-eq-pair s t
 
@@ -85,7 +85,7 @@ module _
       is-equiv-is-invertible eq-pair' is-retraction-pair-eq is-section-pair-eq
 
   equiv-pair-eq :
-    (s t : A × B) → (s ＝ t) ≃ Eq-prod s t
+    (s t : A × B) → (s ＝ t) ≃ Eq-product s t
   pr1 (equiv-pair-eq s t) = pair-eq
   pr2 (equiv-pair-eq s t) = is-equiv-pair-eq s t
 ```

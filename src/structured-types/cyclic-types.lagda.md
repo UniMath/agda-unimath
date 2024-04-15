@@ -59,7 +59,7 @@ module _
 
   is-cyclic-prop-Set-With-Automorphism : Prop l
   is-cyclic-prop-Set-With-Automorphism =
-    prod-Prop
+    product-Prop
       ( trunc-Prop (type-Set-With-Automorphism X))
       ( Π-Prop
         ( type-Set-With-Automorphism X)

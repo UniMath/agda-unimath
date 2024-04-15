@@ -66,10 +66,9 @@ module _
       ( ( inv
           ( contraction
             ( H (f x))
-            ( pair
-              ( map-inv-is-contr-map H (f x))
+            ( ( map-inv-is-contr-map H (f x)) ,
               ( is-section-map-inv-is-contr-map H (f x))))) ∙
-        ( contraction (H (f x)) (pair x refl)))
+        ( contraction (H (f x)) (x , refl)))
 
   abstract
     is-equiv-is-contr-map : is-contr-map f → is-equiv f
@@ -93,14 +92,14 @@ module _
     pr1 (center-fiber-is-coherently-invertible H y) =
       map-inv-is-coherently-invertible H y
     pr2 (center-fiber-is-coherently-invertible H y) =
-      is-retraction-is-coherently-invertible H y
+      is-section-map-inv-is-coherently-invertible H y
 
     contraction-fiber-is-coherently-invertible :
       (H : is-coherently-invertible f) → (y : B) → (t : fiber f y) →
       (center-fiber-is-coherently-invertible H y) ＝ t
-    contraction-fiber-is-coherently-invertible H y (pair x refl) =
+    contraction-fiber-is-coherently-invertible H y (x , refl) =
       eq-Eq-fiber f y
-        ( is-section-is-coherently-invertible H x)
+        ( is-retraction-map-inv-is-coherently-invertible H x)
         ( ( right-unit) ∙
           ( inv ( coh-is-coherently-invertible H x)))
 

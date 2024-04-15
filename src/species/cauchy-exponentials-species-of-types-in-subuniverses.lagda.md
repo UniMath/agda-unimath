@@ -130,7 +130,7 @@ module _
       ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
       ( cauchy-exponential-species-subuniverse P Q C1 S X)
   equiv-cauchy-exponential-composition-unit-species-subuniverse =
-    equiv-tot λ _ → left-unit-law-prod-is-contr is-contr-unit
+    equiv-tot λ _ → left-unit-law-product-is-contr is-contr-unit
 ```
 
 ### Equivalence form with species of types
@@ -229,7 +229,7 @@ module _
                         ( eq-equiv
                           ( matching-correspondence-Relaxed-Σ-Decomposition d))
                         ( pr2 X))))) ∘e
-              ( ( commutative-prod) ∘e
+              ( ( commutative-product) ∘e
                 ( inv-equiv
                   ( equiv-add-redundant-prop
                     ( is-prop-type-Prop (P (inclusion-subuniverse P X)))
@@ -293,7 +293,7 @@ module _
             ( inclusion-subuniverse P X))) ∘e
         ( ( equiv-tot
             ( λ d →
-              equiv-prod
+              equiv-product
                 ( inv-equiv
                   ( equiv-cauchy-exponential-Σ-extension-species-subuniverse
                     ( P)

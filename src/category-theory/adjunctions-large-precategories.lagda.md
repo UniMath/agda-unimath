@@ -160,7 +160,7 @@ module _
       ( map-inv-equiv-is-adjoint-pair-Large-Precategory H X2 Y2)
   naturality-inv-equiv-is-adjoint-pair-Large-Precategory
     H {X1 = X1} {X2} {Y1} {Y2} f g =
-    coherence-square-inv-horizontal
+    horizontal-inv-equiv-coherence-square-maps
       ( equiv-is-adjoint-pair-Large-Precategory H X1 Y1)
       ( λ h →
         comp-hom-Large-Precategory D

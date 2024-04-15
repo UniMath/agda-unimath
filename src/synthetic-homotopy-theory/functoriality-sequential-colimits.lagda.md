@@ -23,7 +23,7 @@ open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams
@@ -274,7 +274,7 @@ module _
     ( ap-concat-htpy _
       ( ( right-unit-htpy) ∙h
         ( inv-htpy
-          ( left-unit-law-left-whisk-htpy
+          ( left-unit-law-left-whisker-comp
             ( coherence-cocone-sequential-diagram c n)))))
 
   preserves-id-map-sequential-colimit-hom-sequential-diagram :
@@ -329,18 +329,29 @@ module _
           ( g)
           ( n))))
   pr2 htpy-preserves-comp-map-sequential-colimit-hom-sequential-diagram n =
-    ( right-whisk-square-htpy
+    ( right-whisker-concat-coherence-square-homotopies
       ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c c''
         ( comp-hom-sequential-diagram A B C g f)
         ( n))
       ( ( map-sequential-colimit-hom-sequential-diagram up-c c''
           ( comp-hom-sequential-diagram A B C g f)) ·l
         ( coherence-cocone-sequential-diagram c n))
-      ( _)
+      ( coherence-cocone-sequential-diagram
+        ( map-cocone-hom-sequential-diagram
+          ( comp-hom-sequential-diagram A B C g f)
+          ( c''))
+        ( n))
+      ( ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
+          ( up-c)
+          ( c'')
+          ( comp-hom-sequential-diagram A B C g f)
+          ( succ-ℕ n)) ·r
+        ( map-sequential-diagram A n))
       ( coherence-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c
         ( c'')
         ( comp-hom-sequential-diagram A B C g f)
-        ( n))) ∙h
+        ( n))
+      ( _)) ∙h
     ( ap-concat-htpy
       ( htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram up-c c''
         ( comp-hom-sequential-diagram A B C g f)
@@ -426,8 +437,8 @@ module _
 
 ### A retract of sequential diagrams induces a retract of sequential colimits
 
-Additionally, the underlying map of the retraction is definitionally equal to
-the map induced by the retraction of sequential diagrams.
+Additionally, the underlying map of the retraction is strictly equal to the map
+induced by the retraction of sequential diagrams.
 
 ```agda
 module _
@@ -781,8 +792,4 @@ module _
 
 ## References
 
-1. Kristina Sojakova, Floris van Doorn, and Egbert Rijke. 2020. Sequential
-   Colimits in Homotopy Type Theory. In Proceedings of the 35th Annual ACM/IEEE
-   Symposium on Logic in Computer Science (LICS '20). Association for Computing
-   Machinery, New York, NY, USA, 845–858,
-   [DOI:10.1145](https://doi.org/10.1145/3373718.3394801)
+{{#bibliography}} {{#reference SDR20}}

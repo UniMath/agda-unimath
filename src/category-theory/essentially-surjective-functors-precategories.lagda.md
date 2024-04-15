@@ -43,14 +43,15 @@ module _
     Π-Prop
       ( obj-Precategory D)
       ( λ y →
-        ∃-Prop
+        exists-structure-Prop
           ( obj-Precategory C)
           ( λ x → iso-Precategory D (obj-functor-Precategory C D F x) y))
 
   is-essentially-surjective-functor-Precategory : UU (l1 ⊔ l3 ⊔ l4)
   is-essentially-surjective-functor-Precategory =
     ( y : obj-Precategory D) →
-    ∃ ( obj-Precategory C)
+    exists-structure
+      ( obj-Precategory C)
       ( λ x → iso-Precategory D (obj-functor-Precategory C D F x) y)
 
   is-prop-is-essentially-surjective-functor-Precategory :
@@ -114,10 +115,7 @@ Rezk completion_.
 
 ## References
 
-1. Benedikt Ahrens and Krzysztof Kapulkin and Michael Shulman, _Univalent
-   Categories and the Rezk completion_ (2015)
-   ([arXiv:1303.0584](https://arxiv.org/abs/1303.0584),
-   [DOI:10.1017/S0960129514000486](https://doi.org/10.1017/S0960129514000486))
+{{#bibliography}} {{#reference AKS15}}
 
 ## External links
 

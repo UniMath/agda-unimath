@@ -12,6 +12,7 @@ open import foundation.embeddings
 open import foundation.equivalence-extensionality
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.embeddings-groups
@@ -63,13 +64,11 @@ module _
 
 ### Cayley's theorem as a corollary of the Yoneda lemma
 
-This is Corollary 2.2.10 of _Category theory in context_, and remains to be
-formalized.
+This is Corollary 2.2.10 of {{#cite Rie17}}, and remains to be formalized.
 
 ## References
 
-1. Emily Riehl, _Category Theory in Context_, 2016
-   ([PDF](https://math.jhu.edu/~eriehl/context.pdf))
+{{#bibliography}}
 
 ## External links
 

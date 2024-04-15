@@ -33,7 +33,7 @@ The [double negation](foundation.double-negation.md) operation `¬¬` is a
 ```agda
 operator-double-negation-modality :
   (l : Level) → operator-modality l l
-operator-double-negation-modality _ = ¬¬
+operator-double-negation-modality _ = ¬¬_
 
 unit-double-negation-modality :
   {l : Level} → unit-modality (operator-double-negation-modality l)
@@ -57,17 +57,14 @@ is-uniquely-eliminating-modality-double-negation-modality {l} {A} P =
       double-negation-extend
         ( λ (a : A) →
           tr
-            ( ¬¬ ∘ P)
+            ( ¬¬_ ∘ P)
             ( eq-is-prop is-prop-double-negation)
             ( f a))
         ( z))
 ```
 
-This proof follows Example 1.9 in _Modalities in homotopy type theory_.
+This proof follows Example 1.9 in {{#cite RSS20}}.
 
 ## References
 
-- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
-  theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
-  ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
-  [DOI:10.23638/LMCS-16(1:2)2020](https://doi.org/10.23638/LMCS-16%281%3A2%292020))
+{{#bibliography}}

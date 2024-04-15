@@ -12,6 +12,7 @@ module foundation.binary-functoriality-set-quotients where
 open import foundation.binary-homotopies
 open import foundation.dependent-pair-types
 open import foundation.exponents-set-quotients
+open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -27,7 +28,6 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -381,7 +381,7 @@ module _
                 ( λ x →
                   ( inv-equiv equiv-funext) ∘e
                   ( inv-equiv
-                    ( equiv-dependent-universal-property-surj-is-surjective
+                    ( equiv-dependent-universal-property-surjection-is-surjective
                       ( map-reflecting-map-equivalence-relation S qS)
                       ( is-surjective-is-set-quotient S QS qS UqS)
                       ( λ u →

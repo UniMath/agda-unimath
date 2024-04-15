@@ -41,7 +41,7 @@ module _
 
   product-∞-Group : ∞-Group (l1 ⊔ l2)
   pr1 product-∞-Group =
-    prod-Pointed-Type
+    product-Pointed-Type
       ( classifying-pointed-type-∞-Group G)
       ( classifying-pointed-type-∞-Group H)
   pr2 product-∞-Group =

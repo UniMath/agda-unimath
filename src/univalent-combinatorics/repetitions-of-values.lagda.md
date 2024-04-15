@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.sets
 
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.decidable-propositions
@@ -48,7 +49,7 @@ repetition-of-values-is-not-injective-Fin k l f N =
   where
   u : Σ (Fin k) (λ x → ¬ ((y : Fin k) → f x ＝ f y → x ＝ y))
   u =
-    exists-not-not-forall-Fin k
+    exists-not-not-for-all-Fin k
       ( λ x →
         is-decidable-Π-Fin k
           ( λ y →
@@ -61,7 +62,7 @@ repetition-of-values-is-not-injective-Fin k l f N =
   H : ¬ ((y : Fin k) → f x ＝ f y → x ＝ y)
   H = pr2 u
   v : Σ (Fin k) (λ y → ¬ (f x ＝ f y → x ＝ y))
-  v = exists-not-not-forall-Fin k
+  v = exists-not-not-for-all-Fin k
       ( λ y →
         is-decidable-function-type
           ( has-decidable-equality-Fin l (f x) (f y))
@@ -72,7 +73,7 @@ repetition-of-values-is-not-injective-Fin k l f N =
   K : ¬ (f x ＝ f y → x ＝ y)
   K = pr2 v
   w : (f x ＝ f y) × (x ≠ y)
-  w = exists-not-not-forall-count
+  w = exists-not-not-for-all-count
       ( λ _ → Id x y)
       ( λ _ →
         has-decidable-equality-Fin k x y)
@@ -91,7 +92,7 @@ is-decidable-is-repetition-of-values-Fin :
 is-decidable-is-repetition-of-values-Fin f x =
   is-decidable-Σ-Fin
     ( λ y →
-      is-decidable-prod
+      is-decidable-product
         ( is-decidable-neg (has-decidable-equality-Fin x y))
         ( has-decidable-equality-Fin (f x) (f y)))
 ```
@@ -105,7 +106,7 @@ is-decidable-is-repeated-value-Fin :
 is-decidable-is-repeated-value-Fin k l f x =
   is-decidable-Σ-Fin k
     ( λ y →
-      is-decidable-prod
+      is-decidable-product
         ( is-decidable-neg (has-decidable-equality-Fin k x y))
         ( has-decidable-equality-Fin l (f x) (f y)))
 ```

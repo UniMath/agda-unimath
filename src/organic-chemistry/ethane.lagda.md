@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.unit-type
@@ -62,7 +63,7 @@ module _
 
   edge-ethane-Prop : unordered-pair vertex-ethane → Prop lzero
   edge-ethane-Prop p =
-    prod-Prop
+    product-Prop
       ( is-in-unordered-pair-Prop p (zero-Fin 1))
       ( is-in-unordered-pair-Prop p (one-Fin 1))
 
@@ -166,7 +167,7 @@ module _
             ( inl (inr _) , is-one) → neq-inl-inr is-one
             ( inr _ , is-one) → neq-inl-inr is-one))
     pr2 (is-torsorial-standard-edge-ethane (inl (inr _))) (inr _ , P) =
-      eq-pair-Σ refl
+      eq-pair-eq-fiber
         ( eq-is-prop
           ( is-prop-edge-ethane
             ( standard-unordered-pair (inl (inr _)) (inr _))))
@@ -176,7 +177,7 @@ module _
     pr2 (pr2 (pr1 (is-torsorial-standard-edge-ethane (inr _)))) =
       unit-trunc-Prop (zero-Fin 1 , refl)
     pr2 (is-torsorial-standard-edge-ethane (inr _)) (inl (inr _) , P) =
-      eq-pair-Σ refl
+      eq-pair-eq-fiber
         ( eq-is-prop
           ( is-prop-edge-ethane
             ( standard-unordered-pair (inr star) (inl (inr star)))))

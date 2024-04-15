@@ -53,35 +53,37 @@ module _
               ( intersection-decidable-subtype P Q)
               ( F)))))
   eq-symmetric-difference =
-    ( ( coprod-eq-is-finite
+    ( ( coproduct-eq-is-finite
         ( is-finite-type-decidable-subtype P F)
         ( is-finite-type-decidable-subtype Q F))) ∙
       ( ( ap
           ( number-of-elements-has-finite-cardinality)
           ( all-elements-equal-has-finite-cardinality
             ( has-finite-cardinality-is-finite
-              ( is-finite-coprod
+              ( is-finite-coproduct
                 ( is-finite-type-decidable-subtype P F)
                 ( is-finite-type-decidable-subtype Q F)))
             ( pair
               ( number-of-elements-is-finite
-                ( is-finite-coprod-symmetric-difference))
+                ( is-finite-coproduct-symmetric-difference))
               ( transitive-mere-equiv _ _ _
                 ( unit-trunc-Prop
                   ( inv-equiv (equiv-symmetric-difference P Q)))
                 ( mere-equiv-has-finite-cardinality
                   ( has-finite-cardinality-is-finite
-                    ( is-finite-coprod-symmetric-difference))))))) ∙
+                    ( is-finite-coproduct-symmetric-difference))))))) ∙
         ( inv
-          ( coprod-eq-is-finite
+          ( coproduct-eq-is-finite
             ( is-finite-type-decidable-subtype
               ( symmetric-difference-decidable-subtype P Q) F)
-            ( is-finite-coprod is-finite-intersection is-finite-intersection)) ∙
+            ( is-finite-coproduct
+              ( is-finite-intersection)
+              ( is-finite-intersection))) ∙
           ( ap
             ( ( number-of-elements-decidable-subtype-X
                 ( symmetric-difference-decidable-subtype P Q)) +ℕ_)
             ( ( inv
-                ( coprod-eq-is-finite
+                ( coproduct-eq-is-finite
                   ( is-finite-intersection)
                   ( is-finite-intersection))) ∙
               ( ap
@@ -101,7 +103,7 @@ module _
       {l' : Level} → decidable-subtype l' X → ℕ
     number-of-elements-decidable-subtype-X R =
       number-of-elements-is-finite (is-finite-type-decidable-subtype R F)
-    is-finite-coprod-symmetric-difference :
+    is-finite-coproduct-symmetric-difference :
       is-finite
         ( ( type-decidable-subtype
             ( symmetric-difference-decidable-subtype P Q)) +
@@ -109,10 +111,10 @@ module _
               ( intersection-decidable-subtype P Q)) +
             ( type-decidable-subtype
               ( intersection-decidable-subtype P Q))))
-    is-finite-coprod-symmetric-difference =
-      is-finite-coprod
+    is-finite-coproduct-symmetric-difference =
+      is-finite-coproduct
         ( is-finite-type-decidable-subtype
           ( symmetric-difference-decidable-subtype P Q)
           ( F))
-        ( is-finite-coprod is-finite-intersection is-finite-intersection)
+        ( is-finite-coproduct is-finite-intersection is-finite-intersection)
 ```

@@ -8,6 +8,7 @@ module foundation.booleans where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.involutions
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
 open import foundation.unit-type
@@ -23,6 +24,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.sections
 open import foundation-core.sets
 
 open import univalent-combinatorics.finite-types
@@ -237,9 +239,9 @@ neq-neg-bool false ()
 ### Boolean negation is an involution
 
 ```agda
-neg-neg-bool : (neg-bool ∘ neg-bool) ~ id
-neg-neg-bool true = refl
-neg-neg-bool false = refl
+is-involution-neg-bool : is-involution neg-bool
+is-involution-neg-bool true = refl
+is-involution-neg-bool false = refl
 ```
 
 ### Boolean negation is an equivalence
@@ -247,22 +249,23 @@ neg-neg-bool false = refl
 ```agda
 abstract
   is-equiv-neg-bool : is-equiv neg-bool
-  pr1 (pr1 is-equiv-neg-bool) = neg-bool
-  pr2 (pr1 is-equiv-neg-bool) = neg-neg-bool
-  pr1 (pr2 is-equiv-neg-bool) = neg-bool
-  pr2 (pr2 is-equiv-neg-bool) = neg-neg-bool
+  is-equiv-neg-bool = is-equiv-is-involution is-involution-neg-bool
 
 equiv-neg-bool : bool ≃ bool
 pr1 equiv-neg-bool = neg-bool
 pr2 equiv-neg-bool = is-equiv-neg-bool
 ```
 
-### The constant function `const bool bool b` is not an equivalence
+### The constant function `const bool b` is not an equivalence
 
 ```agda
 abstract
-  not-equiv-const :
-    (b : bool) → ¬ (is-equiv (const bool bool b))
-  not-equiv-const true ((g , G) , _) = neq-true-false-bool (G false)
-  not-equiv-const false ((g , G) , _) = neq-false-true-bool (G true)
+  no-section-const-bool : (b : bool) → ¬ (section (const bool b))
+  no-section-const-bool true (g , G) = neq-true-false-bool (G false)
+  no-section-const-bool false (g , G) = neq-false-true-bool (G true)
+
+abstract
+  is-not-equiv-const-bool :
+    (b : bool) → ¬ (is-equiv (const bool b))
+  is-not-equiv-const-bool b e = no-section-const-bool b (section-is-equiv e)
 ```

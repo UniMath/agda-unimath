@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
@@ -19,10 +20,10 @@ open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -98,7 +99,7 @@ abstract
         ( (x : A) → Σ (B x) (λ b → f x ＝ b))
         ( ( λ t x → (pr1 t x , pr2 t x)) ,
           ( λ t → (pr1 ∘ t , pr2 ∘ t)) ,
-          ( λ t → eq-pair-Σ refl refl))
+          ( λ t → eq-pair-eq-fiber refl))
         ( weak-funext A
           ( λ x → Σ (B x) (λ b → f x ＝ b))
           ( λ x → is-torsorial-Id (f x))))

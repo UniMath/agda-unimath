@@ -35,7 +35,7 @@ module _
   is-binary-upper-bound-Poset-Prop :
     (x y z : type-Poset P) → Prop l2
   is-binary-upper-bound-Poset-Prop x y z =
-    prod-Prop (leq-Poset-Prop P x z) (leq-Poset-Prop P y z)
+    product-Prop (leq-Poset-Prop P x z) (leq-Poset-Prop P y z)
 
   is-binary-upper-bound-Poset :
     (x y z : type-Poset P) → UU l2

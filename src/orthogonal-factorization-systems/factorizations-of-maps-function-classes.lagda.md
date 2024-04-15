@@ -8,7 +8,6 @@ module orthogonal-factorization-systems.factorizations-of-maps-function-classes 
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -25,7 +24,7 @@ open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.factorizations-of-maps
 open import orthogonal-factorization-systems.function-classes
@@ -65,7 +64,7 @@ module _
 
   is-function-class-factorization-Prop : Prop (lL ⊔ lR)
   is-function-class-factorization-Prop =
-    conjunction-Prop
+    product-Prop
       ( L (left-map-factorization F))
       ( R (right-map-factorization F))
 

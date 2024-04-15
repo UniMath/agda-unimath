@@ -49,7 +49,7 @@ module _
     composition-cauchy-series-species-types (λ _ → unit) S X ≃
     exponential-cauchy-series-species-types
   equiv-exponential-cauchy-series-composition-unit-species-types =
-    equiv-tot λ F → left-unit-law-prod-is-contr is-contr-unit
+    equiv-tot λ F → left-unit-law-product-is-contr is-contr-unit
 ```
 
 ### The Cauchy series associated to the Cauchy exponential of `S` is equal to the exponential of its Cauchy series

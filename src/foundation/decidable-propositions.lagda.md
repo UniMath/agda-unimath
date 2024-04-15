@@ -74,7 +74,7 @@ module _
     Decidable-Prop l ≃
     ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
   split-Decidable-Prop =
-    ( left-distributive-Σ-coprod (Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
+    ( left-distributive-Σ-coproduct (Prop l) (λ Q → pr1 Q) (λ Q → ¬ (pr1 Q))) ∘e
     ( inv-associative-Σ (UU l) is-prop (λ X → is-decidable (pr1 X)))
 
   map-equiv-bool-Decidable-Prop' :
@@ -142,8 +142,8 @@ equiv-universes-Decidable-Prop l l' =
 
 iff-universes-Decidable-Prop :
   (l l' : Level) (P : Decidable-Prop l) →
-  ( prop-Decidable-Prop P ⇔
-    prop-Decidable-Prop (map-equiv (equiv-universes-Decidable-Prop l l') P))
+  ( type-Decidable-Prop P) ↔
+  ( type-Decidable-Prop (map-equiv (equiv-universes-Decidable-Prop l l') P))
 pr1 (iff-universes-Decidable-Prop l l' P) p =
   map-inv-equiv
     ( compute-equiv-bool-Decidable-Prop

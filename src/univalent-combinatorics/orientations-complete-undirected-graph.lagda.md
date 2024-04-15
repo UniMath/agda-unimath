@@ -282,8 +282,8 @@ module _
       pr2 h' =
         is-equiv-is-invertible
           ( λ (pair Y np) → pair Y (λ p' → np (inv p')))
-          ( λ (pair Y np) → eq-pair-Σ refl (eq-is-prop is-prop-neg))
-          ( λ (pair Y np) → eq-pair-Σ refl (eq-is-prop is-prop-neg))
+          ( λ (pair Y np) → eq-pair-eq-fiber (eq-is-prop is-prop-neg))
+          ( λ (pair Y np) → eq-pair-eq-fiber (eq-is-prop is-prop-neg))
   eq-mod-two-number-of-differences-orientation-Complete-Undirected-Graph :
     (d1 d2 d3 : orientation-Complete-Undirected-Graph) (m : Fin 2) →
     Id
@@ -521,7 +521,7 @@ module _
               eq-pair-Σ
                 ( ap
                   ( pr1 ∘ d)
-                  ( eq-pair-Σ refl (eq-is-prop is-prop-type-trunc-Prop)))
+                  ( eq-pair-eq-fiber (eq-is-prop is-prop-type-trunc-Prop)))
                 ( eq-is-prop
                   ( is-prop-type-Decidable-Prop
                     ( pr1 Y (pr1 (map-equiv id-equiv d Y)))))))
@@ -1345,20 +1345,20 @@ module _
                 λ s →
                 np
                   ( ( tr
-                    ( λ y →
-                      Id
-                        ( i)
-                        ( map-equiv
-                          ( transposition
-                            ( standard-2-Element-Decidable-Subtype
-                              ( has-decidable-equality-count eX)
-                              ( np)))
-                          ( y)))
-                    ( inv r1)
-                    ( inv
-                      ( right-computation-standard-transposition
-                        ( has-decidable-equality-count eX)
-                        ( np))) ∙
+                      ( λ y →
+                        Id
+                          ( i)
+                          ( map-equiv
+                            ( transposition
+                              ( standard-2-Element-Decidable-Subtype
+                                ( has-decidable-equality-count eX)
+                                ( np)))
+                            ( y)))
+                      ( inv r1)
+                      ( inv
+                        ( right-computation-standard-transposition
+                          ( has-decidable-equality-count eX)
+                          ( np))) ∙
                     ( s ∙ r1))))
             ( inl
               ( tr
@@ -2334,13 +2334,13 @@ module _
         ( tr
           ( λ Y' →
             type-Decidable-Prop
-              ( ( pr1 Y' ∘
-                ( map-inv-equiv
-                  ( transposition
-                    ( standard-2-Element-Decidable-Subtype
-                      ( has-decidable-equality-count eX)
-                      ( np)))))
-                ( y)))
+              ( ( pr1 Y'
+                  ( map-inv-equiv
+                    ( transposition
+                      ( standard-2-Element-Decidable-Subtype
+                        ( has-decidable-equality-count eX)
+                        ( np)))
+                    ( y)))))
           ( P)
           ( inr
             ( inv
@@ -2353,13 +2353,13 @@ module _
         ( tr
           ( λ Y' →
             type-Decidable-Prop
-              ( ( pr1 Y' ∘
+              ( pr1 Y'
                 ( map-inv-equiv
                   ( transposition
                     ( standard-2-Element-Decidable-Subtype
                       ( has-decidable-equality-count eX)
-                      ( np)))))
-                ( j)))
+                      ( np)))
+                  ( j))))
           ( P)
           ( inl
             ( q ∙
@@ -2463,13 +2463,13 @@ module _
           ( tr
             ( λ Y' →
               type-Decidable-Prop
-                ( ( pr1 Y' ∘
+                ( pr1 Y'
                   ( map-inv-equiv
                     ( transposition
                       ( standard-2-Element-Decidable-Subtype
                         ( has-decidable-equality-count eX)
-                        ( np)))))
-                  ( y)))
+                        ( np)))
+                    ( y))))
             ( P)
             ( inr
               ( inv
@@ -2482,13 +2482,13 @@ module _
           ( tr
             ( λ Y' →
               type-Decidable-Prop
-                ( ( ( pr1 Y') ∘
-                    ( map-inv-equiv
-                      ( transposition
-                        ( standard-2-Element-Decidable-Subtype
-                          ( has-decidable-equality-count eX)
-                          ( np)))))
-                  ( i)))
+                ( pr1 Y'
+                  ( map-inv-equiv
+                    ( transposition
+                      ( standard-2-Element-Decidable-Subtype
+                        ( has-decidable-equality-count eX)
+                        ( np)))
+                    ( i))))
             ( P)
             ( inl
               ( r ∙
@@ -2529,13 +2529,13 @@ module _
           ( tr
             ( λ Y' →
               type-Decidable-Prop
-                ( ( ( pr1 Y') ∘
+                ( pr1 Y'
                     ( map-inv-equiv
                       ( transposition
                         ( standard-2-Element-Decidable-Subtype
                           ( has-decidable-equality-count eX)
-                          ( np)))))
-                  ( x)))
+                          ( np)))
+                      ( x))))
             ( P)
             ( inl
               ( inv
@@ -2548,13 +2548,13 @@ module _
           ( tr
             ( λ Y' →
               type-Decidable-Prop
-                ( ( ( pr1 Y') ∘
-                    ( map-inv-equiv
-                      ( transposition
-                        ( standard-2-Element-Decidable-Subtype
-                          ( has-decidable-equality-count eX)
-                          ( np)))))
-                  ( j)))
+                ( pr1 Y'
+                  ( map-inv-equiv
+                    ( transposition
+                      ( standard-2-Element-Decidable-Subtype
+                        ( has-decidable-equality-count eX)
+                        ( np)))
+                    ( j))))
             ( P)
             ( inr
               ( s ∙
@@ -2597,13 +2597,13 @@ module _
         ( tr
           ( λ Y' →
             type-Decidable-Prop
-              ( ( pr1 Y' ∘
+              ( pr1 Y'
                 ( map-inv-equiv
                   ( transposition
                     ( standard-2-Element-Decidable-Subtype
                       ( has-decidable-equality-count eX)
-                      ( np)))))
-                ( x)))
+                      ( np)))
+                  ( x))))
           ( P)
           ( inl
             ( inv
@@ -2616,13 +2616,13 @@ module _
         ( tr
           ( λ Y' →
             type-Decidable-Prop
-              ( ( pr1 Y' ∘
+              ( pr1 Y'
                 ( map-inv-equiv
                   ( transposition
                     ( standard-2-Element-Decidable-Subtype
                       ( has-decidable-equality-count eX)
-                      ( np)))))
-                ( i)))
+                      ( np)))
+                  ( i))))
           ( P)
           ( inr
             ( t ∙

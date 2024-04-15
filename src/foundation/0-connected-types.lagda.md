@@ -128,7 +128,7 @@ equiv-dependent-universal-property-is-0-connected :
     ((x : A) → type-Prop (P x)) ≃ type-Prop (P a))
 equiv-dependent-universal-property-is-0-connected a H P =
   ( equiv-universal-property-unit (type-Prop (P a))) ∘e
-  ( equiv-dependent-universal-property-surj-is-surjective
+  ( equiv-dependent-universal-property-surjection-is-surjective
     ( point a)
     ( is-surjective-point-is-0-connected a H)
     ( P))
@@ -191,8 +191,8 @@ module _
   is-0-connected-product =
     is-contr-equiv
       ( type-trunc-Set X × type-trunc-Set Y)
-      ( equiv-distributive-trunc-prod-Set X Y)
-      ( is-contr-prod p1 p2)
+      ( equiv-distributive-trunc-product-Set X Y)
+      ( is-contr-product p1 p2)
 ```
 
 ### A contractible type is `0`-connected

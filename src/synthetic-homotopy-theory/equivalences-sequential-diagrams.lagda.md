@@ -140,7 +140,7 @@ module _
   pr1 inv-equiv-sequential-diagram n =
     inv-equiv (equiv-equiv-sequential-diagram B e n)
   pr2 inv-equiv-sequential-diagram n =
-    coherence-square-inv-vertical
+    vertical-inv-equiv-coherence-square-maps
       ( map-sequential-diagram A n)
       ( equiv-equiv-sequential-diagram B e n)
       ( equiv-equiv-sequential-diagram B e (succ-ℕ n))

@@ -12,6 +12,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.retracts-of-types
@@ -19,7 +20,7 @@ open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 ```
 
 </details>
@@ -160,7 +161,7 @@ module _
     UU (l1 ⊔ l2)
   coherence-htpy-factorization-through F E R L =
     ( is-factorization-factorization-through F) ~
-    ( htpy-comp-horizontal L R ∙h is-factorization-factorization-through E)
+    ( horizontal-concat-htpy R L ∙h is-factorization-factorization-through E)
 
   htpy-factorization-through :
     (F E : factorization-through f X) → UU (l1 ⊔ l2 ⊔ l3)

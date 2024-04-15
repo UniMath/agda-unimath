@@ -55,7 +55,7 @@ module _
 
   is-join-semilattice-prop-Semigroup : Prop l
   is-join-semilattice-prop-Semigroup =
-    prod-Prop
+    product-Prop
       ( Π-Prop
         ( type-Semigroup X)
         ( λ x →

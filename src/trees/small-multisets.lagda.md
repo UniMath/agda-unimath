@@ -41,7 +41,7 @@ A multiset `X := tree-𝕎 A α` is said to be **small** with respect to a unive
 ```agda
 is-small-𝕍-Prop : (l : Level) {l1 : Level} → 𝕍 l1 → Prop (l1 ⊔ lsuc l)
 is-small-𝕍-Prop l (tree-𝕎 A α) =
-  prod-Prop (is-small-Prop l A) (Π-Prop A (λ x → is-small-𝕍-Prop l (α x)))
+  product-Prop (is-small-Prop l A) (Π-Prop A (λ x → is-small-𝕍-Prop l (α x)))
 
 is-small-𝕍 : (l : Level) {l1 : Level} → 𝕍 l1 → UU (l1 ⊔ lsuc l)
 is-small-𝕍 l X = type-Prop (is-small-𝕍-Prop l X)

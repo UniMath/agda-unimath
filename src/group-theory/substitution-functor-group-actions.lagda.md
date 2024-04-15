@@ -113,7 +113,7 @@ module _
   preset-obj-left-adjoint-subst-action-Group :
     {l3 : Level} → action-Group G l3 → Set (l2 ⊔ l3)
   preset-obj-left-adjoint-subst-action-Group X =
-    prod-Set (set-Group H) (set-action-Group G X)
+    product-Set (set-Group H) (set-action-Group G X)
 
   pretype-obj-left-adjoint-subst-action-Group :
     {l3 : Level} → action-Group G l3 → UU (l2 ⊔ l3)
@@ -135,7 +135,7 @@ module _
     ( equivalence-relation-obj-left-adjoint-subst-action-Group X)
     ( h , x)
     ( h' , x') =
-    ∃-Prop
+    exists-structure-Prop
       ( type-Group G)
       ( λ g →
         ( Id (mul-Group H (map-hom-Group G H f g) h) h') ×
@@ -143,7 +143,7 @@ module _
   pr1
     ( pr2 (equivalence-relation-obj-left-adjoint-subst-action-Group X))
     ( h , x) =
-    intro-∃
+    intro-exists
       ( unit-Group G)
       ( pair
         ( ( ap (mul-Group' H h) (preserves-unit-hom-Group G H f)) ∙
@@ -162,7 +162,7 @@ module _
         ( h' , x')
         ( h , x))
       ( λ (g , p , q) →
-        intro-∃
+        intro-exists
           ( inv-Group G g)
           ( ( ( ap
                 ( mul-Group' H h')
@@ -191,7 +191,7 @@ module _
             ( h , x)
             ( h'' , x''))
           ( λ (g' , p' , q') →
-            intro-∃
+            intro-exists
               ( mul-Group G g' g)
               ( ( ( ap
                     ( mul-Group' H h)

@@ -17,6 +17,7 @@ open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.isomorphisms-of-sets
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -44,8 +45,9 @@ obj-Large-Precategory Set-Large-Precategory = Set
 hom-set-Large-Precategory Set-Large-Precategory = hom-set-Set
 comp-hom-Large-Precategory Set-Large-Precategory g f = g ∘ f
 id-hom-Large-Precategory Set-Large-Precategory = id
-associative-comp-hom-Large-Precategory Set-Large-Precategory h g f = refl
-inv-associative-comp-hom-Large-Precategory Set-Large-Precategory h g f = refl
+involutive-eq-associative-comp-hom-Large-Precategory Set-Large-Precategory
+  h g f =
+  reflⁱ
 left-unit-law-comp-hom-Large-Precategory Set-Large-Precategory f = refl
 right-unit-law-comp-hom-Large-Precategory Set-Large-Precategory f = refl
 ```

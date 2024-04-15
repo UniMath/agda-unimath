@@ -1,5 +1,9 @@
 # Foundation
 
+```agda
+{-# OPTIONS --guardedness #-}
+```
+
 ## Files in the foundation folder
 
 ```agda
@@ -14,6 +18,7 @@ open import foundation.action-on-equivalences-functions public
 open import foundation.action-on-equivalences-functions-out-of-subuniverses public
 open import foundation.action-on-equivalences-type-families public
 open import foundation.action-on-equivalences-type-families-over-subuniverses public
+open import foundation.action-on-higher-identifications-functions public
 open import foundation.action-on-homotopies-functions public
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public
@@ -24,6 +29,7 @@ open import foundation.arithmetic-law-product-and-pi-decompositions public
 open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.bands public
+open import foundation.base-changes-span-diagrams public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public
@@ -32,12 +38,15 @@ open import foundation.binary-homotopies public
 open import foundation.binary-operations-unordered-pairs-of-types public
 open import foundation.binary-reflecting-maps-equivalence-relations public
 open import foundation.binary-relations public
+open import foundation.binary-relations-with-extensions public
+open import foundation.binary-relations-with-lifts public
 open import foundation.binary-transport public
 open import foundation.binary-type-duality public
 open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-morphisms-arrows public
+open import foundation.cartesian-morphisms-span-diagrams public
 open import foundation.cartesian-product-types public
 open import foundation.cartesian-products-set-quotients public
 open import foundation.category-of-families-of-sets public
@@ -45,6 +54,7 @@ open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.codiagonal-maps-of-types public
 open import foundation.coherently-invertible-maps public
+open import foundation.coinhabited-pairs-of-types public
 open import foundation.commuting-cubes-of-maps public
 open import foundation.commuting-hexagons-of-identifications public
 open import foundation.commuting-pentagons-of-identifications public
@@ -57,10 +67,12 @@ open import foundation.commuting-tetrahedra-of-maps public
 open import foundation.commuting-triangles-of-homotopies public
 open import foundation.commuting-triangles-of-identifications public
 open import foundation.commuting-triangles-of-maps public
+open import foundation.commuting-triangles-of-morphisms-arrows public
 open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.composite-maps-in-inverse-sequential-diagrams public
 open import foundation.composition-algebra public
+open import foundation.computational-identity-types public
 open import foundation.cones-over-cospan-diagrams public
 open import foundation.cones-over-inverse-sequential-diagrams public
 open import foundation.conjunction public
@@ -78,6 +90,7 @@ open import foundation.copartial-functions public
 open import foundation.coproduct-decompositions public
 open import foundation.coproduct-decompositions-subuniverse public
 open import foundation.coproduct-types public
+open import foundation.coproducts-pullbacks public
 open import foundation.coslice public
 open import foundation.cospan-diagrams public
 open import foundation.cospans public
@@ -100,22 +113,26 @@ open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-inverse-sequential-diagrams public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-products-pullbacks public
 open import foundation.dependent-sequences public
+open import foundation.dependent-sums-pullbacks public
 open import foundation.dependent-telescopes public
 open import foundation.dependent-universal-property-equivalences public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
 open import foundation.descent-equivalences public
+open import foundation.diagonal-maps-cartesian-products-of-types public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonal-span-diagrams public
 open import foundation.diagonals-of-maps public
 open import foundation.diagonals-of-morphisms-arrows public
-open import foundation.discrete-reflexive-relations public
+open import foundation.discrete-relations public
 open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
 open import foundation.disjunction public
+open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-modality public
 open import foundation.double-powersets public
@@ -140,24 +157,30 @@ open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-arrows public
 open import foundation.equivalences-cospans public
+open import foundation.equivalences-double-arrows public
 open import foundation.equivalences-inverse-sequential-diagrams public
 open import foundation.equivalences-maybe public
 open import foundation.equivalences-span-diagrams public
 open import foundation.equivalences-span-diagrams-families-of-types public
 open import foundation.equivalences-spans public
 open import foundation.equivalences-spans-families-of-types public
+open import foundation.evaluation-functions public
 open import foundation.exclusive-disjunction public
+open import foundation.exclusive-sum public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
 open import foundation.extensions-types public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
 open import foundation.families-of-maps public
+open import foundation.families-over-telescopes public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-equivalences public
 open import foundation.fibered-involutions public
 open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
+open import foundation.finitely-coherent-equivalences public
+open import foundation.finitely-coherently-invertible-maps public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
 open import foundation.function-types public
@@ -177,9 +200,13 @@ open import foundation.functoriality-truncation public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.global-subuniverses public
+open import foundation.higher-homotopies-morphisms-arrows public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
+open import foundation.homotopies-morphisms-arrows public
+open import foundation.homotopy-algebra public
 open import foundation.homotopy-induction public
+open import foundation.homotopy-preorder-of-types public
 open import foundation.identity-systems public
 open import foundation.identity-truncated-types public
 open import foundation.identity-types public
@@ -189,6 +216,7 @@ open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
+open import foundation.infinitely-coherent-equivalences public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
 open import foundation.injective-maps public
@@ -223,11 +251,14 @@ open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
+open import foundation.mere-functions public
+open import foundation.mere-logical-equivalences public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospan-diagrams public
 open import foundation.morphisms-cospans public
+open import foundation.morphisms-double-arrows public
 open import foundation.morphisms-inverse-sequential-diagrams public
 open import foundation.morphisms-span-diagrams public
 open import foundation.morphisms-spans public
@@ -262,6 +293,7 @@ open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public
 open import foundation.postcomposition-dependent-functions public
 open import foundation.postcomposition-functions public
+open import foundation.postcomposition-pullbacks public
 open import foundation.powersets public
 open import foundation.precomposition-dependent-functions public
 open import foundation.precomposition-functions public
@@ -277,6 +309,7 @@ open import foundation.product-decompositions-subuniverse public
 open import foundation.products-binary-relations public
 open import foundation.products-equivalence-relations public
 open import foundation.products-of-tuples-of-types public
+open import foundation.products-pullbacks public
 open import foundation.products-unordered-pairs-of-types public
 open import foundation.products-unordered-tuples-of-types public
 open import foundation.projective-types public
@@ -286,7 +319,6 @@ open import foundation.propositional-maps public
 open import foundation.propositional-resizing public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
-open import foundation.pullback-squares public
 open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
 open import foundation.raising-universe-levels public
@@ -326,6 +358,10 @@ open import foundation.spans public
 open import foundation.spans-families-of-types public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
+open import foundation.standard-pullbacks public
+open import foundation.strict-symmetrization-binary-relations public
+open import foundation.strictly-involutive-identity-types public
+open import foundation.strictly-right-unital-concatenation-identifications public
 open import foundation.strongly-extensional-maps public
 open import foundation.structure public
 open import foundation.structure-identity-principle public
@@ -354,6 +390,9 @@ open import foundation.transport-along-higher-identifications public
 open import foundation.transport-along-homotopies public
 open import foundation.transport-along-identifications public
 open import foundation.transport-split-type-families public
+open import foundation.transposition-identifications-along-equivalences public
+open import foundation.transposition-identifications-along-retractions public
+open import foundation.transposition-identifications-along-sections public
 open import foundation.transposition-span-diagrams public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public
@@ -376,8 +415,8 @@ open import foundation.type-arithmetic-unit-type public
 open import foundation.type-duality public
 open import foundation.type-theoretic-principle-of-choice public
 open import foundation.unions-subtypes public
-open import foundation.unique-existence public
 open import foundation.uniqueness-image public
+open import foundation.uniqueness-quantification public
 open import foundation.uniqueness-set-quotients public
 open import foundation.uniqueness-set-truncations public
 open import foundation.uniqueness-truncation public
@@ -408,6 +447,7 @@ open import foundation.universal-property-set-quotients public
 open import foundation.universal-property-set-truncation public
 open import foundation.universal-property-truncation public
 open import foundation.universal-property-unit-type public
+open import foundation.universal-quantification public
 open import foundation.universe-levels public
 open import foundation.unordered-pairs public
 open import foundation.unordered-pairs-of-types public
@@ -417,5 +457,10 @@ open import foundation.vectors-set-quotients public
 open import foundation.weak-function-extensionality public
 open import foundation.weak-limited-principle-of-omniscience public
 open import foundation.weakly-constant-maps public
-open import foundation.whiskering-homotopies public
+open import foundation.whiskering-higher-homotopies-composition public
+open import foundation.whiskering-homotopies-composition public
+open import foundation.whiskering-homotopies-concatenation public
+open import foundation.whiskering-identifications-concatenation public
+open import foundation.whiskering-operations public
+open import foundation.yoneda-identity-types public
 ```

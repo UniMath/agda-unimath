@@ -20,11 +20,12 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.path-algebra
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-identifications-concatenation
 
 open import synthetic-homotopy-theory.cocones-under-spans
 ```
@@ -324,10 +325,10 @@ module _
             (x : X) →
             coherence-square-identifications
               ( h x)
-              ( identification-left-whisk
+              ( left-whisker-concat
                 ( meridian-suspension-structure c x)
                 ( q))
-              ( identification-right-whisk
+              ( right-whisker-concat
                 ( p)
                 ( meridian-suspension-structure c' x))
               ( h' x)))
@@ -343,10 +344,10 @@ module _
             (x : X) →
             coherence-square-identifications
               ( h x)
-              ( identification-left-whisk
+              ( left-whisker-concat
                 ( meridian-suspension-structure c x)
                 ( q))
-              ( identification-right-whisk
+              ( right-whisker-concat
                 ( p)
                 ( meridian-suspension-structure c' x))
               ( pr2 y x)))
@@ -358,8 +359,8 @@ module _
           (x : X) →
           coherence-square-identifications
             ( h x)
-            ( identification-left-whisk (meridian-suspension-structure c x) q)
-            ( identification-right-whisk
+            ( left-whisker-concat (meridian-suspension-structure c x) q)
+            ( right-whisker-concat
               ( refl)
               ( meridian-suspension-structure c' x))
             ( h' x))
@@ -391,10 +392,10 @@ module _
     (x : X) →
       coherence-square-identifications
         ( meridian-htpy-suspension-structure h x)
-        ( identification-left-whisk
+        ( left-whisker-concat
           ( meridian-suspension-structure c x)
           ( south-htpy-in-htpy-suspension-structure H))
-        ( identification-right-whisk
+        ( right-whisker-concat
           ( north-htpy-in-htpy-suspension-structure H)
           ( meridian-suspension-structure c' x))
         ( meridian-htpy-suspension-structure h' x)

@@ -158,7 +158,7 @@ inv-equiv-Type-With-Endomorphism :
 pr1 (inv-equiv-Type-With-Endomorphism X Y e) =
   inv-equiv (equiv-equiv-Type-With-Endomorphism X Y e)
 pr2 (inv-equiv-Type-With-Endomorphism X Y e) =
-  coherence-square-inv-horizontal
+  horizontal-inv-equiv-coherence-square-maps
     ( equiv-equiv-Type-With-Endomorphism X Y e)
     ( endomorphism-Type-With-Endomorphism X)
     ( endomorphism-Type-With-Endomorphism Y)

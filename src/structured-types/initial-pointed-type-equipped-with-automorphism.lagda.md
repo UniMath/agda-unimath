@@ -18,6 +18,7 @@ open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.iterating-automorphisms
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.unit-type
 open import foundation.universe-levels
 

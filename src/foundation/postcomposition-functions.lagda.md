@@ -11,7 +11,10 @@ open import foundation-core.postcomposition-functions public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.postcomposition-dependent-functions
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
@@ -19,14 +22,12 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.type-theoretic-principle-of-choice
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -177,8 +178,10 @@ abstract
   is-equiv-postcomp-is-equiv {X = X} {Y = Y} f is-equiv-f A =
     is-equiv-is-invertible
       ( postcomp A (map-inv-is-equiv is-equiv-f))
-      ( eq-htpy ∘ htpy-right-whisk (is-section-map-inv-is-equiv is-equiv-f))
-      ( eq-htpy ∘ htpy-right-whisk (is-retraction-map-inv-is-equiv is-equiv-f))
+      ( eq-htpy ∘
+        right-whisker-comp (is-section-map-inv-is-equiv is-equiv-f))
+      ( eq-htpy ∘
+        right-whisker-comp (is-retraction-map-inv-is-equiv is-equiv-f))
 
   is-equiv-postcomp-equiv :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ≃ Y) →
@@ -205,4 +208,59 @@ module _
     (e : B ≃ C) (f g : A → B) → (f ~ g) ≃ (map-equiv e ∘ f ~ map-equiv e ∘ g)
   equiv-htpy-postcomp-htpy e f g =
     equiv-Π-equiv-family (λ a → equiv-ap e (f a) (g a))
+```
+
+### Computing the action on identifications of postcomposition by a map
+
+Consider a map `f : B → C` and two functions `g h : A → B`. Then the
+[action on identifications](foundation.action-on-identifications-functions.md)
+`ap (postcomp A f)` fits in a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
+
+```text
+                    ap (postcomp A f)
+       (g = h) --------------------------> (f ∘ g = f ∘ h)
+          |                                       |
+  htpy-eq |                                       | htpy-eq
+          ∨                                       ∨
+       (g ~ h) --------------------------> (f ∘ g ~ f ∘ h).
+                          f ·l_
+```
+
+Similarly, the action on identifications `ap (postcomp A f)` also fits in a
+commuting square
+
+```text
+                          f ·l_
+       (g ~ h) --------------------------> (f ∘ g ~ f ∘ h)
+          |                                       |
+  eq-htpy |                                       | eq-htpy
+          ∨                                       ∨
+       (g = h) --------------------------> (f ∘ g = f ∘ h).
+                     ap (postcomp A f)
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g h : A → B} (f : B → C)
+  where
+
+  compute-htpy-eq-ap-postcomp :
+    coherence-square-maps
+      ( ap (postcomp A f) {x = g} {y = h})
+      ( htpy-eq)
+      ( htpy-eq)
+      ( f ·l_)
+  compute-htpy-eq-ap-postcomp =
+    compute-htpy-eq-ap-postcomp-Π f
+
+  compute-eq-htpy-ap-postcomp :
+    coherence-square-maps
+      ( f ·l_)
+      ( eq-htpy)
+      ( eq-htpy)
+      ( ap (postcomp A f) {x = g} {y = h})
+  compute-eq-htpy-ap-postcomp =
+    compute-eq-htpy-ap-postcomp-Π f
 ```

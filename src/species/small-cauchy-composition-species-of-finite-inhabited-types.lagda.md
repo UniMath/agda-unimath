@@ -57,7 +57,7 @@ equiv-Σ-Decomposition-Inhabited-𝔽-Σ-Decomposition-𝔽 X =
       ( map-compute-Inhabited-𝔽' X))) ∘e
   ( ( equiv-tot
       ( λ D →
-        equiv-prod
+        equiv-product
           ( equiv-add-redundant-prop
             ( is-property-is-inhabited _)
             ( λ _ →
@@ -99,7 +99,7 @@ module _
     Σ-𝔽
       ( finite-Σ-Decomposition-Subuniverse-Inhabited-𝔽 X)
       ( λ D →
-        prod-𝔽
+        product-𝔽
           ( S ( subuniverse-indexing-type-Σ-Decomposition-Subuniverse
                 ( is-finite-and-inhabited-Prop)
                 ( map-compute-Inhabited-𝔽' X)

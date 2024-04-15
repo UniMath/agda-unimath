@@ -24,6 +24,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
@@ -106,7 +107,7 @@ module _
   is-prop-type-prop-standard-2-Element-Subtype :
     (z : type-Set X) → is-prop (type-prop-standard-2-Element-Subtype z)
   is-prop-type-prop-standard-2-Element-Subtype z =
-    is-prop-coprod
+    is-prop-coproduct
       ( λ p q → np (p ∙ inv q))
       ( is-set-type-Set X x z)
       ( is-set-type-Set X y z)
@@ -125,8 +126,8 @@ module _
     Fin 2 ≃ type-standard-2-Element-Subtype
   equiv-type-standard-2-Element-Subtype =
     ( inv-equiv
-      ( left-distributive-Σ-coprod (type-Set X) (Id x) (Id y))) ∘e
-    ( equiv-coprod
+      ( left-distributive-Σ-coproduct (type-Set X) (Id x) (Id y))) ∘e
+    ( equiv-coproduct
       ( equiv-is-contr
         ( is-contr-Fin-one-ℕ)
         ( is-torsorial-Id x))
@@ -253,7 +254,7 @@ module _
       Σ ( type-2-Element-Type X)
         ( λ x → ¬ ((y : type-2-Element-Type X) → Id (f x) (f y)))
     first-element h =
-      exists-not-not-forall-count (λ z → (w : type-2-Element-Type X) →
+      exists-not-not-for-all-count (λ z → (w : type-2-Element-Type X) →
       Id (f z) (f w)) (λ z → {!!})
         {!!} {!!}
     two-elements-different-image :

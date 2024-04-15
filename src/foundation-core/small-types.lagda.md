@@ -195,6 +195,13 @@ pr1 (is-small-is-contr l H) = raise-unit l
 pr2 (is-small-is-contr l H) = equiv-is-contr H is-contr-raise-unit
 ```
 
+### The unit type is small with respect to any universe
+
+```agda
+is-small-unit : {l : Level} → is-small l unit
+is-small-unit = is-small-is-contr _ is-contr-unit
+```
+
 ### Small types are closed under dependent pair types
 
 ```agda
@@ -224,17 +231,17 @@ pr2 (Σ-Small-Type {l1} {l2} {l3} {l4} A B) =
 ### Small types are closed under cartesian products
 
 ```agda
-is-small-prod :
+is-small-product :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} →
   is-small l3 A → is-small l4 B → is-small (l3 ⊔ l4) (A × B)
-is-small-prod H K = is-small-Σ H (λ a → K)
+is-small-product H K = is-small-Σ H (λ a → K)
 
-prod-Small-Type :
+product-Small-Type :
   {l1 l2 l3 l4 : Level} →
   Small-Type l1 l2 → Small-Type l3 l4 → Small-Type (l1 ⊔ l3) (l2 ⊔ l4)
-pr1 (prod-Small-Type A B) = type-Small-Type A × type-Small-Type B
-pr2 (prod-Small-Type A B) =
-  is-small-prod (is-small-type-Small-Type A) (is-small-type-Small-Type B)
+pr1 (product-Small-Type A B) = type-Small-Type A × type-Small-Type B
+pr2 (product-Small-Type A B) =
+  is-small-product (is-small-type-Small-Type A) (is-small-type-Small-Type B)
 ```
 
 ### Any product of small types indexed by a small type is small
@@ -276,18 +283,19 @@ is-small-function-type H K = is-small-Π H (λ a → K)
 ### Small types are closed under coproduct types
 
 ```agda
-is-small-coprod :
+is-small-coproduct :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} →
   is-small l3 A → is-small l4 B → is-small (l3 ⊔ l4) (A + B)
-pr1 (is-small-coprod H K) = type-is-small H + type-is-small K
-pr2 (is-small-coprod H K) = equiv-coprod (equiv-is-small H) (equiv-is-small K)
+pr1 (is-small-coproduct H K) = type-is-small H + type-is-small K
+pr2 (is-small-coproduct H K) =
+  equiv-coproduct (equiv-is-small H) (equiv-is-small K)
 
-coprod-Small-Type :
+coproduct-Small-Type :
   {l1 l2 l3 l4 : Level} →
   Small-Type l1 l2 → Small-Type l3 l4 → Small-Type (l1 ⊔ l3) (l2 ⊔ l4)
-pr1 (coprod-Small-Type A B) = type-Small-Type A + type-Small-Type B
-pr2 (coprod-Small-Type A B) =
-  is-small-coprod (is-small-type-Small-Type A) (is-small-type-Small-Type B)
+pr1 (coproduct-Small-Type A B) = type-Small-Type A + type-Small-Type B
+pr2 (coproduct-Small-Type A B) =
+  is-small-coproduct (is-small-type-Small-Type A) (is-small-type-Small-Type B)
 ```
 
 ### The type of logical equivalences between small types is small
@@ -297,5 +305,5 @@ is-small-logical-equivalence :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} →
   is-small l3 A → is-small l4 B → is-small (l3 ⊔ l4) (A ↔ B)
 is-small-logical-equivalence H K =
-  is-small-prod (is-small-function-type H K) (is-small-function-type K H)
+  is-small-product (is-small-function-type H K) (is-small-function-type K H)
 ```

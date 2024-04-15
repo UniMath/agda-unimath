@@ -145,7 +145,7 @@ module _
       ((x : A) → section (f x)) →
       is-fiberwise-equiv f
     fundamental-theorem-id-section f section-f x =
-      is-equiv-section-is-equiv
+      is-equiv-is-equiv-section
         ( f x)
         ( section-f x)
         ( fundamental-theorem-id-retraction

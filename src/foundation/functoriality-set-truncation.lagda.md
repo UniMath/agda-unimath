@@ -11,8 +11,10 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functoriality-truncation
 open import foundation.images
+open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.set-truncations
+open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
 open import foundation.uniqueness-image
@@ -20,6 +22,7 @@ open import foundation.uniqueness-set-truncations
 open import foundation.universal-property-image
 open import foundation.universal-property-set-truncation
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
@@ -29,11 +32,8 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.truncation-levels
-open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -87,7 +87,7 @@ module _
   binary-map-trunc-Set x y =
     map-trunc-Set
       ( λ (x' , y') → f x' y')
-      ( map-inv-equiv-distributive-trunc-prod-Set A B (x , y))
+      ( map-inv-equiv-distributive-trunc-product-Set A B (x , y))
 ```
 
 ## Properties

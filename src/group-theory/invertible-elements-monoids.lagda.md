@@ -145,7 +145,7 @@ module _
   all-elements-equal-is-invertible-element-Monoid x (y , p , q) (y' , p' , q') =
     eq-type-subtype
       ( λ z →
-        prod-Prop
+        product-Prop
           ( Id-Prop (set-Monoid M) (mul-Monoid M x z) (unit-Monoid M))
           ( Id-Prop (set-Monoid M) (mul-Monoid M z x) (unit-Monoid M)))
       ( ( inv (left-unit-law-mul-Monoid M y)) ∙

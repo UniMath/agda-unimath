@@ -189,7 +189,7 @@ is-decidable-subtype-is-finite-has-decidable-eq S dec-A fin-S a =
     ( fin-S)
     ( is-decidable-Prop (S a))
     ( λ count-S →
-      rec-coprod
+      rec-coproduct
         ( λ x → inl (tr (type-Prop ∘ S) (inv (pr2 x)) (pr2 (pr1 x))))
         ( λ x → inr λ S-a → x (( (a , S-a) , refl)))
         ( is-decidable-Σ-count count-S λ s → dec-A a (pr1 s)))

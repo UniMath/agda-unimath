@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -126,7 +127,7 @@ module _
 
   is-wide-subprecategory-Prop : Prop (l1 ⊔ l2 ⊔ l3)
   is-wide-subprecategory-Prop =
-    prod-Prop
+    product-Prop
       ( contains-id-prop-subtype-hom-wide-Precategory C P₁)
       ( is-closed-under-composition-prop-subtype-hom-wide-Precategory C P₁)
 
@@ -340,23 +341,15 @@ module _
         ( inclusion-hom-Wide-Subprecategory C P y z g)
         ( inclusion-hom-Wide-Subprecategory C P x y f))
 
-  inv-associative-comp-hom-Wide-Subprecategory :
+  involutive-eq-associative-comp-hom-Wide-Subprecategory :
     {x y z w : obj-Wide-Subprecategory C P}
     (h : hom-Wide-Subprecategory C P z w)
     (g : hom-Wide-Subprecategory C P y z)
     (f : hom-Wide-Subprecategory C P x y) →
-    ( comp-hom-Wide-Subprecategory h
-      ( comp-hom-Wide-Subprecategory g f)) ＝
-    ( comp-hom-Wide-Subprecategory
-      ( comp-hom-Wide-Subprecategory h g) f)
-
-  inv-associative-comp-hom-Wide-Subprecategory {x} {y} {z} {w} h g f =
-    eq-type-subtype
-      ( subtype-hom-Wide-Subprecategory C P x w)
-      ( inv-associative-comp-hom-Precategory C
-        ( inclusion-hom-Wide-Subprecategory C P z w h)
-        ( inclusion-hom-Wide-Subprecategory C P y z g)
-        ( inclusion-hom-Wide-Subprecategory C P x y f))
+    comp-hom-Wide-Subprecategory (comp-hom-Wide-Subprecategory h g) f ＝ⁱ
+    comp-hom-Wide-Subprecategory h (comp-hom-Wide-Subprecategory g f)
+  involutive-eq-associative-comp-hom-Wide-Subprecategory h g f =
+    involutive-eq-eq (associative-comp-hom-Wide-Subprecategory h g f)
 
   left-unit-law-comp-hom-Wide-Subprecategory :
     {x y : obj-Wide-Subprecategory C P}
@@ -383,10 +376,8 @@ module _
       ( hom-set-Wide-Subprecategory)
   pr1 associative-composition-operation-Wide-Subprecategory =
     comp-hom-Wide-Subprecategory
-  pr1 (pr2 associative-composition-operation-Wide-Subprecategory h g f) =
-    associative-comp-hom-Wide-Subprecategory h g f
-  pr2 (pr2 associative-composition-operation-Wide-Subprecategory h g f) =
-    inv-associative-comp-hom-Wide-Subprecategory h g f
+  pr2 associative-composition-operation-Wide-Subprecategory =
+    involutive-eq-associative-comp-hom-Wide-Subprecategory
 
   is-unital-composition-operation-Wide-Subprecategory :
     is-unital-composition-operation-binary-family-Set

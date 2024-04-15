@@ -1,4 +1,4 @@
-# Non-contractible types
+# Noncontractible types
 
 ```agda
 module foundation.noncontractible-types where
@@ -23,7 +23,7 @@ open import foundation-core.negation
 
 ## Idea
 
-A type `X` is non-contractible if it comes equipped with an element of type
+A type `X` is noncontractible if it comes equipped with an element of type
 `¬ (is-contr X)`.
 
 ## Definitions

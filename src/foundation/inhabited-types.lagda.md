@@ -46,7 +46,7 @@ is-inhabited-Prop X = trunc-Prop X
 is-inhabited : {l : Level} → UU l → UU l
 is-inhabited X = type-Prop (is-inhabited-Prop X)
 
-is-property-is-inhabited : {l : Level} → (X : UU l) → is-prop (is-inhabited X)
+is-property-is-inhabited : {l : Level} (X : UU l) → is-prop (is-inhabited X)
 is-property-is-inhabited X = is-prop-type-Prop (is-inhabited-Prop X)
 
 Inhabited-Type : (l : Level) → UU (lsuc l)
@@ -225,6 +225,5 @@ is-contr-is-inhabited-is-prop {A = A} p h =
 - The notion of _nonempty types_ is treated in
   [`foundation.empty-types`](foundation.empty-types.md). In particular, every
   inhabited type is nonempty.
-
 - For the notion of _pointed types_, see
   [`structured-types.pointed-types`](structured-types.pointed-types.md).

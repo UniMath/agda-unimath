@@ -139,7 +139,8 @@ module _
           ( λ q →
             ( ( pr1 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 3 A) q) ＝
               ( (ap (power-nat-Ω 5 A) p) ∙ pr1 (pr2 (pr2 t)))) ×
-            ( ( pr2 (pr2 (pr2 s)) ∙ ap (power-nat-Ω 2 A) (ap-binary _∙_ p q)) ＝
+            ( ( pr2 (pr2 (pr2 s)) ∙
+                ap (power-nat-Ω 2 A) (horizontal-concat-Id² p q)) ＝
               ( ap (power-nat-Ω 3 A) q ∙ pr2 (pr2 (pr2 t))))))
 
   refl-Eq-structure-Hatcher-Acyclic-Type :
@@ -225,8 +226,8 @@ module _
                   power-nat-Ω 5 (Ω A) a ＝ power-nat-Ω 3 (Ω A) (pr1 bq)))) ∘e
             ( equiv-tot
               ( λ b →
-                ( commutative-prod) ∘e
-                ( equiv-prod
+                ( commutative-product) ∘e
+                ( equiv-product
                   ( id-equiv)
                   ( ( ( inv-equiv
                         ( equiv-ap
@@ -291,7 +292,7 @@ module _
       ( λ p →
         equiv-tot
           ( λ q →
-            equiv-prod
+            equiv-product
               ( equiv-left-transpose-eq-concat' _ _ _ ∘e equiv-inv _ _)
               ( equiv-left-transpose-eq-concat' _ _ _ ∘e equiv-inv _ _)))
 

@@ -106,7 +106,7 @@ left-unit-law-z-concat-Ω³ :
 left-unit-law-z-concat-Ω³ α =
   ( left-unit-law-z-concat-Id³ α) ∙
   ( ( inv right-unit) ∙
-    ( ( inv-nat-htpy (λ ω → left-unit-law-horizontal-concat-Id² ω) α) ∙
+    ( ( inv-nat-htpy (λ ω → compute-left-refl-horizontal-concat-Id² ω) α) ∙
       ( ( inv right-unit) ∙
         ( ( inv-nat-htpy ap-id α) ∙
           ( ap-id α)))))
@@ -129,7 +129,7 @@ right-unit-law-z-concat-Ω³ α =
 -}
 {-
   ( ( inv right-unit) ∙
-    ( ( inv-nat-htpy (λ ω → right-unit-law-horizontal-concat-Id² ω) α) ∙
+    ( ( inv-nat-htpy (λ ω → compute-right-refl-horizontal-concat-Id² ω) α) ∙
       ( left-unit ∙
         ( ( inv right-unit) ∙
           ( ( inv-nat-htpy

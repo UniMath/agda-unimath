@@ -8,11 +8,27 @@
   "Full width equals sign (＝)": {
     "body": ["＝"],
     "description": "Full width equals sign",
-    "prefix": ["Id", "equals"]
+    "prefix": ["Id"]
   },
   "Yoneda embedding (ょ)": {
     "body": ["ょ"],
     "description": "Yoneda embedding",
     "prefix": ["yoneda"]
+  },
+
+  "Equational reasoning": {
+    "body": ["equational-reasoning ? ＝ ? by ?"],
+    "description": "Equational reasoning",
+    "prefix": ["equational-reasoning"]
+  },
+  "Homotopy-reasoning": {
+    "body": ["homotopy-reasoning ? ~ ? by ?"],
+    "description": "Homotopy-reasoning",
+    "prefix": ["homotopy-reasoning"]
+  },
+  "Equivalence-reasoning": {
+    "body": ["equivalence-reasoning ? ≃ ? by ?"],
+    "description": "Equivalence-reasoning",
+    "prefix": ["equivalence-reasoning"]
   }
 }

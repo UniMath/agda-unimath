@@ -41,8 +41,4 @@ is-central-h-space A =
 
 ## References
 
-- Ulrik Buchholtz, Daniel Christensen, Jarl G. Taxerås Flaten, Egbert Rijke,
-  _Central H-spaces and banded types_
-  ([arXiv:2301.02636](https://arxiv.org/abs/2301.02636))
-
--
+{{#bibliography}} {{#reference BCFR23}}

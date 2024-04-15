@@ -450,7 +450,7 @@ module _
 
   has-bottom-and-top-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
   has-bottom-and-top-element-Finitely-Graded-Poset-Prop =
-    prod-Prop
+    product-Prop
       has-bottom-element-Finitely-Graded-Poset-Prop
       has-top-element-Finitely-Graded-Poset-Prop
 

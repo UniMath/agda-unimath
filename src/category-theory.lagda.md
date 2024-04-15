@@ -120,6 +120,8 @@ open import category-theory.opposite-categories public
 open import category-theory.opposite-large-precategories public
 open import category-theory.opposite-precategories public
 open import category-theory.opposite-preunivalent-categories public
+open import category-theory.pointed-endofunctors-categories public
+open import category-theory.pointed-endofunctors-precategories public
 open import category-theory.precategories public
 open import category-theory.precategory-of-elements-of-a-presheaf public
 open import category-theory.precategory-of-functors public

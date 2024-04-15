@@ -17,6 +17,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -24,7 +25,7 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pushouts
@@ -107,7 +108,7 @@ is-equiv-inr-join-empty X =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-pr1-prod-empty X)
+    ( is-equiv-pr1-product-empty X)
     ( up-join)
 
 left-unit-law-join :
@@ -123,7 +124,7 @@ is-equiv-inr-join-is-empty {A = A} {B = B} is-empty-A =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-pr1-prod-is-empty A B is-empty-A)
+    ( is-equiv-pr1-product-is-empty A B is-empty-A)
     ( up-join)
 
 left-unit-law-join-is-empty :
@@ -144,7 +145,7 @@ is-equiv-inl-join-empty X =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-pr2-prod-empty X)
+    ( is-equiv-pr2-product-empty X)
     ( up-join)
 
 right-unit-law-join :
@@ -160,7 +161,7 @@ is-equiv-inl-join-is-empty {A = A} {B = B} is-empty-B =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-pr2-prod-is-empty A B is-empty-B)
+    ( is-equiv-pr2-product-is-empty A B is-empty-B)
     ( up-join)
 
 right-unit-law-join-is-empty :
@@ -187,7 +188,7 @@ is-equiv-inl-join-unit X =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-map-left-unit-law-prod)
+    ( is-equiv-map-left-unit-law-product)
     ( up-join)
 
 left-zero-law-join :
@@ -206,7 +207,7 @@ is-equiv-inl-join-is-contr A B is-contr-A =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-pr2-prod-is-contr is-contr-A)
+    ( is-equiv-pr2-product-is-contr is-contr-A)
     ( up-join)
 
 left-zero-law-join-is-contr :
@@ -228,7 +229,7 @@ is-equiv-inr-join-unit X =
     ( pr1)
     ( pr2)
     ( cocone-join)
-    ( is-equiv-map-right-unit-law-prod)
+    ( is-equiv-map-right-unit-law-product)
     ( up-join)
 
 right-zero-law-join :
@@ -318,13 +319,13 @@ module _
   where
 
   cocone-disjunction : cocone pr1 pr2 (type-disjunction-Prop A B)
-  pr1 cocone-disjunction = inl-disjunction-Prop A B
-  pr1 (pr2 cocone-disjunction) = inr-disjunction-Prop A B
+  pr1 cocone-disjunction = inl-disjunction
+  pr1 (pr2 cocone-disjunction) = inr-disjunction
   pr2 (pr2 cocone-disjunction) (a , b) =
     eq-is-prop'
-      ( is-prop-type-disjunction-Prop A B)
-      ( inl-disjunction-Prop A B a)
-      ( inr-disjunction-Prop A B b)
+      ( is-prop-disjunction-Prop A B)
+      ( inl-disjunction a)
+      ( inr-disjunction b)
 
   map-disjunction-join-Prop : type-join-Prop A B → type-disjunction-Prop A B
   map-disjunction-join-Prop =
@@ -332,15 +333,16 @@ module _
 
   map-join-disjunction-Prop : type-disjunction-Prop A B → type-join-Prop A B
   map-join-disjunction-Prop =
-    elim-disjunction-Prop A B
+    elim-disjunction
       ( join-Prop A B)
-      ( inl-join-Prop A B , inr-join-Prop A B)
+      ( inl-join-Prop A B)
+      ( inr-join-Prop A B)
 
   is-equiv-map-disjunction-join-Prop : is-equiv map-disjunction-join-Prop
   is-equiv-map-disjunction-join-Prop =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-type-join-Prop A B)
-      ( is-prop-type-disjunction-Prop A B)
+      ( is-prop-disjunction-Prop A B)
       ( map-join-disjunction-Prop)
 
   equiv-disjunction-join-Prop :
@@ -350,8 +352,8 @@ module _
 
   is-equiv-map-join-disjunction-Prop : is-equiv map-join-disjunction-Prop
   is-equiv-map-join-disjunction-Prop =
-    is-equiv-is-prop
-      ( is-prop-type-disjunction-Prop A B)
+    is-equiv-has-converse-is-prop
+      ( is-prop-disjunction-Prop A B)
       ( is-prop-type-join-Prop A B)
       ( map-disjunction-join-Prop)
 
@@ -369,10 +371,10 @@ module _
       ( cocone-join)
       ( cocone-disjunction)
       ( map-disjunction-join-Prop)
-      ( ( λ _ → eq-is-prop (is-prop-type-disjunction-Prop A B)) ,
-        ( λ _ → eq-is-prop (is-prop-type-disjunction-Prop A B)) ,
+      ( ( λ _ → eq-is-prop (is-prop-disjunction-Prop A B)) ,
+        ( λ _ → eq-is-prop (is-prop-disjunction-Prop A B)) ,
         ( λ (a , b) → eq-is-contr
-          ( is-prop-type-disjunction-Prop A B
+          ( is-prop-disjunction-Prop A B
             ( horizontal-map-cocone pr1 pr2
               ( cocone-map pr1 pr2
                 ( cocone-join)
@@ -391,5 +393,4 @@ module _
 
 ## References
 
-- Egbert Rijke, _The join construction_, 2017
-  ([arXiv:1701.07538](https://arxiv.org/abs/1701.07538))
+{{#bibliography}} {{#reference Rij17}}

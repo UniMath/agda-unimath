@@ -9,6 +9,7 @@ module finite-group-theory.finite-semigroups where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.decidable-propositions
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -39,12 +40,18 @@ Finite semigroups are semigroups of which the underlying type is finite.
 
 ## Definitions
 
+### The predicate of having an associative multiplication operation on finite types
+
+```agda
+has-associative-mul-𝔽 : {l : Level} (X : 𝔽 l) → UU l
+has-associative-mul-𝔽 X = has-associative-mul (type-𝔽 X)
+```
+
 ### Finite semigroups
 
 ```agda
 Semigroup-𝔽 : (l : Level) → UU (lsuc l)
-Semigroup-𝔽 l =
-  Σ (𝔽 l) (λ X → has-associative-mul (type-𝔽 X))
+Semigroup-𝔽 l = Σ (𝔽 l) (has-associative-mul-𝔽)
 
 module _
   {l : Level} (G : Semigroup-𝔽 l)
@@ -89,9 +96,24 @@ module _
     ( mul-Semigroup-𝔽 x (mul-Semigroup-𝔽 y z))
   associative-mul-Semigroup-𝔽 =
     associative-mul-Semigroup semigroup-Semigroup-𝔽
+
+finite-semigroup-is-finite-Semigroup :
+  {l : Level} → (G : Semigroup l) → is-finite (type-Semigroup G) → Semigroup-𝔽 l
+pr1 (pr1 (finite-semigroup-is-finite-Semigroup G f)) = type-Semigroup G
+pr2 (pr1 (finite-semigroup-is-finite-Semigroup G f)) = f
+pr2 (finite-semigroup-is-finite-Semigroup G f) = has-associative-mul-Semigroup G
+
+module _
+  {l : Level} (G : Semigroup-𝔽 l)
+  where
+
+  ap-mul-Semigroup-𝔽 :
+    {x x' y y' : type-Semigroup-𝔽 G} →
+    x ＝ x' → y ＝ y' → mul-Semigroup-𝔽 G x y ＝ mul-Semigroup-𝔽 G x' y'
+  ap-mul-Semigroup-𝔽 = ap-mul-Semigroup (semigroup-Semigroup-𝔽 G)
 ```
 
-### Semigroups of order n
+### Semigroups of order `n`
 
 ```agda
 Semigroup-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
@@ -124,7 +146,7 @@ is-finite-has-associative-mul H =
                   is-finite-eq (has-decidable-equality-is-finite H)))))
 ```
 
-### The type of semigroups of order n is π-finite
+### The type of semigroups of order `n` is π-finite
 
 ```agda
 is-π-finite-Semigroup-of-Order' :
@@ -175,4 +197,40 @@ mere-equiv-number-of-semi-groups-of-order :
 mere-equiv-number-of-semi-groups-of-order n =
   mere-equiv-number-of-connected-components
     ( is-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
+```
+
+### There is a finite number of ways to equip a finite type with the structure of a semigroup
+
+```agda
+structure-semigroup-𝔽 :
+  {l1 : Level} → 𝔽 l1 → UU l1
+structure-semigroup-𝔽 = has-associative-mul-𝔽
+
+is-finite-structure-semigroup-𝔽 :
+  {l : Level} → (X : 𝔽 l) → is-finite (structure-semigroup-𝔽 X)
+is-finite-structure-semigroup-𝔽 X =
+  is-finite-Σ
+    ( is-finite-Π
+      ( is-finite-type-𝔽 X)
+      ( λ _ → is-finite-Π (is-finite-type-𝔽 X) (λ _ → is-finite-type-𝔽 X)))
+    ( λ m →
+      is-finite-Π
+        ( is-finite-type-𝔽 X)
+        ( λ x →
+          is-finite-Π
+            ( is-finite-type-𝔽 X)
+            ( λ y →
+              is-finite-Π
+                ( is-finite-type-𝔽 X)
+                ( λ z →
+                  is-finite-is-decidable-Prop
+                    ( (m (m x y) z ＝ m x (m y z)) ,
+                      is-set-is-finite
+                        ( is-finite-type-𝔽 X)
+                        ( m (m x y) z)
+                        ( m x (m y z)))
+                    ( has-decidable-equality-is-finite
+                      ( is-finite-type-𝔽 X)
+                      ( m (m x y) z)
+                      ( m x (m y z)))))))
 ```

@@ -17,7 +17,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import linear-algebra.vectors
 
@@ -28,7 +28,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Any map `f : A → B` determines a map `vec n A → vec n B` for every `n`.
+Any map `f : A → B` determines a map `vec A n → vec B n` for every `n`.
 
 ## Definition
 

@@ -9,23 +9,25 @@ open import foundation-core.homotopies public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-higher-identifications-functions
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
-open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -93,12 +95,12 @@ module _
   is-section-concat-inv-htpy' :
     ((concat-htpy' f K) ∘ (concat-inv-htpy' f K)) ~ id
   is-section-concat-inv-htpy' L =
-    eq-htpy (λ x → is-section-inv-concat' (f x) (K x) (L x))
+    eq-htpy (λ x → is-section-inv-concat' (K x) (L x))
 
   is-retraction-concat-inv-htpy' :
     ((concat-inv-htpy' f K) ∘ (concat-htpy' f K)) ~ id
   is-retraction-concat-inv-htpy' L =
-    eq-htpy (λ x → is-retraction-inv-concat' (f x) (K x) (L x))
+    eq-htpy (λ x → is-retraction-inv-concat' (K x) (L x))
 
   is-equiv-concat-htpy' : is-equiv (concat-htpy' f K)
   is-equiv-concat-htpy' =
@@ -216,11 +218,11 @@ module _
   pr2 (compute-dependent-identification-eq-value p q r) =
     is-equiv-map-compute-dependent-identification-eq-value p q r
 
-  inv-map-compute-dependent-identification-eq-value :
+  map-inv-compute-dependent-identification-eq-value :
     {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
     dependent-identification (eq-value f g) p q r →
     coherence-square-identifications (ap (tr B p) q) (apd f p) (apd g p) r
-  inv-map-compute-dependent-identification-eq-value p q r =
+  map-inv-compute-dependent-identification-eq-value p q r =
     map-inv-equiv (compute-dependent-identification-eq-value p q r)
 ```
 
@@ -250,11 +252,11 @@ module _
   pr2 (compute-dependent-identification-eq-value-function p q r) =
     is-equiv-map-compute-dependent-identification-eq-value-function p q r
 
-  inv-map-compute-dependent-identification-eq-value-function :
+  map-inv-compute-dependent-identification-eq-value-function :
     {x y : A} (p : x ＝ y) (q : f x ＝ g x) (r : f y ＝ g y) →
     dependent-identification (eq-value f g) p q r →
     coherence-square-identifications q (ap f p) (ap g p) r
-  inv-map-compute-dependent-identification-eq-value-function p q r =
+  map-inv-compute-dependent-identification-eq-value-function p q r =
     map-inv-equiv (compute-dependent-identification-eq-value-function p q r)
 ```
 
@@ -292,8 +294,8 @@ htpy-swap-nat-right-htpy :
   {l0 l1 l2 : Level} {X : UU l0} {Y : UU l1} {Z : UU l2}
   {f g : X → Y} {f' g' : Y → Z} (H' : f' ~ g')
   (H : f ~ g) →
-  (htpy-right-whisk H' f ∙h htpy-left-whisk g' H) ~
-  (htpy-left-whisk f' H ∙h htpy-right-whisk H' g)
+  (right-whisker-comp H' f ∙h left-whisker-comp g' H) ~
+  (left-whisker-comp f' H ∙h right-whisker-comp H' g)
 htpy-swap-nat-right-htpy H' H x =
     nat-htpy H' (H x)
 
@@ -301,9 +303,9 @@ eckmann-hilton-htpy :
   {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
   (H ∙h K) ~ (K ∙h H)
 eckmann-hilton-htpy H K x =
-  ( inv (identification-left-whisk (H x) (ap-id (K x))) ∙
+  ( inv (left-whisker-concat (H x) (ap-id (K x))) ∙
   ( htpy-swap-nat-right-htpy H K x)) ∙
-  ( identification-right-whisk (ap-id (K x)) (H x))
+  ( right-whisker-concat (ap-id (K x)) (H x))
 ```
 
 ### Action on identifications at `eq-htpy`
@@ -323,11 +325,11 @@ module _
       ( h)
       ( λ k p → eq-htpy (λ i → ap (f i) (p i)) ＝ ap (map-Π f) (eq-htpy p))
       ( eq-htpy-refl-htpy (map-Π f h) ∙
-        ap (ap (map-Π f)) (inv (eq-htpy-refl-htpy h)))
+        inv (ap² (map-Π f) (eq-htpy-refl-htpy h)))
 ```
 
 ## See also
 
 - [Multivariable homotopies](foundation.multivariable-homotopies.md).
-- The [whiskering operations](foundation.whiskering-homotopies.md) on
-  homotopies.
+- The [whiskering operations](foundation.whiskering-homotopies-composition.md)
+  on homotopies.

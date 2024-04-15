@@ -11,6 +11,7 @@ open import foundation-core.sets public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.subuniverses
 open import foundation.truncated-types
 open import foundation.univalent-type-families
@@ -21,6 +22,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.precomposition-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
@@ -72,14 +74,14 @@ pr2 (Σ-Set A B) = is-set-Σ (is-set-type-Set A) (λ x → is-set-type-Set (B x)
 
 ```agda
 abstract
-  is-set-prod :
+  is-set-product :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-set A → is-set B → is-set (A × B)
-  is-set-prod = is-trunc-prod zero-𝕋
+  is-set-product = is-trunc-product zero-𝕋
 
-prod-Set :
+product-Set :
   {l1 l2 : Level} (A : Set l1) (B : Set l2) → Set (l1 ⊔ l2)
-prod-Set A B = Σ-Set A (λ x → B)
+product-Set A B = Σ-Set A (λ x → B)
 ```
 
 ### Being a set is a property

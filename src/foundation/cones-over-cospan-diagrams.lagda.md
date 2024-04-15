@@ -7,21 +7,27 @@ module foundation.cones-over-cospan-diagrams where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.dependent-universal-property-equivalences
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.homotopy-induction
-open import foundation.morphisms-arrows
+open import foundation.identity-types
+open import foundation.multivariable-homotopies
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-homotopies
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -34,13 +40,13 @@ triple `(p, q, H)` consisting of a map `p : C → A`, a map `q : C → B`, and a
 [homotopy](foundation-core.homotopies.md) `H` witnessing that the square
 
 ```text
-      q
-  C -----> B
-  |        |
- p|        |g
-  V        V
-  A -----> X
-      f
+        q
+    C -----> B
+    |        |
+  p |        | g
+    ∨        ∨
+    A -----> X
+        f
 ```
 
 [commutes](foundation-core.commuting-squares-of-maps.md).
@@ -72,14 +78,6 @@ module _
   coherence-square-cone :
     coherence-square-maps horizontal-map-cone vertical-map-cone g f
   coherence-square-cone = pr2 (pr2 c)
-
-  hom-arrow-cone : hom-arrow vertical-map-cone g
-  pr1 hom-arrow-cone = horizontal-map-cone
-  pr1 (pr2 hom-arrow-cone) = f
-  pr2 (pr2 hom-arrow-cone) = coherence-square-cone
-
-  hom-arrow-cone' : hom-arrow horizontal-map-cone f
-  hom-arrow-cone' = transpose-hom-arrow vertical-map-cone g hom-arrow-cone
 ```
 
 ### Dependent cones over cospan diagrams
@@ -101,7 +99,7 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
     ( PC x)
 ```
 
-### Identifications of cones over cospan diagram
+### Characterizing identifications of cones over cospan diagrams
 
 ```agda
 module _
@@ -123,6 +121,23 @@ module _
       ( λ K →
         Σ ( horizontal-map-cone f g c ~ horizontal-map-cone f g c')
           ( coherence-htpy-cone c c' K))
+
+  htpy-vertical-map-htpy-cone :
+    (c c' : cone f g C) (H : htpy-cone c c') →
+    vertical-map-cone f g c ~ vertical-map-cone f g c'
+  htpy-vertical-map-htpy-cone c c' H = pr1 H
+
+  htpy-horizontal-map-htpy-cone :
+    (c c' : cone f g C) (H : htpy-cone c c') →
+    horizontal-map-cone f g c ~ horizontal-map-cone f g c'
+  htpy-horizontal-map-htpy-cone c c' H = pr1 (pr2 H)
+
+  coh-htpy-cone :
+    (c c' : cone f g C) (H : htpy-cone c c') →
+    coherence-htpy-cone c c'
+      ( htpy-vertical-map-htpy-cone c c' H)
+      ( htpy-horizontal-map-htpy-cone c c' H)
+  coh-htpy-cone c c' H = pr2 (pr2 H)
 
   refl-htpy-cone : (c : cone f g C) → htpy-cone c c
   pr1 (refl-htpy-cone c) = refl-htpy
@@ -220,20 +235,6 @@ module _
       ( coherence-square-cone f g c)
 ```
 
-### Cones obtained from morphisms of arrows
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (h : hom-arrow f g)
-  where
-
-  cone-hom-arrow : cone (map-codomain-hom-arrow f g h) g A
-  pr1 cone-hom-arrow = f
-  pr1 (pr2 cone-hom-arrow) = map-domain-hom-arrow f g h
-  pr2 (pr2 cone-hom-arrow) = coh-hom-arrow f g h
-```
-
 ### The swapping function on cones over cospans
 
 ```agda
@@ -246,7 +247,13 @@ pr1 (pr2 (swap-cone f g c)) = vertical-map-cone f g c
 pr2 (pr2 (swap-cone f g c)) = inv-htpy (coherence-square-cone f g c)
 ```
 
-### Parallel cones over cospan diagrams
+### Parallel cones over parallel cospan diagrams
+
+Two cones with the same domain over parallel cospans are considered
+{{#concept "parallel" Disambiguation="cones over parallel cospan diagrams"}} if
+they are part of a fully coherent diagram: there is a fully coherent cube where
+all the vertical maps are identities, the top face is given by one cone, and the
+bottom face is given by the other.
 
 ```agda
 module _
@@ -284,9 +291,285 @@ module _
 
 ```agda
 id-cone : {l : Level} (A : UU l) → cone (id {A = A}) (id {A = A}) A
-pr1 (id-cone A) = id
-pr1 (pr2 (id-cone A)) = id
-pr2 (pr2 (id-cone A)) = refl-htpy
+id-cone A = (id , id , refl-htpy)
+```
+
+## Properties
+
+### Relating `htpy-parallel-cone` to the identity type of cones
+
+In the following part we relate the type `htpy-parallel-cone` to the identity
+type of cones. We show that `htpy-parallel-cone` characterizes
+[dependent identifications](foundation.dependent-identifications.md) of cones on
+the same domain over parallel cospans.
+
+**Note.** The characterization relies heavily on
+[function extensionality](foundation.function-extensionality.md).
+
+#### The type family of homotopies of parallel cones is torsorial
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {f : A → X} {g : B → X}
+  where
+
+  refl-htpy-parallel-cone :
+    (c : cone f g C) →
+    htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c
+  pr1 (refl-htpy-parallel-cone c) = refl-htpy
+  pr1 (pr2 (refl-htpy-parallel-cone c)) = refl-htpy
+  pr2 (pr2 (refl-htpy-parallel-cone c)) = right-unit-htpy
+
+  htpy-eq-degenerate-parallel-cone :
+    (c c' : cone f g C) →
+    c ＝ c' →
+    htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
+  htpy-eq-degenerate-parallel-cone c .c refl = refl-htpy-parallel-cone c
+
+  htpy-parallel-cone-refl-htpy-htpy-cone :
+    (c c' : cone f g C) →
+    htpy-cone f g c c' →
+    htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
+  htpy-parallel-cone-refl-htpy-htpy-cone (p , q , H) (p' , q' , H') =
+    tot
+      ( λ K →
+        tot
+          ( λ L M →
+            ( ap-concat-htpy H right-unit-htpy) ∙h
+            ( M ∙h ap-concat-htpy' H' inv-htpy-right-unit-htpy)))
+
+  abstract
+    is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone :
+      (c c' : cone f g C) →
+      is-equiv (htpy-parallel-cone-refl-htpy-htpy-cone c c')
+    is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone (p , q , H) (p' , q' , H') =
+      is-equiv-tot-is-fiberwise-equiv
+        ( λ K →
+          is-equiv-tot-is-fiberwise-equiv
+            ( λ L →
+              is-equiv-comp
+                ( concat-htpy
+                  ( ap-concat-htpy H right-unit-htpy)
+                  ( (f ·l K) ∙h refl-htpy ∙h H'))
+                ( concat-htpy'
+                  ( H ∙h (g ·l L))
+                  ( ap-concat-htpy' H' inv-htpy-right-unit-htpy))
+                ( is-equiv-concat-htpy'
+                  ( H ∙h (g ·l L))
+                  ( λ x → right-whisker-concat (inv right-unit) (H' x)))
+                ( is-equiv-concat-htpy
+                  ( λ x → left-whisker-concat (H x) right-unit)
+                  ( (f ·l K) ∙h refl-htpy ∙h H'))))
+
+  abstract
+    is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy :
+      (c : cone f g C) →
+      is-torsorial (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c)
+    is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy c =
+      is-contr-is-equiv'
+        ( Σ (cone f g C) (htpy-cone f g c))
+        ( tot (htpy-parallel-cone-refl-htpy-htpy-cone c))
+        ( is-equiv-tot-is-fiberwise-equiv
+          ( is-equiv-htpy-parallel-cone-refl-htpy-htpy-cone c))
+        ( is-torsorial-htpy-cone f g c)
+
+  abstract
+    is-torsorial-htpy-parallel-cone-refl-htpy :
+      {g' : B → X} (Hg : g ~ g') (c : cone f g C) →
+      is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg c)
+    is-torsorial-htpy-parallel-cone-refl-htpy =
+      ind-htpy
+        ( g)
+        ( λ g'' Hg' →
+          (c : cone f g C) →
+          is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg' c))
+        ( is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy)
+
+  abstract
+    is-torsorial-htpy-parallel-cone :
+      {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') (c : cone f g C) →
+      is-torsorial (htpy-parallel-cone Hf Hg c)
+    is-torsorial-htpy-parallel-cone Hf {g'} =
+      ind-htpy
+        ( f)
+        ( λ f'' Hf' →
+          (g' : B → X) (Hg : g ~ g') (c : cone f g C) →
+          is-contr (Σ (cone f'' g' C) (htpy-parallel-cone Hf' Hg c)))
+        ( λ g' Hg → is-torsorial-htpy-parallel-cone-refl-htpy Hg)
+        ( Hf)
+        ( g')
+```
+
+#### The type family of homotopies of parallel cones characterizes dependent identifications of cones on the same domain over parallel cospans
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {f : A → X} {g : B → X}
+  where
+
+  tr-right-tr-left-cone-eq-htpy :
+    {f' : A → X} → f ~ f' → {g' : B → X} → g ~ g' → cone f g C → cone f' g' C
+  tr-right-tr-left-cone-eq-htpy {f'} Hf Hg c =
+    tr
+      ( λ y → cone f' y C)
+      ( eq-htpy Hg)
+      ( tr (λ x → cone x g C) (eq-htpy Hf) c)
+
+  compute-tr-right-tr-left-cone-eq-htpy-refl-htpy :
+    (c : cone f g C) →
+    tr-right-tr-left-cone-eq-htpy refl-htpy refl-htpy c ＝ c
+  compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c =
+    ( ap
+      ( λ t →
+        tr
+          ( λ g'' → cone f g'' C)
+          ( t)
+          ( tr (λ x → cone x g C) (eq-htpy (refl-htpy' f)) c))
+      ( eq-htpy-refl-htpy g)) ∙
+    ( ap (λ t → tr (λ f''' → cone f''' g C) t c) (eq-htpy-refl-htpy f))
+
+  htpy-eq-parallel-cone-refl-htpy :
+    (c c' : cone f g C) →
+    tr-right-tr-left-cone-eq-htpy refl-htpy refl-htpy c ＝ c' →
+    htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
+  htpy-eq-parallel-cone-refl-htpy c c' =
+    map-inv-is-equiv-precomp-Π-is-equiv
+      ( is-equiv-concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')
+      ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
+      ( htpy-eq-degenerate-parallel-cone c c')
+
+  left-map-triangle-eq-parallel-cone-refl-htpy :
+    (c c' : cone f g C) →
+    ( ( htpy-eq-parallel-cone-refl-htpy c c') ∘
+      ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ~
+    ( htpy-eq-degenerate-parallel-cone c c')
+  left-map-triangle-eq-parallel-cone-refl-htpy c c' =
+    is-section-map-inv-is-equiv-precomp-Π-is-equiv
+      ( is-equiv-concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')
+      ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
+      ( htpy-eq-degenerate-parallel-cone c c')
+
+  abstract
+    htpy-parallel-cone-dependent-eq' :
+      {g' : B → X} (Hg : g ~ g') →
+      (c : cone f g C) (c' : cone f g' C) →
+      tr-right-tr-left-cone-eq-htpy refl-htpy Hg c ＝ c' →
+      htpy-parallel-cone (refl-htpy' f) Hg c c'
+    htpy-parallel-cone-dependent-eq' =
+      ind-htpy g
+        ( λ g'' Hg' →
+          ( c : cone f g C) (c' : cone f g'' C) →
+          tr-right-tr-left-cone-eq-htpy refl-htpy Hg' c ＝ c' →
+          htpy-parallel-cone refl-htpy Hg' c c')
+        ( htpy-eq-parallel-cone-refl-htpy)
+
+    left-map-triangle-parallel-cone-eq' :
+      (c c' : cone f g C) →
+      ( ( htpy-parallel-cone-dependent-eq' refl-htpy c c') ∘
+        ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ~
+      ( htpy-eq-degenerate-parallel-cone c c')
+    left-map-triangle-parallel-cone-eq' c c' =
+      ( right-whisker-comp
+        ( multivariable-htpy-eq 3
+          ( compute-ind-htpy g
+            ( λ g'' Hg' →
+              ( c : cone f g C) (c' : cone f g'' C) →
+              tr-right-tr-left-cone-eq-htpy refl-htpy Hg' c ＝ c' →
+              htpy-parallel-cone refl-htpy Hg' c c')
+            ( htpy-eq-parallel-cone-refl-htpy))
+          ( c)
+          ( c'))
+        ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ∙h
+      ( left-map-triangle-eq-parallel-cone-refl-htpy c c')
+
+  abstract
+    htpy-parallel-cone-dependent-eq :
+      {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') →
+      (c : cone f g C) (c' : cone f' g' C) →
+      tr-right-tr-left-cone-eq-htpy Hf Hg c ＝ c' →
+      htpy-parallel-cone Hf Hg c c'
+    htpy-parallel-cone-dependent-eq {f'} Hf {g'} Hg c c' p =
+      ind-htpy f
+        ( λ f'' Hf' →
+          ( g' : B → X) (Hg : g ~ g') (c : cone f g C) (c' : cone f'' g' C) →
+          ( tr-right-tr-left-cone-eq-htpy Hf' Hg c ＝ c') →
+          htpy-parallel-cone Hf' Hg c c')
+        ( λ g' → htpy-parallel-cone-dependent-eq' {g' = g'})
+        Hf g' Hg c c' p
+
+    left-map-triangle-parallel-cone-eq :
+      (c c' : cone f g C) →
+      ( ( htpy-parallel-cone-dependent-eq refl-htpy refl-htpy c c') ∘
+        ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ~
+      ( htpy-eq-degenerate-parallel-cone c c')
+    left-map-triangle-parallel-cone-eq c c' =
+      ( right-whisker-comp
+        ( multivariable-htpy-eq 5
+          ( compute-ind-htpy f
+            ( λ f'' Hf' →
+              ( g' : B → X) (Hg : g ~ g')
+              (c : cone f g C) (c' : cone f'' g' C) →
+              ( tr-right-tr-left-cone-eq-htpy Hf' Hg c ＝ c') →
+              htpy-parallel-cone Hf' Hg c c')
+            ( λ g' → htpy-parallel-cone-dependent-eq' {g' = g'}))
+          ( g)
+          ( refl-htpy)
+          ( c)
+          ( c'))
+        ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')) ∙h
+      ( left-map-triangle-parallel-cone-eq' c c')
+
+  abstract
+    is-fiberwise-equiv-htpy-parallel-cone-dependent-eq :
+      {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') →
+      (c : cone f g C) (c' : cone f' g' C) →
+      is-equiv (htpy-parallel-cone-dependent-eq Hf Hg c c')
+    is-fiberwise-equiv-htpy-parallel-cone-dependent-eq {f'} Hf {g'} Hg c c' =
+      ind-htpy f
+        ( λ f' Hf →
+          ( g' : B → X) (Hg : g ~ g') (c : cone f g C) (c' : cone f' g' C) →
+            is-equiv (htpy-parallel-cone-dependent-eq Hf Hg c c'))
+        ( λ g' Hg c c' →
+          ind-htpy g
+            ( λ g' Hg →
+              ( c : cone f g C) (c' : cone f g' C) →
+                is-equiv (htpy-parallel-cone-dependent-eq refl-htpy Hg c c'))
+            ( λ c c' →
+              is-equiv-right-map-triangle
+                ( htpy-eq-degenerate-parallel-cone c c')
+                ( htpy-parallel-cone-dependent-eq refl-htpy refl-htpy c c')
+                ( concat (compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c) c')
+                ( inv-htpy (left-map-triangle-parallel-cone-eq c c'))
+                ( fundamental-theorem-id
+                  ( is-torsorial-htpy-parallel-cone
+                    ( refl-htpy' f)
+                    ( refl-htpy' g)
+                    ( c))
+                  ( htpy-eq-degenerate-parallel-cone c) c')
+                ( is-equiv-concat
+                  ( compute-tr-right-tr-left-cone-eq-htpy-refl-htpy c)
+                  ( c')))
+            ( Hg)
+            ( c)
+            ( c'))
+        ( Hf)
+        ( g')
+        ( Hg)
+        ( c)
+        ( c')
+
+  dependent-eq-htpy-parallel-cone :
+    {f' : A → X} (Hf : f ~ f') {g' : B → X} (Hg : g ~ g') →
+    (c : cone f g C) (c' : cone f' g' C) →
+    htpy-parallel-cone Hf Hg c c' →
+    tr-right-tr-left-cone-eq-htpy Hf Hg c ＝ c'
+  dependent-eq-htpy-parallel-cone Hf Hg c c' =
+    map-inv-is-equiv
+      ( is-fiberwise-equiv-htpy-parallel-cone-dependent-eq Hf Hg c c')
 ```
 
 ## Table of files about pullbacks

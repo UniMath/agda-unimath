@@ -21,6 +21,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
@@ -77,7 +78,7 @@ extensionality-Fin :
   (x ＝ y) ≃ (Eq-Fin k x y)
 pr1 (extensionality-Fin k x y) = Eq-Fin-eq k
 pr2 (extensionality-Fin k x y) =
-  is-equiv-is-prop
+  is-equiv-has-converse-is-prop
     ( is-set-Fin k x y)
     ( is-prop-Eq-Fin k x y)
     ( eq-Eq-Fin k)
@@ -91,7 +92,10 @@ is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inr y) = is-decidable-unit
 has-decidable-equality-Fin :
   (k : ℕ) (x y : Fin k) → is-decidable (Id x y)
 has-decidable-equality-Fin k x y =
-  map-coprod (eq-Eq-Fin k) (map-neg (Eq-Fin-eq k)) (is-decidable-Eq-Fin k x y)
+  map-coproduct
+    ( eq-Eq-Fin k)
+    ( map-neg (Eq-Fin-eq k))
+    ( is-decidable-Eq-Fin k x y)
 
 Fin-Discrete-Type : ℕ → Discrete-Type lzero
 pr1 (Fin-Discrete-Type k) = Fin k
@@ -127,7 +131,7 @@ is-prop-is-one-Fin k x = is-set-Fin (succ-ℕ k) x (one-Fin k)
 is-prop-is-zero-or-one-Fin-two-ℕ :
   (x : Fin 2) → is-prop ((is-zero-Fin 2 x) + (is-one-Fin 2 x))
 is-prop-is-zero-or-one-Fin-two-ℕ x =
-  is-prop-coprod
+  is-prop-coproduct
     ( λ p q → Eq-Fin-eq 2 (inv p ∙ q))
     ( is-prop-is-zero-Fin 1 x)
     ( is-prop-is-one-Fin 1 x)

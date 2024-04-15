@@ -8,11 +8,11 @@ module foundation.transport-along-homotopies where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.function-extensionality
 open import foundation.homotopy-induction
 open import foundation.transport-along-higher-identifications
 open import foundation.universe-levels
 
-open import foundation-core.function-extensionality
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.transport-along-identifications

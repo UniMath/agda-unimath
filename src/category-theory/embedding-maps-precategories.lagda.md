@@ -48,7 +48,7 @@ module _
 
   is-embedding-map-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-embedding-map-prop-map-Precategory =
-    prod-Prop
+    product-Prop
       ( is-emb-Prop (obj-map-Precategory C D F))
       ( is-fully-faithful-prop-map-Precategory C D F)
 

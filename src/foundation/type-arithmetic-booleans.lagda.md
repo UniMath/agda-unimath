@@ -33,43 +33,43 @@ module _
   {l : Level} (A : bool → UU l)
   where
 
-  map-Σ-bool-coprod : Σ bool A → A true + A false
-  map-Σ-bool-coprod (pair true a) = inl a
-  map-Σ-bool-coprod (pair false a) = inr a
+  map-Σ-bool-coproduct : Σ bool A → A true + A false
+  map-Σ-bool-coproduct (pair true a) = inl a
+  map-Σ-bool-coproduct (pair false a) = inr a
 
-  map-inv-Σ-bool-coprod : A true + A false → Σ bool A
-  map-inv-Σ-bool-coprod (inl a) = pair true a
-  map-inv-Σ-bool-coprod (inr a) = pair false a
+  map-inv-Σ-bool-coproduct : A true + A false → Σ bool A
+  map-inv-Σ-bool-coproduct (inl a) = pair true a
+  map-inv-Σ-bool-coproduct (inr a) = pair false a
 
-  is-section-map-inv-Σ-bool-coprod :
-    ( map-Σ-bool-coprod ∘ map-inv-Σ-bool-coprod) ~ id
-  is-section-map-inv-Σ-bool-coprod (inl a) = refl
-  is-section-map-inv-Σ-bool-coprod (inr a) = refl
+  is-section-map-inv-Σ-bool-coproduct :
+    ( map-Σ-bool-coproduct ∘ map-inv-Σ-bool-coproduct) ~ id
+  is-section-map-inv-Σ-bool-coproduct (inl a) = refl
+  is-section-map-inv-Σ-bool-coproduct (inr a) = refl
 
-  is-retraction-map-inv-Σ-bool-coprod :
-    ( map-inv-Σ-bool-coprod ∘ map-Σ-bool-coprod) ~ id
-  is-retraction-map-inv-Σ-bool-coprod (pair true a) = refl
-  is-retraction-map-inv-Σ-bool-coprod (pair false a) = refl
+  is-retraction-map-inv-Σ-bool-coproduct :
+    ( map-inv-Σ-bool-coproduct ∘ map-Σ-bool-coproduct) ~ id
+  is-retraction-map-inv-Σ-bool-coproduct (pair true a) = refl
+  is-retraction-map-inv-Σ-bool-coproduct (pair false a) = refl
 
-  is-equiv-map-Σ-bool-coprod : is-equiv map-Σ-bool-coprod
-  is-equiv-map-Σ-bool-coprod =
+  is-equiv-map-Σ-bool-coproduct : is-equiv map-Σ-bool-coproduct
+  is-equiv-map-Σ-bool-coproduct =
     is-equiv-is-invertible
-      map-inv-Σ-bool-coprod
-      is-section-map-inv-Σ-bool-coprod
-      is-retraction-map-inv-Σ-bool-coprod
+      map-inv-Σ-bool-coproduct
+      is-section-map-inv-Σ-bool-coproduct
+      is-retraction-map-inv-Σ-bool-coproduct
 
-  equiv-Σ-bool-coprod : Σ bool A ≃ (A true + A false)
-  pr1 equiv-Σ-bool-coprod = map-Σ-bool-coprod
-  pr2 equiv-Σ-bool-coprod = is-equiv-map-Σ-bool-coprod
+  equiv-Σ-bool-coproduct : Σ bool A ≃ (A true + A false)
+  pr1 equiv-Σ-bool-coproduct = map-Σ-bool-coproduct
+  pr2 equiv-Σ-bool-coproduct = is-equiv-map-Σ-bool-coproduct
 
-  is-equiv-map-inv-Σ-bool-coprod : is-equiv map-inv-Σ-bool-coprod
-  is-equiv-map-inv-Σ-bool-coprod =
+  is-equiv-map-inv-Σ-bool-coproduct : is-equiv map-inv-Σ-bool-coproduct
+  is-equiv-map-inv-Σ-bool-coproduct =
     is-equiv-is-invertible
-      map-Σ-bool-coprod
-      is-retraction-map-inv-Σ-bool-coprod
-      is-section-map-inv-Σ-bool-coprod
+      map-Σ-bool-coproduct
+      is-retraction-map-inv-Σ-bool-coproduct
+      is-section-map-inv-Σ-bool-coproduct
 
-  inv-equiv-Σ-bool-coprod : (A true + A false) ≃ Σ bool A
-  pr1 inv-equiv-Σ-bool-coprod = map-inv-Σ-bool-coprod
-  pr2 inv-equiv-Σ-bool-coprod = is-equiv-map-inv-Σ-bool-coprod
+  inv-equiv-Σ-bool-coproduct : (A true + A false) ≃ Σ bool A
+  pr1 inv-equiv-Σ-bool-coproduct = map-inv-Σ-bool-coproduct
+  pr2 inv-equiv-Σ-bool-coproduct = is-equiv-map-inv-Σ-bool-coproduct
 ```

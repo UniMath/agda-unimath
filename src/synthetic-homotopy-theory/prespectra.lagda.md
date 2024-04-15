@@ -114,5 +114,4 @@ module _
 
 ## References
 
-- J. P. May, _A Concise Course in Algebraic Topology_, 1999
-  ([pdf](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf))
+{{#bibliography}} {{#reference May99}}

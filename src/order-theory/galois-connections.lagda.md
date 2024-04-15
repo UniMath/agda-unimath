@@ -390,7 +390,7 @@ module _
     (G H : Galois-Connection P Q) →
     is-equiv (htpy-upper-adjoint-htpy-lower-adjoint-Galois-Connection G H)
   is-equiv-htpy-upper-adjoint-htpy-lower-adjoint-Galois-Connection G H =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-htpy-lower-adjoint-Galois-Connection G H)
       ( is-prop-htpy-upper-adjoint-Galois-Connection P Q G H)
       ( htpy-lower-adjoint-htpy-upper-adjoint-Galois-Connection G H)
@@ -399,7 +399,7 @@ module _
     (G H : Galois-Connection P Q) →
     is-equiv (htpy-lower-adjoint-htpy-upper-adjoint-Galois-Connection G H)
   is-equiv-htpy-lower-adjoint-htpy-upper-adjoint-Galois-Connection G H =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-htpy-upper-adjoint-Galois-Connection P Q G H)
       ( is-prop-htpy-lower-adjoint-Galois-Connection G H)
       ( htpy-upper-adjoint-htpy-lower-adjoint-Galois-Connection G H)
@@ -545,5 +545,4 @@ module _
 
 ## References
 
-- Erné, Koslowski, Melton, Strecker. _A primer on Galois connections_. Annals
-  New York Academy of Sciences 704 (1993)
+{{#bibliography}} {{#reference EKMS93}}

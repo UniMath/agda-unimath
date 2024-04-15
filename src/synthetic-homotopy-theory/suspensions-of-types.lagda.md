@@ -15,6 +15,7 @@ open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -33,7 +34,7 @@ open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
+open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -543,7 +544,7 @@ constant map `B → (A → B)` is an equivalence for all `n`-types `B`.
 So for any `(k+1)`-type `Y`, we have the commutative diagram
 
 ```text
-                 const
+                 Δ
      Y ---------------------->  (suspension X → Y)
      ^                                  |
  pr1 | ≃                              ≃ | ev-suspension
@@ -585,20 +586,22 @@ module _
         ( λ y →
           is-torsorial-fiber-Id
             ( λ y' →
-              ( const X (y ＝ y') ,
-                is-equiv-diagonal-is-connected (Id-Truncated-Type Y y y') c))))
+              ( diagonal-exponential (y ＝ y') X ,
+                is-equiv-diagonal-exponential-is-connected
+                  ( Id-Truncated-Type Y y y')
+                  ( c)))))
 
   is-connected-succ-suspension-is-connected :
     is-connected k X → is-connected (succ-𝕋 k) (suspension X)
   is-connected-succ-suspension-is-connected c =
-    is-connected-is-equiv-diagonal
+    is-connected-is-equiv-diagonal-exponential
       ( λ Y →
         is-equiv-right-factor
           ( ( north-suspension-structure) ∘
             ( ev-suspension
               ( suspension-structure-suspension X)
               ( type-Truncated-Type Y)))
-          ( const (suspension X) (type-Truncated-Type Y))
+          ( diagonal-exponential (type-Truncated-Type Y) (suspension X))
           ( is-equiv-north-suspension-ev-suspension-is-connected-Truncated-Type
               ( c)
               ( Y))

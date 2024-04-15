@@ -140,7 +140,7 @@ module _
 
   eq-Eq-fiber-uncurry' : {s t : fiber' f b} → Eq-fiber' s t → s ＝ t
   eq-Eq-fiber-uncurry' {x , p} (refl , refl) =
-    ap (pair x) (inv right-unit)
+    ap (pair _) (inv right-unit)
 
   eq-Eq-fiber' :
     {s t : fiber' f b} (α : pr1 s ＝ pr1 t) → pr2 t ＝ pr2 s ∙ ap f α → s ＝ t
@@ -331,27 +331,27 @@ module _
   pr1 (pr2 (map-compute-fiber-comp (a , p))) = a
   pr2 (pr2 (map-compute-fiber-comp (a , p))) = refl
 
-  inv-map-compute-fiber-comp :
+  map-inv-compute-fiber-comp :
     Σ (fiber g x) (λ t → fiber h (pr1 t)) → fiber (g ∘ h) x
-  pr1 (inv-map-compute-fiber-comp t) = pr1 (pr2 t)
-  pr2 (inv-map-compute-fiber-comp t) = ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
+  pr1 (map-inv-compute-fiber-comp t) = pr1 (pr2 t)
+  pr2 (map-inv-compute-fiber-comp t) = ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
 
-  is-section-inv-map-compute-fiber-comp :
-    is-section map-compute-fiber-comp inv-map-compute-fiber-comp
-  is-section-inv-map-compute-fiber-comp ((.(h a) , refl) , (a , refl)) = refl
+  is-section-map-inv-compute-fiber-comp :
+    is-section map-compute-fiber-comp map-inv-compute-fiber-comp
+  is-section-map-inv-compute-fiber-comp ((.(h a) , refl) , (a , refl)) = refl
 
-  is-retraction-inv-map-compute-fiber-comp :
-    is-retraction map-compute-fiber-comp inv-map-compute-fiber-comp
-  is-retraction-inv-map-compute-fiber-comp (a , refl) = refl
+  is-retraction-map-inv-compute-fiber-comp :
+    is-retraction map-compute-fiber-comp map-inv-compute-fiber-comp
+  is-retraction-map-inv-compute-fiber-comp (a , refl) = refl
 
   abstract
     is-equiv-map-compute-fiber-comp :
       is-equiv map-compute-fiber-comp
     is-equiv-map-compute-fiber-comp =
       is-equiv-is-invertible
-        ( inv-map-compute-fiber-comp)
-        ( is-section-inv-map-compute-fiber-comp)
-        ( is-retraction-inv-map-compute-fiber-comp)
+        ( map-inv-compute-fiber-comp)
+        ( is-section-map-inv-compute-fiber-comp)
+        ( is-retraction-map-inv-compute-fiber-comp)
 
   compute-fiber-comp :
     fiber (g ∘ h) x ≃ Σ (fiber g x) (λ t → fiber h (pr1 t))
@@ -359,18 +359,18 @@ module _
   pr2 compute-fiber-comp = is-equiv-map-compute-fiber-comp
 
   abstract
-    is-equiv-inv-map-compute-fiber-comp :
-      is-equiv inv-map-compute-fiber-comp
-    is-equiv-inv-map-compute-fiber-comp =
+    is-equiv-map-inv-compute-fiber-comp :
+      is-equiv map-inv-compute-fiber-comp
+    is-equiv-map-inv-compute-fiber-comp =
         is-equiv-is-invertible
           ( map-compute-fiber-comp)
-          ( is-retraction-inv-map-compute-fiber-comp)
-          ( is-section-inv-map-compute-fiber-comp)
+          ( is-retraction-map-inv-compute-fiber-comp)
+          ( is-section-map-inv-compute-fiber-comp)
 
   inv-compute-fiber-comp :
     Σ (fiber g x) (λ t → fiber h (pr1 t)) ≃ fiber (g ∘ h) x
-  pr1 inv-compute-fiber-comp = inv-map-compute-fiber-comp
-  pr2 inv-compute-fiber-comp = is-equiv-inv-map-compute-fiber-comp
+  pr1 inv-compute-fiber-comp = map-inv-compute-fiber-comp
+  pr2 inv-compute-fiber-comp = is-equiv-map-inv-compute-fiber-comp
 ```
 
 ## Table of files about fibers of maps

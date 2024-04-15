@@ -18,6 +18,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.iterated-dependent-product-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subsingleton-induction
 open import foundation.subtypes
@@ -216,7 +217,7 @@ module _
   is-equiv-is-iso-is-iso-base-is-replete-Subprecategory :
     is-equiv is-iso-is-iso-base-is-replete-Subprecategory
   is-equiv-is-iso-is-iso-base-is-replete-Subprecategory =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-iso-Precategory C (inclusion-hom-Subprecategory C P x y f))
       ( is-prop-is-iso-Subprecategory C P f)
       ( is-iso-base-is-iso-Subprecategory C P)
@@ -249,7 +250,7 @@ module _
     ( inv-associative-Σ _ _ _) ∘e
     ( equiv-tot
       ( λ f →
-        ( commutative-prod) ∘e
+        ( commutative-product) ∘e
         ( inv-right-unit-law-Σ-is-contr
           ( λ is-iso-C-f → is-proof-irrelevant-is-prop
             ( is-prop-is-in-hom-obj-subprecategory-Subprecategory C P x y f)
@@ -315,7 +316,6 @@ This remains to be formalized.
 ## See also
 
 - Every [subcategory](category-theory.subcategories.md) is replete.
-
 - Because of universe polymorphism,
   [large subcategories](category-theory.large-subcategories.md) are not large
   replete by construction, although they are levelwise replete.
