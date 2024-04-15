@@ -41,8 +41,8 @@ contrast to [idempotent maps](foundation.idempotent-maps.md), which may in
 general fail to be coherent.
 
 **Terminology.** Our definition of a _quasicoherently idempotent map_
-corresponds to the definition of a _quasiidempotent map_ in {{#reference Shu17}}
-and {{#reference Shu14SplittingIdempotents}}.
+corresponds to the definition of a _quasiidempotent map_ in {{#cite Shu17}} and
+{{#cite Shu14SplittingIdempotents}}.
 
 ## Definitions
 
@@ -167,7 +167,10 @@ module _
     eq-is-prop (is-set-A ((f ∘ f ∘ f) x) ((f ∘ f) x))
 ```
 
-### If `i` and `r` is an inclusion-retraction pair, then `i ∘ r` is quasicoherently idempotent
+### If `i` and `r` form an inclusion-retraction pair, then `i ∘ r` is quasicoherently idempotent
+
+This statement can be found as part of the proof of Lemma 3.6 in
+{{#cite Shu17}}.
 
 ```agda
 module _
@@ -296,7 +299,7 @@ module _
 ### Realigning the coherence of a quasicoherent idempotence proof
 
 Given a quasicoherently idempotent map `f`, any other idempotence homotopy
-`H : f ∘ f ~ f` that is homotopic to the coherent one is also coherent.
+`I : f ∘ f ~ f` that is homotopic to the coherent one is also coherent.
 
 ```agda
 module _

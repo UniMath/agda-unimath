@@ -324,7 +324,8 @@ module _
 
 ### The type of split idempotent maps on `A` is equivalent to retracts of `A`
 
-Note that the proof relies on the function extensionality axiom.
+Note that the proof relies on the
+[function extensionality](foundation.function-extensionality.md) axiom.
 
 ```agda
 module _
@@ -513,12 +514,10 @@ module _
 
 ### Split idempotent maps are quasicoherently idempotent
 
-This is Lemma 3.6 in {{#cite Shu17}}. We follow a more direct route as we have
-already shown that quasicoherent idempotents are closed under homotopy.
+This is Lemma 3.6 in {{#cite Shu17}}.
 
-**Proof.** We have already seen that inclusion-retraction composites are
-quasicoherently idempotent, and since every split idempotent is homotopic to an
-inclusion-retraction composite we are done.
+**Proof.** Inclusion-retraction composites are quasicoherently idempotent, so
+since quasicoherently idempotent maps are closed under homotopy we are done.
 
 ```agda
 module _
@@ -726,8 +725,8 @@ module _
 ```
 
 However, to show that these maps form an inclusion-retraction pair, we use the
-coherence of quasicoherent idempotents as well as the
-[function extensionality](foundation.function-extensionality.md) axiom.
+coherence of quasicoherent idempotents as well as the function extensionality
+axiom.
 
 ```agda
 module _
