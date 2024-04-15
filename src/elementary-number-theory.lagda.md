@@ -73,6 +73,7 @@ open import elementary-number-theory.initial-segments-natural-numbers public
 open import elementary-number-theory.integer-fractions public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
+open import elementary-number-theory.inverse-nonzero-rational-numbers public
 open import elementary-number-theory.inverse-positive-integer-fractions public
 open import elementary-number-theory.inverse-positive-rational-numbers public
 open import elementary-number-theory.jacobi-symbol public
