@@ -342,12 +342,10 @@ module _
 
 ### Not every idempotent map is quasicoherently idempotent
 
-A counterexample can be constructed using the
-[cantor space](set-theory.cantor-space.md), see Section 4 of {{#cite Shu17}} for
-more details. Note that the statement does not ask for the idempotence witness
-`I : f ∘ f ~ f` to be preserved, meaning that the counterexample involves an
-idempotent map `f`, such that _no_ idempotence homotopy `f ∘ f ~ f` is
-quasicoherent.
+To be clear, what we are asking for is an idempotent map `f`, such that _no_
+idempotence homotopy `f ∘ f ~ f` is quasicoherent. A counterexample can be
+constructed using the [cantor space](set-theory.cantor-space.md), see Section 4
+of {{#cite Shu17}} for more details.
 
 ## See also
 
