@@ -198,6 +198,9 @@ module _
 
 ### Quasicoherent idempotence is preserved by homotopies
 
+This fact does not explicitly appear in {{#cite Shu17}} although it is
+implicitly used in Lemma 3.6.
+
 ```agda
 module _
   {l : Level} {A : UU l} {f g : A → A} (F : is-quasicoherently-idempotent f)
