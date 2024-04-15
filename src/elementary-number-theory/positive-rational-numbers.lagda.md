@@ -135,7 +135,7 @@ one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 
 ```agda
 is-positive-rational-fraction-ℤ :
-  (x : fraction-ℤ) (P : is-positive-fraction-ℤ x) →
+  {x : fraction-ℤ} (P : is-positive-fraction-ℤ x) →
   is-positive-ℚ (rational-fraction-ℤ x)
 is-positive-rational-fraction-ℤ = is-positive-reduce-fraction-ℤ
 ```
@@ -160,8 +160,8 @@ module _
 
 ```agda
 decide-is-negative-is-positive-is-nonzero-ℚ :
-  (x : ℚ) → is-nonzero-ℚ x → is-positive-ℚ (neg-ℚ x) + is-positive-ℚ x
-decide-is-negative-is-positive-is-nonzero-ℚ x H =
+  {x : ℚ} → is-nonzero-ℚ x → is-positive-ℚ (neg-ℚ x) + is-positive-ℚ x
+decide-is-negative-is-positive-is-nonzero-ℚ {x} H =
   rec-coproduct
     ( inl ∘ is-positive-neg-is-negative-ℤ)
     ( inr)
@@ -187,15 +187,15 @@ not-is-negative-is-positive-ℚ x (N , P) =
 ### Positive rational numbers are nonzero
 
 ```agda
-is-nonzero-is-positive-ℚ : (x : ℚ) → is-positive-ℚ x → is-nonzero-ℚ x
-is-nonzero-is-positive-ℚ x H =
+is-nonzero-is-positive-ℚ : {x : ℚ} → is-positive-ℚ x → is-nonzero-ℚ x
+is-nonzero-is-positive-ℚ {x} H =
   is-nonzero-is-nonzero-numerator-ℚ x
     ( is-nonzero-is-positive-ℤ
       { numerator-ℚ x}
       ( H))
 
 nonzero-ℚ⁺ : positive-ℚ → nonzero-ℚ
-nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ x P)
+nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
 ```
 
 ### The sum of two positive rational numbers is positive
@@ -205,7 +205,6 @@ is-positive-add-ℚ :
   {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x +ℚ y)
 is-positive-add-ℚ {x} {y} P Q =
   is-positive-rational-fraction-ℤ
-    ( add-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
     ( is-positive-add-fraction-ℤ
       { fraction-ℚ x}
       { fraction-ℚ y}
@@ -236,7 +235,6 @@ is-positive-mul-ℚ :
   {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x *ℚ y)
 is-positive-mul-ℚ {x} {y} P Q =
   is-positive-rational-fraction-ℤ
-    ( mul-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y))
     ( is-positive-mul-fraction-ℤ
       { fraction-ℚ x}
       { fraction-ℚ y}

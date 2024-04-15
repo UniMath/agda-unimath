@@ -55,7 +55,7 @@ module _
               ( inv (swap-neg-mul-ℚ y x) ∙_))) ∘
         ( is-invertible-is-positive-ℚ (neg-ℚ x)))
       ( is-invertible-is-positive-ℚ x)
-      ( decide-is-negative-is-positive-is-nonzero-ℚ x H)
+      ( decide-is-negative-is-positive-is-nonzero-ℚ H)
 
   is-nonzero-is-invertible-ℚ :
     Σ ℚ (λ y → (x *ℚ y ＝ one-ℚ) × (y *ℚ x ＝ one-ℚ)) →

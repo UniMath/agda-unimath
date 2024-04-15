@@ -69,9 +69,9 @@ is-positive-sim-fraction-ℤ x y S P =
 
 ```agda
 is-positive-reduce-fraction-ℤ :
-  (x : fraction-ℤ) (P : is-positive-fraction-ℤ x) →
+  {x : fraction-ℤ} (P : is-positive-fraction-ℤ x) →
   is-positive-fraction-ℤ (reduce-fraction-ℤ x)
-is-positive-reduce-fraction-ℤ x =
+is-positive-reduce-fraction-ℤ {x} =
   is-positive-sim-fraction-ℤ
     ( x)
     ( reduce-fraction-ℤ x)
