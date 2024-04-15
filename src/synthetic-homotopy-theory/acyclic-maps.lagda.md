@@ -34,6 +34,7 @@ open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.pullbacks
+open import foundation.retracts-of-maps
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
@@ -526,6 +527,22 @@ module _
             ( point a)
             ( is-acyclic-map-terminal-map-is-acyclic unit is-acyclic-unit)
             ( λ b → is-acyclic-equiv (compute-fiber-point a b) (l-ac a b))))
+```
+
+### Acyclic maps are closed under retracts
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  is-acyclic-map-retract-of :
+    f retract-of-map g → is-acyclic-map g → is-acyclic-map f
+  is-acyclic-map-retract-of R ac b =
+    is-acyclic-retract-of
+      ( retract-fiber-retract-map f g R b)
+      ( ac (map-codomain-inclusion-retract-map f g R b))
 ```
 
 ## See also

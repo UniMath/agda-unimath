@@ -325,7 +325,7 @@ module _
             ( map-emb i)
             ( fiber (map-emb m)))) ∘e
         ( inv-equiv
-          ( equiv-dependent-universal-property-surj-is-surjective
+          ( equiv-dependent-universal-property-surjection-is-surjective
             ( pr1 q)
             ( H)
             ( λ b →
