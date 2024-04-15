@@ -7,14 +7,13 @@ module foundation.quasicoherently-idempotent-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.1-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.homotopy-algebra
 open import foundation.idempotent-maps
-open import foundation.1-types
 open import foundation.negation
-open import foundation.equality-dependent-pair-types
 open import foundation.universe-levels
-open import synthetic-homotopy-theory.circle
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
 
@@ -23,6 +22,8 @@ open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sets
+
+open import synthetic-homotopy-theory.circle
 ```
 
 </details>
