@@ -20,6 +20,7 @@ open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import reflection.erasing-equality
 
@@ -217,31 +218,17 @@ module _
     dependent-cocone-map f g (cocone-pushout f g) P
   pr2 (equiv-dup-pushout P) =
     dup-pushout P
-```
 
-### The universal property of standard pushouts
-
-```agda
--- TODO: Redefine. The current definition does not preserve the inverse map.
-up-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) →
-  universal-property-pushout l4 f g (cocone-pushout f g)
-up-pushout f g =
-  universal-property-dependent-universal-property-pushout f g
-    ( cocone-pushout f g)
-    ( dup-pushout f g)
-
-equiv-up-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) (X : UU l4) → (pushout f g → X) ≃ (cocone f g X)
-pr1 (equiv-up-pushout f g X) = cocone-map f g (cocone-pushout f g)
-pr2 (equiv-up-pushout f g X) = up-pushout f g X
+  is-retraction-dependent-cogap :
+    {P : pushout f g → UU l4} →
+    is-retraction
+      ( dependent-cocone-map f g (cocone-pushout f g) P)
+      ( dependent-cogap f g)
+  is-retraction-dependent-cogap {P = P} =
+    is-retraction-map-inv-is-equiv (dup-pushout P)
 ```
 
 ### The cogap map
-
-<!-- TODO: redefine `cogap` in terms of `dependent-cogap`, and show it is inverse to `cocone-map` -->
 
 ```agda
 module _
@@ -250,14 +237,48 @@ module _
   where
 
   cogap : cocone f g X → pushout f g → X
-  cogap = map-inv-equiv (equiv-up-pushout f g X)
+  cogap = dependent-cogap f g ∘ dependent-cocone-cocone f g (cocone-pushout f g)
 
   is-section-cogap : is-section (cocone-map f g (cocone-pushout f g)) cogap
-  is-section-cogap = is-section-map-inv-equiv (equiv-up-pushout f g X)
+  is-section-cogap =
+    ( ( triangle-dependent-cocone-map-constant-type-family' f g
+        ( cocone-pushout f g)) ·r
+      ( cogap)) ∙h
+    ( ( map-inv-dependent-cocone-cocone f g (cocone-pushout f g)) ·l
+      ( is-section-dependent-cogap f g) ·r
+      ( dependent-cocone-cocone f g (cocone-pushout f g))) ∙h
+    ( is-retraction-map-inv-dependent-cocone-cocone f g (cocone-pushout f g))
 
   is-retraction-cogap :
     is-retraction (cocone-map f g (cocone-pushout f g)) cogap
-  is-retraction-cogap = is-retraction-map-inv-equiv (equiv-up-pushout f g X)
+  is-retraction-cogap =
+    ( ( cogap) ·l
+      ( ( triangle-dependent-cocone-map-constant-type-family' f g
+          ( cocone-pushout f g)))) ∙h
+    ( ( dependent-cogap f g) ·l
+      ( is-section-map-inv-dependent-cocone-cocone f g (cocone-pushout f g)) ·r
+      ( dependent-cocone-map f g (cocone-pushout f g) (λ _ → X))) ∙h
+    ( is-retraction-dependent-cogap f g)
+```
+
+### The universal property of standard pushouts
+
+```agda
+up-pushout :
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) →
+  universal-property-pushout l4 f g (cocone-pushout f g)
+up-pushout f g P =
+  is-equiv-is-invertible
+    ( cogap f g)
+    ( is-section-cogap f g)
+    ( is-retraction-cogap f g)
+
+equiv-up-pushout :
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) (X : UU l4) → (pushout f g → X) ≃ (cocone f g X)
+pr1 (equiv-up-pushout f g X) = cocone-map f g (cocone-pushout f g)
+pr2 (equiv-up-pushout f g X) = up-pushout f g X
 ```
 
 ### Computation with the cogap map
