@@ -13,7 +13,9 @@ open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.group-of-rational-numbers
+open import elementary-number-theory.inverse-nonzero-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.dependent-pair-types
@@ -24,6 +26,7 @@ open import foundation.universe-levels
 
 open import group-theory.semigroups
 
+open import ring-theory.division-rings
 open import ring-theory.rings
 ```
 
@@ -35,7 +38,7 @@ The
 [commutative group of rational numbers](elementary-number-theory.group-of-rational-numbers.md)
 equipped with
 [multiplication](elementary-number-theory.multiplication-rational-numbers.md) is
-a [commutative ring](commutative-algebra.commutative-rings.md).
+a commutative [division ring](ring-theory.division-rings.md).
 
 ## Definitions
 
@@ -66,10 +69,20 @@ pr1 ℚ-Ring = ℚ-Ab
 pr2 ℚ-Ring = has-mul-ℚ-Ab
 ```
 
-### The commutative ring of rational numbers
+## Properties
+
+### The ring of rational numbers is commutative
 
 ```agda
 ℚ-Commutative-Ring : Commutative-Ring lzero
 pr1 ℚ-Commutative-Ring = ℚ-Ring
 pr2 ℚ-Commutative-Ring = commutative-mul-ℚ
+```
+
+### The ring of rational numbers is a division ring
+
+```agda
+is-division-Ring-ℚ-Ring : is-division-Ring ℚ-Ring
+pr1 is-division-Ring-ℚ-Ring = is-nonzero-one-ℚ ∘ inv
+pr2 is-division-Ring-ℚ-Ring x H = is-invertible-is-nonzero-ℚ x (H ∘ inv)
 ```
