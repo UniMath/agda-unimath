@@ -1,7 +1,7 @@
-# Equivalences of coforks
+# Morphisms of coforks
 
 ```agda
-module synthetic-homotopy-theory.equivalences-coforks where
+module synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows where
 ```
 
 <details><summary>Imports</summary>
@@ -10,16 +10,13 @@ module synthetic-homotopy-theory.equivalences-coforks where
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
-open import foundation.equivalences
-open import foundation.equivalences-arrows
-open import foundation.equivalences-double-arrows
 open import foundation.homotopies
 open import foundation.morphisms-arrows
+open import foundation.morphisms-double-arrows
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.morphisms-coforks
 ```
 
 </details>
@@ -28,29 +25,28 @@ open import synthetic-homotopy-theory.morphisms-coforks
 
 Consider two [double arrows](foundation.double-arrows.md) `f, g : A → B` and
 `h, k : U → V`, equipped with [coforks](synthetic-homotopy-theory.coforks.md)
-`c : B → X` and `c' : V → Y`, respectively, and an
-[equivalence of double arrows](foundation.equivalences-double-arrows.md)
-`e : (f, g) ≃ (h, k)`.
+`c : B → X` and `c' : V → Y`, respectively, and a
+[morphism of double arrows](foundation.morphisms-double-arrows.md)
+`e : (f, g) → (h, k)`.
 
-Then an
-{{#concept "equivalence of coforks" Disambiguation="of types" Agda=equiv-cofork}}
-over `e` is a triple `(m, H, K)`, with `m : X ≃ Y` an
-[equivalence](foundation-core.equivalences.md) of vertices of the coforks, `H` a
-[homotopy](foundation-core.homotopies.md) witnessing that the bottom square in
-the diagram
+Then a
+{{#concept "morphism of coforks" Disambiguation="under a morphism of double arrows" Agda=hom-cofork-hom-double-arrow}}
+under `e` is a triple `(m, H, K)`, with `m : X → Y` a map of vertices of the
+coforks, `H` a [homotopy](foundation-core.homotopies.md) witnessing that the
+bottom square in the diagram
 
 ```text
            i
      A --------> U
-    | |    ≃    | |
+    | |         | |
   f | | g     h | | k
     | |         | |
-    ∨ ∨    ≃    ∨ ∨
+    ∨ ∨         ∨ ∨
      B --------> V
      |     j     |
    c |           | c'
      |           |
-     ∨     ≃     ∨
+     ∨           ∨
      X --------> Y
            m
 ```
@@ -61,15 +57,15 @@ datum "filling the inside" --- we have two stacks of squares
 ```text
            i                        i
      A --------> U            A --------> U
-     |     ≃     |            |     ≃     |
+     |           |            |           |
    f |           | h        g |           | k
      |           |            |           |
-     ∨     ≃     ∨            ∨     ≃     ∨
+     ∨           ∨            ∨           ∨
      B --------> V            B --------> V
      |     j     |            |     j     |
    c |           | c'       c |           | c'
      |           |            |           |
-     ∨     ≃     ∨            ∨     ≃     ∨
+     ∨           ∨            ∨           ∨
      X --------> Y            X --------> Y
            m                        m
 ```
@@ -115,82 +111,74 @@ which are required to be homotopic.
 
 ## Definitions
 
-### Equivalences of coforks
+### Morphisms of coforks under morphisms of double arrows
 
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {a : double-arrow l1 l2} {X : UU l3} (c : cofork a X)
   {a' : double-arrow l4 l5} {Y : UU l6} (c' : cofork a' Y)
-  (e : equiv-double-arrow a a')
+  (h : hom-double-arrow a a')
   where
 
-  coherence-map-cofork-equiv-cofork : (X ≃ Y) → UU (l2 ⊔ l6)
-  coherence-map-cofork-equiv-cofork m =
+  coherence-map-cofork-hom-cofork-hom-double-arrow : (X → Y) → UU (l2 ⊔ l6)
+  coherence-map-cofork-hom-cofork-hom-double-arrow u =
     coherence-square-maps
-      ( codomain-map-equiv-double-arrow a a' e)
+      ( codomain-map-hom-double-arrow a a' h)
       ( map-cofork a c)
       ( map-cofork a' c')
-      ( map-equiv m)
+      ( u)
 
-  coherence-equiv-cofork :
-    (m : X ≃ Y) → coherence-map-cofork-equiv-cofork m →
+  coherence-hom-cofork-hom-double-arrow :
+    (u : X → Y) → coherence-map-cofork-hom-cofork-hom-double-arrow u →
     UU (l1 ⊔ l6)
-  coherence-equiv-cofork m H =
+  coherence-hom-cofork-hom-double-arrow u H =
     ( ( H ·r (left-map-double-arrow a)) ∙h
       ( ( map-cofork a' c') ·l
-        ( left-square-equiv-double-arrow a a' e)) ∙h
-      ( (coh-cofork a' c') ·r (domain-map-equiv-double-arrow a a' e))) ~
-    ( ( (map-equiv m) ·l (coh-cofork a c)) ∙h
+        ( left-square-hom-double-arrow a a' h)) ∙h
+      ( (coh-cofork a' c') ·r (domain-map-hom-double-arrow a a' h))) ~
+    ( ( u ·l (coh-cofork a c)) ∙h
       ( H ·r (right-map-double-arrow a)) ∙h
-      ( (map-cofork a' c') ·l (right-square-equiv-double-arrow a a' e)))
+      ( (map-cofork a' c') ·l (right-square-hom-double-arrow a a' h)))
 
-  equiv-cofork : UU (l1 ⊔ l2 ⊔ l3 ⊔ l6)
-  equiv-cofork =
-    Σ ( X ≃ Y)
-      ( λ m →
-        Σ ( coherence-map-cofork-equiv-cofork m)
-          ( coherence-equiv-cofork m))
+  hom-cofork-hom-double-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l6)
+  hom-cofork-hom-double-arrow =
+    Σ ( X → Y)
+      ( λ u →
+        Σ ( coherence-map-cofork-hom-cofork-hom-double-arrow u)
+          ( coherence-hom-cofork-hom-double-arrow u))
+```
 
-  module _
-    (e' : equiv-cofork)
-    where
+### Components of a morphism of coforks under a morphism of double arrows
 
-    equiv-equiv-cofork : X ≃ Y
-    equiv-equiv-cofork = pr1 e'
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {a : double-arrow l1 l2} {X : UU l3} (c : cofork a X)
+  {a' : double-arrow l4 l5} {Y : UU l6} (c' : cofork a' Y)
+  {h : hom-double-arrow a a'} (m : hom-cofork-hom-double-arrow c c' h)
+  where
 
-    map-equiv-cofork : X → Y
-    map-equiv-cofork = map-equiv equiv-equiv-cofork
+  map-hom-cofork-hom-double-arrow : X → Y
+  map-hom-cofork-hom-double-arrow = pr1 m
 
-    is-equiv-map-equiv-cofork : is-equiv map-equiv-cofork
-    is-equiv-map-equiv-cofork =
-      is-equiv-map-equiv equiv-equiv-cofork
+  coh-map-cofork-hom-cofork-hom-double-arrow :
+    coherence-map-cofork-hom-cofork-hom-double-arrow c c' h
+      ( map-hom-cofork-hom-double-arrow)
+  coh-map-cofork-hom-cofork-hom-double-arrow = pr1 (pr2 m)
 
-    coh-map-cofork-equiv-cofork :
-      coherence-map-cofork-equiv-cofork equiv-equiv-cofork
-    coh-map-cofork-equiv-cofork = pr1 (pr2 e')
+  hom-map-cofork-hom-cofork-hom-double-arrow :
+    hom-arrow (map-cofork a c) (map-cofork a' c')
+  pr1 hom-map-cofork-hom-cofork-hom-double-arrow =
+    codomain-map-hom-double-arrow a a' h
+  pr1 (pr2 hom-map-cofork-hom-cofork-hom-double-arrow) =
+    map-hom-cofork-hom-double-arrow
+  pr2 (pr2 hom-map-cofork-hom-cofork-hom-double-arrow) =
+    coh-map-cofork-hom-cofork-hom-double-arrow
 
-    equiv-map-cofork-equiv-cofork :
-      equiv-arrow (map-cofork a c) (map-cofork a' c')
-    pr1 equiv-map-cofork-equiv-cofork = codomain-equiv-equiv-double-arrow a a' e
-    pr1 (pr2 equiv-map-cofork-equiv-cofork) = equiv-equiv-cofork
-    pr2 (pr2 equiv-map-cofork-equiv-cofork) = coh-map-cofork-equiv-cofork
-
-    hom-map-cofork-equiv-cofork :
-      hom-arrow (map-cofork a c) (map-cofork a' c')
-    hom-map-cofork-equiv-cofork =
-      hom-equiv-arrow
-        ( map-cofork a c)
-        ( map-cofork a' c')
-        ( equiv-map-cofork-equiv-cofork)
-
-    coh-equiv-cofork :
-      coherence-equiv-cofork equiv-equiv-cofork coh-map-cofork-equiv-cofork
-    coh-equiv-cofork = pr2 (pr2 e')
-
-    hom-cofork-equiv-cofork :
-      hom-cofork c c' (hom-double-arrow-equiv-double-arrow a a' e)
-    pr1 hom-cofork-equiv-cofork = map-equiv-cofork
-    pr1 (pr2 hom-cofork-equiv-cofork) = coh-map-cofork-equiv-cofork
-    pr2 (pr2 hom-cofork-equiv-cofork) = coh-equiv-cofork
+  coh-hom-cofork-hom-double-arrow :
+    coherence-hom-cofork-hom-double-arrow c c' h
+      ( map-hom-cofork-hom-double-arrow)
+      ( coh-map-cofork-hom-cofork-hom-double-arrow)
+  coh-hom-cofork-hom-double-arrow = pr2 (pr2 m)
 ```
