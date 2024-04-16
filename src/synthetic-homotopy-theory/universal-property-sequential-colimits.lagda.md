@@ -24,6 +24,9 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.coforks
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
+open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams
+open import synthetic-homotopy-theory.equivalences-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.universal-property-coequalizers
 ```
@@ -157,39 +160,79 @@ module _
     ( {l : Level} →
       universal-property-coequalizer l
         ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c)) →
+        ( cofork-cocone-sequential-diagram c)) →
     universal-property-sequential-colimit c
   universal-property-sequential-colimit-universal-property-coequalizer
     ( up-cofork)
     ( Y) =
     is-equiv-left-map-triangle
       ( cocone-map-sequential-diagram c)
-      ( cocone-sequential-diagram-cofork A)
+      ( cocone-sequential-diagram-cofork)
       ( cofork-map
         ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c))
-      ( triangle-cocone-sequential-diagram-cofork A c)
+        ( cofork-cocone-sequential-diagram c))
+      ( triangle-cocone-sequential-diagram-cofork c)
       ( up-cofork Y)
-      ( is-equiv-cocone-sequential-diagram-cofork A)
+      ( is-equiv-cocone-sequential-diagram-cofork)
 
   universal-property-coequalizer-universal-property-sequential-colimit :
     universal-property-sequential-colimit c →
     ( {l : Level} →
       universal-property-coequalizer l
         ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c))
+        ( cofork-cocone-sequential-diagram c))
   universal-property-coequalizer-universal-property-sequential-colimit
     ( up-sequential-colimit)
     ( Y) =
     is-equiv-top-map-triangle
       ( cocone-map-sequential-diagram c)
-      ( cocone-sequential-diagram-cofork A)
+      ( cocone-sequential-diagram-cofork)
       ( cofork-map
         ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c))
-      ( triangle-cocone-sequential-diagram-cofork A c)
-      ( is-equiv-cocone-sequential-diagram-cofork A)
+        ( cofork-cocone-sequential-diagram c))
+      ( triangle-cocone-sequential-diagram-cofork c)
+      ( is-equiv-cocone-sequential-diagram-cofork)
       ( up-sequential-colimit Y)
+```
+
+### The universal property of colimits is preserved by equivalences of cocones under equivalences of sequential diagrams
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : sequential-diagram l1} {X : UU l2} {c : cocone-sequential-diagram A X}
+  {B : sequential-diagram l3} {Y : UU l4} {c' : cocone-sequential-diagram B Y}
+  (e : equiv-sequential-diagram A B)
+  (e' : equiv-cocone-equiv-sequential-diagram c c' e)
+  where
+
+  universal-property-sequential-colimit-equiv-cocone-equiv-sequential-diagram :
+    universal-property-sequential-colimit c' →
+    universal-property-sequential-colimit c
+  universal-property-sequential-colimit-equiv-cocone-equiv-sequential-diagram
+    up-c' =
+    universal-property-sequential-colimit-universal-property-coequalizer c
+      ( universal-property-coequalizer-equiv-cofork-equiv-double-arrow
+        ( cofork-cocone-sequential-diagram c)
+        ( cofork-cocone-sequential-diagram c')
+        ( equiv-double-arrow-equiv-sequential-diagram A B e)
+        ( equiv-cofork-equiv-cocone-equiv-sequential-diagram c c' e e')
+        ( universal-property-coequalizer-universal-property-sequential-colimit _
+          ( up-c')))
+
+  universal-property-sequential-colimit-equiv-cocone-equiv-sequential-diagram' :
+    universal-property-sequential-colimit c →
+    universal-property-sequential-colimit c'
+  universal-property-sequential-colimit-equiv-cocone-equiv-sequential-diagram'
+    up-c =
+    universal-property-sequential-colimit-universal-property-coequalizer c'
+      ( universal-property-coequalizer-equiv-cofork-equiv-double-arrow'
+        ( cofork-cocone-sequential-diagram c)
+        ( cofork-cocone-sequential-diagram c')
+        ( equiv-double-arrow-equiv-sequential-diagram A B e)
+        ( equiv-cofork-equiv-cocone-equiv-sequential-diagram c c' e e')
+        ( universal-property-coequalizer-universal-property-sequential-colimit _
+          ( up-c)))
 ```
 
 ### The 3-for-2 property of the universal property of sequential colimits

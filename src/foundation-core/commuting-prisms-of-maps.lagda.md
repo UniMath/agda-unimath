@@ -7,8 +7,12 @@ module foundation-core.commuting-prisms-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.commuting-pentagons-of-identifications
+open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.commuting-triangles-of-maps
@@ -248,6 +252,46 @@ module _
             ( bottom ·r hA)
             ( (hC ·l top) ∙h (inv-right ·r h ∙h (g' ·l inv-left)))
             ( H))))
+
+  module _
+    ( top : coherence-triangle-maps f g h)
+    ( inv-front : coherence-square-maps f hA hC f')
+    ( inv-right : coherence-square-maps g hB hC g')
+    ( inv-left : coherence-square-maps h hA hB h')
+    ( bottom : coherence-triangle-maps f' g' h')
+    where
+
+    vertical-coherence-prism-inv-squares-maps-vertical-coherence-prism-maps :
+      vertical-coherence-prism-maps f g h f' g' h' hA hB hC
+        ( top)
+        ( inv-front)
+        ( inv-right)
+        ( inv-left)
+        ( bottom) →
+      vertical-coherence-prism-inv-squares-maps f g h f' g' h' hA hB hC
+        ( top)
+        ( inv-htpy inv-front)
+        ( inv-htpy inv-right)
+        ( inv-htpy inv-left)
+        ( bottom)
+    vertical-coherence-prism-inv-squares-maps-vertical-coherence-prism-maps
+      H a =
+      ( reflect-top-left-coherence-pentagon-identifications
+        ( bottom (hA a))
+        ( inv-front a)
+        ( ap g' (inv-left a))
+        ( ap hC (top a))
+        ( inv-right (h a))
+        ( inv
+          ( ( assoc (bottom (hA a)) (ap g' (inv-left a)) (inv-right (h a))) ∙
+            ( H a)))) ∙
+      ( left-whisker-concat
+        ( ap hC (top a) ∙ inv (inv-right (h a)))
+        ( inv (ap-inv g' (inv-left a)))) ∙
+      ( assoc
+        ( ap hC (top a))
+        ( inv (inv-right (h a)))
+        ( ap g' (inv (inv-left a))))
 
   module _
     ( inv-top : coherence-triangle-maps' f g h)

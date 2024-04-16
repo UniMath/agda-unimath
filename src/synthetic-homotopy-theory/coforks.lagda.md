@@ -144,13 +144,13 @@ module _
   {l1 l2 l3 : Level} (a : double-arrow l1 l2) {X : UU l3}
   where
 
-  reflexive-htpy-cofork : (e : cofork a X) → htpy-cofork a e e
-  pr1 (reflexive-htpy-cofork e) = refl-htpy
-  pr2 (reflexive-htpy-cofork e) = right-unit-htpy
+  refl-htpy-cofork : (e : cofork a X) → htpy-cofork a e e
+  pr1 (refl-htpy-cofork e) = refl-htpy
+  pr2 (refl-htpy-cofork e) = right-unit-htpy
 
   htpy-cofork-eq :
     (e e' : cofork a X) → (e ＝ e') → htpy-cofork a e e'
-  htpy-cofork-eq e .e refl = reflexive-htpy-cofork e
+  htpy-cofork-eq e .e refl = refl-htpy-cofork e
 
   abstract
     is-torsorial-htpy-cofork :

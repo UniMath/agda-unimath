@@ -24,7 +24,7 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.coforks
-open import synthetic-homotopy-theory.equivalences-coforks
+open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -164,7 +164,7 @@ In other words, given two coforks connected vertically with equivalences, as in
 the following diagram:
 
 Given an
-[equivalence of coforks](synthetic-homotopy-theory.equivalences-coforks.md)
+[equivalence of coforks](synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows.md)
 between coforks `c` and `c'`
 
 ```text
@@ -191,13 +191,13 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {a : double-arrow l1 l2} {X : UU l3} (c : cofork a X)
   {a' : double-arrow l4 l5} {Y : UU l6} (c' : cofork a' Y)
-  (e : equiv-double-arrow a a') (e' : equiv-cofork c c' e)
+  (e : equiv-double-arrow a a') (e' : equiv-cofork-equiv-double-arrow c c' e)
   where
 
-  universal-property-coequalizer-equiv-cofork :
+  universal-property-coequalizer-equiv-cofork-equiv-double-arrow :
     ({l : Level} → universal-property-coequalizer l a' c') →
     ({l : Level} → universal-property-coequalizer l a c)
-  universal-property-coequalizer-equiv-cofork up-c' =
+  universal-property-coequalizer-equiv-cofork-equiv-double-arrow up-c' =
     universal-property-coequalizer-universal-property-pushout a c
       ( universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
         ( vertical-map-span-cocone-cofork a')
@@ -209,17 +209,17 @@ module _
         ( horizontal-map-cocone-cofork a c)
         ( vertical-map-cocone-cofork a c)
         ( spanning-map-hom-span-diagram-cofork-hom-double-arrow a a'
-          ( hom-double-arrow-equiv-double-arrow a a' e))
+          ( hom-equiv-double-arrow a a' e))
         ( domain-map-equiv-double-arrow a a' e)
         ( codomain-map-equiv-double-arrow a a' e)
-        ( map-equiv-cofork c c' e e')
+        ( map-equiv-cofork-equiv-double-arrow c c' e e')
         ( coherence-square-cocone-cofork a c)
         ( inv-htpy
           ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-double-arrow-equiv-double-arrow a a' e)))
+            ( hom-equiv-double-arrow a a' e)))
         ( inv-htpy
           ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-double-arrow-equiv-double-arrow a a' e)))
+            ( hom-equiv-double-arrow a a' e)))
         ( inv-htpy
           ( pasting-vertical-coherence-square-maps
             ( domain-map-equiv-double-arrow a a' e)
@@ -228,19 +228,19 @@ module _
             ( codomain-map-equiv-double-arrow a a' e)
             ( map-cofork a c)
             ( map-cofork a' c')
-            ( map-equiv-cofork c c' e e')
+            ( map-equiv-cofork-equiv-double-arrow c c' e e')
             ( left-square-equiv-double-arrow a a' e)
-            ( coh-map-cofork-equiv-cofork c c' e e')))
-        ( inv-htpy (coh-map-cofork-equiv-cofork c c' e e'))
+            ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e')))
+        ( inv-htpy (coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e'))
         ( coherence-square-cocone-cofork a' c')
         ( coherence-cube-maps-rotate-120
           ( horizontal-map-cocone-cofork a c)
           ( domain-map-equiv-double-arrow a a' e)
-          ( map-equiv-cofork c c' e e')
+          ( map-equiv-cofork-equiv-double-arrow c c' e e')
           ( horizontal-map-cocone-cofork a' c')
           ( horizontal-map-span-cocone-cofork a)
           ( spanning-map-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-double-arrow-equiv-double-arrow a a' e))
+            ( hom-equiv-double-arrow a a' e))
           ( codomain-map-equiv-double-arrow a a' e)
           ( horizontal-map-span-cocone-cofork a')
           ( vertical-map-span-cocone-cofork a)
@@ -248,11 +248,11 @@ module _
           ( vertical-map-span-cocone-cofork a')
           ( vertical-map-cocone-cofork a' c')
           ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-double-arrow-equiv-double-arrow a a' e))
+            ( hom-equiv-double-arrow a a' e))
           ( coherence-square-cocone-cofork a c)
           ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-double-arrow-equiv-double-arrow a a' e))
-          ( coh-map-cofork-equiv-cofork c c' e e')
+            ( hom-equiv-double-arrow a a' e))
+          ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e')
           ( coherence-square-cocone-cofork a' c')
           ( pasting-vertical-coherence-square-maps
             ( domain-map-equiv-double-arrow a a' e)
@@ -261,26 +261,26 @@ module _
             ( codomain-map-equiv-double-arrow a a' e)
             ( map-cofork a c)
             ( map-cofork a' c')
-            ( map-equiv-cofork c c' e e')
+            ( map-equiv-cofork-equiv-double-arrow c c' e e')
             ( left-square-equiv-double-arrow a a' e)
-            ( coh-map-cofork-equiv-cofork c c' e e'))
+            ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e'))
           ( inv-htpy
             ( ind-coproduct _
               ( right-unit-htpy)
-              ( coh-equiv-cofork c c' e e'))))
+              ( coh-equiv-cofork-equiv-double-arrow c c' e e'))))
         ( is-equiv-map-coproduct
           ( is-equiv-domain-map-equiv-double-arrow a a' e)
           ( is-equiv-domain-map-equiv-double-arrow a a' e))
         ( is-equiv-domain-map-equiv-double-arrow a a' e)
         ( is-equiv-codomain-map-equiv-double-arrow a a' e)
-        ( is-equiv-map-equiv-cofork c c' e e')
+        ( is-equiv-map-equiv-cofork-equiv-double-arrow c c' e e')
         ( universal-property-pushout-universal-property-coequalizer a' c'
           ( up-c')))
 
-  universal-property-coequalizer-equiv-cofork' :
+  universal-property-coequalizer-equiv-cofork-equiv-double-arrow' :
     ({l : Level} → universal-property-coequalizer l a c) →
     ({l : Level} → universal-property-coequalizer l a' c')
-  universal-property-coequalizer-equiv-cofork' up-c =
+  universal-property-coequalizer-equiv-cofork-equiv-double-arrow' up-c =
     universal-property-coequalizer-universal-property-pushout a' c'
       ( universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
         ( vertical-map-span-cocone-cofork a')
@@ -292,17 +292,17 @@ module _
         ( horizontal-map-cocone-cofork a c)
         ( vertical-map-cocone-cofork a c)
         ( spanning-map-hom-span-diagram-cofork-hom-double-arrow a a'
-          ( hom-double-arrow-equiv-double-arrow a a' e))
+          ( hom-equiv-double-arrow a a' e))
         ( domain-map-equiv-double-arrow a a' e)
         ( codomain-map-equiv-double-arrow a a' e)
-        ( map-equiv-cofork c c' e e')
+        ( map-equiv-cofork-equiv-double-arrow c c' e e')
         ( coherence-square-cocone-cofork a c)
         ( inv-htpy
           ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-double-arrow-equiv-double-arrow a a' e)))
+            ( hom-equiv-double-arrow a a' e)))
         ( inv-htpy
           ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-double-arrow-equiv-double-arrow a a' e)))
+            ( hom-equiv-double-arrow a a' e)))
         ( inv-htpy
           ( pasting-vertical-coherence-square-maps
             ( domain-map-equiv-double-arrow a a' e)
@@ -311,19 +311,19 @@ module _
             ( codomain-map-equiv-double-arrow a a' e)
             ( map-cofork a c)
             ( map-cofork a' c')
-            ( map-equiv-cofork c c' e e')
+            ( map-equiv-cofork-equiv-double-arrow c c' e e')
             ( left-square-equiv-double-arrow a a' e)
-            ( coh-map-cofork-equiv-cofork c c' e e')))
-        ( inv-htpy (coh-map-cofork-equiv-cofork c c' e e'))
+            ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e')))
+        ( inv-htpy (coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e'))
         ( coherence-square-cocone-cofork a' c')
         ( coherence-cube-maps-rotate-120
           ( horizontal-map-cocone-cofork a c)
           ( domain-map-equiv-double-arrow a a' e)
-          ( map-equiv-cofork c c' e e')
+          ( map-equiv-cofork-equiv-double-arrow c c' e e')
           ( horizontal-map-cocone-cofork a' c')
           ( horizontal-map-span-cocone-cofork a)
           ( spanning-map-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-double-arrow-equiv-double-arrow a a' e))
+            ( hom-equiv-double-arrow a a' e))
           ( codomain-map-equiv-double-arrow a a' e)
           ( horizontal-map-span-cocone-cofork a')
           ( vertical-map-span-cocone-cofork a)
@@ -331,11 +331,11 @@ module _
           ( vertical-map-span-cocone-cofork a')
           ( vertical-map-cocone-cofork a' c')
           ( right-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-double-arrow-equiv-double-arrow a a' e))
+            ( hom-equiv-double-arrow a a' e))
           ( coherence-square-cocone-cofork a c)
           ( left-square-hom-span-diagram-cofork-hom-double-arrow a a'
-            ( hom-double-arrow-equiv-double-arrow a a' e))
-          ( coh-map-cofork-equiv-cofork c c' e e')
+            ( hom-equiv-double-arrow a a' e))
+          ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e')
           ( coherence-square-cocone-cofork a' c')
           ( pasting-vertical-coherence-square-maps
             ( domain-map-equiv-double-arrow a a' e)
@@ -344,18 +344,18 @@ module _
             ( codomain-map-equiv-double-arrow a a' e)
             ( map-cofork a c)
             ( map-cofork a' c')
-            ( map-equiv-cofork c c' e e')
+            ( map-equiv-cofork-equiv-double-arrow c c' e e')
             ( left-square-equiv-double-arrow a a' e)
-            ( coh-map-cofork-equiv-cofork c c' e e'))
+            ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e'))
           ( inv-htpy
             ( ind-coproduct _
               ( right-unit-htpy)
-              ( coh-equiv-cofork c c' e e'))))
+              ( coh-equiv-cofork-equiv-double-arrow c c' e e'))))
         ( is-equiv-map-coproduct
           ( is-equiv-domain-map-equiv-double-arrow a a' e)
           ( is-equiv-domain-map-equiv-double-arrow a a' e))
         ( is-equiv-domain-map-equiv-double-arrow a a' e)
         ( is-equiv-codomain-map-equiv-double-arrow a a' e)
-        ( is-equiv-map-equiv-cofork c c' e e')
+        ( is-equiv-map-equiv-cofork-equiv-double-arrow c c' e e')
         ( universal-property-pushout-universal-property-coequalizer a c up-c))
 ```

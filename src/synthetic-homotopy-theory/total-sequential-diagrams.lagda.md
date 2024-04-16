@@ -16,6 +16,8 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-sequential-diagrams
+open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams
+open import synthetic-homotopy-theory.equivalences-sequential-diagrams
 open import synthetic-homotopy-theory.functoriality-sequential-colimits
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-colimits
@@ -49,16 +51,16 @@ module _
   family-total-sequential-diagram : ℕ → UU (l1 ⊔ l2)
   family-total-sequential-diagram n =
     Σ (family-sequential-diagram A n)
-      (family-dependent-sequential-diagram A B n)
+      (family-dependent-sequential-diagram B n)
 
   map-total-sequential-diagram :
     (n : ℕ) → family-total-sequential-diagram n →
     family-total-sequential-diagram (succ-ℕ n)
   map-total-sequential-diagram n =
     map-Σ
-      ( family-dependent-sequential-diagram A B (succ-ℕ n))
+      ( family-dependent-sequential-diagram B (succ-ℕ n))
       ( map-sequential-diagram A n)
-      ( map-dependent-sequential-diagram A B n)
+      ( map-dependent-sequential-diagram B n)
 
   total-sequential-diagram : sequential-diagram (l1 ⊔ l2)
   pr1 total-sequential-diagram = family-total-sequential-diagram
@@ -114,4 +116,33 @@ module _
   pr1-standard-sequential-colimit-total-sequential-diagram =
     map-hom-standard-sequential-colimit A
       ( pr1-total-sequential-diagram B)
+```
+
+## Properties
+
+### Equivalences of dependent sequential diagrams induce equivalences on the total sequential diagrams
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : sequential-diagram l1}
+  (B : dependent-sequential-diagram A l2)
+  (C : dependent-sequential-diagram A l3)
+  (e : equiv-dependent-sequential-diagram B C)
+  where
+
+  equiv-total-sequential-diagram-equiv-dependent-sequential-diagram :
+    equiv-sequential-diagram
+      ( total-sequential-diagram B)
+      ( total-sequential-diagram C)
+  pr1 equiv-total-sequential-diagram-equiv-dependent-sequential-diagram n =
+    equiv-tot (equiv-equiv-dependent-sequential-diagram C e n)
+  pr2 equiv-total-sequential-diagram-equiv-dependent-sequential-diagram n =
+    coherence-square-maps-Σ
+      ( family-dependent-sequential-diagram C (succ-ℕ n))
+      ( map-dependent-sequential-diagram B n)
+      ( map-equiv-dependent-sequential-diagram C e n)
+      ( map-equiv-dependent-sequential-diagram C e (succ-ℕ n))
+      ( map-dependent-sequential-diagram C n)
+      { refl-htpy}
+      ( λ a → inv-htpy (coh-equiv-dependent-sequential-diagram C e n a))
 ```
