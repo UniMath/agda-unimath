@@ -330,7 +330,7 @@ module _
       ( dependent-cocone-constant-type-family-cocone f g (cocone-pushout f g) c)
 ```
 
-<!-- TODO: find the right infrastructure to make the proof below just an application of some construction -->
+<!-- TODO: find the right infrastructure to make the proof below just an application of some construction. Note that this is very almost `coherence-htpy-cocone-coherence-htpy-dependent-cocone-constant-type-family`, but an `apd-constant-type-family` has snuck its way into the proof -->
 
 ```agda
   abstract
