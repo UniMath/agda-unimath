@@ -44,8 +44,8 @@ one for each `x : Aₙ`, or as a sequence fibered over `(A, a)`, visualised as
      b₀      b₁      b₂
  B₀ ---> B₁ ---> B₂ ---> ⋯
  |       |       |
- V       V       V
- V       V       V
+ |       |       |
+ ↡       ↡       ↡
  A₀ ---> A₁ ---> A₂ ---> ⋯.
      a₀      a₁      a₂
 ```
@@ -69,7 +69,7 @@ dependent-sequential-diagram A l2 =
 
 ```agda
 module _
-  { l1 l2 : Level} (A : sequential-diagram l1)
+  { l1 l2 : Level} {A : sequential-diagram l1}
   ( B : dependent-sequential-diagram A l2)
   where
 
@@ -129,17 +129,17 @@ module _
   naturality-section-dependent-sequential-diagram :
     ( s :
       ( n : ℕ) (x : family-sequential-diagram A n) →
-      family-dependent-sequential-diagram A B n x) →
+      family-dependent-sequential-diagram B n x) →
     UU (l1 ⊔ l2)
   naturality-section-dependent-sequential-diagram s =
     ( n : ℕ) →
-    ( map-dependent-sequential-diagram A B n _ ∘ s n) ~
+    ( map-dependent-sequential-diagram B n _ ∘ s n) ~
     ( s (succ-ℕ n) ∘ map-sequential-diagram A n)
 
   section-dependent-sequential-diagram : UU (l1 ⊔ l2)
   section-dependent-sequential-diagram =
     Σ ( ( n : ℕ) (x : family-sequential-diagram A n) →
-        family-dependent-sequential-diagram A B n x)
+        family-dependent-sequential-diagram B n x)
       ( λ s → naturality-section-dependent-sequential-diagram s)
 ```
 
@@ -154,7 +154,7 @@ module _
 
   map-section-dependent-sequential-diagram :
     ( n : ℕ) (x : family-sequential-diagram A n) →
-    family-dependent-sequential-diagram A B n x
+    family-dependent-sequential-diagram B n x
   map-section-dependent-sequential-diagram = pr1 s
 
   naturality-map-section-dependent-sequential-diagram :
