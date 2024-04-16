@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.constant-type-families
 open import foundation.contractible-types
+open import foundation.dependent-homotopies
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -128,12 +129,10 @@ module _
   where
 
   coherence-htpy-dependent-cocone :
-    ( d' : dependent-cocone f g c P)
-    ( K :
-      horizontal-map-dependent-cocone f g c P d ~
-      horizontal-map-dependent-cocone f g c P d')
-    ( L :
-      vertical-map-dependent-cocone f g c P d ~
+    ( d' : dependent-cocone f g c P) →
+    ( horizontal-map-dependent-cocone f g c P d ~
+      horizontal-map-dependent-cocone f g c P d') →
+    ( vertical-map-dependent-cocone f g c P d ~
       vertical-map-dependent-cocone f g c P d') →
     UU (l1 ⊔ l5)
   coherence-htpy-dependent-cocone d' K L =
@@ -241,24 +240,27 @@ module _
   (f : S → A) (g : S → B) (c : cocone f g X) {Y : UU l5}
   where
 
-  dependent-cocone-cocone : cocone f g Y → dependent-cocone f g c (λ _ → Y)
-  pr1 (dependent-cocone-cocone (f' , g' , H)) = f'
-  pr1 (pr2 (dependent-cocone-cocone (f' , g' , H))) = g'
-  pr2 (pr2 (dependent-cocone-cocone (f' , g' , H))) s =
+  dependent-cocone-constant-type-family-cocone :
+    cocone f g Y → dependent-cocone f g c (λ _ → Y)
+  pr1 (dependent-cocone-constant-type-family-cocone (f' , g' , H)) = f'
+  pr1 (pr2 (dependent-cocone-constant-type-family-cocone (f' , g' , H))) = g'
+  pr2 (pr2 (dependent-cocone-constant-type-family-cocone (f' , g' , H))) s =
     tr-constant-type-family (coherence-square-cocone f g c s) (f' (f s)) ∙ H s
 
-  map-inv-dependent-cocone-cocone :
+  cocone-dependent-cocone-constant-type-family :
     dependent-cocone f g c (λ _ → Y) → cocone f g Y
-  pr1 (map-inv-dependent-cocone-cocone (f' , g' , H)) = f'
-  pr1 (pr2 (map-inv-dependent-cocone-cocone (f' , g' , H))) = g'
-  pr2 (pr2 (map-inv-dependent-cocone-cocone (f' , g' , H))) s =
+  pr1 (cocone-dependent-cocone-constant-type-family (f' , g' , H)) = f'
+  pr1 (pr2 (cocone-dependent-cocone-constant-type-family (f' , g' , H))) = g'
+  pr2 (pr2 (cocone-dependent-cocone-constant-type-family (f' , g' , H))) s =
     ( inv
       ( tr-constant-type-family (coherence-square-cocone f g c s) (f' (f s)))) ∙
     ( H s)
 
-  is-section-map-inv-dependent-cocone-cocone :
-    is-section dependent-cocone-cocone map-inv-dependent-cocone-cocone
-  is-section-map-inv-dependent-cocone-cocone (f' , g' , H) =
+  is-section-cocone-dependent-cocone-constant-type-family :
+    is-section
+      dependent-cocone-constant-type-family-cocone
+      cocone-dependent-cocone-constant-type-family
+  is-section-cocone-dependent-cocone-constant-type-family (f' , g' , H) =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
         ( eq-htpy
@@ -269,9 +271,11 @@ module _
                 ( f' (f s)))
               ( H s))))
 
-  is-retraction-map-inv-dependent-cocone-cocone :
-    is-retraction dependent-cocone-cocone map-inv-dependent-cocone-cocone
-  is-retraction-map-inv-dependent-cocone-cocone (f' , g' , H) =
+  is-retraction-cocone-dependent-cocone-constant-type-family :
+    is-retraction
+      dependent-cocone-constant-type-family-cocone
+      cocone-dependent-cocone-constant-type-family
+  is-retraction-cocone-dependent-cocone-constant-type-family (f' , g' , H) =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
         ( eq-htpy
@@ -282,17 +286,19 @@ module _
                 ( f' (f s)))
               ( H s))))
 
-  is-equiv-dependent-cocone-cocone : is-equiv dependent-cocone-cocone
-  is-equiv-dependent-cocone-cocone =
+  is-equiv-dependent-cocone-constant-type-family-cocone :
+    is-equiv dependent-cocone-constant-type-family-cocone
+  is-equiv-dependent-cocone-constant-type-family-cocone =
     is-equiv-is-invertible
-      ( map-inv-dependent-cocone-cocone)
-      ( is-section-map-inv-dependent-cocone-cocone)
-      ( is-retraction-map-inv-dependent-cocone-cocone)
+      ( cocone-dependent-cocone-constant-type-family)
+      ( is-section-cocone-dependent-cocone-constant-type-family)
+      ( is-retraction-cocone-dependent-cocone-constant-type-family)
 
   compute-dependent-cocone-constant-type-family :
     cocone f g Y ≃ dependent-cocone f g c (λ _ → Y)
   compute-dependent-cocone-constant-type-family =
-    ( dependent-cocone-cocone , is-equiv-dependent-cocone-cocone)
+    ( dependent-cocone-constant-type-family-cocone ,
+      is-equiv-dependent-cocone-constant-type-family-cocone)
 ```
 
 ### Computing the dependent cocone map on a constant type family
@@ -305,12 +311,12 @@ module _
 
   triangle-dependent-cocone-map-constant-type-family :
     dependent-cocone-map f g c (λ _ → Y) ~
-    dependent-cocone-cocone f g c ∘ cocone-map f g c
+    dependent-cocone-constant-type-family-cocone f g c ∘ cocone-map f g c
   triangle-dependent-cocone-map-constant-type-family h =
     eq-htpy-dependent-cocone f g c
       ( λ _ → Y)
       ( dependent-cocone-map f g c (λ _ → Y) h)
-      ( (dependent-cocone-cocone f g c ∘ cocone-map f g c) h)
+      ( dependent-cocone-constant-type-family-cocone f g c (cocone-map f g c h))
       ( ( refl-htpy) ,
         ( refl-htpy) ,
         ( λ s →
@@ -319,11 +325,12 @@ module _
 
   triangle-dependent-cocone-map-constant-type-family' :
     cocone-map f g c ~
-    map-inv-dependent-cocone-cocone f g c ∘ dependent-cocone-map f g c (λ _ → Y)
+    cocone-dependent-cocone-constant-type-family f g c ∘
+    dependent-cocone-map f g c (λ _ → Y)
   triangle-dependent-cocone-map-constant-type-family' h =
     eq-htpy-cocone f g
       ( cocone-map f g c h)
-      ( ( map-inv-dependent-cocone-cocone f g c
+      ( ( cocone-dependent-cocone-constant-type-family f g c
           ( dependent-cocone-map f g c (λ _ → Y) h)))
       ( ( refl-htpy) ,
         ( refl-htpy) ,
@@ -353,10 +360,10 @@ module _
   is-equiv-cocone-map-is-equiv-dependent-cocone-map-constant-type-family =
     is-equiv-top-map-triangle
       ( dependent-cocone-map f g c (λ _ → Y))
-      ( dependent-cocone-cocone f g c)
+      ( dependent-cocone-constant-type-family-cocone f g c)
       ( cocone-map f g c)
       ( triangle-dependent-cocone-map-constant-type-family f g c)
-      ( is-equiv-dependent-cocone-cocone f g c)
+      ( is-equiv-dependent-cocone-constant-type-family-cocone f g c)
 
   is-equiv-dependent-cocone-map-constant-type-family-is-equiv-cocone-map :
     is-equiv (cocone-map f g c) →
@@ -364,9 +371,73 @@ module _
   is-equiv-dependent-cocone-map-constant-type-family-is-equiv-cocone-map H =
     is-equiv-left-map-triangle
       ( dependent-cocone-map f g c (λ _ → Y))
-      ( dependent-cocone-cocone f g c)
+      ( dependent-cocone-constant-type-family-cocone f g c)
       ( cocone-map f g c)
       ( triangle-dependent-cocone-map-constant-type-family f g c)
       ( H)
-      ( is-equiv-dependent-cocone-cocone f g c)
+      ( is-equiv-dependent-cocone-constant-type-family-cocone f g c)
+```
+
+### Computing with the characterization of identifications of dependent cocones on constant type families
+
+If two dependent cocones on a constant type family are homotopic, then so are
+their nondependent counterparts.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {S : UU l1} {A : UU l2} {B : UU l3} (f : S → A) (g : S → B)
+  {X : UU l4} (c : cocone f g X)
+  (Y : UU l5)
+  where
+
+  coherence-htpy-cocone-coherence-htpy-dependent-cocone-constant-type-family :
+    ( d d' : dependent-cocone f g c (λ _ → Y)) →
+    ( K :
+      horizontal-map-dependent-cocone f g c (λ _ → Y) d ~
+      horizontal-map-dependent-cocone f g c (λ _ → Y) d')
+    ( L :
+      vertical-map-dependent-cocone f g c (λ _ → Y) d ~
+      vertical-map-dependent-cocone f g c (λ _ → Y) d')
+    ( H : coherence-htpy-dependent-cocone f g c (λ _ → Y) d d' K L) →
+    statement-coherence-htpy-cocone f g
+      ( cocone-dependent-cocone-constant-type-family f g c d)
+      ( cocone-dependent-cocone-constant-type-family f g c d')
+      ( K)
+      ( L)
+  coherence-htpy-cocone-coherence-htpy-dependent-cocone-constant-type-family
+    d d' K L H x =
+    ( assoc
+      ( inv
+        ( tr-constant-type-family
+          ( coherence-square-cocone f g c x)
+          ( horizontal-map-dependent-cocone f g c (λ _ → Y) d (f x))))
+      ( coherence-square-dependent-cocone f g c (λ _ → Y) d x)
+      ( L (g x))) ∙
+    ( ap
+      ( inv
+        ( tr-constant-type-family
+          ( coherence-square-cocone f g c x)
+          ( horizontal-map-dependent-cocone f g c (λ _ → Y) d (f x))) ∙_)
+      ( H x)) ∙
+    ( inv
+      ( assoc
+        ( inv
+          ( tr-constant-type-family
+            ( coherence-square-cocone f g c x)
+            ( horizontal-map-dependent-cocone f g c (λ _ → Y) d (f x))))
+        ( ap (tr (λ _ → Y) (coherence-square-cocone f g c x)) (K (f x)))
+        ( coherence-square-dependent-cocone f g c (λ _ → Y) d' x))) ∙
+    ap
+      ( _∙ coherence-square-dependent-cocone f g c (λ _ → Y) d' x)
+      ( naturality-inv-tr-constant-type-family
+        ( coherence-square-cocone f g c x)
+        ( K (f x))) ∙
+    ( assoc
+      ( K (f x))
+      ( inv
+        ( tr-constant-type-family
+          ( coherence-square-cocone f g c x)
+          ( horizontal-map-dependent-cocone f g c (λ _ → Y) d' (f x))))
+      ( coherence-square-dependent-cocone f g c (λ _ → Y) d' x))
 ```
