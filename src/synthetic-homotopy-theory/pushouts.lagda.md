@@ -1,8 +1,6 @@
 # Pushouts
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module synthetic-homotopy-theory.pushouts where
 ```
 

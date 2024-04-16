@@ -30,12 +30,6 @@ a type `X`, the cocone map
 
 has a [section](foundation.sections.md).
 
-The fact that the recursion principle of pushouts is
-[logically equivalent](foundation.logical-equivalences.md) to the
-[universal property](synthetic-homotopy-theory.universal-property-pushouts.md)
-of pushouts is shown in
-[`universal-property-pushouts`](synthetic-homotopy-theory.universal-property-pushouts.md).
-
 ## Definition
 
 ### The recursion principle of pushouts

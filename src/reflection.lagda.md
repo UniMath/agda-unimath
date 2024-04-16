@@ -1,5 +1,9 @@
 # Reflection
 
+```agda
+{-# OPTIONS --rewriting #-}
+```
+
 ## Files in the reflection folder
 
 ```agda
