@@ -19,6 +19,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.retractions
 open import foundation.standard-pullbacks
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -88,25 +89,27 @@ abstract
 #### The induction principle of pushouts implies the dependent universal property of pushouts
 
 ```agda
-htpy-eq-dependent-cocone-map :
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  ( f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ( H : induction-principle-pushout l f g c)
-  { P : X → UU l} (h h' : (x : X) → P x) →
-  dependent-cocone-map f g c P h ＝ dependent-cocone-map f g c P h' → h ~ h'
-htpy-eq-dependent-cocone-map f g c ind-c {P} h h' p =
-  ind-induction-principle-pushout f g c ind-c
-    ( λ x → Id (h x) (h' x))
-    ( pair
-      ( horizontal-htpy-eq-dependent-cocone f g c P
-        ( dependent-cocone-map f g c P h)
-        ( dependent-cocone-map f g c P h')
-        ( p))
-      ( pair
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
+  where
+
+  htpy-eq-dependent-cocone-map :
+    { l : Level} →
+    induction-principle-pushout l f g c →
+    { P : X → UU l} (h h' : (x : X) → P x) →
+    dependent-cocone-map f g c P h ＝ dependent-cocone-map f g c P h' → h ~ h'
+  htpy-eq-dependent-cocone-map ind-c {P} h h' p =
+    ind-induction-principle-pushout f g c ind-c
+      ( λ x → h x ＝ h' x)
+      ( ( horizontal-htpy-eq-dependent-cocone f g c P
+          ( dependent-cocone-map f g c P h)
+          ( dependent-cocone-map f g c P h')
+          ( p)) ,
         ( vertical-htpy-eq-dependent-cocone f g c P
           ( dependent-cocone-map f g c P h)
           ( dependent-cocone-map f g c P h')
-          ( p))
+          ( p)) ,
         ( λ s →
           map-compute-dependent-identification-eq-value h h'
             ( coherence-square-cocone f g c s)
@@ -124,28 +127,33 @@ htpy-eq-dependent-cocone-map f g c ind-c {P} h h' p =
               ( dependent-cocone-map f g c P h)
               ( dependent-cocone-map f g c P h')
               ( p)
-              ( s)))))
+              ( s))))
 
-dependent-universal-property-pushout-induction-principle-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ({l : Level} → induction-principle-pushout l f g c) →
-  ({l : Level} → dependent-universal-property-pushout l f g c)
-dependent-universal-property-pushout-induction-principle-pushout
-  f g c ind-c P =
-  is-equiv-is-invertible
-    ( ind-induction-principle-pushout f g c ind-c P)
-    ( pr2 (ind-c P))
-    ( λ h →
-      eq-htpy
-        ( htpy-eq-dependent-cocone-map f g c
+  is-retraction-ind-induction-principle-pushout :
+    (H : {l : Level} → induction-principle-pushout l f g c) →
+    {l : Level} (P : X → UU l) →
+    is-retraction
+      ( dependent-cocone-map f g c P)
+      ( ind-induction-principle-pushout f g c H P)
+  is-retraction-ind-induction-principle-pushout ind-c P h =
+    eq-htpy
+      ( htpy-eq-dependent-cocone-map
+        ( ind-c)
+        ( ind-induction-principle-pushout f g c
           ( ind-c)
-          ( ind-induction-principle-pushout f g c
-            ( ind-c)
-            ( P)
-            ( dependent-cocone-map f g c P h))
-          ( h)
-          ( pr2 (ind-c P) (dependent-cocone-map f g c P h))))
+          ( P)
+          ( dependent-cocone-map f g c P h))
+        ( h)
+        ( pr2 (ind-c P) (dependent-cocone-map f g c P h)))
+
+  dependent-universal-property-pushout-induction-principle-pushout :
+    ({l : Level} → induction-principle-pushout l f g c) →
+    ({l : Level} → dependent-universal-property-pushout l f g c)
+  dependent-universal-property-pushout-induction-principle-pushout ind-c P =
+    is-equiv-is-invertible
+      ( ind-induction-principle-pushout f g c ind-c P)
+      ( pr2 (ind-c P))
+      ( is-retraction-ind-induction-principle-pushout ind-c P)
 ```
 
 #### The dependent universal property of pushouts implies the induction principle of pushouts
