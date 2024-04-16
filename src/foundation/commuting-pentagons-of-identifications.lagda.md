@@ -22,7 +22,7 @@ A pentagon of [identifications](foundation-core.identity-types.md)
 ```text
                top
              x --- y
-  top-left  /       \ top-right
+   top-left /       \ top-right
            /         \
           z           w
             \       /
@@ -64,7 +64,7 @@ vertex. For example, we may reflect a pentagon
 ```text
                top
              x --- y
-  top-left  /       \ top-right
+   top-left /       \ top-right
            /         \
           z           w
             \       /
@@ -129,8 +129,8 @@ module _
       ( top)
       ( inv top-right)
   reflect-top-left-coherence-pentagon-identifications
-    top refl refl bottom-left refl H =
-    inv (right-unit ∙ right-unit ∙ H ∙ right-unit ∙ right-unit)
+    refl refl refl bottom-left refl H =
+    inv (right-unit ∙ right-unit ∙ H)
 
   reflect-top-right-coherence-pentagon-identifications :
     (top : x ＝ y)
@@ -149,8 +149,8 @@ module _
       ( inv top-left)
       ( inv top)
   reflect-top-right-coherence-pentagon-identifications
-    top top-left refl refl refl H =
-    ap inv (inv right-unit ∙ H ∙ right-unit ∙ right-unit)
+    refl top-left refl refl refl H =
+    ap inv (inv right-unit ∙ H)
 
   reflect-bottom-left-coherence-pentagon-identifications :
     (top : x ＝ y)
@@ -169,7 +169,7 @@ module _
       ( inv bottom-left)
       ( top-left)
   reflect-bottom-left-coherence-pentagon-identifications
-    refl top-left refl refl bottom-right H = right-unit ∙ inv H ∙ right-unit
+    refl refl refl refl bottom-right H = right-unit ∙ inv H
 
   reflect-bottom-right-coherence-pentagon-identifications :
     (top : x ＝ y)
@@ -188,6 +188,6 @@ module _
       ( top)
       ( inv top-right)
   reflect-bottom-right-coherence-pentagon-identifications
-    top refl refl bottom-left refl H =
-    inv (right-unit ∙ right-unit ∙ H ∙ right-unit ∙ right-unit)
+    refl refl refl bottom-left refl H =
+    inv (right-unit ∙ right-unit ∙ H)
 ```
