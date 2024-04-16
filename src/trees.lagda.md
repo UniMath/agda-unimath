@@ -29,6 +29,7 @@ open import trees.equivalences-enriched-directed-trees public
 open import trees.extensional-w-types public
 open import trees.fibers-directed-trees public
 open import trees.fibers-enriched-directed-trees public
+open import trees.full-binary-trees public
 open import trees.functoriality-combinator-directed-trees public
 open import trees.functoriality-fiber-directed-tree public
 open import trees.functoriality-w-types public
@@ -44,6 +45,7 @@ open import trees.morphisms-enriched-directed-trees public
 open import trees.multiset-indexed-dependent-products-of-types public
 open import trees.multisets public
 open import trees.planar-binary-trees public
+open import trees.plane-trees public
 open import trees.polynomial-endofunctors public
 open import trees.raising-universe-levels-directed-trees public
 open import trees.ranks-of-elements-w-types public
