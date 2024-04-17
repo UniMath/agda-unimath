@@ -47,7 +47,8 @@ Given two dependent functions `f g : (x : A) → B x`, a
 
 Naturality follows automatically from the fact that every section is natural in
 the base. I.e., for every edge `x →₂ y` in `A`, we have a dependent edge
-`α x →₂ α y` over it, giving us a commuting square of simplicial arrows
+`α x →₂ α y` over it, giving us a commuting dependent square of simplicial
+arrows
 
 ```text
            α x
