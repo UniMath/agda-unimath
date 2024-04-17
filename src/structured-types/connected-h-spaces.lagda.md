@@ -222,11 +222,3 @@ module _
     pr2 is-binary-equiv-mul-0-Connected-H-Space =
       is-equiv-left-mul-0-Connected-H-Space
 ```
-
-### The connected component of the unit element of an H-space is a connected H-space
-
-```agda
-module _
-  {l1 : Level} (A : H-Space l1)
-  where
-```

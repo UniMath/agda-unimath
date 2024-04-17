@@ -10,6 +10,7 @@ module foundation.connected-components where
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
+open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
@@ -60,7 +61,7 @@ module _
 
   connected-component : UU l
   connected-component =
-    Σ A (λ x → type-trunc-Prop (x ＝ a))
+    Σ A (mere-eq a)
 
   point-connected-component : connected-component
   pr1 point-connected-component = a
@@ -77,7 +78,7 @@ module _
   abstract
     mere-equality-connected-component :
       (X : connected-component) →
-      type-trunc-Prop (value-connected-component X ＝ a)
+      mere-eq a (value-connected-component X)
     mere-equality-connected-component X = pr2 X
 ```
 
@@ -96,11 +97,11 @@ abstract
       ( λ (x , p) →
         apply-universal-property-trunc-Prop
           ( p)
-          ( trunc-Prop ((a , unit-trunc-Prop refl) ＝ (x , p)))
+          ( mere-eq-Prop (a , unit-trunc-Prop refl) (x , p))
           ( λ p' →
             unit-trunc-Prop
               ( eq-pair-Σ
-                ( inv p')
+                ( p')
                 ( all-elements-equal-type-trunc-Prop _ p))))
 
 connected-component-∞-Group :
