@@ -452,21 +452,6 @@ module _
   compute-refl-top-map-coherence-triangle-identifications p = refl
 ```
 
-### The action of functions on commuting triangles of identifications
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  {x y z : A} (left : x ＝ z) (right : y ＝ z) (top : x ＝ y)
-  where
-
-  action-function-coherence-triangle-identifications :
-    coherence-triangle-identifications left right top →
-    coherence-triangle-identifications (ap f left) (ap f right) (ap f top)
-  action-function-coherence-triangle-identifications s =
-    ap (ap f) s ∙ ap-concat f top right
-```
-
 ### Inverting one side of a commuting triangle of identifications
 
 ```agda
@@ -583,6 +568,21 @@ module _
         ( q)
         ( s)
         ( t))
+```
+
+### Inverting all sides of a commuting triangle of identifications
+
+```agda
+module _
+  {l1 : Level} {A : UU l1} {x y z : A}
+  where
+
+  inv-coherence-triangle-identifications :
+    (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) →
+    coherence-triangle-identifications left right top →
+    coherence-triangle-identifications (inv left) (inv top) (inv right)
+  inv-coherence-triangle-identifications .(top ∙ right) right top refl =
+    distributive-inv-concat top right
 ```
 
 ### Concatenating identifications on edges with coherences of commuting triangles of identifications
