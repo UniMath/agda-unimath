@@ -39,6 +39,9 @@ in a type `A` from `x : A` to `y : A` is a
 together with [identifications](foundation-core.identity-types.md) `α 0₂ ＝ x`
 and `α 1₂ ＝ y`. We call `x` the _source_, and `y` the _target_ of the edge.
 
+We introduce the notation `x →₂ y` for the type of simplicial edges from `x` to
+`y`.
+
 ## Definitions
 
 ### Dependent simplicial edges
@@ -70,38 +73,40 @@ module _
   {l : Level} {A : UU l}
   where
 
+  _→₂_ : A → A → UU l
+  _→₂_ = dependent-simplicial-hom {A = λ _ → A}
+
+  infix 7 _→₂_
+
   simplicial-hom : A → A → UU l
-  simplicial-hom = dependent-simplicial-hom {A = λ _ → A}
+  simplicial-hom = _→₂_
 
   eq-source-simplicial-hom :
-    {x y : A} (f : simplicial-hom x y) →
-    simplicial-arrow-simplicial-hom f 0₂ ＝ x
+    {x y : A} (f : x →₂ y) → simplicial-arrow-simplicial-hom f 0₂ ＝ x
   eq-source-simplicial-hom f = pr1 (pr2 f)
 
   inv-eq-source-simplicial-hom :
-    {x y : A} (f : simplicial-hom x y) →
-    x ＝ simplicial-arrow-simplicial-hom f 0₂
+    {x y : A} (f : x →₂ y) → x ＝ simplicial-arrow-simplicial-hom f 0₂
   inv-eq-source-simplicial-hom f = inv (eq-source-simplicial-hom f)
 
   eq-target-simplicial-hom :
-    {x y : A} (f : simplicial-hom x y) →
-    simplicial-arrow-simplicial-hom f 1₂ ＝ y
+    {x y : A} (f : x →₂ y) → simplicial-arrow-simplicial-hom f 1₂ ＝ y
   eq-target-simplicial-hom f = pr2 (pr2 f)
 
   eq-source-target-simplicial-hom :
-    {x y z : A} (f : simplicial-hom x y) (g : simplicial-hom y z) →
+    {x y z : A} (f : x →₂ y) (g : y →₂ z) →
     simplicial-arrow-simplicial-hom f 1₂ ＝ simplicial-arrow-simplicial-hom g 0₂
   eq-source-target-simplicial-hom f g =
     eq-target-simplicial-hom f ∙ inv-eq-source-simplicial-hom g
 
   eq-source-source-simplicial-hom :
-    {x y z : A} (f : simplicial-hom x y) (g : simplicial-hom x z) →
+    {x y z : A} (f : x →₂ y) (g : x →₂ z) →
     simplicial-arrow-simplicial-hom f 0₂ ＝ simplicial-arrow-simplicial-hom g 0₂
   eq-source-source-simplicial-hom f g =
     eq-source-simplicial-hom f ∙ inv-eq-source-simplicial-hom g
 
   eq-target-target-simplicial-hom :
-    {x y z : A} (f : simplicial-hom x y) (g : simplicial-hom z y) →
+    {x y z : A} (f : x →₂ y) (g : z →₂ y) →
     simplicial-arrow-simplicial-hom f 1₂ ＝ simplicial-arrow-simplicial-hom g 1₂
   eq-target-target-simplicial-hom f g =
     eq-target-simplicial-hom f ∙ inv (eq-target-simplicial-hom g)
@@ -110,7 +115,7 @@ module _
 ### The identity/constant simplicial edges
 
 ```agda
-id-simplicial-hom : {l : Level} {A : UU l} (x : A) → simplicial-hom x x
+id-simplicial-hom : {l : Level} {A : UU l} (x : A) → x →₂ x
 id-simplicial-hom = simplicial-hom-simplicial-arrow ∘ id-simplicial-arrow
 ```
 
@@ -118,7 +123,7 @@ id-simplicial-hom = simplicial-hom-simplicial-arrow ∘ id-simplicial-arrow
 
 ```agda
 simplicial-hom-eq :
-  {l : Level} {A : UU l} {x y : A} → x ＝ y → simplicial-hom x y
+  {l : Level} {A : UU l} {x y : A} → x ＝ y → x →₂ y
 pr1 (simplicial-hom-eq p) = simplicial-arrow-eq p
 pr2 (simplicial-hom-eq refl) = (refl , refl)
 ```
@@ -131,30 +136,30 @@ module _
   where
 
   coherence-htpy-simplicial-hom :
-    (f g : simplicial-hom x y) →
+    (f g : x →₂ y) →
     simplicial-arrow-simplicial-hom f ~ simplicial-arrow-simplicial-hom g →
     UU l
   coherence-htpy-simplicial-hom f g H =
     ( eq-source-simplicial-hom f ＝ H 0₂ ∙ eq-source-simplicial-hom g) ×
     ( eq-target-simplicial-hom f ＝ H 1₂ ∙ eq-target-simplicial-hom g)
 
-  htpy-simplicial-hom : (f g : simplicial-hom x y) → UU l
+  htpy-simplicial-hom : (f g : x →₂ y) → UU l
   htpy-simplicial-hom f g =
     Σ ( simplicial-arrow-simplicial-hom f ~ simplicial-arrow-simplicial-hom g)
     ( coherence-htpy-simplicial-hom f g)
 
   refl-htpy-simplicial-hom :
-    (f : simplicial-hom x y) → htpy-simplicial-hom f f
+    (f : x →₂ y) → htpy-simplicial-hom f f
   refl-htpy-simplicial-hom f = (refl-htpy , refl , refl)
 
   htpy-eq-simplicial-hom :
-    (f g : simplicial-hom x y) → f ＝ g → htpy-simplicial-hom f g
+    (f g : x →₂ y) → f ＝ g → htpy-simplicial-hom f g
   htpy-eq-simplicial-hom f .f refl = refl-htpy-simplicial-hom f
 
   abstract
     is-torsorial-htpy-simplicial-hom :
-      (f : simplicial-hom x y) →
-      is-contr (Σ (simplicial-hom x y) (htpy-simplicial-hom f))
+      (f : x →₂ y) →
+      is-contr (Σ (x →₂ y) (htpy-simplicial-hom f))
     is-torsorial-htpy-simplicial-hom f =
       is-torsorial-Eq-structure
         ( is-torsorial-htpy (simplicial-arrow-simplicial-hom f))
@@ -165,19 +170,19 @@ module _
           ( is-torsorial-Id (eq-target-simplicial-hom f)))
 
   is-equiv-htpy-eq-simplicial-hom :
-    (f g : simplicial-hom x y) → is-equiv (htpy-eq-simplicial-hom f g)
+    (f g : x →₂ y) → is-equiv (htpy-eq-simplicial-hom f g)
   is-equiv-htpy-eq-simplicial-hom f =
     fundamental-theorem-id
       ( is-torsorial-htpy-simplicial-hom f)
       ( htpy-eq-simplicial-hom f)
 
   extensionality-simplicial-hom :
-    (f g : simplicial-hom x y) → (f ＝ g) ≃ (htpy-simplicial-hom f g)
+    (f g : x →₂ y) → (f ＝ g) ≃ (htpy-simplicial-hom f g)
   extensionality-simplicial-hom f g =
     ( htpy-eq-simplicial-hom f g , is-equiv-htpy-eq-simplicial-hom f g)
 
   eq-htpy-simplicial-hom :
-    (f g : simplicial-hom x y) → htpy-simplicial-hom f g → f ＝ g
+    (f g : x →₂ y) → htpy-simplicial-hom f g → f ＝ g
   eq-htpy-simplicial-hom f g =
     map-inv-equiv (extensionality-simplicial-hom f g)
 ```
@@ -187,11 +192,11 @@ module _
 ```agda
 module _
   {l : Level} {A : UU l} {x y : A}
-  {f : simplicial-arrow A} (g : simplicial-hom x y)
+  {f : simplicial-arrow A} (g : x →₂ y)
   (H : f ~ simplicial-arrow-simplicial-hom g)
   where
 
-  simplicial-hom-htpy-simplicial-arrow : simplicial-hom x y
+  simplicial-hom-htpy-simplicial-arrow : x →₂ y
   simplicial-hom-htpy-simplicial-arrow =
     ( f ,
       H 0₂ ∙ eq-source-simplicial-hom g ,
