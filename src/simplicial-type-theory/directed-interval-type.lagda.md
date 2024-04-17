@@ -9,15 +9,20 @@ module simplicial-type-theory.directed-interval-type where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.function-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.propositions
+open import foundation.retractions
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -80,3 +85,42 @@ is-noncontractible-𝟚' = (0₂ , 1₂ , is-nontrivial-𝟚)
 is-noncontractible-𝟚 : is-noncontractible 𝟚
 is-noncontractible-𝟚 = (1 , is-noncontractible-𝟚')
 ```
+
+### The canonical inclusion of the booleans into the directed interval
+
+```agda
+map-directed-interval-bool : bool → 𝟚
+map-directed-interval-bool true = 1₂
+map-directed-interval-bool false = 0₂
+
+is-injective-map-directed-interval-bool :
+  is-injective map-directed-interval-bool
+is-injective-map-directed-interval-bool {true} {true} p =
+  refl
+is-injective-map-directed-interval-bool {true} {false} p =
+  ex-falso (is-nontrivial-𝟚 (inv p))
+is-injective-map-directed-interval-bool {false} {true} p =
+  ex-falso (is-nontrivial-𝟚 p)
+is-injective-map-directed-interval-bool {false} {false} p =
+  refl
+
+is-retraction-is-injective-map-directed-interval-bool :
+  {x y : bool} →
+  is-retraction
+    ( ap map-directed-interval-bool {x} {y})
+    ( is-injective-map-directed-interval-bool)
+is-retraction-is-injective-map-directed-interval-bool {true} {true} refl =
+  refl
+is-retraction-is-injective-map-directed-interval-bool {false} {false} refl =
+  refl
+
+retraction-ap-map-directed-interval-bool :
+  {x y : bool} → retraction (ap map-directed-interval-bool {x} {y})
+retraction-ap-map-directed-interval-bool =
+  ( is-injective-map-directed-interval-bool ,
+    is-retraction-is-injective-map-directed-interval-bool)
+```
+
+We show that `map-directed-interval-bool` is an
+[embedding](foundation-core.embeddings.md) in
+[`directed-relation-on-directed-interval-type`](simplicial-type-theory.directed-relation-on-directed-interval-type.md).

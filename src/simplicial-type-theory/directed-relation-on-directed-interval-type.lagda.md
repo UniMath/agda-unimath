@@ -10,9 +10,11 @@ module simplicial-type-theory.directed-relation-on-directed-interval-type where
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
@@ -45,12 +47,12 @@ is a [total order](order-theory.total-orders.md) with `0₂` as the
 
 ```agda
 postulate
-  _≤-𝟚_ : 𝟚 → 𝟚 → UU
+  _≤-𝟚_ : 𝟚 → 𝟚 → UU lzero
   is-prop-leq-𝟚 : {x y : 𝟚} → is-prop (x ≤-𝟚 y)
 
 infix 30 _≤-𝟚_
 
-leq-𝟚 : 𝟚 → 𝟚 → UU
+leq-𝟚 : 𝟚 → 𝟚 → UU lzero
 leq-𝟚 = _≤-𝟚_
 ```
 
@@ -143,4 +145,12 @@ is-set-𝟚 = is-set-type-Poset 𝟚-Poset
 not-leq-target-source-𝟚 : ¬ (1₂ ≤-𝟚 0₂)
 not-leq-target-source-𝟚 leq-1-0 =
   is-nontrivial-𝟚 (antisymmetric-leq-𝟚 min-leq-𝟚 leq-1-0)
+```
+
+### The canonical inclusion of the booleans into the directed interval is an embedding
+
+```agda
+is-emb-map-directed-interval-bool : is-emb map-directed-interval-bool
+is-emb-map-directed-interval-bool =
+  is-emb-is-injective is-set-𝟚 is-injective-map-directed-interval-bool
 ```
