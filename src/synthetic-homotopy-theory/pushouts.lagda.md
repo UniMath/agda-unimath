@@ -308,6 +308,11 @@ pr2 (equiv-up-pushout f g X) = up-pushout f g X
 
 ### Computation with the cogap map
 
+We define the computation witnesses for the cogap map in terms of the
+computation witnesses for the dependent cogap map so that when
+[rewriting is enabled for pushouts](synthetic-homotopy-theory.rewriting-pushouts.md),
+these witnesses reduce to reflexivities.
+
 ```agda
 module _
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -328,7 +333,7 @@ module _
       ( dependent-cocone-constant-type-family-cocone f g (cocone-pushout f g) c)
 ```
 
-<!-- TODO: find the right infrastructure to make the proof below just an application of some construction. Note that this is very almost `coherence-htpy-cocone-coherence-htpy-dependent-cocone-constant-type-family`, but an `apd-constant-type-family` has snuck its way into the proof -->
+<!-- TODO: find the right infrastructure to make the proof below just an application of a more general construction. Note that this is very almost `coherence-htpy-cocone-coherence-htpy-dependent-cocone-constant-type-family`, but an `apd-constant-type-family` has snuck its way into the proof -->
 
 ```agda
   abstract
