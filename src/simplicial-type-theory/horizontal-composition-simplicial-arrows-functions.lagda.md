@@ -39,7 +39,7 @@ open import simplicial-type-theory.simplicial-edges
 Given a simplicial arrow `α` of functions `A → B` and a simplicial arrow `β` of
 functions `B → C`, we may
 {{#concept "horizontally compose" Disambiguation="simplicial arrows of functions" Agda=horizontal-comp-simplicial-arrow}}
-them to obtain a simplicial arrow of functions `A → B`. The horizontal composite
+them to obtain a simplicial arrow of functions `A → C`. The horizontal composite
 is constructed by "synchronously traversing `α` and `β`":
 
 ```text
