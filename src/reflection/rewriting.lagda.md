@@ -31,8 +31,9 @@ abundant caution when defining such rules.
 
 ## Definitions
 
-We declare to Agda that the [identity relation](foundation.identity-types.md)
-may be used to define rewrite rules.
+We declare to Agda that the
+[standard identity relation](foundation.identity-types.md) may be used to define
+rewrite rules.
 
 ```agda
 {-# BUILTIN REWRITE _＝_ #-}
