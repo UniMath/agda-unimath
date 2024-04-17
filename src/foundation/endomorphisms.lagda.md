@@ -28,7 +28,13 @@ open import structured-types.wild-monoids
 
 ## Idea
 
-An {{#concept "endomorphism"}} on a type `A` is a function `A → A`. The type of endomorphisms on `A` an [H-space](structured-types.h-spaces.md). Note that the unit laws for function composition hold judgmentally, so [function extensionality](foundation.function-extensionality.md) is not required to establish the H-space structure on the type of endomorphisms `A → A`. Furthermore, since function composition is strictly associative, the type of endomorphisms `A → A` is also a [wild monoid](structured-types.wild-monoids.md).
+An {{#concept "endomorphism"}} on a type `A` is a function `A → A`. The type of
+endomorphisms on `A` an [H-space](structured-types.h-spaces.md). Note that the
+unit laws for function composition hold judgmentally, so
+[function extensionality](foundation.function-extensionality.md) is not required
+to establish the H-space structure on the type of endomorphisms `A → A`.
+Furthermore, since function composition is strictly associative, the type of
+endomorphisms `A → A` is also a [wild monoid](structured-types.wild-monoids.md).
 
 ## Properties
 

@@ -28,7 +28,15 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A {{#concept "mere unit" Disambiguation="H-space"}} in an [H-space](structured-types.h-spaces.md) `A` is an element `x` that is [merely equal](foundation.mere-equality.md) to the unit element of `A`. The type of mere units of an H-space always forms a [connected H-space](structured-types.connected-h-spaces.md). In particular, since the multiplicative operation of a connected H-space is always a [binary equivalence](foundation.binary-equivalences.md), it follows that the binary operation restricted to the mere units of an H-space is a binary equivalence.
+A {{#concept "mere unit" Disambiguation="H-space"}} in an
+[H-space](structured-types.h-spaces.md) `A` is an element `x` that is
+[merely equal](foundation.mere-equality.md) to the unit element of `A`. The type
+of mere units of an H-space always forms a
+[connected H-space](structured-types.connected-h-spaces.md). In particular,
+since the multiplicative operation of a connected H-space is always a
+[binary equivalence](foundation.binary-equivalences.md), it follows that the
+binary operation restricted to the mere units of an H-space is a binary
+equivalence.
 
 ## Definitions
 

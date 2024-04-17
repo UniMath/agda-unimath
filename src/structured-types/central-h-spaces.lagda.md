@@ -36,10 +36,13 @@ pointed evaluation map `(A → A) →∗ A`. If the type `A` is
 [0-connected](foundation.0-connected-types.md), then the section maps to the
 [connected component](foundation.connected-components.md) of `(A ≃ A)` at the
 identity [equivalence](foundation-core.equivalences.md). Now the question arises
-for which H-spaces this evaluation map `(A → A) →∗ A` is an equivalence. This leads to the concept of _central H-space_.
+for which H-spaces this evaluation map `(A → A) →∗ A` is an equivalence. This
+leads to the concept of _central H-space_.
 
-A {{#concept "central pointed type" agda=Central-Pointed-Type}} is a [pointed type](structured-types.pointed-types.md) such that the map `ev_pt : (A → A)_{(id)} → A` from the connected component of the identity function is an
-equivalence. Note that every type of endofunctions is an H-space.
+A {{#concept "central pointed type" agda=Central-Pointed-Type}} is a
+[pointed type](structured-types.pointed-types.md) such that the map
+`ev_pt : (A → A)_{(id)} → A` from the connected component of the identity
+function is an equivalence. Note that every type of endofunctions is an H-space.
 
 ## Definitions
 
@@ -92,7 +95,7 @@ module _
       ( type-Central-Pointed-Type → type-Central-Pointed-Type)
       ( id) ≃
     type-Central-Pointed-Type
-  pr1 ev-point-equiv-Central-Pointed-Type = ev-point-Central-Pointed-Type 
+  pr1 ev-point-equiv-Central-Pointed-Type = ev-point-Central-Pointed-Type
   pr2 ev-point-equiv-Central-Pointed-Type = is-central-Central-Pointed-Type
 ```
 
@@ -102,7 +105,7 @@ module _
 module _
   {l : Level} (A : H-Space l)
   where
-  
+
   is-central-H-Space : UU l
   is-central-H-Space =
     is-0-connected-H-Space A ×
@@ -203,10 +206,6 @@ module _
 ```
 
 ### Central pointed types are central H-Spaces
-
-```agda
-
-```
 
 ## References
 

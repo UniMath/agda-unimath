@@ -27,13 +27,21 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A {{#concept "connected H-space" Agda=Connected-H-Space}} is an [H-space](structured-types.h-spaces.md) of which the underlying type is [0-connected](foundation.0-connected-types.md). The binary operation `μ : A → A → A` of any connected H-space `A` is a [binary equivalence](foundation.binary-equivalences.md). This means that the maps
+A {{#concept "connected H-space" Agda=Connected-H-Space}} is an
+[H-space](structured-types.h-spaces.md) of which the underlying type is
+[0-connected](foundation.0-connected-types.md). The binary operation
+`μ : A → A → A` of any connected H-space `A` is a
+[binary equivalence](foundation.binary-equivalences.md). This means that the
+maps
 
 ```text
   x ↦ μ x y : A → A        and         y ↦ μ x y : A → A
 ```
 
-are [equivalences](foundation-core.equivalences.md) for any `x` and `y` in `A`. Furthermore, the [connected component](foundation.connected-components.md) of the unit element of an H-space is always a connected H-space. We will prove this fact in the file about [mere units](structured-types.mere-units-h-spaces.md).
+are [equivalences](foundation-core.equivalences.md) for any `x` and `y` in `A`.
+Furthermore, the [connected component](foundation.connected-components.md) of
+the unit element of an H-space is always a connected H-space. We will prove this
+fact in the file about [mere units](structured-types.mere-units-h-spaces.md).
 
 ## Definitions
 
