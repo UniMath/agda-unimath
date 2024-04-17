@@ -240,6 +240,6 @@ module _
 ## See also
 
 - Retracts of types are defined in
-  [`foundation.retracts-of-types`](foundation.retracts-of-types.md).
+  [`foundation-core.retracts-of-types`](foundation-core.retracts-of-types.md).
 - Retracts of maps are defined in
   [`foundation.retracts-of-maps`](foundation.retracts-of-maps.md).

@@ -21,6 +21,7 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.coequalizers
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
 open import synthetic-homotopy-theory.sequential-diagrams
@@ -121,7 +122,7 @@ abstract
     { l : Level} (A : sequential-diagram l) →
     cocone-sequential-diagram A (standard-sequential-colimit A)
   cocone-standard-sequential-colimit A =
-    cocone-sequential-diagram-cofork A
+    cocone-sequential-diagram-cofork
       ( cofork-canonical-coequalizer (double-arrow-sequential-diagram A))
 
   dup-standard-sequential-colimit :

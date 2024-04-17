@@ -31,7 +31,7 @@ open import foundation-core.whiskering-homotopies-concatenation
 
 A [(two-sided) inverse](foundation-core.invertible-maps.md) for a map
 `f : A → B` is a map `g : B → A` equipped with
-[homotopies](foundation-core.homotopies.md) ` S : f ∘ g ~ id` and
+[homotopies](foundation-core.homotopies.md) `S : f ∘ g ~ id` and
 `R : g ∘ f ~ id`. Such data, however is [structure](foundation.structure.md) on
 the map `f`, and not generally a [property](foundation-core.propositions.md).
 One way to make the type of inverses into a property is by adding a single

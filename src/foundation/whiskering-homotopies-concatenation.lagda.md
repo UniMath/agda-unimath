@@ -11,7 +11,6 @@ open import foundation-core.whiskering-homotopies-concatenation public
 ```agda
 open import foundation.universe-levels
 open import foundation.whiskering-identifications-concatenation
-open import foundation.whiskering-operations
 
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-function-types
