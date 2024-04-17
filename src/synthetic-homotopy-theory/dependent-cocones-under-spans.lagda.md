@@ -191,7 +191,7 @@ pr2 (pr2 (dependent-cocone-map f g c P h)) s =
 
 ## Properties
 
-### Characterization of identifications of dependent cocones
+### Characterization of identifications of dependent cocones over a fixed cocone
 
 ```agda
 module _
@@ -305,7 +305,7 @@ module _
       is-retraction-map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone d')
 ```
 
-### Dependent homotopies of dependent cocones
+### Dependent homotopies of dependent cocones over homotopies of cocones
 
 ```agda
 module _
@@ -391,9 +391,11 @@ module _
           ( is-torsorial-htpy _))
 ```
 
-We now move to characterize cocones equipped with dependent cocones, from this,
-it follows that dependent homotopies of dependent cocones characterize dependent
-identifications of them.
+#### Characterizing equality of cocones equipped with dependent cocones
+
+We now move to characterize equality of cocones equipped with dependent cocones,
+from this, it follows that dependent homotopies of dependent cocones
+characterize dependent identifications of them.
 
 ```agda
 module _
@@ -473,7 +475,7 @@ module _
       is-equiv-htpy-eq-cocone-with-dependent-cocone c c')
 ```
 
-### Dependent cocones on constant type families
+### Dependent cocones on constant type families are equivalent to nondependent cocones
 
 ```agda
 module _
@@ -619,7 +621,7 @@ module _
       ( is-equiv-dependent-cocone-constant-type-family-cocone f g c)
 ```
 
-### Computing with the characterization of identifications of dependent cocones on constant type families
+### Computing with the characterization of identifications of dependent cocones on constant type families over a fixed cocone
 
 If two dependent cocones on a constant type family are homotopic, then so are
 their nondependent counterparts.
