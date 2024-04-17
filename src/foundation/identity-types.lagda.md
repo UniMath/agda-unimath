@@ -219,6 +219,20 @@ module _
         ( ( ap (concat' _ s) (right-inv right-unit))))
 ```
 
+### Applying the right unit law on one side of a higher identification is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  equiv-right-unit : (p : x ＝ y) (q : x ＝ y) → (p ＝ q) ≃ (p ∙ refl ＝ q)
+  equiv-right-unit p = equiv-concat right-unit
+
+  equiv-right-unit' : (p : x ＝ y) (q : x ＝ y) → (p ＝ q ∙ refl) ≃ (p ＝ q)
+  equiv-right-unit' p q = equiv-concat' p right-unit
+```
+
 ### Reassociating one side of a higher identification is an equivalence
 
 ```agda
@@ -265,7 +279,7 @@ module _
 
   left-transpose-eq-concat' :
     (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
-    (p ＝ q ∙ r) → (inv q ∙ p ＝ r)
+    p ＝ q ∙ r → inv q ∙ p ＝ r
   left-transpose-eq-concat' p q r =
     map-equiv (equiv-left-transpose-eq-concat' p q r)
 
@@ -282,7 +296,7 @@ module _
 
   equiv-right-transpose-eq-concat :
     (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
-    ((p ∙ q) ＝ r) ≃ (p ＝ (r ∙ (inv q)))
+    (p ∙ q ＝ r) ≃ (p ＝ r ∙ inv q)
   pr1 (equiv-right-transpose-eq-concat p q r) = right-transpose-eq-concat p q r
   pr2 (equiv-right-transpose-eq-concat p q r) =
     is-equiv-right-transpose-eq-concat p q r
@@ -291,11 +305,13 @@ module _
     (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
     (p ＝ q ∙ r) ≃ (p ∙ inv r ＝ q)
   equiv-right-transpose-eq-concat' p q r =
-    equiv-inv _ _ ∘e equiv-right-transpose-eq-concat q r p ∘e equiv-inv _ _
+    equiv-inv q (p ∙ inv r) ∘e
+    equiv-right-transpose-eq-concat q r p ∘e
+    equiv-inv p (q ∙ r)
 
   right-transpose-eq-concat' :
     (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
-    (p ＝ q ∙ r) → (p ∙ inv r ＝ q)
+    p ＝ q ∙ r → p ∙ inv r ＝ q
   right-transpose-eq-concat' p q r =
     map-equiv (equiv-right-transpose-eq-concat' p q r)
 ```
