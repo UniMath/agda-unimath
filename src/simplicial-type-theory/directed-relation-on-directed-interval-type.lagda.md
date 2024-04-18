@@ -92,6 +92,8 @@ postulate
 leq-𝟚-Prop : (x y : 𝟚) → Prop lzero
 leq-𝟚-Prop x y = (x ≤-𝟚 y , is-prop-leq-𝟚)
 
+{-# INLINE leq-𝟚-Prop #-}
+
 min-leq-eq-𝟚 : {x y : 𝟚} → x ＝ 0₂ → x ≤-𝟚 y
 min-leq-eq-𝟚 refl = min-leq-𝟚
 
@@ -137,6 +139,11 @@ is-set-𝟚 = is-set-type-Poset 𝟚-Poset
 
 𝟚-Set : Set lzero
 𝟚-Set = (𝟚 , is-set-𝟚)
+
+Id-𝟚-Prop : 𝟚 → 𝟚 → Prop lzero
+Id-𝟚-Prop = Id-Prop 𝟚-Set
+
+{-# INLINE Id-𝟚-Prop #-}
 ```
 
 ### The maximal element is not less than or equal to the bottom element of the directed interval
