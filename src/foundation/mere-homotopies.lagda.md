@@ -17,11 +17,13 @@ open import foundation.propositions
 open import foundation.universe-levels
 ```
 
-<details>
+</details>
 
 ## Idea
 
-A {{#concept "mere homotopy" Agda=mere-htpy}} between two dependent functions `f g : (a : A) → B a` is an element of the [propositional truncation](foundation.propositional-truncations.md)
+A {{#concept "mere homotopy" Agda=mere-htpy}} between two dependent functions
+`f g : (a : A) → B a` is an element of the
+[propositional truncation](foundation.propositional-truncations.md)
 
 ```text
   ║ f ~ g ║₋₁

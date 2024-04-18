@@ -254,6 +254,8 @@ open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.mere-functions public
+open import foundation.mere-homotopies public
+open import foundation.mere-identity-endomorphisms public
 open import foundation.mere-logical-equivalences public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public

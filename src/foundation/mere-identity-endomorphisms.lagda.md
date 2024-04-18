@@ -17,7 +17,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-An [endomorphism](foundation-core.endomorphisms.md) `f : A → A` on a type `A` is said to be a {{#concept "mere identity endomorphism" Agda=mere-identity-endomorphism}} if it is [merely homotopic](foundation.mere-homotopies.md) to the [identity function](foundation-core.function-types.md).
+An [endomorphism](foundation-core.endomorphisms.md) `f : A → A` on a type `A` is
+said to be a
+{{#concept "mere identity endomorphism" Agda=mere-identity-endomorphism}} if it
+is [merely homotopic](foundation.mere-homotopies.md) to the
+[identity function](foundation-core.function-types.md).
 
 ## Definitions
 
