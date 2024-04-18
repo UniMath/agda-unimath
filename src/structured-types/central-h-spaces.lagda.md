@@ -205,8 +205,4 @@ module _
         ( id))
 ```
 
-### Central pointed types are central H-Spaces
-
-## References
-
 {{#bibliography}} {{#reference BCFR23}}
