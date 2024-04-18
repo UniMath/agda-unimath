@@ -70,7 +70,7 @@ module _
     (X ＝ Y) ≃ equiv-classifying-type-symmetric-Concrete-Group X Y
   extensionality-classifying-type-symmetric-Concrete-Group X =
     extensionality-type-subtype
-      ( λ Y → mere-eq-Prop Y A)
+      ( mere-eq-Prop A)
       ( pr2 X)
       ( id-equiv)
       ( extensionality-Set (pr1 X))
