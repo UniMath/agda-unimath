@@ -7,6 +7,7 @@ module foundation.mere-identity-endomorphisms where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.mere-homotopies
 open import foundation.propositions
@@ -41,4 +42,15 @@ module _
   is-prop-is-mere-identity-endomorphism :
     is-prop is-mere-identity-endomorphism
   is-prop-is-mere-identity-endomorphism = is-prop-mere-htpy id f
+```
+
+### Mere identity endomorphisms
+
+```agda
+module _
+  {l1 : Level} (A : UU l1)
+  where
+
+  mere-identity-endomorphism : UU l1
+  mere-identity-endomorphism = Σ (A → A) is-mere-identity-endomorphism
 ```
