@@ -700,11 +700,11 @@ module _
         ( inv right-unit)
         ( s))
 
-  right-unwhisker-cohernece-square-identifications :
+  right-unwhisker-concat-coherence-square-identifications :
     {u : A} (p : w ＝ u) →
     coherence-square-identifications top left (right ∙ p) (bottom ∙ p) →
     coherence-square-identifications top left right bottom
-  right-unwhisker-cohernece-square-identifications refl =
+  right-unwhisker-concat-coherence-square-identifications refl =
     ( inv-concat-right-identification-coherence-square-identifications
       ( top)
       ( left)

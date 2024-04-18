@@ -92,3 +92,4 @@ pr2 (pr2 (pr2 (endo-Monoid A))) f = refl
 
 - For endomorphisms in a category see
   [`category-theory.endomorphisms-in-categories`](category-theory.endomorphisms-in-categories.md).
+- [Mere identity endomorphisms](foundation.mere-identity-endomorphisms.md)
