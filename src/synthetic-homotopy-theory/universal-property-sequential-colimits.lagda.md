@@ -456,26 +456,27 @@ The homotopy of cocones consists of homotopies
 which we construct by induction as
 
 ```text
-  K₀ : (j₀')₀ ≐ j₀ ~ j₀             by reflexivity
-  Kₙ₊₁ : (j₀')ₙ₊₁ ≐ (j₀')ₙ ∘ aₙ⁻¹
-       ~ jₙ ∘ aₙ⁻¹                  by Kₙ
-       ~ jₙ₊₁ ∘ aₙ ∘ aₙ⁻¹           by coherence Hₙ of c
-       ~ jₙ₊₁                       by aₙ⁻¹ being a section of aₙ ,
+  K₀ : (j₀')₀ ≐ j₀ ~ j₀     by reflexivity
+  Kₙ₊₁ : (j₀')ₙ₊₁
+       ≐ (j₀')ₙ ∘ aₙ⁻¹      by definition
+       ~ jₙ ∘ aₙ⁻¹          by Kₙ
+       ~ jₙ₊₁ ∘ aₙ ∘ aₙ⁻¹   by coherence Hₙ of c
+       ~ jₙ₊₁               by aₙ⁻¹ being a section of aₙ ,
 ```
 
 and a coherence datum which upon some pondering boils down to the following
 [commuting square of homotopies](foundation-core.commuting-squares-of-homotopies.md):
 
 ```text
-                      Kₙ ·r (aₙ⁻¹ ∘ aₙ)                  Hₙ ·r (aₙ⁻¹ ∘ aₙ)
-  (j₀')ₙ ∘ aₙ⁻¹ ∘ aₙ ------------------> jₙ ∘ aₙ⁻¹ ∘ aₙ -------------------> jₙ₊₁ ∘ aₙ ∘ aₙ⁻¹ ∘ aₙ
-           |                                   |                                       |
-           |                                   |                                       |
-           | (j₀')ₙ ·l is-retraction aₙ⁻¹      |  jₙ ·l is-retraction aₙ⁻¹             | jₙ₊₁ ·l is-section aₙ⁻¹ ·r aₙ
-           |                                   |                                       |
-           ∨                                   ∨                                       ∨
-        (j₀')ₙ ------------------------------> jₙ ----------------------------->  jₙ₊₁ ∘ aₙ .
-                             Kₙ                                   Hₙ
+                        Kₙ ·r (aₙ⁻¹ ∘ aₙ)                Hₙ ·r (aₙ⁻¹ ∘ aₙ)
+     (j₀')ₙ ∘ aₙ⁻¹ ∘ aₙ ----------------> jₙ ∘ aₙ⁻¹ ∘ aₙ ----------------> jₙ₊₁ ∘ aₙ ∘ aₙ⁻¹ ∘ aₙ
+              |                                 |                                    |
+              |                                 |                                    |
+  (j₀')ₙ ·l is-retraction aₙ⁻¹      jₙ ·l is-retraction aₙ⁻¹            jₙ₊₁ ·l is-section aₙ⁻¹ ·r aₙ
+              |                                 |                                    |
+              ∨                                 ∨                                    ∨
+           (j₀')ₙ ----------------------------> jₙ -------------------------->  jₙ₊₁ ∘ aₙ .
+                               Kₙ                                 Hₙ
 ```
 
 This rectangle is almost a pasting of the squares of naturality of `Kₙ` and `Hₙ`
@@ -605,14 +606,17 @@ module _
               ( coherence-cocone-sequential-diagram c n))
             ( is-retraction-map-inv-is-equiv (equivs n) a)))
 
-  is-retraction-cocone-first-map-is-equiv-sequential-diagram :
-    is-retraction
-      ( first-map-cocone-sequential-diagram)
-      ( cocone-first-map-is-equiv-sequential-diagram)
-  is-retraction-cocone-first-map-is-equiv-sequential-diagram c =
-    eq-htpy-cocone-sequential-diagram A _ _
-      ( htpy-htpy-is-retraction-cocone-first-map-is-equiv-sequential-diagram c ,
-        coh-htpy-is-retraction-cocone-first-map-is-equiv-sequential-diagram c)
+  abstract
+    is-retraction-cocone-first-map-is-equiv-sequential-diagram :
+      is-retraction
+        ( first-map-cocone-sequential-diagram)
+        ( cocone-first-map-is-equiv-sequential-diagram)
+    is-retraction-cocone-first-map-is-equiv-sequential-diagram c =
+      eq-htpy-cocone-sequential-diagram A _ _
+        ( ( htpy-htpy-is-retraction-cocone-first-map-is-equiv-sequential-diagram
+            ( c)) ,
+          ( coh-htpy-is-retraction-cocone-first-map-is-equiv-sequential-diagram
+            ( c)))
 
   is-equiv-first-map-cocone-is-equiv-sequential-diagram :
     is-equiv first-map-cocone-sequential-diagram
