@@ -17,7 +17,6 @@ open import foundation.homotopies-morphisms-arrows
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
-open import foundation.retracts-of-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -28,6 +27,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
+open import foundation-core.retracts-of-types
 open import foundation-core.sections
 ```
 

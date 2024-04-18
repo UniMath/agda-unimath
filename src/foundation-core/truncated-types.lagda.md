@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
-open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -22,6 +21,7 @@ open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.retracts-of-types
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncation-levels
 ```
