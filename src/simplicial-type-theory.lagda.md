@@ -13,4 +13,5 @@ open import simplicial-type-theory.simplicial-cubes public
 open import simplicial-type-theory.simplicial-edges public
 open import simplicial-type-theory.simplicial-natural-transformations public
 open import simplicial-type-theory.whiskering-simplicial-arrows-functions public
+open import simplicial-type-theory.whiskering-simplicial-edges-functions public
 ```
