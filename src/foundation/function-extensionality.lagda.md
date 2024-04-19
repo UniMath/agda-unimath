@@ -14,6 +14,7 @@ open import foundation.evaluation-functions
 open import foundation.implicit-function-types
 open import foundation.universe-levels
 
+open import foundation-core.coherently-invertible-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -149,6 +150,13 @@ module _
     is-section-eq-htpy : is-section htpy-eq eq-htpy
 
     is-retraction-eq-htpy' : is-retraction htpy-eq eq-htpy
+
+    coh-eq-htpy' :
+      coherence-is-coherently-invertible
+        ( htpy-eq)
+        ( eq-htpy)
+        ( is-section-eq-htpy)
+        ( is-retraction-eq-htpy')
 
 funext : function-extensionality
 funext f g =

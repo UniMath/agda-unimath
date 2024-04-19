@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
+open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -59,6 +60,13 @@ module _
     is-section-eq-equiv : is-section equiv-eq eq-equiv
 
     is-retraction-eq-equiv' : is-retraction equiv-eq eq-equiv
+
+    coh-eq-equiv' :
+      coherence-is-coherently-invertible
+        ( equiv-eq)
+        ( eq-equiv)
+        ( is-section-eq-equiv)
+        ( is-retraction-eq-equiv')
 
 univalence : univalence-axiom
 univalence A B =
