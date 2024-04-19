@@ -78,24 +78,26 @@ module _
   (x : ℚ)
   where
 
-  is-nonzero-numerator-is-nonzero-ℚ :
-    is-nonzero-ℚ x → is-nonzero-ℤ (numerator-ℚ x)
-  is-nonzero-numerator-is-nonzero-ℚ H =
-    H ∘ (is-zero-is-zero-numerator-ℚ x)
+  abstract
+    is-nonzero-numerator-is-nonzero-ℚ :
+      is-nonzero-ℚ x → is-nonzero-ℤ (numerator-ℚ x)
+    is-nonzero-numerator-is-nonzero-ℚ H =
+      H ∘ (is-zero-is-zero-numerator-ℚ x)
 
-  is-nonzero-is-nonzero-numerator-ℚ :
-    is-nonzero-ℤ (numerator-ℚ x) → is-nonzero-ℚ x
-  is-nonzero-is-nonzero-numerator-ℚ H = H ∘ (ap numerator-ℚ)
+    is-nonzero-is-nonzero-numerator-ℚ :
+      is-nonzero-ℤ (numerator-ℚ x) → is-nonzero-ℚ x
+    is-nonzero-is-nonzero-numerator-ℚ H = H ∘ (ap numerator-ℚ)
 ```
 
 ### one-ℚ is nonzero
 
 ```agda
-is-nonzero-one-ℚ : is-nonzero-ℚ one-ℚ
-is-nonzero-one-ℚ =
-  is-nonzero-is-nonzero-numerator-ℚ
-    ( one-ℚ)
-    ( is-nonzero-one-ℤ)
+abstract
+  is-nonzero-one-ℚ : is-nonzero-ℚ one-ℚ
+  is-nonzero-one-ℚ =
+    is-nonzero-is-nonzero-numerator-ℚ
+      ( one-ℚ)
+      ( is-nonzero-one-ℤ)
 
 one-nonzero-ℚ : nonzero-ℚ
 one-nonzero-ℚ = (one-ℚ , is-nonzero-one-ℚ)
@@ -104,13 +106,14 @@ one-nonzero-ℚ = (one-ℚ , is-nonzero-one-ℚ)
 ### The negative of a nonzero rational number is nonzero
 
 ```agda
-is-nonzero-neg-ℚ : (x : ℚ) → is-nonzero-ℚ x → is-nonzero-ℚ (neg-ℚ x)
-is-nonzero-neg-ℚ x H =
-  is-nonzero-is-nonzero-numerator-ℚ
-    ( neg-ℚ x)
-    ( is-nonzero-neg-nonzero-ℤ
-      ( numerator-ℚ x)
-      ( is-nonzero-numerator-is-nonzero-ℚ x H))
+abstract
+  is-nonzero-neg-ℚ : (x : ℚ) → is-nonzero-ℚ x → is-nonzero-ℚ (neg-ℚ x)
+  is-nonzero-neg-ℚ x H =
+    is-nonzero-is-nonzero-numerator-ℚ
+      ( neg-ℚ x)
+      ( is-nonzero-neg-nonzero-ℤ
+        ( numerator-ℚ x)
+        ( is-nonzero-numerator-is-nonzero-ℚ x H))
 ```
 
 ### The nonzero negative of a nonzero rational number
@@ -123,10 +126,11 @@ neg-nonzero-ℚ (x , H) = (neg-ℚ x , is-nonzero-neg-ℚ x H)
 ### The product of two nonzero rational numbers is nonzero
 
 ```agda
-is-nonzero-mul-ℚ :
-  {x y : ℚ} → is-nonzero-ℚ x → is-nonzero-ℚ y → is-nonzero-ℚ (x *ℚ y)
-is-nonzero-mul-ℚ {x} {y} H K =
-  rec-coproduct H K ∘ (decide-is-zero-factor-is-zero-mul-ℚ x y)
+abstract
+  is-nonzero-mul-ℚ :
+    {x y : ℚ} → is-nonzero-ℚ x → is-nonzero-ℚ y → is-nonzero-ℚ (x *ℚ y)
+  is-nonzero-mul-ℚ {x} {y} H K =
+    rec-coproduct H K ∘ (decide-is-zero-factor-is-zero-mul-ℚ x y)
 ```
 
 ### The nonzero product of two nonzero rational numbers
@@ -156,13 +160,14 @@ module _
 ### The factors of a nonzero product of rational numbers are nonzero
 
 ```agda
-is-nonzero-left-factor-mul-ℚ :
-  (x y : ℚ) → is-nonzero-ℚ (x *ℚ y) → is-nonzero-ℚ x
-is-nonzero-left-factor-mul-ℚ x y H Z =
-  H (ap (_*ℚ y) Z ∙ left-zero-law-mul-ℚ y)
+abstract
+  is-nonzero-left-factor-mul-ℚ :
+    (x y : ℚ) → is-nonzero-ℚ (x *ℚ y) → is-nonzero-ℚ x
+  is-nonzero-left-factor-mul-ℚ x y H Z =
+    H (ap (_*ℚ y) Z ∙ left-zero-law-mul-ℚ y)
 
-is-nonzero-right-factor-mul-ℚ :
-  (x y : ℚ) → is-nonzero-ℚ (x *ℚ y) → is-nonzero-ℚ y
-is-nonzero-right-factor-mul-ℚ x y H Z =
-  H (ap (x *ℚ_) Z ∙ right-zero-law-mul-ℚ x)
+  is-nonzero-right-factor-mul-ℚ :
+    (x y : ℚ) → is-nonzero-ℚ (x *ℚ y) → is-nonzero-ℚ y
+  is-nonzero-right-factor-mul-ℚ x y H Z =
+    H (ap (x *ℚ_) Z ∙ right-zero-law-mul-ℚ x)
 ```

@@ -85,10 +85,12 @@ module _
   (x : ℚ) (H : is-nonzero-ℚ x)
   where
 
-  left-inverse-law-mul-is-nonzero-ℚ : (inv-is-nonzero-ℚ H *ℚ x) ＝ one-ℚ
-  left-inverse-law-mul-is-nonzero-ℚ = pr2 (pr2 (is-invertible-is-nonzero-ℚ x H))
+  abstract
+    left-inverse-law-mul-is-nonzero-ℚ : (inv-is-nonzero-ℚ H *ℚ x) ＝ one-ℚ
+    left-inverse-law-mul-is-nonzero-ℚ =
+      pr2 (pr2 (is-invertible-is-nonzero-ℚ x H))
 
-  right-inverse-law-mul-is-nonzero-ℚ : (x *ℚ inv-is-nonzero-ℚ H) ＝ one-ℚ
-  right-inverse-law-mul-is-nonzero-ℚ =
-    pr1 (pr2 (is-invertible-is-nonzero-ℚ x H))
+    right-inverse-law-mul-is-nonzero-ℚ : (x *ℚ inv-is-nonzero-ℚ H) ＝ one-ℚ
+    right-inverse-law-mul-is-nonzero-ℚ =
+      pr1 (pr2 (is-invertible-is-nonzero-ℚ x H))
 ```

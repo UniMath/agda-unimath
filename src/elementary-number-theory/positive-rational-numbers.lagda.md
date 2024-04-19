@@ -123,9 +123,10 @@ is-set-ℚ⁺ = is-set-type-subtype is-positive-prop-ℚ is-set-ℚ
 ### The rational image of a positive integer is positive
 
 ```agda
-is-positive-rational-ℤ :
-  (x : ℤ) → is-positive-ℤ x → is-positive-ℚ (rational-ℤ x)
-is-positive-rational-ℤ x P = P
+abstract
+  is-positive-rational-ℤ :
+    (x : ℤ) → is-positive-ℤ x → is-positive-ℚ (rational-ℤ x)
+  is-positive-rational-ℤ x P = P
 
 one-ℚ⁺ : ℚ⁺
 one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
@@ -134,10 +135,11 @@ one-ℚ⁺ = (one-ℚ , is-positive-int-positive-ℤ one-positive-ℤ)
 ### The rational image of a positive integer fraction is positive
 
 ```agda
-is-positive-rational-fraction-ℤ :
-  {x : fraction-ℤ} (P : is-positive-fraction-ℤ x) →
-  is-positive-ℚ (rational-fraction-ℤ x)
-is-positive-rational-fraction-ℤ = is-positive-reduce-fraction-ℤ
+abstract
+  is-positive-rational-fraction-ℤ :
+    {x : fraction-ℤ} (P : is-positive-fraction-ℤ x) →
+    is-positive-ℚ (rational-fraction-ℤ x)
+  is-positive-rational-fraction-ℤ = is-positive-reduce-fraction-ℤ
 ```
 
 ### A rational number `x` is positive if and only if `0 < x`
@@ -147,13 +149,14 @@ module _
   (x : ℚ)
   where
 
-  le-zero-is-positive-ℚ : is-positive-ℚ x → le-ℚ zero-ℚ x
-  le-zero-is-positive-ℚ =
-    is-positive-eq-ℤ (inv (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x)))
+  abstract
+    le-zero-is-positive-ℚ : is-positive-ℚ x → le-ℚ zero-ℚ x
+    le-zero-is-positive-ℚ =
+      is-positive-eq-ℤ (inv (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x)))
 
-  is-positive-le-zero-ℚ : le-ℚ zero-ℚ x → is-positive-ℚ x
-  is-positive-le-zero-ℚ =
-    is-positive-eq-ℤ (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x))
+    is-positive-le-zero-ℚ : le-ℚ zero-ℚ x → is-positive-ℚ x
+    is-positive-le-zero-ℚ =
+      is-positive-eq-ℤ (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x))
 ```
 
 ### A nonzero rational number or its negative is positive
@@ -173,26 +176,28 @@ decide-is-negative-is-positive-is-nonzero-ℚ {x} H =
 ### A rational and its negative are not both positive
 
 ```agda
-not-is-negative-is-positive-ℚ :
-  (x : ℚ) → ¬ (is-positive-ℚ (neg-ℚ x) × is-positive-ℚ x)
-not-is-negative-is-positive-ℚ x (N , P) =
-  is-not-negative-and-positive-ℤ
-    ( numerator-ℚ x)
-    ( ( is-negative-eq-ℤ
-        (neg-neg-ℤ (numerator-ℚ x))
-        (is-negative-neg-is-positive-ℤ {numerator-ℚ (neg-ℚ x)} N)) ,
-      ( P))
+abstract
+  not-is-negative-is-positive-ℚ :
+    (x : ℚ) → ¬ (is-positive-ℚ (neg-ℚ x) × is-positive-ℚ x)
+  not-is-negative-is-positive-ℚ x (N , P) =
+    is-not-negative-and-positive-ℤ
+      ( numerator-ℚ x)
+      ( ( is-negative-eq-ℤ
+          (neg-neg-ℤ (numerator-ℚ x))
+          (is-negative-neg-is-positive-ℤ {numerator-ℚ (neg-ℚ x)} N)) ,
+        ( P))
 ```
 
 ### Positive rational numbers are nonzero
 
 ```agda
-is-nonzero-is-positive-ℚ : {x : ℚ} → is-positive-ℚ x → is-nonzero-ℚ x
-is-nonzero-is-positive-ℚ {x} H =
-  is-nonzero-is-nonzero-numerator-ℚ x
-    ( is-nonzero-is-positive-ℤ
-      { numerator-ℚ x}
-      ( H))
+abstract
+  is-nonzero-is-positive-ℚ : {x : ℚ} → is-positive-ℚ x → is-nonzero-ℚ x
+  is-nonzero-is-positive-ℚ {x} H =
+    is-nonzero-is-nonzero-numerator-ℚ x
+      ( is-nonzero-is-positive-ℤ
+        { numerator-ℚ x}
+        ( H))
 
 nonzero-ℚ⁺ : positive-ℚ → nonzero-ℚ
 nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
@@ -201,15 +206,16 @@ nonzero-ℚ⁺ (x , P) = (x , is-nonzero-is-positive-ℚ P)
 ### The sum of two positive rational numbers is positive
 
 ```agda
-is-positive-add-ℚ :
-  {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x +ℚ y)
-is-positive-add-ℚ {x} {y} P Q =
-  is-positive-rational-fraction-ℤ
-    ( is-positive-add-fraction-ℤ
-      { fraction-ℚ x}
-      { fraction-ℚ y}
-      ( P)
-      ( Q))
+abstract
+  is-positive-add-ℚ :
+    {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x +ℚ y)
+  is-positive-add-ℚ {x} {y} P Q =
+    is-positive-rational-fraction-ℤ
+      ( is-positive-add-fraction-ℤ
+        { fraction-ℚ x}
+        { fraction-ℚ y}
+        ( P)
+        ( Q))
 ```
 
 ### The positive sum of two positive rational numbers
@@ -231,15 +237,16 @@ _+ℚ⁺_ = add-ℚ⁺
 ### The product of two positive rational numbers is positive
 
 ```agda
-is-positive-mul-ℚ :
-  {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x *ℚ y)
-is-positive-mul-ℚ {x} {y} P Q =
-  is-positive-rational-fraction-ℤ
-    ( is-positive-mul-fraction-ℤ
-      { fraction-ℚ x}
-      { fraction-ℚ y}
-      ( P)
-      ( Q))
+abstract
+  is-positive-mul-ℚ :
+    {x y : ℚ} → is-positive-ℚ x → is-positive-ℚ y → is-positive-ℚ (x *ℚ y)
+  is-positive-mul-ℚ {x} {y} P Q =
+    is-positive-rational-fraction-ℤ
+      ( is-positive-mul-fraction-ℤ
+        { fraction-ℚ x}
+        { fraction-ℚ y}
+        ( P)
+        ( Q))
 ```
 
 ### The positive product of two positive rational numbers
