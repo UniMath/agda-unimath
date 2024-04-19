@@ -75,7 +75,7 @@ equiv-tr-refl B = refl
 
 ```agda
 tr-loop :
-  {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (l : a0 ＝ a0) →
-  (tr (λ y → y ＝ y) p l) ＝ ((inv p ∙ l) ∙ p)
-tr-loop refl l = inv right-unit
+  {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (q : a0 ＝ a0) →
+  tr (λ y → y ＝ y) p q ＝ (inv p ∙ q) ∙ p
+tr-loop refl q = inv right-unit
 ```
