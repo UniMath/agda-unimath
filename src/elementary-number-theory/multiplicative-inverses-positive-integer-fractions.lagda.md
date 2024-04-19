@@ -1,7 +1,7 @@
-# Inverse of positive integer fractions
+# Multiplicative inverses of positive integer fractions
 
 ```agda
-module elementary-number-theory.inverse-positive-integer-fractions where
+module elementary-number-theory.multiplicative-inverses-positive-integer-fractions where
 ```
 
 <details><summary>Imports</summary>

@@ -1,18 +1,18 @@
-# Inverse of positive rational numbers
+# Multiplicative inverses of positive rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module elementary-number-theory.inverse-positive-rational-numbers where
+module elementary-number-theory.multiplicative-inverses-positive-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.inverse-positive-integer-fractions
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 

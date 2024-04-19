@@ -1,16 +1,16 @@
-# Inverse of nonzero rational numbers
+# Multiplicative inverses of nonzero rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module elementary-number-theory.inverse-nonzero-rational-numbers where
+module elementary-number-theory.multiplicative-inverses-nonzero-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inverse-positive-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-inverses-positive-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers

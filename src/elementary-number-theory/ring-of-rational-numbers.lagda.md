@@ -13,8 +13,8 @@ open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.group-of-rational-numbers
-open import elementary-number-theory.inverse-nonzero-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-inverses-nonzero-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.rational-numbers
 
