@@ -34,9 +34,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-The type of
-{{#concept "nonzero" Disambiguation="rational number" Agda=nonzero-ℚ}}
-[rational numbers](elementary-number-theory.rational-numbers.md).
+The {{#concept "nonzero" Disambiguation="rational numbers" Agda=nonzero-ℚ}}
+[rational numbers](elementary-number-theory.rational-numbers.md) are the
+rational numbers different from `zero-ℚ`.
+
+They form a nonempty subset of the rational numbers, stable under `neg-ℚ` and
+[`mul-ℚ`](elementary-number-theory.multiplication-rational-numbers.md).
 
 ## Definitions
 
