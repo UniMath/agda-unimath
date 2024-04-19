@@ -43,11 +43,11 @@ In this file we postulate the univalence axiom. Its statement is defined in
 ## Postulates
 
 Rather than postulating a witness of `univalence-axiom` directly, we postulate
-the constituents of a two-sided inverse to `equiv-eq`. The benefits are that we
-end up with a single converse map to `equiv-eq`, rather than a separate section
-and retraction, although they would be homotopic regardless. In addition, this
-will help Agda display goals involving the univalence axiom in a more readable
-way.
+the constituents of a coherent two-sided inverse to `equiv-eq`. The benefits are
+that we end up with a single converse map to `equiv-eq`, rather than a separate
+section and retraction, although they would be homotopic regardless. In
+addition, this formulation helps Agda display goals involving the univalence
+axiom in a more readable way.
 
 ```agda
 module _

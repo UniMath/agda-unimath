@@ -133,11 +133,11 @@ function-extensionality = {l1 l2 : Level} → function-extensionality-Level l1 l
 ```
 
 Rather than postulating a witness of `function-extensionality` directly, we
-postulate the constituents of a two-sided inverse to `htpy-eq`. The benefits are
-that we end up with a single converse map to `htpy-eq`, rather than a separate
-section and retraction, although they would be homotopic regardless. In
-addition, this will help Agda display goals involving function extensionality in
-a more readable way.
+postulate the constituents of a coherent two-sided inverse to `htpy-eq`. The
+benefits are that we end up with a single converse map to `htpy-eq`, rather than
+a separate section and retraction, although they would be homotopic regardless.
+In addition, this formulation helps Agda display goals involving function
+extensionality in a more readable way.
 
 ```agda
 module _
