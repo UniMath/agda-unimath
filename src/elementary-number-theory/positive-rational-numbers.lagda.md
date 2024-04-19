@@ -264,11 +264,12 @@ _*ℚ⁺_ = mul-ℚ⁺
 ### The positive rational numbers are a multiplicative submonoid of the rational numbers
 
 ```agda
-is-submonoid-ℚ⁺ : is-submonoid-subset-Monoid ℚ-mul-Monoid is-positive-prop-ℚ
-pr1 is-submonoid-ℚ⁺ = is-positive-rational-ℚ⁺ one-ℚ⁺
-pr2 is-submonoid-ℚ⁺ = λ x y → is-positive-mul-ℚ {x} {y}
+is-submonoid-ℚ-mul-ℚ⁺ :
+  is-submonoid-subset-Monoid ℚ-mul-Monoid is-positive-prop-ℚ
+pr1 is-submonoid-ℚ-mul-ℚ⁺ = is-positive-rational-ℚ⁺ one-ℚ⁺
+pr2 is-submonoid-ℚ-mul-ℚ⁺ x y = is-positive-mul-ℚ {x} {y}
 
 ℚ⁺-mul-Submonoid : Submonoid lzero ℚ-mul-Monoid
 pr1 ℚ⁺-mul-Submonoid = is-positive-prop-ℚ
-pr2 ℚ⁺-mul-Submonoid = is-submonoid-ℚ⁺
+pr2 ℚ⁺-mul-Submonoid = is-submonoid-ℚ-mul-ℚ⁺
 ```

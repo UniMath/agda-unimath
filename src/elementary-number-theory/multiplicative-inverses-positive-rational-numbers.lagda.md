@@ -48,14 +48,6 @@ module _
       ( is-reduced-fraction-ℚ x)
 ```
 
-### The positive inverse of a positive rational number
-
-```agda
-inv-ℚ⁺ : ℚ⁺ → ℚ⁺
-pr1 (inv-ℚ⁺ (x , P)) = inv-is-positive-ℚ {x} P
-pr2 (inv-ℚ⁺ (x , P)) = is-positive-denominator-ℚ x
-```
-
 ## Properties
 
 ### Positive rational numbers are invertible
@@ -85,33 +77,4 @@ module _
   pr1 is-invertible-is-positive-ℚ = inv-is-positive-ℚ {x} P
   pr1 (pr2 is-invertible-is-positive-ℚ) = right-inverse-law-mul-is-positive-ℚ
   pr2 (pr2 is-invertible-is-positive-ℚ) = left-inverse-law-mul-is-positive-ℚ
-```
-
-### Positive rational numbers are positively invertible
-
-```agda
-module _
-  (x : ℚ⁺)
-  where
-
-  abstract
-    left-inverse-law-mul-ℚ⁺ : (inv-ℚ⁺ x) *ℚ⁺ x ＝ one-ℚ⁺
-    left-inverse-law-mul-ℚ⁺ =
-      eq-ℚ⁺
-        ( left-inverse-law-mul-is-positive-ℚ
-          ( rational-ℚ⁺ x)
-          ( is-positive-rational-ℚ⁺ x))
-
-    right-inverse-law-mul-ℚ⁺ : x *ℚ⁺ (inv-ℚ⁺ x) ＝ one-ℚ⁺
-    right-inverse-law-mul-ℚ⁺ =
-      eq-ℚ⁺
-        ( right-inverse-law-mul-is-positive-ℚ
-          ( rational-ℚ⁺ x)
-          ( is-positive-rational-ℚ⁺ x))
-
-  is-invertible-ℚ⁺ :
-    Σ ℚ⁺ (λ y → (x *ℚ⁺ y ＝ one-ℚ⁺) × (y *ℚ⁺ x ＝ one-ℚ⁺))
-  pr1 is-invertible-ℚ⁺ = inv-ℚ⁺ x
-  pr1 (pr2 is-invertible-ℚ⁺) = right-inverse-law-mul-ℚ⁺
-  pr2 (pr2 is-invertible-ℚ⁺) = left-inverse-law-mul-ℚ⁺
 ```
