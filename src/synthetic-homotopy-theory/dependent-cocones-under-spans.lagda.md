@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.dependent-cocones-under-spans where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
 open import foundation.commuting-squares-of-maps
 open import foundation.constant-type-families
 open import foundation.contractible-types
@@ -650,27 +651,16 @@ module _
       ( L)
   coherence-htpy-cocone-dependent-cocone-coherence-htpy-dependent-cocone-constant-type-family
     d d' K L H x =
-    ( assoc
+    ( left-whisker-concat-coherence-square-identifications
       ( inv
         ( tr-constant-type-family
           ( coherence-square-cocone f g c x)
           ( horizontal-map-dependent-cocone f g c (λ _ → Y) d (f x))))
+      ( ap (tr (λ _ → Y) (coherence-square-cocone f g c x)) (K (f x)))
       ( coherence-square-dependent-cocone f g c (λ _ → Y) d x)
-      ( L (g x))) ∙
-    ( ap
-      ( inv
-        ( tr-constant-type-family
-          ( coherence-square-cocone f g c x)
-          ( horizontal-map-dependent-cocone f g c (λ _ → Y) d (f x))) ∙_)
+      ( coherence-square-dependent-cocone f g c (λ _ → Y) d' x)
+      ( L (g x))
       ( H x)) ∙
-    ( inv
-      ( assoc
-        ( inv
-          ( tr-constant-type-family
-            ( coherence-square-cocone f g c x)
-            ( horizontal-map-dependent-cocone f g c (λ _ → Y) d (f x))))
-        ( ap (tr (λ _ → Y) (coherence-square-cocone f g c x)) (K (f x)))
-        ( coherence-square-dependent-cocone f g c (λ _ → Y) d' x))) ∙
     ( ap
       ( _∙ coherence-square-dependent-cocone f g c (λ _ → Y) d' x)
       ( naturality-inv-tr-constant-type-family
@@ -696,53 +686,46 @@ module _
   where
 
   coherence-htpy-cocone-coherence-htpy-dependent-cocone-constant-type-family :
-    (c'' : cocone f g X)
-    (c c' : cocone f g Y) →
-    ( K : horizontal-map-cocone f g c ~ horizontal-map-cocone f g c')
-    ( L : vertical-map-cocone f g c ~ vertical-map-cocone f g c') →
-    coherence-htpy-dependent-cocone f g c'' (λ _ → Y)
-      ( dependent-cocone-constant-type-family-cocone f g c'' c)
-      ( dependent-cocone-constant-type-family-cocone f g c'' c')
+    (c : cocone f g X)
+    (d d' : cocone f g Y) →
+    ( K : horizontal-map-cocone f g d ~ horizontal-map-cocone f g d')
+    ( L : vertical-map-cocone f g d ~ vertical-map-cocone f g d') →
+    coherence-htpy-dependent-cocone f g c (λ _ → Y)
+      ( dependent-cocone-constant-type-family-cocone f g c d)
+      ( dependent-cocone-constant-type-family-cocone f g c d')
       ( K)
       ( L) →
     statement-coherence-htpy-cocone f g
-      ( c)
-      ( c')
+      ( d)
+      ( d')
       ( K)
       ( L)
   coherence-htpy-cocone-coherence-htpy-dependent-cocone-constant-type-family
-    c'' c c' K L H x =
+    c d d' K L H x =
     is-injective-concat
       ( tr-constant-type-family
-        ( coherence-square-cocone f g c'' x)
-        ( horizontal-map-cocone f g c (f x)))
+        ( coherence-square-cocone f g c x)
+        ( horizontal-map-cocone f g d (f x)))
       ( ( inv
           ( assoc
             ( tr-constant-type-family
-              ( coherence-square-cocone f g c'' x)
-              ( horizontal-map-cocone f g c (f x)))
-            ( coherence-square-cocone f g c x)
+              ( coherence-square-cocone f g c x)
+              ( horizontal-map-cocone f g d (f x)))
+            ( coherence-square-cocone f g d x)
             ( L (g x)))) ∙
         ( H x) ∙
-        ( inv
-          ( assoc
-            ( ap
-              ( tr (λ _ → Y) (coherence-square-cocone f g c'' x))
-              ( K (f x)))
-            ( tr-constant-type-family
-              ( coherence-square-cocone f g c'' x)
-              ( horizontal-map-cocone f g c' (f x)))
-            ( coherence-square-cocone f g c' x))) ∙
-        ( ap
-          ( _∙ coherence-square-cocone f g c' x)
+        ( right-whisker-concat-coherence-square-identifications
+          ( tr-constant-type-family
+            ( coherence-square-cocone f g c x)
+            ( horizontal-map-cocone f g d (f x)))
+          ( ap (tr (λ _ → Y) (coherence-square-cocone f g c x)) (K (f x)))
+          ( K (f x))
+          ( tr-constant-type-family
+            ( coherence-square-cocone f g c x)
+            ( horizontal-map-cocone f g d' (f x)))
           ( inv
             ( naturality-tr-constant-type-family
-              ( coherence-square-cocone f g c'' x)
-              ( K (f x))))) ∙
-        ( assoc
-          ( tr-constant-type-family
-            ( coherence-square-cocone f g c'' x)
-            ( horizontal-map-cocone f g c (f x)))
-          ( K (f x))
-          ( coherence-square-cocone f g c' x)))
+              ( coherence-square-cocone f g c x)
+              ( K (f x))))
+          ( coherence-square-cocone f g d' x)))
 ```
