@@ -39,11 +39,30 @@ that the map `(A ＝ B) → (A ≃ B)` is an
 In this file we postulate the univalence axiom. Its statement is defined in
 [`foundation-core.univalence`](foundation-core.univalence.md).
 
-## Postulate
+## Postulates
+
+Rather than postulating a witness of `univalence-axiom` directly, we postulate
+the constituents of a two-sided inverse to `equiv-eq`. The benefits are that we
+end up with a single converse map to `equiv-eq`, rather than a separate section
+and retraction, although they would be homotopic regardless. In addition, this
+will help Agda display goals involving the univalence axiom in a more readable
+way.
 
 ```agda
-postulate
-  univalence : univalence-axiom
+module _
+  {l : Level} {A B : UU l}
+  where
+
+  postulate
+    eq-equiv : A ≃ B → A ＝ B
+
+    is-section-eq-equiv : is-section equiv-eq eq-equiv
+
+    is-retraction-eq-equiv' : is-retraction equiv-eq eq-equiv
+
+univalence : univalence-axiom
+univalence A B =
+  is-equiv-is-invertible eq-equiv is-section-eq-equiv is-retraction-eq-equiv'
 ```
 
 ## Properties
@@ -57,14 +76,8 @@ module _
   pr1 equiv-univalence = equiv-eq
   pr2 equiv-univalence = univalence A B
 
-  eq-equiv : A ≃ B → A ＝ B
-  eq-equiv = map-inv-is-equiv (univalence A B)
-
   abstract
-    is-section-eq-equiv : is-section equiv-eq eq-equiv
-    is-section-eq-equiv = is-section-map-inv-is-equiv (univalence A B)
-
-    is-retraction-eq-equiv : is-retraction equiv-eq eq-equiv
+    is-retraction-eq-equiv : is-retraction (equiv-eq {A = A} {B}) eq-equiv
     is-retraction-eq-equiv =
       is-retraction-map-inv-is-equiv (univalence A B)
 
@@ -72,8 +85,9 @@ module _
   {l : Level}
   where
 
-  is-equiv-eq-equiv : (A B : UU l) → is-equiv (eq-equiv)
-  is-equiv-eq-equiv A B = is-equiv-map-inv-is-equiv (univalence A B)
+  is-equiv-eq-equiv : (A B : UU l) → is-equiv (eq-equiv {A = A} {B})
+  is-equiv-eq-equiv A B =
+    is-equiv-is-invertible equiv-eq is-retraction-eq-equiv' is-section-eq-equiv
 
   compute-eq-equiv-id-equiv : (A : UU l) → eq-equiv {A = A} id-equiv ＝ refl
   compute-eq-equiv-id-equiv A = is-retraction-eq-equiv refl

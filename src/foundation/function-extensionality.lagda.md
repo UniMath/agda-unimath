@@ -168,9 +168,10 @@ module _
   is-equiv-eq-htpy f g =
     is-equiv-is-invertible htpy-eq is-retraction-eq-htpy' is-section-eq-htpy
 
-  is-retraction-eq-htpy :
-    {f g : (x : A) → B x} → is-retraction (htpy-eq {f = f} {g}) eq-htpy
-  is-retraction-eq-htpy {f} {g} = is-retraction-map-inv-is-equiv (funext f g)
+  abstract
+    is-retraction-eq-htpy :
+      {f g : (x : A) → B x} → is-retraction (htpy-eq {f = f} {g}) eq-htpy
+    is-retraction-eq-htpy {f} {g} = is-retraction-map-inv-is-equiv (funext f g)
 
   eq-htpy-refl-htpy :
     (f : (x : A) → B x) → eq-htpy (refl-htpy {f = f}) ＝ refl
