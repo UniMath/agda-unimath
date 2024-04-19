@@ -248,9 +248,7 @@ abstract
     ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
   pr1 (is-contr-Π {A = A} {B = B} H) x = center (H x)
   pr2 (is-contr-Π {A = A} {B = B} H) f =
-    map-inv-is-equiv
-      ( funext (λ x → center (H x)) f)
-      ( λ x → contraction (H x) (f x))
+    eq-htpy (λ x → contraction (H x) (f x))
 
 abstract
   is-contr-implicit-Π :
