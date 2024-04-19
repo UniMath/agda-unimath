@@ -37,9 +37,9 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The {{#concept "join" Disambiguation="of types" Agda=join Agda=_*_}} of `A` and
-`B` is the [pushout](synthetic-homotopy-theory.pushouts.md) of the
-[span](foundation.spans.md) `A ← A × B → B`,
+The {{#concept "join" Disambiguation="of types" Agda=_*_}} of `A` and `B` is the
+[pushout](synthetic-homotopy-theory.pushouts.md) of the
+[span](foundation.spans.md) `A ← A × B → B`.
 
 ## Definitions
 
@@ -60,13 +60,13 @@ module _
   cocone-join = cocone-pushout pr1 pr2
 
   inl-join : A → A * B
-  inl-join = pr1 cocone-join
+  inl-join = horizontal-map-cocone pr1 pr2 cocone-join
 
   inr-join : B → A * B
-  inr-join = pr1 (pr2 cocone-join)
+  inr-join = vertical-map-cocone pr1 pr2 cocone-join
 
   glue-join : (t : A × B) → inl-join (pr1 t) ＝ inr-join (pr2 t)
-  glue-join = pr2 (pr2 cocone-join)
+  glue-join = coherence-square-cocone pr1 pr2 cocone-join
 ```
 
 ### The universal property of the join
@@ -77,7 +77,7 @@ module _
   where
 
   up-join :
-    {l : Level} → universal-property-pushout l pr1 pr2 (cocone-join {A = A} {B})
+    {l : Level} → universal-property-pushout l {A = A} {B} pr1 pr2 cocone-join
   up-join = up-pushout pr1 pr2
 
   equiv-up-join :
@@ -102,7 +102,7 @@ module _
   compute-inl-dependent-cogap-join = compute-inl-dependent-cogap pr1 pr2 c
 
   compute-inr-dependent-cogap-join :
-    ( dependent-cogap-join ∘ inr-join) ~
+    dependent-cogap-join ∘ inr-join ~
     vertical-map-dependent-cocone pr1 pr2 cocone-join P c
   compute-inr-dependent-cogap-join = compute-inr-dependent-cogap pr1 pr2 c
 

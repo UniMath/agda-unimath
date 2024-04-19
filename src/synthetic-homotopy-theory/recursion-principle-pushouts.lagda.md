@@ -21,8 +21,8 @@ open import synthetic-homotopy-theory.dependent-cocones-under-spans
 ## Idea
 
 The {{#concept "recursion principle of pushouts"}} asserts that for every type
-`Y` and [cocone](synthetic-homotopy-theory.dependent-cocones-under-spans.md) on
-a type `X`, the cocone map
+`Y` and [cocone](synthetic-homotopy-theory.cocones-under-spans.md) on a type
+`X`, the cocone map
 
 ```text
   cocone-map f g c Y : (X → Y) → cocone f g Y
@@ -64,27 +64,27 @@ module _
       ( h)
       ( pr2 rec-c h)
 
-  left-compute-rec-recursion-principle-pushout :
+  compute-horizontal-map-rec-recursion-principle-pushout :
     ( h : cocone f g Y) (a : A) →
     rec-recursion-principle-pushout h (horizontal-map-cocone f g c a) ＝
     horizontal-map-cocone f g h a
-  left-compute-rec-recursion-principle-pushout h =
+  compute-horizontal-map-rec-recursion-principle-pushout h =
     pr1 (compute-rec-recursion-principle-pushout h)
 
-  right-compute-rec-recursion-principle-pushout :
+  compute-vertical-map-rec-recursion-principle-pushout :
     ( h : cocone f g Y) (b : B) →
     rec-recursion-principle-pushout h (vertical-map-cocone f g c b) ＝
     vertical-map-cocone f g h b
-  right-compute-rec-recursion-principle-pushout h =
+  compute-vertical-map-rec-recursion-principle-pushout h =
     pr1 (pr2 (compute-rec-recursion-principle-pushout h))
 
-  path-compute-rec-recursion-principle-pushout :
+  compute-glue-rec-recursion-principle-pushout :
     (h : cocone f g Y) →
     statement-coherence-htpy-cocone f g
       ( cocone-map f g c (rec-recursion-principle-pushout h))
       ( h)
-      ( left-compute-rec-recursion-principle-pushout h)
-      ( right-compute-rec-recursion-principle-pushout h)
-  path-compute-rec-recursion-principle-pushout h =
+      ( compute-horizontal-map-rec-recursion-principle-pushout h)
+      ( compute-vertical-map-rec-recursion-principle-pushout h)
+  compute-glue-rec-recursion-principle-pushout h =
     pr2 (pr2 (compute-rec-recursion-principle-pushout h))
 ```

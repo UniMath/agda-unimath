@@ -144,7 +144,8 @@ module _
           ( P)
           ( dependent-cocone-map f g c P h))
         ( h)
-        ( pr2 (ind-c P) (dependent-cocone-map f g c P h)))
+        ( eq-compute-ind-induction-principle-pushout f g c ind-c P
+          ( dependent-cocone-map f g c P h)))
 
   dependent-universal-property-pushout-induction-principle-pushout :
     ({l : Level} → induction-principle-pushout l f g c) →
@@ -152,7 +153,7 @@ module _
   dependent-universal-property-pushout-induction-principle-pushout ind-c P =
     is-equiv-is-invertible
       ( ind-induction-principle-pushout f g c ind-c P)
-      ( pr2 (ind-c P))
+      ( eq-compute-ind-induction-principle-pushout f g c ind-c P)
       ( is-retraction-ind-induction-principle-pushout ind-c P)
 ```
 

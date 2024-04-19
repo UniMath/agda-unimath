@@ -17,8 +17,8 @@ open import foundation-core.identity-types
 ## Idea
 
 Agda's rewriting functionality allows us to add new strict equalities to our
-type theory. Given an equality `β : x ＝ y`, then adding a rewrite rule for `β`
-with
+type theory. Given an [identification](foundation-core.identity-types.md)
+`β : x ＝ y`, then adding a rewrite rule for `β` with
 
 ```text
 {-# REWRITE β #-}

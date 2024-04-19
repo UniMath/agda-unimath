@@ -17,7 +17,7 @@ open import foundation-core.identity-types
 ## Idea
 
 Agda's builtin primitive `primEraseEquality` is a special construct on
-[identifications](foundation-core.identity-types.md), that, for every
+[identifications](foundation-core.identity-types.md) that for every
 identification `x ＝ y` gives an identification `x ＝ y` with the following
 reduction behaviour:
 

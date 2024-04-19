@@ -136,20 +136,20 @@ module _
       horizontal-map-cocone f g c ~
       horizontal-map-cocone f g c'
     horizontal-htpy-eq-cocone =
-      pr1 (htpy-eq-cocone c c' p)
+      horizontal-htpy-cocone c c' (htpy-eq-cocone c c' p)
 
     vertical-htpy-eq-cocone :
       vertical-map-cocone f g c ~
       vertical-map-cocone f g c'
     vertical-htpy-eq-cocone =
-      pr1 (pr2 (htpy-eq-cocone c c' p))
+      vertical-htpy-cocone c c' (htpy-eq-cocone c c' p)
 
     coherence-square-htpy-eq-cocone :
       statement-coherence-htpy-cocone c c'
         ( horizontal-htpy-eq-cocone)
         ( vertical-htpy-eq-cocone)
     coherence-square-htpy-eq-cocone =
-      pr2 (pr2 (htpy-eq-cocone c c' p))
+      coherence-htpy-cocone c c' (htpy-eq-cocone c c' p)
 
   is-torsorial-htpy-cocone :
     (c : cocone f g X) → is-torsorial (htpy-cocone c)

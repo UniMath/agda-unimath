@@ -128,6 +128,14 @@ pr2 (pr2 (cocone-pushout f g)) = glue-pushout f g
 
 ### The dependent cogap map
 
+We postulate the constituents of a section of
+`dependent-cocone-map f g (cocone-pushout f g)` up to homotopy of dependent
+cocones. This is, assuming
+[function extensionality](foundation.function-extensionality.md), precisely the
+data of the induction principle of pushouts. We write out each component
+separately to accomodate
+[optional rewrite rules for the standard pushouts](synthetic-homotopy-theory.rewriting-pushouts.md).
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -238,11 +246,15 @@ module _
   equiv-dup-pushout :
     (P : pushout f g → UU l) →
     ((x : pushout f g) → P x) ≃ dependent-cocone f g (cocone-pushout f g) P
-  equiv-dup-pushout P =
-    ( dependent-cocone-map f g (cocone-pushout f g) P , dup-pushout P)
+  pr1 (equiv-dup-pushout P) = dependent-cocone-map f g (cocone-pushout f g) P
+  pr2 (equiv-dup-pushout P) = dup-pushout P
 ```
 
 ### The cogap map
+
+We define `cogap` and its computation rules in terms of `dependent-cogap` to
+ensure the proper computational behaviour when in the presence of strict
+computation laws on the point constructors of the standard pushouts.
 
 ```agda
 module _
@@ -254,19 +266,14 @@ module _
   cogap =
     dependent-cogap f g ∘
     dependent-cocone-constant-type-family-cocone f g (cocone-pushout f g)
-```
 
-We write out the section and retraction homotopy in full detail to ensure that
-the inverse of `cocone-map` computes to `cogap` judgmentally.
-
-```agda
   is-section-cogap : is-section (cocone-map f g (cocone-pushout f g)) cogap
   is-section-cogap =
     ( ( triangle-dependent-cocone-map-constant-type-family' f g
         ( cocone-pushout f g)) ·r
       ( cogap)) ∙h
     ( ( cocone-dependent-cocone-constant-type-family f g
-      ( cocone-pushout f g)) ·l
+        ( cocone-pushout f g)) ·l
       ( is-section-dependent-cogap f g) ·r
       ( dependent-cocone-constant-type-family-cocone f g
         ( cocone-pushout f g))) ∙h
