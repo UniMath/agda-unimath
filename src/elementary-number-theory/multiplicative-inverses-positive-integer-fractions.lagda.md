@@ -24,8 +24,11 @@ open import foundation.transport-along-identifications
 
 ## Idea
 
-[Positive integer fractions](elementary-number-theory.positive-integer-fractions.md)
-have a multiplicative inverse up to the canonical similarity relation on
+The integer fraction obtained by swapping the numerator and the denominator of a
+[positive integer fraction](elementary-number-theory.positive-integer-fractions.md)
+is a
+[multiplicative](elementary-number-theory.multiplication-integer-fractions.md)
+inverse of the original fraction up to the canonical similarity relation on
 [integer fractions](elementary-number-theory.integer-fractions.md).
 
 ## Definitions

@@ -17,6 +17,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.negative-integers
 open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-and-negative-integers
@@ -37,6 +38,8 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import group-theory.submonoids
 ```
 
 </details>
@@ -259,17 +262,14 @@ infixl 40 _*ℚ⁺_
 _*ℚ⁺_ = mul-ℚ⁺
 ```
 
-### Unit laws for multiplication of positive rational numbers
+### The positive rational numbers are a multiplicative submonoid of the rational numbers
 
 ```agda
-module _
-  (x : ℚ⁺)
-  where
+is-submonoid-ℚ⁺ : is-submonoid-subset-Monoid ℚ-mul-Monoid is-positive-prop-ℚ
+pr1 is-submonoid-ℚ⁺ = is-positive-rational-ℚ⁺ one-ℚ⁺
+pr2 is-submonoid-ℚ⁺ = λ x y → is-positive-mul-ℚ {x} {y}
 
-  abstract
-    left-unit-law-mul-ℚ⁺ : one-ℚ⁺ *ℚ⁺ x ＝ x
-    left-unit-law-mul-ℚ⁺ = eq-ℚ⁺ (left-unit-law-mul-ℚ (rational-ℚ⁺ x))
-
-    right-unit-law-mul-ℚ⁺ : x *ℚ⁺ one-ℚ⁺ ＝ x
-    right-unit-law-mul-ℚ⁺ = eq-ℚ⁺ (right-unit-law-mul-ℚ (rational-ℚ⁺ x))
+ℚ⁺-mul-Submonoid : Submonoid lzero ℚ-mul-Monoid
+pr1 ℚ⁺-mul-Submonoid = is-positive-prop-ℚ
+pr2 ℚ⁺-mul-Submonoid = is-submonoid-ℚ⁺
 ```

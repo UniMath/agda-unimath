@@ -27,7 +27,8 @@ open import foundation.identity-types
 ## Idea
 
 [Positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-have a multiplicative inverse.
+are [invertible elements](group-theory.invertible-elements-monoids.md) of the
+[multiplicative monoid of rational numbers](elementary-number-theory.multiplicative-monoid-of-rational-numbers.md).
 
 ## Definitions
 

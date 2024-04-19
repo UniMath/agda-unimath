@@ -12,6 +12,7 @@ open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
 open import elementary-number-theory.addition-positive-and-negative-integers public
 open import elementary-number-theory.addition-rational-numbers public
+open import elementary-number-theory.additive-group-of-rational-numbers public
 open import elementary-number-theory.arithmetic-functions public
 open import elementary-number-theory.based-induction-natural-numbers public
 open import elementary-number-theory.based-strong-induction-natural-numbers public
@@ -61,7 +62,6 @@ open import elementary-number-theory.goldbach-conjecture public
 open import elementary-number-theory.greatest-common-divisor-integers public
 open import elementary-number-theory.greatest-common-divisor-natural-numbers public
 open import elementary-number-theory.group-of-integers public
-open import elementary-number-theory.group-of-rational-numbers public
 open import elementary-number-theory.half-integers public
 open import elementary-number-theory.hardy-ramanujan-number public
 open import elementary-number-theory.inequality-integer-fractions public
@@ -98,6 +98,7 @@ open import elementary-number-theory.multiplicative-inverses-nonzero-rational-nu
 open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions public
 open import elementary-number-theory.multiplicative-inverses-positive-rational-numbers public
 open import elementary-number-theory.multiplicative-monoid-of-natural-numbers public
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers public
 open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-standard-cyclic-rings public
 open import elementary-number-theory.multiset-coefficients public

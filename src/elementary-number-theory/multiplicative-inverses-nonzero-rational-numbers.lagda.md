@@ -11,6 +11,7 @@ module elementary-number-theory.multiplicative-inverses-nonzero-rational-numbers
 ```agda
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-inverses-positive-rational-numbers
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -23,6 +24,8 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
+
+open import group-theory.invertible-elements-monoids
 ```
 
 </details>
@@ -30,7 +33,8 @@ open import foundation.transport-along-identifications
 ## Idea
 
 [Nonzero rational numbers](elementary-number-theory.nonzero-rational-numbers.md)
-have a multiplicative inverse.
+are [invertible elements](group-theory.invertible-elements-monoids.md) of the
+[multiplicative monoid of rational numbers](elementary-number-theory.multiplicative-monoid-of-rational-numbers.md).
 
 ## Lemma
 
@@ -42,8 +46,7 @@ module _
   where
 
   is-invertible-is-nonzero-ℚ :
-    is-nonzero-ℚ x →
-    Σ ℚ (λ y → (x *ℚ y ＝ one-ℚ) × (y *ℚ x ＝ one-ℚ))
+    is-nonzero-ℚ x → is-invertible-element-Monoid ℚ-mul-Monoid x
   is-invertible-is-nonzero-ℚ H =
     rec-coproduct
       ( ( map-Σ _
@@ -57,8 +60,7 @@ module _
       ( decide-is-negative-is-positive-is-nonzero-ℚ H)
 
   is-nonzero-is-invertible-ℚ :
-    Σ ℚ (λ y → (x *ℚ y ＝ one-ℚ) × (y *ℚ x ＝ one-ℚ)) →
-    is-nonzero-ℚ x
+    is-invertible-element-Monoid ℚ-mul-Monoid x → is-nonzero-ℚ x
   is-nonzero-is-invertible-ℚ (y , L , _) =
     is-nonzero-left-factor-mul-ℚ x y (inv-tr is-nonzero-ℚ L is-nonzero-one-ℚ)
 ```

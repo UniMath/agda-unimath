@@ -12,9 +12,10 @@ module elementary-number-theory.ring-of-rational-numbers where
 open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-rational-numbers
-open import elementary-number-theory.group-of-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
 open import elementary-number-theory.multiplicative-inverses-nonzero-rational-numbers
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.rational-numbers
 
@@ -35,7 +36,7 @@ open import ring-theory.rings
 ## Idea
 
 The
-[commutative group of rational numbers](elementary-number-theory.group-of-rational-numbers.md)
+[additive group of rational numbers](elementary-number-theory.additive-group-of-rational-numbers.md)
 equipped with
 [multiplication](elementary-number-theory.multiplication-rational-numbers.md) is
 a commutative [division ring](ring-theory.division-rings.md).
@@ -45,28 +46,19 @@ a commutative [division ring](ring-theory.division-rings.md).
 ### The compatible multiplicative structure on the abelian group of rational numbers
 
 ```agda
-has-associative-mul-ℚ : has-associative-mul ℚ
-pr1 has-associative-mul-ℚ = mul-ℚ
-pr2 has-associative-mul-ℚ = associative-mul-ℚ
-
-is-unital-mul-ℚ : is-unital mul-ℚ
-pr1 is-unital-mul-ℚ = one-ℚ
-pr1 (pr2 is-unital-mul-ℚ) = left-unit-law-mul-ℚ
-pr2 (pr2 is-unital-mul-ℚ) = right-unit-law-mul-ℚ
-
-has-mul-ℚ-Ab : has-mul-Ab ℚ-Ab
-pr1 has-mul-ℚ-Ab = has-associative-mul-ℚ
-pr1 (pr2 has-mul-ℚ-Ab) = is-unital-mul-ℚ
-pr1 (pr2 (pr2 has-mul-ℚ-Ab)) = left-distributive-mul-add-ℚ
-pr2 (pr2 (pr2 has-mul-ℚ-Ab)) = right-distributive-mul-add-ℚ
+has-mul-ℚ-add-Ab : has-mul-Ab ℚ-add-Ab
+pr1 has-mul-ℚ-add-Ab = has-associative-mul-Semigroup ℚ-mul-Semigroup
+pr1 (pr2 has-mul-ℚ-add-Ab) = is-unital-mul-ℚ
+pr1 (pr2 (pr2 has-mul-ℚ-add-Ab)) = left-distributive-mul-add-ℚ
+pr2 (pr2 (pr2 has-mul-ℚ-add-Ab)) = right-distributive-mul-add-ℚ
 ```
 
 ### The ring of rational numbers
 
 ```agda
 ℚ-Ring : Ring lzero
-pr1 ℚ-Ring = ℚ-Ab
-pr2 ℚ-Ring = has-mul-ℚ-Ab
+pr1 ℚ-Ring = ℚ-add-Ab
+pr2 ℚ-Ring = has-mul-ℚ-add-Ab
 ```
 
 ## Properties
