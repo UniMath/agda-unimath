@@ -91,6 +91,9 @@ module _
       ( map-cocone-sequential-diagram (succ-ℕ n))
       ( map-sequential-diagram A n)
   coherence-cocone-sequential-diagram = pr2 c
+
+  first-map-cocone-sequential-diagram : family-sequential-diagram A 0 → X
+  first-map-cocone-sequential-diagram = map-cocone-sequential-diagram 0
 ```
 
 ### Homotopies of cocones under a sequential diagram

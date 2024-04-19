@@ -22,8 +22,6 @@ open import foundation.universal-property-sequential-limits
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-homotopies
-open import foundation-core.contractible-types
-open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -164,16 +162,23 @@ module _
   {l : Level} (A : inverse-sequential-diagram l)
   where
 
+  coherence-Eq-standard-sequential-limit :
+    (s t : standard-sequential-limit A)
+    (H :
+      sequence-standard-sequential-limit A s ~
+      sequence-standard-sequential-limit A t) → UU l
+  coherence-Eq-standard-sequential-limit s t H =
+    coherence-square-homotopies
+      ( H)
+      ( coherence-standard-sequential-limit A s)
+      ( coherence-standard-sequential-limit A t)
+      ( λ n → ap (map-inverse-sequential-diagram A n) (H (succ-ℕ n)))
+
   Eq-standard-sequential-limit : (s t : standard-sequential-limit A) → UU l
   Eq-standard-sequential-limit s t =
     Σ ( sequence-standard-sequential-limit A s ~
         sequence-standard-sequential-limit A t)
-      ( λ H →
-        coherence-square-homotopies
-          ( H)
-          ( coherence-standard-sequential-limit A s)
-          ( coherence-standard-sequential-limit A t)
-          ( λ n → ap (map-inverse-sequential-diagram A n) (H (succ-ℕ n))))
+      ( coherence-Eq-standard-sequential-limit s t)
 
   refl-Eq-standard-sequential-limit :
     (s : standard-sequential-limit A) → Eq-standard-sequential-limit s s

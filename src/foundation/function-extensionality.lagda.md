@@ -13,7 +13,6 @@ open import foundation.dependent-pair-types
 open import foundation.evaluation-functions
 open import foundation.implicit-function-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.function-types

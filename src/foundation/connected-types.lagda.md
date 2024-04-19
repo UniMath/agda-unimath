@@ -15,7 +15,6 @@ open import foundation.functoriality-truncation
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.retracts-of-types
 open import foundation.truncations
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -26,6 +25,7 @@ open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.precomposition-functions
+open import foundation-core.retracts-of-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
