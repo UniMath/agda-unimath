@@ -15,7 +15,6 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.composition-algebra
 open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels

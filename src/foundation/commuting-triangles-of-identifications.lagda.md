@@ -9,16 +9,13 @@ module foundation.commuting-triangles-of-identifications where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
-open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.universe-levels
 open import foundation.whiskering-identifications-concatenation
 
+open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.equivalences
-open import foundation-core.function-types
-open import foundation-core.homotopies
 ```
 
 </details>
