@@ -46,10 +46,9 @@ open import group-theory.submonoids
 
 ## Idea
 
-An [rational number](elementary-number-theory.rational-numbers.md) `x` is said
-to be
-{{#concept "positive" Disambiguation="rational number" Agda=is-positive-ℚ}} if
-its underlying fraction is
+A [rational number](elementary-number-theory.rational-numbers.md) `x` is said to
+be {{#concept "positive" Disambiguation="rational number" Agda=is-positive-ℚ}}
+if its underlying fraction is
 [positive](elementary-number-theory.positive-integer-fractions.md).
 
 ## Definitions
