@@ -162,4 +162,4 @@ abstract
 ## See also
 
 - The additive group structure on the rational numbers is defined in
-  [`elementary-number-theory.group-of-rational-numbers`](elementary-number-theory.group-of-rational-numbers.md).
+  [`elementary-number-theory.additive-group-of-rational-numbers`](elementary-number-theory.additive-group-of-rational-numbers.md).
