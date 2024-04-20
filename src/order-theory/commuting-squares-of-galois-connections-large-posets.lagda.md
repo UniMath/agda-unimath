@@ -33,7 +33,7 @@ Consider a diagram of
      | |        | |
      ∨ |   LJ   ∨ |
         ------->  |
-      Q     ⊥    ∨.
+      Q     ⊥    V.
         <-------
            UJ
 ```
