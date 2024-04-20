@@ -22,7 +22,7 @@ every map `f` in `A → B`.
 
 ```text
       Im f
-      ^  \
+      ∧  \
      /    \
     /      ∨
   A ------> B

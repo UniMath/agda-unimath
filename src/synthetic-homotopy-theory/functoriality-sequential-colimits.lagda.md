@@ -119,14 +119,14 @@ This homotopy of cocones provides
 
 ```text
           Aₙ₊₁
-         ^ | \
+         ∧ | \
        /   |   \
      /     |fₙ₊₁ ∨
     Aₙ ---------> X
     |      |      |
     |      ∨      |
  fₙ |     Bₙ₊₁    | g
-    |    ^   \    |
+    |    ∧   \    |
     |  /       \  |
     ∨/           ∨∨
     Bₙ ---------> Y ,

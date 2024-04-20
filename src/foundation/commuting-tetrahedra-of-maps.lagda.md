@@ -23,7 +23,7 @@ is a commuting diagram of the form
 
 ```text
   A ----------> B
-  |  \       ^  |
+  |  \       ∧  |
   |    \   /    |
   |      /      |
   |    /   \    |

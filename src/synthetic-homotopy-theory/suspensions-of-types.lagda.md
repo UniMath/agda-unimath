@@ -546,7 +546,7 @@ So for any `(k+1)`-type `Y`, we have the commutative diagram
 ```text
                  Δ
      Y ---------------------->  (suspension X → Y)
-     ^                                  |
+     ∧                                  |
  pr1 | ≃                              ≃ | ev-suspension
      |                      ≃           ∨
   Σ (y y' : Y) , y ＝ y' <----- suspension-structure Y

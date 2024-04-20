@@ -69,7 +69,7 @@ commuting square
 ```text
                     ap (postcomp-Π A f)
        (g ＝ h) -------------------------> (f ∘ g ＝ f ∘ h)
-          ^                                       ^
+          ∧                                       ∧
   eq-htpy |                                       | eq-htpy
           |                                       |
        (g ~ h) --------------------------> (f ∘ g ~ f ∘ h).

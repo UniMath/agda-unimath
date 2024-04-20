@@ -37,7 +37,7 @@ such that the composition `i ∘ g` is `f`.
 
 ```text
            A
-          ^|
+          ∧|
         /  i
       g    |
     /      ∨
@@ -78,7 +78,7 @@ module _
 
 ```text
            A
-          ^|
+          ∧|
         /  i
       g    |
     /      ∨
@@ -126,7 +126,7 @@ module _
 
 ```text
            A
-          ^|
+          ∧|
         /  i
       g    |
     /      ∨
@@ -147,7 +147,7 @@ module _
 
 ```text
                     A
-                   ^|
+                   ∧|
                  /  i
                g    |
              /      ∨

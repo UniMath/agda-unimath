@@ -57,14 +57,14 @@ We may also arrange the maps into a more vertical shape, like so:
 
 ```text
           B
-      h  ^| \  g
+      h  ∧| \  g
        /  |   \
      /  f | ⇑   ∨
     A ---------> C
     |     | hB   |
     | ⇗   ∨   ⇗  |
  hA |     B'     | hC
-    | h' ^  \ g' |
+    | h' ∧  \ g' |
     |  /  ⇑   \  |
     ∨/          ∨∨
     A' --------> C' .

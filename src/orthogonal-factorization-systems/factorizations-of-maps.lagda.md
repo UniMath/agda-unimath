@@ -32,7 +32,7 @@ A **factorization** of a map `f : A → B` is a pair of maps `g : X → B` and
 
 ```text
        X
-      ^ \
+      ∧ \
    h /   \ g
     /     ∨
   A -----> B

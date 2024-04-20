@@ -198,14 +198,14 @@ The basic set-up is that, given a commuting prism of maps
 
 ```text
           B
-      h  ^| \  g
+      h  ∧| \  g
        /  |   \
      /  f | ⇑   ∨
     A ---------> C
     |     | hB   |
     | ⇗   ∨   ⇗  |
  hA |     B'     | hC
-    | h' ^  \ g' |
+    | h' ∧  \ g' |
     |  /  ⇑   \  |
     ∨/          ∨∨
     A' --------> C'
@@ -217,7 +217,7 @@ we have commuting prisms of
 
 ```text
                     (B' → S)
-         (- ∘ g') ^     |     \ (- ∘ h')
+         (- ∘ g') ∧     |     \ (- ∘ h')
                 /       |       \
               / (- ∘ f')| ⇑       ∨
        (C' → S) ---------------> (A' → S)
@@ -225,7 +225,7 @@ we have commuting prisms of
            |            | (- ∘ hB)   |
            |     ⇙      ∨      ⇙     |
   (- ∘ hC) |         (B → S)         | (- ∘ hA)
-           |  (- ∘ g) ^   \ (- ∘ h)  |
+           |  (- ∘ g) ∧   \ (- ∘ h)  |
            |       /    ⇑    \       |
            ∨    /               ∨    ∨
         (C → S) ----------------> (A → S).
@@ -424,14 +424,14 @@ Given a commuting prism of maps
 
 ```text
           B
-      h  ^| \  g
+      h  ∧| \  g
        /  |   \
      /  f | ⇑   ∨
     A ---------> C
     |     | hB   |
     | ⇗   ∨   ⇗  |
  hA |     B'     | hC
-    | h' ^  \ g' |
+    | h' ∧  \ g' |
     |  /  ⇑   \  |
     ∨/          ∨∨
     A' --------> C'
@@ -443,7 +443,7 @@ we have commuting prisms of
 
 ```text
                      (S → B)
-          (h ∘ -) ^     |     \ (g ∘ -)
+          (h ∘ -) ∧     |     \ (g ∘ -)
                 /       |       \
               /  (f ∘ -)| ⇑       ∨
         (S → A) ----------------> (S → C)
@@ -451,7 +451,7 @@ we have commuting prisms of
            |            | (hB ∘ -)   |
            |     ⇗      ∨      ⇗     |
   (hA ∘ -) |         (S → B')        | (hC ∘ -)
-           | (h' ∘ -) ^   \ (g' ∘ -) |
+           | (h' ∘ -) ∧   \ (g' ∘ -) |
            |       /    ⇑    \       |
            ∨    /               ∨    ∨
         (S → A') ---------------> (S → C').

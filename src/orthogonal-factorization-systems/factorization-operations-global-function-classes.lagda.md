@@ -27,7 +27,7 @@ in `L`, and the right map is in `R`.
 
 ```text
       Im f
-      ^  \
+      ∧  \
  L ∋ /    \ ∈ R
     /      ∨
   A ------> B
