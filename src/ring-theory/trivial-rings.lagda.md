@@ -8,14 +8,17 @@ module ring-theory.trivial-rings where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
 
@@ -70,4 +73,20 @@ pr2 (is-contr-is-trivial-Ring R p) x =
         by ap-binary (mul-Ring R) p refl
       ＝ x
         by left-unit-law-mul-Ring R x
+```
+
+### Invertible elements of nontrivial rings are different from zero
+
+```agda
+module _
+  {l : Level} (R : Ring l) (H : is-nontrivial-Ring R) (x : type-Ring R)
+  where
+
+  is-nonzero-is-invertible-element-nontrivial-Ring :
+    is-invertible-element-Ring R x → zero-Ring R ≠ x
+  is-nonzero-is-invertible-element-nontrivial-Ring (y , P , _) K =
+    H
+      ( ( inv (left-zero-law-mul-Ring R y)) ∙
+        ( ap (mul-Ring' R y) K) ∙
+        ( P))
 ```
