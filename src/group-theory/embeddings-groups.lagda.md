@@ -52,7 +52,7 @@ module _
 
 ```agda
 emb-Group-Slice :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (G : Group l1) → UU (lsuc l ⊔ l1)
 emb-Group-Slice l G = Σ ( Group l) (λ H → emb-Group H G)
 
 emb-group-slice-Subgroup :

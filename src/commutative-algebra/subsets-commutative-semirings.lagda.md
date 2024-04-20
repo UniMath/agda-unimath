@@ -30,7 +30,7 @@ A **subset** of a commutative semiring is a subtype of its underlying type.
 
 ```agda
 subset-Commutative-Semiring :
-  (l : Level) {l1 : Level} (A : Commutative-Semiring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (A : Commutative-Semiring l1) → UU (lsuc l ⊔ l1)
 subset-Commutative-Semiring l A =
   subset-Semiring l (semiring-Commutative-Semiring A)
 

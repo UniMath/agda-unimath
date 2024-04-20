@@ -57,7 +57,7 @@ module _
 
 ```agda
 subset-Group :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (G : Group l1) → UU (lsuc l ⊔ l1)
 subset-Group l G = type-Large-Locale (powerset-large-locale-Group G) l
 
 is-set-subset-Group :
