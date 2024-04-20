@@ -810,7 +810,7 @@ module _
 Given a commutative diagram where `i`, `j` and `k` are equivalences,
 
 ```text
-            g'
+           g'
        S' ---> B'
       / \       \
   f' /   \ k     \ j
