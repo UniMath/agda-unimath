@@ -24,6 +24,7 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.groups
+open import group-theory.invertible-elements-monoids
 open import group-theory.monoids
 open import group-theory.submonoids
 ```
@@ -70,8 +71,7 @@ module _
     right-inverse-law-mul-is-positive-ℚ =
       (commutative-mul-ℚ x _) ∙ (left-inverse-law-mul-is-positive-ℚ)
 
-  is-invertible-is-positive-ℚ :
-    Σ ℚ (λ y → (x *ℚ y ＝ one-ℚ) × (y *ℚ x ＝ one-ℚ))
+  is-invertible-is-positive-ℚ : is-invertible-element-Monoid ℚ-mul-Monoid x
   pr1 is-invertible-is-positive-ℚ = inv-is-positive-ℚ
   pr1 (pr2 is-invertible-is-positive-ℚ) = right-inverse-law-mul-is-positive-ℚ
   pr2 (pr2 is-invertible-is-positive-ℚ) = left-inverse-law-mul-is-positive-ℚ
@@ -92,7 +92,7 @@ pr2 (inv-ℚ⁺ (x , P)) = is-positive-denominator-ℚ x
 ```agda
 ℚ⁺-mul-Group : Group lzero
 pr1 ℚ⁺-mul-Group = semigroup-Submonoid ℚ-mul-Monoid ℚ⁺-mul-Submonoid
-pr1 (pr2 ℚ⁺-mul-Group) = is-unital-Monoid (monoid-Submonoid _ _)
+pr1 (pr2 ℚ⁺-mul-Group) = is-unital-Monoid ℚ⁺-mul-Monoid
 pr1 (pr2 (pr2 ℚ⁺-mul-Group)) = inv-ℚ⁺
 pr1 (pr2 (pr2 (pr2 ℚ⁺-mul-Group))) x =
   eq-ℚ⁺
