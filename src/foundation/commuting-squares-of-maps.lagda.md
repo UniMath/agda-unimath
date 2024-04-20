@@ -603,32 +603,27 @@ homotopy that is homotopic to first transposing the squares and then composing
 them.
 
 ```text
-      tl       tr                tr ∘ tl
-  A -----> B -----> C         A --------> C
-  |        |        |         |           |
-l |       m|        | r  ↦   l|          r|
-  |   H    |   K    |         |   H | K   |
-  ∨        ∨        ∨         ∨           ∨
-  X -----> Y -----> Z         X --------> Z
-      bl       br                br ∘ bl
+          tl       tr                tr ∘ tl
+      A -----> B -----> C         A --------> C
+      |        |        |         |           |
+    l |   H  m |   K    | r  ↦  l |   H | K   | r
+      ∨        ∨        ∨         ∨           ∨
+      X -----> Y -----> Z         X --------> Z
+          bl       br                br ∘ bl
 
-         -                          -
-         |                          |
-         ∨                          ∨
+               ↧                        ↧
 
-           -∘r
-    W^Z ------> W^C
-     |           |
--∘br |    W^K    | -∘tr           W^(H | K)
-     |           |
-     ∨     -∘m   ∨                   ~
-    W^Y ------> W^B   |->
-     |           |                  W^K
--∘bl |    W^H    | -∘tl             ---
-     |           |                  W^H
-     ∨           ∨
-    W^X ------> W^A
-          -∘l
+             - ∘ r
+        W^Z ------> W^C
+         |           |
+  - ∘ br |    W^K    | - ∘ tr        W^(H | K)
+         ∨   - ∘ m   ∨                  ~
+        W^Y ------> W^B       ↦
+         |           |                 W^K
+  - ∘ bl |    W^H    | - ∘ tl          ---
+         ∨           ∨                 W^H
+        W^X ------> W^A
+             - ∘ l
 ```
 
 ```agda
