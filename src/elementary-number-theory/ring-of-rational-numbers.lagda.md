@@ -32,6 +32,7 @@ open import foundation.universe-levels
 open import group-theory.semigroups
 
 open import ring-theory.division-rings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
 
@@ -82,12 +83,7 @@ is-division-Ring-ℚ-Ring : is-division-Ring ℚ-Ring
 pr1 is-division-Ring-ℚ-Ring = is-nonzero-one-ℚ ∘ inv
 pr2 is-division-Ring-ℚ-Ring x H =
   rec-coproduct
-    ( ( map-Σ _
-        ( neg-ℚ)
-        ( λ y →
-          map-product
-            ( swap-neg-mul-ℚ x y ∙_)
-            ( inv (swap-neg-mul-ℚ y x) ∙_))) ∘
+    ( ( is-invertible-element-neg-Ring' ℚ-Ring x) ∘
       ( is-invertible-is-positive-ℚ (neg-ℚ x)))
     ( is-invertible-is-positive-ℚ x)
     ( decide-is-negative-is-positive-is-nonzero-ℚ (H ∘ inv))
