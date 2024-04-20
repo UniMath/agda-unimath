@@ -61,6 +61,11 @@ module _
   ind-induction-principle-pushout : dependent-cocone f g c P → (x : X) → P x
   ind-induction-principle-pushout = pr1 (ind-c P)
 
+  eq-compute-ind-induction-principle-pushout :
+    (h : dependent-cocone f g c P) →
+    dependent-cocone-map f g c P (ind-induction-principle-pushout h) ＝ h
+  eq-compute-ind-induction-principle-pushout = pr2 (ind-c P)
+
   compute-ind-induction-principle-pushout :
     (h : dependent-cocone f g c P) →
     htpy-dependent-cocone f g c P
@@ -70,29 +75,29 @@ module _
     htpy-eq-dependent-cocone f g c P
       ( dependent-cocone-map f g c P (ind-induction-principle-pushout h))
       ( h)
-      ( pr2 (ind-c P) h)
+      ( eq-compute-ind-induction-principle-pushout h)
 
-  left-compute-ind-induction-principle-pushout :
+  compute-horizontal-map-ind-induction-principle-pushout :
     ( h : dependent-cocone f g c P) (a : A) →
     ind-induction-principle-pushout h (horizontal-map-cocone f g c a) ＝
     horizontal-map-dependent-cocone f g c P h a
-  left-compute-ind-induction-principle-pushout h =
+  compute-horizontal-map-ind-induction-principle-pushout h =
     pr1 (compute-ind-induction-principle-pushout h)
 
-  right-compute-ind-induction-principle-pushout :
+  compute-vertical-map-ind-induction-principle-pushout :
     ( h : dependent-cocone f g c P) (b : B) →
     ind-induction-principle-pushout h (vertical-map-cocone f g c b) ＝
     vertical-map-dependent-cocone f g c P h b
-  right-compute-ind-induction-principle-pushout h =
+  compute-vertical-map-ind-induction-principle-pushout h =
     pr1 (pr2 (compute-ind-induction-principle-pushout h))
 
-  path-compute-ind-induction-principle-pushout :
+  compute-glue-ind-induction-principle-pushout :
     (h : dependent-cocone f g c P) →
     coherence-htpy-dependent-cocone f g c P
       ( dependent-cocone-map f g c P (ind-induction-principle-pushout h))
       ( h)
-      ( left-compute-ind-induction-principle-pushout h)
-      ( right-compute-ind-induction-principle-pushout h)
-  path-compute-ind-induction-principle-pushout h =
+      ( compute-horizontal-map-ind-induction-principle-pushout h)
+      ( compute-vertical-map-ind-induction-principle-pushout h)
+  compute-glue-ind-induction-principle-pushout h =
     pr2 (pr2 (compute-ind-induction-principle-pushout h))
 ```
