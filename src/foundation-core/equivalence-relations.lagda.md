@@ -38,7 +38,7 @@ is-equivalence-relation R =
   is-transitive-Relation-Prop R
 
 equivalence-relation :
-  (l : Level) {l1 : Level} (A : UU l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
 equivalence-relation l A = Σ (Relation-Prop l A) is-equivalence-relation
 
 prop-equivalence-relation :
