@@ -811,11 +811,11 @@ Given a commutative diagram where `i`, `j` and `k` are equivalences,
 
 ```text
             g'
-        S' ---> B'
+       S' ---> B'
       / \       \
   f' /   \ k     \ j
     /     ∨   g   ∨
-    A'     S ----> B
+   A'     S ----> B
      \    |       |
     i \   | f     |
        \  ∨     ⌜ ∨
