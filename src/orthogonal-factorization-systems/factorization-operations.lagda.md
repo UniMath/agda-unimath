@@ -24,7 +24,7 @@ every map `f` in `A → B`.
       Im f
       ^  \
      /    \
-    /      v
+    /      ∨
   A ------> B
        f
 ```

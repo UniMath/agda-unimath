@@ -402,7 +402,7 @@ rectangle is a pushout if and only if the right square is a pushout.
    A ----> B ----> C
    |       |       |
   f|       |       |
-   v       v       v
+   ∨       ∨       ∨
    X ----> Y ----> Z
 ```
 
@@ -558,7 +558,7 @@ again a pushout.
    S' ---> S ----> B
    |   ≃   |       |
 f' |       | f     |
-   v   ≃   v     ⌜ v
+   ∨   ≃   ∨     ⌜ ∨
    A' ---> A ----> X
        j
 ```
@@ -606,11 +606,11 @@ rectangle is a pushout if and only if the bottom square is a pushout.
    A -----> X
    |        |
   f|        |
-   v      ⌜ v
+   ∨      ⌜ ∨
    B -----> Y
    |        |
   k|        |
-   v        v
+   ∨        ∨
    C -----> Z
 ```
 
@@ -765,11 +765,11 @@ pasting lemma.
        |       |
      i | ≃   ≃ | j
        |       |
-       v   g   v
+       ∨   g   ∨
        S ----> B
        |       |
      f |       |
-       v    ⌜  v
+       ∨    ⌜  ∨
        A ----> X
 ```
 
@@ -815,11 +815,11 @@ Given a commutative diagram where `i`, `j` and `k` are equivalences,
       S' ---> B'
      / \       \
  f' /   \ k     \ j
-   /     v   g   v
+   /     ∨   g   ∨
   A'     S ----> B
     \    |       |
    i \   | f     |
-      \  v     ⌜ v
+      \  v     ⌜ ∨
        > A ----> X
 ```
 
@@ -829,7 +829,7 @@ the induced square is a pushout:
    S' ---> B'
    |       |
    |       |
-   v     ⌜ v
+   v     ⌜ ∨
    A' ---> X.
 ```
 

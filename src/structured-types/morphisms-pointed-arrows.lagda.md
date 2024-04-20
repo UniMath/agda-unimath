@@ -55,7 +55,7 @@ consisting of pointed maps `i : A →∗ X` and `j : B →∗ Y` and a
     A -----> X
     |        |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -144,7 +144,7 @@ of a morphism of pointed arrows
     A -----> X
     |        |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -156,7 +156,7 @@ is the morphism of pointed arrows
     A -----> B
     |        |
   i |        | j
-    V        V
+    ∨        ∨
     X -----> Y.
         g
 ```
@@ -204,7 +204,7 @@ The identity morphism of pointed arrows is defined as
     A -----> A
     |        |
   f |        | f
-    V        V
+    ∨        ∨
     B -----> B
         id
 ```
@@ -236,7 +236,7 @@ Consider a commuting diagram of the form
     A -----> X -----> U
     |        |        |
   f |   α  g |   β    | h
-    V        V        V
+    ∨        ∨        ∨
     B -----> Y -----> V.
         α₁       β₁
 ```
@@ -251,7 +251,7 @@ of `β : g → h` with `α : f → g` is therefore defined to be
     A ----------> U
     |             |
   f |    α □ β    | h
-    V             V
+    ∨             ∨
     B ----------> V.
         β₁ ∘ α₁
 ```
@@ -424,7 +424,7 @@ and a pointed `2`-homotopy `r₂` witnessing that the square of pointed homotopi
   (α₁ ∘ f) --------> (α₁ ∘ f)
       |                  |
    α₂ |                  | α₂
-      V                  V
+      ∨                  ∨
    (g ∘ α₀) --------> (g ∘ α₀)
              g ·l r₀
 ```

@@ -92,7 +92,7 @@ so it suffices to invoke the flattening lemma for coequalizers.
              |                                     |                            |
  inv-assoc-Σ | ≃                       inv-assoc-Σ | ≃                       id | ≃
              |                                     |                            |
-             V                --------->           V                            V
+             ∨                --------->           ∨                            ∨
    Σ ((n, a) : Σ ℕ A) P(iₙ a) ---------> Σ ((n, a) : Σ ℕ A) P(iₙ a) -----> Σ (x : X) P(x) ,
 ```
 

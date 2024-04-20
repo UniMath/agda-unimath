@@ -47,7 +47,7 @@ in `L`, and the right map is in `R`.
        ∙
       ^ \
  L ∋ /   \ ∈ R
-    /     v
+    /     ∨
   A -----> B
 ```
 

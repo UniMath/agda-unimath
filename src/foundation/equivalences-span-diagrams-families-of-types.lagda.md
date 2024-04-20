@@ -35,7 +35,7 @@ types indexed by a type `I` to a span `(B , t)` indexed by `I` consists of a
      S -----> T
      |        |
   fᵢ |        | gᵢ
-     V        V
+     ∨        ∨
      Aᵢ ----> Bᵢ
          h
 ```

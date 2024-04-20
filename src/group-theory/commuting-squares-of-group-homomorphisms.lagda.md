@@ -25,7 +25,7 @@ A square of [group homomorphisms](group-theory.homomorphisms-groups.md)
     G -----> H
     |        |
   g |        | h
-    V        V
+    ∨        ∨
     K -----> L
         k
 ```

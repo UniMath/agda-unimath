@@ -34,7 +34,7 @@ A **factorization** of a map `f : A → B` is a pair of maps `g : X → B` and
        X
       ^ \
    h /   \ g
-    /     v
+    /     ∨
   A -----> B
       f
 ```

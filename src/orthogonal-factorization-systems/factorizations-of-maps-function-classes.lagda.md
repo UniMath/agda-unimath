@@ -44,7 +44,7 @@ such that their composite `r ∘ l` is `f`.
          X
         ^ \
  L ∋ l /   \ r ∈ R
-      /     v
+      /     ∨
     A -----> B
         f
 ```

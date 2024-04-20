@@ -90,7 +90,7 @@ Consider a [cocone](synthetic-homotopy-theory.cocones-under-spans.md)
     S -----> B
     |        |
   f |        | j
-    V        V
+    ∨        ∨
     A -----> X  .
         i
 ```
@@ -154,7 +154,7 @@ allow us to construct the following
                                /                |                \
                              /                  |                  \
                            /                    |                    \
-                         V                      V                      V
+                         ∨                      ∨                      ∨
   Σ (h : A → X) ((a : A) → P (h a))    X → Σ (x : X) (P x)    Σ (h : B → X) ((b : B) → P (h b))
                          |\             /               \             /|
                          |  \         /                   \         /  |
@@ -163,7 +163,7 @@ allow us to construct the following
                          |      / \                           / \      |
                          |    /     \                       /     \    |
                          |  /         \                   /         \  |
-                         VV             V               V             VV
+                         ∨∨             ∨               ∨             ∨∨
          A → Σ (x : X) (P x)    Σ (h : S → X) ((s : S) → P (h s))    B → Σ (x : X) (P x)
                            \                    |                    /
                              \                  |                  /
@@ -172,7 +172,7 @@ allow us to construct the following
                                    \            |            /
                                      \          |          /
                                        \        |        /
-                                         V      V      V
+                                         ∨      ∨      ∨
                                        S → Σ (x : X) (P x) .
 ```
 
@@ -196,7 +196,7 @@ i.e. for every `h : X → X` we have a pullback
             |                             |
             |                             |
             |                             |
-            V                             V
+            ∨                             ∨
   (a : A) → P (h (i a)) -----> (s : S) → P (h (j (g s))) ,
 ```
 

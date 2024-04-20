@@ -43,7 +43,7 @@ A **morphism between
     Aₙ ---> Aₙ₊₁
     |       |
  fₙ |       | fₙ₊₁
-    v       v
+    ∨       ∨
     Bₙ ---> Bₙ₊₁
         bₙ
 ```

@@ -31,7 +31,7 @@ if the [commuting square](foundation-core.commuting-squares-of-maps.md)
     A -----> X
     |        |
   f |   h    | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```

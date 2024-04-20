@@ -57,7 +57,7 @@ A **pushout** of `𝒮` is an initial type `X` equipped with a
     S -----> B
     |        |
   f |   H    | j
-    V        V
+    ∨        ∨
     A -----> X,
         i
 ```
@@ -473,11 +473,11 @@ Given a pushout square with a
    S ----> B
    |       | \
  f |    inr|  \  n
-   v    ⌜  v   \
+   ∨    ⌜  ∨   \
    A ----> ∙    \
     \ inl   \   |
   m  \  cogap\  |
-      \       ∨ v
+      \       ∨ ∨
        \-----> X
 ```
 
@@ -487,7 +487,7 @@ we have, for every `x : X`, a pushout square of fibers:
     fiber (m ∘ f) x ---> fiber (cogap ∘ inr) x
            |                       |
            |                       |
-           v                    ⌜  v
+           ∨                    ⌜  ∨
  fiber (cogap ∘ inl) x ----> fiber cogap x
 ```
 
@@ -601,7 +601,7 @@ We record the following auxiliary lemma which says that if we have types `T`,
    T ----------> G
    |             |
  u |             |
-   v           ⌜ v
+   ∨           ⌜ ∨
    F ----> fiber cogap x
 ```
 

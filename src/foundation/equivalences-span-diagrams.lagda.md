@@ -44,7 +44,7 @@ with two [homotopies](foundation-core.homotopies.md) witnessing that the diagram
     A <----- S -----> B
     |        |        |
   u |        | w      | v
-    V        V        V
+    ∨        ∨        ∨
     C <----- T -----> D
          h       k
 ```

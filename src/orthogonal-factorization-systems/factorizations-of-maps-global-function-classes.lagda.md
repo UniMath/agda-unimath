@@ -45,7 +45,7 @@ classes `L` and `R`** of a map `f : A → B` is a pair of maps `l : A → X` and
          X
         ^ \
  L ∋ l /   \ r ∈ R
-      /     v
+      /     ∨
     A -----> B
         f
 ```

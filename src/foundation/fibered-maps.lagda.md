@@ -46,7 +46,7 @@ Consider a diagram of the form
   |         |
  f|         |g
   |         |
-  V         V
+  ∨         ∨
   X ------> Y
        i
 ```
@@ -437,7 +437,7 @@ module _
 empty ---> B
   |        |
  !|        |g
-  V        V
+  ∨        ∨
   X -----> Y
        i
 ```
@@ -479,7 +479,7 @@ module _
   A -----> B
   |        |
  f|        |!
-  V        V
+  ∨        ∨
   X ---> unit
       !
 ```

@@ -40,7 +40,7 @@ such that the composition `i ∘ g` is `f`.
           ^|
         /  i
       g    |
-    /      v
+    /      ∨
   X - f -> B
 ```
 
@@ -81,12 +81,12 @@ module _
           ^|
         /  i
       g    |
-    /      v
+    /      ∨
   X - f -> B
     \      |
       h    j
        \   |
-         v v
+         ∨ ∨
            C
 ```
 
@@ -107,7 +107,7 @@ module _
     \      |      /
       h    i    j
         \  |  /
-         v v v
+         ∨ ∨ ∨
            X
 ```
 
@@ -129,7 +129,7 @@ module _
           ^|
         /  i
       g    |
-    /      v
+    /      ∨
   X - f -> B - h -> S
 ```
 
@@ -150,7 +150,7 @@ module _
                    ^|
                  /  i
                g    |
-             /      v
+             /      ∨
   S - h -> X - f -> B
 ```
 

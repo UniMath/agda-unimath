@@ -1176,7 +1176,7 @@ of coherently invertible maps asserts that for any
    \       /
    f\     /g
      \   /
-      V V
+      ∨ ∨
        X,
 ```
 

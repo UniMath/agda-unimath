@@ -267,7 +267,7 @@ We consider the commutative diagram for any `k`-type `X`:
  (B → X) <---------------------------- cocone f f X
     |                  ≃                  ^
  id | ≃                                 ≃ | (universal property)
-    v                                     |
+    ∨                                     |
  (B → X) ------------------------> (pushout f f → X)
           precomp (codiagonal f)
 ```

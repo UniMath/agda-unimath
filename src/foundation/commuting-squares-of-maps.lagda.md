@@ -425,11 +425,11 @@ As a corollary, whenever we have two coherence squares touching at a vertex:
   A -----> B
   |        |
   |   H ⇗  |
-  V        V
+  ∨        ∨
   C -----> D -----> X
            |        |
            |   K ⇗  |
-           V        V
+           ∨        ∨
            Y -----> Z ,
 ```
 
@@ -465,11 +465,11 @@ Given a square of commuting squares, like so:
   A -----> B -----> C
   |        |        |
   |    ⇗   |    ⇗   |
-  V        V        V
+  ∨        ∨        ∨
   X -----> Y -----> Z
   |        |        |
   |    ⇗   |    ⇗   |
-  V        V        V
+  ∨        ∨        ∨
   M -----> N -----> O ,
 ```
 
@@ -821,7 +821,7 @@ Taking a square of the form
   X -----> A -----> B
            |        |
       left |   H    | right
-           v        v
+           ∨        ∨
            C -----> D
              bottom
 ```
@@ -832,7 +832,7 @@ and transposing it by precomposition results in the square
   W^D -----> W^B
    |          |
    |   W^H    |
-   v          v   -∘f
+   ∨          ∨   -∘f
   W^C -----> W^A -----> W^X
 ```
 

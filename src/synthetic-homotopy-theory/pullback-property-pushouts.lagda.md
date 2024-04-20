@@ -33,7 +33,7 @@ pushout of `S` if and only if the square
   Y^X -----> Y^B
    | ⌟        |
    |          |
-   V          V
+   ∨          ∨
   Y^A -----> Y^S
 ```
 

@@ -30,7 +30,7 @@ Given a span of maps
       X
      / \
   f /   \ g
-   v     v
+   ∨     ∨
   A       B,
 ```
 
@@ -41,7 +41,7 @@ map `h : A → B` together with a coherence triangle `(h ∘ f) ~ g`:
       X
      / \
   f /   \ g
-   v     v
+   ∨     ∨
   A ----> B.
       h
 ```

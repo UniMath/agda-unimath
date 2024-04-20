@@ -27,7 +27,7 @@ is a commuting diagram of the form
   |    \   /    |
   |      /      |
   |    /   \    |
-  V  /       v  V
+  ∨  /       ∨  ∨
   X ----------> Y.
 ```
 

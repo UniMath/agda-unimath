@@ -58,7 +58,7 @@ Consider a map `f : {x : A} → B x → C x` and two functions
        (g ＝ h) -------------------------> (f ∘ g ＝ f ∘ h)
           |                                       |
   htpy-eq |                                       | htpy-eq
-          V                                       V
+          ∨                                       ∨
        (g ~ h) --------------------------> (f ∘ g ~ f ∘ h).
                           f ·l_
 ```
