@@ -473,7 +473,7 @@ Given a pushout square with a
    S ----> B
    |       | \
  f |    inr|  \  n
-   ∨    ⌜  ∨   \
+   ∨     ⌜ ∨   \
    A ----> ∙    \
     \ inl   \   |
   m  \  cogap\  |
@@ -487,7 +487,7 @@ we have, for every `x : X`, a pushout square of fibers:
     fiber (m ∘ f) x ---> fiber (cogap ∘ inr) x
            |                       |
            |                       |
-           ∨                    ⌜  ∨
+           ∨                     ⌜ ∨
  fiber (cogap ∘ inl) x ----> fiber cogap x
 ```
 

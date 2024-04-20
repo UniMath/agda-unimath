@@ -42,7 +42,7 @@ we may form their **smash product** as the following
  A ∨∗ B ----> A ×∗ B
     |           |
     |           |
-    ∨        ⌜  ∨
+    ∨         ⌜ ∨
   unit -----> A ∧∗ B
 ```
 
