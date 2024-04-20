@@ -37,7 +37,7 @@ inverse of the original fraction up to the canonical similarity relation on
 
 ```agda
 module _
-  {x : fraction-ℤ} (H : is-positive-fraction-ℤ x)
+  (x : fraction-ℤ) (H : is-positive-fraction-ℤ x)
   where
 
   inv-is-positive-fraction-ℤ : fraction-ℤ
@@ -57,14 +57,13 @@ module _
 
   is-reduced-inv-is-positive-fraction-ℤ :
     is-reduced-fraction-ℤ x →
-    is-reduced-fraction-ℤ (inv-is-positive-fraction-ℤ {x} P)
+    is-reduced-fraction-ℤ (inv-is-positive-fraction-ℤ x P)
   is-reduced-inv-is-positive-fraction-ℤ =
-    tr
+    inv-tr
       ( is-one-ℤ)
-      ( inv
-        ( is-commutative-gcd-ℤ
-          ( denominator-fraction-ℤ x)
-          ( numerator-fraction-ℤ x)))
+      ( is-commutative-gcd-ℤ
+        ( denominator-fraction-ℤ x)
+        ( numerator-fraction-ℤ x))
 ```
 
 ### The multiplication of a positive integer fraction with its inverse is similar to one
@@ -76,7 +75,7 @@ module _
 
   left-inverse-law-mul-is-positive-fraction-ℤ :
     sim-fraction-ℤ
-      (mul-fraction-ℤ (inv-is-positive-fraction-ℤ {x} P) x)
+      (mul-fraction-ℤ (inv-is-positive-fraction-ℤ x P) x)
       (one-fraction-ℤ)
   left-inverse-law-mul-is-positive-fraction-ℤ =
     ( right-unit-law-mul-ℤ _) ∙
@@ -87,7 +86,7 @@ module _
 
   right-inverse-law-mul-is-positive-fraction-ℤ :
     sim-fraction-ℤ
-      (mul-fraction-ℤ x (inv-is-positive-fraction-ℤ {x} P))
+      (mul-fraction-ℤ x (inv-is-positive-fraction-ℤ x P))
       (one-fraction-ℤ)
   right-inverse-law-mul-is-positive-fraction-ℤ =
     ( right-unit-law-mul-ℤ _) ∙

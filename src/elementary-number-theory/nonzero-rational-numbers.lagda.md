@@ -13,6 +13,7 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.nonzero-integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
@@ -28,6 +29,8 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import group-theory.submonoids
 ```
 
 </details>
@@ -110,8 +113,8 @@ one-nonzero-ℚ = (one-ℚ , is-nonzero-one-ℚ)
 
 ```agda
 abstract
-  is-nonzero-neg-ℚ : (x : ℚ) → is-nonzero-ℚ x → is-nonzero-ℚ (neg-ℚ x)
-  is-nonzero-neg-ℚ x H =
+  is-nonzero-neg-ℚ : {x : ℚ} → is-nonzero-ℚ x → is-nonzero-ℚ (neg-ℚ x)
+  is-nonzero-neg-ℚ {x} H =
     is-nonzero-is-nonzero-numerator-ℚ
       ( neg-ℚ x)
       ( is-nonzero-neg-nonzero-ℤ
@@ -123,7 +126,7 @@ abstract
 
 ```agda
 neg-nonzero-ℚ : nonzero-ℚ → nonzero-ℚ
-neg-nonzero-ℚ (x , H) = (neg-ℚ x , is-nonzero-neg-ℚ x H)
+neg-nonzero-ℚ (x , H) = (neg-ℚ x , is-nonzero-neg-ℚ H)
 ```
 
 ### The product of two nonzero rational numbers is nonzero
@@ -136,28 +139,17 @@ abstract
     rec-coproduct H K ∘ (decide-is-zero-factor-is-zero-mul-ℚ x y)
 ```
 
-### The nonzero product of two nonzero rational numbers
+### The nonzero rational numbers are a multiplicative submonoid of the rational numbers
 
 ```agda
-mul-nonzero-ℚ : nonzero-ℚ → nonzero-ℚ → nonzero-ℚ
-mul-nonzero-ℚ (x , P) (y , Q) = (x *ℚ y , is-nonzero-mul-ℚ P Q)
-```
+is-submonoid-ℚ-mul-nonzero-ℚ :
+  is-submonoid-subset-Monoid ℚ-mul-Monoid is-nonzero-prop-ℚ
+pr1 is-submonoid-ℚ-mul-nonzero-ℚ = is-nonzero-one-ℚ
+pr2 is-submonoid-ℚ-mul-nonzero-ℚ x y = is-nonzero-mul-ℚ {x} {y}
 
-### Unit laws for multiplication of nonzero rational numbers
-
-```agda
-module _
-  (x : nonzero-ℚ)
-  where
-
-  abstract
-    left-unit-law-mul-nonzero-ℚ : mul-nonzero-ℚ one-nonzero-ℚ x ＝ x
-    left-unit-law-mul-nonzero-ℚ =
-      eq-nonzero-ℚ (left-unit-law-mul-ℚ (rational-nonzero-ℚ x))
-
-    right-unit-law-mul-nonzero-ℚ : mul-nonzero-ℚ x one-nonzero-ℚ ＝ x
-    right-unit-law-mul-nonzero-ℚ =
-      eq-nonzero-ℚ (right-unit-law-mul-ℚ (rational-nonzero-ℚ x))
+nonzero-ℚ-mul-Submonoid : Submonoid lzero ℚ-mul-Monoid
+pr1 nonzero-ℚ-mul-Submonoid = is-nonzero-prop-ℚ
+pr2 nonzero-ℚ-mul-Submonoid = is-submonoid-ℚ-mul-nonzero-ℚ
 ```
 
 ### The factors of a nonzero product of rational numbers are nonzero

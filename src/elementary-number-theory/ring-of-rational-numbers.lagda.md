@@ -14,13 +14,17 @@ open import commutative-algebra.commutative-rings
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-inverses-nonzero-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
@@ -76,5 +80,15 @@ pr2 ℚ-Commutative-Ring = commutative-mul-ℚ
 ```agda
 is-division-Ring-ℚ-Ring : is-division-Ring ℚ-Ring
 pr1 is-division-Ring-ℚ-Ring = is-nonzero-one-ℚ ∘ inv
-pr2 is-division-Ring-ℚ-Ring x H = is-invertible-is-nonzero-ℚ x (H ∘ inv)
+pr2 is-division-Ring-ℚ-Ring x H =
+  rec-coproduct
+    ( ( map-Σ _
+        ( neg-ℚ)
+        ( λ y →
+          map-product
+            ( swap-neg-mul-ℚ x y ∙_)
+            ( inv (swap-neg-mul-ℚ y x) ∙_))) ∘
+      ( is-invertible-is-positive-ℚ (neg-ℚ x)))
+    ( is-invertible-is-positive-ℚ x)
+    ( decide-is-negative-is-positive-is-nonzero-ℚ (H ∘ inv))
 ```

@@ -95,9 +95,7 @@ open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiplication-positive-and-negative-integers public
 open import elementary-number-theory.multiplication-rational-numbers public
 open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers public
-open import elementary-number-theory.multiplicative-inverses-nonzero-rational-numbers public
 open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions public
-open import elementary-number-theory.multiplicative-inverses-positive-rational-numbers public
 open import elementary-number-theory.multiplicative-monoid-of-natural-numbers public
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers public
 open import elementary-number-theory.multiplicative-units-integers public
