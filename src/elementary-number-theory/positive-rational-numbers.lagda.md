@@ -11,6 +11,7 @@ module elementary-number-theory.positive-rational-numbers where
 ```agda
 open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-rational-numbers
+open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
@@ -39,7 +40,12 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import group-theory.commutative-monoids
+open import group-theory.monoids
+open import group-theory.semigroups
 open import group-theory.submonoids
+open import group-theory.submonoids-commutative-monoids
+open import group-theory.subsemigroups
 ```
 
 </details>
@@ -220,17 +226,23 @@ abstract
         ( Q))
 ```
 
+### The positive rational numbers are an additive subsemigroup of the rational numbers
+
+```agda
+ℚ⁺-add-Subsemigroup : Subsemigroup lzero ℚ-add-Semigroup
+pr1 ℚ⁺-add-Subsemigroup = is-positive-prop-ℚ
+pr2 ℚ⁺-add-Subsemigroup {x} {y} = is-positive-add-ℚ {x} {y}
+
+ℚ⁺-add-Semigroup : Semigroup lzero
+ℚ⁺-add-Semigroup =
+  semigroup-Subsemigroup ℚ-add-Semigroup ℚ⁺-add-Subsemigroup
+```
+
 ### The positive sum of two positive rational numbers
 
 ```agda
 add-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
-add-ℚ⁺ x y =
-  ( add-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y) ,
-    is-positive-add-ℚ
-      { rational-ℚ⁺ x}
-      { rational-ℚ⁺ y}
-      ( is-positive-rational-ℚ⁺ x)
-      ( is-positive-rational-ℚ⁺ y))
+add-ℚ⁺ = mul-Subsemigroup ℚ-add-Semigroup ℚ⁺-add-Subsemigroup
 
 infixl 35 _+ℚ⁺_
 _+ℚ⁺_ = add-ℚ⁺
@@ -251,16 +263,6 @@ abstract
         ( Q))
 ```
 
-### The positive product of two positive rational numbers
-
-```agda
-mul-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
-mul-ℚ⁺ (x , P) (y , Q) = (x *ℚ y , is-positive-mul-ℚ {x} {y} P Q)
-
-infixl 40 _*ℚ⁺_
-_*ℚ⁺_ = mul-ℚ⁺
-```
-
 ### The positive rational numbers are a multiplicative submonoid of the rational numbers
 
 ```agda
@@ -272,4 +274,23 @@ pr2 is-submonoid-ℚ-mul-ℚ⁺ x y = is-positive-mul-ℚ {x} {y}
 ℚ⁺-mul-Submonoid : Submonoid lzero ℚ-mul-Monoid
 pr1 ℚ⁺-mul-Submonoid = is-positive-prop-ℚ
 pr2 ℚ⁺-mul-Submonoid = is-submonoid-ℚ-mul-ℚ⁺
+
+ℚ⁺-mul-Monoid : Monoid lzero
+ℚ⁺-mul-Monoid = monoid-Submonoid ℚ-mul-Monoid ℚ⁺-mul-Submonoid
+
+ℚ⁺-mul-Commutative-Monoid : Commutative-Monoid lzero
+ℚ⁺-mul-Commutative-Monoid =
+  commutative-monoid-Commutative-Submonoid
+    ℚ-mul-Commutative-Monoid
+    ℚ⁺-mul-Submonoid
+```
+
+### The positive product of two positive rational numbers
+
+```agda
+mul-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
+mul-ℚ⁺ = mul-Submonoid ℚ-mul-Monoid ℚ⁺-mul-Submonoid
+
+infixl 40 _*ℚ⁺_
+_*ℚ⁺_ = mul-ℚ⁺
 ```
