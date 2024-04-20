@@ -34,7 +34,7 @@ i.e. a cofork with the
 ### All double arrows admit a coequalizer
 
 The
-{{#concept "canonical coequalizer" Disambiguation="of types" Agda=canonical-coequalizer}}
+{{#concept "standard coequalizer" Disambiguation="of types" Agda=standard-coequalizer}}
 may be obtained as a [pushout](synthetic-homotopy-theory.pushouts.md) of the
 span
 
@@ -63,27 +63,27 @@ module _
   where
 
   abstract
-    canonical-coequalizer : UU (l1 ⊔ l2)
-    canonical-coequalizer =
+    standard-coequalizer : UU (l1 ⊔ l2)
+    standard-coequalizer =
       pushout
         ( vertical-map-span-cocone-cofork a)
         ( horizontal-map-span-cocone-cofork a)
 
-    cofork-canonical-coequalizer : cofork a canonical-coequalizer
-    cofork-canonical-coequalizer =
+    cofork-standard-coequalizer : cofork a standard-coequalizer
+    cofork-standard-coequalizer =
       cofork-cocone-codiagonal a
         ( cocone-pushout
           ( vertical-map-span-cocone-cofork a)
           ( horizontal-map-span-cocone-cofork a))
 
-    dup-canonical-coequalizer :
+    dup-standard-coequalizer :
       {l : Level} →
       dependent-universal-property-coequalizer l a
-        ( cofork-canonical-coequalizer)
-    dup-canonical-coequalizer =
+        ( cofork-standard-coequalizer)
+    dup-standard-coequalizer =
       dependent-universal-property-coequalizer-dependent-universal-property-pushout
         ( a)
-        ( cofork-canonical-coequalizer)
+        ( cofork-standard-coequalizer)
         ( λ P →
           tr
             ( λ c →
@@ -104,11 +104,11 @@ module _
               ( horizontal-map-span-cocone-cofork a)
               ( P)))
 
-    up-canonical-coequalizer :
+    up-standard-coequalizer :
       {l : Level} →
-      universal-property-coequalizer l a cofork-canonical-coequalizer
-    up-canonical-coequalizer =
+      universal-property-coequalizer l a cofork-standard-coequalizer
+    up-standard-coequalizer =
       universal-property-dependent-universal-property-coequalizer a
-        ( cofork-canonical-coequalizer)
-        ( dup-canonical-coequalizer)
+        ( cofork-standard-coequalizer)
+        ( dup-standard-coequalizer)
 ```
