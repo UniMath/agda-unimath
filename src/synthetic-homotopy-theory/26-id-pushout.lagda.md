@@ -247,7 +247,7 @@ triangle-hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q h =
 is-equiv-hom-Fam-pushout-map :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : {l : Level} → universal-property-pushout l f g c)
+  ( up-X : universal-property-pushout f g c)
   ( P : X → UU l5) (Q : X → UU l6) →
   is-equiv (hom-Fam-pushout-map c P Q)
 is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
@@ -263,7 +263,7 @@ is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
 equiv-hom-Fam-pushout-map :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : {l : Level} → universal-property-pushout l f g c)
+  ( up-X : universal-property-pushout f g c)
   ( P : X → UU l5) (Q : X → UU l6) →
   ( (x : X) → P x → Q x) ≃
   hom-Fam-pushout (desc-fam c P) (desc-fam c Q)
@@ -308,7 +308,7 @@ triangle-is-universal-id-Fam-pushout' c a Q = refl-htpy
 is-universal-id-Fam-pushout' :
   { l l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X)
-  ( up-X : {l' : Level} → universal-property-pushout l' f g c) (a : A) →
+  ( up-X : universal-property-pushout f g c) (a : A) →
   ( Q : (x : X) → UU l) →
   is-equiv
     ( ev-point-hom-Fam-pushout
@@ -331,7 +331,7 @@ is-universal-id-Fam-pushout :
   { l1 l2 l3 l4 l : Level}
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X)
-  ( up-X : {l' : Level} → universal-property-pushout l' f g c) (a : A) →
+  ( up-X : universal-property-pushout f g c) (a : A) →
   is-universal-Fam-pushout l (desc-fam c (Id (pr1 c a))) a refl
 is-universal-id-Fam-pushout {S = S} {A} {B} {X} {f} {g} c up-X a Q =
   map-inv-equiv

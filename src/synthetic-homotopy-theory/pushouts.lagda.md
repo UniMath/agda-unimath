@@ -297,9 +297,9 @@ module _
 
 ```agda
 up-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) →
-  universal-property-pushout l4 f g (cocone-pushout f g)
+  universal-property-pushout f g (cocone-pushout f g)
 up-pushout f g P =
   is-equiv-is-invertible
     ( cogap f g)
@@ -432,7 +432,7 @@ module _
   where
 
   universal-property-pushout-is-pushout :
-    is-pushout f g c → {l : Level} → universal-property-pushout l f g c
+    is-pushout f g c → universal-property-pushout f g c
   universal-property-pushout-is-pushout po =
     up-pushout-up-pushout-is-equiv f g
       ( cocone-pushout f g)
@@ -446,7 +446,7 @@ module _
       ( up-pushout f g)
 
   is-pushout-universal-property-pushout :
-    ({l : Level} → universal-property-pushout l f g c) → is-pushout f g c
+    universal-property-pushout f g c → is-pushout f g c
   is-pushout-universal-property-pushout =
     is-equiv-up-pushout-up-pushout f g
       ( cocone-pushout f g)
@@ -545,7 +545,7 @@ square commute (almost) trivially.
         ( horizontal-map-span-cogap-fiber)
         ( vertical-map-span-cogap-fiber)
         ( fiber (cogap f g c) x))
-      ( universal-property-pushout l
+      ( universal-property-pushout-Level l
         ( horizontal-map-span-cogap-fiber)
         ( vertical-map-span-cogap-fiber))
 
@@ -633,7 +633,7 @@ fibers.
     universal-property-pushout-cogap-fiber-up-to-equiv :
       { l : Level} →
       ( Σ ( cocone u v (fiber (cogap f g c) x))
-          ( λ c → universal-property-pushout l u v c))
+          ( λ c → universal-property-pushout-Level l u v c))
     universal-property-pushout-cogap-fiber-up-to-equiv {l} =
       universal-property-pushout-extension-by-equivalences
         ( horizontal-map-span-cogap-fiber)
@@ -661,8 +661,8 @@ module _
   where
 
   universal-property-pushout-swap-cocone-universal-property-pushout :
-    {l : Level} → universal-property-pushout l f g c →
-    universal-property-pushout l g f (swap-cocone f g X c)
+    universal-property-pushout f g c →
+    universal-property-pushout g f (swap-cocone f g X c)
   universal-property-pushout-swap-cocone-universal-property-pushout up Y =
     is-equiv-equiv'
       ( id-equiv)

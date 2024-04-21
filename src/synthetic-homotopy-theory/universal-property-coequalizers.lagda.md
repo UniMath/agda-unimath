@@ -118,11 +118,10 @@ module _
   where
 
   universal-property-coequalizer-universal-property-pushout :
-    ({l : Level} →
-      universal-property-pushout l
-        ( vertical-map-span-cocone-cofork a)
-        ( horizontal-map-span-cocone-cofork a)
-        ( cocone-codiagonal-cofork a e)) →
+    universal-property-pushout
+      ( vertical-map-span-cocone-cofork a)
+      ( horizontal-map-span-cocone-cofork a)
+      ( cocone-codiagonal-cofork a e) →
     ({l : Level} →
       universal-property-coequalizer l a e)
   universal-property-coequalizer-universal-property-pushout up-pushout Y =
@@ -140,11 +139,10 @@ module _
   universal-property-pushout-universal-property-coequalizer :
     ({l : Level} →
       universal-property-coequalizer l a e) →
-    ({l : Level} →
-      universal-property-pushout l
-        ( vertical-map-span-cocone-cofork a)
-        ( horizontal-map-span-cocone-cofork a)
-        ( cocone-codiagonal-cofork a e))
+    universal-property-pushout
+      ( vertical-map-span-cocone-cofork a)
+      ( horizontal-map-span-cocone-cofork a)
+      ( cocone-codiagonal-cofork a e)
   universal-property-pushout-universal-property-coequalizer up-coequalizer Y =
     is-equiv-top-map-triangle
       ( cofork-map a e)
