@@ -827,7 +827,7 @@ and transposing it by precomposition results in the square
   W^D -----> W^B
    |          |
    |   W^H    |
-   ∨          ∨   -∘f
+   ∨          ∨  - ∘ f
   W^C -----> W^A -----> W^X
 ```
 
