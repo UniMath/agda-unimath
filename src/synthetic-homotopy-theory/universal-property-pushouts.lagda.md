@@ -69,6 +69,10 @@ found in the following table:
 
 ### The universal property of pushouts at a universe level
 
+**Warning.** This definition is here only because of backward compatibility
+reasons, and will be removed in the future. Do not use this definition in new
+formalizations.
+
 ```agda
 universal-property-pushout-Level :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
