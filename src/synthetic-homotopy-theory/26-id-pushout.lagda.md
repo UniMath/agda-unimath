@@ -440,7 +440,7 @@ equiv-is-equiv-hom-Fam-pushout P Q h is-equiv-h =
 hom-identity-is-universal-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l5}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : (l : Level) → universal-property-pushout l f g c) →
+  ( up-X : universal-property-pushout f g c) →
   ( P : Fam-pushout l4 f g) (a : A) (p : pr1 P a) →
   is-universal-Fam-pushout l5 P a p →
   Σ ( hom-Fam-pushout P (desc-fam c (Id (pr1 c a))))
@@ -451,7 +451,7 @@ hom-identity-is-universal-Fam-pushout {f = f} {g} c up-X P a p is-univ-P =
 is-identity-is-universal-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l5}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : (l : Level) → universal-property-pushout l f g c) →
+  ( up-X : universal-property-pushout f g c) →
   ( P : Fam-pushout l4 f g) (a : A) (p : pr1 P a) →
   is-universal-Fam-pushout l5 P a p →
   Σ ( equiv-Fam-pushout P (desc-fam c (Id (pr1 c a))))

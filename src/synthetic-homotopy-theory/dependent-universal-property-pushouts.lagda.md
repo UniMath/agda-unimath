@@ -193,7 +193,7 @@ dependent-pullback-property-dependent-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   dependent-universal-property-pushout f g c →
-  ({l : Level} → dependent-pullback-property-pushout l f g c)
+  dependent-pullback-property-pushout f g c
 dependent-pullback-property-dependent-universal-property-pushout
   f g (pair i (pair j H)) I P =
   let c = (pair i (pair j H)) in
@@ -218,7 +218,7 @@ dependent-pullback-property-dependent-universal-property-pushout
 dependent-universal-property-dependent-pullback-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ({l : Level} → dependent-pullback-property-pushout l f g c) →
+  dependent-pullback-property-pushout f g c →
   dependent-universal-property-pushout f g c
 dependent-universal-property-dependent-pullback-property-pushout
   f g (pair i (pair j H)) dpullback-c P =
@@ -255,7 +255,7 @@ module _
     dependent-universal-property-pushout f g c →
     universal-property-pushout f g c
   universal-property-dependent-universal-property-pushout dup-c {l} =
-    universal-property-pushout-pullback-property-pushout-Level l f g c
+    universal-property-pushout-pullback-property-pushout f g c
       ( pullback-property-dependent-pullback-property-pushout f g c
         ( dependent-pullback-property-dependent-universal-property-pushout f g c
           ( dup-c)))
@@ -266,5 +266,5 @@ module _
   dependent-universal-property-universal-property-pushout up-c =
     dependent-universal-property-dependent-pullback-property-pushout f g c
       ( dependent-pullback-property-pullback-property-pushout f g c
-        ( pullback-property-pushout-universal-property-pushout-Level f g c up-c))
+        ( pullback-property-pushout-universal-property-pushout f g c up-c))
 ```
