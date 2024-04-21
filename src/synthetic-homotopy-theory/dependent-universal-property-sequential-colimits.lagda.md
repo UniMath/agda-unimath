@@ -64,7 +64,7 @@ module _
 
   dependent-universal-property-sequential-colimit : UUω
   dependent-universal-property-sequential-colimit =
-    { l : Level} → (P : X → UU l) →
+    {l : Level} (P : X → UU l) →
     is-equiv (dependent-cocone-map-sequential-diagram c P)
 ```
 

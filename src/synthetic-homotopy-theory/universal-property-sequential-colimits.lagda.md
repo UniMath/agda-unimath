@@ -75,8 +75,7 @@ module _
 
   universal-property-sequential-colimit : UUω
   universal-property-sequential-colimit =
-    {l : Level} → (Y : UU l) →
-    is-equiv (cocone-map-sequential-diagram c {Y = Y})
+    {l : Level} (Y : UU l) → is-equiv (cocone-map-sequential-diagram c {Y = Y})
 ```
 
 ### The map induced by the universal property of sequential colimits
