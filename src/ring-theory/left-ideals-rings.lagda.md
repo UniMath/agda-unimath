@@ -52,7 +52,7 @@ module _
       ( is-prop-is-closed-under-left-multiplication-subset-Ring R S)
 
 left-ideal-Ring :
-  (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (R : Ring l1) → UU (lsuc l ⊔ l1)
 left-ideal-Ring l R = Σ (subset-Ring l R) (is-left-ideal-subset-Ring R)
 
 module _
