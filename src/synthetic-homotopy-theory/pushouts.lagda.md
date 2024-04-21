@@ -212,7 +212,7 @@ module _
       ( htpy-compute-dependent-cogap f g c)
 
   induction-principle-pushout' :
-    {l : Level} → induction-principle-pushout l f g (cocone-pushout f g)
+    induction-principle-pushout f g (cocone-pushout f g)
   induction-principle-pushout' P =
     ( dependent-cogap f g , is-section-dependent-cogap)
 

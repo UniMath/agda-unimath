@@ -95,11 +95,10 @@ module _
   where
 
   htpy-eq-dependent-cocone-map :
-    { l : Level} →
-    induction-principle-pushout l f g c →
-    { P : X → UU l} (h h' : (x : X) → P x) →
+    induction-principle-pushout f g c →
+    { l : Level} {P : X → UU l} (h h' : (x : X) → P x) →
     dependent-cocone-map f g c P h ＝ dependent-cocone-map f g c P h' → h ~ h'
-  htpy-eq-dependent-cocone-map ind-c {P} h h' p =
+  htpy-eq-dependent-cocone-map ind-c {P = P} h h' p =
     ind-induction-principle-pushout f g c ind-c
       ( λ x → h x ＝ h' x)
       ( ( horizontal-htpy-eq-dependent-cocone f g c P
@@ -130,7 +129,7 @@ module _
               ( s))))
 
   is-retraction-ind-induction-principle-pushout :
-    (H : {l : Level} → induction-principle-pushout l f g c) →
+    (H : induction-principle-pushout f g c) →
     {l : Level} (P : X → UU l) →
     is-retraction
       ( dependent-cocone-map f g c P)
@@ -148,7 +147,7 @@ module _
           ( dependent-cocone-map f g c P h)))
 
   dependent-universal-property-pushout-induction-principle-pushout :
-    ({l : Level} → induction-principle-pushout l f g c) →
+    induction-principle-pushout f g c →
     dependent-universal-property-pushout f g c
   dependent-universal-property-pushout-induction-principle-pushout ind-c P =
     is-equiv-is-invertible
@@ -164,7 +163,7 @@ induction-principle-pushout-dependent-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   dependent-universal-property-pushout f g c →
-  ({l : Level} → induction-principle-pushout l f g c)
+  induction-principle-pushout f g c
 induction-principle-pushout-dependent-universal-property-pushout
   f g c dup-c P = pr1 (dup-c P)
 ```
