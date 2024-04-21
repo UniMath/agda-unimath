@@ -48,11 +48,11 @@ the pushout.
 
 ```agda
 dependent-universal-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-dependent-universal-property-pushout l f g {X} c =
-  (P : X → UU l) → is-equiv (dependent-cocone-map f g c P)
+  UUω
+dependent-universal-property-pushout f g {X} c =
+  {l : Level} (P : X → UU l) → is-equiv (dependent-cocone-map f g c P)
 ```
 
 ## Properties
@@ -62,10 +62,10 @@ dependent-universal-property-pushout l f g {X} c =
 ```agda
 abstract
   uniqueness-dependent-universal-property-pushout :
-    { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
+    { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
     ( f : S → A) (g : S → B) (c : cocone f g X)
-    ( dup-c : dependent-universal-property-pushout l f g c) →
-    ( P : X → UU l) ( h : dependent-cocone f g c P) →
+    ( dup-c : dependent-universal-property-pushout f g c) →
+    {l : Level} (P : X → UU l) ( h : dependent-cocone f g c P) →
     is-contr
       ( Σ ( (x : X) → P x)
           ( λ k →
@@ -149,7 +149,7 @@ module _
 
   dependent-universal-property-pushout-induction-principle-pushout :
     ({l : Level} → induction-principle-pushout l f g c) →
-    ({l : Level} → dependent-universal-property-pushout l f g c)
+    dependent-universal-property-pushout f g c
   dependent-universal-property-pushout-induction-principle-pushout ind-c P =
     is-equiv-is-invertible
       ( ind-induction-principle-pushout f g c ind-c P)
@@ -163,7 +163,7 @@ module _
 induction-principle-pushout-dependent-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ({l : Level} → dependent-universal-property-pushout l f g c) →
+  dependent-universal-property-pushout f g c →
   ({l : Level} → induction-principle-pushout l f g c)
 induction-principle-pushout-dependent-universal-property-pushout
   f g c dup-c P = pr1 (dup-c P)
@@ -193,7 +193,7 @@ triangle-dependent-pullback-property-pushout f g (pair i (pair j H)) P h =
 dependent-pullback-property-dependent-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  ({l : Level} → dependent-universal-property-pushout l f g c) →
+  dependent-universal-property-pushout f g c →
   ({l : Level} → dependent-pullback-property-pushout l f g c)
 dependent-pullback-property-dependent-universal-property-pushout
   f g (pair i (pair j H)) I P =
@@ -220,7 +220,7 @@ dependent-universal-property-dependent-pullback-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   ({l : Level} → dependent-pullback-property-pushout l f g c) →
-  ({l : Level} → dependent-universal-property-pushout l f g c)
+  dependent-universal-property-pushout f g c
 dependent-universal-property-dependent-pullback-property-pushout
   f g (pair i (pair j H)) dpullback-c P =
   let c = (pair i (pair j H)) in
@@ -253,7 +253,7 @@ module _
   where
 
   universal-property-dependent-universal-property-pushout :
-    ({l : Level} → dependent-universal-property-pushout l f g c) →
+    dependent-universal-property-pushout f g c →
     universal-property-pushout f g c
   universal-property-dependent-universal-property-pushout dup-c {l} =
     universal-property-pushout-pullback-property-pushout-Level l f g c
@@ -263,7 +263,7 @@ module _
 
   dependent-universal-property-universal-property-pushout :
     universal-property-pushout f g c →
-    ({l : Level} → dependent-universal-property-pushout l f g c)
+    dependent-universal-property-pushout f g c
   dependent-universal-property-universal-property-pushout up-c =
     dependent-universal-property-dependent-pullback-property-pushout f g c
       ( dependent-pullback-property-pullback-property-pushout f g c

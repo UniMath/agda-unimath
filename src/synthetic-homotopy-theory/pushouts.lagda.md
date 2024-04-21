@@ -232,19 +232,19 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B)
   where
 
   dup-pushout :
-    dependent-universal-property-pushout l f g (cocone-pushout f g)
+    dependent-universal-property-pushout f g (cocone-pushout f g)
   dup-pushout =
     dependent-universal-property-pushout-induction-principle-pushout f g
       ( cocone-pushout f g)
       ( induction-principle-pushout' f g)
 
   equiv-dup-pushout :
-    (P : pushout f g → UU l) →
+    {l : Level} (P : pushout f g → UU l) →
     ((x : pushout f g) → P x) ≃ dependent-cocone f g (cocone-pushout f g) P
   pr1 (equiv-dup-pushout P) = dependent-cocone-map f g (cocone-pushout f g) P
   pr2 (equiv-dup-pushout P) = dup-pushout P

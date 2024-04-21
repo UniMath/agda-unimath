@@ -127,11 +127,10 @@ module _
   where
 
   dependent-universal-property-coequalizer-dependent-universal-property-pushout :
-    ({l : Level} →
-      dependent-universal-property-pushout l
-        ( vertical-map-span-cocone-cofork a)
-        ( horizontal-map-span-cocone-cofork a)
-        ( cocone-codiagonal-cofork a e)) →
+    dependent-universal-property-pushout
+      ( vertical-map-span-cocone-cofork a)
+      ( horizontal-map-span-cocone-cofork a)
+      ( cocone-codiagonal-cofork a e) →
     ({l : Level} →
       dependent-universal-property-coequalizer l a e)
   dependent-universal-property-coequalizer-dependent-universal-property-pushout
@@ -152,11 +151,10 @@ module _
   dependent-universal-property-pushout-dependent-universal-property-coequalizer :
     ({l : Level} →
       dependent-universal-property-coequalizer l a e) →
-    ({l : Level} →
-      dependent-universal-property-pushout l
-        ( vertical-map-span-cocone-cofork a)
-        ( horizontal-map-span-cocone-cofork a)
-        ( cocone-codiagonal-cofork a e))
+    dependent-universal-property-pushout
+      ( vertical-map-span-cocone-cofork a)
+      ( horizontal-map-span-cocone-cofork a)
+      ( cocone-codiagonal-cofork a e)
   dependent-universal-property-pushout-dependent-universal-property-coequalizer
     ( dup-coequalizer)
     ( P) =
