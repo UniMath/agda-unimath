@@ -59,7 +59,7 @@ module _
 
 ```agda
 subset-Ab :
-  (l : Level) {l1 : Level} (A : Ab l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (A : Ab l1) → UU (lsuc l ⊔ l1)
 subset-Ab l A = subset-Group l (group-Ab A)
 
 is-set-subset-Ab :

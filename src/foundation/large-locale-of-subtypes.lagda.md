@@ -38,11 +38,11 @@ module _
   where
 
   powerset-Large-Locale :
-    Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3)) lzero
+    Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3) lzero
   powerset-Large-Locale = power-Large-Locale A Prop-Large-Locale
 
   large-poset-powerset-Large-Locale :
-    Large-Poset (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3))
+    Large-Poset (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
   large-poset-powerset-Large-Locale =
     large-poset-Large-Locale powerset-Large-Locale
 
@@ -60,12 +60,12 @@ module _
     is-set-type-Large-Locale powerset-Large-Locale
 
   large-meet-semilattice-powerset-Large-Locale :
-    Large-Meet-Semilattice (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3))
+    Large-Meet-Semilattice (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
   large-meet-semilattice-powerset-Large-Locale =
     large-meet-semilattice-Large-Locale powerset-Large-Locale
 
   large-suplattice-powerset-Large-Locale :
-    Large-Suplattice (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3)) lzero
+    Large-Suplattice (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3) lzero
   large-suplattice-powerset-Large-Locale =
     large-suplattice-Large-Locale powerset-Large-Locale
 
