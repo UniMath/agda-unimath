@@ -165,10 +165,9 @@ module _
   where
 
   universal-property-sequential-colimit-universal-property-coequalizer :
-    ( {l : Level} →
-      universal-property-coequalizer l
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c)) →
+    universal-property-coequalizer
+      ( double-arrow-sequential-diagram A)
+      ( cofork-cocone-sequential-diagram c) →
     universal-property-sequential-colimit c
   universal-property-sequential-colimit-universal-property-coequalizer
     ( up-cofork)
@@ -185,10 +184,9 @@ module _
 
   universal-property-coequalizer-universal-property-sequential-colimit :
     universal-property-sequential-colimit c →
-    ( {l : Level} →
-      universal-property-coequalizer l
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c))
+    universal-property-coequalizer
+      ( double-arrow-sequential-diagram A)
+      ( cofork-cocone-sequential-diagram c)
   universal-property-coequalizer-universal-property-sequential-colimit
     ( up-sequential-colimit)
     ( Y) =

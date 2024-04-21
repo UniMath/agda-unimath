@@ -152,10 +152,9 @@ module _
   where
 
   dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer :
-    ( {l : Level} →
-      dependent-universal-property-coequalizer l
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c)) →
+    dependent-universal-property-coequalizer
+      ( double-arrow-sequential-diagram A)
+      ( cofork-cocone-sequential-diagram c) →
     dependent-universal-property-sequential-colimit c
   dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
     ( dup-coequalizer)
@@ -172,10 +171,9 @@ module _
 
   dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit :
     dependent-universal-property-sequential-colimit c →
-    ( {l : Level} →
-      dependent-universal-property-coequalizer l
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c))
+    dependent-universal-property-coequalizer
+      ( double-arrow-sequential-diagram A)
+      ( cofork-cocone-sequential-diagram c)
   dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
     ( dup-c)
     ( P) =
