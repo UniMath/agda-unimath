@@ -1,9 +1,16 @@
 # Simplicial type theory
 
 ```agda
+{-# OPTIONS --rewriting #-}
+```
+
+## Files in the simplicial type theory folder
+
+```agda
 module simplicial-type-theory where
 
 open import simplicial-type-theory.2-simplices public
+open import simplicial-type-theory.action-on-simplicial-edges-dependent-functions public
 open import simplicial-type-theory.action-on-simplicial-edges-functions public
 open import simplicial-type-theory.comma-types public
 open import simplicial-type-theory.directed-interval-type public
