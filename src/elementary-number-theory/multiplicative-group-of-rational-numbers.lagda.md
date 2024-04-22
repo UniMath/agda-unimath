@@ -46,25 +46,31 @@ the [core](group-theory.cores-monoids.md) of the
 ### The multiplicative group of rational numbers
 
 ```agda
-ℚˣ-mul-Group : Group lzero
-ℚˣ-mul-Group = group-of-units-Ring ℚ-Ring
+group-of-units-ℚ : Group lzero
+group-of-units-ℚ = group-of-units-Ring ring-ℚ
+
+group-mul-ℚˣ : Group lzero
+group-mul-ℚˣ = group-of-units-Ring ring-ℚ
 ```
 
 ### The type of invertible rational numbers
 
 ```agda
 ℚˣ : UU lzero
-ℚˣ = type-group-of-units-Ring ℚ-Ring
+ℚˣ = type-group-of-units-Ring ring-ℚ
 ```
 
 ### Operations of the multiplicative group of rational numbers
 
 ```agda
 mul-ℚˣ : ℚˣ → ℚˣ → ℚˣ
-mul-ℚˣ = mul-group-of-units-Ring ℚ-Ring
+mul-ℚˣ = mul-group-of-units-Ring ring-ℚ
+
+infixl 40 _*ℚˣ_
+_*ℚˣ_ = mul-ℚˣ
 
 inv-ℚˣ : ℚˣ → ℚˣ
-inv-ℚˣ = inv-group-of-units-Ring ℚ-Ring
+inv-ℚˣ = inv-group-of-units-Ring ring-ℚ
 ```
 
 ## Properties
@@ -72,12 +78,15 @@ inv-ℚˣ = inv-group-of-units-Ring ℚ-Ring
 ### The multiplicative group of rational numbers is commutative
 
 ```agda
-ℚˣ-mul-Ab : Ab lzero
-pr1 ℚˣ-mul-Ab = ℚˣ-mul-Group
-pr2 ℚˣ-mul-Ab =
+commutative-mul-ℚˣ : (x y : ℚˣ) → (x *ℚˣ y) ＝ (y *ℚˣ x)
+commutative-mul-ℚˣ =
   commutative-mul-Commutative-Submonoid
-    ( ℚ-mul-Commutative-Monoid)
-    ( submonoid-core-Monoid ℚ-mul-Monoid)
+    ( commutative-monoid-mul-ℚ)
+    ( submonoid-core-Monoid monoid-mul-ℚ)
+
+abelian-group-mul-ℚˣ : Ab lzero
+pr1 abelian-group-mul-ℚˣ = group-mul-ℚˣ
+pr2 abelian-group-mul-ℚˣ = commutative-mul-ℚˣ
 ```
 
 ### The elements of the multiplicative group of the rational numbers are the nonzero rational numbers
@@ -88,25 +97,25 @@ module _
   where
 
   is-nonzero-is-invertible-ℚ :
-    is-invertible-element-Ring ℚ-Ring x → is-nonzero-ℚ x
+    is-invertible-element-Ring ring-ℚ x → is-nonzero-ℚ x
   is-nonzero-is-invertible-ℚ H K =
     is-nonzero-is-invertible-element-nontrivial-Ring
-      ( ℚ-Ring)
+      ( ring-ℚ)
       ( pr1 is-division-ring-ℚ)
       ( x)
       ( H)
       ( inv K)
 
   is-invertible-is-nonzero-ℚ :
-    is-nonzero-ℚ x → is-invertible-element-Ring ℚ-Ring x
+    is-nonzero-ℚ x → is-invertible-element-Ring ring-ℚ x
   is-invertible-is-nonzero-ℚ = is-invertible-element-ring-is-nonzero-ℚ x
 
 eq-is-invertible-prop-is-nonzero-prop-ℚ :
-  is-nonzero-prop-ℚ ＝ is-invertible-element-prop-Ring ℚ-Ring
+  is-nonzero-prop-ℚ ＝ is-invertible-element-prop-Ring ring-ℚ
 eq-is-invertible-prop-is-nonzero-prop-ℚ =
   antisymmetric-leq-subtype
     ( is-nonzero-prop-ℚ)
-    ( is-invertible-element-prop-Ring ℚ-Ring)
+    ( is-invertible-element-prop-Ring ring-ℚ)
     ( is-invertible-is-nonzero-ℚ)
     ( is-nonzero-is-invertible-ℚ)
 ```

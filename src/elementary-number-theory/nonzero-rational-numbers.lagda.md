@@ -142,14 +142,14 @@ abstract
 ### The nonzero rational numbers are a multiplicative submonoid of the rational numbers
 
 ```agda
-is-submonoid-ℚ-mul-nonzero-ℚ :
-  is-submonoid-subset-Monoid ℚ-mul-Monoid is-nonzero-prop-ℚ
-pr1 is-submonoid-ℚ-mul-nonzero-ℚ = is-nonzero-one-ℚ
-pr2 is-submonoid-ℚ-mul-nonzero-ℚ x y = is-nonzero-mul-ℚ {x} {y}
+is-submonoid-mul-nonzero-ℚ :
+  is-submonoid-subset-Monoid monoid-mul-ℚ is-nonzero-prop-ℚ
+pr1 is-submonoid-mul-nonzero-ℚ = is-nonzero-one-ℚ
+pr2 is-submonoid-mul-nonzero-ℚ x y = is-nonzero-mul-ℚ {x} {y}
 
-nonzero-ℚ-mul-Submonoid : Submonoid lzero ℚ-mul-Monoid
-pr1 nonzero-ℚ-mul-Submonoid = is-nonzero-prop-ℚ
-pr2 nonzero-ℚ-mul-Submonoid = is-submonoid-ℚ-mul-nonzero-ℚ
+submonoid-mul-nonzero-ℚ : Submonoid lzero monoid-mul-ℚ
+pr1 submonoid-mul-nonzero-ℚ = is-nonzero-prop-ℚ
+pr2 submonoid-mul-nonzero-ℚ = is-submonoid-mul-nonzero-ℚ
 ```
 
 ### The factors of a nonzero product of rational numbers are nonzero

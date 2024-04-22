@@ -36,26 +36,26 @@ inverse given by`neg-ℚ`.
 ### The additive abelian group of rational numbers
 
 ```agda
-ℚ-add-Semigroup : Semigroup lzero
-pr1 ℚ-add-Semigroup = ℚ-Set
-pr1 (pr2 ℚ-add-Semigroup) = add-ℚ
-pr2 (pr2 ℚ-add-Semigroup) = associative-add-ℚ
+semigroup-add-ℚ : Semigroup lzero
+pr1 semigroup-add-ℚ = ℚ-Set
+pr1 (pr2 semigroup-add-ℚ) = add-ℚ
+pr2 (pr2 semigroup-add-ℚ) = associative-add-ℚ
 
 is-unital-add-ℚ : is-unital add-ℚ
 pr1 is-unital-add-ℚ = zero-ℚ
 pr1 (pr2 is-unital-add-ℚ) = left-unit-law-add-ℚ
 pr2 (pr2 is-unital-add-ℚ) = right-unit-law-add-ℚ
 
-ℚ-add-Monoid : Monoid lzero
-pr1 ℚ-add-Monoid = ℚ-add-Semigroup
-pr2 ℚ-add-Monoid = is-unital-add-ℚ
+monoid-add-ℚ : Monoid lzero
+pr1 monoid-add-ℚ = semigroup-add-ℚ
+pr2 monoid-add-ℚ = is-unital-add-ℚ
 
-ℚ-add-Group : Group lzero
-pr1 ℚ-add-Group = ℚ-add-Semigroup
-pr1 (pr2 ℚ-add-Group) = is-unital-add-ℚ
-pr1 (pr2 (pr2 ℚ-add-Group)) = neg-ℚ
-pr1 (pr2 (pr2 (pr2 ℚ-add-Group))) = left-inverse-law-add-ℚ
-pr2 (pr2 (pr2 (pr2 ℚ-add-Group))) = right-inverse-law-add-ℚ
+group-add-ℚ : Group lzero
+pr1 group-add-ℚ = semigroup-add-ℚ
+pr1 (pr2 group-add-ℚ) = is-unital-add-ℚ
+pr1 (pr2 (pr2 group-add-ℚ)) = neg-ℚ
+pr1 (pr2 (pr2 (pr2 group-add-ℚ))) = left-inverse-law-add-ℚ
+pr2 (pr2 (pr2 (pr2 group-add-ℚ))) = right-inverse-law-add-ℚ
 ```
 
 ## Properties
@@ -63,7 +63,7 @@ pr2 (pr2 (pr2 (pr2 ℚ-add-Group))) = right-inverse-law-add-ℚ
 ### Tha additive group of rational numbers is commutative
 
 ```agda
-ℚ-add-Ab : Ab lzero
-pr1 ℚ-add-Ab = ℚ-add-Group
-pr2 ℚ-add-Ab = commutative-add-ℚ
+abelian-group-add-ℚ : Ab lzero
+pr1 abelian-group-add-ℚ = group-add-ℚ
+pr2 abelian-group-add-ℚ = commutative-add-ℚ
 ```

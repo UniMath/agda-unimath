@@ -71,7 +71,7 @@ module _
     right-inverse-law-mul-is-positive-ℚ =
       (commutative-mul-ℚ x _) ∙ (left-inverse-law-mul-is-positive-ℚ)
 
-  is-invertible-is-positive-ℚ : is-invertible-element-Monoid ℚ-mul-Monoid x
+  is-invertible-is-positive-ℚ : is-invertible-element-Monoid monoid-mul-ℚ x
   pr1 is-invertible-is-positive-ℚ = inv-is-positive-ℚ
   pr1 (pr2 is-invertible-is-positive-ℚ) = right-inverse-law-mul-is-positive-ℚ
   pr2 (pr2 is-invertible-is-positive-ℚ) = left-inverse-law-mul-is-positive-ℚ
@@ -90,16 +90,16 @@ pr2 (inv-ℚ⁺ (x , P)) = is-positive-denominator-ℚ x
 ### The multiplicative group of positive rational numbers
 
 ```agda
-ℚ⁺-mul-Group : Group lzero
-pr1 ℚ⁺-mul-Group = semigroup-Submonoid ℚ-mul-Monoid ℚ⁺-mul-Submonoid
-pr1 (pr2 ℚ⁺-mul-Group) = is-unital-Monoid ℚ⁺-mul-Monoid
-pr1 (pr2 (pr2 ℚ⁺-mul-Group)) = inv-ℚ⁺
-pr1 (pr2 (pr2 (pr2 ℚ⁺-mul-Group))) x =
+group-mul-ℚ⁺ : Group lzero
+pr1 group-mul-ℚ⁺ = semigroup-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
+pr1 (pr2 group-mul-ℚ⁺) = is-unital-Monoid monoid-mul-ℚ⁺
+pr1 (pr2 (pr2 group-mul-ℚ⁺)) = inv-ℚ⁺
+pr1 (pr2 (pr2 (pr2 group-mul-ℚ⁺))) x =
   eq-ℚ⁺
     ( left-inverse-law-mul-is-positive-ℚ
       ( rational-ℚ⁺ x)
       ( is-positive-rational-ℚ⁺ x))
-pr2 (pr2 (pr2 (pr2 ℚ⁺-mul-Group))) x =
+pr2 (pr2 (pr2 (pr2 group-mul-ℚ⁺))) x =
   eq-ℚ⁺
     ( right-inverse-law-mul-is-positive-ℚ
       ( rational-ℚ⁺ x)
@@ -111,11 +111,7 @@ pr2 (pr2 (pr2 (pr2 ℚ⁺-mul-Group))) x =
 ### The multiplicative group of positive rational numbers is commutative
 
 ```agda
-commutative-mul-ℚ⁺ : (x y : ℚ⁺) → (x *ℚ⁺ y) ＝ (y *ℚ⁺ x)
-commutative-mul-ℚ⁺ x y =
-  eq-ℚ⁺ (commutative-mul-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y))
-
-ℚ⁺-mul-Ab : Ab lzero
-pr1 ℚ⁺-mul-Ab = ℚ⁺-mul-Group
-pr2 ℚ⁺-mul-Ab = commutative-mul-ℚ⁺
+abelian-group-mul-ℚ⁺ : Ab lzero
+pr1 abelian-group-mul-ℚ⁺ = group-mul-ℚ⁺
+pr2 abelian-group-mul-ℚ⁺ = commutative-mul-ℚ⁺
 ```

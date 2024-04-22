@@ -35,19 +35,19 @@ equipped with
 ### The multiplicative monoid of rational numbers
 
 ```agda
-ℚ-mul-Semigroup : Semigroup lzero
-pr1 ℚ-mul-Semigroup = ℚ-Set
-pr1 (pr2 ℚ-mul-Semigroup) = mul-ℚ
-pr2 (pr2 ℚ-mul-Semigroup) = associative-mul-ℚ
+semigroup-mul-ℚ : Semigroup lzero
+pr1 semigroup-mul-ℚ = ℚ-Set
+pr1 (pr2 semigroup-mul-ℚ) = mul-ℚ
+pr2 (pr2 semigroup-mul-ℚ) = associative-mul-ℚ
 
 is-unital-mul-ℚ : is-unital mul-ℚ
 pr1 is-unital-mul-ℚ = one-ℚ
 pr1 (pr2 is-unital-mul-ℚ) = left-unit-law-mul-ℚ
 pr2 (pr2 is-unital-mul-ℚ) = right-unit-law-mul-ℚ
 
-ℚ-mul-Monoid : Monoid lzero
-pr1 ℚ-mul-Monoid = ℚ-mul-Semigroup
-pr2 ℚ-mul-Monoid = is-unital-mul-ℚ
+monoid-mul-ℚ : Monoid lzero
+pr1 monoid-mul-ℚ = semigroup-mul-ℚ
+pr2 monoid-mul-ℚ = is-unital-mul-ℚ
 ```
 
 ## Properties
@@ -55,7 +55,7 @@ pr2 ℚ-mul-Monoid = is-unital-mul-ℚ
 ### The multiplicative monoid of rational numbers is commutative
 
 ```agda
-ℚ-mul-Commutative-Monoid : Commutative-Monoid lzero
-pr1 ℚ-mul-Commutative-Monoid = ℚ-mul-Monoid
-pr2 ℚ-mul-Commutative-Monoid = commutative-mul-ℚ
+commutative-monoid-mul-ℚ : Commutative-Monoid lzero
+pr1 commutative-monoid-mul-ℚ = monoid-mul-ℚ
+pr2 commutative-monoid-mul-ℚ = commutative-mul-ℚ
 ```

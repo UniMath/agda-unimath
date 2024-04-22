@@ -40,19 +40,19 @@ a commutative [division ring](ring-theory.division-rings.md).
 ### The compatible multiplicative structure on the abelian group of rational numbers
 
 ```agda
-has-mul-ℚ-add-Ab : has-mul-Ab ℚ-add-Ab
-pr1 has-mul-ℚ-add-Ab = has-associative-mul-Semigroup ℚ-mul-Semigroup
-pr1 (pr2 has-mul-ℚ-add-Ab) = is-unital-mul-ℚ
-pr1 (pr2 (pr2 has-mul-ℚ-add-Ab)) = left-distributive-mul-add-ℚ
-pr2 (pr2 (pr2 has-mul-ℚ-add-Ab)) = right-distributive-mul-add-ℚ
+has-mul-abelian-group-add-ℚ : has-mul-Ab abelian-group-add-ℚ
+pr1 has-mul-abelian-group-add-ℚ = has-associative-mul-Semigroup semigroup-mul-ℚ
+pr1 (pr2 has-mul-abelian-group-add-ℚ) = is-unital-mul-ℚ
+pr1 (pr2 (pr2 has-mul-abelian-group-add-ℚ)) = left-distributive-mul-add-ℚ
+pr2 (pr2 (pr2 has-mul-abelian-group-add-ℚ)) = right-distributive-mul-add-ℚ
 ```
 
 ### The ring of rational numbers
 
 ```agda
-ℚ-Ring : Ring lzero
-pr1 ℚ-Ring = ℚ-add-Ab
-pr2 ℚ-Ring = has-mul-ℚ-add-Ab
+ring-ℚ : Ring lzero
+pr1 ring-ℚ = abelian-group-add-ℚ
+pr2 ring-ℚ = has-mul-abelian-group-add-ℚ
 ```
 
 ## Properties
@@ -60,7 +60,7 @@ pr2 ℚ-Ring = has-mul-ℚ-add-Ab
 ### The ring of rational numbers is commutative
 
 ```agda
-ℚ-Commutative-Ring : Commutative-Ring lzero
-pr1 ℚ-Commutative-Ring = ℚ-Ring
-pr2 ℚ-Commutative-Ring = commutative-mul-ℚ
+commutative-ring-ℚ : Commutative-Ring lzero
+pr1 commutative-ring-ℚ = ring-ℚ
+pr2 commutative-ring-ℚ = commutative-mul-ℚ
 ```

@@ -229,20 +229,20 @@ abstract
 ### The positive rational numbers are an additive subsemigroup of the rational numbers
 
 ```agda
-ℚ⁺-add-Subsemigroup : Subsemigroup lzero ℚ-add-Semigroup
-pr1 ℚ⁺-add-Subsemigroup = is-positive-prop-ℚ
-pr2 ℚ⁺-add-Subsemigroup {x} {y} = is-positive-add-ℚ {x} {y}
+subsemigroup-add-ℚ⁺ : Subsemigroup lzero semigroup-add-ℚ
+pr1 subsemigroup-add-ℚ⁺ = is-positive-prop-ℚ
+pr2 subsemigroup-add-ℚ⁺ {x} {y} = is-positive-add-ℚ {x} {y}
 
-ℚ⁺-add-Semigroup : Semigroup lzero
-ℚ⁺-add-Semigroup =
-  semigroup-Subsemigroup ℚ-add-Semigroup ℚ⁺-add-Subsemigroup
+semigroup-add-ℚ⁺ : Semigroup lzero
+semigroup-add-ℚ⁺ =
+  semigroup-Subsemigroup semigroup-add-ℚ subsemigroup-add-ℚ⁺
 ```
 
 ### The positive sum of two positive rational numbers
 
 ```agda
 add-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
-add-ℚ⁺ = mul-Subsemigroup ℚ-add-Semigroup ℚ⁺-add-Subsemigroup
+add-ℚ⁺ = mul-Subsemigroup semigroup-add-ℚ subsemigroup-add-ℚ⁺
 
 infixl 35 _+ℚ⁺_
 _+ℚ⁺_ = add-ℚ⁺
@@ -266,31 +266,41 @@ abstract
 ### The positive rational numbers are a multiplicative submonoid of the rational numbers
 
 ```agda
-is-submonoid-ℚ-mul-ℚ⁺ :
-  is-submonoid-subset-Monoid ℚ-mul-Monoid is-positive-prop-ℚ
-pr1 is-submonoid-ℚ-mul-ℚ⁺ = is-positive-rational-ℚ⁺ one-ℚ⁺
-pr2 is-submonoid-ℚ-mul-ℚ⁺ x y = is-positive-mul-ℚ {x} {y}
+is-submonoid-mul-ℚ⁺ :
+  is-submonoid-subset-Monoid monoid-mul-ℚ is-positive-prop-ℚ
+pr1 is-submonoid-mul-ℚ⁺ = is-positive-rational-ℚ⁺ one-ℚ⁺
+pr2 is-submonoid-mul-ℚ⁺ x y = is-positive-mul-ℚ {x} {y}
 
-ℚ⁺-mul-Submonoid : Submonoid lzero ℚ-mul-Monoid
-pr1 ℚ⁺-mul-Submonoid = is-positive-prop-ℚ
-pr2 ℚ⁺-mul-Submonoid = is-submonoid-ℚ-mul-ℚ⁺
+submonoid-mul-ℚ⁺ : Submonoid lzero monoid-mul-ℚ
+pr1 submonoid-mul-ℚ⁺ = is-positive-prop-ℚ
+pr2 submonoid-mul-ℚ⁺ = is-submonoid-mul-ℚ⁺
 
-ℚ⁺-mul-Monoid : Monoid lzero
-ℚ⁺-mul-Monoid = monoid-Submonoid ℚ-mul-Monoid ℚ⁺-mul-Submonoid
+monoid-mul-ℚ⁺ : Monoid lzero
+monoid-mul-ℚ⁺ = monoid-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 
-ℚ⁺-mul-Commutative-Monoid : Commutative-Monoid lzero
-ℚ⁺-mul-Commutative-Monoid =
+commutative-monoid-mul-ℚ⁺ : Commutative-Monoid lzero
+commutative-monoid-mul-ℚ⁺ =
   commutative-monoid-Commutative-Submonoid
-    ℚ-mul-Commutative-Monoid
-    ℚ⁺-mul-Submonoid
+    commutative-monoid-mul-ℚ
+    submonoid-mul-ℚ⁺
 ```
 
 ### The positive product of two positive rational numbers
 
 ```agda
 mul-ℚ⁺ : ℚ⁺ → ℚ⁺ → ℚ⁺
-mul-ℚ⁺ = mul-Submonoid ℚ-mul-Monoid ℚ⁺-mul-Submonoid
+mul-ℚ⁺ = mul-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 
 infixl 40 _*ℚ⁺_
 _*ℚ⁺_ = mul-ℚ⁺
+```
+
+### The positive product of positive rational numbers is commutative
+
+```agda
+commutative-mul-ℚ⁺ : (x y : ℚ⁺) → (x *ℚ⁺ y) ＝ (y *ℚ⁺ x)
+commutative-mul-ℚ⁺ =
+  commutative-mul-Commutative-Submonoid
+    commutative-monoid-mul-ℚ
+    submonoid-mul-ℚ⁺
 ```

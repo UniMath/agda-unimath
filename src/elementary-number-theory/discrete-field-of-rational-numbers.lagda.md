@@ -46,10 +46,10 @@ module _
   (x : ℚ) (H : is-nonzero-ℚ x)
   where
 
-  is-invertible-element-ring-is-nonzero-ℚ : is-invertible-element-Ring ℚ-Ring x
+  is-invertible-element-ring-is-nonzero-ℚ : is-invertible-element-Ring ring-ℚ x
   is-invertible-element-ring-is-nonzero-ℚ =
     rec-coproduct
-      ( ( is-invertible-element-neg-Ring' ℚ-Ring x) ∘
+      ( ( is-invertible-element-neg-Ring' ring-ℚ x) ∘
         ( is-invertible-is-positive-ℚ (neg-ℚ x)))
       ( is-invertible-is-positive-ℚ x)
       ( decide-is-negative-is-positive-is-nonzero-ℚ H)
@@ -60,7 +60,7 @@ module _
 ### The ring of rational numbers is a division ring
 
 ```agda
-is-division-ring-ℚ : is-division-Ring ℚ-Ring
+is-division-ring-ℚ : is-division-Ring ring-ℚ
 pr1 is-division-ring-ℚ = is-nonzero-one-ℚ ∘ inv
 pr2 is-division-ring-ℚ x H =
   is-invertible-element-ring-is-nonzero-ℚ x (H ∘ inv)
@@ -69,6 +69,6 @@ pr2 is-division-ring-ℚ x H =
 ### The rational numbers are a discrete field
 
 ```agda
-is-discrete-field-ℚ : is-discrete-field-Commutative-Ring ℚ-Commutative-Ring
+is-discrete-field-ℚ : is-discrete-field-Commutative-Ring commutative-ring-ℚ
 is-discrete-field-ℚ = is-division-ring-ℚ
 ```
