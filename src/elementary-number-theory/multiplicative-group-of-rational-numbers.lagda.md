@@ -9,6 +9,7 @@ module elementary-number-theory.multiplicative-group-of-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.discrete-field-of-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
 open import elementary-number-theory.rational-numbers
@@ -91,14 +92,14 @@ module _
   is-nonzero-is-invertible-ℚ H K =
     is-nonzero-is-invertible-element-nontrivial-Ring
       ( ℚ-Ring)
-      ( pr1 is-division-Ring-ℚ-Ring)
+      ( pr1 is-division-ring-ℚ)
       ( x)
       ( H)
       ( inv K)
 
   is-invertible-is-nonzero-ℚ :
     is-nonzero-ℚ x → is-invertible-element-Ring ℚ-Ring x
-  is-invertible-is-nonzero-ℚ H = pr2 is-division-Ring-ℚ-Ring x (H ∘ inv)
+  is-invertible-is-nonzero-ℚ = is-invertible-element-ring-is-nonzero-ℚ x
 
 eq-is-invertible-prop-is-nonzero-prop-ℚ :
   is-nonzero-prop-ℚ ＝ is-invertible-element-prop-Ring ℚ-Ring

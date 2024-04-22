@@ -11,28 +11,17 @@ module elementary-number-theory.ring-of-rational-numbers where
 ```agda
 open import commutative-algebra.commutative-rings
 
-open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.multiplication-rational-numbers
-open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
-open import elementary-number-theory.nonzero-rational-numbers
-open import elementary-number-theory.positive-rational-numbers
-open import elementary-number-theory.rational-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.identity-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.semigroups
 
-open import ring-theory.division-rings
-open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
 
@@ -74,17 +63,4 @@ pr2 ℚ-Ring = has-mul-ℚ-add-Ab
 ℚ-Commutative-Ring : Commutative-Ring lzero
 pr1 ℚ-Commutative-Ring = ℚ-Ring
 pr2 ℚ-Commutative-Ring = commutative-mul-ℚ
-```
-
-### The ring of rational numbers is a division ring
-
-```agda
-is-division-Ring-ℚ-Ring : is-division-Ring ℚ-Ring
-pr1 is-division-Ring-ℚ-Ring = is-nonzero-one-ℚ ∘ inv
-pr2 is-division-Ring-ℚ-Ring x H =
-  rec-coproduct
-    ( ( is-invertible-element-neg-Ring' ℚ-Ring x) ∘
-      ( is-invertible-is-positive-ℚ (neg-ℚ x)))
-    ( is-invertible-is-positive-ℚ x)
-    ( decide-is-negative-is-positive-is-nonzero-ℚ (H ∘ inv))
 ```

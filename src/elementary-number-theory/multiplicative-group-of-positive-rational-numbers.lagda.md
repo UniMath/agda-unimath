@@ -33,7 +33,7 @@ open import group-theory.submonoids
 
 ## Idea
 
-The submonoid of
+The [submonoid](group-theory.submonoids.md) of
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 in the
 [multiplicative monoid of rational numbers](elementary-number-theory.multiplicative-monoid-of-rational-numbers.md)
