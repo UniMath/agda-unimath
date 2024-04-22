@@ -85,8 +85,7 @@ module _
   is-nonzero-is-invertible-element-nontrivial-Ring :
     is-invertible-element-Ring R x → zero-Ring R ≠ x
   is-nonzero-is-invertible-element-nontrivial-Ring (y , P , _) K =
-    H
-      ( ( inv (left-zero-law-mul-Ring R y)) ∙
+    H ( ( inv (left-zero-law-mul-Ring R y)) ∙
         ( ap (mul-Ring' R y) K) ∙
         ( P))
 ```
