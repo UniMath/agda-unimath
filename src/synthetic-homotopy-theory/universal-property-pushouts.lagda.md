@@ -431,8 +431,8 @@ module _
   where
 
   universal-property-pushout-rectangle-universal-property-pushout-right :
-    ( universal-property-pushout (vertical-map-cocone f g c) k d) →
-    ( universal-property-pushout f (k ∘ g) (cocone-comp-horizontal f g k c d))
+    universal-property-pushout (vertical-map-cocone f g c) k d →
+    universal-property-pushout f (k ∘ g) (cocone-comp-horizontal f g k c d)
   universal-property-pushout-rectangle-universal-property-pushout-right
     ( up-d)
     { l} =
@@ -496,7 +496,7 @@ module _
       ( f)
       ( k ∘ g)
       ( cocone-comp-horizontal f g k c d) →
-    ( universal-property-pushout (vertical-map-cocone f g c) k d)
+    universal-property-pushout (vertical-map-cocone f g c) k d
   universal-property-pushout-right-universal-property-pushout-rectangle
     ( up-r)
     { l} =
@@ -697,8 +697,8 @@ module _
               ( W))))
 
   universal-property-pushout-top-universal-property-pushout-rectangle :
-    ( universal-property-pushout (k ∘ f) g (cocone-comp-vertical f g k c d)) →
-    ( universal-property-pushout k (horizontal-map-cocone f g c) d)
+    universal-property-pushout (k ∘ f) g (cocone-comp-vertical f g k c d) →
+    universal-property-pushout k (horizontal-map-cocone f g c) d
   universal-property-pushout-top-universal-property-pushout-rectangle
     ( up-r)
     { l} =
@@ -857,7 +857,7 @@ module _
 
   universal-property-pushout-extension-by-equivalences :
     {l : Level} → is-equiv i → is-equiv j → is-equiv k →
-    Σ (cocone f' g' X) (λ d → universal-property-pushout-Level l f' g' d)
+    Σ (cocone f' g' X) (universal-property-pushout-Level l f' g')
   universal-property-pushout-extension-by-equivalences ie je ke =
     universal-property-pushout-top-extension-by-equivalences
       ( f')
@@ -916,8 +916,8 @@ module _
   where
 
   universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv :
-    ( universal-property-pushout f g (h , k , bottom)) →
-    ( universal-property-pushout f' g' (h' , k' , top))
+    universal-property-pushout f g (h , k , bottom) →
+    universal-property-pushout f' g' (h' , k' , top)
   universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
     ( up-bottom)
     { l = l} =
@@ -962,8 +962,8 @@ module _
             ( W)))
 
   universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv :
-    ( universal-property-pushout f' g' (h' , k' , top)) →
-    ( universal-property-pushout f g (h , k , bottom))
+    universal-property-pushout f' g' (h' , k' , top) →
+    universal-property-pushout f g (h , k , bottom)
   universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
     ( up-top)
     { l = l} =
