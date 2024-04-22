@@ -111,7 +111,11 @@ pr2 (pr2 (pr2 (pr2 ℚ⁺-mul-Group))) x =
 ### The multiplicative group of positive rational numbers is commutative
 
 ```agda
+commutative-mul-ℚ⁺ : (x y : ℚ⁺) → (x *ℚ⁺ y) ＝ (y *ℚ⁺ x)
+commutative-mul-ℚ⁺ x y =
+  eq-ℚ⁺ (commutative-mul-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y))
+
 ℚ⁺-mul-Ab : Ab lzero
 pr1 ℚ⁺-mul-Ab = ℚ⁺-mul-Group
-pr2 ℚ⁺-mul-Ab x y = eq-ℚ⁺ (commutative-mul-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y))
+pr2 ℚ⁺-mul-Ab = commutative-mul-ℚ⁺
 ```
