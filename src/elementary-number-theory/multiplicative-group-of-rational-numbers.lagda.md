@@ -9,12 +9,14 @@ module elementary-number-theory.multiplicative-group-of-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.discrete-field-of-rational-numbers
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.nonzero-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.ring-of-rational-numbers
 
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -101,14 +103,19 @@ module _
   is-nonzero-is-invertible-ℚ H K =
     is-nonzero-is-invertible-element-nontrivial-Ring
       ( ring-ℚ)
-      ( pr1 is-division-ring-ℚ)
+      ( is-nonzero-one-ℚ ∘ inv)
       ( x)
       ( H)
       ( inv K)
 
-  is-invertible-is-nonzero-ℚ :
+  is-invertible-element-ring-is-nonzero-ℚ :
     is-nonzero-ℚ x → is-invertible-element-Ring ring-ℚ x
-  is-invertible-is-nonzero-ℚ = is-invertible-element-ring-is-nonzero-ℚ x
+  is-invertible-element-ring-is-nonzero-ℚ H =
+    rec-coproduct
+      ( ( is-invertible-element-neg-Ring' ring-ℚ x) ∘
+        ( is-invertible-is-positive-ℚ (neg-ℚ x)))
+      ( is-invertible-is-positive-ℚ x)
+      ( decide-is-negative-is-positive-is-nonzero-ℚ H)
 
 eq-is-invertible-prop-is-nonzero-prop-ℚ :
   is-nonzero-prop-ℚ ＝ is-invertible-element-prop-Ring ring-ℚ
@@ -116,6 +123,6 @@ eq-is-invertible-prop-is-nonzero-prop-ℚ =
   antisymmetric-leq-subtype
     ( is-nonzero-prop-ℚ)
     ( is-invertible-element-prop-Ring ring-ℚ)
-    ( is-invertible-is-nonzero-ℚ)
+    ( is-invertible-element-ring-is-nonzero-ℚ)
     ( is-nonzero-is-invertible-ℚ)
 ```
