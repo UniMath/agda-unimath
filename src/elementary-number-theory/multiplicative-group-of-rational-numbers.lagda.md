@@ -35,9 +35,9 @@ open import ring-theory.trivial-rings
 ## Idea
 
 The multiplicative group of rational numbers is the
-[group of units](ring-theory.group-of-units-ring.md) of the
+[group of units](ring-theory.groups-of-units-rings.md) of the
 [ring of rational numbers](elementary-number-theory.ring-of-rational-numbers.md),
-the [core](group-theory.core-monoids.md) of the
+the [core](group-theory.cores-monoids.md) of the
 [multiplicative monoid of rational numbers](elementary-number-theory.multiplicative-monoid-of-rational-numbers.md).
 
 ## Definitions

@@ -20,7 +20,9 @@ The type of [rational numbers](elementary-number-theory.rational-numbers.md)
 equipped with [addition](elementary-number-theory.addition-rational-numbers.md)
 and
 [multiplication](elementary-number-theory.multiplication-rational-numbers.md) is
-a [discrete field](commutative-algebra.discrete-fields.md), i.e., a [commutative ring](commutative-algebra.commutative-rings.md) whose nonzero elements are invertible.
+a [discrete field](commutative-algebra.discrete-fields.md), i.e., a
+[commutative ring](commutative-algebra.commutative-rings.md) whose nonzero
+elements are invertible.
 
 ## Definitions
 
