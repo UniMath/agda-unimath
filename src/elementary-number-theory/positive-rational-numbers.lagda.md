@@ -18,6 +18,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-rational-numbers
+open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions
 open import elementary-number-theory.multiplicative-monoid-of-rational-numbers
 open import elementary-number-theory.negative-integers
 open import elementary-number-theory.nonzero-rational-numbers
@@ -41,6 +42,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
+open import group-theory.invertible-elements-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
 open import group-theory.submonoids
@@ -303,4 +305,40 @@ commutative-mul-ℚ⁺ =
   commutative-mul-Commutative-Submonoid
     commutative-monoid-mul-ℚ
     submonoid-mul-ℚ⁺
+```
+
+### The positive rational numbers are invertible elements of the multiplicative monoid of rational numbers
+
+```agda
+module _
+  (x : ℚ) (P : is-positive-ℚ x)
+  where
+
+  inv-is-positive-ℚ : ℚ
+  pr1 inv-is-positive-ℚ = inv-is-positive-fraction-ℤ (fraction-ℚ x) P
+  pr2 inv-is-positive-ℚ =
+    is-reduced-inv-is-positive-fraction-ℤ
+      ( fraction-ℚ x)
+      ( P)
+      ( is-reduced-fraction-ℚ x)
+
+  abstract
+    left-inverse-law-mul-is-positive-ℚ : inv-is-positive-ℚ *ℚ x ＝ one-ℚ
+    left-inverse-law-mul-is-positive-ℚ =
+      ( eq-ℚ-sim-fraction-ℤ
+        ( mul-fraction-ℤ
+          ( inv-is-positive-fraction-ℤ (fraction-ℚ x) P)
+          ( fraction-ℚ x))
+        ( one-fraction-ℤ)
+        ( left-inverse-law-mul-is-positive-fraction-ℤ (fraction-ℚ x) P)) ∙
+      ( is-retraction-rational-fraction-ℚ one-ℚ)
+
+    right-inverse-law-mul-is-positive-ℚ : x *ℚ inv-is-positive-ℚ ＝ one-ℚ
+    right-inverse-law-mul-is-positive-ℚ =
+      (commutative-mul-ℚ x _) ∙ (left-inverse-law-mul-is-positive-ℚ)
+
+  is-invertible-is-positive-ℚ : is-invertible-element-Monoid monoid-mul-ℚ x
+  pr1 is-invertible-is-positive-ℚ = inv-is-positive-ℚ
+  pr1 (pr2 is-invertible-is-positive-ℚ) = right-inverse-law-mul-is-positive-ℚ
+  pr2 (pr2 is-invertible-is-positive-ℚ) = left-inverse-law-mul-is-positive-ℚ
 ```
