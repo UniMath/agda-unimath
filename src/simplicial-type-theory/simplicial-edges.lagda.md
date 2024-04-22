@@ -44,25 +44,25 @@ We introduce the notation `x →₂ y` for the type of simplicial edges from `x`
 
 ## Definitions
 
-### Dependent simplicial edges
+### Simplicial edges in types dependent over the directed interval
 
 ```agda
 module _
   {l : Level} {A : 𝟚 → UU l}
   where
 
-  dependent-simplicial-hom : A 0₂ → A 1₂ → UU l
-  dependent-simplicial-hom x y =
-    Σ (dependent-simplicial-arrow A) (λ α → (α 0₂ ＝ x) × (α 1₂ ＝ y))
+  simplicial-hom' : A 0₂ → A 1₂ → UU l
+  simplicial-hom' x y =
+    Σ (simplicial-arrow' A) (λ α → (α 0₂ ＝ x) × (α 1₂ ＝ y))
 
   simplicial-arrow-simplicial-hom :
     {x : A 0₂} {y : A 1₂} →
-    dependent-simplicial-hom x y →
-    dependent-simplicial-arrow A
+    simplicial-hom' x y →
+    simplicial-arrow' A
   simplicial-arrow-simplicial-hom = pr1
 
   simplicial-hom-simplicial-arrow :
-    (α : dependent-simplicial-arrow A) → dependent-simplicial-hom (α 0₂) (α 1₂)
+    (α : simplicial-arrow' A) → simplicial-hom' (α 0₂) (α 1₂)
   simplicial-hom-simplicial-arrow α = (α , refl , refl)
 ```
 
@@ -74,7 +74,7 @@ module _
   where
 
   _→₂_ : A → A → UU l
-  _→₂_ = dependent-simplicial-hom {A = λ _ → A}
+  _→₂_ = simplicial-hom' {A = λ _ → A}
 
   infix 7 _→₂_
 
@@ -146,7 +146,7 @@ module _
   htpy-simplicial-hom : (f g : x →₂ y) → UU l
   htpy-simplicial-hom f g =
     Σ ( simplicial-arrow-simplicial-hom f ~ simplicial-arrow-simplicial-hom g)
-    ( coherence-htpy-simplicial-hom f g)
+      ( coherence-htpy-simplicial-hom f g)
 
   refl-htpy-simplicial-hom :
     (f : x →₂ y) → htpy-simplicial-hom f f

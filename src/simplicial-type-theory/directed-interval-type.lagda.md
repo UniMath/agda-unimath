@@ -88,6 +88,11 @@ is-noncontractible-𝟚 = (1 , is-noncontractible-𝟚')
 
 ### The canonical inclusion of the booleans into the directed interval
 
+The canonical inclusion of the booleans into the directed interval is the map
+that sends `false` to `0₂` and `true` to `1₂`. Using the nontriviality of `𝟚`,
+we can already show that this map is
+[injective](foundation-core.injective-maps.md).
+
 ```agda
 map-directed-interval-bool : bool → 𝟚
 map-directed-interval-bool true = 1₂

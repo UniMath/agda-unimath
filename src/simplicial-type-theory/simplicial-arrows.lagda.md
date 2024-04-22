@@ -28,18 +28,18 @@ arrows with a specified source and target.
 
 ## Definitions
 
-### Dependent simplicial arrows
+### Simplicial arrows in types dependent over the directed interval
 
 ```agda
-dependent-simplicial-arrow : {l : Level} → (𝟚 → UU l) → UU l
-dependent-simplicial-arrow A = (t : 𝟚) → A t
+simplicial-arrow' : {l : Level} → (𝟚 → UU l) → UU l
+simplicial-arrow' A = (t : 𝟚) → A t
 ```
 
 ### Simplicial arrows
 
 ```agda
 simplicial-arrow : {l : Level} → UU l → UU l
-simplicial-arrow A = dependent-simplicial-arrow (λ _ → A)
+simplicial-arrow A = simplicial-arrow' (λ _ → A)
 ```
 
 ### The identity/constant simplicial arrows

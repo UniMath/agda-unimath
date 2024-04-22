@@ -85,18 +85,18 @@ module _
   where
 
   family-of-simplicial-arrows-simplicial-arrow-of-dependent-functions :
-    dependent-simplicial-arrow (λ t → (x : A) → B x t) →
-    (x : A) → dependent-simplicial-arrow (B x)
+    simplicial-arrow' (λ t → (x : A) → B x t) →
+    (x : A) → simplicial-arrow' (B x)
   family-of-simplicial-arrows-simplicial-arrow-of-dependent-functions = swap-Π
 
   simplicial-arrow-of-dependent-functions-family-of-simplicial-arrows :
-    ((x : A) → dependent-simplicial-arrow (B x)) →
-    dependent-simplicial-arrow (λ t → (x : A) → B x t)
+    ((x : A) → simplicial-arrow' (B x)) →
+    simplicial-arrow' (λ t → (x : A) → B x t)
   simplicial-arrow-of-dependent-functions-family-of-simplicial-arrows = swap-Π
 
   equiv-family-of-simplicial-arrows-simplicial-arrow-of-dependent-functions :
-    ( dependent-simplicial-arrow (λ t → (x : A) → B x t)) ≃
-    ( (x : A) → dependent-simplicial-arrow (B x))
+    ( simplicial-arrow' (λ t → (x : A) → B x t)) ≃
+    ( (x : A) → simplicial-arrow' (B x))
   equiv-family-of-simplicial-arrows-simplicial-arrow-of-dependent-functions =
     equiv-swap-Π
 ```
