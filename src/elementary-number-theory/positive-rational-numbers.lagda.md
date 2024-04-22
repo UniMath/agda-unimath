@@ -250,6 +250,22 @@ infixl 35 _+ℚ⁺_
 _+ℚ⁺_ = add-ℚ⁺
 ```
 
+### The positive sum of positive rational numbers is associative
+
+```agda
+associative-add-ℚ⁺ : (x y z : ℚ⁺) → ((x +ℚ⁺ y) +ℚ⁺ z) ＝ (x +ℚ⁺ (y +ℚ⁺ z))
+associative-add-ℚ⁺ =
+  associative-mul-Subsemigroup semigroup-add-ℚ subsemigroup-add-ℚ⁺
+```
+
+### The positive sum of positive rational numbers is commutative
+
+```agda
+commutative-add-ℚ⁺ : (x y : ℚ⁺) → (x +ℚ⁺ y) ＝ (y +ℚ⁺ x)
+commutative-add-ℚ⁺ x y =
+  eq-ℚ⁺ (commutative-add-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y))
+```
+
 ### The product of two positive rational numbers is positive
 
 ```agda
@@ -295,6 +311,14 @@ mul-ℚ⁺ = mul-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 
 infixl 40 _*ℚ⁺_
 _*ℚ⁺_ = mul-ℚ⁺
+```
+
+### The positive product of positive rational numbers is associative
+
+```agda
+associative-mul-ℚ⁺ : (x y z : ℚ⁺) → ((x *ℚ⁺ y) *ℚ⁺ z) ＝ (x *ℚ⁺ (y *ℚ⁺ z))
+associative-mul-ℚ⁺ =
+  associative-mul-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
 ```
 
 ### The positive product of positive rational numbers is commutative

@@ -59,6 +59,9 @@ group-mul-ℚˣ = group-of-units-Ring ring-ℚ
 ```agda
 ℚˣ : UU lzero
 ℚˣ = type-group-of-units-Ring ring-ℚ
+
+one-ℚˣ : ℚˣ
+one-ℚˣ = unit-group-of-units-Ring ring-ℚ
 ```
 
 ### Operations of the multiplicative group of rational numbers
@@ -72,6 +75,23 @@ _*ℚˣ_ = mul-ℚˣ
 
 inv-ℚˣ : ℚˣ → ℚˣ
 inv-ℚˣ = inv-group-of-units-Ring ring-ℚ
+```
+
+### Inverse laws in the multiplicative group of rational numbers
+
+```agda
+left-inverse-law-mul-ℚˣ : (x : ℚˣ) → (inv-ℚˣ x) *ℚˣ x ＝ one-ℚˣ
+left-inverse-law-mul-ℚˣ = left-inverse-law-mul-group-of-units-Ring ring-ℚ
+
+right-inverse-law-mul-ℚˣ : (x : ℚˣ) → x *ℚˣ (inv-ℚˣ x) ＝ one-ℚˣ
+right-inverse-law-mul-ℚˣ = right-inverse-law-mul-group-of-units-Ring ring-ℚ
+```
+
+### Associativity law in the multiplicative group of rational numbers
+
+```agda
+associative-mul-ℚˣ : (x y z : ℚˣ) → ((x *ℚˣ y) *ℚˣ z) ＝ (x *ℚˣ (y *ℚˣ z))
+associative-mul-ℚˣ = associative-mul-Group group-mul-ℚˣ
 ```
 
 ## Properties

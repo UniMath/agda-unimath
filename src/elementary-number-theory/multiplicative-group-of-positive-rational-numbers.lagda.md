@@ -64,6 +64,16 @@ pr2 (pr2 (pr2 (pr2 group-mul-ℚ⁺))) x =
       ( is-positive-rational-ℚ⁺ x))
 ```
 
+### Inverse laws in the multiplicative group of positive rational numbers
+
+```agda
+left-inverse-law-mul-ℚ⁺ : (x : ℚ⁺) → (inv-ℚ⁺ x) *ℚ⁺ x ＝ one-ℚ⁺
+left-inverse-law-mul-ℚ⁺ = left-inverse-law-mul-Group group-mul-ℚ⁺
+
+right-inverse-law-mul-ℚ⁺ : (x : ℚ⁺) → x *ℚ⁺ (inv-ℚ⁺ x) ＝ one-ℚ⁺
+right-inverse-law-mul-ℚ⁺ = right-inverse-law-mul-Group group-mul-ℚ⁺
+```
+
 ## Properties
 
 ### The multiplicative group of positive rational numbers is commutative
