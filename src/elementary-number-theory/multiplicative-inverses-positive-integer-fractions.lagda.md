@@ -29,7 +29,8 @@ The integer fraction obtained by swapping the numerator and the denominator of a
 is a
 [multiplicative](elementary-number-theory.multiplication-integer-fractions.md)
 inverse of the original fraction up to the canonical similarity relation on
-[integer fractions](elementary-number-theory.integer-fractions.md).
+[integer fractions](elementary-number-theory.integer-fractions.md): its
+multiplication with the original fraction is similar to one.
 
 ## Definitions
 
