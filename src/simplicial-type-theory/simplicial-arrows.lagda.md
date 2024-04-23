@@ -20,9 +20,9 @@ open import simplicial-type-theory.directed-interval-type
 A
 {{#concept "simplicial arrow" Disambiguation="simplicial type theory" Agda=simplicial-arrow}}
 in a type `A` is a map from the
-[directed interval](simplicial-type-theory.directed-interval.md) to the type,
-`𝟚 → A`. Given a simplicial arrow `α` in `A`, we call `α 0₂` the _source_, and
-`α 1₂` the _target_ of the arrow. See
+[directed interval](simplicial-type-theory.directed-interval-type.md) to the
+type, `𝟚 → A`. Given a simplicial arrow `α` in `A`, we call `α 0₂` the _source_,
+and `α 1₂` the _target_ of the arrow. See
 [simplicial edges](simplicial-type-theory.simplicial-edges.md) for simplicial
 arrows with a specified source and target.
 
@@ -52,7 +52,18 @@ id-simplicial-arrow x _ = x
 ### Simplicial arrows arising from equalities
 
 ```agda
-simplicial-arrow-eq :
-  {l : Level} {A : UU l} {x y : A} → x ＝ y → simplicial-arrow A
-simplicial-arrow-eq {x = x} refl = id-simplicial-arrow x
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  simplicial-arrow-eq : x ＝ y → simplicial-arrow A
+  simplicial-arrow-eq refl = id-simplicial-arrow x
+
+  compute-source-simplicial-arrow-eq :
+    (p : x ＝ y) → simplicial-arrow-eq p 0₂ ＝ x
+  compute-source-simplicial-arrow-eq refl = refl
+
+  compute-target-simplicial-arrow-eq :
+    (p : x ＝ y) → simplicial-arrow-eq p 1₂ ＝ y
+  compute-target-simplicial-arrow-eq refl = refl
 ```

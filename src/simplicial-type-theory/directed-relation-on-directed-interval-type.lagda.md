@@ -73,9 +73,9 @@ postulate
 [join operation](synthetic-homotopy-theory.joins-of-types.md) on types as we may
 commonly want to eliminate the directed relation into types, and not just
 propositions. Moreover, the join operation is defined in terms of the
-[standard pushout](synthetic-homtopy-theory.pushouts.md) which we can enable
+[standard pushout](synthetic-homotopy-theory.pushouts.md) which we can enable
 rewrite rules for by importing the module
-[`synthetic-homtopy-theory.rewriting-pushouts`](synthetic-homtopy-theory.rewriting-pushouts.md).
+[`synthetic-homotopy-theory.rewriting-pushouts`](synthetic-homotopy-theory.rewriting-pushouts.md).
 
 ### The source and target of the directed interval are bottom and top elements
 

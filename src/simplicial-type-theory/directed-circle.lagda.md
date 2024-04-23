@@ -15,7 +15,7 @@ open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
-open import foundation.dependent-identifications
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
@@ -44,10 +44,7 @@ open import simplicial-type-theory.simplicial-arrows
 open import simplicial-type-theory.simplicial-edges
 open import simplicial-type-theory.universal-property-directed-circle
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
-open import synthetic-homotopy-theory.joins-of-types
-open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.circle
 ```
 
 </details>
@@ -133,8 +130,7 @@ module _
       (x : directed-circle) → P x
 
   compute-arrow-ind-directed-circle :
-    (α : free-dependent-directed-loop free-loop-directed-circle P) →
-    (t : 𝟚) →
+    (α : free-dependent-directed-loop free-loop-directed-circle P) (t : 𝟚) →
     ind-directed-circle α (arrow-directed-circle t) ＝
     arrow-free-dependent-directed-loop free-loop-directed-circle α t
   compute-arrow-ind-directed-circle α t =
@@ -211,6 +207,14 @@ module _
         ( free-loop-directed-circle)
         ( X)
         ( α))
+```
+
+### The canonical map from the directed circle to the circle
+
+```agda
+map-directed-circle-circle : directed-circle → 𝕊¹
+map-directed-circle-circle =
+  rec-directed-circle (free-directed-loop-free-loop free-loop-𝕊¹)
 ```
 
 ## Properties

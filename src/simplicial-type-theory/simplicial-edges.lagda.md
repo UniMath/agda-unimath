@@ -124,8 +124,10 @@ id-simplicial-hom = simplicial-hom-simplicial-arrow ∘ id-simplicial-arrow
 ```agda
 simplicial-hom-eq :
   {l : Level} {A : UU l} {x y : A} → x ＝ y → x →₂ y
-pr1 (simplicial-hom-eq p) = simplicial-arrow-eq p
-pr2 (simplicial-hom-eq refl) = (refl , refl)
+simplicial-hom-eq p =
+  ( simplicial-arrow-eq p ,
+    compute-source-simplicial-arrow-eq p ,
+    compute-target-simplicial-arrow-eq p)
 ```
 
 ### Characterizing equality of homomorphisms

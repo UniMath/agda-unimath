@@ -29,6 +29,7 @@ open import foundation.universe-levels
 open import simplicial-type-theory.dependent-simplicial-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
+open import synthetic-homotopy-theory.free-loops
 open import simplicial-type-theory.simplicial-edges
 ```
 
@@ -37,7 +38,7 @@ open import simplicial-type-theory.simplicial-edges
 ## Idea
 
 A {{#concept "free directed loop"}} in a type `X` consists of a
-[directed arrow](simplicial-type.theory.simplicial-arrows.md) `α : 𝟚 → X` and an
+[directed arrow](simplicial-type-theory.simplicial-arrows.md) `α : 𝟚 → X` and an
 [identification](foundation-core.identity-types.md) `α 1₂ ＝ α 0₂`. Free
 directed loops are classified by the
 [directed circle](simplicial-type-theory.directed-circle.md), meaning that the
@@ -119,6 +120,21 @@ module _
     ( arrow-free-dependent-directed-loop ,
       refl ,
       compute-target-free-dependent-directed-loop)
+```
+
+### Free directed loops from free loops
+
+```agda
+module _
+  {l1 : Level} {X : UU l1}
+  where
+
+  free-directed-loop-free-loop : free-loop X → free-directed-loop X
+  pr1 (free-directed-loop-free-loop α) =
+    simplicial-arrow-eq (loop-free-loop α)
+  pr2 (free-directed-loop-free-loop α) =
+    ( compute-target-simplicial-arrow-eq (loop-free-loop α) ∙
+      inv (compute-source-simplicial-arrow-eq (loop-free-loop α)))
 ```
 
 ## Properties
@@ -247,7 +263,7 @@ module _
     map-inv-is-equiv (is-equiv-htpy-free-dependent-directed-loop-eq β β')
 ```
 
-### The type of free dependent loops in a constant family of types is equivalent to the type of ordinary free loops
+### The type of free dependent loops in a constant family of types is equivalent to the type of ordinary free directed loops
 
 ```agda
 module _
