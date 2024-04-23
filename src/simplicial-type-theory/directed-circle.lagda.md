@@ -55,7 +55,8 @@ open import synthetic-homotopy-theory.pushouts
 ## Idea
 
 The {{#concept "directed circle"}} is the type consisting of a point `*` and a
-nontrivial endosimplex `* →₂ *`. The directed circle classifies
+nontrivial [directed edge](simplicial-type-theory.simplicial-edges.md) `* →₂ *`.
+The directed circle classifies
 [free directed loops](simplicial-type-theory.free-directed-loops.md), meaning
 that maps `directed-circle → X` are in correspondence with free directed loops
 of `X`.

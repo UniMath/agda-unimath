@@ -20,6 +20,7 @@ open import simplicial-type-theory.directed-relation-on-directed-interval-type p
 open import simplicial-type-theory.free-directed-loops public
 open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions public
 open import simplicial-type-theory.horizontal-composition-simplicial-edges-functions public
+open import simplicial-type-theory.rewriting-directed-circle public
 open import simplicial-type-theory.simplicial-arrows public
 open import simplicial-type-theory.simplicial-cubes public
 open import simplicial-type-theory.simplicial-edges public
