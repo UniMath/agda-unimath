@@ -16,6 +16,7 @@ open import simplicial-type-theory.comma-types public
 open import simplicial-type-theory.dependent-simplicial-edges public
 open import simplicial-type-theory.directed-interval-type public
 open import simplicial-type-theory.directed-relation-on-directed-interval-type public
+open import simplicial-type-theory.free-directed-loops public
 open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions public
 open import simplicial-type-theory.horizontal-composition-simplicial-edges-functions public
 open import simplicial-type-theory.simplicial-arrows public

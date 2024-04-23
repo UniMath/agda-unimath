@@ -59,7 +59,7 @@ respective fiber of `B`
    ~~~~~~~~~~~~~~~~~~~~~~~~~
         ↧             ↧
   ----- ∙ ----------> ∙ -----      A.
-        x       α      y
+        x      α      y
 ```
 
 ## Definitions
