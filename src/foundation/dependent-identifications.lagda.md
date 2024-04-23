@@ -33,19 +33,6 @@ operators are equivalences.
 
 ## Properties
 
-### Computing dependent identifications in constant type families
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  compute-dependent-identification-constant-type-family :
-    {x y : A} (p : x ＝ y) {x' y' : B} →
-    (x' ＝ y') ≃ dependent-identification (λ _ → B) p x' y'
-  compute-dependent-identification-constant-type-family refl = id-equiv
-```
-
 ### Computing twice iterated dependent identifications
 
 ```agda
