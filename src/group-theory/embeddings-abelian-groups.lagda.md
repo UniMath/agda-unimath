@@ -53,7 +53,7 @@ module _
 
 ```agda
 emb-Ab-Slice :
-  (l : Level) {l1 : Level} (A : Ab l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (A : Ab l1) → UU (lsuc l ⊔ l1)
 emb-Ab-Slice l A = emb-Group-Slice l (group-Ab A)
 
 emb-ab-slice-Subgroup-Ab :

@@ -10,8 +10,10 @@ module foundation.constant-type-families where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
 open import foundation-core.identity-types
@@ -79,6 +81,45 @@ tr-constant-type-family refl b = refl
 ```agda
 apd-constant-type-family :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A} (p : x ＝ y) →
-  apd f p ＝ (tr-constant-type-family p (f x) ∙ ap f p)
+  apd f p ＝ tr-constant-type-family p (f x) ∙ ap f p
 apd-constant-type-family f refl = refl
+```
+
+### Naturality of transport in constant type families
+
+For every equality `p : x ＝ x'` in `A` and `q : y ＝ y'` in `B` we have a
+commuting square of identifications
+
+```text
+                    ap (tr (λ _ → B) p) q
+          tr (λ _ → B) p y ------> tr (λ _ → B) p y'
+                         |         |
+  tr-constant-family p y |         | tr-constant-family p y'
+                         ∨         ∨
+                         y ------> y'.
+                              q
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  naturality-tr-constant-type-family :
+    {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
+    coherence-square-identifications
+      ( ap (tr (λ _ → B) p) q)
+      ( tr-constant-type-family p y)
+      ( tr-constant-type-family p y')
+      ( q)
+  naturality-tr-constant-type-family p refl = right-unit
+
+  naturality-inv-tr-constant-type-family :
+    {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
+    coherence-square-identifications
+      ( q)
+      ( inv (tr-constant-type-family p y))
+      ( inv (tr-constant-type-family p y'))
+      ( ap (tr (λ _ → B) p) q)
+  naturality-inv-tr-constant-type-family p refl = right-unit
 ```

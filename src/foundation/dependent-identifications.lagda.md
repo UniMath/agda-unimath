@@ -43,7 +43,7 @@ module _
     {x' : B x} {y' : B y}
     (p' : dependent-identification B p x' y')
     (q' : dependent-identification B q x' y') →
-    p' ＝ ((tr² B α _) ∙ q') → dependent-identification² B α p' q'
+    p' ＝ tr² B α x' ∙ q' → dependent-identification² B α p' q'
   map-compute-dependent-identification² refl ._ refl refl =
     refl
 
@@ -52,7 +52,7 @@ module _
     {x' : B x} {y' : B y}
     (p' : dependent-identification B p x' y')
     (q' : dependent-identification B q x' y') →
-    dependent-identification² B α p' q' → p' ＝ ((tr² B α _) ∙ q')
+    dependent-identification² B α p' q' → p' ＝ tr² B α x' ∙ q'
   map-inv-compute-dependent-identification² refl refl ._ refl =
     refl
 
@@ -93,7 +93,7 @@ module _
     {x' : B x} {y' : B y}
     (p' : dependent-identification B p x' y')
     (q' : dependent-identification B q x' y') →
-    (p' ＝ ((tr² B α _) ∙ q')) ≃ dependent-identification² B α p' q'
+    (p' ＝ tr² B α x' ∙ q') ≃ dependent-identification² B α p' q'
   pr1 (compute-dependent-identification² α p' q') =
     map-compute-dependent-identification² α p' q'
   pr2 (compute-dependent-identification² α p' q') =

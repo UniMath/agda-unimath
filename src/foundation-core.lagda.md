@@ -48,6 +48,7 @@ open import foundation-core.propositional-maps public
 open import foundation-core.propositions public
 open import foundation-core.pullbacks public
 open import foundation-core.retractions public
+open import foundation-core.retracts-of-types public
 open import foundation-core.sections public
 open import foundation-core.sets public
 open import foundation-core.small-types public

@@ -10,7 +10,6 @@ module foundation.functoriality-truncation where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.retracts-of-types
 open import foundation.truncations
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -21,6 +20,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.retractions
+open import foundation-core.retracts-of-types
 open import foundation-core.sections
 open import foundation-core.truncation-levels
 ```

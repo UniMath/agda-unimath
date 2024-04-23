@@ -12,6 +12,7 @@ module trees where
 open import trees.algebras-polynomial-endofunctors public
 open import trees.bases-directed-trees public
 open import trees.bases-enriched-directed-trees public
+open import trees.binary-w-types public
 open import trees.bounded-multisets public
 open import trees.coalgebra-of-directed-trees public
 open import trees.coalgebra-of-enriched-directed-trees public
@@ -32,6 +33,7 @@ open import trees.full-binary-trees public
 open import trees.functoriality-combinator-directed-trees public
 open import trees.functoriality-fiber-directed-tree public
 open import trees.functoriality-w-types public
+open import trees.hereditary-w-types public
 open import trees.indexed-w-types public
 open import trees.induction-w-types public
 open import trees.inequality-w-types public

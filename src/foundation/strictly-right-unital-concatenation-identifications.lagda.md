@@ -131,7 +131,7 @@ module _
   left-inv-right-strict-concat : {x y : A} (p : x ＝ y) → inv p ∙ᵣ p ＝ refl
   left-inv-right-strict-concat refl = refl
 
-  right-inv-right-strict-concat : {x y : A} (p : x ＝ y) → p ∙ᵣ (inv p) ＝ refl
+  right-inv-right-strict-concat : {x y : A} (p : x ＝ y) → p ∙ᵣ inv p ＝ refl
   right-inv-right-strict-concat refl = refl
 
   inv-inv-right-strict-concat : {x y : A} (p : x ＝ y) → inv (inv p) ＝ p
