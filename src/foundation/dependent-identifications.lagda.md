@@ -144,12 +144,13 @@ module _
     dependent-identification B (p ∙ᵣ q) x' z'
   right-strict-concat-dependent-identification p refl p' q' = p' ∙ᵣ q'
 
-  compute-right-strict-concat-dependent-identification-refl :
+  compute-right-strict-concat-dependent-identification-right-base-refl :
     { x y : A} (p : x ＝ y) →
     { x' : B x} {y' z' : B y} (p' : dependent-identification B p x' y') →
     ( q' : y' ＝ z') →
     right-strict-concat-dependent-identification p refl p' q' ＝ p' ∙ᵣ q'
-  compute-right-strict-concat-dependent-identification-refl q p' q' = refl
+  compute-right-strict-concat-dependent-identification-right-base-refl q p' q' =
+    refl
 ```
 
 #### Inverses of dependent identifications
