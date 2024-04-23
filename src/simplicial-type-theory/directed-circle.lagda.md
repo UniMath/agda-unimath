@@ -15,7 +15,6 @@ open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types

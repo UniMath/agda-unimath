@@ -34,7 +34,6 @@ open import foundation.negation
 open import foundation.precomposition-dependent-functions
 open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.negated-equality
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
