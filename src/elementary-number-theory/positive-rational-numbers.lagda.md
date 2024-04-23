@@ -59,6 +59,12 @@ be {{#concept "positive" Disambiguation="rational number" Agda=is-positive-ℚ}}
 if its underlying fraction is
 [positive](elementary-number-theory.positive-integer-fractions.md).
 
+Positive rational numbers are a [subsemigroup](group-theory.subsemigroups.md) of
+the
+[additive monoid of rational numbers](elementary-number-theory.additive-group-of-rational-numbers.md)
+and a [submonoid](group-theory.submonoids.md) of the
+[multiplicative monoid of rational numbers](elementary-number-theory.multiplicative-monoid-of-rational-numbers.md).
+
 ## Definitions
 
 ### The property of being a positive rational number
@@ -331,6 +337,18 @@ commutative-mul-ℚ⁺ =
     submonoid-mul-ℚ⁺
 ```
 
+### Multiplicative unit laws for positive multiplication of positive rational numbers
+
+```agda
+left-unit-law-mul-ℚ⁺ : (x : ℚ⁺) → one-ℚ⁺ *ℚ⁺ x ＝ x
+left-unit-law-mul-ℚ⁺ =
+  left-unit-law-mul-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
+
+right-unit-law-mul-ℚ⁺ : (x : ℚ⁺) → x *ℚ⁺ one-ℚ⁺ ＝ x
+right-unit-law-mul-ℚ⁺ =
+  right-unit-law-mul-Submonoid monoid-mul-ℚ submonoid-mul-ℚ⁺
+```
+
 ### The positive rational numbers are invertible elements of the multiplicative monoid of rational numbers
 
 ```agda
@@ -365,4 +383,51 @@ module _
   pr1 is-invertible-is-positive-ℚ = inv-is-positive-ℚ
   pr1 (pr2 is-invertible-is-positive-ℚ) = right-inverse-law-mul-is-positive-ℚ
   pr2 (pr2 is-invertible-is-positive-ℚ) = left-inverse-law-mul-is-positive-ℚ
+```
+
+### The strict inequality on positive rational numbers
+
+```agda
+le-prop-ℚ⁺ : ℚ⁺ → ℚ⁺ → Prop lzero
+le-prop-ℚ⁺ x y = le-ℚ-Prop (rational-ℚ⁺ x) (rational-ℚ⁺ y)
+
+le-ℚ⁺ : ℚ⁺ → ℚ⁺ → UU lzero
+le-ℚ⁺ x y = type-Prop (le-prop-ℚ⁺ x y)
+
+is-prop-le-ℚ⁺ : (x y : ℚ⁺) → is-prop (le-ℚ⁺ x y)
+is-prop-le-ℚ⁺ x y = is-prop-type-Prop (le-prop-ℚ⁺ x y)
+```
+
+### The sum of two positive rational numbers is greater than each of them
+
+```agda
+module _
+  (x y : ℚ⁺)
+  where
+
+  le-left-add-ℚ⁺ : le-ℚ⁺ x (x +ℚ⁺ y)
+  le-left-add-ℚ⁺ =
+    tr
+      ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
+      ( right-unit-law-add-ℚ (rational-ℚ⁺ x))
+      ( preserves-le-right-add-ℚ
+        ( rational-ℚ⁺ x)
+        ( zero-ℚ)
+        ( rational-ℚ⁺ y)
+        ( le-zero-is-positive-ℚ
+          ( rational-ℚ⁺ y)
+          ( is-positive-rational-ℚ⁺ y)))
+
+  le-right-add-ℚ⁺ : le-ℚ⁺ y (x +ℚ⁺ y)
+  le-right-add-ℚ⁺ =
+    tr
+      ( λ z → le-ℚ z ((rational-ℚ⁺ x) +ℚ (rational-ℚ⁺ y)))
+      ( left-unit-law-add-ℚ (rational-ℚ⁺ y))
+      ( preserves-le-left-add-ℚ
+        ( rational-ℚ⁺ y)
+        ( zero-ℚ)
+        ( rational-ℚ⁺ x)
+        ( le-zero-is-positive-ℚ
+          ( rational-ℚ⁺ x)
+          ( is-positive-rational-ℚ⁺ x)))
 ```
