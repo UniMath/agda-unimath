@@ -268,18 +268,17 @@ module _
   where
 
   triangle-comparison-free-directed-loop :
+    ev-free-directed-loop-Π α (λ _ → Y) ~
     map-compute-free-dependent-directed-loop-constant-type-family α Y ∘
-    ev-free-directed-loop α Y ~
-    ev-free-directed-loop-Π α (λ _ → Y)
+    ev-free-directed-loop α Y
   triangle-comparison-free-directed-loop f =
     eq-htpy-free-dependent-directed-loop α
       ( λ _ → Y)
+      ( ev-free-directed-loop-Π α (λ _ → Y) f)
       ( map-compute-free-dependent-directed-loop-constant-type-family α Y
         ( ev-free-directed-loop α Y f))
-      ( ev-free-directed-loop-Π α (λ _ → Y) f)
       ( ( refl-htpy) ,
-        ( inv
-          ( apd-constant-type-family f (compute-target-free-directed-loop α))))
+        ( apd-constant-type-family f (compute-target-free-directed-loop α)))
 
 module _
   {l1 : Level} {X : UU l1} (α : free-directed-loop X)
@@ -294,7 +293,7 @@ module _
         ( ev-free-directed-loop-Π α (λ _ → Y))
         ( map-compute-free-dependent-directed-loop-constant-type-family α Y)
         ( ev-free-directed-loop α Y)
-        ( inv-htpy (triangle-comparison-free-directed-loop α Y))
+        ( triangle-comparison-free-directed-loop α Y)
         ( is-equiv-map-equiv
           ( compute-free-dependent-directed-loop-constant-type-family α Y))
         ( I (λ _ → Y))
@@ -311,7 +310,22 @@ module _
     universal-property-induction-principle-directed-circle :
       induction-principle-directed-circle α →
       universal-property-directed-circle α
-    universal-property-induction-principle-directed-circle X =
+    universal-property-induction-principle-directed-circle I =
       universal-property-dependent-universal-property-directed-circle α
-        ( dependent-universal-property-induction-principle-directed-circle α X)
+        ( dependent-universal-property-induction-principle-directed-circle α I)
+```
+
+### The induction principle of the directed circle implies ther recursion principle of the directed circle
+
+```agda
+module _
+  {l1 : Level} {X : UU l1} (α : free-directed-loop X)
+  where
+
+    recursion-principle-induction-principle-directed-circle :
+      induction-principle-directed-circle α →
+      recursion-principle-directed-circle α
+    recursion-principle-induction-principle-directed-circle I Y =
+      section-is-equiv
+        ( universal-property-induction-principle-directed-circle α I Y)
 ```

@@ -14,6 +14,7 @@ open import simplicial-type-theory.action-on-simplicial-edges-dependent-function
 open import simplicial-type-theory.action-on-simplicial-edges-functions public
 open import simplicial-type-theory.comma-types public
 open import simplicial-type-theory.dependent-simplicial-edges public
+open import simplicial-type-theory.directed-circle public
 open import simplicial-type-theory.directed-interval-type public
 open import simplicial-type-theory.directed-relation-on-directed-interval-type public
 open import simplicial-type-theory.free-directed-loops public
