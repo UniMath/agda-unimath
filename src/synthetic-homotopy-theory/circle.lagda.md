@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.mere-equality
+open import foundation.negated-equality
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
@@ -36,6 +37,7 @@ open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.spheres
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.universal-cover-circle
 open import synthetic-homotopy-theory.universal-property-circle
 
 open import univalent-combinatorics.standard-finite-types
@@ -169,6 +171,16 @@ module _
     base-universal-property-𝕊¹ ∙ α
   loop-universal-property-𝕊¹ =
     pr2 (pr2 apply-universal-property-𝕊¹)
+```
+
+### The loop of the circle is nontrivial
+
+```agda
+is-nontrivial-loop-𝕊¹ : loop-𝕊¹ ≠ refl
+is-nontrivial-loop-𝕊¹ =
+  is-nontrivial-loop-dependent-universal-property-circle
+    ( free-loop-𝕊¹)
+    ( dependent-universal-property-𝕊¹)
 ```
 
 ### The circle is 0-connected
