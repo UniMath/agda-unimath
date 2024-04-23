@@ -8,11 +8,15 @@ module foundation.quasicoherently-idempotent-maps where
 
 ```agda
 open import foundation.1-types
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.homotopy-algebra
 open import foundation.idempotent-maps
+open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.negation
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
@@ -54,13 +58,13 @@ corresponds to the definition of a _quasiidempotent map_ in {{#cite Shu17}} and
 ### The structure of quasicoherent idempotence on maps
 
 ```agda
-coherence-is-quasicoherently-idempotent :
+quasicoherence-is-idempotent :
   {l : Level} {A : UU l} (f : A → A) → f ∘ f ~ f → UU l
-coherence-is-quasicoherently-idempotent f I = f ·l I ~ I ·r f
+quasicoherence-is-idempotent f I = f ·l I ~ I ·r f
 
 is-quasicoherently-idempotent : {l : Level} {A : UU l} → (A → A) → UU l
 is-quasicoherently-idempotent f =
-  Σ (f ∘ f ~ f) (coherence-is-quasicoherently-idempotent f)
+  Σ (f ∘ f ~ f) (quasicoherence-is-idempotent f)
 
 module _
   {l : Level} {A : UU l} {f : A → A} (H : is-quasicoherently-idempotent f)
@@ -70,7 +74,7 @@ module _
   is-idempotent-is-quasicoherently-idempotent = pr1 H
 
   coh-is-quasicoherently-idempotent :
-    coherence-is-quasicoherently-idempotent f
+    quasicoherence-is-idempotent f
       ( is-idempotent-is-quasicoherently-idempotent)
   coh-is-quasicoherently-idempotent = pr2 H
 ```
@@ -99,7 +103,7 @@ module _
       ( is-quasicoherently-idempotent-quasicoherently-idempotent-map)
 
   coh-quasicoherently-idempotent-map :
-    coherence-is-quasicoherently-idempotent
+    quasicoherence-is-idempotent
       ( map-quasicoherently-idempotent-map)
       ( is-idempotent-quasicoherently-idempotent-map)
   coh-quasicoherently-idempotent-map =
@@ -114,6 +118,34 @@ module _
 
 ## Properties
 
+### The identity function is quasicoherently idempotent
+
+In fact, any idempotence witness of the identity function is quasicoherent.
+
+```agda
+module _
+  {l : Level} {A : UU l} (H : is-idempotent (id {A = A}))
+  where
+
+  quasicoherence-is-idempotent-id :
+    quasicoherence-is-idempotent id H
+  quasicoherence-is-idempotent-id = left-unit-law-left-whisker-comp H
+
+  is-quasicoherently-idempotent-is-idempotent-id :
+    is-quasicoherently-idempotent (id {A = A})
+  is-quasicoherently-idempotent-is-idempotent-id =
+    ( H , quasicoherence-is-idempotent-id)
+
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-quasicoherently-idempotent-id :
+    is-quasicoherently-idempotent (id {A = A})
+  is-quasicoherently-idempotent-id =
+    is-quasicoherently-idempotent-is-idempotent-id refl-htpy
+```
+
 ### Being quasicoherently idempotent on a set is a property
 
 ```agda
@@ -121,9 +153,9 @@ module _
   {l : Level} {A : UU l} (is-set-A : is-set A) (f : A → A)
   where
 
-  is-prop-coherence-is-quasicoherently-idempotent-is-set :
-    (I : f ∘ f ~ f) → is-prop (coherence-is-quasicoherently-idempotent f I)
-  is-prop-coherence-is-quasicoherently-idempotent-is-set I =
+  is-prop-quasicoherence-is-idempotent-is-set :
+    (I : f ∘ f ~ f) → is-prop (quasicoherence-is-idempotent f I)
+  is-prop-quasicoherence-is-idempotent-is-set I =
     is-prop-Π
       ( λ x →
         is-set-is-prop
@@ -136,7 +168,7 @@ module _
   is-prop-is-quasicoherently-idempotent-is-set =
     is-prop-Σ
       ( is-prop-is-idempotent-is-set is-set-A f)
-      ( is-prop-coherence-is-quasicoherently-idempotent-is-set)
+      ( is-prop-quasicoherence-is-idempotent-is-set)
 
   is-quasicoherently-idempotent-is-set-Prop : Prop l
   is-quasicoherently-idempotent-is-set-Prop =
@@ -171,16 +203,38 @@ Two distinct witnesses that it is idempotent are given by `t ↦ refl` and
 `t ↦ loop`. Both of these are quasicoherent, because
 
 ```text
-  coherence-is-quasicoherently-idempotent id I ≐ (id ·l I ~ I ·r id) ≃ (I ~ I).
+  quasicoherence-is-idempotent id I ≐ (id ·l I ~ I ·r id) ≃ (I ~ I).
 ```
 
-To formalize this result, we first need that the loop of the circle is
-nontrivial.
+```agda
+is-idempotent-id-loop-𝕊¹ : is-idempotent (id {A = 𝕊¹})
+is-idempotent-id-loop-𝕊¹ =
+  function-apply-dependent-universal-property-𝕊¹
+    ( eq-value id id)
+    ( loop-𝕊¹)
+    ( tr-loop loop-𝕊¹ loop-𝕊¹ ∙ ap (_∙ loop-𝕊¹) (left-inv loop-𝕊¹))
 
-```text
-is-not-prop-is-quasicoherently-idempotent-id-circle :
+is-not-prop-is-quasicoherently-idempotent-id-𝕊¹ :
   ¬ (is-prop (is-quasicoherently-idempotent (id {A = 𝕊¹})))
-is-not-prop-is-quasicoherently-idempotent-id-circle = ?
+is-not-prop-is-quasicoherently-idempotent-id-𝕊¹ H =
+  nonequal-Π
+    ( is-idempotent-id-loop-𝕊¹)
+    ( refl-htpy)
+    ( base-𝕊¹)
+    ( λ p →
+      is-nontrivial-loop-𝕊¹
+        ( inv
+          ( base-dependent-universal-property-𝕊¹
+            ( eq-value id id)
+            ( loop-𝕊¹)
+            ( tr-loop loop-𝕊¹ loop-𝕊¹ ∙ ap (_∙ loop-𝕊¹) (left-inv loop-𝕊¹))) ∙
+          ( p)))
+    ( ap pr1
+      ( eq-is-prop H
+        { is-quasicoherently-idempotent-is-idempotent-id
+          ( is-idempotent-id-loop-𝕊¹)}
+        { is-quasicoherently-idempotent-is-idempotent-id
+          ( refl-htpy)}))
 ```
 
 ### Idempotent maps on sets are quasicoherently idempotent
@@ -208,11 +262,11 @@ module _
   (i : B → A) (r : A → B) (H : is-retraction i r)
   where
 
-  coherence-is-quasicoherently-idempotent-inclusion-retraction :
-    coherence-is-quasicoherently-idempotent
+  quasicoherence-is-idempotent-inclusion-retraction :
+    quasicoherence-is-idempotent
       ( i ∘ r)
       ( is-idempotent-inclusion-retraction i r H)
-  coherence-is-quasicoherently-idempotent-inclusion-retraction =
+  quasicoherence-is-idempotent-inclusion-retraction =
     ( inv-preserves-comp-left-whisker-comp i r (i ·l H ·r r)) ∙h
     ( double-whisker-comp²
       ( i)
@@ -223,7 +277,7 @@ module _
     is-quasicoherently-idempotent (i ∘ r)
   is-quasicoherently-idempotent-inclusion-retraction =
     ( is-idempotent-inclusion-retraction i r H ,
-      coherence-is-quasicoherently-idempotent-inclusion-retraction)
+      quasicoherence-is-idempotent-inclusion-retraction)
 ```
 
 ### Quasicoherent idempotence is preserved by homotopies
@@ -237,13 +291,13 @@ module _
   where
 
   abstract
-    coherence-is-quasicoherently-idempotent-htpy :
+    quasicoherence-is-idempotent-htpy :
       (H : g ~ f) →
-      coherence-is-quasicoherently-idempotent g
+      quasicoherence-is-idempotent g
         ( is-idempotent-htpy
           ( is-idempotent-is-quasicoherently-idempotent F)
           ( H))
-    coherence-is-quasicoherently-idempotent-htpy H =
+    quasicoherence-is-idempotent-htpy H =
       homotopy-reasoning
       ( g ·l is-idempotent-htpy I H)
       ~ ( H ·r (g ∘ g)) ∙h
@@ -317,7 +371,7 @@ module _
       ( is-idempotent-is-quasicoherently-idempotent F)
       ( H)
   pr2 (is-quasicoherently-idempotent-htpy H) =
-    coherence-is-quasicoherently-idempotent-htpy H
+    quasicoherence-is-idempotent-htpy H
 
   is-quasicoherently-idempotent-inv-htpy :
     f ~ g → is-quasicoherently-idempotent g
@@ -326,7 +380,7 @@ module _
       ( is-idempotent-is-quasicoherently-idempotent F)
       ( inv-htpy H)
   pr2 (is-quasicoherently-idempotent-inv-htpy H) =
-    coherence-is-quasicoherently-idempotent-htpy (inv-htpy H)
+    quasicoherence-is-idempotent-htpy (inv-htpy H)
 ```
 
 ### Realigning the coherence of a quasicoherent idempotence proof
@@ -341,18 +395,18 @@ module _
   (I : f ∘ f ~ f)
   where
 
-  coherence-is-quasicoherently-idempotent-is-idempotent-htpy :
+  quasicoherence-is-idempotent-is-idempotent-htpy :
     is-idempotent-is-quasicoherently-idempotent F ~ I →
-    coherence-is-quasicoherently-idempotent f I
-  coherence-is-quasicoherently-idempotent-is-idempotent-htpy α =
+    quasicoherence-is-idempotent f I
+  quasicoherence-is-idempotent-is-idempotent-htpy α =
     ( left-whisker-comp² f (inv-htpy α)) ∙h
     ( coh-is-quasicoherently-idempotent F) ∙h
     ( right-whisker-comp² α f)
 
-  coherence-is-quasicoherently-idempotent-is-idempotent-inv-htpy :
+  quasicoherence-is-idempotent-is-idempotent-inv-htpy :
     I ~ is-idempotent-is-quasicoherently-idempotent F →
-    coherence-is-quasicoherently-idempotent f I
-  coherence-is-quasicoherently-idempotent-is-idempotent-inv-htpy α =
+    quasicoherence-is-idempotent f I
+  quasicoherence-is-idempotent-is-idempotent-inv-htpy α =
     ( left-whisker-comp² f α) ∙h
     ( coh-is-quasicoherently-idempotent F) ∙h
     ( right-whisker-comp² (inv-htpy α) f)
@@ -361,13 +415,13 @@ module _
     is-idempotent-is-quasicoherently-idempotent F ~ I →
     is-quasicoherently-idempotent f
   is-quasicoherently-idempotent-is-idempotent-htpy α =
-    ( I , coherence-is-quasicoherently-idempotent-is-idempotent-htpy α)
+    ( I , quasicoherence-is-idempotent-is-idempotent-htpy α)
 
   is-quasicoherently-idempotent-is-idempotent-inv-htpy :
     I ~ is-idempotent-is-quasicoherently-idempotent F →
     is-quasicoherently-idempotent f
   is-quasicoherently-idempotent-is-idempotent-inv-htpy α =
-    ( I , coherence-is-quasicoherently-idempotent-is-idempotent-inv-htpy α)
+    ( I , quasicoherence-is-idempotent-is-idempotent-inv-htpy α)
 ```
 
 ### Not every idempotent map is quasicoherently idempotent
