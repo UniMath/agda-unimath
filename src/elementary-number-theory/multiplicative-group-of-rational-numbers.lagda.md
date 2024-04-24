@@ -117,9 +117,9 @@ module _
   (x : ℚ)
   where
 
-  is-nonzero-is-invertible-ℚ :
+  is-nonzero-is-invertible-element-ring-ℚ :
     is-invertible-element-Ring ring-ℚ x → is-nonzero-ℚ x
-  is-nonzero-is-invertible-ℚ H K =
+  is-nonzero-is-invertible-element-ring-ℚ H K =
     is-nonzero-is-invertible-element-nontrivial-Ring
       ( ring-ℚ)
       ( is-nonzero-one-ℚ ∘ inv)
@@ -136,12 +136,12 @@ module _
       ( is-invertible-is-positive-ℚ x)
       ( decide-is-negative-is-positive-is-nonzero-ℚ H)
 
-eq-is-invertible-prop-is-nonzero-prop-ℚ :
+eq-is-invertible-element-prop-is-nonzero-prop-ℚ :
   is-nonzero-prop-ℚ ＝ is-invertible-element-prop-Ring ring-ℚ
-eq-is-invertible-prop-is-nonzero-prop-ℚ =
+eq-is-invertible-element-prop-is-nonzero-prop-ℚ =
   antisymmetric-leq-subtype
     ( is-nonzero-prop-ℚ)
     ( is-invertible-element-prop-Ring ring-ℚ)
     ( is-invertible-element-ring-is-nonzero-ℚ)
-    ( is-nonzero-is-invertible-ℚ)
+    ( is-nonzero-is-invertible-element-ring-ℚ)
 ```
