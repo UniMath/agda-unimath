@@ -55,7 +55,10 @@ module _
 
 ## Properties
 
-### Nullity is closed under equivalences
+### Closure under equivalences
+
+If `C` is `Y`-null and we have equivalences `X ≃ Y` and `(x : A) → B x ≃ C x`,
+then `B` is `X`-null.
 
 ```agda
 module _
@@ -64,8 +67,8 @@ module _
 
   is-null-family-equiv :
     {l5 : Level} {C : A → UU l5} →
-    X ≃ Y → ((x : A) → C x ≃ B x) →
-    is-null-family Y B → is-null-family X C
+    X ≃ Y → ((x : A) → B x ≃ C x) →
+    is-null-family Y C → is-null-family X B
   is-null-family-equiv e f H x = is-null-equiv e (f x) (H x)
 
   is-null-family-equiv-exponent :
@@ -77,20 +80,41 @@ module _
   where
 
   is-null-family-equiv-family :
-    ((x : A) → C x ≃ B x) → is-null-family Y B → is-null-family Y C
+    ((x : A) → B x ≃ C x) → is-null-family Y C → is-null-family Y B
   is-null-family-equiv-family f H x = is-null-equiv-base (f x) (H x)
 ```
 
-### Retracts of `Y`-null families are `Y`-null
+### Closure under retracts
+
+If `C` is `Y`-null and `X` is a retract of `Y` and `B` is a retract of `C`, then
+`B` is `X`-null.
 
 ```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {X : UU l1} {Y : UU l2} {A : UU l3} {B : A → UU l4} {C : A → UU l5}
+  where
+
+  is-null-family-retract :
+    X retract-of Y → ((x : A) → (B x) retract-of (C x)) →
+    is-null-family Y C → is-null-family X B
+  is-null-family-retract e f H x = is-null-retract e (f x) (H x)
+
 module _
   {l1 l2 l3 l4 : Level} {Y : UU l1} {A : UU l2} {B : A → UU l3} {C : A → UU l4}
   where
 
-  is-null-family-retract :
-    ((x : A) → (C x) retract-of (B x)) → is-null-family Y B → is-null-family Y C
-  is-null-family-retract f H x = is-null-retract (f x) (H x)
+  is-null-family-retract-family :
+    ((x : A) → (B x) retract-of (C x)) → is-null-family Y C → is-null-family Y B
+  is-null-family-retract-family f H x = is-null-retract-base (f x) (H x)
+
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {A : UU l3} {B : A → UU l4}
+  where
+
+  is-null-family-retract-exponent :
+    X retract-of Y → is-null-family Y B → is-null-family X B
+  is-null-family-retract-exponent e H x = is-null-retract-exponent e (H x)
 ```
 
 ## See also
