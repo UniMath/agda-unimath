@@ -21,11 +21,12 @@ open import foundation-core.sections
 
 ## Idea
 
-**Subsingleton induction** on a type `A` is a slight variant of
-[singleton induction](foundation.singleton-induction.md) which in turn is a
-principle analogous to induction for the [unit type](foundation.unit-type.md).
-Subsingleton induction uses the observation that a type equipped with an element
-is [contractible](foundation-core.contractible-types.md) if and only if it is a
+{{#concept "Subsingleton induction" Agda=ind-subsingleton}} on a type `A` is a
+slight variant of [singleton induction](foundation.singleton-induction.md) which
+in turn is a principle analogous to induction for the
+[unit type](foundation.unit-type.md). Subsingleton induction uses the
+observation that a type equipped with an element is
+[contractible](foundation-core.contractible-types.md) if and only if it is a
 [proposition](foundation-core.propositions.md).
 
 Subsingleton induction states that given a type family `B` over `A`, to
@@ -95,3 +96,10 @@ abstract
     {l1 : Level} (A : UU l1) → ({l2 : Level} → is-subsingleton l2 A) → is-prop A
   is-prop-is-subsingleton A S = is-prop-ind-subsingleton A (pr1 ∘ S)
 ```
+
+## Table of files about propositional logic
+
+The following table gives an overview of basic constructions in propositional
+logic and related considerations.
+
+{{#include tables/propositional-logic.md}}

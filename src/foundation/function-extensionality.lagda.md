@@ -13,7 +13,6 @@ open import foundation.dependent-pair-types
 open import foundation.evaluation-functions
 open import foundation.implicit-function-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -46,15 +45,15 @@ equivalence. The map `htpy-eq` is the unique map that fits in a
               htpy-eq
     (f ＝ g) ----------> (f ~ g)
            \            /
-  ap (ev a) \          / ev a
+  ap (ev x) \          / ev x
              ∨        ∨
-            (f a ＝ g a)
+            (f x ＝ g x)
 ```
 
 In other words, we define
 
 ```text
-  htpy-eq p a := ap (ev a) p.
+  htpy-eq p x := ap (ev x) p.
 ```
 
 It follows from this definition that `htpy-eq refl ≐ refl-htpy`, as expected.

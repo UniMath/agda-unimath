@@ -21,6 +21,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
@@ -285,7 +286,7 @@ module _
     (((x : X) → A (f x)) → ((y : Y) → A y)) →
     is-local-dependent-type f A
   is-local-dependent-type-is-prop A is-prop-A =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-Π is-prop-A)
       ( is-prop-Π (is-prop-A ∘ f))
 

@@ -9,6 +9,7 @@ module foundation.retracts-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-prisms-of-maps
+open import foundation.commuting-triangles-of-morphisms-arrows
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
@@ -16,7 +17,6 @@ open import foundation.homotopies-morphisms-arrows
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
-open import foundation.retracts-of-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -27,6 +27,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
+open import foundation-core.retracts-of-types
 open import foundation-core.sections
 ```
 
@@ -105,10 +106,7 @@ module _
   where
 
   is-retraction-hom-arrow : UU (l1 ⊔ l2)
-  is-retraction-hom-arrow =
-    htpy-hom-arrow f f
-      ( comp-hom-arrow f g f r i)
-      ( id-hom-arrow)
+  is-retraction-hom-arrow = coherence-triangle-hom-arrow' f g f id-hom-arrow r i
 ```
 
 ### The type of retractions of a morphism of arrows
@@ -714,11 +712,11 @@ module _
 
   inclusion-precomp-retract-map : hom-arrow (precomp f S) (precomp g S)
   inclusion-precomp-retract-map =
-    hom-arrow-precomp-hom-arrow g f (hom-retraction-retract-map f g R) S
+    precomp-hom-arrow g f (hom-retraction-retract-map f g R) S
 
   hom-retraction-precomp-retract-map : hom-arrow (precomp g S) (precomp f S)
   hom-retraction-precomp-retract-map =
-    hom-arrow-precomp-hom-arrow f g (inclusion-retract-map f g R) S
+    precomp-hom-arrow f g (inclusion-retract-map f g R) S
 
   is-retraction-map-domain-precomp-retract-map :
     is-retraction
@@ -814,11 +812,11 @@ module _
 
   inclusion-postcomp-retract-map : hom-arrow (postcomp S f) (postcomp S g)
   inclusion-postcomp-retract-map =
-    hom-arrow-postcomp-hom-arrow f g (inclusion-retract-map f g R) S
+    postcomp-hom-arrow f g (inclusion-retract-map f g R) S
 
   hom-retraction-postcomp-retract-map : hom-arrow (postcomp S g) (postcomp S f)
   hom-retraction-postcomp-retract-map =
-    hom-arrow-postcomp-hom-arrow g f (hom-retraction-retract-map f g R) S
+    postcomp-hom-arrow g f (hom-retraction-retract-map f g R) S
 
   is-retraction-map-domain-postcomp-retract-map :
     is-retraction

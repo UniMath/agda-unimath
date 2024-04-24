@@ -1,5 +1,9 @@
 # Synthetic homotopy theory
 
+```agda
+{-# OPTIONS --rewriting #-}
+```
+
 ## Files in the synthetic homotopy theory folder
 
 ```agda
@@ -23,6 +27,7 @@ open import synthetic-homotopy-theory.codiagonals-of-maps public
 open import synthetic-homotopy-theory.coequalizers public
 open import synthetic-homotopy-theory.cofibers public
 open import synthetic-homotopy-theory.coforks public
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams public
 open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.connected-set-bundles-circle public
 open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams public
@@ -43,9 +48,16 @@ open import synthetic-homotopy-theory.descent-circle-dependent-pair-types public
 open import synthetic-homotopy-theory.descent-circle-equivalence-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
+open import synthetic-homotopy-theory.descent-data-sequential-colimits public
+open import synthetic-homotopy-theory.descent-property-sequential-colimits public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
+open import synthetic-homotopy-theory.equifibered-sequential-diagrams public
+open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams public
+open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows public
+open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
+open import synthetic-homotopy-theory.families-descent-data-sequential-colimits public
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
 open import synthetic-homotopy-theory.flattening-lemma-pushouts public
 open import synthetic-homotopy-theory.flattening-lemma-sequential-colimits public
@@ -67,6 +79,9 @@ open import synthetic-homotopy-theory.joins-of-types public
 open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.maps-of-prespectra public
 open import synthetic-homotopy-theory.mere-spheres public
+open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequential-diagrams public
+open import synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows public
+open import synthetic-homotopy-theory.morphisms-dependent-sequential-diagrams public
 open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.multiplication-circle public
@@ -79,11 +94,14 @@ open import synthetic-homotopy-theory.pullback-property-pushouts public
 open import synthetic-homotopy-theory.pushout-products public
 open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
+open import synthetic-homotopy-theory.recursion-principle-pushouts public
 open import synthetic-homotopy-theory.retracts-of-sequential-diagrams public
+open import synthetic-homotopy-theory.rewriting-pushouts public
 open import synthetic-homotopy-theory.sections-descent-circle public
 open import synthetic-homotopy-theory.sequential-colimits public
 open import synthetic-homotopy-theory.sequential-diagrams public
 open import synthetic-homotopy-theory.sequentially-compact-types public
+open import synthetic-homotopy-theory.shifts-sequential-diagrams public
 open import synthetic-homotopy-theory.smash-products-of-pointed-types public
 open import synthetic-homotopy-theory.spectra public
 open import synthetic-homotopy-theory.sphere-prespectrum public
@@ -93,6 +111,8 @@ open import synthetic-homotopy-theory.suspension-structures public
 open import synthetic-homotopy-theory.suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.tangent-spheres public
+open import synthetic-homotopy-theory.total-cocones-families-sequential-diagrams public
+open import synthetic-homotopy-theory.total-sequential-diagrams public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.truncated-acyclic-maps public
 open import synthetic-homotopy-theory.truncated-acyclic-types public

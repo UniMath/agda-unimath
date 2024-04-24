@@ -117,15 +117,39 @@ module _
         ( vertical-htpy-cocone)
     coherence-htpy-cocone = pr2 (pr2 H)
 
-  reflexive-htpy-cocone :
+  refl-htpy-cocone :
     (c : cocone f g X) → htpy-cocone c c
-  pr1 (reflexive-htpy-cocone (i , j , H)) = refl-htpy
-  pr1 (pr2 (reflexive-htpy-cocone (i , j , H))) = refl-htpy
-  pr2 (pr2 (reflexive-htpy-cocone (i , j , H))) = right-unit-htpy
+  pr1 (refl-htpy-cocone (i , j , H)) = refl-htpy
+  pr1 (pr2 (refl-htpy-cocone (i , j , H))) = refl-htpy
+  pr2 (pr2 (refl-htpy-cocone (i , j , H))) = right-unit-htpy
 
   htpy-eq-cocone :
     (c c' : cocone f g X) → c ＝ c' → htpy-cocone c c'
-  htpy-eq-cocone c .c refl = reflexive-htpy-cocone c
+  htpy-eq-cocone c .c refl = refl-htpy-cocone c
+
+  module _
+    (c c' : cocone f g X)
+    (p : c ＝ c')
+    where
+
+    horizontal-htpy-eq-cocone :
+      horizontal-map-cocone f g c ~
+      horizontal-map-cocone f g c'
+    horizontal-htpy-eq-cocone =
+      horizontal-htpy-cocone c c' (htpy-eq-cocone c c' p)
+
+    vertical-htpy-eq-cocone :
+      vertical-map-cocone f g c ~
+      vertical-map-cocone f g c'
+    vertical-htpy-eq-cocone =
+      vertical-htpy-cocone c c' (htpy-eq-cocone c c' p)
+
+    coherence-square-htpy-eq-cocone :
+      statement-coherence-htpy-cocone c c'
+        ( horizontal-htpy-eq-cocone)
+        ( vertical-htpy-eq-cocone)
+    coherence-square-htpy-eq-cocone =
+      coherence-htpy-cocone c c' (htpy-eq-cocone c c' p)
 
   is-torsorial-htpy-cocone :
     (c : cocone f g X) → is-torsorial (htpy-cocone c)

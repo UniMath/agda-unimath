@@ -12,6 +12,7 @@ open import foundation-core.functoriality-dependent-pair-types public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-homotopies
 open import foundation.dependent-pair-types
+open import foundation.morphisms-arrows
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
@@ -300,6 +301,33 @@ module _
   coherence-square-maps-map-Σ-map-base H (a , p) = eq-pair-Σ (H a) refl
 ```
 
+### Commuting triangles of maps on total spaces
+
+#### Functoriality of `Σ` preserves commuting triangles of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {P : A → UU l2}
+  {B : UU l3} {Q : B → UU l4}
+  {C : UU l5} (R : C → UU l6)
+  {left' : A → C} {right' : B → C} {top' : A → B}
+  (left : (a : A) → P a → R (left' a))
+  (right : (b : B) → Q b → R (right' b))
+  (top : (a : A) → P a → Q (top' a))
+  where
+
+  coherence-triangle-maps-Σ :
+    {H' : coherence-triangle-maps left' right' top'} →
+    ( (a : A) (p : P a) →
+      dependent-identification R (H' a) (left _ p) (right _ (top _ p))) →
+    coherence-triangle-maps
+      ( map-Σ R left' left)
+      ( map-Σ R right' right)
+      ( map-Σ Q top' top)
+  coherence-triangle-maps-Σ {H'} H (a , p) = eq-pair-Σ (H' a) (H a p)
+```
+
 #### `map-Σ-map-base` preserves commuting triangles of maps
 
 ```agda
@@ -333,7 +361,22 @@ module _
   compute-ap-map-Σ-map-base-eq-pair-Σ refl refl = refl
 ```
 
-#### Computing the inverse of `equiv-tot`
+### The action of `ind-Σ` on identifications in fibers of dependent pair types is given by the action of the fibers of the function with the first argument fixed
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : A → UU l2} {C : UU l3}
+  (f : (a : A) (b : B a) → C)
+  where
+
+  compute-ap-ind-Σ-eq-pair-eq-fiber :
+    {a : A} {b b' : B a} (p : b ＝ b') →
+    ap (ind-Σ f) (eq-pair-eq-fiber p) ＝ ap (f a) p
+  compute-ap-ind-Σ-eq-pair-eq-fiber refl = refl
+```
+
+### Computing the inverse of `equiv-tot`
 
 ```agda
 module _
@@ -349,6 +392,25 @@ module _
       ( equiv-tot e)
       ( ( is-section-map-inv-equiv (equiv-tot e) (a , c)) ∙
         ( eq-pair-eq-fiber (inv (is-section-map-inv-equiv (e a) c))))
+```
+
+### Dependent sums of morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
+  (f : (i : I) → A i → B i) (g : (i : I) → X i → Y i)
+  (α : (i : I) → hom-arrow (f i) (g i))
+  where
+
+  tot-hom-arrow : hom-arrow (tot f) (tot g)
+  pr1 tot-hom-arrow =
+    tot (λ i → map-domain-hom-arrow (f i) (g i) (α i))
+  pr1 (pr2 tot-hom-arrow) =
+    tot (λ i → map-codomain-hom-arrow (f i) (g i) (α i))
+  pr2 (pr2 tot-hom-arrow) =
+    tot-htpy (λ i → coh-hom-arrow (f i) (g i) (α i))
 ```
 
 ## See also

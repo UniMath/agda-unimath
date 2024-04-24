@@ -31,7 +31,7 @@ open import foundation-core.whiskering-homotopies-concatenation
 
 A [(two-sided) inverse](foundation-core.invertible-maps.md) for a map
 `f : A → B` is a map `g : B → A` equipped with
-[homotopies](foundation-core.homotopies.md) ` S : f ∘ g ~ id` and
+[homotopies](foundation-core.homotopies.md) `S : f ∘ g ~ id` and
 `R : g ∘ f ~ id`. Such data, however is [structure](foundation.structure.md) on
 the map `f`, and not generally a [property](foundation-core.propositions.md).
 One way to make the type of inverses into a property is by adding a single
@@ -39,11 +39,11 @@ coherence condition between the homotopies of the inverse, asking that the
 following diagram commmutes
 
 ```text
-               S ·r f
-             --------->
-  f ∘ g ∘ f             f.
-             --------->
-               f ·l R
+              S ·r f
+            --------->
+  f ∘ g ∘ f            f.
+            --------->
+              f ·l R
 ```
 
 We call such data a
@@ -54,19 +54,18 @@ and this additional coherence.
 There is also the alternative coherence condition we could add
 
 ```text
-               R ·r g
-             --------->
-  g ∘ f ∘ g             g.
-             --------->
-               g ·l S
+              R ·r g
+            --------->
+  g ∘ f ∘ g            g.
+            --------->
+              g ·l S
 ```
 
-We will colloquially refer to invertible maps equipped with this coherence for
+We will colloquially refer to invertible maps equipped with this coherence as
 _transpose coherently invertible maps_.
 
 **Note.** Coherently invertible maps are referred to as
-{{#concept "half adjoint equivalences"}} in _Homotopy Type Theory – Univalent
-Foundations of Mathematics_.
+{{#concept "half adjoint equivalences"}} in {{#cite UF13}}.
 
 On this page we will prove that every two-sided inverse `g` of `f` can be
 promoted to a coherent two-sided inverse. Thus, for most properties of
@@ -833,11 +832,11 @@ We begin by observing that `C` fits somewhere along the diagonal of this square
 via the composite
 
 ```text
-                       Sf
-           HgH       ------>    H⁻¹
-    f'gf' -----> fgf    C    f ----> f'.
-                     ------>
-                       fR
+                        Sf
+            HgH       ------>     H⁻¹
+    f'gf' ------> fgf    C    f ------> f'.
+                      ------>
+                        fR
 ```
 
 ```agda
@@ -876,7 +875,7 @@ squares
       |             |            |             |
   Sf' |             | Sf     f'R |             | fR
       ∨             ∨            ∨             ∨
-      f' ---------> f            f' ---------> f
+      f' ---------> f            f' ---------> f.
              H                          H
 ```
 

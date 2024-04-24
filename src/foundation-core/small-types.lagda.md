@@ -195,6 +195,13 @@ pr1 (is-small-is-contr l H) = raise-unit l
 pr2 (is-small-is-contr l H) = equiv-is-contr H is-contr-raise-unit
 ```
 
+### The unit type is small with respect to any universe
+
+```agda
+is-small-unit : {l : Level} → is-small l unit
+is-small-unit = is-small-is-contr _ is-contr-unit
+```
+
 ### Small types are closed under dependent pair types
 
 ```agda
@@ -300,3 +307,7 @@ is-small-logical-equivalence :
 is-small-logical-equivalence H K =
   is-small-product (is-small-function-type H K) (is-small-function-type K H)
 ```
+
+## See also
+
+- [Small maps](foundation.small-maps.md)

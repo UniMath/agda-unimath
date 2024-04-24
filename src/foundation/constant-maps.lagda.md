@@ -60,7 +60,7 @@ module _
 
   compute-action-htpy-function-const :
     (c : C) (H : f ~ g) →
-    action-htpy-function (const ((x : A) → B x) C c) H ＝ refl
+    action-htpy-function (const ((x : A) → B x) c) H ＝ refl
   compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
 ```
 
@@ -183,90 +183,6 @@ point-faithful-map :
 pr1 (point-faithful-map A x) = point x
 pr2 (point-faithful-map A x) =
   is-faithful-point-is-1-type (is-1-type-type-1-Type A) x
-```
-
-### Given a term of `A`, the constant map is injective viewed as a function `B → (A → B)`
-
-```agda
-is-injective-const :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → is-injective (const A B)
-is-injective-const A B a p = htpy-eq p a
-
-const-injection :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → injection B (A → B)
-pr1 (const-injection A B a) = const A B
-pr2 (const-injection A B a) = is-injective-const A B a
-```
-
-### The action on identifications of a constant map is a constant map
-
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B)
-  where
-
-  compute-htpy-eq-ap-const : htpy-eq ∘ ap (const A B) ~ const A (x ＝ y)
-  compute-htpy-eq-ap-const refl = refl
-
-  inv-compute-htpy-eq-ap-const : const A (x ＝ y) ~ htpy-eq ∘ ap (const A B)
-  inv-compute-htpy-eq-ap-const =
-    inv-htpy compute-htpy-eq-ap-const
-
-  compute-eq-htpy-ap-const : ap (const A B) ~ eq-htpy ∘ const A (x ＝ y)
-  compute-eq-htpy-ap-const p =
-    map-eq-transpose-equiv equiv-funext (compute-htpy-eq-ap-const p)
-```
-
-### If `A` is a retract of `B` then `const S A` is a retract of `const S B`
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (S : UU l3) (R : A retract-of B)
-  where
-
-  inclusion-const-retract : hom-arrow (const S A) (const S B)
-  inclusion-const-retract =
-    ( inclusion-retract R ,
-      postcomp S (inclusion-retract R) ,
-      refl-htpy)
-
-  hom-retraction-const-retract : hom-arrow (const S B) (const S A)
-  hom-retraction-const-retract =
-    ( map-retraction-retract R ,
-      postcomp S (map-retraction-retract R) ,
-      refl-htpy)
-
-  coh-retract-map-const-retract :
-    coherence-retract-map
-      ( const S A)
-      ( const S B)
-      ( inclusion-const-retract)
-      ( hom-retraction-const-retract)
-      ( is-retraction-map-retraction-retract R)
-      ( htpy-postcomp S (is-retraction-map-retraction-retract R))
-  coh-retract-map-const-retract x =
-    ( compute-eq-htpy-ap-const S
-      ( map-retraction-retract R (inclusion-retract R x))
-      ( x)
-      ( is-retraction-map-retraction-retract R x)) ∙
-    ( inv right-unit)
-
-  is-retraction-hom-retraction-const-retract :
-    is-retraction-hom-arrow
-      ( const S A)
-      ( const S B)
-      ( inclusion-const-retract)
-      ( hom-retraction-const-retract)
-  is-retraction-hom-retraction-const-retract =
-    ( is-retraction-map-retraction-retract R ,
-      htpy-postcomp S (is-retraction-map-retraction-retract R) ,
-      coh-retract-map-const-retract)
-
-  retract-map-const-retract : (const S A) retract-of-map (const S B)
-  retract-map-const-retract =
-    ( inclusion-const-retract ,
-      hom-retraction-const-retract ,
-      is-retraction-hom-retraction-const-retract)
 ```
 
 ## See also

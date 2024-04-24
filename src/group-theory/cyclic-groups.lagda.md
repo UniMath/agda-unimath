@@ -51,9 +51,7 @@ module _
 
   is-cyclic-prop-Group : Prop l1
   is-cyclic-prop-Group =
-    ∃-Prop
-      ( type-Group G)
-      ( is-generating-element-Group G)
+    ∃ (type-Group G) (is-generating-element-prop-Group G)
 
   is-cyclic-Group : UU l1
   is-cyclic-Group = type-Prop is-cyclic-prop-Group
@@ -136,13 +134,17 @@ module _
 
   is-cyclic-has-generating-element-Group :
     is-cyclic-Group G →
-    {l : Level} → ∃ (type-Group G) (λ g → is-emb-ev-element-hom-Group' G g l)
-  is-cyclic-has-generating-element-Group H =
+    {l : Level} →
+    exists-structure
+      ( type-Group G)
+      ( λ g → is-emb-ev-element-hom-Group' G g l)
+  is-cyclic-has-generating-element-Group H {l} =
     apply-universal-property-trunc-Prop H
-      ( ∃-Prop (type-Group G) (λ g → is-emb-ev-element-hom-Group' G g _))
+      ( exists-structure-Prop
+        ( type-Group G)
+        ( λ g → is-emb-ev-element-hom-Group' G g l))
       ( λ (g , u) →
-        intro-∃ g
-          ( is-emb-ev-element-is-generating-element-Group G g u))
+        intro-exists g (is-emb-ev-element-is-generating-element-Group G g u))
 ```
 
 ## See also

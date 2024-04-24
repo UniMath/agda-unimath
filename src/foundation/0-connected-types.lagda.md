@@ -128,7 +128,7 @@ equiv-dependent-universal-property-is-0-connected :
     ((x : A) → type-Prop (P x)) ≃ type-Prop (P a))
 equiv-dependent-universal-property-is-0-connected a H P =
   ( equiv-universal-property-unit (type-Prop (P a))) ∘e
-  ( equiv-dependent-universal-property-surj-is-surjective
+  ( equiv-dependent-universal-property-surjection-is-surjective
     ( point a)
     ( is-surjective-point-is-0-connected a H)
     ( P))

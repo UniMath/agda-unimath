@@ -421,7 +421,7 @@ module _
 
   double-transpose-eq-concat :
     {x y u v : A} (r : x ＝ u) (p : x ＝ y) (s : u ＝ v) (q : y ＝ v) →
-    p ∙ q ＝ r ∙ s → (inv r) ∙ p ＝ s ∙ (inv q)
+    p ∙ q ＝ r ∙ s → inv r ∙ p ＝ s ∙ inv q
   double-transpose-eq-concat refl p s refl α =
     (inv right-unit ∙ α) ∙ inv right-unit
 

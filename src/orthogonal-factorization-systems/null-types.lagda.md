@@ -9,11 +9,13 @@ module orthogonal-factorization-systems.null-types where
 ```agda
 open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.postcomposition-functions
+open import foundation.logical-equivalences
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.retracts-of-maps
@@ -39,7 +41,7 @@ A type `A` is said to be
 [constant map](foundation-core.constant-maps.md)
 
 ```text
-  const : A → (Y → A)
+  Δ : A → (Y → A)
 ```
 
 is an [equivalence](foundation-core.equivalences.md). The idea is that "`A`
@@ -56,10 +58,10 @@ module _
   where
 
   is-null : UU (l1 ⊔ l2)
-  is-null = is-equiv (const Y A)
+  is-null = is-equiv (diagonal-exponential A Y)
 
   is-prop-is-null : is-prop is-null
-  is-prop-is-null = is-property-is-equiv (const Y A)
+  is-prop-is-null = is-property-is-equiv (diagonal-exponential A Y)
 
   is-null-Prop : Prop (l1 ⊔ l2)
   pr1 is-null-Prop = is-null
@@ -111,7 +113,7 @@ module _
   is-local-terminal-map-is-null : is-null Y A → is-local (terminal-map Y) A
   is-local-terminal-map-is-null =
     is-equiv-comp
-      ( const Y A)
+      ( diagonal-exponential A Y)
       ( map-left-unit-law-function-type A)
       ( is-equiv-map-left-unit-law-function-type A)
 

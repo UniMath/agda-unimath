@@ -203,6 +203,17 @@ pr2 (involution-Π-involution-fam i) f =
   eq-htpy (λ x → is-involution-map-involution (i x) (f x))
 ```
 
+### Coherence of involutions
+
+```agda
+module _
+  {l : Level} {A : UU l} {f : A → A} (H : is-involution f)
+  where
+
+  coherence-is-involution : UU l
+  coherence-is-involution = f ·l H ~ H ·r f
+```
+
 ## Examples
 
 ### The identity function is an involution

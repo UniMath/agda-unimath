@@ -15,7 +15,6 @@ open import foundation.hilberts-epsilon-operators
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
-open import foundation.retracts-of-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -24,6 +23,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
+open import foundation-core.retracts-of-types
 ```
 
 </details>
@@ -61,13 +61,15 @@ is-inhabited-or-empty A = type-trunc-Prop A + is-empty A
 
 ### Merely decidable types
 
-A type `A` is said to be merely decidable if it comes equipped with an element
-of `type-trunc-Prop (is-decidable A)`.
+A type `A` is said to be
+{{#concept "merely decidable" Agda=is-merely-decidable}} if it comes equipped
+with an element of `║ is-decidable A ║₋₁`, or equivalently, the
+[disjunction](foundation.disjunction.md) `A ∨ ¬ A` holds.
 
 ```agda
-is-merely-Decidable-Prop :
+is-merely-decidable-Prop :
   {l : Level} → UU l → Prop l
-is-merely-Decidable-Prop A = trunc-Prop (is-decidable A)
+is-merely-decidable-Prop A = trunc-Prop (is-decidable A)
 
 is-merely-decidable : {l : Level} → UU l → UU l
 is-merely-decidable A = type-trunc-Prop (is-decidable A)
@@ -208,8 +210,7 @@ double-negation-elim-is-decidable (inr x) p = ex-falso (p x)
 ```agda
 double-negation-is-decidable : {l : Level} {P : UU l} → ¬¬ (is-decidable P)
 double-negation-is-decidable {P = P} f =
-  map-neg (inr {A = P} {B = ¬ P}) f
-    ( map-neg (inl {A = P} {B = ¬ P}) f)
+  map-neg (inr {A = P} {B = ¬ P}) f (map-neg (inl {A = P} {B = ¬ P}) f)
 ```
 
 ### Decidable types have ε-operators
@@ -236,9 +237,9 @@ idempotent-is-decidable P (inr np) = inr (λ p → np (inl p))
 
 ```agda
 abstract
-  is-prop-is-inhabited-or-empty :
+  is-property-is-inhabited-or-empty :
     {l1 : Level} (A : UU l1) → is-prop (is-inhabited-or-empty A)
-  is-prop-is-inhabited-or-empty A =
+  is-property-is-inhabited-or-empty A =
     is-prop-coproduct
       ( λ t → apply-universal-property-trunc-Prop t empty-Prop)
       ( is-prop-type-trunc-Prop)
@@ -246,7 +247,7 @@ abstract
 
 is-inhabited-or-empty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-inhabited-or-empty-Prop A) = is-inhabited-or-empty A
-pr2 (is-inhabited-or-empty-Prop A) = is-prop-is-inhabited-or-empty A
+pr2 (is-inhabited-or-empty-Prop A) = is-property-is-inhabited-or-empty A
 ```
 
 ### Any inhabited type is a fixed point for `is-decidable`
