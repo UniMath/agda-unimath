@@ -86,8 +86,8 @@ module _
 
 ### Closure under retracts
 
-If `C` is `Y`-null and `X` is a retract of `Y` and `B` is a retract of `C`, then
-`B` is `X`-null.
+If `C` is `Y`-null and `X` is a retract of `Y` and `B x` is a retract of `C x`
+for all `x`, then `B` is `X`-null.
 
 ```agda
 module _
