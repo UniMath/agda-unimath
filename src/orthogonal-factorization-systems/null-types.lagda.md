@@ -10,11 +10,14 @@ module orthogonal-factorization-systems.null-types where
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
+open import foundation.equivalences-arrows
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.postcomposition-functions
+open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.retracts-of-maps
@@ -23,6 +26,7 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universal-property-family-of-fibers-of-maps
+open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-maps
@@ -181,7 +185,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (Y : UU l1) (A : UU l2)
+  {l1 l2 : Level} {Y : UU l1} {A : UU l2}
   where
 
   is-null-is-orthogonal-terminal-maps :
@@ -189,9 +193,23 @@ module _
   is-null-is-orthogonal-terminal-maps H =
     is-null-is-local-terminal-map Y A
       ( is-local-is-orthogonal-terminal-map (terminal-map Y) H)
-```
 
-The converse remains to be formalized.
+  is-orthogonal-terminal-maps-is-null :
+    is-null Y A → is-orthogonal (terminal-map Y) (terminal-map A)
+  is-orthogonal-terminal-maps-is-null H =
+    is-orthogonal-is-orthogonal-fiber-condition-right-map
+      ( terminal-map Y)
+      ( terminal-map A)
+      ( λ _ →
+        is-equiv-source-is-equiv-target-equiv-arrow
+          ( precomp (terminal-map Y) (fiber (terminal-map A) star))
+          ( diagonal-exponential A Y)
+          ( ( equiv-fiber-terminal-map star) ∘e
+            ( equiv-universal-property-unit (fiber (terminal-map A) star)) ,
+            ( equiv-postcomp Y (equiv-fiber-terminal-map star)) ,
+            ( refl-htpy))
+          ( H))
+```
 
 ### A type is `f`-local if it is null at every fiber of `f`
 
