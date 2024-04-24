@@ -118,13 +118,13 @@ module _
 
   is-null-family-is-null-map-pr1 :
     is-null-map Y (pr1 {B = B}) → is-null-family Y B
-  is-null-family-is-null-map-pr1 H x =
-    is-null-equiv-base (inv-equiv-fiber-pr1 B x) (H x)
+  is-null-family-is-null-map-pr1 =
+    is-null-family-equiv-family (inv-equiv-fiber-pr1 B)
 
   is-null-map-pr1-is-null-family :
     is-null-family Y B → is-null-map Y (pr1 {B = B})
-  is-null-map-pr1-is-null-family H x =
-    is-null-equiv-base (equiv-fiber-pr1 B x) (H x)
+  is-null-map-pr1-is-null-family =
+    is-null-family-equiv-family (equiv-fiber-pr1 B)
 ```
 
 ### The pullback and fiber condition for `Y`-null maps are equivalent
