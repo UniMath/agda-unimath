@@ -129,7 +129,7 @@ abstract
 
 ## Properties
 
-### The positive rational numbers are a Set
+### The positive rational numbers form a set
 
 ```agda
 is-set-ℚ⁺ : is-set ℚ⁺
