@@ -130,7 +130,7 @@ module _
       ( diagonal-exponential A 𝟚)
       ( tot (λ x → tot (λ y → simplicial-hom-eq {x = x} {y})))
   equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚 =
-    (compute-total-Id , compute-total-simplicial-hom , refl-htpy)
+    ( compute-total-Id , compute-total-simplicial-hom , refl-htpy)
 
   is-simplicially-discrete-is-𝟚-null :
     is-null 𝟚 A → is-simplicially-discrete A
