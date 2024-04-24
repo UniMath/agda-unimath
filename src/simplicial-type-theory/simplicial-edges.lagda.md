@@ -14,12 +14,16 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.retractions
+open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
@@ -215,4 +219,135 @@ module _
         ( simplicial-hom-htpy-simplicial-arrow)
         ( g)
         ( htpy-simplicial-hom-htpy-simplicial-arrow)
+```
+
+### Computing the based total type of simplicial edges
+
+```text
+  Σ (𝟚 → A) (λ α → α 0₂ ＝ x) ≃ Σ (y : A), (x →₂ y)
+```
+
+```agda
+module _
+  {l : Level} {A : UU l} (x : A)
+  where
+
+  based-simplicial-hom : UU l
+  based-simplicial-hom = Σ A (λ y → (x →₂ y))
+
+  map-compute-based-simplicial-hom :
+    Σ (𝟚 → A) (λ α → α 0₂ ＝ x) → based-simplicial-hom
+  map-compute-based-simplicial-hom (α , p) = (α 1₂ , α , p , refl)
+
+  map-inv-compute-based-simplicial-hom :
+    based-simplicial-hom → Σ (𝟚 → A) (λ α → α 0₂ ＝ x)
+  map-inv-compute-based-simplicial-hom (y , α , p , q) = (α , p)
+
+  is-section-map-inv-compute-based-simplicial-hom :
+    is-section
+      ( map-compute-based-simplicial-hom)
+      ( map-inv-compute-based-simplicial-hom)
+  is-section-map-inv-compute-based-simplicial-hom
+    (.(α 1₂) , α , p , refl) = refl
+
+  is-retraction-map-inv-compute-based-simplicial-hom :
+    is-retraction
+      ( map-compute-based-simplicial-hom)
+      ( map-inv-compute-based-simplicial-hom)
+  is-retraction-map-inv-compute-based-simplicial-hom = refl-htpy
+
+  is-equiv-map-compute-based-simplicial-hom :
+    is-equiv map-compute-based-simplicial-hom
+  is-equiv-map-compute-based-simplicial-hom =
+    is-equiv-is-invertible
+      ( map-inv-compute-based-simplicial-hom)
+      ( is-section-map-inv-compute-based-simplicial-hom)
+      ( is-retraction-map-inv-compute-based-simplicial-hom)
+
+  is-equiv-map-inv-compute-based-simplicial-hom :
+    is-equiv map-inv-compute-based-simplicial-hom
+  is-equiv-map-inv-compute-based-simplicial-hom =
+    is-equiv-is-invertible
+      ( map-compute-based-simplicial-hom)
+      ( is-retraction-map-inv-compute-based-simplicial-hom)
+      ( is-section-map-inv-compute-based-simplicial-hom)
+
+  compute-based-simplicial-hom :
+    Σ (𝟚 → A) (λ α → α 0₂ ＝ x) ≃ based-simplicial-hom
+  compute-based-simplicial-hom =
+    ( map-compute-based-simplicial-hom ,
+      is-equiv-map-compute-based-simplicial-hom)
+
+  inv-compute-based-simplicial-hom :
+    based-simplicial-hom ≃ Σ (𝟚 → A) (λ α → α 0₂ ＝ x)
+  inv-compute-based-simplicial-hom =
+    ( map-inv-compute-based-simplicial-hom ,
+      is-equiv-map-inv-compute-based-simplicial-hom)
+```
+
+### Computing the total type of simplicial edges
+
+The directed interval type classifies the total type of simplicial edges in a
+type.
+
+```text
+  (𝟚 → A) ≃ Σ (x y : A), (x →₂ y)
+```
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  total-simplicial-hom : UU l
+  total-simplicial-hom = Σ A based-simplicial-hom
+
+  map-compute-total-simplicial-hom :
+    (𝟚 → A) → total-simplicial-hom
+  map-compute-total-simplicial-hom α = (α 0₂ , α 1₂ , α , refl , refl)
+
+  map-inv-compute-total-simplicial-hom :
+    total-simplicial-hom → 𝟚 → A
+  map-inv-compute-total-simplicial-hom (x , y , α , p , q) = α
+
+  is-section-map-inv-compute-total-simplicial-hom :
+    is-section
+      ( map-compute-total-simplicial-hom)
+      ( map-inv-compute-total-simplicial-hom)
+  is-section-map-inv-compute-total-simplicial-hom
+    (.(α 0₂) , .(α 1₂) , α , refl , refl) = refl
+
+  is-retraction-map-inv-compute-total-simplicial-hom :
+    is-retraction
+      ( map-compute-total-simplicial-hom)
+      ( map-inv-compute-total-simplicial-hom)
+  is-retraction-map-inv-compute-total-simplicial-hom = refl-htpy
+
+  is-equiv-map-compute-total-simplicial-hom :
+    is-equiv map-compute-total-simplicial-hom
+  is-equiv-map-compute-total-simplicial-hom =
+    is-equiv-is-invertible
+      ( map-inv-compute-total-simplicial-hom)
+      ( is-section-map-inv-compute-total-simplicial-hom)
+      ( is-retraction-map-inv-compute-total-simplicial-hom)
+
+  is-equiv-map-inv-compute-total-simplicial-hom :
+    is-equiv map-inv-compute-total-simplicial-hom
+  is-equiv-map-inv-compute-total-simplicial-hom =
+    is-equiv-is-invertible
+      ( map-compute-total-simplicial-hom)
+      ( is-retraction-map-inv-compute-total-simplicial-hom)
+      ( is-section-map-inv-compute-total-simplicial-hom)
+
+  compute-total-simplicial-hom :
+    (𝟚 → A) ≃ total-simplicial-hom
+  compute-total-simplicial-hom =
+    ( map-compute-total-simplicial-hom ,
+      is-equiv-map-compute-total-simplicial-hom)
+
+  inv-compute-total-simplicial-hom :
+    total-simplicial-hom ≃ (𝟚 → A)
+  inv-compute-total-simplicial-hom =
+    ( map-inv-compute-total-simplicial-hom ,
+      is-equiv-map-inv-compute-total-simplicial-hom)
 ```

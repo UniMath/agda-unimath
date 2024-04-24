@@ -25,6 +25,7 @@ open import simplicial-type-theory.simplicial-arrows public
 open import simplicial-type-theory.simplicial-cubes public
 open import simplicial-type-theory.simplicial-edges public
 open import simplicial-type-theory.simplicial-natural-transformations public
+open import simplicial-type-theory.simplicially-discrete-types public
 open import simplicial-type-theory.universal-property-directed-circle public
 open import simplicial-type-theory.whiskering-simplicial-arrows-functions public
 open import simplicial-type-theory.whiskering-simplicial-edges-functions public

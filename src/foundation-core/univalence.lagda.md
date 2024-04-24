@@ -108,8 +108,8 @@ abstract
   is-torsorial-equiv-based-univalence :
     {l : Level} (A : UU l) →
     based-univalence-axiom A → is-torsorial (λ (B : UU l) → A ≃ B)
-  is-torsorial-equiv-based-univalence A UA =
-    fundamental-theorem-id' (λ B → equiv-eq) UA
+  is-torsorial-equiv-based-univalence A =
+    fundamental-theorem-id' (λ B → equiv-eq)
 ```
 
 ### Contractibility of the total space of equivalences implies univalence
