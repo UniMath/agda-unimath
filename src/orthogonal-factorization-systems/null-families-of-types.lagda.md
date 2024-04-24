@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.retracts-of-types
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.null-types
@@ -49,10 +50,50 @@ module _
     is-prop-Π (λ x → is-prop-is-null Y (B x))
 
   is-null-family-Prop : Prop (l1 ⊔ l2 ⊔ l3)
-  pr1 is-null-family-Prop = is-null-family
-  pr2 is-null-family-Prop = is-property-is-null-family
+  is-null-family-Prop = (is-null-family , is-property-is-null-family)
+```
+
+## Properties
+
+### Nullity is closed under equivalences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {A : UU l3} {B : A → UU l4}
+  where
+
+  is-null-family-equiv :
+    {l5 : Level} {C : A → UU l5} →
+    X ≃ Y → ((x : A) → C x ≃ B x) →
+    is-null-family Y B → is-null-family X C
+  is-null-family-equiv e f H x = is-null-equiv e (f x) (H x)
+
+  is-null-family-equiv-exponent :
+    (e : X ≃ Y) → is-null-family Y B → is-null-family X B
+  is-null-family-equiv-exponent e H x = is-null-equiv-exponent e (H x)
+
+module _
+  {l1 l2 l3 l4 : Level} {Y : UU l1} {A : UU l2} {B : A → UU l3} {C : A → UU l4}
+  where
+
+  is-null-family-equiv-family :
+    ((x : A) → C x ≃ B x) → is-null-family Y B → is-null-family Y C
+  is-null-family-equiv-family f H x = is-null-equiv-base (f x) (H x)
+```
+
+### Retracts of `Y`-null families are `Y`-null
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {Y : UU l1} {A : UU l2} {B : A → UU l3} {C : A → UU l4}
+  where
+
+  is-null-family-retract :
+    ((x : A) → (C x) retract-of (B x)) → is-null-family Y B → is-null-family Y C
+  is-null-family-retract f H x = is-null-retract (f x) (H x)
 ```
 
 ## See also
 
-- [Null maps](orthogonal-factorization-systems.null-maps.md)
+- In [`null-maps`](orthogonal-factorization-systems.null-maps.md) we show that a
+  type family is `Y`-null if and only if its total space projection is.

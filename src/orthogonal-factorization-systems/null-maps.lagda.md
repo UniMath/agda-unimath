@@ -109,6 +109,24 @@ module _
 
 ## Properties
 
+### A type family is `Y`-null if and only if its total space projection is
+
+```agda
+module _
+  {l1 l2 l3 : Level} (Y : UU l1) {A : UU l2} (B : A → UU l3)
+  where
+
+  is-null-family-is-null-map-pr1 :
+    is-null-map Y (pr1 {B = B}) → is-null-family Y B
+  is-null-family-is-null-map-pr1 H x =
+    is-null-equiv-base (inv-equiv-fiber-pr1 B x) (H x)
+
+  is-null-map-pr1-is-null-family :
+    is-null-family Y B → is-null-map Y (pr1 {B = B})
+  is-null-map-pr1-is-null-family H x =
+    is-null-equiv-base (equiv-fiber-pr1 B x) (H x)
+```
+
 ### The pullback and fiber condition for `Y`-null maps are equivalent
 
 ```agda

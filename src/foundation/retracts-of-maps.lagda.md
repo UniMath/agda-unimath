@@ -15,6 +15,7 @@ open import foundation.diagonal-maps-of-types
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies-morphisms-arrows
+open import foundation.homotopy-algebra
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
@@ -22,6 +23,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.constant-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -905,55 +907,69 @@ module _
   pr2 retract-map-postcomp-retract-map = retraction-postcomp-retract-map
 ```
 
-### If `A` is a retract of `B` then `diagonal-exponential S A` is a retract of `diagonal-exponential S B`
+### If `A` is a retract of `B` and `S` is a retract of `T` then `diagonal-exponential A S` is a retract of `diagonal-exponential B T`
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (S : UU l3) (R : A retract-of B)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {S : UU l3} {T : UU l4}
+  (R : A retract-of B) (Q : S retract-of T)
   where
 
   inclusion-diagonal-exponential-retract :
-    hom-arrow (diagonal-exponential A S) (diagonal-exponential B S)
+    hom-arrow (diagonal-exponential A S) (diagonal-exponential B T)
   inclusion-diagonal-exponential-retract =
     ( inclusion-retract R ,
-      postcomp S (inclusion-retract R) ,
+      precomp (map-retraction-retract Q) B ∘ postcomp S (inclusion-retract R) ,
       refl-htpy)
 
   hom-retraction-diagonal-exponential-retract :
-    hom-arrow (diagonal-exponential B S) (diagonal-exponential A S)
+    hom-arrow (diagonal-exponential B T) (diagonal-exponential A S)
   hom-retraction-diagonal-exponential-retract =
     ( map-retraction-retract R ,
-      postcomp S (map-retraction-retract R) ,
+      postcomp S (map-retraction-retract R) ∘ precomp (inclusion-retract Q) B ,
       refl-htpy)
 
   coh-retract-map-diagonal-exponential-retract :
     coherence-retract-map
       ( diagonal-exponential A S)
-      ( diagonal-exponential B S)
+      ( diagonal-exponential B T)
       ( inclusion-diagonal-exponential-retract)
       ( hom-retraction-diagonal-exponential-retract)
       ( is-retraction-map-retraction-retract R)
-      ( htpy-postcomp S (is-retraction-map-retraction-retract R))
+      ( horizontal-concat-htpy
+        ( htpy-postcomp S (is-retraction-map-retraction-retract R))
+        ( htpy-precomp (is-retraction-map-retraction-retract Q) A))
   coh-retract-map-diagonal-exponential-retract x =
     ( compute-eq-htpy-ap-diagonal-exponential S
       ( map-retraction-retract R (inclusion-retract R x))
       ( x)
       ( is-retraction-map-retraction-retract R x)) ∙
-    ( inv right-unit)
+    ( ap
+      ( λ p →
+        ( ap (λ f a → map-retraction-retract R (inclusion-retract R (f a))) p) ∙
+        ( eq-htpy (λ _ → is-retraction-map-retraction-retract R x)))
+      ( inv
+        ( ( ap
+            ( eq-htpy)
+            ( eq-htpy (ap-const x ·r is-retraction-map-retraction-retract Q))) ∙
+          ( eq-htpy-refl-htpy (diagonal-exponential A S x))))) ∙
+      ( inv right-unit)
 
   is-retraction-hom-retraction-diagonal-exponential-retract :
     is-retraction-hom-arrow
       ( diagonal-exponential A S)
-      ( diagonal-exponential B S)
+      ( diagonal-exponential B T)
       ( inclusion-diagonal-exponential-retract)
       ( hom-retraction-diagonal-exponential-retract)
   is-retraction-hom-retraction-diagonal-exponential-retract =
-    ( is-retraction-map-retraction-retract R ,
-      htpy-postcomp S (is-retraction-map-retraction-retract R) ,
-      coh-retract-map-diagonal-exponential-retract)
+    ( ( is-retraction-map-retraction-retract R) ,
+      ( horizontal-concat-htpy
+        ( htpy-postcomp S (is-retraction-map-retraction-retract R))
+        ( htpy-precomp (is-retraction-map-retraction-retract Q) A)) ,
+      ( coh-retract-map-diagonal-exponential-retract))
 
   retract-map-diagonal-exponential-retract :
-    (diagonal-exponential A S) retract-of-map (diagonal-exponential B S)
+    (diagonal-exponential A S) retract-of-map (diagonal-exponential B T)
   retract-map-diagonal-exponential-retract =
     ( inclusion-diagonal-exponential-retract ,
       hom-retraction-diagonal-exponential-retract ,

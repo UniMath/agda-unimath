@@ -69,18 +69,25 @@ module _
 
 ## Properties
 
-### `Y`-null types are closed under equivalences
+### Closure under equivalences
+
+If `B` is `Y`-null and we have equivalences `X ≃ Y` and `A ≃ B`, then `A` is
+`X`-null.
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4}
   where
 
-  is-null-equiv : (e : X ≃ Y) (f : B ≃ A) → is-null Y A → is-null X B
+  is-null-equiv : (e : X ≃ Y) (f : A ≃ B) → is-null Y B → is-null X A
   is-null-equiv e f H =
     is-equiv-htpy-equiv
-      ( equiv-precomp e B ∘e equiv-postcomp Y (inv-equiv f) ∘e (_ , H) ∘e f)
-      ( λ b → eq-htpy (λ _ → inv (is-retraction-map-inv-equiv f b)))
+      ( equiv-precomp e A ∘e equiv-postcomp Y (inv-equiv f) ∘e (_ , H) ∘e f)
+      ( λ x → eq-htpy (λ _ → inv (is-retraction-map-inv-equiv f x)))
+
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {A : UU l3}
+  where
 
   is-null-equiv-exponent : (e : X ≃ Y) → is-null Y A → is-null X A
   is-null-equiv-exponent e H =
@@ -89,17 +96,49 @@ module _
       ( diagonal-exponential A Y)
       ( H)
       ( is-equiv-precomp-equiv e A)
+
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  is-null-equiv-base : (f : A ≃ B) → is-null Y B → is-null Y A
+  is-null-equiv-base f H =
+    is-equiv-htpy-equiv
+      ( equiv-postcomp Y (inv-equiv f) ∘e (_ , H) ∘e f)
+      ( λ b → eq-htpy (λ _ → inv (is-retraction-map-inv-equiv f b)))
 ```
 
-### `Y`-null types are closed under retracts
+### Closure under retracts
+
+If `B` is `Y`-null and `X` is a retract of `Y` and `A` is a retract of `B`, then
+`A` is `X`-null.
 
 ```agda
-  is-null-retract : (f : B retract-of A) → is-null Y A → is-null Y B
-  is-null-retract f =
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4}
+  where
+
+  is-null-retract :
+    X retract-of Y → A retract-of B → is-null Y B → is-null X A
+  is-null-retract e f =
     is-equiv-retract-map-is-equiv
+      ( diagonal-exponential A X)
       ( diagonal-exponential B Y)
-      ( diagonal-exponential A Y)
-      ( retract-map-diagonal-exponential-retract Y f)
+      ( retract-map-diagonal-exponential-retract f e)
+
+module _
+  {l1 l2 l3 : Level} {Y : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  is-null-retract-base : A retract-of B → is-null Y B → is-null Y A
+  is-null-retract-base = is-null-retract id-retract
+
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {A : UU l3}
+  where
+
+  is-null-retract-exponent : X retract-of Y → is-null Y A → is-null X A
+  is-null-retract-exponent e = is-null-retract e id-retract
 ```
 
 ### A type is `Y`-null if and only if it is local at the terminal projection `Y → unit`
