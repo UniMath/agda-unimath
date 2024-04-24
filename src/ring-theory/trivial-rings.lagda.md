@@ -75,7 +75,7 @@ pr2 (is-contr-is-trivial-Ring R p) x =
         by left-unit-law-mul-Ring R x
 ```
 
-### Invertible elements of nontrivial rings are different from zero
+### Invertible elements of nontrivial rings are not equal to zero
 
 ```agda
 module _

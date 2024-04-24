@@ -43,7 +43,7 @@ pr1 is-division-ring-ℚ = is-nonzero-one-ℚ ∘ inv
 pr2 is-division-ring-ℚ x H = is-invertible-element-ring-is-nonzero-ℚ x (H ∘ inv)
 ```
 
-### The rational numbers are a discrete field
+### The rational numbers form a discrete field
 
 ```agda
 is-discrete-field-ℚ : is-discrete-field-Commutative-Ring commutative-ring-ℚ
