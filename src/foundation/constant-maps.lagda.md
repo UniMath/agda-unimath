@@ -64,14 +64,9 @@ module _
   compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
 ```
 
-### Computing the fibers of constant maps
+### Computing the fibers of the point
 
 ```agda
-compute-fiber-const :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  fiber (const A B) f ≃ Σ B (λ b → (x : A) → b ＝ f x)
-compute-fiber-const f = equiv-tot (λ _ → equiv-funext)
-
 compute-fiber-point :
   {l : Level} {A : UU l} (x y : A) → fiber (point x) y ≃ (x ＝ y)
 compute-fiber-point x y = left-unit-law-product

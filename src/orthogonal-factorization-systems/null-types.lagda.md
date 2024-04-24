@@ -7,15 +7,14 @@ module orthogonal-factorization-systems.null-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.postcomposition-functions
 open import foundation.logical-equivalences
+open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.retracts-of-maps
@@ -38,15 +37,15 @@ open import orthogonal-factorization-systems.orthogonal-maps
 A type `A` is said to be
 {{#concept "null at" Disambiguation="type" Agda=is-null}} `Y`, or
 {{#concept "`Y`-null" Disambiguation="type" Agda=is-null}}, if the
-[constant map](foundation-core.constant-maps.md)
+[diagonal map](foundation.diagonal-maps-of-types.md)
 
 ```text
   Δ : A → (Y → A)
 ```
 
-is an [equivalence](foundation-core.equivalences.md). The idea is that "`A`
-observes the type `Y` to be
-[contractible](foundation-core.contractible-types.md)".
+is an [equivalence](foundation-core.equivalences.md). The idea is that `A`
+"observes" the type `Y` to be
+[contractible](foundation-core.contractible-types.md).
 
 ## Definitions
 
@@ -87,7 +86,7 @@ module _
   is-null-equiv-exponent e H =
     is-equiv-comp
       ( precomp (map-equiv e) A)
-      ( const Y A)
+      ( diagonal-exponential A Y)
       ( H)
       ( is-equiv-precomp-equiv e A)
 ```
@@ -98,9 +97,9 @@ module _
   is-null-retract : (f : B retract-of A) → is-null Y A → is-null Y B
   is-null-retract f =
     is-equiv-retract-map-is-equiv
-      ( const Y B)
-      ( const Y A)
-      ( retract-map-const-retract Y f)
+      ( diagonal-exponential B Y)
+      ( diagonal-exponential A Y)
+      ( retract-map-diagonal-exponential-retract Y f)
 ```
 
 ### A type is `Y`-null if and only if it is local at the terminal projection `Y → unit`
@@ -127,8 +126,8 @@ module _
   equiv-is-local-terminal-map-is-null :
     is-null Y A ≃ is-local (terminal-map Y) A
   equiv-is-local-terminal-map-is-null =
-    equiv-prop
-      ( is-property-is-equiv (const Y A))
+    equiv-iff-is-prop
+      ( is-property-is-equiv (diagonal-exponential A Y))
       ( is-property-is-equiv (precomp (terminal-map Y) A))
       ( is-local-terminal-map-is-null)
       ( is-null-is-local-terminal-map)

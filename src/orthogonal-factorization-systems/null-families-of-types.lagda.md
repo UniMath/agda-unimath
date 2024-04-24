@@ -24,10 +24,10 @@ open import orthogonal-factorization-systems.orthogonal-maps
 A family of types `B : A → UU l` is said to be
 {{#concept "null" Disambiguation="family of types" Agda=is-null-family}} at `Y`,
 or **`Y`-null**, if every [fiber](foundation-core.fibers-of-maps.md) is. I.e.,
-if the [constant map](foundation-core.constant-maps.md)
+if the [diagonal map](foundation.diagonal-maps-of-types.md)
 
 ```text
-  const : (B x) → (Y → (B x))
+  Δ : B x → (Y → B x)
 ```
 
 is an [equivalence](foundation-core.equivalences.md) for every `x` in `A`.

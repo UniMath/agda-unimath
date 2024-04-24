@@ -8,8 +8,8 @@ module orthogonal-factorization-systems.null-maps where
 
 ```agda
 open import foundation.cones-over-cospan-diagrams
-open import foundation.constant-maps
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.families-of-equivalences
@@ -18,6 +18,7 @@ open import foundation.function-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
@@ -48,13 +49,13 @@ if its [fibers](foundation-core.fibers-of-maps.md) are
 the square
 
 ```text
-       const
+         Δ
     A ------> (Y → A)
     |            |
   f |            | f ∘ -
     ∨            ∨
     B ------> (Y → B)
-       const
+         Δ
 ```
 
 is a [pullback](foundation-core.pullbacks.md).
@@ -85,18 +86,23 @@ module _
   {l1 l2 l3 : Level} (Y : UU l1) {A : UU l2} {B : UU l3} (f : A → B)
   where
 
-  cone-is-null-map-pullback-condition : cone (const Y B) (postcomp Y f) A
-  cone-is-null-map-pullback-condition = (f , const Y A , refl-htpy)
+  cone-is-null-map-pullback-condition :
+    cone (diagonal-exponential B Y) (postcomp Y f) A
+  cone-is-null-map-pullback-condition =
+    (f , diagonal-exponential A Y , refl-htpy)
 
   is-null-map-pullback-condition : UU (l1 ⊔ l2 ⊔ l3)
   is-null-map-pullback-condition =
-    is-pullback (const Y B) (postcomp Y f) (cone-is-null-map-pullback-condition)
+    is-pullback
+      ( diagonal-exponential B Y)
+      ( postcomp Y f)
+      ( cone-is-null-map-pullback-condition)
 
   is-prop-is-null-map-pullback-condition :
     is-prop is-null-map-pullback-condition
   is-prop-is-null-map-pullback-condition =
     is-prop-is-pullback
-      ( const Y B)
+      ( diagonal-exponential B Y)
       ( postcomp Y f)
       ( cone-is-null-map-pullback-condition)
 ```
@@ -115,31 +121,31 @@ module _
       (b : B) →
       equiv-arrow
         ( map-fiber-vertical-map-cone
-          ( const Y B)
+          ( diagonal-exponential B Y)
           ( postcomp Y f)
           ( cone-is-null-map-pullback-condition Y f)
           ( b))
-        ( const Y (fiber f b))
+        ( diagonal-exponential (fiber f b) Y)
     compute-map-fiber-vertical-map-cone-is-null-map-pullback-condition b =
       ( id-equiv ,
-        inv-compute-Π-fiber-postcomp Y f (const Y B b) ,
+        inv-compute-Π-fiber-postcomp Y f (diagonal-exponential B Y b) ,
         ( λ where (x , refl) → refl))
 
   is-null-map-pullback-condition-is-null-map :
     is-null-map Y f → is-null-map-pullback-condition Y f
   is-null-map-pullback-condition-is-null-map H =
     is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
-      ( const Y B)
+      ( diagonal-exponential B Y)
       ( postcomp Y f)
       ( cone-is-null-map-pullback-condition Y f)
       ( λ b →
         is-equiv-source-is-equiv-target-equiv-arrow
           ( map-fiber-vertical-map-cone
-            ( const Y B)
+            ( diagonal-exponential B Y)
             ( postcomp Y f)
             ( cone-is-null-map-pullback-condition Y f)
             ( b))
-          ( const Y (fiber f b))
+          ( diagonal-exponential (fiber f b) Y)
           ( compute-map-fiber-vertical-map-cone-is-null-map-pullback-condition
             ( b))
           ( H b))
@@ -149,14 +155,14 @@ module _
   is-null-map-is-null-map-pullback-condition H b =
     is-equiv-target-is-equiv-source-equiv-arrow
       ( map-fiber-vertical-map-cone
-        ( const Y B)
+        ( diagonal-exponential B Y)
         ( postcomp Y f)
         ( cone-is-null-map-pullback-condition Y f)
         ( b))
-      ( const Y (fiber f b))
+      ( diagonal-exponential (fiber f b) Y)
       ( compute-map-fiber-vertical-map-cone-is-null-map-pullback-condition b)
       ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
-        ( const Y B)
+        ( diagonal-exponential B Y)
         ( postcomp Y f)
         ( cone-is-null-map-pullback-condition Y f)
         ( H)
@@ -183,7 +189,7 @@ module _
   equiv-is-local-terminal-map-is-null-map :
     is-null-map Y f ≃ is-local-map (terminal-map Y) f
   equiv-is-local-terminal-map-is-null-map =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-property-is-null-map Y f)
       ( is-property-is-local-map (terminal-map Y) f)
       ( is-local-terminal-map-is-null-map)
@@ -208,7 +214,7 @@ module _
   is-null-map-is-orthogonal-fiber-condition-terminal-map H b =
     is-equiv-target-is-equiv-source-equiv-arrow
       ( precomp (terminal-map Y) (fiber f b))
-      ( const Y (fiber f b))
+      ( diagonal-exponential (fiber f b) Y)
       ( left-unit-law-function-type (fiber f b) , id-equiv , refl-htpy)
       ( H (point b))
 
@@ -218,7 +224,7 @@ module _
   is-orthogonal-fiber-condition-terminal-map-is-null-map H b =
     is-equiv-source-is-equiv-target-equiv-arrow
       ( precomp (terminal-map Y) (fiber f (b star)))
-      ( const Y (fiber f (b star)))
+      ( diagonal-exponential (fiber f (b star)) Y)
       ( left-unit-law-function-type (fiber f (b star)) , id-equiv , refl-htpy)
       ( H (b star))
 
