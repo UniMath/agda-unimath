@@ -75,8 +75,7 @@ module _
 
   universal-property-sequential-colimit : UUω
   universal-property-sequential-colimit =
-    {l : Level} → (Y : UU l) →
-    is-equiv (cocone-map-sequential-diagram c {Y = Y})
+    {l : Level} (Y : UU l) → is-equiv (cocone-map-sequential-diagram c {Y = Y})
 ```
 
 ### The map induced by the universal property of sequential colimits
@@ -165,10 +164,9 @@ module _
   where
 
   universal-property-sequential-colimit-universal-property-coequalizer :
-    ( {l : Level} →
-      universal-property-coequalizer l
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c)) →
+    universal-property-coequalizer
+      ( double-arrow-sequential-diagram A)
+      ( cofork-cocone-sequential-diagram c) →
     universal-property-sequential-colimit c
   universal-property-sequential-colimit-universal-property-coequalizer
     ( up-cofork)
@@ -185,10 +183,9 @@ module _
 
   universal-property-coequalizer-universal-property-sequential-colimit :
     universal-property-sequential-colimit c →
-    ( {l : Level} →
-      universal-property-coequalizer l
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c))
+    universal-property-coequalizer
+      ( double-arrow-sequential-diagram A)
+      ( cofork-cocone-sequential-diagram c)
   universal-property-coequalizer-universal-property-sequential-colimit
     ( up-sequential-colimit)
     ( Y) =
@@ -406,7 +403,7 @@ triangle commute:
   X → Y ----------> cocone A Y
         \         /
          \       /
-  - ∘ i₀  \     / first-map-cocone-sequential-colimit
+   - ∘ i₀ \     / first-map-cocone-sequential-colimit
            \   /
             ∨ ∨
           A₀ → Y .
@@ -432,8 +429,8 @@ which to every `f : A₀ → Y` assigns the cocone
   A₀ ----> A₁ ----> A₂ ----> ⋯
     \      |      /
      \     |     /
-      \  f∘a₀⁻¹ /
-   f   \   |   / f ∘ a₁⁻¹ ∘ a₀⁻¹
+      \ f ∘ a₀⁻¹/
+     f \   |   / f ∘ a₁⁻¹ ∘ a₀⁻¹
         \  |  /
          ∨ ∨ ∨
            Y ,

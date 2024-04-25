@@ -37,13 +37,13 @@ A **cocone under a [span](foundation.spans.md)** `A <-f- S -g-> B` with codomain
 [homotopy](foundation.homotopies.md) witnessing that the square
 
 ```text
-      g
-  S -----> B
-  |        |
- f|        |j
-  V        V
-  A -----> X
-      i
+        g
+    S -----> B
+    |        |
+  f |        |j
+    ∨        ∨
+    A -----> X
+        i
 ```
 
 [commutes](foundation.commuting-squares-of-maps.md).
@@ -215,12 +215,12 @@ cocone-map-comp f g (i , j , H) h k =
 ### Horizontal composition of cocones
 
 ```text
-      i       k
-  A ----> B ----> C
-  |       |       |
- f|       |       |
-  v       v       v
-  X ----> Y ----> Z
+        i       k
+    A ----> B ----> C
+    |       |       |
+  f |       |       |
+    ∨       ∨       ∨
+    X ----> Y ----> Z
 ```
 
 ```agda
@@ -250,13 +250,13 @@ pr2 (pr2 (cocone-comp-horizontal f i k c d)) =
 A variation on the above:
 
 ```text
-       i       k
-   A ----> B ----> C
-   |       |       |
- f |     g |       |
-   v       v       v
-   X ----> Y ----> Z
-       j
+        i       k
+    A ----> B ----> C
+    |       |       |
+  f |     g |       |
+    ∨       ∨       ∨
+    X ----> Y ----> Z
+        j
 ```
 
 ```agda
@@ -273,16 +273,16 @@ cocone-comp-horizontal' f i k g j c coh =
 ### Vertical composition of cocones
 
 ```text
-     i
- A -----> X
- |        |
-f|        |
- v        v
- B -----> Y
- |        |
-k|        |
- v        v
- C -----> Z
+        i
+    A -----> X
+    |        |
+  f |        |
+    ∨        ∨
+    B -----> Y
+    |        |
+  k |        |
+    ∨        ∨
+    C -----> Z
 ```
 
 ```agda
@@ -312,16 +312,16 @@ pr2 (pr2 (cocone-comp-vertical f i k c d)) =
 A variation on the above:
 
 ```text
-     i
- A -----> X
- |        |
-f|        |g
- v   j    v
- B -----> Y
- |        |
-k|        |
- v        v
- C -----> Z
+        i
+    A -----> X
+    |        |
+  f |        |g
+    ∨   j    ∨
+    B -----> Y
+    |        |
+  k |        |
+    ∨        ∨
+    C -----> Z
 ```
 
 ```agda
@@ -338,26 +338,26 @@ cocone-comp-vertical' f i g j k c coh =
 Given a commutative diagram like this,
 
 ```text
-          g'
-      S' ---> B'
-     / \       \
- f' /   \ k     \ j
-   /     v   g   v
-  A'     S ----> B
-    \    |       |
-   i \   | f     |
-      \  v       v
-       > A ----> X
+           g'
+       S' ---> B'
+      / \       \
+  f' /   \ k     \ j
+    /     ∨   g   ∨
+   A'     S ----> B
+     \    |       |
+    i \   | f     |
+       \  ∨       ∨
+        > A ----> X
 ```
 
 we can compose both vertically and horizontally to get the following cocone:
 
 ```text
-   S' ---> B'
-   |       |
-   |       |
-   v       v
-   A' ---> X
+  S' ---> B'
+  |       |
+  |       |
+  ∨       ∨
+  A' ---> X
 ```
 
 Notice that the triple `(i,j,k)` is really a morphism of spans. So the resulting

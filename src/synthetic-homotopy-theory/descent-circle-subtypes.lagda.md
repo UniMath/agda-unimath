@@ -133,7 +133,7 @@ module _
           ( λ x → is-in-subtype subtype-descent-data-circle-subtype (pr1 x))
 
   equiv-section-descent-data-circle-subtype-fixpoint-in-subtype :
-    dependent-universal-property-circle (l2 ⊔ l3) l →
+    dependent-universal-property-circle l →
     ( (x : S) → family-descent-data-circle-dependent-pair-type l A B x) ≃
     ( Σ ( fixpoint-descent-data-circle
           ( descent-data-family-with-descent-data-circle A))

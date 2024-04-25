@@ -72,7 +72,7 @@ We claim that the square
         (X ＝ Y) --------> (B X ＝ B Y)
            |                    |
   equiv-eq |                    | equiv-eq
-           V                    V
+           ∨                    ∨
         (X ≃ Y) ---------> (B X ≃ B Y).
                      B
 ```

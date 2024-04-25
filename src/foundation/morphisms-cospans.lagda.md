@@ -30,7 +30,7 @@ witnessing that the two triangles
   X ----> Y      X ----> Y
    \     /        \     /
   f \   / h      g \   / k
-     V V            V V
+     ∨ ∨            ∨ ∨
       A              B
 ```
 

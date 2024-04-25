@@ -37,10 +37,10 @@ such that the composition `i ∘ g` is `f`.
 
 ```text
            A
-          ^|
+          ∧|
         /  i
       g    |
-    /      v
+    /      ∨
   X - f -> B
 ```
 
@@ -78,15 +78,15 @@ module _
 
 ```text
            A
-          ^|
+          ∧|
         /  i
       g    |
-    /      v
+    /      ∨
   X - f -> B
     \      |
       h    j
        \   |
-         v v
+         ∨ ∨
            C
 ```
 
@@ -107,7 +107,7 @@ module _
     \      |      /
       h    i    j
         \  |  /
-         v v v
+         ∨ ∨ ∨
            X
 ```
 
@@ -126,10 +126,10 @@ module _
 
 ```text
            A
-          ^|
+          ∧|
         /  i
       g    |
-    /      v
+    /      ∨
   X - f -> B - h -> S
 ```
 
@@ -147,10 +147,10 @@ module _
 
 ```text
                     A
-                   ^|
+                   ∧|
                  /  i
                g    |
-             /      v
+             /      ∨
   S - h -> X - f -> B
 ```
 

@@ -56,14 +56,14 @@ module _
     {l : Level} (Z : UU l) → is-equiv (ev-suspension Z)
 ```
 
-### The universal property of the suspension as a pushout
+### The universal property of the suspension at a universe level as a pushout
 
 ```agda
 universal-property-pushout-suspension :
-  (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2)
-  (s : suspension-structure X Y) → UU (lsuc l ⊔ l1 ⊔ l2)
-universal-property-pushout-suspension l X Y s =
-  universal-property-pushout l
+  {l1 l2 : Level} (X : UU l1) (Y : UU l2)
+  (s : suspension-structure X Y) → UUω
+universal-property-pushout-suspension X Y s =
+  universal-property-pushout
     ( terminal-map X)
     ( terminal-map X)
     ( suspension-cocone-suspension-structure s)
@@ -85,10 +85,10 @@ triangle-ev-suspension :
 triangle-ev-suspension (N , S , merid) Z h = refl
 
 is-equiv-ev-suspension :
-  { l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+  { l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   ( s : suspension-structure X Y) →
-  ( up-Y : universal-property-pushout-suspension l3 X Y s) →
-  ( Z : UU l3) → is-equiv (ev-suspension s Z)
+  universal-property-pushout-suspension X Y s →
+  { l3 : Level} (Z : UU l3) → is-equiv (ev-suspension s Z)
 is-equiv-ev-suspension {X = X} s up-Y Z =
   is-equiv-left-map-triangle
     ( ev-suspension s Z)

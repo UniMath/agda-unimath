@@ -311,7 +311,7 @@ The **3-for-2 property** of equivalences asserts that for any
    \       /
    f\     /g
      \   /
-      V V
+      ∨ ∨
        X,
 ```
 
@@ -622,7 +622,7 @@ We will assume a commuting square
     A -----> C
     |        |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> D
         i
 ```
