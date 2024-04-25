@@ -24,6 +24,7 @@ open import simplicial-type-theory.rewriting-directed-circle public
 open import simplicial-type-theory.simplicial-arrows public
 open import simplicial-type-theory.simplicial-cubes public
 open import simplicial-type-theory.simplicial-edges public
+open import simplicial-type-theory.simplicial-mapping-cylinders public
 open import simplicial-type-theory.simplicial-natural-transformations public
 open import simplicial-type-theory.simplicially-discrete-types public
 open import simplicial-type-theory.universal-property-directed-circle public
