@@ -47,7 +47,7 @@ triangles
    \       /
     \     /
   iₙ \   / iₙ₊₁
-      V V
+      ∨ ∨
        X
 ```
 

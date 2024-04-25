@@ -29,7 +29,7 @@ property. It asserts that in a commuting diagram of the form
  A -----> B -----> C
  |        |        |
 f|       g|        |h
- V        V        V
+ ∨        ∨        ∨
  X -----> Y -----> Z,
      i        j
 ```

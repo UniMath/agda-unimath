@@ -34,7 +34,7 @@ the [commuting square](foundation-core.commuting-squares-of-maps.md)
           Σ A (B ∘ f) --------> Σ X B
                |                  |
   Σ id (g ∘ f) |                  | Σ id g
-               V                  V
+               ∨                  ∨
           Σ A (Y ∘ f) --------> Σ X Y.
                        Σ f id
 ```

@@ -71,7 +71,7 @@ If the map `f : A → B` is epi, then the commutative square
     A -----> B
     |        |
   f |        | id
-    V      ⌜ V
+    ∨      ⌜ ∨
     B -----> B
         id
 ```

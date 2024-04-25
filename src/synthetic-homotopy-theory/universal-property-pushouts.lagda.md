@@ -413,12 +413,12 @@ If in the following diagram the left square is a pushout, then the outer
 rectangle is a pushout if and only if the right square is a pushout.
 
 ```text
-      g       k
-   A ----> B ----> C
-   |       |       |
-  f|       |       |
-   v       v       v
-   X ----> Y ----> Z
+       g       k
+    A ----> B ----> C
+    |       |       |
+  f |       |       |
+    ∨       ∨       ∨
+    X ----> Y ----> Z
 ```
 
 ```agda
@@ -561,13 +561,13 @@ map f' : S' → A' making the left square commute, then the outer rectangle is
 again a pushout.
 
 ```text
-       i       g
-   S' ---> S ----> B
-   |   ≃   |       |
-f' |       | f     |
-   v   ≃   v     ⌜ v
-   A' ---> A ----> X
-       j
+         i       g
+     S' ---> S ----> B
+     |   ≃   |       |
+  f' |       | f     |
+     ∨   ≃   ∨     ⌜ ∨
+     A' ---> A ----> X
+         j
 ```
 
 ```agda
@@ -608,16 +608,16 @@ If in the following diagram the top square is a pushout, then the outer
 rectangle is a pushout if and only if the bottom square is a pushout.
 
 ```text
-       g
-   A -----> X
-   |        |
-  f|        |
-   v      ⌜ v
-   B -----> Y
-   |        |
-  k|        |
-   v        v
-   C -----> Z
+        g
+    A -----> X
+    |        |
+  f |        |
+    ∨      ⌜ ∨
+    B -----> Y
+    |        |
+  k |        |
+    ∨        ∨
+    C -----> Z
 ```
 
 ```agda
@@ -758,17 +758,16 @@ rectangle is again a pushout. This is a special case of the vertical pushout
 pasting lemma.
 
 ```text
-           g'
-       S' ---> B'
-       |       |
-     i | ≃   ≃ | j
-       |       |
-       v   g   v
-       S ----> B
-       |       |
-     f |       |
-       v    ⌜  v
-       A ----> X
+          g'
+      S' ---> B'
+      |       |
+    i | ≃   ≃ | j
+      ∨   g   ∨
+      S ----> B
+      |       |
+    f |       |
+      ∨     ⌜ ∨
+      A ----> X
 ```
 
 ```agda
@@ -808,26 +807,26 @@ module _
 Given a commutative diagram where `i`, `j` and `k` are equivalences,
 
 ```text
-          g'
-      S' ---> B'
-     / \       \
- f' /   \ k     \ j
-   /     v   g   v
-  A'     S ----> B
-    \    |       |
-   i \   | f     |
-      \  v     ⌜ v
-       > A ----> X
+           g'
+       S' ---> B'
+      / \       \
+  f' /   \ k     \ j
+    /     ∨   g   ∨
+   A'     S ----> B
+     \    |       |
+    i \   | f     |
+       \  ∨     ⌜ ∨
+        > A ----> X
 ```
 
 the induced square is a pushout:
 
 ```text
-   S' ---> B'
-   |       |
-   |       |
-   v     ⌜ v
-   A' ---> X.
+  S' ---> B'
+  |       |
+  |       |
+  ∨     ⌜ ∨
+  A' ---> X.
 ```
 
 This combines both special cases of the pushout pasting lemmas for equivalences.

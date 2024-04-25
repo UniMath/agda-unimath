@@ -123,7 +123,7 @@ The square
           |                                |
    K ↦ UK |                                | K ↦ UK
           |                                |
-          V                                V
+          ∨                                ∨
   subset-Semigroup H ------------> subset-Semigroup G
                       pullback f
 ```

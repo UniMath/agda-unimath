@@ -96,7 +96,7 @@ is-univalent-UU l = univalence
            \               /
             \             /
   equiv-tr B \           / equiv-eq
-              v         v
+              ∨         ∨
               (B x ≃ B y)
 ```
 

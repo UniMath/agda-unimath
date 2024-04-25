@@ -58,7 +58,7 @@ Consider a map `f : {x : A} → B x → C x` and two functions
        (g ＝ h) -------------------------> (f ∘ g ＝ f ∘ h)
           |                                       |
   htpy-eq |                                       | htpy-eq
-          V                                       V
+          ∨                                       ∨
        (g ~ h) --------------------------> (f ∘ g ~ f ∘ h).
                           f ·l_
 ```
@@ -69,7 +69,7 @@ commuting square
 ```text
                     ap (postcomp-Π A f)
        (g ＝ h) -------------------------> (f ∘ g ＝ f ∘ h)
-          ^                                       ^
+          ∧                                       ∧
   eq-htpy |                                       | eq-htpy
           |                                       |
        (g ~ h) --------------------------> (f ∘ g ~ f ∘ h).

@@ -39,7 +39,7 @@ Consider a type `X` and a point `x : X`. We say that `x` **has a tangent
     T -----> C
     |        |
     |        | i
-    V      ⌜ V
+    ∨      ⌜ ∨
     1 -----> X
         x
   ```

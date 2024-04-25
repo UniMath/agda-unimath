@@ -403,7 +403,7 @@ triangle commute:
   X → Y ----------> cocone A Y
         \         /
          \       /
-  - ∘ i₀  \     / first-map-cocone-sequential-colimit
+   - ∘ i₀ \     / first-map-cocone-sequential-colimit
            \   /
             ∨ ∨
           A₀ → Y .
@@ -429,8 +429,8 @@ which to every `f : A₀ → Y` assigns the cocone
   A₀ ----> A₁ ----> A₂ ----> ⋯
     \      |      /
      \     |     /
-      \  f∘a₀⁻¹ /
-   f   \   |   / f ∘ a₁⁻¹ ∘ a₀⁻¹
+      \ f ∘ a₀⁻¹/
+     f \   |   / f ∘ a₁⁻¹ ∘ a₀⁻¹
         \  |  /
          ∨ ∨ ∨
            Y ,

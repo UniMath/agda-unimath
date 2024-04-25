@@ -38,7 +38,7 @@ consisting of [pointed equivalences](structured-types.pointed-equivalences.md)
     A -----> X
     |        |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```

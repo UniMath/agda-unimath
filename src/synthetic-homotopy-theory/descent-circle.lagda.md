@@ -136,7 +136,7 @@ be described as a diagram
   X -----> A base
   |         |
  e|         | tr A loop
-  v         v
+  ∨         ∨
   X -----> A base
       α
 ```

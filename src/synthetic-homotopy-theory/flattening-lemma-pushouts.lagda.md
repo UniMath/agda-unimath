@@ -45,7 +45,7 @@ given a pushout square
   S -----> B
   |        |
  f|        |j
-  V      ⌜ V
+  ∨      ⌜ ∨
   A -----> X
       i
 ```
@@ -57,7 +57,7 @@ commuting square
   Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
            |                                                 |
            |                                                 |
-           V                                               ⌜ V
+           ∨                                               ⌜ ∨
   Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x)
 ```
 
@@ -306,7 +306,7 @@ map of spans:
   Σ (a : A) (PA a) <------- Σ (s : S) (PA (f s)) -----> Σ (b : B) (PB b)
          |                           |                         |
          |                           |                         |
-         v                           v                         v
+         ∨                           ∨                         ∨
 Σ (a : A) (P (i a)) <---- Σ (s : S) (P (i (f s))) ---> Σ (b : B) (P (j b))
 ```
 

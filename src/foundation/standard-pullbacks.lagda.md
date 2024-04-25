@@ -52,7 +52,7 @@ of the cospan, completing the diagram
      | ⌟          |
      |            | g
      |            |
-     v            v
+     ∨            ∨
      A ---------> X.
            f
 ```
@@ -478,7 +478,7 @@ Given a standard pullback square
     C -------> B
     | ⌟        |
   g'|          | g
-    v          v
+    ∨          ∨
     A -------> X
          f
 ```
@@ -490,7 +490,7 @@ square
             C ---------> X
             | ⌟          |
   (f' , g') |            |
-            v            v
+            ∨            ∨
           A × B -----> X × X,
                 f × g
 ```
