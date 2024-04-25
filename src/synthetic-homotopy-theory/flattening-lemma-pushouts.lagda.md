@@ -125,9 +125,8 @@ module _
 
   flattening-lemma-pushout-statement : UUω
   flattening-lemma-pushout-statement =
-    ( {l : Level} → dependent-universal-property-pushout l f g c) →
-    { l : Level} →
-    universal-property-pushout l
+    dependent-universal-property-pushout f g c →
+    universal-property-pushout
       ( vertical-map-span-flattening-pushout)
       ( horizontal-map-span-flattening-pushout)
       ( cocone-flattening-pushout)
@@ -198,9 +197,8 @@ module _
 
   flattening-lemma-descent-data-pushout-statement : UUω
   flattening-lemma-descent-data-pushout-statement =
-    ( {l : Level} → dependent-universal-property-pushout l f g c) →
-    { l : Level} →
-    universal-property-pushout l
+    dependent-universal-property-pushout f g c →
+    universal-property-pushout
       ( vertical-map-span-flattening-descent-data-pushout)
       ( horizontal-map-span-flattening-descent-data-pushout)
       ( cocone-flattening-descent-data-pushout)

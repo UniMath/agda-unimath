@@ -68,11 +68,11 @@ pr2 (pr2 (cone-dependent-pullback-property-pushout f g (i , j , H) P)) h =
   eq-htpy (λ s → apd h (H s))
 
 dependent-pullback-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-dependent-pullback-property-pushout l {S} {A} {B} f g {X} (i , j , H) =
-  (P : X → UU l) →
+  UUω
+dependent-pullback-property-pushout {S = S} {A} {B} f g {X} (i , j , H) =
+  {l : Level} (P : X → UU l) →
   is-pullback
     ( λ (h : (a : A) → P (i a)) → λ s → tr P (H s) (h (f s)))
     ( λ (h : (b : B) → P (j b)) → λ s → h (g s))
@@ -105,8 +105,8 @@ module _
   where
 
   pullback-property-dependent-pullback-property-pushout :
-    ({l : Level} → dependent-pullback-property-pushout l f g c) →
-    ({l : Level} → pullback-property-pushout l f g c)
+    dependent-pullback-property-pushout f g c →
+    pullback-property-pushout f g c
   pullback-property-dependent-pullback-property-pushout dpp-c Y =
     is-pullback-htpy
       ( λ h →
@@ -222,7 +222,7 @@ pullback property.
 
   is-pullback-cone-family-dependent-pullback-family :
     {l : Level} (P : X → UU l) →
-    ({l : Level} → pullback-property-pushout l f g c) →
+    pullback-property-pushout f g c →
     (γ : X → X) →
     is-pullback
       ( ( tr
@@ -271,8 +271,8 @@ pullback property.
         ( pp-c (Σ X P)))
 
   dependent-pullback-property-pullback-property-pushout :
-    ({l : Level} → pullback-property-pushout l f g c) →
-    ({l : Level} → dependent-pullback-property-pushout l f g c)
+    pullback-property-pushout f g c →
+    dependent-pullback-property-pushout f g c
   dependent-pullback-property-pullback-property-pushout pp-c P =
     is-pullback-htpy'
       ( ( tr-lift-family-of-elements-precomp P id

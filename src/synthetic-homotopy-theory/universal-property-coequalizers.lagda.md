@@ -49,18 +49,18 @@ is an [equivalence](foundation.equivalences.md).
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (l : Level) (a : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 : Level} (a : double-arrow l1 l2) {X : UU l3}
   (e : cofork a X)
   where
 
-  universal-property-coequalizer : UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)
+  universal-property-coequalizer : UUω
   universal-property-coequalizer =
-    (Y : UU l) → is-equiv (cofork-map a e {Y = Y})
+    {l : Level} (Y : UU l) → is-equiv (cofork-map a e {Y = Y})
 
 module _
   {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
   (e : cofork a X) {Y : UU l4}
-  (up-coequalizer : universal-property-coequalizer l4 a e)
+  (up-coequalizer : universal-property-coequalizer a e)
   where
 
   map-universal-property-coequalizer : cofork a Y → (X → Y)
@@ -75,7 +75,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
   (e : cofork a X) {Y : UU l4}
-  (up-coequalizer : universal-property-coequalizer l4 a e)
+  (up-coequalizer : universal-property-coequalizer a e)
   (e' : cofork a Y)
   where
 
@@ -118,13 +118,11 @@ module _
   where
 
   universal-property-coequalizer-universal-property-pushout :
-    ({l : Level} →
-      universal-property-pushout l
-        ( vertical-map-span-cocone-cofork a)
-        ( horizontal-map-span-cocone-cofork a)
-        ( cocone-codiagonal-cofork a e)) →
-    ({l : Level} →
-      universal-property-coequalizer l a e)
+    universal-property-pushout
+      ( vertical-map-span-cocone-cofork a)
+      ( horizontal-map-span-cocone-cofork a)
+      ( cocone-codiagonal-cofork a e) →
+      universal-property-coequalizer a e
   universal-property-coequalizer-universal-property-pushout up-pushout Y =
     is-equiv-left-map-triangle
       ( cofork-map a e)
@@ -138,13 +136,11 @@ module _
       ( is-equiv-cofork-cocone-codiagonal a)
 
   universal-property-pushout-universal-property-coequalizer :
-    ({l : Level} →
-      universal-property-coequalizer l a e) →
-    ({l : Level} →
-      universal-property-pushout l
-        ( vertical-map-span-cocone-cofork a)
-        ( horizontal-map-span-cocone-cofork a)
-        ( cocone-codiagonal-cofork a e))
+    universal-property-coequalizer a e →
+    universal-property-pushout
+      ( vertical-map-span-cocone-cofork a)
+      ( horizontal-map-span-cocone-cofork a)
+      ( cocone-codiagonal-cofork a e)
   universal-property-pushout-universal-property-coequalizer up-coequalizer Y =
     is-equiv-top-map-triangle
       ( cofork-map a e)
@@ -195,8 +191,8 @@ module _
   where
 
   universal-property-coequalizer-equiv-cofork-equiv-double-arrow :
-    ({l : Level} → universal-property-coequalizer l a' c') →
-    ({l : Level} → universal-property-coequalizer l a c)
+    universal-property-coequalizer a' c' →
+    universal-property-coequalizer a c
   universal-property-coequalizer-equiv-cofork-equiv-double-arrow up-c' =
     universal-property-coequalizer-universal-property-pushout a c
       ( universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
@@ -278,8 +274,8 @@ module _
           ( up-c')))
 
   universal-property-coequalizer-equiv-cofork-equiv-double-arrow' :
-    ({l : Level} → universal-property-coequalizer l a c) →
-    ({l : Level} → universal-property-coequalizer l a' c')
+    universal-property-coequalizer a c →
+    universal-property-coequalizer a' c'
   universal-property-coequalizer-equiv-cofork-equiv-double-arrow' up-c =
     universal-property-coequalizer-universal-property-pushout a' c'
       ( universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv

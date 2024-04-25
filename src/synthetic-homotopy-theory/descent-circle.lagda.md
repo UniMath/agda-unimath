@@ -333,7 +333,7 @@ module _
       ( id-equiv , (htpy-eq (inv (compute-map-eq-ap (loop-free-loop l)))))
 
   is-equiv-descent-data-family-circle-universal-property-circle :
-    ( up-circle : universal-property-circle (lsuc l2) l) →
+    ( up-circle : universal-property-circle l) →
     is-equiv (descent-data-family-circle l)
   is-equiv-descent-data-family-circle-universal-property-circle up-circle =
     is-equiv-left-map-triangle
@@ -352,7 +352,7 @@ unique-family-property-circle l2 {S} l =
 
 module _
   { l1 l2 : Level} {S : UU l1} (l : free-loop S)
-  ( up-circle : universal-property-circle (lsuc l2) l)
+  ( up-circle : universal-property-circle l)
   where
 
   unique-family-property-universal-property-circle :

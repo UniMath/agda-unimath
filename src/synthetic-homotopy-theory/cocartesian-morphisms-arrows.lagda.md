@@ -109,8 +109,7 @@ module _
     cocone-hom-arrow f g hom-arrow-cocartesian-hom-arrow
 
   universal-property-cocartesian-hom-arrow :
-    {l : Level} →
-    universal-property-pushout l
+    universal-property-pushout
       ( f)
       ( map-domain-cocartesian-hom-arrow)
       ( cocone-cocartesian-hom-arrow)

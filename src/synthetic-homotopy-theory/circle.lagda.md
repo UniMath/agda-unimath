@@ -67,7 +67,7 @@ free-loop-𝕊¹ = base-𝕊¹ , loop-𝕊¹
 𝕊¹-Pointed-Type = 𝕊¹ , base-𝕊¹
 
 postulate
-  ind-𝕊¹ : {l : Level} → induction-principle-circle l free-loop-𝕊¹
+  ind-𝕊¹ : induction-principle-circle free-loop-𝕊¹
 ```
 
 ## Properties
@@ -76,7 +76,7 @@ postulate
 
 ```agda
 dependent-universal-property-𝕊¹ :
-  {l : Level} → dependent-universal-property-circle l free-loop-𝕊¹
+  dependent-universal-property-circle free-loop-𝕊¹
 dependent-universal-property-𝕊¹ =
   dependent-universal-property-induction-principle-circle free-loop-𝕊¹ ind-𝕊¹
 
@@ -127,12 +127,11 @@ module _
 ### The universal property of the circle
 
 ```agda
-universal-property-𝕊¹ :
-  {l : Level} → universal-property-circle l free-loop-𝕊¹
+universal-property-𝕊¹ : universal-property-circle free-loop-𝕊¹
 universal-property-𝕊¹ =
   universal-property-dependent-universal-property-circle
-    free-loop-𝕊¹
-    dependent-universal-property-𝕊¹
+    ( free-loop-𝕊¹)
+    ( dependent-universal-property-𝕊¹)
 
 uniqueness-universal-property-𝕊¹ :
   {l : Level} {X : UU l} (α : free-loop X) →

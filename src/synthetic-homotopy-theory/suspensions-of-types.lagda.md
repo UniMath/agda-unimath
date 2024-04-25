@@ -105,8 +105,8 @@ cogap-suspension' :
 cogap-suspension' {X = X} = cogap (terminal-map X) (terminal-map X)
 
 up-suspension' :
-  {l1 l2 : Level} (X : UU l1) →
-  universal-property-pushout l2
+  {l1 : Level} (X : UU l1) →
+  universal-property-pushout
     ( terminal-map X)
     ( terminal-map X)
     ( cocone-suspension X)
