@@ -379,10 +379,12 @@ module _
     right-inverse-law-mul-is-positive-ℚ =
       (commutative-mul-ℚ x _) ∙ (left-inverse-law-mul-is-positive-ℚ)
 
-  is-invertible-is-positive-ℚ : is-invertible-element-Monoid monoid-mul-ℚ x
-  pr1 is-invertible-is-positive-ℚ = inv-is-positive-ℚ
-  pr1 (pr2 is-invertible-is-positive-ℚ) = right-inverse-law-mul-is-positive-ℚ
-  pr2 (pr2 is-invertible-is-positive-ℚ) = left-inverse-law-mul-is-positive-ℚ
+  is-mul-invertible-is-positive-ℚ : is-invertible-element-Monoid monoid-mul-ℚ x
+  pr1 is-mul-invertible-is-positive-ℚ = inv-is-positive-ℚ
+  pr1 (pr2 is-mul-invertible-is-positive-ℚ) =
+    right-inverse-law-mul-is-positive-ℚ
+  pr2 (pr2 is-mul-invertible-is-positive-ℚ) =
+    left-inverse-law-mul-is-positive-ℚ
 ```
 
 ### The strict inequality on positive rational numbers

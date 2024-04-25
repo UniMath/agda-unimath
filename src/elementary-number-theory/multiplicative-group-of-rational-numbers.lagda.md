@@ -132,8 +132,8 @@ module _
   is-invertible-element-ring-is-nonzero-ℚ H =
     rec-coproduct
       ( ( is-invertible-element-neg-Ring' ring-ℚ x) ∘
-        ( is-invertible-is-positive-ℚ (neg-ℚ x)))
-      ( is-invertible-is-positive-ℚ x)
+        ( is-mul-invertible-is-positive-ℚ (neg-ℚ x)))
+      ( is-mul-invertible-is-positive-ℚ x)
       ( decide-is-negative-is-positive-is-nonzero-ℚ H)
 
 eq-is-invertible-element-prop-is-nonzero-prop-ℚ :
