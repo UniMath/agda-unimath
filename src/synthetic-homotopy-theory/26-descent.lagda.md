@@ -218,7 +218,7 @@ triangle-desc-fam {l = l} {S} {A} {B} {X} (pair i (pair j H)) P =
 is-equiv-desc-fam :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   {f : S → A} {g : S → B} (c : cocone f g X) →
-  ({l' : Level} → universal-property-pushout l' f g c) →
+  universal-property-pushout f g c →
   is-equiv (desc-fam {l = l} {f = f} {g} c)
 is-equiv-desc-fam {l = l} {f = f} {g} c up-c =
   is-equiv-left-map-triangle
@@ -232,7 +232,7 @@ is-equiv-desc-fam {l = l} {f = f} {g} c up-c =
 equiv-desc-fam :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   {f : S → A} {g : S → B} (c : cocone f g X) →
-  ({l' : Level} → universal-property-pushout l' f g c) →
+  universal-property-pushout f g c →
   (X → UU l) ≃ Fam-pushout l f g
 equiv-desc-fam c up-c =
   pair
@@ -246,7 +246,7 @@ equiv-desc-fam c up-c =
 uniqueness-Fam-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g X) →
-  ({l' : Level} → universal-property-pushout l' f g c) →
+  universal-property-pushout f g c →
   ( P : Fam-pushout l f g) →
   is-contr
     ( Σ (X → UU l) (λ Q →
@@ -262,16 +262,16 @@ uniqueness-Fam-pushout {l = l} f g c up-c P =
 fam-Fam-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   {f : S → A} {g : S → B} (c : cocone f g X) →
-  (up-X : {l' : Level} → universal-property-pushout l' f g c) →
-  Fam-pushout l f g → (X → UU l)
+  universal-property-pushout f g c →
+  Fam-pushout l f g → X → UU l
 fam-Fam-pushout {f = f} {g} c up-X P =
   pr1 (center (uniqueness-Fam-pushout f g c up-X P))
 
 is-section-fam-Fam-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   {f : S → A} {g : S → B} (c : cocone f g X) →
-  (up-X : {l' : Level} → universal-property-pushout l' f g c) →
-  ((desc-fam {l = l} c) ∘ (fam-Fam-pushout c up-X)) ~ id
+  (up-X : universal-property-pushout f g c) →
+  desc-fam {l = l} c ∘ fam-Fam-pushout c up-X ~ id
 is-section-fam-Fam-pushout {f = f} {g} c up-X P =
   inv
     ( eq-equiv-Fam-pushout (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
@@ -279,7 +279,7 @@ is-section-fam-Fam-pushout {f = f} {g} c up-X P =
 compute-left-fam-Fam-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : {l' : Level} → universal-property-pushout l' f g c) →
+  ( up-X : universal-property-pushout f g c) →
   ( P : Fam-pushout l f g) →
   ( a : A) → (pr1 P a) ≃ (fam-Fam-pushout c up-X P (pr1 c a))
 compute-left-fam-Fam-pushout {f = f} {g} c up-X P =
@@ -288,7 +288,7 @@ compute-left-fam-Fam-pushout {f = f} {g} c up-X P =
 compute-right-fam-Fam-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : {l' : Level} → universal-property-pushout l' f g c) →
+  ( up-X : universal-property-pushout f g c) →
   ( P : Fam-pushout l f g) →
   ( b : B) → (pr1 (pr2 P) b) ≃ (fam-Fam-pushout c up-X P (pr1 (pr2 c) b))
 compute-right-fam-Fam-pushout {f = f} {g} c up-X P =
@@ -297,7 +297,7 @@ compute-right-fam-Fam-pushout {f = f} {g} c up-X P =
 compute-path-fam-Fam-pushout :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
-  ( up-X : {l' : Level} → universal-property-pushout l' f g c) →
+  ( up-X : universal-property-pushout f g c) →
   ( P : Fam-pushout l f g) →
   ( s : S) →
     ( ( map-equiv (compute-right-fam-Fam-pushout c up-X P (g s))) ∘
