@@ -1,4 +1,4 @@
-# The discrete field of rational numbers
+# The field of rational numbers
 
 ```agda
 module elementary-number-theory.field-of-rational-numbers where
