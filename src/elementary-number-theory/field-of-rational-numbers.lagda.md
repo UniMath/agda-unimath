@@ -1,7 +1,7 @@
 # The discrete field of rational numbers
 
 ```agda
-module elementary-number-theory.discrete-field-of-rational-numbers where
+module elementary-number-theory.field-of-rational-numbers where
 ```
 
 <details><summary>Imports</summary>
