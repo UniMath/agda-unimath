@@ -105,8 +105,8 @@ cogap-suspension' :
 cogap-suspension' {X = X} = cogap (terminal-map X) (terminal-map X)
 
 up-suspension' :
-  {l1 l2 : Level} (X : UU l1) →
-  universal-property-pushout l2
+  {l1 : Level} (X : UU l1) →
+  universal-property-pushout
     ( terminal-map X)
     ( terminal-map X)
     ( cocone-suspension X)
@@ -546,9 +546,9 @@ So for any `(k+1)`-type `Y`, we have the commutative diagram
 ```text
                  Δ
      Y ---------------------->  (suspension X → Y)
-     ^                                  |
+     ∧                                  |
  pr1 | ≃                              ≃ | ev-suspension
-     |                      ≃           v
+     |                      ≃           ∨
   Σ (y y' : Y) , y ＝ y' <----- suspension-structure Y
                                 ≐ Σ (y y' : Y) , X → y ＝ y'
 ```

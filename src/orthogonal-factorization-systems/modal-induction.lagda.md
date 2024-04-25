@@ -263,7 +263,7 @@ For every `f : X → Y` there is an associated
     X ------> Y
     |         |
     |         |
-    v         v
+    ∨         ∨
    ○ X ----> ○ Y.
         ○ f
 ```

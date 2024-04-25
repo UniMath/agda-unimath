@@ -45,7 +45,7 @@ determined by the identification `B id-equiv ＝ id-equiv`, and fits in a
         (X ＝ Y) --------> (B X ＝ B Y)
            |                    |
   equiv-eq |                    | equiv-eq
-           V                    V
+           ∨                    ∨
         (X ≃ Y) ---------> (B X ≃ B Y).
                      B
 ```
@@ -98,7 +98,7 @@ We claim that the square
         (X ＝ Y) --------> (B X ＝ B Y)
            |                    |
   equiv-eq |                    | equiv-eq
-           V                    V
+           ∨                    ∨
         (X ≃ Y) ---------> (B X ≃ B Y).
                      B
 ```

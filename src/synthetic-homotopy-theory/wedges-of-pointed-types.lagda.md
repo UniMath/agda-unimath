@@ -36,7 +36,7 @@ defined by the following
   unit ------> A
     |          |
     |          |
-    v        ⌜ v
+    ∨        ⌜ ∨
     B -----> A ∨∗ B,
 ```
 

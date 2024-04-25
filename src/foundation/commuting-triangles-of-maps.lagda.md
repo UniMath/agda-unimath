@@ -34,7 +34,7 @@ A triangle of maps
  A ----> B
   \     /
    \   /
-    V V
+    ∨ ∨
      X
 ```
 
@@ -86,7 +86,7 @@ Given a commuting triangle of maps
    A ----> B
     \  ⇗  /
    h \   / g
-      V V
+      ∨ ∨
        X
 ```
 
@@ -98,7 +98,7 @@ there is an induced commuting triangle of
   (X → S) ----> (B → S)
         \   ⇗  /
   (- ∘ h) \   / (- ∘ f)
-           V V
+           ∨ ∨
          (A → S).
 ```
 
@@ -138,7 +138,7 @@ Given a commuting triangle of maps
    A ----> B
     \  ⇗  /
    h \   / g
-      V V
+      ∨ ∨
        X
 ```
 
@@ -150,7 +150,7 @@ there is an induced commuting triangle of
   (S → A) ----> (S → B)
         \   ⇗  /
   (h ∘ -) \   / (g ∘ -)
-           V V
+           ∨ ∨
          (S → X).
 ```
 

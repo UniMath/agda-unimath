@@ -71,7 +71,7 @@ The map `f : A → B` is said to be
          B → X -------> A → X
            |              |
      g ∘ - |              | g ∘ -
-           V              V
+           ∨              ∨
          B → Y -------> A → Y.
                 - ∘ f
    ```
@@ -139,7 +139,7 @@ The maps `f` and `g` are orthogonal if and only if the square
       B → X -------> A → X
         |              |
   g ∘ - |              | g ∘ -
-        V              V
+        ∨              ∨
       B → Y -------> A → Y.
              - ∘ f
 ```
@@ -397,11 +397,11 @@ below diagram is a pullback precisely when `g` is right orthogonal to `f`:
       B → X -------> A → X
         |              |
   g ∘ - |              | g ∘ -
-        V              V
+        ∨              ∨
       B → Y -------> A → Y
         | ⌟            |
   h ∘ - |              | h ∘ -
-        V              V
+        ∨              ∨
       B → Z -------> A → Z.
              - ∘ f
 ```
@@ -493,7 +493,7 @@ below diagram is a pullback precisely when `f` is left orthogonal to `g`:
       C → X -------> B → X -------> A → X
         |              | ⌟            |
   g ∘ - |              |              | g ∘ -
-        V              V              V
+        ∨              ∨              ∨
       C → Y -------> B → Y -------> A → Y
              - ∘ h          - ∘ f
 ```
@@ -585,7 +585,7 @@ If `f ⊥ gᵢ`, for each `i : I`, then `f ⊥ (map-Π g)`.
               |                           |
   map-Π g ∘ - |                           | map-Π g ∘ -
               |                           |
-              v                           v
+              ∨                           ∨
          (B → Πᵢ Yᵢ) ---------------> (A → Πᵢ Yᵢ)
                           - ∘ f
 ```
@@ -600,7 +600,7 @@ equivalent to
                   |                           |
    map-Π (gᵢ ∘ -) |                           | map-Π (gᵢ ∘ -)
                   |                           |
-                  v                           v
+                  ∨                           ∨
             (Πᵢ B → Yᵢ) ---------------> (Πᵢ A → Yᵢ)
                           map-Π (- ∘ f)
 ```
@@ -756,7 +756,7 @@ If `fᵢ ⊥ g` for every `i`, then `(tot f) ⊥ g`.
         |                               |
   g ∘ - |                               | g ∘ -
         |                               |
-        v                               v
+        ∨                               ∨
   ((Σ I B) → Y) ---------------> ((Σ I A) → Y)
                   - ∘ (tot f)
 ```
@@ -771,7 +771,7 @@ square is equivalent to
              |                        |
   Πᵢ (g ∘ -) |                        | Πᵢ (g ∘ -)
              |                        |
-             v                        v
+             ∨                        ∨
         Πᵢ (Bᵢ → Y) -----------> Πᵢ (Aᵢ → Y),
                     Πᵢ (- ∘ fᵢ)
 ```
@@ -846,7 +846,7 @@ If `f ⊥ g` and `f' ⊥ g`, then `(f + f') ⊥ g`.
         |                               |
   g ∘ - |                               | g ∘ -
         |                               |
-        v                               v
+        ∨                               ∨
   ((B + B') → Y) ---------------> ((A + A') → Y)
                    - ∘ (f + f')
 ```
@@ -861,7 +861,7 @@ equivalent to
                     |                               |
   (g ∘ -) × (g ∘ -) |                               | (g ∘ -) × (g ∘ -)
                     |                               |
-                    v                               v
+                    ∨                               ∨
             (B → Y) × (B' → Y) -----------> (A → Y) × (A' → Y),
                             (- ∘ f) × (- ∘ f')
 ```
@@ -938,7 +938,7 @@ Given a pullback square
     X' -----> X
     | ⌟       |
   g'|         | g
-    v         v
+    ∨         ∨
     Y' -----> Y,
 ```
 
@@ -998,7 +998,7 @@ that means we have a pullback square
       B → X -----> A → X
         | ⌟          |
   ! ∘ - |            | ! ∘ -
-        v            v
+        ∨            ∨
       B → 1 -----> A → 1.
             - ∘ f
 ```

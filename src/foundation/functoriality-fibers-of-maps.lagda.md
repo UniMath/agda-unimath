@@ -38,7 +38,7 @@ to `g`
     A -----> X
     |        |
   f |        | g
-    v        v
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -51,7 +51,7 @@ induces a morphism of arrows between the
   fiber f b -----> fiber g (j b)
       |                  |
       |                  |
-      V                  V
+      ∨                  ∨
       A ---------------> X.
 ```
 
@@ -254,7 +254,7 @@ Given two morphisms of arrows
     |         |
   f |  α  β   | g
     |         |
-    V   α₁    V
+    ∨   α₁    ∨
     B ------> Y
       ------>
         β₁
@@ -268,13 +268,13 @@ diagram of the form
             ∧     |   \
            /      |    \ (x , q) ↦ (x , q ∙ γ₁ b)
           /       |     \
-         /        |      V
+         /        |      ∨
   fiber f b --------> fiber g (β₁ b)
         |         |     /
         |         |    /
         |         |   /
         |         |  /
-        V         V V
+        ∨         ∨ ∨
         A -------> X
 ```
 
@@ -338,7 +338,7 @@ Now it remains to fill a coherence for the square of homotopies
                 |            |
  coh (tr ∘ α b) |            | coh-hom-arrow-fiber f g β b
     ≐ refl-htpy |            | ≐ refl-htpy
-                V            V
+                ∨            ∨
                 · ---------> ·
                    i ·r H
 ```

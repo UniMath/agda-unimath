@@ -50,15 +50,15 @@ diagram relating the different notions of "category":
         Gaunt categories
               /   \
             /       \
-          v           v
+          ∨           ∨
   Categories         Strict categories
           \           /
             \       /
-              v   v
+              ∨   ∨
       Preunivalent categories
                 |
                 |
-                v
+                ∨
           Precategories
 ```
 

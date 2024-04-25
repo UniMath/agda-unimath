@@ -28,7 +28,7 @@ and `g`_ is a choice of lifting square for every commuting square
   A ------> B
   |         |
  f|         |g
-  V         V
+  ∨         ∨
   X ------> Y.
 ```
 

@@ -27,7 +27,7 @@ A triangle of maps
      A ----> B
       \     /
   left \   / right
-        V V
+        ∨ ∨
          X
 ```
 
@@ -85,7 +85,7 @@ then the triangle
    \       /
    g\     /f
      \   /
-      V V
+      ∨ ∨
        X
 ```
 
@@ -117,7 +117,7 @@ then the triangle
    \       /
    h\     /r
      \   /
-      V V
+      ∨ ∨
        B
 ```
 
