@@ -76,8 +76,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  up-join :
-    universal-property-pushout {A = A} {B} pr1 pr2 cocone-join
+  up-join : universal-property-pushout {A = A} {B} pr1 pr2 cocone-join
   up-join = up-pushout pr1 pr2
 
   equiv-up-join :
@@ -412,8 +411,7 @@ module _
   pr1 equiv-join-disjunction-Prop = map-join-disjunction-Prop
   pr2 equiv-join-disjunction-Prop = is-equiv-map-join-disjunction-Prop
 
-  up-join-disjunction :
-    universal-property-pushout pr1 pr2 cocone-disjunction
+  up-join-disjunction : universal-property-pushout pr1 pr2 cocone-disjunction
   up-join-disjunction =
     up-pushout-up-pushout-is-equiv
       ( pr1)

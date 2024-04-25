@@ -127,12 +127,11 @@ module _
 ### The universal property of the circle
 
 ```agda
-universal-property-𝕊¹ :
-  universal-property-circle free-loop-𝕊¹
+universal-property-𝕊¹ : universal-property-circle free-loop-𝕊¹
 universal-property-𝕊¹ =
   universal-property-dependent-universal-property-circle
-    free-loop-𝕊¹
-    dependent-universal-property-𝕊¹
+    ( free-loop-𝕊¹)
+    ( dependent-universal-property-𝕊¹)
 
 uniqueness-universal-property-𝕊¹ :
   {l : Level} {X : UU l} (α : free-loop X) →

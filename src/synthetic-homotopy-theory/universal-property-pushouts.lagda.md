@@ -260,9 +260,9 @@ triangle-pullback-property-pushout-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2}
   {B : UU l3} (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   {l : Level} (Y : UU l) →
-  ( cocone-map f g c) ~
-  ( tot (λ i' → tot (λ j' → htpy-eq))) ∘
-  ( gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y))
+  cocone-map f g c ~
+  ( tot (λ i' → tot (λ j' → htpy-eq)) ∘
+    gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y))
 triangle-pullback-property-pushout-universal-property-pushout f g c Y h =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
@@ -492,10 +492,7 @@ module _
               ( W))))
 
   universal-property-pushout-right-universal-property-pushout-rectangle :
-    universal-property-pushout
-      ( f)
-      ( k ∘ g)
-      ( cocone-comp-horizontal f g k c d) →
+    universal-property-pushout f (k ∘ g) (cocone-comp-horizontal f g k c d) →
     universal-property-pushout (vertical-map-cocone f g c) k d
   universal-property-pushout-right-universal-property-pushout-rectangle
     ( up-r)
@@ -633,11 +630,9 @@ module _
   where
 
   universal-property-pushout-rectangle-universal-property-pushout-top :
-    ( universal-property-pushout k (horizontal-map-cocone f g c) d) →
-    ( universal-property-pushout (k ∘ f) g (cocone-comp-vertical f g k c d))
-  universal-property-pushout-rectangle-universal-property-pushout-top
-    ( up-d)
-    { l} =
+    universal-property-pushout k (horizontal-map-cocone f g c) d →
+    universal-property-pushout (k ∘ f) g (cocone-comp-vertical f g k c d)
+  universal-property-pushout-rectangle-universal-property-pushout-top up-d =
     universal-property-pushout-pullback-property-pushout
       ( k ∘ f)
       ( g)
@@ -699,9 +694,7 @@ module _
   universal-property-pushout-top-universal-property-pushout-rectangle :
     universal-property-pushout (k ∘ f) g (cocone-comp-vertical f g k c d) →
     universal-property-pushout k (horizontal-map-cocone f g c) d
-  universal-property-pushout-top-universal-property-pushout-rectangle
-    ( up-r)
-    { l} =
+  universal-property-pushout-top-universal-property-pushout-rectangle up-r =
     universal-property-pushout-pullback-property-pushout k
       ( horizontal-map-cocone f g c)
       ( d)

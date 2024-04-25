@@ -77,7 +77,7 @@ module _
           ( horizontal-map-span-cocone-cofork a))
 
     dup-standard-coequalizer :
-      dependent-universal-property-coequalizer a (cofork-standard-coequalizer)
+      dependent-universal-property-coequalizer a cofork-standard-coequalizer
     dup-standard-coequalizer =
       dependent-universal-property-coequalizer-dependent-universal-property-pushout
         ( a)
