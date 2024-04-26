@@ -30,6 +30,7 @@ open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.bands public
 open import foundation.base-changes-span-diagrams public
+open import foundation.bicomposition-functions public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public
