@@ -206,6 +206,7 @@ open import foundation.higher-homotopies-morphisms-arrows public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
 open import foundation.homotopies-morphisms-arrows public
+open import foundation.homotopies-morphisms-cospan-diagrams public
 open import foundation.homotopy-algebra public
 open import foundation.homotopy-induction public
 open import foundation.homotopy-preorder-of-types public

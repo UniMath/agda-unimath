@@ -55,8 +55,7 @@ a morphism of cospan diagrams, as input. Examples of this kind include
 cospan :
   {l1 l2 : Level} (l : Level) (A : UU l1) (B : UU l2) →
   UU (l1 ⊔ l2 ⊔ lsuc l)
-cospan l A B =
-  Σ (UU l) (λ X → (A → X) × (B → X))
+cospan l A B = Σ (UU l) (λ X → (A → X) × (B → X))
 
 module _
   {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2} (c : cospan l A B)

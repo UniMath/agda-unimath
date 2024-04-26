@@ -40,4 +40,15 @@ module _
   cospan-cospan-diagram :
     cospan l3 left-type-cospan-diagram right-type-cospan-diagram
   cospan-cospan-diagram = pr2 (pr2 c)
+
+  cospanning-type-cospan-diagram : UU l3
+  cospanning-type-cospan-diagram = codomain-cospan cospan-cospan-diagram
+
+  left-map-cospan-diagram :
+    left-type-cospan-diagram → cospanning-type-cospan-diagram
+  left-map-cospan-diagram = left-map-cospan cospan-cospan-diagram
+
+  right-map-cospan-diagram :
+    right-type-cospan-diagram → cospanning-type-cospan-diagram
+  right-map-cospan-diagram = right-map-cospan cospan-cospan-diagram
 ```
