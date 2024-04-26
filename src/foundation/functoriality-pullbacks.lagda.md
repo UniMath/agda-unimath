@@ -59,7 +59,10 @@ module _
     is-pullback (left-map-cospan-diagram 𝒯) (right-map-cospan-diagram 𝒯) c' →
     hom-cospan-diagram 𝒮 𝒯 → C → C'
   map-is-pullback c c' is-pb-c is-pb-c' h x =
-    map-inv-is-equiv is-pb-c' (map-standard-pullback h (gap (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) c x))
+    map-inv-is-equiv
+      ( is-pb-c')
+      ( map-standard-pullback h
+        ( gap (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) c x))
 ```
 
 ## Properties
@@ -89,7 +92,7 @@ module _
     ( ( map-inv-is-equiv pb-c) ·l
       ( preserves-id-map-standard-pullback) ·r
       ( gap (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) c)) ∙h
-   ( is-retraction-map-inv-is-equiv pb-c)
+    ( is-retraction-map-inv-is-equiv pb-c)
 ```
 
 ### The functorial action on maps of pullbacks preserves composition

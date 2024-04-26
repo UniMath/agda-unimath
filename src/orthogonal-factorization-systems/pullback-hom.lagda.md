@@ -10,6 +10,7 @@ module orthogonal-factorization-systems.pullback-hom where
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.cones-over-cospan-diagrams
+open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
@@ -235,6 +236,10 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → B) (g : X → Y)
   where
+
+  cospan-diagram-pullback-hom : cospan-diagram (l2 ⊔ l4) (l1 ⊔ l3) (l1 ⊔ l4)
+  cospan-diagram-pullback-hom =
+    ( (B → Y) , (A → X) , (A → Y) , precomp f Y , postcomp A g)
 
   cone-pullback-hom : cone (precomp f Y) (postcomp A g) (B → X)
   pr1 cone-pullback-hom = postcomp B g
