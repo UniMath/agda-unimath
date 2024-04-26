@@ -157,6 +157,28 @@ module _
   coherence-htpy-htpy-cocone-sequential-diagram = pr2 H
 ```
 
+### Inverting homotopies of cocones under sequential diagrams
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
+  {c c' : cocone-sequential-diagram A X}
+  (H : htpy-cocone-sequential-diagram c c')
+  where
+
+  inv-htpy-cocone-sequential-diagram : htpy-cocone-sequential-diagram c' c
+  pr1 inv-htpy-cocone-sequential-diagram n =
+    inv-htpy (htpy-htpy-cocone-sequential-diagram H n)
+  pr2 inv-htpy-cocone-sequential-diagram n =
+    horizontal-inv-coherence-square-homotopies
+      ( htpy-htpy-cocone-sequential-diagram H n)
+      ( coherence-cocone-sequential-diagram c n)
+      ( coherence-cocone-sequential-diagram c' n)
+      ( ( htpy-htpy-cocone-sequential-diagram H (succ-ℕ n)) ·r
+        ( map-sequential-diagram A n))
+      ( coherence-htpy-htpy-cocone-sequential-diagram H n)
+```
+
 ### Concatenation of homotopies of cocones under a sequential diagram
 
 ```agda
