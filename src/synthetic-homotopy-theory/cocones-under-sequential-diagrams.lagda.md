@@ -363,16 +363,19 @@ module _
   ( c : cocone-sequential-diagram A X)
   where
 
+  htpy-cocone-map-id-sequential-diagram :
+    htpy-cocone-sequential-diagram (cocone-map-sequential-diagram c id) c
+  pr1 htpy-cocone-map-id-sequential-diagram n =
+    refl-htpy
+  pr2 htpy-cocone-map-id-sequential-diagram n =
+    ( right-unit-htpy) ∙h
+    ( left-unit-law-left-whisker-comp
+      ( coherence-cocone-sequential-diagram c n))
+
   cocone-map-id-sequential-diagram : cocone-map-sequential-diagram c id ＝ c
   cocone-map-id-sequential-diagram =
-    eq-htpy-cocone-sequential-diagram A
-      ( cocone-map-sequential-diagram c id)
-      ( c)
-      ( ( ev-pair refl-htpy) ,
-        ( λ n →
-          ( right-unit-htpy) ∙h
-          ( left-unit-law-left-whisker-comp
-            ( coherence-cocone-sequential-diagram c n))))
+    eq-htpy-cocone-sequential-diagram A _ _
+      ( htpy-cocone-map-id-sequential-diagram)
 ```
 
 ### Postcomposing cocones under a sequential colimit distributes over function composition
@@ -388,6 +391,18 @@ module _
   ( c : cocone-sequential-diagram A X)
   where
 
+  htpy-cocone-map-comp-sequential-diagram :
+    ( h : X → Y) (k : Y → Z) →
+    htpy-cocone-sequential-diagram
+      ( cocone-map-sequential-diagram c (k ∘ h))
+      ( cocone-map-sequential-diagram (cocone-map-sequential-diagram c h) k)
+  pr1 (htpy-cocone-map-comp-sequential-diagram h k) n =
+    refl-htpy
+  pr2 (htpy-cocone-map-comp-sequential-diagram h k) n =
+    ( right-unit-htpy) ∙h
+    ( inv-preserves-comp-left-whisker-comp k h
+      ( coherence-cocone-sequential-diagram c n))
+
   cocone-map-comp-sequential-diagram :
     ( h : X → Y) (k : Y → Z) →
     cocone-map-sequential-diagram c (k ∘ h) ＝
@@ -396,11 +411,7 @@ module _
     eq-htpy-cocone-sequential-diagram A
       ( cocone-map-sequential-diagram c (k ∘ h))
       ( cocone-map-sequential-diagram (cocone-map-sequential-diagram c h) k)
-      ( ( ev-pair refl-htpy) ,
-        ( λ n →
-          ( right-unit-htpy) ∙h
-          ( inv-preserves-comp-left-whisker-comp k h
-            ( coherence-cocone-sequential-diagram c n))))
+      ( htpy-cocone-map-comp-sequential-diagram h k)
 ```
 
 ## References
