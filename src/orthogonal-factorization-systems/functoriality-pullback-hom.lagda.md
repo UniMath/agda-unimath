@@ -12,6 +12,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.bicomposition-functions
 open import foundation.composition-algebra
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-pullbacks
@@ -50,6 +51,102 @@ There is a commuting triangle of ∞-categories
 that maps pairs of arrows to their pullback-hom. We refer to either of the
 vertical functors as the pullback-hom functor.
 
+<!-- TODO "functorialtiy of the pullback-hom consists of multiple pieces..." -->
+
+By [functoriality of pullbacks](foundation.functoriality-pullbacks.md), there is
+a functor that maps cospan diagrams of the form
+
+```text
+           - ∘ f           g ∘ -
+  (B → Y) ------> (A → Y) <------ (A → X)
+```
+
+to the type of [morphisms of arrows](foundation.morphisms-arrows.md) from `f` to
+`g`
+
+```text
+      f → g -------> A → X
+        | ⌟            |
+        |              | g ∘ -
+        ∨              ∨
+      B → Y -------> A → Y.
+             - ∘ f
+```
+
+For every morphism of cospan diagrams of this form
+
+```text
+            - ∘ f           g ∘ -
+   (B → Y) ------> (A → Y) <------ (A → X)
+      |               |               |
+      |               |               |
+      ∨     - ∘ f'    ∨    g' ∘ -     ∨
+  (B' → Y') ----> (A' → Y') <---- (A' → X')
+```
+
+we thus have a commuting cube given by the functorial action of pullbacks
+
+```text
+                 f → g -----------> A → X
+                /  | ⌟             /  |
+              /    |             /    |
+            ∨      |           ∨      |
+      f' → g' ---------> A' → X'      |
+         | ⌟       ∨        |         ∨
+         |       B → Y ---- | ----> A → Y
+         |      /           |      /
+         |    /             |    /
+         ∨  ∨               ∨  ∨
+      B' → Y' ---------> A' → Y'.
+```
+
+Now, there is moreover a bifunctor mapping pairs of arrows to cospan diagrams of
+the form described above. This bifunctor is contravariant in the left argument
+and covariant in the right. I.e., a pair of morphisms of arrows `F : f' → f` and
+`G : g → g'` gives a morphism of cospan diagrams
+
+```text
+            - ∘ f           g ∘ -
+   (B → Y) ------> (A → Y) <------ (A → X)
+      |               |               |
+      |               |               |
+      ∨     - ∘ f'    ∨    g' ∘ -     ∨
+  (B' → Y') ----> (A' → Y') <---- (A' → X')
+```
+
+that is given componentwise by
+[bicomposition of functions](foundation.bicomposition-functions.md).
+
+Restricting along this bifunctor, the functorial action of pullbacks extends to
+a bifunctorial action that we call the
+{{#concept "bifunctoriality of the pullback-hom" Disambiguation="on types"}}.
+
+Given a pair of maps `f` and `g`, the pullback-hom produces a new map
+`f ⋔ g : (B → X) → (f → g)`, and given morphisms of arrows `F : f' → f` and
+`G : g → g'`, we obtain a morphism of the following arrows
+
+```text
+     (B → X) -----> (B' → X')
+        |               |
+  f ⋔ g |               | f' ⋔ g'
+        ∨               ∨
+     (f → g) -----> (f' → g')
+```
+
+```text
+                                    A → X
+                                ∧  /  |
+                 f → g -------/  /    |
+                   | ⌟         ∨      |
+      f' → g' ---------> A' → X'      |
+         | ⌟       ∨        |         ∨
+         |       B → Y ---- | ----> A → Y
+         |      /           |      /
+         |    /             |    /
+         ∨  ∨               ∨  ∨
+      B' → Y' ---------> A' → Y'.
+```
+
 ## Definitions
 
 ### The bifunctorial map inducing morphisms of the pullback-hom cospan diagrams from morphisms of the arrows
@@ -64,8 +161,7 @@ module _
   where
 
   map-hom-cospan-diagram-hom-arrows-pullback-hom :
-    hom-arrow f' f →
-    hom-arrow g g' →
+    hom-arrow f' f → hom-arrow g g' →
     hom-cospan-diagram
       ( cospan-diagram-pullback-hom f g)
       ( cospan-diagram-pullback-hom f' g')
@@ -109,13 +205,11 @@ module _
       ( cospan-diagram-pullback-hom f' g') →
     hom-arrow f g → hom-arrow f' g'
   map-hom-cospan-diagram-pullback-hom =
-    map-is-pullback
+    map-pullback-cone
       ( cospan-diagram-pullback-hom f g)
       ( cospan-diagram-pullback-hom f' g')
-      ( cone-hom-arrow-pullback-hom f g)
-      ( cone-hom-arrow-pullback-hom f' g')
-      ( is-pullback-cone-hom-arrow-pullback-hom f g)
-      ( is-pullback-cone-hom-arrow-pullback-hom f' g')
+      ( pullback-cone-hom-arrow-pullback-hom f g)
+      ( pullback-cone-hom-arrow-pullback-hom f' g')
 ```
 
 ### The bifunctorial action on morphisms of arrows of the pullback-hom
@@ -130,11 +224,54 @@ module _
   (f' : A' → B') (g' : X' → Y')
   where
 
-  map-hom-arrows-pullback-hom :
+  map-codomain-hom-arrows-pullback-hom :
     hom-arrow f' f → hom-arrow g g' → hom-arrow f g → hom-arrow f' g'
-  map-hom-arrows-pullback-hom F G =
+  map-codomain-hom-arrows-pullback-hom F G =
     map-hom-cospan-diagram-pullback-hom f g f' g'
       ( map-hom-cospan-diagram-hom-arrows-pullback-hom f g f' g' F G)
+
+  -- map-domain-hom-arrows-pullback-hom :
+  --   hom-arrow f' f → hom-arrow g g' → (B → X) → (B' → X')
+  -- map-domain-hom-arrows-pullback-hom F G =
+  --   bicomp (map-codomain-hom-arrow f' f F) (map-domain-hom-arrow g g' G)
+
+  -- coherence-map-hom-arrows-pullback-hom :
+  --   (F : hom-arrow f' f) (G : hom-arrow g g') →
+  --   coherence-hom-arrow (f ⋔ g) (f' ⋔ g')
+  --     ( map-domain-hom-arrows-pullback-hom F G)
+  --     ( map-codomain-hom-arrows-pullback-hom F G)
+  -- coherence-map-hom-arrows-pullback-hom F@(hA , hB , HF) G@(hX , hY , HG) h =
+  --   eq-htpy-hom-arrow f' g'
+  --     ( (map-codomain-hom-arrows-pullback-hom F G ∘ f ⋔ g) h)
+  --     ( (f' ⋔ g' ∘ map-domain-hom-arrows-pullback-hom F G) h)
+  --     ( (hX ∘ h) ·l inv-htpy HF ,
+  --       HG ·r (h ∘ hB) ,
+  --       ( λ x →
+  --         equational-reasoning
+  --         ( ( ap
+  --             ( λ f₁ → f₁ x)
+  --             ( ( eq-htpy ((hY ∘ g ∘ h) ·l HF)) ∙
+  --               ( ap (λ h₁ → hY ∘ h₁ ∘ hA) (eq-htpy refl-htpy)) ∙
+  --               ( inv (eq-htpy (inv-htpy HG ·r (h ∘ f ∘ hA)))))) ∙
+  --           ( ap g' (ap (hX ∘ h) (inv (HF x)))))
+  --         ＝
+  --         ( ( ap
+  --             ( λ f₁ → f₁ x)
+  --             ( ( eq-htpy ((hY ∘ g ∘ h) ·l HF)) ∙
+  --               ( eq-htpy (HG ·r (h ∘ f ∘ hA))))) ∙
+  --           ( ap g' (ap (hX ∘ h) (inv (HF x)))))
+  --           by {!   !}
+  --         ＝ {!   !} by {!   !}
+  --         ＝ (HG ·r (h ∘ hB ∘ f')) x by {!   !}
+  --         ＝ _
+  --         by inv right-unit))
+
+  -- map-hom-arrows-pullback-hom :
+  --   hom-arrow f' f → hom-arrow g g' → hom-arrow (f ⋔ g) (f' ⋔ g')
+  -- map-hom-arrows-pullback-hom F G =
+  --   ( map-domain-hom-arrows-pullback-hom F G ,
+  --     map-codomain-hom-arrows-pullback-hom F G ,
+  --     coherence-map-hom-arrows-pullback-hom F G)
 ```
 
 ## Properties
@@ -374,10 +511,9 @@ module _
     map-hom-cospan-diagram-pullback-hom f g f g
       ( id-hom-cospan-diagram (cospan-diagram-pullback-hom f g)) ~ id
   preserves-id-map-hom-cospan-diagram-pullback-hom =
-    preserves-id-map-is-pullback
+    preserves-id-map-pullback-cone
       ( cospan-diagram-pullback-hom f g)
-      ( cone-hom-arrow-pullback-hom f g)
-      ( is-pullback-cone-hom-arrow-pullback-hom f g)
+      ( pullback-cone-hom-arrow-pullback-hom f g)
 ```
 
 ### The functorial action of the pullback-hom on cospan diagrams preserves composition
@@ -412,16 +548,13 @@ module _
     map-hom-cospan-diagram-pullback-hom f' g' f'' g'' h ∘
     map-hom-cospan-diagram-pullback-hom f g f' g' h'
   preserves-comp-map-hom-cospan-diagram-pullback-hom =
-    preserves-comp-map-is-pullback
+    preserves-comp-map-pullback-cone
       ( cospan-diagram-pullback-hom f g)
       ( cospan-diagram-pullback-hom f' g')
       ( cospan-diagram-pullback-hom f'' g'')
-      ( cone-hom-arrow-pullback-hom f g)
-      ( cone-hom-arrow-pullback-hom f' g')
-      ( cone-hom-arrow-pullback-hom f'' g'')
-      ( is-pullback-cone-hom-arrow-pullback-hom f g)
-      ( is-pullback-cone-hom-arrow-pullback-hom f' g')
-      ( is-pullback-cone-hom-arrow-pullback-hom f'' g'')
+      ( pullback-cone-hom-arrow-pullback-hom f g)
+      ( pullback-cone-hom-arrow-pullback-hom f' g')
+      ( pullback-cone-hom-arrow-pullback-hom f'' g'')
 ```
 
 ### The functorial action of the pullback-hom on cospan diagrams preserves homotopies
@@ -449,13 +582,11 @@ module _
     map-hom-cospan-diagram-pullback-hom f g f' g' h ~
     map-hom-cospan-diagram-pullback-hom f g f' g' h'
   preserves-htpy-map-hom-cospan-diagram-pullback-hom =
-    preserves-htpy-map-is-pullback
+    preserves-htpy-map-pullback-cone
       ( cospan-diagram-pullback-hom f g)
       ( cospan-diagram-pullback-hom f' g')
-      ( cone-hom-arrow-pullback-hom f g)
-      ( cone-hom-arrow-pullback-hom f' g')
-      ( is-pullback-cone-hom-arrow-pullback-hom f g)
-      ( is-pullback-cone-hom-arrow-pullback-hom f' g')
+      ( pullback-cone-hom-arrow-pullback-hom f g)
+      ( pullback-cone-hom-arrow-pullback-hom f' g')
 ```
 
 ### The bifunctorial action of the pullback-hom on arrows preserves identities
@@ -467,9 +598,9 @@ module _
   (f : A → B) (g : X → Y)
   where
 
-  preserves-id-map-hom-arrows-pullback-hom :
-    map-hom-arrows-pullback-hom f g f g id-hom-arrow id-hom-arrow ~ id
-  preserves-id-map-hom-arrows-pullback-hom =
+  preserves-id-map-codomain-hom-arrows-pullback-hom :
+     map-codomain-hom-arrows-pullback-hom f g f g id-hom-arrow id-hom-arrow ~ id
+  preserves-id-map-codomain-hom-arrows-pullback-hom =
     ( preserves-htpy-map-hom-cospan-diagram-pullback-hom f g f g
       ( map-hom-cospan-diagram-hom-arrows-pullback-hom f g f g
         ( id-hom-arrow)
@@ -492,15 +623,15 @@ module _
   (f'' : A'' → B'') (g'' : X'' → Y'')
   where
 
-  preserves-comp-map-hom-arrows-pullback-hom :
+  preserves-comp-map-codomain-hom-arrows-pullback-hom :
     (F : hom-arrow f' f) (F' : hom-arrow f'' f') →
     (G' : hom-arrow g' g'') (G : hom-arrow g g') →
-    map-hom-arrows-pullback-hom f g f'' g''
+     map-codomain-hom-arrows-pullback-hom f g f'' g''
       ( comp-hom-arrow f'' f' f F F')
       ( comp-hom-arrow g g' g'' G' G) ~
-    map-hom-arrows-pullback-hom f' g' f'' g'' F' G' ∘
-    map-hom-arrows-pullback-hom f g f' g' F G
-  preserves-comp-map-hom-arrows-pullback-hom F F' G' G =
+     map-codomain-hom-arrows-pullback-hom f' g' f'' g'' F' G' ∘
+     map-codomain-hom-arrows-pullback-hom f g f' g' F G
+  preserves-comp-map-codomain-hom-arrows-pullback-hom F F' G' G =
     ( preserves-htpy-map-hom-cospan-diagram-pullback-hom f g f'' g''
       ( map-hom-cospan-diagram-hom-arrows-pullback-hom f g f'' g''
         ( comp-hom-arrow f'' f' f F F')
@@ -530,17 +661,43 @@ module _
   where
 
   abstract
-    preserves-htpy-map-hom-arrows-pullback-hom :
+    preserves-htpy-map-codomain-hom-arrows-pullback-hom :
       (F F' : hom-arrow f' f) (G G' : hom-arrow g g') →
       htpy-hom-arrow f' f F F' → htpy-hom-arrow g g' G G' →
-      map-hom-arrows-pullback-hom f g f' g' F G ~
-      map-hom-arrows-pullback-hom f g f' g' F' G'
-    preserves-htpy-map-hom-arrows-pullback-hom F F' G G' HF HG =
+       map-codomain-hom-arrows-pullback-hom f g f' g' F G ~
+       map-codomain-hom-arrows-pullback-hom f g f' g' F' G'
+    preserves-htpy-map-codomain-hom-arrows-pullback-hom F F' G G' HF HG =
       preserves-htpy-map-hom-cospan-diagram-pullback-hom f g f' g'
         ( map-hom-cospan-diagram-hom-arrows-pullback-hom f g f' g' F G)
         ( map-hom-cospan-diagram-hom-arrows-pullback-hom f g f' g' F' G')
         ( preserves-htpy-map-hom-cospan-diagram-hom-arrows-pullback-hom
             f g f' g' F F' G G' HF HG)
+```
+
+### The bifunctorial action of the pullback-hom on arrows preserves retracts
+
+```agda
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
+  (f' : A' → B') (g' : X' → Y')
+  where
+
+  -- inclusion-preserves-retracts-map-codomain-hom-arrows-pullback-hom :
+  --   hom-arrow (f' ⋔ g') (f ⋔ g)
+  -- inclusion-preserves-retracts-map-codomain-hom-arrows-pullback-hom =
+  --   ( bicomp {!   !} {!   !}) ,
+  --   {!   map-codomain-hom-arrows-pullback-hom  !} , {!   !}
+
+  -- preserves-retracts-map-codomain-hom-arrows-pullback-hom :
+  --   (F : f retract-of-map f') (F : g retract-of-map g) →
+  --   (f' ⋔ g') retract-of-map (f ⋔ g)
+  -- preserves-retracts-map-codomain-hom-arrows-pullback-hom F G =
+  --   {!  map-codomain-hom-arrows-pullback-hom f' g' f g ? ?  !} ,
+  --   {!   !} ,
+  --   {!   !}
 ```
 
 ## Table of files about pullbacks
