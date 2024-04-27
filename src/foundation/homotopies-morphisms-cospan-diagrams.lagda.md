@@ -67,6 +67,32 @@ module _
   (𝒯 : cospan-diagram l1' l2' l3')
   where
 
+  left-square-coherence-htpy-hom-cospan-diagram :
+    (h h' : hom-cospan-diagram 𝒮 𝒯) →
+    left-map-hom-cospan-diagram 𝒮 𝒯 h ~
+    left-map-hom-cospan-diagram 𝒮 𝒯 h' →
+    cospanning-map-hom-cospan-diagram 𝒮 𝒯 h ~
+    cospanning-map-hom-cospan-diagram 𝒮 𝒯 h' → UU (l1 ⊔ l3')
+  left-square-coherence-htpy-hom-cospan-diagram h h' L C =
+    coherence-square-homotopies
+      ( left-map-cospan-diagram 𝒯 ·l L)
+      ( left-square-hom-cospan-diagram 𝒮 𝒯 h)
+      ( left-square-hom-cospan-diagram 𝒮 𝒯 h')
+      ( C ·r left-map-cospan-diagram 𝒮)
+
+  right-square-coherence-htpy-hom-cospan-diagram :
+    (h h' : hom-cospan-diagram 𝒮 𝒯) →
+    right-map-hom-cospan-diagram 𝒮 𝒯 h ~
+    right-map-hom-cospan-diagram 𝒮 𝒯 h' →
+    cospanning-map-hom-cospan-diagram 𝒮 𝒯 h ~
+    cospanning-map-hom-cospan-diagram 𝒮 𝒯 h' → UU (l2 ⊔ l3')
+  right-square-coherence-htpy-hom-cospan-diagram h h' R C =
+    coherence-square-homotopies
+      ( right-map-cospan-diagram 𝒯 ·l R)
+      ( right-square-hom-cospan-diagram 𝒮 𝒯 h)
+      ( right-square-hom-cospan-diagram 𝒮 𝒯 h')
+      ( C ·r right-map-cospan-diagram 𝒮)
+
   coherence-htpy-hom-cospan-diagram :
     (h h' : hom-cospan-diagram 𝒮 𝒯) →
     left-map-hom-cospan-diagram 𝒮 𝒯 h ~
@@ -76,16 +102,8 @@ module _
     cospanning-map-hom-cospan-diagram 𝒮 𝒯 h ~
     cospanning-map-hom-cospan-diagram 𝒮 𝒯 h' → UU (l1 ⊔ l2 ⊔ l3')
   coherence-htpy-hom-cospan-diagram h h' L R C =
-    ( coherence-square-homotopies
-      ( left-map-cospan-diagram 𝒯 ·l L)
-      ( left-square-hom-cospan-diagram 𝒮 𝒯 h)
-      ( left-square-hom-cospan-diagram 𝒮 𝒯 h')
-      ( C ·r left-map-cospan-diagram 𝒮)) ×
-    ( coherence-square-homotopies
-      ( right-map-cospan-diagram 𝒯 ·l R)
-      ( right-square-hom-cospan-diagram 𝒮 𝒯 h)
-      ( right-square-hom-cospan-diagram 𝒮 𝒯 h')
-      ( C ·r right-map-cospan-diagram 𝒮))
+    ( left-square-coherence-htpy-hom-cospan-diagram h h' L C) ×
+    ( right-square-coherence-htpy-hom-cospan-diagram h h' R C)
 
   htpy-hom-cospan-diagram :
     (h h' : hom-cospan-diagram 𝒮 𝒯) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l1' ⊔ l2' ⊔ l3')
