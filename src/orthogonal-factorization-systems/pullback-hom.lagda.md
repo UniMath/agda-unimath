@@ -261,21 +261,17 @@ module _
 
   map-compute-pullback-hom :
     hom-arrow f g → type-standard-pullback-hom f g
-  pr1 (map-compute-pullback-hom h) =
-    map-codomain-hom-arrow f g h
-  pr1 (pr2 (map-compute-pullback-hom h)) =
-    map-domain-hom-arrow f g h
-  pr2 (pr2 (map-compute-pullback-hom h)) =
-    eq-htpy (coh-hom-arrow f g h)
+  map-compute-pullback-hom h =
+    ( map-codomain-hom-arrow f g h ,
+      map-domain-hom-arrow f g h ,
+      eq-htpy (coh-hom-arrow f g h))
 
   map-inv-compute-pullback-hom :
     type-standard-pullback-hom f g → hom-arrow f g
-  pr1 (map-inv-compute-pullback-hom h) =
-    map-domain-standard-pullback-hom f g h
-  pr1 (pr2 (map-inv-compute-pullback-hom h)) =
-    map-codomain-standard-pullback-hom f g h
-  pr2 (pr2 (map-inv-compute-pullback-hom h)) =
-    coh-standard-pullback-hom f g h
+  map-inv-compute-pullback-hom h =
+    ( map-domain-standard-pullback-hom f g h ,
+      map-codomain-standard-pullback-hom f g h ,
+      coh-standard-pullback-hom f g h)
 
   is-section-map-inv-compute-pullback-hom :
     is-section map-compute-pullback-hom map-inv-compute-pullback-hom
@@ -290,23 +286,21 @@ module _
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber (is-section-eq-htpy (coh-hom-arrow f g h)))
 
-  abstract
-    is-equiv-map-compute-pullback-hom :
-      is-equiv map-compute-pullback-hom
-    is-equiv-map-compute-pullback-hom =
-      is-equiv-is-invertible
-        ( map-inv-compute-pullback-hom)
-        ( is-section-map-inv-compute-pullback-hom)
-        ( is-retraction-map-inv-compute-pullback-hom)
+  is-equiv-map-compute-pullback-hom :
+    is-equiv map-compute-pullback-hom
+  is-equiv-map-compute-pullback-hom =
+    is-equiv-is-invertible
+      ( map-inv-compute-pullback-hom)
+      ( is-section-map-inv-compute-pullback-hom)
+      ( is-retraction-map-inv-compute-pullback-hom)
 
-  abstract
-    is-equiv-map-inv-compute-pullback-hom :
-      is-equiv map-inv-compute-pullback-hom
-    is-equiv-map-inv-compute-pullback-hom =
-      is-equiv-is-invertible
-        ( map-compute-pullback-hom)
-        ( is-retraction-map-inv-compute-pullback-hom)
-        ( is-section-map-inv-compute-pullback-hom)
+  is-equiv-map-inv-compute-pullback-hom :
+    is-equiv map-inv-compute-pullback-hom
+  is-equiv-map-inv-compute-pullback-hom =
+    is-equiv-is-invertible
+      ( map-compute-pullback-hom)
+      ( is-retraction-map-inv-compute-pullback-hom)
+      ( is-section-map-inv-compute-pullback-hom)
 
   compute-pullback-hom : hom-arrow f g ≃ type-standard-pullback-hom f g
   pr1 compute-pullback-hom = map-compute-pullback-hom

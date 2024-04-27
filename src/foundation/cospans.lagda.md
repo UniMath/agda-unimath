@@ -71,6 +71,22 @@ module _
   right-map-cospan = pr2 (pr2 c)
 ```
 
+### The identity cospan
+
+```agda
+id-cospan : {l : Level} (A : UU l) → cospan l A A
+id-cospan A = (A , id , id)
+```
+
+### The swapping operation on cospans
+
+```agda
+swap-cospan :
+  {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2} →
+  cospan l A B → cospan l B A
+swap-cospan (C , f , g) = (C , g , f)
+```
+
 ## See also
 
 - The formal dual of cospans is [spans](foundation.spans.md).

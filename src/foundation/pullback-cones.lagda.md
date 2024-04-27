@@ -9,6 +9,7 @@ module foundation.pullback-cones where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospan-diagrams
+open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.function-extensionality
@@ -54,48 +55,75 @@ is an [equivalence](foundation-core.equivalenes.md). This is known as the
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X)
+  {l1 l2 l3 : Level} (𝒮 : cospan-diagram l1 l2 l3)
   where
 
   pullback-cone : (l4 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4)
   pullback-cone l4 =
-    Σ (Σ (UU l4) (λ C → cone f g C)) (λ (C , c) → is-pullback f g c)
+    Σ ( Σ ( UU l4)
+          ( λ C →
+            cone (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) C))
+      ( λ (C , c) →
+        is-pullback (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) c)
 
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (c : pullback-cone f g l4)
+  {l1 l2 l3 l4 : Level} (𝒮 : cospan-diagram l1 l2 l3) (c : pullback-cone 𝒮 l4)
   where
 
   domain-pullback-cone : UU l4
   domain-pullback-cone = pr1 (pr1 c)
 
-  cone-pullback-cone : cone f g domain-pullback-cone
+  cone-pullback-cone :
+    cone
+      ( left-map-cospan-diagram 𝒮)
+      ( right-map-cospan-diagram 𝒮)
+      ( domain-pullback-cone)
   cone-pullback-cone = pr2 (pr1 c)
 
-  vertical-map-pullback-cone : domain-pullback-cone → A
+  vertical-map-pullback-cone :
+    domain-pullback-cone → left-type-cospan-diagram 𝒮
   vertical-map-pullback-cone =
-    vertical-map-cone f g cone-pullback-cone
+    vertical-map-cone
+      ( left-map-cospan-diagram 𝒮)
+      ( right-map-cospan-diagram 𝒮)
+      ( cone-pullback-cone)
 
-  horizontal-map-pullback-cone : domain-pullback-cone → B
+  horizontal-map-pullback-cone :
+    domain-pullback-cone → right-type-cospan-diagram 𝒮
   horizontal-map-pullback-cone =
-    horizontal-map-cone f g cone-pullback-cone
+    horizontal-map-cone
+      ( left-map-cospan-diagram 𝒮)
+      ( right-map-cospan-diagram 𝒮)
+      ( cone-pullback-cone)
 
   coherence-square-pullback-cone :
     coherence-square-maps
       ( horizontal-map-pullback-cone)
       ( vertical-map-pullback-cone)
-      ( g)
-      ( f)
+      ( right-map-cospan-diagram 𝒮)
+      ( left-map-cospan-diagram 𝒮)
   coherence-square-pullback-cone =
-    coherence-square-cone f g cone-pullback-cone
+    coherence-square-cone
+      ( left-map-cospan-diagram 𝒮)
+      ( right-map-cospan-diagram 𝒮)
+      ( cone-pullback-cone)
 
-  is-pullback-pullback-cone : is-pullback f g cone-pullback-cone
+  is-pullback-pullback-cone :
+    is-pullback
+      ( left-map-cospan-diagram 𝒮)
+      ( right-map-cospan-diagram 𝒮)
+      ( cone-pullback-cone)
   is-pullback-pullback-cone = pr2 c
 
-  up-pullback-cone : universal-property-pullback f g cone-pullback-cone
+  up-pullback-cone :
+    universal-property-pullback
+      ( left-map-cospan-diagram 𝒮)
+      ( right-map-cospan-diagram 𝒮)
+      ( cone-pullback-cone)
   up-pullback-cone =
-    universal-property-pullback-is-pullback f g
+    universal-property-pullback-is-pullback
+      ( left-map-cospan-diagram 𝒮)
+      ( right-map-cospan-diagram 𝒮)
       ( cone-pullback-cone)
       ( is-pullback-pullback-cone)
 ```
@@ -110,9 +138,12 @@ module _
   where
 
   pasting-horizontal-pullback-cone :
-    (c : pullback-cone j h l1) →
-    pullback-cone i (vertical-map-pullback-cone j h c) l2 →
-    pullback-cone (j ∘ i) h l2
+    (c : pullback-cone (Y , C , Z , j , h) l1) →
+    pullback-cone
+      ( X , domain-pullback-cone (Y , C , Z , j , h) c , Y , i ,
+        vertical-map-pullback-cone (Y , C , Z , j , h) c)
+      ( l2) →
+    pullback-cone (X , C , Z , j ∘ i , h) l2
   pasting-horizontal-pullback-cone ((A , a) , pb-A) ((B , b) , pb-B) =
     ( B , pasting-horizontal-cone i j h a b) ,
     ( is-pullback-rectangle-is-pullback-left-square i j h a b pb-A pb-B)
@@ -128,9 +159,11 @@ module _
   where
 
   pasting-vertical-pullback-cone :
-    (c : pullback-cone f g l1) →
-    pullback-cone (horizontal-map-pullback-cone f g c) h l2 →
-    pullback-cone f (g ∘ h) l2
+    (c : pullback-cone (C , Y , Z , f , g) l1) →
+    pullback-cone
+      ( domain-pullback-cone (C , Y , Z , f , g) c , X , Y ,
+        horizontal-map-pullback-cone (C , Y , Z , f , g) c , h) l2 →
+    pullback-cone (C , X , Z , f , g ∘ h) l2
   pasting-vertical-pullback-cone ((A , a) , pb-A) ((B , b) , pb-B) =
     ( B , pasting-vertical-cone f g h a b) ,
     ( is-pullback-rectangle-is-pullback-top-square f g h a b pb-A pb-B)
@@ -140,18 +173,23 @@ module _
 
 ```agda
 swap-pullback-cone :
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) → pullback-cone f g l4 → pullback-cone g f l4
-swap-pullback-cone f g ((C , c) , pb-C) =
-  ( ( C , swap-cone f g c) , is-pullback-swap-cone f g c pb-C)
+  {l1 l2 l3 l4 : Level} (𝒮 : cospan-diagram l1 l2 l3) →
+  pullback-cone 𝒮 l4 →
+  pullback-cone (swap-cospan-diagram 𝒮) l4
+swap-pullback-cone 𝒮 ((C , c) , pb-C) =
+  ( C , swap-cone (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) c) ,
+  ( is-pullback-swap-cone
+    ( left-map-cospan-diagram 𝒮)
+    ( right-map-cospan-diagram 𝒮)
+    ( c)
+    ( pb-C))
 ```
 
 ### The identity pullback cone over the identity cospan diagram
 
 ```agda
 id-pullback-cone :
-  {l : Level} (A : UU l) → pullback-cone (id {A = A}) (id {A = A}) l
+  {l : Level} (A : UU l) → pullback-cone (id-cospan-diagram A) l
 id-pullback-cone A = ((A , id-cone A) , is-pullback-id-cone A)
 ```
 
