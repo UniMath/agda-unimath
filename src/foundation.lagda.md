@@ -322,6 +322,7 @@ open import foundation.propositional-maps public
 open import foundation.propositional-resizing public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
+open import foundation.pullback-cones public
 open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
 open import foundation.quasicoherently-idempotent-maps public

@@ -195,6 +195,14 @@ module _
   is-pullback-standard-pullback = is-equiv-id
 ```
 
+### The identity cone is a pullback
+
+```agda
+is-pullback-id-cone : {l : Level} (A : UU l) → is-pullback id id (id-cone A)
+is-pullback-id-cone A =
+  is-equiv-is-invertible pr1 (λ where (x , .x , refl) → refl) refl-htpy
+```
+
 ### Pullbacks are preserved under homotopies of parallel cones
 
 ```agda
