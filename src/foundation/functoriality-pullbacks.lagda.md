@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.homotopies-morphisms-cospan-diagrams
 open import foundation.morphisms-cospan-diagrams
 open import foundation.standard-pullbacks
 open import foundation.universe-levels
@@ -145,20 +146,20 @@ module _
                         ( inv (assoc (H' x) (ap hX' p) (inv (K' y)))))))))))))
 
   preserves-comp-map-is-pullback :
-    {l4 l4' l4'' : Level} {C : UU l4} {C' : UU l4'} {C'' : UU l4''} →
+    {l4 l4' l4'' : Level} {C : UU l4} {C' : UU l4'} {C'' : UU l4''}
     (c : cone (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) C)
-    (c' : cone (left-map-cospan-diagram 𝒯) (right-map-cospan-diagram 𝒯) C') →
-    (c'' : cone (left-map-cospan-diagram ℛ) (right-map-cospan-diagram ℛ) C'') →
+    (c' : cone (left-map-cospan-diagram 𝒯) (right-map-cospan-diagram 𝒯) C')
+    (c'' : cone (left-map-cospan-diagram ℛ) (right-map-cospan-diagram ℛ) C'')
     (pb-c :
-      is-pullback (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) c) →
+      is-pullback (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) c)
     (pb-c' :
-      is-pullback (left-map-cospan-diagram 𝒯) (right-map-cospan-diagram 𝒯) c') →
+      is-pullback (left-map-cospan-diagram 𝒯) (right-map-cospan-diagram 𝒯) c')
     (pb-c'' :
       is-pullback
         ( left-map-cospan-diagram ℛ)
         ( right-map-cospan-diagram ℛ)
-        ( c'')) →
-    (h : hom-cospan-diagram 𝒯 ℛ) →
+        ( c''))
+    (h : hom-cospan-diagram 𝒯 ℛ)
     (h' : hom-cospan-diagram 𝒮 𝒯) →
     map-is-pullback 𝒮 ℛ c c'' pb-c pb-c'' (comp-hom-cospan-diagram 𝒮 𝒯 ℛ h h') ~
     map-is-pullback 𝒯 ℛ c' c'' pb-c' pb-c'' h ∘
@@ -170,6 +171,111 @@ module _
           ( inv-htpy (is-section-map-inv-is-equiv pb-c')) ·r
           ( map-standard-pullback 𝒮 𝒯 h'))) ·r
       ( gap (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) c))
+```
+
+### The functorial action on maps of pullbacks preserves homotopies
+
+We show that the functorial action on maps of pullbacks preserves homotopies
+without appealing to the function extensionality axiom.
+
+```agda
+module _
+  {l1 l2 l3 l1' l2' l3' : Level}
+  where
+
+  coherence-preserves-htpy-map-standard-pullback :
+    (𝒮 : cospan-diagram l1 l2 l3)
+    (𝒯 : cospan-diagram l1' l2' l3')
+    (h h' : hom-cospan-diagram 𝒮 𝒯)
+    (H : htpy-hom-cospan-diagram 𝒮 𝒯 h h') →
+    (t :
+      standard-pullback
+        ( left-map-cospan-diagram 𝒮)
+        ( right-map-cospan-diagram 𝒮)) →
+    coherence-Eq-standard-pullback
+      ( left-map-cospan-diagram 𝒯)
+      ( right-map-cospan-diagram 𝒯)
+      ( map-standard-pullback 𝒮 𝒯 h t)
+      ( map-standard-pullback 𝒮 𝒯 h' t)
+      ( htpy-left-map-htpy-hom-cospan-diagram 𝒮 𝒯 h h' H
+        ( vertical-map-standard-pullback t))
+      ( htpy-right-map-htpy-hom-cospan-diagram 𝒮 𝒯 h h' H
+        ( horizontal-map-standard-pullback t))
+  coherence-preserves-htpy-map-standard-pullback
+    𝒮@(A , B , X , f , g)
+    𝒯@(A' , B' , X' , f' , g')
+    h@(hA , hB , hX , HA , HB)
+    h'@(hA' , hB' , hX' , HA' , HB')
+    (HHA , HHB , HHX , K , L)
+    (x , y , p) =
+    equational-reasoning
+    ap f' (HHA x) ∙ ((HA' x ∙ ap hX' p) ∙ inv (HB' y))
+    ＝ (HA x ∙ (ap hX p ∙ HHX (g y))) ∙ inv (HB' y)
+    by
+      ( inv (assoc (ap f' (HHA x)) (HA' x ∙ ap hX' p) (inv (HB' y)))) ∙
+      ( ap
+        ( _∙ inv (HB' y))
+        ( ( inv (assoc (ap f' (HHA x)) (HA' x) (ap hX' p))) ∙
+          ( ap (_∙ ap hX' p) (inv (K x))) ∙
+          ( assoc (HA x) (HHX (f x)) (ap hX' p)) ∙
+          ( ap (HA x ∙_) (nat-htpy HHX p))))
+    ＝ HA x ∙ (ap hX p ∙ (inv (HB y) ∙ ap g' (HHB y)))
+    by
+      ( assoc (HA x) (ap hX p ∙ HHX (g y)) (inv (HB' y))) ∙
+      ( ap
+        ( HA x ∙_)
+        ( ( assoc (ap hX p) (HHX (g y)) (inv (HB' y))) ∙
+          ( ap
+            ( ap hX p ∙_)
+            ( double-transpose-eq-concat'
+              ( ap g' (HHB y))
+              ( HB y)
+              ( HB' y)
+              ( HHX (g y))
+              ( L y)))))
+    ＝ ((HA x ∙ ap hX p) ∙ inv (HB y)) ∙ ap g' (HHB y)
+    by
+      ( inv (assoc (HA x) (ap hX p) (inv (HB y) ∙ ap g' (HHB y)))) ∙
+      ( inv (assoc (HA x ∙ ap hX p) (inv (HB y)) (ap g' (HHB y))))
+
+  preserves-htpy-map-standard-pullback :
+    (𝒮 : cospan-diagram l1 l2 l3)
+    (𝒯 : cospan-diagram l1' l2' l3')
+    (h h' : hom-cospan-diagram 𝒮 𝒯)
+    (H : htpy-hom-cospan-diagram 𝒮 𝒯 h h') →
+    map-standard-pullback 𝒮 𝒯 h ~ map-standard-pullback 𝒮 𝒯 h'
+  preserves-htpy-map-standard-pullback 𝒮 𝒯 h h' H t =
+    eq-Eq-standard-pullback
+      ( left-map-cospan-diagram 𝒯)
+      ( right-map-cospan-diagram 𝒯)
+      ( htpy-left-map-htpy-hom-cospan-diagram 𝒮 𝒯 h h' H
+        ( vertical-map-standard-pullback t))
+      ( htpy-right-map-htpy-hom-cospan-diagram 𝒮 𝒯 h h' H
+        ( horizontal-map-standard-pullback t))
+      ( coherence-preserves-htpy-map-standard-pullback 𝒮 𝒯 h h' H t)
+
+module _
+  {l1 l2 l3 l1' l2' l3' : Level}
+  (𝒮 : cospan-diagram l1 l2 l3)
+  (𝒯 : cospan-diagram l1' l2' l3')
+  {l4 l4' : Level} {C : UU l4} {C' : UU l4'}
+  (c : cone (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) C)
+  (c' : cone (left-map-cospan-diagram 𝒯) (right-map-cospan-diagram 𝒯) C')
+  (pb-c :
+    is-pullback (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) c)
+  (pb-c' :
+    is-pullback (left-map-cospan-diagram 𝒯) (right-map-cospan-diagram 𝒯) c')
+  (h h' : hom-cospan-diagram 𝒮 𝒯)
+  (H : htpy-hom-cospan-diagram 𝒮 𝒯 h h')
+  where
+
+  preserves-htpy-map-is-pullback :
+    map-is-pullback 𝒮 𝒯 c c' pb-c pb-c' h ~
+    map-is-pullback 𝒮 𝒯 c c' pb-c pb-c' h'
+  preserves-htpy-map-is-pullback =
+    ( map-inv-is-equiv (pb-c')) ·l
+    ( preserves-htpy-map-standard-pullback 𝒮 𝒯 h h' H) ·r
+    ( gap (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) c)
 ```
 
 ## Table of files about pullbacks

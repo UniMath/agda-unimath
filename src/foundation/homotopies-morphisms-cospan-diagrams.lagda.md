@@ -117,6 +117,46 @@ module _
             Σ ( cospanning-map-hom-cospan-diagram 𝒮 𝒯 h ~
                 cospanning-map-hom-cospan-diagram 𝒮 𝒯 h')
               ( λ C → coherence-htpy-hom-cospan-diagram h h' L R C)))
+
+module _
+  {l1 l2 l3 l1' l2' l3' : Level}
+  (𝒮 : cospan-diagram l1 l2 l3)
+  (𝒯 : cospan-diagram l1' l2' l3')
+  (h h' : hom-cospan-diagram 𝒮 𝒯)
+  (H : htpy-hom-cospan-diagram 𝒮 𝒯 h h')
+  where
+
+  htpy-left-map-htpy-hom-cospan-diagram :
+    left-map-hom-cospan-diagram 𝒮 𝒯 h ~ left-map-hom-cospan-diagram 𝒮 𝒯 h'
+  htpy-left-map-htpy-hom-cospan-diagram = pr1 H
+
+  htpy-right-map-htpy-hom-cospan-diagram :
+    right-map-hom-cospan-diagram 𝒮 𝒯 h ~ right-map-hom-cospan-diagram 𝒮 𝒯 h'
+  htpy-right-map-htpy-hom-cospan-diagram = pr1 (pr2 H)
+
+  htpy-cospanning-map-htpy-hom-cospan-diagram :
+    cospanning-map-hom-cospan-diagram 𝒮 𝒯 h ~
+    cospanning-map-hom-cospan-diagram 𝒮 𝒯 h'
+  htpy-cospanning-map-htpy-hom-cospan-diagram = pr1 (pr2 (pr2 H))
+
+  coh-htpy-hom-cospan-diagram :
+    coherence-htpy-hom-cospan-diagram 𝒮 𝒯 h h'
+      ( htpy-left-map-htpy-hom-cospan-diagram)
+      ( htpy-right-map-htpy-hom-cospan-diagram)
+      ( htpy-cospanning-map-htpy-hom-cospan-diagram)
+  coh-htpy-hom-cospan-diagram = pr2 (pr2 (pr2 H))
+
+  left-square-coh-htpy-hom-cospan-diagram :
+    left-square-coherence-htpy-hom-cospan-diagram 𝒮 𝒯 h h'
+      ( htpy-left-map-htpy-hom-cospan-diagram)
+      ( htpy-cospanning-map-htpy-hom-cospan-diagram)
+  left-square-coh-htpy-hom-cospan-diagram = pr1 coh-htpy-hom-cospan-diagram
+
+  right-square-coh-htpy-hom-cospan-diagram :
+    right-square-coherence-htpy-hom-cospan-diagram 𝒮 𝒯 h h'
+      ( htpy-right-map-htpy-hom-cospan-diagram)
+      ( htpy-cospanning-map-htpy-hom-cospan-diagram)
+  right-square-coh-htpy-hom-cospan-diagram = pr2 coh-htpy-hom-cospan-diagram
 ```
 
 ## Properties

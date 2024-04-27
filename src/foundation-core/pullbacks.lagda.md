@@ -207,7 +207,7 @@ module _
     {c : cone f g C} {c' : cone f' g' C} (Hc : htpy-parallel-cone Hf Hg c c') →
     gap f g c ~ map-equiv-standard-pullback-htpy Hf Hg ∘ gap f' g' c'
   triangle-is-pullback-htpy {p , q , H} {p' , q' , H'} (Hp , Hq , HH) z =
-    map-extensionality-standard-pullback f g
+    eq-Eq-standard-pullback f g
       ( Hp z)
       ( Hq z)
       ( ( inv (assoc (ap f (Hp z)) (Hf (p' z) ∙ H' z) (inv (Hg (q' z))))) ∙
