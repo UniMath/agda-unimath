@@ -28,6 +28,7 @@ open import foundation.morphisms-arrows
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
+open import foundation.pullback-cones
 open import foundation.pullbacks
 open import foundation.retractions
 open import foundation.sections
@@ -388,6 +389,12 @@ module _
     is-pullback (precomp f Y) (postcomp A g) (cone-hom-arrow-pullback-hom f g)
   is-pullback-cone-hom-arrow-pullback-hom =
     is-equiv-map-compute-pullback-hom f g
+
+  pullback-cone-hom-arrow-pullback-hom :
+    pullback-cone (cospan-diagram-pullback-hom f g) (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  pullback-cone-hom-arrow-pullback-hom =
+    ( hom-arrow f g , cone-hom-arrow-pullback-hom f g) ,
+    ( is-pullback-cone-hom-arrow-pullback-hom)
 
   universal-property-pullback-cone-hom-arrow-pullback-hom :
     universal-property-pullback

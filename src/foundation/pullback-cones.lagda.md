@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.multivariable-homotopies
+open import foundation.standard-pullbacks
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -28,6 +29,8 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.pullbacks
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 open import foundation-core.universal-property-pullbacks
@@ -126,6 +129,35 @@ module _
       ( right-map-cospan-diagram 𝒮)
       ( cone-pullback-cone)
       ( is-pullback-pullback-cone)
+
+  gap-standard-pullback-pullback-cone :
+    domain-pullback-cone →
+    standard-pullback (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮)
+  gap-standard-pullback-pullback-cone =
+    gap
+      ( left-map-cospan-diagram 𝒮)
+      ( right-map-cospan-diagram 𝒮)
+      ( cone-pullback-cone)
+
+  map-inv-gap-standard-pullback-pullback-cone :
+    standard-pullback (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) →
+    domain-pullback-cone
+  map-inv-gap-standard-pullback-pullback-cone =
+    map-inv-is-equiv is-pullback-pullback-cone
+
+  is-section-map-inv-gap-standard-pullback-pullback-cone :
+    is-section
+      ( gap-standard-pullback-pullback-cone)
+      ( map-inv-gap-standard-pullback-pullback-cone)
+  is-section-map-inv-gap-standard-pullback-pullback-cone =
+    is-section-map-inv-is-equiv is-pullback-pullback-cone
+
+  is-retraction-map-inv-gap-standard-pullback-pullback-cone :
+    is-retraction
+      ( gap-standard-pullback-pullback-cone)
+      ( map-inv-gap-standard-pullback-pullback-cone)
+  is-retraction-map-inv-gap-standard-pullback-pullback-cone =
+    is-retraction-map-inv-is-equiv is-pullback-pullback-cone
 ```
 
 ### Horizontal pasting of pullback cones
