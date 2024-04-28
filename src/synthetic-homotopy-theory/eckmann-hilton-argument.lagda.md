@@ -57,12 +57,12 @@ constructions themselves "the Eckmann-Hilton argument".
 ### Constructing the Eckmann-Hilton identification from the interchange law
 
 The more algebraic argument uses the interchange law
-[`interchange-Ω²`](synthetic-homotopy-theory.double-loop-spaces.mu).
-The interchange law essentially expresses that
-[ø`horizontal-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md)
-is a group homomorphism of
-[`vertical-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md)
-in each variable.
+[`interchange-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md). The
+interchange law essentially expresses that
+[ø`horizontal-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md) is a
+group homomorphism of
+[`vertical-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md) in each
+variable.
 
 ```agda
 module _
@@ -150,18 +150,16 @@ tr² (Id base) s p ＝ left-whisker-concat p s
 ```
 
 (up to equality of boundary). This claim is shown in
-['tr²-Id-right](foundation.transport-along-higher-identifications.md).
-Thus, the 2-D descent data of `Id base` is (up to equivalence) exactly the
-homotopy at the heart of this version of the Eckmann-Hilton argument.
+['tr²-Id-right](foundation.transport-along-higher-identifications.md). Thus, the
+2-D descent data of `Id base` is (up to equivalence) exactly the homotopy at the
+heart of this version of the Eckmann-Hilton argument.
 
 Recall that homotopies of type `id ~ id` automatically commute with each other
-via
-[`eckmann-hilton-htpy`](foundation.homotopies.md).
-This identification is constructed using the naturality condition of the two
-homotopies involved. What the above shows is that the Eckmann-Hilton
-identification of 2-loops in the base type `X` is the same as the Eckmann-Hilton
-homotopy (evaluated at the base point) of the homotopies induced by said
-2-loops.
+via [`eckmann-hilton-htpy`](foundation.homotopies.md). This identification is
+constructed using the naturality condition of the two homotopies involved. What
+the above shows is that the Eckmann-Hilton identification of 2-loops in the base
+type `X` is the same as the Eckmann-Hilton homotopy (evaluated at the base
+point) of the homotopies induced by said 2-loops.
 
 Of course `Id base` is a special type family. But this idea generalizes
 nonetheless. Given a type family `B : X → UU`, any 2-loops `α β : Ω X` induce
