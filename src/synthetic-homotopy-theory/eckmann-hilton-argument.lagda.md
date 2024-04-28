@@ -57,11 +57,11 @@ constructions themselves "the Eckmann-Hilton argument".
 ### Constructing the Eckmann-Hilton identification from the interchange law
 
 The more algebraic argument uses the interchange law
-[`interchange-Ω²`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#2449).
+[`interchange-Ω²`](synthetic-homotopy-theory.double-loop-spaces.mu).
 The interchange law essentially expresses that
-[`horizontal-concat-Ω²`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#1106)
+[ø`horizontal-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md)
 is a group homomorphism of
-[`vertical-concat-Ω²`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#966)
+[`vertical-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md)
 in each variable.
 
 ```agda
@@ -119,10 +119,10 @@ Eckmann-Hilton argument is often depicted as follows:
 The first picture represents the vertical concatenation of `α` and `β`. The
 notation ` | γ | δ |` represents the horizontal concatenation of 2-dimensional
 identifications `γ` and `δ`. Then `| refl | α |` is just
-[`left-whisker-concat refl-Ω² α`](https://unimath.github.io/agda-unimath/foundation-core.whiskering-identifications-concatenation.html#1678).
+[`left-whisker-concat refl-Ω² α`](foundation-core.whiskering-identifications-concatenation.md).
 The first and last equality come from the unit laws of whiskering. And the
 middle equality can be recognized as
-[`commutative-left-whisker-right-whisker-concat`](https://unimath.github.io/agda-unimath/foundation-core.whiskering-identifications-concatenation.html#5773),
+[`commutative-left-whisker-right-whisker-concat`](foundation-core.whiskering-identifications-concatenation.md),
 which is the naturality condition of `left-whisker-concat - α` applied to `β`.
 
 Since this version of the Eckmann-Hilton argument may seem more complicated than
@@ -140,9 +140,9 @@ tr (Id base) l p ＝ p ∙ l
 ```
 
 This is shown in
-[`tr-Id-right`](https://unimath.github.io/agda-unimath/foundation-core.transport-along-identifications.html#2846).
+[`tr-Id-right`](foundation-core.transport-along-identifications.md).
 
-Up one dimension, a 2-loop `s` induces a homotpy
+Up one dimension, a 2-loop `s` induces a homotopy
 `tr² (Id base) s : id {A = Ω X} ~ id`. We can compute
 
 ```text
@@ -150,13 +150,13 @@ tr² (Id base) s p ＝ left-whisker-concat p s
 ```
 
 (up to equality of boundary). This claim is shown in
-['tr²-Id-right](https://unimath.github.io/agda-unimath/foundation.transport-along-higher-identifications.html#1217).
+['tr²-Id-right](foundation.transport-along-higher-identifications.md).
 Thus, the 2-D descent data of `Id base` is (up to equivalence) exactly the
 homotopy at the heart of this version of the Eckmann-Hilton argument.
 
-Recall that homotpies of type `id ~ id` automatically commute with each other
+Recall that homotopies of type `id ~ id` automatically commute with each other
 via
-[`eckmann-hilton-htpy`](https://unimath.github.io/agda-unimath/foundation.homotopies.html#10173).
+[`eckmann-hilton-htpy`](foundation.homotopies.md).
 This identification is constructed using the naturality condition of the two
 homotopies involved. What the above shows is that the Eckmann-Hilton
 identification of 2-loops in the base type `X` is the same as the Eckmann-Hilton
@@ -166,16 +166,16 @@ homotopy (evaluated at the base point) of the homotopies induced by said
 Of course `Id base` is a special type family. But this idea generalizes
 nonetheless. Given a type family `B : X → UU`, any 2-loops `α β : Ω X` induce
 homotopies `tr² B α` and `tr² B β` of type `id {A = B base} ~ id`. Again, these
-homotpies automatically commute with each other via the homotopy
+homotopies automatically commute with each other via the homotopy
 
 ```text
 λ p → nat-htpy (tr² B α) (tr² B β p)
 ```
 
 Now, the naturality condition that makes `α` and `β` commute in `Ω² X` (which is
-just `commutative-left-whisker-right-whisker-concat`) is sent by `tr³ B` to the
+`commutative-left-whisker-right-whisker-concat`) is sent by `tr³ B` to the
 homotopy above. This is shown in
-[`tr³-commutative-htpy-commutative-concat`](https://unimath.github.io/agda-unimath/foundation.transport-along-identifications.html#3825).
+[`tr³-commutative-htpy-commutative-concat`](foundation.transport-along-identifications.md).
 From this, it is easy to show that "transport preserves the Eckmann-Hilton
 identification" by proving that the additional coherence identification in the
 definition of `eckmann-hilton` and `eckmann-hilton-htpy` are compatible.
@@ -251,7 +251,7 @@ which is what we prove.
 
 **Note.** that the above property is distinct from syllepsis, since it concerns
 two different construction of the Eckmann-Hilton identification. Further, it
-applies to all 2-loops, not just 3-loops.
+applies to all 2-loops, not solely 3-loops.
 
 ```agda
 module _
