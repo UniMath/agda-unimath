@@ -15,6 +15,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.path-algebra
@@ -297,7 +298,7 @@ commutative-right-whisker-left-whisker-htpy :
   (right-whisker-comp H' f ∙h left-whisker-comp g' H) ~
   (left-whisker-comp f' H ∙h right-whisker-comp H' g)
 commutative-right-whisker-left-whisker-htpy H' H x =
-    nat-htpy H' (H x)
+    coh-horizontal-concat-htpy H' H x
 
 eckmann-hilton-htpy :
   {l : Level} {X : UU l} (H K : id {A = X} ~ id) →

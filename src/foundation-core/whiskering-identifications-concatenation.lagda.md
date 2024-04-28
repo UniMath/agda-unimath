@@ -196,7 +196,7 @@ module _
     left-whisker-concat p β ∙ right-whisker-concat α q' ＝
     right-whisker-concat α q ∙ left-whisker-concat p' β
   commutative-left-whisker-right-whisker-concat β =
-    nat-htpy (λ α → left-whisker-concat α β)
+    nat-htpy (λ p → left-whisker-concat p β)
 
   commutative-right-whisker-left-whisker-concat :
     {p p' : x ＝ y} (α : p ＝ p') {q q' : y ＝ z} (β : q ＝ q') →

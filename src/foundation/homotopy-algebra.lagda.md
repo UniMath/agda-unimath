@@ -7,11 +7,14 @@ module foundation.homotopy-algebra where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -89,4 +92,25 @@ module _
   coh-horizontal-concat-htpy :
     horizontal-concat-htpy' G F ~ horizontal-concat-htpy G F
   coh-horizontal-concat-htpy = nat-htpy G ·r F
+```
+
+### Eckmann-Hilton for homotopies
+
+```agda
+commutative-right-whisker-left-whisker-htpy :
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}
+  {f g : X → Y} {f' g' : Y → Z} (H' : f' ~ g')
+  (H : f ~ g) →
+  ((H' ·r f) ∙h (g' ·l H)) ~
+  ((f' ·l H) ∙h (H' ·r g))
+commutative-right-whisker-left-whisker-htpy H' H x =
+    coh-horizontal-concat-htpy H' H x
+
+eckmann-hilton-htpy :
+  {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
+  (H ∙h K) ~ (K ∙h H)
+eckmann-hilton-htpy H K x =
+  ( inv (left-whisker-concat (H x) (ap-id (K x))) ∙
+  ( commutative-right-whisker-left-whisker-htpy H K x)) ∙
+  ( right-whisker-concat (ap-id (K x)) (H x))
 ```
