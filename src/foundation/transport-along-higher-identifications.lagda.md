@@ -102,7 +102,7 @@ module _
   {B : A → UU l2}
   where
 
-  tr³-htpy-swap-path-swap :
+  tr³-commutative-htpy-commutative-concat :
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') (b : B x) →
     coherence-square-identifications
       ( ( right-whisker-concat
@@ -127,7 +127,7 @@ module _
         ( tr-concat p' q' b))
       ( left-whisker-concat
         ( tr-concat p q b)
-        ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b))
+        ( commutative-right-whisker-left-whisker-htpy (tr² B β) (tr² B α) b))
       ( ( right-whisker-concat
           ( tr²-concat
             ( right-whisker-concat α q)
@@ -143,5 +143,5 @@ module _
           ( tr-concat p' q' b)
           ( tr²-right-whisker α q b)
           ( tr²-left-whisker p' β b)))
-  tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b = refl
+  tr³-commutative-htpy-commutative-concat {q = refl} refl {p = refl} refl b = refl
 ```

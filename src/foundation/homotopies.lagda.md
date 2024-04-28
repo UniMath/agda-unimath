@@ -290,13 +290,13 @@ module _
 ### Eckmann-Hilton for homotopies
 
 ```agda
-htpy-swap-nat-right-htpy :
+commutative-right-whisker-left-whisker-htpy :
   {l0 l1 l2 : Level} {X : UU l0} {Y : UU l1} {Z : UU l2}
   {f g : X → Y} {f' g' : Y → Z} (H' : f' ~ g')
   (H : f ~ g) →
   (right-whisker-comp H' f ∙h left-whisker-comp g' H) ~
   (left-whisker-comp f' H ∙h right-whisker-comp H' g)
-htpy-swap-nat-right-htpy H' H x =
+commutative-right-whisker-left-whisker-htpy H' H x =
     nat-htpy H' (H x)
 
 eckmann-hilton-htpy :
@@ -304,7 +304,7 @@ eckmann-hilton-htpy :
   (H ∙h K) ~ (K ∙h H)
 eckmann-hilton-htpy H K x =
   ( inv (left-whisker-concat (H x) (ap-id (K x))) ∙
-  ( htpy-swap-nat-right-htpy H K x)) ∙
+  ( commutative-right-whisker-left-whisker-htpy H K x)) ∙
   ( right-whisker-concat (ap-id (K x)) (H x))
 ```
 
