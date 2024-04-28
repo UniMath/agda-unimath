@@ -288,27 +288,6 @@ module _
         ( inv right-unit))
 ```
 
-### Eckmann-Hilton for homotopies
-
-```agda
-commutative-right-whisker-left-whisker-htpy :
-  {l0 l1 l2 : Level} {X : UU l0} {Y : UU l1} {Z : UU l2}
-  {f g : X → Y} {f' g' : Y → Z} (H' : f' ~ g')
-  (H : f ~ g) →
-  (right-whisker-comp H' f ∙h left-whisker-comp g' H) ~
-  (left-whisker-comp f' H ∙h right-whisker-comp H' g)
-commutative-right-whisker-left-whisker-htpy H' H x =
-    coh-horizontal-concat-htpy H' H x
-
-eckmann-hilton-htpy :
-  {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
-  (H ∙h K) ~ (K ∙h H)
-eckmann-hilton-htpy H K x =
-  ( inv (left-whisker-concat (H x) (ap-id (K x))) ∙
-  ( commutative-right-whisker-left-whisker-htpy H K x)) ∙
-  ( right-whisker-concat (ap-id (K x)) (H x))
-```
-
 ### Action on identifications at `eq-htpy`
 
 ```agda
