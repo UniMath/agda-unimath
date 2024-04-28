@@ -143,5 +143,6 @@ module _
           ( tr-concat p' q' b)
           ( tr²-right-whisker α q b)
           ( tr²-left-whisker p' β b)))
-  tr³-commutative-htpy-commutative-concat {q = refl} refl {p = refl} refl b = refl
+  tr³-commutative-htpy-commutative-concat {q = refl} refl {p = refl} refl b =
+    refl
 ```

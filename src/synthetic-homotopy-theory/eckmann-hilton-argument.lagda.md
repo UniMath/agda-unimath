@@ -130,51 +130,55 @@ the algbraic version, the reader is entitled to wonder why we bother giving this
 second version.
 
 This version of the Eckmann-Hilton argument makes more salient the connection
-between the Eckmann-Hilton identification and the 2-D descent data of a type family. For
-now, consider the family of based identity types `Id base : X → UU`. A 1-loop `l`
-induces an autoequivalence `tr (Id base) l : Ω X ≃ Ω X`. We can compute
-that
+between the Eckmann-Hilton identification and the 2-D descent data of a type
+family. For now, consider the family of based identity types `Id base : X → UU`.
+A 1-loop `l` induces an autoequivalence `tr (Id base) l : Ω X ≃ Ω X`. We can
+compute that
 
 ```text
 tr (Id base) l p ＝ p ∙ l
-
 ```
 
 This is shown in
 [`tr-Id-right`](https://unimath.github.io/agda-unimath/foundation-core.transport-along-identifications.html#2846).
 
-
-Up one dimension, a 2-loop `s` induces a homotpy `tr² (Id base) s : id {A = Ω X} ~ id`.
-We can compute
+Up one dimension, a 2-loop `s` induces a homotpy
+`tr² (Id base) s : id {A = Ω X} ~ id`. We can compute
 
 ```text
 tr² (Id base) s p ＝ left-whisker-concat p s
 ```
 
-(up to equality of boundary). This claim is shown in ['tr²-Id-right](https://unimath.github.io/agda-unimath/foundation.transport-along-higher-identifications.html#1217). Thus, the 2-D descent data of `Id base` is (up to equivalence) exactly the homotopy at the heart of this
-version of the Eckmann-Hilton argument.
+(up to equality of boundary). This claim is shown in
+['tr²-Id-right](https://unimath.github.io/agda-unimath/foundation.transport-along-higher-identifications.html#1217).
+Thus, the 2-D descent data of `Id base` is (up to equivalence) exactly the
+homotopy at the heart of this version of the Eckmann-Hilton argument.
 
 Recall that homotpies of type `id ~ id` automatically commute with each other
 via
 [`eckmann-hilton-htpy`](https://unimath.github.io/agda-unimath/foundation.homotopies.html#10173).
 This identification is constructed using the naturality condition of the two
-homotopies involved. What the above shows is that the Eckmann-Hilton identification of 2-loops in the base
-type `X` is the same as the Eckmann-Hilton homotopy (evaluated at the base point) of the homotopies induced by said 2-loops.
+homotopies involved. What the above shows is that the Eckmann-Hilton
+identification of 2-loops in the base type `X` is the same as the Eckmann-Hilton
+homotopy (evaluated at the base point) of the homotopies induced by said
+2-loops.
 
 Of course `Id base` is a special type family. But this idea generalizes
 nonetheless. Given a type family `B : X → UU`, any 2-loops `α β : Ω X` induce
 homotopies `tr² B α` and `tr² B β` of type `id {A = B base} ~ id`. Again, these
 homotpies automatically commute with each other via the homotopy
+
 ```text
 λ p → nat-htpy (tr² B α) (tr² B β p)
 ```
-Now, the naturality condition that makes `α` and `β` commute in `Ω² X`
-(which is just `commutative-left-whisker-right-whisker-concat`)
-is sent by `tr³ B` to the homotopy above.
-This is shown in [`tr³-commutative-htpy-commutative-concat`](https://unimath.github.io/agda-unimath/foundation.transport-along-identifications.html#3825).
+
+Now, the naturality condition that makes `α` and `β` commute in `Ω² X` (which is
+just `commutative-left-whisker-right-whisker-concat`) is sent by `tr³ B` to the
+homotopy above. This is shown in
+[`tr³-commutative-htpy-commutative-concat`](https://unimath.github.io/agda-unimath/foundation.transport-along-identifications.html#3825).
 From this, it is easy to show that "transport preserves the Eckmann-Hilton
-identification" by proving that the additional coherence identification in the definition
-of `eckmann-hilton` and `eckmann-hilton-htpy` are compatible.
+identification" by proving that the additional coherence identification in the
+definition of `eckmann-hilton` and `eckmann-hilton-htpy` are compatible.
 
 This connection has important consequences, one of which being the connection
 between the Eckmann-Hilton argument and the Hopf fibration.
@@ -303,7 +307,7 @@ module _
 
 ## Properties
 
-### We can apply each `eckmann-hilton-Ω²` and `inv-eckmann-hilton-Ω²` to a single 2-loop to obtain a 3-loop.
+### We can apply each `eckmann-hilton-Ω²` and `inv-eckmann-hilton-Ω²` to a single 2-loop to obtain a 3-loop
 
 Such 3-loops are at the heart of the Hopf fibration.
 
