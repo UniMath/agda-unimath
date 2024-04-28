@@ -591,6 +591,8 @@ module _
 
 ### The bifunctorial action of the pullback-hom on arrows preserves identities
 
+**Proof.** Follows by that functors compose.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
@@ -611,6 +613,8 @@ module _
 ```
 
 ### The bifunctorial action of the pullback-hom on arrows preserves composition
+
+**Proof.** Follows by that functors compose.
 
 ```agda
 module _
@@ -650,6 +654,8 @@ module _
 ```
 
 ### The bifunctorial action of the pullback-hom on arrows preserves homotopies
+
+**Proof.** Follows by that functors can be composed.
 
 ```agda
 module _

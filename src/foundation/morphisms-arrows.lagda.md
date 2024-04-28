@@ -98,9 +98,7 @@ module _
   where
 
   id-hom-arrow : hom-arrow f f
-  pr1 id-hom-arrow = id
-  pr1 (pr2 id-hom-arrow) = id
-  pr2 (pr2 id-hom-arrow) = refl-htpy
+  id-hom-arrow = (id , id , refl-htpy)
 ```
 
 ### Composition of morphisms of arrows
