@@ -7,7 +7,9 @@ module simplicial-type-theory.simplicially-discrete-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
+open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
@@ -17,6 +19,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.propositions
 open import foundation.sections
 open import foundation.torsorial-type-families
@@ -26,7 +29,10 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.null-types
 
 open import simplicial-type-theory.directed-interval-type
+open import simplicial-type-theory.directed-relation-on-directed-interval-type
 open import simplicial-type-theory.simplicial-edges
+
+open import synthetic-homotopy-theory.circle
 ```
 
 </details>
@@ -122,7 +128,7 @@ if the fiberwise map is.
 
 ```agda
 module _
-  {l : Level} (A : UU l)
+  {l : Level} {A : UU l}
   where
 
   equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚 :
@@ -153,4 +159,28 @@ module _
       ( equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚)
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ x → is-equiv-tot-is-fiberwise-equiv (H x)))
+```
+
+### Simplicially discrete types are Segal
+
+This remains to be formalized. The proof boils down to showing that `Λ²₁ ↪ Δ²`
+is anodyne with respect to `𝟚 → 1`.
+
+## Examples
+
+### The directed interval is not simplicially discrete
+
+```agda
+is-not-simplicially-discrete-𝟚 : ¬ (is-simplicially-discrete 𝟚)
+is-not-simplicially-discrete-𝟚 H =
+  is-nontrivial-𝟚 (map-inv-is-equiv (H 0₂ 1₂) representing-hom-𝟚)
+```
+
+### Propositions are simplicially discrete
+
+```agda
+is-simplicially-discrete-is-prop :
+  {l : Level} {P : UU l} → is-prop P → is-simplicially-discrete P
+is-simplicially-discrete-is-prop =
+  is-simplicially-discrete-is-𝟚-null ∘ is-null-is-prop-is-inhabited' 0₂
 ```
