@@ -19,10 +19,12 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.retracts-of-maps
@@ -235,16 +237,6 @@ module _
   is-local-is-null-fiber A = is-local-dependent-type-is-null-fiber (λ _ → A)
 ```
 
-### Contractible types are null at all types
-
-```agda
-is-null-is-contr :
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) → is-contr A → is-null B A
-is-null-is-contr {A = A} B is-contr-A =
-  is-null-is-local-terminal-map B A
-    ( is-local-is-contr (terminal-map B) A is-contr-A)
-```
-
 ### Null types are closed under dependent sums
 
 This is Theorem 2.19 in {{#cite RSS20}}.
@@ -269,4 +261,43 @@ module _
             ( λ x → diagonal-exponential (B x) Y , is-null-B x)
         ≃ (Y → Σ A B)
         by inv-distributive-Π-Σ)
+```
+
+### Contractible types are null at all types
+
+```agda
+is-null-is-contr :
+  {l1 l2 : Level} {A : UU l1} (B : UU l2) → is-contr A → is-null B A
+is-null-is-contr {A = A} B is-contr-A =
+  is-null-is-local-terminal-map B A
+    ( is-local-is-contr (terminal-map B) A is-contr-A)
+```
+
+### Propositions are null at inhabited types
+
+```agda
+module _
+  {l1 l2 : Level} {Y : UU l1}
+  where
+
+  is-null-is-prop-is-inhabited' :
+    {P : UU l2} → Y → is-prop P → is-null Y P
+  is-null-is-prop-is-inhabited' {P} y is-prop-P =
+    is-equiv-has-converse-is-prop
+      ( is-prop-P)
+      ( is-prop-function-type is-prop-P)
+      ( λ f → f y)
+
+  is-null-is-prop-is-inhabited :
+    {P : UU l2} → is-inhabited Y → is-prop P → is-null Y P
+  is-null-is-prop-is-inhabited {P} is-inhabited-Y is-prop-P =
+    is-equiv-has-converse-is-prop
+      ( is-prop-P)
+      ( is-prop-function-type is-prop-P)
+      ( λ f → rec-trunc-Prop (P , is-prop-P) f is-inhabited-Y)
+
+  is-null-prop-is-inhabited :
+    is-inhabited Y → (P : Prop l2) → is-null Y (type-Prop P)
+  is-null-prop-is-inhabited is-inhabited-Y P =
+    is-null-is-prop-is-inhabited is-inhabited-Y (is-prop-type-Prop P)
 ```
