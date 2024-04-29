@@ -27,11 +27,11 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
 
+open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions
 open import simplicial-type-theory.horizontal-composition-simplicial-edges-functions
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.directed-edges
 ```
 
 </details>

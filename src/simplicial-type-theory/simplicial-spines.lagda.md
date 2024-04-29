@@ -34,10 +34,10 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.directed-relation-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.directed-edges
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans

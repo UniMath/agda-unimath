@@ -25,9 +25,9 @@ open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
+open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.directed-edges
 ```
 
 </details>

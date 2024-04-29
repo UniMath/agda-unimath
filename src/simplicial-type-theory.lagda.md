@@ -15,6 +15,7 @@ open import simplicial-type-theory.action-on-directed-edges-functions public
 open import simplicial-type-theory.comma-types public
 open import simplicial-type-theory.dependent-simplicial-edges public
 open import simplicial-type-theory.directed-circle public
+open import simplicial-type-theory.directed-edges public
 open import simplicial-type-theory.directed-interval-type public
 open import simplicial-type-theory.directed-relation-directed-interval-type public
 open import simplicial-type-theory.free-directed-loops public
@@ -24,7 +25,6 @@ open import simplicial-type-theory.rewriting-directed-circle public
 open import simplicial-type-theory.simplicial-arrows public
 open import simplicial-type-theory.simplicial-cones public
 open import simplicial-type-theory.simplicial-cubes public
-open import simplicial-type-theory.directed-edges public
 open import simplicial-type-theory.simplicial-mapping-cylinders public
 open import simplicial-type-theory.simplicial-natural-transformations public
 open import simplicial-type-theory.simplicial-spines public

@@ -36,11 +36,11 @@ open import foundation.universe-levels
 
 open import reflection.erasing-equality
 
+open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.directed-relation-directed-interval-type
 open import simplicial-type-theory.free-directed-loops
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.universal-property-directed-circle
 
 open import synthetic-homotopy-theory.circle
