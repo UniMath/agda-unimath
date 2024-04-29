@@ -27,7 +27,7 @@ Any function `f : A → B` preserves
 [directed edges](simplicial-type-theory.directed-edges.md), in the sense that it
 maps any edge `p : x →₂ y` in `A` to an edge
 `action-simplicial-hom f p : f x →₂ f y` in `B`. This action on directed edges
-can be thought of as functoriality of functions in simplicial type theory.
+can be thought of as a functorial action of functions in simplicial type theory.
 
 ## Definition
 

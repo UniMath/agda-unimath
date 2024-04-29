@@ -166,6 +166,12 @@ module _
 This remains to be formalized. The proof boils down to showing that `Λ²₁ ↪ Δ²`
 is anodyne with respect to `𝟚 → 1`.
 
+### A type is simplicially discrete if and only if it is pregroupoidal and Rezk complete
+
+This is proposition 10.10 of {{#cite RS17}}. This remains to be formalized.
+
+<!-- TODO triangle `iso-eq`, `hom-iso`, `hom-eq` -->
+
 ## Examples
 
 ### The directed interval is not simplicially discrete
@@ -184,3 +190,7 @@ is-simplicially-discrete-is-prop :
 is-simplicially-discrete-is-prop =
   is-simplicially-discrete-is-𝟚-null ∘ is-null-is-prop-is-inhabited' 0₂
 ```
+
+## References
+
+{{#bibliography}} {{#reference RS17}}
