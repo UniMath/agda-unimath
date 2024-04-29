@@ -22,6 +22,7 @@ open import simplicial-type-theory.horizontal-composition-simplicial-arrows-func
 open import simplicial-type-theory.horizontal-composition-simplicial-edges-functions public
 open import simplicial-type-theory.rewriting-directed-circle public
 open import simplicial-type-theory.simplicial-arrows public
+open import simplicial-type-theory.simplicial-cones public
 open import simplicial-type-theory.simplicial-cubes public
 open import simplicial-type-theory.simplicial-edges public
 open import simplicial-type-theory.simplicial-mapping-cylinders public
