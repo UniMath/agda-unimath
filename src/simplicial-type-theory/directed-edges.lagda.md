@@ -1,7 +1,7 @@
-# Simplicial edges
+# Directed edges
 
 ```agda
-module simplicial-type-theory.simplicial-edges where
+module simplicial-type-theory.directed-edges where
 ```
 
 <details><summary>Imports</summary>
@@ -37,18 +37,18 @@ open import simplicial-type-theory.simplicial-arrows
 ## Idea
 
 A
-{{#concept "simplicial edge" Disambiguation="simplicial type theory" Agda=simplicial-hom}}
+{{#concept "directed edge" Disambiguation="simplicial type theory" Agda=simplicial-hom}}
 in a type `A` from `x : A` to `y : A` is a
 [simplicial arrow](simplicial-type-theory.simplicial-arrows.md) `α` in `A`
 together with [identifications](foundation-core.identity-types.md) `α 0₂ ＝ x`
 and `α 1₂ ＝ y`. We call `x` the _source_, and `y` the _target_ of the edge.
 
-We introduce the notation `x →₂ y` for the type of simplicial edges from `x` to
+We introduce the notation `x →₂ y` for the type of directed edges from `x` to
 `y`.
 
 ## Definitions
 
-### Simplicial edges in types dependent over the directed interval
+### Directed edges in types dependent over the directed interval
 
 ```agda
 module _
@@ -70,7 +70,7 @@ module _
   simplicial-hom-simplicial-arrow α = (α , refl , refl)
 ```
 
-### Simplicial edges
+### Directed edges
 
 ```agda
 module _
@@ -116,7 +116,7 @@ module _
     eq-target-simplicial-hom f ∙ inv (eq-target-simplicial-hom g)
 ```
 
-### The identity/constant simplicial edges
+### The identity/constant directed edges
 
 ```agda
 id-simplicial-hom : {l : Level} {A : UU l} (x : A) → x →₂ x
@@ -130,7 +130,7 @@ representing-hom-𝟚 : 0₂ →₂ 1₂
 representing-hom-𝟚 = (id , refl , refl)
 ```
 
-### Simplicial edges arising from equalities
+### Directed edges arising from equalities
 
 ```agda
 simplicial-hom-eq :
@@ -200,7 +200,7 @@ module _
     map-inv-equiv (extensionality-simplicial-hom f g)
 ```
 
-### The homotopy of simplicial edges associated to a homotopy of simplicial arrows
+### The homotopy of directed edges associated to a homotopy of simplicial arrows
 
 ```agda
 module _
@@ -228,7 +228,7 @@ module _
         ( htpy-simplicial-hom-htpy-simplicial-arrow)
 ```
 
-### Computing the based total type of simplicial edges
+### Computing the based total type of directed edges
 
 ```text
   Σ (𝟚 → A) (λ α → α 0₂ ＝ x) ≃ Σ (y : A), (x →₂ y)
@@ -292,9 +292,9 @@ module _
       is-equiv-map-inv-compute-based-simplicial-hom)
 ```
 
-### Computing the total type of simplicial edges
+### Computing the total type of directed edges
 
-The directed interval type classifies the total type of simplicial edges in a
+The directed interval type classifies the total type of directed edges in a
 type.
 
 ```text

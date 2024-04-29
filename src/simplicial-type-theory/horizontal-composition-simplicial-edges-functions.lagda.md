@@ -1,4 +1,4 @@
-# Horizontal composition of simplicial edges between functions
+# Horizontal composition of directed edges between functions
 
 ```agda
 module simplicial-type-theory.horizontal-composition-simplicial-edges-functions where
@@ -30,17 +30,17 @@ open import orthogonal-factorization-systems.extensions-of-maps
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-edges
+open import simplicial-type-theory.directed-edges
 ```
 
 </details>
 
 ## Idea
 
-Given a simplicial edge `α` between functions `f g : A → B` and a simplicial
-edge `β` of functions `f' g' : B → C`, we may
-{{#concept "horizontally compose" Disambiguation="simplicial edges of functions" Agda=horizontal-comp-simplicial-hom}}
-them to obtain a simplicial edge of functions `f' ∘ f →₂ g' ∘ g`. The horizontal
+Given a directed edge `α` between functions `f g : A → B` and a simplicial edge
+`β` of functions `f' g' : B → C`, we may
+{{#concept "horizontally compose" Disambiguation="directed edges of functions" Agda=horizontal-comp-simplicial-hom}}
+them to obtain a directed edge of functions `f' ∘ f →₂ g' ∘ g`. The horizontal
 composite is constructed by "synchronously traversing `α` and `β`", defined on
 the underlying [simplicial arrows](simplicial-type-theory.simplicial-arrows.md)
 as:
@@ -51,7 +51,7 @@ as:
 
 ## Definitions
 
-### Horizontal composition of simplicial edges between functions
+### Horizontal composition of directed edges between functions
 
 ```agda
 module _
@@ -68,7 +68,7 @@ module _
 
 ## Properties
 
-### Unit laws for horizontal composition of simplicial edges of functions
+### Unit laws for horizontal composition of directed edges of functions
 
 ```agda
 module _
@@ -88,7 +88,7 @@ module _
     eq-pair-eq-fiber (eq-pair (ap-id s) (ap-id t))
 ```
 
-### Associativity of horizontal composition of simplicial edges of functions
+### Associativity of horizontal composition of directed edges of functions
 
 ```agda
 module _

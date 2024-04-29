@@ -58,7 +58,7 @@ the [pushout](synthetic-homotopy-theory.pushouts.md)
 
 Intuitively, the simplicial suspension of `X` can be understood as a type
 consisting of a point at the north and south pole, and a
-[simplicial edge](simplicial-type-theory.simplicial-edges.md) `north →₂ south`
-for every element `x : X`. It is constructed by taking the
+[directed edge](simplicial-type-theory.directed-edges.md) `north →₂ south` for
+every element `x : X`. It is constructed by taking the
 [cartesian product](foundation-core.cartesian-product-types.md) `X × 𝟚`, and
 "pinching" it together at the north and south pole.

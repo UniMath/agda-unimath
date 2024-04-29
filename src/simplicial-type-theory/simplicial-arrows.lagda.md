@@ -26,8 +26,8 @@ in a type `A` is a map from the
 [directed interval](simplicial-type-theory.directed-interval-type.md) to the
 type, `𝟚 → A`. Given a simplicial arrow `α` in `A`, we call `α 0₂` the _source_,
 and `α 1₂` the _target_ of the arrow. See
-[simplicial edges](simplicial-type-theory.simplicial-edges.md) for simplicial
-arrows with a specified source and target.
+[directed edges](simplicial-type-theory.directed-edges.md) for simplicial arrows
+with a specified source and target.
 
 ## Definitions
 

@@ -1,4 +1,4 @@
-# Dependent simplicial edges
+# Dependent directed edges
 
 ```agda
 module simplicial-type-theory.dependent-simplicial-edges where
@@ -27,7 +27,7 @@ open import orthogonal-factorization-systems.extensions-of-maps
 
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-edges
+open import simplicial-type-theory.directed-edges
 ```
 
 </details>
@@ -35,8 +35,7 @@ open import simplicial-type-theory.simplicial-edges
 ## Idea
 
 Given a type family `B : A → 𝒰` and a
-[directed edge](simplicial-type-theory.simplicial-edges.md) `α : x →₂ y` in `A`,
-a
+[directed edge](simplicial-type-theory.directed-edges.md) `α : x →₂ y` in `A`, a
 {{#concept "dependent directed edge" Disambiguation="simplicial type theory" Agda=dependent-simplicial-hom}}
 _over_ `α` from `x'` to `y'` is a simplicial arrow `β` in `B ∘ α : 𝟚 → 𝒰`. such
 that `β 0₂ ＝ x'` over the identification `α 0₂ ＝ x` and `β 1₂ ＝ y'` over the
@@ -64,7 +63,7 @@ respective fiber of `B`
 
 ## Definitions
 
-### Dependent simplicial edges
+### Dependent directed edges
 
 ```agda
 module _
@@ -104,7 +103,7 @@ module _
   eq-target-dependent-simplicial-hom = pr2 (pr2 β)
 ```
 
-### The identity/constant dependent simplicial edges
+### The identity/constant dependent directed edges
 
 ```agda
 id-dependent-simplicial-hom :
@@ -113,7 +112,7 @@ id-dependent-simplicial-hom :
 id-dependent-simplicial-hom = id-simplicial-hom
 ```
 
-### Dependent simplicial edges arising from identifications
+### Dependent directed edges arising from identifications
 
 ```agda
 dependent-simplicial-hom-eq :
@@ -123,7 +122,7 @@ dependent-simplicial-hom-eq :
 dependent-simplicial-hom-eq refl = simplicial-hom-eq
 ```
 
-### Characterizing equality of dependent simplicial edges over a fixed edge
+### Characterizing equality of dependent directed edges over a fixed edge
 
 Given a directed edge `α : x →₂ y` in `A` and elements `x' : B x` and
 `y' : B y`, we want to characterize identifications of dependent directed edges

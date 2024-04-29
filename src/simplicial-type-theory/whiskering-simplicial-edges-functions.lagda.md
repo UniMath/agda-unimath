@@ -1,4 +1,4 @@
-# Whiskering operations on simplicial edges between functions
+# Whiskering operations on directed edges between functions
 
 ```agda
 module simplicial-type-theory.whiskering-simplicial-edges-functions where
@@ -31,21 +31,21 @@ open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions
 open import simplicial-type-theory.horizontal-composition-simplicial-edges-functions
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-edges
+open import simplicial-type-theory.directed-edges
 ```
 
 </details>
 
 ## Idea
 
-Given a simplicial edge `α : f →₂ f'` of functions `A → B` we may whisker it on
-the left by a function `h : B → C` to obtain a simplicial edge of functions
+Given a directed edge `α : f →₂ f'` of functions `A → B` we may whisker it on
+the left by a function `h : B → C` to obtain a directed edge of functions
 `hα : hf →₂ hf'`, or we may whisker it on the right by a function `g : C → A` to
-obtain a simplicial edge of functions `αg : fg →₂ f'g`.
+obtain a directed edge of functions `αg : fg →₂ f'g`.
 
 ## Definitions
 
-### Left whiskering simplicial edges between functions by functions
+### Left whiskering directed edges between functions by functions
 
 ```agda
 module _
@@ -58,7 +58,7 @@ module _
     horizontal-comp-simplicial-hom (id-simplicial-hom h)
 ```
 
-### Right whiskering simplicial edges between functions by functions
+### Right whiskering directed edges between functions by functions
 
 ```agda
 module _
@@ -73,7 +73,7 @@ module _
 
 ## Properties
 
-### Unit laws of whiskering of simplicial edges
+### Unit laws of whiskering of directed edges
 
 ```agda
 module _
@@ -93,7 +93,7 @@ module _
     right-unit-law-horizontal-comp-simplicial-hom
 ```
 
-### Absorption laws of whiskering of simplicial edges
+### Absorption laws of whiskering of directed edges
 
 These laws hold strictly.
 
@@ -115,7 +115,7 @@ module _
   left-absorption-law-right-whisker-comp-simplicial-hom g f = refl
 ```
 
-### Whiskering of simplicial edges between functions preserves function composition
+### Whiskering of directed edges between functions preserves function composition
 
 ```agda
 module _

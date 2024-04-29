@@ -29,7 +29,7 @@ open import foundation.universe-levels
 open import simplicial-type-theory.dependent-simplicial-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-edges
+open import simplicial-type-theory.directed-edges
 
 open import synthetic-homotopy-theory.free-loops
 ```

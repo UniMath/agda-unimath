@@ -1,7 +1,7 @@
-# The action on simplicial edges of functions
+# The action on directed edges of functions
 
 ```agda
-module simplicial-type-theory.action-on-simplicial-edges-functions where
+module simplicial-type-theory.action-on-directed-edges-functions where
 ```
 
 <details><summary>Imports</summary>
@@ -16,7 +16,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import simplicial-type-theory.simplicial-edges
+open import simplicial-type-theory.directed-edges
 ```
 
 </details>
@@ -24,14 +24,14 @@ open import simplicial-type-theory.simplicial-edges
 ## Idea
 
 Any function `f : A → B` preserves
-[simplicial edges](simplicial-type-theory.simplicial-edges.md), in the sense
-that it maps any edge `p : x →₂ y` in `A` to an edge
-`action-simplicial-hom f p : f x →₂ f y` in `B`. This action on simplicial edges
+[directed edges](simplicial-type-theory.directed-edges.md), in the sense that it
+maps any edge `p : x →₂ y` in `A` to an edge
+`action-simplicial-hom f p : f x →₂ f y` in `B`. This action on directed edges
 can be thought of as functoriality of functions in simplicial type theory.
 
 ## Definition
 
-### The functorial action of functions on simplicial edges
+### The functorial action of functions on directed edges
 
 ```agda
 action-simplicial-hom-function :
@@ -42,7 +42,7 @@ action-simplicial-hom-function f (α , s , t) = (f ∘ α , ap f s , ap f t)
 
 ## Properties
 
-### The identity function acts trivially on simplicial edges
+### The identity function acts trivially on directed edges
 
 ```agda
 compute-action-simplicial-hom-id-function :
@@ -52,7 +52,7 @@ compute-action-simplicial-hom-id-function (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-id s) (ap-id t))
 ```
 
-### The action on simplicial edges of a composite function is the composite of the actions
+### The action on directed edges of a composite function is the composite of the actions
 
 ```agda
 compute-action-simplicial-hom-comp-function :
@@ -72,7 +72,7 @@ associative-action-simplicial-hom-comp-function h g f (α , s , t) =
   eq-pair-eq-fiber (eq-pair (ap-comp-assoc h g f s) (ap-comp-assoc h g f t))
 ```
 
-### The action on simplicial edges of any map preserves the identity edges
+### The action on directed edges of any map preserves the identity edges
 
 In fact, the identity edges are preserved strictly.
 

@@ -40,7 +40,7 @@ open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.directed-relation-directed-interval-type
 open import simplicial-type-theory.free-directed-loops
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-edges
+open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.universal-property-directed-circle
 
 open import synthetic-homotopy-theory.circle
@@ -51,7 +51,7 @@ open import synthetic-homotopy-theory.circle
 ## Idea
 
 The {{#concept "directed circle"}} is the type consisting of a point `*` and a
-nontrivial [directed edge](simplicial-type-theory.simplicial-edges.md) `* →₂ *`.
+nontrivial [directed edge](simplicial-type-theory.directed-edges.md) `* →₂ *`.
 The directed circle classifies
 [free directed loops](simplicial-type-theory.free-directed-loops.md), meaning
 that maps `directed-circle → X` are in correspondence with free directed loops

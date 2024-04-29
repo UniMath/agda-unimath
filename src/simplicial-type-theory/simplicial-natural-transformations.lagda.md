@@ -27,10 +27,10 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
 
-open import simplicial-type-theory.action-on-simplicial-edges-functions
+open import simplicial-type-theory.action-on-directed-edges-functions
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-edges
+open import simplicial-type-theory.directed-edges
 ```
 
 </details>
@@ -39,7 +39,7 @@ open import simplicial-type-theory.simplicial-edges
 
 Given two dependent functions `f g : (x : A) → B x`, a
 {{#concept "simplicial natural transformation" Disambiguation="simplicial type theory" Agda=simplicial-natural-transformation}}
-`α` from `f` to `g` is a family of simplicial edges
+`α` from `f` to `g` is a family of directed edges
 
 ```text
   α : (x : A) → (f x →₂ g x).
@@ -104,7 +104,7 @@ module _
 ### Extensionality for simplicial natural transformations
 
 A simplicial natural transformation between functions `f` and `g` is the same as
-a simplicial edge from `f` to `g`.
+a directed edge from `f` to `g`.
 
 ```agda
 module _

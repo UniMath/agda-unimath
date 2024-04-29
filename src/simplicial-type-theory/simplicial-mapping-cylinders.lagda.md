@@ -37,7 +37,7 @@ open import foundation.universe-levels
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.directed-relation-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-edges
+open import simplicial-type-theory.directed-edges
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -64,7 +64,7 @@ Given a map `f : X → Y`, we define the
 
 Intuitively, the simplicial mapping cylinder of `f` can be understood as `X`
 simplicially glued to `Y` along `f`. I.e., for every `x : X` there is a
-[directed edge](simplicial-type-theory.simplicial-edges.md) `x →₂ f x`.
+[directed edge](simplicial-type-theory.directed-edges.md) `x →₂ f x`.
 
 ## Definitions
 

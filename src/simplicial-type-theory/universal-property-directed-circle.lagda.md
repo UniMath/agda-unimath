@@ -28,8 +28,8 @@ open import foundation.strictly-right-unital-concatenation-identifications
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import simplicial-type-theory.action-on-simplicial-edges-dependent-functions
-open import simplicial-type-theory.action-on-simplicial-edges-functions
+open import simplicial-type-theory.action-on-directed-edges-dependent-functions
+open import simplicial-type-theory.action-on-directed-edges-functions
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.free-directed-loops
 open import simplicial-type-theory.simplicial-arrows

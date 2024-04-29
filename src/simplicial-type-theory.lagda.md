@@ -10,8 +10,8 @@
 module simplicial-type-theory where
 
 open import simplicial-type-theory.2-simplices public
-open import simplicial-type-theory.action-on-simplicial-edges-dependent-functions public
-open import simplicial-type-theory.action-on-simplicial-edges-functions public
+open import simplicial-type-theory.action-on-directed-edges-dependent-functions public
+open import simplicial-type-theory.action-on-directed-edges-functions public
 open import simplicial-type-theory.comma-types public
 open import simplicial-type-theory.dependent-simplicial-edges public
 open import simplicial-type-theory.directed-circle public
@@ -24,7 +24,7 @@ open import simplicial-type-theory.rewriting-directed-circle public
 open import simplicial-type-theory.simplicial-arrows public
 open import simplicial-type-theory.simplicial-cones public
 open import simplicial-type-theory.simplicial-cubes public
-open import simplicial-type-theory.simplicial-edges public
+open import simplicial-type-theory.directed-edges public
 open import simplicial-type-theory.simplicial-mapping-cylinders public
 open import simplicial-type-theory.simplicial-natural-transformations public
 open import simplicial-type-theory.simplicial-spines public

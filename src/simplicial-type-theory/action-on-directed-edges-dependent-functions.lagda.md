@@ -1,7 +1,7 @@
-# The action on simplicial edges of dependent functions
+# The action on directed edges of dependent functions
 
 ```agda
-module simplicial-type-theory.action-on-simplicial-edges-dependent-functions where
+module simplicial-type-theory.action-on-directed-edges-dependent-functions where
 ```
 
 <details><summary>Imports</summary>
@@ -18,7 +18,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import simplicial-type-theory.dependent-simplicial-edges
-open import simplicial-type-theory.simplicial-edges
+open import simplicial-type-theory.directed-edges
 ```
 
 </details>
@@ -26,15 +26,15 @@ open import simplicial-type-theory.simplicial-edges
 ## Idea
 
 Any dependent function `f : (x : A) → B x` preserves
-[simplicial edges](simplicial-type-theory.simplicial-edges.md), in the sense
-that it maps any edge `p : x →₂ y` in `A` to a dependent edge
+[directed edges](simplicial-type-theory.directed-edges.md), in the sense that it
+maps any edge `p : x →₂ y` in `A` to a dependent edge
 `action-simplicial-hom-dependent-function f p` from `f x` to `f y` over `p` in
-`B`. This action on simplicial edges can be thought of as functoriality of
+`B`. This action on directed edges can be thought of as functoriality of
 functions in simplicial type theory.
 
 ## Definition
 
-### The functorial action of dependent functions on simplicial edges
+### The functorial action of dependent functions on directed edges
 
 ```agda
 action-simplicial-hom-dependent-function :

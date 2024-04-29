@@ -37,7 +37,7 @@ open import foundation.universe-levels
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.directed-relation-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.simplicial-edges
+open import simplicial-type-theory.directed-edges
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -62,7 +62,7 @@ Given a type `X`, we define the {{#concept "simplicial cone type"}} as the
 
 Intuitively, the simplicial cone of `X` can be understood as `X` with a point
 `*` attached such that there is a
-[directed edge](simplicial-type-theory.simplicial-edges.md) `* →₂ x` for every
+[directed edge](simplicial-type-theory.directed-edges.md) `* →₂ x` for every
 `x : X`.
 
 ## Definitions
