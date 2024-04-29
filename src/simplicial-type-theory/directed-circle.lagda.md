@@ -206,14 +206,18 @@ module _
         ( free-loop-directed-circle)
         ( X)
         ( α))
-```
 
-### The canonical map from the directed circle to the circle
-
-```agda
-map-directed-circle-circle : directed-circle → 𝕊¹
-map-directed-circle-circle =
-  rec-directed-circle (free-directed-loop-free-loop free-loop-𝕊¹)
+  compute-arrow-rec-directed-circle :
+    (α : free-directed-loop X) →
+    rec-directed-circle α ∘ arrow-directed-circle ~
+    arrow-free-directed-loop α
+  compute-arrow-rec-directed-circle α =
+    compute-arrow-ind-directed-circle
+      ( λ _ → X)
+      ( map-compute-free-dependent-directed-loop-constant-type-family
+        ( free-loop-directed-circle)
+        ( X)
+        ( α))
 ```
 
 ## Properties
@@ -230,5 +234,23 @@ diagram
     ------->
        1₂
 ```
+
+This remains to be formalized.
+
+### The canonical comparison map to the homotopic circle
+
+```agda
+map-directed-circle-circle : directed-circle → 𝕊¹
+map-directed-circle-circle =
+  rec-directed-circle (free-directed-loop-free-loop free-loop-𝕊¹)
+
+compute-map-directed-circle-circle-id-arrow :
+  (x : directed-circle) →
+  map-directed-circle-circle ∘ id-simplicial-arrow x ~
+  id-simplicial-arrow (map-directed-circle-circle x)
+compute-map-directed-circle-circle-id-arrow x = refl-htpy
+```
+
+### The loop of the directed circle is nontrivial
 
 This remains to be formalized.
