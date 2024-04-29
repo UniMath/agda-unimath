@@ -193,6 +193,7 @@ open import foundation.functoriality-dependent-function-types public
 open import foundation.functoriality-dependent-pair-types public
 open import foundation.functoriality-fibers-of-maps public
 open import foundation.functoriality-function-types public
+open import foundation.functoriality-morphisms-arrows public
 open import foundation.functoriality-propositional-truncation public
 open import foundation.functoriality-pullbacks public
 open import foundation.functoriality-sequential-limits public

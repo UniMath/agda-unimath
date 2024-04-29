@@ -61,7 +61,11 @@ module _
     map-inv-is-equiv
       ( is-pullback-pullback-cone 𝒯 c')
       ( map-standard-pullback h
-        ( gap (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) (cone-pullback-cone 𝒮 c) x))
+        ( gap
+          ( left-map-cospan-diagram 𝒮)
+          ( right-map-cospan-diagram 𝒮)
+          ( cone-pullback-cone 𝒮 c)
+          ( x)))
 ```
 
 ## Properties
@@ -86,11 +90,12 @@ module _
   preserves-id-map-pullback-cone c =
     ( ( map-inv-is-equiv (is-pullback-pullback-cone 𝒮 c)) ·l
       ( preserves-id-map-standard-pullback) ·r
-      ( gap (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) (cone-pullback-cone 𝒮 c))) ∙h
+      ( gap
+        ( left-map-cospan-diagram 𝒮)
+        ( right-map-cospan-diagram 𝒮)
+        ( cone-pullback-cone 𝒮 c))) ∙h
     ( is-retraction-map-inv-is-equiv (is-pullback-pullback-cone 𝒮 c))
 ```
-
-<!-- TODO add more definitions for pullback-cones -->
 
 ### The functorial action on maps of pullbacks preserves composition
 
@@ -158,7 +163,10 @@ module _
           ( inv-htpy
             ( is-section-map-inv-is-equiv (is-pullback-pullback-cone 𝒯 c'))) ·r
           ( map-standard-pullback 𝒮 𝒯 h'))) ·r
-      ( gap (left-map-cospan-diagram 𝒮) (right-map-cospan-diagram 𝒮) (cone-pullback-cone 𝒮 c)))
+      ( gap
+        ( left-map-cospan-diagram 𝒮)
+        ( right-map-cospan-diagram 𝒮)
+        ( cone-pullback-cone 𝒮 c)))
 ```
 
 ### The functorial action on maps of pullbacks preserves homotopies

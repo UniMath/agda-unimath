@@ -20,6 +20,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
+open import foundation.functoriality-morphisms-arrows
 open import foundation.higher-homotopies-morphisms-arrows
 open import foundation.homotopies
 open import foundation.homotopies-morphisms-arrows
@@ -104,14 +105,15 @@ orthogonal to `g`, while the pullback-hom of `f` and `g` is
 [surjective](foundation.surjective-maps.md) if and only if `f` satisfies the
 left lifting property to `g`.
 
-There are two common ways to denote the pullback-hom: Some authors use `f ⋔ g`,
-while other authors use `⟨f , g⟩`. Both notations can be used, depending on what
-perspective of the pullback-hom is emphasized. The pitchfork-notation `f ⋔ g` is
-used more often in settings where a lifting property of `f` and `g` is
-emphasized, while the hom-notation `⟨f , g⟩` is used when the pullback-hom is
-thought of in terms of hom-sets. The latter notation is useful for instance, if
-one wants to emphasize an adjoint relation between the pullback-hom and the
-pushout-product:
+**Notation.** There are two common ways to denote the pullback-hom: Some authors
+use `f ⋔ g`, while other authors use `⟨f , g⟩`. Both notations can be used,
+depending on what perspective of the pullback-hom is emphasized. The
+pitchfork-notation `f ⋔ g` is used more often in settings where a lifting
+property of `f` and `g` is emphasized, while the hom-notation `⟨f , g⟩` is used
+when the pullback-hom is thought of in terms of hom-sets. The latter notation is
+useful for instance, if one wants to emphasize an adjoint relation between the
+pullback-hom and the
+[pushout-product](synthetic-homotopy-theory.pushout-products.md):
 
 ```text
   ⟨f □ g , h⟩ ＝ ⟨f , ⟨g , h⟩⟩.
@@ -155,9 +157,10 @@ module _
   coh-pullback-hom j = refl-htpy
 
   pullback-hom : (B → X) → hom-arrow f g
-  pr1 (pullback-hom j) = map-domain-pullback-hom j
-  pr1 (pr2 (pullback-hom j)) = map-codomain-pullback-hom j
-  pr2 (pr2 (pullback-hom j)) = coh-pullback-hom j
+  pullback-hom j =
+    ( map-domain-pullback-hom j ,
+      map-codomain-pullback-hom j ,
+      coh-pullback-hom j)
 
   infix 30 _⋔_
   _⋔_ = pullback-hom
@@ -238,14 +241,8 @@ module _
   (f : A → B) (g : X → Y)
   where
 
-  cospan-diagram-pullback-hom : cospan-diagram (l2 ⊔ l4) (l1 ⊔ l3) (l1 ⊔ l4)
-  cospan-diagram-pullback-hom =
-    ( (B → Y) , (A → X) , (A → Y) , precomp f Y , postcomp A g)
-
   cone-pullback-hom : cone (precomp f Y) (postcomp A g) (B → X)
-  pr1 cone-pullback-hom = postcomp B g
-  pr1 (pr2 cone-pullback-hom) = precomp f X
-  pr2 (pr2 cone-pullback-hom) = refl-htpy
+  cone-pullback-hom = (postcomp B g , precomp f X , refl-htpy)
 
   gap-pullback-hom : (B → X) → type-standard-pullback-hom f g
   gap-pullback-hom = gap (precomp f Y) (postcomp A g) cone-pullback-hom
@@ -337,7 +334,7 @@ module _
   triangle-pullback-hom :
     coherence-triangle-maps'
       ( gap-pullback-hom f g)
-      ( map-compute-pullback-hom f g)
+      ( gap (precomp f Y) (postcomp A g) (cone-hom-arrow' f g))
       ( pullback-hom f g)
   triangle-pullback-hom j =
     eq-pair-eq-fiber (eq-pair-eq-fiber (is-retraction-eq-htpy refl))
@@ -386,12 +383,15 @@ module _
   where
 
   is-pullback-cone-hom-arrow-pullback-hom :
-    is-pullback (precomp f Y) (postcomp A g) (cone-hom-arrow-pullback-hom f g)
+    is-pullback
+      ( precomp f Y)
+      ( postcomp A g)
+      ( cone-hom-arrow-pullback-hom f g)
   is-pullback-cone-hom-arrow-pullback-hom =
     is-equiv-map-compute-pullback-hom f g
 
   pullback-cone-hom-arrow-pullback-hom :
-    pullback-cone (cospan-diagram-pullback-hom f g) (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+    pullback-cone (cospan-diagram-hom-arrow f g) (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   pullback-cone-hom-arrow-pullback-hom =
     ( hom-arrow f g , cone-hom-arrow-pullback-hom f g) ,
     ( is-pullback-cone-hom-arrow-pullback-hom)
