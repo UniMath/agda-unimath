@@ -29,7 +29,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.null-types
 
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.directed-relation-on-directed-interval-type
+open import simplicial-type-theory.directed-relation-directed-interval-type
 open import simplicial-type-theory.simplicial-edges
 
 open import synthetic-homotopy-theory.circle

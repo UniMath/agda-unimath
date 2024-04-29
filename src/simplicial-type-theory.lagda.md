@@ -16,7 +16,7 @@ open import simplicial-type-theory.comma-types public
 open import simplicial-type-theory.dependent-simplicial-edges public
 open import simplicial-type-theory.directed-circle public
 open import simplicial-type-theory.directed-interval-type public
-open import simplicial-type-theory.directed-relation-on-directed-interval-type public
+open import simplicial-type-theory.directed-relation-directed-interval-type public
 open import simplicial-type-theory.free-directed-loops public
 open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions public
 open import simplicial-type-theory.horizontal-composition-simplicial-edges-functions public
@@ -30,6 +30,7 @@ open import simplicial-type-theory.simplicial-natural-transformations public
 open import simplicial-type-theory.simplicial-spines public
 open import simplicial-type-theory.simplicial-suspension public
 open import simplicial-type-theory.simplicially-discrete-types public
+open import simplicial-type-theory.standard-simplices public
 open import simplicial-type-theory.standard-simplicial-joins public
 open import simplicial-type-theory.universal-property-directed-circle public
 open import simplicial-type-theory.whiskering-simplicial-arrows-functions public

@@ -31,7 +31,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.directed-relation-on-directed-interval-type
+open import simplicial-type-theory.directed-relation-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
 open import simplicial-type-theory.simplicial-edges
 

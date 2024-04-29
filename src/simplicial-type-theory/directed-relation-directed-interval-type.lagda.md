@@ -1,7 +1,7 @@
 # The directed relation on the directed interval type
 
 ```agda
-module simplicial-type-theory.directed-relation-on-directed-interval-type where
+module simplicial-type-theory.directed-relation-directed-interval-type where
 ```
 
 <details><summary>Imports</summary>

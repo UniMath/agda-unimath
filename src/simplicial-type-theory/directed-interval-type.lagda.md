@@ -43,7 +43,7 @@ consisting of a distinct source and target element, `0₂` and `1₂`, and comes
 
 In this file, we postulate the existence of the directed interval type together
 with its distinct source and target elements. In the module
-[`directed-relation-on-directed-interval-type`](simplicial-type-theory.directed-relation-on-directed-interval-type.md),
+[`directed-relation-directed-interval-type`](simplicial-type-theory.directed-relation-directed-interval-type.md),
 we postulate the existence of the directed relation on the directed interval
 type.
 
@@ -128,4 +128,4 @@ retraction-ap-map-directed-interval-bool =
 
 We show that `map-directed-interval-bool` is an
 [embedding](foundation-core.embeddings.md) in
-[`directed-relation-on-directed-interval-type`](simplicial-type-theory.directed-relation-on-directed-interval-type.md).
+[`directed-relation-directed-interval-type`](simplicial-type-theory.directed-relation-directed-interval-type.md).
