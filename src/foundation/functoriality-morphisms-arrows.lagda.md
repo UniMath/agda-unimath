@@ -187,7 +187,7 @@ module _
       ( htpy-postcomp A' (inv-htpy G) ·r precomp F₀ X))
 ```
 
-### The functorial action on morphisms of cospan diagrams of the pullback-hom
+### The functorial action on morphisms of cospan diagrams of morphisms of arrows
 
 ```agda
 module _
@@ -212,7 +212,7 @@ module _
       ( pullback-cone-hom-arrow f' g')
 ```
 
-### bla bla bla
+### The bifunctorial action of morphisms of arrows
 
 ```agda
 module _
@@ -233,7 +233,7 @@ module _
 
 ## Properties
 
-### The functorial map inducing morphisms of the pullback-hom cospan diagrams from morphisms of the arrows preserves homotopies
+### The bifunctorial map on morphisms of arrows inducing morphisms of the associated cospan diagrams of morphisms of arrows preserves homotopies
 
 ```agda
 module _
@@ -274,7 +274,7 @@ module _
         ( eq-htpy-hom-arrow g g' G G' K)
 ```
 
-### The functorial map inducing morphisms of the pullback-hom cospan diagrams from morphisms of the arrows preserves identities
+### The bifunctorial map on morphisms of arrows inducing morphisms of the associated cospan diagrams of morphisms of arrows preserves identities
 
 ```agda
 module _
@@ -299,7 +299,7 @@ module _
       right-unit-htpy ∙h compute-htpy-postcomp-refl-htpy A g)
 ```
 
-### The functorial map inducing morphisms of the pullback-hom cospan diagrams from morphisms of the arrows preserves identities
+### The bifunctorial map on morphisms of arrows inducing morphisms of the associated cospan diagrams of morphisms of arrows preserves identities
 
 ```agda
 module _
@@ -455,7 +455,7 @@ module _
         F F' G' G)
 ```
 
-### The functorial action of the pullback-hom on cospan diagrams preserves identities
+### The functorial action of morphisms of arrows on cospan diagrams preserves identities
 
 ```agda
 module _
@@ -473,7 +473,7 @@ module _
       ( pullback-cone-hom-arrow f g)
 ```
 
-### The functorial action of the pullback-hom on cospan diagrams preserves composition
+### The functorial action of morphisms of arrows on cospan diagrams preserves composition
 
 ```agda
 module _
@@ -514,7 +514,7 @@ module _
       ( pullback-cone-hom-arrow f'' g'')
 ```
 
-### The functorial action of the pullback-hom on cospan diagrams preserves homotopies
+### The functorial action of morphisms of arrows on cospan diagrams preserves homotopies
 
 ```agda
 module _
