@@ -123,6 +123,13 @@ id-simplicial-hom : {l : Level} {A : UU l} (x : A) → x →₂ x
 id-simplicial-hom = simplicial-hom-simplicial-arrow ∘ id-simplicial-arrow
 ```
 
+### The representing edge of the directed interval
+
+```agda
+representing-hom-𝟚 : 0₂ →₂ 1₂
+representing-hom-𝟚 = (id , refl , refl)
+```
+
 ### Simplicial edges arising from equalities
 
 ```agda

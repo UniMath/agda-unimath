@@ -7,7 +7,10 @@ module simplicial-type-theory.simplicial-arrows where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.universe-levels
 
 open import simplicial-type-theory.directed-interval-type
@@ -49,6 +52,13 @@ id-simplicial-arrow : {l : Level} {A : UU l} (x : A) → simplicial-arrow A
 id-simplicial-arrow x _ = x
 ```
 
+### The representing arrow of the directed interval
+
+```agda
+representing-arrow-𝟚 : simplicial-arrow 𝟚
+representing-arrow-𝟚 = id
+```
+
 ### Simplicial arrows arising from equalities
 
 ```agda
@@ -66,4 +76,14 @@ module _
   compute-target-simplicial-arrow-eq :
     (p : x ＝ y) → simplicial-arrow-eq p 1₂ ＝ y
   compute-target-simplicial-arrow-eq refl = refl
+```
+
+## Properties
+
+### The representing arrow of the directed interval is not constant
+
+```agda
+is-not-constant-representing-arrow-𝟚 :
+  (t : 𝟚) → ¬ (representing-arrow-𝟚 ~ id-simplicial-arrow t)
+is-not-constant-representing-arrow-𝟚 _ H = is-nontrivial-𝟚 (H 0₂ ∙ inv (H 1₂))
 ```
