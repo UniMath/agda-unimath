@@ -138,6 +138,17 @@ module _
       inv (compute-source-simplicial-arrow-eq (loop-free-loop α)))
 ```
 
+### Constant free directed loops
+
+```agda
+module _
+  {l1 : Level} {X : UU l1}
+  where
+
+  constant-free-directed-loop : X → free-directed-loop X
+  constant-free-directed-loop x = (id-simplicial-arrow x , refl)
+```
+
 ## Properties
 
 ### Characterization of the identity type of the type of free directed loops
