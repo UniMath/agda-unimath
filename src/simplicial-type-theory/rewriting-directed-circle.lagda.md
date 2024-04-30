@@ -44,8 +44,8 @@ reduce to `refl`. This is achieved using Agda's
 To enable these computation rules in your own formalizations, set the
 `--rewriting` option and import this module. Keep in mind, however, that we
 offer no way to selectively disable these rules, so if your module depends on
-any other module that imports this one, you will automatically also have
-rewriting for pushouts enabled.
+any other module that depends on this one, you will necessarily also have
+rewriting for the directed circle enabled.
 
 By default, we abstain from using rewrite rules in agda-unimath. However, we
 recognize their usefulness in, for instance, exploratory formalizations. Since
