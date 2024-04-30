@@ -54,6 +54,11 @@ open import order-theory.preorders
 open import order-theory.subposets
 open import order-theory.subtypes-leq-posets
 open import order-theory.top-elements-posets
+
+open import foundation.images
+open import foundation.replacement
+open import foundation.locally-small-types
+open import foundation-core.small-types
 ```
 
 </details>
@@ -66,7 +71,7 @@ TODO
 
 ```agda
 module _
-  {l1 l2 : Level} {i : Set l1} (axioms : formulas l2 i)
+  {l1 l2 : Level} {i : Set l1} (axioms : modal-theory l2 i)
   (zorn : Zorn (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) l2)
   (prop-resize : propositional-resizing (l1 ⊔ l2) (lsuc (l1 ⊔ l2)))
   (L-is-cons : is-consistent-modal-logic (modal-logic axioms))
@@ -74,7 +79,7 @@ module _
   where
 
   private
-    logic : formulas (l1 ⊔ l2) i
+    logic : modal-theory (l1 ⊔ l2) i
     logic = modal-logic axioms
 
     contains-ax-k : ax-k i ⊆ logic
@@ -113,15 +118,15 @@ module _
         ( contains-K)
         ( K-contains-ax-dn i)
 
-  is-L-consistent-theory-Prop : formulas (l1 ⊔ l2) i → Prop (l1 ⊔ l2)
+  is-L-consistent-theory-Prop : modal-theory (l1 ⊔ l2) i → Prop (l1 ⊔ l2)
   is-L-consistent-theory-Prop t =
-    is-consistent-modal-logic-Prop (weak-modal-logic (union-subtype logic t))
+    is-consistent-modal-logic-Prop (weak-modal-logic (logic ∪ t))
 
-  is-L-consistent-theory : formulas (l1 ⊔ l2) i → UU (l1 ⊔ l2)
+  is-L-consistent-theory : modal-theory (l1 ⊔ l2) i → UU (l1 ⊔ l2)
   is-L-consistent-theory = type-Prop ∘ is-L-consistent-theory-Prop
 
   L-consistent-theory : UU (lsuc l1 ⊔ lsuc l2)
-  L-consistent-theory = Σ (formulas (l1 ⊔ l2) i) is-L-consistent-theory
+  L-consistent-theory = type-subtype is-L-consistent-theory-Prop
 
   L-consistent-theory-leq-Prop :
     L-consistent-theory → L-consistent-theory → Prop (l1 ⊔ l2)
@@ -144,6 +149,9 @@ module _
 
   is-L-complete-theory : L-consistent-theory → UU (lsuc l1 ⊔ lsuc l2)
   is-L-complete-theory = type-Prop ∘ is-L-complete-theory-Prop
+
+  L-complete-theory : UU (lsuc l1 ⊔ lsuc l2)
+  L-complete-theory = type-subtype is-L-complete-theory-Prop
 
   weak-modal-logic-subset-complete-theory :
     (x : L-consistent-theory) → is-L-complete-theory x →
@@ -213,11 +221,11 @@ module _
         ( subtype-union-right (Id-formula-Prop a) (pr1 x)))
       ( subtype-union-left (Id-formula-Prop a) (pr1 x) a refl)
 
-  complete-theory-contains-all-formulas :
+  disjuctivity-L-complete-theory :
     LEM (l1 ⊔ l2) →
     (x : L-consistent-theory) → is-L-complete-theory x →
-    (a : formula i) → type-disjunction-Prop (pr1 x a) (pr1 x (~ a))
-  complete-theory-contains-all-formulas lem x is-comp a with lem ((pr1 x) a)
+    (a : formula i) → pr1 x a ∨ pr1 x (~ a)
+  disjuctivity-L-complete-theory lem x is-comp a with lem (pr1 x a)
   ... | inl a-in-logic =
     inl-disjunction-Prop ((pr1 x) a) ((pr1 x) (~ a)) a-in-logic
   ... | inr a-not-in-logic =
@@ -311,7 +319,7 @@ module _
     (λ a → pr1 x (□ a)) ⊆ pr1 y
   lemma-box-diamond lem x x-is-comp y y-is-comp sub a box-a-in-x =
     apply-universal-property-trunc-Prop
-      ( complete-theory-contains-all-formulas lem y y-is-comp a)
+      ( disjuctivity-L-complete-theory lem y y-is-comp a)
       ( pr1 y a)
       ( λ
         { (inl a-in-y) → a-in-y
@@ -358,7 +366,7 @@ module _
     is-in-subtype (pr1 x) (a →ₘ b)
   complete-theory-implication lem x is-comp {a} {b} imp =
     apply-universal-property-trunc-Prop
-      ( complete-theory-contains-all-formulas lem x is-comp a)
+      ( disjuctivity-L-complete-theory lem x is-comp a)
       ( pr1 x (a →ₘ b))
       ( λ { (inl a-in-logic) →
               ( weak-modal-logic-subset-complete-theory
@@ -498,7 +506,7 @@ module _
                       ( ~ a)
                       ( unit-trunc-Prop (w-ax not-a-in-logic))))))})
 
-  canonical-worlds : subtype (lsuc l1 ⊔ lsuc l2) (formulas (l1 ⊔ l2) i)
+  canonical-worlds : subtype (lsuc l1 ⊔ lsuc l2) (modal-theory (l1 ⊔ l2) i)
   canonical-worlds x =
     Σ-Prop
       ( is-L-consistent-theory-Prop x)
@@ -506,7 +514,7 @@ module _
 
   canonical-kripke-model-world-type : UU (lsuc l1 ⊔ lsuc l2)
   canonical-kripke-model-world-type =
-    Σ (formulas (l1 ⊔ l2) i) (is-in-subtype canonical-worlds)
+    Σ (modal-theory (l1 ⊔ l2) i) (is-in-subtype canonical-worlds)
 
   lindenbaum :
     (x : L-consistent-theory) →
@@ -562,7 +570,7 @@ module _
 
     chain-union :
       chain-Poset l2 L-consistent-big-theories-Poset →
-      formulas (lsuc l1 ⊔ lsuc l2) i
+      modal-theory (lsuc l1 ⊔ lsuc l2) i
     chain-union C a =
       exists-Prop
         ( type-subtype
@@ -767,7 +775,7 @@ module _
     (x : L-consistent-theory)
     (is-comp : is-L-complete-theory x)
     (a : formula i) →
-    ( (y : formulas (l1 ⊔ l2) i) →
+    ( (y : modal-theory (l1 ⊔ l2) i) →
       (is-canonical : is-in-subtype canonical-worlds y) →
       relation-kripke-model i canonical-kripke-model
         ( pr1 x , pr2 x , is-comp)
@@ -776,7 +784,7 @@ module _
     is-in-subtype (pr1 x) (□ a)
   complete-theory-box lem x is-comp a h =
     apply-universal-property-trunc-Prop
-      ( complete-theory-contains-all-formulas lem x is-comp (□ a))
+      ( disjuctivity-L-complete-theory lem x is-comp (□ a))
       ( pr1 x (□ a))
       ( λ { (inl box-in-logic) → box-in-logic
           ; (inr not-box-in-logic) →
@@ -842,7 +850,7 @@ module _
       ( ap (λ x → g →ₘ x) (reverse-list-to-implications f l))
 
     move-right :
-      {l' : Level} (axioms : formulas l' i)
+      {l' : Level} (axioms : modal-theory l' i)
       (f : formula i) (l : list (formula i)) →
       ax-k i ⊆ weak-modal-logic axioms →
       ax-s i ⊆ weak-modal-logic axioms →
@@ -1240,4 +1248,30 @@ module _
               ( pr2 (pr2 x))
               ( a)
               ( in-logic))))
+
+    canonical-model-theorem'' :
+      (a : formula i) → logic a ⇔ (canonical-kripke-model ⊨M a)
+    pr1 (canonical-model-theorem'' a) in-logic x =
+      forward-implication
+        ( canonical-model-theorem a x)
+        ( logic-subset-L-complete-theory
+          ( pr1 x , pr1 (pr2 x))
+          ( pr2 (pr2 x))
+          ( a)
+          ( in-logic))
+    pr2 (canonical-model-theorem'' a) in-class-logic with lem (logic a)
+    ... | inl x = x
+    ... | inr x =
+      ex-falso
+        ( forward-implication (canonical-model-theorem' a) x in-class-logic)
+
+    canonical-model-completness :
+      {l3 : Level}
+      (C : model-class (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) i (l1 ⊔ l2) l3) →
+      is-in-subtype C canonical-kripke-model →
+      completeness logic C
+    canonical-model-completness C model-in-class a a-in-class-logic =
+      backward-implication
+        ( canonical-model-theorem'' a)
+        ( a-in-class-logic canonical-kripke-model model-in-class)
 ```

@@ -44,13 +44,14 @@ TODO
 --   completeness = class-modal-logic C ⊆ logic
 
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {i : Set l1} (logic : formulas l2 i)
-  (C : model-class l3 l4 i l5 l6)
+  {l1 l2 l3 l4 l5 l6 : Level} {i : Set l1}
   where
 
-  completeness : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6)
-  completeness = class-modal-logic C ⊆ logic
+  completeness :
+    modal-theory l2 i →
+    model-class l3 l4 i l5 l6 →
+    UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6)
+  completeness logic C = class-modal-logic C ⊆ logic
 ```
 
 ## Properties

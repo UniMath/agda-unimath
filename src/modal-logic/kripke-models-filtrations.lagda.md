@@ -257,19 +257,10 @@ module _
               ( a)
               ( in-theory)))))
 
-  map-valuate-function-equivalence-class :
-    (class : equivalence-class Φ-equivalence) →
-    valuate-function-equivalence-class class →
-    type-subtype theory → Prop (l1 ⊔ l2 ⊔ l4)
-  map-valuate-function-equivalence-class _ = pr1
-
   map-function-equivalence-class :
     equivalence-class Φ-equivalence →
     type-subtype theory → Prop (l1 ⊔ l2 ⊔ l4)
-  map-function-equivalence-class class =
-    map-valuate-function-equivalence-class
-      ( class)
-      ( function-equivalence-class class)
+  map-function-equivalence-class = pr1 ∘ function-equivalence-class
 
   is-injective-map-function-equivalence-class :
     is-injective map-function-equivalence-class
@@ -314,25 +305,6 @@ module _
     map-function-equivalence-class
   pr2 injection-map-function-equivalence-class =
     is-injective-map-function-equivalence-class
-
-  is-bounded-valuate-Prop :
-    {l6 l7 : Level} {A : UU l6} →
-    (type-Set i → A → Prop l7) →
-    Prop (l3 ⊔ l5 ⊔ l6 ⊔ l7)
-  is-bounded-valuate-Prop {A = A} V =
-    Π-Prop (type-Set i)
-      ( λ n →
-        ( function-Prop
-          ( ¬ (is-in-subtype theory (var n)))
-          ( Π-Prop A
-            ( λ x →
-              ( neg-Prop (V n x))))))
-
-  -- is-bounded-valuate :
-  --   {l6 l7 : Level} {A : UU l6} →
-  --   (type-Set i → A → Prop l7) →
-  --   UU (l3 ⊔ l5 ⊔ l6 ⊔ l7)
-  -- is-bounded-valuate = type-Prop ∘ is-bounded-valuate-Prop
 
   module _
     {l6 l7 l8 : Level} (M* : kripke-model l6 l7 i l8)
@@ -534,9 +506,7 @@ module _
       ( is-inhabited-type-kripke-model i M)
 
   minimal-kripke-model-filtration-relation :
-    equivalence-class Φ-equivalence →
-    equivalence-class Φ-equivalence →
-    Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+    Relation-Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5) (equivalence-class Φ-equivalence)
   minimal-kripke-model-filtration-relation x* y* =
     ∃-Prop
       ( type-kripke-model i M × type-kripke-model i M)
@@ -563,16 +533,18 @@ module _
 
   minimal-kripke-model-filtration :
     kripke-model
-      ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
+      ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
       ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
       ( i)
       ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  minimal-kripke-model-filtration =
-    pair
-      ( pair
-        ( equivalence-class Φ-equivalence , is-inhabited-equivalence-classes)
-        ( minimal-kripke-model-filtration-relation))
-      ( minimal-kripke-model-filtration-valuate)
+  pr1 (pr1 (pr1 minimal-kripke-model-filtration)) =
+    equivalence-class Φ-equivalence
+  pr2 (pr1 (pr1 minimal-kripke-model-filtration)) =
+    is-inhabited-equivalence-classes
+  pr2 (pr1 minimal-kripke-model-filtration) =
+    minimal-kripke-model-filtration-relation
+  pr2 minimal-kripke-model-filtration =
+    minimal-kripke-model-filtration-valuate
 
   minimal-transitive-kripke-model-filtration :
     kripke-model
@@ -580,13 +552,15 @@ module _
       ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
       ( i)
       ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  minimal-transitive-kripke-model-filtration =
-    pair
-      ( pair
-        ( equivalence-class Φ-equivalence , is-inhabited-equivalence-classes)
-        ( transitive-closure-Prop
-          ( type-Relation-Prop minimal-kripke-model-filtration-relation)))
-      ( minimal-kripke-model-filtration-valuate)
+  pr1 (pr1 (pr1 minimal-transitive-kripke-model-filtration)) =
+    equivalence-class Φ-equivalence
+  pr2 (pr1 (pr1 minimal-transitive-kripke-model-filtration)) =
+    is-inhabited-equivalence-classes
+  pr2 (pr1 minimal-transitive-kripke-model-filtration) =
+    transitive-closure-Prop
+      ( type-Relation-Prop minimal-kripke-model-filtration-relation)
+  pr2 minimal-transitive-kripke-model-filtration =
+    minimal-kripke-model-filtration-valuate
 
   module _
     (theory-is-closed : is-modal-theory-closed-under-subformulas i theory)
@@ -783,8 +757,8 @@ module _
     minimal-transitive-kripke-model-filtration-is-transitive :
       is-in-subtype
         ( transitivity-kripke-class
-          ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
-          ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
+          ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
+          ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
           ( i)
           ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
         ( minimal-transitive-kripke-model-filtration)
@@ -796,8 +770,8 @@ module _
       is-in-subtype (equivalence-kripke-class l1 l2 i l4) M →
       is-in-subtype
         ( equivalence-kripke-class
-          ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
-          ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
+          ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
+          ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
           ( i)
           ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
         ( minimal-transitive-kripke-model-filtration)
@@ -815,7 +789,6 @@ module _
   (l4 : Level)
   (l5 l6 l7 l8 : Level)
   where
-
   filtration-models :
     model-class l1 l2 i l4
       (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8)

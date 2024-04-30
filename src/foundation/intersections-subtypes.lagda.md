@@ -61,6 +61,9 @@ module _
     pr1 (p x r)
   pr2 (pr2 (is-greatest-binary-lower-bound-intersection-subtype R) p) x r =
     pr2 (p x r)
+
+  infixl 15 _∩_
+  _∩_ = intersection-subtype
 ```
 
 ### The intersection of two decidable subtypes

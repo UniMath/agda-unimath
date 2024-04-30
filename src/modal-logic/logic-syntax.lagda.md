@@ -37,11 +37,12 @@ module _
   {l1 : Level} (l2 : Level) (i : Set l1)
   where
 
-  formulas : UU (l1 ⊔ lsuc l2)
-  formulas = subtype l2 (formula i)
-
   modal-theory : UU (l1 ⊔ lsuc l2)
-  modal-theory = formulas
+  modal-theory = subtype l2 (formula i)
+
+  -- TODO: remove
+  formulas : UU (l1 ⊔ lsuc l2)
+  formulas = modal-theory
 
 module _
   {l1 l2 : Level} {i : Set l1}
@@ -49,24 +50,35 @@ module _
 
   infix 5 _⊢_
 
-  data _⊢_ (axioms : formulas l2 i) : formula i → UU (l1 ⊔ l2) where
+  data _⊢_ (axioms : modal-theory l2 i) : formula i → UU (l1 ⊔ l2) where
     ax : {a : formula i} → is-in-subtype axioms a → axioms ⊢ a
     mp : {a b : formula i} → axioms ⊢ a →ₘ b → axioms ⊢ a → axioms ⊢ b
     nec : {a : formula i} → axioms ⊢ a → axioms ⊢ □ a
 
-  modal-logic : formulas l2 i → formulas (l1 ⊔ l2) i
+  is-modal-logic-Prop : modal-theory l2 i → Prop (l1 ⊔ l2)
+  is-modal-logic-Prop theory =
+    implicit-Π-Prop (formula i) (λ a → function-Prop (theory ⊢ a) (theory a))
+
+  is-modal-logic : modal-theory l2 i → UU (l1 ⊔ l2)
+  is-modal-logic = type-Prop ∘ is-modal-logic-Prop
+
+  T-modal-logic : UU (l1 ⊔ lsuc l2)
+  T-modal-logic = Σ (modal-theory l2 i) is-modal-logic
+
+  -- TODO: rename to modal-logic-closure
+  modal-logic : modal-theory l2 i → modal-theory (l1 ⊔ l2) i
   modal-logic axioms a = trunc-Prop (axioms ⊢ a)
 
-  is-contradictory-modal-logic-Prop : formulas l2 i → Prop l2
+  is-contradictory-modal-logic-Prop : modal-theory l2 i → Prop l2
   is-contradictory-modal-logic-Prop logic = logic ⊥
 
-  is-contradictory-modal-logic : formulas l2 i → UU l2
+  is-contradictory-modal-logic : modal-theory l2 i → UU l2
   is-contradictory-modal-logic = type-Prop ∘ is-contradictory-modal-logic-Prop
 
-  is-consistent-modal-logic-Prop : formulas l2 i → Prop l2
+  is-consistent-modal-logic-Prop : modal-theory l2 i → Prop l2
   is-consistent-modal-logic-Prop = neg-Prop ∘ is-contradictory-modal-logic-Prop
 
-  is-consistent-modal-logic : formulas l2 i → UU l2
+  is-consistent-modal-logic : modal-theory l2 i → UU l2
   is-consistent-modal-logic = type-Prop ∘ is-consistent-modal-logic-Prop
 
 module _
@@ -107,16 +119,14 @@ module _
   axioms-subset-modal-logic _ a H = unit-trunc-Prop (ax H)
 
   modal-logic-closed :
-    {l2 : Level} {axioms : formulas l2 i} {a : formula i} →
-    modal-logic axioms ⊢ a →
-    is-in-subtype (modal-logic axioms) a
+    {l2 : Level} {axioms : formulas l2 i} → is-modal-logic (modal-logic axioms)
   modal-logic-closed (ax x) = x
   modal-logic-closed {axioms = axioms} {a} (mp tdab tda) =
     apply-twice-universal-property-trunc-Prop
       ( modal-logic-closed tdab)
       ( modal-logic-closed tda)
       ( modal-logic axioms a)
-      (λ dab da → unit-trunc-Prop (mp dab da))
+      ( λ dab da → unit-trunc-Prop (mp dab da))
   modal-logic-closed {axioms = axioms} {a} (nec d) =
     apply-universal-property-trunc-Prop
       ( modal-logic-closed d)

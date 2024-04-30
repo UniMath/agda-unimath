@@ -13,6 +13,8 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.small-types
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
@@ -66,7 +68,7 @@ pr1 (pr2 (decidable-prop-Prop lem P)) = is-prop-type-Prop P
 pr2 (pr2 (decidable-prop-Prop lem P)) = lem P
 ```
 
-### TODO: Given LEM, Prop equiv Decidable-Prop
+### Given LEM, Prop equiv Decidable-Prop
 
 ```agda
 prop-equiv-decidable-prop :
@@ -87,6 +89,39 @@ is-finite-Prop-LEM lem =
   is-finite-equiv'
     ( equiv-bool-Decidable-Prop ∘e prop-equiv-decidable-prop lem)
     ( is-finite-bool)
+
+is-small-Prop-LEM : {l1 : Level} (l2 : Level) → LEM l1 → is-small l2 (Prop l1)
+is-small-Prop-LEM {l1} l2 lem =
+  is-small-equiv
+    ( Decidable-Prop l1)
+    ( prop-equiv-decidable-prop lem)
+    ( is-small-Decidable-Prop l1 l2)
+
+is-small-type-Prop-LEM :
+  {l1 : Level} (l2 : Level) → LEM l1 → (P : Prop l1) → is-small l2 (type-Prop P)
+is-small-type-Prop-LEM l2 lem P =
+  is-small-prop-is-decidable-prop l2 (type-Prop P) (is-prop-type-Prop P , lem P)
+
+-- is-small-type-Prop-LEM :
+--   {l1 : Level} (l2 : Level) → LEM l1 → is-small l2 (type-Prop l1)
+-- is-small-type-Prop-LEM {l1} {l2} lem =
+--   ?
+--   -- is-small-Π
+--   --   (is-small-Prop-LEM l2 lem)
+--   --   (λ P → is-small-Π (is-small-Prop-LEM l2 lem) (λ _ → is-small-Prop-LEM l2 lem))
+```
+
+### Given LEM, type subtype is small
+
+```agda
+is-small-type-subtype-LEM :
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A) →
+  LEM l2 →
+  is-small l1 (type-subtype P)
+is-small-type-subtype-LEM {l1} {l2} {A} P lem =
+  is-small-Σ {l1} {l2} {l1} {l1}
+    (is-small' {l1} {A})
+    (λ x → is-small-type-Prop-LEM l1 lem (P x))
 ```
 
 ### The unrestricted law of excluded middle does not hold

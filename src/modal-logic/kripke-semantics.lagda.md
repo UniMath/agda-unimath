@@ -62,10 +62,6 @@ module _
   {l1 l2 : Level}
   where
 
-  -- TODO: replace with theorem
-  postulate
-    is-set-kripke-frame : is-set (kripke-frame l1 l2)
-
   Inhabited-Type-kripke-frame : kripke-frame l1 l2 → Inhabited-Type l1
   Inhabited-Type-kripke-frame = pr1
 
@@ -239,9 +235,8 @@ module _
   where
 
   infix 5 _⊨_
-  infix 5 _⊭_
   infix 5 _⊨M_
-  infix 5 _⊭M_
+  infix 5 _⊨C_
 
   _⊨_ :
     Σ (kripke-model l1 l2 i l4) (type-kripke-model i) →
@@ -255,17 +250,8 @@ module _
       ( type-kripke-model i M)
       ( λ y → function-Prop (relation-kripke-model i M x y) ((M , y) ⊨ a))
 
-  _⊭_ :
-    Σ (kripke-model l1 l2 i l4) (type-kripke-model i) →
-    formula i →
-    Prop (l1 ⊔ l2 ⊔ l4)
-  (M , x) ⊭ a = neg-Prop ((M , x) ⊨ a)
-
   _⊨M_ : kripke-model l1 l2 i l4 → formula i → Prop (l1 ⊔ l2 ⊔ l4)
   M ⊨M a = Π-Prop (type-kripke-model i M) (λ x → (M , x) ⊨ a)
-
-  _⊭M_ : kripke-model l1 l2 i l4 → formula i → Prop (l1 ⊔ l2 ⊔ l4)
-  M ⊭M a = neg-Prop (M ⊨M a)
 
   _⊨C_ :
     {l5 : Level} →
@@ -280,7 +266,7 @@ module _
   class-modal-logic :
     {l5 : Level} →
     model-class l1 l2 i l4 l5 →
-    formulas (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5) i
+    modal-theory (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5) i
   class-modal-logic = _⊨C_
 
   -- TODO: rename
@@ -292,28 +278,6 @@ module _
     class-modal-logic C₂ ⊆ class-modal-logic C₁
   class-modal-logic-monotic C₁ C₂ sub _ in-modal-logic-C₂ M in-C₁ =
     in-modal-logic-C₂ M (sub M in-C₁)
-
-module _
-  {l1 l2 : Level}
-  {l3 : Level} (i : Set l3)
-  (l4 : Level)
-  where
-
-  kripke-frame-model-class :
-    kripke-frame l1 l2 →
-    model-class l1 l2 i l4 (lsuc l1 ⊔ lsuc l2)
-  pr1 (kripke-frame-model-class F M) =
-    kripke-frame-kripke-model i M ＝ F
-  pr2 (kripke-frame-model-class F M) =
-    is-set-kripke-frame (kripke-frame-kripke-model i M) F
-
-  -- frame-modal-logic :
-  --   kripke-frame l1 l2 →
-  --   formulas (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4) i
-  -- frame-modal-logic F a =
-  --   Π-Prop
-  --     ( type-Set i → type-kripke-frame F → Prop l4)
-  --     ( λ v → (F , v) ⊨M a)
 
 module _
   (l1 l2 : Level)
@@ -385,11 +349,11 @@ module _
     {l5 : Level} →
     model-class l1 l2 i l4 l5 →
     model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  decidable-subclass C = intersection-subtype (decidable-models l1 l2 i l4) C
+  decidable-subclass C = (decidable-models l1 l2 i l4) ∩ C
 
   finite-subclass :
     {l5 : Level} →
     model-class l1 l2 i l4 l5 →
     model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  finite-subclass C = intersection-subtype (finite-models l1 l2 i l4) C
+  finite-subclass C = (finite-models l1 l2 i l4) ∩ C
 ```

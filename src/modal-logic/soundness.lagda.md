@@ -34,14 +34,12 @@ TODO
 ## Definition
 
 ```agda
-module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {i : Set l1} (logic : formulas l2 i)
-  (C : model-class l3 l4 i l5 l6)
-  where
-
-  soundness : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6)
-  soundness = logic ⊆ class-modal-logic C
+soundness :
+  {l1 l2 l3 l4 l5 l6 : Level} {i : Set l1} →
+  modal-theory l2 i →
+  model-class l3 l4 i l5 l6 →
+  UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6)
+soundness logic C = logic ⊆ class-modal-logic C
 ```
 
 ## Properties
@@ -81,32 +79,33 @@ module _
 
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
-  {i : Set l1} (ax₁ : formulas l2 i) (ax₂ : formulas l3 i)
+  {i : Set l1} (theory₁ : formulas l2 i) (theory₂ : formulas l3 i)
   (C₁ : model-class l4 l5 i l6 l7) (C₂ : model-class l4 l5 i l6 l8)
-  (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂)
+  (sound₁ : soundness theory₁ C₁) (sound₂ : soundness theory₂ C₂)
   where
 
   forces-in-intersection :
     (M : kripke-model l4 l5 i l6) →
-    is-in-subtype (intersection-subtype C₁ C₂) M →
+    is-in-subtype (C₁ ∩ C₂) M →
     (a : formula i) →
-    is-in-subtype ax₁ a + is-in-subtype ax₂ a →
+    is-in-subtype theory₁ a + is-in-subtype theory₂ a →
     type-Prop (M ⊨M a)
   forces-in-intersection M in-class a (inl d) =
     sound₁ a d M (subtype-intersection-left C₁ C₂ M in-class)
   forces-in-intersection M in-class a (inr d) =
     sound₂ a d M (subtype-intersection-right C₁ C₂ M in-class)
 
-  soundness-union :
-    soundness (union-subtype ax₁ ax₂) (intersection-subtype C₁ C₂)
-  soundness-union a is-ax M in-class =
+  soundness-union : soundness (theory₁ ∪ theory₂) (C₁ ∩ C₂)
+  soundness-union a is-theory M in-class =
     apply-universal-property-trunc-Prop
-      ( is-ax)
+      ( is-theory)
       ( M ⊨M a)
       ( forces-in-intersection M in-class a)
 
   soundness-modal-logic-union :
-    soundness (modal-logic (union-subtype ax₁ ax₂)) (intersection-subtype C₁ C₂)
+    soundness
+      (modal-logic (union-subtype theory₁ theory₂))
+      (intersection-subtype C₁ C₂)
   soundness-modal-logic-union =
     soundness-modal-logic (intersection-subtype C₁ C₂) soundness-union
 

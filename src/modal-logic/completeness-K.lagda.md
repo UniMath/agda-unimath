@@ -64,19 +64,14 @@ module _
   where
 
   completeness-K : completeness (modal-logic-K i) (all-models (lsuc l1) l1 i l1)
-  completeness-K a in-kripke-logic with lem (modal-logic-K i a)
-  ... | inl in-logic = in-logic
-  ... | inr not-in-logic =
-    ex-falso
-      ( forward-implication
-        ( canonical-model-theorem'
-          ( modal-logic-K-axioms i)
-          ( zorn)
-          ( prop-resize)
-          ( is-consistent-K i)
-          ( refl-leq-subtype (modal-logic-K i))
-          ( lem)
-          ( a))
-        ( not-in-logic)
-        ( in-kripke-logic _ star))
+  completeness-K =
+    canonical-model-completness
+      ( modal-logic-K-axioms i)
+      ( zorn)
+      ( prop-resize)
+      ( is-consistent-K i)
+      ( refl-leq-subtype (modal-logic-K i))
+      ( lem)
+      ( all-models (lsuc l1) l1 i l1)
+      ( star)
 ```

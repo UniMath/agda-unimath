@@ -93,19 +93,14 @@ module _
 
   completeness-S5 :
     completeness (modal-logic-S5 i) (equivalence-kripke-class (lsuc l1) l1 i l1)
-  completeness-S5 a in-kripke-logic with lem (modal-logic-S5 i a)
-  ... | inl in-logic = in-logic
-  ... | inr not-in-logic =
-    ex-falso
-      ( forward-implication
-        ( canonical-model-theorem'
-          ( modal-logic-S5-axioms i)
-          ( zorn)
-          ( prop-resize)
-          ( is-consistent-S5 i)
-          ( modal-logic-K-sub-S5 i)
-          ( lem)
-          ( a))
-        ( not-in-logic)
-        ( in-kripke-logic _ S5-canonical-model-is-equivalence))
+  completeness-S5 =
+    canonical-model-completness
+      ( modal-logic-S5-axioms i)
+      ( zorn)
+      ( prop-resize)
+      ( is-consistent-S5 i)
+      ( modal-logic-K-sub-S5 i)
+      ( lem)
+      ( equivalence-kripke-class (lsuc l1) l1 i l1)
+      ( S5-canonical-model-is-equivalence)
 ```

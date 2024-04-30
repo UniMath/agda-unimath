@@ -44,7 +44,6 @@ TODO
 ## Definition
 
 ```agda
--- TODO: levels
 module _
   {l1 : Level}
   (i : Set l1)

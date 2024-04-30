@@ -33,17 +33,17 @@ TODO
 
 ```agda
 module _
-  {l : Level} (i : Set l)
+  {l : Level}
   where
 
   infixr 7 _→ₘ_
   infixr 25 □_
 
-  data formula : UU l where
-    var : type-Set i → formula
-    ⊥ : formula
-    _→ₘ_ : formula → formula → formula
-    □_ : formula → formula
+  data formula (i : Set l) : UU l where
+    var : type-Set i → formula i
+    ⊥ : formula i
+    _→ₘ_ : formula i → formula i → formula i
+    □_ : formula i → formula i
 
 module _
   {l : Level} {i : Set l}
@@ -51,8 +51,8 @@ module _
 
   infixr 25 ~_
   infixr 25 ~~_
-  -- infixl 10 _∨_
-  -- infixl 15 _∧_
+  infixl 10 _∨ₘ_
+  infixl 15 _∧ₘ_
   infixr 25 ◇_
 
   ~_ : formula i → formula i
@@ -61,11 +61,11 @@ module _
   ~~_ : formula i → formula i
   ~~ a = ~ ~ a
 
-  -- _∨_ : formula i → formula i → formula i
-  -- a ∨ b = ~ a →ₘ b
+  _∨ₘ_ : formula i → formula i → formula i
+  a ∨ₘ b = ~ a →ₘ b
 
-  -- _∧_ : formula i → formula i → formula i
-  -- a ∧ b = ~ (a →ₘ ~ b)
+  _∧ₘ_ : formula i → formula i → formula i
+  a ∧ₘ b = ~ (a →ₘ ~ b)
 
   ⊤ : formula i
   ⊤ = ~ ⊥
