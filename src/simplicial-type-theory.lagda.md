@@ -29,6 +29,7 @@ open import simplicial-type-theory.simplicial-mapping-cylinders public
 open import simplicial-type-theory.simplicial-natural-transformations public
 open import simplicial-type-theory.simplicial-spines public
 open import simplicial-type-theory.simplicial-suspension public
+open import simplicial-type-theory.simplicially-covariant-type-families public
 open import simplicial-type-theory.simplicially-discrete-types public
 open import simplicial-type-theory.standard-simplices public
 open import simplicial-type-theory.standard-simplicial-joins public
