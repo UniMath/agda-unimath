@@ -13,8 +13,11 @@ open import foundation.empty-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
@@ -136,6 +139,71 @@ module _
   compute-null-htpy-empty-domain =
     right-unit-law-Σ-is-contr
       ( λ y → dependent-universal-property-empty' (λ x → f x ＝ y))
+```
+
+### If the domain has an element then the center of the null-homotopy is unique
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  eq-center-null-htpy-has-element-domain :
+    A → (H K : null-htpy f) → center-null-htpy H ＝ center-null-htpy K
+  eq-center-null-htpy-has-element-domain a H K =
+    inv (contraction-null-htpy H a) ∙ contraction-null-htpy K a
+```
+
+### If the codomain is a set and the domain has an element the type of null-homotopies is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (is-set-B : is-set B) (a : A)
+  {f : A → B}
+  where
+
+  all-elements-equal-null-htpy-has-element-domain-is-set-codomain :
+    all-elements-equal (null-htpy f)
+  all-elements-equal-null-htpy-has-element-domain-is-set-codomain H K =
+    eq-htpy-null-htpy H K
+      ( ( eq-center-null-htpy-has-element-domain a H K) ,
+        ( λ x → eq-is-prop (is-set-B (f x) (center-null-htpy K))))
+
+  is-prop-null-htpy-has-element-domain-is-set-codomain : is-prop (null-htpy f)
+  is-prop-null-htpy-has-element-domain-is-set-codomain =
+    is-prop-all-elements-equal
+      ( all-elements-equal-null-htpy-has-element-domain-is-set-codomain)
+```
+
+### If the codomain is a set and the domain is inhabited the type of null-homotopies is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (a : is-inhabited A) (is-set-B : is-set B)
+  {f : A → B}
+  where
+
+  eq-center-null-htpy-is-inhabited-domain-is-set-codomain :
+    (H K : null-htpy f) → center-null-htpy H ＝ center-null-htpy K
+  eq-center-null-htpy-is-inhabited-domain-is-set-codomain H K =
+    rec-trunc-Prop
+      ( Id-Prop (B , is-set-B) (center-null-htpy H) (center-null-htpy K))
+      ( λ x → eq-center-null-htpy-has-element-domain x H K)
+      ( a)
+
+  all-elements-equal-null-htpy-is-inhabited-domain-is-set-codomain :
+    all-elements-equal (null-htpy f)
+  all-elements-equal-null-htpy-is-inhabited-domain-is-set-codomain H K =
+    eq-htpy-null-htpy H K
+      ( ( eq-center-null-htpy-is-inhabited-domain-is-set-codomain H K) ,
+        ( λ x → eq-is-prop (is-set-B (f x) (center-null-htpy K))))
+
+  is-prop-null-htpy-is-inhabited-domain-is-set-codomain : is-prop (null-htpy f)
+  is-prop-null-htpy-is-inhabited-domain-is-set-codomain =
+    is-prop-all-elements-equal
+      ( all-elements-equal-null-htpy-is-inhabited-domain-is-set-codomain)
 ```
 
 ## See also
