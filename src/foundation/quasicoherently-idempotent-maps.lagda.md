@@ -207,32 +207,18 @@ Two distinct witnesses that it is idempotent are given by `t ↦ refl` and
 ```
 
 ```agda
-is-idempotent-id-loop-𝕊¹ : is-idempotent (id {A = 𝕊¹})
-is-idempotent-id-loop-𝕊¹ =
-  function-apply-dependent-universal-property-𝕊¹
-    ( eq-value id id)
-    ( loop-𝕊¹)
-    ( tr-loop loop-𝕊¹ loop-𝕊¹ ∙ ap (_∙ loop-𝕊¹) (left-inv loop-𝕊¹))
-
 is-not-prop-is-quasicoherently-idempotent-id-𝕊¹ :
   ¬ (is-prop (is-quasicoherently-idempotent (id {A = 𝕊¹})))
 is-not-prop-is-quasicoherently-idempotent-id-𝕊¹ H =
   nonequal-Π
-    ( is-idempotent-id-loop-𝕊¹)
+    ( loop-htpy-𝕊¹)
     ( refl-htpy)
     ( base-𝕊¹)
-    ( λ p →
-      is-nontrivial-loop-𝕊¹
-        ( inv
-          ( base-dependent-universal-property-𝕊¹
-            ( eq-value id id)
-            ( loop-𝕊¹)
-            ( tr-loop loop-𝕊¹ loop-𝕊¹ ∙ ap (_∙ loop-𝕊¹) (left-inv loop-𝕊¹))) ∙
-          ( p)))
+    ( is-not-refl-ev-base-loop-htpy-𝕊¹)
     ( ap pr1
       ( eq-is-prop H
         { is-quasicoherently-idempotent-is-idempotent-id
-          ( is-idempotent-id-loop-𝕊¹)}
+          ( loop-htpy-𝕊¹)}
         { is-quasicoherently-idempotent-is-idempotent-id
           ( refl-htpy)}))
 ```
