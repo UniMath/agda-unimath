@@ -15,6 +15,7 @@ open import foundation.identity-types
 open import foundation.large-locale-of-subtypes
 open import foundation.logical-equivalences
 open import foundation.powersets
+open import foundation.propositions
 open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -107,6 +108,23 @@ module _
 
   subtype-union-right : Q ⊆ union-subtype P Q
   subtype-union-right x = inr-disjunction-Prop (P x) (Q x)
+
+  elim-union-subtype :
+    {l4 : Level} (f : X → Prop l4) →
+    ((x : X) → is-in-subtype P x → type-Prop (f x)) →
+    ((x : X) → is-in-subtype Q x → type-Prop (f x)) →
+    (x : X) → is-in-subtype (P ∪ Q) x → type-Prop (f x)
+  elim-union-subtype f H-P H-Q x =
+    elim-disjunction-Prop (P x) (Q x) (f x) (H-P x , H-Q x)
+
+  elim-union-subtype' :
+    {l4 : Level} (R : Prop l4) →
+    ((x : X) → is-in-subtype P x → type-Prop R) →
+    ((x : X) → is-in-subtype Q x → type-Prop R) →
+    (x : X) → is-in-subtype (P ∪ Q) x → type-Prop R
+  elim-union-subtype' R H-P H-Q x =
+    elim-disjunction-Prop (P x) (Q x) R (H-P x , H-Q x)
+    -- elim-disjunction-Prop (P x) (Q x) (f x) (H-P x , H-Q x) p
 
   subtype-union-both :
     {l4 : Level} (S : subtype l4 X) → P ⊆ S → Q ⊆ S → union-subtype P Q ⊆ S

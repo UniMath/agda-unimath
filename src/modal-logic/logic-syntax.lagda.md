@@ -8,6 +8,7 @@ module modal-logic.logic-syntax where
 
 ```agda
 open import foundation.conjunction
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
@@ -80,6 +81,25 @@ module _
 
   is-consistent-modal-logic : modal-theory l2 i → UU l2
   is-consistent-modal-logic = type-Prop ∘ is-consistent-modal-logic-Prop
+
+module _
+  {l1 : Level} {i : Set l1}
+  where
+
+  is-contradictory-modal-logic-monotic :
+    {l2 l3 : Level} (ax₁ : modal-theory l2 i) (ax₂ : modal-theory l3 i) →
+    ax₁ ⊆ ax₂ →
+    is-contradictory-modal-logic ax₁ →
+    is-contradictory-modal-logic ax₂
+  is-contradictory-modal-logic-monotic ax₁ ax₂ leq = leq ⊥
+
+  is-consistent-modal-logic-antimonotic :
+    {l2 l3 : Level} (ax₁ : modal-theory l2 i) (ax₂ : modal-theory l3 i) →
+    ax₁ ⊆ ax₂ →
+    is-consistent-modal-logic ax₂ →
+    is-consistent-modal-logic ax₁
+  is-consistent-modal-logic-antimonotic ax₁ ax₂ leq is-cons =
+    is-cons ∘ is-contradictory-modal-logic-monotic ax₁ ax₂ leq
 
 module _
   {l1 l2 : Level} {i : Set l1} {axioms : formulas l2 i}
@@ -183,15 +203,57 @@ module _
       ( modal-logic-monotic leq)
 
 module _
-  {l1 l2 : Level} {i : Set l1} (a : formula i) (logic : formulas l2 i)
+  {l1 l2 : Level} {i : Set l1} (a : formula i) (theory : modal-theory l2 i)
   where
 
+  -- TODO: make Id-formula to be a function for 1 element modal-theory
   theory-add-formula : formulas (l1 ⊔ l2) i
-  theory-add-formula = union-subtype (Id-formula-Prop a) logic
+  theory-add-formula = (Id-formula-Prop a) ∪ theory
 
   formula-in-add-formula : is-in-subtype theory-add-formula a
-  formula-in-add-formula = subtype-union-left (Id-formula-Prop a) logic a refl
+  formula-in-add-formula = subtype-union-left (Id-formula-Prop a) theory a refl
 
-  subset-add-formula : logic ⊆ theory-add-formula
-  subset-add-formula = subtype-union-right (Id-formula-Prop a) logic
+  subset-add-formula : theory ⊆ theory-add-formula
+  subset-add-formula = subtype-union-right (Id-formula-Prop a) theory
+
+  elim-theory-add-formula :
+    {l3 : Level} (P : formula i → Prop l3) →
+    type-Prop (P a) →
+    ((x : formula i) → is-in-subtype theory x → type-Prop (P x)) →
+    (x : formula i) → is-in-subtype theory-add-formula x → type-Prop (P x)
+  elim-theory-add-formula P H-a H-rest =
+    elim-union-subtype (Id-formula-Prop a) theory P
+      ( λ { .a refl → H-a })
+      ( H-rest)
+
+  subset-theory-add-formula :
+    {l3 : Level} (theory' : formulas l3 i) →
+    is-in-subtype theory' a →
+    theory ⊆ theory' →
+    theory-add-formula ⊆ theory'
+  subset-theory-add-formula theory' a-in =
+    subtype-union-both
+      ( Id-formula-Prop a)
+      ( theory)
+      ( theory')
+      ( λ { .a refl → a-in })
+
+module _
+  {l1 : Level} {i : Set l1}
+  where
+
+  is-disjuctive-modal-theory :
+    {l2 : Level} → modal-theory l2 i → UU (l1 ⊔ l2)
+  is-disjuctive-modal-theory theory =
+    (a : formula i) → is-in-subtype theory a + is-in-subtype theory (~ a)
+
+  theory-add-formula-union-right :
+    (a : formula i)
+    {l2 l3 : Level}
+    (theory : formulas l2 i)
+    (theory' : formulas l3 i) →
+    theory ∪ theory-add-formula a theory' ⊆
+      theory-add-formula a (theory ∪ theory')
+  theory-add-formula-union-right a theory theory' =
+    union-swap-1-2 theory (Id-formula-Prop a) theory'
 ```

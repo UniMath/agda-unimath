@@ -54,11 +54,6 @@ open import order-theory.preorders
 open import order-theory.subposets
 open import order-theory.subtypes-leq-posets
 open import order-theory.top-elements-posets
-
-open import foundation.images
-open import foundation.replacement
-open import foundation.locally-small-types
-open import foundation-core.small-types
 ```
 
 </details>
