@@ -7,6 +7,7 @@ module simplicial-type-theory.directed-relation-directed-interval-type where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.0-connected-types
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -15,7 +16,10 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.mere-equality
+open import foundation.negated-equality
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -160,4 +164,12 @@ not-leq-target-source-𝟚 leq-1-0 =
 is-emb-map-directed-interval-bool : is-emb map-directed-interval-bool
 is-emb-map-directed-interval-bool =
   is-emb-is-injective is-set-𝟚 is-injective-map-directed-interval-bool
+```
+
+### The directed interval is not connected
+
+```agda
+is-not-connected-𝟚 : ¬ (is-0-connected 𝟚)
+is-not-connected-𝟚 H =
+  is-nontrivial-𝟚 (reflects-mere-eq (𝟚-Set) id (mere-eq-is-0-connected H 0₂ 1₂))
 ```
