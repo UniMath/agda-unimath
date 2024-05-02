@@ -9,6 +9,7 @@ module simplicial-type-theory.directed-interval-type where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.cartesian-product-types
@@ -18,9 +19,11 @@ open import foundation.empty-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.mere-equality
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sets
