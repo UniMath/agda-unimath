@@ -129,3 +129,16 @@ retraction-ap-map-directed-interval-bool =
 We show that `map-directed-interval-bool` is an
 [embedding](foundation-core.embeddings.md) in
 [`directed-relation-directed-interval-type`](simplicial-type-theory.directed-relation-directed-interval-type.md).
+
+### The directed interval is not connected
+
+**Proof.** A type is 0-connected only if all pairs of elements are
+[merely equal](foundation.mere-equality.md), and since we are attempting to
+deduce a contradiction we may assume we have that all elements are equal, but
+`0₂` and `1₂` are not.
+
+```agda
+is-not-0-connected-𝟚 : ¬ (is-0-connected 𝟚)
+is-not-0-connected-𝟚 H =
+  rec-trunc-Prop empty-Prop is-nontrivial-𝟚 (mere-eq-is-0-connected H 0₂ 1₂)
+```
