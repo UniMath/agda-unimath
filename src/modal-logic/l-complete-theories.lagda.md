@@ -604,14 +604,38 @@ module _
         is-inhabited (L-consistent-theory logic l3) →
         is-inhabited (L-complete-theory l3)
       extend-L-consistent-theory zorn is-inh =
-        ( is-inhabited-L-complete-exists-complete-L-consistent-theory
+        is-inhabited-L-complete-exists-complete-L-consistent-theory
           ( zorn
             ( L-consistent-theories-Poset logic l3)
             ( is-inh)
             ( λ C C-is-inh →
               ( intro-∃
                 ( resized-chain-union-L-consistent-theory C C-is-inh)
-                ( union-is-chain-upper-bound C C-is-inh)))))
+                ( union-is-chain-upper-bound C C-is-inh))))
+
+  module _
+    {l3 : Level}
+    (prop-resize : propositional-resizing (l1 ⊔ l2) (lsuc l1 ⊔ lsuc l2 ⊔ l3))
+    (zorn : Zorn-non-empty (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) l3)
+    (is-logic : is-weak-modal-logic logic)
+    (is-cons : is-consistent-modal-logic logic)
+    (contains-ax-k : ax-k i ⊆ logic)
+    (contains-ax-s : ax-s i ⊆ logic)
+    where
+
+    is-inhabited-L-complete-theory :
+      is-inhabited (L-complete-theory (l1 ⊔ l2))
+    is-inhabited-L-complete-theory =
+      extend-L-consistent-theory prop-resize contains-ax-k contains-ax-s zorn
+        ( map-is-inhabited
+          ( λ (t , t-is-cons) →
+            ( pair
+              ( raise-subtype l1 t)
+              ( is-L-consistent-antimonotic logic (raise-subtype l1 t) t
+                ( inv-subset-equiv-subtypes t (raise-subtype l1 t)
+                  ( compute-raise-subtype l1 t))
+                ( t-is-cons))))
+          ( is-inhabited-L-consistent-theory logic is-logic is-cons))
 
 module _
   {l1 : Level} {i : Set l1}

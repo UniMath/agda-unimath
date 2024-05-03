@@ -87,18 +87,6 @@ module _
       ( weak-modal-logic-closure-monotic
         ( subtype-union-right logic (modal-theory-L-consistent-theory theory)))
       ( is-L-consistent-theory-modal-theory-L-consistent-theory theory)
-    -- is-consistent-modal-logic-antimonotic
-    --   ( modal-theory-L-consistent-theory theory)
-    --   ( weak-modal-logic-closure
-    --     ( logic ∪ modal-theory-L-consistent-theory theory))
-    --   ( transitive-leq-subtype
-    --     ( modal-theory-L-consistent-theory theory)
-    --     ( logic ∪ modal-theory-L-consistent-theory theory)
-    --     ( weak-modal-logic-closure
-    --       ( logic ∪ modal-theory-L-consistent-theory theory))
-    --     ( subset-axioms-weak-modal-logic)
-    --     ( subtype-union-right logic (modal-theory-L-consistent-theory theory)))
-    --   ( is-L-consistent-theory-modal-theory-L-consistent-theory theory)
 
   is-L-consistent-antimonotic :
     {l3 l4 : Level}
@@ -116,7 +104,6 @@ module _
 
   L-consistent-theory-leq-Prop :
     {l3 : Level} → Relation-Prop (l1 ⊔ l3) (L-consistent-theory l3)
-    -- {l3 : Level} → L-consistent-theory l3 → L-consistent-theory → Prop (l1 ⊔ l2)
   L-consistent-theory-leq-Prop x y =
     leq-prop-subtype
       ( modal-theory-L-consistent-theory x)

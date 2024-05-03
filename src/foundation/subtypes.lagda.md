@@ -157,7 +157,6 @@ module _
   {l1 : Level} {A : UU l1}
   where
 
-  --- TODO: replace with equiv-fam
   equiv-subtypes :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
   equiv-subtypes P Q = (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
@@ -204,7 +203,7 @@ pr1 (subtype-Set l2 A) = subtype l2 A
 pr2 (subtype-Set l2 A) = is-set-subtype
 ```
 
-### TODO
+### TODO: raise subtype
 
 ```agda
 raise-subtype :
