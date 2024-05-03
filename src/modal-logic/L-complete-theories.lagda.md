@@ -1,60 +1,52 @@
 # L-complete theories
 
 ```agda
-module modal-logic.L-complete-theories where
+module modal-logic.l-complete-theories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.action-on-identifications-functions
--- open import foundation.cartesian-product-types
 open import foundation.binary-relations
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
--- open import foundation.empty-types
--- open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.identity-types
--- open import foundation.inhabited-types
--- open import foundation.intersections-subtypes
+open import foundation.empty-types
+open import foundation.existential-quantification
+open import foundation.inhabited-types
 open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
-open import foundation.negation
--- open import foundation.propositional-resizing
-open import foundation.propositional-truncations
-open import foundation.propositions
--- open import foundation.raising-universe-levels
-open import foundation.sets
 open import foundation.subtypes
+open import foundation.propositional-truncations
+open import foundation.propositional-resizing
 open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
--- open import foundation.unit-type
 open import foundation.universe-levels
 
--- open import foundation-core.equivalences
+open import foundation-core.coproduct-types
+open import foundation-core.equality-dependent-pair-types
+open import foundation-core.function-types
+open import foundation-core.identity-types
+open import foundation-core.negation
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.subtypes
 
--- open import lists.lists
--- open import lists.reversing-lists
+open import lists.lists
+open import lists.lists-subtypes
 
 open import modal-logic.axioms
--- open import modal-logic.completeness
 open import modal-logic.formulas
--- open import modal-logic.formulas-deduction
--- open import modal-logic.kripke-semantics
 open import modal-logic.logic-syntax
--- open import modal-logic.modal-logic-K
--- open import modal-logic.soundness
+open import modal-logic.l-consistent-theories
 open import modal-logic.weak-deduction
 
--- open import order-theory.chains-posets
 open import order-theory.maximal-elements-posets
+open import order-theory.chains-posets
 open import order-theory.posets
--- open import order-theory.preorders
 open import order-theory.subposets
 open import order-theory.subtypes-leq-posets
--- open import order-theory.top-elements-posets
+open import order-theory.zorn
 ```
 
 </details>
@@ -69,82 +61,24 @@ TODO
 module _
   {l1 l2 : Level} {i : Set l1}
   (logic : modal-theory l2 i)
-  (logic-is-modal-logic : is-modal-logic logic)
   where
 
-  is-L-consistent-theory-Prop :
-    {l3 : Level} → modal-theory l3 i → Prop (l1 ⊔ l2 ⊔ l3)
-  is-L-consistent-theory-Prop theory =
-    is-consistent-modal-logic-Prop (weak-modal-logic-closure (logic ∪ theory))
-
-  is-L-consistent-theory :
-    {l3 : Level} → modal-theory l3 i → UU (l1 ⊔ l2 ⊔ l3)
-  is-L-consistent-theory = type-Prop ∘ is-L-consistent-theory-Prop
-
-  L-consistent-theory : (l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
-  L-consistent-theory l3 = type-subtype (is-L-consistent-theory-Prop {l3})
-
-  modal-theory-L-consistent-theory :
-    {l3 : Level} → L-consistent-theory l3 → modal-theory l3 i
-  modal-theory-L-consistent-theory =
-    inclusion-subtype is-L-consistent-theory-Prop
-
-  is-L-consistent-theory-modal-theory-L-consistent-theory :
-    {l3 : Level} (theory : L-consistent-theory l3) →
-    is-L-consistent-theory (modal-theory-L-consistent-theory theory)
-  is-L-consistent-theory-modal-theory-L-consistent-theory =
-    is-in-subtype-inclusion-subtype is-L-consistent-theory-Prop
-
-  is-L-consistent-antimonotic :
-    {l3 l4 : Level}
-    (theory₁ : modal-theory l3 i) →
-    (theory₂ : modal-theory l4 i) →
-    theory₁ ⊆ theory₂ →
-    is-L-consistent-theory theory₂ →
-    is-L-consistent-theory theory₁
-  is-L-consistent-antimonotic theory₁ theory₂ leq is-cons =
-    is-consistent-modal-logic-antimonotic
-      ( weak-modal-logic-closure (logic ∪ theory₁))
-      ( weak-modal-logic-closure (logic ∪ theory₂))
-      ( weak-modal-logic-closure-monotic
-        ( subset-union-subset-right logic theory₁ theory₂ leq))
-      ( is-cons)
-
-  L-consistent-theory-leq-Prop :
-    {l3 : Level} → Relation-Prop (l1 ⊔ l3) (L-consistent-theory l3)
-    -- {l3 : Level} → L-consistent-theory l3 → L-consistent-theory → Prop (l1 ⊔ l2)
-  L-consistent-theory-leq-Prop x y =
-    leq-prop-subtype
-      ( modal-theory-L-consistent-theory x)
-      ( modal-theory-L-consistent-theory y)
-
-  L-consistent-theory-leq :
-    {l3 : Level} → Relation (l1 ⊔ l3) (L-consistent-theory l3)
-  L-consistent-theory-leq = type-Relation-Prop L-consistent-theory-leq-Prop
-
-  theories-Poset : (l3 : Level) → Poset (l1 ⊔ lsuc l3) (l1 ⊔ l3)
-  theories-Poset l3 = subtypes-leq-Poset l3 (formula i)
-
-  L-consistent-theories-Poset :
-    (l3 : Level) → Poset (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3)
-  L-consistent-theories-Poset l3 =
-    poset-Subposet (theories-Poset l3) (is-L-consistent-theory-Prop)
-
   is-L-complete-theory-Prop :
-    {l3 : Level} → L-consistent-theory l3 → Prop (l1 ⊔ l2 ⊔ lsuc l3)
+    {l3 : Level} → L-consistent-theory logic l3 → Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-L-complete-theory-Prop {l3} =
-    is-maximal-element-Poset-Prop (L-consistent-theories-Poset l3)
+    is-maximal-element-Poset-Prop (L-consistent-theories-Poset logic l3)
 
   is-L-complete-theory :
-    {l3 : Level} → L-consistent-theory l3 → UU (l1 ⊔ l2 ⊔ lsuc l3)
+    {l3 : Level} → L-consistent-theory logic l3 → UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-L-complete-theory = type-Prop ∘ is-L-complete-theory-Prop
 
   L-complete-theory : (l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
   L-complete-theory l3 = type-subtype (is-L-complete-theory-Prop {l3})
 
   L-consistent-theory-L-complete-theory :
-    {l3 : Level} → L-complete-theory l3 → L-consistent-theory l3
-  L-consistent-theory-L-complete-theory = inclusion-subtype is-L-complete-theory-Prop
+    {l3 : Level} → L-complete-theory l3 → L-consistent-theory logic l3
+  L-consistent-theory-L-complete-theory =
+    inclusion-subtype is-L-complete-theory-Prop
 
   is-L-complete-theory-L-consistent-theory :
     {l3 : Level} (theory : L-complete-theory l3) →
@@ -155,26 +89,36 @@ module _
   modal-theory-L-complete-theory :
     {l3 : Level} → L-complete-theory l3 → modal-theory l3 i
   modal-theory-L-complete-theory =
-    modal-theory-L-consistent-theory ∘ L-consistent-theory-L-complete-theory
+    modal-theory-L-consistent-theory logic ∘
+      L-consistent-theory-L-complete-theory
 
-  eq-is-L-consistent-union-L-complete :
-    {l3 l4 : Level} →
-    (((theory , _) , _) : L-complete-theory (l1 ⊔ l2 ⊔ l3 ⊔ l4)) →
-    (theory' : modal-theory l4 i) →
-    is-L-consistent-theory (theory' ∪ theory) →
-    theory' ∪ theory ＝ theory
-  eq-is-L-consistent-union-L-complete
-    ((theory , is-cons) , is-comp) theory' is-L-cons =
+  is-L-consistent-theory-modal-theory-L-complete-theory :
+    {l3 : Level} (theory : L-complete-theory l3) →
+    is-L-consistent-theory logic (modal-theory-L-complete-theory theory)
+  is-L-consistent-theory-modal-theory-L-complete-theory =
+    is-L-consistent-theory-modal-theory-L-consistent-theory logic ∘
+      L-consistent-theory-L-complete-theory
+
+  module _
+    {l3 : Level}
+    (((theory , is-cons) , is-comp) : L-complete-theory (l1 ⊔ l2 ⊔ l3))
+    (theory' : modal-theory l3 i)
+    where
+
+    eq-is-L-consistent-union-L-complete :
+      is-L-consistent-theory logic (theory' ∪ theory) →
+      theory' ∪ theory ＝ theory
+    eq-is-L-consistent-union-L-complete is-L-cons =
       ap
-        ( modal-theory-L-consistent-theory)
+        ( modal-theory-L-consistent-theory logic)
         ( is-comp
           ( theory' ∪ theory , is-L-cons)
           ( subtype-union-right theory' theory))
 
   union-L-consistent :
     {l3 : Level} →
-    L-consistent-theory l3 →
-    L-consistent-theory (l1 ⊔ l2 ⊔ l3)
+    L-consistent-theory logic l3 →
+    L-consistent-theory logic (l1 ⊔ l2 ⊔ l3)
   pr1 (union-L-consistent (theory , is-cons)) =
     weak-modal-logic-closure (logic ∪ theory)
   pr2 (union-L-consistent (theory , is-cons)) bot-in-logic =
@@ -201,14 +145,15 @@ module _
         ( bot-in-logic))
 
   module _
-    {l3 : Level}
+    (l3 : Level)
     (t@((theory , is-cons) , is-comp) : L-complete-theory (l1 ⊔ l2 ⊔ l3))
     where
 
     eq-union-L-consistent :
       weak-modal-logic-closure (logic ∪ theory) ＝ theory
     eq-union-L-consistent =
-      ap modal-theory-L-consistent-theory
+      ap
+        ( modal-theory-L-consistent-theory logic)
         ( is-comp
           ( union-L-consistent (theory , is-cons))
           ( transitive-leq-subtype
@@ -231,14 +176,13 @@ module _
     subset-union-logic-L-complete-theory =
       transitive-leq-subtype
         ( logic ∪ theory)
-        ( modal-theory-L-consistent-theory
+        ( modal-theory-L-consistent-theory logic
           ( union-L-consistent (theory , is-cons)))
         ( theory)
         ( subset-union-L-consistent)
         ( subset-axioms-weak-modal-logic)
 
-    subset-logic-L-complete-theory :
-      logic ⊆ theory
+    subset-logic-L-complete-theory : logic ⊆ theory
     subset-logic-L-complete-theory =
       transitive-leq-subtype
         ( logic)
@@ -247,93 +191,465 @@ module _
         ( subset-union-logic-L-complete-theory)
         ( subtype-union-left logic theory)
 
-    is-weak-modal-logic-L-complete-theory :
-      is-weak-modal-logic theory
+    is-weak-modal-logic-L-complete-theory : is-weak-modal-logic theory
     is-weak-modal-logic-L-complete-theory =
       transitive-leq-subtype
         ( weak-modal-logic-closure theory)
-        ( modal-theory-L-consistent-theory
+        ( modal-theory-L-consistent-theory logic
           ( union-L-consistent (theory , is-cons)))
         ( theory)
         ( subset-union-L-consistent)
         ( weak-modal-logic-closure-monotic (subtype-union-right logic theory))
 
+  module _
+    {l3 : Level}
+    (t@((theory , is-cons) , is-comp) : L-complete-theory (l1 ⊔ l2 ⊔ l3))
+    (theory' : modal-theory l3 i)
+    where
+
+    eq-is-consistent-union-L-complete :
+      is-consistent-modal-logic (weak-modal-logic-closure (theory' ∪ theory)) →
+      theory' ∪ theory ＝ theory
+    eq-is-consistent-union-L-complete is-cons' =
+      eq-is-L-consistent-union-L-complete t theory'
+        ( is-consistent-modal-logic-antimonotic
+          ( weak-modal-logic-closure (logic ∪ (theory' ∪ theory)))
+          ( weak-modal-logic-closure (theory' ∪ theory))
+          ( weak-modal-logic-closure-monotic
+            ( subtype-union-both logic (theory' ∪ theory) (theory' ∪ theory)
+              ( transitive-leq-subtype
+                ( logic)
+                ( theory)
+                ( theory' ∪ theory)
+                ( subtype-union-right theory' theory)
+                ( subset-logic-L-complete-theory l3 t))
+              ( refl-leq-subtype (theory' ∪ theory))))
+          ( is-cons'))
+
+  module _
+    (t@((theory , is-cons) , is-comp) : L-complete-theory (l1 ⊔ l2))
+    (contains-ax-k : ax-k i ⊆ logic)
+    (contains-ax-s : ax-s i ⊆ logic)
+    (contains-ax-dn : ax-dn i ⊆ logic)
+    where
+
+    private
+      contains-ax-k' : ax-k i ⊆ theory
+      contains-ax-k' =
+        transitive-leq-subtype (ax-k i) logic theory
+          ( subset-logic-L-complete-theory lzero t)
+          ( contains-ax-k)
+
+      contains-ax-s' : ax-s i ⊆ theory
+      contains-ax-s' =
+        transitive-leq-subtype (ax-s i) logic theory
+          ( subset-logic-L-complete-theory lzero t)
+          ( contains-ax-s)
+
+      contains-ax-dn' : ax-dn i ⊆ theory
+      contains-ax-dn' =
+        transitive-leq-subtype (ax-dn i) logic theory
+          ( subset-logic-L-complete-theory lzero t)
+          ( contains-ax-dn)
+
+    is-L-consistent-add-formula-not-in-logic :
+      {a : formula i} →
+      ¬ (is-in-subtype theory a) →
+      is-L-consistent-theory logic (theory-add-formula (~ a) theory)
+    is-L-consistent-add-formula-not-in-logic {a} not-in-logic bot-in-logic =
+      not-in-logic
+        ( weak-modal-logic-mp
+          ( is-weak-modal-logic-L-complete-theory lzero t)
+          ( contains-ax-dn' (~~ a →ₘ a) (a , refl))
+          ( is-weak-modal-logic-L-complete-theory lzero t (~~ a)
+            ( forward-implication
+              ( deduction-lemma
+                ( theory)
+                ( contains-ax-k')
+                ( contains-ax-s')
+                ( ~ a)
+                ( ⊥))
+              ( weak-modal-logic-closure-monotic
+                ( subtype-union-both logic (theory-add-formula (~ a) theory)
+                  ( theory-add-formula (~ a) theory)
+                  ( transitive-leq-subtype
+                    ( logic)
+                    ( theory)
+                    ( theory-add-formula (~ a) theory)
+                    ( subset-add-formula (~ a) theory)
+                    ( subset-logic-L-complete-theory lzero t))
+                  ( refl-leq-subtype (theory-add-formula (~ a) theory)))
+                ( ⊥)
+                ( bot-in-logic)))))
+
+    contains-negation-not-contains-formula-L-complete-theory :
+      {a : formula i} →
+      ¬ (is-in-subtype theory a) →
+      is-in-subtype theory (~ a)
+    contains-negation-not-contains-formula-L-complete-theory {a} not-in-logic =
+      tr
+        ( λ t → is-in-subtype t (~ a))
+        ( eq-is-L-consistent-union-L-complete t
+          ( Id-formula-Prop (~ a))
+          ( is-L-consistent-add-formula-not-in-logic not-in-logic))
+        ( formula-in-add-formula (~ a) theory)
+
+    is-disjuctive-L-complete-theory :
+      LEM (l1 ⊔ l2) →
+      is-disjuctive-modal-theory theory
+    is-disjuctive-L-complete-theory lem a with lem (theory a)
+    ... | inl a-in-logic = inl a-in-logic
+    ... | inr a-not-in-logic =
+      inr
+        ( contains-negation-not-contains-formula-L-complete-theory
+          ( a-not-in-logic))
+
+  is-inhabited-L-complete-exists-complete-L-consistent-theory :
+    {l3 : Level} →
+    ∃ (L-consistent-theory logic l3) is-L-complete-theory →
+    is-inhabited (L-complete-theory l3)
+  is-inhabited-L-complete-exists-complete-L-consistent-theory {l3} =
+    elim-exists-Prop
+      ( is-L-complete-theory-Prop)
+      ( is-inhabited-Prop (L-complete-theory l3))
+      ( λ theory is-comp → unit-trunc-Prop (theory , is-comp))
+
+  module _
+    {l3 l4 : Level}
+    (C : chain-Poset l4 (L-consistent-theories-Poset logic l3))
+    where
+
+    private
+      P : Poset (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3)
+      P = L-consistent-theories-Poset logic l3
+
+      modal-theory-chain-element :
+        type-chain-Poset P C → modal-theory l3 i
+      modal-theory-chain-element =
+        modal-theory-L-consistent-theory logic ∘
+          type-Poset-type-chain-Poset P C
+
+      L-union : type-chain-Poset P C → modal-theory (l1 ⊔ l2 ⊔ l3) i
+      L-union x =
+        weak-modal-logic-closure (logic ∪ modal-theory-chain-element x)
+
+      theory-subset-L-union :
+        (x : type-chain-Poset P C) → modal-theory-chain-element x ⊆ L-union x
+      theory-subset-L-union x =
+        transitive-leq-subtype
+          ( modal-theory-chain-element x)
+          ( logic ∪ modal-theory-chain-element x)
+          ( L-union x)
+          ( subset-axioms-weak-modal-logic)
+          ( subtype-union-right logic (modal-theory-chain-element x))
+
+      leq-L-union :
+        (x y : type-chain-Poset P C) →
+        modal-theory-chain-element x ⊆ modal-theory-chain-element y →
+        L-union x ⊆ L-union y
+      leq-L-union x y leq =
+        weak-modal-logic-closure-monotic
+          ( subset-union-subset-right logic
+            ( modal-theory-chain-element x)
+            ( modal-theory-chain-element y)
+            ( leq))
+
+    chain-union-modal-theory :
+      modal-theory (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4) i
+    chain-union-modal-theory a =
+      ∃-Prop (type-chain-Poset P C)
+        ( λ x → is-in-subtype (modal-theory-chain-element x) a)
+
+    exists-chain-element-with-formula-Prop :
+      (a : formula i) → Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+    exists-chain-element-with-formula-Prop a =
+      ∃-Prop (type-chain-Poset P C)
+        ( λ x →
+          ( is-in-subtype
+            ( weak-modal-logic-closure (logic ∪ modal-theory-chain-element x))
+            ( a)))
+
+    exists-chain-element-with-formula :
+      (a : formula i) → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+    exists-chain-element-with-formula =
+      type-Prop ∘ exists-chain-element-with-formula-Prop
+
     module _
       (contains-ax-k : ax-k i ⊆ logic)
       (contains-ax-s : ax-s i ⊆ logic)
-      (contains-ax-dn : ax-dn i ⊆ logic)
       where
 
       private
-        contains-ax-k' : ax-k i ⊆ theory
-        contains-ax-k' =
-          transitive-leq-subtype (ax-k i) logic theory
-            ( subset-logic-L-complete-theory)
+        contains-ax-k' :
+          {l5 : Level} (theory : modal-theory l5 i) → ax-k i ⊆ logic ∪ theory
+        contains-ax-k' theory =
+          transitive-leq-subtype (ax-k i) logic (logic ∪ theory)
+            ( subtype-union-left logic theory)
             ( contains-ax-k)
 
-        contains-ax-s' : ax-s i ⊆ theory
-        contains-ax-s' =
-          transitive-leq-subtype (ax-s i) logic theory
-            ( subset-logic-L-complete-theory)
+        contains-ax-s' :
+          {l5 : Level} (theory : modal-theory l5 i) → ax-s i ⊆ logic ∪ theory
+        contains-ax-s' theory =
+          transitive-leq-subtype (ax-s i) logic (logic ∪ theory)
+            ( subtype-union-left logic theory)
             ( contains-ax-s)
 
-        contains-ax-dn' : ax-dn i ⊆ theory
-        contains-ax-dn' =
-          transitive-leq-subtype (ax-dn i) logic theory
-            ( subset-logic-L-complete-theory)
-            ( contains-ax-dn)
+        L-union-deduction-lemma :
+          (l : list (formula i)) →
+          (h a : formula i) →
+          is-in-subtype
+            ( weak-modal-logic-closure (logic ∪ list-subtype (cons h l))) a →
+          is-in-subtype
+            ( weak-modal-logic-closure (logic ∪ list-subtype l)) (h →ₘ a)
+        L-union-deduction-lemma l h a in-logic =
+          forward-implication
+            ( deduction-lemma
+              ( logic ∪ list-subtype l)
+              ( contains-ax-k' (list-subtype l))
+              ( contains-ax-s' (list-subtype l))
+              ( h)
+              ( a))
+            ( weak-modal-logic-closure-monotic
+              ( transitive-leq-subtype
+                ( logic ∪ list-subtype (cons h l))
+                ( logic ∪ theory-add-formula h (list-subtype l))
+                ( theory-add-formula h (logic ∪ list-subtype l))
+                ( theory-add-formula-union-right h logic (list-subtype l))
+                ( subset-union-subset-right
+                  ( logic)
+                  ( list-subtype (cons h l))
+                  ( theory-add-formula h (list-subtype l))
+                  ( backward-subset-head-add h l)))
+              ( a)
+              ( in-logic))
 
-      is-L-consistent-add-formula-not-in-logic :
+      in-chain-in-chain-union-assumptions :
+        is-inhabited (type-chain-Poset P C) →
+        (l : list (formula i)) →
+        list-subtype l ⊆ chain-union-modal-theory →
         {a : formula i} →
-        ¬ (is-in-subtype theory a) →
-        is-L-consistent-theory (theory-add-formula (~ a) theory)
-      is-L-consistent-add-formula-not-in-logic {a} not-in-logic bot-in-logic =
-        not-in-logic
-          ( weak-modal-logic-mp theory
-            ( is-weak-modal-logic-L-complete-theory)
-            ( contains-ax-dn' (~~ a →ₘ a) (a , refl))
-            ( is-weak-modal-logic-L-complete-theory (~~ a)
-              ( forward-implication
-                ( deduction-lemma
-                  ( theory)
-                  ( contains-ax-k')
-                  ( contains-ax-s')
-                  ( ~ a)
-                  ( ⊥))
-                ( weak-modal-logic-closure-monotic
-                  ( subtype-union-both logic (theory-add-formula (~ a) theory)
-                    ( theory-add-formula (~ a) theory)
-                    ( transitive-leq-subtype
+        is-in-subtype (weak-modal-logic-closure (logic ∪ list-subtype l)) a →
+        exists-chain-element-with-formula a
+      in-chain-in-chain-union-assumptions is-inh nil leq {a} in-logic =
+        apply-universal-property-trunc-Prop
+          ( is-inh)
+          ( exists-chain-element-with-formula-Prop a)
+          ( λ x →
+            ( intro-∃ x
+              ( weak-modal-logic-closure-monotic
+                ( subtype-union-both logic (list-subtype nil)
+                  ( logic ∪ modal-theory-chain-element x)
+                  ( subtype-union-left logic (modal-theory-chain-element x))
+                  ( subset-list-subtype-nil
+                    ( logic ∪ modal-theory-chain-element x)))
+                ( a)
+                ( in-logic))))
+      in-chain-in-chain-union-assumptions is-inh (cons h l) leq {a} in-logic =
+        apply-twice-universal-property-trunc-Prop
+          ( leq h (head-in-list-subtype))
+          ( in-chain-in-chain-union-assumptions is-inh l
+            ( transitive-leq-subtype
+              ( list-subtype l)
+              ( list-subtype (cons h l))
+              ( chain-union-modal-theory)
+              ( leq)
+              ( subset-tail-list-subtype))
+            ( L-union-deduction-lemma l h a in-logic))
+          ( exists-chain-element-with-formula-Prop a)
+          ( λ (x , h-in-x) (y , ha-in-y) →
+            ( elim-disjunction-Prop
+              ( leq-Poset-Prop P
+                ( type-Poset-type-chain-Poset P C x)
+                ( type-Poset-type-chain-Poset P C y))
+              ( leq-Poset-Prop P
+                ( type-Poset-type-chain-Poset P C y)
+                ( type-Poset-type-chain-Poset P C x))
+              ( exists-chain-element-with-formula-Prop a)
+              ( pair
+                ( λ x-leq-y →
+                  ( intro-∃ y
+                    ( weak-modal-logic-closure-mp
+                      ( ha-in-y)
+                      ( leq-L-union x y x-leq-y h
+                        ( theory-subset-L-union x h h-in-x)))))
+                ( λ y-leq-x →
+                  ( intro-∃ x
+                    ( weak-modal-logic-closure-mp
+                      ( leq-L-union y x y-leq-x (h →ₘ a) ha-in-y)
+                      ( theory-subset-L-union x h h-in-x)))))
+              ( is-chain-Subposet-chain-Poset P C x y)))
+
+      in-chain-in-chain-union :
+        is-inhabited (type-chain-Poset P C) →
+        {a : formula i} →
+        is-in-subtype
+          ( weak-modal-logic-closure (logic ∪ chain-union-modal-theory))
+          ( a) →
+        exists-chain-element-with-formula a
+      in-chain-in-chain-union is-inh {a} =
+        map-universal-property-trunc-Prop
+          ( exists-chain-element-with-formula-Prop a)
+          ( λ d →
+            ( apply-universal-property-trunc-Prop
+              ( lists-in-union-lists
+                ( list-assumptions-weak-deduction d)
+                ( logic)
+                ( chain-union-modal-theory)
+                ( subset-theory-list-assumptions-weak-deduction d))
+              ( exists-chain-element-with-formula-Prop a)
+              ( λ ((logic-l , theory-l) , leq-lists , leq-logic , leq-theory) →
+                ( in-chain-in-chain-union-assumptions is-inh theory-l leq-theory
+                  ( weak-modal-logic-closure-monotic
+                    {ax₁ = list-subtype logic-l ∪ list-subtype theory-l}
+                    ( subset-union-subset-left
+                      ( list-subtype logic-l)
                       ( logic)
-                      ( theory)
-                      ( theory-add-formula (~ a) theory)
-                      ( subset-add-formula (~ a) theory)
-                      ( subset-logic-L-complete-theory))
-                    ( refl-leq-subtype (theory-add-formula (~ a) theory)))
-                  ( ⊥)
-                  ( bot-in-logic)))))
+                      ( list-subtype theory-l)
+                      ( leq-logic))
+                    ( a)
+                    ( weak-modal-logic-closure-monotic leq-lists a
+                      ( is-in-weak-deduction-closure-weak-deduction
+                        ( is-assumptions-list-assumptions-weak-deduction
+                          ( d)))))))))
 
-      contains-negation-not-contains-formula-L-complete-theory :
-        {a : formula i} →
-        ¬ (is-in-subtype theory a) →
-        is-in-subtype theory (~ a)
-      contains-negation-not-contains-formula-L-complete-theory {a} not-in-logic =
-          tr
-            ( λ t → is-in-subtype t (~ a))
-            ( eq-is-L-consistent-union-L-complete
-              {l3 = l3} {l4 = l1}
-              ( t)
-              ( Id-formula-Prop (~ a))
-              ( is-L-consistent-add-formula-not-in-logic not-in-logic))
-            ( formula-in-add-formula (~ a) theory)
+      is-L-consistent-theory-chain-union-modal-theory :
+        is-inhabited (type-chain-Poset P C) →
+        is-L-consistent-theory logic chain-union-modal-theory
+      is-L-consistent-theory-chain-union-modal-theory is-inh in-logic =
+        apply-universal-property-trunc-Prop
+          ( in-chain-in-chain-union is-inh in-logic)
+          ( empty-Prop)
+          ( λ (x , in-logic') →
+            ( is-L-consistent-theory-modal-theory-L-consistent-theory
+              ( logic)
+              ( type-Poset-type-chain-Poset P C x)
+              ( in-logic')))
 
-      is-disjuctive-L-complete-theory :
-        LEM (l1 ⊔ l2 ⊔ l3) →
-        is-disjuctive-modal-theory theory
-      is-disjuctive-L-complete-theory lem a with lem (theory a)
-      ... | inl a-in-logic = inl a-in-logic
-      ... | inr a-not-in-logic =
-        inr
-          ( contains-negation-not-contains-formula-L-complete-theory
-            ( a-not-in-logic))
+  module _
+    {l3 l4 : Level}
+    (prop-resize : propositional-resizing l3 (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4))
+    where
+
+    private
+      P : Poset (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3)
+      P = L-consistent-theories-Poset logic l3
+
+    resized-chain-union-modal-theory :
+      chain-Poset l4 P →
+      modal-theory l3 i
+    resized-chain-union-modal-theory C =
+      resize prop-resize ∘ chain-union-modal-theory C
+
+    equiv-resized-chain-union-modal-theory :
+      (C : chain-Poset l4 P) →
+      equiv-subtypes
+        (resized-chain-union-modal-theory C)
+        (chain-union-modal-theory C)
+    equiv-resized-chain-union-modal-theory C a =
+      is-equiv-resize prop-resize (chain-union-modal-theory C a)
+
+    module _
+      (contains-ax-k : ax-k i ⊆ logic)
+      (contains-ax-s : ax-s i ⊆ logic)
+      where
+
+      is-L-consistent-resized-chain-union-modal-theory :
+        (C : chain-Poset l4 P) →
+        is-inhabited (type-chain-Poset P C) →
+        is-L-consistent-theory logic (resized-chain-union-modal-theory C)
+      is-L-consistent-resized-chain-union-modal-theory C is-inh =
+        is-L-consistent-antimonotic logic
+          ( resized-chain-union-modal-theory C)
+          ( chain-union-modal-theory C)
+          ( subset-equiv-subtypes
+            ( resized-chain-union-modal-theory C)
+            ( chain-union-modal-theory C)
+            ( equiv-resized-chain-union-modal-theory C))
+          ( is-L-consistent-theory-chain-union-modal-theory C
+            ( contains-ax-k)
+            ( contains-ax-s)
+            ( is-inh))
+
+      resized-chain-union-L-consistent-theory :
+        (C : chain-Poset l4 P) →
+        is-inhabited (type-chain-Poset P C) →
+        L-consistent-theory logic l3
+      pr1 (resized-chain-union-L-consistent-theory C is-inh) =
+        resized-chain-union-modal-theory C
+      pr2 (resized-chain-union-L-consistent-theory C is-inh) =
+        is-L-consistent-resized-chain-union-modal-theory C is-inh
+
+      union-is-chain-upper-bound :
+        (C : chain-Poset l4 P) →
+        (is-inh : is-inhabited (type-chain-Poset P C)) →
+        is-chain-upper-bound P C
+          ( resized-chain-union-L-consistent-theory C is-inh)
+      union-is-chain-upper-bound C is-inh x =
+        transitive-leq-subtype
+          ( modal-theory-L-consistent-theory logic
+            ( type-Poset-type-chain-Poset
+              ( L-consistent-theories-Poset logic l3)
+              ( C)
+              ( x)))
+          ( chain-union-modal-theory C)
+          ( resized-chain-union-modal-theory C)
+          ( inv-subset-equiv-subtypes
+            ( resized-chain-union-modal-theory C)
+            ( chain-union-modal-theory C)
+            ( equiv-resized-chain-union-modal-theory C))
+          ( λ a in-theory → intro-∃ x in-theory)
+
+      extend-L-consistent-theory :
+        (zorn : Zorn-non-empty (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3) l4) →
+        is-inhabited (L-consistent-theory logic l3) →
+        is-inhabited (L-complete-theory l3)
+      extend-L-consistent-theory zorn is-inh =
+        ( is-inhabited-L-complete-exists-complete-L-consistent-theory
+          ( zorn
+            ( L-consistent-theories-Poset logic l3)
+            ( is-inh)
+            ( λ C C-is-inh →
+              ( intro-∃
+                ( resized-chain-union-L-consistent-theory C C-is-inh)
+                ( union-is-chain-upper-bound C C-is-inh)))))
+
+module _
+  {l1 : Level} {i : Set l1}
+  {l2 l3 : Level}
+  (logic₁ : modal-theory l2 i)
+  (logic₂ : modal-theory l3 i)
+  (theory : modal-theory (l1 ⊔ l2 ⊔ l3) i)
+  (is-cons₁ : is-L-consistent-theory logic₁ theory)
+  (is-cons₂ : is-L-consistent-theory logic₂ theory)
+  where
+
+  universal-L-complete-theory :
+    is-L-complete-theory logic₁ (theory , is-cons₁) →
+    is-L-complete-theory logic₂ (theory , is-cons₂)
+  universal-L-complete-theory is-comp (theory' , is-cons') leq =
+    eq-pair-Σ
+      ( equational-proof)
+      ( eq-is-prop
+        ( is-prop-type-Prop (is-L-consistent-theory-Prop logic₂ theory)))
+    where
+    complete-theory : L-complete-theory logic₁ (l1 ⊔ l2 ⊔ l3)
+    complete-theory = (theory , is-cons₁) , is-comp
+
+    equational-proof : theory' ＝ theory
+    equational-proof =
+      equational-reasoning
+      theory'
+      ＝ theory' ∪ theory
+        by inv (eq-union-subset-right theory' theory leq)
+      ＝ theory
+        by eq-is-consistent-union-L-complete logic₁ complete-theory theory'
+          ( is-consistent-modal-logic-antimonotic
+            ( weak-modal-logic-closure (theory' ∪ theory))
+            ( weak-modal-logic-closure theory')
+            ( weak-modal-logic-closure-monotic
+              ( subtype-union-both theory' theory theory'
+                ( refl-leq-subtype theory')
+                ( leq)))
+            ( is-consistent-modal-theory-L-consistent-theory logic₂
+              ( theory' , is-cons')))
 ```

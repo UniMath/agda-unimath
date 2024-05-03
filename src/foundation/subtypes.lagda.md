@@ -144,6 +144,19 @@ module _
   {l1 : Level} {A : UU l1}
   where
 
+  antisymmetric-leq-subtype :
+    {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → P ＝ Q
+  antisymmetric-leq-subtype P Q H K =
+    eq-has-same-elements-subtype P Q (λ x → (H x , K x))
+```
+
+### TODO: equiv subtypes
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
   --- TODO: replace with equiv-fam
   equiv-subtypes :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
@@ -155,8 +168,8 @@ module _
   inv-equiv-subtypes P Q e x = inv-equiv (e x)
 
   equiv-antisymmetric-leq-subtype :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
-    equiv-subtypes P Q
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
+    P ⊆ Q → Q ⊆ P → equiv-subtypes P Q
   equiv-antisymmetric-leq-subtype P Q H K x =
     equiv-iff-is-prop
       ( is-prop-is-in-subtype P x)
@@ -164,10 +177,16 @@ module _
       ( H x)
       ( K x)
 
-  antisymmetric-leq-subtype :
-    {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → P ＝ Q
-  antisymmetric-leq-subtype P Q H K =
-    eq-has-same-elements-subtype P Q (λ x → (H x , K x))
+  subset-equiv-subtypes :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
+    equiv-subtypes P Q → P ⊆ Q
+  subset-equiv-subtypes P Q e x = map-equiv (e x)
+
+  inv-subset-equiv-subtypes :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
+    equiv-subtypes P Q → Q ⊆ P
+  inv-subset-equiv-subtypes P Q =
+    subset-equiv-subtypes Q P ∘ inv-equiv-subtypes P Q
 ```
 
 ### The type of all subtypes of a type is a set

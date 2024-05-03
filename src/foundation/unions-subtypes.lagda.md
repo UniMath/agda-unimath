@@ -276,4 +276,24 @@ module _
     ( union-subtype P P)
     ( subtype-union-left P P)
     ( subtype-union-same)
+
+module _
+  {l1 l2 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l2 X)
+  where
+
+  eq-union-subset-left : P ⊆ Q → P ∪ Q ＝ Q
+  eq-union-subset-left P-sub-Q =
+    antisymmetric-leq-subtype
+      ( P ∪ Q)
+      ( Q)
+      ( subtype-union-both P Q Q P-sub-Q (refl-leq-subtype Q))
+      ( subtype-union-right P Q)
+
+  eq-union-subset-right : Q ⊆ P → P ∪ Q ＝ P
+  eq-union-subset-right Q-sub-P =
+    antisymmetric-leq-subtype
+      ( P ∪ Q)
+      ( P)
+      ( subtype-union-both P Q P (refl-leq-subtype P) Q-sub-P)
+      ( subtype-union-left P Q)
 ```

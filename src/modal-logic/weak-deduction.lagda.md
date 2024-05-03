@@ -30,6 +30,7 @@ open import foundation-core.negation
 
 open import lists.concatenation-lists
 open import lists.lists
+open import lists.lists-subtypes
 open import lists.reversing-lists
 
 open import modal-logic.axioms
@@ -45,7 +46,7 @@ TODO
 
 ## Definition
 
-```agda
+````agda
 module _
   {l1 l2 : Level} {i : Set l1}
   where
@@ -123,18 +124,26 @@ module _
 
   ind-weak-deduction :
     {l : Level} {axioms : modal-theory l2 i}
-    {P : {a : formula i} → axioms ⊢w a → UU l} →
+    (P : {a : formula i} → axioms ⊢w a → UU l) →
     ( {a : formula i} (in-axioms : is-in-subtype axioms a) →
       P (weak-deduction-ax in-axioms)) →
-    ( {a b : formula i} {dab : axioms ⊢w a →ₘ b} {da : axioms ⊢w a} →
+    ( {a b : formula i} (dab : axioms ⊢w a →ₘ b) (da : axioms ⊢w a) →
       P dab → P da → P (weak-deduction-mp dab da)) →
     {a : formula i} (wd : axioms ⊢w a) → P wd
-  ind-weak-deduction H-ax H-mp (ax in-axioms , _) =
+  ind-weak-deduction P H-ax H-mp (ax in-axioms , _) =
     H-ax in-axioms
-  ind-weak-deduction {P = P} H-ax H-mp (mp dba db , is-w-dba , is-w-db) =
-    H-mp
-      ( ind-weak-deduction {P = P} H-ax H-mp (dba , is-w-dba))
-      ( ind-weak-deduction {P = P} H-ax H-mp (db , is-w-db))
+  ind-weak-deduction P H-ax H-mp (mp dba db , is-w-dba , is-w-db) =
+    H-mp _ _
+      ( ind-weak-deduction P H-ax H-mp (dba , is-w-dba))
+      ( ind-weak-deduction P H-ax H-mp (db , is-w-db))
+
+  rec-weak-deduction :
+    {l : Level} {axioms : modal-theory l2 i} {P : UU l} →
+    ( {a : formula i} (in-axioms : is-in-subtype axioms a) → P) →
+    ( {a b : formula i} (dab : axioms ⊢w a →ₘ b) (da : axioms ⊢w a) →
+      P → P → P) →
+    {a : formula i} (wd : axioms ⊢w a) → P
+  rec-weak-deduction {P = P} = ind-weak-deduction (λ _ → P)
 
   weak-modal-logic-closure : modal-theory l2 i → modal-theory (l1 ⊔ l2) i
   weak-modal-logic-closure axioms a = trunc-Prop (axioms ⊢w a)
@@ -153,7 +162,7 @@ module _
   is-in-weak-deduction-closure-weak-deduction = unit-trunc-Prop
 
 module _
-  {l1 l2 : Level} {i : Set l1} (axioms : modal-theory l2 i)
+  {l1 l2 : Level} {i : Set l1} {axioms : modal-theory l2 i}
   where
 
   weak-modal-logic-closure-ax :
@@ -177,7 +186,8 @@ module _
 
 module _
   {l1 l2 : Level} {i : Set l1}
-  (theory : modal-theory l2 i) (is-w : is-weak-modal-logic theory)
+  {theory : modal-theory l2 i}
+  (is-w : is-weak-modal-logic theory)
   where
 
   weak-modal-logic-mp :
@@ -187,9 +197,9 @@ module _
     is-in-subtype theory b
   weak-modal-logic-mp {a} {b} dab da =
     is-w b
-      ( weak-modal-logic-closure-mp theory
-        ( weak-modal-logic-closure-ax theory dab)
-        ( weak-modal-logic-closure-ax theory da))
+      ( weak-modal-logic-closure-mp
+        ( weak-modal-logic-closure-ax dab)
+        ( weak-modal-logic-closure-ax da))
 
 module _
   {l1 l2 : Level} {i : Set l1} {axioms : modal-theory l2 i}
@@ -199,10 +209,10 @@ module _
     {a : formula i} → weak-modal-logic-closure axioms ⊢w a →
     is-in-subtype (weak-modal-logic-closure axioms) a
   weak-modal-logic-closed =
-    ind-weak-deduction
+    ind-weak-deduction _
       ( λ in-axioms → in-axioms)
-      ( λ in-logic-ab in-logic-a →
-        ( weak-modal-logic-closure-mp axioms in-logic-ab in-logic-a))
+      ( λ _ _ in-logic-ab in-logic-a →
+        ( weak-modal-logic-closure-mp in-logic-ab in-logic-a))
 
   is-weak-modal-logic-weak-modal-logic-closure :
     is-weak-modal-logic (weak-modal-logic-closure axioms)
@@ -211,24 +221,8 @@ module _
       ( weak-modal-logic-closure axioms a)
       ( weak-modal-logic-closed)
 
-  -- weak-modal-logic-closure-closed :
-  --   is-weak-modal-logic axioms →
-  --   weak-modal-logic-closure axioms ⊆ axioms
-  -- weak-modal-logic-closure-closed is-logic a =
-  --   map-universal-property-trunc-Prop (axioms a) is-logic
-
--- module _
---   {l1 l2 : Level} {i : Set l1} {axioms : modal-theory l2 i}
---   where
-
   subset-axioms-weak-modal-logic : axioms ⊆ weak-modal-logic-closure axioms
-  subset-axioms-weak-modal-logic a = weak-modal-logic-closure-ax axioms
-
---   subset-double-weak-modal-logic-closure :
---     weak-modal-logic-closure (weak-modal-logic-closure axioms) ⊆
---       weak-modal-logic-closure axioms
---   subset-double-weak-modal-logic-closure =
---     weak-modal-logic-closure-closed is-weak-modal-logic-weak-modal-logic-closure
+  subset-axioms-weak-modal-logic a = weak-modal-logic-closure-ax
 
 module _
   {l1 l2 l3 : Level} {i : Set l1}
@@ -239,16 +233,16 @@ module _
 
   weak-deduction-monotic : {a : formula i} → ax₁ ⊢w a → ax₂ ⊢w a
   weak-deduction-monotic =
-    ind-weak-deduction
+    ind-weak-deduction _
       ( λ {a} in-axioms → weak-deduction-ax (leq a in-axioms))
-      ( λ dab da → weak-deduction-mp dab da)
+      ( λ _ _ dab da → weak-deduction-mp dab da)
 
   weak-modal-logic-closure-monotic :
     weak-modal-logic-closure ax₁ ⊆ weak-modal-logic-closure ax₂
   weak-modal-logic-closure-monotic a =
     map-universal-property-trunc-Prop
       ( weak-modal-logic-closure ax₂ a)
-      ( unit-trunc-Prop ∘ weak-deduction-monotic)
+      ( is-in-weak-deduction-closure-weak-deduction ∘ weak-deduction-monotic)
 
 module _
   {l1 l2 l3 : Level} {i : Set l1}
@@ -268,9 +262,21 @@ module _
       ( weak-modal-logic-closure-monotic leq)
 
 module _
+  {l1 : Level} {i : Set l1}
+  where
+
+  backward-subset-head-add :
+    (a : formula i) (l : list (formula i)) →
+    list-subtype (cons a l) ⊆ theory-add-formula a (list-subtype l)
+  backward-subset-head-add a l =
+    subset-list-subtype-cons
+      ( theory-add-formula a (list-subtype l))
+      ( formula-in-add-formula a (list-subtype l))
+      ( subset-add-formula a (list-subtype l))
+
+module _
   {l1 l2 : Level} {i : Set l1}
   (axioms : modal-theory l2 i)
-  -- (is-w : is-weak-modal-logic logic)
   where
 
   backward-deduction-lemma :
@@ -304,22 +310,22 @@ module _
       theory-add-formula a axioms ⊢w b →
       is-in-subtype (weak-modal-logic-closure axioms) (a →ₘ b)
     forward-deduction-lemma a =
-      ind-weak-deduction
+      ind-weak-deduction _
         ( λ {b} b-in-axioms →
           ( elim-theory-add-formula a axioms
             ( λ x → weak-modal-logic-closure axioms (a →ₘ x))
             ( is-in-weak-deduction-closure-weak-deduction (deduction-a->a a))
             ( λ x x-in-axioms →
-              ( weak-modal-logic-closure-mp axioms
-                ( weak-modal-logic-closure-ax axioms
+              ( weak-modal-logic-closure-mp
+                ( weak-modal-logic-closure-ax
                   ( contains-ax-k (x →ₘ a →ₘ x) (x , a , refl)))
-                ( weak-modal-logic-closure-ax axioms x-in-axioms)))
+                ( weak-modal-logic-closure-ax x-in-axioms)))
             ( b)
             ( b-in-axioms)))
-        ( λ {b} {c} dabc dab →
-          ( weak-modal-logic-closure-mp axioms
-            ( weak-modal-logic-closure-mp axioms
-              ( weak-modal-logic-closure-ax axioms
+        ( λ {b} {c} _ _ dabc dab →
+          ( weak-modal-logic-closure-mp
+            ( weak-modal-logic-closure-mp
+              ( weak-modal-logic-closure-ax
                 ( contains-ax-s _ (a , b , c , refl)))
               ( dabc))
             ( dab)))
@@ -337,50 +343,74 @@ module _
         ( weak-modal-logic-closure (theory-add-formula a axioms) b)
         ( is-in-weak-deduction-closure-weak-deduction ∘
           backward-deduction-lemma)
+```
 
---   module _
---     -- TODO: maybe just in axioms?
---     (contains-ax-k : ax-k i ⊆ weak-modal-logic axioms)
---     (contains-ax-s : ax-s i ⊆ weak-modal-logic axioms)
---     where
+### TODO: List of assumptions
 
---     forward-deduction-lemma :
---       (a : formula i) {b : formula i} →
---       theory-add-formula a axioms ▷ b →
---       is-in-subtype (weak-modal-logic axioms) (a →ₘ b)
---     forward-deduction-lemma a {b} (w-ax x) =
---       elim-disjunction-Prop
---         ( Id-formula-Prop a b)
---         ( axioms b)
---         ( (weak-modal-logic axioms) (a →ₘ b))
---         ( (λ { refl → deduction-a->a a})
---         , (λ in-axioms →
---             ( apply-universal-property-trunc-Prop
---               ( contains-ax-k _ (b , a , refl))
---               ( (weak-modal-logic axioms) (a →ₘ b))
---               ( λ x → unit-trunc-Prop (w-mp x (w-ax in-axioms))))))
---         ( x)
---     forward-deduction-lemma a {b} (w-mp {c} twdcb twdc) =
---       apply-three-times-universal-property-trunc-Prop
---         ( forward-deduction-lemma a twdcb)
---         ( forward-deduction-lemma a twdc)
---         ( contains-ax-s _ (a , c , b , refl))
---         ( (weak-modal-logic axioms) (a →ₘ b))
---         ( λ wdacb wdac x →
---           ( unit-trunc-Prop (w-mp (w-mp x wdacb) wdac)))
+```agda
+module _
+  {l1 : Level} {i : Set l1}
+  where
 
---     deduction-lemma :
---       (a b : formula i) →
---       weak-modal-logic (theory-add-formula a axioms) b ⇔
---         weak-modal-logic axioms (a →ₘ b)
---     pr1 (deduction-lemma a b) =
---       map-universal-property-trunc-Prop
---         ( (weak-modal-logic axioms) (a →ₘ b))
---         ( forward-deduction-lemma a)
---     pr2 (deduction-lemma a b) =
---       map-universal-property-trunc-Prop
---         ( weak-modal-logic (theory-add-formula a axioms) b)
---         ( backward-deduction-lemma)
+  list-assumptions-weak-deduction :
+    {l2 : Level} {theory : modal-theory l2 i} {a : formula i} →
+    theory ⊢w a → list (formula i)
+  list-assumptions-weak-deduction =
+    rec-weak-deduction
+      ( λ {a} _ → cons a nil)
+      ( λ _ _ l1 l2 → concat-list l1 l2)
+
+  subset-theory-list-assumptions-weak-deduction :
+    {l2 : Level} {theory : modal-theory l2 i} {a : formula i} →
+    (d : theory ⊢w a) →
+    list-subtype (list-assumptions-weak-deduction d) ⊆ theory
+  subset-theory-list-assumptions-weak-deduction {theory = theory} =
+    ind-weak-deduction
+      ( λ d → list-subtype (list-assumptions-weak-deduction d) ⊆ theory)
+      ( λ {a} in-axioms →
+        ( subset-list-subtype-cons theory in-axioms
+          ( subset-list-subtype-nil theory)))
+      ( λ dab da sub1 sub2 →
+        ( transitive-leq-subtype
+          ( list-subtype
+            ( concat-list
+              ( list-assumptions-weak-deduction dab)
+              ( list-assumptions-weak-deduction da)))
+          ( list-subtype (list-assumptions-weak-deduction dab) ∪
+              list-subtype (list-assumptions-weak-deduction da))
+          ( theory)
+          ( subtype-union-both
+            ( list-subtype (list-assumptions-weak-deduction dab))
+            ( list-subtype (list-assumptions-weak-deduction da))
+            ( theory)
+            ( sub1)
+            ( sub2))
+          ( subset-list-subtype-concat-union)))
+
+  is-assumptions-list-assumptions-weak-deduction :
+    {l2 : Level} {theory : modal-theory l2 i} {a : formula i} →
+    (d : theory ⊢w a) →
+    list-subtype (list-assumptions-weak-deduction d) ⊢w a
+  is-assumptions-list-assumptions-weak-deduction {theory = theory} =
+    ind-weak-deduction
+      ( λ {a} d → list-subtype (list-assumptions-weak-deduction d) ⊢w a)
+      ( λ _ → weak-deduction-ax head-in-list-subtype)
+      ( λ dab da rab ra →
+        ( weak-deduction-monotic
+          {ax₁ = list-subtype (list-assumptions-weak-deduction dab) ∪
+            list-subtype (list-assumptions-weak-deduction da)}
+          ( subset-list-subtype-union-concat)
+          ( weak-deduction-mp
+            ( weak-deduction-monotic
+              ( subtype-union-left
+                ( list-subtype (list-assumptions-weak-deduction dab))
+                ( list-subtype (list-assumptions-weak-deduction da)))
+              ( rab))
+            ( weak-deduction-monotic
+              ( subtype-union-right
+                ( list-subtype (list-assumptions-weak-deduction dab))
+                ( list-subtype (list-assumptions-weak-deduction da)))
+              ( ra)))))
 ```
 
 ### Old definition
@@ -1014,3 +1044,4 @@ module _
 --         ( (weak-modal-logic axioms) b)
 --         ( λ x y z → unit-trunc-Prop (w-mp (w-mp z y) x))
 ```
+````

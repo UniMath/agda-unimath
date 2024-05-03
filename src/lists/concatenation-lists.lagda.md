@@ -172,3 +172,22 @@ tail-concat-list' (cons a nil) y = refl
 tail-concat-list' (cons a (cons b x)) y =
   ap (cons b) (tail-concat-list' (cons b x) y)
 ```
+
+### TODO: Concats
+
+```agda
+in-concat-left :
+  {l : Level} {A : UU l} (l1 l2 : list A)
+  {a : A} → a ∈-list l1 → a ∈-list (concat-list l1 l2)
+in-concat-left _ _ (is-head a _) =
+  is-head a _
+in-concat-left _ l2 (is-in-tail a x l1 in-l1) =
+  is-in-tail a x (concat-list l1 l2) (in-concat-left l1 l2 in-l1)
+
+in-concat-right :
+  {l : Level} {A : UU l} (l1 l2 : list A)
+  {a : A} → a ∈-list l2 → a ∈-list (concat-list l1 l2)
+in-concat-right nil l2 in-l2 = in-l2
+in-concat-right (cons x l1) l2 in-l2 =
+  is-in-tail _ x (concat-list l1 l2) (in-concat-right l1 l2 in-l2)
+```

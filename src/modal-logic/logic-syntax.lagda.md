@@ -56,19 +56,16 @@ module _
     mp : {a b : formula i} → axioms ⊢ a →ₘ b → axioms ⊢ a → axioms ⊢ b
     nec : {a : formula i} → axioms ⊢ a → axioms ⊢ □ a
 
-  is-modal-logic-Prop : modal-theory l2 i → Prop (l1 ⊔ l2)
-  is-modal-logic-Prop theory =
-    implicit-Π-Prop (formula i) (λ a → function-Prop (theory ⊢ a) (theory a))
-
-  is-modal-logic : modal-theory l2 i → UU (l1 ⊔ l2)
-  is-modal-logic = type-Prop ∘ is-modal-logic-Prop
-
-  T-modal-logic : UU (l1 ⊔ lsuc l2)
-  T-modal-logic = Σ (modal-theory l2 i) is-modal-logic
-
   -- TODO: rename to modal-logic-closure
   modal-logic : modal-theory l2 i → modal-theory (l1 ⊔ l2) i
   modal-logic axioms a = trunc-Prop (axioms ⊢ a)
+
+  is-modal-logic-Prop : modal-theory l2 i → Prop (l1 ⊔ l2)
+  is-modal-logic-Prop theory =
+    leq-prop-subtype (modal-logic theory) theory
+
+  is-modal-logic : modal-theory l2 i → UU (l1 ⊔ l2)
+  is-modal-logic = type-Prop ∘ is-modal-logic-Prop
 
   is-contradictory-modal-logic-Prop : modal-theory l2 i → Prop l2
   is-contradictory-modal-logic-Prop logic = logic ⊥
@@ -139,19 +136,14 @@ module _
   axioms-subset-modal-logic _ a H = unit-trunc-Prop (ax H)
 
   modal-logic-closed :
-    {l2 : Level} {axioms : formulas l2 i} → is-modal-logic (modal-logic axioms)
+    {l2 : Level} {axioms : formulas l2 i} {a : formula i} →
+    modal-logic axioms ⊢ a →
+    is-in-subtype (modal-logic axioms) a
   modal-logic-closed (ax x) = x
-  modal-logic-closed {axioms = axioms} {a} (mp tdab tda) =
-    apply-twice-universal-property-trunc-Prop
-      ( modal-logic-closed tdab)
-      ( modal-logic-closed tda)
-      ( modal-logic axioms a)
-      ( λ dab da → unit-trunc-Prop (mp dab da))
-  modal-logic-closed {axioms = axioms} {a} (nec d) =
-    apply-universal-property-trunc-Prop
-      ( modal-logic-closed d)
-      ( modal-logic axioms a)
-      ( unit-trunc-Prop ∘ nec)
+  modal-logic-closed (mp dab da) =
+    modal-logic-mp (modal-logic-closed dab) (modal-logic-closed da)
+  modal-logic-closed (nec d) =
+    modal-logic-nec (modal-logic-closed d)
 
   subset-double-modal-logic :
     {l2 : Level}
@@ -256,4 +248,14 @@ module _
       theory-add-formula a (theory ∪ theory')
   theory-add-formula-union-right a theory theory' =
     union-swap-1-2 theory (Id-formula-Prop a) theory'
+
+  inv-theory-add-formula-union-right :
+    (a : formula i)
+    {l2 l3 : Level}
+    (theory : formulas l2 i)
+    (theory' : formulas l3 i) →
+    theory-add-formula a (theory ∪ theory') ⊆
+      theory ∪ theory-add-formula a theory'
+  inv-theory-add-formula-union-right a theory theory' =
+    union-swap-1-2 (Id-formula-Prop a) theory theory'
 ```
