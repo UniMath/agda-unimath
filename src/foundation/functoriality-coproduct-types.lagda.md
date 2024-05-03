@@ -231,6 +231,31 @@ module _
   pr1 (equiv-coproduct e e') = map-equiv-coproduct e e'
   pr2 (equiv-coproduct e e') =
     is-equiv-map-coproduct (is-equiv-map-equiv e) (is-equiv-map-equiv e')
+
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  where
+
+  compute-map-inv-equiv-coproduct :
+    (e : A ≃ A') (e' : B ≃ B') →
+    ( map-inv-equiv (equiv-coproduct e e')) ~
+    ( map-equiv-coproduct (inv-equiv e) (inv-equiv e'))
+  compute-map-inv-equiv-coproduct e e' x =
+    is-injective-equiv
+      ( equiv-coproduct e e')
+      ( is-section-map-inv-equiv (equiv-coproduct e e') x ∙
+      ( inv (id-map-coproduct A' B' x)) ∙
+      ( inv
+        ( htpy-map-coproduct
+          ( is-section-map-inv-equiv e)
+          ( is-section-map-inv-equiv e')
+          ( x))) ∙
+      ( preserves-comp-map-coproduct
+        ( map-inv-equiv e)
+        ( map-equiv e)
+        ( map-inv-equiv e')
+        ( map-equiv e')
+        ( x)))
 ```
 
 ### Functoriality of coproducts preserves being surjective

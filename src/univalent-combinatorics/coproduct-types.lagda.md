@@ -14,11 +14,14 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.type-arithmetic-coproduct-types
@@ -69,6 +72,30 @@ inr-coproduct-Fin k l = map-coproduct-Fin k l ∘ inr
 compute-inl-coproduct-Fin :
   (k : ℕ) → inl-coproduct-Fin k 0 ~ id
 compute-inl-coproduct-Fin k x = refl
+
+map-Fin-add-ℕ :
+  (k l : ℕ) → Fin (k +ℕ l) → Fin k + Fin l
+map-Fin-add-ℕ k zero-ℕ = inl
+map-Fin-add-ℕ k (succ-ℕ l) =
+  ( map-equiv (associative-coproduct {A = Fin k} {B = Fin l})) ∘
+  ( map-coproduct (map-Fin-add-ℕ k l) id)
+
+compute-map-Fin-add-ℕ :
+  (k l : ℕ) → map-equiv (Fin-add-ℕ k l) ~ map-Fin-add-ℕ k l
+compute-map-Fin-add-ℕ k zero-ℕ x = refl
+compute-map-Fin-add-ℕ k (succ-ℕ l) x =
+  ( htpy-eq
+    ( distributive-map-inv-comp-equiv
+      ( inv-associative-coproduct)
+      ( equiv-coproduct (coproduct-Fin k l) id-equiv))
+    ( x)) ∙
+  ( htpy-eq-equiv
+    ( inv-inv-equiv associative-coproduct)
+    ( map-inv-equiv (equiv-coproduct (coproduct-Fin k l) id-equiv) x)) ∙
+  ( ap
+    ( map-associative-coproduct)
+    ( ( compute-map-inv-equiv-coproduct (coproduct-Fin k l) (id-equiv) x) ∙
+    ( htpy-map-coproduct (compute-map-Fin-add-ℕ k l) refl-htpy x)))
 ```
 
 ### Inclusion of `coproduct-Fin` into the natural numbers
