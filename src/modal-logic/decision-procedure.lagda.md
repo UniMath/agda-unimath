@@ -177,7 +177,7 @@ module _
   subformulas-list a = cons a (rest a)
     where
     rest : modal-formula i → list (modal-formula i)
-    rest (var x) = nil
+    rest (varₘ x) = nil
     rest ⊥ₘ = nil
     rest (a →ₘ b) = concat-list (subformulas-list a) (subformulas-list b)
     rest (□ₘ a) = subformulas-list a

@@ -134,7 +134,7 @@ module _
     where
 
     is-modal-theory-has-subformulas-Prop : modal-formula i → Prop l2
-    is-modal-theory-has-subformulas-Prop (var _) = raise-unit-Prop l2
+    is-modal-theory-has-subformulas-Prop (varₘ _) = raise-unit-Prop l2
     is-modal-theory-has-subformulas-Prop ⊥ₘ = raise-unit-Prop l2
     is-modal-theory-has-subformulas-Prop (a →ₘ b) =
       product-Prop (theory a) (theory b)
@@ -166,7 +166,7 @@ module _
         is-in-subtype theory a) →
       is-modal-theory-closed-under-subformulas
     is-modal-theory-closed-under-subformulas-condition
-      h-impl h-box {var n} _ = raise-star
+      h-impl h-box {varₘ n} _ = raise-star
     is-modal-theory-closed-under-subformulas-condition
       h-impl h-box {⊥ₘ} _ = raise-star
     is-modal-theory-closed-under-subformulas-condition
@@ -324,7 +324,7 @@ module _
         ( λ n →
           ( Π-Prop (type-kripke-model i M)
             ( λ x → iff-Prop
-              ( product-Prop (theory (var n)) (valuate-kripke-model i M n x))
+              ( product-Prop (theory (varₘ n)) (valuate-kripke-model i M n x))
               ( valuate-kripke-model i M* n
                 ( map-equiv e (class Φ-equivalence x))))))
 
@@ -506,7 +506,7 @@ module _
     Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   minimal-kripke-model-filtration-valuate n x* =
     product-Prop
-      ( theory (var n))
+      ( theory (varₘ n))
       ( Π-Prop
         ( type-kripke-model i M)
         ( λ x →
@@ -593,7 +593,7 @@ module _
                   ( λ y eq-xy →
                     ( map-inv-raise
                       ( forward-implication
-                        ( eq-xy (var n) in-theory)
+                        ( eq-xy (varₘ n) in-theory)
                         ( map-raise val-n)))))))
             ( λ (in-theory , val-n) → in-theory , val-n x (λ _ _ → id , id)))
           ( proof-lower-bound)
@@ -665,7 +665,7 @@ module _
                     ( λ y eq-xy →
                       ( map-inv-raise
                         ( forward-implication
-                          ( eq-xy (var n) in-theory)
+                          ( eq-xy (varₘ n) in-theory)
                           ( map-raise val-n)))))))
               ( λ (in-theory , val-n) → in-theory , val-n x (λ _ _ → id , id)))
             ( λ x y r → unit-trunc-Prop (base* (proof-lower-bound x y r)))

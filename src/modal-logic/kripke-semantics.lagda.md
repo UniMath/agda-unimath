@@ -232,7 +232,7 @@ module _
     Σ (kripke-model l1 l2 i l4) (type-kripke-model i) →
     modal-formula i →
     Prop (l1 ⊔ l2 ⊔ l4)
-  (M , x) ⊨ var n = raise-Prop (l1 ⊔ l2) (valuate-kripke-model i M n x)
+  (M , x) ⊨ varₘ n = raise-Prop (l1 ⊔ l2) (valuate-kripke-model i M n x)
   (M , x) ⊨ ⊥ₘ = raise-empty-Prop (l1 ⊔ l2 ⊔ l4)
   (M , x) ⊨ a →ₘ b = hom-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
   (M , x) ⊨ □ₘ a =
@@ -314,7 +314,7 @@ module _
     lemma :
       (a : modal-formula i) (x : type-kripke-model i M) →
       is-decidable (type-Prop ((M , x) ⊨ a))
-    lemma (var n) x =
+    lemma (varₘ n) x =
       is-decidable-raise (l1 ⊔ l2) _ (dec-v x n)
     lemma ⊥ₘ x =
       inr map-inv-raise

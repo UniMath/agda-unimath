@@ -69,18 +69,19 @@ module _
         ( map-equiv-is-kripke-model-filtration i theory M M* is-filtration
           ( class (Φ-equivalence i theory M) x))
         ⊨ a)
-  pr1 (kripke-models-filtrations-theorem' is-filtration (var n) in-theory x) f =
-    map-raise
-      ( forward-implication
-        ( is-filtration-valuate-is-kripke-model-filtration
-          ( i)
-          ( theory)
-          ( M)
-          ( M*)
-          ( is-filtration)
-          ( n)
-          ( x))
-      ( in-theory , map-inv-raise f))
+  pr1 (kripke-models-filtrations-theorem' is-filtration (varₘ n) in-theory x)
+    f =
+      map-raise
+        ( forward-implication
+          ( is-filtration-valuate-is-kripke-model-filtration
+            ( i)
+            ( theory)
+            ( M)
+            ( M*)
+            ( is-filtration)
+            ( n)
+            ( x))
+        ( in-theory , map-inv-raise f))
   pr1 (kripke-models-filtrations-theorem' is-filtration ⊥ₘ in-theory x) =
     map-raise ∘ map-inv-raise
   pr1 (kripke-models-filtrations-theorem' is-filtration (a →ₘ b) in-theory x)
@@ -148,15 +149,16 @@ module _
                       ( inv y*-id-class)
                       ( r-xy))
                     (f)))))
-  pr2 (kripke-models-filtrations-theorem' is-filtration (var n) in-theory x) f =
-    map-raise
-      ( pr2
-        ( backward-implication
-          ( is-filtration-valuate-is-kripke-model-filtration i theory M M*
-            ( is-filtration)
-            ( n)
-            ( x))
-          ( map-inv-raise f)))
+  pr2 (kripke-models-filtrations-theorem' is-filtration (varₘ n) in-theory x)
+    f =
+      map-raise
+        ( pr2
+          ( backward-implication
+            ( is-filtration-valuate-is-kripke-model-filtration i theory M M*
+              ( is-filtration)
+              ( n)
+              ( x))
+            ( map-inv-raise f)))
   pr2 (kripke-models-filtrations-theorem' is-filtration ⊥ₘ in-theory x) =
     map-raise ∘ map-inv-raise
   pr2 (kripke-models-filtrations-theorem' is-filtration (a →ₘ b) in-theory x)
