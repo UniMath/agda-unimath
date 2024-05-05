@@ -49,6 +49,7 @@ open import foundation-core.propositions
 open import lists.arrays
 open import lists.concatenation-lists
 open import lists.lists
+open import lists.lists-subtypes
 open import lists.reversing-lists
 
 open import modal-logic.completeness
@@ -116,121 +117,11 @@ module _
     with decision-procedure' a
   ... | inl valid-in-C = complete a (λ M M-in-C → valid-in-C (M , M-in-C))
 
-module _
-  {l : Level} {i : Set l}
-  where
-
-  collect-vars : formula i → list (type-Set i)
-  collect-vars (var x) = cons x nil
-  collect-vars ⊥ = nil
-  collect-vars (a →ₘ b) = concat-list (collect-vars a) (collect-vars b)
-  collect-vars (□ a) = collect-vars a
-
-module _
-  {l1 l2 l3 l4 l5 : Level} (i : Set l3)
-  (F : kripke-frame l1 l2)
-  where
-
-  valuates-equals-on-vars :
-    {l6 : Level} →
-    subtype l6 (type-Set i) →
-    (type-Set i → type-kripke-frame F → Prop l4) →
-    (type-Set i → type-kripke-frame F → Prop l5) →
-    UU (l1 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
-  valuates-equals-on-vars vars V V' =
-    ((a , _) : type-subtype vars) → (x : type-kripke-frame F) → V a x ⇔ V' a x
-
-  valuates-equals-on-vars-subtype :
-    {l6 l7 : Level}
-    (vars₁ : subtype l6 (type-Set i))
-    (vars₂ : subtype l7 (type-Set i)) →
-    vars₂ ⊆ vars₁ →
-    (V : type-Set i → type-kripke-frame F → Prop l4)
-    (V' : type-Set i → type-kripke-frame F → Prop l5) →
-    valuates-equals-on-vars (vars₁) V V' →
-    valuates-equals-on-vars (vars₂) V V'
-  valuates-equals-on-vars-subtype vars₁ vars₂ sub V V' eq (a , in-vars) =
-    eq (a , sub a in-vars)
-
-  affect-only-occured-vars :
-    (a : formula i) →
-    (V : type-Set i → type-kripke-frame F → Prop l4) →
-    (V' : type-Set i → type-kripke-frame F → Prop l5) →
-    valuates-equals-on-vars (in-list (collect-vars a)) V V' →
-    (x : type-kripke-frame F) →
-    (((F , V) , x) ⊨ a) ⇔ (((F , V') , x) ⊨ a)
-  affect-only-occured-vars (var n) V V' eq x =
-    pair
-      ( λ v →
-        ( map-raise
-          ( forward-implication
-            ( eq (n , unit-trunc-Prop (is-head n nil)) x)
-            ( map-inv-raise v))))
-      ( λ v →
-        ( map-raise
-          ( backward-implication
-            ( eq (n , unit-trunc-Prop (is-head n nil)) x)
-            ( map-inv-raise v))))
-  affect-only-occured-vars ⊥ V V' eq x =
-    (map-raise ∘ map-inv-raise) , (map-raise ∘ map-inv-raise)
-  affect-only-occured-vars (a →ₘ b) V V' eq x =
-    pair
-      ( λ fab fa →
-        ( forward-implication
-          ( affect-only-occured-vars b V V'
-            ( valuates-equals-on-vars-subtype
-              ( in-list (collect-vars (a →ₘ b)))
-              ( in-list (collect-vars b))
-              ( subset-in-concat-right (collect-vars a) (collect-vars b))
-              ( V)
-              ( V')
-              ( eq))
-            ( x))
-          ( fab
-            ( backward-implication
-              ( affect-only-occured-vars a V V'
-                ( valuates-equals-on-vars-subtype
-                  ( in-list (collect-vars (a →ₘ b)))
-                  ( in-list (collect-vars a))
-                  ( subset-in-concat-left (collect-vars a) (collect-vars b))
-                  ( V)
-                  ( V')
-                  ( eq))
-                ( x))
-              ( fa)))))
-      ( λ fab fa →
-        ( backward-implication
-          ( affect-only-occured-vars b V V'
-            ( valuates-equals-on-vars-subtype
-              ( in-list (collect-vars (a →ₘ b)))
-              ( in-list (collect-vars b))
-              ( subset-in-concat-right (collect-vars a) (collect-vars b))
-              ( V)
-              ( V')
-              ( eq))
-            ( x))
-          ( fab
-            ( forward-implication
-              ( affect-only-occured-vars a V V'
-                ( valuates-equals-on-vars-subtype
-                  ( in-list (collect-vars (a →ₘ b)))
-                  ( in-list (collect-vars a))
-                  ( subset-in-concat-left (collect-vars a) (collect-vars b))
-                  ( V)
-                  ( V')
-                  ( eq))
-                ( x))
-              ( fa)))))
-  affect-only-occured-vars (□ a) V V' eq x =
-    pair
-      ( λ f y r →
-        ( forward-implication (affect-only-occured-vars a V V' eq y) (f y r)))
-      ( λ f y r →
-        ( backward-implication (affect-only-occured-vars a V V' eq y) (f y r)))
-
+-- TODO: move to kuratowsky-finite-sets
 is-kuratowsky-finite-set-Prop' : {l : Level} → Set l → Prop l
 is-kuratowsky-finite-set-Prop' X =
-  ∃-Prop (list (type-Set X)) (λ l → (x : type-Set X) → type-Prop (in-list l x))
+  ∃-Prop (list (type-Set X))
+    ( λ l → (x : type-Set X) → type-Prop (list-subtype l x))
 
 is-kuratowsky-finite-set' : {l : Level} → Set l → UU l
 is-kuratowsky-finite-set' X = type-Prop (is-kuratowsky-finite-set-Prop' X)
@@ -241,21 +132,22 @@ is-kuratowsky-finite-set-is-kuratowsky-finite-set' :
 is-kuratowsky-finite-set-is-kuratowsky-finite-set' X =
   map-universal-property-trunc-Prop
     ( is-kuratowsky-finite-set-Prop X)
-    ( λ (l , all-in-list) →
+    ( λ (l , all-list-subtype) →
       ( intro-∃
         ( length-list l)
         ( pair
           ( component-list l)
           ( λ x →
             ( apply-universal-property-trunc-Prop
-              ( all-in-list x)
+              ( all-list-subtype x)
               ( trunc-Prop (fiber _ x))
-              ( λ x-in-list →
+              ( λ x-list-subtype →
                 ( unit-trunc-Prop
                   ( pair
-                    ( index-in-list x l x-in-list)
+                    ( index-in-list x l x-list-subtype)
                     ( inv
-                      ( eq-component-list-index-in-list x l x-in-list))))))))))
+                      ( eq-component-list-index-in-list x l
+                        ( x-list-subtype)))))))))))
 
 dependent-map-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -266,7 +158,7 @@ dependent-map-list {A = A} {B} (cons x l) f =
   cons (f (x , is-head x l)) (dependent-map-list l f')
   where
   f' : Σ A (λ a → a ∈-list l) → B
-  f' (a , in-list) = f (a , is-in-tail a x l in-list)
+  f' (a , list-subtype) = f (a , is-in-tail a x l list-subtype)
 
 in-dependent-map-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -291,7 +183,7 @@ module _
     rest (□ a) = subformulas-list a
 
   subformulas : formula i → modal-theory l i
-  subformulas a = in-list (subformulas-list a)
+  subformulas a = list-subtype (subformulas-list a)
 
   subformulas-list-has-subimpl :
     (a : formula i) {x y : formula i} →
@@ -310,13 +202,12 @@ module _
           ( subformulas-list y)
           ( is-head y _)))
   subformulas-list-has-subimpl
-    (a →ₘ b) {x} {y} (is-in-tail .(x →ₘ y) .(a →ₘ b) _ xy-in-list)
+    (a →ₘ b) {x} {y} (is-in-tail .(x →ₘ y) .(a →ₘ b) _ xy-list-subtype)
     with
     in-concat-list
       ( subformulas-list a)
       ( subformulas-list b)
-      ( x →ₘ y)
-      ( xy-in-list)
+      ( xy-list-subtype)
   ... | inl xy-in-left =
     let (x-in-tail , y-in-tail) = subformulas-list-has-subimpl a xy-in-left
     in pair
@@ -332,8 +223,9 @@ module _
       ( is-in-tail y (a →ₘ b) _
         ( in-concat-right (subformulas-list a) (subformulas-list b) y-in-tail))
   subformulas-list-has-subimpl
-    (□ a) {x} {y} (is-in-tail .(x →ₘ y) .(□ a) _ xy-in-list) =
-      let (x-in-tail , y-in-tail) = subformulas-list-has-subimpl a xy-in-list
+    (□ a) {x} {y} (is-in-tail .(x →ₘ y) .(□ a) _ xy-list-subtype) =
+      let (x-in-tail , y-in-tail) =
+            subformulas-list-has-subimpl a xy-list-subtype
       in (is-in-tail x (□ a) _ x-in-tail) , (is-in-tail y (□ a) _ y-in-tail)
 
   subformulas-list-has-subbox :
@@ -343,9 +235,9 @@ module _
   subformulas-list-has-subbox .(□ x) {x} (is-head .(□ x) _) =
     is-in-tail x (□ x) _ (is-head x _)
   subformulas-list-has-subbox
-    (a →ₘ b) {x} (is-in-tail .(□ x) .(a →ₘ b) _ x-in-list)
+    (a →ₘ b) {x} (is-in-tail .(□ x) .(a →ₘ b) _ x-list-subtype)
     with
-    in-concat-list (subformulas-list a) (subformulas-list b) (□ x) x-in-list
+    in-concat-list (subformulas-list a) (subformulas-list b) x-list-subtype
   ... | inl x-in-left =
     is-in-tail x (a →ₘ b) _
       ( in-concat-left (subformulas-list a) (subformulas-list b)
@@ -354,8 +246,9 @@ module _
     is-in-tail x (a →ₘ b) _
       ( in-concat-right (subformulas-list a) (subformulas-list b)
         ( subformulas-list-has-subbox b x-in-right))
-  subformulas-list-has-subbox (□ a) {x} (is-in-tail .(□ x) .(□ a) _ x-in-list) =
-    is-in-tail x (□ a) _ (subformulas-list-has-subbox a x-in-list)
+  subformulas-list-has-subbox
+    (□ a) {x} (is-in-tail .(□ x) .(□ a) _ x-list-subtype) =
+    is-in-tail x (□ a) _ (subformulas-list-has-subbox a x-list-subtype)
 
   is-modal-theory-closed-under-subformulas-subformulas :
     (a : formula i) →
@@ -363,45 +256,48 @@ module _
   is-modal-theory-closed-under-subformulas-subformulas a =
     is-modal-theory-closed-under-subformulas-condition
       ( i)
-      ( in-list (subformulas-list a))
+      ( list-subtype (subformulas-list a))
       ( map-universal-property-trunc-Prop
         ( product-Prop
-          ( in-list (subformulas-list a) _)
-          ( in-list (subformulas-list a) _))
-        ( λ impl-in-list →
-          ( let (a-in-list , b-in-list) =
-                  subformulas-list-has-subimpl a impl-in-list
-            in (unit-trunc-Prop a-in-list) , (unit-trunc-Prop b-in-list))))
+          ( list-subtype (subformulas-list a) _)
+          ( list-subtype (subformulas-list a) _))
+        ( λ impl-list-subtype →
+          ( let (a-list-subtype , b-list-subtype) =
+                  subformulas-list-has-subimpl a impl-list-subtype
+            in pair
+              ( unit-trunc-Prop a-list-subtype)
+              ( unit-trunc-Prop b-list-subtype))))
       ( map-universal-property-trunc-Prop
-        ( in-list (subformulas-list a) _)
+        ( list-subtype (subformulas-list a) _)
         ( unit-trunc-Prop ∘ subformulas-list-has-subbox a))
 
   subformulas-Set : formula i → Set l
-  subformulas-Set a = set-subset (formula-Set i) (in-list (subformulas-list a))
+  subformulas-Set a =
+    set-subset (formula-Set i) (list-subtype (subformulas-list a))
 
   subformulas-Set-list : (a : formula i) → list (type-Set (subformulas-Set a))
   subformulas-Set-list a =
     dependent-map-list
       ( subformulas-list a)
-      ( λ (x , in-list) → x , unit-trunc-Prop in-list)
+      ( λ (x , list-subtype) → x , unit-trunc-Prop list-subtype)
 
   is-kuratowsky-finite'-subformulas-list :
     (a : formula i) → is-kuratowsky-finite-set' (subformulas-Set a)
   is-kuratowsky-finite'-subformulas-list a =
     intro-∃
       ( subformulas-Set-list a)
-      ( λ (b , trunc-b-in-list) →
+      ( λ (b , trunc-b-list-subtype) →
         ( apply-universal-property-trunc-Prop
-          ( trunc-b-in-list)
-          ( in-list (subformulas-Set-list a) (b , trunc-b-in-list))
-          ( λ b-in-list →
+          ( trunc-b-list-subtype)
+          ( list-subtype (subformulas-Set-list a) (b , trunc-b-list-subtype))
+          ( λ b-list-subtype →
             ( unit-trunc-Prop
               ( tr
                 ( λ i → (b , i) ∈-list subformulas-Set-list a)
                 ( eq-is-prop is-prop-type-trunc-Prop)
                 ( in-dependent-map-list
-                  (λ (x , in-list) → x , unit-trunc-Prop in-list)
-                  ( b-in-list)))))))
+                  (λ (x , list-subtype) → x , unit-trunc-Prop list-subtype)
+                  ( b-list-subtype)))))))
 
   is-kuratowsky-finite-subformulas-list :
     (a : formula i) → is-kuratowsky-finite-set (subformulas-Set a)
@@ -413,7 +309,7 @@ module _
   is-finite-subformulas-list :
     LEM l →
     (a : formula i) →
-    is-finite (type-subtype (in-list (subformulas-list a)))
+    is-finite (type-subtype (list-subtype (subformulas-list a)))
   is-finite-subformulas-list lem a =
     is-finite-is-kuratowsky-finite-set
       (subformulas-Set a) lem (is-kuratowsky-finite-subformulas-list a)
@@ -423,7 +319,7 @@ module _
     LEM l →
     LEM l2 →
     (a : formula i) →
-    is-finite (type-subtype (in-list (subformulas-list a)) → Prop l2)
+    is-finite (type-subtype (list-subtype (subformulas-list a)) → Prop l2)
   is-finite-subtypes-subformulas-list lem lem2 a =
     is-finite-function-type
       ( is-finite-subformulas-list lem a)
@@ -691,13 +587,13 @@ module _
                   ( unit-trunc-Prop (is-head a _))
                   ( x))
                 ( in-logic
-                  ( filtration (in-list (cons a _)) M)
+                  ( filtration (list-subtype (cons a _)) M)
                   ( intro-∃ (a , (M , M-in-class)) refl)
                   ( map-equiv-is-kripke-model-filtration
                     ( i)
                     ( subformulas i a)
                     ( M)
-                    ( filtration (in-list (cons a _)) M)
+                    ( filtration (list-subtype (cons a _)) M)
                     ( is-filt)
                     ( class
                       ( Φ-equivalence i
@@ -710,7 +606,7 @@ module _
     (C₂ : model-class l6 l7 i l8 l10) →
     ( ((M , _) : type-subtype C) →
       (a : formula i) →
-      is-in-subtype C₂ (filtration (in-list (subformulas-list i a)) M)) →
+      is-in-subtype C₂ (filtration (list-subtype (subformulas-list i a)) M)) →
     soundness logic C₂ →
     soundness logic filtrate-class
   filtrate-soundness logic C₂ H sound a in-logic M* in-class =

@@ -17,6 +17,8 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
+open import foundation-core.coproduct-types
+
 open import group-theory.monoids
 
 open import lists.lists
@@ -190,4 +192,14 @@ in-concat-right :
 in-concat-right nil l2 in-l2 = in-l2
 in-concat-right (cons x l1) l2 in-l2 =
   is-in-tail _ x (concat-list l1 l2) (in-concat-right l1 l2 in-l2)
+
+in-concat-list :
+  {l : Level} {A : UU l} (l1 l2 : list A)
+  {a : A} → a ∈-list (concat-list l1 l2) → (a ∈-list l1) + (a ∈-list l2)
+in-concat-list nil l2 {a} in-list = inr in-list
+in-concat-list (cons x l1) l2 {.x} (is-head .x _) = inl (is-head x l1)
+in-concat-list (cons x l1) l2 {a} (is-in-tail .a .x _ in-list)
+  with in-concat-list l1 l2 in-list
+... | inl in-l1 = inl (is-in-tail a x l1 in-l1)
+... | inr in-l2 = inr in-l2
 ```

@@ -48,7 +48,7 @@ open import modal-logic.modal-logic-k
 open import modal-logic.soundness
 open import modal-logic.weak-deduction
 
-open import order-theory.maximal-elements-posets
+open import order-theory.zorn
 
 open import univalent-combinatorics.finite-types
 ```
@@ -87,7 +87,7 @@ module _
 
   module _
     (lem : LEM (lsuc (lsuc l1)))
-    (zorn : Zorn (lsuc l1) l1 l1)
+    (zorn : Zorn-non-empty (lsuc l1) l1 l1)
     (prop-resize : propositional-resizing l1 (lsuc l1))
     where
 
@@ -108,7 +108,7 @@ module _
         ( λ ((a , M , _) , p) →
           ( tr (is-in-subtype (filtration-models _ _ i _ _ _ _ _)) (inv p)
             ( intro-∃
-              ( in-list (subformulas-list i a) , M)
+              ( subformulas i a , M)
               ( pair
                 (is-finite-subformulas-list
                   ( i)
@@ -116,9 +116,9 @@ module _
                   ( a))
                 ( is-kripke-model-filtration-minimal-kripke-model-filtration
                   ( i)
-                  ( in-list (subformulas-list i a))
+                  ( subformulas i a)
                   ( M)
-                  ( is-modal-theory-closed-under-subformulas-subformulas-list
+                  ( is-modal-theory-closed-under-subformulas-subformulas
                     ( i)
                     ( a)))))))
 
