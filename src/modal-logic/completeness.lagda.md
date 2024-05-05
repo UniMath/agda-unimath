@@ -34,15 +34,6 @@ TODO
 ## Definition
 
 ```agda
--- module _
---   {l1 l2 l3 l4 l5 l6 : Level}
---   {i : Set l1} (logic : formulas l2 i)
---   {w : UU l3} (C : model-class w l4 i l5 l6)
---   where
-
---   completeness : UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6)
---   completeness = class-modal-logic C ⊆ logic
-
 module _
   {l1 l2 l3 l4 l5 l6 : Level} {i : Set l1}
   where
@@ -52,25 +43,4 @@ module _
     model-class l3 l4 i l5 l6 →
     UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6)
   completeness logic C = class-modal-logic C ⊆ logic
-```
-
-## Properties
-
-```agda
--- module _
---   {l1 l2 l3 l4 l5 l6 l7 : Level}
---   {i : Set l1} (logic : formulas l2 i)
---   {w : UU l3}
---   (C₁ : model-class w l4 i l5 l6) (C₂ : model-class w l4 i l5 l7)
---   where
-
---   completeness-subclass :
---     C₁ ⊆ C₂ → completeness logic C₁ → completeness logic C₂
---   completeness-subclass sub complete =
---     transitive-leq-subtype
---       ( class-modal-logic C₂)
---       ( class-modal-logic C₁)
---       ( logic)
---       ( complete)
---       ( class-modal-logic-monotic C₁ C₂ sub)
 ```

@@ -51,7 +51,8 @@ module _
   {l : Level} (i : Set l)
   where
 
-  ax-1-parameter : (h : formula i → formula i) → is-injective h → formulas l i
+  ax-1-parameter :
+    (h : formula i → formula i) → is-injective h → modal-theory l i
   pr1 (ax-1-parameter h inj f) = Σ (formula i) (λ a → f ＝ h a)
   pr2 (ax-1-parameter h inj f) (a , refl) =
     is-prop-is-contr
@@ -64,7 +65,7 @@ module _
     (h : formula i → formula i → formula i) →
     ({x x' y y' : formula i} → h x y ＝ h x' y' → x ＝ x') →
     ({x x' y y' : formula i} → h x y ＝ h x' y' → y ＝ y') →
-    formulas l i
+    modal-theory l i
   pr1 (ax-2-parameters h inj-1 inj-2 f) =
     Σ (formula i) (λ a → Σ (formula i) (λ b → f ＝ h a b))
   pr2 (ax-2-parameters h inj-1 inj-2 f) (a , b , refl) =
@@ -79,7 +80,7 @@ module _
     ({x x' y y' z z' : formula i} → h x y z ＝ h x' y' z' → x ＝ x') →
     ({x x' y y' z z' : formula i} → h x y z ＝ h x' y' z' → y ＝ y') →
     ({x x' y y' z z' : formula i} → h x y z ＝ h x' y' z' → z ＝ z') →
-    formulas l i
+    modal-theory l i
   pr1 (ax-3-parameters h inj-1 inj-2 inj-3 f) =
     Σ ( formula i)
       ( λ a → Σ (formula i) (λ b → Σ (formula i) ( λ c → f ＝ h a b c)))
@@ -90,14 +91,14 @@ module _
         ( λ x (y , z , e) → inj-1 e))
       ( a , b , c , refl)
 
-  ax-k : formulas l i
+  ax-k : modal-theory l i
   ax-k =
     ax-2-parameters
       ( λ a b → a →ₘ b →ₘ a)
       ( eq-implication-left)
       ( eq-implication-left ∘ eq-implication-right)
 
-  ax-s : formulas l i
+  ax-s : modal-theory l i
   ax-s =
     ax-3-parameters
       ( λ a b c → (a →ₘ b →ₘ c) →ₘ (a →ₘ b) →ₘ a →ₘ c)
@@ -105,29 +106,29 @@ module _
       ( eq-implication-left ∘ eq-implication-right ∘ eq-implication-left)
       ( eq-implication-right ∘ eq-implication-right ∘ eq-implication-left)
 
-  ax-n : formulas l i
+  ax-n : modal-theory l i
   ax-n =
     ax-2-parameters
       ( λ a b → □ (a →ₘ b) →ₘ □ a →ₘ □ b)
       ( eq-implication-left ∘ eq-box ∘ eq-implication-left)
       ( eq-implication-right ∘ eq-box ∘ eq-implication-left)
 
-  ax-dn : formulas l i
+  ax-dn : modal-theory l i
   ax-dn = ax-1-parameter (λ a → ~~ a →ₘ a) eq-implication-right
 
-  ax-m : formulas l i
+  ax-m : modal-theory l i
   ax-m = ax-1-parameter (λ a → □ a →ₘ a) eq-implication-right
 
-  ax-b : formulas l i
+  ax-b : modal-theory l i
   ax-b = ax-1-parameter (λ a → a →ₘ □ ◇ a) eq-implication-left
 
-  ax-d : formulas l i
+  ax-d : modal-theory l i
   ax-d = ax-1-parameter (λ a → □ a →ₘ ◇ a) (eq-box ∘ eq-implication-left)
 
-  ax-4 : formulas l i
+  ax-4 : modal-theory l i
   ax-4 = ax-1-parameter (λ a → □ a →ₘ □ □ a) (eq-box ∘ eq-implication-left)
 
-  ax-5 : formulas l i
+  ax-5 : modal-theory l i
   ax-5 =
     ax-1-parameter ( λ a → ◇ a →ₘ □ ◇ a) ( eq-diamond ∘ eq-implication-left)
 

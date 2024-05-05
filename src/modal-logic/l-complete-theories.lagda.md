@@ -16,9 +16,9 @@ open import foundation.existential-quantification
 open import foundation.inhabited-types
 open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
-open import foundation.subtypes
-open import foundation.propositional-truncations
 open import foundation.propositional-resizing
+open import foundation.propositional-truncations
+open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
 open import foundation.universe-levels
@@ -30,19 +30,20 @@ open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtypes
 
 open import lists.lists
 open import lists.lists-subtypes
 
 open import modal-logic.axioms
 open import modal-logic.formulas
-open import modal-logic.logic-syntax
+open import modal-logic.formulas-deduction
 open import modal-logic.l-consistent-theories
+open import modal-logic.logic-syntax
+open import modal-logic.modal-logic-k
 open import modal-logic.weak-deduction
 
-open import order-theory.maximal-elements-posets
 open import order-theory.chains-posets
+open import order-theory.maximal-elements-posets
 open import order-theory.posets
 open import order-theory.subposets
 open import order-theory.subtypes-leq-posets
@@ -99,6 +100,13 @@ module _
     is-L-consistent-theory-modal-theory-L-consistent-theory logic ∘
       L-consistent-theory-L-complete-theory
 
+  is-consistent-modal-theory-L-complete-theory :
+    {l3 : Level} (theory : L-complete-theory l3) →
+    is-consistent-modal-logic (modal-theory-L-complete-theory theory)
+  is-consistent-modal-theory-L-complete-theory =
+    is-consistent-modal-theory-L-consistent-theory logic ∘
+      L-consistent-theory-L-complete-theory
+
   module _
     {l3 : Level}
     (((theory , is-cons) , is-comp) : L-complete-theory (l1 ⊔ l2 ⊔ l3))
@@ -138,7 +146,7 @@ module _
               ( logic)
               ( logic ∪ theory)
               ( weak-modal-logic-closure (logic ∪ theory))
-              ( subset-axioms-weak-modal-logic)
+              ( subset-axioms-weak-modal-logic-closure)
               ( subtype-union-left logic theory))
             ( refl-leq-subtype (weak-modal-logic-closure (logic ∪ theory)))))
         ( ⊥)
@@ -160,7 +168,7 @@ module _
             ( theory)
             ( logic ∪ theory)
             ( weak-modal-logic-closure (logic ∪ theory))
-            ( subset-axioms-weak-modal-logic)
+            ( subset-axioms-weak-modal-logic-closure)
             ( subtype-union-right logic theory)))
 
     subset-union-L-consistent :
@@ -180,7 +188,7 @@ module _
           ( union-L-consistent (theory , is-cons)))
         ( theory)
         ( subset-union-L-consistent)
-        ( subset-axioms-weak-modal-logic)
+        ( subset-axioms-weak-modal-logic-closure)
 
     subset-logic-L-complete-theory : logic ⊆ theory
     subset-logic-L-complete-theory =
@@ -294,15 +302,43 @@ module _
           ( is-L-consistent-add-formula-not-in-logic not-in-logic))
         ( formula-in-add-formula (~ a) theory)
 
-    is-disjuctive-L-complete-theory :
-      LEM (l1 ⊔ l2) →
-      is-disjuctive-modal-theory theory
-    is-disjuctive-L-complete-theory lem a with lem (theory a)
-    ... | inl a-in-logic = inl a-in-logic
-    ... | inr a-not-in-logic =
-      inr
-        ( contains-negation-not-contains-formula-L-complete-theory
-          ( a-not-in-logic))
+    module _
+      (lem : LEM (l1 ⊔ l2))
+      where
+
+      is-disjuctive-L-complete-theory :
+        is-disjuctive-modal-theory theory
+      is-disjuctive-L-complete-theory a with lem (theory a)
+      ... | inl a-in-logic = inl a-in-logic
+      ... | inr a-not-in-logic =
+        inr
+          ( contains-negation-not-contains-formula-L-complete-theory
+            ( a-not-in-logic))
+
+      -- TODO: move from module
+      lemma-box-diamond-L-complete :
+        is-modal-logic logic →
+        is-normal-modal-logic logic →
+        (((theory' , _) , _) : L-complete-theory (l1 ⊔ l2)) →
+        diamond-modal-theory theory ⊆ theory' →
+        unbox-modal-theory theory' ⊆ theory
+      lemma-box-diamond-L-complete is-logic is-normal x leq a box-a-in-x
+        with is-disjuctive-L-complete-theory a
+      ... | inl a-in-t = a-in-t
+      ... | inr not-a-in-t =
+        ex-falso
+          ( is-consistent-modal-theory-L-complete-theory x
+            ( weak-modal-logic-mp
+              ( is-weak-modal-logic-L-complete-theory lzero x)
+              { a = □ a}
+              ( weak-modal-logic-mp
+                  ( is-weak-modal-logic-L-complete-theory lzero x)
+                  { a = ◇ ~ a}
+                  ( subset-logic-L-complete-theory lzero x (◇ ~ a →ₘ ~ □ a)
+                    ( modal-logic-diamond-negate-implication i logic is-normal
+                      ( is-logic)))
+                  ( leq (◇ ~ a) (intro-∃ (~ a) (not-a-in-t , refl))))
+              ( box-a-in-x)))
 
   is-inhabited-L-complete-exists-complete-L-consistent-theory :
     {l3 : Level} →
@@ -340,7 +376,7 @@ module _
           ( modal-theory-chain-element x)
           ( logic ∪ modal-theory-chain-element x)
           ( L-union x)
-          ( subset-axioms-weak-modal-logic)
+          ( subset-axioms-weak-modal-logic-closure)
           ( subtype-union-right logic (modal-theory-chain-element x))
 
       leq-L-union :
@@ -508,7 +544,7 @@ module _
                       ( leq-logic))
                     ( a)
                     ( weak-modal-logic-closure-monotic leq-lists a
-                      ( is-in-weak-deduction-closure-weak-deduction
+                      ( is-in-weak-modal-logic-closure-weak-deduction
                         ( is-assumptions-list-assumptions-weak-deduction
                           ( d)))))))))
 
@@ -674,6 +710,6 @@ module _
               ( subtype-union-both theory' theory theory'
                 ( refl-leq-subtype theory')
                 ( leq)))
-            ( is-consistent-modal-theory-L-consistent-theory logic₂
+            ( is-consistent-closure-L-consistent-theory logic₂
               ( theory' , is-cons')))
 ```

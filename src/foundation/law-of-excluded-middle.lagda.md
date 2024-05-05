@@ -17,6 +17,7 @@ open import foundation.small-types
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import foundation-core.coproduct-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
@@ -49,6 +50,18 @@ module _
 ```
 
 ## Properties
+
+-- implies contraposition
+
+### The law of excluded middle implies the contraposition of a proposition
+
+```agda
+contraposition :
+  {l1 l2 : Level} → LEM l2 → {P : UU l1} (Q : Prop l2) →
+  (¬ (type-Prop Q) → ¬ P) →
+  P → type-Prop Q
+contraposition lem Q = contraposition-is-decidable (lem Q)
+```
 
 ### TODO
 

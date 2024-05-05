@@ -1,7 +1,7 @@
 # Modal logic K
 
 ```agda
-module modal-logic.modal-logic-K where
+module modal-logic.modal-logic-k where
 ```
 
 <details><summary>Imports</summary>
@@ -45,11 +45,14 @@ module _
   {l : Level} (i : Set l)
   where
 
-  modal-logic-K-axioms : formulas l i
+  modal-logic-K-axioms : modal-theory l i
   modal-logic-K-axioms = ax-k i ∪ ax-s i ∪ ax-n i ∪ ax-dn i
 
-  modal-logic-K : formulas l i
-  modal-logic-K = modal-logic modal-logic-K-axioms
+  modal-logic-K : modal-theory l i
+  modal-logic-K = modal-logic-closure modal-logic-K-axioms
+
+  is-modal-logic-K : is-modal-logic modal-logic-K
+  is-modal-logic-K = subset-double-modal-logic modal-logic-K-axioms
 
   K-axioms-contains-ax-k : ax-k i ⊆ modal-logic-K-axioms
   K-axioms-contains-ax-k =
@@ -127,6 +130,14 @@ module _
       ( modal-logic-K)
       ( axioms-subset-modal-logic modal-logic-K-axioms)
       ( K-axioms-contains-ax-dn)
+
+is-normal-modal-logic :
+  {l1 l2 : Level} {i : Set l1} → modal-theory l2 i → UU (l1 ⊔ l2)
+is-normal-modal-logic {i = i} logic = modal-logic-K i ⊆ logic
+
+is-normal-modal-logic-K :
+  {l1 : Level} (i : Set l1) → is-normal-modal-logic (modal-logic-K i)
+is-normal-modal-logic-K i = refl-leq-subtype (modal-logic-K i)
 
 module _
   {l1 l2 l3 l4 : Level} (i : Set l1)

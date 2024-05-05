@@ -11,6 +11,7 @@ open import lists.flattening-lists public
 open import lists.functoriality-lists public
 open import lists.lists public
 open import lists.lists-discrete-types public
+open import lists.lists-subtypes public
 open import lists.permutation-lists public
 open import lists.permutation-vectors public
 open import lists.predicates-on-lists public

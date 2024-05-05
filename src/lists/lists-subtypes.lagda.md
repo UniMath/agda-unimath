@@ -1,4 +1,4 @@
-# Lists
+# Lists subtypes
 
 ```agda
 module lists.lists-subtypes where
@@ -9,22 +9,22 @@ module lists.lists-subtypes where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation-core.empty-types
 open import foundation.existential-quantification
-open import foundation.logical-equivalences
 open import foundation.intersections-subtypes
-open import foundation.unions-subtypes
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.unions-subtypes
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.empty-types
 open import foundation-core.function-types
 open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.subtypes
 
-open import lists.lists
 open import lists.concatenation-lists
+open import lists.lists
 open import lists.reversing-lists
 ```
 
@@ -76,7 +76,7 @@ module _
     map-universal-property-trunc-Prop
       ( S x)
       ( λ { (is-head .x .l) → a-in-S
-          ; (is-in-tail .x .a .l t) → l-sub-S x (in-list-subtype-in-list t) })
+          ; (is-in-tail .x .a .l t) → l-sub-S x (in-list-subtype-in-list t)})
 
   subset-list-subtype-reverse-list :
     (l : list A) → list-subtype l ⊆ list-subtype (reverse-list l)

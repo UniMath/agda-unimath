@@ -20,9 +20,9 @@ open import foundation-core.sets
 open import foundation-core.subtypes
 
 open import modal-logic.axioms
-open import modal-logic.logic-syntax
-open import modal-logic.l-consistent-theories
 open import modal-logic.l-complete-theories
+open import modal-logic.l-consistent-theories
+open import modal-logic.logic-syntax
 open import modal-logic.weak-deduction
 
 open import order-theory.zorn
@@ -44,7 +44,7 @@ module _
   (contains-ax-s : ax-s i ⊆ logic)
   (zorn : Zorn-non-empty (lsuc (l1 ⊔ l2 ⊔ l3)) (l1 ⊔ l2 ⊔ l3) l3)
   (prop-resize : propositional-resizing (l1 ⊔ l2 ⊔ l3) (lsuc (l1 ⊔ l2 ⊔ l3)))
-  (x@(theory , is-cons) : L-consistent-theory logic l3)
+  (x@(theory , is-cons) : L-consistent-theory logic (l1 ⊔ l2 ⊔ l3))
   where
 
   lindenbaum :
@@ -74,7 +74,7 @@ module _
         ( logic)
         ( logic ∪ theory)
         ( weak-modal-logic-closure (logic ∪ theory))
-        ( subset-axioms-weak-modal-logic)
+        ( subset-axioms-weak-modal-logic-closure)
         ( subtype-union-left logic theory)
 
     contains-ax-k' : ax-k i ⊆ L
@@ -130,6 +130,6 @@ module _
           ( theory)
           ( logic ∪ theory)
           ( L)
-          ( subset-axioms-weak-modal-logic)
+          ( subset-axioms-weak-modal-logic-closure)
           ( subtype-union-right logic theory)))
 ```

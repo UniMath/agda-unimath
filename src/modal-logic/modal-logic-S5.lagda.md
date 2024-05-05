@@ -1,7 +1,7 @@
 # Modal logic S5
 
 ```agda
-module modal-logic.modal-logic-S5 where
+module modal-logic.modal-logic-s5 where
 ```
 
 <details><summary>Imports</summary>
@@ -25,7 +25,7 @@ open import modal-logic.axioms
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
 open import modal-logic.logic-syntax
-open import modal-logic.modal-logic-K
+open import modal-logic.modal-logic-k
 open import modal-logic.soundness
 
 open import univalent-combinatorics.finite-types
@@ -44,14 +44,17 @@ module _
   {l : Level} (i : Set l)
   where
 
-  modal-logic-S5-axioms : formulas l i
+  modal-logic-S5-axioms : modal-theory l i
   modal-logic-S5-axioms = modal-logic-K-axioms i ∪ (ax-m i ∪ (ax-b i ∪ ax-4 i))
 
-  modal-logic-S5 : formulas l i
-  modal-logic-S5 = modal-logic modal-logic-S5-axioms
+  modal-logic-S5 : modal-theory l i
+  modal-logic-S5 = modal-logic-closure modal-logic-S5-axioms
 
-  modal-logic-K-sub-S5 : modal-logic-K i ⊆ modal-logic-S5
-  modal-logic-K-sub-S5 =
+  is-modal-logic-S5 : is-modal-logic modal-logic-S5
+  is-modal-logic-S5 = subset-double-modal-logic modal-logic-S5-axioms
+
+  is-normal-modal-logic-S5 : is-normal-modal-logic modal-logic-S5
+  is-normal-modal-logic-S5 =
     modal-logic-monotic
       ( subtype-union-left
         ( modal-logic-K-axioms i)

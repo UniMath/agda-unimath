@@ -16,12 +16,12 @@ open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
-open import foundation-core.propositions
 open import foundation-core.coproduct-types
+open import foundation-core.propositions
 
 open import order-theory.chains-posets
-open import order-theory.posets
 open import order-theory.maximal-elements-posets
+open import order-theory.posets
 ```
 
 </details>

@@ -75,11 +75,11 @@ module _
   is-L-consistent-theory-modal-theory-L-consistent-theory =
     is-in-subtype-inclusion-subtype is-L-consistent-theory-Prop
 
-  is-consistent-modal-theory-L-consistent-theory :
+  is-consistent-closure-L-consistent-theory :
     {l3 : Level} (theory : L-consistent-theory l3) →
     is-consistent-modal-logic
       ( weak-modal-logic-closure (modal-theory-L-consistent-theory theory))
-  is-consistent-modal-theory-L-consistent-theory theory =
+  is-consistent-closure-L-consistent-theory theory =
     is-consistent-modal-logic-antimonotic
       ( weak-modal-logic-closure (modal-theory-L-consistent-theory theory))
       ( weak-modal-logic-closure
@@ -87,6 +87,16 @@ module _
       ( weak-modal-logic-closure-monotic
         ( subtype-union-right logic (modal-theory-L-consistent-theory theory)))
       ( is-L-consistent-theory-modal-theory-L-consistent-theory theory)
+
+  is-consistent-modal-theory-L-consistent-theory :
+    {l3 : Level} (theory : L-consistent-theory l3) →
+    is-consistent-modal-logic (modal-theory-L-consistent-theory theory)
+  is-consistent-modal-theory-L-consistent-theory theory =
+    is-consistent-modal-logic-antimonotic
+      ( modal-theory-L-consistent-theory theory)
+      ( weak-modal-logic-closure (modal-theory-L-consistent-theory theory))
+      ( subset-axioms-weak-modal-logic-closure)
+      ( is-consistent-closure-L-consistent-theory theory)
 
   is-L-consistent-antimonotic :
     {l3 l4 : Level}

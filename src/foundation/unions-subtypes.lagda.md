@@ -15,8 +15,8 @@ open import foundation.identity-types
 open import foundation.large-locale-of-subtypes
 open import foundation.logical-equivalences
 open import foundation.powersets
-open import foundation.propositions
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 

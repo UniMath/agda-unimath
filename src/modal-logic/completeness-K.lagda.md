@@ -1,7 +1,7 @@
 # Completeness of K
 
 ```agda
-module modal-logic.completeness-K where
+module modal-logic.completeness-k where
 ```
 
 <details><summary>Imports</summary>
@@ -38,11 +38,11 @@ open import modal-logic.completeness
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
 open import modal-logic.logic-syntax
-open import modal-logic.modal-logic-K
+open import modal-logic.modal-logic-k
 open import modal-logic.soundness
 open import modal-logic.weak-deduction
 
-open import order-theory.maximal-elements-posets
+open import order-theory.zorn
 ```
 
 </details>
@@ -54,24 +54,33 @@ TODO
 ## Definition
 
 ```agda
--- TODO: levels
 module _
   {l1 : Level}
   (i : Set l1)
   (lem : LEM l1)
-  (zorn : Zorn (lsuc l1) l1 l1)
+  (zorn : Zorn-non-empty (lsuc l1) l1 l1)
   (prop-resize : propositional-resizing l1 (lsuc l1))
   where
 
   completeness-K : completeness (modal-logic-K i) (all-models (lsuc l1) l1 i l1)
   completeness-K =
     canonical-model-completness
-      ( modal-logic-K-axioms i)
+      ( modal-logic-K i)
+      ( is-modal-logic-K i)
+      ( is-consistent-K i)
+      ( is-normal-modal-logic-K i)
+      ( lem)
       ( zorn)
       ( prop-resize)
-      ( is-consistent-K i)
-      ( refl-leq-subtype (modal-logic-K i))
-      ( lem)
       ( all-models (lsuc l1) l1 i l1)
       ( star)
+    -- canonical-model-completness
+    --   ( modal-logic-K-axioms i)
+    --   ( zorn)
+    --   ( prop-resize)
+    --   ( is-consistent-K i)
+    --   ( refl-leq-subtype (modal-logic-K i))
+    --   ( lem)
+    --   ( all-models (lsuc l1) l1 i l1)
+    --   ( star)
 ```

@@ -26,13 +26,14 @@ open import modal-logic.canonical-model-theorem
 open import modal-logic.completeness
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
+open import modal-logic.l-complete-theories
 open import modal-logic.logic-syntax
-open import modal-logic.modal-logic-K
-open import modal-logic.modal-logic-S5
+open import modal-logic.modal-logic-k
+open import modal-logic.modal-logic-s5
 open import modal-logic.soundness
 open import modal-logic.weak-deduction
 
-open import order-theory.maximal-elements-posets
+open import order-theory.zorn
 ```
 
 </details>
@@ -47,118 +48,98 @@ TODO
 module _
   {l1 : Level}
   (i : Set l1)
-  (lem : LEM l1)
-  (zorn : Zorn (lsuc l1) l1 l1)
+  (lem : LEM l1) -- TODO: not needed
+  (zorn : Zorn-non-empty (lsuc l1) l1 l1)
   (prop-resize : propositional-resizing l1 (lsuc l1))
-  (axioms : modal-theory l1 i)
-  (is-cons : is-consistent-modal-logic (modal-logic axioms))
-  (contains-K : modal-logic-K i ⊆ modal-logic axioms)
+  (logic : modal-theory l1 i)
+  (is-logic : is-modal-logic logic)
+  (is-cons : is-consistent-modal-logic logic)
+  (is-normal : is-normal-modal-logic logic)
   where
 
+  private
+    contains-ax-k : ax-k i ⊆ logic
+    contains-ax-k =
+      transitive-leq-subtype
+        ( ax-k i)
+        ( modal-logic-K i)
+        ( logic)
+        ( is-normal)
+        ( K-contains-ax-k i)
+
+    contains-ax-s : ax-s i ⊆ logic
+    contains-ax-s =
+      transitive-leq-subtype
+        ( ax-s i)
+        ( modal-logic-K i)
+        ( logic)
+        ( is-normal)
+        ( K-contains-ax-s i)
+
+    contains-ax-dn : ax-dn i ⊆ logic
+    contains-ax-dn =
+      transitive-leq-subtype
+        ( ax-dn i)
+        ( modal-logic-K i)
+        ( logic)
+        ( is-normal)
+        ( K-contains-ax-dn i)
+
   is-canonical-ax-m :
-    ax-m i ⊆ modal-logic axioms →
+    ax-m i ⊆ logic →
     is-in-subtype
       ( reflexive-kripke-class (lsuc l1) l1 i l1)
-      ( canonical-kripke-model axioms zorn prop-resize is-cons contains-K)
+      ( canonical-kripke-model logic is-logic is-cons is-normal lem zorn
+        prop-resize)
   is-canonical-ax-m ax-m-subset x a box-a-in-x =
-    weak-modal-logic-subset-complete-theory
-      ( axioms)
-      ( zorn)
-      ( prop-resize)
-      ( is-cons)
-      ( contains-K)
-      ( pr1 x , pr1 (pr2 x))
-      ( pr2 (pr2 x))
-      ( a)
-      ( weak-modal-logic-mp
-        ( weak-modal-logic-ax
-          ( logic-subset-L-complete-theory
-            ( axioms)
-            ( zorn)
-            ( prop-resize)
-            ( is-cons)
-            ( contains-K)
-            ( pr1 x , pr1 (pr2 x))
-            ( pr2 (pr2 x))
-            ( □ a →ₘ a)
-            ( ax-m-subset _ (a , refl))))
-        ( weak-modal-logic-ax box-a-in-x))
+    weak-modal-logic-mp
+      ( is-weak-modal-logic-L-complete-theory logic lzero x)
+      ( subset-logic-L-complete-theory logic lzero x
+        ( □ a →ₘ a)
+        ( ax-m-subset (□ a →ₘ a) (a , refl)))
+      ( box-a-in-x)
 
   is-canonical-ax-b :
-    ax-b i ⊆ modal-logic axioms →
+    ax-b i ⊆ logic →
     is-in-subtype
       ( symmetry-kripke-class (lsuc l1) l1 i l1)
-      ( canonical-kripke-model axioms zorn prop-resize is-cons contains-K)
-  is-canonical-ax-b ax-b-subset x y r-xy a box-a-in-y =
-      lemma-box-diamond
-        ( axioms)
-        ( zorn)
-        ( prop-resize)
-        ( is-cons)
-        ( contains-K)
-        ( lem)
-        ( pr1 y , pr1 (pr2 y))
-        ( pr2 (pr2 y))
-        ( pr1 x , pr1 (pr2 x))
-        ( pr2 (pr2 x))
-        ( λ b →
-          ( map-universal-property-trunc-Prop
-            ( pr1 y b)
-            ( λ { (c , refl , c-in-x) →
-              ( r-xy (◇ c)
-                ( weak-modal-logic-subset-complete-theory
-                  ( axioms)
-                  ( zorn)
-                  ( prop-resize)
-                  ( is-cons)
-                  ( contains-K)
-                  ( pr1 x , pr1 (pr2 x))
-                  ( pr2 (pr2 x))
-                  ( □ ◇ c)
-                  ( weak-modal-logic-mp
-                    ( weak-modal-logic-ax
-                      ( logic-subset-L-complete-theory
-                        ( axioms)
-                        ( zorn)
-                        ( prop-resize)
-                        ( is-cons)
-                        ( contains-K)
-                        ( pr1 x , pr1 (pr2 x))
-                        ( pr2 (pr2 x))
-                        ( c →ₘ □ ◇ c)
-                        ( ax-b-subset _ (c , refl))))
-                    ( weak-modal-logic-ax c-in-x))))})))
-        ( a)
-        ( box-a-in-y)
+      ( canonical-kripke-model logic is-logic is-cons is-normal lem zorn
+        prop-resize)
+  is-canonical-ax-b ax-b-subset x y xRy a box-a-in-y =
+    lemma-box-diamond-L-complete logic x
+      ( contains-ax-k)
+      ( contains-ax-s)
+      ( contains-ax-dn)
+      ( lem)
+      ( is-logic)
+      ( is-normal)
+      ( y)
+      ( λ b →
+        ( map-universal-property-trunc-Prop
+          ( modal-theory-L-complete-theory logic y b)
+          ( λ { (c , c-in-x , refl) →
+            ( xRy (◇ c)
+              ( weak-modal-logic-mp
+                ( is-weak-modal-logic-L-complete-theory logic lzero x)
+                ( subset-logic-L-complete-theory logic lzero x (c →ₘ □ ◇ c)
+                  ( ax-b-subset (c →ₘ □ ◇ c) (c , refl)))
+                ( c-in-x)))})))
+      ( a)
+      ( box-a-in-y)
 
   is-canonical-ax-4 :
-    ax-4 i ⊆ modal-logic axioms →
+    ax-4 i ⊆ logic →
     is-in-subtype
       ( transitivity-kripke-class (lsuc l1) l1 i l1)
-      ( canonical-kripke-model axioms zorn prop-resize is-cons contains-K)
-  is-canonical-ax-4 ax-4-subset x y z r-yz r-xy a box-a-in-x =
-      r-yz a
-        ( r-xy (□ a)
-          ( weak-modal-logic-subset-complete-theory
-          ( axioms)
-          ( zorn)
-          ( prop-resize)
-          ( is-cons)
-          ( contains-K)
-          ( pr1 x , pr1 (pr2 x))
-          ( pr2 (pr2 x))
-          ( □ □ a)
-          ( weak-modal-logic-mp
-            ( weak-modal-logic-ax
-              ( logic-subset-L-complete-theory
-                ( axioms)
-                ( zorn)
-                ( prop-resize)
-                ( is-cons)
-                ( contains-K)
-                ( pr1 x , pr1 (pr2 x))
-                ( pr2 (pr2 x))
-                ( □ a →ₘ □ □ a)
-                ( ax-4-subset _ (a , refl))))
-            ( weak-modal-logic-ax box-a-in-x))))
+      ( canonical-kripke-model logic is-logic is-cons is-normal lem zorn
+        prop-resize)
+  is-canonical-ax-4 ax-4-subset x y z yRz xRy a box-a-in-x =
+    yRz a
+      ( xRy (□ a)
+        ( weak-modal-logic-mp
+          ( is-weak-modal-logic-L-complete-theory logic lzero x)
+          ( subset-logic-L-complete-theory logic lzero x
+            ( □ a →ₘ □ □ a)
+            ( ax-4-subset (□ a →ₘ □ □ a) (a , refl)))
+          ( box-a-in-x)))
 ```
