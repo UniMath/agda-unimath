@@ -35,10 +35,10 @@ open import lists.lists
 open import lists.lists-subtypes
 
 open import modal-logic.axioms
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.formulas-deduction
 open import modal-logic.l-consistent-theories
-open import modal-logic.logic-syntax
 open import modal-logic.modal-logic-k
 open import modal-logic.weak-deduction
 
@@ -149,7 +149,7 @@ module _
               ( subset-axioms-weak-modal-logic-closure)
               ( subtype-union-left logic theory))
             ( refl-leq-subtype (weak-modal-logic-closure (logic ∪ theory)))))
-        ( ⊥)
+        ( ⊥ₘ)
         ( bot-in-logic))
 
   module _
@@ -261,46 +261,46 @@ module _
           ( contains-ax-dn)
 
     is-L-consistent-add-formula-not-in-logic :
-      {a : formula i} →
+      {a : modal-formula i} →
       ¬ (is-in-subtype theory a) →
-      is-L-consistent-theory logic (theory-add-formula (~ a) theory)
+      is-L-consistent-theory logic (theory-add-formula (¬ₘ a) theory)
     is-L-consistent-add-formula-not-in-logic {a} not-in-logic bot-in-logic =
       not-in-logic
         ( weak-modal-logic-mp
           ( is-weak-modal-logic-L-complete-theory lzero t)
-          ( contains-ax-dn' (~~ a →ₘ a) (a , refl))
-          ( is-weak-modal-logic-L-complete-theory lzero t (~~ a)
+          ( contains-ax-dn' (¬¬ₘ a →ₘ a) (a , refl))
+          ( is-weak-modal-logic-L-complete-theory lzero t (¬¬ₘ a)
             ( forward-implication
               ( deduction-lemma
                 ( theory)
                 ( contains-ax-k')
                 ( contains-ax-s')
-                ( ~ a)
-                ( ⊥))
+                ( ¬ₘ a)
+                ( ⊥ₘ))
               ( weak-modal-logic-closure-monotic
-                ( subtype-union-both logic (theory-add-formula (~ a) theory)
-                  ( theory-add-formula (~ a) theory)
+                ( subtype-union-both logic (theory-add-formula (¬ₘ a) theory)
+                  ( theory-add-formula (¬ₘ a) theory)
                   ( transitive-leq-subtype
                     ( logic)
                     ( theory)
-                    ( theory-add-formula (~ a) theory)
-                    ( subset-add-formula (~ a) theory)
+                    ( theory-add-formula (¬ₘ a) theory)
+                    ( subset-add-formula (¬ₘ a) theory)
                     ( subset-logic-L-complete-theory lzero t))
-                  ( refl-leq-subtype (theory-add-formula (~ a) theory)))
-                ( ⊥)
+                  ( refl-leq-subtype (theory-add-formula (¬ₘ a) theory)))
+                ( ⊥ₘ)
                 ( bot-in-logic)))))
 
     contains-negation-not-contains-formula-L-complete-theory :
-      {a : formula i} →
+      {a : modal-formula i} →
       ¬ (is-in-subtype theory a) →
-      is-in-subtype theory (~ a)
+      is-in-subtype theory (¬ₘ a)
     contains-negation-not-contains-formula-L-complete-theory {a} not-in-logic =
       tr
-        ( λ t → is-in-subtype t (~ a))
+        ( λ t → is-in-subtype t (¬ₘ a))
         ( eq-is-L-consistent-union-L-complete t
-          ( Id-formula-Prop (~ a))
+          ( Id-formula-Prop (¬ₘ a))
           ( is-L-consistent-add-formula-not-in-logic not-in-logic))
-        ( formula-in-add-formula (~ a) theory)
+        ( formula-in-add-formula (¬ₘ a) theory)
 
     module _
       (lem : LEM (l1 ⊔ l2))
@@ -330,14 +330,14 @@ module _
           ( is-consistent-modal-theory-L-complete-theory x
             ( weak-modal-logic-mp
               ( is-weak-modal-logic-L-complete-theory lzero x)
-              { a = □ a}
+              { a = □ₘ a}
               ( weak-modal-logic-mp
                   ( is-weak-modal-logic-L-complete-theory lzero x)
-                  { a = ◇ ~ a}
-                  ( subset-logic-L-complete-theory lzero x (◇ ~ a →ₘ ~ □ a)
+                  { a = ◇ₘ ¬ₘ a}
+                  ( subset-logic-L-complete-theory lzero x (◇ₘ ¬ₘ a →ₘ ¬ₘ □ₘ a)
                     ( modal-logic-diamond-negate-implication i logic is-normal
                       ( is-logic)))
-                  ( leq (◇ ~ a) (intro-exists (~ a) (not-a-in-t , refl))))
+                  ( leq (◇ₘ ¬ₘ a) (intro-exists (¬ₘ a) (not-a-in-t , refl))))
               ( box-a-in-x)))
 
   is-inhabited-L-complete-exists-complete-L-consistent-theory :
@@ -395,14 +395,14 @@ module _
       ∃ (type-chain-Poset P C) (λ x → modal-theory-chain-element x a)
 
     exists-chain-element-with-formula-Prop :
-      (a : formula i) → Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+      (a : modal-formula i) → Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
     exists-chain-element-with-formula-Prop a =
       ∃ (type-chain-Poset P C)
         ( λ x →
           ( weak-modal-logic-closure (logic ∪ modal-theory-chain-element x) a))
 
     exists-chain-element-with-formula :
-      (a : formula i) → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
+      (a : modal-formula i) → UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
     exists-chain-element-with-formula =
       type-Prop ∘ exists-chain-element-with-formula-Prop
 
@@ -427,8 +427,8 @@ module _
             ( contains-ax-s)
 
         L-union-deduction-lemma :
-          (l : list (formula i)) →
-          (h a : formula i) →
+          (l : list (modal-formula i)) →
+          (h a : modal-formula i) →
           is-in-subtype
             ( weak-modal-logic-closure (logic ∪ list-subtype (cons h l))) a →
           is-in-subtype
@@ -457,9 +457,9 @@ module _
 
       in-chain-in-chain-union-assumptions :
         is-inhabited (type-chain-Poset P C) →
-        (l : list (formula i)) →
+        (l : list (modal-formula i)) →
         list-subtype l ⊆ chain-union-modal-theory →
-        {a : formula i} →
+        {a : modal-formula i} →
         is-in-subtype (weak-modal-logic-closure (logic ∪ list-subtype l)) a →
         exists-chain-element-with-formula a
       in-chain-in-chain-union-assumptions is-inh nil leq {a} in-logic =
@@ -512,7 +512,7 @@ module _
 
       in-chain-in-chain-union :
         is-inhabited (type-chain-Poset P C) →
-        {a : formula i} →
+        {a : modal-formula i} →
         is-in-subtype
           ( weak-modal-logic-closure (logic ∪ chain-union-modal-theory))
           ( a) →

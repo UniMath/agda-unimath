@@ -28,8 +28,8 @@ open import foundation-core.sets
 open import foundation-core.subtypes
 
 open import modal-logic.axioms
+open import modal-logic.deduction
 open import modal-logic.formulas
-open import modal-logic.logic-syntax
 open import modal-logic.weak-deduction
 
 open import order-theory.maximal-elements-posets
@@ -124,7 +124,7 @@ module _
   L-consistent-theory-leq = type-Relation-Prop L-consistent-theory-leq-Prop
 
   theories-Poset : (l3 : Level) → Poset (l1 ⊔ lsuc l3) (l1 ⊔ l3)
-  theories-Poset l3 = subtypes-leq-Poset l3 (formula i)
+  theories-Poset l3 = subtypes-leq-Poset l3 (modal-formula i)
 
   L-consistent-theories-Poset :
     (l3 : Level) → Poset (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3)

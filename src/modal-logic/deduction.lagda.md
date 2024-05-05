@@ -1,7 +1,7 @@
 # Modal logic syntax
 
 ```agda
-module modal-logic.logic-syntax where
+module modal-logic.deduction where
 ```
 
 <details><summary>Imports</summary>
@@ -42,7 +42,7 @@ module _
   where
 
   modal-theory : UU (l1 ⊔ lsuc l2)
-  modal-theory = subtype l2 (formula i)
+  modal-theory = subtype l2 (modal-formula i)
 
 module _
   {l1 l2 : Level} {i : Set l1}
@@ -50,10 +50,10 @@ module _
 
   infix 5 _⊢_
 
-  data _⊢_ (axioms : modal-theory l2 i) : formula i → UU (l1 ⊔ l2) where
-    ax : {a : formula i} → is-in-subtype axioms a → axioms ⊢ a
-    mp : {a b : formula i} → axioms ⊢ a →ₘ b → axioms ⊢ a → axioms ⊢ b
-    nec : {a : formula i} → axioms ⊢ a → axioms ⊢ □ a
+  data _⊢_ (axioms : modal-theory l2 i) : modal-formula i → UU (l1 ⊔ l2) where
+    ax : {a : modal-formula i} → is-in-subtype axioms a → axioms ⊢ a
+    mp : {a b : modal-formula i} → axioms ⊢ a →ₘ b → axioms ⊢ a → axioms ⊢ b
+    nec : {a : modal-formula i} → axioms ⊢ a → axioms ⊢ □ₘ a
 
   -- TODO: rename to modal-logic-closure
   modal-logic-closure : modal-theory l2 i → modal-theory (l1 ⊔ l2) i
@@ -67,12 +67,12 @@ module _
   is-modal-logic = type-Prop ∘ is-modal-logic-Prop
 
   is-in-modal-logic-closure-deduction :
-    {axioms : modal-theory l2 i} {a : formula i} →
+    {axioms : modal-theory l2 i} {a : modal-formula i} →
     axioms ⊢ a → is-in-subtype (modal-logic-closure axioms) a
   is-in-modal-logic-closure-deduction = unit-trunc-Prop
 
   is-contradictory-modal-logic-Prop : modal-theory l2 i → Prop l2
-  is-contradictory-modal-logic-Prop logic = logic ⊥
+  is-contradictory-modal-logic-Prop logic = logic ⊥ₘ
 
   is-contradictory-modal-logic : modal-theory l2 i → UU l2
   is-contradictory-modal-logic = type-Prop ∘ is-contradictory-modal-logic-Prop
@@ -92,7 +92,7 @@ module _
     ax₁ ⊆ ax₂ →
     is-contradictory-modal-logic ax₁ →
     is-contradictory-modal-logic ax₂
-  is-contradictory-modal-logic-monotic ax₁ ax₂ leq = leq ⊥
+  is-contradictory-modal-logic-monotic ax₁ ax₂ leq = leq ⊥ₘ
 
   is-consistent-modal-logic-antimonotic :
     {l2 l3 : Level} (ax₁ : modal-theory l2 i) (ax₂ : modal-theory l3 i) →
@@ -107,13 +107,13 @@ module _
   where
 
   modal-logic-closure-ax :
-    {a : formula i} →
+    {a : modal-formula i} →
     is-in-subtype axioms a →
     is-in-subtype (modal-logic-closure axioms) a
   modal-logic-closure-ax = unit-trunc-Prop ∘ ax
 
   modal-logic-closure-mp :
-    {a b : formula i} →
+    {a b : modal-formula i} →
     is-in-subtype (modal-logic-closure axioms) (a →ₘ b) →
     is-in-subtype (modal-logic-closure axioms) a →
     is-in-subtype (modal-logic-closure axioms) b
@@ -123,12 +123,12 @@ module _
       ( λ dab da → unit-trunc-Prop (mp dab da))
 
   modal-logic-closure-nec :
-    {a : formula i} →
+    {a : modal-formula i} →
     is-in-subtype (modal-logic-closure axioms) a →
-    is-in-subtype (modal-logic-closure axioms) (□ a)
+    is-in-subtype (modal-logic-closure axioms) (□ₘ a)
   modal-logic-closure-nec {a} =
     map-universal-property-trunc-Prop
-      ( modal-logic-closure axioms (□ a))
+      ( modal-logic-closure axioms (□ₘ a))
       ( λ da → unit-trunc-Prop (nec da))
 
 module _
@@ -137,7 +137,7 @@ module _
   where
 
   modal-logic-mp :
-    {a b : formula i} →
+    {a b : modal-formula i} →
     is-in-subtype logic (a →ₘ b) →
     is-in-subtype logic a →
     is-in-subtype logic b
@@ -148,11 +148,11 @@ module _
         ( modal-logic-closure-ax da))
 
   modal-logic-nec :
-    {a : formula i} →
+    {a : modal-formula i} →
     is-in-subtype logic a →
-    is-in-subtype logic (□ a)
+    is-in-subtype logic (□ₘ a)
   modal-logic-nec {a} d =
-    is-logic (□ a) (modal-logic-closure-nec (modal-logic-closure-ax d))
+    is-logic (□ₘ a) (modal-logic-closure-nec (modal-logic-closure-ax d))
 
 module _
   {l1 : Level} {i : Set l1}
@@ -164,7 +164,7 @@ module _
   axioms-subset-modal-logic _ a H = unit-trunc-Prop (ax H)
 
   modal-logic-closed :
-    {l2 : Level} {axioms : modal-theory l2 i} {a : formula i} →
+    {l2 : Level} {axioms : modal-theory l2 i} {a : modal-formula i} →
     modal-logic-closure axioms ⊢ a →
     is-in-subtype (modal-logic-closure axioms) a
   modal-logic-closed (ax x) = x
@@ -189,7 +189,7 @@ module _
   (leq : ax₁ ⊆ ax₂)
   where
 
-  deduction-monotic : {a : formula i} → ax₁ ⊢ a → ax₂ ⊢ a
+  deduction-monotic : {a : modal-formula i} → ax₁ ⊢ a → ax₂ ⊢ a
   deduction-monotic (ax x) = ax (leq _ x)
   deduction-monotic (mp dab da) =
     mp (deduction-monotic dab) (deduction-monotic da)
@@ -218,7 +218,9 @@ module _
       ( modal-logic-monotic leq)
 
 module _
-  {l1 l2 : Level} {i : Set l1} (a : formula i) (theory : modal-theory l2 i)
+  {l1 l2 : Level} {i : Set l1}
+  (a : modal-formula i)
+  (theory : modal-theory l2 i)
   where
 
   -- TODO: make Id-formula to be a function for 1 element modal-theory
@@ -241,10 +243,10 @@ module _
       ( leq)
 
   elim-theory-add-formula :
-    {l3 : Level} (P : formula i → Prop l3) →
+    {l3 : Level} (P : modal-formula i → Prop l3) →
     type-Prop (P a) →
-    ((x : formula i) → is-in-subtype theory x → type-Prop (P x)) →
-    (x : formula i) → is-in-subtype theory-add-formula x → type-Prop (P x)
+    ((x : modal-formula i) → is-in-subtype theory x → type-Prop (P x)) →
+    (x : modal-formula i) → is-in-subtype theory-add-formula x → type-Prop (P x)
   elim-theory-add-formula P H-a H-rest =
     elim-union-subtype (Id-formula-Prop a) theory P
       ( λ { .a refl → H-a})
@@ -267,13 +269,13 @@ module _
   where
 
   unbox-modal-theory : modal-theory l2 i → modal-theory l2 i
-  unbox-modal-theory theory a = theory (□ a)
+  unbox-modal-theory theory a = theory (□ₘ a)
 
   diamond-modal-theory : modal-theory l2 i → modal-theory (l1 ⊔ l2) i
   diamond-modal-theory theory a =
     exists-structure-Prop
-      ( formula i)
-      ( λ b → is-in-subtype theory b × (a ＝ ◇ b))
+      ( modal-formula i)
+      ( λ b → is-in-subtype theory b × (a ＝ ◇ₘ b))
 
 module _
   {l1 : Level} {i : Set l1}
@@ -282,10 +284,10 @@ module _
   is-disjuctive-modal-theory :
     {l2 : Level} → modal-theory l2 i → UU (l1 ⊔ l2)
   is-disjuctive-modal-theory theory =
-    (a : formula i) → is-in-subtype theory a + is-in-subtype theory (~ a)
+    (a : modal-formula i) → is-in-subtype theory a + is-in-subtype theory (¬ₘ a)
 
   theory-add-formula-union-right :
-    (a : formula i)
+    (a : modal-formula i)
     {l2 l3 : Level}
     (theory : modal-theory l2 i)
     (theory' : modal-theory l3 i) →
@@ -295,7 +297,7 @@ module _
     union-swap-1-2 theory (Id-formula-Prop a) theory'
 
   inv-theory-add-formula-union-right :
-    (a : formula i)
+    (a : modal-formula i)
     {l2 l3 : Level}
     (theory : modal-theory l2 i)
     (theory' : modal-theory l3 i) →

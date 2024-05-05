@@ -33,12 +33,12 @@ open import lists.reversing-lists
 
 open import modal-logic.axioms
 open import modal-logic.completeness
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
 open import modal-logic.l-complete-theories
 open import modal-logic.l-consistent-theories
 open import modal-logic.lindenbaum
-open import modal-logic.logic-syntax
 open import modal-logic.modal-logic-k
 open import modal-logic.weak-deduction
 
@@ -108,10 +108,10 @@ module _
       ( contains-ax-s)
   pr2 (pr1 canonical-kripke-model) x y =
     Π-Prop
-      ( formula i)
+      ( modal-formula i)
       ( λ a →
         ( hom-Prop
-          ( modal-theory-L-complete-theory logic x (□ a))
+          ( modal-theory-L-complete-theory logic x (□ₘ a))
           ( modal-theory-L-complete-theory logic y a)))
   pr2 canonical-kripke-model n x =
     modal-theory-L-complete-theory logic x (var n)
@@ -168,7 +168,7 @@ module _
           ( lem)
 
     L-complete-theory-implication :
-      {a b : formula i} →
+      {a b : modal-formula i} →
       (is-in-subtype theory a → is-in-subtype theory b) →
       is-in-subtype theory (a →ₘ b)
     L-complete-theory-implication {a} {b} f with is-disjuctive-theory a
@@ -198,16 +198,16 @@ module _
               { ax₁ = theory}
               { ax₂ = theory-add-formula a theory}
               ( subset-add-formula a theory)
-              ( ~ a)
+              ( ¬ₘ a)
               ( weak-modal-logic-closure-ax not-a-in-logic))))
 
     L-complete-theory-box :
-      {a : formula i} →
+      {a : modal-formula i} →
       ( (y : L-complete-theory logic (l1 ⊔ l2)) →
         relation-kripke-model i canonical-kripke-model x y →
         is-in-subtype (modal-theory-L-complete-theory logic y) a) →
-      is-in-subtype theory (□ a)
-    L-complete-theory-box {a} f with is-disjuctive-theory (□ a)
+      is-in-subtype theory (□ₘ a)
+    L-complete-theory-box {a} f with is-disjuctive-theory (□ₘ a)
     ... | inl box-a-in-logic = box-a-in-logic
     ... | inr not-box-a-in-logic =
       ex-falso
@@ -219,37 +219,39 @@ module _
             ( is-consistent-modal-theory-L-complete-theory logic w
               ( weak-modal-logic-mp
                 ( is-weak-modal-logic-L-complete-theory logic lzero w)
-                ( y-leq-w (~ a)
-                  ( formula-in-add-formula (~ a) (unbox-modal-theory theory)))
+                ( y-leq-w (¬ₘ a)
+                  ( formula-in-add-formula (¬ₘ a) (unbox-modal-theory theory)))
                 ( f w (λ b → y-leq-w b ∘ y-contains-unbox))))))
       where
       y : modal-theory (l1 ⊔ l2) i
-      y = theory-add-formula (~ a) (unbox-modal-theory theory)
+      y = theory-add-formula (¬ₘ a) (unbox-modal-theory theory)
 
       y-contains-unbox :
-        {b : formula i} →
-        is-in-subtype theory (□ b) →
+        {b : modal-formula i} →
+        is-in-subtype theory (□ₘ b) →
         is-in-subtype y b
       y-contains-unbox {b} =
-        subset-add-formula (~ a) (unbox-modal-theory theory) b
+        subset-add-formula (¬ₘ a) (unbox-modal-theory theory) b
 
-      list-to-implications : formula i → (l : list (formula i)) → formula i
+      list-to-implications :
+        modal-formula i → (l : list (modal-formula i)) → modal-formula i
       list-to-implications f nil = f
       list-to-implications f (cons g l) = list-to-implications (g →ₘ f) l
 
-      list-to-implications-rev : formula i → (l : list (formula i)) → formula i
+      list-to-implications-rev :
+        modal-formula i → (l : list (modal-formula i)) → modal-formula i
       list-to-implications-rev f nil = f
       list-to-implications-rev f (cons g l) = g →ₘ list-to-implications-rev f l
 
       list-to-implication-rev-snoc :
-        (f g : formula i) (l : list (formula i)) →
+        (f g : modal-formula i) (l : list (modal-formula i)) →
         list-to-implications f (snoc l g) ＝ g →ₘ list-to-implications f l
       list-to-implication-rev-snoc f g nil = refl
       list-to-implication-rev-snoc f g (cons h l) =
         list-to-implication-rev-snoc (h →ₘ f) g l
 
       eq-reverse-list-to-implications :
-        (f : formula i) (l : list (formula i)) →
+        (f : modal-formula i) (l : list (modal-formula i)) →
         list-to-implications f (reverse-list l) ＝ list-to-implications-rev f l
       eq-reverse-list-to-implications f nil = refl
       eq-reverse-list-to-implications f (cons g l) =
@@ -257,7 +259,7 @@ module _
         ( ap (λ x → g →ₘ x) (eq-reverse-list-to-implications f l))
 
       move-assumptions-right :
-        (f : formula i) (l : list (formula i)) →
+        (f : modal-formula i) (l : list (modal-formula i)) →
         is-in-subtype (weak-modal-logic-closure (logic ∪ list-subtype l)) f →
         is-in-subtype
           ( weak-modal-logic-closure logic)
@@ -297,10 +299,10 @@ module _
               ( in-logic)))
 
       α :
-        (l : list (formula i)) →
+        (l : list (modal-formula i)) →
         list-subtype l ⊆ unbox-modal-theory theory →
-        is-in-subtype theory (□ (list-to-implications-rev a l)) →
-        is-in-subtype theory (□ a)
+        is-in-subtype theory (□ₘ (list-to-implications-rev a l)) →
+        is-in-subtype theory (□ₘ a)
       α nil sub in-logic = in-logic
       α (cons c l) sub in-logic =
         α l
@@ -312,25 +314,25 @@ module _
             ( subset-tail-list-subtype))
           ( weak-modal-logic-mp
             ( is-weak-modal-logic-L-complete-theory logic lzero x)
-            { a = □ c}
-            { b = □ list-to-implications-rev a l}
+            { a = □ₘ c}
+            { b = □ₘ list-to-implications-rev a l}
             ( weak-modal-logic-mp
               ( is-weak-modal-logic-L-complete-theory logic lzero x)
-              { a = □ (c →ₘ list-to-implications-rev a l)}
-              { b = □ c →ₘ □ (list-to-implications-rev a l)}
+              { a = □ₘ (c →ₘ list-to-implications-rev a l)}
+              { b = □ₘ c →ₘ □ₘ (list-to-implications-rev a l)}
               ( contains-ax-n' _ (c , list-to-implications-rev a l , refl))
               ( in-logic))
             ( sub c head-in-list-subtype))
 
       β :
-        (l : list (formula i)) →
+        (l : list (modal-formula i)) →
         list-subtype l ⊆ unbox-modal-theory theory →
         is-in-subtype (weak-modal-logic-closure (logic ∪ list-subtype l)) a →
-        is-in-subtype theory (□ a)
+        is-in-subtype theory (□ₘ a)
       β l sub in-logic =
         α l sub
           ( subset-logic-L-complete-theory logic lzero x
-            ( □ list-to-implications-rev a l)
+            ( □ₘ list-to-implications-rev a l)
             ( modal-logic-nec is-logic
               ( tr
                 ( is-in-subtype logic)
@@ -347,62 +349,62 @@ module _
                       ( in-logic)))))))
 
       γ :
-        (l : list (formula i)) →
+        (l : list (modal-formula i)) →
         list-subtype l ⊆ unbox-modal-theory theory →
         is-contradictory-modal-logic
           ( weak-modal-logic-closure
-            ( theory-add-formula (~ a) (logic ∪ list-subtype l))) →
-        is-in-subtype theory (□ a)
+            ( theory-add-formula (¬ₘ a) (logic ∪ list-subtype l))) →
+        is-in-subtype theory (□ₘ a)
       γ l sub is-cont =
         β l sub
-          ( weak-modal-logic-closure-mp {a = ~~ a} {b = a}
+          ( weak-modal-logic-closure-mp {a = ¬¬ₘ a} {b = a}
             ( weak-modal-logic-closure-ax
-              ( subtype-union-left logic (list-subtype l) (~~ a →ₘ a)
-                ( contains-ax-dn (~~ a →ₘ a) (a , refl))))
+              ( subtype-union-left logic (list-subtype l) (¬¬ₘ a →ₘ a)
+                ( contains-ax-dn (¬¬ₘ a →ₘ a) (a , refl))))
             ( forward-implication
               ( deduction-lemma
                 ( logic ∪ list-subtype l)
                 ( contains-ax-k-union (list-subtype l))
                 ( contains-ax-s-union (list-subtype l))
-                ( ~ a)
-                ( ⊥))
+                ( ¬ₘ a)
+                ( ⊥ₘ))
               ( is-cont)))
 
       δ :
-        (l : list (formula i)) →
+        (l : list (modal-formula i)) →
         list-subtype l ⊆ unbox-modal-theory theory →
         is-contradictory-modal-logic
           ( weak-modal-logic-closure
-            ( logic ∪ (theory-add-formula (~ a) (list-subtype l)))) →
-        is-in-subtype theory (□ a)
+            ( logic ∪ (theory-add-formula (¬ₘ a) (list-subtype l)))) →
+        is-in-subtype theory (□ₘ a)
       δ l sub is-cont =
         γ l sub
           ( is-contradictory-modal-logic-monotic
             ( weak-modal-logic-closure
-              ( logic ∪ theory-add-formula (~ a) (list-subtype l)))
+              ( logic ∪ theory-add-formula (¬ₘ a) (list-subtype l)))
             ( weak-modal-logic-closure
-              ( theory-add-formula (~ a) (logic ∪ list-subtype l)))
+              ( theory-add-formula (¬ₘ a) (logic ∪ list-subtype l)))
             ( weak-modal-logic-closure-monotic
-              ( theory-add-formula-union-right (~ a) logic (list-subtype l)))
+              ( theory-add-formula-union-right (¬ₘ a) logic (list-subtype l)))
             ( is-cont))
 
       ε :
-        (l : list (formula i)) →
+        (l : list (modal-formula i)) →
         list-subtype l ⊆ logic ∪ y →
         is-contradictory-modal-logic
           ( weak-modal-logic-closure (list-subtype l)) →
-        is-in-subtype theory (□ a)
+        is-in-subtype theory (□ₘ a)
       ε l sub is-cont =
         apply-universal-property-trunc-Prop
           ( lists-in-union-lists l logic y sub)
-          ( theory (□ a))
+          ( theory (□ₘ a))
           ( λ ((l-ax , l-y) , l-sub-union , l-ax-sub-logic , l-y-sub-y) →
             ( apply-universal-property-trunc-Prop
               ( lists-in-union-lists l-y
-                ( Id-formula-Prop (~ a))
+                ( Id-formula-Prop (¬ₘ a))
                 ( unbox-modal-theory theory)
                 ( l-y-sub-y))
-              ( theory (□ a))
+              ( theory (□ₘ a))
               ( λ ((l-not-a , l-box) , l-sub-union' , l-not-a-sub , l-box-sub) →
                 ( δ
                   ( l-box)
@@ -410,35 +412,37 @@ module _
                   ( is-contradictory-modal-logic-monotic
                     ( weak-modal-logic-closure (list-subtype l))
                     ( weak-modal-logic-closure
-                      ( logic ∪ theory-add-formula (~ a) (list-subtype l-box)))
+                      ( logic ∪ theory-add-formula (¬ₘ a) (list-subtype l-box)))
                     ( weak-modal-logic-closure-monotic
                       ( transitive-leq-subtype
                         ( list-subtype l)
                         ( list-subtype l-ax ∪ list-subtype l-y)
-                        ( logic ∪ theory-add-formula (~ a) (list-subtype l-box))
+                        ( logic ∪
+                            theory-add-formula (¬ₘ a) (list-subtype l-box))
                         ( subset-union-subsets
                           ( list-subtype l-ax)
                           ( list-subtype l-y)
                           ( logic)
-                          ( theory-add-formula (~ a) (list-subtype l-box))
+                          ( theory-add-formula (¬ₘ a) (list-subtype l-box))
                           ( l-ax-sub-logic)
                           ( transitive-leq-subtype
                             ( list-subtype l-y)
                             ( list-subtype l-not-a ∪ list-subtype l-box)
-                            ( theory-add-formula (~ a) (list-subtype l-box))
+                            ( theory-add-formula (¬ₘ a) (list-subtype l-box))
                             ( subtype-union-both
                               ( list-subtype l-not-a)
                               ( list-subtype l-box)
-                              ( theory-add-formula (~ a) (list-subtype l-box))
+                              ( theory-add-formula (¬ₘ a) (list-subtype l-box))
                               ( transitive-leq-subtype
                                 ( list-subtype l-not-a)
-                                ( Id-formula-Prop (~ a))
-                                ( theory-add-formula (~ a) (list-subtype l-box))
+                                ( Id-formula-Prop (¬ₘ a))
+                                ( theory-add-formula (¬ₘ a)
+                                  ( list-subtype l-box))
                                 ( subtype-union-left
-                                  ( Id-formula-Prop (~ a))
+                                  ( Id-formula-Prop (¬ₘ a))
                                   ( list-subtype l-box))
                                 ( l-not-a-sub))
-                              ( subset-add-formula (~ a) (list-subtype l-box)))
+                              ( subset-add-formula (¬ₘ a) (list-subtype l-box)))
                             ( l-sub-union')))
                         ( l-sub-union)))
                     ( is-cont))))))
@@ -459,13 +463,13 @@ module _
                     ( is-assumptions-list-assumptions-weak-deduction d-bot))))))
 
   canonical-model-theorem-pointwise :
-    (a : formula i)
+    (a : modal-formula i)
     (x : L-complete-theory logic (l1 ⊔ l2)) →
     type-iff-Prop
       ( modal-theory-L-complete-theory logic x a)
       ( (canonical-kripke-model , x) ⊨ a)
   pr1 (canonical-model-theorem-pointwise (var n) x) = map-raise
-  pr1 (canonical-model-theorem-pointwise ⊥ x) =
+  pr1 (canonical-model-theorem-pointwise ⊥ₘ x) =
     map-raise ∘ is-consistent-modal-theory-L-complete-theory logic x
   pr1 (canonical-model-theorem-pointwise (a →ₘ b) x) in-logic f =
     forward-implication
@@ -474,12 +478,12 @@ module _
         ( is-weak-modal-logic-L-complete-theory logic lzero x)
         ( in-logic)
         ( backward-implication (canonical-model-theorem-pointwise a x) f))
-  pr1 (canonical-model-theorem-pointwise (□ a) x) in-logic y xRy =
+  pr1 (canonical-model-theorem-pointwise (□ₘ a) x) in-logic y xRy =
     forward-implication
       ( canonical-model-theorem-pointwise a y)
       ( xRy a in-logic)
   pr2 (canonical-model-theorem-pointwise (var n) x) = map-inv-raise
-  pr2 (canonical-model-theorem-pointwise ⊥ x) (map-raise ())
+  pr2 (canonical-model-theorem-pointwise ⊥ₘ x) (map-raise ())
   pr2 (canonical-model-theorem-pointwise (a →ₘ b) x) f =
     L-complete-theory-implication x
       ( λ in-x →
@@ -489,7 +493,7 @@ module _
             ( forward-implication
               ( canonical-model-theorem-pointwise a x)
               ( in-x)))))
-  pr2 (canonical-model-theorem-pointwise (□ a) x) f =
+  pr2 (canonical-model-theorem-pointwise (□ₘ a) x) f =
     L-complete-theory-box x
       ( λ y xRy →
         ( backward-implication
@@ -497,7 +501,8 @@ module _
           ( f y xRy)))
 
   canonical-model-theorem :
-    (a : formula i) → type-iff-Prop (logic a) (canonical-kripke-model ⊨M a)
+    (a : modal-formula i) →
+    type-iff-Prop (logic a) (canonical-kripke-model ⊨M a)
   pr1 (canonical-model-theorem a) in-logic x =
     forward-implication
       ( canonical-model-theorem-pointwise a x)
@@ -513,19 +518,19 @@ module _
             ( is-consistent-modal-theory-L-complete-theory logic w
               ( weak-modal-logic-mp
                 ( is-weak-modal-logic-L-complete-theory logic lzero w)
-                ( leq (~ a) not-a-in-x)
+                ( leq (¬ₘ a) not-a-in-x)
                 ( backward-implication
                   ( canonical-model-theorem-pointwise a w)
                   ( f w)))))))
     where
     x : modal-theory (l1 ⊔ l2) i
-    x = raise-subtype l2 (Id-formula-Prop (~ a))
+    x = raise-subtype l2 (Id-formula-Prop (¬ₘ a))
 
-    not-a-in-x : is-in-subtype x ( ~ a)
+    not-a-in-x : is-in-subtype x ( ¬ₘ a)
     not-a-in-x =
-      subset-equiv-subtypes (Id-formula-Prop (~ a)) x
-        ( compute-raise-subtype l2 (Id-formula-Prop (~ a)))
-        ( ~ a)
+      subset-equiv-subtypes (Id-formula-Prop (¬ₘ a)) x
+        ( compute-raise-subtype l2 (Id-formula-Prop (¬ₘ a)))
+        ( ¬ₘ a)
         ( refl)
 
     is-L-consistent-x :
@@ -533,22 +538,22 @@ module _
     is-L-consistent-x a-not-in-logic bot-in-logic =
       a-not-in-logic
         ( modal-logic-mp is-logic
-          {a = ~~ a}
+          {a = ¬¬ₘ a}
           {b = a}
-          ( contains-ax-dn (~~ a →ₘ a) (a , refl))
-          ( is-logic (~~ a)
-            ( subset-weak-modal-logic-closure-modal-logic-closure (~~ a)
+          ( contains-ax-dn (¬¬ₘ a →ₘ a) (a , refl))
+          ( is-logic (¬¬ₘ a)
+            ( subset-weak-modal-logic-closure-modal-logic-closure (¬¬ₘ a)
               ( forward-implication
-                ( deduction-lemma logic contains-ax-k contains-ax-s ( ~ a) ⊥)
+                ( deduction-lemma logic contains-ax-k contains-ax-s ( ¬ₘ a) ⊥ₘ)
                 ( weak-modal-logic-closure-monotic
-                  ( subtype-union-both logic x (theory-add-formula (~ a) logic)
-                    ( subtype-union-right (Id-formula-Prop (~ a)) logic)
-                    ( transitive-leq-subtype x (Id-formula-Prop (~ a))
-                      ( theory-add-formula (~ a) logic)
-                      ( subtype-union-left (Id-formula-Prop (~ a)) logic)
-                      ( inv-subset-equiv-subtypes (Id-formula-Prop (~ a)) x
-                        ( compute-raise-subtype l2 (Id-formula-Prop (~ a))))))
-                  ( ⊥)
+                  ( subtype-union-both logic x (theory-add-formula (¬ₘ a) logic)
+                    ( subtype-union-right (Id-formula-Prop (¬ₘ a)) logic)
+                    ( transitive-leq-subtype x (Id-formula-Prop (¬ₘ a))
+                      ( theory-add-formula (¬ₘ a) logic)
+                      ( subtype-union-left (Id-formula-Prop (¬ₘ a)) logic)
+                      ( inv-subset-equiv-subtypes (Id-formula-Prop (¬ₘ a)) x
+                        ( compute-raise-subtype l2 (Id-formula-Prop (¬ₘ a))))))
+                  ( ⊥ₘ)
                   ( bot-in-logic))))))
 
   canonical-model-completness :

@@ -33,8 +33,8 @@ open import foundation.universe-levels
 open import foundation-core.equivalence-relations
 open import foundation-core.identity-types
 
+open import modal-logic.deduction
 open import modal-logic.formulas
-open import modal-logic.logic-syntax
 
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.finite-types
@@ -230,23 +230,23 @@ module _
 
   _⊨_ :
     Σ (kripke-model l1 l2 i l4) (type-kripke-model i) →
-    formula i →
+    modal-formula i →
     Prop (l1 ⊔ l2 ⊔ l4)
   (M , x) ⊨ var n = raise-Prop (l1 ⊔ l2) (valuate-kripke-model i M n x)
-  (M , x) ⊨ ⊥ = raise-empty-Prop (l1 ⊔ l2 ⊔ l4)
+  (M , x) ⊨ ⊥ₘ = raise-empty-Prop (l1 ⊔ l2 ⊔ l4)
   (M , x) ⊨ a →ₘ b = hom-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
-  (M , x) ⊨ □ a =
+  (M , x) ⊨ □ₘ a =
     Π-Prop
       ( type-kripke-model i M)
       ( λ y → function-Prop (relation-kripke-model i M x y) ((M , y) ⊨ a))
 
-  _⊨M_ : kripke-model l1 l2 i l4 → formula i → Prop (l1 ⊔ l2 ⊔ l4)
+  _⊨M_ : kripke-model l1 l2 i l4 → modal-formula i → Prop (l1 ⊔ l2 ⊔ l4)
   M ⊨M a = Π-Prop (type-kripke-model i M) (λ x → (M , x) ⊨ a)
 
   _⊨C_ :
     {l5 : Level} →
     model-class l1 l2 i l4 l5 →
-    formula i →
+    modal-formula i →
     Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5)
   C ⊨C a =
     Π-Prop
@@ -278,7 +278,7 @@ module _
   decidable-models : model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   decidable-models M =
     Π-Prop
-      ( formula i)
+      ( modal-formula i)
       ( λ a →
         ( Π-Prop
           ( type-kripke-model i M)
@@ -312,15 +312,15 @@ module _
   finite-models-subclass-decidable-models M (w-is-fin , dec-r , dec-v) = lemma
     where
     lemma :
-      (a : formula i) (x : type-kripke-model i M) →
+      (a : modal-formula i) (x : type-kripke-model i M) →
       is-decidable (type-Prop ((M , x) ⊨ a))
     lemma (var n) x =
       is-decidable-raise (l1 ⊔ l2) _ (dec-v x n)
-    lemma ⊥ x =
+    lemma ⊥ₘ x =
       inr map-inv-raise
     lemma (a →ₘ b) x =
       is-decidable-function-type (lemma a x) (lemma b x)
-    lemma (□ a) x =
+    lemma (□ₘ a) x =
       is-decidable-Π-is-finite
         ( w-is-fin)
         ( λ y → is-decidable-function-type (dec-r x y) (lemma a y))
@@ -328,7 +328,7 @@ module _
   is-finite-model-valuate-decidable-models :
     (M : kripke-model l1 l2 i l4) →
     is-in-subtype (finite-models l1 l2 i l4) M →
-    (a : formula i) →
+    (a : modal-formula i) →
     is-decidable (type-Prop (M ⊨M a))
   is-finite-model-valuate-decidable-models M sub-fin a =
     is-decidable-Π-is-finite

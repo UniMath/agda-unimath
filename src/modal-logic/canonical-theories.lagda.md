@@ -24,10 +24,10 @@ open import foundation-core.coproduct-types
 open import modal-logic.axioms
 open import modal-logic.canonical-model-theorem
 open import modal-logic.completeness
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
 open import modal-logic.l-complete-theories
-open import modal-logic.logic-syntax
 open import modal-logic.modal-logic-k
 open import modal-logic.modal-logic-s5
 open import modal-logic.soundness
@@ -95,8 +95,8 @@ module _
     weak-modal-logic-mp
       ( is-weak-modal-logic-L-complete-theory logic lzero x)
       ( subset-logic-L-complete-theory logic lzero x
-        ( □ a →ₘ a)
-        ( ax-m-subset (□ a →ₘ a) (a , refl)))
+        ( □ₘ a →ₘ a)
+        ( ax-m-subset (□ₘ a →ₘ a) (a , refl)))
       ( box-a-in-x)
 
   is-canonical-ax-b :
@@ -118,11 +118,11 @@ module _
         ( map-universal-property-trunc-Prop
           ( modal-theory-L-complete-theory logic y b)
           ( λ { (c , c-in-x , refl) →
-            ( xRy (◇ c)
+            ( xRy (◇ₘ c)
               ( weak-modal-logic-mp
                 ( is-weak-modal-logic-L-complete-theory logic lzero x)
-                ( subset-logic-L-complete-theory logic lzero x (c →ₘ □ ◇ c)
-                  ( ax-b-subset (c →ₘ □ ◇ c) (c , refl)))
+                ( subset-logic-L-complete-theory logic lzero x (c →ₘ □ₘ ◇ₘ c)
+                  ( ax-b-subset (c →ₘ □ₘ ◇ₘ c) (c , refl)))
                 ( c-in-x)))})))
       ( a)
       ( box-a-in-y)
@@ -135,11 +135,11 @@ module _
         prop-resize)
   is-canonical-ax-4 ax-4-subset x y z yRz xRy a box-a-in-x =
     yRz a
-      ( xRy (□ a)
+      ( xRy (□ₘ a)
         ( weak-modal-logic-mp
           ( is-weak-modal-logic-L-complete-theory logic lzero x)
           ( subset-logic-L-complete-theory logic lzero x
-            ( □ a →ₘ □ □ a)
-            ( ax-4-subset (□ a →ₘ □ □ a) (a , refl)))
+            ( □ₘ a →ₘ □ₘ □ₘ a)
+            ( ax-4-subset (□ₘ a →ₘ □ₘ □ₘ a) (a , refl)))
           ( box-a-in-x)))
 ```

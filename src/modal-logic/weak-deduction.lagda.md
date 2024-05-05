@@ -34,8 +34,8 @@ open import lists.lists-subtypes
 open import lists.reversing-lists
 
 open import modal-logic.axioms
+open import modal-logic.deduction
 open import modal-logic.formulas
-open import modal-logic.logic-syntax
 ```
 
 </details>
@@ -52,39 +52,41 @@ module _
   where
 
   is-weak-deduction-Prop :
-    {axioms : modal-theory l2 i} {a : formula i} → axioms ⊢ a → Prop lzero
+    {axioms : modal-theory l2 i} {a : modal-formula i} → axioms ⊢ a → Prop lzero
   is-weak-deduction-Prop (ax x) = unit-Prop
   is-weak-deduction-Prop (mp dab da) =
     conjunction-Prop (is-weak-deduction-Prop dab) (is-weak-deduction-Prop da)
   is-weak-deduction-Prop (nec d) = empty-Prop
 
   is-weak-deduction :
-    {axioms : modal-theory l2 i} {a : formula i} → axioms ⊢ a → UU lzero
+    {axioms : modal-theory l2 i} {a : modal-formula i} → axioms ⊢ a → UU lzero
   is-weak-deduction = type-Prop ∘ is-weak-deduction-Prop
 
   infix 5 _⊢w_
 
-  _⊢w_ : modal-theory l2 i → formula i → UU (l1 ⊔ l2)
+  _⊢w_ : modal-theory l2 i → modal-formula i → UU (l1 ⊔ l2)
   axioms ⊢w a = type-subtype (is-weak-deduction-Prop {axioms} {a})
 
   deduction-weak-deduction :
-    {axioms : modal-theory l2 i} {a : formula i} → axioms ⊢w a → axioms ⊢ a
+    {axioms : modal-theory l2 i} {a : modal-formula i} →
+    axioms ⊢w a →
+    axioms ⊢ a
   deduction-weak-deduction = inclusion-subtype is-weak-deduction-Prop
 
   is-weak-deduction-deduction-weak-deduction :
-    {axioms : modal-theory l2 i} {a : formula i} (d : axioms ⊢w a) →
+    {axioms : modal-theory l2 i} {a : modal-formula i} (d : axioms ⊢w a) →
     is-weak-deduction (deduction-weak-deduction d)
   is-weak-deduction-deduction-weak-deduction =
     is-in-subtype-inclusion-subtype is-weak-deduction-Prop
 
   weak-deduction-ax :
-    {axioms : modal-theory l2 i} {a : formula i} →
+    {axioms : modal-theory l2 i} {a : modal-formula i} →
     is-in-subtype axioms a →
     axioms ⊢w a
   weak-deduction-ax in-axioms = ax in-axioms , star
 
   weak-deduction-mp :
-    {axioms : modal-theory l2 i} {a b : formula i} →
+    {axioms : modal-theory l2 i} {a b : modal-formula i} →
     axioms ⊢w (a →ₘ b) →
     axioms ⊢w a →
     axioms ⊢w b
@@ -93,12 +95,12 @@ module _
 
   ind-weak-deduction :
     {l : Level} {axioms : modal-theory l2 i}
-    (P : {a : formula i} → axioms ⊢w a → UU l) →
-    ( {a : formula i} (in-axioms : is-in-subtype axioms a) →
+    (P : {a : modal-formula i} → axioms ⊢w a → UU l) →
+    ( {a : modal-formula i} (in-axioms : is-in-subtype axioms a) →
       P (weak-deduction-ax in-axioms)) →
-    ( {a b : formula i} (dab : axioms ⊢w a →ₘ b) (da : axioms ⊢w a) →
+    ( {a b : modal-formula i} (dab : axioms ⊢w a →ₘ b) (da : axioms ⊢w a) →
       P dab → P da → P (weak-deduction-mp dab da)) →
-    {a : formula i} (wd : axioms ⊢w a) → P wd
+    {a : modal-formula i} (wd : axioms ⊢w a) → P wd
   ind-weak-deduction P H-ax H-mp (ax in-axioms , _) =
     H-ax in-axioms
   ind-weak-deduction P H-ax H-mp (mp dba db , is-w-dba , is-w-db) =
@@ -108,10 +110,10 @@ module _
 
   rec-weak-deduction :
     {l : Level} {axioms : modal-theory l2 i} {P : UU l} →
-    ( {a : formula i} (in-axioms : is-in-subtype axioms a) → P) →
-    ( {a b : formula i} (dab : axioms ⊢w a →ₘ b) (da : axioms ⊢w a) →
+    ( {a : modal-formula i} (in-axioms : is-in-subtype axioms a) → P) →
+    ( {a b : modal-formula i} (dab : axioms ⊢w a →ₘ b) (da : axioms ⊢w a) →
       P → P → P) →
-    {a : formula i} (wd : axioms ⊢w a) → P
+    {a : modal-formula i} (wd : axioms ⊢w a) → P
   rec-weak-deduction {P = P} = ind-weak-deduction (λ _ → P)
 
   weak-modal-logic-closure : modal-theory l2 i → modal-theory (l1 ⊔ l2) i
@@ -125,7 +127,7 @@ module _
   is-weak-modal-logic = type-Prop ∘ is-weak-modal-logic-Prop
 
   is-in-weak-modal-logic-closure-weak-deduction :
-    {axioms : modal-theory l2 i} {a : formula i} →
+    {axioms : modal-theory l2 i} {a : modal-formula i} →
     axioms ⊢w a → is-in-subtype (weak-modal-logic-closure axioms) a
   is-in-weak-modal-logic-closure-weak-deduction = unit-trunc-Prop
 
@@ -154,14 +156,14 @@ module _
   where
 
   weak-modal-logic-closure-ax :
-    {a : formula i} →
+    {a : modal-formula i} →
     is-in-subtype axioms a →
     is-in-subtype (weak-modal-logic-closure axioms) a
   weak-modal-logic-closure-ax =
     is-in-weak-modal-logic-closure-weak-deduction ∘ weak-deduction-ax
 
   weak-modal-logic-closure-mp :
-    {a b : formula i} →
+    {a b : modal-formula i} →
     is-in-subtype (weak-modal-logic-closure axioms) (a →ₘ b) →
     is-in-subtype (weak-modal-logic-closure axioms) a →
     is-in-subtype (weak-modal-logic-closure axioms) b
@@ -179,7 +181,7 @@ module _
   where
 
   weak-modal-logic-mp :
-    {a b : formula i} →
+    {a b : modal-formula i} →
     is-in-subtype theory (a →ₘ b) →
     is-in-subtype theory a →
     is-in-subtype theory b
@@ -194,7 +196,7 @@ module _
   where
 
   weak-modal-logic-closed :
-    {a : formula i} → weak-modal-logic-closure axioms ⊢w a →
+    {a : modal-formula i} → weak-modal-logic-closure axioms ⊢w a →
     is-in-subtype (weak-modal-logic-closure axioms) a
   weak-modal-logic-closed =
     ind-weak-deduction _
@@ -220,7 +222,7 @@ module _
   (leq : ax₁ ⊆ ax₂)
   where
 
-  weak-deduction-monotic : {a : formula i} → ax₁ ⊢w a → ax₂ ⊢w a
+  weak-deduction-monotic : {a : modal-formula i} → ax₁ ⊢w a → ax₂ ⊢w a
   weak-deduction-monotic =
     ind-weak-deduction _
       ( λ {a} in-axioms → weak-deduction-ax (leq a in-axioms))
@@ -255,7 +257,7 @@ module _
   where
 
   backward-subset-head-add :
-    (a : formula i) (l : list (formula i)) →
+    (a : modal-formula i) (l : list (modal-formula i)) →
     list-subtype (cons a l) ⊆ theory-add-formula a (list-subtype l)
   backward-subset-head-add a l =
     subset-list-subtype-cons
@@ -269,7 +271,7 @@ module _
   where
 
   backward-deduction-lemma :
-    {a b : formula i} →
+    {a b : modal-formula i} →
     axioms ⊢w a →ₘ b →
     theory-add-formula a axioms ⊢w b
   backward-deduction-lemma {a} wab =
@@ -286,7 +288,7 @@ module _
 
     -- TODO: move to file with deduction
     deduction-a->a :
-      (a : formula i) → axioms ⊢w a →ₘ a
+      (a : modal-formula i) → axioms ⊢w a →ₘ a
     deduction-a->a a =
       weak-deduction-mp
         ( weak-deduction-mp
@@ -295,7 +297,7 @@ module _
         ( weak-deduction-ax (contains-ax-k _ (a , a , refl)))
 
     forward-deduction-lemma :
-      (a : formula i) {b : formula i} →
+      (a : modal-formula i) {b : modal-formula i} →
       theory-add-formula a axioms ⊢w b →
       is-in-subtype (weak-modal-logic-closure axioms) (a →ₘ b)
     forward-deduction-lemma a =
@@ -320,7 +322,7 @@ module _
             ( dab)))
 
     deduction-lemma :
-      (a b : formula i) →
+      (a b : modal-formula i) →
       type-iff-Prop
         ( weak-modal-logic-closure (theory-add-formula a axioms) b)
         ( weak-modal-logic-closure axioms (a →ₘ b))
@@ -343,15 +345,15 @@ module _
   where
 
   list-assumptions-weak-deduction :
-    {l2 : Level} {theory : modal-theory l2 i} {a : formula i} →
-    theory ⊢w a → list (formula i)
+    {l2 : Level} {theory : modal-theory l2 i} {a : modal-formula i} →
+    theory ⊢w a → list (modal-formula i)
   list-assumptions-weak-deduction =
     rec-weak-deduction
       ( λ {a} _ → cons a nil)
       ( λ _ _ l1 l2 → concat-list l1 l2)
 
   subset-theory-list-assumptions-weak-deduction :
-    {l2 : Level} {theory : modal-theory l2 i} {a : formula i} →
+    {l2 : Level} {theory : modal-theory l2 i} {a : modal-formula i} →
     (d : theory ⊢w a) →
     list-subtype (list-assumptions-weak-deduction d) ⊆ theory
   subset-theory-list-assumptions-weak-deduction {theory = theory} =
@@ -378,7 +380,7 @@ module _
           ( subset-list-subtype-concat-union)))
 
   is-assumptions-list-assumptions-weak-deduction :
-    {l2 : Level} {theory : modal-theory l2 i} {a : formula i} →
+    {l2 : Level} {theory : modal-theory l2 i} {a : modal-formula i} →
     (d : theory ⊢w a) →
     list-subtype (list-assumptions-weak-deduction d) ⊢w a
   is-assumptions-list-assumptions-weak-deduction {theory = theory} =
@@ -412,61 +414,61 @@ module _
   -- TODO: move to formulas-deduction
 
   deduction-ex-falso :
-    (a b : formula i) →
-    is-in-subtype (weak-modal-logic-closure axioms) (~ a →ₘ a →ₘ b)
+    (a b : modal-formula i) →
+    is-in-subtype (weak-modal-logic-closure axioms) (¬ₘ a →ₘ a →ₘ b)
   deduction-ex-falso a b =
     forward-implication
-      ( deduction-lemma axioms contains-ax-k contains-ax-s (~ a) (a →ₘ b))
+      ( deduction-lemma axioms contains-ax-k contains-ax-s (¬ₘ a) (a →ₘ b))
       ( forward-implication
         ( deduction-lemma
-          ( theory-add-formula (~ a) axioms)
+          ( theory-add-formula (¬ₘ a) axioms)
           ( contains-ax-k')
           ( contains-ax-s')
           ( a)
           ( b))
-        ( weak-modal-logic-closure-mp {a = ~~ b}
+        ( weak-modal-logic-closure-mp {a = ¬¬ₘ b}
           ( weak-modal-logic-closure-ax
-            ( contains-ax-dn'' (~~ b →ₘ b) (b , refl)))
-          ( weak-modal-logic-closure-mp {a = ⊥}
+            ( contains-ax-dn'' (¬¬ₘ b →ₘ b) (b , refl)))
+          ( weak-modal-logic-closure-mp {a = ⊥ₘ}
             ( weak-modal-logic-closure-ax
-              ( contains-ax-k'' (⊥ →ₘ ~ b →ₘ ⊥) (⊥ , ~ b , refl)))
+              ( contains-ax-k'' (⊥ₘ →ₘ ¬ₘ b →ₘ ⊥ₘ) (⊥ₘ , ¬ₘ b , refl)))
             ( weak-modal-logic-closure-mp {a = a}
               ( weak-modal-logic-closure-ax
                 ( subset-add-formula a
-                  ( theory-add-formula (~ a) axioms)
-                  ( ~ a)
-                  ( formula-in-add-formula (~ a) axioms)))
+                  ( theory-add-formula (¬ₘ a) axioms)
+                  ( ¬ₘ a)
+                  ( formula-in-add-formula (¬ₘ a) axioms)))
               ( weak-modal-logic-closure-ax
                 ( formula-in-add-formula a
-                  ( theory-add-formula (~ a) axioms)))))))
+                  ( theory-add-formula (¬ₘ a) axioms)))))))
     where
-    contains-ax-k' : ax-k i ⊆ theory-add-formula (~ a) axioms
+    contains-ax-k' : ax-k i ⊆ theory-add-formula (¬ₘ a) axioms
     contains-ax-k' =
-      transitive-subset-add-formula (~ a) axioms (ax-k i) contains-ax-k
+      transitive-subset-add-formula (¬ₘ a) axioms (ax-k i) contains-ax-k
 
-    contains-ax-s' : ax-s i ⊆ theory-add-formula (~ a) axioms
+    contains-ax-s' : ax-s i ⊆ theory-add-formula (¬ₘ a) axioms
     contains-ax-s' =
-      transitive-subset-add-formula (~ a) axioms (ax-s i) contains-ax-s
+      transitive-subset-add-formula (¬ₘ a) axioms (ax-s i) contains-ax-s
 
     contains-ax-k'' :
-      ax-k i ⊆ theory-add-formula a (theory-add-formula (~ a) axioms)
+      ax-k i ⊆ theory-add-formula a (theory-add-formula (¬ₘ a) axioms)
     contains-ax-k'' =
-      transitive-subset-add-formula a (theory-add-formula (~ a) axioms)
+      transitive-subset-add-formula a (theory-add-formula (¬ₘ a) axioms)
         ( ax-k i)
         ( contains-ax-k')
 
     contains-ax-dn'' :
-      ax-dn i ⊆ theory-add-formula a (theory-add-formula (~ a) axioms)
+      ax-dn i ⊆ theory-add-formula a (theory-add-formula (¬ₘ a) axioms)
     contains-ax-dn'' =
       transitive-subset-add-formula a
-        ( theory-add-formula (~ a) axioms)
+        ( theory-add-formula (¬ₘ a) axioms)
         ( ax-dn i)
-        ( transitive-subset-add-formula (~ a) axioms (ax-dn i) contains-ax-dn)
+        ( transitive-subset-add-formula (¬ₘ a) axioms (ax-dn i) contains-ax-dn)
 
   logic-ex-falso :
-    (a b : formula i) →
+    (a b : modal-formula i) →
     is-in-subtype (weak-modal-logic-closure axioms) a →
-    is-in-subtype (weak-modal-logic-closure axioms) (~ a) →
+    is-in-subtype (weak-modal-logic-closure axioms) (¬ₘ a) →
     is-in-subtype (weak-modal-logic-closure axioms) b
   logic-ex-falso a b a-in-logic not-a-in-logic =
     weak-modal-logic-closure-mp
@@ -482,30 +484,30 @@ module _
   where
 
   inv-deduction-ex-falso :
-    (a b : formula i) →
-    is-in-subtype (weak-modal-logic-closure axioms) (a →ₘ ~ a →ₘ b)
+    (a b : modal-formula i) →
+    is-in-subtype (weak-modal-logic-closure axioms) (a →ₘ ¬ₘ a →ₘ b)
   inv-deduction-ex-falso a b =
     forward-implication
-      ( deduction-lemma axioms contains-ax-k contains-ax-s a (~ a →ₘ b))
+      ( deduction-lemma axioms contains-ax-k contains-ax-s a (¬ₘ a →ₘ b))
       ( forward-implication
         ( deduction-lemma
           ( theory-add-formula a axioms)
           ( contains-ax-k')
           ( contains-ax-s')
-          ( ~ a)
+          ( ¬ₘ a)
           ( b))
         ( logic-ex-falso
-          ( theory-add-formula (a →ₘ ⊥) (theory-add-formula a axioms))
+          ( theory-add-formula (a →ₘ ⊥ₘ) (theory-add-formula a axioms))
           ( contains-ax-k'')
           ( contains-ax-s'')
           ( contains-ax-dn'')
           ( a)
           ( b)
           ( weak-modal-logic-closure-ax
-            ( subset-add-formula (~ a) (theory-add-formula a axioms) a
+            ( subset-add-formula (¬ₘ a) (theory-add-formula a axioms) a
               ( formula-in-add-formula a axioms)))
           ( weak-modal-logic-closure-ax
-            ( formula-in-add-formula (~ a) (theory-add-formula a axioms)))))
+            ( formula-in-add-formula (¬ₘ a) (theory-add-formula a axioms)))))
     where
     contains-ax-k' : ax-k i ⊆ theory-add-formula a axioms
     contains-ax-k' =
@@ -516,23 +518,23 @@ module _
       transitive-subset-add-formula a axioms (ax-s i) contains-ax-s
 
     contains-ax-k'' :
-      ax-k i ⊆ theory-add-formula (~ a) (theory-add-formula a axioms)
+      ax-k i ⊆ theory-add-formula (¬ₘ a) (theory-add-formula a axioms)
     contains-ax-k'' =
-      transitive-subset-add-formula (~ a) (theory-add-formula a axioms)
+      transitive-subset-add-formula (¬ₘ a) (theory-add-formula a axioms)
         ( ax-k i)
         ( contains-ax-k')
 
     contains-ax-s'' :
-      ax-s i ⊆ theory-add-formula (~ a) (theory-add-formula a axioms)
+      ax-s i ⊆ theory-add-formula (¬ₘ a) (theory-add-formula a axioms)
     contains-ax-s'' =
-      transitive-subset-add-formula (~ a) (theory-add-formula a axioms)
+      transitive-subset-add-formula (¬ₘ a) (theory-add-formula a axioms)
         ( ax-s i)
         ( contains-ax-s')
 
     contains-ax-dn'' :
-      ax-dn i ⊆ theory-add-formula (~ a) (theory-add-formula a axioms)
+      ax-dn i ⊆ theory-add-formula (¬ₘ a) (theory-add-formula a axioms)
     contains-ax-dn'' =
-      transitive-subset-add-formula (~ a)
+      transitive-subset-add-formula (¬ₘ a)
         ( theory-add-formula a axioms)
         ( ax-dn i)
         ( transitive-subset-add-formula a axioms (ax-dn i) contains-ax-dn)

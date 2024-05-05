@@ -20,9 +20,9 @@ open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
-open import modal-logic.logic-syntax
 ```
 
 </details>

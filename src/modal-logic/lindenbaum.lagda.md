@@ -20,9 +20,9 @@ open import foundation-core.sets
 open import foundation-core.subtypes
 
 open import modal-logic.axioms
+open import modal-logic.deduction
 open import modal-logic.l-complete-theories
 open import modal-logic.l-consistent-theories
-open import modal-logic.logic-syntax
 open import modal-logic.weak-deduction
 
 open import order-theory.zorn

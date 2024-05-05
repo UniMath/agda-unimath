@@ -20,9 +20,9 @@ open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
-open import modal-logic.logic-syntax
 ```
 
 </details>
@@ -52,7 +52,7 @@ module _
   where
 
   soundness-axioms :
-    soundness axioms C → {a : formula i} → axioms ⊢ a → type-Prop (C ⊨C a)
+    soundness axioms C → {a : modal-formula i} → axioms ⊢ a → type-Prop (C ⊨C a)
   soundness-axioms H (ax x) = H _ x
   soundness-axioms H (mp dab da) M in-class x =
     soundness-axioms H dab M in-class x (soundness-axioms H da M in-class x)
@@ -88,7 +88,7 @@ module _
   forces-in-intersection :
     (M : kripke-model l4 l5 i l6) →
     is-in-subtype (C₁ ∩ C₂) M →
-    (a : formula i) →
+    (a : modal-formula i) →
     is-in-subtype theory₁ a + is-in-subtype theory₂ a →
     type-Prop (M ⊨M a)
   forces-in-intersection M in-class a (inl d) =

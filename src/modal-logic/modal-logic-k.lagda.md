@@ -24,9 +24,9 @@ open import foundation.universe-levels
 open import foundation-core.coproduct-types
 
 open import modal-logic.axioms
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
-open import modal-logic.logic-syntax
 open import modal-logic.soundness
 
 open import univalent-combinatorics.finite-types
@@ -189,7 +189,7 @@ module _
     map-inv-raise
       ( soundness-K-finite
         ( i)
-        ( ⊥)
+        ( ⊥ₘ)
         ( bot-in-logic)
         ( pair
           ( pair (unit , unit-trunc-Prop star) (λ _ _ → empty-Prop))

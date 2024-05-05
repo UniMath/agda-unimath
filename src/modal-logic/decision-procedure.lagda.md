@@ -1,7 +1,7 @@
 # Modal logic decision
 
 ```agda
-module modal-logic.modal-logic-decision where
+module modal-logic.decision-procedure where
 ```
 
 <details><summary>Imports</summary>
@@ -53,11 +53,11 @@ open import lists.lists-subtypes
 open import lists.reversing-lists
 
 open import modal-logic.completeness
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-models-filtrations
 open import modal-logic.kripke-models-filtrations-theorem
 open import modal-logic.kripke-semantics
-open import modal-logic.logic-syntax
 open import modal-logic.soundness
 open import modal-logic.weak-deduction
 
@@ -89,7 +89,7 @@ module _
   where
 
   decision-procedure' :
-    (a : formula i) →
+    (a : modal-formula i) →
     is-decidable
       ( (M : type-subtype C) → type-Prop (inclusion-subtype C M ⊨M a))
   decision-procedure' a =
@@ -98,7 +98,7 @@ module _
       ( λ (M , M-in-C) →
         ( is-finite-model-valuate-decidable-models i M (C-sub-fin M M-in-C) a))
 
-  decision-procedure : (a : formula i) → bool
+  decision-procedure : (a : modal-formula i) → bool
   decision-procedure a with decision-procedure' a
   ... | inl _ = true
   ... | inr _ = false
@@ -106,7 +106,7 @@ module _
   decision-procedure-correctness :
     soundness theory C →
     completeness theory C →
-    (a : formula i) →
+    (a : modal-formula i) →
     is-in-subtype theory a ↔ type-prop-bool (decision-procedure a)
   pr1 (decision-procedure-correctness sound complete a) in-theory
     with decision-procedure' a
@@ -173,20 +173,20 @@ module _
   {l : Level} (i : Set l)
   where
 
-  subformulas-list : formula i → list (formula i)
+  subformulas-list : modal-formula i → list (modal-formula i)
   subformulas-list a = cons a (rest a)
     where
-    rest : formula i → list (formula i)
+    rest : modal-formula i → list (modal-formula i)
     rest (var x) = nil
-    rest ⊥ = nil
+    rest ⊥ₘ = nil
     rest (a →ₘ b) = concat-list (subformulas-list a) (subformulas-list b)
-    rest (□ a) = subformulas-list a
+    rest (□ₘ a) = subformulas-list a
 
-  subformulas : formula i → modal-theory l i
+  subformulas : modal-formula i → modal-theory l i
   subformulas a = list-subtype (subformulas-list a)
 
   subformulas-list-has-subimpl :
-    (a : formula i) {x y : formula i} →
+    (a : modal-formula i) {x y : modal-formula i} →
     (x →ₘ y) ∈-list subformulas-list a →
     (x ∈-list subformulas-list a) × (y ∈-list subformulas-list a)
   subformulas-list-has-subimpl .(x →ₘ y) {x} {y} (is-head .(x →ₘ y) _) =
@@ -223,19 +223,19 @@ module _
       ( is-in-tail y (a →ₘ b) _
         ( in-concat-right (subformulas-list a) (subformulas-list b) y-in-tail))
   subformulas-list-has-subimpl
-    (□ a) {x} {y} (is-in-tail .(x →ₘ y) .(□ a) _ xy-list-subtype) =
+    (□ₘ a) {x} {y} (is-in-tail .(x →ₘ y) .(□ₘ a) _ xy-list-subtype) =
       let (x-in-tail , y-in-tail) =
             subformulas-list-has-subimpl a xy-list-subtype
-      in (is-in-tail x (□ a) _ x-in-tail) , (is-in-tail y (□ a) _ y-in-tail)
+      in (is-in-tail x (□ₘ a) _ x-in-tail) , (is-in-tail y (□ₘ a) _ y-in-tail)
 
   subformulas-list-has-subbox :
-    (a : formula i) {x : formula i} →
-    □ x ∈-list subformulas-list a →
+    (a : modal-formula i) {x : modal-formula i} →
+    □ₘ x ∈-list subformulas-list a →
     x ∈-list subformulas-list a
-  subformulas-list-has-subbox .(□ x) {x} (is-head .(□ x) _) =
-    is-in-tail x (□ x) _ (is-head x _)
+  subformulas-list-has-subbox .(□ₘ x) {x} (is-head .(□ₘ x) _) =
+    is-in-tail x (□ₘ x) _ (is-head x _)
   subformulas-list-has-subbox
-    (a →ₘ b) {x} (is-in-tail .(□ x) .(a →ₘ b) _ x-list-subtype)
+    (a →ₘ b) {x} (is-in-tail .(□ₘ x) .(a →ₘ b) _ x-list-subtype)
     with
     in-concat-list (subformulas-list a) (subformulas-list b) x-list-subtype
   ... | inl x-in-left =
@@ -247,11 +247,11 @@ module _
       ( in-concat-right (subformulas-list a) (subformulas-list b)
         ( subformulas-list-has-subbox b x-in-right))
   subformulas-list-has-subbox
-    (□ a) {x} (is-in-tail .(□ x) .(□ a) _ x-list-subtype) =
-    is-in-tail x (□ a) _ (subformulas-list-has-subbox a x-list-subtype)
+    (□ₘ a) {x} (is-in-tail .(□ₘ x) .(□ₘ a) _ x-list-subtype) =
+    is-in-tail x (□ₘ a) _ (subformulas-list-has-subbox a x-list-subtype)
 
   is-modal-theory-closed-under-subformulas-subformulas :
-    (a : formula i) →
+    (a : modal-formula i) →
     is-modal-theory-closed-under-subformulas i (subformulas a)
   is-modal-theory-closed-under-subformulas-subformulas a =
     is-modal-theory-closed-under-subformulas-condition
@@ -271,18 +271,19 @@ module _
         ( list-subtype (subformulas-list a) _)
         ( unit-trunc-Prop ∘ subformulas-list-has-subbox a))
 
-  subformulas-Set : formula i → Set l
+  subformulas-Set : modal-formula i → Set l
   subformulas-Set a =
     set-subset (formula-Set i) (list-subtype (subformulas-list a))
 
-  subformulas-Set-list : (a : formula i) → list (type-Set (subformulas-Set a))
+  subformulas-Set-list :
+    (a : modal-formula i) → list (type-Set (subformulas-Set a))
   subformulas-Set-list a =
     dependent-map-list
       ( subformulas-list a)
       ( λ (x , list-subtype) → x , unit-trunc-Prop list-subtype)
 
   is-kuratowsky-finite'-subformulas-list :
-    (a : formula i) → is-kuratowsky-finite-set' (subformulas-Set a)
+    (a : modal-formula i) → is-kuratowsky-finite-set' (subformulas-Set a)
   is-kuratowsky-finite'-subformulas-list a =
     intro-exists
       ( subformulas-Set-list a)
@@ -300,7 +301,7 @@ module _
                   ( b-list-subtype)))))))
 
   is-kuratowsky-finite-subformulas-list :
-    (a : formula i) → is-kuratowsky-finite-set (subformulas-Set a)
+    (a : modal-formula i) → is-kuratowsky-finite-set (subformulas-Set a)
   is-kuratowsky-finite-subformulas-list a =
     is-kuratowsky-finite-set-is-kuratowsky-finite-set'
       ( subformulas-Set a)
@@ -308,7 +309,7 @@ module _
 
   is-finite-subformulas-list :
     LEM l →
-    (a : formula i) →
+    (a : modal-formula i) →
     is-finite (type-subtype (list-subtype (subformulas-list a)))
   is-finite-subformulas-list lem a =
     is-finite-is-kuratowsky-finite-set
@@ -318,7 +319,7 @@ module _
     {l2 : Level} →
     LEM l →
     LEM l2 →
-    (a : formula i) →
+    (a : modal-formula i) →
     is-finite (type-subtype (list-subtype (subformulas-list a)) → Prop l2)
   is-finite-subtypes-subformulas-list lem lem2 a =
     is-finite-function-type
@@ -477,7 +478,7 @@ module _
   filtrate-class :
     model-class l6 l7 i l8 ( l3 ⊔ l5 ⊔ lsuc (l1 ⊔ l2 ⊔ l4 ⊔ l6 ⊔ l7 ⊔ l8))
   filtrate-class M* =
-    exists-structure-Prop (formula i × type-subtype C)
+    exists-structure-Prop (modal-formula i × type-subtype C)
       ( λ (a , (M , _)) → M* ＝ filtration (subformulas i a) M)
 
   module _
@@ -525,7 +526,7 @@ module _
     {l9 l10 : Level} (logic : modal-theory l9 i) →
     (C₂ : model-class l6 l7 i l8 l10) →
     ( ((M , _) : type-subtype C) →
-      (a : formula i) →
+      (a : modal-formula i) →
       is-in-subtype C₂ (filtration (list-subtype (subformulas-list i a)) M)) →
     soundness logic C₂ →
     soundness logic filtrate-class

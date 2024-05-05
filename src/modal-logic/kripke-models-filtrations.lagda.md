@@ -38,9 +38,9 @@ open import foundation-core.injective-maps
 open import foundation-core.transport-along-identifications
 
 open import modal-logic.axioms
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
-open import modal-logic.logic-syntax
 
 open import univalent-combinatorics.finite-types
 ```
@@ -133,21 +133,21 @@ module _
     {l2 : Level} (theory : modal-theory l2 i)
     where
 
-    is-modal-theory-has-subformulas-Prop : formula i → Prop l2
+    is-modal-theory-has-subformulas-Prop : modal-formula i → Prop l2
     is-modal-theory-has-subformulas-Prop (var _) = raise-unit-Prop l2
-    is-modal-theory-has-subformulas-Prop ⊥ = raise-unit-Prop l2
+    is-modal-theory-has-subformulas-Prop ⊥ₘ = raise-unit-Prop l2
     is-modal-theory-has-subformulas-Prop (a →ₘ b) =
       product-Prop (theory a) (theory b)
-    is-modal-theory-has-subformulas-Prop (□ a) = theory a
+    is-modal-theory-has-subformulas-Prop (□ₘ a) = theory a
 
-    is-modal-theory-has-subformulas : formula i → UU l2
+    is-modal-theory-has-subformulas : modal-formula i → UU l2
     is-modal-theory-has-subformulas =
       type-Prop ∘ is-modal-theory-has-subformulas-Prop
 
     is-modal-theory-closed-under-subformulas-Prop : Prop (l1 ⊔ l2)
     is-modal-theory-closed-under-subformulas-Prop =
       implicit-Π-Prop
-        ( formula i)
+        ( modal-formula i)
         ( λ a →
           ( function-Prop
             ( is-in-subtype theory a)
@@ -158,19 +158,21 @@ module _
       type-Prop (is-modal-theory-closed-under-subformulas-Prop)
 
     is-modal-theory-closed-under-subformulas-condition :
-      ( {a b : formula i} →
+      ( {a b : modal-formula i} →
         is-in-subtype theory (a →ₘ b) →
         is-in-subtype theory a × is-in-subtype theory b) →
-      ( {a : formula i} → is-in-subtype theory (□ a) → is-in-subtype theory a) →
+      ( {a : modal-formula i} →
+        is-in-subtype theory (□ₘ a) →
+        is-in-subtype theory a) →
       is-modal-theory-closed-under-subformulas
     is-modal-theory-closed-under-subformulas-condition
       h-impl h-box {var n} _ = raise-star
     is-modal-theory-closed-under-subformulas-condition
-      h-impl h-box {⊥} _ = raise-star
+      h-impl h-box {⊥ₘ} _ = raise-star
     is-modal-theory-closed-under-subformulas-condition
       h-impl h-box {a →ₘ b} = h-impl
     is-modal-theory-closed-under-subformulas-condition
-      h-impl h-box {□ a} = h-box
+      h-impl h-box {□ₘ a} = h-box
 
 module _
   {l1 l2 l3 l4 l5 : Level} (i : Set l3)
@@ -182,7 +184,7 @@ module _
     equivalence-relation (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5) (type-kripke-model i M)
   pr1 Φ-equivalence x y =
     Π-Prop
-      ( formula i)
+      ( modal-formula i)
       ( λ a →
         ( function-Prop
           ( is-in-subtype theory a)
@@ -354,9 +356,9 @@ module _
       equivalence-class Φ-equivalence ≃ type-kripke-model i M* →
       Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l7)
     filtration-relation-upper-bound-Prop e =
-      Π-Prop (formula i)
+      Π-Prop (modal-formula i)
         ( λ a →
-          ( function-Prop (is-in-subtype theory (□ a))
+          ( function-Prop (is-in-subtype theory (□ₘ a))
             ( Π-Prop (type-kripke-model i M)
               ( λ x →
                 ( Π-Prop (type-kripke-model i M)
@@ -365,7 +367,7 @@ module _
                       ( relation-kripke-model i M*
                         ( map-equiv e (class Φ-equivalence x))
                         ( map-equiv e (class Φ-equivalence y)))
-                      ( hom-Prop ((M , x) ⊨ □ a)
+                      ( hom-Prop ((M , x) ⊨ □ₘ a)
                         ( (M , y) ⊨ a)))))))))
 
     filtration-relation-upper-bound :
@@ -548,13 +550,13 @@ module _
     where
 
     proof-upper-bound :
-      (a : formula i) →
-      is-in-subtype theory (□ a) →
+      (a : modal-formula i) →
+      is-in-subtype theory (□ₘ a) →
       (x y : type-kripke-model i M) →
       relation-kripke-model i minimal-kripke-model-filtration
         ( class Φ-equivalence x)
         ( class Φ-equivalence y) →
-      type-Prop ((M , x) ⊨ □ a) →
+      type-Prop ((M , x) ⊨ □ₘ a) →
       type-Prop ((M , y) ⊨ a)
     proof-upper-bound a box-in-theory x y r-xy x-forces-box =
       apply-universal-property-trunc-Prop
@@ -564,7 +566,7 @@ module _
           ( backward-implication
             ( iff-y a (theory-is-closed box-in-theory))
             ( forward-implication
-              ( iff-x (□ a) box-in-theory)
+              ( iff-x (□ₘ a) box-in-theory)
               ( x-forces-box)
               ( y')
               ( r-xy'))))
@@ -599,14 +601,14 @@ module _
 
     helper :
       is-in-subtype (transitivity-kripke-class l1 l2 i l4) M →
-      (a : formula i) →
-      is-in-subtype theory (□ a) →
+      (a : modal-formula i) →
+      is-in-subtype theory (□ₘ a) →
       (x y : type-kripke-model i M) →
       transitive-closure
         ( relation-kripke-model i minimal-kripke-model-filtration)
         ( class Φ-equivalence x)
         ( class Φ-equivalence y) →
-      type-Prop ((M , x) ⊨ □ a) →
+      type-Prop ((M , x) ⊨ □ₘ a) →
       type-Prop ((M , y) ⊨ a)
     helper M-is-trans a box-in-theory x y (base* r-xy) x-forces-box =
       proof-upper-bound a box-in-theory x y r-xy x-forces-box
@@ -629,11 +631,11 @@ module _
           ( λ ((x' , z') , r-xz' , iff-x , iff-z) →
             ( helper M-is-trans a box-in-theory z y c-zy
               ( backward-implication
-                ( iff-z (□ a) box-in-theory)
-                ( ax-4-soundness i l2 l4 (□ a →ₘ □ □ a) (a , refl) M M-is-trans
+                ( iff-z (□ₘ a) box-in-theory)
+                ( ax-4-soundness i l2 l4 _ (a , refl) M M-is-trans
                   ( x')
                   ( forward-implication
-                    ( iff-x (□ a) box-in-theory)
+                    ( iff-x (□ₘ a) box-in-theory)
                     ( x-forces-box))
                   ( z')
                   ( r-xz')))))

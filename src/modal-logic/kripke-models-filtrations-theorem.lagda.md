@@ -35,10 +35,10 @@ open import foundation-core.equivalence-relations
 open import foundation-core.invertible-maps
 
 open import modal-logic.completeness
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-models-filtrations
 open import modal-logic.kripke-semantics
-open import modal-logic.logic-syntax
 ```
 
 </details>
@@ -59,7 +59,7 @@ module _
 
   kripke-models-filtrations-theorem' :
     (is-filtration : is-kripke-model-filtration i theory M M*)
-    (a : formula i) →
+    (a : modal-formula i) →
     is-in-subtype theory a →
     (x : type-kripke-model i M) →
     type-iff-Prop
@@ -81,7 +81,7 @@ module _
           ( n)
           ( x))
       ( in-theory , map-inv-raise f))
-  pr1 (kripke-models-filtrations-theorem' is-filtration ⊥ in-theory x) =
+  pr1 (kripke-models-filtrations-theorem' is-filtration ⊥ₘ in-theory x) =
     map-raise ∘ map-inv-raise
   pr1 (kripke-models-filtrations-theorem' is-filtration (a →ₘ b) in-theory x)
     fab fa =
@@ -95,7 +95,7 @@ module _
               ( pr1 (theory-is-closed in-theory))
               ( x))
             ( fa)))
-  pr1 (kripke-models-filtrations-theorem' is-filtration (□ a) in-theory x)
+  pr1 (kripke-models-filtrations-theorem' is-filtration (□ₘ a) in-theory x)
     f y* r-xy =
       apply-universal-property-trunc-Prop
         ( is-inhabited-subtype-equivalence-class
@@ -157,7 +157,7 @@ module _
             ( n)
             ( x))
           ( map-inv-raise f)))
-  pr2 (kripke-models-filtrations-theorem' is-filtration ⊥ in-theory x) =
+  pr2 (kripke-models-filtrations-theorem' is-filtration ⊥ₘ in-theory x) =
     map-raise ∘ map-inv-raise
   pr2 (kripke-models-filtrations-theorem' is-filtration (a →ₘ b) in-theory x)
     fab fa =
@@ -171,7 +171,7 @@ module _
               ( pr1 (theory-is-closed in-theory))
               ( x))
             ( fa)))
-  pr2 (kripke-models-filtrations-theorem' is-filtration (□ a) in-theory x)
+  pr2 (kripke-models-filtrations-theorem' is-filtration (□ₘ a) in-theory x)
     f y r-xy =
       backward-implication
         ( kripke-models-filtrations-theorem' is-filtration a

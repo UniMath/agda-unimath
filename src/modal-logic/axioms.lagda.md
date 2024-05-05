@@ -32,9 +32,9 @@ open import foundation-core.sets
 open import foundation-core.subtypes
 open import foundation-core.transport-along-identifications
 
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
-open import modal-logic.logic-syntax
 open import modal-logic.soundness
 ```
 
@@ -52,8 +52,8 @@ module _
   where
 
   ax-1-parameter :
-    (h : formula i → formula i) → is-injective h → modal-theory l i
-  pr1 (ax-1-parameter h inj f) = Σ (formula i) (λ a → f ＝ h a)
+    (h : modal-formula i → modal-formula i) → is-injective h → modal-theory l i
+  pr1 (ax-1-parameter h inj f) = Σ (modal-formula i) (λ a → f ＝ h a)
   pr2 (ax-1-parameter h inj f) (a , refl) =
     is-prop-is-contr
       ( is-contr-Σ-is-prop a refl
@@ -62,12 +62,12 @@ module _
       ( a , refl)
 
   ax-2-parameters :
-    (h : formula i → formula i → formula i) →
-    ({x x' y y' : formula i} → h x y ＝ h x' y' → x ＝ x') →
-    ({x x' y y' : formula i} → h x y ＝ h x' y' → y ＝ y') →
+    (h : modal-formula i → modal-formula i → modal-formula i) →
+    ({x x' y y' : modal-formula i} → h x y ＝ h x' y' → x ＝ x') →
+    ({x x' y y' : modal-formula i} → h x y ＝ h x' y' → y ＝ y') →
     modal-theory l i
   pr1 (ax-2-parameters h inj-1 inj-2 f) =
-    Σ (formula i) (λ a → Σ (formula i) (λ b → f ＝ h a b))
+    Σ (modal-formula i) (λ a → Σ (modal-formula i) (λ b → f ＝ h a b))
   pr2 (ax-2-parameters h inj-1 inj-2 f) (a , b , refl) =
     is-prop-is-contr
       ( is-contr-Σ-is-prop a (b , refl)
@@ -76,14 +76,17 @@ module _
       ( a , b , refl)
 
   ax-3-parameters :
-    (h : formula i → formula i → formula i → formula i) →
-    ({x x' y y' z z' : formula i} → h x y z ＝ h x' y' z' → x ＝ x') →
-    ({x x' y y' z z' : formula i} → h x y z ＝ h x' y' z' → y ＝ y') →
-    ({x x' y y' z z' : formula i} → h x y z ＝ h x' y' z' → z ＝ z') →
+    (h :
+      modal-formula i → modal-formula i → modal-formula i → modal-formula i) →
+    ({x x' y y' z z' : modal-formula i} → h x y z ＝ h x' y' z' → x ＝ x') →
+    ({x x' y y' z z' : modal-formula i} → h x y z ＝ h x' y' z' → y ＝ y') →
+    ({x x' y y' z z' : modal-formula i} → h x y z ＝ h x' y' z' → z ＝ z') →
     modal-theory l i
   pr1 (ax-3-parameters h inj-1 inj-2 inj-3 f) =
-    Σ ( formula i)
-      ( λ a → Σ (formula i) (λ b → Σ (formula i) ( λ c → f ＝ h a b c)))
+    Σ ( modal-formula i)
+      ( λ a →
+        ( Σ (modal-formula i)
+          ( λ b → Σ (modal-formula i) ( λ c → f ＝ h a b c))))
   pr2 (ax-3-parameters h inj-1 inj-2 inj-3 f) (a , b , c , refl) =
     is-prop-is-contr
       ( is-contr-Σ-is-prop a (b , c , refl)
@@ -109,28 +112,28 @@ module _
   ax-n : modal-theory l i
   ax-n =
     ax-2-parameters
-      ( λ a b → □ (a →ₘ b) →ₘ □ a →ₘ □ b)
+      ( λ a b → □ₘ (a →ₘ b) →ₘ □ₘ a →ₘ □ₘ b)
       ( eq-implication-left ∘ eq-box ∘ eq-implication-left)
       ( eq-implication-right ∘ eq-box ∘ eq-implication-left)
 
   ax-dn : modal-theory l i
-  ax-dn = ax-1-parameter (λ a → ~~ a →ₘ a) eq-implication-right
+  ax-dn = ax-1-parameter (λ a → ¬¬ₘ a →ₘ a) eq-implication-right
 
   ax-m : modal-theory l i
-  ax-m = ax-1-parameter (λ a → □ a →ₘ a) eq-implication-right
+  ax-m = ax-1-parameter (λ a → □ₘ a →ₘ a) eq-implication-right
 
   ax-b : modal-theory l i
-  ax-b = ax-1-parameter (λ a → a →ₘ □ ◇ a) eq-implication-left
+  ax-b = ax-1-parameter (λ a → a →ₘ □ₘ ◇ₘ a) eq-implication-left
 
   ax-d : modal-theory l i
-  ax-d = ax-1-parameter (λ a → □ a →ₘ ◇ a) (eq-box ∘ eq-implication-left)
+  ax-d = ax-1-parameter (λ a → □ₘ a →ₘ ◇ₘ a) (eq-box ∘ eq-implication-left)
 
   ax-4 : modal-theory l i
-  ax-4 = ax-1-parameter (λ a → □ a →ₘ □ □ a) (eq-box ∘ eq-implication-left)
+  ax-4 = ax-1-parameter (λ a → □ₘ a →ₘ □ₘ □ₘ a) (eq-box ∘ eq-implication-left)
 
   ax-5 : modal-theory l i
   ax-5 =
-    ax-1-parameter ( λ a → ◇ a →ₘ □ ◇ a) ( eq-diamond ∘ eq-implication-left)
+    ax-1-parameter ( λ a → ◇ₘ a →ₘ □ₘ ◇ₘ a) ( eq-diamond ∘ eq-implication-left)
 
 module _
   {l1 l2 : Level}
@@ -150,26 +153,26 @@ module _
 
   ax-n-soundness : soundness (ax-n i) (all-models l2 l3 i l4)
   ax-n-soundness
-    .(□ (a →ₘ b) →ₘ □ a →ₘ □ b)
+    .(□ₘ (a →ₘ b) →ₘ □ₘ a →ₘ □ₘ b)
     (a , b , refl)
     M in-class x fab fa y r =
       fab y r (fa y r)
 
   ax-dn-soundness : soundness (ax-dn i) (decidable-models l2 l3 i l4)
-  ax-dn-soundness .(~~ a →ₘ a) (a , refl) M is-dec x f
+  ax-dn-soundness .(¬¬ₘ a →ₘ a) (a , refl) M is-dec x f
     with (is-dec a x)
   ... | inl fa = fa
   ... | inr fna = raise-ex-falso _ (f (λ fa -> map-raise (fna fa)))
 
   ax-m-soundness : soundness (ax-m i) (reflexive-kripke-class l2 l3 i l4)
-  ax-m-soundness .(□ a →ₘ a) (a , refl) M is-refl x fa = fa x (is-refl x)
+  ax-m-soundness .(□ₘ a →ₘ a) (a , refl) M is-refl x fa = fa x (is-refl x)
 
   ax-b-soundness : soundness (ax-b i) (symmetry-kripke-class l2 l3 i l4)
-  ax-b-soundness .(a →ₘ □ ◇ a) (a , refl) M is-sym x fa y r contra =
+  ax-b-soundness .(a →ₘ □ₘ ◇ₘ a) (a , refl) M is-sym x fa y r contra =
     contra x (is-sym x y r) fa
 
   ax-d-soundness : soundness (ax-d i) (serial-kripke-class l2 l3 i l4)
-  ax-d-soundness .(□ a →ₘ ◇ a) (a , refl) M is-serial x fa contra =
+  ax-d-soundness .(□ₘ a →ₘ ◇ₘ a) (a , refl) M is-serial x fa contra =
     map-raise
       ( apply-universal-property-trunc-Prop
         ( is-serial x)
@@ -177,10 +180,10 @@ module _
         ( λ (y , r) → map-inv-raise (contra y r (fa y r))))
 
   ax-4-soundness : soundness (ax-4 i) (transitivity-kripke-class l2 l3 i l4)
-  ax-4-soundness .(□ a →ₘ □ □ a) (a , refl) M is-trans x fa y r-xy z r-yz =
+  ax-4-soundness .(□ₘ a →ₘ □ₘ □ₘ a) (a , refl) M is-trans x fa y r-xy z r-yz =
     fa z (is-trans x y z r-yz r-xy)
 
   ax-5-sooundness : soundness (ax-5 i) (euclidean-kripke-class l2 l3 i l4)
-  ax-5-sooundness .(◇ a →ₘ □ ◇ a) (a , refl) M is-eucl x fa y r-xy contra =
+  ax-5-sooundness .(◇ₘ a →ₘ □ₘ ◇ₘ a) (a , refl) M is-eucl x fa y r-xy contra =
     fa (λ z r-xz → contra z (is-eucl x y z r-xy r-xz))
 ```

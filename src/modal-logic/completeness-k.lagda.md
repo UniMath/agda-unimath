@@ -35,9 +35,9 @@ open import foundation.universe-levels
 open import modal-logic.axioms
 open import modal-logic.canonical-model-theorem
 open import modal-logic.completeness
+open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
-open import modal-logic.logic-syntax
 open import modal-logic.modal-logic-k
 open import modal-logic.soundness
 open import modal-logic.weak-deduction
