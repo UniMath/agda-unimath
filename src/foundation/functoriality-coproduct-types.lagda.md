@@ -202,7 +202,7 @@ module _
     is-section-map-inv-equiv-coproduct :
       (f : A ≃ A') (g : B ≃ B') →
       ( map-coproduct (map-equiv f) (map-equiv g)) ∘
-      ( map-coproduct (map-inv-equiv f) (map-inv-equiv g) ) ~ id
+      ( map-coproduct (map-inv-equiv f) (map-inv-equiv g)) ~ id
     is-section-map-inv-equiv-coproduct f g =
       ( inv-htpy
         ( preserves-comp-map-coproduct
@@ -218,7 +218,7 @@ module _
   abstract
     is-retraction-map-inv-equiv-coproduct :
       (f : A ≃ A') (g : B ≃ B') →
-      ( map-coproduct (map-inv-equiv f) (map-inv-equiv g) ) ∘
+      ( map-coproduct (map-inv-equiv f) (map-inv-equiv g)) ∘
       ( map-coproduct (map-equiv f) (map-equiv g)) ~ id
     is-retraction-map-inv-equiv-coproduct f g =
       ( inv-htpy
@@ -231,7 +231,7 @@ module _
         ( is-retraction-map-inv-equiv f)
         ( is-retraction-map-inv-equiv g)) ∙h
       ( id-map-coproduct A B)
-      
+
   is-equiv-map-coproduct :
     {f : A → A'} {g : B → B'} →
     is-equiv f → is-equiv g → is-equiv (map-coproduct f g)
@@ -240,7 +240,7 @@ module _
       ( map-coproduct (map-inv-is-equiv H) (map-inv-is-equiv K))
       ( is-section-map-inv-equiv-coproduct (f , H) (g , K))
       ( is-retraction-map-inv-equiv-coproduct (f , H) (g , K))
-  
+
   map-equiv-coproduct : A ≃ A' → B ≃ B' → A + B → A' + B'
   map-equiv-coproduct e e' = map-coproduct (map-equiv e) (map-equiv e')
 
