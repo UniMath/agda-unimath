@@ -193,11 +193,6 @@ module _
   {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
   where
 
-  map-inv-equiv-coproduct :
-    (f : A ≃ A') (g : B ≃ B') → A' + B' → A + B
-  map-inv-equiv-coproduct f g =
-    map-coproduct (map-inv-equiv f) (map-inv-equiv g)
-
   abstract
     is-section-map-inv-equiv-coproduct :
       (f : A ≃ A') (g : B ≃ B') →
