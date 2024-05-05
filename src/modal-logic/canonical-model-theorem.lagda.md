@@ -175,7 +175,7 @@ module _
     ... | inl a-in-logic =
       is-weak-modal-logic-L-complete-theory logic lzero x (a →ₘ b)
         ( forward-implication
-          ( deduction-lemma theory contains-ax-k' contains-ax-s' a b)
+          ( deduction-theorem theory contains-ax-k' contains-ax-s' a b)
           ( weak-modal-logic-closure-monotic
             { ax₁ = theory}
             { ax₂ = theory-add-formula a theory}
@@ -185,7 +185,7 @@ module _
     ... | inr not-a-in-logic =
       is-weak-modal-logic-L-complete-theory logic lzero x (a →ₘ b)
         ( forward-implication
-          ( deduction-lemma theory contains-ax-k' contains-ax-s' a b)
+          ( deduction-theorem theory contains-ax-k' contains-ax-s' a b)
           ( logic-ex-falso
             ( theory-add-formula a theory)
             ( transitive-subset-add-formula a theory (ax-k i) contains-ax-k')
@@ -276,7 +276,7 @@ module _
       move-assumptions-right f (cons c l) in-logic =
         move-assumptions-right (c →ₘ f) l
           ( forward-implication
-            ( deduction-lemma
+            ( deduction-theorem
               ( logic ∪ list-subtype l)
               ( contains-ax-k-union (list-subtype l))
               ( contains-ax-s-union (list-subtype l))
@@ -362,7 +362,7 @@ module _
               ( subtype-union-left logic (list-subtype l) (¬¬ₘ a →ₘ a)
                 ( contains-ax-dn (¬¬ₘ a →ₘ a) (a , refl))))
             ( forward-implication
-              ( deduction-lemma
+              ( deduction-theorem
                 ( logic ∪ list-subtype l)
                 ( contains-ax-k-union (list-subtype l))
                 ( contains-ax-s-union (list-subtype l))
@@ -544,7 +544,9 @@ module _
           ( is-logic (¬¬ₘ a)
             ( subset-weak-modal-logic-closure-modal-logic-closure (¬¬ₘ a)
               ( forward-implication
-                ( deduction-lemma logic contains-ax-k contains-ax-s ( ¬ₘ a) ⊥ₘ)
+                ( deduction-theorem logic contains-ax-k contains-ax-s
+                  ( ¬ₘ a)
+                  ( ⊥ₘ))
                 ( weak-modal-logic-closure-monotic
                   ( subtype-union-both logic x (theory-add-formula (¬ₘ a) logic)
                     ( subtype-union-right (Id-formula-Prop (¬ₘ a)) logic)

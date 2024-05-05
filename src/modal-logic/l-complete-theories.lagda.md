@@ -271,7 +271,7 @@ module _
           ( contains-ax-dn' (¬¬ₘ a →ₘ a) (a , refl))
           ( is-weak-modal-logic-L-complete-theory lzero t (¬¬ₘ a)
             ( forward-implication
-              ( deduction-lemma
+              ( deduction-theorem
                 ( theory)
                 ( contains-ax-k')
                 ( contains-ax-s')
@@ -426,16 +426,16 @@ module _
             ( subtype-union-left logic theory)
             ( contains-ax-s)
 
-        L-union-deduction-lemma :
+        L-union-deduction-theorem :
           (l : list (modal-formula i)) →
           (h a : modal-formula i) →
           is-in-subtype
             ( weak-modal-logic-closure (logic ∪ list-subtype (cons h l))) a →
           is-in-subtype
             ( weak-modal-logic-closure (logic ∪ list-subtype l)) (h →ₘ a)
-        L-union-deduction-lemma l h a in-logic =
+        L-union-deduction-theorem l h a in-logic =
           forward-implication
-            ( deduction-lemma
+            ( deduction-theorem
               ( logic ∪ list-subtype l)
               ( contains-ax-k' (list-subtype l))
               ( contains-ax-s' (list-subtype l))
@@ -486,7 +486,7 @@ module _
               ( chain-union-modal-theory)
               ( leq)
               ( subset-tail-list-subtype))
-            ( L-union-deduction-lemma l h a in-logic))
+            ( L-union-deduction-theorem l h a in-logic))
           ( exists-chain-element-with-formula-Prop a)
           ( λ (x , h-in-x) (y , ha-in-y) →
             ( elim-disjunction

@@ -270,11 +270,11 @@ module _
   (axioms : modal-theory l2 i)
   where
 
-  backward-deduction-lemma :
+  backward-deduction-theorem :
     {a b : modal-formula i} →
     axioms ⊢w a →ₘ b →
     theory-add-formula a axioms ⊢w b
-  backward-deduction-lemma {a} wab =
+  backward-deduction-theorem {a} wab =
     weak-deduction-mp
       ( weak-deduction-monotic
         ( subset-add-formula a axioms)
@@ -296,11 +296,11 @@ module _
           ( weak-deduction-ax (contains-ax-k _ (a , a →ₘ a , refl))))
         ( weak-deduction-ax (contains-ax-k _ (a , a , refl)))
 
-    forward-deduction-lemma :
+    forward-deduction-theorem :
       (a : modal-formula i) {b : modal-formula i} →
       theory-add-formula a axioms ⊢w b →
       is-in-subtype (weak-modal-logic-closure axioms) (a →ₘ b)
-    forward-deduction-lemma a =
+    forward-deduction-theorem a =
       ind-weak-deduction _
         ( λ {b} b-in-axioms →
           ( elim-theory-add-formula a axioms
@@ -321,20 +321,20 @@ module _
               ( dabc))
             ( dab)))
 
-    deduction-lemma :
+    deduction-theorem :
       (a b : modal-formula i) →
       type-iff-Prop
         ( weak-modal-logic-closure (theory-add-formula a axioms) b)
         ( weak-modal-logic-closure axioms (a →ₘ b))
-    pr1 (deduction-lemma a b) =
+    pr1 (deduction-theorem a b) =
       map-universal-property-trunc-Prop
         ( weak-modal-logic-closure axioms (a →ₘ b))
-        ( forward-deduction-lemma a)
-    pr2 (deduction-lemma a b) =
+        ( forward-deduction-theorem a)
+    pr2 (deduction-theorem a b) =
       map-universal-property-trunc-Prop
         ( weak-modal-logic-closure (theory-add-formula a axioms) b)
         ( is-in-weak-modal-logic-closure-weak-deduction ∘
-          backward-deduction-lemma)
+          backward-deduction-theorem)
 ```
 
 ### TODO: List of assumptions
@@ -418,9 +418,9 @@ module _
     is-in-subtype (weak-modal-logic-closure axioms) (¬ₘ a →ₘ a →ₘ b)
   deduction-ex-falso a b =
     forward-implication
-      ( deduction-lemma axioms contains-ax-k contains-ax-s (¬ₘ a) (a →ₘ b))
+      ( deduction-theorem axioms contains-ax-k contains-ax-s (¬ₘ a) (a →ₘ b))
       ( forward-implication
-        ( deduction-lemma
+        ( deduction-theorem
           ( theory-add-formula (¬ₘ a) axioms)
           ( contains-ax-k')
           ( contains-ax-s')
@@ -488,9 +488,9 @@ module _
     is-in-subtype (weak-modal-logic-closure axioms) (a →ₘ ¬ₘ a →ₘ b)
   inv-deduction-ex-falso a b =
     forward-implication
-      ( deduction-lemma axioms contains-ax-k contains-ax-s a (¬ₘ a →ₘ b))
+      ( deduction-theorem axioms contains-ax-k contains-ax-s a (¬ₘ a →ₘ b))
       ( forward-implication
-        ( deduction-lemma
+        ( deduction-theorem
           ( theory-add-formula a axioms)
           ( contains-ax-k')
           ( contains-ax-s')

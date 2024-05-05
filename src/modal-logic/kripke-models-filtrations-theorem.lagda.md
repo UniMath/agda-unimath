@@ -1,7 +1,7 @@
 # Kripke models filtrations theorem
 
 ```agda
-module modal-logic.kripke-models-filtrations-theorem where
+module modal-logic.filtration-lemma where
 ```
 
 <details><summary>Imports</summary>
@@ -57,7 +57,7 @@ module _
   (M : kripke-model l1 l2 i l4) (M* : kripke-model l6 l7 i l8)
   where
 
-  kripke-models-filtrations-theorem' :
+  filtration-lemma :
     (is-filtration : is-kripke-model-filtration i theory M M*)
     (a : modal-formula i) →
     is-in-subtype theory a →
@@ -69,7 +69,7 @@ module _
         ( map-equiv-is-kripke-model-filtration i theory M M* is-filtration
           ( class (Φ-equivalence i theory M) x))
         ⊨ a)
-  pr1 (kripke-models-filtrations-theorem' is-filtration (varₘ n) in-theory x)
+  pr1 (filtration-lemma is-filtration (varₘ n) in-theory x)
     f =
       map-raise
         ( forward-implication
@@ -82,21 +82,21 @@ module _
             ( n)
             ( x))
         ( in-theory , map-inv-raise f))
-  pr1 (kripke-models-filtrations-theorem' is-filtration ⊥ₘ in-theory x) =
+  pr1 (filtration-lemma is-filtration ⊥ₘ in-theory x) =
     map-raise ∘ map-inv-raise
-  pr1 (kripke-models-filtrations-theorem' is-filtration (a →ₘ b) in-theory x)
+  pr1 (filtration-lemma is-filtration (a →ₘ b) in-theory x)
     fab fa =
       forward-implication
-        ( kripke-models-filtrations-theorem' is-filtration b
+        ( filtration-lemma is-filtration b
           ( pr2 (theory-is-closed in-theory))
           ( x))
         ( fab
           ( backward-implication
-            ( kripke-models-filtrations-theorem' is-filtration a
+            ( filtration-lemma is-filtration a
               ( pr1 (theory-is-closed in-theory))
               ( x))
             ( fa)))
-  pr1 (kripke-models-filtrations-theorem' is-filtration (□ₘ a) in-theory x)
+  pr1 (filtration-lemma is-filtration (□ₘ a) in-theory x)
     f y* r-xy =
       apply-universal-property-trunc-Prop
         ( is-inhabited-subtype-equivalence-class
@@ -128,7 +128,7 @@ module _
                 ( λ z* → type-Prop ((M* , z*) ⊨ a))
                 ( y*-id-class)
                 ( forward-implication
-                  ( kripke-models-filtrations-theorem' is-filtration a
+                  ( filtration-lemma is-filtration a
                     ( theory-is-closed in-theory)
                     ( y))
                   ( filtration-relation-upper-bound-is-kripke-model-filtration
@@ -149,7 +149,7 @@ module _
                       ( inv y*-id-class)
                       ( r-xy))
                     (f)))))
-  pr2 (kripke-models-filtrations-theorem' is-filtration (varₘ n) in-theory x)
+  pr2 (filtration-lemma is-filtration (varₘ n) in-theory x)
     f =
       map-raise
         ( pr2
@@ -159,24 +159,24 @@ module _
               ( n)
               ( x))
             ( map-inv-raise f)))
-  pr2 (kripke-models-filtrations-theorem' is-filtration ⊥ₘ in-theory x) =
+  pr2 (filtration-lemma is-filtration ⊥ₘ in-theory x) =
     map-raise ∘ map-inv-raise
-  pr2 (kripke-models-filtrations-theorem' is-filtration (a →ₘ b) in-theory x)
+  pr2 (filtration-lemma is-filtration (a →ₘ b) in-theory x)
     fab fa =
       backward-implication
-        ( kripke-models-filtrations-theorem' is-filtration b
+        ( filtration-lemma is-filtration b
           ( pr2 (theory-is-closed in-theory))
           ( x))
         ( fab
           ( forward-implication
-            ( kripke-models-filtrations-theorem' is-filtration a
+            ( filtration-lemma is-filtration a
               ( pr1 (theory-is-closed in-theory))
               ( x))
             ( fa)))
-  pr2 (kripke-models-filtrations-theorem' is-filtration (□ₘ a) in-theory x)
+  pr2 (filtration-lemma is-filtration (□ₘ a) in-theory x)
     f y r-xy =
       backward-implication
-        ( kripke-models-filtrations-theorem' is-filtration a
+        ( filtration-lemma is-filtration a
           ( theory-is-closed in-theory)
           ( y))
         ( f

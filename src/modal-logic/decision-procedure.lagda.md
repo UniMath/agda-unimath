@@ -54,9 +54,9 @@ open import lists.reversing-lists
 
 open import modal-logic.completeness
 open import modal-logic.deduction
+open import modal-logic.filtration-lemma
 open import modal-logic.formulas
 open import modal-logic.kripke-models-filtrations
-open import modal-logic.kripke-models-filtrations-theorem
 open import modal-logic.kripke-semantics
 open import modal-logic.soundness
 open import modal-logic.weak-deduction
@@ -497,7 +497,7 @@ module _
       complete a
         ( λ M M-in-class x →
           ( backward-implication
-            ( kripke-models-filtrations-theorem' i
+            ( filtration-lemma i
               ( subformulas i a)
               ( is-modal-theory-closed-under-subformulas-subformulas i a)
               ( M)

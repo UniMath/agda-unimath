@@ -165,9 +165,9 @@ module _
     is-in-subtype (weak-modal-logic-closure axioms) (¬ₘ b →ₘ ¬ₘ a)
   weak-modal-logic-implication-negate {a} {b} ab =
     forward-implication
-      ( deduction-lemma axioms contains-ax-k contains-ax-s (¬ₘ b) (¬ₘ a))
+      ( deduction-theorem axioms contains-ax-k contains-ax-s (¬ₘ b) (¬ₘ a))
       ( forward-implication
-        ( deduction-lemma
+        ( deduction-theorem
           ( theory-add-formula (¬ₘ b) axioms)
           ( contains-ax-k')
           ( contains-ax-s')
