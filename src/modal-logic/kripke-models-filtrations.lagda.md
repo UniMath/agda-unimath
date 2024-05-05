@@ -202,7 +202,7 @@ module _
         ( (a , in-theory) : type-subtype theory)
         ( (x , _) :
             type-subtype (subtype-equivalence-class Φ-equivalence class)) →
-            f (a , in-theory) ⇔ ((M , x) ⊨ a))
+            type-iff-Prop (f (a , in-theory)) ((M , x) ⊨ a))
 
   is-prop-valuate-function-equivalence-class :
     (class : equivalence-class Φ-equivalence) →
@@ -508,7 +508,7 @@ module _
   minimal-kripke-model-filtration-relation :
     Relation-Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5) (equivalence-class Φ-equivalence)
   minimal-kripke-model-filtration-relation x* y* =
-    ∃-Prop
+    exists-structure-Prop
       ( type-kripke-model i M × type-kripke-model i M)
       ( λ (x , y) →
         ( product
@@ -596,12 +596,12 @@ module _
           ( class Φ-equivalence x)
           ( class Φ-equivalence y))
     proof-lower-bound x y r =
-      intro-∃ (x , y) (r , (λ _ _ → id , id) , (λ _ _ → id , id))
+      intro-exists (x , y) (r , (λ _ _ → id , id) , (λ _ _ → id , id))
 
     is-kripke-model-filtration-minimal-kripke-model-filtration :
       is-kripke-model-filtration minimal-kripke-model-filtration
     is-kripke-model-filtration-minimal-kripke-model-filtration =
-      intro-∃
+      intro-exists
         ( id-equiv)
         ( triple
           ( λ n x →
@@ -674,7 +674,7 @@ module _
       is-kripke-model-filtration minimal-transitive-kripke-model-filtration
     is-kripke-model-filtration-minimal-transitive-kripke-model-filtration
       M-is-trans =
-        intro-∃
+        intro-exists
           ( id-equiv)
           ( triple
             ( λ n x →
@@ -712,7 +712,7 @@ module _
       map-universal-property-trunc-Prop
         ( relation-Prop-kripke-model i minimal-kripke-model-filtration y* x*)
         ( λ ((x , y) , r-xy , x-in-x* , y-in-y*) →
-          ( intro-∃ (y , x) (is-sym x y r-xy , y-in-y* , x-in-x*)))
+          ( intro-exists (y , x) (is-sym x y r-xy , y-in-y* , x-in-x*)))
 
     minimal-filtration-preserves-symmetry :
       is-in-subtype (symmetry-kripke-class l1 l2 i l4) M →
@@ -793,7 +793,7 @@ module _
     model-class l1 l2 i l4
       (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8)
   filtration-models M* =
-    ∃-Prop
+    exists-structure-Prop
       ( modal-theory l5 i × kripke-model l6 l7 i l8)
       ( λ (theory , M) →
         ( product

@@ -11,6 +11,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.law-of-excluded-middle
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.raising-universe-levels
 open import foundation.unit-type
@@ -60,13 +61,13 @@ unit-equiv-true :
   {l : Level} (P : Prop l) → type-Prop P → type-equiv-Prop unit-Prop P
 pr1 (unit-equiv-true P p) _ = p
 pr2 (unit-equiv-true P p) =
-  is-equiv-is-prop is-prop-unit (is-prop-type-Prop P) (λ _ → star)
+  is-equiv-has-converse-is-prop is-prop-unit (is-prop-type-Prop P) (λ _ → star)
 
 empty-equiv-false :
   {l : Level} (P : Prop l) → ¬ (type-Prop P) → type-equiv-Prop empty-Prop P
 pr1 (empty-equiv-false P np) = ex-falso
 pr2 (empty-equiv-false P np) =
-  is-equiv-is-prop is-prop-empty (is-prop-type-Prop P) np
+  is-equiv-has-converse-is-prop is-prop-empty (is-prop-type-Prop P) np
 
 propositional-resizing-LEM :
   (l1 : Level) {l2 : Level} → LEM l2 → propositional-resizing l1 l2

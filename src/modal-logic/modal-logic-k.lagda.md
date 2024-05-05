@@ -45,8 +45,9 @@ module _
   {l : Level} (i : Set l)
   where
 
+  -- TODO: refactor
   modal-logic-K-axioms : modal-theory l i
-  modal-logic-K-axioms = ax-k i ∪ ax-s i ∪ ax-n i ∪ ax-dn i
+  modal-logic-K-axioms = ((ax-k i ∪ ax-s i) ∪ ax-n i) ∪ ax-dn i
 
   modal-logic-K : modal-theory l i
   modal-logic-K = modal-logic-closure modal-logic-K-axioms
@@ -62,9 +63,9 @@ module _
       ( modal-logic-K-axioms)
       ( transitive-leq-subtype
         ( ax-k i ∪ ax-s i)
-        ( ax-k i ∪ ax-s i ∪ ax-n i)
+        ( (ax-k i ∪ ax-s i) ∪ ax-n i)
         ( modal-logic-K-axioms)
-        ( subtype-union-left (ax-k i ∪ ax-s i ∪ ax-n i) (ax-dn i))
+        ( subtype-union-left ((ax-k i ∪ ax-s i) ∪ ax-n i) (ax-dn i))
         ( subtype-union-left (ax-k i ∪ ax-s i) (ax-n i)))
       ( subtype-union-left (ax-k i) (ax-s i))
 
@@ -76,9 +77,9 @@ module _
       ( modal-logic-K-axioms)
       ( transitive-leq-subtype
         ( ax-k i ∪ ax-s i)
-        ( ax-k i ∪ ax-s i ∪ ax-n i)
+        ( (ax-k i ∪ ax-s i) ∪ ax-n i)
         ( modal-logic-K-axioms)
-        ( subtype-union-left (ax-k i ∪ ax-s i ∪ ax-n i) (ax-dn i))
+        ( subtype-union-left ((ax-k i ∪ ax-s i) ∪ ax-n i) (ax-dn i))
         ( subtype-union-left (ax-k i ∪ ax-s i) (ax-n i)))
       ( subtype-union-right (ax-k i) (ax-s i))
 
@@ -86,14 +87,14 @@ module _
   K-axioms-contains-ax-n =
     transitive-leq-subtype
       ( ax-n i)
-      ( ax-k i ∪ ax-s i ∪ ax-n i)
+      ( (ax-k i ∪ ax-s i) ∪ ax-n i)
       ( modal-logic-K-axioms)
-      ( subtype-union-left (ax-k i ∪ ax-s i ∪ ax-n i) (ax-dn i))
+      ( subtype-union-left ((ax-k i ∪ ax-s i) ∪ ax-n i) (ax-dn i))
       ( subtype-union-right (ax-k i ∪ ax-s i) (ax-n i))
 
   K-axioms-contains-ax-dn : ax-dn i ⊆ modal-logic-K-axioms
   K-axioms-contains-ax-dn =
-    subtype-union-right (ax-k i ∪ ax-s i ∪ ax-n i) (ax-dn i)
+    subtype-union-right ((ax-k i ∪ ax-s i) ∪ ax-n i) (ax-dn i)
 
   K-contains-ax-k : ax-k i ⊆ modal-logic-K
   K-contains-ax-k =
@@ -147,7 +148,7 @@ module _
     soundness (modal-logic-K-axioms i) (decidable-models l2 l3 i l4)
   soundness-K-axioms =
     soundness-union-subclass-right-sublevels
-      ( ax-k i ∪ ax-s i ∪ ax-n i)
+      ( (ax-k i ∪ ax-s i) ∪ ax-n i)
       ( ax-dn i)
       ( l1 ⊔ l2 ⊔ l3 ⊔ l4)
       ( all-models l2 l3 i l4)

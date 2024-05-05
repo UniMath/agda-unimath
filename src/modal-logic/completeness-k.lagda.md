@@ -74,13 +74,4 @@ module _
       ( prop-resize)
       ( all-models (lsuc l1) l1 i l1)
       ( star)
-    -- canonical-model-completness
-    --   ( modal-logic-K-axioms i)
-    --   ( zorn)
-    --   ( prop-resize)
-    --   ( is-consistent-K i)
-    --   ( refl-leq-subtype (modal-logic-K i))
-    --   ( lem)
-    --   ( all-models (lsuc l1) l1 i l1)
-    --   ( star)
 ```

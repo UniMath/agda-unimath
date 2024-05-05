@@ -321,8 +321,9 @@ module _
 
     deduction-lemma :
       (a b : formula i) →
-      weak-modal-logic-closure (theory-add-formula a axioms) b ⇔
-        weak-modal-logic-closure axioms (a →ₘ b)
+      type-iff-Prop
+        ( weak-modal-logic-closure (theory-add-formula a axioms) b)
+        ( weak-modal-logic-closure axioms (a →ₘ b))
     pr1 (deduction-lemma a b) =
       map-universal-property-trunc-Prop
         ( weak-modal-logic-closure axioms (a →ₘ b))

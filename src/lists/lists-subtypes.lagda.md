@@ -149,13 +149,13 @@ module _
     {l2 l3 : Level}
     (xs : list A) (a : subtype l2 A) (b : subtype l3 A) →
     list-subtype xs ⊆ union-subtype a b →
-    ∃ ( list A × list A)
+    exists-structure ( list A × list A)
       ( λ (xsl , xsr) →
         ( list-subtype xs ⊆ list-subtype xsl ∪ list-subtype xsr) ×
         ( list-subtype xsl ⊆ a) ×
         ( list-subtype xsr ⊆ b))
   lists-in-union-lists nil a b sub =
-    intro-∃ (nil , nil)
+    intro-exists (nil , nil)
       ( triple
         ( subset-list-subtype-nil (list-subtype nil ∪ list-subtype nil))
         ( subset-list-subtype-nil a)
@@ -169,55 +169,54 @@ module _
           ( union-subtype a b)
           ( leq)
           ( subset-tail-list-subtype)))
-      ( ∃-Prop _ _)
+      ( exists-structure-Prop _ _)
       ( λ ((xsl , xsr) , leq-lists , leq-xsl , leq-xsr) →
-        ( elim-disjunction-Prop (a x) (b x) (∃-Prop _ _)
-          ( pair
-            ( λ x-in-a →
-              ( intro-∃ (cons x xsl , xsr)
-                ( triple
-                  ( subset-list-subtype-cons
+        ( elim-disjunction (exists-structure-Prop _ _)
+          ( λ x-in-a →
+            ( intro-exists (cons x xsl , xsr)
+              ( triple
+                ( subset-list-subtype-cons
+                  ( list-subtype (cons x xsl) ∪ list-subtype xsr)
+                  ( subtype-union-left
+                    ( list-subtype (cons x xsl))
+                    ( list-subtype xsr)
+                    ( x)
+                    ( head-in-list-subtype))
+                  ( transitive-leq-subtype
+                    ( list-subtype xs)
+                    ( list-subtype xsl ∪ list-subtype xsr)
                     ( list-subtype (cons x xsl) ∪ list-subtype xsr)
-                    ( subtype-union-left
+                    ( subset-union-subset-left
+                      ( list-subtype xsl)
                       ( list-subtype (cons x xsl))
                       ( list-subtype xsr)
-                      ( x)
-                      ( head-in-list-subtype))
-                    ( transitive-leq-subtype
-                      ( list-subtype xs)
-                      ( list-subtype xsl ∪ list-subtype xsr)
-                      ( list-subtype (cons x xsl) ∪ list-subtype xsr)
-                      ( subset-union-subset-left
-                        ( list-subtype xsl)
-                        ( list-subtype (cons x xsl))
-                        ( list-subtype xsr)
-                        ( subset-tail-list-subtype))
-                      ( leq-lists)))
-                  ( backward-implication (iff-subset-head-tail x xsl a)
-                    ( x-in-a , leq-xsl))
-                  ( leq-xsr))))
-            ( λ x-in-b →
-              ( intro-∃ (xsl , cons x xsr)
-                ( triple
-                  ( subset-list-subtype-cons
+                      ( subset-tail-list-subtype))
+                    ( leq-lists)))
+                ( backward-implication (iff-subset-head-tail x xsl a)
+                  ( x-in-a , leq-xsl))
+                ( leq-xsr))))
+          ( λ x-in-b →
+            ( intro-exists (xsl , cons x xsr)
+              ( triple
+                ( subset-list-subtype-cons
+                  ( list-subtype xsl ∪ list-subtype (cons x xsr))
+                  ( subtype-union-right
+                    ( list-subtype xsl)
+                    ( list-subtype (cons x xsr))
+                    ( x)
+                    ( head-in-list-subtype))
+                  ( transitive-leq-subtype
+                    ( list-subtype xs)
+                    ( list-subtype xsl ∪ list-subtype xsr)
                     ( list-subtype xsl ∪ list-subtype (cons x xsr))
-                    ( subtype-union-right
+                    ( subset-union-subset-right
                       ( list-subtype xsl)
+                      ( list-subtype xsr)
                       ( list-subtype (cons x xsr))
-                      ( x)
-                      ( head-in-list-subtype))
-                    ( transitive-leq-subtype
-                      ( list-subtype xs)
-                      ( list-subtype xsl ∪ list-subtype xsr)
-                      ( list-subtype xsl ∪ list-subtype (cons x xsr))
-                      ( subset-union-subset-right
-                        ( list-subtype xsl)
-                        ( list-subtype xsr)
-                        ( list-subtype (cons x xsr))
-                        ( subset-tail-list-subtype))
-                      ( leq-lists)))
-                  ( leq-xsl)
-                  ( backward-implication (iff-subset-head-tail x xsr b)
-                    ( x-in-b , leq-xsr))))))
+                      ( subset-tail-list-subtype))
+                    ( leq-lists)))
+                ( leq-xsl)
+                ( backward-implication (iff-subset-head-tail x xsr b)
+                  ( x-in-b , leq-xsr)))))
           ( leq x head-in-list-subtype)))
 ```

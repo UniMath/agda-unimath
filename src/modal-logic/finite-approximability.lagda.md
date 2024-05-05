@@ -71,7 +71,7 @@ module _
     modal-theory l2 i →
     Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ lsuc l6)
   is-finitely-approximable-Prop l3 l4 l5 l6 logic =
-    ∃-Prop
+    exists-structure-Prop
       ( model-class l3 l4 i l5 l6)
       ( λ C →
         ( product
@@ -107,7 +107,7 @@ module _
         ( filtration-models _ _ i _ _ _ _ _ M*)
         ( λ ((a , M , _) , p) →
           ( tr (is-in-subtype (filtration-models _ _ i _ _ _ _ _)) (inv p)
-            ( intro-∃
+            ( intro-exists
               ( subformulas i a , M)
               ( pair
                 (is-finite-subformulas-list
@@ -156,7 +156,7 @@ module _
         ( lsuc (lsuc (lsuc l1)))
         ( modal-logic-K i)
     is-finitely-approximable-K =
-      intro-∃
+      intro-exists
         ( K-finite-class)
         ( pair
           ( soundness-subclass

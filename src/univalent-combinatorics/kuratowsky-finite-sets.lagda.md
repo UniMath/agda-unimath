@@ -103,7 +103,7 @@ is-kuratowsky-finite-set-surjection :
 is-kuratowsky-finite-set-surjection X Y f =
   map-universal-property-trunc-Prop
     ( is-kuratowsky-finite-set-Prop Y)
-    ( λ (n , g) → (intro-∃ n (surjection-comp f g)))
+    ( λ (n , g) → (intro-exists n (surjection-comp f g)))
 
 is-kuratowsky-finite-set-is-finite :
   {l : Level} (X : Set l) →
@@ -112,7 +112,7 @@ is-kuratowsky-finite-set-is-finite :
 is-kuratowsky-finite-set-is-finite X =
   map-universal-property-trunc-Prop
     ( is-kuratowsky-finite-set-Prop X)
-    ( λ (n , e) → intro-∃ n (map-equiv e , is-surjective-map-equiv e))
+    ( λ (n , e) → intro-exists n (map-equiv e , is-surjective-map-equiv e))
 ```
 
 ### Classical facts

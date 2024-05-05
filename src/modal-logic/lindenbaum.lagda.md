@@ -48,10 +48,11 @@ module _
   where
 
   lindenbaum :
-    ∃ ( L-complete-theory logic (l1 ⊔ l2 ⊔ l3))
+    exists (L-complete-theory logic (l1 ⊔ l2 ⊔ l3))
       ( λ y →
-        ( modal-theory-L-consistent-theory logic x ⊆
-          modal-theory-L-complete-theory logic y))
+        ( leq-prop-subtype
+          ( modal-theory-L-consistent-theory logic x)
+          ( modal-theory-L-complete-theory logic y)))
   lindenbaum =
     apply-universal-property-trunc-Prop
       ( extend-L-consistent-theory L prop-resize contains-ax-k' contains-ax-s'
@@ -59,9 +60,13 @@ module _
         ( is-inhabited-L-consistent-theory L
           ( is-weak-modal-logic-weak-modal-logic-closure)
           ( is-cons)))
-      ( ∃-Prop _ _)
+      ( ∃ (L-complete-theory logic (l1 ⊔ l2 ⊔ l3))
+        ( λ y →
+          ( leq-prop-subtype
+            ( modal-theory-L-consistent-theory logic x)
+            ( modal-theory-L-complete-theory logic y))))
       ( λ y →
-        ( intro-∃
+        ( intro-exists
           ( result-L-complete y)
           ( subset-theory-transofrm-L-complete y)))
     where

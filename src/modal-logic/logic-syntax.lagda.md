@@ -271,7 +271,9 @@ module _
 
   diamond-modal-theory : modal-theory l2 i → modal-theory (l1 ⊔ l2) i
   diamond-modal-theory theory a =
-    ∃-Prop (formula i) (λ b → is-in-subtype theory b × (a ＝ ◇ b))
+    exists-structure-Prop
+      ( formula i)
+      ( λ b → is-in-subtype theory b × (a ＝ ◇ b))
 
 module _
   {l1 : Level} {i : Set l1}

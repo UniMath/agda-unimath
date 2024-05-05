@@ -106,7 +106,7 @@ module _
   is-chain-upper-bound = type-Prop ∘ is-chain-upper-bound-Prop
 
   has-chain-upper-bound-Prop : Prop (l1 ⊔ l2 ⊔ l3)
-  has-chain-upper-bound-Prop = ∃-Prop (type-Poset X) is-chain-upper-bound
+  has-chain-upper-bound-Prop = ∃ (type-Poset X) is-chain-upper-bound-Prop
 
   has-chain-upper-bound : UU (l1 ⊔ l2 ⊔ l3)
   has-chain-upper-bound = type-Prop has-chain-upper-bound-Prop

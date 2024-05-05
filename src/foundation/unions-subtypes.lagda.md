@@ -41,9 +41,8 @@ module _
 
   union-subtype : subtype l1 X → subtype l2 X → subtype (l1 ⊔ l2) X
   union-subtype P Q x = (P x) ∨ (Q x)
-  union-subtype P Q x = disjunction-Prop (P x) (Q x)
 
-  infixl 10 _∪_
+  infixr 10 _∪_
   _∪_ = union-subtype
 ```
 
@@ -103,43 +102,41 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l3 X)
   where
 
-  subtype-union-left : P ⊆ union-subtype P Q
-  subtype-union-left x = inl-disjunction-Prop (P x) (Q x)
+  subtype-union-left : P ⊆ P ∪ Q
+  -- subtype-union-left x = inl-disjunction-Prop (P x) (Q x)
+  subtype-union-left x = inl-disjunction
 
-  subtype-union-right : Q ⊆ union-subtype P Q
-  subtype-union-right x = inr-disjunction-Prop (P x) (Q x)
+  subtype-union-right : Q ⊆ P ∪ Q
+  -- subtype-union-right x = inr-disjunction-Prop (P x) (Q x)
+  subtype-union-right x = inr-disjunction
 
   elim-union-subtype :
     {l4 : Level} (f : X → Prop l4) →
     ((x : X) → is-in-subtype P x → type-Prop (f x)) →
     ((x : X) → is-in-subtype Q x → type-Prop (f x)) →
     (x : X) → is-in-subtype (P ∪ Q) x → type-Prop (f x)
-  elim-union-subtype f H-P H-Q x =
-    elim-disjunction-Prop (P x) (Q x) (f x) (H-P x , H-Q x)
+  elim-union-subtype f H-P H-Q x = elim-disjunction (f x) (H-P x) (H-Q x)
 
   elim-union-subtype' :
     {l4 : Level} (R : Prop l4) →
     ((x : X) → is-in-subtype P x → type-Prop R) →
     ((x : X) → is-in-subtype Q x → type-Prop R) →
     (x : X) → is-in-subtype (P ∪ Q) x → type-Prop R
-  elim-union-subtype' R H-P H-Q x =
-    elim-disjunction-Prop (P x) (Q x) R (H-P x , H-Q x)
-    -- elim-disjunction-Prop (P x) (Q x) (f x) (H-P x , H-Q x) p
+  elim-union-subtype' R = elim-union-subtype (λ _ → R)
+    -- elim-disjunction-Prop (P x) (Q x) R (H-P x , H-Q x)
 
   subtype-union-both :
-    {l4 : Level} (S : subtype l4 X) → P ⊆ S → Q ⊆ S → union-subtype P Q ⊆ S
-  subtype-union-both S P-sub-S Q-sub-S x =
-    elim-disjunction-Prop (P x) (Q x) (S x) (P-sub-S x , Q-sub-S x)
+    {l4 : Level} (S : subtype l4 X) → P ⊆ S → Q ⊆ S → P ∪ Q ⊆ S
+  subtype-union-both = elim-union-subtype
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} (P : subtype l2 X) (Q : subtype l3 X)
   where
 
   subset-union-comm :
-    union-subtype P Q ⊆ union-subtype Q P
+    P ∪ Q ⊆ Q ∪ P
   subset-union-comm =
-    subtype-union-both P Q
-      ( union-subtype Q P)
+    subtype-union-both P Q (Q ∪ P)
       ( subtype-union-right Q P)
       ( subtype-union-left Q P)
 
@@ -148,50 +145,28 @@ module _
   (P : subtype l2 X) (Q : subtype l3 X) (S : subtype l4 X)
   where
 
-  forward-subset-union-assoc :
-    union-subtype P (union-subtype Q S) ⊆ union-subtype (union-subtype P Q) S
+  forward-subset-union-assoc : P ∪ (Q ∪ S) ⊆ (P ∪ Q) ∪ S
   forward-subset-union-assoc =
-    subtype-union-both
-      ( P)
-      ( union-subtype Q S)
-      ( union-subtype (union-subtype P Q) S)
-      ( transitive-leq-subtype
-        ( P)
-        ( union-subtype P Q)
-        ( union-subtype (union-subtype P Q) S)
-        ( subtype-union-left (union-subtype P Q) S)
+    subtype-union-both P (Q ∪ S) ((P ∪ Q) ∪ S)
+      ( transitive-leq-subtype P (P ∪ Q) ((P ∪ Q) ∪ S)
+        ( subtype-union-left (P ∪ Q) S)
         ( subtype-union-left P Q))
-      ( subtype-union-both Q S
-        ( union-subtype (union-subtype P Q) S)
-        ( transitive-leq-subtype
-          ( Q)
-          ( union-subtype P Q)
-          ( union-subtype (union-subtype P Q) S)
-          ( subtype-union-left (union-subtype P Q) S)
+      ( subtype-union-both Q S ((P ∪ Q) ∪ S)
+        ( transitive-leq-subtype Q (P ∪ Q) ((P ∪ Q) ∪ S)
+          ( subtype-union-left (P ∪ Q) S)
           ( subtype-union-right P Q))
-        ( subtype-union-right (union-subtype P Q) S))
+        ( subtype-union-right (P ∪ Q) S))
 
-  backward-subset-union-assoc :
-    union-subtype (union-subtype P Q) S ⊆ union-subtype P (union-subtype Q S)
+  backward-subset-union-assoc : (P ∪ Q) ∪ S ⊆ P ∪ (Q ∪ S)
   backward-subset-union-assoc =
-    subtype-union-both
-      ( union-subtype P Q)
-      ( S)
-      ( union-subtype P (union-subtype Q S))
-      ( subtype-union-both P Q
-        ( union-subtype P (union-subtype Q S))
-        ( subtype-union-left P (union-subtype Q S))
-        ( transitive-leq-subtype
-          ( Q)
-          ( union-subtype Q S)
-          ( union-subtype P (union-subtype Q S))
-          ( subtype-union-right P (union-subtype Q S))
+    subtype-union-both (P ∪ Q) S (P ∪ (Q ∪ S))
+      ( subtype-union-both P Q (P ∪ (Q ∪ S))
+        ( subtype-union-left P (Q ∪ S))
+        ( transitive-leq-subtype Q (Q ∪ S) (P ∪ (Q ∪ S))
+          ( subtype-union-right P (Q ∪ S))
           ( subtype-union-left Q S)))
-      ( transitive-leq-subtype
-        ( S)
-        ( union-subtype Q S)
-        ( union-subtype P (union-subtype Q S))
-        ( subtype-union-right P (union-subtype Q S))
+      ( transitive-leq-subtype S (Q ∪ S) (P ∪ (Q ∪ S))
+        ( subtype-union-right P (Q ∪ S))
         ( subtype-union-right Q S))
 
 module _
@@ -203,13 +178,13 @@ module _
     (P1 : subtype l2 X) (Q1 : subtype l3 X)
     (P2 : subtype l4 X) (Q2 : subtype l5 X) →
     P1 ⊆ P2 → Q1 ⊆ Q2 →
-    union-subtype P1 Q1 ⊆ union-subtype P2 Q2
+    P1 ∪ Q1 ⊆ P2 ∪ Q2
   subset-union-subsets P1 Q1 P2 Q2 P1-sub-P2 Q1-sub-Q2 =
-    subtype-union-both P1 Q1 (union-subtype P2 Q2)
-      ( transitive-leq-subtype P1 P2 (union-subtype P2 Q2)
+    subtype-union-both P1 Q1 (P2 ∪ Q2)
+      ( transitive-leq-subtype P1 P2 (P2 ∪ Q2)
         ( subtype-union-left P2 Q2)
         ( P1-sub-P2))
-      ( transitive-leq-subtype Q1 Q2 (union-subtype P2 Q2)
+      ( transitive-leq-subtype Q1 Q2 (P2 ∪ Q2)
         ( subtype-union-right P2 Q2)
         ( Q1-sub-Q2))
 
@@ -217,13 +192,9 @@ module _
     {l2 l3 l4 : Level}
     (P1 : subtype l2 X) (P2 : subtype l3 X) (Q : subtype l4 X) →
     P1 ⊆ P2 →
-    union-subtype P1 Q ⊆ union-subtype P2 Q
+    P1 ∪ Q ⊆ P2 ∪ Q
   subset-union-subset-left P1 P2 Q P1-sub-P2 =
-    subtype-union-both P1 Q (union-subtype P2 Q)
-      ( transitive-leq-subtype P1 P2 (union-subtype P2 Q)
-        ( subtype-union-left P2 Q)
-        ( P1-sub-P2))
-      ( subtype-union-right P2 Q)
+    subset-union-subsets P1 Q P2 Q P1-sub-P2 (refl-leq-subtype Q)
 
   subset-union-subset-right :
     {l2 l3 l4 : Level}
@@ -231,11 +202,7 @@ module _
     Q1 ⊆ Q2 →
     union-subtype P Q1 ⊆ union-subtype P Q2
   subset-union-subset-right P Q1 Q2 Q1-sub-Q2 =
-    subtype-union-both P Q1 (union-subtype P Q2)
-      ( subtype-union-left P Q2)
-      ( transitive-leq-subtype Q1 Q2 (union-subtype P Q2)
-        ( subtype-union-right P Q2)
-        ( Q1-sub-Q2))
+    subset-union-subsets P Q1 P Q2 (refl-leq-subtype P) Q1-sub-Q2
 
 module _
   {l1 l2 l3 l4 : Level} {X : UU l1}
@@ -243,21 +210,12 @@ module _
   where
 
   union-swap-1-2 :
-    union-subtype P (union-subtype Q S) ⊆ union-subtype Q (union-subtype P S)
+    P ∪ (Q ∪ S) ⊆ Q ∪ (P ∪ S)
   union-swap-1-2 =
-    transitive-leq-subtype
-      ( union-subtype P (union-subtype Q S))
-      ( union-subtype (union-subtype Q P) S)
-      ( union-subtype Q (union-subtype P S))
+    transitive-leq-subtype (P ∪ (Q ∪ S)) ((Q ∪ P) ∪ S) (Q ∪ (P ∪ S))
       ( backward-subset-union-assoc Q P S)
-      ( transitive-leq-subtype
-        ( union-subtype P (union-subtype Q S))
-        ( union-subtype (union-subtype P Q) S)
-        ( union-subtype (union-subtype Q P) S)
-        ( subset-union-subset-left
-          ( union-subtype P Q)
-          ( union-subtype Q P)
-          ( S)
+      ( transitive-leq-subtype (P ∪ (Q ∪ S)) ((P ∪ Q) ∪ S) ((Q ∪ P) ∪ S)
+        ( subset-union-subset-left (P ∪ Q) (Q ∪ P) S
           ( subset-union-comm P Q))
         ( forward-subset-union-assoc P Q S))
 

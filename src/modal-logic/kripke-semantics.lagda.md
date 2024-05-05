@@ -146,7 +146,8 @@ module _
   where
 
   is-serial : UU (l1 ⊔ l2)
-  is-serial = (x : A) → ∃ A (λ y → R x y)
+  -- is-serial = (x : A) → ∃ A (λ y → R x y)
+  is-serial = (x : A) → exists-structure A (λ y → R x y)
 
   is-euclidean : UU (l1 ⊔ l2)
   is-euclidean = (x y z : A) → R x y → R x z → R y z
@@ -160,7 +161,7 @@ module _
 
   is-prop-is-serial-Relation-Prop : is-prop is-serial-Relation-Prop
   is-prop-is-serial-Relation-Prop =
-    is-prop-Π (λ x → is-prop-∃ A _)
+    is-prop-Π (λ x → is-prop-exists-structure A _)
 
   is-euclidean-Relation-Prop : UU (l1 ⊔ l2)
   is-euclidean-Relation-Prop = is-euclidean (type-Relation-Prop R)
@@ -244,7 +245,7 @@ module _
     Prop (l1 ⊔ l2 ⊔ l4)
   (M , x) ⊨ var n = raise-Prop (l1 ⊔ l2) (valuate-kripke-model i M n x)
   (M , x) ⊨ ⊥ = raise-empty-Prop (l1 ⊔ l2 ⊔ l4)
-  (M , x) ⊨ a →ₘ b = implication-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
+  (M , x) ⊨ a →ₘ b = hom-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
   (M , x) ⊨ □ a =
     Π-Prop
       ( type-kripke-model i M)

@@ -497,7 +497,7 @@ module _
           ( f y xRy)))
 
   canonical-model-theorem :
-    (a : formula i) → logic a ⇔ (canonical-kripke-model ⊨M a)
+    (a : formula i) → type-iff-Prop (logic a) (canonical-kripke-model ⊨M a)
   pr1 (canonical-model-theorem a) in-logic x =
     forward-implication
       ( canonical-model-theorem-pointwise a x)

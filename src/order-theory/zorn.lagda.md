@@ -44,7 +44,7 @@ module _
       ( λ X →
           ( function-Prop
             ( (C : chain-Poset l3 X) → has-chain-upper-bound X C)
-            ( ∃-Prop (type-Poset X) (is-maximal-element-Poset X))))
+            ( ∃ (type-Poset X) (is-maximal-element-Poset-Prop X))))
 
   Zorn : UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   Zorn = type-Prop Zorn-Prop
@@ -60,7 +60,7 @@ module _
             ( (C : chain-Poset l3 X) →
               is-inhabited (type-chain-Poset X C) →
               has-chain-upper-bound X C)
-            ( ∃-Prop (type-Poset X) (is-maximal-element-Poset X)))))
+            ( ∃ (type-Poset X) (is-maximal-element-Poset-Prop X)))))
 
   Zorn-non-empty : UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   Zorn-non-empty = type-Prop Zorn-non-empty-Prop
@@ -92,10 +92,11 @@ module _
           ( is-inhabited-X)
           ( has-chain-upper-bound-Prop X C)
           ( λ x →
-            ( intro-∃ x
-              ( λ (y , y-in-C) → ex-falso (is-empty-C (intro-∃ y y-in-C)))))
+            ( intro-exists x
+              ( λ (y , y-in-C) →
+                ( ex-falso (is-empty-C (intro-exists y y-in-C))))))
 
-    iff-Zorn-non-empty-Zorn : Zorn-non-empty-Prop ⇔ Zorn-Prop
+    iff-Zorn-non-empty-Zorn : type-iff-Prop Zorn-non-empty-Prop Zorn-Prop
     pr1 (iff-Zorn-non-empty-Zorn) = Zorn-Zorn-non-empty
     pr2 (iff-Zorn-non-empty-Zorn) = Zorn-non-empty-Zorn
 ```

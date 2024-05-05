@@ -107,7 +107,7 @@ module _
     soundness theory C →
     completeness theory C →
     (a : formula i) →
-    theory a ⇔ prop-bool (decision-procedure a)
+    is-in-subtype theory a ↔ type-prop-bool (decision-procedure a)
   pr1 (decision-procedure-correctness sound complete a) in-theory
     with decision-procedure' a
   ... | inl _ = star
@@ -120,7 +120,7 @@ module _
 -- TODO: move to kuratowsky-finite-sets
 is-kuratowsky-finite-set-Prop' : {l : Level} → Set l → Prop l
 is-kuratowsky-finite-set-Prop' X =
-  ∃-Prop (list (type-Set X))
+  exists-structure-Prop (list (type-Set X))
     ( λ l → (x : type-Set X) → type-Prop (list-subtype l x))
 
 is-kuratowsky-finite-set' : {l : Level} → Set l → UU l
@@ -133,7 +133,7 @@ is-kuratowsky-finite-set-is-kuratowsky-finite-set' X =
   map-universal-property-trunc-Prop
     ( is-kuratowsky-finite-set-Prop X)
     ( λ (l , all-list-subtype) →
-      ( intro-∃
+      ( intro-exists
         ( length-list l)
         ( pair
           ( component-list l)
@@ -284,7 +284,7 @@ module _
   is-kuratowsky-finite'-subformulas-list :
     (a : formula i) → is-kuratowsky-finite-set' (subformulas-Set a)
   is-kuratowsky-finite'-subformulas-list a =
-    intro-∃
+    intro-exists
       ( subformulas-Set-list a)
       ( λ (b , trunc-b-list-subtype) →
         ( apply-universal-property-trunc-Prop
@@ -549,7 +549,7 @@ module _
   filtrate-class :
     model-class l6 l7 i l8 ( l3 ⊔ l5 ⊔ lsuc (l1 ⊔ l2 ⊔ l4 ⊔ l6 ⊔ l7 ⊔ l8))
   filtrate-class M* =
-    ∃-Prop (formula i × type-subtype C)
+    exists-structure-Prop (formula i × type-subtype C)
       ( λ (a , (M , _)) → M* ＝ filtration (subformulas i a) M)
 
   module _
@@ -588,7 +588,7 @@ module _
                   ( x))
                 ( in-logic
                   ( filtration (list-subtype (cons a _)) M)
-                  ( intro-∃ (a , (M , M-in-class)) refl)
+                  ( intro-exists (a , (M , M-in-class)) refl)
                   ( map-equiv-is-kripke-model-filtration
                     ( i)
                     ( subformulas i a)

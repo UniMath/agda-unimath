@@ -45,7 +45,7 @@ module _
   where
 
   modal-logic-S5-axioms : modal-theory l i
-  modal-logic-S5-axioms = modal-logic-K-axioms i ∪ (ax-m i ∪ (ax-b i ∪ ax-4 i))
+  modal-logic-S5-axioms = modal-logic-K-axioms i ∪ ax-m i ∪ ax-b i ∪ ax-4 i
 
   modal-logic-S5 : modal-theory l i
   modal-logic-S5 = modal-logic-closure modal-logic-S5-axioms
