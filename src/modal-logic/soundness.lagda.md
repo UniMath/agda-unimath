@@ -104,11 +104,9 @@ module _
       ( forces-in-intersection M in-class a)
 
   soundness-modal-logic-union :
-    soundness
-      (modal-logic-closure (union-subtype theory₁ theory₂))
-      (intersection-subtype C₁ C₂)
+    soundness (modal-logic-closure (theory₁ ∪ theory₂)) (C₁ ∩ C₂)
   soundness-modal-logic-union =
-    soundness-modal-logic (intersection-subtype C₁ C₂) soundness-union
+    soundness-modal-logic (C₁ ∩ C₂) soundness-union
 
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
@@ -120,11 +118,11 @@ module _
     (C₁ : model-class l4 l5 i l6 (l7 ⊔ l8)) (C₂ : model-class l4 l5 i l6 l7)
     (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
     C₁ ⊆ C₂ →
-    soundness (union-subtype ax₁ ax₂) C₁
+    soundness (ax₁ ∪ ax₂) C₁
   soundness-union-subclass-left-sublevels
     l8 C₁ C₂ sound₁ sound₂ C₁-sub-C₂ =
       tr
-        ( soundness (union-subtype ax₁ ax₂))
+        ( soundness (ax₁ ∪ ax₂))
         ( intersection-subtype-left-sublevels l8 C₁ C₂ C₁-sub-C₂)
         ( soundness-union ax₁ ax₂ C₁ C₂ sound₁ sound₂)
 
@@ -133,11 +131,11 @@ module _
     (C₁ : model-class l4 l5 i l6 l7) (C₂ : model-class l4 l5 i l6 (l7 ⊔ l8))
     (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
     C₂ ⊆ C₁ →
-    soundness (union-subtype ax₁ ax₂) C₂
+    soundness (ax₁ ∪ ax₂) C₂
   soundness-union-subclass-right-sublevels
     l8 C₁ C₂ sound₁ sound₂ C₂-sub-C₁ =
       tr
-        ( soundness (union-subtype ax₁ ax₂))
+        ( soundness (ax₁ ∪ ax₂))
         ( intersection-subtype-right-sublevels l8 C₁ C₂ C₂-sub-C₁)
         ( soundness-union ax₁ ax₂ C₁ C₂ sound₁ sound₂)
 
@@ -146,11 +144,11 @@ module _
     (C₁ : model-class l4 l5 i l6 (l7 ⊔ l8)) (C₂ : model-class l4 l5 i l6 l7)
     (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
     C₁ ⊆ C₂ →
-    soundness (modal-logic-closure (union-subtype ax₁ ax₂)) C₁
+    soundness (modal-logic-closure (ax₁ ∪ ax₂)) C₁
   soundness-modal-logic-union-subclass-left-sublevels
     l8 C₁ C₂ sound₁ sound₂ C₁-sub-C₂ =
       tr
-        ( soundness (modal-logic-closure (union-subtype ax₁ ax₂)))
+        ( soundness (modal-logic-closure (ax₁ ∪ ax₂)))
         ( intersection-subtype-left-sublevels l8 C₁ C₂ C₁-sub-C₂)
         ( soundness-modal-logic-union ax₁ ax₂ C₁ C₂ sound₁ sound₂)
 
@@ -159,11 +157,11 @@ module _
     (C₁ : model-class l4 l5 i l6 l7) (C₂ : model-class l4 l5 i l6 (l7 ⊔ l8))
     (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
     C₂ ⊆ C₁ →
-    soundness (modal-logic-closure (union-subtype ax₁ ax₂)) C₂
+    soundness (modal-logic-closure (ax₁ ∪ ax₂)) C₂
   soundness-modal-logic-union-subclass-right-sublevels
     l8 C₁ C₂ sound₁ sound₂ C₂-sub-C₁ =
       tr
-        ( soundness (modal-logic-closure (union-subtype ax₁ ax₂)))
+        ( soundness (modal-logic-closure (ax₁ ∪ ax₂)))
         ( intersection-subtype-right-sublevels l8 C₁ C₂ C₂-sub-C₁)
         ( soundness-modal-logic-union ax₁ ax₂ C₁ C₂ sound₁ sound₂)
 
@@ -171,7 +169,7 @@ module _
     (C₁ : model-class l4 l5 i l6 l7) (C₂ : model-class l4 l5 i l6 l7)
     (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
     C₁ ⊆ C₂ →
-    soundness (modal-logic-closure (union-subtype ax₁ ax₂)) C₁
+    soundness (modal-logic-closure (ax₁ ∪ ax₂)) C₁
   soundness-modal-logic-union-subclass-left =
     soundness-modal-logic-union-subclass-left-sublevels lzero
 
@@ -179,7 +177,7 @@ module _
     (C₁ : model-class l4 l5 i l6 l7) (C₂ : model-class l4 l5 i l6 l7)
     (sound₁ : soundness ax₁ C₁) (sound₂ : soundness ax₂ C₂) →
     C₂ ⊆ C₁ →
-    soundness (modal-logic-closure (union-subtype ax₁ ax₂)) C₂
+    soundness (modal-logic-closure (ax₁ ∪ ax₂)) C₂
   soundness-modal-logic-union-subclass-right =
     soundness-modal-logic-union-subclass-right-sublevels lzero
 
@@ -190,15 +188,15 @@ module _
   (sound₁ : soundness ax₁ C) (sound₂ : soundness ax₂ C)
   where
 
-  soundness-union-same-class : soundness (union-subtype ax₁ ax₂) C
+  soundness-union-same-class : soundness (ax₁ ∪ ax₂) C
   soundness-union-same-class =
     tr
-      ( soundness (union-subtype ax₁ ax₂))
+      ( soundness (ax₁ ∪ ax₂))
       ( is-reflexivity-intersection C)
       ( soundness-union ax₁ ax₂ C C sound₁ sound₂)
 
   soundness-modal-logic-union-same-class :
-    soundness (modal-logic-closure (union-subtype ax₁ ax₂)) C
+    soundness (modal-logic-closure (ax₁ ∪ ax₂)) C
   soundness-modal-logic-union-same-class =
     soundness-modal-logic C soundness-union-same-class
 ```

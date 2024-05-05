@@ -143,9 +143,7 @@ module _
       ( ax-m i)
       ( ax-b i ∪ ax-4 i)
       ( reflexive-kripke-class l2 l3 i l4)
-      ( intersection-subtype
-        ( symmetry-kripke-class l2 l3 i l4)
-        ( transitivity-kripke-class l2 l3 i l4))
+      ( symmetry-kripke-class l2 l3 i l4 ∩ transitivity-kripke-class l2 l3 i l4)
       ( ax-m-soundness i l3 l4)
       ( soundness-union
         ( ax-b i)

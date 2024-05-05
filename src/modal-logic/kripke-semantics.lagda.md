@@ -184,17 +184,6 @@ module _
   relation-property-class property M =
     property (relation-Prop-kripke-model i M)
 
-  -- intersection-relation-property-class :
-  --   {l5 l6 : Level} →
-  --   (R₁ : {A : UU l1} → subtype l5 (Relation-Prop l2 A)) →
-  --   (R₂ : {A : UU l1} → subtype l5 (Relation-Prop l2 A)) →
-  --   Id
-  --     ( intersection-subtype
-  --       ( relation-property-class R₁)
-  --       ( relation-property-class R₂))
-  --     ( relation-property-class (intersection-subtype R₁ R₂))
-  -- intersection-relation-property-class R₁ R₂ = refl
-
   reflexive-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
   reflexive-kripke-class =
     relation-property-class
