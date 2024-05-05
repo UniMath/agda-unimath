@@ -193,37 +193,54 @@ module _
   {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
   where
 
-  abstract
-    is-equiv-map-coproduct :
-      {f : A → A'} {g : B → B'} →
-      is-equiv f → is-equiv g → is-equiv (map-coproduct f g)
-    pr1
-      ( pr1
-        ( is-equiv-map-coproduct
-          ( (sf , Sf) , (rf , Rf))
-          ( (sg , Sg) , (rg , Rg)))) = map-coproduct sf sg
-    pr2
-      ( pr1
-        ( is-equiv-map-coproduct {f} {g}
-          ( (sf , Sf) , (rf , Rf))
-          ( (sg , Sg) , (rg , Rg)))) =
-      ( ( inv-htpy (preserves-comp-map-coproduct sf f sg g)) ∙h
-        ( htpy-map-coproduct Sf Sg)) ∙h
-      ( id-map-coproduct A' B')
-    pr1
-      ( pr2
-        ( is-equiv-map-coproduct
-          ( (sf , Sf) , (rf , Rf))
-          ( (sg , Sg) , (rg , Rg)))) = map-coproduct rf rg
-    pr2
-      ( pr2
-        ( is-equiv-map-coproduct {f} {g}
-          ( (sf , Sf) , (rf , Rf))
-          ( (sg , Sg) , (rg , Rg)))) =
-      ( ( inv-htpy (preserves-comp-map-coproduct f rf g rg)) ∙h
-        ( htpy-map-coproduct Rf Rg)) ∙h
-      ( id-map-coproduct A B)
+  map-inv-equiv-coproduct :
+    (f : A ≃ A') (g : B ≃ B') → A' + B' → A + B
+  map-inv-equiv-coproduct f g =
+    map-coproduct (map-inv-equiv f) (map-inv-equiv g)
 
+  abstract
+    is-section-map-inv-equiv-coproduct :
+      (f : A ≃ A') (g : B ≃ B') →
+      ( map-coproduct (map-equiv f) (map-equiv g)) ∘
+      ( map-coproduct (map-inv-equiv f) (map-inv-equiv g) ) ~ id
+    is-section-map-inv-equiv-coproduct f g =
+      ( inv-htpy
+        ( preserves-comp-map-coproduct
+          ( map-inv-equiv f)
+          ( map-equiv f)
+          ( map-inv-equiv g)
+          ( map-equiv g))) ∙h
+      ( htpy-map-coproduct
+        ( is-section-map-inv-equiv f)
+        ( is-section-map-inv-equiv g)) ∙h
+      ( id-map-coproduct A' B')
+
+  abstract
+    is-retraction-map-inv-equiv-coproduct :
+      (f : A ≃ A') (g : B ≃ B') →
+      ( map-coproduct (map-inv-equiv f) (map-inv-equiv g) ) ∘
+      ( map-coproduct (map-equiv f) (map-equiv g)) ~ id
+    is-retraction-map-inv-equiv-coproduct f g =
+      ( inv-htpy
+        ( preserves-comp-map-coproduct
+          ( map-equiv f)
+          ( map-inv-equiv f)
+          ( map-equiv g)
+          ( map-inv-equiv g))) ∙h
+      ( htpy-map-coproduct
+        ( is-retraction-map-inv-equiv f)
+        ( is-retraction-map-inv-equiv g)) ∙h
+      ( id-map-coproduct A B)
+      
+  is-equiv-map-coproduct :
+    {f : A → A'} {g : B → B'} →
+    is-equiv f → is-equiv g → is-equiv (map-coproduct f g)
+  is-equiv-map-coproduct {f} {g} H K =
+    is-equiv-is-invertible
+      ( map-coproduct (map-inv-is-equiv H) (map-inv-is-equiv K))
+      ( is-section-map-inv-equiv-coproduct (f , H) (g , K))
+      ( is-retraction-map-inv-equiv-coproduct (f , H) (g , K))
+  
   map-equiv-coproduct : A ≃ A' → B ≃ B' → A + B → A' + B'
   map-equiv-coproduct e e' = map-coproduct (map-equiv e) (map-equiv e')
 
@@ -231,31 +248,6 @@ module _
   pr1 (equiv-coproduct e e') = map-equiv-coproduct e e'
   pr2 (equiv-coproduct e e') =
     is-equiv-map-coproduct (is-equiv-map-equiv e) (is-equiv-map-equiv e')
-
-module _
-  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
-  where
-
-  compute-map-inv-equiv-coproduct :
-    (e : A ≃ A') (e' : B ≃ B') →
-    ( map-inv-equiv (equiv-coproduct e e')) ~
-    ( map-equiv-coproduct (inv-equiv e) (inv-equiv e'))
-  compute-map-inv-equiv-coproduct e e' x =
-    is-injective-equiv
-      ( equiv-coproduct e e')
-      ( is-section-map-inv-equiv (equiv-coproduct e e') x ∙
-      ( inv (id-map-coproduct A' B' x)) ∙
-      ( inv
-        ( htpy-map-coproduct
-          ( is-section-map-inv-equiv e)
-          ( is-section-map-inv-equiv e')
-          ( x))) ∙
-      ( preserves-comp-map-coproduct
-        ( map-inv-equiv e)
-        ( map-equiv e)
-        ( map-inv-equiv e')
-        ( map-equiv e')
-        ( x)))
 ```
 
 ### Functoriality of coproducts preserves being surjective

@@ -94,8 +94,7 @@ compute-map-Fin-add-ℕ k (succ-ℕ l) x =
     ( map-inv-equiv (equiv-coproduct (coproduct-Fin k l) id-equiv) x)) ∙
   ( ap
     ( map-associative-coproduct)
-    ( ( compute-map-inv-equiv-coproduct (coproduct-Fin k l) (id-equiv) x) ∙
-    ( htpy-map-coproduct (compute-map-Fin-add-ℕ k l) refl-htpy x)))
+    ( htpy-map-coproduct (compute-map-Fin-add-ℕ k l) refl-htpy x))
 ```
 
 ### Inclusion of `coproduct-Fin` into the natural numbers
