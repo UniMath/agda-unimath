@@ -58,7 +58,7 @@ module _
   where
 
   kripke-models-filtrations-theorem' :
-    (is-filtration : is-kripke-model-filtration-Σ i theory M M*)
+    (is-filtration : is-kripke-model-filtration i theory M M*)
     (a : formula i) →
     is-in-subtype theory a →
     (x : type-kripke-model i M) →

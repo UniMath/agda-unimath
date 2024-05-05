@@ -275,27 +275,31 @@ module _
         ( is-set-equivalence-class Φ-equivalence x-class y-class))
       ( λ (x , x-in-class) (y , y-in-class) →
         ( equational-reasoning
-            x-class ＝ class Φ-equivalence x by
-                        ( inv
-                          ( eq-class-equivalence-class
-                            ( Φ-equivalence)
-                            ( x-class)
-                            ( x-in-class)))
-                    ＝ class Φ-equivalence y by
-                        ( apply-effectiveness-class'
-                          ( Φ-equivalence)
-                          ( λ a a-in-theory →
-                            ( g-val (a , a-in-theory) (y , y-in-class)
-                              ∘iff iff-eq (htpy-eq p (a , a-in-theory))
-                              ∘iff inv-iff
-                                    ( f-val
-                                      ( a , a-in-theory)
-                                      ( x , x-in-class)))))
-                    ＝ y-class by
-                        ( eq-class-equivalence-class
-                          ( Φ-equivalence)
-                          ( y-class)
-                          ( y-in-class))))
+            x-class
+              ＝ class Φ-equivalence x
+                by
+                  inv
+                    ( eq-class-equivalence-class
+                      ( Φ-equivalence)
+                      ( x-class)
+                      ( x-in-class))
+              ＝ class Φ-equivalence y
+                by
+                  apply-effectiveness-class'
+                    ( Φ-equivalence)
+                    ( λ a a-in-theory →
+                      ( g-val (a , a-in-theory) (y , y-in-class)
+                        ∘iff iff-eq (htpy-eq p (a , a-in-theory))
+                        ∘iff inv-iff
+                              ( f-val
+                                ( a , a-in-theory)
+                                ( x , x-in-class))))
+              ＝ y-class
+                by
+                  eq-class-equivalence-class
+                    ( Φ-equivalence)
+                    ( y-class)
+                    ( y-in-class)))
 
   injection-map-function-equivalence-class :
     injection
@@ -370,20 +374,9 @@ module _
     filtration-relation-upper-bound =
       type-Prop ∘ filtration-relation-upper-bound-Prop
 
-    -- is-alpha-Σ :
-    --   UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6 ⊔ l8)
-    -- is-alpha-Σ =
-    --   product
-    --     ( equivalence-class Φ-equivalence ≃ type-kripke-model i M*)
-    --     ( is-bounded-valuate (valuate-kripke-model i M*))
-
-    -- is-alpha-Prop :
-    --   Prop (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6 ⊔ l8)
-    -- is-alpha-Prop = trunc-Prop is-alpha-Σ
-
-    is-kripke-model-filtration-Σ :
-      UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6 ⊔ l7 ⊔ l8)
-    is-kripke-model-filtration-Σ =
+    is-kripke-model-filtration :
+      UU (lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5) ⊔ l6 ⊔ l7 ⊔ l8)
+    is-kripke-model-filtration =
       Σ ( equivalence-class Φ-equivalence ≃ type-kripke-model i M*)
         ( λ e →
           ( product
@@ -392,44 +385,36 @@ module _
               ( filtration-relation-lower-bound e)
               ( filtration-relation-upper-bound e))))
 
-    is-kripke-model-filtration-Prop :
-      Prop (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6 ⊔ l7 ⊔ l8)
-    is-kripke-model-filtration-Prop = trunc-Prop is-kripke-model-filtration-Σ
-
-    is-kripke-model-filtration :
-      UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ l6 ⊔ l7 ⊔ l8)
-    is-kripke-model-filtration = type-Prop is-kripke-model-filtration-Prop
-
     equiv-is-kripke-model-filtration :
-      is-kripke-model-filtration-Σ →
+      is-kripke-model-filtration →
       equivalence-class Φ-equivalence ≃ type-kripke-model i M*
     equiv-is-kripke-model-filtration = pr1
 
     map-equiv-is-kripke-model-filtration :
-      is-kripke-model-filtration-Σ →
+      is-kripke-model-filtration →
       equivalence-class Φ-equivalence → type-kripke-model i M*
     map-equiv-is-kripke-model-filtration =
       map-equiv ∘ equiv-is-kripke-model-filtration
 
     map-inv-equiv-is-kripke-model-filtration :
-      is-kripke-model-filtration-Σ →
+      is-kripke-model-filtration →
       type-kripke-model i M* → equivalence-class Φ-equivalence
     map-inv-equiv-is-kripke-model-filtration =
       map-inv-equiv ∘ equiv-is-kripke-model-filtration
 
     is-filtration-valuate-is-kripke-model-filtration :
-      (e : is-kripke-model-filtration-Σ) →
+      (e : is-kripke-model-filtration) →
       is-filtration-valuate (equiv-is-kripke-model-filtration e)
     is-filtration-valuate-is-kripke-model-filtration = pr1 ∘ pr2
 
     filtration-relation-lower-bound-is-kripke-model-filtration :
-      (e : is-kripke-model-filtration-Σ) →
+      (e : is-kripke-model-filtration) →
       filtration-relation-lower-bound (equiv-is-kripke-model-filtration e)
     filtration-relation-lower-bound-is-kripke-model-filtration =
       pr1 ∘ pr2 ∘ pr2
 
     filtration-relation-upper-bound-is-kripke-model-filtration :
-      (e : is-kripke-model-filtration-Σ) →
+      (e : is-kripke-model-filtration) →
       filtration-relation-upper-bound (equiv-is-kripke-model-filtration e)
     filtration-relation-upper-bound-is-kripke-model-filtration =
       pr2 ∘ pr2 ∘ pr2
@@ -451,7 +436,7 @@ module _
         ( is-section-map-section-map-equiv e x*)
 
     class-x-eq-x* :
-      (is-filt : is-kripke-model-filtration-Σ)
+      (is-filt : is-kripke-model-filtration)
       (x : type-kripke-model i M)
       (x* : type-kripke-model i M*) →
       is-in-equivalence-class Φ-equivalence
@@ -479,24 +464,20 @@ module _
       is-kripke-model-filtration →
       is-in-subtype (reflexive-kripke-class l1 l2 i l4) M →
       is-in-subtype (reflexive-kripke-class l6 l7 i l8) M*
-    filtration-preserves-reflexivity t-is-filt is-refl class =
+    filtration-preserves-reflexivity is-filt is-refl class =
       apply-universal-property-trunc-Prop
-        ( t-is-filt)
+        ( is-inhabited-subtype-equivalence-class Φ-equivalence
+          ( map-inv-equiv-is-kripke-model-filtration is-filt class))
         ( relation-Prop-kripke-model i M* class class)
-        ( λ is-filt →
-          ( apply-universal-property-trunc-Prop
-            ( is-inhabited-subtype-equivalence-class Φ-equivalence
-              ( map-inv-equiv-is-kripke-model-filtration is-filt class))
-            ( relation-Prop-kripke-model i M* class class)
-            ( λ (x , in-class) →
-              ( tr
-                ( λ y → relation-kripke-model i M* y y)
-                ( class-x-eq-x* is-filt x class in-class)
-                ( filtration-relation-lower-bound-is-kripke-model-filtration
-                  ( is-filt)
-                  ( x)
-                  ( x)
-                  ( is-refl x))))))
+        ( λ (x , in-class) →
+          ( tr
+            ( λ y → relation-kripke-model i M* y y)
+            ( class-x-eq-x* is-filt x class in-class)
+            ( filtration-relation-lower-bound-is-kripke-model-filtration
+              ( is-filt)
+              ( x)
+              ( x)
+              ( is-refl x))))
 
   is-inhabited-equivalence-classes :
     is-inhabited (equivalence-class Φ-equivalence)
@@ -548,8 +529,8 @@ module _
 
   minimal-transitive-kripke-model-filtration :
     kripke-model
-      ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
-      ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
+      ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
+      ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
       ( i)
       ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   pr1 (pr1 (pr1 minimal-transitive-kripke-model-filtration)) =
@@ -601,8 +582,7 @@ module _
     is-kripke-model-filtration-minimal-kripke-model-filtration :
       is-kripke-model-filtration minimal-kripke-model-filtration
     is-kripke-model-filtration-minimal-kripke-model-filtration =
-      intro-exists
-        ( id-equiv)
+      pair id-equiv
         ( triple
           ( λ n x →
             ( pair
@@ -674,8 +654,7 @@ module _
       is-kripke-model-filtration minimal-transitive-kripke-model-filtration
     is-kripke-model-filtration-minimal-transitive-kripke-model-filtration
       M-is-trans =
-        intro-exists
-          ( id-equiv)
+        pair id-equiv
           ( triple
             ( λ n x →
               ( pair
@@ -695,7 +674,7 @@ module _
       is-in-subtype (reflexive-kripke-class l1 l2 i l4) M →
       is-in-subtype
         ( reflexive-kripke-class
-          ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
+          ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
           ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
           ( i)
           ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
@@ -718,7 +697,7 @@ module _
       is-in-subtype (symmetry-kripke-class l1 l2 i l4) M →
       is-in-subtype
         ( symmetry-kripke-class
-          ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
+          ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
           ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
           ( i)
           ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
@@ -730,8 +709,8 @@ module _
       is-in-subtype (reflexive-kripke-class l1 l2 i l4) M →
       is-in-subtype
         ( reflexive-kripke-class
-          ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
-          ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
+          ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
+          ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
           ( i)
           ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
         ( minimal-transitive-kripke-model-filtration)
@@ -744,8 +723,8 @@ module _
       is-in-subtype (symmetry-kripke-class l1 l2 i l4) M →
       is-in-subtype
         ( symmetry-kripke-class
-          ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
-          ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
+          ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
+          ( lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
           ( i)
           ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
         ( minimal-transitive-kripke-model-filtration)
@@ -789,6 +768,7 @@ module _
   (l4 : Level)
   (l5 l6 l7 l8 : Level)
   where
+
   filtration-models :
     model-class l1 l2 i l4
       (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8)

@@ -438,8 +438,6 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level} (i : Set l3)
-  -- (theory : modal-theory l5 i)
-  -- (is-fin : is-finite (type-subtype theory))
   (l5 l6 l7 l8 : Level)
   (lem : LEM (l2 ⊔ lsuc l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8))
   where
@@ -449,94 +447,24 @@ module _
   filtration-models-subset-finite-models M* =
     map-universal-property-trunc-Prop
       ( finite-models l1 l2 i l4 M*)
-      ( λ ((theory , M) , is-fin , t-is-filt) →
-        ( apply-universal-property-trunc-Prop
-          ( t-is-filt)
-          ( finite-models l1 l2 i l4 M*)
-          ( λ is-filt →
-            ( triple
-              ( is-finite-equiv
-                ( equiv-is-kripke-model-filtration i theory M M* is-filt)
-                ( is-finite-equivalence-classes-filtration i M
-                  ( lower-LEM (l2 ⊔ l4) lem)
-                  ( theory)
-                  ( is-fin)))
-              ( λ x y →
-                ( lower-LEM
-                  ( lsuc l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8)
-                  ( lem)
-                  ( relation-Prop-kripke-model i M* x y)))
-              ( λ x n →
-                ( lower-LEM
-                  ( l2 ⊔ lsuc l3 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8)
-                  ( lem)
-                  ( valuate-kripke-model i M* n x)))))))
-
-  -- module _
-  --   (l6 l7 l8 : Level)
-  --   where
-
-    -- private
-    --   w' = type-is-small (is-small-equivalence-classes-filtration l6)
-
-    -- extend :
-    --   (type-subtype (λ n → theory (var n)) → w' → Prop l8) →
-    --   type-Set i → w' → Prop l8
-    -- extend f n x
-    --   with
-    --   lower-LEM
-    --   ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
-    --   ( lem)
-    --   ( theory (var n))
-    -- ... | inl in-theory = f (n , in-theory) x
-    -- ... | inr _ = raise-empty-Prop l8
-
-    -- is-bounded-valuate-extend :
-    --   (f : type-subtype (λ n → theory (var n)) → w' → Prop l8) →
-    --   is-bounded-valuate i theory M (extend f)
-    -- is-bounded-valuate-extend f n not-in-theory x val
-    --   with
-    --   lower-LEM
-    --   ( lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
-    --   ( lem)
-    --   ( theory (var n))
-    -- ... | inl in-theory = not-in-theory in-theory
-    -- ... | inr not-in-theory' = map-inv-raise val
-
-    -- last :
-    --   (w' → w' → Prop l7)
-    --   × (type-subtype (λ n → theory (var n)) → w' → Prop l8) →
-    --   type-subtype (is-alpha-Prop i theory M {l6} {l7} {l8})
-    -- last (r , v) =
-    --   pair
-    --     ( pair
-    --       ( pair
-    --         ( pair
-    --           ( w')
-    --           ( map-is-inhabited
-    --             ( λ x →
-    --               ( map-equiv-is-small
-    --                 ( is-small-equivalence-classes-filtration l6)
-    --                 ( class (Φ-equivalence i theory M) x)))
-    --             ( is-inhabited-type-kripke-model i M)))
-    --         ( r))
-    --       ( extend v))
-    --     ( unit-trunc-Prop
-    --       ( pair
-    --         ( equiv-is-small (is-small-equivalence-classes-filtration l6))
-    --         ( is-bounded-valuate-extend v)))
-
-    -- is-surjective-last : is-surjective last
-    -- is-surjective-last (r , v) =
-    --   unit-trunc-Prop
-    --     (pair
-    --       ( pair
-    --         ( λ x y →
-    --           ( relation-Prop-kripke-model i r
-    --             ( {!   !})
-    --             ( {!   !})))
-    --         ( {!   !}))
-    --       ( {!   !}))
+      ( λ ((theory , M) , is-fin , is-filt) →
+        ( triple
+          ( is-finite-equiv
+            ( equiv-is-kripke-model-filtration i theory M M* is-filt)
+            ( is-finite-equivalence-classes-filtration i M
+              ( lower-LEM (l2 ⊔ l4) lem)
+              ( theory)
+              ( is-fin)))
+          ( λ x y →
+            ( lower-LEM
+              ( lsuc l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8)
+              ( lem)
+              ( relation-Prop-kripke-model i M* x y)))
+          ( λ x n →
+            ( lower-LEM
+              ( l2 ⊔ lsuc l3 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8)
+              ( lem)
+              ( valuate-kripke-model i M* n x)))))
 
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level} (i : Set l3)
@@ -567,39 +495,31 @@ module _
     filtrate-completeness logic complete a in-logic =
       complete a
         ( λ M M-in-class x →
-          apply-universal-property-trunc-Prop
-            ( filtration-is-filtration
-              ( M , M-in-class)
+          ( backward-implication
+            ( kripke-models-filtrations-theorem' i
               ( subformulas i a)
-              ( is-modal-theory-closed-under-subformulas-subformulas i a))
-            ( (M , x) ⊨ a)
-            ( λ is-filt →
-              ( backward-implication
-                ( kripke-models-filtrations-theorem' i
+              ( is-modal-theory-closed-under-subformulas-subformulas i a)
+              ( M)
+              ( filtration (subformulas i a) M)
+              ( filtration-is-filtration
+                ( M , M-in-class)
+                ( subformulas i a)
+                ( is-modal-theory-closed-under-subformulas-subformulas i a))
+              ( a)
+              ( head-in-list-subtype)
+              ( x))
+            ( in-logic
+              ( filtration (subformulas i a) M)
+              ( intro-exists (a , M , M-in-class) refl)
+              ( map-equiv-is-kripke-model-filtration i
+                ( subformulas i a)
+                ( M)
+                ( filtration (subformulas i a) M)
+                ( filtration-is-filtration
+                  ( M , M-in-class)
                   ( subformulas i a)
-                  ( is-modal-theory-closed-under-subformulas-subformulas
-                    ( i)
-                    ( a))
-                  ( M)
-                  ( filtration (subformulas i a) M)
-                  ( is-filt)
-                  ( a)
-                  ( unit-trunc-Prop (is-head a _))
-                  ( x))
-                ( in-logic
-                  ( filtration (list-subtype (cons a _)) M)
-                  ( intro-exists (a , (M , M-in-class)) refl)
-                  ( map-equiv-is-kripke-model-filtration
-                    ( i)
-                    ( subformulas i a)
-                    ( M)
-                    ( filtration (list-subtype (cons a _)) M)
-                    ( is-filt)
-                    ( class
-                      ( Φ-equivalence i
-                        ( subformulas i a)
-                        ( M))
-                      ( x)))))))
+                  ( is-modal-theory-closed-under-subformulas-subformulas i a))
+                ( class (Φ-equivalence i (subformulas i a) M) x)))))
 
   filtrate-soundness :
     {l9 l10 : Level} (logic : modal-theory l9 i) →
