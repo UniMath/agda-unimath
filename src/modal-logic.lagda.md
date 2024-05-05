@@ -19,9 +19,9 @@ open import modal-logic.l-complete-theories public
 open import modal-logic.l-consistent-theories public
 open import modal-logic.lindenbaum public
 open import modal-logic.logic-syntax public
+open import modal-logic.modal-logic-decision public
 open import modal-logic.modal-logic-k public
 open import modal-logic.modal-logic-s5 public
-open import modal-logic.modal-logic-decision public
 open import modal-logic.soundness public
 open import modal-logic.weak-deduction public
 ```
