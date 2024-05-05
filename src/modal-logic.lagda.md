@@ -11,11 +11,11 @@ open import modal-logic.completeness-k public
 open import modal-logic.completeness-s5 public
 open import modal-logic.decision-procedure public
 open import modal-logic.deduction public
+open import modal-logic.filtration-lemma public
 open import modal-logic.finite-approximability public
 open import modal-logic.formulas public
 open import modal-logic.formulas-deduction public
 open import modal-logic.kripke-models-filtrations public
-open import modal-logic.kripke-models-filtrations-theorem public
 open import modal-logic.kripke-semantics public
 open import modal-logic.l-complete-theories public
 open import modal-logic.l-consistent-theories public
