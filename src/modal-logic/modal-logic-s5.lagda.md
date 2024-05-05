@@ -51,7 +51,7 @@ module _
   modal-logic-S5 = modal-logic-closure modal-logic-S5-axioms
 
   is-modal-logic-S5 : is-modal-logic modal-logic-S5
-  is-modal-logic-S5 = subset-double-modal-logic modal-logic-S5-axioms
+  is-modal-logic-S5 = is-modal-logic-modal-logic-closure modal-logic-S5-axioms
 
   is-normal-modal-logic-S5 : is-normal-modal-logic modal-logic-S5
   is-normal-modal-logic-S5 =

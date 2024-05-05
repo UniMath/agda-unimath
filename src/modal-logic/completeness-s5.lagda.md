@@ -71,24 +71,24 @@ module _
         ( is-modal-logic-S5 i)
         ( is-consistent-S5 i)
         ( is-normal-modal-logic-S5 i)
-        ( lem)
         ( zorn)
         ( prop-resize))
   S5-canonical-model-is-equivalence =
     triple
-      ( is-canonical-ax-m i lem zorn prop-resize
+      ( is-canonical-ax-m i zorn prop-resize
         ( modal-logic-S5 i)
         ( is-modal-logic-S5 i)
         ( is-consistent-S5 i)
         ( is-normal-modal-logic-S5 i)
         ( modal-logic-S5-contains-ax-m i))
-      ( is-canonical-ax-b i lem zorn prop-resize
+      ( is-canonical-ax-b i zorn prop-resize
         ( modal-logic-S5 i)
         ( is-modal-logic-S5 i)
         ( is-consistent-S5 i)
         ( is-normal-modal-logic-S5 i)
+        ( lem)
         ( modal-logic-S5-contains-ax-b i))
-      ( is-canonical-ax-4 i lem zorn prop-resize
+      ( is-canonical-ax-4 i zorn prop-resize
         ( modal-logic-S5 i)
         ( is-modal-logic-S5 i)
         ( is-consistent-S5 i)
@@ -103,9 +103,9 @@ module _
       ( is-modal-logic-S5 i)
       ( is-consistent-S5 i)
       ( is-normal-modal-logic-S5 i)
-      ( lem)
       ( zorn)
       ( prop-resize)
+      ( lem)
       ( equivalence-kripke-class (lsuc l1) l1 i l1)
       ( S5-canonical-model-is-equivalence)
 ```

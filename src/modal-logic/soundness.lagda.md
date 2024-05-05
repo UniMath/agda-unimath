@@ -52,11 +52,14 @@ module _
   where
 
   soundness-axioms :
-    soundness axioms C → {a : modal-formula i} → axioms ⊢ a → type-Prop (C ⊨C a)
-  soundness-axioms H (ax x) = H _ x
-  soundness-axioms H (mp dab da) M in-class x =
+    soundness axioms C →
+    {a : modal-formula i} →
+    axioms ⊢ₘ a →
+    type-Prop (C ⊨C a)
+  soundness-axioms H (modal-ax x) = H _ x
+  soundness-axioms H (modal-mp dab da) M in-class x =
     soundness-axioms H dab M in-class x (soundness-axioms H da M in-class x)
-  soundness-axioms H (nec d) M in-class _ y _ =
+  soundness-axioms H (modal-nec d) M in-class _ y _ =
     soundness-axioms H d M in-class y
 
   soundness-modal-logic :

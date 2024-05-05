@@ -10,6 +10,7 @@ module foundation.equivalence-classes where
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
+open import foundation.equality-dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
@@ -18,6 +19,7 @@ open import foundation.locally-small-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
 open import foundation.slice
 open import foundation.small-types
 open import foundation.subtype-identity-principle
@@ -27,14 +29,16 @@ open import foundation.universal-property-image
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.dependent-identifications
 open import foundation-core.embeddings
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.torsorial-type-families
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -381,6 +385,88 @@ module _
       {x y : A} → sim-equivalence-relation R x y → class R x ＝ class R y
     apply-effectiveness-class' {x} {y} =
       map-inv-equiv (is-effective-class x y)
+```
+
+### TODO: title
+
+```agda
+  eq-class-in-common-class :
+    (c : equivalence-class R) {a a' : A} →
+    is-in-equivalence-class R c a →
+    is-in-equivalence-class R c a' →
+    class R a ＝ class R a'
+  eq-class-in-common-class c {a} {a'} a-in-c a'-in-c =
+    equational-reasoning
+      class R a
+        ＝ c by eq-effective-quotient' a c a-in-c
+        ＝ class R a' by inv (eq-effective-quotient' a' c a'-in-c)
+
+  sim-equivalence-relation-in-same-class :
+    (c : equivalence-class R) {a a' : A} →
+    is-in-equivalence-class R c a →
+    is-in-equivalence-class R c a' →
+    sim-equivalence-relation R a a'
+  sim-equivalence-relation-in-same-class c {a} {a'} a-in-c a'-in-c =
+    apply-effectiveness-class (eq-class-in-common-class c a-in-c a'-in-c)
+```
+
+### TODO: Eliminator
+
+```agda
+  rec-equivalence-class :
+    {l3 : Level} (B : Set l3) →
+    (f : A → type-Set B) →
+    ((a a' : A) → sim-equivalence-relation R a a' → f a ＝ f a') →
+    equivalence-class R → type-Set B
+  rec-equivalence-class {l3} B f H c =
+    pr1
+      ( apply-universal-property-trunc-Prop
+        ( is-inhabited-subtype-equivalence-class R c)
+        ( b , is-prop-b)
+        ( λ (a , a-in-c) →
+          ( pair (f a)
+            ( λ a' a'-in-c →
+              ( H a a'
+                ( sim-equivalence-relation-in-same-class c a-in-c a'-in-c))))))
+    where
+    b : UU (l1 ⊔ l2 ⊔ l3)
+    b =
+      Σ (type-Set B) (λ b → (a : A) → is-in-equivalence-class R c a → b ＝ f a)
+
+    is-prop-b : is-prop b
+    is-prop-b =
+      is-prop-all-elements-equal
+        ( λ (b , h) (b' , h') →
+          ( eq-pair-Σ
+            ( apply-universal-property-trunc-Prop
+              ( is-inhabited-subtype-equivalence-class R c)
+              ( b ＝ b' , is-set-type-Set B b b')
+              ( λ (a , a-in-c) → h a a-in-c ∙ inv (h' a a-in-c)))
+            ( eq-is-prop
+              ( is-prop-Π
+                ( λ x → is-prop-function-type (is-set-type-Set B b' (f x)))))))
+
+  rec-equivalence-class-Prop :
+    {l3 : Level} (B : Prop l3) →
+    (f : A → type-Prop B) →
+    equivalence-class R → type-Prop B
+  rec-equivalence-class-Prop B f =
+    rec-equivalence-class (set-Prop B) f
+      ( λ a a' _ → eq-is-prop (is-prop-type-Prop B))
+
+  ind-equivalence-class-Prop :
+    {l3 : Level} (B : equivalence-class R → Prop l3) →
+    (f : (a : A) → type-Prop (B (class R a))) →
+    (c : equivalence-class R) → type-Prop (B c)
+  ind-equivalence-class-Prop B f c =
+    apply-universal-property-trunc-Prop
+      ( is-inhabited-subtype-equivalence-class R c)
+      ( B c)
+      ( λ (a , a-in-c) →
+        ( tr
+          ( type-Prop ∘ B)
+          ( eq-effective-quotient' a c a-in-c)
+          ( rec-equivalence-class-Prop (Π-Prop A (B ∘ class R)) (λ _ → f) c a)))
 ```
 
 ### The map `class` into the type of equivalence classes is surjective and effective

@@ -290,12 +290,9 @@ module _
                   apply-effectiveness-class'
                     ( Φ-equivalence)
                     ( λ a a-in-theory →
-                      ( g-val (a , a-in-theory) (y , y-in-class)
-                        ∘iff iff-eq (htpy-eq p (a , a-in-theory))
-                        ∘iff inv-iff
-                              ( f-val
-                                ( a , a-in-theory)
-                                ( x , x-in-class))))
+                      ( g-val (a , a-in-theory) (y , y-in-class) ∘iff
+                          iff-eq (htpy-eq p (a , a-in-theory)) ∘iff
+                          inv-iff (f-val (a , a-in-theory) (x , x-in-class))))
               ＝ y-class
                 by
                   eq-class-equivalence-class

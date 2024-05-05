@@ -53,7 +53,7 @@ module _
   modal-logic-K = modal-logic-closure modal-logic-K-axioms
 
   is-modal-logic-K : is-modal-logic modal-logic-K
-  is-modal-logic-K = subset-double-modal-logic modal-logic-K-axioms
+  is-modal-logic-K = is-modal-logic-modal-logic-closure modal-logic-K-axioms
 
   K-axioms-contains-ax-k : ax-k i ⊆ modal-logic-K-axioms
   K-axioms-contains-ax-k =

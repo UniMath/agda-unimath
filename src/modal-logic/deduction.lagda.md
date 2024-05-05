@@ -1,4 +1,4 @@
-# Modal logic syntax
+# Modal logic deduction
 
 ```agda
 module modal-logic.deduction where
@@ -48,16 +48,16 @@ module _
   {l1 l2 : Level} {i : Set l1}
   where
 
-  infix 5 _⊢_
+  infix 5 _⊢ₘ_
 
-  data _⊢_ (axioms : modal-theory l2 i) : modal-formula i → UU (l1 ⊔ l2) where
-    ax : {a : modal-formula i} → is-in-subtype axioms a → axioms ⊢ a
-    mp : {a b : modal-formula i} → axioms ⊢ a →ₘ b → axioms ⊢ a → axioms ⊢ b
-    nec : {a : modal-formula i} → axioms ⊢ a → axioms ⊢ □ₘ a
+  data _⊢ₘ_ (axioms : modal-theory l2 i) : modal-formula i → UU (l1 ⊔ l2) where
+    modal-ax : {a : modal-formula i} → is-in-subtype axioms a → axioms ⊢ₘ a
+    modal-mp :
+      {a b : modal-formula i} → axioms ⊢ₘ a →ₘ b → axioms ⊢ₘ a → axioms ⊢ₘ b
+    modal-nec : {a : modal-formula i} → axioms ⊢ₘ a → axioms ⊢ₘ □ₘ a
 
-  -- TODO: rename to modal-logic-closure
   modal-logic-closure : modal-theory l2 i → modal-theory (l1 ⊔ l2) i
-  modal-logic-closure axioms a = trunc-Prop (axioms ⊢ a)
+  modal-logic-closure axioms a = trunc-Prop (axioms ⊢ₘ a)
 
   is-modal-logic-Prop : modal-theory l2 i → Prop (l1 ⊔ l2)
   is-modal-logic-Prop theory =
@@ -68,7 +68,7 @@ module _
 
   is-in-modal-logic-closure-deduction :
     {axioms : modal-theory l2 i} {a : modal-formula i} →
-    axioms ⊢ a → is-in-subtype (modal-logic-closure axioms) a
+    axioms ⊢ₘ a → is-in-subtype (modal-logic-closure axioms) a
   is-in-modal-logic-closure-deduction = unit-trunc-Prop
 
   is-contradictory-modal-logic-Prop : modal-theory l2 i → Prop l2
@@ -110,7 +110,7 @@ module _
     {a : modal-formula i} →
     is-in-subtype axioms a →
     is-in-subtype (modal-logic-closure axioms) a
-  modal-logic-closure-ax = unit-trunc-Prop ∘ ax
+  modal-logic-closure-ax = unit-trunc-Prop ∘ modal-ax
 
   modal-logic-closure-mp :
     {a b : modal-formula i} →
@@ -120,7 +120,7 @@ module _
   modal-logic-closure-mp {a} {b} tdab tda =
     apply-twice-universal-property-trunc-Prop tdab tda
       ( modal-logic-closure axioms b)
-      ( λ dab da → unit-trunc-Prop (mp dab da))
+      ( λ dab da → unit-trunc-Prop (modal-mp dab da))
 
   modal-logic-closure-nec :
     {a : modal-formula i} →
@@ -129,7 +129,7 @@ module _
   modal-logic-closure-nec {a} =
     map-universal-property-trunc-Prop
       ( modal-logic-closure axioms (□ₘ a))
-      ( λ da → unit-trunc-Prop (nec da))
+      ( λ da → unit-trunc-Prop (modal-nec da))
 
 module _
   {l1 l2 : Level} {i : Set l1}
@@ -161,24 +161,24 @@ module _
   axioms-subset-modal-logic :
     {l2 : Level} (axioms : modal-theory l2 i) →
     axioms ⊆ modal-logic-closure axioms
-  axioms-subset-modal-logic _ a H = unit-trunc-Prop (ax H)
+  axioms-subset-modal-logic _ a H = unit-trunc-Prop (modal-ax H)
 
   modal-logic-closed :
     {l2 : Level} {axioms : modal-theory l2 i} {a : modal-formula i} →
-    modal-logic-closure axioms ⊢ a →
+    modal-logic-closure axioms ⊢ₘ a →
     is-in-subtype (modal-logic-closure axioms) a
-  modal-logic-closed (ax x) = x
-  modal-logic-closed (mp dab da) =
+  modal-logic-closed (modal-ax x) = x
+  modal-logic-closed (modal-mp dab da) =
     modal-logic-closure-mp (modal-logic-closed dab) (modal-logic-closed da)
-  modal-logic-closed (nec d) =
+  modal-logic-closed (modal-nec d) =
     modal-logic-closure-nec (modal-logic-closed d)
 
   -- TODO: refactor
-  subset-double-modal-logic :
+  is-modal-logic-modal-logic-closure :
     {l2 : Level}
     (axioms : modal-theory l2 i) →
     is-modal-logic (modal-logic-closure axioms)
-  subset-double-modal-logic axioms a =
+  is-modal-logic-modal-logic-closure axioms a =
     map-universal-property-trunc-Prop
       ( modal-logic-closure axioms a)
       ( modal-logic-closed)
@@ -189,11 +189,11 @@ module _
   (leq : ax₁ ⊆ ax₂)
   where
 
-  deduction-monotic : {a : modal-formula i} → ax₁ ⊢ a → ax₂ ⊢ a
-  deduction-monotic (ax x) = ax (leq _ x)
-  deduction-monotic (mp dab da) =
-    mp (deduction-monotic dab) (deduction-monotic da)
-  deduction-monotic (nec d) = nec (deduction-monotic d)
+  deduction-monotic : {a : modal-formula i} → ax₁ ⊢ₘ a → ax₂ ⊢ₘ a
+  deduction-monotic (modal-ax x) = modal-ax (leq _ x)
+  deduction-monotic (modal-mp dab da) =
+    modal-mp (deduction-monotic dab) (deduction-monotic da)
+  deduction-monotic (modal-nec d) = modal-nec (deduction-monotic d)
 
   modal-logic-monotic : modal-logic-closure ax₁ ⊆ modal-logic-closure ax₂
   modal-logic-monotic a =
@@ -214,7 +214,7 @@ module _
       ( modal-logic-closure ax₁)
       ( modal-logic-closure (modal-logic-closure ax₂))
       ( modal-logic-closure ax₂)
-      ( subset-double-modal-logic ax₂)
+      ( is-modal-logic-modal-logic-closure ax₂)
       ( modal-logic-monotic leq)
 
 module _

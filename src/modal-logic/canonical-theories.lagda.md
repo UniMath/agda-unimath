@@ -48,7 +48,6 @@ TODO
 module _
   {l1 : Level}
   (i : Set l1)
-  (lem : LEM l1) -- TODO: not needed
   (zorn : Zorn-non-empty (lsuc l1) l1 l1)
   (prop-resize : propositional-resizing l1 (lsuc l1))
   (logic : modal-theory l1 i)
@@ -89,8 +88,13 @@ module _
     ax-m i ⊆ logic →
     is-in-subtype
       ( reflexive-kripke-class (lsuc l1) l1 i l1)
-      ( canonical-kripke-model logic is-logic is-cons is-normal lem zorn
-        prop-resize)
+      ( canonical-kripke-model
+        ( logic)
+        ( is-logic)
+        ( is-cons)
+        ( is-normal)
+        ( zorn)
+        ( prop-resize))
   is-canonical-ax-m ax-m-subset x a box-a-in-x =
     weak-modal-logic-mp
       ( is-weak-modal-logic-L-complete-theory logic lzero x)
@@ -100,12 +104,18 @@ module _
       ( box-a-in-x)
 
   is-canonical-ax-b :
+    LEM l1 →
     ax-b i ⊆ logic →
     is-in-subtype
       ( symmetry-kripke-class (lsuc l1) l1 i l1)
-      ( canonical-kripke-model logic is-logic is-cons is-normal lem zorn
-        prop-resize)
-  is-canonical-ax-b ax-b-subset x y xRy a box-a-in-y =
+      ( canonical-kripke-model
+        ( logic)
+        ( is-logic)
+        ( is-cons)
+        ( is-normal)
+        ( zorn)
+        ( prop-resize))
+  is-canonical-ax-b lem ax-b-subset x y xRy a box-a-in-y =
     lemma-box-diamond-L-complete logic x
       ( contains-ax-k)
       ( contains-ax-s)
@@ -131,8 +141,13 @@ module _
     ax-4 i ⊆ logic →
     is-in-subtype
       ( transitivity-kripke-class (lsuc l1) l1 i l1)
-      ( canonical-kripke-model logic is-logic is-cons is-normal lem zorn
-        prop-resize)
+      ( canonical-kripke-model
+        ( logic)
+        ( is-logic)
+        ( is-cons)
+        ( is-normal)
+        ( zorn)
+        ( prop-resize))
   is-canonical-ax-4 ax-4-subset x y z yRz xRy a box-a-in-x =
     yRz a
       ( xRy (□ₘ a)

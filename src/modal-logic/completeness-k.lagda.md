@@ -69,9 +69,9 @@ module _
       ( is-modal-logic-K i)
       ( is-consistent-K i)
       ( is-normal-modal-logic-K i)
-      ( lem)
       ( zorn)
       ( prop-resize)
+      ( lem)
       ( all-models (lsuc l1) l1 i l1)
       ( star)
 ```
