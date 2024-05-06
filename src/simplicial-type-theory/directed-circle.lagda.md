@@ -69,6 +69,10 @@ of the diagram
        1₂
 ```
 
+In
+[`rewriting-directed-circle`](simplicial-type-theory.rewriting-directed-circle.md)
+we make the directed circle the strict coequalizer of this diagram.
+
 ## Postulates
 
 ### The standard directed circle type
@@ -83,12 +87,8 @@ postulate
 base-directed-circle : directed-circle
 base-directed-circle = arrow-directed-circle 0₂
 
-compute-target-arrow-directed-circle :
-  arrow-directed-circle 1₂ ＝ base-directed-circle
-compute-target-arrow-directed-circle =
-  primEraseEquality compute-target-arrow-directed-circle'
-  where postulate
-  compute-target-arrow-directed-circle' :
+postulate
+  compute-target-arrow-directed-circle :
     arrow-directed-circle 1₂ ＝ base-directed-circle
 
 compute-source-arrow-directed-circle :
