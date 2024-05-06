@@ -195,110 +195,83 @@ module _
   pr2 (pr2 (pr2 Φ-equivalence)) x y z r-xy r-yz a in-theory =
     r-xy a in-theory ∘iff r-yz a in-theory
 
-  valuate-function-equivalence-class :
-    equivalence-class Φ-equivalence →
-    UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5)
-  valuate-function-equivalence-class class =
-    Σ ( type-subtype theory → Prop (l1 ⊔ l2 ⊔ l4))
-      ( λ f →
-        ( (a , in-theory) : type-subtype theory)
-        ( (x , _) :
-            type-subtype (subtype-equivalence-class Φ-equivalence class)) →
-            type-iff-Prop (f (a , in-theory)) ((M , x) ⊨ a))
+  map-function-equivalence-class-Set :
+    Set (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5)
+  map-function-equivalence-class-Set =
+    function-Set (type-subtype theory) (Prop-Set (l1 ⊔ l2 ⊔ l4))
 
-  is-prop-valuate-function-equivalence-class :
-    (class : equivalence-class Φ-equivalence) →
-    is-prop (valuate-function-equivalence-class class)
-  is-prop-valuate-function-equivalence-class class =
-    apply-universal-property-trunc-Prop
-      ( is-inhabited-subtype-equivalence-class Φ-equivalence class)
-      ( is-prop _ , is-prop-is-prop _)
-      ( λ x →
-        ( is-prop-all-elements-equal
-          ( λ (f , f-val) (g , g-val) →
-            ( eq-pair-Σ
-              ( eq-htpy
-                ( λ a →
-                  ( eq-iff
-                    ( λ fa →
-                      ( backward-implication
-                        ( g-val a x)
-                        ( forward-implication (f-val a x) fa)))
-                    ( λ ga →
-                      ( backward-implication
-                        ( f-val a x)
-                        ( forward-implication (g-val a x) ga))))))
-              ( eq-is-prop
-                ( is-prop-Π
-                  ( λ (a , in-theory) →
-                    ( is-prop-Π
-                      ( λ (x , _) →
-                        ( is-prop-iff-Prop
-                          ( g (a , in-theory))
-                          ( (M , x) ⊨ a)))))))))))
+  map-function-worlds :
+    type-kripke-model i M → type-Set map-function-equivalence-class-Set
+  map-function-worlds x (a , _) = (M , x) ⊨ a
 
-  function-equivalence-class :
-    (class : equivalence-class Φ-equivalence) →
-    valuate-function-equivalence-class class
-  function-equivalence-class class =
-    apply-universal-property-trunc-Prop
-      ( is-inhabited-subtype-equivalence-class Φ-equivalence class)
-      ( pair
-        ( valuate-function-equivalence-class class)
-        ( is-prop-valuate-function-equivalence-class class))
-      ( λ (x , x-in-class) →
-        ( pair
-          ( λ (a , _) → (M , x) ⊨ a)
-          ( λ (a , in-theory) (y , y-in-class) →
-            ( apply-effectiveness-class Φ-equivalence {x} {y}
-              ( concat
-                ( eq-effective-quotient' Φ-equivalence x class x-in-class)
-                ( _)
-                ( inv
-                  ( eq-effective-quotient' Φ-equivalence y class y-in-class)))
-              ( a)
-              ( in-theory)))))
+  map-function-worlds-correct :
+    (x y : type-kripke-model i M) →
+    sim-equivalence-relation Φ-equivalence x y →
+    map-function-worlds x ＝ map-function-worlds y
+  map-function-worlds-correct x y s =
+    eq-htpy
+      ( λ (a , a-in-theory) →
+        ( eq-iff' ((M , x) ⊨ a) ((M , y) ⊨ a) (s a a-in-theory)))
 
   map-function-equivalence-class :
     equivalence-class Φ-equivalence →
     type-subtype theory → Prop (l1 ⊔ l2 ⊔ l4)
-  map-function-equivalence-class = pr1 ∘ function-equivalence-class
+  map-function-equivalence-class =
+    rec-equivalence-class Φ-equivalence
+      ( map-function-equivalence-class-Set)
+      ( map-function-worlds)
+      ( map-function-worlds-correct)
 
   is-injective-map-function-equivalence-class :
     is-injective map-function-equivalence-class
   is-injective-map-function-equivalence-class {x-class} {y-class} p =
-    let (f , f-val) = function-equivalence-class x-class
-        (g , g-val) = function-equivalence-class y-class
-    in apply-twice-universal-property-trunc-Prop
+    apply-twice-universal-property-trunc-Prop
       ( is-inhabited-subtype-equivalence-class Φ-equivalence x-class)
       ( is-inhabited-subtype-equivalence-class Φ-equivalence y-class)
       ( pair
         ( x-class ＝ y-class)
         ( is-set-equivalence-class Φ-equivalence x-class y-class))
       ( λ (x , x-in-class) (y , y-in-class) →
-        ( equational-reasoning
-            x-class
-              ＝ class Φ-equivalence x
-                by
-                  inv
-                    ( eq-class-equivalence-class
-                      ( Φ-equivalence)
-                      ( x-class)
-                      ( x-in-class))
-              ＝ class Φ-equivalence y
-                by
-                  apply-effectiveness-class'
-                    ( Φ-equivalence)
-                    ( λ a a-in-theory →
-                      ( g-val (a , a-in-theory) (y , y-in-class) ∘iff
-                          iff-eq (htpy-eq p (a , a-in-theory)) ∘iff
-                          inv-iff (f-val (a , a-in-theory) (x , x-in-class))))
-              ＝ y-class
-                by
-                  eq-class-equivalence-class
-                    ( Φ-equivalence)
-                    ( y-class)
-                    ( y-in-class)))
+        ( eq-share-common-element-equivalence-class Φ-equivalence
+          ( x-class)
+          ( y-class)
+          ( intro-exists x
+            ( pair
+              ( x-in-class)
+              ( transitive-is-in-equivalence-class Φ-equivalence
+                ( y-class)
+                ( y)
+                ( x)
+                ( y-in-class)
+                ( λ a a-in-theory →
+                  ( iff-eq
+                    ( inv
+                      ( ap (λ f → f (a , a-in-theory))
+                        ( equational-reasoning
+                            map-function-worlds x
+                              ＝ map-function-equivalence-class x-class
+                                by
+                                  inv
+                                    ( compute-rec-equivalence-class
+                                      ( Φ-equivalence)
+                                      ( map-function-equivalence-class-Set)
+                                      ( map-function-worlds)
+                                      ( map-function-worlds-correct)
+                                      ( x-class)
+                                      ( x)
+                                      ( x-in-class))
+                              ＝ map-function-equivalence-class y-class
+                                by p
+                              ＝ map-function-worlds y
+                                by
+                                  compute-rec-equivalence-class
+                                    ( Φ-equivalence)
+                                    ( map-function-equivalence-class-Set)
+                                    ( map-function-worlds)
+                                    ( map-function-worlds-correct)
+                                    ( y-class)
+                                    ( y)
+                                    ( y-in-class)))))))))))
 
   injection-map-function-equivalence-class :
     injection
@@ -364,8 +337,7 @@ module _
                       ( relation-kripke-model i M*
                         ( map-equiv e (class Φ-equivalence x))
                         ( map-equiv e (class Φ-equivalence y)))
-                      ( hom-Prop ((M , x) ⊨ □ₘ a)
-                        ( (M , y) ⊨ a)))))))))
+                      ( (M , x) ⊨ □ₘ a ⇒ (M , y) ⊨ a))))))))
 
     filtration-relation-upper-bound :
       equivalence-class Φ-equivalence ≃ type-kripke-model i M* →

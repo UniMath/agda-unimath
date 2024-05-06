@@ -224,9 +224,9 @@ module _
   {l1 l2 l3 l4 : Level} {i : Set l3}
   where
 
-  infix 5 _⊨_
-  infix 5 _⊨M_
-  infix 5 _⊨C_
+  infix 6 _⊨_
+  infix 6 _⊨M_
+  infix 6 _⊨C_
 
   _⊨_ :
     Σ (kripke-model l1 l2 i l4) (type-kripke-model i) →
@@ -234,7 +234,7 @@ module _
     Prop (l1 ⊔ l2 ⊔ l4)
   (M , x) ⊨ varₘ n = raise-Prop (l1 ⊔ l2) (valuate-kripke-model i M n x)
   (M , x) ⊨ ⊥ₘ = raise-empty-Prop (l1 ⊔ l2 ⊔ l4)
-  (M , x) ⊨ a →ₘ b = hom-Prop ((M , x) ⊨ a) ((M , x) ⊨ b)
+  (M , x) ⊨ a →ₘ b = (M , x) ⊨ a ⇒ (M , x) ⊨ b
   (M , x) ⊨ □ₘ a =
     Π-Prop
       ( type-kripke-model i M)

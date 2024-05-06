@@ -349,12 +349,12 @@ module _
   ... | inl x = pr1 x
   ... | inr x = a
 
-  is-invertable-surjection-from-injection :
+  is-invertible-surjection-from-injection :
     (a0 : type-Set A) →
     (inj@(f , _) : injection (type-Set A) (type-Set B)) →
     (a : type-Set A) →
     surjection-from-injection a0 inj (f a) ＝ a
-  is-invertable-surjection-from-injection a0 (f , is-inj) a
+  is-invertible-surjection-from-injection a0 (f , is-inj) a
     with
       lem2
         ( pair
@@ -373,7 +373,7 @@ module _
     is-surjective (surjection-from-injection a inj)
   is-surjective-surjection-from-injection a0 (f , is-inj) a =
     unit-trunc-Prop
-      ( f a , is-invertable-surjection-from-injection a0 (f , is-inj) a)
+      ( f a , is-invertible-surjection-from-injection a0 (f , is-inj) a)
 
   kuratowsky-finite-set-injection :
     injection (type-Set A) (type-Set B) →

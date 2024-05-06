@@ -109,9 +109,8 @@ module _
     Π-Prop
       ( modal-formula i)
       ( λ a →
-        ( hom-Prop
-          ( modal-theory-L-complete-theory logic x (□ₘ a))
-          ( modal-theory-L-complete-theory logic y a)))
+        ( modal-theory-L-complete-theory logic x (□ₘ a) ⇒
+            modal-theory-L-complete-theory logic y a))
   pr2 canonical-kripke-model n x =
     modal-theory-L-complete-theory logic x (varₘ n)
 
