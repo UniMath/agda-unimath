@@ -25,23 +25,18 @@ open import simplicial-type-theory.directed-circle
 This module endows the
 [directed circle](simplicial-type-theory.directed-circle.md) with strict
 computation rules using Agda's [rewriting](reflection.rewriting.md)
-functionality. This gives the strict equalities
-
-```text
-  arrow-directed-circle 1₂ ≐ base-directed-circle
-```
+functionality. This gives the strict equality
 
 ```text
   ind-directed-circle α (arrow-directed-circle t) ≐
-  arrow-free-dependent-directed-loop free-loop-directed-circle α
+  arrow-free-dependent-directed-loop free-loop-directed-circle α.
 ```
 
-In addition, the pre-existing witnesses of these equalities:
-`compute-target-arrow-directed-circle` and `compute-arrow-ind-directed-circle`
-reduce to `refl`. This is achieved using Agda's
-[equality erasure](reflection.erasing-equality.md) functionality.
+In addition, the pre-existing witness of this equality
+`compute-arrow-ind-directed-circle` reduces to `refl`. This is achieved using
+Agda's [equality erasure](reflection.erasing-equality.md) functionality.
 
-To enable these computation rules in your own formalizations, set the
+To enable this computation rule in your own formalizations, set the
 `--rewriting` option and import this module. Keep in mind, however, that we
 offer no way to selectively disable these rules, so if your module depends on
 any other module that depends on this one, you will necessarily also have
@@ -58,7 +53,6 @@ other formalizations that do not enable rewrite rules.
 ## Rewrite rules
 
 ```agda
-{-# REWRITE compute-target-arrow-directed-circle #-}
 {-# REWRITE compute-arrow-ind-directed-circle #-}
 ```
 
