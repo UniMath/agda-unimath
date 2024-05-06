@@ -7,6 +7,7 @@ module simplicial-type-theory.directed-relation-directed-interval-type where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -27,6 +28,7 @@ open import order-theory.total-orders
 
 open import simplicial-type-theory.directed-interval-type
 
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.joins-of-types
 ```
 
@@ -85,6 +87,62 @@ postulate
   min-leq-𝟚 : {x : 𝟚} → 0₂ ≤-𝟚 x
 
   max-leq-𝟚 : {x : 𝟚} → x ≤-𝟚 1₂
+```
+
+## Operations
+
+### The binary max function on the directed interval
+
+```agda
+cocone-max-𝟚 : (t s : 𝟚) → cocone pr1 pr2 𝟚
+cocone-max-𝟚 t s =
+  ( (λ _ → s) , (λ _ → t) , (λ (p , q) → antisymmetric-leq-𝟚 q p))
+
+max-𝟚 : 𝟚 → 𝟚 → 𝟚
+max-𝟚 t s = cogap-join 𝟚 (cocone-max-𝟚 t s) total-leq-𝟚
+
+abstract
+  compute-left-max-𝟚 : {t s : 𝟚} (p : s ≤-𝟚 t) → max-𝟚 t s ＝ t
+  compute-left-max-𝟚 {t} {s} p =
+    ( ap
+      ( cogap-join 𝟚 (cocone-max-𝟚 t s))
+      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
+    compute-inr-cogap-join (cocone-max-𝟚 t s) p
+
+abstract
+  compute-right-max-𝟚 : {t s : 𝟚} (p : t ≤-𝟚 s) → max-𝟚 t s ＝ s
+  compute-right-max-𝟚 {t} {s} p =
+    ( ap
+      ( cogap-join 𝟚 (cocone-max-𝟚 t s))
+      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
+    compute-inl-cogap-join (cocone-max-𝟚 t s) p
+```
+
+### The binary minimum function on the directed interval
+
+```agda
+cocone-min-𝟚 : (t s : 𝟚) → cocone pr1 pr2 𝟚
+cocone-min-𝟚 t s =
+  ( (λ _ → t) , (λ _ → s) , (λ (p , q) → antisymmetric-leq-𝟚 p q))
+
+min-𝟚 : 𝟚 → 𝟚 → 𝟚
+min-𝟚 t s = cogap-join 𝟚 (cocone-min-𝟚 t s) total-leq-𝟚
+
+abstract
+  compute-left-min-𝟚 : {t s : 𝟚} (p : t ≤-𝟚 s) → min-𝟚 t s ＝ t
+  compute-left-min-𝟚 {t} {s} p =
+    ( ap
+      ( cogap-join 𝟚 (cocone-min-𝟚 t s))
+      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
+    compute-inl-cogap-join (cocone-min-𝟚 t s) p
+
+abstract
+  compute-right-min-𝟚 : {t s : 𝟚} (p : s ≤-𝟚 t) → min-𝟚 t s ＝ s
+  compute-right-min-𝟚 {t} {s} p =
+    ( ap
+      ( cogap-join 𝟚 (cocone-min-𝟚 t s))
+      ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
+    compute-inr-cogap-join (cocone-min-𝟚 t s) p
 ```
 
 ## Definitions
@@ -162,3 +220,11 @@ is-emb-map-directed-interval-bool : is-emb map-directed-interval-bool
 is-emb-map-directed-interval-bool =
   is-emb-is-injective is-set-𝟚 is-injective-map-directed-interval-bool
 ```
+
+### The directed relation `t ≤-𝟚 s` is equivalent to the relation `max-𝟚 t s ＝ s`
+
+This remains to be formalized.
+
+### The directed relation `t ≤-𝟚 s` is equivalent to the relation `min-𝟚 t s ＝ t`
+
+This remains to be formalized.
