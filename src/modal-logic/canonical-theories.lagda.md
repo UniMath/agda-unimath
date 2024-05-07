@@ -48,7 +48,7 @@ TODO
 module _
   {l1 : Level}
   (i : Set l1)
-  (zorn : Zorn-non-empty (lsuc l1) l1 l1)
+  (zorn : Zorn (lsuc l1) l1 l1)
   (prop-resize : propositional-resizing l1 (lsuc l1))
   (logic : modal-theory l1 i)
   (is-logic : is-modal-logic logic)

@@ -60,7 +60,7 @@ module _
   (is-logic : is-modal-logic logic)
   (is-cons : is-consistent-modal-logic logic)
   (is-normal : is-normal-modal-logic logic)
-  (zorn : Zorn-non-empty (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) l2)
+  (zorn : Zorn (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) l2)
   (prop-resize : propositional-resizing (l1 ⊔ l2) (lsuc (l1 ⊔ l2)))
   where
 

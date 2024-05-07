@@ -7,9 +7,11 @@ module lists.lists-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
+open import foundation.inhabited-subtypes
 open import foundation.intersections-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -17,6 +19,7 @@ open import foundation.unions-subtypes
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.function-types
 open import foundation-core.negation
@@ -65,6 +68,16 @@ module _
   head-in-list-subtype :
     {a : A} {l : list A} → is-in-subtype (list-subtype (cons a l)) a
   head-in-list-subtype {a} {l} = in-list-subtype-in-list (is-head a l)
+
+  is-decidable-is-inhabited-list-subtype :
+    (l : list A) → is-decidable (is-inhabited-subtype (list-subtype l))
+  is-decidable-is-inhabited-list-subtype nil =
+    inr
+      ( map-universal-property-trunc-Prop
+        ( empty-Prop)
+        ( λ (x , in-list) → not-in-list-nil in-list))
+  is-decidable-is-inhabited-list-subtype (cons x xs) =
+    inl (unit-trunc-Prop (x , head-in-list-subtype))
 
   subset-list-subtype-cons :
     {a : A} {l : list A} →

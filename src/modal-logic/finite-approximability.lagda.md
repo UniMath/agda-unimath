@@ -87,7 +87,7 @@ module _
 
   module _
     (lem : LEM (lsuc (lsuc l1)))
-    (zorn : Zorn-non-empty (lsuc l1) l1 l1)
+    (zorn : Zorn (lsuc l1) l1 l1)
     (prop-resize : propositional-resizing l1 (lsuc l1))
     where
 

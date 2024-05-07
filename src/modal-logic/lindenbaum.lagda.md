@@ -42,7 +42,7 @@ module _
   (logic : modal-theory l2 i)
   (contains-ax-k : ax-k i ⊆ logic)
   (contains-ax-s : ax-s i ⊆ logic)
-  (zorn : Zorn-non-empty (lsuc (l1 ⊔ l2 ⊔ l3)) (l1 ⊔ l2 ⊔ l3) l3)
+  (zorn : Zorn (lsuc (l1 ⊔ l2 ⊔ l3)) (l1 ⊔ l2 ⊔ l3) l3)
   (prop-resize : propositional-resizing (l1 ⊔ l2 ⊔ l3) (lsuc (l1 ⊔ l2 ⊔ l3)))
   (x@(theory , is-cons) : L-consistent-theory logic (l1 ⊔ l2 ⊔ l3))
   where

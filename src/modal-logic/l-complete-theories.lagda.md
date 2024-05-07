@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
@@ -394,6 +395,18 @@ module _
     chain-union-modal-theory a =
       ∃ (type-chain-Poset P C) (λ x → modal-theory-chain-element x a)
 
+    is-inhabited-chain-is-inhabited-chain-union :
+      is-inhabited-subtype (chain-union-modal-theory) →
+      is-inhabited (type-chain-Poset P C)
+    is-inhabited-chain-is-inhabited-chain-union =
+      map-universal-property-trunc-Prop
+        ( is-inhabited-Prop (type-chain-Poset P C))
+        ( λ (x , x-in-union) →
+          ( apply-universal-property-trunc-Prop
+            ( x-in-union)
+            ( is-inhabited-Prop (type-chain-Poset P C))
+            ( λ (c , _) → unit-trunc-Prop c)))
+
     exists-chain-element-with-formula-Prop :
       (a : modal-formula i) → Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4)
     exists-chain-element-with-formula-Prop a =
@@ -490,12 +503,6 @@ module _
           ( exists-chain-element-with-formula-Prop a)
           ( λ (x , h-in-x) (y , ha-in-y) →
             ( elim-disjunction
-              -- ( leq-Poset-Prop P
-              --   ( type-Poset-type-chain-Poset P C x)
-              --   ( type-Poset-type-chain-Poset P C y))
-              -- ( leq-Poset-Prop P
-              --   ( type-Poset-type-chain-Poset P C y)
-              --   ( type-Poset-type-chain-Poset P C x))
               ( exists-chain-element-with-formula-Prop a)
               ( λ x-leq-y →
                 ( intro-exists y
@@ -510,14 +517,45 @@ module _
                     ( theory-subset-L-union x h h-in-x))))
               ( is-chain-Subposet-chain-Poset P C x y)))
 
-      in-chain-in-chain-union :
-        is-inhabited (type-chain-Poset P C) →
+      in-chain-in-list :
+        (l : list (modal-formula i)) →
+        list-subtype l ⊆ chain-union-modal-theory →
         {a : modal-formula i} →
+        ¬ is-in-subtype (weak-modal-logic-closure logic) a →
+        is-in-subtype (weak-modal-logic-closure (logic ∪ list-subtype l)) a →
+        exists-chain-element-with-formula a
+      in-chain-in-list l leq {a} not-in-logic in-union =
+        in-chain-in-chain-union-assumptions
+          ( is-inhabited-chain-is-inhabited-chain-union
+            ( rec-coproduct
+              ( map-is-inhabited (λ (x , in-list) → x , leq x in-list))
+              ( λ not-inh →
+                ( ex-falso
+                  ( not-in-logic
+                    ( weak-modal-logic-closure-monotic
+                      ( subtype-union-both
+                        ( logic)
+                        ( list-subtype l)
+                        ( logic)
+                        ( refl-leq-subtype logic)
+                        ( λ x in-list →
+                          ( ex-falso
+                            ( not-inh (unit-trunc-Prop (x , in-list))))))
+                      ( a)
+                      ( in-union)))))
+              ( is-decidable-is-inhabited-list-subtype l)))
+          ( l)
+          ( leq)
+          ( in-union)
+
+      in-chain-in-chain-union :
+        {a : modal-formula i} →
+        ¬ is-in-subtype (weak-modal-logic-closure logic) a →
         is-in-subtype
           ( weak-modal-logic-closure (logic ∪ chain-union-modal-theory))
           ( a) →
         exists-chain-element-with-formula a
-      in-chain-in-chain-union is-inh {a} =
+      in-chain-in-chain-union {a} not-in-logic =
         map-universal-property-trunc-Prop
           ( exists-chain-element-with-formula-Prop a)
           ( λ d →
@@ -529,9 +567,9 @@ module _
                 ( subset-theory-list-assumptions-weak-deduction d))
               ( exists-chain-element-with-formula-Prop a)
               ( λ ((logic-l , theory-l) , leq-lists , leq-logic , leq-theory) →
-                ( in-chain-in-chain-union-assumptions is-inh theory-l leq-theory
+                ( in-chain-in-list theory-l leq-theory not-in-logic
                   ( weak-modal-logic-closure-monotic
-                    {ax₁ = list-subtype logic-l ∪ list-subtype theory-l}
+                    { ax₁ = list-subtype logic-l ∪ list-subtype theory-l}
                     ( subset-union-subset-left
                       ( list-subtype logic-l)
                       ( logic)
@@ -540,15 +578,15 @@ module _
                     ( a)
                     ( weak-modal-logic-closure-monotic leq-lists a
                       ( is-in-weak-modal-logic-closure-weak-deduction
-                        ( is-assumptions-list-assumptions-weak-deduction
+                        (is-assumptions-list-assumptions-weak-deduction
                           ( d)))))))))
 
       is-L-consistent-theory-chain-union-modal-theory :
-        is-inhabited (type-chain-Poset P C) →
+        is-consistent-modal-logic (weak-modal-logic-closure logic) →
         is-L-consistent-theory logic chain-union-modal-theory
-      is-L-consistent-theory-chain-union-modal-theory is-inh in-logic =
+      is-L-consistent-theory-chain-union-modal-theory is-cons in-logic =
         apply-universal-property-trunc-Prop
-          ( in-chain-in-chain-union is-inh in-logic)
+          ( in-chain-in-chain-union is-cons in-logic)
           ( empty-Prop)
           ( λ (x , in-logic') →
             ( is-L-consistent-theory-modal-theory-L-consistent-theory
@@ -586,9 +624,9 @@ module _
 
       is-L-consistent-resized-chain-union-modal-theory :
         (C : chain-Poset l4 P) →
-        is-inhabited (type-chain-Poset P C) →
+        is-consistent-modal-logic (weak-modal-logic-closure logic) →
         is-L-consistent-theory logic (resized-chain-union-modal-theory C)
-      is-L-consistent-resized-chain-union-modal-theory C is-inh =
+      is-L-consistent-resized-chain-union-modal-theory C is-cons =
         is-L-consistent-antimonotic logic
           ( resized-chain-union-modal-theory C)
           ( chain-union-modal-theory C)
@@ -599,23 +637,23 @@ module _
           ( is-L-consistent-theory-chain-union-modal-theory C
             ( contains-ax-k)
             ( contains-ax-s)
-            ( is-inh))
+            ( is-cons))
 
       resized-chain-union-L-consistent-theory :
         (C : chain-Poset l4 P) →
-        is-inhabited (type-chain-Poset P C) →
+        is-consistent-modal-logic (weak-modal-logic-closure logic) →
         L-consistent-theory logic l3
-      pr1 (resized-chain-union-L-consistent-theory C is-inh) =
+      pr1 (resized-chain-union-L-consistent-theory C is-cons) =
         resized-chain-union-modal-theory C
-      pr2 (resized-chain-union-L-consistent-theory C is-inh) =
-        is-L-consistent-resized-chain-union-modal-theory C is-inh
+      pr2 (resized-chain-union-L-consistent-theory C is-cons) =
+        is-L-consistent-resized-chain-union-modal-theory C is-cons
 
       union-is-chain-upper-bound :
         (C : chain-Poset l4 P) →
-        (is-inh : is-inhabited (type-chain-Poset P C)) →
+        (is-cons : is-consistent-modal-logic (weak-modal-logic-closure logic)) →
         is-chain-upper-bound P C
-          ( resized-chain-union-L-consistent-theory C is-inh)
-      union-is-chain-upper-bound C is-inh x =
+          ( resized-chain-union-L-consistent-theory C is-cons)
+      union-is-chain-upper-bound C _ x =
         transitive-leq-subtype
           ( modal-theory-L-consistent-theory logic
             ( type-Poset-type-chain-Poset
@@ -631,23 +669,29 @@ module _
           ( λ a in-theory → intro-exists x in-theory)
 
       extend-L-consistent-theory :
-        (zorn : Zorn-non-empty (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3) l4) →
+        Zorn (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3) l4 →
         is-inhabited (L-consistent-theory logic l3) →
         is-inhabited (L-complete-theory l3)
       extend-L-consistent-theory zorn is-inh =
-        is-inhabited-L-complete-exists-complete-L-consistent-theory
-          ( zorn
-            ( L-consistent-theories-Poset logic l3)
-            ( is-inh)
-            ( λ C C-is-inh →
-              ( intro-exists
-                ( resized-chain-union-L-consistent-theory C C-is-inh)
-                ( union-is-chain-upper-bound C C-is-inh))))
+        map-universal-property-trunc-Prop
+          ( is-inhabited-Prop (L-complete-theory l3))
+          ( λ theory →
+            ( zorn
+              ( L-consistent-theories-Poset logic l3)
+              ( λ C →
+                ( intro-exists
+                  ( resized-chain-union-L-consistent-theory C
+                    ( is-consistent-closure-logic-L-consistent-theory logic
+                      ( theory)))
+                  ( union-is-chain-upper-bound C
+                    ( is-consistent-closure-logic-L-consistent-theory logic
+                      ( theory)))))))
+          ( is-inh)
 
   module _
     {l3 : Level}
     (prop-resize : propositional-resizing (l1 ⊔ l2) (lsuc l1 ⊔ lsuc l2 ⊔ l3))
-    (zorn : Zorn-non-empty (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) l3)
+    (zorn : Zorn (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) l3)
     (is-logic : is-weak-modal-logic logic)
     (is-cons : is-consistent-modal-logic logic)
     (contains-ax-k : ax-k i ⊆ logic)

@@ -98,6 +98,18 @@ module _
       ( subset-axioms-weak-modal-logic-closure)
       ( is-consistent-closure-L-consistent-theory theory)
 
+  is-consistent-closure-logic-L-consistent-theory :
+    {l3 : Level} (theory : L-consistent-theory l3) →
+    is-consistent-modal-logic (weak-modal-logic-closure logic)
+  is-consistent-closure-logic-L-consistent-theory theory =
+    is-consistent-modal-logic-antimonotic
+      ( weak-modal-logic-closure logic)
+      ( weak-modal-logic-closure
+        ( logic ∪ modal-theory-L-consistent-theory theory))
+      ( weak-modal-logic-closure-monotic
+        ( subtype-union-left logic (modal-theory-L-consistent-theory theory)))
+      ( is-L-consistent-theory-modal-theory-L-consistent-theory theory)
+
   is-L-consistent-antimonotic :
     {l3 l4 : Level}
     (theory₁ : modal-theory l3 i) →

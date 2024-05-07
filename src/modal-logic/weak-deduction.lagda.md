@@ -65,9 +65,13 @@ module _
   is-weak-deduction = type-Prop ∘ is-weak-deduction-Prop
 
   infix 5 _⊢ₘw_
+  infix 5 _⊬ₘw_
 
   _⊢ₘw_ : modal-theory l2 i → modal-formula i → UU (l1 ⊔ l2)
   axioms ⊢ₘw a = type-subtype (is-weak-deduction-Prop {axioms} {a})
+
+  _⊬ₘw_ : modal-theory l2 i → modal-formula i → UU (l1 ⊔ l2)
+  axioms ⊬ₘw a = ¬ (axioms ⊢ₘw a)
 
   deduction-weak-deduction :
     {axioms : modal-theory l2 i} {a : modal-formula i} →
