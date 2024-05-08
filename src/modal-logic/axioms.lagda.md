@@ -158,20 +158,20 @@ module _
     M in-class x fab fa y r =
       fab y r (fa y r)
 
-  ax-dn-soundness : soundness (ax-dn i) (decidable-models l2 l3 i l4)
+  ax-dn-soundness : soundness (ax-dn i) (decidable-kripke-models l2 l3 i l4)
   ax-dn-soundness .(¬¬ₘ a →ₘ a) (a , refl) M is-dec x f
     with (is-dec a x)
   ... | inl fa = fa
   ... | inr fna = raise-ex-falso _ (f (λ fa -> map-raise (fna fa)))
 
-  ax-m-soundness : soundness (ax-m i) (reflexive-kripke-class l2 l3 i l4)
+  ax-m-soundness : soundness (ax-m i) (reflexive-kripke-models l2 l3 i l4)
   ax-m-soundness .(□ₘ a →ₘ a) (a , refl) M is-refl x fa = fa x (is-refl x)
 
-  ax-b-soundness : soundness (ax-b i) (symmetry-kripke-class l2 l3 i l4)
+  ax-b-soundness : soundness (ax-b i) (symmetry-kripke-models l2 l3 i l4)
   ax-b-soundness .(a →ₘ □ₘ ◇ₘ a) (a , refl) M is-sym x fa y r contra =
     contra x (is-sym x y r) fa
 
-  ax-d-soundness : soundness (ax-d i) (serial-kripke-class l2 l3 i l4)
+  ax-d-soundness : soundness (ax-d i) (serial-kripke-models l2 l3 i l4)
   ax-d-soundness .(□ₘ a →ₘ ◇ₘ a) (a , refl) M is-serial x fa contra =
     map-raise
       ( apply-universal-property-trunc-Prop
@@ -179,11 +179,11 @@ module _
         ( empty-Prop)
         ( λ (y , r) → map-inv-raise (contra y r (fa y r))))
 
-  ax-4-soundness : soundness (ax-4 i) (transitivity-kripke-class l2 l3 i l4)
+  ax-4-soundness : soundness (ax-4 i) (transitive-kripke-models l2 l3 i l4)
   ax-4-soundness .(□ₘ a →ₘ □ₘ □ₘ a) (a , refl) M is-trans x fa y r-xy z r-yz =
     fa z (is-trans x y z r-yz r-xy)
 
-  ax-5-sooundness : soundness (ax-5 i) (euclidean-kripke-class l2 l3 i l4)
+  ax-5-sooundness : soundness (ax-5 i) (euclidean-kripke-models l2 l3 i l4)
   ax-5-sooundness .(◇ₘ a →ₘ □ₘ ◇ₘ a) (a , refl) M is-eucl x fa y r-xy contra =
     fa (λ z r-xz → contra z (is-eucl x y z r-xy r-xz))
 ```

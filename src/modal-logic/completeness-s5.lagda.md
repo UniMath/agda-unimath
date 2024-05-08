@@ -65,7 +65,7 @@ module _
 
   S5-canonical-model-is-equivalence :
     is-in-subtype
-      ( equivalence-kripke-class (lsuc l1) l1 i l1)
+      ( equivalence-kripke-models (lsuc l1) l1 i l1)
       ( canonical-kripke-model
         ( modal-logic-S5 i)
         ( is-modal-logic-S5 i)
@@ -96,7 +96,9 @@ module _
         ( modal-logic-S5-contains-ax-4 i))
 
   completeness-S5 :
-    completeness (modal-logic-S5 i) (equivalence-kripke-class (lsuc l1) l1 i l1)
+    completeness
+      ( modal-logic-S5 i)
+      ( equivalence-kripke-models (lsuc l1) l1 i l1)
   completeness-S5 =
     canonical-model-completness
       ( modal-logic-S5 i)
@@ -106,6 +108,6 @@ module _
       ( zorn)
       ( prop-resize)
       ( lem)
-      ( equivalence-kripke-class (lsuc l1) l1 i l1)
+      ( equivalence-kripke-models (lsuc l1) l1 i l1)
       ( S5-canonical-model-is-equivalence)
 ```

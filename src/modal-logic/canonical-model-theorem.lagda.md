@@ -94,9 +94,9 @@ module _
 
   canonical-kripke-model :
     kripke-model (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2) i (l1 ⊔ l2)
-  pr1 (pr1 (pr1 canonical-kripke-model)) =
+  pr1 (pr1 canonical-kripke-model) =
     L-complete-theory logic (l1 ⊔ l2)
-  pr2 (pr1 (pr1 canonical-kripke-model)) =
+  pr2 (pr1 canonical-kripke-model) =
     is-inhabited-L-complete-theory
       ( logic)
       ( prop-resize)
@@ -105,13 +105,13 @@ module _
       ( is-cons)
       ( contains-ax-k)
       ( contains-ax-s)
-  pr2 (pr1 canonical-kripke-model) x y =
+  pr1 (pr2 canonical-kripke-model) x y =
     Π-Prop
       ( modal-formula i)
       ( λ a →
         ( modal-theory-L-complete-theory logic x (□ₘ a) ⇒
             modal-theory-L-complete-theory logic y a))
-  pr2 canonical-kripke-model n x =
+  pr2 (pr2 canonical-kripke-model) n x =
     modal-theory-L-complete-theory logic x (varₘ n)
 
   module _
@@ -480,7 +480,7 @@ module _
       (x : L-complete-theory logic (l1 ⊔ l2)) →
       type-iff-Prop
         ( modal-theory-L-complete-theory logic x a)
-        ( (canonical-kripke-model , x) ⊨ a)
+        ( (canonical-kripke-model , x) ⊨ₘ a)
     pr1 (canonical-model-theorem-pointwise (varₘ n) x) = map-raise
     pr1 (canonical-model-theorem-pointwise ⊥ₘ x) =
       map-raise ∘ is-consistent-modal-theory-L-complete-theory logic x
@@ -515,7 +515,7 @@ module _
 
     canonical-model-theorem :
       (a : modal-formula i) →
-      type-iff-Prop (logic a) (canonical-kripke-model ⊨M a)
+      type-iff-Prop (logic a) (canonical-kripke-model ⊨Mₘ a)
     pr1 (canonical-model-theorem a) in-logic x =
       forward-implication
         ( canonical-model-theorem-pointwise a x)

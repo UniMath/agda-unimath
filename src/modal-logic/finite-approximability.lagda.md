@@ -78,6 +78,20 @@ module _
           ( soundness logic (finite-subclass i C))
           ( completeness logic (finite-subclass i C))))
 
+  is-finitely-approximable-Prop' :
+    {l2 : Level} (l3 l4 l5 l6 : Level) →
+    modal-theory l2 i →
+    Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ lsuc l6)
+  is-finitely-approximable-Prop' l3 l4 l5 l6 logic =
+    exists-structure-Prop
+      ( model-class l3 l4 i l5 l6)
+      ( λ C →
+        ( product
+          ( C ⊆ finite-kripke-models l3 l4 i l5)
+          ( product
+            ( soundness logic (finite-subclass i C))
+            ( completeness logic (finite-subclass i C)))))
+
   is-finitely-approximable :
     {l2 : Level} (l3 l4 l5 l6 : Level) →
     modal-theory l2 i →
@@ -146,7 +160,7 @@ module _
         ( all-models (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1))
         ( λ _ _ → star)
         ( λ a in-logic M _ x →
-          ( soundness-K i a in-logic M (λ b y → lem ((M , y) ⊨ b)) x))
+          ( soundness-K i a in-logic M (λ b y → lem ((M , y) ⊨ₘ b)) x))
 
     is-finitely-approximable-K :
       is-finitely-approximable
@@ -164,7 +178,11 @@ module _
             ( K-finite-class)
             ( finite-subclass i K-finite-class)
             ( subtype-intersection-right
-              ( finite-models (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1))
+              ( finite-decidable-kripke-models
+                ( lsuc (lsuc l1))
+                ( lsuc l1)
+                ( i)
+                ( lsuc l1))
               ( K-finite-class))
             ( soundness-K-filtration))
           ( transitive-leq-subtype
@@ -186,9 +204,18 @@ module _
                       ( lsuc l1)
                       ( l1)
                       ( l1))
-                    ( finite-models (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1))
-                    ( filtration-models-subset-finite-models i l1
-                      (lsuc l1) l1 l1 lem)
+                    ( finite-decidable-kripke-models
+                      ( lsuc (lsuc l1))
+                      ( lsuc l1)
+                      ( i)
+                      ( lsuc l1))
+                    ( filtration-models-subset-finite-decidable-kripke-models
+                      ( i)
+                      ( l1)
+                      ( lsuc l1)
+                      ( l1)
+                      ( l1)
+                      ( lem))
                     ( K-finite-class-sub-filtration-models)
                     ( M)
                     ( M-in-class))

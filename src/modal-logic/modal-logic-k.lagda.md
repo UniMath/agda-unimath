@@ -145,14 +145,14 @@ module _
   where
 
   soundness-K-axioms :
-    soundness (modal-logic-K-axioms i) (decidable-models l2 l3 i l4)
+    soundness (modal-logic-K-axioms i) (decidable-kripke-models l2 l3 i l4)
   soundness-K-axioms =
     soundness-union-subclass-right-sublevels
       ( (ax-k i ∪ ax-s i) ∪ ax-n i)
       ( ax-dn i)
       ( l1 ⊔ l2 ⊔ l3 ⊔ l4)
       ( all-models l2 l3 i l4)
-      ( decidable-models l2 l3 i l4)
+      ( decidable-kripke-models l2 l3 i l4)
       ( soundness-union-same-class
         ( ax-k i ∪ ax-s i)
         ( ax-n i)
@@ -165,19 +165,22 @@ module _
           ( ax-s-soundness i l3 l4))
         ( ax-n-soundness i l3 l4))
       ( ax-dn-soundness i l3 l4)
-      ( all-models-is-largest-class i (decidable-models l2 l3 i l4))
+      ( all-models-is-largest-class i (decidable-kripke-models l2 l3 i l4))
 
-  soundness-K : soundness (modal-logic-K i) (decidable-models l2 l3 i l4)
+  soundness-K : soundness (modal-logic-K i) (decidable-kripke-models l2 l3 i l4)
   soundness-K =
-    soundness-modal-logic (decidable-models l2 l3 i l4) soundness-K-axioms
+    soundness-modal-logic
+      ( decidable-kripke-models l2 l3 i l4)
+      ( soundness-K-axioms)
 
-  soundness-K-finite : soundness (modal-logic-K i) (finite-models l2 l3 i l4)
+  soundness-K-finite :
+    soundness (modal-logic-K i) (finite-decidable-kripke-models l2 l3 i l4)
   soundness-K-finite =
     soundness-subclass
       ( modal-logic-K i)
-      ( decidable-models l2 l3 i l4)
-      ( finite-models l2 l3 i l4)
-      ( finite-models-subclass-decidable-models i)
+      ( decidable-kripke-models l2 l3 i l4)
+      ( finite-decidable-kripke-models l2 l3 i l4)
+      ( finite-decidable-subclass-decidable-models i)
       ( soundness-K)
 
 module _
@@ -191,8 +194,9 @@ module _
         ( i)
         ( ⊥ₘ)
         ( bot-in-logic)
-        ( pair
-          ( pair (unit , unit-trunc-Prop star) (λ _ _ → empty-Prop))
+        ( triple
+          ( unit , unit-trunc-Prop star)
+          ( λ _ _ → empty-Prop)
           ( λ _ _ → empty-Prop))
         ( triple
           ( is-finite-unit)

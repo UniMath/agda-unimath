@@ -52,75 +52,43 @@ TODO
 
 ```agda
 module _
-  (l1 l2 : Level)
-  where
-
-  kripke-frame : UU (lsuc l1 ⊔ lsuc l2)
-  kripke-frame = Σ (Inhabited-Type l1) (Relation-Prop l2 ∘ type-Inhabited-Type)
-
-module _
-  {l1 l2 : Level}
-  where
-
-  Inhabited-Type-kripke-frame : kripke-frame l1 l2 → Inhabited-Type l1
-  Inhabited-Type-kripke-frame = pr1
-
-  type-kripke-frame : kripke-frame l1 l2 → UU l1
-  type-kripke-frame = type-Inhabited-Type ∘ Inhabited-Type-kripke-frame
-
-  is-inhabited-type-kripke-frame :
-    (F : kripke-frame l1 l2) → is-inhabited (type-kripke-frame F)
-  is-inhabited-type-kripke-frame =
-    is-inhabited-type-Inhabited-Type ∘ Inhabited-Type-kripke-frame
-
-  relation-Prop-kripke-frame :
-    (F : kripke-frame l1 l2) → Relation-Prop l2 (type-kripke-frame F)
-  relation-Prop-kripke-frame = pr2
-
-  relation-kripke-frame :
-    (F : kripke-frame l1 l2) → Relation l2 (type-kripke-frame F)
-  relation-kripke-frame = type-Relation-Prop ∘ relation-Prop-kripke-frame
-
-module _
   (l1 l2 : Level) {l3 : Level} (i : Set l3) (l4 : Level)
   where
 
   kripke-model : UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4)
   kripke-model =
-    Σ (kripke-frame l1 l2) (λ F → type-Set i → type-kripke-frame F → Prop l4)
+    Σ ( Inhabited-Type l1)
+      ( λ w →
+        ( product
+          ( Relation-Prop l2 (type-Inhabited-Type w))
+          ( type-Set i → type-Inhabited-Type w → Prop l4)))
 
 module _
   {l1 l2 l3 l4 : Level} (i : Set l3)
   where
 
-  kripke-frame-kripke-model : kripke-model l1 l2 i l4 → kripke-frame l1 l2
-  kripke-frame-kripke-model = pr1
-
   Inhabited-Type-kripke-model : kripke-model l1 l2 i l4 → Inhabited-Type l1
-  Inhabited-Type-kripke-model =
-    Inhabited-Type-kripke-frame ∘ kripke-frame-kripke-model
+  Inhabited-Type-kripke-model = pr1
 
   type-kripke-model : kripke-model l1 l2 i l4 → UU l1
-  type-kripke-model = type-kripke-frame ∘ kripke-frame-kripke-model
+  type-kripke-model = type-Inhabited-Type ∘ Inhabited-Type-kripke-model
 
   is-inhabited-type-kripke-model :
     (M : kripke-model l1 l2 i l4) → is-inhabited (type-kripke-model M)
   is-inhabited-type-kripke-model =
-    is-inhabited-type-kripke-frame ∘ kripke-frame-kripke-model
+    is-inhabited-type-Inhabited-Type ∘ Inhabited-Type-kripke-model
 
   relation-Prop-kripke-model :
     (M : kripke-model l1 l2 i l4) → Relation-Prop l2 (type-kripke-model M)
-  relation-Prop-kripke-model =
-    relation-Prop-kripke-frame ∘ kripke-frame-kripke-model
+  relation-Prop-kripke-model = pr1 ∘ pr2
 
   relation-kripke-model :
     (M : kripke-model l1 l2 i l4) → Relation l2 (type-kripke-model M)
-  relation-kripke-model =
-    relation-kripke-frame ∘ kripke-frame-kripke-model
+  relation-kripke-model = type-Relation-Prop ∘ relation-Prop-kripke-model
 
   valuate-kripke-model :
     (M : kripke-model l1 l2 i l4) → type-Set i → type-kripke-model M → Prop l4
-  valuate-kripke-model = pr2
+  valuate-kripke-model = pr2 ∘ pr2
 
 module _
   (l1 l2 : Level) {l3 : Level} (i : Set l3) (l4 : Level)
@@ -184,80 +152,80 @@ module _
   relation-property-class property M =
     property (relation-Prop-kripke-model i M)
 
-  reflexive-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  reflexive-kripke-class =
+  reflexive-kripke-models : model-class l1 l2 i l4 (l1 ⊔ l2)
+  reflexive-kripke-models =
     relation-property-class
       ( λ x →
         ( is-reflexive-Relation-Prop x , is-prop-is-reflexive-Relation-Prop x))
 
-  symmetry-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  symmetry-kripke-class =
+  symmetry-kripke-models : model-class l1 l2 i l4 (l1 ⊔ l2)
+  symmetry-kripke-models =
     relation-property-class
       ( λ x →
         ( is-symmetric-Relation-Prop x , is-prop-is-symmetric-Relation-Prop x))
 
-  transitivity-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  transitivity-kripke-class =
+  transitive-kripke-models : model-class l1 l2 i l4 (l1 ⊔ l2)
+  transitive-kripke-models =
     relation-property-class
       ( λ x →
         ( pair
           ( is-transitive-Relation-Prop x)
           ( is-prop-is-transitive-Relation-Prop x)))
 
-  serial-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  serial-kripke-class =
+  serial-kripke-models : model-class l1 l2 i l4 (l1 ⊔ l2)
+  serial-kripke-models =
     relation-property-class
       ( λ x →
         ( is-serial-Relation-Prop x , is-prop-is-serial-Relation-Prop x))
 
-  euclidean-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  euclidean-kripke-class =
+  euclidean-kripke-models : model-class l1 l2 i l4 (l1 ⊔ l2)
+  euclidean-kripke-models =
     relation-property-class
       ( λ x →
         ( is-euclidean-Relation-Prop x , is-prop-is-euclidean-Relation-Prop x))
 
-  equivalence-kripke-class : model-class l1 l2 i l4 (l1 ⊔ l2)
-  equivalence-kripke-class =
+  equivalence-kripke-models : model-class l1 l2 i l4 (l1 ⊔ l2)
+  equivalence-kripke-models =
     relation-property-class is-equivalence-relation-Prop
 
 module _
   {l1 l2 l3 l4 : Level} {i : Set l3}
   where
 
-  infix 6 _⊨_
-  infix 6 _⊨M_
-  infix 6 _⊨C_
+  infix 7 _⊨ₘ_
+  infix 7 _⊨Mₘ_
+  infix 7 _⊨Cₘ_
 
-  _⊨_ :
+  _⊨ₘ_ :
     Σ (kripke-model l1 l2 i l4) (type-kripke-model i) →
     modal-formula i →
     Prop (l1 ⊔ l2 ⊔ l4)
-  (M , x) ⊨ varₘ n = raise-Prop (l1 ⊔ l2) (valuate-kripke-model i M n x)
-  (M , x) ⊨ ⊥ₘ = raise-empty-Prop (l1 ⊔ l2 ⊔ l4)
-  (M , x) ⊨ a →ₘ b = (M , x) ⊨ a ⇒ (M , x) ⊨ b
-  (M , x) ⊨ □ₘ a =
+  (M , x) ⊨ₘ varₘ n = raise-Prop (l1 ⊔ l2) (valuate-kripke-model i M n x)
+  (M , x) ⊨ₘ ⊥ₘ = raise-empty-Prop (l1 ⊔ l2 ⊔ l4)
+  (M , x) ⊨ₘ a →ₘ b = (M , x) ⊨ₘ a ⇒ (M , x) ⊨ₘ b
+  (M , x) ⊨ₘ □ₘ a =
     Π-Prop
       ( type-kripke-model i M)
-      ( λ y → function-Prop (relation-kripke-model i M x y) ((M , y) ⊨ a))
+      ( λ y → function-Prop (relation-kripke-model i M x y) ((M , y) ⊨ₘ a))
 
-  _⊨M_ : kripke-model l1 l2 i l4 → modal-formula i → Prop (l1 ⊔ l2 ⊔ l4)
-  M ⊨M a = Π-Prop (type-kripke-model i M) (λ x → (M , x) ⊨ a)
+  _⊨Mₘ_ : kripke-model l1 l2 i l4 → modal-formula i → Prop (l1 ⊔ l2 ⊔ l4)
+  M ⊨Mₘ a = Π-Prop (type-kripke-model i M) (λ x → (M , x) ⊨ₘ a)
 
-  _⊨C_ :
+  _⊨Cₘ_ :
     {l5 : Level} →
     model-class l1 l2 i l4 l5 →
     modal-formula i →
     Prop (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5)
-  C ⊨C a =
+  C ⊨Cₘ a =
     Π-Prop
       ( kripke-model l1 l2 i l4)
-      ( λ M → function-Prop (is-in-subtype C M) (M ⊨M a))
+      ( λ M → function-Prop (is-in-subtype C M) (M ⊨Mₘ a))
 
   class-modal-logic :
     {l5 : Level} →
     model-class l1 l2 i l4 l5 →
     modal-theory (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l4 ⊔ l5) i
-  class-modal-logic = _⊨C_
+  class-modal-logic = _⊨Cₘ_
 
   -- TODO: rename
   class-modal-logic-monotic :
@@ -275,18 +243,20 @@ module _
   (l4 : Level)
   where
 
-  decidable-models : model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  decidable-models M =
+  decidable-kripke-models : model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  decidable-kripke-models M =
     Π-Prop
       ( modal-formula i)
       ( λ a →
         ( Π-Prop
           ( type-kripke-model i M)
-          ( λ x → is-decidable-Prop ((M , x) ⊨ a))))
+          ( λ x → is-decidable-Prop ((M , x) ⊨ₘ a))))
 
-  -- TODO: maybe dicidable-finite?
-  finite-models : model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  finite-models M =
+  finite-kripke-models : model-class l1 l2 i l4 l1
+  finite-kripke-models = is-finite-Prop ∘ type-kripke-model i
+
+  finite-decidable-kripke-models : model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  finite-decidable-kripke-models M =
     product-Prop
       ( is-finite-Prop (type-kripke-model i M))
       ( product-Prop
@@ -307,13 +277,15 @@ module _
   {l1 l2 l3 l4 : Level} (i : Set l3)
   where
 
-  finite-models-subclass-decidable-models :
-    finite-models l1 l2 i l4 ⊆ decidable-models l1 l2 i l4
-  finite-models-subclass-decidable-models M (w-is-fin , dec-r , dec-v) = lemma
+  finite-decidable-subclass-decidable-models :
+    finite-decidable-kripke-models l1 l2 i l4 ⊆
+      decidable-kripke-models l1 l2 i l4
+  finite-decidable-subclass-decidable-models M (w-is-fin , dec-r , dec-v) =
+    lemma
     where
     lemma :
       (a : modal-formula i) (x : type-kripke-model i M) →
-      is-decidable (type-Prop ((M , x) ⊨ a))
+      is-decidable (type-Prop ((M , x) ⊨ₘ a))
     lemma (varₘ n) x =
       is-decidable-raise (l1 ⊔ l2) _ (dec-v x n)
     lemma ⊥ₘ x =
@@ -325,25 +297,25 @@ module _
         ( w-is-fin)
         ( λ y → is-decidable-function-type (dec-r x y) (lemma a y))
 
-  is-finite-model-valuate-decidable-models :
+  is-finite-model-valuate-decidable-kripke-models :
     (M : kripke-model l1 l2 i l4) →
-    is-in-subtype (finite-models l1 l2 i l4) M →
+    is-in-subtype (finite-decidable-kripke-models l1 l2 i l4) M →
     (a : modal-formula i) →
-    is-decidable (type-Prop (M ⊨M a))
-  is-finite-model-valuate-decidable-models M sub-fin a =
+    is-decidable (type-Prop (M ⊨Mₘ a))
+  is-finite-model-valuate-decidable-kripke-models M sub-fin a =
     is-decidable-Π-is-finite
       ( pr1 (sub-fin))
-      ( finite-models-subclass-decidable-models M sub-fin a)
+      ( finite-decidable-subclass-decidable-models M sub-fin a)
 
   decidable-subclass :
     {l5 : Level} →
     model-class l1 l2 i l4 l5 →
     model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  decidable-subclass C = (decidable-models l1 l2 i l4) ∩ C
+  decidable-subclass C = (decidable-kripke-models l1 l2 i l4) ∩ C
 
   finite-subclass :
     {l5 : Level} →
     model-class l1 l2 i l4 l5 →
     model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-  finite-subclass C = (finite-models l1 l2 i l4) ∩ C
+  finite-subclass C = (finite-decidable-kripke-models l1 l2 i l4) ∩ C
 ```

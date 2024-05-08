@@ -55,7 +55,7 @@ module _
     soundness axioms C →
     {a : modal-formula i} →
     axioms ⊢ₘ a →
-    type-Prop (C ⊨C a)
+    type-Prop (C ⊨Cₘ a)
   soundness-axioms H (modal-ax x) = H _ x
   soundness-axioms H (modal-mp dab da) M in-class x =
     soundness-axioms H dab M in-class x (soundness-axioms H da M in-class x)
@@ -65,7 +65,7 @@ module _
   soundness-modal-logic :
     soundness axioms C → soundness (modal-logic-closure axioms) C
   soundness-modal-logic H a =
-    map-universal-property-trunc-Prop (C ⊨C a) (soundness-axioms H)
+    map-universal-property-trunc-Prop (C ⊨Cₘ a) (soundness-axioms H)
 
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
@@ -93,7 +93,7 @@ module _
     is-in-subtype (C₁ ∩ C₂) M →
     (a : modal-formula i) →
     is-in-subtype theory₁ a + is-in-subtype theory₂ a →
-    type-Prop (M ⊨M a)
+    type-Prop (M ⊨Mₘ a)
   forces-in-intersection M in-class a (inl d) =
     sound₁ a d M (subtype-intersection-left C₁ C₂ M in-class)
   forces-in-intersection M in-class a (inr d) =
@@ -103,7 +103,7 @@ module _
   soundness-union a is-theory M in-class =
     apply-universal-property-trunc-Prop
       ( is-theory)
-      ( M ⊨M a)
+      ( M ⊨Mₘ a)
       ( forces-in-intersection M in-class a)
 
   soundness-modal-logic-union :

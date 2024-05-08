@@ -36,7 +36,7 @@ module _
   {l : Level}
   where
 
-  infixr 7 _→ₘ_
+  infixr 8 _→ₘ_
   infixr 25 □ₘ_
 
   data modal-formula (i : Set l) : UU l where

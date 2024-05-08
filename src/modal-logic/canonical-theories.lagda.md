@@ -87,7 +87,7 @@ module _
   is-canonical-ax-m :
     ax-m i ⊆ logic →
     is-in-subtype
-      ( reflexive-kripke-class (lsuc l1) l1 i l1)
+      ( reflexive-kripke-models (lsuc l1) l1 i l1)
       ( canonical-kripke-model
         ( logic)
         ( is-logic)
@@ -107,7 +107,7 @@ module _
     LEM l1 →
     ax-b i ⊆ logic →
     is-in-subtype
-      ( symmetry-kripke-class (lsuc l1) l1 i l1)
+      ( symmetry-kripke-models (lsuc l1) l1 i l1)
       ( canonical-kripke-model
         ( logic)
         ( is-logic)
@@ -140,7 +140,7 @@ module _
   is-canonical-ax-4 :
     ax-4 i ⊆ logic →
     is-in-subtype
-      ( transitivity-kripke-class (lsuc l1) l1 i l1)
+      ( transitive-kripke-models (lsuc l1) l1 i l1)
       ( canonical-kripke-model
         ( logic)
         ( is-logic)

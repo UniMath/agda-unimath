@@ -137,68 +137,70 @@ module _
   where
 
   soundness-S5-additional-axioms :
-    soundness (ax-m i ∪ (ax-b i ∪ ax-4 i)) (equivalence-kripke-class l2 l3 i l4)
+    soundness
+      ( ax-m i ∪ ax-b i ∪ ax-4 i)
+      (equivalence-kripke-models l2 l3 i l4)
   soundness-S5-additional-axioms =
     soundness-union
       ( ax-m i)
       ( ax-b i ∪ ax-4 i)
-      ( reflexive-kripke-class l2 l3 i l4)
-      ( symmetry-kripke-class l2 l3 i l4 ∩ transitivity-kripke-class l2 l3 i l4)
+      ( reflexive-kripke-models l2 l3 i l4)
+      ( symmetry-kripke-models l2 l3 i l4 ∩ transitive-kripke-models l2 l3 i l4)
       ( ax-m-soundness i l3 l4)
       ( soundness-union
         ( ax-b i)
         ( ax-4 i)
-        ( symmetry-kripke-class l2 l3 i l4)
-        ( transitivity-kripke-class l2 l3 i l4)
+        ( symmetry-kripke-models l2 l3 i l4)
+        ( transitive-kripke-models l2 l3 i l4)
         ( ax-b-soundness i l3 l4)
         ( ax-4-soundness i l3 l4))
 
   soundness-S5-axioms :
     soundness
       ( modal-logic-S5-axioms i)
-      ( decidable-subclass i (equivalence-kripke-class l2 l3 i l4))
+      ( decidable-subclass i (equivalence-kripke-models l2 l3 i l4))
   soundness-S5-axioms =
     soundness-union
       ( modal-logic-K-axioms i)
       ( ax-m i ∪ (ax-b i ∪ ax-4 i))
-      ( decidable-models l2 l3 i l4)
-      ( equivalence-kripke-class l2 l3 i l4)
+      ( decidable-kripke-models l2 l3 i l4)
+      ( equivalence-kripke-models l2 l3 i l4)
       ( soundness-K-axioms i)
       ( soundness-S5-additional-axioms)
 
   soundness-S5 :
     soundness
       ( modal-logic-S5 i)
-      ( decidable-subclass i (equivalence-kripke-class l2 l3 i l4))
+      ( decidable-subclass i (equivalence-kripke-models l2 l3 i l4))
   soundness-S5 =
     soundness-modal-logic
-      ( decidable-subclass i (equivalence-kripke-class l2 l3 i l4))
+      ( decidable-subclass i (equivalence-kripke-models l2 l3 i l4))
       ( soundness-S5-axioms)
 
   soundness-S5-finite :
     soundness
       ( modal-logic-S5 i)
-      ( finite-subclass i (equivalence-kripke-class l2 l3 i l4))
+      ( finite-subclass i (equivalence-kripke-models l2 l3 i l4))
   soundness-S5-finite =
     soundness-subclass
       ( modal-logic-S5 i)
-      ( decidable-subclass i (equivalence-kripke-class l2 l3 i l4))
-      ( finite-subclass i (equivalence-kripke-class l2 l3 i l4))
+      ( decidable-subclass i (equivalence-kripke-models l2 l3 i l4))
+      ( finite-subclass i (equivalence-kripke-models l2 l3 i l4))
       ( subtype-both-intersection
-        ( decidable-models l2 l3 i l4)
-        ( equivalence-kripke-class l2 l3 i l4)
-        ( finite-subclass i (equivalence-kripke-class l2 l3 i l4))
+        ( decidable-kripke-models l2 l3 i l4)
+        ( equivalence-kripke-models l2 l3 i l4)
+        ( finite-subclass i (equivalence-kripke-models l2 l3 i l4))
         ( transitive-leq-subtype
-          ( finite-subclass i (equivalence-kripke-class l2 l3 i l4))
-          ( finite-models l2 l3 i l4)
-          ( decidable-models l2 l3 i l4)
-          ( finite-models-subclass-decidable-models i)
+          ( finite-subclass i (equivalence-kripke-models l2 l3 i l4))
+          ( finite-decidable-kripke-models l2 l3 i l4)
+          ( decidable-kripke-models l2 l3 i l4)
+          ( finite-decidable-subclass-decidable-models i)
           ( subtype-intersection-left
-            ( finite-models l2 l3 i l4)
-            ( equivalence-kripke-class l2 l3 i l4)))
+            ( finite-decidable-kripke-models l2 l3 i l4)
+            ( equivalence-kripke-models l2 l3 i l4)))
         ( subtype-intersection-right
-          ( finite-models l2 l3 i l4)
-          ( equivalence-kripke-class l2 l3 i l4)))
+          ( finite-decidable-kripke-models l2 l3 i l4)
+          ( equivalence-kripke-models l2 l3 i l4)))
       ( soundness-S5)
 
 module _
@@ -212,8 +214,9 @@ module _
         ( i)
         ( ⊥ₘ)
         ( bot-in-logic)
-        ( pair
-          ( pair (unit , unit-trunc-Prop star) (λ _ _ → unit-Prop))
+        ( triple
+          ( unit , unit-trunc-Prop star)
+          ( λ _ _ → unit-Prop)
           ( λ _ _ → unit-Prop))
         ( pair
           ( triple

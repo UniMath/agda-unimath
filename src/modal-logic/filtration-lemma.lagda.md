@@ -63,12 +63,12 @@ module _
     is-in-subtype theory a →
     (x : type-kripke-model i M) →
     type-iff-Prop
-      ( (M , x) ⊨ a)
+      ( (M , x) ⊨ₘ a)
       ( pair
         ( M*)
         ( map-equiv-is-kripke-model-filtration i theory M M* is-filtration
           ( class (Φ-equivalence i theory M) x))
-        ⊨ a)
+        ⊨ₘ a)
   pr1 (filtration-lemma is-filtration (varₘ n) in-theory x)
     f =
       map-raise
@@ -104,7 +104,7 @@ module _
           ( map-inv-equiv-is-kripke-model-filtration i theory M M*
             ( is-filtration)
             ( y*)))
-        ( (M* , y*) ⊨ a)
+        ( (M* , y*) ⊨ₘ a)
         ( λ (y , y-in-class) →
           ( let y*-id-class
                   = concat
@@ -125,7 +125,7 @@ module _
                             ( is-filtration)))
                         ( y*))
             in tr
-                ( λ z* → type-Prop ((M* , z*) ⊨ a))
+                ( λ z* → type-Prop ((M* , z*) ⊨ₘ a))
                 ( y*-id-class)
                 ( forward-implication
                   ( filtration-lemma is-filtration a

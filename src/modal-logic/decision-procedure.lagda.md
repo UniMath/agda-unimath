@@ -84,19 +84,21 @@ module _
   (i : Set l3)
   (theory : modal-theory l2 i)
   (C : model-class l1 l2 i l4 l5)
-  (C-sub-fin : C ⊆ finite-models l1 l2 i l4)
+  (C-sub-fin : C ⊆ finite-decidable-kripke-models l1 l2 i l4)
   (C-is-fin : is-finite (type-subtype C))
   where
 
   decision-procedure' :
     (a : modal-formula i) →
     is-decidable
-      ( (M : type-subtype C) → type-Prop (inclusion-subtype C M ⊨M a))
+      ( (M : type-subtype C) → type-Prop (inclusion-subtype C M ⊨Mₘ a))
   decision-procedure' a =
     is-decidable-Π-is-finite
       ( C-is-fin)
       ( λ (M , M-in-C) →
-        ( is-finite-model-valuate-decidable-models i M (C-sub-fin M M-in-C) a))
+        ( is-finite-model-valuate-decidable-kripke-models i M
+          ( C-sub-fin M M-in-C)
+          ( a)))
 
   decision-procedure : (a : modal-formula i) → bool
   decision-procedure a with decision-procedure' a
@@ -443,11 +445,12 @@ module _
   (lem : LEM (l2 ⊔ lsuc l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8))
   where
 
-  filtration-models-subset-finite-models :
-    filtration-models l1 l2 i l4 l5 l6 l7 l8 ⊆ finite-models l1 l2 i l4
-  filtration-models-subset-finite-models M* =
+  filtration-models-subset-finite-decidable-kripke-models :
+    filtration-models l1 l2 i l4 l5 l6 l7 l8 ⊆
+      finite-decidable-kripke-models l1 l2 i l4
+  filtration-models-subset-finite-decidable-kripke-models M* =
     map-universal-property-trunc-Prop
-      ( finite-models l1 l2 i l4 M*)
+      ( finite-decidable-kripke-models l1 l2 i l4 M*)
       ( λ ((theory , M) , is-fin , is-filt) →
         ( triple
           ( is-finite-equiv
@@ -533,7 +536,7 @@ module _
   filtrate-soundness logic C₂ H sound a in-logic M* in-class =
     apply-universal-property-trunc-Prop
       ( in-class)
-      ( M* ⊨M a)
+      ( M* ⊨Mₘ a)
       ( λ ((b , (M , in-C)) , p) →
         ( sound a in-logic M*
           ( tr (is-in-subtype C₂) (inv p) (H (M , in-C) b))))
