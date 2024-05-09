@@ -603,9 +603,7 @@ module _
       P : Poset (l1 ⊔ l2 ⊔ lsuc l3) (l1 ⊔ l3)
       P = L-consistent-theories-Poset logic l3
 
-    resized-chain-union-modal-theory :
-      chain-Poset l4 P →
-      modal-theory l3 i
+    resized-chain-union-modal-theory : chain-Poset l4 P → modal-theory l3 i
     resized-chain-union-modal-theory C =
       resize prop-resize ∘ chain-union-modal-theory C
 

@@ -80,8 +80,9 @@ module _
             ( M*)
             ( is-filtration)
             ( n)
+            ( in-theory)
             ( x))
-        ( in-theory , map-inv-raise f))
+        ( map-inv-raise f))
   pr1 (filtration-lemma is-filtration ⊥ₘ in-theory x) =
     map-raise ∘ map-inv-raise
   pr1 (filtration-lemma is-filtration (a →ₘ b) in-theory x)
@@ -152,13 +153,13 @@ module _
   pr2 (filtration-lemma is-filtration (varₘ n) in-theory x)
     f =
       map-raise
-        ( pr2
-          ( backward-implication
-            ( is-filtration-valuate-is-kripke-model-filtration i theory M M*
-              ( is-filtration)
-              ( n)
-              ( x))
-            ( map-inv-raise f)))
+        ( backward-implication
+          ( is-filtration-valuate-is-kripke-model-filtration i theory M M*
+            ( is-filtration)
+            ( n)
+            ( in-theory)
+            ( x))
+          ( map-inv-raise f))
   pr2 (filtration-lemma is-filtration ⊥ₘ in-theory x) =
     map-raise ∘ map-inv-raise
   pr2 (filtration-lemma is-filtration (a →ₘ b) in-theory x)

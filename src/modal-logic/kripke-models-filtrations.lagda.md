@@ -292,11 +292,12 @@ module _
     is-filtration-valuate-Prop e =
       Π-Prop (type-Set i)
         ( λ n →
-          ( Π-Prop (type-kripke-model i M)
-            ( λ x → iff-Prop
-              ( product-Prop (theory (varₘ n)) (valuate-kripke-model i M n x))
-              ( valuate-kripke-model i M* n
-                ( map-equiv e (class Φ-equivalence x))))))
+          ( theory (varₘ n) ⇒
+            ( Π-Prop (type-kripke-model i M)
+              ( λ x → iff-Prop
+                ( valuate-kripke-model i M n x)
+                ( valuate-kripke-model i M* n
+                  ( map-equiv e (class Φ-equivalence x)))))))
 
     is-filtration-valuate :
       equivalence-class Φ-equivalence ≃ type-kripke-model i M* →
@@ -555,16 +556,17 @@ module _
     is-kripke-model-filtration-minimal-kripke-model-filtration =
       pair id-equiv
         ( triple
-          ( λ n x →
+          ( λ n in-theory x →
             ( pair
-              ( λ (in-theory , val-n) →
-                ( pair in-theory
+              ( λ val-n →
+                ( pair
+                  ( in-theory)
                   ( λ y eq-xy →
                     ( map-inv-raise
                       ( forward-implication
                         ( eq-xy (varₘ n) in-theory)
-                        ( map-raise val-n)))))))
-            ( λ (in-theory , val-n) → in-theory , val-n x (λ _ _ → id , id)))
+                        ( map-raise val-n))))))
+              ( λ (in-theory , val-n) → val-n x (λ _ _ → id , id))))
           ( proof-lower-bound)
           ( proof-upper-bound))
 
@@ -627,16 +629,17 @@ module _
       M-is-trans =
         pair id-equiv
           ( triple
-            ( λ n x →
+            ( λ n in-theory x →
               ( pair
-                ( λ (in-theory , val-n) →
-                  ( pair in-theory
+                ( λ val-n →
+                  ( pair
+                    ( in-theory)
                     ( λ y eq-xy →
                       ( map-inv-raise
                         ( forward-implication
                           ( eq-xy (varₘ n) in-theory)
-                          ( map-raise val-n)))))))
-              ( λ (in-theory , val-n) → in-theory , val-n x (λ _ _ → id , id)))
+                          ( map-raise val-n))))))
+                ( λ (in-theory , val-n) → val-n x (λ _ _ → id , id))))
             ( λ x y r → unit-trunc-Prop (base* (proof-lower-bound x y r)))
             ( filtration-relation-upper-bound-Prop-minimal-transitive-kripke-model-filtration
               ( M-is-trans)))
