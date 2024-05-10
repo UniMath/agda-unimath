@@ -117,7 +117,7 @@ you need to change the template in ./scripts/generate_main_index_file.py
   - [Guidelines for mixfix operators](MIXFIX-OPERATORS.md)
   - [Citing sources](CITING-SOURCES.md)
   - [Citing the library](CITE-THIS-LIBRARY.md)
-- [Library contents](SUMMARY.md)
+- [Library contents](VISUALIZATION.md)
 - [Art](ART.md)
 {literature_index}
 
