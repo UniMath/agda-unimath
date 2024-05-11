@@ -127,13 +127,14 @@ module _
       ( λ b →
         ( map-universal-property-trunc-Prop
           ( modal-theory-L-complete-theory logic y b)
-          ( λ { (c , c-in-x , refl) →
-            ( xRy (◇ₘ c)
-              ( weak-modal-logic-mp
-                ( is-weak-modal-logic-L-complete-theory logic lzero x)
-                ( subset-logic-L-complete-theory logic lzero x (c →ₘ □ₘ ◇ₘ c)
-                  ( ax-b-subset (c →ₘ □ₘ ◇ₘ c) (c , refl)))
-                ( c-in-x)))})))
+          ( λ where
+            (c , c-in-x , refl) →
+              ( xRy (◇ₘ c)
+                ( weak-modal-logic-mp
+                  ( is-weak-modal-logic-L-complete-theory logic lzero x)
+                  ( subset-logic-L-complete-theory logic lzero x (c →ₘ □ₘ ◇ₘ c)
+                    ( ax-b-subset (c →ₘ □ₘ ◇ₘ c) (c , refl)))
+                  ( c-in-x))))))
       ( a)
       ( box-a-in-y)
 

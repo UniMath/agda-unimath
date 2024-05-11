@@ -27,9 +27,16 @@ open import foundation.universe-levels
 
 ## Idea
 
-TODO
+The formula of modal logic is defined inductively as follows:
+
+- A variable is a formula.
+- ⊥ is a formula.
+- If `a` and `b` are formulas, then `a → b` is a formula.
+- If `a` is a formula, then □`a` is a formula.
 
 ## Definition
+
+### Inductive definition of formulas
 
 ```agda
 module _
@@ -44,7 +51,11 @@ module _
     ⊥ₘ : modal-formula i
     _→ₘ_ : modal-formula i → modal-formula i → modal-formula i
     □ₘ_ : modal-formula i → modal-formula i
+```
 
+### Additional notations
+
+```agda
 module _
   {l : Level} {i : Set l}
   where
@@ -72,7 +83,11 @@ module _
 
   ◇ₘ_ : modal-formula i → modal-formula i
   ◇ₘ a = ¬ₘ □ₘ ¬ₘ a
+```
 
+### If formulas are equal, then their subformulas are equal
+
+```agda
   eq-implication-left : {a b c d : modal-formula i} → a →ₘ b ＝ c →ₘ d → a ＝ c
   eq-implication-left refl = refl
 
@@ -88,11 +103,11 @@ module _
 
 ## Properties
 
-### The formulas are a set
+### Characterizing the identity type of lists
 
 ```agda
 module _
-  {l : Level} (i : Set l)
+  {l : Level} {i : Set l}
   where
 
   Eq-formula : modal-formula i → modal-formula i → UU l
@@ -167,12 +182,16 @@ module _
       ( is-prop-Eq-formula)
       ( refl-Eq-formula)
       ( λ _ _ → eq-Eq-formula)
+```
 
-  formula-Set : Set l
-  pr1 formula-Set = modal-formula i
-  pr2 formula-Set = is-set-formula
+### A formula is a set
+
+```agda
+formula-Set : {l : Level} (i : Set l) → Set l
+pr1 (formula-Set i) = modal-formula i
+pr2 (formula-Set i) = is-set-formula
 
 Id-formula-Prop :
   {l : Level} {i : Set l} → modal-formula i → modal-formula i → Prop l
-Id-formula-Prop = Id-Prop (formula-Set _)
+Id-formula-Prop {i = i} = Id-Prop (formula-Set i)
 ```

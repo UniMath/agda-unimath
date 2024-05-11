@@ -80,11 +80,11 @@ TODO
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level}
-  (i : Set l3)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (i : Set l1)
   (theory : modal-theory l2 i)
-  (C : model-class l1 l2 i l4 l5)
-  (C-sub-fin : C ⊆ finite-decidable-kripke-models l1 l2 i l4)
+  (C : model-class l3 l4 i l5 l6)
+  (C-sub-fin : C ⊆ finite-decidable-kripke-models l3 l4 i l5)
   (C-is-fin : is-finite (type-subtype C))
   where
 

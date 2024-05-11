@@ -88,8 +88,9 @@ module _
   subset-list-subtype-cons {a} {l} S a-in-S l-sub-S x =
     map-universal-property-trunc-Prop
       ( S x)
-      ( λ { (is-head .x .l) → a-in-S
-          ; (is-in-tail .x .a .l t) → l-sub-S x (in-list-subtype-in-list t)})
+      ( λ where
+        (is-head .x .l) → a-in-S
+        (is-in-tail .x .a .l t) → l-sub-S x (in-list-subtype-in-list t))
 
   subset-list-subtype-reverse-list :
     (l : list A) → list-subtype l ⊆ list-subtype (reverse-list l)

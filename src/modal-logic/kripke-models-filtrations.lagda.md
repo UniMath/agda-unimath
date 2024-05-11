@@ -252,7 +252,7 @@ module _
                               ＝ map-function-equivalence-class x-class
                                 by
                                   inv
-                                    ( compute-rec-equivalence-class
+                                    ( compute-rec-equivalence-class'
                                       ( Φ-equivalence)
                                       ( map-function-equivalence-class-Set)
                                       ( map-function-worlds)
@@ -264,7 +264,7 @@ module _
                                 by p
                               ＝ map-function-worlds y
                                 by
-                                  compute-rec-equivalence-class
+                                  compute-rec-equivalence-class'
                                     ( Φ-equivalence)
                                     ( map-function-equivalence-class-Set)
                                     ( map-function-worlds)
