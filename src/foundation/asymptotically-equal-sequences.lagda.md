@@ -24,7 +24,7 @@ open import foundation-core.function-types
 
 ## Idea
 
-Two squences `u` and `v` are **asymptotically equal** if `u n ＝ v n` for any
+Two sequences `u` and `v` are **asymptotically equal** if `u n ＝ v n` for any
 sufficiently large natural number `n`.
 
 ## Definition

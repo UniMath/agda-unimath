@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.asymptotically-equal-sequences
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.sequences
@@ -88,6 +89,23 @@ module _
       (refl-leq-ℕ (modulus-∞-constant-sequence u H)))
 ```
 
+### A sequence is asymptotically constant if it is asymptotically equal to some constant sequence
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  is-∞-constant-eq-∞-constant-sequence :
+    (Σ A (λ x → eq-∞-sequence (λ n → x) u)) → is-∞-constant-sequence u
+  is-∞-constant-eq-∞-constant-sequence (x , H) =
+    map-Σ
+      ( is-modulus-∞-constant-sequence u)
+      ( id)
+      ( λ N K p q I J → (inv (K p I)) ∙ (K q J))
+      ( H)
+```
+
 ### A subsequence of an asymptotically constant sequence is asymptotically constant
 
 ```agda
@@ -131,4 +149,24 @@ module _
 
   is-∞-constant-is-∞-constant-subsequence : is-∞-constant-sequence u
   is-∞-constant-is-∞-constant-subsequence = H (refl-subsequence u)
+```
+
+### A sequence asymptotically equal to an asymptotically constant sequence is asymptotically constant
+
+```agda
+module _
+  {l : Level} {A : UU l} (u v : sequence A) (H : eq-∞-sequence u v)
+  where
+
+  preserves-∞-constant-eq-∞-sequence :
+    is-∞-constant-sequence u → is-∞-constant-sequence v
+  preserves-∞-constant-eq-∞-sequence K =
+    is-∞-constant-eq-∞-constant-sequence v
+      ( ∞-value-∞-constant-sequence u K ,
+       transitive-eq-∞-sequence
+        ( λ n → ∞-value-∞-constant-sequence u K)
+        ( u)
+        ( v)
+        ( H)
+        ( eq-∞-constant-sequence u K))
 ```
