@@ -88,6 +88,7 @@ open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.modular-arithmetic-standard-finite-types public
 open import elementary-number-theory.monoid-of-natural-numbers-with-addition public
 open import elementary-number-theory.monoid-of-natural-numbers-with-maximum public
+open import elementary-number-theory.monotonic-endomaps-natural-numbers public
 open import elementary-number-theory.multiplication-integer-fractions public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public

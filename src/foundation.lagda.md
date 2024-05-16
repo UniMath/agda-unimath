@@ -26,6 +26,8 @@ open import foundation.action-on-identifications-functions public
 open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
+open import foundation.asymptotically-constant-sequences public
+open import foundation.asymptotically-equal-sequences public
 open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.bands public
@@ -369,6 +371,7 @@ open import foundation.strongly-extensional-maps public
 open import foundation.structure public
 open import foundation.structure-identity-principle public
 open import foundation.structured-type-duality public
+open import foundation.subsequences public
 open import foundation.subsingleton-induction public
 open import foundation.subterminal-types public
 open import foundation.subtype-duality public
