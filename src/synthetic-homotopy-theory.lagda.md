@@ -48,7 +48,9 @@ open import synthetic-homotopy-theory.descent-circle-dependent-pair-types public
 open import synthetic-homotopy-theory.descent-circle-equivalence-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
+open import synthetic-homotopy-theory.descent-data-coequalizers public
 open import synthetic-homotopy-theory.descent-data-sequential-colimits public
+open import synthetic-homotopy-theory.descent-property-coequalizers public
 open import synthetic-homotopy-theory.descent-property-sequential-colimits public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
@@ -56,6 +58,7 @@ open import synthetic-homotopy-theory.equifibered-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows public
 open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams public
+open import synthetic-homotopy-theory.equivalences-descent-data-coequalizers public
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.families-descent-data-sequential-colimits public
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
@@ -83,6 +86,7 @@ open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequenti
 open import synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows public
 open import synthetic-homotopy-theory.morphisms-dependent-sequential-diagrams public
 open import synthetic-homotopy-theory.morphisms-descent-data-circle public
+open import synthetic-homotopy-theory.morphisms-descent-data-coequalizers public
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.null-cocones-under-pointed-span-diagrams public
