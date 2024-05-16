@@ -10,7 +10,6 @@ module elementary-number-theory.monotonic-endomaps-natural-numbers where
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.empty-types
