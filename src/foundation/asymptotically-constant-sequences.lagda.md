@@ -163,10 +163,10 @@ module _
   preserves-∞-constant-eq-∞-sequence K =
     is-∞-constant-eq-∞-constant-sequence v
       ( ∞-value-∞-constant-sequence u K ,
-       transitive-eq-∞-sequence
-        ( λ n → ∞-value-∞-constant-sequence u K)
-        ( u)
-        ( v)
-        ( H)
-        ( eq-∞-constant-sequence u K))
+        transitive-eq-∞-sequence
+          ( λ n → ∞-value-∞-constant-sequence u K)
+          ( u)
+          ( v)
+          ( H)
+          ( eq-∞-constant-sequence u K))
 ```
