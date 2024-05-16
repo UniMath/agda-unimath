@@ -214,6 +214,7 @@ equiv-empty-or-unit-is-decidable-prop {l} {A} H@(_ , is-d) with is-d
 ... | inl contra = inl (equiv-unit-is-decidable-prop H contra)
 ... | inr a = inr (equiv-empty-is-decidable-prop H a)
 
+-- TODO: move to foundation
 is-small-prop-is-decidable-prop :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-decidable-prop A → is-small l2 A
 is-small-prop-is-decidable-prop l2 A H

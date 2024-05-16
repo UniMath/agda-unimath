@@ -458,7 +458,6 @@ module _
     where
 
     private
-
       b : equivalence-class R → UU (l1 ⊔ l2 ⊔ l3)
       b c =
         Σ ( type-Set (B c))

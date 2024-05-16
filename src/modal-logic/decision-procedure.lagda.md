@@ -80,9 +80,8 @@ TODO
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
+  {l1 l3 l4 l5 l6 : Level}
   (i : Set l1)
-  (theory : modal-theory l2 i)
   (C : model-class l3 l4 i l5 l6)
   (C-sub-fin : C ⊆ finite-decidable-kripke-models l3 l4 i l5)
   (C-is-fin : is-finite (type-subtype C))
@@ -106,16 +105,17 @@ module _
   ... | inr _ = false
 
   decision-procedure-correctness :
+    {l2 : Level} (theory : modal-theory l2 i) →
     soundness theory C →
     completeness theory C →
     (a : modal-formula i) →
     is-in-subtype theory a ↔ type-prop-bool (decision-procedure a)
-  pr1 (decision-procedure-correctness sound complete a) in-theory
+  pr1 (decision-procedure-correctness theory sound complete a) in-theory
     with decision-procedure' a
   ... | inl _ = star
   ... | inr not-valid-in-C =
       not-valid-in-C (λ (M , M-in-C) x → sound a in-theory M M-in-C x)
-  pr2 (decision-procedure-correctness sound complete a) _
+  pr2 (decision-procedure-correctness theory sound complete a) _
     with decision-procedure' a
   ... | inl valid-in-C = complete a (λ M M-in-C → valid-in-C (M , M-in-C))
 
@@ -172,7 +172,7 @@ in-dependent-map-list {A = A} {B} f (is-in-tail _ x l a-in-l) =
   is-in-tail _ _ _ (in-dependent-map-list _ a-in-l)
 
 module _
-  {l : Level} (i : Set l)
+  {l : Level} {i : Set l}
   where
 
   subformulas-list : modal-formula i → list (modal-formula i)
@@ -445,30 +445,19 @@ module _
   (lem : LEM (l2 ⊔ lsuc l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8))
   where
 
-  filtration-models-subset-finite-decidable-kripke-models :
+  filtration-models-subset-finite-kripke-models :
     filtration-models l1 l2 i l4 l5 l6 l7 l8 ⊆
-      finite-decidable-kripke-models l1 l2 i l4
-  filtration-models-subset-finite-decidable-kripke-models M* =
+      finite-kripke-models l1 l2 i l4
+  filtration-models-subset-finite-kripke-models M* =
     map-universal-property-trunc-Prop
-      ( finite-decidable-kripke-models l1 l2 i l4 M*)
+      ( finite-kripke-models l1 l2 i l4 M*)
       ( λ ((theory , M) , is-fin , is-filt) →
-        ( triple
-          ( is-finite-equiv
-            ( equiv-is-kripke-model-filtration i theory M M* is-filt)
-            ( is-finite-equivalence-classes-filtration i M
-              ( lower-LEM (l2 ⊔ l4) lem)
-              ( theory)
-              ( is-fin)))
-          ( λ x y →
-            ( lower-LEM
-              ( lsuc l3 ⊔ l4 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8)
-              ( lem)
-              ( relation-Prop-kripke-model i M* x y)))
-          ( λ x n →
-            ( lower-LEM
-              ( l2 ⊔ lsuc l3 ⊔ lsuc l5 ⊔ lsuc l6 ⊔ lsuc l7 ⊔ lsuc l8)
-              ( lem)
-              ( valuate-kripke-model i M* n x)))))
+        ( is-finite-equiv
+          ( equiv-is-kripke-model-filtration i theory M M* is-filt)
+          ( is-finite-equivalence-classes-filtration i M
+            ( lower-LEM (l2 ⊔ l4) lem)
+            ( theory)
+            ( is-fin))))
 
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level} (i : Set l3)
@@ -482,7 +471,7 @@ module _
     model-class l6 l7 i l8 ( l3 ⊔ l5 ⊔ lsuc (l1 ⊔ l2 ⊔ l4 ⊔ l6 ⊔ l7 ⊔ l8))
   filtrate-class M* =
     exists-structure-Prop (modal-formula i × type-subtype C)
-      ( λ (a , (M , _)) → M* ＝ filtration (subformulas i a) M)
+      ( λ (a , M , _) → M* ＝ filtration (subformulas a) M)
 
   module _
     (filtration-is-filtration :
@@ -491,6 +480,29 @@ module _
       is-modal-theory-closed-under-subformulas i theory →
       is-kripke-model-filtration i theory M (filtration theory M))
     where
+
+    is-finite-filtrate-class :
+      LEM (lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4)) →
+      filtrate-class ⊆ finite-kripke-models l6 l7 i l8
+    is-finite-filtrate-class lem M* =
+      elim-exists
+        ( finite-kripke-models l6 l7 i l8 M*)
+        ( λ where
+          (a , M , M-in-C) refl →
+            ( is-finite-equiv
+              ( equiv-is-kripke-model-filtration i
+                ( subformulas a)
+                ( M)
+                ( M*)
+                ( filtration-is-filtration
+                  ( M , M-in-C)
+                  ( subformulas a)
+                  ( is-modal-theory-closed-under-subformulas-subformulas a)))
+              ( is-finite-equivalence-classes-filtration i M lem
+                ( subformulas a)
+                ( is-finite-subformulas-list
+                  ( lower-LEM (lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4)) lem)
+                ( a)))))
 
     filtrate-completeness :
       {l9 : Level} (logic : modal-theory l9 i) →
@@ -501,43 +513,40 @@ module _
         ( λ M M-in-class x →
           ( backward-implication
             ( filtration-lemma i
-              ( subformulas i a)
-              ( is-modal-theory-closed-under-subformulas-subformulas i a)
+              ( subformulas a)
+              ( is-modal-theory-closed-under-subformulas-subformulas a)
               ( M)
-              ( filtration (subformulas i a) M)
+              ( filtration (subformulas a) M)
               ( filtration-is-filtration
                 ( M , M-in-class)
-                ( subformulas i a)
-                ( is-modal-theory-closed-under-subformulas-subformulas i a))
+                ( subformulas a)
+                ( is-modal-theory-closed-under-subformulas-subformulas a))
               ( a)
               ( head-in-list-subtype)
               ( x))
             ( in-logic
-              ( filtration (subformulas i a) M)
+              ( filtration (subformulas a) M)
               ( intro-exists (a , M , M-in-class) refl)
               ( map-equiv-is-kripke-model-filtration i
-                ( subformulas i a)
+                ( subformulas a)
                 ( M)
-                ( filtration (subformulas i a) M)
+                ( filtration (subformulas a) M)
                 ( filtration-is-filtration
                   ( M , M-in-class)
-                  ( subformulas i a)
-                  ( is-modal-theory-closed-under-subformulas-subformulas i a))
-                ( class (Φ-equivalence i (subformulas i a) M) x)))))
+                  ( subformulas a)
+                  ( is-modal-theory-closed-under-subformulas-subformulas a))
+                ( class (Φ-equivalence i (subformulas a) M) x)))))
 
   filtrate-soundness :
     {l9 l10 : Level} (logic : modal-theory l9 i) →
     (C₂ : model-class l6 l7 i l8 l10) →
-    ( ((M , _) : type-subtype C) →
-      (a : modal-formula i) →
-      is-in-subtype C₂ (filtration (list-subtype (subformulas-list i a)) M)) →
+    filtrate-class ⊆ C₂ →
     soundness logic C₂ →
     soundness logic filtrate-class
-  filtrate-soundness logic C₂ H sound a in-logic M* in-class =
-    apply-universal-property-trunc-Prop
-      ( in-class)
-      ( M* ⊨Mₘ a)
-      ( λ ((b , (M , in-C)) , p) →
-        ( sound a in-logic M*
-          ( tr (is-in-subtype C₂) (inv p) (H (M , in-C) b))))
+  filtrate-soundness logic C₂ H =
+    transitive-leq-subtype
+      ( logic)
+      ( class-modal-logic C₂)
+      ( class-modal-logic filtrate-class)
+      ( class-modal-logic-monotic filtrate-class C₂ H)
 ```

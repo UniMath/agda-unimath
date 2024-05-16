@@ -103,7 +103,7 @@ module _
 
 ## Properties
 
-### Characterizing the identity type of lists
+### Characterizing the identity type of formulas
 
 ```agda
 module _
@@ -174,7 +174,11 @@ module _
   is-prop-Eq-formula (□ₘ _) ⊥ₘ = is-prop-raise-empty
   is-prop-Eq-formula (□ₘ _) (_ →ₘ _) = is-prop-raise-empty
   is-prop-Eq-formula (□ₘ a) (□ₘ c) = is-prop-Eq-formula a c
+```
 
+### A formula is a set
+
+```agda
   is-set-formula : is-set (modal-formula i)
   is-set-formula =
     is-set-prop-in-id
@@ -182,11 +186,7 @@ module _
       ( is-prop-Eq-formula)
       ( refl-Eq-formula)
       ( λ _ _ → eq-Eq-formula)
-```
 
-### A formula is a set
-
-```agda
 formula-Set : {l : Level} (i : Set l) → Set l
 pr1 (formula-Set i) = modal-formula i
 pr2 (formula-Set i) = is-set-formula

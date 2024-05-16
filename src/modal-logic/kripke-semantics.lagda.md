@@ -21,6 +21,7 @@ open import foundation.function-types
 open import foundation.inhabited-types
 open import foundation.intersections-subtypes
 open import foundation.iterated-dependent-product-types
+open import foundation.law-of-excluded-middle
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositions
@@ -318,4 +319,26 @@ module _
     model-class l1 l2 i l4 l5 →
     model-class l1 l2 i l4 (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   finite-subclass C = (finite-decidable-kripke-models l1 l2 i l4) ∩ C
+
+module _
+  {l1 l2 l3 l4 : Level} (i : Set l3)
+  (lem : LEM (l1 ⊔ l2 ⊔ l4))
+  where
+
+  all-models-is-decidable :
+    all-models l1 l2 i l4 ⊆ decidable-kripke-models l1 l2 i l4
+  all-models-is-decidable M _ a x = lem ((M , x) ⊨ₘ a)
+
+  subset-decidable-subclass-lem :
+    {l5 : Level} (C : model-class l1 l2 i l4 l5) →
+    C ⊆ decidable-subclass i C
+  subset-decidable-subclass-lem C =
+    subtype-both-intersection (decidable-kripke-models l1 l2 i l4) C C
+      ( transitive-leq-subtype
+        ( C)
+        ( all-models l1 l2 i l4)
+        ( decidable-kripke-models l1 l2 i l4)
+        ( all-models-is-decidable)
+        ( all-models-is-largest-class i C))
+      ( refl-leq-subtype C)
 ```

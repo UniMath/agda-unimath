@@ -39,12 +39,14 @@ open import foundation-core.invertible-maps
 
 open import modal-logic.completeness
 open import modal-logic.completeness-k
+open import modal-logic.completeness-s5
 open import modal-logic.decision-procedure
 open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-models-filtrations
 open import modal-logic.kripke-semantics
 open import modal-logic.modal-logic-k
+open import modal-logic.modal-logic-s5
 open import modal-logic.soundness
 open import modal-logic.weak-deduction
 
@@ -65,7 +67,6 @@ TODO
 module _
   {l1 : Level} (i : Set l1)
   where
-
   is-finitely-approximable-Prop :
     {l2 : Level} (l3 l4 l5 l6 : Level) →
     modal-theory l2 i →
@@ -74,23 +75,9 @@ module _
     exists-structure-Prop
       ( model-class l3 l4 i l5 l6)
       ( λ C →
-        ( product
-          ( soundness logic (finite-subclass i C))
-          ( completeness logic (finite-subclass i C))))
-
-  is-finitely-approximable-Prop' :
-    {l2 : Level} (l3 l4 l5 l6 : Level) →
-    modal-theory l2 i →
-    Prop (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5 ⊔ lsuc l6)
-  is-finitely-approximable-Prop' l3 l4 l5 l6 logic =
-    exists-structure-Prop
-      ( model-class l3 l4 i l5 l6)
-      ( λ C →
-        ( product
-          ( C ⊆ finite-kripke-models l3 l4 i l5)
-          ( product
-            ( soundness logic (finite-subclass i C))
-            ( completeness logic (finite-subclass i C)))))
+        ( C ⊆ finite-kripke-models l3 l4 i l5) ×
+        ( soundness logic C) ×
+        ( completeness logic C))
 
   is-finitely-approximable :
     {l2 : Level} (l3 l4 l5 l6 : Level) →
@@ -100,67 +87,38 @@ module _
     type-Prop (is-finitely-approximable-Prop l3 l4 l5 l6 logic)
 
   module _
+    {l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level}
+    (C : model-class l2 l3 i l4 l5)
+    (filtration : modal-theory l1 i →
+                  kripke-model l2 l3 i l4 →
+                  kripke-model l6 l7 i l8)
+    (is-filtration :
+      ((M , _) : type-subtype C) (theory : modal-theory l1 i) →
+      is-modal-theory-closed-under-subformulas i theory →
+      is-kripke-model-filtration i theory M (filtration theory M))
+    (logic : modal-theory l9 i)
+    (complete : completeness logic C)
+    (C₂ : model-class l6 l7 i l8 l10)
+    (leq : filtrate-class i C filtration ⊆ C₂)
+    (sound : soundness logic C₂)
+    where
+
+    is-finitely-approximable-filtration :
+      LEM (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4) →
+      is-finitely-approximable l6 l7 l8
+        (l1 ⊔ l5 ⊔ lsuc (l2 ⊔ l3 ⊔ l4 ⊔ l6 ⊔ l7 ⊔ l8)) logic
+    is-finitely-approximable-filtration lem =
+      intro-exists (filtrate-class i C filtration)
+        ( triple
+          ( is-finite-filtrate-class i C filtration is-filtration lem)
+          ( filtrate-soundness i C filtration logic C₂ leq sound)
+          ( filtrate-completeness i C filtration is-filtration logic complete))
+
+  module _
     (lem : LEM (lsuc (lsuc l1)))
     (zorn : Zorn (lsuc l1) l1 l1)
     (prop-resize : propositional-resizing l1 (lsuc l1))
     where
-
-    K-finite-class :
-      model-class (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1) (lsuc (lsuc (lsuc l1)))
-    K-finite-class =
-      filtrate-class i
-        ( all-models (lsuc l1) l1 i l1)
-        ( minimal-kripke-model-filtration i)
-
-    K-finite-class-sub-filtration-models :
-      K-finite-class ⊆
-        filtration-models
-          (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1) l1 (lsuc l1) l1 l1
-    K-finite-class-sub-filtration-models M* =
-      map-universal-property-trunc-Prop
-        ( filtration-models _ _ i _ _ _ _ _ M*)
-        ( λ ((a , M , _) , p) →
-          ( tr (is-in-subtype (filtration-models _ _ i _ _ _ _ _)) (inv p)
-            ( intro-exists
-              ( subformulas i a , M)
-              ( pair
-                (is-finite-subformulas-list
-                  ( i)
-                  ( lower-LEM (lsuc (lsuc l1)) lem)
-                  ( a))
-                ( is-kripke-model-filtration-minimal-kripke-model-filtration
-                  ( i)
-                  ( subformulas i a)
-                  ( M)
-                  ( is-modal-theory-closed-under-subformulas-subformulas
-                    ( i)
-                    ( a)))))))
-
-    completeness-K-filtration :
-      completeness (modal-logic-K i) (K-finite-class)
-    completeness-K-filtration =
-      filtrate-completeness i
-        ( all-models (lsuc l1) l1 i l1)
-        ( minimal-kripke-model-filtration i)
-        ( λ (M , _) theory theory-is-closed →
-          ( is-kripke-model-filtration-minimal-kripke-model-filtration i
-            ( theory)
-            ( M)
-            ( theory-is-closed)))
-        ( modal-logic-K i)
-        ( completeness-K i (lower-LEM (lsuc (lsuc l1)) lem) zorn prop-resize)
-
-    soundness-K-filtration :
-      soundness (modal-logic-K i) (K-finite-class)
-    soundness-K-filtration =
-      filtrate-soundness i
-        ( all-models (lsuc l1) l1 i l1)
-        ( minimal-kripke-model-filtration i)
-        ( modal-logic-K i)
-        ( all-models (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1))
-        ( λ _ _ → star)
-        ( λ a in-logic M _ x →
-          ( soundness-K i a in-logic M (λ b y → lem ((M , y) ⊨ₘ b)) x))
 
     is-finitely-approximable-K :
       is-finitely-approximable
@@ -170,54 +128,83 @@ module _
         ( lsuc (lsuc (lsuc l1)))
         ( modal-logic-K i)
     is-finitely-approximable-K =
-      intro-exists
-        ( K-finite-class)
-        ( pair
-          ( soundness-subclass
-            ( modal-logic-K i)
-            ( K-finite-class)
-            ( finite-subclass i K-finite-class)
-            ( subtype-intersection-right
-              ( finite-decidable-kripke-models
-                ( lsuc (lsuc l1))
-                ( lsuc l1)
-                ( i)
-                ( lsuc l1))
-              ( K-finite-class))
-            ( soundness-K-filtration))
-          ( transitive-leq-subtype
-            ( class-modal-logic (finite-subclass i K-finite-class))
-            ( class-modal-logic K-finite-class)
-            ( modal-logic-K i)
-            ( completeness-K-filtration)
-            ( λ a a-in-logic M M-in-class →
-              ( a-in-logic M
-                ( pair
-                  ( transitive-leq-subtype
-                    ( K-finite-class)
-                    ( filtration-models
-                      ( lsuc (lsuc l1))
-                      ( lsuc l1)
-                      ( i)
-                      ( lsuc l1)
-                      ( l1)
-                      ( lsuc l1)
-                      ( l1)
-                      ( l1))
-                    ( finite-decidable-kripke-models
-                      ( lsuc (lsuc l1))
-                      ( lsuc l1)
-                      ( i)
-                      ( lsuc l1))
-                    ( filtration-models-subset-finite-decidable-kripke-models
-                      ( i)
-                      ( l1)
-                      ( lsuc l1)
-                      ( l1)
-                      ( l1)
-                      ( lem))
-                    ( K-finite-class-sub-filtration-models)
-                    ( M)
-                    ( M-in-class))
-                  ( M-in-class))))))
+      is-finitely-approximable-filtration
+        ( all-models (lsuc l1) l1 i l1)
+        ( minimal-kripke-model-filtration _) -- TODO: make i implicit
+        ( λ (M , _) theory is-closed →
+          ( is-kripke-model-filtration-minimal-kripke-model-filtration i
+            ( theory)
+            ( M)
+            ( is-closed)))
+        ( modal-logic-K i)
+        ( completeness-K i (lower-LEM (lsuc (lsuc l1)) lem) zorn prop-resize)
+        ( all-models (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1))
+        ( λ _ _ → star)
+        ( transitive-leq-subtype
+          ( modal-logic-K i)
+          ( class-modal-logic
+            ( decidable-kripke-models (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1)))
+          ( class-modal-logic
+            ( all-models (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1)))
+          ( class-modal-logic-monotic
+            ( all-models (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1))
+            ( decidable-kripke-models (lsuc (lsuc l1)) (lsuc l1) i (lsuc l1))
+            ( all-models-is-decidable i lem))
+          ( soundness-K i))
+        ( lem)
+
+    is-finitely-approximable-S5 :
+      is-finitely-approximable
+        ( lsuc (lsuc l1))
+        ( lsuc (lsuc l1))
+        ( lsuc l1)
+        ( lsuc (lsuc (lsuc l1)))
+        ( modal-logic-S5 i)
+    is-finitely-approximable-S5 =
+      is-finitely-approximable-filtration
+        ( equivalence-kripke-models (lsuc l1) l1 i l1)
+        ( minimal-transitive-kripke-model-filtration _) -- TODO: make i implicit
+        ( λ (M , in-equiv) theory is-closed →
+          ( is-kripke-model-filtration-minimal-transitive-kripke-model-filtration
+            ( i)
+            ( theory)
+            ( M)
+            ( is-closed)
+            ( pr2 (pr2 in-equiv)))) -- TODO: refactor
+        ( modal-logic-S5 i)
+        ( completeness-S5 i (lower-LEM (lsuc (lsuc l1)) lem) zorn prop-resize)
+        ( equivalence-kripke-models
+          (lsuc (lsuc l1)) (lsuc (lsuc l1)) i (lsuc l1))
+        ( λ M* →
+          ( elim-exists
+            ( equivalence-kripke-models
+              (lsuc (lsuc l1)) (lsuc (lsuc l1)) i (lsuc l1) M*)
+            ( λ where
+              ( a , M , in-equiv) refl →
+                ( minimal-transitive-filtration-preserves-equivalence
+                  _ -- TODO: make implicit
+                  ( subformulas a)
+                  ( M)
+                  ( is-modal-theory-closed-under-subformulas-subformulas a)
+                  ( in-equiv)))))
+        ( transitive-leq-subtype
+          ( modal-logic-S5 i)
+          ( class-modal-logic
+            ( decidable-subclass i
+              ( equivalence-kripke-models
+                (lsuc (lsuc l1)) (lsuc (lsuc l1)) i (lsuc l1))))
+          ( class-modal-logic
+            ( equivalence-kripke-models
+              (lsuc (lsuc l1)) (lsuc (lsuc l1)) i (lsuc l1)))
+          ( class-modal-logic-monotic
+            ( equivalence-kripke-models
+              (lsuc (lsuc l1)) (lsuc (lsuc l1)) i (lsuc l1))
+            ( decidable-subclass i
+              ( equivalence-kripke-models
+                (lsuc (lsuc l1)) (lsuc (lsuc l1)) i (lsuc l1)))
+            ( subset-decidable-subclass-lem i lem
+              ( equivalence-kripke-models
+                (lsuc (lsuc l1)) (lsuc (lsuc l1)) i (lsuc l1))))
+          ( soundness-S5 i))
+        ( lem)
 ```
