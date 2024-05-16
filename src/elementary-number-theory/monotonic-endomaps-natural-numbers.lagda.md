@@ -25,7 +25,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-Monotic endomaps of natural numbers are functions `f : ℕ → ℕ` that preserves or
+Monotic endomaps of natural numbers are functions `f : ℕ → ℕ` that preserve or
 reverse (strict) inequality of natural numbers.
 
 ## Definitions
