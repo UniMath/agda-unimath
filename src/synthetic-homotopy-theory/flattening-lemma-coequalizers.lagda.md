@@ -66,21 +66,21 @@ module _
   where
 
   left-map-double-arrow-flattening-lemma-coequalizer :
-    Σ (domain-double-arrow a) (P ∘ map-cofork a e ∘ left-map-double-arrow a) →
-    Σ (codomain-double-arrow a) (P ∘ map-cofork a e)
+    Σ (domain-double-arrow a) (P ∘ map-cofork e ∘ left-map-double-arrow a) →
+    Σ (codomain-double-arrow a) (P ∘ map-cofork e)
   left-map-double-arrow-flattening-lemma-coequalizer =
     map-Σ-map-base
       ( left-map-double-arrow a)
-      ( P ∘ map-cofork a e)
+      ( P ∘ map-cofork e)
 
   right-map-double-arrow-flattening-lemma-coequalizer :
-    Σ (domain-double-arrow a) (P ∘ map-cofork a e ∘ left-map-double-arrow a) →
-    Σ (codomain-double-arrow a) (P ∘ map-cofork a e)
+    Σ (domain-double-arrow a) (P ∘ map-cofork e ∘ left-map-double-arrow a) →
+    Σ (codomain-double-arrow a) (P ∘ map-cofork e)
   right-map-double-arrow-flattening-lemma-coequalizer =
     map-Σ
-      ( P ∘ map-cofork a e)
+      ( P ∘ map-cofork e)
       ( right-map-double-arrow a)
-      ( λ x → tr P (coh-cofork a e x))
+      ( λ x → tr P (coh-cofork e x))
 
   double-arrow-flattening-lemma-coequalizer : double-arrow (l1 ⊔ l4) (l2 ⊔ l4)
   double-arrow-flattening-lemma-coequalizer =
@@ -90,21 +90,19 @@ module _
 
   cofork-flattening-lemma-coequalizer :
     cofork double-arrow-flattening-lemma-coequalizer (Σ X P)
-  pr1 cofork-flattening-lemma-coequalizer = map-Σ-map-base (map-cofork a e) P
+  pr1 cofork-flattening-lemma-coequalizer = map-Σ-map-base (map-cofork e) P
   pr2 cofork-flattening-lemma-coequalizer =
     coherence-square-maps-map-Σ-map-base P
       ( right-map-double-arrow a)
       ( left-map-double-arrow a)
-      ( map-cofork a e)
-      ( map-cofork a e)
-      ( coh-cofork a e)
+      ( map-cofork e)
+      ( map-cofork e)
+      ( coh-cofork e)
 
   flattening-lemma-coequalizer-statement : UUω
   flattening-lemma-coequalizer-statement =
-    dependent-universal-property-coequalizer a e →
-    universal-property-coequalizer
-      ( double-arrow-flattening-lemma-coequalizer)
-      ( cofork-flattening-lemma-coequalizer)
+    dependent-universal-property-coequalizer e →
+    universal-property-coequalizer (cofork-flattening-lemma-coequalizer)
 ```
 
 ## Properties
@@ -135,8 +133,6 @@ module _
     flattening-lemma-coequalizer : flattening-lemma-coequalizer-statement a P e
     flattening-lemma-coequalizer dup-coequalizer =
       universal-property-coequalizer-universal-property-pushout
-        ( double-arrow-flattening-lemma-coequalizer a P e)
-        ( cofork-flattening-lemma-coequalizer a P e)
         ( universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
           ( vertical-map-span-cocone-cofork
             ( double-arrow-flattening-lemma-coequalizer a P e))
@@ -206,7 +202,5 @@ module _
             ( horizontal-map-span-cocone-cofork a)
             ( cocone-codiagonal-cofork a e)
             ( dependent-universal-property-pushout-dependent-universal-property-coequalizer
-              ( a)
-              ( e)
               ( dup-coequalizer))))
 ```

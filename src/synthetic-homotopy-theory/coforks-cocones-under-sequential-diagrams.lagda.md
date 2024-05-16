@@ -233,10 +233,7 @@ module _
 
   dependent-cofork-dependent-cocone-sequential-diagram :
     dependent-cocone-sequential-diagram c P →
-    dependent-cofork
-      ( double-arrow-sequential-diagram A)
-      ( cofork-cocone-sequential-diagram c)
-      ( P)
+    dependent-cofork (cofork-cocone-sequential-diagram c) P
   pr1 (dependent-cofork-dependent-cocone-sequential-diagram d) =
     ind-Σ (map-dependent-cocone-sequential-diagram P d)
   pr2 (dependent-cofork-dependent-cocone-sequential-diagram d) =
@@ -377,9 +374,9 @@ module _
     cofork (double-arrow-sequential-diagram A) X →
     cocone-sequential-diagram A X
   pr1 (cocone-sequential-diagram-cofork e) =
-    ev-pair (map-cofork (double-arrow-sequential-diagram A) e)
+    ev-pair (map-cofork e)
   pr2 (cocone-sequential-diagram-cofork e) =
-    ev-pair (coh-cofork (double-arrow-sequential-diagram A) e)
+    ev-pair (coh-cofork e)
 
   abstract
     is-section-cocone-sequential-diagram-cofork :
@@ -431,15 +428,12 @@ module _
     coherence-triangle-maps
       ( cocone-map-sequential-diagram c {Y = Y})
       ( cocone-sequential-diagram-cofork)
-      ( cofork-map
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c))
+      ( cofork-map (cofork-cocone-sequential-diagram c))
   triangle-cocone-sequential-diagram-cofork h =
     eq-htpy-cocone-sequential-diagram A
       ( cocone-map-sequential-diagram c h)
       ( cocone-sequential-diagram-cofork
         ( cofork-map
-          ( double-arrow-sequential-diagram A)
           ( cofork-cocone-sequential-diagram c)
           ( h)))
       ( refl-htpy-cocone-sequential-diagram _ _)
@@ -468,23 +462,14 @@ module _
   where
 
   dependent-cocone-sequential-diagram-dependent-cofork :
-    dependent-cofork
-      ( double-arrow-sequential-diagram A)
-      ( cofork-cocone-sequential-diagram c)
-      ( P) →
+    dependent-cofork (cofork-cocone-sequential-diagram c) P →
     dependent-cocone-sequential-diagram c P
   pr1 (dependent-cocone-sequential-diagram-dependent-cofork e) =
     ev-pair
-      ( map-dependent-cofork
-        ( double-arrow-sequential-diagram A)
-        ( P)
-        ( e))
+      ( map-dependent-cofork P e)
   pr2 (dependent-cocone-sequential-diagram-dependent-cofork e) =
     ev-pair
-      ( coherence-dependent-cofork
-        ( double-arrow-sequential-diagram A)
-        ( P)
-        ( e))
+      ( coherence-dependent-cofork P e)
 
   abstract
     is-section-dependent-cocone-sequential-diagram-dependent-cofork :
@@ -492,13 +477,11 @@ module _
         ( dependent-cofork-dependent-cocone-sequential-diagram P)
         ( dependent-cocone-sequential-diagram-dependent-cofork)
     is-section-dependent-cocone-sequential-diagram-dependent-cofork e =
-      eq-htpy-dependent-cofork
-        ( double-arrow-sequential-diagram A)
-        ( P)
+      eq-htpy-dependent-cofork P
         ( dependent-cofork-dependent-cocone-sequential-diagram P
           ( dependent-cocone-sequential-diagram-dependent-cofork e))
         ( e)
-        ( refl-htpy-dependent-cofork _ _ _)
+        ( refl-htpy-dependent-cofork _ _)
 
     is-retraction-dependent-cocone-sequential-diagram-dependent-cofork :
       is-retraction
@@ -520,10 +503,7 @@ module _
       ( is-section-dependent-cocone-sequential-diagram-dependent-cofork)
 
   equiv-dependent-cocone-sequential-diagram-dependent-cofork :
-    dependent-cofork
-      ( double-arrow-sequential-diagram A)
-      ( cofork-cocone-sequential-diagram c)
-      ( P) ≃
+    dependent-cofork (cofork-cocone-sequential-diagram c) P ≃
     dependent-cocone-sequential-diagram c P
   pr1 equiv-dependent-cocone-sequential-diagram-dependent-cofork =
     dependent-cocone-sequential-diagram-dependent-cofork
@@ -540,16 +520,11 @@ module _
     coherence-triangle-maps
       ( dependent-cocone-map-sequential-diagram c P)
       ( dependent-cocone-sequential-diagram-dependent-cofork P)
-      ( dependent-cofork-map
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c))
+      ( dependent-cofork-map (cofork-cocone-sequential-diagram c))
   triangle-dependent-cocone-sequential-diagram-dependent-cofork h =
     eq-htpy-dependent-cocone-sequential-diagram P
       ( dependent-cocone-map-sequential-diagram c P h)
       ( dependent-cocone-sequential-diagram-dependent-cofork P
-        ( dependent-cofork-map
-          ( double-arrow-sequential-diagram A)
-          ( cofork-cocone-sequential-diagram c)
-          ( h)))
+        ( dependent-cofork-map (cofork-cocone-sequential-diagram c) h))
       ( refl-htpy-dependent-cocone-sequential-diagram _ _)
 ```

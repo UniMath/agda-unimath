@@ -49,18 +49,18 @@ is an [equivalence](foundation.equivalences.md).
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 : Level} {a : double-arrow l1 l2} {X : UU l3}
   (e : cofork a X)
   where
 
   universal-property-coequalizer : UUω
   universal-property-coequalizer =
-    {l : Level} (Y : UU l) → is-equiv (cofork-map a e {Y = Y})
+    {l : Level} (Y : UU l) → is-equiv (cofork-map e {Y = Y})
 
 module _
-  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
-  (e : cofork a X) {Y : UU l4}
-  (up-coequalizer : universal-property-coequalizer a e)
+  {l1 l2 l3 l4 : Level} {a : double-arrow l1 l2} {X : UU l3}
+  {e : cofork a X} {Y : UU l4}
+  (up-coequalizer : universal-property-coequalizer e)
   where
 
   map-universal-property-coequalizer : cofork a Y → (X → Y)
@@ -73,33 +73,33 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
-  (e : cofork a X) {Y : UU l4}
-  (up-coequalizer : universal-property-coequalizer a e)
+  {l1 l2 l3 l4 : Level} {a : double-arrow l1 l2} {X : UU l3}
+  {e : cofork a X} {Y : UU l4}
+  (up-coequalizer : universal-property-coequalizer e)
   (e' : cofork a Y)
   where
 
   htpy-cofork-map-universal-property-coequalizer :
-    htpy-cofork a
-      ( cofork-map a e
-        ( map-universal-property-coequalizer a e up-coequalizer e'))
+    htpy-cofork
+      ( cofork-map e
+        ( map-universal-property-coequalizer up-coequalizer e'))
       ( e')
   htpy-cofork-map-universal-property-coequalizer =
     htpy-cofork-eq a
-      ( cofork-map a e
-        ( map-universal-property-coequalizer a e up-coequalizer e'))
+      ( cofork-map e
+        ( map-universal-property-coequalizer up-coequalizer e'))
       ( e')
       ( is-section-map-inv-is-equiv (up-coequalizer Y) e')
 
   abstract
     uniqueness-map-universal-property-coequalizer :
-      is-contr (Σ (X → Y) (λ h → htpy-cofork a (cofork-map a e h) e'))
+      is-contr (Σ (X → Y) (λ h → htpy-cofork (cofork-map e h) e'))
     uniqueness-map-universal-property-coequalizer =
       is-contr-is-equiv'
-        ( fiber (cofork-map a e) e')
-        ( tot (λ h → htpy-cofork-eq a (cofork-map a e h) e'))
+        ( fiber (cofork-map e) e')
+        ( tot (λ h → htpy-cofork-eq a (cofork-map e h) e'))
         ( is-equiv-tot-is-fiberwise-equiv
-          ( λ h → is-equiv-htpy-cofork-eq a (cofork-map a e h) e'))
+          ( λ h → is-equiv-htpy-cofork-eq a (cofork-map e h) e'))
         ( is-contr-map-is-equiv (up-coequalizer Y) e')
 ```
 
@@ -113,8 +113,8 @@ more precise, asserting that under this mapping,
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (a : double-arrow l1 l2) {X : UU l3}
-  (e : cofork a X)
+  {l1 l2 l3 : Level} {a : double-arrow l1 l2} {X : UU l3}
+  {e : cofork a X}
   where
 
   universal-property-coequalizer-universal-property-pushout :
@@ -122,10 +122,10 @@ module _
       ( vertical-map-span-cocone-cofork a)
       ( horizontal-map-span-cocone-cofork a)
       ( cocone-codiagonal-cofork a e) →
-      universal-property-coequalizer a e
+      universal-property-coequalizer e
   universal-property-coequalizer-universal-property-pushout up-pushout Y =
     is-equiv-left-map-triangle
-      ( cofork-map a e)
+      ( cofork-map e)
       ( cofork-cocone-codiagonal a)
       ( cocone-map
         ( vertical-map-span-cocone-cofork a)
@@ -136,14 +136,14 @@ module _
       ( is-equiv-cofork-cocone-codiagonal a)
 
   universal-property-pushout-universal-property-coequalizer :
-    universal-property-coequalizer a e →
+    universal-property-coequalizer e →
     universal-property-pushout
       ( vertical-map-span-cocone-cofork a)
       ( horizontal-map-span-cocone-cofork a)
       ( cocone-codiagonal-cofork a e)
   universal-property-pushout-universal-property-coequalizer up-coequalizer Y =
     is-equiv-top-map-triangle
-      ( cofork-map a e)
+      ( cofork-map e)
       ( cofork-cocone-codiagonal a)
       ( cocone-map
         ( vertical-map-span-cocone-cofork a)
@@ -185,16 +185,16 @@ a coequalizer.
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  {a : double-arrow l1 l2} {X : UU l3} (c : cofork a X)
-  {a' : double-arrow l4 l5} {Y : UU l6} (c' : cofork a' Y)
+  {a : double-arrow l1 l2} {X : UU l3} {c : cofork a X}
+  {a' : double-arrow l4 l5} {Y : UU l6} {c' : cofork a' Y}
   (e : equiv-double-arrow a a') (e' : equiv-cofork-equiv-double-arrow c c' e)
   where
 
   universal-property-coequalizer-equiv-cofork-equiv-double-arrow :
-    universal-property-coequalizer a' c' →
-    universal-property-coequalizer a c
+    universal-property-coequalizer c' →
+    universal-property-coequalizer c
   universal-property-coequalizer-equiv-cofork-equiv-double-arrow up-c' =
-    universal-property-coequalizer-universal-property-pushout a c
+    universal-property-coequalizer-universal-property-pushout
       ( universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
         ( vertical-map-span-cocone-cofork a')
         ( horizontal-map-span-cocone-cofork a')
@@ -222,8 +222,8 @@ module _
             ( left-map-double-arrow a)
             ( left-map-double-arrow a')
             ( codomain-map-equiv-double-arrow a a' e)
-            ( map-cofork a c)
-            ( map-cofork a' c')
+            ( map-cofork c)
+            ( map-cofork c')
             ( map-equiv-cofork-equiv-double-arrow c c' e e')
             ( left-square-equiv-double-arrow a a' e)
             ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e')))
@@ -255,8 +255,8 @@ module _
             ( left-map-double-arrow a)
             ( left-map-double-arrow a')
             ( codomain-map-equiv-double-arrow a a' e)
-            ( map-cofork a c)
-            ( map-cofork a' c')
+            ( map-cofork c)
+            ( map-cofork c')
             ( map-equiv-cofork-equiv-double-arrow c c' e e')
             ( left-square-equiv-double-arrow a a' e)
             ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e'))
@@ -270,14 +270,14 @@ module _
         ( is-equiv-domain-map-equiv-double-arrow a a' e)
         ( is-equiv-codomain-map-equiv-double-arrow a a' e)
         ( is-equiv-map-equiv-cofork-equiv-double-arrow c c' e e')
-        ( universal-property-pushout-universal-property-coequalizer a' c'
+        ( universal-property-pushout-universal-property-coequalizer
           ( up-c')))
 
   universal-property-coequalizer-equiv-cofork-equiv-double-arrow' :
-    universal-property-coequalizer a c →
-    universal-property-coequalizer a' c'
+    universal-property-coequalizer c →
+    universal-property-coequalizer c'
   universal-property-coequalizer-equiv-cofork-equiv-double-arrow' up-c =
-    universal-property-coequalizer-universal-property-pushout a' c'
+    universal-property-coequalizer-universal-property-pushout
       ( universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
         ( vertical-map-span-cocone-cofork a')
         ( horizontal-map-span-cocone-cofork a')
@@ -305,8 +305,8 @@ module _
             ( left-map-double-arrow a)
             ( left-map-double-arrow a')
             ( codomain-map-equiv-double-arrow a a' e)
-            ( map-cofork a c)
-            ( map-cofork a' c')
+            ( map-cofork c)
+            ( map-cofork c')
             ( map-equiv-cofork-equiv-double-arrow c c' e e')
             ( left-square-equiv-double-arrow a a' e)
             ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e')))
@@ -338,8 +338,8 @@ module _
             ( left-map-double-arrow a)
             ( left-map-double-arrow a')
             ( codomain-map-equiv-double-arrow a a' e)
-            ( map-cofork a c)
-            ( map-cofork a' c')
+            ( map-cofork c)
+            ( map-cofork c')
             ( map-equiv-cofork-equiv-double-arrow c c' e e')
             ( left-square-equiv-double-arrow a a' e)
             ( coh-map-cofork-equiv-cofork-equiv-double-arrow c c' e e'))
@@ -353,5 +353,5 @@ module _
         ( is-equiv-domain-map-equiv-double-arrow a a' e)
         ( is-equiv-codomain-map-equiv-double-arrow a a' e)
         ( is-equiv-map-equiv-cofork-equiv-double-arrow c c' e e')
-        ( universal-property-pushout-universal-property-coequalizer a c up-c))
+        ( universal-property-pushout-universal-property-coequalizer up-c))
 ```

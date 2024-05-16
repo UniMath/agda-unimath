@@ -71,7 +71,7 @@ module _
   equiv-htpy-htpy-out-of-sequential-colimit up-c f g =
     ( inv-equiv
       ( equiv-dependent-universal-property-sequential-colimit
-        ( dependent-universal-property-universal-property-sequential-colimit c
+        ( dependent-universal-property-universal-property-sequential-colimit
           ( up-c)))) ∘e
     ( equiv-tot
       ( λ K →
@@ -140,7 +140,6 @@ abstract
       ( cocone-standard-sequential-colimit A)
   up-standard-sequential-colimit {A = A} =
     universal-property-dependent-universal-property-sequential-colimit
-      ( cocone-standard-sequential-colimit A)
       ( dup-standard-sequential-colimit)
 
 module _
