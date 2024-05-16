@@ -86,7 +86,7 @@ module _
       is-modulus-modulus-∞-constant-sequence u H
       ( modulus-∞-constant-sequence u H)
       ( n)
-      (refl-leq-ℕ (modulus-∞-constant-sequence u H)))
+      ( refl-leq-ℕ (modulus-∞-constant-sequence u H)))
 ```
 
 ### A sequence is asymptotically constant if it is asymptotically equal to some constant sequence
