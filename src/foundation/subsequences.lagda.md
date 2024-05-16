@@ -28,7 +28,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **subsequence** of of a [sequence](foundation.sequences.md) `u : ℕ → A` is a
+A **subsequence** of a [sequence](foundation.sequences.md) `u : ℕ → A` is a
 sequence `u ∘ f` for some
 [strictly increasing](elementary-number-theory.monotonic-endomaps-natural-numbers.md)
 map `f : ℕ → ℕ`.
