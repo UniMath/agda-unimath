@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.descent-data-coequalizers
 open import synthetic-homotopy-theory.equivalences-descent-data-coequalizers
+open import synthetic-homotopy-theory.families-descent-data-coequalizers
 open import synthetic-homotopy-theory.universal-property-coequalizers
 ```
 
@@ -142,4 +143,13 @@ module _
   family-cofork-descent-data-coequalizer : X → UU l4
   family-cofork-descent-data-coequalizer =
     pr1 (center uniqueness-descent-data-coequalizer)
+
+  family-with-descent-data-coequalizer-descent-data-coequalizer :
+    family-with-descent-data-coequalizer c l4
+  pr1 family-with-descent-data-coequalizer-descent-data-coequalizer =
+    family-cofork-descent-data-coequalizer
+  pr1 (pr2 family-with-descent-data-coequalizer-descent-data-coequalizer) =
+    P
+  pr2 (pr2 family-with-descent-data-coequalizer-descent-data-coequalizer) =
+    pr2 (center uniqueness-descent-data-coequalizer)
 ```
