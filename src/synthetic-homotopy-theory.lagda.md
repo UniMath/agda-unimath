@@ -104,6 +104,7 @@ open import synthetic-homotopy-theory.recursion-principle-pushouts public
 open import synthetic-homotopy-theory.retracts-of-sequential-diagrams public
 open import synthetic-homotopy-theory.rewriting-pushouts public
 open import synthetic-homotopy-theory.sections-descent-circle public
+open import synthetic-homotopy-theory.sections-descent-data-coequalizers public
 open import synthetic-homotopy-theory.sequential-colimits public
 open import synthetic-homotopy-theory.sequential-diagrams public
 open import synthetic-homotopy-theory.sequentially-compact-types public
