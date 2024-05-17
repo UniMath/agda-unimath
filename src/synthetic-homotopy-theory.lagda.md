@@ -49,6 +49,7 @@ open import synthetic-homotopy-theory.descent-circle-equivalence-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
 open import synthetic-homotopy-theory.descent-data-coequalizers public
+open import synthetic-homotopy-theory.descent-data-coequalizers-function-families public
 open import synthetic-homotopy-theory.descent-data-sequential-colimits public
 open import synthetic-homotopy-theory.descent-property-coequalizers public
 open import synthetic-homotopy-theory.descent-property-sequential-colimits public
