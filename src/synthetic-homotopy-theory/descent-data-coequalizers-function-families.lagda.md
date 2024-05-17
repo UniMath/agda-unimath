@@ -9,11 +9,14 @@ module synthetic-homotopy-theory.descent-data-coequalizers-function-families whe
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.homotopy-algebra
 open import foundation.identity-types
@@ -27,6 +30,8 @@ open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.descent-data-coequalizers
 open import synthetic-homotopy-theory.equivalences-descent-data-coequalizers
 open import synthetic-homotopy-theory.families-descent-data-coequalizers
+open import synthetic-homotopy-theory.morphisms-descent-data-coequalizers
+open import synthetic-homotopy-theory.sections-descent-data-coequalizers
 ```
 
 </details>
@@ -121,4 +126,23 @@ module _
     descent-data-coequalizer-function-family
   pr2 (pr2 family-with-descent-data-coequalizer-function-family) =
     equiv-descent-data-coequalizer-function-family
+
+  compute-section-family-cofork-function-family :
+    section-descent-data-coequalizer descent-data-coequalizer-function-family ≃
+    hom-descent-data-coequalizer
+      ( descent-data-family-with-descent-data-coequalizer P)
+      ( descent-data-family-with-descent-data-coequalizer Q)
+  compute-section-family-cofork-function-family =
+    equiv-tot
+      ( λ h →
+        equiv-Π-equiv-family
+          ( λ a →
+            ( equiv-inv-htpy _ _) ∘e
+            ( inv-equiv
+              ( equiv-coherence-triangle-maps-inv-top'
+                ( ( map-family-family-with-descent-data-coequalizer Q a) ∘
+                  ( h (left-map-double-arrow F a)))
+                ( h (right-map-double-arrow F a))
+                ( equiv-family-family-with-descent-data-coequalizer P a))) ∘e
+            ( equiv-funext)))
 ```
