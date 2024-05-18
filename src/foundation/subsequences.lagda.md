@@ -8,7 +8,7 @@ module foundation.subsequences where
 
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.monotonic-endomaps-natural-numbers
+open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
@@ -30,7 +30,7 @@ open import foundation.universe-levels
 
 A **subsequence** of a [sequence](foundation.sequences.md) `u : ℕ → A` is a
 sequence `u ∘ f` for some
-[strictly increasing](elementary-number-theory.monotonic-endomaps-natural-numbers.md)
+[strictly increasing](elementary-number-theory.monotonic-sequences-natural-numbers.md)
 map `f : ℕ → ℕ`.
 
 ## Definition
@@ -43,7 +43,7 @@ module _
   where
 
   subsequence : UU lzero
-  subsequence = type-subtype is-strictly-increasing-endomap-prop-ℕ
+  subsequence = type-subtype is-strictly-increasing-sequence-prop-ℕ
 ```
 
 ```agda
@@ -55,7 +55,7 @@ module _
   extract-subsequence = pr1 v
 
   is-strictly-increasing-extract-subsequence :
-    is-strictly-increasing-endomap-ℕ extract-subsequence
+    is-strictly-increasing-sequence-ℕ extract-subsequence
   is-strictly-increasing-extract-subsequence = pr2 v
 
   sequence-subsequence : sequence A
