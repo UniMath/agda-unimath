@@ -83,6 +83,7 @@ open import foundation.connected-components-universes public
 open import foundation.connected-maps public
 open import foundation.connected-types public
 open import foundation.constant-maps public
+open import foundation.constant-sequences public
 open import foundation.constant-span-diagrams public
 open import foundation.constant-type-families public
 open import foundation.contractible-maps public

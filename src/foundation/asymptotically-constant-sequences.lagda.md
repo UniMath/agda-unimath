@@ -12,6 +12,7 @@ open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.asymptotically-equal-sequences
+open import foundation.constant-sequences
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -60,6 +61,17 @@ module _
 
 ## Properties
 
+### Constant sequences are asymptotically constant
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A) (H : is-constant-sequence u)
+  where
+
+  is-∞-constant-is-constant-sequence : is-∞-constant-sequence u
+  is-∞-constant-is-constant-sequence = (zero-ℕ , λ p q I J → H p q)
+```
+
 ### The asymptotical value of an asymptotically constant sequence
 
 ```agda
@@ -78,15 +90,15 @@ module _
   {l : Level} {A : UU l} (u : sequence A) (H : is-∞-constant-sequence u)
   where
 
-  eq-∞-constant-sequence :
-    eq-∞-sequence (λ n → ∞-value-∞-constant-sequence u H) u
-  eq-∞-constant-sequence =
+  eq-∞-value-∞-constant-sequence :
+    eq-∞-sequence (const-sequence (∞-value-∞-constant-sequence u H)) u
+  eq-∞-value-∞-constant-sequence =
     ( modulus-∞-constant-sequence u H) ,
     ( λ n →
       is-modulus-modulus-∞-constant-sequence u H
-      ( modulus-∞-constant-sequence u H)
-      ( n)
-      ( refl-leq-ℕ (modulus-∞-constant-sequence u H)))
+        ( modulus-∞-constant-sequence u H)
+        ( n)
+        ( refl-leq-ℕ (modulus-∞-constant-sequence u H)))
 ```
 
 ### A sequence is asymptotically constant if it is asymptotically equal to some constant sequence
@@ -97,7 +109,7 @@ module _
   where
 
   is-∞-constant-eq-∞-constant-sequence :
-    (Σ A (λ x → eq-∞-sequence (λ n → x) u)) → is-∞-constant-sequence u
+    (Σ A (λ x → eq-∞-sequence (const-sequence x) u)) → is-∞-constant-sequence u
   is-∞-constant-eq-∞-constant-sequence (x , H) =
     map-Σ
       ( is-modulus-∞-constant-sequence u)
@@ -162,11 +174,11 @@ module _
     is-∞-constant-sequence u → is-∞-constant-sequence v
   preserves-∞-constant-eq-∞-sequence K =
     is-∞-constant-eq-∞-constant-sequence v
-      ( ∞-value-∞-constant-sequence u K ,
-        transitive-eq-∞-sequence
+      ( ( ∞-value-∞-constant-sequence u K) ,
+        ( transitive-eq-∞-sequence
           ( λ n → ∞-value-∞-constant-sequence u K)
           ( u)
           ( v)
           ( H)
-          ( eq-∞-constant-sequence u K))
+          ( eq-∞-value-∞-constant-sequence u K)))
 ```
