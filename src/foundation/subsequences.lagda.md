@@ -74,7 +74,7 @@ module _
   refl-subsequence : subsequence u
   refl-subsequence = (id , λ i j → id)
 
-  eq-refl-subsequence : sequence-subsequence u refl-subsequence ＝ u
+  eq-refl-subsequence : u ＝ sequence-subsequence u refl-subsequence
   eq-refl-subsequence = refl
 ```
 
@@ -105,4 +105,30 @@ module _
       (sequence-subsequence u sub-subsequence)
       (sequence-subsequence (sequence-subsequence u v) w)
   eq-sub-subsequence = refl
+```
+
+### Subsequences are functorial
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (u : sequence A)
+  where
+
+  map-subsequence : subsequence u → subsequence (map-sequence f u)
+  map-subsequence H = H
+```
+
+### The extracted sequence of the image of a subsequence is the extracted sequence of the image
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (u : sequence A)
+  (v : subsequence u)
+  where
+
+  compute-map-subsequence :
+    Id
+      (map-sequence f (sequence-subsequence u v))
+      (sequence-subsequence (map-sequence f u) (map-subsequence f u v))
+  compute-map-subsequence = refl
 ```
