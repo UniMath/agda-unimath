@@ -73,6 +73,7 @@ open import synthetic-homotopy-theory.functoriality-sequential-colimits public
 open import synthetic-homotopy-theory.functoriality-suspensions public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
 open import synthetic-homotopy-theory.hatchers-acyclic-type public
+open import synthetic-homotopy-theory.induction-principle-identity-types-coequalizers public
 open import synthetic-homotopy-theory.induction-principle-pushouts public
 open import synthetic-homotopy-theory.infinite-complex-projective-space public
 open import synthetic-homotopy-theory.infinite-cyclic-types public
