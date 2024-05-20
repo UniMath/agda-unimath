@@ -11,6 +11,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.asymptotical-dependent-sequences
 open import foundation.dependent-pair-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
@@ -36,11 +37,21 @@ module _
   {l : Level} {A : UU l} (u v : sequence A)
   where
 
-  is-modulus-eq-∞-sequence : ℕ → UU l
-  is-modulus-eq-∞-sequence N = (m : ℕ) → leq-ℕ N m → u m ＝ v m
-
   eq-∞-sequence : UU l
-  eq-∞-sequence = Σ ℕ is-modulus-eq-∞-sequence
+  eq-∞-sequence = asymptotically (λ n → u n ＝ v n)
+```
+
+```agda
+module _
+  {l : Level} {A : UU l} {u v : sequence A} (H : eq-∞-sequence u v)
+  where
+
+  modulus-eq-∞-sequence : ℕ
+  modulus-eq-∞-sequence = pr1 H
+
+  is-modulus-eq-∞-sequence :
+    (n : ℕ) → leq-ℕ modulus-eq-∞-sequence n → u n ＝ v n
+  is-modulus-eq-∞-sequence = pr2 H
 ```
 
 ## Properties
@@ -67,7 +78,7 @@ module _
   symmetric-eq-∞-sequence : eq-∞-sequence u v → eq-∞-sequence v u
   symmetric-eq-∞-sequence =
     map-Σ
-      ( is-modulus-eq-∞-sequence v u)
+      ( is-modulus-dependent-sequence (λ n → v n ＝ u n))
       ( id)
       ( λ N H m K → inv (H m K))
 ```

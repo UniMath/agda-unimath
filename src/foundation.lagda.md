@@ -26,6 +26,7 @@ open import foundation.action-on-identifications-functions public
 open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
+open import foundation.asymptotical-dependent-sequences public
 open import foundation.asymptotically-constant-sequences public
 open import foundation.asymptotically-equal-sequences public
 open import foundation.automorphisms public

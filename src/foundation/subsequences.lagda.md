@@ -132,3 +132,26 @@ module _
       (sequence-subsequence (map-sequence f u) (map-subsequence f u v))
   compute-map-subsequence = refl
 ```
+
+### Modulus of a subsquence
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A) (v : subsequence u)
+  where
+
+  modulus-subsequence : ℕ → ℕ
+  modulus-subsequence =
+    modulus-limit-∞-is-strictly-increasing-sequence-ℕ
+      ( extract-subsequence u v)
+      ( is-strictly-increasing-extract-subsequence u v)
+
+  is-modulus-subsequence :
+    (N p : ℕ) →
+    leq-ℕ (modulus-subsequence N) p →
+    leq-ℕ N (extract-subsequence u v p)
+  is-modulus-subsequence =
+    is-modulus-limit-∞-is-strictly-increasing-sequence-ℕ
+      ( extract-subsequence u v)
+      ( is-strictly-increasing-extract-subsequence u v)
+```

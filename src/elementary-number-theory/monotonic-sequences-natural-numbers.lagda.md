@@ -197,10 +197,10 @@ module _
   modulus-limit-∞-is-strictly-increasing-sequence-ℕ M =
     pr1 (limit-∞-is-strictly-increasing-sequence-ℕ M)
 
-  is-modulus-modulus-limit-∞-is-strictly-increasing-sequence-ℕ :
+  is-modulus-limit-∞-is-strictly-increasing-sequence-ℕ :
     (M p : ℕ) →
     leq-ℕ (modulus-limit-∞-is-strictly-increasing-sequence-ℕ M) p →
     leq-ℕ M (f p)
-  is-modulus-modulus-limit-∞-is-strictly-increasing-sequence-ℕ M =
+  is-modulus-limit-∞-is-strictly-increasing-sequence-ℕ M =
     pr2 (limit-∞-is-strictly-increasing-sequence-ℕ M)
 ```
