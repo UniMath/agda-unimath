@@ -410,18 +410,9 @@ module _
       is-pullback f g c →
       is-fiberwise-equiv (map-fiber-horizontal-map-cone f g c)
     is-fiberwise-equiv-map-fiber-horizontal-map-cone-is-pullback pb =
-      is-fiberwise-equiv-is-equiv-tot
-        ( is-equiv-top-is-equiv-bottom-square
-          ( map-equiv-total-fiber (horizontal-map-cone f g c))
-          ( tot (λ _ → tot (λ _ → inv)))
-          ( tot (map-fiber-horizontal-map-cone f g c))
-          ( gap g f (swap-cone f g c))
-          ( square-tot-map-fiber-horizontal-map-cone)
-          ( is-equiv-map-equiv-total-fiber (horizontal-map-cone f g c))
-          ( is-equiv-tot-is-fiberwise-equiv
-            ( λ y →
-              is-equiv-tot-is-fiberwise-equiv (λ x → is-equiv-inv (f x) (g y))))
-          ( is-pullback-swap-cone f g c pb))
+      is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback g f
+        ( swap-cone f g c)
+        ( is-pullback-swap-cone f g c pb)
 
   abstract
     is-pullback-is-fiberwise-equiv-map-fiber-horizontal-map-cone :
@@ -429,17 +420,9 @@ module _
       is-pullback f g c
     is-pullback-is-fiberwise-equiv-map-fiber-horizontal-map-cone is-equiv-fsq =
       is-pullback-swap-cone' f g c
-        ( is-equiv-bottom-is-equiv-top-square
-          ( map-equiv-total-fiber (horizontal-map-cone f g c))
-          ( tot (λ _ → tot (λ _ → inv)))
-          ( tot (map-fiber-horizontal-map-cone f g c))
-          ( gap g f (swap-cone f g c))
-          ( square-tot-map-fiber-horizontal-map-cone)
-          ( is-equiv-map-equiv-total-fiber (horizontal-map-cone f g c))
-          ( is-equiv-tot-is-fiberwise-equiv
-            ( λ y →
-              is-equiv-tot-is-fiberwise-equiv (λ x → is-equiv-inv (f x) (g y))))
-          ( is-equiv-tot-is-fiberwise-equiv is-equiv-fsq))
+        ( is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone g f
+          ( swap-cone f g c)
+          ( is-equiv-fsq))
 ```
 
 ### The horizontal pullback pasting property
