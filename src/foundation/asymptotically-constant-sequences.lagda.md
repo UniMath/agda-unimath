@@ -7,7 +7,9 @@ module foundation.asymptotically-constant-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -77,7 +79,51 @@ module _
 
   is-∞-constant-is-constant-sequence : is-∞-constant-sequence u
   pr1 is-∞-constant-is-constant-sequence = zero-ℕ
-  pr2 is-∞-constant-is-constant-sequence p I = zero-ℕ , λ q J → H p q
+  pr2 is-∞-constant-is-constant-sequence p I = (zero-ℕ , λ q J → H p q)
+```
+
+### The asymptotical value of an asymptotically constant sequence is unique
+
+```agda
+module _
+  {l : Level} {A : UU l} {u : sequence A}
+  (H K : is-∞-constant-sequence u)
+  where
+
+  all-equal-∞-value-∞-constant-sequence :
+    ∞-value-∞-constant-sequence H ＝ ∞-value-∞-constant-sequence K
+  all-equal-∞-value-∞-constant-sequence =
+    ( is-modulus-∞-value-∞-constant-sequence
+      ( H)
+      ( max-ℕ
+        ( modulus-∞-value-∞-constant-sequence H)
+        ( modulus-∞-value-∞-constant-sequence K))
+      ( leq-left-leq-max-ℕ
+        ( max-ℕ
+          ( modulus-∞-value-∞-constant-sequence H)
+          ( modulus-∞-value-∞-constant-sequence K))
+        ( modulus-∞-value-∞-constant-sequence H)
+        ( modulus-∞-value-∞-constant-sequence K)
+        ( refl-leq-ℕ
+          ( max-ℕ
+            ( modulus-∞-value-∞-constant-sequence H)
+            ( modulus-∞-value-∞-constant-sequence K))))) ∙
+    ( inv
+      ( is-modulus-∞-value-∞-constant-sequence
+        ( K)
+        ( max-ℕ
+          ( modulus-∞-value-∞-constant-sequence H)
+          ( modulus-∞-value-∞-constant-sequence K))
+        ( leq-right-leq-max-ℕ
+          ( max-ℕ
+            ( modulus-∞-value-∞-constant-sequence H)
+            ( modulus-∞-value-∞-constant-sequence K))
+          ( modulus-∞-value-∞-constant-sequence H)
+          ( modulus-∞-value-∞-constant-sequence K)
+          ( refl-leq-ℕ
+            ( max-ℕ
+              ( modulus-∞-value-∞-constant-sequence H)
+              ( modulus-∞-value-∞-constant-sequence K))))))
 ```
 
 ### An asymptotically constant sequence is asymptotically equal to the constant sequence of its asymptotical value
@@ -98,7 +144,7 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l} (u : sequence A) (x : A)
+  {l : Level} {A : UU l} (x : A) (u : sequence A)
   where
 
   is-∞-constant-eq-∞-constant-sequence :
@@ -120,20 +166,28 @@ module _
   {l : Level} {A : UU l} (u : sequence A) (v : subsequence u)
   where
 
+  eq-∞-value-∞-constant-subsequence :
+    (H : is-∞-constant-sequence u) →
+    eq-∞-sequence
+      ( const-sequence (∞-value-∞-constant-sequence H))
+      ( sequence-subsequence u v)
+  eq-∞-value-∞-constant-subsequence H =
+    ( ( modulus-subsequence u v (modulus-∞-value-∞-constant-sequence H)) ,
+      ( λ n I →
+        is-modulus-∞-value-∞-constant-sequence H
+          ( extract-subsequence u v n)
+          ( is-modulus-subsequence u v
+            ( modulus-∞-value-∞-constant-sequence H)
+            ( n)
+            ( I))))
+
   is-∞-constant-subsequence :
     is-∞-constant-sequence u → is-∞-constant-sequence (sequence-subsequence u v)
   is-∞-constant-subsequence H =
     is-∞-constant-eq-∞-constant-sequence
-      ( sequence-subsequence u v)
       ( ∞-value-∞-constant-sequence H)
-      ( ( modulus-subsequence u v (modulus-∞-value-∞-constant-sequence H)) ,
-        ( λ n I →
-          is-modulus-∞-value-∞-constant-sequence H
-            ( extract-subsequence u v n)
-            ( is-modulus-subsequence u v
-              ( modulus-∞-value-∞-constant-sequence H)
-              ( n)
-              ( I))))
+      ( sequence-subsequence u v)
+      ( eq-∞-value-∞-constant-subsequence H)
 ```
 
 ### A sequence is asymptotically constant if all its subsequences are asymptotically constant
@@ -158,12 +212,99 @@ module _
   preserves-∞-constant-eq-∞-sequence :
     is-∞-constant-sequence u → is-∞-constant-sequence v
   preserves-∞-constant-eq-∞-sequence K =
-    is-∞-constant-eq-∞-constant-sequence v
+    is-∞-constant-eq-∞-constant-sequence
       ( ∞-value-∞-constant-sequence K)
+      ( v)
       ( transitive-eq-∞-sequence
         ( const-sequence (∞-value-∞-constant-sequence K))
         ( u)
         ( v)
         ( H)
         ( eq-∞-value-∞-constant-sequence K))
+```
+
+### Asymptotically stationnary sequences
+
+#### The type of being asymptotically stationnary
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  is-∞-stationnary-sequence : UU l
+  is-∞-stationnary-sequence = asymptotically (λ n → u n ＝ u (succ-ℕ n))
+
+  is-∞-constant-modulus-is-∞-stationnary-sequence :
+    (H : is-∞-stationnary-sequence) →
+    (n : ℕ) →
+    leq-ℕ (modulus-∞-asymptotically H) n →
+    u (modulus-∞-asymptotically H) ＝ u n
+  is-∞-constant-modulus-is-∞-stationnary-sequence H =
+    based-ind-ℕ
+      ( modulus-∞-asymptotically H)
+      ( λ n → u (modulus-∞-asymptotically H) ＝ u n)
+      ( refl)
+      ( λ n I K → K ∙ is-modulus-∞-asymptotically H n I)
+```
+
+#### A sequence is asymptotically constant if and only if it is asymptotically stationnary
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  is-∞-constant-is-∞-stationnary :
+    is-∞-stationnary-sequence u → is-∞-constant-sequence u
+  is-∞-constant-is-∞-stationnary H =
+    is-∞-constant-eq-∞-constant-sequence
+      ( u (modulus-∞-asymptotically H))
+      ( u)
+      ( ( modulus-∞-asymptotically H) ,
+        ( is-∞-constant-modulus-is-∞-stationnary-sequence u H))
+
+  is-∞-stationnary-is-∞-constant-sequence :
+    is-∞-constant-sequence u → is-∞-stationnary-sequence u
+  is-∞-stationnary-is-∞-constant-sequence H =
+    ( ( modulus-∞-value-∞-constant-sequence H) ,
+      ( λ n I →
+        ( inv (is-modulus-∞-value-∞-constant-sequence H n I)) ∙
+        ( is-modulus-∞-value-∞-constant-sequence
+          ( H)
+          ( succ-ℕ n)
+          ( preserves-leq-succ-ℕ
+            ( modulus-∞-value-∞-constant-sequence H)
+            ( n)
+            ( I)))))
+```
+
+### A sequence is asymptotically constant if and only if it is asymptotically equal to all its subsequences
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  eq-∞-subsequence-is-∞-constant-sequence :
+    is-∞-constant-sequence u →
+    ((v : subsequence u) → eq-∞-sequence u (sequence-subsequence u v))
+  eq-∞-subsequence-is-∞-constant-sequence H v =
+    transitive-eq-∞-sequence
+      ( u)
+      ( const-sequence (∞-value-∞-constant-sequence H))
+      ( sequence-subsequence u v)
+      ( eq-∞-value-∞-constant-subsequence u v H)
+      ( symmetric-eq-∞-sequence
+        ( const-sequence (∞-value-∞-constant-sequence H))
+        ( u)
+        ( eq-∞-value-∞-constant-sequence H))
+
+  is-∞-constant-eq-∞-sequence-subsequence :
+    ((v : subsequence u) → eq-∞-sequence u (sequence-subsequence u v)) →
+    is-∞-constant-sequence u
+  is-∞-constant-eq-∞-sequence-subsequence H =
+    is-∞-constant-is-∞-stationnary
+      ( u)
+      ( H (skip-zero-sequence u))
 ```
