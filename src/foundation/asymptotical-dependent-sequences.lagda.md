@@ -87,7 +87,7 @@ module _
     H k (transitive-leq-ℕ i j k K I)
 ```
 
-### A dependent sequence thats asymptotically has an asymptotical modulus is asymptotical
+### A dependent sequence that asymptotically has an asymptotical modulus is asymptotical
 
 ```agda
 module _
@@ -120,28 +120,25 @@ module _
           ( is-modulus-subsequence A B N p I))
 ```
 
-### A dependent sequence that asymptotically map from an asymptotical dependent sequence is asymptotical
+### Asymptotical functorial action on asymptotical dependent sequences
 
 ```agda
-module _
-  {l1 l2 : Level} {A : ℕ → UU l1} {B : ℕ → UU l2}
-  where
-
-  asymptotically-map-dependent-sequence :
-    asymptotically (λ n → A n → B n) →
-    asymptotically A →
-    asymptotically B
-  asymptotically-map-dependent-sequence H K =
-    ( max-ℕ (modulus-∞-asymptotically H) (modulus-∞-asymptotically K)) ,
-    ( λ q I →
-      is-modulus-∞-asymptotically H q
-        ( leq-left-leq-max-ℕ q
+map-asymptotically :
+  {l1 l2 : Level} {A : ℕ → UU l1} {B : ℕ → UU l2} →
+  asymptotically (λ n → A n → B n) →
+  asymptotically A →
+  asymptotically B
+map-asymptotically H K =
+  ( max-ℕ (modulus-∞-asymptotically H) (modulus-∞-asymptotically K)) ,
+  ( λ q I →
+    is-modulus-∞-asymptotically H q
+      ( leq-left-leq-max-ℕ q
+        ( modulus-∞-asymptotically H)
+        ( modulus-∞-asymptotically K)
+        ( I))
+      ( is-modulus-∞-asymptotically K q
+        ( leq-right-leq-max-ℕ q
           ( modulus-∞-asymptotically H)
           ( modulus-∞-asymptotically K)
-          ( I))
-        ( is-modulus-∞-asymptotically K q
-          ( leq-right-leq-max-ℕ q
-            ( modulus-∞-asymptotically H)
-            ( modulus-∞-asymptotically K)
-            ( I))))
+          ( I))))
 ```
