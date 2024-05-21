@@ -123,6 +123,24 @@ module _
       ( a)
 ```
 
+### Any cone induces a family of maps between the fibers of the vertical maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
+  (f : A → X) (g : B → X) (c : cone f g C) (b : B)
+  where
+
+  map-fiber-horizontal-map-cone :
+    fiber (horizontal-map-cone f g c) b → fiber f (g b)
+  map-fiber-horizontal-map-cone =
+    map-domain-hom-arrow-fiber
+      ( horizontal-map-cone f g c)
+      ( f)
+      ( hom-arrow-cone' f g c)
+      ( b)
+```
+
 ### For any `f : A → B` and any identification `p : b ＝ b'` in `B`, we obtain a morphism of arrows between the fiber inclusion at `b` to the fiber inclusion at `b'`
 
 ```agda
