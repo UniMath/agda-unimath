@@ -8,6 +8,7 @@ module foundation.asymptotical-dependent-sequences where
 
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -62,6 +63,17 @@ module _
 
 ## Properties
 
+### Pointed dependent sequences are asymptotical
+
+```agda
+module _
+  {l : Level} {A : ℕ → UU l}
+  where
+
+  asymptotically-Π : ((n : ℕ) → A n) → asymptotically A
+  asymptotically-Π u = (zero-ℕ , λ p I → u p)
+```
+
 ### Any natural number greater than an asymptotical modulus is an asymptotical modulus
 
 ```agda
@@ -106,4 +118,30 @@ module _
         K
           ( extract-subsequence A B p)
           ( is-modulus-subsequence A B N p I))
+```
+
+### A dependent sequence that asymptotically map from an asymptotical dependent sequence is asymptotical
+
+```agda
+module _
+  {l1 l2 : Level} {A : ℕ → UU l1} {B : ℕ → UU l2}
+  where
+
+  asymptotically-map-dependent-sequence :
+    asymptotically (λ n → A n → B n) →
+    asymptotically A →
+    asymptotically B
+  asymptotically-map-dependent-sequence H K =
+    ( max-ℕ (modulus-∞-asymptotically H) (modulus-∞-asymptotically K)) ,
+    ( λ q I →
+      is-modulus-∞-asymptotically H q
+        ( leq-left-leq-max-ℕ q
+          ( modulus-∞-asymptotically H)
+          ( modulus-∞-asymptotically K)
+          ( I))
+        ( is-modulus-∞-asymptotically K q
+          ( leq-right-leq-max-ℕ q
+            ( modulus-∞-asymptotically H)
+            ( modulus-∞-asymptotically K)
+            ( I))))
 ```
