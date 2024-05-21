@@ -68,7 +68,7 @@ module _
 
 Two null-homotopies `H` and `K` are equal if there is an
 [equality](foundation-core.identity-types.md) of base points `p : H₀ ＝ K₀` such
-that every `x : A`, we have a
+that every for `x : A` we have a
 [commuting triangle of identifications](foundation.commuting-triangles-of-identifications.md)
 
 ```text
