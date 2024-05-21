@@ -249,15 +249,6 @@ module _
         ( is-equiv-map-equiv-standard-pullback-htpy Hf Hg)
 ```
 
-### A computation for the symmetry of pullbacks
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
-  (f : A → X) (g : B → X) (c : cone f g C)
-  where
-```
-
 ### Pullbacks are symmetric
 
 The pullback of `f : A → X ← B : g` is also the pullback of `g : B → X ← A : f`.
@@ -298,15 +289,15 @@ the vertical maps is a family of equivalences
 
 ```text
   fiber i a --> fiber g (f a)
-      |             |
-      |             |
-      ∨             ∨
-      C ----------> B
-      |             |
-    i |             | g
-      ∨             ∨
-  a ∈ A ----------> X.
-             f
+      |               |
+      |               |
+      ∨               ∨
+      C ------------> B
+      |               |
+    i |               | g
+      ∨               ∨
+  a ∈ A ------------> X.
+              f
 ```
 
 ```agda
@@ -364,13 +355,13 @@ A cone is a pullback if and only if the induced family of maps on fibers between
 the horizontal maps is a family of equivalences
 
 ```text
-                         j
-    fiber j b ----> C ------> B ∋ b
-          |         |         |
-          |         |         | g
-          ∨         ∨         ∨
-  fiber f (g b) --> A ------> X.
-                         f
+                            j
+      fiber j b ----> C --------> B ∋ b
+          |           |           |
+          |           |           | g
+          ∨           ∨           ∨
+    fiber f (g b) --> A --------> X.
+                            f
 ```
 
 ```agda
