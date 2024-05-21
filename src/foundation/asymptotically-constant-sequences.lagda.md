@@ -98,32 +98,18 @@ module _
       ( max-ℕ
         ( modulus-∞-value-∞-constant-sequence H)
         ( modulus-∞-value-∞-constant-sequence K))
-      ( leq-left-leq-max-ℕ
-        ( max-ℕ
-          ( modulus-∞-value-∞-constant-sequence H)
-          ( modulus-∞-value-∞-constant-sequence K))
+      ( leq-left-max-ℕ
         ( modulus-∞-value-∞-constant-sequence H)
-        ( modulus-∞-value-∞-constant-sequence K)
-        ( refl-leq-ℕ
-          ( max-ℕ
-            ( modulus-∞-value-∞-constant-sequence H)
-            ( modulus-∞-value-∞-constant-sequence K))))) ∙
+        ( modulus-∞-value-∞-constant-sequence K))) ∙
     ( inv
       ( is-modulus-∞-value-∞-constant-sequence
         ( K)
         ( max-ℕ
           ( modulus-∞-value-∞-constant-sequence H)
           ( modulus-∞-value-∞-constant-sequence K))
-        ( leq-right-leq-max-ℕ
-          ( max-ℕ
-            ( modulus-∞-value-∞-constant-sequence H)
-            ( modulus-∞-value-∞-constant-sequence K))
+        ( leq-right-max-ℕ
           ( modulus-∞-value-∞-constant-sequence H)
-          ( modulus-∞-value-∞-constant-sequence K)
-          ( refl-leq-ℕ
-            ( max-ℕ
-              ( modulus-∞-value-∞-constant-sequence H)
-              ( modulus-∞-value-∞-constant-sequence K))))))
+          ( modulus-∞-value-∞-constant-sequence K))))
 ```
 
 ### An asymptotically constant sequence is asymptotically equal to the constant sequence of its asymptotical value

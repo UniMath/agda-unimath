@@ -75,6 +75,14 @@ leq-left-leq-max-ℕ k (succ-ℕ m) zero-ℕ H = H
 leq-left-leq-max-ℕ (succ-ℕ k) (succ-ℕ m) (succ-ℕ n) H =
   leq-left-leq-max-ℕ k m n H
 
+leq-left-max-ℕ : (m n : ℕ) → m ≤-ℕ (max-ℕ m n)
+leq-left-max-ℕ m n =
+  leq-left-leq-max-ℕ
+    ( max-ℕ m n)
+    ( m)
+    ( n)
+    ( refl-leq-ℕ (max-ℕ m n))
+
 leq-right-leq-max-ℕ :
   (k m n : ℕ) → (max-ℕ m n) ≤-ℕ k → n ≤-ℕ k
 leq-right-leq-max-ℕ k zero-ℕ zero-ℕ H = star
@@ -82,6 +90,14 @@ leq-right-leq-max-ℕ k zero-ℕ (succ-ℕ n) H = H
 leq-right-leq-max-ℕ k (succ-ℕ m) zero-ℕ H = star
 leq-right-leq-max-ℕ (succ-ℕ k) (succ-ℕ m) (succ-ℕ n) H =
   leq-right-leq-max-ℕ k m n H
+
+leq-right-max-ℕ : (m n : ℕ) → n ≤-ℕ (max-ℕ m n)
+leq-right-max-ℕ m n =
+  leq-right-leq-max-ℕ
+    ( max-ℕ m n)
+    ( m)
+    ( n)
+    ( refl-leq-ℕ (max-ℕ m n))
 
 is-least-upper-bound-max-ℕ :
   (m n : ℕ) → is-least-binary-upper-bound-Poset ℕ-Poset m n (max-ℕ m n)
@@ -91,8 +107,7 @@ is-least-upper-bound-max-ℕ m n =
     { m}
     { n}
     { max-ℕ m n}
-    ( leq-left-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n)) ,
-      leq-right-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n)))
+    ( leq-left-max-ℕ m n , leq-right-max-ℕ m n)
     ( λ x (H , K) → leq-max-ℕ x m n H K)
 ```
 
