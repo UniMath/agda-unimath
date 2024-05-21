@@ -792,4 +792,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference SDR20}}
+{{#bibliography}} {{#reference SvDR20}}
