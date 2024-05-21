@@ -116,7 +116,7 @@ module _
             ~
      A -------> Σ (x y : A), (x ＝ y)
      |                 |
-   Δ |                 | Σ simplicial-hom-eq
+   Δ |                 | Σ² simplicial-hom-eq
      ∨                 ∨
   (𝟚 → A) ----> Σ (x y : A), (x →₂ y),
             ~
