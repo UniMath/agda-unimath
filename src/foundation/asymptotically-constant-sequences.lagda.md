@@ -1,4 +1,4 @@
-# Aymptotically constant Sequences
+# Asymptotically constant sequences
 
 ```agda
 module foundation.asymptotically-constant-sequences where
