@@ -203,7 +203,7 @@ is-nontrivial-loop-𝕊¹ =
     ( dependent-universal-property-𝕊¹)
 ```
 
-### The loop homotopy the circle is nontrivial
+### The loop homotopy on the circle is nontrivial
 
 ```agda
 abstract
