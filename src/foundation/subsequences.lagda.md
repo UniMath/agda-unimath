@@ -64,21 +64,6 @@ module _
 
 ## Properties
 
-### The subsequence that skips the first term
-
-```agda
-module _
-  {l : Level} {A : UU l} (u : sequence A)
-  where
-
-  skip-zero-sequence : subsequence u
-  skip-zero-sequence = (succ-ℕ , λ i j K → K)
-
-  eq-skip-zero-sequence :
-    (n : ℕ) → sequence-subsequence u skip-zero-sequence n ＝ u (succ-ℕ n)
-  eq-skip-zero-sequence n = refl
-```
-
 ### Any sequence is a subsequence of itself
 
 ```agda
@@ -91,6 +76,21 @@ module _
 
   eq-refl-subsequence : u ＝ sequence-subsequence u refl-subsequence
   eq-refl-subsequence = refl
+```
+
+### The subsequence that skips the first term
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  skip-zero-sequence : subsequence u
+  skip-zero-sequence = (succ-ℕ , λ i j K → K)
+
+  eq-skip-zero-sequence :
+    u ∘ succ-ℕ ＝ sequence-subsequence u skip-zero-sequence
+  eq-skip-zero-sequence = refl
 ```
 
 ### A subsequence of a subsequence is a subsequence of the original sequence
