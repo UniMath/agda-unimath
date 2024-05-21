@@ -9,13 +9,11 @@ module foundation.asymptotical-dependent-sequences where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
-open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.dependent-sequences
 open import foundation.functoriality-dependent-pair-types
-open import foundation.subsequences
 open import foundation.universe-levels
 ```
 
@@ -99,25 +97,6 @@ module _
     asymptotically A
   asymptotically-is-modulus-dependent-sequence (N , H) =
     (N , (λ n K → H n K n (refl-leq-ℕ n)))
-```
-
-### Any subsequence of an asymptotical dependent sequence is asymptotical
-
-```agda
-module _
-  {l : Level} (A : ℕ → UU l) (B : subsequence A)
-  where
-
-  asymptotically-sequence-subsequence :
-    asymptotically A → asymptotically (sequence-subsequence A B)
-  asymptotically-sequence-subsequence =
-    map-Σ
-      ( is-modulus-dependent-sequence (sequence-subsequence A B))
-      ( modulus-subsequence A B)
-      ( λ N K p I →
-        K
-          ( extract-subsequence A B p)
-          ( is-modulus-subsequence A B N p I))
 ```
 
 ### Asymptotical functorial action on asymptotical dependent sequences

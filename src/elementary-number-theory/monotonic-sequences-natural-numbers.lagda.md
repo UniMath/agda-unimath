@@ -11,6 +11,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.asymptotical-dependent-sequences
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
@@ -170,25 +171,25 @@ module _
   where
 
   limit-∞-is-strictly-increasing-sequence-ℕ :
-    (M : ℕ) → Σ ℕ (λ N → (p : ℕ) → leq-ℕ N p → leq-ℕ M (f p))
+    (M : ℕ) → asymptotically (λ n → leq-ℕ M (f n))
   limit-∞-is-strictly-increasing-sequence-ℕ zero-ℕ =
-    ( zero-ℕ , λ p K → leq-zero-ℕ (f p))
+    ( zero-ℕ , λ n K → leq-zero-ℕ (f n))
   limit-∞-is-strictly-increasing-sequence-ℕ (succ-ℕ M) =
     map-Σ
-      ( λ N → (p : ℕ) → leq-ℕ N p → leq-ℕ (succ-ℕ M) (f p))
+      ( is-modulus-dependent-sequence (λ n → leq-ℕ (succ-ℕ M) (f n)))
       ( succ-ℕ)
-      ( λ N K p I →
-        leq-succ-le-ℕ M (f p)
+      ( λ N K n I →
+        leq-succ-le-ℕ M (f n)
           (concatenate-leq-le-ℕ
             { M}
             { f N}
-            { f p}
+            { f n}
             ( K N (refl-leq-ℕ N))
-            ( H N p
+            ( H N n
               ( concatenate-le-leq-ℕ
                 { N}
                 { succ-ℕ N}
-                { p}
+                { n}
                 ( succ-le-ℕ N)
                 ( I)))))
       ( limit-∞-is-strictly-increasing-sequence-ℕ M)

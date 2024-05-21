@@ -12,6 +12,7 @@ open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.asymptotical-dependent-sequences
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -169,4 +170,30 @@ module _
     is-modulus-limit-∞-is-strictly-increasing-sequence-ℕ
       ( extract-subsequence u v)
       ( is-strictly-increasing-extract-subsequence u v)
+```
+
+### A dependent sequence is asymptotical if and only if all its subsequences are asymptotical
+
+```agda
+module _
+  {l : Level} (A : ℕ → UU l)
+  where
+
+  asymptotically-sequence-subsequence :
+    asymptotically A →
+    ((B : subsequence A) → asymptotically (sequence-subsequence A B))
+  asymptotically-sequence-subsequence H B =
+    map-Σ
+      ( is-modulus-dependent-sequence (sequence-subsequence A B))
+      ( modulus-subsequence A B)
+      ( λ N K p I →
+        K
+          ( extract-subsequence A B p)
+          ( is-modulus-subsequence A B N p I))
+      ( H)
+
+  asymptotically-subsequence :
+    ((B : subsequence A) → asymptotically (sequence-subsequence A B)) →
+    asymptotically A
+  asymptotically-subsequence H = H (refl-subsequence A)
 ```
