@@ -49,7 +49,7 @@ A [cone](foundation.cones-over-cospan-diagrams.md) `𝑐` over a
   C → standard-pullback f g
 ```
 
-is an [equivalence](foundation-core.equivalenes.md). This is known as the
+is an [equivalence](foundation-core.equivalences.md). This is known as the
 [small predicate of being a pullback](foundation-core.pullbacks.md).
 
 ## Definitions
