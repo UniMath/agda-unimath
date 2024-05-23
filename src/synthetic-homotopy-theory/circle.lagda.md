@@ -175,24 +175,6 @@ module _
     pr2 (pr2 apply-universal-property-𝕊¹)
 ```
 
-### The loop homotopy on the circle
-
-```agda
-loop-htpy-𝕊¹ : (x : 𝕊¹) → x ＝ x
-loop-htpy-𝕊¹ =
-  function-apply-dependent-universal-property-𝕊¹
-    ( eq-value id id)
-    ( loop-𝕊¹)
-    ( tr-loop loop-𝕊¹ loop-𝕊¹ ∙ ap (_∙ loop-𝕊¹) (left-inv loop-𝕊¹))
-
-compute-base-loop-htpy-𝕊¹ : loop-htpy-𝕊¹ base-𝕊¹ ＝ loop-𝕊¹
-compute-base-loop-htpy-𝕊¹ =
-  base-dependent-universal-property-𝕊¹
-    ( eq-value id id)
-    ( loop-𝕊¹)
-    ( tr-loop loop-𝕊¹ loop-𝕊¹ ∙ ap (_∙ loop-𝕊¹) (left-inv loop-𝕊¹))
-```
-
 ### The loop of the circle is nontrivial
 
 ```agda
@@ -201,22 +183,6 @@ is-nontrivial-loop-𝕊¹ =
   is-nontrivial-loop-dependent-universal-property-circle
     ( free-loop-𝕊¹)
     ( dependent-universal-property-𝕊¹)
-```
-
-### The loop homotopy on the circle is nontrivial
-
-```agda
-abstract
-  is-not-refl-ev-base-loop-htpy-𝕊¹ : loop-htpy-𝕊¹ base-𝕊¹ ≠ refl
-  is-not-refl-ev-base-loop-htpy-𝕊¹ p =
-    is-nontrivial-loop-𝕊¹ (inv (compute-base-loop-htpy-𝕊¹) ∙ p)
-
-is-nontrivial-loop-htpy-𝕊¹' : ¬ (loop-htpy-𝕊¹ ~ refl-htpy)
-is-nontrivial-loop-htpy-𝕊¹' H = is-not-refl-ev-base-loop-htpy-𝕊¹ (H base-𝕊¹)
-
-is-nontrivial-loop-htpy-𝕊¹ : loop-htpy-𝕊¹ ≠ refl-htpy
-is-nontrivial-loop-htpy-𝕊¹ =
-  nonequal-Π loop-htpy-𝕊¹ refl-htpy base-𝕊¹ is-not-refl-ev-base-loop-htpy-𝕊¹
 ```
 
 ### The circle is 0-connected

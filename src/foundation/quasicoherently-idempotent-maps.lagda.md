@@ -28,6 +28,7 @@ open import foundation-core.retractions
 open import foundation-core.sets
 
 open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.multiplication-circle
 ```
 
 </details>
