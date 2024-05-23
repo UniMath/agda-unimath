@@ -220,3 +220,7 @@ module _
   pr2 (pr2 (pr2 (pr2 exp-Type-With-Apartness))) =
     is-cotransitive-apart-function-into-Type-With-Apartness
 ```
+
+## References
+
+{{#bibliography}} {{#reference MRR88}}

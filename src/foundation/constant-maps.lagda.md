@@ -15,11 +15,20 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
+open import foundation.morphisms-arrows
+open import foundation.postcomposition-functions
+open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-unit-type
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.1-types
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
@@ -55,15 +64,20 @@ module _
   compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
 ```
 
+### Computing the fibers of point inclusions
+
+```agda
+compute-fiber-point :
+  {l : Level} {A : UU l} (x y : A) → fiber (point x) y ≃ (x ＝ y)
+compute-fiber-point x y = left-unit-law-product
+```
+
 ### A type is `k+1`-truncated if and only if all point inclusions are `k`-truncated maps
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
-
-  compute-fiber-point : (x y : A) → fiber (point x) y ≃ (x ＝ y)
-  compute-fiber-point x y = left-unit-law-product
 
   abstract
     is-trunc-map-point-is-trunc :
