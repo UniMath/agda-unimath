@@ -86,7 +86,7 @@ module _
   pr2 diagonal-exponential-injection = is-injective-diagonal-exponential
 ```
 
-### The action on identifications of a constant map is a constant map
+### The action on identifications of an (exponential) diagonal is a diagonal
 
 ```agda
 module _
