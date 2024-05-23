@@ -46,6 +46,17 @@ module _
   constant-sequence = Σ (sequence A) is-constant-sequence
 ```
 
+### Stationnary values of a sequence
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  is-stationnary-value-sequence : ℕ → UU l
+  is-stationnary-value-sequence n = (u n) ＝ (u (succ-ℕ n))
+```
+
 ## Properties
 
 ### The value of a constant sequence
@@ -88,10 +99,32 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l} (u : sequence A)
+  {l : Level} {A : UU l} (x : A) (u : sequence A)
   where
 
   is-constant-htpy-constant-sequence :
-    Σ A (λ x → (const-sequence x) ~ u) → is-constant-sequence u
-  is-constant-htpy-constant-sequence (x , H) p q = inv (H p) ∙ H q
+    (const-sequence x) ~ u → is-constant-sequence u
+  is-constant-htpy-constant-sequence H p q = inv (H p) ∙ H q
+```
+
+### A sequence is constant if and only if all its values are stationnary
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A)
+  where
+
+  is-stationnary-value-is-constant-sequence :
+    is-constant-sequence u →
+    ((n : ℕ) → is-stationnary-value-sequence u n)
+  is-stationnary-value-is-constant-sequence H n = H n (succ-ℕ n)
+
+  is-constant-is-stationnary-value-sequence :
+    ((n : ℕ) → is-stationnary-value-sequence u n) →
+    is-constant-sequence u
+  is-constant-is-stationnary-value-sequence H =
+    is-constant-htpy-constant-sequence
+      ( u zero-ℕ)
+      ( u)
+      ( ind-ℕ (refl) (λ n K → K ∙ H n))
 ```
