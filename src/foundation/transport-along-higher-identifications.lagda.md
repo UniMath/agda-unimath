@@ -10,6 +10,7 @@ module foundation.transport-along-higher-identifications where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-identifications
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.homotopy-algebra
 open import foundation.path-algebra

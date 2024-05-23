@@ -8,11 +8,17 @@ module synthetic-homotopy-theory.eckmann-hilton-argument where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.homotopies
+open import foundation.homotopy-algebra
 open import foundation.identity-types
 open import foundation.interchange-law
 open import foundation.path-algebra
+open import foundation.transport-along-higher-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-concatenation
 open import foundation.whiskering-identifications-concatenation
 
 open import structured-types.pointed-equivalences

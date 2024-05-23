@@ -188,27 +188,38 @@ doing so.
 
 ```agda
 module _
-  {l : Level} {A : UU l} {x y z : A}
+  {l : Level} {A : UU l} {x y z : A} {p p' : x ＝ y} {q q' : y ＝ z}
   where
 
-  commutative-left-whisker-right-whisker-concat :
-    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
-    left-whisker-concat p β ∙ right-whisker-concat α q' ＝
+  left-whisker-right-whisker-concat :
+    (β : q ＝ q') (α : p ＝ p') →
+    p ∙ q ＝ p' ∙ q'
+  left-whisker-right-whisker-concat β α =
+    left-whisker-concat p β ∙ right-whisker-concat α q'
+
+  right-whisker-left-whisker-concat : 
+    (α : p ＝ p') (β : q ＝ q') → p ∙ q ＝ p' ∙ q'
+  right-whisker-left-whisker-concat α β =
     right-whisker-concat α q ∙ left-whisker-concat p' β
+
+  commutative-left-whisker-right-whisker-concat :
+    (β : q ＝ q') (α : p ＝ p') →
+    left-whisker-right-whisker-concat β α ＝
+    right-whisker-left-whisker-concat α β
   commutative-left-whisker-right-whisker-concat β =
     nat-htpy (λ p → left-whisker-concat p β)
 
   commutative-right-whisker-left-whisker-concat :
-    {p p' : x ＝ y} (α : p ＝ p') {q q' : y ＝ z} (β : q ＝ q') →
-    right-whisker-concat α q ∙ left-whisker-concat p' β ＝
-    left-whisker-concat p β ∙ right-whisker-concat α q'
+    (α : p ＝ p') (β : q ＝ q') →
+    right-whisker-left-whisker-concat α β ＝
+    left-whisker-right-whisker-concat β α
   commutative-right-whisker-left-whisker-concat α =
     nat-htpy (right-whisker-concat α)
 
   compute-inv-commutative-left-whisker-right-whisker-concat :
-    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
-    inv (commutative-right-whisker-left-whisker-concat α β) ＝
-    commutative-left-whisker-right-whisker-concat β α
+    (β : q ＝ q') (α : p ＝ p') →
+    ( inv (commutative-right-whisker-left-whisker-concat α β)) ＝
+    ( commutative-left-whisker-right-whisker-concat β α)
   compute-inv-commutative-left-whisker-right-whisker-concat refl refl =
     refl
 ```
