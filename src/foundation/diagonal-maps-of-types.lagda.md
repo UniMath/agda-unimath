@@ -11,6 +11,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
+open import foundation.morphisms-arrows
+open import foundation.postcomposition-functions
+open import foundation.retracts-of-types
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -79,4 +84,37 @@ module _
   diagonal-exponential-injection : injection A (B → A)
   pr1 diagonal-exponential-injection = diagonal-exponential A B
   pr2 diagonal-exponential-injection = is-injective-diagonal-exponential
+```
+
+### The action on identifications of an (exponential) diagonal is a diagonal
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B)
+  where
+
+  compute-htpy-eq-ap-diagonal-exponential :
+    htpy-eq ∘ ap (diagonal-exponential B A) ~ diagonal-exponential (x ＝ y) A
+  compute-htpy-eq-ap-diagonal-exponential refl = refl
+
+  inv-compute-htpy-eq-ap-diagonal-exponential :
+    diagonal-exponential (x ＝ y) A ~ htpy-eq ∘ ap (diagonal-exponential B A)
+  inv-compute-htpy-eq-ap-diagonal-exponential =
+    inv-htpy compute-htpy-eq-ap-diagonal-exponential
+
+  compute-eq-htpy-ap-diagonal-exponential :
+    ap (diagonal-exponential B A) ~ eq-htpy ∘ diagonal-exponential (x ＝ y) A
+  compute-eq-htpy-ap-diagonal-exponential p =
+    map-eq-transpose-equiv
+      ( equiv-funext)
+      ( compute-htpy-eq-ap-diagonal-exponential p)
+```
+
+### Computing the fibers of diagonal maps
+
+```agda
+compute-fiber-diagonal-exponential :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  fiber (diagonal-exponential B A) f ≃ Σ B (λ b → (x : A) → b ＝ f x)
+compute-fiber-diagonal-exponential f = equiv-tot (λ _ → equiv-funext)
 ```
