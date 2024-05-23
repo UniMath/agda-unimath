@@ -123,3 +123,7 @@ pr1 (exp-Type-With-Tight-Apartness X Y) =
 pr2 (exp-Type-With-Tight-Apartness X Y) =
   is-tight-apartness-function-into-Type-With-Tight-Apartness Y
 ```
+
+## References
+
+{{#bibliography}} {{#reference MRR88}}
