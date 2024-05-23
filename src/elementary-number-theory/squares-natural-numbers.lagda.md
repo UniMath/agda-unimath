@@ -9,6 +9,7 @@ module elementary-number-theory.squares-natural-numbers where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-types
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
@@ -40,6 +41,17 @@ a [natural number](elementary-number-theory.natural-numbers.md) `n` is the
 
 of `n` with itself.
 
+There is also a recursive definition of the squares. Define the function `S : ℕ → ℕ` recursively by
+
+```text
+        S 0 := 0
+        S 1 := 1
+        S 2 := 4
+  S (n + 3) := 3 * S (n + 2) - 3 * S (n + 1) + S n.
+```
+
+Then we have `S n = n²` for all `n : ℕ`.
+
 ## Definition
 
 ### Squares of natural numbers
@@ -61,6 +73,20 @@ is-square-ℕ n = Σ ℕ (λ x → n ＝ square-ℕ x)
 ```agda
 square-root-ℕ : (n : ℕ) → is-square-ℕ n → ℕ
 square-root-ℕ _ (root , _) = root
+```
+
+### The recursive definition of the square of a natural number
+
+```agda
+recursive-square-ℕ : ℕ → ℕ
+recursive-square-ℕ zero-ℕ = 0
+recursive-square-ℕ (succ-ℕ zero-ℕ) = 1
+recursive-square-ℕ (succ-ℕ (succ-ℕ zero-ℕ)) = 4
+recursive-square-ℕ (succ-ℕ (succ-ℕ (succ-ℕ n))) =
+  ( dist-ℕ
+    ( 3 *ℕ recursive-square-ℕ (succ-ℕ (succ-ℕ n)))
+    ( 3 *ℕ recursive-square-ℕ (succ-ℕ n))) +ℕ
+  ( recursive-square-ℕ n)
 ```
 
 ## Properties
