@@ -154,6 +154,6 @@ module _
 ## See also
 
 - The decidable total order on the rational numbers is defined in
-  [`decidable-total-order-rational-numbers](elementary-number-theory.decidable-total-order-rational-numbers.md)
+  [`decidable-total-order-rational-numbers`](elementary-number-theory.decidable-total-order-rational-numbers.md)
 - The strict ordering on the rational numbers is defined in
   [`strict-inequality-rational-numbers`](elementary-number-theory.strict-inequality-rational-numbers.md)

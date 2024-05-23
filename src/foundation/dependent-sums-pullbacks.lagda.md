@@ -41,7 +41,7 @@ Squares of the form
       |                          |
   pr1 |                          | pr1
       |                          |
-      V                          V
+      ∨                          ∨
       A -----------------------> B
                    f
 ```
@@ -105,7 +105,7 @@ Given a map `f : A → B` with a family of maps over it
   Σ A P ----------> Σ B Q
     |                |
     |                |
-    v                v
+    ∨                ∨
     A -------------> B
              f
 ```

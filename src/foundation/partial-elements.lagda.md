@@ -38,7 +38,7 @@ codomain of the
     1   ∅     ∅
     |   |     |
   T | ∘ |  =  |
-    V   V     V
+    ∨   ∨     ∨
   Prop  X   P T X
 ```
 

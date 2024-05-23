@@ -44,7 +44,7 @@ the sense that for any two maps `f : A → B` and `g : C → D` the diagram
       |   \      |
   1×g |    \f×g  | 1×g
       |     \    |
-      V      >   V
+      ∨      ∨   ∨
     A × D ---> B × D
           f×1
 ```

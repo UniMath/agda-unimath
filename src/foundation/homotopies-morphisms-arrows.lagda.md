@@ -59,7 +59,7 @@ and `J : j ~ j'` and a homotopy `K` witnessing that the
   (j ∘ f) --------> (j' ∘ f)
      |                 |
    H |                 | H'
-     V                 V
+     ∨                 ∨
   (g ∘ i) --------> (g ∘ i')
            g ·l I
 ```
@@ -467,7 +467,7 @@ Consider a commuting diagram of the form
     A -----> X -----> U -----> K
     |        |        |        |
   f |   α  g |   β  h |   γ    | i
-    V        V        V        V
+    ∨        ∨        ∨        ∨
     B -----> Y -----> V -----> L
         α₁       β₁       γ₁
 ```

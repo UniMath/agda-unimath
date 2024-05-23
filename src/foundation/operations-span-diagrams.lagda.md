@@ -46,7 +46,7 @@ and an [equivalence of arrows](foundation.equivalences-arrows.md)
      A' <---- S'
      |        |
   h₀ | ≃    ≃ | h₁
-     V        V
+     ∨        ∨
      A <----- S -----> B.
           f       g
 ```
@@ -115,7 +115,7 @@ and a [equivalence of arrows](foundation.equivalences-arrows.md)
            S' ----> B'
            |        |
         h₀ | ≃    ≃ | h₁
-           V        V
+           ∨        ∨
   A <----- S -----> B.
        f       g
 ```

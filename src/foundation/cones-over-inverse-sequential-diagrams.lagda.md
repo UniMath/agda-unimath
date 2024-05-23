@@ -40,7 +40,7 @@ from `X` into the sequence of types of `A` such that the triangles
      X
     / \
    /   \
-  v     v
+  ∨     ∨
  Aₙ₊₁ -> Aₙ
 ```
 

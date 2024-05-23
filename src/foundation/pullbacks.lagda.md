@@ -332,7 +332,7 @@ Given a pullback square
     C -------> B
     | ⌟        |
   g'|          | g
-    v          v
+    ∨          ∨
     A -------> X
          f
 ```

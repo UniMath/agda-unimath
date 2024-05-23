@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   website:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         agda: ['2.6.4']

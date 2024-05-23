@@ -113,7 +113,7 @@ type of maps `h : B → X` equipped with a homotopy witnessing that the square
     A -----> B
     |        |
   f |        | h
-    V        V
+    ∨        ∨
     B -----> X
         g
 ```

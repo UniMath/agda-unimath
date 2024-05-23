@@ -7,8 +7,11 @@ module elementary-number-theory.strict-inequality-rational-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-integer-fractions
+open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
 open import elementary-number-theory.difference-integers
+open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-integer-fractions
 open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.inequality-rational-numbers
@@ -25,6 +28,7 @@ open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-integer-fractions
 open import elementary-number-theory.strict-inequality-integers
 
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.conjunction
@@ -36,9 +40,11 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -178,6 +184,24 @@ module _
       ( H)
       ( sim-reduced-fraction-ℤ p)
 
+  reflects-le-right-rational-fraction-ℤ :
+    le-ℚ x (rational-fraction-ℤ p) → le-fraction-ℤ (fraction-ℚ x) p
+  reflects-le-right-rational-fraction-ℤ H =
+    concatenate-le-sim-fraction-ℤ
+      ( fraction-ℚ x)
+      ( reduce-fraction-ℤ p)
+      ( p)
+      ( H)
+      ( symmetric-sim-fraction-ℤ
+        ( p)
+        ( reduce-fraction-ℤ p)
+        ( sim-reduced-fraction-ℤ p))
+
+  iff-le-right-rational-fraction-ℤ :
+    le-fraction-ℤ (fraction-ℚ x) p ↔ le-ℚ x (rational-fraction-ℤ p)
+  pr1 iff-le-right-rational-fraction-ℤ = preserves-le-right-rational-fraction-ℤ
+  pr2 iff-le-right-rational-fraction-ℤ = reflects-le-right-rational-fraction-ℤ
+
   preserves-le-left-rational-fraction-ℤ :
     le-fraction-ℤ p (fraction-ℚ x) → le-ℚ (rational-fraction-ℤ p) x
   preserves-le-left-rational-fraction-ℤ =
@@ -189,6 +213,112 @@ module _
         ( p)
         ( fraction-ℚ ( rational-fraction-ℤ p))
         ( sim-reduced-fraction-ℤ p))
+
+  reflects-le-left-rational-fraction-ℤ :
+    le-ℚ (rational-fraction-ℤ p) x → le-fraction-ℤ p (fraction-ℚ x)
+  reflects-le-left-rational-fraction-ℤ =
+    concatenate-sim-le-fraction-ℤ
+      ( p)
+      ( reduce-fraction-ℤ p)
+      ( fraction-ℚ x)
+      ( sim-reduced-fraction-ℤ p)
+
+  iff-le-left-rational-fraction-ℤ :
+    le-fraction-ℤ p (fraction-ℚ x) ↔ le-ℚ (rational-fraction-ℤ p) x
+  pr1 iff-le-left-rational-fraction-ℤ = preserves-le-left-rational-fraction-ℤ
+  pr2 iff-le-left-rational-fraction-ℤ = reflects-le-left-rational-fraction-ℤ
+```
+
+### `x < y` if and only if `0 < y - x`
+
+```agda
+module _
+  (x y : ℚ)
+  where
+
+  iff-translate-diff-le-zero-ℚ : le-ℚ zero-ℚ (y -ℚ x) ↔ le-ℚ x y
+  iff-translate-diff-le-zero-ℚ =
+    logical-equivalence-reasoning
+      le-ℚ zero-ℚ (y -ℚ x)
+      ↔ le-fraction-ℤ
+        ( zero-fraction-ℤ)
+        ( add-fraction-ℤ (fraction-ℚ y) (neg-fraction-ℤ (fraction-ℚ x)))
+        by
+          inv-iff
+            ( iff-le-right-rational-fraction-ℤ
+              ( zero-ℚ)
+              ( add-fraction-ℤ (fraction-ℚ y) (neg-fraction-ℤ (fraction-ℚ x))))
+      ↔ le-ℚ x y
+        by
+          inv-tr
+            ( _↔ le-ℚ x y)
+            ( eq-translate-diff-le-zero-fraction-ℤ
+              ( fraction-ℚ x)
+              ( fraction-ℚ y))
+            ( id-iff)
+```
+
+### Strict inequality on the rational numbers is invariant by translation
+
+```agda
+module _
+  (z x y : ℚ)
+  where
+
+  iff-translate-left-le-ℚ : le-ℚ (z +ℚ x) (z +ℚ y) ↔ le-ℚ x y
+  iff-translate-left-le-ℚ =
+    logical-equivalence-reasoning
+      le-ℚ (z +ℚ x) (z +ℚ y)
+      ↔ le-ℚ zero-ℚ ((z +ℚ y) -ℚ (z +ℚ x))
+        by (inv-iff (iff-translate-diff-le-zero-ℚ (z +ℚ x) (z +ℚ y)))
+      ↔ le-ℚ zero-ℚ (y -ℚ x)
+        by
+          ( inv-tr
+            ( _↔ le-ℚ zero-ℚ (y -ℚ x))
+            ( ap (le-ℚ zero-ℚ) (left-translation-diff-ℚ y x z))
+            ( id-iff))
+      ↔ le-ℚ x y
+        by (iff-translate-diff-le-zero-ℚ x y)
+
+  iff-translate-right-le-ℚ : le-ℚ (x +ℚ z) (y +ℚ z) ↔ le-ℚ x y
+  iff-translate-right-le-ℚ =
+    logical-equivalence-reasoning
+      le-ℚ (x +ℚ z) (y +ℚ z)
+      ↔ le-ℚ zero-ℚ ((y +ℚ z) -ℚ (x +ℚ z))
+        by (inv-iff (iff-translate-diff-le-zero-ℚ (x +ℚ z) (y +ℚ z)))
+      ↔ le-ℚ zero-ℚ (y -ℚ x)
+        by
+          ( inv-tr
+            ( _↔ le-ℚ zero-ℚ (y -ℚ x))
+            ( ap (le-ℚ zero-ℚ) (right-translation-diff-ℚ y x z))
+            ( id-iff))
+      ↔ le-ℚ x y by (iff-translate-diff-le-zero-ℚ x y)
+
+  preserves-le-left-add-ℚ : le-ℚ x y → le-ℚ (x +ℚ z) (y +ℚ z)
+  preserves-le-left-add-ℚ = backward-implication iff-translate-right-le-ℚ
+
+  preserves-le-right-add-ℚ : le-ℚ x y → le-ℚ (z +ℚ x) (z +ℚ y)
+  preserves-le-right-add-ℚ = backward-implication iff-translate-left-le-ℚ
+
+  reflects-le-left-add-ℚ : le-ℚ (x +ℚ z) (y +ℚ z) → le-ℚ x y
+  reflects-le-left-add-ℚ = forward-implication iff-translate-right-le-ℚ
+
+  reflects-le-right-add-ℚ : le-ℚ (z +ℚ x) (z +ℚ y) → le-ℚ x y
+  reflects-le-right-add-ℚ = forward-implication iff-translate-left-le-ℚ
+```
+
+### Addition on the rational numbers preserves strict inequality
+
+```agda
+preserves-le-add-ℚ :
+  {a b c d : ℚ} → le-ℚ a b → le-ℚ c d → le-ℚ (a +ℚ c) (b +ℚ d)
+preserves-le-add-ℚ {a} {b} {c} {d} H K =
+  transitive-le-ℚ
+    ( a +ℚ c)
+    ( b +ℚ c)
+    ( b +ℚ d)
+    ( preserves-le-right-add-ℚ b c d K)
+    ( preserves-le-left-add-ℚ c a b H)
 ```
 
 ### The rational numbers have no lower or upper bound

@@ -101,9 +101,8 @@ module _
 
   flattening-lemma-coequalizer-statement : UUω
   flattening-lemma-coequalizer-statement =
-    ({l : Level} → dependent-universal-property-coequalizer l a e) →
-    {l : Level} →
-    universal-property-coequalizer l
+    dependent-universal-property-coequalizer a e →
+    universal-property-coequalizer
       ( double-arrow-flattening-lemma-coequalizer)
       ( cofork-flattening-lemma-coequalizer)
 ```

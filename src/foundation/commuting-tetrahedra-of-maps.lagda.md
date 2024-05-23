@@ -23,11 +23,11 @@ is a commuting diagram of the form
 
 ```text
   A ----------> B
-  |  \       ^  |
+  |  \       ∧  |
   |    \   /    |
   |      /      |
   |    /   \    |
-  V  /       v  V
+  ∨  /       ∨  ∨
   X ----------> Y.
 ```
 

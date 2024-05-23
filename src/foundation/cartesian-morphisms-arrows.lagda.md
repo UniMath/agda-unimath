@@ -53,7 +53,7 @@ if the [commuting square](foundation-core.commuting-squares-of-maps.md)
     A -----> X
     |        |
   f |   h    | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -184,7 +184,7 @@ of a cartesian morphism of arrows
     A -----> X
     | ⌟      |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -196,7 +196,7 @@ is the cartesian morphism of arrows
     A -----> B
     | ⌟      |
   i |        | j
-    V        V
+    ∨        ∨
     X -----> Y.
         g
 ```

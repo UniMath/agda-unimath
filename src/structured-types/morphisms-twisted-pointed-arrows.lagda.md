@@ -33,7 +33,7 @@ consisting of pointed maps `i : X →∗ A` and `j : B →∗ Y` and a
     A <----- X
     |        |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```

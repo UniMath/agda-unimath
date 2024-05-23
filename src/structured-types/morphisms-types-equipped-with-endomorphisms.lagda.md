@@ -39,7 +39,7 @@ that the square
   X -----> Y
   |        |
  f|        |g
-  V        V
+  ∨        ∨
   X -----> Y
       h
 ```

@@ -32,7 +32,7 @@ that the square
   X -----> Y
   |        |
  e|        |f
-  V        V
+  ∨        ∨
   X -----> Y
       h
 ```
