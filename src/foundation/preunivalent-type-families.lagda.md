@@ -70,7 +70,7 @@ is-preunivalent-UU l = preunivalence
            \               /
             \             /
   equiv-tr B \           / equiv-eq
-              v         v
+              ∨         ∨
               (B x ≃ B y)
 ```
 

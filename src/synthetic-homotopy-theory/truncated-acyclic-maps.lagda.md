@@ -541,7 +541,7 @@ module _
    S -------> B -------> C
    |          |          |
  f |          | j        | inr
-   v       ⌜  v       ⌜  v
+   ∨        ⌜ ∨        ⌜ ∨
    A -------> C -------> ∙
         i          inl
 ```
@@ -560,7 +560,7 @@ For this, we use the following commutative diagram
       |                                      |
     ≃ | (universal                           | vertical-map-cocone
       |  property)                           | (second projection)
-      v                                      v
+      ∨                                      ∨
  cocone j j X --------------------------> (C → X)
                  vertical-map-cocone
                  (second projection)

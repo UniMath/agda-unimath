@@ -32,7 +32,7 @@ A {{#concept "morphism of span diagrams" Agda=hom-span-diagram}} from a
     A <----- S -----> B
     |        |        |
   u |        | w      | v
-    V        V        V
+    ∨        ∨        ∨
     C <----- T -----> D
          h       k
 ```
@@ -52,7 +52,7 @@ squares of morphisms of spans are oriented in the following way:
                     S ----------------------> T
                     |                         |
     left-map-span s |                         | left-map-span t
-                    V                         V
+                    ∨                         ∨
                     A ----------------------> C
                         map-domain-hom-span
   ```
@@ -68,7 +68,7 @@ squares of morphisms of spans are oriented in the following way:
                      S ----------------------> T
                      |                         |
     right-map-span s |                         | right-map-span t
-                     V                         V
+                     ∨                         ∨
                      B ----------------------> D
                         map-codomain-hom-span
   ```

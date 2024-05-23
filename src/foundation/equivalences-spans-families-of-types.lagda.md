@@ -40,7 +40,7 @@ span `t` on `A` consists of an [equivalence](foundation-core.equivalences.md)
   S ----> T
    \     /
     \   /
-     V V
+     ∨ ∨
       Aᵢ
 ```
 

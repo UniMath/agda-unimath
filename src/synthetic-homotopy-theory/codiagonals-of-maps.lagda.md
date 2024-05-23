@@ -93,7 +93,7 @@ module _
         ( terminal-map (fiber f b))
         ( terminal-map (fiber f b))
         ( fiber (codiagonal-map f) b))
-      ( universal-property-pushout l
+      ( universal-property-pushout-Level l
         ( terminal-map (fiber f b))
         ( terminal-map (fiber f b)))
   universal-property-suspension-cocone-fiber =
@@ -121,8 +121,7 @@ module _
     pr1 (universal-property-suspension-cocone-fiber {lzero})
 
   universal-property-suspension-fiber :
-    {l : Level} →
-    universal-property-pushout l
+    universal-property-pushout
       ( terminal-map (fiber f b))
       ( terminal-map (fiber f b))
       ( suspension-cocone-fiber)

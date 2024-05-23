@@ -48,11 +48,12 @@ module _
 
 ```agda
 module _
-  {l1 : Level} (l2 : Level) {X : UU l1} (α : free-loop X)
+  {l1 : Level} {X : UU l1} (α : free-loop X)
   where
 
-  universal-property-circle : UU (l1 ⊔ lsuc l2)
-  universal-property-circle = (Y : UU l2) → is-equiv (ev-free-loop α Y)
+  universal-property-circle : UUω
+  universal-property-circle =
+    {l : Level} (Y : UU l) → is-equiv (ev-free-loop α Y)
 ```
 
 ### Evaluating a dependent function at a free loop
@@ -71,15 +72,16 @@ module _
 
 ```agda
 module _
-  {l1 : Level} (l2 : Level) {X : UU l1} (α : free-loop X)
+  {l1 : Level} {X : UU l1} (α : free-loop X)
   where
 
-  induction-principle-circle : UU (lsuc l2 ⊔ l1)
-  induction-principle-circle = (P : X → UU l2) → section (ev-free-loop-Π α P)
+  induction-principle-circle : UUω
+  induction-principle-circle =
+    {l2 : Level} (P : X → UU l2) → section (ev-free-loop-Π α P)
 
 module _
   {l1 l2 : Level} {X : UU l1} (α : free-loop X)
-  (H : {l : Level} → induction-principle-circle l α) (P : X → UU l2)
+  (H : induction-principle-circle α) (P : X → UU l2)
   (β : free-dependent-loop α P)
   where
 
@@ -95,12 +97,12 @@ module _
 
 ```agda
 module _
-  {l1 : Level} (l2 : Level) {X : UU l1} (α : free-loop X)
+  {l1 : Level} {X : UU l1} (α : free-loop X)
   where
 
-  dependent-universal-property-circle : UU (lsuc l2 ⊔ l1)
+  dependent-universal-property-circle : UUω
   dependent-universal-property-circle =
-    (P : X → UU l2) → is-equiv (ev-free-loop-Π α P)
+    {l2 : Level} (P : X → UU l2) → is-equiv (ev-free-loop-Π α P)
 ```
 
 ## Properties
@@ -127,7 +129,7 @@ module _
     map-compute-dependent-identification-eq-value f g (loop-free-loop α) p p q
 
   is-retraction-ind-circle :
-    ( ind-circle : {l : Level} → induction-principle-circle l α)
+    ( ind-circle : induction-principle-circle α)
     { l2 : Level} (P : X → UU l2) →
     ( ( function-induction-principle-circle α ind-circle P) ∘
       ( ev-free-loop-Π α P)) ~
@@ -146,8 +148,8 @@ module _
 
   abstract
     dependent-universal-property-induction-principle-circle :
-      ({l : Level} → induction-principle-circle l α) →
-      ({l : Level} → dependent-universal-property-circle l α)
+      induction-principle-circle α →
+      dependent-universal-property-circle α
     dependent-universal-property-induction-principle-circle ind-circle P =
       is-equiv-is-invertible
         ( function-induction-principle-circle α ind-circle P)
@@ -164,7 +166,7 @@ module _
 
   abstract
     uniqueness-universal-property-circle :
-      ({l : Level} → universal-property-circle l α) →
+      universal-property-circle α →
       {l2 : Level} (Y : UU l2) (α' : free-loop Y) →
       is-contr (Σ (X → Y) (λ f → Eq-free-loop (ev-free-loop α Y f) α'))
     uniqueness-universal-property-circle up-circle Y α' =
@@ -184,7 +186,7 @@ module _
   where
 
   uniqueness-dependent-universal-property-circle :
-    ({l : Level} → dependent-universal-property-circle l α) →
+    dependent-universal-property-circle α →
     {l2 : Level} {P : X → UU l2} (k : free-dependent-loop α P) →
     is-contr
       ( Σ ( (x : X) → P x)
@@ -223,8 +225,8 @@ module _
 
   abstract
     universal-property-dependent-universal-property-circle :
-      ({l : Level} → dependent-universal-property-circle l α) →
-      ({l : Level} → universal-property-circle l α)
+      dependent-universal-property-circle α →
+      universal-property-circle α
     universal-property-dependent-universal-property-circle dup-circle Y =
       is-equiv-top-map-triangle
         ( ev-free-loop-Π α (λ x → Y))
@@ -244,8 +246,8 @@ module _
 
   abstract
     universal-property-induction-principle-circle :
-      ({l : Level} → induction-principle-circle l α) →
-      ({l : Level} → universal-property-circle l α)
+      induction-principle-circle α →
+      universal-property-circle α
     universal-property-induction-principle-circle X =
       universal-property-dependent-universal-property-circle α
         ( dependent-universal-property-induction-principle-circle α X)
@@ -257,7 +259,7 @@ module _
 abstract
   is-connected-circle' :
     { l1 l2 : Level} {X : UU l1} (l : free-loop X) →
-    ( dup-circle : dependent-universal-property-circle l2 l)
+    ( dup-circle : dependent-universal-property-circle l)
     ( P : X → UU l2) (is-prop-P : (x : X) → is-prop (P x)) →
     P (base-free-loop l) → (x : X) → P x
   is-connected-circle' l dup-circle P is-prop-P p =

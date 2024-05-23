@@ -340,7 +340,7 @@ Given a diagram as follows where the right-hand square is a pullback
   ∙ -------> ∙ -------> ∙
   |          | ⌟        |
   |          |          |
-  v          v          v
+  ∨          ∨          ∨
   ∙ -------> ∙ -------> ∙,
 ```
 
@@ -431,11 +431,11 @@ Given a diagram as follows where the lower square is a pullback
   ∙ -------> ∙
   |          |
   |          |
-  v          v
+  ∨          ∨
   ∙ -------> ∙
   | ⌟        |
   |          |
-  v          v
+  ∨          ∨
   ∙ -------> ∙,
 ```
 
@@ -672,7 +672,7 @@ Given a pullback square
     C -------> B
     | ⌟        |
   g'|          | g
-    v          v
+    ∨          ∨
     A -------> X
          f
 ```
@@ -684,7 +684,7 @@ square
             C ---------> X
             | ⌟          |
   (f' , g') |            |
-            v            v
+            ∨            ∨
           A × B -----> X × X,
                 f × g
 ```

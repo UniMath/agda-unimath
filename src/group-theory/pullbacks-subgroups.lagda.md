@@ -170,7 +170,7 @@ The square
          |                            |
   K ↦ UK |                            | K ↦ UK
          |                            |
-         V                            V
+         ∨                            ∨
    subset-Group H ------------> subset-Group G
                    pullback f
 ```

@@ -51,7 +51,7 @@ of `X` and `B` of `Y` that fit into a commutative diagram
     A ------> X ------> A
     |         |         |
   f |    i    | g   r   | f
-    v         v         v
+    ∨         ∨         ∨
     B ------> Y ------> B
          i₁        r₁
 ```
@@ -73,7 +73,7 @@ coherence
             |                      |
   r₁ ·l i⁻¹ |          L           | f ·l H₀
             |                      |
-            V                      V
+            ∨                      ∨
       r₁ ∘ i₁ ∘ f ---------------> f
                        H₁ ·r f
 ```
@@ -91,7 +91,7 @@ the square
     A ========= A
     |           |
   f | refl-htpy | f
-    v           v
+    ∨           ∨
     B ========= B,
 ```
 
@@ -294,7 +294,7 @@ In fact, we only need the following data to show this:
             X ------> A
             |         |
           g |    r    | f
-            v         v
+            ∨         ∨
   B ------> Y ------> B.
        i₁   H₁   r₁
 ```
@@ -307,7 +307,7 @@ In fact, we only need the following data to show this:
         \       /
   r₁ ∘ g \     / f
           \   /
-           V V
+           ∨ ∨
             B.
 ```
 
@@ -354,7 +354,7 @@ In fact, we only need the following data to show this:
     A ------> X ------> A
     |         |
   f |    i    | g
-    v         v
+    ∨         ∨
     B ------> Y.
          i₁
 ```
@@ -367,7 +367,7 @@ In fact, we only need the following data to show this:
         \       /
   g ∘ i₀ \     / i₁
           \   /
-           V V
+           ∨ ∨
             Y.
 ```
 
@@ -464,11 +464,11 @@ row of squares in the diagram below.
   fiber f b -----> fiber g (i₁ b) -----> fiber f b
      |                 |                    |
      |       i'        |         r'         |
-     v                 v                    v
+     ∨                 ∨                    ∨
      A ----- i₀ -----> X ------- r₀ ------> A
      |                 |                    |
    f |       i         | g       r          | f
-     v                 v                    v
+     ∨                 ∨                    ∨
      B --------------> Y -----------------> B
              i₁                  r₁
 ```
@@ -485,7 +485,7 @@ obtain a commuting diagram
   fiber f b -----> fiber g (i₁ b) -----> fiber f (r₀ (i₀ b)) -----> fiber f b
      |                 |                       |                        |
      |       i'        |           r'          |                        |
-     v                 v                       v                        V
+     ∨                 ∨                       ∨                        ∨
      A --------------> X --------------------> A ---------------------> A
              i₀                    r₀                       id
 ```

@@ -30,7 +30,7 @@ A fibered involution is a fibered map
   |          |
  f|          |g
   |          |
-  V          V
+  ∨          ∨
   X -------> X
        i
 ```

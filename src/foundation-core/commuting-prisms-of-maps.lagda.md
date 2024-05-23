@@ -31,12 +31,12 @@ Consider an arrangment of maps composable into a diagram as follows:
     |\           |\
     | \ h   ⇗    | \ h'
     |  \      f' |  \
-    |   V        |   V
+    |   ∨        |   ∨
   f | ⇐ B ------ | -> B'
     |   /   hB   | ⇐ /
     |  / g       |  / g'
     | /     ⇗    | /
-    VV           VV
+    ∨∨           ∨∨
     C ---------> C' ,
           hC
 ```
@@ -57,16 +57,16 @@ We may also arrange the maps into a more vertical shape, like so:
 
 ```text
           B
-      h  ^| \  g
+      h  ∧| \  g
        /  |   \
-     /  f | ⇑   V
+     /  f | ⇑   ∨
     A ---------> C
     |     | hB   |
-    | ⇗   V   ⇗  |
+    | ⇗   ∨   ⇗  |
  hA |     B'     | hC
-    | h' ^  \ g' |
+    | h' ∧  \ g' |
     |  /  ⇑   \  |
-    V/          VV
+    ∨/          ∨∨
     A' --------> C' .
           f'
 ```

@@ -30,11 +30,11 @@ consists of a map `w : S → T` [equipped](foundation.structure.md) with two
              S
            / | \
         f /  |  \ h
-         V   |   V
+         ∨   |   ∨
         A    |w   B
          ∧   |   ∧
         h \  |  / k
-           \ V /
+           \ ∨ /
              T
 ```
 

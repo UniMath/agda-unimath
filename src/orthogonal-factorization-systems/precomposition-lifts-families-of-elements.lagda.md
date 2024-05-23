@@ -45,7 +45,7 @@ In other words, given a diagram
                       |
                       | pr1
                       |
-                      v
+                      ∨
   J ------> I ------> A         ,
        f         a
 ```
@@ -111,7 +111,7 @@ different codomains, namely `lift-family-of-elements B (a ∘ f)` and
                             \                    /
            precomp-lift B g a  \              / tr (lift-family-of-elements B) (htpy-precomp H A a)
                                   \        /
-                                     V  V
+                                     ∨  ∨
                        lift-family-of-elements B (a ∘ g)
 ```
 
@@ -215,7 +215,7 @@ We have a [commuting square](foundation.commuting-squares-of-maps.md) like this:
                   |                                                           |
                   | map-inv-distributive-Π-Σ    ⇗    map-inv-distributive-Π-Σ |
                   |                                                           |
-                  V                                                           V
+                  ∨                                                           ∨
               I → Σ A B ------------------------------------------------> J → Σ A B ,
                                                - ∘ f
 ```
@@ -284,13 +284,13 @@ and `precomp-lifted-family-of-elements g`. One factors through
                                -----------------------------------
                              /                                     \
                            /     ⇗ htpy-precomp-lifted-family H      \
-                         /                                             V
+                         /                                             ∨
   Σ (a : I → A) ((i : I) → B (a i)) ------------------------> Σ (a : J → A) ((j : J) → B (a j))
                   |                  precomp-lifted-family f                  |
                   |                                                           |
                   |                             ⇗                             |
                   | map-inv-distributive-Π-Σ         map-inv-distributive-Π-Σ |
-                  V                                                           V
+                  ∨                                                           ∨
               I → Σ A B ------------------------------------------------> J → Σ A B ,
                                               - ∘ f
 ```
@@ -304,7 +304,7 @@ while the other factors through `- ∘ g`:
                   |                                                           |
                   | map-inv-distributive-Π-Σ    ⇗    map-inv-distributive-Π-Σ |
                   |                                                           |
-                  V                           - ∘ g                           V
+                  ∨                           - ∘ g                           ∨
               I → Σ A B ------------------------------------------------> J → Σ A B .
                         \                                               >
                           \             ⇗  htpy-precomp H             /

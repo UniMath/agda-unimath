@@ -77,7 +77,7 @@ sim-fraction-mul-fraction-ℤ
       by interchange-law-mul-mul-ℤ nx' dx ny' dy
 ```
 
-### Unit laws for mulitplication on integer fractions
+### Unit laws for multiplication on integer fractions
 
 ```agda
 left-unit-law-mul-fraction-ℤ :

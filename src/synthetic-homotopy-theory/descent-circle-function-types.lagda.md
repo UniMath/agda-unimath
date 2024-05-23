@@ -162,7 +162,7 @@ module _
         ( equiv-funext))
 
   equiv-descent-data-family-circle-function-type-hom :
-    dependent-universal-property-circle (l2 ⊔ l3) l →
+    dependent-universal-property-circle l →
     ( (x : S) → family-descent-data-circle-function-type l A B x) ≃
     hom-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)
