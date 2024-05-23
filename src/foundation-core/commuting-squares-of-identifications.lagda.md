@@ -130,14 +130,13 @@ It also induces a square
            p
 ```
 
-
 ```agda
 module _
   {l : Level} {A : UU l} {a b : A} (p q : a ＝ b)
   where
 
   coherence-square-identifications-horizontal-refl :
-    p ＝ q → 
+    p ＝ q →
     coherence-square-identifications
       ( refl)
       ( p)
@@ -152,13 +151,12 @@ module _
       ( p)
       ( q)
       ( refl)) →
-    p ＝ q      
+    p ＝ q
   inv-coherence-square-identifications-horizontal-refl α =
     inv right-unit ∙ α
 
-
   coherence-square-identifications-vertical-refl :
-    p ＝ q → 
+    p ＝ q →
     coherence-square-identifications
       ( q)
       ( refl)

@@ -197,7 +197,7 @@ module _
   left-whisker-right-whisker-concat β α =
     left-whisker-concat p β ∙ right-whisker-concat α q'
 
-  right-whisker-left-whisker-concat : 
+  right-whisker-left-whisker-concat :
     (α : p ＝ p') (β : q ＝ q') → p ∙ q ＝ p' ∙ q'
   right-whisker-left-whisker-concat α β =
     right-whisker-concat α q ∙ left-whisker-concat p' β

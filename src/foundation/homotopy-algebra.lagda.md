@@ -116,7 +116,7 @@ module _
     ((H' ·r f) ∙h (g' ·l H))
 
   commutative-right-whisker-left-whisker-htpy :
-    (H' : f' ~ g') (H : f ~ g) → 
+    (H' : f' ~ g') (H : f ~ g) →
     right-whisker-left-whisker-concat-htpy H' H ~
     left-whisker-right-whisker-concat-htpy H H'
   commutative-right-whisker-left-whisker-htpy H' H x =

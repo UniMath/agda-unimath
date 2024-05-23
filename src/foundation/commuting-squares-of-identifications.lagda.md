@@ -590,8 +590,8 @@ Consider two squares of identifications as in the diagram
                  refl
 ```
 
-Then the pasted square can be computed in terms of the horizontal
-concatination of the filler squares
+Then the pasted square can be computed in terms of the horizontal concatination
+of the filler squares
 
 ```agda
 module _
@@ -611,9 +611,15 @@ module _
       ( bottom-left)
       ( bottom-right)
       ( refl)
-      ( coherence-square-identifications-horizontal-refl top-left top-right α)
-      ( coherence-square-identifications-horizontal-refl bottom-left bottom-right β)) ＝
-      ( horizontal-concat-Id²  α β)
+      ( coherence-square-identifications-horizontal-refl
+        ( top-left)
+        ( top-right)
+        ( α))
+      ( coherence-square-identifications-horizontal-refl
+        ( bottom-left)
+        ( bottom-right)
+        ( β))) ＝
+      ( horizontal-concat-Id² α β)
   vertical-pasting-coherence-square-identifications-horizontal-refl
     refl refl refl refl refl refl =
       refl
@@ -635,8 +641,14 @@ module _
       ( α)
       ( β)) ＝
       ( horizontal-concat-Id²
-        ( inv-coherence-square-identifications-horizontal-refl top-left top-right α)
-        ( inv-coherence-square-identifications-horizontal-refl bottom-left bottom-right β))
+        ( inv-coherence-square-identifications-horizontal-refl
+          ( top-left)
+          ( top-right)
+          ( α))
+        ( inv-coherence-square-identifications-horizontal-refl
+          ( bottom-left)
+          ( bottom-right)
+          ( β)))
   vertical-pasting-inv-coherence-square-identifications-horizontal-refl
     refl refl refl refl refl refl =
       refl

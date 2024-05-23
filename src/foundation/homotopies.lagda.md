@@ -156,12 +156,14 @@ module _
   where
 
   compute-right-refl-htpy-horizontal-concat-htpy² :
-    (α : H ~ H' ) (K : g ~ h) → horizontal-concat-htpy² α refl-htpy ~ right-whisker-concat-htpy α K
+    (α : H ~ H') (K : g ~ h) →
+    horizontal-concat-htpy² α refl-htpy ~ right-whisker-concat-htpy α K
   compute-right-refl-htpy-horizontal-concat-htpy² α K x =
-    compute-right-refl-horizontal-concat-Id² (α x) 
+    compute-right-refl-horizontal-concat-Id² (α x)
 
   compute-left-refl-htpy-horizontal-concat-htpy² :
-    (K : h ~ f) (α : H ~ H') → horizontal-concat-htpy² refl-htpy α ~ left-whisker-concat-htpy K α
+    (K : h ~ f) (α : H ~ H') →
+    horizontal-concat-htpy² refl-htpy α ~ left-whisker-concat-htpy K α
   compute-left-refl-htpy-horizontal-concat-htpy² K α x =
     compute-left-refl-horizontal-concat-Id² (α x)
 ```
@@ -187,7 +189,8 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (a : A) → B a}
-  {H H' H'' : f ~ g} (α : H ~ H') (α' : H' ~ H'') { K K' K'' : g ~ h} (β : K ~ K') (β' : K' ~ K'')
+  {H H' H'' : f ~ g} (α : H ~ H') (α' : H' ~ H'') { K K' K'' : g ~ h}
+  (β : K ~ K') (β' : K' ~ K'')
   where
 
   interchange-htpy² :

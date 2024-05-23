@@ -110,8 +110,8 @@ module _
 
 ### Squares with refl on opposite sides
 
-Given a homotopy `H ~ H'`, we can obtain a commutative square with
-`refl-htpy` on the top and bottom.
+Given a homotopy `H ~ H'`, we can obtain a commutative square with `refl-htpy`
+on the top and bottom.
 
 ```text
       refl-htpy
@@ -148,11 +148,10 @@ module _
     ( H ~ H')
   inv-coherence-square-homotopies-horizontal-refl K =
     inv-htpy right-unit-htpy ∙h K
-    
 ```
 
-Given a homotopy `H ~ H'`, we can obtain a commutative square with
-`refl-htpy` on the left and right.
+Given a homotopy `H ~ H'`, we can obtain a commutative square with `refl-htpy`
+on the left and right.
 
 ```text
                H'
@@ -188,7 +187,7 @@ module _
       ( H)) →
     ( H ~ H')
   inv-coherence-square-homotopies-vertical-refl K =
-    K ∙h right-unit-htpy  
+    K ∙h right-unit-htpy
 ```
 
 ## Operations

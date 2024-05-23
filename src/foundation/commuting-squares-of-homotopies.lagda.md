@@ -559,8 +559,8 @@ Consider two squares of homotopies as in the diagram
                   refl
 ```
 
-The result of vertically pasting these squares can be computed in terms
-of the horizontal concatination of homotopies
+The result of vertically pasting these squares can be computed in terms of the
+horizontal concatination of homotopies
 
 ```agda
 module _
@@ -568,7 +568,6 @@ module _
   (top-left : a ~ b) (top-right : a ~ b)
   (bottom-left : b ~ c) (bottom-right : b ~ c)
   where
-
 
   vertical-pasting-coherence-square-homotopies-horizontal-refl :
     (H : top-left ~ top-right) (K : bottom-left ~ bottom-right) →
@@ -581,8 +580,14 @@ module _
       ( bottom-left)
       ( bottom-right)
       ( refl-htpy)
-      ( coherence-square-homotopies-horizontal-refl top-left top-right H)
-      ( coherence-square-homotopies-horizontal-refl bottom-left bottom-right K)) ~
+      ( coherence-square-homotopies-horizontal-refl
+        ( top-left)
+        ( top-right)
+        ( H))
+      ( coherence-square-homotopies-horizontal-refl
+        ( bottom-left)
+        ( bottom-right)
+        ( K))) ~
     (horizontal-concat-htpy² H K)
   vertical-pasting-coherence-square-homotopies-horizontal-refl H K x =
     vertical-pasting-coherence-square-identifications-horizontal-refl
@@ -594,8 +599,16 @@ module _
       ( K x)
 
   vertical-pasting-inv-coherence-square-homotopies-horizontal-refl :
-    (H : coherence-square-homotopies refl-htpy top-left top-right refl-htpy)
-    (K : coherence-square-homotopies refl-htpy bottom-left bottom-right refl-htpy) →
+    (H : coherence-square-homotopies
+      ( refl-htpy)
+      ( top-left)
+      ( top-right)
+      ( refl-htpy))
+    (K : coherence-square-homotopies
+      ( refl-htpy)
+      ( bottom-left)
+      ( bottom-right)
+      ( refl-htpy)) →
     (inv-htpy right-unit-htpy) ∙h
     ( vertical-pasting-coherence-square-homotopies
       ( refl-htpy)
@@ -608,8 +621,14 @@ module _
       ( H)
       ( K)) ~
     ( horizontal-concat-htpy²
-      ( inv-coherence-square-homotopies-horizontal-refl top-left top-right H)
-      ( inv-coherence-square-homotopies-horizontal-refl bottom-left bottom-right K) )
+      ( inv-coherence-square-homotopies-horizontal-refl
+        ( top-left)
+        ( top-right)
+        ( H))
+      ( inv-coherence-square-homotopies-horizontal-refl
+        ( bottom-left)
+        ( bottom-right)
+        ( K)))
   vertical-pasting-inv-coherence-square-homotopies-horizontal-refl H K x =
     vertical-pasting-inv-coherence-square-identifications-horizontal-refl
       ( top-left x)
