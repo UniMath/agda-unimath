@@ -64,7 +64,7 @@ module _
   compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
 ```
 
-### Computing the fibers of the point
+### Computing the fibers of point inclusions
 
 ```agda
 compute-fiber-point :
