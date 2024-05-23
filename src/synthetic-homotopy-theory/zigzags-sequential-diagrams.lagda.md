@@ -156,11 +156,11 @@ get a zigzag between `(B, b)` and the
            a₁
 ```
 
-We call this a _half-shift_ of the original zigzag, and it provides certain
-symmetry between the downward-going `f` maps and upward-going `g` maps. We
-exploit this symmetry in the proceeding constructions by formulating the
-definitions and lemmas for the downwards directions, and then applying them to
-the half-shift of a zigzag to get the constructions for the upward direction.
+We call this a _half-shift_ of the original zigzag, and it provides a symmetry
+between the downward-going `f` maps and upward-going `g` maps. We exploit this
+symmetry in the proceeding constructions by formulating the definitions and
+lemmas for the downwards directions, and then applying them to the half-shift of
+a zigzag to get the constructions for the upward direction.
 
 Repeating a half-shift twice gets us a shift of a zigzag.
 
@@ -234,9 +234,12 @@ Similarly, we can realign the half-shift of a zigzag to get the morphism
   g₀ |   f₁ /  | g₁   /  | g₂
      |    /    |    / f₂ |
      ∨  /      ∨  /      ∨
-     A₁ -----> A₂ -----> A₃ -----> ⋯ .
+     A₁ -----> A₂ -----> A₃ -----> ⋯ ,
           a₁        a₂
 ```
+
+which should be thought of as an inverse of `f` --- and we show that it indeed
+induces an inverse in the colimit further down.
 
 ```agda
 module _
