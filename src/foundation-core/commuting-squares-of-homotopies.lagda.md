@@ -108,9 +108,9 @@ module _
     vertical-refl-coherence-square-identifications (H x)
 ```
 
-### Squares with refl on opposite sides
+### Squares with refl on the top and bottom
 
-Given a homotopy `H ~ H'`, we can obtain a commutative square with `refl-htpy`
+Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy`
 on the top and bottom.
 
 ```text
@@ -138,19 +138,26 @@ module _
       ( refl-htpy)
   coherence-square-homotopies-horizontal-refl K =
     right-unit-htpy ∙h K
+```
 
+Conversely, given a coherence square as above, we can obtain a homotopy
+  `H ~ H'`.
+
+```agda
   inv-coherence-square-homotopies-horizontal-refl :
-    ( coherence-square-homotopies
+    coherence-square-homotopies
       ( refl-htpy)
       ( H)
       ( H')
-      ( refl-htpy)) →
-    ( H ~ H')
+      ( refl-htpy) →
+    H ~ H'
   inv-coherence-square-homotopies-horizontal-refl K =
     inv-htpy right-unit-htpy ∙h K
 ```
 
-Given a homotopy `H ~ H'`, we can obtain a commutative square with `refl-htpy`
+### Squares with `refl` on the left and right
+
+Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy`
 on the left and right.
 
 ```text
@@ -178,7 +185,12 @@ module _
       ( H)
   coherence-square-homotopies-vertical-refl K =
     K ∙h inv-htpy right-unit-htpy
+```
 
+Conversely, given a coherence square as above, we can obtain a homotopy
+`H ~ H'`.
+
+```agda
   inv-coherence-square-homotopies-vertical-refl :
     ( coherence-square-homotopies
       ( H')

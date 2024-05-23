@@ -104,9 +104,10 @@ module _
   vertical-refl-coherence-square-identifications = inv right-unit
 ```
 
-### Squares with `refl` on opposite sides
+### Squares with `refl` on the top and bottom
 
-An identification `α : p ＝ q` induces a filler for the coherence square
+Given an identification `α : p ＝ q`, we can obtain a coherence square
+with `refl` on the top and bottom, like the diagram below.
 
 ```text
        refl
@@ -116,18 +117,6 @@ An identification `α : p ＝ q` induces a filler for the coherence square
     ∨        ∨
     b -----> b.
        refl
-```
-
-It also induces a square
-
-```text
-           q
-       a -----> b
-       |        |
-  refl |        | refl
-       ∨        ∨
-       a -----> b.
-           p
 ```
 
 ```agda
@@ -144,7 +133,12 @@ module _
       ( refl)
   coherence-square-identifications-horizontal-refl α =
     right-unit ∙ α
+```
 
+Conversely, given a coherence square as above, we can obtain an equality
+`p ＝ q`.
+
+```agda
   inv-coherence-square-identifications-horizontal-refl :
     (coherence-square-identifications
       ( refl)
@@ -154,7 +148,25 @@ module _
     p ＝ q
   inv-coherence-square-identifications-horizontal-refl α =
     inv right-unit ∙ α
+```
 
+### Squares with `refl` on the left and right
+
+Given an identification `α : p ＝ q`, we can obtain a coherence square
+with `refl` on the left and right, like the diagram below.
+
+
+```text
+           q
+       a -----> b
+       |        |
+  refl |        | refl
+       ∨        ∨
+       a -----> b.
+           p
+```
+
+```agda
   coherence-square-identifications-vertical-refl :
     p ＝ q →
     coherence-square-identifications
@@ -164,7 +176,12 @@ module _
       ( p)
   coherence-square-identifications-vertical-refl α =
     α ∙ inv right-unit
+```
 
+Conversely, given a coherence square as above, we can obtain an equality
+` p ＝ q`.
+
+```agda
   inv-coherence-square-identifications-vertical-refl :
     (coherence-square-identifications
       ( q)
