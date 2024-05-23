@@ -122,15 +122,17 @@ and by pasting diagrams.
 module _
   { l1 l2 l3 : Level} (A : sequential-diagram l1) (B : sequential-diagram l2)
   ( C : sequential-diagram l3)
+  ( g : hom-sequential-diagram B C) (f : hom-sequential-diagram A B)
   where
 
-  comp-hom-sequential-diagram :
-    hom-sequential-diagram B C →
-    hom-sequential-diagram A B →
-    hom-sequential-diagram A C
-  pr1 (comp-hom-sequential-diagram g f) n =
+  map-comp-hom-sequential-diagram :
+    (n : ℕ) → family-sequential-diagram A n → family-sequential-diagram C n
+  map-comp-hom-sequential-diagram n =
     map-hom-sequential-diagram C g n ∘ map-hom-sequential-diagram B f n
-  pr2 (comp-hom-sequential-diagram g f) n =
+
+  naturality-comp-hom-sequential-diagram :
+    naturality-hom-sequential-diagram A C map-comp-hom-sequential-diagram
+  naturality-comp-hom-sequential-diagram n =
     pasting-vertical-coherence-square-maps
       ( map-sequential-diagram A n)
       ( map-hom-sequential-diagram B f n)
@@ -141,6 +143,11 @@ module _
       ( map-sequential-diagram C n)
       ( naturality-map-hom-sequential-diagram B f n)
       ( naturality-map-hom-sequential-diagram C g n)
+
+  comp-hom-sequential-diagram :
+    hom-sequential-diagram A C
+  pr1 comp-hom-sequential-diagram = map-comp-hom-sequential-diagram
+  pr2 comp-hom-sequential-diagram = naturality-comp-hom-sequential-diagram
 ```
 
 ### Homotopies between morphisms of sequential diagrams

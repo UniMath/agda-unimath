@@ -17,6 +17,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -148,6 +149,48 @@ module _
               ( cocone-map-sequential-diagram c h)
               ( c')))
         ( is-contr-map-is-equiv (up-sequential-colimit Y) c')
+```
+
+### The cocone of a sequential colimit induces the identity function by its universal property
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1}
+  {X : UU l2} {c : cocone-sequential-diagram A X}
+  (up-c : universal-property-sequential-colimit c)
+  where
+
+  compute-map-universal-property-sequential-colimit-id :
+    map-universal-property-sequential-colimit up-c c ~ id
+  compute-map-universal-property-sequential-colimit-id =
+    htpy-eq
+      ( ap pr1
+        ( eq-is-contr'
+          ( uniqueness-map-universal-property-sequential-colimit up-c c)
+          ( ( map-universal-property-sequential-colimit up-c c) ,
+            ( htpy-cocone-universal-property-sequential-colimit up-c c))
+          ( id , htpy-cocone-map-id-sequential-diagram A c)))
+```
+
+### Homotopies between cocones under sequential diagrams induce homotopies between the induced maps out of sequential colimits
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : sequential-diagram l1}
+  {X : UU l2} {c : cocone-sequential-diagram A X}
+  (up-c : universal-property-sequential-colimit c)
+  {Y : UU l3} {c' c'' : cocone-sequential-diagram A Y}
+  (H : htpy-cocone-sequential-diagram c' c'')
+  where
+
+  htpy-map-universal-property-htpy-cocone-sequential-diagram :
+    map-universal-property-sequential-colimit up-c c' ~
+    map-universal-property-sequential-colimit up-c c''
+  htpy-map-universal-property-htpy-cocone-sequential-diagram =
+    htpy-eq
+      ( ap
+        ( map-universal-property-sequential-colimit up-c)
+        ( eq-htpy-cocone-sequential-diagram A c' c'' H))
 ```
 
 ### Correspondence between universal properties of sequential colimits and coequalizers
