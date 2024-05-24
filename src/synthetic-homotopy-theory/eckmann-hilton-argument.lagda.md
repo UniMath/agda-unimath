@@ -65,7 +65,7 @@ constructions themselves "the Eckmann-Hilton argument".
 The more algebraic argument uses the interchange law
 [`interchange-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md). The
 interchange law essentially expresses that
-[ø`horizontal-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md) is a
+[`horizontal-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md) is a
 group homomorphism of
 [`vertical-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md) in each
 variable.
@@ -356,6 +356,26 @@ module _
 ```
 
 ### Computing transport along `eckmann-hilton`
+
+This coherence relates the three dimensional transport [`tr³`](foundation.transport-along-higher-identifications.md)
+along an Eckmann-Hilton identification [`eckmann-hilton-Ω² α β`](synthetic-homotopy-theory.eckmann-hilton-argument.md)
+to the the Eckmann-Hilton argument for homotopies [`eckmann-hilton-htpy (tr² B α) (tr² B β)`](foundation.homotopy-algebra.md).
+
+This takes the form of a commutative square of homotopies
+
+```text
+                                           tr²-concat α β
+                          tr² B (α ∙ β) ------------------- tr² B α ∙h tr² B β
+
+                               |                                    |
+                               |                                    |
+tr³ B (eckmann-hilton-Ω² α β)  |                                    | eckmann-hilton-htpy (tr² B α) (tr² B β) 
+                               |                                    |
+                               |                                    |
+
+                          tr² B (β ∙ α) ------------------- tr² B β ∙h tr² B α
+                                           tr²-concat β α
+```
 
 ```agda
 module _
