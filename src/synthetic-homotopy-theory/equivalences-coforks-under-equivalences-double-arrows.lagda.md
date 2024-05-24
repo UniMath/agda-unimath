@@ -129,8 +129,8 @@ module _
   coherence-map-cofork-equiv-cofork-equiv-double-arrow m =
     coherence-square-maps
       ( codomain-map-equiv-double-arrow a a' e)
-      ( map-cofork a c)
-      ( map-cofork a' c')
+      ( map-cofork c)
+      ( map-cofork c')
       ( map-equiv m)
 
   coherence-equiv-cofork-equiv-double-arrow :
@@ -138,12 +138,12 @@ module _
     UU (l1 ⊔ l6)
   coherence-equiv-cofork-equiv-double-arrow m H =
     ( ( H ·r (left-map-double-arrow a)) ∙h
-      ( ( map-cofork a' c') ·l
+      ( ( map-cofork c') ·l
         ( left-square-equiv-double-arrow a a' e)) ∙h
-      ( (coh-cofork a' c') ·r (domain-map-equiv-double-arrow a a' e))) ~
-    ( ( (map-equiv m) ·l (coh-cofork a c)) ∙h
+      ( (coh-cofork c') ·r (domain-map-equiv-double-arrow a a' e))) ~
+    ( ( (map-equiv m) ·l (coh-cofork c)) ∙h
       ( H ·r (right-map-double-arrow a)) ∙h
-      ( (map-cofork a' c') ·l (right-square-equiv-double-arrow a a' e)))
+      ( (map-cofork c') ·l (right-square-equiv-double-arrow a a' e)))
 
   equiv-cofork-equiv-double-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l6)
   equiv-cofork-equiv-double-arrow =
@@ -174,7 +174,7 @@ module _
     coh-map-cofork-equiv-cofork-equiv-double-arrow = pr1 (pr2 e')
 
     equiv-map-cofork-equiv-cofork-equiv-double-arrow :
-      equiv-arrow (map-cofork a c) (map-cofork a' c')
+      equiv-arrow (map-cofork c) (map-cofork c')
     pr1 equiv-map-cofork-equiv-cofork-equiv-double-arrow =
       codomain-equiv-equiv-double-arrow a a' e
     pr1 (pr2 equiv-map-cofork-equiv-cofork-equiv-double-arrow) =
@@ -183,11 +183,11 @@ module _
       coh-map-cofork-equiv-cofork-equiv-double-arrow
 
     hom-map-cofork-equiv-cofork-equiv-double-arrow :
-      hom-arrow (map-cofork a c) (map-cofork a' c')
+      hom-arrow (map-cofork c) (map-cofork c')
     hom-map-cofork-equiv-cofork-equiv-double-arrow =
       hom-equiv-arrow
-        ( map-cofork a c)
-        ( map-cofork a' c')
+        ( map-cofork c)
+        ( map-cofork c')
         ( equiv-map-cofork-equiv-cofork-equiv-double-arrow)
 
     coh-equiv-cofork-equiv-double-arrow :

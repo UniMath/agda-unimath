@@ -203,13 +203,11 @@ has the universal property of coequalizers.
 ```agda
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
-  ( c : cocone-sequential-diagram A X)
+  { c : cocone-sequential-diagram A X}
   where
 
   universal-property-sequential-colimit-universal-property-coequalizer :
-    universal-property-coequalizer
-      ( double-arrow-sequential-diagram A)
-      ( cofork-cocone-sequential-diagram c) →
+    universal-property-coequalizer (cofork-cocone-sequential-diagram c) →
     universal-property-sequential-colimit c
   universal-property-sequential-colimit-universal-property-coequalizer
     ( up-cofork)
@@ -217,27 +215,21 @@ module _
     is-equiv-left-map-triangle
       ( cocone-map-sequential-diagram c)
       ( cocone-sequential-diagram-cofork)
-      ( cofork-map
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c))
+      ( cofork-map (cofork-cocone-sequential-diagram c))
       ( triangle-cocone-sequential-diagram-cofork c)
       ( up-cofork Y)
       ( is-equiv-cocone-sequential-diagram-cofork)
 
   universal-property-coequalizer-universal-property-sequential-colimit :
     universal-property-sequential-colimit c →
-    universal-property-coequalizer
-      ( double-arrow-sequential-diagram A)
-      ( cofork-cocone-sequential-diagram c)
+    universal-property-coequalizer (cofork-cocone-sequential-diagram c)
   universal-property-coequalizer-universal-property-sequential-colimit
     ( up-sequential-colimit)
     ( Y) =
     is-equiv-top-map-triangle
       ( cocone-map-sequential-diagram c)
       ( cocone-sequential-diagram-cofork)
-      ( cofork-map
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c))
+      ( cofork-map (cofork-cocone-sequential-diagram c))
       ( triangle-cocone-sequential-diagram-cofork c)
       ( is-equiv-cocone-sequential-diagram-cofork)
       ( up-sequential-colimit Y)
@@ -259,13 +251,11 @@ module _
     universal-property-sequential-colimit c
   universal-property-sequential-colimit-equiv-cocone-equiv-sequential-diagram
     up-c' =
-    universal-property-sequential-colimit-universal-property-coequalizer c
+    universal-property-sequential-colimit-universal-property-coequalizer
       ( universal-property-coequalizer-equiv-cofork-equiv-double-arrow
-        ( cofork-cocone-sequential-diagram c)
-        ( cofork-cocone-sequential-diagram c')
         ( equiv-double-arrow-equiv-sequential-diagram A B e)
         ( equiv-cofork-equiv-cocone-equiv-sequential-diagram c c' e e')
-        ( universal-property-coequalizer-universal-property-sequential-colimit _
+        ( universal-property-coequalizer-universal-property-sequential-colimit
           ( up-c')))
 
   universal-property-sequential-colimit-equiv-cocone-equiv-sequential-diagram' :
@@ -273,13 +263,11 @@ module _
     universal-property-sequential-colimit c'
   universal-property-sequential-colimit-equiv-cocone-equiv-sequential-diagram'
     up-c =
-    universal-property-sequential-colimit-universal-property-coequalizer c'
+    universal-property-sequential-colimit-universal-property-coequalizer
       ( universal-property-coequalizer-equiv-cofork-equiv-double-arrow'
-        ( cofork-cocone-sequential-diagram c)
-        ( cofork-cocone-sequential-diagram c')
         ( equiv-double-arrow-equiv-sequential-diagram A B e)
         ( equiv-cofork-equiv-cocone-equiv-sequential-diagram c c' e e')
-        ( universal-property-coequalizer-universal-property-sequential-colimit _
+        ( universal-property-coequalizer-universal-property-sequential-colimit
           ( up-c)))
 ```
 

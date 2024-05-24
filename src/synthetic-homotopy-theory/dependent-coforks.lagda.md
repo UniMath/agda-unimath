@@ -69,33 +69,33 @@ for double arrows.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 l4 : Level} {a : double-arrow l1 l2} {X : UU l3}
   (e : cofork a X) (P : X → UU l4)
   where
 
   dependent-cofork : UU (l1 ⊔ l2 ⊔ l4)
   dependent-cofork =
-    Σ ( (b : codomain-double-arrow a) → P (map-cofork a e b))
+    Σ ( (b : codomain-double-arrow a) → P (map-cofork e b))
       ( λ k →
         (x : domain-double-arrow a) →
         dependent-identification P
-          ( coh-cofork a e x)
+          ( coh-cofork e x)
           ( k (left-map-double-arrow a x))
           ( k (right-map-double-arrow a x)))
 
 module _
-  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 l4 : Level} {a : double-arrow l1 l2} {X : UU l3}
   {e : cofork a X} (P : X → UU l4)
-  (k : dependent-cofork a e P)
+  (k : dependent-cofork e P)
   where
 
-  map-dependent-cofork : (b : codomain-double-arrow a) → P (map-cofork a e b)
+  map-dependent-cofork : (b : codomain-double-arrow a) → P (map-cofork e b)
   map-dependent-cofork = pr1 k
 
   coherence-dependent-cofork :
     (x : domain-double-arrow a) →
     dependent-identification P
-      ( coh-cofork a e x)
+      ( coh-cofork e x)
       ( map-dependent-cofork (left-map-double-arrow a x))
       ( map-dependent-cofork (right-map-double-arrow a x))
   coherence-dependent-cofork = pr2 k
@@ -108,24 +108,24 @@ together with a coherence condition.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 l4 : Level} {a : double-arrow l1 l2} {X : UU l3}
   {e : cofork a X} (P : X → UU l4)
   where
 
   coherence-htpy-dependent-cofork :
-    (k k' : dependent-cofork a e P) →
-    (K : map-dependent-cofork a P k ~ map-dependent-cofork a P k') →
+    (k k' : dependent-cofork e P) →
+    (K : map-dependent-cofork P k ~ map-dependent-cofork P k') →
     UU (l1 ⊔ l4)
   coherence-htpy-dependent-cofork k k' K =
-    ( (coherence-dependent-cofork a P k) ∙h (K ·r right-map-double-arrow a)) ~
-    ( ( (λ {x} → tr P (coh-cofork a e x)) ·l (K ·r left-map-double-arrow a)) ∙h
-      ( coherence-dependent-cofork a P k'))
+    ( (coherence-dependent-cofork P k) ∙h (K ·r right-map-double-arrow a)) ~
+    ( ( (λ {x} → tr P (coh-cofork e x)) ·l (K ·r left-map-double-arrow a)) ∙h
+      ( coherence-dependent-cofork P k'))
 
   htpy-dependent-cofork :
-    (k k' : dependent-cofork a e P) →
+    (k k' : dependent-cofork e P) →
     UU (l1 ⊔ l2 ⊔ l4)
   htpy-dependent-cofork k k' =
-    Σ ( map-dependent-cofork a P k ~ map-dependent-cofork a P k')
+    Σ ( map-dependent-cofork P k ~ map-dependent-cofork P k')
       ( coherence-htpy-dependent-cofork k k')
 ```
 
@@ -143,14 +143,14 @@ a dependent map, according to the diagram
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 : Level} {a : double-arrow l1 l2} {X : UU l3}
   (e : cofork a X)
   where
 
   dependent-cofork-map :
-    {l : Level} {P : X → UU l} → ((x : X) → P x) → dependent-cofork a e P
-  pr1 (dependent-cofork-map h) = h ∘ map-cofork a e
-  pr2 (dependent-cofork-map h) = apd h ∘ coh-cofork a e
+    {l : Level} {P : X → UU l} → ((x : X) → P x) → dependent-cofork e P
+  pr1 (dependent-cofork-map h) = h ∘ map-cofork e
+  pr2 (dependent-cofork-map h) = apd h ∘ coh-cofork e
 ```
 
 ## Properties
@@ -159,34 +159,34 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 l4 : Level} {a : double-arrow l1 l2} {X : UU l3}
   {e : cofork a X} (P : X → UU l4)
   where
 
   refl-htpy-dependent-cofork :
-    (k : dependent-cofork a e P) →
-    htpy-dependent-cofork a P k k
+    (k : dependent-cofork e P) →
+    htpy-dependent-cofork P k k
   pr1 (refl-htpy-dependent-cofork k) = refl-htpy
   pr2 (refl-htpy-dependent-cofork k) = right-unit-htpy
 
   htpy-dependent-cofork-eq :
-    (k k' : dependent-cofork a e P) →
-    (k ＝ k') → htpy-dependent-cofork a P k k'
+    (k k' : dependent-cofork e P) →
+    (k ＝ k') → htpy-dependent-cofork P k k'
   htpy-dependent-cofork-eq k .k refl = refl-htpy-dependent-cofork k
 
   abstract
     is-torsorial-htpy-dependent-cofork :
-      (k : dependent-cofork a e P) →
-      is-torsorial (htpy-dependent-cofork a P k)
+      (k : dependent-cofork e P) →
+      is-torsorial (htpy-dependent-cofork P k)
     is-torsorial-htpy-dependent-cofork k =
       is-torsorial-Eq-structure
-        ( is-torsorial-htpy (map-dependent-cofork a P k))
-        ( map-dependent-cofork a P k , refl-htpy)
+        ( is-torsorial-htpy (map-dependent-cofork P k))
+        ( map-dependent-cofork P k , refl-htpy)
         ( is-torsorial-htpy
-          ( coherence-dependent-cofork a P k ∙h refl-htpy))
+          ( coherence-dependent-cofork P k ∙h refl-htpy))
 
     is-equiv-htpy-dependent-cofork-eq :
-      (k k' : dependent-cofork a e P) →
+      (k k' : dependent-cofork e P) →
       is-equiv (htpy-dependent-cofork-eq k k')
     is-equiv-htpy-dependent-cofork-eq k =
       fundamental-theorem-id
@@ -194,8 +194,8 @@ module _
         ( htpy-dependent-cofork-eq k)
 
   eq-htpy-dependent-cofork :
-    (k k' : dependent-cofork a e P) →
-    htpy-dependent-cofork a P k k' → k ＝ k'
+    (k k' : dependent-cofork e P) →
+    htpy-dependent-cofork P k k' → k ＝ k'
   eq-htpy-dependent-cofork k k' =
     map-inv-is-equiv (is-equiv-htpy-dependent-cofork-eq k k')
 ```
@@ -204,12 +204,12 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 l4 : Level} {a : double-arrow l1 l2} {X : UU l3}
   (e : cofork a X) (Y : UU l4)
   where
 
   compute-dependent-cofork-constant-family :
-    dependent-cofork a e (λ _ → Y) ≃ cofork a Y
+    dependent-cofork e (λ _ → Y) ≃ cofork a Y
   compute-dependent-cofork-constant-family =
     equiv-tot
       ( λ h →
@@ -218,30 +218,30 @@ module _
             equiv-concat
               ( inv
                 ( tr-constant-type-family
-                  ( coh-cofork a e x)
+                  ( coh-cofork e x)
                   ( h (left-map-double-arrow a x))))
               ( h (right-map-double-arrow a x))))
 
   map-compute-dependent-cofork-constant-family :
-    dependent-cofork a e (λ _ → Y) → cofork a Y
+    dependent-cofork e (λ _ → Y) → cofork a Y
   map-compute-dependent-cofork-constant-family =
     map-equiv compute-dependent-cofork-constant-family
 
   triangle-compute-dependent-cofork-constant-family :
     coherence-triangle-maps
-      ( cofork-map a e)
+      ( cofork-map e)
       ( map-compute-dependent-cofork-constant-family)
-      ( dependent-cofork-map a e)
+      ( dependent-cofork-map e)
   triangle-compute-dependent-cofork-constant-family h =
     eq-htpy-cofork a
-      ( cofork-map a e h)
+      ( cofork-map e h)
       ( map-compute-dependent-cofork-constant-family
-        ( dependent-cofork-map a e h))
+        ( dependent-cofork-map e h))
       ( ( refl-htpy) ,
         ( right-unit-htpy ∙h
           ( λ x →
             left-transpose-eq-concat _ _ _
-              ( inv (apd-constant-type-family h (coh-cofork a e x))))))
+              ( inv (apd-constant-type-family h (coh-cofork e x))))))
 ```
 
 ### Dependent coforks are special cases of dependent cocones under spans
@@ -252,7 +252,7 @@ on `P` over a cocone corresponding to `e` via `cocone-codiagonal-cofork`.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 : Level} {a : double-arrow l1 l2} {X : UU l3}
   (e : cofork a X)
   where
 
@@ -266,7 +266,7 @@ module _
         ( horizontal-map-span-cocone-cofork a)
         ( cocone-codiagonal-cofork a e)
         ( P) →
-      dependent-cofork a e P
+      dependent-cofork e P
     pr1 (dependent-cofork-dependent-cocone-codiagonal k) =
       vertical-map-dependent-cocone
         ( vertical-map-span-cocone-cofork a)
@@ -277,7 +277,7 @@ module _
     pr2 (dependent-cofork-dependent-cocone-codiagonal k) x =
       inv
         ( ap
-          ( tr P (coh-cofork a e x))
+          ( tr P (coh-cofork e x))
           ( coherence-square-dependent-cocone
             ( vertical-map-span-cocone-cofork a)
             ( horizontal-map-span-cocone-cofork a)
@@ -294,20 +294,20 @@ module _
         ( inr x)
 
     dependent-cocone-codiagonal-dependent-cofork :
-      dependent-cofork a e P →
+      dependent-cofork e P →
       dependent-cocone
         ( vertical-map-span-cocone-cofork a)
         ( horizontal-map-span-cocone-cofork a)
         ( cocone-codiagonal-cofork a e)
         ( P)
     pr1 (dependent-cocone-codiagonal-dependent-cofork k) =
-      map-dependent-cofork a P k ∘ left-map-double-arrow a
+      map-dependent-cofork P k ∘ left-map-double-arrow a
     pr1 (pr2 (dependent-cocone-codiagonal-dependent-cofork k)) =
-      map-dependent-cofork a P k
+      map-dependent-cofork P k
     pr2 (pr2 (dependent-cocone-codiagonal-dependent-cofork k)) (inl a) =
       refl
     pr2 (pr2 (dependent-cocone-codiagonal-dependent-cofork k)) (inr x) =
-      coherence-dependent-cofork a P k x
+      coherence-dependent-cofork P k x
 
     abstract
       is-section-dependent-cocone-codiagonal-dependent-cofork :
@@ -315,7 +315,7 @@ module _
           ( dependent-cocone-codiagonal-dependent-cofork)) ~
         ( id)
       is-section-dependent-cocone-codiagonal-dependent-cofork k =
-        eq-htpy-dependent-cofork a P
+        eq-htpy-dependent-cofork P
           ( dependent-cofork-dependent-cocone-codiagonal
             ( dependent-cocone-codiagonal-dependent-cofork k))
           ( k)
@@ -376,7 +376,7 @@ module _
                   right-whisker-concat
                     ( inv
                       ( ap-inv
-                        ( tr P (coh-cofork a e x))
+                        ( tr P (coh-cofork e x))
                         ( coherence-square-dependent-cocone
                           ( vertical-map-span-cocone-cofork a)
                           ( horizontal-map-span-cocone-cofork a)
@@ -406,7 +406,7 @@ module _
         ( horizontal-map-span-cocone-cofork a)
         ( cocone-codiagonal-cofork a e)
         ( P) ≃
-      dependent-cofork a e P
+      dependent-cofork e P
     pr1 equiv-dependent-cofork-dependent-cocone-codiagonal =
       dependent-cofork-dependent-cocone-codiagonal
     pr2 equiv-dependent-cofork-dependent-cocone-codiagonal =
@@ -415,7 +415,7 @@ module _
   triangle-dependent-cofork-dependent-cocone-codiagonal :
     {l4 : Level} (P : X → UU l4) →
     coherence-triangle-maps
-      ( dependent-cofork-map a e)
+      ( dependent-cofork-map e)
       ( dependent-cofork-dependent-cocone-codiagonal P)
       ( dependent-cocone-map
         ( vertical-map-span-cocone-cofork a)
@@ -423,8 +423,8 @@ module _
         ( cocone-codiagonal-cofork a e)
         ( P))
   triangle-dependent-cofork-dependent-cocone-codiagonal P h =
-    eq-htpy-dependent-cofork a P
-      ( dependent-cofork-map a e h)
+    eq-htpy-dependent-cofork P
+      ( dependent-cofork-map e h)
       ( dependent-cofork-dependent-cocone-codiagonal P
         ( dependent-cocone-map
           ( vertical-map-span-cocone-cofork a)

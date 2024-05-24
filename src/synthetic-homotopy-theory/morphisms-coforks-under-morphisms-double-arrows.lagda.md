@@ -125,8 +125,8 @@ module _
   coherence-map-cofork-hom-cofork-hom-double-arrow u =
     coherence-square-maps
       ( codomain-map-hom-double-arrow a a' h)
-      ( map-cofork a c)
-      ( map-cofork a' c')
+      ( map-cofork c)
+      ( map-cofork c')
       ( u)
 
   coherence-hom-cofork-hom-double-arrow :
@@ -134,12 +134,12 @@ module _
     UU (l1 ⊔ l6)
   coherence-hom-cofork-hom-double-arrow u H =
     ( ( H ·r (left-map-double-arrow a)) ∙h
-      ( ( map-cofork a' c') ·l
+      ( ( map-cofork c') ·l
         ( left-square-hom-double-arrow a a' h)) ∙h
-      ( (coh-cofork a' c') ·r (domain-map-hom-double-arrow a a' h))) ~
-    ( ( u ·l (coh-cofork a c)) ∙h
+      ( (coh-cofork c') ·r (domain-map-hom-double-arrow a a' h))) ~
+    ( ( u ·l (coh-cofork c)) ∙h
       ( H ·r (right-map-double-arrow a)) ∙h
-      ( (map-cofork a' c') ·l (right-square-hom-double-arrow a a' h)))
+      ( (map-cofork c') ·l (right-square-hom-double-arrow a a' h)))
 
   hom-cofork-hom-double-arrow : UU (l1 ⊔ l2 ⊔ l3 ⊔ l6)
   hom-cofork-hom-double-arrow =
@@ -168,7 +168,7 @@ module _
   coh-map-cofork-hom-cofork-hom-double-arrow = pr1 (pr2 m)
 
   hom-map-cofork-hom-cofork-hom-double-arrow :
-    hom-arrow (map-cofork a c) (map-cofork a' c')
+    hom-arrow (map-cofork c) (map-cofork c')
   pr1 hom-map-cofork-hom-cofork-hom-double-arrow =
     codomain-map-hom-double-arrow a a' h
   pr1 (pr2 hom-map-cofork-hom-cofork-hom-double-arrow) =

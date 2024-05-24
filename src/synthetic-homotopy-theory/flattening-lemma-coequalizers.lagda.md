@@ -1,6 +1,7 @@
 # The flattening lemma for coequalizers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
 module synthetic-homotopy-theory.flattening-lemma-coequalizers where
 ```
 
@@ -8,10 +9,13 @@ module synthetic-homotopy-theory.flattening-lemma-coequalizers where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-identifications
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.double-arrows
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-double-arrows
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -19,9 +23,14 @@ open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
 
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
+open import synthetic-homotopy-theory.descent-data-coequalizers
+open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows
+open import synthetic-homotopy-theory.equivalences-descent-data-coequalizers
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
 open import synthetic-homotopy-theory.universal-property-coequalizers
 open import synthetic-homotopy-theory.universal-property-pushouts
@@ -66,21 +75,21 @@ module _
   where
 
   left-map-double-arrow-flattening-lemma-coequalizer :
-    Σ (domain-double-arrow a) (P ∘ map-cofork a e ∘ left-map-double-arrow a) →
-    Σ (codomain-double-arrow a) (P ∘ map-cofork a e)
+    Σ (domain-double-arrow a) (P ∘ map-cofork e ∘ left-map-double-arrow a) →
+    Σ (codomain-double-arrow a) (P ∘ map-cofork e)
   left-map-double-arrow-flattening-lemma-coequalizer =
     map-Σ-map-base
       ( left-map-double-arrow a)
-      ( P ∘ map-cofork a e)
+      ( P ∘ map-cofork e)
 
   right-map-double-arrow-flattening-lemma-coequalizer :
-    Σ (domain-double-arrow a) (P ∘ map-cofork a e ∘ left-map-double-arrow a) →
-    Σ (codomain-double-arrow a) (P ∘ map-cofork a e)
+    Σ (domain-double-arrow a) (P ∘ map-cofork e ∘ left-map-double-arrow a) →
+    Σ (codomain-double-arrow a) (P ∘ map-cofork e)
   right-map-double-arrow-flattening-lemma-coequalizer =
     map-Σ
-      ( P ∘ map-cofork a e)
+      ( P ∘ map-cofork e)
       ( right-map-double-arrow a)
-      ( λ x → tr P (coh-cofork a e x))
+      ( λ x → tr P (coh-cofork e x))
 
   double-arrow-flattening-lemma-coequalizer : double-arrow (l1 ⊔ l4) (l2 ⊔ l4)
   double-arrow-flattening-lemma-coequalizer =
@@ -90,21 +99,78 @@ module _
 
   cofork-flattening-lemma-coequalizer :
     cofork double-arrow-flattening-lemma-coequalizer (Σ X P)
-  pr1 cofork-flattening-lemma-coequalizer = map-Σ-map-base (map-cofork a e) P
+  pr1 cofork-flattening-lemma-coequalizer = map-Σ-map-base (map-cofork e) P
   pr2 cofork-flattening-lemma-coequalizer =
     coherence-square-maps-map-Σ-map-base P
       ( right-map-double-arrow a)
       ( left-map-double-arrow a)
-      ( map-cofork a e)
-      ( map-cofork a e)
-      ( coh-cofork a e)
+      ( map-cofork e)
+      ( map-cofork e)
+      ( coh-cofork e)
 
   flattening-lemma-coequalizer-statement : UUω
   flattening-lemma-coequalizer-statement =
-    dependent-universal-property-coequalizer a e →
-    universal-property-coequalizer
-      ( double-arrow-flattening-lemma-coequalizer)
-      ( cofork-flattening-lemma-coequalizer)
+    dependent-universal-property-coequalizer e →
+    universal-property-coequalizer (cofork-flattening-lemma-coequalizer)
+```
+
+### The statement of the flattening lemma for coequalizers, phrased using descent data
+
+The above statement of the flattening lemma works with a provided type family
+over the coequalizer. We can instead accept a definition of this family via
+descent data.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {F : double-arrow l1 l2}
+  (P : descent-data-coequalizer F l3)
+  where
+
+  double-arrow-flattening-lemma-descent-data-coequalizer :
+    double-arrow (l1 ⊔ l3) (l2 ⊔ l3)
+  double-arrow-flattening-lemma-descent-data-coequalizer =
+    make-double-arrow
+      ( map-Σ-map-base
+        ( left-map-double-arrow F)
+        ( family-descent-data-coequalizer P))
+      ( map-Σ
+        ( family-descent-data-coequalizer P)
+        ( right-map-double-arrow F)
+        ( map-family-descent-data-coequalizer P))
+
+module _
+  {l1 l2 l3 l4 : Level} {F : double-arrow l1 l2}
+  {X : UU l3} (c : cofork F X)
+  (P : descent-data-coequalizer F l4)
+  (Q : X → UU l4)
+  (e : equiv-descent-data-coequalizer P (descent-data-family-cofork c Q))
+  where
+
+  cofork-flattening-lemma-descent-coequalizer :
+    cofork
+      ( double-arrow-flattening-lemma-descent-data-coequalizer P)
+      ( Σ X Q)
+  pr1 cofork-flattening-lemma-descent-coequalizer =
+    map-Σ Q
+      ( map-cofork c)
+      ( map-equiv-descent-data-coequalizer P (descent-data-family-cofork c Q) e)
+  pr2 cofork-flattening-lemma-descent-coequalizer =
+    coherence-square-maps-Σ Q
+      ( map-family-descent-data-coequalizer P)
+      ( λ a → id)
+      ( map-equiv-descent-data-coequalizer P (descent-data-family-cofork c Q) e)
+      ( map-equiv-descent-data-coequalizer P (descent-data-family-cofork c Q) e)
+      ( λ a →
+        inv-htpy
+          ( coherence-equiv-descent-data-coequalizer P
+            ( descent-data-family-cofork c Q)
+            ( e)
+            ( a)))
+
+  flattening-lemma-descent-data-coequalizer-statement : UUω
+  flattening-lemma-descent-data-coequalizer-statement =
+    universal-property-coequalizer c →
+    universal-property-coequalizer cofork-flattening-lemma-descent-coequalizer
 ```
 
 ## Properties
@@ -135,8 +201,6 @@ module _
     flattening-lemma-coequalizer : flattening-lemma-coequalizer-statement a P e
     flattening-lemma-coequalizer dup-coequalizer =
       universal-property-coequalizer-universal-property-pushout
-        ( double-arrow-flattening-lemma-coequalizer a P e)
-        ( cofork-flattening-lemma-coequalizer a P e)
         ( universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
           ( vertical-map-span-cocone-cofork
             ( double-arrow-flattening-lemma-coequalizer a P e))
@@ -206,7 +270,112 @@ module _
             ( horizontal-map-span-cocone-cofork a)
             ( cocone-codiagonal-cofork a e)
             ( dependent-universal-property-pushout-dependent-universal-property-coequalizer
-              ( a)
-              ( e)
               ( dup-coequalizer))))
+```
+
+### Proof of the descent data statement of the flattening lemma for coequalizers
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {F : double-arrow l1 l2}
+  {X : UU l3} {c : cofork F X}
+  (P : descent-data-coequalizer F l4)
+  (Q : X → UU l4)
+  (e : equiv-descent-data-coequalizer P (descent-data-family-cofork c Q))
+  where
+
+  equiv-double-arrow-flattening-lemma-descent-data-coequalizer :
+    equiv-double-arrow
+      ( double-arrow-flattening-lemma-descent-data-coequalizer P)
+      ( double-arrow-flattening-lemma-coequalizer F Q c)
+  pr1 equiv-double-arrow-flattening-lemma-descent-data-coequalizer =
+    equiv-tot
+      ( ( equiv-equiv-descent-data-coequalizer P
+          ( descent-data-family-cofork c Q)
+          ( e)) ∘
+        ( left-map-double-arrow F))
+  pr1 (pr2 equiv-double-arrow-flattening-lemma-descent-data-coequalizer) =
+    equiv-tot
+      ( equiv-equiv-descent-data-coequalizer P
+        ( descent-data-family-cofork c Q)
+        ( e))
+  pr1 (pr2 (pr2 equiv-double-arrow-flattening-lemma-descent-data-coequalizer)) =
+    refl-htpy
+  pr2 (pr2 (pr2 equiv-double-arrow-flattening-lemma-descent-data-coequalizer)) =
+    coherence-square-maps-Σ
+      ( Q ∘ map-cofork c)
+      ( map-equiv-descent-data-coequalizer
+        ( P)
+        ( descent-data-family-cofork c Q)
+        ( e) ∘ left-map-double-arrow F)
+      ( map-family-descent-data-coequalizer P)
+      ( λ a → tr Q (coh-cofork c a))
+      ( map-equiv-descent-data-coequalizer
+        ( P)
+        ( descent-data-family-cofork c Q)
+        ( e))
+      ( coherence-equiv-descent-data-coequalizer P
+        ( descent-data-family-cofork c Q)
+        ( e))
+
+  equiv-cofork-equiv-double-arrow-flattening-lemma-descent-data-coequalizer :
+    equiv-cofork-equiv-double-arrow
+      ( cofork-flattening-lemma-descent-coequalizer c P Q e)
+      ( cofork-flattening-lemma-coequalizer F Q c)
+      ( equiv-double-arrow-flattening-lemma-descent-data-coequalizer)
+  pr1
+    equiv-cofork-equiv-double-arrow-flattening-lemma-descent-data-coequalizer =
+    id-equiv
+  pr1
+    ( pr2
+        equiv-cofork-equiv-double-arrow-flattening-lemma-descent-data-coequalizer)
+    = refl-htpy
+  pr2
+    ( pr2
+      equiv-cofork-equiv-double-arrow-flattening-lemma-descent-data-coequalizer)
+    ( a , p) =
+    inv
+      ( ( left-whisker-concat _
+          ( compute-ap-map-Σ-map-base-eq-pair-Σ
+            ( map-cofork c)
+            ( Q)
+            ( refl)
+            ( coherence-equiv-descent-data-coequalizer P
+              ( descent-data-family-cofork c Q)
+              ( e)
+              ( a)
+              ( p)))) ∙
+        ( right-whisker-concat
+          ( ( right-unit) ∙
+            ( ap-id _) ∙
+            ( triangle-eq-pair-Σ Q (coh-cofork c a) _))
+          ( eq-pair-Σ refl
+            ( coherence-equiv-descent-data-coequalizer P
+              ( descent-data-family-cofork c Q)
+              ( e)
+              ( a)
+              ( p)))) ∙
+        ( ( left-whisker-concat-coherence-triangle-identifications'
+            ( eq-pair-Σ (coh-cofork c a) refl)
+            ( _)
+            ( _)
+            ( _)
+            ( left-inv-htpy-left-whisker
+              ( pair (map-cofork c (right-map-double-arrow F a)))
+              ( coherence-equiv-descent-data-coequalizer P
+                ( descent-data-family-cofork c Q)
+                ( e)
+                ( a))
+              ( p))) ∙
+          ( right-unit)))
+
+  abstract
+    flattening-lemma-descent-data-coequalizer :
+      flattening-lemma-descent-data-coequalizer-statement c P Q e
+    flattening-lemma-descent-data-coequalizer up-c =
+      universal-property-coequalizer-equiv-cofork-equiv-double-arrow
+        ( equiv-double-arrow-flattening-lemma-descent-data-coequalizer)
+        ( equiv-cofork-equiv-double-arrow-flattening-lemma-descent-data-coequalizer)
+        ( flattening-lemma-coequalizer F Q c
+          ( dependent-universal-property-universal-property-coequalizer up-c))
 ```

@@ -153,7 +153,7 @@ module _
       ( ( right-unit-htpy) ∙h
         ( right-unit-htpy) ∙h
         ( left-unit-law-left-whisker-comp
-          ( coh-cofork _
+          ( coh-cofork
             ( cofork-cocone-sequential-diagram
               ( total-cocone-family-cocone-sequential-diagram c P)))))
 
@@ -164,13 +164,7 @@ module _
         ( total-cocone-family-cocone-sequential-diagram c P)
     flattening-lemma-sequential-colimit up-c =
       universal-property-sequential-colimit-universal-property-coequalizer
-        ( total-cocone-family-cocone-sequential-diagram c P)
         ( universal-property-coequalizer-equiv-cofork-equiv-double-arrow
-          ( cofork-cocone-sequential-diagram
-            ( total-cocone-family-cocone-sequential-diagram c P))
-          ( cofork-flattening-lemma-coequalizer _
-            ( P)
-            ( cofork-cocone-sequential-diagram c))
           ( equiv-double-arrow-flattening-lemma-sequential-colimit)
           ( equiv-cofork-flattening-lemma-sequential-colimit)
           ( flattening-lemma-coequalizer _
@@ -179,7 +173,6 @@ module _
             ( dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
               ( c)
               ( dependent-universal-property-universal-property-sequential-colimit
-                ( c)
                 ( up-c)))))
 ```
 

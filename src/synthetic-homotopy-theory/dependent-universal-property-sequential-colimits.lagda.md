@@ -153,7 +153,6 @@ module _
 
   dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer :
     dependent-universal-property-coequalizer
-      ( double-arrow-sequential-diagram A)
       ( cofork-cocone-sequential-diagram c) →
     dependent-universal-property-sequential-colimit c
   dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
@@ -162,9 +161,7 @@ module _
     is-equiv-left-map-triangle
       ( dependent-cocone-map-sequential-diagram c P)
       ( dependent-cocone-sequential-diagram-dependent-cofork P)
-      ( dependent-cofork-map
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c))
+      ( dependent-cofork-map (cofork-cocone-sequential-diagram c))
       ( triangle-dependent-cocone-sequential-diagram-dependent-cofork P)
       ( dup-coequalizer P)
       ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork P)
@@ -172,7 +169,6 @@ module _
   dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit :
     dependent-universal-property-sequential-colimit c →
     dependent-universal-property-coequalizer
-      ( double-arrow-sequential-diagram A)
       ( cofork-cocone-sequential-diagram c)
   dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
     ( dup-c)
@@ -180,9 +176,7 @@ module _
     is-equiv-top-map-triangle
       ( dependent-cocone-map-sequential-diagram c P)
       ( dependent-cocone-sequential-diagram-dependent-cofork P)
-      ( dependent-cofork-map
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c))
+      ( dependent-cofork-map (cofork-cocone-sequential-diagram c))
       ( triangle-dependent-cocone-sequential-diagram-dependent-cofork P)
       ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork P)
       ( dup-c P)
@@ -193,7 +187,7 @@ module _
 ```agda
 module _
   { l1 l2 : Level} {A : sequential-diagram l1} {X : UU l2}
-  ( c : cocone-sequential-diagram A X)
+  { c : cocone-sequential-diagram A X}
   where
 
   universal-property-dependent-universal-property-sequential-colimit :
@@ -220,10 +214,7 @@ module _
     dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
       ( c)
       ( dependent-universal-property-universal-property-coequalizer
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c)
         ( universal-property-coequalizer-universal-property-sequential-colimit
-          ( c)
           ( up-sequential-diagram)))
 ```
 
@@ -256,10 +247,9 @@ module _
           ( c')
           ( h)
           ( H)
-          ( universal-property-dependent-universal-property-sequential-colimit c
+          ( universal-property-dependent-universal-property-sequential-colimit
             ( dup-c))
           ( universal-property-dependent-universal-property-sequential-colimit
-            ( c')
             ( dup-c'))
 
     dependent-universal-property-sequential-colimit-is-equiv-dependent-universal-property-sequential-colimit :
@@ -268,13 +258,13 @@ module _
       dependent-universal-property-sequential-colimit c'
     dependent-universal-property-sequential-colimit-is-equiv-dependent-universal-property-sequential-colimit
       ( dup-c) (is-equiv-h) =
-      dependent-universal-property-universal-property-sequential-colimit c'
+      dependent-universal-property-universal-property-sequential-colimit
         ( universal-property-sequential-colimit-is-equiv-universal-property-sequential-colimit
           ( c)
           ( c')
           ( h)
           ( H)
-          ( universal-property-dependent-universal-property-sequential-colimit c
+          ( universal-property-dependent-universal-property-sequential-colimit
             ( dup-c))
           ( is-equiv-h))
 
@@ -285,7 +275,7 @@ module _
     dependent-universal-property-sequential-colimit-dependent-universal-property-sequential-colimit-is-equiv
       ( is-equiv-h)
       ( dup-c') =
-      dependent-universal-property-universal-property-sequential-colimit c
+      dependent-universal-property-universal-property-sequential-colimit
         ( universal-property-sequential-colimit-universal-property-sequential-colimit-is-equiv
           ( c)
           ( c')
@@ -293,6 +283,5 @@ module _
           ( H)
           ( is-equiv-h)
           ( universal-property-dependent-universal-property-sequential-colimit
-            ( c')
             ( dup-c')))
 ```

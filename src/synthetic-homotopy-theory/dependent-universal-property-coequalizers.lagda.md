@@ -44,22 +44,22 @@ dependent-cofork-map : ((x : X) → P x) → dependent-cocone e P.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (a : double-arrow l1 l2) {X : UU l3}
+  {l1 l2 l3 : Level} {a : double-arrow l1 l2} {X : UU l3}
   (e : cofork a X)
   where
 
   dependent-universal-property-coequalizer : UUω
   dependent-universal-property-coequalizer =
-    {l : Level} (P : X → UU l) → is-equiv (dependent-cofork-map a e {P = P})
+    {l : Level} (P : X → UU l) → is-equiv (dependent-cofork-map e {P = P})
 
 module _
-  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
-  (e : cofork a X) {P : X → UU l4}
-  (dup-coequalizer : dependent-universal-property-coequalizer a e)
+  {l1 l2 l3 l4 : Level} {a : double-arrow l1 l2} {X : UU l3}
+  {e : cofork a X} {P : X → UU l4}
+  (dup-coequalizer : dependent-universal-property-coequalizer e)
   where
 
   map-dependent-universal-property-coequalizer :
-    dependent-cofork a e P →
+    dependent-cofork e P →
     (x : X) → P x
   map-dependent-universal-property-coequalizer =
     map-inv-is-equiv (dup-coequalizer P)
@@ -71,23 +71,23 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (a : double-arrow l1 l2) {X : UU l3}
-  (e : cofork a X) {P : X → UU l4}
-  (dup-coequalizer : dependent-universal-property-coequalizer a e)
-  (k : dependent-cofork a e P)
+  {l1 l2 l3 l4 : Level} {a : double-arrow l1 l2} {X : UU l3}
+  {e : cofork a X} {P : X → UU l4}
+  (dup-coequalizer : dependent-universal-property-coequalizer e)
+  (k : dependent-cofork e P)
   where
 
   htpy-dependent-cofork-dependent-universal-property-coequalizer :
-    htpy-dependent-cofork a P
-      ( dependent-cofork-map a e
-        ( map-dependent-universal-property-coequalizer a e
+    htpy-dependent-cofork P
+      ( dependent-cofork-map e
+        ( map-dependent-universal-property-coequalizer
           ( dup-coequalizer)
           ( k)))
       ( k)
   htpy-dependent-cofork-dependent-universal-property-coequalizer =
-    htpy-dependent-cofork-eq a P
-      ( dependent-cofork-map a e
-        ( map-dependent-universal-property-coequalizer a e
+    htpy-dependent-cofork-eq P
+      ( dependent-cofork-map e
+        ( map-dependent-universal-property-coequalizer
           ( dup-coequalizer)
           ( k)))
       ( k)
@@ -97,17 +97,17 @@ module _
     uniqueness-dependent-universal-property-coequalizer :
       is-contr
         ( Σ ((x : X) → P x)
-          ( λ h → htpy-dependent-cofork a P (dependent-cofork-map a e h) k))
+          ( λ h → htpy-dependent-cofork P (dependent-cofork-map e h) k))
     uniqueness-dependent-universal-property-coequalizer =
       is-contr-is-equiv'
-        ( fiber (dependent-cofork-map a e) k)
+        ( fiber (dependent-cofork-map e) k)
         ( tot
           ( λ h →
-            htpy-dependent-cofork-eq a P (dependent-cofork-map a e h) k))
+            htpy-dependent-cofork-eq P (dependent-cofork-map e h) k))
         ( is-equiv-tot-is-fiberwise-equiv
           ( λ h →
-            is-equiv-htpy-dependent-cofork-eq a P
-              ( dependent-cofork-map a e h)
+            is-equiv-htpy-dependent-cofork-eq P
+              ( dependent-cofork-map e h)
               ( k)))
         ( is-contr-map-is-equiv (dup-coequalizer P) k)
 ```
@@ -122,8 +122,8 @@ more precise, asserting that under this mapping,
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (a : double-arrow l1 l2) {X : UU l3}
-  (e : cofork a X)
+  {l1 l2 l3 : Level} {a : double-arrow l1 l2} {X : UU l3}
+  {e : cofork a X}
   where
 
   dependent-universal-property-coequalizer-dependent-universal-property-pushout :
@@ -131,24 +131,24 @@ module _
       ( vertical-map-span-cocone-cofork a)
       ( horizontal-map-span-cocone-cofork a)
       ( cocone-codiagonal-cofork a e) →
-    dependent-universal-property-coequalizer a e
+    dependent-universal-property-coequalizer e
   dependent-universal-property-coequalizer-dependent-universal-property-pushout
     ( dup-pushout)
     ( P) =
     is-equiv-left-map-triangle
-      ( dependent-cofork-map a e)
-      ( dependent-cofork-dependent-cocone-codiagonal a e P)
+      ( dependent-cofork-map e)
+      ( dependent-cofork-dependent-cocone-codiagonal e P)
       ( dependent-cocone-map
         ( vertical-map-span-cocone-cofork a)
         ( horizontal-map-span-cocone-cofork a)
         ( cocone-codiagonal-cofork a e)
         ( P))
-      ( triangle-dependent-cofork-dependent-cocone-codiagonal a e P)
+      ( triangle-dependent-cofork-dependent-cocone-codiagonal e P)
       ( dup-pushout P)
-      ( is-equiv-dependent-cofork-dependent-cocone-codiagonal a e P)
+      ( is-equiv-dependent-cofork-dependent-cocone-codiagonal e P)
 
   dependent-universal-property-pushout-dependent-universal-property-coequalizer :
-    dependent-universal-property-coequalizer a e →
+    dependent-universal-property-coequalizer e →
     dependent-universal-property-pushout
       ( vertical-map-span-cocone-cofork a)
       ( horizontal-map-span-cocone-cofork a)
@@ -157,15 +157,15 @@ module _
     ( dup-coequalizer)
     ( P) =
     is-equiv-top-map-triangle
-      ( dependent-cofork-map a e)
-      ( dependent-cofork-dependent-cocone-codiagonal a e P)
+      ( dependent-cofork-map e)
+      ( dependent-cofork-dependent-cocone-codiagonal e P)
       ( dependent-cocone-map
         ( vertical-map-span-cocone-cofork a)
         ( horizontal-map-span-cocone-cofork a)
         ( cocone-codiagonal-cofork a e)
         ( P))
-      ( triangle-dependent-cofork-dependent-cocone-codiagonal a e P)
-      ( is-equiv-dependent-cofork-dependent-cocone-codiagonal a e P)
+      ( triangle-dependent-cofork-dependent-cocone-codiagonal e P)
+      ( is-equiv-dependent-cofork-dependent-cocone-codiagonal e P)
       ( dup-coequalizer P)
 ```
 
@@ -173,36 +173,34 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (a : double-arrow l1 l2) {X : UU l3}
-  (e : cofork a X)
+  {l1 l2 l3 : Level} {a : double-arrow l1 l2} {X : UU l3}
+  {e : cofork a X}
   where
 
   universal-property-dependent-universal-property-coequalizer :
-    dependent-universal-property-coequalizer a e →
-    universal-property-coequalizer a e
+    dependent-universal-property-coequalizer e →
+    universal-property-coequalizer e
   universal-property-dependent-universal-property-coequalizer
     ( dup-coequalizer)
     ( Y) =
     is-equiv-left-map-triangle
-      ( cofork-map a e)
-      ( map-compute-dependent-cofork-constant-family a e Y)
-      ( dependent-cofork-map a e)
-      ( triangle-compute-dependent-cofork-constant-family a e Y)
+      ( cofork-map e)
+      ( map-compute-dependent-cofork-constant-family e Y)
+      ( dependent-cofork-map e)
+      ( triangle-compute-dependent-cofork-constant-family e Y)
       ( dup-coequalizer (λ _ → Y))
       ( is-equiv-map-equiv
-        ( compute-dependent-cofork-constant-family a e Y))
+        ( compute-dependent-cofork-constant-family e Y))
 
   dependent-universal-property-universal-property-coequalizer :
-    universal-property-coequalizer a e →
-    dependent-universal-property-coequalizer a e
+    universal-property-coequalizer e →
+    dependent-universal-property-coequalizer e
   dependent-universal-property-universal-property-coequalizer up-coequalizer =
     dependent-universal-property-coequalizer-dependent-universal-property-pushout
-      ( a)
-      ( e)
       ( dependent-universal-property-universal-property-pushout
           ( vertical-map-span-cocone-cofork a)
           ( horizontal-map-span-cocone-cofork a)
           ( cocone-codiagonal-cofork a e)
-          ( universal-property-pushout-universal-property-coequalizer a e
+          ( universal-property-pushout-universal-property-coequalizer
             ( up-coequalizer)))
 ```

@@ -48,7 +48,11 @@ open import synthetic-homotopy-theory.descent-circle-dependent-pair-types public
 open import synthetic-homotopy-theory.descent-circle-equivalence-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
+open import synthetic-homotopy-theory.descent-data-coequalizers public
+open import synthetic-homotopy-theory.descent-data-coequalizers-equivalence-families public
+open import synthetic-homotopy-theory.descent-data-coequalizers-function-families public
 open import synthetic-homotopy-theory.descent-data-sequential-colimits public
+open import synthetic-homotopy-theory.descent-property-coequalizers public
 open import synthetic-homotopy-theory.descent-property-sequential-colimits public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.eckmann-hilton-argument public
@@ -56,7 +60,9 @@ open import synthetic-homotopy-theory.equifibered-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams public
 open import synthetic-homotopy-theory.equivalences-coforks-under-equivalences-double-arrows public
 open import synthetic-homotopy-theory.equivalences-dependent-sequential-diagrams public
+open import synthetic-homotopy-theory.equivalences-descent-data-coequalizers public
 open import synthetic-homotopy-theory.equivalences-sequential-diagrams public
+open import synthetic-homotopy-theory.families-descent-data-coequalizers public
 open import synthetic-homotopy-theory.families-descent-data-sequential-colimits public
 open import synthetic-homotopy-theory.flattening-lemma-coequalizers public
 open import synthetic-homotopy-theory.flattening-lemma-pushouts public
@@ -67,6 +73,7 @@ open import synthetic-homotopy-theory.functoriality-sequential-colimits public
 open import synthetic-homotopy-theory.functoriality-suspensions public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
 open import synthetic-homotopy-theory.hatchers-acyclic-type public
+open import synthetic-homotopy-theory.induction-principle-identity-types-coequalizers public
 open import synthetic-homotopy-theory.induction-principle-pushouts public
 open import synthetic-homotopy-theory.infinite-complex-projective-space public
 open import synthetic-homotopy-theory.infinite-cyclic-types public
@@ -83,6 +90,7 @@ open import synthetic-homotopy-theory.morphisms-cocones-under-morphisms-sequenti
 open import synthetic-homotopy-theory.morphisms-coforks-under-morphisms-double-arrows public
 open import synthetic-homotopy-theory.morphisms-dependent-sequential-diagrams public
 open import synthetic-homotopy-theory.morphisms-descent-data-circle public
+open import synthetic-homotopy-theory.morphisms-descent-data-coequalizers public
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.null-cocones-under-pointed-span-diagrams public
@@ -98,6 +106,7 @@ open import synthetic-homotopy-theory.recursion-principle-pushouts public
 open import synthetic-homotopy-theory.retracts-of-sequential-diagrams public
 open import synthetic-homotopy-theory.rewriting-pushouts public
 open import synthetic-homotopy-theory.sections-descent-circle public
+open import synthetic-homotopy-theory.sections-descent-data-coequalizers public
 open import synthetic-homotopy-theory.sequential-colimits public
 open import synthetic-homotopy-theory.sequential-diagrams public
 open import synthetic-homotopy-theory.sequentially-compact-types public
