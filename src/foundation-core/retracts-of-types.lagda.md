@@ -14,6 +14,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.postcomposition-functions
 open import foundation-core.precomposition-functions
@@ -166,6 +167,17 @@ module _
     postcomp S (map-retraction-retract R)
   pr2 (pr2 retract-postcomp) h =
     eq-htpy (is-retraction-map-retraction-retract R ·r h)
+```
+
+### Every type is a retract of itself
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  id-retract : A retract-of A
+  id-retract = (id , id , refl-htpy)
 ```
 
 ### Composition of retracts
