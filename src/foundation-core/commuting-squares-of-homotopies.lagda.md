@@ -110,8 +110,8 @@ module _
 
 ### Squares with refl on the top and bottom
 
-Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy`
-on the top and bottom.
+Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy` on
+the top and bottom.
 
 ```text
       refl-htpy
@@ -141,7 +141,7 @@ module _
 ```
 
 Conversely, given a coherence square as above, we can obtain a homotopy
-  `H ~ H'`.
+`H ~ H'`.
 
 ```agda
   inv-coherence-square-homotopies-horizontal-refl :
@@ -157,8 +157,8 @@ Conversely, given a coherence square as above, we can obtain a homotopy
 
 ### Squares with `refl` on the left and right
 
-Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy`
-on the left and right.
+Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy` on
+the left and right.
 
 ```text
                H'

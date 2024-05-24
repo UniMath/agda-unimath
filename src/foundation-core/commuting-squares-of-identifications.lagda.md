@@ -106,8 +106,8 @@ module _
 
 ### Squares with `refl` on the top and bottom
 
-Given an identification `α : p ＝ q`, we can obtain a coherence square
-with `refl` on the top and bottom, like the diagram below.
+Given an identification `α : p ＝ q`, we can obtain a coherence square with
+`refl` on the top and bottom, like the diagram below.
 
 ```text
        refl
@@ -152,9 +152,8 @@ Conversely, given a coherence square as above, we can obtain an equality
 
 ### Squares with `refl` on the left and right
 
-Given an identification `α : p ＝ q`, we can obtain a coherence square
-with `refl` on the left and right, like the diagram below.
-
+Given an identification `α : p ＝ q`, we can obtain a coherence square with
+`refl` on the left and right, like the diagram below.
 
 ```text
            q
