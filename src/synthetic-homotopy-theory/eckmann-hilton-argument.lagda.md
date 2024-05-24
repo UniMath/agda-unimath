@@ -357,25 +357,32 @@ module _
 
 ### Computing transport along `eckmann-hilton`
 
-This coherence relates the three dimensional transport [`tr³`](foundation.transport-along-higher-identifications.md)
-along an Eckmann-Hilton identification [`eckmann-hilton-Ω² α β`](synthetic-homotopy-theory.eckmann-hilton-argument.md)
-to the the Eckmann-Hilton argument for homotopies [`eckmann-hilton-htpy (tr² B α) (tr² B β)`](foundation.homotopy-algebra.md).
+This coherence relates the three dimensional transport
+[`tr³`](foundation.transport-along-higher-identifications.md) along an
+Eckmann-Hilton identification
+[`eckmann-hilton-Ω² α β`](synthetic-homotopy-theory.eckmann-hilton-argument.md)
+to the the Eckmann-Hilton argument for homotopies
+[`eckmann-hilton-htpy (tr² B α) (tr² B β)`](foundation.homotopy-algebra.md).
 
 This takes the form of a commutative square of homotopies
 
 ```text
-                                           tr²-concat α β
-                          tr² B (α ∙ β) ------------------- tr² B α ∙h tr² B β
+                 tr²-concat α β
+tr² B (α ∙ β) ------------------- tr² B α ∙h tr² B β
 
-                               |                                    |
-                               |                                    |
-tr³ B (eckmann-hilton-Ω² α β)  |                                    | eckmann-hilton-htpy (tr² B α) (tr² B β) 
-                               |                                    |
-                               |                                    |
+     |                                    |
+     |                                    |
+     |                                    |
+     |                                    | 
+     |                                    |
+     |                                    |
 
-                          tr² B (β ∙ α) ------------------- tr² B β ∙h tr² B α
-                                           tr²-concat β α
+tr² B (β ∙ α) ------------------- tr² B β ∙h tr² B α
+                 tr²-concat β α
 ```
+
+where the left leg is `tr³ B (eckmann-hilton-Ω² α β)` and the right
+leg is `eckmann-hilton-htpy (tr² B α) (tr² B β)`.
 
 ```agda
 module _
