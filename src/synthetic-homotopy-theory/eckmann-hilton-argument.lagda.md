@@ -373,7 +373,7 @@ tr² B (α ∙ β) ------------------- tr² B α ∙h tr² B β
      |                                    |
      |                                    |
      |                                    |
-     |                                    | 
+     |                                    |
      |                                    |
      |                                    |
 
@@ -381,8 +381,8 @@ tr² B (β ∙ α) ------------------- tr² B β ∙h tr² B α
                  tr²-concat β α
 ```
 
-where the left leg is `tr³ B (eckmann-hilton-Ω² α β)` and the right
-leg is `eckmann-hilton-htpy (tr² B α) (tr² B β)`.
+where the left leg is `tr³ B (eckmann-hilton-Ω² α β)` and the right leg is
+`eckmann-hilton-htpy (tr² B α) (tr² B β)`.
 
 ```agda
 module _
