@@ -71,7 +71,7 @@ If the map `f : A → B` is epi, then the commutative square
     A -----> B
     |        |
   f |        | id
-    V      ⌜ V
+    ∨      ⌜ ∨
     B -----> B
         id
 ```
@@ -99,7 +99,7 @@ module _
 
   universal-property-pushout-is-epimorphism :
     is-epimorphism f →
-    {l : Level} → universal-property-pushout l f f (cocone-codiagonal-map f)
+    universal-property-pushout f f (cocone-codiagonal-map f)
   universal-property-pushout-is-epimorphism e X =
     is-equiv-comp
       ( map-equiv (compute-total-fiber-precomp f X))
@@ -134,7 +134,7 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
 ```agda
   is-epimorphism-universal-property-pushout-Level :
     {l : Level} →
-    universal-property-pushout l f f (cocone-codiagonal-map f) →
+    universal-property-pushout-Level l f f (cocone-codiagonal-map f) →
     is-epimorphism-Level l f
   is-epimorphism-universal-property-pushout-Level up-c X =
     is-emb-is-contr-fibers-values
@@ -153,7 +153,7 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
             ( g)))
 
   is-epimorphism-universal-property-pushout :
-    ({l : Level} → universal-property-pushout l f f (cocone-codiagonal-map f)) →
+    universal-property-pushout f f (cocone-codiagonal-map f) →
     is-epimorphism f
   is-epimorphism-universal-property-pushout up-c =
     is-epimorphism-universal-property-pushout-Level up-c

@@ -1,5 +1,9 @@
 # Synthetic homotopy theory
 
+```agda
+{-# OPTIONS --rewriting #-}
+```
+
 ## Files in the synthetic homotopy theory folder
 
 ```agda
@@ -90,7 +94,9 @@ open import synthetic-homotopy-theory.pullback-property-pushouts public
 open import synthetic-homotopy-theory.pushout-products public
 open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
+open import synthetic-homotopy-theory.recursion-principle-pushouts public
 open import synthetic-homotopy-theory.retracts-of-sequential-diagrams public
+open import synthetic-homotopy-theory.rewriting-pushouts public
 open import synthetic-homotopy-theory.sections-descent-circle public
 open import synthetic-homotopy-theory.sequential-colimits public
 open import synthetic-homotopy-theory.sequential-diagrams public
@@ -118,4 +124,5 @@ open import synthetic-homotopy-theory.universal-property-sequential-colimits pub
 open import synthetic-homotopy-theory.universal-property-suspensions public
 open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.wedges-of-pointed-types public
+open import synthetic-homotopy-theory.zigzags-sequential-diagrams public
 ```

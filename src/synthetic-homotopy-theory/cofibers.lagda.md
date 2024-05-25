@@ -58,8 +58,8 @@ module _
   pr2 (cofiber-Pointed-Type f) = point-cofiber f
 
   universal-property-cofiber :
-    (f : A → B) {l : Level} →
-    universal-property-pushout l f (terminal-map A) (cocone-cofiber f)
+    (f : A → B) →
+    universal-property-pushout f (terminal-map A) (cocone-cofiber f)
   universal-property-cofiber f = up-pushout f (terminal-map A)
 ```
 

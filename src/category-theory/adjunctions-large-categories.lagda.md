@@ -38,7 +38,7 @@ Two [functors](category-theory.functors-large-categories.md) `F : C → D` and
               |                       |
   g ∘ - ∘ F f |                       | G g ∘ - ∘ f
               |                       |
-              v                       v
+              ∨                       ∨
         hom (F X₂) Y₂ --------> hom X₂ (G Y₂)
                        ϕ X₂ Y₂
 ```

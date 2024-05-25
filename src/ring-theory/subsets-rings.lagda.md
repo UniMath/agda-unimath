@@ -31,7 +31,7 @@ A subset of a ring is a subtype of the underlying type of a ring
 
 ```agda
 subset-Ring :
-  (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (R : Ring l1) → UU (lsuc l ⊔ l1)
 subset-Ring l R = subtype l (type-Ring R)
 
 is-set-subset-Ring :

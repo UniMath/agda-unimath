@@ -111,7 +111,7 @@ the form
 ```text
           bₙ(x)
   Bₙ(x) -------> Bₙ₊₁(aₙ(x))
-    ^                ^
+    ∧                ∧
  sₙ |                | sₙ₊₁
     |                |
  (x : Aₙ) ---> (aₙ(x) : Aₙ₊₁)
@@ -165,4 +165,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference SDR20}}
+{{#bibliography}} {{#reference SvDR20}}

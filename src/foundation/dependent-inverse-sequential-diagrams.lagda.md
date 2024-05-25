@@ -96,7 +96,7 @@ we mean that the diagrams
 ```text
             gₙ
       Bₙ₊₁ ---> Bₙ
-      ^         ^
+      ∧         ∧
   hₙ₊₁|         | hₙ
       |         |
       Aₙ₊₁ ---> Aₙ

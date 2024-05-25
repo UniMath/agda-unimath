@@ -41,17 +41,28 @@ open import foundation.universe-levels
 
 ## Idea
 
-A dependent type `A` over `X` is said to be **local at** `f : Y → X`, or
-**`f`-local**, if the [precomposition map](foundation-core.function-types.md)
+A dependent type `A` over `Y` is said to be
+{{#concept "local at" Disambiguation="map of types"}} `f : X → Y`, or
+{{#concept "`f`-local" Disambiguation="map of types"}} , if the
+[precomposition map](foundation-core.function-types.md)
 
 ```text
-  _∘ f : ((x : X) → A x) → ((y : Y) → A (f y))
+  _∘ f : ((y : Y) → A y) → ((x : X) → A (f x))
 ```
 
 is an [equivalence](foundation-core.equivalences.md).
 
-We reserve the name `is-local` for when `A` does not vary over `X`, and specify
+We reserve the name `is-local` for when `A` does not vary over `Y`, and specify
 with `is-local-dependent-type` when it does.
+
+Note that a local dependent type is not the same as a
+[local family](orthogonal-factorization-systems.local-families-of-types.md).
+While a local family is a type family `P` on some other indexing type `A`, such
+that each fiber is local as a nondependent type over `Y`, a local dependent type
+is a local type that additionally may vary over `Y`. Concretely, a local
+dependent type `A` may be understood as a family of types such that for every
+`y : Y`, `A y` is
+`fiber f y`-[null](orthogonal-factorization-systems.null-types.md).
 
 ## Definition
 
@@ -59,7 +70,7 @@ with `is-local-dependent-type` when it does.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} (f : Y → X) (A : X → UU l3)
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) (A : Y → UU l3)
   where
 
   is-local-dependent-type : UU (l1 ⊔ l2 ⊔ l3)
@@ -77,7 +88,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} (f : Y → X) (A : UU l3)
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) (A : UU l3)
   where
 
   is-local : UU (l1 ⊔ l2 ⊔ l3)
@@ -92,15 +103,15 @@ module _
 
 ## Properties
 
-### Being local distributes over Π-types
+### Locality distributes over Π-types
 
 ```agda
 module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
   distributive-Π-is-local-dependent-type :
-    {l3 l4 : Level} {A : UU l3} (B : A → X → UU l4) →
+    {l3 l4 : Level} {A : UU l3} (B : A → Y → UU l4) →
     ((a : A) → is-local-dependent-type f (B a)) →
     is-local-dependent-type f (λ x → (a : A) → B a x)
   distributive-Π-is-local-dependent-type B f-loc =
@@ -122,8 +133,8 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  {Y : UU l1} {X : UU l2} {A : X → UU l3} {B : X → UU l4}
-  (f : Y → X)
+  {X : UU l1} {Y : UU l2} {A : Y → UU l3} {B : Y → UU l4}
+  (f : X → Y)
   where
 
   is-local-dependent-type-fam-equiv :
@@ -143,8 +154,8 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level}
-  {Y : UU l1} {X : UU l2} {A : UU l3} {B : UU l4}
-  (f : Y → X)
+  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4}
+  (f : X → Y)
   where
 
   is-local-equiv : A ≃ B → is-local f B → is-local f A
@@ -158,7 +169,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {Y : UU l1} {X : UU l2} {A : UU l3} {f f' : Y → X}
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {A : UU l3} {f f' : X → Y}
   where
 
   is-local-htpy : (H : f ~ f') → is-local f' A → is-local f A
@@ -227,7 +238,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
   is-equiv-is-local : ({l : Level} (A : UU l) → is-local f A) → is-equiv f
@@ -238,43 +249,43 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
-  section-is-local-domains' : section (precomp f Y) → is-local f X → section f
-  pr1 (section-is-local-domains' section-precomp-Y is-local-X) =
-    pr1 section-precomp-Y id
-  pr2 (section-is-local-domains' section-precomp-Y is-local-X) =
+  section-is-local-domains' : section (precomp f X) → is-local f Y → section f
+  pr1 (section-is-local-domains' section-precomp-X is-local-Y) =
+    pr1 section-precomp-X id
+  pr2 (section-is-local-domains' section-precomp-X is-local-Y) =
     htpy-eq
       ( ap
         ( pr1)
-        { ( f ∘ pr1 (section-is-local-domains' section-precomp-Y is-local-X)) ,
-          ( ap (postcomp Y f) (pr2 section-precomp-Y id))}
+        { ( f ∘ pr1 (section-is-local-domains' section-precomp-X is-local-Y)) ,
+          ( ap (postcomp X f) (pr2 section-precomp-X id))}
         { id , refl}
-        ( eq-is-contr (is-contr-map-is-equiv is-local-X f)))
+        ( eq-is-contr (is-contr-map-is-equiv is-local-Y f)))
 
-  is-equiv-is-local-domains' : section (precomp f Y) → is-local f X → is-equiv f
-  pr1 (is-equiv-is-local-domains' section-precomp-Y is-local-X) =
-    section-is-local-domains' section-precomp-Y is-local-X
-  pr2 (is-equiv-is-local-domains' section-precomp-Y is-local-X) =
-    retraction-section-precomp-domain f section-precomp-Y
+  is-equiv-is-local-domains' : section (precomp f X) → is-local f Y → is-equiv f
+  pr1 (is-equiv-is-local-domains' section-precomp-X is-local-Y) =
+    section-is-local-domains' section-precomp-X is-local-Y
+  pr2 (is-equiv-is-local-domains' section-precomp-X is-local-Y) =
+    retraction-section-precomp-domain f section-precomp-X
 
-  is-equiv-is-local-domains : is-local f Y → is-local f X → is-equiv f
-  is-equiv-is-local-domains is-local-Y =
-    is-equiv-is-local-domains' (pr1 is-local-Y)
+  is-equiv-is-local-domains : is-local f X → is-local f Y → is-equiv f
+  is-equiv-is-local-domains is-local-X =
+    is-equiv-is-local-domains' (pr1 is-local-X)
 ```
 
 ### Propositions are `f`-local if `_∘ f` has a converse
 
 ```agda
 module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
   is-local-dependent-type-is-prop :
-    {l : Level} (A : X → UU l) →
-    ((x : X) → is-prop (A x)) →
-    (((y : Y) → A (f y)) → ((x : X) → A x)) →
+    {l : Level} (A : Y → UU l) →
+    ((y : Y) → is-prop (A y)) →
+    (((x : X) → A (f x)) → ((y : Y) → A y)) →
     is-local-dependent-type f A
   is-local-dependent-type-is-prop A is-prop-A =
     is-equiv-has-converse-is-prop
@@ -283,22 +294,20 @@ module _
 
   is-local-is-prop :
     {l : Level} (A : UU l) →
-    is-prop A → ((Y → A) → (X → A)) → is-local f A
+    is-prop A → ((X → A) → (Y → A)) → is-local f A
   is-local-is-prop A is-prop-A =
     is-local-dependent-type-is-prop (λ _ → A) (λ _ → is-prop-A)
 ```
-
-## Examples
 
 ### All type families are local at equivalences
 
 ```agda
 module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
   is-local-dependent-type-is-equiv :
-    is-equiv f → {l : Level} (A : X → UU l) → is-local-dependent-type f A
+    is-equiv f → {l : Level} (A : Y → UU l) → is-local-dependent-type f A
   is-local-dependent-type-is-equiv is-equiv-f =
     is-equiv-precomp-Π-is-equiv is-equiv-f
 
@@ -311,12 +320,12 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
   is-local-dependent-type-is-contr :
-    {l : Level} (A : X → UU l) →
-    ((x : X) → is-contr (A x)) → is-local-dependent-type f A
+    {l : Level} (A : Y → UU l) →
+    ((y : Y) → is-contr (A y)) → is-local-dependent-type f A
   is-local-dependent-type-is-contr A is-contr-A =
     is-equiv-is-contr
       ( precomp-Π f A)

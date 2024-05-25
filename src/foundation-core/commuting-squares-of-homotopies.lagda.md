@@ -26,7 +26,7 @@ A square of [homotopies](foundation-core.homotopies.md)
       f ------> g
       |         |
  left |         | right
-      v         v
+      ∨         ∨
       h ------> i
         bottom
 ```

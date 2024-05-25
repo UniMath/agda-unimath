@@ -22,7 +22,7 @@ The {{#concept "diagonal" Disambiguation="morphism of arrows"}} of a
     A -----> X
     |        |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -35,7 +35,7 @@ maps `i` and `j`, which fit in a naturality square
     A -----> A ×_X A
     |           |
   f |           | functoriality Δ g
-    V           V
+    ∨           ∨
     B -----> B ×_Y B.
        Δ j
 ```

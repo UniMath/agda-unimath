@@ -17,6 +17,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -75,8 +76,7 @@ module _
 
   universal-property-sequential-colimit : UUω
   universal-property-sequential-colimit =
-    {l : Level} → (Y : UU l) →
-    is-equiv (cocone-map-sequential-diagram c {Y = Y})
+    {l : Level} (Y : UU l) → is-equiv (cocone-map-sequential-diagram c {Y = Y})
 ```
 
 ### The map induced by the universal property of sequential colimits
@@ -151,6 +151,48 @@ module _
         ( is-contr-map-is-equiv (up-sequential-colimit Y) c')
 ```
 
+### The cocone of a sequential colimit induces the identity function by its universal property
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1}
+  {X : UU l2} {c : cocone-sequential-diagram A X}
+  (up-c : universal-property-sequential-colimit c)
+  where
+
+  compute-map-universal-property-sequential-colimit-id :
+    map-universal-property-sequential-colimit up-c c ~ id
+  compute-map-universal-property-sequential-colimit-id =
+    htpy-eq
+      ( ap pr1
+        ( eq-is-contr'
+          ( uniqueness-map-universal-property-sequential-colimit up-c c)
+          ( ( map-universal-property-sequential-colimit up-c c) ,
+            ( htpy-cocone-universal-property-sequential-colimit up-c c))
+          ( id , htpy-cocone-map-id-sequential-diagram A c)))
+```
+
+### Homotopies between cocones under sequential diagrams induce homotopies between the induced maps out of sequential colimits
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : sequential-diagram l1}
+  {X : UU l2} {c : cocone-sequential-diagram A X}
+  (up-c : universal-property-sequential-colimit c)
+  {Y : UU l3} {c' c'' : cocone-sequential-diagram A Y}
+  (H : htpy-cocone-sequential-diagram c' c'')
+  where
+
+  htpy-map-universal-property-htpy-cocone-sequential-diagram :
+    map-universal-property-sequential-colimit up-c c' ~
+    map-universal-property-sequential-colimit up-c c''
+  htpy-map-universal-property-htpy-cocone-sequential-diagram =
+    htpy-eq
+      ( ap
+        ( map-universal-property-sequential-colimit up-c)
+        ( eq-htpy-cocone-sequential-diagram A c' c'' H))
+```
+
 ### Correspondence between universal properties of sequential colimits and coequalizers
 
 A cocone under a sequential diagram has the universal property of sequential
@@ -165,10 +207,9 @@ module _
   where
 
   universal-property-sequential-colimit-universal-property-coequalizer :
-    ( {l : Level} →
-      universal-property-coequalizer l
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c)) →
+    universal-property-coequalizer
+      ( double-arrow-sequential-diagram A)
+      ( cofork-cocone-sequential-diagram c) →
     universal-property-sequential-colimit c
   universal-property-sequential-colimit-universal-property-coequalizer
     ( up-cofork)
@@ -185,10 +226,9 @@ module _
 
   universal-property-coequalizer-universal-property-sequential-colimit :
     universal-property-sequential-colimit c →
-    ( {l : Level} →
-      universal-property-coequalizer l
-        ( double-arrow-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram c))
+    universal-property-coequalizer
+      ( double-arrow-sequential-diagram A)
+      ( cofork-cocone-sequential-diagram c)
   universal-property-coequalizer-universal-property-sequential-colimit
     ( up-sequential-colimit)
     ( Y) =
@@ -406,7 +446,7 @@ triangle commute:
   X → Y ----------> cocone A Y
         \         /
          \       /
-  - ∘ i₀  \     / first-map-cocone-sequential-colimit
+   - ∘ i₀ \     / first-map-cocone-sequential-colimit
            \   /
             ∨ ∨
           A₀ → Y .
@@ -432,8 +472,8 @@ which to every `f : A₀ → Y` assigns the cocone
   A₀ ----> A₁ ----> A₂ ----> ⋯
     \      |      /
      \     |     /
-      \  f∘a₀⁻¹ /
-   f   \   |   / f ∘ a₁⁻¹ ∘ a₀⁻¹
+      \ f ∘ a₀⁻¹/
+     f \   |   / f ∘ a₁⁻¹ ∘ a₀⁻¹
         \  |  /
          ∨ ∨ ∨
            Y ,

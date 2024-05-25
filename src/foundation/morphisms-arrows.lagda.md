@@ -38,7 +38,7 @@ the square
     A -----> X
     |        |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -85,7 +85,7 @@ The identity morphism of arrows is defined as
     A -----> A
     |        |
   f |        | f
-    V        V
+    ∨        ∨
     B -----> B
         id
 ```
@@ -112,7 +112,7 @@ Consider a commuting diagram of the form
     A -----> X -----> U
     |        |        |
   f |   α  g |   β    | h
-    V        V        V
+    ∨        ∨        ∨
     B -----> Y -----> V.
         α₁       β₁
 ```
@@ -126,7 +126,7 @@ maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of
     A ----------> U
     |             |
   f |    α □ β    | h
-    V             V
+    ∨             ∨
     B ----------> V.
         β₁ ∘ α₁
 ```
@@ -185,7 +185,7 @@ morphism of arrows
     A -----> X
     |        |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -197,7 +197,7 @@ is the morphism of arrows
     A -----> B
     |        |
   i |        | j
-    V        V
+    ∨        ∨
     X -----> Y.
         g
 ```

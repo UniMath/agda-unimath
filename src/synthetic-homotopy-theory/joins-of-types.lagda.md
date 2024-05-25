@@ -28,6 +28,7 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -36,16 +37,17 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The **join** of `A` and `B` is the
+The {{#concept "join" Disambiguation="of types" Agda=_*_}} of `A` and `B` is the
 [pushout](synthetic-homotopy-theory.pushouts.md) of the
 [span](foundation.spans.md) `A ← A × B → B`.
 
-## Definition
+## Definitions
+
+### The standard join of types
 
 ```agda
-join :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
-join A B = pushout (pr1 {A = A} {B = λ _ → B}) pr2
+join : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+join A B = pushout {A = A} {B = B} pr1 pr2
 
 infixr 15 _*_
 _*_ = join
@@ -54,45 +56,92 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  cocone-join : cocone (pr1 {A = A} {B = λ _ → B}) pr2 (A * B)
+  cocone-join : cocone {A = A} {B = B} pr1 pr2 (A * B)
   cocone-join = cocone-pushout pr1 pr2
 
-  up-join :
-    {l : Level} → universal-property-pushout l pr1 pr2 (cocone-join)
+  inl-join : A → A * B
+  inl-join = horizontal-map-cocone pr1 pr2 cocone-join
+
+  inr-join : B → A * B
+  inr-join = vertical-map-cocone pr1 pr2 cocone-join
+
+  glue-join : (t : A × B) → inl-join (pr1 t) ＝ inr-join (pr2 t)
+  glue-join = coherence-square-cocone pr1 pr2 cocone-join
+```
+
+### The universal property of the join
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  up-join : universal-property-pushout {A = A} {B} pr1 pr2 cocone-join
   up-join = up-pushout pr1 pr2
 
   equiv-up-join :
     {l : Level} (X : UU l) → (A * B → X) ≃ cocone pr1 pr2 X
   equiv-up-join = equiv-up-pushout pr1 pr2
+```
 
-  inl-join : A → A * B
-  inl-join = pr1 cocone-join
+### The dependent cogap map of the join
 
-  inr-join : B → A * B
-  inr-join = pr1 (pr2 cocone-join)
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {P : A * B → UU l3}
+  (c : dependent-cocone pr1 pr2 cocone-join P)
+  where
 
-  glue-join : (t : A × B) → inl-join (pr1 t) ＝ inr-join (pr2 t)
-  glue-join = pr2 (pr2 cocone-join)
+  dependent-cogap-join : (x : A * B) → P x
+  dependent-cogap-join = dependent-cogap pr1 pr2 {P = P} c
+
+  compute-inl-dependent-cogap-join :
+    dependent-cogap-join ∘ inl-join ~
+    horizontal-map-dependent-cocone pr1 pr2 cocone-join P c
+  compute-inl-dependent-cogap-join = compute-inl-dependent-cogap pr1 pr2 c
+
+  compute-inr-dependent-cogap-join :
+    dependent-cogap-join ∘ inr-join ~
+    vertical-map-dependent-cocone pr1 pr2 cocone-join P c
+  compute-inr-dependent-cogap-join = compute-inr-dependent-cogap pr1 pr2 c
+
+  compute-glue-dependent-cogap-join :
+    coherence-htpy-dependent-cocone pr1 pr2 cocone-join P
+      ( dependent-cocone-map pr1 pr2 cocone-join P dependent-cogap-join)
+      ( c)
+      ( compute-inl-dependent-cogap-join)
+      ( compute-inr-dependent-cogap-join)
+  compute-glue-dependent-cogap-join = compute-glue-dependent-cogap pr1 pr2 c
+```
+
+### The cogap map of the join
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
   cogap-join :
     {l3 : Level} (X : UU l3) → cocone pr1 pr2 X → A * B → X
-  cogap-join X = map-inv-is-equiv (up-join X)
+  cogap-join X = cogap pr1 pr2
 
   compute-inl-cogap-join :
     {l3 : Level} {X : UU l3} (c : cocone pr1 pr2 X) →
-    ( cogap-join X c ∘ inl-join) ~ horizontal-map-cocone pr1 pr2 c
+    cogap-join X c ∘ inl-join ~ horizontal-map-cocone pr1 pr2 c
   compute-inl-cogap-join = compute-inl-cogap pr1 pr2
 
   compute-inr-cogap-join :
     {l3 : Level} {X : UU l3} (c : cocone pr1 pr2 X) →
-    ( cogap-join X c ∘ inr-join) ~ vertical-map-cocone pr1 pr2 c
+    cogap-join X c ∘ inr-join ~ vertical-map-cocone pr1 pr2 c
   compute-inr-cogap-join = compute-inr-cogap pr1 pr2
 
   compute-glue-cogap-join :
     {l3 : Level} {X : UU l3} (c : cocone pr1 pr2 X) →
-    ( ( cogap-join X c ·l coherence-square-cocone pr1 pr2 cocone-join) ∙h
-      ( compute-inr-cogap-join c ·r pr2)) ~
-    ( compute-inl-cogap-join c ·r pr1) ∙h coherence-square-cocone pr1 pr2 c
+    statement-coherence-htpy-cocone pr1 pr2
+      ( cocone-map pr1 pr2 cocone-join (cogap-join X c))
+      ( c)
+      ( compute-inl-cogap-join c)
+      ( compute-inr-cogap-join c)
   compute-glue-cogap-join = compute-glue-cogap pr1 pr2
 ```
 
@@ -271,15 +320,15 @@ module _
     is-proof-irrelevant A → is-proof-irrelevant B → is-proof-irrelevant (A * B)
   is-proof-irrelevant-join-is-proof-irrelevant
     is-proof-irrelevant-A is-proof-irrelevant-B =
-    cogap-join (is-contr (A * B))
-      ( pair
-        ( left-zero-law-join-is-contr A B ∘ is-proof-irrelevant-A)
-        ( pair
-          ( right-zero-law-join-is-contr A B ∘ is-proof-irrelevant-B)
-          ( λ (a , b) → center
+    cogap-join
+      ( is-contr (A * B))
+      ( ( left-zero-law-join-is-contr A B ∘ is-proof-irrelevant-A) ,
+        ( right-zero-law-join-is-contr A B ∘ is-proof-irrelevant-B) ,
+        ( λ (a , b) →
+          center
             ( is-property-is-contr
               ( left-zero-law-join-is-contr A B (is-proof-irrelevant-A a))
-              ( right-zero-law-join-is-contr A B (is-proof-irrelevant-B b))))))
+              ( right-zero-law-join-is-contr A B (is-proof-irrelevant-B b)))))
 
   is-prop-join-is-prop :
     is-prop A → is-prop B → is-prop (A * B)
@@ -362,8 +411,7 @@ module _
   pr1 equiv-join-disjunction-Prop = map-join-disjunction-Prop
   pr2 equiv-join-disjunction-Prop = is-equiv-map-join-disjunction-Prop
 
-  up-join-disjunction :
-    {l : Level} → universal-property-pushout l pr1 pr2 cocone-disjunction
+  up-join-disjunction : universal-property-pushout pr1 pr2 cocone-disjunction
   up-join-disjunction =
     up-pushout-up-pushout-is-equiv
       ( pr1)
@@ -373,14 +421,15 @@ module _
       ( map-disjunction-join-Prop)
       ( ( λ _ → eq-is-prop (is-prop-disjunction-Prop A B)) ,
         ( λ _ → eq-is-prop (is-prop-disjunction-Prop A B)) ,
-        ( λ (a , b) → eq-is-contr
-          ( is-prop-disjunction-Prop A B
-            ( horizontal-map-cocone pr1 pr2
-              ( cocone-map pr1 pr2
-                ( cocone-join)
-                ( map-disjunction-join-Prop))
-              ( a))
-            ( vertical-map-cocone pr1 pr2 cocone-disjunction b))))
+        ( λ (a , b) →
+          eq-is-contr
+            ( is-prop-disjunction-Prop A B
+              ( horizontal-map-cocone pr1 pr2
+                ( cocone-map pr1 pr2
+                  ( cocone-join)
+                  ( map-disjunction-join-Prop))
+                ( a))
+              ( vertical-map-cocone pr1 pr2 cocone-disjunction b))))
       ( is-equiv-map-disjunction-join-Prop)
       ( up-join)
 ```

@@ -521,7 +521,7 @@ implies that the square
           |                      |
   S ↦ ⟨S⟩ |                      | S ↦ ⟨S⟩
           |                      |
-          V                      V
+          ∨                      ∨
       Subgroup G ----------> Subgroup H
                     im f
 ```

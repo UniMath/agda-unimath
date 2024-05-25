@@ -264,7 +264,7 @@ diagram
       / | \
     a/  |  \c
     /   |b  \
-   V    V    V
+   ∨    ∨    ∨
   A --> B --> C
      f     g
 ```
