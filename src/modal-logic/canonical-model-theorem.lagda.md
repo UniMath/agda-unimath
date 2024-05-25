@@ -408,7 +408,7 @@ module _
             ( λ ((l-ax , l-y) , sub-union , l-ax-sub-logic , l-y-sub-y) →
               ( apply-universal-property-trunc-Prop
                 ( lists-in-union-lists l-y
-                  ( Id-formula-Prop (¬ₘ a))
+                  ( Id-modal-formula-Prop (¬ₘ a))
                   ( unbox-modal-theory theory)
                   ( l-y-sub-y))
                 ( theory (□ₘ a))
@@ -445,11 +445,11 @@ module _
                                   ( list-subtype l-box))
                                 ( transitive-leq-subtype
                                   ( list-subtype l-not-a)
-                                  ( Id-formula-Prop (¬ₘ a))
+                                  ( Id-modal-formula-Prop (¬ₘ a))
                                   ( theory-add-formula (¬ₘ a)
                                     ( list-subtype l-box))
                                   ( subtype-union-left
-                                    ( Id-formula-Prop (¬ₘ a))
+                                    ( Id-modal-formula-Prop (¬ₘ a))
                                     ( list-subtype l-box))
                                   ( l-not-a-sub))
                                 ( subset-add-formula
@@ -537,12 +537,12 @@ module _
                     ( f w)))))))
       where
       x : modal-theory (l1 ⊔ l2) i
-      x = raise-subtype l2 (Id-formula-Prop (¬ₘ a))
+      x = raise-subtype l2 (Id-modal-formula-Prop (¬ₘ a))
 
       not-a-in-x : is-in-subtype x ( ¬ₘ a)
       not-a-in-x =
-        subset-equiv-subtypes (Id-formula-Prop (¬ₘ a)) x
-          ( compute-raise-subtype l2 (Id-formula-Prop (¬ₘ a)))
+        subset-equiv-subtypes (Id-modal-formula-Prop (¬ₘ a)) x
+          ( compute-raise-subtype l2 (Id-modal-formula-Prop (¬ₘ a)))
           ( ¬ₘ a)
           ( refl)
 
@@ -563,13 +563,18 @@ module _
                   ( weak-modal-logic-closure-monotic
                     ( subtype-union-both logic x
                       ( theory-add-formula (¬ₘ a) logic)
-                      ( subtype-union-right (Id-formula-Prop (¬ₘ a)) logic)
-                      ( transitive-leq-subtype x (Id-formula-Prop (¬ₘ a))
+                      ( subtype-union-right
+                        ( Id-modal-formula-Prop (¬ₘ a)) logic)
+                      ( transitive-leq-subtype x ( Id-modal-formula-Prop (¬ₘ a))
                         ( theory-add-formula (¬ₘ a) logic)
-                        ( subtype-union-left (Id-formula-Prop (¬ₘ a)) logic)
-                        ( inv-subset-equiv-subtypes (Id-formula-Prop (¬ₘ a)) x
+                        ( subtype-union-left
+                          ( Id-modal-formula-Prop (¬ₘ a))
+                          ( logic))
+                        ( inv-subset-equiv-subtypes
+                          (Id-modal-formula-Prop (¬ₘ a))
+                          ( x)
                           ( compute-raise-subtype l2
-                            ( Id-formula-Prop (¬ₘ a))))))
+                            ( Id-modal-formula-Prop (¬ₘ a))))))
                     ( ⊥ₘ)
                     ( bot-in-logic))))))
 

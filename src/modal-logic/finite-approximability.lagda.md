@@ -7,48 +7,31 @@ module modal-logic.finite-approximability where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
-open import foundation.coproduct-types
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.equivalence-classes
-open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.inhabited-types
-open import foundation.intersections-subtypes
 open import foundation.law-of-excluded-middle
-open import foundation.logical-equivalences
 open import foundation.propositional-resizing
-open import foundation.propositional-truncations
-open import foundation.propositions
-open import foundation.raising-universe-levels
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.transport-along-identifications
-open import foundation.unions-subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.embeddings
-open import foundation-core.equivalence-relations
-open import foundation-core.invertible-maps
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.sets
+open import foundation-core.subtypes
 
+open import modal-logic.closed-under-subformulas-theories
 open import modal-logic.completeness
 open import modal-logic.completeness-k
 open import modal-logic.completeness-s5
 open import modal-logic.decision-procedure
 open import modal-logic.deduction
-open import modal-logic.formulas
 open import modal-logic.kripke-models-filtrations
 open import modal-logic.kripke-semantics
 open import modal-logic.modal-logic-k
 open import modal-logic.modal-logic-s5
 open import modal-logic.soundness
-open import modal-logic.weak-deduction
+open import modal-logic.subformulas
 
 open import order-theory.zorn
 
@@ -94,8 +77,8 @@ module _
                   kripke-model l6 l7 i l8)
     (is-filtration :
       ((M , _) : type-subtype C) (theory : modal-theory l1 i) →
-      is-modal-theory-closed-under-subformulas i theory →
-      is-kripke-model-filtration i theory M (filtration theory M))
+      is-modal-theory-closed-under-subformulas theory →
+      is-kripke-model-filtration theory M (filtration theory M))
     (logic : modal-theory l9 i)
     (complete : completeness logic C)
     (C₂ : model-class l6 l7 i l8 l10)
@@ -130,9 +113,9 @@ module _
     is-finitely-approximable-K =
       is-finitely-approximable-filtration
         ( all-models (lsuc l1) l1 i l1)
-        ( minimal-kripke-model-filtration _) -- TODO: make i implicit
+        ( minimal-kripke-model-filtration)
         ( λ (M , _) theory is-closed →
-          ( is-kripke-model-filtration-minimal-kripke-model-filtration i
+          ( is-kripke-model-filtration-minimal-kripke-model-filtration
             ( theory)
             ( M)
             ( is-closed)))
@@ -163,10 +146,9 @@ module _
     is-finitely-approximable-S5 =
       is-finitely-approximable-filtration
         ( equivalence-kripke-models (lsuc l1) l1 i l1)
-        ( minimal-transitive-kripke-model-filtration _) -- TODO: make i implicit
+        ( minimal-transitive-kripke-model-filtration)
         ( λ (M , in-equiv) theory is-closed →
           ( is-kripke-model-filtration-minimal-transitive-kripke-model-filtration
-            ( i)
             ( theory)
             ( M)
             ( is-closed)
@@ -182,7 +164,6 @@ module _
             ( λ where
               ( a , M , in-equiv) refl →
                 ( minimal-transitive-filtration-preserves-equivalence
-                  _ -- TODO: make implicit
                   ( subformulas a)
                   ( M)
                   ( is-modal-theory-closed-under-subformulas-subformulas a)

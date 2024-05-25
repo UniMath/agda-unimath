@@ -48,6 +48,7 @@ open import order-theory.maximal-elements-posets
 open import order-theory.posets
 open import order-theory.subposets
 open import order-theory.subtypes-leq-posets
+open import order-theory.upper-bounds-chains-posets
 open import order-theory.zorn
 ```
 
@@ -299,7 +300,7 @@ module _
       tr
         ( λ t → is-in-subtype t (¬ₘ a))
         ( eq-is-L-consistent-union-L-complete t
-          ( Id-formula-Prop (¬ₘ a))
+          ( Id-modal-formula-Prop (¬ₘ a))
           ( is-L-consistent-add-formula-not-in-logic not-in-logic))
         ( formula-in-add-formula (¬ₘ a) theory)
 

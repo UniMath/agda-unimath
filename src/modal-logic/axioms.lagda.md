@@ -57,7 +57,7 @@ module _
   pr2 (ax-1-parameter h inj f) (a , refl) =
     is-prop-is-contr
       ( is-contr-Σ-is-prop a refl
-        ( λ b → is-set-formula (h a) (h b))
+        ( λ b → is-set-modal-formula (h a) (h b))
         ( λ x → inj))
       ( a , refl)
 

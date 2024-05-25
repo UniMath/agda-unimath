@@ -24,6 +24,7 @@ open import foundation-core.empty-types
 open import foundation-core.function-types
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.sets
 open import foundation-core.subtypes
 
 open import lists.concatenation-lists

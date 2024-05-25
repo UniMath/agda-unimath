@@ -9,6 +9,7 @@ module modal-logic.kripke-models-filtrations where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
+open import foundation.binary-relations-transitive-closures
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -31,13 +32,13 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.injective-maps
 open import foundation-core.transport-along-identifications
 
 open import modal-logic.axioms
+open import modal-logic.closed-under-subformulas-theories
 open import modal-logic.deduction
 open import modal-logic.formulas
 open import modal-logic.kripke-semantics
@@ -54,128 +55,8 @@ TODO
 ## Definition
 
 ```agda
--- TODO: move to new file
 module _
-  {l1 l2 : Level} {A : UU l1}
-  where
-
-  data transitive-closure (R : Relation l2 A) : A → A → UU (l1 ⊔ l2)
-    where
-    base* : {x y : A} → R x y → transitive-closure R x y
-    step* :
-      {x y z : A} →
-      R x y →
-      transitive-closure R y z →
-      transitive-closure R x z
-
-  transitive-closure-Prop :
-    (R : Relation l2 A) → Relation-Prop (l1 ⊔ l2) A
-  transitive-closure-Prop R x y =
-    trunc-Prop (transitive-closure R x y)
-
-  is-transitive-transitive-closure :
-    (R : Relation l2 A) → is-transitive (transitive-closure R)
-  is-transitive-transitive-closure R x y z c-yz (base* r-xy) =
-    step* r-xy c-yz
-  is-transitive-transitive-closure
-    R x y z c-yz (step* {y = u} r-xu c-uy) =
-      step* r-xu (is-transitive-transitive-closure R u y z c-yz c-uy)
-
-  is-transitive-transitive-closure-Prop :
-    (R : Relation l2 A) →
-    is-transitive-Relation-Prop (transitive-closure-Prop R)
-  is-transitive-transitive-closure-Prop R x y z c-yz c-xy =
-    apply-twice-universal-property-trunc-Prop
-      ( c-yz)
-      ( c-xy)
-      ( transitive-closure-Prop R x z)
-      ( λ r-yz r-xy →
-        ( unit-trunc-Prop (is-transitive-transitive-closure R x y z r-yz r-xy)))
-
-  transitive-closure-preserves-reflexivity :
-    (R : Relation l2 A) →
-    is-reflexive R →
-    is-reflexive (transitive-closure R)
-  transitive-closure-preserves-reflexivity R is-refl x = base* (is-refl x)
-
-  transitive-closure-preserves-symmetry :
-    (R : Relation l2 A) →
-    is-symmetric R →
-    is-symmetric (transitive-closure R)
-  transitive-closure-preserves-symmetry R is-sym x y (base* r) =
-    base* (is-sym x y r)
-  transitive-closure-preserves-symmetry R is-sym x y (step* {y = u} r-xu c-uy) =
-    is-transitive-transitive-closure R y u x
-      ( base* (is-sym x u r-xu))
-      ( transitive-closure-preserves-symmetry R is-sym u y c-uy)
-
-  transitive-closure-Prop-preserves-reflexivity :
-    (R : Relation l2 A) →
-    is-reflexive R →
-    is-reflexive-Relation-Prop (transitive-closure-Prop R)
-  transitive-closure-Prop-preserves-reflexivity R is-refl x =
-    unit-trunc-Prop (transitive-closure-preserves-reflexivity R is-refl x)
-
-  transitive-closure-Prop-preserves-symmetry :
-    (R : Relation l2 A) →
-    is-symmetric R →
-    is-symmetric-Relation-Prop (transitive-closure-Prop R)
-  transitive-closure-Prop-preserves-symmetry R is-sym x y =
-    map-universal-property-trunc-Prop
-      ( transitive-closure-Prop R y x)
-      ( unit-trunc-Prop ∘ transitive-closure-preserves-symmetry R is-sym x y)
-
-module _
-  {l1 : Level} (i : Set l1)
-  where
-
-  module _
-    {l2 : Level} (theory : modal-theory l2 i)
-    where
-
-    is-modal-theory-has-subformulas-Prop : modal-formula i → Prop l2
-    is-modal-theory-has-subformulas-Prop (varₘ _) = raise-unit-Prop l2
-    is-modal-theory-has-subformulas-Prop ⊥ₘ = raise-unit-Prop l2
-    is-modal-theory-has-subformulas-Prop (a →ₘ b) =
-      product-Prop (theory a) (theory b)
-    is-modal-theory-has-subformulas-Prop (□ₘ a) = theory a
-
-    is-modal-theory-has-subformulas : modal-formula i → UU l2
-    is-modal-theory-has-subformulas =
-      type-Prop ∘ is-modal-theory-has-subformulas-Prop
-
-    is-modal-theory-closed-under-subformulas-Prop : Prop (l1 ⊔ l2)
-    is-modal-theory-closed-under-subformulas-Prop =
-      implicit-Π-Prop
-        ( modal-formula i)
-        ( λ a →
-          ( function-Prop
-            ( is-in-subtype theory a)
-            ( is-modal-theory-has-subformulas-Prop a)))
-
-    is-modal-theory-closed-under-subformulas : UU (l1 ⊔ l2)
-    is-modal-theory-closed-under-subformulas =
-      type-Prop (is-modal-theory-closed-under-subformulas-Prop)
-
-    is-modal-theory-closed-under-subformulas-condition :
-      ( {a b : modal-formula i} →
-        is-in-subtype theory (a →ₘ b) →
-        is-in-subtype theory a × is-in-subtype theory b) →
-      ( {a : modal-formula i} →
-        is-in-subtype theory (□ₘ a) →
-        is-in-subtype theory a) →
-      is-modal-theory-closed-under-subformulas
-    is-modal-theory-closed-under-subformulas-condition
-      h-impl h-box {varₘ n} _ = raise-star
-    is-modal-theory-closed-under-subformulas-condition
-      h-impl h-box {⊥ₘ} _ = raise-star
-    is-modal-theory-closed-under-subformulas-condition
-      h-impl h-box {a →ₘ b} = h-impl
-    is-modal-theory-closed-under-subformulas-condition
-      h-impl h-box {□ₘ a} = h-box
-
-module _
-  {l1 l2 l3 l4 l5 : Level} (i : Set l3)
+  {l1 l2 l3 l4 l5 : Level} {i : Set l3}
   (theory : modal-theory l5 i)
   (M : kripke-model l1 l2 i l4)
   where
@@ -510,13 +391,12 @@ module _
   pr2 (pr1 minimal-transitive-kripke-model-filtration) =
     is-inhabited-equivalence-classes
   pr1 (pr2 minimal-transitive-kripke-model-filtration) =
-    transitive-closure-Prop
-      ( type-Relation-Prop minimal-kripke-model-filtration-relation)
+    transitive-closure-Prop minimal-kripke-model-filtration-relation
   pr2 (pr2 minimal-transitive-kripke-model-filtration) =
     minimal-kripke-model-filtration-valuate
 
   module _
-    (theory-is-closed : is-modal-theory-closed-under-subformulas i theory)
+    (theory-is-closed : is-modal-theory-closed-under-subformulas theory)
     where
 
     proof-upper-bound :
@@ -534,7 +414,12 @@ module _
         ( (M , y) ⊨ₘ a)
         ( λ ((x' , y') , r-xy' , iff-x , iff-y) →
           ( backward-implication
-            ( iff-y a (theory-is-closed box-in-theory))
+            -- ( iff-y a (theory-is-closed box-in-theory))
+            ( iff-y a
+              ( is-has-subboxes-is-closed-under-subformulas
+                ( theory)
+                ( theory-is-closed)
+                ( box-in-theory)))
             ( forward-implication
               ( iff-x (□ₘ a) box-in-theory)
               ( x-forces-box)
@@ -581,15 +466,17 @@ module _
         ( class Φ-equivalence y) →
       type-Prop ((M , x) ⊨ₘ □ₘ a) →
       type-Prop ((M , y) ⊨ₘ a)
-    helper M-is-trans a box-in-theory x y (base* r-xy) x-forces-box =
-      proof-upper-bound a box-in-theory x y r-xy x-forces-box
-    helper M-is-trans a box-in-theory x y (step* {y = z*} r-xz c-zy)
-      x-forces-box =
-        apply-universal-property-trunc-Prop
-          ( is-inhabited-subtype-equivalence-class Φ-equivalence z*)
-          ( (M , y) ⊨ₘ a)
-          ( λ (z , z-in-z*) →
-            aux z (eq-class-equivalence-class Φ-equivalence z* z-in-z*))
+    helper M-is-trans a box-in-theory x y
+      (transitive-closure-base r-xy) x-forces-box =
+        proof-upper-bound a box-in-theory x y r-xy x-forces-box
+    helper M-is-trans a box-in-theory x y
+      (transitive-closure-step {y = z*} r-xz c-zy)
+        x-forces-box =
+          apply-universal-property-trunc-Prop
+            ( is-inhabited-subtype-equivalence-class Φ-equivalence z*)
+            ( (M , y) ⊨ₘ a)
+            ( λ (z , z-in-z*) →
+              aux z (eq-class-equivalence-class Φ-equivalence z* z-in-z*))
       where
       aux :
         (z : type-kripke-model i M) →
@@ -640,7 +527,9 @@ module _
                           ( eq-xy (varₘ n) in-theory)
                           ( map-raise val-n))))))
                 ( λ (in-theory , val-n) → val-n x (λ _ _ → id , id))))
-            ( λ x y r → unit-trunc-Prop (base* (proof-lower-bound x y r)))
+            ( λ x y r →
+              unit-trunc-Prop
+                ( transitive-closure-base (proof-lower-bound x y r)))
             ( filtration-relation-upper-bound-Prop-minimal-transitive-kripke-model-filtration
               ( M-is-trans)))
 
@@ -690,7 +579,7 @@ module _
         ( minimal-transitive-kripke-model-filtration)
     minimal-transitive-filtration-preserves-reflexivity is-refl =
       transitive-closure-Prop-preserves-reflexivity
-        ( type-Relation-Prop minimal-kripke-model-filtration-relation)
+        ( minimal-kripke-model-filtration-relation)
         ( minimal-filtration-preserves-reflexivity is-refl)
 
     minimal-transitive-kripke-model-filtration-preserves-symmetry :
@@ -704,7 +593,7 @@ module _
         ( minimal-transitive-kripke-model-filtration)
     minimal-transitive-kripke-model-filtration-preserves-symmetry is-sym =
       transitive-closure-Prop-preserves-symmetry
-        ( type-Relation-Prop minimal-kripke-model-filtration-relation)
+        ( minimal-kripke-model-filtration-relation)
         ( minimal-filtration-preserves-symmetry is-sym)
 
     minimal-transitive-kripke-model-filtration-is-transitive :
@@ -717,7 +606,7 @@ module _
         ( minimal-transitive-kripke-model-filtration)
     minimal-transitive-kripke-model-filtration-is-transitive =
       is-transitive-transitive-closure-Prop
-        ( type-Relation-Prop minimal-kripke-model-filtration-relation)
+        ( minimal-kripke-model-filtration-relation)
 
     minimal-transitive-filtration-preserves-equivalence :
       is-in-subtype (equivalence-kripke-models l1 l2 i l4) M →
@@ -752,5 +641,5 @@ module _
       ( λ (theory , M) →
         ( product
           ( is-finite (type-subtype theory))
-          ( is-kripke-model-filtration i theory M M*)))
+          ( is-kripke-model-filtration theory M M*)))
 ```

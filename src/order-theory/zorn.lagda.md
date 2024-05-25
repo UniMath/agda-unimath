@@ -22,6 +22,7 @@ open import foundation-core.propositions
 open import order-theory.chains-posets
 open import order-theory.maximal-elements-posets
 open import order-theory.posets
+open import order-theory.upper-bounds-chains-posets
 ```
 
 </details>

@@ -87,27 +87,4 @@ module _
     is-prop (inclusion-chain-Poset C D)
   is-prop-inclusion-chain-Poset =
     is-prop-inclusion-chain-Preorder (preorder-Poset X)
-
--- TODO: move to separate file
-module _
-  {l1 l2 l3 : Level} (X : Poset l1 l2) (C : chain-Poset l3 X)
-  where
-
-  is-chain-upper-bound-Prop : (x : type-Poset X) → Prop (l1 ⊔ l2 ⊔ l3)
-  is-chain-upper-bound-Prop x =
-    Π-Prop
-      ( type-chain-Poset X C)
-      ( λ y →
-        ( leq-Poset-Prop X
-          ( inclusion-subtype (sub-preorder-chain-Poset X C) y)
-          ( x)))
-
-  is-chain-upper-bound : (x : type-Poset X) → UU (l1 ⊔ l2 ⊔ l3)
-  is-chain-upper-bound = type-Prop ∘ is-chain-upper-bound-Prop
-
-  has-chain-upper-bound-Prop : Prop (l1 ⊔ l2 ⊔ l3)
-  has-chain-upper-bound-Prop = ∃ (type-Poset X) is-chain-upper-bound-Prop
-
-  has-chain-upper-bound : UU (l1 ⊔ l2 ⊔ l3)
-  has-chain-upper-bound = type-Prop has-chain-upper-bound-Prop
 ```

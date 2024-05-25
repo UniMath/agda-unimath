@@ -134,64 +134,67 @@ module _
   refl-Eq-formula (a →ₘ b) = (refl-Eq-formula a) , (refl-Eq-formula b)
   refl-Eq-formula (□ₘ a) = refl-Eq-formula a
 
-  Eq-eq-formula : {a b : modal-formula i} → a ＝ b → Eq-formula a b
-  Eq-eq-formula {a} refl = refl-Eq-formula a
+  Eq-eq-modal-formula : {a b : modal-formula i} → a ＝ b → Eq-formula a b
+  Eq-eq-modal-formula {a} refl = refl-Eq-formula a
 
-  eq-Eq-formula : {a b : modal-formula i} → Eq-formula a b → a ＝ b
-  eq-Eq-formula {varₘ _} {varₘ _} refl = refl
-  eq-Eq-formula {varₘ _} {⊥ₘ} (map-raise ())
-  eq-Eq-formula {varₘ _} {_ →ₘ _} (map-raise ())
-  eq-Eq-formula {varₘ _} {□ₘ _} (map-raise ())
-  eq-Eq-formula {⊥ₘ} {varₘ _} (map-raise ())
-  eq-Eq-formula {⊥ₘ} {⊥ₘ} _ = refl
-  eq-Eq-formula {⊥ₘ} {_ →ₘ _} (map-raise ())
-  eq-Eq-formula {⊥ₘ} {□ₘ _} (map-raise ())
-  eq-Eq-formula {_ →ₘ _} {varₘ _} (map-raise ())
-  eq-Eq-formula {_ →ₘ _} {⊥ₘ} (map-raise ())
-  eq-Eq-formula {a →ₘ b} {c →ₘ d} (eq1 , eq2) =
-    ap (λ (x , y) → x →ₘ y) (eq-pair (eq-Eq-formula eq1) (eq-Eq-formula eq2))
-  eq-Eq-formula {_ →ₘ _} {□ₘ _} (map-raise ())
-  eq-Eq-formula {□ₘ _} {varₘ _} (map-raise ())
-  eq-Eq-formula {□ₘ _} {⊥ₘ} (map-raise ())
-  eq-Eq-formula {□ₘ _} {_ →ₘ _} (map-raise ())
-  eq-Eq-formula {□ₘ _} {□ₘ _} eq = ap □ₘ_ (eq-Eq-formula eq)
+  eq-Eq-modal-formula : {a b : modal-formula i} → Eq-formula a b → a ＝ b
+  eq-Eq-modal-formula {varₘ _} {varₘ _} refl = refl
+  eq-Eq-modal-formula {varₘ _} {⊥ₘ} (map-raise ())
+  eq-Eq-modal-formula {varₘ _} {_ →ₘ _} (map-raise ())
+  eq-Eq-modal-formula {varₘ _} {□ₘ _} (map-raise ())
+  eq-Eq-modal-formula {⊥ₘ} {varₘ _} (map-raise ())
+  eq-Eq-modal-formula {⊥ₘ} {⊥ₘ} _ = refl
+  eq-Eq-modal-formula {⊥ₘ} {_ →ₘ _} (map-raise ())
+  eq-Eq-modal-formula {⊥ₘ} {□ₘ _} (map-raise ())
+  eq-Eq-modal-formula {_ →ₘ _} {varₘ _} (map-raise ())
+  eq-Eq-modal-formula {_ →ₘ _} {⊥ₘ} (map-raise ())
+  eq-Eq-modal-formula {a →ₘ b} {c →ₘ d} (eq1 , eq2) =
+    ap (λ (x , y) → x →ₘ y)
+      ( eq-pair (eq-Eq-modal-formula eq1) (eq-Eq-modal-formula eq2))
+  eq-Eq-modal-formula {_ →ₘ _} {□ₘ _} (map-raise ())
+  eq-Eq-modal-formula {□ₘ _} {varₘ _} (map-raise ())
+  eq-Eq-modal-formula {□ₘ _} {⊥ₘ} (map-raise ())
+  eq-Eq-modal-formula {□ₘ _} {_ →ₘ _} (map-raise ())
+  eq-Eq-modal-formula {□ₘ _} {□ₘ _} eq = ap □ₘ_ (eq-Eq-modal-formula eq)
 
-  is-prop-Eq-formula : (a b : modal-formula i) → is-prop (Eq-formula a b)
-  is-prop-Eq-formula (varₘ n) (varₘ m) = is-prop-type-Prop (Id-Prop i n m)
-  is-prop-Eq-formula (varₘ _) ⊥ₘ = is-prop-raise-empty
-  is-prop-Eq-formula (varₘ _) (_ →ₘ _) = is-prop-raise-empty
-  is-prop-Eq-formula (varₘ -) (□ₘ _) = is-prop-raise-empty
-  is-prop-Eq-formula ⊥ₘ (varₘ _) = is-prop-raise-empty
-  is-prop-Eq-formula ⊥ₘ ⊥ₘ = is-prop-raise-unit
-  is-prop-Eq-formula ⊥ₘ (_ →ₘ _) = is-prop-raise-empty
-  is-prop-Eq-formula ⊥ₘ (□ₘ _) = is-prop-raise-empty
-  is-prop-Eq-formula (_ →ₘ _) (varₘ _) = is-prop-raise-empty
-  is-prop-Eq-formula (_ →ₘ _) ⊥ₘ = is-prop-raise-empty
-  is-prop-Eq-formula (a →ₘ b) (c →ₘ d) =
-    is-prop-product (is-prop-Eq-formula a c) (is-prop-Eq-formula b d)
-  is-prop-Eq-formula (_ →ₘ _) (□ₘ _) = is-prop-raise-empty
-  is-prop-Eq-formula (□ₘ _) (varₘ _) = is-prop-raise-empty
-  is-prop-Eq-formula (□ₘ _) ⊥ₘ = is-prop-raise-empty
-  is-prop-Eq-formula (□ₘ _) (_ →ₘ _) = is-prop-raise-empty
-  is-prop-Eq-formula (□ₘ a) (□ₘ c) = is-prop-Eq-formula a c
+  is-prop-Eq-modal-formula : (a b : modal-formula i) → is-prop (Eq-formula a b)
+  is-prop-Eq-modal-formula (varₘ n) (varₘ m) = is-prop-type-Prop (Id-Prop i n m)
+  is-prop-Eq-modal-formula (varₘ _) ⊥ₘ = is-prop-raise-empty
+  is-prop-Eq-modal-formula (varₘ _) (_ →ₘ _) = is-prop-raise-empty
+  is-prop-Eq-modal-formula (varₘ -) (□ₘ _) = is-prop-raise-empty
+  is-prop-Eq-modal-formula ⊥ₘ (varₘ _) = is-prop-raise-empty
+  is-prop-Eq-modal-formula ⊥ₘ ⊥ₘ = is-prop-raise-unit
+  is-prop-Eq-modal-formula ⊥ₘ (_ →ₘ _) = is-prop-raise-empty
+  is-prop-Eq-modal-formula ⊥ₘ (□ₘ _) = is-prop-raise-empty
+  is-prop-Eq-modal-formula (_ →ₘ _) (varₘ _) = is-prop-raise-empty
+  is-prop-Eq-modal-formula (_ →ₘ _) ⊥ₘ = is-prop-raise-empty
+  is-prop-Eq-modal-formula (a →ₘ b) (c →ₘ d) =
+    is-prop-product
+    ( is-prop-Eq-modal-formula a c)
+    ( is-prop-Eq-modal-formula b d)
+  is-prop-Eq-modal-formula (_ →ₘ _) (□ₘ _) = is-prop-raise-empty
+  is-prop-Eq-modal-formula (□ₘ _) (varₘ _) = is-prop-raise-empty
+  is-prop-Eq-modal-formula (□ₘ _) ⊥ₘ = is-prop-raise-empty
+  is-prop-Eq-modal-formula (□ₘ _) (_ →ₘ _) = is-prop-raise-empty
+  is-prop-Eq-modal-formula (□ₘ a) (□ₘ c) = is-prop-Eq-modal-formula a c
 ```
 
 ### A formula is a set
 
 ```agda
-  is-set-formula : is-set (modal-formula i)
-  is-set-formula =
+  is-set-modal-formula : is-set (modal-formula i)
+  is-set-modal-formula =
     is-set-prop-in-id
       ( Eq-formula)
-      ( is-prop-Eq-formula)
+      ( is-prop-Eq-modal-formula)
       ( refl-Eq-formula)
-      ( λ _ _ → eq-Eq-formula)
+      ( λ _ _ → eq-Eq-modal-formula)
 
-formula-Set : {l : Level} (i : Set l) → Set l
-pr1 (formula-Set i) = modal-formula i
-pr2 (formula-Set i) = is-set-formula
+modal-formula-Set : {l : Level} (i : Set l) → Set l
+pr1 (modal-formula-Set i) = modal-formula i
+pr2 (modal-formula-Set i) = is-set-modal-formula
 
-Id-formula-Prop :
+Id-modal-formula-Prop :
   {l : Level} {i : Set l} → modal-formula i → modal-formula i → Prop l
-Id-formula-Prop {i = i} = Id-Prop (formula-Set i)
+Id-modal-formula-Prop {i = i} = Id-Prop (modal-formula-Set i)
 ```

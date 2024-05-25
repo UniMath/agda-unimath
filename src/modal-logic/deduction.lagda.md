@@ -254,13 +254,14 @@ module _
 
   -- TODO: make Id-formula to be a function for 1 element modal-theory
   theory-add-formula : modal-theory (l1 ⊔ l2) i
-  theory-add-formula = (Id-formula-Prop a) ∪ theory
+  theory-add-formula = (Id-modal-formula-Prop a) ∪ theory
 
   formula-in-add-formula : is-in-subtype theory-add-formula a
-  formula-in-add-formula = subtype-union-left (Id-formula-Prop a) theory a refl
+  formula-in-add-formula =
+    subtype-union-left (Id-modal-formula-Prop a) theory a refl
 
   subset-add-formula : theory ⊆ theory-add-formula
-  subset-add-formula = subtype-union-right (Id-formula-Prop a) theory
+  subset-add-formula = subtype-union-right (Id-modal-formula-Prop a) theory
 
   transitive-subset-add-formula :
     {l3 : Level} (theory' : modal-theory l3 i) →
@@ -277,7 +278,7 @@ module _
     ((x : modal-formula i) → is-in-subtype theory x → type-Prop (P x)) →
     (x : modal-formula i) → is-in-subtype theory-add-formula x → type-Prop (P x)
   elim-theory-add-formula P H-a H-rest =
-    elim-union-subtype (Id-formula-Prop a) theory P
+    elim-union-subtype (Id-modal-formula-Prop a) theory P
       ( λ where .a refl → H-a)
       ( H-rest)
 
@@ -288,7 +289,7 @@ module _
     theory-add-formula ⊆ theory'
   subset-theory-add-formula theory' a-in =
     subtype-union-both
-      ( Id-formula-Prop a)
+      ( Id-modal-formula-Prop a)
       ( theory)
       ( theory')
       ( λ where .a refl → a-in)
@@ -323,7 +324,7 @@ module _
     theory ∪ theory-add-formula a theory' ⊆
       theory-add-formula a (theory ∪ theory')
   theory-add-formula-union-right a theory theory' =
-    union-swap-1-2 theory (Id-formula-Prop a) theory'
+    union-swap-1-2 theory (Id-modal-formula-Prop a) theory'
 
   inv-theory-add-formula-union-right :
     (a : modal-formula i)
@@ -333,5 +334,5 @@ module _
     theory-add-formula a (theory ∪ theory') ⊆
       theory ∪ theory-add-formula a theory'
   inv-theory-add-formula-union-right a theory theory' =
-    union-swap-1-2 (Id-formula-Prop a) theory theory'
+    union-swap-1-2 (Id-modal-formula-Prop a) theory theory'
 ```

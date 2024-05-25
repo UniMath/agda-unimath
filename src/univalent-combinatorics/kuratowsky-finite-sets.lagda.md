@@ -12,17 +12,24 @@ open import elementary-number-theory.natural-numbers
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.functoriality-propositional-truncation
 open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
+open import foundation-core.transport-along-identifications
+
+open import lists.functoriality-lists
+open import lists.lists
+open import lists.lists-subtypes
 
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
@@ -69,6 +76,78 @@ module _
   is-kuratowsky-finite-set-𝔽-Kuratowsky = pr2 X
 ```
 
+## Second definition
+
+```agda
+is-kuratowsky-finite-set-list-Prop : {l : Level} → Set l → Prop l
+is-kuratowsky-finite-set-list-Prop X =
+  exists-structure-Prop (list (type-Set X))
+    ( λ l → (x : type-Set X) → is-in-subtype (list-subtype l) x)
+
+is-kuratowsky-finite-set-list : {l : Level} → Set l → UU l
+is-kuratowsky-finite-set-list X =
+  type-Prop (is-kuratowsky-finite-set-list-Prop X)
+
+is-kuratowsky-finite-set-is-kuratowsky-finite-set-list :
+  {l : Level} (X : Set l) →
+  is-kuratowsky-finite-set-list X → is-kuratowsky-finite-set X
+is-kuratowsky-finite-set-is-kuratowsky-finite-set-list X =
+  elim-exists
+    ( is-kuratowsky-finite-set-Prop X)
+    ( λ l all-list-subtype →
+      intro-exists (length-list l)
+        ( pair
+          ( component-list l)
+          ( λ x →
+            map-trunc-Prop
+              ( λ in-list →
+                pair
+                  ( index-in-list x l in-list)
+                  ( inv (eq-component-list-index-in-list x l in-list)))
+              ( all-list-subtype x))))
+
+-- TODO: prove another implication
+```
+
+### Kuratowky finite subsets
+
+```agda
+is-kuratowsky-finite-subset :
+  {l1 l2 : Level} (A : Set l1) (B : subtype l2 (type-Set A))
+  (l : list (type-Set A)) →
+  equiv-subtypes B (list-subtype l) →
+  is-kuratowsky-finite-set (set-subset A B)
+is-kuratowsky-finite-subset A B l e =
+  is-kuratowsky-finite-set-is-kuratowsky-finite-set-list
+    ( set-subset A B)
+    ( intro-exists l'
+      ( λ (a , in-B) →
+        map-trunc-Prop
+          ( λ a-in-l →
+            tr
+              ( λ i → (a , i) ∈-list l')
+              ( eq-is-prop (is-prop-type-Prop (B a)))
+              ( in-dependent-map-list _ a-in-l))
+          ( map-equiv (e a) in-B)))
+  where
+  l' : list (type-subtype B)
+  l' =
+    dependent-map-list l
+      ( λ a in-list →
+        a , map-section-map-equiv (e a) (in-list-subtype-in-list in-list))
+```
+
+### List subtype is Kuratowky finite
+
+```agda
+is-kuratowski-finite-list-subtype :
+  {l1 : Level} (A : Set l1) (l : list (type-Set A)) →
+  is-kuratowsky-finite-set (set-subset A (list-subtype l))
+is-kuratowski-finite-list-subtype A l =
+  is-kuratowsky-finite-subset A (list-subtype l) l
+    ( id-equiv-subtypes (list-subtype l))
+```
+
 ## Properties
 
 ### A Kuratowsky finite set is finite if and only if it has decidable equality
@@ -92,7 +171,7 @@ has-decidable-equality-is-finite-type-𝔽-Kuratowsky X H =
   has-decidable-equality-is-finite H
 ```
 
-### TODO: change title
+### Kuratowsky finite sets are closed under surjections
 
 ```agda
 is-kuratowsky-finite-set-surjection :
@@ -101,18 +180,22 @@ is-kuratowsky-finite-set-surjection :
   is-kuratowsky-finite-set X →
   is-kuratowsky-finite-set Y
 is-kuratowsky-finite-set-surjection X Y f =
-  map-universal-property-trunc-Prop
+  elim-exists
     ( is-kuratowsky-finite-set-Prop Y)
-    ( λ (n , g) → (intro-exists n (surjection-comp f g)))
+    ( λ n g → intro-exists n (surjection-comp f g))
+```
 
+### Any finite set is Kuratowsky finite
+
+```agda
 is-kuratowsky-finite-set-is-finite :
   {l : Level} (X : Set l) →
   is-finite (type-Set X) →
   is-kuratowsky-finite-set X
 is-kuratowsky-finite-set-is-finite X =
-  map-universal-property-trunc-Prop
+  elim-exists
     ( is-kuratowsky-finite-set-Prop X)
-    ( λ (n , e) → intro-exists n (map-equiv e , is-surjective-map-equiv e))
+    ( λ n e → intro-exists n (map-equiv e , is-surjective-map-equiv e))
 ```
 
 ### Classical facts

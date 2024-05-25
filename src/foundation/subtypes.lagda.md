@@ -166,6 +166,10 @@ module _
     equiv-subtypes P Q → equiv-subtypes Q P
   inv-equiv-subtypes P Q e x = inv-equiv (e x)
 
+  id-equiv-subtypes :
+    {l2 : Level} (P : subtype l2 A) → equiv-subtypes P P
+  id-equiv-subtypes P x = id-equiv
+
   equiv-antisymmetric-leq-subtype :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
     P ⊆ Q → Q ⊆ P → equiv-subtypes P Q
