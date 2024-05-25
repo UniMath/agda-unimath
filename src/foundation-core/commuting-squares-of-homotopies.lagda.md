@@ -155,7 +155,7 @@ Conversely, given a coherence square as above, we can obtain a homotopy
     inv-htpy right-unit-htpy ∙h K
 ```
 
-### Squares with `refl` on the left and right
+### Squares with `refl-htpy` on the left and right
 
 Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy` on
 the left and right.
@@ -192,12 +192,12 @@ Conversely, given a coherence square as above, we can obtain a homotopy
 
 ```agda
   inv-coherence-square-homotopies-vertical-refl :
-    ( coherence-square-homotopies
+    coherence-square-homotopies
       ( H')
       ( refl-htpy)
       ( refl-htpy)
-      ( H)) →
-    ( H ~ H')
+      ( H) →
+    H ~ H'
   inv-coherence-square-homotopies-vertical-refl K =
     K ∙h right-unit-htpy
 ```

@@ -19,7 +19,6 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.dependent-identifications
@@ -28,7 +27,6 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies-concatenation
-open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>

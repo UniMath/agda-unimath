@@ -89,8 +89,8 @@ are commuting squares of identifications of the form
        a -----> b
        |        |
   refl |        | refl
-       ∨        ∨
-       a -----> b.
+       ∨       ∨
+       a -----> b
            p
 ```
 
@@ -114,8 +114,8 @@ Given an identification `α : p ＝ q`, we can obtain a coherence square with
     a -----> a
     |        |
   p |        | q
-    ∨        ∨
-    b -----> b.
+    ∨       ∨
+    b -----> b
        refl
 ```
 
@@ -140,11 +140,11 @@ Conversely, given a coherence square as above, we can obtain an equality
 
 ```agda
   inv-coherence-square-identifications-horizontal-refl :
-    (coherence-square-identifications
+    coherence-square-identifications
       ( refl)
       ( p)
       ( q)
-      ( refl)) →
+      ( refl) →
     p ＝ q
   inv-coherence-square-identifications-horizontal-refl α =
     inv right-unit ∙ α
@@ -182,11 +182,11 @@ Conversely, given a coherence square as above, we can obtain an equality
 
 ```agda
   inv-coherence-square-identifications-vertical-refl :
-    (coherence-square-identifications
+    coherence-square-identifications
       ( q)
       ( refl)
       ( refl)
-      ( p)) →
+      ( p) →
     p ＝ q
   inv-coherence-square-identifications-vertical-refl α =
     α ∙ right-unit

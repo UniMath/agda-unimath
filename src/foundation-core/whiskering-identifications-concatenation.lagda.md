@@ -175,11 +175,14 @@ commutes. There are at least two natural ways in which this square is seen to
 commute:
 
 1. The square commutes by naturality of the homotopy
-   `α ↦ left-whisker-concat α β`.
+   `p ↦ left-whisker-concat p β`.
 2. The transposed square commutes by the naturality of the homotopy
-   `β ↦ right-whisker-concat α β`.
+   `q ↦ right-whisker-concat α q`.
 
-These two ways in which the square commutes are inverse to each other.
+The first way can be thought of braiding `β` over `α`, while the second
+can be thought of braiding `α` under `β`. Braiding `β` over `α`, then
+braiding `α` under `β` results in no braid at all. Thus,
+these two ways in which the square commutes are inverse to each other.
 
 **Note.** The following statements could have been formalized using
 [commuting squares of identifications](foundation.commuting-squares-of-identifications.md).
@@ -205,11 +208,11 @@ module _
   commutative-right-whisker-left-whisker-concat α =
     nat-htpy (right-whisker-concat α)
 
-  compute-inv-commutative-left-whisker-right-whisker-concat :
+  compute-inv-commutative-right-whisker-left-whisker-concat :
     (β : q ＝ q') (α : p ＝ p') →
     ( inv (commutative-right-whisker-left-whisker-concat α β)) ＝
     ( commutative-left-whisker-right-whisker-concat β α)
-  compute-inv-commutative-left-whisker-right-whisker-concat refl refl =
+  compute-inv-commutative-right-whisker-left-whisker-concat refl refl =
     refl
 ```
 

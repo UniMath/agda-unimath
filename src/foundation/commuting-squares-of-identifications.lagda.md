@@ -581,13 +581,13 @@ Consider two squares of identifications as in the diagram
               a --------> a
               |           |
      top-left |           | top-right
-              ∨  refl    ∨
+              ∨   refl   ∨
               b --------> b
               |           |
   bottom-left |           | bottom-right
-              ∨           ∨
+              ∨          ∨
               c --------> c
-                 refl
+                  refl
 ```
 
 Then the pasted square can be computed in terms of the horizontal concatination
@@ -602,7 +602,7 @@ module _
     (top-left : a ＝ b) (top-right : a ＝ b)
     (bottom-left : b ＝ c) (bottom-right : b ＝ c)
     (α : top-left ＝ top-right) (β : bottom-left ＝ bottom-right) →
-    (inv right-unit) ∙
+    ( ( inv right-unit) ∙
     ( vertical-pasting-coherence-square-identifications
       ( refl)
       ( top-left)
@@ -618,7 +618,7 @@ module _
       ( coherence-square-identifications-horizontal-refl
         ( bottom-left)
         ( bottom-right)
-        ( β))) ＝
+        ( β)))) ＝
       ( horizontal-concat-Id² α β)
   vertical-pasting-coherence-square-identifications-horizontal-refl
     refl refl refl refl refl refl =
@@ -629,7 +629,7 @@ module _
     (bottom-left : b ＝ c) (bottom-right : b ＝ c)
     (α : coherence-square-identifications refl top-left top-right refl)
     (β : coherence-square-identifications refl bottom-left bottom-right refl) →
-    (inv right-unit) ∙
+    ( ( inv right-unit) ∙
     ( vertical-pasting-coherence-square-identifications
       ( refl)
       ( top-left)
@@ -639,7 +639,7 @@ module _
       ( bottom-right)
       ( refl)
       ( α)
-      ( β)) ＝
+      ( β))) ＝
       ( horizontal-concat-Id²
         ( inv-coherence-square-identifications-horizontal-refl
           ( top-left)

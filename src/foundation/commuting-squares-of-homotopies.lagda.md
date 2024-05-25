@@ -541,26 +541,26 @@ module _
           ( p x) (top x) (left x) (right x) (bottom x) (q x))
 ```
 
-### Computing the pasting of two squares with refl on opposite sides
+### Computing the pasting of two squares with `refl-htpy` on opposite sides
 
 Consider two squares of homotopies as in the diagram
 
 ```text
-                  refl
-              a --------> a
-              |           |
-     top-left |           | top-right
-              ∨  refl    ∨
-              b --------> b
-              |           |
-  bottom-left |           | bottom-right
-              ∨           ∨
-              c --------> c
-                  refl
+                 refl-htpy
+              a ----------> a
+              |             |
+     top-left |             | top-right
+              ∨ refl-htpy  ∨
+              b ----------> b
+              |             |
+  bottom-left |             | bottom-right
+              ∨            ∨
+              c ----------> c
+                 refl-htpy
 ```
 
-The result of vertically pasting these squares can be computed in terms of the
-horizontal concatination of homotopies
+The result of vertically pasting these squares can be computed in terms
+of the horizontal concatination of homotopies.
 
 ```agda
 module _
@@ -571,7 +571,7 @@ module _
 
   vertical-pasting-coherence-square-homotopies-horizontal-refl :
     (H : top-left ~ top-right) (K : bottom-left ~ bottom-right) →
-    (inv-htpy right-unit-htpy) ∙h
+    ( ( inv-htpy right-unit-htpy) ∙h
     ( vertical-pasting-coherence-square-homotopies
       ( refl-htpy)
       ( top-left)
@@ -587,8 +587,8 @@ module _
       ( coherence-square-homotopies-horizontal-refl
         ( bottom-left)
         ( bottom-right)
-        ( K))) ~
-    (horizontal-concat-htpy² H K)
+        ( K)))) ~
+    ( horizontal-concat-htpy² H K)
   vertical-pasting-coherence-square-homotopies-horizontal-refl H K x =
     vertical-pasting-coherence-square-identifications-horizontal-refl
       ( top-left x)
@@ -609,7 +609,7 @@ module _
       ( bottom-left)
       ( bottom-right)
       ( refl-htpy)) →
-    (inv-htpy right-unit-htpy) ∙h
+    ( ( inv-htpy right-unit-htpy) ∙h
     ( vertical-pasting-coherence-square-homotopies
       ( refl-htpy)
       ( top-left)
@@ -619,7 +619,7 @@ module _
       ( bottom-right)
       ( refl-htpy)
       ( H)
-      ( K)) ~
+      ( K))) ~
     ( horizontal-concat-htpy²
       ( inv-coherence-square-homotopies-horizontal-refl
         ( top-left)

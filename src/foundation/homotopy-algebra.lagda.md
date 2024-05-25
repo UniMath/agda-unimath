@@ -7,15 +7,12 @@ module foundation.homotopy-algebra where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.whiskering-homotopies-concatenation
-open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>
@@ -110,12 +107,28 @@ module _
   commutative-right-whisker-left-whisker-htpy H' H x =
       coh-horizontal-concat-htpy H' H x
 
-eckmann-hilton-htpy :
-  {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
-  (H ∙h K) ~ (K ∙h H)
-eckmann-hilton-htpy H K =
-  ( inv-htpy
-    ( left-whisker-concat-htpy H (left-unit-law-left-whisker-comp K))) ∙h
-  ( commutative-right-whisker-left-whisker-htpy H K) ∙h
-  ( right-whisker-concat-htpy (left-unit-law-left-whisker-comp K) H)
+module _
+  {l : Level} {X : UU l}  
+  where
+
+  eckmann-hilton-htpy :
+    (H K : id {A = X} ~ id) →
+    (H ∙h K) ~ (K ∙h H)
+  eckmann-hilton-htpy H K =
+    ( inv-htpy
+      ( left-whisker-concat-htpy H (left-unit-law-left-whisker-comp K))) ∙h
+    ( commutative-right-whisker-left-whisker-htpy H K) ∙h
+    ( right-whisker-concat-htpy (left-unit-law-left-whisker-comp K) H)
 ```
+
+### Obtaining a 3-automorphism from a 2-automorphism using `eckmann-hilton-htpy`
+
+Given a 2-automorphism `H : id ~ id`, we can obtain a homotopy
+`eckmann-hilton-htpy H H : H ∙h H ~ H ∙h H`. The type of this
+homotopy is equivalent to the type of 3-automorphisms `refl-htpy ~ refl-htpy`
+
+
+  3-automorphism-eckmann-hilton-htpy :
+    id {A = X} ~ id → refl-htpy {f = id {A = X}} ~ refl-htpy
+  3-automorphism-eckmann-hilton-htpy = {!!}
+
