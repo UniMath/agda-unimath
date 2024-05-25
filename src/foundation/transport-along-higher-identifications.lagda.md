@@ -400,7 +400,7 @@ module _
         ( right-whisker-concat α q'))
       ( tr-concat p' q')) ∙h
     ( tr²-left-whisker-concat-tr²-right-whisker-concat β α)
-    
+
   tr²-right-whisker-concat-tr²-left-whisker-concat :
     (α : p ＝ p') (β : q ＝ q') →
     coherence-square-homotopies
@@ -465,15 +465,14 @@ module _
     refl-htpy
 ```
 
-##### A simplification of the non-trivial faces of the cube `α` and `β` are 2-loops.
-
+##### A simplification of the non-trivial faces of the cube `α` and `β` are 2-loops
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {a : A}
   {B : A → UU l2}
   where
-  
+
   tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² :
     (α β : refl {x = a} ＝ refl) →
     ( ( tr² B (left-whisker-concat refl α)) ∙h
@@ -521,7 +520,7 @@ module _
     (α β : refl {x = a} ＝ refl) →
     ( ( inv-htpy right-unit-htpy) ∙h
     ( tr²-right-whisker-concat-tr²-left-whisker-concat α β)) ~
-    ( tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² α β)      
+    ( tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² α β)
   compute-tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² α β =
     ( vertical-pasting-inv-coherence-square-homotopies-horizontal-refl
       ( tr² B (right-whisker-concat α refl))

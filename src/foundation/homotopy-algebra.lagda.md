@@ -108,7 +108,7 @@ module _
       coh-horizontal-concat-htpy H' H x
 
 module _
-  {l : Level} {X : UU l}  
+  {l : Level} {X : UU l}
   where
 
   eckmann-hilton-htpy :
@@ -124,11 +124,8 @@ module _
 ### Obtaining a 3-automorphism from a 2-automorphism using `eckmann-hilton-htpy`
 
 Given a 2-automorphism `H : id ~ id`, we can obtain a homotopy
-`eckmann-hilton-htpy H H : H ∙h H ~ H ∙h H`. The type of this
-homotopy is equivalent to the type of 3-automorphisms `refl-htpy ~ refl-htpy`
+`eckmann-hilton-htpy H H : H ∙h H ~ H ∙h H`. The type of this homotopy is
+equivalent to the type of 3-automorphisms `refl-htpy ~ refl-htpy`
 
-
-  3-automorphism-eckmann-hilton-htpy :
-    id {A = X} ~ id → refl-htpy {f = id {A = X}} ~ refl-htpy
-  3-automorphism-eckmann-hilton-htpy = {!!}
-
+3-automorphism-eckmann-hilton-htpy : id {A = X} ~ id → refl-htpy {f = id {A =
+X}} ~ refl-htpy 3-automorphism-eckmann-hilton-htpy = {!!}

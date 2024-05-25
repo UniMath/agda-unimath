@@ -559,8 +559,8 @@ Consider two squares of homotopies as in the diagram
                  refl-htpy
 ```
 
-The result of vertically pasting these squares can be computed in terms
-of the horizontal concatination of homotopies.
+The result of vertically pasting these squares can be computed in terms of the
+horizontal concatination of homotopies.
 
 ```agda
 module _
