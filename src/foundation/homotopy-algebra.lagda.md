@@ -120,12 +120,3 @@ module _
     ( commutative-right-whisker-left-whisker-htpy H K) ∙h
     ( right-whisker-concat-htpy (left-unit-law-left-whisker-comp K) H)
 ```
-
-### Obtaining a 3-automorphism from a 2-automorphism using `eckmann-hilton-htpy`
-
-Given a 2-automorphism `H : id ~ id`, we can obtain a homotopy
-`eckmann-hilton-htpy H H : H ∙h H ~ H ∙h H`. The type of this homotopy is
-equivalent to the type of 3-automorphisms `refl-htpy ~ refl-htpy`
-
-3-automorphism-eckmann-hilton-htpy : id {A = X} ~ id → refl-htpy {f = id {A =
-X}} ~ refl-htpy 3-automorphism-eckmann-hilton-htpy = {!!}

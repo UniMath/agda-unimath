@@ -787,22 +787,6 @@ module _
         ( tr³-horizontal-concat-right-unit-law-right-whisker-left-unit-law-left-whisker-Ω²))
 ```
 
-### Computing `tr³` along `3-loop-eckmann-hilton-Ω²`
-
-We can use the above computation to compute `tr³` along the 3-loop
-`3-loop-eckmann-hilton-Ω²`
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {a : A}
-  {B : A → UU l2} (α : type-Ω² a)
-  where
-
-  tr³-3-loop-eckmann-hilton-Ω² :
-    tr³ B (3-loop-eckmann-hilton-Ω² α) ~ {!!}
-  tr³-3-loop-eckmann-hilton-Ω² = {!!}
-```
-
 ## External links
 
 - [The Eckmann-Hilton argument](https://1lab.dev/Algebra.Magma.Unital.EckmannHilton.html)
