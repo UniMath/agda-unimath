@@ -11,8 +11,11 @@ open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-monotonic-sequences-natural-numbers
 
 open import foundation.asymptotical-dependent-sequences
+open import foundation.asymptotically-constant-sequences
+open import foundation.cartesian-product-types
 open import foundation.constant-sequences
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -24,6 +27,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sequences
+open import foundation.subsequences
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -33,7 +37,7 @@ open import foundation.universe-levels
 ## Idea
 
 Monotic sequences of natural numbers are functions `f : ℕ → ℕ` that preserve or
-reverse (strict) inequality of natural numbers.
+reverse inequality of natural numbers.
 
 ## Definitions
 
@@ -61,30 +65,6 @@ module _
     is-prop-type-Prop is-increasing-prop-sequence-ℕ
 ```
 
-### Strictly increasing sequences of natural numbers
-
-```agda
-module _
-  (f : sequence ℕ)
-  where
-
-  is-strictly-increasing-sequence-prop-ℕ : Prop lzero
-  is-strictly-increasing-sequence-prop-ℕ =
-    Π-Prop ℕ
-      ( λ i →
-        Π-Prop ℕ
-          ( λ j → hom-Prop (le-ℕ-Prop i j) (le-ℕ-Prop (f i) (f j))))
-
-  is-strictly-increasing-sequence-ℕ : UU lzero
-  is-strictly-increasing-sequence-ℕ =
-    type-Prop is-strictly-increasing-sequence-prop-ℕ
-
-  is-prop-is-strictly-increasing-sequence-ℕ :
-    is-prop is-strictly-increasing-sequence-ℕ
-  is-prop-is-strictly-increasing-sequence-ℕ =
-    is-prop-type-Prop is-strictly-increasing-sequence-prop-ℕ
-```
-
 ### Decreasing sequences of natural numbers
 
 ```agda
@@ -105,30 +85,6 @@ module _
   is-prop-is-decreasing-sequence-ℕ : is-prop is-decreasing-sequence-ℕ
   is-prop-is-decreasing-sequence-ℕ =
     is-prop-type-Prop is-decreasing-sequence-prop-ℕ
-```
-
-### Strictly decreasing sequences of natural numbers
-
-```agda
-module _
-  (f : sequence ℕ)
-  where
-
-  is-strictly-decreasing-sequence-prop-ℕ : Prop lzero
-  is-strictly-decreasing-sequence-prop-ℕ =
-    Π-Prop ℕ
-      ( λ i →
-        Π-Prop ℕ
-          ( λ j → hom-Prop (le-ℕ-Prop i j) (le-ℕ-Prop (f j) (f i))))
-
-  is-strictly-decreasing-sequence-ℕ : UU lzero
-  is-strictly-decreasing-sequence-ℕ =
-    type-Prop is-strictly-decreasing-sequence-prop-ℕ
-
-  is-prop-is-strictly-decreasing-sequence-ℕ :
-    is-prop is-strictly-decreasing-sequence-ℕ
-  is-prop-is-strictly-decreasing-sequence-ℕ =
-    is-prop-type-Prop is-strictly-decreasing-sequence-prop-ℕ
 ```
 
 ### Monotonic values of sequences of natural numbers
@@ -161,38 +117,6 @@ module _
     is-prop is-decreasing-value-sequence-ℕ
   is-prop-is-decreasing-value-sequence-ℕ =
     is-prop-type-Prop is-decreasing-value-prop-sequence-ℕ
-```
-
-### Strict monotonic values of sequences of natural numbers
-
-```agda
-module _
-  (f : sequence ℕ) (n : ℕ)
-  where
-
-  is-strict-increasing-value-prop-sequence-ℕ : Prop lzero
-  is-strict-increasing-value-prop-sequence-ℕ = le-ℕ-Prop (f n) (f (succ-ℕ n))
-
-  is-strict-increasing-value-sequence-ℕ : UU lzero
-  is-strict-increasing-value-sequence-ℕ =
-    type-Prop is-strict-increasing-value-prop-sequence-ℕ
-
-  is-prop-is-strict-increasing-value-sequence-ℕ :
-    is-prop is-strict-increasing-value-sequence-ℕ
-  is-prop-is-strict-increasing-value-sequence-ℕ =
-    is-prop-type-Prop is-strict-increasing-value-prop-sequence-ℕ
-
-  is-strict-decreasing-value-prop-sequence-ℕ : Prop lzero
-  is-strict-decreasing-value-prop-sequence-ℕ = le-ℕ-Prop (f (succ-ℕ n)) (f n)
-
-  is-strict-decreasing-value-sequence-ℕ : UU lzero
-  is-strict-decreasing-value-sequence-ℕ =
-    type-Prop is-strict-decreasing-value-prop-sequence-ℕ
-
-  is-prop-is-strict-decreasing-value-sequence-ℕ :
-    is-prop is-strict-decreasing-value-sequence-ℕ
-  is-prop-is-strict-decreasing-value-sequence-ℕ =
-    is-prop-type-Prop is-strict-decreasing-value-prop-sequence-ℕ
 ```
 
 ## Properties
@@ -237,51 +161,7 @@ module _
       ( λ n J K → transitive-leq-ℕ (f (succ-ℕ n)) (f n) (f p) K (H n))
 ```
 
-### A sequence is strictly monotonic if and only if all its values are strictly monotonic with the same monotonicity
-
-```agda
-module _
-  (f : sequence ℕ)
-  where
-
-  is-strict-increasing-value-is-strictly-increasing-sequence-ℕ :
-    is-strictly-increasing-sequence-ℕ f →
-    ((n : ℕ) → is-strict-increasing-value-sequence-ℕ f n)
-  is-strict-increasing-value-is-strictly-increasing-sequence-ℕ H n =
-    H n (succ-ℕ n) (succ-le-ℕ n)
-
-  is-strictly-increasing-is-strict-increasing-value-sequence-ℕ :
-    ((n : ℕ) → is-strict-increasing-value-sequence-ℕ f n) →
-    is-strictly-increasing-sequence-ℕ f
-  is-strictly-increasing-is-strict-increasing-value-sequence-ℕ H p q I =
-    based-ind-ℕ
-      ( succ-ℕ p)
-      ( λ k → le-ℕ (f p) (f k))
-      ( H p)
-      ( λ n J K → transitive-le-ℕ (f p) (f n) (f (succ-ℕ n)) K ((H n)))
-      ( q)
-      ( leq-succ-le-ℕ p q I)
-
-  is-strict-decreasing-value-is-strictly-decreasing-sequence-ℕ :
-    is-strictly-decreasing-sequence-ℕ f →
-    ((n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n)
-  is-strict-decreasing-value-is-strictly-decreasing-sequence-ℕ H n =
-    H n (succ-ℕ n) (succ-le-ℕ n)
-
-  is-strictly-decreasing-is-strict-decreasing-value-sequence-ℕ :
-    ((n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n) →
-    is-strictly-decreasing-sequence-ℕ f
-  is-strictly-decreasing-is-strict-decreasing-value-sequence-ℕ H p q I =
-    based-ind-ℕ
-      ( succ-ℕ p)
-      ( λ k → le-ℕ (f k) (f p))
-      ( H p)
-      ( λ n J → transitive-le-ℕ (f (succ-ℕ n)) (f n) (f p) (H n))
-      ( q)
-      ( leq-succ-le-ℕ p q I)
-```
-
-## Strictly monotonic sequences of natural numbers are monotonic
+## Strictly increasing sequences of natural numbers are monotonic
 
 ```agda
 module _
@@ -295,12 +175,50 @@ module _
   is-increasing-value-is-strict-increasing-value-sequence-ℕ n =
     leq-le-ℕ (f n) (f (succ-ℕ n))
 
-  is-increasing-is-strictly-increasing-sequence-ℕ :
-    is-strictly-increasing-sequence-ℕ f → is-increasing-sequence-ℕ f
-  is-increasing-is-strictly-increasing-sequence-ℕ H =
+  is-increasing-is-strict-increasing-sequence-ℕ :
+    is-strict-increasing-sequence-ℕ f → is-increasing-sequence-ℕ f
+  is-increasing-is-strict-increasing-sequence-ℕ H =
     is-increasing-is-increasing-value-sequence-ℕ f
       ( λ n → is-increasing-value-is-strict-increasing-value-sequence-ℕ n
-        ( is-strict-increasing-value-is-strictly-increasing-sequence-ℕ f H n))
+        ( is-strict-increasing-value-is-strict-increasing-sequence-ℕ f H n))
+```
+
+### Any subsequence of a monotonic sequence of natural numbers is monotonic
+
+```agda
+module _
+  (u : sequence ℕ)
+  where
+
+  is-increasing-subsequence-increasing-sequence-ℕ :
+    (H : is-increasing-sequence-ℕ u) →
+    (v : subsequence u) →
+    is-increasing-sequence-ℕ (sequence-subsequence u v)
+  is-increasing-subsequence-increasing-sequence-ℕ H v p q I =
+    H
+      ( extract-subsequence u v p)
+      ( extract-subsequence u v q)
+      ( is-increasing-is-strict-increasing-sequence-ℕ
+        ( extract-subsequence u v)
+        ( is-strict-increasing-extract-subsequence u v)
+        ( p)
+        ( q)
+        ( I))
+
+  is-decreasing-subsequence-decreasing-sequence-ℕ :
+    (H : is-decreasing-sequence-ℕ u) →
+    (v : subsequence u) →
+    is-decreasing-sequence-ℕ (sequence-subsequence u v)
+  is-decreasing-subsequence-decreasing-sequence-ℕ H v p q I =
+    H
+      ( extract-subsequence u v p)
+      ( extract-subsequence u v q)
+      ( is-increasing-is-strict-increasing-sequence-ℕ
+        ( extract-subsequence u v)
+        ( is-strict-increasing-extract-subsequence u v)
+        ( p)
+        ( q)
+        ( I))
 ```
 
 ### A monotonic value is either stationnary or strictly monotonic
@@ -333,9 +251,15 @@ module _
   where
 
   is-∞-zero-is-zero-value-decreasing-sequence-ℕ :
-    (n : ℕ) (K : f n ＝ zero-ℕ) → (k : ℕ) → leq-ℕ n k → zero-ℕ ＝ f k
-  is-∞-zero-is-zero-value-decreasing-sequence-ℕ n K k I =
-    is-zero-leq-zero-ℕ' (f k) (tr (leq-ℕ (f k)) K (H n k I))
+    Σ ℕ (λ n → zero-ℕ ＝ f n) → asymptotically (λ n → zero-ℕ ＝ f n)
+  is-∞-zero-is-zero-value-decreasing-sequence-ℕ =
+    rec-Σ
+      ( λ n K →
+        ( n ,
+          λ k I →
+            is-zero-leq-zero-ℕ'
+              ( f k)
+              ( inv-tr (leq-ℕ (f k)) K (H n k I))))
 ```
 
 ### A decreasing sequence of natural numbers that has no strictly decreasing value is constant
@@ -362,132 +286,296 @@ module _
 
 ```agda
 module _
-  (f : sequence ℕ) (H : is-decreasing-sequence-ℕ f) (N : ℕ)
+  (f : sequence ℕ) (H : is-decreasing-sequence-ℕ f)
   where
 
-  is-∞-constant-∞-no-strict-decreasing-value-decreasing-sequence-ℕ :
-    ((n : ℕ) → (leq-ℕ N n) → ¬ (is-strict-decreasing-value-sequence-ℕ f n)) →
-    ((n : ℕ) → leq-ℕ N n → f N ＝ f n)
-  is-∞-constant-∞-no-strict-decreasing-value-decreasing-sequence-ℕ K =
-    based-ind-ℕ
-      ( N)
-      ( λ n → f N ＝ f n)
-      ( refl)
-      ( λ n I J →
-        rec-coproduct
-          ( J ∙_)
-          ( ex-falso ∘ (K n I))
-          ( decide-is-stationnary-is-decreasing-value-sequence-ℕ f n
-            (is-decreasing-value-is-decreasing-sequence-ℕ f H n)))
+  is-∞-constant-∞-no-strict-value-decreasing-sequence-ℕ :
+    asymptotically (λ n → ¬ (is-strict-decreasing-value-sequence-ℕ f n)) →
+    is-∞-constant-sequence f
+  is-∞-constant-∞-no-strict-value-decreasing-sequence-ℕ =
+    rec-Σ
+      ( λ N K →
+        is-∞-constant-eq-∞-constant-sequence
+          ( f N)
+          ( f)
+          ( ( N) ,
+            ( based-ind-ℕ
+            ( N)
+            ( λ n → f N ＝ f n)
+            ( refl)
+            ( λ n I J →
+              rec-coproduct
+                ( J ∙_)
+                ( ex-falso ∘ (K n I))
+                ( decide-is-stationnary-is-decreasing-value-sequence-ℕ f n
+                (is-decreasing-value-is-decreasing-sequence-ℕ f H n))))))
 ```
 
 ### A decreasing sequence of natural numbers with bounded strictly decreasing values is asymptotically constant
 
 ```agda
 module _
-  (f : sequence ℕ) (H : is-decreasing-sequence-ℕ f) (N : ℕ)
+  (f : sequence ℕ) (H : is-decreasing-sequence-ℕ f)
   where
 
-  is-∞-constant-is-bounded-strict-decreasing-value-decreasing-sequence-ℕ :
-    ((n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n → le-ℕ n N) →
-    ((n : ℕ) → leq-ℕ N n → f N ＝ f n)
-  is-∞-constant-is-bounded-strict-decreasing-value-decreasing-sequence-ℕ K =
-    is-∞-constant-∞-no-strict-decreasing-value-decreasing-sequence-ℕ f H N
-      ( λ n I J → contradiction-le-ℕ n N (K n J) I)
+  is-upper-bound-strict-value-decreasing-sequence-ℕ : ℕ → UU lzero
+  is-upper-bound-strict-value-decreasing-sequence-ℕ N =
+    (n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n → le-ℕ n N
+
+  is-∞-constant-is-upper-bounded-strict-value-decreasing-sequence-ℕ :
+    Σ ℕ is-upper-bound-strict-value-decreasing-sequence-ℕ →
+    is-∞-constant-sequence f
+  is-∞-constant-is-upper-bounded-strict-value-decreasing-sequence-ℕ =
+    ( is-∞-constant-∞-no-strict-value-decreasing-sequence-ℕ f H) ∘
+    ( rec-Σ (λ N I → (N , (λ n J L → contradiction-le-ℕ n N (I n L) J))))
 ```
 
-### Any subsequence of a decreasing sequence of natural numbers is decreasing
+### Asymptotical strictly decreasing values
+
+```agda
+module _
+  (f : sequence ℕ) (N n : ℕ)
+  where
+
+  is-∞-strict-decreasing-value-prop-sequence-ℕ : Prop lzero
+  is-∞-strict-decreasing-value-prop-sequence-ℕ =
+    product-Prop
+      (leq-ℕ-Prop N n)
+      (is-strict-decreasing-value-prop-sequence-ℕ f n)
+
+  is-∞-strict-decreasing-value-sequence-ℕ : UU lzero
+  is-∞-strict-decreasing-value-sequence-ℕ =
+    type-Prop is-∞-strict-decreasing-value-prop-sequence-ℕ
+
+  is-prop-is-∞-strict-decreasing-value-sequence-ℕ :
+    is-prop is-∞-strict-decreasing-value-sequence-ℕ
+  is-prop-is-∞-strict-decreasing-value-sequence-ℕ =
+    is-prop-type-Prop is-∞-strict-decreasing-value-prop-sequence-ℕ
+```
+
+### A decreasing sequence of natural numbers with no asymptotical strictly decreasing values is asymptotically constant
 
 ```agda
 module _
   (f : sequence ℕ) (H : is-decreasing-sequence-ℕ f)
-  (φ : sequence ℕ) (K : is-strictly-increasing-sequence-ℕ φ)
   where
 
-  is-decreasing-subsequence-decreasing-sequence-ℕ :
-    is-decreasing-sequence-ℕ (f ∘ φ)
-  is-decreasing-subsequence-decreasing-sequence-ℕ p q I =
-    H
-      ( φ p)
-      ( φ q)
-      ( is-increasing-is-strictly-increasing-sequence-ℕ φ K p q I)
+  is-∞-constant-no-∞-strict-decreasing-value-decreasing-sequence-ℕ :
+    Σ ℕ (λ N → ¬ Σ ℕ (is-∞-strict-decreasing-value-sequence-ℕ f N)) →
+    is-∞-constant-sequence f
+  is-∞-constant-no-∞-strict-decreasing-value-decreasing-sequence-ℕ =
+    ( is-∞-constant-∞-no-strict-value-decreasing-sequence-ℕ f H) ∘
+    ( rec-Σ (λ N K → (N , λ n I J → K (n , (I , J)))))
 ```
 
-### There exist no strictly decreasing sequences of natural numbers
-
-```agda
-no-strictly-decreasing-sequence-leq-ℕ :
-  (f : sequence ℕ) →
-  (N : ℕ) →
-  is-strictly-decreasing-sequence-ℕ f →
-  leq-ℕ (f zero-ℕ) N →
-  empty
-no-strictly-decreasing-sequence-leq-ℕ f zero-ℕ H =
-  concatenate-le-leq-ℕ
-    { f 1}
-    { f 0}
-    { 0}
-    ( H 0 1 (succ-le-ℕ 0))
-no-strictly-decreasing-sequence-leq-ℕ f (succ-ℕ N) H K =
-  no-strictly-decreasing-sequence-leq-ℕ
-    ( f ∘ succ-ℕ)
-    ( N)
-    ( λ i j → H (succ-ℕ i) (succ-ℕ j))
-    ( leq-le-succ-ℕ
-      ( f 1)
-      ( N)
-      ( concatenate-le-leq-ℕ
-        { f 1}
-        { f 0}
-        { succ-ℕ N}
-        ( H 0 1 (succ-le-ℕ 0))
-        ( K)))
-
-no-strictly-decreasing-sequence-ℕ :
-  (f : sequence ℕ) → ¬ (is-strictly-decreasing-sequence-ℕ f)
-no-strictly-decreasing-sequence-ℕ f H =
-  no-strictly-decreasing-sequence-leq-ℕ f (f 0) H (refl-leq-ℕ (f 0))
-```
-
-### Strictly increasing sequences of natural numbers grow infinitely
+### A monotonic sequence of natural numbers with a constant subsequence is asymptotically constant
 
 ```agda
 module _
-  (f : sequence ℕ) (H : is-strictly-increasing-sequence-ℕ f)
+  (u : sequence ℕ)
   where
 
-  limit-∞-is-strictly-increasing-sequence-ℕ :
-    (M : ℕ) → asymptotically (λ n → leq-ℕ M (f n))
-  limit-∞-is-strictly-increasing-sequence-ℕ zero-ℕ =
-    ( zero-ℕ , λ n K → leq-zero-ℕ (f n))
-  limit-∞-is-strictly-increasing-sequence-ℕ (succ-ℕ M) =
-    map-Σ
-      ( is-modulus-dependent-sequence (λ n → leq-ℕ (succ-ℕ M) (f n)))
-      ( succ-ℕ)
-      ( λ N K n I →
-        leq-succ-le-ℕ M (f n)
-          (concatenate-leq-le-ℕ
-            { M}
-            { f N}
-            { f n}
-            ( K N (refl-leq-ℕ N))
-            ( H N n
-              ( concatenate-le-leq-ℕ
-                { N}
-                { succ-ℕ N}
-                { n}
-                ( succ-le-ℕ N)
-                ( I)))))
-      ( limit-∞-is-strictly-increasing-sequence-ℕ M)
+  is-∞-constant-is-constant-subsequence-increasing-sequence-ℕ :
+    is-increasing-sequence-ℕ u →
+    Σ (subsequence u) (is-constant-sequence ∘ (sequence-subsequence u)) →
+    is-∞-constant-sequence u
+  is-∞-constant-is-constant-subsequence-increasing-sequence-ℕ H =
+    rec-Σ
+      ( λ v K →
+      is-∞-constant-eq-∞-constant-sequence
+        ( u (extract-subsequence u v zero-ℕ))
+        ( u)
+        ( ( extract-subsequence u v zero-ℕ) ,
+          ( λ n I →
+            antisymmetric-leq-ℕ
+              ( u (extract-subsequence u v zero-ℕ))
+              ( u n)
+              ( H (extract-subsequence u v zero-ℕ) n I)
+              ( tr
+                ( leq-ℕ (u n))
+                ( K (modulus-subsequence u v n) zero-ℕ)
+                ( H
+                  ( n)
+                  ( extract-modulus-subsequence u v n)
+                  ( leq-extract-modulus-subsequence u v n))))))
 
-  modulus-limit-∞-is-strictly-increasing-sequence-ℕ : ℕ → ℕ
-  modulus-limit-∞-is-strictly-increasing-sequence-ℕ M =
-    pr1 (limit-∞-is-strictly-increasing-sequence-ℕ M)
+  is-∞-constant-is-constant-subsequence-decreasing-sequence-ℕ :
+    is-decreasing-sequence-ℕ u →
+    Σ (subsequence u) (is-constant-sequence ∘ (sequence-subsequence u)) →
+    is-∞-constant-sequence u
+  is-∞-constant-is-constant-subsequence-decreasing-sequence-ℕ H =
+    rec-Σ
+      ( λ v K →
+      is-∞-constant-eq-∞-constant-sequence
+        ( u (extract-subsequence u v zero-ℕ))
+        ( u)
+        ( ( extract-subsequence u v zero-ℕ) ,
+          ( λ n I →
+            antisymmetric-leq-ℕ
+              ( u (extract-subsequence u v zero-ℕ))
+              ( u n)
+              ( tr
+                ( λ k → leq-ℕ k (u n))
+                ( K (modulus-subsequence u v n) zero-ℕ)
+                ( H
+                  ( n)
+                  ( extract-modulus-subsequence u v n)
+                  ( leq-extract-modulus-subsequence u v n)))
+              ( H (extract-subsequence u v zero-ℕ) n I))))
+```
 
-  is-modulus-limit-∞-is-strictly-increasing-sequence-ℕ :
-    (M p : ℕ) →
-    leq-ℕ (modulus-limit-∞-is-strictly-increasing-sequence-ℕ M) p →
-    leq-ℕ M (f p)
-  is-modulus-limit-∞-is-strictly-increasing-sequence-ℕ M =
-    pr2 (limit-∞-is-strictly-increasing-sequence-ℕ M)
+### A monotonic sequence of natural numbers with an asymptotically constant subsequence is asymptotically constant
+
+```agda
+module _
+  (u : sequence ℕ)
+  where
+
+  is-∞-constant-is-∞-constant-subsequence-increasing-sequence-ℕ :
+    is-increasing-sequence-ℕ u →
+    Σ (subsequence u) (is-∞-constant-sequence ∘ (sequence-subsequence u)) →
+    is-∞-constant-sequence u
+  is-∞-constant-is-∞-constant-subsequence-increasing-sequence-ℕ H =
+    ( is-∞-constant-is-constant-subsequence-increasing-sequence-ℕ u H) ∘
+    ( rec-Σ (λ v K →
+      rec-Σ
+        ( λ w I → ( sub-subsequence u v w , I))
+        ( constant-subsequence-is-∞-constant-sequence
+          ( sequence-subsequence u v)
+          ( K))))
+
+  is-∞-constant-is-∞-constant-subsequence-decreasing-sequence-ℕ :
+    is-decreasing-sequence-ℕ u →
+    Σ (subsequence u) (is-∞-constant-sequence ∘ (sequence-subsequence u)) →
+    is-∞-constant-sequence u
+  is-∞-constant-is-∞-constant-subsequence-decreasing-sequence-ℕ H =
+    ( is-∞-constant-is-constant-subsequence-decreasing-sequence-ℕ u H) ∘
+    ( rec-Σ
+      ( λ v →
+        ( rec-Σ (λ w I → (sub-subsequence u v w , I))) ∘
+        ( constant-subsequence-is-∞-constant-sequence
+          ( sequence-subsequence u v))))
+```
+
+### A decreasing sequence of natural numbers cannot have arbitrarily large strict decreasing values
+
+```agda
+module _
+  (f : sequence ℕ) (H : is-decreasing-sequence-ℕ f)
+  (K : (N : ℕ) → Σ ℕ (is-∞-strict-decreasing-value-sequence-ℕ f N))
+  where
+
+  extract-∞-strict-decreasing-value-sequence-ℕ : ℕ → ℕ
+  extract-∞-strict-decreasing-value-sequence-ℕ zero-ℕ = pr1 (K zero-ℕ)
+  extract-∞-strict-decreasing-value-sequence-ℕ (succ-ℕ n) =
+    pr1 (K (succ-ℕ (extract-∞-strict-decreasing-value-sequence-ℕ n)))
+
+  is-strict-value-∞-strict-decreasing-value-sequence-ℕ :
+    (n : ℕ) →
+    is-strict-decreasing-value-sequence-ℕ f
+      (extract-∞-strict-decreasing-value-sequence-ℕ n)
+  is-strict-value-∞-strict-decreasing-value-sequence-ℕ zero-ℕ =
+    pr2 (pr2 (K zero-ℕ))
+  is-strict-value-∞-strict-decreasing-value-sequence-ℕ (succ-ℕ n) =
+    pr2 (pr2 (K (succ-ℕ (extract-∞-strict-decreasing-value-sequence-ℕ n))))
+
+  leq-succ-extract-∞-strict-decreasing-value-sequence-ℕ :
+    (n : ℕ) →
+    leq-ℕ
+      (succ-ℕ (extract-∞-strict-decreasing-value-sequence-ℕ n))
+      (extract-∞-strict-decreasing-value-sequence-ℕ (succ-ℕ n))
+  leq-succ-extract-∞-strict-decreasing-value-sequence-ℕ n =
+    pr1
+      ( pr2
+        ( K
+          ( succ-ℕ
+            ( extract-∞-strict-decreasing-value-sequence-ℕ n))))
+
+  no-∞-strict-decreasing-value-decreasing-sequence-ℕ : empty
+  no-∞-strict-decreasing-value-decreasing-sequence-ℕ =
+    no-strict-decreasing-value-sequence-ℕ
+      ( f ∘ extract-∞-strict-decreasing-value-sequence-ℕ)
+      ( λ n →
+        concatenate-leq-le-ℕ
+        { f (extract-∞-strict-decreasing-value-sequence-ℕ (succ-ℕ n))}
+        { f (succ-ℕ (extract-∞-strict-decreasing-value-sequence-ℕ n))}
+        { f (extract-∞-strict-decreasing-value-sequence-ℕ n)}
+        ( H
+          ( succ-ℕ (extract-∞-strict-decreasing-value-sequence-ℕ n))
+          ( extract-∞-strict-decreasing-value-sequence-ℕ (succ-ℕ n))
+        ( leq-succ-extract-∞-strict-decreasing-value-sequence-ℕ n))
+        ( is-strict-value-∞-strict-decreasing-value-sequence-ℕ n))
+```
+
+### The subsequences of a decreasing sequence of natural numbers don't all have a strict decreasing value
+
+#### Strict decreasing values of subsequences
+
+```agda
+module _
+  (u : sequence ℕ) (v : subsequence u)
+  where
+
+  is-strict-decreasing-value-subsequence-ℕ : ℕ → UU lzero
+  is-strict-decreasing-value-subsequence-ℕ =
+    is-strict-decreasing-value-sequence-ℕ (sequence-subsequence u v)
+```
+
+#### Not all subsequences of a decreasing sequence of natural nimbers have a strict decreasing value
+
+```agda
+module _
+  (u : sequence ℕ) (H : is-decreasing-sequence-ℕ u)
+  (K : (v : subsequence u) → Σ ℕ (is-strict-decreasing-value-subsequence-ℕ u v))
+  where
+
+  extract-strict-decreasing-value-subsequence-ℕ : ℕ → ℕ
+  extract-strict-decreasing-value-subsequence-ℕ zero-ℕ =
+    pr1 (K (refl-subsequence u))
+  extract-strict-decreasing-value-subsequence-ℕ (succ-ℕ n) =
+    skip-ℕ
+      ( extract-strict-decreasing-value-subsequence-ℕ n)
+      ( pr1
+        ( K
+          ( skip-subsequence
+            ( extract-strict-decreasing-value-subsequence-ℕ n)
+            ( u))))
+
+  is-strict-value-extract-strict-decreasing-value-subsequence-ℕ :
+    (n : ℕ) →
+    is-strict-decreasing-value-sequence-ℕ u
+      (extract-strict-decreasing-value-subsequence-ℕ n)
+  is-strict-value-extract-strict-decreasing-value-subsequence-ℕ zero-ℕ =
+    pr2 (K (refl-subsequence u))
+  is-strict-value-extract-strict-decreasing-value-subsequence-ℕ (succ-ℕ n) =
+    pr2
+      ( K
+        ( skip-subsequence
+          ( extract-strict-decreasing-value-subsequence-ℕ n)
+          ( u)))
+
+  no-strict-decreasing-value-subsequence-ℕ : empty
+  no-strict-decreasing-value-subsequence-ℕ =
+    no-strict-decreasing-value-sequence-ℕ
+      ( u ∘ extract-strict-decreasing-value-subsequence-ℕ)
+      ( λ n →
+        concatenate-leq-le-ℕ
+        { u (extract-strict-decreasing-value-subsequence-ℕ (succ-ℕ n))}
+        { u (succ-ℕ (extract-strict-decreasing-value-subsequence-ℕ n))}
+        { u (extract-strict-decreasing-value-subsequence-ℕ n)}
+        ( H
+          ( succ-ℕ (extract-strict-decreasing-value-subsequence-ℕ n))
+          ( skip-ℕ
+            ( extract-strict-decreasing-value-subsequence-ℕ n)
+            ( pr1
+              ( K
+              ( strict-increasing-skip-ℕ
+                ( extract-strict-decreasing-value-subsequence-ℕ n)))))
+          ( leq-add-ℕ
+            ( extract-strict-decreasing-value-subsequence-ℕ n)
+            ( pr1
+              ( K
+              ( strict-increasing-skip-ℕ
+                ( extract-strict-decreasing-value-subsequence-ℕ n))))))
+        ( is-strict-value-extract-strict-decreasing-value-subsequence-ℕ n))
 ```

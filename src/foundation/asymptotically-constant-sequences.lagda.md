@@ -10,8 +10,8 @@ module foundation.asymptotically-constant-sequences where
 open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
-open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-monotonic-sequences-natural-numbers
 
 open import foundation.asymptotical-dependent-sequences
 open import foundation.asymptotically-equal-sequences
@@ -293,4 +293,27 @@ module _
     is-∞-constant-is-∞-stationnary
       ( u)
       ( H (skip-zero-sequence u))
+```
+
+### An asymptotically constant sequence has a constant subsequence
+
+```agda
+module _
+  {l : Level} {A : UU l} (u : sequence A) (H : is-∞-constant-sequence u)
+  where
+
+  constant-subsequence-is-∞-constant-sequence :
+    Σ (subsequence u) (is-constant-sequence ∘ sequence-subsequence u)
+  constant-subsequence-is-∞-constant-sequence =
+    ( skip-subsequence (modulus-∞-value-∞-constant-sequence H) u) ,
+    ( λ p q →
+      ( inv
+        ( is-modulus-∞-value-∞-constant-sequence
+          ( H)
+          ( skip-ℕ (modulus-∞-value-∞-constant-sequence H) p)
+          ( leq-add-ℕ (modulus-∞-value-∞-constant-sequence H) (succ-ℕ p)))) ∙
+        ( is-modulus-∞-value-∞-constant-sequence
+          ( H)
+          ( skip-ℕ (modulus-∞-value-∞-constant-sequence H) q)
+          ( leq-add-ℕ (modulus-∞-value-∞-constant-sequence H) (succ-ℕ q))))
 ```

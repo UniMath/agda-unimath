@@ -7,10 +7,11 @@ module foundation.subsequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
-open import elementary-number-theory.monotonic-sequences-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strict-monotonic-sequences-natural-numbers
 
 open import foundation.asymptotical-dependent-sequences
 open import foundation.dependent-pair-types
@@ -44,7 +45,7 @@ module _
   where
 
   subsequence : UU lzero
-  subsequence = type-subtype is-strictly-increasing-sequence-prop-ℕ
+  subsequence = strict-increasing-sequence-ℕ
 ```
 
 ```agda
@@ -53,11 +54,13 @@ module _
   where
 
   extract-subsequence : ℕ → ℕ
-  extract-subsequence = pr1 v
+  extract-subsequence =
+    sequence-strict-increasing-sequence-ℕ v
 
-  is-strictly-increasing-extract-subsequence :
-    is-strictly-increasing-sequence-ℕ extract-subsequence
-  is-strictly-increasing-extract-subsequence = pr2 v
+  is-strict-increasing-extract-subsequence :
+    is-strict-increasing-sequence-ℕ extract-subsequence
+  is-strict-increasing-extract-subsequence =
+    is-strict-increasing-sequence-strict-increasing-sequence-ℕ v
 
   sequence-subsequence : sequence A
   sequence-subsequence n = u (extract-subsequence n)
@@ -73,10 +76,10 @@ module _
   where
 
   refl-subsequence : subsequence u
-  refl-subsequence = (id , λ i j → id)
+  refl-subsequence = strict-increasing-id-ℕ
 
-  eq-refl-subsequence : u ＝ sequence-subsequence u refl-subsequence
-  eq-refl-subsequence = refl
+  compute-refl-subsequence : u ＝ sequence-subsequence u refl-subsequence
+  compute-refl-subsequence = refl
 ```
 
 ### The subsequence that skips the first term
@@ -87,11 +90,26 @@ module _
   where
 
   skip-zero-sequence : subsequence u
-  skip-zero-sequence = (succ-ℕ , λ i j K → K)
+  skip-zero-sequence = strict-increasing-succ-ℕ
 
-  eq-skip-zero-sequence :
+  compute-skip-zero-sequence :
     u ∘ succ-ℕ ＝ sequence-subsequence u skip-zero-sequence
-  eq-skip-zero-sequence = refl
+  compute-skip-zero-sequence = refl
+```
+
+### The subsequence that skips the `n + 1` first terms
+
+```agda
+module _
+  {l : Level} {A : UU l} (n : ℕ) (u : sequence A)
+  where
+
+  skip-subsequence : subsequence u
+  skip-subsequence = strict-increasing-skip-ℕ n
+
+  compute-skip-subsequence :
+    u ∘ (succ-ℕ ∘ add-ℕ n) ＝ sequence-subsequence u skip-subsequence
+  compute-skip-subsequence = refl
 ```
 
 ### A subsequence of a subsequence is a subsequence of the original sequence
@@ -103,18 +121,7 @@ module _
   where
 
   sub-subsequence : subsequence u
-  pr1 sub-subsequence =
-    extract-subsequence u v ∘ extract-subsequence (sequence-subsequence u v) w
-  pr2 sub-subsequence i j H =
-    is-strictly-increasing-extract-subsequence u v
-      ( extract-subsequence (sequence-subsequence u v) w i)
-      ( extract-subsequence (sequence-subsequence u v) w j)
-      ( is-strictly-increasing-extract-subsequence
-        ( sequence-subsequence u v)
-        ( w)
-        ( i)
-        ( j)
-        ( H))
+  sub-subsequence = comp-strict-increasing-sequence-ℕ v w
 
   eq-sub-subsequence :
     Id
@@ -158,18 +165,29 @@ module _
 
   modulus-subsequence : ℕ → ℕ
   modulus-subsequence =
-    modulus-limit-∞-is-strictly-increasing-sequence-ℕ
+    modulus-limit-∞-is-strict-increasing-sequence-ℕ
       ( extract-subsequence u v)
-      ( is-strictly-increasing-extract-subsequence u v)
+      ( is-strict-increasing-extract-subsequence u v)
 
   is-modulus-subsequence :
     (N p : ℕ) →
     leq-ℕ (modulus-subsequence N) p →
     leq-ℕ N (extract-subsequence u v p)
   is-modulus-subsequence =
-    is-modulus-limit-∞-is-strictly-increasing-sequence-ℕ
+    is-modulus-limit-∞-is-strict-increasing-sequence-ℕ
       ( extract-subsequence u v)
-      ( is-strictly-increasing-extract-subsequence u v)
+      ( is-strict-increasing-extract-subsequence u v)
+
+  extract-modulus-subsequence : ℕ → ℕ
+  extract-modulus-subsequence = extract-subsequence u v ∘ modulus-subsequence
+
+  leq-extract-modulus-subsequence :
+    (n : ℕ) → leq-ℕ n (extract-modulus-subsequence n)
+  leq-extract-modulus-subsequence n =
+    is-modulus-subsequence
+      ( n)
+      ( modulus-subsequence n)
+      ( refl-leq-ℕ (modulus-subsequence n))
 ```
 
 ### A dependent sequence is asymptotical if and only if all its subsequences are asymptotical
