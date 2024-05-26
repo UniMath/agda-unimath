@@ -118,7 +118,7 @@ the top and bottom.
    f ----------> f
    |             |
  H |             | H'
-   ∨            ∨
+   ∨             ∨
    g ----------> g
       refl-htpy
 ```
@@ -165,7 +165,7 @@ the left and right.
           f ------> g
           |         |
 refl-htpy |         | refl-htpy
-          ∨        ∨
+          ∨         ∨
           f ------> g
                H
 ```

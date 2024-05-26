@@ -581,11 +581,11 @@ Consider two squares of identifications as in the diagram
               a --------> a
               |           |
      top-left |           | top-right
-              ∨   refl   ∨
+              ∨   refl    ∨
               b --------> b
               |           |
   bottom-left |           | bottom-right
-              ∨          ∨
+              ∨           ∨
               c --------> c
                   refl
 ```

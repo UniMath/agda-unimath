@@ -89,8 +89,8 @@ are commuting squares of identifications of the form
        a -----> b
        |        |
   refl |        | refl
-       ∨       ∨
-       a -----> b
+       ∨        ∨
+       a -----> b.
            p
 ```
 
@@ -114,7 +114,7 @@ Given an identification `α : p ＝ q`, we can obtain a coherence square with
     a -----> a
     |        |
   p |        | q
-    ∨       ∨
+    ∨        ∨
     b -----> b
        refl
 ```
@@ -161,7 +161,7 @@ Given an identification `α : p ＝ q`, we can obtain a coherence square with
        |        |
   refl |        | refl
        ∨        ∨
-       a -----> b.
+       a -----> b
            p
 ```
 

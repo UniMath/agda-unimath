@@ -325,7 +325,7 @@ module _
 Given a 2-loop `s : Ω² A`, we can obtain an identification
 `eckmann-hilton-Ω² s s : s ∙ s ＝ s ∙ s`. The type of this identification is
 equivalent to the type of 3-loops, via the equivalence
-[`pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s)`](synthetic-homotopy-theory.double-loop-spaces).
+[`pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s)`](synthetic-homotopy-theory.double-loop-spaces.md).
 
 3-loops obtained in this way are at the heart of the Hopf fibration.
 
@@ -382,16 +382,16 @@ This takes the form of a commutative square of homotopies
 
 ```text
                  tr²-concat α β
-tr² B (α ∙ β) ------------------- tr² B α ∙h tr² B β
+tr² B (α ∙ β) -------------------> tr² B α ∙h tr² B β
 
      |                                    |
      |                                    |
      |                                    |
      |                                    |
      |                                    |
-     |                                    |
+      ∨                                    ∨
 
-tr² B (β ∙ α) ------------------- tr² B β ∙h tr² B α
+tr² B (β ∙ α) -------------------> tr² B β ∙h tr² B α
                  tr²-concat β α
 ```
 
