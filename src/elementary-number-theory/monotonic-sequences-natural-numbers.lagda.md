@@ -183,6 +183,32 @@ module _
         ( is-strict-increasing-value-is-strict-increasing-sequence-ℕ f H n))
 ```
 
+### A sequence of natural numbers is constant if and only if it is increasing and decreasing
+
+```agda
+module _
+  (f : sequence ℕ)
+  where
+
+  is-increasing-is-constant-sequence-ℕ :
+    is-constant-sequence f → is-increasing-sequence-ℕ f
+  is-increasing-is-constant-sequence-ℕ H p q I = leq-eq-ℕ (f p) (f q) (H p q)
+
+  is-decreasing-is-constant-sequence-ℕ :
+    is-constant-sequence f → is-decreasing-sequence-ℕ f
+  is-decreasing-is-constant-sequence-ℕ H p q I = leq-eq-ℕ (f q) (f p) (H q p)
+
+  is-constant-is-increasing-decreasing-sequence-ℕ :
+    is-increasing-sequence-ℕ f →
+    is-decreasing-sequence-ℕ f →
+    is-constant-sequence f
+  is-constant-is-increasing-decreasing-sequence-ℕ I J p q =
+    rec-coproduct
+      ( λ H → antisymmetric-leq-ℕ (f p) (f q) (I p q H) (J p q H))
+      ( λ H → antisymmetric-leq-ℕ (f p) (f q) (J q p H) (I q p H))
+      ( linear-leq-ℕ p q)
+```
+
 ### Any subsequence of a monotonic sequence of natural numbers is monotonic
 
 ```agda
@@ -221,7 +247,7 @@ module _
 
 ```agda
 module _
-  (u : sequence ℕ)
+  {u : sequence ℕ}
   where
 
   is-∞-constant-is-constant-subsequence-increasing-sequence-ℕ :
@@ -277,7 +303,7 @@ module _
 
 ```agda
 module _
-  (u : sequence ℕ)
+  {u : sequence ℕ}
   where
 
   is-∞-constant-is-∞-constant-subsequence-increasing-sequence-ℕ :
@@ -285,7 +311,7 @@ module _
     Σ-subsequence is-∞-constant-sequence u →
     is-∞-constant-sequence u
   is-∞-constant-is-∞-constant-subsequence-increasing-sequence-ℕ H =
-    ( is-∞-constant-is-constant-subsequence-increasing-sequence-ℕ u H) ∘
+    ( is-∞-constant-is-constant-subsequence-increasing-sequence-ℕ H) ∘
     ( rec-Σ (λ v K →
       rec-Σ
         ( λ w I → ( sub-subsequence u v w , I))
@@ -298,12 +324,52 @@ module _
     Σ-subsequence is-∞-constant-sequence u →
     is-∞-constant-sequence u
   is-∞-constant-is-∞-constant-subsequence-decreasing-sequence-ℕ H =
-    ( is-∞-constant-is-constant-subsequence-decreasing-sequence-ℕ u H) ∘
+    ( is-∞-constant-is-constant-subsequence-decreasing-sequence-ℕ H) ∘
     ( rec-Σ
       ( λ v →
         ( rec-Σ (λ w I → (sub-subsequence u v w , I))) ∘
         ( constant-subsequence-is-∞-constant-sequence
           ( sequence-subsequence u v))))
+```
+
+### A decreasing sequence of natural numbers with an increasing subsequence is asymptotically constant
+
+```agda
+module _
+  {u : sequence ℕ} (H : is-decreasing-sequence-ℕ u)
+  where
+
+  is-∞-constant-is-increasing-subsequence-decreasing-subsequence-ℕ :
+    Σ-subsequence is-increasing-sequence-ℕ u → is-∞-constant-sequence u
+  is-∞-constant-is-increasing-subsequence-decreasing-subsequence-ℕ =
+    ( is-∞-constant-is-constant-subsequence-decreasing-sequence-ℕ H) ∘
+    ( rec-Σ
+      ( λ v K →
+        ( v ,
+          is-constant-is-increasing-decreasing-sequence-ℕ
+            ( sequence-subsequence u v)
+            ( K)
+            ( is-decreasing-Π-subsequence-ℕ u H v))))
+```
+
+### An increasing sequence of natural numbers with an decreasing subsequence is asymptotically constant
+
+```agda
+module _
+  {u : sequence ℕ} (H : is-increasing-sequence-ℕ u)
+  where
+
+  is-∞-constant-is-decreasing-subsequence-increasing-subsequence-ℕ :
+    Σ-subsequence is-decreasing-sequence-ℕ u → is-∞-constant-sequence u
+  is-∞-constant-is-decreasing-subsequence-increasing-subsequence-ℕ =
+    ( is-∞-constant-is-constant-subsequence-increasing-sequence-ℕ H) ∘
+    ( rec-Σ
+      ( λ v K →
+        ( v ,
+          is-constant-is-increasing-decreasing-sequence-ℕ
+            ( sequence-subsequence u v)
+            ( is-increasing-Π-subsequence-ℕ u H v)
+            ( K))))
 ```
 
 ### A monotonic value is either stationnary or strictly monotonic
