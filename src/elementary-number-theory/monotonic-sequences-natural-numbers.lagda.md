@@ -447,15 +447,15 @@ module _
           ( f)
           ( ( N) ,
             ( based-ind-ℕ
-            ( N)
-            ( λ n → f N ＝ f n)
-            ( refl)
-            ( λ n I J →
-              rec-coproduct
-                ( J ∙_)
-                ( ex-falso ∘ (K n I))
-                ( decide-is-stationnary-is-decreasing-value-sequence-ℕ f n
-                  ( is-decreasing-value-is-decreasing-sequence-ℕ f H n))))))
+              ( N)
+              ( λ n → f N ＝ f n)
+              ( refl)
+              ( λ n I J →
+                rec-coproduct
+                  ( J ∙_)
+                  ( ex-falso ∘ (K n I))
+                  ( decide-is-stationnary-is-decreasing-value-sequence-ℕ f n
+                    ( is-decreasing-value-is-decreasing-sequence-ℕ f H n))))))
 ```
 
 ### A decreasing sequence of natural numbers with bounded strictly decreasing values is asymptotically constant
