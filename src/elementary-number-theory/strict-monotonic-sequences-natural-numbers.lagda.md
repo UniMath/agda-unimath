@@ -312,7 +312,7 @@ comp-strict-increasing-sequence-ℕ g f =
     ( is-strict-increasing-sequence-strict-increasing-sequence-ℕ f))
 ```
 
-### Strictly increasing sequences of natural numbers grow infinitely
+### A strictly increasing sequence of natural numbers takes arbitrarily large values
 
 ```agda
 module _

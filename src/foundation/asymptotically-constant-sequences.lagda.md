@@ -66,6 +66,9 @@ module _
     ∞-value-∞-constant-sequence ＝ u n
   is-modulus-∞-value-∞-constant-sequence =
     is-modulus-∞-asymptotically (value-∞-asymptotically H)
+
+  const-∞-value-∞-constant-sequence : sequence A
+  const-∞-value-∞-constant-sequence n = ∞-value-∞-constant-sequence
 ```
 
 ## Properties
@@ -120,7 +123,7 @@ module _
   where
 
   eq-∞-value-∞-constant-sequence :
-    eq-∞-sequence (const-sequence (∞-value-∞-constant-sequence H)) u
+    eq-∞-sequence (const-∞-value-∞-constant-sequence H) u
   eq-∞-value-∞-constant-sequence =
     ( modulus-∞-value-∞-constant-sequence H) ,
     ( is-modulus-∞-value-∞-constant-sequence H)
@@ -149,15 +152,12 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l} (u : sequence A) (v : subsequence u)
+  {l : Level} {A : UU l} (u : sequence A) (H : is-∞-constant-sequence u)
   where
 
   eq-∞-value-∞-constant-subsequence :
-    (H : is-∞-constant-sequence u) →
-    eq-∞-sequence
-      ( const-sequence (∞-value-∞-constant-sequence H))
-      ( sequence-subsequence u v)
-  eq-∞-value-∞-constant-subsequence H =
+    Π-subsequence (eq-∞-sequence (const-∞-value-∞-constant-sequence H)) u
+  eq-∞-value-∞-constant-subsequence v =
     ( ( modulus-subsequence u v (modulus-∞-value-∞-constant-sequence H)) ,
       ( λ n I →
         is-modulus-∞-value-∞-constant-sequence H
@@ -167,13 +167,12 @@ module _
             ( n)
             ( I))))
 
-  is-∞-constant-subsequence :
-    is-∞-constant-sequence u → is-∞-constant-sequence (sequence-subsequence u v)
-  is-∞-constant-subsequence H =
+  is-∞-constant-subsequence : Π-subsequence is-∞-constant-sequence u
+  is-∞-constant-subsequence v =
     is-∞-constant-eq-∞-constant-sequence
       ( ∞-value-∞-constant-sequence H)
       ( sequence-subsequence u v)
-      ( eq-∞-value-∞-constant-subsequence H)
+      ( eq-∞-value-∞-constant-subsequence v)
 ```
 
 ### A sequence is asymptotically constant if all its subsequences are asymptotically constant
@@ -181,11 +180,12 @@ module _
 ```agda
 module _
   {l : Level} {A : UU l} (u : sequence A)
-  (H : (v : subsequence u) → is-∞-constant-sequence (sequence-subsequence u v))
+  (H : Π-subsequence is-∞-constant-sequence u)
   where
 
   is-∞-constant-is-∞-constant-subsequence : is-∞-constant-sequence u
-  is-∞-constant-is-∞-constant-subsequence = H (refl-subsequence u)
+  is-∞-constant-is-∞-constant-subsequence =
+    sequence-Π-sequence is-∞-constant-sequence u H
 ```
 
 ### A sequence asymptotically equal to an asymptotically constant sequence is asymptotically constant
@@ -202,7 +202,7 @@ module _
       ( ∞-value-∞-constant-sequence K)
       ( v)
       ( transitive-eq-∞-sequence
-        ( const-sequence (∞-value-∞-constant-sequence K))
+        ( const-∞-value-∞-constant-sequence K)
         ( u)
         ( v)
         ( H)
@@ -273,22 +273,20 @@ module _
   where
 
   eq-∞-subsequence-is-∞-constant-sequence :
-    is-∞-constant-sequence u →
-    ((v : subsequence u) → eq-∞-sequence u (sequence-subsequence u v))
+    is-∞-constant-sequence u → Π-subsequence (eq-∞-sequence u) u
   eq-∞-subsequence-is-∞-constant-sequence H v =
     transitive-eq-∞-sequence
       ( u)
-      ( const-sequence (∞-value-∞-constant-sequence H))
+      ( const-∞-value-∞-constant-sequence H)
       ( sequence-subsequence u v)
-      ( eq-∞-value-∞-constant-subsequence u v H)
+      ( eq-∞-value-∞-constant-subsequence u H v)
       ( symmetric-eq-∞-sequence
-        ( const-sequence (∞-value-∞-constant-sequence H))
+        ( const-∞-value-∞-constant-sequence H)
         ( u)
         ( eq-∞-value-∞-constant-sequence H))
 
   is-∞-constant-eq-∞-sequence-subsequence :
-    ((v : subsequence u) → eq-∞-sequence u (sequence-subsequence u v)) →
-    is-∞-constant-sequence u
+    Π-subsequence (eq-∞-sequence u) u → is-∞-constant-sequence u
   is-∞-constant-eq-∞-sequence-subsequence H =
     is-∞-constant-is-∞-stationnary
       ( u)
@@ -303,7 +301,7 @@ module _
   where
 
   constant-subsequence-is-∞-constant-sequence :
-    Σ (subsequence u) (is-constant-sequence ∘ sequence-subsequence u)
+    Σ-subsequence is-constant-sequence u
   constant-subsequence-is-∞-constant-sequence =
     ( skip-subsequence (modulus-∞-value-∞-constant-sequence H) u) ,
     ( λ p q →

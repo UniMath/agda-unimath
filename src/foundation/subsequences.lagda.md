@@ -190,28 +190,40 @@ module _
       ( refl-leq-ℕ (modulus-subsequence n))
 ```
 
+### Subsequential type families
+
+```agda
+module _
+  {l l1 : Level} {A : UU l} (P : sequence A → UU l1)
+  where
+
+  Π-subsequence : sequence A → UU l1
+  Π-subsequence u = (v : subsequence u) → P (sequence-subsequence u v)
+
+  sequence-Π-sequence : (u : sequence A) → Π-subsequence u → P u
+  sequence-Π-sequence u H = H (refl-subsequence u)
+
+  Σ-subsequence : sequence A → UU l1
+  Σ-subsequence u = Σ (subsequence u) (P ∘ (sequence-subsequence u))
+
+  sequence-Σ-sequence : (u : sequence A) → P u → Σ-subsequence u
+  sequence-Σ-sequence u H = (refl-subsequence u , H)
+```
+
 ### A dependent sequence is asymptotical if and only if all its subsequences are asymptotical
 
 ```agda
 module _
-  {l : Level} (A : ℕ → UU l)
+  {l : Level} (A : ℕ → UU l) (H : asymptotically A)
   where
 
-  asymptotically-sequence-subsequence :
-    asymptotically A →
-    ((B : subsequence A) → asymptotically (sequence-subsequence A B))
-  asymptotically-sequence-subsequence H B =
+  asymptotically-Π-subsequence : Π-subsequence asymptotically A
+  asymptotically-Π-subsequence B =
     map-Σ
       ( is-modulus-dependent-sequence (sequence-subsequence A B))
       ( modulus-subsequence A B)
-      ( λ N K p I →
-        K
-          ( extract-subsequence A B p)
-          ( is-modulus-subsequence A B N p I))
+      ( λ N K p →
+        ( K (extract-subsequence A B p)) ∘
+        ( is-modulus-subsequence A B N p))
       ( H)
-
-  asymptotically-subsequence :
-    ((B : subsequence A) → asymptotically (sequence-subsequence A B)) →
-    asymptotically A
-  asymptotically-subsequence H = H (refl-subsequence A)
 ```
