@@ -167,25 +167,12 @@ module _
             ( n)
             ( I))))
 
-  is-∞-constant-subsequence : Π-subsequence is-∞-constant-sequence u
-  is-∞-constant-subsequence v =
+  is-∞-constant-Π-subsequence : Π-subsequence is-∞-constant-sequence u
+  is-∞-constant-Π-subsequence v =
     is-∞-constant-eq-∞-constant-sequence
       ( ∞-value-∞-constant-sequence H)
       ( sequence-subsequence u v)
       ( eq-∞-value-∞-constant-subsequence v)
-```
-
-### A sequence is asymptotically constant if all its subsequences are asymptotically constant
-
-```agda
-module _
-  {l : Level} {A : UU l} (u : sequence A)
-  (H : Π-subsequence is-∞-constant-sequence u)
-  where
-
-  is-∞-constant-is-∞-constant-subsequence : is-∞-constant-sequence u
-  is-∞-constant-is-∞-constant-subsequence =
-    sequence-Π-sequence is-∞-constant-sequence u H
 ```
 
 ### A sequence asymptotically equal to an asymptotically constant sequence is asymptotically constant
@@ -219,7 +206,7 @@ module _
   where
 
   is-∞-stationnary-sequence : UU l
-  is-∞-stationnary-sequence = asymptotically (λ n → u n ＝ u (succ-ℕ n))
+  is-∞-stationnary-sequence = asymptotically (is-stationnary-value-sequence u)
 
   is-∞-constant-modulus-is-∞-stationnary-sequence :
     (H : is-∞-stationnary-sequence) →

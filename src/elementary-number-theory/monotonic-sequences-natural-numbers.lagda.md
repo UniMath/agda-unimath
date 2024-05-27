@@ -190,9 +190,9 @@ module _
   (u : sequence ℕ)
   where
 
-  is-increasing-subsequence-increasing-sequence-ℕ :
+  is-increasing-Π-subsequence-ℕ :
     (H : is-increasing-sequence-ℕ u) → Π-subsequence is-increasing-sequence-ℕ u
-  is-increasing-subsequence-increasing-sequence-ℕ H v p q I =
+  is-increasing-Π-subsequence-ℕ H v p q I =
     H
       ( extract-subsequence u v p)
       ( extract-subsequence u v q)
@@ -203,9 +203,9 @@ module _
         ( q)
         ( I))
 
-  is-decreasing-subsequence-decreasing-sequence-ℕ :
+  is-decreasing-Π-subsequence-ℕ :
     (H : is-decreasing-sequence-ℕ u) → Π-subsequence is-decreasing-sequence-ℕ u
-  is-decreasing-subsequence-decreasing-sequence-ℕ H v p q I =
+  is-decreasing-Π-subsequence-ℕ H v p q I =
     H
       ( extract-subsequence u v p)
       ( extract-subsequence u v q)
@@ -393,7 +393,7 @@ module _
                 ( J ∙_)
                 ( ex-falso ∘ (K n I))
                 ( decide-is-stationnary-is-decreasing-value-sequence-ℕ f n
-                (is-decreasing-value-is-decreasing-sequence-ℕ f H n))))))
+                  ( is-decreasing-value-is-decreasing-sequence-ℕ f H n))))))
 ```
 
 ### A decreasing sequence of natural numbers with bounded strictly decreasing values is asymptotically constant

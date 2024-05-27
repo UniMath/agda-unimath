@@ -200,14 +200,14 @@ module _
   Π-subsequence : sequence A → UU l1
   Π-subsequence u = (v : subsequence u) → P (sequence-subsequence u v)
 
-  sequence-Π-sequence : (u : sequence A) → Π-subsequence u → P u
-  sequence-Π-sequence u H = H (refl-subsequence u)
+  sequence-Π-subsequence : (u : sequence A) → Π-subsequence u → P u
+  sequence-Π-subsequence u H = H (refl-subsequence u)
 
   Σ-subsequence : sequence A → UU l1
   Σ-subsequence u = Σ (subsequence u) (P ∘ (sequence-subsequence u))
 
-  sequence-Σ-sequence : (u : sequence A) → P u → Σ-subsequence u
-  sequence-Σ-sequence u H = (refl-subsequence u , H)
+  sequence-Σ-subsequence : (u : sequence A) → P u → Σ-subsequence u
+  sequence-Σ-subsequence u H = (refl-subsequence u , H)
 ```
 
 ### A dependent sequence is asymptotical if and only if all its subsequences are asymptotical
