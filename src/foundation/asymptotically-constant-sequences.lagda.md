@@ -297,8 +297,8 @@ module _
           ( H)
           ( skip-ℕ (modulus-∞-value-∞-constant-sequence H) p)
           ( leq-add-ℕ (modulus-∞-value-∞-constant-sequence H) (succ-ℕ p)))) ∙
-        ( is-modulus-∞-value-∞-constant-sequence
-          ( H)
-          ( skip-ℕ (modulus-∞-value-∞-constant-sequence H) q)
-          ( leq-add-ℕ (modulus-∞-value-∞-constant-sequence H) (succ-ℕ q))))
+      ( is-modulus-∞-value-∞-constant-sequence
+        ( H)
+        ( skip-ℕ (modulus-∞-value-∞-constant-sequence H) q)
+        ( leq-add-ℕ (modulus-∞-value-∞-constant-sequence H) (succ-ℕ q))))
 ```
