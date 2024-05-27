@@ -343,13 +343,12 @@ module _
     Σ-subsequence is-increasing-sequence-ℕ u → is-∞-constant-sequence u
   is-∞-constant-is-increasing-subsequence-decreasing-subsequence-ℕ =
     ( is-∞-constant-is-constant-subsequence-decreasing-sequence-ℕ H) ∘
-    ( rec-Σ
+    ( tot
       ( λ v K →
-        ( v ,
-          is-constant-is-increasing-decreasing-sequence-ℕ
-            ( sequence-subsequence u v)
-            ( K)
-            ( is-decreasing-Π-subsequence-ℕ u H v))))
+        is-constant-is-increasing-decreasing-sequence-ℕ
+          ( sequence-subsequence u v)
+          ( K)
+          ( is-decreasing-Π-subsequence-ℕ u H v)))
 ```
 
 ### An increasing sequence of natural numbers with an decreasing subsequence is asymptotically constant
@@ -363,13 +362,12 @@ module _
     Σ-subsequence is-decreasing-sequence-ℕ u → is-∞-constant-sequence u
   is-∞-constant-is-decreasing-subsequence-increasing-subsequence-ℕ =
     ( is-∞-constant-is-constant-subsequence-increasing-sequence-ℕ H) ∘
-    ( rec-Σ
+    ( tot
       ( λ v K →
-        ( v ,
-          is-constant-is-increasing-decreasing-sequence-ℕ
-            ( sequence-subsequence u v)
-            ( is-increasing-Π-subsequence-ℕ u H v)
-            ( K))))
+        is-constant-is-increasing-decreasing-sequence-ℕ
+          ( sequence-subsequence u v)
+          ( is-increasing-Π-subsequence-ℕ u H v)
+          ( K)))
 ```
 
 ### A monotonic value is either stationnary or strictly monotonic
@@ -404,13 +402,11 @@ module _
   is-∞-zero-is-zero-value-decreasing-sequence-ℕ :
     Σ ℕ (λ n → zero-ℕ ＝ f n) → asymptotically (λ n → zero-ℕ ＝ f n)
   is-∞-zero-is-zero-value-decreasing-sequence-ℕ =
-    rec-Σ
-      ( λ n K →
-        ( n ,
-          λ k I →
-            is-zero-leq-zero-ℕ'
-              ( f k)
-              ( inv-tr (leq-ℕ (f k)) K (H n k I))))
+    tot
+      ( λ n K k I →
+        is-zero-leq-zero-ℕ'
+          ( f k)
+          ( inv-tr (leq-ℕ (f k)) K (H n k I)))
 ```
 
 ### A decreasing sequence of natural numbers that has no strictly decreasing value is constant
