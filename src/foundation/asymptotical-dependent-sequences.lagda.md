@@ -24,7 +24,7 @@ open import foundation.universe-levels
 A dependent sequence `A : ℕ → UU l` is **asymptotical** if `A n` is pointed for
 sufficiently large natural numbers `n`.
 
-## Definition
+## Definitions
 
 ### Asymptotical dependent sequences
 
@@ -39,6 +39,8 @@ module _
   asymptotically : UU l
   asymptotically = Σ ℕ is-modulus-dependent-sequence
 ```
+
+### Modulus of an asymptotical dependent sequence
 
 ```agda
 module _

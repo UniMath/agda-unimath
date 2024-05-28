@@ -32,7 +32,7 @@ open import foundation.universe-levels
 A sequence `u` is **asymptotically constant** if `u p ＝ u q` for sufficiently
 large `p` and `q`.
 
-## Definition
+## Definitions
 
 ### Asymptotically constant sequences
 

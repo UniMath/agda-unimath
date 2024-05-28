@@ -28,7 +28,7 @@ open import foundation-core.function-types
 Two sequences `u` and `v` are **asymptotically equal** if `u n ＝ v n` for any
 sufficiently large natural number `n`.
 
-## Definition
+## Definitions
 
 ### The relation of being asymptotically equal sequences
 
@@ -40,6 +40,8 @@ module _
   eq-∞-sequence : UU l
   eq-∞-sequence = asymptotically (λ n → u n ＝ v n)
 ```
+
+### Modulus of asymptotical equality
 
 ```agda
 module _

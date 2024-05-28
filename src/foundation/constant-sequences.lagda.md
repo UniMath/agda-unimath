@@ -22,7 +22,7 @@ open import foundation.universe-levels
 
 A sequence `u` is **constant** if `u p ＝ u q` for all `p` and `q`.
 
-## Definition
+## Definitions
 
 ### Constant sequences
 

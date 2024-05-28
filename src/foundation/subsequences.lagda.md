@@ -32,10 +32,10 @@ open import foundation.universe-levels
 
 A **subsequence** of a [sequence](foundation.sequences.md) `u : ℕ → A` is a
 sequence `u ∘ f` for some
-[strictly increasing](elementary-number-theory.monotonic-sequences-natural-numbers.md)
+[strictly increasing](elementary-number-theory.strict-monotonic-sequences-natural-numbers.md)
 map `f : ℕ → ℕ`.
 
-## Definition
+## Definitions
 
 ### Subsequences
 
@@ -47,6 +47,8 @@ module _
   subsequence : UU lzero
   subsequence = strict-increasing-sequence-ℕ
 ```
+
+### The extracted sequence of a subsequence
 
 ```agda
 module _
