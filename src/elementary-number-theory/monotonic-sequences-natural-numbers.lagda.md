@@ -37,8 +37,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Monotic sequences of natural numbers are functions `f : ℕ → ℕ` that preserve or
-reverse inequality of natural numbers.
+Monotonic sequences of natural numbers are functions `f : ℕ → ℕ` that preserve
+or reverse inequality of natural numbers.
 
 ## Definitions
 
@@ -313,12 +313,11 @@ module _
     is-∞-constant-sequence u
   is-∞-constant-is-∞-constant-subsequence-increasing-sequence-ℕ H =
     ( is-∞-constant-is-constant-subsequence-increasing-sequence-ℕ H) ∘
-    ( rec-Σ (λ v K →
-      rec-Σ
-        ( λ w I → ( sub-subsequence u v w , I))
+    ( rec-Σ
+      ( λ v →
+        ( rec-Σ ( λ w I → ( sub-subsequence u v w , I))) ∘
         ( constant-subsequence-is-∞-constant-sequence
-          ( sequence-subsequence u v)
-          ( K))))
+          ( sequence-subsequence u v))))
 
   is-∞-constant-is-∞-constant-subsequence-decreasing-sequence-ℕ :
     is-decreasing-sequence-ℕ u →
@@ -393,7 +392,45 @@ module _
     map-coproduct inv id (eq-or-le-leq-ℕ (f (succ-ℕ n)) (f n) H)
 ```
 
-### A decreasing sequence that takes the value zero is asymptotically equal to zero
+### Any value of a monotonic sequence of natural numbers that is not a strict value is stationnary
+
+```agda
+module _
+  (f : sequence ℕ)
+  where
+
+  is-stationnary-is-not-strict-value-increasing-sequence-ℕ :
+    is-increasing-sequence-ℕ f →
+    (n : ℕ) →
+    ¬ (is-strict-increasing-value-sequence-ℕ f n) →
+    is-stationnary-value-sequence f n
+  is-stationnary-is-not-strict-value-increasing-sequence-ℕ H n K =
+    map-right-unit-law-coproduct-is-empty
+      ( is-stationnary-value-sequence f n)
+      ( is-strict-increasing-value-sequence-ℕ f n)
+      ( K)
+      ( decide-is-stationnary-is-increasing-value-sequence-ℕ
+        ( f)
+        ( n)
+        ( is-increasing-value-is-increasing-sequence-ℕ f H n))
+
+  is-stationnary-is-not-strict-value-decreasing-sequence-ℕ :
+    is-decreasing-sequence-ℕ f →
+    (n : ℕ) →
+    ¬ (is-strict-decreasing-value-sequence-ℕ f n) →
+    is-stationnary-value-sequence f n
+  is-stationnary-is-not-strict-value-decreasing-sequence-ℕ H n K =
+    map-right-unit-law-coproduct-is-empty
+      ( is-stationnary-value-sequence f n)
+      ( is-strict-decreasing-value-sequence-ℕ f n)
+      ( K)
+      ( decide-is-stationnary-is-decreasing-value-sequence-ℕ
+        ( f)
+        ( n)
+        ( is-decreasing-value-is-decreasing-sequence-ℕ f H n))
+```
+
+### A decreasing sequence of natural numbers that takes the value zero is asymptotically equal to zero
 
 ```agda
 module _
@@ -423,12 +460,11 @@ module _
   is-constant-no-strict-decreasing-value-decreasing-sequence-ℕ K =
     is-constant-is-stationnary-value-sequence f
       ( λ n →
-        map-right-unit-law-coproduct-is-empty
-          ( is-stationnary-value-sequence f n)
-          ( is-strict-decreasing-value-sequence-ℕ f n)
-          ( K n)
-          ( decide-is-stationnary-is-decreasing-value-sequence-ℕ f n
-            ( is-decreasing-value-is-decreasing-sequence-ℕ f H n)))
+        is-stationnary-is-not-strict-value-decreasing-sequence-ℕ
+          ( f)
+          ( H)
+          ( n)
+          ( K n))
 ```
 
 ### A decreasing sequence of natural numbers that asymptotically has no strictly decreasing value is asymptotically constant
@@ -442,22 +478,9 @@ module _
     asymptotically (λ n → ¬ (is-strict-decreasing-value-sequence-ℕ f n)) →
     is-∞-constant-sequence f
   is-∞-constant-∞-no-strict-value-decreasing-sequence-ℕ =
-    rec-Σ
-      ( λ N K →
-        is-∞-constant-eq-∞-constant-sequence
-          ( f N)
-          ( f)
-          ( ( N) ,
-            ( based-ind-ℕ
-              ( N)
-              ( λ n → f N ＝ f n)
-              ( refl)
-              ( λ n I J →
-                rec-coproduct
-                  ( J ∙_)
-                  ( ex-falso ∘ (K n I))
-                  ( decide-is-stationnary-is-decreasing-value-sequence-ℕ f n
-                    ( is-decreasing-value-is-decreasing-sequence-ℕ f H n))))))
+    ( is-∞-constant-is-∞-stationnary-sequence f) ∘
+    ( map-asymptotically-Π
+      ( is-stationnary-is-not-strict-value-decreasing-sequence-ℕ f H))
 ```
 
 ### A decreasing sequence of natural numbers with bounded strictly decreasing values is asymptotically constant
@@ -518,7 +541,7 @@ module _
     is-∞-constant-sequence f
   is-∞-constant-no-∞-strict-decreasing-value-decreasing-sequence-ℕ =
     ( is-∞-constant-∞-no-strict-value-decreasing-sequence-ℕ H) ∘
-    ( rec-Σ (λ N K → (N , λ n I J → K (n , (I , J)))))
+    ( tot (λ n K p I J → K (p , ( I , J))))
 ```
 
 ### A decreasing sequence of natural numbers cannot have arbitrarily large strict decreasing values

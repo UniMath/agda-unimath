@@ -102,22 +102,31 @@ module _
 ### Asymptotical functorial action on asymptotical dependent sequences
 
 ```agda
-map-asymptotically :
-  {l1 l2 : Level} {A : ℕ → UU l1} {B : ℕ → UU l2} →
-  asymptotically (λ n → A n → B n) →
-  asymptotically A →
-  asymptotically B
-map-asymptotically H K =
-  ( max-ℕ (modulus-∞-asymptotically H) (modulus-∞-asymptotically K)) ,
-  ( λ q I →
-    is-modulus-∞-asymptotically H q
-      ( leq-left-leq-max-ℕ q
-        ( modulus-∞-asymptotically H)
-        ( modulus-∞-asymptotically K)
-        ( I))
-      ( is-modulus-∞-asymptotically K q
-        ( leq-right-leq-max-ℕ q
+module _
+  {l1 l2 : Level} {A : ℕ → UU l1} {B : ℕ → UU l2}
+  where
+
+  map-asymptotically :
+    asymptotically (λ n → A n → B n) →
+    asymptotically A →
+    asymptotically B
+  map-asymptotically H K =
+    ( max-ℕ (modulus-∞-asymptotically H) (modulus-∞-asymptotically K)) ,
+    ( λ q I →
+      is-modulus-∞-asymptotically H q
+        ( leq-left-leq-max-ℕ q
           ( modulus-∞-asymptotically H)
           ( modulus-∞-asymptotically K)
-          ( I))))
+          ( I))
+        ( is-modulus-∞-asymptotically K q
+          ( leq-right-leq-max-ℕ q
+            ( modulus-∞-asymptotically H)
+            ( modulus-∞-asymptotically K)
+            ( I))))
+
+  map-asymptotically-Π :
+    ((n : ℕ) → A n → B n) →
+    asymptotically A →
+    asymptotically B
+  map-asymptotically-Π H = map-asymptotically (asymptotically-Π H)
 ```

@@ -228,9 +228,9 @@ module _
   {l : Level} {A : UU l} (u : sequence A)
   where
 
-  is-∞-constant-is-∞-stationnary :
+  is-∞-constant-is-∞-stationnary-sequence :
     is-∞-stationnary-sequence u → is-∞-constant-sequence u
-  is-∞-constant-is-∞-stationnary H =
+  is-∞-constant-is-∞-stationnary-sequence H =
     is-∞-constant-eq-∞-constant-sequence
       ( u (modulus-∞-asymptotically H))
       ( u)
@@ -275,7 +275,7 @@ module _
   is-∞-constant-eq-∞-sequence-subsequence :
     Π-subsequence (eq-∞-sequence u) u → is-∞-constant-sequence u
   is-∞-constant-eq-∞-sequence-subsequence H =
-    is-∞-constant-is-∞-stationnary
+    is-∞-constant-is-∞-stationnary-sequence
       ( u)
       ( H (skip-zero-sequence u))
 ```
