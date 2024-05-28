@@ -29,6 +29,7 @@ open import foundation.propositions
 open import foundation.sequences
 open import foundation.subsequences
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 ```
 
@@ -422,9 +423,10 @@ module _
   is-constant-no-strict-decreasing-value-decreasing-sequence-ℕ K =
     is-constant-is-stationnary-value-sequence f
       ( λ n →
-        rec-coproduct
-          ( id)
-          ( ex-falso ∘ (K n))
+        map-right-unit-law-coproduct-is-empty
+          ( is-stationnary-value-sequence f n)
+          ( is-strict-decreasing-value-sequence-ℕ f n)
+          ( K n)
           ( decide-is-stationnary-is-decreasing-value-sequence-ℕ f n
             ( is-decreasing-value-is-decreasing-sequence-ℕ f H n)))
 ```
