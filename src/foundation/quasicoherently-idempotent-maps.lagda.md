@@ -212,16 +212,14 @@ is-not-prop-is-quasicoherently-idempotent-id-𝕊¹ :
   ¬ (is-prop (is-quasicoherently-idempotent (id {A = 𝕊¹})))
 is-not-prop-is-quasicoherently-idempotent-id-𝕊¹ H =
   nonequal-Π
-    ( loop-htpy-𝕊¹)
+    ( degree-1-refl-htpy-𝕊¹)
     ( refl-htpy)
     ( base-𝕊¹)
-    ( is-not-refl-ev-base-loop-htpy-𝕊¹)
+    ( is-not-refl-ev-base-degree-1-refl-htpy-𝕊¹)
     ( ap pr1
       ( eq-is-prop H
-        { is-quasicoherently-idempotent-is-idempotent-id
-          ( loop-htpy-𝕊¹)}
-        { is-quasicoherently-idempotent-is-idempotent-id
-          ( refl-htpy)}))
+        { is-quasicoherently-idempotent-is-idempotent-id degree-1-refl-htpy-𝕊¹}
+        { is-quasicoherently-idempotent-is-idempotent-id refl-htpy}))
 ```
 
 ### Idempotent maps on sets are quasicoherently idempotent
