@@ -36,7 +36,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-Strictly monotic sequences of natural numbers are functions `f : ℕ → ℕ` that
+Strictly monotonic sequences of natural numbers are functions `f : ℕ → ℕ` that
 preserve or reverse strict inequality of natural numbers.
 
 Strictly decreasing sequences of natural numbers don't exist.
