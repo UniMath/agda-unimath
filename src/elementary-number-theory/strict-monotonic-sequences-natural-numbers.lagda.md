@@ -282,6 +282,12 @@ associative-skip-ℕ i j k =
     ( succ-ℕ)
     ( ( left-successor-law-add-ℕ (i +ℕ j) k) ∙
       ( ap succ-ℕ (associative-add-ℕ i j k)))
+
+le-skip-ℕ : (m n : ℕ) → le-ℕ m (skip-ℕ m n)
+le-skip-ℕ m n = le-succ-leq-ℕ m (m +ℕ n) (leq-add-ℕ m n)
+
+le-skip-ℕ' : (m n : ℕ) → le-ℕ m (skip-ℕ n m)
+le-skip-ℕ' m n = le-succ-leq-ℕ m (n +ℕ m) (leq-add-ℕ' m n)
 ```
 
 ### The composition of strictly increasing sequences of natural numbers is strictly increasing
