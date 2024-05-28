@@ -38,7 +38,7 @@ A fibered equivalence is a fibered map
   |          |
  f|          |g
   |          |
-  V          V
+  ∨          ∨
   X -------> Y
        i
 ```

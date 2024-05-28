@@ -44,18 +44,18 @@ of pushouts is shown in
 
 ```agda
 induction-principle-pushout :
-  { l1 l2 l3 l4 : Level} (l : Level) →
+  { l1 l2 l3 l4 : Level} →
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
   ( f : S → A) (g : S → B) (c : cocone f g X) →
-  UU (lsuc l ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
-induction-principle-pushout l {X = X} f g c =
-  (P : X → UU l) → section (dependent-cocone-map f g c P)
+  UUω
+induction-principle-pushout {X = X} f g c =
+  {l : Level} (P : X → UU l) → section (dependent-cocone-map f g c P)
 
 module _
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X)
-  ( ind-c : induction-principle-pushout l f g c)
-  ( P : X → UU l)
+  ( ind-c : induction-principle-pushout f g c)
+  {l : Level} ( P : X → UU l)
   where
 
   ind-induction-principle-pushout : dependent-cocone f g c P → (x : X) → P x

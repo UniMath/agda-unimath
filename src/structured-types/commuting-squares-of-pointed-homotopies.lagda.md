@@ -27,7 +27,7 @@ A square of [pointed homotopies](structured-types.pointed-homotopies.md)
       f ------> g
       |         |
  left |         | right
-      v         v
+      ∨         ∨
       h ------> i
         bottom
 ```

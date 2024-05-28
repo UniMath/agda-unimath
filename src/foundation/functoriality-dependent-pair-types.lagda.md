@@ -49,7 +49,7 @@ over `H`, expressed as
    C a -----> D (f a)
       \      /
   g' a \    / tr D (H a)
-        V  V
+        ∨  ∨
       D (f' a)         ,
 ```
 

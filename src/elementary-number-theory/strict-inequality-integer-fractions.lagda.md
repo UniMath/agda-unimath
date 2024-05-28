@@ -7,6 +7,7 @@ module elementary-number-theory.strict-inequality-integer-fractions where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-positive-and-negative-integers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
@@ -316,4 +317,25 @@ module _
         ( id)
         ( λ p → concatenate-leq-le-fraction-ℤ x y z p H)
         ( decide-le-leq-fraction-ℤ y x))
+```
+
+### `x < y` if and only if `0 < y - x`
+
+```agda
+module _
+  (x y : fraction-ℤ)
+  where
+
+  eq-translate-diff-le-zero-fraction-ℤ :
+    le-fraction-ℤ zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x)) ＝
+    le-fraction-ℤ x y
+  eq-translate-diff-le-zero-fraction-ℤ =
+    ap
+      ( is-positive-ℤ)
+      ( ( cross-mul-diff-zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x))) ∙
+        ( ap
+          ( add-ℤ ( (numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x)))
+          ( left-negative-law-mul-ℤ
+            ( numerator-fraction-ℤ x)
+            ( denominator-fraction-ℤ y))))
 ```

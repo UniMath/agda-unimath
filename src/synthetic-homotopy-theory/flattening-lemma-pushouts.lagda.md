@@ -45,7 +45,7 @@ given a pushout square
   S -----> B
   |        |
  f|        |j
-  V      ⌜ V
+  ∨      ⌜ ∨
   A -----> X
       i
 ```
@@ -57,7 +57,7 @@ commuting square
   Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
            |                                                 |
            |                                                 |
-           V                                               ⌜ V
+           ∨                                               ⌜ ∨
   Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x)
 ```
 
@@ -125,9 +125,8 @@ module _
 
   flattening-lemma-pushout-statement : UUω
   flattening-lemma-pushout-statement =
-    ( {l : Level} → dependent-universal-property-pushout l f g c) →
-    { l : Level} →
-    universal-property-pushout l
+    dependent-universal-property-pushout f g c →
+    universal-property-pushout
       ( vertical-map-span-flattening-pushout)
       ( horizontal-map-span-flattening-pushout)
       ( cocone-flattening-pushout)
@@ -198,9 +197,8 @@ module _
 
   flattening-lemma-descent-data-pushout-statement : UUω
   flattening-lemma-descent-data-pushout-statement =
-    ( {l : Level} → dependent-universal-property-pushout l f g c) →
-    { l : Level} →
-    universal-property-pushout l
+    dependent-universal-property-pushout f g c →
+    universal-property-pushout
       ( vertical-map-span-flattening-descent-data-pushout)
       ( horizontal-map-span-flattening-descent-data-pushout)
       ( cocone-flattening-descent-data-pushout)
@@ -308,7 +306,7 @@ map of spans:
   Σ (a : A) (PA a) <------- Σ (s : S) (PA (f s)) -----> Σ (b : B) (PB b)
          |                           |                         |
          |                           |                         |
-         v                           v                         v
+         ∨                           ∨                         ∨
 Σ (a : A) (P (i a)) <---- Σ (s : S) (P (i (f s))) ---> Σ (b : B) (P (j b))
 ```
 

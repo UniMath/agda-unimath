@@ -40,7 +40,7 @@ into a [natural square](foundation-core.commuting-squares-of-maps.md)
     X ------> Y
     |         |
     |         |
-    v         v
+    ∨         ∨
    ○ X ----> ○ Y.
         ○ f
 ```
@@ -101,7 +101,7 @@ For every map `f : X → Y` there is a naturality square
     X ------> Y
     |         |
     |         |
-    v         v
+    ∨         ∨
    ○ X ----> ○ Y.
         ○ f
 ```

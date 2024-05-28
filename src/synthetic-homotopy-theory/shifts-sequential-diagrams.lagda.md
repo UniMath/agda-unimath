@@ -10,17 +10,21 @@ module synthetic-homotopy-theory.shifts-sequential-diagrams where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.commuting-triangles-of-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.homotopy-algebra
 open import foundation.identity-types
 open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-concatenation
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
+open import synthetic-homotopy-theory.functoriality-sequential-colimits
 open import synthetic-homotopy-theory.morphisms-sequential-diagrams
 open import synthetic-homotopy-theory.sequential-colimits
 open import synthetic-homotopy-theory.sequential-diagrams
@@ -770,4 +774,202 @@ module _
   pr2 (compute-sequential-colimit-shift-sequential-diagram k) =
     is-sequential-colimit-universal-property _
       ( up-shift-cocone-sequential-diagram k up-standard-sequential-colimit)
+```
+
+### Unshifting cocones under sequential diagrams is homotopic to precomposing them with shift inclusion morphisms
+
+Given a cocone `c`
+
+```text
+         a₁
+     A₁ ---> A₂ ---> ⋯
+     |      /
+     |     /
+  i₁ |    / i₂
+     |   /
+     ∨  ∨
+     X
+```
+
+under `A[1]`, we have two way of turning it into a cocone under `A` --- we can
+unshift it, which gives the cocone
+
+```text
+           a₀      a₁
+       A₀ ---> A₁ ---> A₂ ---> ⋯
+        \      |      /
+         \     |     /
+  i₁ ∘ a₀ \    | i₁ / i₂
+           \   |   /
+            ∨  ∨  ∨
+               X ,
+```
+
+or we can prepend the inclusion morphism
+`hom-shift-sequential-diagram : A → A[1]` to get
+
+```text
+         a₀
+     A₀ ---> A₁ ---> ⋯
+     |       |
+  a₀ |       | a₁
+     ∨   a₁  ∨
+     A₁ ---> A₂ ---> ⋯
+     |      /
+     |     /
+  i₁ |    / i₂
+     |   /
+     ∨  ∨
+     X .
+```
+
+We show that these two cocones are homotopic.
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1}
+  {X : UU l2}
+  (c : cocone-sequential-diagram (shift-once-sequential-diagram A) X)
+  where
+
+  htpy-cocone-unshift-cocone-map-cocone-hom-shift-sequential-diagram :
+    htpy-cocone-sequential-diagram
+      ( unshift-once-cocone-sequential-diagram A c)
+      ( map-cocone-hom-sequential-diagram
+        ( hom-shift-once-sequential-diagram A)
+        ( c))
+  pr1 htpy-cocone-unshift-cocone-map-cocone-hom-shift-sequential-diagram
+    zero-ℕ = refl-htpy
+  pr1 htpy-cocone-unshift-cocone-map-cocone-hom-shift-sequential-diagram
+    (succ-ℕ n) = coherence-cocone-sequential-diagram c n
+  pr2 htpy-cocone-unshift-cocone-map-cocone-hom-shift-sequential-diagram
+    zero-ℕ = inv-htpy-right-unit-htpy
+  pr2 htpy-cocone-unshift-cocone-map-cocone-hom-shift-sequential-diagram
+    (succ-ℕ n) =
+    left-whisker-concat-htpy
+      ( coherence-cocone-sequential-diagram c n)
+      ( inv-htpy-right-unit-htpy)
+```
+
+As a corollary, taking a cocone `c` under `A`, shifting it and prepending the
+shift inclusion morphism results in a cocone homotopic to `c`, i.e.,
+
+```text
+         a₀      a₁
+     A₀ ---> A₁ ---> A₂ ---> ⋯
+     |       |       |                     a₀      a₁
+  a₀ |       | a₁    | a₂              A₀ ---> A₁ ---> A₂ ---> ⋯
+     ∨   a₁  ∨   a₂  ∨                  \      |      /
+     A₁ ---> A₂ ---> A₃ ---> ⋯    ~      \     | i₁  /
+      \      |      /                  i₀ \    |    / i₂
+       \     |     /                       \   |   /
+     i₁ \    | i₂ / i₃                      ∨  ∨  ∨
+         \   |   /                             X .
+          ∨  ∨  ∨
+             X
+```
+
+**Proof:** We first use the above lemma, which says that the left cocone is
+homotopic to `c[1][-1]`, and then we use the fact that unshifting is a
+retraction.
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1}
+  {X : UU l2} (c : cocone-sequential-diagram A X)
+  where
+
+  inv-compute-map-cocone-hom-shift-sequential-diagram :
+    htpy-cocone-sequential-diagram
+      ( c)
+      ( map-cocone-hom-sequential-diagram
+        ( hom-shift-once-sequential-diagram A)
+        ( shift-once-cocone-sequential-diagram c))
+  inv-compute-map-cocone-hom-shift-sequential-diagram =
+    concat-htpy-cocone-sequential-diagram
+      ( inv-htpy-is-retraction-unshift-once-cocone-sequential-diagram c)
+      ( htpy-cocone-unshift-cocone-map-cocone-hom-shift-sequential-diagram
+        ( shift-once-cocone-sequential-diagram c))
+
+  compute-map-cocone-hom-shift-sequential-diagram :
+    htpy-cocone-sequential-diagram
+      ( map-cocone-hom-sequential-diagram
+        ( hom-shift-once-sequential-diagram A)
+        ( shift-once-cocone-sequential-diagram c))
+      ( c)
+  compute-map-cocone-hom-shift-sequential-diagram =
+    inv-htpy-cocone-sequential-diagram
+      ( inv-compute-map-cocone-hom-shift-sequential-diagram)
+```
+
+### Inclusion morphisms of shifting sequential diagrams induce the identity map on sequential colimits
+
+Given a sequential diagram `(A, a)` with a colimit `X`, then we know that for
+every natural number `k`
+
+- `X` is also a sequential colimit of `A[k]` and
+- there is a morphism `A → A[k]`, inducing a map between colimits.
+
+Together they give a map `X → X`, which we show here to be the identity map.
+
+**Proof:** By induction on `k`; for the base case, observe that `A → A[0]` is
+the identity morphism, which gets sent to the identity map by functoriality of
+sequential colimits.
+
+For the inductive case, observe that the inclusion morphism `A → A[k + 1]` is
+defined as the composition `A → A[k] → A[k + 1]`, so by functoriality the
+induced map is the composition of the maps induced by `A → A[k]` and
+`A[k] → A[k + 1]`. The first induced map is the identity map by the inductive
+hypothesis. The second induced map is defined to be the map obtained by the
+universal property of `X` as a colimit of `A[k]` from the cocone `c[k + 1]`
+precomposed by the inclusion `A[k] → A[k + 1]`. We have seen above that this
+precomposition results in a cocone homotopic to `c[k]`, so the map induced by
+`A[k] → A[k + 1]` is homotopic to the one induced by `c[k]`. But `c[k]` is the
+cocone of the sequential colimit of `A[k]`, so it also induces the identity map.
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1}
+  {X : UU l2} {c : cocone-sequential-diagram A X}
+  (up-c : universal-property-sequential-colimit c)
+  where
+
+  compute-map-colimit-hom-shift-once-sequential-diagram :
+    map-sequential-colimit-hom-sequential-diagram
+      ( up-c)
+      ( shift-once-cocone-sequential-diagram c)
+      ( hom-shift-once-sequential-diagram A) ~
+    id
+  compute-map-colimit-hom-shift-once-sequential-diagram =
+    ( htpy-map-universal-property-htpy-cocone-sequential-diagram
+      ( up-c)
+      ( compute-map-cocone-hom-shift-sequential-diagram c)) ∙h
+    ( compute-map-universal-property-sequential-colimit-id up-c)
+
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1}
+  {X : UU l2} {c : cocone-sequential-diagram A X}
+  (up-c : universal-property-sequential-colimit c)
+  where
+
+  compute-map-colimit-hom-shift-sequential-diagram :
+    (k : ℕ) →
+    map-sequential-colimit-hom-sequential-diagram
+      ( up-c)
+      ( shift-cocone-sequential-diagram k c)
+      ( hom-shift-sequential-diagram A k) ~
+    id
+  compute-map-colimit-hom-shift-sequential-diagram zero-ℕ =
+    preserves-id-map-sequential-colimit-hom-sequential-diagram up-c
+  compute-map-colimit-hom-shift-sequential-diagram (succ-ℕ k) =
+    ( preserves-comp-map-sequential-colimit-hom-sequential-diagram
+      ( up-c)
+      ( up-shift-cocone-sequential-diagram k up-c)
+      ( shift-cocone-sequential-diagram (succ-ℕ k) c)
+      ( hom-shift-once-sequential-diagram (shift-sequential-diagram k A))
+      ( hom-shift-sequential-diagram A k)) ∙h
+    ( horizontal-concat-htpy
+      ( compute-map-colimit-hom-shift-once-sequential-diagram
+        ( up-shift-cocone-sequential-diagram k up-c))
+      ( compute-map-colimit-hom-shift-sequential-diagram k))
 ```

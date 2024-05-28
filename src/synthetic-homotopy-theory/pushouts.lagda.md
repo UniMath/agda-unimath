@@ -57,7 +57,7 @@ A **pushout** of `𝒮` is an initial type `X` equipped with a
     S -----> B
     |        |
   f |   H    | j
-    V        V
+    ∨        ∨
     A -----> X,
         i
 ```
@@ -212,7 +212,7 @@ module _
       ( htpy-compute-dependent-cogap f g c)
 
   induction-principle-pushout' :
-    {l : Level} → induction-principle-pushout l f g (cocone-pushout f g)
+    induction-principle-pushout f g (cocone-pushout f g)
   induction-principle-pushout' P =
     ( dependent-cogap f g , is-section-dependent-cogap)
 
@@ -232,19 +232,19 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B)
   where
 
   dup-pushout :
-    dependent-universal-property-pushout l f g (cocone-pushout f g)
+    dependent-universal-property-pushout f g (cocone-pushout f g)
   dup-pushout =
     dependent-universal-property-pushout-induction-principle-pushout f g
       ( cocone-pushout f g)
       ( induction-principle-pushout' f g)
 
   equiv-dup-pushout :
-    (P : pushout f g → UU l) →
+    {l : Level} (P : pushout f g → UU l) →
     ((x : pushout f g) → P x) ≃ dependent-cocone f g (cocone-pushout f g) P
   pr1 (equiv-dup-pushout P) = dependent-cocone-map f g (cocone-pushout f g) P
   pr2 (equiv-dup-pushout P) = dup-pushout P
@@ -297,9 +297,9 @@ module _
 
 ```agda
 up-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  {l1 l2 l3 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) →
-  universal-property-pushout l4 f g (cocone-pushout f g)
+  universal-property-pushout f g (cocone-pushout f g)
 up-pushout f g P =
   is-equiv-is-invertible
     ( cogap f g)
@@ -432,7 +432,7 @@ module _
   where
 
   universal-property-pushout-is-pushout :
-    is-pushout f g c → {l : Level} → universal-property-pushout l f g c
+    is-pushout f g c → universal-property-pushout f g c
   universal-property-pushout-is-pushout po =
     up-pushout-up-pushout-is-equiv f g
       ( cocone-pushout f g)
@@ -446,7 +446,7 @@ module _
       ( up-pushout f g)
 
   is-pushout-universal-property-pushout :
-    ({l : Level} → universal-property-pushout l f g c) → is-pushout f g c
+    universal-property-pushout f g c → is-pushout f g c
   is-pushout-universal-property-pushout =
     is-equiv-up-pushout-up-pushout f g
       ( cocone-pushout f g)
@@ -473,11 +473,11 @@ Given a pushout square with a
    S ----> B
    |       | \
  f |    inr|  \  n
-   v    ⌜  v   \
+   ∨     ⌜ ∨   \
    A ----> ∙    \
     \ inl   \   |
   m  \  cogap\  |
-      \       ∨ v
+      \       ∨ ∨
        \-----> X
 ```
 
@@ -487,7 +487,7 @@ we have, for every `x : X`, a pushout square of fibers:
     fiber (m ∘ f) x ---> fiber (cogap ∘ inr) x
            |                       |
            |                       |
-           v                    ⌜  v
+           ∨                     ⌜ ∨
  fiber (cogap ∘ inl) x ----> fiber cogap x
 ```
 
@@ -545,7 +545,7 @@ square commute (almost) trivially.
         ( horizontal-map-span-cogap-fiber)
         ( vertical-map-span-cogap-fiber)
         ( fiber (cogap f g c) x))
-      ( universal-property-pushout l
+      ( universal-property-pushout-Level l
         ( horizontal-map-span-cogap-fiber)
         ( vertical-map-span-cogap-fiber))
 
@@ -601,7 +601,7 @@ We record the following auxiliary lemma which says that if we have types `T`,
    T ----------> G
    |             |
  u |             |
-   v           ⌜ v
+   ∨           ⌜ ∨
    F ----> fiber cogap x
 ```
 
@@ -633,7 +633,7 @@ fibers.
     universal-property-pushout-cogap-fiber-up-to-equiv :
       { l : Level} →
       ( Σ ( cocone u v (fiber (cogap f g c) x))
-          ( λ c → universal-property-pushout l u v c))
+          ( λ c → universal-property-pushout-Level l u v c))
     universal-property-pushout-cogap-fiber-up-to-equiv {l} =
       universal-property-pushout-extension-by-equivalences
         ( horizontal-map-span-cogap-fiber)
@@ -661,8 +661,8 @@ module _
   where
 
   universal-property-pushout-swap-cocone-universal-property-pushout :
-    {l : Level} → universal-property-pushout l f g c →
-    universal-property-pushout l g f (swap-cocone f g X c)
+    universal-property-pushout f g c →
+    universal-property-pushout g f (swap-cocone f g X c)
   universal-property-pushout-swap-cocone-universal-property-pushout up Y =
     is-equiv-equiv'
       ( id-equiv)

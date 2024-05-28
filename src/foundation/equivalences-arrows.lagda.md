@@ -32,7 +32,7 @@ function `g : X → Y` is a [morphism of arrows](foundation.morphisms-arrows.md)
     A -----> X
     |   ≃    |
   f |        | g
-    V   ≃    V
+    ∨   ≃    ∨
     B -----> Y
         j
 ```

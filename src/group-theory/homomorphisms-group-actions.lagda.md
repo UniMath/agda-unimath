@@ -40,7 +40,7 @@ that for any element `g` of the [group](group-theory.groups.md) `G` the square
       X -----> Y
       |        |
   μ g |        | μ g
-      V        V
+      ∨        ∨
       X -----> Y
           f
 ```

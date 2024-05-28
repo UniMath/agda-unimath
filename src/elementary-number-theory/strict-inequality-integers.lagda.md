@@ -27,6 +27,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
@@ -142,6 +143,20 @@ le-succ-ℤ x =
     ( is-positive-int-positive-ℤ one-positive-ℤ)
 ```
 
+### Strict inequality on the integers is invariant by translation
+
+```agda
+module _
+  (z x y : ℤ)
+  where
+
+  eq-translate-left-le-ℤ : le-ℤ (z +ℤ x) (z +ℤ y) ＝ le-ℤ x y
+  eq-translate-left-le-ℤ = ap is-positive-ℤ (left-translation-diff-ℤ y x z)
+
+  eq-translate-right-le-ℤ : le-ℤ (x +ℤ z) (y +ℤ z) ＝ le-ℤ x y
+  eq-translate-right-le-ℤ = ap is-positive-ℤ (right-translation-diff-ℤ y x z)
+```
+
 ### Addition on the integers preserves strict inequality
 
 ```agda
@@ -193,6 +208,9 @@ module _
 
     is-positive-le-zero-ℤ : le-ℤ zero-ℤ x → is-positive-ℤ x
     is-positive-le-zero-ℤ = is-positive-eq-ℤ (right-zero-law-diff-ℤ x)
+
+    eq-le-zero-is-positive-ℤ : is-positive-ℤ x ＝ le-ℤ zero-ℤ x
+    eq-le-zero-is-positive-ℤ = ap is-positive-ℤ (inv (right-zero-law-diff-ℤ x))
 ```
 
 ### If an integer is greater than a positive integer it is positive

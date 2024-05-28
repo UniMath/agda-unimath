@@ -9,13 +9,17 @@ module foundation.identity-systems where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.families-of-equivalences
+open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
@@ -79,27 +83,38 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
   where
 
+  map-section-is-identity-system-is-torsorial :
+    is-torsorial B →
+    {l3 : Level} (P : (x : A) (y : B x) → UU l3) →
+    P a b → (x : A) (y : B x) → P x y
+  map-section-is-identity-system-is-torsorial H P p x y =
+    tr (fam-Σ P) (eq-is-contr H) p
+
+  is-section-map-section-is-identity-system-is-torsorial :
+    (H : is-torsorial B) →
+    {l3 : Level} (P : (x : A) (y : B x) → UU l3) →
+    is-section
+      ( ev-refl-identity-system b)
+      ( map-section-is-identity-system-is-torsorial H P)
+  is-section-map-section-is-identity-system-is-torsorial H P p =
+    ap
+      ( λ t → tr (fam-Σ P) t p)
+      ( eq-is-contr'
+        ( is-prop-is-contr H (a , b) (a , b))
+        ( eq-is-contr H)
+        ( refl))
+
   abstract
     is-identity-system-is-torsorial :
-      (H : is-torsorial B) → is-identity-system B a b
-    pr1 (is-identity-system-is-torsorial H P) p x y =
-      tr
-        ( fam-Σ P)
-        ( eq-is-contr H)
-        ( p)
-    pr2 (is-identity-system-is-torsorial H P) p =
-      ap
-        ( λ t → tr (fam-Σ P) t p)
-        ( eq-is-contr'
-          ( is-prop-is-contr H (a , b) (a , b))
-          ( eq-is-contr H)
-          ( refl))
+      is-torsorial B → is-identity-system B a b
+    is-identity-system-is-torsorial H P =
+      ( map-section-is-identity-system-is-torsorial H P ,
+        is-section-map-section-is-identity-system-is-torsorial H P)
 
   abstract
     is-torsorial-is-identity-system :
       is-identity-system B a b → is-torsorial B
-    pr1 (pr1 (is-torsorial-is-identity-system H)) = a
-    pr2 (pr1 (is-torsorial-is-identity-system H)) = b
+    pr1 (is-torsorial-is-identity-system H) = (a , b)
     pr2 (is-torsorial-is-identity-system H) (x , y) =
       pr1 (H (λ x' y' → (a , b) ＝ (x' , y'))) refl x y
 

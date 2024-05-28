@@ -39,7 +39,7 @@ that the square
   P A B X ---------> P A B Y
       |                |
       |                |
-      V                V
+      ∨                ∨
       X -------------> Y
                f
 ```

@@ -29,7 +29,7 @@ e)`and`(B, f)`is a map`h`from`A`to`B` such that the square
   A -----> B
   |        |
  e|        |f
-  v        v
+  ∨        ∨
   A -----> B
       h
 ```
