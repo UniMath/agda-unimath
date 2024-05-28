@@ -22,6 +22,7 @@ open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 
 open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.loop-homotopy-circle
 ```
 
 </details>
@@ -36,32 +37,6 @@ This multiplicative structure carries over to the homotopy type of the
 [circle](synthetic-homotopy-theory.circle.md).
 
 ## Definitions
-
-### The degree 1 reflexivity homotopy on the circle
-
-```agda
-degree-1-refl-htpy-𝕊¹ : (x : 𝕊¹) → x ＝ x
-degree-1-refl-htpy-𝕊¹ =
-  function-apply-dependent-universal-property-𝕊¹
-    ( eq-value id id)
-    ( loop-𝕊¹)
-    ( map-compute-dependent-identification-eq-value-id-id
-      ( loop-𝕊¹)
-      ( loop-𝕊¹)
-      ( loop-𝕊¹)
-      ( refl))
-
-compute-base-degree-1-refl-htpy-𝕊¹ : degree-1-refl-htpy-𝕊¹ base-𝕊¹ ＝ loop-𝕊¹
-compute-base-degree-1-refl-htpy-𝕊¹ =
-  base-dependent-universal-property-𝕊¹
-    ( eq-value id id)
-    ( loop-𝕊¹)
-    ( map-compute-dependent-identification-eq-value-id-id
-      ( loop-𝕊¹)
-      ( loop-𝕊¹)
-      ( loop-𝕊¹)
-      ( refl))
-```
 
 ### Multiplication on the circle
 
@@ -83,8 +58,8 @@ eq-id-id-𝕊¹-Pointed-Type =
   dependent-identification-Mul-Π-𝕊¹ loop-𝕊¹
     ( id-pointed-map)
     ( id-pointed-map)
-    ( degree-1-refl-htpy-𝕊¹)
-    ( inv compute-base-degree-1-refl-htpy-𝕊¹ ∙ inv right-unit)
+    ( loop-htpy-𝕊¹)
+    ( inv compute-base-loop-htpy-𝕊¹ ∙ inv right-unit)
 
 mul-Π-𝕊¹ : Π-𝕊¹ (Mul-Π-𝕊¹) (id-pointed-map) (eq-id-id-𝕊¹-Pointed-Type)
 mul-Π-𝕊¹ =
@@ -98,28 +73,6 @@ mul-𝕊¹ x = pr1 (pr1 mul-Π-𝕊¹ x)
 ```
 
 ## Properties
-
-### The degree 1 reflexivity homotopy on the circle is nontrivial
-
-```agda
-abstract
-  is-not-refl-ev-base-degree-1-refl-htpy-𝕊¹ :
-    degree-1-refl-htpy-𝕊¹ base-𝕊¹ ≠ refl
-  is-not-refl-ev-base-degree-1-refl-htpy-𝕊¹ p =
-    is-nontrivial-loop-𝕊¹ (inv (compute-base-degree-1-refl-htpy-𝕊¹) ∙ p)
-
-is-nontrivial-degree-1-refl-htpy-𝕊¹' : ¬ (degree-1-refl-htpy-𝕊¹ ~ refl-htpy)
-is-nontrivial-degree-1-refl-htpy-𝕊¹' H =
-  is-not-refl-ev-base-degree-1-refl-htpy-𝕊¹ (H base-𝕊¹)
-
-is-nontrivial-degree-1-refl-htpy-𝕊¹ : degree-1-refl-htpy-𝕊¹ ≠ refl-htpy
-is-nontrivial-degree-1-refl-htpy-𝕊¹ =
-  nonequal-Π
-    ( degree-1-refl-htpy-𝕊¹)
-    ( refl-htpy)
-    ( base-𝕊¹)
-    ( is-not-refl-ev-base-degree-1-refl-htpy-𝕊¹)
-```
 
 ### The unit laws of multiplication on the circle
 
