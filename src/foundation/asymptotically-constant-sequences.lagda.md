@@ -155,9 +155,9 @@ module _
   {l : Level} {A : UU l} (u : sequence A) (H : is-∞-constant-sequence u)
   where
 
-  eq-∞-value-∞-constant-subsequence :
+  eq-∞-value-∞-constant-Π-subsequence :
     Π-subsequence (eq-∞-sequence (const-∞-value-∞-constant-sequence H)) u
-  eq-∞-value-∞-constant-subsequence v =
+  eq-∞-value-∞-constant-Π-subsequence v =
     ( ( modulus-subsequence u v (modulus-∞-value-∞-constant-sequence H)) ,
       ( λ n I →
         is-modulus-∞-value-∞-constant-sequence H
@@ -172,7 +172,7 @@ module _
     is-∞-constant-eq-∞-constant-sequence
       ( ∞-value-∞-constant-sequence H)
       ( sequence-subsequence u v)
-      ( eq-∞-value-∞-constant-subsequence v)
+      ( eq-∞-value-∞-constant-Π-subsequence v)
 ```
 
 ### A sequence asymptotically equal to an asymptotically constant sequence is asymptotically constant
@@ -266,7 +266,7 @@ module _
       ( u)
       ( const-∞-value-∞-constant-sequence H)
       ( sequence-subsequence u v)
-      ( eq-∞-value-∞-constant-subsequence u H v)
+      ( eq-∞-value-∞-constant-Π-subsequence u H v)
       ( symmetric-eq-∞-sequence
         ( const-∞-value-∞-constant-sequence H)
         ( u)
