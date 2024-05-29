@@ -117,6 +117,11 @@ module _
 #### Computing `tr²` along the unit laws for vertical concatenation of identifications
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {x y : A}
+  {B : A → UU l2}
+  where
+
   tr²-left-unit :
     (p : x ＝ y) → tr² B left-unit ~ tr-concat refl p
   tr²-left-unit p = refl-htpy
@@ -160,10 +165,10 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {x y : A} {p p' : x ＝ y} {α α' α'' : p ＝ p'}
   where
 
   tr³-concat :
-    {x y : A} {p p' : x ＝ y} {α α' α'' : p ＝ p'}
     (γ : α ＝ α') (δ : α' ＝ α'') → tr³ B (γ ∙ δ) ~ (tr³ B γ) ∙h (tr³ B δ)
   tr³-concat γ δ b = ap-concat (λ t → tr² B t b) γ δ
 ```
@@ -171,8 +176,12 @@ module _
 #### Computing `tr³` along the horizontal concatination of identifications
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {x y : A} {p p' p'' : x ＝ y}
+  {α α' : p ＝ p'} {β β' : p' ＝ p''} {B : A → UU l2}
+  where
+
   tr³-horizontal-concat :
-    {x y : A} {p p' p'' : x ＝ y} {α α' : p ＝ p'} {β β' : p' ＝ p''}
     (γ : α ＝ α') (δ : β ＝ β') →
     coherence-square-homotopies
       ( tr²-concat α β)
@@ -185,20 +194,25 @@ module _
 #### Computing `tr³` along the inverse of an identification
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {x y : A} {p p' : x ＝ y} {α α' : p ＝ p'}
+  {B : A → UU l2}
+  where
+
   tr³-inv :
-    {x y : A} {p p' : x ＝ y} {α α' : p ＝ p'} (γ : α ＝ α') →
+   (γ : α ＝ α') →
     tr³ B (inv γ) ~ inv-htpy (tr³ B γ)
   tr³-inv γ b = ap-inv (λ t → tr² B t b) γ
 
   left-inv-law-tr³ :
-    {x y : A} {p p' : x ＝ y} {α α' : p ＝ p'} (γ : α ＝ α') →
+    (γ : α ＝ α') →
     tr³ B (inv γ) ∙h tr³ B γ ~ refl-htpy
   left-inv-law-tr³ γ =
     ( right-whisker-concat-htpy (tr³-inv γ) (tr³ B γ)) ∙h
     ( left-inv-htpy (tr³ B γ))
 
   right-inv-law-tr³ :
-    {x y : A} {p p' : x ＝ y} {α α' : p ＝ p'} (γ : α ＝ α') →
+    (γ : α ＝ α') →
     tr³ B γ ∙h tr³ B (inv γ) ~ refl-htpy
   right-inv-law-tr³ γ =
     ( left-whisker-concat-htpy (tr³ B γ) (tr³-inv γ)) ∙h
@@ -208,13 +222,18 @@ module _
 #### Computing `tr³` along the unit laws for vertical concatenation of identifications
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {x y : A} {p q : x ＝ y} 
+  {B : A → UU l2}
+  where
+
   tr³-right-unit :
-    {x y : A} {p q : x ＝ y} (α : p ＝ q) →
+    (α : p ＝ q) →
     tr³ B (right-unit {p = α}) ~ tr²-concat α refl ∙h right-unit-htpy
   tr³-right-unit refl = refl-htpy
 
   tr³-left-unit :
-    {x y : A} {p q : x ＝ y} (α : p ＝ q) →
+    (α : p ＝ q) →
     tr³ B (left-unit {p = α}) ~ tr²-concat refl α ∙h left-unit-htpy
   tr³-left-unit α = refl-htpy
 ```
@@ -222,8 +241,13 @@ module _
 #### Computing tr³ along the unit laws for whiskering of identifications
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {x y : A}
+  {B : A → UU l2}
+  where
+
   tr³-left-unit-law-left-whisker-concat :
-    {x y : A} {q q' : x ＝ y} (β : q ＝ q') →
+    {q q' : x ＝ y} (β : q ＝ q') →
     coherence-square-homotopies
       ( inv-htpy right-unit-htpy)
       ( refl-htpy)
@@ -232,7 +256,7 @@ module _
   tr³-left-unit-law-left-whisker-concat refl = refl-htpy
 
   tr³-right-unit-law-right-whisker-concat :
-    {x y : A} {p p' : x ＝ y} (α : p ＝ p') →
+    {p p' : x ＝ y} (α : p ＝ p') →
     coherence-square-homotopies
       ( ( tr²-concat (right-whisker-concat α refl) right-unit) ∙h
       ( left-whisker-concat-htpy
@@ -253,8 +277,13 @@ module _
 The above coherences have simplified forms when we consider 2-loops
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {x : A}
+  {B : A → UU l2}
+  where
+
   tr³-left-unit-law-left-whisker-concat-Ω² :
-    {x : A} (β : refl {x = x} ＝ refl) →
+    (β : refl {x = x} ＝ refl) →
     coherence-square-homotopies
       ( inv-htpy right-unit-htpy)
       ( refl-htpy)
@@ -264,7 +293,7 @@ The above coherences have simplified forms when we consider 2-loops
     tr³-left-unit-law-left-whisker-concat β
 
   tr³-right-unit-law-right-whisker-concat-Ω² :
-    {x : A} (α : refl {x = x} ＝ refl) →
+    (α : refl {x = x} ＝ refl) →
     coherence-square-homotopies
       ( inv-htpy right-unit-htpy)
       ( tr³ B (inv (right-unit-law-right-whisker-concat α ∙ right-unit)))
@@ -488,8 +517,11 @@ module _
 
   compute-tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² :
     (α β : refl {x = a} ＝ refl) →
-    ( ( inv-htpy right-unit-htpy) ∙h
-    ( tr²-left-whisker-concat-tr²-right-whisker-concat α β)) ~
+    ( inv-coherence-square-homotopies-horizontal-refl
+      ( ( tr² B (left-whisker-concat refl α)) ∙h
+      ( tr² B (right-whisker-concat β refl) ))
+      ( tr² B α ∙h id ·l (tr² B β))
+      ( tr²-left-whisker-concat-tr²-right-whisker-concat α β)) ~
     ( tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² α β)
   compute-tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² α β =
     ( vertical-pasting-inv-coherence-square-homotopies-horizontal-refl
@@ -518,8 +550,11 @@ module _
 
   compute-tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² :
     (α β : refl {x = a} ＝ refl) →
-    ( ( inv-htpy right-unit-htpy) ∙h
-    ( tr²-right-whisker-concat-tr²-left-whisker-concat α β)) ~
+    ( inv-coherence-square-homotopies-horizontal-refl
+      ( ( tr² B (right-whisker-concat α refl)) ∙h
+      ( tr² B (left-whisker-concat refl β)))
+      ( id ·l (tr² B α) ∙h tr² B β)
+      ( tr²-right-whisker-concat-tr²-left-whisker-concat α β)) ~
     ( tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² α β)
   compute-tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² α β =
     ( vertical-pasting-inv-coherence-square-homotopies-horizontal-refl

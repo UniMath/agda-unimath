@@ -152,7 +152,7 @@ Conversely, given a coherence square as above, we can obtain a homotopy
       ( refl-htpy) →
     H ~ H'
   inv-coherence-square-homotopies-horizontal-refl K =
-    inv-htpy right-unit-htpy ∙h K
+    inv-htpy-right-unit-htpy ∙h K
 ```
 
 ### Squares with `refl-htpy` on the left and right

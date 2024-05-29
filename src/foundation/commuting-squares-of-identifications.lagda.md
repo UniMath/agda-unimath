@@ -602,23 +602,25 @@ module _
     (top-left : a ＝ b) (top-right : a ＝ b)
     (bottom-left : b ＝ c) (bottom-right : b ＝ c)
     (α : top-left ＝ top-right) (β : bottom-left ＝ bottom-right) →
-    ( ( inv right-unit) ∙
-    ( vertical-pasting-coherence-square-identifications
-      ( refl)
-      ( top-left)
-      ( top-right)
-      ( refl)
-      ( bottom-left)
-      ( bottom-right)
-      ( refl)
-      ( coherence-square-identifications-horizontal-refl
+    ( inv-coherence-square-identifications-horizontal-refl
+      ( top-left ∙ bottom-left)
+      ( top-right ∙ bottom-right)
+      ( vertical-pasting-coherence-square-identifications
+        ( refl)
         ( top-left)
         ( top-right)
-        ( α))
-      ( coherence-square-identifications-horizontal-refl
+        ( refl)
         ( bottom-left)
         ( bottom-right)
-        ( β)))) ＝
+        ( refl)
+        ( coherence-square-identifications-horizontal-refl
+          ( top-left)
+          ( top-right)
+          ( α))
+        ( coherence-square-identifications-horizontal-refl
+          ( bottom-left)
+          ( bottom-right)
+          ( β)))) ＝
       ( horizontal-concat-Id² α β)
   vertical-pasting-coherence-square-identifications-horizontal-refl
     refl refl refl refl refl refl =
@@ -629,17 +631,19 @@ module _
     (bottom-left : b ＝ c) (bottom-right : b ＝ c)
     (α : coherence-square-identifications refl top-left top-right refl)
     (β : coherence-square-identifications refl bottom-left bottom-right refl) →
-    ( ( inv right-unit) ∙
-    ( vertical-pasting-coherence-square-identifications
-      ( refl)
-      ( top-left)
-      ( top-right)
-      ( refl)
-      ( bottom-left)
-      ( bottom-right)
-      ( refl)
-      ( α)
-      ( β))) ＝
+    ( inv-coherence-square-identifications-horizontal-refl
+      ( top-left ∙ bottom-left)
+      ( top-right ∙ bottom-right)
+      ( vertical-pasting-coherence-square-identifications
+        ( refl)
+        ( top-left)
+        ( top-right)
+        ( refl)
+        ( bottom-left)
+        ( bottom-right)
+        ( refl)
+        ( α)
+        ( β))) ＝
       ( horizontal-concat-Id²
         ( inv-coherence-square-identifications-horizontal-refl
           ( top-left)

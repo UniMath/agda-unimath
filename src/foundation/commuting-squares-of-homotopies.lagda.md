@@ -571,23 +571,25 @@ module _
 
   vertical-pasting-coherence-square-homotopies-horizontal-refl :
     (H : top-left ~ top-right) (K : bottom-left ~ bottom-right) →
-    ( ( inv-htpy right-unit-htpy) ∙h
-    ( vertical-pasting-coherence-square-homotopies
-      ( refl-htpy)
-      ( top-left)
-      ( top-right)
-      ( refl-htpy)
-      ( bottom-left)
-      ( bottom-right)
-      ( refl-htpy)
-      ( coherence-square-homotopies-horizontal-refl
+    ( inv-coherence-square-homotopies-horizontal-refl
+      ( top-left ∙h bottom-left)
+      ( top-right ∙h bottom-right)
+      ( vertical-pasting-coherence-square-homotopies
+        ( refl-htpy)
         ( top-left)
         ( top-right)
-        ( H))
-      ( coherence-square-homotopies-horizontal-refl
+        ( refl-htpy)
         ( bottom-left)
         ( bottom-right)
-        ( K)))) ~
+        ( refl-htpy)
+        ( coherence-square-homotopies-horizontal-refl
+          ( top-left)
+          ( top-right)
+          ( H))
+        ( coherence-square-homotopies-horizontal-refl
+          ( bottom-left)
+          ( bottom-right)
+          ( K)))) ~
     ( horizontal-concat-htpy² H K)
   vertical-pasting-coherence-square-homotopies-horizontal-refl H K x =
     vertical-pasting-coherence-square-identifications-horizontal-refl
@@ -609,17 +611,19 @@ module _
       ( bottom-left)
       ( bottom-right)
       ( refl-htpy)) →
-    ( ( inv-htpy right-unit-htpy) ∙h
-    ( vertical-pasting-coherence-square-homotopies
-      ( refl-htpy)
-      ( top-left)
-      ( top-right)
-      ( refl-htpy)
-      ( bottom-left)
-      ( bottom-right)
-      ( refl-htpy)
-      ( H)
-      ( K))) ~
+    ( inv-coherence-square-homotopies-horizontal-refl
+      ( top-left ∙h bottom-left)
+      ( top-right ∙h bottom-right)
+      ( vertical-pasting-coherence-square-homotopies
+        ( refl-htpy)
+        ( top-left)
+        ( top-right)
+        ( refl-htpy)
+        ( bottom-left)
+        ( bottom-right)
+        ( refl-htpy)
+        ( H)
+        ( K))) ~
     ( horizontal-concat-htpy²
       ( inv-coherence-square-homotopies-horizontal-refl
         ( top-left)
