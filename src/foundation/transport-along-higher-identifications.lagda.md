@@ -200,7 +200,7 @@ module _
   where
 
   tr³-inv :
-   (γ : α ＝ α') →
+    (γ : α ＝ α') →
     tr³ B (inv γ) ~ inv-htpy (tr³ B γ)
   tr³-inv γ b = ap-inv (λ t → tr² B t b) γ
 
@@ -223,7 +223,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {x y : A} {p q : x ＝ y} 
+  {l1 l2 : Level} {A : UU l1} {x y : A} {p q : x ＝ y}
   {B : A → UU l2}
   where
 
@@ -519,7 +519,7 @@ module _
     (α β : refl {x = a} ＝ refl) →
     ( inv-coherence-square-homotopies-horizontal-refl
       ( ( tr² B (left-whisker-concat refl α)) ∙h
-      ( tr² B (right-whisker-concat β refl) ))
+      ( tr² B (right-whisker-concat β refl)))
       ( tr² B α ∙h id ·l (tr² B β))
       ( tr²-left-whisker-concat-tr²-right-whisker-concat α β)) ~
     ( tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² α β)

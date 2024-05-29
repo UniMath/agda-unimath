@@ -400,8 +400,8 @@ where the left leg is `tr³ B (eckmann-hilton-Ω² α β)` and the right leg is
 
 We construct a filler for this square by first distributing `tr³` across the
 concatenated paths used in `eckmann-hilton-Ω²`, then splitting the resultant
-square into three vertical squares, constructing fillers for each, then
-pasting them together. The filler of the middle square is
+square into three vertical squares, constructing fillers for each, then pasting
+them together. The filler of the middle square is
 
 ```text
   tr³-commutative-left-whisker-right-whisker-concat-Ω² α β

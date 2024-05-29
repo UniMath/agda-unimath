@@ -179,8 +179,8 @@ commute:
 2. The transposed square commutes by the naturality of the homotopy
    `q ↦ right-whisker-concat α q`.
 
-The first way can be thought of as braiding `β` over `α`, while the second can be
-thought of braiding `α` under `β`. Braiding `β` over `α`, then braiding `α`
+The first way can be thought of as braiding `β` over `α`, while the second can
+be thought of braiding `α` under `β`. Braiding `β` over `α`, then braiding `α`
 under `β` results in no braid at all. Thus, these two ways in which the square
 commutes are inverse to each other.
 
