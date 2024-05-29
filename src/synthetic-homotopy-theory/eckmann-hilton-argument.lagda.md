@@ -143,7 +143,7 @@ To see this, consider the family of based identity types `Id base : X → UU`. A
 compute that
 
 ```text
-tr (Id base) l p ＝ p ∙ l
+  tr (Id base) l p ＝ p ∙ l.
 ```
 
 This is shown in
@@ -153,7 +153,7 @@ Up one dimension, a 2-loop `s` induces a homotopy
 `tr² (Id base) s : id {A = Ω X} ~ id`. We can compute
 
 ```text
-tr² (Id base) s p ＝ left-whisker-concat p s
+  tr² (Id base) s p ＝ left-whisker-concat p s,
 ```
 
 (up to equality of boundary). This claim is shown in
@@ -175,14 +175,14 @@ homotopies `tr² B α` and `tr² B β` of type `id {A = B base} ~ id`. Again, th
 homotopies automatically commute with each other via
 
 ```text
-[commutative-right-whisker-left-whisker-htpy (tr² B α) (tr² B β)](foundation.homotopy-algebra.md)
+  commutative-right-whisker-left-whisker-htpy (tr² B α) (tr² B β)
 ```
 
 which is the naturality condition of `tr² B α` applied to `tr² B β`. The
 naturality condition that makes `α` and `β` commute in `Ω² X` is
 
 ```text
-commutative-left-whisker-right-whisker-concat α β
+  commutative-left-whisker-right-whisker-concat α β
 ```
 
 Transporting along this latter identification (i.e., applying
@@ -375,24 +375,24 @@ This coherence relates the three dimensional transport
 [`tr³`](foundation.transport-along-higher-identifications.md) along an
 Eckmann-Hilton identification
 [`eckmann-hilton-Ω² α β`](synthetic-homotopy-theory.eckmann-hilton-argument.md)
-to the the Eckmann-Hilton argument for homotopies
+to the Eckmann-Hilton argument for homotopies
 [`eckmann-hilton-htpy (tr² B α) (tr² B β)`](foundation.homotopy-algebra.md).
 
 This takes the form of a commutative square of homotopies
 
 ```text
-                 tr²-concat α β
-tr² B (α ∙ β) -------------------> tr² B α ∙h tr² B β
-
-     |                                    |
-     |                                    |
-     |                                    |
-     |                                    |
-     |                                    |
-     ∨                                    ∨
-
-tr² B (β ∙ α) -------------------> tr² B β ∙h tr² B α
-                 tr²-concat β α
+                   tr²-concat α β
+  tr² B (α ∙ β) -------------------> tr² B α ∙h tr² B β
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       ∨                                    ∨
+  tr² B (β ∙ α) -------------------> tr² B β ∙h tr² B α,
+                   tr²-concat β α
 ```
 
 where the left leg is `tr³ B (eckmann-hilton-Ω² α β)` and the right leg is
@@ -400,11 +400,11 @@ where the left leg is `tr³ B (eckmann-hilton-Ω² α β)` and the right leg is
 
 We construct a filler for this square by first distributing `tr³` across the
 concatenated paths used in `eckmann-hilton-Ω²`, then splitting the resultant
-square it into three vertical squares, constructing fillers for each, then
+square into three vertical squares, constructing fillers for each, then
 pasting them together. The filler of the middle square is
 
 ```text
-[tr³-commutative-left-whisker-right-whisker-concat-Ω² α β](foundation.transport-along-higher-identifications)
+  tr³-commutative-left-whisker-right-whisker-concat-Ω² α β
 ```
 
 The fillers for the top and bottom squares are constructed below. They relate
@@ -442,14 +442,14 @@ module _
     ( tr³-eckmann-hilton-distributed)
   tr³-concat-eckmann-hilton =
     ( tr³-concat
-        ( ( inv
+      ( ( inv
           ( horizontal-concat-Id²
             ( left-unit-law-left-whisker-Ω² α)
             ( right-unit-law-right-whisker-Ω² β))) ∙
         ( commutative-left-whisker-right-whisker-concat α β))
-        ( horizontal-concat-Id²
-          ( right-unit-law-right-whisker-Ω² β)
-          ( left-unit-law-left-whisker-Ω² α))) ∙h
+      ( horizontal-concat-Id²
+        ( right-unit-law-right-whisker-Ω² β)
+        ( left-unit-law-left-whisker-Ω² α))) ∙h
     ( right-whisker-concat-htpy
       ( tr³-concat
         ( inv

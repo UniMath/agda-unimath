@@ -114,13 +114,13 @@ Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy` on
 the top and bottom.
 
 ```text
-      refl-htpy
-   f ----------> f
-   |             |
- H |             | H'
-   ∨             ∨
-   g ----------> g
-      refl-htpy
+       refl-htpy
+    f ----------> f
+    |             |
+  H |             | H'
+    ∨             ∨
+    g ----------> g
+       refl-htpy
 ```
 
 ```agda
@@ -161,13 +161,13 @@ Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy` on
 the left and right.
 
 ```text
-               H'
-          f ------> g
-          |         |
-refl-htpy |         | refl-htpy
-          ∨         ∨
-          f ------> g
-               H
+                 H'
+            f ------> g
+            |         |
+  refl-htpy |         | refl-htpy
+            ∨         ∨
+            f ------> g
+                 H
 ```
 
 ```agda

@@ -150,7 +150,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (a : A) → B a}
-    {H H' : f ~ g}
+  {H H' : f ~ g}
   where
 
   compute-right-refl-htpy-horizontal-concat-htpy² :
@@ -187,7 +187,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (a : A) → B a}
-  {H H' H'' : f ~ g} (α : H ~ H') (α' : H' ~ H'') { K K' K'' : g ~ h}
+  {H H' H'' : f ~ g} (α : H ~ H') (α' : H' ~ H'') {K K' K'' : g ~ h}
   (β : K ~ K') (β' : K' ~ K'')
   where
 
@@ -197,7 +197,7 @@ module _
   interchange-htpy² x = interchange-Id² (α x) (α' x) (β x) (β' x)
 ```
 
-### Three dimensional concatination of homotopies
+### Three dimensional concatenation of homotopies
 
 ```agda
 module _

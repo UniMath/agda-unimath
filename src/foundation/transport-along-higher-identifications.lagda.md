@@ -72,7 +72,7 @@ module _
 
 ### Coherences and algebraic identities for `tr²`
 
-#### Computing `tr²` along the concatenation identifications
+#### Computing `tr²` along the concatenation of identifications
 
 ```agda
 module _
@@ -86,7 +86,7 @@ module _
   tr²-concat α α' b = ap-concat (λ t → tr B t b) α α'
 ```
 
-#### Computing `tr²` along the inverse of a path
+#### Computing `tr²` along the inverse of an identification
 
 ```agda
 module _
@@ -99,17 +99,17 @@ module _
     tr² B (inv α) ~ inv-htpy (tr² B α)
   tr²-inv α b = ap-inv (λ t → tr B t b) α
 
-  left-inv-law-tr² :
+  left-inverse-law-tr² :
     {p p' : x ＝ y} (α : p ＝ p') →
     tr² B (inv α) ∙h tr² B α ~ refl-htpy
-  left-inv-law-tr² α =
+  left-inverse-law-tr² α =
     ( right-whisker-concat-htpy (tr²-inv α) (tr² B α)) ∙h
     ( left-inv-htpy (tr² B α))
 
-  right-inv-law-tr² :
+  right-inverse-law-tr² :
     {p p' : x ＝ y} (α : p ＝ p') →
     tr² B α ∙h tr² B (inv α) ~ refl-htpy
-  right-inv-law-tr² α =
+  right-inverse-law-tr² α =
     ( left-whisker-concat-htpy (tr² B α) (tr²-inv α)) ∙h
     ( right-inv-htpy (tr² B α))
 ```
@@ -139,7 +139,7 @@ module _
     coherence-square-homotopies
       ( tr-concat p q)
       ( tr² B (left-whisker-concat p β))
-      ( ( tr² B β) ·r (tr B p))
+      ( tr² B β ·r tr B p)
       ( tr-concat p q')
   tr²-left-whisker refl refl = refl-htpy
 
@@ -155,7 +155,7 @@ module _
 
 ### Coherences and algebraic identities for `tr³`
 
-#### Computing `tr³` along the concatenation identifications
+#### Computing `tr³` along the concatenation of identifications
 
 ```agda
 module _
@@ -182,7 +182,7 @@ module _
   tr³-horizontal-concat refl refl = inv-htpy right-unit-htpy
 ```
 
-#### Computing `tr³` along the inverse of a path
+#### Computing `tr³` along the inverse of an identification
 
 ```agda
   tr³-inv :
@@ -391,7 +391,7 @@ module _
     coherence-square-homotopies
       ( tr-concat p q)
       ( tr² B (left-whisker-concat p β ∙ right-whisker-concat α q'))
-      ( ( ( tr² B β) ·r (tr B p)) ∙h ((tr B q') ·l (tr² B α)))
+      ( (tr² B β ·r tr B p) ∙h (tr B q' ·l tr² B α))
       ( tr-concat p' q')
   tr²-concat-left-whisker-concat-right-whisker-concat β α =
     ( right-whisker-concat-htpy
@@ -552,7 +552,7 @@ module _
     ( tr²-concat-left-whisker-concat-right-whisker-concat α β)) ~
     ( tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
   compute-tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β =
-    inv-htpy
+    ( inv-htpy
       ( assoc-htpy
         ( inv-htpy right-unit-htpy)
         ( right-whisker-concat-htpy
@@ -560,7 +560,7 @@ module _
             ( left-whisker-concat refl α)
             ( right-whisker-concat β refl))
           ( refl-htpy))
-        ( tr²-left-whisker-concat-tr²-right-whisker-concat α β)) ∙h
+        ( tr²-left-whisker-concat-tr²-right-whisker-concat α β))) ∙h
     ( right-whisker-concat-htpy
       ( vertical-inv-coherence-square-homotopies
         ( right-whisker-concat-htpy

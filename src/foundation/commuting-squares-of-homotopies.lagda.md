@@ -550,7 +550,7 @@ Consider two squares of homotopies as in the diagram
               a ----------> a
               |             |
      top-left |             | top-right
-              ∨ refl-htpy   ∨
+              ∨  refl-htpy  ∨
               b ----------> b
               |             |
   bottom-left |             | bottom-right
