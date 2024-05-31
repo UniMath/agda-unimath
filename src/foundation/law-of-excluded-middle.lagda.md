@@ -47,6 +47,9 @@ module _
 
   LEM : UU (lsuc l)
   LEM = type-Prop LEM-Prop
+
+apply-LEM : {l : Level} → LEM l → {P : UU l} → is-prop P → is-decidable P
+apply-LEM lem {P} is-prop-P = lem (P , is-prop-P)
 ```
 
 ## Properties

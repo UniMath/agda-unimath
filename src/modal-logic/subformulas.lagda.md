@@ -9,12 +9,14 @@ module modal-logic.subformulas where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.functoriality-propositional-truncation
+open import foundation.law-of-excluded-middle
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.function-types
+open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
 
@@ -26,6 +28,8 @@ open import modal-logic.closed-under-subformulas-theories
 open import modal-logic.deduction
 open import modal-logic.formulas
 
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.function-types
 open import univalent-combinatorics.kuratowsky-finite-sets
 ```
 
@@ -53,7 +57,11 @@ module _
 
   subformulas : modal-formula i → modal-theory l i
   subformulas a = list-subtype (subformulas-list a)
+```
 
+### Subformulas is closed under subformulas
+
+```agda
   subformulas-list-has-subimpl :
     (a : modal-formula i) {x y : modal-formula i} →
     (x →ₘ y) ∈-list subformulas-list a →
@@ -143,4 +151,30 @@ module _
     is-kuratowsky-finite-set (set-subset (modal-formula-Set i) (subformulas a))
   is-kuratowsky-finite-subformulas-list a =
     is-kuratowski-finite-list-subtype (modal-formula-Set i) (subformulas-list a)
+```
+
+TODO: Remove
+
+### TODO: Classical facts
+
+```agda
+  is-finite-subformulas-list :
+    LEM l →
+    (a : modal-formula i) →
+    is-finite (type-subtype (subformulas a))
+  is-finite-subformulas-list lem a =
+    is-finite-is-kuratowsky-finite-set
+      ( set-subset (modal-formula-Set i) (subformulas a))
+      ( lem)
+      ( is-kuratowsky-finite-subformulas-list a)
+
+  is-finite-subtypes-subformulas-list :
+    {l2 : Level} →
+    LEM (l ⊔ l2) →
+    (a : modal-formula i) →
+    is-finite (type-subtype (subformulas a) → Prop l2)
+  is-finite-subtypes-subformulas-list {l2} lem a =
+    is-finite-function-type
+      ( is-finite-subformulas-list (lower-LEM l2 lem) a)
+      ( is-finite-Prop-LEM (lower-LEM l lem))
 ```

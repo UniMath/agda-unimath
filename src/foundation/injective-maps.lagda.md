@@ -9,16 +9,23 @@ open import foundation-core.injective-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.functoriality-propositional-truncation
+open import foundation.inhabited-types
 open import foundation.logical-equivalences
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
+open import foundation-core.coproduct-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
+open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.retractions
 open import foundation-core.sets
 ```
 
@@ -103,4 +110,35 @@ module _
   is-injective-Prop : is-set A → (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-injective-Prop H f) = is-injective f
   pr2 (is-injective-Prop H f) = is-prop-is-injective H f
+```
+
+### TODO: Title
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B)
+  (is-injective-f : is-injective f)
+  (dec : (b : B) → is-decidable (fiber f b))
+  where
+
+  retraction-is-injective : A → retraction f
+  pr1 (retraction-is-injective a0) b with dec b
+  ... | inl (a , _) = a
+  ... | inr _ = a0
+  pr2 (retraction-is-injective _) a with dec (f a)
+  ... | inl (a , eq) = is-injective-f eq
+  ... | inr contra = ex-falso (contra (a , refl))
+
+  surjective-is-injective : A → B ↠ A
+  pr1 (surjective-is-injective a) =
+    map-retraction f (retraction-is-injective a)
+  pr2 (surjective-is-injective a) =
+    is-surjective-has-section
+      ( pair f
+        ( is-retraction-map-retraction f
+          ( retraction-is-injective a)))
+
+  is-inhabited-inv-surjections : is-inhabited A → is-inhabited (B ↠ A)
+  is-inhabited-inv-surjections = map-trunc-Prop surjective-is-injective
 ```

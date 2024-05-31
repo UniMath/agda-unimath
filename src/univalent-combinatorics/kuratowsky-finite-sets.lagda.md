@@ -209,4 +209,15 @@ is-finite-is-kuratowsky-finite-set X lem is-fin =
   is-finite-has-decidable-equality-type-𝔽-Kuratowsky
     ( X , is-fin)
     ( λ x y → lem (Id-Prop X x y))
+
+is-finite-surjection :
+  {l1 l2 : Level} (X : Set l1) (Y : Set l2) →
+  LEM l2 →
+  type-Set X ↠ type-Set Y →
+  is-finite (type-Set X) →
+  is-finite (type-Set Y)
+is-finite-surjection X Y lem f is-fin =
+  is-finite-is-kuratowsky-finite-set Y lem
+    ( is-kuratowsky-finite-set-surjection X Y f
+      ( is-kuratowsky-finite-set-is-finite X is-fin))
 ```

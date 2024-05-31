@@ -148,7 +148,7 @@ module _
         ( equivalence-kripke-models (lsuc l1) l1 i l1)
         ( minimal-transitive-kripke-model-filtration)
         ( λ (M , in-equiv) theory is-closed →
-          ( is-kripke-model-filtration-minimal-transitive-kripke-model-filtration
+          ( is-filtration-minimal-transitive-kripke-model-filtration
             ( theory)
             ( M)
             ( is-closed)
