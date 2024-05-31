@@ -746,4 +746,5 @@ module _
 
 ## External links
 
-- [Decreasing sequences of natural numbers](https://ncatlab.org/nlab/show/natural+number#decreasing_sequences_of_natural_numbers) at $n$Lab
+- [Decreasing sequences of natural numbers](https://ncatlab.org/nlab/show/natural+number#decreasing_sequences_of_natural_numbers)
+  at $n$Lab
