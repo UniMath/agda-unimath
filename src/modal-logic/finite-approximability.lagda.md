@@ -24,10 +24,12 @@ open import modal-logic.closed-under-subformulas-theories
 open import modal-logic.completeness
 open import modal-logic.completeness-k
 open import modal-logic.completeness-s5
-open import modal-logic.decision-procedure
 open import modal-logic.deduction
+open import modal-logic.filtrated-kripke-classes
 open import modal-logic.kripke-models-filtrations
 open import modal-logic.kripke-semantics
+open import modal-logic.minimal-kripke-filtration
+open import modal-logic.minimal-transitive-kripke-filtration
 open import modal-logic.modal-logic-k
 open import modal-logic.modal-logic-s5
 open import modal-logic.soundness
