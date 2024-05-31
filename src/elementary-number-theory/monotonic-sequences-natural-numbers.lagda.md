@@ -7,6 +7,7 @@ module elementary-number-theory.monotonic-sequences-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -242,6 +243,40 @@ module _
         ( p)
         ( q)
         ( I))
+```
+
+### A monotonic sequence of natural numbers `u` with `u (p + n) ＝ u n` is constant between `n` and `p + n`
+
+```agda
+module _
+  (u : sequence ℕ) (p n : ℕ) (I : u (p +ℕ n) ＝ u n)
+  where
+
+  constant-value-is-stationnary-interval-increasing-sequence-ℕ :
+    is-increasing-sequence-ℕ u →
+    (k : ℕ) (J : leq-ℕ k p) → u (k +ℕ n) ＝ u n
+  constant-value-is-stationnary-interval-increasing-sequence-ℕ H k J =
+    antisymmetric-leq-ℕ
+      ( u (k +ℕ n))
+      ( u n)
+      ( concatenate-leq-eq-ℕ
+        ( u (k +ℕ n))
+        ( H (k +ℕ n) (p +ℕ n) (preserves-leq-left-add-ℕ n k p J))
+        ( I))
+      ( H n (k +ℕ n) (leq-add-ℕ' n k))
+
+  constant-value-is-stationnary-interval-decreasing-sequence-ℕ :
+    is-decreasing-sequence-ℕ u →
+    (k : ℕ) (J : leq-ℕ k p) → u (k +ℕ n) ＝ u n
+  constant-value-is-stationnary-interval-decreasing-sequence-ℕ H k J =
+    antisymmetric-leq-ℕ
+      ( u (k +ℕ n))
+      ( u n)
+      ( H n (k +ℕ n) (leq-add-ℕ' n k))
+      ( concatenate-eq-leq-ℕ
+        ( u (k +ℕ n))
+        ( inv I)
+        ( H (k +ℕ n) (p +ℕ n) (preserves-leq-left-add-ℕ n k p J)))
 ```
 
 ### A monotonic sequence of natural numbers with a constant subsequence is asymptotically constant
@@ -652,3 +687,63 @@ module _
                 ( extract-strict-decreasing-value-subsequence-ℕ n))))))
         ( is-strict-value-extract-strict-decreasing-value-subsequence-ℕ n))
 ```
+
+### Decreasing sequences of natural numbers have arbitrarily long stationnary intervals
+
+```agda
+stationnary-interval-bounded-decreasing-sequence-ℕ :
+    (u : sequence ℕ) (H : is-decreasing-sequence-ℕ u) (M : ℕ) →
+    (leq-ℕ (u zero-ℕ) M) →
+    ((p : ℕ) → Σ ℕ (λ n → u (p +ℕ n) ＝ u n))
+stationnary-interval-bounded-decreasing-sequence-ℕ u H zero-ℕ I p =
+  ( zero-ℕ ,
+    antisymmetric-leq-ℕ
+      ( u p)
+      ( u zero-ℕ)
+      ( H zero-ℕ p (leq-zero-ℕ p))
+      ( transitive-leq-ℕ (u 0) 0 (u p) (leq-zero-ℕ (u p)) I))
+stationnary-interval-bounded-decreasing-sequence-ℕ u H (succ-ℕ M) I p =
+  rec-coproduct
+    ( λ J → (zero-ℕ , J))
+    ( λ J →
+      rec-Σ
+        ( λ k H → (skip-ℕ p k , H))
+        ( stationnary-interval-bounded-decreasing-sequence-ℕ
+          ( sequence-subsequence u (skip-subsequence p u))
+          ( is-decreasing-Π-subsequence-ℕ
+            ( u)
+            ( H)
+            ( skip-subsequence p u))
+          ( M)
+          ( transitive-leq-ℕ
+            ( u (succ-ℕ p))
+            ( u p)
+            ( M)
+            ( leq-le-succ-ℕ
+              ( u p)
+              ( M)
+              ( concatenate-le-leq-ℕ {u p} {u 0} {succ-ℕ M} J I))
+              ( H p (succ-ℕ p) (succ-leq-ℕ p)))
+          ( p)))
+    ( eq-or-le-leq-ℕ
+      ( u p)
+      ( u zero-ℕ)
+      ( H zero-ℕ p (leq-zero-ℕ p)))
+
+module _
+  {u : sequence ℕ} (H : is-decreasing-sequence-ℕ u)
+  where
+
+  stationnary-interval-decreasing-sequence-ℕ :
+    (p : ℕ) → Σ ℕ (λ n → u (p +ℕ n) ＝ u n)
+  stationnary-interval-decreasing-sequence-ℕ =
+    stationnary-interval-bounded-decreasing-sequence-ℕ
+      ( u)
+      ( H)
+      ( u 0)
+      ( refl-leq-ℕ (u 0))
+```
+
+## External links
+
+- [Decreasing sequences of natural numbers](https://ncatlab.org/nlab/show/natural+number#decreasing_sequences_of_natural_numbers) at $n$Lab
