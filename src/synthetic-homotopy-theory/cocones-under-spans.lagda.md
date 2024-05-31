@@ -14,6 +14,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.morphisms-arrows
+open import foundation.span-diagrams
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -58,6 +59,13 @@ cocone :
   (f : S → A) (g : S → B) → UU l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 cocone {A = A} {B = B} f g X =
   Σ (A → X) (λ i → Σ (B → X) (λ j → coherence-square-maps g f j i))
+
+cocone-span-diagram :
+  {l1 l2 l3 l4 : Level} →
+  span-diagram l1 l2 l3 → UU l4 →
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+cocone-span-diagram 𝒮 X =
+  cocone (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮) X
 
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -194,6 +202,14 @@ cocone-map :
 pr1 (cocone-map f g c h) = h ∘ horizontal-map-cocone f g c
 pr1 (pr2 (cocone-map f g c h)) = h ∘ vertical-map-cocone f g c
 pr2 (pr2 (cocone-map f g c h)) = h ·l coherence-square-cocone f g c
+
+cocone-map-span-diagram :
+  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X) →
+  {l5 : Level} {Y : UU l5} →
+  (X → Y) → cocone-span-diagram 𝒮 Y
+cocone-map-span-diagram {𝒮 = 𝒮} c =
+  cocone-map (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮) c
 
 cocone-map-id :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
