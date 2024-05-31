@@ -77,6 +77,7 @@ open import order-theory.maximal-chains-posets public
 open import order-theory.maximal-chains-preorders public
 open import order-theory.meet-semilattices public
 open import order-theory.meet-suplattices public
+open import order-theory.monotonic-sequences-posets public
 open import order-theory.nuclei-large-locales public
 open import order-theory.order-preserving-maps-large-posets public
 open import order-theory.order-preserving-maps-large-preorders public
@@ -94,6 +95,7 @@ open import order-theory.preorders public
 open import order-theory.principal-lower-sets-large-posets public
 open import order-theory.principal-upper-sets-large-posets public
 open import order-theory.reflective-galois-connections-large-posets public
+open import order-theory.sequences-posets public
 open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public

@@ -8,6 +8,7 @@ module foundation.subsequences where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
@@ -63,6 +64,17 @@ module _
     is-strict-increasing-sequence-ℕ extract-subsequence
   is-strict-increasing-extract-subsequence =
     is-strict-increasing-sequence-strict-increasing-sequence-ℕ v
+
+  leq-id-extract-subsequence :
+    (p : ℕ) → leq-ℕ p (extract-subsequence p)
+  leq-id-extract-subsequence = leq-id-strict-increasing-sequence-ℕ v
+
+  preserves-leq-extract-subsequence :
+    (p q : ℕ) →
+    leq-ℕ p q →
+    leq-ℕ (extract-subsequence p) (extract-subsequence q)
+  preserves-leq-extract-subsequence =
+    preserves-leq-strict-increasing-sequence-ℕ v
 
   sequence-subsequence : sequence A
   sequence-subsequence n = u (extract-subsequence n)

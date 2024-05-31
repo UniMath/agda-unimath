@@ -236,6 +236,31 @@ module _
     ( is-strict-decreasing-is-strict-decreasing-value-sequence-ℕ f)
 ```
 
+### Strictly increasing sequences of natural numbers preserve inequality
+
+```agda
+module _
+  (f : strict-increasing-sequence-ℕ) (p q : ℕ)
+  where
+
+  preserves-leq-strict-increasing-sequence-ℕ :
+    leq-ℕ p q →
+    leq-ℕ
+      ( sequence-strict-increasing-sequence-ℕ f p)
+      ( sequence-strict-increasing-sequence-ℕ f q)
+  preserves-leq-strict-increasing-sequence-ℕ =
+    ( leq-eq-or-le-ℕ
+      (sequence-strict-increasing-sequence-ℕ f p)
+      (sequence-strict-increasing-sequence-ℕ f q)) ∘
+    ( map-coproduct
+      ( ap (sequence-strict-increasing-sequence-ℕ f))
+      ( is-strict-increasing-sequence-strict-increasing-sequence-ℕ
+        ( f)
+        ( p)
+        ( q))) ∘
+    ( eq-or-le-leq-ℕ p q)
+```
+
 ### The identity sequence is strictly increasing
 
 ```agda
@@ -244,6 +269,34 @@ is-strict-increasing-id-ℕ i j = id
 
 strict-increasing-id-ℕ : strict-increasing-sequence-ℕ
 strict-increasing-id-ℕ = id , is-strict-increasing-id-ℕ
+```
+
+### The identity sequence is lesser than all strictly increasing sequences of natural numbers
+
+```agda
+module _
+  (f : strict-increasing-sequence-ℕ)
+  where
+
+  leq-id-strict-increasing-sequence-ℕ :
+    (n : ℕ) → leq-ℕ n (sequence-strict-increasing-sequence-ℕ f n)
+  leq-id-strict-increasing-sequence-ℕ =
+    ind-ℕ
+      ( leq-zero-ℕ (sequence-strict-increasing-sequence-ℕ f zero-ℕ))
+      ( λ n H →
+        leq-succ-le-ℕ
+          ( n)
+          ( sequence-strict-increasing-sequence-ℕ f (succ-ℕ n))
+          ( concatenate-leq-le-ℕ
+            { n}
+            { sequence-strict-increasing-sequence-ℕ f n}
+            { sequence-strict-increasing-sequence-ℕ f (succ-ℕ n)}
+            ( H)
+            ( is-strict-increasing-sequence-strict-increasing-sequence-ℕ
+              ( f)
+              ( n)
+              ( succ-ℕ n)
+              ( succ-le-ℕ n))))
 ```
 
 ### The successor function is strictly increasing
