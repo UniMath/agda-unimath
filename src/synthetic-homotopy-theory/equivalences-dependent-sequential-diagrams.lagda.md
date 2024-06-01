@@ -254,4 +254,10 @@ module _
     equiv-eq-dependent-sequential-diagram C
   pr2 (extensionality-dependent-sequential-diagram C) =
     is-equiv-equiv-eq-dependent-sequential-diagram C
+
+  eq-equiv-dependent-sequential-diagram :
+    (C : dependent-sequential-diagram A l2) →
+    equiv-dependent-sequential-diagram B C → (B ＝ C)
+  eq-equiv-dependent-sequential-diagram C =
+    map-inv-equiv (extensionality-dependent-sequential-diagram C)
 ```
