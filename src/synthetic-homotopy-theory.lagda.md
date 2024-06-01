@@ -48,6 +48,7 @@ open import synthetic-homotopy-theory.descent-circle-equivalence-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
 open import synthetic-homotopy-theory.descent-data-pushouts public
+open import synthetic-homotopy-theory.descent-data-pushouts-function-families public
 open import synthetic-homotopy-theory.descent-data-sequential-colimits public
 open import synthetic-homotopy-theory.descent-property-pushouts public
 open import synthetic-homotopy-theory.descent-property-sequential-colimits public
@@ -103,6 +104,7 @@ open import synthetic-homotopy-theory.recursion-principle-pushouts public
 open import synthetic-homotopy-theory.retracts-of-sequential-diagrams public
 open import synthetic-homotopy-theory.rewriting-pushouts public
 open import synthetic-homotopy-theory.sections-descent-circle public
+open import synthetic-homotopy-theory.sections-descent-data-pushouts public
 open import synthetic-homotopy-theory.sequential-colimits public
 open import synthetic-homotopy-theory.sequential-diagrams public
 open import synthetic-homotopy-theory.sequentially-compact-types public
