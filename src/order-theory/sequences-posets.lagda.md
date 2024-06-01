@@ -157,15 +157,11 @@ module _
     leq-∞-sequence-poset P v w →
     eq-∞-sequence w z →
     leq-∞-sequence-poset P u z
-  concatenate-eq-∞-leq-∞-eq-∞-sequence-poset I =
-    map-binary-asymptotically
-      ( map-asymptotically-Π
-        ( λ n H J K →
-          concatenate-eq-leq-Poset
-            ( P)
-            ( H)
-            ( concatenate-leq-eq-Poset P J K))
-        ( I))
+  concatenate-eq-∞-leq-∞-eq-∞-sequence-poset =
+    ( map-binary-asymptotically) ∘
+    ( map-asymptotically-Π
+      ( λ n H J →
+        (concatenate-eq-leq-Poset P H) ∘ (concatenate-leq-eq-Poset P J)))
 ```
 
 ## Properties
@@ -202,17 +198,25 @@ module _
   leq-∞-value-leq-∞-constant-sequence-poset :
     (H : is-∞-constant-sequence u) →
     (K : is-∞-constant-sequence v) →
-    leq-Poset P (∞-value-∞-constant-sequence H) (∞-value-∞-constant-sequence K)
+    leq-∞-sequence-poset P
+      (const-∞-value-∞-constant-sequence H)
+      (const-∞-value-∞-constant-sequence K)
   leq-∞-value-leq-∞-constant-sequence-poset H K =
-    value-∞-asymptotically
-      (concatenate-eq-∞-leq-∞-eq-∞-sequence-poset
-        ( P)
-        ( eq-∞-value-∞-constant-sequence H)
-        ( I)
-        ( symmetric-eq-∞-sequence
-          ( const-∞-value-∞-constant-sequence K)
-          ( v)
-          ( eq-∞-value-∞-constant-sequence K)))
+    concatenate-eq-∞-leq-∞-eq-∞-sequence-poset
+      ( P)
+      ( eq-∞-value-∞-constant-sequence H)
+      ( I)
+      ( symmetric-eq-∞-sequence
+        ( const-∞-value-∞-constant-sequence K)
+        ( v)
+        ( eq-∞-value-∞-constant-sequence K))
+
+  leq-value-leq-∞-constant-sequence-poset :
+    (H : is-∞-constant-sequence u) →
+    (K : is-∞-constant-sequence v) →
+    leq-Poset P (∞-value-∞-constant-sequence H) (∞-value-∞-constant-sequence K)
+  leq-value-leq-∞-constant-sequence-poset H K =
+    value-∞-asymptotically (leq-∞-value-leq-∞-constant-sequence-poset H K)
 ```
 
 ### A sequence in a partially ordered set that asymptotically lies between two asymptotically equal sequences is asymptotically equal to them
@@ -294,7 +298,7 @@ module _
         ( ∞-value-∞-constant-sequence K)
         ( ∞-value-∞-constant-sequence H)
         ( E)
-        ( leq-∞-value-leq-∞-constant-sequence-poset
+        ( leq-value-leq-∞-constant-sequence-poset
           ( P)
           ( u)
           ( w)
