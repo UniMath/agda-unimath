@@ -122,3 +122,21 @@ module _
   antisymmetric-∞-leq-∞-sequence-poset u v =
     map-binary-asymptotically-Π (λ n → antisymmetric-leq-Poset P (u n) (v n))
 ```
+
+### Concatenation of asymptotical inequality and equality of sequences in partially ordered sets
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) {u v w : sequence-poset P}
+  where
+
+  concatenate-eq-∞-leq-∞-sequence-poset :
+    eq-∞-sequence u v → leq-∞-sequence-poset P v w → leq-∞-sequence-poset P u w
+  concatenate-eq-∞-leq-∞-sequence-poset =
+    map-binary-asymptotically-Π (λ n → concatenate-eq-leq-Poset P)
+
+  concatenate-leq-∞-eq-∞-sequence-poset :
+    leq-∞-sequence-poset P u v → eq-∞-sequence v w → leq-∞-sequence-poset P u w
+  concatenate-leq-∞-eq-∞-sequence-poset =
+    map-binary-asymptotically-Π (λ n → concatenate-leq-eq-Poset P)
+```
