@@ -54,7 +54,7 @@ module _
   leq-value-prop-sequence-poset n = leq-Poset-Prop P (u n) (v n)
 
   leq-value-sequence-poset : ℕ → UU l2
-  leq-value-sequence-poset n = type-Prop (leq-value-prop-sequence-poset n)
+  leq-value-sequence-poset = type-Prop ∘ leq-value-prop-sequence-poset
 
   leq-prop-sequence-poset : Prop l2
   leq-prop-sequence-poset = Π-Prop ℕ leq-value-prop-sequence-poset
@@ -100,14 +100,14 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  ∞-leq-sequence-poset : (u v : sequence-poset P) → UU l2
-  ∞-leq-sequence-poset u v = asymptotically (leq-value-sequence-poset P u v)
+  leq-∞-sequence-poset : (u v : sequence-poset P) → UU l2
+  leq-∞-sequence-poset u v = asymptotically (leq-value-sequence-poset P u v)
 
-  refl-∞-leq-sequence-poset : is-reflexive ∞-leq-sequence-poset
-  refl-∞-leq-sequence-poset = asymptotically-Π ∘ (refl-leq-sequence-poset P)
+  refl-leq-∞-sequence-poset : is-reflexive leq-∞-sequence-poset
+  refl-leq-∞-sequence-poset = asymptotically-Π ∘ (refl-leq-sequence-poset P)
 
-  transitive-∞-leq-sequence-poset : is-transitive ∞-leq-sequence-poset
-  transitive-∞-leq-sequence-poset u v w (n , H) (m , K) =
+  transitive-leq-∞-sequence-poset : is-transitive leq-∞-sequence-poset
+  transitive-leq-∞-sequence-poset u v w (n , H) (m , K) =
     ( max-ℕ m n) ,
     ( λ p I →
       transitive-leq-Poset
@@ -118,12 +118,12 @@ module _
         ( H p (leq-right-leq-max-ℕ p m n I))
         ( K p (leq-left-leq-max-ℕ p m n I)))
 
-  ∞-antisymmetric-∞-leq-sequence-poset :
+  antisymmetric-∞-leq-∞-sequence-poset :
     (u v : sequence-poset P) →
-    ∞-leq-sequence-poset u v →
-    ∞-leq-sequence-poset v u →
+    leq-∞-sequence-poset u v →
+    leq-∞-sequence-poset v u →
     eq-∞-sequence u v
-  ∞-antisymmetric-∞-leq-sequence-poset u v (n , H) (m , K) =
+  antisymmetric-∞-leq-∞-sequence-poset u v (n , H) (m , K) =
     ( max-ℕ n m) ,
     ( λ p I →
       antisymmetric-leq-Poset
