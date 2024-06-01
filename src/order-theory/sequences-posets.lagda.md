@@ -7,7 +7,6 @@ module order-theory.sequences-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.asymptotical-dependent-sequences
@@ -106,30 +105,20 @@ module _
   refl-leq-∞-sequence-poset : is-reflexive leq-∞-sequence-poset
   refl-leq-∞-sequence-poset = asymptotically-Π ∘ (refl-leq-sequence-poset P)
 
+  leq-∞-eq-∞-sequence-poset :
+    {u v : sequence-poset P} → eq-∞-sequence u v → leq-∞-sequence-poset u v
+  leq-∞-eq-∞-sequence-poset {u} {v} =
+    map-asymptotically-Π (λ n → leq-eq-Poset P)
+
   transitive-leq-∞-sequence-poset : is-transitive leq-∞-sequence-poset
-  transitive-leq-∞-sequence-poset u v w (n , H) (m , K) =
-    ( max-ℕ m n) ,
-    ( λ p I →
-      transitive-leq-Poset
-        ( P)
-        ( u p)
-        ( v p)
-        ( w p)
-        ( H p (leq-right-leq-max-ℕ p m n I))
-        ( K p (leq-left-leq-max-ℕ p m n I)))
+  transitive-leq-∞-sequence-poset u v w =
+    map-binary-asymptotically-Π (λ n → transitive-leq-Poset P (u n) (v n) (w n))
 
   antisymmetric-∞-leq-∞-sequence-poset :
     (u v : sequence-poset P) →
     leq-∞-sequence-poset u v →
     leq-∞-sequence-poset v u →
     eq-∞-sequence u v
-  antisymmetric-∞-leq-∞-sequence-poset u v (n , H) (m , K) =
-    ( max-ℕ n m) ,
-    ( λ p I →
-      antisymmetric-leq-Poset
-        ( P)
-        ( u p)
-        ( v p)
-        ( H p (leq-left-leq-max-ℕ p n m I))
-        ( K p (leq-right-leq-max-ℕ p n m I)))
+  antisymmetric-∞-leq-∞-sequence-poset u v =
+    map-binary-asymptotically-Π (λ n → antisymmetric-leq-Poset P (u n) (v n))
 ```

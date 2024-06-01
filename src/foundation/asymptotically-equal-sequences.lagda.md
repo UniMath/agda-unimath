@@ -78,11 +78,7 @@ module _
   where
 
   symmetric-eq-∞-sequence : eq-∞-sequence u v → eq-∞-sequence v u
-  symmetric-eq-∞-sequence =
-    map-Σ
-      ( is-modulus-dependent-sequence (λ n → v n ＝ u n))
-      ( id)
-      ( λ N H m K → inv (H m K))
+  symmetric-eq-∞-sequence = map-asymptotically-Π (λ n → inv)
 ```
 
 ### Asymptotical equality is a transitive relation
@@ -96,9 +92,5 @@ module _
     eq-∞-sequence v w →
     eq-∞-sequence u v →
     eq-∞-sequence u w
-  transitive-eq-∞-sequence (n , H) (m , K) =
-    ( max-ℕ m n) ,
-    ( λ p I →
-      ( K p (leq-left-leq-max-ℕ p m n I)) ∙
-      ( H p (leq-right-leq-max-ℕ p m n I)))
+  transitive-eq-∞-sequence = map-binary-asymptotically-Π (λ n I J → J ∙ I)
 ```

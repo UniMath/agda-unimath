@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.dependent-sequences
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
 ```
@@ -130,5 +131,27 @@ module _
     ((n : ℕ) → A n → B n) →
     asymptotically A →
     asymptotically B
-  map-asymptotically-Π H = map-asymptotically (asymptotically-Π H)
+  map-asymptotically-Π = map-asymptotically ∘ asymptotically-Π
+```
+
+### Asymptotical binary functorial action on asymptotical dependent sequences
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : ℕ → UU l1} {B : ℕ → UU l2} {C : ℕ → UU l3}
+  where
+
+  map-binary-asymptotically :
+    asymptotically (λ n → A n → B n → C n) →
+    asymptotically A →
+    asymptotically B →
+    asymptotically C
+  map-binary-asymptotically I = map-asymptotically ∘ (map-asymptotically I)
+
+  map-binary-asymptotically-Π :
+    ((n : ℕ) → A n → B n → C n) →
+    asymptotically A →
+    asymptotically B →
+    asymptotically C
+  map-binary-asymptotically-Π = map-binary-asymptotically ∘ asymptotically-Π
 ```
