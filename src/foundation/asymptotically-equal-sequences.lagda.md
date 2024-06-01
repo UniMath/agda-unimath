@@ -62,12 +62,16 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l} (u : sequence A)
+  {l : Level} {A : UU l}
   where
 
-  refl-eq-∞-sequence : eq-∞-sequence u u
-  pr1 refl-eq-∞-sequence = zero-ℕ
-  pr2 refl-eq-∞-sequence m H = refl
+  refl-eq-∞-sequence : (u : sequence A) → eq-∞-sequence u u
+  pr1 (refl-eq-∞-sequence u) = zero-ℕ
+  pr2 (refl-eq-∞-sequence u) m H = refl
+
+  eq-∞-eq-sequence :
+    {u v : sequence A} → ((n : ℕ) → (u n) ＝ v n) → eq-∞-sequence u v
+  eq-∞-eq-sequence {u} {v} I = (zero-ℕ , λ n H → I n)
 ```
 
 ### Asymptotical equality is a symmetric relation

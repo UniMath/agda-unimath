@@ -185,7 +185,7 @@ module _
     asymptotically (λ n → ¬ (is-strict-decreasing-value-sequence-ℕ f n)) →
     is-∞-constant-sequence f
   ∞-constant-∞-no-strict-value-decreasing-sequence-ℕ =
-    ( is-∞-constant-is-∞-stationnary-sequence f) ∘
+    ( ∞-constant-is-∞-stationnary-sequence f) ∘
     ( map-asymptotically-Π
       ( stationnary-value-is-not-strict-value-decreasing-sequence-ℕ f H))
 ```

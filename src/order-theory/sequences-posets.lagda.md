@@ -10,8 +10,10 @@ module order-theory.sequences-posets where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.asymptotical-dependent-sequences
+open import foundation.asymptotically-constant-sequences
 open import foundation.asymptotically-equal-sequences
 open import foundation.binary-relations
+open import foundation.constant-sequences
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -121,6 +123,12 @@ module _
     eq-∞-sequence u v
   antisymmetric-∞-leq-∞-sequence-poset u v =
     map-binary-asymptotically-Π (λ n → antisymmetric-leq-Poset P (u n) (v n))
+
+  leq-∞-leq-sequence-poset :
+    {u v : sequence-poset P} →
+    leq-sequence-poset P u v →
+    leq-∞-sequence-poset u v
+  leq-∞-leq-sequence-poset = asymptotically-Π
 ```
 
 ### Concatenation of asymptotical inequality and equality of sequences in partially ordered sets
@@ -139,4 +147,158 @@ module _
     leq-∞-sequence-poset P u v → eq-∞-sequence v w → leq-∞-sequence-poset P u w
   concatenate-leq-∞-eq-∞-sequence-poset =
     map-binary-asymptotically-Π (λ n → concatenate-leq-eq-Poset P)
+
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) {u v w z : sequence-poset P}
+  where
+
+  concatenate-eq-∞-leq-∞-eq-∞-sequence-poset :
+    eq-∞-sequence u v →
+    leq-∞-sequence-poset P v w →
+    eq-∞-sequence w z →
+    leq-∞-sequence-poset P u z
+  concatenate-eq-∞-leq-∞-eq-∞-sequence-poset I =
+    map-binary-asymptotically
+      ( map-asymptotically-Π
+        ( λ n H J K →
+          concatenate-eq-leq-Poset
+            ( P)
+            ( H)
+            ( concatenate-leq-eq-Poset P J K))
+        ( I))
+```
+
+## Properties
+
+### Asymptotical values preserves asymptotical inequality of sequences in partially ordered sets
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (u v : sequence-poset P)
+  (I : leq-∞-sequence-poset P u v)
+  where
+
+  leq-∞-left-leq-∞-constant-sequence-poset :
+    (H : is-∞-constant-sequence u) →
+    leq-∞-sequence-poset P (const-∞-value-∞-constant-sequence H) v
+  leq-∞-left-leq-∞-constant-sequence-poset H =
+    concatenate-eq-∞-leq-∞-sequence-poset
+      ( P)
+      ( eq-∞-value-∞-constant-sequence H)
+      ( I)
+
+  leq-∞-right-leq-∞-constant-sequence-poset :
+    (H : is-∞-constant-sequence v) →
+    leq-∞-sequence-poset P u (const-∞-value-∞-constant-sequence H)
+  leq-∞-right-leq-∞-constant-sequence-poset H =
+    concatenate-leq-∞-eq-∞-sequence-poset
+      ( P)
+      ( I)
+      ( symmetric-eq-∞-sequence
+        ( const-∞-value-∞-constant-sequence H)
+        ( v)
+        ( eq-∞-value-∞-constant-sequence H))
+
+  leq-∞-value-leq-∞-constant-sequence-poset :
+    (H : is-∞-constant-sequence u) →
+    (K : is-∞-constant-sequence v) →
+    leq-Poset P (∞-value-∞-constant-sequence H) (∞-value-∞-constant-sequence K)
+  leq-∞-value-leq-∞-constant-sequence-poset H K =
+    value-∞-asymptotically
+      (concatenate-eq-∞-leq-∞-eq-∞-sequence-poset
+        ( P)
+        ( eq-∞-value-∞-constant-sequence H)
+        ( I)
+        ( symmetric-eq-∞-sequence
+          ( const-∞-value-∞-constant-sequence K)
+          ( v)
+          ( eq-∞-value-∞-constant-sequence K)))
+```
+
+### A sequence in a partially ordered set that asymptotically lies between two asymptotically equal sequences is asymptotically equal to them
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (u v w : sequence-poset P)
+  (I : leq-∞-sequence-poset P u v) (J : leq-∞-sequence-poset P v w)
+  (E : eq-∞-sequence w u)
+  where
+
+  left-eq-∞-guarded-sequence-poset : eq-∞-sequence u v
+  left-eq-∞-guarded-sequence-poset =
+    antisymmetric-∞-leq-∞-sequence-poset
+      ( P)
+      ( u)
+      ( v)
+      ( I)
+      ( concatenate-leq-∞-eq-∞-sequence-poset P J E)
+
+  right-eq-∞-guarded-sequence-poset : eq-∞-sequence v w
+  right-eq-∞-guarded-sequence-poset =
+    antisymmetric-∞-leq-∞-sequence-poset
+      ( P)
+      ( v)
+      ( w)
+      ( J)
+      ( concatenate-eq-∞-leq-∞-sequence-poset P E I)
+```
+
+### A sequence in a partially ordered that asymptotically lies between two asymptotically constant sequences with the same asymptotical value is asymptotically constant
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (u v w : sequence-poset P)
+  (I : leq-∞-sequence-poset P u v) (J : leq-∞-sequence-poset P v w)
+  (H : is-∞-constant-sequence u) (K : is-∞-constant-sequence w)
+  where
+
+  ∞-constant-eq-∞-value-guarded-sequence-poset :
+    Id
+      (∞-value-∞-constant-sequence K)
+      (∞-value-∞-constant-sequence H) →
+    is-∞-constant-sequence v
+  ∞-constant-eq-∞-value-guarded-sequence-poset E =
+    ∞-constant-eq-∞-constant-sequence
+      ( ∞-value-∞-constant-sequence H)
+      ( v)
+      ( antisymmetric-∞-leq-∞-sequence-poset
+        ( P)
+        ( const-∞-value-∞-constant-sequence H)
+        ( v)
+        ( concatenate-eq-∞-leq-∞-sequence-poset
+          ( P)
+          ( eq-∞-value-∞-constant-sequence H)
+          ( I))
+        ( concatenate-leq-∞-eq-∞-sequence-poset
+          ( P)
+          ( J)
+          ( transitive-eq-∞-sequence
+            ( w)
+            ( const-∞-value-∞-constant-sequence K)
+            ( const-∞-value-∞-constant-sequence H)
+            ( eq-∞-eq-sequence (λ n → E))
+            ( symmetric-eq-∞-sequence
+              ( const-∞-value-∞-constant-sequence K)
+              ( w)
+              ( eq-∞-value-∞-constant-sequence K)))))
+
+  ∞-constant-leq-∞-value-guarded-sequence-poset :
+    leq-Poset P
+      (∞-value-∞-constant-sequence K)
+      (∞-value-∞-constant-sequence H) →
+    is-∞-constant-sequence v
+  ∞-constant-leq-∞-value-guarded-sequence-poset E =
+    ∞-constant-eq-∞-value-guarded-sequence-poset
+      ( antisymmetric-leq-Poset
+        ( P)
+        ( ∞-value-∞-constant-sequence K)
+        ( ∞-value-∞-constant-sequence H)
+        ( E)
+        ( leq-∞-value-leq-∞-constant-sequence-poset
+          ( P)
+          ( u)
+          ( w)
+          ( transitive-leq-∞-sequence-poset P u v w J I)
+          ( H)
+          ( K)))
 ```

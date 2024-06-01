@@ -136,9 +136,9 @@ module _
   {l : Level} {A : UU l} (x : A) (u : sequence A)
   where
 
-  is-∞-constant-eq-∞-constant-sequence :
+  ∞-constant-eq-∞-constant-sequence :
     (eq-∞-sequence (const-sequence x) u) → is-∞-constant-sequence u
-  is-∞-constant-eq-∞-constant-sequence H =
+  ∞-constant-eq-∞-constant-sequence H =
     ( modulus-eq-∞-sequence H) ,
     ( λ p I →
       ( ( modulus-eq-∞-sequence H) ,
@@ -167,9 +167,9 @@ module _
             ( n)
             ( I))))
 
-  is-∞-constant-Π-subsequence : Π-subsequence is-∞-constant-sequence u
-  is-∞-constant-Π-subsequence v =
-    is-∞-constant-eq-∞-constant-sequence
+  ∞-constant-Π-subsequence : Π-subsequence is-∞-constant-sequence u
+  ∞-constant-Π-subsequence v =
+    ∞-constant-eq-∞-constant-sequence
       ( ∞-value-∞-constant-sequence H)
       ( sequence-subsequence u v)
       ( eq-∞-value-∞-constant-Π-subsequence v)
@@ -185,7 +185,7 @@ module _
   preserves-∞-constant-eq-∞-sequence :
     is-∞-constant-sequence u → is-∞-constant-sequence v
   preserves-∞-constant-eq-∞-sequence K =
-    is-∞-constant-eq-∞-constant-sequence
+    ∞-constant-eq-∞-constant-sequence
       ( ∞-value-∞-constant-sequence K)
       ( v)
       ( transitive-eq-∞-sequence
@@ -228,18 +228,18 @@ module _
   {l : Level} {A : UU l} (u : sequence A)
   where
 
-  is-∞-constant-is-∞-stationnary-sequence :
+  ∞-constant-is-∞-stationnary-sequence :
     is-∞-stationnary-sequence u → is-∞-constant-sequence u
-  is-∞-constant-is-∞-stationnary-sequence H =
-    is-∞-constant-eq-∞-constant-sequence
+  ∞-constant-is-∞-stationnary-sequence H =
+    ∞-constant-eq-∞-constant-sequence
       ( u (modulus-∞-asymptotically H))
       ( u)
       ( ( modulus-∞-asymptotically H) ,
         ( is-∞-constant-modulus-is-∞-stationnary-sequence u H))
 
-  is-∞-stationnary-is-∞-constant-sequence :
+  ∞-stationnary-is-∞-constant-sequence :
     is-∞-constant-sequence u → is-∞-stationnary-sequence u
-  is-∞-stationnary-is-∞-constant-sequence H =
+  ∞-stationnary-is-∞-constant-sequence H =
     ( ( modulus-∞-value-∞-constant-sequence H) ,
       ( λ n I →
         ( inv (is-modulus-∞-value-∞-constant-sequence H n I)) ∙
@@ -272,10 +272,10 @@ module _
         ( u)
         ( eq-∞-value-∞-constant-sequence H))
 
-  is-∞-constant-eq-∞-sequence-subsequence :
+  ∞-constant-eq-∞-sequence-subsequence :
     Π-subsequence (eq-∞-sequence u) u → is-∞-constant-sequence u
-  is-∞-constant-eq-∞-sequence-subsequence H =
-    is-∞-constant-is-∞-stationnary-sequence
+  ∞-constant-eq-∞-sequence-subsequence H =
+    ∞-constant-is-∞-stationnary-sequence
       ( u)
       ( H (skip-zero-sequence u))
 ```
