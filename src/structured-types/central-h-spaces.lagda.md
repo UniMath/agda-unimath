@@ -15,6 +15,7 @@ open import foundation.endomorphisms
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.mere-identity-endomorphisms
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -42,7 +43,7 @@ leads to the concept of _central H-space_.
 A {{#concept "central pointed type" agda=Central-Pointed-Type}} is a
 [pointed type](structured-types.pointed-types.md) such that the map
 `ev_pt : (A → A)_{(id)} → A` from the connected component of the identity
-function is an equivalence. Note that every type of endofunctions is an H-space.
+function is an equivalence. Note that every type of [mere identity endomorphisms](foundation.mere-identity-endomorphisms.md) is an H-space, and therefore it follows that every central pointed type is also an H-space.
 
 ## Definitions
 
@@ -53,7 +54,7 @@ is-central-Pointed-Type :
   {l : Level} (A : Pointed-Type l) → UU l
 is-central-Pointed-Type A =
   is-equiv
-    { A = connected-component (type-Pointed-Type A → type-Pointed-Type A) id}
+    { A = mere-identity-endomorphism (type-Pointed-Type A)}
     ( ev-point-Pointed-Type A ∘ pr1)
 ```
 
@@ -83,17 +84,13 @@ module _
   is-central-Central-Pointed-Type = pr2 A
 
   ev-point-Central-Pointed-Type :
-    connected-component
-      ( type-Central-Pointed-Type → type-Central-Pointed-Type)
-      ( id) →
+    mere-identity-endomorphism type-Central-Pointed-Type →
     type-Central-Pointed-Type
   ev-point-Central-Pointed-Type =
     ev-point-Pointed-Type pointed-type-Central-Pointed-Type ∘ pr1
 
   ev-point-equiv-Central-Pointed-Type :
-    connected-component
-      ( type-Central-Pointed-Type → type-Central-Pointed-Type)
-      ( id) ≃
+    mere-identity-endomorphism type-Central-Pointed-Type ≃
     type-Central-Pointed-Type
   pr1 ev-point-equiv-Central-Pointed-Type = ev-point-Central-Pointed-Type
   pr2 ev-point-equiv-Central-Pointed-Type = is-central-Central-Pointed-Type

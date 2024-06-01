@@ -81,7 +81,7 @@ module _
     (g : hom-action-Concrete-Group G X Y) →
     (f ＝ g) ≃ htpy-hom-action-Concrete-Group g
   extensionality-hom-action-Concrete-Group g =
-    ( equiv-dependent-universal-property-is-0-connected
+    ( equiv-dependent-universal-property-0-connected-type
       ( shape-Concrete-Group G)
       ( is-0-connected-classifying-type-Concrete-Group G)
       ( λ u →

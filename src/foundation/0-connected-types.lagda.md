@@ -17,6 +17,7 @@ open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-contractible-types
@@ -39,19 +40,83 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is said to be connected if its type of connected components, i.e., its
-set truncation, is contractible.
+A type is said to be {{#concept "0-connected" Agda=is-0-connected}} if its type
+of connected components, i.e., its
+[set truncation](foundation.set-truncations.md), is
+[contractible](foundation-core.contractible-types.md). Sometimes we simply say
+that a type is connected instead of saying that it is 0-connected.
+
+## Definitions
+
+### The predicate of being a `0`-connected type
 
 ```agda
-is-0-connected-Prop : {l : Level} → UU l → Prop l
-is-0-connected-Prop A = is-contr-Prop (type-trunc-Set A)
+module _
+  {l : Level} (A : UU l)
+  where
 
-is-0-connected : {l : Level} → UU l → UU l
-is-0-connected A = type-Prop (is-0-connected-Prop A)
+  is-0-connected-Prop : Prop l
+  is-0-connected-Prop = is-contr-Prop (type-trunc-Set A)
 
-is-prop-is-0-connected : {l : Level} (A : UU l) → is-prop (is-0-connected A)
-is-prop-is-0-connected A = is-prop-type-Prop (is-0-connected-Prop A)
+  is-0-connected : UU l
+  is-0-connected = type-Prop is-0-connected-Prop
 
+  is-prop-is-0-connected : is-prop is-0-connected
+  is-prop-is-0-connected = is-prop-type-Prop is-0-connected-Prop
+```
+
+### The dependent universal property of pointed `0`-connected types
+
+The
+{{#concept "dependent universal property of `0`-connected types" Agda=dependent-universal-property-0-connected-type}}
+asserts that for any element `a` in a type `A` and any
+[subtype](foundation.subtypes.md) `P` of `A`, the evaluation map
+
+```text
+  ((x : A) → P x) → P a
+```
+
+is an equivalence. In other words, a type `A` with a given element `a` is
+`0`-connected precisely when any subtype contains all elements if and only if it
+contains the given element `a`.
+
+```agda
+module _
+  {l1 : Level} {A : UU l1} (a : A)
+  where
+
+  ev-point-subtype :
+    {l2 : Level} (P : subtype l2 A) →
+    ((x : A) → is-in-subtype P x) → is-in-subtype P a
+  ev-point-subtype P f = f a
+
+  dependent-universal-property-0-connected-type : UUω
+  dependent-universal-property-0-connected-type =
+    {l : Level} (P : subtype l A) → is-equiv (ev-point-subtype P)
+```
+
+### The universal property of `0`-connected types
+
+The
+{{#concept "universal property of `0`-connected types" Agda=universal-property-0-connected-type}}
+asserts that maps from a type `A` equipped with a given element `a : A` into a
+[set](foundation-core.sets.md) `S` are uniquely determined by an element of `S`.
+
+```agda
+module _
+  {l1 : Level} {A : UU l1} (a : A)
+  where
+
+  universal-property-0-connected-type : UUω
+  universal-property-0-connected-type =
+    {l : Level} (S : Set l) → is-equiv (ev-point' a {type-Set S})
+```
+
+## Properties
+
+### `0`-connected types are inhabited
+
+```agda
 abstract
   is-inhabited-is-0-connected :
     {l : Level} {A : UU l} → is-0-connected A → is-inhabited A
@@ -60,24 +125,36 @@ abstract
       ( center C)
       ( set-Prop (trunc-Prop A))
       ( unit-trunc-Prop)
+```
 
+### Any two elements in a `0`-connected type are merely equal
+
+```agda
 abstract
   mere-eq-is-0-connected :
     {l : Level} {A : UU l} → is-0-connected A → (x y : A) → mere-eq x y
   mere-eq-is-0-connected {A = A} H x y =
     apply-effectiveness-unit-trunc-Set (eq-is-contr H)
+```
 
+### A pointed type in which every element is merely equal to the base point is `0`-connected
+
+```agda
 abstract
   is-0-connected-mere-eq :
     {l : Level} {A : UU l} (a : A) →
     ((x : A) → mere-eq a x) → is-0-connected A
-  is-0-connected-mere-eq {l} {A} a e =
-    pair
-      ( unit-trunc-Set a)
-      ( apply-dependent-universal-property-trunc-Set'
-        ( λ x → set-Prop (Id-Prop (trunc-Set A) (unit-trunc-Set a) x))
-        ( λ x → apply-effectiveness-unit-trunc-Set' (e x)))
+  pr1 (is-0-connected-mere-eq {l} {A} a e) =
+    unit-trunc-Set a
+  pr2 (is-0-connected-mere-eq {l} {A} a e) =
+    apply-dependent-universal-property-trunc-Set'
+      ( λ x → set-Prop (Id-Prop (trunc-Set A) (unit-trunc-Set a) x))
+      ( λ x → apply-effectiveness-unit-trunc-Set' (e x))
+```
 
+### An inhabited type in which any two elements are merely equal is `0`-connected
+
+```agda
 abstract
   is-0-connected-mere-eq-is-inhabited :
     {l : Level} {A : UU l} →
@@ -86,17 +163,22 @@ abstract
     apply-universal-property-trunc-Prop H
       ( is-0-connected-Prop _)
       ( λ a → is-0-connected-mere-eq a (K a))
+```
 
-is-0-connected-is-surjective-point :
-  {l1 : Level} {A : UU l1} (a : A) →
-  is-surjective (point a) → is-0-connected A
-is-0-connected-is-surjective-point a H =
-  is-0-connected-mere-eq a
-    ( λ x →
-      apply-universal-property-trunc-Prop
-        ( H x)
-        ( mere-eq-Prop a x)
-        ( λ u → unit-trunc-Prop (pr2 u)))
+### The point inclusion of a given element of a type is surjective if and only if the type is `0`-connected
+
+```agda
+abstract
+  is-0-connected-is-surjective-point :
+    {l1 : Level} {A : UU l1} (a : A) →
+    is-surjective (point a) → is-0-connected A
+  is-0-connected-is-surjective-point a H =
+    is-0-connected-mere-eq a
+      ( λ x →
+        apply-universal-property-trunc-Prop
+          ( H x)
+          ( mere-eq-Prop a x)
+          ( λ u → unit-trunc-Prop (pr2 u)))
 
 abstract
   is-surjective-point-is-0-connected :
@@ -107,38 +189,75 @@ abstract
       ( mere-eq-is-0-connected H a x)
       ( trunc-Prop (fiber (point a) x))
       ( λ where refl → unit-trunc-Prop (star , refl))
+```
 
-is-trunc-map-ev-point-is-connected :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →
-  is-0-connected A → is-trunc (succ-𝕋 k) B →
-  is-trunc-map k (ev-point' a {B})
-is-trunc-map-ev-point-is-connected k {A} {B} a H K =
-  is-trunc-map-comp k
-    ( ev-point' star {B})
-    ( precomp (point a) B)
-    ( is-trunc-map-is-equiv k
-      ( universal-property-contr-is-contr star is-contr-unit B))
-    ( is-trunc-map-precomp-Π-is-surjective k
+### A pointed connected type `A` is `k + 1`-truncated if and only if the base point inclusion is `k`-truncated
+
+```agda
+abstract
+  is-trunc-map-ev-point-is-connected :
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →
+    is-0-connected A → is-trunc (succ-𝕋 k) B →
+    is-trunc-map k (ev-point' a {B})
+  is-trunc-map-ev-point-is-connected k {A} {B} a H K =
+    is-trunc-map-comp k
+      ( ev-point' star {B})
+      ( precomp (point a) B)
+      ( is-trunc-map-is-equiv k
+        ( universal-property-contr-is-contr star is-contr-unit B))
+      ( is-trunc-map-precomp-Π-is-surjective k
+        ( is-surjective-point-is-0-connected a H)
+        ( λ _ → (B , K)))
+```
+
+### The dependent universal property of `0`-connected types
+
+```agda
+module _
+  {l1 : Level} {A : UU l1} (a : A)
+  where
+
+  abstract
+    is-0-connected-dependent-universal-property-0-connected-type :
+      dependent-universal-property-0-connected-type a →
+      is-0-connected A
+    is-0-connected-dependent-universal-property-0-connected-type H =
+      is-0-connected-mere-eq a
+        ( map-inv-is-equiv (H (mere-eq-Prop a)) (refl-mere-eq a))
+
+  abstract
+    dependent-universal-property-0-connected-type-is-0-connected :
+      is-0-connected A → dependent-universal-property-0-connected-type a
+    dependent-universal-property-0-connected-type-is-0-connected H P =
+      is-equiv-comp _ _
+        ( dependent-universal-property-surjection-is-surjective
+          ( point a)
+          ( is-surjective-point-is-0-connected a H)
+          ( P))
+        ( universal-property-unit (type-Prop (P a)))
+
+  equiv-dependent-universal-property-0-connected-type :
+    is-0-connected A →
+    ( {l : Level} (P : subtype l A) →
+      ((x : A) → is-in-subtype P x) ≃ is-in-subtype P a)
+  equiv-dependent-universal-property-0-connected-type H P =
+    ( equiv-universal-property-unit (type-Prop (P a))) ∘e
+    ( equiv-dependent-universal-property-surjection-is-surjective
+      ( point a)
       ( is-surjective-point-is-0-connected a H)
-      ( λ _ → (B , K)))
+      ( P))
 
-equiv-dependent-universal-property-is-0-connected :
-  {l1 : Level} {A : UU l1} (a : A) → is-0-connected A →
-  ( {l : Level} (P : A → Prop l) →
-    ((x : A) → type-Prop (P x)) ≃ type-Prop (P a))
-equiv-dependent-universal-property-is-0-connected a H P =
-  ( equiv-universal-property-unit (type-Prop (P a))) ∘e
-  ( equiv-dependent-universal-property-surjection-is-surjective
-    ( point a)
-    ( is-surjective-point-is-0-connected a H)
-    ( P))
+  abstract
+    apply-dependent-universal-property-0-connected-type :
+      {l2 : Level} → is-0-connected A → (P : subtype l2 A) →
+      is-in-subtype P a → (x : A) → is-in-subtype P x
+    apply-dependent-universal-property-0-connected-type H P =
+      map-inv-equiv (equiv-dependent-universal-property-0-connected-type H P)
+```
 
-apply-dependent-universal-property-is-0-connected :
-  {l1 : Level} {A : UU l1} (a : A) → is-0-connected A →
-  {l : Level} (P : A → Prop l) → type-Prop (P a) → (x : A) → type-Prop (P x)
-apply-dependent-universal-property-is-0-connected a H P =
-  map-inv-equiv (equiv-dependent-universal-property-is-0-connected a H P)
+### A pointed type is connected if and only if the fiber inclusion is surjective for any type family over it
 
+```agda
 abstract
   is-surjective-fiber-inclusion :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
@@ -167,16 +286,22 @@ abstract
     is-0-connected A
   is-0-connected-is-surjective-fiber-inclusion a H =
     is-0-connected-mere-eq a (mere-eq-is-surjective-fiber-inclusion a H)
+```
 
-is-0-connected-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (A ≃ B) → is-0-connected B → is-0-connected A
-is-0-connected-equiv e = is-contr-equiv _ (equiv-trunc-Set e)
+### `0`-connected types are closed under equivalences
 
-is-0-connected-equiv' :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (A ≃ B) → is-0-connected A → is-0-connected B
-is-0-connected-equiv' e = is-0-connected-equiv (inv-equiv e)
+```agda
+abstract
+  is-0-connected-equiv :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    (A ≃ B) → is-0-connected B → is-0-connected A
+  is-0-connected-equiv e = is-contr-equiv _ (equiv-trunc-Set e)
+
+abstract
+  is-0-connected-equiv' :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    (A ≃ B) → is-0-connected A → is-0-connected B
+  is-0-connected-equiv' e = is-0-connected-equiv (inv-equiv e)
 ```
 
 ### `0-connected` types are closed under cartesian products
@@ -198,9 +323,12 @@ module _
 ### A contractible type is `0`-connected
 
 ```agda
-is-0-connected-is-contr :
-  {l : Level} (X : UU l) →
-  is-contr X → is-0-connected X
-is-0-connected-is-contr X p =
-  is-contr-equiv X (inv-equiv (equiv-unit-trunc-Set (X , is-set-is-contr p))) p
+abstract
+  is-0-connected-is-contr :
+    {l : Level} (X : UU l) →
+    is-contr X → is-0-connected X
+  is-0-connected-is-contr X p =
+    is-contr-equiv X
+      ( inv-equiv (equiv-unit-trunc-Set (X , is-set-is-contr p)))
+      ( p)
 ```

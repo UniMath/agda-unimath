@@ -10,7 +10,7 @@ module foundation.connected-components where
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
-open import foundation.mere-equality
+open import foundation-core.mere-equality
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
