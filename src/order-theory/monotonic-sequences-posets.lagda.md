@@ -7,6 +7,7 @@ module order-theory.monotonic-sequences-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -126,11 +127,11 @@ module _
 
 ## Properties
 
-### The value of a sequence in a partially ordered set is stationnary if and only if it is both increasing and decreasing
+### Any value of a sequence in a partially ordered set is stationnary if and only if it is both increasing and decreasing
 
 ```agda
 module _
-  {l1 l2 : Level} (P : Poset l1 l2) {u : sequence-poset P} (n : ℕ)
+  {l1 l2 : Level} (P : Poset l1 l2) (u : sequence-poset P) (n : ℕ)
   where
 
   increasing-value-is-stationnary-value-sequence-poset :
@@ -210,11 +211,11 @@ module _
     is-constant-sequence u → is-decreasing-sequence-poset P u
   decreasing-is-constant-sequence-poset H p q I = leq-eq-Poset P (H q p)
 
-  constant-is-increasing-decreasing-sequence-post :
+  constant-is-increasing-decreasing-sequence-poset :
     is-increasing-sequence-poset P u →
     is-decreasing-sequence-poset P u →
     is-constant-sequence u
-  constant-is-increasing-decreasing-sequence-post I J p q =
+  constant-is-increasing-decreasing-sequence-poset I J p q =
     rec-coproduct
       ( λ H → antisymmetric-leq-Poset P (u p) (u q) (I p q H) (J p q H))
       ( λ H → antisymmetric-leq-Poset P (u p) (u q) (J q p H) (I q p H))
@@ -225,7 +226,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (P : Poset l1 l2) {u : sequence-poset P}
+  {l1 l2 : Level} (P : Poset l1 l2) (u : sequence-poset P)
   where
 
   increasing-Π-subsequence-increasing-sequence-poset :
@@ -251,7 +252,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (P : Poset l1 l2) {u : sequence-poset P}
+  {l1 l2 : Level} (P : Poset l1 l2) (u : sequence-poset P)
   where
 
   increasing-Π-subsequence-leq-sequence-poset :
@@ -273,7 +274,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (P : Poset l1 l2) {u : sequence-poset P}
+  {l1 l2 : Level} (P : Poset l1 l2) (u : sequence-poset P)
   where
 
   decreasing-Π-subsequence-leq-sequence-poset :
@@ -289,6 +290,43 @@ module _
     Π-subsequence (λ v → leq-sequence-poset P v u) u
   Π-subsequence-leq-decreasing-sequence-Poset H v n =
     H n (extract-subsequence u v n) (leq-id-extract-subsequence u v n)
+```
+
+### A monotonic sequence `u` with `u (p + n) ＝ u p` is constant between `n` and `p + n`
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (u : sequence-poset P)
+  (p n : ℕ) (I : u (p +ℕ n) ＝ u n)
+  where
+
+  constant-value-is-stationnary-interval-increasing-sequence-poset :
+    is-increasing-sequence-poset P u →
+    (k : ℕ) (J : leq-ℕ k p) → u (k +ℕ n) ＝ u n
+  constant-value-is-stationnary-interval-increasing-sequence-poset H k J =
+    antisymmetric-leq-Poset
+      ( P)
+      ( u (k +ℕ n))
+      ( u n)
+      ( concatenate-leq-eq-Poset
+        ( P)
+        ( H (k +ℕ n) (p +ℕ n) (preserves-leq-left-add-ℕ n k p J))
+        ( I))
+      ( H n (k +ℕ n) (leq-add-ℕ' n k))
+
+  constant-value-is-stationnary-interval-decreasing-sequence-poset :
+    is-decreasing-sequence-poset P u →
+    (k : ℕ) (J : leq-ℕ k p) → u (k +ℕ n) ＝ u n
+  constant-value-is-stationnary-interval-decreasing-sequence-poset H k J =
+    antisymmetric-leq-Poset
+      ( P)
+      ( u (k +ℕ n))
+      ( u n)
+      ( H n (k +ℕ n) (leq-add-ℕ' n k))
+      ( concatenate-eq-leq-Poset
+        ( P)
+        ( inv I)
+        ( H (k +ℕ n) (p +ℕ n) (preserves-leq-left-add-ℕ n k p J)))
 ```
 
 ### Asymptotical behavior
@@ -349,4 +387,75 @@ module _
                     ( extract-modulus-subsequence u v n)
                     ( leq-extract-modulus-subsequence u v n)))
                 ( H (extract-subsequence u v zero-ℕ) n I))))
+```
+
+#### A monotonic sequence in a partially ordered set with an asymptotically constant subsequence is asymptotically constant
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) {u : sequence-poset P}
+  where
+
+  ∞-constant-Σ-subsequence-∞-constant-increasing-sequence-poset :
+    is-increasing-sequence-poset P u →
+    Σ-subsequence is-∞-constant-sequence u →
+    is-∞-constant-sequence u
+  ∞-constant-Σ-subsequence-∞-constant-increasing-sequence-poset H =
+    ( ∞-constant-Σ-subsequence-constant-increasing-sequence-poset P H) ∘
+    ( rec-Σ
+      ( λ v →
+        ( rec-Σ ( λ w I → ( sub-subsequence u v w , I))) ∘
+        ( constant-subsequence-is-∞-constant-sequence
+          ( sequence-subsequence u v))))
+
+  ∞-constant-Σ-subsequence-∞-constant-decreasing-sequence-poset :
+    is-decreasing-sequence-poset P u →
+    Σ-subsequence is-∞-constant-sequence u →
+    is-∞-constant-sequence u
+  ∞-constant-Σ-subsequence-∞-constant-decreasing-sequence-poset H =
+    ( ∞-constant-Σ-subsequence-constant-decreasing-sequence-poset P H) ∘
+    ( rec-Σ
+      ( λ v →
+        ( rec-Σ (λ w I → (sub-subsequence u v w , I))) ∘
+        ( constant-subsequence-is-∞-constant-sequence
+          ( sequence-subsequence u v))))
+```
+
+#### An increasing sequence in a partially ordered set with a decreasing subsequence is asymptotically constant
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) {u : sequence-poset P}
+  (H : is-increasing-sequence-poset P u)
+  where
+
+  ∞-constant-Σ-subsequence-decreasing-is-increasing-sequence-poset :
+    Σ-subsequence (is-decreasing-sequence-poset P) u →
+    is-∞-constant-sequence u
+  ∞-constant-Σ-subsequence-decreasing-is-increasing-sequence-poset =
+    ( ∞-constant-Σ-subsequence-constant-increasing-sequence-poset P H) ∘
+    ( tot
+      ( (constant-is-increasing-decreasing-sequence-poset P) ∘
+        ( increasing-Π-subsequence-increasing-sequence-poset P u H)))
+```
+
+#### A decreasing sequence in a partially ordered set with an increasing subsequence is asymptotically constant
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) {u : sequence-poset P}
+  (H : is-decreasing-sequence-poset P u)
+  where
+
+  ∞-constant-Σ-subsequence-increasing-is-decreasing-sequence-poset :
+    Σ-subsequence (is-increasing-sequence-poset P) u →
+    is-∞-constant-sequence u
+  ∞-constant-Σ-subsequence-increasing-is-decreasing-sequence-poset =
+    ( ∞-constant-Σ-subsequence-constant-decreasing-sequence-poset P H) ∘
+    ( tot
+      ( λ v K →
+        constant-is-increasing-decreasing-sequence-poset
+          ( P)
+          ( K)
+          ( decreasing-Π-subsequence-decreasing-sequence-poset P u H v)))
 ```
