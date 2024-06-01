@@ -31,7 +31,7 @@ can be partially ordered by pointwise comparison.
 
 ## Definitions
 
-### Sequences in a partially ordered sets
+### Sequences in partially ordered sets
 
 ```agda
 module _
