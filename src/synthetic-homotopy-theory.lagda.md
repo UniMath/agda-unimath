@@ -50,6 +50,7 @@ open import synthetic-homotopy-theory.descent-circle-subtypes public
 open import synthetic-homotopy-theory.descent-data-pushouts public
 open import synthetic-homotopy-theory.descent-data-pushouts-equivalence-families public
 open import synthetic-homotopy-theory.descent-data-pushouts-function-families public
+open import synthetic-homotopy-theory.descent-data-pushouts-identity-types public
 open import synthetic-homotopy-theory.descent-data-sequential-colimits public
 open import synthetic-homotopy-theory.descent-property-pushouts public
 open import synthetic-homotopy-theory.descent-property-sequential-colimits public
