@@ -111,6 +111,18 @@ module _
       ( descent-data-family-with-descent-data-pushout)
   equiv-descent-data-family-with-descent-data-pushout = pr2 (pr2 P)
 
+  inv-equiv-descent-data-family-with-descent-data-pushout :
+    equiv-descent-data-pushout
+      ( descent-data-family-with-descent-data-pushout)
+      ( descent-data-family-cocone-span-diagram c
+        ( family-cocone-family-with-descent-data-pushout))
+  inv-equiv-descent-data-family-with-descent-data-pushout =
+    inv-equiv-descent-data-pushout
+      ( descent-data-family-cocone-span-diagram c
+        ( family-cocone-family-with-descent-data-pushout))
+      ( descent-data-family-with-descent-data-pushout)
+      ( equiv-descent-data-family-with-descent-data-pushout)
+
   left-equiv-family-with-descent-data-pushout :
     (a : domain-span-diagram 𝒮) →
     family-cocone-family-with-descent-data-pushout

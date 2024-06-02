@@ -46,7 +46,7 @@ given a pushout square
       g
   S -----> B
   |        |
- f|        |j
+ f|        | j
   ∨      ⌜ ∨
   A -----> X
       i
