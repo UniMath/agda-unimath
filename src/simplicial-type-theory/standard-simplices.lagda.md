@@ -142,3 +142,13 @@ predicate-Δ = is-in-subtype ∘ subtype-Δ
 -- -- Λ : (n k : ℕ) → Shape (simplicial-cube n)
 -- -- Λ n k = aux-Λ n k k
 ```
+
+## Properties
+
+### The standard 𝑛-simplex is a retract of the directed 𝑛-cube
+
+This remains to be formalized. Lemma 4.2.2 {{#cite MR23b}}
+
+## References
+
+{{#bibliography}}
