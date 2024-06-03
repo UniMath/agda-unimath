@@ -278,3 +278,54 @@ module _
     is-orthogonal-is-orthogonal-fiber-condition-right-map (terminal-map Y) f
       ( is-orthogonal-fiber-condition-terminal-map-is-null-map H)
 ```
+
+### A family is `Y`-null if and only if it is orthogonal to the terminal projection of `Y`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (Y : UU l1) {A : UU l2} {B : A → UU l3}
+  where
+
+  is-null-family-is-orthogonal-terminal-map :
+    is-orthogonal (terminal-map Y) (pr1 {B = B}) → is-null-family Y B
+  is-null-family-is-orthogonal-terminal-map H =
+    is-null-family-is-null-map-pr1 Y B
+      ( is-null-map-is-orthogonal-terminal-map Y pr1 H)
+
+  is-orthogonal-terminal-map-is-null-family :
+    is-null-family Y B → is-orthogonal (terminal-map Y) (pr1 {B = B})
+  is-orthogonal-terminal-map-is-null-family H =
+    is-orthogonal-terminal-map-is-null-map Y pr1
+      ( is-null-map-pr1-is-null-family Y B H)
+```
+
+### The dependent sum of a `Y`-null type family over a `Y`-null base is `Y`-null
+
+```agda
+module _
+  {l1 l2 l3 : Level} (Y : UU l1) {A : UU l2} {B : A → UU l3}
+  where
+
+  abstract
+    is-null-Σ : is-null Y A → is-null-family Y B → is-null Y (Σ A B)
+    is-null-Σ is-null-A is-null-B =
+      is-null-is-orthogonal-terminal-maps
+        ( is-orthogonal-right-comp
+          ( terminal-map Y)
+          ( pr1)
+          ( terminal-map A)
+          ( is-orthogonal-terminal-maps-is-null is-null-A)
+          ( is-orthogonal-terminal-map-is-null-family Y is-null-B))
+
+  abstract
+    is-null-family-is-null-Σ :
+      is-null Y A → is-null Y (Σ A B) → is-null-family Y B
+    is-null-family-is-null-Σ is-null-A is-null-Σ-B =
+      is-null-family-is-orthogonal-terminal-map Y
+        ( is-orthogonal-right-right-factor
+          ( terminal-map Y)
+          ( pr1)
+          ( terminal-map A)
+          ( is-orthogonal-terminal-maps-is-null is-null-A)
+          ( is-orthogonal-terminal-maps-is-null is-null-Σ-B))
+```
