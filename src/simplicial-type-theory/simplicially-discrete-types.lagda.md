@@ -10,8 +10,10 @@ module simplicial-type-theory.simplicially-discrete-types where
 open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
 open import foundation.connected-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
+open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.function-types
@@ -189,6 +191,24 @@ is-simplicially-discrete-is-prop :
   {l : Level} {P : UU l} → is-prop P → is-simplicially-discrete P
 is-simplicially-discrete-is-prop =
   is-simplicially-discrete-is-𝟚-null ∘ is-null-is-prop-is-inhabited' 0₂
+```
+
+### Contractible types are simplicially discrete
+
+```agda
+is-simplicially-discrete-is-contr :
+  {l : Level} {P : UU l} → is-contr P → is-simplicially-discrete P
+is-simplicially-discrete-is-contr is-contr-P =
+  is-simplicially-discrete-is-prop (is-prop-is-contr is-contr-P)
+```
+
+### Empty types are simplicially discrete
+
+```agda
+is-simplicially-discrete-is-empty :
+  {l : Level} {P : UU l} → is-empty P → is-simplicially-discrete P
+is-simplicially-discrete-is-empty is-empty-P =
+  is-simplicially-discrete-is-prop (is-prop-is-empty is-empty-P)
 ```
 
 ## References
