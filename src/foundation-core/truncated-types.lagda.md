@@ -20,6 +20,7 @@ open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
+open import foundation-core.invertible-maps
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
@@ -433,7 +434,12 @@ module _
               ( is-trunc-function-type k H)
               ( λ h →
                 is-trunc-Π k (λ x → is-trunc-Id H (h (f x)) x))))
+```
 
+Alternatively, this follows from the fact that equivalences embed into function
+types, and function types between `k`-truncated types are `k`-truncated.
+
+```agda
 type-equiv-Truncated-Type :
   {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k) (B : Truncated-Type l2 k) →
   UU (l1 ⊔ l2)

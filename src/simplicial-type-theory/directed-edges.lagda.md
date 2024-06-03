@@ -7,6 +7,7 @@ module simplicial-type-theory.directed-edges where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -14,6 +15,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -23,6 +25,8 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
+open import foundation.type-arithmetic-booleans
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -141,6 +145,8 @@ simplicial-hom-eq p =
     compute-target-simplicial-arrow-eq p)
 ```
 
+## Properties
+
 ### Characterizing equality of homomorphisms
 
 ```agda
@@ -222,10 +228,10 @@ module _
   eq-simplicial-hom-htpy-simplicial-arrow :
     simplicial-hom-htpy-simplicial-arrow ＝ g
   eq-simplicial-hom-htpy-simplicial-arrow =
-      eq-htpy-simplicial-hom
-        ( simplicial-hom-htpy-simplicial-arrow)
-        ( g)
-        ( htpy-simplicial-hom-htpy-simplicial-arrow)
+    eq-htpy-simplicial-hom
+      ( simplicial-hom-htpy-simplicial-arrow)
+      ( g)
+      ( htpy-simplicial-hom-htpy-simplicial-arrow)
 ```
 
 ### Computing the based total type of directed edges
@@ -357,4 +363,26 @@ module _
   inv-compute-total-simplicial-hom =
     ( map-inv-compute-total-simplicial-hom ,
       is-equiv-map-inv-compute-total-simplicial-hom)
+```
+
+### The hom type is an extension type
+
+The hom-type `x →₂ y` is equivalent to the
+[type of extensions](orthogonal-factorization-systems.extensions-of-maps.md) of
+`[x , y] : ∂𝟚 → A` along the inclusion `∂𝟚 ↪ 𝟚`.
+
+```agda
+module _
+  {l : Level} {A : UU l} (x y : A)
+  where
+
+  compute-extension-type-simplicial-hom :
+    (x →₂ y) ≃ extension map-directed-interval-bool (rec-bool y x)
+  compute-extension-type-simplicial-hom =
+    equiv-tot
+      ( λ α →
+        ( inv-equiv-Π-bool-product
+          ( λ b → rec-bool y x b ＝ α (map-directed-interval-bool b))) ∘e
+        ( commutative-product) ∘e
+        ( equiv-product (equiv-inv (α 0₂) x) (equiv-inv (α 1₂) y)))
 ```

@@ -25,6 +25,7 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
 
+open import simplicial-type-theory.action-on-directed-edges-functions
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
@@ -51,13 +52,13 @@ respective fiber of `B`
 ```text
        B x           B y
    ~~~~~~~~~~~~~~~~~~~~~~~~~
-  |     |             |     |
-  |  x' ∙ ··········> |     |      B
-  |     |      β      ∙ y'  |
-  |     |             |     |
+  │     │             │     │
+  │  x' ∙ ··········> │     │      B
+  │     │      β      ∙ y'  │
+  │     │             │     │
    ~~~~~~~~~~~~~~~~~~~~~~~~~
         ↧             ↧
-  ----- ∙ ----------> ∙ -----      A.
+  ───── ∙ ──────────> ∙ ─────      A.
         x      α      y
 ```
 
@@ -131,16 +132,16 @@ from `x'` to `y'` over `α`. The situation is as follows
 ```text
        B x                                     B y
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  |     |        |                     |        |     |
-  |     |        |          β          |        |     |
-  |     | ====== ∙ ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯> ∙ ====== |     |
-  |  x' ∙        |                     |        ∙ y'  |      B
-  |     | ====== ∙ ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯> ∙ ====== |     |
-  |     |        |          β'         |        |     |
-  |     |        |                     |        |     |
+  │     │        │                     │        │     │
+  │     │        │          β          │        │     │
+  │     │ ══════ ∙ ··················> ∙ ══════ │     │
+  │  x' ∙        │                     │        ∙ y'  │      B
+  │     │ ══════ ∙ ··················> ∙ ══════ │     │
+  │     │        │          β'         │        │     │
+  │     │        │                     │        │     │
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         ↧        ↧                     ↧        ↧
-  ----- ∙ ====== ∙ ------------------> ∙ ====== ∙ -----      A.
+  ───── ∙ ══════ ∙ ──────────────────> ∙ ====== ∙ ─────      A.
         x       α 0₂        α         α 1₂      y
 ```
 
@@ -151,15 +152,15 @@ fill the triangles at the end points, we require further coherences of the
 dependent triangles depicted below
 
 ```text
-            ---- ∙ β 0₂           β 1₂ ∙ ----
-          /      |                     |      \
-     x' ∙        | H 0₂           H 1₂ |        ∙ y'
-          \      |                     |      /
-            ---- ∙ β' 0₂         β' 1₂ ∙ ----
+            ──── ∙ β 0₂           β 1₂ ∙ ────
+          ╱      │                     │      ╲
+     x' ∙        │ H 0₂           H 1₂ │        ∙ y'
+          ╲      │                     │      ╱
+            ──── ∙ β' 0₂         β' 1₂ ∙ ────
 
         ↧        ↧                     ↧        ↧
 
-      x ∙ ------ ∙ α 0₂           α 1₂ ∙ ------ ∙ y.
+      x ∙ ────── ∙ α 0₂           α 1₂ ∙ ────── ∙ y.
 ```
 
 ```agda
