@@ -14,8 +14,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.empty-types
+open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -26,7 +29,10 @@ open import foundation.noncontractible-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -89,14 +95,71 @@ is-noncontractible-𝟚 : is-noncontractible 𝟚
 is-noncontractible-𝟚 = (1 , is-noncontractible-𝟚')
 ```
 
+## Definitions
+
+### The boundary of the directed interval
+
+```agda
+subtype-∂𝟚' : subtype lzero 𝟚
+subtype-∂𝟚' t =
+  coproduct-Prop
+    ( mere-eq-Prop t 0₂)
+    ( mere-eq-Prop t 1₂)
+    ( λ |t=0| →
+      rec-trunc-Prop empty-Prop
+        ( λ t=1 →
+          rec-trunc-Prop empty-Prop
+            ( λ t=0 → is-nontrivial-𝟚 (inv t=0 ∙ t=1))
+            ( |t=0|)))
+
+∂𝟚 : UU lzero
+∂𝟚 = type-subtype subtype-∂𝟚'
+```
+
 ### The canonical inclusion of the booleans into the directed interval
 
 The canonical inclusion of the booleans into the directed interval is the map
-that sends `false` to `0₂` and `true` to `1₂`. Using the nontriviality of `𝟚`,
-we can already show that this map is
-[injective](foundation-core.injective-maps.md).
+that sends `false` to `0₂` and `true` to `1₂`. We call the
+[image](foundation.images.md) of this map the boundary of the directed interval,
+`∂𝟚`, and we show that `bool` is a [retract](foundation.retracts-of-types.md) of
+`∂𝟚`.
 
 ```agda
+map-boundary-directed-interval-bool : bool → ∂𝟚
+map-boundary-directed-interval-bool true = (1₂ , inr (refl-mere-eq 1₂))
+map-boundary-directed-interval-bool false = (0₂ , inl (refl-mere-eq 0₂))
+
+map-bool-boundary-directed-interval : ∂𝟚 → bool
+map-bool-boundary-directed-interval (t , inl x) = false
+map-bool-boundary-directed-interval (t , inr x) = true
+
+is-retraction-map-bool-boundary-directed-interval :
+  is-retraction
+    ( map-boundary-directed-interval-bool)
+    ( map-bool-boundary-directed-interval)
+is-retraction-map-bool-boundary-directed-interval true = refl
+is-retraction-map-bool-boundary-directed-interval false = refl
+
+is-surjective-map-bool-boundary-directed-interval :
+  is-surjective map-bool-boundary-directed-interval
+is-surjective-map-bool-boundary-directed-interval =
+  is-surjective-has-section
+    ( map-boundary-directed-interval-bool ,
+      is-retraction-map-bool-boundary-directed-interval)
+
+is-surjective-map-boundary-directed-interval-bool :
+  is-surjective map-boundary-directed-interval-bool
+is-surjective-map-boundary-directed-interval-bool (t , inl |p|) =
+  rec-trunc-Prop
+    ( trunc-Prop (fiber map-boundary-directed-interval-bool (t , inl |p|)))
+    ( λ t=0 → unit-trunc-Prop (false , eq-type-subtype subtype-∂𝟚' (inv t=0)))
+    ( |p|)
+is-surjective-map-boundary-directed-interval-bool (t , inr |p|) =
+  rec-trunc-Prop
+    ( trunc-Prop (fiber map-boundary-directed-interval-bool (t , inr |p|)))
+    ( λ t=1 → unit-trunc-Prop (true , eq-type-subtype subtype-∂𝟚' (inv t=1)))
+    ( |p|)
+
 map-directed-interval-bool : bool → 𝟚
 map-directed-interval-bool true = 1₂
 map-directed-interval-bool false = 0₂
@@ -117,10 +180,8 @@ is-retraction-is-injective-map-directed-interval-bool :
   is-retraction
     ( ap map-directed-interval-bool {x} {y})
     ( is-injective-map-directed-interval-bool)
-is-retraction-is-injective-map-directed-interval-bool {true} {true} refl =
-  refl
-is-retraction-is-injective-map-directed-interval-bool {false} {false} refl =
-  refl
+is-retraction-is-injective-map-directed-interval-bool {true} refl = refl
+is-retraction-is-injective-map-directed-interval-bool {false} refl = refl
 
 retraction-ap-map-directed-interval-bool :
   {x y : bool} → retraction (ap map-directed-interval-bool {x} {y})
