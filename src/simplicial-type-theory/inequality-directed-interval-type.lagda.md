@@ -1,7 +1,7 @@
-# The directed relation on the directed interval type
+# The inequality on the directed interval type
 
 ```agda
-module simplicial-type-theory.directed-relation-directed-interval-type where
+module simplicial-type-theory.inequality-directed-interval-type where
 ```
 
 <details><summary>Imports</summary>
@@ -46,11 +46,12 @@ is a [total order](order-theory.total-orders.md) with `0₂` as the
 
 ## Postulates
 
-### The directed relation
+### The directed relation on the directed interval
 
 ```agda
 postulate
   _≤-𝟚_ : 𝟚 → 𝟚 → UU lzero
+
   is-prop-leq-𝟚 : {x y : 𝟚} → is-prop (x ≤-𝟚 y)
 
 infix 30 _≤-𝟚_
@@ -102,20 +103,20 @@ max-𝟚 : 𝟚 → 𝟚 → 𝟚
 max-𝟚 t s = cogap-join 𝟚 (cocone-max-𝟚 t s) total-leq-𝟚
 
 abstract
-  compute-left-max-𝟚 : {t s : 𝟚} (p : s ≤-𝟚 t) → max-𝟚 t s ＝ t
+  compute-left-max-𝟚 : {t s : 𝟚} → s ≤-𝟚 t → max-𝟚 t s ＝ t
   compute-left-max-𝟚 {t} {s} p =
     ( ap
       ( cogap-join 𝟚 (cocone-max-𝟚 t s))
       ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
-    compute-inr-cogap-join (cocone-max-𝟚 t s) p
+    ( compute-inr-cogap-join (cocone-max-𝟚 t s) p)
 
 abstract
-  compute-right-max-𝟚 : {t s : 𝟚} (p : t ≤-𝟚 s) → max-𝟚 t s ＝ s
+  compute-right-max-𝟚 : {t s : 𝟚} → t ≤-𝟚 s → max-𝟚 t s ＝ s
   compute-right-max-𝟚 {t} {s} p =
     ( ap
       ( cogap-join 𝟚 (cocone-max-𝟚 t s))
       ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
-    compute-inl-cogap-join (cocone-max-𝟚 t s) p
+    ( compute-inl-cogap-join (cocone-max-𝟚 t s) p)
 ```
 
 ### The binary minimum function on the directed interval
@@ -134,7 +135,7 @@ abstract
     ( ap
       ( cogap-join 𝟚 (cocone-min-𝟚 t s))
       ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
-    compute-inl-cogap-join (cocone-min-𝟚 t s) p
+    ( compute-inl-cogap-join (cocone-min-𝟚 t s) p)
 
 abstract
   compute-right-min-𝟚 : {t s : 𝟚} (p : s ≤-𝟚 t) → min-𝟚 t s ＝ s
@@ -142,7 +143,7 @@ abstract
     ( ap
       ( cogap-join 𝟚 (cocone-min-𝟚 t s))
       ( eq-is-prop (is-prop-join-is-prop is-prop-leq-𝟚 is-prop-leq-𝟚))) ∙
-    compute-inr-cogap-join (cocone-min-𝟚 t s) p
+    ( compute-inr-cogap-join (cocone-min-𝟚 t s) p)
 ```
 
 ## Definitions
@@ -213,6 +214,14 @@ not-leq-target-source-𝟚 leq-1-0 =
   is-nontrivial-𝟚 (antisymmetric-leq-𝟚 min-leq-𝟚 leq-1-0)
 ```
 
+### The directed relation `t ≤-𝟚 s` is equivalent to the relation `max-𝟚 t s ＝ s`
+
+This remains to be formalized.
+
+### The directed relation `t ≤-𝟚 s` is equivalent to the relation `min-𝟚 t s ＝ t`
+
+This remains to be formalized.
+
 ### The canonical inclusion of the booleans into the directed interval is an embedding
 
 ```agda
@@ -221,10 +230,6 @@ is-emb-map-directed-interval-bool =
   is-emb-is-injective is-set-𝟚 is-injective-map-directed-interval-bool
 ```
 
-### The directed relation `t ≤-𝟚 s` is equivalent to the relation `max-𝟚 t s ＝ s`
-
-This remains to be formalized.
-
-### The directed relation `t ≤-𝟚 s` is equivalent to the relation `min-𝟚 t s ＝ t`
+### The canonical inclusion of the booleans into the directed interval preserves and reflects its ordering
 
 This remains to be formalized.

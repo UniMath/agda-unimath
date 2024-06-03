@@ -24,7 +24,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.directed-relation-directed-interval-type
+open import simplicial-type-theory.inequality-directed-interval-type
 
 open import synthetic-homotopy-theory.joins-of-types
 ```
@@ -86,4 +86,70 @@ subtype-boundary-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , u) =
 
 boundary-simplicial-cube : ℕ → UU lzero
 boundary-simplicial-cube = type-subtype ∘ subtype-boundary-simplicial-cube
+```
+
+### The predicate of being an initial element in the simplicial 𝑛-cube
+
+```agda
+is-initial-element-simplicial-cube : (n : ℕ) → simplicial-cube n → UU lzero
+is-initial-element-simplicial-cube 0 _ = unit
+is-initial-element-simplicial-cube 1 x = (x ＝ 0₂)
+is-initial-element-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , y) =
+  ( is-initial-element-simplicial-cube 1 x) ×
+  ( is-initial-element-simplicial-cube (succ-ℕ n) y)
+
+is-prop-is-initial-element-simplicial-cube :
+  (n : ℕ) (x : simplicial-cube n) →
+  is-prop (is-initial-element-simplicial-cube n x)
+is-prop-is-initial-element-simplicial-cube 0 _ = is-prop-unit
+is-prop-is-initial-element-simplicial-cube 1 x = is-set-𝟚 x 0₂
+is-prop-is-initial-element-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , y) =
+  is-prop-product
+    ( is-prop-is-initial-element-simplicial-cube 1 x)
+    ( is-prop-is-initial-element-simplicial-cube (succ-ℕ n) y)
+
+is-initial-element-simplicial-cube-Prop :
+  (n : ℕ) → simplicial-cube n → Prop lzero
+is-initial-element-simplicial-cube-Prop n x =
+  ( is-initial-element-simplicial-cube n x ,
+    is-prop-is-initial-element-simplicial-cube n x)
+```
+
+### The predicate of being a terminal element in the simplicial 𝑛-cube
+
+```agda
+is-terminal-element-simplicial-cube : (n : ℕ) → simplicial-cube n → UU lzero
+is-terminal-element-simplicial-cube 0 _ = unit
+is-terminal-element-simplicial-cube 1 x = (x ＝ 1₂)
+is-terminal-element-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , y) =
+  ( is-terminal-element-simplicial-cube 1 x) ×
+  ( is-terminal-element-simplicial-cube (succ-ℕ n) y)
+
+is-prop-is-terminal-element-simplicial-cube :
+  (n : ℕ) (x : simplicial-cube n) →
+  is-prop (is-terminal-element-simplicial-cube n x)
+is-prop-is-terminal-element-simplicial-cube 0 _ = is-prop-unit
+is-prop-is-terminal-element-simplicial-cube 1 x = is-set-𝟚 x 1₂
+is-prop-is-terminal-element-simplicial-cube (succ-ℕ (succ-ℕ n)) (x , y) =
+  is-prop-product
+    ( is-prop-is-terminal-element-simplicial-cube 1 x)
+    ( is-prop-is-terminal-element-simplicial-cube (succ-ℕ n) y)
+
+is-terminal-element-simplicial-cube-Prop :
+  (n : ℕ) → simplicial-cube n → Prop lzero
+is-terminal-element-simplicial-cube-Prop n x =
+  ( is-terminal-element-simplicial-cube n x ,
+    is-prop-is-terminal-element-simplicial-cube n x)
+```
+
+## Properties
+
+### The simplicial 𝑛-cube is a set
+
+```agda
+is-set-simplicial-cube : (n : ℕ) → is-set (simplicial-cube n)
+is-set-simplicial-cube zero-ℕ = is-set-unit
+is-set-simplicial-cube (succ-ℕ zero-ℕ) = is-set-𝟚
+is-set-simplicial-cube (succ-ℕ (succ-ℕ n)) =
+  is-set-product is-set-𝟚 (is-set-simplicial-cube (succ-ℕ n))
 ```

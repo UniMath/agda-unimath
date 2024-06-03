@@ -36,7 +36,7 @@ open import foundation.universe-levels
 
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.directed-relation-directed-interval-type
+open import simplicial-type-theory.inequality-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
 
 open import synthetic-homotopy-theory.cocones-under-spans

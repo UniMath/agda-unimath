@@ -36,7 +36,7 @@ open import foundation.universe-levels
 
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.directed-relation-directed-interval-type
+open import simplicial-type-theory.inequality-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -57,7 +57,7 @@ Given a type `X`, we define the {{#concept "simplicial cone type"}} as the
             |           |
   (id , 0₂) |           |
             ∨         ⌜ ∨
-          X × 𝟚 ----> cone₂ X
+          X × 𝟚 ---> cone₂ X
 ```
 
 Intuitively, the simplicial cone of `X` can be understood as `X` with a point

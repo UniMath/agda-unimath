@@ -32,8 +32,9 @@ open import foundation.universe-levels
 
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.directed-relation-directed-interval-type
+open import simplicial-type-theory.inequality-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
+open import simplicial-type-theory.simplicial-cones
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.joins-of-types
@@ -182,4 +183,15 @@ rec-simplicial-hom-∂Δ² f g h =
     ( eq-source-source-simplicial-hom f h)
     ( eq-source-target-simplicial-hom f g)
     ( eq-target-target-simplicial-hom g h)
+```
+
+### The 2-simplex as a simplicial cone
+
+```agda
+simplicial-cone-Δ² : UU lzero
+simplicial-cone-Δ² = simplicial-cone 𝟚
+
+-- map-simplicial-square-simplicial-cone-Δ² : simplicial-cone-Δ² → 𝟚 × 𝟚
+-- map-simplicial-square-simplicial-cone-Δ² =
+--   cogap-simplicial-cone (λ x y → x , y) (0₂ , 0₂) {!   !}
 ```

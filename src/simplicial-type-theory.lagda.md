@@ -20,7 +20,7 @@ open import simplicial-type-theory.directed-edges public
 open import simplicial-type-theory.directed-edges-cartesian-product-types public
 open import simplicial-type-theory.directed-edges-dependent-pair-types public
 open import simplicial-type-theory.directed-interval-type public
-open import simplicial-type-theory.directed-relation-directed-interval-type public
+open import simplicial-type-theory.inequality-directed-interval-type public
 open import simplicial-type-theory.free-directed-loops public
 open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions public
 open import simplicial-type-theory.horizontal-composition-simplicial-edges-functions public
