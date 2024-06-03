@@ -22,6 +22,7 @@ open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.retractions
 open import foundation-core.retracts-of-types
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncation-levels
@@ -76,8 +77,7 @@ module _
 abstract
   is-trunc-succ-is-trunc :
     (k : 𝕋) {l : Level} {A : UU l} → is-trunc k A → is-trunc (succ-𝕋 k) A
-  pr1 (is-trunc-succ-is-trunc neg-two-𝕋 H x y) = eq-is-contr H
-  pr2 (is-trunc-succ-is-trunc neg-two-𝕋 H x .x) refl = left-inv (pr2 H x)
+  is-trunc-succ-is-trunc neg-two-𝕋 = is-prop-is-contr
   is-trunc-succ-is-trunc (succ-𝕋 k) H x y = is-trunc-succ-is-trunc k (H x y)
 
 truncated-type-succ-Truncated-Type :
@@ -122,11 +122,11 @@ module _
   where
 
   is-trunc-retract-of :
-    {k : 𝕋} {A : UU l1} {B : UU l2} →
+    (k : 𝕋) {A : UU l1} {B : UU l2} →
     A retract-of B → is-trunc k B → is-trunc k A
-  is-trunc-retract-of {neg-two-𝕋} = is-contr-retract-of _
-  is-trunc-retract-of {succ-𝕋 k} R H x y =
-    is-trunc-retract-of (retract-eq R x y) (H (pr1 R x) (pr1 R y))
+  is-trunc-retract-of neg-two-𝕋 = is-contr-retract-of _
+  is-trunc-retract-of (succ-𝕋 k) R H x y =
+    is-trunc-retract-of k (retract-eq R x y) (H (pr1 R x) (pr1 R y))
 ```
 
 ### `k`-truncated types are closed under equivalences
@@ -137,7 +137,7 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} (B : UU l2) (f : A → B) → is-equiv f →
     is-trunc k B → is-trunc k A
   is-trunc-is-equiv k B f is-equiv-f =
-    is-trunc-retract-of (pair f (pr2 is-equiv-f))
+    is-trunc-retract-of k (pair f (pr2 is-equiv-f))
 
 abstract
   is-trunc-equiv :
@@ -179,6 +179,18 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A ↪ B) →
     is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
   is-trunc-emb k f = is-trunc-is-emb k (map-emb f) (is-emb-map-emb f)
+```
+
+In fact, it suffices that the map's action on identifications has a retraction.
+
+```agda
+abstract
+  is-trunc-retraction-ap :
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
+    ((x y : A) → retraction (ap f {x} {y})) →
+    is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
+  is-trunc-retraction-ap k f Ef H x y =
+    is-trunc-retract-of k (ap f , Ef x y) (H (f x) (f y))
 ```
 
 ### Truncated types are closed under dependent pair types
@@ -244,7 +256,7 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
     is-trunc k A → is-trunc k B → is-trunc k (A × B)
   is-trunc-product k is-trunc-A is-trunc-B =
-    is-trunc-Σ is-trunc-A (λ x → is-trunc-B)
+    is-trunc-Σ is-trunc-A (λ _ → is-trunc-B)
 
 product-Truncated-Type :
   {l1 l2 : Level} (k : 𝕋) →
@@ -262,7 +274,7 @@ is-trunc-product' :
   is-trunc (succ-𝕋 k) (A × B)
 is-trunc-product' k f g (pair a b) (pair a' b') =
   is-trunc-equiv k
-    ( Eq-product (pair a b) (pair a' b'))
+    ( Eq-product (a , b) (pair a' b'))
     ( equiv-pair-eq (pair a b) (pair a' b'))
     ( is-trunc-product k (f b a a') (g a b b'))
 
@@ -353,7 +365,7 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
     is-trunc k B → is-trunc k (A → B)
   is-trunc-function-type k {A} {B} is-trunc-B =
-    is-trunc-Π k {B = λ (x : A) → B} (λ x → is-trunc-B)
+    is-trunc-Π k {B = λ (x : A) → B} (λ _ → is-trunc-B)
 
 function-type-Truncated-Type :
   {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : Truncated-Type l2 k) →

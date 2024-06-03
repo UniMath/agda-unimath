@@ -18,6 +18,8 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -36,7 +38,7 @@ map-universal-property-bool (pair x y) false = y
 abstract
   is-section-map-universal-property-bool :
     {l : Level} {A : UU l} →
-    ((ev-true-false A) ∘ map-universal-property-bool) ~ id
+    is-section (ev-true-false A) (map-universal-property-bool)
   is-section-map-universal-property-bool (pair x y) = refl
 
 abstract
@@ -49,14 +51,14 @@ abstract
 abstract
   is-retraction-map-universal-property-bool :
     {l : Level} {A : UU l} →
-    (map-universal-property-bool ∘ (ev-true-false A)) ~ id
+    is-retraction (ev-true-false A) (map-universal-property-bool)
   is-retraction-map-universal-property-bool f =
     eq-htpy (is-retraction-map-universal-property-bool' f)
 
 abstract
   universal-property-bool :
     {l : Level} (A : UU l) →
-    is-equiv (λ (f : bool → A) → pair (f true) (f false))
+    is-equiv (λ (f : bool → A) → (f true , f false))
   universal-property-bool A =
     is-equiv-is-invertible
       map-universal-property-bool
