@@ -336,7 +336,9 @@ module _
   abstract
     is-simplicially-fully-faithful-triangle-is-equiv :
       (f : A → C) (g : B → C) (e : A → B) (H : coherence-triangle-maps f g e) →
-      is-equiv e → is-simplicially-fully-faithful g → is-simplicially-fully-faithful f
+      is-equiv e →
+      is-simplicially-fully-faithful g →
+      is-simplicially-fully-faithful f
     is-simplicially-fully-faithful-triangle-is-equiv
       f g e H is-equiv-e is-ff-g =
       is-simplicially-fully-faithful-left-map-triangle f g e H is-ff-g
