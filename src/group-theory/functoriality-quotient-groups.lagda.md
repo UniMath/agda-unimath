@@ -41,7 +41,7 @@ satisfying the property that `x ∈ N ⇒ f x ∈ M` induces a group homomorphis
     G -------> H
     |          |
   q |          | q
-    V          V
+    ∨          ∨
    G/N -----> H/M
          g
 ```

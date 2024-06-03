@@ -51,7 +51,7 @@ Then the square
        (g ＝ h) ---------------------------> (g ∘ f ＝ h ∘ f)
           |                                         |
   htpy-eq |                                         | htpy-eq
-          V                                         V
+          ∨                                         ∨
        (g ~ h) ----------------------------> (g ∘ f ~ h ∘ f)
                 precomp-Π f (eq-value g h)
 ```

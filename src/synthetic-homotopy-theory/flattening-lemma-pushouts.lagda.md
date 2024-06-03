@@ -20,14 +20,16 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.span-diagrams
 open import foundation.transport-along-identifications
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
+open import synthetic-homotopy-theory.descent-data-pushouts
+open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -45,7 +47,7 @@ given a pushout square
   S -----> B
   |        |
  f|        |j
-  V      ⌜ V
+  ∨      ⌜ ∨
   A -----> X
       i
 ```
@@ -57,7 +59,7 @@ commuting square
   Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
            |                                                 |
            |                                                 |
-           V                                               ⌜ V
+           ∨                                               ⌜ ∨
   Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x)
 ```
 
@@ -125,12 +127,23 @@ module _
 
   flattening-lemma-pushout-statement : UUω
   flattening-lemma-pushout-statement =
-    ( {l : Level} → dependent-universal-property-pushout l f g c) →
-    { l : Level} →
-    universal-property-pushout l
+    dependent-universal-property-pushout f g c →
+    universal-property-pushout
       ( vertical-map-span-flattening-pushout)
       ( horizontal-map-span-flattening-pushout)
       ( cocone-flattening-pushout)
+
+module _
+  {l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X)
+  (P : X → UU l5)
+  where
+
+  span-diagram-flattening-pushout : span-diagram (l1 ⊔ l5) (l2 ⊔ l5) (l3 ⊔ l5)
+  span-diagram-flattening-pushout =
+    make-span-diagram
+      ( vertical-map-span-flattening-pushout P _ _ c)
+      ( horizontal-map-span-flattening-pushout P _ _ c)
 ```
 
 ### The statement of the flattening lemma for pushouts, phrased using descent data
@@ -141,22 +154,44 @@ data for the pushout.
 
 ```agda
 module _
-  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
-  ( f : S → A) (g : S → B) (c : cocone f g X)
-  ( P : Fam-pushout l5 f g)
-  ( Q : X → UU l5)
-  ( e : equiv-Fam-pushout P (desc-fam c Q))
+  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
+  (P : descent-data-pushout 𝒮 l4)
   where
 
   vertical-map-span-flattening-descent-data-pushout :
-    Σ S (pr1 P ∘ f) → Σ A (pr1 P)
+    Σ ( spanning-type-span-diagram 𝒮)
+      ( λ s → pr1 P (left-map-span-diagram 𝒮 s)) →
+    Σ ( domain-span-diagram 𝒮) (pr1 P)
   vertical-map-span-flattening-descent-data-pushout =
-    map-Σ-map-base f (pr1 P)
+    map-Σ-map-base
+      ( left-map-span-diagram 𝒮)
+      ( pr1 P)
 
   horizontal-map-span-flattening-descent-data-pushout :
-    Σ S (pr1 P ∘ f) → Σ B (pr1 (pr2 P))
+    Σ ( spanning-type-span-diagram 𝒮)
+      ( λ s → pr1 P (left-map-span-diagram 𝒮 s)) →
+    Σ ( codomain-span-diagram 𝒮) (pr1 (pr2 P))
   horizontal-map-span-flattening-descent-data-pushout =
-    map-Σ (pr1 (pr2 P)) g (λ s → map-equiv (pr2 (pr2 P) s))
+    map-Σ
+      ( pr1 (pr2 P))
+      ( right-map-span-diagram 𝒮)
+      ( λ s → map-equiv (pr2 (pr2 P) s))
+
+  span-diagram-flattening-descent-data-pushout :
+    span-diagram (l1 ⊔ l4) (l2 ⊔ l4) (l3 ⊔ l4)
+  span-diagram-flattening-descent-data-pushout =
+    make-span-diagram
+      ( vertical-map-span-flattening-descent-data-pushout)
+      ( horizontal-map-span-flattening-descent-data-pushout)
+
+module _
+  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  ( f : S → A) (g : S → B) (c : cocone f g X)
+  ( P : descent-data-pushout (make-span-diagram f g) l5)
+  ( Q : X → UU l5)
+  ( e :
+    equiv-descent-data-pushout P (descent-data-family-cocone-span-diagram c Q))
+  where
 
   horizontal-map-cocone-flattening-descent-data-pushout :
     Σ A (pr1 P) → Σ X Q
@@ -174,8 +209,8 @@ module _
 
   coherence-square-cocone-flattening-descent-data-pushout :
     coherence-square-maps
-      ( horizontal-map-span-flattening-descent-data-pushout)
-      ( vertical-map-span-flattening-descent-data-pushout)
+      ( horizontal-map-span-flattening-descent-data-pushout P)
+      ( vertical-map-span-flattening-descent-data-pushout P)
       ( vertical-map-cocone-flattening-descent-data-pushout)
       ( horizontal-map-cocone-flattening-descent-data-pushout)
   coherence-square-cocone-flattening-descent-data-pushout =
@@ -186,8 +221,8 @@ module _
 
   cocone-flattening-descent-data-pushout :
     cocone
-      ( vertical-map-span-flattening-descent-data-pushout)
-      ( horizontal-map-span-flattening-descent-data-pushout)
+      ( vertical-map-span-flattening-descent-data-pushout P)
+      ( horizontal-map-span-flattening-descent-data-pushout P)
       ( Σ X Q)
   pr1 cocone-flattening-descent-data-pushout =
     horizontal-map-cocone-flattening-descent-data-pushout
@@ -198,11 +233,10 @@ module _
 
   flattening-lemma-descent-data-pushout-statement : UUω
   flattening-lemma-descent-data-pushout-statement =
-    ( {l : Level} → dependent-universal-property-pushout l f g c) →
-    { l : Level} →
-    universal-property-pushout l
-      ( vertical-map-span-flattening-descent-data-pushout)
-      ( horizontal-map-span-flattening-descent-data-pushout)
+    dependent-universal-property-pushout f g c →
+    universal-property-pushout
+      ( vertical-map-span-flattening-descent-data-pushout P)
+      ( horizontal-map-span-flattening-descent-data-pushout P)
       ( cocone-flattening-descent-data-pushout)
 ```
 
@@ -308,7 +342,7 @@ map of spans:
   Σ (a : A) (PA a) <------- Σ (s : S) (PA (f s)) -----> Σ (b : B) (PB b)
          |                           |                         |
          |                           |                         |
-         v                           v                         v
+         ∨                           ∨                         ∨
 Σ (a : A) (P (i a)) <---- Σ (s : S) (P (i (f s))) ---> Σ (b : B) (P (j b))
 ```
 
@@ -319,9 +353,10 @@ descent data.
 module _
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X)
-  ( P : Fam-pushout l5 f g)
+  ( P : descent-data-pushout (make-span-diagram f g) l5)
   ( Q : X → UU l5)
-  ( e : equiv-Fam-pushout P (desc-fam c Q))
+  ( e :
+    equiv-descent-data-pushout P (descent-data-family-cocone-span-diagram c Q))
   where
 
   coherence-cube-flattening-lemma-descent-data-pushout :
@@ -330,8 +365,8 @@ module _
       ( horizontal-map-span-flattening-pushout Q f g c)
       ( horizontal-map-cocone-flattening-pushout Q f g c)
       ( vertical-map-cocone-flattening-pushout Q f g c)
-      ( vertical-map-span-flattening-descent-data-pushout f g c P Q e)
-      ( horizontal-map-span-flattening-descent-data-pushout f g c P Q e)
+      ( vertical-map-span-flattening-descent-data-pushout P)
+      ( horizontal-map-span-flattening-descent-data-pushout P)
       ( horizontal-map-cocone-flattening-descent-data-pushout f g c P Q e)
       ( vertical-map-cocone-flattening-descent-data-pushout f g c P Q e)
       ( tot (λ s → map-equiv (pr1 e (f s))))
@@ -374,8 +409,8 @@ module _
       ( horizontal-map-span-flattening-pushout Q f g c)
       ( horizontal-map-cocone-flattening-pushout Q f g c)
       ( vertical-map-cocone-flattening-pushout Q f g c)
-      ( vertical-map-span-flattening-descent-data-pushout f g c P Q e)
-      ( horizontal-map-span-flattening-descent-data-pushout f g c P Q e)
+      ( vertical-map-span-flattening-descent-data-pushout P)
+      ( horizontal-map-span-flattening-descent-data-pushout P)
       ( horizontal-map-cocone-flattening-descent-data-pushout f g c P Q e)
       ( vertical-map-cocone-flattening-descent-data-pushout f g c P Q e)
       ( tot (λ s → map-equiv (pr1 e (f s))))

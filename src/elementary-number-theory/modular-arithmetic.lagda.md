@@ -19,6 +19,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
@@ -154,12 +155,12 @@ int-ℤ-Mod-bounded :
   (k : ℕ) → (x : ℤ-Mod (succ-ℕ k)) →
   leq-ℤ (int-ℤ-Mod (succ-ℕ k) x) (int-ℕ (succ-ℕ k))
 int-ℤ-Mod-bounded zero-ℕ (inr x) = star
-int-ℤ-Mod-bounded (succ-ℕ k) (inl x) = is-nonnegative-succ-ℤ
-  ((inr (inr k)) +ℤ
-  (neg-ℤ (int-ℕ (nat-Fin (succ-ℕ k) x)))) (int-ℤ-Mod-bounded k x)
-int-ℤ-Mod-bounded (succ-ℕ k) (inr x) = is-nonnegative-succ-ℤ
-  ((inr (inr k)) +ℤ (inl k))
-  (is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
+int-ℤ-Mod-bounded (succ-ℕ k) (inl x) =
+  is-nonnegative-succ-is-nonnegative-ℤ
+    ( int-ℤ-Mod-bounded k x)
+int-ℤ-Mod-bounded (succ-ℕ k) (inr x) =
+  is-nonnegative-succ-is-nonnegative-ℤ
+    ( is-nonnegative-eq-ℤ (inv (left-inverse-law-add-ℤ (inl k))) star)
 ```
 
 ## The successor and predecessor functions on the integers modulo `k`
@@ -240,7 +241,7 @@ pr1 (equiv-add-ℤ-Mod' k x) = add-ℤ-Mod' k x
 pr2 (equiv-add-ℤ-Mod' k x) = is-equiv-add-ℤ-Mod' k x
 
 is-injective-add-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → is-injective (add-ℤ-Mod k x)
-is-injective-add-ℤ-Mod zero-ℕ = is-injective-add-ℤ
+is-injective-add-ℤ-Mod zero-ℕ = is-injective-left-add-ℤ
 is-injective-add-ℤ-Mod (succ-ℕ k) = is-injective-add-Fin (succ-ℕ k)
 
 is-injective-add-ℤ-Mod' : (k : ℕ) (x : ℤ-Mod k) → is-injective (add-ℤ-Mod' k x)
@@ -405,12 +406,12 @@ right-distributive-mul-add-ℤ-Mod (succ-ℕ k) =
 
 is-left-mul-neg-one-neg-ℤ-Mod :
   (k : ℕ) (x : ℤ-Mod k) → neg-ℤ-Mod k x ＝ mul-ℤ-Mod k (neg-one-ℤ-Mod k) x
-is-left-mul-neg-one-neg-ℤ-Mod zero-ℕ = is-left-mul-neg-one-neg-ℤ
+is-left-mul-neg-one-neg-ℤ-Mod zero-ℕ = inv ∘ left-neg-unit-law-mul-ℤ
 is-left-mul-neg-one-neg-ℤ-Mod (succ-ℕ k) = is-mul-neg-one-neg-Fin k
 
 is-left-mul-neg-one-neg-ℤ-Mod' :
   (k : ℕ) (x : ℤ-Mod k) → neg-ℤ-Mod k x ＝ mul-ℤ-Mod k x (neg-one-ℤ-Mod k)
-is-left-mul-neg-one-neg-ℤ-Mod' zero-ℕ = is-right-mul-neg-one-neg-ℤ
+is-left-mul-neg-one-neg-ℤ-Mod' zero-ℕ = inv ∘ right-neg-unit-law-mul-ℤ
 is-left-mul-neg-one-neg-ℤ-Mod' (succ-ℕ k) = is-mul-neg-one-neg-Fin' k
 ```
 

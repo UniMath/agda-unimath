@@ -13,12 +13,14 @@ open import foundation.dependent-pair-types
 open import foundation.evaluation-functions
 open import foundation.implicit-function-types
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.coherently-invertible-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -46,15 +48,15 @@ equivalence. The map `htpy-eq` is the unique map that fits in a
               htpy-eq
     (f ＝ g) ----------> (f ~ g)
            \            /
-  ap (ev a) \          / ev a
+  ap (ev x) \          / ev x
              ∨        ∨
-            (f a ＝ g a)
+            (f x ＝ g x)
 ```
 
 In other words, we define
 
 ```text
-  htpy-eq p a := ap (ev a) p.
+  htpy-eq p x := ap (ev x) p.
 ```
 
 It follows from this definition that `htpy-eq refl ≐ refl-htpy`, as expected.
@@ -69,7 +71,7 @@ module _
   where
 
   htpy-eq : {f g : (x : A) → B x} → f ＝ g → f ~ g
-  htpy-eq p x = ap (ev x) p
+  htpy-eq p a = ap (ev a) p
 
   compute-htpy-eq-refl : {f : (x : A) → B x} → htpy-eq refl ＝ refl-htpy' f
   compute-htpy-eq-refl = refl
@@ -128,9 +130,37 @@ function-extensionality-Level l1 l2 =
 ```agda
 function-extensionality : UUω
 function-extensionality = {l1 l2 : Level} → function-extensionality-Level l1 l2
+```
 
-postulate
-  funext : function-extensionality
+Rather than postulating a witness of `function-extensionality` directly, we
+postulate the constituents of a coherent two-sided inverse to `htpy-eq`. The
+benefits are that we end up with a single converse map to `htpy-eq`, rather than
+a separate section and retraction, although they would be homotopic regardless.
+In addition, this formulation helps Agda display goals involving function
+extensionality in a more readable way.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  where
+
+  postulate
+    eq-htpy : f ~ g → f ＝ g
+
+    is-section-eq-htpy : is-section htpy-eq eq-htpy
+
+    is-retraction-eq-htpy' : is-retraction htpy-eq eq-htpy
+
+    coh-eq-htpy' :
+      coherence-is-coherently-invertible
+        ( htpy-eq)
+        ( eq-htpy)
+        ( is-section-eq-htpy)
+        ( is-retraction-eq-htpy')
+
+funext : function-extensionality
+funext f g =
+  is-equiv-is-invertible eq-htpy is-section-eq-htpy is-retraction-eq-htpy'
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
@@ -140,29 +170,23 @@ module _
   pr1 (equiv-funext) = htpy-eq
   pr2 (equiv-funext {f} {g}) = funext f g
 
-  eq-htpy : {f g : (x : A) → B x} → (f ~ g) → f ＝ g
-  eq-htpy {f} {g} = map-inv-is-equiv (funext f g)
+  is-equiv-eq-htpy :
+    (f g : (x : A) → B x) → is-equiv (eq-htpy {f = f} {g})
+  is-equiv-eq-htpy f g =
+    is-equiv-is-invertible htpy-eq is-retraction-eq-htpy' is-section-eq-htpy
 
   abstract
-    is-section-eq-htpy :
-      {f g : (x : A) → B x} → (htpy-eq ∘ eq-htpy {f} {g}) ~ id
-    is-section-eq-htpy {f} {g} = is-section-map-inv-is-equiv (funext f g)
-
     is-retraction-eq-htpy :
-      {f g : (x : A) → B x} → (eq-htpy ∘ htpy-eq {f = f} {g = g}) ~ id
+      {f g : (x : A) → B x} → is-retraction (htpy-eq {f = f} {g}) eq-htpy
     is-retraction-eq-htpy {f} {g} = is-retraction-map-inv-is-equiv (funext f g)
 
-    is-equiv-eq-htpy :
-      (f g : (x : A) → B x) → is-equiv (eq-htpy {f} {g})
-    is-equiv-eq-htpy f g = is-equiv-map-inv-is-equiv (funext f g)
+  eq-htpy-refl-htpy :
+    (f : (x : A) → B x) → eq-htpy (refl-htpy {f = f}) ＝ refl
+  eq-htpy-refl-htpy f = is-retraction-eq-htpy refl
 
-    eq-htpy-refl-htpy :
-      (f : (x : A) → B x) → eq-htpy (refl-htpy {f = f}) ＝ refl
-    eq-htpy-refl-htpy f = is-retraction-eq-htpy refl
-
-    equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ (f ＝ g)
-    pr1 (equiv-eq-htpy {f} {g}) = eq-htpy
-    pr2 (equiv-eq-htpy {f} {g}) = is-equiv-eq-htpy f g
+  equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ (f ＝ g)
+  pr1 (equiv-eq-htpy {f} {g}) = eq-htpy
+  pr2 (equiv-eq-htpy {f} {g}) = is-equiv-eq-htpy f g
 ```
 
 ### Function extensionality for implicit functions

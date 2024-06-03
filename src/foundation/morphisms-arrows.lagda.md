@@ -15,6 +15,8 @@ open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.postcomposition-functions
@@ -36,7 +38,7 @@ the square
     A -----> X
     |        |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -72,6 +74,107 @@ module _
   coh-hom-arrow = pr2 ∘ pr2
 ```
 
+## Operations
+
+### The identity morphism of arrows
+
+The identity morphism of arrows is defined as
+
+```text
+        id
+    A -----> A
+    |        |
+  f |        | f
+    ∨        ∨
+    B -----> B
+        id
+```
+
+where the homotopy `id ∘ f ~ f ∘ id` is the reflexivity homotopy.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  id-hom-arrow : hom-arrow f f
+  pr1 id-hom-arrow = id
+  pr1 (pr2 id-hom-arrow) = id
+  pr2 (pr2 id-hom-arrow) = refl-htpy
+```
+
+### Composition of morphisms of arrows
+
+Consider a commuting diagram of the form
+
+```text
+        α₀       β₀
+    A -----> X -----> U
+    |        |        |
+  f |   α  g |   β    | h
+    ∨        ∨        ∨
+    B -----> Y -----> V.
+        α₁       β₁
+```
+
+Then the outer rectangle commutes by horizontal pasting of commuting squares of
+maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of
+`β : g → h` with `α : f → g` is therefore defined to be
+
+```text
+        β₀ ∘ α₀
+    A ----------> U
+    |             |
+  f |    α □ β    | h
+    ∨             ∨
+    B ----------> V.
+        β₁ ∘ α₁
+```
+
+**Note.** Associativity and the unit laws for composition of morphisms of arrows
+are proven in
+[Homotopies of morphisms of arrows](foundation.homotopies-morphisms-arrows.md).
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
+  (f : A → B) (g : X → Y) (h : U → V) (b : hom-arrow g h) (a : hom-arrow f g)
+  where
+
+  map-domain-comp-hom-arrow : A → U
+  map-domain-comp-hom-arrow =
+    map-domain-hom-arrow g h b ∘ map-domain-hom-arrow f g a
+
+  map-codomain-comp-hom-arrow : B → V
+  map-codomain-comp-hom-arrow =
+    map-codomain-hom-arrow g h b ∘ map-codomain-hom-arrow f g a
+
+  coh-comp-hom-arrow :
+    coherence-hom-arrow f h
+      ( map-domain-comp-hom-arrow)
+      ( map-codomain-comp-hom-arrow)
+  coh-comp-hom-arrow =
+    pasting-horizontal-coherence-square-maps
+      ( map-domain-hom-arrow f g a)
+      ( map-domain-hom-arrow g h b)
+      ( f)
+      ( g)
+      ( h)
+      ( map-codomain-hom-arrow f g a)
+      ( map-codomain-hom-arrow g h b)
+      ( coh-hom-arrow f g a)
+      ( coh-hom-arrow g h b)
+
+  comp-hom-arrow : hom-arrow f h
+  pr1 comp-hom-arrow =
+    map-domain-comp-hom-arrow
+  pr1 (pr2 comp-hom-arrow) =
+    map-codomain-comp-hom-arrow
+  pr2 (pr2 comp-hom-arrow) =
+    coh-comp-hom-arrow
+```
+
 ### Transposing morphisms of arrows
 
 The {{#concept "transposition" Disambiguation="morphism of arrows"}} of a
@@ -82,7 +185,7 @@ morphism of arrows
     A -----> X
     |        |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -94,7 +197,7 @@ is the morphism of arrows
     A -----> B
     |        |
   i |        | j
-    V        V
+    ∨        ∨
     X -----> Y.
         g
 ```
@@ -159,103 +262,46 @@ module _
   pr2 (pr2 cone-hom-arrow) = coh-hom-arrow f g h
 ```
 
-### The identity morphism of arrows
-
-The identity morphism of arrows is defined as
-
-```text
-        id
-    A -----> A
-    |        |
-  f |        | f
-    V        V
-    B -----> B
-        id
-```
-
-where the homotopy `id ∘ f ~ f ∘ id` is the reflexivity homotopy.
+### Morphisms of arrows are preserved under homotopies
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   where
 
-  id-hom-arrow : hom-arrow f f
-  pr1 id-hom-arrow = id
-  pr1 (pr2 id-hom-arrow) = id
-  pr2 (pr2 id-hom-arrow) = refl-htpy
+  hom-arrow-htpy-source :
+    {f f' : A → B} (F' : f' ~ f) (g : X → Y) →
+    hom-arrow f g → hom-arrow f' g
+  hom-arrow-htpy-source F' g (i , j , H) = (i , j , (j ·l F') ∙h H)
+
+  hom-arrow-htpy-target :
+    (f : A → B) {g g' : X → Y} (G : g ~ g') →
+    hom-arrow f g → hom-arrow f g'
+  hom-arrow-htpy-target f G (i , j , H) = (i , j , H ∙h (G ·r i))
+
+  hom-arrow-htpy :
+    {f f' : A → B} (F' : f' ~ f) {g g' : X → Y} (G : g ~ g') →
+    hom-arrow f g → hom-arrow f' g'
+  hom-arrow-htpy F' G (i , j , H) = (i , j , (j ·l F') ∙h H ∙h (G ·r i))
 ```
 
-### Composition of morphisms of arrows
-
-Consider a commuting diagram of the form
-
-```text
-        α₀       β₀
-    A -----> X -----> U
-    |        |        |
-  f |   α  g |   β    | h
-    V        V        V
-    B -----> Y -----> V.
-        α₁       β₁
-```
-
-Then the outer rectangle commutes by horizontal pasting of commuting squares of
-maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of
-`β : g → h` with `α : f → g` is therefore defined to be
-
-```text
-        β₀ ∘ α₀
-    A ----------> U
-    |             |
-  f |    α □ β    | h
-    V             V
-    B ----------> V.
-        β₁ ∘ α₁
-```
-
-**Note.** Associativity and the unit laws for composition of morphisms of arrows
-are proven in
-[Homotopies of morphisms of arrows](foundation.homotopies-morphisms-arrows.md).
+### Dependent products of morphisms of arrows
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4} {U : UU l5} {V : UU l6}
-  (f : A → B) (g : X → Y) (h : U → V) (b : hom-arrow g h) (a : hom-arrow f g)
+  {l1 l2 l3 l4 l5 : Level}
+  {I : UU l5} {A : I → UU l1} {B : I → UU l2} {X : I → UU l3} {Y : I → UU l4}
+  (f : (i : I) → A i → B i) (g : (i : I) → X i → Y i)
+  (α : (i : I) → hom-arrow (f i) (g i))
   where
 
-  map-domain-comp-hom-arrow : A → U
-  map-domain-comp-hom-arrow =
-    map-domain-hom-arrow g h b ∘ map-domain-hom-arrow f g a
-
-  map-codomain-comp-hom-arrow : B → V
-  map-codomain-comp-hom-arrow =
-    map-codomain-hom-arrow g h b ∘ map-codomain-hom-arrow f g a
-
-  coh-comp-hom-arrow :
-    coherence-hom-arrow f h
-      ( map-domain-comp-hom-arrow)
-      ( map-codomain-comp-hom-arrow)
-  coh-comp-hom-arrow =
-    pasting-horizontal-coherence-square-maps
-      ( map-domain-hom-arrow f g a)
-      ( map-domain-hom-arrow g h b)
-      ( f)
-      ( g)
-      ( h)
-      ( map-codomain-hom-arrow f g a)
-      ( map-codomain-hom-arrow g h b)
-      ( coh-hom-arrow f g a)
-      ( coh-hom-arrow g h b)
-
-  comp-hom-arrow : hom-arrow f h
-  pr1 comp-hom-arrow =
-    map-domain-comp-hom-arrow
-  pr1 (pr2 comp-hom-arrow) =
-    map-codomain-comp-hom-arrow
-  pr2 (pr2 comp-hom-arrow) =
-    coh-comp-hom-arrow
+  Π-hom-arrow : hom-arrow (map-Π f) (map-Π g)
+  pr1 Π-hom-arrow =
+    map-Π (λ i → map-domain-hom-arrow (f i) (g i) (α i))
+  pr1 (pr2 Π-hom-arrow) =
+    map-Π (λ i → map-codomain-hom-arrow (f i) (g i) (α i))
+  pr2 (pr2 Π-hom-arrow) =
+    htpy-map-Π (λ i → coh-hom-arrow (f i) (g i) (α i))
 ```
 
 ### Morphisms of arrows give morphisms of precomposition arrows
@@ -270,13 +316,13 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  hom-arrow-precomp-hom-arrow :
+  precomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (precomp g S) (precomp f S)
-  pr1 (hom-arrow-precomp-hom-arrow S) =
+  pr1 (precomp-hom-arrow S) =
     precomp (map-codomain-hom-arrow f g α) S
-  pr1 (pr2 (hom-arrow-precomp-hom-arrow S)) =
+  pr1 (pr2 (precomp-hom-arrow S)) =
     precomp (map-domain-hom-arrow f g α) S
-  pr2 (pr2 (hom-arrow-precomp-hom-arrow S)) h =
+  pr2 (pr2 (precomp-hom-arrow S)) h =
     inv (eq-htpy (h ·l coh-hom-arrow f g α))
 ```
 
@@ -292,13 +338,13 @@ module _
   (f : A → B) (g : X → Y) (α : hom-arrow f g)
   where
 
-  hom-arrow-postcomp-hom-arrow :
+  postcomp-hom-arrow :
     {l : Level} (S : UU l) → hom-arrow (postcomp S f) (postcomp S g)
-  pr1 (hom-arrow-postcomp-hom-arrow S) =
+  pr1 (postcomp-hom-arrow S) =
     postcomp S (map-domain-hom-arrow f g α)
-  pr1 (pr2 (hom-arrow-postcomp-hom-arrow S)) =
+  pr1 (pr2 (postcomp-hom-arrow S)) =
     postcomp S (map-codomain-hom-arrow f g α)
-  pr2 (pr2 (hom-arrow-postcomp-hom-arrow S)) h =
+  pr2 (pr2 (postcomp-hom-arrow S)) h =
     eq-htpy (coh-hom-arrow f g α ·r h)
 ```
 

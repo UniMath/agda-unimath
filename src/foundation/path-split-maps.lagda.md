@@ -12,6 +12,7 @@ open import foundation-core.path-split-maps public
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.iterated-dependent-product-types
+open import foundation.logical-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -47,7 +48,7 @@ module _
     is-equiv-is-path-split-is-equiv :
       (f : A → B) → is-equiv (is-path-split-is-equiv f)
     is-equiv-is-path-split-is-equiv f =
-      is-equiv-is-prop
+      is-equiv-has-converse-is-prop
         ( is-property-is-equiv f)
         ( is-prop-is-path-split f)
         ( is-equiv-is-path-split f)
@@ -60,7 +61,7 @@ module _
     is-equiv-is-equiv-is-path-split :
       (f : A → B) → is-equiv (is-equiv-is-path-split f)
     is-equiv-is-equiv-is-path-split f =
-      is-equiv-is-prop
+      is-equiv-has-converse-is-prop
         ( is-prop-is-path-split f)
         ( is-property-is-equiv f)
         ( is-path-split-is-equiv f)

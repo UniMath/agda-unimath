@@ -42,7 +42,7 @@ which is uniquely determined by the
        (X = Y) ---------------> (f X = f Y)
           |                          |
  equiv-eq |                          | id
-          V                          V
+          ∨                          ∨
        (X ≃ Y) ---------------> (f X = f Y)
                 action-equiv f
 ```

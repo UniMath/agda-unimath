@@ -61,7 +61,7 @@ lifting diagram
             |
             | pr1
             |
-            v
+            ∨
   I ------> A         .
        a
 ```

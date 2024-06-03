@@ -115,7 +115,7 @@ In a commuting triangle of the form
    \       /
    f\     /g
      \   /
-      V V
+      ∨ ∨
        X,
 ```
 
@@ -188,7 +188,7 @@ In a commuting triangle of the form
    \       /
    f\     /g
      \   /
-      V V
+      ∨ ∨
        X,
 ```
 

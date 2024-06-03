@@ -28,7 +28,7 @@ satisfies the following three axioms:
       A -----> A ×_X A
       |           |
     f |           | functoriality Δ g
-      V           V
+      ∨           ∨
       B -----> B ×_Y B.
          Δ j
    ```

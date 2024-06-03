@@ -69,7 +69,7 @@ module _
     ( ( action-wild-representation-type-Monoid x) ∘
       ( action-wild-representation-type-Monoid y))
   preserves-mul-action-wild-representation-type-Monoid =
-    preserves-mul-map-hom-Wild-Monoid
+    preserves-mul-hom-Wild-Monoid
       ( wild-monoid-Monoid M)
       ( endo-Wild-Monoid type-wild-representation-type-Monoid)
       ( hom-action-wild-representation-type-Monoid)

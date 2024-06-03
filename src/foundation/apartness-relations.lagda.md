@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.propositional-truncations
+open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -53,9 +54,12 @@ module _
   is-consistent : UU (l1 ⊔ l2)
   is-consistent = (a b : A) → (a ＝ b) → ¬ (type-Prop (R a b))
 
+  is-cotransitive-Prop : Prop (l1 ⊔ l2)
+  is-cotransitive-Prop =
+    ∀' A (λ a → ∀' A (λ b → ∀' A (λ c → R a b ⇒ (R a c ∨ R b c))))
+
   is-cotransitive : UU (l1 ⊔ l2)
-  is-cotransitive =
-    (a b c : A) → type-hom-Prop (R a b) (disjunction-Prop (R a c) (R b c))
+  is-cotransitive = type-Prop is-cotransitive-Prop
 
   is-apartness-relation : UU (l1 ⊔ l2)
   is-apartness-relation =
@@ -150,7 +154,7 @@ module _
   rel-apart-function-into-Type-With-Apartness :
     Relation-Prop (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
   rel-apart-function-into-Type-With-Apartness f g =
-    ∃-Prop X (λ x → apart-Type-With-Apartness Y (f x) (g x))
+    ∃ X (λ x → rel-apart-Type-With-Apartness Y (f x) (g x))
 
   apart-function-into-Type-With-Apartness :
     Relation (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
@@ -202,16 +206,8 @@ module _
               ( rel-apart-function-into-Type-With-Apartness X Y f h)
               ( rel-apart-function-into-Type-With-Apartness X Y g h))
             ( λ where
-              ( inl b) →
-                inl-disjunction-Prop
-                  ( rel-apart-function-into-Type-With-Apartness X Y f h)
-                  ( rel-apart-function-into-Type-With-Apartness X Y g h)
-                  ( unit-trunc-Prop (x , b))
-              ( inr b) →
-                inr-disjunction-Prop
-                  ( rel-apart-function-into-Type-With-Apartness X Y f h)
-                  ( rel-apart-function-into-Type-With-Apartness X Y g h)
-                  ( unit-trunc-Prop (x , b))))
+              ( inl b) → inl-disjunction (intro-exists x b)
+              ( inr b) → inr-disjunction (intro-exists x b)))
 
   exp-Type-With-Apartness : Type-With-Apartness (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 exp-Type-With-Apartness = X → type-Type-With-Apartness Y
@@ -224,3 +220,7 @@ module _
   pr2 (pr2 (pr2 (pr2 exp-Type-With-Apartness))) =
     is-cotransitive-apart-function-into-Type-With-Apartness
 ```
+
+## References
+
+{{#bibliography}} {{#reference MRR88}}

@@ -19,7 +19,7 @@ open import foundation-core.contractible-types public
 open import foundation-core.coproduct-types public
 open import foundation-core.decidable-propositions public
 open import foundation-core.dependent-identifications public
-open import foundation-core.diagonal-maps-of-types public
+open import foundation-core.diagonal-maps-cartesian-products-of-types public
 open import foundation-core.discrete-types public
 open import foundation-core.embeddings public
 open import foundation-core.empty-types public
@@ -48,6 +48,7 @@ open import foundation-core.propositional-maps public
 open import foundation-core.propositions public
 open import foundation-core.pullbacks public
 open import foundation-core.retractions public
+open import foundation-core.retracts-of-types public
 open import foundation-core.sections public
 open import foundation-core.sets public
 open import foundation-core.small-types public

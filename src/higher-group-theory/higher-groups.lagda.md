@@ -9,11 +9,17 @@ module higher-group-theory.higher-groups where
 ```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.full-subtypes
 open import foundation.identity-types
+open import foundation.images
 open import foundation.mere-equality
+open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.unit-type
 open import foundation.universe-levels
 
+open import structured-types.h-spaces
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
@@ -49,30 +55,58 @@ module _
   shape-∞-Group =
     point-Pointed-Type classifying-pointed-type-∞-Group
 
-  is-0-connected-classifying-type-∞-Group :
-    is-0-connected classifying-type-∞-Group
-  is-0-connected-classifying-type-∞-Group = pr2 G
+  point-∞-Group : unit → classifying-type-∞-Group
+  point-∞-Group = point shape-∞-Group
 
-  mere-eq-classifying-type-∞-Group :
-    (X Y : classifying-type-∞-Group) → mere-eq X Y
-  mere-eq-classifying-type-∞-Group =
-    mere-eq-is-0-connected
-      is-0-connected-classifying-type-∞-Group
+  abstract
+    is-0-connected-classifying-type-∞-Group :
+      is-0-connected classifying-type-∞-Group
+    is-0-connected-classifying-type-∞-Group = pr2 G
 
-  elim-prop-classifying-type-∞-Group :
-    {l2 : Level} (P : classifying-type-∞-Group → Prop l2) →
-    type-Prop (P shape-∞-Group) →
-    ((X : classifying-type-∞-Group) → type-Prop (P X))
-  elim-prop-classifying-type-∞-Group =
-    apply-dependent-universal-property-is-0-connected
-      shape-∞-Group
-      is-0-connected-classifying-type-∞-Group
+  abstract
+    mere-eq-classifying-type-∞-Group :
+      (X Y : classifying-type-∞-Group) → mere-eq X Y
+    mere-eq-classifying-type-∞-Group =
+      mere-eq-is-0-connected
+        is-0-connected-classifying-type-∞-Group
+
+  abstract
+    is-full-subtype-im-point-∞-Group :
+      is-full-subtype (subtype-im point-∞-Group)
+    is-full-subtype-im-point-∞-Group x =
+      apply-universal-property-trunc-Prop
+        ( mere-eq-classifying-type-∞-Group shape-∞-Group x)
+        ( subtype-im point-∞-Group x)
+        ( λ where refl → unit-trunc-Prop (star , refl))
+
+  compute-im-point-∞-Group :
+    im point-∞-Group ≃ classifying-type-∞-Group
+  compute-im-point-∞-Group =
+    equiv-inclusion-is-full-subtype
+      ( subtype-im point-∞-Group)
+      ( is-full-subtype-im-point-∞-Group)
+
+  abstract
+    elim-prop-classifying-type-∞-Group :
+      {l2 : Level} (P : classifying-type-∞-Group → Prop l2) →
+      type-Prop (P shape-∞-Group) →
+      ((X : classifying-type-∞-Group) → type-Prop (P X))
+    elim-prop-classifying-type-∞-Group =
+      apply-dependent-universal-property-is-0-connected
+        shape-∞-Group
+        is-0-connected-classifying-type-∞-Group
+
+  h-space-∞-Group : H-Space l
+  h-space-∞-Group = Ω-H-Space classifying-pointed-type-∞-Group
+
+  pointed-type-∞-Group : Pointed-Type l
+  pointed-type-∞-Group = Ω classifying-pointed-type-∞-Group
 
   type-∞-Group : UU l
-  type-∞-Group = type-Ω classifying-pointed-type-∞-Group
+  type-∞-Group = type-Pointed-Type pointed-type-∞-Group
 
   unit-∞-Group : type-∞-Group
-  unit-∞-Group = refl-Ω classifying-pointed-type-∞-Group
+  unit-∞-Group = point-Pointed-Type pointed-type-∞-Group
 
   mul-∞-Group : (x y : type-∞-Group) → type-∞-Group
   mul-∞-Group = mul-Ω classifying-pointed-type-∞-Group
@@ -95,10 +129,10 @@ module _
     right-unit-law-mul-Ω classifying-pointed-type-∞-Group
 
   coherence-unit-laws-mul-∞-Group :
-    Id
-      ( left-unit-law-mul-∞-Group unit-∞-Group)
-      ( right-unit-law-mul-∞-Group unit-∞-Group)
-  coherence-unit-laws-mul-∞-Group = refl
+    left-unit-law-mul-∞-Group unit-∞-Group ＝
+    right-unit-law-mul-∞-Group unit-∞-Group
+  coherence-unit-laws-mul-∞-Group =
+    coherence-unit-laws-mul-Ω classifying-pointed-type-∞-Group
 
   inv-∞-Group : type-∞-Group → type-∞-Group
   inv-∞-Group = inv-Ω classifying-pointed-type-∞-Group

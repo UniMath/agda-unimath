@@ -19,6 +19,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
@@ -584,7 +585,7 @@ module _
           ( equivalence-relation-congruence-Normal-Subgroup G N)
           ( set-Group H))
         ( λ f →
-          is-equiv-is-prop
+          is-equiv-has-converse-is-prop
             ( is-prop-preserves-mul-Group (quotient-Group G N) H f)
             ( is-prop-preserves-mul-Group G H
               ( f ∘ map-quotient-hom-Group G N))
@@ -627,7 +628,7 @@ along `q`:
     | \
   q |  \ f
     |   \
-    V    V
+    ∨    ∨
    G/N -> H.
        ∃!
 ```

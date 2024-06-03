@@ -101,14 +101,14 @@ module _
       ( large-subposet-Large-Subframe S)
 
   leq-prop-Large-Subframe :
-    Large-Relation-Prop (λ l → α l ⊔ δ l) β type-Large-Subframe
+    Large-Relation-Prop β type-Large-Subframe
   leq-prop-Large-Subframe =
     leq-prop-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   leq-Large-Subframe :
-    Large-Relation (λ l → α l ⊔ δ l) β type-Large-Subframe
+    Large-Relation β type-Large-Subframe
   leq-Large-Subframe =
     leq-Large-Subposet
       ( large-poset-Large-Frame F)

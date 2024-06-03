@@ -16,7 +16,8 @@ open import foundation.identity-types
 open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
-open import foundation-core.diagonal-maps-of-types
+open import foundation-core.commuting-triangles-of-maps
+open import foundation-core.diagonal-maps-cartesian-products-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.families-of-equivalences
@@ -127,9 +128,74 @@ module _
       ( universal-property-pullback-is-pullback f g c H)
 ```
 
+### The homotopy of cones obtained from the universal property of pullbacks
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) {C : UU l4}
+  (c : cone f g C) (up : is-pullback f g c)
+  {l5 : Level} {C' : UU l5} (c' : cone f g C')
+  where
+
+  htpy-cone-gap-is-pullback :
+    htpy-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+  htpy-cone-gap-is-pullback =
+    htpy-eq-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+      ( compute-gap-is-pullback f g c up c')
+
+  htpy-vertical-map-gap-is-pullback :
+    vertical-map-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c')) ~
+      vertical-map-cone f g c'
+  htpy-vertical-map-gap-is-pullback =
+    htpy-vertical-map-htpy-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+      ( htpy-cone-gap-is-pullback)
+
+  htpy-horizontal-map-gap-is-pullback :
+    horizontal-map-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c')) ~
+      horizontal-map-cone f g c'
+  htpy-horizontal-map-gap-is-pullback =
+    htpy-horizontal-map-htpy-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+      ( htpy-cone-gap-is-pullback)
+
+  coh-htpy-cone-gap-is-pullback :
+    coherence-htpy-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+      ( htpy-vertical-map-gap-is-pullback)
+      ( htpy-horizontal-map-gap-is-pullback)
+  coh-htpy-cone-gap-is-pullback =
+    coh-htpy-cone f g
+      ( cone-map f g c (gap-is-pullback f g c up c'))
+      ( c')
+      ( htpy-cone-gap-is-pullback)
+```
+
 ## Properties
 
-### Parallel pullback squares
+### The standard pullbacks are pullbacks
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X)
+  where
+
+  is-pullback-standard-pullback : is-pullback f g (cone-standard-pullback f g)
+  is-pullback-standard-pullback = is-equiv-id
+```
+
+### Pullbacks are preserved under homotopies of parallel cones
 
 ```agda
 module _
@@ -159,13 +225,13 @@ module _
       {c : cone f g C} (c' : cone f' g' C)
       (Hc : htpy-parallel-cone Hf Hg c c') →
       is-pullback f' g' c' → is-pullback f g c
-    is-pullback-htpy {c} c' H is-pb-c' =
+    is-pullback-htpy {c} c' H pb-c' =
       is-equiv-left-map-triangle
         ( gap f g c)
         ( map-equiv-standard-pullback-htpy Hf Hg)
         ( gap f' g' c')
         ( triangle-is-pullback-htpy H)
-        ( is-pb-c')
+        ( pb-c')
         ( is-equiv-map-equiv-standard-pullback-htpy Hf Hg)
 
   abstract
@@ -192,13 +258,13 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c : cone f g C) →
     is-pullback f g c → is-pullback g f (swap-cone f g c)
-  is-pullback-swap-cone f g c is-pb-c =
+  is-pullback-swap-cone f g c pb-c =
     is-equiv-left-map-triangle
       ( gap g f (swap-cone f g c))
       ( map-commutative-standard-pullback f g)
       ( gap f g c)
       ( triangle-map-commutative-standard-pullback f g c)
-      ( is-pb-c)
+      ( pb-c)
       ( is-equiv-map-commutative-standard-pullback f g)
 
 abstract
@@ -274,7 +340,7 @@ Given a diagram as follows where the right-hand square is a pullback
   ∙ -------> ∙ -------> ∙
   |          | ⌟        |
   |          |          |
-  v          v          v
+  ∨          ∨          ∨
   ∙ -------> ∙ -------> ∙,
 ```
 
@@ -285,14 +351,14 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (i : X → Y) (j : Y → Z) (h : C → Z)
+  (c : cone j h B) (d : cone i (vertical-map-cone j h c) A)
   where
 
   abstract
     is-pullback-rectangle-is-pullback-left-square :
-      (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
       is-pullback j h c → is-pullback i (vertical-map-cone j h c) d →
       is-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d)
-    is-pullback-rectangle-is-pullback-left-square c d is-pb-c is-pb-d =
+    is-pullback-rectangle-is-pullback-left-square pb-c pb-d =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone (j ∘ i) h
         ( pasting-horizontal-cone i j h c d)
         ( λ x →
@@ -312,22 +378,21 @@ module _
               ( i)
               ( vertical-map-cone j h c)
               ( d)
-              ( is-pb-d)
+              ( pb-d)
               ( x))
             ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
               ( j)
               ( h)
               ( c)
-              ( is-pb-c)
+              ( pb-c)
               ( i x)))
 
   abstract
     is-pullback-left-square-is-pullback-rectangle :
-      (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
       is-pullback j h c →
       is-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d) →
       is-pullback i (vertical-map-cone j h c) d
-    is-pullback-left-square-is-pullback-rectangle c d is-pb-c is-pb-rect =
+    is-pullback-left-square-is-pullback-rectangle pb-c pb-rect =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone i
         ( vertical-map-cone j h c)
         ( d)
@@ -348,13 +413,13 @@ module _
               ( j)
               ( h)
               ( c)
-              ( is-pb-c)
+              ( pb-c)
               ( i x))
             ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
               ( j ∘ i)
               ( h)
               ( pasting-horizontal-cone i j h c d)
-              ( is-pb-rect)
+              ( pb-rect)
               ( x)))
 ```
 
@@ -366,11 +431,11 @@ Given a diagram as follows where the lower square is a pullback
   ∙ -------> ∙
   |          |
   |          |
-  v          v
+  ∨          ∨
   ∙ -------> ∙
   | ⌟        |
   |          |
-  v          v
+  ∨          ∨
   ∙ -------> ∙,
 ```
 
@@ -381,15 +446,15 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   (f : C → Z) (g : Y → Z) (h : X → Y)
+  (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A)
   where
 
   abstract
     is-pullback-top-square-is-pullback-rectangle :
-      (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
       is-pullback f g c →
       is-pullback f (g ∘ h) (pasting-vertical-cone f g h c d) →
       is-pullback (horizontal-map-cone f g c) h d
-    is-pullback-top-square-is-pullback-rectangle c d is-pb-c is-pb-dc =
+    is-pullback-top-square-is-pullback-rectangle pb-c pb-dc =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( horizontal-map-cone f g c)
         ( h)
@@ -408,7 +473,7 @@ module _
               ( f)
               ( g)
               ( c)
-              ( is-pb-c)
+              ( pb-c)
               ( vertical-map-cone f g c x))
             ( is-equiv-top-is-equiv-bottom-square
               ( map-inv-compute-fiber-comp
@@ -437,17 +502,16 @@ module _
               ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback f
                 ( g ∘ h)
                 ( pasting-vertical-cone f g h c d)
-                ( is-pb-dc)
+                ( pb-dc)
                 ( vertical-map-cone f g c x)))
             ( x , refl))
 
   abstract
     is-pullback-rectangle-is-pullback-top-square :
-      (c : cone f g B) (d : cone (horizontal-map-cone f g c) h A) →
       is-pullback f g c →
       is-pullback (horizontal-map-cone f g c) h d →
       is-pullback f (g ∘ h) (pasting-vertical-cone f g h c d)
-    is-pullback-rectangle-is-pullback-top-square c d is-pb-c is-pb-d =
+    is-pullback-rectangle-is-pullback-top-square pb-c pb-d =
       is-pullback-is-fiberwise-equiv-map-fiber-vertical-map-cone
         ( f)
         ( g ∘ h)
@@ -491,14 +555,14 @@ module _
                 ( f)
                 ( g)
                 ( c)
-                ( is-pb-c)
+                ( pb-c)
                 ( x))
               ( λ t →
                 is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
                   ( horizontal-map-cone f g c)
                   ( h)
                   ( d)
-                  ( is-pb-d)
+                  ( pb-d)
                   ( pr1 t))))
 ```
 
@@ -608,7 +672,7 @@ Given a pullback square
     C -------> B
     | ⌟        |
   g'|          | g
-    v          v
+    ∨          ∨
     A -------> X
          f
 ```
@@ -620,7 +684,7 @@ square
             C ---------> X
             | ⌟          |
   (f' , g') |            |
-            v            v
+            ∨            ∨
           A × B -----> X × X,
                 f × g
 ```
@@ -638,24 +702,24 @@ module _
     is-pullback-fold-cone-is-pullback :
       {l4 : Level} {C : UU l4} (c : cone f g C) →
       is-pullback f g c →
-      is-pullback (map-product f g) (diagonal X) (fold-cone f g c)
-    is-pullback-fold-cone-is-pullback c is-pb-c =
+      is-pullback (map-product f g) (diagonal-product X) (fold-cone f g c)
+    is-pullback-fold-cone-is-pullback c pb-c =
       is-equiv-left-map-triangle
-        ( gap (map-product f g) (diagonal X) (fold-cone f g c))
+        ( gap (map-product f g) (diagonal-product X) (fold-cone f g c))
         ( map-fold-cone-standard-pullback f g)
         ( gap f g c)
         ( triangle-map-fold-cone-standard-pullback f g c)
-        ( is-pb-c)
+        ( pb-c)
         ( is-equiv-map-fold-cone-standard-pullback f g)
 
   abstract
     is-pullback-is-pullback-fold-cone :
       {l4 : Level} {C : UU l4} (c : cone f g C) →
-      is-pullback (map-product f g) (diagonal X) (fold-cone f g c) →
+      is-pullback (map-product f g) (diagonal-product X) (fold-cone f g c) →
       is-pullback f g c
     is-pullback-is-pullback-fold-cone c =
       is-equiv-top-map-triangle
-        ( gap (map-product f g) (diagonal X) (fold-cone f g c))
+        ( gap (map-product f g) (diagonal-product X) (fold-cone f g c))
         ( map-fold-cone-standard-pullback f g)
         ( gap f g c)
         ( triangle-map-fold-cone-standard-pullback f g c)

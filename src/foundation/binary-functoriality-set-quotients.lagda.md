@@ -381,7 +381,7 @@ module _
                 ( λ x →
                   ( inv-equiv equiv-funext) ∘e
                   ( inv-equiv
-                    ( equiv-dependent-universal-property-surj-is-surjective
+                    ( equiv-dependent-universal-property-surjection-is-surjective
                       ( map-reflecting-map-equivalence-relation S qS)
                       ( is-surjective-is-set-quotient S QS qS UqS)
                       ( λ u →

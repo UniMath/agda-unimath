@@ -38,7 +38,7 @@ Partial functions can be described
   ∅     1   ∅
   |     |   |
   |  ⇒  | ∘ |
-  V     V   V
+  ∨     ∨   ∨
   A   Prop  B
 ```
 

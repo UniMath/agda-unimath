@@ -244,7 +244,7 @@ is-set-subgroup-Concrete-Group G X Y =
               ( transitive-action-subgroup-Concrete-Group G Y)
               ( pr1 e)
               ( pr1 f)
-              ( intro-∃
+              ( intro-exists
                 ( unit-coset-subgroup-Concrete-Group G X)
                 ( pr2 e ∙ inv (pr2 f)))))))
 ```

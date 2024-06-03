@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibered-maps
+open import foundation.logical-equivalences
 open import foundation.pullbacks
 open import foundation.slice
 open import foundation.universe-levels
@@ -37,7 +38,7 @@ A fibered equivalence is a fibered map
   |          |
  f|          |g
   |          |
-  V          V
+  ∨          ∨
   X -------> Y
        i
 ```
@@ -333,7 +334,7 @@ module _
     is-pullback (pr1 ihH) g (cone-fibered-map f g ihH) ≃
     is-fibered-equiv-fibered-map f g ihH
   equiv-is-fibered-equiv-is-pullback is-equiv-i =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-prop-is-pullback (pr1 ihH) g (cone-fibered-map f g ihH))
       ( is-prop-is-fibered-equiv-fibered-map f g ihH)
       ( is-fibered-equiv-is-pullback is-equiv-i)

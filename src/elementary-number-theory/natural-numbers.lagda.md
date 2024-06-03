@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
@@ -34,6 +35,15 @@ data ℕ : UU lzero where
   succ-ℕ : ℕ → ℕ
 
 {-# BUILTIN NATURAL ℕ #-}
+
+second-succ-ℕ : ℕ → ℕ
+second-succ-ℕ = succ-ℕ ∘ succ-ℕ
+
+third-succ-ℕ : ℕ → ℕ
+third-succ-ℕ = succ-ℕ ∘ second-succ-ℕ
+
+fourth-succ-ℕ : ℕ → ℕ
+fourth-succ-ℕ = succ-ℕ ∘ third-succ-ℕ
 ```
 
 ### Useful predicates on the natural numbers
