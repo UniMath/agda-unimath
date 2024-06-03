@@ -9,6 +9,7 @@ module simplicial-type-theory.simplicially-discrete-types where
 ```agda
 open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.connected-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -24,11 +25,13 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
+open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.null-maps
 open import orthogonal-factorization-systems.null-types
 
 open import simplicial-type-theory.directed-edges
@@ -141,27 +144,29 @@ module _
   equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚 =
     ( compute-total-Id , compute-total-simplicial-hom , refl-htpy)
 
-  is-simplicially-discrete-is-𝟚-null :
-    is-null 𝟚 A → is-simplicially-discrete A
-  is-simplicially-discrete-is-𝟚-null H x =
-    is-fiberwise-equiv-is-equiv-tot
-      ( is-fiberwise-equiv-is-equiv-tot
-        ( is-equiv-target-is-equiv-source-equiv-arrow
-          ( diagonal-exponential A 𝟚)
-          ( tot (λ x → tot (λ y → simplicial-hom-eq {x = x} {y})))
-          ( equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚)
-          ( H))
-        ( x))
+  abstract
+    is-simplicially-discrete-is-𝟚-null :
+      is-null 𝟚 A → is-simplicially-discrete A
+    is-simplicially-discrete-is-𝟚-null H x =
+      is-fiberwise-equiv-is-equiv-tot
+        ( is-fiberwise-equiv-is-equiv-tot
+          ( is-equiv-target-is-equiv-source-equiv-arrow
+            ( diagonal-exponential A 𝟚)
+            ( tot (λ x → tot (λ y → simplicial-hom-eq {x = x} {y})))
+            ( equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚)
+            ( H))
+          ( x))
 
-  is-𝟚-null-is-simplicially-discrete :
-    is-simplicially-discrete A → is-null 𝟚 A
-  is-𝟚-null-is-simplicially-discrete H =
-    is-equiv-source-is-equiv-target-equiv-arrow
-      ( diagonal-exponential A 𝟚)
-      ( tot (λ x → tot (λ y → simplicial-hom-eq {x = x} {y})))
-      ( equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚)
-      ( is-equiv-tot-is-fiberwise-equiv
-        ( λ x → is-equiv-tot-is-fiberwise-equiv (H x)))
+  abstract
+    is-𝟚-null-is-simplicially-discrete :
+      is-simplicially-discrete A → is-null 𝟚 A
+    is-𝟚-null-is-simplicially-discrete H =
+      is-equiv-source-is-equiv-target-equiv-arrow
+        ( diagonal-exponential A 𝟚)
+        ( tot (λ x → tot (λ y → simplicial-hom-eq {x = x} {y})))
+        ( equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚)
+        ( is-equiv-tot-is-fiberwise-equiv
+          ( λ x → is-equiv-tot-is-fiberwise-equiv (H x)))
 
   iff-is-𝟚-null-is-simplicially-discrete :
     is-simplicially-discrete A ↔ is-null 𝟚 A
@@ -171,7 +176,77 @@ module _
 
 ### Simplicially discrete types are closed under retracts
 
-This remains to be formalized.
+```agda
+is-simplicially-discrete-retract :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A retract-of B → is-simplicially-discrete B → is-simplicially-discrete A
+is-simplicially-discrete-retract r H =
+  is-simplicially-discrete-is-𝟚-null
+    ( is-null-retract-base r (is-𝟚-null-is-simplicially-discrete H))
+```
+
+### Simplicially discrete types are closed under equivalences
+
+```agda
+is-simplicially-discrete-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-simplicially-discrete B → is-simplicially-discrete A
+is-simplicially-discrete-equiv e H =
+  is-simplicially-discrete-is-𝟚-null
+    ( is-null-equiv-base e (is-𝟚-null-is-simplicially-discrete H))
+```
+
+### Simplicially discrete types are closed under dependent products
+
+```agda
+is-simplicially-discrete-Π :
+  {l1 l2 : Level} {I : UU l1} {B : I → UU l2} →
+  ((i : I) → is-simplicially-discrete (B i)) →
+  is-simplicially-discrete ((i : I) → B i)
+is-simplicially-discrete-Π H =
+  is-simplicially-discrete-is-𝟚-null
+    ( is-null-Π (λ i → is-𝟚-null-is-simplicially-discrete (H i)))
+```
+
+### Simplicially discrete types are closed under exponentiation
+
+```agda
+is-simplicially-discrete-function-type :
+  {l1 l2 : Level} {I : UU l1} {B : UU l2} →
+  is-simplicially-discrete B →
+  is-simplicially-discrete (I → B)
+is-simplicially-discrete-function-type H = is-simplicially-discrete-Π (λ _ → H)
+```
+
+### Simplicially discrete types are closed under cartesian products
+
+```agda
+is-simplicially-discrete-product :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-simplicially-discrete A →
+  is-simplicially-discrete B →
+  is-simplicially-discrete (A × B)
+is-simplicially-discrete-product is-disc-A is-disc-B =
+  is-simplicially-discrete-is-𝟚-null
+    ( is-null-product
+      ( is-𝟚-null-is-simplicially-discrete is-disc-A)
+      ( is-𝟚-null-is-simplicially-discrete is-disc-B))
+```
+
+### Simplicially discrete types are closed under dependent sums
+
+```agda
+is-simplicially-discrete-Σ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  is-simplicially-discrete A →
+  ((x : A) → is-simplicially-discrete (B x)) →
+  is-simplicially-discrete (Σ A B)
+is-simplicially-discrete-Σ is-disc-A is-disc-B =
+  is-simplicially-discrete-is-𝟚-null
+    ( is-null-Σ 𝟚
+      ( is-𝟚-null-is-simplicially-discrete is-disc-A)
+      ( λ x → is-𝟚-null-is-simplicially-discrete (is-disc-B x)))
+```
 
 ### Simplicially discrete types are Segal
 
