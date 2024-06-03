@@ -22,18 +22,18 @@ open import foundation.identity-types
 open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.sections
-open import foundation.whiskering-homotopies-composition
 open import foundation.strictly-right-unital-concatenation-identifications
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.extensions-of-maps
 
-open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.action-on-directed-edges-functions
+open import simplicial-type-theory.directed-edges
+open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
 ```
 
@@ -195,7 +195,7 @@ module _
   is-retraction-is-hom-injective-has-retraction' :
     {x y : A} (α : x →₂ y) →
     htpy-simplicial-hom
-      ( is-hom-injective-has-retraction (action-simplicial-hom-function i  α))
+      ( is-hom-injective-has-retraction (action-simplicial-hom-function i α))
       ( α)
   pr1 (is-retraction-is-hom-injective-has-retraction' (α , p , q)) =
     H ·r α

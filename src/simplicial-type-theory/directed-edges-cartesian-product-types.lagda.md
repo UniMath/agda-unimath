@@ -7,32 +7,32 @@ module simplicial-type-theory.directed-edges-cartesian-product-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.action-on-identifications-dependent-functions
+open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
-open import foundation.equality-cartesian-product-types
-open import foundation.sections
-open import foundation.retractions
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.retractions
+open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
 
-open import simplicial-type-theory.action-on-directed-edges-functions
 open import simplicial-type-theory.action-on-directed-edges-dependent-functions
-open import simplicial-type-theory.directed-edges
+open import simplicial-type-theory.action-on-directed-edges-functions
 open import simplicial-type-theory.dependent-simplicial-edges
+open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
 ```
