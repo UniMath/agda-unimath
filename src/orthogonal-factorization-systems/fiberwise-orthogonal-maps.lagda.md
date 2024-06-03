@@ -252,7 +252,7 @@ module _
       ( is-equiv-map-equiv g)
 ```
 
-### If `g` is fiberwise `f`-orthogonal, then it is null at `f`'s fibers
+### If `g` is fiberwise `f`-orthogonal then it is null at the fibers of `f`
 
 ```agda
 module _
@@ -360,7 +360,7 @@ Given a base change of `g`
     Y' -----> Y,
 ```
 
-if `f ⊥' g`, then `f ⊥' g'`.
+if `g` is fiberwise `f`-orthogonal, then `g'` is fiberwise `f`-orthogonal.
 
 ```agda
 module _
