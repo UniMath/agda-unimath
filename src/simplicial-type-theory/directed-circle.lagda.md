@@ -25,6 +25,8 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
@@ -36,11 +38,13 @@ open import foundation.universe-levels
 
 open import reflection.erasing-equality
 
+open import simplicial-type-theory.action-on-directed-edges-functions
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.directed-relation-directed-interval-type
 open import simplicial-type-theory.free-directed-loops
 open import simplicial-type-theory.simplicial-arrows
+open import simplicial-type-theory.simplicially-discrete-types
 open import simplicial-type-theory.universal-property-directed-circle
 
 open import synthetic-homotopy-theory.circle
@@ -237,7 +241,7 @@ diagram
 
 This remains to be formalized.
 
-### The canonical comparison map to the homotopic circle
+### The canonical comparison map to the homotopical circle
 
 ```agda
 map-directed-circle-circle : directed-circle → 𝕊¹
@@ -253,4 +257,30 @@ compute-map-directed-circle-circle-id-arrow x = refl-htpy
 
 ### The loop of the directed circle is nontrivial
 
-This remains to be formalized.
+```agda
+module _
+  (is-discrete-𝕊¹ : is-simplicially-discrete 𝕊¹)
+  where
+
+  is-nontrivial-loop-simplicial-hom-𝕊¹ :
+    simplicial-hom-eq loop-𝕊¹ ≠ id-simplicial-hom base-𝕊¹
+  is-nontrivial-loop-simplicial-hom-𝕊¹ p =
+    is-nontrivial-loop-𝕊¹
+      ( is-injective-is-equiv (is-discrete-𝕊¹ base-𝕊¹ base-𝕊¹) p)
+```
+
+Steps:
+
+- construct computation on edges of the recursor of the directed circle
+- show that the loop of the directed circle maps to `simplicial-hom-eq loop-𝕊¹`
+
+```agda
+  -- is-nontrivial-loop-directed-circle :
+  --   loop-directed-circle ≠ id-simplicial-hom base-directed-circle
+  -- is-nontrivial-loop-directed-circle p =
+  --   is-nontrivial-loop-simplicial-hom-𝕊¹
+  --     {! ? ∙ ap (action-simplicial-hom-function map-directed-circle-circle) p ∙ ? !}
+```
+
+It remains to formalize that the circle is simplicially discrete. Note that the
+proof only uses that `simplicial-hom-eq` is injective.
