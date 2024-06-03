@@ -21,6 +21,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sections
@@ -161,7 +162,16 @@ module _
       ( equiv-tot-simplicial-hom-eq-diagonal-exponential-𝟚)
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ x → is-equiv-tot-is-fiberwise-equiv (H x)))
+
+  iff-is-𝟚-null-is-simplicially-discrete :
+    is-simplicially-discrete A ↔ is-null 𝟚 A
+  iff-is-𝟚-null-is-simplicially-discrete =
+    ( is-𝟚-null-is-simplicially-discrete , is-simplicially-discrete-is-𝟚-null)
 ```
+
+### Simplicially discrete types are closed under retracts
+
+This remains to be formalized.
 
 ### Simplicially discrete types are Segal
 

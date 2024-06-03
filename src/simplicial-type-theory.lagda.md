@@ -17,13 +17,15 @@ open import simplicial-type-theory.coskeletal-types public
 open import simplicial-type-theory.dependent-simplicial-edges public
 open import simplicial-type-theory.directed-circle public
 open import simplicial-type-theory.directed-edges public
+open import simplicial-type-theory.directed-edges-booleans public
 open import simplicial-type-theory.directed-edges-cartesian-product-types public
 open import simplicial-type-theory.directed-edges-dependent-pair-types public
 open import simplicial-type-theory.directed-interval-type public
-open import simplicial-type-theory.inequality-directed-interval-type public
 open import simplicial-type-theory.free-directed-loops public
 open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions public
 open import simplicial-type-theory.horizontal-composition-simplicial-edges-functions public
+open import simplicial-type-theory.inequality-directed-interval-type public
+open import simplicial-type-theory.inner-2-horn public
 open import simplicial-type-theory.rewriting-directed-circle public
 open import simplicial-type-theory.simplicial-arrows public
 open import simplicial-type-theory.simplicial-cones public

@@ -41,8 +41,8 @@ open import reflection.erasing-equality
 open import simplicial-type-theory.action-on-directed-edges-functions
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.inequality-directed-interval-type
 open import simplicial-type-theory.free-directed-loops
+open import simplicial-type-theory.inequality-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
 open import simplicial-type-theory.simplicially-discrete-types
 open import simplicial-type-theory.universal-property-directed-circle

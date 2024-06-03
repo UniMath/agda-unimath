@@ -18,9 +18,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.whiskering-homotopies-composition
 open import foundation.empty-types
-open import foundation.disjunction
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -36,6 +34,7 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import reflection.erasing-equality
 
@@ -46,13 +45,13 @@ open import simplicial-type-theory.simplicial-arrows
 open import simplicial-type-theory.simplicial-cubes
 
 open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.universal-property-pushouts
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.induction-principle-pushouts
-open import synthetic-homotopy-theory.recursion-principle-pushouts
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.joins-of-types
 open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.recursion-principle-pushouts
+open import synthetic-homotopy-theory.universal-property-pushouts
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -119,7 +118,8 @@ terminal-point-spine zero-ℕ = star-spine-0
 terminal-point-spine (succ-ℕ n) = in-arrow-spine 1₂
 
 postulate
-  glue-spine : {n : ℕ} → inl-spine (terminal-point-spine n) ＝ in-arrow-spine {n} 0₂
+  glue-spine :
+    {n : ℕ} → inl-spine (terminal-point-spine n) ＝ in-arrow-spine {n} 0₂
 ```
 
 ### The induction principle of the (𝑛+1)-spine
