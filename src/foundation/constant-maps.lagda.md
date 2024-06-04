@@ -15,11 +15,20 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
+open import foundation.morphisms-arrows
+open import foundation.postcomposition-functions
+open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.type-arithmetic-unit-type
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.1-types
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
@@ -51,8 +60,16 @@ module _
 
   compute-action-htpy-function-const :
     (c : C) (H : f ~ g) →
-    action-htpy-function (const ((x : A) → B x) C c) H ＝ refl
+    action-htpy-function (const ((x : A) → B x) c) H ＝ refl
   compute-action-htpy-function-const c H = ap-const c (eq-htpy H)
+```
+
+### Computing the fibers of point inclusions
+
+```agda
+compute-fiber-point :
+  {l : Level} {A : UU l} (x y : A) → fiber (point x) y ≃ (x ＝ y)
+compute-fiber-point x y = left-unit-law-product
 ```
 
 ### A type is `k+1`-truncated if and only if all point inclusions are `k`-truncated maps
@@ -61,9 +78,6 @@ module _
 module _
   {l : Level} {A : UU l}
   where
-
-  compute-fiber-point : (x y : A) → fiber (point x) y ≃ (x ＝ y)
-  compute-fiber-point x y = left-unit-law-product
 
   abstract
     is-trunc-map-point-is-trunc :
@@ -164,34 +178,6 @@ point-faithful-map :
 pr1 (point-faithful-map A x) = point x
 pr2 (point-faithful-map A x) =
   is-faithful-point-is-1-type (is-1-type-type-1-Type A) x
-```
-
-### Given a term of `A`, the constant map is injective viewed as a function `B → (A → B)`
-
-```agda
-is-injective-const :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → is-injective (const A B)
-is-injective-const A B a p = htpy-eq p a
-
-const-injection :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → injection B (A → B)
-pr1 (const-injection A B a) = const A B
-pr2 (const-injection A B a) = is-injective-const A B a
-```
-
-### The action on identifications of a diagonal map is another diagonal map
-
-```agda
-htpy-diagonal-Id-ap-diagonal-htpy-eq :
-  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B) →
-  htpy-eq ∘ ap (const A B) ~ const A (x ＝ y)
-htpy-diagonal-Id-ap-diagonal-htpy-eq A x y refl = refl
-
-htpy-ap-diagonal-htpy-eq-diagonal-Id :
-  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B) →
-  const A (x ＝ y) ~ htpy-eq ∘ ap (const A B)
-htpy-ap-diagonal-htpy-eq-diagonal-Id A x y =
-  inv-htpy (htpy-diagonal-Id-ap-diagonal-htpy-eq A x y)
 ```
 
 ## See also

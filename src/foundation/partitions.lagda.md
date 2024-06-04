@@ -8,6 +8,7 @@ module foundation.partitions where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -512,9 +513,7 @@ module _
   share-common-element-block-partition-Prop :
     (C : block-partition P) → Prop (l1 ⊔ l2)
   share-common-element-block-partition-Prop C =
-    ∃-Prop A
-      ( λ a →
-        is-in-block-partition P B a × is-in-block-partition P C a)
+    ∃ A (λ a → subtype-block-partition P B a ∧ subtype-block-partition P C a)
 
   share-common-element-block-partition :
     (C : block-partition P) → UU (l1 ⊔ l2)

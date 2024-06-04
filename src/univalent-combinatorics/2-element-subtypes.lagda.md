@@ -24,6 +24,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
@@ -253,7 +254,7 @@ module _
       Σ ( type-2-Element-Type X)
         ( λ x → ¬ ((y : type-2-Element-Type X) → Id (f x) (f y)))
     first-element h =
-      exists-not-not-forall-count (λ z → (w : type-2-Element-Type X) →
+      exists-not-not-for-all-count (λ z → (w : type-2-Element-Type X) →
       Id (f z) (f w)) (λ z → {!!})
         {!!} {!!}
     two-elements-different-image :

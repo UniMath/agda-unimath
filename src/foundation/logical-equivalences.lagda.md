@@ -25,26 +25,51 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
 
 ## Idea
 
-**Logical equivalences** between two types `A` and `B` consist of a map `A → B`
-and a map `B → A`. The type of logical equivalences between types is the
-Curry-Howard interpretation of logical equivalences between
+{{#concept "Logical equivalences" Agda=}} between two types `A` and `B` consist
+of a map `A → B` and a map `B → A`. The type of logical equivalences between
+types is the Curry-Howard interpretation of logical equivalences between
 [propositions](foundation-core.propositions.md).
 
 ## Definition
 
+### The structure on a map of being a logical equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  has-converse : (A → B) → UU (l1 ⊔ l2)
+  has-converse f = B → A
+
+  is-prop-has-converse :
+    is-prop A → (f : A → B) → is-prop (has-converse f)
+  is-prop-has-converse is-prop-A f = is-prop-function-type is-prop-A
+
+has-converse-Prop :
+  {l1 l2 : Level} (A : Prop l1) {B : UU l2} → (type-Prop A → B) → Prop (l1 ⊔ l2)
+has-converse-Prop A f =
+  ( has-converse f ,
+    is-prop-has-converse (is-prop-type-Prop A) f)
+```
+
 ### Logical equivalences between types
 
 ```agda
+iff : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+iff A B = Σ (A → B) has-converse
+
 infix 6 _↔_
 
 _↔_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-A ↔ B = (A → B) × (B → A)
+_↔_ = iff
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : A ↔ B)
@@ -79,8 +104,15 @@ module _
 
   infix 6 _⇔_
 
-  _⇔_ : UU (l1 ⊔ l2)
-  _⇔_ = type-iff-Prop
+  _⇔_ : Prop (l1 ⊔ l2)
+  _⇔_ = iff-Prop
+```
+
+### The identity logical equivalence
+
+```agda
+id-iff : {l1 : Level} {A : UU l1} → A ↔ A
+id-iff = (id , id)
 ```
 
 ### Composition of logical equivalences
@@ -136,12 +168,43 @@ module _
 
 ```agda
 module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-equiv-has-converse-is-prop :
+      is-prop A → is-prop B → {f : A → B} → (B → A) → is-equiv f
+    is-equiv-has-converse-is-prop is-prop-A is-prop-B {f} g =
+      is-equiv-is-invertible
+        ( g)
+        ( λ y → eq-is-prop is-prop-B)
+        ( λ x → eq-is-prop is-prop-A)
+
+  abstract
+    equiv-iff-is-prop : is-prop A → is-prop B → (A → B) → (B → A) → A ≃ B
+    pr1 (equiv-iff-is-prop is-prop-A is-prop-B f g) = f
+    pr2 (equiv-iff-is-prop is-prop-A is-prop-B f g) =
+      is-equiv-has-converse-is-prop is-prop-A is-prop-B g
+
+module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  equiv-iff' : (P ⇔ Q) → (type-Prop P ≃ type-Prop Q)
-  pr1 (equiv-iff' t) = pr1 t
-  pr2 (equiv-iff' t) = is-equiv-is-prop (pr2 P) (pr2 Q) (pr2 t)
+  abstract
+    is-equiv-has-converse :
+      {f : type-Prop P → type-Prop Q} → (type-Prop Q → type-Prop P) → is-equiv f
+    is-equiv-has-converse =
+      is-equiv-has-converse-is-prop
+        ( is-prop-type-Prop P)
+        ( is-prop-type-Prop Q)
+
+  equiv-iff' : type-Prop (P ⇔ Q) → (type-Prop P ≃ type-Prop Q)
+  pr1 (equiv-iff' t) = forward-implication t
+  pr2 (equiv-iff' t) =
+    is-equiv-has-converse-is-prop
+      ( is-prop-type-Prop P)
+      ( is-prop-type-Prop Q)
+      ( backward-implication t)
 
   equiv-iff :
     (type-Prop P → type-Prop Q) → (type-Prop Q → type-Prop P) →
@@ -175,7 +238,7 @@ compute-fiber-iff-equiv {A = A} {B} (f , g) =
 ### Two equal propositions are logically equivalent
 
 ```agda
-iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → P ⇔ Q
+iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → type-Prop (P ⇔ Q)
 pr1 (iff-eq refl) = id
 pr2 (iff-eq refl) = id
 ```
@@ -188,14 +251,14 @@ abstract
     {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
     is-equiv (equiv-iff' P Q)
   is-equiv-equiv-iff P Q =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-iff-Prop P Q)
       ( is-prop-type-equiv-Prop P Q)
       ( iff-equiv)
 
 equiv-equiv-iff :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  (P ⇔ Q) ≃ (type-Prop P ≃ type-Prop Q)
+  (type-Prop P ↔ type-Prop Q) ≃ (type-Prop P ≃ type-Prop Q)
 pr1 (equiv-equiv-iff P Q) = equiv-iff' P Q
 pr2 (equiv-equiv-iff P Q) = is-equiv-equiv-iff P Q
 ```

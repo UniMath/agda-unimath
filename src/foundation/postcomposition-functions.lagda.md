@@ -219,11 +219,11 @@ Consider a map `f : B → C` and two functions `g h : A → B`. Then the
 
 ```text
                     ap (postcomp A f)
-       (g = h) --------------------------> (g ∘ f = h ∘ f)
+       (g = h) --------------------------> (f ∘ g = f ∘ h)
           |                                       |
   htpy-eq |                                       | htpy-eq
           ∨                                       ∨
-       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f).
+       (g ~ h) --------------------------> (f ∘ g ~ f ∘ h).
                           f ·l_
 ```
 
@@ -232,11 +232,11 @@ commuting square
 
 ```text
                           f ·l_
-       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
+       (g ~ h) --------------------------> (f ∘ g ~ f ∘ h)
           |                                       |
   eq-htpy |                                       | eq-htpy
           ∨                                       ∨
-       (g = h) --------------------------> (g ∘ f = h ∘ f).
+       (g = h) --------------------------> (f ∘ g = f ∘ h).
                      ap (postcomp A f)
 ```
 

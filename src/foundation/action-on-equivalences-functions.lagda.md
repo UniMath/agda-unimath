@@ -24,17 +24,22 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Applying the
+Given a map between universes `f : 𝒰 → 𝒱`, then applying the
 [action on identifications](foundation.action-on-identifications-functions.md)
 to [identifications](foundation-core.identity-types.md) arising from the
-[univalence axiom](foundation.univalence.md) gives us the **action on
-equivalences**.
+[univalence axiom](foundation.univalence.md) gives us the
+{{#concept "action on equivalences" Agda=action-equiv-function}}
+
+```text
+  action-equiv-function f : X ≃ Y → f X ≃ f Y.
+```
 
 Alternatively, one can apply
 [transport along identifications](foundation-core.transport-along-identifications.md)
 to get
-[transport along equivalences](foundation.transport-along-equivalences.md), but
-luckily, these two notions coincide.
+[transport along equivalences](foundation.transport-along-equivalences.md).
+However, by univalence such an action must also be unique, hence these two
+constructions coincide.
 
 ## Definition
 
@@ -68,7 +73,7 @@ module _
 ```agda
 compute-action-equiv-function-const :
   {l1 l2 : Level} {B : UU l2} (b : B) {X Y : UU l1}
-  (e : X ≃ Y) → (action-equiv-function (const (UU l1) B b) e) ＝ refl
+  (e : X ≃ Y) → (action-equiv-function (const (UU l1) b) e) ＝ refl
 compute-action-equiv-function-const b e = ap-const b (eq-equiv e)
 ```
 

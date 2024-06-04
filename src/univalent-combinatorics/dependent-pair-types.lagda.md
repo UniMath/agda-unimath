@@ -25,6 +25,7 @@ open import foundation.propositions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -154,7 +155,7 @@ abstract
       ( ( right-unit-law-Σ-is-contr
           ( λ x →
             is-proof-irrelevant-is-prop
-              ( is-prop-is-inhabited-or-empty (B x))
+              ( is-property-is-inhabited-or-empty (B x))
               ( is-inhabited-or-empty-is-finite (g x)))) ∘e
         ( inv-equiv
           ( left-distributive-Σ-coproduct A

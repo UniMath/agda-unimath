@@ -118,14 +118,14 @@ module _
 
   integer-multiple-in-pos-Ab :
     (n : ℕ) (a : type-Ab A) →
-    integer-multiple-Ab A (in-pos n) a ＝
+    integer-multiple-Ab A (in-pos-ℤ n) a ＝
     multiple-Ab A (succ-ℕ n) a
   integer-multiple-in-pos-Ab =
     integer-power-in-pos-Group (group-Ab A)
 
   integer-multiple-in-neg-Ab :
     (n : ℕ) (a : type-Ab A) →
-    integer-multiple-Ab A (in-neg n) a ＝
+    integer-multiple-Ab A (in-neg-ℤ n) a ＝
     neg-Ab A (multiple-Ab A (succ-ℕ n) a)
   integer-multiple-in-neg-Ab =
     integer-power-in-neg-Group (group-Ab A)

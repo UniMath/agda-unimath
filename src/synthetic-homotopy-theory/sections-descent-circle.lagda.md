@@ -233,7 +233,7 @@ module _
     is-equiv-map-equiv equiv-fixpoint-descent-data-circle-free-dependent-loop
 
   is-equiv-ev-fixpoint-descent-data-circle :
-    ( dependent-universal-property-circle l2 l) →
+    dependent-universal-property-circle l →
     is-equiv ev-fixpoint-descent-data-circle
   is-equiv-ev-fixpoint-descent-data-circle dup-circle =
     is-equiv-top-map-triangle
@@ -245,7 +245,7 @@ module _
       ( dup-circle (family-family-with-descent-data-circle A))
 
   equiv-ev-fixpoint-descent-data-circle :
-    ( dependent-universal-property-circle l2 l) →
+    dependent-universal-property-circle l →
     ( (x : S) → (family-family-with-descent-data-circle A) x) ≃
     ( fixpoint-descent-data-circle
       ( descent-data-family-with-descent-data-circle A))

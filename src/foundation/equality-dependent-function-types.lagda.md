@@ -28,7 +28,9 @@ Given a family of types `B` over `A`, if we can characterize the
 [identity types](foundation-core.identity-types.md) of each `B x`, then we can
 characterize the identity types of `(x : A) → B x`.
 
-### Contractibility
+## Properties
+
+### Torsoriality
 
 ```agda
 module _

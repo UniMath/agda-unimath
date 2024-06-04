@@ -44,7 +44,7 @@ precisely the types in the reflective subuniverse.
 
 ```agda
 is-reflective-subuniverse :
-  {l1 l2 : Level} (P : UU l1 → Prop l2) → UU (lsuc l1 ⊔ l2)
+  {l1 l2 : Level} (P : subuniverse l1 l2) → UU (lsuc l1 ⊔ l2)
 is-reflective-subuniverse {l1} P =
   Σ ( operator-modality l1 l1)
     ( λ ○ →
@@ -86,7 +86,7 @@ module _
 ```agda
 reflective-subuniverse : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 reflective-subuniverse l1 l2 =
-  Σ (UU l1 → Prop l2) (is-reflective-subuniverse)
+  Σ (subuniverse l1 l2) (is-reflective-subuniverse)
 ```
 
 ```agda
@@ -182,8 +182,8 @@ module _
     is-in-subuniverse-subuniverse-localization P (L A)
   pr2 (pr2 (pr2 is-reflective-has-all-localizations-subuniverse))
     A B is-in-subuniverse-A =
-      is-local-at-unit-is-in-subuniverse-subuniverse-localization
-        P (L B) A is-in-subuniverse-A
+    is-local-at-unit-is-in-subuniverse-subuniverse-localization
+      P (L B) A is-in-subuniverse-A
 ```
 
 ## Recursion for reflective subuniverses

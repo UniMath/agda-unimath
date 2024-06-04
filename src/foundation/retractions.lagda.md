@@ -9,10 +9,8 @@ open import foundation-core.retractions public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.coslice
 open import foundation.dependent-pair-types
-open import foundation.retracts-of-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -20,7 +18,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
+open import foundation-core.retracts-of-types
 ```
 
 </details>
@@ -90,14 +88,4 @@ pr2
   ( pr2
     ( retraction-right-factor-retract-of-retraction-left-factor f g h H rg)) =
   is-retraction-retraction-left-map-triangle f g h H rg
-```
-
-### If `f` has a retraction, then `f` is injective
-
-```agda
-abstract
-  is-injective-retraction :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    retraction f → is-injective f
-  is-injective-retraction f (h , H) {x} {y} p = inv (H x) ∙ (ap h p ∙ H y)
 ```

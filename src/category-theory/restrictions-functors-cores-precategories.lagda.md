@@ -42,7 +42,7 @@ that fit into a natural diagram
     |               |
     |               |
     |               |
-    v               v
+    ∨               ∨
     C ------------> D.
             F
 ```

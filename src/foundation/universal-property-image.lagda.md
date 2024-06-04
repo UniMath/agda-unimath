@@ -104,7 +104,7 @@ abstract
     { B : UU l3} (i : B ↪ X) (q : hom-slice f (map-emb i)) →
     is-image' f i q → is-image f i q
   is-image-is-image' f i q up' C j =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-hom-slice (map-emb i) j)
       ( is-prop-hom-slice f j)
       ( up' C j)
@@ -325,7 +325,7 @@ module _
             ( map-emb i)
             ( fiber (map-emb m)))) ∘e
         ( inv-equiv
-          ( equiv-dependent-universal-property-surj-is-surjective
+          ( equiv-dependent-universal-property-surjection-is-surjective
             ( pr1 q)
             ( H)
             ( λ b →

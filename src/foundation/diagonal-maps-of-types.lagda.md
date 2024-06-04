@@ -2,116 +2,119 @@
 
 ```agda
 module foundation.diagonal-maps-of-types where
-
-open import foundation-core.diagonal-maps-of-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.0-maps
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.faithful-maps
+open import foundation.equality-cartesian-product-types
+open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
+open import foundation.morphisms-arrows
+open import foundation.postcomposition-functions
+open import foundation.retracts-of-types
+open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
 
-open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-maps
-open import foundation-core.embeddings
+open import foundation-core.constant-maps
+open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.propositional-maps
+open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.sets
-open import foundation-core.truncated-maps
-open import foundation-core.truncated-types
-open import foundation-core.truncation-levels
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
 
-## Properties
+## Idea
 
-### A type is `k+1`-truncated if and only if the diagonal is `k`-truncated
+The
+{{#concept "diagonal map" Disambiguation="of a type into exponentials" Agda=diagonal-exponential}}
+of a type `A` is the map that includes the points of `A` into the exponential
+`X → A`.
+
+## Definitions
 
 ```agda
 module _
-  {l : Level} {A : UU l}
+  {l1 l2 : Level} (A : UU l1) (X : UU l2)
   where
 
-  abstract
-    is-trunc-is-trunc-map-diagonal :
-      (k : 𝕋) → is-trunc-map k (diagonal A) → is-trunc (succ-𝕋 k) A
-    is-trunc-is-trunc-map-diagonal k is-trunc-d x y =
-      is-trunc-is-equiv' k
-        ( fiber (diagonal A) (pair x y))
-        ( eq-fiber-diagonal A (pair x y))
-        ( is-equiv-eq-fiber-diagonal A (pair x y))
-        ( is-trunc-d (pair x y))
+  diagonal-exponential : A → X → A
+  diagonal-exponential = const X
+```
 
-  abstract
-    is-prop-is-contr-map-diagonal : is-contr-map (diagonal A) → is-prop A
-    is-prop-is-contr-map-diagonal = is-trunc-is-trunc-map-diagonal neg-two-𝕋
+## Properties
 
-  abstract
-    is-set-is-prop-map-diagonal : is-prop-map (diagonal A) → is-set A
-    is-set-is-prop-map-diagonal = is-trunc-is-trunc-map-diagonal neg-one-𝕋
+### The action on identifications of a diagonal map is another diagonal map
 
-  abstract
-    is-set-is-emb-diagonal : is-emb (diagonal A) → is-set A
-    is-set-is-emb-diagonal H =
-      is-set-is-prop-map-diagonal (is-prop-map-is-emb H)
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (x y : A) (B : UU l2)
+  where
 
-  abstract
-    is-1-type-is-0-map-diagonal : is-0-map (diagonal A) → is-1-type A
-    is-1-type-is-0-map-diagonal = is-trunc-is-trunc-map-diagonal zero-𝕋
+  htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq :
+    htpy-eq ∘ ap (diagonal-exponential A B) ~ diagonal-exponential (x ＝ y) B
+  htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq refl = refl
 
-  abstract
-    is-1-type-is-faithful-diagonal : is-faithful (diagonal A) → is-1-type A
-    is-1-type-is-faithful-diagonal H =
-      is-1-type-is-0-map-diagonal (is-0-map-is-faithful H)
+  htpy-ap-diagonal-exponential-htpy-eq-diagonal-exponential-Id :
+    diagonal-exponential (x ＝ y) B ~ htpy-eq ∘ ap (diagonal-exponential A B)
+  htpy-ap-diagonal-exponential-htpy-eq-diagonal-exponential-Id =
+    inv-htpy htpy-diagonal-exponential-Id-ap-diagonal-exponential-htpy-eq
+```
 
-  abstract
-    is-trunc-map-diagonal-is-trunc :
-      (k : 𝕋) → is-trunc (succ-𝕋 k) A → is-trunc-map k (diagonal A)
-    is-trunc-map-diagonal-is-trunc k is-trunc-A t =
-      is-trunc-is-equiv k
-        ( pr1 t ＝ pr2 t)
-        ( eq-fiber-diagonal A t)
-        ( is-equiv-eq-fiber-diagonal A t)
-          ( is-trunc-A (pr1 t) (pr2 t))
+### Given an element of the exponent the diagonal map is injective
 
-  abstract
-    is-contr-map-diagonal-is-prop : is-prop A → is-contr-map (diagonal A)
-    is-contr-map-diagonal-is-prop = is-trunc-map-diagonal-is-trunc neg-two-𝕋
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) (b : B)
+  where
 
-  abstract
-    is-prop-map-diagonal-is-set : is-set A → is-prop-map (diagonal A)
-    is-prop-map-diagonal-is-set = is-trunc-map-diagonal-is-trunc neg-one-𝕋
+  is-injective-diagonal-exponential :
+    is-injective (diagonal-exponential A B)
+  is-injective-diagonal-exponential p = htpy-eq p b
 
-  abstract
-    is-emb-diagonal-is-set : is-set A → is-emb (diagonal A)
-    is-emb-diagonal-is-set H =
-      is-emb-is-prop-map (is-prop-map-diagonal-is-set H)
+  diagonal-exponential-injection : injection A (B → A)
+  pr1 diagonal-exponential-injection = diagonal-exponential A B
+  pr2 diagonal-exponential-injection = is-injective-diagonal-exponential
+```
 
-  abstract
-    is-0-map-diagonal-is-1-type : is-1-type A → is-0-map (diagonal A)
-    is-0-map-diagonal-is-1-type = is-trunc-map-diagonal-is-trunc zero-𝕋
+### The action on identifications of an (exponential) diagonal is a diagonal
 
-  abstract
-    is-faithful-diagonal-is-1-type : is-1-type A → is-faithful (diagonal A)
-    is-faithful-diagonal-is-1-type H =
-      is-faithful-is-0-map (is-0-map-diagonal-is-1-type H)
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) {B : UU l2} (x y : B)
+  where
 
-diagonal-emb :
-  {l : Level} (A : Set l) → (type-Set A) ↪ ((type-Set A) × (type-Set A))
-pr1 (diagonal-emb A) = diagonal (type-Set A)
-pr2 (diagonal-emb A) = is-emb-diagonal-is-set (is-set-type-Set A)
+  compute-htpy-eq-ap-diagonal-exponential :
+    htpy-eq ∘ ap (diagonal-exponential B A) ~ diagonal-exponential (x ＝ y) A
+  compute-htpy-eq-ap-diagonal-exponential refl = refl
 
-diagonal-faithful-map :
-  {l : Level} (A : 1-Type l) →
-  faithful-map (type-1-Type A) (type-1-Type A × type-1-Type A)
-pr1 (diagonal-faithful-map A) = diagonal (type-1-Type A)
-pr2 (diagonal-faithful-map A) =
-  is-faithful-diagonal-is-1-type (is-1-type-type-1-Type A)
+  inv-compute-htpy-eq-ap-diagonal-exponential :
+    diagonal-exponential (x ＝ y) A ~ htpy-eq ∘ ap (diagonal-exponential B A)
+  inv-compute-htpy-eq-ap-diagonal-exponential =
+    inv-htpy compute-htpy-eq-ap-diagonal-exponential
+
+  compute-eq-htpy-ap-diagonal-exponential :
+    ap (diagonal-exponential B A) ~ eq-htpy ∘ diagonal-exponential (x ＝ y) A
+  compute-eq-htpy-ap-diagonal-exponential p =
+    map-eq-transpose-equiv
+      ( equiv-funext)
+      ( compute-htpy-eq-ap-diagonal-exponential p)
+```
+
+### Computing the fibers of diagonal maps
+
+```agda
+compute-fiber-diagonal-exponential :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  fiber (diagonal-exponential B A) f ≃ Σ B (λ b → (x : A) → b ＝ f x)
+compute-fiber-diagonal-exponential f = equiv-tot (λ _ → equiv-funext)
 ```

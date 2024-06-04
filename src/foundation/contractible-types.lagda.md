@@ -11,7 +11,9 @@ open import foundation-core.contractible-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.function-extensionality
+open import foundation.logical-equivalences
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -123,7 +125,7 @@ is-closed-under-is-contr-subuniverse P =
 equiv-is-contr-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → A ≃ B → is-contr A ≃ is-contr B
 equiv-is-contr-equiv {A = A} {B = B} e =
-  equiv-prop
+  equiv-iff-is-prop
     ( is-property-is-contr)
     ( is-property-is-contr)
     ( is-contr-retract-of A
@@ -170,36 +172,39 @@ module _
   where
 
   abstract
-    is-equiv-self-diagonal-is-equiv-diagonal :
-      ({l : Level} (X : UU l) → is-equiv (λ x → const A X x)) →
-      is-equiv (λ x → const A A x)
-    is-equiv-self-diagonal-is-equiv-diagonal H = H A
+    is-equiv-self-diagonal-exponential-is-equiv-diagonal-exponential :
+      ({l : Level} (X : UU l) → is-equiv (diagonal-exponential X A)) →
+      is-equiv (diagonal-exponential A A)
+    is-equiv-self-diagonal-exponential-is-equiv-diagonal-exponential H = H A
 
   abstract
-    is-contr-is-equiv-self-diagonal :
-      is-equiv (λ x → const A A x) → is-contr A
-    is-contr-is-equiv-self-diagonal H =
+    is-contr-is-equiv-self-diagonal-exponential :
+      is-equiv (diagonal-exponential A A) → is-contr A
+    is-contr-is-equiv-self-diagonal-exponential H =
       tot (λ x → htpy-eq) (center (is-contr-map-is-equiv H id))
 
   abstract
-    is-contr-is-equiv-diagonal :
-      ({l : Level} (X : UU l) → is-equiv (λ x → const A X x)) → is-contr A
-    is-contr-is-equiv-diagonal H =
-      is-contr-is-equiv-self-diagonal
-        ( is-equiv-self-diagonal-is-equiv-diagonal H)
+    is-contr-is-equiv-diagonal-exponential :
+      ({l : Level} (X : UU l) → is-equiv (diagonal-exponential X A)) →
+      is-contr A
+    is-contr-is-equiv-diagonal-exponential H =
+      is-contr-is-equiv-self-diagonal-exponential
+        ( is-equiv-self-diagonal-exponential-is-equiv-diagonal-exponential H)
 
   abstract
-    is-equiv-diagonal-is-contr :
+    is-equiv-diagonal-exponential-is-contr :
       is-contr A →
-      {l : Level} (X : UU l) → is-equiv (const A X)
-    is-equiv-diagonal-is-contr H X =
+      {l : Level} (X : UU l) → is-equiv (diagonal-exponential X A)
+    is-equiv-diagonal-exponential-is-contr H X =
       is-equiv-is-invertible
         ( ev-point' (center H))
         ( λ f → eq-htpy (λ x → ap f (contraction H x)))
         ( λ x → refl)
 
-  equiv-diagonal-is-contr :
+  equiv-diagonal-exponential-is-contr :
     {l : Level} (X : UU l) → is-contr A → X ≃ (A → X)
-  pr1 (equiv-diagonal-is-contr X H) = const A X
-  pr2 (equiv-diagonal-is-contr X H) = is-equiv-diagonal-is-contr H X
+  pr1 (equiv-diagonal-exponential-is-contr X H) =
+    diagonal-exponential X A
+  pr2 (equiv-diagonal-exponential-is-contr X H) =
+    is-equiv-diagonal-exponential-is-contr H X
 ```

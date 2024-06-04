@@ -104,7 +104,7 @@ contradiction by squaring both sides of the inequality
 greater-than-square-root-ℕ :
   (n root : ℕ) → ¬ ((n +ℕ 2 ≤-ℕ root) × (n +ℕ 2 ＝ square-ℕ root))
 greater-than-square-root-ℕ n root (pf-leq , pf-eq) =
-  reflects-order-add-ℕ
+  reflects-leq-left-add-ℕ
     ( square-ℕ root)
     ( square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2)
     ( 0)

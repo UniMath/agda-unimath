@@ -23,6 +23,7 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types

@@ -24,10 +24,11 @@ open import foundation-core.sections
 
 ## Idea
 
-An **inverse** for a map `f : A → B` is a map `g : B → A` equipped with
-[homotopies](foundation-core.homotopies.md) ` (f ∘ g) ~ id` and `(g ∘ f) ~ id`.
-Such data, however is [structure](foundation.structure.md) on the map `f`, and
-not generally a [property](foundation-core.propositions.md).
+An {{#concept "inverse" Disambiguation="maps of types" Agda=is-inverse}} for a
+map `f : A → B` is a map `g : B → A` equipped with
+[homotopies](foundation-core.homotopies.md) `f ∘ g ~ id` and `g ∘ f ~ id`. Such
+data, however, is [structure](foundation.structure.md) on the map `f`, and not
+generally a [property](foundation-core.propositions.md).
 
 ## Definition
 
@@ -319,15 +320,12 @@ repeat the proof to avoid cyclic dependencies.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
-  (H : is-invertible f) {x y : A}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-invertible f)
   where
 
-  is-injective-is-invertible : f x ＝ f y → x ＝ y
-  is-injective-is-invertible p =
-    ( inv (is-retraction-map-inv-is-invertible H x)) ∙
-    ( ( ap (map-inv-is-invertible H) p) ∙
-      ( is-retraction-map-inv-is-invertible H y))
+  is-injective-is-invertible : {x y : A} → f x ＝ f y → x ＝ y
+  is-injective-is-invertible =
+    is-injective-retraction f (retraction-is-invertible H)
 ```
 
 ## See also

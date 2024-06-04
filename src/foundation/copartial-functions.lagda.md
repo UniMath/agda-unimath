@@ -41,7 +41,7 @@ described as a [morphism of arrows](foundation.morphisms-arrows.md)
      A     B   1
      |     |   |
   id |  ⇒  | □ | T
-     V     V   V
+     ∨     ∨   ∨
      A     1  Prop
 ```
 
@@ -56,7 +56,7 @@ functions can be defined by
                      copartial-element (copartial-element C)
                             ∧                 |
    map-copartial-element g /                  | join-copartial-element
-                          /                   V
+                          /                   ∨
   A ----> copartial-element B       copartial-element C
       f
 ```

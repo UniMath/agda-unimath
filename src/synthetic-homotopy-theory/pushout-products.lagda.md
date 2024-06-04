@@ -34,7 +34,7 @@ of `f` and `g` is defined as the
        A × B --------> X × B
          |               |
   id × g |      H ⇗      | id × g
-         V               V
+         ∨               ∨
        A × Y --------> X × Y.
               f × id
 ```
@@ -61,7 +61,7 @@ and a homotopy `M` witnessing that the
                   |                                       |
   (f □ g) ·l glue |                                       | H
                   |                                       |
-                  V                                       V
+                  ∨                                       ∨
        (f □ g) ∘ inr ∘ (f × id) ---------------> (id × g) ∘ (f × id)
                                  L ·r (f × id)
 ```

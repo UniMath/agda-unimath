@@ -18,6 +18,7 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.singleton-induction
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

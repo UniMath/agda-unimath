@@ -22,10 +22,12 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -262,7 +264,11 @@ module _
         eq-hom-Slice-Precategory C A _ _ (pr2 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
 
       q :
-        ∀ k →
+        (k :
+          hom-Precategory
+            ( Slice-Precategory C A)
+            ( Z , comp-hom-Precategory C f h₁)
+            ( W , p)) →
         is-prop
           ( ( comp-hom-Precategory
               (Slice-Precategory C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
@@ -274,7 +280,11 @@ module _
           ( is-set-hom-Slice-Precategory C A _ _ _ _)
 
       σ :
-        ∀ k →
+        (k :
+          hom-Precategory
+            ( Slice-Precategory C A)
+            ( Z , comp-hom-Precategory C f h₁)
+            ( W , p)) →
         ( ( comp-hom-Precategory
             ( Slice-Precategory C A)
             ( p₁ , α₁)
@@ -330,7 +340,7 @@ module _
                   ( p₂' , α')))))
 
       q :
-        ∀ k' →
+        (k' : hom-Precategory C W' W) →
         is-prop
           (( comp-hom-Precategory C p₁ k' ＝ p₁') ×
           ( comp-hom-Precategory C p₂ k' ＝ p₂'))
@@ -362,7 +372,7 @@ module _
       is-product-obj-Precategory
         (Slice-Precategory C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂)
     equiv-is-pullback-is-product-Slice-Precategory =
-      equiv-prop
+      equiv-iff-is-prop
         ( is-prop-is-pullback-obj-Precategory C A X Y f g W p₁ p₂ α)
         ( is-prop-is-product-obj-Precategory
           (Slice-Precategory C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂))

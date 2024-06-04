@@ -51,7 +51,7 @@ total-space-Relation {A = A} R = Σ (A × A) λ (a , a') → R a a'
 
 ```agda
 Relation-Prop :
-  (l : Level) {l1 : Level} (A : UU l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
 Relation-Prop l A = A → A → Prop l
 
 type-Relation-Prop :
@@ -150,7 +150,7 @@ module _
 
 ### The predicate of being a transitive relation valued in propositions
 
-A relation `R` on a type `A` valued in propositions is said to be \*\*transitive
+A relation `R` on a type `A` valued in propositions is said to be **transitive**
 if its underlying relation is transitive.
 
 ```agda

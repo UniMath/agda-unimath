@@ -9,7 +9,6 @@ module foundation.equivalences-arrows where
 ```agda
 open import foundation.cartesian-morphisms-arrows
 open import foundation.commuting-squares-of-maps
-open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
@@ -33,7 +32,7 @@ function `g : X → Y` is a [morphism of arrows](foundation.morphisms-arrows.md)
     A -----> X
     |   ≃    |
   f |        | g
-    V   ≃    V
+    ∨   ≃    ∨
     B -----> Y
         j
 ```

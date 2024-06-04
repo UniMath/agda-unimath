@@ -27,7 +27,7 @@ open import foundation.whiskering-homotopies-composition
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
-open import foundation-core.diagonal-maps-of-types
+open import foundation-core.diagonal-maps-cartesian-products-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
@@ -38,6 +38,7 @@ open import foundation-core.postcomposition-functions
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-identifications-concatenation
 ```
@@ -331,7 +332,7 @@ Given a pullback square
     C -------> B
     | ⌟        |
   g'|          | g
-    v          v
+    ∨          ∨
     A -------> X
          f
 ```

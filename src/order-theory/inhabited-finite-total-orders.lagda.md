@@ -38,8 +38,8 @@ module _
   is-inhabited-Total-Order-𝔽 : UU (l1 ⊔ l2)
   is-inhabited-Total-Order-𝔽 = is-finite-Poset (poset-Total-Order-𝔽 P)
 
-  is-prop-is-inhabited-Total-Order-𝔽 : is-prop is-inhabited-Total-Order-𝔽
-  is-prop-is-inhabited-Total-Order-𝔽 =
+  is-property-is-inhabited-Total-Order-𝔽 : is-prop is-inhabited-Total-Order-𝔽
+  is-property-is-inhabited-Total-Order-𝔽 =
     is-prop-is-finite-Poset (poset-Total-Order-𝔽 P)
 
   is-finite-type-is-inhabited-Total-Order-𝔽 :

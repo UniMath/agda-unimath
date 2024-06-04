@@ -39,7 +39,7 @@ witnessing that the square
       X -------------> Y
       |                |
       |                |
-      V                V
+      ∨                ∨
   P A B X ---------> P A B Y
            P A B f
 ```

@@ -37,7 +37,7 @@ module _
 
   map-constant-pointed-map : type-Pointed-Type A → type-Pointed-Type B
   map-constant-pointed-map =
-    const (type-Pointed-Type A) (type-Pointed-Type B) (point-Pointed-Type B)
+    const (type-Pointed-Type A) (point-Pointed-Type B)
 
   preserves-point-constant-pointed-map :
     map-constant-pointed-map (point-Pointed-Type A) ＝ point-Pointed-Type B
