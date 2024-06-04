@@ -79,6 +79,7 @@ open import synthetic-homotopy-theory.iterated-suspensions-of-pointed-types publ
 open import synthetic-homotopy-theory.join-powers-of-types public
 open import synthetic-homotopy-theory.joins-of-maps public
 open import synthetic-homotopy-theory.joins-of-types public
+open import synthetic-homotopy-theory.loop-homotopy-circle public
 open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.maps-of-prespectra public
 open import synthetic-homotopy-theory.mere-spheres public
