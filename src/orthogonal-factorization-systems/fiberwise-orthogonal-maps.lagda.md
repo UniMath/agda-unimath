@@ -56,7 +56,7 @@ open import orthogonal-factorization-systems.pullback-hom
 ## Idea
 
 The map `f : A → B` is said to be
-{{#concept "fiberwise orthogonal" Disambiguation="maps of types" Agda=is-orthogonal}}
+{{#concept "fiberwise orthogonal" Disambiguation="maps of types" Agda=is-fiberwise-orthogonal-pullback-condition}}
 to `g : X → Y` if every [base change](foundation.cartesian-morphisms-arrows.md)
 of `f` is [orthogonal](orthogonal-factorization-systems.md) to `g`.
 
