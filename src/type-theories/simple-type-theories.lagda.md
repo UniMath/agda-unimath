@@ -54,9 +54,9 @@ module simple where
     coinductive
     field
       element :
-        {X : T} (x : system.element A X) →
-        fibered-system.element B (f X) x
-      slice : (X : T) → section-system (fibered-system.slice B (f X)) f
+        {X : T} (x : system.element A X) → fibered-system.element B (f X) x
+      slice :
+        (X : T) → section-system (fibered-system.slice B (f X)) f
 
   ------------------------------------------------------------------------------
 ```
