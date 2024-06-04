@@ -37,6 +37,7 @@ open import foundation.unit-type
 open import foundation.universal-property-booleans
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.coproducts-null-types
 open import orthogonal-factorization-systems.extensions-of-maps
 open import orthogonal-factorization-systems.null-families-of-types
 open import orthogonal-factorization-systems.null-maps
@@ -115,45 +116,14 @@ module _
   (is-disc-B : is-simplicially-discrete B)
   where
 
-  abstract
-    is-𝟚-null-projection-bool-coproduct :
-      is-null-map 𝟚 (projection-bool-coproduct {A = A} {B})
-    is-𝟚-null-projection-bool-coproduct =
-      is-null-map-left-map-triangle 𝟚
-        ( λ where
-          (inl _) → refl
-          (inr _) → refl)
-        ( is-null-map-pr1-is-null-family 𝟚
-          ( rec-bool (raise (l1 ⊔ l2) A) (raise (l1 ⊔ l2) B))
-          ( λ where
-            true →
-              is-null-equiv-base
-                ( inv-compute-raise (l1 ⊔ l2) A)
-                ( is-𝟚-null-is-simplicially-discrete is-disc-A)
-            false →
-              is-null-equiv-base
-                ( inv-compute-raise (l1 ⊔ l2) B)
-                ( is-𝟚-null-is-simplicially-discrete is-disc-B)))
-        ( is-null-map-map-equiv 𝟚
-          ( ( inv-equiv-Σ-bool-coproduct
-              ( rec-bool (raise (l1 ⊔ l2) A) (raise (l1 ⊔ l2) B))) ∘e
-            ( equiv-coproduct
-              ( compute-raise (l1 ⊔ l2) A)
-              ( compute-raise (l1 ⊔ l2) B))))
-
-  is-simplicially-discrete-coproduct-Level :
+  is-simplicially-discrete-coproduct :
     is-simplicially-discrete A →
     is-simplicially-discrete B →
     is-simplicially-discrete (A + B)
-  is-simplicially-discrete-coproduct-Level is-disc-A is-disc-B =
+  is-simplicially-discrete-coproduct is-disc-A is-disc-B =
     is-simplicially-discrete-is-𝟚-null
-      ( is-null-is-orthogonal-terminal-maps
-        ( is-orthogonal-right-comp
-          ( terminal-map 𝟚)
-          ( projection-bool-coproduct)
-          ( terminal-map bool)
-          ( is-orthogonal-terminal-maps-is-null is-𝟚-null-bool)
-          ( is-orthogonal-terminal-map-is-null-map 𝟚
-            ( projection-bool-coproduct)
-            ( is-𝟚-null-projection-bool-coproduct))))
+      ( is-null-coproduct-is-null-bool 𝟚
+        ( is-𝟚-null-bool)
+        ( is-𝟚-null-is-simplicially-discrete is-disc-A)
+        ( is-𝟚-null-is-simplicially-discrete is-disc-B))
 ```

@@ -376,3 +376,8 @@ This remains to be formalized.
 
 - We show that null types are closed under dependent sums in
   [`null-maps`](orthogonal-factorization-systems.null-maps.md).
+- In
+  [`coproducts-null-types`](orthogonal-factorization-systems.coproducts-null-types.md)
+  we show that `Y`-null types are closed under
+  [coproducts](foundation.coproduct-types.md) if and only if the
+  [booleans](foundation.booleans.md) are `Y`-null.
