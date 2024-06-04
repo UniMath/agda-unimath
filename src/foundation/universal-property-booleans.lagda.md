@@ -16,6 +16,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.coproduct-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
@@ -115,4 +116,16 @@ eq-false-equiv' e p (inr x) =
           ( pair true p)
           ( pair false (eq-true (map-equiv e false) x)))))
 -}
+```
+
+### The canonical projection from a coproduct to the booleans
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  projection-bool-coproduct : A + B → bool
+  projection-bool-coproduct (inl _) = true
+  projection-bool-coproduct (inr _) = false
 ```
