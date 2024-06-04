@@ -262,29 +262,10 @@ module _
       (∞-value-∞-constant-sequence H) →
     is-∞-constant-sequence v
   ∞-constant-eq-∞-value-guarded-sequence-poset E =
-    ∞-constant-eq-∞-constant-sequence
-      ( ∞-value-∞-constant-sequence H)
-      ( v)
-      ( antisymmetric-∞-leq-∞-sequence-poset
-        ( P)
-        ( const-∞-value-∞-constant-sequence H)
-        ( v)
-        ( concatenate-eq-∞-leq-∞-sequence-poset
-          ( P)
-          ( eq-∞-value-∞-constant-sequence H)
-          ( I))
-        ( concatenate-leq-∞-eq-∞-sequence-poset
-          ( P)
-          ( J)
-          ( transitive-eq-∞-sequence
-            ( w)
-            ( const-∞-value-∞-constant-sequence K)
-            ( const-∞-value-∞-constant-sequence H)
-            ( eq-∞-eq-sequence (λ n → E))
-            ( symmetric-eq-∞-sequence
-              ( const-∞-value-∞-constant-sequence K)
-              ( w)
-              ( eq-∞-value-∞-constant-sequence K)))))
+    preserves-∞-constant-eq-∞-sequence u v
+      ( left-eq-∞-guarded-sequence-poset P u v w I J
+        ( eq-∞-sequence-eq-∞-value-∞-constant-sequence w u K H E))
+      ( H)
 
   ∞-constant-leq-∞-value-guarded-sequence-poset :
     leq-Poset P

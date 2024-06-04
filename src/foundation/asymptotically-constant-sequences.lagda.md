@@ -148,6 +148,34 @@ module _
           ( is-modulus-eq-∞-sequence H q J))))
 ```
 
+### Two asymptotically constant sequences are asymptotically equal if and only if their asymptotical value is the same
+
+```agda
+module _
+  {l : Level} {A : UU l} (u v : sequence A)
+  (H : is-∞-constant-sequence u) (K : is-∞-constant-sequence v)
+  where
+
+  eq-∞-sequence-eq-∞-value-∞-constant-sequence :
+    (∞-value-∞-constant-sequence H) ＝ (∞-value-∞-constant-sequence K) →
+    eq-∞-sequence u v
+  eq-∞-sequence-eq-∞-value-∞-constant-sequence I =
+    conjugate-eq-∞-sequence
+      ( eq-∞-value-∞-constant-sequence H)
+      ( eq-∞-value-∞-constant-sequence K)
+      ( asymptotically-Π (λ n → I))
+
+  eq-∞-value-eq-∞-sequence-∞-constant-sequence :
+    eq-∞-sequence u v →
+    (∞-value-∞-constant-sequence H) ＝ (∞-value-∞-constant-sequence K)
+  eq-∞-value-eq-∞-sequence-∞-constant-sequence I =
+    value-∞-asymptotically
+    ( conjugate-eq-∞-sequence'
+      ( eq-∞-value-∞-constant-sequence H)
+      ( eq-∞-value-∞-constant-sequence K)
+      ( I))
+```
+
 ### Any subsequence of an asymptotically constant sequence is asymptotically constant
 
 ```agda

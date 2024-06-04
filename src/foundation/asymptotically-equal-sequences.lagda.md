@@ -83,6 +83,13 @@ module _
 
   symmetric-eq-∞-sequence : eq-∞-sequence u v → eq-∞-sequence v u
   symmetric-eq-∞-sequence = map-asymptotically-Π (λ n → inv)
+
+module _
+  {l : Level} {A : UU l} {u v : sequence A}
+  where
+
+  inv-eq-∞-sequence : eq-∞-sequence u v → eq-∞-sequence v u
+  inv-eq-∞-sequence = symmetric-eq-∞-sequence u v
 ```
 
 ### Asymptotical equality is a transitive relation
@@ -97,4 +104,32 @@ module _
     eq-∞-sequence u v →
     eq-∞-sequence u w
   transitive-eq-∞-sequence = map-binary-asymptotically-Π (λ n I J → J ∙ I)
+```
+
+### conjunction-Propugation of asymptotical equality
+
+```agda
+module _
+  {l : Level} {A : UU l} {u u' v v' : sequence A}
+  where
+
+  conjugate-eq-∞-sequence :
+    eq-∞-sequence u u' →
+    eq-∞-sequence v v' →
+    eq-∞-sequence u v →
+    eq-∞-sequence u' v'
+  conjugate-eq-∞-sequence H K I =
+    transitive-eq-∞-sequence u' u v'
+      ( transitive-eq-∞-sequence u v v' K I)
+      ( inv-eq-∞-sequence H)
+
+  conjugate-eq-∞-sequence' :
+    eq-∞-sequence u u' →
+    eq-∞-sequence v v' →
+    eq-∞-sequence u' v' →
+    eq-∞-sequence u v
+  conjugate-eq-∞-sequence' H K I =
+    transitive-eq-∞-sequence u u' v
+      ( transitive-eq-∞-sequence u' v' v (inv-eq-∞-sequence K) I)
+      ( H)
 ```
