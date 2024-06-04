@@ -13,6 +13,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
+open import foundation.action-on-identifications-functions
 open import foundation.equivalences-arrows
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
@@ -367,6 +368,10 @@ module _
             ( is-orthogonal-terminal-maps-is-null is-null-A)
             ( is-orthogonal-terminal-maps-is-null is-null-B)))
 ```
+
+### Null types are closed under identity types
+
+This remains to be formalized.
 
 ## See also
 
