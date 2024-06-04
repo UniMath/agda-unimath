@@ -30,10 +30,10 @@ open import structured-types.large-transitive-globular-types
 open import structured-types.reflexive-globular-types
 open import structured-types.transitive-globular-types
 
-open import wild-category-theory.isomorphisms-in-noncoherent-large-wild-infinity-infinity-precategories
-open import wild-category-theory.isomorphisms-in-noncoherent-wild-infinity-infinity-precategories
-open import wild-category-theory.noncoherent-large-wild-infinity-infinity-precategories
-open import wild-category-theory.noncoherent-wild-infinity-infinity-precategories
+open import wild-category-theory.isomorphisms-in-noncoherent-large-wild-higher-precategories
+open import wild-category-theory.isomorphisms-in-noncoherent-wild-higher-precategories
+open import wild-category-theory.noncoherent-large-wild-higher-precategories
+open import wild-category-theory.noncoherent-wild-higher-precategories
 ```
 
 </details>
@@ -103,19 +103,19 @@ is-transitive-large-globular-structure-Type =
     is-transitive-globular-structure-Π
 ```
 
-### The noncoherent large wild $(∞,∞)$-precategory of types
+### The noncoherent large wild higher precategory of types
 
 ```agda
-Type-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory :
-  Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory lsuc (_⊔_)
-Type-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory =
+Type-Noncoherent-Large-Wild-Higher-Precategory :
+  Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
+Type-Noncoherent-Large-Wild-Higher-Precategory =
   λ where
-  .obj-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory l →
+  .obj-Noncoherent-Large-Wild-Higher-Precategory l →
     UU l
-  .hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory →
+  .hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
     large-globular-structure-Type
-  .id-hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory →
+  .id-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
     is-reflexive-large-globular-structure-Type
-  .comp-hom-globular-structure-Noncoherent-Large-Wild-⟨∞,∞⟩-Precategory →
+  .comp-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
     is-transitive-large-globular-structure-Type
 ```
