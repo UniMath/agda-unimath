@@ -63,10 +63,25 @@ consists of the type families
 and the gluing data sending `h : PA (fs) → RA (fs)` to
 `(RS s ∘ h ∘ (PS s)⁻¹) : PB (gs) → RB (gs)`.
 
-The fiberwise families then correspond to
-[sections](synthetic-homotopy-theory.sections-descent-data-pushouts.md) of this
-descent data, and it suffices to show that those correspond to morphisms. The
-coherence datum of such a section has the type
+**Note:** It is important to differentiate between families of _function types_,
+i.e. a type family that to every `x : X` assigns the _type_ `P x → R x`, and
+families of _functions_, i.e. a family that to every `x : X` assigns a
+_function_ from `P x` to R x`. Descent data plays the role of a family of types,
+so it makes sense to talk about "descent data corresponding to a family of
+function types", but it doesn't make sense to talk about "descent data
+corresponding to a family of functions". The kind of data that corresponds to
+families of functions are the _sections_ of the descent data of a family of
+function types.
+
+It suffices to show that the sections correspond to morphisms. The first two
+components of a section and a morphism agree, namely they are
+
+```text
+  sA : (a : A) → PA a → RA a
+  sB : (b : B) → PB b → RB b,
+```
+
+respectively. The coherence datum of a section has the type
 
 ```text
   (s : S) → RS s ∘ sA (fs) ∘ (RS s)⁻¹ = sB (gs),
