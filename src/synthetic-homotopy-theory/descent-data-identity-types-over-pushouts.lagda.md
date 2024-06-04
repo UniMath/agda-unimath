@@ -1,9 +1,9 @@
-# Descent data for families of identifications over pushouts
+# Descent data for type families of identity types over pushouts
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module synthetic-homotopy-theory.descent-data-pushouts-identity-types where
+module synthetic-homotopy-theory.descent-data-identity-types-over-pushouts where
 ```
 
 <details><summary>Imports</summary>

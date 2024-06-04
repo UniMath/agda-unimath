@@ -47,10 +47,10 @@ open import synthetic-homotopy-theory.descent-circle-dependent-pair-types public
 open import synthetic-homotopy-theory.descent-circle-equivalence-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
+open import synthetic-homotopy-theory.descent-data-equivalence-types-over-pushouts public
+open import synthetic-homotopy-theory.descent-data-function-types-over-pushouts public
+open import synthetic-homotopy-theory.descent-data-identity-types-over-pushouts public
 open import synthetic-homotopy-theory.descent-data-pushouts public
-open import synthetic-homotopy-theory.descent-data-pushouts-equivalence-families public
-open import synthetic-homotopy-theory.descent-data-pushouts-function-families public
-open import synthetic-homotopy-theory.descent-data-pushouts-identity-types public
 open import synthetic-homotopy-theory.descent-data-sequential-colimits public
 open import synthetic-homotopy-theory.descent-property-pushouts public
 open import synthetic-homotopy-theory.descent-property-sequential-colimits public
