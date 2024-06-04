@@ -379,7 +379,9 @@ By associativity in `𝒟`, composition in the fiber is dependently associative
   c ===== c ===== c ===== c
 ```
 
-```agda
+The proof remains to be formalized.
+
+```text
   associative-comp-hom-fiber-precategory-Displayed-Precategory :
     {x y z w : obj-fiber-precategory-Displayed-Precategory}
     (h : hom-fiber-precategory-Displayed-Precategory z w)
@@ -393,97 +395,71 @@ By associativity in `𝒟`, composition in the fiber is dependently associative
       ( comp-hom-fiber-precategory-Displayed-Precategory g f))
   associative-comp-hom-fiber-precategory-Displayed-Precategory
     {x} {y} {z} {w} h g f =
-      {! associative-comp-hom-Displayed-Precategory 𝒞 𝒟 _ _ _ h g f  !} -- this is a dependent identification over `associative-comp-hom-Precategory 𝒞 id-hom id-hom id-hom`. Can we show it's a
-      -- equational-reasoning {! comp-hom-fiber-precategory-Displayed-Precategory (comp-hom-fiber-precategory-Displayed-Precategory h g) f !} ＝ {!   !} by {!   !}
-      -- ind-subsingleton
-      --   ( is-set-hom-Displayed-Precategory 𝒞 𝒟
-      --     ( id-hom-Precategory 𝒞 {c})
-      --     ( x)
-      --     ( w)
-      --     ( comp-hom-fiber-precategory-Displayed-Precategory
-      --       ( comp-hom-fiber-precategory-Displayed-Precategory h g)
-      --       ( f))
-      --     ( comp-hom-fiber-precategory-Displayed-Precategory
-      --       ( h)
-      --       ( comp-hom-fiber-precategory-Displayed-Precategory g f)))
-      --   (associative-comp-hom-Displayed-Precategory 𝒞 𝒟
-      --     {c} {c} {c} {c}
-      --     ( id-hom-Precategory 𝒞)
-      --     ( id-hom-Precategory 𝒞)
-      --     ( id-hom-Precategory 𝒞)
-      --     {x} {y} {z} {w} h g f)
-    -- tr
-    --   (λ p → {!   !})
-    --   ( eq-is-prop
-    --     )
-    --   ( associative-comp-hom-Displayed-Precategory 𝒞 𝒟
-    --     {c} {c} {c} {c}
-    --     ( id-hom-Precategory 𝒞)
-    --     ( id-hom-Precategory 𝒞)
-    --     ( id-hom-Precategory 𝒞)
-    --     {x} {y} {z} {w} h g f)
+      {! associative-comp-hom-Displayed-Precategory 𝒞 𝒟 _ _ _ h g f  !}
+```
 
-  -- associative-composition-operation-fiber-precategory-Displayed-Precategory :
-  --   associative-composition-operation-binary-family-Set
-  --     ( hom-set-fiber-precategory-Displayed-Precategory)
-  -- pr1
-  --   associative-composition-operation-fiber-precategory-Displayed-Precategory =
-  --   comp-hom-fiber-precategory-Displayed-Precategory
-  -- pr2
-  --   associative-composition-operation-fiber-precategory-Displayed-Precategory =
-  --   associative-comp-hom-fiber-precategory-Displayed-Precategory
+```text
+  associative-composition-operation-fiber-precategory-Displayed-Precategory :
+    associative-composition-operation-binary-family-Set
+      ( hom-set-fiber-precategory-Displayed-Precategory)
+  pr1
+    associative-composition-operation-fiber-precategory-Displayed-Precategory =
+    comp-hom-fiber-precategory-Displayed-Precategory
+  pr2
+    associative-composition-operation-fiber-precategory-Displayed-Precategory =
+    associative-comp-hom-fiber-precategory-Displayed-Precategory
 
-  -- id-hom-fiber-precategory-Displayed-Precategory :
-  --   {x : obj-fiber-precategory-Displayed-Precategory} →
-  --   hom-fiber-precategory-Displayed-Precategory x x
-  -- id-hom-fiber-precategory-Displayed-Precategory {x} =
-  --   id-hom-Displayed-Precategory 𝒞 𝒟 x
+  id-hom-fiber-precategory-Displayed-Precategory :
+    {x : obj-fiber-precategory-Displayed-Precategory} →
+    hom-fiber-precategory-Displayed-Precategory x x
+  id-hom-fiber-precategory-Displayed-Precategory {x} =
+    id-hom-Displayed-Precategory 𝒞 𝒟 x
 
-  -- left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory :
-  --   {x y : obj-fiber-precategory-Displayed-Precategory} →
-  --   (f : hom-fiber-precategory-Displayed-Precategory x y) →
-  --   comp-hom-fiber-precategory-Displayed-Precategory
-  --     ( id-hom-fiber-precategory-Displayed-Precategory)
-  --     ( f) ＝
-  --   f
-  -- left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory =
-  --   left-unit-law-comp-hom-Displayed-Precategory 𝒞 𝒟 (id-hom-Precategory 𝒞 {c})
+  left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory :
+    {x y : obj-fiber-precategory-Displayed-Precategory} →
+    (f : hom-fiber-precategory-Displayed-Precategory x y) →
+    comp-hom-fiber-precategory-Displayed-Precategory
+      ( id-hom-fiber-precategory-Displayed-Precategory)
+      ( f) ＝
+    f
+  left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory =
+    left-unit-law-comp-hom-Displayed-Precategory 𝒞 𝒟 (id-hom-Precategory 𝒞 {c})
 
-  -- right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory :
-  --   {x y : obj-fiber-precategory-Displayed-Precategory} →
-  --   (f : hom-fiber-precategory-Displayed-Precategory x y) →
-  --   comp-hom-fiber-precategory-Displayed-Precategory
-  --     ( f)
-  --     ( id-hom-fiber-precategory-Displayed-Precategory) ＝
-  --   f
-  -- right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory =
-  --   right-unit-law-comp-hom-Displayed-Precategory 𝒞 𝒟 (id-hom-Precategory 𝒞 {c})
+  right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory :
+    {x y : obj-fiber-precategory-Displayed-Precategory} →
+    (f : hom-fiber-precategory-Displayed-Precategory x y) →
+    comp-hom-fiber-precategory-Displayed-Precategory
+      ( f)
+      ( id-hom-fiber-precategory-Displayed-Precategory) ＝
+    f
+  right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory =
+    right-unit-law-comp-hom-Displayed-Precategory 𝒞 𝒟 (id-hom-Precategory 𝒞 {c})
 
-  -- is-unital-composition-operation-fiber-precategory-Displayed-Precategory :
-  --   is-unital-composition-operation-binary-family-Set
-  --     ( hom-set-fiber-precategory-Displayed-Precategory)
-  --     ( comp-hom-fiber-precategory-Displayed-Precategory)
-  -- pr1
-  --   is-unital-composition-operation-fiber-precategory-Displayed-Precategory x =
-  --   id-hom-fiber-precategory-Displayed-Precategory
-  -- pr1
-  --   ( pr2
-  --     is-unital-composition-operation-fiber-precategory-Displayed-Precategory) =
-  --       left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory
-  -- pr2
-  --   ( pr2
-  --     is-unital-composition-operation-fiber-precategory-Displayed-Precategory) =
-  --       right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory
+  is-unital-composition-operation-fiber-precategory-Displayed-Precategory :
+    is-unital-composition-operation-binary-family-Set
+      ( hom-set-fiber-precategory-Displayed-Precategory)
+      ( comp-hom-fiber-precategory-Displayed-Precategory)
+  pr1
+    is-unital-composition-operation-fiber-precategory-Displayed-Precategory x =
+    id-hom-fiber-precategory-Displayed-Precategory
+  pr1
+    ( pr2
+      is-unital-composition-operation-fiber-precategory-Displayed-Precategory) =
+        left-unit-law-comp-hom-fiber-precategory-Displayed-Precategory
+  pr2
+    ( pr2
+      is-unital-composition-operation-fiber-precategory-Displayed-Precategory) =
+        right-unit-law-comp-hom-fiber-precategory-Displayed-Precategory
 
-  -- fiber-precategory-Displayed-Precategory : Precategory l3 l4
-  -- pr1 fiber-precategory-Displayed-Precategory =
-  --   obj-fiber-precategory-Displayed-Precategory
-  -- pr1 (pr2 fiber-precategory-Displayed-Precategory) =
-  --   hom-set-fiber-precategory-Displayed-Precategory
-  -- pr1 (pr2 (pr2 fiber-precategory-Displayed-Precategory)) =
-  --   associative-composition-operation-fiber-precategory-Displayed-Precategory
-  -- pr2 (pr2 (pr2 fiber-precategory-Displayed-Precategory)) =
-  --   is-unital-composition-operation-fiber-precategory-Displayed-Precategory
+  fiber-precategory-Displayed-Precategory : Precategory l3 l4
+  pr1 fiber-precategory-Displayed-Precategory =
+    obj-fiber-precategory-Displayed-Precategory
+  pr1 (pr2 fiber-precategory-Displayed-Precategory) =
+    hom-set-fiber-precategory-Displayed-Precategory
+  pr1 (pr2 (pr2 fiber-precategory-Displayed-Precategory)) =
+    associative-composition-operation-fiber-precategory-Displayed-Precategory
+  pr2 (pr2 (pr2 fiber-precategory-Displayed-Precategory)) =
+    is-unital-composition-operation-fiber-precategory-Displayed-Precategory
 ```
 
 ## References
