@@ -494,8 +494,7 @@ module _
       ( λ X →
         is-contr-equiv
           ( structure-Hatcher-Acyclic-Type (Ω X))
-          ( equiv-comp
-            ( equiv-pointed-map-Hatcher-Acyclic-Type A (Ω X) σ i)
+          ( ( equiv-pointed-map-Hatcher-Acyclic-Type A (Ω X) σ i) ∘e
             ( equiv-transpose-suspension-loop-adjunction A X))
           ( is-contr-structure-Hatcher-Acyclic-Type-Ω X))
 ```

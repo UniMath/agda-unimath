@@ -23,6 +23,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.precomposition-dependent-functions
+open import foundation.span-diagrams
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -30,10 +31,12 @@ open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
+open import synthetic-homotopy-theory.descent-data-pushouts
+open import synthetic-homotopy-theory.descent-property-pushouts
+open import synthetic-homotopy-theory.equivalences-descent-data-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -49,8 +52,8 @@ module hom-Fam-pushout
   { B : UU l3}
   { f : S → A}
   { g : S → B}
-  ( P : Fam-pushout l4 f g)
-  ( Q : Fam-pushout l5 f g)
+  ( P : descent-data-pushout (make-span-diagram f g) l4)
+  ( Q : descent-data-pushout (make-span-diagram f g) l5)
   where
 
   private
@@ -153,7 +156,9 @@ hom-Fam-pushout-map :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( P : X → UU l5) (Q : X → UU l6) → ((x : X) → P x → Q x) →
-  hom-Fam-pushout (desc-fam c P) (desc-fam c Q)
+  hom-Fam-pushout
+    ( descent-data-family-cocone-span-diagram c P)
+    ( descent-data-family-cocone-span-diagram c Q)
 hom-Fam-pushout-map {f = f} {g} c P Q h =
   pair
     ( precomp-Π (pr1 c) (λ x → P x → Q x) h)
@@ -177,7 +182,9 @@ hom-Fam-pushout-dependent-cocone :
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( P : X → UU l5) (Q : X → UU l6) →
   dependent-cocone f g c (λ x → P x → Q x) →
-  hom-Fam-pushout (desc-fam c P) (desc-fam c Q)
+  hom-Fam-pushout
+    ( descent-data-family-cocone-span-diagram c P)
+    ( descent-data-family-cocone-span-diagram c Q)
 hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q =
   tot (λ hA → tot (λ hB →
     map-Π (λ s →
@@ -230,8 +237,8 @@ triangle-hom-Fam-pushout-dependent-cocone :
     ( dependent-cocone-map f g c (λ x → P x → Q x)))
 triangle-hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q h =
   eq-htpy-hom-Fam-pushout
-    ( desc-fam c P)
-    ( desc-fam c Q)
+    ( descent-data-family-cocone-span-diagram c P)
+    ( descent-data-family-cocone-span-diagram c Q)
     ( hom-Fam-pushout-map c P Q h)
     ( hom-Fam-pushout-dependent-cocone c P Q
       ( dependent-cocone-map f g c (λ x → P x → Q x) h))
@@ -266,7 +273,9 @@ equiv-hom-Fam-pushout-map :
   ( up-X : universal-property-pushout f g c)
   ( P : X → UU l5) (Q : X → UU l6) →
   ( (x : X) → P x → Q x) ≃
-  hom-Fam-pushout (desc-fam c P) (desc-fam c Q)
+  hom-Fam-pushout
+    ( descent-data-family-cocone-span-diagram c P)
+    ( descent-data-family-cocone-span-diagram c Q)
 equiv-hom-Fam-pushout-map c up-X P Q =
   pair
     ( hom-Fam-pushout-map c P Q)
@@ -278,16 +287,20 @@ equiv-hom-Fam-pushout-map c up-X P Q =
 ```agda
 ev-point-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g)
+  { f : S → A} {g : S → B}
+  ( P : descent-data-pushout (make-span-diagram f g) l4)
+  ( Q : descent-data-pushout (make-span-diagram f g) l5)
   {a : A} → (pr1 P a) → (hom-Fam-pushout P Q) → pr1 Q a
 ev-point-hom-Fam-pushout P Q {a} p h = pr1 h a p
 
 is-universal-Fam-pushout :
   { l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (a : A) (p : pr1 P a) →
+  { f : S → A} {g : S → B}
+  ( P : descent-data-pushout (make-span-diagram f g) l4) (a : A) (p : pr1 P a) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 is-universal-Fam-pushout l {f = f} {g} P a p =
-  ( Q : Fam-pushout l f g) → is-equiv (ev-point-hom-Fam-pushout P Q p)
+  ( Q : descent-data-pushout (make-span-diagram f g) l) →
+  is-equiv (ev-point-hom-Fam-pushout P Q p)
 ```
 
 ### Lemma 19.2.2 The descent data of the identity type is a universal family
@@ -299,8 +312,8 @@ triangle-is-universal-id-Fam-pushout' :
   (a : A) ( Q : (x : X) → UU l) →
   ( ev-refl (pr1 c a) {B = λ x p → Q x}) ~
   ( ( ev-point-hom-Fam-pushout
-      ( desc-fam c (Id (pr1 c a)))
-      ( desc-fam c Q)
+      ( descent-data-family-cocone-span-diagram c (Id (pr1 c a)))
+      ( descent-data-family-cocone-span-diagram c Q)
       ( refl)) ∘
     ( hom-Fam-pushout-map c (Id (pr1 c a)) Q))
 triangle-is-universal-id-Fam-pushout' c a Q = refl-htpy
@@ -312,15 +325,15 @@ is-universal-id-Fam-pushout' :
   ( Q : (x : X) → UU l) →
   is-equiv
     ( ev-point-hom-Fam-pushout
-      ( desc-fam c (Id (pr1 c a)))
-      ( desc-fam c Q)
+      ( descent-data-family-cocone-span-diagram c (Id (pr1 c a)))
+      ( descent-data-family-cocone-span-diagram c Q)
       ( refl))
 is-universal-id-Fam-pushout' c up-X a Q =
   is-equiv-right-map-triangle
     ( ev-refl (pr1 c a) {B = λ x p → Q x})
     ( ev-point-hom-Fam-pushout
-      ( desc-fam c (Id (pr1 c a)))
-      ( desc-fam c Q)
+      ( descent-data-family-cocone-span-diagram c (Id (pr1 c a)))
+      ( descent-data-family-cocone-span-diagram c Q)
       ( refl))
     ( hom-Fam-pushout-map c (Id (pr1 c a)) Q)
     ( triangle-is-universal-id-Fam-pushout' c a Q)
@@ -332,14 +345,20 @@ is-universal-id-Fam-pushout :
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X)
   ( up-X : universal-property-pushout f g c) (a : A) →
-  is-universal-Fam-pushout l (desc-fam c (Id (pr1 c a))) a refl
+  is-universal-Fam-pushout l
+    ( descent-data-family-cocone-span-diagram c (Id (pr1 c a)))
+    ( a)
+    ( refl)
 is-universal-id-Fam-pushout {S = S} {A} {B} {X} {f} {g} c up-X a Q =
-  map-inv-equiv
-    ( equiv-precomp-Π
-      ( equiv-desc-fam c up-X)
-      ( λ (Q : Fam-pushout _ f g) →
-        is-equiv (ev-point-hom-Fam-pushout
-          ( desc-fam c (Id (pr1 c a))) Q refl)))
+  map-inv-is-equiv
+    ( is-equiv-precomp-Π-is-equiv
+      ( is-equiv-descent-data-family-cocone-span-diagram up-X)
+      ( λ (Q : descent-data-pushout (make-span-diagram f g) _) →
+        is-equiv
+          ( ev-point-hom-Fam-pushout
+            ( descent-data-family-cocone-span-diagram c (Id (pr1 c a)))
+            ( Q)
+            ( refl))))
     ( is-universal-id-Fam-pushout' c up-X a)
     ( Q)
 ```
@@ -351,7 +370,7 @@ equipped with two-sided inverses are equivalences.
 id-hom-Fam-pushout :
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} →
-  ( P : Fam-pushout l4 f g) → hom-Fam-pushout P P
+  ( P : descent-data-pushout (make-span-diagram f g) l4) → hom-Fam-pushout P P
 id-hom-Fam-pushout P =
   pair
     ( λ a → id)
@@ -362,7 +381,9 @@ id-hom-Fam-pushout P =
 comp-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} →
-  ( P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g) (R : Fam-pushout l6 f g) →
+  ( P : descent-data-pushout (make-span-diagram f g) l4)
+  ( Q : descent-data-pushout (make-span-diagram f g) l5)
+  ( R : descent-data-pushout (make-span-diagram f g) l6) →
   hom-Fam-pushout Q R → hom-Fam-pushout P Q → hom-Fam-pushout P R
 comp-hom-Fam-pushout {f = f} {g} P Q R k h =
   pair
@@ -384,7 +405,9 @@ comp-hom-Fam-pushout {f = f} {g} P Q R k h =
 is-invertible-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} →
-  ( P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g) (h : hom-Fam-pushout P Q) →
+  ( P : descent-data-pushout (make-span-diagram f g) l4)
+  ( Q : descent-data-pushout (make-span-diagram f g) l5)
+  ( h : hom-Fam-pushout P Q) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
 is-invertible-hom-Fam-pushout P Q h =
   Σ ( hom-Fam-pushout Q P) (λ k →
@@ -397,7 +420,9 @@ is-invertible-hom-Fam-pushout P Q h =
 
 is-equiv-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g) →
+  { f : S → A} {g : S → B}
+  ( P : descent-data-pushout (make-span-diagram f g) l4)
+  ( Q : descent-data-pushout (make-span-diagram f g) l5) →
   hom-Fam-pushout P Q → UU (l2 ⊔ l3 ⊔ l4 ⊔ l5)
 is-equiv-hom-Fam-pushout {A = A} {B} {f} {g} P Q h =
   ((a : A) → is-equiv (pr1 h a)) × ((b : B) → is-equiv (pr1 (pr2 h) b))
@@ -405,7 +430,9 @@ is-equiv-hom-Fam-pushout {A = A} {B} {f} {g} P Q h =
 is-equiv-is-invertible-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} →
-  ( P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g) (h : hom-Fam-pushout P Q) →
+  ( P : descent-data-pushout (make-span-diagram f g) l4)
+  ( Q : descent-data-pushout (make-span-diagram f g) l5)
+  (h : hom-Fam-pushout P Q) →
   is-invertible-hom-Fam-pushout P Q h → is-equiv-hom-Fam-pushout P Q h
 is-equiv-is-invertible-hom-Fam-pushout P Q h has-inv-h =
   pair
@@ -422,9 +449,11 @@ is-equiv-is-invertible-hom-Fam-pushout P Q h has-inv-h =
 
 equiv-is-equiv-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g) →
+  { f : S → A} {g : S → B}
+  ( P : descent-data-pushout (make-span-diagram f g) l4)
+  ( Q : descent-data-pushout (make-span-diagram f g) l5) →
   ( h : hom-Fam-pushout P Q) →
-  is-equiv-hom-Fam-pushout P Q h → equiv-Fam-pushout P Q
+  is-equiv-hom-Fam-pushout P Q h → equiv-descent-data-pushout P Q
 equiv-is-equiv-hom-Fam-pushout P Q h is-equiv-h =
   pair
     ( λ a → pair (pr1 h a) (pr1 is-equiv-h a))
