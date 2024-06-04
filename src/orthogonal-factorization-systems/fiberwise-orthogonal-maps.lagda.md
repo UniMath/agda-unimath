@@ -56,11 +56,11 @@ open import orthogonal-factorization-systems.pullback-hom
 ## Idea
 
 The map `f : A → B` is said to be
-{{#concept "fiberwise orthogonal" Disambiguation="maps of types" Agda=is-fiberwise-orthogonal-pullback-condition}}
+{{#concept "fiberwise left orthogonal" Disambiguation="maps of types" Agda=is-fiberwise-orthogonal-pullback-condition}}
 to `g : X → Y` if every [base change](foundation.cartesian-morphisms-arrows.md)
-of `f` is [orthogonal](orthogonal-factorization-systems.md) to `g`.
+of `f` is [left orthogonal](orthogonal-factorization-systems.md) to `g`.
 
-More concretely, `f` _is fiberwise orthogonal to_ `g` if for every
+More concretely, `f` _is fiberwise left orthogonal to_ `g` if for every
 [pullback](foundation-core.pullbacks.md) square
 
 ```text
@@ -134,10 +134,10 @@ module _
     is-fiberwise-orthogonal-pullback-condition f g →
     universal-property-fiberwise-orthogonal-maps f g
   universal-property-fiberwise-orthogonal-maps-is-fiberwise-orthogonal-pullback-condition
-    H f' α =
+    H {A' = A'} f' α =
     universal-property-pullback-is-pullback
       ( precomp f' Y)
-      ( postcomp _ g)
+      ( postcomp A' g)
       ( cone-pullback-hom f' g)
       ( H f' α)
 
@@ -145,10 +145,10 @@ module _
     universal-property-fiberwise-orthogonal-maps f g →
     is-fiberwise-orthogonal-pullback-condition f g
   is-fiberwise-orthogonal-pullback-condition-universal-property-fiberwise-orthogonal-maps
-    H f' α =
+    H {A' = A'} f' α =
     is-pullback-universal-property-pullback
       ( precomp f' Y)
-      ( postcomp _ g)
+      ( postcomp A' g)
       ( cone-pullback-hom f' g)
       ( H f' α)
 ```
@@ -252,7 +252,7 @@ module _
       ( is-equiv-map-equiv g)
 ```
 
-### If `g` is fiberwise `f`-orthogonal then it is null at the fibers of `f`
+### If `g` is fiberwise right orthogonal to `f` then it is null at the fibers of `f`
 
 ```agda
 module _
@@ -360,7 +360,8 @@ Given a base change of `g`
     Y' -----> Y,
 ```
 
-if `g` is fiberwise `f`-orthogonal, then `g'` is fiberwise `f`-orthogonal.
+if `g` is fiberwise right orthogonal to `f`, then `g'` is fiberwise right
+orthogonal to `f`.
 
 ```agda
 module _
@@ -376,15 +377,17 @@ module _
     is-orthogonal-pullback-condition-right-base-change f' g g' β (G f' α)
 ```
 
-### Fiberwise orthogonal maps are closed under composition and have the right cancellation property
+### Closure properties of left fiberwise orthogonal maps
+
+#### The left class is closed under composition and have the right cancellation property
 
 This remains to be formalized.
 
-### Fiberwise orthogonal maps are closed under coproducts
+#### The left class is closed under coproducts
 
 This remains to be formalized.
 
-### Fiberwise orthogonality is preserved under base change
+#### The left class is preserved under base change
 
 ```agda
 module _
@@ -400,19 +403,19 @@ module _
     H f'' (comp-cartesian-hom-arrow f'' f' f α α')
 ```
 
-### Fiberwise orthogonal maps are closed under cobase change
+#### The left class is closed under cobase change
 
 This remains to be formalized.
 
-### Fiberwise orthogonal maps are closed transfininte composition
+#### The left class is closed transfininte composition
 
 This remains to be formalized.
 
-### Fiberwise orthogonal maps are closed under products
+#### The left class is closed under cartesian products
 
 This remains to be formalized.
 
-### Fiberwise orthogonal maps are closed under taking image inclusions
+#### The left class is closed under taking image inclusions
 
 This remains to be formalized.
 
