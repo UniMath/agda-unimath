@@ -14,6 +14,7 @@ open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.families-of-equivalences
 open import foundation.fibers-of-maps
+open import foundation.functoriality-cartesian-product-types
 open import foundation.function-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
@@ -219,7 +220,7 @@ module _
     inv-equiv equiv-is-local-terminal-map-is-null-map
 ```
 
-### A map is `Y`-null if and only if the terminal projection of `Y` is orthogonal to `f`
+### A map is `Y`-null if and only if it is `Y`-orthogonal
 
 ```agda
 module _
@@ -279,7 +280,39 @@ module _
       ( is-orthogonal-fiber-condition-terminal-map-is-null-map H)
 ```
 
-### A family is `Y`-null if and only if it is orthogonal to the terminal projection of `Y`
+### Equivalences are null at any type
+
+```agda
+module _
+  {l1 l2 l3 : Level} (Y : UU l1) {A : UU l2} {B : UU l3} (e : A ≃ B)
+  where
+
+  is-null-map-map-equiv : is-null-map Y (map-equiv e)
+  is-null-map-map-equiv =
+    is-null-map-is-orthogonal-terminal-map Y
+      ( map-equiv e)
+      ( is-orthogonal-equiv-right (terminal-map Y) e)
+```
+
+### Null maps are closed under homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} (Y : UU l1) {A : UU l2} {B : UU l3}
+  {f g : A → B}
+  where
+
+  is-null-map-htpy : f ~ g → is-null-map Y f → is-null-map Y g
+  is-null-map-htpy H is-null-f =
+    is-null-map-is-orthogonal-terminal-map Y g
+      ( is-orthogonal-htpy-right (terminal-map Y) f H
+        ( is-orthogonal-terminal-map-is-null-map Y f is-null-f))
+
+  is-null-map-htpy' : g ~ f → is-null-map Y f → is-null-map Y g
+  is-null-map-htpy' H = is-null-map-htpy (inv-htpy H)
+```
+
+### A family is `Y`-null if and only if it is `Y`-orthogonal
 
 ```agda
 module _
@@ -320,12 +353,108 @@ module _
   abstract
     is-null-family-is-null-Σ :
       is-null Y A → is-null Y (Σ A B) → is-null-family Y B
-    is-null-family-is-null-Σ is-null-A is-null-Σ-B =
+    is-null-family-is-null-Σ is-null-A is-null-ΣAB =
       is-null-family-is-orthogonal-terminal-map Y
         ( is-orthogonal-right-right-factor
           ( terminal-map Y)
           ( pr1)
           ( terminal-map A)
           ( is-orthogonal-terminal-maps-is-null is-null-A)
-          ( is-orthogonal-terminal-maps-is-null is-null-Σ-B))
+          ( is-orthogonal-terminal-maps-is-null is-null-ΣAB))
+```
+
+### Composition and right cancellation of null maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (Y : UU l1) {A : UU l2} {B : UU l3} {C : UU l4}
+  {f : A → B} {g : B → C}
+  where
+
+  abstract
+    is-null-map-comp :
+      is-null-map Y g → is-null-map Y f → is-null-map Y (g ∘ f)
+    is-null-map-comp is-null-g is-null-f =
+      is-null-map-is-orthogonal-terminal-map Y (g ∘ f)
+        ( is-orthogonal-right-comp (terminal-map Y) f g
+          ( is-orthogonal-terminal-map-is-null-map Y g is-null-g)
+          ( is-orthogonal-terminal-map-is-null-map Y f is-null-f))
+
+  abstract
+    is-null-map-right-factor :
+      is-null-map Y g → is-null-map Y (g ∘ f) → is-null-map Y f
+    is-null-map-right-factor is-null-g is-null-gf =
+      is-null-map-is-orthogonal-terminal-map Y f
+        ( is-orthogonal-right-right-factor (terminal-map Y) f g
+          ( is-orthogonal-terminal-map-is-null-map Y g is-null-g)
+          ( is-orthogonal-terminal-map-is-null-map Y (g ∘ f) is-null-gf))
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (Y : UU l1) {A : UU l2} {B : UU l3} {C : UU l4}
+  {f : A → B} {g : B → C} {h : A → C} (H : h ~ g ∘ f)
+  where
+
+  is-null-map-left-map-triangle :
+    is-null-map Y g → is-null-map Y f → is-null-map Y h
+  is-null-map-left-map-triangle is-null-g is-null-f =
+    is-null-map-htpy' Y H (is-null-map-comp Y is-null-g is-null-f)
+
+  is-null-map-top-map-triangle :
+    is-null-map Y g → is-null-map Y h → is-null-map Y f
+  is-null-map-top-map-triangle is-null-g is-null-h =
+    is-null-map-right-factor Y is-null-g (is-null-map-htpy Y H is-null-h)
+```
+
+### Null maps are closed under dependent products
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (Y : UU l1) {I : UU l2} {A : I → UU l3} {B : I → UU l4}
+  {f : (i : I) → A i → B i}
+  where
+
+  abstract
+    is-null-map-Π : ((i : I) → is-null-map Y (f i)) → is-null-map Y (map-Π f)
+    is-null-map-Π is-null-f =
+      is-null-map-is-orthogonal-terminal-map Y (map-Π f)
+      ( is-orthogonal-right-Π (terminal-map Y) f
+        ( λ i → is-orthogonal-terminal-map-is-null-map Y (f i) (is-null-f i)))
+```
+
+### Null maps are closed under exponentiation
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (Y : UU l1) (I : UU l2) {A : UU l3} {B : UU l4} {f : A → B}
+  where
+
+  abstract
+    is-null-map-postcomp : is-null-map Y f → is-null-map Y (postcomp I f)
+    is-null-map-postcomp is-null-f =
+      is-null-map-is-orthogonal-terminal-map Y (postcomp I f)
+        ( is-orthogonal-right-postcomp I (terminal-map Y) f
+          ( is-orthogonal-terminal-map-is-null-map Y f is-null-f))
+```
+
+### Null maps are closed under cartesian products
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (Y : UU l1) {A : UU l2} {B : UU l3} {C : UU l4} {D : UU l5}
+  {f : A → B} {g : C → D}
+  where
+
+  abstract
+    is-null-map-product :
+      is-null-map Y f → is-null-map Y g → is-null-map Y (map-product f g)
+    is-null-map-product is-null-f is-null-g =
+      is-null-map-is-orthogonal-terminal-map Y (map-product f g)
+        ( is-orthogonal-right-product (terminal-map Y) f g
+          ( is-orthogonal-terminal-map-is-null-map Y f is-null-f)
+          ( is-orthogonal-terminal-map-is-null-map Y g is-null-g))
 ```
