@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+
 module synthetic-homotopy-theory.descent-data-pushouts-identity-types where
 ```
 
@@ -39,14 +40,15 @@ Given a [cocone](synthetic-homotopy-theory.cocones-under-spans.md) under a
 ```
 
 and a point `x₀ : X`, the type family of
-[identity types](foundation-core.identity-types.md) based at `x₀`, `x ↦ x₀ = x`,
-is [characterized](synthetic-homotopy-theory.families-descent-data-pushouts.md)
-by the [descent data](synthetic-homotopy-theory.descent-data-pushouts.md)
+[identity types](foundation-core.identity-types.md) based at `x₀`,
+`x ↦ (x₀ = x)`, is
+[characterized](synthetic-homotopy-theory.families-descent-data-pushouts.md) by
+the [descent data](synthetic-homotopy-theory.descent-data-pushouts.md)
 `(IA, IB, IS)`, where `IA` and `IB` are families of identity types
 
 ```text
-  IA a := x₀ = ia
-  IB b := x₀ = jb,
+  IA a := (x₀ = ia)
+  IB b := (x₀ = jb),
 ```
 
 and the gluing data `IS s : (x₀ = ifs) ≃ (x₀ = jgs)` is given by concatenation
