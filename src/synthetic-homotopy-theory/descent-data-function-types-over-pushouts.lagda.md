@@ -93,28 +93,26 @@ module _
   (R : family-with-descent-data-pushout c l6)
   where
 
-  family-cocone-family-with-descent-data-pushout-function-family :
-    X → UU (l5 ⊔ l6)
-  family-cocone-family-with-descent-data-pushout-function-family x =
+  family-cocone-function-type-pushout : X → UU (l5 ⊔ l6)
+  family-cocone-function-type-pushout x =
     family-cocone-family-with-descent-data-pushout P x →
     family-cocone-family-with-descent-data-pushout R x
 
-  descent-data-pushout-function-family :
-    descent-data-pushout 𝒮 (l5 ⊔ l6)
-  pr1 descent-data-pushout-function-family a =
+  descent-data-function-type-pushout : descent-data-pushout 𝒮 (l5 ⊔ l6)
+  pr1 descent-data-function-type-pushout a =
     left-family-family-with-descent-data-pushout P a →
     left-family-family-with-descent-data-pushout R a
-  pr1 (pr2 descent-data-pushout-function-family) b =
+  pr1 (pr2 descent-data-function-type-pushout) b =
     right-family-family-with-descent-data-pushout P b →
     right-family-family-with-descent-data-pushout R b
-  pr2 (pr2 descent-data-pushout-function-family) s =
+  pr2 (pr2 descent-data-function-type-pushout) s =
     ( equiv-postcomp _
       ( equiv-family-family-with-descent-data-pushout R s)) ∘e
     ( equiv-precomp
       ( inv-equiv (equiv-family-family-with-descent-data-pushout P s))
       ( _))
 
-  left-equiv-equiv-descent-data-pushout-function-family :
+  left-equiv-equiv-descent-data-function-type-pushout :
     (a : domain-span-diagram 𝒮) →
     ( family-cocone-family-with-descent-data-pushout P
         ( horizontal-map-cocone _ _ c a) →
@@ -122,14 +120,14 @@ module _
         ( horizontal-map-cocone _ _ c a)) ≃
     ( left-family-family-with-descent-data-pushout P a →
       left-family-family-with-descent-data-pushout R a)
-  left-equiv-equiv-descent-data-pushout-function-family a =
+  left-equiv-equiv-descent-data-function-type-pushout a =
     ( equiv-postcomp _
       ( left-equiv-family-with-descent-data-pushout R a)) ∘e
     ( equiv-precomp
       ( inv-equiv (left-equiv-family-with-descent-data-pushout P a))
       ( _))
 
-  right-equiv-equiv-descent-data-pushout-function-family :
+  right-equiv-equiv-descent-data-function-type-pushout :
     (b : codomain-span-diagram 𝒮) →
     ( family-cocone-family-with-descent-data-pushout P
         ( vertical-map-cocone _ _ c b) →
@@ -137,29 +135,31 @@ module _
         ( vertical-map-cocone _ _ c b)) ≃
     ( right-family-family-with-descent-data-pushout P b →
       right-family-family-with-descent-data-pushout R b)
-  right-equiv-equiv-descent-data-pushout-function-family b =
+  right-equiv-equiv-descent-data-function-type-pushout b =
     ( equiv-postcomp _
       ( right-equiv-family-with-descent-data-pushout R b)) ∘e
     ( equiv-precomp
       ( inv-equiv (right-equiv-family-with-descent-data-pushout P b))
       ( _))
 
-  coherence-equiv-descent-data-pushout-function-family :
+  coherence-equiv-descent-data-function-type-pushout :
     (s : spanning-type-span-diagram 𝒮) →
     coherence-square-maps
       ( map-equiv
-        ( left-equiv-equiv-descent-data-pushout-function-family
+        ( left-equiv-equiv-descent-data-function-type-pushout
           ( left-map-span-diagram 𝒮 s)))
       ( tr
-        ( family-cocone-family-with-descent-data-pushout-function-family)
+        ( family-cocone-function-type-pushout)
         ( coherence-square-cocone _ _ c s))
-      ( map-family-descent-data-pushout descent-data-pushout-function-family s)
+      ( map-family-descent-data-pushout
+        ( descent-data-function-type-pushout)
+        ( s))
       ( map-equiv
-        ( right-equiv-equiv-descent-data-pushout-function-family
+        ( right-equiv-equiv-descent-data-function-type-pushout
           ( right-map-span-diagram 𝒮 s)))
-  coherence-equiv-descent-data-pushout-function-family s =
+  coherence-equiv-descent-data-function-type-pushout s =
     ( ( map-equiv
-        ( right-equiv-equiv-descent-data-pushout-function-family
+        ( right-equiv-equiv-descent-data-function-type-pushout
           ( right-map-span-diagram 𝒮 s))) ·l
       ( tr-function-type
         ( family-cocone-family-with-descent-data-pushout P)
@@ -180,26 +180,26 @@ module _
             ( equiv-family-family-with-descent-data-pushout P s)
             ( inv-htpy (coherence-family-with-descent-data-pushout P s)))))
 
-  equiv-descent-data-pushout-function-family :
+  equiv-descent-data-function-type-pushout :
     equiv-descent-data-pushout
       ( descent-data-family-cocone-span-diagram c
-        ( family-cocone-family-with-descent-data-pushout-function-family))
-      ( descent-data-pushout-function-family)
-  pr1 equiv-descent-data-pushout-function-family =
-    left-equiv-equiv-descent-data-pushout-function-family
-  pr1 (pr2 equiv-descent-data-pushout-function-family) =
-    right-equiv-equiv-descent-data-pushout-function-family
-  pr2 (pr2 equiv-descent-data-pushout-function-family) =
-    coherence-equiv-descent-data-pushout-function-family
+        ( family-cocone-function-type-pushout))
+      ( descent-data-function-type-pushout)
+  pr1 equiv-descent-data-function-type-pushout =
+    left-equiv-equiv-descent-data-function-type-pushout
+  pr1 (pr2 equiv-descent-data-function-type-pushout) =
+    right-equiv-equiv-descent-data-function-type-pushout
+  pr2 (pr2 equiv-descent-data-function-type-pushout) =
+    coherence-equiv-descent-data-function-type-pushout
 
-  family-with-descent-data-pushout-function-family :
+  family-with-descent-data-function-type-pushout :
     family-with-descent-data-pushout c (l5 ⊔ l6)
-  pr1 family-with-descent-data-pushout-function-family =
-    family-cocone-family-with-descent-data-pushout-function-family
-  pr1 (pr2 family-with-descent-data-pushout-function-family) =
-    descent-data-pushout-function-family
-  pr2 (pr2 family-with-descent-data-pushout-function-family) =
-    equiv-descent-data-pushout-function-family
+  pr1 family-with-descent-data-function-type-pushout =
+    family-cocone-function-type-pushout
+  pr1 (pr2 family-with-descent-data-function-type-pushout) =
+    descent-data-function-type-pushout
+  pr2 (pr2 family-with-descent-data-function-type-pushout) =
+    equiv-descent-data-function-type-pushout
 ```
 
 ## Properties
@@ -214,43 +214,30 @@ module _
   (R : family-with-descent-data-pushout c l6)
   where
 
-  hom-section-descent-data-pushout-function-family :
-    section-descent-data-pushout (descent-data-pushout-function-family P R) →
+  hom-section-descent-data-function-type-pushout :
+    section-descent-data-pushout (descent-data-function-type-pushout P R) →
     hom-descent-data-pushout
       ( descent-data-family-with-descent-data-pushout P)
       ( descent-data-family-with-descent-data-pushout R)
-  pr1 (hom-section-descent-data-pushout-function-family t) =
-    left-map-section-descent-data-pushout
-      ( descent-data-pushout-function-family P R)
-      ( t)
-  pr1 (pr2 (hom-section-descent-data-pushout-function-family t)) =
-    right-map-section-descent-data-pushout
-      ( descent-data-pushout-function-family P R)
-      ( t)
-  pr2 (pr2 (hom-section-descent-data-pushout-function-family t)) s =
-    inv-htpy
-      ( map-inv-equiv
-        ( equiv-coherence-triangle-maps-inv-top'
-          ( ( map-family-family-with-descent-data-pushout R s) ∘
-            ( left-map-section-descent-data-pushout
-              ( descent-data-pushout-function-family P R)
-              ( t)
-              ( left-map-span-diagram 𝒮 s)))
-          ( right-map-section-descent-data-pushout
-            ( descent-data-pushout-function-family P R)
-            ( t)
-            ( right-map-span-diagram 𝒮 s))
-          ( equiv-family-family-with-descent-data-pushout P s))
-        ( htpy-eq
-          ( coherence-section-descent-data-pushout
-            ( descent-data-pushout-function-family P R)
-            ( t)
-            ( s))))
+  hom-section-descent-data-function-type-pushout =
+    tot
+      ( λ tA →
+        tot
+        ( λ tB tS s →
+          inv-htpy
+            ( map-inv-equiv
+              ( equiv-coherence-triangle-maps-inv-top'
+                ( ( map-family-family-with-descent-data-pushout R s) ∘
+                  ( tA (left-map-span-diagram 𝒮 s)))
+                ( tB (right-map-span-diagram 𝒮 s))
+                ( equiv-family-family-with-descent-data-pushout P s))
+              ( htpy-eq (tS s)))))
 
   abstract
-    is-equiv-hom-section-descent-data-pushout-function-family :
-      is-equiv hom-section-descent-data-pushout-function-family
-    is-equiv-hom-section-descent-data-pushout-function-family =
+    is-equiv-hom-section-descent-data-function-type-pushout :
+      is-equiv
+        ( hom-section-descent-data-function-type-pushout)
+    is-equiv-hom-section-descent-data-function-type-pushout =
       is-equiv-tot-is-fiberwise-equiv
         ( λ tA →
           is-equiv-tot-is-fiberwise-equiv
@@ -276,9 +263,9 @@ module _
       ( descent-data-family-with-descent-data-pushout P)
       ( descent-data-family-with-descent-data-pushout R)
   hom-descent-data-map-family-cocone-span-diagram =
-    ( hom-section-descent-data-pushout-function-family) ∘
+    ( hom-section-descent-data-function-type-pushout) ∘
     ( section-descent-data-section-family-cocone-span-diagram
-      ( family-with-descent-data-pushout-function-family P R))
+      ( family-with-descent-data-function-type-pushout P R))
 
   abstract
     is-equiv-hom-descent-data-map-family-cocone-span-diagram :
@@ -288,7 +275,7 @@ module _
       is-equiv-comp _ _
         ( is-equiv-section-descent-data-section-family-cocone-span-diagram _
           ( up-c))
-        ( is-equiv-hom-section-descent-data-pushout-function-family)
+        ( is-equiv-hom-section-descent-data-function-type-pushout)
 ```
 
 As a corollary, given a morphism `(hA, hB, hS) : (PA, PB, PS) → (RA, RB, RS)`,

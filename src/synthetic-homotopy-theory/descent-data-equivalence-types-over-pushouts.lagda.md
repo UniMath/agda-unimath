@@ -66,21 +66,19 @@ module _
   (R : family-with-descent-data-pushout c l6)
   where
 
-  family-cocone-family-with-descent-data-pushout-equivalence-family :
-    X → UU (l5 ⊔ l6)
-  family-cocone-family-with-descent-data-pushout-equivalence-family x =
+  family-cocone-equivalence-type-pushout : X → UU (l5 ⊔ l6)
+  family-cocone-equivalence-type-pushout x =
     family-cocone-family-with-descent-data-pushout P x ≃
     family-cocone-family-with-descent-data-pushout R x
 
-  descent-data-pushout-equivalence-family :
-    descent-data-pushout 𝒮 (l5 ⊔ l6)
-  pr1 descent-data-pushout-equivalence-family a =
+  descent-data-equivalence-type-pushout : descent-data-pushout 𝒮 (l5 ⊔ l6)
+  pr1 descent-data-equivalence-type-pushout a =
     left-family-family-with-descent-data-pushout P a ≃
     left-family-family-with-descent-data-pushout R a
-  pr1 (pr2 descent-data-pushout-equivalence-family) b =
+  pr1 (pr2 descent-data-equivalence-type-pushout) b =
     right-family-family-with-descent-data-pushout P b ≃
     right-family-family-with-descent-data-pushout R b
-  pr2 (pr2 descent-data-pushout-equivalence-family) s =
+  pr2 (pr2 descent-data-equivalence-type-pushout) s =
     ( equiv-postcomp-equiv
       ( equiv-family-family-with-descent-data-pushout R s)
       ( _)) ∘e
@@ -88,7 +86,7 @@ module _
       ( inv-equiv (equiv-family-family-with-descent-data-pushout P s))
       ( _))
 
-  left-equiv-equiv-descent-data-pushout-equivalence-family :
+  left-equiv-equiv-descent-data-equivalence-type-pushout :
     (a : domain-span-diagram 𝒮) →
     ( family-cocone-family-with-descent-data-pushout P
         ( horizontal-map-cocone _ _ c a) ≃
@@ -96,7 +94,7 @@ module _
         ( horizontal-map-cocone _ _ c a)) ≃
     ( left-family-family-with-descent-data-pushout P a ≃
       left-family-family-with-descent-data-pushout R a)
-  left-equiv-equiv-descent-data-pushout-equivalence-family a =
+  left-equiv-equiv-descent-data-equivalence-type-pushout a =
     ( equiv-postcomp-equiv
       ( left-equiv-family-with-descent-data-pushout R a)
       ( _)) ∘e
@@ -104,7 +102,7 @@ module _
       ( inv-equiv (left-equiv-family-with-descent-data-pushout P a))
       ( _))
 
-  right-equiv-equiv-descent-data-pushout-equivalence-family :
+  right-equiv-equiv-descent-data-equivalence-type-pushout :
     (b : codomain-span-diagram 𝒮) →
     ( family-cocone-family-with-descent-data-pushout P
         ( vertical-map-cocone _ _ c b) ≃
@@ -112,7 +110,7 @@ module _
         ( vertical-map-cocone _ _ c b)) ≃
     ( right-family-family-with-descent-data-pushout P b ≃
       right-family-family-with-descent-data-pushout R b)
-  right-equiv-equiv-descent-data-pushout-equivalence-family b =
+  right-equiv-equiv-descent-data-equivalence-type-pushout b =
     ( equiv-postcomp-equiv
       ( right-equiv-family-with-descent-data-pushout R b)
       ( _)) ∘e
@@ -120,24 +118,24 @@ module _
       ( inv-equiv (right-equiv-family-with-descent-data-pushout P b))
       ( _))
 
-  coherence-equiv-descent-data-pushout-equivalence-family :
+  coherence-equiv-descent-data-equivalence-type-pushout :
     (s : spanning-type-span-diagram 𝒮) →
     coherence-square-maps
       ( map-equiv
-        ( left-equiv-equiv-descent-data-pushout-equivalence-family
+        ( left-equiv-equiv-descent-data-equivalence-type-pushout
           ( left-map-span-diagram 𝒮 s)))
       ( tr
-        ( family-cocone-family-with-descent-data-pushout-equivalence-family)
+        ( family-cocone-equivalence-type-pushout)
         ( coherence-square-cocone _ _ c s))
       ( map-family-descent-data-pushout
-        ( descent-data-pushout-equivalence-family)
+        ( descent-data-equivalence-type-pushout)
         ( s))
       ( map-equiv
-        ( right-equiv-equiv-descent-data-pushout-equivalence-family
+        ( right-equiv-equiv-descent-data-equivalence-type-pushout
           ( right-map-span-diagram 𝒮 s)))
-  coherence-equiv-descent-data-pushout-equivalence-family s =
+  coherence-equiv-descent-data-equivalence-type-pushout s =
     ( ( map-equiv
-      ( right-equiv-equiv-descent-data-pushout-equivalence-family
+      ( right-equiv-equiv-descent-data-equivalence-type-pushout
         ( right-map-span-diagram 𝒮 s))) ·l
       ( tr-equiv-type
         ( family-cocone-family-with-descent-data-pushout P)
@@ -158,26 +156,26 @@ module _
             ( equiv-family-family-with-descent-data-pushout P s)
             ( inv-htpy (coherence-family-with-descent-data-pushout P s)))))
 
-  equiv-descent-data-pushout-equivalence-family :
+  equiv-descent-data-equivalence-type-pushout :
     equiv-descent-data-pushout
       ( descent-data-family-cocone-span-diagram c
-        ( family-cocone-family-with-descent-data-pushout-equivalence-family))
-      ( descent-data-pushout-equivalence-family)
-  pr1 equiv-descent-data-pushout-equivalence-family =
-    left-equiv-equiv-descent-data-pushout-equivalence-family
-  pr1 (pr2 equiv-descent-data-pushout-equivalence-family) =
-    right-equiv-equiv-descent-data-pushout-equivalence-family
-  pr2 (pr2 equiv-descent-data-pushout-equivalence-family) =
-    coherence-equiv-descent-data-pushout-equivalence-family
+        ( family-cocone-equivalence-type-pushout))
+      ( descent-data-equivalence-type-pushout)
+  pr1 equiv-descent-data-equivalence-type-pushout =
+    left-equiv-equiv-descent-data-equivalence-type-pushout
+  pr1 (pr2 equiv-descent-data-equivalence-type-pushout) =
+    right-equiv-equiv-descent-data-equivalence-type-pushout
+  pr2 (pr2 equiv-descent-data-equivalence-type-pushout) =
+    coherence-equiv-descent-data-equivalence-type-pushout
 
-  family-with-descent-data-pushout-equivalence-family :
+  family-with-descent-data-equivalence-type-pushout :
     family-with-descent-data-pushout c (l5 ⊔ l6)
-  pr1 family-with-descent-data-pushout-equivalence-family =
-    family-cocone-family-with-descent-data-pushout-equivalence-family
-  pr1 (pr2 family-with-descent-data-pushout-equivalence-family) =
-    descent-data-pushout-equivalence-family
-  pr2 (pr2 family-with-descent-data-pushout-equivalence-family) =
-    equiv-descent-data-pushout-equivalence-family
+  pr1 family-with-descent-data-equivalence-type-pushout =
+    family-cocone-equivalence-type-pushout
+  pr1 (pr2 family-with-descent-data-equivalence-type-pushout) =
+    descent-data-equivalence-type-pushout
+  pr2 (pr2 family-with-descent-data-equivalence-type-pushout) =
+    equiv-descent-data-equivalence-type-pushout
 ```
 
 ## Properties
@@ -192,46 +190,30 @@ module _
   (R : family-with-descent-data-pushout c l6)
   where
 
-  equiv-section-descent-data-pushout-equivalence-family :
+  equiv-section-descent-data-equivalence-type-pushout :
     section-descent-data-pushout
-      ( descent-data-pushout-equivalence-family P R) →
+      ( descent-data-equivalence-type-pushout P R) →
     equiv-descent-data-pushout
       ( descent-data-family-with-descent-data-pushout P)
       ( descent-data-family-with-descent-data-pushout R)
-  pr1 (equiv-section-descent-data-pushout-equivalence-family t) =
-    left-map-section-descent-data-pushout
-      ( descent-data-pushout-equivalence-family P R)
-      ( t)
-  pr1 (pr2 (equiv-section-descent-data-pushout-equivalence-family t)) =
-    right-map-section-descent-data-pushout
-      ( descent-data-pushout-equivalence-family P R)
-      ( t)
-  pr2 (pr2 (equiv-section-descent-data-pushout-equivalence-family t)) s =
-    inv-htpy
-      ( map-inv-equiv
-        ( equiv-coherence-triangle-maps-inv-top'
-          ( ( map-family-family-with-descent-data-pushout R s) ∘
-            ( map-equiv
-              ( left-map-section-descent-data-pushout
-                ( descent-data-pushout-equivalence-family P R)
-                ( t)
-                ( left-map-span-diagram 𝒮 s))))
-          ( map-equiv
-            ( right-map-section-descent-data-pushout
-              ( descent-data-pushout-equivalence-family P R)
-              ( t)
-              ( right-map-span-diagram 𝒮 s)))
-          ( equiv-family-family-with-descent-data-pushout P s))
-        ( htpy-eq-equiv
-          ( coherence-section-descent-data-pushout
-            ( descent-data-pushout-equivalence-family P R)
-            ( t)
-            ( s))))
+  equiv-section-descent-data-equivalence-type-pushout =
+    tot
+      ( λ tA →
+        tot
+          ( λ tB tS s →
+            inv-htpy
+              ( map-inv-equiv
+                ( equiv-coherence-triangle-maps-inv-top'
+                  ( ( map-family-family-with-descent-data-pushout R s) ∘
+                    ( map-equiv (tA (left-map-span-diagram 𝒮 s))))
+                  ( map-equiv (tB (right-map-span-diagram 𝒮 s)))
+                  ( equiv-family-family-with-descent-data-pushout P s))
+                ( htpy-eq-equiv (tS s)))))
 
   abstract
-    is-equiv-equiv-section-descent-data-pushout-equivalence-family :
-      is-equiv equiv-section-descent-data-pushout-equivalence-family
-    is-equiv-equiv-section-descent-data-pushout-equivalence-family =
+    is-equiv-equiv-section-descent-data-equivalence-type-pushout :
+      is-equiv equiv-section-descent-data-equivalence-type-pushout
+    is-equiv-equiv-section-descent-data-equivalence-type-pushout =
       is-equiv-tot-is-fiberwise-equiv
         ( λ tA →
           is-equiv-tot-is-fiberwise-equiv
@@ -257,9 +239,9 @@ module _
       ( descent-data-family-with-descent-data-pushout P)
       ( descent-data-family-with-descent-data-pushout R)
   equiv-descent-data-equiv-family-cocone-span-diagram =
-    ( equiv-section-descent-data-pushout-equivalence-family) ∘
+    ( equiv-section-descent-data-equivalence-type-pushout) ∘
     ( section-descent-data-section-family-cocone-span-diagram
-      ( family-with-descent-data-pushout-equivalence-family P R))
+      ( family-with-descent-data-equivalence-type-pushout P R))
 
   abstract
     is-equiv-equiv-descent-data-equiv-family-cocone-span-diagram :
@@ -269,7 +251,7 @@ module _
       is-equiv-comp _ _
         ( is-equiv-section-descent-data-section-family-cocone-span-diagram _
           ( up-c))
-        ( is-equiv-equiv-section-descent-data-pushout-equivalence-family)
+        ( is-equiv-equiv-section-descent-data-equivalence-type-pushout)
 ```
 
 As a corollary, given an equivalence

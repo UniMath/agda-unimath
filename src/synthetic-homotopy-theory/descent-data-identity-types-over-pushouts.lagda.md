@@ -63,34 +63,33 @@ module _
   (x₀ : X)
   where
 
-  family-cocone-family-with-descent-data-pushout-identity-type : X → UU l4
-  family-cocone-family-with-descent-data-pushout-identity-type x =
-    x₀ ＝ x
+  family-cocone-identity-type-pushout : X → UU l4
+  family-cocone-identity-type-pushout x = x₀ ＝ x
 
-  descent-data-pushout-identity-type : descent-data-pushout 𝒮 l4
-  pr1 descent-data-pushout-identity-type a =
+  descent-data-identity-type-pushout : descent-data-pushout 𝒮 l4
+  pr1 descent-data-identity-type-pushout a =
     x₀ ＝ horizontal-map-cocone _ _ c a
-  pr1 (pr2 descent-data-pushout-identity-type) b =
+  pr1 (pr2 descent-data-identity-type-pushout) b =
     x₀ ＝ vertical-map-cocone _ _ c b
-  pr2 (pr2 descent-data-pushout-identity-type) s =
+  pr2 (pr2 descent-data-identity-type-pushout) s =
     equiv-concat' x₀ (coherence-square-cocone _ _ c s)
 
-  equiv-descent-data-pushout-identity-type :
+  equiv-descent-data-identity-type-pushout :
     equiv-descent-data-pushout
       ( descent-data-family-cocone-span-diagram c
-        ( family-cocone-family-with-descent-data-pushout-identity-type))
-      ( descent-data-pushout-identity-type)
-  pr1 equiv-descent-data-pushout-identity-type a = id-equiv
-  pr1 (pr2 equiv-descent-data-pushout-identity-type) b = id-equiv
-  pr2 (pr2 equiv-descent-data-pushout-identity-type) s =
+        ( family-cocone-identity-type-pushout))
+      ( descent-data-identity-type-pushout)
+  pr1 equiv-descent-data-identity-type-pushout a = id-equiv
+  pr1 (pr2 equiv-descent-data-identity-type-pushout) b = id-equiv
+  pr2 (pr2 equiv-descent-data-identity-type-pushout) s =
     tr-Id-right (coherence-square-cocone _ _ c s)
 
-  family-with-descent-data-pushout-identity-type :
+  family-with-descent-data-identity-type-pushout :
     family-with-descent-data-pushout c l4
-  pr1 family-with-descent-data-pushout-identity-type =
-    family-cocone-family-with-descent-data-pushout-identity-type
-  pr1 (pr2 family-with-descent-data-pushout-identity-type) =
-    descent-data-pushout-identity-type
-  pr2 (pr2 family-with-descent-data-pushout-identity-type) =
-    equiv-descent-data-pushout-identity-type
+  pr1 family-with-descent-data-identity-type-pushout =
+    family-cocone-identity-type-pushout
+  pr1 (pr2 family-with-descent-data-identity-type-pushout) =
+    descent-data-identity-type-pushout
+  pr2 (pr2 family-with-descent-data-identity-type-pushout) =
+    equiv-descent-data-identity-type-pushout
 ```
