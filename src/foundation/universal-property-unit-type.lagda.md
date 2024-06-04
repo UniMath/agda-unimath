@@ -123,3 +123,15 @@ abstract
       ( universal-property-unit-is-equiv-point x is-equiv-point Y)
       ( refl-htpy)
 ```
+
+### The unit type is terminal
+
+```agda
+module _
+  {l : Level} {X : UU l}
+  where
+
+  is-equiv-terminal-map-Π-unit : is-equiv (terminal-map (X → unit))
+  is-equiv-terminal-map-Π-unit =
+    is-equiv-is-invertible (const X) refl-htpy refl-htpy
+```

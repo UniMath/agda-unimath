@@ -65,6 +65,17 @@ module _
   ind-bool pt pf false = pf
 ```
 
+### The recursion principle of the booleans
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  rec-bool : A → A → bool → A
+  rec-bool = ind-bool (λ _ → A)
+```
+
 ### The `if_then_else` function
 
 ```agda
@@ -73,8 +84,7 @@ module _
   where
 
   if_then_else_ : bool → A → A → A
-  if true then x else y = x
-  if false then x else y = y
+  if b then x else y = rec-bool x y b
 ```
 
 ### Raising universe levels of the booleans

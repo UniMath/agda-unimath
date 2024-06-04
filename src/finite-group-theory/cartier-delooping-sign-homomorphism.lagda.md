@@ -202,4 +202,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference MR23}}
+{{#bibliography}} {{#reference MR23a}}

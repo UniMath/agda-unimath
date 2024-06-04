@@ -10,13 +10,13 @@ module foundation.constant-type-families where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
-open import foundation-core.identity-types
 ```
 
 </details>
@@ -74,6 +74,26 @@ tr-constant-type-family :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (p : x ＝ y) (b : B) →
   dependent-identification (constant-type-family A B) p b b
 tr-constant-type-family refl b = refl
+```
+
+### Computing dependent identifications in constant type families
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  map-compute-dependent-identification-constant-type-family :
+    {x y : A} (p : x ＝ y) {x' y' : B} →
+    x' ＝ y' → dependent-identification (λ _ → B) p x' y'
+  map-compute-dependent-identification-constant-type-family p {x'} q =
+    tr-constant-type-family p x' ∙ q
+
+  compute-dependent-identification-constant-type-family :
+    {x y : A} (p : x ＝ y) {x' y' : B} →
+    (x' ＝ y') ≃ dependent-identification (λ _ → B) p x' y'
+  compute-dependent-identification-constant-type-family p {x'} {y'} =
+    equiv-concat (tr-constant-type-family p x') y'
 ```
 
 ### Dependent action on paths of sections of standard constant type families
