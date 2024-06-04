@@ -384,6 +384,13 @@ module _
 
 ### The disjunction of mutually exclusive types
 
+If two propositions are mutually exclusive, then their disjunction is equivalent
+to the coproduct of their underlying types
+
+```text
+  P ∨ Q = P + Q.
+```
+
 ```agda
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)

@@ -78,7 +78,7 @@ module _
   pr2 inv-equiv-Σ-bool-coproduct = is-equiv-map-inv-Σ-bool-coproduct
 ```
 
-### Dependent products over booleans are equivalent to products
+### Dependent products over the booleans are cartesian products
 
 This is also the dependent
 [universal property of the booleans](foundation.universal-property-booleans.md).
