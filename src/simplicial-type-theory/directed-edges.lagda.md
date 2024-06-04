@@ -15,11 +15,13 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.truncation-levels
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
+open import foundation.truncated-types
 open import foundation.identity-types
 open import foundation.retractions
 open import foundation.sections
@@ -385,4 +387,22 @@ module _
           ( λ b → rec-bool y x b ＝ α (map-directed-interval-bool b))) ∘e
         ( commutative-product) ∘e
         ( equiv-product (equiv-inv (α 0₂) x) (equiv-inv (α 1₂) y)))
+```
+
+### The hom-types of a truncated type are truncated
+
+```agda
+module _
+  {l : Level} (k : 𝕋) {A : UU l} (x y : A)
+  where
+
+  is-trunc-simplicial-hom : is-trunc k A → is-trunc k (x →₂ y)
+  is-trunc-simplicial-hom is-trunc-A =
+    is-trunc-equiv k
+      ( extension map-directed-interval-bool (rec-bool y x))
+      ( compute-extension-type-simplicial-hom x y)
+      ( is-trunc-extension-dependent-type k
+        ( map-directed-interval-bool)
+        ( rec-bool y x)
+        ( λ _ → is-trunc-A))
 ```
