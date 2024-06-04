@@ -14,8 +14,8 @@ open import foundation.equivalences
 open import foundation.equivalences-arrows
 open import foundation.families-of-equivalences
 open import foundation.fibers-of-maps
-open import foundation.functoriality-cartesian-product-types
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies
 open import foundation.identity-types

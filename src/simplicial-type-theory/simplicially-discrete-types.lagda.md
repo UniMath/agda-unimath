@@ -37,6 +37,7 @@ open import orthogonal-factorization-systems.null-types
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
+open import simplicial-type-theory.simplicially-fully-faithful-maps
 
 open import synthetic-homotopy-theory.circle
 ```
@@ -246,6 +247,25 @@ is-simplicially-discrete-Σ is-disc-A is-disc-B =
     ( is-null-Σ 𝟚
       ( is-𝟚-null-is-simplicially-discrete is-disc-A)
       ( λ x → is-𝟚-null-is-simplicially-discrete (is-disc-B x)))
+```
+
+### A family over a simplicially discrete type is a family of simplicially discrete types if and only if the dependent sum is
+
+One direction was established above, the converse is recorded below.
+
+```agda
+is-simplicially-discrete-family-is-simplicially-discrete-Σ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  is-simplicially-discrete A →
+  is-simplicially-discrete (Σ A B) →
+  (x : A) → is-simplicially-discrete (B x)
+is-simplicially-discrete-family-is-simplicially-discrete-Σ
+  is-disc-A is-disc-ΣAB x =
+  is-simplicially-discrete-is-𝟚-null
+    ( is-null-family-is-null-Σ 𝟚
+      ( is-𝟚-null-is-simplicially-discrete is-disc-A)
+      ( is-𝟚-null-is-simplicially-discrete is-disc-ΣAB)
+      ( x))
 ```
 
 ### Simplicially discrete types are Segal
