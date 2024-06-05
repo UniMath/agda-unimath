@@ -15,6 +15,7 @@ open import foundation.asymptotically-equal-sequences
 open import foundation.binary-relations
 open import foundation.constant-sequences
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -81,7 +82,7 @@ module _
   pr2 (pr2 (pr2 (pr1 poset-sequence-poset))) u v w J I n =
     transitive-leq-Poset P (u n) (v n) (w n) (J n) (I n)
   pr2 poset-sequence-poset u v I J =
-    eq-sequence u v (λ n → antisymmetric-leq-Poset P (u n) (v n) (I n) (J n))
+    eq-htpy (λ n → antisymmetric-leq-Poset P (u n) (v n) (I n) (J n))
 
   refl-leq-sequence-poset : is-reflexive (leq-sequence-poset P)
   refl-leq-sequence-poset = refl-leq-Poset poset-sequence-poset
