@@ -127,6 +127,11 @@ module _
   eq-∞-value-∞-constant-sequence =
     ( modulus-∞-value-∞-constant-sequence H) ,
     ( is-modulus-∞-value-∞-constant-sequence H)
+
+  eq-∞-value-∞-constant-sequence' :
+    eq-∞-sequence u (const-∞-value-∞-constant-sequence H)
+  eq-∞-value-∞-constant-sequence' =
+    inv-eq-∞-sequence eq-∞-value-∞-constant-sequence
 ```
 
 ### A sequence is asymptotically constant if it is asymptotically equal to some constant sequence
@@ -295,10 +300,7 @@ module _
       ( const-∞-value-∞-constant-sequence H)
       ( sequence-subsequence u v)
       ( eq-∞-value-∞-constant-Π-subsequence u H v)
-      ( symmetric-eq-∞-sequence
-        ( const-∞-value-∞-constant-sequence H)
-        ( u)
-        ( eq-∞-value-∞-constant-sequence H))
+      ( eq-∞-value-∞-constant-sequence' H)
 
   ∞-constant-eq-∞-sequence-subsequence :
     Π-subsequence (eq-∞-sequence u) u → is-∞-constant-sequence u

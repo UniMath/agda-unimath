@@ -186,14 +186,9 @@ module _
   leq-∞-right-leq-∞-constant-sequence-poset :
     (H : is-∞-constant-sequence v) →
     leq-∞-sequence-poset P u (const-∞-value-∞-constant-sequence H)
-  leq-∞-right-leq-∞-constant-sequence-poset H =
-    concatenate-leq-∞-eq-∞-sequence-poset
-      ( P)
-      ( I)
-      ( symmetric-eq-∞-sequence
-        ( const-∞-value-∞-constant-sequence H)
-        ( v)
-        ( eq-∞-value-∞-constant-sequence H))
+  leq-∞-right-leq-∞-constant-sequence-poset =
+    ( concatenate-leq-∞-eq-∞-sequence-poset P I) ∘
+    ( eq-∞-value-∞-constant-sequence')
 
   leq-∞-value-leq-∞-constant-sequence-poset :
     (H : is-∞-constant-sequence u) →
@@ -206,10 +201,7 @@ module _
       ( P)
       ( eq-∞-value-∞-constant-sequence H)
       ( I)
-      ( symmetric-eq-∞-sequence
-        ( const-∞-value-∞-constant-sequence K)
-        ( v)
-        ( eq-∞-value-∞-constant-sequence K))
+      ( eq-∞-value-∞-constant-sequence' K)
 
   leq-value-leq-∞-constant-sequence-poset :
     (H : is-∞-constant-sequence u) →

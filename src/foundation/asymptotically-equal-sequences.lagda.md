@@ -106,7 +106,7 @@ module _
   transitive-eq-∞-sequence = map-binary-asymptotically-Π (λ n I J → J ∙ I)
 ```
 
-### conjunction-Propugation of asymptotical equality
+### Conjugation of asymptotical equality
 
 ```agda
 module _
