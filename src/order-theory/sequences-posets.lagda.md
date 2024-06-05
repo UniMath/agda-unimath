@@ -220,8 +220,8 @@ module _
   (E : eq-∞-sequence w u)
   where
 
-  left-eq-∞-guarded-sequence-poset : eq-∞-sequence u v
-  left-eq-∞-guarded-sequence-poset =
+  left-eq-∞-squeeze-sequence-poset : eq-∞-sequence u v
+  left-eq-∞-squeeze-sequence-poset =
     antisymmetric-∞-leq-∞-sequence-poset
       ( P)
       ( u)
@@ -229,8 +229,8 @@ module _
       ( I)
       ( concatenate-leq-∞-eq-∞-sequence-poset P J E)
 
-  right-eq-∞-guarded-sequence-poset : eq-∞-sequence v w
-  right-eq-∞-guarded-sequence-poset =
+  right-eq-∞-squeeze-sequence-poset : eq-∞-sequence v w
+  right-eq-∞-squeeze-sequence-poset =
     antisymmetric-∞-leq-∞-sequence-poset
       ( P)
       ( v)
@@ -248,24 +248,24 @@ module _
   (H : is-∞-constant-sequence u) (K : is-∞-constant-sequence w)
   where
 
-  ∞-constant-eq-∞-value-guarded-sequence-poset :
+  ∞-constant-eq-∞-value-squeeze-sequence-poset :
     Id
       (∞-value-∞-constant-sequence K)
       (∞-value-∞-constant-sequence H) →
     is-∞-constant-sequence v
-  ∞-constant-eq-∞-value-guarded-sequence-poset E =
+  ∞-constant-eq-∞-value-squeeze-sequence-poset E =
     preserves-∞-constant-eq-∞-sequence u v
-      ( left-eq-∞-guarded-sequence-poset P u v w I J
+      ( left-eq-∞-squeeze-sequence-poset P u v w I J
         ( eq-∞-sequence-eq-∞-value-∞-constant-sequence w u K H E))
       ( H)
 
-  ∞-constant-leq-∞-value-guarded-sequence-poset :
+  ∞-constant-leq-∞-value-squeeze-sequence-poset :
     leq-Poset P
       (∞-value-∞-constant-sequence K)
       (∞-value-∞-constant-sequence H) →
     is-∞-constant-sequence v
-  ∞-constant-leq-∞-value-guarded-sequence-poset E =
-    ∞-constant-eq-∞-value-guarded-sequence-poset
+  ∞-constant-leq-∞-value-squeeze-sequence-poset E =
+    ∞-constant-eq-∞-value-squeeze-sequence-poset
       ( antisymmetric-leq-Poset
         ( P)
         ( ∞-value-∞-constant-sequence K)
@@ -279,3 +279,8 @@ module _
           ( H)
           ( K)))
 ```
+
+## External links
+
+- The [squeeze theorem](https://en.wikipedia.org/wiki/Squeeze_theorem) at
+  Wikipedia
