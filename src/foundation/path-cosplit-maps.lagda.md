@@ -14,6 +14,7 @@ open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.truncated-maps
+open import foundation.mere-path-cosplit-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
@@ -67,6 +68,18 @@ is-path-cosplit (succ-𝕋 k) {A} f = (x y : A) → is-path-cosplit k (ap f {x} 
 ```
 
 ## Properties
+
+### If a map is `k`-path-cosplit it is merely `k`-path-cosplit
+
+```agda
+is-mere-path-cosplit-is-path-cosplit :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
+  is-path-cosplit k f → is-mere-path-cosplit k f
+is-mere-path-cosplit-is-path-cosplit neg-two-𝕋 is-cosplit-f =
+  unit-trunc-Prop is-cosplit-f
+is-mere-path-cosplit-is-path-cosplit (succ-𝕋 k) is-cosplit-f x y =
+  is-mere-path-cosplit-is-path-cosplit k (is-cosplit-f x y)
+```
 
 ### If a map is `k`-truncated then it is `k`-path-cosplit
 
