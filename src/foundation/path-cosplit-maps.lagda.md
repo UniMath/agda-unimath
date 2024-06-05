@@ -35,53 +35,38 @@ its domain and codomain. A
 {{#concept "path-cosplit map" Disambiguation="between types" Agda=is-path-cosplit}}
 is one such notion, lying somewhere between
 [embeddings](foundation-core.embeddings.md) and
-[injective maps](foundation-core.injective-maps.md). In fact, if we understand
-`k`-injective map to mean the `k`-dimensional
-[action on identifications](foundation.action-on-identifications-functions.md)
+[injective maps](foundation-core.injective-maps.md). In fact, given an integer
+`k ≥ -2`, if we understand `k`-injective map to mean the `k+2`-dimensional
+[action on identifications](foundation.action-on-higher-identifications-functions.md)
 has a converse map, then we have proper inclusions
 
 ```text
   k-injective maps ⊃ k-path-cosplit maps ⊃ k-truncated maps.
 ```
 
-While a `k`-truncated map answers the question: "at which dimension is the
-[action on higher identifications](foundation.action-on-higher-identifications-functions.md)
-of a function always an [equivalence](foundation-core.equivalences.md)?",
-`k`-path-cosplitting instead answers the question: "at which dimension is the
-action a [retract](foundation-core.retracts-of-types.md)?" Thus a
-_-2-path-cosplit map_ is a map that merely is a retract. A `k+1`-path-cosplit
-map is a map whose action on identifications is `k`-path-cosplit.
+While `k`-truncatedness answers the question: "at which dimension is the action
+on higher identifications of a function always an
+[equivalence](foundation-core.equivalences.md)?", `k`-path-cosplitting instead
+answers the question: "at which dimension is the action a
+[retract](foundation-core.retracts-of-types.md)?" Thus a _-2-path-cosplit map_
+is a map equipped with a [retraction](foundation-core.retractions.md). A
+`k+1`-path-cosplit map is a map whose action on identifications is
+`k`-path-cosplit.
 
 We show that `k`-path-cosplittness coincides with `k`-truncatedness when the
 codomain is `k`-truncated, but more generally `k`-path-cosplitting may only
-induce mere retracts on higher homotopy groups.
+induce retracts on higher homotopy groups.
 
 ## Definitions
 
 ```agda
 is-path-cosplit :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-is-path-cosplit neg-two-𝕋 f = is-inhabited (retraction f)
+is-path-cosplit neg-two-𝕋 f = retraction f
 is-path-cosplit (succ-𝕋 k) {A} f = (x y : A) → is-path-cosplit k (ap f {x} {y})
 ```
 
 ## Properties
-
-### Being path-cosplit is a property
-
-```agda
-is-prop-is-path-cosplit :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
-  is-prop (is-path-cosplit k f)
-is-prop-is-path-cosplit neg-two-𝕋 f =
-  is-property-is-inhabited (retraction f)
-is-prop-is-path-cosplit (succ-𝕋 k) f =
-  is-prop-Π (λ x → is-prop-Π λ y → is-prop-is-path-cosplit k (ap f))
-
-is-path-cosplit-Prop :
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
-is-path-cosplit-Prop k f = (is-path-cosplit k f , is-prop-is-path-cosplit k f)
-```
 
 ### If a map is `k`-truncated then it is `k`-path-cosplit
 
@@ -90,7 +75,7 @@ is-path-cosplit-is-trunc :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
   is-trunc-map k f → is-path-cosplit k f
 is-path-cosplit-is-trunc neg-two-𝕋 is-trunc-f =
-  unit-trunc-Prop (retraction-is-contr-map is-trunc-f)
+  retraction-is-contr-map is-trunc-f
 is-path-cosplit-is-trunc (succ-𝕋 k) {f = f} is-trunc-f x y =
   is-path-cosplit-is-trunc k (is-trunc-map-ap-is-trunc-map k f is-trunc-f x y)
 ```
@@ -102,10 +87,7 @@ is-path-cosplit-succ-is-path-cosplit :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
   is-path-cosplit k f → is-path-cosplit (succ-𝕋 k) f
 is-path-cosplit-succ-is-path-cosplit neg-two-𝕋 {f = f} is-cosplit-f x y =
-  rec-trunc-Prop
-    ( is-path-cosplit-Prop neg-two-𝕋 (ap f))
-    ( λ r → unit-trunc-Prop (retraction-ap f r))
-    ( is-cosplit-f)
+  retraction-ap f is-cosplit-f
 is-path-cosplit-succ-is-path-cosplit (succ-𝕋 k) is-cosplit-f x y =
   is-path-cosplit-succ-is-path-cosplit k (is-cosplit-f x y)
 ```
@@ -117,10 +99,8 @@ is-trunc-domain-is-path-cosplit-is-trunc-codomain :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
   is-trunc k B → is-path-cosplit k f → is-trunc k A
 is-trunc-domain-is-path-cosplit-is-trunc-codomain neg-two-𝕋
-  {A} {B} {f} is-trunc-B =
-  rec-trunc-Prop
-    ( is-trunc-Prop neg-two-𝕋 A)
-    ( λ r → is-trunc-retract-of (f , r) is-trunc-B)
+  {A} {B} {f} is-trunc-B is-cosplit-f =
+  is-trunc-retract-of (f , is-cosplit-f) is-trunc-B
 is-trunc-domain-is-path-cosplit-is-trunc-codomain
   (succ-𝕋 k) {A} {B} {f} is-trunc-B is-cosplit-f x y =
   is-trunc-domain-is-path-cosplit-is-trunc-codomain k
@@ -150,3 +130,7 @@ is-trunc-map-is-path-cosplit-is-trunc-codomain k is-trunc-B is-cosplit-f =
       ( is-cosplit-f))
     ( is-trunc-B)
 ```
+
+## See also
+
+- [Mere path-cosplit maps](foundation.mere-path-cosplit-maps.md)
