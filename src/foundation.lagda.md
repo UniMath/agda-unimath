@@ -287,6 +287,7 @@ open import foundation.partial-functions public
 open import foundation.partial-sequences public
 open import foundation.partitions public
 open import foundation.path-algebra public
+open import foundation.path-cosplit-maps public
 open import foundation.path-split-maps public
 open import foundation.perfect-images public
 open import foundation.permutations-spans-families-of-types public
