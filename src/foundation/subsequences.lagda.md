@@ -137,11 +137,11 @@ module _
   sub-subsequence : subsequence u
   sub-subsequence = comp-strict-increasing-sequence-ℕ v w
 
-  eq-sub-subsequence :
+  compute-sub-subsequence :
     Id
       (sequence-subsequence u sub-subsequence)
       (sequence-subsequence (sequence-subsequence u v) w)
-  eq-sub-subsequence = refl
+  compute-sub-subsequence = refl
 ```
 
 ### Subsequences are functorial
