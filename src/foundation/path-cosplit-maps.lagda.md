@@ -12,9 +12,9 @@ open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
+open import foundation.mere-path-cosplit-maps
 open import foundation.propositional-truncations
 open import foundation.truncated-maps
-open import foundation.mere-path-cosplit-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
