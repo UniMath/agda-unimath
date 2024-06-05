@@ -62,7 +62,8 @@ are closed under [coproducts](foundation.coproduct-types.md) if and only if the
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (Y : UU l1) {A : UU l2} {B : UU l3}
+  {l1 l2 l3 : Level}
+  (Y : UU l1) {A : UU l2} {B : UU l3}
   (is-null-A : is-null Y A)
   (is-null-B : is-null Y B)
   where
@@ -94,14 +95,14 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (Y : UU l1) {A : UU l2} {B : UU l3}
+  {l1 l2 l3 : Level}
+  (Y : UU l1) {A : UU l2} {B : UU l3}
   (is-null-bool : is-null Y bool)
   (is-null-A : is-null Y A)
   (is-null-B : is-null Y B)
   where
 
-  is-null-coproduct-is-null-bool :
-    is-null Y (A + B)
+  is-null-coproduct-is-null-bool : is-null Y (A + B)
   is-null-coproduct-is-null-bool =
     is-null-is-orthogonal-terminal-maps
       ( is-orthogonal-right-comp

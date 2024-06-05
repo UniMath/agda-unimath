@@ -268,10 +268,16 @@ pr2 (product-Truncated-Type k A B) =
   is-trunc-product k
     ( is-trunc-type-Truncated-Type A)
     ( is-trunc-type-Truncated-Type B)
+```
 
+We need only show that each factor is `k`-truncated given that the opposite
+factor has an element when `k ≥ -1`.
+
+```agda
 is-trunc-product' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
-  (B → is-trunc (succ-𝕋 k) A) → (A → is-trunc (succ-𝕋 k) B) →
+  (B → is-trunc (succ-𝕋 k) A) →
+  (A → is-trunc (succ-𝕋 k) B) →
   is-trunc (succ-𝕋 k) (A × B)
 is-trunc-product' k f g (pair a b) (pair a' b') =
   is-trunc-equiv k
@@ -279,26 +285,26 @@ is-trunc-product' k f g (pair a b) (pair a' b') =
     ( equiv-pair-eq (pair a b) (pair a' b'))
     ( is-trunc-product k (f b a a') (g a b b'))
 
-is-trunc-left-factor-product :
+is-trunc-left-factor-product' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   is-trunc k (A × B) → B → is-trunc k A
-is-trunc-left-factor-product neg-two-𝕋 {A} {B} H b =
+is-trunc-left-factor-product' neg-two-𝕋 {A} {B} H b =
   is-contr-left-factor-product A B H
-is-trunc-left-factor-product (succ-𝕋 k) H b a a' =
-  is-trunc-left-factor-product k {A = (a ＝ a')} {B = (b ＝ b)}
+is-trunc-left-factor-product' (succ-𝕋 k) H b a a' =
+  is-trunc-left-factor-product' k {A = (a ＝ a')} {B = (b ＝ b)}
     ( is-trunc-equiv' k
       ( pair a b ＝ pair a' b)
       ( equiv-pair-eq (pair a b) (pair a' b))
       ( H (pair a b) (pair a' b)))
     ( refl)
 
-is-trunc-right-factor-product :
+is-trunc-right-factor-product' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   is-trunc k (A × B) → A → is-trunc k B
-is-trunc-right-factor-product neg-two-𝕋 {A} {B} H a =
+is-trunc-right-factor-product' neg-two-𝕋 {A} {B} H a =
   is-contr-right-factor-product A B H
-is-trunc-right-factor-product (succ-𝕋 k) {A} {B} H a b b' =
-  is-trunc-right-factor-product k {A = (a ＝ a)} {B = (b ＝ b')}
+is-trunc-right-factor-product' (succ-𝕋 k) {A} {B} H a b b' =
+  is-trunc-right-factor-product' k {A = (a ＝ a)} {B = (b ＝ b')}
     ( is-trunc-equiv' k
       ( pair a b ＝ pair a b')
       ( equiv-pair-eq (pair a b) (pair a b'))

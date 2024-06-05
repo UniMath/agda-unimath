@@ -13,6 +13,8 @@ open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
+open import foundation.inhabited-types
+open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-booleans
 open import foundation.universe-levels
@@ -502,31 +504,51 @@ is-globularly-coskeletal-product' k f g (a , b) (a' , b') =
     ( compute-simplicial-hom-product)
     ( is-globularly-coskeletal-product k (f b a a') (g a b b'))
 
-is-globularly-coskeletal-left-factor-product :
+is-globularly-coskeletal-left-factor-product' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   is-globularly-coskeletal k (A × B) → B → is-globularly-coskeletal k A
-is-globularly-coskeletal-left-factor-product neg-two-𝕋 {A} {B} H b =
+is-globularly-coskeletal-left-factor-product' neg-two-𝕋 {A} {B} H b =
   is-contr-left-factor-product A B H
-is-globularly-coskeletal-left-factor-product (succ-𝕋 k) H b a a' =
-  is-globularly-coskeletal-left-factor-product k
+is-globularly-coskeletal-left-factor-product' (succ-𝕋 k) H b a a' =
+  is-globularly-coskeletal-left-factor-product' k
     ( is-globularly-coskeletal-equiv' k
       ( (a , b) →₂ (a' , b))
       ( compute-simplicial-hom-product)
       ( H (a , b) (a' , b)))
     ( id-simplicial-hom b)
 
-is-globularly-coskeletal-right-factor-product :
+is-globularly-coskeletal-left-factor-product :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+  is-globularly-coskeletal k (A × B) →
+  is-inhabited B →
+  is-globularly-coskeletal k A
+is-globularly-coskeletal-left-factor-product k {A} {B} H =
+  rec-trunc-Prop
+    ( is-globularly-coskeletal-Prop k A)
+    ( is-globularly-coskeletal-left-factor-product' k H)
+
+is-globularly-coskeletal-right-factor-product' :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
   is-globularly-coskeletal k (A × B) → A → is-globularly-coskeletal k B
-is-globularly-coskeletal-right-factor-product neg-two-𝕋 {A} {B} H a =
+is-globularly-coskeletal-right-factor-product' neg-two-𝕋 {A} {B} H a =
   is-contr-right-factor-product A B H
-is-globularly-coskeletal-right-factor-product (succ-𝕋 k) H a b b' =
-  is-globularly-coskeletal-right-factor-product k
+is-globularly-coskeletal-right-factor-product' (succ-𝕋 k) H a b b' =
+  is-globularly-coskeletal-right-factor-product' k
     ( is-globularly-coskeletal-equiv' k
       ( (a , b) →₂ (a , b'))
       ( compute-simplicial-hom-product)
       ( H (a , b) (a , b')))
     ( id-simplicial-hom a)
+
+is-globularly-coskeletal-right-factor-product :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
+  is-globularly-coskeletal k (A × B) →
+  is-inhabited A →
+  is-globularly-coskeletal k B
+is-globularly-coskeletal-right-factor-product k {A} {B} H =
+  rec-trunc-Prop
+    ( is-globularly-coskeletal-Prop k B)
+    ( is-globularly-coskeletal-right-factor-product' k H)
 ```
 
 ### The type of equivalences between globularly coskeletal types is globularly coskeletal

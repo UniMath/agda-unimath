@@ -59,8 +59,9 @@ open import simplicial-type-theory.simplicially-discrete-types
 
 We postulate that the [booleans](foundation.booleans.md) are
 [simplicially discrete](simplicial-type-theory.simplicially-discrete-types.md)
-and hence that all [directed edges](simplicial-type-theory.directed-edges.md)
-are constant. This refutes the models of the
+and hence that all its
+[directed edges](simplicial-type-theory.directed-edges.md) are constant. This
+refutes the models of the
 [directed interval](simplicial-type-theory.directed-interval.md) in the booleans
 and is a differing property between the two types.
 
@@ -101,8 +102,8 @@ is-not-directed-interval-bool e =
   is-not-simplicially-discrete-𝟚
     ( is-simplicially-discrete-equiv e is-simplicially-discrete-bool)
 
-is-not-retract-directed-interval-bool : ¬ (𝟚 retract-of bool)
-is-not-retract-directed-interval-bool r =
+is-not-retract-of-directed-interval-bool : ¬ (𝟚 retract-of bool)
+is-not-retract-of-directed-interval-bool r =
   is-not-simplicially-discrete-𝟚
     ( is-simplicially-discrete-retract r is-simplicially-discrete-bool)
 ```
