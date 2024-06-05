@@ -257,3 +257,27 @@ map-snoc-list :
 map-snoc-list f nil a = refl
 map-snoc-list f (cons b x) a = ap (cons (f b)) (map-snoc-list f x a)
 ```
+
+### TODO: maybe another file
+
+```agda
+dependent-map-list :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (l : list A) (f : (a : A) → a ∈-list l → B) →
+  list B
+dependent-map-list nil f = nil
+dependent-map-list {A = A} {B} (cons x l) f =
+  cons (f x (is-head x l)) (dependent-map-list l f')
+  where
+  f' : (a : A) → a ∈-list l → B
+  f' a list-subtype = f a (is-in-tail a x l list-subtype)
+
+in-dependent-map-list :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l : list A} (f : (a : A) → a ∈-list l → B)
+  {a : A} (a-in-l : a ∈-list l) →
+  f a a-in-l ∈-list dependent-map-list l f
+in-dependent-map-list f (is-head _ l) = is-head _ _
+in-dependent-map-list {A = A} {B} f (is-in-tail _ x l a-in-l) =
+  is-in-tail _ _ _ (in-dependent-map-list _ a-in-l)
+```

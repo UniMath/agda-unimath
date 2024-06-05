@@ -7,7 +7,11 @@ module order-theory.chains-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.chains-preorders
@@ -53,8 +57,17 @@ module _
   sub-preorder-chain-Poset =
     sub-preorder-chain-Preorder (preorder-Poset X) C
 
+  is-chain-Subposet-chain-Poset :
+    is-chain-Subposet X sub-preorder-chain-Poset
+  is-chain-Subposet-chain-Poset =
+    is-chain-Subpreorder-chain-Preorder (preorder-Poset X) C
+
   type-chain-Poset : UU (l1 ⊔ l3)
   type-chain-Poset = type-chain-Preorder (preorder-Poset X) C
+
+  type-Poset-type-chain-Poset : type-chain-Poset → type-Poset X
+  type-Poset-type-chain-Poset =
+    type-Preorder-type-chain-Preorder (preorder-Poset X) C
 
 module _
   {l1 l2 : Level} (X : Poset l1 l2)

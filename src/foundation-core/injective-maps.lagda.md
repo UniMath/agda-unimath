@@ -90,6 +90,11 @@ module _
     is-injective h → is-injective g → is-injective (g ∘ h)
   is-injective-comp is-inj-h is-inj-g = is-inj-h ∘ is-inj-g
 
+  injection-comp :
+    injection A B → injection B C → injection A C
+  injection-comp (f , is-inj-f) (g , is-inj-g) =
+    g ∘ f , is-injective-comp is-inj-f is-inj-g
+
   is-injective-left-map-triangle :
     (f : A → C) (g : B → C) (h : A → B) → f ~ (g ∘ h) →
     is-injective h → is-injective g → is-injective f

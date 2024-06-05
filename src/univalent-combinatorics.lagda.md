@@ -98,6 +98,7 @@ open import univalent-combinatorics.standard-finite-trees public
 open import univalent-combinatorics.standard-finite-types public
 open import univalent-combinatorics.steiner-systems public
 open import univalent-combinatorics.steiner-triple-systems public
+open import univalent-combinatorics.subfinite-types public
 open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
 open import univalent-combinatorics.symmetric-difference public

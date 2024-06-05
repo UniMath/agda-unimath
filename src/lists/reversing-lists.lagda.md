@@ -130,4 +130,16 @@ remove-last-element-reverse-list x =
   ( inv (reverse-reverse-list (remove-last-element-list (reverse-list x)))) ∙
   ( ( inv (ap reverse-list (tail-reverse-list (reverse-list x)))) ∙
     ( ap (reverse-list ∘ tail-list) (reverse-reverse-list x)))
+
+forward-contains-reverse-list :
+  {l1 : Level} {A : UU l1} (x : A) (xs : list A) →
+  (x ∈-list xs) → (x ∈-list (reverse-list xs))
+forward-contains-reverse-list x (cons .x xs) (is-head .x .xs) =
+  last-in-snoc-list (reverse-list xs) x
+forward-contains-reverse-list x (cons y xs) (is-in-tail .x .y .xs x-in-list) =
+  rest-in-snoc-list
+    ( reverse-list xs)
+    ( y)
+    ( x)
+    ( forward-contains-reverse-list x xs x-in-list)
 ```

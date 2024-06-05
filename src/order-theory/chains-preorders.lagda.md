@@ -58,8 +58,16 @@ module _
   sub-preorder-chain-Preorder : type-Preorder X → Prop l3
   sub-preorder-chain-Preorder = pr1 C
 
+  is-chain-Subpreorder-chain-Preorder :
+    is-chain-Subpreorder X sub-preorder-chain-Preorder
+  is-chain-Subpreorder-chain-Preorder = pr2 C
+
   type-chain-Preorder : UU (l1 ⊔ l3)
   type-chain-Preorder = type-subtype sub-preorder-chain-Preorder
+
+  type-Preorder-type-chain-Preorder : type-chain-Preorder → type-Preorder X
+  type-Preorder-type-chain-Preorder =
+    inclusion-subtype sub-preorder-chain-Preorder
 
 module _
   {l1 l2 : Level} (X : Preorder l1 l2)

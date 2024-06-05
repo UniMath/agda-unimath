@@ -7,22 +7,29 @@ module foundation.equivalence-classes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.conjunction
+open import foundation.constant-type-families
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
+open import foundation.equality-dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.inhabited-subtypes
 open import foundation.locally-small-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
 open import foundation.slice
 open import foundation.small-types
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.transport-along-identifications
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
@@ -30,10 +37,10 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.embeddings
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.torsorial-type-families
 ```
 
@@ -136,6 +143,9 @@ module _
     is-set-equivalence-class : is-set equivalence-class
     is-set-equivalence-class =
       is-set-type-subtype is-equivalence-class-Prop is-set-subtype
+
+  is-in-self-equivalence-class : (a : A) → is-in-equivalence-class (class a) a
+  is-in-self-equivalence-class a = refl-equivalence-relation R a
 
   equivalence-class-Set : Set (l1 ⊔ lsuc l2)
   pr1 equivalence-class-Set = equivalence-class
@@ -381,6 +391,199 @@ module _
       {x y : A} → sim-equivalence-relation R x y → class R x ＝ class R y
     apply-effectiveness-class' {x} {y} =
       map-inv-equiv (is-effective-class x y)
+```
+
+### TODO: title
+
+```agda
+  is-retraction-apply-effectiveness-class :
+    (x y : A) →
+    apply-effectiveness-class' {x} {y} ∘ apply-effectiveness-class {x} {y} ~ id
+  is-retraction-apply-effectiveness-class x y p =
+    eq-is-prop (is-set-equivalence-class R (class R x) (class R y))
+
+  eq-class-in-common-class :
+    (c : equivalence-class R) {a a' : A} →
+    is-in-equivalence-class R c a →
+    is-in-equivalence-class R c a' →
+    class R a ＝ class R a'
+  eq-class-in-common-class c {a} {a'} a-in-c a'-in-c =
+    equational-reasoning
+      class R a
+        ＝ c by eq-effective-quotient' a c a-in-c
+        ＝ class R a' by inv (eq-effective-quotient' a' c a'-in-c)
+
+  -- sim-equivalence-relation-in-class :
+  --   {a a' : A} →
+  --   is-in-equivalence-class R (class R a) a' →
+  --   sim-equivalence-relation R a a'
+  -- sim-equivalence-relation-in-class {a} {a'} a'-in-c =
+  --   apply-effectiveness-class
+  --     ( eq-class-in-common-class (class R a') {!   !} {!   !})
+  --   -- apply-effectiveness-class (eq-class-in-common-class c a-in-c a'-in-c)
+
+  sim-equivalence-relation-in-same-class :
+    (c : equivalence-class R) {a a' : A} →
+    is-in-equivalence-class R c a →
+    is-in-equivalence-class R c a' →
+    sim-equivalence-relation R a a'
+  sim-equivalence-relation-in-same-class c {a} {a'} a-in-c a'-in-c =
+    apply-effectiveness-class (eq-class-in-common-class c a-in-c a'-in-c)
+
+  sim-equivalence-relation-in-class :
+    {a a' : A} →
+    is-in-equivalence-class R (class R a) a' →
+    sim-equivalence-relation R a a'
+  sim-equivalence-relation-in-class {a} {a'} a'-in-c =
+    sim-equivalence-relation-in-same-class
+      ( class R a)
+      ( is-in-self-equivalence-class R a)
+      ( a'-in-c)
+```
+
+### TODO: Eliminator
+
+```agda
+  module _
+    {l3 : Level} (B : equivalence-class R → Set l3)
+    (f : (a : A) → type-Set (B (class R a)))
+    (H :
+      (a a' : A) →
+      (s : sim-equivalence-relation R a a') →
+      dependent-identification
+        ( type-Set ∘ B)
+        ( apply-effectiveness-class' s)
+        ( f a)
+        ( f a'))
+    where
+
+    private
+      b : equivalence-class R → UU (l1 ⊔ l2 ⊔ l3)
+      b c =
+        Σ ( type-Set (B c))
+          ( λ b →
+            (a : A) →
+            (a-in-c : is-in-equivalence-class R c a) →
+            tr (type-Set ∘ B) (eq-class-equivalence-class R c a-in-c) (f a) ＝ b)
+
+      is-prop-b : (c : equivalence-class R) → is-prop (b c)
+      is-prop-b c =
+        is-prop-all-elements-equal
+          ( λ (b , h) (b' , h') →
+            ( eq-pair-Σ
+              ( apply-universal-property-trunc-Prop
+                ( is-inhabited-subtype-equivalence-class R c)
+                ( b ＝ b' , is-set-type-Set (B c) b b')
+                ( λ (a , a-in-c) → inv (h a a-in-c) ∙ h' a a-in-c))
+              ( eq-is-prop
+                ( is-prop-Π
+                  ( λ a →
+                    ( is-prop-Π
+                      ( λ a-in-c →
+                        ( is-set-type-Set (B c)
+                          ( tr (type-Set ∘ B)
+                            ( eq-class-equivalence-class R c a-in-c)
+                            ( f a))
+                          ( b')))))))))
+
+      b-instance-class : (a : A) → b (class R a)
+      pr1 (b-instance-class a) = f a
+      pr2 (b-instance-class a) a' a'-in-c =
+        equational-reasoning
+          tr (type-Set ∘ B) _ (f a')
+            ＝ tr (type-Set ∘ B) _ (f a')
+              by
+                ap
+                  ( λ p → tr (type-Set ∘ B) p (f a'))
+                  ( eq-is-prop (is-set-equivalence-class R _ _))
+            ＝ f a by inv-dependent-identification _ _ (H a a' a'-in-c)
+
+      b-instance : (c : equivalence-class R) → b c
+      b-instance c =
+        apply-universal-property-trunc-Prop
+          ( is-inhabited-subtype-equivalence-class R c)
+          ( b c , is-prop-b c)
+          ( λ (a , a-in-c) →
+            ( tr b (eq-effective-quotient' a c a-in-c) (b-instance-class a)))
+
+    ind-equivalence-class : (c : equivalence-class R) → type-Set (B c)
+    ind-equivalence-class = pr1 ∘ b-instance
+
+    compute-ind-equivalence-class :
+      (a : A) → ind-equivalence-class (class R a) ＝ f a
+    compute-ind-equivalence-class a =
+      ap pr1
+        { x = b-instance (class R a)}
+        { y = b-instance-class a}
+        ( eq-is-prop (is-prop-b (class R a)))
+
+  rec-equivalence-class :
+    {l3 : Level} (B : Set l3) →
+    (f : A → type-Set B) →
+    ((a a' : A) → sim-equivalence-relation R a a' → f a ＝ f a') →
+    equivalence-class R → type-Set B
+  rec-equivalence-class {l3} B f H =
+    ind-equivalence-class (λ _ → B) f
+      -- TODO: duplicate code
+      ( λ a a' s →
+        equational-reasoning
+          tr (type-Set ∘ (λ _ → B)) (apply-effectiveness-class' s) (f a)
+            ＝ f a
+              by tr-constant-type-family (apply-effectiveness-class' s) (f a)
+            ＝ f a'
+              by H a a' s)
+
+  ind-equivalence-class-prop :
+    {l3 : Level} (B : equivalence-class R → Prop l3) →
+    (f : (a : A) → type-Prop (B (class R a))) →
+    (c : equivalence-class R) → type-Prop (B c)
+  ind-equivalence-class-prop B f =
+    ind-equivalence-class (λ a → set-Prop (B a)) f
+      ( λ a a' _ → eq-is-prop (is-prop-type-Prop (B (class R a'))))
+
+  rec-equivalence-class-prop :
+    {l3 : Level} (B : Prop l3) →
+    (f : A → type-Prop B) →
+    equivalence-class R → type-Prop B
+  rec-equivalence-class-prop B f =
+    rec-equivalence-class (set-Prop B) f
+      ( λ a a' _ → eq-is-prop (is-prop-type-Prop B))
+
+  compute-rec-equivalence-class :
+    {l3 : Level} (B : Set l3) →
+    (f : A → type-Set B) →
+    (H : (a a' : A) → sim-equivalence-relation R a a' → f a ＝ f a') →
+    (a : A) →
+    rec-equivalence-class B f H (class R a) ＝ f a
+  compute-rec-equivalence-class B f H =
+    compute-ind-equivalence-class (λ _ → B) f
+      -- TODO: duplicate code
+      ( λ a a' s →
+        equational-reasoning
+          tr (type-Set ∘ (λ _ → B)) (apply-effectiveness-class' s) (f a)
+            ＝ f a
+              by tr-constant-type-family (apply-effectiveness-class' s) (f a)
+            ＝ f a'
+              by H a a' s)
+
+  compute-rec-equivalence-class' :
+    {l3 : Level} (B : Set l3) →
+    (f : A → type-Set B) →
+    (H : (a a' : A) → sim-equivalence-relation R a a' → f a ＝ f a') →
+    (c : equivalence-class R) →
+    (a : A) →
+    (a-in-c : is-in-equivalence-class R c a) →
+    rec-equivalence-class B f H c ＝ f a
+  compute-rec-equivalence-class' B f H c a a-in-c =
+    equational-reasoning
+      rec-equivalence-class B f H c
+        ＝ rec-equivalence-class B f H (class R a)
+          by
+            ap
+              ( rec-equivalence-class B f H)
+              ( inv (eq-effective-quotient' a c a-in-c))
+        ＝ f a
+          by compute-rec-equivalence-class B f H a
 ```
 
 ### The map `class` into the type of equivalence classes is surjective and effective

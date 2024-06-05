@@ -31,6 +31,8 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -123,6 +125,48 @@ is-nonnil-is-cons-list :
   (l : list A) → is-cons-list l → is-nonnil-list l
 is-nonnil-is-cons-list l ((a , l') , refl) q =
   is-nonnil-cons-list a l' q
+```
+
+### TODO: change title
+
+```agda
+last-in-snoc-list :
+  {l : Level} {A : UU l} (xs : list A) (x : A) → x ∈-list (snoc xs x)
+last-in-snoc-list nil x = is-head x nil
+last-in-snoc-list (cons y xs) x =
+  is-in-tail x y (snoc xs x) (last-in-snoc-list xs x)
+
+rest-in-snoc-list :
+  {l : Level} {A : UU l} (xs : list A) (x y : A) →
+  y ∈-list xs → y ∈-list (snoc xs x)
+rest-in-snoc-list (cons y xs) x .y (is-head .y .xs) = is-head y (snoc xs x)
+rest-in-snoc-list (cons y xs) x z (is-in-tail .z .y .xs in-list) =
+  is-in-tail z y (snoc xs x) (rest-in-snoc-list xs x z in-list)
+```
+
+### TODO: change title
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  component-list : (l : list A) → Fin (length-list l) → A
+  component-list (cons x l) (inl k) = component-list l k
+  component-list (cons x l) (inr k) = x
+
+  index-in-list : (a : A) (l : list A) → a ∈-list l → Fin (length-list l)
+  index-in-list a (cons .a l) (is-head .a .l) =
+    inr star
+  index-in-list a (cons x l) (is-in-tail .a .x .l in-list) =
+    inl (index-in-list a l in-list)
+
+  eq-component-list-index-in-list :
+    (a : A) (l : list A) (in-list : a ∈-list l) →
+    a ＝ component-list l (index-in-list a l in-list)
+  eq-component-list-index-in-list a .(cons a l) (is-head .a l) = refl
+  eq-component-list-index-in-list a .(cons x l) (is-in-tail .a x l in-list) =
+    eq-component-list-index-in-list a l in-list
 ```
 
 ### A list that uses cons is not nil

@@ -270,3 +270,15 @@ module _
   is-decidable-raise (inl p) = inl (map-raise p)
   is-decidable-raise (inr np) = inr (λ p' → np (map-inv-raise p'))
 ```
+
+### For decidable type `Q` `¬ Q → ¬ P` implies `P → Q`
+
+```agda
+contraposition-is-decidable :
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
+  is-decidable Q →
+  (¬ Q → ¬ P) →
+  P → Q
+contraposition-is-decidable {Q = Q} (inl q) f p = q
+contraposition-is-decidable {Q = Q} (inr nq) f p = ex-falso (f nq p)
+```
