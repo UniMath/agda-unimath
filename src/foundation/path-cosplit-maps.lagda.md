@@ -51,8 +51,9 @@ on higher identifications of a function always an
 answers the question: "at which dimension is the action a
 [retract](foundation-core.retracts-of-types.md)?" Thus a _-2-path-cosplit map_
 is a map equipped with a [retraction](foundation-core.retractions.md). A
-`k+1`-path-cosplit map is a map whose action on identifications is
-`k`-path-cosplit.
+`k+1`-path-cosplit map is a map whose
+[action on identifications](foundation.action-on-identifications-functions.md)
+is `k`-path-cosplit.
 
 We show that `k`-path-cosplittness coincides with `k`-truncatedness when the
 codomain is `k`-truncated, but more generally `k`-path-cosplitting may only
@@ -147,3 +148,7 @@ is-trunc-map-is-path-cosplit-is-trunc-codomain k is-trunc-B is-cosplit-f =
 ## See also
 
 - [Mere path-cosplit maps](foundation.mere-path-cosplit-maps.md)
+- [Path-split maps](foundation.path-cosplit-maps.md)
+- [Injective maps](foundation-core.injective-maps.md)
+- [Truncated maps](foundation-core.truncated-maps.md)
+- [Embeddings](foundation-core.embeddings.md)

@@ -41,7 +41,7 @@ is one such notion, lying somewhere between
 has a converse map, then we have proper inclusions
 
 ```text
-  k-injective maps ⊃ mere k-path-cosplit maps ⊃ k-truncated maps.
+  k-injective maps ⊃ k-path-cosplit maps ⊃ k-truncated maps.
 ```
 
 While `k`-truncatedness answers the question: "at which dimension is the action
@@ -50,7 +50,8 @@ on higher identifications of a function always an
 instead answers the question: "at which dimension is the action merely a
 [retract](foundation-core.retracts-of-types.md)?" Thus a _-2-path-cosplit map_
 is a map that merely is a retract. A mere `k+1`-path-cosplit map is a map whose
-action on identifications is merely `k`-path-cosplit.
+[action on identifications](foundation.action-on-identifications-functions.md)
+is merely `k`-path-cosplit.
 
 We show that mere `k`-path-cosplittness coincides with `k`-truncatedness when
 the codomain is `k`-truncated, but more generally mere `k`-path-cosplitting may
@@ -158,3 +159,7 @@ is-trunc-map-is-mere-path-cosplit-is-trunc-codomain k is-trunc-B is-cosplit-f =
 ## See also
 
 - [Path-cosplit maps](foundation.path-cosplit-maps.md)
+- [Path-split maps](foundation.path-cosplit-maps.md)
+- [Injective maps](foundation-core.injective-maps.md)
+- [Truncated maps](foundation-core.truncated-maps.md)
+- [Embeddings](foundation-core.embeddings.md)
