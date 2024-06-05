@@ -81,7 +81,8 @@ is-prop-is-mere-path-cosplit (succ-𝕋 k) f =
 
 is-mere-path-cosplit-Prop :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
-is-mere-path-cosplit-Prop k f = (is-mere-path-cosplit k f , is-prop-is-mere-path-cosplit k f)
+is-mere-path-cosplit-Prop k f =
+  (is-mere-path-cosplit k f , is-prop-is-mere-path-cosplit k f)
 ```
 
 ### If a map is `k`-truncated then it is merely `k`-path-cosplit
@@ -93,7 +94,8 @@ is-mere-path-cosplit-is-trunc :
 is-mere-path-cosplit-is-trunc neg-two-𝕋 is-trunc-f =
   unit-trunc-Prop (retraction-is-contr-map is-trunc-f)
 is-mere-path-cosplit-is-trunc (succ-𝕋 k) {f = f} is-trunc-f x y =
-  is-mere-path-cosplit-is-trunc k (is-trunc-map-ap-is-trunc-map k f is-trunc-f x y)
+  is-mere-path-cosplit-is-trunc k
+    ( is-trunc-map-ap-is-trunc-map k f is-trunc-f x y)
 ```
 
 ### If a map is `k`-path-cosplit then it is merely `k+1`-path-cosplit
@@ -102,7 +104,8 @@ is-mere-path-cosplit-is-trunc (succ-𝕋 k) {f = f} is-trunc-f x y =
 is-mere-path-cosplit-succ-is-mere-path-cosplit :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
   is-mere-path-cosplit k f → is-mere-path-cosplit (succ-𝕋 k) f
-is-mere-path-cosplit-succ-is-mere-path-cosplit neg-two-𝕋 {f = f} is-cosplit-f x y =
+is-mere-path-cosplit-succ-is-mere-path-cosplit
+  neg-two-𝕋 {f = f} is-cosplit-f x y =
   rec-trunc-Prop
     ( is-mere-path-cosplit-Prop neg-two-𝕋 (ap f))
     ( λ r → unit-trunc-Prop (retraction-ap f r))
