@@ -13,6 +13,7 @@ open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.truncated-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
@@ -21,7 +22,6 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.propositions
 open import foundation-core.retractions
-open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 ```
 
@@ -124,8 +124,25 @@ is-trunc-domain-is-path-cosplit-is-trunc-codomain
     ( is-cosplit-f x y)
 ```
 
-This result generalizes both of the following statements:
+This result generalizes the following statements:
 
 - A type that injects into a set is a set.
 
 - A type that embeds into a `k+1`-truncated type is `k+1`-truncated.
+
+- A type that maps into a `k`-truncated type via a `k`-truncated map is
+  `k`-truncated.
+
+### If the codomain of a `k`-path-cosplit map is `k`-truncated then the map is `k`-truncated
+
+```agda
+is-trunc-map-is-path-cosplit-is-trunc-codomain :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
+  is-trunc k B → is-path-cosplit k f → is-trunc-map k f
+is-trunc-map-is-path-cosplit-is-trunc-codomain k is-trunc-B is-cosplit-f =
+  is-trunc-map-is-trunc-domain-codomain k
+    ( is-trunc-domain-is-path-cosplit-is-trunc-codomain k
+      ( is-trunc-B)
+      ( is-cosplit-f))
+    ( is-trunc-B)
+```
