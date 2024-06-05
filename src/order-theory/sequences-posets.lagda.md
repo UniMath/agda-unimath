@@ -167,7 +167,7 @@ module _
 
 ## Properties
 
-### Asymptotical values preserves asymptotical inequality of sequences in partially ordered sets
+### Asymptotical values preserve asymptotical inequality of sequences in partially ordered sets
 
 ```agda
 module _
