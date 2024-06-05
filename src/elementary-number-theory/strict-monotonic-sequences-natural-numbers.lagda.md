@@ -246,8 +246,8 @@ module _
   preserves-leq-strict-increasing-sequence-ℕ :
     leq-ℕ p q →
     leq-ℕ
-      ( sequence-strict-increasing-sequence-ℕ f p)
-      ( sequence-strict-increasing-sequence-ℕ f q)
+      (sequence-strict-increasing-sequence-ℕ f p)
+      (sequence-strict-increasing-sequence-ℕ f q)
   preserves-leq-strict-increasing-sequence-ℕ =
     ( leq-eq-or-le-ℕ
       (sequence-strict-increasing-sequence-ℕ f p)
@@ -268,7 +268,7 @@ is-strict-increasing-id-ℕ : is-strict-increasing-sequence-ℕ id
 is-strict-increasing-id-ℕ i j = id
 
 strict-increasing-id-ℕ : strict-increasing-sequence-ℕ
-strict-increasing-id-ℕ = id , is-strict-increasing-id-ℕ
+strict-increasing-id-ℕ = (id , is-strict-increasing-id-ℕ)
 ```
 
 ### The identity sequence is lesser than all strictly increasing sequences of natural numbers
