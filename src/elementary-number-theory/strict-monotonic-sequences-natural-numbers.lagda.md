@@ -15,9 +15,6 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.asymptotical-dependent-sequences
-open import foundation.cartesian-product-types
-open import foundation.constant-sequences
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-types
@@ -194,23 +191,23 @@ module _
 ### There exist no strictly decreasing sequences of natural numbers
 
 ```agda
-no-strict-decreasing-sequence-leq-ℕ :
+no-bounded-strict-decreasing-sequence-ℕ :
   (f : sequence ℕ) →
   (N : ℕ) →
-  is-strict-decreasing-sequence-ℕ f →
   leq-ℕ (f zero-ℕ) N →
+  is-strict-decreasing-sequence-ℕ f →
   empty
-no-strict-decreasing-sequence-leq-ℕ f zero-ℕ H =
+no-bounded-strict-decreasing-sequence-ℕ f zero-ℕ K H =
   concatenate-le-leq-ℕ
     { f 1}
     { f 0}
     { 0}
     ( H 0 1 (succ-le-ℕ 0))
-no-strict-decreasing-sequence-leq-ℕ f (succ-ℕ N) H K =
-  no-strict-decreasing-sequence-leq-ℕ
+    ( K)
+no-bounded-strict-decreasing-sequence-ℕ f (succ-ℕ N) K H =
+  no-bounded-strict-decreasing-sequence-ℕ
     ( f ∘ succ-ℕ)
     ( N)
-    ( λ i j → H (succ-ℕ i) (succ-ℕ j))
     ( leq-le-succ-ℕ
       ( f 1)
       ( N)
@@ -220,14 +217,15 @@ no-strict-decreasing-sequence-leq-ℕ f (succ-ℕ N) H K =
         { succ-ℕ N}
         ( H 0 1 (succ-le-ℕ 0))
         ( K)))
+    ( λ i j → H (succ-ℕ i) (succ-ℕ j))
 
 module _
   (f : sequence ℕ)
   where
 
   no-strict-decreasing-sequence-ℕ : ¬ (is-strict-decreasing-sequence-ℕ f)
-  no-strict-decreasing-sequence-ℕ H =
-    no-strict-decreasing-sequence-leq-ℕ f (f 0) H (refl-leq-ℕ (f 0))
+  no-strict-decreasing-sequence-ℕ =
+    no-bounded-strict-decreasing-sequence-ℕ f (f 0) (refl-leq-ℕ (f 0))
 
   no-strict-decreasing-value-sequence-ℕ :
     ¬ ((n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n)
