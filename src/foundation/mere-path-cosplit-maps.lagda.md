@@ -44,12 +44,18 @@ has a converse map, then we have proper inclusions
   k-injective maps ⊃ k-path-cosplit maps ⊃ k-truncated maps.
 ```
 
-While `k`-truncatedness answers the question: "at which dimension is the action
-on higher identifications of a function always an
-[equivalence](foundation-core.equivalences.md)?", mere `k`-path-cosplitting
-instead answers the question: "at which dimension is the action merely a
-[retract](foundation-core.retracts-of-types.md)?" Thus a _-2-path-cosplit map_
-is a map that merely is a retract. A mere `k+1`-path-cosplit map is a map whose
+While `k`-truncatedness answers the question:
+
+> At which dimension is the action on higher identifications of a function
+> always an [equivalence](foundation-core.equivalences.md)?
+
+Mere `k`-path-cosplitting instead answers the question:
+
+> At which dimension is the action merely a
+> [retract](foundation-core.retracts-of-types.md)?
+
+Thus a _merely `-2`-path-cosplit map_ is a map that merely is a retract. A
+_merely `k+1`-path-cosplit map_ is a map whose
 [action on identifications](foundation.action-on-identifications-functions.md)
 is merely `k`-path-cosplit.
 
