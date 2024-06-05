@@ -121,6 +121,13 @@ module _
     is-equiv-left-map-equiv-descent-data-pushout a =
       is-equiv-map-equiv (left-equiv-equiv-descent-data-pushout a)
 
+    inv-left-map-equiv-descent-data-pushout :
+      (a : domain-span-diagram 𝒮) →
+      left-family-descent-data-pushout Q a →
+      left-family-descent-data-pushout P a
+    inv-left-map-equiv-descent-data-pushout a =
+      map-inv-equiv (left-equiv-equiv-descent-data-pushout a)
+
     right-equiv-equiv-descent-data-pushout :
       (b : codomain-span-diagram 𝒮) →
       right-family-descent-data-pushout P b ≃
@@ -139,6 +146,13 @@ module _
       is-equiv (right-map-equiv-descent-data-pushout b)
     is-equiv-right-map-equiv-descent-data-pushout b =
       is-equiv-map-equiv (right-equiv-equiv-descent-data-pushout b)
+
+    inv-right-map-equiv-descent-data-pushout :
+      (b : codomain-span-diagram 𝒮) →
+      right-family-descent-data-pushout Q b →
+      right-family-descent-data-pushout P b
+    inv-right-map-equiv-descent-data-pushout b =
+      map-inv-equiv (right-equiv-equiv-descent-data-pushout b)
 
     coherence-equiv-descent-data-pushout :
       (s : spanning-type-span-diagram 𝒮) →
