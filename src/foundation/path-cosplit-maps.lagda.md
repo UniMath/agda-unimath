@@ -52,6 +52,10 @@ action a [retract](foundation-core.retracts-of-types.md)?" Thus a
 _-2-path-cosplit map_ is a map that merely is a retract. A `k+1`-path-cosplit
 map is a map whose action on identifications is `k`-path-cosplit.
 
+We show that `k`-path-cosplittness coincides with `k`-truncatedness when the
+codomain is `k`-truncated, but more generally `k`-path-cosplitting may only
+induce mere retracts on higher homotopy groups.
+
 ## Definitions
 
 ```agda
