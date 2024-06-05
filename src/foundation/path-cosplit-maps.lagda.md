@@ -31,26 +31,26 @@ open import foundation-core.truncated-types
 
 In Homotopy Type Theory, there are multiple nonequivalent ways to state that a
 map is "injective" that are more or less informed by the homotopy structures of
-its domain and codomain. A _path-cosplit map_ is one such notion, lying
-somewhere between [embeddings](foundation-core.embeddings.md) and
+its domain and codomain. A
+{{#concept "path-cosplit map" Disambiguation="between types" Agda=is-path-cosplit}}
+is one such notion, lying somewhere between
+[embeddings](foundation-core.embeddings.md) and
 [injective maps](foundation-core.injective-maps.md). In fact, if we understand
-`k`-injective map to mean the `k`-dimensional action on identifications has a
-converse, then we have proper inclusions
+`k`-injective map to mean the `k`-dimensional
+[action on identifications](foundation.action-on-identifications-functions.md)
+has a converse map, then we have proper inclusions
 
 ```text
-  k-injective maps ⊂ k-path-cosplit maps ⊂ k-truncated maps
+  k-injective maps ⊃ k-path-cosplit maps ⊃ k-truncated maps.
 ```
 
-In essence, we can ask two independent questions about a function `f : A → B`:
-at which dimension is its (iterated)
-[action on identifications](foundation.action-on-identifications-functions.md)
-an equivalence, but also, before that, at which level is it a retract? While
-`k`-truncation answers the first question, `k`-path-cosplitting answers the
-second.
-
-Thus a -2-path-cosplit map is a map that merely is a retract. A
-`k+1`-path-cosplit map is a map whose action on identifications is
-`k`-path-cosplit.
+While a `k`-truncated map answers the question: "at which dimension is the
+[action on higher identifications](foundation.action-on-higher-identifications-functions.md)
+of a function always an [equivalence](foundation-core.equivalences.md)?",
+`k`-path-cosplitting instead answers the question: "at which dimension is the
+action a [retract](foundation-core.retracts-of-types.md)?" Thus a
+_-2-path-cosplit map_ is a map that merely is a retract. A `k+1`-path-cosplit
+map is a map whose action on identifications is `k`-path-cosplit.
 
 ## Definitions
 
