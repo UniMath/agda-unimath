@@ -7,8 +7,6 @@ module foundation.sequences where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.dependent-sequences
 open import foundation.universe-levels
 
