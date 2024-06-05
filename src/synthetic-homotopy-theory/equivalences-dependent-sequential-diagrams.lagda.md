@@ -11,8 +11,15 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
 open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.dependent-sequential-diagrams
@@ -195,4 +202,62 @@ module _
     (map-hom-dependent-sequential-diagram C h n a , is-equiv-map n a)
   pr2 (equiv-hom-dependent-sequential-diagram is-equiv-map) =
     coh-hom-dependent-sequential-diagram C h
+```
+
+### Characterization of identity types of dependent sequential diagrams
+
+The type of equivalences of dependent sequential diagrams characterizes the
+identity type of dependent sequential diagrams.
+
+```agda
+module _
+  {l1 l2 : Level} {A : sequential-diagram l1}
+  (B : dependent-sequential-diagram A l2)
+  where
+
+  equiv-eq-dependent-sequential-diagram :
+    (C : dependent-sequential-diagram A l2) →
+    (B ＝ C) → equiv-dependent-sequential-diagram B C
+  equiv-eq-dependent-sequential-diagram .B refl =
+    id-equiv-dependent-sequential-diagram B
+
+  abstract
+    is-torsorial-equiv-dependent-sequential-diagram :
+      is-torsorial (equiv-dependent-sequential-diagram {l3 = l2} B)
+    is-torsorial-equiv-dependent-sequential-diagram =
+      is-torsorial-Eq-structure
+        ( is-torsorial-Eq-Π
+          ( λ n →
+            is-torsorial-Eq-Π
+              ( λ a →
+                is-torsorial-equiv
+                  ( family-dependent-sequential-diagram B n a))))
+        ( family-dependent-sequential-diagram B , λ n a → id-equiv)
+        ( is-torsorial-Eq-Π
+          ( λ n →
+            is-torsorial-Eq-Π
+              ( λ a →
+                is-torsorial-htpy (map-dependent-sequential-diagram B n a))))
+
+  is-equiv-equiv-eq-dependent-sequential-diagram :
+    (C : dependent-sequential-diagram A l2) →
+    is-equiv (equiv-eq-dependent-sequential-diagram C)
+  is-equiv-equiv-eq-dependent-sequential-diagram =
+    fundamental-theorem-id
+      ( is-torsorial-equiv-dependent-sequential-diagram)
+      ( equiv-eq-dependent-sequential-diagram)
+
+  extensionality-dependent-sequential-diagram :
+    (C : dependent-sequential-diagram A l2) →
+    (B ＝ C) ≃ equiv-dependent-sequential-diagram B C
+  pr1 (extensionality-dependent-sequential-diagram C) =
+    equiv-eq-dependent-sequential-diagram C
+  pr2 (extensionality-dependent-sequential-diagram C) =
+    is-equiv-equiv-eq-dependent-sequential-diagram C
+
+  eq-equiv-dependent-sequential-diagram :
+    (C : dependent-sequential-diagram A l2) →
+    equiv-dependent-sequential-diagram B C → (B ＝ C)
+  eq-equiv-dependent-sequential-diagram C =
+    map-inv-equiv (extensionality-dependent-sequential-diagram C)
 ```

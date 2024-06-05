@@ -174,14 +174,14 @@ module _
   {l1 l2 : Level} {X : UU l1} (α : free-loop X) (Y : UU l2)
   where
 
-  compute-free-dependent-loop-const :
+  compute-free-dependent-loop-constant-type-family :
     free-loop Y ≃ free-dependent-loop α (λ x → Y)
-  compute-free-dependent-loop-const =
+  compute-free-dependent-loop-constant-type-family =
     equiv-tot
       ( λ y → equiv-concat (tr-constant-type-family (loop-free-loop α) y) y)
 
-  map-compute-free-dependent-loop-const :
+  map-compute-free-dependent-loop-constant-type-family :
     free-loop Y → free-dependent-loop α (λ x → Y)
-  map-compute-free-dependent-loop-const =
-    map-equiv compute-free-dependent-loop-const
+  map-compute-free-dependent-loop-constant-type-family =
+    map-equiv compute-free-dependent-loop-constant-type-family
 ```
