@@ -70,7 +70,7 @@ module _
   pr2 (refl-eq-∞-sequence u) m H = refl
 
   eq-∞-eq-sequence :
-    {u v : sequence A} → ((n : ℕ) → (u n) ＝ v n) → eq-∞-sequence u v
+    {u v : sequence A} → ((n : ℕ) → u n ＝ v n) → eq-∞-sequence u v
   eq-∞-eq-sequence {u} {v} I = (zero-ℕ , λ n H → I n)
 ```
 
