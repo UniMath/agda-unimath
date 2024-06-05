@@ -292,7 +292,7 @@ module _
     H n (extract-subsequence u v n) (leq-id-extract-subsequence u v n)
 ```
 
-### A monotonic sequence `u` with `u (p + n) ＝ u p` is constant between `n` and `p + n`
+### A monotonic sequence `u` with `u (p + n) ＝ u n` is constant between `n` and `p + n`
 
 ```agda
 module _
