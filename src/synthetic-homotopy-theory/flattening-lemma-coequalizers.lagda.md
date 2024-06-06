@@ -101,7 +101,7 @@ module _
 
   flattening-lemma-coequalizer-statement : UUω
   flattening-lemma-coequalizer-statement =
-    dependent-universal-property-coequalizer a e →
+    universal-property-coequalizer a e →
     universal-property-coequalizer
       ( double-arrow-flattening-lemma-coequalizer)
       ( cofork-flattening-lemma-coequalizer)
@@ -133,7 +133,7 @@ module _
 
   abstract
     flattening-lemma-coequalizer : flattening-lemma-coequalizer-statement a P e
-    flattening-lemma-coequalizer dup-coequalizer =
+    flattening-lemma-coequalizer up-e =
       universal-property-coequalizer-universal-property-pushout
         ( double-arrow-flattening-lemma-coequalizer a P e)
         ( cofork-flattening-lemma-coequalizer a P e)
@@ -205,8 +205,6 @@ module _
             ( vertical-map-span-cocone-cofork a)
             ( horizontal-map-span-cocone-cofork a)
             ( cocone-codiagonal-cofork a e)
-            ( dependent-universal-property-pushout-dependent-universal-property-coequalizer
-              ( a)
-              ( e)
-              ( dup-coequalizer))))
+            ( universal-property-pushout-universal-property-coequalizer a e
+              ( up-e))))
 ```

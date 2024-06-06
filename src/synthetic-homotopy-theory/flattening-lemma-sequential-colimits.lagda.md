@@ -176,11 +176,9 @@ module _
           ( flattening-lemma-coequalizer _
             ( P)
             ( cofork-cocone-sequential-diagram c)
-            ( dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
+            ( universal-property-coequalizer-universal-property-sequential-colimit
               ( c)
-              ( dependent-universal-property-universal-property-sequential-colimit
-                ( c)
-                ( up-c)))))
+              ( up-c))))
 ```
 
 ### Flattening lemma for sequential colimits with descent data

@@ -12,7 +12,6 @@ module synthetic-homotopy-theory where
 open import synthetic-homotopy-theory.0-acyclic-maps public
 open import synthetic-homotopy-theory.0-acyclic-types public
 open import synthetic-homotopy-theory.1-acyclic-types public
-open import synthetic-homotopy-theory.26-id-pushout public
 open import synthetic-homotopy-theory.acyclic-maps public
 open import synthetic-homotopy-theory.acyclic-types public
 open import synthetic-homotopy-theory.category-of-connected-set-bundles-circle public
@@ -73,6 +72,7 @@ open import synthetic-homotopy-theory.functoriality-sequential-colimits public
 open import synthetic-homotopy-theory.functoriality-suspensions public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
 open import synthetic-homotopy-theory.hatchers-acyclic-type public
+open import synthetic-homotopy-theory.identity-systems-descent-data-pushouts public
 open import synthetic-homotopy-theory.induction-principle-pushouts public
 open import synthetic-homotopy-theory.infinite-complex-projective-space public
 open import synthetic-homotopy-theory.infinite-cyclic-types public
