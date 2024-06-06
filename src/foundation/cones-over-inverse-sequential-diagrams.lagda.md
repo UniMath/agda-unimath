@@ -41,7 +41,7 @@ from `X` into the sequence of types of `A` such that the triangles
     ╱ ╲
    ╱   ╲
   ∨     ∨
- Aₙ₊₁ -> Aₙ
+ Aₙ₊₁ ─> Aₙ
 ```
 
 [commute](foundation-core.commuting-triangles-of-maps.md) for all `n : ℕ`.

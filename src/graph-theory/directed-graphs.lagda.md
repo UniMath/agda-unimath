@@ -106,10 +106,10 @@ module alternative where
     edge-Directed-Graph' : UU l2
     edge-Directed-Graph' = pr1 (pr2 G)
 
-    source-edge-Directed-Graph : edge-Directed-Graph' -> vertex-Directed-Graph'
+    source-edge-Directed-Graph : edge-Directed-Graph' → vertex-Directed-Graph'
     source-edge-Directed-Graph = pr1 (pr2 (pr2 G))
 
-    target-edge-Directed-Graph : edge-Directed-Graph' -> vertex-Directed-Graph'
+    target-edge-Directed-Graph : edge-Directed-Graph' → vertex-Directed-Graph'
     target-edge-Directed-Graph = pr2 (pr2 (pr2 G))
 ```
 
@@ -118,7 +118,7 @@ module equiv {l1 l2 : Level} where
   open alternative
 
   Directed-Graph-to-Directed-Graph' :
-    Directed-Graph l1 l2 -> Directed-Graph' l1 (l1 ⊔ l2)
+    Directed-Graph l1 l2 → Directed-Graph' l1 (l1 ⊔ l2)
   pr1 (Directed-Graph-to-Directed-Graph' G) = vertex-Directed-Graph G
   pr1 (pr2 (Directed-Graph-to-Directed-Graph' G)) =
     Σ ( vertex-Directed-Graph G)
@@ -127,7 +127,7 @@ module equiv {l1 l2 : Level} where
   pr2 (pr2 (pr2 (Directed-Graph-to-Directed-Graph' G))) = pr1 ∘ pr2
 
   Directed-Graph'-to-Directed-Graph :
-    Directed-Graph' l1 l2 -> Directed-Graph l1 (l1 ⊔ l2)
+    Directed-Graph' l1 l2 → Directed-Graph l1 (l1 ⊔ l2)
   pr1 (Directed-Graph'-to-Directed-Graph (V , E , st , tg)) = V
   pr2 (Directed-Graph'-to-Directed-Graph (V , E , st , tg)) x y =
     Σ E (λ e → (Id (st e) x) × (Id (tg e) y))

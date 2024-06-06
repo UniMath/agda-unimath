@@ -360,7 +360,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  is-set-vec : (n : ℕ) → is-set A -> is-set (vec A n)
+  is-set-vec : (n : ℕ) → is-set A → is-set (vec A n)
   is-set-vec = is-trunc-vec zero-𝕋
 
 vec-Set : {l : Level} → Set l → ℕ → Set l

@@ -345,7 +345,7 @@ and two elements `u` and `v` of `C`, then the induced square
         │                     │
   ap g' │                     │
         ∨                     ∨
-  (g' u ＝ g' v) -> (f (g' u) ＝ g (f' v))
+  (g' u ＝ g' v) ─> (f (g' u) ＝ g (f' v))
 ```
 
 is also a pullback.

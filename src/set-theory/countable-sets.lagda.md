@@ -216,7 +216,7 @@ cases-map-decidable-subtype-ℕ :
   {l : Level} (X : Set l) →
   ( P : decidable-subtype l ℕ) →
   ( f : type-decidable-subtype P → type-Set X) →
-  ( (n : ℕ) → is-decidable (pr1 (P n)) -> Maybe (type-Set X))
+  ( (n : ℕ) → is-decidable (pr1 (P n)) → Maybe (type-Set X))
 cases-map-decidable-subtype-ℕ X P f n (inl x) = inl (f (n , x))
 cases-map-decidable-subtype-ℕ X P f n (inr x) = inr star
 
