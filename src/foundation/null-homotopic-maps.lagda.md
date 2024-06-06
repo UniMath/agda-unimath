@@ -68,7 +68,7 @@ module _
 
 Two null-homotopies `H` and `K` are equal if there is an
 [equality](foundation-core.identity-types.md) of base points `p : H₀ ＝ K₀` such
-that every for `x : A` we have a
+that for every `x : A` we have a
 [commuting triangle of identifications](foundation.commuting-triangles-of-identifications.md)
 
 ```text
@@ -154,7 +154,7 @@ module _
     inv (contraction-null-htpy H a) ∙ contraction-null-htpy K a
 ```
 
-### If the codomain is a set and the domain has an element the type of null-homotopies is a proposition
+### If the codomain is a set and the domain has an element then being null-homotopic is a property
 
 ```agda
 module _
@@ -176,7 +176,7 @@ module _
       ( all-elements-equal-null-htpy-has-element-domain-is-set-codomain)
 ```
 
-### If the codomain is a set and the domain is inhabited the type of null-homotopies is a proposition
+### If the codomain is a set and the domain is inhabited then being null-homotopic is a property
 
 ```agda
 module _
