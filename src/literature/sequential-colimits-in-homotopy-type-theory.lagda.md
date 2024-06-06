@@ -4,7 +4,7 @@ This file collects references to formalization of constructions and theorems
 from {{#cite SvDR20}}.
 
 ```agda
-module papers.sequential-colimits-in-homotopy-type-theory where
+module literature.sequential-colimits-in-homotopy-type-theory where
 ```
 
 ## 2 Homotopy Type Theory
