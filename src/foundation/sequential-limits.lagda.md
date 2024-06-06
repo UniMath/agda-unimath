@@ -39,7 +39,7 @@ Given an
 
 ```text
                fₙ                     f₁      f₀
-  ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀
+  ⋯ ───> Aₙ₊₁ ───> Aₙ ───> ⋯ ───> A₂ ───> A₁ ───> A₀
 ```
 
 we can form the **standard sequential limit** `limₙ Aₙ` satisfying
@@ -48,7 +48,7 @@ of `Aₙ` thus completing the diagram
 
 ```text
                            fₙ                     f₁      f₀
-  limₙ Aₙ ---> ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀.
+  limₙ Aₙ ───> ⋯ ───> Aₙ₊₁ ───> Aₙ ───> ⋯ ───> A₂ ───> A₁ ───> A₀.
 ```
 
 The standard sequential limit consists of "points at infinity", which can be
@@ -58,7 +58,7 @@ under `f` agree:
 ```text
   ⋯  ↦   xₙ₊₁  ↦   xₙ  ↦   ⋯  ↦   x₂  ↦   x₁  ↦   x₀
           ⫙        ⫙              ⫙       ⫙       ⫙
-  ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀.
+  ⋯ ───> Aₙ₊₁ ───> Aₙ ───> ⋯ ───> A₂ ───> A₁ ───> A₀.
 ```
 
 ## Definitions

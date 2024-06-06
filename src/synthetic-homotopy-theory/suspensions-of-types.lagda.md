@@ -55,7 +55,7 @@ The **suspension** of a type `X` is the
 [span](foundation.spans.md)
 
 ```text
-unit <-- X --> unit
+unit <── X ──> unit
 ```
 
 Suspensions play an important role in synthetic homotopy theory. For example,
@@ -545,11 +545,11 @@ So for any `(k+1)`-type `Y`, we have the commutative diagram
 
 ```text
                  Δ
-     Y ---------------------->  (suspension X → Y)
-     ∧                                  |
- pr1 | ≃                              ≃ | ev-suspension
-     |                      ≃           ∨
-  Σ (y y' : Y) , y ＝ y' <----- suspension-structure Y
+     Y ──────────────────────>  (suspension X → Y)
+     ∧                                  │
+ pr1 │ ≃                              ≃ │ ev-suspension
+     │                      ≃           ∨
+  Σ (y y' : Y) , y ＝ y' <───── suspension-structure Y
                                 ≐ Σ (y y' : Y) , X → y ＝ y'
 ```
 

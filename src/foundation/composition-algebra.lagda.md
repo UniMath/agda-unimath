@@ -52,9 +52,9 @@ homotopy constructed as the whiskering
 
 ```text
                - ∘ f
-          ----------------->         - ∘ h
-  (B → S)  htpy-precomp H S  (A → S) -----> (C → S)
-          ----------------->
+          ─────────────────>         - ∘ h
+  (B → S)  htpy-precomp H S  (A → S) ─────> (C → S)
+          ─────────────────>
                - ∘ g
 ```
 
@@ -62,9 +62,9 @@ is homotopic to the homotopy
 
 ```text
                     - ∘ (f ∘ h)
-            -------------------------->
+            ──────────────────────────>
     (B → S)   htpy-precomp (H ·r h) S   (C → S).
-            -------------------------->
+            ──────────────────────────>
                     - ∘ (g ∘ h)
 ```
 
@@ -91,9 +91,9 @@ Similarly, the homotopy given by the whiskering
 
 ```text
                                - ∘ f
-          - ∘ h          ----------------->
-  (C → S) -----> (B → S)  htpy-precomp H S  (A → S)
-                         ----------------->
+          - ∘ h          ─────────────────>
+  (C → S) ─────> (B → S)  htpy-precomp H S  (A → S)
+                         ─────────────────>
                                - ∘ g
 ```
 
@@ -101,9 +101,9 @@ is homotopic to the homotopy
 
 ```text
                     - ∘ (h ∘ f)
-            -------------------------->
+            ──────────────────────────>
     (C → S)   htpy-precomp (h · l H) S   (A → S).
-            -------------------------->
+            ──────────────────────────>
                     - ∘ (h ∘ g)
 ```
 
@@ -149,9 +149,9 @@ whiskering
 
 ```text
                                f ∘ –
-          h ∘ -          ------------------>
-  (S → C) -----> (S → B)  htpy-postcomp S H  (S → A)
-                         ------------------>
+          h ∘ -          ──────────────────>
+  (S → C) ─────> (S → B)  htpy-postcomp S H  (S → A)
+                         ──────────────────>
                                g ∘ -
 ```
 
@@ -159,9 +159,9 @@ is homotopic to the homotopy
 
 ```text
                     (f ∘ h) ∘ -
-            -------------------------->
+            ──────────────────────────>
     (S → C)   htpy-postcomp S (H ·r h)   (S → A).
-            -------------------------->
+            ──────────────────────────>
                     (g ∘ h) ∘ -
 ```
 
@@ -188,9 +188,9 @@ Similarly, the homotopy given by the whiskering
 
 ```text
                 f ∘ -
-          ----------------->          h ∘ -
-  (S → A)  htpy-postcomp S H  (S → B) -----> (S → C)
-          ----------------->
+          ──────────────────>         h ∘ -
+  (S → A)  htpy-postcomp S H  (S → B) ─────> (S → C)
+          ──────────────────>
                 g ∘ -
 ```
 
@@ -198,9 +198,9 @@ is homotopic to the homotopy
 
 ```text
                     (h ∘ f) ∘ -
-            -------------------------->
+            ──────────────────────────>
     (S → A)   htpy-postcomp S (h ·l H)   (S → C).
-            -------------------------->
+            ──────────────────────────>
                     (h ∘ g) ∘ -
 ```
 
@@ -246,15 +246,15 @@ homotopies
 
 ```text
                         postcomp A g ·l htpy-precomp F X
-           (g ∘ - ∘ f) ---------------------------------> (g ∘ - ∘ f')
-                |                                              |
-                |                                              |
-                |                                              |
+           (g ∘ - ∘ f) ─────────────────────────────────> (g ∘ - ∘ f')
+                │                                              │
+                │                                              │
+                │                                              │
   precomp f Y ·l htpy-postcomp B G            htpy-postcomp A G ·r precomp f' X
-                |                                              |
-                |                                              |
+                │                                              │
+                │                                              │
                 ∨                                              ∨
-          (g' ∘ - ∘ f) --------------------------------> (g' ∘ - ∘ f').
+          (g' ∘ - ∘ f) ────────────────────────────────> (g' ∘ - ∘ f').
                        htpy-precomp F Y ·r postcomp B g'
 ```
 

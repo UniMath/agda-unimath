@@ -119,12 +119,12 @@ The square
 
 ```text
                        pullback f
-    Subsemigroup H ----------------> Subsemigroup G
-          |                                |
-   K ↦ UK |                                | K ↦ UK
-          |                                |
+    Subsemigroup H ────────────────> Subsemigroup G
+          │                                │
+   K ↦ UK │                                │ K ↦ UK
+          │                                │
           ∨                                ∨
-  subset-Semigroup H ------------> subset-Semigroup G
+  subset-Semigroup H ────────────> subset-Semigroup G
                       pullback f
 ```
 

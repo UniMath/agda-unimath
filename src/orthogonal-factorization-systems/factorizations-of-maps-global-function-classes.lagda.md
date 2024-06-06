@@ -43,10 +43,10 @@ classes `L` and `R`** of a map `f : A → B` is a pair of maps `l : A → X` and
 
 ```text
          X
-        ∧ \
- L ∋ l /   \ r ∈ R
-      /     ∨
-    A -----> B
+        ∧ ╲
+ L ∋ l ╱   ╲ r ∈ R
+      ╱     ∨
+    A ─────> B
         f
 ```
 

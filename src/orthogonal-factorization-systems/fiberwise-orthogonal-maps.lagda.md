@@ -64,22 +64,22 @@ More concretely, `f` _is fiberwise left orthogonal to_ `g` if for every
 [pullback](foundation-core.pullbacks.md) square
 
 ```text
-    A' -------> A
-    | ⌟         |
-  f'|           | f
+    A' ───────> A
+    │ ⌟         │
+  f'│           │ f
     ∨           ∨
-    B' -------> B,
+    B' ───────> B,
 ```
 
 the exponential square
 
 ```text
              - ∘ f'
-     B' → X -------> A' → X
-        |               |
-  g ∘ - |               | g ∘ -
+     B' → X ───────> A' → X
+        │               │
+  g ∘ - │               │ g ∘ -
         ∨               ∨
-     B' → Y -------> A' → Y
+     B' → Y ───────> A' → Y
              - ∘ f'
 ```
 
@@ -353,11 +353,11 @@ module _
 Given a base change of `g`
 
 ```text
-    X' -----> X
-    | ⌟       |
-  g'|         | g
+    X' ─────> X
+    │ ⌟       │
+  g'│         │ g
     ∨         ∨
-    Y' -----> Y,
+    Y' ─────> Y,
 ```
 
 if `g` is fiberwise right orthogonal to `f`, then `g'` is fiberwise right

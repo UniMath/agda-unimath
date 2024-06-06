@@ -50,11 +50,11 @@ The {{#concept "pullback-hom" Agda=pullback-hom}} or
 
 ```text
              - ∘ f
-      B → X -------> A → X
-        |              |
-  g ∘ - |              | g ∘ -
+      B → X ───────> A → X
+        │              │
+  g ∘ - │              │ g ∘ -
         ∨              ∨
-      B → Y -------> A → Y.
+      B → Y ───────> A → Y.
              - ∘ f
 ```
 
@@ -71,9 +71,9 @@ This map takes a map `j : B → X` as in the diagram
 
 ```text
     A       X
-    |     ∧ |
-  f |  j/   | g
-    ∨ /     ∨
+    │     ∧ │
+  f │  j╱   │ g
+    ∨ ╱     ∨
     B       Y
 ```
 
@@ -82,11 +82,11 @@ in the diagram
 
 ```text
          j ∘ f
-    A ----------> X
-    |             |
-  f |  refl-htpy  | g
+    A ──────────> X
+    │             │
+  f │  refl-htpy  │ g
     ∨             ∨
-    B ----------> Y.
+    B ──────────> Y.
          g ∘ j
 ```
 
@@ -125,11 +125,11 @@ of arrows
 
 ```text
          j ∘ f
-    A ----------> X
-    |             |
-  f |  refl-htpy  | g
+    A ──────────> X
+    │             │
+  f │  refl-htpy  │ g
     ∨             ∨
-    B ----------> Y.
+    B ──────────> Y.
          g ∘ j
 ```
 
@@ -318,10 +318,10 @@ We construct the homotopy witnessing that the triangle of maps
 
 ```text
                   (B → X)
-                 /       \
-  pullback-hom  /         \ gap
+                 ╱       ╲
+  pullback-hom  ╱         ╲ gap
                ∨           ∨
-     hom-arrow f g -----> type-standard-pullback-hom f g
+     hom-arrow f g ─────> type-standard-pullback-hom f g
 ```
 
 commutes. The bottom map in this triangle is the underlying map of the

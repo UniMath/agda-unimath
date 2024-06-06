@@ -40,13 +40,13 @@ following diagram
 
 ```text
           map-associative-product
-     (A × A) × A ----> A × (A × A)
-             |           |
-  (_*_ , id) |           | (id, _*_)
+     (A × A) × A ────> A × (A × A)
+             │           │
+  (_*_ , id) │           │ (id, _*_)
              ∨           ∨
            A × A       A × A
-               \       /
-          (_*_) \     / (_*_)
+               ╲       ╱
+          (_*_) ╲     ╱ (_*_)
                  ∨   ∨
                    A
 ```
@@ -56,18 +56,18 @@ such that the three diagrams below cohere
 ```text
             associator
   (e * x) * y ===== e * (x * y)
-          \\         //
-     left  \\       //  left
-   unit law \\     // unit law
+          ╲╲         ╱╱
+     left  ╲╲       ╱╱  left
+   unit law ╲╲     ╱╱ unit law
               y * z,
 ```
 
 ```text
             associator
   (x * e) * y ===== x * (e * y)
-          \\         //
-    right  \\       //  left
-   unit law \\     // unit law
+          ╲╲         ╱╱
+    right  ╲╲       ╱╱  left
+   unit law ╲╲     ╱╱ unit law
               x * y,
 ```
 
@@ -76,9 +76,9 @@ and
 ```text
             associator
   (x * y) * e ===== x * (y * e)
-          \\         //
-    right  \\       //  right
-   unit law \\     // unit law
+          ╲╲         ╱╱
+    right  ╲╲       ╱╱  right
+   unit law ╲╲     ╱╱ unit law
               x * y
 ```
 

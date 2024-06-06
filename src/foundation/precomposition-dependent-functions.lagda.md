@@ -48,11 +48,11 @@ Then the square
 
 ```text
                      ap (precomp-Π f C)
-       (g ＝ h) ---------------------------> (g ∘ f ＝ h ∘ f)
-          |                                         |
-  htpy-eq |                                         | htpy-eq
+       (g ＝ h) ───────────────────────────> (g ∘ f ＝ h ∘ f)
+          │                                         │
+  htpy-eq │                                         │ htpy-eq
           ∨                                         ∨
-       (g ~ h) ----------------------------> (g ∘ f ~ h ∘ f)
+       (g ~ h) ────────────────────────────> (g ∘ f ~ h ∘ f)
                 precomp-Π f (eq-value g h)
 ```
 
@@ -62,11 +62,11 @@ Similarly, the map `ap (precomp-Π f C)` fits in a commuting square
 
 ```text
                 precomp-Π f (eq-value g h)
-       (g ~ h) ----------------------------> (g ∘ f ~ h ∘ f)
-          |                                         |
-  eq-htpy |                                         | eq-htpy
+       (g ~ h) ────────────────────────────> (g ∘ f ~ h ∘ f)
+          │                                         │
+  eq-htpy │                                         │ eq-htpy
           ∨                                         ∨
-       (g ＝ h) ---------------------------> (g ∘ f ＝ h ∘ f).
+       (g ＝ h) ───────────────────────────> (g ∘ f ＝ h ∘ f).
                      ap (precomp-Π f C)
 ```
 

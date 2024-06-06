@@ -40,7 +40,7 @@ span
 
 ```text
      ∇         [f,g]
-A <----- A + A -----> B
+A <───── A + A ─────> B
 ```
 
 where the left map is the

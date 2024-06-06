@@ -38,13 +38,13 @@ from their source to their target. For instance, given two $0$-cells `x` and
 
 ```text
             f
-       -----------
-     /  //     \\  \
-    /  //   α   \\  ∨
-   x  H|| ≡≡≡≡> ||K  y.
-    \  \\       //  ∧
-     \  V       V  /
-       -----------
+       ───────────
+     ╱  ╱╱     ╲╲  ╲
+    ╱  ╱╱   α   ╲╲  ∨
+   x  H││ ≡≡≡≡> ││K  y.
+    ╲  ╲╲       ╱╱  ∧
+     ╲  V       V  ╱
+       ───────────
             g
 ```
 

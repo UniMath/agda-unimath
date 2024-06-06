@@ -24,11 +24,11 @@ A square of [pointed homotopies](structured-types.pointed-homotopies.md)
 
 ```text
           top
-      f ------> g
-      |         |
- left |         | right
+      f ──────> g
+      │         │
+ left │         │ right
       ∨         ∨
-      h ------> i
+      h ──────> i
         bottom
 ```
 

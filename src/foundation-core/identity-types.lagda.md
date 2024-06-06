@@ -377,9 +377,9 @@ Consider a triangle of identifications
 
 ```text
       p
-  x ----> y
-   \     /
-  r \   / q
+  x ────> y
+   ╲     ╱
+  r ╲   ╱ q
      ∨ ∨
       z
 ```
@@ -439,10 +439,10 @@ identification `inv r ＝ s`, as indicated in the diagram
 
 ```text
            x
-          ∧ |
-        r | | s
-          | ∨
-  a -----> b -----> c.
+          ∧ │
+        r │ │ s
+          │ ∨
+  a ─────> b ─────> c.
 ```
 
 Then we have identifications

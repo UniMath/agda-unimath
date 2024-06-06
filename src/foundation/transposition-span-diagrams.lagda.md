@@ -24,14 +24,14 @@ of a [span diagram](foundation.span-diagrams.md)
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 is the span diagram
 
 ```text
        g       f
-  B <----- S -----> A.
+  B <───── S ─────> A.
 ```
 
 In other words, the transposition of a span diagram `(A , B , s)` is the span

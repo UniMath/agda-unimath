@@ -225,13 +225,13 @@ The following diagram is a helpful illustration in the second proof:
 
 ```text
                         precomp f
-       (b : B) → C b ------------- > (a : A) → C (f a)
-             |                               ∧
-             |                               |
-     map-Π Δ |                               | ≃ [precomp with the equivalence
-             |                               |        A ≃ Σ B (fiber f)     ]
-             ∨               ind-Σ           |
- ((b : B) → fiber f b → C b) ----> (s : Σ B (fiber f)) → C (pr1 s)
+       (b : B) → C b ──────────────> (a : A) → C (f a)
+             │                               ∧
+             │                               │
+     map-Π Δ │                               │ ≃ [precomp with the equivalence
+             │                               │        A ≃ Σ B (fiber f)     ]
+             ∨               ind-Σ           │
+ ((b : B) → fiber f b → C b) ────> (s : Σ B (fiber f)) → C (pr1 s)
                               ≃
                           [currying]
 ```
@@ -316,12 +316,12 @@ module _
 
 ```text
         g          j
-   S -------> B -------> C
-   |          |          |
- f |          | j        | id
-   |          |          |
+   S ───────> B ───────> C
+   │          │          │
+ f │          │ j        │ id
+   │          │          │
    ∨        ⌜ ∨          ∨
-   A -------> C -------> C
+   A ───────> C ───────> C
         i          id
 ```
 
@@ -332,7 +332,7 @@ computes to the identity:
 
 ```text
           cocone-map f (j ∘ g)
- (C → X) ---------------------> cocone f (j ∘ g) X
+ (C → X) ─────────────────────> cocone f (j ∘ g) X
                              ̇= Σ (l : A → X) , Σ (r : C → X) , l ∘ f ~ r ∘ j ∘ g
      (using the left square)
                              ≃ Σ (l : A → X) , Σ (r : C → X) , l ∘ f ~ r ∘ i ∘ f

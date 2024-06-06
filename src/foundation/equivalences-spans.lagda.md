@@ -41,13 +41,13 @@ consists of an [equivalence](foundation-core.equivalences.md) `w : S ≃ T`
 
 ```text
              S
-           / | \
-        f /  |  \ h
-         ∨   |   ∨
-        A    |w   B
-         ∧   |   ∧
-        h \  |  / k
-           \ ∨ /
+           ╱ │ ╲
+        f ╱  │  ╲ h
+         ∨   │   ∨
+        A    │w   B
+         ∧   │   ∧
+        h ╲  │  ╱ k
+           ╲ ∨ ╱
              T
 ```
 

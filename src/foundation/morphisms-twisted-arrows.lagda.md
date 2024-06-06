@@ -28,11 +28,11 @@ A **morphism of twisted arrows** from `f : A → B` to `g : X → Y` is a triple
 
   ```text
            i
-      A <----- X
-      |        |
-    f |        | g
+      A <───── X
+      │        │
+    f │        │ g
       ∨        ∨
-      B -----> Y
+      B ─────> Y
           j
   ```
 

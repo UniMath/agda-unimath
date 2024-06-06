@@ -27,7 +27,7 @@ diagram of [pointed maps](structured-types.pointed-maps.md) of the form
 
 ```text
        f       g
-  A <----- S -----> B.
+  A <───── S ─────> B.
 ```
 
 In other words, a pointed span diagram consists of two
@@ -151,7 +151,7 @@ span diagram
 
 ```text
        f       α₀
-  B <----- A -----> X.
+  B <───── A ─────> X.
 ```
 
 ```agda

@@ -32,7 +32,7 @@ giving a sequential diagram of maps that extend infinitely to the left:
 
 ```text
      f₃      f₂      f₁      f₀
-  ⋯ ---> A₃ ---> A₂ ---> A₁ ---> A₀.
+  ⋯ ───> A₃ ───> A₂ ───> A₁ ───> A₀.
 ```
 
 This is in contrast to the notion of
@@ -115,7 +115,7 @@ sequential diagram `X → A` defined by levelwise postcomposition
 
 ```text
                     (f₂ ∘ -)          (f₁ ∘ -)          (f₀ ∘ -)
-  ⋯ -----> (X → A₃) -------> (X → A₂) -------> (X → A₁) -------> (X → A₀).
+  ⋯ ─────> (X → A₃) ───────> (X → A₂) ───────> (X → A₁) ───────> (X → A₀).
 ```
 
 ```agda

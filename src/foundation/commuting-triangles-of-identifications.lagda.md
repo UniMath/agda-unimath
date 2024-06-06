@@ -26,9 +26,9 @@ A triangle of [identifications](foundation-core.identity-types.md)
 
 ```text
         top
-     x ----> y
-      \     /
-  left \   / right
+     x ────> y
+      ╲     ╱
+  left ╲   ╱ right
         ∨ ∨
          z
 ```
@@ -73,9 +73,9 @@ Given a commuting triangle of identifications
 
 ```text
         top
-     x ----> y
-      \     /
-  left \   / right
+     x ────> y
+      ╲     ╱
+  left ╲   ╱ right
         ∨ ∨
          z,
 ```
@@ -86,9 +86,9 @@ we may consider three ways of attaching new identifications to it:
 
    ```text
              p ∙ top
-            u ----> y
-             \     /
-     p ∙ left \   / right
+            u ────> y
+             ╲     ╱
+     p ∙ left ╲   ╱ right
                ∨ ∨
                 z.
    ```
@@ -104,9 +104,9 @@ we may consider three ways of attaching new identifications to it:
 
    ```text
                top
-            x ----> y
-             \     /
-     left ∙ p \   / right ∙ p
+            x ────> y
+             ╲     ╱
+     left ∙ p ╲   ╱ right ∙ p
                ∨ ∨
                 u.
    ```
@@ -123,9 +123,9 @@ we may consider three ways of attaching new identifications to it:
 
    ```text
          top ∙ p
-        x ----> u
-         \     /
-     left \   / p⁻¹ ∙ right
+        x ────> u
+         ╲     ╱
+     left ╲   ╱ p⁻¹ ∙ right
            ∨ ∨
             z.
    ```
@@ -160,9 +160,9 @@ There is an equivalence of commuting squares
 
 ```text
         top                        p ∙ top
-     x ----> y                    u ----> y
-      \     /                      \     /
-  left \   / right    ≃    p ∙ left \   / right
+     x ────> y                    u ────> y
+      ╲     ╱                      ╲     ╱
+  left ╲   ╱ right    ≃    p ∙ left ╲   ╱ right
         ∨ ∨                          ∨ ∨
          z                            z
 ```
@@ -233,9 +233,9 @@ There is an equivalence of commuting triangles of identifications
 
 ```text
         top                            top
-     x ----> y                      x ----> y
-      \     /                        \     /
-  left \   / right     ≃     left ∙ p \   / right ∙ p
+     x ────> y                      x ────> y
+      ╲     ╱                        ╲     ╱
+  left ╲   ╱ right     ≃     left ∙ p ╲   ╱ right ∙ p
         ∨ ∨                            ∨ ∨
          z                              u
 ```
@@ -307,9 +307,9 @@ triangles of identifications
 
 ```text
         top                       top ∙ p
-     x ----> y                   x ----> u
-      \     /                     \     /
-  left \   / right     ≃     left  \   / q ∙ right
+     x ────> y                   x ────> u
+      ╲     ╱                     ╲     ╱
+  left ╲   ╱ right     ≃     left  ╲   ╱ q ∙ right
         ∨ ∨                         ∨ ∨
          z                           z.
 ```
@@ -395,9 +395,9 @@ Consider a commuting triangle of identifications
 
 ```text
         top
-     x ----> y
-      \     /
-  left \   / right
+     x ────> y
+      ╲     ╱
+  left ╲   ╱ right
         ∨ ∨
          z
 ```
@@ -407,9 +407,9 @@ triangle of identifications
 
 ```text
           ap f top
-        f x ----> f y
-           \     /
-  ap f left \   / ap f right
+        f x ────> f y
+           ╲     ╱
+  ap f left ╲   ╱ ap f right
              ∨ ∨
              f z
 ```
@@ -650,10 +650,10 @@ Consider a commuting diagram of identifications of the form
 
 ```text
   top-left   top-right
-    a ---> b ---> c
-      \    |    /
-  left \   |m  / right
-        \  |  /
+    a ───> b ───> c
+      ╲    │    ╱
+  left ╲   │m  ╱ right
+        ╲  │  ╱
          ∨ ∨ ∨
            d
 ```
@@ -787,10 +787,10 @@ Consider a commuting triangle of identifications
 
 ```text
          top
-     a ------> b
-      \       /
-  left \     / right
-        \   /
+     a ──────> b
+      ╲       ╱
+  left ╲     ╱ right
+        ╲   ╱
          ∨ ∨
           c
 ```
@@ -829,10 +829,10 @@ Consider a commuting triangle of identifications
 
 ```text
          top
-     a ------> b
-      \       /
-  left \     / right
-        \   /
+     a ──────> b
+      ╲       ╱
+  left ╲     ╱ right
+        ╲   ╱
          ∨ ∨
           c
 ```
@@ -842,12 +842,12 @@ identifications
 
 ```text
       horizontal-pasting t refl
-  left ----------------------> (top ∙ refl) ∙ right
-       \                     /
-        \                   /
-       t \                 / right-whisker right-unit right
-          \               /
-           \             /
+  left ──────────────────────> (top ∙ refl) ∙ right
+       ╲                     ╱
+        ╲                   ╱
+       t ╲                 ╱ right-whisker right-unit right
+          ╲               ╱
+           ╲             ╱
             ∨           ∨
              top ∙ right
 ```
@@ -931,11 +931,11 @@ Consider two commuting triangles of identifications as in the diagram
 
 ```text
       s       t
-  a ----> b ----> c
-    \     |     /
-     \  L |  R /
-    l \   |m  / r
-       \  |  /
+  a ────> b ────> c
+    ╲     │     ╱
+     ╲  L │  R ╱
+    l ╲   │m  ╱ r
+       ╲  │  ╱
         ∨ ∨ ∨
           d,
 ```
@@ -944,11 +944,11 @@ and consider furthermore a commuting triangle of identifications
 
 ```text
              t'
-         b ----> c
-         |     /
-         | R' /
-       m |   / r
-         |  /
+         b ────> c
+         │     ╱
+         │ R' ╱
+       m │   ╱ r
+         │  ╱
          ∨ ∨
          d
 ```
@@ -959,10 +959,10 @@ identification `q` witnessing that the triangle
 
 ```text
         R
-   m ------> t ∙ r
-    \       /
-  R' \     / right-whisker p r
-      \   /
+   m ──────> t ∙ r
+    ╲       ╱
+  R' ╲     ╱ right-whisker p r
+      ╲   ╱
        ∨ ∨
      t' ∙ r
 ```
@@ -971,11 +971,11 @@ commutes. Then the triangle
 
 ```text
                       horizontal-pasting L R
-                      l ----------------> (s ∙ t) ∙ r
-                        \               /
-                         \             /
-  horizontal-pasting L R' \           / right-whisker (left-whisker s p) r
-                           \         /
+                      l ────────────────> (s ∙ t) ∙ r
+                        ╲               ╱
+                         ╲             ╱
+  horizontal-pasting L R' ╲           ╱ right-whisker (left-whisker s p) r
+                           ╲         ╱
                             ∨       ∨
                           (s ∙ t') ∙ r
 ```
@@ -1024,11 +1024,11 @@ Consider two commuting triangles of identifications as in the diagram
 
 ```text
      s      t
-  a ----> b ----> c
-    \     |     /
-     \  L |  R /
-    l \   |m  / r
-       \  |  /
+  a ────> b ────> c
+    ╲     │     ╱
+     ╲  L │  R ╱
+    l ╲   │m  ╱ r
+       ╲  │  ╱
         ∨ ∨ ∨
           d,
 ```
@@ -1037,11 +1037,11 @@ and consider furthermore a commuting triangle of identifications
 
 ```text
       s'
-  a ----> b
-    \     |
-     \ L' |
-    l \   |m
-       \  |
+  a ────> b
+    ╲     │
+     ╲ L' │
+    l ╲   │m
+       ╲  │
         ∨ ∨
           d,
 ```
@@ -1052,10 +1052,10 @@ identification `q` witnessing that the triangle
 
 ```text
         L
-   l ------> s ∙ m
-    \       /
-  L' \     / right-whisker p m
-      \   /
+   l ──────> s ∙ m
+    ╲       ╱
+  L' ╲     ╱ right-whisker p m
+      ╲   ╱
        ∨ ∨
      s' ∙ r
 ```
@@ -1064,11 +1064,11 @@ commutes. Then the triangle
 
 ```text
                       horizontal-pasting L R
-                      l ----------------> (s ∙ t) ∙ r
-                        \               /
-                         \             /
-  horizontal-pasting L R' \           / right-whisker (right-whisker p t) r
-                           \         /
+                      l ────────────────> (s ∙ t) ∙ r
+                        ╲               ╱
+                         ╲             ╱
+  horizontal-pasting L R' ╲           ╱ right-whisker (right-whisker p t) r
+                           ╲         ╱
                             ∨       ∨
                           (s' ∙ t) ∙ r
 ```
@@ -1117,13 +1117,13 @@ Consider a commuting diagram of identifications of the form
 
 ```text
           top
-   a ------------> b
-    \ ⎻⎽          /
-     \  ⎺⎽ mid   / top-right
-      \   ⎺⎽    ∨
-  left \    ⎺> c
-        \     /
-         \   / bottom-right
+   a ────────────> b
+    ╲ ⎻⎽          ╱
+     ╲  ⎺⎽ mid   ╱ top-right
+      ╲   ⎺⎽    ∨
+  left ╲    ⎺> c
+        ╲     ╱
+         ╲   ╱ bottom-right
           ∨ ∨
            d
 ```
@@ -1264,13 +1264,13 @@ commuting diagram of identifications of the form
 
 ```text
                 top
-         a ------------> b
-          \          ⎽⎻ /
-  top-left \     m ⎽⎺  /
-            ∨    ⎽⎺   /
-             c <⎺    / right
-              \     /
-   bottom-left \   /
+         a ────────────> b
+          ╲          ⎽⎻ ╱
+  top-left ╲     m ⎽⎺  ╱
+            ∨    ⎽⎺   ╱
+             c <⎺    ╱ right
+              ╲     ╱
+   bottom-left ╲   ╱
                 ∨ ∨
                  d
 ```
@@ -1284,13 +1284,13 @@ commuting diagram of identifications of the form
 
 ```text
                 top
-         a ------------> b
-          \         ⎽-> /
-  top-left \    m ⎽⎺   /
-            ∨   ⎽⎺    /
-             c ⎺     / right
-              \     /
-   bottom-left \   /
+         a ────────────> b
+          ╲         ⎽-> ╱
+  top-left ╲    m ⎽⎺   ╱
+            ∨   ⎽⎺    ╱
+             c ⎺     ╱ right
+              ╲     ╱
+   bottom-left ╲   ╱
                 ∨ ∨
                  d
 ```
@@ -1308,13 +1308,13 @@ Consider a diagram of the form
 
 ```text
                 top
-         a ------------> b
-          \             /
-  top-left \           / top-right
+         a ────────────> b
+          ╲             ╱
+  top-left ╲           ╱ top-right
             ∨   mid   ∨
-             c ----> d
-              \     /
-   bottom-left \   / bottom-right
+             c ────> d
+              ╲     ╱
+   bottom-left ╲   ╱ bottom-right
                 ∨ ∨
                  e
 ```

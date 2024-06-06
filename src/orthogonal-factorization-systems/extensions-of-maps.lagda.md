@@ -51,11 +51,11 @@ along `i` to `f`.
 
 ```text
   A
-  |  \
+  │  ╲
   i    f
-  |      \
-  ∨       ∨
-  B - g -> P
+  │      ╲
+  ∨   g   ∨
+  B ─────> P
 ```
 
 ## Definition
@@ -107,15 +107,15 @@ module _
 
 ```text
   A
-  |  \
+  │  ╲
   i    f
-  |      \
+  │      ╲
   ∨       ∨
-  B - g -> P
-  |       ∧
-  j      /
-  |    h
-  ∨  /
+  B ─ g ─> P
+  │       ∧
+  j      ╱
+  │    h
+  ∨  ╱
   C
 ```
 
@@ -135,11 +135,11 @@ module _
 
 ```text
            A
-        /  |  \
+        ╱  │  ╲
       f    g    h
-    /      |      \
-   ∨       ∨       ∨
-  B - i -> C - j -> P
+    ╱      │      ╲
+   ∨  i    ∨   j   ∨
+  B ─────> C ─────> P
 ```
 
 #### Horizontal composition of extensions of dependent functions
@@ -176,11 +176,11 @@ module _
 
 ```text
   A
-  |  \
+  │  ╲
   i    f
-  |      \
-  ∨       ∨
-  B - g -> C - h -> P
+  │      ╲
+  ∨   g   ∨    h
+  B ─────> C ─────> P
 ```
 
 ```agda
@@ -198,12 +198,13 @@ module _
 ### Right whiskering of extensions of maps
 
 ```text
-  X - h -> A
-           |  \
+      h
+  X ─────> A
+           │  ╲
            i    f
-           |      \
-           ∨       ∨
-           B - g -> P
+           │      ╲
+           ∨   g   ∨
+           B ─────> P
 ```
 
 ```agda

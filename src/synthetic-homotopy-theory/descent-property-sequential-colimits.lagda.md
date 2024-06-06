@@ -45,10 +45,10 @@ vertex `X`, there is a commuting triangle
 
 ```text
           cocone-map
-  (X → 𝒰) ---------> cocone A 𝒰
-           \       /
-            \     /
-             \   /
+  (X → 𝒰) ─────────> cocone A 𝒰
+           ╲       ╱
+            ╲     ╱
+             ╲   ╱
               ∨ ∨
          descent-data A .
 ```

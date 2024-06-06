@@ -42,11 +42,11 @@ In other words, given a diagram
 
 ```text
                 Σ (x : A) (B x)
-                      |
-                      | pr1
-                      |
+                      │
+                      │ pr1
+                      │
                       ∨
-  J ------> I ------> A         ,
+  J ──────> I ──────> A         ,
        f         a
 ```
 
@@ -105,12 +105,12 @@ different codomains, namely `lift-family-of-elements B (a ∘ f)` and
 
 ```text
                               precomp-lift B f a
-  lift-family-of-elements B a ------------------> lift-family-of-elements B (a ∘ f)
-                      \                                /
-                         \                          /
-                            \                    /
-           precomp-lift B g a  \              / tr (lift-family-of-elements B) (htpy-precomp H A a)
-                                  \        /
+  lift-family-of-elements B a ──────────────────> lift-family-of-elements B (a ∘ f)
+                      ╲                                ╱
+                         ╲                          ╱
+                            ╲                    ╱
+           precomp-lift B g a  ╲              ╱ tr (lift-family-of-elements B) (htpy-precomp H A a)
+                                  ╲        ╱
                                      ∨  ∨
                        lift-family-of-elements B (a ∘ g)
 ```
@@ -210,13 +210,13 @@ We have a [commuting square](foundation.commuting-squares-of-maps.md) like this:
 
 ```text
                                      precomp-lifted-family f
-  Σ (a : I → A) ((i : I) → B (a i)) ------------------------> Σ (a : J → A) ((j : J) → B (a j))
-                  |                                                           |
-                  |                                                           |
-                  | map-inv-distributive-Π-Σ    ⇗    map-inv-distributive-Π-Σ |
-                  |                                                           |
+  Σ (a : I → A) ((i : I) → B (a i)) ────────────────────────> Σ (a : J → A) ((j : J) → B (a j))
+                  │                                                           │
+                  │                                                           │
+                  │ map-inv-distributive-Π-Σ    ⇗    map-inv-distributive-Π-Σ │
+                  │                                                           │
                   ∨                                                           ∨
-              I → Σ A B ------------------------------------------------> J → Σ A B ,
+              I → Σ A B ────────────────────────────────────────────────> J → Σ A B ,
                                                - ∘ f
 ```
 
@@ -281,17 +281,17 @@ and `precomp-lifted-family-of-elements g`. One factors through
 
 ```text
                                      precomp-lifted-family g
-                               -----------------------------------
-                             /                                     \
-                           /     ⇗ htpy-precomp-lifted-family H      \
-                         /                                             ∨
-  Σ (a : I → A) ((i : I) → B (a i)) ------------------------> Σ (a : J → A) ((j : J) → B (a j))
-                  |                  precomp-lifted-family f                  |
-                  |                                                           |
-                  |                             ⇗                             |
-                  | map-inv-distributive-Π-Σ         map-inv-distributive-Π-Σ |
+                               ───────────────────────────────────
+                             ╱                                     ╲
+                           ╱     ⇗ htpy-precomp-lifted-family H      ╲
+                         ╱                                             ∨
+  Σ (a : I → A) ((i : I) → B (a i)) ────────────────────────> Σ (a : J → A) ((j : J) → B (a j))
+                  │                  precomp-lifted-family f                  │
+                  │                                                           │
+                  │                             ⇗                             │
+                  │ map-inv-distributive-Π-Σ         map-inv-distributive-Π-Σ │
                   ∨                                                           ∨
-              I → Σ A B ------------------------------------------------> J → Σ A B ,
+              I → Σ A B ────────────────────────────────────────────────> J → Σ A B ,
                                               - ∘ f
 ```
 
@@ -299,17 +299,17 @@ while the other factors through `- ∘ g`:
 
 ```text
                                      precomp-lifted-family g
-  Σ (a : I → A) ((i : I) → B (a i)) ------------------------> Σ (a : J → A) ((j : J) → B (a j))
-                  |                                                           |
-                  |                                                           |
+  Σ (a : I → A) ((i : I) → B (a i)) ────────────────────────> Σ (a : J → A) ((j : J) → B (a j))
+                  │                                                           │
+                  │                                                           │
                   | map-inv-distributive-Π-Σ    ⇗    map-inv-distributive-Π-Σ |
-                  |                                                           |
+                  │                                                           │
                   ∨                           - ∘ g                           ∨
-              I → Σ A B ------------------------------------------------> J → Σ A B .
-                        \                                               >
-                          \             ⇗  htpy-precomp H             /
-                            \                                       /
-                              -------------------------------------
+              I → Σ A B ────────────────────────────────────────────────> J → Σ A B .
+                        ╲                                               >
+                          ╲             ⇗  htpy-precomp H             ╱
+                            ╲                                       ╱
+                              ─────────────────────────────────────
                                               - ∘ f
 ```
 

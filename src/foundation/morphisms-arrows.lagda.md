@@ -35,11 +35,11 @@ the square
 
 ```text
         i
-    A -----> X
-    |        |
-  f |        | g
+    A ─────> X
+    │        │
+  f │        │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 
@@ -82,11 +82,11 @@ The identity morphism of arrows is defined as
 
 ```text
         id
-    A -----> A
-    |        |
-  f |        | f
+    A ─────> A
+    │        │
+  f │        │ f
     ∨        ∨
-    B -----> B
+    B ─────> B
         id
 ```
 
@@ -109,11 +109,11 @@ Consider a commuting diagram of the form
 
 ```text
         α₀       β₀
-    A -----> X -----> U
-    |        |        |
-  f |   α  g |   β    | h
+    A ─────> X ─────> U
+    │        │        │
+  f │   α  g │   β    │ h
     ∨        ∨        ∨
-    B -----> Y -----> V.
+    B ─────> Y ─────> V.
         α₁       β₁
 ```
 
@@ -123,11 +123,11 @@ maps. The {{#concept "composition" Disambiguation="morphism of arrows"}} of
 
 ```text
         β₀ ∘ α₀
-    A ----------> U
-    |             |
-  f |    α □ β    | h
+    A ──────────> U
+    │             │
+  f │    α □ β    │ h
     ∨             ∨
-    B ----------> V.
+    B ──────────> V.
         β₁ ∘ α₁
 ```
 
@@ -182,11 +182,11 @@ morphism of arrows
 
 ```text
         i
-    A -----> X
-    |        |
-  f |        | g
+    A ─────> X
+    │        │
+  f │        │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 
@@ -194,11 +194,11 @@ is the morphism of arrows
 
 ```text
         f
-    A -----> B
-    |        |
-  i |        | j
+    A ─────> B
+    │        │
+  i │        │ j
     ∨        ∨
-    X -----> Y.
+    X ─────> Y.
         g
 ```
 

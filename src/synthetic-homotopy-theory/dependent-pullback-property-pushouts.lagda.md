@@ -87,11 +87,11 @@ Consider a [cocone](synthetic-homotopy-theory.cocones-under-spans.md)
 
 ```text
         g
-    S -----> B
-    |        |
-  f |        | j
+    S ─────> B
+    │        │
+  f │        │ j
     ∨        ∨
-    A -----> X  .
+    A ─────> X  .
         i
 ```
 
@@ -147,31 +147,31 @@ allow us to construct the following
 
 ```text
                                 Σ (h : X → X) ((x : X) → P (h x))
-                                       /        |        \
-                                     /          |          \
-                                   /            |            \
-                                 /              |              \
-                               /                |                \
-                             /                  |                  \
-                           /                    |                    \
+                                       ╱        │        ╲
+                                     ╱          │          ╲
+                                   ╱            │            ╲
+                                 ╱              │              ╲
+                               ╱                │                ╲
+                             ╱                  │                  ╲
+                           ╱                    │                    ╲
                          ∨                      ∨                      ∨
   Σ (h : A → X) ((a : A) → P (h a))    X → Σ (x : X) (P x)    Σ (h : B → X) ((b : B) → P (h b))
-                         |\             /               \             /|
-                         |  \         /                   \         /  |
-                         |    \     /                       \     /    |
-                         |      \ /                           \ /      |
-                         |      / \                           / \      |
-                         |    /     \                       /     \    |
-                         |  /         \                   /         \  |
+                         │╲             ╱               ╲             ╱│
+                         │  ╲         ╱                   ╲         ╱  │
+                         │    ╲     ╱                       ╲     ╱    │
+                         │      ╲ ╱                           ╲ ╱      │
+                         │      ╱ ╲                           ╱ ╲      │
+                         │    ╱     ╲                       ╱     ╲    │
+                         │  ╱         ╲                   ╱         ╲  │
                          ∨∨             ∨               ∨             ∨∨
          A → Σ (x : X) (P x)    Σ (h : S → X) ((s : S) → P (h s))    B → Σ (x : X) (P x)
-                           \                    |                    /
-                             \                  |                  /
-                               \                |                /
-                                 \              |              /
-                                   \            |            /
-                                     \          |          /
-                                       \        |        /
+                           ╲                    │                    ╱
+                             ╲                  │                  ╱
+                               ╲                │                ╱
+                                 ╲              │              ╱
+                                   ╲            │            ╱
+                                     ╲          │          ╱
+                                       ╲        │        ╱
                                          ∨      ∨      ∨
                                        S → Σ (x : X) (P x) .
 ```
@@ -191,13 +191,13 @@ square, which implies that we get a family of pullback squares of the fibers,
 i.e. for every `h : X → X` we have a pullback
 
 ```text
-    (x : X) → P (h x) ---------> (b : B) → P (h (j b))
-            | ⌟                           |
-            |                             |
-            |                             |
-            |                             |
+    (x : X) → P (h x) ─────────> (b : B) → P (h (j b))
+            │ ⌟                           │
+            │                             │
+            │                             │
+            │                             │
             ∨                             ∨
-  (a : A) → P (h (i a)) -----> (s : S) → P (h (j (g s))) ,
+  (a : A) → P (h (i a)) ─────> (s : S) → P (h (j (g s))) ,
 ```
 
 and instantiating for `id : X → X` gives us exactly a proof of the dependent

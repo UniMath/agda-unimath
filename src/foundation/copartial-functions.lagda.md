@@ -39,8 +39,8 @@ described as a [morphism of arrows](foundation.morphisms-arrows.md)
 
 ```text
      A     B   1
-     |     |   |
-  id |  ⇒  | □ | T
+     │     │   │
+  id │  ⇒  │ □ │ T
      ∨     ∨   ∨
      A     1  Prop
 ```
@@ -54,10 +54,10 @@ functions can be defined by
 
 ```text
                      copartial-element (copartial-element C)
-                            ∧                 |
-   map-copartial-element g /                  | join-copartial-element
-                          /                   ∨
-  A ----> copartial-element B       copartial-element C
+                            ∧                 │
+   map-copartial-element g ╱                  │ join-copartial-element
+                          ╱                   ∨
+  A ────> copartial-element B       copartial-element C
       f
 ```
 

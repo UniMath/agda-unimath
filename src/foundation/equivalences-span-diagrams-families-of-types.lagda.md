@@ -32,11 +32,11 @@ types indexed by a type `I` to a span `(B , t)` indexed by `I` consists of a
 
 ```text
          e
-     S -----> T
-     |        |
-  fᵢ |        | gᵢ
+     S ─────> T
+     │        │
+  fᵢ │        │ gᵢ
      ∨        ∨
-     Aᵢ ----> Bᵢ
+     Aᵢ ────> Bᵢ
          h
 ```
 

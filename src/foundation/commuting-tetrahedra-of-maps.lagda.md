@@ -22,13 +22,13 @@ A {{#concept "commuting tetrahedron of maps" Agda=coherence-tetrahedron-maps}}
 is a commuting diagram of the form
 
 ```text
-  A ----------> B
-  |  \       ∧  |
-  |    \   /    |
-  |      /      |
-  |    /   \    |
-  ∨  /       ∨  ∨
-  X ----------> Y.
+  A ──────────> B
+  │  ╲       ∧  │
+  │    ╲   ╱    │
+  │      ╱      │
+  │    ╱   ╲    │
+  ∨  ╱       ∨  ∨
+  X ──────────> Y.
 ```
 
 ## Definition

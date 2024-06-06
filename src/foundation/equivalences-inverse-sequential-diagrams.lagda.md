@@ -35,11 +35,11 @@ An
 `A ≃ B` is a commuting diagram of the form
 
 ```text
-  ⋯ ----> Aₙ₊₁ ----> Aₙ ----> ⋯ ----> A₁ ----> A₀
-           |         |       |       |        |
-  ⋯        |         |       ⋯       |        |
+  ⋯ ────> Aₙ₊₁ ────> Aₙ ────> ⋯ ────> A₁ ────> A₀
+           │         │       │       │        │
+  ⋯        │         │       ⋯       │        │
            ∨         ∨       ∨       ∨        ∨
-  ⋯ ----> Bₙ₊₁ ----> Bₙ ----> ⋯ ----> B₁ ----> B₀.
+  ⋯ ────> Bₙ₊₁ ────> Bₙ ────> ⋯ ────> B₁ ────> B₀.
 ```
 
 where every vertical map is an [equivalence](foundation-core.equivalences.md).

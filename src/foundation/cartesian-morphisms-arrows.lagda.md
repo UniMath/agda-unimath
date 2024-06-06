@@ -50,11 +50,11 @@ if the [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
         i
-    A -----> X
-    |        |
-  f |   h    | g
+    A ─────> X
+    │        │
+  f │   h    │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 
@@ -181,11 +181,11 @@ of a cartesian morphism of arrows
 
 ```text
         i
-    A -----> X
-    | ⌟      |
-  f |        | g
+    A ─────> X
+    │ ⌟      │
+  f │        │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 
@@ -193,11 +193,11 @@ is the cartesian morphism of arrows
 
 ```text
         f
-    A -----> B
-    | ⌟      |
-  i |        | j
+    A ─────> B
+    │ ⌟      │
+  i │        │ j
     ∨        ∨
-    X -----> Y.
+    X ─────> Y.
         g
 ```
 
@@ -711,11 +711,11 @@ A morphism of arrows
 
 ```text
          i
-    A ------> X
-    |         |
-  f |         | g
+    A ──────> X
+    │         │
+  f │         │ g
     ∨         ∨
-    B ------> Y
+    B ──────> Y
          j
 ```
 
@@ -723,11 +723,11 @@ is cartesian if and only if either of the folded morphisms
 
 ```text
           (f , i)                       (f , i)
-        A ------> B × X               A ------> B × X
-        |           |                 |           |
-  g ∘ i |           | j × g     j ∘ f |           | j × g
+        A ──────> B × X               A ──────> B × X
+        │           │                 │           │
+  g ∘ i │           │ j × g     j ∘ f │           │ j × g
         ∨           ∨                 ∨           ∨
-        Y ------> Y × Y               Y ------> Y × Y
+        Y ──────> Y × Y               Y ──────> Y × Y
              Δ                             Δ
 ```
 
@@ -834,11 +834,11 @@ module _
 Suppose given a cospan of morphisms of arrows
 
 ```text
-    A ------> C <------ B
-    |         |       ⌞ |
-  f |    α    h    β    | g
+    A ──────> C <────── B
+    │         │       ⌞ │
+  f │    α    h    β    │ g
     ∨         ∨         ∨
-    A' -----> C' <----- B'
+    A' ─────> C' <───── B'
 ```
 
 where `β` is cartesian. Moreover, suppose we have a map `i : A' → B'` from the
@@ -847,9 +847,9 @@ triangle
 
 ```text
          i
-     A' ---> B'
-      \     /
-       \   /
+     A' ───> B'
+      ╲     ╱
+       ╲   ╱
         ∨ ∨
          C'
 ```

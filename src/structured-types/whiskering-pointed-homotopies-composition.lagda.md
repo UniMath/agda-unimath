@@ -40,8 +40,8 @@ from either a pointed homotopy on the left or on the right of the composition.
 
   ```text
         f
-      ----->     h
-    A -----> B -----> C.
+      ─────>     h
+    A ─────> B ─────> C.
         g
   ```
 
@@ -59,8 +59,8 @@ from either a pointed homotopy on the left or on the right of the composition.
 
   ```text
                  g
-        f      ----->
-    A -----> B -----> C.
+        f      ─────>
+    A ─────> B ─────> C.
                  h
   ```
 
@@ -95,13 +95,13 @@ For the coherence, we have to show that the triangle
 
 ```text
             ap h₀ (H₀ *)
-  h₀ (f₀ *) ------------> h₀ (g₀ *)
-           \             /
-   ap h₀ f₁ \           / ap h₀ g₁
+  h₀ (f₀ *) ────────────> h₀ (g₀ *)
+           ╲             ╱
+   ap h₀ f₁ ╲           ╱ ap h₀ g₁
              ∨         ∨
            h₀ *       h₀ *
-               \     /
-             h₁ \   / h₁
+               ╲     ╱
+             h₁ ╲   ╱ h₁
                  ∨ ∨
                   ∗
 ```
@@ -112,10 +112,10 @@ with respect to concatenation it suffices to show that the triangle
 
 ```text
            ap h₀ (H₀ *)
-  h₀ (f₀ *) ---------> h₀ (g₀ *)
-           \          /
-   ap h₀ f₁ \        / ap h₀ g₁
-             \      /
+  h₀ (f₀ *) ─────────> h₀ (g₀ *)
+           ╲          ╱
+   ap h₀ f₁ ╲        ╱ ap h₀ g₁
+             ╲      ╱
               ∨    ∨
                h₀ *
 ```
@@ -125,10 +125,10 @@ follows from the fact that the triangle
 
 ```text
         H₀ *
-  f₀ * ------> g₀ *
-      \       /
-    f₁ \     / g₁
-        \   /
+  f₀ * ──────> g₀ *
+      ╲       ╱
+    f₁ ╲     ╱ g₁
+        ╲   ╱
          ∨ ∨
           *
 ```
@@ -194,13 +194,13 @@ Then we have to show that the outer triangle in the diagram
 
 ```text
               H₀ (f₀ *)
-  g₀ (f₀ *) ------------> h₀ (f₀ *)
-           \             /
-   ap g₀ f₁ \           / ap h₀ f₁
+  g₀ (f₀ *) ────────────> h₀ (f₀ *)
+           ╲             ╱
+   ap g₀ f₁ ╲           ╱ ap h₀ f₁
              ∨  H₀ *   ∨
-           g₀ * ----> h₀ *
-               \     /
-             g₁ \   / h₁
+           g₀ * ────> h₀ *
+               ╲     ╱
+             g₁ ╲   ╱ h₁
                  ∨ ∨
                   ∗
 ```
@@ -280,10 +280,10 @@ triangle
 
 ```text
                    H₁
-  ap g₀ f₁ ∙ g₁ ------> refl ∙ (ap g₀ f₁ ∙ g₁)
-               \       /
-           refl \     / right-whisker-concat refl (ap g₀ f₁ ∙ g₁) ≐ refl
-                 \   /
+  ap g₀ f₁ ∙ g₁ ──────> refl ∙ (ap g₀ f₁ ∙ g₁)
+               ╲       ╱
+           refl ╲     ╱ right-whisker-concat refl (ap g₀ f₁ ∙ g₁) ≐ refl
+                 ╲   ╱
                   ∨ ∨
        refl ∙ (ap g₀ f₁ ∙ g₁)
 ```
@@ -293,13 +293,13 @@ square and the lower triangle in the diagram
 
 ```text
                 refl
-  g₀ (f₀ *) ------------> g₀ (f₀ *)
-           \             /
-   ap g₀ f₁ \           / ap g₀ f₁
+  g₀ (f₀ *) ────────────> g₀ (f₀ *)
+           ╲             ╱
+   ap g₀ f₁ ╲           ╱ ap g₀ f₁
              ∨  refl   ∨
-           g₀ * ----> g₀ *
-               \     /
-             g₁ \   / g₁
+           g₀ * ────> g₀ *
+               ╲     ╱
+             g₁ ╲   ╱ g₁
                  ∨ ∨
                   ∗.
 ```

@@ -43,24 +43,24 @@ states that pushouts commute with
 given a pushout square
 
 ```text
-      g
-  S -----> B
-  |        |
- f|        | j
-  ∨      ⌜ ∨
-  A -----> X
-      i
+        g
+    S ─────> B
+    │        │
+  f │        │ j
+    ∨      ⌜ ∨
+    A ─────> X
+        i
 ```
 
 with homotopy `H : i ∘ f ~ j ∘ g`, and for any type family `P` over `X`, the
 commuting square
 
 ```text
-  Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
-           |                                                 |
-           |                                                 |
+  Σ (s : S), P(if(s)) ───> Σ (s : S), P(jg(s)) ───> Σ (b : B), P(j(b))
+           │                                                 │
+           │                                                 │
            ∨                                               ⌜ ∨
-  Σ (a : A), P(i(a)) -----------------------------> Σ (x : X), P(x)
+  Σ (a : A), P(i(a)) ─────────────────────────────> Σ (x : X), P(x)
 ```
 
 is again a pushout square.
@@ -342,11 +342,11 @@ The other parts of the cube are defined naturally, and come from the following
 map of spans:
 
 ```text
-  Σ (a : A) (PA a) <------- Σ (s : S) (PA (f s)) -----> Σ (b : B) (PB b)
-         |                           |                         |
-         |                           |                         |
+  Σ (a : A) (PA a) <─────── Σ (s : S) (PA (f s)) ─────> Σ (b : B) (PB b)
+         │                           │                         │
+         │                           │                         │
          ∨                           ∨                         ∨
-Σ (a : A) (P (i a)) <---- Σ (s : S) (P (i (f s))) ---> Σ (b : B) (P (j b))
+Σ (a : A) (P (i a)) <──── Σ (s : S) (P (i (f s))) ───> Σ (b : B) (P (j b))
 ```
 
 where the vertical maps are equivalences given fiberwise by the equivalence of

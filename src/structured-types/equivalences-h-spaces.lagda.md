@@ -49,15 +49,15 @@ that the unit laws are preserved:
 
   ```text
                               α * x'
-                  e (μ * x') -------> μ (e *) (e x')
-                        \                 /
-                         \               / ap (μ - (e x')) e₁
-                          \             /
-                           \           ∨
-    ap e (left-unit-law x') \       μ * (e x')
-                             \       /
-                              \     / left-unit-law (e x')
-                               \   /
+                  e (μ * x') ───────> μ (e *) (e x')
+                        ╲                 ╱
+                         ╲               ╱ ap (μ - (e x')) e₁
+                          ╲             ╱
+                           ╲           ∨
+    ap e (left-unit-law x') ╲       μ * (e x')
+                             ╲       ╱
+                              ╲     ╱ left-unit-law (e x')
+                               ╲   ╱
                                 ∨ ∨
                                 e x'
   ```
@@ -68,15 +68,15 @@ that the unit laws are preserved:
 
   ```text
                               α x *
-                  e (μ x *) --------> μ (e x) (e *)
-                        \                 /
-                         \               / ap (μ (e x) -) e₁
-                          \             /
-                           \           ∨
-    ap e (right-unit-law x) \       μ (e x) *
-                             \       /
-                              \     / right-unit-law (e x)
-                               \   /
+                  e (μ x *) ────────> μ (e x) (e *)
+                        ╲                 ╱
+                         ╲               ╱ ap (μ (e x) -) e₁
+                          ╲             ╱
+                           ╲           ∨
+    ap e (right-unit-law x) ╲       μ (e x) *
+                             ╲       ╱
+                              ╲     ╱ right-unit-law (e x)
+                               ╲   ╱
                                 ∨ ∨
                                 e x
   ```
@@ -87,11 +87,11 @@ that the unit laws are preserved:
 
   ```text
                                                      α₁
-     α₀ * * ∙ (ap (μ - (e *)) e₁ ∙ left-unit-law *) ---> ap e (left-unit-law *)
-                       |                                         |
-         (α₀ * *) ·l β |                                         |
+     α₀ * * ∙ (ap (μ - (e *)) e₁ ∙ left-unit-law *) ───> ap e (left-unit-law *)
+                       │                                         │
+         (α₀ * *) ·l β │                                         │
                        ∨                                         ∨
-    α₀ * * ∙ (ap (μ (e *) -) e₁ ∙ right-unit-law *) ---> ap e (right-unit-law *)
+    α₀ * * ∙ (ap (μ (e *) -) e₁ ∙ right-unit-law *) ───> ap e (right-unit-law *)
                                                      α₂
   ```
 
@@ -100,11 +100,11 @@ that the unit laws are preserved:
 
   ```text
                                ap (μ (e *)) e₁
-                μ (e *) (e *) -----------------> μ (e *) *
-                      |                               |
-    ap (μ - (e *)) e₁ |                 β             | right-unit-law (e *)
+                μ (e *) (e *) ─────────────────> μ (e *) *
+                      │                               │
+    ap (μ - (e *)) e₁ │                 β             │ right-unit-law (e *)
                       ∨                               ∨
-                   μ * (e *) ----------------------> e *
+                   μ * (e *) ──────────────────────> e *
                                left-unit-law (e *)
   ```
 
@@ -116,15 +116,15 @@ that the unit laws are preserved:
 
   ```text
                                ap (μ (e *)) e₁
-                μ (e *) (e *) -----------------> μ (e *) * --------> e *
-                      |                               |               |
-    ap (μ - (e *)) e₁ |                 ap (μ - *) e₁ |               |
+                μ (e *) (e *) ─────────────────> μ (e *) * ────────> e *
+                      │                               │               │
+    ap (μ - (e *)) e₁ │                 ap (μ - *) e₁ │               │
                       ∨                               ∨               ∨
-                   μ * (e *) ---------------------> μ * * ----------> *
-                      |            ap (μ *) e₁        |               |
-                      |                               |  coh ·r refl  | refl
+                   μ * (e *) ─────────────────────> μ * * ──────────> *
+                      │            ap (μ *) e₁        │               │
+                      │                               │  coh ·r refl  │ refl
                       ∨                               ∨               ∨
-                     e * ---------------------------> * ------------> *
+                     e * ───────────────────────────> * ────────────> *
                                        e₁                  refl
   ```
 

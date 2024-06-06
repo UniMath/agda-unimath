@@ -47,15 +47,15 @@ that the unit laws are preserved:
 
   ```text
                               α * x'
-                  f (μ * x') -------> μ (f *) (f x')
-                        \                 /
-                         \               / ap (μ - (f x')) f₁
-                          \             /
-                           \           ∨
-    ap f (left-unit-law x') \       μ * (f x')
-                             \       /
-                              \     / left-unit-law (f x')
-                               \   /
+                  f (μ * x') ───────> μ (f *) (f x')
+                        ╲                 ╱
+                         ╲               ╱ ap (μ - (f x')) f₁
+                          ╲             ╱
+                           ╲           ∨
+    ap f (left-unit-law x') ╲       μ * (f x')
+                             ╲       ╱
+                              ╲     ╱ left-unit-law (f x')
+                               ╲   ╱
                                 ∨ ∨
                                 f x'
   ```
@@ -66,15 +66,15 @@ that the unit laws are preserved:
 
   ```text
                               α x *
-                  f (μ x *) --------> μ (f x) (f *)
-                        \                 /
-                         \               / ap (μ (f x) -) f₁
-                          \             /
-                           \           ∨
-    ap f (right-unit-law x) \       μ (f x) *
-                             \       /
-                              \     / right-unit-law (f x)
-                               \   /
+                  f (μ x *) ────────> μ (f x) (f *)
+                        ╲                 ╱
+                         ╲               ╱ ap (μ (f x) -) f₁
+                          ╲             ╱
+                           ╲           ∨
+    ap f (right-unit-law x) ╲       μ (f x) *
+                             ╲       ╱
+                              ╲     ╱ right-unit-law (f x)
+                               ╲   ╱
                                 ∨ ∨
                                 f x
   ```
@@ -85,11 +85,11 @@ that the unit laws are preserved:
 
   ```text
                                                      α₁
-     α₀ * * ∙ (ap (μ - (f *)) f₁ ∙ left-unit-law *) ---> ap f (left-unit-law *)
-                       |                                         |
-         (α₀ * *) ·l β |                                         |
+     α₀ * * ∙ (ap (μ - (f *)) f₁ ∙ left-unit-law *) ───> ap f (left-unit-law *)
+                       │                                         │
+         (α₀ * *) ·l β │                                         │
                        ∨                                         ∨
-    α₀ * * ∙ (ap (μ (f *) -) f₁ ∙ right-unit-law *) ---> ap f (right-unit-law *)
+    α₀ * * ∙ (ap (μ (f *) -) f₁ ∙ right-unit-law *) ───> ap f (right-unit-law *)
                                                      α₂
   ```
 
@@ -98,11 +98,11 @@ that the unit laws are preserved:
 
   ```text
                                ap (μ (f *)) f₁
-                μ (f *) (f *) -----------------> μ (f *) *
-                      |                               |
-    ap (μ - (f *)) f₁ |                 β             | right-unit-law (f *)
+                μ (f *) (f *) ─────────────────> μ (f *) *
+                      │                               │
+    ap (μ - (f *)) f₁ │                 β             │ right-unit-law (f *)
                       ∨                               ∨
-                   μ * (f *) ----------------------> f *
+                   μ * (f *) ──────────────────────> f *
                                left-unit-law (f *)
   ```
 
@@ -114,15 +114,15 @@ that the unit laws are preserved:
 
   ```text
                                ap (μ (f *)) f₁
-                μ (f *) (f *) -----------------> μ (f *) * --------> f *
-                      |                               |               |
-    ap (μ - (f *)) f₁ |                 ap (μ - *) f₁ |               |
+                μ (f *) (f *) ─────────────────> μ (f *) * ────────> f *
+                      │                               │               │
+    ap (μ - (f *)) f₁ │                 ap (μ - *) f₁ │               │
                       ∨                               ∨               ∨
-                   μ * (f *) ---------------------> μ * * ----------> *
-                      |            ap (μ *) f₁        |               |
-                      |                               |  coh ·r refl  | refl
+                   μ * (f *) ─────────────────────> μ * * ──────────> *
+                      │            ap (μ *) f₁        │               │
+                      │                               │  coh ·r refl  │ refl
                       ∨                               ∨               ∨
-                     f * ---------------------------> * ------------> *
+                     f * ───────────────────────────> * ────────────> *
                                        f₁                  refl
   ```
 

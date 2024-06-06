@@ -23,9 +23,9 @@ A triangle of [homotopies](foundation-core.homotopies.md) of dependent functions
 
 ```text
       top
-    f ----> g
-     \     /
- left \   / right
+    f ────> g
+     ╲     ╱
+ left ╲   ╱ right
        ∨ ∨
         h
 ```
@@ -61,9 +61,9 @@ Consider a commuting triangle of homotopies
 
 ```text
         top
-     f ----> g
-      \     /
-  left \   / right
+     f ────> g
+      ╲     ╱
+  left ╲   ╱ right
         ∨ ∨
          h
 ```
@@ -73,10 +73,10 @@ dependent function `i : (x : A) → B x`. Then the triangle of homotopies
 
 ```text
            H ∙h top
-         i --------> g
-           \       /
-  H ∙h left \     / right
-             \   /
+         i ────────> g
+           ╲       ╱
+  H ∙h left ╲     ╱ right
+             ╲   ╱
               ∨ ∨
                h
 ```
@@ -108,9 +108,9 @@ Consider a commuting triangle of homotopies
 
 ```text
         top
-     f ----> g
-      \     /
-  left \   / right
+     f ────> g
+      ╲     ╱
+  left ╲   ╱ right
         ∨ ∨
          h
 ```
@@ -120,10 +120,10 @@ dependent function `i : (x : A) → B x`. Then the triangle of homotopies
 
 ```text
               top
-         f --------> g
-           \       /
-  left ∙h H \     / right ∙h H
-             \   /
+         f ────────> g
+           ╲       ╱
+  left ∙h H ╲     ╱ right ∙h H
+             ╲   ╱
               ∨ ∨
                i
 ```
@@ -156,9 +156,9 @@ Consider a commuting triangle of homotopies
 
 ```text
         top
-     f ----> g
-      \     /
-  left \   / right
+     f ────> g
+      ╲     ╱
+  left ╲   ╱ right
         ∨ ∨
          h
 ```
@@ -168,10 +168,10 @@ where `f`, `g`, and `h` are maps `A → B`. Furthermore, consider a map
 
 ```text
            i ·l top
-     i ∘ f --------> i ∘ g
-           \       /
-  i ·l left \     / i ·l right
-             \   /
+     i ∘ f ────────> i ∘ g
+           ╲       ╱
+  i ·l left ╲     ╱ i ·l right
+             ╲   ╱
               ∨ ∨
              i ∘ h.
 ```
@@ -198,9 +198,9 @@ Consider a commuting triangle of homotopies
 
 ```text
         top
-     f ----> g
-      \     /
-  left \   / right
+     f ────> g
+      ╲     ╱
+  left ╲   ╱ right
         ∨ ∨
          h
 ```
@@ -210,10 +210,10 @@ where `f`, `g`, and `h` are maps `A → B`. Furthermore, consider a map
 
 ```text
            top ·r i
-     f ∘ i --------> g ∘ i
-           \       /
-  left ·r i \     / right ·r i
-             \   /
+     f ∘ i ────────> g ∘ i
+           ╲       ╱
+  left ·r i ╲     ╱ right ·r i
+             ╲   ╱
               ∨ ∨
              h ∘ i.
 ```

@@ -136,8 +136,8 @@ a dependent map, according to the diagram
 
 ```text
      g
-   ----->     e              h
- A -----> B -----> (x : X) -----> (P x)
+   ─────>     e              h
+ A ─────> B ─────> (x : X) ─────> (P x)
      f
 ```
 

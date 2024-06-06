@@ -33,9 +33,9 @@ An {{#concept "equivalence of cospans" Agda=equiv-cospan}} from
 
 ```text
       e              e
-  X ----> Y      X ----> Y
-   \     /        \     /
-  f \   / h      g \   / k
+  X ────> Y      X ────> Y
+   ╲     ╱        ╲     ╱
+  f ╲   ╱ h      g ╲   ╱ k
      ∨ ∨            ∨ ∨
       A              B
 ```

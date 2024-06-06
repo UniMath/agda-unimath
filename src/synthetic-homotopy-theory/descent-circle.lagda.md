@@ -132,13 +132,13 @@ equipped with descent data `(X, e)`, and a proof of their equivalence. This can
 be described as a diagram
 
 ```text
-      α
-  X -----> A base
-  |         |
- e|         | tr A loop
-  ∨         ∨
-  X -----> A base
-      α
+        α
+    X ─────> A base
+    │         │
+  e │         │ tr A loop
+    ∨         ∨
+    X ─────> A base
+        α
 ```
 
 Ideally, every section characterizing descent data of a particular type family

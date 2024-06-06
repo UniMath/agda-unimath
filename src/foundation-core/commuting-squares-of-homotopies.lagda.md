@@ -23,11 +23,11 @@ A square of [homotopies](foundation-core.homotopies.md)
 
 ```text
           top
-      f ------> g
-      |         |
- left |         | right
+      f ──────> g
+      │         │
+ left │         │ right
       ∨         ∨
-      h ------> i
+      h ──────> i
         bottom
 ```
 
@@ -63,11 +63,11 @@ are commuting squares of homotopies of the form
 
 ```text
        refl-htpy
-    f ----------> f
-    |             |
-  H |             | H
+    f ──────────> f
+    │             │
+  H │             │ H
     ∨             ∨
-    g ----------> g.
+    g ──────────> g.
        refl-htpy
 ```
 
@@ -89,11 +89,11 @@ are commuting squares of homotopies of the form
 
 ```text
                 H
-            f -----> g
-            |        |
-  refl-htpy |        | refl-htpy
+            f ─────> g
+            │        │
+  refl-htpy │        │ refl-htpy
             ∨        ∨
-            f -----> g.
+            f ─────> g.
                 H
 ```
 
@@ -116,11 +116,11 @@ Given a commuting square of homotopies
 
 ```text
            top
-       f -------> g
-       |          |
-  left |          | right
+       f ───────> g
+       │          │
+  left │          │ right
        ∨          ∨
-       h -------> i,
+       h ───────> i,
           bottom
 ```
 
@@ -128,11 +128,11 @@ the square of homotopies
 
 ```text
               top⁻¹
-        g ------------> f
-        |               |
-  right |               | left
+        g ────────────> f
+        │               │
+  right │               │ left
         ∨               ∨
-        i ------------> h
+        i ────────────> h
              bottom⁻¹
 ```
 
@@ -162,11 +162,11 @@ Given a commuting square of homotopies
 
 ```text
            top
-       f -------> g
-       |          |
-  left |          | right
+       f ───────> g
+       │          │
+  left │          │ right
        ∨          ∨
-       h -------> i,
+       h ───────> i,
           bottom
 ```
 
@@ -174,11 +174,11 @@ the square of homotopies
 
 ```text
             bottom
-         h -------> i
-         |          |
-  left⁻¹ |          | right⁻¹
+         h ───────> i
+         │          │
+  left⁻¹ │          │ right⁻¹
          ∨          ∨
-         f -------> g
+         f ───────> g
              top
 ```
 
@@ -208,11 +208,11 @@ Given a commuting square of homotopies
 
 ```text
            top
-       f -------> g
-       |          |
-  left |          | right
+       f ───────> g
+       │          │
+  left │          │ right
        ∨          ∨
-       h -------> i
+       h ───────> i
           bottom
 ```
 
@@ -221,11 +221,11 @@ square of homotopies
 
 ```text
                  F ·l top
-           f f -----------> f g
-            |                |
-  F ·l left |                | F ·l right
+           f f ───────────> f g
+            │                │
+  F ·l left │                │ F ·l right
             ∨                ∨
-            h -------------> i
+            h ─────────────> i
                F ·l bottom
 ```
 
@@ -284,11 +284,11 @@ sides with another homotopy, as for example in the diagram below:
 
 ```text
              top
-       a ---------> b
-       |           | |
-  left |     right |~| right'
+       a ─────────> b
+       │           │ │
+  left │     right │~│ right'
        ∨           ∨ ∨
-       c ---------> d.
+       c ─────────> d.
            bottom
 ```
 
@@ -305,12 +305,12 @@ Consider a commuting diagram of homotopies
 
 ```text
            top'
-         ------->
-       f -------> g
-       |   top    |
-  left |          | right
+         ───────>
+       f ───────> g
+       │   top    │
+  left │          │ right
        ∨          ∨
-       h -------> i.
+       h ───────> i.
           bottom
 ```
 
@@ -318,11 +318,11 @@ with a homotopy `top ~ top'`. Then we get maps back and forth
 
 ```text
            top                             top'
-       f -------> g                    f -------> g
-       |          |                    |          |
-  left |          | right    ↔    left |          | right
+       f ───────> g                    f ───────> g
+       │          │                    │          │
+  left │          │ right    ↔    left │          │ right
        ∨          ∨                    ∨          ∨
-       h -------> i                    h -------> i.
+       h ───────> i                    h ───────> i.
           bottom                          bottom
 ```
 
@@ -367,11 +367,11 @@ Consider a commuting diagram of homotopies
 
 ```text
               top
-         f -------> g
-        | |         |
-  left' | | left    | right
+         f ───────> g
+        │ │         │
+  left' │ │ left    │ right
         ∨ ∨         ∨
-         h -------> i.
+         h ───────> i.
             bottom
 ```
 
@@ -379,11 +379,11 @@ with a homotopy `left ~ left'`. Then we get maps back and forth
 
 ```text
            top                              top
-       f -------> g                     f -------> g
-       |          |                     |          |
-  left |          | right    ↔    left' |          | right
+       f ───────> g                     f ───────> g
+       │          │                     │          │
+  left │          │ right    ↔    left' │          │ right
        ∨          ∨                     ∨          ∨
-       h -------> i                     h -------> i.
+       h ───────> i                     h ───────> i.
           bottom                           bottom
 ```
 
@@ -428,11 +428,11 @@ Consider a commuting diagram of homotopies
 
 ```text
             top
-       f -------> g
-       |         | |
-  left |   right | | right'
+       f ───────> g
+       │         │ │
+  left │   right │ │ right'
        ∨         ∨ ∨
-       h -------> i.
+       h ───────> i.
           bottom
 ```
 
@@ -440,11 +440,11 @@ with a homotopy `right ~ right'`. Then we get maps back and forth
 
 ```text
            top                             top
-       f -------> g                    f -------> g
-       |          |                    |          |
-  left |          | right    ↔    left |          | right'
+       f ───────> g                    f ───────> g
+       │          │                    │          │
+  left │          │ right    ↔    left │          │ right'
        ∨          ∨                    ∨          ∨
-       h -------> i                    h -------> i.
+       h ───────> i                    h ───────> i.
           bottom                          bottom
 ```
 
@@ -489,12 +489,12 @@ Consider a commuting diagram of homotopies
 
 ```text
             top
-       f -------> g
-       |          |
-  left |          | right
+       f ───────> g
+       │          │
+  left │          │ right
        ∨  bottom  ∨
-       h -------> i.
-         ------->
+       h ───────> i.
+         ───────>
           bottom'
 ```
 
@@ -502,11 +502,11 @@ with a homotopy `bottom ~ bottom'`. Then we get maps back and forth
 
 ```text
            top                             top
-       f -------> g                    f -------> g
-       |          |                    |          |
-  left |          | right    ↔    left |          | right
+       f ───────> g                    f ───────> g
+       │          │                    │          │
+  left │          │ right    ↔    left │          │ right
        ∨          ∨                    ∨          ∨
-       h -------> i                    h -------> i.
+       h ───────> i                    h ───────> i.
           bottom                          bottom'
 ```
 
@@ -551,11 +551,11 @@ Given a commuting square of homotopies
 
 ```text
            top
-       f -------> g
-       |          |
-  left |          | right
+       f ───────> g
+       │          │
+  left │          │ right
        ∨          ∨
-       h -------> i,
+       h ───────> i,
           bottom
 ```
 
@@ -565,11 +565,11 @@ we may consider four ways of attaching new homotopies to it:
 
    ```text
                 H ∙h top
-              u -------> g
-              |          |
-    H ∙h left |          | right
+              u ───────> g
+              │          │
+    H ∙h left │          │ right
               ∨          ∨
-              h -------> i.
+              h ───────> i.
                  bottom
    ```
 
@@ -584,11 +584,11 @@ we may consider four ways of attaching new homotopies to it:
 
    ```text
                    top
-           f ------------> g
-           |               |
-      left |               | right ∙h H
+           f ────────────> g
+           │               │
+      left │               │ right ∙h H
            ∨               ∨
-           h ------------> u.
+           h ────────────> u.
               bottom ∙h H
    ```
 
@@ -603,11 +603,11 @@ we may consider four ways of attaching new homotopies to it:
 
    ```text
                       top
-              f --------------> g
-              |                 |
-    left ∙h H |                 | right
+              f ──────────────> g
+              │                 │
+    left ∙h H │                 │ right
               ∨                 ∨
-              u --------------> i.
+              u ──────────────> i.
                  H⁻¹ ∙h bottom
    ```
 
@@ -628,11 +628,11 @@ we may consider four ways of attaching new homotopies to it:
 
    ```text
             top ∙h H
-          f --------> u
-          |           |
-     left |           | H⁻¹ ∙h right
+          f ────────> u
+          │           │
+     left │           │ H⁻¹ ∙h right
           ∨           ∨
-          h --------> i.
+          h ────────> i.
              bottom
    ```
 
@@ -661,11 +661,11 @@ For any homotopy `H : u ~ f` we obtain maps back and forth
 
 ```text
            top                                H ∙h top
-       f -------> g                         u -------> g
-       |          |                         |          |
-  left |          | right    ↔    H ∙h left |          | right
+       f ───────> g                         u ───────> g
+       │          │                         │          │
+  left │          │ right    ↔    H ∙h left │          │ right
        ∨          ∨                         ∨          ∨
-       h -------> i                         h -------> i
+       h ───────> i                         h ───────> i
           bottom                               bottom
 ```
 
@@ -715,11 +715,11 @@ For any homotopy `H : i ~ u` we obtain maps back and forth
 
 ```text
            top                                 top
-       f -------> g                     f ------------> g
-       |          |                     |               |
-  left |          | right    ↔     left |               | right ∙h H
+       f ───────> g                     f ────────────> g
+       │          │                     │               │
+  left │          │ right    ↔     left │               │ right ∙h H
        ∨          ∨                     ∨               ∨
-       h -------> i                     h ------------> i
+       h ───────> i                     h ────────────> i
           bottom                           bottom ∙h H
 ```
 
@@ -797,11 +797,11 @@ For any inverse pair of homotopies `H : g ~ u` and `K : u ~ g` equipped with
 
 ```text
            top                                    top
-       f -------> g                         f -----------> g
-       |          |                         |              |
-  left |          | right    ↔    left ∙h H |              | right
+       f ───────> g                         f ───────────> g
+       │          │                         │              │
+  left │          │ right    ↔    left ∙h H │              │ right
        ∨          ∨                         ∨              ∨
-       h -------> i                         u -----------> i
+       h ───────> i                         u ───────────> i
           bottom                               K ∙h bottom
 ```
 
@@ -853,11 +853,11 @@ For any inverse pair of homotopies `H : g ~ u` and `K : u ~ g` equipped with
 
 ```text
            top                             top ∙h H
-       f -------> g                     f --------> u
-       |          |                     |           |
-  left |          | right    ↔     left |           | K ∙h right
+       f ───────> g                     f ────────> u
+       │          │                     │           │
+  left │          │ right    ↔     left │           │ K ∙h right
        ∨          ∨                     ∨           ∨
-       h -------> i                     h --------> i
+       h ───────> i                     h ────────> i
           bottom                           bottom
 ```
 
@@ -908,11 +908,11 @@ Consider two squares of homotopies as in the diagram
 
 ```text
             top-left         top-right
-       a -------------> b -------------> c
-       |                |                |
-  left |                | middle         | right
+       a ─────────────> b ─────────────> c
+       │                │                │
+  left │                │ middle         │ right
        ∨                ∨                ∨
-       d -------------> e -------------> f
+       d ─────────────> e ─────────────> f
           bottom-left      bottom-right
 ```
 
@@ -952,15 +952,15 @@ Consider two squares of homotopies as in the diagram
 
 ```text
                   top
-              a --------> b
-              |           |
-     top-left |           | top-right
+              a ────────> b
+              │           │
+     top-left │           │ top-right
               ∨  middle   ∨
-              c --------> d
-              |           |
-  bottom-left |           | bottom-right
+              c ────────> d
+              │           │
+  bottom-left │           │ bottom-right
               ∨           ∨
-              e --------> f
+              e ────────> f
                  bottom
 ```
 
@@ -1128,11 +1128,11 @@ Consider the vertically constant square of homotopies
 
 ```text
            H
-       f -----> g
-       |        |
-  refl |        | refl
+       f ─────> g
+       │        │
+  refl │        │ refl
        ∨        ∨
-       f -----> g
+       f ─────> g
            H
 ```
 
@@ -1141,11 +1141,11 @@ whiskering of the above square with `K` is the commuting square of homotopies
 
 ```text
             H
-       f -------> g
-       |          |
-  refl |   refl   | K
+       f ───────> g
+       │          │
+  refl │   refl   │ K
        ∨          ∨
-       f -------> h
+       f ───────> h
           H ∙h K
 ```
 
@@ -1172,11 +1172,11 @@ Consider a horizontally constant commuting square of homotopies
 
 ```text
        refl-htpy
-    f ----------> f
-    |             |
-  H |             | H
+    f ──────────> f
+    │             │
+  H │             │ H
     ∨             ∨
-    g ----------> g
+    g ──────────> g
        refl-htpy
 ```
 
@@ -1185,11 +1185,11 @@ of the above square with `K` is the square
 
 ```text
        refl-htpy
-    f ----------> f
-    |             |
-  H |  refl-htpy  | H ∙h K
+    f ──────────> f
+    │             │
+  H │  refl-htpy  │ H ∙h K
     ∨             ∨
-    g ----------> h.
+    g ──────────> h.
            K
 ```
 
@@ -1217,11 +1217,11 @@ homotopies
 
 ```text
        refl-htpy
-    g ----------> g
-    |             |
-  K |             | K
+    g ──────────> g
+    │             │
+  K │             │ K
     ∨             ∨
-    h ----------> h
+    h ──────────> h
        refl-htpy
 ```
 
@@ -1230,11 +1230,11 @@ is the commuting square
 
 ```text
                                     K ∙h refl-htpy
-         f -----------------------------------------------------------------> g
-         |                                                                    |
-  K ∙h H | right-unit-htpy ∙h (right-whisker-concat-htpy right-unit-htpy H)⁻¹ | H
+         f ─────────────────────────────────────────────────────────────────> g
+         │                                                                    │
+  K ∙h H │ right-unit-htpy ∙h (right-whisker-concat-htpy right-unit-htpy H)⁻¹ │ H
          ∨                                                                    ∨
-         h -----------------------------------------------------------------> h.
+         h ─────────────────────────────────────────────────────────────────> h.
                                       refl-htpy
 ```
 
@@ -1271,11 +1271,11 @@ Consider the vertically constant square of homotopies
 
 ```text
                 K
-            g -----> h
-            |        |
-  refl-htpy |        | refl-htpy
+            g ─────> h
+            │        │
+  refl-htpy │        │ refl-htpy
             ∨        ∨
-            g -----> h
+            g ─────> h
                 K
 ```
 
@@ -1284,11 +1284,11 @@ whiskering of the above square with `H` is the square
 
 ```text
                                             H ∙h K
-                 f ----------------------------------------------------------> h
-                 |                                                             |
-  H ∙h refl-htpy | right-whisker-concat-htpy right-unit-htpy K ∙h right-unit⁻¹ | refl-htpy
+                 f ──────────────────────────────────────────────────────────> h
+                 │                                                             │
+  H ∙h refl-htpy │ right-whisker-concat-htpy right-unit-htpy K ∙h right-unit⁻¹ │ refl-htpy
                  ∨                                                             ∨
-                 g ----------------------------------------------------------> h.
+                 g ──────────────────────────────────────────────────────────> h.
                                               K
 ```
 
@@ -1325,11 +1325,11 @@ Consider a commuting diagram of homotopies of the form
 
 ```text
             top-left        top-right
-       a -------------> c -------------> e
-       |                |                |
-  left |                | middle         | right
+       a ─────────────> c ─────────────> e
+       │                │                │
+  left │                │ middle         │ right
        ∨                ∨                ∨
-       b -------------> d -------------> f
+       b ─────────────> d ─────────────> f
           bottom-left      bottom-right
 ```
 
@@ -1339,11 +1339,11 @@ associativity the horizontal concatenation of the squares
 
 ```text
                H ∙h top-left      top-right
-            u -------------> c -------------> e
-            |                |                |
-  H ∙h left |                | middle         | right
+            u ─────────────> c ─────────────> e
+            │                │                │
+  H ∙h left │                │ middle         │ right
             ∨                ∨                ∨
-            b -------------> d -------------> f
+            b ─────────────> d ─────────────> f
                bottom-left      bottom-right
 ```
 
@@ -1416,15 +1416,15 @@ Consider two squares of homotopies as in the diagram
 
 ```text
                   top
-              a --------> b
-              |           |
-     top-left |           | top-right
+              a ────────> b
+              │           │
+     top-left │           │ top-right
               ∨  middle   ∨
-              c --------> d
-              |           |
-  bottom-left |           | bottom-right
+              c ────────> d
+              │           │
+  bottom-left │           │ bottom-right
               ∨           ∨
-              e --------> f
+              e ────────> f
                  bottom
 ```
 
@@ -1434,15 +1434,15 @@ pasting of the squares
 
 ```text
                   H ∙h top
-                u --------> b
-                |           |
-  H ∙h top-left |           | top-right
+                u ────────> b
+                │           │
+  H ∙h top-left │           │ top-right
                 ∨  middle   ∨
-                c --------> d
-                |           |
-    bottom-left |           | bottom-right
+                c ────────> d
+                │           │
+    bottom-left │           │ bottom-right
                 ∨           ∨
-                e --------> f.
+                e ────────> f.
                    bottom
 ```
 
@@ -1510,11 +1510,11 @@ Consider a commuting diagram of homotopies of the form
 
 ```text
             top-left        top-right
-       a -------------> c -------------> e
-       |                |                |
-  left |                | middle         | right
+       a ─────────────> c ─────────────> e
+       │                │                │
+  left │                │ middle         │ right
        ∨                ∨                ∨
-       b -------------> d -------------> f
+       b ─────────────> d ─────────────> f
           bottom-left      bottom-right
 ```
 
@@ -1524,11 +1524,11 @@ the squares
 
 ```text
             top-left           top-right
-       a -------------> c ------------------> e
-       |                |                     |
-  left |                | middle              | right ∙h K
+       a ─────────────> c ──────────────────> e
+       │                │                     │
+  left │                │ middle              │ right ∙h K
        ∨                ∨                     ∨
-       b -------------> d ------------------> g
+       b ─────────────> d ──────────────────> g
           bottom-left      bottom-right ∙h K
 ```
 
@@ -1599,15 +1599,15 @@ Consider two squares of homotopies as in the diagram
 
 ```text
                   top
-              a --------> b
-              |           |
-     top-left |           | top-right
+              a ────────> b
+              │           │
+     top-left │           │ top-right
               ∨  middle   ∨
-              c --------> d
-              |           |
-  bottom-left |           | bottom-right
+              c ────────> d
+              │           │
+  bottom-left │           │ bottom-right
               ∨           ∨
-              e --------> f
+              e ────────> f
                  bottom
 ```
 
@@ -1617,15 +1617,15 @@ pasting of the squares
 
 ```text
                      top
-              a ------------> b
-              |               |
-     top-left |               | top-right
+              a ────────────> b
+              │               │
+     top-left │               │ top-right
               ∨    middle     ∨
-              c ------------> d
-              |               |
-  bottom-left |               | bottom-right ∙h K
+              c ────────────> d
+              │               │
+  bottom-left │               │ bottom-right ∙h K
               ∨               ∨
-              e ------------> g.
+              e ────────────> g.
                  bottom ∙h K
 ```
 

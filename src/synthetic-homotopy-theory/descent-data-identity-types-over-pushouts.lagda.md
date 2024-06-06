@@ -31,11 +31,11 @@ Given a [cocone](synthetic-homotopy-theory.cocones-under-spans.md) under a
 
 ```text
         g
-    S -----> B
-    |        |
-  f |        | j
+    S ─────> B
+    │        │
+  f │        │ j
     ∨        ∨
-    A -----> X
+    A ─────> X
         i
 ```
 

@@ -42,7 +42,7 @@ In other words, the sequential colimit universally completes the diagram
 
 ```text
      a₀      a₁      a₂
- A₀ ---> A₁ ---> A₂ ---> ⋯ ---> A∞ .
+ A₀ ───> A₁ ───> A₂ ───> ⋯ ───> A∞ .
 ```
 
 We often abuse notation and write `A∞` for just the codomain of the universal

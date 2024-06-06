@@ -43,10 +43,10 @@ Consider a diagram of the form
 
 ```text
     A         B
-    |         |
-  f |         | g
+    │         │
+  f │         │ g
     ∨         ∨
-    X ------> Y
+    X ──────> Y
          i
 ```
 
@@ -433,11 +433,11 @@ module _
 
 ```text
          !
-  empty ---> B
-    |        |
-  ! |        | g
+  empty ───> B
+    │        │
+  ! │        │ g
     ∨        ∨
-    X -----> Y
+    X ─────> Y
         i
 ```
 
@@ -475,11 +475,11 @@ module _
 ### If the bottom right corner is contractible, the type of fibered maps is equivalent to maps `A → B`
 
 ```text
-    A -----> B
-    |        |
-  f |        | !
+    A ─────> B
+    │        │
+  f │        │ !
     ∨        ∨
-    X ---> unit
+    X ───> unit
        !
 ```
 

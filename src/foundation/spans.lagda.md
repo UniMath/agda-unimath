@@ -33,7 +33,7 @@ We disambiguate between spans and [span diagrams](foundation.span-diagrams.md).
 We consider spans from `A` to `B` to be _morphisms_ from `A` to `B` in the
 category of types and spans between them, whereas we consider span diagrams to
 be _objects_ in the category of diagrams of types of the form
-`* <---- * ----> *`. Conceptually there is a subtle, but important distinction
+`* <──── * ────> *`. Conceptually there is a subtle, but important distinction
 between spans and span diagrams. As mentioned previously, a span from `A` to `B`
 is equivalently described as a binary relation from `A` to `B`. On the other
 hand, span diagrams are more suitable for functorial operations that take

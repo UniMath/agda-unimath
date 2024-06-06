@@ -36,9 +36,9 @@ from `𝒮` to `𝒯` consists of a map `h : S → T` and a
 
 ```text
         h
-    S ----> T
-     \     /
-  f i \   / g i
+    S ────> T
+     ╲     ╱
+  f i ╲   ╱ g i
        ∨ ∨
        A i
 ```
@@ -102,10 +102,10 @@ and a family `β` of homotopies witnessing that the triangle
 
 ```text
               f i
-             /   \
-        H i / β i \ K i
+             ╱   ╲
+        H i ╱ β i ╲ K i
            ∨       ∨
-  (g i ∘ h) ------> (g i ∘ k)
+  (g i ∘ h) ──────> (g i ∘ k)
             g i · α
 ```
 

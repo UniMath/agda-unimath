@@ -42,10 +42,10 @@ such that their composite `r ∘ l` is `f`.
 
 ```text
          X
-        ∧ \
- L ∋ l /   \ r ∈ R
-      /     ∨
-    A -----> B
+        ∧ ╲
+ L ∋ l ╱   ╲ r ∈ R
+      ╱     ∨
+    A ─────> B
         f
 ```
 

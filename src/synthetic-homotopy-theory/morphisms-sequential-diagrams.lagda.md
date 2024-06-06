@@ -39,13 +39,13 @@ A **morphism between
 `fₙ : Aₙ → Bₙ` satisfying the naturality condition that all squares of the form
 
 ```text
-        aₙ
-    Aₙ ---> Aₙ₊₁
-    |       |
- fₙ |       | fₙ₊₁
-    ∨       ∨
-    Bₙ ---> Bₙ₊₁
-        bₙ
+         aₙ
+     Aₙ ───> Aₙ₊₁
+     │       │
+  fₙ │       │ fₙ₊₁
+     ∨       ∨
+     Bₙ ───> Bₙ₊₁
+         bₙ
 ```
 
 [commute](foundation.commuting-squares-of-maps.md).
@@ -159,13 +159,13 @@ filling the cylinders
 
 ```text
               aₙ
-      Aₙ ----------> Aₙ₊₁
-      / \            / \
-     / Hₙ\          /Hₙ₊₁\
- fₙ |  => | gₙ fₙ₊₁ |  => | gₙ₊₁
-     \   /          \   /
-      \ /            \ /
-      Bₙ ----------> Bₙ₊₁.
+      Aₙ ──────────> Aₙ₊₁
+      ╱ ╲            ╱ ╲
+     ╱ Hₙ╲          ╱Hₙ₊₁╲
+ fₙ │  ⇒  │ gₙ fₙ₊₁ │  ⇒  │ gₙ₊₁
+     ╲   ╱          ╲   ╱
+      ╲ ╱            ╲ ╱
+      Bₙ ──────────> Bₙ₊₁.
               bₙ
 ```
 

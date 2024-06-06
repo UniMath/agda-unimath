@@ -40,12 +40,12 @@ the sense that for any two maps `f : A → B` and `g : C → D` the diagram
 
 ```text
           f×1
-    A × C ---> B × C
-      |   \      |
-  1×g |    \f×g  | 1×g
-      |     \    |
+    A × C ───> B × C
+      │   ╲      │
+  1×g │    ╲f×g  │ 1×g
+      │     ╲    │
       ∨      ∨   ∨
-    A × D ---> B × D
+    A × D ───> B × D
           f×1
 ```
 

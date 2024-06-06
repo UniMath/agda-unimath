@@ -30,12 +30,12 @@ Consider a [subtype](foundation-core.subtypes.md) `T` of a type `B` and a map
 
 ```text
                  π₂
-  pullback f T -----> T
-       | ⌟            |
-    π₁ |              | i
-       |              |
+  pullback f T ─────> T
+       │ ⌟            │
+    π₁ │              │ i
+       │              │
        ∨              ∨
-       A -----------> B
+       A ───────────> B
                f
 ```
 

@@ -35,13 +35,13 @@ interchanger diagram
 
 ```text
                       ap (r ↦ f x r) q
-                 f x y -------------> f x y'
-                   |                    |
-                   |                    |
-  ap (r ↦ f r y) p |                    | ap (r ↦ f r y') p
-                   |                    |
+                 f x y ─────────────> f x y'
+                   │                    │
+                   │                    │
+  ap (r ↦ f r y) p │                    │ ap (r ↦ f r y') p
+                   │                    │
                    ∨                    ∨
-                 f x' y ------------> f x' y'.
+                 f x' y ────────────> f x' y'.
                       ap (r ↦ f x' r) q
 ```
 
@@ -121,13 +121,13 @@ uncurried [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
                            (- ∘ Δ) × 1
-       (A × A → B) × Path A --------> (A → B) × Path A
-                |                             |
-                |                             |
-          1 × Δ |                             | ap
-                |                             |
+       (A × A → B) × Path A ────────> (A → B) × Path A
+                │                             │
+                │                             │
+          1 × Δ │                             │ ap
+                │                             │
                 ∨                             ∨
-  (A × A → B) × Path A × Path A ----------> Path B.
+  (A × A → B) × Path A × Path A ──────────> Path B.
                                  ap-binary
 ```
 

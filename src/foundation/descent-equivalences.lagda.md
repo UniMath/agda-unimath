@@ -26,11 +26,11 @@ property. It asserts that in a commuting diagram of the form
 
 ```text
      p        q
- A -----> B -----> C
- |        |        |
-f|       g|        |h
+ A ─────> B ─────> C
+ │        │        │
+f│       g│        │h
  ∨        ∨        ∨
- X -----> Y -----> Z,
+ X ─────> Y ─────> Z,
      i        j
 ```
 

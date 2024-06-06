@@ -45,7 +45,7 @@ states that sequential colimits commute with
 a [cocone](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md)
 
 ```text
-  A₀ ---> A₁ ---> A₂ ---> ⋯ ---> X
+  A₀ ───> A₁ ───> A₂ ───> ⋯ ───> X
 ```
 
 with the universal property of sequential colimits, and a family `P : X → 𝒰`,
@@ -53,7 +53,7 @@ the induced cocone under the
 [total sequential diagram](synthetic-homotopy-theory.total-sequential-diagrams.md)
 
 ```text
-  Σ (a : A₀) P(i₀ a) ---> Σ (a : A₁) P(i₁ a) ---> ⋯ ---> Σ (x : X) P(x)
+  Σ (a : A₀) P(i₀ a) ───> Σ (a : A₁) P(i₁ a) ───> ⋯ ───> Σ (x : X) P(x)
 ```
 
 is again a sequential colimit.
@@ -68,7 +68,7 @@ More generally, given a type family `P : X → 𝒰` and
 we have that the induced cocone
 
 ```text
-  Σ A₀ B₀ ---> Σ A₁ B₁ ---> ⋯ ---> Σ X P
+  Σ A₀ B₀ ───> Σ A₁ B₁ ───> ⋯ ───> Σ X P
 ```
 
 is a sequential colimit.
@@ -87,13 +87,13 @@ so it suffices to invoke the flattening lemma for coequalizers.
 **Proof:** The diagram we construct is
 
 ```text
-                               ------->
-  Σ (n : ℕ) Σ (a : Aₙ) P(iₙ a) -------> Σ (n : ℕ) Σ (a : Aₙ) P(iₙ a) ----> Σ (x : X) P(x)
-             |                                     |                            |
- inv-assoc-Σ | ≃                       inv-assoc-Σ | ≃                       id | ≃
-             |                                     |                            |
-             ∨                --------->           ∨                            ∨
-   Σ ((n, a) : Σ ℕ A) P(iₙ a) ---------> Σ ((n, a) : Σ ℕ A) P(iₙ a) -----> Σ (x : X) P(x) ,
+                               ───────>
+  Σ (n : ℕ) Σ (a : Aₙ) P(iₙ a) ───────> Σ (n : ℕ) Σ (a : Aₙ) P(iₙ a) ────> Σ (x : X) P(x)
+             │                                     │                            │
+ inv-assoc-Σ │ ≃                       inv-assoc-Σ │ ≃                       id │ ≃
+             │                                     │                            │
+             ∨                ─────────>           ∨                            ∨
+   Σ ((n, a) : Σ ℕ A) P(iₙ a) ─────────> Σ ((n, a) : Σ ℕ A) P(iₙ a) ─────> Σ (x : X) P(x) ,
 ```
 
 where the top is the cofork corresponding to the cocone for the flattening
@@ -189,11 +189,11 @@ that given a family `P : X → 𝒰` with its descent data `B`, there is an
 [equivalence of cocones](synthetic-homotopy-theory.equivalences-cocones-under-equivalences-sequential-diagrams.md)
 
 ```text
-     Σ A₀ B₀ ---------> Σ A₁ B₁ ------> ⋯ -----> Σ X P
-        |                  |                       |
-        | ≃                | ≃                     | ≃
+     Σ A₀ B₀ ─────────> Σ A₁ B₁ ──────> ⋯ ─────> Σ X P
+        │                  │                       │
+        │ ≃                │ ≃                     │ ≃
         ∨                  ∨                       ∨
-  Σ A₀ (P ∘ i₀) ---> Σ A₁ (P ∘ i₁) ---> ⋯ -----> Σ X P .
+  Σ A₀ (P ∘ i₀) ───> Σ A₁ (P ∘ i₁) ───> ⋯ ─────> Σ X P .
 ```
 
 The bottom cocone is a sequential colimit by the flattening lemma, and the

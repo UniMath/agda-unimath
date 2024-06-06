@@ -25,11 +25,11 @@ Given two maps, `f : A → X` and `g : B → Y`, a _lifting operation between `f
 and `g`_ is a choice of lifting square for every commuting square
 
 ```text
-  A ------> B
-  |         |
- f|         |g
+  A ──────> B
+  │         │
+ f│         │g
   ∨         ∨
-  X ------> Y.
+  X ──────> Y.
 ```
 
 Given a lifting operation we can say that `f` has a _left lifting structure_

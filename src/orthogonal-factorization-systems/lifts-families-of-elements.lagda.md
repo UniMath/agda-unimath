@@ -58,11 +58,11 @@ lifting diagram
 
 ```text
       Σ (x : A) (B x)
-            |
-            | pr1
-            |
+            │
+            │ pr1
+            │
             ∨
-  I ------> A         .
+  I ──────> A         .
        a
 ```
 

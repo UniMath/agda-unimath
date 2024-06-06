@@ -40,8 +40,8 @@ given a coequalizer
 
 ```text
      g
-   ----->     e
- A -----> B -----> X
+   ─────>     e
+ A ─────> B ─────> X
      f
 ```
 
@@ -49,8 +49,8 @@ with homotopy `H : e ∘ f ~ e ∘ g`, and a type family `P : X → 𝓤` over `
 cofork
 
 ```text
-                  ----->
- Σ (a : A) P(efa) -----> Σ (b : B) P(eb) ---> Σ (x : X) P(x)
+                  ─────>
+ Σ (a : A) P(efa) ─────> Σ (b : B) P(eb) ───> Σ (x : X) P(x)
 ```
 
 is again a coequalizer.

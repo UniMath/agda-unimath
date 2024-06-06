@@ -36,22 +36,22 @@ Given two
 [commuting squares of maps](foundation-core.commuting-squares-of-maps.md),
 
 ```text
-    C ------> B                  C' -----> B'
-    |         |                  |         |
-    |         |  g     and       |         | g'
+    C ──────> B                  C' ─────> B'
+    │         │                  │         │
+    │         │  g     and       │         │ g'
     ∨         ∨                  ∨         ∨
-    A ------> X                  A' -----> X',
+    A ──────> X                  A' ─────> X',
          f                            f'
 ```
 
 then their coproduct
 
 ```text
-  C + C' ----> B + B'
-    |            |
-    |            | g + g'
+  C + C' ────> B + B'
+    │            │
+    │            │ g + g'
     ∨            ∨
-  A + A' ----> X + X'
+  A + A' ────> X + X'
          f + f'
 ```
 

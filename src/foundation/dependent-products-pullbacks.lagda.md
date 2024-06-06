@@ -31,22 +31,22 @@ open import foundation-core.universal-property-pullbacks
 Given a family of pullback squares
 
 ```text
-    Cᵢ -----> Bᵢ
-    | ⌟       |
-    |         | gᵢ
+    Cᵢ ─────> Bᵢ
+    │ ⌟       │
+    │         │ gᵢ
     ∨         ∨
-    Aᵢ -----> Xᵢ
+    Aᵢ ─────> Xᵢ
          fᵢ
 ```
 
 indexed by `i : I`, their dependent product
 
 ```text
-  Πᵢ Cᵢ -----> Πᵢ Bᵢ
-    | ⌟          |
-    |            | Πᵢ gᵢ
+  Πᵢ Cᵢ ─────> Πᵢ Bᵢ
+    │ ⌟          │
+    │            │ Πᵢ gᵢ
     ∨            ∨
-  Πᵢ Aᵢ -----> Πᵢ Xᵢ
+  Πᵢ Aᵢ ─────> Πᵢ Xᵢ
          Πᵢ fᵢ
 ```
 

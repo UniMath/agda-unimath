@@ -31,12 +31,12 @@ such that the squares
 
 ```text
            i                   i
-     A --------> X       A --------> X
-     |     ≃     |       |     ≃     |
-   f |           | h   g |           | k
-     |           |       |           |
+     A ────────> X       A ────────> X
+     │     ≃     │       │     ≃     │
+   f │           │ h   g │           │ k
+     │           │       │           │
      ∨     ≃     ∨       ∨     ≃     ∨
-     B --------> Y       B --------> Y
+     B ────────> Y       B ────────> Y
            j                   j
 ```
 
@@ -165,12 +165,12 @@ Given a [morphism of double arrows](foundation.morphisms-double-arrows.md)
 
 ```text
            i                   i
-     A --------> X       A --------> X
-     |           |       |           |
-   f |           | h   g |           | k
-     |           |       |           |
+     A ────────> X       A ────────> X
+     │           │       │           │
+   f │           │ h   g │           │ k
+     │           │       │           │
      ∨           ∨       ∨           ∨
-     B --------> Y       B --------> Y ,
+     B ────────> Y       B ────────> Y ,
            j                   j
 ```
 

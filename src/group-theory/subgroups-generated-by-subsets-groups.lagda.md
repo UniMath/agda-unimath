@@ -501,12 +501,12 @@ There are three ways to state this fact:
 
 ```text
                     pullback f
-   subset-Group G <------------ subset-Group H
+   subset-Group G <──────────── subset-Group H
          ∧                            ∧
-         |                            |
-  K ↦ UK |                            | K ↦ UK
-         |                            |
-     Subgroup G <---------------- Subgroup H
+         │                            │
+  K ↦ UK │                            │ K ↦ UK
+         │                            │
+     Subgroup G <──────────────── Subgroup H
                     pullback f
 ```
 
@@ -517,12 +517,12 @@ implies that the square
 
 ```text
                     im f
-    subset-Group G ------> subset-Group H
-          |                      |
-  S ↦ ⟨S⟩ |                      | S ↦ ⟨S⟩
-          |                      |
+    subset-Group G ──────> subset-Group H
+          │                      │
+  S ↦ ⟨S⟩ │                      │ S ↦ ⟨S⟩
+          │                      │
           ∨                      ∨
-      Subgroup G ----------> Subgroup H
+      Subgroup G ──────────> Subgroup H
                     im f
 ```
 

@@ -35,11 +35,11 @@ such that for each morphism `f : X → Y` in `C` the diagram
 
 ```text
        η X
-    X -----> F X
-    |         |
-  f |         | F f
+    X ─────> F X
+    │         │
+  f │         │ F f
     ∨         ∨
-    Y -----> F Y
+    Y ─────> F Y
        η Y
 ```
 

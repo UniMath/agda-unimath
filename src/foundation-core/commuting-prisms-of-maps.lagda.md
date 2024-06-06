@@ -27,17 +27,17 @@ Consider an arrangment of maps composable into a diagram as follows:
 
 ```text
           hA
-    A ---------> A'
-    |\           |\
-    | \ h   ⇗    | \ h'
-    |  \      f' |  \
-    |   ∨        |   ∨
-  f | ⇐ B ------ | -> B'
-    |   /   hB   | ⇐ /
-    |  / g       |  / g'
-    | /     ⇗    | /
+    A ─────────> A'
+    │╲           │╲
+    │ ╲ h   ⇗    │ ╲ h'
+    │  ╲      f' │  ╲
+    │   ∨        │   ∨
+  f │ ⇐ B ────── │ ─> B'
+    │   ╱   hB   │ ⇐ ╱
+    │  ╱ g       │  ╱ g'
+    │ ╱     ⇗    │ ╱
     ∨∨           ∨∨
-    C ---------> C' ,
+    C ─────────> C' ,
           hC
 ```
 
@@ -57,17 +57,17 @@ We may also arrange the maps into a more vertical shape, like so:
 
 ```text
           B
-      h  ∧| \  g
-       /  |   \
-     /  f | ⇑   ∨
-    A ---------> C
-    |     | hB   |
-    | ⇗   ∨   ⇗  |
- hA |     B'     | hC
-    | h' ∧  \ g' |
-    |  /  ⇑   \  |
-    ∨/          ∨∨
-    A' --------> C' .
+      h  ∧│ ╲  g
+       ╱  │   ╲
+     ╱  f │ ⇑   ∨
+    A ─────────> C
+    │     │ hB   │
+    │ ⇗   ∨   ⇗  │
+ hA │     B'     │ hC
+    │ h' ∧  ╲ g' │
+    │  ╱  ⇑   ╲  │
+    ∨╱          ∨∨
+    A' ────────> C' .
           f'
 ```
 

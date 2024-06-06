@@ -25,11 +25,11 @@ satisfies the following three axioms:
    distinguished square
    ```text
          Δ i
-      A -----> A ×_X A
-      |           |
-    f |           | functoriality Δ g
+      A ─────> A ×_X A
+      │           │
+    f │           │ functoriality Δ g
       ∨           ∨
-      B -----> B ×_Y B.
+      B ─────> B ×_Y B.
          Δ j
    ```
    is again a distinguished square.

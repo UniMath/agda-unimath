@@ -148,12 +148,12 @@ composition. Since map composition is strictly associative, the Mac Lane
 pentagon also follows by reflexivity.
 
 ```text
-    (I(GH))F ---- I((GH)F)
-          /        \
-         /          \
+    (I(GH))F ──── I((GH)F)
+          ╱        ╲
+         ╱          ╲
   ((IH)G)F          I(H(GF))
-          \        /
-            \    /
+          ╲        ╱
+            ╲    ╱
            (IH)(GF)
 ```
 

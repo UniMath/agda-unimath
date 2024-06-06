@@ -25,13 +25,13 @@ Consider two
 [dependent sequential diagrams](synthetic-homotopy-theory.dependent-sequential-diagrams.md)
 
 ```text
-     b₀      b₁      b₂            c₀      c₁      c₂
- B₀ ---> B₁ ---> B₂ ---> ⋯     C₀ ---> C₁ ---> C₂ ---> ⋯
- |       |       |             |       |       |
- |       |       |             |       |       |
- ↡       ↡       ↡             ↡       ↡       ↡
- A₀ ---> A₁ ---> A₂ ---> ⋯     A₀ ---> A₁ ---> A₂ ---> ⋯ .
-     a₀      a₁      a₂            a₀      a₁      a₂
+      b₀      b₁      b₂            c₀      c₁      c₂
+  B₀ ───> B₁ ───> B₂ ───> ⋯     C₀ ───> C₁ ───> C₂ ───> ⋯
+  │       │       │             │       │       │
+  │       │       │             │       │       │
+  ↡       ↡       ↡             ↡       ↡       ↡
+  A₀ ───> A₁ ───> A₂ ───> ⋯     A₀ ───> A₁ ───> A₂ ───> ⋯ .
+      a₀      a₁      a₂            a₀      a₁      a₂
 ```
 
 A
@@ -47,12 +47,12 @@ hₙ : (a : Aₙ) → Bₙ a → Cₙ a
 
 ```text
                  hₙ a
-     Bₙ a -----------------> Cₙ a
-       |                       |
-  bₙ a |                       | cₙ a
-       |                       |
+     Bₙ a ─────────────────> Cₙ a
+       │                       │
+  bₙ a │                       │ cₙ a
+       │                       │
        ∨                       ∨
-  Bₙ₊₁ (aₙ a) ----------> Cₙ₊₁ (aₙ a)
+  Bₙ₊₁ (aₙ a) ──────────> Cₙ₊₁ (aₙ a)
               hₙ₊₁ (aₙ a)
 ```
 

@@ -44,7 +44,7 @@ Consider a span `𝒮` of types
 
 ```text
       f     g
-  A <--- S ---> B.
+  A <─── S ───> B.
 ```
 
 A **pushout** of `𝒮` is an initial type `X` equipped with a
@@ -54,11 +54,11 @@ A **pushout** of `𝒮` is an initial type `X` equipped with a
 
 ```text
         g
-    S -----> B
-    |        |
-  f |   H    | j
+    S ─────> B
+    │        │
+  f │   H    │ j
     ∨        ∨
-    A -----> X,
+    A ─────> X,
         i
 ```
 
@@ -91,7 +91,7 @@ We will assume that for any span
 
 ```text
       f     g
-  A <--- S ---> B,
+  A <─── S ───> B,
 ```
 
 where `S : UU l1`, `A : UU l2`, and `B : UU l3` there is a pushout in
@@ -470,25 +470,25 @@ Given a pushout square with a
 
 ```text
        g
-   S ----> B
-   |       | \
- f |    inr|  \  n
-   ∨     ⌜ ∨   \
-   A ----> ∙    \
-    \ inl   \   |
-  m  \  cogap\  |
-      \       ∨ ∨
-       \-----> X
+   S ────> B
+   │       │ ╲
+ f │    inr│  ╲  n
+   ∨     ⌜ ∨   ╲
+   A ────> ∙    ╲
+    ╲ inl   ╲   │
+  m  ╲  cogap╲  │
+      ╲       ∨ ∨
+       ╲─────> X
 ```
 
 we have, for every `x : X`, a pushout square of fibers:
 
 ```text
-    fiber (m ∘ f) x ---> fiber (cogap ∘ inr) x
-           |                       |
-           |                       |
+    fiber (m ∘ f) x ───> fiber (cogap ∘ inr) x
+           │                       │
+           │                       │
            ∨                     ⌜ ∨
- fiber (cogap ∘ inl) x ----> fiber cogap x
+ fiber (cogap ∘ inl) x ────> fiber cogap x
 ```
 
 ```agda
@@ -598,11 +598,11 @@ We record the following auxiliary lemma which says that if we have types `T`,
 
 ```text
           v
-   T ----------> G
-   |             |
- u |             |
+   T ──────────> G
+   │             │
+ u │             │
    ∨           ⌜ ∨
-   F ----> fiber cogap x
+   F ────> fiber cogap x
 ```
 
 Thus, this lemma is useful in case we have convenient descriptions of the

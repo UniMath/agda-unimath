@@ -69,11 +69,11 @@ We claim that the square
 
 ```text
                    ap B
-        (X ＝ Y) --------> (B X ＝ B Y)
-           |                    |
-  equiv-eq |                    | equiv-eq
+        (X ＝ Y) ────────> (B X ＝ B Y)
+           │                    │
+  equiv-eq │                    │ equiv-eq
            ∨                    ∨
-        (X ≃ Y) ---------> (B X ≃ B Y).
+        (X ≃ Y) ─────────> (B X ≃ B Y).
                      B
 ```
 

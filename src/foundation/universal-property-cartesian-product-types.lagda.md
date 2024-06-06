@@ -104,11 +104,11 @@ over the [terminal type `unit`](foundation.unit-type.md)
 
 ```text
            pr2
-   A × B ------> B
-     |           |
- pr1 |           |
+   A × B ──────> B
+     │           │
+ pr1 │           │
      ∨           ∨
-     A -------> unit
+     A ───────> unit
 ```
 
 is a [pullback](foundation-core.pullbacks.md). The
@@ -117,11 +117,11 @@ states in this case that maps into `A × B` are in correspondence with pairs of
 maps into `A` and `B` such that the square
 
 ```text
-     X --------> B
-     |           |
-     |           |
+     X ────────> B
+     │           │
+     │           │
      ∨           ∨
-     A -------> unit
+     A ───────> unit
 ```
 
 [commutes](foundation-core.commuting-squares-of-maps.md). However, all parallel

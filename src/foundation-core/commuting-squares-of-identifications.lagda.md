@@ -25,11 +25,11 @@ A square of [identifications](foundation-core.identity-types.md)
 
 ```text
            top
-       x -------> y
-       |          |
-  left |          | right
+       x ───────> y
+       │          │
+  left │          │ right
        ∨          ∨
-       z -------> w
+       z ───────> w
           bottom
 ```
 
@@ -61,11 +61,11 @@ are commuting squares of identifications of the form
 
 ```text
        refl
-    a -----> a
-    |        |
-  p |        | p
+    a ─────> a
+    │        │
+  p │        │ p
     ∨        ∨
-    b -----> b.
+    b ─────> b.
        refl
 ```
 
@@ -86,11 +86,11 @@ are commuting squares of identifications of the form
 
 ```text
            p
-       a -----> b
-       |        |
-  refl |        | refl
+       a ─────> b
+       │        │
+  refl │        │ refl
        ∨        ∨
-       a -----> b.
+       a ─────> b.
            p
 ```
 
@@ -112,11 +112,11 @@ Given a commuting square of identifications
 
 ```text
            top
-       x -------> y
-       |          |
-  left |          | right
+       x ───────> y
+       │          │
+  left │          │ right
        ∨          ∨
-       z -------> w,
+       z ───────> w,
           bottom
 ```
 
@@ -124,11 +124,11 @@ the square of identifications
 
 ```text
              inv top
-        y ------------> x
-        |               |
-  right |               | left
+        y ────────────> x
+        │               │
+  right │               │ left
         ∨               ∨
-        w ------------> z
+        w ────────────> z
            inv bottom
 ```
 
@@ -153,11 +153,11 @@ Given a commuting square of identifications
 
 ```text
            top
-       x -------> y
-       |          |
-  left |          | right
+       x ───────> y
+       │          │
+  left │          │ right
        ∨          ∨
-       z -------> w,
+       z ───────> w,
           bottom
 ```
 
@@ -165,11 +165,11 @@ the square of identifications
 
 ```text
               bottom
-           z -------> w
-           |          |
-  inv left |          | inv right
+           z ───────> w
+           │          │
+  inv left │          │ inv right
            ∨          ∨
-           x -------> y
+           x ───────> y
                top
 ```
 
@@ -194,11 +194,11 @@ Given a commuting square of identifications
 
 ```text
            top
-       x -------> y
-       |          |
-  left |          | right
+       x ───────> y
+       │          │
+  left │          │ right
        ∨          ∨
-       z -------> w
+       z ───────> w
           bottom
 ```
 
@@ -206,11 +206,11 @@ in a type `A`, and given a map `f : A → B`, the square of identifications
 
 ```text
                  ap f top
-           f x -----------> f y
-            |                |
-  ap f left |                | ap f right
+           f x ───────────> f y
+            │                │
+  ap f left │                │ ap f right
             ∨                ∨
-            z -------------> w
+            z ─────────────> w
                ap f bottom
 ```
 
@@ -239,11 +239,11 @@ the four sides with another identification, as for example in the diagram below:
 
 ```text
              top
-       a ---------> b
-       |           | |
-  left |     right |=| right'
+       a ─────────> b
+       │           │ │
+  left │     right │=│ right'
        ∨           ∨ ∨
-       c ---------> d.
+       c ─────────> d.
            bottom
 ```
 
@@ -261,12 +261,12 @@ Consider a commuting diagram of identifications
 
 ```text
            top'
-         ------->
-       x -------> y
-       |   top    |
-  left |          | right
+         ───────>
+       x ───────> y
+       │   top    │
+  left │          │ right
        ∨          ∨
-       z -------> w.
+       z ───────> w.
           bottom
 ```
 
@@ -274,11 +274,11 @@ with an identification `top ＝ top'`. Then we get an equivalence
 
 ```text
            top                             top'
-       x -------> y                    x -------> y
-       |          |                    |          |
-  left |          | right    ≃    left |          | right
+       x ───────> y                    x ───────> y
+       │          │                    │          │
+  left │          │ right    ≃    left │          │ right
        ∨          ∨                    ∨          ∨
-       z -------> w                    z -------> w.
+       z ───────> w                    z ───────> w.
           bottom                          bottom
 ```
 
@@ -325,11 +325,11 @@ Consider a commuting diagram of identifications
 
 ```text
               top
-         x -------> y
-        | |         |
-  left' | | left    | right
+         x ───────> y
+        │ │         │
+  left' │ │ left    │ right
         ∨ ∨         ∨
-         z -------> w.
+         z ───────> w.
             bottom
 ```
 
@@ -337,11 +337,11 @@ with an identification `left ＝ left'`. Then we get an equivalence
 
 ```text
            top                              top
-       x -------> y                     x -------> y
-       |          |                     |          |
-  left |          | right    ≃    left' |          | right
+       x ───────> y                     x ───────> y
+       │          │                     │          │
+  left │          │ right    ≃    left' │          │ right
        ∨          ∨                     ∨          ∨
-       z -------> w                     z -------> w.
+       z ───────> w                     z ───────> w.
           bottom                           bottom
 ```
 
@@ -388,11 +388,11 @@ Consider a commuting diagram of identifications
 
 ```text
             top
-       x -------> y
-       |         | |
-  left |   right | | right'
+       x ───────> y
+       │         │ │
+  left │   right │ │ right'
        ∨         ∨ ∨
-       z -------> w.
+       z ───────> w.
           bottom
 ```
 
@@ -400,11 +400,11 @@ with an identification `right ＝ right'`. Then we get an equivalence
 
 ```text
            top                             top
-       x -------> y                    x -------> y
-       |          |                    |          |
-  left |          | right    ≃    left |          | right'
+       x ───────> y                    x ───────> y
+       │          │                    │          │
+  left │          │ right    ≃    left │          │ right'
        ∨          ∨                    ∨          ∨
-       z -------> w                    z -------> w.
+       z ───────> w                    z ───────> w.
           bottom                          bottom
 ```
 
@@ -451,12 +451,12 @@ Consider a commuting diagram of identifications
 
 ```text
             top
-       x -------> y
-       |          |
-  left |          | right
+       x ───────> y
+       │          │
+  left │          │ right
        ∨  bottom  ∨
-       z -------> w.
-         ------->
+       z ───────> w.
+         ───────>
           bottom'
 ```
 
@@ -464,11 +464,11 @@ with an identification `bottom ＝ bottom'`. Then we get an equivalence
 
 ```text
            top                             top
-       x -------> y                    x -------> y
-       |          |                    |          |
-  left |          | right    ≃    left |          | right
+       x ───────> y                    x ───────> y
+       │          │                    │          │
+  left │          │ right    ≃    left │          │ right
        ∨          ∨                    ∨          ∨
-       z -------> w                    z -------> w.
+       z ───────> w                    z ───────> w.
           bottom                          bottom'
 ```
 
@@ -515,11 +515,11 @@ Given a commuting square of identifications
 
 ```text
            top
-       x -------> y
-       |          |
-  left |          | right
+       x ───────> y
+       │          │
+  left │          │ right
        ∨          ∨
-       z -------> w,
+       z ───────> w,
           bottom
 ```
 
@@ -529,11 +529,11 @@ we may consider four ways of attaching new identifications to it:
 
    ```text
                 p ∙ top
-              u -------> y
-              |          |
-     p ∙ left |          | right
+              u ───────> y
+              │          │
+     p ∙ left │          │ right
               ∨          ∨
-              z -------> w.
+              z ───────> w.
                  bottom
    ```
 
@@ -548,11 +548,11 @@ we may consider four ways of attaching new identifications to it:
 
    ```text
                    top
-           x ------------> y
-           |               |
-      left |               | right ∙ p
+           x ────────────> y
+           │               │
+      left │               │ right ∙ p
            ∨               ∨
-           z ------------> u.
+           z ────────────> u.
               bottom ∙ p
    ```
 
@@ -567,11 +567,11 @@ we may consider four ways of attaching new identifications to it:
 
    ```text
                       top
-              x --------------> y
-              |                 |
-     left ∙ p |                 | right
+              x ──────────────> y
+              │                 │
+     left ∙ p │                 │ right
               ∨                 ∨
-              u --------------> w.
+              u ──────────────> w.
                  p⁻¹ ∙ bottom
    ```
 
@@ -592,11 +592,11 @@ we may consider four ways of attaching new identifications to it:
 
    ```text
              top ∙ p
-          x --------> u
-          |           |
-     left |           | p⁻¹ ∙ right
+          x ────────> u
+          │           │
+     left │           │ p⁻¹ ∙ right
           ∨           ∨
-          z --------> w.
+          z ────────> w.
              bottom
    ```
 
@@ -625,11 +625,11 @@ For any identification `p : u ＝ x` we obtain an equivalence
 
 ```text
            top                                p ∙ top
-       x -------> y                         u -------> y
-       |          |                         |          |
-  left |          | right    ≃     p ∙ left |          | right
+       x ───────> y                         u ───────> y
+       │          │                         │          │
+  left │          │ right    ≃     p ∙ left │          │ right
        ∨          ∨                         ∨          ∨
-       z -------> w                         z -------> w
+       z ───────> w                         z ───────> w
           bottom                               bottom
 ```
 
@@ -665,11 +665,11 @@ For any identification `p : w ＝ u` we obtain an equivalence
 
 ```text
            top                                 top
-       x -------> y                     x ------------> y
-       |          |                     |               |
-  left |          | right    ≃     left |               | right ∙ p
+       x ───────> y                     x ────────────> y
+       │          │                     │               │
+  left │          │ right    ≃     left │               │ right ∙ p
        ∨          ∨                     ∨               ∨
-       z -------> w                     z ------------> w
+       z ───────> w                     z ────────────> w
           bottom                           bottom ∙ p
 ```
 
@@ -757,11 +757,11 @@ with `α : inv p ＝ q` we obtain an equivalence
 
 ```text
            top                                    top
-       x -------> y                         x -----------> y
-       |          |                         |              |
-  left |          | right    ≃     left ∙ p |              | right
+       x ───────> y                         x ───────────> y
+       │          │                         │              │
+  left │          │ right    ≃     left ∙ p │              │ right
        ∨          ∨                         ∨              ∨
-       z -------> w                         u -----------> w
+       z ───────> w                         u ───────────> w
           bottom                               q ∙ bottom
 ```
 
@@ -805,11 +805,11 @@ with `α : inv p ＝ q` we obtain an equivalence
 
 ```text
            top                             top ∙ p
-       x -------> y                     x --------> u
-       |          |                     |           |
-  left |          | right    ≃     left |           | q ∙ right
+       x ───────> y                     x ────────> u
+       │          │                     │           │
+  left │          │ right    ≃     left │           │ q ∙ right
        ∨          ∨                     ∨           ∨
-       z -------> w                     z --------> w
+       z ───────> w                     z ────────> w
           bottom                           bottom
 ```
 
@@ -852,11 +852,11 @@ Consider two squares of identifications as in the diagram
 
 ```text
             top-left         top-right
-       a -------------> b -------------> c
-       |                |                |
-  left |                | middle         | right
+       a ─────────────> b ─────────────> c
+       │                │                │
+  left │                │ middle         │ right
        ∨                ∨                ∨
-       d -------------> e -------------> f
+       d ─────────────> e ─────────────> f
           bottom-left      bottom-right
 ```
 
@@ -901,15 +901,15 @@ Consider two squares of identifications as in the diagram
 
 ```text
                   top
-              a --------> b
-              |           |
-     top-left |           | top-right
+              a ────────> b
+              │           │
+     top-left │           │ top-right
               ∨  middle   ∨
-              c --------> d
-              |           |
-  bottom-left |           | bottom-right
+              c ────────> d
+              │           │
+  bottom-left │           │ bottom-right
               ∨           ∨
-              e --------> f
+              e ────────> f
                  bottom
 ```
 
@@ -1060,11 +1060,11 @@ Consider the vertically constant square of identifications
 
 ```text
            p
-       x -----> y
-       |        |
-  refl |        | refl
+       x ─────> y
+       │        │
+  refl │        │ refl
        ∨        ∨
-       x -----> y
+       x ─────> y
            p
 ```
 
@@ -1074,11 +1074,11 @@ of identifications
 
 ```text
             p
-       x -------> y
-       |          |
-  refl |   refl   | q
+       x ───────> y
+       │          │
+  refl │   refl   │ q
        ∨          ∨
-       x -------> z
+       x ───────> z
           p ∙ q
 ```
 
@@ -1104,11 +1104,11 @@ Consider a horizontally constant commuting square of identifications
 
 ```text
        refl
-    x -----> x
-    |        |
-  p |        | p
+    x ─────> x
+    │        │
+  p │        │ p
     ∨        ∨
-    y -----> y
+    y ─────> y
        refl
 ```
 
@@ -1117,11 +1117,11 @@ right whiskering of the above square with `q` is the square
 
 ```text
        refl
-    x -----> x
-    |        |
-  p |  refl  | p ∙ q
+    x ─────> x
+    │        │
+  p │  refl  │ p ∙ q
     ∨        ∨
-    y -----> z.
+    y ─────> z.
         q
 ```
 
@@ -1148,11 +1148,11 @@ square of identifications
 
 ```text
        refl
-    y -----> y
-    |        |
-  q |        | q
+    y ─────> y
+    │        │
+  q │        │ q
     ∨        ∨
-    z -----> z
+    z ─────> z
        refl
 ```
 
@@ -1161,11 +1161,11 @@ with `p` is the commuting square
 
 ```text
                                   q ∙ refl
-        x ------------------------------------------------------> y
-        |                                                         |
-  q ∙ p |  right-unit ∙ inv (right-whisker-concat right-unit p)   | p
+        x ──────────────────────────────────────────────────────> y
+        │                                                         │
+  q ∙ p │  right-unit ∙ inv (right-whisker-concat right-unit p)   │ p
         ∨                                                         ∨
-        z ------------------------------------------------------> z.
+        z ──────────────────────────────────────────────────────> z.
                                    refl
 ```
 
@@ -1200,11 +1200,11 @@ Consider the vertically constant square of identifications
 
 ```text
            q
-       y -----> z
-       |        |
-  refl |        | refl
+       y ─────> z
+       │        │
+  refl │        │ refl
        ∨        ∨
-       y -----> z
+       y ─────> z
            q
 ```
 
@@ -1213,11 +1213,11 @@ Then the left whiskering of the above square with `p` is the square
 
 ```text
                                     p ∙ q
-           x ---------------------------------------------------> z
-           |                                                      |
-  p ∙ refl |  right-whisker-concat right-unit q ∙ inv right-unit  | refl
+           x ───────────────────────────────────────────────────> z
+           │                                                      │
+  p ∙ refl │  right-whisker-concat right-unit q ∙ inv right-unit  │ refl
            ∨                                                      ∨
-           y ---------------------------------------------------> z.
+           y ───────────────────────────────────────────────────> z.
                                       q
 ```
 
@@ -1252,11 +1252,11 @@ Consider a commuting diagram of identifications of the form
 
 ```text
             top-left        top-right
-       a -------------> c -------------> e
-       |                |                |
-  left |                | middle         | right
+       a ─────────────> c ─────────────> e
+       │                │                │
+  left │                │ middle         │ right
        ∨                ∨                ∨
-       b -------------> d -------------> f
+       b ─────────────> d ─────────────> f
           bottom-left      bottom-right
 ```
 
@@ -1266,11 +1266,11 @@ associativity the horizontal concatenation of the squares
 
 ```text
               p ∙ top-left      top-right
-           x -------------> c -------------> e
-           |                |                |
-  p ∙ left |                | middle         | right
+           x ─────────────> c ─────────────> e
+           │                │                │
+  p ∙ left │                │ middle         │ right
            ∨                ∨                ∨
-           b -------------> d -------------> f
+           b ─────────────> d ─────────────> f
               bottom-left      bottom-right
 ```
 
@@ -1333,15 +1333,15 @@ Consider two squares of identifications as in the diagram
 
 ```text
                   top
-              a --------> b
-              |           |
-     top-left |           | top-right
+              a ────────> b
+              │           │
+     top-left │           │ top-right
               ∨  middle   ∨
-              c --------> d
-              |           |
-  bottom-left |           | bottom-right
+              c ────────> d
+              │           │
+  bottom-left │           │ bottom-right
               ∨           ∨
-              e --------> f
+              e ────────> f
                  bottom
 ```
 
@@ -1351,15 +1351,15 @@ vertical pasting of the squares
 
 ```text
                   p ∙ top
-               x --------> b
-               |           |
-  p ∙ top-left |           | top-right
+               x ────────> b
+               │           │
+  p ∙ top-left │           │ top-right
                ∨  middle   ∨
-               c --------> d
-               |           |
-   bottom-left |           | bottom-right
+               c ────────> d
+               │           │
+   bottom-left │           │ bottom-right
                ∨           ∨
-               e --------> f.
+               e ────────> f.
                   bottom
 ```
 
@@ -1417,11 +1417,11 @@ Consider a commuting diagram of identifications of the form
 
 ```text
             top-left        top-right
-       a -------------> c -------------> e
-       |                |                |
-  left |                | middle         | right
+       a ─────────────> c ─────────────> e
+       │                │                │
+  left │                │ middle         │ right
        ∨                ∨                ∨
-       b -------------> d -------------> f
+       b ─────────────> d ─────────────> f
           bottom-left      bottom-right
 ```
 
@@ -1431,11 +1431,11 @@ pasting of the squares
 
 ```text
             top-left           top-right
-       a -------------> c ------------------> e
-       |                |                     |
-  left |                | middle              | right ∙ q
+       a ─────────────> c ──────────────────> e
+       │                │                     │
+  left │                │ middle              │ right ∙ q
        ∨                ∨                     ∨
-       b -------------> d ------------------> y
+       b ─────────────> d ──────────────────> y
           bottom-left      bottom-right ∙ q
 ```
 
@@ -1496,15 +1496,15 @@ Consider two squares of identifications as in the diagram
 
 ```text
                   top
-              a --------> b
-              |           |
-     top-left |           | top-right
+              a ────────> b
+              │           │
+     top-left │           │ top-right
               ∨  middle   ∨
-              c --------> d
-              |           |
-  bottom-left |           | bottom-right
+              c ────────> d
+              │           │
+  bottom-left │           │ bottom-right
               ∨           ∨
-              e --------> f
+              e ────────> f
                  bottom
 ```
 
@@ -1514,15 +1514,15 @@ vertical pasting of the squares
 
 ```text
                      top
-              a ------------> b
-              |               |
-     top-left |               | top-right
+              a ────────────> b
+              │               │
+     top-left │               │ top-right
               ∨    middle     ∨
-              c ------------> d
-              |               |
-  bottom-left |               | bottom-right ∙ q
+              c ────────────> d
+              │               │
+  bottom-left │               │ bottom-right ∙ q
               ∨               ∨
-              e ------------> y.
+              e ────────────> y.
                  bottom ∙ q
 ```
 

@@ -46,9 +46,9 @@ equivalence. The map `htpy-eq` is the unique map that fits in a
 
 ```text
               htpy-eq
-    (f ＝ g) ----------> (f ~ g)
-           \            /
-  ap (ev x) \          / ev x
+    (f ＝ g) ──────────> (f ~ g)
+           ╲            ╱
+  ap (ev x) ╲          ╱ ev x
              ∨        ∨
             (f x ＝ g x)
 ```
@@ -251,11 +251,11 @@ For any two functions `f g : (x : A) → B x` we have a
 
 ```text
                   inv
-       (f = g) ---------> (g = f)
-          |                  |
-  htpy-eq |                  | htpy-eq
+       (f = g) ─────────> (g = f)
+          │                  │
+  htpy-eq │                  │ htpy-eq
           ∨                  ∨
-       (f ~ g) ---------> (g ~ f).
+       (f ~ g) ─────────> (g ~ f).
                 inv-htpy
 ```
 
@@ -277,11 +277,11 @@ For any two functions `f g : (x : A) → B x` we have a commuting square
 
 ```text
                 inv-htpy
-       (f ~ g) ---------> (g ~ f)
-          |                  |
-  eq-htpy |                  | eq-htpy
+       (f ~ g) ─────────> (g ~ f)
+          │                  │
+  eq-htpy │                  │ eq-htpy
           ∨                  ∨
-       (f = g) ---------> (g = f).
+       (f = g) ─────────> (g = f).
                   inv
 ```
 

@@ -24,9 +24,9 @@ A triangle of maps
 
 ```text
         top
-     A ----> B
-      \     /
-  left \   / right
+     A ────> B
+      ╲     ╱
+  left ╲   ╱ right
         ∨ ∨
          X
 ```
@@ -81,10 +81,10 @@ then the triangle
 
 ```text
        t
-  B ------> A
-   \       /
-   g\     /f
-     \   /
+  B ──────> A
+   ╲       ╱
+   g╲     ╱f
+     ╲   ╱
       ∨ ∨
        X
 ```
@@ -113,10 +113,10 @@ then the triangle
 
 ```text
        f
-  A ------> X
-   \       /
-   h\     /r
-     \   /
+  A ──────> X
+   ╲       ╱
+   h╲     ╱r
+     ╲   ╱
       ∨ ∨
        B
 ```

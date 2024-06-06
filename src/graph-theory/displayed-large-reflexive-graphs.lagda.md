@@ -33,7 +33,7 @@ A {{#concept "displayed large reflexive graph"}} `H` a over a base
 
            ↧
 
-    x ----------> y    ∋ G.
+    x ──────────> y    ∋ G.
            e
   ```
 

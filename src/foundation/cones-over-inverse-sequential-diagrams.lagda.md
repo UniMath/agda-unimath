@@ -38,8 +38,8 @@ from `X` into the sequence of types of `A` such that the triangles
 
 ```text
      X
-    / \
-   /   \
+    ╱ ╲
+   ╱   ╲
   ∨     ∨
  Aₙ₊₁ -> Aₙ
 ```

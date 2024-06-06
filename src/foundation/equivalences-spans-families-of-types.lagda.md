@@ -37,9 +37,9 @@ span `t` on `A` consists of an [equivalence](foundation-core.equivalences.md)
 
 ```text
       e
-  S ----> T
-   \     /
-    \   /
+  S ────> T
+   ╲     ╱
+    ╲   ╱
      ∨ ∨
       Aᵢ
 ```

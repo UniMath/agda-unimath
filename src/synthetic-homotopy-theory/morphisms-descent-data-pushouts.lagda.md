@@ -45,12 +45,12 @@ equipped with a family of [homotopies](foundation-core.homotopies.md) making
 
 ```text
               hA(fs)
-     PA(fs) --------> QA(fs)
-       |                |
-  PS s |                | QS s
-       |                |
+     PA(fs) ────────> QA(fs)
+       │                │
+  PS s │                │ QS s
+       │                │
        ∨                ∨
-     PB(gs) --------> QB(gs)
+     PB(gs) ────────> QB(gs)
               hB(gs)
 ```
 
@@ -72,12 +72,12 @@ homotopies
 
 ```text
                  HB(gs) ·r PS s
-  hB(gs) ∘ PS s ---------------> kB(gs) ∘ PS s
-         |                              |
-    hS s |                              | tS s
-         |                              |
+  hB(gs) ∘ PS s ───────────────> kB(gs) ∘ PS s
+         │                              │
+    hS s │                              │ tS s
+         │                              │
          ∨                              ∨
-  QS s ∘ hA(fs) ---------------> QS s ∘ kA(fs)
+  QS s ∘ hA(fs) ───────────────> QS s ∘ kA(fs)
                  QS s ·l HA(fs)
 ```
 
@@ -88,17 +88,17 @@ and `tS` along the common vertical maps
 ```text
              tA(fs)
             ________
-           /        ∨
+           ╱        ∨
      PA(fs)          QA(fs)
-       |   \________∧  |
-       |     hA(fs)    |
-       |               |
-  PS s |               | QS s
-       |     tB(gs)    |
-       |    ________   |
-       ∨   /        ∨  ∨
+       │   ╲________∧  │
+       │     hA(fs)    │
+       │               │
+  PS s │               │ QS s
+       │     tB(gs)    │
+       │    ________   │
+       ∨   ╱        ∨  ∨
      PB(gs)          QB(gs).
-           \________∧
+           ╲________∧
              hB(gs)
 ```
 

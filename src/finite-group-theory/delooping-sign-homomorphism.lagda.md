@@ -89,14 +89,14 @@ The delooping of a group homomorphism `f : G → H` is a pointed map
 commutes :
 
 ```text
-        f
-  G --------> H
-  |           |
- ≅|           |≅
-  |           |
-  ∨           ∨
-  BG ------> BH
-       ΩBf
+          f
+    G ────────> H
+    │           │
+  ≅ │           │ ≅
+    │           │
+    ∨           ∨
+    BG ──────> BH
+         ΩBf
 ```
 
 In this file, we study the delooping of the sign homomorphism, and, more

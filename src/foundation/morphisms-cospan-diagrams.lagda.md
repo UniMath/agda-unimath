@@ -23,11 +23,11 @@ A {{#concept "morphism of cospan diagrams" Agda=hom-cospan-diagram}} is a
 commuting diagram of the form
 
 ```text
-  A -----> X <----- B
-  |        |        |
-  |        |        |
+  A ─────> X <───── B
+  │        │        │
+  │        │        │
   ∨        ∨        ∨
-  A' ----> X' <---- B'.
+  A' ────> X' <──── B'.
 ```
 
 ## Definitions

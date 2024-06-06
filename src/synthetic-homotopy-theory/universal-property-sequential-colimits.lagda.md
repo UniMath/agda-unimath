@@ -61,7 +61,7 @@ diagram
 
 ```text
      a₀      a₁      a₂     i
- A₀ ---> A₁ ---> A₂ ---> ⋯ --> X.
+ A₀ ───> A₁ ───> A₂ ───> ⋯ ──> X.
 ```
 
 ## Definitions
@@ -421,10 +421,10 @@ we have [commuting triangles](foundation-core.commuting-triangles-of-maps.md)
 
 ```text
         aₙ
-  Aₙ ------> Aₙ₊₁
-    \   ≃   /
-  ≃  \     /
-   iₙ \   / iₙ₊₁
+  Aₙ ──────> Aₙ₊₁
+    ╲   ≃   ╱
+  ≃  ╲     ╱
+   iₙ ╲   ╱ iₙ₊₁
        ∨ ∨
         X ,
 ```
@@ -443,11 +443,11 @@ triangle commute:
 
 ```text
         cocone-map
-  X → Y ----------> cocone A Y
-        \         /
-         \       /
-   - ∘ i₀ \     / first-map-cocone-sequential-colimit
-           \   /
+  X → Y ──────────> cocone A Y
+        ╲         ╱
+         ╲       ╱
+   - ∘ i₀ ╲     ╱ first-map-cocone-sequential-colimit
+           ╲   ╱
             ∨ ∨
           A₀ → Y .
 ```
@@ -469,12 +469,12 @@ which to every `f : A₀ → Y` assigns the cocone
 
 ```text
        a₀       a₁
-  A₀ ----> A₁ ----> A₂ ----> ⋯
-    \      |      /
-     \     |     /
+  A₀ ────> A₁ ────> A₂ ────> ⋯
+    ╲      │      ╱
+     ╲     │     ╱
       \ f ∘ a₀⁻¹/
-     f \   |   / f ∘ a₁⁻¹ ∘ a₀⁻¹
-        \  |  /
+     f ╲   │   ╱ f ∘ a₁⁻¹ ∘ a₀⁻¹
+        ╲  │  ╱
          ∨ ∨ ∨
            Y ,
 ```
@@ -509,13 +509,13 @@ and a coherence datum which upon some pondering boils down to the following
 
 ```text
                         Kₙ ·r (aₙ⁻¹ ∘ aₙ)                Hₙ ·r (aₙ⁻¹ ∘ aₙ)
-     (j₀')ₙ ∘ aₙ⁻¹ ∘ aₙ ----------------> jₙ ∘ aₙ⁻¹ ∘ aₙ ----------------> jₙ₊₁ ∘ aₙ ∘ aₙ⁻¹ ∘ aₙ
-              |                                 |                                    |
-              |                                 |                                    |
+     (j₀')ₙ ∘ aₙ⁻¹ ∘ aₙ ────────────────> jₙ ∘ aₙ⁻¹ ∘ aₙ ────────────────> jₙ₊₁ ∘ aₙ ∘ aₙ⁻¹ ∘ aₙ
+              │                                 │                                    │
+              │                                 │                                    │
   (j₀')ₙ ·l is-retraction aₙ⁻¹      jₙ ·l is-retraction aₙ⁻¹            jₙ₊₁ ·l is-section aₙ⁻¹ ·r aₙ
-              |                                 |                                    |
+              │                                 │                                    │
               ∨                                 ∨                                    ∨
-           (j₀')ₙ ----------------------------> jₙ -------------------------->  jₙ₊₁ ∘ aₙ .
+           (j₀')ₙ ────────────────────────────> jₙ ──────────────────────────>  jₙ₊₁ ∘ aₙ .
                                Kₙ                                 Hₙ
 ```
 

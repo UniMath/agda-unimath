@@ -40,9 +40,9 @@ following diagram commmutes
 
 ```text
               S ·r f
-            --------->
+            ─────────>
   f ∘ g ∘ f            f.
-            --------->
+            ─────────>
               f ·l R
 ```
 
@@ -55,9 +55,9 @@ There is also the alternative coherence condition we could add
 
 ```text
               R ·r g
-            --------->
+            ─────────>
   g ∘ f ∘ g            g.
-            --------->
+            ─────────>
               g ·l S
 ```
 
@@ -628,11 +628,11 @@ The proof follows Lemma 4.2.2 in {{#cite UF13}}.
 
 ```text
                    gfRg
-     gfgfg --------------------> gfg
-       |                          |
-  Rgfg |  nat-htpy R ·r (R ·r g)  | Rg
+     gfgfg ────────────────────> gfg
+       │                          │
+  Rgfg │  nat-htpy R ·r (R ·r g)  │ Rg
        ∨                          ∨
-      gfg ----------------------> g.
+      gfg ──────────────────────> g.
                     Rg
 ```
 
@@ -646,11 +646,11 @@ along the top edge of this naturality square obtaining the coherence square
 
 ```text
              gfgS
-     gfgfg -------> gfg
-       |             |
-  Rgfg |             | Rg
+     gfgfg ───────> gfg
+       │             │
+  Rgfg │             │ Rg
        ∨             ∨
-      gfg ---------> g.
+      gfg ─────────> g.
               Rg
 ```
 
@@ -658,11 +658,11 @@ There is also the naturality square
 
 ```text
                    gfgS
-     gfgfg --------------------> gfg
-       |                          |
-  Rgfg |  nat-htpy (R ·r g) ·r S  | Rg
+     gfgfg ────────────────────> gfg
+       │                          │
+  Rgfg │  nat-htpy (R ·r g) ·r S  │ Rg
        ∨                          ∨
-      gfg ----------------------> g.
+      gfg ──────────────────────> g.
                     gS
 ```
 
@@ -670,11 +670,11 @@ Now, by pasting these along the common edge `Rgfg`, we obtain
 
 ```text
             gfgS           gfgS
-      gfg <------- gfgfg -------> gfg
-       |             |             |
-    Rg |             | Rgfg        | Rg
+      gfg <─────── gfgfg ───────> gfg
+       │             │             │
+    Rg │             │ Rgfg        │ Rg
        ∨             ∨             ∨
-       g <--------- gfg --------> gm
+       g <───────── gfg ────────> gm
              Rg             gS
 ```
 
@@ -820,11 +820,11 @@ we must construct a coherence `C'` of the square
 
 ```text
            Hgf'
-    f'gf' -----> f'gf
-      |           |
- f'gH |           | Sf'
+    f'gf' ─────> f'gf
+      │           │
+ f'gH │           │ Sf'
       ∨           ∨
-    f'gf -------> f'.
+    f'gf ───────> f'.
            f'R
 ```
 
@@ -833,9 +833,9 @@ via the composite
 
 ```text
                         Sf
-            HgH       ------>     H⁻¹
-    f'gf' ------> fgf    C    f ------> f'.
-                      ------>
+            HgH       ──────>     H⁻¹
+    f'gf' ──────> fgf    C    f ──────> f'.
+                      ──────>
                         fR
 ```
 
@@ -871,11 +871,11 @@ squares
 
 ```text
             fgH                        Hgf
-     fgf' -------> fgf          f'gf -------> fgf
-      |             |            |             |
-  Sf' |             | Sf     f'R |             | fR
+     fgf' ───────> fgf          f'gf ───────> fgf
+      │             │            │             │
+  Sf' │             │ Sf     f'R │             │ fR
       ∨             ∨            ∨             ∨
-      f' ---------> f            f' ---------> f.
+      f' ─────────> f            f' ─────────> f.
              H                          H
 ```
 
@@ -1172,10 +1172,10 @@ of coherently invertible maps asserts that for any
 
 ```text
        h
-  A ------> B
-   \       /
-   f\     /g
-     \   /
+  A ──────> B
+   ╲       ╱
+   f╲     ╱g
+     ╲   ╱
       ∨ ∨
        X,
 ```

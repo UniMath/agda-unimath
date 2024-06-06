@@ -20,11 +20,11 @@ open import foundation.universe-levels
 A square of morphisms
 
 ```text
-  x ------> y
-  |         |
-  |         |
+  x ──────> y
+  │         │
+  │         │
   ∨         ∨
-  z ------> w
+  z ──────> w
 ```
 
 in a [set-magmoid](category-theory.set-magmoids.md) `C` is said to **commute**

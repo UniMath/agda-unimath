@@ -39,11 +39,11 @@ of [pushouts](synthetic-homotopy-theory.pushouts.md) states that given a pushout
 
 ```text
         g
-    S -----> B
-    |        |
-  f |        | j
+    S ─────> B
+    │        │
+  f │        │ j
     ∨        ∨
-    A -----> X,
+    A ─────> X,
         i
 ```
 
@@ -55,9 +55,9 @@ type families `X → 𝒰` and the type of
 
 ```text
            cocone-map
-  (X → 𝒰) -----------> cocone 𝒰
-         \             /
-           \         /
+  (X → 𝒰) ───────────> cocone 𝒰
+         ╲             ╱
+           ╲         ╱
              ∨     ∨
           descent-data.
 ```
@@ -91,12 +91,12 @@ and the square
 
 ```text
            eA (fs)
-  P(ifs) --------> PA(fs)
-     |                 |
-     | tr P (H s)      | PS s
-     |                 |
+  P(ifs) ────────> PA(fs)
+     │                 │
+     │ tr P (H s)      │ PS s
+     │                 │
      ∨                 ∨
-  P(jgs) --------> PB(gs)
+  P(jgs) ────────> PB(gs)
            eB (gs)
 ```
 

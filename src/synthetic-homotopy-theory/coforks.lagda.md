@@ -46,8 +46,8 @@ map `e : B → X` together with a [homotopy](foundation.homotopies.md)
 
 ```text
      g
-   ----->     e
- A -----> B -----> X
+   ─────>     e
+ A ─────> B ─────> X
      f
 ```
 
@@ -119,8 +119,8 @@ a new cofork `h ∘ e`.
 
 ```text
      g
-   ----->     e        h
- A -----> B -----> X -----> Y
+   ─────>     e        h
+ A ─────> B ─────> X ─────> Y
      f
 ```
 
@@ -197,8 +197,8 @@ module _
 
 ```text
      g
-   ----->     e        h        k
- A -----> B -----> X -----> Y -----> Z
+   ─────>     e        h        k
+ A ─────> B ─────> X ─────> Y ─────> Z
      f
 ```
 
@@ -228,7 +228,7 @@ of [cocones](synthetic-homotopy-theory.cocones-under-spans.md) under the span
 
 ```text
      ∇         [f,g]
-A <----- A + A -----> B.
+A <───── A + A ─────> B.
 ```
 
 ```agda
@@ -384,12 +384,12 @@ A [morphism of double arrows](foundation.morphisms-double-arrows.md)
 
 ```text
            i
-     A --------> X
-    | |         | |
-  f | | g     h | | k
-    | |         | |
+     A ────────> X
+    │ │         │ │
+  f │ │ g     h │ │ k
+    │ │         │ │
     ∨ ∨         ∨ ∨
-     B --------> Y
+     B ────────> Y
            j
 ```
 
@@ -397,11 +397,11 @@ induces a [morphism of span diagrams](foundation.morphisms-span-diagrams.md)
 
 ```text
           ∇           [f,g]
-    A <------- A + A -------> B
-    |            |            |
-  i |            | i + i      | j
+    A <─────── A + A ───────> B
+    │            │            │
+  i │            │ i + i      │ j
     ∨            ∨            ∨
-    X <------- X + X -------> Y
+    X <─────── X + X ───────> Y
           ∇           [h,k]
 ```
 
@@ -461,12 +461,12 @@ An [equivalence of double arrows](foundation.equivalences-double-arrows.md)
 
 ```text
            i
-     A --------> X
-    | |    ≃    | |
-  f | | g     h | | k
-    | |         | |
+     A ────────> X
+    │ │    ≃    │ │
+  f │ │ g     h │ │ k
+    │ │         │ │
     ∨ ∨    ≃    ∨ ∨
-     B --------> Y
+     B ────────> Y
            j
 ```
 
@@ -475,11 +475,11 @@ induces an
 
 ```text
           ∇           [f,g]
-    A <------- A + A -------> B
-    |            |            |
-  i | ≃        ≃ | i + i    ≃ | j
+    A <─────── A + A ───────> B
+    │            │            │
+  i │ ≃        ≃ │ i + i    ≃ │ j
     ∨            ∨            ∨
-    X <------- X + X -------> Y
+    X <─────── X + X ───────> Y
           ∇           [h,k]
 ```
 

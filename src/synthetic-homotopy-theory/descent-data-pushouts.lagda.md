@@ -27,7 +27,7 @@ for the [pushout](synthetic-homotopy-theory.universal-property-pushouts.md) of a
 
 ```text
      f     g
-  A <-- S --> B
+  A <── S ──> B
 ```
 
 is a triple `(PA, PB, PS)`, where `PA : A → 𝒰` is a type family over `A`,
@@ -119,11 +119,11 @@ Given a [cocone](synthetic-homotopy-theory.cocones-under-spans.md)
 
 ```text
         g
-    S -----> B
-    |        |
-  f |        | j
+    S ─────> B
+    │        │
+  f │        │ j
     ∨        ∨
-    A -----> X
+    A ─────> X
         i
 ```
 

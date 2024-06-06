@@ -25,9 +25,9 @@ We draw a double arrow as
 
 ```text
      A
-    | |
-  f | | g
-    | |
+    │ │
+  f │ │ g
+    │ │
     ∨ ∨
      B
 ```

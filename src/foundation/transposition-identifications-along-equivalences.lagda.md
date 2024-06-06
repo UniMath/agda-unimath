@@ -46,10 +46,10 @@ witnessing that the triangle
 
 ```text
       ap e q
-  e x ------> e (e⁻¹ y)
-     \       /
-    p \     / is-section-map-inv-equiv e y
-       \   /
+  e x ──────> e (e⁻¹ y)
+     ╲       ╱
+    p ╲     ╱ is-section-map-inv-equiv e y
+       ╲   ╱
         ∨ ∨
          y
 ```

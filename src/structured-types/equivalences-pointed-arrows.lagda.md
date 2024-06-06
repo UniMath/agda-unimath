@@ -35,11 +35,11 @@ consisting of [pointed equivalences](structured-types.pointed-equivalences.md)
 
 ```text
         i
-    A -----> X
-    |        |
-  f |        | g
+    A ─────> X
+    │        │
+  f │        │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 

@@ -46,9 +46,9 @@ over `H`, expressed as
 
 ```text
         g a
-   C a -----> D (f a)
-      \      /
-  g' a \    / tr D (H a)
+   C a ─────> D (f a)
+      ╲      ╱
+  g' a ╲    ╱ tr D (H a)
         ∨  ∨
       D (f' a)         ,
 ```
@@ -66,13 +66,13 @@ of
 
 ```text
                       ap (λ p → tr D p (g a c)) (α a)
-  tr D (H a) (g a c) --------------------------------- tr D (H' a) (g a c)
-                     \                               /
-                        \                         /
-                           \                   /
-                      K a c   \             /   K' a c
-                                 \       /
-                                    \ /
+  tr D (H a) (g a c) ───────────────────────────────── tr D (H' a) (g a c)
+                     ╲                               ╱
+                        ╲                         ╱
+                           ╲                   ╱
+                      K a c   ╲             ╱   K' a c
+                                 ╲       ╱
+                                    ╲  ╱
                                   g' a c        .
 ```
 

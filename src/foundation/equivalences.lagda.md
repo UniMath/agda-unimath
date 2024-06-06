@@ -257,12 +257,12 @@ Consider a commuting diagram of maps
 
 ```text
          i
-    A ------> X
-    |       ∧ |
-  f |     /   | g
-    |   h     |
-    ∨ /       ∨
-    B ------> Y.
+    A ──────> X
+    │       ∧ │
+  f │     ╱   │ g
+    │   h     │
+    ∨ ╱       ∨
+    B ──────> Y.
          j
 ```
 

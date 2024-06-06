@@ -37,11 +37,11 @@ such that the composition `i ∘ g` is `f`.
 
 ```text
            A
-          ∧|
-        /  i
-      g    |
-    /      ∨
-  X - f -> B
+          ∧│
+        ╱  i
+      g    │
+    ╱      ∨
+  X ─ f ─> B
 ```
 
 ## Definition
@@ -78,14 +78,14 @@ module _
 
 ```text
            A
-          ∧|
-        /  i
-      g    |
-    /      ∨
-  X - f -> B
-    \      |
+          ∧│
+        ╱  i
+      g    │
+    ╱      ∨
+  X ─ f ─> B
+    ╲      │
       h    j
-       \   |
+       ╲   │
          ∨ ∨
            C
 ```
@@ -103,10 +103,10 @@ module _
 ### Horizontal composition of lifts of maps
 
 ```text
-  A - f -> B - g -> C
-    \      |      /
+  A ─ f ─> B ─ g ─> C
+    ╲      │      ╱
       h    i    j
-        \  |  /
+        ╲  │  ╱
          ∨ ∨ ∨
            X
 ```
@@ -126,11 +126,11 @@ module _
 
 ```text
            A
-          ∧|
-        /  i
-      g    |
-    /      ∨
-  X - f -> B - h -> S
+          ∧│
+        ╱  i
+      g    │
+    ╱      ∨
+  X ─ f ─> B ─ h ─> S
 ```
 
 ```agda
@@ -147,11 +147,11 @@ module _
 
 ```text
                     A
-                   ∧|
-                 /  i
-               g    |
-             /      ∨
-  S - h -> X - f -> B
+                   ∧│
+                 ╱  i
+               g    │
+             ╱      ∨
+  S ─ h ─> X ─ f ─> B
 ```
 
 ```agda

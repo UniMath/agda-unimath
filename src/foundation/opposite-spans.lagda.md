@@ -22,14 +22,14 @@ Consider a [span](foundation.spans.md) `(S , f , g)` from `A` to `B`. The
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 is the span
 
 ```text
        g       f
-  B <----- S -----> A.
+  B <───── S ─────> A.
 ```
 
 Recall that [binary type duality](foundation.binary-type-duality.md) shows that

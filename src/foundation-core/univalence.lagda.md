@@ -127,11 +127,11 @@ commuting diagram
 
 ```text
                  equiv-eq
-    (B x = B y) ---------> (B x ≃ B y)
-         ∧                      |
-  ap B p |                      | map-equiv
-         |                      ∨
-      (x = y) -----------> (B x → B y).
+    (B x = B y) ─────────> (B x ≃ B y)
+         ∧                      │
+  ap B p │                      │ map-equiv
+         │                      ∨
+      (x = y) ───────────> (B x → B y).
                   tr B p
 ```
 

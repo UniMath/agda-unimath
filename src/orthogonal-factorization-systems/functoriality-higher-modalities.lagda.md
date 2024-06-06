@@ -37,11 +37,11 @@ into a [natural square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
          f
-    X ------> Y
-    |         |
-    |         |
+    X ──────> Y
+    │         │
+    │         │
     ∨         ∨
-   ○ X ----> ○ Y.
+   ○ X ────> ○ Y.
         ○ f
 ```
 
@@ -98,11 +98,11 @@ For every map `f : X → Y` there is a naturality square
 
 ```text
          f
-    X ------> Y
-    |         |
-    |         |
+    X ──────> Y
+    │         │
+    │         │
     ∨         ∨
-   ○ X ----> ○ Y.
+   ○ X ────> ○ Y.
         ○ f
 ```
 

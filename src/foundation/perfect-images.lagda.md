@@ -42,7 +42,7 @@ also the following chain
 
 ```text
       f          g            f               g       g
-  a₀ --> f (a₀) --> g(f(a₀)) --> f(g(f(a₀))) --> ... --> (g ◦ f)ⁿ(a₀) ＝ a
+  a₀ ──> f (a₀) ──> g(f(a₀)) ──> f(g(f(a₀))) ──> ... ──> (g ◦ f)ⁿ(a₀) ＝ a
 ```
 
 We say `a₀` is an {{#concept "origin"}} for `a`, and `a` is a

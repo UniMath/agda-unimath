@@ -105,7 +105,7 @@ map `f := (f₀ , f₁) : A →∗ B`. Then `g` is base point preserving.
 
 ```text
        (ap g f₁)⁻¹              H *
-  g * -------------> g (f₀ *) -------> *.
+  g * ─────────────> g (f₀ *) ───────> *.
 ```
 
 In order to show that the retracting homotopy `H : g ∘ f₀ ~ id` is pointed, we
@@ -113,10 +113,10 @@ have to show that the triangle of identifications
 
 ```text
                                    H *
-                         g (f₀ *) -----> *
-                                \       /
-  ap g f₁ ∙ ((ap g f₁)⁻¹ ∙ H *)  \     / refl
-                                  \   /
+                         g (f₀ *) ─────> *
+                                ╲       ╱
+  ap g f₁ ∙ ((ap g f₁)⁻¹ ∙ H *)  ╲     ╱ refl
+                                  ╲   ╱
                                    ∨ ∨
                                     *
 ```

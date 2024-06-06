@@ -36,13 +36,13 @@ The term "equifibered" comes from the equivalent definition as
 over `(A, a)`
 
 ```text
-     b₀      b₁      b₂
- B₀ ---> B₁ ---> B₂ ---> ⋯
- |       |       |
- |       |       |
- ↡       ↡       ↡
- A₀ ---> A₁ ---> A₂ ---> ⋯ ,
-     a₀      a₁      a₂
+      b₀      b₁      b₂
+  B₀ ───> B₁ ───> B₂ ───> ⋯
+  │       │       │
+  │       │       │
+  ↡       ↡       ↡
+  A₀ ───> A₁ ───> A₂ ───> ⋯ ,
+      a₀      a₁      a₂
 ```
 
 which are said to be "fibered over `A`", whose maps `bₙ` are equivalences.

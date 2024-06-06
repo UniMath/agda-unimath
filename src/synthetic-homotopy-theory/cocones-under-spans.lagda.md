@@ -39,11 +39,11 @@ A **cocone under a [span](foundation.spans.md)** `A <-f- S -g-> B` with codomain
 
 ```text
         g
-    S -----> B
-    |        |
-  f |        | j
+    S ─────> B
+    │        │
+  f │        │ j
     ∨        ∨
-    A -----> X
+    A ─────> X
         i
 ```
 
@@ -232,11 +232,11 @@ cocone-map-comp f g (i , j , H) h k =
 
 ```text
         i       k
-    A ----> B ----> C
-    |       |       |
-  f |       |       |
+    A ────> B ────> C
+    │       │       │
+  f │       │       │
     ∨       ∨       ∨
-    X ----> Y ----> Z
+    X ────> Y ────> Z
 ```
 
 ```agda
@@ -267,11 +267,11 @@ A variation on the above:
 
 ```text
         i       k
-    A ----> B ----> C
-    |       |       |
-  f |     g |       |
+    A ────> B ────> C
+    │       │       │
+  f │     g │       │
     ∨       ∨       ∨
-    X ----> Y ----> Z
+    X ────> Y ────> Z
         j
 ```
 
@@ -290,15 +290,15 @@ cocone-comp-horizontal' f i k g j c coh =
 
 ```text
         i
-    A -----> X
-    |        |
-  f |        |
+    A ─────> X
+    │        │
+  f │        │
     ∨        ∨
-    B -----> Y
-    |        |
-  k |        |
+    B ─────> Y
+    │        │
+  k │        │
     ∨        ∨
-    C -----> Z
+    C ─────> Z
 ```
 
 ```agda
@@ -329,15 +329,15 @@ A variation on the above:
 
 ```text
         i
-    A -----> X
-    |        |
-  f |        | g
+    A ─────> X
+    │        │
+  f │        │ g
     ∨   j    ∨
-    B -----> Y
-    |        |
-  k |        |
+    B ─────> Y
+    │        │
+  k │        │
     ∨        ∨
-    C -----> Z
+    C ─────> Z
 ```
 
 ```agda
@@ -355,25 +355,25 @@ Given a commutative diagram like this,
 
 ```text
            g'
-       S' ---> B'
-      / \       \
-  f' /   \ k     \ j
-    /     ∨   g   ∨
-   A'     S ----> B
-     \    |       |
-    i \   | f     |
-       \  ∨       ∨
-        > A ----> X
+       S' ───> B'
+      ╱ ╲       ╲
+  f' ╱   ╲ k     ╲ j
+    ╱     ∨   g   ∨
+   A'     S ────> B
+     ╲    │       │
+    i ╲   │ f     │
+       ╲  ∨       ∨
+        > A ────> X
 ```
 
 we can compose both vertically and horizontally to get the following cocone:
 
 ```text
-  S' ---> B'
-  |       |
-  |       |
+  S' ───> B'
+  │       │
+  │       │
   ∨       ∨
-  A' ---> X
+  A' ───> X
 ```
 
 Notice that the triple `(i,j,k)` is really a morphism of spans. So the resulting

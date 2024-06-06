@@ -41,7 +41,7 @@ Here we show that when `P` is additionally equipped with corresponding
 `B`, it induces a cocone on the total sequential diagram
 
 ```text
-  Σ A₀ B₀ ----> Σ A₁ B₁ ----> ⋯ ----> Σ X P .
+  Σ A₀ B₀ ────> Σ A₁ B₁ ────> ⋯ ────> Σ X P .
 ```
 
 Specializing the above to the case when the descent data is the one induced by
@@ -49,11 +49,11 @@ the family, we get a cocone of the form
 
 ```text
                 tot₍₊₁₎ (tr P Hₙ)
-  Σ Aₙ (P ∘ iₙ) ----------------> Σ Aₙ₊₁ (P ∘ iₙ₊₁)
-                \               /
-                  \           /
-  map-Σ-map-base iₙ \       / map-Σ-map-base iₙ₊₁
-                      \   /
+  Σ Aₙ (P ∘ iₙ) ────────────────> Σ Aₙ₊₁ (P ∘ iₙ₊₁)
+                ╲               ╱
+                  ╲           ╱
+  map-Σ-map-base iₙ ╲       ╱ map-Σ-map-base iₙ₊₁
+                      ╲   ╱
                        ∨ ∨
                       Σ X P .
 ```
@@ -133,11 +133,11 @@ In other words, there is an
 under the induced equivalence of sequential diagrams
 
 ```text
-     Σ A₀ B₀ ---------> Σ A₁ B₁ ------> ⋯ -----> Σ X P
-        |                  |                       |
-        | ≃                | ≃                     | ≃
+     Σ A₀ B₀ ─────────> Σ A₁ B₁ ──────> ⋯ ─────> Σ X P
+        │                  │                       │
+        │ ≃                │ ≃                     │ ≃
         ∨                  ∨                       ∨
-  Σ A₀ (P ∘ i₀) ---> Σ A₁ (P ∘ i₁) ---> ⋯ -----> Σ X P .
+  Σ A₀ (P ∘ i₀) ───> Σ A₁ (P ∘ i₁) ───> ⋯ ─────> Σ X P .
 ```
 
 ```agda

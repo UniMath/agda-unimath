@@ -41,8 +41,8 @@ of the concatenations.
 
   ```text
                  K
-        H      ----->
-    f -----> g -----> h,
+        H      ─────>
+    f ─────> g ─────> h,
                  L
   ```
 
@@ -56,8 +56,8 @@ of the concatenations.
 
   ```text
         H
-      ----->
-    f -----> g -----> h,
+      ─────>
+    f ─────> g ─────> h,
         K        L
   ```
 
@@ -75,8 +75,8 @@ the diagram
 
 ```text
                K
-      H      ----->
-  f -----> g -----> h.
+      H      ─────>
+  f ─────> g ─────> h.
                L
 ```
 
@@ -92,10 +92,10 @@ the triangle
 
 ```text
            (H ∙h K)₁
-        f₁ --------> ((H₀ *) ∙ (K₀ *)) ∙ h₁
-           \       /
-  (H ∙h L)₁ \     / right-whisker (left-whisker (H₀ *) (α₀ *)) h₁
-             \   /
+        f₁ ────────> ((H₀ *) ∙ (K₀ *)) ∙ h₁
+           ╲       ╱
+  (H ∙h L)₁ ╲     ╱ right-whisker (left-whisker (H₀ *) (α₀ *)) h₁
+             ╲   ╱
               ∨ ∨
     ((H₀ *) ∙ (L₀ *)) ∙ h₁
 ```
@@ -106,12 +106,12 @@ horizontal pastings of the
 
 ```text
        H₀ *      K₀ *                   H₀ *      L₀ *
-  f₀ * ---> g₀ * ----> h₀ *        f₀ * ---> g₀ * ----> h₀ *
-       \      |      /                  \      |      /
-        \  H₁ |  K₁ /                    \  H₁ |  L₁ /
-     f₁  \    |g₁  / h₁               f₁  \    |g₁  / h₁
-          \   |   /                        \   |   /
-           \  |  /                          \  |  /
+  f₀ * ───> g₀ * ────> h₀ *        f₀ * ───> g₀ * ────> h₀ *
+       ╲      │      ╱                  ╲      │      ╱
+        \  H₁ │  K₁ ╱                    ╲  H₁ │  L₁ ╱
+     f₁  ╲    │g₁  ╱ h₁               f₁  ╲    │g₁  ╱ h₁
+          ╲   │   ╱                        ╲   │   ╱
+           ╲  │  ╱                          ╲  │  ╱
             ∨ ∨ ∨                            ∨ ∨ ∨
               *                                *.
 ```
@@ -120,11 +120,11 @@ Then the triangle
 
 ```text
                    horizontal-pasting H₁ K₁
-                       f₁ --------> (H₀ * ∙ K₀ *) ∙ h₁
-                         \         /
-                          \       /
-  horizontal-pasting H₁ L₁ \     / right-whisker (left-whisker (H₀ *) (α₀ *)) h₁
-                            \   /
+                       f₁ ────────> (H₀ * ∙ K₀ *) ∙ h₁
+                         ╲         ╱
+                          ╲       ╱
+  horizontal-pasting H₁ L₁ ╲     ╱ right-whisker (left-whisker (H₀ *) (α₀ *)) h₁
+                            ╲   ╱
                              ∨ ∨
                         (H₀ * ∙ K₀ *) ∙ h₁
 ```
@@ -182,8 +182,8 @@ Consider three pointed maps `f := (f₀ , f₁)`, `g := (g₀ , g₁)`, and
 
 ```text
       H
-    ----->
-  f -----> g -----> h.
+    ─────>
+  f ─────> g ─────> h.
       K        L
 ```
 
@@ -199,10 +199,10 @@ the triangle
 
 ```text
            (H ∙h L)₁
-         f₁ --------> ((H₀ *) ∙ (L₀ *)) ∙ h₁
-           \         /
-  (K ∙h L)₁ \       / right-whisker (right-whisker (α₀ *) (L₀ *)) h₁
-             \     /
+         f₁ ────────> ((H₀ *) ∙ (L₀ *)) ∙ h₁
+           ╲         ╱
+  (K ∙h L)₁ ╲       ╱ right-whisker (right-whisker (α₀ *) (L₀ *)) h₁
+             ╲     ╱
               ∨   ∨
       ((K₀ *) ∙ (L₀ *)) ∙ h₁
 ```
@@ -213,12 +213,12 @@ horizontal pastings of the
 
 ```text
        H₀ *      L₀ *                   K₀ *      L₀ *
-  f₀ * ---> g₀ * ----> h₀ *        f₀ * ---> g₀ * ----> h₀ *
-       \      |      /                  \      |      /
-        \  H₁ |  L₁ /                    \  K₁ |  L₁ /
-     f₁  \    |g₁  / h₁               f₁  \    |g₁  / h₁
-          \   |   /                        \   |   /
-           \  |  /                          \  |  /
+  f₀ * ───> g₀ * ────> h₀ *        f₀ * ───> g₀ * ────> h₀ *
+       ╲      │      ╱                  ╲      │      ╱
+        \  H₁ │  L₁ ╱                    ╲  K₁ │  L₁ ╱
+     f₁  ╲    │g₁  / h₁               f₁  ╲    │g₁  ╱ h₁
+          ╲   │   ╱                        ╲   │   ╱
+           ╲  │  ╱                          ╲  │  ╱
             ∨ ∨ ∨                            ∨ ∨ ∨
               *                                *.
 ```
@@ -227,11 +227,11 @@ Then the triangle
 
 ```text
                    horizontal-pasting H₁ L₁
-                       f₁ --------> (H₀ * ∙ L₀ *) ∙ h₁
-                         \         /
-                          \       /
-  horizontal-pasting K₁ L₁ \     / right-whisker (right-whisker (α₀ *) (L₀ *)) h₁
-                            \   /
+                       f₁ ────────> (H₀ * ∙ L₀ *) ∙ h₁
+                         ╲         ╱
+                          ╲       ╱
+  horizontal-pasting K₁ L₁ ╲     ╱ right-whisker (right-whisker (α₀ *) (L₀ *)) h₁
+                            ╲   ╱
                              ∨ ∨
                         (K₀ * ∙ L₀ *) ∙ h₁
 ```

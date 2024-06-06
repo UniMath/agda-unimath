@@ -46,16 +46,16 @@ A [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
 
 ```text
       a₀      a₁      a₂
-  A₀ ---> A₁ ---> A₂ ---> ⋯
+  A₀ ───> A₁ ───> A₂ ───> ⋯
 ```
 
 induces a [double arrow](foundation.double-arrows.md)
 
 ```text
   Σ (n : ℕ) Aₙ
-      | |
-   id | | tot ₍₊₁₎ a
-      | |
+      │ │
+   id │ │ tot ₍₊₁₎ a
+      │ │
       ∨ ∨
   Σ (n : ℕ) Aₙ
 ```
@@ -75,10 +75,10 @@ The data of a
 
 ```text
         aₙ
-  Aₙ ------> Aₙ₊₁
-    \       /
-     \  Hₙ /
-   iₙ \   / iₙ₊₁
+  Aₙ ──────> Aₙ₊₁
+    ╲       ╱
+     ╲  Hₙ ╱
+   iₙ ╲   ╱ iₙ₊₁
        ∨ ∨
         X
 ```
@@ -88,10 +88,10 @@ diagram comprising of the single triangle
 
 ```text
            tot ₍₊₁₎ a
-  (Σ ℕ A) ------------> (Σ ℕ A)
-         \             /
-           \         /
-          i  \     /  i
+  (Σ ℕ A) ────────────> (Σ ℕ A)
+         ╲             ╱
+           ╲         ╱
+          i  ╲     ╱  i
                ∨ ∨
                 X
 ```
@@ -360,10 +360,10 @@ Furthermore, for every cocone `c` under `A` with vertex `X` there is a
 
 ```text
               cofork-map
-      (X → Y) ----------> cofork (double-arrow A) Y
-            \             /
-  cocone-map  \         /  cocone-cofork
-                \     /
+      (X → Y) ──────────> cofork (double-arrow A) Y
+            ╲             ╱
+  cocone-map  ╲         ╱  cocone-cofork
+                ╲     ╱
                  ∨   ∨
                cocone A Y .
 ```
@@ -452,10 +452,10 @@ triangle
 
 ```text
                       dependent-cofork-map
-      ((x : X) → P x) -------------------> dependent-cofork (cofork-cocone c) Y
-                      \                  /
-  dependent-cocone-map  \              /  dependent-cocone-dependent-cofork
-                          \          /
+      ((x : X) → P x) ───────────────────> dependent-cofork (cofork-cocone c) Y
+                      ╲                  ╱
+  dependent-cocone-map  ╲              ╱  dependent-cocone-dependent-cofork
+                          ╲          ╱
                            ∨        ∨
                       dependent-cocone c P .
 ```

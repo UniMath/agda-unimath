@@ -41,11 +41,11 @@ triple `(p, q, H)` consisting of a map `p : C → A`, a map `q : C → B`, and a
 
 ```text
         q
-    C -----> B
-    |        |
-  p |        | g
+    C ─────> B
+    │        │
+  p │        │ g
     ∨        ∨
-    A -----> X
+    A ─────> X
         f
 ```
 

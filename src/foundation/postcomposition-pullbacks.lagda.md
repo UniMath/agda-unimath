@@ -34,11 +34,11 @@ Given a [pullback](foundation-core.pullbacks.md) square
 
 ```text
          f'
-    C -------> B
-    | ⌟        |
-  g'|          | g
+    C ───────> B
+    │ ⌟        │
+  g'│          │ g
     ∨          ∨
-    A -------> X
+    A ───────> X
          f
 ```
 
@@ -47,12 +47,12 @@ then the exponentiated square given by
 
 ```text
                 f' ∘ -
-      (T → C) ---------> (T → B)
-         |                  |
-  g' ∘ - |                  | g ∘ -
-         |                  |
+      (T → C) ─────────> (T → B)
+         │                  │
+  g' ∘ - │                  │ g ∘ -
+         │                  │
          ∨                  ∨
-      (T → A) ---------> (T → X)
+      (T → A) ─────────> (T → X)
                 f ∘ -
 ```
 

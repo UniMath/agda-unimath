@@ -43,11 +43,11 @@ Consider two [pointed homotopies](structured-types.pointed-homotopies.md)
 
 ```text
         H₀ *                        H₀ *
-  f₀ * ------> g₀ *           f₀ * ------> g₀ *
-      \       /                   \       ∧
-    f₁ \  H₁ / g₁      and      f₁ \  H̃₁ / inv g₁
-        \   /                       \   /
-         ∨ ∨                         ∨ /
+  f₀ * ──────> g₀ *           f₀ * ──────> g₀ *
+      ╲       ╱                   ╲       ∧
+    f₁ ╲  H₁ ╱ g₁      and      f₁ ╲  H̃₁ ╱ inv g₁
+        ╲   ╱                       ╲   ╱
+         ∨ ∨                         ∨ ╱
           *                           *
 ```
 
@@ -55,11 +55,11 @@ and
 
 ```text
         K₀ *                        K₀ *
-  f₀ * ------> g₀ *           f₀ * ------> g₀ *
-      \       /                   \       ∧
-    f₁ \  K₁ / g₁      and      f₁ \  K̃₁ / inv g₁
-        \   /                       \   /
-         ∨ ∨                         ∨ /
+  f₀ * ──────> g₀ *           f₀ * ──────> g₀ *
+      ╲       ╱                   ╲       ∧
+    f₁ ╲  K₁ ╱ g₁      and      f₁ ╲  K̃₁ ╱ inv g₁
+        ╲   ╱                       ╲   ╱
+         ∨ ∨                         ∨ ╱
           *                           *,
 ```
 
@@ -76,10 +76,10 @@ unpointed [homotopy](foundation-core.homotopies.md) `α₀ : H₀ ~ K₀` and an
 
 ```text
         H₁
-  f₁ ------> (H₀ *) ∙ g₁
-    \       /
-  K₁ \     / right-whisker-concat (α₀ *) g₁
-      \   /
+  f₁ ──────> (H₀ *) ∙ g₁
+    ╲       ╱
+  K₁ ╲     ╱ right-whisker-concat (α₀ *) g₁
+      ╲   ╱
        ∨ ∨
    (K₀ *) ∙ g₁
 ```
@@ -94,11 +94,11 @@ witnessing that the triangle
 
 ```text
         α₀ *
-  H₀ * ------> K₀ *
-      \       ∧
-    H̃₁ \     / inv K̃₁
-        \   /
-         ∨ /
+  H₀ * ──────> K₀ *
+      ╲       ∧
+    H̃₁ ╲     ╱ inv K̃₁
+        ╲   ╱
+         ∨ ╱
        f₁ ∙ inv g₁
 ```
 
@@ -221,10 +221,10 @@ triangle
 
 ```text
         H₁
-  f₁ ------> (H₀ *) ∙ h₁
-    \       /
-  L₁ \     / right-whisker-concat ((α₀ *) ∙h (β₀ *)) g₁
-      \   /
+  f₁ ──────> (H₀ *) ∙ h₁
+    ╲       ╱
+  L₁ ╲     ╱ right-whisker-concat ((α₀ *) ∙h (β₀ *)) g₁
+      ╲   ╱
        ∨ ∨
    (L₀ *) ∙ h₁
 ```
@@ -236,13 +236,13 @@ an identification witnessing that the triangle
 
 ```text
            H₁
-  f₁ ----------> (H₀ *) ∙ h₁
-    \             /
-     \           / right-whisker-concat (α₀ *) g₁
-      \         ∨
-    L₁ \    (K₀ *) ∙ h₁
-        \     /
-         \   / right-whisker-concat (β₀ *) g₁
+  f₁ ──────────> (H₀ *) ∙ h₁
+    ╲             ╱
+     ╲           ╱ right-whisker-concat (α₀ *) g₁
+      ╲         ∨
+    L₁ ╲    (K₀ *) ∙ h₁
+        ╲     ╱
+         ╲   ╱ right-whisker-concat (β₀ *) g₁
           ∨ ∨
       (L₀ *) ∙ h₁
 ```
@@ -533,10 +533,10 @@ identification witnessing that the triangle
 
 ```text
      (H ∙h refl)₁
-  f₁ ------------> (H₀ * ∙ refl) ∙ g₁
-    \             /
-  H₁ \           / right-whisker-concat right-unit g₁
-      \         /
+  f₁ ────────────> (H₀ * ∙ refl) ∙ g₁
+    ╲             ╱
+  H₁ ╲           ╱ right-whisker-concat right-unit g₁
+      ╲         ╱
        ∨       ∨
       (H₀ *) ∙ g₁
 ```
@@ -546,12 +546,12 @@ commuting triangles of identifications
 
 ```text
       H₀ *      refl
-  f₀ * --> g₀ * ---> g₀ *
-      \      |      /
-       \     | g₁  /
-     f₁ \    |    / g₁
-         \   |   /
-          \  |  /
+  f₀ * ──> g₀ * ───> g₀ *
+      ╲      │      ╱
+       ╲     │ g₁  ╱
+     f₁ ╲    │    ╱ g₁
+         ╲   │   ╱
+          ╲  │  ╱
            ∨ ∨ ∨
              *.
 ```

@@ -92,10 +92,10 @@ is-univalent-UU l = univalence
 
 ```text
                 ap B
-       (x ＝ y) -----> (B x ＝ B y)
-           \               /
-            \             /
-  equiv-tr B \           / equiv-eq
+       (x ＝ y) ─────> (B x ＝ B y)
+           ╲               ╱
+            ╲             ╱
+  equiv-tr B ╲           ╱ equiv-eq
               ∨         ∨
               (B x ≃ B y)
 ```

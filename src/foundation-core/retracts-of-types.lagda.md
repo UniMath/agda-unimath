@@ -34,7 +34,7 @@ maps
 
 ```text
       i        r
-  A -----> B -----> A
+  A ─────> B ─────> A
 ```
 
 such that `r` is a [retraction](foundation-core.retractions.md) of `i`, i.e.,

@@ -63,11 +63,11 @@ witnessing that the triangle of identifications
 
 ```text
         H₀ *
-  f₀ * ------> g₀ *
-      \       ∧
-    f₁ \     / inv g₁
-        \   /
-         ∨ /
+  f₀ * ──────> g₀ *
+      ╲       ∧
+    f₁ ╲     ╱ inv g₁
+        ╲   ╱
+         ∨ ╱
           *
 ```
 
@@ -90,11 +90,11 @@ in the sense that the triangle of identifications
 
 ```text
                       H *
-                f * ------> g *
-                   \       ∧
-  preserves-point f \     / inv (preserves-point g)
-                     \   /
-                      ∨ /
+                f * ──────> g *
+                   ╲       ∧
+  preserves-point f ╲     ╱ inv (preserves-point g)
+                     ╲   ╱
+                      ∨ ╱
                        *
 ```
 

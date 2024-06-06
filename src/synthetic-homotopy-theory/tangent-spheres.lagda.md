@@ -36,11 +36,11 @@ Consider a type `X` and a point `x : X`. We say that `x` **has a tangent
 - A [homotopy](foundation-core.homotopies.md) witnessing that the square
   ```text
         j
-    T -----> C
-    |        |
-    |        | i
+    T ─────> C
+    │        │
+    │        │ i
     ∨      ⌜ ∨
-    1 -----> X
+    1 ─────> X
         x
   ```
   [commutes](foundation.commuting-squares-of-maps.md), and is a

@@ -26,12 +26,12 @@ A fibered involution is a fibered map
 
 ```text
        h
-  A -------> A
-  |          |
- f|          |g
-  |          |
+  A ───────> A
+  │          │
+ f│          │g
+  │          │
   ∨          ∨
-  X -------> X
+  X ───────> X
        i
 ```
 

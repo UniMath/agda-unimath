@@ -52,11 +52,11 @@ consisting of pointed maps `i : A →∗ X` and `j : B →∗ Y` and a
 
 ```text
         i
-    A -----> X
-    |        |
-  f |        | g
+    A ─────> X
+    │        │
+  f │        │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 
@@ -141,11 +141,11 @@ of a morphism of pointed arrows
 
 ```text
         i
-    A -----> X
-    |        |
-  f |        | g
+    A ─────> X
+    │        │
+  f │        │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 
@@ -153,11 +153,11 @@ is the morphism of pointed arrows
 
 ```text
         f
-    A -----> B
-    |        |
-  i |        | j
+    A ─────> B
+    │        │
+  i │        │ j
     ∨        ∨
-    X -----> Y.
+    X ─────> Y.
         g
 ```
 
@@ -201,11 +201,11 @@ The identity morphism of pointed arrows is defined as
 
 ```text
         id
-    A -----> A
-    |        |
-  f |        | f
+    A ─────> A
+    │        │
+  f │        │ f
     ∨        ∨
-    B -----> B
+    B ─────> B
         id
 ```
 
@@ -233,11 +233,11 @@ Consider a commuting diagram of the form
 
 ```text
         α₀       β₀
-    A -----> X -----> U
-    |        |        |
-  f |   α  g |   β    | h
+    A ─────> X ─────> U
+    │        │        │
+  f │   α  g │   β    │ h
     ∨        ∨        ∨
-    B -----> Y -----> V.
+    B ─────> Y ─────> V.
         α₁       β₁
 ```
 
@@ -248,11 +248,11 @@ of `β : g → h` with `α : f → g` is therefore defined to be
 
 ```text
         β₀ ∘ α₀
-    A ----------> U
-    |             |
-  f |    α □ β    | h
+    A ──────────> U
+    │             │
+  f │    α □ β    │ h
     ∨             ∨
-    B ----------> V.
+    B ──────────> V.
         β₁ ∘ α₁
 ```
 
@@ -331,11 +331,11 @@ pointed homotopies `I : i ~∗ i'` and `J : j ~∗ j'` and a pointed `2`-homotop
 
 ```text
             J ·r f
-  (j ∘∗ f) --------> (j' ∘∗ f)
-     |                   |
-   H |                   | H'
+  (j ∘∗ f) ────────> (j' ∘∗ f)
+     │                   │
+   H │                   │ H'
      ∨                   ∨
-  (g ∘∗ i) ---------> (g ∘∗ i')
+  (g ∘∗ i) ─────────> (g ∘∗ i')
              g ·l I
 ```
 
@@ -401,11 +401,11 @@ Consider a morphism of pointed arrows
 
 ```text
                 α₀
-            A -----> X
-            |        |
-  (f₀ , f₁) |   α₂   | (g₀ , g₁)
+            A ─────> X
+            │        │
+  (f₀ , f₁) │   α₂   │ (g₀ , g₁)
             ∨        ∨
-            B -----> Y
+            B ─────> Y
                 α₁
 ```
 
@@ -421,11 +421,11 @@ and a pointed `2`-homotopy `r₂` witnessing that the square of pointed homotopi
 
 ```text
             r₁ ·r f
-  (α₁ ∘ f) --------> (α₁ ∘ f)
-      |                  |
-   α₂ |                  | α₂
+  (α₁ ∘ f) ────────> (α₁ ∘ f)
+      │                  │
+   α₂ │                  │ α₂
       ∨                  ∨
-   (g ∘ α₀) --------> (g ∘ α₀)
+   (g ∘ α₀) ────────> (g ∘ α₀)
              g ·l r₀
 ```
 

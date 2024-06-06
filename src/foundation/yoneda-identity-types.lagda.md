@@ -712,13 +712,13 @@ on both arguments using one of the two sides in the Gray interchanger diagram
 
 ```text
                       ap (r ↦ f x r) q
-                 f x y -------------> f x y'
-                   |                    |
-                   |                    |
-  ap (r ↦ f r y) p |                    | ap (r ↦ f r y') p
-                   |                    |
+                 f x y ─────────────> f x y'
+                   │                    │
+                   │                    │
+  ap (r ↦ f r y) p │                    │ ap (r ↦ f r y') p
+                   │                    │
                    ∨                    ∨
-                 f x' y ------------> f x' y'
+                 f x' y ────────────> f x' y'
                       ap (r ↦ f x' r) q
 ```
 

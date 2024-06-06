@@ -33,7 +33,7 @@ Consider a [span diagram](foundation.span-diagrams.md) `𝒮` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and maps `i : A → A'` and `j : B → B'`. The
@@ -42,7 +42,7 @@ of `𝒮`, `i`, and `j` is the span diagram
 
 ```text
        i ∘ f     j ∘ g
-  A' <------- S -------> B'.
+  A' <─────── S ───────> B'.
 ```
 
 ```agda
@@ -69,7 +69,7 @@ Consider a [span diagram](foundation.span-diagrams.md) `𝒮` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and a map `i : A → A'`. The
@@ -78,7 +78,7 @@ of `𝒮` and `i` is the span diagram
 
 ```text
        i ∘ f      g
-  A' <------- S -----> B.
+  A' <─────── S ─────> B.
 ```
 
 ```agda
@@ -98,7 +98,7 @@ Consider a [span diagram](foundation.span-diagrams.md) `𝒮` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and a map `j : B → B'`. The
@@ -107,7 +107,7 @@ of `𝒮` by `j` is the span diagram
 
 ```text
         f      j ∘ g
-  A' <----- S -------> B'.
+  A' <───── S ───────> B'.
 ```
 
 ```agda
@@ -127,7 +127,7 @@ Consider a span diagram `𝒮` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f`
@@ -135,11 +135,11 @@ as indicated in the diagram
 
 ```text
           f'
-     A' <---- S'
-     |        |
-  h₀ |        | h₁
+     A' <──── S'
+     │        │
+  h₀ │        │ h₁
      ∨        ∨
-     A <----- S -----> B.
+     A <───── S ─────> B.
           f       g
 ```
 
@@ -199,7 +199,7 @@ Consider a span diagram `𝒮` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow g' g`
@@ -207,11 +207,11 @@ as indicated in the diagram
 
 ```text
                g'
-           S' ----> B'
-           |        |
-        h₀ |        | h₁
+           S' ────> B'
+           │        │
+        h₀ │        │ h₁
            ∨        ∨
-  A <----- S -----> B.
+  A <───── S ─────> B.
        f       g
 ```
 

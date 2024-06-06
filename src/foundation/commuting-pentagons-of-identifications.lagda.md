@@ -21,12 +21,12 @@ A pentagon of [identifications](foundation-core.identity-types.md)
 
 ```text
                top
-             x --- y
-   top-left /       \ top-right
-           /         \
+             x ─── y
+   top-left ╱       ╲ top-right
+           ╱         ╲
           z           w
-            \       /
-  bottom-left \   / bottom-right
+            ╲       ╱
+  bottom-left ╲   ╱ bottom-right
                 v
 ```
 
@@ -63,12 +63,12 @@ vertex. For example, we may reflect a pentagon
 
 ```text
                top
-             x --- y
-   top-left /       \ top-right
-           /         \
+             x ─── y
+   top-left ╱       ╲ top-right
+           ╱         ╲
           z           w
-            \       /
-  bottom-left \   / bottom-right
+            ╲       ╱
+  bottom-left ╲   ╱ bottom-right
                 v
 ```
 
@@ -76,12 +76,12 @@ along the axis connecting `top` and `v` to get
 
 ```text
                top⁻¹
-              y --- x
-   top-right /       \ top-left
-            /         \
+              y ─── x
+   top-right ╱       ╲ top-left
+            ╱         ╲
            w           z
-             \       /
-  bottom-right \   / bottom-left
+             ╲       ╱
+  bottom-right ╲   ╱ bottom-left
                  v .
 ```
 

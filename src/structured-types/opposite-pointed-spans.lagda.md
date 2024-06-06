@@ -26,14 +26,14 @@ words, the opposite of a pointed span
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 is the pointed span
 
 ```text
        g       f
-  B <----- S -----> A.
+  B <───── S ─────> A.
 ```
 
 ## Definitions

@@ -111,10 +111,10 @@ In a commuting triangle of the form
 
 ```text
        h
-  A ------> B
-   \       /
-   f\     /g
-     \   /
+  A ──────> B
+   ╲       ╱
+   f╲     ╱g
+     ╲   ╱
       ∨ ∨
        X,
 ```
@@ -184,10 +184,10 @@ In a commuting triangle of the form
 
 ```text
        h
-  A ------> B
-   \       /
-   f\     /g
-     \   /
+  A ──────> B
+   ╲       ╱
+   f╲     ╱g
+     ╲   ╱
       ∨ ∨
        X,
 ```

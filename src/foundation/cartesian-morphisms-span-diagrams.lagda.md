@@ -28,11 +28,11 @@ if the two squares in the diagram
 
 ```text
        h       k
-  C <----- T -----> D
-  |      ⌞ | ⌟      |
-  |        |        |
+  C <───── T ─────> D
+  │      ⌞ │ ⌟      │
+  │        │        │
   ∨        ∨        ∨
-  A <----- S -----> B
+  A <───── S ─────> B
        f       g
 ```
 

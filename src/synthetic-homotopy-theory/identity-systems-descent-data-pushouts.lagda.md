@@ -59,11 +59,11 @@ Given descent data `(PA, PB, PS)` for the pushout
 
 ```text
         g
-    S -----> B
-    |        |
-  f |   H    | j
+    S ─────> B
+    │        │
+  f │   H    │ j
     ∨        ∨
-    A -----> X
+    A ─────> X
         i
 ```
 
@@ -84,7 +84,7 @@ total space `Σ X P` is the pushout of the
 [span diagram](foundation.span-diagrams.md) of total spaces
 
 ```text
-  Σ A PA <----- Σ S (PA ∘ f) -----> Σ B PB,
+  Σ A PA <───── Σ S (PA ∘ f) ─────> Σ B PB,
 ```
 
 so, again by the descent property, descent data over it correspond to type
@@ -218,12 +218,12 @@ and a coherence between them that isn't relevant here. Then there is a
 [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
-  (x : X) → (p : P x) → RΣ (x, p) ---> (u : Σ X P) → RΣ u ----> section (RΣA, RΣB, RΣS)
-                |                                                           |
-                | ev-refl ((eᴾA a)⁻¹ p₀)                                    | ev-refl p₀
-                |                                                           |
+  (x : X) → (p : P x) → RΣ (x, p) ───> (u : Σ X P) → RΣ u ────> section (RΣA, RΣB, RΣS)
+                │                                                           │
+                │ ev-refl ((eᴾA a)⁻¹ p₀)                                    │ ev-refl p₀
+                │                                                           │
                 ∨                                                           ∨
-      RΣ (ia₀, (eᴾA a)⁻¹ p₀) ---------------------------------------> RΣA (a₀, p₀).
+      RΣ (ia₀, (eᴾA a)⁻¹ p₀) ───────────────────────────────────────> RΣA (a₀, p₀).
                                       eᴿA (a₀, p₀)
 ```
 

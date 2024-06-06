@@ -260,11 +260,11 @@ For every `f : X → Y` there is an associated
 
 ```text
          f
-    X ------> Y
-    |         |
-    |         |
+    X ──────> Y
+    │         │
+    │         │
     ∨         ∨
-   ○ X ----> ○ Y.
+   ○ X ────> ○ Y.
         ○ f
 ```
 

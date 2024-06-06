@@ -166,12 +166,12 @@ The square
 
 ```text
                    pullback f
-     Subgroup H ----------------> Subgroup G
-         |                            |
-  K ↦ UK |                            | K ↦ UK
-         |                            |
+     Subgroup H ────────────────> Subgroup G
+         │                            │
+  K ↦ UK │                            │ K ↦ UK
+         │                            │
          ∨                            ∨
-   subset-Group H ------------> subset-Group G
+   subset-Group H ────────────> subset-Group G
                    pullback f
 ```
 

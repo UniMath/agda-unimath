@@ -69,11 +69,11 @@ For the general case, we must construct a coherence of the square
 
 ```text
             g ·r F
-        gf -------> gf'
-         |          |
-  G ·r f |          | G ·r f'
+        gf ───────> gf'
+         │          │
+  G ·r f │          │ G ·r f'
          ∨          ∨
-       g'f ------> g'f'
+       g'f ──────> g'f'
            g' ·r F
 ```
 

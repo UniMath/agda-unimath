@@ -42,11 +42,11 @@ Every commuting square
 
 ```text
             top
-       A --------> X
-       |           |
-  left |           | right
+       A ────────> X
+       │           │
+  left │           │ right
        ∨           ∨
-       B --------> Y
+       B ────────> Y
           bottom
 ```
 
@@ -55,11 +55,11 @@ induces a commuting square of
 
 ```text
                          precomp right S
-                (A → S) -----------------> (X → S)
-                   |                           |
-  precomp bottom S |                           | precomp top S
+                (A → S) ──────────────────> (X → S)
+                   │                           │
+  precomp bottom S │                           │ precomp top S
                    ∨                           ∨
-                (B → S) ------------------> (Y → S).
+                (B → S) ──────────────────> (Y → S).
                           precomp left S
 ```
 
@@ -97,11 +97,11 @@ Every commuting square
 
 ```text
             top
-       A --------> X
-       |           |
-  left |           | right
+       A ────────> X
+       │           │
+  left │           │ right
        ∨           ∨
-       B --------> Y
+       B ────────> Y
           bottom
 ```
 
@@ -110,11 +110,11 @@ induces a commuting square of
 
 ```text
                         postcomp S top
-              (S → A) ------------------> (S → X)
-                 |                           |
- postcomp S left |                           | postcomp S right
+              (S → A) ──────────────────> (S → X)
+                 │                           │
+ postcomp S left │                           │ postcomp S right
                  ∨                           ∨
-              (S → B) ------------------> (S → Y).
+              (S → B) ──────────────────> (S → Y).
                        postcomp S bottom
 ```
 
@@ -396,11 +396,11 @@ square of coherence squares of maps and identifications:
 
 ```text
             ap f (ap g p)
-   f (g x) ---------------> f (g y)
-      |                       |
-  H x |                       | H y
+   f (g x) ───────────────> f (g y)
+      │                       │
+  H x │                       │ H y
       ∨                       ∨
-   h (k x) ---------------> h (k y)
+   h (k x) ───────────────> h (k y)
             ap h (ap k p)           .
 ```
 
@@ -424,15 +424,15 @@ module _
 As a corollary, whenever we have two coherence squares touching at a vertex:
 
 ```text
-  A -----> B
-  |        |
-  |   H ⇗  |
+  A ─────> B
+  │        │
+  │   H ⇗  │
   ∨        ∨
-  C -----> D -----> X
-           |        |
-           |   K ⇗  |
+  C ─────> D ─────> X
+           │        │
+           │   K ⇗  │
            ∨        ∨
-           Y -----> Z ,
+           Y ─────> Z ,
 ```
 
 there is a homotopy between first applying `H`, then `K`, and first applying
@@ -464,15 +464,15 @@ module _
 Given a square of commuting squares, like so:
 
 ```text
-  A -----> B -----> C
-  |        |        |
-  |    ⇗   |    ⇗   |
+  A ─────> B ─────> C
+  │        │        │
+  │    ⇗   │    ⇗   │
   ∨        ∨        ∨
-  X -----> Y -----> Z
-  |        |        |
-  |    ⇗   |    ⇗   |
+  X ─────> Y ─────> Z
+  │        │        │
+  │    ⇗   │    ⇗   │
   ∨        ∨        ∨
-  M -----> N -----> O ,
+  M ─────> N ─────> O ,
 ```
 
 we have two choices for obtaining the outer commuting square — either by first
@@ -606,25 +606,25 @@ them.
 
 ```text
           tl       tr                tr ∘ tl
-      A -----> B -----> C         A --------> C
-      |        |        |         |           |
-    l |   H  m |   K    | r  ↦  l |   H | K   | r
+      A ─────> B ─────> C         A ────────> C
+      │        │        │         │           │
+    l │   H  m │   K    │ r  ↦  l │   H | K   │ r
       ∨        ∨        ∨         ∨           ∨
-      X -----> Y -----> Z         X --------> Z
+      X ─────> Y ─────> Z         X ────────> Z
           bl       br                br ∘ bl
 
                ↧                        ↧
 
              - ∘ r
-        W^Z ------> W^C
-         |           |
-  - ∘ br |    W^K    | - ∘ tr        W^(H | K)
+        W^Z ──────> W^C
+         │           │
+  - ∘ br │    W^K    │ - ∘ tr        W^(H | K)
          ∨   - ∘ m   ∨                  ~
-        W^Y ------> W^B       ↦
-         |           |                 W^K
-  - ∘ bl |    W^H    | - ∘ tl          ---
+        W^Y ──────> W^B       ↦
+         │           │                 W^K
+  - ∘ bl │    W^H    │ - ∘ tl          ───
          ∨           ∨                 W^H
-        W^X ------> W^A
+        W^X ──────> W^A
              - ∘ l
 ```
 
@@ -815,22 +815,22 @@ Taking a square of the form
 
 ```text
       f        top
-  X -----> A -----> B
-           |        |
-      left |   H    | right
+  X ─────> A ─────> B
+           │        │
+      left │   H    │ right
            ∨        ∨
-           C -----> D
+           C ─────> D
              bottom
 ```
 
 and transposing it by precomposition results in the square
 
 ```text
-  W^D -----> W^B
-   |          |
-   |   W^H    |
+  W^D ─────> W^B
+   │          │
+   │   W^H    │
    ∨          ∨  - ∘ f
-  W^C -----> W^A -----> W^X
+  W^C ─────> W^A ─────> W^X
 ```
 
 This fact can be written as distribution of right whiskering over transposition:
@@ -1004,23 +1004,23 @@ which take the following form:
 
 ```text
            top
-     A -----------> C
-     |             ∧|
-     |           /  |
-     |     bl  /    |
-  tl |       /      | tr
-     |     /        |
-     |   /          |
-     ∨ /    mid     ∨
-     B -----------> Y
-     |             ∧|
-     |           /  |
-     |     tr  /    |
-  bl |       /      | br
-     |     /        |
-     |   /          |
-     ∨ /            ∨
-     C -----------> Z .
+     A ───────────> C
+     │             ∧│
+     │           ╱  │
+     │     bl  ╱    │
+  tl │       ╱      │ tr
+     │     ╱        │
+     │   ╱          │
+     ∨ ╱    mid     ∨
+     B ───────────> Y
+     │             ∧│
+     │           ╱  │
+     │     tr  ╱    │
+  bl │       ╱      │ br
+     │     ╱        │
+     │   ╱          │
+     ∨ ╱            ∨
+     C ───────────> Z .
           bottom
 ```
 
@@ -1031,11 +1031,11 @@ If the square that arises in the middle,
 
 ```text
         bl
-     B ----> C
-     |       |
-  bl |       | tr
+     B ────> C
+     │       │
+  bl │       │ tr
      ∨       ∨
-     C ----> Y ,
+     C ────> Y ,
         tr
 ```
 
@@ -1045,15 +1045,15 @@ whole rectangle collapses (is homotopic) to the
 
 ```text
                          Y
-                        ∧ \
-                  tr  /     \  br
-                    /         \
-        top       /             ∨
-  A -----------> C -----------> Z .
-   \             ∧    bottom
-     \         /
-   tl  \     /  bl
-         ∨ /
+                        ∧ ╲
+                  tr  ╱     ╲  br
+                    ╱         ╲
+        top       ╱             ∨
+  A ───────────> C ───────────> Z .
+   ╲             ∧    bottom
+     ╲         ╱
+   tl  ╲     ╱  bl
+         ∨ ╱
           B
 ```
 

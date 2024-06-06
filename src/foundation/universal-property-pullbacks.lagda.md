@@ -29,20 +29,20 @@ describes the optimal way to complete a diagram of the form
 
 ```text
            B
-           |
-           |
+           │
+           │
            ∨
-  A -----> X
+  A ─────> X
 ```
 
 to a square
 
 ```text
-  C -----> B
-  | ⌟      |
-  |        |
+  C ─────> B
+  │ ⌟      │
+  │        │
   ∨        ∨
-  A -----> X.
+  A ─────> X.
 ```
 
 ## Properties
@@ -79,11 +79,11 @@ module _
 Given a diagram
 
 ```text
-  ∙ -------> ∙ -------> ∙
-  |          | ⌟        |
-  |          |          |
+  ∙ ───────> ∙ ───────> ∙
+  │          │ ⌟        │
+  │          │          │
   ∨          ∨          ∨
-  ∙ -------> ∙ -------> ∙
+  ∙ ───────> ∙ ───────> ∙
 ```
 
 where the right-hand square is a pullback, then the left-hand square is a
@@ -135,15 +135,15 @@ module _
 Given a diagram
 
 ```text
-  ∙ -------> ∙
-  |          |
-  |          |
+  ∙ ───────> ∙
+  │          │
+  │          │
   ∨          ∨
-  ∙ -------> ∙
-  | ⌟        |
-  |          |
+  ∙ ───────> ∙
+  │ ⌟        │
+  │          │
   ∨          ∨
-  ∙ -------> ∙
+  ∙ ───────> ∙
 ```
 
 where the bottom square is a pullback, then the top square is a pullback if and

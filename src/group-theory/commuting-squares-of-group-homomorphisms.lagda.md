@@ -22,11 +22,11 @@ A square of [group homomorphisms](group-theory.homomorphisms-groups.md)
 
 ```text
         f
-    G -----> H
-    |        |
-  g |        | h
+    G ─────> H
+    │        │
+  g │        │ h
     ∨        ∨
-    K -----> L
+    K ─────> L
         k
 ```
 

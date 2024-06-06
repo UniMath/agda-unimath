@@ -41,11 +41,11 @@ and `(i' , j' , H')` from `f` to `g`, as in the diagrams
 
 ```text
         i                   i'
-    A -----> X          A -----> X
-    |        |          |        |
-  f |        | g      f |        | g
+    A ─────> X          A ─────> X
+    │        │          │        │
+  f │        │ g      f │        │ g
     ∨        ∨          ∨        ∨
-    B -----> Y          B -----> Y.
+    B ─────> Y          B ─────> Y.
         j                   j'
 ```
 
@@ -56,11 +56,11 @@ and `J : j ~ j'` and a homotopy `K` witnessing that the
 
 ```text
            J ·r f
-  (j ∘ f) --------> (j' ∘ f)
-     |                 |
-   H |                 | H'
+  (j ∘ f) ────────> (j' ∘ f)
+     │                 │
+   H │                 │ H'
      ∨                 ∨
-  (g ∘ i) --------> (g ∘ i')
+  (g ∘ i) ────────> (g ∘ i')
            g ·l I
 ```
 
@@ -464,11 +464,11 @@ Consider a commuting diagram of the form
 
 ```text
         α₀       β₀       γ₀
-    A -----> X -----> U -----> K
-    |        |        |        |
-  f |   α  g |   β  h |   γ    | i
+    A ─────> X ─────> U ─────> K
+    │        │        │        │
+  f │   α  g │   β  h │   γ    │ i
     ∨        ∨        ∨        ∨
-    B -----> Y -----> V -----> L
+    B ─────> Y ─────> V ─────> L
         α₁       β₁       γ₁
 ```
 

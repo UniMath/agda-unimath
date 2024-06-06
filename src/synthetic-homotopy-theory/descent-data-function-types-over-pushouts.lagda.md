@@ -300,12 +300,12 @@ with the component-wise [homotopies](foundation-core.homotopies.md)
 
 ```text
                  hA a                               hB a
-          PA a --------> RA a                PB b --------> RB b
-            |              ∧                   |              ∧
-  (eᴾA a)⁻¹ |              | eᴿA a   (eᴾB b)⁻¹ |              | eᴿB b
-            |              |                   |              |
-            ∨              |                   ∨              |
-         P (ia) ------> R (ia)              P (jb) ------> R (jb)
+          PA a ────────> RA a                PB b ────────> RB b
+            │              ∧                   │              ∧
+  (eᴾA a)⁻¹ │              │ eᴿA a   (eᴾB b)⁻¹ │              │ eᴿB b
+            │              │                   │              │
+            ∨              │                   ∨              │
+         P (ia) ──────> R (ia)              P (jb) ──────> R (jb)
                 h (ia)                             h (jb)
 ```
 
@@ -313,12 +313,12 @@ which we can turn into the computation rules
 
 ```text
               eᴾA a                           eᴾB a
-      P (ia) -------> PA a            P (jb) -------> PB b
-         |              |                |              |
-  h (ia) |              | hA a    h (jb) |              | hB b
-         |              |                |              |
+      P (ia) ───────> PA a            P (jb) ───────> PB b
+         │              │                │              │
+  h (ia) │              │ hA a    h (jb) │              │ hB b
+         │              │                │              │
          ∨              ∨                ∨              ∨
-      R (ia) -------> RA a            R (jb) -------> RB b
+      R (ia) ───────> RA a            R (jb) ───────> RB b
               eᴿA a                           eᴿB b
 ```
 

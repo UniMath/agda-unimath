@@ -110,11 +110,11 @@ type of maps `h : B → X` equipped with a homotopy witnessing that the square
 
 ```text
         f
-    A -----> B
-    |        |
-  f |        | h
+    A ─────> B
+    │        │
+  f │        │ h
     ∨        ∨
-    B -----> X
+    B ─────> X
         g
 ```
 
@@ -161,11 +161,11 @@ of `precomp f C` fits in a
 
 ```text
                      ap (precomp f C)
-       (g = h) --------------------------> (g ∘ f = h ∘ f)
-          |                                       |
-  htpy-eq |                                       | htpy-eq
+       (g = h) ──────────────────────────> (g ∘ f = h ∘ f)
+          │                                       │
+  htpy-eq │                                       │ htpy-eq
           ∨                                       ∨
-       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f).
+       (g ~ h) ──────────────────────────> (g ∘ f ~ h ∘ f).
                 precomp f (eq-value g h)
 ```
 
@@ -174,11 +174,11 @@ commuting square
 
 ```text
                 precomp f (eq-value g h)
-       (g ~ h) --------------------------> (g ∘ f ~ h ∘ f)
-          |                                       |
-  eq-htpy |                                       | eq-htpy
+       (g ~ h) ──────────────────────────> (g ∘ f ~ h ∘ f)
+          │                                       │
+  eq-htpy │                                       │ eq-htpy
           ∨                                       ∨
-       (g = h) --------------------------> (g ∘ f = h ∘ f).
+       (g = h) ──────────────────────────> (g ∘ f = h ∘ f).
                      ap (precomp f C)
 ```
 

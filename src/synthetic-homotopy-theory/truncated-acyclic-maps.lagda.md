@@ -538,11 +538,11 @@ module _
 
 ```text
         g          j
-   S -------> B -------> C
-   |          |          |
- f |          | j        | inr
+   S ───────> B ───────> C
+   │          │          │
+ f │          │ j        │ inr
    ∨        ⌜ ∨        ⌜ ∨
-   A -------> C -------> ∙
+   A ───────> C ───────> ∙
         i          inl
 ```
 
@@ -555,13 +555,13 @@ For this, we use the following commutative diagram
 
 ```text
                       ≃
-   (∙ → X) ------------------------> cocone f (j ∘ g) X
-      |      (by pushout pasting)            |
-      |                                      |
-    ≃ | (universal                           | vertical-map-cocone
-      |  property)                           | (second projection)
+   (∙ → X) ────────────────────────> cocone f (j ∘ g) X
+      │      (by pushout pasting)            │
+      │                                      │
+    ≃ │ (universal                           │ vertical-map-cocone
+      │  property)                           │ (second projection)
       ∨                                      ∨
- cocone j j X --------------------------> (C → X)
+ cocone j j X ──────────────────────────> (C → X)
                  vertical-map-cocone
                  (second projection)
 ```
@@ -574,7 +574,7 @@ following equivalences for that purpose:
 
 ```text
           cocone-map f (j ∘ g)
- (C → X) -----------------------> cocone f (j ∘ g) X
+ (C → X) ───────────────────────> cocone f (j ∘ g) X
                                ̇= Σ (l : A → X) ,
                                  Σ (r : C → X) , l ∘ f ~ r ∘ j ∘ g
        (using the left square)

@@ -45,7 +45,7 @@ Consider a span `𝒮` of types
 
 ```text
       f     g
-  A <--- S ---> B.
+  A <─── S ───> B.
 ```
 
 and a type `X` equipped with a
@@ -414,11 +414,11 @@ rectangle is a pushout if and only if the right square is a pushout.
 
 ```text
        g       k
-    A ----> B ----> C
-    |       |       |
-  f |       |       |
+    A ────> B ────> C
+    │       │       │
+  f │       │       │
     ∨       ∨       ∨
-    X ----> Y ----> Z
+    X ────> Y ────> Z
 ```
 
 ```agda
@@ -562,11 +562,11 @@ again a pushout.
 
 ```text
          i       g
-     S' ---> S ----> B
-     |   ≃   |       |
-  f' |       | f     |
+     S' ───> S ────> B
+     │   ≃   │       │
+  f' │       │ f     │
      ∨   ≃   ∨     ⌜ ∨
-     A' ---> A ----> X
+     A' ───> A ────> X
          j
 ```
 
@@ -609,15 +609,15 @@ rectangle is a pushout if and only if the bottom square is a pushout.
 
 ```text
         g
-    A -----> X
-    |        |
-  f |        |
+    A ─────> X
+    │        │
+  f │        │
     ∨      ⌜ ∨
-    B -----> Y
-    |        |
-  k |        |
+    B ─────> Y
+    │        │
+  k │        │
     ∨        ∨
-    C -----> Z
+    C ─────> Z
 ```
 
 ```agda
@@ -759,15 +759,15 @@ pasting lemma.
 
 ```text
           g'
-      S' ---> B'
-      |       |
-    i | ≃   ≃ | j
+      S' ───> B'
+      │       │
+    i │ ≃   ≃ │ j
       ∨   g   ∨
-      S ----> B
-      |       |
-    f |       |
+      S ────> B
+      │       │
+    f │       │
       ∨     ⌜ ∨
-      A ----> X
+      A ────> X
 ```
 
 ```agda
@@ -808,25 +808,25 @@ Given a commutative diagram where `i`, `j` and `k` are equivalences,
 
 ```text
            g'
-       S' ---> B'
-      / \       \
-  f' /   \ k     \ j
-    /     ∨   g   ∨
-   A'     S ----> B
-     \    |       |
-    i \   | f     |
-       \  ∨     ⌜ ∨
-        > A ----> X
+       S' ───> B'
+      ╱ ╲       ╲
+  f' ╱   ╲ k     ╲ j
+    ╱     ∨   g   ∨
+   A'     S ────> B
+     ╲    │       │
+    i ╲   │ f     │
+       ╲  ∨     ⌜ ∨
+        > A ────> X
 ```
 
 the induced square is a pushout:
 
 ```text
-  S' ---> B'
-  |       |
-  |       |
+  S' ───> B'
+  │       │
+  │       │
   ∨     ⌜ ∨
-  A' ---> X.
+  A' ───> X.
 ```
 
 This combines both special cases of the pushout pasting lemmas for equivalences.

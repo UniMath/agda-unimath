@@ -49,10 +49,10 @@ witnessing that the triangle of identifications
 
 ```text
         H₀ *
-  f₀ * ------> g₀ *
-      \       /
-    f₁ \     / g₁
-        \   /
+  f₀ * ──────> g₀ *
+      ╲       ╱
+    f₁ ╲     ╱ g₁
+        ╲   ╱
          ∨ ∨
           *
 ```
@@ -79,11 +79,11 @@ triangle of identifications
 
 ```text
         H₀ *
-  f₀ * ------> g₀ *
-      \       ∧
-    f₁ \     / inv g₁
-        \   /
-         ∨ /
+  f₀ * ──────> g₀ *
+      ╲       ∧
+    f₁ ╲     ╱ inv g₁
+        ╲   ╱
+         ∨ ╱
           *
 ```
 
@@ -104,10 +104,10 @@ identification on the right in the commuting triangle
 
 ```text
         H₀ *
-  f₀ * ------> g₀ *
-      \       /
-    f₁ \     / g₁
-        \   /
+  f₀ * ──────> g₀ *
+      ╲       ╱
+    f₁ ╲     ╱ g₁
+        ╲   ╱
          ∨ ∨
           *.
 ```
@@ -160,10 +160,10 @@ identifications
 
 ```text
                       H *
-                f * ------> g *
-                   \       /
-  preserves-point f \     / preserves-point g
-                     \   /
+                f * ──────> g *
+                   ╲       ╱
+  preserves-point f ╲     ╱ preserves-point g
+                     ╲   ╱
                       ∨ ∨
                        *
 ```
@@ -236,7 +236,7 @@ and `h := (h₀ , h₁)`, and pointed homotopies `G := (G₀ , G₁)` and
 
 ```text
       G        H
-  f -----> g -----> h
+  f ─────> g ─────> h
 ```
 
 The concatenation `(G ∙h H)` of `G` and `H` has underlying unpointed homotopy
@@ -250,12 +250,12 @@ pasting the commuting triangles of identifications
 
 ```text
       G₀ *      H₀ *
-  f₀ * --> g₀ * ---> h₀ *
-      \      |      /
-       \     | g₁  /
-     f₁ \    |    / h₁
-         \   |   /
-          \  |  /
+  f₀ * ──> g₀ * ───> h₀ *
+      ╲      │      ╱
+       ╲     │ g₁  ╱
+     f₁ ╲    │    ╱ h₁
+         ╲   │   ╱
+          ╲  │  ╱
            ∨ ∨ ∨
              *.
 ```

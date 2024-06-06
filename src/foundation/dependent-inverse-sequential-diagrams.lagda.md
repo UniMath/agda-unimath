@@ -36,7 +36,7 @@ a dependent sequential diagram of maps that extend infinitely to the left:
 
 ```text
      g₃      g₂      g₁      g₀
-  ⋯ ---> B₃ ---> B₂ ---> B₁ ---> B₀.
+  ⋯ ───> B₃ ───> B₂ ───> B₁ ───> B₀.
 ```
 
 ## Definitions
@@ -95,11 +95,11 @@ we mean that the diagrams
 
 ```text
             gₙ
-      Bₙ₊₁ ---> Bₙ
+      Bₙ₊₁ ───> Bₙ
       ∧         ∧
-  hₙ₊₁|         | hₙ
-      |         |
-      Aₙ₊₁ ---> Aₙ
+  hₙ₊₁│         │ hₙ
+      │         │
+      Aₙ₊₁ ───> Aₙ
             fₙ
 ```
 

@@ -37,13 +37,13 @@ that fit into a natural diagram
 
 ```text
           core F
-  core C -------> core D
-    |               |
-    |               |
-    |               |
-    |               |
+  core C ───────> core D
+    │               │
+    │               │
+    │               │
+    │               │
     ∨               ∨
-    C ------------> D.
+    C ────────────> D.
             F
 ```
 

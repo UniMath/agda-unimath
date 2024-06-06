@@ -30,11 +30,11 @@ Consider a square of [pointed maps](structured-types.pointed-maps.md)
 
 ```text
             top
-       A --------> X
-       |           |
-  left |           | right
+       A ────────> X
+       │           │
+  left │           │ right
        ∨           ∨
-       B --------> Y.
+       B ────────> Y.
           bottom
 ```
 
@@ -86,11 +86,11 @@ Consider a commuting square of pointed maps
 
 ```text
             top
-       A --------> X
-       |           |
-  left |           | right
+       A ────────> X
+       │           │
+  left │           │ right
        ∨           ∨
-       B --------> Y
+       B ────────> Y
           bottom
 ```
 
@@ -98,11 +98,11 @@ and consider a pointed map `f : Y →∗ Z`. Then the square
 
 ```text
               top
-       A -------------> X
-       |                |
-  left |                | f ∘∗ right
+       A ─────────────> X
+       │                │
+  left │                │ f ∘∗ right
        ∨                ∨
-       B -------------> Z
+       B ─────────────> Z
           f ∘∗ bottom
 ```
 
@@ -134,11 +134,11 @@ Consider a commuting square of pointed maps
 
 ```text
             top
-       A --------> X
-       |           |
-  left |           | right
+       A ────────> X
+       │           │
+  left │           │ right
        ∨           ∨
-       B --------> Y
+       B ────────> Y
           bottom
 ```
 
@@ -146,11 +146,11 @@ and consider a pointed map `f : Z →∗ A`. Then the square
 
 ```text
                f ∘∗ top
-            A ----------> X
-            |             |
-  left ∘∗ f |             | right
+            A ──────────> X
+            │             │
+  left ∘∗ f │             │ right
             ∨             ∨
-            B ----------> Z
+            B ──────────> Z
                 bottom
 ```
 
@@ -182,11 +182,11 @@ Consider two commuting squares of pointed maps, as in the diagram
 
 ```text
             top-left         top-right
-       A -------------> B --------------> C
-       |                |                 |
-  left |                | middle          | right
+       A ─────────────> B ──────────────> C
+       │                │                 │
+  left │                │ middle          │ right
        ∨                ∨                 ∨
-       D -------------> E --------------> F
+       D ─────────────> E ──────────────> F
           bottom-left      bottom-right
 ```
 
@@ -204,11 +204,11 @@ commuting square
 
 ```text
              top-right ∘∗ top-left
-       A -----------------------------> C
-       |                                |
-  left |                                | right
+       A ─────────────────────────────> C
+       │                                │
+  left │                                │ right
        ∨                                ∨
-       D -----------------------------> F
+       D ─────────────────────────────> F
           bottom-right ∘∗ bottom-left
 ```
 
@@ -272,15 +272,15 @@ Consider two commuting squares of pointed maps, as in the diagram
 
 ```text
                    top
-              A --------> B
-              |           |
-     top-left |           | top-right
+              A ────────> B
+              │           │
+     top-left │           │ top-right
               ∨  middle   ∨
-              C --------> D
-              |           |
-  bottom-left |           | bottom-right
+              C ────────> D
+              │           │
+  bottom-left │           │ bottom-right
               ∨           ∨
-              E --------> F
+              E ────────> F
                  bottom
 ```
 
@@ -298,11 +298,11 @@ commuting square
 
 ```text
                                top
-                          A --------> B
-                          |           |
-  bottom-left ∘∗ top-left |           | bottom-right ∘∗ top-right
+                          A ────────> B
+                          │           │
+  bottom-left ∘∗ top-left │           │ bottom-right ∘∗ top-right
                           ∨           ∨
-                          E --------> F
+                          E ────────> F
                              bottom
 ```
 

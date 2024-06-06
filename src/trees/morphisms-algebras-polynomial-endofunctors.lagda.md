@@ -36,11 +36,11 @@ that the square
 
 ```text
            P A B f
-  P A B X ---------> P A B Y
-      |                |
-      |                |
+  P A B X ─────────> P A B Y
+      │                │
+      │                │
       ∨                ∨
-      X -------------> Y
+      X ─────────────> Y
                f
 ```
 

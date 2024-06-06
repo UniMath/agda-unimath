@@ -35,7 +35,7 @@ Consider a span diagram `𝒮` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and an [equivalence of arrows](foundation.equivalences-arrows.md)
@@ -43,11 +43,11 @@ and an [equivalence of arrows](foundation.equivalences-arrows.md)
 
 ```text
           f'
-     A' <---- S'
-     |        |
-  h₀ | ≃    ≃ | h₁
+     A' <──── S'
+     │        │
+  h₀ │ ≃    ≃ │ h₁
      ∨        ∨
-     A <----- S -----> B.
+     A <───── S ─────> B.
           f       g
 ```
 
@@ -104,7 +104,7 @@ Consider a span diagram `𝒮` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and a [equivalence of arrows](foundation.equivalences-arrows.md)
@@ -112,11 +112,11 @@ and a [equivalence of arrows](foundation.equivalences-arrows.md)
 
 ```text
                g'
-           S' ----> B'
-           |        |
-        h₀ | ≃    ≃ | h₁
+           S' ────> B'
+           │        │
+        h₀ │ ≃    ≃ │ h₁
            ∨        ∨
-  A <----- S -----> B.
+  A <───── S ─────> B.
        f       g
 ```
 

@@ -20,9 +20,9 @@ Consider a triangle of [morphisms of arrows](foundation.morphisms-arrows.md)
 
 ```text
         top
-     f ----> g
-      \     /
-  left \   / right
+     f ────> g
+      ╲     ╱
+  left ╲   ╱ right
         ∨ ∨
          h
 ```
@@ -43,17 +43,17 @@ the square faces in the diagram
 
 ```text
         f
-  ∙ ---------> ∙
-  |\           |\
-  | \          | \
-  |  \         |  \
-  |   ∨        |   ∨
-  |    ∙ --- g ---> ∙
-  |   /        |   /
-  |  /         |  /
-  | /          | /
+  ∙ ─────────> ∙
+  │╲           │╲
+  │ ╲          │ ╲
+  │  ╲         │  ╲
+  │   ∨        │   ∨
+  │    ∙ ─── g ───> ∙
+  │   ╱        │   ╱
+  │  ╱         │  ╱
+  │ ╱          │ ╱
   ∨∨           ∨∨
-  ∙ ---------> ∙.
+  ∙ ─────────> ∙.
         h
 ```
 

@@ -51,11 +51,11 @@ Consider a [cone](foundation.cones-over-cospan-diagrams.md) over a
 [cospan diagram of types](foundation.cospan-diagrams.md) `f : A -> X <- B : g,`
 
 ```text
-  C ------> B
-  |         |
-  |         | g
+  C ──────> B
+  │         │
+  │         │ g
   ∨         ∨
-  A ------> X.
+  A ──────> X.
        f
 ```
 
@@ -329,11 +329,11 @@ Given a pullback square
 
 ```text
          f'
-    C -------> B
-    | ⌟        |
-  g'|          | g
+    C ───────> B
+    │ ⌟        │
+  g'│          │ g
     ∨          ∨
-    A -------> X
+    A ───────> X
          f
 ```
 
@@ -341,9 +341,9 @@ and two elements `u` and `v` of `C`, then the induced square
 
 ```text
                 ap f'
-     (u ＝ v) --------> (f' u ＝ f' v)
-        |                     |
-  ap g' |                     |
+     (u ＝ v) ────────> (f' u ＝ f' v)
+        │                     │
+  ap g' │                     │
         ∨                     ∨
   (g' u ＝ g' v) -> (f (g' u) ＝ g (f' v))
 ```

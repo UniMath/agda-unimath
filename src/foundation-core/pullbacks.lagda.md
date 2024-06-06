@@ -36,11 +36,11 @@ Consider a [cone](foundation.cones-over-cospan-diagrams.md) over a
 [cospan diagram of types](foundation.cospan-diagrams.md) `f : A -> X <- B : g,`
 
 ```text
-  C ------> B
-  |         |
-  |         | g
+  C ──────> B
+  │         │
+  │         │ g
   ∨         ∨
-  A ------> X.
+  A ──────> X.
        f
 ```
 
@@ -337,11 +337,11 @@ module _
 Given a diagram as follows where the right-hand square is a pullback
 
 ```text
-  ∙ -------> ∙ -------> ∙
-  |          | ⌟        |
-  |          |          |
+  ∙ ───────> ∙ ───────> ∙
+  │          │ ⌟        │
+  │          │          │
   ∨          ∨          ∨
-  ∙ -------> ∙ -------> ∙,
+  ∙ ───────> ∙ ───────> ∙,
 ```
 
 then the left-hand square is a pullback if and only if the composite square is.
@@ -428,15 +428,15 @@ module _
 Given a diagram as follows where the lower square is a pullback
 
 ```text
-  ∙ -------> ∙
-  |          |
-  |          |
+  ∙ ───────> ∙
+  │          │
+  │          │
   ∨          ∨
-  ∙ -------> ∙
-  | ⌟        |
-  |          |
+  ∙ ───────> ∙
+  │ ⌟        │
+  │          │
   ∨          ∨
-  ∙ -------> ∙,
+  ∙ ───────> ∙,
 ```
 
 then the upper square is a pullback if and only if the composite square is.
@@ -572,22 +572,22 @@ Consider two cospans with a shared vertex `B`:
 
 ```text
       f       g       h       i
-  A ----> X <---- B ----> Y <---- C,
+  A ────> X <──── B ────> Y <──── C,
 ```
 
 and with pullback cones `α` and `β` respectively. Moreover, consider a cone `γ`
 over the pullbacks as in the following diagram
 
 ```text
-  ∙ ------------> ∙ ------------> C
-  |               | ⌟             |
-  |       γ       |       β       | i
+  ∙ ────────────> ∙ ────────────> C
+  │               │ ⌟             │
+  │       γ       │       β       │ i
   ∨               ∨               ∨
-  ∙ ------------> B ------------> Y
-  | ⌟             |       h
-  |       α       | g
+  ∙ ────────────> B ────────────> Y
+  │ ⌟             │       h
+  │       α       │ g
   ∨               ∨
-  A ------------> X.
+  A ────────────> X.
           f
 ```
 
@@ -669,11 +669,11 @@ Given a pullback square
 
 ```text
          f'
-    C -------> B
-    | ⌟        |
-  g'|          | g
+    C ───────> B
+    │ ⌟        │
+  g'│          │ g
     ∨          ∨
-    A -------> X
+    A ───────> X
          f
 ```
 
@@ -681,11 +681,11 @@ we can "fold" the vertical edge onto the horizontal one and get a new pullback
 square
 
 ```text
-            C ---------> X
-            | ⌟          |
-  (f' , g') |            |
+            C ─────────> X
+            │ ⌟          │
+  (f' , g') │            │
             ∨            ∨
-          A × B -----> X × X,
+          A × B ─────> X × X,
                 f × g
 ```
 

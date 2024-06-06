@@ -20,11 +20,11 @@ open import foundation.universe-levels
 A square of morphisms
 
 ```text
-  x ------> y
-  |         |
-  |         |
+  x ──────> y
+  │         │
+  │         │
   ∨         ∨
-  z ------> w
+  z ──────> w
 ```
 
 in a [large precategory](category-theory.large-precategories.md) `C` is said to

@@ -43,7 +43,7 @@ for the _positive integers_. Arranged on a number line, we have
 
 ```text
   ⋯  -4  -3  -2  -1   0   1   2   3   4   ⋯
-  <---+---+---+---]   |   [---+---+---+--->
+  <───┼───┼───┼───┤   |   ├───┼───┼───┼───>
 ```
 
 We say an integer is

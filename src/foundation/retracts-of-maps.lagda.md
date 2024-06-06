@@ -48,11 +48,11 @@ of `X` and `B` of `Y` that fit into a commutative diagram
 
 ```text
          i₀        r₀
-    A ------> X ------> A
-    |         |         |
-  f |    i    | g   r   | f
+    A ──────> X ──────> A
+    │         │         │
+  f │    i    │ g   r   │ f
     ∨         ∨         ∨
-    B ------> Y ------> B
+    B ──────> Y ──────> B
          i₁        r₁
 ```
 
@@ -68,13 +68,13 @@ coherence
 
 ```text
                      r ·r i₀
-       r₁ ∘ g ∘ i₀ ----------> f ∘ r₀ ∘ i₀
-            |                      |
-            |                      |
-  r₁ ·l i⁻¹ |          L           | f ·l H₀
-            |                      |
+       r₁ ∘ g ∘ i₀ ──────────> f ∘ r₀ ∘ i₀
+            │                      │
+            │                      │
+  r₁ ·l i⁻¹ │          L           │ f ·l H₀
+            │                      │
             ∨                      ∨
-      r₁ ∘ i₁ ∘ f ---------------> f
+      r₁ ∘ i₁ ∘ f ───────────────> f
                        H₁ ·r f
 ```
 
@@ -89,8 +89,8 @@ the square
 
 ```text
     A ========= A
-    |           |
-  f | refl-htpy | f
+    │           │
+  f │ refl-htpy │ f
     ∨           ∨
     B ========= B,
 ```
@@ -291,11 +291,11 @@ In fact, we only need the following data to show this:
 
 ```text
                  r₀
-            X ------> A
-            |         |
-          g |    r    | f
+            X ──────> A
+            │         │
+          g │    r    │ f
             ∨         ∨
-  B ------> Y ------> B.
+  B ──────> Y ──────> B.
        i₁   H₁   r₁
 ```
 
@@ -303,10 +303,10 @@ In fact, we only need the following data to show this:
 
 ```text
             r₀
-       X ------> A
-        \       /
-  r₁ ∘ g \     / f
-          \   /
+       X ──────> A
+        ╲       ╱
+  r₁ ∘ g ╲     ╱ f
+          ╲   ╱
            ∨ ∨
             B.
 ```
@@ -351,11 +351,11 @@ In fact, we only need the following data to show this:
 
 ```text
          i₀   H   r₀
-    A ------> X ------> A
-    |         |
-  f |    i    | g
+    A ──────> X ──────> A
+    │         │
+  f │    i    │ g
     ∨         ∨
-    B ------> Y.
+    B ──────> Y.
          i₁
 ```
 
@@ -363,10 +363,10 @@ In fact, we only need the following data to show this:
 
 ```text
             f
-       A ------> B
-        \       /
-  g ∘ i₀ \     / i₁
-          \   /
+       A ──────> B
+        ╲       ╱
+  g ∘ i₀ ╲     ╱ i₁
+          ╲   ╱
            ∨ ∨
             Y.
 ```
@@ -461,15 +461,15 @@ row of squares in the diagram below.
 
 ```text
               j                     s
-  fiber f b -----> fiber g (i₁ b) -----> fiber f b
-     |                 |                    |
-     |       i'        |         r'         |
+  fiber f b ─────> fiber g (i₁ b) ─────> fiber f b
+     │                 │                    │
+     │       i'        │         r'         │
      ∨                 ∨                    ∨
-     A ----- i₀ -----> X ------- r₀ ------> A
-     |                 |                    |
-   f |       i         | g       r          | f
+     A ───── i₀ ─────> X ─────── r₀ ──────> A
+     │                 │                    │
+   f │       i         │ g       r          │ f
      ∨                 ∨                    ∨
-     B --------------> Y -----------------> B
+     B ──────────────> Y ─────────────────> B
              i₁                  r₁
 ```
 
@@ -482,11 +482,11 @@ obtain a commuting diagram
 
 ```text
               j                     s                          ≃
-  fiber f b -----> fiber g (i₁ b) -----> fiber f (r₀ (i₀ b)) -----> fiber f b
-     |                 |                       |                        |
-     |       i'        |           r'          |                        |
+  fiber f b ─────> fiber g (i₁ b) ─────> fiber f (r₀ (i₀ b)) ─────> fiber f b
+     │                 │                       │                        │
+     │       i'        │           r'          │                        │
      ∨                 ∨                       ∨                        ∨
-     A --------------> X --------------------> A ---------------------> A
+     A ──────────────> X ────────────────────> A ─────────────────────> A
              i₀                    r₀                       id
 ```
 

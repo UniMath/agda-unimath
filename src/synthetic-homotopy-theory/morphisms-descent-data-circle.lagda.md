@@ -25,13 +25,13 @@ and `(B,f)` over the
 e)`and`(B, f)`is a map`h`from`A`to`B` such that the square
 
 ```text
-      h
-  A -----> B
-  |        |
- e|        |f
-  ∨        ∨
-  A -----> B
-      h
+        h
+    A ─────> B
+    │        │
+  e │        │ f
+    ∨        ∨
+    A ─────> B
+        h
 ```
 
 [commutes](foundation.commuting-squares-of-maps.md).

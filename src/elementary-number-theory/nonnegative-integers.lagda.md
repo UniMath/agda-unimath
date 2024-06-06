@@ -43,7 +43,7 @@ Arranged on a number line, we have
 
 ```text
   ⋯  -4  -3  -2  -1   0   1   2   3   4   ⋯
-  <---+---+---+---]   |   [---+---+---+--->
+  <───┼───┼───┼───┤   |   ├───┼───┼───┼───>
 ```
 
 The {{#concept "nonnegative" Disambiguation="integer" Agda=is-nonnegative-ℤ}}

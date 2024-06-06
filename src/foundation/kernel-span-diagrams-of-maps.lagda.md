@@ -26,7 +26,7 @@ of `f` is the [span diagram](foundation.span-diagrams.md)
 
 ```text
       pr1                           pr1 ∘ pr2
-  A <----- Σ (x y : A), f x ＝ f y -----------> A.
+  A <───── Σ (x y : A), f x ＝ f y ───────────> A.
 ```
 
 We call this the kernel span diagram, since the pair `(pr1 , pr1 ∘ pr2)` is

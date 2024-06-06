@@ -28,13 +28,13 @@ consists of a map `w : S → T` [equipped](foundation.structure.md) with two
 
 ```text
              S
-           / | \
-        f /  |  \ h
-         ∨   |   ∨
-        A    |w   B
-         ∧   |   ∧
-        h \  |  / k
-           \ ∨ /
+           ╱ │ ╲
+        f ╱  │  ╲ h
+         ∨   │   ∨
+        A    │w   B
+         ∧   │   ∧
+        h ╲  │  ╱ k
+           ╲ ∨ ╱
              T
 ```
 

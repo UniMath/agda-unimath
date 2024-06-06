@@ -34,12 +34,12 @@ A fibered equivalence is a fibered map
 
 ```text
        h
-  A -------> B
-  |          |
- f|          |g
-  |          |
+  A ───────> B
+  │          │
+ f│          │g
+  │          │
   ∨          ∨
-  X -------> Y
+  X ───────> Y
        i
 ```
 

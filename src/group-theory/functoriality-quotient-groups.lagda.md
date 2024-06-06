@@ -38,11 +38,11 @@ satisfying the property that `x ∈ N ⇒ f x ∈ M` induces a group homomorphis
 
 ```text
          f
-    G -------> H
-    |          |
-  q |          | q
+    G ───────> H
+    │          │
+  q │          │ q
     ∨          ∨
-   G/N -----> H/M
+   G/N ─────> H/M
          g
 ```
 

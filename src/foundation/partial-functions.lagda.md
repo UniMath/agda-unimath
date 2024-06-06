@@ -36,8 +36,8 @@ Partial functions can be described
 
 ```text
   ∅     1   ∅
-  |     |   |
-  |  ⇒  | ∘ |
+  │     │   │
+  │  ⇒  │ ∘ │
   ∨     ∨   ∨
   A   Prop  B
 ```

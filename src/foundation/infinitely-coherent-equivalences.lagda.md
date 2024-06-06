@@ -72,7 +72,7 @@ Being an infinitely coherent equivalence is an inverse sequential limit of the
 diagram
 
 ```text
-  ... ---> is-finitely-coherent-equivalence 1 f ---> is-finitely-coherent-equivalence 0 f.
+  ... ───> is-finitely-coherent-equivalence 1 f ───> is-finitely-coherent-equivalence 0 f.
 ```
 
 ## Definitions
@@ -250,11 +250,11 @@ for each `x : A` and `y : B` a homotopy `α₁` witnessing that the triangle
 
 ```text
                (f x = y)
-              /         \
-       s x y /           \ t x y
-            /             \
+              ╱         ╲
+       s x y ╱           ╲ t x y
+            ╱             ╲
            ∨               ∨
-  (x = h y) --------------> (x = k y)
+  (x = h y) ──────────────> (x = k y)
              p ↦ p ∙ α₀ y
 ```
 

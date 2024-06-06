@@ -23,7 +23,7 @@ i.e. a certain infinite [sequence](foundation.dependent-sequences.md) of maps
 
 ```text
       ⋯        fₙ      ⋯      f₁      f₀
-  ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₁ ---> A₀,
+  ⋯ ───> Aₙ₊₁ ───> Aₙ ───> ⋯ ───> A₁ ───> A₀,
 ```
 
 we can form the **transfinite cocomposition** of `f` by taking the canonical map

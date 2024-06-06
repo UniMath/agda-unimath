@@ -32,9 +32,9 @@ instead of giving for every diagram
 
 ```text
        y
-      ∧ \
-     /   \
-    /     ∨
+      ∧ ╲
+     ╱   ╲
+    ╱     ∨
   x        z
 ```
 
@@ -44,9 +44,9 @@ span
 ```text
        y
       ∧
-     /
-    /
-  x -----> z,
+     ╱
+    ╱
+  x ─────> z,
 ```
 
 an _extension_ `y → z`. By symmetry it also gives an extension in the opposite

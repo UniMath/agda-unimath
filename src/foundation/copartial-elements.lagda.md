@@ -42,18 +42,18 @@ In order to compare copartial elements with
 following [pullback](foundation.pullbacks.md) squares
 
 ```text
-  A -----> Σ (Q : Prop), A * Q        1 -----> Σ (P : Prop), (P → A)
-  | ⌟              |                  | ⌟              |
-  |                |                  |                |
+  A ─────> Σ (Q : Prop), A * Q        1 ─────> Σ (P : Prop), (P → A)
+  │ ⌟              │                  │ ⌟              │
+  │                │                  │                │
   ∨                ∨                  ∨                ∨
-  1 -----------> Prop                 1 -----------> Prop
+  1 ───────────> Prop                 1 ───────────> Prop
           F                                   F
 
-  1 -----> Σ (Q : Prop), A * Q        A -----> Σ (P : Prop), (P → A)
-  | ⌟              |                  | ⌟              |
-  |                |                  |                |
+  1 ─────> Σ (Q : Prop), A * Q        A ─────> Σ (P : Prop), (P → A)
+  │ ⌟              │                  │ ⌟              │
+  │                │                  │                │
   ∨                ∨                  ∨                ∨
-  1 -----------> Prop                 1 -----------> Prop
+  1 ───────────> Prop                 1 ───────────> Prop
           T                                   T
 ```
 
@@ -69,8 +69,8 @@ the [pushout-product](synthetic-homotopy-theory.pushout-products.md)
 
 ```text
     A   1
-    |   |
-  ! | □ | T
+    │   │
+  ! │ □ │ T
     ∨   ∨
     1  Prop
 ```
@@ -82,11 +82,11 @@ copartial elements induce copartial elements. Indeed, note that
 
 ```text
                                          P Q x ↦ (P * Q , x)
-    1     1       Σ (P Q : Prop), P * Q ---------------------> 1
-    |     |               |                                    |
-  T |  □  | T   =   T □ T |                                    |
+    1     1       Σ (P Q : Prop), P * Q ─────────────────────> 1
+    │     │               │                                    │
+  T │  □  │ T   =   T □ T │                                    │
     ∨     ∨               ∨                                    ∨
-  Prop   Prop           Prop² ------------------------------> Prop
+  Prop   Prop           Prop² ──────────────────────────────> Prop
                                        P Q ↦ P * Q
 ```
 

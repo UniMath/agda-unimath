@@ -30,11 +30,11 @@ Consider two maps `f : A → X` and `g : B → X` with a common codomain. The
 
 ```text
              π₂
-   A ×_X B -----> B
-     | ⌟          |
-  π₁ |            | g
+   A ×_X B ─────> B
+     │ ⌟          │
+  π₁ │            │ g
      ∨            ∨
-     A ---------> X.
+     A ─────────> X.
            f
 ```
 
@@ -43,11 +43,11 @@ the cogap map of any cartesian square
 
 ```text
         j
-    A -----> X
-    | ⌟      |
-  f |        | g
+    A ─────> X
+    │ ⌟      │
+  f │        │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         i
 ```
 
@@ -66,10 +66,10 @@ from the [fiber](foundation-core.fibers-of-maps.md) of `f * g` to the
 
 ```text
             ≃
-   A *_X B --> Σ (x : X), (fiber f x) * (fiber g x)
-        \       /
-         \     /
-          \   /
+   A *_X B ──> Σ (x : X), (fiber f x) * (fiber g x)
+        ╲       ╱
+         ╲     ╱
+          ╲   ╱
            ∨ ∨
             X.
 ```
@@ -79,11 +79,11 @@ in which the top map is an equivalence. The join of maps is related to the
 fits in a [pullback diagram](foundation.pullbacks.md)
 
 ```text
-      A *_X B ------> (X × B) ⊔_{A × B} (A × X)
-        | ⌟                   |
-  f * g |                     | f □ g
+      A *_X B ──────> (X × B) ⊔_{A × B} (A × X)
+        │ ⌟                   │
+  f * g │                     │ f □ g
         ∨                     ∨
-        X ----------------> X × X.
+        X ────────────────> X × X.
                  Δ
 ```
 
@@ -92,10 +92,10 @@ that there is a commuting triangle
 
 ```text
                               ≃
-  (X × B) ⊔_{A × B} (A × X) ----> (A × Y) *_{X × Y} (X × B)
-                        \           /
-                   f □ g \         / (f × id) * (id × g)
-                          \       /
+  (X × B) ⊔_{A × B} (A × X) ────> (A × Y) *_{X × Y} (X × B)
+                        ╲           ╱
+                   f □ g ╲         ╱ (f × id) * (id × g)
+                          ╲       ╱
                            ∨     ∨
                             X × Y
 ```

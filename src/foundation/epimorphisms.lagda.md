@@ -68,11 +68,11 @@ If the map `f : A → B` is epi, then the commutative square
 
 ```text
         f
-    A -----> B
-    |        |
-  f |        | id
+    A ─────> B
+    │        │
+  f │        │ id
     ∨      ⌜ ∨
-    B -----> B
+    B ─────> B
         id
 ```
 

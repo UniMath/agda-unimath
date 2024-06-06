@@ -27,9 +27,9 @@ witnessing that the two triangles
 
 ```text
       u              u
-  X ----> Y      X ----> Y
-   \     /        \     /
-  f \   / h      g \   / k
+  X ────> Y      X ────> Y
+   ╲     ╱        ╲     ╱
+  f ╲   ╱ h      g ╲   ╱ k
      ∨ ∨            ∨ ∨
       A              B
 ```

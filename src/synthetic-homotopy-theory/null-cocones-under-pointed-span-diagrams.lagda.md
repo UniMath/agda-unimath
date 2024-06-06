@@ -34,7 +34,7 @@ The {{#concept "null cocone" Disambiguation="pointed span diagram"}} under a
 
 ```text
       f       g
-  A <---- S ----> B
+  A <──── S ────> B
 ```
 
 with codomain `X` is the
@@ -45,11 +45,11 @@ with codomain `X` is the
 
 ```text
         g
-    S -----> B
-    |        |
-  f |        | const
+    S ─────> B
+    │        │
+  f │        │ const
     ∨        ∨
-    A -----> X
+    A ─────> X
       const
 ```
 

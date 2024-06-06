@@ -48,16 +48,16 @@ diagram relating the different notions of "category":
 
 ```text
         Gaunt categories
-              /   \
-            /       \
-          ∨           ∨
+             ╱     ╲
+            ╱       ╲
+           ∨         ∨
   Categories         Strict categories
-          \           /
-            \       /
-              ∨   ∨
+           ╲         ╱
+            ╲       ╱
+             ∨     ∨
       Preunivalent categories
-                |
-                |
+                │
+                │
                 ∨
           Precategories
 ```

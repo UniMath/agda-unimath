@@ -129,11 +129,11 @@ concatenation asserts that the square of identifications
 
 ```text
                      right-whisker-concat α refl
-           p ∙ refl -----------------------------> p' ∙ refl
-             |                                        |
-  right-unit |                                        |
+           p ∙ refl ─────────────────────────────> p' ∙ refl
+             │                                        │
+  right-unit │                                        │
              ∨                                        ∨
-             p -------------------------------------> p'
+             p ─────────────────────────────────────> p'
 ```
 
 commutes for any `α : p ＝ p'`. Note that this law is slightly more complicated,
@@ -163,11 +163,11 @@ Then the square of identifications
 
 ```text
                          right-whisker α q
-                 p ∙ q ---------------------> p' ∙ q
-                   |                             |
-  left-whisker p β |                             | left-whisker p' β
+                 p ∙ q ─────────────────────> p' ∙ q
+                   │                             │
+  left-whisker p β │                             │ left-whisker p' β
                    ∨                             ∨
-                 p ∙ q' --------------------> p' ∙ q'
+                 p ∙ q' ────────────────────> p' ∙ q'
                          right-whisker α q'
 ```
 
@@ -219,8 +219,8 @@ Consider a diagram of identifications
 
 ```text
                r
-      p      ----->     q
-  a -----> b -----> c ----->
+      p      ─────>     q
+  a ─────> b ─────> c ─────>
                s
 ```
 
@@ -228,11 +228,11 @@ with `t : r ＝ s`. Then the square of identifications
 
 ```text
                                assoc p r q
-                  (p ∙ r) ∙ q -------------> p ∙ (r ∙ q)
-                       |                          |
-  double-whisker p t q |                          | double-whisker' p t q
+                  (p ∙ r) ∙ q ─────────────> p ∙ (r ∙ q)
+                       │                          │
+  double-whisker p t q │                          │ double-whisker' p t q
                        ∨                          ∨
-                  (p ∙ s) ∙ q -------------> p ∙ (s ∙ q)
+                  (p ∙ s) ∙ q ─────────────> p ∙ (s ∙ q)
                                assoc p s q
 ```
 
@@ -257,11 +257,11 @@ Consider an identification `r : p ＝ q` between two identifications
 
 ```text
                       right-whisker r refl
-            p ∙ refl ----------------------> q ∙ refl
-              |                                |
-   right-unit |                                | right-unit
+            p ∙ refl ──────────────────────> q ∙ refl
+              │                                │
+   right-unit │                                │ right-unit
               ∨                                ∨
-              p -----------------------------> q
+              p ─────────────────────────────> q
                                 r
 ```
 

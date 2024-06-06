@@ -41,7 +41,7 @@ The equivalence of binary type duality takes a binary relation `R : A → B → 
 to the span
 
 ```text
-  A <----- Σ (a : A), Σ (b : B), R a b -----> B.
+  A <───── Σ (a : A), Σ (b : B), R a b ─────> B.
 ```
 
 and its inverse takes a span `A <-f- S -g-> B` to the binary relation
@@ -57,7 +57,7 @@ and its inverse takes a span `A <-f- S -g-> B` to the binary relation
 Given a binary relation `R : A → B → 𝒰`, we obtain a span
 
 ```text
-  A <----- Σ (a : A), Σ (b : B), R a b -----> B.
+  A <───── Σ (a : A), Σ (b : B), R a b ─────> B.
 ```
 
 ```agda
@@ -86,7 +86,7 @@ Given a span
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 we obtain the binary relation `a b ↦ Σ (s : S), (f s ＝ a) × (g s ＝ b)`.

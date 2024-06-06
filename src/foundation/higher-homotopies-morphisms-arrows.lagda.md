@@ -48,11 +48,11 @@ and a homotopy witnessing that the square of homotopies
 
 ```text
                  left-whisker-concat-htpy H (g · γ₀)
-  H ∙ (g ·l I) ---------------------------------------> H ∙ (g · I')
-       |                                                     |
-     K |                                                     | K'
+  H ∙ (g ·l I) ───────────────────────────────────────> H ∙ (g · I')
+       │                                                     │
+     K │                                                     │ K'
        ∨                                                     ∨
-  (J · f) ∙ H' ---------------------------------------> (J' · f) ∙ H'
+  (J · f) ∙ H' ───────────────────────────────────────> (J' · f) ∙ H'
                 right-whisker-concat-htpy (γ₁ · f) H'
 ```
 

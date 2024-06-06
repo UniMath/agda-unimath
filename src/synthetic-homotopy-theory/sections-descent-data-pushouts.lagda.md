@@ -57,9 +57,9 @@ and `PB`, respectively, and `tS` is a coherence datum, witnessing that for every
 
 ```text
            tA ∘ f
-  (s : S) --------> PA (f s)
-          \       /
-    tB ∘ g  \   / PS s
+  (s : S) ────────> PA (f s)
+          ╲       ╱
+    tB ∘ g  ╲   ╱ PS s
              ∨ ∨
           PB (g s)
 ```
@@ -87,12 +87,12 @@ identifications
 
 ```text
                PS s ·l HA fs
-  PS s (tA fs) ------------> PS s (rA fs)
-       |                          |
-  tS s |                          | rS s
-       |                          |
+  PS s (tA fs) ────────────> PS s (rA fs)
+       │                          │
+  tS s │                          │ rS s
+       │                          │
        ∨                          ∨
-     tB gs -------------------> rB gs
+     tB gs ───────────────────> rB gs
                    HB gs
 ```
 
@@ -256,10 +256,10 @@ This map factors through the dependent cocone map
 
 ```text
                 dependent-cocone-map
-  (x : X) → P x --------------------> dependent-cocone P
-                \                  /
-                  \              /
-                    \          /
+  (x : X) → P x ────────────────────> dependent-cocone P
+                ╲                  ╱
+                  ╲              ╱
+                    ╲          ╱
                       ∨      ∨
                 section (PA, PB, PS),
 ```

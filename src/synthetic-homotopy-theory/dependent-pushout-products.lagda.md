@@ -31,11 +31,11 @@ the [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
                        Σ f id
-          Σ A (B ∘ f) --------> Σ X B
-               |                  |
-  Σ id (g ∘ f) |                  | Σ id g
+          Σ A (B ∘ f) ────────> Σ X B
+               │                  │
+  Σ id (g ∘ f) │                  │ Σ id g
                ∨                  ∨
-          Σ A (Y ∘ f) --------> Σ X Y.
+          Σ A (Y ∘ f) ────────> Σ X Y.
                        Σ f id
 ```
 

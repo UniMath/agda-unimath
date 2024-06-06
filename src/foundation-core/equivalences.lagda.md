@@ -165,7 +165,7 @@ To see this, we concatenate the following homotopies
 
 ```text
          H⁻¹ ·r g ·r f                  h ·l G ·r f           H
-  g ∘ h ---------------> h ∘ f ∘ g ∘ f -------------> h ∘ f -----> id.
+  g ∘ h ───────────────> h ∘ f ∘ g ∘ f ─────────────> h ∘ f ─────> id.
 ```
 
 ```agda
@@ -307,10 +307,10 @@ The **3-for-2 property** of equivalences asserts that for any
 
 ```text
        h
-  A ------> B
-   \       /
-   f\     /g
-     \   /
+  A ──────> B
+   ╲       ╱
+   f╲     ╱g
+     ╲   ╱
       ∨ ∨
        X,
 ```
@@ -619,11 +619,11 @@ We will assume a commuting square
 
 ```text
         h
-    A -----> C
-    |        |
-  f |        | g
+    A ─────> C
+    │        │
+  f │        │ g
     ∨        ∨
-    B -----> D
+    B ─────> D
         i
 ```
 

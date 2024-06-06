@@ -19,11 +19,11 @@ The {{#concept "diagonal" Disambiguation="morphism of arrows"}} of a
 
 ```text
         i
-    A -----> X
-    |        |
-  f |        | g
+    A ─────> X
+    │        │
+  f │        │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 
@@ -32,11 +32,11 @@ maps `i` and `j`, which fit in a naturality square
 
 ```text
        Δ i
-    A -----> A ×_X A
-    |           |
-  f |           | functoriality Δ g
+    A ─────> A ×_X A
+    │           │
+  f │           │ functoriality Δ g
     ∨           ∨
-    B -----> B ×_Y B.
+    B ─────> B ×_Y B.
        Δ j
 ```
 

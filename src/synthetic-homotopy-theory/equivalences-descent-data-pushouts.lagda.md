@@ -45,12 +45,12 @@ equipped with a family of [homotopies](foundation-core.homotopies.md) making
 
 ```text
               eA(fs)
-     PA(fs) --------> QA(fs)
-       |                |
-  PS s |                | QS s
-       |                |
+     PA(fs) ────────> QA(fs)
+       │                │
+  PS s │                │ QS s
+       │                │
        ∨                ∨
-     PB(gs) --------> QB(gs)
+     PB(gs) ────────> QB(gs)
               eB(gs)
 ```
 
@@ -200,12 +200,12 @@ and mirroring the coherence squares vertically to get
 
 ```text
              eA(a)⁻¹
-     QA(fs) --------> PA(fs)
-       |                |
-  QS s |                | PS s
-       |                |
+     QA(fs) ────────> PA(fs)
+       │                │
+  QS s │                │ PS s
+       │                │
        ∨                ∨
-     QB(gs) --------> PB(gs).
+     QB(gs) ────────> PB(gs).
              eB(a)⁻¹
 ```
 

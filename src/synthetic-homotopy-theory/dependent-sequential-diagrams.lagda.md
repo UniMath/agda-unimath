@@ -35,18 +35,18 @@ They can be thought of as a family of sequential diagrams
 
 ```text
        bₙ(x)           bₙ₊₁(aₙ(x))
- Bₙ(x) ----> Bₙ₊₁(aₙ(x)) -------> Bₙ₊₂(aₙ₊₁(aₙ(x))) ----> ⋯,
+ Bₙ(x) ────> Bₙ₊₁(aₙ(x)) ───────> Bₙ₊₂(aₙ₊₁(aₙ(x))) ────> ⋯,
 ```
 
 one for each `x : Aₙ`, or as a sequence fibered over `(A, a)`, visualised as
 
 ```text
      b₀      b₁      b₂
- B₀ ---> B₁ ---> B₂ ---> ⋯
- |       |       |
- |       |       |
+ B₀ ───> B₁ ───> B₂ ───> ⋯
+ │       │       │
+ │       │       │
  ↡       ↡       ↡
- A₀ ---> A₁ ---> A₂ ---> ⋯.
+ A₀ ───> A₁ ───> A₂ ───> ⋯.
      a₀      a₁      a₂
 ```
 
@@ -110,11 +110,11 @@ the form
 
 ```text
           bₙ(x)
-  Bₙ(x) -------> Bₙ₊₁(aₙ(x))
+  Bₙ(x) ───────> Bₙ₊₁(aₙ(x))
     ∧                ∧
- sₙ |                | sₙ₊₁
-    |                |
- (x : Aₙ) ---> (aₙ(x) : Aₙ₊₁)
+ sₙ │                │ sₙ₊₁
+    │                │
+ (x : Aₙ) ───> (aₙ(x) : Aₙ₊₁)
            aₙ
 ```
 

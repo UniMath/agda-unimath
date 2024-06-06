@@ -112,11 +112,11 @@ commuting square of identifications
 
 ```text
                     ap (tr (λ _ → B) p) q
-          tr (λ _ → B) p y ------> tr (λ _ → B) p y'
-                         |         |
-  tr-constant-family p y |         | tr-constant-family p y'
+          tr (λ _ → B) p y ──────> tr (λ _ → B) p y'
+                         │         │
+  tr-constant-family p y │         │ tr-constant-family p y'
                          ∨         ∨
-                         y ------> y'.
+                         y ──────> y'.
                               q
 ```
 

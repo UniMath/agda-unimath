@@ -39,11 +39,11 @@ which is uniquely determined by the
 
 ```text
                      ap f
-       (X = Y) ---------------> (f X = f Y)
-          |                          |
- equiv-eq |                          | id
+       (X = Y) ───────────────> (f X = f Y)
+          │                          │
+ equiv-eq │                          │ id
           ∨                          ∨
-       (X ≃ Y) ---------------> (f X = f Y)
+       (X ≃ Y) ───────────────> (f X = f Y)
                 action-equiv f
 ```
 

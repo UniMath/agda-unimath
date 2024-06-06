@@ -33,14 +33,14 @@ diagram
 
 ```text
       f         g
-  A -----> X <----- B
+  A ─────> X <───── B
 ```
 
 We disambiguate between cospans and
 [cospan diagrams](foundation.cospan-diagrams.md). We consider a cospan from `A`
 to `B` a morphism from `A` to `B` in the category of types and cospans between
 them, whereas we consider cospan diagrams to be _objects_ in the category of
-diagrams of types of the form `* <---- * ----> *`. Conceptually there is a
+diagrams of types of the form `* <──── * ────> *`. Conceptually there is a
 subtle, but important distinction between cospans and cospan diagrams. Cospan
 diagrams are more suitable for functorial operations that take "cospans" as
 input, but for which the functorial action takes a natural transformation, i.e.,

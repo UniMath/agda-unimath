@@ -44,10 +44,10 @@ conjunction
 
 ```text
            R
-        /  ∶  \
-      /    ∶    \
-    ∨      ∨      ∨
-  P <--- P ∧ Q ---> Q.
+        ╱  ∶  ╲
+       ╱   ∶   ╲
+     ∨     ∨     ∨
+   P <── P ∧ Q ──> Q.
 ```
 
 In other words, we have a

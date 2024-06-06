@@ -34,14 +34,14 @@ Given an
 
 ```text
                fₙ                     f₁      f₀
-  ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀
+  ⋯ ───> Aₙ₊₁ ───> Aₙ ───> ⋯ ───> A₂ ───> A₁ ───> A₀
 ```
 
 the **sequential limit** `limₙ Aₙ` is a universal type completing the diagram
 
 ```text
                            fₙ                     f₁      f₀
-  limₙ Aₙ ---> ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀.
+  limₙ Aₙ ───> ⋯ ───> Aₙ₊₁ ───> Aₙ ───> ⋯ ───> A₂ ───> A₁ ───> A₀.
 ```
 
 The **universal property of the sequential limit** states that `limₙ Aₙ` is the

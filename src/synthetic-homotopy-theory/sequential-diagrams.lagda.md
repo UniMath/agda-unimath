@@ -27,7 +27,7 @@ They can be represented by diagrams
 
 ```text
      a₀      a₁      a₂
- A₀ ---> A₁ ---> A₂ ---> ⋯
+ A₀ ───> A₁ ───> A₂ ───> ⋯
 ```
 
 extending infinitely to the right.
@@ -77,7 +77,7 @@ Given a sequential diagram `A` and a type `X` there is a sequential diagram
 
 ```text
            (f₀ ∘ -)          (f₁ ∘ -)          (f₂ ∘ -)
-  (X → A₀) -------> (X → A₁) -------> (X → A₂) -------> (X → A₃) -------> ⋯
+  (X → A₀) ───────> (X → A₁) ───────> (X → A₂) ───────> (X → A₃) ───────> ⋯
 ```
 
 ```agda

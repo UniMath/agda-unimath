@@ -35,11 +35,11 @@ to `g`
 
 ```text
         i
-    A -----> X
-    |        |
-  f |        | g
+    A ─────> X
+    │        │
+  f │        │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 
@@ -48,11 +48,11 @@ induces a morphism of arrows between the
 [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
-  fiber f b -----> fiber g (j b)
-      |                  |
-      |                  |
+  fiber f b ─────> fiber g (j b)
+      │                  │
+      │                  │
       ∨                  ∨
-      A ---------------> X.
+      A ───────────────> X.
 ```
 
 This operation from morphisms of arrows from `f` to `g` to morphisms of arrows
@@ -248,15 +248,15 @@ Given two morphisms of arrows
 
 ```text
         α₀
-      ------>
-    A ------> X
+      ──────>
+    A ──────> X
     |   β₀    |
-    |         |
+    │         │
   f |  α  β   | g
-    |         |
+    │         │
     ∨   α₁    ∨
-    B ------> Y
-      ------>
+    B ──────> Y
+      ──────>
         β₁
 ```
 
@@ -265,17 +265,17 @@ diagram of the form
 
 ```text
            fiber g (α₁ b)
-            ∧     |   \
-           /      |    \ (x , q) ↦ (x , q ∙ γ₁ b)
-          /       |     \
-         /        |      ∨
-  fiber f b --------> fiber g (β₁ b)
-        |         |     /
-        |         |    /
-        |         |   /
-        |         |  /
+            ∧     │   ╲
+           ╱      │    ╲ (x , q) ↦ (x , q ∙ γ₁ b)
+          ╱       │     ╲
+         ╱        │      ∨
+  fiber f b ────────> fiber g (β₁ b)
+        │         │     ╱
+        │         │    ╱
+        │         │   ╱
+        │         │  ╱
         ∨         ∨ ∨
-        A -------> X
+        A ───────> X
 ```
 
 To show that we have such a commuting diagram, we have to show that the top
@@ -334,12 +334,12 @@ Now it remains to fill a coherence for the square of homotopies
 
 ```text
                    γ₀ ·r i
-                · ---------> ·
-                |            |
- coh (tr ∘ α b) |            | coh-hom-arrow-fiber f g β b
-    ≐ refl-htpy |            | ≐ refl-htpy
+                · ─────────> ·
+                │            │
+ coh (tr ∘ α b) │            │ coh-hom-arrow-fiber f g β b
+    ≐ refl-htpy │            │ ≐ refl-htpy
                 ∨            ∨
-                · ---------> ·
+                · ─────────> ·
                    i ·r H
 ```
 

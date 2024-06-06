@@ -26,11 +26,11 @@ A square of [homotopies](foundation-core.identity-types.md)
 
 ```text
            top
-       f -------> g
-       |          |
-  left |          | right
+       f ───────> g
+       │          │
+  left │          │ right
        ∨          ∨
-       h -------> i
+       h ───────> i
           bottom
 ```
 
@@ -48,11 +48,11 @@ sides with another homotopy, as for example in the diagram below:
 
 ```text
              top
-       a ---------> b
-       |           | |
-  left |     right |~| right'
+       a ─────────> b
+       │           │ │
+  left │     right │~│ right'
        ∨           ∨ ∨
-       c ---------> d.
+       c ─────────> d.
            bottom
 ```
 
@@ -65,12 +65,12 @@ Consider a commuting diagram of homotopies
 
 ```text
            top'
-         ------->
-       f -------> g
-       |   top    |
-  left |          | right
+         ───────>
+       f ───────> g
+       │   top    │
+  left │          │ right
        ∨          ∨
-       h -------> i.
+       h ───────> i.
           bottom
 ```
 
@@ -78,11 +78,11 @@ with a homotopy `top ~ top'`. Then we get an equivalence
 
 ```text
            top                             top'
-       f -------> g                    f -------> g
-       |          |                    |          |
-  left |          | right    ≃    left |          | right
+       f ───────> g                    f ───────> g
+       │          │                    │          │
+  left │          │ right    ≃    left │          │ right
        ∨          ∨                    ∨          ∨
-       h -------> i                    h -------> i.
+       h ───────> i                    h ───────> i.
           bottom                          bottom
 ```
 
@@ -119,11 +119,11 @@ Consider a commuting diagram of homotopies
 
 ```text
               top
-         f -------> g
-        | |         |
-  left' | | left    | right
+         f ───────> g
+        │ │         │
+  left' │ │ left    │ right
         ∨ ∨         ∨
-         h -------> i.
+         h ───────> i.
             bottom
 ```
 
@@ -131,11 +131,11 @@ with a homotopy `left ~ left'`. Then we get an equivalence
 
 ```text
            top                              top
-       f -------> g                     f -------> g
-       |          |                     |          |
-  left |          | right    ≃    left' |          | right
+       f ───────> g                     f ───────> g
+       │          │                     │          │
+  left │          │ right    ≃    left' │          │ right
        ∨          ∨                     ∨          ∨
-       h -------> i                     h -------> i.
+       h ───────> i                     h ───────> i.
           bottom                           bottom
 ```
 
@@ -172,11 +172,11 @@ Consider a commuting diagram of homotopies
 
 ```text
             top
-       f -------> g
-       |         | |
-  left |   right | | right'
+       f ───────> g
+       │         │ │
+  left │   right │ │ right'
        ∨         ∨ ∨
-       h -------> i.
+       h ───────> i.
           bottom
 ```
 
@@ -184,11 +184,11 @@ with a homotopy `right ~ right'`. Then we get an equivalence
 
 ```text
            top                             top
-       f -------> g                    f -------> g
-       |          |                    |          |
-  left |          | right    ≃    left |          | right'
+       f ───────> g                    f ───────> g
+       │          │                    │          │
+  left │          │ right    ≃    left │          │ right'
        ∨          ∨                    ∨          ∨
-       h -------> i                    h -------> i.
+       h ───────> i                    h ───────> i.
           bottom                          bottom
 ```
 
@@ -225,12 +225,12 @@ Consider a commuting diagram of homotopies
 
 ```text
             top
-       f -------> g
-       |          |
-  left |          | right
+       f ───────> g
+       │          │
+  left │          │ right
        ∨  bottom  ∨
-       h -------> i.
-         ------->
+       h ───────> i.
+         ───────>
           bottom'
 ```
 
@@ -238,11 +238,11 @@ with a homotopy `bottom ~ bottom'`. Then we get an equivalence
 
 ```text
            top                             top
-       f -------> g                    f -------> g
-       |          |                    |          |
-  left |          | right    ≃    left |          | right
+       f ───────> g                    f ───────> g
+       │          │                    │          │
+  left │          │ right    ≃    left │          │ right
        ∨          ∨                    ∨          ∨
-       h -------> i                    h -------> i.
+       h ───────> i                    h ───────> i.
           bottom                          bottom'
 ```
 
@@ -278,11 +278,11 @@ Given a commuting square of homotopies
 
 ```text
            top
-       f -------> g
-       |          |
-  left |          | right
+       f ───────> g
+       │          │
+  left │          │ right
        ∨          ∨
-       h -------> i,
+       h ───────> i,
           bottom
 ```
 
@@ -292,11 +292,11 @@ we may consider four ways of attaching new homotopies to it:
 
    ```text
                 p ∙h top
-              u -------> g
-              |          |
-     p ∙h left |          | right
+              u ───────> g
+              │          │
+    p ∙h left │          │ right
               ∨          ∨
-              h -------> i.
+              h ───────> i.
                  bottom
    ```
 
@@ -311,11 +311,11 @@ we may consider four ways of attaching new homotopies to it:
 
    ```text
                    top
-           f ------------> g
-           |               |
-      left |               | right ∙h p
+           f ────────────> g
+           │               │
+      left │               │ right ∙h p
            ∨               ∨
-           h ------------> u.
+           h ────────────> u.
               bottom ∙h p
    ```
 
@@ -330,11 +330,11 @@ we may consider four ways of attaching new homotopies to it:
 
    ```text
                       top
-              f --------------> g
-              |                 |
-    left ∙h p |                 | right
+              f ──────────────> g
+              │                 │
+    left ∙h p │                 │ right
               ∨                 ∨
-              u --------------> i.
+              u ──────────────> i.
                  p⁻¹ ∙h bottom
    ```
 
@@ -355,11 +355,11 @@ we may consider four ways of attaching new homotopies to it:
 
    ```text
              top ∙h p
-          f --------> u
-          |           |
-     left |           | p⁻¹ ∙h right
+          f ────────> u
+          │           │
+     left │           │ p⁻¹ ∙h right
           ∨           ∨
-          h --------> i.
+          h ────────> i.
              bottom
    ```
 
@@ -388,11 +388,11 @@ For any homotopy `p : u ~ f` we obtain an equivalence
 
 ```text
            top                                p ∙h top
-       f -------> g                         u -------> g
-       |          |                         |          |
-  left |          | right    ≃    p ∙h left |          | right
+       f ───────> g                         u ───────> g
+       │          │                         │          │
+  left │          │ right    ≃    p ∙h left │          │ right
        ∨          ∨                         ∨          ∨
-       h -------> i                         h -------> i
+       h ───────> i                         h ───────> i
           bottom                               bottom
 ```
 
@@ -422,11 +422,11 @@ For any homotopy `p : i ~ u` we obtain an equivalence
 
 ```text
            top                                 top
-       f -------> g                     f ------------> g
-       |          |                     |               |
-  left |          | right    ≃     left |               | right ∙h p
+       f ───────> g                     f ────────────> g
+       │          │                     │               │
+  left │          │ right    ≃     left │               │ right ∙h p
        ∨          ∨                     ∨               ∨
-       h -------> i                     h ------------> i
+       h ───────> i                     h ────────────> i
           bottom                           bottom ∙h p
 ```
 
@@ -456,11 +456,11 @@ For any inverse pair of homotopies `p : g ~ u` and `q : u ~ g` equipped with
 
 ```text
            top                                    top
-       f -------> g                         f -----------> g
-       |          |                         |              |
-  left |          | right    ≃     left ∙h p |              | right
+       f ───────> g                         f ───────────> g
+       │          │                         │              │
+  left │          │ right    ≃    left ∙h p │              │ right
        ∨          ∨                         ∨              ∨
-       h -------> i                         u -----------> i
+       h ───────> i                         u ───────────> i
           bottom                               q ∙h bottom
 ```
 
@@ -490,11 +490,11 @@ For any inverse pair of homotopies `p : g ~ u` and `q : u ~ g` equipped with
 
 ```text
            top                             top ∙h p
-       f -------> g                     f --------> u
-       |          |                     |           |
-  left |          | right    ≃     left |           | q ∙h right
+       f ───────> g                     f ────────> u
+       │          │                     │           │
+  left │          │ right    ≃     left │           │ q ∙h right
        ∨          ∨                     ∨           ∨
-       h -------> i                     h --------> i
+       h ───────> i                     h ────────> i
           bottom                           bottom
 ```
 

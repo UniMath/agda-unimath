@@ -61,11 +61,11 @@ identifications
 
 ```text
                       ap² f (horizontal-inv-Id² α)
-        ap f (inv p) ------------------------------> ap f (inv q)
-             |                                            |
-  ap-inv f p |                                            | ap-inv f q
+        ap f (inv p) ──────────────────────────────> ap f (inv q)
+             │                                            │
+  ap-inv f p │                                            │ ap-inv f q
              ∨                                            ∨
-        inv (ap f p) ------------------------------> inv (ap f q)
+        inv (ap f p) ──────────────────────────────> inv (ap f q)
                       horizontal-inv-Id² (ap² f α)
 ```
 
@@ -96,11 +96,11 @@ Consider an identification `α : p ＝ q` between two identifications
 
 ```text
                 ap² id α
-       ap id p ----------> ap id q
-          |                    |
-  ap-id p |                    | ap-id q
+       ap id p ───────────> ap id q
+          │                    │
+  ap-id p │                    │ ap-id q
           ∨                    ∨
-          p -----------------> q
+          p ─────────────────> q
                      α
 ```
 
@@ -126,11 +126,11 @@ Consider an identification `α : p ＝ q` between two identifications
 
 ```text
                          ap² (g ∘ f) α
-          ap (g ∘ f) p -----------------> ap (g ∘ f) q
-                |                               |
-  ap-comp g f p |                               | ap-comp g f q
+          ap (g ∘ f) p ─────────────────> ap (g ∘ f) q
+                │                               │
+  ap-comp g f p │                               │ ap-comp g f q
                 ∨                               ∨
-          ap g (ap f p) ----------------> ap g (ap f q)
+          ap g (ap f p) ────────────────> ap g (ap f q)
                          ap² g (ap² f α)
 ```
 
@@ -161,10 +161,10 @@ of identifications
 
 ```text
                  ap² (const b) α
-  ap (const b) p ---------------> ap (const b) q
-                 \              /
-      ap-const b p \          / ap-const b q
-                     ∨      ∨
+  ap (const b) p ───────────────> ap (const b) q
+                 ╲              ╱
+     ap-const b p ╲            ╱ ap-const b q
+                   ∨          ∨
                        refl
 ```
 

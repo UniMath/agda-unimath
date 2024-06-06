@@ -48,11 +48,11 @@ and `(B, b)`, their
 
 ```text
         a₀      a₁      a₂
-    A₀ ---> A₁ ---> A₂ ---> ⋯ ---> X
-    |       |       |              |
- f₀ |       | f₁    | f₂           | g
+    A₀ ───> A₁ ───> A₂ ───> ⋯ ───> X
+    │       │       │              │
+ f₀ │       │ f₁    │ f₂           │ g
     ∨       ∨       ∨              ∨
-    B₀ ---> B₁ ---> B₂ ---> ⋯ ---> Y
+    B₀ ───> B₁ ───> B₂ ───> ⋯ ───> Y
         b₀      b₁      b₂
 ```
 
@@ -69,8 +69,8 @@ them to their colimits and maps between them.
 
 ```text
   (A, a)    A∞
-    |       |
-  f |   ↦   | f∞
+    │       │
+  f │   ↦   │ f∞
     ∨       ∨
   (B, b)    B∞  .
 ```
@@ -101,11 +101,11 @@ The unique map `g : X → Y` such that the diagram
 
 ```text
         a₀      a₁      a₂
-    A₀ ---> A₁ ---> A₂ ---> ⋯ ---> X
-    |       |       |              |
- f₀ |       | f₁    | f₂           | g
+    A₀ ───> A₁ ───> A₂ ───> ⋯ ───> X
+    │       │       │              │
+ f₀ │       │ f₁    │ f₂           │ g
     ∨       ∨       ∨              ∨
-    B₀ ---> B₁ ---> B₂ ---> ⋯ ---> Y
+    B₀ ───> B₁ ───> B₂ ───> ⋯ ───> Y
         b₀      b₁      b₂
 ```
 
@@ -119,17 +119,17 @@ This homotopy of cocones provides
 
 ```text
           Aₙ₊₁
-         ∧ | \
-       /   |   \
-     /     |fₙ₊₁ ∨
-    Aₙ ---------> X
-    |      |      |
-    |      ∨      |
- fₙ |     Bₙ₊₁    | g
-    |    ∧   \    |
-    |  /       \  |
-    ∨/           ∨∨
-    Bₙ ---------> Y ,
+         ∧ │ ╲
+       ╱   │   ╲
+     ╱     │fₙ₊₁ ∨
+    Aₙ ─────────> X
+    │      │      │
+    │      ∨      │
+ fₙ │     Bₙ₊₁    │ g
+    │    ∧   ╲    │
+    │  ╱       ╲  │
+    ∨╱           ∨∨
+    Bₙ ─────────> Y ,
 ```
 
 where the [triangles](foundation-core.commuting-triangles-of-maps.md) are
@@ -499,11 +499,11 @@ diagrams, i.e. it is the unique map `g : Y → X` making the diagram
 
 ```text
            b₀      b₁      b₂
-       B₀ ---> B₁ ---> B₂ ---> ⋯ ---> Y
-       |       |       |              |
-  e₀⁻¹ |       | e₁⁻¹  | e₂⁻¹         | g
+       B₀ ───> B₁ ───> B₂ ───> ⋯ ───> Y
+       │       │       │              │
+  e₀⁻¹ │       │ e₁⁻¹  │ e₂⁻¹         │ g
        ∨       ∨       ∨              ∨
-       A₀ ---> A₁ ---> A₂ ---> ⋯ ---> X
+       A₀ ───> A₁ ───> A₂ ───> ⋯ ───> X
            a₀      a₁      a₂
 ```
 

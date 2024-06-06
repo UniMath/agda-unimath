@@ -260,12 +260,12 @@ module _
 #### Mac Lane pentagon for nonunital functor composition
 
 ```text
-    (I(GH))F ---- I((GH)F)
-          /        \
-         /          \
+    (I(GH))F ──── I((GH)F)
+          ╱        ╲
+         ╱          ╲
   ((IH)G)F          I(H(GF))
-          \        /
-            \    /
+          ╲        ╱
+            ╲    ╱
            (IH)(GF)
 ```
 

@@ -30,7 +30,7 @@ Consider a [span](foundation.spans.md) `s` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and maps `i : A → A'` and `j : B → B'`. The
@@ -39,7 +39,7 @@ and maps `i : A → A'` and `j : B → B'`. The
 
 ```text
        i ∘ f     j ∘ g
-  A' <------- S -------> B.
+  A' <─────── S ───────> B.
 ```
 
 ```agda
@@ -61,7 +61,7 @@ Consider a [span](foundation.spans.md) `s` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and a map `i : A → A'`. The
@@ -70,7 +70,7 @@ and a map `i : A → A'`. The
 
 ```text
        i ∘ f      g
-  A' <------- S -----> B.
+  A' <─────── S ─────> B.
 ```
 
 ```agda
@@ -90,7 +90,7 @@ Consider a [span](foundation.spans.md) `s` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and a map `j : B → B'`. The
@@ -99,7 +99,7 @@ of `s` by `j` is the span
 
 ```text
         f      j ∘ g
-  A' <----- S -------> B.
+  A' <───── S ───────> B.
 ```
 
 ```agda
@@ -119,7 +119,7 @@ Consider a span `s` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow f' f`
@@ -127,11 +127,11 @@ as indicated in the diagram
 
 ```text
           f'
-     A' <---- S'
-     |        |
-  h₀ |        | h₁
+     A' <──── S'
+     │        │
+  h₀ │        │ h₁
      ∨        ∨
-     A <----- S -----> B.
+     A <───── S ─────> B.
           f       g
 ```
 
@@ -167,7 +167,7 @@ Consider a span `s` given by
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 and a [morphism of arrows](foundation.morphisms-arrows.md) `h : hom-arrow g' g`
@@ -175,11 +175,11 @@ as indicated in the diagram
 
 ```text
                g'
-           S' ----> B'
-           |        |
-        h₀ |        | h₁
+           S' ────> B'
+           │        │
+        h₀ │        │ h₁
            ∨        ∨
-  A <----- S -----> B.
+  A <───── S ─────> B.
        f       g
 ```
 

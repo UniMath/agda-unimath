@@ -27,7 +27,7 @@ The orbit stabilizer theorem for concrete groups asserts that the type
 sequence
 
 ```text
-  BG_x ----> BG ----> B(Orbit(x))
+  BG_x ────> BG ────> B(Orbit(x))
 ```
 
 To see that this is indeed a formulation of the orbit-stabilizer theorem, note
@@ -35,7 +35,7 @@ that the delooping of `Orbit(x)` gives `Orbit(x)` the structure of a group.
 Furthermore, this fiber sequence induces a short exact sequence
 
 ```text
-  G_x ----> G ----> Orbit(x),
+  G_x ────> G ────> Orbit(x),
 ```
 
 which induces a bijection from the cosets of the stabilizer subgroup `G_x` of

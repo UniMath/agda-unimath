@@ -72,18 +72,18 @@ The map `f : A → B` is said to be
 
    ```text
                 - ∘ f
-         B → X -------> A → X
-           |              |
-     g ∘ - |              | g ∘ -
+         B → X ───────> A → X
+           │              │
+     g ∘ - │              │ g ∘ -
            ∨              ∨
-         B → Y -------> A → Y.
+         B → Y ───────> A → Y.
                 - ∘ f
    ```
 
 4. The induced dependent precomposition map
 
    ```text
-     - ∘ f : ((x : B) → fiber g (h x)) --> ((x : A) → fiber g (h (f x)))
+     - ∘ f : ((x : B) → fiber g (h x)) ──> ((x : A) → fiber g (h (f x)))
    ```
 
    is an equivalence for every `h : B → Y`.
@@ -144,11 +144,11 @@ The maps `f` and `g` are orthogonal if and only if the square
 
 ```text
              - ∘ f
-      B → X -------> A → X
-        |              |
-  g ∘ - |              | g ∘ -
+      B → X ───────> A → X
+        │              │
+  g ∘ - │              │ g ∘ -
         ∨              ∨
-      B → Y -------> A → Y.
+      B → Y ───────> A → Y.
              - ∘ f
 ```
 
@@ -203,15 +203,15 @@ fibers
 
 ```text
                            (- ∘ f)
-   ((x : B) → fiber g (h x)) --> ((x : A) → fiber g (h (f x)))
-                      |               |
-                      |               |
+   ((x : B) → fiber g (h x)) ──> ((x : A) → fiber g (h (f x)))
+                      │               │
+                      │               │
                       ∨    (- ∘ f)    ∨
-                   (B → X) ------> (A → X)
-                      |               |
-              (g ∘ -) |               | (g ∘ -)
+                   (B → X) ──────> (A → X)
+                      │               │
+              (g ∘ -) │               │ (g ∘ -)
                       ∨    (- ∘ f)    ∨
-               h ∈ (B → Y) ------> (A → Y)
+               h ∈ (B → Y) ──────> (A → Y)
 ```
 
 is an equivalence for every `h : B → Y`.
@@ -496,15 +496,15 @@ below diagram is a pullback precisely when `g` is right orthogonal to `f`:
 
 ```text
              - ∘ f
-      B → X -------> A → X
-        |              |
-  g ∘ - |              | g ∘ -
+      B → X ───────> A → X
+        │              │
+  g ∘ - │              │ g ∘ -
         ∨              ∨
-      B → Y -------> A → Y
-        | ⌟            |
-  h ∘ - |              | h ∘ -
+      B → Y ───────> A → Y
+        │ ⌟            │
+  h ∘ - │              │ h ∘ -
         ∨              ∨
-      B → Z -------> A → Z.
+      B → Z ───────> A → Z.
              - ∘ f
 ```
 
@@ -592,11 +592,11 @@ below diagram is a pullback precisely when `f` is left orthogonal to `g`:
 
 ```text
              - ∘ h          - ∘ f
-      C → X -------> B → X -------> A → X
-        |              | ⌟            |
-  g ∘ - |              |              | g ∘ -
+      C → X ───────> B → X ───────> A → X
+        │              │ ⌟            │
+  g ∘ - │              │              │ g ∘ -
         ∨              ∨              ∨
-      C → Y -------> B → Y -------> A → Y
+      C → Y ───────> B → Y ───────> A → Y
              - ∘ h          - ∘ f
 ```
 
@@ -682,13 +682,13 @@ If `f ⊥ gᵢ`, for each `i : I`, then `f ⊥ (map-Π g)`.
 
 ```text
                           - ∘ f
-         (B → Πᵢ Xᵢ) ---------------> (A → Πᵢ Xᵢ)
-              |                           |
-              |                           |
-  map-Π g ∘ - |                           | map-Π g ∘ -
-              |                           |
+         (B → Πᵢ Xᵢ) ───────────────> (A → Πᵢ Xᵢ)
+              │                           │
+              │                           │
+  map-Π g ∘ - │                           │ map-Π g ∘ -
+              │                           │
               ∨                           ∨
-         (B → Πᵢ Yᵢ) ---------------> (A → Πᵢ Yᵢ)
+         (B → Πᵢ Yᵢ) ───────────────> (A → Πᵢ Yᵢ)
                           - ∘ f
 ```
 
@@ -697,13 +697,13 @@ equivalent to
 
 ```text
                           map-Π (- ∘ f)
-            (Πᵢ B → Xᵢ) ---------------> (Πᵢ A → Xᵢ)
-                  |                           |
-                  |                           |
-   map-Π (gᵢ ∘ -) |                           | map-Π (gᵢ ∘ -)
-                  |                           |
+            (Πᵢ B → Xᵢ) ───────────────> (Πᵢ A → Xᵢ)
+                  │                           │
+                  │                           │
+   map-Π (gᵢ ∘ -) │                           │ map-Π (gᵢ ∘ -)
+                  │                           │
                   ∨                           ∨
-            (Πᵢ B → Yᵢ) ---------------> (Πᵢ A → Yᵢ)
+            (Πᵢ B → Yᵢ) ───────────────> (Πᵢ A → Yᵢ)
                           map-Π (- ∘ f)
 ```
 
@@ -853,13 +853,13 @@ If `fᵢ ⊥ g` for every `i`, then `(tot f) ⊥ g`.
 
 ```text
                   - ∘ (tot f)
-  ((Σ I B) → X) ---------------> ((Σ I A) → X)
-        |                               |
-        |                               |
-  g ∘ - |                               | g ∘ -
-        |                               |
+  ((Σ I B) → X) ───────────────> ((Σ I A) → X)
+        │                               │
+        │                               │
+  g ∘ - │                               │ g ∘ -
+        │                               │
         ∨                               ∨
-  ((Σ I B) → Y) ---------------> ((Σ I A) → Y)
+  ((Σ I B) → Y) ───────────────> ((Σ I A) → Y)
                   - ∘ (tot f)
 ```
 
@@ -868,13 +868,13 @@ square is equivalent to
 
 ```text
                     Πᵢ (- ∘ fᵢ)
-        Πᵢ (Bᵢ → X) -----------> Πᵢ (Aᵢ → X)
-             |                        |
-             |                        |
-  Πᵢ (g ∘ -) |                        | Πᵢ (g ∘ -)
-             |                        |
+        Πᵢ (Bᵢ → X) ───────────> Πᵢ (Aᵢ → X)
+             │                        │
+             │                        │
+  Πᵢ (g ∘ -) │                        │ Πᵢ (g ∘ -)
+             │                        │
              ∨                        ∨
-        Πᵢ (Bᵢ → Y) -----------> Πᵢ (Aᵢ → Y),
+        Πᵢ (Bᵢ → Y) ───────────> Πᵢ (Aᵢ → Y),
                     Πᵢ (- ∘ fᵢ)
 ```
 
@@ -943,13 +943,13 @@ If `f ⊥ g` and `f' ⊥ g`, then `(f + f') ⊥ g`.
 
 ```text
                      - ∘ (f + f')
-  ((B + B') → X) ---------------> ((A + A') → X)
-        |                               |
-        |                               |
-  g ∘ - |                               | g ∘ -
-        |                               |
+  ((B + B') → X) ───────────────> ((A + A') → X)
+        │                               │
+        │                               │
+  g ∘ - │                               │ g ∘ -
+        │                               │
         ∨                               ∨
-  ((B + B') → Y) ---------------> ((A + A') → Y)
+  ((B + B') → Y) ───────────────> ((A + A') → Y)
                    - ∘ (f + f')
 ```
 
@@ -958,13 +958,13 @@ equivalent to
 
 ```text
                             (- ∘ f) × (- ∘ f')
-            (B → X) × (B' → X) -----------> (A → X) × (A' → X)
-                    |                               |
-                    |                               |
-  (g ∘ -) × (g ∘ -) |                               | (g ∘ -) × (g ∘ -)
-                    |                               |
+            (B → X) × (B' → X) ───────────> (A → X) × (A' → X)
+                    │                               │
+                    │                               │
+  (g ∘ -) × (g ∘ -) │                               │ (g ∘ -) × (g ∘ -)
+                    │                               │
                     ∨                               ∨
-            (B → Y) × (B' → Y) -----------> (A → Y) × (A' → Y),
+            (B → Y) × (B' → Y) ───────────> (A → Y) × (A' → Y),
                             (- ∘ f) × (- ∘ f')
 ```
 
@@ -1037,11 +1037,11 @@ module _
 Given a pullback square
 
 ```text
-    X' -----> X
-    | ⌟       |
-  g'|         | g
+    X' ─────> X
+    │ ⌟       │
+  g'│         │ g
     ∨         ∨
-    Y' -----> Y,
+    Y' ─────> Y,
 ```
 
 if `f ⊥ g`, then `f ⊥ g'`.
@@ -1097,11 +1097,11 @@ that means we have a pullback square
 
 ```text
             - ∘ f
-      B → X -----> A → X
-        | ⌟          |
-  ! ∘ - |            | ! ∘ -
+      B → X ─────> A → X
+        │ ⌟          │
+  ! ∘ - │            │ ! ∘ -
         ∨            ∨
-      B → 1 -----> A → 1.
+      B → 1 ─────> A → 1.
             - ∘ f
 ```
 

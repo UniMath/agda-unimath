@@ -30,11 +30,11 @@ of a span `S` can also be stated as a
 pushout of `S` if and only if the square
 
 ```text
-  Y^X -----> Y^B
-   | ⌟        |
-   |          |
+  Y^X ─────> Y^B
+   │ ⌟        │
+   │          │
    ∨          ∨
-  Y^A -----> Y^S
+  Y^A ─────> Y^S
 ```
 
 is a [pullback](foundation.pullbacks.md) square for every type `Y`. Below, we

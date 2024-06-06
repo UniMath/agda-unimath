@@ -36,11 +36,11 @@ A **morphism of inverse sequential diagrams** `A → B` is a commuting diagram o
 the form
 
 ```text
-  ⋯ ----> Aₙ₊₁ ----> Aₙ ----> ⋯ ----> A₁ ----> A₀
-           |         |       |       |        |
-  ⋯        |         |       ⋯       |        |
+  ⋯ ────> Aₙ₊₁ ────> Aₙ ────> ⋯ ────> A₁ ────> A₀
+           │         │       │       │        │
+  ⋯        │         │       ⋯       │        │
            ∨         ∨       ∨       ∨        ∨
-  ⋯ ----> Bₙ₊₁ ----> Bₙ ----> ⋯ ----> B₁ ----> B₀.
+  ⋯ ────> Bₙ₊₁ ────> Bₙ ────> ⋯ ────> B₁ ────> B₀.
 ```
 
 ## Definitions

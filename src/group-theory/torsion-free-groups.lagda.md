@@ -54,11 +54,11 @@ holds for all elements `x : G`. This condition can be formulated in several
 3. The map `p` in the [pullback square](foundation-core.pullbacks.md)
    ```text
              q
-       · ---------> Prop
-       | ⌟            |
-      p|              | P ↦ {k : ℤ ∣ (k ＝ 0) ∨ P}
+       · ─────────> Prop
+       │ ⌟            │
+      p│              │ P ↦ {k : ℤ ∣ (k ＝ 0) ∨ P}
        ∨              ∨
-       G -------> Subgroup ℤ
+       G ───────> Subgroup ℤ
           order
    ```
    is an [equivalence](foundation.equivalences.md).

@@ -119,10 +119,10 @@ and `e' : Y ≃ Z` in `𝒰₁` we obtain a commuting triangle
 
 ```text
                      tr-equiv f e
-                 f X ----------> f Y
-                     \         /
-  tr-equiv f (e' ∘ e) \       / tr-equiv f e'
-                       \     /
+                 f X ──────────> f Y
+                     ╲         ╱
+  tr-equiv f (e' ∘ e) ╲       ╱ tr-equiv f e'
+                       ╲     ╱
                         ∨   ∨
                          f Z
 ```

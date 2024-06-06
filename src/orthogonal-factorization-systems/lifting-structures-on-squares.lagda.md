@@ -47,14 +47,14 @@ A
 of a commuting square
 
 ```text
-       h
-  A ------> X
-  |         |
- f|         |g
-  |         |
-  ∨         ∨
-  B ------> Y
-       i
+         h
+    A ──────> X
+    │         │
+  f │         │g
+    │         │
+    ∨         ∨
+    B ──────> Y
+         i
 ```
 
 consists of a
@@ -62,14 +62,14 @@ consists of a
 `j : B → X` such that the complete diagram
 
 ```text
-         h
-   A --------> X
-   |        ∧  |
- f |   j  /    | g
-   |    /      |
-   ∨  /        ∨
-   B --------> Y
-         i
+          h
+    A ────────> X
+    │        ∧  │
+  f │   j  ╱    │ g
+    │    ╱      │
+    ∨  ╱        ∨
+    B ────────> Y
+          i
 ```
 
 commutes. We refer to a square equipped with a lifting structure as a
@@ -259,24 +259,24 @@ module _
 The diagram
 
 ```text
-   A          X
-   |        ∧ |
- f |   j  /   |g
-   |    /     |
-   ∨  /       ∨
-   B          Y
+    A          X
+    │        ∧ │
+  f │   j  ╱   │ g
+    │    ╱     │
+    ∨  ╱       ∨
+    B          Y
 ```
 
 gives rise to a lifting square
 
 ```text
        j ∘ f
-    A -------> X
-    |        ∧ |
-  f |   j  /   | g
-    |    /     |
-    ∨  /       ∨
-    B -------> Y
+    A ───────> X
+    │        ∧ │
+  f │   j  ╱   │ g
+    │    ╱     │
+    ∨  ╱       ∨
+    B ───────> Y
        g ∘ j
 ```
 

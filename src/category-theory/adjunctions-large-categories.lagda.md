@@ -34,12 +34,12 @@ Two [functors](category-theory.functors-large-categories.md) `F : C → D` and
 
 ```text
                        ϕ X₁ Y₁
-        hom (F X₁) Y₁ --------> hom X₁ (G Y₁)
-              |                       |
-  g ∘ - ∘ F f |                       | G g ∘ - ∘ f
-              |                       |
+        hom (F X₁) Y₁ ────────> hom X₁ (G Y₁)
+              │                       │
+  g ∘ - ∘ F f │                       │ G g ∘ - ∘ f
+              │                       │
               ∨                       ∨
-        hom (F X₂) Y₂ --------> hom X₂ (G Y₂)
+        hom (F X₂) Y₂ ────────> hom X₂ (G Y₂)
                        ϕ X₂ Y₂
 ```
 

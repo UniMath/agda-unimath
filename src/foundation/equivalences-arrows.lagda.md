@@ -29,11 +29,11 @@ function `g : X → Y` is a [morphism of arrows](foundation.morphisms-arrows.md)
 
 ```text
         i
-    A -----> X
-    |   ≃    |
-  f |        | g
+    A ─────> X
+    │   ≃    │
+  f │        │ g
     ∨   ≃    ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 

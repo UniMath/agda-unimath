@@ -39,11 +39,11 @@ we may form their **smash product** as the following
 [pushout](synthetic-homotopy-theory.pushouts.md)
 
 ```text
- A ∨∗ B ----> A ×∗ B
-    |           |
-    |           |
+ A ∨∗ B ────> A ×∗ B
+    │           │
+    │           │
     ∨         ⌜ ∨
-  unit -----> A ∧∗ B
+  unit ─────> A ∧∗ B
 ```
 
 where the map `A ∨∗ B → A ×∗ B` is the canonical inclusion

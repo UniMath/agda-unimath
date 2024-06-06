@@ -29,11 +29,11 @@ A {{#concept "morphism of span diagrams" Agda=hom-span-diagram}} from a
 
 ```text
          f       g
-    A <----- S -----> B
-    |        |        |
-  u |        | w      | v
+    A <───── S ─────> B
+    │        │        │
+  u │        │ w      │ v
     ∨        ∨        ∨
-    C <----- T -----> D
+    C <───── T ─────> D
          h       k
 ```
 
@@ -49,11 +49,11 @@ squares of morphisms of spans are oriented in the following way:
 
   ```text
                        spanning-map-hom-span
-                    S ----------------------> T
-                    |                         |
-    left-map-span s |                         | left-map-span t
+                    S ──────────────────────> T
+                    │                         │
+    left-map-span s │                         │ left-map-span t
                     ∨                         ∨
-                    A ----------------------> C
+                    A ──────────────────────> C
                         map-domain-hom-span
   ```
 
@@ -65,11 +65,11 @@ squares of morphisms of spans are oriented in the following way:
 
   ```text
                         spanning-map-hom-span
-                     S ----------------------> T
-                     |                         |
-    right-map-span s |                         | right-map-span t
+                     S ──────────────────────> T
+                     │                         │
+    right-map-span s │                         │ right-map-span t
                      ∨                         ∨
-                     B ----------------------> D
+                     B ──────────────────────> D
                         map-codomain-hom-span
   ```
 

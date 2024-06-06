@@ -48,12 +48,12 @@ we can form the
 of the cospan, completing the diagram
 
 ```text
-  A ×_X B ------> B
-     | ⌟          |
-     |            | g
-     |            |
+  A ×_X B ──────> B
+     │ ⌟          │
+     │            │ g
+     │            │
      ∨            ∨
-     A ---------> X.
+     A ─────────> X.
            f
 ```
 
@@ -135,7 +135,7 @@ Given two cospans with a shared vertex `B`:
 
 ```text
       f       g       h       i
-  A ----> X <---- B ----> Y <---- C,
+  A ────> X <──── B ────> Y <──── C,
 ```
 
 we call the standard limit of the diagram the
@@ -307,7 +307,7 @@ Consider two cospans with a shared vertex `B`:
 
 ```text
       f       g       h       i
-  A ----> X <---- B ----> Y <---- C,
+  A ────> X <──── B ────> Y <──── C,
 ```
 
 then we can construct their limit using standard pullbacks in two equivalent
@@ -315,15 +315,15 @@ ways. We can construct it by first forming the standard pullback of `f` and `g`,
 and then forming the standard pullback of the resulting `h ∘ f'` and `i`
 
 ```text
-  (A ×_X B) ×_Y C ---------------------> C
-         | ⌟                             |
-         |                               | i
+  (A ×_X B) ×_Y C ─────────────────────> C
+         │ ⌟                             │
+         │                               │ i
          ∨                               ∨
-      A ×_X B ---------> B ------------> Y
-         | ⌟     f'      |       h
-         |               | g
+      A ×_X B ─────────> B ────────────> Y
+         │ ⌟     f'      │       h
+         │               │ g
          ∨               ∨
-         A ------------> X,
+         A ────────────> X,
                  f
 ```
 
@@ -331,15 +331,15 @@ or we can first form the pullback of `h` and `i`, and then form the pullback of
 `f` and the resulting `g ∘ i'`:
 
 ```text
-  A ×_X (B ×_Y C) --> B ×_Y C ---------> C
-         | ⌟             | ⌟             |
-         |               | i'            | i
-         |               ∨               ∨
-         |               B ------------> Y
-         |               |       h
-         |               | g
+  A ×_X (B ×_Y C) ──> B ×_Y C ─────────> C
+         │ ⌟             │ ⌟             │
+         │               │ i'            │ i
+         │               ∨               ∨
+         │               B ────────────> Y
+         │               │       h
+         │               │ g
          ∨               ∨
-         A ------------> X.
+         A ────────────> X.
                  f
 ```
 
@@ -350,10 +350,10 @@ equivalent to the standard ternary pullback.
 
 ```text
               B
-              |
-              | g
+              │
+              │ g
               ∨
-    A ------> X <------ C
+    A ──────> X <────── C
          f         h
 ```
 
@@ -361,7 +361,7 @@ is a special case of what we consider here that is recovered by using
 
 ```text
       f       g       g       h
-  A ----> X <---- B ----> X <---- C.
+  A ────> X <──── B ────> X <──── C.
 ```
 
 - See also the following relevant stack exchange question:
@@ -475,11 +475,11 @@ Given a standard pullback square
 
 ```text
          f'
-    C -------> B
-    | ⌟        |
-  g'|          | g
+    C ───────> B
+    │ ⌟        │
+  g'│          │ g
     ∨          ∨
-    A -------> X
+    A ───────> X
          f
 ```
 
@@ -487,11 +487,11 @@ we can "fold" the vertical edge onto the horizontal one and get a new pullback
 square
 
 ```text
-            C ---------> X
-            | ⌟          |
-  (f' , g') |            |
+            C ─────────> X
+            │ ⌟          │
+  (f' , g') │            │
             ∨            ∨
-          A × B -----> X × X,
+          A × B ─────> X × X,
                 f × g
 ```
 

@@ -28,8 +28,8 @@ Given a span of maps
 
 ```text
       X
-     / \
-  f /   \ g
+     ╱ ╲
+  f ╱   ╲ g
    ∨     ∨
   A       B,
 ```
@@ -39,10 +39,10 @@ map `h : A → B` together with a coherence triangle `(h ∘ f) ~ g`:
 
 ```text
       X
-     / \
-  f /   \ g
+     ╱ ╲
+  f ╱   ╲ g
    ∨     ∨
-  A ----> B.
+  A ────> B.
       h
 ```
 

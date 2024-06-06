@@ -32,9 +32,9 @@ of giving for every diagram
 
 ```text
        y
-      ∧ \
-     /   \
-    /     ∨
+      ∧ ╲
+     ╱   ╲
+    ╱     ∨
   x        z
 ```
 
@@ -42,10 +42,10 @@ a horizontal arrow `x → z`, a binary relation with lifts gives, for every cosp
 
 ```text
        y
-        \
-         \
+        ╲
+         ╲
           ∨
-  x -----> z,
+  x ─────> z,
 ```
 
 a _lift_ `x → y`. By symmetry it also gives a lift in the opposite direction

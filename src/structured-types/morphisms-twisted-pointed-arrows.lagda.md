@@ -30,11 +30,11 @@ consisting of pointed maps `i : X →∗ A` and `j : B →∗ Y` and a
 
 ```text
          i
-    A <----- X
-    |        |
-  f |        | g
+    A <───── X
+    │        │
+  f │        │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 

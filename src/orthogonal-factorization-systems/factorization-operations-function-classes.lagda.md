@@ -45,10 +45,10 @@ in `L`, and the right map is in `R`.
 
 ```text
        ∙
-      ∧ \
- L ∋ /   \ ∈ R
-    /     ∨
-  A -----> B
+      ∧ ╲
+ L ∋ ╱   ╲ ∈ R
+    ╱     ∨
+  A ─────> B
 ```
 
 ## Definitions

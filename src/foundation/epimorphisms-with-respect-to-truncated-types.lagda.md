@@ -264,11 +264,11 @@ We consider the commutative diagram for any `k`-type `X`:
 
 ```text
              horizontal-map-cocone
- (B → X) <---------------------------- cocone f f X
-    |                  ≃                  ∧
- id | ≃                                 ≃ | (universal property)
-    ∨                                     |
- (B → X) ------------------------> (pushout f f → X)
+ (B → X) <──────────────────────────── cocone f f X
+    │                  ≃                  ∧
+ id │ ≃                                 ≃ │ (universal property)
+    ∨                                     │
+ (B → X) ────────────────────────> (pushout f f → X)
           precomp (codiagonal f)
 ```
 

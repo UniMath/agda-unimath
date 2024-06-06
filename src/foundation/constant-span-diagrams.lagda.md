@@ -25,14 +25,14 @@ The {{#concept "constant span diagram" Agda=constant-span-diagram}} at a type
 
 ```text
       id       id
-  X <----- X -----> X.
+  X <───── X ─────> X.
 ```
 
 Alternatively, a span diagram
 
 ```text
        f       g
-  A <----- S -----> B
+  A <───── S ─────> B
 ```
 
 is said to be constant if both `f` and `g` are

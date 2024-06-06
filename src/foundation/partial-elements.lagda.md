@@ -36,8 +36,8 @@ codomain of the
 
 ```text
     1   ∅     ∅
-    |   |     |
-  T | ∘ |  =  |
+    │   │     │
+  T │ ∘ │  =  │
     ∨   ∨     ∨
   Prop  X   P T X
 ```

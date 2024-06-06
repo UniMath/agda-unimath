@@ -22,7 +22,7 @@ form
 
 ```text
        f       g
-  A <----- S -----> B.
+  A <───── S ─────> B.
 ```
 
 In other words, a span diagram consists of two types `A` and `B` and a
@@ -31,7 +31,7 @@ In other words, a span diagram consists of two types `A` and `B` and a
 We disambiguate between [spans](foundation.spans.md) and span diagrams. We
 consider spans from `A` to `B` to be _morphisms_ from `A` to `B` in the category
 of types and spans between them, whereas we consider span diagrams to be
-_objects_ in the category of diagrams of types of the form `* <---- * ----> *`.
+_objects_ in the category of diagrams of types of the form `* <──── * ────> *`.
 Conceptually there is a subtle, but important distinction between spans and span
 diagrams. In [binary type duality](foundation.binary-type-duality.md) we show a
 span from `A` to `B` is [equivalently](foundation-core.equivalences.md)
@@ -94,7 +94,7 @@ span diagram associated to `α` is the span diagram
 
 ```text
        f       α₀
-  B <----- A -----> X.
+  B <───── A ─────> X.
 ```
 
 ```agda

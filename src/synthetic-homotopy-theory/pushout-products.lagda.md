@@ -31,11 +31,11 @@ of `f` and `g` is defined as the
 
 ```text
               f × id
-       A × B --------> X × B
-         |               |
-  id × g |      H ⇗      | id × g
+       A × B ────────> X × B
+         │               │
+  id × g │      H ⇗      │ id × g
          ∨               ∨
-       A × Y --------> X × Y.
+       A × Y ────────> X × Y.
               f × id
 ```
 
@@ -57,12 +57,12 @@ and a homotopy `M` witnessing that the
 
 ```text
                                  K ·r (id × g)
-       (f □ g) ∘ inl ∘ (id × g) ---------------> (f × id) ∘ (id × g)
-                  |                                       |
-  (f □ g) ·l glue |                                       | H
-                  |                                       |
+       (f □ g) ∘ inl ∘ (id × g) ───────────────> (f × id) ∘ (id × g)
+                  │                                       │
+  (f □ g) ·l glue │                                       │ H
+                  │                                       │
                   ∨                                       ∨
-       (f □ g) ∘ inr ∘ (f × id) ---------------> (id × g) ∘ (f × id)
+       (f □ g) ∘ inr ∘ (f × id) ───────────────> (id × g) ∘ (f × id)
                                  L ·r (f × id)
 ```
 

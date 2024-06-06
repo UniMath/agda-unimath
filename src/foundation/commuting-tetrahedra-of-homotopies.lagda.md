@@ -23,13 +23,13 @@ is a commuting diagram of the form
 
 ```text
              top
-       f ----------> g
-       |  \       ∧  |
-       |    \   /    |
-  left |      /      | right
-       |    /   \    |
-       ∨  /       ∨  ∨
-       h ----------> i.
+       f ──────────> g
+       │  ╲       ∧  │
+       │    ╲   ╱    │
+  left │      ╱      │ right
+       │    ╱   ╲    │
+       ∨  ╱       ∨  ∨
+       h ──────────> i.
             bottom
 ```
 

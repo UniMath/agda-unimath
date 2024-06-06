@@ -23,10 +23,10 @@ Consider a triangle of [pointed maps](structured-types.pointed-maps.md)
 
 ```text
            top
-       A ------> B
-        \       /
-    left \     / right
-          \   /
+       A ──────> B
+        ╲       ╱
+    left ╲     ╱ right
+          ╲   ╱
            ∨ ∨
             C
 ```
@@ -71,10 +71,10 @@ Consider a commuting triangle of pointed maps
 
 ```text
            top
-       A ------> B
-        \       /
-    left \     / right
-          \   /
+       A ──────> B
+        ╲       ╱
+    left ╲     ╱ right
+          ╲   ╱
            ∨ ∨
             C
 ```
@@ -85,10 +85,10 @@ is a coherence of the triangle of pointed maps
 
 ```text
               top
-          A ------> B
-           \       /
-  f ∘∗ left \     / f ∘∗ right
-             \   /
+          A ──────> B
+           ╲       ╱
+  f ∘∗ left ╲     ╱ f ∘∗ right
+             ╲   ╱
               ∨ ∨
                X
 ```

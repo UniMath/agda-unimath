@@ -32,9 +32,9 @@ open import foundation-core.whiskering-identifications-concatenation
 A triangle of maps
 
 ```text
- A ----> B
-  \     /
-   \   /
+ A ────> B
+  ╲     ╱
+   ╲   ╱
     ∨ ∨
      X
 ```
@@ -90,9 +90,9 @@ Given a commuting triangle of maps
 
 ```text
        f
-   A ----> B
-    \  ⇗  /
-   h \   / g
+   A ────> B
+    ╲  ⇗  ╱
+   h ╲   ╱ g
       ∨ ∨
        X
 ```
@@ -102,9 +102,9 @@ there is an induced commuting triangle of
 
 ```text
          (- ∘ g)
-  (X → S) ----> (B → S)
-        \   ⇗  /
-  (- ∘ h) \   / (- ∘ f)
+  (X → S) ────> (B → S)
+         ╲  ⇗  ╱
+  (- ∘ h) ╲   ╱ (- ∘ f)
            ∨ ∨
          (A → S).
 ```
@@ -142,9 +142,9 @@ Given a commuting triangle of maps
 
 ```text
        f
-   A ----> B
-    \  ⇗  /
-   h \   / g
+   A ────> B
+    ╲  ⇗  ╱
+   h ╲   ╱ g
       ∨ ∨
        X
 ```
@@ -154,9 +154,9 @@ there is an induced commuting triangle of
 
 ```text
          (f ∘ -)
-  (S → A) ----> (S → B)
-        \   ⇗  /
-  (h ∘ -) \   / (g ∘ -)
+  (S → A) ────> (S → B)
+         ╲  ⇗  ╱
+  (h ∘ -) ╲   ╱ (g ∘ -)
            ∨ ∨
          (S → X).
 ```
@@ -211,23 +211,23 @@ module _
 Two [commuting triangles](foundation-core.commuting-triangles-of-maps.md)
 
 ```text
-   A         A --> X
-  | \         \    |
-  |  \ H  L  K \   |
-  |   \         \  |
+   A         A ──> X
+  │ ╲         ╲    │
+  │  ╲ H  L  K ╲   │
+  │   ╲         ╲  │
   ∨    ∨         ∨ ∨
-  B --> Y         Y
+  B ──> Y         Y
 ```
 
 with a [homotopic](foundation-core.homotopies.md) diagonal may be pasted into a
 [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
-  A -----> X
-  |        |
-  |        |
+  A ─────> X
+  │        │
+  │        │
   ∨        ∨
-  B -----> Y.
+  B ─────> Y.
 ```
 
 ```agda
@@ -272,12 +272,12 @@ module _
 We can also consider pasting triangles of the form
 
 ```text
-  A --> X      X
-  |    ∧     ∧ |
-  | H /     /  |
-  |  /     / K |
-  ∨ /     /    ∨
-  B      B --> Y .
+  A ──> X      X
+  │    ∧     ∧ │
+  │ H ╱     ╱  │
+  │  ╱     ╱ K │
+  ∨ ╱     ╱    ∨
+  B      B ──> Y .
 ```
 
 ```agda

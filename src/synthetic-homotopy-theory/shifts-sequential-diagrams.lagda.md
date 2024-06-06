@@ -94,14 +94,14 @@ Given a sequential diagram `A`
 
 ```text
      a₀      a₁      a₂
- A₀ ---> A₁ ---> A₂ ---> ⋯ ,
+ A₀ ───> A₁ ───> A₂ ───> ⋯ ,
 ```
 
 we can forget the first type and map to get the diagram
 
 ```text
      a₁      a₂
- A₁ ---> A₂ ---> ⋯ ,
+ A₁ ───> A₂ ───> ⋯ ,
 ```
 
 which we call `A[1]`. Inductively, we define `A[k + 1] ≐ A[k][1]`.
@@ -131,11 +131,11 @@ Given a morphism of sequential diagrams `f : A → B`
 
 ```text
         a₀      a₁
-    A₀ ---> A₁ ---> A₂ ---> ⋯
-    |       |       |
- f₀ |       | f₁    | f₂
+    A₀ ───> A₁ ───> A₂ ───> ⋯
+    │       │       │
+ f₀ │       │ f₁    │ f₂
     ∨       ∨       ∨
-    B₀ ---> B₁ ---> B₂ ---> ⋯ ,
+    B₀ ───> B₁ ───> B₂ ───> ⋯ ,
         b₀      b₁
 ```
 
@@ -143,11 +143,11 @@ we can drop the first square to get the morphism
 
 ```text
         a₁
-    A₁ ---> A₂ ---> ⋯
-    |       |
- f₁ |       | f₂
+    A₁ ───> A₂ ───> ⋯
+    │       │
+ f₁ │       │ f₂
     ∨       ∨
-    B₁ ---> B₂ ---> ⋯ ,
+    B₁ ───> B₂ ───> ⋯ ,
         b₁
 ```
 
@@ -191,11 +191,11 @@ Given a cocone `c`
 
 ```text
       a₀      a₁
-  A₀ ---> A₁ ---> A₂ ---> ⋯
-   \      |      /
-    \     |     /
-  i₀ \    | i₁ / i₂
-      \   |   /
+  A₀ ───> A₁ ───> A₂ ───> ⋯
+   ╲      │      ╱
+    ╲     │     ╱
+  i₀ ╲    │ i₁ / i₂
+      ╲   │   ╱
        ∨  ∨  ∨
           X
 ```
@@ -204,11 +204,11 @@ under `A`, we may forget the first inclusion and homotopy to get the cocone
 
 ```text
          a₁
-     A₁ ---> A₂ ---> ⋯
-     |      /
-     |     /
-  i₁ |    / i₂
-     |   /
+     A₁ ───> A₂ ───> ⋯
+     │      ╱
+     │     ╱
+  i₁ │    ╱ i₂
+     │   ╱
      ∨  ∨
      X
 ```
@@ -251,11 +251,11 @@ Conversely, given a cocone `c`
 
 ```text
          a₁
-     A₁ ---> A₂ ---> ⋯
-     |      /
-     |     /
-  i₁ |    / i₂
-     |   /
+     A₁ ───> A₂ ───> ⋯
+     │      ╱
+     │     ╱
+  i₁ │    ╱ i₂
+     │   ╱
      ∨  ∨
      X
 ```
@@ -264,11 +264,11 @@ under `A[1]`, we may prepend a map
 
 ```text
            a₀      a₁
-       A₀ ---> A₁ ---> A₂ ---> ⋯
-        \      |      /
-         \     |     /
-  i₁ ∘ a₀ \    | i₁ / i₂
-           \   |   /
+       A₀ ───> A₁ ───> A₂ ───> ⋯
+        ╲      │      ╱
+         ╲     │     ╱
+  i₁ ∘ a₀ ╲    │ i₁ / i₂
+           ╲   │   ╱
             ∨  ∨  ∨
                X
 ```
@@ -328,11 +328,11 @@ Given cocones `c` and `c'` under `A`
 
 ```text
      a₀      a₁                   a₀      a₁
- A₀ ---> A₁ ---> A₂ ---> ⋯    A₀ ---> A₁ ---> A₂ ---> ⋯
-  \      |      /              \      |      /
-   \     | i₁  /                \     | i'₁ /
- i₀ \    |    / i₂     ~     i'₀ \    |    / i'₂
-     \   |   /                    \   |   /
+ A₀ ───> A₁ ───> A₂ ───> ⋯    A₀ ───> A₁ ───> A₂ ───> ⋯
+  ╲      │      ╱              ╲      │      ╱
+   ╲     │ i₁  ╱                ╲     │ i'₁ ╱
+ i₀ ╲    │    ╱ i₂     ~     i'₀ ╲    │    ╱ i'₂
+     ╲   │   ╱                    ╲   │   ╱
       ∨  ∨  ∨                      ∨  ∨  ∨
          X                            X
 ```
@@ -384,11 +384,11 @@ to unshift a homotopy of cocones. Given two cocones `c`, `c'` under `A[1]`
 
 ```text
          a₁                     a₁
-     A₁ ---> A₂ ---> ⋯      A₁ ---> A₂ ---> ⋯
-     |      /               |      /
-     |     /                |     /
-  i₁ |    / i₂     ~    i'₁ |    / i'₂
-     |   /                  |   /
+     A₁ ───> A₂ ───> ⋯      A₁ ───> A₂ ───> ⋯
+     │      ╱               │      ╱
+     │     ╱                │     ╱
+  i₁ │    ╱ i₂     ~    i'₁ │    ╱ i'₂
+     │   ╱                  │   ╱
      ∨  ∨                   ∨  ∨
      X                      X
 ```
@@ -443,11 +443,11 @@ The morphism is obtained by observing that the squares in the diagram
 
 ```text
         a₀      a₁
-    A₀ ---> A₁ ---> A₂ ---> ⋯
-    |       |       |
- a₀ |       | a₁    | a₂
+    A₀ ───> A₁ ───> A₂ ───> ⋯
+    │       │       │
+ a₀ │       │ a₁    │ a₂
     ∨       ∨       ∨
-    A₁ ---> A₂ ---> A₃ ---> ⋯
+    A₁ ───> A₂ ───> A₃ ───> ⋯
         a₁      a₂
 ```
 
@@ -646,16 +646,16 @@ Given a sequential colimit
 
 ```text
      a₀      a₁      a₂
- A₀ ---> A₁ ---> A₂ ---> ⋯ --> X,
+ A₀ ───> A₁ ───> A₂ ───> ⋯ ──> X,
 ```
 
 there is a commuting triangle
 
 ```text
               cocone-map
-      X → Y ------------> cocone A Y
-            \           /
-  cocone-map  \       /
+      X → Y ────────────> cocone A Y
+            ╲           ╱
+  cocone-map  ╲       ╱
                 ∨   ∨
              cocone A[1] Y.
 ```
@@ -664,15 +664,15 @@ Inductively, we compose this triangle in the following way
 
 ```text
               cocone-map
-      X → Y ------------> cocone A Y
-            \⟍             |
-             \ ⟍           |
-              \  ⟍         |
-               \   ⟍       ∨
-                \    > cocone A[k] Y
-     cocone-map  \       /
-                  \     /
-                   \   /
+      X → Y ────────────> cocone A Y
+            ╲⟍             │
+             ╲ ⟍           │
+              ╲  ⟍         │
+               ╲   ⟍       ∨
+                ╲    > cocone A[k] Y
+     cocone-map  ╲       ╱
+                  ╲     ╱
+                   ╲   ╱
                     ∨ ∨
              cocone A[k + 1] Y,
 ```
@@ -684,10 +684,10 @@ This gives us the commuting triangle
 
 ```text
               cocone-map
-      X → Y ------------> cocone A Y
-            \     ≃     /
-  cocone-map  \       / ≃
-                ∨   ∨
+      X → Y ────────────> cocone A Y
+             ╲    ≃    ╱
+  cocone-map  ╲       ╱ ≃
+               ∨     ∨
              cocone A[k] Y,
 ```
 
@@ -782,11 +782,11 @@ Given a cocone `c`
 
 ```text
          a₁
-     A₁ ---> A₂ ---> ⋯
-     |      /
-     |     /
-  i₁ |    / i₂
-     |   /
+     A₁ ───> A₂ ───> ⋯
+     │      ╱
+     │     ╱
+  i₁ │    ╱ i₂
+     │   ╱
      ∨  ∨
      X
 ```
@@ -796,11 +796,11 @@ unshift it, which gives the cocone
 
 ```text
            a₀      a₁
-       A₀ ---> A₁ ---> A₂ ---> ⋯
-        \      |      /
-         \     |     /
-  i₁ ∘ a₀ \    | i₁ / i₂
-           \   |   /
+       A₀ ───> A₁ ───> A₂ ───> ⋯
+        ╲      │      ╱
+         ╲     │     ╱
+  i₁ ∘ a₀ ╲    │ i₁ / i₂
+           ╲   │   ╱
             ∨  ∨  ∨
                X ,
 ```
@@ -810,15 +810,15 @@ or we can prepend the inclusion morphism
 
 ```text
          a₀
-     A₀ ---> A₁ ---> ⋯
-     |       |
-  a₀ |       | a₁
+     A₀ ───> A₁ ───> ⋯
+     │       │
+  a₀ │       │ a₁
      ∨   a₁  ∨
-     A₁ ---> A₂ ---> ⋯
-     |      /
-     |     /
-  i₁ |    / i₂
-     |   /
+     A₁ ───> A₂ ───> ⋯
+     │      ╱
+     │     ╱
+  i₁ │    ╱ i₂
+     │   ╱
      ∨  ∨
      X .
 ```
@@ -856,15 +856,15 @@ shift inclusion morphism results in a cocone homotopic to `c`, i.e.,
 
 ```text
          a₀      a₁
-     A₀ ---> A₁ ---> A₂ ---> ⋯
-     |       |       |                     a₀      a₁
-  a₀ |       | a₁    | a₂              A₀ ---> A₁ ---> A₂ ---> ⋯
-     ∨   a₁  ∨   a₂  ∨                  \      |      /
-     A₁ ---> A₂ ---> A₃ ---> ⋯    ~      \     | i₁  /
-      \      |      /                  i₀ \    |    / i₂
-       \     |     /                       \   |   /
-     i₁ \    | i₂ / i₃                      ∨  ∨  ∨
-         \   |   /                             X .
+     A₀ ───> A₁ ───> A₂ ───> ⋯
+     │       │       │                     a₀      a₁
+  a₀ │       │ a₁    │ a₂              A₀ ───> A₁ ───> A₂ ───> ⋯
+     ∨   a₁  ∨   a₂  ∨                  ╲      │      ╱
+     A₁ ───> A₂ ───> A₃ ───> ⋯    ~      ╲     │ i₁  ╱
+      ╲      │      ╱                  i₀ ╲    │    ╱ i₂
+       ╲     │     ╱                       ╲   │   ╱
+     i₁ ╲    │ i₂ ╱ i₃                      ∨  ∨  ∨
+         ╲   │   ╱                             X .
           ∨  ∨  ∨
              X
 ```

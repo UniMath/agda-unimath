@@ -41,11 +41,11 @@ with two [homotopies](foundation-core.homotopies.md) witnessing that the diagram
 
 ```text
          f       g
-    A <----- S -----> B
-    |        |        |
-  u |        | w      | v
+    A <───── S ─────> B
+    │        │        │
+  u │        │ w      │ v
     ∨        ∨        ∨
-    C <----- T -----> D
+    C <───── T ─────> D
          h       k
 ```
 

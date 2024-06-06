@@ -265,11 +265,11 @@ identification `p : x ＝ y` in `A`, we have a
 
 ```text
           ap f p
-     f x -------> f y
-      |            |
-  H x |            | H y
+     f x ───────> f y
+      │            │
+  H x │            │ H y
       ∨            ∨
-     g x -------> g y.
+     g x ───────> g y.
           ap g p
 ```
 

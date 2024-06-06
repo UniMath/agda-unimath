@@ -33,11 +33,11 @@ defined by the following
 [pointed pushout](synthetic-homotopy-theory.pushouts-of-pointed-types.md):
 
 ```text
-  unit ------> A
-    |          |
-    |          |
+  unit ──────> A
+    │          │
+    │          │
     ∨        ⌜ ∨
-    B -----> A ∨∗ B,
+    B ─────> A ∨∗ B,
 ```
 
 and is thus canonically pointed at the identified image of `a` and `b`.

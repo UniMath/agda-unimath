@@ -36,13 +36,13 @@ open import foundation-core.universal-property-pullbacks
 Squares of the form
 
 ```text
-  Σ (x : A) (Q (f x)) ----> Σ (y : B) Q
-      |                          |
-      |                          |
-  pr1 |                          | pr1
-      |                          |
+  Σ (x : A) (Q (f x)) ────> Σ (y : B) Q
+      │                          │
+      │                          │
+  pr1 │                          │ pr1
+      │                          │
       ∨                          ∨
-      A -----------------------> B
+      A ───────────────────────> B
                    f
 ```
 
@@ -102,11 +102,11 @@ Given a map `f : A → B` with a family of maps over it
 
 ```text
          map-Σ f g
-  Σ A P ----------> Σ B Q
-    |                |
-    |                |
+  Σ A P ──────────> Σ B Q
+    │                │
+    │                │
     ∨                ∨
-    A -------------> B
+    A ─────────────> B
              f
 ```
 

@@ -35,13 +35,13 @@ Consider two
 that the square
 
 ```text
-      h
-  X -----> Y
-  |        |
- f|        |g
-  ∨        ∨
-  X -----> Y
-      h
+        h
+    X ─────> Y
+    │        │
+  f │        │ g
+    ∨        ∨
+    X ─────> Y
+        h
 ```
 
 [commutes](foundation.commuting-squares-of-maps.md).

@@ -21,7 +21,7 @@ Consider a map `f : A → B`. The
 
 ```text
        f       f
-  B <----- A -----> B.
+  B <───── A ─────> B.
 ```
 
 ## Definitions

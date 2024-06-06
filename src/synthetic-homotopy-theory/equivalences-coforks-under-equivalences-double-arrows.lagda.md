@@ -41,17 +41,17 @@ the diagram
 
 ```text
            i
-     A --------> U
-    | |    ≃    | |
-  f | | g     h | | k
-    | |         | |
+     A ────────> U
+    │ │    ≃    │ │
+  f │ │ g     h │ │ k
+    │ │         │ │
     ∨ ∨    ≃    ∨ ∨
-     B --------> V
-     |     j     |
-   c |           | c'
-     |           |
+     B ────────> V
+     │     j     │
+   c │           │ c'
+     │           │
      ∨     ≃     ∨
-     X --------> Y
+     X ────────> Y
            m
 ```
 
@@ -60,17 +60,17 @@ datum "filling the inside" --- we have two stacks of squares
 
 ```text
            i                        i
-     A --------> U            A --------> U
-     |     ≃     |            |     ≃     |
-   f |           | h        g |           | k
-     |           |            |           |
+     A ────────> U            A ────────> U
+     │     ≃     │            │     ≃     │
+   f │           │ h        g │           │ k
+     │           │            │           │
      ∨     ≃     ∨            ∨     ≃     ∨
-     B --------> V            B --------> V
-     |     j     |            |     j     |
-   c |           | c'       c |           | c'
-     |           |            |           |
+     B ────────> V            B ────────> V
+     │     j     │            │     j     │
+   c │           │ c'       c │           │ c'
+     │           │            │           │
      ∨     ≃     ∨            ∨     ≃     ∨
-     X --------> Y            X --------> Y
+     X ────────> Y            X ────────> Y
            m                        m
 ```
 
@@ -79,17 +79,17 @@ which share the top map `i` and the bottom square, and the coherences of `c` and
 
 ```text
                                                 i                 i
-     A                  A                 A --------> U     A --------> U
-     |                  |                             |                 |
-   f |                f |                             | h               | k
-     |                  |                             |                 |
+     A                  A                 A ────────> U     A ────────> U
+     │                  │                             │                 │
+   f │                f │                             │ h               │ k
+     │                  │                             │                 │
      ∨                  ∨     j                       ∨                 ∨
-     B         ~        B --------> V       ~         V        ~        V
-     |                              |                 |                 |
-   c |                              | c'              | c'              | c'
-     |                              |                 |                 |
+     B         ~        B ────────> V       ~         V        ~        V
+     │                              │                 │                 │
+   c │                              │ c'              │ c'              │ c'
+     │                              │                 │                 │
      ∨                              ∨                 ∨                 ∨
-     X --------> Y                  Y                 Y                 Y
+     X ────────> Y                  Y                 Y                 Y
            m
 ```
 
@@ -97,17 +97,17 @@ and
 
 ```text
                                                                   i
-     A                 A               A                    A --------> U
-     |                 |               |                                |
-   f |               g |             g |                                | k
-     |                 |               |                                |
+     A                 A               A                    A ────────> U
+     │                 │               │                                │
+   f │               g │             g │                                │ k
+     │                 │               │                                │
      ∨                 ∨               ∨     j                          ∨
-     B         ~       B       ~       B --------> V           ~        V
-     |                 |                           |                    |
-   c |               c |                           | c'                 | c'
-     |                 |                           |                    |
+     B         ~       B       ~       B ────────> V           ~        V
+     │                 │                           │                    │
+   c │               c │                           │ c'                 │ c'
+     │                 │                           │                    │
      ∨                 ∨                           ∨                    ∨
-     X --------> Y     X --------> Y               Y                    Y ,
+     X ────────> Y     X ────────> Y               Y                    Y ,
            m                 m
 ```
 

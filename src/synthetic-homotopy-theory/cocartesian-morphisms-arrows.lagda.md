@@ -28,11 +28,11 @@ if the [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
         i
-    A -----> X
-    |        |
-  f |   h    | g
+    A ─────> X
+    │        │
+  f │   h    │ g
     ∨        ∨
-    B -----> Y
+    B ─────> Y
         j
 ```
 
