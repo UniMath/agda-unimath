@@ -14,6 +14,8 @@ STATUS_FLAG_DUPLICATE_TITLE = 4
 
 entry_template = '- [{title}]({mdfile})'
 
+LITERATURE_MODULE = 'literature'
+
 
 def generate_namespace_entry_list(root_path, namespace):
     status = 0
@@ -70,18 +72,23 @@ def generate_namespace_entry_list(root_path, namespace):
     return namespace_entry_list, status
 
 
-def generate_index(root_path, header):
+def generate_index(root_path):
     status = 0
     entry_lists = []
     namespaces = sorted(set(utils.get_subdirectories_recursive(root_path)))
 
     for namespace in namespaces:
+        if namespace == LITERATURE_MODULE:
+            continue
         entry_list, s = generate_namespace_entry_list(root_path, namespace)
         entry_lists.append(entry_list)
         status |= s
 
-    index = f'{header}\n\n' + '\n\n'.join(entry_lists) + '\n'
-    return index, status
+    literature_index, lit_status = generate_namespace_entry_list(root_path, LITERATURE_MODULE)
+    status |= lit_status
+
+    index = '\n\n'.join(entry_lists) + '\n'
+    return index, literature_index, status
 
 
 summary_template = """
@@ -93,26 +100,28 @@ you need to change the template in ./scripts/generate_main_index_file.py
 
 # Overview
 
-- [Overview](HOME.md)
-  - [Home](HOME.md)
-  - [Community](CONTRIBUTORS.md)
-    - [Maintainers](MAINTAINERS.md)
-    - [Contributors](CONTRIBUTORS.md)
-    - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
-    - [Projects using Agda-Unimath](USERS.md)
-    - [Grant acknowledgements](GRANT-ACKNOWLEDGEMENTS.md)
-  - [Guides](HOWTO-INSTALL.md)
-    - [Installing the library](HOWTO-INSTALL.md)
-    - [Design principles](DESIGN-PRINCIPLES.md)
-    - [Contributing to the library](CONTRIBUTING.md)
-    - [Structuring your file](FILE-CONVENTIONS.md)
-        - [File template](TEMPLATE.lagda.md)
-    - [The library coding style](CODINGSTYLE.md)
-    - [Guidelines for mixfix operators](MIXFIX-OPERATORS.md)
-    - [Citing sources](CITING-SOURCES.md)
-    - [Citing the library](CITE-THIS-LIBRARY.md)
-  - [Library contents](SUMMARY.md)
-  - [Art](ART.md)
+- [Home](HOME.md)
+- [Community](CONTRIBUTORS.md)
+  - [Maintainers](MAINTAINERS.md)
+  - [Contributors](CONTRIBUTORS.md)
+  - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
+  - [Projects using Agda-Unimath](USERS.md)
+  - [Grant acknowledgements](GRANT-ACKNOWLEDGEMENTS.md)
+- [Guides](HOWTO-INSTALL.md)
+  - [Installing the library](HOWTO-INSTALL.md)
+  - [Design principles](DESIGN-PRINCIPLES.md)
+  - [Contributing to the library](CONTRIBUTING.md)
+  - [Structuring your file](FILE-CONVENTIONS.md)
+      - [File template](TEMPLATE.lagda.md)
+  - [The library coding style](CODINGSTYLE.md)
+  - [Guidelines for mixfix operators](MIXFIX-OPERATORS.md)
+  - [Citing sources](CITING-SOURCES.md)
+  - [Citing the library](CITE-THIS-LIBRARY.md)
+- [Library contents](SUMMARY.md)
+- [Art](ART.md)
+{literature_index}
+
+# The agda-unimath library
 
 {module_index}
 """
@@ -122,13 +131,15 @@ if __name__ == '__main__':
     root = 'src'
 
     summary_path = 'SUMMARY.md'
-    index_header = '# The agda-unimath library'
 
     root_path = pathlib.Path(root)
 
-    index_content, status = generate_index(root_path, index_header)
+    module_index, literature_index, status = generate_index(root_path)
     if status == 0:
-        summary_contents = summary_template.format(module_index=index_content)
+        summary_contents = summary_template.format(
+            literature_index=literature_index,
+            module_index=module_index
+        )
         with open(summary_path, 'w') as summary_file:
             summary_file.write(summary_contents)
     sys.exit(status)
