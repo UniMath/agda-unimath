@@ -57,7 +57,7 @@ pair of logical implications `P → R` and `Q → R`, if and only if `P ∨ Q` i
   P ──> P ∨ Q <── Q
     ╲     ∶     ╱
      ╲    ∶    ╱
-       ∨  ∨   ∨
+      ∨   ∨   ∨
           R.
 ```
 

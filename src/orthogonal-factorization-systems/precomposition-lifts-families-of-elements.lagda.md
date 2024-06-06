@@ -302,7 +302,7 @@ while the other factors through `- ∘ g`:
   Σ (a : I → A) ((i : I) → B (a i)) ────────────────────────> Σ (a : J → A) ((j : J) → B (a j))
                   │                                                           │
                   │                                                           │
-                  | map-inv-distributive-Π-Σ    ⇗    map-inv-distributive-Π-Σ |
+                  │ map-inv-distributive-Π-Σ    ⇗    map-inv-distributive-Π-Σ │
                   │                                                           │
                   ∨                           - ∘ g                           ∨
               I → Σ A B ────────────────────────────────────────────────> J → Σ A B .

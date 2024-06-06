@@ -358,13 +358,13 @@ reflexivity homotopy, which makes the second diagram collapse to
 
 ```text
            aₙ
-        --------
+        ────────
       ╱          ╲
     ╱              ∨
   Aₙ ────> Bₙ ────> Aₙ₊₁
     ╲ fₙ       gₙ  ∧ │   ╲ fₙ₊₁
       ╲          ╱   │     ∨
-        --------     │ aₙ₊₁ Bₙ₊₁
+        ────────     │ aₙ₊₁ Bₙ₊₁
            aₙ        │     ╱
                      ∨   ∨ gₙ₊₁
                     Aₙ₊₂ ,
