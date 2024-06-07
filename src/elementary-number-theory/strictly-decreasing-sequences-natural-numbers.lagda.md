@@ -39,21 +39,9 @@ module _
   (f : sequence ℕ)
   where
 
-  is-strict-decreasing-sequence-prop-ℕ : Prop lzero
-  is-strict-decreasing-sequence-prop-ℕ =
-    Π-Prop ℕ
-      ( λ i →
-        Π-Prop ℕ
-          ( λ j → hom-Prop (le-ℕ-Prop i j) (le-ℕ-Prop (f j) (f i))))
-
   is-strict-decreasing-sequence-ℕ : UU lzero
   is-strict-decreasing-sequence-ℕ =
-    type-Prop is-strict-decreasing-sequence-prop-ℕ
-
-  is-prop-is-strict-decreasing-sequence-ℕ :
-    is-prop is-strict-decreasing-sequence-ℕ
-  is-prop-is-strict-decreasing-sequence-ℕ =
-    is-prop-type-Prop is-strict-decreasing-sequence-prop-ℕ
+    (i j : ℕ) → le-ℕ i j → le-ℕ (f j) (f i)
 ```
 
 ### Strict decreasing values of sequences of natural numbers
