@@ -28,8 +28,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-Strictly increasing sequences of natural numbers are sequences `f : ℕ → ℕ` that
-preserve inequality of natural numbers.
+A sequences of natural numbers is **strictly increasing** if it preserves
+[strict inequality](elementary-number-theory.strict-inequality-natural-numbers.md)
+of natural numbers.
 
 The identity sequence is strictly increasing. Strictly increasing sequences of
 natural numbers are stable under composition. Strictly increasing sequences of

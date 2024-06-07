@@ -24,7 +24,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A sequences of natural numbers is **strictly increasing** if it reverses
+A sequences of natural numbers is **strictly decreasing** if it reverses
 [strict inequality](elementary-number-theory.strict-inequality-natural-numbers.md)
 of natural numbers.
 
@@ -78,7 +78,7 @@ module _
 
 ## Properties
 
-### A sequence is strictly decreasing if and only if all its values are strictly strictly decreasing
+### A sequence is strictly decreasing if and only if all its values are strictly decreasing
 
 ```agda
 module _
