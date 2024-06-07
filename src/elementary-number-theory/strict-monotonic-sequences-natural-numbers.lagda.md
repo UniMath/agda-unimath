@@ -151,16 +151,16 @@ module _
   (f : sequence ℕ)
   where
 
-  is-strict-increasing-value-is-strict-increasing-sequence-ℕ :
+  strict-increasing-value-is-strict-increasing-sequence-ℕ :
     is-strict-increasing-sequence-ℕ f →
     ((n : ℕ) → is-strict-increasing-value-sequence-ℕ f n)
-  is-strict-increasing-value-is-strict-increasing-sequence-ℕ H n =
+  strict-increasing-value-is-strict-increasing-sequence-ℕ H n =
     H n (succ-ℕ n) (succ-le-ℕ n)
 
-  is-strict-increasing-is-strict-increasing-value-sequence-ℕ :
+  strict-increasing-is-strict-increasing-value-sequence-ℕ :
     ((n : ℕ) → is-strict-increasing-value-sequence-ℕ f n) →
     is-strict-increasing-sequence-ℕ f
-  is-strict-increasing-is-strict-increasing-value-sequence-ℕ H p q I =
+  strict-increasing-is-strict-increasing-value-sequence-ℕ H p q I =
     based-ind-ℕ
       ( succ-ℕ p)
       ( λ k → le-ℕ (f p) (f k))
@@ -169,16 +169,16 @@ module _
       ( q)
       ( leq-succ-le-ℕ p q I)
 
-  is-strict-decreasing-value-is-strict-decreasing-sequence-ℕ :
+  strict-decreasing-value-is-strict-decreasing-sequence-ℕ :
     is-strict-decreasing-sequence-ℕ f →
     ((n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n)
-  is-strict-decreasing-value-is-strict-decreasing-sequence-ℕ H n =
+  strict-decreasing-value-is-strict-decreasing-sequence-ℕ H n =
     H n (succ-ℕ n) (succ-le-ℕ n)
 
-  is-strict-decreasing-is-strict-decreasing-value-sequence-ℕ :
+  strict-decreasing-is-strict-decreasing-value-sequence-ℕ :
     ((n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n) →
     is-strict-decreasing-sequence-ℕ f
-  is-strict-decreasing-is-strict-decreasing-value-sequence-ℕ H p q I =
+  strict-decreasing-is-strict-decreasing-value-sequence-ℕ H p q I =
     based-ind-ℕ
       ( succ-ℕ p)
       ( λ k → le-ℕ (f k) (f p))
@@ -186,6 +186,20 @@ module _
       ( λ n J → transitive-le-ℕ (f (succ-ℕ n)) (f n) (f p) (H n))
       ( q)
       ( leq-succ-le-ℕ p q I)
+
+module _
+  (f : strict-increasing-sequence-ℕ)
+  where
+
+  strict-increasing-value-strict-increasing-sequence-ℕ :
+    (n : ℕ) →
+    is-strict-increasing-value-sequence-ℕ
+      (sequence-strict-increasing-sequence-ℕ f)
+      (n)
+  strict-increasing-value-strict-increasing-sequence-ℕ =
+    strict-increasing-value-is-strict-increasing-sequence-ℕ
+      ( sequence-strict-increasing-sequence-ℕ f)
+      ( is-strict-increasing-sequence-strict-increasing-sequence-ℕ f)
 ```
 
 ### There exist no strictly decreasing sequences of natural numbers
@@ -231,7 +245,7 @@ module _
     ¬ ((n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n)
   no-strict-decreasing-value-sequence-ℕ =
     ( no-strict-decreasing-sequence-ℕ) ∘
-    ( is-strict-decreasing-is-strict-decreasing-value-sequence-ℕ f)
+    ( strict-decreasing-is-strict-decreasing-value-sequence-ℕ f)
 ```
 
 ### Strictly increasing sequences of natural numbers preserve inequality
@@ -373,41 +387,44 @@ comp-strict-increasing-sequence-ℕ g f =
 
 ```agda
 module _
-  (f : sequence ℕ) (H : is-strict-increasing-sequence-ℕ f)
+  (f : strict-increasing-sequence-ℕ) (M : ℕ)
   where
 
-  limit-∞-is-strict-increasing-sequence-ℕ :
-    (M : ℕ) → asymptotically (λ n → leq-ℕ M (f n))
-  limit-∞-is-strict-increasing-sequence-ℕ zero-ℕ =
-    ( zero-ℕ , λ n K → leq-zero-ℕ (f n))
-  limit-∞-is-strict-increasing-sequence-ℕ (succ-ℕ M) =
-    map-Σ
-      ( is-modulus-dependent-sequence (λ n → leq-ℕ (succ-ℕ M) (f n)))
-      ( succ-ℕ)
-      ( λ N K n I →
-        leq-succ-le-ℕ M (f n)
-          (concatenate-leq-le-ℕ
-            { M}
-            { f N}
-            { f n}
-            ( K N (refl-leq-ℕ N))
-            ( H N n
-              ( concatenate-le-leq-ℕ
-                { N}
-                { succ-ℕ N}
-                { n}
-                ( succ-le-ℕ N)
-                ( I)))))
-      ( limit-∞-is-strict-increasing-sequence-ℕ M)
+  unbounded-strict-increasing-sequence-ℕ :
+    Σ ℕ (λ n → leq-ℕ M (sequence-strict-increasing-sequence-ℕ f n))
+  unbounded-strict-increasing-sequence-ℕ =
+    (M , leq-id-strict-increasing-sequence-ℕ f M)
 
-  modulus-limit-∞-is-strict-increasing-sequence-ℕ : ℕ → ℕ
-  modulus-limit-∞-is-strict-increasing-sequence-ℕ M =
-    pr1 (limit-∞-is-strict-increasing-sequence-ℕ M)
+  modulus-unbounded-strict-increasing-sequence-ℕ : ℕ
+  modulus-unbounded-strict-increasing-sequence-ℕ =
+    pr1 unbounded-strict-increasing-sequence-ℕ
 
-  is-modulus-limit-∞-is-strict-increasing-sequence-ℕ :
-    (M p : ℕ) →
-    leq-ℕ (modulus-limit-∞-is-strict-increasing-sequence-ℕ M) p →
-    leq-ℕ M (f p)
-  is-modulus-limit-∞-is-strict-increasing-sequence-ℕ M =
-    pr2 (limit-∞-is-strict-increasing-sequence-ℕ M)
+  value-unbounded-strict-increasing-sequence-ℕ : ℕ
+  value-unbounded-strict-increasing-sequence-ℕ =
+    sequence-strict-increasing-sequence-ℕ f
+      modulus-unbounded-strict-increasing-sequence-ℕ
+
+  is-modulus-unbounded-strict-increasing-sequence-ℕ :
+    leq-ℕ M value-unbounded-strict-increasing-sequence-ℕ
+  is-modulus-unbounded-strict-increasing-sequence-ℕ =
+    pr2 unbounded-strict-increasing-sequence-ℕ
+
+  is-∞-modulus-unbounded-strict-increasing-sequence-ℕ :
+    (p : ℕ) →
+    leq-ℕ modulus-unbounded-strict-increasing-sequence-ℕ p →
+    leq-ℕ M (sequence-strict-increasing-sequence-ℕ f p)
+  is-∞-modulus-unbounded-strict-increasing-sequence-ℕ =
+    based-ind-ℕ
+      ( modulus-unbounded-strict-increasing-sequence-ℕ)
+      ( λ k → leq-ℕ M (sequence-strict-increasing-sequence-ℕ f k))
+      ( is-modulus-unbounded-strict-increasing-sequence-ℕ)
+      ( λ n I →
+        transitive-leq-ℕ
+          ( M)
+          ( sequence-strict-increasing-sequence-ℕ f n)
+          ( sequence-strict-increasing-sequence-ℕ f (succ-ℕ n))
+          ( leq-le-ℕ
+            ( sequence-strict-increasing-sequence-ℕ f n)
+            ( sequence-strict-increasing-sequence-ℕ f (succ-ℕ n))
+            ( strict-increasing-value-strict-increasing-sequence-ℕ f n)))
 ```

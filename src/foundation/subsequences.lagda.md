@@ -179,29 +179,22 @@ module _
 
   modulus-subsequence : ℕ → ℕ
   modulus-subsequence =
-    modulus-limit-∞-is-strict-increasing-sequence-ℕ
-      ( extract-subsequence u v)
-      ( is-strict-increasing-extract-subsequence u v)
+    modulus-unbounded-strict-increasing-sequence-ℕ v
 
   is-modulus-subsequence :
     (N p : ℕ) →
     leq-ℕ (modulus-subsequence N) p →
     leq-ℕ N (extract-subsequence u v p)
   is-modulus-subsequence =
-    is-modulus-limit-∞-is-strict-increasing-sequence-ℕ
-      ( extract-subsequence u v)
-      ( is-strict-increasing-extract-subsequence u v)
+    is-∞-modulus-unbounded-strict-increasing-sequence-ℕ v
 
   extract-modulus-subsequence : ℕ → ℕ
   extract-modulus-subsequence = extract-subsequence u v ∘ modulus-subsequence
 
   leq-extract-modulus-subsequence :
     (n : ℕ) → leq-ℕ n (extract-modulus-subsequence n)
-  leq-extract-modulus-subsequence n =
-    is-modulus-subsequence
-      ( n)
-      ( modulus-subsequence n)
-      ( refl-leq-ℕ (modulus-subsequence n))
+  leq-extract-modulus-subsequence =
+    is-modulus-unbounded-strict-increasing-sequence-ℕ v
 ```
 
 ### Subsequential type families
@@ -238,6 +231,6 @@ module _
       ( modulus-subsequence A B)
       ( λ N K p →
         ( K (extract-subsequence A B p)) ∘
-        ( is-modulus-subsequence A B N p))
+        ( is-∞-modulus-unbounded-strict-increasing-sequence-ℕ B N p))
       ( H)
 ```
