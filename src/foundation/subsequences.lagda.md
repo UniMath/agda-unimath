@@ -12,7 +12,7 @@ open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
-open import elementary-number-theory.strict-monotonic-sequences-natural-numbers
+open import elementary-number-theory.strictly-increasing-sequences-natural-numbers
 
 open import foundation.asymptotical-dependent-sequences
 open import foundation.dependent-pair-types
@@ -33,7 +33,7 @@ open import foundation.universe-levels
 
 A **subsequence** of a [sequence](foundation.sequences.md) `u : ℕ → A` is a
 sequence `u ∘ f` for some
-[strictly increasing](elementary-number-theory.strict-monotonic-sequences-natural-numbers.md)
+[strictly increasing](elementary-number-theory.strictly-increasing-sequences-natural-numbers.md)
 map `f : ℕ → ℕ`.
 
 ## Definitions

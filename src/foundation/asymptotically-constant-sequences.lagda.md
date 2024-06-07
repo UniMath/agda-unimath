@@ -11,7 +11,7 @@ open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strict-monotonic-sequences-natural-numbers
+open import elementary-number-theory.strictly-increasing-sequences-natural-numbers
 
 open import foundation.asymptotical-dependent-sequences
 open import foundation.asymptotically-equal-sequences

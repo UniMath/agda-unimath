@@ -1,7 +1,7 @@
-# Strictly monotonic sequences of natural numbers
+# Strictly increasing sequences of natural numbers
 
 ```agda
-module elementary-number-theory.strict-monotonic-sequences-natural-numbers where
+module elementary-number-theory.strictly-increasing-sequences-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -14,18 +14,13 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.asymptotical-dependent-sequences
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.negation
 open import foundation.propositions
 open import foundation.sequences
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -33,13 +28,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-Strictly monotonic sequences of natural numbers are functions `f : ℕ → ℕ` that
-preserve or reverse strict inequality of natural numbers.
+Strictly increasing sequences of natural numbers are sequences `f : ℕ → ℕ` that
+preserve inequality of natural numbers.
 
-Strictly decreasing sequences of natural numbers don't exist.
-
-Strictly increasing sequences of natural numbers are stable under composition
-and can get arbitrarily large.
+The identity sequence is strictly increasing. Strictly increasing sequences of
+natural numbers are stable under composition. Strictly increasing sequences of
+natural numbers and can get arbitrarily large.
 
 ## Definitions
 
@@ -86,31 +80,7 @@ module _
   is-strict-increasing-sequence-strict-increasing-sequence-ℕ = pr2 f
 ```
 
-### Strictly decreasing sequences of natural numbers
-
-```agda
-module _
-  (f : sequence ℕ)
-  where
-
-  is-strict-decreasing-sequence-prop-ℕ : Prop lzero
-  is-strict-decreasing-sequence-prop-ℕ =
-    Π-Prop ℕ
-      ( λ i →
-        Π-Prop ℕ
-          ( λ j → hom-Prop (le-ℕ-Prop i j) (le-ℕ-Prop (f j) (f i))))
-
-  is-strict-decreasing-sequence-ℕ : UU lzero
-  is-strict-decreasing-sequence-ℕ =
-    type-Prop is-strict-decreasing-sequence-prop-ℕ
-
-  is-prop-is-strict-decreasing-sequence-ℕ :
-    is-prop is-strict-decreasing-sequence-ℕ
-  is-prop-is-strict-decreasing-sequence-ℕ =
-    is-prop-type-Prop is-strict-decreasing-sequence-prop-ℕ
-```
-
-### Strict monotonic values of sequences of natural numbers
+### Strictly increasing values of a sequence of natural numbers
 
 ```agda
 module _
@@ -128,23 +98,11 @@ module _
     is-prop is-strict-increasing-value-sequence-ℕ
   is-prop-is-strict-increasing-value-sequence-ℕ =
     is-prop-type-Prop is-strict-increasing-value-prop-sequence-ℕ
-
-  is-strict-decreasing-value-prop-sequence-ℕ : Prop lzero
-  is-strict-decreasing-value-prop-sequence-ℕ = le-ℕ-Prop (f (succ-ℕ n)) (f n)
-
-  is-strict-decreasing-value-sequence-ℕ : UU lzero
-  is-strict-decreasing-value-sequence-ℕ =
-    type-Prop is-strict-decreasing-value-prop-sequence-ℕ
-
-  is-prop-is-strict-decreasing-value-sequence-ℕ :
-    is-prop is-strict-decreasing-value-sequence-ℕ
-  is-prop-is-strict-decreasing-value-sequence-ℕ =
-    is-prop-type-Prop is-strict-decreasing-value-prop-sequence-ℕ
 ```
 
 ## Properties
 
-### A sequence is strictly monotonic if and only if all its values are strictly monotonic with the same monotonicity
+### A sequence of natural numbers is strictly invceasing if and only if all its values are strictly increasing
 
 ```agda
 module _
@@ -169,24 +127,6 @@ module _
       ( q)
       ( leq-succ-le-ℕ p q I)
 
-  strict-decreasing-value-is-strict-decreasing-sequence-ℕ :
-    is-strict-decreasing-sequence-ℕ f →
-    ((n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n)
-  strict-decreasing-value-is-strict-decreasing-sequence-ℕ H n =
-    H n (succ-ℕ n) (succ-le-ℕ n)
-
-  strict-decreasing-is-strict-decreasing-value-sequence-ℕ :
-    ((n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n) →
-    is-strict-decreasing-sequence-ℕ f
-  strict-decreasing-is-strict-decreasing-value-sequence-ℕ H p q I =
-    based-ind-ℕ
-      ( succ-ℕ p)
-      ( λ k → le-ℕ (f k) (f p))
-      ( H p)
-      ( λ n J → transitive-le-ℕ (f (succ-ℕ n)) (f n) (f p) (H n))
-      ( q)
-      ( leq-succ-le-ℕ p q I)
-
 module _
   (f : strict-increasing-sequence-ℕ)
   where
@@ -200,52 +140,6 @@ module _
     strict-increasing-value-is-strict-increasing-sequence-ℕ
       ( sequence-strict-increasing-sequence-ℕ f)
       ( is-strict-increasing-sequence-strict-increasing-sequence-ℕ f)
-```
-
-### There exist no strictly decreasing sequences of natural numbers
-
-```agda
-no-bounded-strict-decreasing-sequence-ℕ :
-  (f : sequence ℕ) →
-  (N : ℕ) →
-  leq-ℕ (f zero-ℕ) N →
-  is-strict-decreasing-sequence-ℕ f →
-  empty
-no-bounded-strict-decreasing-sequence-ℕ f zero-ℕ K H =
-  concatenate-le-leq-ℕ
-    { f 1}
-    { f 0}
-    { 0}
-    ( H 0 1 (succ-le-ℕ 0))
-    ( K)
-no-bounded-strict-decreasing-sequence-ℕ f (succ-ℕ N) K H =
-  no-bounded-strict-decreasing-sequence-ℕ
-    ( f ∘ succ-ℕ)
-    ( N)
-    ( leq-le-succ-ℕ
-      ( f 1)
-      ( N)
-      ( concatenate-le-leq-ℕ
-        { f 1}
-        { f 0}
-        { succ-ℕ N}
-        ( H 0 1 (succ-le-ℕ 0))
-        ( K)))
-    ( λ i j → H (succ-ℕ i) (succ-ℕ j))
-
-module _
-  (f : sequence ℕ)
-  where
-
-  no-strict-decreasing-sequence-ℕ : ¬ (is-strict-decreasing-sequence-ℕ f)
-  no-strict-decreasing-sequence-ℕ =
-    no-bounded-strict-decreasing-sequence-ℕ f (f 0) (refl-leq-ℕ (f 0))
-
-  no-strict-decreasing-value-sequence-ℕ :
-    ¬ ((n : ℕ) → is-strict-decreasing-value-sequence-ℕ f n)
-  no-strict-decreasing-value-sequence-ℕ =
-    ( no-strict-decreasing-sequence-ℕ) ∘
-    ( strict-decreasing-is-strict-decreasing-value-sequence-ℕ f)
 ```
 
 ### Strictly increasing sequences of natural numbers preserve inequality
@@ -321,40 +215,6 @@ strict-increasing-succ-ℕ : strict-increasing-sequence-ℕ
 strict-increasing-succ-ℕ = (succ-ℕ , is-strict-increasing-succ-ℕ)
 ```
 
-### The strictly increasing sequence of natural numbers that skips the `n + 1` first terms
-
-```agda
-skip-ℕ : ℕ → ℕ → ℕ
-skip-ℕ n m = succ-ℕ (n +ℕ m)
-
-is-strict-increasing-skip-ℕ :
-  (n : ℕ) → is-strict-increasing-sequence-ℕ (skip-ℕ n)
-is-strict-increasing-skip-ℕ n p q I =
-  concatenate-le-leq-ℕ
-    { add-ℕ n p}
-    { succ-ℕ (add-ℕ n p)}
-    { add-ℕ n q}
-    ( succ-le-ℕ (add-ℕ n p))
-    ( preserves-leq-right-add-ℕ n (succ-ℕ p) q (leq-succ-le-ℕ p q I))
-
-strict-increasing-skip-ℕ : (n : ℕ) → strict-increasing-sequence-ℕ
-strict-increasing-skip-ℕ n = (skip-ℕ n , is-strict-increasing-skip-ℕ n)
-
-associative-skip-ℕ : (i j k : ℕ) →
-  skip-ℕ (skip-ℕ i j) k ＝ skip-ℕ i (skip-ℕ j k)
-associative-skip-ℕ i j k =
-  ap
-    ( succ-ℕ)
-    ( ( left-successor-law-add-ℕ (i +ℕ j) k) ∙
-      ( ap succ-ℕ (associative-add-ℕ i j k)))
-
-le-skip-ℕ : (m n : ℕ) → le-ℕ m (skip-ℕ m n)
-le-skip-ℕ m n = le-succ-leq-ℕ m (m +ℕ n) (leq-add-ℕ m n)
-
-le-skip-ℕ' : (m n : ℕ) → le-ℕ m (skip-ℕ n m)
-le-skip-ℕ' m n = le-succ-leq-ℕ m (n +ℕ m) (leq-add-ℕ' m n)
-```
-
 ### The composition of strictly increasing sequences of natural numbers is strictly increasing
 
 ```agda
@@ -427,4 +287,38 @@ module _
             ( sequence-strict-increasing-sequence-ℕ f n)
             ( sequence-strict-increasing-sequence-ℕ f (succ-ℕ n))
             ( strict-increasing-value-strict-increasing-sequence-ℕ f n)))
+```
+
+### The strictly increasing sequence of natural numbers that skips the `n + 1` first terms
+
+```agda
+skip-ℕ : ℕ → ℕ → ℕ
+skip-ℕ n m = succ-ℕ (n +ℕ m)
+
+is-strict-increasing-skip-ℕ :
+  (n : ℕ) → is-strict-increasing-sequence-ℕ (skip-ℕ n)
+is-strict-increasing-skip-ℕ n p q I =
+  concatenate-le-leq-ℕ
+    { add-ℕ n p}
+    { succ-ℕ (add-ℕ n p)}
+    { add-ℕ n q}
+    ( succ-le-ℕ (add-ℕ n p))
+    ( preserves-leq-right-add-ℕ n (succ-ℕ p) q (leq-succ-le-ℕ p q I))
+
+strict-increasing-skip-ℕ : (n : ℕ) → strict-increasing-sequence-ℕ
+strict-increasing-skip-ℕ n = (skip-ℕ n , is-strict-increasing-skip-ℕ n)
+
+associative-skip-ℕ : (i j k : ℕ) →
+  skip-ℕ (skip-ℕ i j) k ＝ skip-ℕ i (skip-ℕ j k)
+associative-skip-ℕ i j k =
+  ap
+    ( succ-ℕ)
+    ( ( left-successor-law-add-ℕ (i +ℕ j) k) ∙
+      ( ap succ-ℕ (associative-add-ℕ i j k)))
+
+le-skip-ℕ : (m n : ℕ) → le-ℕ m (skip-ℕ m n)
+le-skip-ℕ m n = le-succ-leq-ℕ m (m +ℕ n) (leq-add-ℕ m n)
+
+le-skip-ℕ' : (m n : ℕ) → le-ℕ m (skip-ℕ n m)
+le-skip-ℕ' m n = le-succ-leq-ℕ m (n +ℕ m) (leq-add-ℕ' m n)
 ```
