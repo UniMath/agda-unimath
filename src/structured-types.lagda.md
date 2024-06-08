@@ -15,6 +15,7 @@ open import structured-types.commuting-squares-of-pointed-homotopies public
 open import structured-types.commuting-squares-of-pointed-maps public
 open import structured-types.commuting-triangles-of-pointed-maps public
 open import structured-types.conjugation-pointed-types public
+open import structured-types.connected-h-spaces public
 open import structured-types.constant-pointed-maps public
 open import structured-types.contractible-pointed-types public
 open import structured-types.cyclic-types public
@@ -45,6 +46,7 @@ open import structured-types.large-symmetric-globular-types public
 open import structured-types.large-transitive-globular-types public
 open import structured-types.magmas public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public
+open import structured-types.mere-units-h-spaces public
 open import structured-types.morphisms-h-spaces public
 open import structured-types.morphisms-magmas public
 open import structured-types.morphisms-pointed-arrows public
