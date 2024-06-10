@@ -14,6 +14,7 @@ open import order-theory.closure-operators-large-locales public
 open import order-theory.closure-operators-large-posets public
 open import order-theory.commuting-squares-of-galois-connections-large-posets public
 open import order-theory.commuting-squares-of-order-preserving-maps-large-posets public
+open import order-theory.constant-sequences-posets public
 open import order-theory.coverings-locales public
 open import order-theory.decidable-posets public
 open import order-theory.decidable-preorders public
@@ -21,6 +22,7 @@ open import order-theory.decidable-subposets public
 open import order-theory.decidable-subpreorders public
 open import order-theory.decidable-total-orders public
 open import order-theory.decidable-total-preorders public
+open import order-theory.decreasing-sequences-posets public
 open import order-theory.dependent-products-large-frames public
 open import order-theory.dependent-products-large-locales public
 open import order-theory.dependent-products-large-meet-semilattices public
@@ -49,6 +51,7 @@ open import order-theory.homomorphisms-meet-semilattices public
 open import order-theory.homomorphisms-meet-sup-lattices public
 open import order-theory.homomorphisms-sup-lattices public
 open import order-theory.ideals-preorders public
+open import order-theory.increasing-sequences-posets public
 open import order-theory.inhabited-finite-total-orders public
 open import order-theory.interval-subposets public
 open import order-theory.join-semilattices public

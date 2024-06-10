@@ -45,6 +45,40 @@ module _
   sequence-poset = sequence (type-Poset P)
 ```
 
+### Monotonic values of sequences in partially ordered sets
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (u : sequence-poset P) (n : ℕ)
+  where
+
+  is-increasing-value-prop-sequence-poset : Prop l2
+  is-increasing-value-prop-sequence-poset =
+    leq-Poset-Prop P (u n) (u (succ-ℕ n))
+
+  is-increasing-value-sequence-poset : UU l2
+  is-increasing-value-sequence-poset =
+    type-Prop is-increasing-value-prop-sequence-poset
+
+  is-prop-is-increasing-value-sequence-poset :
+    is-prop is-increasing-value-sequence-poset
+  is-prop-is-increasing-value-sequence-poset =
+    is-prop-type-Prop is-increasing-value-prop-sequence-poset
+
+  is-decreasing-value-prop-sequence-poset : Prop l2
+  is-decreasing-value-prop-sequence-poset =
+    leq-Poset-Prop P (u (succ-ℕ n)) (u n)
+
+  is-decreasing-value-sequence-poset : UU l2
+  is-decreasing-value-sequence-poset =
+    type-Prop is-decreasing-value-prop-sequence-poset
+
+  is-prop-is-decreasing-value-sequence-poset :
+    is-prop is-decreasing-value-sequence-poset
+  is-prop-is-decreasing-value-sequence-poset =
+    is-prop-type-Prop is-decreasing-value-prop-sequence-poset
+```
+
 ### Pointwise comparison on sequences in partially ordered sets
 
 ```agda
@@ -166,6 +200,33 @@ module _
 ```
 
 ## Properties
+
+### Any value of a sequence in a partially ordered set is stationnary if and only if it is both increasing and decreasing
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (u : sequence-poset P) (n : ℕ)
+  where
+
+  increasing-value-is-stationnary-value-sequence-poset :
+    is-stationnary-value-sequence u n →
+    is-increasing-value-sequence-poset P u n
+  increasing-value-is-stationnary-value-sequence-poset H =
+    leq-eq-Poset P H
+
+  decreasing-value-is-stationnary-value-sequence-poset :
+    is-stationnary-value-sequence u n →
+    is-decreasing-value-sequence-poset P u n
+  decreasing-value-is-stationnary-value-sequence-poset H =
+    leq-eq-Poset P (inv H)
+
+  stationnary-value-is-increasing-decreasing-value-sequence-poset :
+    is-increasing-value-sequence-poset P u n →
+    is-decreasing-value-sequence-poset P u n →
+    is-stationnary-value-sequence u n
+  stationnary-value-is-increasing-decreasing-value-sequence-poset =
+    antisymmetric-leq-Poset P (u n) (u (succ-ℕ n))
+```
 
 ### Asymptotical values preserve asymptotical inequality of sequences in partially ordered sets
 

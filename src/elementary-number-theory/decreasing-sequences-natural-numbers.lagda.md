@@ -1,7 +1,7 @@
-# Monotonic sequences of natural numbers
+# Decreasing sequences of natural numbers
 
 ```agda
-module elementary-number-theory.monotonic-sequences-natural-numbers where
+module elementary-number-theory.decreasing-sequences-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -34,43 +34,37 @@ open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
-open import order-theory.monotonic-sequences-posets
+open import order-theory.decreasing-sequences-posets
+open import order-theory.sequences-posets
 ```
 
 </details>
 
 ## Idea
 
-Monotonic sequences of natural numbers are functions `f : ℕ → ℕ` that preserve
-or reverse inequality of natural numbers.
+A sequences of natural numbers is **decreasing** if it reverses
+[inequality of natural numbers](elementary-number-theory.inequality-natural-numbers.md).
 
 ## Definitions
 
-### Monotonic values of sequences of natural numbers
+### Decreasing values of sequences of natural numbers
 
 ```agda
 module _
   (f : sequence ℕ) (n : ℕ)
   where
 
-  is-increasing-value-sequence-ℕ : UU lzero
-  is-increasing-value-sequence-ℕ =
-    is-increasing-value-sequence-poset ℕ-Poset f n
-
   is-decreasing-value-sequence-ℕ : UU lzero
   is-decreasing-value-sequence-ℕ =
     is-decreasing-value-sequence-poset ℕ-Poset f n
 ```
 
-### Monotonic sequences of natural numbers
+### Decreasing sequences of natural numbers
 
 ```agda
 module _
   (f : sequence ℕ)
   where
-
-  is-increasing-sequence-ℕ : UU lzero
-  is-increasing-sequence-ℕ = is-increasing-sequence-poset ℕ-Poset f
 
   is-decreasing-sequence-ℕ : UU lzero
   is-decreasing-sequence-ℕ = is-decreasing-sequence-poset ℕ-Poset f
@@ -95,19 +89,12 @@ module _
           ( inv-tr (leq-ℕ (f k)) K (H n k I)))
 ```
 
-### A monotonic value of a sequence of natural numbers is either stationnary or strictly monotonic
+### A decreasing value of a sequence of natural numbers is either stationnary or strictly decreasing
 
 ```agda
 module _
   (f : sequence ℕ) (n : ℕ)
   where
-
-  decide-is-stationnary-is-increasing-value-sequence-ℕ :
-    is-increasing-value-sequence-ℕ f n →
-    (is-stationnary-value-sequence f n) +
-    (is-strict-increasing-value-sequence-ℕ f n)
-  decide-is-stationnary-is-increasing-value-sequence-ℕ =
-    eq-or-le-leq-ℕ (f n) (f (succ-ℕ n))
 
   decide-is-stationnary-is-decreasing-value-sequence-ℕ :
     is-decreasing-value-sequence-ℕ f n →
@@ -117,27 +104,12 @@ module _
     map-coproduct inv id (eq-or-le-leq-ℕ (f (succ-ℕ n)) (f n) H)
 ```
 
-### Any value of a monotonic sequence of natural numbers that is not a strict value is stationnary
+### Any value of a decreasing sequence of natural numbers that is not a strict value is stationnary
 
 ```agda
 module _
   (f : sequence ℕ)
   where
-
-  stationnary-value-is-not-strict-value-increasing-sequence-ℕ :
-    is-increasing-sequence-ℕ f →
-    (n : ℕ) →
-    ¬ (is-strict-increasing-value-sequence-ℕ f n) →
-    is-stationnary-value-sequence f n
-  stationnary-value-is-not-strict-value-increasing-sequence-ℕ H n K =
-    map-right-unit-law-coproduct-is-empty
-      ( is-stationnary-value-sequence f n)
-      ( is-strict-increasing-value-sequence-ℕ f n)
-      ( K)
-      ( decide-is-stationnary-is-increasing-value-sequence-ℕ
-        ( f)
-        ( n)
-        ( increasing-value-is-increasing-sequence-poset ℕ-Poset {f} H n))
 
   stationnary-value-is-not-strict-value-decreasing-sequence-ℕ :
     is-decreasing-sequence-ℕ f →
