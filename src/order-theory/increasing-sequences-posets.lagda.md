@@ -24,6 +24,7 @@ open import foundation.sequences
 open import foundation.subsequences
 open import foundation.universe-levels
 
+open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 open import order-theory.sequences-posets
 ```
@@ -47,13 +48,7 @@ module _
 
   is-increasing-prop-sequence-poset : Prop l2
   is-increasing-prop-sequence-poset =
-      Π-Prop ℕ
-      ( λ i →
-        Π-Prop ℕ
-          ( λ j →
-            hom-Prop
-              ( leq-ℕ-Prop i j)
-              ( leq-Poset-Prop P (u i) (u j))))
+    preserves-order-Poset-Prop ℕ-Poset P u
 
   is-increasing-sequence-poset : UU l2
   is-increasing-sequence-poset =
