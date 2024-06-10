@@ -76,6 +76,22 @@ module _
       (map-binary-asymptotically-Π (λ n I J → I ∙ (inv J)) H K)
 ```
 
+### A sequence has an asymptotical value if and only if it is asymptotically equal to some constant sequence
+
+```agda
+module _
+  {l : Level} {A : UU l} (x : A) (u : sequence A)
+  where
+
+  eq-∞-const-sequence-is-∞-value-sequence :
+    is-∞-value-sequence x u → eq-∞-sequence (const-sequence x) u
+  eq-∞-const-sequence-is-∞-value-sequence = tot (λ n K → K)
+
+  is-∞-value-eq-∞-constant-sequence :
+    eq-∞-sequence (const-sequence x) u → is-∞-value-sequence x u
+  is-∞-value-eq-∞-constant-sequence = tot (λ n K → K)
+```
+
 ### Asymptotical equality preserves asymptotical value
 
 ```agda

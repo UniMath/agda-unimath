@@ -181,18 +181,6 @@ module _
   {l : Level} {A : UU l} (u : sequence A) (H : is-∞-constant-sequence u)
   where
 
-  eq-∞-value-∞-constant-Π-subsequence :
-    Π-subsequence (eq-∞-sequence (const-∞-value-∞-constant-sequence H)) u
-  eq-∞-value-∞-constant-Π-subsequence v =
-    ( ( modulus-subsequence u v (modulus-∞-value-∞-constant-sequence H)) ,
-      ( λ n I →
-        is-modulus-∞-value-∞-constant-sequence H
-          ( extract-subsequence u v n)
-          ( is-modulus-subsequence u v
-            ( modulus-∞-value-∞-constant-sequence H)
-            ( n)
-            ( I))))
-
   ∞-constant-Π-subsequence : Π-subsequence is-∞-constant-sequence u
   ∞-constant-Π-subsequence v =
     ∞-constant-is-∞-value-sequence
@@ -294,7 +282,10 @@ module _
       ( u)
       ( const-∞-value-∞-constant-sequence H)
       ( sequence-subsequence u v)
-      ( eq-∞-value-∞-constant-Π-subsequence u H v)
+      ( eq-∞-const-sequence-is-∞-value-sequence
+        ( ∞-value-∞-constant-sequence H)
+        ( sequence-subsequence u v)
+        ( Π-subsequence-∞-value-sequence (is-∞-value-∞-constant-sequence H) v))
       ( eq-∞-value-∞-constant-sequence' H)
 
   ∞-constant-eq-∞-sequence-subsequence :
