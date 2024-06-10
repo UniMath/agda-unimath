@@ -104,3 +104,8 @@ module _
   pr1 (is-injective-Prop H f) = is-injective f
   pr2 (is-injective-Prop H f) = is-prop-is-injective H f
 ```
+
+## See also
+
+- [Embeddings](foundation-core.embeddings.md)
+- [Path-cosplit maps](foundation.path-cosplit-maps.md)

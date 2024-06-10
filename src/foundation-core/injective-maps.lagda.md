@@ -153,3 +153,8 @@ is-injective-is-contr :
   is-contr A → is-injective f
 is-injective-is-contr f H p = eq-is-contr H
 ```
+
+## See also
+
+- [Embeddings](foundation-core.embeddings.md)
+- [Path-cosplit maps](foundation.path-cosplit-maps.md)

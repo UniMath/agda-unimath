@@ -260,6 +260,7 @@ open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.mere-functions public
 open import foundation.mere-logical-equivalences public
+open import foundation.mere-path-cosplit-maps public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
@@ -292,6 +293,7 @@ open import foundation.partial-functions public
 open import foundation.partial-sequences public
 open import foundation.partitions public
 open import foundation.path-algebra public
+open import foundation.path-cosplit-maps public
 open import foundation.path-split-maps public
 open import foundation.perfect-images public
 open import foundation.permutations-spans-families-of-types public
