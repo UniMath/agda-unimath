@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strictly-increasing-sequences-natural-numbers
 
 open import foundation.asymptotical-dependent-sequences
+open import foundation.asymptotical-value-sequences
 open import foundation.asymptotically-equal-sequences
 open import foundation.constant-sequences
 open import foundation.dependent-pair-types
@@ -56,16 +57,20 @@ module _
   ∞-value-∞-constant-sequence : A
   ∞-value-∞-constant-sequence = u (modulus-∞-asymptotically H)
 
+  is-∞-value-∞-constant-sequence :
+    is-∞-value-sequence ∞-value-∞-constant-sequence u
+  is-∞-value-∞-constant-sequence = value-∞-asymptotically H
+
   modulus-∞-value-∞-constant-sequence : ℕ
   modulus-∞-value-∞-constant-sequence =
-    modulus-∞-asymptotically (value-∞-asymptotically H)
+    modulus-∞-asymptotically is-∞-value-∞-constant-sequence
 
   is-modulus-∞-value-∞-constant-sequence :
     (n : ℕ) →
     leq-ℕ modulus-∞-value-∞-constant-sequence n →
     ∞-value-∞-constant-sequence ＝ u n
   is-modulus-∞-value-∞-constant-sequence =
-    is-modulus-∞-asymptotically (value-∞-asymptotically H)
+    is-modulus-∞-asymptotically is-∞-value-∞-constant-sequence
 
   const-∞-value-∞-constant-sequence : sequence A
   const-∞-value-∞-constant-sequence n = ∞-value-∞-constant-sequence
@@ -96,23 +101,30 @@ module _
   all-equal-∞-value-∞-constant-sequence :
     ∞-value-∞-constant-sequence H ＝ ∞-value-∞-constant-sequence K
   all-equal-∞-value-∞-constant-sequence =
-    ( is-modulus-∞-value-∞-constant-sequence
-      ( H)
-      ( max-ℕ
-        ( modulus-∞-value-∞-constant-sequence H)
-        ( modulus-∞-value-∞-constant-sequence K))
-      ( leq-left-max-ℕ
-        ( modulus-∞-value-∞-constant-sequence H)
-        ( modulus-∞-value-∞-constant-sequence K))) ∙
-    ( inv
-      ( is-modulus-∞-value-∞-constant-sequence
-        ( K)
-        ( max-ℕ
-          ( modulus-∞-value-∞-constant-sequence H)
-          ( modulus-∞-value-∞-constant-sequence K))
-        ( leq-right-max-ℕ
-          ( modulus-∞-value-∞-constant-sequence H)
-          ( modulus-∞-value-∞-constant-sequence K))))
+    all-eq-∞-value-sequence
+      ( ∞-value-∞-constant-sequence H)
+      ( ∞-value-∞-constant-sequence K)
+      ( u)
+      ( is-∞-value-∞-constant-sequence H)
+      ( is-∞-value-∞-constant-sequence K)
+```
+
+### A sequence is asymptotically constant if it has some asymptotical value
+
+```agda
+module _
+  {l : Level} {A : UU l} (x : A) (u : sequence A)
+  where
+
+  ∞-constant-is-∞-value-sequence :
+    is-∞-value-sequence x u → is-∞-constant-sequence u
+  ∞-constant-is-∞-value-sequence H =
+    ( modulus-∞-value-sequence H) ,
+    ( λ p I →
+      ( modulus-∞-value-sequence H) ,
+      ( λ q J →
+        ( inv (is-modulus-∞-value-sequence H p I)) ∙
+        ( is-modulus-∞-value-sequence H q J)))
 ```
 
 ### An asymptotically constant sequence is asymptotically equal to the constant sequence of its asymptotical value
@@ -132,25 +144,6 @@ module _
     eq-∞-sequence u (const-∞-value-∞-constant-sequence H)
   eq-∞-value-∞-constant-sequence' =
     inv-eq-∞-sequence eq-∞-value-∞-constant-sequence
-```
-
-### A sequence is asymptotically constant if it is asymptotically equal to some constant sequence
-
-```agda
-module _
-  {l : Level} {A : UU l} (x : A) (u : sequence A)
-  where
-
-  ∞-constant-eq-∞-constant-sequence :
-    (eq-∞-sequence (const-sequence x) u) → is-∞-constant-sequence u
-  ∞-constant-eq-∞-constant-sequence H =
-    ( modulus-eq-∞-sequence H) ,
-    ( λ p I →
-      ( ( modulus-eq-∞-sequence H) ,
-        ( λ q J →
-          ( inv
-            ( is-modulus-eq-∞-sequence H p I)) ∙
-          ( is-modulus-eq-∞-sequence H q J))))
 ```
 
 ### Two asymptotically constant sequences are asymptotically equal if and only if their asymptotical value is the same
@@ -202,10 +195,12 @@ module _
 
   ∞-constant-Π-subsequence : Π-subsequence is-∞-constant-sequence u
   ∞-constant-Π-subsequence v =
-    ∞-constant-eq-∞-constant-sequence
+    ∞-constant-is-∞-value-sequence
       ( ∞-value-∞-constant-sequence H)
       ( sequence-subsequence u v)
-      ( eq-∞-value-∞-constant-Π-subsequence v)
+      ( Π-subsequence-∞-value-sequence
+        ( is-∞-value-∞-constant-sequence H)
+        ( v))
 ```
 
 ### A sequence asymptotically equal to an asymptotically constant sequence is asymptotically constant
@@ -218,7 +213,7 @@ module _
   preserves-∞-constant-eq-∞-sequence :
     is-∞-constant-sequence u → is-∞-constant-sequence v
   preserves-∞-constant-eq-∞-sequence K =
-    ∞-constant-eq-∞-constant-sequence
+    ∞-constant-is-∞-value-sequence
       ( ∞-value-∞-constant-sequence K)
       ( v)
       ( transitive-eq-∞-sequence
@@ -264,7 +259,7 @@ module _
   ∞-constant-is-∞-stationnary-sequence :
     is-∞-stationnary-sequence u → is-∞-constant-sequence u
   ∞-constant-is-∞-stationnary-sequence H =
-    ∞-constant-eq-∞-constant-sequence
+    ∞-constant-is-∞-value-sequence
       ( u (modulus-∞-asymptotically H))
       ( u)
       ( ( modulus-∞-asymptotically H) ,

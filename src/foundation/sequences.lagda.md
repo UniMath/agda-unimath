@@ -7,7 +7,10 @@ module foundation.sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.dependent-sequences
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import foundation-core.function-types
@@ -26,6 +29,17 @@ A **sequence** of elements in a type `A` is a map `ℕ → A`.
 ```agda
 sequence : {l : Level} → UU l → UU l
 sequence A = dependent-sequence (λ _ → A)
+```
+
+### Values of a sequence
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-value-sequence : A → sequence A → ℕ → UU l
+  is-value-sequence x u n = x ＝ u n
 ```
 
 ### Functorial action on maps of sequences

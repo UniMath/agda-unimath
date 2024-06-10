@@ -63,7 +63,7 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l} (u : sequence A) (H : is-constant-sequence u)
+  {l : Level} {A : UU l} {u : sequence A} (H : is-constant-sequence u)
   where
 
   value-constant-sequence : A

@@ -345,7 +345,7 @@ module _
   ∞-constant-Σ-subsequence-constant-increasing-sequence-poset H =
     rec-Σ
       ( λ v K →
-        ∞-constant-eq-∞-constant-sequence
+        ∞-constant-is-∞-value-sequence
           ( u (extract-subsequence u v zero-ℕ))
           ( u)
           ( ( extract-subsequence u v zero-ℕ) ,
@@ -370,7 +370,7 @@ module _
   ∞-constant-Σ-subsequence-constant-decreasing-sequence-poset H =
     rec-Σ
       ( λ v K →
-        ∞-constant-eq-∞-constant-sequence
+        ∞-constant-is-∞-value-sequence
           ( u (extract-subsequence u v zero-ℕ))
           ( u)
           ( ( extract-subsequence u v zero-ℕ) ,
