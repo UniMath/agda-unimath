@@ -85,9 +85,9 @@ module _
   {l : Level} {A : UU l} {u : sequence A} (H : is-constant-sequence u)
   where
 
-  is-∞-constant-is-constant-sequence : is-∞-constant-sequence u
-  pr1 is-∞-constant-is-constant-sequence = zero-ℕ
-  pr2 is-∞-constant-is-constant-sequence p I = (zero-ℕ , λ q J → H p q)
+  ∞-constant-is-constant-sequence : is-∞-constant-sequence u
+  pr1 ∞-constant-is-constant-sequence = zero-ℕ
+  pr2 ∞-constant-is-constant-sequence p I = (zero-ℕ , λ q J → H p q)
 ```
 
 ### The asymptotical value of an asymptotically constant sequence is unique
