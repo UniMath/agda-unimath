@@ -45,8 +45,8 @@ module _
   (f : sequence ℕ)
   where
 
-  is-strict-increasing-sequence-prop-ℕ : Prop lzero
-  is-strict-increasing-sequence-prop-ℕ =
+  is-strict-increasing-prop-sequence-ℕ : Prop lzero
+  is-strict-increasing-prop-sequence-ℕ =
     Π-Prop ℕ
       ( λ i →
         Π-Prop ℕ
@@ -54,19 +54,19 @@ module _
 
   is-strict-increasing-sequence-ℕ : UU lzero
   is-strict-increasing-sequence-ℕ =
-    type-Prop is-strict-increasing-sequence-prop-ℕ
+    type-Prop is-strict-increasing-prop-sequence-ℕ
 
   is-prop-is-strict-increasing-sequence-ℕ :
     is-prop is-strict-increasing-sequence-ℕ
   is-prop-is-strict-increasing-sequence-ℕ =
-    is-prop-type-Prop is-strict-increasing-sequence-prop-ℕ
+    is-prop-type-Prop is-strict-increasing-prop-sequence-ℕ
 ```
 
 ### The type of strictly increasing sequences of natural numbers
 
 ```agda
 strict-increasing-sequence-ℕ : UU lzero
-strict-increasing-sequence-ℕ = type-subtype is-strict-increasing-sequence-prop-ℕ
+strict-increasing-sequence-ℕ = type-subtype is-strict-increasing-prop-sequence-ℕ
 
 module _
   (f : strict-increasing-sequence-ℕ)
@@ -129,11 +129,10 @@ module _
       ( leq-succ-le-ℕ p q I)
 
 module _
-  (f : strict-increasing-sequence-ℕ)
+  (f : strict-increasing-sequence-ℕ) (n : ℕ)
   where
 
   strict-increasing-value-strict-increasing-sequence-ℕ :
-    (n : ℕ) →
     is-strict-increasing-value-sequence-ℕ
       (sequence-strict-increasing-sequence-ℕ f)
       (n)
@@ -141,6 +140,7 @@ module _
     strict-increasing-value-is-strict-increasing-sequence-ℕ
       ( sequence-strict-increasing-sequence-ℕ f)
       ( is-strict-increasing-sequence-strict-increasing-sequence-ℕ f)
+      ( n)
 ```
 
 ### Strictly increasing sequences of natural numbers preserve inequality

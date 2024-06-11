@@ -170,7 +170,7 @@ module _
   compute-map-subsequence = refl
 ```
 
-### Modulus of a subsquence
+### Modulus of a subsequence
 
 ```agda
 module _

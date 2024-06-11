@@ -214,7 +214,7 @@ module _
 
 ### Asymptotically stationnary sequences
 
-#### The type of being asymptotically stationnary
+#### The predicate of being asymptotically stationnary
 
 ```agda
 module _

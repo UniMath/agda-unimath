@@ -125,10 +125,10 @@ module _
       ( P)
       ( H (skip-zero-sequence u))
 
-  Π-subsequence-leq-decreasing-sequence-Poset :
+  Π-subsequence-leq-decreasing-sequence-poset :
     is-decreasing-sequence-poset P u →
     Π-subsequence (λ v → leq-sequence-poset P v u) u
-  Π-subsequence-leq-decreasing-sequence-Poset H v n =
+  Π-subsequence-leq-decreasing-sequence-poset H v n =
     H n (extract-subsequence u v n) (leq-id-extract-subsequence u v n)
 ```
 

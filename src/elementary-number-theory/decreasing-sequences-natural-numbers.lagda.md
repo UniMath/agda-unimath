@@ -16,6 +16,7 @@ open import elementary-number-theory.strictly-decreasing-sequences-natural-numbe
 open import elementary-number-theory.strictly-increasing-sequences-natural-numbers
 
 open import foundation.asymptotical-dependent-sequences
+open import foundation.asymptotical-value-sequences
 open import foundation.asymptotically-constant-sequences
 open import foundation.cartesian-product-types
 open import foundation.constant-sequences
@@ -79,9 +80,9 @@ module _
   {f : sequence ℕ} (H : is-decreasing-sequence-ℕ f)
   where
 
-  eq-∞-zero-is-zero-value-decreasing-sequence-ℕ :
-    Σ ℕ (λ n → zero-ℕ ＝ f n) → asymptotically (λ n → zero-ℕ ＝ f n)
-  eq-∞-zero-is-zero-value-decreasing-sequence-ℕ =
+  is-∞-zero-value-is-zero-value-decreasing-sequence-ℕ :
+    Σ ℕ (is-value-sequence zero-ℕ f) → is-∞-value-sequence zero-ℕ f
+  is-∞-zero-value-is-zero-value-decreasing-sequence-ℕ =
     tot
       ( λ n K k I →
         is-zero-leq-zero-ℕ'
