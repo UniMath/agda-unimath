@@ -28,7 +28,7 @@ open import order-theory.sequences-posets
 
 ## Idea
 
-A sequences of natural numbers is **increasing** if it preserves
+A sequence of natural numbers is **increasing** if it preserves
 [inequality of natural numbers](elementary-number-theory.inequality-natural-numbers.md).
 
 ## Definitions

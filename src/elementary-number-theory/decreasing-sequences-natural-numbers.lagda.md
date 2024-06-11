@@ -43,7 +43,7 @@ open import order-theory.sequences-posets
 
 ## Idea
 
-A sequences of natural numbers is **decreasing** if it reverses
+A sequence of natural numbers is **decreasing** if it reverses
 [inequality of natural numbers](elementary-number-theory.inequality-natural-numbers.md).
 
 ## Definitions
