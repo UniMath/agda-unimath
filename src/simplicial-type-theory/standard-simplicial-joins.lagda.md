@@ -65,9 +65,16 @@ edges `a →₂ b` for every `a : A` and `b : B`.
 This construction satisfies the laws
 
 - $𝟚 ≃ 1 ＊₂ 1$
+
 - $Δⁿ⁺¹ ≃ Δⁿ⁺¹ ＊₂ 1 ≃ 1 ＊₂ Δⁿ⁺¹$
+
 - $Λ²₀ ≃ 1 ＊₂ bool$
+
 - $Λ²₂ ≃ bool ＊₂ 1$
+
+- $1 ＊₂ (-)$ is the simplicial cone
+
+- $ (-) ＊₂ 1$ is the simplicial cocone
 
 ## Postulates
 
@@ -94,3 +101,7 @@ module _
 
 It remains to define and postulate the induction principle of the simplicial
 join.
+
+## See also
+
+- The simplicial pushout join
