@@ -80,9 +80,9 @@ module _
   {f : sequence ℕ} (H : is-decreasing-sequence-ℕ f)
   where
 
-  is-∞-zero-value-is-zero-value-decreasing-sequence-ℕ :
+  ∞-zero-value-is-zero-value-decreasing-sequence-ℕ :
     Σ ℕ (is-value-sequence zero-ℕ f) → is-∞-value-sequence zero-ℕ f
-  is-∞-zero-value-is-zero-value-decreasing-sequence-ℕ =
+  ∞-zero-value-is-zero-value-decreasing-sequence-ℕ =
     tot
       ( λ n K k I →
         is-zero-leq-zero-ℕ'
