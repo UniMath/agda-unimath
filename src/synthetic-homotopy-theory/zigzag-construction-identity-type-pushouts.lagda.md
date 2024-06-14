@@ -70,6 +70,96 @@ TODO
 ### TODO
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-maps
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
+-- open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
+open import synthetic-homotopy-theory.universal-property-sequential-colimits
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : sequential-diagram l1} {B : sequential-diagram l2}
+  {X : UU l3} {c : cocone-sequential-diagram A X}
+  (up-c : universal-property-sequential-colimit c)
+  {Y : UU l4} {c' : cocone-sequential-diagram B Y}
+  (up-c' : universal-property-sequential-colimit c')
+  (z : zigzag-sequential-diagram A B)
+  (P : X → UU l5) (Q : Y → UU l6)
+  (e : (x : X) → P x ≃ Q (map-colimit-zigzag-sequential-diagram up-c up-c' z x))
+  where
+
+  private
+    CB :
+      (n : ℕ) →
+      coherence-square-maps
+        ( map-zigzag-sequential-diagram z n)
+        ( map-cocone-sequential-diagram c n)
+        ( map-cocone-sequential-diagram c' n)
+        ( map-colimit-zigzag-sequential-diagram up-c up-c' z)
+    CB =
+       htpy-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
+        ( up-c)
+        ( c')
+        ( hom-diagram-zigzag-sequential-diagram z)
+    dup-c : dependent-universal-property-sequential-colimit c
+    dup-c = dependent-universal-property-universal-property-sequential-colimit _ up-c
+    dup-c' : dependent-universal-property-sequential-colimit c'
+    dup-c' = dependent-universal-property-universal-property-sequential-colimit _ up-c'
+
+  tS-equiv-tS :
+    (tA : (n : ℕ) (a : family-sequential-diagram A n) → P (map-cocone-sequential-diagram c n a))
+    (HA :
+      (n : ℕ) (a : family-sequential-diagram A n) →
+      tr P (coherence-cocone-sequential-diagram c n a) (tA n a) ＝
+      tA (succ-ℕ n) (map-sequential-diagram A n a))
+    (tB : (n : ℕ) (b : family-sequential-diagram B n) → Q (map-cocone-sequential-diagram c' n b))
+    (HB :
+      (n : ℕ) (b : family-sequential-diagram B n) →
+      tr Q (coherence-cocone-sequential-diagram c' n b) (tB n b) ＝
+      tB (succ-ℕ n) (map-sequential-diagram B n b))
+    (n : ℕ) (a : family-sequential-diagram A n) →
+    ( ( map-equiv
+        ( e (map-cocone-sequential-diagram c n a))
+        ( map-dependent-universal-property-sequential-colimit dup-c
+          ( tA , HA)
+          ( map-cocone-sequential-diagram c n a))) ＝
+      map-dependent-universal-property-sequential-colimit dup-c'
+        ( tB , HB)
+        ( map-colimit-zigzag-sequential-diagram up-c up-c' z
+          ( map-cocone-sequential-diagram c n a))) ≃
+    ( ( tr Q
+        ( CB n a)
+        ( map-equiv (e (map-cocone-sequential-diagram c n a)) (tA n a))) ＝
+      ( tB n (map-zigzag-sequential-diagram z n a)))
+  tS-equiv-tS tA HA tB HB n a =
+    ( equiv-concat' _
+      ( pr1
+        ( htpy-dependent-cocone-dependent-universal-property-sequential-colimit
+          ( dup-c')
+          ( tB , HB))
+        ( n)
+        ( map-zigzag-sequential-diagram z n a))) ∘e
+    ( equiv-concat' _
+      ( apd
+        ( map-dependent-universal-property-sequential-colimit dup-c' (tB , HB))
+        ( CB n a))) ∘e
+    ( equiv-ap
+      ( equiv-tr Q (CB n a))
+      ( _)
+      ( _)) ∘e
+    equiv-concat
+      ( ap
+        ( map-equiv (e (map-cocone-sequential-diagram c n a)))
+        ( inv
+          ( pr1
+            ( htpy-dependent-cocone-dependent-universal-property-sequential-colimit
+              ( dup-c)
+              ( tA , HA))
+            ( n)
+            ( a))))
+      ( _)
+```
+
+```agda
 module _
   {l1 l2 l3 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
@@ -518,6 +608,31 @@ module _
 
       pr1 (cocone-tSS s) = alt-tS s
       pr2 (cocone-tSS s) = {!!}
+
+    alt-tS-tS-equiv :
+      (s : spanning-type-span-diagram 𝒮) →
+      {!!}
+      -- (n : ℕ) →
+      -- (p : Path-to-a 𝒮 a₀ (left-map-span-diagram 𝒮 s) n) →
+      -- {!!} ≃ {!!}
+    alt-tS-tS-equiv s =
+      tS-equiv-tS
+        ( up-standard-sequential-colimit)
+        ( up-shift-cocone-sequential-diagram 1 up-standard-sequential-colimit)
+        ( zigzag-sequential-diagram-zigzag-id-pushout 𝒮 a₀ s)
+        ( λ p → left-family-descent-data-pushout R (left-map-span-diagram 𝒮 s , p))
+        ( λ p → right-family-descent-data-pushout R (right-map-span-diagram 𝒮 s , p))
+        ( λ p → equiv-family-descent-data-pushout R (s , p))
+        ( tA (left-map-span-diagram 𝒮 s))
+        -- ( λ where
+        --   zero-ℕ (map-raise refl) → inv (compute-inl-dependent-cogap _ _ (cocone-tA (left-map-span-diagram 𝒮 s) 0) _ ∙ {!!})
+        --   (succ-ℕ n) a → {!!} )
+        ( λ n p →
+          inv
+            ( ( compute-inl-dependent-cogap _ _ (cocone-tA (left-map-span-diagram 𝒮 s) n) p) ∙
+              {!refl!}))
+        ( λ n → tB (right-map-span-diagram 𝒮 s) (succ-ℕ n))
+        ( {!!})
 
   ind-singleton-zigzag-id-pushout' :
     {l5 : Level}
