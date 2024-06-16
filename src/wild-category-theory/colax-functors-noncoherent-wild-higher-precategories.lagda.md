@@ -281,7 +281,8 @@ is-colax-functor-comp-colax-functor-Noncoherent-Wild-Higher-Precategory :
   (F : colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ) →
   is-colax-functor-Noncoherent-Wild-Higher-Precategory
     ( map-comp-colax-functor-Noncoherent-Wild-Higher-Precategory G F)
-is-colax-functor-comp-colax-functor-Noncoherent-Wild-Higher-Precategory {𝒞 = 𝒞} G F =
+is-colax-functor-comp-colax-functor-Noncoherent-Wild-Higher-Precategory
+  {𝒞 = 𝒞} G F =
   λ where
   .preserves-id-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory x →
     comp-2-hom-Noncoherent-Wild-Higher-Precategory 𝒞
