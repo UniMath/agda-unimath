@@ -467,5 +467,6 @@ open import foundation.whiskering-homotopies-composition public
 open import foundation.whiskering-homotopies-concatenation public
 open import foundation.whiskering-identifications-concatenation public
 open import foundation.whiskering-operations public
+open import foundation.wild-category-of-types public
 open import foundation.yoneda-identity-types public
 ```
