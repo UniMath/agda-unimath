@@ -36,7 +36,7 @@ A
 [map of noncoherent large wild higher precategories](wild-category-theory.maps-noncoherent-large-wild-higher-precategories.md)
 that preserves identity morphisms and composition _colaxly_. This means that for
 every $n$-morphism `f` in `𝒜`, where we take $0$-morphisms to be objects, there
-is an $(n+2)$-morphism
+is an $(n+1)$-morphism
 
 ```text
   Fₙ₊₁ (id-hom 𝒜 f) ⇒ id-hom ℬ (Fₙ f)
@@ -44,11 +44,11 @@ is an $(n+2)$-morphism
 
 in `ℬ`,
 
-and for every pair of composable $n$-morphisms `g` after `f` in `𝒜`, there is an
-$(n+1)$-morphism
+and for every pair of composable $(n+1)$-morphisms `g` after `f` in `𝒜`, there
+is an $(n+2)$-morphism
 
 ```text
-  Fₙ (g ∘ f) ⇒ (Fₙ g) ∘ (Fₙ f)
+  Fₙ₊₁ (g ∘ f) ⇒ (Fₙ₊₁ g) ∘ (Fₙ₊₁ f)
 ```
 
 in `ℬ`.
@@ -156,7 +156,7 @@ record
         { x = obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory x})
   preserves-id-hom-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     preserves-id-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
-      ( is-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
+      ( is-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
 
   preserves-comp-hom-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 l3 : Level}
@@ -173,7 +173,7 @@ record
         ( hom-colax-functor-Noncoherent-Large-Wild-Higher-Precategory f))
   preserves-comp-hom-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     preserves-comp-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
-      ( is-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
+      ( is-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
 
   2-hom-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
@@ -236,8 +236,8 @@ record
     ( map-hom-noncoherent-wild-Higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
         ( x)
         ( y) ,
-      is-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory
-        ( is-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
+      is-colax-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory
+        ( is-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
         ( x)
         ( y))
 
@@ -255,7 +255,7 @@ module _
   is-colax-functor-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
       ( id-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜)
-  is-functor-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
+  is-colax-functor-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     λ where
       .preserves-id-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
         x →
@@ -263,8 +263,8 @@ module _
       .preserves-comp-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
         g f →
         id-2-hom-Noncoherent-Large-Wild-Higher-Precategory 𝒜
-      .is-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory x y →
-        is-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory
+      .is-colax-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory x y →
+        is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory
           ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
             ( 𝒜)
             ( x)
@@ -276,8 +276,8 @@ module _
     λ where
     .map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory →
       id-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜
-    .is-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory →
-      is-functor-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
+    .is-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory →
+      is-colax-functor-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
 ### Composition of colax functors between noncoherent wild higher precategories
@@ -304,7 +304,7 @@ module _
   is-colax-functor-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
       ( map-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
-  is-functor-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
+  is-colax-functor-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     λ where
     .preserves-id-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
       x →
@@ -328,8 +328,8 @@ module _
             ( F)
             ( g)
             ( f)))
-    .is-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory x y →
-      is-functor-comp-colax-functor-Noncoherent-Wild-Higher-Precategory
+    .is-colax-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory x y →
+      is-colax-functor-comp-colax-functor-Noncoherent-Wild-Higher-Precategory
         ( hom-noncoherent-wild-Higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
           ( G)
           ( obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory F x)
@@ -348,6 +348,6 @@ module _
     λ where
     .map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory →
       map-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
-    .is-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory →
-      is-functor-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
+    .is-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory →
+      is-colax-functor-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 ```

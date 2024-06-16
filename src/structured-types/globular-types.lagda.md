@@ -55,6 +55,11 @@ special property of globular types.
 
 ### The structure of a globular type
 
+**Comment.** The choice to add a second universe level in the definition of a
+globular structure may seem rather arbitrary, but makes the concept applicable
+in particular extra cases that are of use to us when working with
+[large globular structures](structured-types.large-globular-types.md).
+
 ```agda
 record
   globular-structure {l1 : Level} (l2 : Level) (A : UU l1) : UU (l1 ⊔ lsuc l2)

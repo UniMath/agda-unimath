@@ -40,7 +40,9 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 
 ## Idea
 
-The {{#concept "wild category of types" Agda=Type-Noncoherent-Large-Wild-Higher-Precategory}} consists of types and functions and homotopies.
+The
+{{#concept "wild category of types" Agda=Type-Noncoherent-Large-Wild-Higher-Precategory}}
+consists of types and functions and homotopies.
 
 ## Definitions
 
