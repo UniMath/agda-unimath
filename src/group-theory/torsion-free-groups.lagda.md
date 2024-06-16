@@ -17,6 +17,7 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.singleton-subtypes
@@ -56,7 +57,7 @@ holds for all elements `x : G`. This condition can be formulated in several
        · ---------> Prop
        | ⌟            |
       p|              | P ↦ {k : ℤ ∣ (k ＝ 0) ∨ P}
-       V              V
+       ∨              ∨
        G -------> Subgroup ℤ
           order
    ```
@@ -149,7 +150,7 @@ module _
   is-torsion-free-has-unique-torsion-element-Group :
     has-unique-torsion-element-Group G → is-torsion-free-Group G
   is-torsion-free-has-unique-torsion-element-Group H x k p =
-    ap pr1 (eq-is-contr H {x , intro-∃ k p} {unit-torsion-element-Group G})
+    ap pr1 (eq-is-contr H {x , intro-exists k p} {unit-torsion-element-Group G})
 
   abstract
     has-unique-torsion-element-is-torsion-free-Group :
@@ -158,11 +159,10 @@ module _
       fundamental-theorem-id'
         ( λ where x refl → is-torsion-element-unit-Group G)
         ( λ x →
-          is-equiv-is-prop
-            ( is-set-type-Group G _ _)
+          is-equiv-has-converse-is-prop
+            ( is-set-type-Group G (unit-Group G) x)
             ( is-prop-is-torsion-element-Group G x)
-            ( elim-exists-Prop
-                ( λ k → Id-Prop (set-Group G) _ _)
-                ( Id-Prop (set-Group G) _ _)
-                ( λ k p → inv (H x k p))))
+            ( elim-exists
+              ( Id-Prop (set-Group G) (unit-Group G) x)
+              ( λ k p → inv (H x k p))))
 ```

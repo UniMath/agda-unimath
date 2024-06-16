@@ -53,7 +53,7 @@ module _
       ( Σ ( type-Truncated-Type C)
           ( λ z → (t : fiber f y) → g (pr1 t) ＝ z))
   unique-extension-fiber-is-truncation-is-truncation-ap C g =
-    apply-dependent-universal-property-surj-is-surjective f H
+    apply-dependent-universal-property-surjection-is-surjective f H
       ( λ y → is-contr-Prop _)
       ( λ x →
         is-contr-equiv

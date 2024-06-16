@@ -138,7 +138,7 @@ as indicated in the diagram
      A' <---- S'
      |        |
   h₀ |        | h₁
-     V        V
+     ∨        ∨
      A <----- S -----> B.
           f       g
 ```
@@ -210,7 +210,7 @@ as indicated in the diagram
            S' ----> B'
            |        |
         h₀ |        | h₁
-           V        V
+           ∨        ∨
   A <----- S -----> B.
        f       g
 ```

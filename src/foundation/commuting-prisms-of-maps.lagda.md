@@ -15,7 +15,6 @@ open import foundation.commuting-triangles-of-maps
 open import foundation.composition-algebra
 open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
@@ -199,16 +198,16 @@ The basic set-up is that, given a commuting prism of maps
 
 ```text
           B
-      h  ^| \  g
+      h  ∧| \  g
        /  |   \
-     /  f | ⇑   v
+     /  f | ⇑   ∨
     A ---------> C
     |     | hB   |
-    | ⇗   v   ⇗  |
+    | ⇗   ∨   ⇗  |
  hA |     B'     | hC
-    | h' ^  \ g' |
+    | h' ∧  \ g' |
     |  /  ⇑   \  |
-    v/          vv
+    ∨/          ∨∨
     A' --------> C'
           f'
 ```
@@ -218,17 +217,17 @@ we have commuting prisms of
 
 ```text
                     (B' → S)
-         (- ∘ g') ^     |     \ (- ∘ h')
+         (- ∘ g') ∧     |     \ (- ∘ h')
                 /       |       \
-              / (- ∘ f')| ⇑       v
+              / (- ∘ f')| ⇑       ∨
        (C' → S) ---------------> (A' → S)
            |            |            |
            |            | (- ∘ hB)   |
-           |     ⇙      v      ⇙     |
+           |     ⇙      ∨      ⇙     |
   (- ∘ hC) |         (B → S)         | (- ∘ hA)
-           |  (- ∘ g) ^   \ (- ∘ h)  |
+           |  (- ∘ g) ∧   \ (- ∘ h)  |
            |       /    ⇑    \       |
-           v    /               v    v
+           ∨    /               ∨    ∨
         (C → S) ----------------> (A → S).
                      (- ∘ f)
 ```
@@ -425,16 +424,16 @@ Given a commuting prism of maps
 
 ```text
           B
-      h  ^| \  g
+      h  ∧| \  g
        /  |   \
-     /  f | ⇑   v
+     /  f | ⇑   ∨
     A ---------> C
     |     | hB   |
-    | ⇗   v   ⇗  |
+    | ⇗   ∨   ⇗  |
  hA |     B'     | hC
-    | h' ^  \ g' |
+    | h' ∧  \ g' |
     |  /  ⇑   \  |
-    v/          vv
+    ∨/          ∨∨
     A' --------> C'
           f'
 ```
@@ -444,17 +443,17 @@ we have commuting prisms of
 
 ```text
                      (S → B)
-          (h ∘ -) ^     |     \ (g ∘ -)
+          (h ∘ -) ∧     |     \ (g ∘ -)
                 /       |       \
-              /  (f ∘ -)| ⇑       v
+              /  (f ∘ -)| ⇑       ∨
         (S → A) ----------------> (S → C)
            |            |            |
            |            | (hB ∘ -)   |
-           |     ⇗      v      ⇗     |
+           |     ⇗      ∨      ⇗     |
   (hA ∘ -) |         (S → B')        | (hC ∘ -)
-           | (h' ∘ -) ^   \ (g' ∘ -) |
+           | (h' ∘ -) ∧   \ (g' ∘ -) |
            |       /    ⇑    \       |
-           v    /               v    v
+           ∨    /               ∨    ∨
         (S → A') ---------------> (S → C').
                      (f' ∘ -)
 ```

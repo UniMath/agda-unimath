@@ -117,7 +117,6 @@ module _
                 ( equiv-concat
                   ( H ( const
                         ( type-2-Element-Type X)
-                        ( type-Pointed-Type A)
                         ( point-Pointed-Type A)))
                   ( point-Pointed-Type A))
                 ( ( X) ,

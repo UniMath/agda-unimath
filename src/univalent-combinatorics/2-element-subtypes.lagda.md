@@ -254,7 +254,7 @@ module _
       Σ ( type-2-Element-Type X)
         ( λ x → ¬ ((y : type-2-Element-Type X) → Id (f x) (f y)))
     first-element h =
-      exists-not-not-forall-count (λ z → (w : type-2-Element-Type X) →
+      exists-not-not-for-all-count (λ z → (w : type-2-Element-Type X) →
       Id (f z) (f w)) (λ z → {!!})
         {!!} {!!}
     two-elements-different-image :

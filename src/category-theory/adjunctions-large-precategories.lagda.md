@@ -39,7 +39,7 @@ Let `C` and `D` be two
               |                       |
   g ∘ - ∘ F f |                       | G g ∘ - ∘ f
               |                       |
-              v                       v
+              ∨                       ∨
         hom (F X₂) Y₂ --------> hom X₂ (G Y₂)
                        ϕ X₂ Y₂
 ```

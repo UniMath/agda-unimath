@@ -7,12 +7,16 @@ module ring-theory.invertible-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.invertible-elements-monoids
@@ -306,6 +310,36 @@ module _
   is-invertible-element-mul-Ring =
     is-invertible-element-mul-Monoid
       ( multiplicative-monoid-Ring R)
+```
+
+### Invertible elements are closed under negatives
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-invertible-element-neg-Ring :
+    (x : type-Ring R) →
+    is-invertible-element-Ring R x →
+    is-invertible-element-Ring R (neg-Ring R x)
+  is-invertible-element-neg-Ring x =
+    map-Σ _
+      ( neg-Ring R)
+      ( λ y →
+        map-product
+          ( mul-neg-Ring R x y ∙_)
+          ( mul-neg-Ring R y x ∙_))
+
+  is-invertible-element-neg-Ring' :
+    (x : type-Ring R) →
+    is-invertible-element-Ring R (neg-Ring R x) →
+    is-invertible-element-Ring R x
+  is-invertible-element-neg-Ring' x H =
+    tr
+      ( is-invertible-element-Ring R)
+      ( neg-neg-Ring R x)
+      ( is-invertible-element-neg-Ring (neg-Ring R x) H)
 ```
 
 ### The inverse of an invertible element is invertible

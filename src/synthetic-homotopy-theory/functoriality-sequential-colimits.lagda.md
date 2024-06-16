@@ -51,7 +51,7 @@ and `(B, b)`, their
     A₀ ---> A₁ ---> A₂ ---> ⋯ ---> X
     |       |       |              |
  f₀ |       | f₁    | f₂           | g
-    V       V       V              V
+    ∨       ∨       ∨              ∨
     B₀ ---> B₁ ---> B₂ ---> ⋯ ---> Y
         b₀      b₁      b₂
 ```
@@ -71,7 +71,7 @@ them to their colimits and maps between them.
   (A, a)    A∞
     |       |
   f |   ↦   | f∞
-    V       V
+    ∨       ∨
   (B, b)    B∞  .
 ```
 
@@ -104,7 +104,7 @@ The unique map `g : X → Y` such that the diagram
     A₀ ---> A₁ ---> A₂ ---> ⋯ ---> X
     |       |       |              |
  f₀ |       | f₁    | f₂           | g
-    V       V       V              V
+    ∨       ∨       ∨              ∨
     B₀ ---> B₁ ---> B₂ ---> ⋯ ---> Y
         b₀      b₁      b₂
 ```
@@ -119,16 +119,16 @@ This homotopy of cocones provides
 
 ```text
           Aₙ₊₁
-         ^ | \
+         ∧ | \
        /   |   \
-     /     |fₙ₊₁ V
+     /     |fₙ₊₁ ∨
     Aₙ ---------> X
     |      |      |
-    |      V      |
+    |      ∨      |
  fₙ |     Bₙ₊₁    | g
-    |    ^   \    |
+    |    ∧   \    |
     |  /       \  |
-    V/           VV
+    ∨/           ∨∨
     Bₙ ---------> Y ,
 ```
 
@@ -502,7 +502,7 @@ diagrams, i.e. it is the unique map `g : Y → X` making the diagram
        B₀ ---> B₁ ---> B₂ ---> ⋯ ---> Y
        |       |       |              |
   e₀⁻¹ |       | e₁⁻¹  | e₂⁻¹         | g
-       V       V       V              V
+       ∨       ∨       ∨              ∨
        A₀ ---> A₁ ---> A₂ ---> ⋯ ---> X
            a₀      a₁      a₂
 ```
@@ -792,4 +792,4 @@ module _
 
 ## References
 
-{{#bibliography}} {{#reference SDR20}}
+{{#bibliography}} {{#reference SvDR20}}

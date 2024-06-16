@@ -39,7 +39,7 @@ such that the squares
   |            |
   |            |
   |            |
-  v            v
+  ∨            ∨
   ΩAₙ₊₁ -----> ΩBₙ₊₁
         Ωfₙ₊₁
 ```

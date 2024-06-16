@@ -12,6 +12,7 @@ open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
 open import elementary-number-theory.addition-positive-and-negative-integers public
 open import elementary-number-theory.addition-rational-numbers public
+open import elementary-number-theory.additive-group-of-rational-numbers public
 open import elementary-number-theory.arithmetic-functions public
 open import elementary-number-theory.based-induction-natural-numbers public
 open import elementary-number-theory.based-strong-induction-natural-numbers public
@@ -37,6 +38,7 @@ open import elementary-number-theory.decidable-total-order-rational-numbers publ
 open import elementary-number-theory.decidable-total-order-standard-finite-types public
 open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
+open import elementary-number-theory.difference-rational-numbers public
 open import elementary-number-theory.dirichlet-convolution public
 open import elementary-number-theory.distance-integers public
 open import elementary-number-theory.distance-natural-numbers public
@@ -52,6 +54,7 @@ open import elementary-number-theory.exponentiation-natural-numbers public
 open import elementary-number-theory.factorials public
 open import elementary-number-theory.falling-factorials public
 open import elementary-number-theory.fibonacci-sequence public
+open import elementary-number-theory.field-of-rational-numbers public
 open import elementary-number-theory.finitary-natural-numbers public
 open import elementary-number-theory.finitely-cyclic-maps public
 open import elementary-number-theory.fundamental-theorem-of-arithmetic public
@@ -91,7 +94,11 @@ open import elementary-number-theory.multiplication-lists-of-natural-numbers pub
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiplication-positive-and-negative-integers public
 open import elementary-number-theory.multiplication-rational-numbers public
+open import elementary-number-theory.multiplicative-group-of-positive-rational-numbers public
+open import elementary-number-theory.multiplicative-group-of-rational-numbers public
+open import elementary-number-theory.multiplicative-inverses-positive-integer-fractions public
 open import elementary-number-theory.multiplicative-monoid-of-natural-numbers public
+open import elementary-number-theory.multiplicative-monoid-of-rational-numbers public
 open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-standard-cyclic-rings public
 open import elementary-number-theory.multiset-coefficients public
@@ -101,13 +108,16 @@ open import elementary-number-theory.nonnegative-integers public
 open import elementary-number-theory.nonpositive-integers public
 open import elementary-number-theory.nonzero-integers public
 open import elementary-number-theory.nonzero-natural-numbers public
+open import elementary-number-theory.nonzero-rational-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.parity-natural-numbers public
 open import elementary-number-theory.peano-arithmetic public
 open import elementary-number-theory.pisano-periods public
 open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
 open import elementary-number-theory.positive-and-negative-integers public
+open import elementary-number-theory.positive-integer-fractions public
 open import elementary-number-theory.positive-integers public
+open import elementary-number-theory.positive-rational-numbers public
 open import elementary-number-theory.powers-integers public
 open import elementary-number-theory.powers-of-two public
 open import elementary-number-theory.prime-numbers public
@@ -121,6 +131,7 @@ open import elementary-number-theory.relatively-prime-natural-numbers public
 open import elementary-number-theory.repeating-element-standard-finite-type public
 open import elementary-number-theory.retracts-of-natural-numbers public
 open import elementary-number-theory.ring-of-integers public
+open import elementary-number-theory.ring-of-rational-numbers public
 open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public
 open import elementary-number-theory.squares-integers public

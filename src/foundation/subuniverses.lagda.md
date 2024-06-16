@@ -38,7 +38,7 @@ open import foundation-core.transport-along-identifications
 
 ```agda
 is-subuniverse :
-  {l1 l2 : Level} (P : UU l1 → UU l2) → UU ((lsuc l1) ⊔ l2)
+  {l1 l2 : Level} (P : UU l1 → UU l2) → UU (lsuc l1 ⊔ l2)
 is-subuniverse P = is-subtype P
 
 subuniverse :

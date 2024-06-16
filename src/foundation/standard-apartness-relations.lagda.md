@@ -55,3 +55,7 @@ pr1 (is-standard-is-tight-Apartness-Relation R H lem x y) np =
 pr2 (is-standard-is-tight-Apartness-Relation R H lem x .x) r refl =
   antirefl-Apartness-Relation R x r
 ```
+
+## References
+
+{{#bibliography}} {{#reference MRR88}}

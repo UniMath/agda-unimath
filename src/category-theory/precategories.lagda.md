@@ -319,8 +319,8 @@ module _
 ## See also
 
 - [Categories](category-theory.categories.md) are univalent precategories.
-- [Functors between precategories](category-theory.categories.md) are
-  [structure](foundation.structure.md)-preserving maps of precategories.
+- [Functors between precategories](category-theory.functors-precategories.md)
+  are [structure](foundation.structure.md)-preserving maps of precategories.
 - [Large precategories](category-theory.large-precategories.md) are
   precategories whose collections of objects and morphisms form large types.
 

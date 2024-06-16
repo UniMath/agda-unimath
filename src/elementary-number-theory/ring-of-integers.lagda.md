@@ -14,6 +14,7 @@ open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonzero-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -28,6 +29,7 @@ open import ring-theory.homomorphisms-rings
 open import ring-theory.initial-rings
 open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
+open import ring-theory.trivial-rings
 ```
 
 </details>
@@ -52,6 +54,13 @@ pr2 ℤ-Commutative-Ring = commutative-mul-ℤ
 
 ## Properties
 
+### The ring of integers is nontrivial
+
+```agda
+is-nontrivial-ℤ-Ring : is-nontrivial-Ring ℤ-Ring
+is-nontrivial-ℤ-Ring H = is-nonzero-one-ℤ (inv H)
+```
+
 ### The integer multiples in `ℤ-Ring` coincide with multiplication in `ℤ`
 
 ```agda
@@ -59,7 +68,7 @@ is-mul-integer-multiple-ℤ-Ring :
   (k l : ℤ) → integer-multiple-Ring ℤ-Ring k l ＝ mul-ℤ k l
 is-mul-integer-multiple-ℤ-Ring (inl zero-ℕ) l =
   ( integer-multiple-neg-one-Ring ℤ-Ring l) ∙
-  ( is-left-mul-neg-one-neg-ℤ l)
+  ( inv (left-neg-unit-law-mul-ℤ l))
 is-mul-integer-multiple-ℤ-Ring (inl (succ-ℕ k)) l =
   ( integer-multiple-pred-Ring ℤ-Ring (inl k) l) ∙
   ( ap

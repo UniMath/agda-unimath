@@ -36,7 +36,7 @@ An {{#concept "equivalence of cospans" Agda=equiv-cospan}} from
   X ----> Y      X ----> Y
    \     /        \     /
   f \   / h      g \   / k
-     V V            V V
+     ∨ ∨            ∨ ∨
       A              B
 ```
 

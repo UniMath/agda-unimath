@@ -46,7 +46,7 @@ is-inhabited-Prop X = trunc-Prop X
 is-inhabited : {l : Level} → UU l → UU l
 is-inhabited X = type-Prop (is-inhabited-Prop X)
 
-is-property-is-inhabited : {l : Level} → (X : UU l) → is-prop (is-inhabited X)
+is-property-is-inhabited : {l : Level} (X : UU l) → is-prop (is-inhabited X)
 is-property-is-inhabited X = is-prop-type-Prop (is-inhabited-Prop X)
 
 Inhabited-Type : (l : Level) → UU (lsuc l)
@@ -195,7 +195,7 @@ pr2 (Σ-Inhabited-Type X Y) =
 ```agda
 map-is-inhabited :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (f : (A → B)) → is-inhabited A → is-inhabited B
+  (f : A → B) → is-inhabited A → is-inhabited B
 map-is-inhabited f = map-trunc-Prop f
 ```
 

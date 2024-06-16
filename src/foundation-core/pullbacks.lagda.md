@@ -17,7 +17,7 @@ open import foundation.standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.diagonal-maps-of-types
+open import foundation-core.diagonal-maps-cartesian-products-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.families-of-equivalences
@@ -340,7 +340,7 @@ Given a diagram as follows where the right-hand square is a pullback
   ∙ -------> ∙ -------> ∙
   |          | ⌟        |
   |          |          |
-  v          v          v
+  ∨          ∨          ∨
   ∙ -------> ∙ -------> ∙,
 ```
 
@@ -431,11 +431,11 @@ Given a diagram as follows where the lower square is a pullback
   ∙ -------> ∙
   |          |
   |          |
-  v          v
+  ∨          ∨
   ∙ -------> ∙
   | ⌟        |
   |          |
-  v          v
+  ∨          ∨
   ∙ -------> ∙,
 ```
 
@@ -672,7 +672,7 @@ Given a pullback square
     C -------> B
     | ⌟        |
   g'|          | g
-    v          v
+    ∨          ∨
     A -------> X
          f
 ```
@@ -684,7 +684,7 @@ square
             C ---------> X
             | ⌟          |
   (f' , g') |            |
-            v            v
+            ∨            ∨
           A × B -----> X × X,
                 f × g
 ```
@@ -702,10 +702,10 @@ module _
     is-pullback-fold-cone-is-pullback :
       {l4 : Level} {C : UU l4} (c : cone f g C) →
       is-pullback f g c →
-      is-pullback (map-product f g) (diagonal X) (fold-cone f g c)
+      is-pullback (map-product f g) (diagonal-product X) (fold-cone f g c)
     is-pullback-fold-cone-is-pullback c pb-c =
       is-equiv-left-map-triangle
-        ( gap (map-product f g) (diagonal X) (fold-cone f g c))
+        ( gap (map-product f g) (diagonal-product X) (fold-cone f g c))
         ( map-fold-cone-standard-pullback f g)
         ( gap f g c)
         ( triangle-map-fold-cone-standard-pullback f g c)
@@ -715,11 +715,11 @@ module _
   abstract
     is-pullback-is-pullback-fold-cone :
       {l4 : Level} {C : UU l4} (c : cone f g C) →
-      is-pullback (map-product f g) (diagonal X) (fold-cone f g c) →
+      is-pullback (map-product f g) (diagonal-product X) (fold-cone f g c) →
       is-pullback f g c
     is-pullback-is-pullback-fold-cone c =
       is-equiv-top-map-triangle
-        ( gap (map-product f g) (diagonal X) (fold-cone f g c))
+        ( gap (map-product f g) (diagonal-product X) (fold-cone f g c))
         ( map-fold-cone-standard-pullback f g)
         ( gap f g c)
         ( triangle-map-fold-cone-standard-pullback f g c)

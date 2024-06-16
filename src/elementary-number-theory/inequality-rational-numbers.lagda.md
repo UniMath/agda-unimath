@@ -21,6 +21,7 @@ open import elementary-number-theory.positive-integers
 open import elementary-number-theory.rational-numbers
 
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -97,7 +98,7 @@ refl-leq-ℚ x =
 ```agda
 antisymmetric-leq-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℚ y x → x ＝ y
 antisymmetric-leq-ℚ x y H H' =
-  ( inv (in-fraction-fraction-ℚ x)) ∙
+  ( inv (is-retraction-rational-fraction-ℚ x)) ∙
   ( eq-ℚ-sim-fraction-ℤ
     ( fraction-ℚ x)
     ( fraction-ℚ y)
@@ -106,7 +107,7 @@ antisymmetric-leq-ℚ x y H H' =
       ( fraction-ℚ y)
       ( H)
       ( H'))) ∙
-  ( in-fraction-fraction-ℚ y)
+  ( is-retraction-rational-fraction-ℚ y)
 ```
 
 ### Inequality on the rational numbers is linear
@@ -153,6 +154,6 @@ module _
 ## See also
 
 - The decidable total order on the rational numbers is defined in
-  [`decidable-total-order-rational-numbers](elementary-number-theory.decidable-total-order-rational-numbers.md)
+  [`decidable-total-order-rational-numbers`](elementary-number-theory.decidable-total-order-rational-numbers.md)
 - The strict ordering on the rational numbers is defined in
   [`strict-inequality-rational-numbers`](elementary-number-theory.strict-inequality-rational-numbers.md)

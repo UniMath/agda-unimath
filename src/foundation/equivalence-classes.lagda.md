@@ -7,6 +7,7 @@ module foundation.equivalence-classes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.existential-quantification
@@ -56,7 +57,7 @@ module _
 
   is-equivalence-class-Prop : subtype l2 A → Prop (l1 ⊔ l2)
   is-equivalence-class-Prop P =
-    ∃-Prop A (λ x → has-same-elements-subtype P (prop-equivalence-relation R x))
+    ∃ A (λ x → has-same-elements-subtype-Prop P (prop-equivalence-relation R x))
 
   is-equivalence-class : subtype l2 A → UU (l1 ⊔ l2)
   is-equivalence-class P = type-Prop (is-equivalence-class-Prop P)
@@ -246,8 +247,9 @@ module _
   share-common-element-equivalence-class-Prop :
     (C D : equivalence-class R) → Prop (l1 ⊔ l2)
   share-common-element-equivalence-class-Prop C D =
-    ∃-Prop A
-      ( λ x → is-in-equivalence-class R C x × is-in-equivalence-class R D x)
+    ∃ ( A)
+      ( λ x →
+        is-in-equivalence-class-Prop R C x ∧ is-in-equivalence-class-Prop R D x)
 
   share-common-element-equivalence-class :
     (C D : equivalence-class R) → UU (l1 ⊔ l2)

@@ -63,7 +63,7 @@ is-prop-is-ideal-subset-Ring R P =
       ( is-prop-is-closed-under-right-multiplication-subset-Ring R P))
 
 ideal-Ring :
-  (l : Level) {l1 : Level} (R : Ring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (R : Ring l1) → UU (lsuc l ⊔ l1)
 ideal-Ring l R =
   Σ (subset-Ring l R) (is-ideal-subset-Ring R)
 

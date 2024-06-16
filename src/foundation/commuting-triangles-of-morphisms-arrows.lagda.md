@@ -10,11 +10,6 @@ module foundation.commuting-triangles-of-morphisms-arrows where
 open import foundation.homotopies-morphisms-arrows
 open import foundation.morphisms-arrows
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
-
-open import foundation-core.commuting-squares-of-maps
-open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.homotopies
 ```
 
 </details>

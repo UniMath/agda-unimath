@@ -15,6 +15,8 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
+open import foundation.logical-equivalences
+open import foundation.transport-along-identifications
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.truncated-maps
 open import foundation.universal-property-equivalences
@@ -33,6 +35,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.retractions
+open import foundation-core.retracts-of-types
 open import foundation-core.sections
 open import foundation-core.subtypes
 open import foundation-core.truncation-levels
@@ -134,6 +137,21 @@ module _
         ( is-contr-map-is-equiv (is-equiv-precomp-is-equiv f is-equiv-f A) id)
 ```
 
+### The underlying retract of an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  retract-equiv : A ≃ B → A retract-of B
+  retract-equiv e =
+    ( map-equiv e , map-inv-equiv e , is-retraction-map-inv-equiv e)
+
+  retract-inv-equiv : B ≃ A → A retract-of B
+  retract-inv-equiv = retract-equiv ∘ inv-equiv
+```
+
 ### Being an equivalence is a property
 
 ```agda
@@ -188,7 +206,7 @@ module _
     ( H : coherence-triangle-maps h (map-equiv e) f) →
     is-equiv f ≃ is-equiv h
   equiv-is-equiv-right-map-triangle {f} e h H =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-property-is-equiv f)
       ( is-property-is-equiv h)
       ( λ is-equiv-f →
@@ -215,7 +233,7 @@ module _
     ( H : coherence-triangle-maps h f (map-equiv e)) →
     is-equiv f ≃ is-equiv h
   equiv-is-equiv-top-map-triangle e {f} h H =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-property-is-equiv f)
       ( is-property-is-equiv h)
       ( is-equiv-left-map-triangle h f (map-equiv e) H (is-equiv-map-equiv e))
@@ -380,7 +398,7 @@ module _
     { f g : A → B} → (f ~ g) →
     is-equiv f ≃ is-equiv g
   equiv-is-equiv-htpy {f} {g} H =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-property-is-equiv f)
       ( is-property-is-equiv g)
       ( is-equiv-htpy f (inv-htpy H))
@@ -553,6 +571,19 @@ equiv-precomp-equiv :
   (A ≃ B) → (C : UU l3) → (B ≃ C) ≃ (A ≃ C)
 pr1 (equiv-precomp-equiv e C) = _∘e e
 pr2 (equiv-precomp-equiv e C) = is-equiv-precomp-equiv-equiv e
+```
+
+### Computing transport in the type of equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (B : A → UU l2) (C : A → UU l3)
+  where
+
+  tr-equiv-type :
+    {x y : A} (p : x ＝ y) (e : B x ≃ C x) →
+    tr (λ x → B x ≃ C x) p e ＝ equiv-tr C p ∘e e ∘e equiv-tr B (inv p)
+  tr-equiv-type refl e = eq-htpy-equiv refl-htpy
 ```
 
 ### A cospan in which one of the legs is an equivalence is a pullback if and only if the corresponding map on the cone is an equivalence

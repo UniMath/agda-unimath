@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
@@ -34,7 +35,7 @@ A triangle of maps
  A ----> B
   \     /
    \   /
-    V V
+    ∨ ∨
      X
 ```
 
@@ -55,6 +56,18 @@ module _
   (left : A → X) (right : B → X) (e : A ≃ B)
   where
 
+  equiv-coherence-triangle-maps-inv-top' :
+    coherence-triangle-maps left right (map-equiv e) ≃
+    coherence-triangle-maps' right left (map-inv-equiv e)
+  equiv-coherence-triangle-maps-inv-top' =
+    equiv-Π
+      ( λ b → left (map-inv-equiv e b) ＝ right b)
+      ( e)
+      ( λ a →
+        equiv-concat
+          ( ap left (is-retraction-map-inv-equiv e a))
+          ( right (map-equiv e a)))
+
   equiv-coherence-triangle-maps-inv-top :
     coherence-triangle-maps left right (map-equiv e) ≃
     coherence-triangle-maps right left (map-inv-equiv e)
@@ -62,13 +75,7 @@ module _
     ( equiv-inv-htpy
       ( left ∘ (map-inv-equiv e))
       ( right)) ∘e
-    ( equiv-Π
-      ( λ b → left (map-inv-equiv e b) ＝ right b)
-      ( e)
-      ( λ a →
-        equiv-concat
-          ( ap left (is-retraction-map-inv-equiv e a))
-          ( right (map-equiv e a))))
+    ( equiv-coherence-triangle-maps-inv-top')
 
   coherence-triangle-maps-inv-top :
     coherence-triangle-maps left right (map-equiv e) →
@@ -86,7 +93,7 @@ Given a commuting triangle of maps
    A ----> B
     \  ⇗  /
    h \   / g
-      V V
+      ∨ ∨
        X
 ```
 
@@ -98,7 +105,7 @@ there is an induced commuting triangle of
   (X → S) ----> (B → S)
         \   ⇗  /
   (- ∘ h) \   / (- ∘ f)
-           V V
+           ∨ ∨
          (A → S).
 ```
 
@@ -138,7 +145,7 @@ Given a commuting triangle of maps
    A ----> B
     \  ⇗  /
    h \   / g
-      V V
+      ∨ ∨
        X
 ```
 
@@ -150,7 +157,7 @@ there is an induced commuting triangle of
   (S → A) ----> (S → B)
         \   ⇗  /
   (h ∘ -) \   / (g ∘ -)
-           V V
+           ∨ ∨
          (S → X).
 ```
 
@@ -260,4 +267,30 @@ module _
     horizontal-pasting-coherence-triangle-maps diagonal H K
   compute-refl-htpy-horizontal-pasting-coherence-triangle-maps diagonal H K x =
     right-whisker-concat right-unit (K x)
+```
+
+We can also consider pasting triangles of the form
+
+```text
+  A --> X      X
+  |    ∧     ∧ |
+  | H /     /  |
+  |  /     / K |
+  ∨ /     /    ∨
+  B      B --> Y .
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (top : A → X) (left : A → B) (right : X → Y) (bottom : B → Y)
+  {diagonal : B → X}
+  where
+
+  horizontal-pasting-up-diagonal-coherence-triangle-maps :
+    coherence-triangle-maps' top diagonal left →
+    coherence-triangle-maps bottom right diagonal →
+    coherence-square-maps top left right bottom
+  horizontal-pasting-up-diagonal-coherence-triangle-maps H K =
+    (K ·r left) ∙h (right ·l H)
 ```

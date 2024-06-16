@@ -7,6 +7,7 @@ module elementary-number-theory.strict-inequality-integer-fractions where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-positive-and-negative-integers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
@@ -26,6 +27,7 @@ open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -226,6 +228,20 @@ module _
       ( is-positive-denominator-fraction-ℤ q)
 ```
 
+### The similarity of integer fractions preserves strict inequality
+
+```agda
+module _
+  (p q p' q' : fraction-ℤ) (H : sim-fraction-ℤ p p') (K : sim-fraction-ℤ q q')
+  where
+
+  preserves-le-sim-fraction-ℤ : le-fraction-ℤ p q → le-fraction-ℤ p' q'
+  preserves-le-sim-fraction-ℤ I =
+    concatenate-sim-le-fraction-ℤ p' p q'
+      ( symmetric-sim-fraction-ℤ p p' H)
+      ( concatenate-le-sim-fraction-ℤ p q q' I K)
+```
+
 ### Fractions with equal denominator compare the same as their numerators
 
 ```agda
@@ -278,9 +294,9 @@ module _
   where
 
   dense-le-fraction-ℤ :
-    ∃ fraction-ℤ (λ r → le-fraction-ℤ x r × le-fraction-ℤ r y)
+    exists fraction-ℤ (λ r → le-fraction-ℤ-Prop x r ∧ le-fraction-ℤ-Prop r y)
   dense-le-fraction-ℤ =
-    intro-∃
+    intro-exists
       ( mediant-fraction-ℤ x y)
       ( le-left-mediant-fraction-ℤ x y H , le-right-mediant-fraction-ℤ x y H)
 ```
@@ -293,11 +309,33 @@ module _
   where
 
   located-le-fraction-ℤ :
-    le-fraction-ℤ y z → (le-fraction-ℤ-Prop y x) ∨ (le-fraction-ℤ-Prop x z)
+    le-fraction-ℤ y z →
+    type-disjunction-Prop (le-fraction-ℤ-Prop y x) (le-fraction-ℤ-Prop x z)
   located-le-fraction-ℤ H =
     unit-trunc-Prop
       ( map-coproduct
         ( id)
         ( λ p → concatenate-leq-le-fraction-ℤ x y z p H)
         ( decide-le-leq-fraction-ℤ y x))
+```
+
+### `x < y` if and only if `0 < y - x`
+
+```agda
+module _
+  (x y : fraction-ℤ)
+  where
+
+  eq-translate-diff-le-zero-fraction-ℤ :
+    le-fraction-ℤ zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x)) ＝
+    le-fraction-ℤ x y
+  eq-translate-diff-le-zero-fraction-ℤ =
+    ap
+      ( is-positive-ℤ)
+      ( ( cross-mul-diff-zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x))) ∙
+        ( ap
+          ( add-ℤ ( (numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x)))
+          ( left-negative-law-mul-ℤ
+            ( numerator-fraction-ℤ x)
+            ( denominator-fraction-ℤ y))))
 ```

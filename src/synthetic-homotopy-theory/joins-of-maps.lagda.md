@@ -33,7 +33,7 @@ Consider two maps `f : A → X` and `g : B → X` with a common codomain. The
    A ×_X B -----> B
      | ⌟          |
   π₁ |            | g
-     V            V
+     ∨            ∨
      A ---------> X.
            f
 ```
@@ -46,7 +46,7 @@ the cogap map of any cartesian square
     A -----> X
     | ⌟      |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         i
 ```
@@ -70,7 +70,7 @@ from the [fiber](foundation-core.fibers-of-maps.md) of `f * g` to the
         \       /
          \     /
           \   /
-           V V
+           ∨ ∨
             X.
 ```
 
@@ -82,7 +82,7 @@ fits in a [pullback diagram](foundation.pullbacks.md)
       A *_X B ------> (X × B) ⊔_{A × B} (A × X)
         | ⌟                   |
   f * g |                     | f □ g
-        V                     V
+        ∨                     ∨
         X ----------------> X × X.
                  Δ
 ```
@@ -96,7 +96,7 @@ that there is a commuting triangle
                         \           /
                    f □ g \         / (f × id) * (id × g)
                           \       /
-                           V     V
+                           ∨     ∨
                             X × Y
 ```
 

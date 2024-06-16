@@ -45,14 +45,14 @@ following [pullback](foundation.pullbacks.md) squares
   A -----> Σ (Q : Prop), A * Q        1 -----> Σ (P : Prop), (P → A)
   | ⌟              |                  | ⌟              |
   |                |                  |                |
-  V                V                  V                V
+  ∨                ∨                  ∨                ∨
   1 -----------> Prop                 1 -----------> Prop
           F                                   F
 
   1 -----> Σ (Q : Prop), A * Q        A -----> Σ (P : Prop), (P → A)
   | ⌟              |                  | ⌟              |
   |                |                  |                |
-  V                V                  V                V
+  ∨                ∨                  ∨                ∨
   1 -----------> Prop                 1 -----------> Prop
           T                                   T
 ```
@@ -71,7 +71,7 @@ the [pushout-product](synthetic-homotopy-theory.pushout-products.md)
     A   1
     |   |
   ! | □ | T
-    V   V
+    ∨   ∨
     1  Prop
 ```
 
@@ -85,7 +85,7 @@ copartial elements induce copartial elements. Indeed, note that
     1     1       Σ (P Q : Prop), P * Q ---------------------> 1
     |     |               |                                    |
   T |  □  | T   =   T □ T |                                    |
-    V     V               V                                    V
+    ∨     ∨               ∨                                    ∨
   Prop   Prop           Prop² ------------------------------> Prop
                                        P Q ↦ P * Q
 ```

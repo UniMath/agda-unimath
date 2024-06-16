@@ -53,7 +53,7 @@ The {{#concept "pullback-hom" Agda=pullback-hom}} or
       B → X -------> A → X
         |              |
   g ∘ - |              | g ∘ -
-        V              V
+        ∨              ∨
       B → Y -------> A → Y.
              - ∘ f
 ```

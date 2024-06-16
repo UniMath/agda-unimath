@@ -264,7 +264,7 @@ module _
     ((y : set-quotient R) → type-Prop (P y)) ≃
     ((x : A) → type-Prop (P (quotient-map R x)))
   equiv-induction-set-quotient =
-    equiv-dependent-universal-property-surj-is-surjective
+    equiv-dependent-universal-property-surjection-is-surjective
       ( quotient-map R)
       ( is-surjective-quotient-map R)
 

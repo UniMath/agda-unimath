@@ -9,6 +9,7 @@ module foundation.universal-property-family-of-fibers-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.families-of-equivalences
 open import foundation.function-extensionality
 open import foundation.subtype-identity-principle
@@ -416,17 +417,16 @@ property.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} {C : B → UU l3}
   where
 
   is-equiv-precomp-Π-fiber-condition :
-    {l3 : Level} {C : B → UU l3} →
-    ((b : B) → is-equiv (λ (c : C b) → const (fiber f b) (C b) c)) →
+    ((b : B) → is-equiv (diagonal-exponential (C b) (fiber f b))) →
     is-equiv (precomp-Π f C)
-  is-equiv-precomp-Π-fiber-condition {l3} {C} H =
+  is-equiv-precomp-Π-fiber-condition H =
     is-equiv-comp
       ( ev-lift-family-of-elements-fiber f (λ b _ → C b))
-      ( map-Π (λ b → const (fiber f b) (C b)))
+      ( map-Π (λ b → diagonal-exponential (C b) (fiber f b)))
       ( is-equiv-map-Π-is-fiberwise-equiv H)
       ( universal-property-family-of-fibers-fiber f C)
 ```

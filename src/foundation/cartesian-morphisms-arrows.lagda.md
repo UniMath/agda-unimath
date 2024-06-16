@@ -15,7 +15,7 @@ open import foundation.coproducts-pullbacks
 open import foundation.dependent-pair-types
 open import foundation.dependent-products-pullbacks
 open import foundation.dependent-sums-pullbacks
-open import foundation.diagonal-maps-of-types
+open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-types
@@ -53,7 +53,7 @@ if the [commuting square](foundation-core.commuting-squares-of-maps.md)
     A -----> X
     |        |
   f |   h    | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -184,7 +184,7 @@ of a cartesian morphism of arrows
     A -----> X
     | ⌟      |
   f |        | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
@@ -196,7 +196,7 @@ is the cartesian morphism of arrows
     A -----> B
     | ⌟      |
   i |        | j
-    V        V
+    ∨        ∨
     X -----> Y.
         g
 ```
@@ -746,11 +746,11 @@ module _
   transpose-fold-hom-arrow :
     hom-arrow
       ( λ x → (f x , map-domain-hom-arrow f g α x))
-      ( diagonal Y)
+      ( diagonal-product Y)
   transpose-fold-hom-arrow =
     hom-arrow-cone
       ( map-product (map-codomain-hom-arrow f g α) g)
-      ( diagonal Y)
+      ( diagonal-product Y)
       ( fold-cone (map-codomain-hom-arrow f g α) g (cone-hom-arrow f g α))
 
   fold-hom-arrow :
@@ -760,14 +760,14 @@ module _
   fold-hom-arrow =
     transpose-hom-arrow
       ( λ a → f a , map-domain-hom-arrow f g α a)
-      ( diagonal Y)
+      ( diagonal-product Y)
       ( transpose-fold-hom-arrow)
 
   is-cartesian-transpose-fold-hom-arrow :
     is-cartesian-hom-arrow f g α →
     is-cartesian-hom-arrow
       ( λ x → (f x , map-domain-hom-arrow f g α x))
-      ( diagonal Y)
+      ( diagonal-product Y)
       ( transpose-fold-hom-arrow)
   is-cartesian-transpose-fold-hom-arrow =
     is-pullback-fold-cone-is-pullback
@@ -778,7 +778,7 @@ module _
   is-cartesian-is-cartesian-transpose-fold-hom-arrow :
     is-cartesian-hom-arrow
       ( λ x → (f x , map-domain-hom-arrow f g α x))
-      ( diagonal Y)
+      ( diagonal-product Y)
       ( transpose-fold-hom-arrow) →
     is-cartesian-hom-arrow f g α
   is-cartesian-is-cartesian-transpose-fold-hom-arrow =
@@ -796,7 +796,7 @@ module _
   is-cartesian-fold-hom-arrow H =
     is-cartesian-transpose-cartesian-hom-arrow
       ( λ x → (f x , map-domain-hom-arrow f g α x))
-      ( diagonal Y)
+      ( diagonal-product Y)
       ( transpose-fold-hom-arrow , is-cartesian-transpose-fold-hom-arrow H)
 
 module _
@@ -809,7 +809,7 @@ module _
   transpose-fold-cartesian-hom-arrow :
     cartesian-hom-arrow
       ( λ x → (f x , map-domain-cartesian-hom-arrow f g α x))
-      ( diagonal Y)
+      ( diagonal-product Y)
   pr1 transpose-fold-cartesian-hom-arrow =
     transpose-fold-hom-arrow f g (hom-arrow-cartesian-hom-arrow f g α)
   pr2 transpose-fold-cartesian-hom-arrow =

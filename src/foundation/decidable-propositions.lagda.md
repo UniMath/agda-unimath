@@ -142,8 +142,8 @@ equiv-universes-Decidable-Prop l l' =
 
 iff-universes-Decidable-Prop :
   (l l' : Level) (P : Decidable-Prop l) →
-  ( prop-Decidable-Prop P ⇔
-    prop-Decidable-Prop (map-equiv (equiv-universes-Decidable-Prop l l') P))
+  ( type-Decidable-Prop P) ↔
+  ( type-Decidable-Prop (map-equiv (equiv-universes-Decidable-Prop l l') P))
 pr1 (iff-universes-Decidable-Prop l l' P) p =
   map-inv-equiv
     ( compute-equiv-bool-Decidable-Prop

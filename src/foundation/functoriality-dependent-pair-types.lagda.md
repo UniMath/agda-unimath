@@ -49,7 +49,7 @@ over `H`, expressed as
    C a -----> D (f a)
       \      /
   g' a \    / tr D (H a)
-        V  V
+        ∨  ∨
       D (f' a)         ,
 ```
 
@@ -301,6 +301,33 @@ module _
   coherence-square-maps-map-Σ-map-base H (a , p) = eq-pair-Σ (H a) refl
 ```
 
+### Commuting triangles of maps on total spaces
+
+#### Functoriality of `Σ` preserves commuting triangles of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {P : A → UU l2}
+  {B : UU l3} {Q : B → UU l4}
+  {C : UU l5} (R : C → UU l6)
+  {left' : A → C} {right' : B → C} {top' : A → B}
+  (left : (a : A) → P a → R (left' a))
+  (right : (b : B) → Q b → R (right' b))
+  (top : (a : A) → P a → Q (top' a))
+  where
+
+  coherence-triangle-maps-Σ :
+    {H' : coherence-triangle-maps left' right' top'} →
+    ( (a : A) (p : P a) →
+      dependent-identification R (H' a) (left _ p) (right _ (top _ p))) →
+    coherence-triangle-maps
+      ( map-Σ R left' left)
+      ( map-Σ R right' right)
+      ( map-Σ Q top' top)
+  coherence-triangle-maps-Σ {H'} H (a , p) = eq-pair-Σ (H' a) (H a p)
+```
+
 #### `map-Σ-map-base` preserves commuting triangles of maps
 
 ```agda
@@ -334,7 +361,22 @@ module _
   compute-ap-map-Σ-map-base-eq-pair-Σ refl refl = refl
 ```
 
-#### Computing the inverse of `equiv-tot`
+### The action of `ind-Σ` on identifications in fibers of dependent pair types is given by the action of the fibers of the function with the first argument fixed
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : A → UU l2} {C : UU l3}
+  (f : (a : A) (b : B a) → C)
+  where
+
+  compute-ap-ind-Σ-eq-pair-eq-fiber :
+    {a : A} {b b' : B a} (p : b ＝ b') →
+    ap (ind-Σ f) (eq-pair-eq-fiber p) ＝ ap (f a) p
+  compute-ap-ind-Σ-eq-pair-eq-fiber refl = refl
+```
+
+### Computing the inverse of `equiv-tot`
 
 ```agda
 module _

@@ -53,11 +53,11 @@ data
     is-large-higher-directed-graph β γ V 0
 
   cons-base-is-large-higher-directed-graph :
-    Large-Relation α β V → is-large-higher-directed-graph β γ V 1
+    Large-Relation β V → is-large-higher-directed-graph β γ V 1
 
   cons-ind-is-large-higher-directed-graph :
     (n : ℕ) →
-    (E : Large-Relation α β V) →
+    (E : Large-Relation β V) →
     ( {l1 l2 : Level} (u : V l1) (v : V l2) →
       is-higher-directed-graph-succ (γ l1 l2) n (E u v)) →
     is-large-higher-directed-graph β γ V (succ-ℕ (succ-ℕ n))
@@ -68,7 +68,7 @@ edge-is-large-higher-directed-graph :
   (n : ℕ)
   (V : (l : Level) → UU (α l)) →
   is-large-higher-directed-graph β γ V (succ-ℕ n) →
-  Large-Relation α β V
+  Large-Relation β V
 edge-is-large-higher-directed-graph
   β γ .0 V (cons-base-is-large-higher-directed-graph E) =
   E
@@ -96,7 +96,7 @@ open Large-Higher-Directed-Graph public
 edge-Large-Higher-Directed-Graph :
   {α : Level → Level} {β γ : Level → Level → Level} {n : ℕ}
   (G : Large-Higher-Directed-Graph α β γ (succ-ℕ n)) →
-  Large-Relation α β (vertex-Large-Higher-Directed-Graph G)
+  Large-Relation β (vertex-Large-Higher-Directed-Graph G)
 edge-Large-Higher-Directed-Graph {α} {β} {γ} {n} G =
   edge-is-large-higher-directed-graph β γ n
     ( vertex-Large-Higher-Directed-Graph G)

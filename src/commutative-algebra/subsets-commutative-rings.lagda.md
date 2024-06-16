@@ -33,7 +33,7 @@ A **subset** of a commutative ring is a subtype of its underlying type.
 
 ```agda
 subset-Commutative-Ring :
-  (l : Level) {l1 : Level} (A : Commutative-Ring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (A : Commutative-Ring l1) → UU (lsuc l ⊔ l1)
 subset-Commutative-Ring l A = subtype l (type-Commutative-Ring A)
 
 is-set-subset-Commutative-Ring :

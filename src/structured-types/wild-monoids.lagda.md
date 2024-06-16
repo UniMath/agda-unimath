@@ -43,11 +43,11 @@ following diagram
      (A × A) × A ----> A × (A × A)
              |           |
   (_*_ , id) |           | (id, _*_)
-             v           v
+             ∨           ∨
            A × A       A × A
                \       /
           (_*_) \     / (_*_)
-                 v   v
+                 ∨   ∨
                    A
 ```
 

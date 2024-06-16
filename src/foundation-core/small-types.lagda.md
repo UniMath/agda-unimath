@@ -307,3 +307,7 @@ is-small-logical-equivalence :
 is-small-logical-equivalence H K =
   is-small-product (is-small-function-type H K) (is-small-function-type K H)
 ```
+
+## See also
+
+- [Small maps](foundation.small-maps.md)
