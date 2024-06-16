@@ -83,7 +83,7 @@ record
           ( hom-map-Noncoherent-Wild-Higher-Precategory F g)
           ( hom-map-Noncoherent-Wild-Higher-Precategory F f))
 
-    is-functor-map-hom-Noncoherent-Wild-Higher-Precategory :
+    is-colax-functor-map-hom-Noncoherent-Wild-Higher-Precategory :
       (x y : obj-Noncoherent-Wild-Higher-Precategory 𝒜) →
       is-colax-functor-Noncoherent-Wild-Higher-Precategory
         ( hom-noncoherent-wild-Higher-precategory-map-Noncoherent-Wild-Higher-Precategory
@@ -117,7 +117,7 @@ module _
     map-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ
   map-colax-functor-Noncoherent-Wild-Higher-Precategory = pr1 F
 
-  is-functor-colax-functor-Noncoherent-Wild-Higher-Precategory :
+  is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory :
     is-colax-functor-Noncoherent-Wild-Higher-Precategory
       ( map-colax-functor-Noncoherent-Wild-Higher-Precategory)
   is-functor-colax-functor-Noncoherent-Wild-Higher-Precategory = pr2 F
@@ -226,7 +226,7 @@ module _
 ### The identity colax functor on a noncoherent wild higher precategory
 
 ```agda
-is-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory :
+is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory :
   {l1 l2 : Level} (𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2) →
   is-colax-functor-Noncoherent-Wild-Higher-Precategory
     ( id-map-Noncoherent-Wild-Higher-Precategory 𝒜)
@@ -272,7 +272,7 @@ module _
       ( map-colax-functor-Noncoherent-Wild-Higher-Precategory G)
       ( map-colax-functor-Noncoherent-Wild-Higher-Precategory F)
 
-is-functor-comp-colax-functor-Noncoherent-Wild-Higher-Precategory :
+is-colax-functor-comp-colax-functor-Noncoherent-Wild-Higher-Precategory :
   {l1 l2 l3 l4 l5 l6 : Level}
   {𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2}
   {ℬ : Noncoherent-Wild-Higher-Precategory l3 l4}

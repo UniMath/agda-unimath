@@ -55,7 +55,7 @@ in `ℬ`.
 
 ## Definitions
 
-### The predicate of being a functor between noncoherent wild higher precategories
+### The predicate of being a colax functor between noncoherent wild higher precategories
 
 ```agda
 record
@@ -91,7 +91,7 @@ record
           ( hom-map-Noncoherent-Large-Wild-Higher-Precategory F g)
           ( hom-map-Noncoherent-Large-Wild-Higher-Precategory F f))
 
-    is-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory :
+    is-colax-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory :
       {l1 l2 : Level}
       (x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1)
       (y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2) →
@@ -120,7 +120,7 @@ record
     map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
       map-Noncoherent-Large-Wild-Higher-Precategory δ 𝒜 ℬ
 
-    is-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
+    is-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
       is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
         ( map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
 ```
@@ -252,7 +252,7 @@ module _
   (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α β)
   where
 
-  is-functor-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
+  is-colax-functor-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
       ( id-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜)
   is-functor-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
@@ -301,7 +301,7 @@ module _
       ( map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory G)
       ( map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory F)
 
-  is-functor-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
+  is-colax-functor-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
       ( map-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
   is-functor-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =

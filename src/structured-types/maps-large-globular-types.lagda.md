@@ -23,7 +23,7 @@ open import structured-types.maps-globular-types
 ## Idea
 
 A
-{{#concept "map" Disambiguation="between large globular types" Agda=map-Large-Globular-Type}}
+{{#concept "map" Disambiguation="large globular types" Agda=map-Large-Globular-Type}}
 `f` between [large globular types](structured-types.large-globular-types.md) `A`
 and `B` is a map `F₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`,
 a map of $(n+1)$-cells
