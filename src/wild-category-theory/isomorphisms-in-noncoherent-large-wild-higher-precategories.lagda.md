@@ -76,7 +76,7 @@ record
         ( id-hom-Noncoherent-Large-Wild-Higher-Precategory 𝒞)
     is-iso-is-split-epi-is-iso-Noncoherent-Large-Wild-Higher-Precategory :
       is-iso-Noncoherent-Wild-Higher-Precategory
-        ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+        ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
           ( 𝒞)
           ( y)
           ( y))
@@ -92,7 +92,7 @@ record
         ( id-hom-Noncoherent-Large-Wild-Higher-Precategory 𝒞)
     is-iso-is-split-mono-is-iso-Noncoherent-Large-Wild-Higher-Precategory :
       is-iso-Noncoherent-Wild-Higher-Precategory
-        ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+        ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
           ( 𝒞)
           ( x)
           ( x))
@@ -153,7 +153,7 @@ module _
 
   is-iso-is-split-epi-iso-Noncoherent-Large-Wild-Higher-Precategory :
     is-iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
         ( 𝒞)
         ( y)
         ( y))
@@ -164,7 +164,7 @@ module _
 
   iso-is-split-epi-iso-Noncoherent-Large-Wild-Higher-Precategory :
     iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
         ( 𝒞)
         ( y)
         ( y))
@@ -195,7 +195,7 @@ module _
 
   is-iso-is-split-mono-iso-Noncoherent-Large-Wild-Higher-Precategory :
     is-iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
         ( 𝒞)
         ( x)
         ( x))
@@ -206,7 +206,7 @@ module _
 
   iso-is-split-mono-iso-Noncoherent-Large-Wild-Higher-Precategory :
     iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
         ( 𝒞)
         ( x)
         ( x))

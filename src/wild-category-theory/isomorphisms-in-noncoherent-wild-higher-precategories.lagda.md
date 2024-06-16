@@ -76,7 +76,7 @@ record
         ( id-hom-Noncoherent-Wild-Higher-Precategory 𝒞)
     is-iso-is-split-epi-is-iso-Noncoherent-Wild-Higher-Precategory :
       is-iso-Noncoherent-Wild-Higher-Precategory
-        ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Wild-Higher-Precategory
+        ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
           ( 𝒞)
           ( y)
           ( y))
@@ -92,7 +92,7 @@ record
         ( id-hom-Noncoherent-Wild-Higher-Precategory 𝒞)
     is-iso-is-split-mono-is-iso-Noncoherent-Wild-Higher-Precategory :
       is-iso-Noncoherent-Wild-Higher-Precategory
-        ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Wild-Higher-Precategory
+        ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
           ( 𝒞)
           ( x)
           ( x))
@@ -149,7 +149,7 @@ module _
 
   is-iso-is-split-epi-iso-Noncoherent-Wild-Higher-Precategory :
     is-iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
         ( 𝒞)
         ( y)
         ( y))
@@ -160,7 +160,7 @@ module _
 
   iso-is-split-epi-iso-Noncoherent-Wild-Higher-Precategory :
     iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
         ( 𝒞)
         ( y)
         ( y))
@@ -191,7 +191,7 @@ module _
 
   is-iso-is-split-mono-iso-Noncoherent-Wild-Higher-Precategory :
     is-iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
         ( 𝒞)
         ( x)
         ( x))
@@ -202,7 +202,7 @@ module _
 
   iso-is-split-mono-iso-Noncoherent-Wild-Higher-Precategory :
     iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
         ( 𝒞)
         ( x)
         ( x))

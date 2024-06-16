@@ -107,20 +107,20 @@ module _
     1-cell-map-Globular-Type
       ( hom-globular-type-map-Noncoherent-Large-Wild-Higher-Precategory F)
 
-  hom-noncoherent-wild-Higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory :
+  hom-noncoherent-wild-higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
     (x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1)
     (y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2) →
     map-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
         ( 𝒜)
         ( x)
         ( y))
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
         ( ℬ)
         ( obj-map-Noncoherent-Large-Wild-Higher-Precategory F x)
         ( obj-map-Noncoherent-Large-Wild-Higher-Precategory F y))
-  hom-noncoherent-wild-Higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory
+  hom-noncoherent-wild-higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory
     x y =
     λ where
     .obj-map-Noncoherent-Wild-Higher-Precategory →

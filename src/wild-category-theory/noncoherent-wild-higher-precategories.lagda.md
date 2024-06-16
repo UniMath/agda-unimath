@@ -161,10 +161,10 @@ We record some common projections for noncoherent wild higher precategories.
       ( x)
       ( y)
 
-  hom-noncoherent-wild-Higher-precategory-Noncoherent-Wild-Higher-Precategory :
+  hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory :
     (x y : obj-Noncoherent-Wild-Higher-Precategory) →
     Noncoherent-Wild-Higher-Precategory l2 l2
-  hom-noncoherent-wild-Higher-precategory-Noncoherent-Wild-Higher-Precategory
+  hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
     x y =
     make-Noncoherent-Wild-Higher-Precategory
       ( hom-Noncoherent-Wild-Higher-Precategory x y)

@@ -145,12 +145,12 @@ precategories.
       ( x)
       ( y)
 
-  hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory :
+  hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
     (x : obj-Noncoherent-Large-Wild-Higher-Precategory l1)
     (y : obj-Noncoherent-Large-Wild-Higher-Precategory l2) →
     Noncoherent-Wild-Higher-Precategory (β l1 l2) (β l1 l2)
-  hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+  hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
     x y =
     make-Noncoherent-Wild-Higher-Precategory
       ( hom-Noncoherent-Large-Wild-Higher-Precategory x y)

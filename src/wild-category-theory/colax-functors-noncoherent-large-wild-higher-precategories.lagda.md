@@ -96,7 +96,7 @@ record
       (x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1)
       (y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2) →
       is-colax-functor-Noncoherent-Wild-Higher-Precategory
-        ( hom-noncoherent-wild-Higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory
+        ( hom-noncoherent-wild-higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory
           ( F)
           ( x)
           ( y))
@@ -201,39 +201,39 @@ record
     hom-globular-type-map-Noncoherent-Large-Wild-Higher-Precategory
       ( map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
 
-  map-hom-noncoherent-wild-Higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
+  map-hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
     (x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1)
     (y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2) →
     map-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
         ( 𝒜)
         ( x)
         ( y))
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
         ( ℬ)
         ( obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory x)
         ( obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory y))
-  map-hom-noncoherent-wild-Higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
-    hom-noncoherent-wild-Higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory
+  map-hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
+    hom-noncoherent-wild-higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory
       ( map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
 
-  hom-noncoherent-wild-Higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
+  hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
     (x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1)
     (y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2) →
     colax-functor-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
         ( 𝒜)
         ( x)
         ( y))
-      ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
         ( ℬ)
         ( obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory x)
         ( obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory y))
-  hom-noncoherent-wild-Higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
+  hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
     x y =
-    ( map-hom-noncoherent-wild-Higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
+    ( map-hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
         ( x)
         ( y) ,
       is-colax-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory
@@ -265,7 +265,7 @@ module _
         id-2-hom-Noncoherent-Large-Wild-Higher-Precategory 𝒜
       .is-colax-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory x y →
         is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory
-          ( hom-noncoherent-wild-Higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+          ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
             ( 𝒜)
             ( x)
             ( y))
@@ -330,11 +330,11 @@ module _
             ( f)))
     .is-colax-functor-map-hom-Noncoherent-Large-Wild-Higher-Precategory x y →
       is-colax-functor-comp-colax-functor-Noncoherent-Wild-Higher-Precategory
-        ( hom-noncoherent-wild-Higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
+        ( hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
           ( G)
           ( obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory F x)
           ( obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory F y))
-        ( hom-noncoherent-wild-Higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
+        ( hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
           ( F)
           ( x)
           ( y))
