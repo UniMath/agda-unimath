@@ -75,6 +75,20 @@ module _
         ( r)
         ( x)
         ( y))
+
+  comp-3-cell-is-transitive-large-globular-structure :
+    {l1 l2 : Level} {x : A l1} {y : A l2}
+    {f g : 1-cell-large-globular-structure G x y}
+    {H K L : 2-cell-large-globular-structure G f g} →
+    3-cell-large-globular-structure G K L →
+    3-cell-large-globular-structure G H K →
+    3-cell-large-globular-structure G H L
+  comp-3-cell-is-transitive-large-globular-structure {x = x} {y} =
+    comp-2-cell-is-transitive-globular-structure
+      ( is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
+        ( r)
+        ( x)
+        ( y))
 ```
 
 ### The type of transitive globular structures on a large type
