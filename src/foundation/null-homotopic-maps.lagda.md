@@ -16,11 +16,13 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.negation
 open import foundation.propositional-truncations
+open import foundation.constant-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
@@ -204,6 +206,21 @@ module _
   is-prop-null-htpy-is-inhabited-domain-is-set-codomain =
     is-prop-all-elements-equal
       ( all-elements-equal-null-htpy-is-inhabited-domain-is-set-codomain)
+```
+
+### Null-homotopic maps from `A` to `B` are in correspondence with elements of `B`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  compute-null-homotopic-map : Σ (A → B) (null-htpy) ≃ B
+  compute-null-homotopic-map =
+    equivalence-reasoning
+      Σ (A → B) (null-htpy)
+      ≃ Σ B (λ b → Σ (A → B) (λ f → f ~ const A b)) by equiv-left-swap-Σ
+      ≃ B by right-unit-law-Σ-is-contr (λ b → is-torsorial-htpy' (const A b))
 ```
 
 ## See also
