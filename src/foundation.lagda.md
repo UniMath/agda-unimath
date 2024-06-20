@@ -278,6 +278,7 @@ open import foundation.multivariable-sections public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
+open import foundation.null-homotopic-maps public
 open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public
 open import foundation.operations-spans-families-of-types public

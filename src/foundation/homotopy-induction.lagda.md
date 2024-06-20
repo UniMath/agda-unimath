@@ -88,7 +88,7 @@ module _
     is-torsorial-htpy : is-torsorial (λ g → f ~ g)
     is-torsorial-htpy =
       is-contr-equiv'
-        ( Σ ((x : A) → B x) (Id f))
+        ( Σ ((x : A) → B x) (λ g → f ＝ g))
         ( equiv-tot (λ g → equiv-funext))
         ( is-torsorial-Id f)
 
@@ -109,8 +109,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
     based-function-extensionality f →
     induction-principle-homotopies f
-  induction-principle-homotopies-based-function-extensionality
-    {A = A} {B} f funext-f =
+  induction-principle-homotopies-based-function-extensionality f funext-f =
     is-identity-system-is-torsorial f
       ( refl-htpy)
       ( is-torsorial-htpy f)
@@ -170,6 +169,10 @@ module _
 
   is-contr-map-ev-refl-htpy : is-contr-map (ev-refl-htpy C)
   is-contr-map-ev-refl-htpy = is-contr-map-is-equiv is-equiv-ev-refl-htpy
+
+  equiv-ev-refl-htpy :
+    ((g : (x : A) → B x) (H : f ~ g) → C g H) ≃ C f refl-htpy
+  equiv-ev-refl-htpy = (ev-refl-htpy C , is-equiv-ev-refl-htpy)
 ```
 
 ## See also
