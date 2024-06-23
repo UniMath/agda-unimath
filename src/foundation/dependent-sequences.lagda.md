@@ -35,6 +35,8 @@ dependent-sequence B = (n : ℕ) → B n
 ```agda
 map-dependent-sequence :
   {l1 l2 : Level} {A : ℕ → UU l1} {B : ℕ → UU l2} →
-  ((n : ℕ) → A n → B n) → dependent-sequence A → dependent-sequence B
+  dependent-sequence (λ n → A n → B n) →
+  dependent-sequence A →
+  dependent-sequence B
 map-dependent-sequence f a = map-Π f a
 ```
