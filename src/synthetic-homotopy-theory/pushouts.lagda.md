@@ -151,6 +151,12 @@ module _
       ( inl-standard-pushout)
   glue-standard-pushout =
     glue-pushout (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮)
+
+  cocone-pushout-span-diagram :
+    cocone-span-diagram 𝒮 standard-pushout
+  pr1 cocone-pushout-span-diagram = inl-standard-pushout
+  pr1 (pr2 cocone-pushout-span-diagram) = inr-standard-pushout
+  pr2 (pr2 cocone-pushout-span-diagram) = glue-standard-pushout
 ```
 
 ### The dependent cogap map
