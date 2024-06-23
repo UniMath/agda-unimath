@@ -831,7 +831,7 @@ module _
 
 ### Lifting cartesian morphisms along lifts of the codomain
 
-Suppose given a cospan of morphisms of arrows
+Suppose given a cospan diagram of arrows
 
 ```text
     A ------> C <------ B
