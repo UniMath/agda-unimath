@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 -- open import foundation.contractible-types
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.cartesian-product-types
+open import foundation.commuting-squares-of-homotopies
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -539,7 +540,10 @@ module _
                   ( tr-concat _ _)))))) ·r
         ( map-family-descent-data-pushout R
           ( s , map-cocone-standard-sequential-colimit n p))) ∙h
-      ( [ii]) ∙h
+      ( nat-lemma
+          ( concat-s-inf 𝒮 a₀ s)
+          ( ev-pair (map-family-descent-data-pushout R) s)
+          ( [i] p)) ∙h
       ( ( map-family-descent-data-pushout R
           ( s ,
             map-cocone-standard-sequential-colimit
@@ -550,131 +554,65 @@ module _
         ( ( tr-concat _ _) ∙h
           ( λ q → substitution-law-tr _ _ _)))
       where
-      [0] :
-        ( ( ( concat-s-inf 𝒮 a₀ s) ·l
-            ( coherence-cocone-standard-sequential-colimit n)) ∙h
-          ( ( CB s (succ-ℕ n)) ·r
-            ( inl-Path-to-a 𝒮 a₀ (left-map-span-diagram 𝒮 s) n))) ~
-        ( ( CB s n) ∙h
-          ( ( ( coherence-cocone-standard-sequential-colimit (succ-ℕ n)) ·r
-              ( concat-s 𝒮 a₀ s n)) ∙h
-            ( ( map-cocone-standard-sequential-colimit
-                { A =
-                  right-sequential-diagram-zigzag-id-pushout 𝒮 a₀
-                    ( right-map-span-diagram 𝒮 s)}
-                ( succ-ℕ (succ-ℕ n))) ·l
-              pr2
-               (hom-diagram-zigzag-sequential-diagram
-                (zigzag-sequential-diagram-zigzag-id-pushout 𝒮 a₀ s))
-               n)))
-      [0] =
-        coherence-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
-          ( up-standard-sequential-colimit)
-          ( shift-once-cocone-sequential-diagram
-            ( cocone-standard-sequential-colimit
-              ( right-sequential-diagram-zigzag-id-pushout 𝒮 a₀ (right-map-span-diagram 𝒮 s))))
-          ( hom-diagram-zigzag-sequential-diagram
-            ( zigzag-sequential-diagram-zigzag-id-pushout 𝒮 a₀ s))
-          ( n)
-      [0]' :
-        (
-            (concat-s-inf 𝒮 a₀ s ·l
-             coherence-cocone-standard-sequential-colimit n
-             ∙h
-             CB s (succ-ℕ n) ·r
-             inl-Path-to-a 𝒮 a₀ (left-map-span-diagram 𝒮 s) n) ∙h
-             (map-cocone-standard-sequential-colimit {A = right-sequential-diagram-zigzag-id-pushout 𝒮 a₀ (right-map-span-diagram 𝒮 s) } (succ-ℕ (succ-ℕ n)) ·l
-              (
-                pr1 (zigzag-sequential-diagram-zigzag-id-pushout 𝒮 a₀ s)
-                  (succ-ℕ n)
-                  ·l
-                  (pr1
-                  (pr2 (pr2 (zigzag-sequential-diagram-zigzag-id-pushout 𝒮 a₀ s)))
-                  n)
-                )
-            ))
-         ~
-          (CB s n ∙h
-             (
-                coherence-cocone-standard-sequential-colimit (succ-ℕ n) ·r
-                 concat-s 𝒮 a₀ s n
-                 ∙h
-                (map-cocone-standard-sequential-colimit {A = right-sequential-diagram-zigzag-id-pushout 𝒮 a₀ (right-map-span-diagram 𝒮 s) } (succ-ℕ (succ-ℕ n)) ·l
-                     (λ x₃ →
-                        glue-pushout
-                        _
-                        _
-                        (s ,
-                         refl ,
-                         pr1 (zigzag-sequential-diagram-zigzag-id-pushout 𝒮 a₀ s) n x₃))))
-                     )
-
-      [0]' =
-        ( ap-concat-htpy _
-          ( ?)) ∙h
-        ( map-inv-equiv
-          ( equiv-right-transpose-htpy-concat _ _ _)
-          ( ( [0]) ∙h
-            ( ap-concat-htpy
-              ( CB s n)
-              ( ( ap-concat-htpy
-                  ( coherence-cocone-standard-sequential-colimit (succ-ℕ n) ·r concat-s 𝒮 a₀ s n)
-                  ( ( distributive-left-whisker-comp-concat
-                      ( map-cocone-standard-sequential-colimit
-                        {A = right-sequential-diagram-zigzag-id-pushout 𝒮 a₀ (right-map-span-diagram 𝒮 s)}
-                        ( succ-ℕ (succ-ℕ n)))
-                      ( _)
-                      ( _)) ∙h
-                    ( ap-concat-htpy _
-                      ( ( left-whisker-comp² _ (left-whisker-inv-htpy _ _)) ∙h
-                        ( left-whisker-inv-htpy _ _))))) ∙h
-                ( inv-htpy-assoc-htpy _ _ _))) ∙h
-            ( inv-htpy-assoc-htpy _ _ _)))
       [i] :
         ( ( concat-s-inf 𝒮 a₀ s) ·l
-          ( coherence-cocone-standard-sequential-colimit n ∙h
-            map-cocone-standard-sequential-colimit (succ-ℕ n) ·l (λ p → glue-pushout _ _ (s , refl , p)))) ~
+          ( ( coherence-cocone-standard-sequential-colimit n) ∙h
+            ( ( map-cocone-standard-sequential-colimit
+              { A =
+                left-sequential-diagram-zigzag-id-pushout 𝒮 a₀
+                  ( left-map-span-diagram 𝒮 s)}
+              ( succ-ℕ n)) ·l
+            ( λ p → glue-pushout _ _ (s , refl , p))))) ~
         ( ( CB s n) ∙h
           ( ( coherence-cocone-standard-sequential-colimit (succ-ℕ n)) ·r
-            ( concat-s 𝒮 a₀ s n)) ∙h
-          ( ( map-cocone-standard-sequential-colimit (succ-ℕ (succ-ℕ n))) ·l
-            ( λ p → glue-pushout _ _ (s , refl , concat-s 𝒮 a₀ s n p))) ∙h
-          ( inv-htpy (CB s (succ-ℕ n)) ·r (concat-inv-s 𝒮 a₀ s (succ-ℕ n) ∘ concat-s 𝒮 a₀ s n)))
+              ( concat-s 𝒮 a₀ s n)) ∙h
+          ( ( map-cocone-standard-sequential-colimit
+              { A =
+                right-sequential-diagram-zigzag-id-pushout 𝒮 a₀
+                  ( right-map-span-diagram 𝒮 s)}
+              ( succ-ℕ (succ-ℕ n))) ·l
+            ( λ p → glue-pushout _ _ ( s , refl , concat-s 𝒮 a₀ s n p))) ∙h
+          ( ( inv-htpy (CB s (succ-ℕ n))) ·r
+            ( concat-inv-s 𝒮 a₀ s (succ-ℕ n) ∘ concat-s 𝒮 a₀ s n)))
       [i] =
-        distributive-left-whisker-comp-concat _ _ _ ∙h
-        {!!}
-      -- square with condensed top and bottom
-      [ii] :
-        coherence-square-maps
-          ( tr
-            ( ev-pair
-              ( left-family-descent-data-pushout R)
-              ( left-map-span-diagram 𝒮 s))
-            ( ( coherence-cocone-standard-sequential-colimit n p) ∙
-              ( ap
-                ( map-cocone-standard-sequential-colimit (succ-ℕ n))
-                ( glue-pushout _ _ (s , refl , p)))))
-          ( map-family-descent-data-pushout R
-            ( s , map-cocone-standard-sequential-colimit n p))
-          ( map-family-descent-data-pushout R
-            ( s ,
-              map-cocone-standard-sequential-colimit (succ-ℕ n)
-                ( concat-inv-s 𝒮 a₀ s (succ-ℕ n) ( concat-s 𝒮 a₀ s n p))))
-          ( tr
-            ( ev-pair
-              ( right-family-descent-data-pushout R)
-              ( right-map-span-diagram 𝒮 s))
-            ( ( CB s n p) ∙
-              ( coherence-cocone-standard-sequential-colimit (succ-ℕ n) (concat-s 𝒮 a₀ s n p)) ∙
-              ( ap
-                ( map-cocone-standard-sequential-colimit (succ-ℕ (succ-ℕ n)))
-                ( glue-pushout _ _ (s , refl , concat-s 𝒮 a₀ s n p))) ∙
-              ( inv (CB s (succ-ℕ n) (concat-inv-s 𝒮 a₀ s (succ-ℕ n) (concat-s 𝒮 a₀ s n p))))))
-      [ii] =
-        nat-lemma
-          ( concat-s-inf 𝒮 a₀ s)
-          ( ev-pair (map-family-descent-data-pushout R) s)
-          ( [i] p)
+        ( distributive-left-whisker-comp-concat _ _ _) ∙h
+        ( right-transpose-htpy-concat _ _ _
+          ( ( left-whisker-concat-coherence-square-homotopies _ _ _ _ _
+              ( λ p →
+                inv
+                  ( nat-coherence-square-maps _ _ _ _
+                    ( CB s (succ-ℕ n))
+                    ( glue-pushout _ _ (s , refl , p))))) ∙h
+            ( map-inv-equiv
+              ( equiv-right-transpose-htpy-concat _ _ _)
+              ( ( coherence-htpy-cocone-map-sequential-colimit-hom-sequential-diagram
+                  ( up-standard-sequential-colimit)
+                  ( shift-once-cocone-sequential-diagram
+                    ( cocone-standard-sequential-colimit
+                      ( right-sequential-diagram-zigzag-id-pushout 𝒮 a₀
+                        ( right-map-span-diagram 𝒮 s))))
+                  ( hom-diagram-zigzag-sequential-diagram
+                    ( zigzag-sequential-diagram-zigzag-id-pushout 𝒮 a₀ s))
+                  ( n)) ∙h
+                ( ap-concat-htpy
+                  ( CB s n)
+                  ( ( ap-concat-htpy _
+                      ( ( distributive-left-whisker-comp-concat
+                          ( map-cocone-standard-sequential-colimit
+                            { A =
+                              right-sequential-diagram-zigzag-id-pushout 𝒮 a₀
+                                ( right-map-span-diagram 𝒮 s)}
+                            ( succ-ℕ (succ-ℕ n)))
+                          ( _)
+                          ( _)) ∙h
+                        ( ap-concat-htpy _
+                          ( ( left-whisker-comp² _
+                              ( left-whisker-inv-htpy _ _)) ∙h
+                            ( left-whisker-inv-htpy _ _))))) ∙h
+                    ( inv-htpy-assoc-htpy _ _ _))) ∙h
+                ( inv-htpy-assoc-htpy _ _ _))))) ∙h
+        ( ap-concat-htpy' _
+          ( inv-htpy-assoc-htpy _ _ _))
 
 
     -- TODO: Explore omitting vertical-map-dependent-cocone
