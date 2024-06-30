@@ -104,6 +104,94 @@ module _
   vertical-refl-coherence-square-identifications = inv right-unit
 ```
 
+### Squares with `refl` on the top and bottom
+
+Given an identification `α : p ＝ q`, we can obtain a coherence square with
+`refl` on the top and bottom, like the diagram below.
+
+```text
+       refl
+    a -----> a
+    |        |
+  p |        | q
+    ∨        ∨
+    b -----> b
+       refl
+```
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b : A} (p q : a ＝ b)
+  where
+
+  coherence-square-identifications-horizontal-refl :
+    p ＝ q →
+    coherence-square-identifications
+      ( refl)
+      ( p)
+      ( q)
+      ( refl)
+  coherence-square-identifications-horizontal-refl α =
+    right-unit ∙ α
+```
+
+Conversely, given a coherence square as above, we can obtain an equality
+`p ＝ q`.
+
+```agda
+  inv-coherence-square-identifications-horizontal-refl :
+    coherence-square-identifications
+      ( refl)
+      ( p)
+      ( q)
+      ( refl) →
+    p ＝ q
+  inv-coherence-square-identifications-horizontal-refl α =
+    inv right-unit ∙ α
+```
+
+### Squares with `refl` on the left and right
+
+Given an identification `α : p ＝ q`, we can obtain a coherence square with
+`refl` on the left and right, like the diagram below.
+
+```text
+           q
+       a -----> b
+       |        |
+  refl |        | refl
+       ∨        ∨
+       a -----> b
+           p
+```
+
+```agda
+  coherence-square-identifications-vertical-refl :
+    p ＝ q →
+    coherence-square-identifications
+      ( q)
+      ( refl)
+      ( refl)
+      ( p)
+  coherence-square-identifications-vertical-refl α =
+    α ∙ inv right-unit
+```
+
+Conversely, given a coherence square as above, we can obtain an equality
+` p ＝ q`.
+
+```agda
+  inv-coherence-square-identifications-vertical-refl :
+    coherence-square-identifications
+      ( q)
+      ( refl)
+      ( refl)
+      ( p) →
+    p ＝ q
+  inv-coherence-square-identifications-vertical-refl α =
+    α ∙ right-unit
+```
+
 ## Operations
 
 ### Inverting squares of identifications horizontally

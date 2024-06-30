@@ -108,6 +108,100 @@ module _
     vertical-refl-coherence-square-identifications (H x)
 ```
 
+### Squares with refl on the top and bottom
+
+Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy` on
+the top and bottom.
+
+```text
+       refl-htpy
+    f ----------> f
+    |             |
+  H |             | H'
+    ∨             ∨
+    g ----------> g
+       refl-htpy
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  (H H' : f ~ g)
+  where
+
+  coherence-square-homotopies-horizontal-refl :
+    H ~ H' →
+    coherence-square-homotopies
+      ( refl-htpy)
+      ( H)
+      ( H')
+      ( refl-htpy)
+  coherence-square-homotopies-horizontal-refl K =
+    right-unit-htpy ∙h K
+```
+
+Conversely, given a coherence square as above, we can obtain a homotopy
+`H ~ H'`.
+
+```agda
+  inv-coherence-square-homotopies-horizontal-refl :
+    coherence-square-homotopies
+      ( refl-htpy)
+      ( H)
+      ( H')
+      ( refl-htpy) →
+    H ~ H'
+  inv-coherence-square-homotopies-horizontal-refl K =
+    inv-htpy-right-unit-htpy ∙h K
+```
+
+### Squares with `refl-htpy` on the left and right
+
+Given a homotopy `H ~ H'`, we can obtain a coherence square with `refl-htpy` on
+the left and right.
+
+```text
+                 H'
+            f ------> g
+            |         |
+  refl-htpy |         | refl-htpy
+            ∨         ∨
+            f ------> g
+                 H
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  (H H' : f ~ g)
+  where
+
+  coherence-square-homotopies-vertical-refl :
+    H ~ H' →
+    coherence-square-homotopies
+      ( H')
+      ( refl-htpy)
+      ( refl-htpy)
+      ( H)
+  coherence-square-homotopies-vertical-refl K =
+    K ∙h inv-htpy right-unit-htpy
+```
+
+Conversely, given a coherence square as above, we can obtain a homotopy
+`H ~ H'`.
+
+```agda
+  inv-coherence-square-homotopies-vertical-refl :
+    coherence-square-homotopies
+      ( H')
+      ( refl-htpy)
+      ( refl-htpy)
+      ( H) →
+    H ~ H'
+  inv-coherence-square-homotopies-vertical-refl K =
+    K ∙h right-unit-htpy
+```
+
 ## Operations
 
 ### Inverting squares of homotopies horizontally

@@ -215,6 +215,20 @@ module _
     ( inv right-unit)
 ```
 
+### Vertical inverses distribute over horizontal concatenation
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z}
+  where
+
+  distributive-inv-horizontal-concat-Id² :
+    (α : p ＝ q) (β : u ＝ v) →
+    inv (horizontal-concat-Id² α β) ＝ horizontal-concat-Id² (inv α) (inv β)
+  distributive-inv-horizontal-concat-Id² refl refl =
+    refl
+```
+
 ### Definition of horizontal inverse
 
 2-paths have an induced inverse operation from the operation on boundary 1-paths
