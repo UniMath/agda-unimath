@@ -259,17 +259,17 @@ module _
     {p p' : x ＝ y} (α : p ＝ p') →
     coherence-square-homotopies
       ( ( tr²-concat (right-whisker-concat α refl) right-unit) ∙h
-      ( left-whisker-concat-htpy
-        ( tr² B (right-whisker-concat α refl))
-        ( tr²-right-unit p')))
+        ( left-whisker-concat-htpy
+          ( tr² B (right-whisker-concat α refl))
+          ( tr²-right-unit p')))
       ( tr³ B (inv (right-unit-law-right-whisker-concat α)))
       ( tr²-right-whisker α refl)
       ( ( tr²-concat right-unit α) ∙h
-      ( right-whisker-concat-htpy (tr²-right-unit p) (tr² B α)) ∙h
-      ( inv-htpy
-        ( left-whisker-concat-htpy
-          ( tr-concat p refl)
-          ( left-unit-law-left-whisker-comp (tr² B α)))))
+        ( right-whisker-concat-htpy (tr²-right-unit p) (tr² B α)) ∙h
+        ( inv-htpy
+          ( left-whisker-concat-htpy
+            ( tr-concat p refl)
+            ( left-unit-law-left-whisker-comp (tr² B α)))))
   tr³-right-unit-law-right-whisker-concat {p = refl} {p' = refl} refl =
     refl-htpy
 ```
@@ -302,43 +302,43 @@ module _
   tr³-right-unit-law-right-whisker-concat-Ω² α =
     concat-top-homotopy-coherence-square-homotopies
       ( ( tr³ B (inv right-unit)) ∙h
-      ( tr²-concat (right-whisker-concat α refl) refl))
+        ( tr²-concat (right-whisker-concat α refl) refl))
       ( tr³
         ( B)
         ( inv (right-unit-law-right-whisker-concat α ∙ right-unit)))
       ( tr²-right-whisker α refl)
       ( inv-htpy (left-unit-law-left-whisker-comp (tr² B α)))
       ( ( right-whisker-concat-htpy
-        ( tr³-inv right-unit)
-        ( tr²-concat (right-whisker-concat α refl) refl)) ∙h
-      ( inv-htpy
-        ( left-transpose-htpy-concat
-          ( tr³ B right-unit)
-          ( inv-htpy right-unit-htpy)
-          ( tr²-concat (right-whisker-concat α refl) refl)
-          ( inv-htpy
-            ( right-transpose-htpy-concat
-              ( tr²-concat (right-whisker-concat α refl) refl)
-              ( right-unit-htpy)
-              ( tr³ B right-unit)
-              ( inv-htpy
-                ( tr³-right-unit (right-whisker-concat α refl))))))))
+          ( tr³-inv right-unit)
+          ( tr²-concat (right-whisker-concat α refl) refl)) ∙h
+        ( inv-htpy
+          ( left-transpose-htpy-concat
+            ( tr³ B right-unit)
+            ( inv-htpy right-unit-htpy)
+            ( tr²-concat (right-whisker-concat α refl) refl)
+            ( inv-htpy
+              ( right-transpose-htpy-concat
+                ( tr²-concat (right-whisker-concat α refl) refl)
+                ( right-unit-htpy)
+                ( tr³ B right-unit)
+                ( inv-htpy
+                  ( tr³-right-unit (right-whisker-concat α refl))))))))
       ( concat-left-homotopy-coherence-square-homotopies
         ( ( tr³ B (inv right-unit)) ∙h
-        ( tr²-concat (right-whisker-concat α refl) refl))
-        ( (tr³ B (inv right-unit)) ∙h
-        ( tr³ B (inv (right-unit-law-right-whisker-concat α))))
+          ( tr²-concat (right-whisker-concat α refl) refl))
+        ( ( tr³ B (inv right-unit)) ∙h
+          ( tr³ B (inv (right-unit-law-right-whisker-concat α))))
         ( tr²-right-whisker α refl)
         ( inv-htpy (left-unit-law-left-whisker-comp (tr² B α)))
         ( ( inv-htpy
-          ( tr³-concat
-            ( inv right-unit)
-            ( inv (right-unit-law-right-whisker-concat α)))) ∙h
-        ( tr⁴
-          ( B)
-          ( inv
-            ( distributive-inv-concat
-              ( right-unit-law-right-whisker-concat α) (right-unit)))))
+            ( tr³-concat
+              ( inv right-unit)
+              ( inv (right-unit-law-right-whisker-concat α)))) ∙h
+          ( tr⁴
+            ( B)
+            ( inv
+              ( distributive-inv-concat
+                ( right-unit-law-right-whisker-concat α) (right-unit)))))
         ( left-whisker-concat-coherence-square-homotopies
           ( tr³ B (inv right-unit))
           ( tr²-concat (right-whisker-concat α refl) refl)
@@ -358,7 +358,7 @@ module _
                 ( left-unit-law-left-whisker-comp (tr² B α))))
             ( concat-top-homotopy-coherence-square-homotopies
               ( ( tr²-concat (right-whisker-concat α refl) refl) ∙h
-              ( refl-htpy))
+                ( refl-htpy))
               ( tr³ B (inv (right-unit-law-right-whisker-concat α)))
               ( tr²-right-whisker α refl)
               ( inv-htpy
@@ -400,8 +400,8 @@ module _
     coherence-square-homotopies
       ( tr-concat p q)
       ( ( tr² B (left-whisker-concat p β)) ∙h
-      ( tr² B (right-whisker-concat α q')))
-      ( ( ( tr² B β) ·r (tr B p)) ∙h ((tr B q') ·l (tr² B α)))
+        ( tr² B (right-whisker-concat α q')))
+      ( (tr² B β ·r tr B p) ∙h (tr B q' ·l tr² B α))
       ( tr-concat p' q')
   tr²-left-whisker-concat-tr²-right-whisker-concat β α =
     ( vertical-pasting-coherence-square-homotopies
@@ -435,8 +435,8 @@ module _
     coherence-square-homotopies
       ( tr-concat p q)
       ( ( tr² B (right-whisker-concat α q)) ∙h
-      ( tr² B (left-whisker-concat p' β)))
-      ( ( ( tr B q) ·l (tr² B α)) ∙h ((tr² B β) ·r (tr B p')))
+        ( tr² B (left-whisker-concat p' β)))
+      ( (tr B q ·l tr² B α) ∙h (tr² B β ·r tr B p'))
       ( tr-concat p' q')
   tr²-right-whisker-concat-tr²-left-whisker-concat α β =
     ( vertical-pasting-coherence-square-homotopies
@@ -505,15 +505,15 @@ module _
   tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² :
     (α β : refl {x = a} ＝ refl) →
     ( ( tr² B (left-whisker-concat refl α)) ∙h
-    ( tr² B (right-whisker-concat β refl))) ~
-    ( ( tr² B α) ∙h (id ·l (tr² B β)))
+      ( tr² B (right-whisker-concat β refl))) ~
+    ( tr² B α ∙h (id ·l (tr² B β)))
   tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² α β =
     horizontal-concat-htpy²
       ( tr³ B (left-unit-law-left-whisker-concat α))
       ( ( tr³
-        ( B)
-        ( inv (right-unit-law-right-whisker-concat β ∙ right-unit))) ∙h
-      ( inv-htpy (left-unit-law-left-whisker-comp (tr² B β))))
+          ( B)
+          ( inv (right-unit-law-right-whisker-concat β ∙ right-unit))) ∙h
+        ( inv-htpy (left-unit-law-left-whisker-comp (tr² B β))))
 
   compute-tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² :
     (α β : refl {x = a} ＝ refl) →
@@ -538,14 +538,14 @@ module _
   tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² :
     (α β : refl {x = a} ＝ refl) →
     ( ( tr² B (right-whisker-concat α refl)) ∙h
-    ( tr² B (left-whisker-concat refl β))) ~
+      ( tr² B (left-whisker-concat refl β))) ~
     ( ( id ·l (tr² B α)) ∙h (tr² B β))
   tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² α β =
     horizontal-concat-htpy²
       ( ( tr³
-        ( B)
-        ( inv (right-unit-law-right-whisker-concat α ∙ right-unit))) ∙h
-      ( inv-htpy (left-unit-law-left-whisker-comp (tr² B α))))
+          ( B)
+          ( inv (right-unit-law-right-whisker-concat α ∙ right-unit))) ∙h
+        ( inv-htpy (left-unit-law-left-whisker-comp (tr² B α))))
       ( tr³ B (left-unit-law-left-whisker-concat β))
 
   compute-tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² :
@@ -573,7 +573,7 @@ module _
     ( tr²
       ( B)
       ( ( left-whisker-concat refl α) ∙
-      ( right-whisker-concat β refl))) ~
+        ( right-whisker-concat β refl))) ~
     ( ( ( tr² B α) ·r (tr B refl)) ∙h ((tr B refl) ·l (tr² B β)))
   tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β =
     ( tr²-concat
@@ -584,7 +584,7 @@ module _
   compute-tr²-concat-left-whisker-concat-right-whisker-concat-Ω² :
     (α β : refl {x = a} ＝ refl) →
     ( ( inv-htpy right-unit-htpy) ∙h
-    ( tr²-concat-left-whisker-concat-right-whisker-concat α β)) ~
+      ( tr²-concat-left-whisker-concat-right-whisker-concat α β)) ~
     ( tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
   compute-tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β =
     ( inv-htpy
@@ -630,7 +630,7 @@ module _
     ( tr²
       ( B)
       ( ( right-whisker-concat α refl) ∙
-      ( left-whisker-concat refl β))) ~
+        ( left-whisker-concat refl β))) ~
     ( ( ( tr B refl) ·l (tr² B α)) ∙h ((tr² B β) ·r (tr B refl)))
   tr²-concat-right-whisker-concat-left-whisker-concat-Ω² α β =
     ( tr²-concat
@@ -641,7 +641,7 @@ module _
   compute-tr²-concat-right-whisker-concat-left-whisker-concat-Ω² :
     (α β : refl {x = a} ＝ refl) →
     ( ( inv-htpy right-unit-htpy) ∙h
-    ( tr²-concat-right-whisker-concat-left-whisker-concat α β)) ~
+      ( tr²-concat-right-whisker-concat-left-whisker-concat α β)) ~
     ( tr²-concat-right-whisker-concat-left-whisker-concat-Ω² α β)
   compute-tr²-concat-right-whisker-concat-left-whisker-concat-Ω² α β =
     ( inv-htpy
@@ -701,24 +701,24 @@ module _
         ( tr² B β))
       ( tr²-concat-right-whisker-concat-left-whisker-concat-Ω² β α)
   tr³-commutative-left-whisker-right-whisker-concat-Ω² α β =
-    ( concat-bottom-homotopy-coherence-square-homotopies
+    concat-bottom-homotopy-coherence-square-homotopies
       ( tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
       ( tr³ B (commutative-left-whisker-right-whisker-concat α β))
       ( commutative-right-whisker-left-whisker-htpy
         ( tr² B α)
         ( tr² B β))
       ( ( inv-htpy right-unit-htpy) ∙h
-      ( tr²-concat-right-whisker-concat-left-whisker-concat β α))
+        ( tr²-concat-right-whisker-concat-left-whisker-concat β α))
       ( compute-tr²-concat-right-whisker-concat-left-whisker-concat-Ω² β α)
       ( concat-top-homotopy-coherence-square-homotopies
         ( ( inv-htpy right-unit-htpy) ∙h
-        ( tr²-concat-left-whisker-concat-right-whisker-concat α β))
+          ( tr²-concat-left-whisker-concat-right-whisker-concat α β))
         ( tr³ B (commutative-left-whisker-right-whisker-concat α β))
         ( commutative-right-whisker-left-whisker-htpy
           ( tr² B α)
           ( tr² B β))
         ( ( inv-htpy right-unit-htpy) ∙h
-        ( tr²-concat-right-whisker-concat-left-whisker-concat β α))
+          ( tr²-concat-right-whisker-concat-left-whisker-concat β α))
         ( compute-tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
         ( horizontal-pasting-coherence-square-homotopies
           ( inv-htpy right-unit-htpy)
@@ -752,12 +752,12 @@ module _
             ( left-whisker-concat-htpy
               ( refl-htpy)
               ( commutative-right-whisker-left-whisker-htpy
-                (tr² B α)
-                (tr² B β)))
+                ( tr² B α)
+                ( tr² B β)))
             ( tr²-concat-right-whisker-concat-left-whisker-concat β α)
             ( left-unit-law-left-whisker-comp
               ( commutative-right-whisker-left-whisker-htpy
                 ( tr² B α)
                 ( tr² B β)))
-            ( tr³-commutative-left-whisker-right-whisker-concat α β)))))
+            ( tr³-commutative-left-whisker-right-whisker-concat α β))))
 ```
