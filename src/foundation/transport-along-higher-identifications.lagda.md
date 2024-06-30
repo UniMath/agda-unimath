@@ -455,7 +455,7 @@ module _
     coherence-square-homotopies
       ( tr-concat p q)
       ( tr² B (right-whisker-concat α q ∙ left-whisker-concat p' β))
-      ( ( ( tr B q) ·l (tr² B α)) ∙h ((tr² B β) ·r (tr B p')))
+      ( ( tr B q ·l tr² B α) ∙h (tr² B β ·r tr B p'))
       ( tr-concat p' q')
   tr²-concat-right-whisker-concat-left-whisker-concat α β =
     ( right-whisker-concat-htpy
