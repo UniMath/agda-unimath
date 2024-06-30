@@ -133,6 +133,24 @@ module _
 
 #### Computing `tr²` along the whiskering of identification
 
+These coherences take the form of the following commutative diagrams
+
+```text
+                                                tr-concat p q
+                               tr B (p ∙ q) -------------------> tr B q ∘ tr² B p
+                                    |                                    |
+                                    |                                    |
+                                    |                                    |
+tr² B (left-whisker-concat p Β)     |                                    | tr² B β ·r tr B p
+                                    |                                    |
+                                    |                                    |
+                                    |                                    |
+                                    ∨                                    ∨
+                               tr² B (p ∙ q') -------------------> tr² B β ∙h tr² B α,
+                                                tr²-concat p q'
+```
+
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {x y z : A}
@@ -239,6 +257,29 @@ module _
 ```
 
 #### Computing tr³ along the unit laws for whiskering of identifications
+
+These coherences take the form of the following commutative diagrams.
+Note that there is an asymmetry between the left and right coherence
+laws due to the asymmetry in the definition of concatination of
+identifications.
+
+The coherence for the left unit law for left whiskering
+
+
+```text
+                   tr²-concat α β
+  tr² B (α ∙ β) -------------------> tr² B (refl ∙ q)
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       ∨                                    ∨
+  tr² B (β ∙ α) -------------------> 
+                   tr²-concat β α
+```
 
 ```agda
 module _
