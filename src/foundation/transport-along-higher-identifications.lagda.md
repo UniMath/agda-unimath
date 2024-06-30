@@ -81,9 +81,9 @@ module _
   where
 
   tr²-concat :
-    {p p' p'' : x ＝ y} (α : p ＝ p') (α' : p' ＝ p'') (b : B x) →
-    (tr² B (α ∙ α') b) ＝ (tr² B α b ∙ tr² B α' b)
-  tr²-concat α α' b = ap-concat (λ t → tr B t b) α α'
+    {p p' p'' : x ＝ y} (α : p ＝ p') (β : p' ＝ p'') →
+    tr² B (α ∙ β) ~ tr² B α ∙h tr² B β
+  tr²-concat α β b = ap-concat (λ t → tr B t b) α β
 ```
 
 #### Computing `tr²` along the inverse of an identification
@@ -133,7 +133,9 @@ module _
 
 #### Computing `tr²` along the whiskering of identification
 
-These coherences take the form of the following commutative diagrams
+These coherences take the form of the following commutative diagrams.
+
+The coherence for left whiskering:
 
 ```text
                                                 tr-concat p q
@@ -146,10 +148,9 @@ tr² B (left-whisker-concat p Β)     |                                    | tr�
                                     |                                    |
                                     |                                    |
                                     ∨                                    ∨
-                               tr² B (p ∙ q') -------------------> tr² B β ∙h tr² B α,
-                                                tr²-concat p q'
+                               tr² B (p ∙ q') -------------------> tr² B q' ∘ tr² B p,
+                                                tr-concat p q'
 ```
-
 
 ```agda
 module _
@@ -165,6 +166,30 @@ module _
       ( tr² B β ·r tr B p)
       ( tr-concat p q')
   tr²-left-whisker refl refl = refl-htpy
+```
+
+The coherence for right whiskering:
+
+```text
+                                                tr-concat p q
+                               tr B (p ∙ q) -------------------> tr B q ∘ tr² B p
+                                    |                                    |
+                                    |                                    |
+                                    |                                    |
+tr² B (right-whisker-concat α q)    |                                    | tr B q ·l tr² B α
+                                    |                                    |
+                                    |                                    |
+                                    |                                    |
+                                    ∨                                    ∨
+                               tr² B (p' ∙ q) -------------------> tr² B q ∘ tr² B p',
+                                                tr-concat p' q
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {x y z : A}
+  {B : A → UU l2}
+  where
 
   tr²-right-whisker :
     {p p' : x ＝ y} (α : p ＝ p') (q : y ＝ z) →
@@ -192,6 +217,23 @@ module _
 ```
 
 #### Computing `tr³` along the horizontal concatination of identifications
+
+This cohrence takes the form of the following commutative diagram:
+
+```text
+                                                tr²-concat α β
+                               tr² B (α ∙ β) -------------------> tr² B α ∙h tr² B β
+                                    |                                    |
+                                    |                                    |
+                                    |                                    |
+tr³ B (horizontal-concat-Id² γ δ)   |                                    | horizontal-concat-htpy² (tr² B γ) (tr² B δ)
+                                    |                                    |
+                                    |                                    |
+                                    |                                    |
+                                    ∨                                    ∨
+                               tr² B (α' ∙ β') -------------------> tr² B α' ∙h tr² B β',
+                                                tr²-concat α' β'
+```
 
 ```agda
 module _
@@ -263,22 +305,21 @@ Note that there is an asymmetry between the left and right coherence
 laws due to the asymmetry in the definition of concatination of
 identifications.
 
-The coherence for the left unit law for left whiskering
-
+The coherence for the left unit law for left whiskering:
 
 ```text
-                   tr²-concat α β
-  tr² B (α ∙ β) -------------------> tr² B (refl ∙ q)
-       |                                    |
-       |                                    |
-       |                                    |
-       |                                    |
-       |                                    |
-       |                                    |
-       |                                    |
-       ∨                                    ∨
-  tr² B (β ∙ α) -------------------> 
-                   tr²-concat β α
+                                           inv-htpy right-unit-htpy
+        tr² B (left-whisker-concat refl Β) -------------------------> tr² B (left-whisker-concat refl Β) ∙h tr-concat refl q'
+                                    |                                    |
+                                    |                                    |
+                                    |                                    |
+                 refl-htpy          |                                    | tr²-left-whisker refl β
+                                    |                                    |
+                                    |                                    |
+                                    |                                    |
+                                    ∨                                    ∨
+        tr² B (left-whisker-concat refl Β) ------------------------->  tr² B β,
+                                     tr³ B (left-unit-law-left-whisker-concat β)
 ```
 
 ```agda
@@ -295,6 +336,30 @@ module _
       ( tr²-left-whisker refl β)
       ( tr³ B (left-unit-law-left-whisker-concat β))
   tr³-left-unit-law-left-whisker-concat refl = refl-htpy
+```
+
+The coherence law for right whiskering
+
+```text
+                                                tr-concat p q
+                               tr B (p ∙ q) -------------------> tr B q ∘ tr² B p
+                                    |                                    |
+                                    |                                    |
+                                    |                                    |
+tr² B (left-whisker-concat p Β)     |                                    | tr² B β ·r tr B p
+                                    |                                    |
+                                    |                                    |
+                                    |                                    |
+                                    ∨                                    ∨
+                               tr² B (p ∙ q') -------------------> tr² B q' ∘ tr² B p,
+                                                tr-concat p q'
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {x y : A}
+  {B : A → UU l2}
+  where
 
   tr³-right-unit-law-right-whisker-concat :
     {p p' : x ＝ y} (α : p ＝ p') →
