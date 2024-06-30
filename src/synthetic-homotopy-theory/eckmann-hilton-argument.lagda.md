@@ -139,7 +139,7 @@ data of a type family, and plays an important role in the construction of the
 Hopf fibration.
 
 To see this, consider the family of based identity types `Id base : X → UU`. A
-1-loop `l` induces an autoequivalence `tr (Id base) l : Ω X ≃ Ω X`. We can
+1-loop `l` induces an [automorphism[(foundation.automorphism.md) `tr (Id base) l : Ω X ≃ Ω X`. We can
 compute that
 
 ```text
@@ -153,10 +153,10 @@ Up one dimension, a 2-loop `s` induces a homotopy
 `tr² (Id base) s : id {A = Ω X} ~ id`. We can compute
 
 ```text
-  tr² (Id base) s p ＝ left-whisker-concat p s,
+  tr² (Id base) s p ∙ tr-Id-right refl p ＝ tr-Id-right refl p ∙ left-whisker-concat p s
 ```
 
-(up to equality of boundary). This claim is shown in
+This claim is shown in
 [tr²-Id-right](foundation.transport-along-higher-identifications.md). Thus, the
 2-D descent data of `Id base` is (up to equivalence) the homotopy at the heart
 of this version of the Eckmann-Hilton argument.

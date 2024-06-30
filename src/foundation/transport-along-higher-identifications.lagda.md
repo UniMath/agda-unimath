@@ -143,7 +143,7 @@ The coherence for left whiskering:
                                     |                                    |
                                     |                                    |
                                     |                                    |
-tr² B (left-whisker-concat p Β)     |                                    | tr² B β ·r tr B p
+  tr² B (left-whisker-concat p Β)   |                                    | tr² B β ·r tr B p
                                     |                                    |
                                     |                                    |
                                     |                                    |
@@ -176,7 +176,7 @@ The coherence for right whiskering:
                                     |                                    |
                                     |                                    |
                                     |                                    |
-tr² B (right-whisker-concat α q)    |                                    | tr B q ·l tr² B α
+  tr² B (right-whisker-concat α q)  |                                    | tr B q ·l tr² B α
                                     |                                    |
                                     |                                    |
                                     |                                    |
@@ -226,7 +226,7 @@ This cohrence takes the form of the following commutative diagram:
                                     |                                    |
                                     |                                    |
                                     |                                    |
-tr³ B (horizontal-concat-Id² γ δ)   |                                    | horizontal-concat-htpy² (tr² B γ) (tr² B δ)
+  tr³ B (horizontal-concat-Id² γ δ) |                                    | horizontal-concat-htpy² (tr² B γ) (tr² B δ)
                                     |                                    |
                                     |                                    |
                                     |                                    |
@@ -305,21 +305,21 @@ Note that there is an asymmetry between the left and right coherence
 laws due to the asymmetry in the definition of concatination of
 identifications.
 
-The coherence for the left unit law for left whiskering:
+The coherence for the left unit law for left whiskering: {- this does not format well -}
 
 ```text
-                                           inv-htpy right-unit-htpy
-        tr² B (left-whisker-concat refl Β) -------------------------> tr² B (left-whisker-concat refl Β) ∙h tr-concat refl q'
-                                    |                                    |
-                                    |                                    |
-                                    |                                    |
-                 refl-htpy          |                                    | tr²-left-whisker refl β
-                                    |                                    |
-                                    |                                    |
-                                    |                                    |
-                                    ∨                                    ∨
-        tr² B (left-whisker-concat refl Β) ------------------------->  tr² B β,
-                                     tr³ B (left-unit-law-left-whisker-concat β)
+                                     inv-htpy right-unit-htpy
+  tr² B (left-whisker-concat refl Β) -------------------------> tr² B (left-whisker-concat refl Β) ∙h tr-concat refl q'
+                              |                                    |
+                              |                                    |
+                              |                                    |
+           refl-htpy          |                                    | tr²-left-whisker refl β
+                              |                                    |
+                              |                                    |
+                              |                                    |
+                              ∨                                    ∨
+  tr² B (left-whisker-concat refl Β) ------------------------->  tr² B β,
+                               tr³ B (left-unit-law-left-whisker-concat β)
 ```
 
 ```agda
@@ -346,7 +346,7 @@ The coherence law for right whiskering
                                     |                                    |
                                     |                                    |
                                     |                                    |
-tr² B (left-whisker-concat p Β)     |                                    | tr² B β ·r tr B p
+  tr² B (left-whisker-concat p Β)   |                                    | tr² B β ·r tr B p
                                     |                                    |
                                     |                                    |
                                     |                                    |
@@ -600,7 +600,7 @@ module _
     refl-htpy
 ```
 
-##### A simplification of the non-trivial faces of the cube `α` and `β` are 2-loops
+##### A simplification of the non-trivial faces of the cube when `α` and `β` are 2-loops
 
 ```agda
 module _
