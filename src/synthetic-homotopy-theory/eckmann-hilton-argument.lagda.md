@@ -139,8 +139,8 @@ data of a type family, and plays an important role in the construction of the
 Hopf fibration.
 
 To see this, consider the family of based identity types `Id base : X → UU`. A
-1-loop `l` induces an [automorphism[(foundation.automorphism.md) `tr (Id base) l : Ω X ≃ Ω X`. We can
-compute that
+1-loop `l` induces an [automorphism[(foundation.automorphism.md)
+`tr (Id base) l : Ω X ≃ Ω X`. We can compute that
 
 ```text
   tr (Id base) l p ＝ p ∙ l.

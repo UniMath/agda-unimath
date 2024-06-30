@@ -300,12 +300,12 @@ module _
 
 #### Computing tr³ along the unit laws for whiskering of identifications
 
-These coherences take the form of the following commutative diagrams.
-Note that there is an asymmetry between the left and right coherence
-laws due to the asymmetry in the definition of concatination of
-identifications.
+These coherences take the form of the following commutative diagrams. Note that
+there is an asymmetry between the left and right coherence laws due to the
+asymmetry in the definition of concatination of identifications.
 
-The coherence for the left unit law for left whiskering: {- this does not format well -}
+The coherence for the left unit law for left whiskering: {- this does not format
+well -}
 
 ```text
                                      inv-htpy right-unit-htpy
