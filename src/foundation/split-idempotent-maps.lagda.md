@@ -525,11 +525,11 @@ module _
   where
 
   abstract
-    coherence-is-quasicoherently-idempotent-is-split-idempotent :
-      coherence-is-quasicoherently-idempotent f
+    quasicoherence-is-idempotent-is-split-idempotent :
+      quasicoherence-is-idempotent f
         ( is-idempotent-is-split-idempotent H)
-    coherence-is-quasicoherently-idempotent-is-split-idempotent =
-      coherence-is-quasicoherently-idempotent-is-idempotent-htpy
+    quasicoherence-is-idempotent-is-split-idempotent =
+      quasicoherence-is-idempotent-is-idempotent-htpy
         ( is-quasicoherently-idempotent-inv-htpy
           ( is-quasicoherently-idempotent-inclusion-retraction
             ( inclusion-is-split-idempotent H)
@@ -543,7 +543,7 @@ module _
     is-quasicoherently-idempotent f
   is-quasicoherently-idempotent-is-split-idempotent =
     ( is-idempotent-is-split-idempotent H ,
-      coherence-is-quasicoherently-idempotent-is-split-idempotent)
+      quasicoherence-is-idempotent-is-split-idempotent)
 
 module _
   {l1 l2 : Level} {A : UU l1} (H : split-idempotent-map l2 A)
