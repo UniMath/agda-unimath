@@ -10,11 +10,9 @@ module foundation.double-negation-modality where
 open import foundation.double-negation
 open import foundation.universe-levels
 
-open import foundation-core.function-types
-open import foundation-core.propositions
-open import foundation-core.transport-along-identifications
+open import foundation-core.empty-types
 
-open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.continuation-modalities
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
@@ -44,27 +42,13 @@ unit-double-negation-modality = intro-double-negation
 
 ### The double negation modality is a uniquely eliminating modality
 
+The double negation modality is an instance of a
+[continuation modality](orthogonal-factorization-systems.continuation-modalities.md).
+
 ```agda
 is-uniquely-eliminating-modality-double-negation-modality :
   {l : Level} →
   is-uniquely-eliminating-modality (unit-double-negation-modality {l})
-is-uniquely-eliminating-modality-double-negation-modality {l} {A} P =
-  is-local-dependent-type-is-prop
-    ( unit-double-negation-modality)
-    ( operator-double-negation-modality l ∘ P)
-    ( λ _ → is-prop-double-negation)
-    ( λ f z →
-      double-negation-extend
-        ( λ (a : A) →
-          tr
-            ( ¬¬_ ∘ P)
-            ( eq-is-prop is-prop-double-negation)
-            ( f a))
-        ( z))
+is-uniquely-eliminating-modality-double-negation-modality {l} =
+  is-uniquely-eliminating-modality-continuation-modality l empty-Prop
 ```
-
-This proof follows Example 1.9 in {{#cite RSS20}}.
-
-## References
-
-{{#bibliography}}
