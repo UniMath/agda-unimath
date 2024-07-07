@@ -135,7 +135,7 @@ id-large-lawvere-tierney-topology =
 - The
   [continuation modalities](orthogonal-factorization-systems.continuation-modalities.md)
   define Lawvere–Tierney topologies, and as a special case so does the
-  [double negation modality](orthogonal-factorization-systems.double-negation-modality.md).
+  [double negation modality](foundation.double-negation-modality.md).
 
 ## References
 
