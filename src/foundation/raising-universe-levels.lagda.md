@@ -71,6 +71,9 @@ compute-raise : (l : Level) {l1 : Level} (A : UU l1) → A ≃ raise l A
 pr1 (compute-raise l A) = map-raise
 pr2 (compute-raise l A) = is-equiv-map-raise
 
+inv-compute-raise : (l : Level) {l1 : Level} (A : UU l1) → raise l A ≃ A
+inv-compute-raise l A = inv-equiv (compute-raise l A)
+
 Raise : (l : Level) {l1 : Level} (A : UU l1) → Σ (UU (l1 ⊔ l)) (λ X → A ≃ X)
 pr1 (Raise l A) = raise l A
 pr2 (Raise l A) = compute-raise l A
