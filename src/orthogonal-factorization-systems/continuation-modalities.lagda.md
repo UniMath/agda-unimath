@@ -41,7 +41,7 @@ open import structured-types.continuations
 ## Idea
 
 Given a [proposition](foundation-core.propositions.md) `R`, the
-[continuations](structured-types.continuations) on `R`
+[continuations](structured-types.continuations.md) on `R`
 
 ```text
   A ↦ ((A → R) → R)
