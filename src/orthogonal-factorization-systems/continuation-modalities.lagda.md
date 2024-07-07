@@ -28,6 +28,7 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.transport-along-identifications
 
+open import orthogonal-factorization-systems.large-lawvere-tierney-topologies
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
@@ -162,6 +163,32 @@ module _
       ( continuation-Prop R (A × B))
       ( product-Prop (continuation-Prop R A) (continuation-Prop R B))
       ( distributive-product-continuation-modality')
+```
+
+```agda
+module _
+  {l : Level} (R : Prop l)
+  where
+
+  is-large-lawvere-tierney-topology-continuation :
+    is-large-lawvere-tierney-topology (continuation-Prop R ∘ type-Prop)
+  is-large-lawvere-tierney-topology-continuation =
+    λ where
+    .is-idempotent-is-large-lawvere-tierney-topology P →
+      ( mul-continuation , unit-continuation)
+    .preserves-unit-is-large-lawvere-tierney-topology →
+      preserves-unit-continuation-modality'
+    .preserves-conjunction-is-large-lawvere-tierney-topology P Q →
+      distributive-product-continuation-modality'
+
+  continuation-large-lawvere-tierney-topology :
+    large-lawvere-tierney-topology (l ⊔_)
+  continuation-large-lawvere-tierney-topology =
+    λ where
+    .operator-large-lawvere-tierney-topology →
+      continuation-Prop R ∘ type-Prop
+    .is-large-lawvere-tierney-topology-large-lawvere-tierney-topology →
+      is-large-lawvere-tierney-topology-continuation
 ```
 
 ## References

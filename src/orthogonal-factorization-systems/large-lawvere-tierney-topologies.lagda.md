@@ -9,11 +9,14 @@ module orthogonal-factorization-systems.large-lawvere-tierney-topologies where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.conjunction
+open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import orthogonal-factorization-systems.lawvere-tierney-topologies
 ```
 
 </details>
@@ -56,6 +59,8 @@ record
     preserves-conjunction-is-large-lawvere-tierney-topology :
       {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
       type-Prop (j (P ∧ Q) ⇔ j P ∧ j Q)
+
+open is-large-lawvere-tierney-topology public
 ```
 
 ### The large set of Lawvere-Tierney topologies
@@ -69,6 +74,38 @@ record
 
     is-large-lawvere-tierney-topology-large-lawvere-tierney-topology :
       is-large-lawvere-tierney-topology operator-large-lawvere-tierney-topology
+
+  is-idempotent-large-lawvere-tierney-topology :
+    {l : Level} (P : Prop l) →
+    type-Prop
+      ( operator-large-lawvere-tierney-topology
+        ( operator-large-lawvere-tierney-topology P) ⇔
+        operator-large-lawvere-tierney-topology P)
+  is-idempotent-large-lawvere-tierney-topology =
+    is-idempotent-is-large-lawvere-tierney-topology
+      ( is-large-lawvere-tierney-topology-large-lawvere-tierney-topology)
+
+  preserves-unit-large-lawvere-tierney-topology :
+    type-Prop (operator-large-lawvere-tierney-topology unit-Prop ⇔ unit-Prop)
+  preserves-unit-large-lawvere-tierney-topology =
+    preserves-unit-is-large-lawvere-tierney-topology
+      ( is-large-lawvere-tierney-topology-large-lawvere-tierney-topology)
+
+  preserves-conjunction-large-lawvere-tierney-topology :
+    {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
+    type-Prop
+      ( operator-large-lawvere-tierney-topology (P ∧ Q) ⇔
+        operator-large-lawvere-tierney-topology P ∧
+        operator-large-lawvere-tierney-topology Q)
+  preserves-conjunction-large-lawvere-tierney-topology =
+    preserves-conjunction-is-large-lawvere-tierney-topology
+      ( is-large-lawvere-tierney-topology-large-lawvere-tierney-topology)
+
+  type-operator-large-lawvere-tierney-topology : {l : Level} → Prop l → UU (δ l)
+  type-operator-large-lawvere-tierney-topology =
+    type-Prop ∘ operator-large-lawvere-tierney-topology
+
+open large-lawvere-tierney-topology public
 ```
 
 ## Examples
@@ -79,21 +116,16 @@ record
 is-large-lawvere-tierney-topology-id : is-large-lawvere-tierney-topology id
 is-large-lawvere-tierney-topology-id =
   λ where
-  .is-large-lawvere-tierney-topology.is-idempotent-is-large-lawvere-tierney-topology
-    P →
-    id-iff
-  .is-large-lawvere-tierney-topology.preserves-unit-is-large-lawvere-tierney-topology →
-    id-iff
-  .is-large-lawvere-tierney-topology.preserves-conjunction-is-large-lawvere-tierney-topology
-    P Q →
-    id-iff
+  .is-idempotent-is-large-lawvere-tierney-topology P → id-iff
+  .preserves-unit-is-large-lawvere-tierney-topology → id-iff
+  .preserves-conjunction-is-large-lawvere-tierney-topology P Q → id-iff
 
 id-large-lawvere-tierney-topology : large-lawvere-tierney-topology (λ l → l)
 id-large-lawvere-tierney-topology =
   λ where
-  .large-lawvere-tierney-topology.operator-large-lawvere-tierney-topology →
+  .operator-large-lawvere-tierney-topology →
     id
-  .large-lawvere-tierney-topology.is-large-lawvere-tierney-topology-large-lawvere-tierney-topology →
+  .is-large-lawvere-tierney-topology-large-lawvere-tierney-topology →
     is-large-lawvere-tierney-topology-id
 ```
 
