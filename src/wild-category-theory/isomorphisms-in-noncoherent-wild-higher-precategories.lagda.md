@@ -21,9 +21,9 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 
 Consider a
 [noncoherent wild higher precategory](wild-category-theory.noncoherent-wild-higher-precategories.md)
-𝒞. An
+`𝒞`. An
 {{#concept "isomorphism" Disambiguation="in noncoherent wild higher precategories" Agda=is-iso-Noncoherent-Wild-Higher-Precategory}}
-in 𝒞 is a morphism `f : x → y` in 𝒞 [equipped](foundation.structure.md) with
+in `𝒞` is a morphism `f : x → y` in `𝒞` [equipped](foundation.structure.md) with
 
 - a morphism `s : y → x`
 - a $2$-morphism `is-split-epi : f ∘ s → id`, where `∘` and `id` denote
