@@ -39,10 +39,8 @@ is an $(n+1)$-morphism
   Fₙ₊₁ (id-hom 𝒜 f) ⇒ id-hom ℬ (Fₙ f)
 ```
 
-in `ℬ`,
-
-and for every pair of composable $(n+1)$-morphisms `g` after `f` in `𝒜`, there
-is an $(n+2)$-morphism
+in `ℬ`, and for every pair of composable $(n+1)$-morphisms `g` after `f` in `𝒜`,
+there is an $(n+2)$-morphism
 
 ```text
   Fₙ₊₁ (g ∘ f) ⇒ (Fₙ₊₁ g) ∘ (Fₙ₊₁ f)

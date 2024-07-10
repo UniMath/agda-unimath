@@ -30,16 +30,16 @@ open import structured-types.transitive-globular-types
 
 ## Idea
 
-It is a important open problem known as the _coherence problem_ to define a
+It is an important open problem known as the _coherence problem_ to define a
 fully coherent notion of $∞$-category in univalent type theory. The subject of
 _wild category theory_ attempts to recover some of the benefits of $∞$-category
 theory without tackling this problem. We introduce, as one of our basic building
 blocks in this subject, the notion of a _noncoherent wild higher precategory_.
 
 A _noncoherent wild higher precategory_ `𝒞` is a structure that attempts at
-capturing the structure of an higher precategory to the $0$'th order. It
-consists of in some sense all of the operations and none of the coherence of an
-higher precategory. Thus, it is defined as a
+capturing the structure of a higher precategory to the $0$'th order. It consists
+of in some sense all of the operations and none of the coherence of a higher
+precategory. Thus, it is defined as a
 [globular type](structured-types.globular-types.md) with families of
 $n$-morphisms labeled as "identities"
 
