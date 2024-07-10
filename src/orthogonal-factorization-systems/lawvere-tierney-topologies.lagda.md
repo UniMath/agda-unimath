@@ -105,7 +105,7 @@ id-lawvere-tierney-topology l = (id , is-lawvere-tierney-topology-id l)
 
 ## See also
 
-- [Large Lawvere-Tierney topologies](orthogonal-factorization-systems.lawvere-tierney-topologies.md)
+- [Large Lawvere-Tierney topologies](orthogonal-factorization-systems.large-lawvere-tierney-topologies.md)
 - The
   [continuation modalities](orthogonal-factorization-systems.continuation-modalities.md)
   define Lawvere–Tierney topologies, and as a special case so does the

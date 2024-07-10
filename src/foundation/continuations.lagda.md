@@ -51,7 +51,7 @@ Given a type `R`,
   A ↦ ((A → R) → R)
 ```
 
-define a monad on types.
+defines a monad on types.
 
 ## Definitions
 
