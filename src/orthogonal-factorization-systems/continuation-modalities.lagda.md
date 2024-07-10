@@ -8,6 +8,7 @@ module orthogonal-factorization-systems.continuation-modalities where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.continuations
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.evaluation-functions
@@ -32,8 +33,6 @@ open import orthogonal-factorization-systems.large-lawvere-tierney-topologies
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
-
-open import structured-types.continuations
 ```
 
 </details>
@@ -41,7 +40,7 @@ open import structured-types.continuations
 ## Idea
 
 Given a [proposition](foundation-core.propositions.md) `R`, the
-[continuations](structured-types.continuations.md) on `R`
+[continuations](foundation.continuations.md) on `R`
 
 ```text
   A ↦ ((A → R) → R)

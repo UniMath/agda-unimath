@@ -1,7 +1,7 @@
 # Continuations
 
 ```agda
-module structured-types.continuations where
+module foundation.continuations where
 ```
 
 <details><summary>Imports</summary>
