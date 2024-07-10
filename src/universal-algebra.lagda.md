@@ -1,4 +1,4 @@
-# Universal Algebra
+# Universal algebra
 
 ## Files in the universal algebra folder
 

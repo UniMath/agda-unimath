@@ -32,7 +32,7 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 
 ## Idea
 
-It is a important open problem known as the _coherence problem_ to define a
+It is an important open problem known as the _coherence problem_ to define a
 fully coherent notion of $∞$-category in univalent type theory. The subject of
 _wild category theory_ attempts to recover some of the benefits of $∞$-category
 theory without tackling this problem. We introduce, as one of our basic building
