@@ -54,11 +54,11 @@ defines a
 
 ```agda
 module _
-  {l1 : Level} (l2 : Level) (R : UU l1)
+  {l1 : Level} (l2 : Level) (R : Prop l1)
   where
 
   operator-continuation-modality : operator-modality l2 (l1 ⊔ l2)
-  operator-continuation-modality = continuation R
+  operator-continuation-modality = continuation (type-Prop R)
 
   unit-continuation-modality :
     unit-modality operator-continuation-modality
@@ -72,10 +72,10 @@ module _
 ```agda
 is-uniquely-eliminating-modality-continuation-modality :
   {l1 : Level} (l : Level) (R : Prop l1) →
-  is-uniquely-eliminating-modality (unit-continuation-modality l (type-Prop R))
+  is-uniquely-eliminating-modality (unit-continuation-modality l R)
 is-uniquely-eliminating-modality-continuation-modality l R P =
   is-local-dependent-type-is-prop
-    ( unit-continuation-modality l (type-Prop R))
+    ( unit-continuation-modality l R)
     ( continuation (type-Prop R) ∘ P)
     ( λ _ → is-prop-continuation-Prop R)
     ( λ f c →
@@ -101,7 +101,7 @@ preserves the unit type.
 preserves-unit-continuation-modality' :
   {l1 : Level} {R : UU l1} → continuation R unit ↔ unit
 preserves-unit-continuation-modality' {R = R} =
-  ( terminal-map (continuation R unit) , unit-continuation-modality lzero R)
+  ( terminal-map (continuation R unit) , unit-continuation)
 
 preserves-unit-continuation-modality :
   {l1 : Level} (R : Prop l1) → continuation (type-Prop R) unit ≃ unit
@@ -187,6 +187,19 @@ module _
       continuation-Prop R ∘ type-Prop
     .is-large-lawvere-tierney-topology-large-lawvere-tierney-topology →
       is-large-lawvere-tierney-topology-continuation
+```
+
+### `A → R` is `continuation R`-stable
+
+```agda
+is-continuation-stable-exp :
+  {l1 l2 : Level} (R : Prop l1) {A : UU l2} →
+  is-modal (unit-continuation-modality (l1 ⊔ l2) R) (A → type-Prop R)
+is-continuation-stable-exp R {A} =
+  is-equiv-has-converse
+    ( function-Prop A R)
+    ( continuation-Prop R (A → type-Prop R))
+    ( _∘ unit-continuation)
 ```
 
 ## References
