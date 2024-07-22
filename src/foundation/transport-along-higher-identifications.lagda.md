@@ -537,7 +537,7 @@ module _
     (α β : refl {x = a} ＝ refl) →
     ( inv-coherence-square-homotopies-horizontal-refl
       ( ( tr² B (left-whisker-concat refl α)) ∙h
-      ( tr² B (right-whisker-concat β refl)))
+        ( tr² B (right-whisker-concat β refl)))
       ( tr² B α ∙h id ·l (tr² B β))
       ( tr²-left-whisker-concat-tr²-right-whisker-concat α β)) ~
     ( tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² α β)
