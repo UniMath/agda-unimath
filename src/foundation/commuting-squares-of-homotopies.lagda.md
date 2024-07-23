@@ -560,7 +560,7 @@ Consider two squares of homotopies as in the diagram
 ```
 
 The result of vertically pasting these squares can be computed in terms of the
-horizontal concatination of homotopies.
+horizontal concatenation of homotopies.
 
 ```agda
 module _

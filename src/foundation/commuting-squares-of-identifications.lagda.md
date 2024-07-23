@@ -590,7 +590,7 @@ Consider two squares of identifications as in the diagram
                   refl
 ```
 
-Then the pasted square can be computed in terms of the horizontal concatination
+Then the pasted square can be computed in terms of the horizontal concatenation
 of the filler squares
 
 ```agda
