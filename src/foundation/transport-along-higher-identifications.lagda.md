@@ -180,7 +180,7 @@ module _
   tr³-concat γ δ b = ap-concat (λ t → tr² B t b) γ δ
 ```
 
-#### Computing `tr³` along the horizontal concatination of identifications
+#### Computing `tr³` along the horizontal concatenation of identifications
 
 ```agda
 module _
@@ -249,7 +249,7 @@ module _
 
 These coherences take the form of the following commutative diagrams. Note that
 there is an asymmetry between the left and right coherence laws due to the
-asymmetry in the definition of concatination of identifications.
+asymmetry in the definition of concatenation of identifications.
 
 ```agda
 module _

@@ -145,7 +145,7 @@ module _
   horizontal-concat-htpy² α β x = horizontal-concat-Id² (α x) (β x)
 ```
 
-### Unit laws for horizontal concatination of homotopies
+### Unit laws for horizontal concatenation of homotopies
 
 ```agda
 module _
@@ -166,7 +166,7 @@ module _
     compute-left-refl-horizontal-concat-Id² (α x)
 ```
 
-### Vertical inverses distribute over horizontal concatination
+### Vertical inverses distribute over horizontal concatenation
 
 ```agda
 module _
