@@ -12,6 +12,7 @@ open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.whiskering-homotopies-concatenation
 ```
 
 </details>
@@ -89,4 +90,33 @@ module _
   coh-horizontal-concat-htpy :
     horizontal-concat-htpy' G F ~ horizontal-concat-htpy G F
   coh-horizontal-concat-htpy = nat-htpy G ·r F
+```
+
+### Eckmann-Hilton for homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}
+  {f g : X → Y} {f' g' : Y → Z}
+  where
+
+  commutative-right-whisker-left-whisker-htpy :
+    (H' : f' ~ g') (H : f ~ g) →
+    (H' ·r f) ∙h (g' ·l H) ~
+    (f' ·l H) ∙h (H' ·r g)
+  commutative-right-whisker-left-whisker-htpy H' H x =
+      coh-horizontal-concat-htpy H' H x
+
+module _
+  {l : Level} {X : UU l}
+  where
+
+  eckmann-hilton-htpy :
+    (H K : id {A = X} ~ id) →
+    (H ∙h K) ~ (K ∙h H)
+  eckmann-hilton-htpy H K =
+    ( inv-htpy
+      ( left-whisker-concat-htpy H (left-unit-law-left-whisker-comp K))) ∙h
+    ( commutative-right-whisker-left-whisker-htpy H K) ∙h
+    ( right-whisker-concat-htpy (left-unit-law-left-whisker-comp K) H)
 ```
