@@ -74,7 +74,7 @@ homotopies
                  HB(gs) ·r PS s
   hB(gs) ∘ PS s ---------------> kB(gs) ∘ PS s
          |                              |
-    hS s |                              | tS s
+    hS s |                              | kS s
          |                              |
          ∨                              ∨
   QS s ∘ hA(fs) ---------------> QS s ∘ kA(fs)
@@ -83,10 +83,10 @@ homotopies
 
 [commutes](foundation-core.commuting-squares-of-homotopies.md). This coherence
 datum may be seen as a filler of the diagram one gets by gluing the squares `hS`
-and `tS` along the common vertical maps
+and `kS` along the common vertical maps
 
 ```text
-             tA(fs)
+             kA(fs)
             ________
            /        ∨
      PA(fs)          QA(fs)
@@ -94,7 +94,7 @@ and `tS` along the common vertical maps
        |     hA(fs)    |
        |               |
   PS s |               | QS s
-       |     tB(gs)    |
+       |     kB(gs)    |
        |    ________   |
        ∨   /        ∨  ∨
      PB(gs)          QB(gs).
@@ -102,7 +102,7 @@ and `tS` along the common vertical maps
              hB(gs)
 ```
 
-The front and back faces are `hS s` and `tS s`, and the top and bottom faces are
+The front and back faces are `hS s` and `kS s`, and the top and bottom faces are
 `HA(fs)` and `HB(gs)`, respectively. `HS` then expresses that going along the
 front face and then the top face is homotopic to first going along the bottom
 face and then the back face.
