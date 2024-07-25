@@ -573,41 +573,6 @@ module _
           ( is-section-map-inv-equiv
             ( equiv-tr _ _)
             ( _))))
-        -- inv
-        --   ( ( ap
-        --       ( λ q →
-        --         tr
-        --           ( ev-pair
-        --             ( right-family-descent-data-pushout R)
-        --             ( right-map-span-diagram 𝒮 s))
-        --           ( CB s (succ-ℕ n) (concat-inv-s 𝒮 a₀ s (succ-ℕ n) p))
-        --           ( map-family-descent-data-pushout R
-        --             ( s ,
-        --               ( map-cocone-standard-sequential-colimit
-        --                 ( succ-ℕ n)
-        --                 ( concat-inv-s 𝒮 a₀ s (succ-ℕ n) p)))
-        --             ( q)))
-        --       ( ( compute-inr-dependent-cogap _ _
-        --           ( pr1 (pr2 (stages-cocones' n)) (left-map-span-diagram 𝒮 s))
-        --           ( s , refl , p)) ∙
-        --         ( pr2 (pr2 (stages-cocones' n)) s p))) ∙
-        --     ( ap
-        --       ( tr
-        --         ( ev-pair
-        --           ( right-family-descent-data-pushout R)
-        --           ( right-map-span-diagram 𝒮 s))
-        --         ( CB s (succ-ℕ n) (concat-inv-s 𝒮 a₀ s (succ-ℕ n) p)))
-        --       ( is-section-map-inv-equiv
-        --         ( equiv-family-descent-data-pushout R
-        --           ( s , map-cocone-standard-sequential-colimit (succ-ℕ n) (concat-inv-s 𝒮 a₀ s (succ-ℕ n) p)))
-        --         ( Φ s n p (dependent-cogap _ _
-        --           ( pr1 (stages-cocones' n) (right-map-span-diagram 𝒮 s)) p)))) ∙
-        --     ( is-section-map-inv-equiv
-        --       ( equiv-tr
-        --         ( ev-pair (right-family-descent-data-pushout R) (right-map-span-diagram 𝒮 s))
-        --         ( CB s (succ-ℕ n) (concat-inv-s 𝒮 a₀ s (succ-ℕ n) p)))
-        --       ( _)))
-
 
     stages-cocones' :
       (n : ℕ) →
