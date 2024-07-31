@@ -39,7 +39,7 @@ open import foundation.universe-levels
 
 The cumulative hierarchy is a model of set theory. Instead of introducing it as
 a HIT, as in the HoTT Book Section 10.4, we introduce its induction principle,
-following Reference 2 below.
+following {{#cite dJKFX23}}.
 
 ## Definitions
 
