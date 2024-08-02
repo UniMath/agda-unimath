@@ -231,6 +231,9 @@ open import foundation.embeddings using
 
 ## 4 A pre-idempotent that doesn't split
 
+This section remains to be formalized.
+[#1103](https://github.com/UniMath/agda-unimath/issues/1103)
+
 **Example 4.1.** An example of an idempotence witness that cannot be extended to
 a coherent system of idempotence data.
 
@@ -276,11 +279,73 @@ split, or even that all pre-idempotents are quasi-idempotent.
 
 ## 5 All quasi-idempotents split
 
+**Example 5.1.** A naïve attempt.
+
 ```agda
 -- TODO
 ```
 
+Sequential colimits of types.
+
+```agda
+open import synthetic-homotopy-theory.sequential-diagrams using
+  ( sequential-diagram
+  )
+
+open import synthetic-homotopy-theory.sequential-colimits using
+  ( standard-sequential-colimit
+  )
+```
+
+Sequential limits of types.
+
+```agda
+open import foundation.inverse-sequential-diagrams using
+  ( inverse-sequential-diagram
+  )
+
+open import foundation.sequential-limits using
+  ( standard-sequential-limit
+  )
+```
+
+**Lemma 5.2.** Characterization of the identity types of sequential limit
+formation.
+
+The formalization generalizes the result of the paper by considering general
+inverse sequential diagrams rather than those that are constantly $f$. Also note
+that compared to the paper, the coherences in the formalization are transposed.
+
+```agda
+open import foundation.sequential-limits using
+  ( extensionality-standard-sequential-limit
+  )
+```
+
+**Theorem 5.3.** Assuming function extensionality, any quasi-idempotent splits.
+
+```agda
+open import foundation.split-idempotent-maps using
+  ( is-split-idempotent-is-quasicoherently-idempotent
+  )
+```
+
+**Remark 5.4.** Components of the construction.
+
+```agda
+open import foundation.split-idempotent-maps using
+  ( inverse-sequential-diagram-splitting-type-is-quasicoherently-idempotent'
+  ; splitting-type-is-quasicoherently-idempotent'
+  ; inclusion-splitting-type-is-quasicoherently-idempotent'
+  ; map-retraction-splitting-type-is-quasicoherently-idempotent'
+  ; htpy-is-split-idempotent-is-quasicoherently-idempotent' -- "requires function extensionality"
+  )
+```
+
 ## 6 Splitting is a retraction
+
+This section remains to be formalized.
+[#1103](https://github.com/UniMath/agda-unimath/issues/1103)
 
 ```agda
 -- TODO
@@ -288,17 +353,26 @@ split, or even that all pre-idempotents are quasi-idempotent.
 
 ## 7 Splitting is not an equivalence
 
+This section remains to be formalized.
+[#1103](https://github.com/UniMath/agda-unimath/issues/1103)
+
 ```agda
 -- TODO
 ```
 
 ## 8 The double classifying space of 2
 
+This section remains to be formalized.
+[#1103](https://github.com/UniMath/agda-unimath/issues/1103)
+
 ```agda
 -- TODO
 ```
 
 ## 9 Coherent idempotents
+
+This section remains to be formalized.
+[#1103](https://github.com/UniMath/agda-unimath/issues/1103)
 
 ```agda
 -- TODO
