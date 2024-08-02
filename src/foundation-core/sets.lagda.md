@@ -98,7 +98,6 @@ A type `A` is said to satisfy
 has-uip : {l : Level} → UU l → UU l
 has-uip A = (x y : A) → all-elements-equal (x ＝ y)
 
-
 module _
   {l : Level} {A : UU l}
   where
