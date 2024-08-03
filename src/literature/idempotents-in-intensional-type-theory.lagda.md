@@ -57,9 +57,9 @@ open import foundation-core.propositions using
 ```
 
 The preferred definition for sets in the library, `is-set` are types whose
-identity types are propositions in the previous sense. While this is also true
-for the definitions used in the article, we note that it does not extend one
-dimension lower to contractible types as our scheme does.
+identity types are propositions in the preferred sense of the library. While the
+same relation holds for the definitions used in the article, we note that it
+does not extend one dimension lower to contractible types as our scheme does.
 
 ```agda
 open import foundation-core.sets using
@@ -74,7 +74,8 @@ open import foundation.homotopies using
 ```
 
 The preferred notion of equivalence in the library are functions equipped with a
-left inverse and a right inverse.
+left inverse and a right inverse, which coincides with the example given in the
+article.
 
 ```agda
 open import foundation.equivalences using
@@ -115,11 +116,14 @@ open import foundation.equality-cartesian-product-types using
 
 ## 3 Some pre-idempotents that split
 
+In this section, definitions of "pre-idempotents", "split idempotents" and
+"quasi-idempotents" are given, and basic relations between them are given.
+
 **Definition 3.1.** Pre-idempotents.
 
-The library's preferred terminology for "a pre-idempotent" is merely "an
-idempotent". We reserve the terminology "a coherent idempotent" for what in the
-article is referred to as "a (fully coherent) idempotent".
+The library's preferred terminology for "a pre-idempotent" is "an idempotent".
+We reserve the terminology "a coherent idempotent" for what in the article is
+referred to as "a (fully coherent) idempotent".
 
 ```agda
 open import foundation.endomorphisms using
@@ -127,7 +131,7 @@ open import foundation.endomorphisms using
   )
 
 open import foundation.idempotent-maps using
-  ( is-idempotent -- "idempotency"
+  ( is-idempotent -- "idempotency witness"
   ; idempotent-map -- "pre-idempotent (map)"
   )
 ```
@@ -193,9 +197,7 @@ open import foundation.split-idempotent-maps using
 
 **Example 3.8.**
 
-```agda
--- TODO
-```
+> This example is not formalized.
 
 **Theorem 3.9.** If a pre-idempotent is weakly constant, then it has a
 splitting.
@@ -225,14 +227,21 @@ open import foundation.embeddings using
   ( is-emb -- "the type of witnesses that a map is an embedding"
   ; _↪_ -- "the type of embeddings between two types"
   )
-
--- TODO
 ```
+
+> The proof remains to be formalized.
+> [#1103](https://github.com/UniMath/agda-unimath/issues/1103)
 
 ## 4 A pre-idempotent that doesn't split
 
-This section remains to be formalized.
-[#1103](https://github.com/UniMath/agda-unimath/issues/1103)
+In this section, assuming univalence and propositional truncations, an example
+is given of a pre-idempotent map that does not split or extend to a
+quasi-idempotent. Such a map is constructed on the
+[connected component of the universe](foundation.connected-components-universes.md)
+at the [cantor space](set-theory.cantor-space.md).
+
+> This section remains to be formalized.
+> [#1103](https://github.com/UniMath/agda-unimath/issues/1103)
 
 **Example 4.1.** An example of an idempotence witness that cannot be extended to
 a coherent system of idempotence data.
@@ -271,19 +280,15 @@ does not split.
 ```
 
 **Corollary 4.7.** It is impossible to prove in MLTT that all pre-idempotents
-split, or even that all pre-idempotents are quasi-idempotent.
-
-```agda
--- TODO
-```
+split, or even that all pre-idempotents are quasi-idempotent. □
 
 ## 5 All quasi-idempotents split
 
+In this section it is shown that every quasi-idempotent map splits.
+
 **Example 5.1.** A naïve attempt.
 
-```agda
--- TODO
-```
+> This example is not formalized.
 
 Sequential colimits of types.
 
@@ -344,39 +349,41 @@ open import foundation.split-idempotent-maps using
 
 ## 6 Splitting is a retraction
 
-This section remains to be formalized.
-[#1103](https://github.com/UniMath/agda-unimath/issues/1103)
+In this section it is shown, assuming the univalence axiom, that the type of
+splittings of a pre-idempotent map is a retract of the type of extensions to
+quasi-idempotence.
+
+> This section remains to be formalized.
+> [#1103](https://github.com/UniMath/agda-unimath/issues/1103)
+
+**Lemma 6.3.** Characterization of the identity types of retract formation.
 
 ```agda
--- TODO
+open import foundation.retracts-of-types using
+  ( extensionality-retracts
+  )
 ```
 
 ## 7 Splitting is not an equivalence
 
-This section remains to be formalized.
-[#1103](https://github.com/UniMath/agda-unimath/issues/1103)
+In this section, it is argued that there may be more quasi-idempotence witnesses
+than splittings of a map.
 
-```agda
--- TODO
-```
+> This section remains to be formalized.
+> [#1103](https://github.com/UniMath/agda-unimath/issues/1103)
 
 ## 8 The double classifying space of 2
 
-This section remains to be formalized.
-[#1103](https://github.com/UniMath/agda-unimath/issues/1103)
+In this section, an explicit example of a type with more quasi-idempotents than
+splittings are worked out, proving Theorem 7.4 from the previous section.
 
-```agda
--- TODO
-```
+> This section remains to be formalized.
+> [#1103](https://github.com/UniMath/agda-unimath/issues/1103)
 
 ## 9 Coherent idempotents
 
-This section remains to be formalized.
-[#1103](https://github.com/UniMath/agda-unimath/issues/1103)
-
-```agda
--- TODO
-```
+> This section remains to be formalized.
+> [#1103](https://github.com/UniMath/agda-unimath/issues/1103)
 
 ## 10 Conclusion
 
