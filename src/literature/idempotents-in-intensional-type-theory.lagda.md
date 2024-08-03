@@ -382,8 +382,16 @@ splittings are worked out, proving Theorem 7.4 from the previous section.
 
 ## 9 Coherent idempotents
 
-> This section remains to be formalized.
-> [#1103](https://github.com/UniMath/agda-unimath/issues/1103)
+In this section, a "homotopy-correct" definition of coherently idempotent maps
+is given.
+
+**Definition 9.1.** (Fully coherent) idempotents.
+
+```agda
+open import foundation.coherently-idempotent-maps using
+  ( is-coherently-idempotent -- "type of (fully coherent) idempotence witnesses"
+  )
+```
 
 ## 10 Conclusion
 
