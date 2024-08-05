@@ -20,8 +20,9 @@ open import order-theory.well-founded-relations
 
 ## Idea
 
-An **ordinal** is a [well founded order](order-theory.well-founded-orders.md)
-that is `Prop` valued and antisymmetric.
+An {{#concept "ordinal" Agda=Ordinal}} is a
+[well-founded order](order-theory.well-founded-orders.md) that is `Prop`-valued
+and antisymmetric.
 
 ## Definitions
 
