@@ -30,13 +30,14 @@ open import orthogonal-factorization-systems.modal-subuniverse-induction
 
 ## Idea
 
-A **reflective subuniverse** is a [subuniverse](foundation.subuniverses.md) `P`
-together with a reflecting operator `○ : UU → UU` that take values in `P`, and a
-[modal unit](orthogonal-factorization-systems.modal-operators.md) `A → ○ A` for
-all [small types](foundation-core.small-types.md) `A`, with the property that
-the types in `P` are [local](orthogonal-factorization-systems.local-types.md) at
-the modal unit for every `A`. Hence the modal types with respect to `○` are
-precisely the types in the reflective subuniverse.
+A {{#concept "reflective subuniverse" Agda=reflective-subuniverse}} is a
+[subuniverse](foundation.subuniverses.md) `P` together with a reflecting
+operator `L : 𝒰 → 𝒰` that take values in `P`, and a
+[unit](orthogonal-factorization-systems.modal-operators.md) `A → L A` for all
+types `A` in `𝒰`, with the property that the types in `P` are
+[local](orthogonal-factorization-systems.local-types.md) at the unit for every
+`A`. Hence the local types with respect to `L` are precisely the types in the
+reflective subuniverse.
 
 ## Definitions
 
@@ -47,11 +48,11 @@ is-reflective-subuniverse :
   {l1 l2 : Level} (P : subuniverse l1 l2) → UU (lsuc l1 ⊔ l2)
 is-reflective-subuniverse {l1} P =
   Σ ( operator-modality l1 l1)
-    ( λ ○ →
-      Σ ( unit-modality ○)
-        ( λ unit-○ →
-          ( (X : UU l1) → is-in-subuniverse P (○ X)) ×
-          ( (X Y : UU l1) → is-in-subuniverse P X → is-local (unit-○ {Y}) X)))
+    ( λ L →
+      Σ ( unit-modality L)
+        ( λ unit-L →
+          ( (X : UU l1) → is-in-subuniverse P (L X)) ×
+          ( (X Y : UU l1) → is-in-subuniverse P X → is-local (unit-L {Y}) X)))
 ```
 
 ```agda
