@@ -23,7 +23,8 @@ A
 {{#concept "limit" Disambiguation="of a functor of precategories" Agda=limit-Precategory}}
 of a [functor](category-theory.functors-precategories.md) `F` of
 [precategories](category-theory.precategories.md) is the
-[terminal cone](category-theory.terminal-cones-precategories.md) to `F`.
+[terminal](category-theory.terminal-objects-precategories.md)
+[cone](category-theory.cones-precategories) to `F`.
 
 Following the terminology for cones, we call the vertex of the terminal cone the
 **vertex** of the limit.
