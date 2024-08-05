@@ -8,18 +8,18 @@ module category-theory.cones-precategories where
 
 ```agda
 open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.natural-transformations-functors-precategories
 open import category-theory.constant-functors
-open import category-theory.precategory-of-functors
 open import category-theory.functors-precategories
+open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
+open import category-theory.precategory-of-functors
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.sets
 open import foundation.propositions
+open import foundation.sets
 open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
@@ -28,8 +28,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A cone of a functor `F` is a natural transformation from a constant functor
-to `F`.
+A cone of a functor `F` is a natural transformation from a constant functor to
+`F`.
 
 ## Definitions
 
@@ -146,7 +146,7 @@ module _
         ( F)
         ( pr1 ψ)
         ( pr1 φ)
-        ( natural-transformation-cone-Precategory γ )) ∙
+        ( natural-transformation-cone-Precategory γ)) ∙
     ap
       ( λ m →
         comp-natural-transformation-Precategory C D
@@ -192,7 +192,7 @@ module _
     associative-composition-operation-binary-family-Set
       hom-set-cone-Precategory
   pr1 associative-composition-operation-cone-Precategory =
-    comp-hom-cone-Precategory 
+    comp-hom-cone-Precategory
   pr2 associative-composition-operation-cone-Precategory =
     involutive-associative-comp-hom-cone-Precategory
 
@@ -216,7 +216,7 @@ module _
       ( left-unit-law-comp-natural-transformation-Precategory C D
           ( vertex-functor-cone-Precategory α)
           ( vertex-functor-cone-Precategory β)
-          ( pr1 φ ))
+          ( pr1 φ))
       ( eq-is-prop
         ( is-set-natural-transformation-Precategory C D
           ( vertex-functor-cone-Precategory α) F _ _))
@@ -241,13 +241,13 @@ module _
       ( comp-hom-cone-Precategory)
   pr1 is-unital-composition-operation-cone-Precategory = id-hom-cone-Precategory
   pr1 (pr2 is-unital-composition-operation-cone-Precategory) =
-    left-unit-law-comp-hom-cone-Precategory 
+    left-unit-law-comp-hom-cone-Precategory
   pr2 (pr2 is-unital-composition-operation-cone-Precategory) =
     right-unit-law-comp-hom-cone-Precategory
 
   cone-precategory-Precategory : Precategory (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
   pr1 cone-precategory-Precategory = cone-Precategory
-  pr1 (pr2 cone-precategory-Precategory) = hom-set-cone-Precategory 
+  pr1 (pr2 cone-precategory-Precategory) = hom-set-cone-Precategory
   pr1 (pr2 (pr2 cone-precategory-Precategory)) =
     associative-composition-operation-cone-Precategory
   pr2 (pr2 (pr2 cone-precategory-Precategory)) =

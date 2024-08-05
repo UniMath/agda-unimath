@@ -8,8 +8,8 @@ module category-theory.limits-precategories where
 
 ```agda
 open import category-theory.cones-precategories
-open import category-theory.precategories
 open import category-theory.functors-precategories
+open import category-theory.precategories
 open import category-theory.terminal-objects-precategories
 
 open import foundation.universe-levels

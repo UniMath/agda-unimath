@@ -7,8 +7,8 @@ module category-theory.reduced-coslice-precategory where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.full-subprecategories
 open import category-theory.coslice-precategories
+open import category-theory.full-subprecategories
 open import category-theory.functors-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories
@@ -23,8 +23,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The reduced coslice precategory of a precategory `C` under an object `X` of `C` is the
-category of objects of `C` equipped with a morphism from `X`.
+The reduced coslice precategory of a precategory `C` under an object `X` of `C`
+is the category of objects of `C` equipped with a morphism from `X`.
 
 ## Definitions
 
@@ -38,7 +38,7 @@ module _
   pr1 (Reduced-Coslice-Full-Subprecategory (Y,f)) =
     ¬ ((Y,f) ＝ ((X , id-hom-Precategory C)))
   pr2 (Reduced-Coslice-Full-Subprecategory (Y,f)) =
-     is-prop-neg
+    is-prop-neg
 
   Reduced-Coslice-Precategory : Precategory (l1 ⊔ l2) l2
   Reduced-Coslice-Precategory =
@@ -46,7 +46,7 @@ module _
       Reduced-Coslice-Full-Subprecategory
 ```
 
-### Properties
+## Properties
 
 ### The inclusion functor into the coslice precategory
 
