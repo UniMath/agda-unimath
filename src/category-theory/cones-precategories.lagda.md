@@ -32,9 +32,10 @@ A {{#concept "cone" Disambiguation="over a functor of precategories"}} over a
 [natural transformation](category-theory.natural-transformations-functors-precategories.md)
 from a [constant functor](category-theory.constant-functors.md) to `F`.
 
-In this context, we usually think of (and refer to) the functor `F` as a **diagram** in its codomain,
-A cone over such diagram then corresponds to an element `d`, called the **vertex** of the cone,
-equipped with components `d → F x` satisfying the naturality condition.
+In this context, we usually think of (and refer to) the functor `F` as a
+**diagram** in its codomain, A cone over such diagram then corresponds to an
+element `d`, called the **vertex** of the cone, equipped with components
+`d → F x` satisfying the naturality condition.
 
 For example, if `F` corresponds to the diagram `F x → F y`, then a cone over `F`
 corresponds to a commuting triangle as below.
