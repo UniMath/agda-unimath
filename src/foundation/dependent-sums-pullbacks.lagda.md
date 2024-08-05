@@ -102,7 +102,7 @@ Given a map `f : A → B` with a family of maps over it
 
 ```text
          map-Σ f g
-  Σ A P ----------> Σ B Q
+  Σ A P ---------> Σ B Q
     |                |
     |                |
     ∨                ∨
