@@ -1,8 +1,8 @@
 # Formalization of results from the literature
 
-This page is a work in early progress. To see what's happening behind the
-scenes, you can have a look at the associated GitHub issue
-[#1055](https://github.com/UniMath/agda-unimath/issues/1055).
+> This page is a work in early progress. To see what's happening behind the
+> scenes, you can have a look at the associated GitHub issue
+> [#1055](https://github.com/UniMath/agda-unimath/issues/1055).
 
 ## References
 

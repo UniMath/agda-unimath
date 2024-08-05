@@ -424,8 +424,9 @@ of {{#cite Shu17}} for more details.
 
 ### Characterization of identity of quasicoherently idempotent maps
 
-A homotopy if quasicoherent idempotence witnesses consists of a homotopy of the
-underlying idempotence witnesses `H : I ~ J`, and a coherence
+A homotopy of quasicoherent idempotence witnesses `(I, Q) ~ (J, R)` consists of
+a homotopy of the underlying idempotence witnesses `H : I ~ J` and a
+[coherence](foundation-core.commuting-squares-of-homotopies.md)
 
 ```text
             fH
@@ -434,7 +435,7 @@ underlying idempotence witnesses `H : I ~ J`, and a coherence
    Q |              | R
      |              |
   I ·r f -------– J ·r f.
-            fH
+            Hf
 ```
 
 ```agda
