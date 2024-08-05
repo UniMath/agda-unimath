@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-The limit of a functor `F in a precategory is the terminal cone to `F`.
+The {{#concept "limit of a functor" Agda=limit-Precategory}} `F` in a
+precategory is the terminal cone to `F`.
 
 ## Definition
 
