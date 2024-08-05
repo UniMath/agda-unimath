@@ -10,6 +10,7 @@ module category-theory.functors-precategories where
 open import category-theory.functors-set-magmoids
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-precategories
+open import category-theory.opposite-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -112,7 +113,7 @@ module _
   preserves-id-is-functor-map-Precategory = pr2
 ```
 
-### functors between precategories
+### Functors between precategories
 
 ```agda
 module _
@@ -414,6 +415,25 @@ module _
     preserves-is-iso-functor-Precategory
       ( hom-iso-Precategory C f)
       ( is-iso-iso-Precategory C f)
+```
+
+### Functors induce functors on the opposite precategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2) (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  where
+
+  opposite-functor-Precategory :
+    functor-Precategory (opposite-Precategory C) (opposite-Precategory D)
+  pr1 opposite-functor-Precategory = obj-functor-Precategory C D F
+  pr1 (pr2 opposite-functor-Precategory) = hom-functor-Precategory C D F
+  pr1 (pr2 (pr2 opposite-functor-Precategory)) g f =
+    preserves-comp-functor-Precategory C D F f g
+  pr2 (pr2 (pr2 opposite-functor-Precategory)) =
+    preserves-id-functor-Precategory C D F
 ```
 
 ### Categorical laws for functor composition
