@@ -7,6 +7,7 @@ module category-theory.slice-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.functors-precategories
 open import category-theory.precategories
 open import category-theory.products-in-precategories
 open import category-theory.pullbacks-in-precategories
@@ -451,4 +452,19 @@ module _
       map-inv-pullback-product-Slice-Precategory
       is-section-map-inv-pullback-product-Slice-Precategory
       is-retraction-map-inv-pullback-product-Slice-Precategory
+```
+
+### The slice precategory has a forgetful functor
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (X : obj-Precategory C)
+  where
+
+  forgetful-functor-Slice-Precategory :
+    functor-Precategory (Slice-Precategory C X) C
+  pr1 forgetful-functor-Slice-Precategory (Y , f) = Y
+  pr1 (pr2 forgetful-functor-Slice-Precategory) (f , pf) = f
+  pr1 (pr2 (pr2 forgetful-functor-Slice-Precategory)) g h = refl
+  pr2 (pr2 (pr2 forgetful-functor-Slice-Precategory)) x = refl
 ```
