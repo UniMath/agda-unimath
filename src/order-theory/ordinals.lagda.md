@@ -20,7 +20,13 @@ open import order-theory.well-founded-relations
 
 ## Idea
 
-An {{#concept "ordinal" Agda=Ordinal}} is a
+An ordinal is a propositional relation that is
+
+- Transitive: `R x y` and `R y z` imply `R x y`.
+- Extensional: `R x y` and `R y x` imply `x ＝ y`.
+- Well-founded: a structure on which it is well-defined to do induction.
+
+In other words, it is a
 [well-founded order](order-theory.well-founded-orders.md) that is `Prop`-valued
 and antisymmetric.
 
