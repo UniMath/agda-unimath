@@ -674,7 +674,7 @@ Now, by pasting these along the common edge `Rgfg`, we obtain
        |             |             |
     Rg |             | Rgfg        | Rg
        ∨             ∨             ∨
-       g <--------- gfg --------> gm
+       g <--------- gfg ---------> g.
              Rg             gS
 ```
 
