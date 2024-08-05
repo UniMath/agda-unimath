@@ -9,13 +9,18 @@ module structured-types.h-spaces where
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
+open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.evaluation-functions
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.path-algebra
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
@@ -195,4 +200,121 @@ module _
           ( λ _ →
             equiv-tot (λ _ → inv-equiv (equiv-right-whisker-concat refl))))) ∘e
     ( associative-Σ _ _ _)
+```
+
+### Every type equivalent to an H-space is an H-space
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : H-Space l2) (e : A ≃ type-H-Space B)
+  where
+
+  unit-equiv-H-Space : A
+  unit-equiv-H-Space = map-inv-equiv e (unit-H-Space B)
+
+  compute-unit-equiv-H-Space : map-equiv e unit-equiv-H-Space ＝ unit-H-Space B
+  compute-unit-equiv-H-Space = is-section-map-inv-equiv e (unit-H-Space B)
+
+  mul-equiv-H-Space : A → A → A
+  mul-equiv-H-Space x y =
+    map-inv-equiv e (mul-H-Space B (map-equiv e x) (map-equiv e y))
+
+  compute-mul-equiv-H-Space :
+    (x y : A) →
+    map-equiv e (mul-equiv-H-Space x y) ＝
+    mul-H-Space B (map-equiv e x) (map-equiv e y)
+  compute-mul-equiv-H-Space x y =
+    is-section-map-inv-equiv e _
+
+  left-unit-law-mul-equiv-H-Space :
+    (x : A) → mul-equiv-H-Space unit-equiv-H-Space x ＝ x
+  left-unit-law-mul-equiv-H-Space x =
+    map-inv-is-equiv
+      ( is-emb-equiv e _ _)
+      ( ( compute-mul-equiv-H-Space _ _) ∙
+        ( ( ap (λ t → mul-H-Space B t _) compute-unit-equiv-H-Space) ∙
+          ( left-unit-law-mul-H-Space B _)))
+
+  compute-left-unit-law-mul-equiv-H-Space :
+    (x : A) →
+    ap (map-equiv e) (left-unit-law-mul-equiv-H-Space x) ＝
+    ( ( compute-mul-equiv-H-Space unit-equiv-H-Space x) ∙
+      ( ( ap (λ t → mul-H-Space B t _) (compute-unit-equiv-H-Space)) ∙
+        ( left-unit-law-mul-H-Space B (map-equiv e x))))
+  compute-left-unit-law-mul-equiv-H-Space x =
+    is-section-map-inv-is-equiv (is-emb-equiv e _ _) _
+
+  right-unit-law-mul-equiv-H-Space :
+    (x : A) → mul-equiv-H-Space x unit-equiv-H-Space ＝ x
+  right-unit-law-mul-equiv-H-Space x =
+    map-inv-is-equiv
+      ( is-emb-equiv e _ _)
+      ( ( compute-mul-equiv-H-Space _ _) ∙
+        ( ( ap (mul-H-Space B _) compute-unit-equiv-H-Space) ∙
+          ( right-unit-law-mul-H-Space B _)))
+
+  compute-right-unit-law-mul-equiv-H-Space :
+    (x : A) →
+    ( ap (map-equiv e) (right-unit-law-mul-equiv-H-Space x)) ＝
+    ( ( compute-mul-equiv-H-Space x unit-equiv-H-Space) ∙
+      ( ( ap (mul-H-Space B _) (compute-unit-equiv-H-Space)) ∙
+        ( right-unit-law-mul-H-Space B (map-equiv e x))))
+  compute-right-unit-law-mul-equiv-H-Space x =
+    is-section-map-inv-is-equiv (is-emb-equiv e _ _) _
+
+  coh-unit-laws-mul-equiv-H-Space :
+    left-unit-law-mul-equiv-H-Space unit-equiv-H-Space ＝
+    right-unit-law-mul-equiv-H-Space unit-equiv-H-Space
+  coh-unit-laws-mul-equiv-H-Space =
+    is-injective-is-equiv
+      ( is-emb-equiv e _ _)
+      ( ( compute-left-unit-law-mul-equiv-H-Space _) ∙
+        ( ( left-whisker-concat
+            ( compute-mul-equiv-H-Space _ _)
+            ( right-unwhisker-concat-coherence-square-identifications
+              ( ap (mul-H-Space B _) compute-unit-equiv-H-Space)
+              ( ap
+                ( λ t → mul-H-Space B t (map-equiv e unit-equiv-H-Space))
+                ( compute-unit-equiv-H-Space))
+              ( right-unit-law-mul-H-Space B _)
+              ( left-unit-law-mul-H-Space B _)
+              ( compute-unit-equiv-H-Space)
+              ( ( left-whisker-concat
+                  ( ap (λ t → mul-H-Space B t _) compute-unit-equiv-H-Space)
+                  ( nat-htpy-id
+                    ( left-unit-law-mul-H-Space B)
+                    ( compute-unit-equiv-H-Space))) ∙
+                ( inv
+                  ( assoc
+                    ( ap (λ t → mul-H-Space B t _) compute-unit-equiv-H-Space)
+                    ( ap (mul-H-Space B _) compute-unit-equiv-H-Space)
+                    ( left-unit-law-mul-H-Space B (unit-H-Space B)))) ∙
+                ( horizontal-concat-Id²
+                  ( triangle-ap-binary'
+                    ( mul-H-Space B)
+                    ( is-section-map-inv-equiv e _)
+                    ( is-section-map-inv-equiv e _))
+                  ( coh-unit-laws-mul-H-Space B)) ∙
+                ( assoc
+                  ( ap (mul-H-Space B _) compute-unit-equiv-H-Space)
+                  ( ap (λ t → mul-H-Space B t _) compute-unit-equiv-H-Space)
+                  ( right-unit-law-mul-H-Space B (unit-H-Space B))) ∙
+                ( inv
+                  ( left-whisker-concat
+                    ( ap (mul-H-Space B _) compute-unit-equiv-H-Space)
+                    ( nat-htpy-id
+                      ( right-unit-law-mul-H-Space B)
+                      ( compute-unit-equiv-H-Space))))))) ∙
+          ( inv (compute-right-unit-law-mul-equiv-H-Space _))))
+
+  pointed-type-equiv-H-Space : Pointed-Type l1
+  pr1 pointed-type-equiv-H-Space = A
+  pr2 pointed-type-equiv-H-Space = unit-equiv-H-Space
+
+  h-space-equiv-H-Space : H-Space l1
+  pr1 h-space-equiv-H-Space = pointed-type-equiv-H-Space
+  pr1 (pr2 h-space-equiv-H-Space) = mul-equiv-H-Space
+  pr1 (pr2 (pr2 h-space-equiv-H-Space)) = left-unit-law-mul-equiv-H-Space
+  pr1 (pr2 (pr2 (pr2 h-space-equiv-H-Space))) = right-unit-law-mul-equiv-H-Space
+  pr2 (pr2 (pr2 (pr2 h-space-equiv-H-Space))) = coh-unit-laws-mul-equiv-H-Space
 ```

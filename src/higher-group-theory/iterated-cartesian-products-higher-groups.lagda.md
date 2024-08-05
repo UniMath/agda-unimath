@@ -92,7 +92,7 @@ module _
     ((X : classifying-type-iterated-product-∞-Group) →
     type-Prop (P X))
   elim-prop-classifying-type-iterated-product-∞-Group =
-    apply-dependent-universal-property-is-0-connected
+    apply-dependent-universal-property-0-connected-type
       shape-iterated-product-∞-Group
       is-0-connected-classifying-type-iterated-product-∞-Group
 

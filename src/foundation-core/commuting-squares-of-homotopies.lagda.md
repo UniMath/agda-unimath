@@ -840,12 +840,12 @@ module _
       ( coh x)
       ( H x)
 
-  right-unwhisker-cohernece-square-homotopies :
+  right-unwhisker-concat-coherence-square-homotopies :
     {u : (x : A) → B x} (H : i ~ u) →
     coherence-square-homotopies top left (right ∙h H) (bottom ∙h H) →
     coherence-square-homotopies top left right bottom
-  right-unwhisker-cohernece-square-homotopies H coh x =
-    right-unwhisker-cohernece-square-identifications
+  right-unwhisker-concat-coherence-square-homotopies H coh x =
+    right-unwhisker-concat-coherence-square-identifications
       ( top x)
       ( left x)
       ( right x)

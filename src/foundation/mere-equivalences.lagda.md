@@ -10,7 +10,7 @@ module foundation.mere-equivalences where
 open import foundation.binary-relations
 open import foundation.decidable-equality
 open import foundation.functoriality-propositional-truncation
-open import foundation.mere-equality
+open import foundation-core.mere-equality
 open import foundation.propositional-truncations
 open import foundation.univalence
 open import foundation.universe-levels

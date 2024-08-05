@@ -9,16 +9,23 @@ module foundation.set-truncations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equality-coproduct-types
+open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.logical-equivalences
 open import foundation.mere-equality
 open import foundation.postcomposition-functions
+open import foundation.propositional-extensionality
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
 open import foundation.slice
+open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.truncations
 open import foundation.uniqueness-set-truncations
@@ -566,4 +573,170 @@ module _
     ( map-product unit-trunc-Set unit-trunc-Set)
   triangle-distributive-trunc-product-Set =
     pr2 (center distributive-trunc-product-Set)
+```
+
+### Extending subtypes to set truncations
+
+Any subtype `P` of `A` extends to a subtype `P̃` of the set truncation of `A`. Futhermore, the underlying type of the extension of `P` to the set truncation of `A` is the set truncation of the underlying type of `P`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
+  where
+
+  extension-trunc-set-subtype : subtype l2 (type-trunc-Set A)
+  extension-trunc-set-subtype =
+    map-universal-property-trunc-Set (Prop-Set l2) P
+
+  is-in-extension-trunc-set-subtype : type-trunc-Set A → UU l2
+  is-in-extension-trunc-set-subtype =
+    is-in-subtype extension-trunc-set-subtype
+
+  abstract
+    compute-extension-trunc-set-subtype :
+      has-same-elements-subtype P (extension-trunc-set-subtype ∘ unit-trunc-Set)
+    compute-extension-trunc-set-subtype x =
+      iff-eq (inv (triangle-universal-property-trunc-Set (Prop-Set l2) P x))
+
+  abstract
+    is-in-extension-trunc-set-is-in-subtype :
+      P ⊆ extension-trunc-set-subtype ∘ unit-trunc-Set
+    is-in-extension-trunc-set-is-in-subtype x =
+      forward-implication (compute-extension-trunc-set-subtype x)
+
+  abstract
+    is-in-subtype-is-in-extension-trunc-set-subtype :
+      extension-trunc-set-subtype ∘ unit-trunc-Set ⊆ P
+    is-in-subtype-is-in-extension-trunc-set-subtype x =
+      backward-implication (compute-extension-trunc-set-subtype x)
+
+  map-compute-type-extension-trunc-set-subtype :
+    type-trunc-Set (type-subtype P) → type-subtype extension-trunc-set-subtype
+  map-compute-type-extension-trunc-set-subtype =
+    map-universal-property-trunc-Set
+      ( set-subset (trunc-Set A) extension-trunc-set-subtype)
+      ( map-Σ
+        ( is-in-extension-trunc-set-subtype)
+        ( unit-trunc-Set)
+        ( is-in-extension-trunc-set-is-in-subtype))
+
+  abstract
+    triangle-map-compute-type-extension-trunc-set-subtype :
+      map-compute-type-extension-trunc-set-subtype ∘ unit-trunc-Set ~
+      map-Σ
+        ( is-in-extension-trunc-set-subtype)
+        ( unit-trunc-Set)
+        ( is-in-extension-trunc-set-is-in-subtype)
+    triangle-map-compute-type-extension-trunc-set-subtype =
+      triangle-universal-property-trunc-Set
+        ( set-subset (trunc-Set A) extension-trunc-set-subtype)
+        ( map-Σ
+          ( is-in-extension-trunc-set-subtype)
+          ( unit-trunc-Set)
+          ( is-in-extension-trunc-set-is-in-subtype))
+
+  map-inv-compute-type-extension-trunc-set-subtype :
+    type-subtype extension-trunc-set-subtype → type-trunc-Set (type-subtype P)
+  map-inv-compute-type-extension-trunc-set-subtype (x , p) =
+    function-dependent-universal-property-trunc-Set
+      ( λ y →
+        function-Set
+          ( is-in-extension-trunc-set-subtype y)
+          ( trunc-Set (type-subtype P)))
+      ( λ y q →
+        unit-trunc-Set
+          ( y , is-in-subtype-is-in-extension-trunc-set-subtype y q))
+      ( x)
+      ( p)
+
+  abstract
+    triangle-map-inv-compute-type-extension-trunc-set-subtype :
+      ( x : A) →
+      ev-pair
+        ( map-inv-compute-type-extension-trunc-set-subtype)
+        ( unit-trunc-Set x) ~
+      ( λ q →
+        unit-trunc-Set
+          ( x , is-in-subtype-is-in-extension-trunc-set-subtype x q))
+    triangle-map-inv-compute-type-extension-trunc-set-subtype x =
+      htpy-eq
+        ( compute-dependent-universal-property-trunc-Set
+          ( λ y →
+            function-Set
+              ( is-in-extension-trunc-set-subtype y)
+              ( trunc-Set (type-subtype P)))
+          ( λ y q →
+            unit-trunc-Set
+              ( y , is-in-subtype-is-in-extension-trunc-set-subtype y q))
+          ( x))
+
+  abstract
+    is-section-map-inv-compute-type-extension-trunc-set-subtype :
+      is-section
+        ( map-compute-type-extension-trunc-set-subtype)
+        ( map-inv-compute-type-extension-trunc-set-subtype)
+    is-section-map-inv-compute-type-extension-trunc-set-subtype (x , p) =
+      function-dependent-universal-property-trunc-Set
+        ( λ y →
+          Π-Set'
+            ( is-in-extension-trunc-set-subtype y)
+            ( λ q →
+              set-Prop
+                ( Id-Prop
+                  ( set-subset (trunc-Set A) extension-trunc-set-subtype)
+                  ( map-compute-type-extension-trunc-set-subtype
+                    ( map-inv-compute-type-extension-trunc-set-subtype
+                      ( y , q)))
+                  ( y , q))))
+        ( λ y q →
+          eq-type-subtype
+            ( extension-trunc-set-subtype)
+            ( ap
+              ( inclusion-subtype extension-trunc-set-subtype)
+              ( ( ap
+                  ( map-compute-type-extension-trunc-set-subtype)
+                  ( triangle-map-inv-compute-type-extension-trunc-set-subtype
+                    y q)) ∙
+                ( triangle-map-compute-type-extension-trunc-set-subtype
+                  ( y , is-in-subtype-is-in-extension-trunc-set-subtype y q)))))
+        ( x)
+        ( p)
+
+  abstract
+    is-retraction-map-inv-compute-type-extension-trunc-set-subtype :
+      is-retraction
+        ( map-compute-type-extension-trunc-set-subtype)
+        ( map-inv-compute-type-extension-trunc-set-subtype)
+    is-retraction-map-inv-compute-type-extension-trunc-set-subtype =
+      apply-dependent-universal-property-trunc-Set'
+        ( λ y →
+          set-Prop
+            ( Id-Prop
+              ( trunc-Set (type-subtype P))
+              ( map-inv-compute-type-extension-trunc-set-subtype
+                ( map-compute-type-extension-trunc-set-subtype y))
+              ( y)))
+        ( λ (y , q) →
+          ( ap
+            ( map-inv-compute-type-extension-trunc-set-subtype)
+            ( triangle-map-compute-type-extension-trunc-set-subtype (y , q))) ∙
+          ( ( triangle-map-inv-compute-type-extension-trunc-set-subtype y
+              ( is-in-extension-trunc-set-is-in-subtype y q)) ∙
+            ( ap unit-trunc-Set (eq-type-subtype P refl))))
+
+  abstract
+    is-equiv-map-compute-type-extension-trunc-set-subtype :
+      is-equiv map-compute-type-extension-trunc-set-subtype
+    is-equiv-map-compute-type-extension-trunc-set-subtype =
+      is-equiv-is-invertible
+        ( map-inv-compute-type-extension-trunc-set-subtype)
+        ( is-section-map-inv-compute-type-extension-trunc-set-subtype)
+        ( is-retraction-map-inv-compute-type-extension-trunc-set-subtype)
+
+  compute-type-extension-trunc-set-subtype :
+    type-trunc-Set (type-subtype P) ≃ type-subtype extension-trunc-set-subtype
+  pr1 compute-type-extension-trunc-set-subtype =
+    map-compute-type-extension-trunc-set-subtype
+  pr2 compute-type-extension-trunc-set-subtype =
+    is-equiv-map-compute-type-extension-trunc-set-subtype
 ```
