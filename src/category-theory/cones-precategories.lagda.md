@@ -28,7 +28,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "cone of a functor between precategories" }} `F` is a
+A {{#concept "cone" Disambiguation="of a functor of precategories"}} of a
+[functor](category-theory.functors-precategories.md) `F` of
+[precategories](category-theory.precategories.md) is a
 [natural transformation](category-theory.natural-transformations-functors-precategories.md)
 from a [constant functor](category-theory.constant-functors.md) to `F`.
 

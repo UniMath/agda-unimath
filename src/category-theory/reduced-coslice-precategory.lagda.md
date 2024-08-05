@@ -28,6 +28,9 @@ of a [precategory](category-theory.precategories.md) `C` under an object `X` of
 `C` is the category of objects of `C` equipped with a non-identity morphism from
 `X`.
 
+These categories can be used to define matching objects, which themselves can be
+used to define Reedy fibrations, as shown in {{#cite Shu15}}.
+
 ## Definitions
 
 ```agda
