@@ -34,6 +34,17 @@ is an [idempotent](foundation.idempotent-maps.md) map `f : A → A`
 [homotopies](foundation-core.homotopies.md) making it a "homotopy-correct"
 definition of an idempotent map in Homotopy Type Theory.
 
+The infinite coherence condition is given by taking the
+[sequential limit](foundation.sequential-limits.md) of iterated application of
+the splitting construction on
+[quasicoherently idempotent maps](foundation.quasicoherently-idempotent-maps.md)
+given in {{#cite Shu17}}:
+
+```text
+  is-coherently-idempotent f :≐
+    Σ (a : ℕ → is-quasicoherently-idempotent f), (Π (n : ℕ), split(aₙ₊₁) ~ aₙ)
+```
+
 **Terminology.** Our definition of a _coherently idempotent map_ corresponds to
 the definition of a _(fully coherent) idempotent map_ in {{#reference Shu17}}
 and {{#reference Shu14SplittingIdempotents}}. Our definition of an _idempotent

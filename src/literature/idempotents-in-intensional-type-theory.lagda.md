@@ -73,9 +73,9 @@ open import foundation.homotopies using
   )
 ```
 
-The preferred notion of equivalence in the library are functions equipped with a
-left inverse and a right inverse, which coincides with the example given in the
-article.
+The preferred notion of equivalence in the library coincides with the example
+given in the article: an equivalence is a function equipped with a left inverse
+and a right inverse.
 
 ```agda
 open import foundation.equivalences using
@@ -110,14 +110,15 @@ open import foundation.univalence-implies-function-extensionality using
 -- MISSING: propositional truncations imply function extensionality
 
 open import foundation.equality-cartesian-product-types using
-  ( equiv-pair-eq -- "characteriation of the identity types of cartesian product type formation"
+  ( Eq-product -- observational equality on pairs
+  ; equiv-pair-eq -- "characteriation of the identity types of cartesian product type formation"
   )
 ```
 
 ## 3 Some pre-idempotents that split
 
 In this section, definitions of "pre-idempotents", "split idempotents" and
-"quasi-idempotents" are given, and basic relations between them are given.
+"quasi-idempotents" are given, and basic relations between them are established.
 
 **Definition 3.1.** Pre-idempotents.
 
@@ -238,7 +239,7 @@ In this section, assuming univalence and propositional truncations, an example
 is given of a pre-idempotent map that does not split or extend to a
 quasi-idempotent. Such a map is constructed on the
 [connected component of the universe](foundation.connected-components-universes.md)
-at the [cantor space](set-theory.cantor-space.md).
+at the [cantor space](set-theory.cantor-space.md), i.e., its classifying space.
 
 > This section remains to be formalized.
 > [#1103](https://github.com/UniMath/agda-unimath/issues/1103)
@@ -284,7 +285,8 @@ split, or even that all pre-idempotents are quasi-idempotent. □
 
 ## 5 All quasi-idempotents split
 
-In this section it is shown that every quasi-idempotent map splits.
+In this section it is shown that, assuming function extensionality, every
+quasi-idempotent map splits.
 
 **Example 5.1.** A naïve attempt.
 
@@ -323,7 +325,8 @@ that compared to the paper, the coherences in the formalization are transposed.
 
 ```agda
 open import foundation.sequential-limits using
-  ( extensionality-standard-sequential-limit
+  ( Eq-standard-sequential-limit -- observational equality on standard sequential limits
+  ; extensionality-standard-sequential-limit
   )
 ```
 
@@ -360,7 +363,8 @@ quasi-idempotence.
 
 ```agda
 open import foundation.retracts-of-types using
-  ( extensionality-retracts
+  ( equiv-retracts -- observational equality on retracts
+  ; extensionality-retracts
   )
 ```
 
@@ -375,15 +379,16 @@ than splittings of a map.
 ## 8 The double classifying space of 2
 
 In this section, an explicit example of a type with more quasi-idempotents than
-splittings are worked out, proving Theorem 7.4 from the previous section.
+splittings are worked out using the univalence axiom and propositional
+truncations, proving Theorem 7.4 from the previous section.
 
 > This section remains to be formalized.
 > [#1103](https://github.com/UniMath/agda-unimath/issues/1103)
 
 ## 9 Coherent idempotents
 
-In this section, a "homotopy-correct" definition of coherently idempotent maps
-is given.
+In this section, assuming function extensionality, a "homotopy-correct"
+definition of coherently idempotent maps is given.
 
 **Definition 9.1.** (Fully coherent) idempotents.
 
@@ -395,9 +400,10 @@ open import foundation.coherently-idempotent-maps using
 
 ## 10 Conclusion
 
-This section of the article features a series of 5 open problems. If any of
-their resolutions are formalized in the library, then it is fitting to record
-them here.
+This section of the article features a series of 5 open problems.
+
+> If a resolution to any of these open problems is formalized in the library,
+> then it should be recorded here.
 
 **Open Problem 10.1.** Can quasi-idempotents be split in MLTT without assuming
 function extensionality? In particular, is there a more "finite" way to
