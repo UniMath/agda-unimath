@@ -53,6 +53,7 @@ open import foundation.category-of-families-of-sets public
 open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.codiagonal-maps-of-types public
+open import foundation.coherently-idempotent-maps public
 open import foundation.coherently-invertible-maps public
 open import foundation.coinhabited-pairs-of-types public
 open import foundation.commuting-cubes-of-maps public
