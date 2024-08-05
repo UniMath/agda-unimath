@@ -24,7 +24,7 @@ A
 of a [functor](category-theory.functors-precategories.md) `F` of
 [precategories](category-theory.precategories.md) is the
 [terminal](category-theory.terminal-objects-precategories.md)
-[cone](category-theory.cones-precategories) to `F`.
+[cone](category-theory.cones-precategories.md) to `F`.
 
 Following the terminology for cones, we call the vertex of the terminal cone the
 **vertex** of the limit.
