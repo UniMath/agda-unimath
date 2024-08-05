@@ -29,8 +29,8 @@ open import foundation.universe-levels
 ## Idea
 
 A {{#concept "cone of a functor between precategories" }} `F` is a
-[natural transformation](category-theory.natural-transformations-functors-precategories)
-from a [constant functor](category-theory.constant-functors) to `F`.
+[natural transformation](category-theory.natural-transformations-functors-precategories.md)
+from a [constant functor](category-theory.constant-functors.md) to `F`.
 
 We call the object that the constant functor takes values at the **vertex** of
 the cone. Further, we say it is a "cone _over_ `F`" rather than a "cone _of_

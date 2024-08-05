@@ -24,8 +24,9 @@ open import foundation.universe-levels
 ## Idea
 
 The {{#concept "reduced coslice precategory" Agda=Reduced-Coslice-Precategory}}
-of a precategory `C` under an object `X` of `C` is the category of objects of
-`C` equipped with a non-identity morphism from `X`.
+of a [precategory](category-theory.precategories.md) `C` under an object `X` of
+`C` is the category of objects of `C` equipped with a non-identity morphism from
+`X`.
 
 ## Definitions
 
