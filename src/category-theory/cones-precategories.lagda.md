@@ -7,7 +7,6 @@ module category-theory.cones-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.constant-functors
 open import category-theory.functors-precategories
 open import category-theory.natural-transformations-functors-precategories
@@ -20,7 +19,6 @@ open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 ```
 
@@ -28,19 +26,30 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "cone" Disambiguation="of a functor of precategories"}} of a
+A {{#concept "cone" Disambiguation="over a functor of precategories"}} over a
 [functor](category-theory.functors-precategories.md) `F` of
 [precategories](category-theory.precategories.md) is a
 [natural transformation](category-theory.natural-transformations-functors-precategories.md)
 from a [constant functor](category-theory.constant-functors.md) to `F`.
 
-We call the object that the constant functor takes values at the **vertex** of
-the cone. Further, we say it is a "cone _over_ `F`" rather than a "cone _of_
-`F`", and it's standard to refer to `F` as a diagram here.
+In this context, we usually think of (and refer to) the functor `F` as a **diagram** in its codomain,
+A cone over such diagram then corresponds to an element `d`, called the **vertex** of the cone,
+equipped with components `d → F x` satisfying the naturality condition.
+
+For example, if `F` corresponds to the diagram `F x → F y`, then a cone over `F`
+corresponds to a commuting triangle as below.
+
+```text
+      d
+    /   \
+   /     \
+  ∨       ∨
+ Fx ----> Fy
+```
 
 ## Definitions
 
-### The type of cones of a functor
+### The type of cones over a functor
 
 ```agda
 module _
@@ -98,7 +107,7 @@ module _
     right-unit-law-comp-hom-Precategory D _
 ```
 
-### The precategory of cones of a functor
+### The precategory of cones over a functor
 
 ```agda
   hom-cone-Precategory : (α β : cone-Precategory) → UU (l1 ⊔ l2 ⊔ l4)
