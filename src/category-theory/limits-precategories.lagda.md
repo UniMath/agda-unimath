@@ -20,7 +20,12 @@ open import foundation.universe-levels
 ## Idea
 
 The {{#concept "limit of a functor" Agda=limit-Precategory}} `F` in a
-precategory is the terminal cone to `F`.
+[precategory](category-theory.precategories) is the
+[terminal](category-theory.terminal-objects-precategories)
+[cone](category-theory.cones-precategories) to `F`.
+
+Following the terminology for cones, we call the vertex of the terminal cone the
+**vertex** of the limit.
 
 ## Definition
 
@@ -47,11 +52,11 @@ module _
   vertex-limit-Precategory =
     vertex-cone-Precategory C D F cone-limit-Precategory
 
-  is-limiting-cone :
+  is-limiting-cone-Precategory :
     is-terminal-obj-Precategory
       ( cone-precategory-Precategory C D F)
       ( cone-limit-Precategory)
-  is-limiting-cone =
+  is-limiting-cone-Precategory =
     is-terminal-obj-terminal-obj-Precategory
       ( cone-precategory-Precategory C D F)
       ( L)

@@ -28,8 +28,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-A cone of a functor `F` is a natural transformation from a constant functor to
-`F`.
+A {{#concept "cone of a functor between precategories" }} `F` is a
+[natural transformation](category-theory.natural-transformations-functors-precategories)
+from a [constant functor](category-theory.constant-functors) to `F`.
+
+We call the object that the constant functor takes values at the **vertex** of
+the cone. Further, we say it is a "cone _over_ `F`" rather than a "cone _of_
+`F`", and it's standard to refer to `F` as a diagram here.
 
 ## Definitions
 
@@ -177,25 +182,6 @@ module _
         ( is-set-natural-transformation-Precategory C D
           ( vertex-functor-cone-Precategory α) F _ _))
 
-  involutive-associative-comp-hom-cone-Precategory :
-    {α β γ τ : cone-Precategory} →
-    (ξ : hom-cone-Precategory γ τ) →
-    (φ : hom-cone-Precategory β γ) →
-    (ψ : hom-cone-Precategory α β) →
-    comp-hom-cone-Precategory (comp-hom-cone-Precategory ξ φ) ψ ＝ⁱ
-    comp-hom-cone-Precategory ξ (comp-hom-cone-Precategory φ ψ)
-  involutive-associative-comp-hom-cone-Precategory ξ φ ψ =
-    involutive-eq-eq
-      ( associative-comp-hom-cone-Precategory ξ φ ψ)
-
-  associative-composition-operation-cone-Precategory :
-    associative-composition-operation-binary-family-Set
-      hom-set-cone-Precategory
-  pr1 associative-composition-operation-cone-Precategory =
-    comp-hom-cone-Precategory
-  pr2 associative-composition-operation-cone-Precategory =
-    involutive-associative-comp-hom-cone-Precategory
-
   id-hom-cone-Precategory :
     (α : cone-Precategory) → hom-cone-Precategory α α
   pr1 (id-hom-cone-Precategory α) =
@@ -235,21 +221,14 @@ module _
         ( is-set-natural-transformation-Precategory C D
           ( vertex-functor-cone-Precategory α) F _ _))
 
-  is-unital-composition-operation-cone-Precategory :
-    is-unital-composition-operation-binary-family-Set
-      ( hom-set-cone-Precategory)
-      ( comp-hom-cone-Precategory)
-  pr1 is-unital-composition-operation-cone-Precategory = id-hom-cone-Precategory
-  pr1 (pr2 is-unital-composition-operation-cone-Precategory) =
-    left-unit-law-comp-hom-cone-Precategory
-  pr2 (pr2 is-unital-composition-operation-cone-Precategory) =
-    right-unit-law-comp-hom-cone-Precategory
-
   cone-precategory-Precategory : Precategory (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
-  pr1 cone-precategory-Precategory = cone-Precategory
-  pr1 (pr2 cone-precategory-Precategory) = hom-set-cone-Precategory
-  pr1 (pr2 (pr2 cone-precategory-Precategory)) =
-    associative-composition-operation-cone-Precategory
-  pr2 (pr2 (pr2 cone-precategory-Precategory)) =
-    is-unital-composition-operation-cone-Precategory
+  cone-precategory-Precategory =
+    make-Precategory
+      cone-Precategory
+      hom-set-cone-Precategory
+      comp-hom-cone-Precategory
+      id-hom-cone-Precategory
+      associative-comp-hom-cone-Precategory
+      left-unit-law-comp-hom-cone-Precategory
+      right-unit-law-comp-hom-cone-Precategory
 ```
