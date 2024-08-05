@@ -18,7 +18,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-The coslice precategory of a precategory `C` under an object `X` of `C` is the
+The {{#concept "coslice precategory" Agda=Coslice-Precategory}} of a [precategory](category-theory.precategories.md) `C` under an object `X` of `C` is the
 category of objects of `C` equipped with a morphism from `X`.
 
 ## Definitions

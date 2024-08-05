@@ -48,14 +48,14 @@ module _
   {l1 l2 : Level} {X : UU l1} (S : Ordinal l2 X)
   where
 
-  lt-Ordinal-Prop : Relation-Prop l2 X
-  lt-Ordinal-Prop = pr1 S
+  lt-prop-Ordinal : Relation-Prop l2 X
+  lt-prop-Ordinal = pr1 S
 
   lt-Ordinal : Relation l2 X
-  lt-Ordinal = type-Relation-Prop lt-Ordinal-Prop
+  lt-Ordinal = type-Relation-Prop lt-prop-Ordinal
 
   is-ordinal-Ordinal :
-    is-ordinal lt-Ordinal-Prop
+    is-ordinal lt-prop-Ordinal
   is-ordinal-Ordinal = pr2 S
 
   is-well-founded-order-Ordinal :
