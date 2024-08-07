@@ -27,6 +27,7 @@ open import category-theory.commuting-squares-of-morphisms-in-large-precategorie
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-set-magmoids public
 open import category-theory.composition-operations-on-binary-families-of-sets public
+open import category-theory.cones-precategories public
 open import category-theory.conservative-functors-precategories public
 open import category-theory.constant-functors public
 open import category-theory.copresheaf-categories public
@@ -92,6 +93,7 @@ open import category-theory.large-function-precategories public
 open import category-theory.large-precategories public
 open import category-theory.large-subcategories public
 open import category-theory.large-subprecategories public
+open import category-theory.limits-precategories public
 open import category-theory.maps-categories public
 open import category-theory.maps-from-small-to-large-categories public
 open import category-theory.maps-from-small-to-large-precategories public

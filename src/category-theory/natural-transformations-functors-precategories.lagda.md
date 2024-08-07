@@ -1,8 +1,6 @@
 # Natural transformations between functors between precategories
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module category-theory.natural-transformations-functors-precategories where
 ```
 
