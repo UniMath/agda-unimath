@@ -138,7 +138,6 @@ open import category-theory.products-in-precategories public
 open import category-theory.products-of-precategories public
 open import category-theory.pseudomonic-functors-precategories public
 open import category-theory.pullbacks-in-precategories public
-open import category-theory.reduced-coslice-precategory public
 open import category-theory.replete-subprecategories public
 open import category-theory.representable-functors-categories public
 open import category-theory.representable-functors-large-precategories public
