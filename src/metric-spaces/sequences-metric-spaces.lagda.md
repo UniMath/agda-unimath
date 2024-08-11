@@ -28,8 +28,8 @@ module _
   {l : Level} (M : Metric-Space l)
   where
 
-  Sequence-Metric-Space : UU l
-  Sequence-Metric-Space = sequence (type-Metric-Space M)
+  sequence-Metric-Space : UU l
+  sequence-Metric-Space = sequence (type-Metric-Space M)
 ```
 
 ### Constant sequences in metric spaces
@@ -39,6 +39,6 @@ module _
   {l : Level} (M : Metric-Space l) (x : type-Metric-Space M)
   where
 
-  constant-Sequence-Metric-Space : Sequence-Metric-Space M
-  constant-Sequence-Metric-Space n = x
+  constant-sequence-Metric-Space : sequence-Metric-Space M
+  constant-sequence-Metric-Space n = x
 ```

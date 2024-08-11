@@ -16,6 +16,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.convergent-sequences-metric-spaces
 open import metric-spaces.functions-metric-spaces
+open import metric-spaces.limits-sequences-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -68,22 +69,22 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  (f : fun-Metric-Space A B) (u : Convergent-Sequence-Metric-Space A)
+  (f : fun-Metric-Space A B) (u : convergent-sequence-Metric-Space A)
   where
 
-  is-limit-pointwise-continuous-map-Convergent-Sequence-Metric-Space :
+  is-limit-pointwise-continuous-map-convergent-sequence-Metric-Space :
     is-pointwise-continuous-fun-Metric-Space A B f
-      ( limit-Convergent-Sequence-Metric-Space A u) →
-    is-limit-Sequence-Metric-Space B
-      ( map-sequence f (sequence-Convergent-Sequence-Metric-Space A u))
-      ( f (limit-Convergent-Sequence-Metric-Space A u))
-  is-limit-pointwise-continuous-map-Convergent-Sequence-Metric-Space H d =
-    ( modulus-limit-Sequence-Metric-Space A
-      ( sequence-Convergent-Sequence-Metric-Space A u)
-      ( limit-Convergent-Sequence-Metric-Space A u)
-      ( is-limit-Convergent-Sequence-Metric-Space A u)
+      ( limit-convergent-sequence-Metric-Space A u) →
+    is-limit-sequence-Metric-Space B
+      ( map-sequence f (sequence-convergent-sequence-Metric-Space A u))
+      ( f (limit-convergent-sequence-Metric-Space A u))
+  is-limit-pointwise-continuous-map-convergent-sequence-Metric-Space H d =
+    ( modulus-limit-sequence-Metric-Space A
+      ( sequence-convergent-sequence-Metric-Space A u)
+      ( limit-convergent-sequence-Metric-Space A u)
+      ( is-limit-convergent-sequence-Metric-Space A u)
       ( pt-continuity-modulus-fun-Metric-Space A B f
-        ( limit-Convergent-Sequence-Metric-Space A u)
+        ( limit-convergent-sequence-Metric-Space A u)
         ( H)
         ( d))) ,
     ( λ n K →
@@ -91,16 +92,16 @@ module _
         ( A)
         ( B)
         ( f)
-        ( limit-Convergent-Sequence-Metric-Space A u)
+        ( limit-convergent-sequence-Metric-Space A u)
         ( H)
         ( d)
-        ( sequence-Convergent-Sequence-Metric-Space A u n)
-        ( is-modulus-modulus-limit-Sequence-Metric-Space A
-          ( sequence-Convergent-Sequence-Metric-Space A u)
-          ( limit-Convergent-Sequence-Metric-Space A u)
-          ( is-limit-Convergent-Sequence-Metric-Space A u)
+        ( sequence-convergent-sequence-Metric-Space A u n)
+        ( is-modulus-modulus-limit-sequence-Metric-Space A
+          ( sequence-convergent-sequence-Metric-Space A u)
+          ( limit-convergent-sequence-Metric-Space A u)
+          ( is-limit-convergent-sequence-Metric-Space A u)
           ( pt-continuity-modulus-fun-Metric-Space A B f
-            ( limit-Convergent-Sequence-Metric-Space A u)
+            ( limit-convergent-sequence-Metric-Space A u)
             ( H)
             ( d))
           ( n)
