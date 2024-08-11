@@ -30,8 +30,14 @@ open import metric-spaces.sequences-metric-spaces
 
 ## Idea
 
-Cauchy sequences in metric spaces are sequences that satisfy the Cauchy
-criterion. This follows Definition 11.2.9 of {{#cite UF13}}.
+A [sequence](metric-spaces.sequences-metric-spaces.md) `u` in a
+[metric space](metric-spaces.metric-spaces.md) is a
+{{#concept "Cauchy sequence" Disambiguation="in a metric space" Agda=is-cauchy-sequence-Metric-Space}}
+if it satisfies the Cauchy criterion: for all `d : ℚ⁺` there exists some `N : ℕ`
+such that `u n` and `u m` are in a `d`-neighbourhood for all `n m : ℕ` greater
+than `N`.
+
+This follows Definition 11.2.9 of {{#cite UF13}}.
 
 ## Definitions
 
