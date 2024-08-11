@@ -13,6 +13,8 @@ open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
+open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
@@ -29,11 +31,13 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
@@ -173,6 +177,18 @@ module _
     is-positive-le-zero-ℚ : le-ℚ zero-ℚ x → is-positive-ℚ x
     is-positive-le-zero-ℚ =
       is-positive-eq-ℤ (cross-mul-diff-zero-fraction-ℤ (fraction-ℚ x))
+```
+
+### The difference of a rational number with a lesser rational number is positive
+
+```agda
+is-positive-diff-le-ℚ : (x y : ℚ) → le-ℚ x y → is-positive-ℚ (y -ℚ x)
+is-positive-diff-le-ℚ x y H =
+  is-positive-le-zero-ℚ
+    ( y -ℚ x)
+    ( backward-implication
+      ( iff-translate-diff-le-zero-ℚ x y)
+      ( H))
 ```
 
 ### A nonzero rational number or its negative is positive
@@ -432,4 +448,86 @@ module _
         ( le-zero-is-positive-ℚ
           ( rational-ℚ⁺ x)
           ( is-positive-rational-ℚ⁺ x)))
+
+module _
+  (x y : ℚ⁺) (H : le-ℚ⁺ x y)
+  where
+
+  le-diff-ℚ⁺ : ℚ⁺
+  pr1 le-diff-ℚ⁺ = (rational-ℚ⁺ y) -ℚ (rational-ℚ⁺ x)
+  pr2 le-diff-ℚ⁺ =
+    is-positive-le-zero-ℚ
+      ( (rational-ℚ⁺ y) -ℚ (rational-ℚ⁺ x))
+      ( backward-implication
+        ( iff-translate-diff-le-zero-ℚ
+          ( rational-ℚ⁺ x)
+          ( rational-ℚ⁺ y))
+        ( ( H)))
+
+  left-diff-law-add-ℚ⁺ : le-diff-ℚ⁺ +ℚ⁺ x ＝ y
+  left-diff-law-add-ℚ⁺ =
+    eq-ℚ⁺
+      ( ( associative-add-ℚ
+          ( rational-ℚ⁺ y)
+          ( neg-ℚ (rational-ℚ⁺ x))
+          ( rational-ℚ⁺ x)) ∙
+        ( ( ap
+            ( (rational-ℚ⁺ y) +ℚ_)
+            ( left-inverse-law-add-ℚ (rational-ℚ⁺ x))) ∙
+        ( right-unit-law-add-ℚ (rational-ℚ⁺ y))))
+
+  right-diff-law-add-ℚ⁺ : x +ℚ⁺ le-diff-ℚ⁺ ＝ y
+  right-diff-law-add-ℚ⁺ =
+    ( eq-ℚ⁺
+      ( commutative-add-ℚ
+        ( rational-ℚ⁺ x)
+        ( rational-ℚ⁺ le-diff-ℚ⁺))) ∙
+    ( left-diff-law-add-ℚ⁺)
+```
+
+### The positive mediant between zero and a positive rational numbers
+
+```agda
+mediant-zero-ℚ⁺ : ℚ⁺ → ℚ⁺
+mediant-zero-ℚ⁺ x =
+  ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x) ,
+    is-positive-le-zero-ℚ
+      ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x))
+      ( le-left-mediant-ℚ
+        ( zero-ℚ)
+        ( rational-ℚ⁺ x)
+        ( le-zero-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x))))
+
+le-mediant-zero-ℚ⁺ : (x : ℚ⁺) → le-ℚ⁺ (mediant-zero-ℚ⁺ x) x
+le-mediant-zero-ℚ⁺ x =
+  ( le-right-mediant-ℚ
+    ( zero-ℚ)
+    ( rational-ℚ⁺ x)
+    ( le-zero-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x)))
+```
+
+### The addition with a positive rational number is an increasing map
+
+```agda
+le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
+le-left-add-rational-ℚ⁺ x d =
+  concatenate-leq-le-ℚ
+    ( x)
+    ( zero-ℚ +ℚ x)
+    ( (rational-ℚ⁺ d) +ℚ x)
+    ( inv-tr (leq-ℚ x) (left-unit-law-add-ℚ x) (refl-leq-ℚ x))
+    ( preserves-le-left-add-ℚ
+      ( x)
+      ( zero-ℚ)
+      ( rational-ℚ⁺ d)
+      ( le-zero-is-positive-ℚ
+        ( rational-ℚ⁺ d)
+        ( is-positive-rational-ℚ⁺ d)))
+
+le-right-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x (x +ℚ (rational-ℚ⁺ d))
+le-right-add-rational-ℚ⁺ x d =
+  inv-tr
+    ( le-ℚ x)
+    ( commutative-add-ℚ x (rational-ℚ⁺ d))
+    ( le-left-add-rational-ℚ⁺ x d)
 ```
