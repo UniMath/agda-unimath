@@ -11,6 +11,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.transport-along-identifications
@@ -81,11 +82,7 @@ module _
 
   is-reflexive-Neighbourhood-Prop : Prop (l1 ⊔ l2)
   is-reflexive-Neighbourhood-Prop =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ (d : ℚ⁺) →
-        ( is-reflexive-Relation-Prop (B d) ,
-          is-prop-is-reflexive-Relation-Prop (B d)))
+    Π-Prop ℚ⁺ (is-reflexive-prop-Relation-Prop ∘ B)
 
   is-reflexive-Neighbourhood : UU (l1 ⊔ l2)
   is-reflexive-Neighbourhood = type-Prop is-reflexive-Neighbourhood-Prop
@@ -104,11 +101,7 @@ module _
 
   is-symmetric-Neighbourhood-Prop : Prop (l1 ⊔ l2)
   is-symmetric-Neighbourhood-Prop =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ (d : ℚ⁺) →
-        ( is-symmetric-Relation-Prop (B d) ,
-          is-prop-is-symmetric-Relation-Prop (B d)))
+    Π-Prop ℚ⁺ (is-symmetric-prop-Relation-Prop ∘ B)
 
   is-symmetric-Neighbourhood : UU (l1 ⊔ l2)
   is-symmetric-Neighbourhood = type-Prop is-symmetric-Neighbourhood-Prop
