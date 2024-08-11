@@ -23,8 +23,10 @@ open import metric-spaces.uniform-continuity-functions-metric-spaces
 
 ## Idea
 
-Subsets of metric spaces inherit the metric structure of their ambient space.
-Moreover, the natural inclusion is uniformly continuous.
+[Subsets](foundation.subtypes.md) of
+[metric spaces](metric-spaces.metric-spaces.md) inherit the metric structure of
+their ambient space. Moreover, the natural inclusion is
+[uniformly continuous](metric-spaces.uniform-continuity-functions-metric-spaces.md).
 
 ## Definitions
 
@@ -66,7 +68,8 @@ module _
   subspace-Metric-Space : Metric-Space l
   subspace-Metric-Space = (set-subset-Metric-Space , substructure-Metric-Space)
 
-  inclusion-subspace-Metric-Space : fun-Metric-Space subspace-Metric-Space A
+  inclusion-subspace-Metric-Space :
+    function-carrier-type-Metric-Space subspace-Metric-Space A
   inclusion-subspace-Metric-Space x = pr1 x
 ```
 
@@ -78,7 +81,7 @@ module _
   where
 
   is-uniformly-continuous-inclusion-subspace-Metric-Space :
-    is-uniformly-continuous-fun-Metric-Space
+    is-uniformly-continuous-function-Metric-Space
       (subspace-Metric-Space A S)
       (A)
       (inclusion-subspace-Metric-Space A S)

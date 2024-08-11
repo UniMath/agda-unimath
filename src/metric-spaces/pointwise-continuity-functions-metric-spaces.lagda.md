@@ -33,32 +33,32 @@ Pointwise continuity of functions between metric spaces
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  (f : fun-Metric-Space A B) (x : type-Metric-Space A)
+  (f : function-carrier-type-Metric-Space A B) (x : type-Metric-Space A)
   where
 
-  is-pointwise-continuity-modulus-fun-Metric-Space : ℚ⁺ → ℚ⁺ → UU (l1 ⊔ l2)
-  is-pointwise-continuity-modulus-fun-Metric-Space ε δ =
+  is-pt-continuity-modulus-function-Metric-Space : ℚ⁺ → ℚ⁺ → UU (l1 ⊔ l2)
+  is-pt-continuity-modulus-function-Metric-Space ε δ =
     (y : type-Metric-Space A) →
     is-in-neighbourhood-Metric-Space A δ x y →
     is-in-neighbourhood-Metric-Space B ε (f x) (f y)
 
-  is-pointwise-continuous-fun-Metric-Space : UU (l1 ⊔ l2)
-  is-pointwise-continuous-fun-Metric-Space =
-    (ε : ℚ⁺) → Σ ℚ⁺ (is-pointwise-continuity-modulus-fun-Metric-Space ε)
+  is-pt-continuous-function-Metric-Space : UU (l1 ⊔ l2)
+  is-pt-continuous-function-Metric-Space =
+    (ε : ℚ⁺) → Σ ℚ⁺ (is-pt-continuity-modulus-function-Metric-Space ε)
 
 module _
   {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  (f : fun-Metric-Space A B) (x : type-Metric-Space A)
-  (H : is-pointwise-continuous-fun-Metric-Space A B f x) (ε : ℚ⁺)
+  (f : function-carrier-type-Metric-Space A B) (x : type-Metric-Space A)
+  (H : is-pt-continuous-function-Metric-Space A B f x) (ε : ℚ⁺)
   where
 
-  pt-continuity-modulus-fun-Metric-Space : ℚ⁺
-  pt-continuity-modulus-fun-Metric-Space = pr1 (H ε)
+  modulus-pt-continuity-function-Metric-Space : ℚ⁺
+  modulus-pt-continuity-function-Metric-Space = pr1 (H ε)
 
-  is-pointwise-continuity-modulus-pt-continuity-modulus-fun-Metric-Space :
-    is-pointwise-continuity-modulus-fun-Metric-Space A B f x ε
-      pt-continuity-modulus-fun-Metric-Space
-  is-pointwise-continuity-modulus-pt-continuity-modulus-fun-Metric-Space =
+  is-modulus-modulus-pt-continuity-function-Metric-Space :
+    is-pt-continuity-modulus-function-Metric-Space A B f x ε
+      modulus-pt-continuity-function-Metric-Space
+  is-modulus-modulus-pt-continuity-function-Metric-Space =
     pr2 (H ε)
 ```
 
@@ -69,11 +69,12 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  (f : fun-Metric-Space A B) (u : convergent-sequence-Metric-Space A)
+  (f : function-carrier-type-Metric-Space A B)
+  (u : convergent-sequence-Metric-Space A)
   where
 
   is-limit-pointwise-continuous-map-convergent-sequence-Metric-Space :
-    is-pointwise-continuous-fun-Metric-Space A B f
+    is-pt-continuous-function-Metric-Space A B f
       ( limit-convergent-sequence-Metric-Space A u) →
     is-limit-sequence-Metric-Space B
       ( map-sequence f (sequence-convergent-sequence-Metric-Space A u))
@@ -83,12 +84,12 @@ module _
       ( sequence-convergent-sequence-Metric-Space A u)
       ( limit-convergent-sequence-Metric-Space A u)
       ( is-limit-convergent-sequence-Metric-Space A u)
-      ( pt-continuity-modulus-fun-Metric-Space A B f
+      ( modulus-pt-continuity-function-Metric-Space A B f
         ( limit-convergent-sequence-Metric-Space A u)
         ( H)
         ( d))) ,
     ( λ n K →
-      is-pointwise-continuity-modulus-pt-continuity-modulus-fun-Metric-Space
+      is-modulus-modulus-pt-continuity-function-Metric-Space
         ( A)
         ( B)
         ( f)
@@ -100,7 +101,7 @@ module _
           ( sequence-convergent-sequence-Metric-Space A u)
           ( limit-convergent-sequence-Metric-Space A u)
           ( is-limit-convergent-sequence-Metric-Space A u)
-          ( pt-continuity-modulus-fun-Metric-Space A B f
+          ( modulus-pt-continuity-function-Metric-Space A B f
             ( limit-convergent-sequence-Metric-Space A u)
             ( H)
             ( d))
@@ -112,24 +113,28 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  (C : Metric-Space l3) (g : fun-Metric-Space B C) (f : fun-Metric-Space A B)
+  {l1 l2 l3 : Level}
+  (A : Metric-Space l1)
+  (B : Metric-Space l2)
+  (C : Metric-Space l3)
+  (g : function-carrier-type-Metric-Space B C)
+  (f : function-carrier-type-Metric-Space A B)
   (a : type-Metric-Space A)
   where
 
-  preserves-pt-continuity-comp-fun-Metric-Space :
-    is-pointwise-continuous-fun-Metric-Space B C g (f a) →
-    is-pointwise-continuous-fun-Metric-Space A B f a →
-    is-pointwise-continuous-fun-Metric-Space A C (g ∘ f) a
-  preserves-pt-continuity-comp-fun-Metric-Space H K ε =
-    ( pt-continuity-modulus-fun-Metric-Space A B f a K
-      ( pt-continuity-modulus-fun-Metric-Space B C g (f a) H ε)) ,
+  preserves-pt-continuity-comp-function-Metric-Space :
+    is-pt-continuous-function-Metric-Space B C g (f a) →
+    is-pt-continuous-function-Metric-Space A B f a →
+    is-pt-continuous-function-Metric-Space A C (g ∘ f) a
+  preserves-pt-continuity-comp-function-Metric-Space H K ε =
+    ( modulus-pt-continuity-function-Metric-Space A B f a K
+      ( modulus-pt-continuity-function-Metric-Space B C g (f a) H ε)) ,
     ( λ y I →
       pr2
         ( H ε)
         ( f y)
         ( pr2
-          ( K (pt-continuity-modulus-fun-Metric-Space B C g (f a) H ε))
+          ( K (modulus-pt-continuity-function-Metric-Space B C g (f a) H ε))
           ( y)
           ( I)))
 ```
