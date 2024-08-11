@@ -83,7 +83,7 @@ module _
   indistinguishable-limit-sequence-Metric-Space :
     is-limit-sequence-Metric-Space M u x →
     is-limit-sequence-Metric-Space M u y →
-    is-indistinguishable-Neighbourhood
+    is-indistinguishable-in-neighbourhood
       ( neighbourhood-Metric-Space M)
       ( x)
       ( y)

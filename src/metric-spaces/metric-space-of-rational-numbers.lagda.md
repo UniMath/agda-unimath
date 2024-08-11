@@ -41,7 +41,7 @@ The set of rational numbers can be equipped with a metric structure.
 ### The standard neighbourhood-relation on the rational numbers
 
 ```agda
-neighbourhood-ℚ : Neighbourhood-Relation-Prop lzero ℚ
+neighbourhood-ℚ : neighbourhood-Relation-Prop lzero ℚ
 neighbourhood-ℚ d x y =
   product-Prop
     (le-ℚ-Prop y (x +ℚ (rational-ℚ⁺ d)))
@@ -51,14 +51,14 @@ neighbourhood-ℚ d x y =
 ### The standard neighbourhood-relation on the rational-numbers is a metric structure
 
 ```agda
-is-symmetric-neighbourhood-ℚ : is-symmetric-Neighbourhood neighbourhood-ℚ
+is-symmetric-neighbourhood-ℚ : is-symmetric-neighbourhood neighbourhood-ℚ
 is-symmetric-neighbourhood-ℚ d x y (H , K) = (K , H)
 
-is-reflexive-neighbourhood-ℚ : is-reflexive-Neighbourhood neighbourhood-ℚ
+is-reflexive-neighbourhood-ℚ : is-reflexive-neighbourhood neighbourhood-ℚ
 is-reflexive-neighbourhood-ℚ d x =
   (le-right-add-rational-ℚ⁺ x d , le-right-add-rational-ℚ⁺ x d)
 
-is-tight-neighbourhood-ℚ : is-tight-Neighbourhood neighbourhood-ℚ
+is-tight-neighbourhood-ℚ : is-tight-neighbourhood neighbourhood-ℚ
 is-tight-neighbourhood-ℚ x y H =
   trichotomy-le-ℚ x y
     ( λ K →
@@ -86,7 +86,7 @@ is-tight-neighbourhood-ℚ x y H =
             ( pr2 (H ( x -ℚ y , is-positive-diff-le-ℚ y x K))))))
 
 is-triangular-neighbourhood-ℚ :
-  is-triangular-Neighbourhood neighbourhood-ℚ
+  is-triangular-neighbourhood neighbourhood-ℚ
 pr1 (is-triangular-neighbourhood-ℚ x y z d₁ d₂ Hyz Hxy) =
   tr
     ( le-ℚ z)
@@ -119,12 +119,12 @@ pr2 (is-triangular-neighbourhood-ℚ x y z d₁ d₂ Hyz Hxy) =
           ( pr2 Hyz)))
         ( pr2 Hxy)))
 
-is-metric-neighbourhood-ℚ : is-metric-Neighbourhood ℚ-Set neighbourhood-ℚ
+is-metric-neighbourhood-ℚ : is-metric-neighbourhood ℚ-Set neighbourhood-ℚ
 is-metric-neighbourhood-ℚ =
-  ( is-symmetric-neighbourhood-ℚ) ,
-  ( is-reflexive-neighbourhood-ℚ) ,
-  ( is-tight-neighbourhood-ℚ) ,
-  ( is-triangular-neighbourhood-ℚ)
+  is-symmetric-neighbourhood-ℚ ,
+  is-reflexive-neighbourhood-ℚ ,
+  is-tight-neighbourhood-ℚ ,
+  is-triangular-neighbourhood-ℚ
 
 metric-structure-ℚ : Metric-Structure lzero ℚ-Set
 pr1 metric-structure-ℚ = neighbourhood-ℚ

@@ -32,43 +32,43 @@ module _
   {l1 : Level} (l2 : Level) (A : UU l1)
   where
 
-  Neighbourhood-Relation-Prop : UU (l1 ⊔ (lsuc l2))
-  Neighbourhood-Relation-Prop = ℚ⁺ → Relation-Prop l2 A
+  neighbourhood-Relation-Prop : UU (l1 ⊔ (lsuc l2))
+  neighbourhood-Relation-Prop = ℚ⁺ → Relation-Prop l2 A
 ```
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : Neighbourhood-Relation-Prop l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
   where
 
-  is-in-Neighbourhood : ℚ⁺ → A → A → UU l2
-  is-in-Neighbourhood d = type-Relation-Prop (B d)
+  is-in-neighbourhood : ℚ⁺ → A → A → UU l2
+  is-in-neighbourhood d = type-Relation-Prop (B d)
 
-  is-prop-is-in-Neighbourhood :
-    (d : ℚ⁺) (x y : A) → is-prop (is-in-Neighbourhood d x y)
-  is-prop-is-in-Neighbourhood d = is-prop-type-Relation-Prop (B d)
+  is-prop-is-in-neighbourhood :
+    (d : ℚ⁺) (x y : A) → is-prop (is-in-neighbourhood d x y)
+  is-prop-is-in-neighbourhood d = is-prop-type-Relation-Prop (B d)
 ```
 
 ### Two elements `x` and `y` are indistinguishable in the neighbourhood-relation `B` if `B d x y` holds for all positive rational numbers d
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : Neighbourhood-Relation-Prop l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
   (x y : A)
   where
 
-  is-indistinguishable-Neighbourhood-Prop : Prop l2
-  is-indistinguishable-Neighbourhood-Prop =
+  is-indistinguishable-in-neighbourhood-Prop : Prop l2
+  is-indistinguishable-in-neighbourhood-Prop =
     Π-Prop ℚ⁺ (λ (d : ℚ⁺) → B d x y)
 
-  is-indistinguishable-Neighbourhood : UU l2
-  is-indistinguishable-Neighbourhood =
-    type-Prop is-indistinguishable-Neighbourhood-Prop
+  is-indistinguishable-in-neighbourhood : UU l2
+  is-indistinguishable-in-neighbourhood =
+    type-Prop is-indistinguishable-in-neighbourhood-Prop
 
-  is-prop-is-indistinguishable-Neighbourhood :
-    is-prop is-indistinguishable-Neighbourhood
-  is-prop-is-indistinguishable-Neighbourhood =
-    is-prop-type-Prop is-indistinguishable-Neighbourhood-Prop
+  is-prop-is-indistinguishable-in-neighbourhood :
+    is-prop is-indistinguishable-in-neighbourhood
+  is-prop-is-indistinguishable-in-neighbourhood =
+    is-prop-type-Prop is-indistinguishable-in-neighbourhood-Prop
 ```
 
 ## Properties
@@ -77,61 +77,61 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : Neighbourhood-Relation-Prop l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
   where
 
-  is-reflexive-Neighbourhood-Prop : Prop (l1 ⊔ l2)
-  is-reflexive-Neighbourhood-Prop =
+  is-reflexive-neighbourhood-Prop : Prop (l1 ⊔ l2)
+  is-reflexive-neighbourhood-Prop =
     Π-Prop ℚ⁺ (is-reflexive-prop-Relation-Prop ∘ B)
 
-  is-reflexive-Neighbourhood : UU (l1 ⊔ l2)
-  is-reflexive-Neighbourhood = type-Prop is-reflexive-Neighbourhood-Prop
+  is-reflexive-neighbourhood : UU (l1 ⊔ l2)
+  is-reflexive-neighbourhood = type-Prop is-reflexive-neighbourhood-Prop
 
-  is-prop-is-reflexive-Neighbourhood : is-prop is-reflexive-Neighbourhood
-  is-prop-is-reflexive-Neighbourhood =
-    is-prop-type-Prop is-reflexive-Neighbourhood-Prop
+  is-prop-is-reflexive-neighbourhood : is-prop is-reflexive-neighbourhood
+  is-prop-is-reflexive-neighbourhood =
+    is-prop-type-Prop is-reflexive-neighbourhood-Prop
 ```
 
 ### A neighbourhood-relation `B` is symmetric if `B d` is symmetric for all positive rational numbers d
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : Neighbourhood-Relation-Prop l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
   where
 
-  is-symmetric-Neighbourhood-Prop : Prop (l1 ⊔ l2)
-  is-symmetric-Neighbourhood-Prop =
+  is-symmetric-neighbourhood-Prop : Prop (l1 ⊔ l2)
+  is-symmetric-neighbourhood-Prop =
     Π-Prop ℚ⁺ (is-symmetric-prop-Relation-Prop ∘ B)
 
-  is-symmetric-Neighbourhood : UU (l1 ⊔ l2)
-  is-symmetric-Neighbourhood = type-Prop is-symmetric-Neighbourhood-Prop
+  is-symmetric-neighbourhood : UU (l1 ⊔ l2)
+  is-symmetric-neighbourhood = type-Prop is-symmetric-neighbourhood-Prop
 
-  is-prop-is-symmetric-Neighbourhood : is-prop is-symmetric-Neighbourhood
-  is-prop-is-symmetric-Neighbourhood =
-    is-prop-type-Prop is-symmetric-Neighbourhood-Prop
+  is-prop-is-symmetric-neighbourhood : is-prop is-symmetric-neighbourhood
+  is-prop-is-symmetric-neighbourhood =
+    is-prop-type-Prop is-symmetric-neighbourhood-Prop
 ```
 
 ### A neighbourhood-relation is tight if any two indistinguishable elements are equal
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : Neighbourhood-Relation-Prop l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
   where
 
-  is-tight-Neighbourhood : UU (l1 ⊔ l2)
-  is-tight-Neighbourhood =
-    (x y : A) → is-indistinguishable-Neighbourhood B x y → x ＝ y
+  is-tight-neighbourhood : UU (l1 ⊔ l2)
+  is-tight-neighbourhood =
+    (x y : A) → is-indistinguishable-in-neighbourhood B x y → x ＝ y
 ```
 
 ### A neighbourhood-relation is monotonic if `B d₁ x y` implies `B d₂ x y` for any positive rational numbers `d₁` and `d₂` with `d₁ < d₂`
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : Neighbourhood-Relation-Prop l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
   where
 
-  is-monotonic-Neighbourhood-Prop : Prop (l1 ⊔ l2)
-  is-monotonic-Neighbourhood-Prop =
+  is-monotonic-neighbourhood-Prop : Prop (l1 ⊔ l2)
+  is-monotonic-neighbourhood-Prop =
     Π-Prop
       ( A)
       ( λ x →
@@ -149,23 +149,23 @@ module _
                       ( λ H →
                         hom-Prop (B d₁ x y) (B d₂ x y))))))))))
 
-  is-monotonic-Neighbourhood : UU (l1 ⊔ l2)
-  is-monotonic-Neighbourhood = type-Prop is-monotonic-Neighbourhood-Prop
+  is-monotonic-neighbourhood : UU (l1 ⊔ l2)
+  is-monotonic-neighbourhood = type-Prop is-monotonic-neighbourhood-Prop
 
-  is-prop-is-monotonic-Neighbourhood : is-prop is-monotonic-Neighbourhood
-  is-prop-is-monotonic-Neighbourhood =
-    is-prop-type-Prop is-monotonic-Neighbourhood-Prop
+  is-prop-is-monotonic-neighbourhood : is-prop is-monotonic-neighbourhood
+  is-prop-is-monotonic-neighbourhood =
+    is-prop-type-Prop is-monotonic-neighbourhood-Prop
 ```
 
 ### A neighbourhood-relation is triangular if it is additively transitive
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : Neighbourhood-Relation-Prop l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
   where
 
-  is-triangular-Neighbourhood-Prop : Prop (l1 ⊔ l2)
-  is-triangular-Neighbourhood-Prop =
+  is-triangular-neighbourhood-Prop : Prop (l1 ⊔ l2)
+  is-triangular-neighbourhood-Prop =
     Π-Prop
       ( A)
       ( λ x →
@@ -187,28 +187,28 @@ module _
                             ( B d₁ x y)
                             ( B (d₁ +ℚ⁺ d₂) x z))))))))))
 
-  is-triangular-Neighbourhood : UU (l1 ⊔ l2)
-  is-triangular-Neighbourhood = type-Prop is-triangular-Neighbourhood-Prop
+  is-triangular-neighbourhood : UU (l1 ⊔ l2)
+  is-triangular-neighbourhood = type-Prop is-triangular-neighbourhood-Prop
 
-  is-prop-is-triangular-Neighbourhood : is-prop is-triangular-Neighbourhood
-  is-prop-is-triangular-Neighbourhood =
-    is-prop-type-Prop is-triangular-Neighbourhood-Prop
+  is-prop-is-triangular-neighbourhood : is-prop is-triangular-neighbourhood
+  is-prop-is-triangular-neighbourhood =
+    is-prop-type-Prop is-triangular-neighbourhood-Prop
 ```
 
 ### Any triangular reflexive neighbourhood-relation is monotonic
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : Neighbourhood-Relation-Prop l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
   where
 
-  is-monotonic-is-reflexive-triangular-Neighbourhood :
-    is-reflexive-Neighbourhood B →
-    is-triangular-Neighbourhood B →
-    is-monotonic-Neighbourhood B
-  is-monotonic-is-reflexive-triangular-Neighbourhood H K x y d₁ d₂ I B₁ =
+  is-monotonic-is-reflexive-triangular-neighbourhood :
+    is-reflexive-neighbourhood B →
+    is-triangular-neighbourhood B →
+    is-monotonic-neighbourhood B
+  is-monotonic-is-reflexive-triangular-neighbourhood H K x y d₁ d₂ I B₁ =
     tr
-      ( λ d → is-in-Neighbourhood B d x y)
+      ( λ d → is-in-neighbourhood B d x y)
       ( right-diff-law-add-ℚ⁺ d₁ d₂ I)
       ( K x y y d₁ (le-diff-ℚ⁺ d₁ d₂ I)
         ( H (le-diff-ℚ⁺ d₁ d₂ I) y)

@@ -34,28 +34,28 @@ neighbourhood-relation.
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Set l1) (B : Neighbourhood-Relation-Prop l2 (type-Set A))
+  {l1 l2 : Level} (A : Set l1) (B : neighbourhood-Relation-Prop l2 (type-Set A))
   where
 
-  is-metric-Neighbourhood : UU (l1 ⊔ l2)
-  is-metric-Neighbourhood =
-    ( is-symmetric-Neighbourhood B) ×
-    ( is-reflexive-Neighbourhood B) ×
-    ( is-tight-Neighbourhood B) ×
-    ( is-triangular-Neighbourhood B)
+  is-metric-neighbourhood : UU (l1 ⊔ l2)
+  is-metric-neighbourhood =
+    ( is-symmetric-neighbourhood B) ×
+    ( is-reflexive-neighbourhood B) ×
+    ( is-tight-neighbourhood B) ×
+    ( is-triangular-neighbourhood B)
 
-  is-prop-is-metric-Neighbourhood : is-prop is-metric-Neighbourhood
-  is-prop-is-metric-Neighbourhood =
+  is-prop-is-metric-neighbourhood : is-prop is-metric-neighbourhood
+  is-prop-is-metric-neighbourhood =
     is-prop-product
-      ( is-prop-is-symmetric-Neighbourhood B)
+      ( is-prop-is-symmetric-neighbourhood B)
       ( is-prop-product
-        ( is-prop-is-reflexive-Neighbourhood B)
+        ( is-prop-is-reflexive-neighbourhood B)
         ( is-prop-product
           ( is-prop-Π
             ( λ x →
               is-prop-Π
               ( λ y → is-prop-Π (λ H → is-set-type-Set A x y))))
-          ( is-prop-is-triangular-Neighbourhood B)))
+          ( is-prop-is-triangular-neighbourhood B)))
 ```
 
 ### Metric structures over a set
@@ -67,8 +67,8 @@ module _
 
   Metric-Structure : UU (l1 ⊔ lsuc l2)
   Metric-Structure =
-    Σ ( Neighbourhood-Relation-Prop l2 (type-Set A))
-      ( is-metric-Neighbourhood A)
+    Σ ( neighbourhood-Relation-Prop l2 (type-Set A))
+      ( is-metric-neighbourhood A)
 ```
 
 ### The type of metric spaces
@@ -93,34 +93,34 @@ module _
   structure-Metric-Space : Metric-Structure l set-Metric-Space
   structure-Metric-Space = pr2 M
 
-  neighbourhood-Metric-Space : Neighbourhood-Relation-Prop l type-Metric-Space
+  neighbourhood-Metric-Space : neighbourhood-Relation-Prop l type-Metric-Space
   neighbourhood-Metric-Space = pr1 structure-Metric-Space
 
   is-metric-neighbourhood-Metric-Space :
-    is-metric-Neighbourhood set-Metric-Space neighbourhood-Metric-Space
+    is-metric-neighbourhood set-Metric-Space neighbourhood-Metric-Space
   is-metric-neighbourhood-Metric-Space = pr2 structure-Metric-Space
 
   is-in-neighbourhood-Metric-Space : ℚ⁺ → Relation l type-Metric-Space
   is-in-neighbourhood-Metric-Space =
-    is-in-Neighbourhood neighbourhood-Metric-Space
+    is-in-neighbourhood neighbourhood-Metric-Space
 
   is-symmetric-neighbourhood-Metric-Space :
-    is-symmetric-Neighbourhood neighbourhood-Metric-Space
+    is-symmetric-neighbourhood neighbourhood-Metric-Space
   is-symmetric-neighbourhood-Metric-Space =
     pr1 is-metric-neighbourhood-Metric-Space
 
   is-reflexive-neighbourhood-Metric-Space :
-    is-reflexive-Neighbourhood neighbourhood-Metric-Space
+    is-reflexive-neighbourhood neighbourhood-Metric-Space
   is-reflexive-neighbourhood-Metric-Space =
     pr1 (pr2 is-metric-neighbourhood-Metric-Space)
 
   is-tight-neighbourhood-Metric-Space :
-    is-tight-Neighbourhood neighbourhood-Metric-Space
+    is-tight-neighbourhood neighbourhood-Metric-Space
   is-tight-neighbourhood-Metric-Space =
     pr1 (pr2 (pr2 is-metric-neighbourhood-Metric-Space))
 
   is-triangular-neighbourhood-Metric-Space :
-    is-triangular-Neighbourhood neighbourhood-Metric-Space
+    is-triangular-neighbourhood neighbourhood-Metric-Space
   is-triangular-neighbourhood-Metric-Space =
     pr2 (pr2 (pr2 is-metric-neighbourhood-Metric-Space))
 ```
@@ -137,7 +137,7 @@ module _
   indistinguishable-eq-Metric-Space :
     (x y : type-Metric-Space M) →
     x ＝ y →
-    is-indistinguishable-Neighbourhood
+    is-indistinguishable-in-neighbourhood
       ( neighbourhood-Metric-Space M)
       ( x)
       ( y)
