@@ -30,7 +30,7 @@ open import metric-spaces.sequences-metric-spaces
 ## Idea
 
 Cauchy sequences in metric spaces are sequences that satisfy the Cauchy
-criterion.
+criterion. This follows Definition 11.2.9 of {{#cite UF13}}.
 
 ## Definitions
 
@@ -117,3 +117,7 @@ module _
               ( transitive-leq-ℕ Nq N q J
                 ( leq-right-leq-max-ℕ N Np Nq (refl-leq-ℕ N)))
 ```
+
+## References
+
+{{#bibliography}}
