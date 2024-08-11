@@ -16,7 +16,7 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-Functions between metric spaces are functions between their carrier types
+{{#concept "Functions" Disambiguation="between metric spaces" Agda=function-Metric-Space}} between metric spaces are (not necessarily continuous) functions between their carrier types.
 
 ## Definitions
 
