@@ -1,4 +1,4 @@
-# Pointwise continuity oequ functions between metric spaces
+# Pointwise continuity of functions between metric spaces
 
 ```agda
 module metric-spaces.pointwise-continuity-functions-metric-spaces where
