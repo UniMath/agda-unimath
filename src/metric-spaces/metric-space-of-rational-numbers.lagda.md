@@ -34,7 +34,12 @@ open import metric-spaces.neighbourhood-relations
 
 ## Idea
 
-The set of rational numbers can be equipped with a metric structure.
+The
+{{#concept "standard metric structure" Disambiguation="on the rational numbers" Agda=metric-structure-ℚ}}
+on the [rational numbers](elementary-number-theory.rational-numbers.md) is the
+[metric structure](metric-spaces.metric-spaces.md) where
+[`d`-neighbourhoods](metric-spaces.neighbourhood-relations.md) are pairs
+`x y : ℚ` such that `x < y + d` and `y < x + d`.
 
 ## Definitions
 
@@ -44,8 +49,8 @@ The set of rational numbers can be equipped with a metric structure.
 neighbourhood-ℚ : neighbourhood-Relation-Prop lzero ℚ
 neighbourhood-ℚ d x y =
   product-Prop
-    (le-ℚ-Prop y (x +ℚ (rational-ℚ⁺ d)))
-    (le-ℚ-Prop x (y +ℚ (rational-ℚ⁺ d)))
+    ( le-ℚ-Prop y (x +ℚ (rational-ℚ⁺ d)))
+    ( le-ℚ-Prop x (y +ℚ (rational-ℚ⁺ d)))
 ```
 
 ### The standard neighbourhood-relation on the rational-numbers is a metric structure
