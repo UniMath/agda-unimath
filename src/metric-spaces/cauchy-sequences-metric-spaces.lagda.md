@@ -34,10 +34,14 @@ A [sequence](metric-spaces.sequences-metric-spaces.md) `u` in a
 [metric space](metric-spaces.metric-spaces.md) is a
 {{#concept "Cauchy sequence" Disambiguation="in a metric space" Agda=is-cauchy-sequence-Metric-Space}}
 if it satisfies the Cauchy criterion: for all `d : ℚ⁺` there exists some `N : ℕ`
-such that `u n` and `u m` are in a `d`-neighbourhood for all `n m : ℕ` greater
-than `N`.
+such that `u n` and `u m` are in a
+[`d`-neighbourhood](metric-spaces.neighbourhood-relations.md) for all `n m : ℕ`
+greater than `N`.
 
 This follows Definition 11.2.9 of {{#cite UF13}}.
+
+All [convergent sequences](metric-spaces.convergent-sequences-metric-spaces.md)
+are Cauchy sequence.
 
 ## Definitions
 
