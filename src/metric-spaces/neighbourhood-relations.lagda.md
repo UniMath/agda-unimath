@@ -135,20 +135,20 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
   where
 
-  is-separating-neigbourhood-Prop : Prop (l1 ⊔ l2)
-  is-separating-neigbourhood-Prop =
+  is-separating-neighbourhood-Prop : Prop (l1 ⊔ l2)
+  is-separating-neighbourhood-Prop =
     Π-Prop
       ( A)
       ( λ (x : A) →
         is-prop-Prop (Σ A (is-indistinguishable-in-neighbourhood B x)))
 
-  is-separating-neigbourhood : UU (l1 ⊔ l2)
-  is-separating-neigbourhood =
-    type-Prop is-separating-neigbourhood-Prop
+  is-separating-neighbourhood : UU (l1 ⊔ l2)
+  is-separating-neighbourhood =
+    type-Prop is-separating-neighbourhood-Prop
 
-  is-prop-is-separating-neigbourhood : is-prop is-separating-neigbourhood
-  is-prop-is-separating-neigbourhood =
-    is-prop-type-Prop is-separating-neigbourhood-Prop
+  is-prop-is-separating-neighbourhood : is-prop is-separating-neighbourhood
+  is-prop-is-separating-neighbourhood =
+    is-prop-type-Prop is-separating-neighbourhood-Prop
 ```
 
 ### In a reflexive separating neighbourhood-relation, indistinguishability is torsorial
@@ -156,7 +156,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
-  (S : is-separating-neigbourhood B) (R : is-reflexive-neighbourhood B)
+  (S : is-separating-neighbourhood B) (R : is-reflexive-neighbourhood B)
   where
 
   is-torsorial-indistinguisable-separating-reflexive-neighbourhood :
@@ -178,7 +178,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
-  (S : is-separating-neigbourhood B) (R : is-reflexive-neighbourhood B)
+  (S : is-separating-neighbourhood B) (R : is-reflexive-neighbourhood B)
   where
 
   is-set-has-separating-reflexive-neighbourhood : is-set A
@@ -210,7 +210,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
-  (S : is-separating-neigbourhood B) (R : is-reflexive-neighbourhood B)
+  (S : is-separating-neighbourhood B) (R : is-reflexive-neighbourhood B)
   where
 
   is-tight-is-separating-reflexive-neighbourhood :
