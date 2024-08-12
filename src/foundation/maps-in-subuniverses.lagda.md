@@ -36,4 +36,4 @@ is-in-subuniverse-map P {A} {B} f = (b : B) → is-in-subuniverse P (fiber f b)
 
 ## See also
 
-- [Maps in a global subuniverse](foundation.maps-in-global-subuniverses.md)
+- [Maps in global subuniverses](foundation.maps-in-global-subuniverses.md)
