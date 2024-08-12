@@ -17,15 +17,14 @@ open import foundation-core.fibers-of-maps
 
 ## Idea
 
-Given a [subuniverse](foundation-core.subuniverses.md) `𝒫` a map `f : A → B` is
-said to be a
-`𝒫`-{{#concept "map" Disambiguation="in a subuniverse" Agda=is-in-subuniverse-map}},
-or to be a map in `𝒫` if its [fibers](foundation-core.fibers-of-maps.md) are in
-`𝒫`.
+Given a [subuniverse](foundation.subuniverses.md) `𝒫`, a map `f : A → B` is said
+to be a
+{{#concept "map in `𝒫`" Disambiguation="in a subuniverse" Agda=is-in-subuniverse-map}},
+or a **`𝒫`-map**, if its [fibers](foundation-core.fibers-of-maps.md) are in `𝒫`.
 
 ## Definitions
 
-### Maps in a subuniverse
+### The predicate on maps of being in a subuniverse
 
 ```agda
 is-in-subuniverse-map :

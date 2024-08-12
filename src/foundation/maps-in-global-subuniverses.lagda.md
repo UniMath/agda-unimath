@@ -23,14 +23,14 @@ open import foundation-core.propositions
 
 ## Idea
 
-Given a [global subuniverse](foundation.global-subuniverses.md) `𝒫` a map
+Given a [global subuniverse](foundation.global-subuniverses.md) `𝒫`, a map
 `f : A → B` is said to be a
 {{#concept "map in `𝒫`" Disambiguation="in a global subuniverse" Agda=is-in-global-subuniverse-map}},
 or a **`𝒫`-map**, if its [fibers](foundation-core.fibers-of-maps.md) are in `𝒫`.
 
 ## Definitions
 
-### Maps in a global subuniverse
+### The predicate on maps of being in a global subuniverse
 
 ```agda
 module _
