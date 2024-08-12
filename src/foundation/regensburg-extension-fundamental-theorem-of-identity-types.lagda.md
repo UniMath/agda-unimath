@@ -24,6 +24,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
+open import foundation.maps-in-subuniverses
 open import foundation.propositional-truncations
 open import foundation.separated-types
 open import foundation.subuniverses
