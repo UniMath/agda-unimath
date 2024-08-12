@@ -11,9 +11,13 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -92,6 +96,19 @@ module _
     is-prop-type-Prop is-reflexive-neighbourhood-Prop
 ```
 
+### In a reflexive neighbourhood-relation, equal elements are indistinguishable
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
+  (H : is-reflexive-neighbourhood B)
+  where
+
+  indistinguishable-eq-reflexive-neighbourhood :
+    (x y : A) → x ＝ y → is-indistinguishable-in-neighbourhood B x y
+  indistinguishable-eq-reflexive-neighbourhood x .x refl d = H d x
+```
+
 ### A neighbourhood-relation `B` is symmetric if `B d` is symmetric for all positive rational numbers d
 
 ```agda
@@ -111,6 +128,71 @@ module _
     is-prop-type-Prop is-symmetric-neighbourhood-Prop
 ```
 
+### A neighbourhood-relation is separating if being indistinguishable with an element is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
+  where
+
+  is-separating-neigbourhood-Prop : Prop (l1 ⊔ l2)
+  is-separating-neigbourhood-Prop =
+    Π-Prop
+      ( A)
+      ( λ (x : A) →
+        is-prop-Prop (Σ A (is-indistinguishable-in-neighbourhood B x)))
+
+  is-separating-neigbourhood : UU (l1 ⊔ l2)
+  is-separating-neigbourhood =
+    type-Prop is-separating-neigbourhood-Prop
+
+  is-prop-is-separating-neigbourhood : is-prop is-separating-neigbourhood
+  is-prop-is-separating-neigbourhood =
+    is-prop-type-Prop is-separating-neigbourhood-Prop
+```
+
+### In a reflexive separating neighbourhood-relation, indistinguishability is torsorial
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
+  (S : is-separating-neigbourhood B) (R : is-reflexive-neighbourhood B)
+  where
+
+  is-torsorial-indistinguisable-separating-reflexive-neighbourhood :
+    (x : A) →
+    is-torsorial (is-indistinguishable-in-neighbourhood B x)
+  is-torsorial-indistinguisable-separating-reflexive-neighbourhood x =
+    is-proof-irrelevant-is-prop (S x) (x , λ d → R d x)
+
+  is-equiv-indistinguishable-eq-separating-reflexive-neighbourhood :
+    (x y : A) → is-equiv (indistinguishable-eq-reflexive-neighbourhood B R x y)
+  is-equiv-indistinguishable-eq-separating-reflexive-neighbourhood x =
+    fundamental-theorem-id
+      ( is-torsorial-indistinguisable-separating-reflexive-neighbourhood x)
+      ( indistinguishable-eq-reflexive-neighbourhood B R x)
+```
+
+### Any type equipped with a reflexive separating neighbourhood-relation is a set
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
+  (S : is-separating-neigbourhood B) (R : is-reflexive-neighbourhood B)
+  where
+
+  is-set-has-separating-reflexive-neighbourhood : is-set A
+  is-set-has-separating-reflexive-neighbourhood x y =
+    is-prop-is-equiv
+      ( is-equiv-indistinguishable-eq-separating-reflexive-neighbourhood
+        B
+        S
+        R
+        x
+        y)
+      ( is-prop-is-indistinguishable-in-neighbourhood B x y)
+```
+
 ### A neighbourhood-relation is tight if any two indistinguishable elements are equal
 
 ```agda
@@ -121,6 +203,21 @@ module _
   is-tight-neighbourhood : UU (l1 ⊔ l2)
   is-tight-neighbourhood =
     (x y : A) → is-indistinguishable-in-neighbourhood B x y → x ＝ y
+```
+
+### Any reflexive separating neighbourhood-relation is tight
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
+  (S : is-separating-neigbourhood B) (R : is-reflexive-neighbourhood B)
+  where
+
+  is-tight-is-separating-reflexive-neighbourhood :
+    is-tight-neighbourhood B
+  is-tight-is-separating-reflexive-neighbourhood x =
+    ( map-inv-is-equiv) ∘
+    ( is-equiv-indistinguishable-eq-separating-reflexive-neighbourhood B S R x)
 ```
 
 ### A neighbourhood-relation is monotonic if `B d₁ x y` implies `B d₂ x y` for any positive rational numbers `d₁` and `d₂` with `d₁ < d₂`
