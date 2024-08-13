@@ -3,6 +3,7 @@
 ```agda
 module metric-spaces where
 
+open import metric-spaces.apartness-relation-metric-spaces public
 open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.convergent-sequences-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
