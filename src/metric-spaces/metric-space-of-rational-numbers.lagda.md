@@ -90,6 +90,12 @@ is-tight-neighbourhood-ℚ x y H =
               ( right-unit-law-add-ℚ x)))
             ( pr2 (H ( x -ℚ y , is-positive-diff-le-ℚ y x K))))))
 
+is-separating-neighbourhood-ℚ : is-separating-neighbourhood neighbourhood-ℚ
+is-separating-neighbourhood-ℚ =
+  is-separating-is-tight-neighbourhood
+    neighbourhood-ℚ
+    is-tight-neighbourhood-ℚ
+
 is-triangular-neighbourhood-ℚ :
   is-triangular-neighbourhood neighbourhood-ℚ
 pr1 (is-triangular-neighbourhood-ℚ x y z d₁ d₂ Hyz Hxy) =
@@ -124,14 +130,14 @@ pr2 (is-triangular-neighbourhood-ℚ x y z d₁ d₂ Hyz Hxy) =
           ( pr2 Hyz)))
         ( pr2 Hxy)))
 
-is-metric-neighbourhood-ℚ : is-metric-neighbourhood ℚ-Set neighbourhood-ℚ
+is-metric-neighbourhood-ℚ : is-metric-neighbourhood ℚ neighbourhood-ℚ
 is-metric-neighbourhood-ℚ =
   is-symmetric-neighbourhood-ℚ ,
   is-reflexive-neighbourhood-ℚ ,
-  is-tight-neighbourhood-ℚ ,
+  is-separating-neighbourhood-ℚ ,
   is-triangular-neighbourhood-ℚ
 
-metric-structure-ℚ : Metric-Structure lzero ℚ-Set
+metric-structure-ℚ : Metric-Structure lzero ℚ
 pr1 metric-structure-ℚ = neighbourhood-ℚ
 pr2 metric-structure-ℚ = is-metric-neighbourhood-ℚ
 ```
@@ -140,6 +146,6 @@ pr2 metric-structure-ℚ = is-metric-neighbourhood-ℚ
 
 ```agda
 metric-space-ℚ : Metric-Space lzero
-pr1 metric-space-ℚ = ℚ-Set
+pr1 metric-space-ℚ = ℚ
 pr2 metric-space-ℚ = metric-structure-ℚ
 ```

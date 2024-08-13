@@ -11,10 +11,14 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -25,23 +29,24 @@ open import metric-spaces.neighbourhood-relations
 
 ## Idea
 
-A metric space is a set equipped a symmetric reflexive tight triangular
-neighbourhood-relation.
+A {{#concept "metric space" Agda=Metric-Space}} is a type equipped a symmetric
+reflexive tight triangular
+[neighbourhood-relation](metric-spaces.neighbourhood-relations.md).
 
 ## Definitions
 
-### The property of being a metric neighbourhood-relation on a set
+### The property of being a metric neighbourhood-relation on a type
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Set l1) (B : neighbourhood-Relation-Prop l2 (type-Set A))
+  {l1 l2 : Level} (A : UU l1) (B : neighbourhood-Relation-Prop l2 A)
   where
 
   is-metric-neighbourhood : UU (l1 ⊔ l2)
   is-metric-neighbourhood =
     ( is-symmetric-neighbourhood B) ×
     ( is-reflexive-neighbourhood B) ×
-    ( is-tight-neighbourhood B) ×
+    ( is-separating-neighbourhood B) ×
     ( is-triangular-neighbourhood B)
 
   is-prop-is-metric-neighbourhood : is-prop is-metric-neighbourhood
@@ -51,10 +56,7 @@ module _
       ( is-prop-product
         ( is-prop-is-reflexive-neighbourhood B)
         ( is-prop-product
-          ( is-prop-Π
-            ( λ x →
-              is-prop-Π
-              ( λ y → is-prop-Π (λ H → is-set-type-Set A x y))))
+          ( is-prop-is-separating-neighbourhood B)
           ( is-prop-is-triangular-neighbourhood B)))
 ```
 
@@ -62,12 +64,12 @@ module _
 
 ```agda
 module _
-  {l1 : Level} (l2 : Level) (A : Set l1)
+  {l1 : Level} (l2 : Level) (A : UU l1)
   where
 
   Metric-Structure : UU (l1 ⊔ lsuc l2)
   Metric-Structure =
-    Σ ( neighbourhood-Relation-Prop l2 (type-Set A))
+    Σ ( neighbourhood-Relation-Prop l2 A)
       ( is-metric-neighbourhood A)
 ```
 
@@ -75,29 +77,23 @@ module _
 
 ```agda
 Metric-Space : (l : Level) → UU (lsuc l)
-Metric-Space l = Σ (Set l) (Metric-Structure l)
+Metric-Space l = Σ (UU l) (Metric-Structure l)
 
 module _
   {l : Level} (M : Metric-Space l)
   where
 
-  set-Metric-Space : Set l
-  set-Metric-Space = pr1 M
-
   type-Metric-Space : UU l
-  type-Metric-Space = type-Set set-Metric-Space
+  type-Metric-Space = pr1 M
 
-  is-set-type-Metric-Space : is-set type-Metric-Space
-  is-set-type-Metric-Space = is-set-type-Set set-Metric-Space
-
-  structure-Metric-Space : Metric-Structure l set-Metric-Space
+  structure-Metric-Space : Metric-Structure l type-Metric-Space
   structure-Metric-Space = pr2 M
 
   neighbourhood-Metric-Space : neighbourhood-Relation-Prop l type-Metric-Space
   neighbourhood-Metric-Space = pr1 structure-Metric-Space
 
   is-metric-neighbourhood-Metric-Space :
-    is-metric-neighbourhood set-Metric-Space neighbourhood-Metric-Space
+    is-metric-neighbourhood type-Metric-Space neighbourhood-Metric-Space
   is-metric-neighbourhood-Metric-Space = pr2 structure-Metric-Space
 
   is-in-neighbourhood-Metric-Space : ℚ⁺ → Relation l type-Metric-Space
@@ -114,15 +110,33 @@ module _
   is-reflexive-neighbourhood-Metric-Space =
     pr1 (pr2 is-metric-neighbourhood-Metric-Space)
 
+  is-separating-neighbourhood-Metric-Space :
+    is-separating-neighbourhood neighbourhood-Metric-Space
+  is-separating-neighbourhood-Metric-Space =
+    pr1 (pr2 (pr2 is-metric-neighbourhood-Metric-Space))
+
   is-tight-neighbourhood-Metric-Space :
     is-tight-neighbourhood neighbourhood-Metric-Space
   is-tight-neighbourhood-Metric-Space =
-    pr1 (pr2 (pr2 is-metric-neighbourhood-Metric-Space))
+    is-tight-is-separating-reflexive-neighbourhood
+      neighbourhood-Metric-Space
+      is-separating-neighbourhood-Metric-Space
+      is-reflexive-neighbourhood-Metric-Space
 
   is-triangular-neighbourhood-Metric-Space :
     is-triangular-neighbourhood neighbourhood-Metric-Space
   is-triangular-neighbourhood-Metric-Space =
     pr2 (pr2 (pr2 is-metric-neighbourhood-Metric-Space))
+
+  is-set-type-Metric-Space : is-set type-Metric-Space
+  is-set-type-Metric-Space =
+    is-set-has-separating-reflexive-neighbourhood
+      neighbourhood-Metric-Space
+      is-separating-neighbourhood-Metric-Space
+      is-reflexive-neighbourhood-Metric-Space
+
+  set-Metric-Space : Set l
+  set-Metric-Space = (type-Metric-Space , is-set-type-Metric-Space)
 ```
 
 ## Properties
@@ -131,18 +145,39 @@ module _
 
 ```agda
 module _
-  {l : Level} (M : Metric-Space l)
+  {l : Level} (M : Metric-Space l) (x y : type-Metric-Space M)
   where
 
   indistinguishable-eq-Metric-Space :
-    (x y : type-Metric-Space M) →
     x ＝ y →
     is-indistinguishable-in-neighbourhood
       ( neighbourhood-Metric-Space M)
       ( x)
       ( y)
-  indistinguishable-eq-Metric-Space x .x refl d =
-    is-reflexive-neighbourhood-Metric-Space M d x
+  indistinguishable-eq-Metric-Space =
+    indistinguishable-eq-reflexive-neighbourhood
+      ( neighbourhood-Metric-Space M)
+      ( is-reflexive-neighbourhood-Metric-Space M)
+      ( x)
+      ( y)
+```
+
+### Indistiguishability in a metric space is equivalent to equality
+
+```agda
+module _
+  {l : Level} (M : Metric-Space l) (x y : type-Metric-Space M)
+  where
+
+  is-equiv-indistinguishable-eq-Metric-Space :
+    is-equiv (indistinguishable-eq-Metric-Space M x y)
+  is-equiv-indistinguishable-eq-Metric-Space =
+    is-equiv-indistinguishable-eq-separating-reflexive-neighbourhood
+      ( neighbourhood-Metric-Space M)
+      ( is-separating-neighbourhood-Metric-Space M)
+      ( is-reflexive-neighbourhood-Metric-Space M)
+      ( x)
+      ( y)
 ```
 
 ### Any set can be equipped with a metric structure
@@ -152,16 +187,18 @@ module _
   {l : Level} (A : Set l)
   where
 
-  discrete-Metric-Structure : Metric-Structure l A
-  pr1 discrete-Metric-Structure d x y = Id-Prop A x y
+  discrete-Metric-Structure : Metric-Structure l (type-Set A)
+  pr1 discrete-Metric-Structure d = Id-Prop A
   pr2 discrete-Metric-Structure =
     ( λ d x y H → inv H) ,
     ( λ d x → refl) ,
-    ( λ x y H → H one-ℚ⁺) ,
+    ( is-separating-is-tight-neighbourhood
+      ( λ d → Id-Prop A)
+      ( λ x y H → H one-ℚ⁺)) ,
     ( λ x y z d₁ d₂ H K → K ∙ H)
 
   discrete-Metric-Space : Metric-Space l
-  discrete-Metric-Space = (A , discrete-Metric-Structure)
+  discrete-Metric-Space = (type-Set A , discrete-Metric-Structure)
 ```
 
 ## External links

@@ -16,6 +16,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.neighbourhood-relations
 open import metric-spaces.uniform-continuity-functions-metric-spaces
 ```
 
@@ -50,23 +51,23 @@ module _
   {l : Level} (A : Metric-Space l) (S : subset-Metric-Space l A)
   where
 
-  set-subset-Metric-Space : Set l
-  set-subset-Metric-Space = set-subset (set-Metric-Space A) S
-
-  substructure-Metric-Space : Metric-Structure l set-subset-Metric-Space
+  substructure-Metric-Space : Metric-Structure l (type-subtype S)
   pr1 substructure-Metric-Space d x y =
     neighbourhood-Metric-Space A d (pr1 x) (pr1 y)
   pr2 substructure-Metric-Space =
     ( λ d x y → is-symmetric-neighbourhood-Metric-Space A d (pr1 x) (pr1 y)) ,
     ( λ d x → is-reflexive-neighbourhood-Metric-Space A d (pr1 x)) ,
-    ( λ x y H →
-      eq-type-subtype S
-        (is-tight-neighbourhood-Metric-Space A (pr1 x) (pr1 y) H)) ,
+    ( is-separating-is-tight-neighbourhood
+      ( λ d x y → neighbourhood-Metric-Space A d (pr1 x) (pr1 y))
+      ( λ x y H →
+        eq-type-subtype
+          ( S)
+          ( is-tight-neighbourhood-Metric-Space A (pr1 x) (pr1 y) H))) ,
     ( λ x y z →
       is-triangular-neighbourhood-Metric-Space A (pr1 x) (pr1 y) (pr1 z))
 
   subspace-Metric-Space : Metric-Space l
-  subspace-Metric-Space = (set-subset-Metric-Space , substructure-Metric-Space)
+  subspace-Metric-Space = (type-subtype S , substructure-Metric-Space)
 
   inclusion-subspace-Metric-Space :
     function-carrier-type-Metric-Space subspace-Metric-Space A

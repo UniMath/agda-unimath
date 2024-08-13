@@ -17,6 +17,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -203,6 +204,28 @@ module _
   is-tight-neighbourhood : UU (l1 ⊔ l2)
   is-tight-neighbourhood =
     (x y : A) → is-indistinguishable-in-neighbourhood B x y → x ＝ y
+```
+
+### Any tight neighbourhood-relation is separating
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : neighbourhood-Relation-Prop l2 A)
+  (T : is-tight-neighbourhood B)
+  where
+
+  all-eq-indistinguishable-tight-neighbourhood :
+    (x : A) →
+    (u v : Σ A (is-indistinguishable-in-neighbourhood B x)) →
+    u ＝ v
+  all-eq-indistinguishable-tight-neighbourhood x (u , I) (v , J) =
+    eq-type-subtype
+      ( is-indistinguishable-in-neighbourhood-Prop B x)
+      ( inv (T x u I) ∙ T x v J)
+
+  is-separating-is-tight-neighbourhood : is-separating-neighbourhood B
+  is-separating-is-tight-neighbourhood x =
+    is-prop-all-elements-equal (all-eq-indistinguishable-tight-neighbourhood x)
 ```
 
 ### Any reflexive separating neighbourhood-relation is tight

@@ -24,27 +24,48 @@ open import foundation.universe-levels
 open import metric-spaces.metric-spaces
 open import metric-spaces.neighbourhood-relations
 open import metric-spaces.sequences-metric-spaces
+open import metric-spaces.uniform-continuity-functions-metric-spaces
 ```
 
 </details>
 
 ## Idea
 
-Dependent products of metric spaces inherit a product metric structure
+Dependent products of [metric spaces](metric-spaces.metric-spaces.md) inherit a
+{{#concept "product metric structure" Agda=Π-Metric-Structure}} where
+[`d`-neighbourhoods](metric-spaces.neighbourhood-relations.md) are the products
+of neighbourhoods over each metric space.
+
+## Definitions
+
+### Product structure of metric spaces
 
 ```agda
 module _
   {l1 l2 : Level} (A : UU l1) (P : A → Metric-Space l2)
   where
 
-  set-Π-Metric-Space : Set (l1 ⊔ l2)
-  set-Π-Metric-Space = Π-Set' A (set-Metric-Space ∘ P)
+  type-Π-Metric-Space : UU (l1 ⊔ l2)
+  type-Π-Metric-Space = (x : A) → type-Metric-Space (P x)
 
-  Π-Metric-Structure : Metric-Structure (l1 ⊔ l2) set-Π-Metric-Space
-  pr1 Π-Metric-Structure d f g =
-    Π-Prop A
+  neighbourhood-Π-Metric-Space :
+    neighbourhood-Relation-Prop (l1 ⊔ l2) type-Π-Metric-Space
+  neighbourhood-Π-Metric-Space d f g =
+    Π-Prop A (λ a → neighbourhood-Metric-Space (P a) d (f a) (g a))
+
+  is-tight-neighbourhood-Π-Metric-Space :
+    is-tight-neighbourhood neighbourhood-Π-Metric-Space
+  is-tight-neighbourhood-Π-Metric-Space f g H =
+    eq-htpy
       ( λ a →
-        neighbourhood-Metric-Space (P a) d (f a) (g a))
+        is-tight-neighbourhood-Metric-Space
+          ( P a)
+          ( f a)
+          ( g a)
+          ( λ d → H d a))
+
+  Π-Metric-Structure : Metric-Structure (l1 ⊔ l2) type-Π-Metric-Space
+  pr1 Π-Metric-Structure = neighbourhood-Π-Metric-Space
   pr2 Π-Metric-Structure =
     ( λ d f g H a →
       is-symmetric-neighbourhood-Metric-Space
@@ -58,14 +79,9 @@ module _
         ( P a)
         ( d)
         ( f a)) ,
-    ( λ f g H →
-      eq-htpy
-        ( λ a →
-          is-tight-neighbourhood-Metric-Space
-            ( P a)
-            ( f a)
-            ( g a)
-            ( λ d → H d a))) ,
+    ( is-separating-is-tight-neighbourhood
+      ( neighbourhood-Π-Metric-Space)
+      ( is-tight-neighbourhood-Π-Metric-Space)) ,
     ( λ f g h d₁ d₂ H K a →
       is-triangular-neighbourhood-Metric-Space
         ( P a)
@@ -76,17 +92,39 @@ module _
         ( d₂)
         ( H a)
         ( K a))
-
-  Π-Metric-Space' : Metric-Space (l1 ⊔ l2)
-  Π-Metric-Space' = (set-Π-Metric-Space , Π-Metric-Structure)
 ```
+
+### Product of metric spaces
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1)
-  (P : type-Metric-Space A → Metric-Space l2)
+  {l1 l2 : Level}
   where
 
-  Π-Metric-Space : Metric-Space (l1 ⊔ l2)
-  Π-Metric-Space = Π-Metric-Space' (type-Metric-Space A) P
+  Π-Metric-Space' :
+    (A : UU l1) → (P : A → Metric-Space l2) → Metric-Space (l1 ⊔ l2)
+  Π-Metric-Space' A P = (type-Π-Metric-Space A P , Π-Metric-Structure A P)
+
+  Π-Metric-Space :
+    (A : Metric-Space l1) →
+    (P : type-Metric-Space A → Metric-Space l2) →
+    Metric-Space (l1 ⊔ l2)
+  Π-Metric-Space A = Π-Metric-Space' (type-Metric-Space A)
+```
+
+## Properties
+
+### The evaluation maps on a product metric space are uniformly continuous
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (P : A → Metric-Space l2) (x : A)
+  where
+
+  is-uniformly-continuous-ev-Π-Metric-Space :
+    is-uniformly-continuous-function-Metric-Space
+      ( Π-Metric-Space' A P)
+      ( P x)
+      ( λ f → f x)
+  is-uniformly-continuous-ev-Π-Metric-Space ε = (ε , λ f g H → H x)
 ```
