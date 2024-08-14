@@ -10,8 +10,13 @@ module category-theory.limits-precategories where
 open import category-theory.cones-precategories
 open import category-theory.functors-precategories
 open import category-theory.precategories
+open import category-theory.right-extensions-precategories
+open import category-theory.right-kan-extensions-precategories
+open import category-theory.terminal-category
 open import category-theory.terminal-objects-precategories
 
+open import foundation.dependent-pair-types
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -23,10 +28,11 @@ A
 {{#concept "limit" Disambiguation="of a functor of precategories" Agda=limit-Precategory}}
 of a [functor](category-theory.functors-precategories.md) `F` of
 [precategories](category-theory.precategories.md) is the
-[terminal](category-theory.terminal-objects-precategories.md)
-[cone](category-theory.cones-precategories.md) to `F`.
+[right kan extension](category-theory.right-kan-extensions-precategories.md) of
+`F` along the terminal functor into the
+[terminal precategory](category-theory.terminal-category.md).
 
-Following the terminology for cones, we call the vertex of the terminal cone the
+If a limit exists, we call the image of `star` under the extension the
 **vertex** of the limit.
 
 ## Definition
@@ -39,27 +45,30 @@ module _
 
   limit-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   limit-Precategory =
-    terminal-obj-Precategory (cone-precategory-Precategory C D F)
+    right-kan-extension-Precategory C terminal-Precategory D
+      (terminal-functor-Precategory C) F
 
 module _
   {l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
   (F : functor-Precategory C D) (L : limit-Precategory C D F)
   where
 
-  cone-limit-Precategory : cone-Precategory C D F
-  cone-limit-Precategory =
-    obj-terminal-obj-Precategory (cone-precategory-Precategory C D F) L
+  right-extension-limit-Precategory :
+    right-extension-Precategory C terminal-Precategory D
+      (terminal-functor-Precategory C) F
+  right-extension-limit-Precategory =
+    right-extension-right-kan-extension-Precategory
+      C terminal-Precategory D (terminal-functor-Precategory C) F L
 
-  vertex-limit-Precategory : obj-Precategory D
+  extension-limit-Precategory :
+    functor-Precategory terminal-Precategory D
+  extension-limit-Precategory =
+    extension-right-kan-extension-Precategory
+      C terminal-Precategory D (terminal-functor-Precategory C) F L
+
+  vertex-limit-Precategory :
+    obj-Precategory D
   vertex-limit-Precategory =
-    vertex-cone-Precategory C D F cone-limit-Precategory
-
-  is-limiting-cone-Precategory :
-    is-terminal-obj-Precategory
-      ( cone-precategory-Precategory C D F)
-      ( cone-limit-Precategory)
-  is-limiting-cone-Precategory =
-    is-terminal-obj-terminal-obj-Precategory
-      ( cone-precategory-Precategory C D F)
-      ( L)
+    obj-functor-Precategory terminal-Precategory D
+      extension-limit-Precategory star
 ```

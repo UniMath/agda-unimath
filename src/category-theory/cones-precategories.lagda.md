@@ -12,13 +12,17 @@ open import category-theory.functors-precategories
 open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-functors
+open import category-theory.right-extensions-precategories
+open import category-theory.terminal-category
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -26,8 +30,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "cone" Disambiguation="over a functor of precategories"}} over a
-[functor](category-theory.functors-precategories.md) `F` of
+A
+{{#concept "cone" Disambiguation="over a functor of precategories" Agda=cone-Precategory}}
+over a [functor](category-theory.functors-precategories.md) `F` of
 [precategories](category-theory.precategories.md) is a
 [natural transformation](category-theory.natural-transformations-functors-precategories.md)
 from a [constant functor](category-theory.constant-functors.md) to `F`.
@@ -47,6 +52,11 @@ corresponds to a commuting triangle as below.
   ∨       ∨
  Fx ----> Fy
 ```
+
+Equivalently, we can see a cone over `F` as a
+[right extension](category-theory.right-extensions-precategories.md) of `F`
+along the terminal functor into the
+[terminal precategory](category-theory.terminal-category.md).
 
 ## Definitions
 
@@ -108,139 +118,68 @@ module _
     right-unit-law-comp-hom-Precategory D _
 ```
 
-### The precategory of cones over a functor
+## Properties
+
+### A cone is a right extension along the terminal map
 
 ```agda
-  hom-cone-Precategory : (α β : cone-Precategory) → UU (l1 ⊔ l2 ⊔ l4)
-  hom-cone-Precategory α β =
-    Σ ( natural-transformation-Precategory C D
-        ( vertex-functor-cone-Precategory α)
-        ( vertex-functor-cone-Precategory β))
-      ( λ γ →
-        comp-natural-transformation-Precategory C D
-          ( vertex-functor-cone-Precategory α)
-          ( vertex-functor-cone-Precategory β)
-          ( F)
-          ( natural-transformation-cone-Precategory β)
-          γ ＝
-        ( natural-transformation-cone-Precategory α))
+  vertex-right-extension-Precategory :
+    right-extension-Precategory C terminal-Precategory D
+      (terminal-functor-Precategory C) F →
+    obj-Precategory D
+  vertex-right-extension-Precategory R =
+    obj-functor-Precategory terminal-Precategory D
+      ( extension-right-extension-Precategory C terminal-Precategory D
+        ( terminal-functor-Precategory C) F R)
+      ( star)
 
-  is-set-hom-cone-Precategory :
-    (α β : cone-Precategory) → is-set (hom-cone-Precategory α β)
-  is-set-hom-cone-Precategory α β =
-    is-set-Σ
-      ( is-set-natural-transformation-Precategory C D
-        ( vertex-functor-cone-Precategory α)
-        ( vertex-functor-cone-Precategory β))
-      ( λ τ →
-        is-set-is-prop
-          ( is-set-natural-transformation-Precategory C D
-            ( vertex-functor-cone-Precategory α) F _ _))
-
-  hom-set-cone-Precategory :
-    (α β : cone-Precategory) → Set (l1 ⊔ l2 ⊔ l4)
-  pr1 (hom-set-cone-Precategory α β) = hom-cone-Precategory α β
-  pr2 (hom-set-cone-Precategory α β) = is-set-hom-cone-Precategory α β
-
-  comp-hom-cone-Precategory :
-    {α β γ : cone-Precategory} →
-    hom-cone-Precategory β γ →
-    hom-cone-Precategory α β →
-    hom-cone-Precategory α γ
-  pr1 (comp-hom-cone-Precategory {α} {β} {γ} φ ψ) =
-    comp-natural-transformation-Precategory C D
-      ( vertex-functor-cone-Precategory α)
-      ( vertex-functor-cone-Precategory β)
-      ( vertex-functor-cone-Precategory γ)
-      ( pr1 φ)
-      ( pr1 ψ)
-  pr2 (comp-hom-cone-Precategory {α} {β} {γ} φ ψ) =
-    inv
-      ( associative-comp-natural-transformation-Precategory C D
-        ( vertex-functor-cone-Precategory α)
-        ( vertex-functor-cone-Precategory β)
-        ( vertex-functor-cone-Precategory γ)
-        ( F)
-        ( pr1 ψ)
-        ( pr1 φ)
-        ( natural-transformation-cone-Precategory γ)) ∙
-    ap
-      ( λ m →
-        comp-natural-transformation-Precategory C D
-          ( vertex-functor-cone-Precategory α)
-          ( vertex-functor-cone-Precategory β)
-          ( F)
-          ( m)
-          ( pr1 ψ))
-      ( pr2 φ) ∙
-    pr2 ψ
-
-  associative-comp-hom-cone-Precategory :
-    {α β γ τ : cone-Precategory} →
-    (ξ : hom-cone-Precategory γ τ) →
-    (φ : hom-cone-Precategory β γ) →
-    (ψ : hom-cone-Precategory α β) →
-    comp-hom-cone-Precategory (comp-hom-cone-Precategory ξ φ) ψ ＝
-    comp-hom-cone-Precategory ξ (comp-hom-cone-Precategory φ ψ)
-  associative-comp-hom-cone-Precategory {α} {β} {γ} {τ} ξ φ ψ =
-    eq-pair-Σ
-      ( associative-comp-natural-transformation-Precategory C D
-        ( vertex-functor-cone-Precategory α)
-        ( vertex-functor-cone-Precategory β)
-        ( vertex-functor-cone-Precategory γ)
-        ( vertex-functor-cone-Precategory τ)
-          _ _ _)
-      ( eq-is-prop
-        ( is-set-natural-transformation-Precategory C D
-          ( vertex-functor-cone-Precategory α) F _ _))
-
-  id-hom-cone-Precategory :
-    (α : cone-Precategory) → hom-cone-Precategory α α
-  pr1 (id-hom-cone-Precategory α) =
-    id-natural-transformation-Precategory C D
-      ( vertex-functor-cone-Precategory α)
-  pr2 (id-hom-cone-Precategory α) =
-    right-unit-law-comp-natural-transformation-Precategory C D
-      ( vertex-functor-cone-Precategory α)
+  cone-right-extension-Precategory :
+    right-extension-Precategory C terminal-Precategory D
+      (terminal-functor-Precategory C) F → cone-Precategory
+  pr1 (cone-right-extension-Precategory R) =
+    vertex-right-extension-Precategory R
+  pr1 (pr2 (cone-right-extension-Precategory R)) =
+    hom-family-natural-transformation-Precategory C D
+      ( comp-functor-Precategory C terminal-Precategory D
+        ( extension-right-extension-Precategory C terminal-Precategory D
+          ( terminal-functor-Precategory C) F R)
+        ( terminal-functor-Precategory C))
       ( F)
-      ( natural-transformation-cone-Precategory α)
+      ( natural-transformation-right-extension-Precategory
+        C terminal-Precategory D
+        ( terminal-functor-Precategory C) F R)
+  pr2 (pr2 (cone-right-extension-Precategory R)) {x} {y} f =
+    naturality-natural-transformation-Precategory C D
+      ( comp-functor-Precategory C terminal-Precategory D
+        ( extension-right-extension-Precategory C terminal-Precategory D
+          ( terminal-functor-Precategory C) F R)
+        ( terminal-functor-Precategory C))
+      ( F)
+      ( natural-transformation-right-extension-Precategory
+        C terminal-Precategory D
+        ( terminal-functor-Precategory C) F R) f ∙
+          ap
+            ( comp-hom-Precategory D
+              ( hom-family-right-extension-Precategory C terminal-Precategory D
+                ( terminal-functor-Precategory C) F R y))
+            ( preserves-id-functor-Precategory terminal-Precategory D
+              ( extension-right-extension-Precategory C terminal-Precategory D
+                ( terminal-functor-Precategory C) F R)
+                ( star))
 
-  left-unit-law-comp-hom-cone-Precategory :
-    {α β : cone-Precategory}
-    (φ : hom-cone-Precategory α β) →
-    comp-hom-cone-Precategory (id-hom-cone-Precategory β) φ ＝ φ
-  left-unit-law-comp-hom-cone-Precategory {α} {β} φ =
-    eq-pair-Σ
-      ( left-unit-law-comp-natural-transformation-Precategory C D
-          ( vertex-functor-cone-Precategory α)
-          ( vertex-functor-cone-Precategory β)
-          ( pr1 φ))
-      ( eq-is-prop
-        ( is-set-natural-transformation-Precategory C D
-          ( vertex-functor-cone-Precategory α) F _ _))
-
-  right-unit-law-comp-hom-cone-Precategory :
-    {α β : cone-Precategory}
-    (φ : hom-cone-Precategory α β) →
-    comp-hom-cone-Precategory φ (id-hom-cone-Precategory α) ＝ φ
-  right-unit-law-comp-hom-cone-Precategory {α} {β} φ =
-    eq-pair-Σ
-      ( right-unit-law-comp-natural-transformation-Precategory C D
-        ( vertex-functor-cone-Precategory α)
-          ( vertex-functor-cone-Precategory β)
-          ( pr1 φ))
-      ( eq-is-prop
-        ( is-set-natural-transformation-Precategory C D
-          ( vertex-functor-cone-Precategory α) F _ _))
-
-  cone-precategory-Precategory : Precategory (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
-  cone-precategory-Precategory =
-    make-Precategory
-      cone-Precategory
-      hom-set-cone-Precategory
-      comp-hom-cone-Precategory
-      id-hom-cone-Precategory
-      associative-comp-hom-cone-Precategory
-      left-unit-law-comp-hom-cone-Precategory
-      right-unit-law-comp-hom-cone-Precategory
+  right-extension-cone-Precategory :
+    cone-Precategory →
+    right-extension-Precategory C terminal-Precategory D
+      (terminal-functor-Precategory C) F
+  pr1 (right-extension-cone-Precategory τ) =
+    constant-functor-Precategory
+      terminal-Precategory D (vertex-cone-Precategory τ)
+  pr1 (pr2 (right-extension-cone-Precategory τ)) =
+    component-cone-Precategory τ
+  pr2 (pr2 (right-extension-cone-Precategory τ)) f =
+    naturality-natural-transformation-Precategory C D
+      ( vertex-functor-cone-Precategory τ)
+      ( F)
+      ( natural-transformation-cone-Precategory τ)
+      ( f)
 ```
