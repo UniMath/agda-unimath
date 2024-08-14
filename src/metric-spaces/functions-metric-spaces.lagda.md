@@ -32,3 +32,14 @@ module _
   function-carrier-type-Metric-Space : UU (l1 ⊔ l2)
   function-carrier-type-Metric-Space = type-Metric-Space A → type-Metric-Space B
 ```
+
+### The identity function on a metric space
+
+```agda
+module _
+  {l : Level} (M : Metric-Space l)
+  where
+
+  id-Metric-Space : function-carrier-type-Metric-Space M M
+  id-Metric-Space x = x
+```

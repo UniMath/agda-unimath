@@ -20,8 +20,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.convergent-sequences-metric-spaces
-open import metric-spaces.limits-sequences-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.modulus-limit-sequences-metric-spaces
 open import metric-spaces.neighbourhood-relations
 open import metric-spaces.sequences-metric-spaces
 ```
@@ -75,17 +75,19 @@ module _
     (d : ℚ⁺) → Σ ℕ (is-modulus-cauchy-sequence-Metric-Space d)
 ```
 
-### Convergent sequences in metric spaces are Cauchy sequences
+### Sequences with a limit modulus are Cauchy sequences
 
 ```agda
 module _
   {l : Level} (M : Metric-Space l) (u : sequence-Metric-Space M)
   where
 
-  is-cauchy-is-convergent-sequence-Metric-Space :
-    is-convergent-sequence-Metric-Space M u →
+  is-cauchy-has-limit-modulus-sequence-Metric-Space :
+    Σ ( type-Metric-Space M)
+      ( λ x → (d : ℚ⁺) → Σ ℕ (is-modulus-limit-sequence-Metric-Space M u x d)) →
     is-cauchy-sequence-Metric-Space M u
-  is-cauchy-is-convergent-sequence-Metric-Space (x , H) d = (N , α)
+  is-cauchy-has-limit-modulus-sequence-Metric-Space (x , H) d =
+    ( N , α)
     where
       d₂ : ℚ⁺
       d₂ = mediant-zero-ℚ⁺ d
@@ -94,10 +96,10 @@ module _
       d₁ = le-diff-ℚ⁺ d₂ d (le-mediant-zero-ℚ⁺ d)
 
       Np : ℕ
-      Np = modulus-limit-sequence-Metric-Space M u x H d₁
+      Np = pr1 (H d₁)
 
       Nq : ℕ
-      Nq = modulus-limit-sequence-Metric-Space M u x H d₂
+      Nq = pr1 (H d₂)
 
       N : ℕ
       N = max-ℕ Np Nq
@@ -117,16 +119,10 @@ module _
             ( is-symmetric-neighbourhood-Metric-Space M d₁ x (u p) β))
         where
           β : is-in-neighbourhood-Metric-Space M d₁ x (u p)
-          β =
-            is-modulus-modulus-limit-sequence-Metric-Space M u x H d₁ p
-              ( transitive-leq-ℕ Np N p I
-                ( leq-left-leq-max-ℕ N Np Nq (refl-leq-ℕ N)))
+          β = pr2 (H d₁) p (transitive-leq-ℕ Np N p I (left-leq-max-ℕ Np Nq))
 
           γ : is-in-neighbourhood-Metric-Space M d₂ x (u q)
-          γ =
-            is-modulus-modulus-limit-sequence-Metric-Space M u x H d₂ q
-              ( transitive-leq-ℕ Nq N q J
-                ( leq-right-leq-max-ℕ N Np Nq (refl-leq-ℕ N)))
+          γ = pr2 (H d₂) q (transitive-leq-ℕ Nq N q J (right-leq-max-ℕ Np Nq))
 ```
 
 ## References

@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
@@ -24,7 +25,7 @@ open import foundation.universe-levels
 open import metric-spaces.metric-spaces
 open import metric-spaces.neighbourhood-relations
 open import metric-spaces.sequences-metric-spaces
-open import metric-spaces.uniform-continuity-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -126,5 +127,6 @@ module _
       ( Π-Metric-Space' A P)
       ( P x)
       ( λ f → f x)
-  is-uniformly-continuous-ev-Π-Metric-Space ε = (ε , λ f g H → H x)
+  is-uniformly-continuous-ev-Π-Metric-Space ε =
+    intro-exists ε (λ f g H → H x)
 ```

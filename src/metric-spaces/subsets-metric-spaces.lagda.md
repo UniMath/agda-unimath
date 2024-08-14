@@ -10,6 +10,7 @@ module metric-spaces.subsets-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -17,7 +18,7 @@ open import foundation.universe-levels
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.neighbourhood-relations
-open import metric-spaces.uniform-continuity-functions-metric-spaces
+open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -86,5 +87,6 @@ module _
       (subspace-Metric-Space A S)
       (A)
       (inclusion-subspace-Metric-Space A S)
-  is-uniformly-continuous-inclusion-subspace-Metric-Space ε = (ε , λ x y H → H)
+  is-uniformly-continuous-inclusion-subspace-Metric-Space ε =
+    intro-exists ε (λ x y H → H)
 ```
