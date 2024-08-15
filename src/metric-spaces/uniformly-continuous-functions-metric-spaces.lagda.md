@@ -107,7 +107,7 @@ module _
 ### Uniformly continuous functions are continuous at every point
 
 ```agda
-module _ε
+module _
   {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
   (f : function-carrier-type-Metric-Space A B)
   where
