@@ -63,7 +63,7 @@ module _
     is-prop-type-Prop is-continuous-prop-function-Metric-Space
 ```
 
-### The type of continuous functions between metric spaces
+### The set of continuous functions between metric spaces
 
 ```agda
 module _
@@ -123,7 +123,7 @@ module _
     id-Metric-Space A , is-continuous-id-Metric-Space
 ```
 
-### Two continuous are equal if their underlying maps are pointwise equal
+### Two continuous functions are equal if their underlying maps are pointwise equal
 
 ```agda
 module _

@@ -136,7 +136,7 @@ module _
     intro-exists ε (λ x y H → is-reflexive-neighbourhood-Metric-Space B ε b)
 ```
 
-### Two uniformly continuous are equal if their underlying maps are pointwise equal
+### Two uniformly continuous functions are equal if their underlying maps are pointwise equal
 
 ```agda
 module _
