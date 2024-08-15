@@ -25,7 +25,7 @@ open import foundation.universe-levels
 open import metric-spaces.metric-spaces
 open import metric-spaces.neighbourhood-relations
 open import metric-spaces.sequences-metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
+open import metric-spaces.short-functions-metric-spaces
 ```
 
 </details>
@@ -115,18 +115,17 @@ module _
 
 ## Properties
 
-### The evaluation maps on a product metric space are uniformly continuous
+### The evaluation maps on a product metric space are short
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (P : A → Metric-Space l2) (x : A)
+  {l1 l2 : Level} (A : UU l1) (P : A → Metric-Space l2) (a : A)
   where
 
-  is-uniformly-continuous-ev-Π-Metric-Space :
-    is-uniformly-continuous-function-Metric-Space
+  is-short-ev-Π-Metric-Space :
+    is-short-function-Metric-Space
       ( Π-Metric-Space' A P)
-      ( P x)
-      ( λ f → f x)
-  is-uniformly-continuous-ev-Π-Metric-Space ε =
-    intro-exists ε (λ f g H → H x)
+      ( P a)
+      ( λ f → f a)
+  is-short-ev-Π-Metric-Space ε x y H = H a
 ```
