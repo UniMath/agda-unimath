@@ -21,7 +21,7 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ## Idea
 
 The
-[uniformly continuous functions](metric-spaces.uniforlmy-continuous-functions-metric-spaces.md)
+[uniformly continuous functions](metric-spaces.uniformly-continuous-functions-metric-spaces.md)
 form a [precategory](category-theory.precategories.md).
 
 ## Definition
