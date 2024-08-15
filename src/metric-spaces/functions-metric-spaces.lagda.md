@@ -7,6 +7,8 @@ module metric-spaces.functions-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.sets
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
@@ -42,4 +44,24 @@ module _
 
   id-Metric-Space : function-carrier-type-Metric-Space M M
   id-Metric-Space x = x
+```
+
+## Properties
+
+### The type of functions between metric spaces is a set
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  where
+
+  is-set-function-carrier-type-Metric-Space :
+    is-set (function-carrier-type-Metric-Space A B)
+  is-set-function-carrier-type-Metric-Space =
+    is-set-Π (λ x → is-set-type-Metric-Space B)
+
+  set-function-carrier-type-Metric-Space : Set (l1 ⊔ l2)
+  set-function-carrier-type-Metric-Space =
+    function-carrier-type-Metric-Space A B ,
+    is-set-function-carrier-type-Metric-Space
 ```

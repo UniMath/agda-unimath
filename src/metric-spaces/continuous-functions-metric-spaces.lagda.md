@@ -9,7 +9,9 @@ module metric-spaces.continuous-functions-metric-spaces where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sequences
@@ -68,9 +70,20 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
   where
 
+  set-continuous-function-Metric-Space : Set (l1 ⊔ l2)
+  set-continuous-function-Metric-Space =
+    set-subset
+      ( set-function-carrier-type-Metric-Space A B)
+      ( is-continuous-prop-function-Metric-Space A B)
+
   continuous-function-Metric-Space : UU (l1 ⊔ l2)
   continuous-function-Metric-Space =
-    type-subtype (is-continuous-prop-function-Metric-Space A B)
+    type-Set set-continuous-function-Metric-Space
+
+  is-set-continuous-function-Metric-Space :
+    is-set continuous-function-Metric-Space
+  is-set-continuous-function-Metric-Space =
+    is-set-type-Set set-continuous-function-Metric-Space
 ```
 
 ```agda
@@ -110,24 +123,24 @@ module _
     id-Metric-Space A , is-continuous-id-Metric-Space
 ```
 
-### The type of continuous functions between metric spaces is a set
+### Two continuous are equal if their underlying maps are pointwise equal
 
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  (f g : continuous-function-Metric-Space A B)
   where
 
-  is-set-continuous-function-Metric-Space :
-    is-set (continuous-function-Metric-Space A B)
-  is-set-continuous-function-Metric-Space =
-    is-set-type-subtype
+  eq-continuous-function-Metric-Space :
+    ( (x : type-Metric-Space A) →
+      Id
+        ( map-continuous-function-Metric-Space A B f x)
+        ( map-continuous-function-Metric-Space A B g x)) →
+    Id f g
+  eq-continuous-function-Metric-Space H =
+    eq-type-subtype
       ( is-continuous-prop-function-Metric-Space A B)
-      ( is-set-Π (λ x → is-set-type-Metric-Space B))
-
-  set-continuous-function-Metric-Space : Set (l1 ⊔ l2)
-  set-continuous-function-Metric-Space =
-    continuous-function-Metric-Space A B ,
-    is-set-continuous-function-Metric-Space
+      ( eq-htpy H)
 ```
 
 ### The composition of continuous functions is continuous

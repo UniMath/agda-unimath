@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -59,16 +60,27 @@ module _
     is-prop-type-Prop is-uniformly-continuous-prop-function-Metric-Space
 ```
 
-### The type of uniformly continuous functions between metric spaces
+### The set of uniformly continuous functions between metric spaces
 
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
   where
 
+  set-uniformly-continuous-function-Metric-Space : Set (l1 ⊔ l2)
+  set-uniformly-continuous-function-Metric-Space =
+    set-subset
+      ( set-function-carrier-type-Metric-Space A B)
+      ( is-uniformly-continuous-prop-function-Metric-Space A B)
+
   uniformly-continuous-function-Metric-Space : UU (l1 ⊔ l2)
   uniformly-continuous-function-Metric-Space =
-    type-subtype (is-uniformly-continuous-prop-function-Metric-Space A B)
+    type-Set set-uniformly-continuous-function-Metric-Space
+
+  is-set-uniformly-continuous-function-Metric-Space :
+    is-set uniformly-continuous-function-Metric-Space
+  is-set-uniformly-continuous-function-Metric-Space =
+    is-set-type-Set set-uniformly-continuous-function-Metric-Space
 ```
 
 ```agda
@@ -124,6 +136,26 @@ module _
     intro-exists ε (λ x y H → is-reflexive-neighbourhood-Metric-Space B ε b)
 ```
 
+### Two uniformly continuous are equal if their underlying maps are pointwise equal
+
+```agda
+module _
+  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  (f g : uniformly-continuous-function-Metric-Space A B)
+  where
+
+  eq-uniformly-continuous-function-Metric-Space :
+    ( (x : type-Metric-Space A) →
+      Id
+        ( map-uniformly-continuous-function-Metric-Space A B f x)
+        ( map-uniformly-continuous-function-Metric-Space A B g x)) →
+    Id f g
+  eq-uniformly-continuous-function-Metric-Space H =
+    eq-type-subtype
+      ( is-uniformly-continuous-prop-function-Metric-Space A B)
+      ( eq-htpy H)
+```
+
 ### The identity function on a metric space is uniformly continuous
 
 ```agda
@@ -140,26 +172,6 @@ module _
   uniformly-continuous-id-Metric-Space =
     id-Metric-Space A ,
     is-uniformly-continuous-id-Metric-Space
-```
-
-### The type of uniformly continuous functions between metric spaces is set
-
-```agda
-module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  where
-
-  is-set-uniformly-continuous-function-Metric-Space :
-    is-set (uniformly-continuous-function-Metric-Space A B)
-  is-set-uniformly-continuous-function-Metric-Space =
-    is-set-type-subtype
-      ( is-uniformly-continuous-prop-function-Metric-Space A B)
-      ( is-set-Π (λ x → is-set-type-Metric-Space B))
-
-  set-uniformly-continuous-function-Metric-Space : Set (l1 ⊔ l2)
-  set-uniformly-continuous-function-Metric-Space =
-    ( uniformly-continuous-function-Metric-Space A B) ,
-    ( is-set-uniformly-continuous-function-Metric-Space)
 ```
 
 ### The composition of uniformly continuous functions is uniformly continuous
