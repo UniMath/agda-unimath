@@ -1,4 +1,4 @@
-# Continuous of functions between metric spaces
+# Continuous functions between metric spaces
 
 ```agda
 module metric-spaces.continuous-functions-metric-spaces where

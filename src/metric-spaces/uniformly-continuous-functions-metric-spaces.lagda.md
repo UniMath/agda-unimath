@@ -1,4 +1,4 @@
-# Uniformly continuous of functions between metric spaces
+# Uniformly continuous functions between metric spaces
 
 ```agda
 module metric-spaces.uniformly-continuous-functions-metric-spaces where
