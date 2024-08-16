@@ -58,9 +58,13 @@ module _
         ( is-prop-product
           ( is-prop-is-separating-neighbourhood B)
           ( is-prop-is-triangular-neighbourhood B)))
+
+  is-metric-prop-neighbourhood : Prop (l1 ⊔ l2)
+  is-metric-prop-neighbourhood =
+    is-metric-neighbourhood , is-prop-is-metric-neighbourhood
 ```
 
-### Metric structures over a set
+### Metric structures over a type
 
 ```agda
 module _
@@ -71,6 +75,19 @@ module _
   Metric-Structure =
     Σ ( neighbourhood-Relation-Prop l2 A)
       ( is-metric-neighbourhood A)
+```
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (S : Metric-Structure l2 A)
+  where
+
+  neighbourhood-Metric-Structure : neighbourhood-Relation-Prop l2 A
+  neighbourhood-Metric-Structure = pr1 S
+
+  is-metric-neighbourhood-Metric-Structure :
+    is-metric-neighbourhood A neighbourhood-Metric-Structure
+  is-metric-neighbourhood-Metric-Structure = pr2 S
 ```
 
 ### The type of metric spaces
