@@ -141,6 +141,30 @@ module _
         ( hom-map-Precategory C D F f)))
 ```
 
+## Equality of functors induces a natural transformation
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  natural-transformation-map-eq-Precategory :
+    (F G : map-Precategory C D) →
+    F ＝ G →
+    natural-transformation-map-Precategory C D F G
+  natural-transformation-map-eq-Precategory F G refl =
+    id-natural-transformation-map-Precategory C D F
+
+  natural-transformation-map-eq-inv-Precategory :
+    (F G : map-Precategory C D) →
+    F ＝ G →
+    natural-transformation-map-Precategory C D G F
+  natural-transformation-map-eq-inv-Precategory F G =
+    natural-transformation-map-eq-Precategory G F ∘ inv
+```
+
 ## Properties
 
 ### That a family of morphisms is a natural transformation is a proposition

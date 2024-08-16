@@ -166,187 +166,92 @@ module _
       ( c)
       ( raise-star)
 
-  extension-limit-Set-Precategory :
-    functor-Precategory terminal-Precategory (Set-Precategory (l1 ⊔ l2))
-  extension-limit-Set-Precategory =
-    constant-functor-Precategory
-      ( terminal-Precategory)
-      ( Set-Precategory (l1 ⊔ l2))
+  cone-limit-Set-Precategory :
+    cone-Precategory C (Set-Precategory (l1 ⊔ l2)) F
+  cone-limit-Set-Precategory =
+    make-cone-Precategory C (Set-Precategory (l1 ⊔ l2)) F
       ( vertex-limit-Set-Precategory)
-
-  right-extension-limit-Set-Precategory :
-    right-extension-Precategory
-      ( C)
-      ( terminal-Precategory)
-      ( Set-Precategory (l1 ⊔ l2))
-      ( terminal-functor-Precategory C)
-      ( F)
-  pr1 right-extension-limit-Set-Precategory =
-    extension-limit-Set-Precategory
-  pr1 (pr2 right-extension-limit-Set-Precategory) =
-    component-limit-Set-Precategory
-  pr2 (pr2 right-extension-limit-Set-Precategory) f =
-    eq-htpy
-      ( λ τ →
-        ( htpy-eq
-          ( naturality-natural-transformation-Precategory
-            ( C)
-            ( Set-Precategory (l1 ⊔ l2))
-            ( constant-functor-Precategory C (Set-Precategory (l1 ⊔ l2))
-              ( raise-unit-Set (l1 ⊔ l2)))
-            ( F)
-            ( τ)
-            ( f))
-          ( raise-star)))
-
-  vertex-limit-Set-Precategory-right-extension-Precategory :
-    ( φ : right-extension-Precategory C terminal-Precategory
-      ( Set-Precategory (l1 ⊔ l2)) (terminal-functor-Precategory C) F) →
-    hom-Precategory
-      ( Set-Precategory (l1 ⊔ l2))
-      ( vertex-right-extension-Precategory C (Set-Precategory (l1 ⊔ l2)) F φ)
-      ( vertex-limit-Set-Precategory)
-  pr1 (vertex-limit-Set-Precategory-right-extension-Precategory φ l)
-    x (map-raise star) =
-      hom-family-right-extension-Precategory C terminal-Precategory
-        ( Set-Precategory (l1 ⊔ l2)) (terminal-functor-Precategory C) F φ x l
-  pr2 (vertex-limit-Set-Precategory-right-extension-Precategory φ l) {x} {y} f =
-    eq-htpy
-      λ { (map-raise star) →
-        ( htpy-eq
-          ( naturality-right-extension-Precategory C terminal-Precategory
-            ( Set-Precategory (l1 ⊔ l2))
-            ( terminal-functor-Precategory C) F φ f) l) ∙
-          ap
-            ( hom-family-right-extension-Precategory C terminal-Precategory
-              ( Set-Precategory (l1 ⊔ l2))
-              ( terminal-functor-Precategory C) F φ y)
+      ( component-limit-Set-Precategory)
+      ( λ f →
+        eq-htpy λ τ →
+          inv
             ( htpy-eq
-              ( preserves-id-functor-Precategory
-                ( terminal-Precategory)
-                ( Set-Precategory (l1 ⊔ l2))
-                ( extension-right-extension-Precategory C terminal-Precategory
-                  ( Set-Precategory (l1 ⊔ l2))
-                  ( terminal-functor-Precategory C) F φ)
-                ( star))
-              ( l))}
-
-  map-inv-right-extension-map-limit-Set-Precategory :
-    ( G :
-      functor-Precategory
-        ( terminal-Precategory)
-        (Set-Precategory (l1 ⊔ l2))) →
-    natural-transformation-Precategory C
-      ( Set-Precategory (l1 ⊔ l2))
-      ( comp-functor-Precategory C terminal-Precategory
-        ( Set-Precategory (l1 ⊔ l2))
-        ( G)
-        ( terminal-functor-Precategory C))
-      ( F) →
-    natural-transformation-Precategory
-      ( terminal-Precategory)
-      ( Set-Precategory (l1 ⊔ l2))
-      ( G)
-      ( extension-limit-Set-Precategory)
-  pr1 (map-inv-right-extension-map-limit-Set-Precategory G φ) x =
-    vertex-limit-Set-Precategory-right-extension-Precategory (G , φ)
-  pr2 (map-inv-right-extension-map-limit-Set-Precategory G φ)
-    {star} {star} star =
-    eq-htpy
-      λ x →
-        ap
-          ( vertex-limit-Set-Precategory-right-extension-Precategory (G , φ))
-          ( inv
-            ( htpy-eq
-              ( preserves-id-functor-Precategory
-                ( terminal-Precategory)
-                ( Set-Precategory (l1 ⊔ l2))
-                ( G)
-                ( star))
-              ( x)))
-
-  is-section-right-extension-map-limit-Set-Precategory :
-    ( G :
-      functor-Precategory
-        ( terminal-Precategory)
-        (Set-Precategory (l1 ⊔ l2))) →
-    is-section
-      ( right-extension-map-Precategory
-        ( C)
-        ( terminal-Precategory)
-        ( Set-Precategory (l1 ⊔ l2))
-        ( terminal-functor-Precategory C)
-        ( F)
-        ( right-extension-limit-Set-Precategory)
-        ( G))
-      ( map-inv-right-extension-map-limit-Set-Precategory G)
-  is-section-right-extension-map-limit-Set-Precategory G φ =
-    eq-htpy-hom-family-natural-transformation-Precategory
-      C
-      ( Set-Precategory (l1 ⊔ l2))
-      ( comp-functor-Precategory C terminal-Precategory
-        ( Set-Precategory (l1 ⊔ l2))
-        ( G)
-        ( terminal-functor-Precategory C))
-      ( F)
-      ( _)
-      ( φ)
-      ( λ c → eq-htpy λ x → refl)
-
-  is-retraction-right-extension-map-limit-Set-Precategory :
-    ( G :
-      functor-Precategory
-        ( terminal-Precategory)
-        (Set-Precategory (l1 ⊔ l2))) →
-    is-retraction
-      ( right-extension-map-Precategory
-        ( C)
-        ( terminal-Precategory)
-        ( Set-Precategory (l1 ⊔ l2))
-        ( terminal-functor-Precategory C)
-        ( F)
-        ( right-extension-limit-Set-Precategory)
-        ( G))
-      ( map-inv-right-extension-map-limit-Set-Precategory G)
-  is-retraction-right-extension-map-limit-Set-Precategory G φ =
-    eq-htpy-hom-family-natural-transformation-Precategory
-      ( terminal-Precategory)
-      ( Set-Precategory (l1 ⊔ l2))
-      ( G)
-      ( extension-limit-Set-Precategory)
-      ( _)
-      ( φ)
-      ( λ {star →
-        eq-htpy
-          ( λ x →
-            eq-htpy-hom-family-natural-transformation-Precategory
+            ( naturality-natural-transformation-Precategory
               ( C)
               ( Set-Precategory (l1 ⊔ l2))
-              ( constant-functor-Precategory
-                ( C)
-                ( Set-Precategory (l1 ⊔ l2))
+              ( constant-functor-Precategory C (Set-Precategory (l1 ⊔ l2))
                 ( raise-unit-Set (l1 ⊔ l2)))
-              ( F) _ _
-              ( λ z → eq-htpy (λ {(map-raise star) → refl})))})
+              ( F)
+              ( τ)
+              ( f))
+            ( raise-star)))
 
-  is-right-kan-extension-limit-Set-Precategory :
-    is-right-kan-extension-Precategory
+  map-inv-cone-map-limit-Set-Precategory :
+    (d : obj-Precategory (Set-Precategory (l1 ⊔ l2))) →
+    natural-transformation-Precategory C (Set-Precategory (l1 ⊔ l2))
+      ( constant-functor-Precategory C (Set-Precategory (l1 ⊔ l2)) d)
+      ( F) →
+    (hom-Precategory (Set-Precategory (l1 ⊔ l2)) d vertex-limit-Set-Precategory)
+  pr1 (map-inv-cone-map-limit-Set-Precategory d φ l) x (map-raise star) =
+    hom-family-natural-transformation-Precategory C (Set-Precategory (l1 ⊔ l2))
+      ( constant-functor-Precategory C (Set-Precategory (l1 ⊔ l2)) d) F φ x l
+  pr2 (map-inv-cone-map-limit-Set-Precategory d φ l) {x} {y} f =
+    eq-htpy
+      λ { (map-raise star) →
+        htpy-eq
+          (naturality-natural-transformation-Precategory C
+            ( Set-Precategory (l1 ⊔ l2))
+            ( constant-functor-Precategory C (Set-Precategory (l1 ⊔ l2)) d)
+            F φ f)
+          ( l)}
+
+  is-section-cone-map-limit-Set-Precategory :
+    (d : obj-Precategory (Set-Precategory (l1 ⊔ l2))) →
+    is-section
+      ( cone-map-Precategory C (Set-Precategory (l1 ⊔ l2)) F
+        cone-limit-Set-Precategory d)
+      ( map-inv-cone-map-limit-Set-Precategory d)
+  is-section-cone-map-limit-Set-Precategory d φ =
+    eq-htpy-hom-family-natural-transformation-Precategory
       ( C)
-      ( terminal-Precategory)
       ( Set-Precategory (l1 ⊔ l2))
-      ( terminal-functor-Precategory C)
+      ( constant-functor-Precategory C (Set-Precategory (l1 ⊔ l2)) d)
       ( F)
-      ( right-extension-limit-Set-Precategory)
-  is-right-kan-extension-limit-Set-Precategory G =
+      ( _)
+      ( φ)
+      ( λ x → eq-htpy λ l → refl)
+
+  is-retraction-cone-map-limit-Set-Precategory :
+    (d : obj-Precategory (Set-Precategory (l1 ⊔ l2))) →
+    is-retraction
+      ( cone-map-Precategory C (Set-Precategory (l1 ⊔ l2)) F
+        cone-limit-Set-Precategory d)
+      ( map-inv-cone-map-limit-Set-Precategory d)
+  is-retraction-cone-map-limit-Set-Precategory d φ =
+    eq-htpy λ l →
+      eq-htpy-hom-family-natural-transformation-Precategory
+        ( C)
+        ( Set-Precategory (l1 ⊔ l2))
+        ( constant-functor-Precategory C (Set-Precategory (l1 ⊔ l2))
+          ( raise-unit-Set (l1 ⊔ l2)))
+        ( F)
+        ( _)
+        ( _)
+        ( λ f → eq-htpy λ {(map-raise star) → refl})
+
+  is-limiting-cone-Set-Precategory :
+    is-limiting-cone-Precategory C (Set-Precategory (l1 ⊔ l2)) F
+      cone-limit-Set-Precategory
+  is-limiting-cone-Set-Precategory φ =
     is-equiv-is-invertible
-      ( map-inv-right-extension-map-limit-Set-Precategory G)
-      ( is-section-right-extension-map-limit-Set-Precategory G)
-      ( is-retraction-right-extension-map-limit-Set-Precategory G)
+      ( map-inv-cone-map-limit-Set-Precategory φ)
+      ( is-section-cone-map-limit-Set-Precategory φ)
+      ( is-retraction-cone-map-limit-Set-Precategory φ)
 
   limit-Set-Precategory :
     limit-Precategory C (Set-Precategory (l1 ⊔ l2)) F
-  pr1 limit-Set-Precategory = right-extension-limit-Set-Precategory
-  pr2 limit-Set-Precategory = is-right-kan-extension-limit-Set-Precategory
+  pr1 limit-Set-Precategory = cone-limit-Set-Precategory
+  pr2 limit-Set-Precategory = is-limiting-cone-Set-Precategory
 
 is-complete-Set-Precategory :
   (l1 l2 : Level) →

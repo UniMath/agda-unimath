@@ -26,6 +26,8 @@ open import category-theory.category-of-maps-from-small-to-large-categories publ
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-set-magmoids public
+open import category-theory.commuting-triangles-of-morphisms-in-precategories public
+open import category-theory.commuting-triangles-of-morphisms-in-set-magmoids public
 open import category-theory.complete-precategories public
 open import category-theory.composition-operations-on-binary-families-of-sets public
 open import category-theory.cones-precategories public
