@@ -194,7 +194,7 @@ module _
       ( is-isometry-map-isometry-function-Metric-Space A B f))
 ```
 
-### Any isometry is uniformly short
+### Any isometry is short
 
 ```agda
 module _
