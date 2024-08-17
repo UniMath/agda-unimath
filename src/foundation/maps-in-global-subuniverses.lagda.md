@@ -99,8 +99,8 @@ module _
     is-in-global-subuniverse-map 𝒫 g
   is-in-global-subuniverse-map-base-change F α d =
     is-closed-under-equiv-global-subuniverse 𝒫 (l1 ⊔ l2) (l3 ⊔ l4)
-    ( fiber f (map-codomain-cartesian-hom-arrow g f α d))
-    ( fiber g d)
-    ( inv-equiv (equiv-fibers-cartesian-hom-arrow g f α d))
-    ( F (map-codomain-cartesian-hom-arrow g f α d))
+      ( fiber f (map-codomain-cartesian-hom-arrow g f α d))
+      ( fiber g d)
+      ( inv-equiv (equiv-fibers-cartesian-hom-arrow g f α d))
+      ( F (map-codomain-cartesian-hom-arrow g f α d))
 ```
