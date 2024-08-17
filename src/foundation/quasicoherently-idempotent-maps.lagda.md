@@ -446,7 +446,8 @@ module _
   coherence-htpy-is-quasicoherently-idempotent :
     (p q : is-quasicoherently-idempotent f) →
     ( is-idempotent-is-quasicoherently-idempotent p ~
-      is-idempotent-is-quasicoherently-idempotent q) → UU l
+      is-idempotent-is-quasicoherently-idempotent q) →
+    UU l
   coherence-htpy-is-quasicoherently-idempotent (I , Q) (J , R) H =
     coherence-square-homotopies
       ( left-whisker-comp² f H)

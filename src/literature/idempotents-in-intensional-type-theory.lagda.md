@@ -7,7 +7,7 @@ from {{#cite Shu17}}.
 module literature.idempotents-in-intensional-type-theory where
 ```
 
-## 1. Introduction
+## 1 Introduction
 
 The introduction section gives an introduction to the problem at hand and
 motivates its study in univalent foundations.
@@ -111,7 +111,7 @@ open import foundation.univalence-implies-function-extensionality using
 
 open import foundation.equality-cartesian-product-types using
   ( Eq-product -- observational equality on pairs
-  ; equiv-pair-eq -- "characteriation of the identity types of cartesian product type formation"
+  ; equiv-pair-eq -- "characterization of the identity types of cartesian product type formation"
   )
 ```
 
