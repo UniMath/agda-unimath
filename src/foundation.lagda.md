@@ -249,6 +249,8 @@ open import foundation.lifts-types public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
+open import foundation.maps-in-global-subuniverses public
+open import foundation.maps-in-subuniverses public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
