@@ -86,10 +86,6 @@ record global-subuniverse (α : Level → Level) : UUω where
     inclusion-subuniverse (subuniverse-global-subuniverse l)
 
 open global-subuniverse public
-
-module _
-  {α : Level → Level} (P : global-subuniverse α)
-  where
 ```
 
 ### The predicate of essentially being in a subuniverse
