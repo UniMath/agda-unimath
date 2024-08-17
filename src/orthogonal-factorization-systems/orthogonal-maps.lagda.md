@@ -88,10 +88,6 @@ The map `f : A → B` is said to be
 
    is an equivalence for every `h : B → Y`.
 
-5. The [fibers](foundation-core.fibers-of-maps.md) of `g` are
-   [`f`-local](orthogonal-factorization-systems.local-types.md), i.e., `g` is an
-   [`f`-local map](orthogonal-factorization-systems.local-maps.md).
-
 If `f` is orthogonal to `g`, we say that `f` is
 {{#concept "left orthogonal" Disambiguation="maps of types" Agda=is-left-orthogonal}}
 to `g`, and `g` is
