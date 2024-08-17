@@ -189,25 +189,23 @@ module _
     map-associative-Σ ∘ map-inv-associative-Σ ~ id
   is-section-map-inv-associative-Σ (x , (y , z)) = refl
 
-  abstract
-    is-equiv-map-associative-Σ : is-equiv map-associative-Σ
-    is-equiv-map-associative-Σ =
-      is-equiv-is-invertible
-        map-inv-associative-Σ
-        is-section-map-inv-associative-Σ
-        is-retraction-map-inv-associative-Σ
+  is-equiv-map-associative-Σ : is-equiv map-associative-Σ
+  is-equiv-map-associative-Σ =
+    is-equiv-is-invertible
+      map-inv-associative-Σ
+      is-section-map-inv-associative-Σ
+      is-retraction-map-inv-associative-Σ
 
   associative-Σ : Σ (Σ A B) C ≃ Σ A (λ x → Σ (B x) (λ y → C (x , y)))
   pr1 associative-Σ = map-associative-Σ
   pr2 associative-Σ = is-equiv-map-associative-Σ
 
-  abstract
-    is-equiv-map-inv-associative-Σ : is-equiv map-inv-associative-Σ
-    is-equiv-map-inv-associative-Σ =
-      is-equiv-is-invertible
-        map-associative-Σ
-        is-retraction-map-inv-associative-Σ
-        is-section-map-inv-associative-Σ
+  is-equiv-map-inv-associative-Σ : is-equiv map-inv-associative-Σ
+  is-equiv-map-inv-associative-Σ =
+    is-equiv-is-invertible
+      map-associative-Σ
+      is-retraction-map-inv-associative-Σ
+      is-section-map-inv-associative-Σ
 
   inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (x , y))) ≃ Σ (Σ A B) C
   pr1 inv-associative-Σ = map-inv-associative-Σ
@@ -295,13 +293,12 @@ module _
     map-inv-interchange-Σ-Σ ∘ map-interchange-Σ-Σ ~ id
   is-retraction-map-inv-interchange-Σ-Σ ((a , b) , (c , d)) = refl
 
-  abstract
-    is-equiv-map-interchange-Σ-Σ : is-equiv map-interchange-Σ-Σ
-    is-equiv-map-interchange-Σ-Σ =
-      is-equiv-is-invertible
-        map-inv-interchange-Σ-Σ
-        is-section-map-inv-interchange-Σ-Σ
-        is-retraction-map-inv-interchange-Σ-Σ
+  is-equiv-map-interchange-Σ-Σ : is-equiv map-interchange-Σ-Σ
+  is-equiv-map-interchange-Σ-Σ =
+    is-equiv-is-invertible
+      map-inv-interchange-Σ-Σ
+      is-section-map-inv-interchange-Σ-Σ
+      is-retraction-map-inv-interchange-Σ-Σ
 
   interchange-Σ-Σ :
     Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t))) ≃
@@ -351,13 +348,12 @@ module _
   is-section-map-inv-left-swap-Σ : map-left-swap-Σ ∘ map-inv-left-swap-Σ ~ id
   is-section-map-inv-left-swap-Σ (b , (a , c)) = refl
 
-  abstract
-    is-equiv-map-left-swap-Σ : is-equiv map-left-swap-Σ
-    is-equiv-map-left-swap-Σ =
-      is-equiv-is-invertible
-        map-inv-left-swap-Σ
-        is-section-map-inv-left-swap-Σ
-        is-retraction-map-inv-left-swap-Σ
+  is-equiv-map-left-swap-Σ : is-equiv map-left-swap-Σ
+  is-equiv-map-left-swap-Σ =
+    is-equiv-is-invertible
+      map-inv-left-swap-Σ
+      is-section-map-inv-left-swap-Σ
+      is-retraction-map-inv-left-swap-Σ
 
   equiv-left-swap-Σ : Σ A (λ a → Σ B (C a)) ≃ Σ B (λ b → Σ A (λ a → C a b))
   pr1 equiv-left-swap-Σ = map-left-swap-Σ
