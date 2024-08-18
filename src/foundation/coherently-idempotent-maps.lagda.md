@@ -41,7 +41,7 @@ the splitting construction on
 given in {{#cite Shu17}}:
 
 ```text
-  is-coherently-idempotent f :≐
+  is-coherently-idempotent f :=
     Σ (a : ℕ → is-quasicoherently-idempotent f), (Π (n : ℕ), split(aₙ₊₁) ~ aₙ)
 ```
 
