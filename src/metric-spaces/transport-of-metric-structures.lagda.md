@@ -44,7 +44,7 @@ Any type equal to the carrier type of a
 Moreover, the
 {{#concept "transport" Disambiguation="of metric space" Agda=tr-Metric-Space}}
 of metric spaces produces a metric space
-[isometric](metric-spaces.isometry-metric-spaces) to the initial one.
+[isometric](metric-spaces.isometry-metric-spaces.md) to the initial one.
 
 ## Definitions
 
