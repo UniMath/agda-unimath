@@ -22,6 +22,7 @@ open import metric-spaces.precategory-of-metric-spaces-and-continuous-functions 
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-uniformly-continuous-functions public
+open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.sequences-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.subsets-metric-spaces public

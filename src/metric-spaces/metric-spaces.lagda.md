@@ -30,7 +30,7 @@ open import metric-spaces.neighbourhood-relations
 ## Idea
 
 A {{#concept "metric space" Agda=Metric-Space}} is a type equipped a symmetric
-reflexive tight triangular
+reflexive separating triangular
 [neighbourhood-relation](metric-spaces.neighbourhood-relations.md).
 
 ## Definitions
