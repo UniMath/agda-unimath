@@ -224,4 +224,4 @@ module _
 ## See also
 
 - Uniformly continuous functions are defined in
-  [`metric-spaces.uniform-continuity-functions-metric-spaces`](metric-spaces.uniform-continuity-functions-metric-spaces.md).
+  [`metric-spaces.uniform-continuity-functions-metric-spaces`](metric-spaces.uniformly-continuous-functions-metric-spaces.md).

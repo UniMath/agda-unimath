@@ -28,7 +28,7 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 [Subsets](foundation.subtypes.md) of
 [metric spaces](metric-spaces.metric-spaces.md) inherit the metric structure of
 their ambient space. Moreover, the natural inclusion is
-[uniformly continuous](metric-spaces.uniform-continuity-functions-metric-spaces.md).
+[uniformly continuous](metric-spaces.uniformly-continuous-functions-metric-spaces.md).
 
 ## Definitions
 
