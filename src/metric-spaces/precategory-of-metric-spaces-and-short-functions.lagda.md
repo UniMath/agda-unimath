@@ -13,6 +13,7 @@ open import category-theory.precategories
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
@@ -20,6 +21,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.isometry-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.precategory-of-metric-spaces-and-isometries
 open import metric-spaces.short-functions-metric-spaces
 ```
 
@@ -73,6 +75,25 @@ module _
 
 ## Properties
 
+### Isomorphisms in the precategory of metric spaces and short maps are equivalences
+
+```agda
+module _
+  {l : Level} (A B : Metric-Space l) (f : short-function-Metric-Space A B)
+  where
+
+  is-equiv-is-iso-precategory-short-function-Metric-Space :
+    is-iso-Precategory precategory-short-function-Metric-Space {A} {B} f →
+    is-equiv (map-short-function-Metric-Space A B f)
+  is-equiv-is-iso-precategory-short-function-Metric-Space =
+    rec-Σ
+      ( λ g H →
+        ( map-short-function-Metric-Space B A g ,
+          htpy-eq (ap (map-short-function-Metric-Space B B) (pr1 H))) ,
+        ( map-short-function-Metric-Space B A g ,
+          htpy-eq (ap (map-short-function-Metric-Space A A) (pr2 H))))
+```
+
 ### Isomorphisms in the precategory of metric spaces and short maps are isometries
 
 ```agda
@@ -115,4 +136,40 @@ module _
           ( map-short-function-Metric-Space A B f x)
           ( map-short-function-Metric-Space A B f y)
           ( H)))
+
+  isometry-is-iso-short-function-Metric-Space :
+    isometry-function-Metric-Space A B
+  isometry-is-iso-short-function-Metric-Space =
+    map-short-function-Metric-Space A B f ,
+    is-isometry-is-iso-precategory-short-function-Metric-Space
+
+  iso-isometry-is-iso-precategory-short-function-Metric-Space :
+    iso-Precategory precategory-isometry-Metric-Space A B
+  iso-isometry-is-iso-precategory-short-function-Metric-Space =
+    isometry-is-iso-short-function-Metric-Space ,
+    is-iso-is-equiv-isometry-function-Metric-Space
+      ( A)
+      ( B)
+      ( isometry-is-iso-short-function-Metric-Space)
+      ( is-equiv-is-iso-precategory-short-function-Metric-Space A B f I)
+```
+
+### Isomorphic objects in the precategory of metric spaces and short maps are equal
+
+```agda
+module _
+  {l : Level} (A B : Metric-Space l)
+  where
+
+  iso-isometry-iso-prectegory-short-function-Metric-Space :
+    iso-Precategory precategory-short-function-Metric-Space A B →
+    iso-Precategory precategory-isometry-Metric-Space A B
+  iso-isometry-iso-prectegory-short-function-Metric-Space =
+    rec-Σ (iso-isometry-is-iso-precategory-short-function-Metric-Space A B)
+
+  eq-iso-precategory-short-function-Metric-Space :
+    iso-Precategory precategory-short-function-Metric-Space A B → A ＝ B
+  eq-iso-precategory-short-function-Metric-Space =
+    eq-iso-precategory-isometry-Metric-Space A B ∘
+    iso-isometry-iso-prectegory-short-function-Metric-Space
 ```

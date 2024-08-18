@@ -140,7 +140,7 @@ module _
     isometry-function-Metric-Space (tr-Metric-Space A B e) A
   inv-isometry-tr-Metric-Space =
     map-inv-equiv (equiv-eq e) ,
-    is-isometry-map-inv-equiv-Metric-Space
+    is-isometry-map-inv-is-equiv-Metric-Space
       ( A)
       ( tr-Metric-Space A B e)
       ( map-eq e)

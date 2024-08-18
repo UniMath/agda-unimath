@@ -209,9 +209,9 @@ module _
   (E : is-equiv f)
   where
 
-  is-isometry-map-inv-equiv-Metric-Space :
+  is-isometry-map-inv-is-equiv-Metric-Space :
     is-isometry-function-Metric-Space B A (map-inv-is-equiv E)
-  is-isometry-map-inv-equiv-Metric-Space d x y =
+  is-isometry-map-inv-is-equiv-Metric-Space d x y =
     logical-equivalence-reasoning
       ( is-in-neighbourhood-Metric-Space B d x y)
       ↔ ( is-in-neighbourhood-Metric-Space B d
@@ -231,6 +231,11 @@ module _
         by
           inv-iff
             ( I d (map-inv-is-equiv E x) (map-inv-is-equiv E y))
+
+  isometry-inv-is-equiv-is-isometry-function-Metric-Space :
+    isometry-function-Metric-Space B A
+  isometry-inv-is-equiv-is-isometry-function-Metric-Space =
+    map-inv-is-equiv E , is-isometry-map-inv-is-equiv-Metric-Space
 ```
 
 ### Any isometry is short
