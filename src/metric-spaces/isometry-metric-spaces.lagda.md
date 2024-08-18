@@ -9,7 +9,9 @@ module metric-spaces.isometry-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -20,6 +22,7 @@ open import foundation.propositions
 open import foundation.sequences
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import metric-spaces.functions-metric-spaces
@@ -192,6 +195,42 @@ module _
       ( map-isometry-function-Metric-Space A B f)
       ( is-isometry-map-isometry-function-Metric-Space B C g)
       ( is-isometry-map-isometry-function-Metric-Space A B f))
+```
+
+### The inverse of an isometric equivalence is an isometry
+
+```agda
+module _
+  {l1 l2 : Level}
+  (A : Metric-Space l1)
+  (B : Metric-Space l2)
+  (f : function-carrier-type-Metric-Space A B)
+  (I : is-isometry-function-Metric-Space A B f)
+  (E : is-equiv f)
+  where
+
+  is-isometry-map-inv-equiv-Metric-Space :
+    is-isometry-function-Metric-Space B A (map-inv-is-equiv E)
+  is-isometry-map-inv-equiv-Metric-Space d x y =
+    logical-equivalence-reasoning
+      ( is-in-neighbourhood-Metric-Space B d x y)
+      ↔ ( is-in-neighbourhood-Metric-Space B d
+          ( f (map-inv-is-equiv E x))
+          ( f (map-inv-is-equiv E y)))
+        by
+          binary-tr
+            ( λ u v →
+              ( is-in-neighbourhood-Metric-Space B d x y) ↔
+              ( is-in-neighbourhood-Metric-Space B d u v))
+            ( inv (is-section-map-inv-is-equiv E x))
+            ( inv (is-section-map-inv-is-equiv E y))
+            ( id-iff)
+      ↔ ( is-in-neighbourhood-Metric-Space A d
+          ( map-inv-is-equiv E x)
+          (map-inv-is-equiv E y))
+        by
+          inv-iff
+            ( I d (map-inv-is-equiv E x) (map-inv-is-equiv E y))
 ```
 
 ### Any isometry is short

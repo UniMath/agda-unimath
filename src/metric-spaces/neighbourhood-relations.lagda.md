@@ -12,9 +12,12 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -333,6 +336,46 @@ module _
       ( K x y y d₁ (le-diff-ℚ⁺ d₁ d₂ I)
         ( H (le-diff-ℚ⁺ d₁ d₂ I) y)
         ( B₁))
+```
+
+### Two neighbourood relations on a type are equal if they define the same neighbourhoods
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (N N' : neighbourhood-Relation-Prop l2 A)
+  where
+
+  Eq-prop-neighbourhood-Relation-Prop : Prop (l1 ⊔ l2)
+  Eq-prop-neighbourhood-Relation-Prop =
+    Π-Prop
+      ( ℚ⁺)
+      ( λ d →
+        Π-Prop
+          ( A)
+          ( λ x →
+            Π-Prop
+              ( A)
+              ( λ y → N d x y ⇔ N' d x y)))
+
+  Eq-neighbourhood-Relation-Prop : UU (l1 ⊔ l2)
+  Eq-neighbourhood-Relation-Prop =
+    type-Prop Eq-prop-neighbourhood-Relation-Prop
+
+  is-prop-Eq-neighbourhood-Relation-Prop :
+    is-prop Eq-neighbourhood-Relation-Prop
+  is-prop-Eq-neighbourhood-Relation-Prop =
+    is-prop-type-Prop Eq-prop-neighbourhood-Relation-Prop
+
+  eq-neighbourhood-Relation :
+    Eq-neighbourhood-Relation-Prop → N ＝ N'
+  eq-neighbourhood-Relation H =
+    eq-htpy
+      ( λ d →
+        eq-htpy
+        ( λ x →
+          eq-htpy
+          ( λ y →
+            eq-iff' (N d x y) (N' d x y) (H d x y))))
 ```
 
 ## External links

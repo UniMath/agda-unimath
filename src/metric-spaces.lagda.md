@@ -8,6 +8,7 @@ open import metric-spaces.cauchy-sequences-metric-spaces public
 open import metric-spaces.continuous-functions-metric-spaces public
 open import metric-spaces.convergent-sequences-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
+open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.isometry-metric-spaces public
 open import metric-spaces.limit-sequences-metric-spaces public
@@ -24,5 +25,6 @@ open import metric-spaces.precategory-of-metric-spaces-and-uniformly-continuous-
 open import metric-spaces.sequences-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.subsets-metric-spaces public
+open import metric-spaces.transport-of-metric-structures public
 open import metric-spaces.uniformly-continuous-functions-metric-spaces public
 ```
