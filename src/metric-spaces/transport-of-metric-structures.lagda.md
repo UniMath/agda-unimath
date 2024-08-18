@@ -43,8 +43,8 @@ Any type equal to the carrier type of a
 [metric space](metric-spaces.metric-spaces.md) inherits a metric structure.
 Moreover, the
 {{#concept "transport" Disambiguation="of metric space" Agda=tr-Metric-Space}}
-of metric spaces produces a metric space [isometric](metric-spaces.lagda.md) to
-the initial one.
+of metric spaces produces a metric space
+[isometric](metric-spaces.isometry-metric-spaces) to the initial one.
 
 ## Definitions
 
