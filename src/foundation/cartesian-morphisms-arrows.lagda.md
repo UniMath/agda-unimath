@@ -22,6 +22,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-fibers-of-maps
 open import foundation.homotopies-morphisms-arrows
 open import foundation.identity-types
 open import foundation.morphisms-arrows
@@ -172,6 +173,30 @@ module _
     is-pullback-swap-cone f (point y)
       ( cone-fiber f y)
       ( is-pullback-cone-fiber f y)
+```
+
+### The induced family of equivalences of fibers of cartesian morphisms of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (h : cartesian-hom-arrow f g)
+  where
+
+  equiv-fibers-cartesian-hom-arrow :
+    (b : B) → fiber f b ≃ fiber g (map-codomain-cartesian-hom-arrow f g h b)
+  equiv-fibers-cartesian-hom-arrow b =
+    ( map-fiber-vertical-map-cone
+      ( map-codomain-cartesian-hom-arrow f g h)
+      ( g)
+      ( cone-cartesian-hom-arrow f g h)
+      ( b)) ,
+    ( is-fiberwise-equiv-map-fiber-vertical-map-cone-is-pullback
+      ( map-codomain-cartesian-hom-arrow f g h)
+      ( g)
+      ( cone-cartesian-hom-arrow f g h)
+      ( is-cartesian-cartesian-hom-arrow f g h)
+      ( b))
 ```
 
 ### Transposing cartesian morphisms of arrows
@@ -831,7 +856,7 @@ module _
 
 ### Lifting cartesian morphisms along lifts of the codomain
 
-Suppose given a cospan of morphisms of arrows
+Suppose given a cospan diagram of arrows
 
 ```text
     A ------> C <------ B
