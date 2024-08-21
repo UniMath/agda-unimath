@@ -281,7 +281,12 @@ does not split.
 ```
 
 **Corollary 4.7.** It is impossible to prove in MLTT that all pre-idempotents
-split, or even that all pre-idempotents are quasi-idempotent. □
+split, or even that all pre-idempotents are quasi-idempotent.
+
+The previous theorem shows that in MLTT with univalence and propositional
+truncations the statement that all pre-idempotents split is false. Thus if it
+were provable in MLTT then MLTT with univalence and propositional truncations
+would be inconsistent, but it is not.
 
 ## 5 All quasi-idempotents split
 
