@@ -22,7 +22,7 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.propositions
-open import foundation-core.retractions
+open import foundation.retractions
 open import foundation-core.truncated-types
 ```
 
@@ -149,6 +149,21 @@ is-trunc-map-is-path-cosplit-is-trunc-codomain k is-trunc-B is-cosplit-f =
       ( is-trunc-B)
       ( is-cosplit-f))
     ( is-trunc-B)
+```
+
+### If the domain is `k+1`-truncated then `k`-path-cosplittings are unique
+
+```agda
+is-prop-is-path-cosplit-is-trunc-succ-domain :
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-trunc (succ-𝕋 k) A → is-prop (is-path-cosplit k f)
+is-prop-is-path-cosplit-is-trunc-succ-domain {k = neg-two-𝕋} =
+  is-prop-retraction
+is-prop-is-path-cosplit-is-trunc-succ-domain {k = succ-𝕋 k} is-trunc-A =
+  is-prop-Π
+    ( λ x →
+      is-prop-Π
+        ( λ y → is-prop-is-path-cosplit-is-trunc-succ-domain (is-trunc-A x y)))
 ```
 
 ## See also

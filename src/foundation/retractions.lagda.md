@@ -17,7 +17,11 @@ open import foundation.whiskering-homotopies-composition
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.contractible-types
 open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.truncation-levels
+open import foundation-core.truncated-types
 open import foundation-core.retracts-of-types
 ```
 
@@ -88,4 +92,26 @@ pr2
   ( pr2
     ( retraction-right-factor-retract-of-retraction-left-factor f g h H rg)) =
   is-retraction-retraction-left-map-triangle f g h H rg
+```
+
+### When the domain is a proposition, the type of retractions is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-trunc-retraction : is-trunc k A → is-trunc k (retraction f)
+  is-trunc-retraction is-trunc-A =
+    is-trunc-Σ
+      ( is-trunc-function-type k is-trunc-A)
+      ( λ r →
+        is-trunc-Π k (λ x → is-trunc-succ-is-trunc k is-trunc-A (r (f x)) x))
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-prop-retraction : is-prop A → is-prop (retraction f)
+  is-prop-retraction = is-trunc-retraction
 ```
