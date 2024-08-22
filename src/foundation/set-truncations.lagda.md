@@ -9,16 +9,13 @@ module foundation.set-truncations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equality-coproduct-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
-open import foundation.images
 open import foundation.mere-equality
 open import foundation.postcomposition-functions
-open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.slice
@@ -39,15 +36,12 @@ open import foundation-core.coproduct-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.subtypes
 open import foundation-core.truncation-levels
 ```
 
@@ -572,93 +566,4 @@ module _
     ( map-product unit-trunc-Set unit-trunc-Set)
   triangle-distributive-trunc-product-Set =
     pr2 (center distributive-trunc-product-Set)
-```
-
-### A computation of the image when the domain and set-truncation of the codomain are equivalent
-
-Given a function on a coproduct
-
-```text
-  f : A1 + A2 → B
-```
-
-such that the set-truncation of the codomain computes to the domain
-
-```text
-              B
-            ∧   \
-         f /     \ η
-          /   ~   ∨
-  (A1 + A2) -----> ║B║₀,
-```
-
-then `B` computes as the coproduct of the images of the restrictions of `f`
-along the left and right inclusion of the coproduct `A1 + A2`
-
-```text
-  B ≃ im (f ∘ inl) + im (f ∘ inr).
-```
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A1 : UU l1} {A2 : UU l2} {B : UU l3}
-  (f : A1 + A2 → B) (e : (A1 + A2) ≃ ║ B ║₀)
-  (H : unit-trunc-Set ∘ f ~ map-equiv e)
-  where
-
-  map-is-coproduct-codomain : (im (f ∘ inl) + im (f ∘ inr)) → B
-  map-is-coproduct-codomain = rec-coproduct pr1 pr1
-
-  triangle-is-coproduct-codomain :
-    ( ( map-is-coproduct-codomain) ∘
-      ( map-coproduct (map-unit-im (f ∘ inl)) (map-unit-im (f ∘ inr)))) ~ f
-  triangle-is-coproduct-codomain (inl x) = refl
-  triangle-is-coproduct-codomain (inr x) = refl
-
-  abstract
-    is-emb-map-is-coproduct-codomain : is-emb map-is-coproduct-codomain
-    is-emb-map-is-coproduct-codomain =
-      is-emb-coproduct
-        ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
-        ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
-        ( λ (b1 , u) (b2 , v) →
-          apply-universal-property-trunc-Prop u
-            ( function-Prop _ empty-Prop)
-            ( λ where
-              ( x , refl) →
-                apply-universal-property-trunc-Prop v
-                  ( function-Prop _ empty-Prop)
-                  ( λ where
-                    ( y , refl) r →
-                      is-empty-eq-coproduct-inl-inr x y
-                        ( is-injective-is-equiv
-                          ( is-equiv-map-equiv e)
-                          ( ( inv (H (inl x))) ∙
-                            ( ap unit-trunc-Set r) ∙
-                            ( H (inr y)))))))
-
-  abstract
-    is-surjective-map-is-coproduct-codomain :
-      is-surjective map-is-coproduct-codomain
-    is-surjective-map-is-coproduct-codomain b =
-      apply-universal-property-trunc-Prop
-        ( apply-effectiveness-unit-trunc-Set
-          ( inv (is-section-map-inv-equiv e (unit-trunc-Set b)) ∙ inv (H a)))
-        ( trunc-Prop (fiber map-is-coproduct-codomain b))
-        ( λ p →
-          unit-trunc-Prop
-            ( ( map-coproduct
-                ( map-unit-im (f ∘ inl))
-                ( map-unit-im (f ∘ inr))
-                ( a)) ,
-              ( triangle-is-coproduct-codomain a ∙ inv p)))
-      where
-      a = map-inv-equiv e (unit-trunc-Set b)
-
-  is-coproduct-codomain : (im (f ∘ inl) + im (f ∘ inr)) ≃ B
-  pr1 is-coproduct-codomain = map-is-coproduct-codomain
-  pr2 is-coproduct-codomain =
-    is-equiv-is-emb-is-surjective
-      is-surjective-map-is-coproduct-codomain
-      is-emb-map-is-coproduct-codomain
 ```

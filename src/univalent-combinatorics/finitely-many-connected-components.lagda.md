@@ -99,12 +99,14 @@ module _
   where
 
   has-finitely-many-connected-components-equiv :
-    has-finitely-many-connected-components A → has-finitely-many-connected-components B
+    has-finitely-many-connected-components A →
+    has-finitely-many-connected-components B
   has-finitely-many-connected-components-equiv =
     is-finite-equiv (equiv-trunc-Set e)
 
   has-finitely-many-connected-components-equiv' :
-    has-finitely-many-connected-components B → has-finitely-many-connected-components A
+    has-finitely-many-connected-components B →
+    has-finitely-many-connected-components A
   has-finitely-many-connected-components-equiv' =
     is-finite-equiv' (equiv-trunc-Set e)
 ```

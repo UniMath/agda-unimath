@@ -104,8 +104,12 @@ all-elements-equal-is-finitely-presented {l1} {A} (pair k K) (pair l L) =
   eq-type-subtype
     ( λ n → has-set-presentation-Prop (Fin-Set n) A)
     ( eq-cardinality
-      ( has-cardinality-connected-components-has-presentation-of-cardinality k K)
-      ( has-cardinality-connected-components-has-presentation-of-cardinality l L))
+      ( has-cardinality-connected-components-has-presentation-of-cardinality
+        ( k)
+        ( K))
+      ( has-cardinality-connected-components-has-presentation-of-cardinality
+        ( l)
+        ( L)))
 
 is-prop-is-finitely-presented :
   {l1 : Level} {A : UU l1} → is-prop (is-finitely-presented A)
