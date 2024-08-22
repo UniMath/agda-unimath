@@ -50,9 +50,13 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A type is **finite** if it is
-[merely equivalent](foundation.mere-equivalences.md) to a
+A type is
+{{#concept "finite" Disambiguation="type" Agda=is-finite WD="finite set" WDID=Q272404}}
+if it is [merely equivalent](foundation.mere-equivalences.md) to a
 [standard finite type](univalent-combinatorics.standard-finite-types.md).
+
+**Terminology.** This finiteness condition is also referred to as _Bishop
+finiteness_. (Cf. the external links at the bottom of this page)
 
 ## Definition
 
@@ -92,7 +96,7 @@ is-finite-type-𝔽 :
 is-finite-type-𝔽 = pr2
 ```
 
-### Types with cardinality `k`
+### Types with finite cardinality `k`
 
 ```agda
 has-cardinality-Prop :
@@ -707,3 +711,14 @@ abstract
           ( p)
           ( pr2 (has-finite-cardinality-is-finite H)))
 ```
+
+## External links
+
+- [Finiteness in Sheaf Topoi](https://grossack.site/2024/08/19/finiteness-in-sheaf-topoi),
+  blog post by Chris Grossack
+- [`Fin.Bishop`](https://www.cs.bham.ac.uk/~mhe/TypeTopology/Fin.Bishop.html) at
+  TypeTopology
+- [finite set](https://ncatlab.org/nlab/show/finite+set) at $n$Lab
+- [finite object](https://ncatlab.org/nlab/show/finite+object) at $n$Lab
+- [Finite set](https://en.wikipedia.org/wiki/Finite_set) at Wikipedia
+- [Finite set](https://www.wikidata.org/wiki/Q272404) at Wikidata
