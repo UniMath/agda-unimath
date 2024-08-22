@@ -7,18 +7,16 @@ module metric-spaces.subsets-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
-
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
-open import foundation.sets
+open import foundation.logical-equivalences
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.functions-metric-spaces
+open import metric-spaces.isometry-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.metric-structures
 open import metric-spaces.neighbourhood-relations
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -28,7 +26,7 @@ open import metric-spaces.uniformly-continuous-functions-metric-spaces
 [Subsets](foundation.subtypes.md) of
 [metric spaces](metric-spaces.metric-spaces.md) inherit the metric structure of
 their ambient space. Moreover, the natural inclusion is
-[uniformly continuous](metric-spaces.uniformly-continuous-functions-metric-spaces.md).
+[isometric](metric-spaces.isometry-metric-spaces.md).
 
 ## Definitions
 
@@ -75,18 +73,17 @@ module _
   inclusion-subspace-Metric-Space x = pr1 x
 ```
 
-### The inclusion from a subspace in its ambient space is uniformly continuous
+### The inclusion from a subspace in its ambient space is isometric
 
 ```agda
 module _
   {l : Level} (A : Metric-Space l) (S : subset-Metric-Space l A)
   where
 
-  is-uniformly-continuous-inclusion-subspace-Metric-Space :
-    is-uniformly-continuous-function-Metric-Space
+  is-isometry-inclusion-subspace-Metric-Space :
+    is-isometry-function-Metric-Space
       (subspace-Metric-Space A S)
       (A)
       (inclusion-subspace-Metric-Space A S)
-  is-uniformly-continuous-inclusion-subspace-Metric-Space ε =
-    intro-exists ε (λ x y H → H)
+  is-isometry-inclusion-subspace-Metric-Space d x y = id-iff
 ```

@@ -342,11 +342,12 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (N N' : neighbourhood-Relation-Prop l2 A)
+  {l1 l2 : Level} (A : UU l1) (N : neighbourhood-Relation-Prop l2 A)
   where
 
-  Eq-prop-neighbourhood-Relation-Prop : Prop (l1 ⊔ l2)
-  Eq-prop-neighbourhood-Relation-Prop =
+  Eq-prop-neighbourhood-Relation-Prop :
+    neighbourhood-Relation-Prop l2 A → Prop (l1 ⊔ l2)
+  Eq-prop-neighbourhood-Relation-Prop N' =
     Π-Prop
       ( ℚ⁺)
       ( λ d →
@@ -357,18 +358,32 @@ module _
               ( A)
               ( λ y → N d x y ⇔ N' d x y)))
 
-  Eq-neighbourhood-Relation-Prop : UU (l1 ⊔ l2)
-  Eq-neighbourhood-Relation-Prop =
-    type-Prop Eq-prop-neighbourhood-Relation-Prop
+  Eq-neighbourhood-Relation-Prop :
+    neighbourhood-Relation-Prop l2 A → UU (l1 ⊔ l2)
+  Eq-neighbourhood-Relation-Prop N' =
+    type-Prop (Eq-prop-neighbourhood-Relation-Prop N')
 
   is-prop-Eq-neighbourhood-Relation-Prop :
-    is-prop Eq-neighbourhood-Relation-Prop
-  is-prop-Eq-neighbourhood-Relation-Prop =
-    is-prop-type-Prop Eq-prop-neighbourhood-Relation-Prop
+    (N' : neighbourhood-Relation-Prop l2 A) →
+    is-prop (Eq-neighbourhood-Relation-Prop N')
+  is-prop-Eq-neighbourhood-Relation-Prop N' =
+    is-prop-type-Prop (Eq-prop-neighbourhood-Relation-Prop N')
+
+  refl-Eq-neighbourhood-Relation-Prop : Eq-neighbourhood-Relation-Prop N
+  refl-Eq-neighbourhood-Relation-Prop d x y = id-iff
+
+  Eq-eq-neighbourhood-Relation-Prop :
+    (N' : neighbourhood-Relation-Prop l2 A) →
+    (N ＝ N') →
+    Eq-neighbourhood-Relation-Prop N'
+  Eq-eq-neighbourhood-Relation-Prop .N refl =
+    refl-Eq-neighbourhood-Relation-Prop
 
   eq-neighbourhood-Relation :
-    Eq-neighbourhood-Relation-Prop → N ＝ N'
-  eq-neighbourhood-Relation H =
+    (N' : neighbourhood-Relation-Prop l2 A) →
+    Eq-neighbourhood-Relation-Prop N' →
+    N ＝ N'
+  eq-neighbourhood-Relation N' H =
     eq-htpy
       ( λ d →
         eq-htpy
@@ -376,6 +391,30 @@ module _
           eq-htpy
           ( λ y →
             eq-iff' (N d x y) (N' d x y) (H d x y))))
+
+  is-torsorial-Eq-neighbourhhod-Relation-Prop :
+    is-torsorial Eq-neighbourhood-Relation-Prop
+  is-torsorial-Eq-neighbourhhod-Relation-Prop =
+    ( N , refl-Eq-neighbourhood-Relation-Prop) ,
+    ( λ (N' , e) →
+      eq-type-subtype
+        ( Eq-prop-neighbourhood-Relation-Prop)
+        ( eq-neighbourhood-Relation N' e))
+
+  is-equiv-Eq-eq-neighbourhood-Relation-Prop :
+    (N' : neighbourhood-Relation-Prop l2 A) →
+    is-equiv (Eq-eq-neighbourhood-Relation-Prop N')
+  is-equiv-Eq-eq-neighbourhood-Relation-Prop =
+    fundamental-theorem-id
+      is-torsorial-Eq-neighbourhhod-Relation-Prop
+      Eq-eq-neighbourhood-Relation-Prop
+
+  equiv-Eq-eq-neighbourhood-Relation-Prop :
+    (N' : neighbourhood-Relation-Prop l2 A) →
+    (N ＝ N') ≃ (Eq-neighbourhood-Relation-Prop N')
+  equiv-Eq-eq-neighbourhood-Relation-Prop N' =
+    Eq-eq-neighbourhood-Relation-Prop N' ,
+    is-equiv-Eq-eq-neighbourhood-Relation-Prop N'
 ```
 
 ## External links

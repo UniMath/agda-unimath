@@ -10,23 +10,28 @@ module metric-spaces.equality-of-metric-spaces where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometry-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.metric-structures
 open import metric-spaces.neighbourhood-relations
 open import metric-spaces.transport-of-metric-structures
 ```
@@ -41,7 +46,36 @@ equal if the natural induced map between the carrier types is an
 
 ## Definitions
 
-### Equality of metric spaces
+### An equality between carrier types is isometric if its natural induced map is an isometry
+
+```agda
+module _
+  {l : Level} (A B : Metric-Space l)
+  where
+
+  is-isometric-eq-prop-Metric-Space :
+    (type-Metric-Space A ＝ type-Metric-Space B) → Prop l
+  is-isometric-eq-prop-Metric-Space e =
+    is-isometry-prop-function-Metric-Space A B (map-eq e)
+
+  is-isometric-eq-Metric-Space :
+    (type-Metric-Space A ＝ type-Metric-Space B) → UU l
+  is-isometric-eq-Metric-Space e =
+    type-Prop (is-isometric-eq-prop-Metric-Space e)
+
+  is-prop-is-isomeetric-eq-Metric-Space :
+    (e : type-Metric-Space A ＝ type-Metric-Space B) →
+    is-prop (is-isometric-eq-Metric-Space e)
+  is-prop-is-isomeetric-eq-Metric-Space e =
+    is-prop-type-Prop (is-isometric-eq-prop-Metric-Space e)
+
+  isometric-eq-Metric-Space : UU (lsuc l)
+  isometric-eq-Metric-Space = type-subtype is-isometric-eq-prop-Metric-Space
+```
+
+## Properties
+
+### An equality between carrier types of metric spaces transport the metric structures if and only if is it isometric
 
 ```agda
 module _
@@ -49,132 +83,49 @@ module _
   (e : type-Metric-Space A ＝ type-Metric-Space B)
   where
 
-  lemma-isometry-Metric-Space :
-    is-isometry-function-Metric-Space A B (map-eq e) →
-    is-isometry-function-Metric-Space
-      ( tr-Metric-Space A (type-Metric-Space B) e)
-      ( B)
-      ( id)
-  lemma-isometry-Metric-Space H d x y =
-    logical-equivalence-reasoning
-      ( is-in-neighbourhood-Metric-Space
-        ( tr-Metric-Space A (type-Metric-Space B) e)
-        ( d)
-        ( x)
-        ( y))
-      ↔ ( is-in-neighbourhood-Metric-Space
-          ( A)
-          ( d)
-          ( map-inv-equiv (equiv-eq e) x)
-          ( map-inv-equiv (equiv-eq e) y))
-        by
-          is-isometry-map-isometry-function-Metric-Space
-            ( tr-Metric-Space A (type-Metric-Space B) e)
-            ( A)
-            ( inv-isometry-tr-Metric-Space A (type-Metric-Space B) e)
-            ( d)
-            ( x)
-            ( y)
-      ↔ ( is-in-neighbourhood-Metric-Space
-          ( B)
-          ( d)
-          ( map-eq e (map-inv-equiv (equiv-eq e) x))
-          ( map-eq e (map-inv-equiv (equiv-eq e) y)))
-        by
-          H
-            ( d)
-            ( map-inv-equiv (equiv-eq e) x)
-            ( map-inv-equiv (equiv-eq e) y)
-      ↔ ( is-in-neighbourhood-Metric-Space B d x y)
-        by
-          binary-tr
-            ( λ u v →
-              ( is-in-neighbourhood-Metric-Space B d u v) ↔
-              ( is-in-neighbourhood-Metric-Space B d x y))
-            ( inv (is-section-map-inv-equiv (equiv-eq e) x))
-            ( inv (is-section-map-inv-equiv (equiv-eq e) y))
-            ( id-iff)
-
-  eq-Metric-Space :
-    is-isometry-function-Metric-Space A B (map-eq e) → A ＝ B
-  eq-Metric-Space H =
-    eq-pair-Σ
+  equiv-is-isometry-map-eq-tr-Metric-Structure :
+    Id
+      ( tr (Metric-Structure l) e (structure-Metric-Space A))
+      ( structure-Metric-Space B) ≃
+    is-isometry-function-Metric-Space A B (map-eq e)
+  equiv-is-isometry-map-eq-tr-Metric-Structure =
+    ( equiv-is-isometry-map-eq-Eq-tr-Metric-Structure
+      ( type-Metric-Space A)
+      ( type-Metric-Space B)
       ( e)
-      ( eq-type-subtype
-        ( is-metric-prop-neighbourhood (type-Metric-Space B))
-        ( eq-neighbourhood-Relation
-          ( type-Metric-Space B)
-          ( neighbourhood-Metric-Space
-            ( tr-Metric-Space A (type-Metric-Space B) e))
-          ( neighbourhood-Metric-Space B)
-          ( lemma-isometry-Metric-Space H)))
+      ( structure-Metric-Space A)
+      ( structure-Metric-Space B)) ∘e
+    ( equiv-Eq-eq-Metric-Structure
+      ( type-Metric-Space B)
+      ( tr (Metric-Structure l) e (structure-Metric-Space A))
+      ( structure-Metric-Space B))
 ```
 
-## Properties
-
-### Isometrically equivalent metric spaces are equal
-
-```agda
-lemma-eq-type :
-  {l : Level} (X Y : UU l) (E : X ＝ Y) (x : X) →
-  map-equiv (equiv-eq E) x ＝ map-eq E x
-lemma-eq-type X .X refl x = refl
-```
+### Equality of metric spaces is equivalent to isometric equality of their carrier types
 
 ```agda
 module _
   {l : Level} (A B : Metric-Space l)
-  (e : type-Metric-Space A ≃ type-Metric-Space B)
-  (I : is-isometry-function-Metric-Space A B (map-equiv e))
   where
 
-  eq-isometric-equiv-Metric-Space : A ＝ B
-  eq-isometric-equiv-Metric-Space =
-    eq-Metric-Space
-      ( A)
-      ( B)
-      ( eq-equiv e)
-      ( tr
-        ( is-isometry-function-Metric-Space A B)
-        ( eq-htpy
-          ( λ x →
-            ap
-              ( λ H → map-equiv H x)
-              ( inv (is-section-eq-equiv e)) ∙
-            ( lemma-eq-type
-              ( type-Metric-Space A)
-              ( type-Metric-Space B)
-              ( eq-equiv e)
-              ( x))))
-        ( I))
+  equiv-isometric-eq-Metric-Space : (A ＝ B) ≃ isometric-eq-Metric-Space A B
+  equiv-isometric-eq-Metric-Space =
+    ( equiv-tot (equiv-is-isometry-map-eq-tr-Metric-Structure A B)) ∘e
+    ( equiv-pair-eq-Σ A B)
 ```
+
+### Isometric equality is torsorial
 
 ```agda
 module _
-  {l : Level} (A B : Metric-Space l)
-  (f : function-carrier-type-Metric-Space A B)
-  (e : is-equiv f)
-  (I : is-isometry-function-Metric-Space A B f)
+  {l : Level} (A : Metric-Space l)
   where
 
-  eq-isometric-is-equiv-Metric-Space : A ＝ B
-  eq-isometric-is-equiv-Metric-Space =
-    eq-isometric-equiv-Metric-Space A B (f , e) I
-```
-
-### Transporting metric structures is the identity in the type of metric spaces
-
-```agda
-module _
-  {l : Level} (A : Metric-Space l) (B : UU l) (e : type-Metric-Space A ＝ B)
-  where
-
-  eq-tr-Metric-Space : A ＝ tr-Metric-Space A B e
-  eq-tr-Metric-Space =
-    eq-isometric-is-equiv-Metric-Space
-      ( A)
-      ( tr-Metric-Space A B e)
-      ( map-eq e)
-      ( is-equiv-map-equiv (equiv-eq e))
-      ( is-isometry-map-eq-tr-Metric-Space A B e)
+  is-torsorial-isometric-eq-Metric-Space :
+    is-torsorial (isometric-eq-Metric-Space A)
+  is-torsorial-isometric-eq-Metric-Space =
+    is-contr-equiv'
+      ( Σ (Metric-Space l) (Id A))
+      ( equiv-tot (equiv-isometric-eq-Metric-Space A))
+      ( is-torsorial-Id A)
 ```

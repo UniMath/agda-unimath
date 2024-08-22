@@ -23,6 +23,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
+open import metric-spaces.metric-structures
 open import metric-spaces.neighbourhood-relations
 open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
@@ -36,6 +37,9 @@ Dependent products of [metric spaces](metric-spaces.metric-spaces.md) inherit a
 {{#concept "product metric structure" Agda=Π-Metric-Structure}} where
 [`d`-neighbourhoods](metric-spaces.neighbourhood-relations.md) are the products
 of neighbourhoods over each metric space.
+
+Moreover, all the evaluation functions are
+[short maps](metric-spaces.short-functions-metric-spaces.md).
 
 ## Definitions
 

@@ -16,14 +16,20 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import metric-spaces.equality-of-metric-spaces
+open import metric-spaces.functions-metric-spaces
+open import metric-spaces.isometric-equivalences-metric-spaces
 open import metric-spaces.isometry-metric-spaces
 open import metric-spaces.metric-spaces
 ```
@@ -91,10 +97,10 @@ module _
   is-equiv-is-iso-precategory-isometry-Metric-Space =
     rec-Σ
       ( λ g H →
-        ( map-isometry-function-Metric-Space B A g ,
-          htpy-eq (ap (map-isometry-function-Metric-Space B B) (pr1 H))) ,
-        ( map-isometry-function-Metric-Space B A g ,
-          htpy-eq (ap (map-isometry-function-Metric-Space A A) (pr2 H))))
+        is-equiv-is-invertible
+          ( map-isometry-function-Metric-Space B A g)
+          ( htpy-eq (ap (map-isometry-function-Metric-Space B B) (pr1 H)))
+          ( htpy-eq (ap (map-isometry-function-Metric-Space A A) (pr2 H))))
 ```
 
 ### Isometric equivalences are isomorphisms in the precategory of metric spaces and isometries
@@ -115,64 +121,90 @@ module _
       ( map-isometry-function-Metric-Space A B f)
       ( is-isometry-map-isometry-function-Metric-Space A B f)
       ( E)) ,
-    ( eq-isometry-function-Metric-Space
-      ( B)
-      ( B)
-      ( comp-isometry-function-Metric-Space
+    ( ( eq-isometry-function-Metric-Space
         ( B)
-        ( A)
         ( B)
-        ( f)
-        ( isometry-inv-is-equiv-is-isometry-function-Metric-Space
+        ( comp-isometry-function-Metric-Space
+          ( B)
           ( A)
           ( B)
-          ( map-isometry-function-Metric-Space A B f)
-          ( is-isometry-map-isometry-function-Metric-Space A B f)
-          ( E)))
-      ( isometry-id-Metric-Space B)
-      ( is-section-map-inv-is-equiv E) ,
-      eq-isometry-function-Metric-Space
-      ( A)
-      ( A)
-      ( comp-isometry-function-Metric-Space
+          ( f)
+          ( isometry-inv-is-equiv-is-isometry-function-Metric-Space
+            ( A)
+            ( B)
+            ( map-isometry-function-Metric-Space A B f)
+            ( is-isometry-map-isometry-function-Metric-Space A B f)
+            ( E)))
+        ( isometry-id-Metric-Space B)
+        ( is-section-map-inv-is-equiv E)) ,
+      ( eq-isometry-function-Metric-Space
         ( A)
-        ( B)
         ( A)
-        ( isometry-inv-is-equiv-is-isometry-function-Metric-Space
+        ( comp-isometry-function-Metric-Space
           ( A)
           ( B)
-          ( map-isometry-function-Metric-Space A B f)
-          ( is-isometry-map-isometry-function-Metric-Space A B f)
-          ( E))
-        ( f))
-      ( isometry-id-Metric-Space A)
-      ( is-retraction-map-inv-is-equiv E))
+          ( A)
+          ( isometry-inv-is-equiv-is-isometry-function-Metric-Space
+            ( A)
+            ( B)
+            ( map-isometry-function-Metric-Space A B f)
+            ( is-isometry-map-isometry-function-Metric-Space A B f)
+            ( E))
+          ( f)))
+        ( isometry-id-Metric-Space A)
+        ( is-retraction-map-inv-is-equiv E))
 ```
 
-### Isomorphic types in the precategory of metric spaces and isometries are equal
+### Isomorphisms in the precategory of metric spaces and isometries are isometric invertible maps
+
+```agda
+module _
+  {l : Level} (A B : Metric-Space l) (f : isometry-function-Metric-Space A B)
+  where
+
+  equiv-is-iso-is-equiv-isometry-Metric-Space :
+    is-iso-Precategory precategory-isometry-Metric-Space {A} {B} f ≃
+    is-equiv (map-isometry-function-Metric-Space A B f)
+  equiv-is-iso-is-equiv-isometry-Metric-Space =
+    equiv-iff
+      ( is-iso-prop-Precategory precategory-isometry-Metric-Space {A} {B} f)
+      ( is-equiv-Prop (map-isometry-function-Metric-Space A B f))
+      ( is-equiv-is-iso-precategory-isometry-Metric-Space A B f)
+      ( is-iso-is-equiv-isometry-function-Metric-Space A B f)
+```
+
+### Isomorphic types in the precategory of metric spaces are isometrically equivalent
 
 ```agda
 module _
   {l : Level} (A B : Metric-Space l)
   where
 
-  eq-iso-precategory-isometry-Metric-Space :
-    iso-Precategory precategory-isometry-Metric-Space A B → A ＝ B
-  eq-iso-precategory-isometry-Metric-Space f =
-    eq-isometric-is-equiv-Metric-Space
-      ( A)
-      ( B)
-      ( map-isometry-function-Metric-Space
-        ( A)
-        ( B)
-        ( hom-iso-Precategory precategory-isometry-Metric-Space {A} {B} f))
-      ( is-equiv-is-iso-precategory-isometry-Metric-Space
-        ( A)
-        ( B)
-        ( hom-iso-Precategory precategory-isometry-Metric-Space {A} {B} f)
-        ( is-iso-iso-Precategory precategory-isometry-Metric-Space {A} {B} f))
-      ( is-isometry-map-isometry-function-Metric-Space
-        ( A)
-        ( B)
-        ( hom-iso-Precategory precategory-isometry-Metric-Space {A} {B} f))
+  equiv-iso-isometric-is-equiv-Metric-Space :
+    iso-Precategory precategory-isometry-Metric-Space A B ≃
+    isometric-is-equiv-Metric-Space A B
+  equiv-iso-isometric-is-equiv-Metric-Space =
+    equiv-tot (λ f → commutative-product) ∘e
+    associative-Σ
+      ( function-carrier-type-Metric-Space A B)
+      ( is-isometry-function-Metric-Space A B)
+      ( is-equiv ∘ map-isometry-function-Metric-Space A B) ∘e
+    equiv-tot
+      (equiv-is-iso-is-equiv-isometry-Metric-Space A B)
+```
+
+### Isomorphism in the precategory of metric spaces and isometries is torsorial
+
+```agda
+module _
+  {l : Level} (A : Metric-Space l)
+  where
+
+  is-torsorial-iso-precategory-isometry-Metric-Space :
+    is-torsorial (iso-Precategory precategory-isometry-Metric-Space A)
+  is-torsorial-iso-precategory-isometry-Metric-Space =
+    is-contr-equiv
+      ( Σ (Metric-Space l) (isometric-is-equiv-Metric-Space A))
+      ( equiv-tot (equiv-iso-isometric-is-equiv-Metric-Space A))
+      ( is-torsorial-isometric-is-equiv-Metric-Space A)
 ```

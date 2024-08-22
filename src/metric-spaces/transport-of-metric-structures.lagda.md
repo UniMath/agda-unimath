@@ -32,6 +32,7 @@ open import foundation.universe-levels
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometry-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.metric-structures
 open import metric-spaces.neighbourhood-relations
 ```
 
@@ -39,12 +40,9 @@ open import metric-spaces.neighbourhood-relations
 
 ## Idea
 
-Any type equal to the carrier type of a
-[metric space](metric-spaces.metric-spaces.md) inherits a metric structure.
-Moreover, the
-{{#concept "transport" Disambiguation="of metric space" Agda=tr-Metric-Space}}
-of metric spaces produces a metric space
-[isometric](metric-spaces.isometry-metric-spaces.md) to the initial one.
+Any [metric structure](metric-spaces.metric-structures.md) on a type equal can
+be transported on any equal type. This defines the
+{{#concept "transport of metric structure" Agda=tr-Metric-Structure}}.
 
 ## Definitions
 
@@ -76,74 +74,113 @@ module _
   compute-neighbourhood-tr-Metric-Structure A .A refl S d x y = refl
 ```
 
-### Transport of metric spaces
-
-```agda
-module _
-  {l : Level} (A : Metric-Space l) (B : UU l)
-  (H : type-Metric-Space A ＝ B)
-  where
-
-  tr-Metric-Space : Metric-Space l
-  tr-Metric-Space =
-    B ,
-    tr-Metric-Structure
-      ( type-Metric-Space A)
-      ( B)
-      ( H)
-      ( structure-Metric-Space A)
-
-  compute-neighbourhood-tr-Metric-Space :
-    (d : ℚ⁺) (x y : type-Metric-Space A) →
-    (neighbourhood-Metric-Space A d x y) ＝
-    (neighbourhood-Metric-Space tr-Metric-Space d (map-eq H x) (map-eq H y))
-  compute-neighbourhood-tr-Metric-Space =
-    compute-neighbourhood-tr-Metric-Structure
-      ( type-Metric-Space A)
-      ( B)
-      ( H)
-      ( structure-Metric-Space A)
-```
-
 ## Properties
 
-### Transport along refl is the identity
+### Two structures between equal types are transported if and only if the cannonical equality map is an isometry
 
 ```agda
 module _
-  {l : Level} (A : Metric-Space l)
+  {l : Level} (A B : UU l) (e : A ＝ B)
+  (U : Metric-Structure l A)
+  (V : Metric-Structure l B)
   where
 
-  compute-tr-refl-Metric-Space :
-    tr-Metric-Space A (type-Metric-Space A) refl ＝ A
-  compute-tr-refl-Metric-Space = refl
-```
+  equiv-is-isometry-map-eq-Eq-tr-Metric-Structure :
+    Eq-Metric-Structure
+      ( B)
+      ( tr-Metric-Structure A B e U)
+      ( V) ≃
+    is-isometry-function-Metric-Space (A , U) (B , V) (map-eq e)
+  equiv-is-isometry-map-eq-Eq-tr-Metric-Structure =
+    equiv-iff
+      ( Eq-prop-Metric-Structure
+        ( B)
+        ( tr-Metric-Structure A B e U)
+        ( V))
+      ( is-isometry-prop-function-Metric-Space (A , U) (B , V) (map-eq e))
+      ( forward)
+      ( backward)
+    where
 
-### The transport of metric structures is an isometry
+    forward :
+      Eq-Metric-Structure
+        ( B)
+        ( tr-Metric-Structure A B e U)
+        ( V) →
+      is-isometry-function-Metric-Space (A , U) (B , V) (map-eq e)
+    forward H d x y =
+      H d (map-eq e x) (map-eq e y) ∘iff
+      iff-eq (compute-neighbourhood-tr-Metric-Structure A B e U d x y)
 
-```agda
-module _
-  {l : Level} (A : Metric-Space l) (B : UU l)
-  (e : type-Metric-Space A ＝ B)
-  where
-
-  is-isometry-map-eq-tr-Metric-Space :
-    is-isometry-function-Metric-Space A (tr-Metric-Space A B e) (map-eq e)
-  is-isometry-map-eq-tr-Metric-Space d x y =
-    iff-eq (compute-neighbourhood-tr-Metric-Space A B e d x y)
-
-  isometry-tr-Metric-Space :
-    isometry-function-Metric-Space A (tr-Metric-Space A B e)
-  isometry-tr-Metric-Space = map-eq e , is-isometry-map-eq-tr-Metric-Space
-
-  inv-isometry-tr-Metric-Space :
-    isometry-function-Metric-Space (tr-Metric-Space A B e) A
-  inv-isometry-tr-Metric-Space =
-    map-inv-equiv (equiv-eq e) ,
-    is-isometry-map-inv-is-equiv-Metric-Space
-      ( A)
-      ( tr-Metric-Space A B e)
-      ( map-eq e)
-      ( is-isometry-map-eq-tr-Metric-Space)
-      ( is-equiv-map-equiv (equiv-eq e))
+    backward :
+      is-isometry-function-Metric-Space (A , U) (B , V) (map-eq e) →
+      Eq-Metric-Structure
+        ( B)
+        ( tr-Metric-Structure A B e U)
+        ( V)
+    backward I d x y =
+      logical-equivalence-reasoning
+        ( is-in-neighbourhood-Metric-Structure
+          ( B)
+          ( tr-Metric-Structure A B e U)
+          ( d)
+          ( x)
+          ( y))
+        ↔ ( is-in-neighbourhood-Metric-Structure
+            ( B)
+            ( tr-Metric-Structure A B e U)
+            ( d)
+            ( map-eq e (map-inv-equiv (equiv-eq e) x))
+            ( map-eq e (map-inv-equiv (equiv-eq e) y)))
+          by
+            binary-tr
+              ( λ u v →
+                ( is-in-neighbourhood-Metric-Structure
+                  ( B)
+                  ( tr-Metric-Structure A B e U)
+                  ( d)
+                  ( x)
+                  ( y)) ↔
+                ( is-in-neighbourhood-Metric-Structure
+                  ( B)
+                  ( tr-Metric-Structure A B e U)
+                  ( d)
+                  ( u)
+                  ( v)))
+              ( inv (is-section-map-inv-equiv (equiv-eq e) x))
+              ( inv (is-section-map-inv-equiv (equiv-eq e) y))
+              ( id-iff)
+        ↔ ( is-in-neighbourhood-Metric-Structure
+            ( A)
+            ( U)
+            ( d)
+            ( map-inv-equiv (equiv-eq e) x)
+            ( map-inv-equiv (equiv-eq e) y))
+          by
+            iff-eq
+              ( inv
+                ( compute-neighbourhood-tr-Metric-Structure
+                  ( A)
+                  ( B)
+                  ( e)
+                  ( U)
+                  ( d)
+                  ( map-inv-equiv (equiv-eq e) x)
+                  ( map-inv-equiv (equiv-eq e) y)))
+        ↔ ( is-in-neighbourhood-Metric-Structure
+            ( B)
+            ( V)
+            ( d)
+            ( map-eq e (map-inv-equiv (equiv-eq e) x))
+            ( map-eq e (map-inv-equiv (equiv-eq e) y)))
+          by I d (map-inv-equiv (equiv-eq e) x) (map-inv-equiv (equiv-eq e) y)
+        ↔ (is-in-neighbourhood-Metric-Structure B V d x y)
+          by
+            binary-tr
+              ( λ u v →
+                ( is-in-neighbourhood-Metric-Structure B V d u v) ↔
+                ( is-in-neighbourhood-Metric-Structure B V d x y))
+              ( inv (is-section-map-inv-equiv (equiv-eq e) x))
+              ( inv (is-section-map-inv-equiv (equiv-eq e) y))
+              ( id-iff)
 ```
