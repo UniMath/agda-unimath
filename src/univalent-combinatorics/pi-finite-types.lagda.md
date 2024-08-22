@@ -394,18 +394,6 @@ pr2 (π-Finite-Π k A B) =
     ( λ x → is-π-finite-type-π-Finite k (B x))
 ```
 
-### Proposition 1.7
-
-```agda
-has-finitely-many-connected-components-Σ-is-0-connected' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-0-connected A → is-π-finite 1 A →
-  ((x : A) → has-finitely-many-connected-components (B x)) →
-  has-finitely-many-connected-components (Σ A B)
-has-finitely-many-connected-components-Σ-is-0-connected' C H =
-  has-finitely-many-connected-components-Σ-is-0-connected C (λ a → pr2 H a a)
-```
-
 ### Dependent sums of π-finite types
 
 The dependent sum of a family of πₙ-finite types over a πₙ₊₁-finite base is
@@ -449,18 +437,14 @@ abstract
                       ( pr1 , is-emb-inclusion-subtype ( λ u → trunc-Prop _))))
                   ( H (pr1 x) (pr1 y)))
               ( λ x → K (pr1 x)))
-            ( has-finitely-many-connected-components-Σ-is-0-connected'
+            ( has-finitely-many-connected-components-Σ-is-0-connected
               ( is-0-connected-im-is-0-connected-domain
                 ( f ∘ inr)
                 ( is-0-connected-unit))
-              ( ( is-finite-is-contr
-                  ( is-0-connected-im-is-0-connected-domain
-                    ( f ∘ inr)
-                    ( is-0-connected-unit))) ,
-                ( λ x y →
+              ( ( λ a →
                   is-π-finite-equiv zero-ℕ
-                    ( equiv-Eq-eq-im (f ∘ inr) x y)
-                    ( H (pr1 x) (pr1 y))))
+                    ( equiv-Eq-eq-im (f ∘ inr) a a)
+                    ( H (pr1 a) (pr1 a))))
               ( λ x → K (pr1 x)))))
       where
       g : ((Σ (im (f ∘ inl)) (B ∘ pr1)) + (Σ (im (f ∘ inr)) (B ∘ pr1))) ≃
