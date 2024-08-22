@@ -51,6 +51,16 @@
   keywords    = {Computer Science - Logic in Computer Science,Mathematics - Algebraic Topology,Mathematics - Category Theory}
 }
 
+@book{BSCS05,
+  title     = {Absztrakt algebrai feladatok},
+  author    = {Bálintné Szendrei, Mária and Czédli, Gábor and Szendrei, Ágnes},
+  url       = {https://interkonyv.hu/konyvek/balintne-szendrei-maria-czedli-gabor-szendrei-agnes-absztrakt-algebrai-feladatok/},
+  year      = {2005},
+  publisher = {Polygon},
+  pagetotal = {523},
+  langid    = {hungarian}
+}
+
 @online{BvDR18,
   title       = {Higher {{Groups}} in {{Homotopy Type Theory}}},
   author      = {Buchholtz, Ulrik and van Doorn, Floris and Rijke, Egbert},
@@ -63,16 +73,6 @@
   abstract    = {We present a development of the theory of higher groups, including infinity groups and connective spectra, in homotopy type theory. An infinity group is simply the loops in a pointed, connected type, where the group structure comes from the structure inherent in the identity types of Martin-L\"of type theory. We investigate ordinary groups from this viewpoint, as well as higher dimensional groups and groups that can be delooped more than once. A major result is the stabilization theorem, which states that if an $n$-type can be delooped $n+2$ times, then it is an infinite loop type. Most of the results have been formalized in the Lean proof assistant.},
   pubstate    = {preprint},
   keywords    = {03B15,Computer Science - Logic in Computer Science,F.4.1,Mathematics - Algebraic Topology,Mathematics - Logic}
-}
-
-@book{BSCS05,
-  title     = {Absztrakt algebrai feladatok},
-  author    = {Bálintné Szendrei, Mária and Czédli, Gábor and Szendrei, Ágnes},
-  url       = {https://interkonyv.hu/konyvek/balintne-szendrei-maria-czedli-gabor-szendrei-agnes-absztrakt-algebrai-feladatok/},
-  year      = {2005},
-  publisher = {Polygon},
-  pagetotal = {523},
-  langid    = {hungarian}
 }
 
 @article{BW23,
@@ -149,7 +149,7 @@
   keywords    = {Computer Science - Logic in Computer Science ; Mathematics - Logic},
   eprint      = {2111.00482},
   eprinttype  = {arxiv},
-  eprintclass = {cs},
+  eprintclass = {cs}
 }
 
 @inproceedings{dJKFX23,
@@ -264,19 +264,19 @@
 }
 
 @inproceedings{KvR19,
-  title       =  {{Path Spaces of Higher Inductive Types in Homotopy Type Theory}},
-  booktitle   =  {Proceedings of the 34th {{Annual ACM}}/{{IEEE Symposium}} on {{Logic}} in {{Computer Science}}},
-  author      =  {Kraus, Nicolai and von Raumer, Jakob},
-  year        =  {2019},
-  publisher   =  {IEEE Press},
-  abstract    =  {The study of equality types is central to homotopy type theory. Characterizing these types is often tricky, and various strategies, such as the encode-decode method, have been developed. We prove a theorem about equality types of coequalizers and pushouts, reminiscent of an induction principle and without any restrictions on the truncation levels. This result makes it possible to reason directly about certain equality types and to streamline existing proofs by eliminating the necessity of auxiliary constructions. To demonstrate this, we give a very short argument for the calculation of the fundamental group of the circle (Licata and Shulman [1]), and for the fact that pushouts preserve embeddings. Further, our development suggests a higher version of the Seifert-van Kampen theorem, and the set-truncation operator maps it to the standard Seifert-van Kampen theorem (due to Favonia and Shulman [2]). We provide a formalization of the main technical results in the proof assistant Lean.},
-  articleno   =  {7},
-  numpages    =  {13},
-  location    =  {Vancouver, Canada},
-  series      =  {LICS '19},
-  eprint      =  {1901.06022},
-  eprinttype  =  {arxiv},
-  eprintclass =  {cs, math},
+  title       = {{Path Spaces of Higher Inductive Types in Homotopy Type Theory}},
+  booktitle   = {Proceedings of the 34th {{Annual ACM}}/{{IEEE Symposium}} on {{Logic}} in {{Computer Science}}},
+  author      = {Kraus, Nicolai and von Raumer, Jakob},
+  year        = {2019},
+  publisher   = {IEEE Press},
+  abstract    = {The study of equality types is central to homotopy type theory. Characterizing these types is often tricky, and various strategies, such as the encode-decode method, have been developed. We prove a theorem about equality types of coequalizers and pushouts, reminiscent of an induction principle and without any restrictions on the truncation levels. This result makes it possible to reason directly about certain equality types and to streamline existing proofs by eliminating the necessity of auxiliary constructions. To demonstrate this, we give a very short argument for the calculation of the fundamental group of the circle (Licata and Shulman [1]), and for the fact that pushouts preserve embeddings. Further, our development suggests a higher version of the Seifert-van Kampen theorem, and the set-truncation operator maps it to the standard Seifert-van Kampen theorem (due to Favonia and Shulman [2]). We provide a formalization of the main technical results in the proof assistant Lean.},
+  articleno   = {7},
+  numpages    = {13},
+  location    = {Vancouver, Canada},
+  series      = {LICS '19},
+  eprint      = {1901.06022},
+  eprinttype  = {arxiv},
+  eprintclass = {cs, math}
 }
 
 @book{May12,
@@ -487,23 +487,6 @@
   keywords    = {Computer Science - Logic in Computer Science,F.3.1,F.3.1 F.4.1,F.4.1,Mathematics - Category Theory,Mathematics - Logic}
 }
 
-@inproceedings{SvDR20,
-  title     = {Sequential {{Colimits}} in {{Homotopy Type Theory}}},
-  booktitle = {Proceedings of the 35th {{Annual ACM}}/{{IEEE Symposium}} on {{Logic}} in {{Computer Science}}},
-  author    = {Sojakova, Kristina and van Doorn, Floris and Rijke, Egbert},
-  date      = {2020-07-08},
-  year      = {2020},
-  month     = {07},
-  series    = {{{LICS}} '20},
-  pages     = {845--858},
-  publisher = {Association for Computing Machinery},
-  location  = {New York, NY, USA},
-  doi       = {10.1145/3373718.3394801},
-  abstract  = {Sequential colimits are an important class of higher inductive types. We present a self-contained and fully formalized proof of the conjecture that in homotopy type theory sequential colimits appropriately commute with Σ-types. This result allows us to give short proofs of a number of useful corollaries, some of which were conjectured in other works: the commutativity of sequential colimits with identity types, with homotopy fibers, loop spaces, and truncations, and the preservation of the properties of truncatedness and connectedness under sequential colimits. Our entire development carries over to (∞, 1)-toposes using Shulman's recent interpretation of homotopy type theory into these structures.},
-  isbn      = {978-1-4503-7104-9},
-  keywords  = {higher inductive types,homotopy type theory,sequential colimits}
-}
-
 @online{Shu14SplittingIdempotents,
   title        = {Splitting {{Idempotents}}},
   author       = {Shulman, Mike},
@@ -539,7 +522,7 @@
   eprint       = {1507.03634},
   eprinttype   = {arxiv},
   eprintclass  = {math},
-  primaryClass = {math.LO},
+  primaryclass = {math.LO},
   journal      = {Logical Methods in Computer Science},
   volume       = {12},
   issue        = {3},
@@ -547,7 +530,6 @@
   publisher    = {Episciences.org},
   issn         = {1860-5974},
   doi          = {10.2168/LMCS-12(3:9)2016},
-  url          = {https://lmcs.episciences.org/2027},
   abstract     = {We study idempotents in intensional Martin-L\"of type theory, and in particular the question of when and whether they split. We show that in the presence of propositional truncation and Voevodsky's univalence axiom, there exist idempotents that do not split; thus in plain MLTT not all idempotents can be proven to split. On the other hand, assuming only function extensionality, an idempotent can be split if and only if its witness of idempotency satisfies one extra coherence condition. Both proofs are inspired by parallel results of Lurie in higher category theory, showing that ideas from higher category theory and homotopy theory can have applications even in ordinary MLTT. Finally, we show that although the witness of idempotency can be recovered from a splitting, the one extra coherence condition cannot in general; and we construct "the type of fully coherent idempotents", by splitting an idempotent on the type of partially coherent ones. Our results have been formally verified in the proof assistant Coq.}
 }
 
@@ -569,6 +551,36 @@
   abstract    = {We combine homotopy type theory with axiomatic cohesion, expressing the latter internally with a version of ‘adjoint logic’ in which the discretization and codiscretization modalities are characterized using a judgemental formalism of ‘crisp variables.’ This yields type theories that we call ‘spatial’ and ‘cohesive,’ in which the types can be viewed as having independent topological and homotopical structure. These type theories can then be used to study formally the process by which topology gives rise to homotopy theory (the ‘fundamental $\infty$-groupoid’ or ‘shape’), disentangling the ‘identifications’ of homotopy type theory from the ‘continuous paths’ of topology. In a further refinement called ‘real-cohesion,’ the shape is determined by continuous maps from the real numbers, as in classical algebraic topology. This enables us to reproduce formally some of the classical applications of homotopy theory to topology. As an example, we prove Brouwer's fixed-point theorem.},
   langid      = {english},
   keywords    = {Mathematics - Algebraic Topology,Mathematics - Category Theory,Mathematics - Logic}
+}
+
+@article{Sto87,
+  title    = {Dedekind finiteness in topoi},
+  journal  = {Journal of Pure and Applied Algebra},
+  volume   = {49},
+  number   = {1},
+  pages    = {219-225},
+  year     = {1987},
+  issn     = {0022-4049},
+  doi      = {10.1016/0022-4049(87)90130-7},
+  author   = {Lawrence Neff Stout},
+  abstract = {A Dedekind finite object in a topos is an object such that any monic endomorphism is an epimorphism. This paper proves the basic properties of Dedekind finiteness and then gives examples which show that the class of Dedekind finite objects is not closed under quotients, subobjects, exponentiation, or finite powerobjects. Examples also show that having no nontrivial epic endomorphisms is distinct from Dedekind finiteness.}
+}
+
+@inproceedings{SvDR20,
+  title     = {Sequential {{Colimits}} in {{Homotopy Type Theory}}},
+  booktitle = {Proceedings of the 35th {{Annual ACM}}/{{IEEE Symposium}} on {{Logic}} in {{Computer Science}}},
+  author    = {Sojakova, Kristina and van Doorn, Floris and Rijke, Egbert},
+  date      = {2020-07-08},
+  year      = {2020},
+  month     = {07},
+  series    = {{{LICS}} '20},
+  pages     = {845--858},
+  publisher = {Association for Computing Machinery},
+  location  = {New York, NY, USA},
+  doi       = {10.1145/3373718.3394801},
+  abstract  = {Sequential colimits are an important class of higher inductive types. We present a self-contained and fully formalized proof of the conjecture that in homotopy type theory sequential colimits appropriately commute with Σ-types. This result allows us to give short proofs of a number of useful corollaries, some of which were conjectured in other works: the commutativity of sequential colimits with identity types, with homotopy fibers, loop spaces, and truncations, and the preservation of the properties of truncatedness and connectedness under sequential colimits. Our entire development carries over to (∞, 1)-toposes using Shulman's recent interpretation of homotopy type theory into these structures.},
+  isbn      = {978-1-4503-7104-9},
+  keywords  = {higher inductive types,homotopy type theory,sequential colimits}
 }
 
 @book{SymmetryBook,

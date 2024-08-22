@@ -28,9 +28,12 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A Kuratowsky finite type is a set `X` for which there exists a surjection into
-`X` from a standard finite type. In other words, the Kuratowsky finite types are
-the set-quotient of a standard finite type.
+A {{#concept "Kuratowsky finite set" agda=𝔽-Kuratowsky}} is a
+[set](foundation-core.sets.md) `X` for which there exists a
+[surjection](foundation.surjective-maps.md) into `X` from a standard finite
+type. In other words, the Kuratowsky finite set are the
+[set-quotient](foundation.set-quotients.md) of a
+[standard finite type](univalent-combinatorics.standard-finite-types.md).
 
 ## Definition
 
@@ -82,6 +85,21 @@ has-decidable-equality-is-finite-type-𝔽-Kuratowsky :
   {l : Level} (X : 𝔽-Kuratowsky l) →
   is-finite (type-𝔽-Kuratowsky X) →
   has-decidable-equality (type-𝔽-Kuratowsky X)
-has-decidable-equality-is-finite-type-𝔽-Kuratowsky X H =
-  has-decidable-equality-is-finite H
+has-decidable-equality-is-finite-type-𝔽-Kuratowsky X =
+  has-decidable-equality-is-finite
 ```
+
+## See also
+
+- [Finite types](univalent-combinatorics.finite-types.md)
+- [Dedekind-finite sets](univalent-combinatorics.dedekind-finite-sets.md)
+
+## External links
+
+- [Finiteness in Sheaf Topoi](https://grossack.site/2024/08/19/finiteness-in-sheaf-topoi),
+  blog post by Chris Grossack
+- [`Fin.Kuratowski`](https://www.cs.bham.ac.uk/~mhe/TypeTopology/Fin.Kuratowski.html)
+  at TypeTopology
+- [finite set](https://ncatlab.org/nlab/show/finite+set) at $n$Lab
+- [finite object](https://ncatlab.org/nlab/show/finite+object) at $n$Lab
+- [Finite set](https://en.wikipedia.org/wiki/Finite_set) at Wikipedia
