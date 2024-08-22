@@ -56,7 +56,7 @@ if it is [merely equivalent](foundation.mere-equivalences.md) to a
 [standard finite type](univalent-combinatorics.standard-finite-types.md).
 
 **Terminology.** This finiteness condition is also referred to as _Bishop
-finiteness_. (Cf. the external links)
+finiteness_. (Cf. the external links at the bottom of this page)
 
 ## Definition
 
