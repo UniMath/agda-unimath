@@ -9,18 +9,24 @@ module foundation.quasicoherently-idempotent-maps where
 ```agda
 open import foundation.1-types
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-algebra
+open import foundation.homotopy-induction
 open import foundation.idempotent-maps
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
@@ -415,6 +421,88 @@ To be clear, what we are asking for is an idempotent map `f`, such that _no_
 idempotence homotopy `f ∘ f ~ f` is quasicoherent. A counterexample can be
 constructed using the [cantor space](set-theory.cantor-space.md), see Section 4
 of {{#cite Shu17}} for more details.
+
+### Characterization of identity of quasicoherently idempotent maps
+
+A homotopy of quasicoherent idempotence witnesses `(I, Q) ~ (J, R)` consists of
+a homotopy of the underlying idempotence witnesses `H : I ~ J` and a
+[coherence](foundation-core.commuting-squares-of-homotopies.md)
+
+```text
+            fH
+  f ·l I -------- f ·l J
+     |              |
+   Q |              | R
+     |              |
+  I ·r f -------– J ·r f.
+            Hf
+```
+
+```agda
+module _
+  {l : Level} {A : UU l} {f : A → A}
+  where
+
+  coherence-htpy-is-quasicoherently-idempotent :
+    (p q : is-quasicoherently-idempotent f) →
+    ( is-idempotent-is-quasicoherently-idempotent p ~
+      is-idempotent-is-quasicoherently-idempotent q) →
+    UU l
+  coherence-htpy-is-quasicoherently-idempotent (I , Q) (J , R) H =
+    coherence-square-homotopies
+      ( left-whisker-comp² f H)
+      ( Q)
+      ( R)
+      ( right-whisker-comp² H f)
+
+  htpy-is-quasicoherently-idempotent :
+    (p q : is-quasicoherently-idempotent f) → UU l
+  htpy-is-quasicoherently-idempotent p q =
+    Σ ( is-idempotent-is-quasicoherently-idempotent p ~
+        is-idempotent-is-quasicoherently-idempotent q)
+      ( coherence-htpy-is-quasicoherently-idempotent p q)
+
+  refl-htpy-is-quasicoherently-idempotent :
+    (p : is-quasicoherently-idempotent f) →
+    htpy-is-quasicoherently-idempotent p p
+  refl-htpy-is-quasicoherently-idempotent p = (refl-htpy , right-unit-htpy)
+
+  htpy-eq-is-quasicoherently-idempotent :
+    (p q : is-quasicoherently-idempotent f) →
+    p ＝ q → htpy-is-quasicoherently-idempotent p q
+  htpy-eq-is-quasicoherently-idempotent p .p refl =
+    refl-htpy-is-quasicoherently-idempotent p
+
+  is-torsorial-htpy-is-quasicoherently-idempotent :
+    (p : is-quasicoherently-idempotent f) →
+    is-torsorial (htpy-is-quasicoherently-idempotent p)
+  is-torsorial-htpy-is-quasicoherently-idempotent p =
+    is-torsorial-Eq-structure
+      ( is-torsorial-htpy (is-idempotent-is-quasicoherently-idempotent p))
+      ( is-idempotent-is-quasicoherently-idempotent p , refl-htpy)
+      ( is-torsorial-htpy (coh-is-quasicoherently-idempotent p ∙h refl-htpy))
+
+  is-equiv-htpy-eq-is-quasicoherently-idempotent :
+    (p q : is-quasicoherently-idempotent f) →
+    is-equiv (htpy-eq-is-quasicoherently-idempotent p q)
+  is-equiv-htpy-eq-is-quasicoherently-idempotent p =
+    fundamental-theorem-id
+      ( is-torsorial-htpy-is-quasicoherently-idempotent p)
+      ( htpy-eq-is-quasicoherently-idempotent p)
+
+  extensionality-is-quasicoherently-idempotent :
+    (p q : is-quasicoherently-idempotent f) →
+    (p ＝ q) ≃ (htpy-is-quasicoherently-idempotent p q)
+  extensionality-is-quasicoherently-idempotent p q =
+    ( htpy-eq-is-quasicoherently-idempotent p q ,
+      is-equiv-htpy-eq-is-quasicoherently-idempotent p q)
+
+  eq-htpy-is-quasicoherently-idempotent :
+    (p q : is-quasicoherently-idempotent f) →
+    htpy-is-quasicoherently-idempotent p q → p ＝ q
+  eq-htpy-is-quasicoherently-idempotent p q =
+    map-inv-is-equiv (is-equiv-htpy-eq-is-quasicoherently-idempotent p q)
+```
 
 ## See also
 
