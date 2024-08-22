@@ -1,4 +1,4 @@
-# Addition on the natural numbers
+# Addition on the natural numbers
 
 ```agda
 module elementary-number-theory.addition-natural-numbers where
@@ -35,6 +35,8 @@ add-ℕ x (succ-ℕ y) = succ-ℕ (add-ℕ x y)
 
 infixl 35 _+ℕ_
 _+ℕ_ = add-ℕ
+
+{-# BUILTIN NATPLUS _+ℕ_ #-}
 
 add-ℕ' : ℕ → ℕ → ℕ
 add-ℕ' m n = add-ℕ n m
