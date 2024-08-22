@@ -1,7 +1,7 @@
-# Kuratowsky finite sets
+# Kuratowski finite sets
 
 ```agda
-module univalent-combinatorics.kuratowsky-finite-sets where
+module univalent-combinatorics.kuratowski-finite-sets where
 ```
 
 <details><summary>Imports</summary>
@@ -28,64 +28,64 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A {{#concept "Kuratowsky finite set" agda=𝔽-Kuratowsky}} is a
+A {{#concept "Kuratowski finite set" agda=𝔽-Kuratowski}} is a
 [set](foundation-core.sets.md) `X` for which there exists a
 [surjection](foundation.surjective-maps.md) into `X` from a standard finite
-type. In other words, the Kuratowsky finite set are the
+type. In other words, the Kuratowski finite set are the
 [set-quotient](foundation.set-quotients.md) of a
 [standard finite type](univalent-combinatorics.standard-finite-types.md).
 
 ## Definition
 
 ```agda
-is-kuratowsky-finite-set-Prop : {l : Level} → Set l → Prop l
-is-kuratowsky-finite-set-Prop X =
+is-kuratowski-finite-set-Prop : {l : Level} → Set l → Prop l
+is-kuratowski-finite-set-Prop X =
   exists-structure-Prop ℕ (λ n → Fin n ↠ type-Set X)
 
-is-kuratowsky-finite-set : {l : Level} → Set l → UU l
-is-kuratowsky-finite-set X = type-Prop (is-kuratowsky-finite-set-Prop X)
+is-kuratowski-finite-set : {l : Level} → Set l → UU l
+is-kuratowski-finite-set X = type-Prop (is-kuratowski-finite-set-Prop X)
 
-𝔽-Kuratowsky : (l : Level) → UU (lsuc l)
-𝔽-Kuratowsky l = Σ (Set l) is-kuratowsky-finite-set
+𝔽-Kuratowski : (l : Level) → UU (lsuc l)
+𝔽-Kuratowski l = Σ (Set l) is-kuratowski-finite-set
 
 module _
-  {l : Level} (X : 𝔽-Kuratowsky l)
+  {l : Level} (X : 𝔽-Kuratowski l)
   where
 
-  set-𝔽-Kuratowsky : Set l
-  set-𝔽-Kuratowsky = pr1 X
+  set-𝔽-Kuratowski : Set l
+  set-𝔽-Kuratowski = pr1 X
 
-  type-𝔽-Kuratowsky : UU l
-  type-𝔽-Kuratowsky = type-Set set-𝔽-Kuratowsky
+  type-𝔽-Kuratowski : UU l
+  type-𝔽-Kuratowski = type-Set set-𝔽-Kuratowski
 
-  is-set-type-𝔽-Kuratowsky : is-set type-𝔽-Kuratowsky
-  is-set-type-𝔽-Kuratowsky = is-set-type-Set set-𝔽-Kuratowsky
+  is-set-type-𝔽-Kuratowski : is-set type-𝔽-Kuratowski
+  is-set-type-𝔽-Kuratowski = is-set-type-Set set-𝔽-Kuratowski
 
-  is-kuratowsky-finite-set-𝔽-Kuratowsky :
-    is-kuratowsky-finite-set set-𝔽-Kuratowsky
-  is-kuratowsky-finite-set-𝔽-Kuratowsky = pr2 X
+  is-kuratowski-finite-set-𝔽-Kuratowski :
+    is-kuratowski-finite-set set-𝔽-Kuratowski
+  is-kuratowski-finite-set-𝔽-Kuratowski = pr2 X
 ```
 
 ## Properties
 
-### A Kuratowsky finite set is finite if and only if it has decidable equality
+### A Kuratowski finite set is finite if and only if it has decidable equality
 
 ```agda
-is-finite-has-decidable-equality-type-𝔽-Kuratowsky :
-  {l : Level} (X : 𝔽-Kuratowsky l) →
-  has-decidable-equality (type-𝔽-Kuratowsky X) →
-  is-finite (type-𝔽-Kuratowsky X)
-is-finite-has-decidable-equality-type-𝔽-Kuratowsky X H =
+is-finite-has-decidable-equality-type-𝔽-Kuratowski :
+  {l : Level} (X : 𝔽-Kuratowski l) →
+  has-decidable-equality (type-𝔽-Kuratowski X) →
+  is-finite (type-𝔽-Kuratowski X)
+is-finite-has-decidable-equality-type-𝔽-Kuratowski X H =
   apply-universal-property-trunc-Prop
-    ( is-kuratowsky-finite-set-𝔽-Kuratowsky X)
-    ( is-finite-Prop (type-𝔽-Kuratowsky X))
+    ( is-kuratowski-finite-set-𝔽-Kuratowski X)
+    ( is-finite-Prop (type-𝔽-Kuratowski X))
     ( λ (n , f , s) → is-finite-codomain (is-finite-Fin n) s H)
 
-has-decidable-equality-is-finite-type-𝔽-Kuratowsky :
-  {l : Level} (X : 𝔽-Kuratowsky l) →
-  is-finite (type-𝔽-Kuratowsky X) →
-  has-decidable-equality (type-𝔽-Kuratowsky X)
-has-decidable-equality-is-finite-type-𝔽-Kuratowsky X =
+has-decidable-equality-is-finite-type-𝔽-Kuratowski :
+  {l : Level} (X : 𝔽-Kuratowski l) →
+  is-finite (type-𝔽-Kuratowski X) →
+  has-decidable-equality (type-𝔽-Kuratowski X)
+has-decidable-equality-is-finite-type-𝔽-Kuratowski X =
   has-decidable-equality-is-finite
 ```
 

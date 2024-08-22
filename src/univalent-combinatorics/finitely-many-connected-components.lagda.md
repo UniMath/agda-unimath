@@ -285,4 +285,4 @@ has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
 
 ## See also
 
-- [Kuratowsky finite sets](univalent-combinatorics.kuratowsky-finite-sets.md)
+- [Kuratowski finite sets](univalent-combinatorics.kuratowski-finite-sets.md)
