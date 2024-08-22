@@ -117,7 +117,7 @@ is-locally-finite-equiv' :
 is-locally-finite-equiv' e = is-locally-finite-equiv (inv-equiv e)
 ```
 
-### Locally finite types are 1-types
+### Locally finite types are `1`-types
 
 ```agda
 is-1-type-is-locally-finite :

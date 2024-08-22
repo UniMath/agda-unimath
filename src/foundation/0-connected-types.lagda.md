@@ -216,7 +216,7 @@ is-0-connected-is-contr X p =
   is-contr-equiv X (inv-equiv (equiv-unit-trunc-Set (X , is-set-is-contr p))) p
 ```
 
-### The image of a function with a 0-connected domain is 0-connected
+### The image of a function with a `0`-connected domain is `0`-connected
 
 ```agda
 abstract

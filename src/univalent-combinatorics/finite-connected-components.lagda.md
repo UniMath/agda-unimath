@@ -77,7 +77,7 @@ mere-equiv-number-of-connected-components H =
   mere-equiv-is-finite H
 ```
 
-### Types with connected components of a certain finite cardinality
+### Types with a finite type of connected components of a specified cardinality
 
 ```agda
 has-cardinality-components-Prop : {l : Level} (k : ℕ) → UU l → Prop l
@@ -118,7 +118,7 @@ has-finite-connected-components-is-0-connected :
 has-finite-connected-components-is-0-connected = is-finite-is-contr
 ```
 
-### Sets with finite connected components are finite
+### Sets with finitely many connected components are finite
 
 ```agda
 is-finite-has-finite-connected-components :
@@ -128,7 +128,7 @@ is-finite-has-finite-connected-components H =
   is-finite-equiv' (equiv-unit-trunc-Set (_ , H))
 ```
 
-### Dependent sums of types with finite connectected components
+### Dependent sums of types with finitely many connected components
 
 The total space of a family of types with finitely many connected components has
 finitely many connected components when the base is `0`-connected and its based
