@@ -93,8 +93,8 @@ module _
   is-equiv-htpy-eq-retract R =
     fundamental-theorem-id (is-torsorial-htpy-retract R) (htpy-eq-retract R)
 
-  equiv-htpy-eq-retract : (R S : A retract-of B) → (R ＝ S) ≃ htpy-retract R S
-  equiv-htpy-eq-retract R S =
+  extensionality-retract : (R S : A retract-of B) → (R ＝ S) ≃ htpy-retract R S
+  extensionality-retract R S =
     ( htpy-eq-retract R S , is-equiv-htpy-eq-retract R S)
 
   eq-htpy-retract : (R S : A retract-of B) → htpy-retract R S → R ＝ S
@@ -158,8 +158,8 @@ module _
   is-equiv-equiv-eq-retracts R =
     fundamental-theorem-id (is-torsorial-equiv-retracts R) (equiv-eq-retracts R)
 
-  equiv-equiv-eq-retracts : (R S : retracts l2 A) → (R ＝ S) ≃ equiv-retracts R S
-  equiv-equiv-eq-retracts R S =
+  extensionality-retracts : (R S : retracts l2 A) → (R ＝ S) ≃ equiv-retracts R S
+  extensionality-retracts R S =
     ( equiv-eq-retracts R S , is-equiv-equiv-eq-retracts R S)
 
   eq-equiv-retracts : (R S : retracts l2 A) → equiv-retracts R S → R ＝ S

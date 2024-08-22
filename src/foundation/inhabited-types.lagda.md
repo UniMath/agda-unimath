@@ -195,7 +195,7 @@ pr2 (Σ-Inhabited-Type X Y) =
 ```agda
 map-is-inhabited :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (f : (A → B)) → is-inhabited A → is-inhabited B
+  (f : A → B) → is-inhabited A → is-inhabited B
 map-is-inhabited f = map-trunc-Prop f
 ```
 

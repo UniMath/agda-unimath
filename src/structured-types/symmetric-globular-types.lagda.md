@@ -33,7 +33,7 @@ $n$-cells from `x` to `y` to $n$-cells from `y` to `x`.
 ```agda
 record
   is-symmetric-globular-structure
-  {l : Level} {A : UU l} (G : globular-structure A) : UU l
+  {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A) : UU (l1 ⊔ l2)
   where
   coinductive
   field
@@ -47,7 +47,7 @@ record
 open is-symmetric-globular-structure public
 
 module _
-  {l : Level} {A : UU l} {G : globular-structure A}
+  {l1 l2 : Level} {A : UU l1} {G : globular-structure l2 A}
   (r : is-symmetric-globular-structure G)
   where
 
@@ -74,9 +74,10 @@ module _
 ### The type of symmetric globular structures
 
 ```agda
-symmetric-globular-structure : {l : Level} (A : UU l) → UU (lsuc l)
-symmetric-globular-structure A =
-  Σ (globular-structure A) (is-symmetric-globular-structure)
+symmetric-globular-structure :
+  {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
+symmetric-globular-structure l2 A =
+  Σ (globular-structure l2 A) (is-symmetric-globular-structure)
 ```
 
 ## Examples

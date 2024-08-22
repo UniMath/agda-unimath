@@ -9,8 +9,10 @@ open import foundation-core.dependent-identifications public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.strictly-right-unital-concatenation-identifications
 open import foundation.transport-along-higher-identifications
 open import foundation.universe-levels
 
@@ -26,7 +28,7 @@ open import foundation-core.transport-along-identifications
 ## Idea
 
 We characterize dependent paths in the family of depedent paths; define the
-groupoidal operators on dependent paths; define the cohrences paths: prove the
+groupoidal operators on dependent paths; define the coherence paths; prove the
 operators are equivalences.
 
 ## Properites
@@ -120,12 +122,35 @@ module _
     dependent-identification B (p ∙ q) x' z'
   concat-dependent-identification refl q refl q' = q'
 
-  compute-concat-dependent-identification-refl :
+  compute-concat-dependent-identification-left-base-refl :
     { y z : A} (q : y ＝ z) →
     { x' y' : B y} {z' : B z} (p' : x' ＝ y') →
     ( q' : dependent-identification B q y' z') →
-    ( concat-dependent-identification refl q p' q') ＝ ap (tr B q) p' ∙ q'
-  compute-concat-dependent-identification-refl refl refl q' = refl
+    concat-dependent-identification refl q p' q' ＝ ap (tr B q) p' ∙ q'
+  compute-concat-dependent-identification-left-base-refl q refl q' = refl
+```
+
+#### Strictly right unital concatenation of dependent identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
+
+  right-strict-concat-dependent-identification :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) {x' : B x} {y' : B y} {z' : B z} →
+    dependent-identification B p x' y' →
+    dependent-identification B q y' z' →
+    dependent-identification B (p ∙ᵣ q) x' z'
+  right-strict-concat-dependent-identification p refl p' q' = p' ∙ᵣ q'
+
+  compute-right-strict-concat-dependent-identification-right-base-refl :
+    { x y : A} (p : x ＝ y) →
+    { x' : B x} {y' z' : B y} (p' : dependent-identification B p x' y') →
+    ( q' : y' ＝ z') →
+    right-strict-concat-dependent-identification p refl p' q' ＝ p' ∙ᵣ q'
+  compute-right-strict-concat-dependent-identification-right-base-refl q p' q' =
+    refl
 ```
 
 #### Inverses of dependent identifications

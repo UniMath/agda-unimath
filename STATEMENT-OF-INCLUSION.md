@@ -9,7 +9,7 @@ from us that we are kind and respectful in discussions, that we will be mindful
 of your pronouns and use
 [inclusive language](https://www.apa.org/about/apa/equity-diversity-inclusion/language-guidelines),
 and that we value your input regardless of your level of experience or status in
-the community. We're commited to providing a safe and welcoming environment to
+the community. We're committed to providing a safe and welcoming environment to
 people of any gender identity, sexual orientation, race, colour, age, ability,
 ethnicity, background, or fluency in English -- here on GitHub, in online
 communication channels, and in person. Homotopy type theory is difficult enough
