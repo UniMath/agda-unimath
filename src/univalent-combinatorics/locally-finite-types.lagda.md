@@ -82,7 +82,7 @@ A type is
 its [identity types](foundation-core.identity-types.md) are
 [finite](univalent-combinatorics.finite-types.md).
 
-## Definition
+## Definitions
 
 ### Locally finite types
 
@@ -90,7 +90,7 @@ its [identity types](foundation-core.identity-types.md) are
 is-locally-finite-Prop :
   {l : Level} → UU l → Prop l
 is-locally-finite-Prop A =
-  Π-Prop A (λ x → Π-Prop A (λ y → is-finite-Prop (Id x y)))
+  Π-Prop A (λ x → Π-Prop A (λ y → is-finite-Prop (x ＝ y)))
 
 is-locally-finite : {l : Level} → UU l → UU l
 is-locally-finite A = type-Prop (is-locally-finite-Prop A)
@@ -165,7 +165,7 @@ is-locally-finite-empty : is-locally-finite empty
 is-locally-finite-empty = is-locally-finite-is-empty id
 ```
 
-### The dependent product of locally finite types
+### Cartesian products of locally finite types
 
 ```agda
 is-locally-finite-product :
@@ -175,7 +175,11 @@ is-locally-finite-product f g x y =
   is-finite-equiv
     ( equiv-eq-pair x y)
     ( is-finite-product (f (pr1 x) (pr1 y)) (g (pr2 x) (pr2 y)))
+```
 
+### Finite products of locally finite types are locally finite
+
+```agda
 is-locally-finite-Π-Fin :
   {l1 : Level} (k : ℕ) {B : Fin k → UU l1} →
   ((x : Fin k) → is-locally-finite (B x)) →
@@ -213,7 +217,8 @@ is-locally-finite-Π {l1} {l2} {A} {B} f g =
 ```agda
 is-locally-finite-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-locally-finite A → ((x : A) → is-locally-finite (B x)) →
+  is-locally-finite A →
+  ((x : A) → is-locally-finite (B x)) →
   is-locally-finite (Σ A B)
 is-locally-finite-Σ {B = B} H K (x , y) (x' , y') =
   is-finite-equiv'

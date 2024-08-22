@@ -71,7 +71,7 @@ is-truncated-π-finite-Prop (succ-ℕ k) X =
   product-Prop
     ( has-finite-connected-components-Prop X)
     ( Π-Prop X
-      ( λ x → Π-Prop X (λ y → is-truncated-π-finite-Prop k (Id x y))))
+      ( λ x → Π-Prop X (λ y → is-truncated-π-finite-Prop k (x ＝ y))))
 
 is-truncated-π-finite : {l : Level} (k : ℕ) → UU l → UU l
 is-truncated-π-finite k A =
@@ -86,7 +86,7 @@ is-π-finite-Prop zero-ℕ X = has-finite-connected-components-Prop X
 is-π-finite-Prop (succ-ℕ k) X =
   product-Prop
     ( is-π-finite-Prop zero-ℕ X)
-    ( Π-Prop X (λ x → Π-Prop X (λ y → is-π-finite-Prop k (Id x y))))
+    ( Π-Prop X (λ x → Π-Prop X (λ y → is-π-finite-Prop k (x ＝ y))))
 
 is-π-finite : {l : Level} (k : ℕ) → UU l → UU l
 is-π-finite k X = type-Prop (is-π-finite-Prop k X)
@@ -406,6 +406,9 @@ has-finite-connected-components-Σ-is-0-connected' C H =
 
 ### Dependent sums of π-finite types
 
+The dependent sum of a family of πₙ-finite types over a πₙ₊₁-finite base is
+πₙ-finite.
+
 ```agda
 abstract
   has-finite-connected-components-Σ' :
@@ -515,7 +518,8 @@ abstract
     {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
     is-π-finite (succ-ℕ k) A → ((x : A) → is-π-finite k (B x)) →
     is-π-finite k (Σ A B)
-  is-π-finite-Σ zero-ℕ {A} {B} = has-finite-connected-components-Σ
+  is-π-finite-Σ zero-ℕ =
+    has-finite-connected-components-Σ
   pr1 (is-π-finite-Σ (succ-ℕ k) H K) =
     has-finite-connected-components-Σ
       ( is-π-finite-one-is-π-finite-succ-ℕ (succ-ℕ k) H)
