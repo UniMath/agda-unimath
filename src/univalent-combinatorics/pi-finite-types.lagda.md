@@ -178,8 +178,7 @@ pr2 (is-π-finite-is-contr (succ-ℕ k) H) x y =
 ### The unit type is π-finite
 
 ```agda
-is-π-finite-unit :
-  (k : ℕ) → is-π-finite k unit
+is-π-finite-unit : (k : ℕ) → is-π-finite k unit
 is-π-finite-unit k = is-π-finite-is-contr k is-contr-unit
 
 unit-π-Finite : (k : ℕ) → π-Finite lzero k
@@ -220,7 +219,8 @@ pr2 (is-π-finite-coproduct (succ-ℕ k) H K) (inr x) (inr y) =
 coproduct-π-Finite :
   {l1 l2 : Level} (k : ℕ) →
   π-Finite l1 k → π-Finite l2 k → π-Finite (l1 ⊔ l2) k
-pr1 (coproduct-π-Finite k A B) = (type-π-Finite k A + type-π-Finite k B)
+pr1 (coproduct-π-Finite k A B) =
+  (type-π-Finite k A + type-π-Finite k B)
 pr2 (coproduct-π-Finite k A B) =
   is-π-finite-coproduct k
     ( is-π-finite-type-π-Finite k A)
@@ -394,10 +394,7 @@ pr2 (π-Finite-Π k A B) =
     ( λ x → is-π-finite-type-π-Finite k (B x))
 ```
 
-### Dependent sums of π-finite types
-
-The dependent sum of a family of πₙ-finite types over a πₙ₊₁-finite base is
-πₙ-finite.
+### Dependent sums of types with finitely many connected components
 
 ```agda
 abstract
@@ -408,7 +405,7 @@ abstract
     ((x : A) → has-finitely-many-connected-components (B x)) →
     has-finitely-many-connected-components (Σ A B)
   has-finitely-many-connected-components-Σ' zero-ℕ e H K =
-    is-π-finite-is-empty zero-ℕ
+    has-finitely-many-connected-components-is-empty
       ( is-empty-is-empty-trunc-Set (map-inv-equiv e) ∘ pr1)
   has-finitely-many-connected-components-Σ' (succ-ℕ k) {A} {B} e H K =
     apply-universal-property-trunc-Prop
@@ -442,7 +439,7 @@ abstract
                 ( f ∘ inr)
                 ( is-0-connected-unit))
               ( ( λ a →
-                  is-π-finite-equiv zero-ℕ
+                  has-finitely-many-connected-components-equiv'
                     ( equiv-Eq-eq-im (f ∘ inr) a a)
                     ( H (pr1 a) (pr1 a))))
               ( λ x → K (pr1 x)))))
@@ -487,7 +484,14 @@ abstract
 
       h : Fin k ≃ type-trunc-Set (im (f ∘ inl))
       h = i , (is-equiv-is-emb-is-surjective is-surjective-i is-emb-i)
+```
 
+### Dependent sums of π-finite types
+
+The dependent sum of a family of πₙ-finite types over a πₙ₊₁-finite base is
+πₙ-finite.
+
+```agda
 has-finitely-many-connected-components-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-π-finite 1 A →

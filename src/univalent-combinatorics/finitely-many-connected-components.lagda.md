@@ -16,6 +16,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fiber-inclusions
@@ -35,6 +36,7 @@ open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
@@ -47,7 +49,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 A type is said to have
-{{#concept "finitely many connected components" Agda=has-finitely-many-components}}
+{{#concept "finitely many connected components"  Disambiguation="of a type" Agda=has-finitely-many-connected-components}}
 if its [set truncation](foundation.set-truncations.md) is a
 [finite type](univalent-combinatorics.finite-types.md).
 
@@ -111,7 +113,16 @@ module _
     is-finite-equiv' (equiv-trunc-Set e)
 ```
 
-### Any 0-connected type has finitely many connected components
+### Empty types have finitely many connected components
+
+```agda
+has-finitely-many-connected-components-is-empty :
+  {l : Level} {A : UU l} → is-empty A → has-finitely-many-connected-components A
+has-finitely-many-connected-components-is-empty f =
+  is-finite-is-empty (is-empty-trunc-Set f)
+```
+
+### Any `0`-connected type has finitely many connected components
 
 ```agda
 has-finitely-many-connected-components-is-0-connected :
@@ -130,12 +141,12 @@ is-finite-has-finitely-many-connected-components H =
   is-finite-equiv' (equiv-unit-trunc-Set (_ , H))
 ```
 
-### Dependent sums of types with finitely many connected components
+### Dependent sums of types with finitely many connected components over a `0`-connected base
 
-The total space of a family of types with finitely many connected components has
-finitely many connected components when the base is `0`-connected and its based
-[loop spaces](synthetic-homotopy-theory.loop-spaces.md) have finitely many
-connected components.
+The total space of a family of types with finitely many connected components
+over a `0`-connected base has finitely many connected components when the based
+[loop spaces](synthetic-homotopy-theory.loop-spaces.md) of the base have
+finitely many connected components.
 
 ```agda
 has-finitely-many-connected-components-Σ-is-0-connected :
