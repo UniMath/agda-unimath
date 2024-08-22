@@ -9,23 +9,23 @@ module foundation.path-cosplit-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-arrows
+open import foundation.function-types
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
 open import foundation.mere-path-cosplit-maps
 open import foundation.propositional-truncations
+open import foundation.retractions
 open import foundation.truncated-maps
 open import foundation.truncation-levels
-open import foundation.equivalences-arrows
 open import foundation.universe-levels
-open import foundation.function-types
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation.retractions
 open import foundation-core.truncated-types
 ```
 
@@ -206,7 +206,8 @@ is-path-cosplit-comp :
   {g : B → C} {f : A → B} →
   is-path-cosplit k g → is-path-cosplit k f → is-path-cosplit k (g ∘ f)
 is-path-cosplit-comp {k = neg-two-𝕋} G F = retraction-comp _ _ G F
-is-path-cosplit-comp {k = succ-𝕋 k} G F x y = is-path-cosplit-comp {! F ? ?  !} {!   !}
+is-path-cosplit-comp {k = succ-𝕋 k} G F x y =
+  is-path-cosplit-comp {! F ? ?  !} {!   !}
 ```
 
 ## See also

@@ -12,10 +12,10 @@ open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
-open import foundation.retracts-of-maps
-open import foundation.retractions
-open import foundation.sections
 open import foundation.morphisms-arrows
+open import foundation.retractions
+open import foundation.retracts-of-maps
+open import foundation.sections
 open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universe-levels

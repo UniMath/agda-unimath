@@ -386,10 +386,6 @@ Given a homotopy `H : f ~ g` we have commuting triangle
 
 where the bottom map is an equivalence.
 
-```agda
-
-```
-
 TODO (also refactor proof `is-emb-htpy` to use this lemma)
 
 ## See also

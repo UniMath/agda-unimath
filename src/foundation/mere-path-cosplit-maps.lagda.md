@@ -9,20 +9,20 @@ module foundation.mere-path-cosplit-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences-arrows
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.truncated-maps
-open import foundation.equivalences-arrows
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.homotopies
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.truncated-types
@@ -198,7 +198,6 @@ module _
 ### Composition and cancellation property of mere path-cosplit maps
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → B} {g : B → C}
   where
