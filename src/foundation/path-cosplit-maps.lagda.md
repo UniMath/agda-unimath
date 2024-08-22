@@ -17,10 +17,12 @@ open import foundation.propositional-truncations
 open import foundation.truncated-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
+open import foundation.function-types
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation.retractions
 open import foundation-core.truncated-types
@@ -164,6 +166,28 @@ is-prop-is-path-cosplit-is-trunc-succ-domain {k = succ-𝕋 k} is-trunc-A =
     ( λ x →
       is-prop-Π
         ( λ y → is-prop-is-path-cosplit-is-trunc-succ-domain (is-trunc-A x y)))
+```
+
+### Path-cosplit maps are closed under homotopy
+
+```agda
+is-path-cosplit-htpy :
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f g : A → B} →
+  f ~ g → is-path-cosplit k g → is-path-cosplit k f
+is-path-cosplit-htpy {k = neg-two-𝕋} = retraction-htpy-map
+is-path-cosplit-htpy {k = succ-𝕋 k} H G x y = {! retraction-top-map-triangle  !}
+```
+
+### Path-cosplit maps compose
+
+```agda
+is-path-cosplit-comp :
+  {l1 l2 l3 : Level} {k : 𝕋}
+  {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B} →
+  is-path-cosplit k g → is-path-cosplit k f → is-path-cosplit k (g ∘ f)
+is-path-cosplit-comp {k = neg-two-𝕋} G F = retraction-comp _ _ G F
+is-path-cosplit-comp {k = succ-𝕋 k} G F x y = is-path-cosplit-comp {! F ? ?  !} {!   !}
 ```
 
 ## See also
