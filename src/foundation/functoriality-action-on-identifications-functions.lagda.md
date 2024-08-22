@@ -272,17 +272,23 @@ It remains to show that these homotopies are coherent.
 module _
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y) (α β : hom-arrow f g) {x y : A}
+  (f : A → B) (g : X → Y) (α β : hom-arrow f g)
+  (H : htpy-hom-arrow f g α β) {x y : A}
   where
 
+  correction-hom-arrow-ap-htpy-hom-arrow :
+    hom-arrow
+      ( ap g {map-domain-hom-arrow f g α x} {map-domain-hom-arrow f g α y})
+      ( ap g {map-domain-hom-arrow f g β x} {map-domain-hom-arrow f g β y})
+  correction-hom-arrow-ap-htpy-hom-arrow = {!   !} , {!   !} , {!   !}
+
   ap-htpy-hom-arrow' :
-    htpy-hom-arrow f g α β →
     coherence-triangle-hom-arrow
       ( ap f)
       ( ap g {map-domain-hom-arrow f g α x} {map-domain-hom-arrow f g α y})
       ( ap g {map-domain-hom-arrow f g β x} {map-domain-hom-arrow f g β y})
       ( ap-hom-arrow f g β {x} {y})
-      {!    !}
+      ({!   !} , {!   !})
       ( ap-hom-arrow f g α {x} {y})
   ap-htpy-hom-arrow' = {!   !}
 ```
