@@ -33,7 +33,7 @@ open import metric-spaces.metric-spaces
 
 An [equivalence](foundation.equivalences.md) between the carrier types of two
 [metric spaces](metric-spaces.metric-spaces.md) is
-{{#concept "isometric" Disambiguation="equivalence between metric spaces" Agda=is-isometric-equic-Metric-Space}}
+{{#concept "isometric" Disambiguation="equivalence between metric spaces" Agda=is-isometric-equiv-Metric-Space}}
 if its carrier map is an [isometry](metric-spaces.isometry-metric-spaces.md).
 
 Isometric equivalnces characterize the equality of metric spaces.
