@@ -16,6 +16,7 @@ open import foundation.mere-path-cosplit-maps
 open import foundation.propositional-truncations
 open import foundation.truncated-maps
 open import foundation.truncation-levels
+open import foundation.equivalences-arrows
 open import foundation.universe-levels
 open import foundation.function-types
 
@@ -166,6 +167,24 @@ is-prop-is-path-cosplit-is-trunc-succ-domain {k = succ-𝕋 k} is-trunc-A =
     ( λ x →
       is-prop-Π
         ( λ y → is-prop-is-path-cosplit-is-trunc-succ-domain (is-trunc-A x y)))
+```
+
+### Path-cosplit maps are closed under retracts of maps
+
+```agda
+-- TODO: retract-map-ap!
+```
+
+### Path-cosplit maps are closed under equivalences of maps
+
+```agda
+is-path-cosplit-equiv-arrow :
+  {l1 l2 l3 l4 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f : A → B} {g : X → Y} (α : equiv-arrow f g) →
+  is-path-cosplit k g → is-path-cosplit k f
+is-path-cosplit-equiv-arrow {k = neg-two-𝕋} α =
+  reflects-retraction-equiv-arrow _ _ α
+is-path-cosplit-equiv-arrow {k = succ-𝕋 k} H G x y = {!   !}
 ```
 
 ### Path-cosplit maps are closed under homotopy
