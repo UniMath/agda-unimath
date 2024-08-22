@@ -1,7 +1,7 @@
 # Finiteness of the type of connected components
 
 ```agda
-module univalent-combinatorics.finite-connected-components where
+module univalent-combinatorics.finitely-many-connected-components where
 ```
 
 <details><summary>Imports</summary>
@@ -56,20 +56,20 @@ if its [set truncation](foundation.set-truncations.md) is a
 ### Types with finitely many connected components
 
 ```agda
-has-finite-connected-components-Prop : {l : Level} → UU l → Prop l
-has-finite-connected-components-Prop A =
+has-finitely-many-connected-components-Prop : {l : Level} → UU l → Prop l
+has-finitely-many-connected-components-Prop A =
   is-finite-Prop (type-trunc-Set A)
 
-has-finite-connected-components : {l : Level} → UU l → UU l
-has-finite-connected-components A =
-  type-Prop (has-finite-connected-components-Prop A)
+has-finitely-many-connected-components : {l : Level} → UU l → UU l
+has-finitely-many-connected-components A =
+  type-Prop (has-finitely-many-connected-components-Prop A)
 
 number-of-connected-components :
-  {l : Level} {X : UU l} → has-finite-connected-components X → ℕ
+  {l : Level} {X : UU l} → has-finitely-many-connected-components X → ℕ
 number-of-connected-components H = number-of-elements-is-finite H
 
 mere-equiv-number-of-connected-components :
-  {l : Level} {X : UU l} (H : has-finite-connected-components X) →
+  {l : Level} {X : UU l} (H : has-finitely-many-connected-components X) →
   mere-equiv
     ( Fin (number-of-connected-components H))
     ( type-trunc-Set X)
@@ -98,33 +98,33 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
   where
 
-  has-finite-connected-components-equiv :
-    has-finite-connected-components A → has-finite-connected-components B
-  has-finite-connected-components-equiv =
+  has-finitely-many-connected-components-equiv :
+    has-finitely-many-connected-components A → has-finitely-many-connected-components B
+  has-finitely-many-connected-components-equiv =
     is-finite-equiv (equiv-trunc-Set e)
 
-  has-finite-connected-components-equiv' :
-    has-finite-connected-components B → has-finite-connected-components A
-  has-finite-connected-components-equiv' =
+  has-finitely-many-connected-components-equiv' :
+    has-finitely-many-connected-components B → has-finitely-many-connected-components A
+  has-finitely-many-connected-components-equiv' =
     is-finite-equiv' (equiv-trunc-Set e)
 ```
 
 ### Any 0-connected type has finitely many connected components
 
 ```agda
-has-finite-connected-components-is-0-connected :
+has-finitely-many-connected-components-is-0-connected :
   {l : Level} {A : UU l} →
-  is-0-connected A → has-finite-connected-components A
-has-finite-connected-components-is-0-connected = is-finite-is-contr
+  is-0-connected A → has-finitely-many-connected-components A
+has-finitely-many-connected-components-is-0-connected = is-finite-is-contr
 ```
 
 ### Sets with finitely many connected components are finite
 
 ```agda
-is-finite-has-finite-connected-components :
+is-finite-has-finitely-many-connected-components :
   {l : Level} {A : UU l} →
-  is-set A → has-finite-connected-components A → is-finite A
-is-finite-has-finite-connected-components H =
+  is-set A → has-finitely-many-connected-components A → is-finite A
+is-finite-has-finitely-many-connected-components H =
   is-finite-equiv' (equiv-unit-trunc-Set (_ , H))
 ```
 
@@ -136,19 +136,19 @@ finitely many connected components when the base is `0`-connected and its based
 connected components.
 
 ```agda
-has-finite-connected-components-Σ-is-0-connected :
+has-finitely-many-connected-components-Σ-is-0-connected :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-0-connected A →
-  ((a : A) → has-finite-connected-components (a ＝ a)) →
-  ((x : A) → has-finite-connected-components (B x)) →
-  has-finite-connected-components (Σ A B)
-has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
+  ((a : A) → has-finitely-many-connected-components (a ＝ a)) →
+  ((x : A) → has-finitely-many-connected-components (B x)) →
+  has-finitely-many-connected-components (Σ A B)
+has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
   apply-universal-property-trunc-Prop
     ( is-inhabited-is-0-connected C)
-    ( has-finite-connected-components-Prop (Σ A B))
+    ( has-finitely-many-connected-components-Prop (Σ A B))
     ( α)
   where
-  α : A → has-finite-connected-components (Σ A B)
+  α : A → has-finitely-many-connected-components (Σ A B)
   α a =
     is-finite-codomain
       ( K a)

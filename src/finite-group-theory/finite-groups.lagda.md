@@ -46,8 +46,8 @@ open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-finite-types
-open import univalent-combinatorics.finite-connected-components
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types

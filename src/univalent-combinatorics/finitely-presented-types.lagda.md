@@ -21,8 +21,8 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-choice
-open import univalent-combinatorics.finite-connected-components
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.standard-finite-types
 ```
 

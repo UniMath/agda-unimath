@@ -42,8 +42,8 @@ open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
-open import univalent-combinatorics.finite-connected-components
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.finitely-presented-types
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.image-of-maps
@@ -69,7 +69,7 @@ is-truncated-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
 is-truncated-π-finite-Prop zero-ℕ X = is-finite-Prop X
 is-truncated-π-finite-Prop (succ-ℕ k) X =
   product-Prop
-    ( has-finite-connected-components-Prop X)
+    ( has-finitely-many-connected-components-Prop X)
     ( Π-Prop X
       ( λ x → Π-Prop X (λ y → is-truncated-π-finite-Prop k (x ＝ y))))
 
@@ -82,7 +82,7 @@ is-truncated-π-finite k A =
 
 ```agda
 is-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
-is-π-finite-Prop zero-ℕ X = has-finite-connected-components-Prop X
+is-π-finite-Prop zero-ℕ X = has-finitely-many-connected-components-Prop X
 is-π-finite-Prop (succ-ℕ k) X =
   product-Prop
     ( is-π-finite-Prop zero-ℕ X)
@@ -108,11 +108,11 @@ is-π-finite-type-π-Finite :
   is-π-finite k (type-π-Finite {l} k A)
 is-π-finite-type-π-Finite k = pr2
 
-has-finite-connected-components-is-π-finite :
+has-finitely-many-connected-components-is-π-finite :
   {l : Level} (k : ℕ) {A : UU l} →
-  is-π-finite k A → has-finite-connected-components A
-has-finite-connected-components-is-π-finite zero-ℕ H = H
-has-finite-connected-components-is-π-finite (succ-ℕ k) H = pr1 H
+  is-π-finite k A → has-finitely-many-connected-components A
+has-finitely-many-connected-components-is-π-finite zero-ℕ H = H
+has-finitely-many-connected-components-is-π-finite (succ-ℕ k) H = pr1 H
 ```
 
 ## Properties
@@ -286,7 +286,8 @@ pr2 (π-finite-𝔽 k A) = is-π-finite-is-finite k (is-finite-type-𝔽 A)
 is-π-finite-UU-Fin :
   {l : Level} (k n : ℕ) → is-π-finite k (UU-Fin l n)
 is-π-finite-UU-Fin zero-ℕ n =
-  has-finite-connected-components-is-0-connected (is-0-connected-UU-Fin n)
+  has-finitely-many-connected-components-is-0-connected
+    ( is-0-connected-UU-Fin n)
 pr1 (is-π-finite-UU-Fin (succ-ℕ k) n) =
   is-π-finite-UU-Fin zero-ℕ n
 pr2 (is-π-finite-UU-Fin (succ-ℕ k) n) x y =
@@ -305,9 +306,9 @@ is-π-finite-is-π-finite-succ-ℕ :
   {l : Level} (k : ℕ) {A : UU l} →
   is-π-finite (succ-ℕ k) A → is-π-finite k A
 is-π-finite-is-π-finite-succ-ℕ zero-ℕ H =
-  has-finite-connected-components-is-π-finite 1 H
+  has-finitely-many-connected-components-is-π-finite 1 H
 pr1 (is-π-finite-is-π-finite-succ-ℕ (succ-ℕ k) H) =
-  has-finite-connected-components-is-π-finite (succ-ℕ (succ-ℕ k)) H
+  has-finitely-many-connected-components-is-π-finite (succ-ℕ (succ-ℕ k)) H
 pr2 (is-π-finite-is-π-finite-succ-ℕ (succ-ℕ k) H) x y =
   is-π-finite-is-π-finite-succ-ℕ k (pr2 H x y)
 ```
@@ -333,7 +334,7 @@ is-finite-is-π-finite :
 is-finite-is-π-finite k H K =
   is-finite-equiv'
     ( equiv-unit-trunc-Set (_ , H))
-    ( has-finite-connected-components-is-π-finite k K)
+    ( has-finitely-many-connected-components-is-π-finite k K)
 ```
 
 ### πₙ-finite n-truncated types are truncated πₙ-finite
@@ -395,13 +396,13 @@ pr2 (π-Finite-Π k A B) =
 ### Proposition 1.7
 
 ```agda
-has-finite-connected-components-Σ-is-0-connected' :
+has-finitely-many-connected-components-Σ-is-0-connected' :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-0-connected A → is-π-finite 1 A →
-  ((x : A) → has-finite-connected-components (B x)) →
-  has-finite-connected-components (Σ A B)
-has-finite-connected-components-Σ-is-0-connected' C H =
-  has-finite-connected-components-Σ-is-0-connected C (λ a → pr2 H a a)
+  ((x : A) → has-finitely-many-connected-components (B x)) →
+  has-finitely-many-connected-components (Σ A B)
+has-finitely-many-connected-components-Σ-is-0-connected' C H =
+  has-finitely-many-connected-components-Σ-is-0-connected C (λ a → pr2 H a a)
 ```
 
 ### Dependent sums of π-finite types
@@ -411,25 +412,25 @@ The dependent sum of a family of πₙ-finite types over a πₙ₊₁-finite ba
 
 ```agda
 abstract
-  has-finite-connected-components-Σ' :
+  has-finitely-many-connected-components-Σ' :
     {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
     (Fin k ≃ type-trunc-Set A) →
-    ((x y : A) → has-finite-connected-components (x ＝ y)) →
-    ((x : A) → has-finite-connected-components (B x)) →
-    has-finite-connected-components (Σ A B)
-  has-finite-connected-components-Σ' zero-ℕ e H K =
+    ((x y : A) → has-finitely-many-connected-components (x ＝ y)) →
+    ((x : A) → has-finitely-many-connected-components (B x)) →
+    has-finitely-many-connected-components (Σ A B)
+  has-finitely-many-connected-components-Σ' zero-ℕ e H K =
     is-π-finite-is-empty zero-ℕ
       ( is-empty-is-empty-trunc-Set (map-inv-equiv e) ∘ pr1)
-  has-finite-connected-components-Σ' (succ-ℕ k) {A} {B} e H K =
+  has-finitely-many-connected-components-Σ' (succ-ℕ k) {A} {B} e H K =
     apply-universal-property-trunc-Prop
       ( has-presentation-of-cardinality-has-cardinality-components
         ( succ-ℕ k)
         ( unit-trunc-Prop e))
-      ( has-finite-connected-components-Prop (Σ A B))
+      ( has-finitely-many-connected-components-Prop (Σ A B))
       ( α)
     where
     α : Σ (Fin (succ-ℕ k) → A) (λ f → is-equiv (unit-trunc-Set ∘ f)) →
-        has-finite-connected-components (Σ A B)
+        has-finitely-many-connected-components (Σ A B)
     α (f , Eηf) =
       is-finite-equiv
         ( equiv-trunc-Set g)
@@ -438,7 +439,7 @@ abstract
             ( Σ (im (f ∘ inl)) (B ∘ pr1))
             ( Σ (im (f ∘ inr)) (B ∘ pr1)))
           ( is-finite-coproduct
-            ( has-finite-connected-components-Σ' k
+            ( has-finitely-many-connected-components-Σ' k
               ( h)
               ( λ x y →
                 is-finite-equiv'
@@ -447,7 +448,7 @@ abstract
                       ( pr1 , is-emb-inclusion-subtype ( λ u → trunc-Prop _))))
                   ( H (pr1 x) (pr1 y)))
               ( λ x → K (pr1 x)))
-            ( has-finite-connected-components-Σ-is-0-connected'
+            ( has-finitely-many-connected-components-Σ-is-0-connected'
               ( is-0-connected-im-is-0-connected-domain
                 ( f ∘ inr)
                 ( is-0-connected-unit))
@@ -502,16 +503,17 @@ abstract
       h : Fin k ≃ type-trunc-Set (im (f ∘ inl))
       h = i , (is-equiv-is-emb-is-surjective is-surjective-i is-emb-i)
 
-has-finite-connected-components-Σ :
+has-finitely-many-connected-components-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-π-finite 1 A →
-  ((x : A) → has-finite-connected-components (B x)) →
-  has-finite-connected-components (Σ A B)
-has-finite-connected-components-Σ {A = A} {B} H K =
+  ((x : A) → has-finitely-many-connected-components (B x)) →
+  has-finitely-many-connected-components (Σ A B)
+has-finitely-many-connected-components-Σ {A = A} {B} H K =
   apply-universal-property-trunc-Prop
     ( pr1 H)
-    ( has-finite-connected-components-Prop (Σ A B))
-    ( λ (k , e) → has-finite-connected-components-Σ' k e (λ x y → pr2 H x y) K)
+    ( has-finitely-many-connected-components-Prop (Σ A B))
+    ( λ (k , e) →
+      has-finitely-many-connected-components-Σ' k e (λ x y → pr2 H x y) K)
 
 abstract
   is-π-finite-Σ :
@@ -519,12 +521,12 @@ abstract
     is-π-finite (succ-ℕ k) A → ((x : A) → is-π-finite k (B x)) →
     is-π-finite k (Σ A B)
   is-π-finite-Σ zero-ℕ =
-    has-finite-connected-components-Σ
+    has-finitely-many-connected-components-Σ
   pr1 (is-π-finite-Σ (succ-ℕ k) H K) =
-    has-finite-connected-components-Σ
+    has-finitely-many-connected-components-Σ
       ( is-π-finite-one-is-π-finite-succ-ℕ (succ-ℕ k) H)
       ( λ x →
-        has-finite-connected-components-is-π-finite (succ-ℕ k) (K x))
+        has-finitely-many-connected-components-is-π-finite (succ-ℕ k) (K x))
   pr2 (is-π-finite-Σ (succ-ℕ k) H K) (x , u) (y , v) =
     is-π-finite-equiv k
       ( equiv-pair-eq-Σ (x , u) (y , v))
