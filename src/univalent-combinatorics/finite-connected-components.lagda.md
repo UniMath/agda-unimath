@@ -130,9 +130,10 @@ is-finite-has-finite-connected-components H =
 
 ### Dependent sums of types with finite connectected components
 
-The total space of a family of types with finite connected components has finite
-connected components when the base is 0-connected and its based loop spaces have
-finite connected components.
+The total space of a family of types with finitely many connected components has
+finitely many connected components when the base is `0`-connected and its based
+[loop spaces](synthetic-homotopy-theory.loop-spaces.md) have finitely many
+connected components.
 
 ```agda
 has-finite-connected-components-Σ-is-0-connected :

@@ -592,11 +592,11 @@ such that the set-truncation of the codomain computes to the domain
   (A1 + A2) -----> ║B║₀,
 ```
 
-then the coproduct of the images of the restrictions of `f` along the left and
-right inclusion of the coproduct `A1 + A2` computes as `B`
+then `B` computes as the coproduct of the images of the restrictions of `f`
+along the left and right inclusion of the coproduct `A1 + A2`
 
 ```text
-  im (f ∘ inl) + im (f ∘ inr) ≃ B.
+  B ≃ im (f ∘ inl) + im (f ∘ inr).
 ```
 
 ```agda
@@ -637,19 +637,23 @@ module _
                             ( ap unit-trunc-Set r) ∙
                             ( H (inr y)))))))
 
-  is-surjective-map-is-coproduct-codomain :
-    is-surjective map-is-coproduct-codomain
-  is-surjective-map-is-coproduct-codomain b =
-    apply-universal-property-trunc-Prop
-      ( apply-effectiveness-unit-trunc-Set
-        ( inv (is-section-map-inv-equiv e (unit-trunc-Set b)) ∙ inv (H a)))
-      ( trunc-Prop (fiber map-is-coproduct-codomain b))
-      ( λ p →
-        unit-trunc-Prop
-          ( ( map-coproduct (map-unit-im (f ∘ inl)) (map-unit-im (f ∘ inr)) a) ,
-            ( triangle-is-coproduct-codomain a ∙ inv p)))
-    where
-    a = map-inv-equiv e (unit-trunc-Set b)
+  abstract
+    is-surjective-map-is-coproduct-codomain :
+      is-surjective map-is-coproduct-codomain
+    is-surjective-map-is-coproduct-codomain b =
+      apply-universal-property-trunc-Prop
+        ( apply-effectiveness-unit-trunc-Set
+          ( inv (is-section-map-inv-equiv e (unit-trunc-Set b)) ∙ inv (H a)))
+        ( trunc-Prop (fiber map-is-coproduct-codomain b))
+        ( λ p →
+          unit-trunc-Prop
+            ( ( map-coproduct
+                ( map-unit-im (f ∘ inl))
+                ( map-unit-im (f ∘ inr))
+                ( a)) ,
+              ( triangle-is-coproduct-codomain a ∙ inv p)))
+      where
+      a = map-inv-equiv e (unit-trunc-Set b)
 
   is-coproduct-codomain : (im (f ∘ inl) + im (f ∘ inr)) ≃ B
   pr1 is-coproduct-codomain = map-is-coproduct-codomain

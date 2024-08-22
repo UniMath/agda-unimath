@@ -200,9 +200,10 @@ module _
 ### The unit type is `0`-connected
 
 ```agda
-is-0-connected-unit : is-0-connected unit
-is-0-connected-unit =
-  is-contr-equiv' unit equiv-unit-trunc-unit-Set is-contr-unit
+abstract
+  is-0-connected-unit : is-0-connected unit
+  is-0-connected-unit =
+    is-contr-equiv' unit equiv-unit-trunc-unit-Set is-contr-unit
 ```
 
 ### A contractible type is `0`-connected
@@ -249,8 +250,9 @@ abstract
                     ( map-trunc-Set f (unit-trunc-Set a)))
                   ( λ where refl → refl)))))
 
-is-0-connected-im-point' :
-  {l1 : Level} {A : UU l1} (f : unit → A) → is-0-connected (im f)
-is-0-connected-im-point' f =
-  is-0-connected-im-is-0-connected-domain f is-0-connected-unit
+abstract
+  is-0-connected-im-point' :
+    {l1 : Level} {A : UU l1} (f : unit → A) → is-0-connected (im f)
+  is-0-connected-im-point' f =
+    is-0-connected-im-is-0-connected-domain f is-0-connected-unit
 ```
