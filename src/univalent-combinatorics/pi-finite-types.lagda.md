@@ -26,6 +26,7 @@ open import foundation.identity-types
 open import foundation.maybe
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.set-presented-types
 open import foundation.set-truncations
 open import foundation.sets
 open import foundation.subtypes
@@ -423,7 +424,7 @@ abstract
       ( is-empty-is-empty-trunc-Set (map-inv-equiv e) ∘ pr1)
   has-finitely-many-connected-components-Σ' (succ-ℕ k) {A} {B} e H K =
     apply-universal-property-trunc-Prop
-      ( has-presentation-of-cardinality-has-cardinality-components
+      ( has-presentation-of-cardinality-has-cardinality-connected-components
         ( succ-ℕ k)
         ( unit-trunc-Prop e))
       ( has-finitely-many-connected-components-Prop (Σ A B))

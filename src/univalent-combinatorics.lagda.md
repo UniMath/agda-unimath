@@ -61,6 +61,7 @@ open import univalent-combinatorics.fibers-of-maps public
 open import univalent-combinatorics.finite-choice public
 open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.finite-types public
+open import univalent-combinatorics.finitely-many-connected-components public
 open import univalent-combinatorics.finitely-presented-types public
 open import univalent-combinatorics.function-types public
 open import univalent-combinatorics.image-of-maps public

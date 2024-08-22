@@ -80,13 +80,13 @@ mere-equiv-number-of-connected-components H =
 ### Types with a finite type of connected components of a specified cardinality
 
 ```agda
-has-cardinality-components-Prop : {l : Level} (k : ℕ) → UU l → Prop l
-has-cardinality-components-Prop k A =
+has-cardinality-connected-components-Prop : {l : Level} (k : ℕ) → UU l → Prop l
+has-cardinality-connected-components-Prop k A =
   has-cardinality-Prop k (type-trunc-Set A)
 
-has-cardinality-components : {l : Level} (k : ℕ) → UU l → UU l
-has-cardinality-components k A =
-  type-Prop (has-cardinality-components-Prop k A)
+has-cardinality-connected-components : {l : Level} (k : ℕ) → UU l → UU l
+has-cardinality-connected-components k A =
+  type-Prop (has-cardinality-connected-components-Prop k A)
 ```
 
 ## Properties
