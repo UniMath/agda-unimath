@@ -86,21 +86,24 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  refl-mere-htpy : (f : (x : A) → B x) → mere-htpy f f
-  refl-mere-htpy f = unit-trunc-Prop refl-htpy
+  abstract
+    refl-mere-htpy : (f : (x : A) → B x) → mere-htpy f f
+    refl-mere-htpy f = unit-trunc-Prop refl-htpy
 
-  transitive-mere-htpy :
-    is-transitive (mere-htpy {B = B})
-  transitive-mere-htpy f g h r s =
-    apply-twice-universal-property-trunc-Prop r s
-      ( mere-htpy-Prop f h)
-      ( λ H K → unit-trunc-Prop (K ∙h H))
+  abstract
+    transitive-mere-htpy :
+      is-transitive (mere-htpy {B = B})
+    transitive-mere-htpy f g h r s =
+      apply-twice-universal-property-trunc-Prop r s
+        ( mere-htpy-Prop f h)
+        ( λ H K → unit-trunc-Prop (K ∙h H))
 
-  symmetric-mere-htpy : is-symmetric (mere-htpy {B = B})
-  symmetric-mere-htpy f g r =
-    apply-universal-property-trunc-Prop r
-      ( mere-htpy-Prop g f)
-      ( λ H → unit-trunc-Prop (inv-htpy H))
+  abstract
+    symmetric-mere-htpy : is-symmetric (mere-htpy {B = B})
+    symmetric-mere-htpy f g r =
+      apply-universal-property-trunc-Prop r
+        ( mere-htpy-Prop g f)
+        ( λ H → unit-trunc-Prop (inv-htpy H))
 
   mere-htpy-Equivalence-Relation :
     equivalence-relation (l1 ⊔ l2) ((x : A) → B x)
@@ -117,11 +120,13 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x)
   where
 
-  mere-eq-mere-htpy : mere-htpy f g → mere-eq f g
-  mere-eq-mere-htpy = map-trunc-Prop eq-htpy
+  abstract
+    mere-eq-mere-htpy : mere-htpy f g → mere-eq f g
+    mere-eq-mere-htpy = map-trunc-Prop eq-htpy
 
-  mere-htpy-mere-eq : mere-eq f g → mere-htpy f g
-  mere-htpy-mere-eq = map-trunc-Prop htpy-eq
+  abstract
+    mere-htpy-mere-eq : mere-eq f g → mere-htpy f g
+    mere-htpy-mere-eq = map-trunc-Prop htpy-eq
 
   equiv-mere-htpy-mere-eq : mere-eq f g ≃ mere-htpy f g
   equiv-mere-htpy-mere-eq = equiv-trunc-Prop equiv-funext
@@ -146,18 +151,19 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x)
   where
 
-  mere-htpy-mere-htpy-component :
-    (g h : mere-htpy-component f) →
-    mere-htpy (map-mere-htpy-component g) (map-mere-htpy-component h)
-  mere-htpy-mere-htpy-component g h =
-    transitive-mere-htpy
-      ( map-mere-htpy-component g)
-      ( f)
-      ( map-mere-htpy-component h)
-      ( mere-htpy-base-function-mere-htpy-component h)
-      ( symmetric-mere-htpy f
+  abstract
+    mere-htpy-mere-htpy-component :
+      (g h : mere-htpy-component f) →
+      mere-htpy (map-mere-htpy-component g) (map-mere-htpy-component h)
+    mere-htpy-mere-htpy-component g h =
+      transitive-mere-htpy
         ( map-mere-htpy-component g)
-        ( mere-htpy-base-function-mere-htpy-component g))
+        ( f)
+        ( map-mere-htpy-component h)
+        ( mere-htpy-base-function-mere-htpy-component h)
+        ( symmetric-mere-htpy f
+          ( map-mere-htpy-component g)
+          ( mere-htpy-base-function-mere-htpy-component g))
 ```
 
 ### The mere homotopy component of any function is connected
@@ -167,11 +173,13 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x)
   where
 
-  is-0-connected-mere-htpy-component : is-0-connected (mere-htpy-component f)
-  is-0-connected-mere-htpy-component =
-    is-0-connected-mere-eq
-      ( base-function-mere-htpy-component f)
-      ( λ g → {!!})
+  abstract
+    is-0-connected-mere-htpy-component : is-0-connected (mere-htpy-component f)
+    is-0-connected-mere-htpy-component =
+      is-0-connected-mere-eq
+        ( base-function-mere-htpy-component f)
+        ( λ (g , H) →
+          {!!})
 ```
 
 ### The mere homotopy component of a function is an ∞-group

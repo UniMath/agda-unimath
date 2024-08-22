@@ -15,8 +15,10 @@ open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-systems
+open import foundation-core.identity-types
 open import foundation.logical-equivalences
 open import foundation-core.mere-equality
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.subtypes
@@ -91,6 +93,20 @@ module _
   is-mere-identity-system-subtype =
     {l : Level} (Q : (x : A) → is-in-subtype P x → Prop l) →
     is-equiv (ev-element-subtype Q)
+
+  ind-mere-identity-system-subtype :
+    is-mere-identity-system-subtype →
+    {l : Level} (Q : (x : A) → is-in-subtype P x → Prop l) →
+    type-Prop (Q a ρ) → (x : A) (p : is-in-subtype P x) → type-Prop (Q x p)
+  ind-mere-identity-system-subtype H Q =
+    map-inv-is-equiv (H Q)
+
+  rec-mere-identity-system-subtype :
+    is-mere-identity-system-subtype →
+    {l : Level} (Q : subtype l A) →
+    is-in-subtype Q a → (x : A) → is-in-subtype P x → is-in-subtype Q x
+  rec-mere-identity-system-subtype H Q =
+    ind-mere-identity-system-subtype H (λ x _ → Q x)
 ```
 
 ### The predicate of being a `0`-connected subtype
@@ -204,6 +220,44 @@ module _
         ( is-torsorial-extension-trunc-set-subtype-is-mere-identity-system)
 ```
 
+### Mere equality is a mere identity system
+
+```agda
+module _
+  {l1 : Level} {A : UU l1} (a : A)
+  where
+
+  abstract
+    is-mere-identity-system-mere-eq :
+      is-mere-identity-system-subtype (mere-eq-Prop a) (refl-mere-eq a)
+    is-mere-identity-system-mere-eq P =
+      is-equiv-has-converse-is-prop
+        ( is-prop-Π (λ x → is-prop-Π (is-prop-is-in-subtype (P x))))
+        ( is-prop-is-in-subtype (P a) (refl-mere-eq a))
+        ( λ p x → ind-trunc-Prop (P x) (λ where refl → p))
+
+  abstract
+    ind-mere-identity-system-mere-eq :
+      {l : Level} (P : (x : A) → mere-eq a x → Prop l) →
+      (p : type-Prop (P a (refl-mere-eq a))) →
+      (x : A) (r : mere-eq a x) → type-Prop (P x r)
+    ind-mere-identity-system-mere-eq =
+      ind-mere-identity-system-subtype
+        ( mere-eq-Prop a)
+        ( refl-mere-eq a)
+        ( is-mere-identity-system-mere-eq)
+
+  abstract
+    rec-mere-identity-system-mere-eq :
+      {l : Level} (P : subtype l A) →
+      (p : is-in-subtype P a) (x : A) (r : mere-eq a x) → is-in-subtype P x
+    rec-mere-identity-system-mere-eq =
+      rec-mere-identity-system-subtype
+        ( mere-eq-Prop a)
+        ( refl-mere-eq a)
+        ( is-mere-identity-system-mere-eq)
+```
+
 ### Any unary mere identity system has the same elements as the subtype of elements merely equal to the base point
 
 ```agda
@@ -214,7 +268,8 @@ module _
 
   has-same-elements-mere-eq-is-mere-identity-system-subtype :
     has-same-elements-subtype (mere-eq-Prop a) P
-  has-same-elements-mere-eq-is-mere-identity-system-subtype x =
-    iff-equiv
-      {! is-fiberwise-equiv-is-equiv-tot!}
+  pr1 (has-same-elements-mere-eq-is-mere-identity-system-subtype x) =
+    rec-mere-identity-system-mere-eq a P ρ x
+  pr2 (has-same-elements-mere-eq-is-mere-identity-system-subtype x) =
+    rec-mere-identity-system-subtype P ρ H (mere-eq-Prop a) (refl-mere-eq a) x
 ```
