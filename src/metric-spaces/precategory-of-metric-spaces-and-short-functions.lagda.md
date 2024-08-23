@@ -12,13 +12,21 @@ open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
+open import foundation.propositions
+open import foundation.torsorial-type-families
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import metric-spaces.functions-metric-spaces
+open import metric-spaces.isometric-equivalences-metric-spaces
 open import metric-spaces.isometry-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.precategory-of-metric-spaces-and-isometries
@@ -134,4 +142,138 @@ module _
           ( map-short-function-Metric-Space A B f x)
           ( map-short-function-Metric-Space A B f y)
           ( H)))
+```
+
+### A short map between metric spaces is an isomorphism if and only if its carrier map is an isometric equivalence
+
+```agda
+module _
+  {l : Level} (A B : Metric-Space l) (f : short-function-Metric-Space A B)
+  where
+
+  is-isometric-is-equiv-is-iso-precategory-short-function-Metric-Space :
+    is-iso-Precategory precategory-short-function-Metric-Space {A} {B} f →
+    is-isometric-is-equiv-Metric-Space
+      ( A)
+      ( B)
+      ( map-short-function-Metric-Space A B f)
+  is-isometric-is-equiv-is-iso-precategory-short-function-Metric-Space H =
+    ( is-equiv-is-iso-precategory-short-function-Metric-Space A B f H) ,
+    ( is-isometry-is-iso-precategory-short-function-Metric-Space A B f H)
+
+  is-iso-is-isometric-is-equiv-precategory-short-function-Metric-Space :
+    is-isometric-is-equiv-Metric-Space
+      ( A)
+      ( B)
+      ( map-short-function-Metric-Space A B f) →
+    is-iso-Precategory precategory-short-function-Metric-Space {A} {B} f
+  is-iso-is-isometric-is-equiv-precategory-short-function-Metric-Space (E , I) =
+    ( short-inverse) ,
+    ( ( eq-short-function-Metric-Space
+      ( B)
+      ( B)
+      ( comp-short-function-Metric-Space
+        ( B)
+        ( A)
+        ( B)
+        ( f)
+        ( short-inverse))
+      ( short-id-Metric-Space B)
+      ( is-section-map-inv-is-equiv E)) ,
+      ( eq-short-function-Metric-Space
+        ( A)
+        ( A)
+        ( comp-short-function-Metric-Space
+          ( A)
+          ( B)
+          ( A)
+          ( short-inverse)
+          ( f))
+        ( short-id-Metric-Space A)
+        ( is-retraction-map-inv-is-equiv E)))
+      where
+
+      short-inverse : short-function-Metric-Space B A
+      short-inverse =
+        map-inv-is-equiv E ,
+        is-short-is-isometry-function-Metric-Space
+          ( B)
+          ( A)
+          ( map-inv-is-equiv E)
+          ( is-isometry-map-inv-is-equiv-Metric-Space
+            ( A)
+            ( B)
+            ( map-short-function-Metric-Space A B f)
+            ( I)
+            ( E))
+```
+
+### A function between metric spaces is a short isomorphism if and only if it an isometric equivalence
+
+```agda
+module _
+  {l : Level} (A B : Metric-Space l)
+  where
+
+  equiv-is-isometric-is-equiv-is-iso-short-function-Metric-Space :
+    (f : function-carrier-type-Metric-Space A B) →
+    Σ ( is-short-function-Metric-Space A B f)
+      ( λ s →
+        is-iso-Precategory precategory-short-function-Metric-Space
+          { A}
+          { B}
+          ( f , s)) ≃
+    is-isometric-is-equiv-Metric-Space A B f
+  equiv-is-isometric-is-equiv-is-iso-short-function-Metric-Space f =
+    equiv-iff
+      ( Σ-Prop
+        ( is-short-prop-function-Metric-Space A B f)
+        ( λ s →
+          is-iso-prop-Precategory precategory-short-function-Metric-Space
+            { A}
+            { B}
+            ( f , s)))
+      ( is-isometric-is-equiv-prop-Metric-Space A B f)
+      ( λ (s , I) →
+        is-isometric-is-equiv-is-iso-precategory-short-function-Metric-Space
+          ( A)
+          ( B)
+          ( f , s)
+          ( I))
+      ( λ I →
+        is-short-is-isometry-function-Metric-Space A B f (pr2 I) ,
+        is-iso-is-isometric-is-equiv-precategory-short-function-Metric-Space
+          ( A)
+          ( B)
+          ( f , is-short-is-isometry-function-Metric-Space A B f (pr2 I))
+          ( I))
+
+  equiv-isometric-is-equiv-iso-precategory-short-function-Metric-Space :
+    iso-Precategory precategory-short-function-Metric-Space A B ≃
+    isometric-is-equiv-Metric-Space A B
+  equiv-isometric-is-equiv-iso-precategory-short-function-Metric-Space =
+    equiv-tot
+      equiv-is-isometric-is-equiv-is-iso-short-function-Metric-Space ∘e
+    associative-Σ
+      ( function-carrier-type-Metric-Space A B)
+      ( is-short-function-Metric-Space A B)
+      ( is-iso-Precategory precategory-short-function-Metric-Space {A} {B})
+```
+
+### Isomorphism in the precategory of metric spaces and short maps is torsorial
+
+```agda
+module _
+  {l : Level} (A : Metric-Space l)
+  where
+
+  is-torsorial-iso-precategory-short-function-Metric-Space :
+    is-torsorial (iso-Precategory precategory-short-function-Metric-Space A)
+  is-torsorial-iso-precategory-short-function-Metric-Space =
+    is-contr-equiv
+      ( Σ (Metric-Space l) (isometric-is-equiv-Metric-Space A))
+      ( equiv-tot
+        ( equiv-isometric-is-equiv-iso-precategory-short-function-Metric-Space
+          ( A)))
+      ( is-torsorial-isometric-is-equiv-Metric-Space A)
 ```

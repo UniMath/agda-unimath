@@ -115,12 +115,7 @@ module _
   is-iso-is-equiv-isometry-function-Metric-Space :
     is-iso-Precategory precategory-isometry-Metric-Space {A} {B} f
   is-iso-is-equiv-isometry-function-Metric-Space =
-    ( isometry-inv-is-equiv-is-isometry-function-Metric-Space
-      ( A)
-      ( B)
-      ( map-isometry-function-Metric-Space A B f)
-      ( is-isometry-map-isometry-function-Metric-Space A B f)
-      ( E)) ,
+    ( isometry-inverse) ,
     ( ( eq-isometry-function-Metric-Space
         ( B)
         ( B)
@@ -129,12 +124,7 @@ module _
           ( A)
           ( B)
           ( f)
-          ( isometry-inv-is-equiv-is-isometry-function-Metric-Space
-            ( A)
-            ( B)
-            ( map-isometry-function-Metric-Space A B f)
-            ( is-isometry-map-isometry-function-Metric-Space A B f)
-            ( E)))
+          ( isometry-inverse))
         ( isometry-id-Metric-Space B)
         ( is-section-map-inv-is-equiv E)) ,
       ( eq-isometry-function-Metric-Space
@@ -144,15 +134,20 @@ module _
           ( A)
           ( B)
           ( A)
-          ( isometry-inv-is-equiv-is-isometry-function-Metric-Space
-            ( A)
-            ( B)
-            ( map-isometry-function-Metric-Space A B f)
-            ( is-isometry-map-isometry-function-Metric-Space A B f)
-            ( E))
+          ( isometry-inverse)
           ( f)))
         ( isometry-id-Metric-Space A)
         ( is-retraction-map-inv-is-equiv E))
+    where
+
+    isometry-inverse : isometry-function-Metric-Space B A
+    isometry-inverse =
+      isometry-inv-is-equiv-is-isometry-function-Metric-Space
+        ( A)
+        ( B)
+        ( map-isometry-function-Metric-Space A B f)
+        ( is-isometry-map-isometry-function-Metric-Space A B f)
+        ( E)
 ```
 
 ### Isomorphisms in the precategory of metric spaces and isometries are isometric invertible maps
