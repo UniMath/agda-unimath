@@ -15,6 +15,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.images
 open import foundation.inhabited-types
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -26,6 +27,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
+open import foundation.weakly-constant-maps
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
@@ -38,8 +40,8 @@ open import foundation-core.homotopies
 ## Idea
 
 A map `f : A → B` is said to be
-{{#concept "null-homotopic" Disambiguation="map of types" Agda=null-htpy}}, or
-_constant_, if there is an element `y : B` such for every `x : A` we have
+{{#concept "null-homotopic" Disambiguation="map of types" Agda=is-null-homotopic}},
+or _constant_, if there is an element `y : B` such for every `x : A` we have
 `f x ＝ y`. In other words, `f` is null-homotopic if it is
 [homotopic](foundation-core.homotopies.md) to a
 [constant](foundation-core.constant-maps.md) function.
@@ -49,19 +51,19 @@ _constant_, if there is an element `y : B` such for every `x : A` we have
 ### The type of null-homotopies of a map
 
 ```agda
-null-htpy :
+is-null-homotopic :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-null-htpy {A = A} {B} f = Σ B (λ y → (x : A) → f x ＝ y)
+is-null-homotopic {A = A} {B} f = Σ B (λ y → (x : A) → f x ＝ y)
 
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : null-htpy f)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-null-homotopic f)
   where
 
-  center-null-htpy : B
-  center-null-htpy = pr1 H
+  center-is-null-homotopic : B
+  center-is-null-homotopic = pr1 H
 
-  contraction-null-htpy : (x : A) → f x ＝ center-null-htpy
-  contraction-null-htpy = pr2 H
+  contraction-is-null-homotopic : (x : A) → f x ＝ center-is-null-homotopic
+  contraction-is-null-homotopic = pr2 H
 ```
 
 ## Properties
@@ -87,47 +89,54 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
-  coherence-htpy-null-htpy :
-    (H K : null-htpy f) (p : center-null-htpy H ＝ center-null-htpy K) →
+  coherence-htpy-is-null-homotopic :
+    (H K : is-null-homotopic f)
+    (p : center-is-null-homotopic H ＝ center-is-null-homotopic K) →
     UU (l1 ⊔ l2)
-  coherence-htpy-null-htpy H K p =
+  coherence-htpy-is-null-homotopic H K p =
     (x : A) →
     coherence-triangle-identifications
-      ( contraction-null-htpy K x)
+      ( contraction-is-null-homotopic K x)
       ( p)
-      ( contraction-null-htpy H x)
+      ( contraction-is-null-homotopic H x)
 
-  htpy-null-htpy : (H K : null-htpy f) → UU (l1 ⊔ l2)
-  htpy-null-htpy H K =
-    Σ ( center-null-htpy H ＝ center-null-htpy K)
-      ( coherence-htpy-null-htpy H K)
+  htpy-is-null-homotopic : (H K : is-null-homotopic f) → UU (l1 ⊔ l2)
+  htpy-is-null-homotopic H K =
+    Σ ( center-is-null-homotopic H ＝ center-is-null-homotopic K)
+      ( coherence-htpy-is-null-homotopic H K)
 
-  refl-htpy-null-htpy : (H : null-htpy f) → htpy-null-htpy H H
-  refl-htpy-null-htpy H = (refl , inv-htpy-right-unit-htpy)
+  refl-htpy-is-null-homotopic :
+    (H : is-null-homotopic f) → htpy-is-null-homotopic H H
+  refl-htpy-is-null-homotopic H = (refl , inv-htpy-right-unit-htpy)
 
-  htpy-eq-null-htpy : (H K : null-htpy f) → H ＝ K → htpy-null-htpy H K
-  htpy-eq-null-htpy H .H refl = refl-htpy-null-htpy H
+  htpy-eq-is-null-homotopic :
+    (H K : is-null-homotopic f) → H ＝ K → htpy-is-null-homotopic H K
+  htpy-eq-is-null-homotopic H .H refl = refl-htpy-is-null-homotopic H
 
-  is-torsorial-htpy-null-htpy :
-    (H : null-htpy f) → is-torsorial (htpy-null-htpy H)
-  is-torsorial-htpy-null-htpy H =
+  is-torsorial-htpy-is-null-homotopic :
+    (H : is-null-homotopic f) → is-torsorial (htpy-is-null-homotopic H)
+  is-torsorial-htpy-is-null-homotopic H =
     is-torsorial-Eq-structure
-      ( is-torsorial-Id (center-null-htpy H))
-      ( center-null-htpy H , refl)
-      ( is-torsorial-htpy' (contraction-null-htpy H ∙h refl-htpy))
+      ( is-torsorial-Id (center-is-null-homotopic H))
+      ( center-is-null-homotopic H , refl)
+      ( is-torsorial-htpy' (contraction-is-null-homotopic H ∙h refl-htpy))
 
-  is-equiv-htpy-eq-null-htpy :
-    (H K : null-htpy f) → is-equiv (htpy-eq-null-htpy H K)
-  is-equiv-htpy-eq-null-htpy H =
-    fundamental-theorem-id (is-torsorial-htpy-null-htpy H) (htpy-eq-null-htpy H)
+  is-equiv-htpy-eq-is-null-homotopic :
+    (H K : is-null-homotopic f) → is-equiv (htpy-eq-is-null-homotopic H K)
+  is-equiv-htpy-eq-is-null-homotopic H =
+    fundamental-theorem-id
+      ( is-torsorial-htpy-is-null-homotopic H)
+      ( htpy-eq-is-null-homotopic H)
 
-  extensionality-htpy-null-htpy :
-    (H K : null-htpy f) → (H ＝ K) ≃ htpy-null-htpy H K
-  extensionality-htpy-null-htpy H K =
-    ( htpy-eq-null-htpy H K , is-equiv-htpy-eq-null-htpy H K)
+  extensionality-htpy-is-null-homotopic :
+    (H K : is-null-homotopic f) → (H ＝ K) ≃ htpy-is-null-homotopic H K
+  extensionality-htpy-is-null-homotopic H K =
+    ( htpy-eq-is-null-homotopic H K , is-equiv-htpy-eq-is-null-homotopic H K)
 
-  eq-htpy-null-htpy : (H K : null-htpy f) → htpy-null-htpy H K → H ＝ K
-  eq-htpy-null-htpy H K = map-inv-is-equiv (is-equiv-htpy-eq-null-htpy H K)
+  eq-htpy-is-null-homotopic :
+    (H K : is-null-homotopic f) → htpy-is-null-homotopic H K → H ＝ K
+  eq-htpy-is-null-homotopic H K =
+    map-inv-is-equiv (is-equiv-htpy-eq-is-null-homotopic H K)
 ```
 
 ### If the domain is empty the type of null-homotopies is equivalent to elements of `B`
@@ -137,8 +146,8 @@ module _
   {l : Level} {B : UU l} {f : empty → B}
   where
 
-  compute-null-htpy-empty-domain : null-htpy f ≃ B
-  compute-null-htpy-empty-domain =
+  compute-is-null-homotopic-empty-domain : is-null-homotopic f ≃ B
+  compute-is-null-homotopic-empty-domain =
     right-unit-law-Σ-is-contr
       ( λ y → dependent-universal-property-empty' (λ x → f x ＝ y))
 ```
@@ -150,10 +159,12 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
-  eq-center-null-htpy-has-element-domain :
-    A → (H K : null-htpy f) → center-null-htpy H ＝ center-null-htpy K
-  eq-center-null-htpy-has-element-domain a H K =
-    inv (contraction-null-htpy H a) ∙ contraction-null-htpy K a
+  eq-center-is-null-homotopic-has-element-domain :
+    A →
+    (H K : is-null-homotopic f) →
+    center-is-null-homotopic H ＝ center-is-null-homotopic K
+  eq-center-is-null-homotopic-has-element-domain a H K =
+    inv (contraction-is-null-homotopic H a) ∙ contraction-is-null-homotopic K a
 ```
 
 ### If the codomain is a set and the domain has an element then being null-homotopic is a property
@@ -165,17 +176,18 @@ module _
   {f : A → B}
   where
 
-  all-elements-equal-null-htpy-has-element-domain-is-set-codomain :
-    all-elements-equal (null-htpy f)
-  all-elements-equal-null-htpy-has-element-domain-is-set-codomain H K =
-    eq-htpy-null-htpy H K
-      ( ( eq-center-null-htpy-has-element-domain a H K) ,
-        ( λ x → eq-is-prop (is-set-B (f x) (center-null-htpy K))))
+  all-elements-equal-is-null-homotopic-has-element-domain-is-set-codomain :
+    all-elements-equal (is-null-homotopic f)
+  all-elements-equal-is-null-homotopic-has-element-domain-is-set-codomain H K =
+    eq-htpy-is-null-homotopic H K
+      ( ( eq-center-is-null-homotopic-has-element-domain a H K) ,
+        ( λ x → eq-is-prop (is-set-B (f x) (center-is-null-homotopic K))))
 
-  is-prop-null-htpy-has-element-domain-is-set-codomain : is-prop (null-htpy f)
-  is-prop-null-htpy-has-element-domain-is-set-codomain =
+  is-prop-is-null-homotopic-has-element-domain-is-set-codomain :
+    is-prop (is-null-homotopic f)
+  is-prop-is-null-homotopic-has-element-domain-is-set-codomain =
     is-prop-all-elements-equal
-      ( all-elements-equal-null-htpy-has-element-domain-is-set-codomain)
+      ( all-elements-equal-is-null-homotopic-has-element-domain-is-set-codomain)
 ```
 
 ### If the codomain is a set and the domain is inhabited then being null-homotopic is a property
@@ -187,25 +199,30 @@ module _
   {f : A → B}
   where
 
-  eq-center-null-htpy-is-inhabited-domain-is-set-codomain :
-    (H K : null-htpy f) → center-null-htpy H ＝ center-null-htpy K
-  eq-center-null-htpy-is-inhabited-domain-is-set-codomain H K =
+  eq-center-is-null-homotopic-is-inhabited-domain-is-set-codomain :
+    (H K : is-null-homotopic f) →
+    center-is-null-homotopic H ＝ center-is-null-homotopic K
+  eq-center-is-null-homotopic-is-inhabited-domain-is-set-codomain H K =
     rec-trunc-Prop
-      ( Id-Prop (B , is-set-B) (center-null-htpy H) (center-null-htpy K))
-      ( λ x → eq-center-null-htpy-has-element-domain x H K)
+      ( Id-Prop
+        ( B , is-set-B)
+        ( center-is-null-homotopic H)
+        ( center-is-null-homotopic K))
+      ( λ x → eq-center-is-null-homotopic-has-element-domain x H K)
       ( a)
 
-  all-elements-equal-null-htpy-is-inhabited-domain-is-set-codomain :
-    all-elements-equal (null-htpy f)
-  all-elements-equal-null-htpy-is-inhabited-domain-is-set-codomain H K =
-    eq-htpy-null-htpy H K
-      ( ( eq-center-null-htpy-is-inhabited-domain-is-set-codomain H K) ,
-        ( λ x → eq-is-prop (is-set-B (f x) (center-null-htpy K))))
+  all-elements-equal-is-null-homotopic-is-inhabited-domain-is-set-codomain :
+    all-elements-equal (is-null-homotopic f)
+  all-elements-equal-is-null-homotopic-is-inhabited-domain-is-set-codomain H K =
+    eq-htpy-is-null-homotopic H K
+      ( ( eq-center-is-null-homotopic-is-inhabited-domain-is-set-codomain H K) ,
+        ( λ x → eq-is-prop (is-set-B (f x) (center-is-null-homotopic K))))
 
-  is-prop-null-htpy-is-inhabited-domain-is-set-codomain : is-prop (null-htpy f)
-  is-prop-null-htpy-is-inhabited-domain-is-set-codomain =
+  is-prop-is-null-homotopic-is-inhabited-domain-is-set-codomain :
+    is-prop (is-null-homotopic f)
+  is-prop-is-null-homotopic-is-inhabited-domain-is-set-codomain =
     is-prop-all-elements-equal
-      ( all-elements-equal-null-htpy-is-inhabited-domain-is-set-codomain)
+      ( all-elements-equal-is-null-homotopic-is-inhabited-domain-is-set-codomain)
 ```
 
 ### Null-homotopic maps from `A` to `B` are in correspondence with elements of `B`
@@ -215,14 +232,30 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  compute-null-homotopic-map : Σ (A → B) (null-htpy) ≃ B
+  compute-null-homotopic-map : Σ (A → B) (is-null-homotopic) ≃ B
   compute-null-homotopic-map =
     equivalence-reasoning
-      Σ (A → B) (null-htpy)
+      Σ (A → B) (is-null-homotopic)
       ≃ Σ B (λ b → Σ (A → B) (λ f → f ~ const A b)) by equiv-left-swap-Σ
       ≃ B by right-unit-law-Σ-is-contr (λ b → is-torsorial-htpy' (const A b))
+```
+
+### Null-homotopic maps are weakly constant
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-weakly-constant-is-null-homotopic :
+    is-null-homotopic f → is-weakly-constant f
+  is-weakly-constant-is-null-homotopic (b , H) x y = H x ∙ inv (H y)
 ```
 
 ## See also
 
 - [Weakly constant maps](foundation.weakly-constant-maps.md)
+
+## External links
+
+- [null homotopy](https://ncatlab.org/nlab/show/null+homotopy) at $n$Lab
