@@ -1,7 +1,6 @@
 # Retractions
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
 module foundation.retractions where
 
 open import foundation-core.retractions public
@@ -18,6 +17,7 @@ open import foundation.whiskering-homotopies-composition
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation.action-on-identifications-functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -73,12 +73,22 @@ is-retraction-retraction-left-map-triangle f g h H (l , L) (k , K) =
         ( retraction-left-map-triangle f g h H (l , L) (k , K))))
     ( k , K)
     ( k ·l L)
-    {!   !}
-    -- ( ( inv-htpy-assoc-htpy
-    --     ( inv-htpy ((k ∘ l) ·l H))
-    --     ( (k ∘ l) ·l H)
-    --     ( (k ·l (L ·r h)) ∙h K)) ∙h
-    --   ( ap-concat-htpy' ((k ·l (L ·r h)) ∙h K) (left-inv-htpy ((k ∘ l) ·l H))))
+    ( homotopy-reasoning
+      (((k ∘ l) ·l inv-htpy H) ∙h ((k ∘ l) ·l H ∙h (k ·l (L ·r h) ∙h K)))
+      ~ (inv-htpy ((k ∘ l) ·l H) ∙h ((k ∘ l) ·l H ∙h (k ·l (L ·r h) ∙h K)))
+      by
+        ap-concat-htpy'
+          ( (k ∘ l) ·l H ∙h (k ·l (L ·r h) ∙h K))
+          ( left-whisker-inv-htpy (k ∘ l) H)
+      ~ ((inv-htpy ((k ∘ l) ·l H) ∙h (k ∘ l) ·l H) ∙h (k ·l (L ·r h) ∙h K))
+      by
+      ( inv-htpy-assoc-htpy
+        ( inv-htpy ((k ∘ l) ·l H))
+        ( (k ∘ l) ·l H)
+        ( (k ·l (L ·r h)) ∙h K))
+      ~ (k ·l L ·r h ∙h is-retraction-map-retraction h (k , K))
+      by
+        ap-concat-htpy' ((k ·l (L ·r h)) ∙h K) (left-inv-htpy ((k ∘ l) ·l H)))
 
 retraction-right-factor-retract-of-retraction-left-factor :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
