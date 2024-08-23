@@ -165,59 +165,6 @@ is-trunc-map-is-mere-path-cosplit-is-trunc-codomain k is-trunc-B is-cosplit-f =
     ( is-trunc-B)
 ```
 
-### Mere path cosplit maps are preserved under equivalences of arrows
-
-```agda
-module _
-  {l1 l2 : Level}
-  where
-
-  -- is-mere-path-cosplit-equiv-arrow :
-  --   {k : 𝕋} {A : UU l1} {B : UU l2} {f g : A → B} → equiv-arrow f g →
-  --   is-mere-path-cosplit k f →
-  --   is-mere-path-cosplit k g
-  -- is-mere-path-cosplit-equiv-arrow {neg-two-𝕋} e = {!   !}
-  -- is-mere-path-cosplit-equiv-arrow {succ-𝕋 k} e H x y = is-mere-path-cosplit-equiv-arrow {{!  k !}} {!   !} (H x y)
-```
-
-### Mere path cosplit maps are preserved under homotopy
-
-```agda
-module _
-  {l1 l2 : Level}
-  where
-
-  -- is-mere-path-cosplit-htpy :
-  --   {k : 𝕋} {A : UU l1} {B : UU l2} {f g : A → B} → f ~ g →
-  --   is-mere-path-cosplit k f →
-  --   is-mere-path-cosplit k g
-  -- is-mere-path-cosplit-htpy {neg-two-𝕋} H is-cosplit-f = {!   !}
-  -- is-mere-path-cosplit-htpy {succ-𝕋 k} H is-cosplit-f x y = is-mere-path-cosplit-htpy {k} {!   !} {!   !}
-```
-
-### Composition and cancellation property of mere path-cosplit maps
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → B} {g : B → C}
-  where
-
-  -- is-mere-path-cosplit-comp :
-  --   {k : 𝕋} →
-  --   is-mere-path-cosplit k g →
-  --   is-mere-path-cosplit k f →
-  --   is-mere-path-cosplit k (g ∘ f)
-  -- is-mere-path-cosplit-comp {k} = {!  !}
-```
-
-If `g ∘ f` is merely `k`-path-cosplit, then so is `f`.
-
-TODO
-
-### If `g ∘ f` is merely `k`-path-cosplit and `f` is `k`-connected, then `g` is merely `k`-path-cosplit
-
-TODO
-
 ## See also
 
 - [Path-cosplit maps](foundation.path-cosplit-maps.md)
