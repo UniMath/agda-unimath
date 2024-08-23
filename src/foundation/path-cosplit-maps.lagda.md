@@ -7,16 +7,30 @@ module foundation.path-cosplit-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences-arrows
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-action-on-identifications-functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
 open import foundation.mere-path-cosplit-maps
+open import foundation.morphisms-arrows
+open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.retractions
+open import foundation.retracts-of-maps
 open import foundation.truncated-maps
 open import foundation.truncation-levels
 open import foundation.universe-levels
@@ -115,6 +129,47 @@ is-path-cosplit-succ-is-path-cosplit (succ-𝕋 k) is-cosplit-f x y =
   is-path-cosplit-succ-is-path-cosplit k (is-cosplit-f x y)
 ```
 
+### If a map is `k`-path-cosplit then it is `k+r`-path-cosplit for every `r ≥ 0`
+
+```agda
+is-path-cosplit-iterated-succ-is-path-cosplit :
+  {l1 l2 : Level} (k : 𝕋) (r : ℕ) {A : UU l1} {B : UU l2} {f : A → B} →
+  is-path-cosplit k f → is-path-cosplit (iterated-succ-𝕋 r k) f
+is-path-cosplit-iterated-succ-is-path-cosplit k zero-ℕ = id
+is-path-cosplit-iterated-succ-is-path-cosplit k (succ-ℕ r) F =
+  is-path-cosplit-iterated-succ-is-path-cosplit (succ-𝕋 k) r
+    ( is-path-cosplit-succ-is-path-cosplit k F)
+```
+
+### Retracts are `k`-path-cosplit for every `k`
+
+```agda
+is-path-cosplit-retraction :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
+  retraction f → is-path-cosplit k f
+is-path-cosplit-retraction neg-two-𝕋 H = H
+is-path-cosplit-retraction (succ-𝕋 k) H =
+  is-path-cosplit-succ-is-path-cosplit k (is-path-cosplit-retraction k H)
+```
+
+### Equivalences are `k`-path-cosplit for every `k`
+
+```agda
+is-path-cosplit-is-equiv :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
+  is-equiv f → is-path-cosplit k f
+is-path-cosplit-is-equiv k H =
+  is-path-cosplit-retraction k (retraction-is-equiv H)
+```
+
+### The identity map is `k`-path-cosplit for every `k`
+
+```agda
+is-path-cosplit-id :
+  {l : Level} (k : 𝕋) {A : UU l} → is-path-cosplit k (id {A = A})
+is-path-cosplit-id k = is-path-cosplit-retraction k (id , refl-htpy)
+```
+
 ### If a type maps into a `k`-truncted type via a `k`-path-cosplit map then it is `k`-truncated
 
 ```agda
@@ -169,10 +224,99 @@ is-prop-is-path-cosplit-is-trunc-succ-domain {k = succ-𝕋 k} is-trunc-A =
         ( λ y → is-prop-is-path-cosplit-is-trunc-succ-domain (is-trunc-A x y)))
 ```
 
-### Path-cosplit maps are closed under retracts of maps
+### Path-cosplit maps are closed under morphisms of maps that are path-cosplit on the domain
+
+Given a commuting diagram of the form
+
+```text
+         i
+    A ------> X
+    |         |
+  f |         | g
+    ∨         ∨
+    B ------> Y.
+         j
+```
+
+then if `g` and `i` are `k`-path cosplit, so is `f`.
 
 ```agda
--- TODO: retract-map-ap!
+is-path-cosplit-is-path-cosplit-on-domain-hom-arrow :
+  {l1 l2 l3 l4 : Level} {k : 𝕋}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (α : hom-arrow f g) →
+  is-path-cosplit k (map-domain-hom-arrow f g α) →
+  is-path-cosplit k g →
+  is-path-cosplit k f
+is-path-cosplit-is-path-cosplit-on-domain-hom-arrow
+  {k = neg-two-𝕋} f g α I =
+  retraction-retract-map-retraction' f g
+    ( map-domain-hom-arrow f g α , I)
+    ( map-codomain-hom-arrow f g α)
+    ( coh-hom-arrow f g α)
+is-path-cosplit-is-path-cosplit-on-domain-hom-arrow
+  {k = succ-𝕋 k} f g α I G x y =
+  is-path-cosplit-is-path-cosplit-on-domain-hom-arrow
+    ( ap f)
+    ( ap g)
+    ( ap-hom-arrow f g α)
+    ( I x y)
+    ( G (map-domain-hom-arrow f g α x) (map-domain-hom-arrow f g α y))
+```
+
+### In a commuting triangle, if the left map is path-cosplit then so is the top map
+
+Given a triangle of the form
+
+```text
+        top
+    A ------> B
+      \     /
+  left \   / right
+        ∨ ∨
+         C,
+```
+
+if the left map is is `k`-path-cosplit then so is the top map.
+
+```agda
+is-path-cosplit-top-map-triangle' :
+  {l1 l2 l3 : Level} {k : 𝕋}
+  {A : UU l1} {B : UU l2} {C : UU l3}
+  (top : A → B) (left : A → C) (right : B → C)
+  (H : coherence-triangle-maps' left right top) →
+  is-path-cosplit k left → is-path-cosplit k top
+is-path-cosplit-top-map-triangle' top left right H =
+  is-path-cosplit-is-path-cosplit-on-domain-hom-arrow top left
+    ( id , right , H)
+    ( is-path-cosplit-id _)
+```
+
+### In a commuting triangle, if the top and right map are path-cosplit then so is the left map
+
+Given a triangle of the form
+
+```text
+       top
+    A ------> B
+      \     /
+  left \   / right
+        ∨ ∨
+         C,
+```
+
+if the top and right map are `k`-path-cosplit then so is the left map.
+
+```agda
+is-path-cosplit-left-map-triangle :
+  {l1 l2 l3 : Level} {k : 𝕋}
+  {A : UU l1} {B : UU l2} {C : UU l3}
+  (top : A → B) (left : A → C) (right : B → C)
+  (H : coherence-triangle-maps left right top) →
+  is-path-cosplit k top → is-path-cosplit k right → is-path-cosplit k left
+is-path-cosplit-left-map-triangle top left right H =
+  is-path-cosplit-is-path-cosplit-on-domain-hom-arrow left right
+    ( top , id , H)
 ```
 
 ### Path-cosplit maps are closed under equivalences of maps
@@ -182,9 +326,10 @@ is-path-cosplit-equiv-arrow :
   {l1 l2 l3 l4 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   {f : A → B} {g : X → Y} (α : equiv-arrow f g) →
   is-path-cosplit k g → is-path-cosplit k f
-is-path-cosplit-equiv-arrow {k = neg-two-𝕋} α =
-  reflects-retraction-equiv-arrow _ _ α
-is-path-cosplit-equiv-arrow {k = succ-𝕋 k} H G x y = {!   !}
+is-path-cosplit-equiv-arrow {f = f} {g} α =
+  is-path-cosplit-is-path-cosplit-on-domain-hom-arrow f g
+    ( hom-equiv-arrow f g α)
+    ( is-path-cosplit-is-equiv _ (is-equiv-map-domain-equiv-arrow f g α))
 ```
 
 ### Path-cosplit maps are closed under homotopy
@@ -193,8 +338,10 @@ is-path-cosplit-equiv-arrow {k = succ-𝕋 k} H G x y = {!   !}
 is-path-cosplit-htpy :
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f g : A → B} →
   f ~ g → is-path-cosplit k g → is-path-cosplit k f
-is-path-cosplit-htpy {k = neg-two-𝕋} = retraction-htpy-map
-is-path-cosplit-htpy {k = succ-𝕋 k} H G x y = {! retraction-top-map-triangle  !}
+is-path-cosplit-htpy H =
+  is-path-cosplit-is-path-cosplit-on-domain-hom-arrow _ _
+    ( id , id , H)
+    ( is-path-cosplit-id _)
 ```
 
 ### Path-cosplit maps compose
@@ -205,9 +352,36 @@ is-path-cosplit-comp :
   {A : UU l1} {B : UU l2} {C : UU l3}
   {g : B → C} {f : A → B} →
   is-path-cosplit k g → is-path-cosplit k f → is-path-cosplit k (g ∘ f)
-is-path-cosplit-comp {k = neg-two-𝕋} G F = retraction-comp _ _ G F
-is-path-cosplit-comp {k = succ-𝕋 k} G F x y =
-  is-path-cosplit-comp {! F ? ?  !} {!   !}
+is-path-cosplit-comp G F = is-path-cosplit-left-map-triangle _ _ _ refl-htpy F G
+```
+
+### Families of path-cosplit maps induce path-cosplittings on dependent products
+
+```agda
+abstract
+  is-path-cosplit-map-Π-is-fiberwise-path-cosplit :
+    {l1 l2 l3 : Level} {k : 𝕋} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+    {f : (i : I) → A i → B i} →
+    ((i : I) → is-path-cosplit k (f i)) → is-path-cosplit k (map-Π f)
+  is-path-cosplit-map-Π-is-fiberwise-path-cosplit {k = neg-two-𝕋} =
+    retraction-map-Π-fiberwise-retraction
+  is-path-cosplit-map-Π-is-fiberwise-path-cosplit {k = succ-𝕋 k} {f = f} F x y =
+    is-path-cosplit-is-path-cosplit-on-domain-hom-arrow
+      ( ap (map-Π f))
+      ( map-Π (λ i → ap (f i)))
+      ( htpy-eq , htpy-eq , (λ where refl → refl))
+      ( is-path-cosplit-is-equiv k (funext x y))
+      ( is-path-cosplit-map-Π-is-fiberwise-path-cosplit (λ i → F i (x i) (y i)))
+```
+
+### If a map is path-cosplit then postcomposing by it is path-cosplit
+
+```agda
+is-path-cosplit-postcomp :
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-path-cosplit k f → (S : UU l3) → is-path-cosplit k (postcomp S f)
+is-path-cosplit-postcomp F S =
+  is-path-cosplit-map-Π-is-fiberwise-path-cosplit (λ _ → F)
 ```
 
 ## See also

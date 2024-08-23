@@ -52,12 +52,12 @@ induces a morphism of arrows between the
 i.e., a [commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
-               ap j
-    (x ＝ y) -------> (j x ＝ j y)
+               ap i
+    (x ＝ y) -------> (i x ＝ i y)
        |                   |
   ap f |                   | ap g
        ∨                   ∨
-  (f x ＝ f y) -> (g (j x) ＝ g (j y)).
+  (f x ＝ f y) -> (g (i x) ＝ g (i y)).
 ```
 
 This operation from morphisms of arrows from `f` to `g` to morphisms of arrows
@@ -276,19 +276,19 @@ module _
   (H : htpy-hom-arrow f g α β) {x y : A}
   where
 
-  correction-hom-arrow-ap-htpy-hom-arrow :
-    hom-arrow
-      ( ap g {map-domain-hom-arrow f g α x} {map-domain-hom-arrow f g α y})
-      ( ap g {map-domain-hom-arrow f g β x} {map-domain-hom-arrow f g β y})
-  correction-hom-arrow-ap-htpy-hom-arrow = {!   !} , {!   !} , {!   !}
+  -- correction-hom-arrow-ap-htpy-hom-arrow :
+  --   hom-arrow
+  --     ( ap g {map-domain-hom-arrow f g α x} {map-domain-hom-arrow f g α y})
+  --     ( ap g {map-domain-hom-arrow f g β x} {map-domain-hom-arrow f g β y})
+  -- correction-hom-arrow-ap-htpy-hom-arrow = {!   !} , {!   !} , {!   !}
 
-  ap-htpy-hom-arrow' :
-    coherence-triangle-hom-arrow
-      ( ap f)
-      ( ap g {map-domain-hom-arrow f g α x} {map-domain-hom-arrow f g α y})
-      ( ap g {map-domain-hom-arrow f g β x} {map-domain-hom-arrow f g β y})
-      ( ap-hom-arrow f g β {x} {y})
-      ({!   !} , {!   !})
-      ( ap-hom-arrow f g α {x} {y})
-  ap-htpy-hom-arrow' = {!   !}
+  -- ap-htpy-hom-arrow' :
+  --   coherence-triangle-hom-arrow
+  --     ( ap f)
+  --     ( ap g {map-domain-hom-arrow f g α x} {map-domain-hom-arrow f g α y})
+  --     ( ap g {map-domain-hom-arrow f g β x} {map-domain-hom-arrow f g β y})
+  --     ( ap-hom-arrow f g β {x} {y})
+  --     ({!   !} , {!   !})
+  --     ( ap-hom-arrow f g α {x} {y})
+  -- ap-htpy-hom-arrow' = {!   !}
 ```
