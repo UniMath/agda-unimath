@@ -73,7 +73,7 @@ inl-Fin k = inl
 
 emb-inl-Fin : (k : ℕ) → Fin k ↪ Fin (succ-ℕ k)
 pr1 (emb-inl-Fin k) = inl-Fin k
-pr2 (emb-inl-Fin k) = is-emb-inl (Fin k) unit
+pr2 (emb-inl-Fin k) = is-emb-inl
 
 neg-one-Fin : (k : ℕ) → Fin (succ-ℕ k)
 neg-one-Fin k = inr star

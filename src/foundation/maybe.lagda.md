@@ -92,7 +92,7 @@ maybe-structure {l1} X = Σ (UU l1) (λ Y → Maybe Y ≃ X)
 ```agda
 abstract
   is-emb-unit-Maybe : {l : Level} {X : UU l} → is-emb (unit-Maybe {X = X})
-  is-emb-unit-Maybe {l} {X} = is-emb-inl X unit
+  is-emb-unit-Maybe = is-emb-inl
 
 emb-unit-Maybe : {l : Level} (X : UU l) → X ↪ Maybe X
 pr1 (emb-unit-Maybe X) = unit-Maybe

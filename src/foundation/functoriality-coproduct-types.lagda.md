@@ -22,6 +22,7 @@ open import foundation.negated-equality
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.surjective-maps
+open import foundation.retractions
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
@@ -231,6 +232,38 @@ module _
   pr1 (equiv-coproduct e e') = map-equiv-coproduct e e'
   pr2 (equiv-coproduct e e') =
     is-equiv-map-coproduct (is-equiv-map-equiv e) (is-equiv-map-equiv e')
+```
+
+### The functorial action of coproducts preserves retractions
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  {f : A → B} {f' : A' → B'} (r : retraction f) (r' : retraction f')
+  where
+
+  map-retraction-map-coproduct : B + B' → A + A'
+  map-retraction-map-coproduct =
+     map-coproduct (map-retraction f r) (map-retraction f' r')
+
+  is-retraction-retraction-map-coproduct :
+    is-retraction (map-coproduct f f') map-retraction-map-coproduct
+  is-retraction-retraction-map-coproduct =
+    ( inv-htpy
+      ( preserves-comp-map-coproduct
+        ( f)
+        ( map-retraction f r)
+        ( f')
+        ( map-retraction f' r'))) ∙h
+    ( htpy-map-coproduct
+      ( is-retraction-map-retraction f r)
+      ( is-retraction-map-retraction f' r')) ∙h
+    ( id-map-coproduct A A')
+
+  retraction-map-coproduct : retraction (map-coproduct f f')
+  retraction-map-coproduct =
+    ( map-retraction-map-coproduct , is-retraction-retraction-map-coproduct)
 ```
 
 ### Functoriality of coproducts preserves being surjective

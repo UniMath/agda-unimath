@@ -886,7 +886,7 @@ abstract
             ( unit-trunc-Set ∘ f)
             ( inl)
             ( is-emb-is-equiv Eηf)
-            ( is-emb-inl (Fin k) unit))
+            ( is-emb-inl))
       h : Fin k ≃ type-trunc-Set (im (f ∘ inl))
       h = i , (is-equiv-is-emb-is-surjective is-surjective-i is-emb-i)
 
