@@ -433,7 +433,7 @@ is-path-cosplit-tot {k = succ-𝕋 k} {f = f} F x y =
       equiv-pair-eq-Σ (tot f x) (tot f y) ,
       coh-compute-ap-tot f)
     ( is-path-cosplit-tot
-      { f = λ i p → inv (preserves-tr f i (pr2 x)) ∙ ap (f (pr1 y)) p}
+      { f = λ p q → inv (preserves-tr f p (pr2 x)) ∙ ap (f (pr1 y)) q}
       ( λ where refl → F (pr1 y) (pr2 x) (pr2 y)))
 ```
 

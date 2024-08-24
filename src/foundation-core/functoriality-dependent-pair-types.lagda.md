@@ -471,7 +471,7 @@ module _
 
   coh-compute-ap-tot :
     pair-eq-Σ ∘ ap (tot g) {a , x} {a' , x'} ~
-    tot (λ i p → inv (preserves-tr g i x) ∙ ap (g a') p) ∘ pair-eq-Σ
+    tot (λ p q → inv (preserves-tr g p x) ∙ ap (g a') q) ∘ pair-eq-Σ
   coh-compute-ap-tot refl = refl
 ```
 
