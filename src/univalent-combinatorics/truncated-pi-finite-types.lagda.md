@@ -9,60 +9,17 @@ module univalent-combinatorics.truncated-pi-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.0-connected-types
-open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
-open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.decidable-types
-open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.empty-types
-open import foundation.equality-coproduct-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
-open import foundation.fiber-inclusions
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-set-truncation
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.logical-equivalences
-open import foundation.maybe
-open import foundation.mere-equality
-open import foundation.mere-equivalences
-open import foundation.propositional-extensionality
-open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.set-presented-types
 open import foundation.set-truncations
-open import foundation.sets
-open import foundation.subtypes
-open import foundation.surjective-maps
-open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.type-arithmetic-coproduct-types
-open import foundation.unit-type
-open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
-open import univalent-combinatorics.coproduct-types
-open import univalent-combinatorics.counting
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
-open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
-open import univalent-combinatorics.finitely-presented-types
-open import univalent-combinatorics.function-types
-open import univalent-combinatorics.image-of-maps
 open import univalent-combinatorics.pi-finite-types
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -74,7 +31,7 @@ A type is
 if it has [finitely](univalent-combinatorics.finite-types.md) many
 [connected components](foundation.connected-components.md), all of its homotopy
 groups up to level `n` at all base points are finite, and all higher homotopy
-groups are [contractible](foundation-core.contractible-types.md).
+groups are [trivial](group-theory.trivial-groups.md).
 
 ## Definitions
 

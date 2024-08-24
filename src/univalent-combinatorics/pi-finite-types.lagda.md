@@ -16,7 +16,6 @@ open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-identifications
-open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
@@ -32,7 +31,6 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.maybe
 open import foundation.mere-equality
-open import foundation.mere-equivalences
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -43,8 +41,6 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.transport-along-identifications
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.univalence
@@ -53,9 +49,7 @@ open import foundation.whiskering-homotopies-composition
 
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
-open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components

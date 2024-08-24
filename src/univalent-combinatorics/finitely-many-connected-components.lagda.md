@@ -18,12 +18,10 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-set-truncation
 open import foundation.mere-equivalences
-open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.set-truncations
 open import foundation.sets
-open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 

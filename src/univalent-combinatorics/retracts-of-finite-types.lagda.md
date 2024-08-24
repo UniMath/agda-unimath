@@ -18,7 +18,6 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.injective-maps
 open import foundation.retractions
 open import foundation.retracts-of-types
-open import foundation.sets
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
