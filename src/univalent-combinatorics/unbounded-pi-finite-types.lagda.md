@@ -459,8 +459,8 @@ is-unbounded-π-finite-Π H K =
 
 ### Dependent sums of unbounded π-finite types
 
-The dependent sum of a family of unbouded π-finite types over an unbounded
-π-finite base is unbouded π-finite.
+The dependent sum of a family of unbounded π-finite types over an unbounded
+π-finite base is unbounded π-finite.
 
 ```agda
 abstract
