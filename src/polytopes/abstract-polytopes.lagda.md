@@ -12,6 +12,7 @@ open import elementary-number-theory
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -24,7 +25,8 @@ open import foundation.universe-levels
 open import order-theory.finitely-graded-posets
 open import order-theory.posets
 
-open import univalent-combinatorics
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
