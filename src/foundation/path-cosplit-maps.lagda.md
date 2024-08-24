@@ -49,6 +49,7 @@ open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 ```
 
@@ -414,6 +415,26 @@ is-path-cosplit-map-product {k = succ-𝕋 k} {f = f} {g} F G x y =
       ( equiv-pair-eq (map-product f g x) (map-product f g y)) ,
       ( coh-compute-ap-map-product f g))
     ( is-path-cosplit-map-product (F (pr1 x) (pr1 y)) (G (pr2 x) (pr2 y)))
+```
+
+### The total map of a family of path-cosplit maps is path-cosplit
+
+```agda
+is-path-cosplit-tot :
+  {l1 l2 l3 : Level} {k : 𝕋}
+  {I : UU l1} {A : I → UU l2} {B : I → UU l3} {f : (i : I) → A i → B i} →
+  ((i : I) → is-path-cosplit k (f i)) →
+  is-path-cosplit k (tot f)
+is-path-cosplit-tot {k = neg-two-𝕋} =
+  retraction-tot
+is-path-cosplit-tot {k = succ-𝕋 k} {f = f} F x y =
+  is-path-cosplit-equiv-arrow
+    ( equiv-pair-eq-Σ x y ,
+      equiv-pair-eq-Σ (tot f x) (tot f y) ,
+      coh-compute-ap-tot f)
+    ( is-path-cosplit-tot
+      { f = λ i p → inv (preserves-tr f i (pr2 x)) ∙ ap (f (pr1 y)) p}
+      ( λ where refl → F (pr1 y) (pr2 x) (pr2 y)))
 ```
 
 ### A map `A + B → C` defined by maps `f : A → C` and `B → C` is path-cosplit if both `f` and `g` are path-cosplit and they don't overlap

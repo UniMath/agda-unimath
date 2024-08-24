@@ -465,6 +465,20 @@ module _
 
 ```agda
 module _
+  {l1 l2 l3 : Level} {A : UU l1} {X : A → UU l2} {Y : A → UU l3}
+  (g : (a : A) → X a → Y a) {a a' : A} {x : X a} {x' : X a'}
+  where
+
+  coh-compute-ap-tot :
+    pair-eq-Σ ∘ ap (tot g) {a , x} {a' , x'} ~
+    tot (λ i p → inv (preserves-tr g i x) ∙ ap (g a') p) ∘ pair-eq-Σ
+  coh-compute-ap-tot refl = refl
+```
+
+### Computing the action on paths of the functorial action of Σ
+
+```agda
+module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : A → UU l3} (Y : B → UU l4)
   (f : A → B) (g : (a : A) → X a → Y (f a)) {a a' : A} {x : X a} {x' : X a'}
   where
