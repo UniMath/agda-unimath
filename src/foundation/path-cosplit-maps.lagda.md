@@ -10,42 +10,44 @@ module foundation.path-cosplit-maps where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.functoriality-action-on-identifications-functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-coproduct-types
+open import foundation.commuting-triangles-of-maps
 open import foundation.coproduct-types
-open import foundation.negated-equality
-open import foundation.equality-coproduct-types
-open import foundation.equality-dependent-pair-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equality-cartesian-product-types
+open import foundation.equality-coproduct-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences-arrows
-open import foundation-core.embeddings
-open import foundation-core.injective-maps
+open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.inhabited-types
-open import foundation.postcomposition-functions
-open import foundation.precomposition-functions
+open import foundation.functoriality-action-on-identifications-functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.commuting-triangles-of-maps
+open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.logical-equivalences
 open import foundation.mere-path-cosplit-maps
 open import foundation.morphisms-arrows
+open import foundation.negated-equality
+open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.retractions
 open import foundation.retracts-of-maps
 open import foundation.truncated-maps
-open import foundation.function-extensionality
-open import foundation.homotopy-induction
 open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.homotopies
+open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 ```
@@ -320,7 +322,7 @@ is-path-cosplit-left-map-triangle :
   {A : UU l1} {B : UU l2} {C : UU l3}
   (top : A → B) (left : A → C) (right : B → C)
   (H : coherence-triangle-maps left right top) →
-  is-path-cosplit k top → is-path-cosplit k right →  is-path-cosplit k left
+  is-path-cosplit k top → is-path-cosplit k right → is-path-cosplit k left
 is-path-cosplit-left-map-triangle top left right H =
   is-path-cosplit-is-path-cosplit-on-domain-hom-arrow left right
     ( top , id , H)
@@ -380,11 +382,8 @@ abstract
   is-path-cosplit-map-Π-is-fiberwise-path-cosplit {k = neg-two-𝕋} =
     retraction-map-Π-fiberwise-retraction
   is-path-cosplit-map-Π-is-fiberwise-path-cosplit {k = succ-𝕋 k} {f = f} F x y =
-    is-path-cosplit-is-path-cosplit-on-domain-hom-arrow
-      ( ap (map-Π f))
-      ( map-Π (λ i → ap (f i)))
-      ( htpy-eq , htpy-eq , (λ where refl → refl))
-      ( is-path-cosplit-is-equiv k (funext x y))
+    is-path-cosplit-equiv-arrow
+      ( equiv-funext , equiv-funext , (λ where refl → refl))
       ( is-path-cosplit-map-Π-is-fiberwise-path-cosplit (λ i → F i (x i) (y i)))
 ```
 
@@ -396,6 +395,25 @@ is-path-cosplit-postcomp :
   is-path-cosplit k f → (S : UU l3) → is-path-cosplit k (postcomp S f)
 is-path-cosplit-postcomp F S =
   is-path-cosplit-map-Π-is-fiberwise-path-cosplit (λ _ → F)
+```
+
+### Products of path-cosplit maps are path-cosplit
+
+```agda
+is-path-cosplit-map-product :
+  {l1 l2 l3 l4 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f : A → B} {g : X → Y} →
+  is-path-cosplit k f →
+  is-path-cosplit k g →
+  is-path-cosplit k (map-product f g)
+is-path-cosplit-map-product {k = neg-two-𝕋} {f = f} {g} =
+  retraction-map-product f g
+is-path-cosplit-map-product {k = succ-𝕋 k} {f = f} {g} F G x y =
+  is-path-cosplit-equiv-arrow
+    ( ( equiv-pair-eq x y) ,
+      ( equiv-pair-eq (map-product f g x) (map-product f g y)) ,
+      ( coh-compute-ap-map-product f g))
+    ( is-path-cosplit-map-product (F (pr1 x) (pr1 y)) (G (pr2 x) (pr2 y)))
 ```
 
 ### A map `A + B → C` defined by maps `f : A → C` and `B → C` is path-cosplit if both `f` and `g` are path-cosplit and they don't overlap

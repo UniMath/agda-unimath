@@ -20,9 +20,9 @@ open import foundation.homotopy-induction
 open import foundation.morphisms-arrows
 open import foundation.negated-equality
 open import foundation.propositional-truncations
+open import foundation.retractions
 open import foundation.structure-identity-principle
 open import foundation.surjective-maps
-open import foundation.retractions
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
@@ -245,7 +245,7 @@ module _
 
   map-retraction-map-coproduct : B + B' → A + A'
   map-retraction-map-coproduct =
-     map-coproduct (map-retraction f r) (map-retraction f' r')
+    map-coproduct (map-retraction f r) (map-retraction f' r')
 
   is-retraction-retraction-map-coproduct :
     is-retraction (map-coproduct f f') map-retraction-map-coproduct
