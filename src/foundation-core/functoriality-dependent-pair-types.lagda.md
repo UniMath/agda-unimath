@@ -7,17 +7,17 @@ module foundation-core.functoriality-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
-open import foundation.action-on-identifications-functions
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.dependent-identifications
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -84,7 +84,7 @@ module _
 
   triangle-map-Σ :
     (f : A → B) (g : (x : A) → C x → D (f x)) →
-    (map-Σ f g) ~ (map-Σ-map-base f D ∘ tot g)
+    map-Σ f g ~ map-Σ-map-base f D ∘ tot g
   triangle-map-Σ f g t = refl
 ```
 
