@@ -461,7 +461,7 @@ module _
   compute-map-Σ-id = refl-htpy
 ```
 
-### Computing the action on paths of the functorial action of Σ
+### Computing the action on identifications of `tot`
 
 ```agda
 module _
@@ -475,7 +475,7 @@ module _
   coh-compute-ap-tot refl = refl
 ```
 
-### Computing the action on paths of the functorial action of Σ
+### Computing the action on identifications of the functorial action of Σ
 
 ```agda
 module _
