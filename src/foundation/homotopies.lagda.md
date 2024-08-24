@@ -372,22 +372,6 @@ module _
         inv (ap² (map-Π f) (eq-htpy-refl-htpy h)))
 ```
 
-###
-
-Given a homotopy `H : f ~ g` we have commuting triangle
-
-```text
-             (x = y)
-            /       \
-     ap f  /         \ ap g
-          ∨           ∨
-  (f x = f y) ----> (g x = g y)
-```
-
-where the bottom map is an equivalence.
-
-TODO (also refactor proof `is-emb-htpy` to use this lemma)
-
 ## See also
 
 - [Multivariable homotopies](foundation.multivariable-homotopies.md).

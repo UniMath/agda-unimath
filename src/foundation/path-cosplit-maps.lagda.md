@@ -304,7 +304,7 @@ is-path-cosplit-top-map-triangle' top left right H =
 Given a triangle of the form
 
 ```text
-       top
+        top
     A ------> B
       \     /
   left \   / right

@@ -92,7 +92,7 @@ has-decidable-equality-is-finite-type-𝔽-Kuratowski X =
 ## See also
 
 - [Finite types](univalent-combinatorics.finite-types.md)
-- [Dedekind-finite sets](univalent-combinatorics.dedekind-finite-sets.md)
+- [Dedekind finite sets](univalent-combinatorics.dedekind-finite-sets.md)
 
 ## External links
 
