@@ -93,7 +93,7 @@ count-retract (pair i R) e =
 
 abstract
   is-finite-retract :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} → A retract-of B →
-    is-finite B → is-finite A
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    A retract-of B → is-finite B → is-finite A
   is-finite-retract R = map-trunc-Prop (count-retract R)
 ```
