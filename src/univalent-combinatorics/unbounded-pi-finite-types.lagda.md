@@ -159,6 +159,9 @@ module _
   Eq-eq-is-unbounded-π-finite p .p refl = refl-Eq-is-unbounded-π-finite p
 ```
 
+> It remains to show that `Eq-is-unbounded-π-finite` defines an identity system
+> on `is-unbounded-π-finite`.
+
 ### Unbounded π-finite types are closed under equivalences
 
 ```agda
