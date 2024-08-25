@@ -42,6 +42,8 @@ This follows Definition 4.5.2 from
 
 ## Definitions
 
+### Premetric structures
+
 ```agda
 module _
   {l1 : Level} (l2 : Level) (A : UU l1)
@@ -50,6 +52,8 @@ module _
   Premetric : UU (l1 ⊔ lsuc l2)
   Premetric = ℚ⁺ → Relation-Prop l2 A
 ```
+
+### Closeness relation in a premetric
 
 ```agda
 module _
