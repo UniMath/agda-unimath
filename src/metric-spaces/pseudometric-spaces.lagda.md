@@ -1,4 +1,4 @@
-# Psuedometric spaces
+# Pseudometric spaces
 
 ```agda
 module metric-spaces.pseudometric-spaces where
@@ -7,133 +7,154 @@ module metric-spaces.pseudometric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
-
 open import foundation.binary-relations
-open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
+open import foundation.equivalence-relations
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.torsorial-type-families
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import metric-spaces.neighbourhood-relations
+open import metric-spaces.premetric-spaces
+open import metric-spaces.premetric-structures
 ```
 
 </details>
 
 ## Idea
 
-A {{#concept "pseudometric space" Agda=Pseudometric-Space}} is a type equipped a
-symmetric reflexive triangular
-[neighbourhood-relation](metric-spaces.neighbourhood-relations.md).
+A {{#concept "pseudometric space" Agda=Pseudometric-Space}} is a
+[premetric space](metric-spaces.premetric-spaces.md) whose
+[premetric](metric-spaces.premetric-structures.md) is symmetric reflexive and
+triangular.
+
+Indistiguishability in a pseudometric space is an
+[equivalence relation](foundation.equivalence-relations.md).
 
 ## Definitions
 
-### The property of being a pseudometric neighbourhood-relation on a type
+### The property of being a pseudometric premetric
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (B : neighbourhood-Relation-Prop l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
   where
 
-  is-pseudometric-neighbourhood : UU (l1 ⊔ l2)
-  is-pseudometric-neighbourhood =
-    ( is-symmetric-neighbourhood B) ×
-    ( is-reflexive-neighbourhood B) ×
-    ( is-triangular-neighbourhood B)
+  is-pseudometric-prop-Premetric : Prop (l1 ⊔ l2)
+  is-pseudometric-prop-Premetric =
+    product-Prop
+      ( is-symmetric-prop-Premetric B)
+      ( product-Prop
+        ( is-reflexive-prop-Premetric B)
+        ( is-triangular-prop-Premetric B))
 
-  is-prop-is-pseudometric-neighbourhood : is-prop is-pseudometric-neighbourhood
-  is-prop-is-pseudometric-neighbourhood =
-    is-prop-product
-      ( is-prop-is-symmetric-neighbourhood B)
-      ( is-prop-product
-        ( is-prop-is-reflexive-neighbourhood B)
-        ( is-prop-is-triangular-neighbourhood B))
+  is-pseudometric-Premetric : UU (l1 ⊔ l2)
+  is-pseudometric-Premetric =
+    type-Prop is-pseudometric-prop-Premetric
 
-  is-pseudometric-prop-neighbourhood : Prop (l1 ⊔ l2)
-  is-pseudometric-prop-neighbourhood =
-    is-pseudometric-neighbourhood , is-prop-is-pseudometric-neighbourhood
+  is-prop-is-pseudometric-Premetric :
+    is-prop is-pseudometric-Premetric
+  is-prop-is-pseudometric-Premetric =
+    is-prop-type-Prop is-pseudometric-prop-Premetric
 ```
 
-### Pseudometric structures over a type
+### The property of being a pseudometric premetric space
 
 ```agda
 module _
-  {l1 : Level} (l2 : Level) (A : UU l1)
+  {l1 l2 : Level} (A : Premetric-Space l1 l2)
   where
 
-  Pseudometric-Structure : UU (l1 ⊔ lsuc l2)
-  Pseudometric-Structure =
-    Σ ( neighbourhood-Relation-Prop l2 A)
-      ( is-pseudometric-neighbourhood A)
-```
+  is-pseudometric-prop-Premetric-Space : Prop (l1 ⊔ l2)
+  is-pseudometric-prop-Premetric-Space =
+    is-pseudometric-prop-Premetric (structure-Premetric-Space A)
 
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) (S : Pseudometric-Structure l2 A)
-  where
+  is-pseudometric-Premetric-Space : UU (l1 ⊔ l2)
+  is-pseudometric-Premetric-Space =
+    type-Prop is-pseudometric-prop-Premetric-Space
 
-  neighbourhood-Pseudometric-Structure : neighbourhood-Relation-Prop l2 A
-  neighbourhood-Pseudometric-Structure = pr1 S
-
-  is-pseudometric-neighbourhood-Pseudometric-Structure :
-    is-pseudometric-neighbourhood A neighbourhood-Pseudometric-Structure
-  is-pseudometric-neighbourhood-Pseudometric-Structure = pr2 S
+  is-prop-is-pseudometric-Premetric-Space :
+    is-prop is-pseudometric-Premetric-Space
+  is-prop-is-pseudometric-Premetric-Space =
+    is-prop-type-Prop is-pseudometric-prop-Premetric-Space
 ```
 
 ### The type of pseudometric spaces
 
 ```agda
-Pseudometric-Space : (l : Level) → UU (lsuc l)
-Pseudometric-Space l = Σ (UU l) (Pseudometric-Structure l)
+Pseudometric-Space : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Pseudometric-Space l1 l2 =
+  type-subtype (is-pseudometric-prop-Premetric-Space {l1} {l2})
 
 module _
-  {l : Level} (M : Pseudometric-Space l)
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
   where
 
-  type-Pseudometric-Space : UU l
-  type-Pseudometric-Space = pr1 M
+  premetric-Pseudometric-Space : Premetric-Space l1 l2
+  premetric-Pseudometric-Space = pr1 M
 
-  structure-Pseudometric-Space :
-    Pseudometric-Structure l type-Pseudometric-Space
-  structure-Pseudometric-Space = pr2 M
+  type-Pseudometric-Space : UU l1
+  type-Pseudometric-Space =
+    type-Premetric-Space premetric-Pseudometric-Space
 
-  neighbourhood-Pseudometric-Space :
-    neighbourhood-Relation-Prop l type-Pseudometric-Space
-  neighbourhood-Pseudometric-Space = pr1 structure-Pseudometric-Space
+  structure-Pseudometric-Space : Premetric l2 type-Pseudometric-Space
+  structure-Pseudometric-Space =
+    structure-Premetric-Space premetric-Pseudometric-Space
 
-  is-pseudometric-neighbourhood-Pseudometric-Space :
-    is-pseudometric-neighbourhood
-      type-Pseudometric-Space
-      neighbourhood-Pseudometric-Space
-  is-pseudometric-neighbourhood-Pseudometric-Space =
-    pr2 structure-Pseudometric-Space
+  is-pseudometric-structure-Pseudometric-Space :
+    is-pseudometric-Premetric structure-Pseudometric-Space
+  is-pseudometric-structure-Pseudometric-Space = pr2 M
 
-  is-in-neighbourhood-Pseudometric-Space :
-    ℚ⁺ → Relation l type-Pseudometric-Space
-  is-in-neighbourhood-Pseudometric-Space =
-    is-in-neighbourhood neighbourhood-Pseudometric-Space
+  is-symmetric-structure-Pseudometric-Space :
+    is-symmetric-Premetric structure-Pseudometric-Space
+  is-symmetric-structure-Pseudometric-Space =
+    pr1 is-pseudometric-structure-Pseudometric-Space
 
-  is-symmetric-neighbourhood-Pseudometric-Space :
-    is-symmetric-neighbourhood neighbourhood-Pseudometric-Space
-  is-symmetric-neighbourhood-Pseudometric-Space =
-    pr1 is-pseudometric-neighbourhood-Pseudometric-Space
+  is-reflexive-structure-Pseudometric-Space :
+    is-reflexive-Premetric structure-Pseudometric-Space
+  is-reflexive-structure-Pseudometric-Space =
+    pr1 (pr2 is-pseudometric-structure-Pseudometric-Space)
 
-  is-reflexive-neighbourhood-Pseudometric-Space :
-    is-reflexive-neighbourhood neighbourhood-Pseudometric-Space
-  is-reflexive-neighbourhood-Pseudometric-Space =
-    pr1 (pr2 is-pseudometric-neighbourhood-Pseudometric-Space)
+  is-triangular-structure-Pseudometric-Space :
+    is-triangular-Premetric structure-Pseudometric-Space
+  is-triangular-structure-Pseudometric-Space =
+    pr2 (pr2 is-pseudometric-structure-Pseudometric-Space)
+```
 
-  is-triangular-neighbourhood-Pseudometric-Space :
-    is-triangular-neighbourhood neighbourhood-Pseudometric-Space
-  is-triangular-neighbourhood-Pseudometric-Space =
-    pr2 (pr2 is-pseudometric-neighbourhood-Pseudometric-Space)
+### Indistiguishability in a pseudometric space
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  (x y : type-Pseudometric-Space M)
+  where
+
+  is-indistinguishable-prop-Pseudometric-Space : Prop l2
+  is-indistinguishable-prop-Pseudometric-Space =
+    is-indistinguishable-prop-Premetric (structure-Pseudometric-Space M) x y
+
+  is-indistinguishable-Pseudometric-Space : UU l2
+  is-indistinguishable-Pseudometric-Space =
+    type-Prop is-indistinguishable-prop-Pseudometric-Space
+
+  is-prop-is-indistinguishable-Pseudometric-Space :
+    is-prop is-indistinguishable-Pseudometric-Space
+  is-prop-is-indistinguishable-Pseudometric-Space =
+    is-prop-type-Prop is-indistinguishable-prop-Pseudometric-Space
+```
+
+### The type of functions between pseudometric spaces
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
+  where
+
+  function-carrier-type-Pseudometric-Space : UU (l1 ⊔ l1')
+  function-carrier-type-Pseudometric-Space =
+    type-Pseudometric-Space A → type-Pseudometric-Space B
 ```
 
 ## Properties
@@ -142,21 +163,39 @@ module _
 
 ```agda
 module _
-  {l : Level} (M : Pseudometric-Space l) (x y : type-Pseudometric-Space M)
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  {x y : type-Pseudometric-Space M} (e : x ＝ y)
   where
 
   indistinguishable-eq-Pseudometric-Space :
-    x ＝ y →
-    is-indistinguishable-in-neighbourhood
-      ( neighbourhood-Pseudometric-Space M)
-      ( x)
-      ( y)
+    is-indistinguishable-Pseudometric-Space M x y
   indistinguishable-eq-Pseudometric-Space =
-    indistinguishable-eq-reflexive-neighbourhood
-      ( neighbourhood-Pseudometric-Space M)
-      ( is-reflexive-neighbourhood-Pseudometric-Space M)
-      ( x)
-      ( y)
+    indistinguishable-eq-reflexive-Premetric
+      ( structure-Pseudometric-Space M)
+      ( is-reflexive-structure-Pseudometric-Space M)
+      ( e)
+```
+
+### Indistiguishability in a pseudometric space is an equivalence relation
+
+```agda
+module _
+  {l1 l2 : Level} (M : Pseudometric-Space l1 l2)
+  where
+
+  is-equivalence-relation-is-indistinguishable-Pseudometric-Space :
+    is-equivalence-relation
+      (is-indistinguishable-prop-Pseudometric-Space M)
+  is-equivalence-relation-is-indistinguishable-Pseudometric-Space =
+    ( is-reflexive-is-indistinguishable-reflexive-Premetric
+      ( structure-Pseudometric-Space M)
+      ( is-reflexive-structure-Pseudometric-Space M)) ,
+    ( is-symmetric-is-indistinguishable-is-symmetric-Premetric
+      ( structure-Pseudometric-Space M)
+      ( is-symmetric-structure-Pseudometric-Space M)) ,
+    ( is-transitive-is-indistinguishable-triangular-Premetric
+      ( structure-Pseudometric-Space M)
+      ( is-triangular-structure-Pseudometric-Space M))
 ```
 
 ### Any set can be equipped with a pseudometric structure
@@ -166,18 +205,14 @@ module _
   {l : Level} (A : Set l)
   where
 
-  discrete-Pseudometric-Structure : Pseudometric-Structure l (type-Set A)
-  pr1 discrete-Pseudometric-Structure d = Id-Prop A
-  pr2 discrete-Pseudometric-Structure =
+  discrete-Pseudometric-Space : Pseudometric-Space l l
+  pr1 discrete-Pseudometric-Space = (type-Set A , λ d → Id-Prop A)
+  pr2 discrete-Pseudometric-Space =
     ( λ d x y H → inv H) ,
     ( λ d x → refl) ,
-    ( λ x y z d₁ d₂ H K → K ∙ H)
-
-  discrete-Pseudometric-Space : Pseudometric-Space l
-  discrete-Pseudometric-Space = (type-Set A , discrete-Pseudometric-Structure)
+    ( λ x y z d d' H K → K ∙ H)
 ```
 
 ## See also
 
-- Metric spaces are defined in the
-  [metric-spaces](metric-spaces.metric-spaces.md) module.
+- Metric spaces are defined in [metric-spaces](metric-spaces.metric-spaces.md).
