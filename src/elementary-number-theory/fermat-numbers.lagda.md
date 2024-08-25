@@ -20,22 +20,32 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-{{#concept "Fermat numbers"}} are numbers of the form `F n := 2^{2^n}+1`. The first five Fermat numbers are
+{{#concept "Fermat numbers"}} are numbers of the form `F n := 2^{2^n}+1`. The
+first five Fermat numbers are
 
 ```text
   3, 5, 17, 257, and 65537.
 ```
 
-The sequence of Fermat numbers is listed as A000215 in the [Online Encyclopedia of Integer Sequences](online-encyclopedia-of-integer-sequences.oeis.md).
+The sequence of Fermat numbers is listed as A000215 in the
+[Online Encyclopedia of Integer Sequences](online-encyclopedia-of-integer-sequences.oeis.md).
 
-Alternatively, the Fermat numbers can be defined with [strong induction](elementary-number-theory.strong-induction-natural-numbers.md) by
+Alternatively, the Fermat numbers can be defined with
+[strong induction](elementary-number-theory.strong-induction-natural-numbers.md)
+by
 
 ```text
 F 0 := 3
 F (n + 1) := 2 + Π_{i≤n}F_i
 ```
 
-This recurrence implies that any two Fermat numbers are [relatively prime](elementary-number-theory.relatively-prime-natural-numbers.md). Goldbach used this observation to prove the [infinitude of primes](elementary-number-theory.infinitude-of-primes.md): Since there are infinitely any Fermat numbers, and all of them are relatively prime, there must be infinitely many prime numbers. Fermat numbers also feature in a series of long-standing open problems in mathematics, including:
+This recurrence implies that any two Fermat numbers are
+[relatively prime](elementary-number-theory.relatively-prime-natural-numbers.md).
+Goldbach used this observation to prove the
+[infinitude of primes](elementary-number-theory.infinitude-of-primes.md): Since
+there are infinitely any Fermat numbers, and all of them are relatively prime,
+there must be infinitely many prime numbers. Fermat numbers also feature in a
+series of long-standing open problems in mathematics, including:
 
 - Are there infinitely many prime Fermat numbers?
 - Are there infinitely many composite Fermat numbers?
