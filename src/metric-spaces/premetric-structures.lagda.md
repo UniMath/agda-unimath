@@ -432,6 +432,8 @@ module _
     Eq-eq-Premetric N' , is-fiberwise-equiv-Eq-eq-Premetric N'
 ```
 
+### Characterisation of the transport of premetric structures along equality of types
+
 ```agda
 module _
   {l1 l2 : Level} (A : UU l1)
@@ -452,4 +454,6 @@ module _
 
 ## References
 
-- [Booij2020PhD](https://etheses.bham.ac.uk/id/eprint/10411/7/Booij2020PhD.pdf)
+- [Booij2020PhD](https://etheses.bham.ac.uk/id/eprint/10411/7/Booij2020PhD.pdf);
+- [Booij premetric spaces](https://ncatlab.org/nlab/show/Booij+premetric+space)
+  at $n$Lab.
