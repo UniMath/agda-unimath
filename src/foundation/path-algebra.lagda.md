@@ -156,20 +156,20 @@ module _
   (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) (s : u ＝ v)
   where
 
-  assoc?² : ((p ∙ q) ∙ r) ∙ s ＝ p ∙ ((q ∙ r) ∙ s)
-  assoc?² = ap (_∙ s) (assoc p q r) ∙ assoc p (q ∙ r) s
+  assoc²-1 : ((p ∙ q) ∙ r) ∙ s ＝ p ∙ ((q ∙ r) ∙ s)
+  assoc²-1 = ap (_∙ s) (assoc p q r) ∙ assoc p (q ∙ r) s
 
-  assoc??² : (p ∙ (q ∙ r)) ∙ s ＝ p ∙ (q ∙ (r ∙ s))
-  assoc??² = assoc p (q ∙ r) s ∙ ap (p ∙_) (assoc q r s)
+  assoc²-2 : (p ∙ (q ∙ r)) ∙ s ＝ p ∙ (q ∙ (r ∙ s))
+  assoc²-2 = assoc p (q ∙ r) s ∙ ap (p ∙_) (assoc q r s)
 
-  assoc???² : ((p ∙ q) ∙ r) ∙ s ＝ p ∙ (q ∙ (r ∙ s))
-  assoc???² = assoc (p ∙ q) r s ∙ assoc p q (r ∙ s)
+  assoc²-3 : ((p ∙ q) ∙ r) ∙ s ＝ p ∙ (q ∙ (r ∙ s))
+  assoc²-3 = assoc (p ∙ q) r s ∙ assoc p q (r ∙ s)
 
-  assoc????² : (p ∙ q) ∙ (r ∙ s) ＝ p ∙ ((q ∙ r) ∙ s)
-  assoc????² = assoc p q (r ∙ s) ∙ ap (p ∙_) (inv (assoc q r s))
+  assoc²-4 : (p ∙ q) ∙ (r ∙ s) ＝ p ∙ ((q ∙ r) ∙ s)
+  assoc²-4 = assoc p q (r ∙ s) ∙ ap (p ∙_) (inv (assoc q r s))
 
-  assoc?????² : (p ∙ q) ∙ (r ∙ s) ＝ (p ∙ (q ∙ r)) ∙ s
-  assoc?????² = inv (assoc (p ∙ q) r s) ∙ ap (_∙ s) (assoc p q r)
+  assoc²-5 : (p ∙ q) ∙ (r ∙ s) ＝ (p ∙ (q ∙ r)) ∙ s
+  assoc²-5 = inv (assoc (p ∙ q) r s) ∙ ap (_∙ s) (assoc p q r)
 ```
 
 ## Properties of 2-paths

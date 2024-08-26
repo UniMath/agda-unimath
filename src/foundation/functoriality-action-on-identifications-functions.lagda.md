@@ -236,7 +236,7 @@ module _
     ( ap
       ( inv (coh-hom-arrow g h β (map-domain-hom-arrow f g α x)) ∙_)
       ( inv
-        ( assoc??²
+        ( assoc²-2
           ( inv (ap (map-codomain-hom-arrow g h β) (coh-hom-arrow f g α x)))
           ( ap (map-codomain-hom-arrow g h β ∘ map-codomain-hom-arrow f g α) p)
           ( ap (map-codomain-hom-arrow g h β) (coh-hom-arrow f g α y))
