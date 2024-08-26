@@ -33,7 +33,7 @@ open import metric-spaces.premetric-structures
 ## Idea
 
 By the
-[identity principle of depdendent pair types](foundation.equality-dependent-pair-types.md),
+[identity principle of depedendent pair types](foundation.equality-dependent-pair-types.md),
 equality of two [premetric spaces](metric-spaces.premetric-spaces.md) is
 equivalent to equality of their carrier type with a proof that this equality
 transports the [premetric structures](metric-spaces.premetric-structures.md).
