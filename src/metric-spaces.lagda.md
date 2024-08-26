@@ -14,7 +14,9 @@ open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-premetric-spaces public
 open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.isometric-equivalences-metric-spaces public
+open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometric-equivalent-metric-spaces public
+open import metric-spaces.isometric-equivalent-premetric-spaces public
 open import metric-spaces.isometry-metric-spaces public
 open import metric-spaces.isometry-premetric-spaces public
 open import metric-spaces.limit-sequences-metric-spaces public
