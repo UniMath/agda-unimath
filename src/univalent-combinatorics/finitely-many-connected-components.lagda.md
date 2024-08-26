@@ -111,14 +111,14 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A retract-of B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (r : A retract-of B)
   where
 
   has-finitely-many-connected-components-retract :
     has-finitely-many-connected-components B →
     has-finitely-many-connected-components A
   has-finitely-many-connected-components-retract =
-    is-finite-retract (retract-trunc-Set e)
+    is-finite-retract (retract-trunc-Set r)
 ```
 
 ### Empty types have finitely many connected components
@@ -173,16 +173,6 @@ has-finitely-many-connected-components-is-0-connected :
 has-finitely-many-connected-components-is-0-connected = is-finite-is-contr
 ```
 
-### Sets with finitely many connected components are finite
-
-```agda
-is-finite-has-finitely-many-connected-components :
-  {l : Level} {A : UU l} →
-  is-set A → has-finitely-many-connected-components A → is-finite A
-is-finite-has-finitely-many-connected-components H =
-  is-finite-equiv' (equiv-unit-trunc-Set (_ , H))
-```
-
 ### Finite types have finitely many connected components
 
 ```agda
@@ -193,7 +183,17 @@ has-finitely-many-connected-components-is-finite {A = A} H =
   is-finite-equiv (equiv-unit-trunc-Set (A , is-set-is-finite H)) H
 ```
 
-### The type of all `n`-element types in `UU l` has finitely many components
+### Sets with finitely many connected components are finite
+
+```agda
+is-finite-has-finitely-many-connected-components :
+  {l : Level} {A : UU l} →
+  is-set A → has-finitely-many-connected-components A → is-finite A
+is-finite-has-finitely-many-connected-components H =
+  is-finite-equiv' (equiv-unit-trunc-Set (_ , H))
+```
+
+### The type of all `n`-element types in `UU l` has finitely many connected components
 
 ```agda
 has-finitely-many-connected-components-UU-Fin :
@@ -203,7 +203,7 @@ has-finitely-many-connected-components-UU-Fin n =
     ( is-0-connected-UU-Fin n)
 ```
 
-### Finite products of types with finitely many connected components have finitely many connected components
+### Finite products of types with finitely many connected components
 
 ```agda
 has-finitely-many-connected-components-finite-Π :
