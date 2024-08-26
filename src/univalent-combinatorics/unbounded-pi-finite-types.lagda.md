@@ -387,7 +387,7 @@ pr2 (is-π-finite-is-unbounded-π-finite H (succ-ℕ k)) x y =
 
 ### Finite products of unbounded π-finite types are unbounded π-finite
 
-> Agda is not convinced that the following proof is productive.
+Agda is not convinced that the following proof is productive.
 
 ```text
 is-unbounded-π-finite-Π :
