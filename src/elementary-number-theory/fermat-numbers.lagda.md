@@ -20,7 +20,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-{{#concept "Fermat numbers"}} are numbers of the form `F n := 2^{2^n}+1`. The
+{{#concept "Fermat numbers"}} are numbers of the form $F n := 2^{2^n}+1$. The
 first five Fermat numbers are
 
 ```text
@@ -34,10 +34,12 @@ Alternatively, the Fermat numbers can be defined with
 [strong induction](elementary-number-theory.strong-induction-natural-numbers.md)
 by
 
-```text
-F 0 := 3
-F (n + 1) := 2 + Π_{i≤n}F_i
-```
+$$
+\begin{aligned}
+F(0) & = 3 \\
+F(n+1) & = \left(\prod_{i=0}^n F_i\right + 2
+\end{aligned}
+$$
 
 This recurrence implies that any two Fermat numbers are
 [relatively prime](elementary-number-theory.relatively-prime-natural-numbers.md).
