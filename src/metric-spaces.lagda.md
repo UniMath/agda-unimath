@@ -37,6 +37,7 @@ open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.sequences-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
+open import metric-spaces.short-functions-premetric-spaces public
 open import metric-spaces.subsets-metric-spaces public
 open import metric-spaces.transport-of-metric-structures public
 open import metric-spaces.uniformly-continuous-functions-metric-spaces public

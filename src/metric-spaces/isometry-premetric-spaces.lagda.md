@@ -98,23 +98,24 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
-  (f : isometry-Premetric-Space A B)
-  (g : isometry-Premetric-Space A B)
+  (f g : isometry-Premetric-Space A B)
   where
 
-  Eq-isometry-Premetric-Space : UU (l1 ⊔ l1')
-  Eq-isometry-Premetric-Space =
-    map-isometry-Premetric-Space A B f ~ map-isometry-Premetric-Space A B g
-
-  equiv-Eq-isometry-Premetric-Space : (f ＝ g) ≃ Eq-isometry-Premetric-Space
-  equiv-Eq-isometry-Premetric-Space =
+  equiv-eq-htpy-map-isometry-Premetric-Space :
+    ( f ＝ g) ≃
+    ( map-isometry-Premetric-Space A B f ~
+      map-isometry-Premetric-Space A B g)
+  equiv-eq-htpy-map-isometry-Premetric-Space =
     equiv-funext ∘e
     extensionality-type-subtype'
       ( is-isometry-prop-Premetric-Space A B)
       ( f)
       ( g)
 
-  eq-Eq-isometry-Premetric-Space : Eq-isometry-Premetric-Space → f ＝ g
-  eq-Eq-isometry-Premetric-Space =
-    map-inv-equiv equiv-Eq-isometry-Premetric-Space
+  eq-htpy-map-isometry-Premetric-Space :
+    ( map-isometry-Premetric-Space A B f ~
+      map-isometry-Premetric-Space A B g) →
+    ( f ＝ g)
+  eq-htpy-map-isometry-Premetric-Space =
+    map-inv-equiv equiv-eq-htpy-map-isometry-Premetric-Space
 ```
