@@ -70,7 +70,7 @@ functor laws, i.e., it preserves identity morphisms and composition.
 ### Morphisms of arrows give morphisms of actions on identifications
 
 A morphism of arrows `α : f → g` gives a morphism of actions on identifications
-`ap-hom-arrow α : ap f → ap g`.
+`ap-hom-arrow α : hom-arrow (ap f) (ap g)`.
 
 ```agda
 module _
@@ -91,11 +91,11 @@ module _
     ( ( ap (map-codomain-hom-arrow f g α) p) ∙
       ( coh-hom-arrow f g α y))
 
-  inv-nat-coh-hom-arrow' :
+  inv-nat-coh-ap-hom-arrow' :
     (p : x ＝ y) →
     coh-hom-arrow f g α x ∙ ap g (ap (map-domain-hom-arrow f g α) p) ＝
     ap (map-codomain-hom-arrow f g α) (ap f p) ∙ coh-hom-arrow f g α y
-  inv-nat-coh-hom-arrow' p =
+  inv-nat-coh-ap-hom-arrow' p =
     ( inv
       ( ap
         ( coh-hom-arrow f g α x ∙_)
@@ -124,7 +124,7 @@ equality:
         ( coh-hom-arrow f g α x)
         ( ap g (ap (map-domain-hom-arrow f g α) p))
         ( ap (map-codomain-hom-arrow f g α) (ap f p) ∙ coh-hom-arrow f g α y)
-        ( inv-nat-coh-hom-arrow' p))
+        ( inv-nat-coh-ap-hom-arrow' p))
 ```
 
 ```agda
@@ -175,7 +175,7 @@ module _
   pr2 (pr2 preserves-id-ap-hom-arrow) = coh-preserves-id-ap-hom-arrow
 ```
 
-### For any `f : A → B` and any identification `p : b ＝ b'` in `B`, we obtain a morphism of arrows between the fiber inclusion at `b` to the fiber inclusion at `b'`
+### For any `f : A → B` and any pair of identifications `p : x' ＝ x` and `q : y ＝ y` in `A`, we obtain a morphism of arrows between the action on identifications on `x ＝ y` to the action on identifications on `x' ＝ y'`
 
 ```agda
 module _
@@ -193,7 +193,7 @@ module _
     inv (ap-concat f p (r ∙ q) ∙ ap (ap f p ∙_) (ap-concat f r q))
 ```
 
-### The functorial action of `fiber` preserves composition of morphisms of arrows
+### The functorial action of `ap` preserves composition of morphisms of arrows
 
 ```agda
 module _
