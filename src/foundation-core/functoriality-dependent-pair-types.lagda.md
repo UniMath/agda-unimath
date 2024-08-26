@@ -469,10 +469,10 @@ module _
   (g : (a : A) → X a → Y a) {a a' : A} {x : X a} {x' : X a'}
   where
 
-  coh-compute-ap-tot :
+  compute-ap-tot :
     pair-eq-Σ ∘ ap (tot g) {a , x} {a' , x'} ~
     tot (λ p q → inv (preserves-tr g p x) ∙ ap (g a') q) ∘ pair-eq-Σ
-  coh-compute-ap-tot refl = refl
+  compute-ap-tot refl = refl
 ```
 
 ### Computing the action on identifications of the functorial action of Σ
@@ -483,14 +483,14 @@ module _
   (f : A → B) (g : (a : A) → X a → Y (f a)) {a a' : A} {x : X a} {x' : X a'}
   where
 
-  coh-compute-ap-map-Σ :
+  compute-ap-map-Σ :
     pair-eq-Σ ∘ ap (map-Σ Y f g) ~
     map-Σ
       ( λ p → dependent-identification Y p (g a x) (g a' x'))
       ( ap f {a} {a'})
       ( λ p q → tr-ap f g p x ∙ ap (g a') q) ∘
     pair-eq-Σ
-  coh-compute-ap-map-Σ refl = refl
+  compute-ap-map-Σ refl = refl
 ```
 
 ## See also

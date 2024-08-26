@@ -343,10 +343,10 @@ module _
   (f : A → B) (g : X → Y) {a a' : A} {x x' : X}
   where
 
-  coh-compute-ap-map-product :
+  compute-ap-map-product :
     pair-eq ∘ ap (map-product f g) ~
     map-product (ap f {a} {a'}) (ap g {x} {x'}) ∘ pair-eq
-  coh-compute-ap-map-product refl = refl
+  compute-ap-map-product refl = refl
 ```
 
 ## See also
