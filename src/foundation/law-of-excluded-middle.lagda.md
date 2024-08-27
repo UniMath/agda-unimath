@@ -116,7 +116,7 @@ is-small-Prop-LEM {l1} l2 lem =
 is-small-type-Prop-LEM :
   {l1 : Level} (l2 : Level) → LEM l1 → (P : Prop l1) → is-small l2 (type-Prop P)
 is-small-type-Prop-LEM l2 lem P =
-  is-small-prop-is-decidable-prop l2 (type-Prop P) (is-prop-type-Prop P , lem P)
+  is-small-is-decidable-prop l2 (type-Prop P) (is-prop-type-Prop P , lem P)
 
 -- is-small-type-Prop-LEM :
 --   {l1 : Level} (l2 : Level) → LEM l1 → is-small l2 (type-Prop l1)

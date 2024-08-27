@@ -38,7 +38,7 @@ open import foundation.binary-homotopies public
 open import foundation.binary-operations-unordered-pairs-of-types public
 open import foundation.binary-reflecting-maps-equivalence-relations public
 open import foundation.binary-relations public
-open import foundation.binary-relations-transitive-closures public
+open import foundation.transitive-closures-binary-relations public
 open import foundation.binary-relations-with-extensions public
 open import foundation.binary-relations-with-lifts public
 open import foundation.binary-transport public

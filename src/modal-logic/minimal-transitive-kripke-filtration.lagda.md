@@ -7,7 +7,7 @@ module modal-logic.minimal-transitive-kripke-filtration where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations-transitive-closures
+open import foundation.transitive-closures-binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.logical-equivalences
@@ -53,7 +53,7 @@ module _
   pr1 minimal-transitive-kripke-model-filtration =
     Inhabited-Type-kripke-model i (minimal-kripke-model-filtration theory M)
   pr1 (pr2 minimal-transitive-kripke-model-filtration) =
-    transitive-closure-Prop
+    transitive-closure-Relation-Prop
       ( relation-Prop-kripke-model i (minimal-kripke-model-filtration theory M))
   pr2 (pr2 minimal-transitive-kripke-model-filtration) =
     valuate-kripke-model i (minimal-kripke-model-filtration theory M)
@@ -73,7 +73,7 @@ module _
         ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
       ( minimal-transitive-kripke-model-filtration)
   minimal-transitive-filtration-is-transitive =
-    is-transitive-transitive-closure-Prop
+    is-transitive-transitive-closure-Relation-Prop
       ( relation-Prop-kripke-model i
         ( minimal-kripke-model-filtration theory M))
 ```
@@ -105,7 +105,7 @@ module _
         x y r =
           -- TODO: Refactor
           unit-trunc-Prop
-            ( transitive-closure-base
+            ( base-transitive-closure-Relation
               ( filtration-relation-lower-bound-is-kripke-model-filtration
                 ( theory)
                 ( M)
@@ -127,13 +127,13 @@ module _
       where
       α :
         (x : type-kripke-model i M) →
-        transitive-closure
+        transitive-closure-Relation
           ( relation-kripke-model i (minimal-kripke-model-filtration theory M))
           ( class (Φ-equivalence theory M) x)
           ( class (Φ-equivalence theory M) y) →
         type-Prop ((M , x) ⊨ₘ □ₘ a) →
         type-Prop ((M , y) ⊨ₘ a)
-      α x (transitive-closure-base r) x-forces-box =
+      α x (base-transitive-closure-Relation r) x-forces-box =
         filtration-relation-upper-bound-is-kripke-model-filtration theory M
           ( minimal-kripke-model-filtration theory M)
           ( is-kripke-model-filtration-minimal-kripke-model-filtration theory M
@@ -144,7 +144,7 @@ module _
           ( y)
           ( r)
           ( x-forces-box)
-      α x (transitive-closure-step {y = z*} r-xz c-zy) x-forces-box =
+      α x (step-transitive-closure-Relation {y = z*} r-xz c-zy) x-forces-box =
         apply-universal-property-trunc-Prop
           ( is-inhabited-subtype-equivalence-class (Φ-equivalence theory M) z*)
           ( (M , y) ⊨ₘ a)
@@ -186,7 +186,7 @@ module _
           ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
         ( minimal-transitive-kripke-model-filtration)
     minimal-transitive-filtration-preserves-reflexivity is-refl =
-      transitive-closure-Prop-preserves-reflexivity
+      is-reflexive-transitive-closure-is-reflexive-Relation-Prop
         ( relation-Prop-kripke-model i
           ( minimal-kripke-model-filtration theory M))
         ( minimal-filtration-preserves-reflexivity theory M theory-is-closed
@@ -206,7 +206,7 @@ module _
           ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
         ( minimal-transitive-kripke-model-filtration)
     minimal-transitive-filtration-preserves-symmetry is-sym =
-      transitive-closure-Prop-preserves-symmetry
+      is-symmetric-transitive-closure-is-symmetric-Relation-Prop
         ( relation-Prop-kripke-model i
           ( minimal-kripke-model-filtration theory M))
         ( minimal-filtration-preserves-symmetry theory M theory-is-closed

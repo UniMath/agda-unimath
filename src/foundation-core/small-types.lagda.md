@@ -24,6 +24,8 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
+open import foundation.empty-types
+open import foundation.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -200,6 +202,23 @@ pr2 (is-small-is-contr l H) = equiv-is-contr H is-contr-raise-unit
 ```agda
 is-small-unit : {l : Level} → is-small l unit
 is-small-unit = is-small-is-contr _ is-contr-unit
+```
+
+### Any empty type is small with respect to any universe
+
+```agda
+is-small-is-empty :
+  (l : Level) {l1 : Level} {A : UU l1} → is-empty A → is-small l A
+pr1 (is-small-is-empty l H) = raise-empty l
+pr2 (is-small-is-empty l H) = equiv-is-empty H is-empty-raise-empty
+```
+
+### The empty type is small with respect to any universe
+
+```agda
+is-small-empty :
+  (l : Level) → is-small l empty
+is-small-empty l = is-small-is-empty l id
 ```
 
 ### Small types are closed under dependent pair types

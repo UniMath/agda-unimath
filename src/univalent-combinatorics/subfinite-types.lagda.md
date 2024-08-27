@@ -71,7 +71,7 @@ is-subfinite-injection :
 is-subfinite-injection {X = X} f =
   elim-exists
     ( is-subfinite-Prop X)
-    ( λ n g → intro-exists n (injection-comp f g))
+    ( λ n g → intro-exists n (comp-injection f g))
 ```
 
 ### Any finite set is subfinite

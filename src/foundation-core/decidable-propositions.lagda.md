@@ -193,32 +193,11 @@ is-merely-decidable-is-decidable-trunc-Prop A (inr f) =
   unit-trunc-Prop (inr (f ∘ unit-trunc-Prop))
 ```
 
-### TODO
+### Any decidable proposition is small with respect to any universe level
 
 ```agda
--- TODO: not only for decidable
-equiv-empty-is-decidable-prop :
-  {l : Level} {A : UU l} → is-decidable-prop A → ¬ A → A ≃ empty
-equiv-empty-is-decidable-prop {l} {A} (is-p , _) contra =
-  equiv-iff (A , is-p) empty-Prop contra ex-falso
-
--- TODO: not only for decidable
-equiv-unit-is-decidable-prop :
-  {l : Level} {A : UU l} → is-decidable-prop A → A → A ≃ unit
-equiv-unit-is-decidable-prop {l} {A} (is-p , _) a =
-  equiv-iff (A , is-p) unit-Prop (λ _ → star) (λ _ → a)
-
-equiv-empty-or-unit-is-decidable-prop :
-  {l : Level} {A : UU l} → is-decidable-prop A → (A ≃ unit) + (A ≃ empty)
-equiv-empty-or-unit-is-decidable-prop {l} {A} H@(_ , is-d) with is-d
-... | inl contra = inl (equiv-unit-is-decidable-prop H contra)
-... | inr a = inr (equiv-empty-is-decidable-prop H a)
-
--- TODO: move to foundation
-is-small-prop-is-decidable-prop :
+is-small-is-decidable-prop :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-decidable-prop A → is-small l2 A
-is-small-prop-is-decidable-prop l2 A H
-  with equiv-empty-or-unit-is-decidable-prop H
-... | inl e = is-small-equiv unit e (raise-unit l2 , compute-raise-unit l2)
-... | inr e = is-small-equiv empty e (raise-empty l2 , compute-raise-empty l2)
+is-small-is-decidable-prop l2 A (H , inl a) = is-small-is-contr l2 (is-proof-irrelevant-is-prop H a)
+is-small-is-decidable-prop l2 A (H , inr f) = is-small-is-empty l2 f
 ```
