@@ -26,7 +26,6 @@ open import metric-spaces.precategory-of-metric-spaces-and-short-functions publi
 open import metric-spaces.premetric-spaces public
 open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
-open import metric-spaces.sequences-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.short-functions-premetric-spaces public
 open import metric-spaces.subsets-metric-spaces public

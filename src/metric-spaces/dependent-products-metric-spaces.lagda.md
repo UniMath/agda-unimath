@@ -25,7 +25,6 @@ open import foundation.universe-levels
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.neighbourhood-relations
-open import metric-spaces.sequences-metric-spaces
 open import metric-spaces.short-functions-metric-spaces
 ```
 
