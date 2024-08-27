@@ -23,7 +23,6 @@ open import foundation.universe-levels
 
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.uniformly-continuous-functions-metric-spaces
 ```
 
 </details>
@@ -190,21 +189,6 @@ module _
       ( map-short-function-Metric-Space A B f)
       ( is-short-map-short-function-Metric-Space B C g)
       ( is-short-map-short-function-Metric-Space A B f))
-```
-
-### Any short map is uniformly continuous
-
-```agda
-module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  (f : function-carrier-type-Metric-Space A B)
-  (H : is-short-function-Metric-Space A B f)
-  where
-
-  is-uniformly-continuous-is-short-function-Metric-Space :
-    is-uniformly-continuous-function-Metric-Space A B f
-  is-uniformly-continuous-is-short-function-Metric-Space ε =
-    intro-exists ε (H ε)
 ```
 
 ### Constant functions between metric spaces are short
