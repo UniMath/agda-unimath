@@ -15,6 +15,7 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
@@ -26,8 +27,8 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import metric-spaces.functions-metric-spaces
+open import metric-spaces.isometry-premetric-spaces
 open import metric-spaces.metric-spaces
-open import metric-spaces.short-functions-metric-spaces
 ```
 
 </details>
@@ -45,210 +46,167 @@ if it transports [neighbourhoods](metric-spaces.neighbourhood-relations.md).
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   (f : function-carrier-type-Metric-Space A B)
   where
 
-  is-isometry-prop-function-Metric-Space : Prop (l1 ⊔ l2)
-  is-isometry-prop-function-Metric-Space =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ d →
-        Π-Prop
-          ( type-Metric-Space A)
-          ( λ x →
-            Π-Prop
-              ( type-Metric-Space A)
-              ( λ y →
-                iff-Prop
-                  ( neighbourhood-Metric-Space A d x y)
-                  ( neighbourhood-Metric-Space B d (f x) (f y)))))
+  is-isometry-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l2')
+  is-isometry-prop-Metric-Space =
+    is-isometry-prop-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
 
-  is-isometry-function-Metric-Space : UU (l1 ⊔ l2)
-  is-isometry-function-Metric-Space =
-    type-Prop is-isometry-prop-function-Metric-Space
+  is-isometry-Metric-Space : UU (l1 ⊔ l2 ⊔ l2')
+  is-isometry-Metric-Space =
+    type-Prop is-isometry-prop-Metric-Space
 
-  is-prop-is-isometry-function-Metric-Space :
-    is-prop is-isometry-function-Metric-Space
-  is-prop-is-isometry-function-Metric-Space =
-    is-prop-type-Prop is-isometry-prop-function-Metric-Space
+  is-prop-is-isometry-Metric-Space :
+    is-prop is-isometry-Metric-Space
+  is-prop-is-isometry-Metric-Space =
+    is-prop-type-Prop is-isometry-prop-Metric-Space
 ```
 
 ### The set of isometries between metric spaces
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
-  set-isometry-function-Metric-Space : Set (l1 ⊔ l2)
-  set-isometry-function-Metric-Space =
+  set-isometry-Metric-Space : Set (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  set-isometry-Metric-Space =
     set-subset
       ( set-function-carrier-type-Metric-Space A B)
-      ( is-isometry-prop-function-Metric-Space A B)
+      ( is-isometry-prop-Metric-Space A B)
 
-  isometry-function-Metric-Space : UU (l1 ⊔ l2)
-  isometry-function-Metric-Space = type-Set set-isometry-function-Metric-Space
+  isometry-Metric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  isometry-Metric-Space = type-Set set-isometry-Metric-Space
 
-  is-set-isometry-function-Metric-Space : is-set isometry-function-Metric-Space
-  is-set-isometry-function-Metric-Space =
-    is-set-type-Set set-isometry-function-Metric-Space
-```
+  is-set-isometry-Metric-Space : is-set isometry-Metric-Space
+  is-set-isometry-Metric-Space =
+    is-set-type-Set set-isometry-Metric-Space
 
-```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  (f : isometry-function-Metric-Space A B)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : isometry-Metric-Space A B)
   where
 
-  map-isometry-function-Metric-Space : function-carrier-type-Metric-Space A B
-  map-isometry-function-Metric-Space = pr1 f
+  map-isometry-Metric-Space : function-carrier-type-Metric-Space A B
+  map-isometry-Metric-Space =
+    map-isometry-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
 
-  is-isometry-map-isometry-function-Metric-Space :
-    is-isometry-function-Metric-Space
-      A
-      B
-      map-isometry-function-Metric-Space
-  is-isometry-map-isometry-function-Metric-Space = pr2 f
+  is-isometry-map-isometry-Metric-Space :
+    is-isometry-Metric-Space A B map-isometry-Metric-Space
+  is-isometry-map-isometry-Metric-Space =
+    is-isometry-map-isometry-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
 ```
 
 ## Properties
-
-### Two isometries are equal if their underlying maps are pointwise equal
-
-```agda
-module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  (f g : isometry-function-Metric-Space A B)
-  where
-
-  eq-isometry-function-Metric-Space :
-    ( (x : type-Metric-Space A) →
-      Id
-        ( map-isometry-function-Metric-Space A B f x)
-        ( map-isometry-function-Metric-Space A B g x)) →
-    Id f g
-  eq-isometry-function-Metric-Space H =
-    eq-type-subtype
-      ( is-isometry-prop-function-Metric-Space A B)
-      ( eq-htpy H)
-```
 
 ### The identity function on a metric space is an isometry
 
 ```agda
 module _
-  {l : Level} (A : Metric-Space l)
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
   is-isometry-id-Metric-Space :
-    is-isometry-function-Metric-Space A A (id-Metric-Space A)
+    is-isometry-Metric-Space A A (id-Metric-Space A)
   is-isometry-id-Metric-Space d x y = id-iff
 
-  isometry-id-Metric-Space : isometry-function-Metric-Space A A
+  isometry-id-Metric-Space : isometry-Metric-Space A A
   isometry-id-Metric-Space =
     id-Metric-Space A , is-isometry-id-Metric-Space
 ```
 
-### The composition of isometries is an isometry
+### Equality of isometries in metric spaces is equivalent to homotopies between their carrier maps
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
-  (A : Metric-Space l1)
-  (B : Metric-Space l2)
-  (C : Metric-Space l3)
-  (g : function-carrier-type-Metric-Space B C)
-  (f : function-carrier-type-Metric-Space A B)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f g : isometry-Metric-Space A B)
   where
 
-  preserves-isometry-comp-function-Metric-Space :
-    is-isometry-function-Metric-Space B C g →
-    is-isometry-function-Metric-Space A B f →
-    is-isometry-function-Metric-Space A C (g ∘ f)
-  preserves-isometry-comp-function-Metric-Space H K d x y =
-    (H d (f x) (f y)) ∘iff (K d x y)
+  equiv-eq-htpy-map-isometry-Metric-Space :
+    (f ＝ g) ≃
+    (map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g)
+  equiv-eq-htpy-map-isometry-Metric-Space =
+    equiv-eq-htpy-map-isometry-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
+      ( g)
+
+  htpy-eq-map-isometry-Metric-Space :
+    (f ＝ g) →
+    (map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g)
+  htpy-eq-map-isometry-Metric-Space =
+    map-equiv equiv-eq-htpy-map-isometry-Metric-Space
+
+  eq-htpy-map-isometry-Metric-Space :
+    (map-isometry-Metric-Space A B f ~ map-isometry-Metric-Space A B g) →
+    (f ＝ g)
+  eq-htpy-map-isometry-Metric-Space =
+    map-inv-equiv equiv-eq-htpy-map-isometry-Metric-Space
 ```
 
 ### The isometric composition of isometries
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
-  (A : Metric-Space l1)
-  (B : Metric-Space l2)
-  (C : Metric-Space l3)
-  (g : isometry-function-Metric-Space B C)
-  (f : isometry-function-Metric-Space A B)
+  {l1a l2a l1b l2b l1c l2c : Level}
+  (A : Metric-Space l1a l2a)
+  (B : Metric-Space l1b l2b)
+  (C : Metric-Space l1c l2c)
+  (g : isometry-Metric-Space B C)
+  (f : isometry-Metric-Space A B)
   where
 
-  comp-isometry-function-Metric-Space :
-    isometry-function-Metric-Space A C
-  comp-isometry-function-Metric-Space =
-    ( map-isometry-function-Metric-Space B C g ∘
-      map-isometry-function-Metric-Space A B f) ,
-    ( preserves-isometry-comp-function-Metric-Space
-      ( A)
-      ( B)
-      ( C)
-      ( map-isometry-function-Metric-Space B C g)
-      ( map-isometry-function-Metric-Space A B f)
-      ( is-isometry-map-isometry-function-Metric-Space B C g)
-      ( is-isometry-map-isometry-function-Metric-Space A B f))
+  comp-isometry-Metric-Space :
+    isometry-Metric-Space A C
+  comp-isometry-Metric-Space =
+    ( map-isometry-Metric-Space B C g ∘
+      map-isometry-Metric-Space A B f) ,
+    ( preserves-isometry-comp-function-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( premetric-Metric-Space C)
+      ( map-isometry-Metric-Space B C g)
+      ( map-isometry-Metric-Space A B f)
+      ( is-isometry-map-isometry-Metric-Space B C g)
+      ( is-isometry-map-isometry-Metric-Space A B f))
 ```
 
-### The inverse of an isometric equivalence is an isometry
+### The isometric inverse of an isometric equivalence
 
 ```agda
 module _
-  {l1 l2 : Level}
-  (A : Metric-Space l1)
-  (B : Metric-Space l2)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   (f : function-carrier-type-Metric-Space A B)
-  (I : is-isometry-function-Metric-Space A B f)
   (E : is-equiv f)
+  (I : is-isometry-Metric-Space A B f)
   where
 
-  is-isometry-map-inv-is-equiv-Metric-Space :
-    is-isometry-function-Metric-Space B A (map-inv-is-equiv E)
-  is-isometry-map-inv-is-equiv-Metric-Space d x y =
-    logical-equivalence-reasoning
-      ( is-in-neighbourhood-Metric-Space B d x y)
-      ↔ ( is-in-neighbourhood-Metric-Space B d
-          ( f (map-inv-is-equiv E x))
-          ( f (map-inv-is-equiv E y)))
-        by
-          binary-tr
-            ( λ u v →
-              ( is-in-neighbourhood-Metric-Space B d x y) ↔
-              ( is-in-neighbourhood-Metric-Space B d u v))
-            ( inv (is-section-map-inv-is-equiv E x))
-            ( inv (is-section-map-inv-is-equiv E y))
-            ( id-iff)
-      ↔ ( is-in-neighbourhood-Metric-Space A d
-          ( map-inv-is-equiv E x)
-          (map-inv-is-equiv E y))
-        by
-          inv-iff
-            ( I d (map-inv-is-equiv E x) (map-inv-is-equiv E y))
-
-  isometry-inv-is-equiv-is-isometry-function-Metric-Space :
-    isometry-function-Metric-Space B A
-  isometry-inv-is-equiv-is-isometry-function-Metric-Space =
-    map-inv-is-equiv E , is-isometry-map-inv-is-equiv-Metric-Space
-```
-
-### Any isometry is short
-
-```agda
-module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  (f : function-carrier-type-Metric-Space A B)
-  (H : is-isometry-function-Metric-Space A B f)
-  where
-
-  is-short-is-isometry-function-Metric-Space :
-    is-short-function-Metric-Space A B f
-  is-short-is-isometry-function-Metric-Space d x y =
-    forward-implication (H d x y)
+  isometry-inv-is-equiv-is-isometry-Metric-Space :
+    isometry-Metric-Space B A
+  isometry-inv-is-equiv-is-isometry-Metric-Space =
+    ( map-inv-is-equiv E) ,
+    ( is-isometry-map-inv-is-equiv-is-isometry-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
+      ( E)
+      ( I))
 ```

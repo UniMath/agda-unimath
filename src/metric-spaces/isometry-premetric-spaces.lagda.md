@@ -9,9 +9,11 @@ module metric-spaces.isometry-premetric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
+open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -92,7 +94,9 @@ module _
   is-isometry-map-isometry-Premetric-Space = pr2 f
 ```
 
-### Equality of isometries is equivalent to homotopies between their carrier maps
+## Properties
+
+### Equality of isometries in premetric spaces is equivalent to homotopies between their carrier maps
 
 ```agda
 module _
@@ -118,4 +122,59 @@ module _
     ( f ＝ g)
   eq-htpy-map-isometry-Premetric-Space =
     map-inv-equiv equiv-eq-htpy-map-isometry-Premetric-Space
+```
+
+### The composition of isometries between premetric spaces is a isometric
+
+```agda
+module _
+  {l1a l2a l1b l2b l1c l2c : Level}
+  (A : Premetric-Space l1a l2a)
+  (B : Premetric-Space l1b l2b)
+  (C : Premetric-Space l1c l2c)
+  (g : function-carrier-type-Premetric-Space B C)
+  (f : function-carrier-type-Premetric-Space A B)
+  where
+
+  preserves-isometry-comp-function-Premetric-Space :
+    is-isometry-Premetric-Space B C g →
+    is-isometry-Premetric-Space A B f →
+    is-isometry-Premetric-Space A C (g ∘ f)
+  preserves-isometry-comp-function-Premetric-Space H K d x y =
+    (H d (f x) (f y)) ∘iff (K d x y)
+```
+
+### The inverse of an isometric equivalence between premetric spaces is isometric
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
+  (f : function-carrier-type-Premetric-Space A B)
+  (E : is-equiv f)
+  (I : is-isometry-Premetric-Space A B f)
+  where
+
+  is-isometry-map-inv-is-equiv-is-isometry-Premetric-Space :
+    is-isometry-Premetric-Space B A (map-inv-is-equiv E)
+  is-isometry-map-inv-is-equiv-is-isometry-Premetric-Space d x y =
+    logical-equivalence-reasoning
+      ( is-close-Premetric-Space B d x y)
+      ↔ ( is-close-Premetric-Space B d
+          ( f (map-inv-is-equiv E x))
+          ( f (map-inv-is-equiv E y)))
+        by
+          binary-tr
+            ( λ u v →
+              ( is-close-Premetric-Space B d x y) ↔
+              ( is-close-Premetric-Space B d u v))
+            ( inv (is-section-map-inv-is-equiv E x))
+            ( inv (is-section-map-inv-is-equiv E y))
+            ( id-iff)
+      ↔ ( is-close-Premetric-Space A d
+          ( map-inv-is-equiv E x)
+          ( map-inv-is-equiv E y))
+        by
+          inv-iff
+            ( I d (map-inv-is-equiv E x) (map-inv-is-equiv E y))
 ```

@@ -12,6 +12,7 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
+open import metric-spaces.premetric-spaces
 ```
 
 </details>
@@ -19,8 +20,7 @@ open import metric-spaces.metric-spaces
 ## Idea
 
 {{#concept "Functions" Disambiguation="between metric spaces" Agda=function-carrier-type-Metric-Space}}
-between metric spaces are (not necessarily continuous) functions between their
-carrier types.
+between metric spaces are functions between their carrier types.
 
 ## Definitions
 
@@ -28,18 +28,22 @@ carrier types.
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
-  function-carrier-type-Metric-Space : UU (l1 ⊔ l2)
-  function-carrier-type-Metric-Space = type-Metric-Space A → type-Metric-Space B
+  function-carrier-type-Metric-Space : UU (l1 ⊔ l1')
+  function-carrier-type-Metric-Space =
+    function-carrier-type-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
 ```
 
 ### The identity function on a metric space
 
 ```agda
 module _
-  {l : Level} (M : Metric-Space l)
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
   id-Metric-Space : function-carrier-type-Metric-Space M M
@@ -52,7 +56,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
   is-set-function-carrier-type-Metric-Space :
@@ -60,7 +65,7 @@ module _
   is-set-function-carrier-type-Metric-Space =
     is-set-Π (λ x → is-set-type-Metric-Space B)
 
-  set-function-carrier-type-Metric-Space : Set (l1 ⊔ l2)
+  set-function-carrier-type-Metric-Space : Set (l1 ⊔ l1')
   set-function-carrier-type-Metric-Space =
     function-carrier-type-Metric-Space A B ,
     is-set-function-carrier-type-Metric-Space

@@ -10,9 +10,10 @@ module metric-spaces.short-functions-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -22,7 +23,9 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.functions-metric-spaces
+open import metric-spaces.isometry-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.short-functions-premetric-spaces
 ```
 
 </details>
@@ -32,7 +35,8 @@ open import metric-spaces.metric-spaces
 A [function](metric-spaces.functions-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is
 {{#concept "short" Disambiguation="function between metric spaces" Agda=is-short-function-Metric-Space}}
-if it preserves [neighbourhoods](metric-spaces.neighbourhood-relations.md).
+if it is [short](metric-spaces.short-functions-premetric-spaces.md) on their
+carrier [premetric spaces](metric-spaces.premetric-spaces.md).
 
 ## Definitions
 
@@ -40,99 +44,78 @@ if it preserves [neighbourhoods](metric-spaces.neighbourhood-relations.md).
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   (f : function-carrier-type-Metric-Space A B)
   where
 
-  is-short-prop-function-Metric-Space : Prop (l1 ⊔ l2)
-  is-short-prop-function-Metric-Space =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ d →
-        Π-Prop
-          ( type-Metric-Space A)
-          ( λ x →
-            Π-Prop
-              ( type-Metric-Space A)
-              ( λ y →
-                hom-Prop
-                  ( neighbourhood-Metric-Space A d x y)
-                  ( neighbourhood-Metric-Space B d (f x) (f y)))))
+  is-short-function-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l2')
+  is-short-function-prop-Metric-Space =
+    is-short-function-prop-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
 
-  is-short-function-Metric-Space : UU (l1 ⊔ l2)
-  is-short-function-Metric-Space = type-Prop is-short-prop-function-Metric-Space
+  is-short-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l2')
+  is-short-function-Metric-Space =
+    type-Prop is-short-function-prop-Metric-Space
 
   is-prop-is-short-function-Metric-Space :
     is-prop is-short-function-Metric-Space
   is-prop-is-short-function-Metric-Space =
-    is-prop-type-Prop is-short-prop-function-Metric-Space
+    is-prop-type-Prop is-short-function-prop-Metric-Space
 ```
 
 ### The set of short functions between metric spaces
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
-  set-short-function-Metric-Space : Set (l1 ⊔ l2)
+  set-short-function-Metric-Space : Set (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   set-short-function-Metric-Space =
     set-subset
       ( set-function-carrier-type-Metric-Space A B)
-      ( is-short-prop-function-Metric-Space A B)
+      ( is-short-function-prop-Metric-Space A B)
 
-  short-function-Metric-Space : UU (l1 ⊔ l2)
+  short-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   short-function-Metric-Space = type-Set set-short-function-Metric-Space
 
   is-set-short-function-Metric-Space : is-set short-function-Metric-Space
   is-set-short-function-Metric-Space =
     is-set-type-Set set-short-function-Metric-Space
-```
 
-```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   (f : short-function-Metric-Space A B)
   where
 
   map-short-function-Metric-Space : function-carrier-type-Metric-Space A B
-  map-short-function-Metric-Space = pr1 f
+  map-short-function-Metric-Space =
+    map-short-function-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
 
   is-short-map-short-function-Metric-Space :
-    is-short-function-Metric-Space
-      A
-      B
-      map-short-function-Metric-Space
-  is-short-map-short-function-Metric-Space = pr2 f
+    is-short-function-Metric-Space A B map-short-function-Metric-Space
+  is-short-map-short-function-Metric-Space =
+    is-short-map-short-function-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
 ```
 
 ## Properties
-
-### Two short functions are equal if their underlying maps are pointwise equal
-
-```agda
-module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
-  (f g : short-function-Metric-Space A B)
-  where
-
-  eq-short-function-Metric-Space :
-    ( (x : type-Metric-Space A) →
-      Id
-        ( map-short-function-Metric-Space A B f x)
-        ( map-short-function-Metric-Space A B g x)) →
-    Id f g
-  eq-short-function-Metric-Space H =
-    eq-type-subtype
-      ( is-short-prop-function-Metric-Space A B)
-      ( eq-htpy H)
-```
 
 ### The identity function on a metric space is short
 
 ```agda
 module _
-  {l : Level} (A : Metric-Space l)
+  {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
   is-short-id-Metric-Space :
@@ -144,67 +127,120 @@ module _
     id-Metric-Space A , is-short-id-Metric-Space
 ```
 
-### The composition of short functions is short
+### Equality of short functions between metric spaces is equivalent to homtopies between their carrier maps
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
-  (A : Metric-Space l1)
-  (B : Metric-Space l2)
-  (C : Metric-Space l3)
-  (g : function-carrier-type-Metric-Space B C)
-  (f : function-carrier-type-Metric-Space A B)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f g : short-function-Metric-Space A B)
   where
 
-  preserves-short-comp-function-Metric-Space :
-    is-short-function-Metric-Space B C g →
-    is-short-function-Metric-Space A B f →
-    is-short-function-Metric-Space A C (g ∘ f)
-  preserves-short-comp-function-Metric-Space H K d x y =
-    H d (f x) (f y) ∘ K d x y
+  equiv-eq-htpy-map-short-function-Metric-Space :
+    ( f ＝ g) ≃
+    ( map-short-function-Metric-Space A B f ~
+      map-short-function-Metric-Space A B g)
+  equiv-eq-htpy-map-short-function-Metric-Space =
+    equiv-funext ∘e
+    extensionality-type-subtype'
+      ( is-short-function-prop-Metric-Space A B) f g
+
+  eq-htpy-map-short-function-Metric-Space :
+    ( map-short-function-Metric-Space A B f ~
+      map-short-function-Metric-Space A B g) →
+    ( f ＝ g)
+  eq-htpy-map-short-function-Metric-Space =
+    map-inv-equiv equiv-eq-htpy-map-short-function-Metric-Space
 ```
 
 ### The short composition of short functions
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
-  (A : Metric-Space l1)
-  (B : Metric-Space l2)
-  (C : Metric-Space l3)
+  {l1a l2a l1b l2b l1c l2c : Level}
+  (A : Metric-Space l1a l2a)
+  (B : Metric-Space l1b l2b)
+  (C : Metric-Space l1c l2c)
   (g : short-function-Metric-Space B C)
   (f : short-function-Metric-Space A B)
   where
 
   comp-short-function-Metric-Space :
     short-function-Metric-Space A C
-  comp-short-function-Metric-Space =
-    ( map-short-function-Metric-Space B C g ∘
-      map-short-function-Metric-Space A B f) ,
-    ( preserves-short-comp-function-Metric-Space
-      ( A)
-      ( B)
-      ( C)
+  pr1 comp-short-function-Metric-Space =
+    map-short-function-Metric-Space B C g ∘
+    map-short-function-Metric-Space A B f
+  pr2 comp-short-function-Metric-Space =
+    preserves-short-comp-function-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( premetric-Metric-Space C)
       ( map-short-function-Metric-Space B C g)
       ( map-short-function-Metric-Space A B f)
       ( is-short-map-short-function-Metric-Space B C g)
-      ( is-short-map-short-function-Metric-Space A B f))
+      ( is-short-map-short-function-Metric-Space A B f)
 ```
 
 ### Constant functions between metric spaces are short
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Metric-Space l1) (B : Metric-Space l2)
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   (b : type-Metric-Space B)
   where
 
   is-short-constant-function-Metric-Space :
     is-short-function-Metric-Space A B (λ _ → b)
   is-short-constant-function-Metric-Space ε x y H =
-    is-reflexive-neighbourhood-Metric-Space B ε b
+    is-reflexive-premetric-structure-Metric-Space B ε b
 ```
 
-## See also
+### Any isometry between metric spaces is short
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  (f : function-carrier-type-Metric-Space A B)
+  where
+
+  is-short-is-isometry-Metric-Space :
+    is-isometry-Metric-Space A B f →
+    is-short-function-Metric-Space A B f
+  is-short-is-isometry-Metric-Space =
+    is-short-is-isometry-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( f)
+```
+
+### The embedding of isometries of metric spaces into short maps
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  where
+
+  short-isometry-Metric-Space :
+    isometry-Metric-Space A B → short-function-Metric-Space A B
+  short-isometry-Metric-Space f =
+    map-isometry-Metric-Space A B f ,
+    is-short-is-isometry-Metric-Space
+      ( A)
+      ( B)
+      ( map-isometry-Metric-Space A B f)
+      ( is-isometry-map-isometry-Metric-Space A B f)
+
+  htpy-map-short-isometry-Metric-Space :
+    (f : isometry-Metric-Space A B) →
+    map-isometry-Metric-Space A B f ~
+    map-short-function-Metric-Space A B
+      (short-isometry-Metric-Space f)
+  htpy-map-short-isometry-Metric-Space f x = refl
+```
+
+## References
 
 - [Short maps](https://ncatlab.org/nlab/show/short+map) at $n$Lab

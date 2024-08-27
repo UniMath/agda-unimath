@@ -27,45 +27,46 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
-open import metric-spaces.metric-structures
-open import metric-spaces.neighbourhood-relations
+open import metric-spaces.premetric-structures
 ```
 
 </details>
 
 ## Idea
 
-The
-{{#concept "standard metric structure" Disambiguation="on the rational numbers" Agda=metric-structure-ℚ}}
-on the [rational numbers](elementary-number-theory.rational-numbers.md) is the
-[metric structure](metric-spaces.metric-spaces.md) where
-[`d`-neighbourhoods](metric-spaces.neighbourhood-relations.md) are pairs
-`x y : ℚ` such that `x < y + d` and `y < x + d`.
+The type of [rational numbers](elementary-number-theory.rational-numbers.md)
+equipped with the [premetric](metric-spaces.premetric-structures.md) where
+`x y : ℚ` are `d`-close when `y < x + d` and `x < y + d` is a
+[metric space](metric-spaces.metric-spaces.md).
+
+It is the {{#concept "standard metric space of rational numbers" Agda=metric-ℚ}}
 
 ## Definitions
 
-### The standard neighbourhood-relation on the rational numbers
+### The standard premetric on the rational numbers
 
 ```agda
-neighbourhood-ℚ : neighbourhood-Relation-Prop lzero ℚ
-neighbourhood-ℚ d x y =
+premetric-ℚ : Premetric lzero ℚ
+premetric-ℚ d x y =
   product-Prop
     ( le-ℚ-Prop y (x +ℚ (rational-ℚ⁺ d)))
     ( le-ℚ-Prop x (y +ℚ (rational-ℚ⁺ d)))
 ```
 
-### The standard neighbourhood-relation on the rational-numbers is a metric structure
+## Properties
+
+### The standard premetric on the rational-numbers is a metric structure
 
 ```agda
-is-symmetric-neighbourhood-ℚ : is-symmetric-neighbourhood neighbourhood-ℚ
-is-symmetric-neighbourhood-ℚ d x y (H , K) = (K , H)
-
-is-reflexive-neighbourhood-ℚ : is-reflexive-neighbourhood neighbourhood-ℚ
-is-reflexive-neighbourhood-ℚ d x =
+is-reflexive-premetric-ℚ : is-reflexive-Premetric premetric-ℚ
+is-reflexive-premetric-ℚ d x =
   (le-right-add-rational-ℚ⁺ x d , le-right-add-rational-ℚ⁺ x d)
 
-is-tight-neighbourhood-ℚ : is-tight-neighbourhood neighbourhood-ℚ
-is-tight-neighbourhood-ℚ x y H =
+is-symmetric-premetric-ℚ : is-symmetric-Premetric premetric-ℚ
+is-symmetric-premetric-ℚ d x y (H , K) = (K , H)
+
+is-tight-premetric-ℚ : is-tight-Premetric premetric-ℚ
+is-tight-premetric-ℚ x y H =
   trichotomy-le-ℚ x y
     ( λ K →
       ex-falso
@@ -91,15 +92,15 @@ is-tight-neighbourhood-ℚ x y H =
               ( right-unit-law-add-ℚ x)))
             ( pr2 (H ( x -ℚ y , is-positive-diff-le-ℚ y x K))))))
 
-is-separating-neighbourhood-ℚ : is-separating-neighbourhood neighbourhood-ℚ
-is-separating-neighbourhood-ℚ =
-  is-separating-is-tight-neighbourhood
-    neighbourhood-ℚ
-    is-tight-neighbourhood-ℚ
+is-local-premetric-ℚ : is-local-Premetric premetric-ℚ
+is-local-premetric-ℚ =
+  is-local-is-tight-Premetric
+    premetric-ℚ
+    is-tight-premetric-ℚ
 
-is-triangular-neighbourhood-ℚ :
-  is-triangular-neighbourhood neighbourhood-ℚ
-pr1 (is-triangular-neighbourhood-ℚ x y z d₁ d₂ Hyz Hxy) =
+is-triangular-premetric-ℚ :
+  is-triangular-Premetric premetric-ℚ
+pr1 (is-triangular-premetric-ℚ x y z d₁ d₂ Hyz Hxy) =
   tr
     ( le-ℚ z)
     ( associative-add-ℚ x (rational-ℚ⁺ d₁) (rational-ℚ⁺ d₂))
@@ -113,7 +114,7 @@ pr1 (is-triangular-neighbourhood-ℚ x y z d₁ d₂ Hyz Hxy) =
         ( x +ℚ (rational-ℚ⁺ d₁))
         ( pr1 Hxy))
       ( pr1 Hyz))
-pr2 (is-triangular-neighbourhood-ℚ x y z d₁ d₂ Hyz Hxy) =
+pr2 (is-triangular-premetric-ℚ x y z d₁ d₂ Hyz Hxy) =
   tr
     ( le-ℚ x)
     ( ap (z +ℚ_) (commutative-add-ℚ (rational-ℚ⁺ d₂) (rational-ℚ⁺ d₁)))
@@ -130,23 +131,16 @@ pr2 (is-triangular-neighbourhood-ℚ x y z d₁ d₂ Hyz Hxy) =
           ( z +ℚ (rational-ℚ⁺ d₂))
           ( pr2 Hyz)))
         ( pr2 Hxy)))
-
-is-metric-neighbourhood-ℚ : is-metric-neighbourhood ℚ neighbourhood-ℚ
-is-metric-neighbourhood-ℚ =
-  is-symmetric-neighbourhood-ℚ ,
-  is-reflexive-neighbourhood-ℚ ,
-  is-separating-neighbourhood-ℚ ,
-  is-triangular-neighbourhood-ℚ
-
-metric-structure-ℚ : Metric-Structure lzero ℚ
-pr1 metric-structure-ℚ = neighbourhood-ℚ
-pr2 metric-structure-ℚ = is-metric-neighbourhood-ℚ
 ```
 
 ### The standard metric space of rational numbers
 
 ```agda
-metric-space-ℚ : Metric-Space lzero
-pr1 metric-space-ℚ = ℚ
-pr2 metric-space-ℚ = metric-structure-ℚ
+metric-space-ℚ : Metric-Space lzero lzero
+pr1 metric-space-ℚ = ℚ , premetric-ℚ
+pr2 metric-space-ℚ =
+  is-reflexive-premetric-ℚ ,
+  is-symmetric-premetric-ℚ ,
+  is-local-premetric-ℚ ,
+  is-triangular-premetric-ℚ
 ```

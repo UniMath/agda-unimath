@@ -19,7 +19,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
-open import metric-spaces.neighbourhood-relations
+open import metric-spaces.premetric-structures
 ```
 
 </details>
@@ -29,21 +29,20 @@ open import metric-spaces.neighbourhood-relations
 Two elements `x` and `y` in a [metric space](metric-spaces.md) are
 {{#concept "apart" Disambiguation="in a metric space", Agda=apart-elements-Metric-Space}}
 if there [exists](foundation.existential-quantification.md) some `d : ℚ⁺` such
-that `x` and `y` are not in a
-[`d`-neighbourhood](metric-spaces.neighbourhood-relations.md).
+that `x` and `y` are not [`d`-close](metric-spaces.premetric-structures.md).
 
 ## Definitions
 
 ```agda
 module _
-  {l : Level} (M : Metric-Space l) (x y : type-Metric-Space M)
+  {l1 l2 : Level} (M : Metric-Space l1 l2) (x y : type-Metric-Space M)
   where
 
-  apart-elements-prop-Metric-Space : Prop l
+  apart-elements-prop-Metric-Space : Prop l2
   apart-elements-prop-Metric-Space =
-    ∃ ℚ⁺ (λ d → neg-Prop (neighbourhood-Metric-Space M d x y))
+    ∃ ℚ⁺ (λ d → neg-Prop (structure-Metric-Space M d x y))
 
-  apart-elements-Metric-Space : UU l
+  apart-elements-Metric-Space : UU l2
   apart-elements-Metric-Space = type-Prop apart-elements-prop-Metric-Space
 
   is-prop-apart-elements-Metric-Space :
@@ -58,7 +57,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (M : Metric-Space l) (x y : type-Metric-Space M)
+  {l1 l2 : Level} (M : Metric-Space l1 l2) (x y : type-Metric-Space M)
   where
 
   not-eq-apart-elements-Metric-Space :
@@ -74,13 +73,12 @@ module _
 
 ```agda
 module _
-  {l : Level} (M : Metric-Space l)
+  {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
-  is-irreflexive-apart-elementys-Metric-Space :
+  is-irreflexive-apart-elements-Metric-Space :
     (x : type-Metric-Space M) → ¬ (apart-elements-Metric-Space M x x)
-
-  is-irreflexive-apart-elementys-Metric-Space x H =
+  is-irreflexive-apart-elements-Metric-Space x H =
     not-eq-apart-elements-Metric-Space M x x H refl
 ```
 
@@ -88,15 +86,16 @@ module _
 
 ```agda
 module _
-  {l : Level} (M : Metric-Space l) (x y : type-Metric-Space M)
+  {l1 l2 : Level} (M : Metric-Space l1 l2) (x y : type-Metric-Space M)
   where
 
   is-symmetric-apart-elements-Metric-Space :
     apart-elements-Metric-Space M x y → apart-elements-Metric-Space M y x
-  is-symmetric-apart-elements-Metric-Space H =
+  is-symmetric-apart-elements-Metric-Space =
     elim-exists
       ( apart-elements-prop-Metric-Space M y x)
       ( λ d I →
-        intro-exists d (I ∘ is-symmetric-neighbourhood-Metric-Space M d y x))
-      ( H)
+        intro-exists
+          ( d)
+          ( I ∘ is-symmetric-premetric-structure-Metric-Space M d y x))
 ```

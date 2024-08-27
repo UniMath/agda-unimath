@@ -7,24 +7,14 @@ module metric-spaces.dependent-products-metric-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.positive-rational-numbers
-
-open import foundation.binary-relations
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sequences
 open import foundation.sets
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
-open import metric-spaces.metric-structures
-open import metric-spaces.neighbourhood-relations
+open import metric-spaces.premetric-structures
 open import metric-spaces.short-functions-metric-spaces
 ```
 
@@ -32,62 +22,59 @@ open import metric-spaces.short-functions-metric-spaces
 
 ## Idea
 
-Dependent products of [metric spaces](metric-spaces.metric-spaces.md) inherit a
-{{#concept "product metric structure" Agda=Π-Metric-Structure}} where
-[`d`-neighbourhoods](metric-spaces.neighbourhood-relations.md) are the products
-of neighbourhoods over each metric space.
+Families of [metric spaces](metric-spaces.metric-spaces.md) over a type produce
+a {{#concept "product metric space" Agda=Π-Metric-Space}} on the type of
+dependent functions into the carrier types of the family. Two functions `f` and
+`g` are [`d`-close](metric-spaces.premetric-structures.md) in the product
+structure if all the evaluations `f x` and `g x` are `d`-close.
 
-Moreover, all the evaluation functions are
-[short maps](metric-spaces.short-functions-metric-spaces.md).
+The evaluation functions from the product metric space to each projected metric
+space are [short maps](metric-spaces.short-functions-metric-spaces.md).
 
 ## Definitions
 
-### Product structure of metric spaces
+### Product of metric spaces
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (P : A → Metric-Space l2)
+  {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2)
   where
 
-  type-Π-Metric-Space : UU (l1 ⊔ l2)
+  type-Π-Metric-Space : UU (l ⊔ l1)
   type-Π-Metric-Space = (x : A) → type-Metric-Space (P x)
 
-  neighbourhood-Π-Metric-Space :
-    neighbourhood-Relation-Prop (l1 ⊔ l2) type-Π-Metric-Space
-  neighbourhood-Π-Metric-Space d f g =
-    Π-Prop A (λ a → neighbourhood-Metric-Space (P a) d (f a) (g a))
+  structure-Π-Metric-Space : Premetric (l ⊔ l2) type-Π-Metric-Space
+  structure-Π-Metric-Space d f g =
+    Π-Prop A (λ x → structure-Metric-Space (P x) d (f x) (g x))
 
-  is-tight-neighbourhood-Π-Metric-Space :
-    is-tight-neighbourhood neighbourhood-Π-Metric-Space
-  is-tight-neighbourhood-Π-Metric-Space f g H =
-    eq-htpy
-      ( λ a →
-        is-tight-neighbourhood-Metric-Space
-          ( P a)
-          ( f a)
-          ( g a)
-          ( λ d → H d a))
-
-  Π-Metric-Structure : Metric-Structure (l1 ⊔ l2) type-Π-Metric-Space
-  pr1 Π-Metric-Structure = neighbourhood-Π-Metric-Space
-  pr2 Π-Metric-Structure =
+  Π-Metric-Space : Metric-Space (l ⊔ l1) (l ⊔ l2)
+  pr1 (pr1 Π-Metric-Space) = type-Π-Metric-Space
+  pr2 (pr1 Π-Metric-Space) = structure-Π-Metric-Space
+  pr2 Π-Metric-Space =
+    ( λ d f a →
+      is-reflexive-premetric-structure-Metric-Space
+        ( P a)
+        ( d)
+        ( f a)) ,
     ( λ d f g H a →
-      is-symmetric-neighbourhood-Metric-Space
+      is-symmetric-premetric-structure-Metric-Space
         ( P a)
         ( d)
         ( f a)
         ( g a)
         ( H a)) ,
-    ( λ d f a →
-      is-reflexive-neighbourhood-Metric-Space
-        ( P a)
-        ( d)
-        ( f a)) ,
-    ( is-separating-is-tight-neighbourhood
-      ( neighbourhood-Π-Metric-Space)
-      ( is-tight-neighbourhood-Π-Metric-Space)) ,
+    ( is-local-is-tight-Premetric
+      ( structure-Π-Metric-Space)
+      ( λ f g H →
+        eq-htpy
+          ( λ a →
+            is-tight-premetric-structure-Metric-Space
+              ( P a)
+              ( f a)
+              ( g a)
+              ( λ d → H d a)))) ,
     ( λ f g h d₁ d₂ H K a →
-      is-triangular-neighbourhood-Metric-Space
+      is-triangular-premetric-structure-Metric-Space
         ( P a)
         ( f a)
         ( g a)
@@ -98,36 +85,18 @@ module _
         ( K a))
 ```
 
-### Product of metric spaces
-
-```agda
-module _
-  {l1 l2 : Level}
-  where
-
-  Π-Metric-Space' :
-    (A : UU l1) → (P : A → Metric-Space l2) → Metric-Space (l1 ⊔ l2)
-  Π-Metric-Space' A P = (type-Π-Metric-Space A P , Π-Metric-Structure A P)
-
-  Π-Metric-Space :
-    (A : Metric-Space l1) →
-    (P : type-Metric-Space A → Metric-Space l2) →
-    Metric-Space (l1 ⊔ l2)
-  Π-Metric-Space A = Π-Metric-Space' (type-Metric-Space A)
-```
-
 ## Properties
 
 ### The evaluation maps on a product metric space are short
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (P : A → Metric-Space l2) (a : A)
+  {l l1 l2 : Level} (A : UU l) (P : A → Metric-Space l1 l2) (a : A)
   where
 
   is-short-ev-Π-Metric-Space :
     is-short-function-Metric-Space
-      ( Π-Metric-Space' A P)
+      ( Π-Metric-Space A P)
       ( P a)
       ( λ f → f a)
   is-short-ev-Π-Metric-Space ε x y H = H a

@@ -16,6 +16,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sequences
@@ -23,6 +24,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.isometry-premetric-spaces
 open import metric-spaces.premetric-spaces
 ```
 
@@ -124,6 +126,42 @@ module _
     ( f ＝ g)
   eq-htpy-map-short-function-Premetric-Space =
     map-inv-equiv equiv-eq-htpy-map-short-function-Premetric-Space
+```
+
+### The composition of short maps between premetric spaces is a short
+
+```agda
+module _
+  {l1a l2a l1b l2b l1c l2c : Level}
+  (A : Premetric-Space l1a l2a)
+  (B : Premetric-Space l1b l2b)
+  (C : Premetric-Space l1c l2c)
+  (g : function-carrier-type-Premetric-Space B C)
+  (f : function-carrier-type-Premetric-Space A B)
+  where
+
+  preserves-short-comp-function-Premetric-Space :
+    is-short-function-Premetric-Space B C g →
+    is-short-function-Premetric-Space A B f →
+    is-short-function-Premetric-Space A C (g ∘ f)
+  preserves-short-comp-function-Premetric-Space H K d x y =
+    H d (f x) (f y) ∘ K d x y
+```
+
+### Any isometry between premetric spaces is short
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
+  (f : function-carrier-type-Premetric-Space A B)
+  where
+
+  is-short-is-isometry-Premetric-Space :
+    is-isometry-Premetric-Space A B f →
+    is-short-function-Premetric-Space A B f
+  is-short-is-isometry-Premetric-Space H d x y =
+    forward-implication (H d x y)
 ```
 
 ## References

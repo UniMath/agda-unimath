@@ -9,11 +9,9 @@ module metric-spaces.category-of-metric-spaces-and-short-functions where
 ```agda
 open import category-theory.categories
 open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions
@@ -31,12 +29,12 @@ is a [category](category-theory.categories.md).
 
 ```agda
 module _
-  {l : Level}
+  {l1 l2 : Level}
   where
 
-  category-short-function-Metric-Space : Category (lsuc l) l
+  category-short-function-Metric-Space : Category (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2)
   pr1 category-short-function-Metric-Space =
-    precategory-short-function-Metric-Space
+    precategory-short-function-Metric-Space {l1} {l2}
   pr2 category-short-function-Metric-Space A =
     fundamental-theorem-id
       ( is-torsorial-iso-precategory-short-function-Metric-Space A)

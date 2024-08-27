@@ -16,7 +16,7 @@ open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometry-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
-open import metric-spaces.neighbourhood-relations
+open import metric-spaces.premetric-structures
 ```
 
 </details>
@@ -34,7 +34,7 @@ their ambient space. Moreover, the natural inclusion is
 
 ```agda
 module _
-  (l : Level) {l1 : Level} (A : Metric-Space l1)
+  (l : Level) {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
   subset-Metric-Space : UU (lsuc l ⊔ l1)
@@ -47,41 +47,50 @@ module _
 
 ```agda
 module _
-  {l : Level} (A : Metric-Space l) (S : subset-Metric-Space l A)
+  {l l1 l2 : Level} (A : Metric-Space l1 l2)
+  (S : subset-Metric-Space l A)
   where
 
-  substructure-Metric-Space : Metric-Structure l (type-subtype S)
-  pr1 substructure-Metric-Space d x y =
-    neighbourhood-Metric-Space A d (pr1 x) (pr1 y)
-  pr2 substructure-Metric-Space =
-    ( λ d x y → is-symmetric-neighbourhood-Metric-Space A d (pr1 x) (pr1 y)) ,
-    ( λ d x → is-reflexive-neighbourhood-Metric-Space A d (pr1 x)) ,
-    ( is-separating-is-tight-neighbourhood
-      ( λ d x y → neighbourhood-Metric-Space A d (pr1 x) (pr1 y))
+  structure-subset-Metric-Space : Premetric l2 (type-subtype S)
+  structure-subset-Metric-Space d x y =
+    structure-Metric-Space A d (pr1 x) (pr1 y)
+
+  is-metric-structure-subset-Metric-Space :
+    is-metric-Premetric structure-subset-Metric-Space
+  is-metric-structure-subset-Metric-Space =
+    ( λ d x →
+      is-reflexive-premetric-structure-Metric-Space A d (pr1 x)) ,
+    ( λ d x y →
+      is-symmetric-premetric-structure-Metric-Space A d (pr1 x) (pr1 y)) ,
+    ( is-local-is-tight-Premetric
+      ( structure-subset-Metric-Space)
       ( λ x y H →
         eq-type-subtype
           ( S)
-          ( is-tight-neighbourhood-Metric-Space A (pr1 x) (pr1 y) H))) ,
+          ( is-tight-premetric-structure-Metric-Space A (pr1 x) (pr1 y) H))) ,
     ( λ x y z →
-      is-triangular-neighbourhood-Metric-Space A (pr1 x) (pr1 y) (pr1 z))
+      is-triangular-premetric-structure-Metric-Space A (pr1 x) (pr1 y) (pr1 z))
 
-  subspace-Metric-Space : Metric-Space l
-  subspace-Metric-Space = (type-subtype S , substructure-Metric-Space)
+  subspace-Metric-Space : Metric-Space (l ⊔ l1) l2
+  pr1 subspace-Metric-Space =
+    type-subtype S , structure-subset-Metric-Space
+  pr2 subspace-Metric-Space =
+    is-metric-structure-subset-Metric-Space
 
   inclusion-subspace-Metric-Space :
     function-carrier-type-Metric-Space subspace-Metric-Space A
-  inclusion-subspace-Metric-Space x = pr1 x
+  inclusion-subspace-Metric-Space = inclusion-subtype S
 ```
 
 ### The inclusion from a subspace in its ambient space is isometric
 
 ```agda
 module _
-  {l : Level} (A : Metric-Space l) (S : subset-Metric-Space l A)
+  {l l1 l2 : Level} (A : Metric-Space l1 l2) (S : subset-Metric-Space l A)
   where
 
   is-isometry-inclusion-subspace-Metric-Space :
-    is-isometry-function-Metric-Space
+    is-isometry-Metric-Space
       (subspace-Metric-Space A S)
       (A)
       (inclusion-subspace-Metric-Space A S)
