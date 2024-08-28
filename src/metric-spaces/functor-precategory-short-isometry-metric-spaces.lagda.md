@@ -104,13 +104,13 @@ module _
       ( B)
       ( comp-isometry-Metric-Space B A B f isometric-inv)
       ( isometry-id-Metric-Space B)
-      ( is-section-map-inv-is-equiv is-equiv-f) ,
-      eq-htpy-map-isometry-Metric-Space
-        ( A)
-        ( A)
-        ( comp-isometry-Metric-Space A B A isometric-inv f)
-        ( isometry-id-Metric-Space A)
-        ( is-retraction-map-inv-is-equiv is-equiv-f))
+      ( is-section-map-inv-is-equiv is-equiv-f)) ,
+    ( eq-htpy-map-isometry-Metric-Space
+      ( A)
+      ( A)
+      ( comp-isometry-Metric-Space A B A isometric-inv f)
+      ( isometry-id-Metric-Space A)
+      ( is-retraction-map-inv-is-equiv is-equiv-f))
     where
 
     is-equiv-f : is-equiv (map-isometry-Metric-Space A B f)

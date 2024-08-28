@@ -11,6 +11,7 @@ open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-premetric-spaces public
 open import metric-spaces.functions-metric-spaces public
+open import metric-spaces.functor-precategory-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-precategory-short-isometry-metric-spaces public
 open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometric-equivalent-premetric-spaces public
