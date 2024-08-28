@@ -27,8 +27,7 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-A map `f : A → B` out of a type `A` equipped with an equivalence relation `R` is
-said to **reflect** `R` if we have `R x y → f x ＝ f y` for every `x y : A`.
+A {{#concept "reflecting map" Disambiguation="equivalence relations" Agda=reflecting-map-equivalence-relation}} out of a type `A` equipped with an [equivalence relation](foundation.equivalence-relations.md) `R` is a map `f : A → B` for which we have `R x y → f x ＝ f y` for every `x y : A`.
 
 ## Definitions
 
@@ -152,3 +151,7 @@ module _
   eq-htpy-reflecting-map-equivalence-relation g =
     map-inv-is-equiv (is-equiv-htpy-eq-reflecting-map-equivalence-relation g)
 ```
+
+## See also
+
+- [Dependent reflecting maps](foundation.dependent-reflecting-maps-equivalence-relations.md)

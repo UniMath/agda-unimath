@@ -41,6 +41,8 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 open import foundation-core.torsorial-type-families
 ```
 
@@ -144,8 +146,8 @@ module _
     is-set-equivalence-class =
       is-set-type-subtype is-equivalence-class-Prop is-set-subtype
 
-  is-in-self-equivalence-class : (a : A) → is-in-equivalence-class (class a) a
-  is-in-self-equivalence-class a = refl-equivalence-relation R a
+  is-in-own-equivalence-class : (a : A) → is-in-equivalence-class (class a) a
+  is-in-own-equivalence-class a = refl-equivalence-relation R a
 
   equivalence-class-Set : Set (l1 ⊔ lsuc l2)
   pr1 equivalence-class-Set = equivalence-class
@@ -386,21 +388,30 @@ module _
     apply-effectiveness-class {x} {y} =
       map-equiv (is-effective-class x y)
 
-  abstract
     apply-effectiveness-class' :
       {x y : A} → sim-equivalence-relation R x y → class R x ＝ class R y
     apply-effectiveness-class' {x} {y} =
       map-inv-equiv (is-effective-class x y)
+
+    is-retraction-apply-effectiveness-class :
+      (x y : A) →
+      is-retraction (apply-effectiveness-class {x} {y}) (apply-effectiveness-class' {x} {y})
+    is-retraction-apply-effectiveness-class x y =
+      is-retraction-map-inv-equiv (is-effective-class x y)
+
+    is-section-apply-effectiveness-class :
+        (x y : A) →
+        is-section (apply-effectiveness-class {x} {y}) (apply-effectiveness-class' {x} {y})
+    is-section-apply-effectiveness-class x y =
+        is-section-map-inv-equiv (is-effective-class x y)
 ```
 
-### TODO: title
+### If two elements `a` and `a'` are in a common class `c`, then `[a] ＝ [a']` and `a ~ a'`
 
 ```agda
-  is-retraction-apply-effectiveness-class :
-    (x y : A) →
-    apply-effectiveness-class' {x} {y} ∘ apply-effectiveness-class {x} {y} ~ id
-  is-retraction-apply-effectiveness-class x y p =
-    eq-is-prop (is-set-equivalence-class R (class R x) (class R y))
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
 
   eq-class-in-common-class :
     (c : equivalence-class R) {a a' : A} →
@@ -408,42 +419,35 @@ module _
     is-in-equivalence-class R c a' →
     class R a ＝ class R a'
   eq-class-in-common-class c {a} {a'} a-in-c a'-in-c =
-    equational-reasoning
-      class R a
-        ＝ c by eq-effective-quotient' a c a-in-c
-        ＝ class R a' by inv (eq-effective-quotient' a' c a'-in-c)
+    eq-effective-quotient' R a c a-in-c ∙
+    inv (eq-effective-quotient' R a' c a'-in-c)
 
-  -- sim-equivalence-relation-in-class :
-  --   {a a' : A} →
-  --   is-in-equivalence-class R (class R a) a' →
-  --   sim-equivalence-relation R a a'
-  -- sim-equivalence-relation-in-class {a} {a'} a'-in-c =
-  --   apply-effectiveness-class
-  --     ( eq-class-in-common-class (class R a') {!   !} {!   !})
-  --   -- apply-effectiveness-class (eq-class-in-common-class c a-in-c a'-in-c)
-
-  sim-equivalence-relation-in-same-class :
+  sim-in-same-class-equivalence-relation :
     (c : equivalence-class R) {a a' : A} →
     is-in-equivalence-class R c a →
     is-in-equivalence-class R c a' →
     sim-equivalence-relation R a a'
-  sim-equivalence-relation-in-same-class c {a} {a'} a-in-c a'-in-c =
-    apply-effectiveness-class (eq-class-in-common-class c a-in-c a'-in-c)
+  sim-in-same-class-equivalence-relation c {a} {a'} a-in-c a'-in-c =
+    apply-effectiveness-class R (eq-class-in-common-class c a-in-c a'-in-c)
 
-  sim-equivalence-relation-in-class :
+  sim-in-class-equivalence-relation :
     {a a' : A} →
     is-in-equivalence-class R (class R a) a' →
     sim-equivalence-relation R a a'
-  sim-equivalence-relation-in-class {a} {a'} a'-in-c =
-    sim-equivalence-relation-in-same-class
+  sim-in-class-equivalence-relation {a} {a'} a'-in-c =
+    sim-in-same-class-equivalence-relation
       ( class R a)
-      ( is-in-self-equivalence-class R a)
+      ( is-in-own-equivalence-class R a)
       ( a'-in-c)
 ```
 
 ### TODO: Eliminator
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
   module _
     {l3 : Level} (B : equivalence-class R → Set l3)
     (f : (a : A) → type-Set (B (class R a)))
@@ -452,7 +456,7 @@ module _
       (s : sim-equivalence-relation R a a') →
       dependent-identification
         ( type-Set ∘ B)
-        ( apply-effectiveness-class' s)
+        ( apply-effectiveness-class' R s)
         ( f a)
         ( f a'))
     where
@@ -504,7 +508,7 @@ module _
           ( is-inhabited-subtype-equivalence-class R c)
           ( b c , is-prop-b c)
           ( λ (a , a-in-c) →
-            ( tr b (eq-effective-quotient' a c a-in-c) (b-instance-class a)))
+            ( tr b (eq-effective-quotient' R a c a-in-c) (b-instance-class a)))
 
     ind-equivalence-class : (c : equivalence-class R) → type-Set (B c)
     ind-equivalence-class = pr1 ∘ b-instance
@@ -527,9 +531,9 @@ module _
       -- TODO: duplicate code
       ( λ a a' s →
         equational-reasoning
-          tr (type-Set ∘ (λ _ → B)) (apply-effectiveness-class' s) (f a)
+          tr (type-Set ∘ (λ _ → B)) (apply-effectiveness-class' R s) (f a)
             ＝ f a
-              by tr-constant-type-family (apply-effectiveness-class' s) (f a)
+              by tr-constant-type-family (apply-effectiveness-class' R s) (f a)
             ＝ f a'
               by H a a' s)
 
@@ -560,9 +564,9 @@ module _
       -- TODO: duplicate code
       ( λ a a' s →
         equational-reasoning
-          tr (type-Set ∘ (λ _ → B)) (apply-effectiveness-class' s) (f a)
+          tr (type-Set ∘ (λ _ → B)) (apply-effectiveness-class' R s) (f a)
             ＝ f a
-              by tr-constant-type-family (apply-effectiveness-class' s) (f a)
+              by tr-constant-type-family (apply-effectiveness-class' R s) (f a)
             ＝ f a'
               by H a a' s)
 
@@ -581,7 +585,7 @@ module _
           by
             ap
               ( rec-equivalence-class B f H)
-              ( inv (eq-effective-quotient' a c a-in-c))
+              ( inv (eq-effective-quotient' R a c a-in-c))
         ＝ f a
           by compute-rec-equivalence-class B f H a
 ```
