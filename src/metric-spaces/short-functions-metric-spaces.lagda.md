@@ -10,6 +10,7 @@ module metric-spaces.short-functions-metric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -234,11 +235,20 @@ module _
       ( is-isometry-map-isometry-Metric-Space A B f)
 
   htpy-map-short-isometry-Metric-Space :
-    (f : isometry-Metric-Space A B) →
-    map-isometry-Metric-Space A B f ~
-    map-short-function-Metric-Space A B
-      (short-isometry-Metric-Space f)
-  htpy-map-short-isometry-Metric-Space f x = refl
+    (map-short-function-Metric-Space A B ∘ short-isometry-Metric-Space) ~
+    (map-isometry-Metric-Space A B)
+  htpy-map-short-isometry-Metric-Space f = refl
+
+  is-emb-short-isometry-Metric-Space :
+    is-emb short-isometry-Metric-Space
+  is-emb-short-isometry-Metric-Space =
+    is-emb-right-factor
+      ( map-short-function-Metric-Space A B)
+      ( short-isometry-Metric-Space)
+      ( is-emb-inclusion-subtype (is-short-function-prop-Metric-Space A B))
+      ( is-emb-htpy
+        ( htpy-map-short-isometry-Metric-Space)
+        ( is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B)))
 ```
 
 ## References
