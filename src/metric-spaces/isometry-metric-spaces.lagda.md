@@ -37,7 +37,7 @@ open import metric-spaces.metric-spaces
 
 A [function](metric-spaces.functions-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is an
-{{#concept "isometry" Disambiguation="between metric spaces" Agda=is-isometry-function-Metric-Space}}
+{{#concept "isometry" Disambiguation="between metric spaces" Agda=is-isometry-Metric-Space}}
 if it transports [neighbourhoods](metric-spaces.neighbourhood-relations.md).
 
 ## Definitions

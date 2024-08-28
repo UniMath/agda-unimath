@@ -17,8 +17,9 @@ open import metric-spaces.premetric-structures
 
 ## Idea
 
-A {{#concept "metric structure" Agda=Metric-Structure}} on a type is a reflexive
-symmetric local triangular [premetric](metric-spaces.premetric-structures.md).
+A [premetric structure](metric-spaces.metric-structures.md) is a
+{{#concept "metric" Disambiguation="premetric structure" Agda=is-metric-Premetric}}
+if it is reflexive, symmetric, local, and triangular.
 
 ## Definitions
 

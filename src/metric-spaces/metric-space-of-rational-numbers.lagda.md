@@ -39,7 +39,7 @@ equipped with the [premetric](metric-spaces.premetric-structures.md) where
 `x y : ℚ` are `d`-close when `y < x + d` and `x < y + d` is a
 [metric space](metric-spaces.metric-spaces.md).
 
-It is the {{#concept "standard metric space of rational numbers" Agda=metric-ℚ}}
+It is the {{#concept "standard metric space of rational numbers" Agda=metric-space-ℚ}}
 
 ## Definitions
 
