@@ -162,24 +162,17 @@ module _
   (A : Metric-Space l1a l2a)
   (B : Metric-Space l1b l2b)
   (C : Metric-Space l1c l2c)
-  (g : short-function-Metric-Space B C)
-  (f : short-function-Metric-Space A B)
   where
 
   comp-short-function-Metric-Space :
+    short-function-Metric-Space B C →
+    short-function-Metric-Space A B →
     short-function-Metric-Space A C
-  pr1 comp-short-function-Metric-Space =
-    map-short-function-Metric-Space B C g ∘
-    map-short-function-Metric-Space A B f
-  pr2 comp-short-function-Metric-Space =
-    preserves-short-comp-function-Premetric-Space
+  comp-short-function-Metric-Space =
+    comp-short-function-Premetric-Space
       ( premetric-Metric-Space A)
       ( premetric-Metric-Space B)
       ( premetric-Metric-Space C)
-      ( map-short-function-Metric-Space B C g)
-      ( map-short-function-Metric-Space A B f)
-      ( is-short-map-short-function-Metric-Space B C g)
-      ( is-short-map-short-function-Metric-Space A B f)
 ```
 
 ### Constant functions between metric spaces are short

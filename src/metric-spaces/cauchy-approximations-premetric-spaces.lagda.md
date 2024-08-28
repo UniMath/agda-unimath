@@ -12,6 +12,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -20,6 +21,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.premetric-spaces
+open import metric-spaces.short-functions-premetric-spaces
 ```
 
 </details>
@@ -96,8 +98,6 @@ module _
   is-cauchy-map-cauchy-approximation-Premetric-Space = pr2 f
 ```
 
-## Properties
-
 ### Limits of a cauchy approximation in a premetric space
 
 ```agda
@@ -129,6 +129,80 @@ module _
     is-prop is-limit-cauchy-approximation-Premetric-Space
   is-prop-is-limit-cauchy-approximation-Premetric-Space =
     is-prop-type-Prop is-limit-cauchy-approximation-prop-Premetric-Space
+```
+
+## Properties
+
+### Short maps between premetric spaces preserve cauchy approximations
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Premetric-Space l1 l2)
+  (B : Premetric-Space l1' l2')
+  (f : function-carrier-type-Premetric-Space A B)
+  (is-short-f : is-short-function-Premetric-Space A B f)
+  (u : ℚ⁺ → type-Premetric-Space A)
+  where
+
+  preserves-is-cauchy-approximation-is-short-function-Premetric-Space :
+    is-cauchy-approximation-Premetric-Space A u →
+    is-cauchy-approximation-Premetric-Space B (f ∘ u)
+  preserves-is-cauchy-approximation-is-short-function-Premetric-Space H ε δ =
+    is-short-f (ε +ℚ⁺ δ) (u ε) (u δ) (H ε δ)
+```
+
+### Short maps between premetric spaces are functorial on cauchy approximations
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Premetric-Space l1 l2)
+  (B : Premetric-Space l1' l2')
+  (f : short-function-Premetric-Space A B)
+  where
+
+  map-short-function-cauchy-approximation-Premetric-Space :
+    cauchy-approximation-Premetric-Space A →
+    cauchy-approximation-Premetric-Space B
+  map-short-function-cauchy-approximation-Premetric-Space (u , H) =
+    map-short-function-Premetric-Space A B f ∘ u ,
+    preserves-is-cauchy-approximation-is-short-function-Premetric-Space
+      ( A)
+      ( B)
+      ( map-short-function-Premetric-Space A B f)
+      ( is-short-map-short-function-Premetric-Space A B f)
+      ( u)
+      ( H)
+
+module _
+  {l1 l2 : Level}
+  (A : Premetric-Space l1 l2)
+  where
+
+  eq-id-map-short-function-cauchy-approximation-Premetric-Space :
+    map-short-function-cauchy-approximation-Premetric-Space
+      ( A)
+      ( A)
+      ( short-id-Premetric-Space A) ＝
+    id
+  eq-id-map-short-function-cauchy-approximation-Premetric-Space = refl
+
+module _
+  {l1a l2a l1b l2b l1c l2c : Level}
+  (A : Premetric-Space l1a l2a)
+  (B : Premetric-Space l1b l2b)
+  (C : Premetric-Space l1c l2c)
+  (g : short-function-Premetric-Space B C)
+  (f : short-function-Premetric-Space A B)
+  where
+
+  eq-comp-map-short-function-cauchy-approximation-Premetric-Space :
+    ( map-short-function-cauchy-approximation-Premetric-Space B C g ∘
+      map-short-function-cauchy-approximation-Premetric-Space A B f) ＝
+    ( map-short-function-cauchy-approximation-Premetric-Space A C
+      (comp-short-function-Premetric-Space A B C g f))
+  eq-comp-map-short-function-cauchy-approximation-Premetric-Space = refl
 ```
 
 ## References

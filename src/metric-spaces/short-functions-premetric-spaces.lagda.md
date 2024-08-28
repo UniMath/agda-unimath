@@ -102,6 +102,22 @@ module _
 
 ## Properties
 
+### The identity function on a metric space is short
+
+```agda
+module _
+  {l1 l2 : Level} (A : Premetric-Space l1 l2)
+  where
+
+  is-short-id-Premetric-Space :
+    is-short-function-Premetric-Space A A (id-Premetric-Space A)
+  is-short-id-Premetric-Space d x y = id
+
+  short-id-Premetric-Space : short-function-Premetric-Space A A
+  short-id-Premetric-Space =
+    id-Premetric-Space A , is-short-id-Premetric-Space
+```
+
 ### Equality of short functions between premetric spaces is equivalent to homtopies between their carrier maps
 
 ```agda
@@ -146,6 +162,33 @@ module _
     is-short-function-Premetric-Space A C (g ∘ f)
   preserves-short-comp-function-Premetric-Space H K d x y =
     H d (f x) (f y) ∘ K d x y
+```
+
+### The short composition of short functions between premetric spaces
+
+```agda
+module _
+  {l1a l2a l1b l2b l1c l2c : Level}
+  (A : Premetric-Space l1a l2a)
+  (B : Premetric-Space l1b l2b)
+  (C : Premetric-Space l1c l2c)
+  (g : short-function-Premetric-Space B C)
+  (f : short-function-Premetric-Space A B)
+  where
+
+  comp-short-function-Premetric-Space : short-function-Premetric-Space A C
+  pr1 comp-short-function-Premetric-Space =
+    map-short-function-Premetric-Space B C g ∘
+    map-short-function-Premetric-Space A B f
+  pr2 comp-short-function-Premetric-Space =
+    preserves-short-comp-function-Premetric-Space
+      ( A)
+      ( B)
+      ( C)
+      ( map-short-function-Premetric-Space B C g)
+      ( map-short-function-Premetric-Space A B f)
+      ( is-short-map-short-function-Premetric-Space B C g)
+      ( is-short-map-short-function-Premetric-Space A B f)
 ```
 
 ### Any isometry between premetric spaces is short
