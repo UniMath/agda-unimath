@@ -234,20 +234,14 @@ module _
       ( map-isometry-Metric-Space A B f)
       ( is-isometry-map-isometry-Metric-Space A B f)
 
-  htpy-map-short-isometry-Metric-Space :
-    (map-short-function-Metric-Space A B ∘ short-isometry-Metric-Space) ~
-    (map-isometry-Metric-Space A B)
-  htpy-map-short-isometry-Metric-Space f = refl
-
-  is-emb-short-isometry-Metric-Space :
-    is-emb short-isometry-Metric-Space
+  is-emb-short-isometry-Metric-Space : is-emb short-isometry-Metric-Space
   is-emb-short-isometry-Metric-Space =
     is-emb-right-factor
       ( map-short-function-Metric-Space A B)
       ( short-isometry-Metric-Space)
       ( is-emb-inclusion-subtype (is-short-function-prop-Metric-Space A B))
       ( is-emb-htpy
-        ( htpy-map-short-isometry-Metric-Space)
+        ( λ f → refl)
         ( is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B)))
 ```
 
