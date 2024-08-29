@@ -1,4 +1,4 @@
-# Right kan extensions in precategories
+# Right Kan extensions in precategories
 
 ```agda
 module category-theory.right-kan-extensions-precategories where
@@ -23,7 +23,7 @@ open import foundation.universe-levels
 ## Idea
 
 A
-{{#concept "right kan extension" Disambiguation="of a functor between precategories" Agda=is-right-kan-extension-Precategory}}
+{{#concept "right Kan extension" Disambiguation="of a functor between precategories" Agda=is-right-kan-extension-Precategory}}
 of [functor](category-theory.functors-precategories.md) `F : C → D` between
 [precategories](category-theory.precategories.md) along another functor
 `p : C → C'` is the universal
