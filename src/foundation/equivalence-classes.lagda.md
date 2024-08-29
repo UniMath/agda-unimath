@@ -50,10 +50,15 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-An equivalence class of an equivalence relation `R` on `A` is a subtype of `A`
-that is merely equivalent to a subtype of the form `R x`. The type of
-equivalence classes of an equivalence relation satisfies the universal property
-of the set quotient.
+An {{#concept "equivalence class" Agda=equivalence-class}} of an
+[equivalence relation](foundation.equivalence-relations.md) `R` on `A` is a
+[subtype](foundation.subtypes.md) of `A` for which there
+[merely exists](foundation.existential-quantification.md) to a subtype of the
+form `R x`.
+
+The type of equivalence classes of an equivalence relation satisfies the
+[universal property of the set quotient](foundation.universal-property-set-quotients.md).
+This fact is shown in the file [set quotients](foundation.set-quotients.md)
 
 ## Definition
 

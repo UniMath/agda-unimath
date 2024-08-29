@@ -8,10 +8,15 @@ module foundation.dependent-reflecting-maps-equivalence-relations where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.subtype-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications
@@ -178,6 +183,45 @@ module _
   eq-htpy-dependent-reflecting-map-equivalence-relation h =
     map-inv-is-equiv
       ( is-equiv-htpy-eq-dependent-reflecting-map-equivalence-relation h)
+```
+
+### The type of dependent reflecting maps into a family `C` is equivalent to the type of reflecting maps into `Σ B C` that give `f` after composing with the first projection
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  {B : UU l3} (f : reflecting-map-equivalence-relation R B)
+  {C : B → UU l4}
+  where
+
+  map-compute-dependent-reflecting-map-equivalence-relation :
+    dependent-reflecting-map-equivalence-relation R f C →
+    Σ ( reflecting-map-equivalence-relation R (Σ B C))
+      ( λ g →
+        pr1 ∘ map-reflecting-map-equivalence-relation R g ~
+        map-reflecting-map-equivalence-relation R f)
+  pr1 (pr1 (map-compute-dependent-reflecting-map-equivalence-relation g)) x =
+    ( map-reflecting-map-equivalence-relation R f x ,
+      map-dependent-reflecting-map-equivalence-relation R f C g x)
+  pr2 (pr1 (map-compute-dependent-reflecting-map-equivalence-relation g)) r =
+    eq-pair-Σ
+      ( reflects-map-reflecting-map-equivalence-relation R f r)
+      ( reflects-map-dependent-reflecting-map-equivalence-relation R f C g r)
+  pr2 (map-compute-dependent-reflecting-map-equivalence-relation g) =
+    refl-htpy
+
+  compute-dependent-reflecting-map-equivalence-relation :
+    Σ ( reflecting-map-equivalence-relation R (Σ B C))
+      ( λ g →
+        pr1 ∘ map-reflecting-map-equivalence-relation R g ~
+        map-reflecting-map-equivalence-relation R f) ≃
+    dependent-reflecting-map-equivalence-relation R f C
+  compute-dependent-reflecting-map-equivalence-relation =
+    {!!} ∘e
+    ( equiv-Σ _
+      ( inv-distributive-Π-Σ)
+      ( λ t → {!equiv-implicit-Π!})) ∘e
+    ( equiv-right-swap-Σ)
 ```
 
 ## See also
