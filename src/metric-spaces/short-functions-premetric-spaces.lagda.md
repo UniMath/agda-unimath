@@ -210,3 +210,4 @@ module _
 ## References
 
 - [Short maps](https://ncatlab.org/nlab/show/short+map) at $n$Lab
+- [Metric maps](https://en.wikipedia.org/wiki/Metric_map) at Wikipedia
