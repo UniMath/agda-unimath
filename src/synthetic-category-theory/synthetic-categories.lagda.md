@@ -19,16 +19,23 @@ open import structured-types.globular-types
 
 ## Idea
 
-{{#concept "synthetic categories"}} are defined by establishing the rules on the type of all synthetic categories. In particular, synthetic categories are not defined to be types of objects equipped with hom-sets and so on, but they are simply elements of the type of synthetic categories, which is given sufficient structure so that we can work with its elements as if they are categories.
+{{#concept "synthetic categories"}} are defined by establishing the rules on the
+type of all synthetic categories. In particular, synthetic categories are not
+defined to be types of objects equipped with hom-sets and so on, but they are
+simply elements of the type of synthetic categories, which is given sufficient
+structure so that we can work with its elements as if they are categories.
 
 The primitive notions of synthetic categories are:
+
 1. Synthetic categories
 2. Functors between them,
 3. Natural isomorphisms between them,
 4. Natural isomorphisms between those,
 5. and so on.
 
-The type of synthetic categories is furthermore postulated to have the following structure:
+The type of synthetic categories is furthermore postulated to have the following
+structure:
+
 1. A terminal category
 2. An initial category
 3. Cartesian product categories
@@ -38,9 +45,13 @@ The type of synthetic categories is furthermore postulated to have the following
 7. A representing arrow
 8. A representing commuting triangle
 
-Furthermore, coproducts are assumed to be universal, there is a Segal axiom and a Rezk axiom, and some that we haven't listed here.
+Furthermore, coproducts are assumed to be universal, there is a Segal axiom and
+a Rezk axiom, and some that we haven't listed here.
 
-The theory of synthetic categories is not intended to be infinitely coherent. Similar to [wild category theory](wild-category-theory.md), some higher coherences are obviously missing. Nevertheless, the theory is strong enough to embody a large amount of higher category theory.
+The theory of synthetic categories is not intended to be infinitely coherent.
+Similar to [wild category theory](wild-category-theory.md), some higher
+coherences are obviously missing. Nevertheless, the theory is strong enough to
+embody a large amount of higher category theory.
 
 ## Definitions
 
@@ -48,7 +59,10 @@ The theory of synthetic categories is not intended to be infinitely coherent. Si
 
 #### The language of synthetic categories
 
-In synthetic category theory we may speak of categories, functors, isomorphisms between them, isomorphisms between those, and so forth. The sorts in the language of synthetic category theory are therefore organized in a [globular type](structured-types.globular-types.md).
+In synthetic category theory we may speak of categories, functors, isomorphisms
+between them, isomorphisms between those, and so forth. The sorts in the
+language of synthetic category theory are therefore organized in a
+[globular type](structured-types.globular-types.md).
 
 ```agda
 module _
@@ -61,7 +75,9 @@ module _
 
 #### The sort of categories in the language of synthetic category theory
 
-The sort of categories in the language of synthetic category theory is the type of `0`-cells in the globular type of sorts of the language of synthetic category theory.
+The sort of categories in the language of synthetic category theory is the type
+of `0`-cells in the globular type of sorts of the language of synthetic category
+theory.
 
 ```agda
 module _
@@ -75,7 +91,9 @@ module _
 
 #### The sort of functors in the language of synthetic category theory
 
-The sort of functors from `C` to `D` in the language of synthetic category theory is the type of `1`-cells between `C` and `D` in the globular type of sorts of the language of synthetic category theory.
+The sort of functors from `C` to `D` in the language of synthetic category
+theory is the type of `1`-cells between `C` and `D` in the globular type of
+sorts of the language of synthetic category theory.
 
 ```agda
 module _
@@ -90,7 +108,9 @@ module _
 
 #### The globular type of functors between categories
 
-The globular type of functors from `C` to `D` in the language of synthetic category theory is the globular type of `1`-cells between `C` and `D` in the globular type of sorst of the language of synthetic category theory.
+The globular type of functors from `C` to `D` in the language of synthetic
+category theory is the globular type of `1`-cells between `C` and `D` in the
+globular type of sorst of the language of synthetic category theory.
 
 ```agda
 module _
@@ -106,7 +126,9 @@ module _
 
 #### The sort of isomorphisms between functors in the language of synthetic category theory
 
-The sort of isomorphisms between functors `F` and `G` in the language of synthetic category theory is the type of `2`-cells between `F` and `G` in the globular type of sorts of the language of synthetic category theory.
+The sort of isomorphisms between functors `F` and `G` in the language of
+synthetic category theory is the type of `2`-cells between `F` and `G` in the
+globular type of sorts of the language of synthetic category theory.
 
 ```agda
 module _
@@ -122,7 +144,12 @@ module _
 
 #### The structure of identity morphisms in the language of synthetic category theory
 
-In the language of synthetic category theory we may speak of the identity functor between categories, the identity isomorphism between functors, and so on. The structure of identity morphisms is therefore a coinductive record, where the base type is the type of identity functors between synthetic categories, and coinductively the structure of identity morphisms in the globular type of functors between any two synthetic categories.
+In the language of synthetic category theory we may speak of the identity
+functor between categories, the identity isomorphism between functors, and so
+on. The structure of identity morphisms is therefore a coinductive record, where
+the base type is the type of identity functors between synthetic categories, and
+coinductively the structure of identity morphisms in the globular type of
+functors between any two synthetic categories.
 
 ```agda
 module _
@@ -158,7 +185,8 @@ module _
 
 #### Composition operators in the language of synthetic category theory
 
-The language of synthetic category theory is equipped with composition operators at each level.
+The language of synthetic category theory is equipped with composition operators
+at each level.
 
 ```agda
 module _
@@ -575,7 +603,7 @@ module _
           ( associative-comp-functor-Synthetic-Category-Theory η H G F)
           ( horizontal-comp-iso-Synthetic-Category-Theory ν
             ( γ)
-            (  horizontal-comp-iso-Synthetic-Category-Theory ν β α))
+            ( horizontal-comp-iso-Synthetic-Category-Theory ν β α))
           ( horizontal-comp-iso-Synthetic-Category-Theory ν
             ( horizontal-comp-iso-Synthetic-Category-Theory ν γ β)
             ( α))
