@@ -18,6 +18,7 @@ open import foundation.category-of-sets
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
@@ -138,14 +139,32 @@ module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   where
 
-  map-representable-functor-copresheaf-Precategory :
-    map-Precategory
+  functor-representable-functor-copresheaf-Precategory :
+    functor-Precategory
       ( opposite-Precategory C)
       ( copresheaf-precategory-Precategory C l2)
-  pr1 map-representable-functor-copresheaf-Precategory =
+  pr1 functor-representable-functor-copresheaf-Precategory =
     representable-functor-Precategory C
-  pr2 map-representable-functor-copresheaf-Precategory =
+  pr1 (pr2 functor-representable-functor-copresheaf-Precategory) =
     representable-natural-transformation-Precategory C
+  pr1 (pr2 (pr2 functor-representable-functor-copresheaf-Precategory))
+    {x} {y} {z} g f =
+    eq-htpy-hom-family-natural-transformation-Precategory
+      ( C)
+      ( Set-Precategory l2)
+      ( representable-functor-Precategory C x)
+      ( representable-functor-Precategory C z)
+      ( _)
+      ( _)
+      ( λ w → eq-htpy (λ h → inv (associative-comp-hom-Precategory C h f g)))
+  pr2 (pr2 (pr2 functor-representable-functor-copresheaf-Precategory)) x =
+    eq-htpy-hom-family-natural-transformation-Precategory
+      ( C)
+      ( Set-Precategory l2)
+      ( representable-functor-Precategory C x)
+      ( representable-functor-Precategory C x)
+      ( representable-natural-transformation-Precategory C
+        ( id-hom-Precategory C))
+      _
+      ( λ z → eq-htpy (λ f → right-unit-law-comp-hom-Precategory C f))
 ```
-
-It remains to show that this map is functorial.
