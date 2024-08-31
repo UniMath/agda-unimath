@@ -35,7 +35,7 @@ open import metric-spaces.precategory-of-metric-spaces-and-isometries
 
 Because [metric spaces](metric-spaces.metric-spaces.md) is
 [set](foundation.sets.md), there's a forgetful
-[functor](category-theory.functor-precategories.md) from the
+[functor](category-theory.functors-precategories.md) from the
 [precategory of metric spaces and isometries](metric-spaces.precategory-of-metric-spaces-and-isometries.md)
 to the [precategory of sets](foundation.category-of-sets.md).
 

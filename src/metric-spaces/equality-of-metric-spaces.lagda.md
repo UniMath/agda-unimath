@@ -31,7 +31,7 @@ open import metric-spaces.premetric-spaces
 
 Equality of [metric-spaces](metric-spaces.metric-spaces.md) is equivalent to
 [equality](metric-spaces.equality-of-premetric-spaces.md) of their carrier
-[premetric spaces](metric-spaces.premetric-spaces); therefore,
+[premetric spaces](metric-spaces.premetric-spaces.md); therefore,
 {{#concept "isometric equality" Disambiguation="between metric spaces", Agda=isometric-eq-Metric-Space}}
 between metric spaces characterizes their equality of metric spaces, as well as
 [isometric equivalence](metric-spaces.isometric-equivalent-premetric-spaces.md),

@@ -35,8 +35,8 @@ in a [premetric space](metric-spaces.premetric-spaces.md) is a map `f` from
 type such that `f ε` and `f δ` are
 [(`ε + δ`)-close](metric-spaces.premetric-structures.md) for all `(ε δ : ℚ⁺)`.
 
-This follows definition 4.5.5 of [Booij2020PhD] or Definition 11.2.10 of
-{{#cite UF13}}.
+This follows definition 4.5.5 of [Booij2020PhD]9(https://etheses.bham.ac.uk/id/eprint/10411/7/Booij2020PhD.pdf)
+or Definition 11.2.10 of {{#cite UF13}}.
 
 ## Definitions
 

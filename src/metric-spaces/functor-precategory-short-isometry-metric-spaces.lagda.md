@@ -34,7 +34,7 @@ open import metric-spaces.short-functions-metric-spaces
 Because every [isometry](metric-spaces.isometry-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is also
 [short](metric-spaces.short-functions-metric-spaces.md), there's a
-[functor](category-theory.functor-precategories.md) between the
+[functor](category-theory.functors-precategories.md) between the
 [precategory of metric spaces and isometries](metric-spaces.precategory-of-metric-spaces-and-isometries.md)
 to the
 [precategory of metric spaces and short maps](metric-spaces.precategory-of-metric-spaces-and-short-functions.md).
