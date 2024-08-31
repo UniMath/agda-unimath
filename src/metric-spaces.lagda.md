@@ -8,6 +8,7 @@ open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-premetric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
+open import metric-spaces.discrete-premetric-structures public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-premetric-spaces public
 open import metric-spaces.functions-metric-spaces public
