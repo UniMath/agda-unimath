@@ -139,16 +139,21 @@ module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   where
 
-  functor-representable-functor-copresheaf-Precategory :
-    functor-Precategory
+  map-representable-functor-copresheaf-Precategory :
+    map-Precategory
       ( opposite-Precategory C)
       ( copresheaf-precategory-Precategory C l2)
-  pr1 functor-representable-functor-copresheaf-Precategory =
+  pr1 map-representable-functor-copresheaf-Precategory =
     representable-functor-Precategory C
-  pr1 (pr2 functor-representable-functor-copresheaf-Precategory) =
+  pr2 map-representable-functor-copresheaf-Precategory =
     representable-natural-transformation-Precategory C
-  pr1 (pr2 (pr2 functor-representable-functor-copresheaf-Precategory))
-    {x} {y} {z} g f =
+
+  is-functor-representable-functor-copresheaf-Precategory :
+    is-functor-map-Precategory
+      ( opposite-Precategory C)
+      ( copresheaf-precategory-Precategory C l2)
+      ( map-representable-functor-copresheaf-Precategory)
+  pr1 is-functor-representable-functor-copresheaf-Precategory {x} {y} {z} g f =
     eq-htpy-hom-family-natural-transformation-Precategory
       ( C)
       ( Set-Precategory l2)
@@ -157,7 +162,7 @@ module _
       ( _)
       ( _)
       ( λ w → eq-htpy (λ h → inv (associative-comp-hom-Precategory C h f g)))
-  pr2 (pr2 (pr2 functor-representable-functor-copresheaf-Precategory)) x =
+  pr2 is-functor-representable-functor-copresheaf-Precategory x =
     eq-htpy-hom-family-natural-transformation-Precategory
       ( C)
       ( Set-Precategory l2)
@@ -167,4 +172,15 @@ module _
         ( id-hom-Precategory C))
       _
       ( λ z → eq-htpy (λ f → right-unit-law-comp-hom-Precategory C f))
+
+  functor-representable-functor-copresheaf-Precategory :
+    functor-Precategory
+      ( opposite-Precategory C)
+      ( copresheaf-precategory-Precategory C l2)
+  functor-representable-functor-copresheaf-Precategory =
+    functor-map-Precategory
+      ( opposite-Precategory C)
+      ( copresheaf-precategory-Precategory C l2)
+      ( map-representable-functor-copresheaf-Precategory)
+      ( is-functor-representable-functor-copresheaf-Precategory)
 ```
