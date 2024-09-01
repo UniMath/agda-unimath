@@ -19,7 +19,7 @@ open import structured-types.globular-types
 
 ## Idea
 
-{{#concept "synthetic categories"}} are defined by establishing the rules on the
+{{#concept "Synthetic categories"}} are defined by establishing the rules on the
 type of all synthetic categories. In particular, synthetic categories are not
 defined to be types of objects equipped with hom-sets and so on, but they are
 simply elements of the type of synthetic categories, which is given sufficient
@@ -50,8 +50,9 @@ a Rezk axiom, and some that we haven't listed here.
 
 The theory of synthetic categories is not intended to be infinitely coherent.
 Similar to [wild category theory](wild-category-theory.md), some higher
-coherences are obviously missing. Nevertheless, the theory is strong enough to
-embody a large amount of higher category theory.
+coherences, such as the Mac Lane pentagon and higher associahedra, are missing.
+Nevertheless, the theory is strong enough to embody a large amount of higher
+category theory.
 
 ## Definitions
 
@@ -110,7 +111,7 @@ module _
 
 The globular type of functors from `C` to `D` in the language of synthetic
 category theory is the globular type of `1`-cells between `C` and `D` in the
-globular type of sorst of the language of synthetic category theory.
+globular type of sorts of the language of synthetic category theory.
 
 ```agda
 module _
@@ -609,3 +610,7 @@ module _
             ( α))
           ( associative-comp-functor-Synthetic-Category-Theory η H' G' F')
 ```
+
+## References
+
+{{#bibliography}}
