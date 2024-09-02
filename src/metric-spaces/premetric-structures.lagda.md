@@ -37,8 +37,7 @@ is a type family of
 the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md).
 
-This follows Definition 4.5.2 from
-[Booij2020PhD](https://etheses.bham.ac.uk/id/eprint/10411/7/Booij2020PhD.pdf).
+This follows Definition 4.5.2 from {{#cite Booij2020PhD}}.
 
 ## Definitions
 
@@ -465,6 +464,9 @@ module _
 
 ## References
 
-- [Booij2020PhD](https://etheses.bham.ac.uk/id/eprint/10411/7/Booij2020PhD.pdf);
+{{#bibliography}}
+
+## See also
+
 - [Booij premetric spaces](https://ncatlab.org/nlab/show/Booij+premetric+space)
   at $n$Lab.
