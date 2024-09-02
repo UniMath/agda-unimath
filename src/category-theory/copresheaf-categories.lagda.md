@@ -10,6 +10,7 @@ module category-theory.copresheaf-categories where
 open import category-theory.categories
 open import category-theory.category-of-functors-from-small-to-large-categories
 open import category-theory.functors-from-small-to-large-precategories
+open import category-theory.functors-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-functors-from-small-to-large-precategories
@@ -18,8 +19,11 @@ open import category-theory.precategory-of-functors-from-small-to-large-precateg
 
 open import foundation.category-of-sets
 open import foundation.commuting-squares-of-maps
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
@@ -256,6 +260,51 @@ module _
     Precategory (l1 ⊔ l2 ⊔ lsuc l) (l1 ⊔ l2 ⊔ l)
   copresheaf-precategory-Precategory =
     precategory-Large-Precategory (copresheaf-large-precategory-Precategory C) l
+```
+
+### The product of small copresheaves
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (C : Precategory l1 l2)
+  where
+
+  product-hom-copresheaf-Precategory :
+    copresheaf-Precategory C l3 →
+    copresheaf-Precategory C l4 →
+    copresheaf-Precategory C (l3 ⊔ l4)
+  pr1 (product-hom-copresheaf-Precategory F G) x =
+    product-Set
+      ( obj-functor-Precategory C (Set-Precategory l3) F x)
+      ( obj-functor-Precategory C (Set-Precategory l4) G x)
+  pr1 (pr2 (product-hom-copresheaf-Precategory F G)) f =
+    map-product
+      ( hom-functor-Precategory C (Set-Precategory l3) F f)
+      ( hom-functor-Precategory C (Set-Precategory l4) G f)
+  pr1 (pr2 (pr2 (product-hom-copresheaf-Precategory F G))) g f =
+    eq-htpy
+      ( λ w →
+        eq-pair
+          ( htpy-eq
+            ( preserves-comp-functor-Precategory C (Set-Precategory l3)
+              F g f)
+            ( pr1 w))
+          ( htpy-eq
+            ( preserves-comp-functor-Precategory C (Set-Precategory l4)
+              G g f)
+            ( pr2 w)))
+  pr2 (pr2 (pr2 (product-hom-copresheaf-Precategory F G))) x =
+    eq-htpy
+      ( λ w →
+        eq-pair
+          ( htpy-eq
+            ( preserves-id-functor-Precategory C (Set-Precategory l3)
+              F x)
+            ( pr1 w))
+          ( htpy-eq
+            ( preserves-id-functor-Precategory C (Set-Precategory l4)
+              G x)
+            ( pr2 w)))
 ```
 
 ## See also

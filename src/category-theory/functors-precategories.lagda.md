@@ -173,6 +173,17 @@ module _
     preserves-id-is-functor-map-Precategory C D
       ( map-functor-Precategory F)
       ( is-functor-functor-Precategory F)
+
+  functor-map-Precategory :
+    (F : map-Precategory C D) →
+    is-functor-map-Precategory C D F →
+    functor-Precategory
+  pr1 (functor-map-Precategory F is-functor-F) =
+    obj-map-Precategory C D F
+  pr1 (pr2 (functor-map-Precategory F is-functor-F)) =
+    hom-map-Precategory C D F
+  pr2 (pr2 (functor-map-Precategory F is-functor-F)) =
+    is-functor-F
 ```
 
 ## Examples

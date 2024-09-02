@@ -180,7 +180,7 @@ module _
 ### The predicate of being an irreflexive relation
 
 A relation `R` on a type `A` is said to be **irreflexive** if it comes equipped
-with a function `(x : A) → ¬ (R x y)`.
+with a function `(x : A) → ¬ (R x x)`.
 
 ```agda
 module _
