@@ -23,6 +23,7 @@ open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.mere-equality
 open import foundation-core.precomposition-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
@@ -217,6 +218,18 @@ abstract
   is-set-emb :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B) → is-set B → is-set A
   is-set-emb = is-trunc-emb neg-one-𝕋
+```
+
+### If mere equality maps into the identity type of `A`, then `A` is a set
+
+```agda
+is-set-mere-eq-in-id :
+  {l : Level} {A : UU l} → ((x y : A) → mere-eq x y → x ＝ y) → is-set A
+is-set-mere-eq-in-id =
+  is-set-prop-in-id
+    ( mere-eq)
+    ( is-prop-mere-eq)
+    ( refl-mere-eq)
 ```
 
 ### Any function from a proposition into a set is an embedding

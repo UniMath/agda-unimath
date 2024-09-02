@@ -92,7 +92,7 @@ module _
       type-Prop (P shape-∞-Group) →
       ((X : classifying-type-∞-Group) → type-Prop (P X))
     elim-prop-classifying-type-∞-Group =
-      apply-dependent-universal-property-is-0-connected
+      apply-dependent-universal-property-0-connected-type
         shape-∞-Group
         is-0-connected-classifying-type-∞-Group
 

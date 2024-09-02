@@ -2,6 +2,8 @@
 
 ```agda
 module foundation.mere-equality where
+
+open import foundation-core.mere-equality public
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +19,6 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalence-relations
 open import foundation-core.identity-types
-open import foundation-core.propositions
 open import foundation-core.sets
 ```
 
@@ -25,57 +26,10 @@ open import foundation-core.sets
 
 ## Idea
 
-Two elements in a type are said to be merely equal if there is an element of the
-propositionally truncated identity type between them.
-
-## Definition
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  mere-eq-Prop : A → A → Prop l
-  mere-eq-Prop x y = trunc-Prop (x ＝ y)
-
-  mere-eq : A → A → UU l
-  mere-eq x y = type-Prop (mere-eq-Prop x y)
-
-  is-prop-mere-eq : (x y : A) → is-prop (mere-eq x y)
-  is-prop-mere-eq x y = is-prop-type-trunc-Prop
-```
+Two elements in a type are said to be {{#concept "merely equal" Agda=mere-eq}} if there is an element of the
+[propositionally truncated](foundation.propositional-truncations.md) [identity type](foundation-core.identity-types.md) between them.
 
 ## Properties
-
-### Reflexivity
-
-```agda
-abstract
-  refl-mere-eq :
-    {l : Level} {A : UU l} → is-reflexive (mere-eq {l} {A})
-  refl-mere-eq _ = unit-trunc-Prop refl
-```
-
-### Symmetry
-
-```agda
-abstract
-  symmetric-mere-eq :
-    {l : Level} {A : UU l} → is-symmetric (mere-eq {l} {A})
-  symmetric-mere-eq _ _ = map-trunc-Prop inv
-```
-
-### Transitivity
-
-```agda
-abstract
-  transitive-mere-eq :
-    {l : Level} {A : UU l} → is-transitive (mere-eq {l} {A})
-  transitive-mere-eq x y z p q =
-    apply-universal-property-trunc-Prop q
-      ( mere-eq-Prop x z)
-      ( λ p' → map-trunc-Prop (p' ∙_) p)
-```
 
 ### Mere equality is an equivalence relation
 
@@ -108,16 +62,4 @@ module _
       ( type-Set X)
   pr1 reflecting-map-mere-eq = f
   pr2 reflecting-map-mere-eq = reflects-mere-eq
-```
-
-### If mere equality maps into the identity type of `A`, then `A` is a set
-
-```agda
-is-set-mere-eq-in-id :
-  {l : Level} {A : UU l} → ((x y : A) → mere-eq x y → x ＝ y) → is-set A
-is-set-mere-eq-in-id =
-  is-set-prop-in-id
-    ( mere-eq)
-    ( is-prop-mere-eq)
-    ( refl-mere-eq)
 ```
