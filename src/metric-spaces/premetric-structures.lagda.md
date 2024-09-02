@@ -356,8 +356,15 @@ module _
   is-transitive-is-indistinguishable-triangular-Premetric x y z H K d =
     tr
       ( λ h → neighborhood-Premetric B h x z)
-      ( eq-split-ℚ⁺ d)
-      ( T x y z (split₁-ℚ⁺ d) (split₂-ℚ⁺ d) (H (split₂-ℚ⁺ d)) (K (split₁-ℚ⁺ d)))
+      ( eq-add-split-ℚ⁺ d)
+      ( T
+        ( x)
+        ( y)
+        ( z)
+        ( left-summand-split-ℚ⁺ d)
+        ( right-summand-split-ℚ⁺ d)
+        ( H (right-summand-split-ℚ⁺ d))
+        ( K (left-summand-split-ℚ⁺ d)))
 ```
 
 ### Any triangular reflexive premetric is monotonic

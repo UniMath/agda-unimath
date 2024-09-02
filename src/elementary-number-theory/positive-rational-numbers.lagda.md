@@ -513,20 +513,23 @@ module _
   (x : ℚ⁺)
   where
 
-  split-ℚ⁺ : Σ ℚ⁺ (λ u → Σ ℚ⁺ (λ v → u +ℚ⁺ v ＝ x))
-  split-ℚ⁺ =
-    mediant-zero-ℚ⁺ x ,
-    le-diff-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x) ,
+  left-summand-split-ℚ⁺ : ℚ⁺
+  left-summand-split-ℚ⁺ = mediant-zero-ℚ⁺ x
+
+  right-summand-split-ℚ⁺ : ℚ⁺
+  right-summand-split-ℚ⁺ =
+    le-diff-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
+
+  eq-add-split-ℚ⁺ :
+    left-summand-split-ℚ⁺ +ℚ⁺ right-summand-split-ℚ⁺ ＝ x
+  eq-add-split-ℚ⁺ =
     right-diff-law-add-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
 
-  split₁-ℚ⁺ : ℚ⁺
-  split₁-ℚ⁺ = pr1 split-ℚ⁺
-
-  split₂-ℚ⁺ : ℚ⁺
-  split₂-ℚ⁺ = pr1 (pr2 split-ℚ⁺)
-
-  eq-split-ℚ⁺ : split₁-ℚ⁺ +ℚ⁺ split₂-ℚ⁺ ＝ x
-  eq-split-ℚ⁺ = pr2 (pr2 split-ℚ⁺)
+  split-ℚ⁺ : Σ ℚ⁺ (λ u → Σ ℚ⁺ (λ v → u +ℚ⁺ v ＝ x))
+  split-ℚ⁺ =
+    left-summand-split-ℚ⁺ ,
+    right-summand-split-ℚ⁺ ,
+    eq-add-split-ℚ⁺
 ```
 
 ### Addition with a positive rational number is an increasing map
