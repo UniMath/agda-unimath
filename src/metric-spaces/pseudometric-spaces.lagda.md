@@ -26,10 +26,10 @@ open import metric-spaces.premetric-structures
 
 A {{#concept "pseudometric space" Agda=Pseudometric-Space}} is a
 [premetric space](metric-spaces.premetric-spaces.md) whose
-[premetric](metric-spaces.premetric-structures.md) is symmetric reflexive and
+[premetric](metric-spaces.premetric-structures.md) is symmetric, reflexive, and
 triangular.
 
-Indistiguishability in a pseudometric space is an
+Indistinguishability in a pseudometric space is an
 [equivalence relation](foundation.equivalence-relations.md).
 
 ## Definitions

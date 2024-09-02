@@ -39,7 +39,7 @@ open import metric-spaces.premetric-structures
 A [premetric](metric-spaces.md) on a type `A` is
 {{#concept "discrete" Disambiguation="premetric structure" Agda=is-discrete-Premetric}}
 any elements in some [`d`-neighbourhood](metric-spaces.premetric-structures.md)
-are merely equal.
+are [merely equal](foundation.mere-equality.md).
 
 Every type has a unique reflexive discrete premetric.
 

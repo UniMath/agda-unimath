@@ -96,7 +96,7 @@ module _
 
 ## Properties
 
-### Equality of isometries in premetric spaces is equivalent to homotopies between their carrier maps
+### Equality of isometries in premetric spaces is characterized by homotopies between their carrier maps
 
 ```agda
 module _
@@ -124,7 +124,7 @@ module _
     map-inv-equiv equiv-eq-htpy-map-isometry-Premetric-Space
 ```
 
-### The composition of isometries between premetric spaces is a isometric
+### Composition of isometries between premetric spaces
 
 ```agda
 module _

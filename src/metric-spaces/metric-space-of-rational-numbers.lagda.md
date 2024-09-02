@@ -56,7 +56,7 @@ premetric-ℚ d x y =
 
 ## Properties
 
-### The standard premetric on the rational-numbers is a metric structure
+### The standard premetric on the rational numbers is a metric
 
 ```agda
 is-reflexive-premetric-ℚ : is-reflexive-Premetric premetric-ℚ

@@ -161,7 +161,7 @@ module _
     map-inv-equiv equiv-eq-htpy-map-isometry-Metric-Space
 ```
 
-### The isometric composition of isometries
+### Composition of isometries
 
 ```agda
 module _
