@@ -485,7 +485,7 @@ module _
     ( left-diff-law-add-ℚ⁺)
 ```
 
-### The positive mediant between zero and a positive rational numbers
+### The positive mediant between zero and a positive rational number
 
 ```agda
 mediant-zero-ℚ⁺ : ℚ⁺ → ℚ⁺
@@ -506,7 +506,7 @@ le-mediant-zero-ℚ⁺ x =
     ( le-zero-is-positive-ℚ (rational-ℚ⁺ x) (is-positive-rational-ℚ⁺ x)))
 ```
 
-### Any positive rational number is the sum of two positve rational numbers
+### Any positive rational number is the sum of two positive rational numbers
 
 ```agda
 module _
@@ -529,7 +529,7 @@ module _
   eq-split-ℚ⁺ = pr2 (pr2 split-ℚ⁺)
 ```
 
-### The addition with a positive rational number is an increasing map
+### Addition with a positive rational number is an increasing map
 
 ```agda
 le-left-add-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ x ((rational-ℚ⁺ d) +ℚ x)
