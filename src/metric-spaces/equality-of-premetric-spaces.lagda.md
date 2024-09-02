@@ -115,19 +115,19 @@ module _
         ( tr (Premetric l2) e (structure-Premetric-Space A))
         ( structure-Premetric-Space B))
       ( is-isometry-prop-Premetric-Space A B (map-eq e))
-      ( forward)
-      ( backward)) ∘e
+      ( is-isometry-eq-tr-structure-Premetric-Space)
+      ( eq-tr-structure-is-isometry-Premetric-Space)) ∘e
     ( equiv-Eq-eq-Premetric
       ( tr (Premetric l2) e (structure-Premetric-Space A))
       ( structure-Premetric-Space B))
     where
 
-    forward :
+    is-isometry-eq-tr-structure-Premetric-Space :
       Eq-Premetric
         ( tr (Premetric l2) e (structure-Premetric-Space A))
         ( structure-Premetric-Space B) →
       is-isometry-Premetric-Space A B (map-eq e)
-    forward H d x y =
+    is-isometry-eq-tr-structure-Premetric-Space H d x y =
       H d (map-eq e x) (map-eq e y) ∘iff
       eq-map-eq-tr-Premetric
         ( type-Premetric-Space A)
@@ -138,12 +138,12 @@ module _
         ( x)
         ( y)
 
-    backward :
+    eq-tr-structure-is-isometry-Premetric-Space :
       is-isometry-Premetric-Space A B (map-eq e) →
       Eq-Premetric
         ( tr (Premetric l2) e (structure-Premetric-Space A))
         ( structure-Premetric-Space B)
-    backward I d x y =
+    eq-tr-structure-is-isometry-Premetric-Space I d x y =
       logical-equivalence-reasoning
         ( neighborhood-Premetric
           ( tr (Premetric l2) e (structure-Premetric-Space A))
