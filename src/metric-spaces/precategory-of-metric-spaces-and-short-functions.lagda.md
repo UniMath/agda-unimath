@@ -118,7 +118,7 @@ module _
     is-short-map-short-function-Metric-Space A B f d x y
   pr2 (is-isometry-is-iso-precategory-short-function-Metric-Space I d x y) H =
     binary-tr
-      ( is-close-Metric-Space A d)
+      ( neighbourhood-Metric-Space A d)
         ( ap
           ( λ K → map-short-function-Metric-Space A A K x)
           ( is-retraction-hom-inv-is-iso-Precategory

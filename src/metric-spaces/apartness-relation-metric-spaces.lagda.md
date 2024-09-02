@@ -29,7 +29,8 @@ open import metric-spaces.premetric-structures
 Two elements `x` and `y` in a [metric space](metric-spaces.md) are
 {{#concept "apart" Disambiguation="in a metric space", Agda=apart-elements-Metric-Space}}
 if there [exists](foundation.existential-quantification.md) some `d : ℚ⁺` such
-that `x` and `y` are not [`d`-close](metric-spaces.premetric-structures.md).
+that `x` and `y` are not in a
+[`d`-neighbourhood](metric-spaces.premetric-structures.md).
 
 ## Definitions
 

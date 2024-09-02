@@ -159,19 +159,19 @@ module _
     is-isometry-Premetric-Space B A (map-inv-is-equiv E)
   is-isometry-map-inv-is-equiv-is-isometry-Premetric-Space d x y =
     logical-equivalence-reasoning
-      ( is-close-Premetric-Space B d x y)
-      ↔ ( is-close-Premetric-Space B d
+      ( neighborhood-Premetric-Space B d x y)
+      ↔ ( neighborhood-Premetric-Space B d
           ( f (map-inv-is-equiv E x))
           ( f (map-inv-is-equiv E y)))
         by
           binary-tr
             ( λ u v →
-              ( is-close-Premetric-Space B d x y) ↔
-              ( is-close-Premetric-Space B d u v))
+              ( neighborhood-Premetric-Space B d x y) ↔
+              ( neighborhood-Premetric-Space B d u v))
             ( inv (is-section-map-inv-is-equiv E x))
             ( inv (is-section-map-inv-is-equiv E y))
             ( id-iff)
-      ↔ ( is-close-Premetric-Space A d
+      ↔ ( neighborhood-Premetric-Space A d
           ( map-inv-is-equiv E x)
           ( map-inv-is-equiv E y))
         by

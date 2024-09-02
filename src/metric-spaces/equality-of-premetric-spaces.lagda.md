@@ -145,12 +145,12 @@ module _
         ( structure-Premetric-Space B)
     backward I d x y =
       logical-equivalence-reasoning
-        ( is-close-Premetric
+        ( neighborhood-Premetric
           ( tr (Premetric l2) e (structure-Premetric-Space A))
           ( d)
           ( x)
           ( y))
-        ↔ ( is-close-Premetric
+        ↔ ( neighborhood-Premetric
             ( structure-Premetric-Space A)
             ( d)
             ( map-inv-eq e x)
@@ -164,19 +164,19 @@ module _
               ( d)
               ( x)
               ( y)
-        ↔ ( is-close-Premetric-Space
+        ↔ ( neighborhood-Premetric-Space
             ( B)
             ( d)
             ( map-eq e (map-inv-eq e x))
             ( map-eq e (map-inv-eq e y)))
           by
             I d (map-inv-eq e x) (map-inv-eq e y)
-        ↔ ( is-close-Premetric-Space B d x y)
+        ↔ ( neighborhood-Premetric-Space B d x y)
           by
             binary-tr
               ( λ u v →
-                is-close-Premetric-Space B d u v ↔
-                is-close-Premetric-Space B d x y)
+                neighborhood-Premetric-Space B d u v ↔
+                neighborhood-Premetric-Space B d x y)
               ( inv (is-section-map-inv-equiv (equiv-eq e) x))
               ( inv (is-section-map-inv-equiv (equiv-eq e) y))
               ( id-iff)

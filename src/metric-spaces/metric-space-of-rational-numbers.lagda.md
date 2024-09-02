@@ -36,7 +36,7 @@ open import metric-spaces.premetric-structures
 
 The type of [rational numbers](elementary-number-theory.rational-numbers.md)
 equipped with the [premetric](metric-spaces.premetric-structures.md) where
-`x y : ℚ` are `d`-close when `y < x + d` and `x < y + d` is a
+`x y : ℚ` are in `d`-neighbourhood when `y < x + d` and `x < y + d` is a
 [metric space](metric-spaces.metric-spaces.md).
 
 It is the

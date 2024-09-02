@@ -22,8 +22,8 @@ open import metric-spaces.premetric-structures
 ## Idea
 
 Any [premetric structure](metric-spaces.premetric-structures.md) on a type `B`
-and a map `f : A → B` defines a premetric on `A` where `x y : A` are `d`-close
-in `A` if `f x` and `f y` are `d`-close in `B`.
+and map `f : A → B` defines a premetric on `A` where `x y : A` are
+`d`-neighbours in `A` if `f x` and `f y` are `d`-neighbours in `B`.
 
 This is the
 {{#concept "pullback" Disambiguation="premetric" Agda=pullback-Premetric}} of a

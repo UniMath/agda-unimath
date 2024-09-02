@@ -60,15 +60,15 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
   where
 
-  is-close-Premetric : ℚ⁺ → A → A → UU l2
-  is-close-Premetric d = type-Relation-Prop (B d)
+  neighborhood-Premetric : ℚ⁺ → A → A → UU l2
+  neighborhood-Premetric d = type-Relation-Prop (B d)
 
-  is-prop-is-close-Premetric :
-    (d : ℚ⁺) (x y : A) → is-prop (is-close-Premetric d x y)
-  is-prop-is-close-Premetric d = is-prop-type-Relation-Prop (B d)
+  is-prop-neighborhood-Premetric :
+    (d : ℚ⁺) (x y : A) → is-prop (neighborhood-Premetric d x y)
+  is-prop-neighborhood-Premetric d = is-prop-type-Relation-Prop (B d)
 ```
 
-### Two elements `x` and `y` are indistinguishable in a premetric if `x` and `y` are `d`-close for any positive rational `d`
+### Two elements `x` and `y` are indistinguishable in a premetric if `x` and `y` are `d`-neighbours for any positive rational `d`
 
 ```agda
 module _
@@ -137,7 +137,7 @@ module _
   indistinguishable-eq-reflexive-Premetric {x} {.x} refl d = H d x
 ```
 
-### A premetric is symmetric if `d`-closeness is symmetric for all positive rational number `d`
+### A premetric is symmetric if `d`-neighbourhoods are symmetric for all positive rational number `d`
 
 ```agda
 module _
@@ -272,7 +272,7 @@ module _
     ( is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric B R L x)
 ```
 
-### A premetric is monotonic if any `d₁`-close elements are `d₂`-close for `d₁ < d₂`
+### A premetric is monotonic if any `d₁`-neighbourhoods are `d₂`-neighbourhoods for `d₁ < d₂`
 
 ```agda
 module _
@@ -355,7 +355,7 @@ module _
     is-transitive (is-indistinguishable-Premetric B)
   is-transitive-is-indistinguishable-triangular-Premetric x y z H K d =
     tr
-      ( λ h → is-close-Premetric B h x z)
+      ( λ h → neighborhood-Premetric B h x z)
       ( eq-split-ℚ⁺ d)
       ( T x y z (split₁-ℚ⁺ d) (split₂-ℚ⁺ d) (H (split₂-ℚ⁺ d)) (K (split₁-ℚ⁺ d)))
 ```
@@ -371,7 +371,7 @@ module _
   is-monotonic-is-reflexive-triangular-Premetric : is-monotonic-Premetric B
   is-monotonic-is-reflexive-triangular-Premetric x y d₁ d₂ I H₁ =
     tr
-      ( λ d → is-close-Premetric B d x y)
+      ( λ d → neighborhood-Premetric B d x y)
       ( right-diff-law-add-ℚ⁺ d₁ d₂ I)
       ( T x y y d₁ (le-diff-ℚ⁺ d₁ d₂ I) (R (le-diff-ℚ⁺ d₁ d₂ I) y) H₁)
 ```

@@ -82,9 +82,9 @@ module _
     is-metric-Premetric structure-Metric-Space
   is-metric-structure-Metric-Space = pr2 M
 
-  is-close-Metric-Space : ℚ⁺ → Relation l2 type-Metric-Space
-  is-close-Metric-Space =
-    is-close-Premetric-Space premetric-Metric-Space
+  neighbourhood-Metric-Space : ℚ⁺ → Relation l2 type-Metric-Space
+  neighbourhood-Metric-Space =
+    neighborhood-Premetric-Space premetric-Metric-Space
 
   is-reflexive-premetric-structure-Metric-Space :
     is-reflexive-Premetric structure-Metric-Space

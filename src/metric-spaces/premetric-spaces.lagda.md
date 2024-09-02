@@ -41,15 +41,16 @@ module _
   structure-Premetric-Space : Premetric l2 type-Premetric-Space
   structure-Premetric-Space = pr2 M
 
-  is-close-Premetric-Space :
+  neighborhood-Premetric-Space :
     ℚ⁺ → type-Premetric-Space → type-Premetric-Space → UU l2
-  is-close-Premetric-Space = is-close-Premetric structure-Premetric-Space
+  neighborhood-Premetric-Space =
+    neighborhood-Premetric structure-Premetric-Space
 
-  is-prop-is-close-Premetric-Space :
+  is-prop-neighborhood-Premetric-Space :
     (d : ℚ⁺) (x y : type-Premetric-Space) →
-    is-prop (is-close-Premetric-Space d x y)
-  is-prop-is-close-Premetric-Space =
-    is-prop-is-close-Premetric (structure-Premetric-Space)
+    is-prop (neighborhood-Premetric-Space d x y)
+  is-prop-neighborhood-Premetric-Space =
+    is-prop-neighborhood-Premetric (structure-Premetric-Space)
 
   is-indistinguishable-prop-Premetric-Space :
     (x y : type-Premetric-Space) → Prop l2

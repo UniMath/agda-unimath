@@ -25,7 +25,8 @@ open import metric-spaces.premetric-structures
 
 A [premetric structure](metric-spaces.premetric-structures.md) `U` on a type `A`
 is {{#concept "finer" Disambiguation="premetric on a type" Agda=leq-Premetric}}
-than another premetric `V` if `(U d)`-close elements are `(V d)`-close for any
+than another premetric `V` if `(U d)`-neighbourhoods are `(V d)`-neighbourhoods
+for any
 [positive rational](elementary-number-theory.positive-rational-numbers.md) `d`.
 
 ## Definitions
