@@ -25,7 +25,24 @@ The
 [precategory of metric spaces and isometries](metric-spaces.precategory-of-metric-spaces-and-isometries.md)
 is a [category](category-theory.categories.md).
 
-## Definition
+## Definitions
+
+### The precategory of metric spaces and isometris is a category
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  is-category-precategory-isometry-Metric-Space :
+    is-category-Precategory (precategory-isometry-Metric-Space {l1} {l2})
+  is-category-precategory-isometry-Metric-Space A =
+    fundamental-theorem-id
+      ( is-torsorial-iso-precategory-isometry-Metric-Space A)
+      ( iso-eq-Precategory precategory-isometry-Metric-Space A)
+```
+
+### The category of metric spaces and isometries
 
 ```agda
 module _
@@ -35,8 +52,6 @@ module _
   category-isometry-Metric-Space : Category (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2)
   pr1 category-isometry-Metric-Space =
     precategory-isometry-Metric-Space {l1} {l2}
-  pr2 category-isometry-Metric-Space A =
-    fundamental-theorem-id
-      ( is-torsorial-iso-precategory-isometry-Metric-Space A)
-      ( iso-eq-Precategory precategory-isometry-Metric-Space A)
+  pr2 category-isometry-Metric-Space =
+    is-category-precategory-isometry-Metric-Space
 ```

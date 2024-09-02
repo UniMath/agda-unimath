@@ -25,7 +25,24 @@ The
 [precategory of metric spaces and short maps](metric-spaces.precategory-of-metric-spaces-and-short-functions.md)
 is a [category](category-theory.categories.md).
 
-## Definition
+## Definitions
+
+### The precategory of metric spaces and short maps is a category
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  is-category-precategory-short-function-Metric-Space :
+    is-category-Precategory (precategory-short-function-Metric-Space {l1} {l2})
+  is-category-precategory-short-function-Metric-Space A =
+    fundamental-theorem-id
+      ( is-torsorial-iso-precategory-short-function-Metric-Space A)
+      ( iso-eq-Precategory precategory-short-function-Metric-Space A)
+```
+
+### The category of metric spaces and short maps
 
 ```agda
 module _
@@ -35,8 +52,6 @@ module _
   category-short-function-Metric-Space : Category (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2)
   pr1 category-short-function-Metric-Space =
     precategory-short-function-Metric-Space {l1} {l2}
-  pr2 category-short-function-Metric-Space A =
-    fundamental-theorem-id
-      ( is-torsorial-iso-precategory-short-function-Metric-Space A)
-      ( iso-eq-Precategory precategory-short-function-Metric-Space A)
+  pr2 category-short-function-Metric-Space =
+    is-category-precategory-short-function-Metric-Space
 ```
