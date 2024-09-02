@@ -30,7 +30,8 @@ open import metric-spaces.premetric-spaces
 
 A function between [premetric spaces](metric-spaces.premetric-spaces.md) is an
 {{#concept "isometry" Disambiguation="between premetric spaces" Agda=is-isometry-Premetric-Space}}
-if it transports [premetric structures](metric-spaces.premetric-structures.md).
+if it preserves and reflects
+[premetric structures](metric-spaces.premetric-structures.md).
 
 ## Definitions
 
