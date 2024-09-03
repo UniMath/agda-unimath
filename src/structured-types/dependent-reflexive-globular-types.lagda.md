@@ -21,11 +21,13 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-## Idea
-
-Consider a [reflexive globular type](structured-types.reflexive-globular-types.md) `G` equipped with a reflexivity element `ρ`. A
-{{#concept "dependent reflexive globular type" Agda=Dependent-Reflexive-Globular-Type}} over `G`
-consists of [dependent globular type](structured-types.dependent-globular-types.md) `H` over `G` equipped with a reflexivity element `ρ'` consisting of
+Consider a
+[reflexive globular type](structured-types.reflexive-globular-types.md) `G`
+equipped with a reflexivity element `ρ`. A
+{{#concept "dependent reflexive globular type" Agda=Dependent-Reflexive-Globular-Type}}
+over `G` consists of
+[dependent globular type](structured-types.dependent-globular-types.md) `H` over
+`G` equipped with a reflexivity element `ρ'` consisting of
 
 ```text
 ρ'₀ : (x : G₀) (y : H₀ x) → H₁ y y (ρ₀ x)
@@ -52,7 +54,7 @@ record
       (y : 0-cell-Dependent-Globular-Type H x) →
       1-cell-Dependent-Globular-Type H y y
         ( refl-0-cell-Reflexive-Globular-Type G)
-                                              
+
     is-reflexive-1-cell-dependent-globular-type-Dependent-Globular-Type :
       {x x' : 0-cell-Reflexive-Globular-Type G}
       (y : 0-cell-Dependent-Globular-Type H x)
@@ -72,7 +74,7 @@ record
     {l1 l2 : Level} (l3 l4 : Level) (G : Reflexive-Globular-Type l1 l2) :
     UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
   where
-    
+
   field
     dependent-globular-type-Dependent-Reflexive-Globular-Type :
       Dependent-Globular-Type l3 l4 (globular-type-Reflexive-Globular-Type G)
@@ -100,7 +102,7 @@ record
       ( 1-cell-globular-type-Reflexive-Globular-Type G x x')
   1-cell-dependent-globular-type-Dependent-Reflexive-Globular-Type =
     1-cell-dependent-globular-type-Dependent-Globular-Type
-      ( dependent-globular-type-Dependent-Reflexive-Globular-Type       )
+      ( dependent-globular-type-Dependent-Reflexive-Globular-Type)
 
   field
     refl-Dependent-Reflexive-Globular-Type :
@@ -148,7 +150,10 @@ open Dependent-Reflexive-Globular-Type public
 
 ### The family of reflexive globular types obtained from a dependent reflexive globular type
 
-Given a dependent reflexive globular type `H` over `G` we construct a family of reflexive globular types indexed by the type of `0`-cells of `G`. This construction makes essential use of the reflexivity elements of the base reflexive globular type.
+Given a dependent reflexive globular type `H` over `G` we construct a family of
+reflexive globular types indexed by the type of `0`-cells of `G`. This
+construction makes essential use of the reflexivity elements of the base
+reflexive globular type.
 
 ```agda
 globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type :
@@ -198,7 +203,10 @@ is-reflexive-1-cell-is-reflexive-globular-structure
   ( is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type H x) =
   refl-0-cell-Dependent-Reflexive-Globular-Type H
 is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
-  ( is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type {G = G} H x) u v =
+  ( is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type
+    { G = G} H x)
+  ( u)
+  ( v) =
   is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type
     ( 1-cell-dependent-reflexive-globular-type-Dependent-Reflexive-Globular-Type
       H u v)
