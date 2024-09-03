@@ -154,6 +154,7 @@ def process_citations_chapter_rec_mut(
 
     elif BIBLIOGRAPHY_REGEX.search(new_content):
         eprint(f"Error! A #bibliography macro was found, but there are no references. File: '{chapter['path']}'.")
+        empty_bibliography_invocations.add(chapter['path'])
 
     chapter['content'] = new_content
 
