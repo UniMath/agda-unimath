@@ -25,7 +25,7 @@ Consider a
 [reflexive globular type](structured-types.reflexive-globular-types.md) `G`
 equipped with a reflexivity element `ρ`. A
 {{#concept "dependent reflexive globular type" Agda=Dependent-Reflexive-Globular-Type}}
-over `G` consists of
+over `G` consists of a
 [dependent globular type](structured-types.dependent-globular-types.md) `H` over
 `G` equipped with a reflexivity element `ρ'` consisting of
 
