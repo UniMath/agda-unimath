@@ -150,6 +150,11 @@ def process_citations_chapter_rec_mut(
             new_content = insert_bibliography_at_correct_location(
                 new_content, bibliography_section)
 
+    elif BIBLIOGRAPHY_REGEX.search(content):
+        eprint(f"Error! A #bibliography macro was found, but there are no references. File: '{chapter['path']}'.")
+
+
+
     chapter['content'] = new_content
 
     process_citations_sections_rec_mut(
