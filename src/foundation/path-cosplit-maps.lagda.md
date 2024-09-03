@@ -497,6 +497,53 @@ module _
         ( G x y)
 ```
 
+### Coroducts of path-cosplit maps are path-cosplit
+
+```agda
+abstract
+  is-path-cosplit-succ-map-coproduct :
+    {l1 l2 l3 l4 : Level} {k : 𝕋}
+    {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+    {f : A → B} {g : X → Y} →
+    is-path-cosplit (succ-𝕋 k) f →
+    is-path-cosplit (succ-𝕋 k) g →
+    is-path-cosplit (succ-𝕋 k) (map-coproduct f g)
+  is-path-cosplit-succ-map-coproduct {f = f} {g} F G (inl x) (inl y) =
+    is-path-cosplit-equiv-arrow
+      ( compute-eq-coproduct-inl-inl x y ,
+        compute-eq-coproduct-inl-inl (f x) (f y) ,
+        λ where refl → refl)
+      ( F x y)
+  is-path-cosplit-succ-map-coproduct {k = k} {f = f} {g} F G (inl x) (inr y) =
+    is-path-cosplit-is-equiv k
+      ( is-equiv-is-empty
+        ( ap (map-coproduct f g))
+        ( is-empty-eq-coproduct-inl-inr (f x) (g y)))
+  is-path-cosplit-succ-map-coproduct {k = k} {f = f} {g} F G (inr x) (inl y) =
+    is-path-cosplit-is-equiv k
+      ( is-equiv-is-empty
+        ( ap (map-coproduct f g))
+        ( is-empty-eq-coproduct-inr-inl (g x) (f y)))
+  is-path-cosplit-succ-map-coproduct {f = f} {g} F G (inr x) (inr y) =
+    is-path-cosplit-equiv-arrow
+      ( compute-eq-coproduct-inr-inr x y ,
+        compute-eq-coproduct-inr-inr (g x) (g y) ,
+        λ where refl → refl)
+      ( G x y)
+
+is-path-cosplit-map-coproduct :
+  {l1 l2 l3 l4 : Level} {k : 𝕋}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f : A → B} {g : X → Y} →
+  is-path-cosplit k f →
+  is-path-cosplit k g →
+  is-path-cosplit k (map-coproduct f g)
+is-path-cosplit-map-coproduct {k = neg-two-𝕋} =
+  retraction-map-coproduct
+is-path-cosplit-map-coproduct {k = succ-𝕋 k} =
+  is-path-cosplit-succ-map-coproduct
+```
+
 ## See also
 
 - [Mere path-cosplit maps](foundation.mere-path-cosplit-maps.md)
