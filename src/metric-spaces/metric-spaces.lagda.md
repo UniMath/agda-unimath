@@ -89,22 +89,30 @@ module _
   is-reflexive-premetric-structure-Metric-Space :
     is-reflexive-Premetric structure-Metric-Space
   is-reflexive-premetric-structure-Metric-Space =
-    pr1 is-metric-structure-Metric-Space
+    is-reflexive-is-metric-Premetric
+      structure-Metric-Space
+      is-metric-structure-Metric-Space
 
   is-symmetric-premetric-structure-Metric-Space :
     is-symmetric-Premetric structure-Metric-Space
   is-symmetric-premetric-structure-Metric-Space =
-    pr1 (pr2 is-metric-structure-Metric-Space)
+    is-symmetric-is-metric-Premetric
+      structure-Metric-Space
+      is-metric-structure-Metric-Space
 
   is-local-premetric-structure-Metric-Space :
     is-local-Premetric structure-Metric-Space
   is-local-premetric-structure-Metric-Space =
-    pr1 (pr2 (pr2 is-metric-structure-Metric-Space))
+    is-local-is-metric-Premetric
+      structure-Metric-Space
+      is-metric-structure-Metric-Space
 
   is-triangular-premetric-structure-Metric-Space :
     is-triangular-Premetric structure-Metric-Space
   is-triangular-premetric-structure-Metric-Space =
-    pr2 (pr2 (pr2 is-metric-structure-Metric-Space))
+    is-triangular-is-metric-Premetric
+      structure-Metric-Space
+      is-metric-structure-Metric-Space
 
   is-tight-premetric-structure-Metric-Space :
     is-tight-Premetric structure-Metric-Space

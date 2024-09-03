@@ -288,6 +288,20 @@ commutative-add-ℚ⁺ x y =
   eq-ℚ⁺ (commutative-add-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y))
 ```
 
+### The additive interchange law on positive rational numbers
+
+```agda
+interchange-law-add-add-ℚ⁺ :
+  (x y u v : ℚ⁺) → (x +ℚ⁺ y) +ℚ⁺ (u +ℚ⁺ v) ＝ (x +ℚ⁺ u) +ℚ⁺ (y +ℚ⁺ v)
+interchange-law-add-add-ℚ⁺ x y u v =
+  eq-ℚ⁺
+    ( interchange-law-add-add-ℚ
+      ( rational-ℚ⁺ x)
+      ( rational-ℚ⁺ y)
+      ( rational-ℚ⁺ u)
+      ( rational-ℚ⁺ v))
+```
+
 ### The product of two positive rational numbers is positive
 
 ```agda
