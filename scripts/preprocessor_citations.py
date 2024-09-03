@@ -23,6 +23,7 @@ CITEAS_FIELD = 'citeas'
 DEFAULT_CITATION_STYLE = 'alpha'
 DEFAULT_LABEL_CITATION_STYLE = 'custom_alpha'
 DEFAULT_ERROR_ON_UNMATCHED_CITE_KEY = True
+DEFAULT_ERROR_ON_EMPTY_BIBLIOGRAPHY_INVOCATION = True
 
 # Regex to match citation macros
 CITE_REGEX = re.compile(r'\{\{#cite\s([^\}\s]+)(?:\s(.*))?\}\}')
@@ -125,7 +126,8 @@ def process_citations_chapter_rec_mut(
         bib_database: pybtex.database.BibliographyData,
         style: pybtex.style.formatting.BaseStyle,
         backend,
-        unmatched_cite_keys: set):
+        unmatched_cite_keys: set,
+        empty_bibliography_invocations: set):
     cited_keys = set()  # Set to keep track of all cited keys
     content = chapter.get('content', '')
     new_content = CITE_REGEX.sub(lambda match: format_citation(
@@ -150,15 +152,13 @@ def process_citations_chapter_rec_mut(
             new_content = insert_bibliography_at_correct_location(
                 new_content, bibliography_section)
 
-    elif BIBLIOGRAPHY_REGEX.search(content):
+    elif BIBLIOGRAPHY_REGEX.search(new_content):
         eprint(f"Error! A #bibliography macro was found, but there are no references. File: '{chapter['path']}'.")
-
-
 
     chapter['content'] = new_content
 
     process_citations_sections_rec_mut(
-        chapter['sub_items'], bib_database, style, backend, unmatched_cite_keys)
+        chapter['sub_items'], bib_database, style, backend, unmatched_cite_keys, empty_bibliography_invocations)
 
 
 def insert_bibliography_at_correct_location(content, bibliography_section):
@@ -182,14 +182,15 @@ def process_citations_sections_rec_mut(
         bib_database,
         style: pybtex.style.formatting.BaseStyle,
         backend: pybtex.backends.BaseBackend,
-        unmatched_cite_keys: set):
+        unmatched_cite_keys: set,
+        empty_bibliography_invocations: set):
     for section in sections:
         chapter = section.get('Chapter')
         if chapter is None:
             continue
 
         process_citations_chapter_rec_mut(
-            chapter, bib_database, style, backend, unmatched_cite_keys)
+            chapter, bib_database, style, backend, unmatched_cite_keys, empty_bibliography_invocations)
 
 
 def process_citations_root_section(
@@ -197,11 +198,12 @@ def process_citations_root_section(
         bib_database: pybtex.database.BibliographyData,
         style: pybtex.style.formatting.BaseStyle,
         backend: pybtex.backends.BaseBackend,
-        unmatched_cite_keys: set):
+        unmatched_cite_keys: set,
+        empty_bibliography_invocations: set):
     chapter = section.get('Chapter')
     if chapter is not None:
         process_citations_chapter_rec_mut(
-            chapter, bib_database, style, backend, unmatched_cite_keys)
+            chapter, bib_database, style, backend, unmatched_cite_keys, empty_bibliography_invocations)
 
     return section
 
@@ -224,6 +226,7 @@ if __name__ == '__main__':
     citations_config = context['config']['preprocessor']['citations']
 
     unmatched_cite_keys = set()
+    empty_bibliography_invocations = set()
 
     if bool(citations_config.get('enable', True)):
         bib_database: pybtex.database.BibliographyData = pybtex.database.parse_file(
@@ -255,7 +258,7 @@ if __name__ == '__main__':
 
         book['sections'] = list(map(
             lambda s: process_citations_root_section(
-                s, bib_database, style, backend, unmatched_cite_keys),
+                s, bib_database, style, backend, unmatched_cite_keys, empty_bibliography_invocations),
             book['sections']))
     else:
         eprint('Skipping citation insertion, enable option was set to',
@@ -268,3 +271,9 @@ if __name__ == '__main__':
 
         if citations_config.get('error_on_unmatched_keys', DEFAULT_ERROR_ON_UNMATCHED_CITE_KEY):
             sys.exit(1)
+
+    if empty_bibliography_invocations:
+        eprint("The following files have #bibliography macro invocations with empty bibliographies: ", ", ".join(sorted(empty_bibliography_invocations)))
+
+        if citations_config.get('error_on_empty_bibliography_invocations', DEFAULT_ERROR_ON_EMPTY_BIBLIOGRAPHY_INVOCATION):
+            sys.exit(2)

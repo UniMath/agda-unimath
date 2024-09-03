@@ -57,6 +57,7 @@ bibtex_file = "references.bib"
 citation_style = "alpha"
 citation_label_style = "custom_alpha"
 error_on_unmatched_keys = true
+error_on_empty_bibliography_invocations = true
 before = [ "git-metadata" ]
 
 [output.linkcheck]
