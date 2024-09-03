@@ -273,7 +273,7 @@ if __name__ == '__main__':
         if citations_config.get('error_on_unmatched_keys', DEFAULT_ERROR_ON_UNMATCHED_CITE_KEY):
             sys.exit(1)
 
-    if not empty_bibliography_invocations:
+    if empty_bibliography_invocations:
         eprint("The following files have #bibliography macro invocations with empty bibliographies: ", ", ".join(sorted(empty_bibliography_invocations)))
 
         if citations_config.get('error_on_empty_bibliography_invocations', DEFAULT_ERROR_ON_EMPTY_BIBLIOGRAPHY_INVOCATION):
