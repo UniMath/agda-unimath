@@ -106,7 +106,7 @@ pr2
   is-retraction-retraction-left-map-triangle f g h H rg
 ```
 
-### When the domain is a proposition, the type of retractions is a proposition
+### When the domain is truncated, the type of retractions is a truncated
 
 ```agda
 module _
@@ -119,7 +119,22 @@ module _
       ( is-trunc-function-type k is-trunc-A)
       ( λ r →
         is-trunc-Π k (λ x → is-trunc-succ-is-trunc k is-trunc-A (r (f x)) x))
+```
 
+### When the domain is contractible, the type of retractions is contractible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-contr-retraction : is-contr A → is-contr (retraction f)
+  is-contr-retraction = is-trunc-retraction
+```
+
+### When the domain is a proposition, the type of retractions is a proposition
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where

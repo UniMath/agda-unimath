@@ -219,6 +219,21 @@ is-trunc-map-is-path-cosplit-is-trunc-codomain k is-trunc-B is-cosplit-f =
     ( is-trunc-B)
 ```
 
+### If the domain is `k+r+2`-truncated, the type of `k`-path-cosplittings is `r`-truncated
+
+```agda
+is-trunc-is-path-cosplit-is-trunc-succ-domain :
+  {l1 l2 : Level} {k r : 𝕋} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-trunc (succ-succ-add-𝕋 r k) A → is-trunc r (is-path-cosplit k f)
+is-trunc-is-path-cosplit-is-trunc-succ-domain {k = neg-two-𝕋} =
+  is-trunc-retraction
+is-trunc-is-path-cosplit-is-trunc-succ-domain {k = succ-𝕋 k} {r} is-trunc-A =
+  is-trunc-Π r
+    ( λ x →
+      is-trunc-Π r
+        ( λ y → is-trunc-is-path-cosplit-is-trunc-succ-domain (is-trunc-A x y)))
+```
+
 ### If the domain is `k+1`-truncated then `k`-path-cosplittings are unique
 
 ```agda
@@ -232,6 +247,21 @@ is-prop-is-path-cosplit-is-trunc-succ-domain {k = succ-𝕋 k} is-trunc-A =
     ( λ x →
       is-prop-Π
         ( λ y → is-prop-is-path-cosplit-is-trunc-succ-domain (is-trunc-A x y)))
+```
+
+### If the domain is `k`-truncated then there is a unique `k`-path-cosplitting
+
+```agda
+is-contr-is-path-cosplit-is-trunc-domain :
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-trunc k A → is-contr (is-path-cosplit k f)
+is-contr-is-path-cosplit-is-trunc-domain {k = neg-two-𝕋} =
+  is-contr-retraction
+is-contr-is-path-cosplit-is-trunc-domain {k = succ-𝕋 k} is-trunc-A =
+  is-contr-Π
+    ( λ x →
+      is-contr-Π
+        ( λ y → is-contr-is-path-cosplit-is-trunc-domain (is-trunc-A x y)))
 ```
 
 ### Path-cosplit maps are closed under morphisms of maps that are path-cosplit on the domain
