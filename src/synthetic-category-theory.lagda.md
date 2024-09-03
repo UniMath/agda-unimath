@@ -27,3 +27,7 @@ module synthetic-category-theory where
 
 open import synthetic-category-theory.synthetic-categories public
 ```
+
+## References
+
+{{#bibliography}}
