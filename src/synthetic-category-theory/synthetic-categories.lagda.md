@@ -122,7 +122,7 @@ module _
     (κ : language-Synthetic-Category-Theory l) →
     (C D : category-Synthetic-Category-Theory κ) → Globular-Type l l
   functor-globular-type-Synthetic-Category-Theory =
-    globular-type-1-cell-Globular-Type
+    1-cell-globular-type-Globular-Type
 ```
 
 #### The sort of isomorphisms between functors in the language of synthetic category theory
@@ -610,7 +610,3 @@ module _
             ( α))
           ( associative-comp-functor-Synthetic-Category-Theory η H' G' F')
 ```
-
-## References
-
-{{#bibliography}}
