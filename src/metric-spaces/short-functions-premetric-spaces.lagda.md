@@ -34,8 +34,7 @@ open import metric-spaces.premetric-spaces
 
 A function between [premetric spaces](metric-spaces.premetric-spaces.md) is
 {{#concept "short" Disambiguation="function between premetric spaces" Agda=is-short-function-Premetric-Space}}
-if it maps
-[`d`-neighbourhoods](metric-spaces.premetric-structures.md) to
+if it maps [`d`-neighbourhoods](metric-spaces.premetric-structures.md) to
 `d`-neighbourhoods.
 
 ## Definitions
