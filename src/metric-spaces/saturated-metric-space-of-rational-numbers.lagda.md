@@ -41,8 +41,10 @@ equipped with the [premetric](metric-spaces.premetric-structures.md) where
 `x y : ℚ` are in `d`-neighbourhood when `y ≤ x + d` and `x ≤ y + d` is a
 [metric space](metric-spaces.metric-spaces.md).
 
+Moreover, it is [saturated](metric-spaces.saturated-metric-spaces.md).
+
 It is the
-{{#concept "standard saturated metric space of rational numbers" Agda=saturated-metric-space-ℚ}}
+{{#concept "standard saturated metric space of rational numbers" Agda=metric-space-leq-ℚ}}
 
 ## Definitions
 
