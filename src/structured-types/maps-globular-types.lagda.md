@@ -48,8 +48,8 @@ record
     globular-type-1-cell-map-Globular-Type :
       {x y : 0-cell-Globular-Type A} →
       map-Globular-Type
-        ( globular-type-1-cell-Globular-Type A x y)
-        ( globular-type-1-cell-Globular-Type B
+        ( 1-cell-globular-type-Globular-Type A x y)
+        ( 1-cell-globular-type-Globular-Type B
           ( 0-cell-map-Globular-Type x)
           ( 0-cell-map-Globular-Type y))
 
@@ -113,7 +113,7 @@ id-map-Globular-Type A =
   λ where
   .0-cell-map-Globular-Type → id
   .globular-type-1-cell-map-Globular-Type {x} {y} →
-    id-map-Globular-Type (globular-type-1-cell-Globular-Type A x y)
+    id-map-Globular-Type (1-cell-globular-type-Globular-Type A x y)
 ```
 
 ### Composition of maps of globular types
