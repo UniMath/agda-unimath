@@ -35,5 +35,5 @@ open import metric-spaces.saturated-metric-space-of-real-numbers public
 open import metric-spaces.saturated-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.short-functions-premetric-spaces public
-open import metric-spaces.subsets-metric-spaces public
+open import metric-spaces.subspaces-metric-spaces public
 ```

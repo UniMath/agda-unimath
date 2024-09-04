@@ -1,7 +1,7 @@
-# Subsets of metric spaces
+# Subspaces of metric spaces
 
 ```agda
-module metric-spaces.subsets-metric-spaces where
+module metric-spaces.subspaces-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
