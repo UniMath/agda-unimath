@@ -194,6 +194,20 @@ is-positive-diff-le-ℚ x y H =
 
 positive-diff-le-ℚ : (x y : ℚ) → le-ℚ x y → ℚ⁺
 positive-diff-le-ℚ x y H = y -ℚ x , is-positive-diff-le-ℚ x y H
+
+left-law-positive-diff-le-ℚ :
+  (x y : ℚ) (H : le-ℚ x y) →
+  (rational-ℚ⁺ (positive-diff-le-ℚ x y H)) +ℚ x ＝ y
+left-law-positive-diff-le-ℚ x y H =
+  associative-add-ℚ y (neg-ℚ x) x ∙
+  inv-tr (λ u → y +ℚ u ＝ y) (left-inverse-law-add-ℚ x) (right-unit-law-add-ℚ y)
+
+right-law-positive-diff-le-ℚ :
+  (x y : ℚ) (H : le-ℚ x y) →
+  x +ℚ (rational-ℚ⁺ (positive-diff-le-ℚ x y H)) ＝ y
+right-law-positive-diff-le-ℚ x y H =
+  commutative-add-ℚ x (y -ℚ x) ∙
+  left-law-positive-diff-le-ℚ x y H
 ```
 
 ### A nonzero rational number or its negative is positive
@@ -672,4 +686,36 @@ module _
       ( Π-Prop ℚ⁺ (λ d → leq-ℚ-Prop x (y +ℚ (rational-ℚ⁺ d))))
       ( leq-add-positive-le-add-positive-ℚ ∘ le-add-positive-leq-ℚ)
       ( leq-leq-add-positive-ℚ)
+```
+
+```agda
+module _
+  (x y : ℚ) (d : ℚ⁺)
+  where
+
+  le-le-add-positive-leq-add-positive-ℚ :
+    (L : leq-ℚ y (x +ℚ (rational-ℚ⁺ d)))
+    (r : ℚ)
+    (I : le-ℚ (r +ℚ rational-ℚ⁺ d) y) →
+    le-ℚ r x
+  le-le-add-positive-leq-add-positive-ℚ L r I =
+    reflects-le-left-add-ℚ
+      ( rational-ℚ⁺ d)
+      ( r)
+      ( x)
+      ( concatenate-le-leq-ℚ
+        ( r +ℚ rational-ℚ⁺ d)
+        ( y)
+        ( x +ℚ rational-ℚ⁺ d)
+        ( I)
+        ( L))
+
+  leq-add-positive-le-le-add-positive-ℚ :
+    ((r : ℚ) → le-ℚ (r +ℚ rational-ℚ⁺ d) y → le-ℚ r x) →
+    leq-ℚ y (x +ℚ rational-ℚ⁺ d)
+  leq-add-positive-le-le-add-positive-ℚ L =
+    rec-coproduct
+      ( ex-falso ∘ (irreflexive-le-ℚ x) ∘ L x)
+      ( id)
+      ( decide-le-leq-ℚ (x +ℚ rational-ℚ⁺ d) y)
 ```
