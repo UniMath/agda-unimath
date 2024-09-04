@@ -107,7 +107,8 @@ module _
       spectrum-Connective-Spectrum
 
   is-equiv-pointed-adjoint-structure-map-Connective-Spectrum :
-    (n : ℕ) → is-pointed-equiv (pointed-adjoint-structure-map-Connective-Spectrum n)
+    (n : ℕ) →
+    is-pointed-equiv (pointed-adjoint-structure-map-Connective-Spectrum n)
   is-equiv-pointed-adjoint-structure-map-Connective-Spectrum =
     is-equiv-pointed-adjoint-structure-map-Spectrum spectrum-Connective-Spectrum
 
