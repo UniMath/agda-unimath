@@ -317,6 +317,9 @@ module _
 
 ### The initial copresheaf
 
+Since colimits are computed pointwise, the initial copresheaf is the constant
+functor at the empty set.
+
 ```agda
 module _
   {l1 l2 : Level} (C : Precategory l1 l2) (l : Level)
@@ -368,6 +371,9 @@ module _
 ```
 
 ### The terminal copresheaf
+
+Since limits are computed pointwise, the terminal copresheaf is the constant
+functor at the terminal set.
 
 ```agda
 module _
