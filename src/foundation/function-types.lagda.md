@@ -11,11 +11,11 @@ open import foundation-core.function-types public
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopy-induction
 open import foundation.universe-levels
-open import foundation.commuting-pentagons-of-identifications
 
 open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
@@ -34,7 +34,7 @@ open import foundation-core.transport-along-identifications
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-   (h : C → D) (g : B → C) (f : A → B)
+  (h : C → D) (g : B → C) (f : A → B)
   where
 
   associative-comp : (h ∘ g) ∘ f ＝ h ∘ (g ∘ f)
