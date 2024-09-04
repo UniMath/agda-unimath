@@ -1,10 +1,15 @@
 # Higher group theory
 
+```agda
+{-# OPTIONS --guardedness #-}
+```
+
 ## Files in the higher group theory folder
 
 ```agda
 module higher-group-theory where
 
+open import higher-group-theory.abelian-higher-groups public
 open import higher-group-theory.cartesian-products-higher-groups public
 open import higher-group-theory.conjugation public
 open import higher-group-theory.cyclic-higher-groups public
@@ -19,6 +24,7 @@ open import higher-group-theory.higher-group-actions public
 open import higher-group-theory.higher-groups public
 open import higher-group-theory.homomorphisms-higher-group-actions public
 open import higher-group-theory.homomorphisms-higher-groups public
+open import higher-group-theory.infinitely-deloopable-types public
 open import higher-group-theory.integers-higher-group public
 open import higher-group-theory.iterated-cartesian-products-higher-groups public
 open import higher-group-theory.iterated-deloopings-of-pointed-types public
