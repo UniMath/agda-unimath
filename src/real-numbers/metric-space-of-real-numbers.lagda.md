@@ -1,9 +1,9 @@
-# The standard saturated metric structure on the real numbers
+# The standard metric structure on the real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module metric-spaces.saturated-metric-space-of-real-numbers where
+module real-numbers.metric-space-of-real-numbers where
 ```
 
 <details><summary>Imports</summary>
