@@ -59,7 +59,6 @@ module _
     in
       coherence-pentagon-identifications α₁ α₄ α₂ α₅ α₃
   mac-lane-pentagon-comp = refl
-
 ```
 
 ### Transport in a family of function types
