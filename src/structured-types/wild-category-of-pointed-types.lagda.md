@@ -40,14 +40,14 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 
 The
 {{#concept "wild category of pointed types" Agda=Pointed-Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory}}
-consists of [pointed types](structured-types.pointed-types.md)
-[pointed functions](structured-types.pointed-functions.md) and
+consists of [pointed types](structured-types.pointed-types.md),
+[pointed functions](structured-types.pointed-functions.md), and
 [pointed homotopies](structured-types.pointed-homotopies.md).
 
-We give two equivalent definitions. The first uses
+We give two equivalent definitions: the first uses
 [uniform pointed homotopies](structured-types.uniform-pointed-homotopies.md),
 giving a uniform definition for all higher cells. However, uniform pointed
-homotopies are not as workable directly as pointed homotopies, although they
+homotopies are not as workable directly as pointed homotopies, although the
 types are equivalent. Therefore we give a second, nonuniform definition of the
 wild category of pointed types where the 2-cells are pointed homotopies, the
 3-cells are [pointed 2-homotopies](structured-types.pointed-2-homotopies.md) and
