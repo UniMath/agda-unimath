@@ -9,9 +9,15 @@ module higher-group-theory.infinitely-deloopable-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.0-connected-types
+open import foundation.connected-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.small-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import higher-group-theory.deloopable-types
@@ -20,8 +26,13 @@ open import higher-group-theory.higher-groups
 open import higher-group-theory.small-higher-groups
 
 open import structured-types.pointed-equivalences
+open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.small-pointed-types
+
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.prespectra
+open import synthetic-homotopy-theory.spectra
 ```
 
 </details>
@@ -32,7 +43,7 @@ A [pointed type](structured-types.pointed-types.md) `X` is said to be
 {{#concept "infinitely deloopable" Disambiguation="pointed type" Agda=infinite-delooping}}
 if it is
 [$n$-deloopable](higher-group-theory.iterated-deloopings-of-pointed-types.md)
-for all $n$, or equivalently, if it is
+for all $n$ such that the deloopings agree, or equivalently, if it is
 [deloopable](higher-group-theory.deloopable-types.md) and coinductively its
 delooping is also infinitely deloopable.
 
@@ -84,10 +95,70 @@ record
     equiv-pointed-equiv is-delooping-infinite-delooping
 
   field
-    infinite-delooping-∞-group-infinite-delooping :
+    infinite-delooping-classifying-pointed-type-infinite-delooping :
       infinite-delooping classifying-pointed-type-infinite-delooping
 
 open infinite-delooping public
+```
+
+## Properties
+
+### The underlying spectrum associated to an infinitely deloopable type
+
+```agda
+module _
+  {l : Level}
+  where
+
+  pointed-type-family-infinite-delooping :
+    (X : Pointed-Type l) (D : infinite-delooping X) → ℕ → Pointed-Type l
+  pointed-type-family-infinite-delooping X D zero-ℕ = X
+  pointed-type-family-infinite-delooping X D (succ-ℕ n) =
+    pointed-type-family-infinite-delooping
+      ( classifying-pointed-type-infinite-delooping D)
+      ( infinite-delooping-classifying-pointed-type-infinite-delooping D)
+      ( n)
+
+  type-family-infinite-delooping :
+    (X : Pointed-Type l) (D : infinite-delooping X) → ℕ → UU l
+  type-family-infinite-delooping X D =
+    type-Pointed-Type ∘ pointed-type-family-infinite-delooping X D
+
+  pointed-equiv-family-infinite-delooping :
+    (X : Pointed-Type l) (D : infinite-delooping X) (n : ℕ) →
+    pointed-type-family-infinite-delooping X D n ≃∗
+    Ω (pointed-type-family-infinite-delooping X D (succ-ℕ n))
+  pointed-equiv-family-infinite-delooping X D zero-ℕ =
+    is-delooping-infinite-delooping D
+  pointed-equiv-family-infinite-delooping X D (succ-ℕ n) =
+    pointed-equiv-family-infinite-delooping
+      ( classifying-pointed-type-infinite-delooping D)
+      ( infinite-delooping-classifying-pointed-type-infinite-delooping D)
+      ( n)
+
+  pointed-map-family-infinite-delooping :
+    (X : Pointed-Type l) (D : infinite-delooping X) (n : ℕ) →
+    pointed-type-family-infinite-delooping X D n →∗
+    Ω (pointed-type-family-infinite-delooping X D (succ-ℕ n))
+  pointed-map-family-infinite-delooping X D =
+    pointed-map-pointed-equiv ∘ pointed-equiv-family-infinite-delooping X D
+
+  prespectrum-infinite-delooping :
+    (X : Pointed-Type l) (D : infinite-delooping X) → Prespectrum l
+  prespectrum-infinite-delooping X D =
+    pointed-type-family-infinite-delooping X D ,
+    pointed-map-family-infinite-delooping X D
+
+  is-spectrum-infinite-delooping :
+    (X : Pointed-Type l) (D : infinite-delooping X) →
+    is-spectrum (prespectrum-infinite-delooping X D)
+  is-spectrum-infinite-delooping X D =
+    is-equiv-map-pointed-equiv ∘ pointed-equiv-family-infinite-delooping X D
+
+  spectrum-infinite-delooping :
+    (X : Pointed-Type l) (D : infinite-delooping X) → Spectrum l
+  spectrum-infinite-delooping X D =
+    prespectrum-infinite-delooping X D , is-spectrum-infinite-delooping X D
 ```
 
 ## External links
