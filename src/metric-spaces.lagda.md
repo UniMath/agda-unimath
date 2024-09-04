@@ -30,6 +30,7 @@ open import metric-spaces.premetric-spaces public
 open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.pullback-premetric-structures public
+open import metric-spaces.saturated-metric-space-of-rational-numbers public
 open import metric-spaces.saturated-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.short-functions-premetric-spaces public
