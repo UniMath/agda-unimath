@@ -335,7 +335,8 @@ module _
       obj-initial-copresheaf-Precategory
       X
   pr1 (hom-initial-copresheaf-Precategory X) x (map-raise ())
-  pr2 (hom-initial-copresheaf-Precategory X) f = eq-htpy λ {(map-raise ())}
+  pr2 (hom-initial-copresheaf-Precategory X) f =
+    eq-htpy (λ where (map-raise ()))
 
   is-unique-hom-initial-copresheaf-Precategory :
     ( X : copresheaf-Precategory C l) →
@@ -353,7 +354,7 @@ module _
       ( X)
       ( hom-initial-copresheaf-Precategory X)
       ( τ)
-      ( λ x → eq-htpy λ {(map-raise ())})
+      ( λ x → eq-htpy (λ where (map-raise ())))
 
   initial-copresheaf-Precategory :
     initial-obj-Precategory
@@ -404,7 +405,7 @@ module _
       ( obj-terminal-copresheaf-Precategory)
       ( hom-terminal-copresheaf-Precategory X)
       ( τ)
-      ( λ x → eq-htpy λ _ → eq-is-prop is-prop-raise-unit)
+      ( λ x → eq-htpy (λ _ → eq-is-prop is-prop-raise-unit))
 
   terminal-copresheaf-Precategory :
     terminal-obj-Precategory

@@ -108,7 +108,7 @@ pr1 (is-nonempty-Prop A) = is-nonempty A
 pr2 (is-nonempty-Prop A) = is-property-is-empty
 ```
 
-### Being empty is preserved under propositional trunctations
+### Being empty is preserved under propositional truncations
 
 ```agda
 abstract
