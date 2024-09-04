@@ -1,9 +1,5 @@
 # Higher group theory
 
-```agda
-{-# OPTIONS --guardedness #-}
-```
-
 ## Files in the higher group theory folder
 
 ```agda
