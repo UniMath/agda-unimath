@@ -32,9 +32,9 @@ open import metric-spaces.premetric-spaces
 
 ## Idea
 
-A funcion between [premetric spaces](metric-spaces.premetric-spaces.md) is
+A function between [premetric spaces](metric-spaces.premetric-spaces.md) is
 {{#concept "short" Disambiguation="function between premetric spaces" Agda=is-short-function-Premetric-Space}}
-if it preserves it maps
+if it maps
 [`d`-neighbourhoods](metric-spaces.premetric-structures.md) to
 `d`-neighbourhoods.
 
@@ -119,7 +119,7 @@ module _
     id-Premetric-Space A , is-short-id-Premetric-Space
 ```
 
-### Equality of short functions between premetric spaces is equivalent to homtopies between their carrier maps
+### Equality of short functions between premetric spaces is characterized by homotopy between their carrier maps
 
 ```agda
 module _
@@ -145,7 +145,7 @@ module _
     map-inv-equiv equiv-eq-htpy-map-short-function-Premetric-Space
 ```
 
-### The composition of short maps between premetric spaces is a short
+### Composition of short maps between premetric spaces
 
 ```agda
 module _
@@ -163,11 +163,6 @@ module _
     is-short-function-Premetric-Space A C (g ∘ f)
   preserves-short-comp-function-Premetric-Space H K d x y =
     H d (f x) (f y) ∘ K d x y
-```
-
-### The short composition of short functions between premetric spaces
-
-```agda
 module _
   {l1a l2a l1b l2b l1c l2c : Level}
   (A : Premetric-Space l1a l2a)
@@ -208,7 +203,7 @@ module _
     forward-implication (H d x y)
 ```
 
-## References
+## External links
 
 - [Short maps](https://ncatlab.org/nlab/show/short+map) at $n$Lab
 - [Metric maps](https://en.wikipedia.org/wiki/Metric_map) at Wikipedia

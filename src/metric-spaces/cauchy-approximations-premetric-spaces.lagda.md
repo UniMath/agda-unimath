@@ -36,7 +36,7 @@ type such that `f ε` and `f δ` are in a
 [(`ε + δ`)-neighbourhood](metric-spaces.premetric-structures.md) for all
 `(ε δ : ℚ⁺)`.
 
-This follows definition 4.5.5 of {{#cite Booij2020PhD}} or Definition 11.2.10 of
+This follows Definition 4.5.5 of {{#cite Booij2020PhD}} or Definition 11.2.10 of
 {{#cite UF13}}.
 
 ## Definitions

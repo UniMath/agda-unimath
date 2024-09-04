@@ -25,8 +25,8 @@ open import metric-spaces.premetric-structures
 
 [Subsets](foundation.subtypes.md) of
 [metric spaces](metric-spaces.metric-spaces.md) inherit the metric structure of
-their ambient space. Moreover, the natural inclusion is
-[isometric](metric-spaces.isometry-metric-spaces.md).
+their ambient space. Moreover, the natural inclusion is an
+[isometry](metric-spaces.isometry-metric-spaces.md).
 
 ## Definitions
 
@@ -43,7 +43,7 @@ module _
 
 ## Properties
 
-### Subsets of metric spaces inherit a metric structure
+### Subsets of metric spaces are metric spaces
 
 ```agda
 module _
@@ -82,7 +82,7 @@ module _
   inclusion-subspace-Metric-Space = inclusion-subtype S
 ```
 
-### The inclusion from a subspace in its ambient space is isometric
+### The inclusion of a subspace is an isometry
 
 ```agda
 module _

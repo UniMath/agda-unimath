@@ -128,7 +128,7 @@ module _
     id-Metric-Space A , is-short-id-Metric-Space
 ```
 
-### Equality of short functions between metric spaces is equivalent to homtopies between their carrier maps
+### Equality of short functions between metric spaces is characterized by homotopy of their carrier maps
 
 ```agda
 module _
@@ -154,7 +154,7 @@ module _
     map-inv-equiv equiv-eq-htpy-map-short-function-Metric-Space
 ```
 
-### The short composition of short functions
+### Composition of short functions
 
 ```agda
 module _
@@ -238,6 +238,6 @@ module _
         ( is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B)))
 ```
 
-## References
+## External links
 
 - [Short maps](https://ncatlab.org/nlab/show/short+map) at $n$Lab
