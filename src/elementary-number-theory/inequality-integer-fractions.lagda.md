@@ -7,6 +7,7 @@ module elementary-number-theory.inequality-integer-fractions where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-integer-fractions
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-positive-and-negative-integers
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions
@@ -123,4 +124,73 @@ transitive-leq-fraction-ℤ p q r H H' =
               ( is-positive-denominator-fraction-ℤ r))
             ( H'))))
     ( is-positive-denominator-fraction-ℤ q)
+```
+
+### Chaining rules for similarity and inequality on the integer fractions
+
+```agda
+module _
+  (p q r : fraction-ℤ)
+  where
+
+  concatenate-sim-leq-fraction-ℤ :
+    sim-fraction-ℤ p q →
+    leq-fraction-ℤ q r →
+    leq-fraction-ℤ p r
+  concatenate-sim-leq-fraction-ℤ H H' =
+    is-nonnegative-right-factor-mul-ℤ
+      ( is-nonnegative-eq-ℤ
+        ( lemma-left-sim-cross-mul-diff-fraction-ℤ p q r H)
+        ( is-nonnegative-mul-ℤ
+          ( is-nonnegative-is-positive-ℤ (is-positive-denominator-fraction-ℤ p))
+          ( H')))
+      ( is-positive-denominator-fraction-ℤ q)
+
+  concatenate-leq-sim-fraction-ℤ :
+    leq-fraction-ℤ p q →
+    sim-fraction-ℤ q r →
+    leq-fraction-ℤ p r
+  concatenate-leq-sim-fraction-ℤ H H' =
+    is-nonnegative-right-factor-mul-ℤ
+      ( is-nonnegative-eq-ℤ
+        ( inv (lemma-right-sim-cross-mul-diff-fraction-ℤ p q r H'))
+        ( is-nonnegative-mul-ℤ
+          ( is-nonnegative-is-positive-ℤ (is-positive-denominator-fraction-ℤ r))
+          ( H)))
+      ( is-positive-denominator-fraction-ℤ q)
+```
+
+### The similarity of integer fractions preserves inequality
+
+```agda
+module _
+  (p q p' q' : fraction-ℤ) (H : sim-fraction-ℤ p p') (K : sim-fraction-ℤ q q')
+  where
+
+  preserves-leq-sim-fraction-ℤ : leq-fraction-ℤ p q → leq-fraction-ℤ p' q'
+  preserves-leq-sim-fraction-ℤ I =
+    concatenate-sim-leq-fraction-ℤ p' p q'
+      ( symmetric-sim-fraction-ℤ p p' H)
+      ( concatenate-leq-sim-fraction-ℤ p q q' I K)
+```
+
+### `x ≤ y` if and only if `0 ≤ y - x`
+
+```agda
+module _
+  (x y : fraction-ℤ)
+  where
+
+  eq-translate-diff-leq-zero-fraction-ℤ :
+    leq-fraction-ℤ zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x)) ＝
+    leq-fraction-ℤ x y
+  eq-translate-diff-leq-zero-fraction-ℤ =
+    ap
+      ( is-nonnegative-ℤ)
+      ( ( cross-mul-diff-zero-fraction-ℤ (y +fraction-ℤ (neg-fraction-ℤ x))) ∙
+        ( ap
+          ( add-ℤ ( (numerator-fraction-ℤ y) *ℤ (denominator-fraction-ℤ x)))
+          ( left-negative-law-mul-ℤ
+            ( numerator-fraction-ℤ x)
+            ( denominator-fraction-ℤ y))))
 ```

@@ -35,6 +35,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -189,6 +191,9 @@ is-positive-diff-le-ℚ x y H =
     ( backward-implication
       ( iff-translate-diff-le-zero-ℚ x y)
       ( H))
+
+positive-diff-le-ℚ : (x y : ℚ) → le-ℚ x y → ℚ⁺
+positive-diff-le-ℚ x y H = y -ℚ x , is-positive-diff-le-ℚ x y H
 ```
 
 ### A nonzero rational number or its negative is positive
@@ -570,4 +575,101 @@ le-right-add-rational-ℚ⁺ x d =
     ( le-ℚ x)
     ( commutative-add-ℚ x (rational-ℚ⁺ d))
     ( le-left-add-rational-ℚ⁺ x d)
+
+left-law-add-positive-diff-le-ℚ :
+  (x y : ℚ) (I : le-ℚ x y) →
+  ((rational-ℚ⁺ (positive-diff-le-ℚ x y I)) +ℚ x) ＝
+  (y)
+left-law-add-positive-diff-le-ℚ x y I =
+  ( associative-add-ℚ
+    ( y)
+    ( neg-ℚ x)
+    ( x)) ∙
+  ( ap (add-ℚ y) (left-inverse-law-add-ℚ x)) ∙
+  ( right-unit-law-add-ℚ y)
+
+right-law-add-positive-diff-le-ℚ :
+  (x y : ℚ) (I : le-ℚ x y) →
+  (x +ℚ (rational-ℚ⁺ (positive-diff-le-ℚ x y I))) ＝
+  (y)
+right-law-add-positive-diff-le-ℚ x y I =
+  ( commutative-add-ℚ
+    ( x)
+    (rational-ℚ⁺ (positive-diff-le-ℚ x y I))) ∙
+  ( left-law-add-positive-diff-le-ℚ x y I)
+```
+
+### Characterization of inequality on the rational numbers by the additive action of `ℚ⁺`
+
+For any `x y : ℚ`, the following conditions are equivalent:
+
+- `x ≤ y`
+- `∀ (δ : ℚ⁺) → x < y + δ`
+- `∀ (δ : ℚ⁺) → x ≤ y + δ`
+
+```agda
+module _
+  (x y : ℚ)
+  where
+
+  le-add-positive-leq-ℚ :
+    (I : leq-ℚ x y) (d : ℚ⁺) → le-ℚ x (y +ℚ (rational-ℚ⁺ d))
+  le-add-positive-leq-ℚ I d =
+    concatenate-leq-le-ℚ
+      ( x)
+      ( y)
+      ( y +ℚ (rational-ℚ⁺ d))
+      ( I)
+      ( le-right-add-rational-ℚ⁺ y d)
+
+  leq-add-positive-le-add-positive-ℚ :
+    ((d : ℚ⁺) → le-ℚ x (y +ℚ (rational-ℚ⁺ d))) →
+    ((d : ℚ⁺) → leq-ℚ x (y +ℚ (rational-ℚ⁺ d)))
+  leq-add-positive-le-add-positive-ℚ H d =
+    leq-le-ℚ
+      { x}
+      { y +ℚ (rational-ℚ⁺ d)}
+      (H d)
+
+  leq-leq-add-positive-ℚ :
+    ((d : ℚ⁺) → leq-ℚ x (y +ℚ (rational-ℚ⁺ d))) → leq-ℚ x y
+  leq-leq-add-positive-ℚ H =
+    rec-coproduct
+      ( λ I →
+        ex-falso
+          ( not-leq-le-ℚ
+            ( mediant-ℚ y x)
+            ( x)
+            ( le-right-mediant-ℚ y x I)
+            ( tr
+              ( leq-ℚ x)
+              ( right-law-add-positive-diff-le-ℚ
+                ( y)
+                ( mediant-ℚ y x)
+                ( le-left-mediant-ℚ y x I))
+              ( H
+                ( positive-diff-le-ℚ
+                  ( y)
+                  ( mediant-ℚ y x)
+                  ( le-left-mediant-ℚ y x I))))))
+      ( id)
+      ( decide-le-leq-ℚ y x)
+
+  equiv-leq-le-add-positive-ℚ :
+    leq-ℚ x y ≃ ((d : ℚ⁺) → le-ℚ x (y +ℚ (rational-ℚ⁺ d)))
+  equiv-leq-le-add-positive-ℚ =
+    equiv-iff
+      ( leq-ℚ-Prop x y)
+      ( Π-Prop ℚ⁺ (λ d → le-ℚ-Prop x (y +ℚ (rational-ℚ⁺ d))))
+      ( le-add-positive-leq-ℚ)
+      ( leq-leq-add-positive-ℚ ∘ leq-add-positive-le-add-positive-ℚ)
+
+  equiv-leq-leq-add-positive-ℚ :
+    leq-ℚ x y ≃ ((d : ℚ⁺) → leq-ℚ x (y +ℚ (rational-ℚ⁺ d)))
+  equiv-leq-leq-add-positive-ℚ =
+    equiv-iff
+      ( leq-ℚ-Prop x y)
+      ( Π-Prop ℚ⁺ (λ d → leq-ℚ-Prop x (y +ℚ (rational-ℚ⁺ d))))
+      ( leq-add-positive-le-add-positive-ℚ ∘ le-add-positive-leq-ℚ)
+      ( leq-leq-add-positive-ℚ)
 ```
