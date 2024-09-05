@@ -270,6 +270,5 @@ module _
 
   right-unit-law-id-pointed-map :
     (f : A →∗ B) → f ∘∗ id-pointed-map ~∗ f
-  pr1 (right-unit-law-id-pointed-map f) = refl-htpy
-  pr2 (right-unit-law-id-pointed-map f) = refl
+  right-unit-law-id-pointed-map = refl-pointed-htpy
 ```
