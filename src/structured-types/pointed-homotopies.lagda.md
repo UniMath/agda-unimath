@@ -564,7 +564,7 @@ Pointed homotopies can be constructed by equational reasoning in the following
 way:
 
 ```text
-homotopy-reasoning
+pointed-homotopy-reasoning
   f ~∗ g by htpy-1
     ~∗ h by htpy-2
     ~∗ i by htpy-3
