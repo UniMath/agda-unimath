@@ -99,7 +99,7 @@ def get_agda_files(path):
         def filter_agda_files(f): return utils.is_agda_file(pathlib.Path(f)) and os.path.dirname(f) != path
         return list(filter(filter_agda_files, utils.get_files_recursive(path)))
     else:
-        print(f"Warning: '{path}' is not a valid file or directory. Skipping.")
+        utils.multithread.thread_safe_print(f"Warning: '{path}' is not a valid file or directory. Skipping.")
         return []
 
 
@@ -126,7 +126,7 @@ if __name__ == '__main__':
         agda_files.extend(get_agda_files(path))
 
     if not agda_files:
-        print("No Agda files found in the specified paths.")
+        utils.multithread.thread_safe_print("No Agda files found in the specified paths.")
         sys.exit(1)
 
     # Sort the files by Git modification status and last commit date
