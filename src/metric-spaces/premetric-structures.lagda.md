@@ -11,12 +11,15 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets
@@ -67,7 +70,7 @@ module _
   is-prop-neighborhood-Premetric d = is-prop-type-Relation-Prop (B d)
 ```
 
-### Two elements `x` and `y` are indistinguishable in a premetric if `x` and `y` are `d`-neighbours for any positive rational `d`
+### Two points `x` and `y` are indistinguishable in a premetric if `x` and `y` are `d`-neighbours for any positive rational `d`
 
 ```agda
 module _
@@ -89,7 +92,46 @@ module _
     is-prop-type-Prop is-indistinguishable-prop-Premetric
 ```
 
+### Two points `x` and `y` are separated in a premetric if there exists some positive rational `d` such that `x` and `y` are not `d`-neighbours
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
+  (x y : A)
+  where
+
+  is-separated-pt-prop-Premetric : Prop l2
+  is-separated-pt-prop-Premetric =
+    ∃ ℚ⁺ (λ d → neg-Prop (B d x y))
+
+  is-separated-pt-Premetric : UU l2
+  is-separated-pt-Premetric =
+    type-Prop is-separated-pt-prop-Premetric
+
+  is-prop-is-separated-pt-Premetric :
+    is-prop is-separated-pt-Premetric
+  is-prop-is-separated-pt-Premetric =
+    is-prop-type-Prop is-separated-pt-prop-Premetric
+```
+
 ## Properties
+
+### Points separated by a premetric structure are not indistinguishable
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
+  (x y : A)
+  where
+
+  is-not-indistinguishable-is-separated-pt-Premetric :
+    is-separated-pt-Premetric B x y → ¬ (is-indistinguishable-Premetric B x y)
+  is-not-indistinguishable-is-separated-pt-Premetric S I =
+    elim-exists
+      ( empty-Prop)
+      ( λ d H → H (I d))
+      ( S)
+```
 
 ### A premetric is reflexive is any element is indistinguishable from itself
 
@@ -136,6 +178,22 @@ module _
   indistinguishable-eq-reflexive-Premetric {x} {.x} refl d = H d x
 ```
 
+### Being separated in a reflexive premetric is irreflexive
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
+  (R : is-reflexive-Premetric B)
+  where
+
+  is-irreflexive-is-separated-pt-is-reflexive-Premetric :
+    (x : A) → ¬ (is-separated-pt-Premetric B x x)
+  is-irreflexive-is-separated-pt-is-reflexive-Premetric x =
+    elim-exists
+      ( empty-Prop)
+      ( λ d H → H (R d x))
+```
+
 ### A premetric is symmetric if `d`-neighbourhoods are symmetric for all positive rational number `d`
 
 ```agda
@@ -167,6 +225,22 @@ module _
     is-symmetric (is-indistinguishable-Premetric B)
   is-symmetric-is-indistinguishable-is-symmetric-Premetric x y H d =
     S d x y (H d)
+```
+
+### Being separated in a symmetric premetric is symmetric
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
+  (S : is-symmetric-Premetric B)
+  where
+
+  is-symmetric-is-separated-pt-is-symmetric-Premetric :
+    is-symmetric (is-separated-pt-Premetric B)
+  is-symmetric-is-separated-pt-is-symmetric-Premetric x y =
+    elim-exists
+      ( is-separated-pt-prop-Premetric B y x)
+      ( λ d I → intro-exists d (I ∘ S d y x))
 ```
 
 ### A premetric is local if indistinguishability has propositional fibers
