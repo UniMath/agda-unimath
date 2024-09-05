@@ -23,7 +23,7 @@ CITEAS_FIELD = 'citeas'
 DEFAULT_CITATION_STYLE = 'alpha'
 DEFAULT_LABEL_CITATION_STYLE = 'custom_alpha'
 DEFAULT_ERROR_ON_UNMATCHED_CITE_KEY = True
-DEFAULT_ERROR_ON_EMPTY_BIBLIOGRAPHY_INVOCATION = True
+DEFAULT_ERROR_ON_EMPTY_BIBLIOGRAPHY = True
 
 # Regex to match citation macros
 CITE_REGEX = re.compile(r'\{\{#cite\s([^\}\s]+)(?:\s(.*))?\}\}')
@@ -231,13 +231,13 @@ if __name__ == '__main__':
 
     if bool(citations_config.get('enable', True)):
         bib_database: pybtex.database.BibliographyData = pybtex.database.parse_file(
-            citations_config.get('bibtex_file'))
+            citations_config.get('bibtex-file'))
 
         # Config
         citation_style_config = citations_config.get(
-            'citation_style', DEFAULT_CITATION_STYLE)
+            'citation-style', DEFAULT_CITATION_STYLE)
         label_style_config = citations_config.get(
-            'citation_label_style', DEFAULT_LABEL_CITATION_STYLE)
+            'citation-label-style', DEFAULT_LABEL_CITATION_STYLE)
         backend_config = 'custom_html'
 
         # Initialize pybtex classes
@@ -270,11 +270,11 @@ if __name__ == '__main__':
     if unmatched_cite_keys:
         eprint("The following unmatched bibliography keys were found while processing citations: ", ", ".join(sorted(unmatched_cite_keys)))
 
-        if citations_config.get('error_on_unmatched_keys', DEFAULT_ERROR_ON_UNMATCHED_CITE_KEY):
+        if citations_config.get('error-on-unmatched-keys', DEFAULT_ERROR_ON_UNMATCHED_CITE_KEY):
             sys.exit(1)
 
     if empty_bibliography_invocations:
         eprint("The following files have #bibliography macro invocations with empty bibliographies: ", ", ".join(sorted(empty_bibliography_invocations)))
 
-        if citations_config.get('error_on_empty_bibliography_invocations', DEFAULT_ERROR_ON_EMPTY_BIBLIOGRAPHY_INVOCATION):
+        if citations_config.get('error-on-empty-bibliography', DEFAULT_ERROR_ON_EMPTY_BIBLIOGRAPHY):
             sys.exit(2)
