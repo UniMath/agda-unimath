@@ -103,13 +103,18 @@ if __name__ == '__main__':
     def filter_agda_files(f): return utils.is_agda_file(
         pathlib.Path(f)) and os.path.dirname(f) != root
 
-    # Sort the files by most recently changed
-    agda_files = sorted(
-        filter(filter_agda_files, utils.get_files_recursive(root)), key=lambda t: -os.stat(t).st_mtime)
+    # Get all Agda files
+    agda_files = list(filter(filter_agda_files, utils.get_files_recursive(root)))
+
+    # Sort the files by Git modification status and last commit date
+    def sort_key(file):
+        return (-int(utils.is_file_modified(file)), -utils.get_git_last_modified(file))
+
+    sorted_agda_files = sorted(agda_files, key=sort_key)
 
     with ThreadPoolExecutor() as executor:
         executor.map(lambda file: process_agda_file(
-            file, agda_options, root, temp_dir), agda_files)
+            file, agda_options, root, temp_dir), sorted_agda_files)
 
     shutil.rmtree(temp_root)
     sys.exit(status)
