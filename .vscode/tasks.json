@@ -51,7 +51,7 @@
       "dependsOrder": "sequence"
     },
     {
-      "label": "remove-unused-imports-this-file",
+      "label": "remove-unused-imports-current-file",
       "detail": "Remove unused imports in current file",
       "type": "shell",
       "command": "${workspaceFolder}/scripts/remove_unused_imports.py",
