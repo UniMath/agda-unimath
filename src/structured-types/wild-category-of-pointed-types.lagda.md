@@ -39,7 +39,7 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 ## Idea
 
 The
-{{#concept "wild category of pointed types" Agda=Pointed-Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory}}
+{{#concept "wild category of pointed types" Agda=uniform-Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory Agda=Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory}}
 consists of [pointed types](structured-types.pointed-types.md),
 [pointed functions](structured-types.pointed-functions.md), and
 [pointed homotopies](structured-types.pointed-homotopies.md).
