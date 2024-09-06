@@ -35,7 +35,7 @@ open import metric-spaces.short-functions-premetric-spaces
 
 A [function](metric-spaces.functions-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is
-{{#concept "short" Disambiguation="function between metric spaces" Agda=is-short-function-Metric-Space}}
+{{#concept "short" Disambiguation="function between metric spaces" Agda=is-short-function-Metric-Space WD="metric map" WDID=Q2713824}}
 if it is [short](metric-spaces.short-functions-premetric-spaces.md) on their
 carrier [premetric spaces](metric-spaces.premetric-spaces.md).
 

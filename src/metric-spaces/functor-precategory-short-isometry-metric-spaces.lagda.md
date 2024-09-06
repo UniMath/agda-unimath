@@ -1,4 +1,4 @@
-# The functor from the precategory of metric spaces and isometries to the precategory of metric spaces and short maps
+# The inclusion of isometries into the category of metric spaces and short maps
 
 ```agda
 module metric-spaces.functor-precategory-short-isometry-metric-spaces where

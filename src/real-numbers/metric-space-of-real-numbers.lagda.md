@@ -1,4 +1,4 @@
-# The standard metric structure on the real numbers
+# The metric space of real numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
@@ -224,7 +224,7 @@ module _
           ( is-rounded-lower-cut-ℝ x (r +ℚ rational-ℚ⁺ ε)) Lxr))
 ```
 
-### Tha canonical embedding from rational to real numbers is an isometry between the standard saturated metric spaces
+### Tha canonical embedding from rational to real numbers is an isometry between metric spaces
 
 ```agda
 is-isometry-metric-space-leq-real-ℚ :

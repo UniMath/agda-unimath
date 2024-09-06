@@ -64,7 +64,7 @@ module _
               ( A)
               ( λ y →
                 hom-Prop
-                  (B d x y)
+                  ( B d x y)
                   ( trunc-Prop (x ＝ y)))))
 
   is-discrete-Premetric : UU (l1 ⊔ l2)

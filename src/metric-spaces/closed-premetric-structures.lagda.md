@@ -92,7 +92,7 @@ module _
 
 ## Properties
 
-### The closure of premetric is closed
+### The closure of a premetric is closed
 
 ```agda
 module _

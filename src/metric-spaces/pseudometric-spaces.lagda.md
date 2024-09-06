@@ -123,7 +123,7 @@ module _
     pr2 (pr2 is-pseudometric-structure-Pseudometric-Space)
 ```
 
-### Indistiguishability in a pseudometric space
+### Indistinguishability in a pseudometric space
 
 ```agda
 module _
@@ -214,7 +214,7 @@ module _
     is-triangular-discrete-Premetric A
 ```
 
-### Any is a discrete pseudometric space
+### Any type is a discrete pseudometric space
 
 ```agda
 module _

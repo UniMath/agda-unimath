@@ -27,7 +27,7 @@ A [premetric structure](metric-spaces.premetric-structures.md) `U` on a type `A`
 is {{#concept "finer" Disambiguation="premetric on a type" Agda=leq-Premetric}}
 than another premetric `V` if `(U d)`-neighbourhoods are `(V d)`-neighbourhoods
 for any
-[positive rational](elementary-number-theory.positive-rational-numbers.md) `d`.
+[positive rational](elementary-number-theory.positive-rational-numbers.md) `d`. This gives a [partial order](order-theory.posets.md) on premetric structures on `A`.
 
 ## Definitions
 
