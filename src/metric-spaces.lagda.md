@@ -15,6 +15,7 @@ open import metric-spaces.equality-of-premetric-spaces public
 open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.functor-precategory-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-precategory-short-isometry-metric-spaces public
+open import metric-spaces.induced-premetric-structures-on-preimages public
 open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometric-equivalent-premetric-spaces public
 open import metric-spaces.isometry-metric-spaces public
@@ -29,7 +30,6 @@ open import metric-spaces.precategory-of-metric-spaces-and-short-functions publi
 open import metric-spaces.premetric-spaces public
 open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
-open import metric-spaces.pullback-premetric-structures public
 open import metric-spaces.saturated-metric-space-of-rational-numbers public
 open import metric-spaces.saturated-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public

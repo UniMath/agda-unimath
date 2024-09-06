@@ -1,7 +1,7 @@
 # Induced premetric structures on preimages
 
 ```agda
-module metric-spaces.pullback-premetric-structures where
+module metric-spaces.induced-premetric-structures-on-preimages where
 ```
 
 <details><summary>Imports</summary>
@@ -26,12 +26,12 @@ and map `f : A → B` defines a premetric on `A` where `x y : A` are
 `d`-neighbours in `A` if `f x` and `f y` are `d`-neighbours in `B`.
 
 This is the
-{{#concept "pullback" Disambiguation="premetric" Agda=pullback-Premetric}} of a
-premetric.
+{{#concept "preimage" Disambiguation="of a premetric structure" Agda=preimage-Premetric}}
+of a premetric.
 
 ## Definitions
 
-### The pullback of a premetric along a map
+### The induced premetric on the preimage of a map
 
 ```agda
 module _
@@ -39,13 +39,13 @@ module _
   (V : Premetric l2 B)
   where
 
-  pullback-Premetric : Premetric l2 A
-  pullback-Premetric d x y = V d (f x) (f y)
+  preimage-Premetric : Premetric l2 A
+  preimage-Premetric d x y = V d (f x) (f y)
 ```
 
 ## Properties
 
-### The pullback of a reflexive premetric is reflexive
+### The preimage of a reflexive premetric is reflexive
 
 ```agda
 module _
@@ -53,12 +53,12 @@ module _
   (V : Premetric l2 B) (R : is-reflexive-Premetric V)
   where
 
-  preserves-reflexive-pullback-Premetric :
-    is-reflexive-Premetric (pullback-Premetric f V)
-  preserves-reflexive-pullback-Premetric d x = R d (f x)
+  preserves-reflexive-preimage-Premetric :
+    is-reflexive-Premetric (preimage-Premetric f V)
+  preserves-reflexive-preimage-Premetric d x = R d (f x)
 ```
 
-### The pullback of a symmetric premetric is symmetric
+### The preimage of a symmetric premetric is symmetric
 
 ```agda
 module _
@@ -66,12 +66,12 @@ module _
   (V : Premetric l2 B) (S : is-symmetric-Premetric V)
   where
 
-  preserves-symmetric-pullback-Premetric :
-    is-symmetric-Premetric (pullback-Premetric f V)
-  preserves-symmetric-pullback-Premetric d x y = S d (f x) (f y)
+  preserves-symmetric-preimage-Premetric :
+    is-symmetric-Premetric (preimage-Premetric f V)
+  preserves-symmetric-preimage-Premetric d x y = S d (f x) (f y)
 ```
 
-### The pullback of a monotonic premetric is monotonic
+### The preimage of a monotonic premetric is monotonic
 
 ```agda
 module _
@@ -79,12 +79,12 @@ module _
   (V : Premetric l2 B) (I : is-monotonic-Premetric V)
   where
 
-  preserves-monotonic-pullback-Premetric :
-    is-monotonic-Premetric (pullback-Premetric f V)
-  preserves-monotonic-pullback-Premetric x y = I (f x) (f y)
+  preserves-monotonic-preimage-Premetric :
+    is-monotonic-Premetric (preimage-Premetric f V)
+  preserves-monotonic-preimage-Premetric x y = I (f x) (f y)
 ```
 
-### The pullback of a triangular premetric is triangular
+### The preimage of a triangular premetric is triangular
 
 ```agda
 module _
@@ -92,12 +92,12 @@ module _
   (V : Premetric l2 B) (T : is-triangular-Premetric V)
   where
 
-  preserves-triangular-pullback-Premetric :
-    is-triangular-Premetric (pullback-Premetric f V)
-  preserves-triangular-pullback-Premetric x y z = T (f x) (f y) (f z)
+  preserves-triangular-preimage-Premetric :
+    is-triangular-Premetric (preimage-Premetric f V)
+  preserves-triangular-preimage-Premetric x y z = T (f x) (f y) (f z)
 ```
 
-### The pulback of a tight metric along an injective map is tight
+### The preimage of a tight metric along an injective map is tight
 
 ```agda
 module _
@@ -107,24 +107,24 @@ module _
   (T : is-tight-Premetric V)
   where
 
-  preserves-tight-injective-pullback-Premetric :
-    is-tight-Premetric (pullback-Premetric f V)
-  preserves-tight-injective-pullback-Premetric x y =
+  preserves-tight-injective-preimage-Premetric :
+    is-tight-Premetric (preimage-Premetric f V)
+  preserves-tight-injective-preimage-Premetric x y =
     I ∘ (T (f x) (f y))
 ```
 
-### The pullback along the identity is the identity
+### The preimage along the identity is the identity
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (U : Premetric l2 A)
   where
 
-  eq-pullback-id-Premetric : pullback-Premetric id U ＝ U
-  eq-pullback-id-Premetric = refl
+  eq-preimage-id-Premetric : preimage-Premetric id U ＝ U
+  eq-preimage-id-Premetric = refl
 ```
 
-### The pullback of premetrics is contravariant
+### The preimage of premetrics is contravariant
 
 ```agda
 module _
@@ -132,8 +132,8 @@ module _
   (g : B → C) (f : A → B) (W : Premetric l C)
   where
 
-  eq-pullback-comp-Premetric :
-    pullback-Premetric f (pullback-Premetric g W) ＝
-    pullback-Premetric (g ∘ f) W
-  eq-pullback-comp-Premetric = refl
+  eq-preimage-comp-Premetric :
+    preimage-Premetric f (preimage-Premetric g W) ＝
+    preimage-Premetric (g ∘ f) W
+  eq-preimage-comp-Premetric = refl
 ```

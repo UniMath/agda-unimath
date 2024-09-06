@@ -27,7 +27,6 @@ open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
-open import metric-spaces.pullback-premetric-structures
 open import metric-spaces.short-functions-metric-spaces
 ```
 
