@@ -255,7 +255,7 @@ module _
 
   is-colocal-is-equiv :
     is-equiv f → {l : Level} (A : UU l) → is-colocal f A
-  is-colocal-is-equiv is-equiv-f = is-equiv-postcomp-is-equiv f is-equiv-f
+  is-colocal-is-equiv = is-equiv-postcomp-is-equiv f
 ```
 
 ### A contractible type is `f`-colocal if and only if `f` is an equivalence
