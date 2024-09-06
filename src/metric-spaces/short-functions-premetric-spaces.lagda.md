@@ -156,11 +156,11 @@ module _
   (f : function-carrier-type-Premetric-Space A B)
   where
 
-  preserves-short-comp-function-Premetric-Space :
+  is-short-comp-function-Premetric-Space :
     is-short-function-Premetric-Space B C g →
     is-short-function-Premetric-Space A B f →
     is-short-function-Premetric-Space A C (g ∘ f)
-  preserves-short-comp-function-Premetric-Space H K d x y =
+  is-short-comp-function-Premetric-Space H K d x y =
     H d (f x) (f y) ∘ K d x y
 module _
   {l1a l2a l1b l2b l1c l2c : Level}
@@ -176,7 +176,7 @@ module _
     map-short-function-Premetric-Space B C g ∘
     map-short-function-Premetric-Space A B f
   pr2 comp-short-function-Premetric-Space =
-    preserves-short-comp-function-Premetric-Space
+    is-short-comp-function-Premetric-Space
       ( A)
       ( B)
       ( C)
