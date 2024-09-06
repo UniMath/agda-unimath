@@ -33,11 +33,13 @@ open import metric-spaces.short-functions-premetric-spaces
 
 ## Idea
 
-A [function](metric-spaces.functions-metric-spaces.md) between
-[metric spaces](metric-spaces.metric-spaces.md) is
+A [function](metric-spaces.functions-metric-spaces.md) `f` between two
+[metric spaces](metric-spaces.metric-spaces.md) `A` and `B` is
 {{#concept "short" Disambiguation="function between metric spaces" Agda=is-short-function-Metric-Space WD="metric map" WDID=Q2713824}}
 if it is [short](metric-spaces.short-functions-premetric-spaces.md) on their
-carrier [premetric spaces](metric-spaces.premetric-spaces.md).
+carrier [premetric spaces](metric-spaces.premetric-spaces.md): for any points
+`x` and `y` that are [`d`-neighbours](metric-spaces.premetric-structures.md) in
+`A`, `f x` and `f y` are `d`-neighbours in `B`.
 
 ## Definitions
 
@@ -238,6 +240,12 @@ module _
         ( is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B)))
 ```
 
+## See also
+
+- The
+  [category of short functions on metric spaces](metric-spaces.category-of-metric-spaces-and-short-functions.md)
+
 ## External links
 
 - [Short maps](https://ncatlab.org/nlab/show/short+map) at $n$Lab
+- [Metric maps](https://en.wikipedia.org/wiki/Metric_map) at Wikipedia
