@@ -133,7 +133,7 @@ module _
       ( S)
 ```
 
-### A premetric is reflexive is any element is indistinguishable from itself
+### A premetric is reflexive if any element is indistinguishable from itself
 
 ```agda
 module _
