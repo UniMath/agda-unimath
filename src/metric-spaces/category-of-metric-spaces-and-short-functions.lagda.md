@@ -23,7 +23,8 @@ open import metric-spaces.precategory-of-metric-spaces-and-short-functions
 
 The
 [precategory of metric spaces and short maps](metric-spaces.precategory-of-metric-spaces-and-short-functions.md)
-is a [category](category-theory.categories.md). We call this the {{#concept "category of metric spaces and short maps" Agda=category-short-function-Metric-Space WD="category of metric spaces" WDID=Q5051850}}.
+is a [category](category-theory.categories.md). We call this the
+{{#concept "category of metric spaces and short maps" Agda=category-short-function-Metric-Space WD="category of metric spaces" WDID=Q5051850}}.
 
 ## Definitions
 
