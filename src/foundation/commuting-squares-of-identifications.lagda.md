@@ -10,6 +10,7 @@ open import foundation-core.commuting-squares-of-identifications public
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -569,4 +570,90 @@ module _
       ( right)
       ( bottom)
       ( q)
+```
+
+### Computing the pasting of squares with `refl` on opposite sides
+
+Consider two squares of identifications as in the diagram
+
+```text
+                  refl
+              a --------> a
+              |           |
+     top-left |           | top-right
+              ∨   refl    ∨
+              b --------> b
+              |           |
+  bottom-left |           | bottom-right
+              ∨           ∨
+              c --------> c
+                  refl
+```
+
+Then the pasted square can be computed in terms of the horizontal concatenation
+of the filler squares
+
+```agda
+module _
+  {l : Level} {A : UU l} {a b c : A}
+  where
+
+  vertical-pasting-coherence-square-identifications-horizontal-refl :
+    (top-left : a ＝ b) (top-right : a ＝ b)
+    (bottom-left : b ＝ c) (bottom-right : b ＝ c)
+    (α : top-left ＝ top-right) (β : bottom-left ＝ bottom-right) →
+    ( inv-coherence-square-identifications-horizontal-refl
+      ( top-left ∙ bottom-left)
+      ( top-right ∙ bottom-right)
+      ( vertical-pasting-coherence-square-identifications
+        ( refl)
+        ( top-left)
+        ( top-right)
+        ( refl)
+        ( bottom-left)
+        ( bottom-right)
+        ( refl)
+        ( coherence-square-identifications-horizontal-refl
+          ( top-left)
+          ( top-right)
+          ( α))
+        ( coherence-square-identifications-horizontal-refl
+          ( bottom-left)
+          ( bottom-right)
+          ( β)))) ＝
+      ( horizontal-concat-Id² α β)
+  vertical-pasting-coherence-square-identifications-horizontal-refl
+    refl refl refl refl refl refl =
+      refl
+
+  vertical-pasting-inv-coherence-square-identifications-horizontal-refl :
+    (top-left : a ＝ b) (top-right : a ＝ b)
+    (bottom-left : b ＝ c) (bottom-right : b ＝ c)
+    (α : coherence-square-identifications refl top-left top-right refl)
+    (β : coherence-square-identifications refl bottom-left bottom-right refl) →
+    ( inv-coherence-square-identifications-horizontal-refl
+      ( top-left ∙ bottom-left)
+      ( top-right ∙ bottom-right)
+      ( vertical-pasting-coherence-square-identifications
+        ( refl)
+        ( top-left)
+        ( top-right)
+        ( refl)
+        ( bottom-left)
+        ( bottom-right)
+        ( refl)
+        ( α)
+        ( β))) ＝
+      ( horizontal-concat-Id²
+        ( inv-coherence-square-identifications-horizontal-refl
+          ( top-left)
+          ( top-right)
+          ( α))
+        ( inv-coherence-square-identifications-horizontal-refl
+          ( bottom-left)
+          ( bottom-right)
+          ( β)))
+  vertical-pasting-inv-coherence-square-identifications-horizontal-refl
+    refl refl refl refl refl refl =
+      refl
 ```

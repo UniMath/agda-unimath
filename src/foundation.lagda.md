@@ -53,6 +53,7 @@ open import foundation.category-of-families-of-sets public
 open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.codiagonal-maps-of-types public
+open import foundation.coherently-idempotent-maps public
 open import foundation.coherently-invertible-maps public
 open import foundation.coinhabited-pairs-of-types public
 open import foundation.commuting-cubes-of-maps public
@@ -249,12 +250,15 @@ open import foundation.lifts-types public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
+open import foundation.maps-in-global-subuniverses public
+open import foundation.maps-in-subuniverses public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.mere-functions public
 open import foundation.mere-logical-equivalences public
+open import foundation.mere-path-cosplit-maps public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
@@ -277,6 +281,7 @@ open import foundation.multivariable-sections public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
+open import foundation.null-homotopic-maps public
 open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public
 open import foundation.operations-spans-families-of-types public
@@ -287,6 +292,7 @@ open import foundation.partial-functions public
 open import foundation.partial-sequences public
 open import foundation.partitions public
 open import foundation.path-algebra public
+open import foundation.path-cosplit-maps public
 open import foundation.path-split-maps public
 open import foundation.perfect-images public
 open import foundation.permutations-spans-families-of-types public
@@ -465,5 +471,6 @@ open import foundation.whiskering-homotopies-composition public
 open import foundation.whiskering-homotopies-concatenation public
 open import foundation.whiskering-identifications-concatenation public
 open import foundation.whiskering-operations public
+open import foundation.wild-category-of-types public
 open import foundation.yoneda-identity-types public
 ```

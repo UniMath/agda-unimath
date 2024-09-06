@@ -43,8 +43,8 @@ module _
   universal-property-dependent-universal-property-empty :
     ({l : Level} → dependent-universal-property-empty l) →
     ({l : Level} → universal-property-empty l)
-  universal-property-dependent-universal-property-empty dup-empty {l} X =
-    dup-empty {l} (λ a → X)
+  universal-property-dependent-universal-property-empty dup-empty X =
+    dup-empty (λ _ → X)
 
   is-empty-universal-property-empty :
     ({l : Level} → universal-property-empty l) → is-empty A
@@ -72,13 +72,13 @@ abstract
   universal-property-empty' :
     {l : Level} (X : UU l) → is-contr (empty → X)
   universal-property-empty' X =
-    dependent-universal-property-empty' (λ t → X)
+    dependent-universal-property-empty' (λ _ → X)
 
 abstract
   uniqueness-empty :
     {l : Level} (Y : UU l) →
     ({l' : Level} (X : UU l') → is-contr (Y → X)) →
-    is-equiv (ind-empty {P = λ t → Y})
+    is-equiv (ind-empty {P = λ _ → Y})
   uniqueness-empty Y H =
     is-equiv-is-equiv-precomp ind-empty
       ( λ X →
@@ -89,7 +89,7 @@ abstract
 
 abstract
   universal-property-empty-is-equiv-ind-empty :
-    {l : Level} (X : UU l) → is-equiv (ind-empty {P = λ t → X}) →
+    {l : Level} (X : UU l) → is-equiv (ind-empty {P = λ _ → X}) →
     ((l' : Level) (Y : UU l') → is-contr (X → Y))
   universal-property-empty-is-equiv-ind-empty X is-equiv-ind-empty l' Y =
     is-contr-is-equiv

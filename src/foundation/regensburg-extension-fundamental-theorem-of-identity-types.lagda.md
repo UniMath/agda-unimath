@@ -24,6 +24,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
+open import foundation.maps-in-subuniverses
 open import foundation.propositional-truncations
 open import foundation.separated-types
 open import foundation.subuniverses
@@ -170,13 +171,14 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (k : 𝕋)
-  {A : UU l1} (a : A) {B : A → UU l2} (H : is-0-connected A)
+  {A : UU l1} (a : A) {B : A → UU l2}
   where
 
   forward-implication-extended-fundamental-theorem-id-connected :
+    is-0-connected A →
     ( (f : (x : A) → (a ＝ x) → B x) → (x : A) → is-connected-map k (f x)) →
     is-inhabited (B a) → is-connected (succ-𝕋 k) (Σ A B)
-  forward-implication-extended-fundamental-theorem-id-connected K L =
+  forward-implication-extended-fundamental-theorem-id-connected H K L =
     is-connected-succ-is-connected-eq
       ( map-trunc-Prop (fiber-inclusion B a) L)
       ( forward-implication-extended-fundamental-theorem-id
@@ -199,7 +201,7 @@ module _
     ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-connected-map k (f x)) ↔
     is-connected (succ-𝕋 k) (Σ A B)
   pr1 (extended-fundamental-theorem-id-connected H K) L =
-    forward-implication-extended-fundamental-theorem-id-connected L K
+    forward-implication-extended-fundamental-theorem-id-connected H L K
   pr2 (extended-fundamental-theorem-id-connected H K) =
     backward-implication-extended-fundamental-theorem-id-connected
 ```
