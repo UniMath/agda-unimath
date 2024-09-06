@@ -516,7 +516,7 @@ module _
     Eq-eq-Premetric N' , is-fiberwise-equiv-Eq-eq-Premetric N'
 ```
 
-### Characterisation of the transport of premetric structures along equality of types
+### Characterization of the transport of premetric structures along equality of types
 
 ```agda
 module _
