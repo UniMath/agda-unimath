@@ -12,11 +12,14 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.faithful-maps
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.faithful-pointed-maps
 open import structured-types.pointed-equivalences
+open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
@@ -122,6 +125,21 @@ module _
   pointed-equiv-pointed-map-Ω-is-emb : Ω A ≃∗ Ω B
   pr1 pointed-equiv-pointed-map-Ω-is-emb = equiv-map-Ω-is-emb
   pr2 pointed-equiv-pointed-map-Ω-is-emb = preserves-refl-map-Ω f
+```
+
+### The operator `pointed-map-Ω` preserves identities
+
+```agda
+module _
+  {l1 : Level} {A : Pointed-Type l1}
+  where
+
+  preserves-id-map-Ω : map-Ω (id-pointed-map {A = A}) ~ id
+  preserves-id-map-Ω = ap-id
+
+  preserves-id-pointed-map-Ω :
+    pointed-map-Ω (id-pointed-map {A = A}) ~∗ id-pointed-map
+  preserves-id-pointed-map-Ω = preserves-id-map-Ω , refl
 ```
 
 ### The operator `pointed-map-Ω` preserves equivalences

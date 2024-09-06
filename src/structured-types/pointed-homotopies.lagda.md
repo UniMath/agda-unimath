@@ -284,6 +284,10 @@ module _
   concat-pointed-htpy : f ~∗ h
   pr1 concat-pointed-htpy = htpy-concat-pointed-htpy
   pr2 concat-pointed-htpy = coherence-point-concat-pointed-htpy
+
+  infixl 15 _∙h∗_
+  _∙h∗_ : f ~∗ h
+  _∙h∗_ = concat-pointed-htpy
 ```
 
 ### Inverses of pointed homotopies
@@ -552,6 +556,39 @@ module _
     is-binary-equiv (λ (G : f ~∗ g) (H : g ~∗ h) → concat-pointed-htpy G H)
   pr1 is-binary-equiv-concat-pointed-htpy = is-equiv-concat-pointed-htpy'
   pr2 is-binary-equiv-concat-pointed-htpy = is-equiv-concat-pointed-htpy
+```
+
+## Reasoning with pointed homotopies
+
+Pointed homotopies can be constructed by equational reasoning in the following
+way:
+
+```text
+pointed-homotopy-reasoning
+  f ~∗ g by htpy-1
+    ~∗ h by htpy-2
+    ~∗ i by htpy-3
+```
+
+The pointed homotopy obtained in this way is `htpy-1 ∙h∗ (htpy-2 ∙h∗ htpy-3)`,
+i.e., it is associated fully to the right.
+
+```agda
+infixl 1 pointed-homotopy-reasoning_
+infixl 0 step-pointed-homotopy-reasoning
+
+pointed-homotopy-reasoning_ :
+  {l1 l2 : Level} {X : Pointed-Type l1} {Y : Pointed-Fam l2 X}
+  (f : pointed-Π X Y) → f ~∗ f
+pointed-homotopy-reasoning f = refl-pointed-htpy f
+
+step-pointed-homotopy-reasoning :
+  {l1 l2 : Level} {X : Pointed-Type l1} {Y : Pointed-Fam l2 X}
+  {f g : pointed-Π X Y} → f ~∗ g →
+  (h : pointed-Π X Y) → g ~∗ h → f ~∗ h
+step-pointed-homotopy-reasoning p h q = p ∙h∗ q
+
+syntax step-pointed-homotopy-reasoning p h q = p ~∗ h by q
 ```
 
 ## See also
