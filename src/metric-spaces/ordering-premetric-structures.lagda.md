@@ -1,4 +1,4 @@
-# The standard ordering of premetric structures on a type
+# The poset of premetric structures on a type
 
 ```agda
 module metric-spaces.ordering-premetric-structures where

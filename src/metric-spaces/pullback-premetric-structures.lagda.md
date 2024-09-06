@@ -1,4 +1,4 @@
-# The pullback of premetric structures
+# Induced premetric structures on preimages
 
 ```agda
 module metric-spaces.pullback-premetric-structures where

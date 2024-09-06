@@ -153,7 +153,7 @@ module _
     is-short-f (ε +ℚ⁺ δ) (u ε) (u δ) (H ε δ)
 ```
 
-### Short maps between premetric spaces are functorial on cauchy approximations
+### Short maps between premetric spaces are functorial on Cauchy approximations
 
 ```agda
 module _
