@@ -1,7 +1,7 @@
 # Types colocal at maps
 
 ```agda
-module orthogonal-factorization-systems.colocal-types where
+module orthogonal-factorization-systems.types-colocal-at-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -17,6 +17,8 @@ open import foundation.equivalences-arrows
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.contractible-maps
+open import foundation-core.fibers-of-maps
 open import foundation.identity-types
 open import foundation.postcomposition-dependent-functions
 open import foundation.postcomposition-functions
@@ -40,21 +42,31 @@ A type `A` is said to be
 [postcomposition map](foundation-core.postcomposition-functions.md)
 
 ```text
-  f ∘_ : (A → X) → (A → Y)
+  f ∘ - : (A → X) → (A → Y)
 ```
 
-is an [equivalence](foundation-core.equivalences.md). This is dual to the notion
-of an [`f`-local type](orthogonal-factorization-systems.local-types.md), which
-is a type such that the
+is an [equivalence](foundation-core.equivalences.md).
+
+Equivalently, `A` is colocal if
+
+1. the type of [sections](foundation-core.sections.md) `(x : A) → fiber f (h x)`
+   is [contractible](foundation-core.contractible-types.md) for all `h : A → Y`.
+2. The initial map `empty → A` is
+   [left orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to
+   `f`.
+
+The notion of `f`-colocal types is dual to
+[`f`-local types](orthogonal-factorization-systems.local-types.md), which is a
+type such that the
 [precomposition map](foundation-core.precomposition-functions.md)
 
 ```text
-  _∘ f : (Y → A) → (X → A)
+  - ∘ f : (Y → A) → (X → A)
 ```
 
 is an equivalence.
 
-## Definition
+## Definitions
 
 ### Types colocal at dependent maps
 
@@ -94,7 +106,43 @@ module _
 
 ## Properties
 
-### Colocal types are closed under equivalences
+### The fiber condition for `f`-colocal types
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {X : UU l1} {Y : UU l2} {A : UU l3}
+  (f : X → Y)
+  where
+
+  is-colocal-fiber-condition-is-colocal :
+    is-colocal f A →
+    ((h : A → Y) → is-contr ((x : A) → fiber f (h x)))
+  is-colocal-fiber-condition-is-colocal H h =
+    is-contr-equiv'
+      ( fiber (postcomp A f) h)
+      ( inv-compute-Π-fiber-postcomp A f h)
+      ( is-contr-map-is-equiv H h)
+
+  is-colocal-is-colocal-fiber-condition :
+    ((h : A → Y) → is-contr ((x : A) → fiber f (h x))) →
+    is-colocal f A
+  is-colocal-is-colocal-fiber-condition H =
+    is-equiv-is-contr-map
+      ( λ h →
+        is-contr-equiv
+          ( (x : A) → fiber f (h x))
+          ( inv-compute-Π-fiber-postcomp A f h)
+          ( H h))
+
+  is-colocal-is-colocal-fiber-condition' :
+    ((h : A → Y) (x : A) → is-contr (fiber f (h x))) →
+    is-colocal f A
+  is-colocal-is-colocal-fiber-condition' H =
+    is-colocal-is-colocal-fiber-condition (is-contr-Π ∘ H)
+```
+
+### `f`-colocal types are closed under equivalences
 
 ```agda
 module _
@@ -236,8 +284,8 @@ module _
     is-equiv-source-is-equiv-target-equiv-arrow
       ( f)
       ( postcomp A f)
-      ( equiv-diagonal-is-contr X is-contr-A ,
-        equiv-diagonal-is-contr Y is-contr-A ,
+      ( equiv-diagonal-exponential-is-contr X is-contr-A ,
+        equiv-diagonal-exponential-is-contr Y is-contr-A ,
         refl-htpy)
 
   is-colocal-is-equiv-is-contr : is-equiv f → is-colocal f A
@@ -245,8 +293,8 @@ module _
     is-equiv-target-is-equiv-source-equiv-arrow
       ( f)
       ( postcomp A f)
-      ( equiv-diagonal-is-contr X is-contr-A ,
-        equiv-diagonal-is-contr Y is-contr-A ,
+      ( equiv-diagonal-exponential-is-contr X is-contr-A ,
+        equiv-diagonal-exponential-is-contr Y is-contr-A ,
         refl-htpy)
 ```
 
