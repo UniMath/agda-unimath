@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.negated-equality
+open import foundation.sets
 ```
 
 </details>
@@ -47,6 +48,8 @@ mul-ℕ (succ-ℕ m) n = (mul-ℕ m n) +ℕ n
 
 infixl 40 _*ℕ_
 _*ℕ_ = mul-ℕ
+
+{-# BUILTIN NATTIMES _*ℕ_ #-}
 
 mul-ℕ' : ℕ → ℕ → ℕ
 mul-ℕ' x y = mul-ℕ y x

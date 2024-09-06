@@ -26,7 +26,7 @@ commuting diagram of the form
   A -----> X <----- B
   |        |        |
   |        |        |
-  V        V        V
+  ∨        ∨        ∨
   A' ----> X' <---- B'.
 ```
 

@@ -18,6 +18,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.logical-equivalences
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
@@ -437,7 +438,7 @@ module _
     type-Prop (is-finite-displayed-Σ-Decomposition A
       (map-equiv equiv-displayed-fibered-Σ-Decomposition D))
   equiv-is-finite-displayed-fibered-Σ-Decomposition =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-prop-type-Prop (is-finite-fibered-Σ-Decomposition A D))
       ( is-prop-type-Prop
         ( is-finite-displayed-Σ-Decomposition A

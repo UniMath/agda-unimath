@@ -18,10 +18,13 @@ open import structured-types.conjugation-pointed-types public
 open import structured-types.constant-pointed-maps public
 open import structured-types.contractible-pointed-types public
 open import structured-types.cyclic-types public
+open import structured-types.dependent-globular-types public
 open import structured-types.dependent-products-h-spaces public
 open import structured-types.dependent-products-pointed-types public
 open import structured-types.dependent-products-wild-monoids public
+open import structured-types.dependent-reflexive-globular-types public
 open import structured-types.dependent-types-equipped-with-automorphisms public
+open import structured-types.equivalences-h-spaces public
 open import structured-types.equivalences-pointed-arrows public
 open import structured-types.equivalences-types-equipped-with-automorphisms public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
@@ -43,6 +46,8 @@ open import structured-types.large-reflexive-globular-types public
 open import structured-types.large-symmetric-globular-types public
 open import structured-types.large-transitive-globular-types public
 open import structured-types.magmas public
+open import structured-types.maps-globular-types public
+open import structured-types.maps-large-globular-types public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-h-spaces public
 open import structured-types.morphisms-magmas public
@@ -74,6 +79,7 @@ open import structured-types.postcomposition-pointed-maps public
 open import structured-types.precomposition-pointed-maps public
 open import structured-types.reflexive-globular-types public
 open import structured-types.sets-equipped-with-automorphisms public
+open import structured-types.small-pointed-types public
 open import structured-types.symmetric-elements-involutive-types public
 open import structured-types.symmetric-globular-types public
 open import structured-types.symmetric-h-spaces public

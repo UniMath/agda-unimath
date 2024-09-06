@@ -253,7 +253,7 @@ homotopies
   precomp f Y ·l htpy-postcomp B G            htpy-postcomp A G ·r precomp f' X
                 |                                              |
                 |                                              |
-                v                                              v
+                ∨                                              ∨
           (g' ∘ - ∘ f) --------------------------------> (g' ∘ - ∘ f').
                        htpy-precomp F Y ·r postcomp B g'
 ```

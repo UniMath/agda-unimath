@@ -278,7 +278,8 @@ module _
       ( f)
 
   htpy-exists-equiv-transitive-action-Concrete-Group :
-    ∃ ( type-transitive-action-Concrete-Group G X)
+    exists-structure
+      ( type-transitive-action-Concrete-Group G X)
       ( λ x →
         map-equiv-transitive-action-Concrete-Group G X Y e x ＝
         map-equiv-transitive-action-Concrete-Group G X Y f x) →

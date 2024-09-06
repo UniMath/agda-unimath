@@ -12,6 +12,7 @@ open import foundation.embeddings
 open import foundation.equivalence-extensionality
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.embeddings-groups

@@ -8,11 +8,17 @@ module synthetic-homotopy-theory.eckmann-hilton-argument where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.homotopies
+open import foundation.homotopy-algebra
 open import foundation.identity-types
 open import foundation.interchange-law
 open import foundation.path-algebra
+open import foundation.transport-along-higher-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-concatenation
 open import foundation.whiskering-identifications-concatenation
 
 open import structured-types.pointed-equivalences
@@ -57,12 +63,12 @@ constructions themselves "the Eckmann-Hilton argument".
 ### Constructing the Eckmann-Hilton identification from the interchange law
 
 The more algebraic argument uses the interchange law
-[`interchange-Ω²`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#2449).
-The interchange law essentially expresses that
-[`horizontal-concat-Ω²`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#1106)
-is a group homomorphism of
-[`vertical-concat-Ω²`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#966)
-in each variable.
+[`interchange-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md). The
+interchange law essentially expresses that
+[`horizontal-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md) is a
+group homomorphism of
+[`vertical-concat-Ω²`](synthetic-homotopy-theory.double-loop-spaces.md) in each
+variable.
 
 ```agda
 module _
@@ -107,8 +113,8 @@ module _
 #### The motivation
 
 Now we give the more homotopy theoretic version of the Eckmann-Hilton argument.
-Consider 2-loops `α β : Ω² (X , base)`. The more homotopy theoretic
-Eckmann-Hilton argument is often depicted as follows:
+Consider 2-loops `α β : Ω² X`. The more homotopy theoretic Eckmann-Hilton
+argument is often depicted as follows:
 
 ```text
 | α |      | refl-Ω² | α |      | β | refl-Ω² |       | β |
@@ -118,49 +124,74 @@ Eckmann-Hilton argument is often depicted as follows:
 
 The first picture represents the vertical concatenation of `α` and `β`. The
 notation ` | γ | δ |` represents the horizontal concatenation of 2-dimensional
-identifications `γ` and `δ`. Then `| refl | α |` is just
-[`left-whisker-concat refl-Ω² α`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7697).
+identifications `γ` and `δ`. Then `| refl-Ω² | α |` is just
+[`left-whisker-concat refl-Ω² α`](foundation-core.whiskering-identifications-concatenation.md).
 The first and last equality come from the unit laws of whiskering. And the
 middle equality can be recognized as
-[`commutative-left-whisker-right-whisker-concat`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#9823),
+[`commutative-left-whisker-right-whisker-concat α β`](foundation-core.whiskering-identifications-concatenation.md),
 which is the naturality condition of `left-whisker-concat - α` applied to `β`.
 
 Since this version of the Eckmann-Hilton argument may seem more complicated than
 the algbraic version, the reader is entitled to wonder why we bother giving this
-second version.
+second version. This version of the Eckmann-Hilton argument makes more salient
+the connection between the Eckmann-Hilton identification and the 2-D descent
+data of a type family, and plays an important role in the construction of the
+Hopf fibration.
 
-This version of the Eckmann-Hilton argument makes more salient the connection
-between the Eckmann-Hilton argument and the 2-D descent data of a fibration. For
-now, consider the family of based path spaces `Id base : X → UU`. A 1-loop `l`
-induces an autoequivalence `Ω X ≃ Ω X` given by concatinating on the right by
-`l`. This is shown in
-[`tr-Id-right`](https://unimath.github.io/agda-unimath/foundation.identity-types.html#11216).
-A 2-loop `s` induces a homotpy `id {A = Ω X} ~ id` given by
-[`left-whisker-concat`](foundation.whiskering-identifications-concatenation.md).
-This claim is shown in TODO (provide link). Thus, the 2-D descent data of
-`Id base` is (up to equivalence) exactly the homotopy at the heart of this
-version of the Eckmann-Hilton argument.
+To see this, consider the family of based identity types `Id base : X → UU`. A
+1-loop `l` induces an [automorphism](foundation.automorphisms.md)
+`tr (Id base) l : Ω X ≃ Ω X`. We can compute that
 
-Recall that homotpies of type `id ~ id` automatically commute with each other
-via
-[`eckmann-hilton-htpy`](https://unimath.github.io/agda-unimath/foundation.homotopies.html#8218).
-This identification is constructed using the naturality condition of the two
-homotopies involved. Thus, in the case of `Id base`, we can see a very close
-correspondence between the Eckmann-Hilton identification of 2-loops in the base
-type `X` and the Eckmann-Hilton identification of the homotopies induced by said
-2-loops.
+```text
+  tr (Id base) l p ＝ p ∙ l.
+```
+
+This is shown in
+[`tr-Id-right`](foundation-core.transport-along-identifications.md).
+
+Up one dimension, a 2-loop `s` induces a homotopy
+`tr² (Id base) s : id {A = Ω X} ~ id`. We can compute
+
+```text
+  tr² (Id base) s p ∙ tr-Id-right refl p ＝ tr-Id-right refl p ∙ left-whisker-concat p s
+```
+
+This claim is shown in
+[tr²-Id-right](foundation.transport-along-higher-identifications.md). Thus, the
+2-D descent data of `Id base` is (up to equivalence) the homotopy at the heart
+of this version of the Eckmann-Hilton argument.
+
+Recall that homotopies of type `id ~ id` automatically commute with each other
+via [`eckmann-hilton-htpy`](foundation.homotopies.md). This identification is
+constructed using the naturality condition of one of the two homotopies
+involved. What the above shows is that the Eckmann-Hilton identification of
+2-loops in the base type `X` is the same as the Eckmann-Hilton homotopy
+(evaluated at the base point) of the homotopies induced by those 2-loops in the
+family `Id base`.
 
 Of course `Id base` is a special type family. But this idea generalizes
 nonetheless. Given a type family `B : X → UU`, any 2-loops `α β : Ω X` induce
 homotopies `tr² B α` and `tr² B β` of type `id {A = B base} ~ id`. Again, these
-homotpies automatically commute with each other via their naturality conditions.
-Then, the naturality condition that makes `α` and `β` commute in `Ω² X` is sent
-by `tr³ B` to the naturality condition that makes the induced homotopies
-commute. This is recorded in
-[`tr³-htpy-swap-path-swap`](https://unimath.github.io/agda-unimath/foundation.transport-along-identifications.html#3825).
-From this, it is easy to show that "transport preserves the Eckmann-Hilton
-identification" by proving that the additional coherence paths in the definition
-of `eckmann-hilton` and `eckmann-hilton-htpy` are compatible.
+homotopies automatically commute with each other via
+
+```text
+  commutative-right-whisker-left-whisker-htpy (tr² B α) (tr² B β)
+```
+
+which is the naturality condition of `tr² B α` applied to `tr² B β`. The
+naturality condition that makes `α` and `β` commute in `Ω² X` is
+
+```text
+  commutative-left-whisker-right-whisker-concat α β
+```
+
+Transporting along this latter identification (i.e., applying
+[`tr³ B`](foundation.transport-along-higher-identifications.md)) results in the
+former homotopy. This is shown in
+[`tr³-commutative-left-whisker-right-whisker-concat`](foundation.transport-along-identifications.md).
+From this, it is easy to compute transporting along an Eckmann-Hilton
+identification by proving that the additional coherence identifications in the
+definition of `eckmann-hilton-Ω²` and `eckmann-hilton-htpy` are compatible.
 
 This connection has important consequences, one of which being the connection
 between the Eckmann-Hilton argument and the Hopf fibration.
@@ -190,7 +221,7 @@ module _
 There is another natural construction of an Eckmann-Hilton identification along
 these lines. If we think of the first construction as "rotating clockwise", this
 alternate version "rotates counter-clockwise". In terms of braids, the previous
-construction of Eckmann-Hilton braids `α` over `β`, while this new construction
+construction of Eckmann-Hilton braids `α` over `β`, while this next construction
 braids `α` under `β`. This difference shows up nicely in the type theory. The
 first version uses the naturality of the operation of whiskering on the left,
 while the second version uses the naturality of the operation of whiskering on
@@ -233,7 +264,7 @@ which is what we prove.
 
 **Note.** that the above property is distinct from syllepsis, since it concerns
 two different construction of the Eckmann-Hilton identification. Further, it
-works for all 2-loops, not just 3-loops.
+applies to all 2-loops, not solely 3-loops.
 
 ```agda
 module _
@@ -270,7 +301,7 @@ module _
           ( left-unit-law-left-whisker-Ω² α)
             ( right-unit-law-right-whisker-Ω² β)))
       ( horizontal-concat-Id²
-        ( compute-inv-commutative-left-whisker-right-whisker-concat α β)
+        ( compute-inv-commutative-right-whisker-left-whisker-concat α β)
         ( inv-inv
           ( horizontal-concat-Id²
             ( right-unit-law-right-whisker-Ω² β)
@@ -289,7 +320,14 @@ module _
 
 ## Properties
 
-### We can apply each `eckmann-hilton-Ω²` and `inv-eckmann-hilton-Ω²` to a single 2-loop to obtain a 3-loop
+### Obtaining a 3-loop from a 2-loop using `eckmann-hilton-Ω²`
+
+Given a 2-loop `s : Ω² A`, we can obtain an identification
+`eckmann-hilton-Ω² s s : s ∙ s ＝ s ∙ s`. The type of this identification is
+equivalent to the type of 3-loops, via the equivalence
+[`pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s)`](synthetic-homotopy-theory.double-loop-spaces.md).
+
+3-loops obtained in this way are at the heart of the Hopf fibration.
 
 ```agda
 module _
@@ -331,6 +369,419 @@ module _
       ( compute-inv-inv-eckmann-hilton-Ω² s s))
 ```
 
+### Computing transport along `eckmann-hilton-Ω²`
+
+This coherence relates the three dimensional transport
+[`tr³`](foundation.transport-along-higher-identifications.md) along an
+Eckmann-Hilton identification
+[`eckmann-hilton-Ω² α β`](synthetic-homotopy-theory.eckmann-hilton-argument.md)
+to the Eckmann-Hilton argument for homotopies
+[`eckmann-hilton-htpy (tr² B α) (tr² B β)`](foundation.homotopy-algebra.md).
+
+This takes the form of a commutative square of homotopies
+
+```text
+                   tr²-concat α β
+  tr² B (α ∙ β) -------------------> tr² B α ∙h tr² B β
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       |                                    |
+       ∨                                    ∨
+  tr² B (β ∙ α) -------------------> tr² B β ∙h tr² B α,
+                   tr²-concat β α
+```
+
+where the left leg is `tr³ B (eckmann-hilton-Ω² α β)` and the right leg is
+`eckmann-hilton-htpy (tr² B α) (tr² B β)`.
+
+We construct a filler for this square by first distributing `tr³` across the
+concatenated paths used in `eckmann-hilton-Ω²`, then splitting the resultant
+square into three vertical squares, constructing fillers for each, then pasting
+them together. The filler of the middle square is
+
+```text
+  tr³-commutative-left-whisker-right-whisker-concat-Ω² α β
+```
+
+The fillers for the top and bottom squares are constructed below. They relate
+the unit laws for whiskering identifications used in `eckmann-hilton-Ω²` and the
+unit laws for whiskering homotopies used in `eckmann-hilton-htpy`.
+
+#### Distributing `tr³` across `eckmann-hilton-Ω²`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {a : A}
+  {B : A → UU l2} (α β : type-Ω² a)
+  where
+
+  tr³-eckmann-hilton-distributed :
+    tr² B (α ∙ β) ~ tr² B (β ∙ α)
+  tr³-eckmann-hilton-distributed =
+    ( tr³
+      ( B)
+      ( inv
+        ( horizontal-concat-Id²
+          ( left-unit-law-left-whisker-Ω² α)
+          ( right-unit-law-right-whisker-Ω² β)))) ∙h
+    ( tr³
+      ( B)
+      ( commutative-left-whisker-right-whisker-concat α β)) ∙h
+    ( tr³
+      ( B)
+      ( horizontal-concat-Id²
+        ( right-unit-law-right-whisker-Ω² β)
+        ( left-unit-law-left-whisker-Ω² α)))
+
+  tr³-concat-eckmann-hilton :
+    ( tr³ B (eckmann-hilton-Ω² α β)) ~
+    ( tr³-eckmann-hilton-distributed)
+  tr³-concat-eckmann-hilton =
+    ( tr³-concat
+      ( ( inv
+          ( horizontal-concat-Id²
+            ( left-unit-law-left-whisker-Ω² α)
+            ( right-unit-law-right-whisker-Ω² β))) ∙
+        ( commutative-left-whisker-right-whisker-concat α β))
+      ( horizontal-concat-Id²
+        ( right-unit-law-right-whisker-Ω² β)
+        ( left-unit-law-left-whisker-Ω² α))) ∙h
+    ( right-whisker-concat-htpy
+      ( tr³-concat
+        ( inv
+          ( horizontal-concat-Id²
+            ( left-unit-law-left-whisker-Ω² α)
+            ( right-unit-law-right-whisker-Ω² β)))
+        ( commutative-left-whisker-right-whisker-concat α β))
+      ( tr³
+        ( B)
+        ( horizontal-concat-Id²
+          ( right-unit-law-right-whisker-Ω² β)
+          ( left-unit-law-left-whisker-Ω² α))))
+```
+
+#### The filler of the top square
+
+```agda
+  tr³-horizontal-concat-left-unit-law-left-whisker-right-unit-law-right-whisker-Ω² :
+    coherence-square-homotopies
+      ( tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
+      ( tr³
+        ( B)
+        ( horizontal-concat-Id²
+          ( left-unit-law-left-whisker-Ω² α)
+          ( right-unit-law-right-whisker-Ω² β)))
+      ( left-whisker-concat-htpy
+        ( tr² B α)
+        ( left-unit-law-left-whisker-comp (tr² B β)))
+      ( tr²-concat α β)
+  tr³-horizontal-concat-left-unit-law-left-whisker-right-unit-law-right-whisker-Ω² =
+    concat-bottom-homotopy-coherence-square-homotopies
+      ( tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
+      ( tr³
+        ( B)
+        ( horizontal-concat-Id²
+          ( left-unit-law-left-whisker-Ω² α)
+          ( right-unit-law-right-whisker-Ω² β)))
+      ( left-whisker-concat-htpy
+        ( tr² B α)
+        ( left-unit-law-left-whisker-comp (tr² B β)))
+      ( tr²-concat α β ∙h refl-htpy)
+      ( right-unit-htpy)
+      ( horizontal-pasting-coherence-square-homotopies
+        ( tr²-concat
+          ( left-whisker-concat refl α)
+          ( right-whisker-concat β refl))
+        ( tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² α β)
+        ( tr³
+          ( B)
+          ( horizontal-concat-Id²
+            ( left-unit-law-left-whisker-Ω² α)
+            ( right-unit-law-right-whisker-Ω² β)))
+        ( horizontal-concat-htpy²
+          ( tr³
+            ( B)
+            ( left-unit-law-left-whisker-Ω² α))
+          ( tr³
+            ( B)
+            ( right-unit-law-right-whisker-Ω² β)))
+        ( left-whisker-concat-htpy
+          ( tr² B α)
+          ( left-unit-law-left-whisker-comp (tr² B β)))
+        ( tr²-concat α β)
+        ( refl-htpy)
+        ( tr³-horizontal-concat
+          ( left-unit-law-left-whisker-Ω² α)
+          ( right-unit-law-right-whisker-Ω² β))
+        ( inv-concat-right-homotopy-coherence-square-homotopies
+          ( tr²-left-whisker-concat-tr²-right-whisker-concat-Ω² α β)
+          ( horizontal-concat-htpy²
+            ( tr³ B (left-unit-law-left-whisker-Ω² α))
+            ( tr³ B (right-unit-law-right-whisker-Ω² β)))
+          ( left-whisker-concat-htpy
+            ( tr² B α)
+            ( left-unit-law-left-whisker-comp (tr² B β)))
+          ( refl-htpy)
+          ( inv-htpy
+            ( compute-left-refl-htpy-horizontal-concat-htpy²
+              ( tr² B α)
+              ( left-unit-law-left-whisker-comp (tr² B β))))
+          ( ( right-unit-htpy) ∙h
+            ( z-concat-htpy³
+              ( inv-htpy right-unit-htpy)
+              ( ( inv-htpy right-unit-htpy) ∙h
+                ( left-whisker-concat-htpy
+                  ( tr³
+                    ( B)
+                    ( inv
+                      ( right-unit-law-right-whisker-concat β ∙ right-unit)))
+                  ( inv-htpy
+                    ( left-inv-htpy
+                      ( left-unit-law-left-whisker-comp (tr² B β))))) ∙h
+                ( inv-htpy
+                  ( assoc-htpy
+                    ( tr³
+                      ( B)
+                      ( inv
+                        ( ( right-unit-law-right-whisker-concat β) ∙
+                          ( right-unit))))
+                    ( inv-htpy (left-unit-law-left-whisker-comp (tr² B β)))
+                    ( left-unit-law-left-whisker-comp (tr² B β)))))) ∙h
+            ( interchange-htpy²
+              ( tr³ B (left-unit-law-left-whisker-concat α))
+              ( refl-htpy)
+              ( ( tr³
+                  ( B)
+                  ( inv
+                    ( ( right-unit-law-right-whisker-concat β) ∙
+                      ( right-unit)))) ∙h
+                ( inv-htpy (left-unit-law-left-whisker-comp (tr² B β))))
+              ( left-unit-law-left-whisker-comp (tr² B β))))))
+
+  tr³-horizontal-concat-inv-left-unit-law-left-whisker-right-unit-law-right-whisker-Ω² :
+    coherence-square-homotopies
+      ( tr²-concat α β)
+      ( tr³
+        ( B)
+        ( inv
+          ( horizontal-concat-Id²
+            ( left-unit-law-left-whisker-Ω² α)
+            ( right-unit-law-right-whisker-Ω² β))))
+      ( inv-htpy
+        ( left-whisker-concat-htpy
+          ( tr² B α)
+          ( left-unit-law-left-whisker-comp (tr² B β))))
+      ( tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
+  tr³-horizontal-concat-inv-left-unit-law-left-whisker-right-unit-law-right-whisker-Ω² =
+    inv-concat-left-homotopy-coherence-square-homotopies
+      ( tr²-concat α β)
+      ( tr³
+        ( B)
+        ( inv
+          ( horizontal-concat-Id²
+            ( left-unit-law-left-whisker-Ω² α)
+            ( right-unit-law-right-whisker-Ω² β))))
+      ( inv-htpy
+        ( left-whisker-concat-htpy
+          ( tr² B α)
+          ( left-unit-law-left-whisker-comp (tr² B β))))
+      ( tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
+      ( tr⁴
+        ( B)
+        ( distributive-inv-horizontal-concat-Id²
+          ( left-unit-law-left-whisker-Ω² α)
+          ( right-unit-law-right-whisker-Ω² β)))
+      ( concat-left-homotopy-coherence-square-homotopies
+        ( tr²-concat α β)
+        ( inv-htpy
+          ( tr³
+            ( B)
+            ( horizontal-concat-Id²
+              ( left-unit-law-left-whisker-Ω² α)
+              ( right-unit-law-right-whisker-Ω² β))))
+        ( inv-htpy
+          ( left-whisker-concat-htpy
+            ( tr² B α)
+            ( left-unit-law-left-whisker-comp (tr² B β))))
+        ( tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
+        ( ( inv-htpy
+            ( tr³-inv
+              ( horizontal-concat-Id²
+                ( left-unit-law-left-whisker-Ω² α)
+                ( right-unit-law-right-whisker-Ω² β)))) ∙h
+          ( tr⁴
+            ( B)
+            ( distributive-inv-horizontal-concat-Id²
+              ( left-unit-law-left-whisker-concat α)
+              ( right-unit-law-right-whisker-Ω² β))))
+        ( vertical-inv-coherence-square-homotopies
+          ( tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
+          ( tr³
+            ( B)
+            ( horizontal-concat-Id²
+              ( left-unit-law-left-whisker-Ω² α)
+              ( right-unit-law-right-whisker-Ω² β)))
+          ( left-whisker-concat-htpy
+            ( tr² B α)
+            ( left-unit-law-left-whisker-comp (tr² B β)))
+          ( tr²-concat α β)
+          ( tr³-horizontal-concat-left-unit-law-left-whisker-right-unit-law-right-whisker-Ω²)))
+```
+
+#### The filler of the bottom square
+
+```agda
+  tr³-horizontal-concat-right-unit-law-right-whisker-left-unit-law-left-whisker-Ω² :
+    coherence-square-homotopies
+      ( tr²-concat-right-whisker-concat-left-whisker-concat-Ω² β α)
+      ( tr³
+        ( B)
+        ( horizontal-concat-Id²
+          ( right-unit-law-right-whisker-Ω² β)
+          ( left-unit-law-left-whisker-Ω² α)))
+      ( right-whisker-concat-htpy
+        ( left-unit-law-left-whisker-comp (tr² B β))
+        ( tr² B α))
+      ( tr²-concat β α)
+  tr³-horizontal-concat-right-unit-law-right-whisker-left-unit-law-left-whisker-Ω² =
+    concat-bottom-homotopy-coherence-square-homotopies
+      ( tr²-concat-right-whisker-concat-left-whisker-concat-Ω² β α)
+      ( tr³
+        ( B)
+        ( horizontal-concat-Id²
+          ( right-unit-law-right-whisker-Ω² β)
+          ( left-unit-law-left-whisker-Ω² α)))
+      ( right-whisker-concat-htpy
+        ( left-unit-law-left-whisker-comp (tr² B β))
+        ( tr² B α))
+      ( tr²-concat β α ∙h refl-htpy)
+      ( right-unit-htpy)
+      ( horizontal-pasting-coherence-square-homotopies
+        ( tr²-concat
+          ( right-whisker-concat β refl)
+          ( left-whisker-concat refl α))
+        ( tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² β α)
+        ( tr³
+          ( B)
+          ( horizontal-concat-Id²
+            ( right-unit-law-right-whisker-Ω² β)
+            ( left-unit-law-left-whisker-Ω² α)))
+        ( horizontal-concat-htpy²
+          ( tr³ B (right-unit-law-right-whisker-Ω² β))
+          ( tr³ B (left-unit-law-left-whisker-Ω² α)))
+        ( right-whisker-concat-htpy
+          ( left-unit-law-left-whisker-comp (tr² B β))
+          ( tr² B α))
+        ( tr²-concat β α)
+        ( refl-htpy)
+        ( tr³-horizontal-concat
+          ( right-unit-law-right-whisker-Ω² β)
+          ( left-unit-law-left-whisker-Ω² α))
+        ( inv-concat-right-homotopy-coherence-square-homotopies
+          ( tr²-right-whisker-concat-tr²-left-whisker-concat-Ω² β α)
+          ( horizontal-concat-htpy²
+            ( tr³ B (right-unit-law-right-whisker-Ω² β))
+            ( tr³ B (left-unit-law-left-whisker-Ω² α)))
+          ( right-whisker-concat-htpy
+            ( left-unit-law-left-whisker-comp (tr² B β))
+            ( tr² B α))
+          ( refl-htpy)
+          ( inv-htpy
+            ( compute-right-refl-htpy-horizontal-concat-htpy²
+              ( left-unit-law-left-whisker-comp (tr² B β))
+              ( tr² B α)))
+          ( ( right-unit-htpy
+              { H =
+                ( horizontal-concat-htpy²
+                  ( tr³ B (right-unit-law-right-whisker-Ω² β))
+                  ( tr³ B (left-unit-law-left-whisker-Ω² α)))}) ∙h
+            ( z-concat-htpy³
+              ( ( inv-htpy right-unit-htpy) ∙h
+                ( left-whisker-concat-htpy
+                  ( tr³ B (right-unit-law-right-whisker-Ω² β))
+                  ( inv-htpy
+                    ( left-inv-htpy
+                      ( left-unit-law-left-whisker-comp (tr² B β))))) ∙h
+                ( inv-htpy
+                  ( assoc-htpy
+                    ( tr³ B (right-unit-law-right-whisker-Ω² β))
+                    ( inv-htpy (left-unit-law-left-whisker-comp (tr² B β)))
+                    ( left-unit-law-left-whisker-comp (tr² B β)))))
+              ( inv-htpy right-unit-htpy)) ∙h
+            ( interchange-htpy²
+              ( ( tr³
+                  ( B)
+                  ( inv
+                    ( ( right-unit-law-right-whisker-concat β) ∙
+                      ( right-unit)))) ∙h
+                ( inv-htpy (left-unit-law-left-whisker-comp (tr² B β))))
+              ( left-unit-law-left-whisker-comp (tr² B β))
+              ( tr³ B (left-unit-law-left-whisker-concat α))
+              ( refl-htpy)))))
+```
+
+#### The computation
+
+```agda
+  tr³-eckmann-hilton :
+    coherence-square-homotopies
+      ( tr²-concat α β)
+      ( tr³ B (eckmann-hilton-Ω² α β))
+      ( eckmann-hilton-htpy (tr² B α) (tr² B β))
+      ( tr²-concat β α)
+  tr³-eckmann-hilton =
+    inv-concat-left-homotopy-coherence-square-homotopies
+      ( tr²-concat α β)
+      ( tr³ B (eckmann-hilton-Ω² α β))
+      ( eckmann-hilton-htpy (tr² B α) (tr² B β))
+      ( tr²-concat β α)
+      ( tr³-concat-eckmann-hilton)
+      ( vertical-pasting-coherence-square-homotopies
+        ( tr²-concat α β)
+        ( tr³ B
+          ( inv
+            ( horizontal-concat-Id²
+              ( left-unit-law-left-whisker-Ω² α)
+              ( right-unit-law-right-whisker-Ω² β))) ∙h
+        ( tr³ B (commutative-left-whisker-right-whisker-concat α β)))
+        ( ( inv-htpy
+            ( left-whisker-concat-htpy
+              ( tr² B α)
+              ( left-unit-law-left-whisker-comp (tr² B β)))) ∙h
+          ( commutative-right-whisker-left-whisker-htpy (tr² B α) (tr² B β)))
+        ( tr²-concat-right-whisker-concat-left-whisker-concat-Ω² β α)
+        ( tr³ B
+          ( horizontal-concat-Id²
+            ( right-unit-law-right-whisker-Ω² β)
+            ( left-unit-law-left-whisker-Ω² α)))
+        ( right-whisker-concat-htpy
+          ( left-unit-law-left-whisker-comp (tr² B β)) (tr² B α))
+        ( tr²-concat β α)
+        ( vertical-pasting-coherence-square-homotopies
+          ( tr²-concat α β)
+          ( tr³
+            ( B)
+            ( inv
+              ( horizontal-concat-Id²
+                ( left-unit-law-left-whisker-Ω² α)
+                ( right-unit-law-right-whisker-Ω² β))))
+          ( inv-htpy
+            ( left-whisker-concat-htpy
+              ( tr² B α)
+              ( left-unit-law-left-whisker-comp (tr² B β))))
+          ( tr²-concat-left-whisker-concat-right-whisker-concat-Ω² α β)
+          ( tr³ B (commutative-left-whisker-right-whisker-concat α β))
+          ( commutative-right-whisker-left-whisker-htpy (tr² B α) (tr² B β))
+          ( tr²-concat-right-whisker-concat-left-whisker-concat-Ω² β α)
+          ( tr³-horizontal-concat-inv-left-unit-law-left-whisker-right-unit-law-right-whisker-Ω²)
+          ( tr³-commutative-left-whisker-right-whisker-concat-Ω² α β))
+        ( tr³-horizontal-concat-right-unit-law-right-whisker-left-unit-law-left-whisker-Ω²))
+```
+
 ## External links
 
 - [The Eckmann-Hilton argument](https://1lab.dev/Algebra.Magma.Unital.EckmannHilton.html)
@@ -339,3 +790,4 @@ module _
   at $n$Lab.
 - [Eckmann-Hilton argument](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument)
   at Wikipedia.
+- [Eckmann-Hilton and the Hopf Fibration](https://www.youtube.com/watch?v=hU4_dVpmkKM)

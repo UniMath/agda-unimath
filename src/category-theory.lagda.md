@@ -26,13 +26,18 @@ open import category-theory.category-of-maps-from-small-to-large-categories publ
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-set-magmoids public
+open import category-theory.commuting-triangles-of-morphisms-in-precategories public
+open import category-theory.commuting-triangles-of-morphisms-in-set-magmoids public
+open import category-theory.complete-precategories public
 open import category-theory.composition-operations-on-binary-families-of-sets public
+open import category-theory.cones-precategories public
 open import category-theory.conservative-functors-precategories public
 open import category-theory.constant-functors public
 open import category-theory.copresheaf-categories public
 open import category-theory.coproducts-in-precategories public
 open import category-theory.cores-categories public
 open import category-theory.cores-precategories public
+open import category-theory.coslice-precategories public
 open import category-theory.dependent-products-of-categories public
 open import category-theory.dependent-products-of-large-categories public
 open import category-theory.dependent-products-of-large-precategories public
@@ -50,6 +55,7 @@ open import category-theory.essential-fibers-of-functors-precategories public
 open import category-theory.essentially-injective-functors-precategories public
 open import category-theory.essentially-surjective-functors-precategories public
 open import category-theory.exponential-objects-precategories public
+open import category-theory.extensions-of-functors-precategories public
 open import category-theory.faithful-functors-precategories public
 open import category-theory.faithful-maps-precategories public
 open import category-theory.full-functors-precategories public
@@ -91,6 +97,7 @@ open import category-theory.large-function-precategories public
 open import category-theory.large-precategories public
 open import category-theory.large-subcategories public
 open import category-theory.large-subprecategories public
+open import category-theory.limits-precategories public
 open import category-theory.maps-categories public
 open import category-theory.maps-from-small-to-large-categories public
 open import category-theory.maps-from-small-to-large-precategories public
@@ -141,6 +148,8 @@ open import category-theory.representable-functors-large-precategories public
 open import category-theory.representable-functors-precategories public
 open import category-theory.representing-arrow-category public
 open import category-theory.restrictions-functors-cores-precategories public
+open import category-theory.right-extensions-precategories public
+open import category-theory.right-kan-extensions-precategories public
 open import category-theory.rigid-objects-categories public
 open import category-theory.rigid-objects-precategories public
 open import category-theory.set-magmoids public

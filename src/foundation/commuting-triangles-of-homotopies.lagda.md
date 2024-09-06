@@ -7,15 +7,12 @@ module foundation.commuting-triangles-of-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.whiskering-identifications-concatenation
 ```
 
 </details>

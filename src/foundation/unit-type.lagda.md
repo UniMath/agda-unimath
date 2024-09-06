@@ -8,6 +8,7 @@ module foundation.unit-type where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-of-types
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
@@ -54,7 +55,7 @@ module _
   where
 
   terminal-map : A → unit
-  terminal-map = const A unit star
+  terminal-map = const A star
 ```
 
 ### Points as maps out of the unit type
@@ -65,7 +66,7 @@ module _
   where
 
   point : A → (unit → A)
-  point = const unit A
+  point = diagonal-exponential A unit
 ```
 
 ### Raising the universe level of the unit type
@@ -78,7 +79,7 @@ raise-star : {l : Level} → raise l unit
 raise-star = map-raise star
 
 raise-terminal-map : {l1 l2 : Level} (A : UU l1) → A → raise-unit l2
-raise-terminal-map {l2 = l2} A = const A (raise-unit l2) raise-star
+raise-terminal-map {l2 = l2} A = const A raise-star
 
 compute-raise-unit : (l : Level) → unit ≃ raise-unit l
 compute-raise-unit l = compute-raise l unit
@@ -167,9 +168,9 @@ abstract
     {l1 : Level} → is-set (raise-unit l1)
   is-set-raise-unit = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-raise-unit
 
-raise-unit-Set : Set lzero
-pr1 raise-unit-Set = unit
-pr2 raise-unit-Set = is-set-unit
+raise-unit-Set : (l1 : Level) → Set l1
+pr1 (raise-unit-Set l1) = raise-unit l1
+pr2 (raise-unit-Set l1) = is-set-raise-unit
 ```
 
 ### All parallel maps into `unit` are equal

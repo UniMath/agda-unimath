@@ -20,6 +20,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
@@ -199,7 +200,7 @@ module _
     (f : natural-transformation-Precategory C D F G) →
     is-equiv (is-iso-functor-is-natural-isomorphism-Precategory f)
   is-equiv-is-iso-functor-is-natural-isomorphism-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-natural-isomorphism-Precategory C D F G f)
       ( is-prop-is-iso-Precategory
         ( functor-precategory-Precategory C D) {F} {G} f)
@@ -209,7 +210,7 @@ module _
     (f : natural-transformation-Precategory C D F G) →
     is-equiv (is-natural-isomorphism-is-iso-functor-Precategory f)
   is-equiv-is-natural-isomorphism-is-iso-functor-Precategory f =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-is-iso-Precategory
         ( functor-precategory-Precategory C D) {F} {G} f)
       ( is-prop-is-natural-isomorphism-Precategory C D F G f)
@@ -289,4 +290,23 @@ module _
     eq-iso-eq-hom-Precategory
       ( functor-precategory-Precategory C D)
       { F} {G} _ _ refl
+```
+
+### The evaluation functor
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  ev-functor-Precategory :
+    (c : obj-Precategory C) →
+    functor-Precategory (functor-precategory-Precategory C D) D
+  pr1 (ev-functor-Precategory c) F = obj-functor-Precategory C D F c
+  pr1 (pr2 (ev-functor-Precategory c)) {F} {G} φ =
+    hom-family-natural-transformation-Precategory C D F G φ c
+  pr1 (pr2 (pr2 (ev-functor-Precategory c))) φ Ψ = refl
+  pr2 (pr2 (pr2 (ev-functor-Precategory c))) F = refl
 ```

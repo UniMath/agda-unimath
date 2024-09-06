@@ -26,6 +26,7 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.coforks
+open import synthetic-homotopy-theory.coforks-cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagrams
 open import synthetic-homotopy-theory.dependent-coforks
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
@@ -63,7 +64,7 @@ module _
 
   dependent-universal-property-sequential-colimit : UUω
   dependent-universal-property-sequential-colimit =
-    { l : Level} → (P : X → UU l) →
+    {l : Level} (P : X → UU l) →
     is-equiv (dependent-cocone-map-sequential-diagram c P)
 ```
 
@@ -151,45 +152,39 @@ module _
   where
 
   dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer :
-    ( {l : Level} →
-      dependent-universal-property-coequalizer l
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c)) →
+    dependent-universal-property-coequalizer
+      ( double-arrow-sequential-diagram A)
+      ( cofork-cocone-sequential-diagram c) →
     dependent-universal-property-sequential-colimit c
   dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
     ( dup-coequalizer)
     ( P) =
     is-equiv-left-map-triangle
       ( dependent-cocone-map-sequential-diagram c P)
-      ( dependent-cocone-sequential-diagram-dependent-cofork c P)
+      ( dependent-cocone-sequential-diagram-dependent-cofork P)
       ( dependent-cofork-map
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c))
-      ( triangle-dependent-cocone-sequential-diagram-dependent-cofork c P)
+        ( double-arrow-sequential-diagram A)
+        ( cofork-cocone-sequential-diagram c))
+      ( triangle-dependent-cocone-sequential-diagram-dependent-cofork P)
       ( dup-coequalizer P)
-      ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork c P)
+      ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork P)
 
   dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit :
     dependent-universal-property-sequential-colimit c →
-    ( {l : Level} →
-      dependent-universal-property-coequalizer l
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c))
+    dependent-universal-property-coequalizer
+      ( double-arrow-sequential-diagram A)
+      ( cofork-cocone-sequential-diagram c)
   dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
     ( dup-c)
     ( P) =
     is-equiv-top-map-triangle
       ( dependent-cocone-map-sequential-diagram c P)
-      ( dependent-cocone-sequential-diagram-dependent-cofork c P)
+      ( dependent-cocone-sequential-diagram-dependent-cofork P)
       ( dependent-cofork-map
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c))
-      ( triangle-dependent-cocone-sequential-diagram-dependent-cofork c P)
-      ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork c P)
+        ( double-arrow-sequential-diagram A)
+        ( cofork-cocone-sequential-diagram c))
+      ( triangle-dependent-cocone-sequential-diagram-dependent-cofork P)
+      ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork P)
       ( dup-c P)
 ```
 
@@ -225,9 +220,8 @@ module _
     dependent-universal-property-sequential-colimit-dependent-universal-property-coequalizer
       ( c)
       ( dependent-universal-property-universal-property-coequalizer
-        ( bottom-map-cofork-cocone-sequential-diagram A)
-        ( top-map-cofork-cocone-sequential-diagram A)
-        ( cofork-cocone-sequential-diagram A c)
+        ( double-arrow-sequential-diagram A)
+        ( cofork-cocone-sequential-diagram c)
         ( universal-property-coequalizer-universal-property-sequential-colimit
           ( c)
           ( up-sequential-diagram)))

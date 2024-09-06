@@ -19,8 +19,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-Dedekind finite sets are sets `X` with the property that every embedding `X ↪ X`
-is an equivalence.
+{{#concept "Dedekind finite sets" Agda=set-𝔽-Dedekind}} are
+[sets](foundation-core.sets.md) `X` with the
+[property](foundation-core.propositions.md) that every
+[embedding](foundation-core.embeddings.md) `X ↪ X` is an
+[equivalence](foundation-core.equivalences.md).
 
 ## Definition
 
@@ -53,3 +56,23 @@ module _
   is-dedekind-finite-set-𝔽-Dedekind : is-dedekind-finite-set set-𝔽-Dedekind
   is-dedekind-finite-set-𝔽-Dedekind = pr2 X
 ```
+
+## See also
+
+- [Finite types](univalent-combinatorics.finite-types.md)
+- [Kratowsky-finite sets](univalent-combinatorics.kuratowski-finite-sets.md)
+
+## References
+
+{{#bibliography}} {{#reference Sto87}}
+
+## External links
+
+- [Finiteness in Sheaf Topoi](https://grossack.site/2024/08/19/finiteness-in-sheaf-topoi),
+  blog post by Chris Grossack
+- [`Fin.Dedekind`](https://www.cs.bham.ac.uk/~mhe/TypeTopology/Fin.Dedekind.html)
+  at TypeTopology
+- [finite object#Dedekind finiteness](https://ncatlab.org/nlab/show/finite+object#dedekind_finiteness)
+- [finite set](https://ncatlab.org/nlab/show/finite+set) at $n$Lab
+- [Dedekind-infinite set](https://en.wikipedia.org/wiki/Dedekind-infinite_set)
+  at Wikipedia

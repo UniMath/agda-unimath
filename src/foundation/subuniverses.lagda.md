@@ -38,7 +38,7 @@ open import foundation-core.transport-along-identifications
 
 ```agda
 is-subuniverse :
-  {l1 l2 : Level} (P : UU l1 → UU l2) → UU ((lsuc l1) ⊔ l2)
+  {l1 l2 : Level} (P : UU l1 → UU l2) → UU (lsuc l1 ⊔ l2)
 is-subuniverse P = is-subtype P
 
 subuniverse :
@@ -75,15 +75,6 @@ module _
 
   emb-inclusion-subuniverse : type-subuniverse ↪ UU l1
   emb-inclusion-subuniverse = emb-subtype P
-```
-
-### Maps in a subuniverse
-
-```agda
-is-in-subuniverse-map :
-  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3) {A : UU l1} {B : UU l2} →
-  (A → B) → UU (l2 ⊔ l3)
-is-in-subuniverse-map P {A} {B} f = (b : B) → is-in-subuniverse P (fiber f b)
 ```
 
 ### The predicate of essentially being in a subuniverse

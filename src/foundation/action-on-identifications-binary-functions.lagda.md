@@ -126,7 +126,7 @@ uncurried [commuting square](foundation-core.commuting-squares-of-maps.md)
                 |                             |
           1 × Δ |                             | ap
                 |                             |
-                v                             v
+                ∨                             ∨
   (A × A → B) × Path A × Path A ----------> Path B.
                                  ap-binary
 ```

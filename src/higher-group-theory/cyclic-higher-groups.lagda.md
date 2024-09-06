@@ -60,7 +60,7 @@ module _
 
   is-cyclic-prop-∞-Group : Prop (l1 ⊔ lsuc l2)
   is-cyclic-prop-∞-Group =
-    ∃-Prop
+    exists-structure-Prop
       ( type-∞-Group G)
       ( λ g → (H : ∞-Group l2) → is-emb (ev-element-∞-Group G H g))
 

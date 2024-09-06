@@ -14,6 +14,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.morphisms-arrows
+open import foundation.span-diagrams
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -37,13 +38,13 @@ A **cocone under a [span](foundation.spans.md)** `A <-f- S -g-> B` with codomain
 [homotopy](foundation.homotopies.md) witnessing that the square
 
 ```text
-      g
-  S -----> B
-  |        |
- f|        |j
-  V        V
-  A -----> X
-      i
+        g
+    S -----> B
+    |        |
+  f |        | j
+    ∨        ∨
+    A -----> X
+        i
 ```
 
 [commutes](foundation.commuting-squares-of-maps.md).
@@ -58,6 +59,13 @@ cocone :
   (f : S → A) (g : S → B) → UU l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 cocone {A = A} {B = B} f g X =
   Σ (A → X) (λ i → Σ (B → X) (λ j → coherence-square-maps g f j i))
+
+cocone-span-diagram :
+  {l1 l2 l3 l4 : Level} →
+  span-diagram l1 l2 l3 → UU l4 →
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+cocone-span-diagram 𝒮 X =
+  cocone (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮) X
 
 module _
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -117,15 +125,39 @@ module _
         ( vertical-htpy-cocone)
     coherence-htpy-cocone = pr2 (pr2 H)
 
-  reflexive-htpy-cocone :
+  refl-htpy-cocone :
     (c : cocone f g X) → htpy-cocone c c
-  pr1 (reflexive-htpy-cocone (i , j , H)) = refl-htpy
-  pr1 (pr2 (reflexive-htpy-cocone (i , j , H))) = refl-htpy
-  pr2 (pr2 (reflexive-htpy-cocone (i , j , H))) = right-unit-htpy
+  pr1 (refl-htpy-cocone (i , j , H)) = refl-htpy
+  pr1 (pr2 (refl-htpy-cocone (i , j , H))) = refl-htpy
+  pr2 (pr2 (refl-htpy-cocone (i , j , H))) = right-unit-htpy
 
   htpy-eq-cocone :
     (c c' : cocone f g X) → c ＝ c' → htpy-cocone c c'
-  htpy-eq-cocone c .c refl = reflexive-htpy-cocone c
+  htpy-eq-cocone c .c refl = refl-htpy-cocone c
+
+  module _
+    (c c' : cocone f g X)
+    (p : c ＝ c')
+    where
+
+    horizontal-htpy-eq-cocone :
+      horizontal-map-cocone f g c ~
+      horizontal-map-cocone f g c'
+    horizontal-htpy-eq-cocone =
+      horizontal-htpy-cocone c c' (htpy-eq-cocone c c' p)
+
+    vertical-htpy-eq-cocone :
+      vertical-map-cocone f g c ~
+      vertical-map-cocone f g c'
+    vertical-htpy-eq-cocone =
+      vertical-htpy-cocone c c' (htpy-eq-cocone c c' p)
+
+    coherence-square-htpy-eq-cocone :
+      statement-coherence-htpy-cocone c c'
+        ( horizontal-htpy-eq-cocone)
+        ( vertical-htpy-eq-cocone)
+    coherence-square-htpy-eq-cocone =
+      coherence-htpy-cocone c c' (htpy-eq-cocone c c' p)
 
   is-torsorial-htpy-cocone :
     (c : cocone f g X) → is-torsorial (htpy-cocone c)
@@ -171,6 +203,14 @@ pr1 (cocone-map f g c h) = h ∘ horizontal-map-cocone f g c
 pr1 (pr2 (cocone-map f g c h)) = h ∘ vertical-map-cocone f g c
 pr2 (pr2 (cocone-map f g c h)) = h ·l coherence-square-cocone f g c
 
+cocone-map-span-diagram :
+  {l1 l2 l3 l4 : Level} {𝒮 : span-diagram l1 l2 l3}
+  {X : UU l4} (c : cocone-span-diagram 𝒮 X) →
+  {l5 : Level} {Y : UU l5} →
+  (X → Y) → cocone-span-diagram 𝒮 Y
+cocone-map-span-diagram {𝒮 = 𝒮} c =
+  cocone-map (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮) c
+
 cocone-map-id :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
@@ -191,12 +231,12 @@ cocone-map-comp f g (i , j , H) h k =
 ### Horizontal composition of cocones
 
 ```text
-      i       k
-  A ----> B ----> C
-  |       |       |
- f|       |       |
-  v       v       v
-  X ----> Y ----> Z
+        i       k
+    A ----> B ----> C
+    |       |       |
+  f |       |       |
+    ∨       ∨       ∨
+    X ----> Y ----> Z
 ```
 
 ```agda
@@ -226,13 +266,13 @@ pr2 (pr2 (cocone-comp-horizontal f i k c d)) =
 A variation on the above:
 
 ```text
-       i       k
-   A ----> B ----> C
-   |       |       |
- f |     g |       |
-   v       v       v
-   X ----> Y ----> Z
-       j
+        i       k
+    A ----> B ----> C
+    |       |       |
+  f |     g |       |
+    ∨       ∨       ∨
+    X ----> Y ----> Z
+        j
 ```
 
 ```agda
@@ -249,16 +289,16 @@ cocone-comp-horizontal' f i k g j c coh =
 ### Vertical composition of cocones
 
 ```text
-     i
- A -----> X
- |        |
-f|        |
- v        v
- B -----> Y
- |        |
-k|        |
- v        v
- C -----> Z
+        i
+    A -----> X
+    |        |
+  f |        |
+    ∨        ∨
+    B -----> Y
+    |        |
+  k |        |
+    ∨        ∨
+    C -----> Z
 ```
 
 ```agda
@@ -288,16 +328,16 @@ pr2 (pr2 (cocone-comp-vertical f i k c d)) =
 A variation on the above:
 
 ```text
-     i
- A -----> X
- |        |
-f|        |g
- v   j    v
- B -----> Y
- |        |
-k|        |
- v        v
- C -----> Z
+        i
+    A -----> X
+    |        |
+  f |        | g
+    ∨   j    ∨
+    B -----> Y
+    |        |
+  k |        |
+    ∨        ∨
+    C -----> Z
 ```
 
 ```agda
@@ -314,26 +354,26 @@ cocone-comp-vertical' f i g j k c coh =
 Given a commutative diagram like this,
 
 ```text
-          g'
-      S' ---> B'
-     / \       \
- f' /   \ k     \ j
-   /     v   g   v
-  A'     S ----> B
-    \    |       |
-   i \   | f     |
-      \  v       v
-       > A ----> X
+           g'
+       S' ---> B'
+      / \       \
+  f' /   \ k     \ j
+    /     ∨   g   ∨
+   A'     S ----> B
+     \    |       |
+    i \   | f     |
+       \  ∨       ∨
+        > A ----> X
 ```
 
 we can compose both vertically and horizontally to get the following cocone:
 
 ```text
-   S' ---> B'
-   |       |
-   |       |
-   v       v
-   A' ---> X
+  S' ---> B'
+  |       |
+  |       |
+  ∨       ∨
+  A' ---> X
 ```
 
 Notice that the triple `(i,j,k)` is really a morphism of spans. So the resulting

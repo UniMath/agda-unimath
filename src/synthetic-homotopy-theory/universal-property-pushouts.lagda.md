@@ -67,21 +67,36 @@ found in the following table:
 
 ## Definition
 
+### The universal property of pushouts at a universe level
+
+**Warning.** This definition is here only because of backward compatibility
+reasons, and will be removed in the future. Do not use this definition in new
+formalizations.
+
+```agda
+universal-property-pushout-Level :
+  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) {X : UU l4} →
+  cocone f g X → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+universal-property-pushout-Level l f g c =
+  (Y : UU l) → is-equiv (cocone-map f g {Y = Y} c)
+```
+
 ### The universal property of pushouts
 
 ```agda
 universal-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} →
-  cocone f g X → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-universal-property-pushout l f g c =
-  (Y : UU l) → is-equiv (cocone-map f g {Y = Y} c)
+  cocone f g X → UUω
+universal-property-pushout f g c =
+  {l : Level} → universal-property-pushout-Level l f g c
 
 module _
   {l1 l2 l3 l4 l5 : Level}
   {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {Y : UU l5}
   (f : S → A) (g : S → B) (c : cocone f g X)
-  (up-c : {l : Level} → universal-property-pushout l f g c)
+  (up-c : universal-property-pushout f g c)
   (d : cocone f g Y)
   where
 
@@ -168,8 +183,8 @@ module _
           ( eq-htpy-cocone f g (cocone-map f g c h) d KLM)))
 
   is-equiv-up-pushout-up-pushout :
-    ( up-c : {l : Level} → universal-property-pushout l f g c) →
-    ( up-d : {l : Level} → universal-property-pushout l f g d) →
+    universal-property-pushout f g c →
+    universal-property-pushout f g d →
     is-equiv h
   is-equiv-up-pushout-up-pushout up-c up-d =
     is-equiv-is-equiv-precomp h
@@ -184,8 +199,8 @@ module _
 
   up-pushout-up-pushout-is-equiv :
     is-equiv h →
-    ( up-c : {l : Level} → universal-property-pushout l f g c) →
-    {l : Level} → universal-property-pushout l f g d
+    universal-property-pushout f g c →
+    universal-property-pushout f g d
   up-pushout-up-pushout-is-equiv is-equiv-h up-c Z =
     is-equiv-left-map-triangle
       ( cocone-map f g d)
@@ -196,9 +211,9 @@ module _
       ( up-c Z)
 
   up-pushout-is-equiv-up-pushout :
-    ( up-d : {l : Level} → universal-property-pushout l f g d) →
+    universal-property-pushout f g d →
     is-equiv h →
-    {l : Level} → universal-property-pushout l f g c
+    universal-property-pushout f g c
   up-pushout-is-equiv-up-pushout up-d is-equiv-h Z =
     is-equiv-right-map-triangle
       ( cocone-map f g d)
@@ -216,8 +231,8 @@ uniquely-unique-pushout :
   { l1 l2 l3 l4 l5 : Level}
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {Y : UU l5}
   ( f : S → A) (g : S → B) (c : cocone f g X) (d : cocone f g Y) →
-  ( up-c : {l : Level} → universal-property-pushout l f g c) →
-  ( up-d : {l : Level} → universal-property-pushout l f g d) →
+  universal-property-pushout f g c →
+  universal-property-pushout f g d →
   is-contr
     ( Σ (X ≃ Y) (λ e → htpy-cocone f g (cocone-map f g c (map-equiv e)) d))
 uniquely-unique-pushout f g c d up-c up-d =
@@ -245,18 +260,18 @@ triangle-pullback-property-pushout-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2}
   {B : UU l3} (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   {l : Level} (Y : UU l) →
-  ( cocone-map f g c) ~
-  ( ( tot (λ i' → tot (λ j' → htpy-eq))) ∘
-    ( gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y)))
+  cocone-map f g c ~
+  ( tot (λ i' → tot (λ j' → htpy-eq)) ∘
+    gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y))
 triangle-pullback-property-pushout-universal-property-pushout f g c Y h =
     eq-pair-eq-fiber
       ( eq-pair-eq-fiber
         ( inv (is-section-eq-htpy (h ·l coherence-square-cocone f g c))))
 
 pullback-property-pushout-universal-property-pushout :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2}
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2}
   {B : UU l3} (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  universal-property-pushout l f g c → pullback-property-pushout l f g c
+  universal-property-pushout f g c → pullback-property-pushout f g c
 pullback-property-pushout-universal-property-pushout f g c up-c Y =
   is-equiv-top-map-triangle
     ( cocone-map f g c)
@@ -269,10 +284,10 @@ pullback-property-pushout-universal-property-pushout f g c up-c Y =
     ( up-c Y)
 
 universal-property-pushout-pullback-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2}
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2}
   {B : UU l3} (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  pullback-property-pushout l f g c → universal-property-pushout l f g c
-universal-property-pushout-pullback-property-pushout l f g c pb-c Y =
+  pullback-property-pushout f g c → universal-property-pushout f g c
+universal-property-pushout-pullback-property-pushout f g c pb-c Y =
   is-equiv-left-map-triangle
     ( cocone-map f g c)
     ( tot (λ i' → tot (λ j' → htpy-eq)))
@@ -291,7 +306,7 @@ is-equiv-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g C) →
   is-equiv f →
-  ({l : Level} → universal-property-pushout l f g c) →
+  universal-property-pushout f g c →
   is-equiv (vertical-map-cocone f g c)
 is-equiv-universal-property-pushout f g (i , j , H) is-equiv-f up-c =
   is-equiv-is-equiv-precomp j
@@ -309,7 +324,7 @@ is-equiv-universal-property-pushout f g (i , j , H) is-equiv-f up-c =
 equiv-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
   (e : S ≃ A) (g : S → B) (c : cocone (map-equiv e) g C) →
-  ({l : Level} → universal-property-pushout l (map-equiv e) g c) →
+  universal-property-pushout (map-equiv e) g c →
   B ≃ C
 pr1 (equiv-universal-property-pushout e g c up-c) =
   vertical-map-cocone (map-equiv e) g c
@@ -325,11 +340,11 @@ universal-property-pushout-is-equiv :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g C) →
   is-equiv f → is-equiv (vertical-map-cocone f g c) →
-  ({l : Level} → universal-property-pushout l f g c)
+  universal-property-pushout f g c
 universal-property-pushout-is-equiv
   f g (i , j , H) is-equiv-f is-equiv-j {l} =
   let c = (i , j , H) in
-  universal-property-pushout-pullback-property-pushout l f g c
+  universal-property-pushout-pullback-property-pushout f g c
     ( λ T →
       is-pullback-is-equiv-horizontal-maps
         ( _∘ f)
@@ -346,7 +361,7 @@ is-equiv-universal-property-pushout' :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g C) →
   is-equiv g →
-  ({l : Level} → universal-property-pushout l f g c) →
+  universal-property-pushout f g c →
   is-equiv (horizontal-map-cocone f g c)
 is-equiv-universal-property-pushout' f g c is-equiv-g up-c =
   is-equiv-is-equiv-precomp
@@ -362,7 +377,7 @@ is-equiv-universal-property-pushout' f g c is-equiv-g up-c =
 equiv-universal-property-pushout' :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
   (f : S → A) (e : S ≃ B) (c : cocone f (map-equiv e) C) →
-  ({l : Level} → universal-property-pushout l f (map-equiv e) c) →
+  universal-property-pushout f (map-equiv e) c →
   A ≃ C
 pr1 (equiv-universal-property-pushout' f e c up-c) = pr1 c
 pr2 (equiv-universal-property-pushout' f e c up-c) =
@@ -377,10 +392,10 @@ universal-property-pushout-is-equiv' :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g C) →
   is-equiv g → is-equiv (pr1 c) →
-  ({l : Level} → universal-property-pushout l f g c)
+  universal-property-pushout f g c
 universal-property-pushout-is-equiv' f g (i , j , H) is-equiv-g is-equiv-i {l} =
   let c = (i , j , H) in
-  universal-property-pushout-pullback-property-pushout l f g c
+  universal-property-pushout-pullback-property-pushout f g c
     ( λ T →
       is-pullback-is-equiv-vertical-maps
         ( precomp f T)
@@ -398,12 +413,12 @@ If in the following diagram the left square is a pushout, then the outer
 rectangle is a pushout if and only if the right square is a pushout.
 
 ```text
-      g       k
-   A ----> B ----> C
-   |       |       |
-  f|       |       |
-   v       v       v
-   X ----> Y ----> Z
+       g       k
+    A ----> B ----> C
+    |       |       |
+  f |       |       |
+    ∨       ∨       ∨
+    X ----> Y ----> Z
 ```
 
 ```agda
@@ -412,18 +427,16 @@ module _
   { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   ( f : A → X) (g : A → B) (k : B → C)
   ( c : cocone f g Y) (d : cocone (vertical-map-cocone f g c) k Z)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( up-c : universal-property-pushout f g c)
   where
 
   universal-property-pushout-rectangle-universal-property-pushout-right :
-    ( {l : Level} →
-      universal-property-pushout l (vertical-map-cocone f g c) k d) →
-    ( {l : Level} →
-      universal-property-pushout l f (k ∘ g) (cocone-comp-horizontal f g k c d))
+    universal-property-pushout (vertical-map-cocone f g c) k d →
+    universal-property-pushout f (k ∘ g) (cocone-comp-horizontal f g k c d)
   universal-property-pushout-rectangle-universal-property-pushout-right
     ( up-d)
     { l} =
-    universal-property-pushout-pullback-property-pushout l f
+    universal-property-pushout-pullback-property-pushout f
       ( k ∘ g)
       ( cocone-comp-horizontal f g k c d)
       ( λ W →
@@ -479,18 +492,12 @@ module _
               ( W))))
 
   universal-property-pushout-right-universal-property-pushout-rectangle :
-    ( {l : Level} →
-      universal-property-pushout
-        ( l)
-        ( f)
-        ( k ∘ g)
-        ( cocone-comp-horizontal f g k c d)) →
-    ( {l : Level} →
-      universal-property-pushout l (vertical-map-cocone f g c) k d)
+    universal-property-pushout f (k ∘ g) (cocone-comp-horizontal f g k c d) →
+    universal-property-pushout (vertical-map-cocone f g c) k d
   universal-property-pushout-right-universal-property-pushout-rectangle
     ( up-r)
     { l} =
-    universal-property-pushout-pullback-property-pushout l
+    universal-property-pushout-pullback-property-pushout
       ( vertical-map-cocone f g c)
       ( k)
       ( d)
@@ -554,13 +561,13 @@ map f' : S' → A' making the left square commute, then the outer rectangle is
 again a pushout.
 
 ```text
-       i       g
-   S' ---> S ----> B
-   |   ≃   |       |
-f' |       | f     |
-   v   ≃   v     ⌜ v
-   A' ---> A ----> X
-       j
+         i       g
+     S' ---> S ----> B
+     |   ≃   |       |
+  f' |       | f     |
+     ∨   ≃   ∨     ⌜ ∨
+     A' ---> A ----> X
+         j
 ```
 
 ```agda
@@ -569,14 +576,13 @@ module _
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {S' : UU l5} {A' : UU l6}
   ( f : S → A) (g : S → B) (i : S' → S) (j : A' → A) (f' : S' → A')
   ( c : cocone f g X)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( up-c : universal-property-pushout f g c)
   ( coh : coherence-square-maps i f' f j)
   where
 
   universal-property-pushout-left-extended-by-equivalences :
     is-equiv i → is-equiv j →
-    {l : Level} →
-    universal-property-pushout l
+    universal-property-pushout
       ( f')
       ( g ∘ i)
       ( cocone-comp-horizontal' f' i g f j c coh)
@@ -589,7 +595,7 @@ module _
 
   universal-property-pushout-left-extension-by-equivalences :
     {l : Level} → is-equiv i → is-equiv j →
-    Σ (cocone f' (g ∘ i) X) (universal-property-pushout l f' (g ∘ i))
+    Σ (cocone f' (g ∘ i) X) (universal-property-pushout-Level l f' (g ∘ i))
   pr1 (universal-property-pushout-left-extension-by-equivalences ie je) =
     cocone-comp-horizontal' f' i g f j c coh
   pr2 (universal-property-pushout-left-extension-by-equivalences ie je) =
@@ -602,16 +608,16 @@ If in the following diagram the top square is a pushout, then the outer
 rectangle is a pushout if and only if the bottom square is a pushout.
 
 ```text
-       g
-   A -----> X
-   |        |
-  f|        |
-   v      ⌜ v
-   B -----> Y
-   |        |
-  k|        |
-   v        v
-   C -----> Z
+        g
+    A -----> X
+    |        |
+  f |        |
+    ∨      ⌜ ∨
+    B -----> Y
+    |        |
+  k |        |
+    ∨        ∨
+    C -----> Z
 ```
 
 ```agda
@@ -620,18 +626,14 @@ module _
   { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
   ( f : A → B) (g : A → X) (k : B → C)
   ( c : cocone f g Y) (d : cocone k (horizontal-map-cocone f g c) Z)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( up-c : universal-property-pushout f g c)
   where
 
   universal-property-pushout-rectangle-universal-property-pushout-top :
-    ( {l : Level} →
-      universal-property-pushout l k (horizontal-map-cocone f g c) d) →
-    ( {l : Level} →
-      universal-property-pushout l (k ∘ f) g (cocone-comp-vertical f g k c d))
-  universal-property-pushout-rectangle-universal-property-pushout-top
-    ( up-d)
-    { l} =
-    universal-property-pushout-pullback-property-pushout l
+    universal-property-pushout k (horizontal-map-cocone f g c) d →
+    universal-property-pushout (k ∘ f) g (cocone-comp-vertical f g k c d)
+  universal-property-pushout-rectangle-universal-property-pushout-top up-d =
+    universal-property-pushout-pullback-property-pushout
       ( k ∘ f)
       ( g)
       ( cocone-comp-vertical f g k c d)
@@ -690,14 +692,10 @@ module _
               ( W))))
 
   universal-property-pushout-top-universal-property-pushout-rectangle :
-    ( {l : Level} →
-      universal-property-pushout l (k ∘ f) g (cocone-comp-vertical f g k c d)) →
-    ( {l : Level} →
-      universal-property-pushout l k (horizontal-map-cocone f g c) d)
-  universal-property-pushout-top-universal-property-pushout-rectangle
-    ( up-r)
-    { l} =
-    universal-property-pushout-pullback-property-pushout l k
+    universal-property-pushout (k ∘ f) g (cocone-comp-vertical f g k c d) →
+    universal-property-pushout k (horizontal-map-cocone f g c) d
+  universal-property-pushout-top-universal-property-pushout-rectangle up-r =
+    universal-property-pushout-pullback-property-pushout k
       ( horizontal-map-cocone f g c)
       ( d)
       ( λ W →
@@ -760,17 +758,16 @@ rectangle is again a pushout. This is a special case of the vertical pushout
 pasting lemma.
 
 ```text
-           g'
-       S' ---> B'
-       |       |
-     i | ≃   ≃ | j
-       |       |
-       v   g   v
-       S ----> B
-       |       |
-     f |       |
-       v    ⌜  v
-       A ----> X
+          g'
+      S' ---> B'
+      |       |
+    i | ≃   ≃ | j
+      ∨   g   ∨
+      S ----> B
+      |       |
+    f |       |
+      ∨     ⌜ ∨
+      A ----> X
 ```
 
 ```agda
@@ -779,14 +776,13 @@ module _
   { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} {S' : UU l5} {B' : UU l6}
   ( f : S → A) (g : S → B) (i : S' → S) (j : B' → B) (g' : S' → B')
   ( c : cocone f g X)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( up-c : universal-property-pushout f g c)
   ( coh : coherence-square-maps g' i j g)
   where
 
   universal-property-pushout-top-extended-by-equivalences :
     is-equiv i → is-equiv j →
-    {l : Level} →
-    universal-property-pushout l
+    universal-property-pushout
       ( f ∘ i)
       ( g')
       ( cocone-comp-vertical' i g' j g f c coh)
@@ -799,7 +795,7 @@ module _
 
   universal-property-pushout-top-extension-by-equivalences :
     {l : Level} → is-equiv i → is-equiv j →
-    Σ (cocone (f ∘ i) g' X) (universal-property-pushout l (f ∘ i) g')
+    Σ (cocone (f ∘ i) g' X) (universal-property-pushout-Level l (f ∘ i) g')
   pr1 (universal-property-pushout-top-extension-by-equivalences ie je) =
     cocone-comp-vertical' i g' j g f c coh
   pr2 (universal-property-pushout-top-extension-by-equivalences ie je) =
@@ -811,26 +807,26 @@ module _
 Given a commutative diagram where `i`, `j` and `k` are equivalences,
 
 ```text
-          g'
-      S' ---> B'
-     / \       \
- f' /   \ k     \ j
-   /     v   g   v
-  A'     S ----> B
-    \    |       |
-   i \   | f     |
-      \  v     ⌜ v
-       > A ----> X
+           g'
+       S' ---> B'
+      / \       \
+  f' /   \ k     \ j
+    /     ∨   g   ∨
+   A'     S ----> B
+     \    |       |
+    i \   | f     |
+       \  ∨     ⌜ ∨
+        > A ----> X
 ```
 
 the induced square is a pushout:
 
 ```text
-   S' ---> B'
-   |       |
-   |       |
-   v     ⌜ v
-   A' ---> X.
+  S' ---> B'
+  |       |
+  |       |
+  ∨     ⌜ ∨
+  A' ---> X.
 ```
 
 This combines both special cases of the pushout pasting lemmas for equivalences.
@@ -846,14 +842,14 @@ module _
   ( f : S → A) (g : S → B) (f' : S' → A') (g' : S' → B')
   ( i : A' → A) (j : B' → B) (k : S' → S)
   ( c : cocone f g X)
-  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  ( up-c : universal-property-pushout f g c)
   ( coh-l : coherence-square-maps k f' f i)
   ( coh-r : coherence-square-maps g' k j g)
   where
 
   universal-property-pushout-extension-by-equivalences :
     {l : Level} → is-equiv i → is-equiv j → is-equiv k →
-    Σ (cocone f' g' X) (λ d → universal-property-pushout l f' g' d)
+    Σ (cocone f' g' X) (universal-property-pushout-Level l f' g')
   universal-property-pushout-extension-by-equivalences ie je ke =
     universal-property-pushout-top-extension-by-equivalences
       ( f')
@@ -875,8 +871,7 @@ module _
 
   universal-property-pushout-extended-by-equivalences :
     is-equiv i → is-equiv j → is-equiv k →
-    {l : Level} →
-    universal-property-pushout l
+    universal-property-pushout
       ( f')
       ( g')
       ( comp-cocone-hom-span f g f' g' i j k c coh-l coh-r)
@@ -913,14 +908,12 @@ module _
   where
 
   universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv :
-    ( {l : Level} →
-      universal-property-pushout l f g (h , k , bottom)) →
-    ( {l : Level} →
-      universal-property-pushout l f' g' (h' , k' , top))
+    universal-property-pushout f g (h , k , bottom) →
+    universal-property-pushout f' g' (h' , k' , top)
   universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
     ( up-bottom)
     { l = l} =
-    universal-property-pushout-pullback-property-pushout l f' g'
+    universal-property-pushout-pullback-property-pushout f' g'
       ( h' , k' , top)
       ( λ W →
         is-pullback-bottom-is-pullback-top-cube-is-equiv
@@ -961,14 +954,12 @@ module _
             ( W)))
 
   universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv :
-    ( {l : Level} →
-      universal-property-pushout l f' g' (h' , k' , top)) →
-    ( {l : Level} →
-      universal-property-pushout l f g (h , k , bottom))
+    universal-property-pushout f' g' (h' , k' , top) →
+    universal-property-pushout f g (h , k , bottom)
   universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
     ( up-top)
     { l = l} =
-    universal-property-pushout-pullback-property-pushout l f g
+    universal-property-pushout-pullback-property-pushout f g
       ( h , k , bottom)
       ( λ W →
         is-pullback-top-is-pullback-bottom-cube-is-equiv

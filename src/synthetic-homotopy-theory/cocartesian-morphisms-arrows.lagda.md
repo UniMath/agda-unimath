@@ -31,12 +31,14 @@ if the [commuting square](foundation-core.commuting-squares-of-maps.md)
     A -----> X
     |        |
   f |   h    | g
-    V        V
+    ∨        ∨
     B -----> Y
         j
 ```
 
-is a [pushout](synthetic-homotopy-theory.pushouts.md) square.
+is a [pushout](synthetic-homotopy-theory.pushouts.md) square. In this instance,
+we also say that `g` is a
+{{#concept "cobase change" Disambiguation="maps of types"}} of `f`.
 
 ## Definitions
 
@@ -107,8 +109,7 @@ module _
     cocone-hom-arrow f g hom-arrow-cocartesian-hom-arrow
 
   universal-property-cocartesian-hom-arrow :
-    {l : Level} →
-    universal-property-pushout l
+    universal-property-pushout
       ( f)
       ( map-domain-cocartesian-hom-arrow)
       ( cocone-cocartesian-hom-arrow)

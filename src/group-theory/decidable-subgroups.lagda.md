@@ -41,7 +41,7 @@ predicate on the type of elements of `G`.
 
 ```agda
 decidable-subset-Group :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (G : Group l1) → UU (lsuc l ⊔ l1)
 decidable-subset-Group l G = decidable-subtype l (type-Group G)
 
 is-set-decidable-subset-Group :
@@ -121,7 +121,7 @@ module _
     is-prop-is-subgroup-subset-Group G (subset-decidable-subset-Group G P)
 
 Decidable-Subgroup :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (G : Group l1) → UU (lsuc l ⊔ l1)
 Decidable-Subgroup l G =
   type-subtype (is-subgroup-prop-decidable-subset-Group {l2 = l} G)
 

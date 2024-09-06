@@ -96,3 +96,8 @@ module _
     pr2 (pr1 (is-torsorial-Id' a)) = refl
     pr2 (is-torsorial-Id' a) (.a , refl) = refl
 ```
+
+### See also
+
+- [Discrete relations](foundation.discrete-relations.md) are binary torsorial
+  type families.

@@ -31,7 +31,7 @@ A **morphism of twisted arrows** from `f : A → B` to `g : X → Y` is a triple
       A <----- X
       |        |
     f |        | g
-      V        V
+      ∨        ∨
       B -----> Y
           j
   ```

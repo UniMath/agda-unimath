@@ -11,13 +11,10 @@ open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
-open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-identifications
-open import foundation-core.constant-maps
-open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.whiskering-identifications-concatenation
@@ -216,6 +213,20 @@ module _
     ( ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
       ( inv (compute-left-refl-horizontal-concat-Id² α))) ∙
     ( inv right-unit)
+```
+
+### Vertical inverses distribute over horizontal concatenation
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z}
+  where
+
+  distributive-inv-horizontal-concat-Id² :
+    (α : p ＝ q) (β : u ＝ v) →
+    inv (horizontal-concat-Id² α β) ＝ horizontal-concat-Id² (inv α) (inv β)
+  distributive-inv-horizontal-concat-Id² refl refl =
+    refl
 ```
 
 ### Definition of horizontal inverse

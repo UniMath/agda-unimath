@@ -17,6 +17,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.type-arithmetic-dependent-pair-types
@@ -119,7 +120,7 @@ module _
     is-finite X ≃
     ( has-decidable-equality X × type-trunc-Prop (Σ ℕ (λ n → Fin n ↠ X)))
   is-finite-iff-∃-surjection-has-decidable-equality =
-    equiv-prop
+    equiv-iff-is-prop
       ( is-prop-is-finite X)
       ( is-prop-product is-prop-has-decidable-equality is-prop-type-trunc-Prop)
       ( λ fin-X → is-finite-if-∃-surjection-has-decidable-equality fin-X)

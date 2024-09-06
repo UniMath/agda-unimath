@@ -11,8 +11,10 @@ open import foundation-core.commuting-squares-of-maps public
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-homotopies
 open import foundation.commuting-triangles-of-maps
 open import foundation.function-extensionality
+open import foundation.homotopy-algebra
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.transposition-identifications-along-equivalences
@@ -425,11 +427,11 @@ As a corollary, whenever we have two coherence squares touching at a vertex:
   A -----> B
   |        |
   |   H ⇗  |
-  V        V
+  ∨        ∨
   C -----> D -----> X
            |        |
            |   K ⇗  |
-           V        V
+           ∨        ∨
            Y -----> Z ,
 ```
 
@@ -465,11 +467,11 @@ Given a square of commuting squares, like so:
   A -----> B -----> C
   |        |        |
   |    ⇗   |    ⇗   |
-  V        V        V
+  ∨        ∨        ∨
   X -----> Y -----> Z
   |        |        |
   |    ⇗   |    ⇗   |
-  V        V        V
+  ∨        ∨        ∨
   M -----> N -----> O ,
 ```
 
@@ -603,32 +605,27 @@ homotopy that is homotopic to first transposing the squares and then composing
 them.
 
 ```text
-      tl       tr                tr ∘ tl
-  A -----> B -----> C         A --------> C
-  |        |        |         |           |
-l |       m|        | r  ↦   l|          r|
-  |   H    |   K    |         |   H | K   |
-  ∨        ∨        ∨         ∨           ∨
-  X -----> Y -----> Z         X --------> Z
-      bl       br                br ∘ bl
+          tl       tr                tr ∘ tl
+      A -----> B -----> C         A --------> C
+      |        |        |         |           |
+    l |   H  m |   K    | r  ↦  l |   H | K   | r
+      ∨        ∨        ∨         ∨           ∨
+      X -----> Y -----> Z         X --------> Z
+          bl       br                br ∘ bl
 
-         -                          -
-         |                          |
-         ∨                          ∨
+               ↧                        ↧
 
-           -∘r
-    W^Z ------> W^C
-     |           |
--∘br |    W^K    | -∘tr           W^(H | K)
-     |           |
-     ∨     -∘m   ∨                   ~
-    W^Y ------> W^B   |->
-     |           |                  W^K
--∘bl |    W^H    | -∘tl             ---
-     |           |                  W^H
-     ∨           ∨
-    W^X ------> W^A
-          -∘l
+             - ∘ r
+        W^Z ------> W^C
+         |           |
+  - ∘ br |    W^K    | - ∘ tr        W^(H | K)
+         ∨   - ∘ m   ∨                  ~
+        W^Y ------> W^B       ↦
+         |           |                 W^K
+  - ∘ bl |    W^H    | - ∘ tl          ---
+         ∨           ∨                 W^H
+        W^X ------> W^A
+             - ∘ l
 ```
 
 ```agda
@@ -821,7 +818,7 @@ Taking a square of the form
   X -----> A -----> B
            |        |
       left |   H    | right
-           v        v
+           ∨        ∨
            C -----> D
              bottom
 ```
@@ -832,7 +829,7 @@ and transposing it by precomposition results in the square
   W^D -----> W^B
    |          |
    |   W^H    |
-   v          v   -∘f
+   ∨          ∨  - ∘ f
   W^C -----> W^A -----> W^X
 ```
 
@@ -998,4 +995,170 @@ module _
     ( K)
     ( h) =
     compute-concat-htpy-precomp H K W h
+```
+
+### Collapsing inner squares in pasted squares composed of triangles
+
+Consider two commuting squares, composed in total of four commuting triangles,
+which take the following form:
+
+```text
+           top
+     A -----------> C
+     |             ∧|
+     |           /  |
+     |     bl  /    |
+  tl |       /      | tr
+     |     /        |
+     |   /          |
+     ∨ /    mid     ∨
+     B -----------> Y
+     |             ∧|
+     |           /  |
+     |     tr  /    |
+  bl |       /      | br
+     |     /        |
+     |   /          |
+     ∨ /            ∨
+     C -----------> Z .
+          bottom
+```
+
+Note that the bottom-left vertex is the same as the top-right vertex, and the
+diagonals are not arbitrary.
+
+If the square that arises in the middle,
+
+```text
+        bl
+     B ----> C
+     |       |
+  bl |       | tr
+     ∨       ∨
+     C ----> Y ,
+        tr
+```
+
+is homotopic to the reflexive homotopy `refl-htpy : tr ∘ bl ~ tr ∘ bl`, then the
+whole rectangle collapses (is homotopic) to the
+[horizontal composition](foundation.homotopy-algebra.md)
+
+```text
+                         Y
+                        ∧ \
+                  tr  /     \  br
+                    /         \
+        top       /             ∨
+  A -----------> C -----------> Z .
+   \             ∧    bottom
+     \         /
+   tl  \     /  bl
+         ∨ /
+          B
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3}
+  {Y : UU l4} {Z : UU l5}
+  (top : A → C) (top-left : A → B) (top-right : C → Y)
+  (mid : B → Y)
+  (bottom-left : B → C) (bottom-right : Y → Z) (bottom : C → Z)
+  (top-left-triangle : coherence-triangle-maps' top bottom-left top-left)
+  (top-right-triangle : coherence-triangle-maps mid top-right bottom-left)
+  (bottom-left-triangle : coherence-triangle-maps' mid top-right bottom-left)
+  (bottom-right-triangle :
+    coherence-triangle-maps bottom bottom-right top-right)
+  where
+
+  pasting-coherence-squares-collapse-triangles' :
+    bottom-left-triangle ∙h top-right-triangle ~ refl-htpy →
+    pasting-vertical-coherence-square-maps
+      ( top)
+      ( top-left)
+      ( top-right)
+      ( mid)
+      ( bottom-left)
+      ( bottom-right)
+      ( bottom)
+      ( horizontal-pasting-up-diagonal-coherence-triangle-maps
+        ( top)
+        ( top-left)
+        ( top-right)
+        ( mid)
+        ( top-left-triangle)
+        ( top-right-triangle))
+      ( horizontal-pasting-up-diagonal-coherence-triangle-maps
+        ( mid)
+        ( bottom-left)
+        ( bottom-right)
+        ( bottom)
+        ( bottom-left-triangle)
+        ( bottom-right-triangle)) ~
+    horizontal-concat-htpy'
+      ( bottom-right-triangle)
+      ( top-left-triangle)
+  pasting-coherence-squares-collapse-triangles' H =
+    left-whisker-concat-coherence-square-homotopies
+      ( bottom-right-triangle ·r bottom-left ·r top-left)
+      ( refl-htpy)
+      ( _)
+      ( _)
+      ( _)
+      ( ( inv-htpy
+          ( distributive-left-whisker-comp-concat
+            ( bottom-right)
+            ( bottom-left-triangle ·r top-left)
+            ( ( top-right-triangle ·r top-left) ∙h
+              ( top-right ·l top-left-triangle)))) ∙h
+        ( left-whisker-comp²
+          ( bottom-right)
+          ( inv-htpy
+            ( right-whisker-concat-coherence-triangle-homotopies
+              ( refl-htpy)
+              ( top-right-triangle ·r top-left)
+              ( bottom-left-triangle ·r top-left)
+              ( inv-htpy H ·r top-left)
+              ( top-right ·l top-left-triangle)))) ∙h
+        ( preserves-comp-left-whisker-comp
+          ( bottom-right)
+          ( top-right)
+          ( top-left-triangle))) ∙h
+    ( ap-concat-htpy'
+      ( (bottom-right ∘ top-right) ·l top-left-triangle)
+      ( right-unit-htpy))
+
+  pasting-coherence-squares-collapse-triangles :
+    bottom-left-triangle ∙h top-right-triangle ~ refl-htpy →
+    pasting-vertical-coherence-square-maps
+      ( top)
+      ( top-left)
+      ( top-right)
+      ( mid)
+      ( bottom-left)
+      ( bottom-right)
+      ( bottom)
+      ( horizontal-pasting-up-diagonal-coherence-triangle-maps
+        ( top)
+        ( top-left)
+        ( top-right)
+        ( mid)
+        ( top-left-triangle)
+        ( top-right-triangle))
+      ( horizontal-pasting-up-diagonal-coherence-triangle-maps
+        ( mid)
+        ( bottom-left)
+        ( bottom-right)
+        ( bottom)
+        ( bottom-left-triangle)
+        ( bottom-right-triangle)) ~
+    horizontal-concat-htpy
+      ( bottom-right-triangle)
+      ( top-left-triangle)
+  pasting-coherence-squares-collapse-triangles H =
+    ( pasting-coherence-squares-collapse-triangles' H) ∙h
+    ( coh-horizontal-concat-htpy
+      ( bottom-right-triangle)
+      ( top-left-triangle))
 ```

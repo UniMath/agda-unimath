@@ -7,6 +7,7 @@ module category-theory.slice-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.functors-precategories
 open import category-theory.precategories
 open import category-theory.products-in-precategories
 open import category-theory.pullbacks-in-precategories
@@ -22,6 +23,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
@@ -263,7 +265,11 @@ module _
         eq-hom-Slice-Precategory C A _ _ (pr2 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
 
       q :
-        ∀ k →
+        (k :
+          hom-Precategory
+            ( Slice-Precategory C A)
+            ( Z , comp-hom-Precategory C f h₁)
+            ( W , p)) →
         is-prop
           ( ( comp-hom-Precategory
               (Slice-Precategory C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
@@ -275,7 +281,11 @@ module _
           ( is-set-hom-Slice-Precategory C A _ _ _ _)
 
       σ :
-        ∀ k →
+        (k :
+          hom-Precategory
+            ( Slice-Precategory C A)
+            ( Z , comp-hom-Precategory C f h₁)
+            ( W , p)) →
         ( ( comp-hom-Precategory
             ( Slice-Precategory C A)
             ( p₁ , α₁)
@@ -331,7 +341,7 @@ module _
                   ( p₂' , α')))))
 
       q :
-        ∀ k' →
+        (k' : hom-Precategory C W' W) →
         is-prop
           (( comp-hom-Precategory C p₁ k' ＝ p₁') ×
           ( comp-hom-Precategory C p₂ k' ＝ p₂'))
@@ -363,7 +373,7 @@ module _
       is-product-obj-Precategory
         (Slice-Precategory C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂)
     equiv-is-pullback-is-product-Slice-Precategory =
-      equiv-prop
+      equiv-iff-is-prop
         ( is-prop-is-pullback-obj-Precategory C A X Y f g W p₁ p₂ α)
         ( is-prop-is-product-obj-Precategory
           (Slice-Precategory C A) (X , f) (Y , g) (W , p) (p₁ , α₁) (p₂ , α₂))
@@ -442,4 +452,19 @@ module _
       map-inv-pullback-product-Slice-Precategory
       is-section-map-inv-pullback-product-Slice-Precategory
       is-retraction-map-inv-pullback-product-Slice-Precategory
+```
+
+### The slice precategory has a forgetful functor
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (X : obj-Precategory C)
+  where
+
+  forgetful-functor-Slice-Precategory :
+    functor-Precategory (Slice-Precategory C X) C
+  pr1 forgetful-functor-Slice-Precategory (Y , f) = Y
+  pr1 (pr2 forgetful-functor-Slice-Precategory) (f , pf) = f
+  pr1 (pr2 (pr2 forgetful-functor-Slice-Precategory)) g h = refl
+  pr2 (pr2 (pr2 forgetful-functor-Slice-Precategory)) x = refl
 ```

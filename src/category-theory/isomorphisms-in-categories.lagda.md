@@ -212,7 +212,7 @@ module _
 ### The type of isomorphisms form a set
 
 The type of isomorphisms between objects `x y : A` is a
-[subtype](foundation-core.subtypes.md) of the [foundation-core.sets.md)
+[subtype](foundation-core.subtypes.md) of the [set](foundation-core.sets.md)
 `hom x y` since being an isomorphism is a proposition.
 
 ```agda

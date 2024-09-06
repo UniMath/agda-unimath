@@ -8,7 +8,6 @@ module orthogonal-factorization-systems.factorizations-of-maps-global-function-c
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -44,9 +43,9 @@ classes `L` and `R`** of a map `f : A → B` is a pair of maps `l : A → X` and
 
 ```text
          X
-        ^ \
+        ∧ \
  L ∋ l /   \ r ∈ R
-      /     v
+      /     ∨
     A -----> B
         f
 ```

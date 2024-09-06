@@ -29,7 +29,7 @@ A subset of a semiring is a subtype of the underlying type of a semiring
 
 ```agda
 subset-Semiring :
-  (l : Level) {l1 : Level} (R : Semiring l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (R : Semiring l1) → UU (lsuc l ⊔ l1)
 subset-Semiring l R = subtype l (type-Semiring R)
 
 is-set-subset-Semiring :

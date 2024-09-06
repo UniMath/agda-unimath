@@ -9,9 +9,11 @@ module real-numbers.rational-real-numbers where
 ```agda
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.embeddings
@@ -55,45 +57,35 @@ is-dedekind-cut-le-ℚ :
     (λ (q : ℚ) → le-ℚ-Prop q x)
     (λ (r : ℚ) → le-ℚ-Prop x r)
 is-dedekind-cut-le-ℚ x =
-  ( left-∃-le-ℚ x , right-∃-le-ℚ x) ,
+  ( exists-lesser-ℚ x , exists-greater-ℚ x) ,
   ( ( λ (q : ℚ) →
       dense-le-ℚ q x ,
-      elim-exists-Prop
-        ( λ r → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop r x))
+      elim-exists
         ( le-ℚ-Prop q x)
-        ( λ r (H , H') → transitive-le-ℚ q r x H H')) ,
+        ( λ r (H , H') → transitive-le-ℚ q r x H' H)) ,
     ( λ (r : ℚ) →
       α x r ∘ dense-le-ℚ x r ,
-      elim-exists-Prop
-        ( λ q → product-Prop ( le-ℚ-Prop q r) ( le-ℚ-Prop x q))
+      elim-exists
         ( le-ℚ-Prop x r)
-        ( λ q (H , H') → transitive-le-ℚ x q r H' H))) ,
+        ( λ q (H , H') → transitive-le-ℚ x q r H H'))) ,
   ( λ (q : ℚ) (H , H') → asymmetric-le-ℚ q x H H') ,
   ( located-le-ℚ x)
   where
     α :
       (a b : ℚ) →
-      ∃ ℚ (λ r → le-ℚ a r × le-ℚ r b) →
-      ∃ ℚ (λ r → le-ℚ r b × le-ℚ a r)
+      exists ℚ (λ r → le-ℚ-Prop a r ∧ le-ℚ-Prop r b) →
+      exists ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r)
     α a b =
-      elim-exists-Prop
-        ( ( λ r →
-            product-Prop
-              ( le-ℚ-Prop a r)
-              ( le-ℚ-Prop r b)))
-        ( exists-Prop ℚ
-          ( λ r →
-            product-Prop
-              ( le-ℚ-Prop r b)
-              ( le-ℚ-Prop a r)))
-        ( λ r ( p , q) → intro-∃ r ( q , p))
+      elim-exists
+        ( ∃ ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r))
+        ( λ r ( p , q) → intro-exists r ( q , p))
 ```
 
 ### The canonical map from `ℚ` to `ℝ`
 
 ```agda
-real-rational : ℚ → ℝ lzero
-real-rational x =
+real-ℚ : ℚ → ℝ lzero
+real-ℚ x =
   real-dedekind-cut
     ( λ (q : ℚ) → le-ℚ-Prop q x)
     ( λ (r : ℚ) → le-ℚ-Prop x r)
@@ -109,9 +101,7 @@ module _
 
   is-rational-ℝ-Prop : Prop l
   is-rational-ℝ-Prop =
-    product-Prop
-      ( neg-Prop (lower-cut-ℝ x p))
-      ( neg-Prop (upper-cut-ℝ x p))
+    (¬' (lower-cut-ℝ x p)) ∧ (¬' (upper-cut-ℝ x p))
 
   is-rational-ℝ : UU l
   is-rational-ℝ = type-Prop is-rational-ℝ-Prop
@@ -129,21 +119,19 @@ all-eq-is-rational-ℝ x p q H H' =
   left-case : le-ℚ p q → p ＝ q
   left-case I =
     ex-falso
-      ( elim-disjunction-Prop
-        ( lower-cut-ℝ x p)
-        ( upper-cut-ℝ x q)
+      ( elim-disjunction
         ( empty-Prop)
-        ( pr1 H , pr2 H')
+        ( pr1 H)
+        ( pr2 H')
         ( is-located-lower-upper-cut-ℝ x p q I))
 
   right-case : le-ℚ q p → p ＝ q
   right-case I =
     ex-falso
-      ( elim-disjunction-Prop
-        ( lower-cut-ℝ x q)
-        ( upper-cut-ℝ x p)
+      ( elim-disjunction
         ( empty-Prop)
-        ( pr1 H' , pr2 H)
+        ( pr1 H')
+        ( pr2 H)
         ( is-located-lower-upper-cut-ℝ x q p I))
 
 is-prop-rational-real : {l : Level} (x : ℝ l) → is-prop (Σ ℚ (is-rational-ℝ x))
@@ -185,30 +173,30 @@ module _
 ### The real embedding of a rational number is rational
 
 ```agda
-is-rational-real-rational : (p : ℚ) → is-rational-ℝ (real-rational p) p
-is-rational-real-rational p = irreflexive-le-ℚ p , irreflexive-le-ℚ p
+is-rational-real-ℚ : (p : ℚ) → is-rational-ℝ (real-ℚ p) p
+is-rational-real-ℚ p = (irreflexive-le-ℚ p , irreflexive-le-ℚ p)
 ```
 
 ### Rational real numbers are embedded rationals
 
 ```agda
 eq-real-rational-is-rational-ℝ :
-  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-rational q ＝ x
+  (x : ℝ lzero) (q : ℚ) (H : is-rational-ℝ x q) → real-ℚ q ＝ x
 eq-real-rational-is-rational-ℝ x q H =
   eq-eq-lower-cut-ℝ
-    ( real-rational q)
+    ( real-ℚ q)
     ( x)
     ( eq-has-same-elements-subtype
       ( λ p → le-ℚ-Prop p q)
       ( lower-cut-ℝ x)
       ( λ r →
         pair
-          ( λ I → elim-disjunction-Prop
-            ( lower-cut-ℝ x r)
-            ( upper-cut-ℝ x q)
-            ( lower-cut-ℝ x r)
-            ( id , λ H' → ex-falso (pr2 H H'))
-            ( is-located-lower-upper-cut-ℝ x r q I))
+          ( λ I →
+            elim-disjunction
+              ( lower-cut-ℝ x r)
+              ( id)
+              ( λ H' → ex-falso (pr2 H H'))
+              ( is-located-lower-upper-cut-ℝ x r q I))
           ( trichotomy-le-ℚ r q
             ( λ I _ → I)
             ( λ E H' → ex-falso (pr1 (tr (is-rational-ℝ x) (inv E) H) H'))
@@ -218,25 +206,25 @@ eq-real-rational-is-rational-ℝ x q H =
 ### The cannonical map from rationals to rational reals
 
 ```agda
-rational-ℝ-rational : ℚ → Rational-ℝ lzero
-rational-ℝ-rational q = real-rational q , q , is-rational-real-rational q
+rational-real-ℚ : ℚ → Rational-ℝ lzero
+rational-real-ℚ q = (real-ℚ q , q , is-rational-real-ℚ q)
 ```
 
 ### The rationals and rational reals are equivalent
 
 ```agda
-is-section-rational-ℝ-rational :
+is-section-rational-real-ℚ :
   (q : ℚ) →
-  rational-rational-ℝ (rational-ℝ-rational q) ＝ q
-is-section-rational-ℝ-rational q = refl
+  rational-rational-ℝ (rational-real-ℚ q) ＝ q
+is-section-rational-real-ℚ q = refl
 
-is-retraction-rational-ℝ-rational :
+is-retraction-rational-real-ℚ :
   (x : Rational-ℝ lzero) →
-  rational-ℝ-rational (rational-rational-ℝ x) ＝ x
-is-retraction-rational-ℝ-rational (x , q , H) =
+  rational-real-ℚ (rational-rational-ℝ x) ＝ x
+is-retraction-rational-real-ℚ (x , q , H) =
   eq-type-subtype
     subtype-rational-real
-    ( ap real-rational α ∙ eq-real-rational-is-rational-ℝ x q H)
+    ( ap real-ℚ α ∙ eq-real-rational-is-rational-ℝ x q H)
   where
     α : rational-rational-ℝ (x , q , H) ＝ q
     α = refl
@@ -248,9 +236,9 @@ pr2 equiv-rational-real =
   where
   section-rational-rational-ℝ : section rational-rational-ℝ
   section-rational-rational-ℝ =
-    rational-ℝ-rational , is-section-rational-ℝ-rational
+    (rational-real-ℚ , is-section-rational-real-ℚ)
 
   retraction-rational-rational-ℝ : retraction rational-rational-ℝ
   retraction-rational-rational-ℝ =
-    rational-ℝ-rational , is-retraction-rational-ℝ-rational
+    (rational-real-ℚ , is-retraction-rational-real-ℚ)
 ```

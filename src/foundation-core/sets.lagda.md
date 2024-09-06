@@ -12,8 +12,10 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
+open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -23,7 +25,9 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is a set if its identity types are propositions.
+A type is a {{#concept "set" Agda=is-set}} if its
+[identity types](foundation-core.identity-types.md) are
+[propositions](foundation-core.propositions.md).
 
 ## Definition
 
@@ -46,8 +50,7 @@ module _
     is-set-type-Set = pr2 X
 
   Id-Prop : (x y : type-Set) → Prop l
-  pr1 (Id-Prop x y) = (x ＝ y)
-  pr2 (Id-Prop x y) = is-set-type-Set x y
+  Id-Prop x y = (x ＝ y , is-set-type-Set x y)
 ```
 
 ## Properties
@@ -83,6 +86,27 @@ module _
     axiom-K-is-set H x p =
       ( inv (contraction (is-proof-irrelevant-is-prop (H x x) refl) refl)) ∙
       ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
+```
+
+### A type is a set if and only if it satisfies uniqueness of identity proofs
+
+A type `A` is said to satisfy
+{{#concept "uniqueness of identity proofs" Agda=has-uip}} if for all elements
+`x y : A` all equality proofs `x ＝ y` are equal.
+
+```agda
+has-uip : {l : Level} → UU l → UU l
+has-uip A = (x y : A) → all-elements-equal (x ＝ y)
+
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-set-has-uip : is-set A → has-uip A
+  is-set-has-uip is-set-A x y = eq-is-prop' (is-set-A x y)
+
+  has-uip-is-set : has-uip A → is-set A
+  has-uip-is-set uip-A x y = is-prop-all-elements-equal (uip-A x y)
 ```
 
 ### If a reflexive binary relation maps into the identity type of `A`, then `A` is a set
@@ -165,4 +189,22 @@ module _
   pr1 equiv-set-Set = equiv-Set
   pr2 equiv-set-Set =
     is-set-equiv-is-set (is-set-type-Set A) (is-set-type-Set B)
+```
+
+### If a type injects into a set, then it is a set
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-set-is-injective :
+      {f : A → B} → is-set B → is-injective f → is-set A
+    is-set-is-injective {f} H I =
+      is-set-prop-in-id
+        ( λ x y → f x ＝ f y)
+        ( λ x y → H (f x) (f y))
+        ( λ x → refl)
+        ( λ x y → I)
 ```

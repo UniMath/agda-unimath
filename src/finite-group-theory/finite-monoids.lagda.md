@@ -36,6 +36,7 @@ open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```

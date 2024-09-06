@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
+open import foundation.logical-equivalences
 open import foundation.precomposition-functions-into-subuniverses
 open import foundation.subtype-identity-principle
 open import foundation.unit-type
@@ -165,7 +166,7 @@ abstract
     extension-property-propositional-truncation P f →
     is-propositional-truncation P f
   is-propositional-truncation-extension-property P f up-P Q =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-Π (λ x → is-prop-type-Prop Q))
       ( is-prop-Π (λ x → is-prop-type-Prop Q))
       ( up-P Q)
@@ -183,7 +184,7 @@ abstract
     is-propositional-truncation P' f' →
     is-equiv h
   is-equiv-is-ptruncation-is-ptruncation P P' f f' h H is-ptr-P is-ptr-P' =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-type-Prop P)
       ( is-prop-type-Prop P')
       ( map-inv-is-equiv (is-ptr-P' P) f)
@@ -278,7 +279,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     (g : type-Prop P → A) → is-propositional-truncation P f
   is-propositional-truncation-has-section {A = A} P f g Q =
-    is-equiv-is-prop
+    is-equiv-has-converse-is-prop
       ( is-prop-function-type (is-prop-type-Prop Q))
       ( is-prop-function-type (is-prop-type-Prop Q))
       ( λ h → h ∘ g)
@@ -358,7 +359,7 @@ abstract
       ( is-equiv-comp
         ( λ h a a' → h a (f' a'))
         ( λ h a p' → h (f a) p')
-        ( is-ptr-f (pair (type-hom-Prop P' Q) (is-prop-type-hom-Prop P' Q)))
+        ( is-ptr-f (pair (type-hom-Prop P' Q) (is-prop-hom-Prop P' Q)))
         ( is-equiv-map-Π-is-fiberwise-equiv
           ( λ a → is-ptr-f' Q)))
 ```

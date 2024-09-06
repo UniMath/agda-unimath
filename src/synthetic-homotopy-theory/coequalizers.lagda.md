@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.coequalizers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.double-arrows
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.transport-along-identifications
@@ -23,16 +24,19 @@ open import synthetic-homotopy-theory.universal-property-coequalizers
 
 ## Idea
 
-The **coequalizer** of a parallel pair `f, g : A → B` is the colimiting
-[cofork](synthetic-homotopy-theory.coforks.md), i.e. a cofork with the
+The **coequalizer** of a [double arrow](foundation.double-arrows.md)
+`f, g : A → B` is the colimiting [cofork](synthetic-homotopy-theory.coforks.md),
+i.e. a cofork with the
 [universal property of coequalizers](synthetic-homotopy-theory.universal-property-coequalizers.md).
 
 ## Properties
 
-### All parallel pairs admit a coequalizer
+### All double arrows admit a coequalizer
 
-The **canonical coequalizer** may be obtained as a
-[pushout](synthetic-homotopy-theory.pushouts.md) of the span
+The
+{{#concept "standard coequalizer" Disambiguation="of types" Agda=standard-coequalizer}}
+may be obtained as a [pushout](synthetic-homotopy-theory.pushouts.md) of the
+span
 
 ```text
      ∇         [f,g]
@@ -55,57 +59,53 @@ the definition is marked abstract.
 
 ```agda
 module _
-  { l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
+  {l1 l2 : Level} (a : double-arrow l1 l2)
   where
 
   abstract
-    canonical-coequalizer : UU (l1 ⊔ l2)
-    canonical-coequalizer =
+    standard-coequalizer : UU (l1 ⊔ l2)
+    standard-coequalizer =
       pushout
-        ( vertical-map-span-cocone-cofork f g)
-        ( horizontal-map-span-cocone-cofork f g)
+        ( vertical-map-span-cocone-cofork a)
+        ( horizontal-map-span-cocone-cofork a)
 
-    cofork-canonical-coequalizer : cofork f g canonical-coequalizer
-    cofork-canonical-coequalizer =
-      cofork-cocone-codiagonal f g
+    cofork-standard-coequalizer : cofork a standard-coequalizer
+    cofork-standard-coequalizer =
+      cofork-cocone-codiagonal a
         ( cocone-pushout
-          ( vertical-map-span-cocone-cofork f g)
-          ( horizontal-map-span-cocone-cofork f g))
+          ( vertical-map-span-cocone-cofork a)
+          ( horizontal-map-span-cocone-cofork a))
 
-    dup-canonical-coequalizer :
-      { l : Level} →
-      dependent-universal-property-coequalizer l f g
-        ( cofork-canonical-coequalizer)
-    dup-canonical-coequalizer =
+    dup-standard-coequalizer :
+      dependent-universal-property-coequalizer a cofork-standard-coequalizer
+    dup-standard-coequalizer =
       dependent-universal-property-coequalizer-dependent-universal-property-pushout
-        ( f)
-        ( g)
-        ( cofork-canonical-coequalizer)
+        ( a)
+        ( cofork-standard-coequalizer)
         ( λ P →
           tr
             ( λ c →
               is-equiv
                 ( dependent-cocone-map
-                  ( vertical-map-span-cocone-cofork f g)
-                  ( horizontal-map-span-cocone-cofork f g)
+                  ( vertical-map-span-cocone-cofork a)
+                  ( horizontal-map-span-cocone-cofork a)
                   ( c)
                   ( P)))
             ( inv
               ( is-retraction-map-inv-is-equiv
-                ( is-equiv-cofork-cocone-codiagonal f g)
+                ( is-equiv-cofork-cocone-codiagonal a)
                 ( cocone-pushout
-                  ( vertical-map-span-cocone-cofork f g)
-                  ( horizontal-map-span-cocone-cofork f g))))
+                  ( vertical-map-span-cocone-cofork a)
+                  ( horizontal-map-span-cocone-cofork a))))
             ( dup-pushout
-              ( vertical-map-span-cocone-cofork f g)
-              ( horizontal-map-span-cocone-cofork f g)
+              ( vertical-map-span-cocone-cofork a)
+              ( horizontal-map-span-cocone-cofork a)
               ( P)))
 
-    up-canonical-coequalizer :
-      { l : Level} →
-      universal-property-coequalizer l f g cofork-canonical-coequalizer
-    up-canonical-coequalizer =
-      universal-property-dependent-universal-property-coequalizer f g
-        ( cofork-canonical-coequalizer)
-        ( dup-canonical-coequalizer)
+    up-standard-coequalizer :
+      universal-property-coequalizer a cofork-standard-coequalizer
+    up-standard-coequalizer =
+      universal-property-dependent-universal-property-coequalizer a
+        ( cofork-standard-coequalizer)
+        ( dup-standard-coequalizer)
 ```

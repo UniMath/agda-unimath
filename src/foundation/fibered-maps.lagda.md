@@ -42,13 +42,12 @@ open import foundation-core.truncation-levels
 Consider a diagram of the form
 
 ```text
-  A         B
-  |         |
- f|         |g
-  |         |
-  V         V
-  X ------> Y
-       i
+    A         B
+    |         |
+  f |         | g
+    ∨         ∨
+    X ------> Y
+         i
 ```
 
 A **fibered map** from `f` to `g` over `i` is a map `h : A → B` such that the
@@ -433,13 +432,13 @@ module _
 ### If the top left corner is empty, the type of fibered maps is equivalent to maps `X → Y`
 
 ```text
-       !
-empty ---> B
-  |        |
- !|        |g
-  V        V
-  X -----> Y
-       i
+         !
+  empty ---> B
+    |        |
+  ! |        | g
+    ∨        ∨
+    X -----> Y
+        i
 ```
 
 ```agda
@@ -476,12 +475,12 @@ module _
 ### If the bottom right corner is contractible, the type of fibered maps is equivalent to maps `A → B`
 
 ```text
-  A -----> B
-  |        |
- f|        |!
-  V        V
-  X ---> unit
-      !
+    A -----> B
+    |        |
+  f |        | !
+    ∨        ∨
+    X ---> unit
+       !
 ```
 
 ```agda

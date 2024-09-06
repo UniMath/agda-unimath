@@ -81,7 +81,7 @@ module _
 
 ```agda
 Subgroup-Ab :
-  (l : Level) {l1 : Level} (A : Ab l1) → UU ((lsuc l) ⊔ l1)
+  (l : Level) {l1 : Level} (A : Ab l1) → UU (lsuc l ⊔ l1)
 Subgroup-Ab l A = Subgroup l (group-Ab A)
 
 module _

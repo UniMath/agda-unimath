@@ -34,7 +34,7 @@ Consider a [subtype](foundation-core.subtypes.md) `T` of a type `B` and a map
        | ⌟            |
     π₁ |              | i
        |              |
-       V              V
+       ∨              ∨
        A -----------> B
                f
 ```

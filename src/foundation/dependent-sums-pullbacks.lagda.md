@@ -41,7 +41,7 @@ Squares of the form
       |                          |
   pr1 |                          | pr1
       |                          |
-      V                          V
+      ∨                          ∨
       A -----------------------> B
                    f
 ```
@@ -102,10 +102,10 @@ Given a map `f : A → B` with a family of maps over it
 
 ```text
          map-Σ f g
-  Σ A P ----------> Σ B Q
+  Σ A P ---------> Σ B Q
     |                |
     |                |
-    v                v
+    ∨                ∨
     A -------------> B
              f
 ```

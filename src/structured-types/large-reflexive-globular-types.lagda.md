@@ -35,9 +35,11 @@ record
   {A : (l : Level) → UU (α l)}
   (G : large-globular-structure β A) : UUω
   where
+
   field
     is-reflexive-1-cell-is-reflexive-large-globular-structure :
       is-reflexive-Large-Relation A (1-cell-large-globular-structure G)
+
     is-reflexive-globular-structure-1-cell-is-reflexive-large-globular-structure :
       {l1 l2 : Level} (x : A l1) (y : A l2) →
       is-reflexive-globular-structure
@@ -48,7 +50,7 @@ open is-reflexive-large-globular-structure public
 module _
   {α : Level → Level} {β : Level → Level → Level}
   {A : (l : Level) → UU (α l)}
-  (G : large-globular-structure β A)
+  {G : large-globular-structure β A}
   (r : is-reflexive-large-globular-structure G)
   where
 
@@ -68,4 +70,16 @@ module _
         ( x)
         ( y))
       ( f)
+
+  refl-3-cell-is-reflexive-large-globular-structure :
+    {l1 l2 : Level} {x : A l1} {y : A l2}
+    {f g : 1-cell-large-globular-structure G x y} →
+    {H : 2-cell-large-globular-structure G f g} →
+    3-cell-large-globular-structure G H H
+  refl-3-cell-is-reflexive-large-globular-structure {x = x} {y} =
+    refl-2-cell-is-reflexive-globular-structure
+      ( is-reflexive-globular-structure-1-cell-is-reflexive-large-globular-structure
+        ( r)
+        ( x)
+        ( y))
 ```
