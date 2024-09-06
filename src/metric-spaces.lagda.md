@@ -3,6 +3,7 @@
 ## Instances of metric spaces
 
 {{#include tables/metric-spaces.md}}
+
 ## Modules in the metric spaces namespace
 
 ```agda
