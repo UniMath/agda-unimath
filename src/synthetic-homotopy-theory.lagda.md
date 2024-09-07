@@ -1,7 +1,7 @@
 # Synthetic homotopy theory
 
 ```agda
-{-# OPTIONS --rewriting #-}
+{-# OPTIONS --rewriting --guardedness #-}
 ```
 
 ## Files in the synthetic homotopy theory folder
