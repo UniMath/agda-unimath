@@ -119,9 +119,9 @@ module _
   pr2 (equiv-unit-is-contr H) = is-equiv-terminal-map-is-contr H
 
   abstract
-    is-contr-is-equiv-const : is-equiv (terminal-map A) → is-contr A
-    pr1 (is-contr-is-equiv-const ((g , G) , (h , H))) = h star
-    pr2 (is-contr-is-equiv-const ((g , G) , (h , H))) = H
+    is-contr-is-equiv-terminal-map : is-equiv (terminal-map A) → is-contr A
+    pr1 (is-contr-is-equiv-terminal-map ((g , G) , (h , H))) = h star
+    pr2 (is-contr-is-equiv-terminal-map ((g , G) , (h , H))) = H
 ```
 
 ### The unit type is a proposition
@@ -171,9 +171,9 @@ abstract
     {l1 : Level} → is-set (raise-unit l1)
   is-set-raise-unit = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-raise-unit
 
-raise-unit-Set : Set lzero
-pr1 raise-unit-Set = unit
-pr2 raise-unit-Set = is-set-unit
+raise-unit-Set : (l1 : Level) → Set l1
+pr1 (raise-unit-Set l1) = raise-unit l1
+pr2 (raise-unit-Set l1) = is-set-raise-unit
 ```
 
 ### All parallel maps into `unit` are equal

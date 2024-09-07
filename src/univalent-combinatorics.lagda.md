@@ -59,9 +59,9 @@ open import univalent-combinatorics.equivalences-standard-finite-types public
 open import univalent-combinatorics.ferrers-diagrams public
 open import univalent-combinatorics.fibers-of-maps public
 open import univalent-combinatorics.finite-choice public
-open import univalent-combinatorics.finite-connected-components public
 open import univalent-combinatorics.finite-presentations public
 open import univalent-combinatorics.finite-types public
+open import univalent-combinatorics.finitely-many-connected-components public
 open import univalent-combinatorics.finitely-presented-types public
 open import univalent-combinatorics.function-types public
 open import univalent-combinatorics.image-of-maps public
@@ -70,8 +70,9 @@ open import univalent-combinatorics.inhabited-finite-types public
 open import univalent-combinatorics.injective-maps public
 open import univalent-combinatorics.involution-standard-finite-types public
 open import univalent-combinatorics.isotopies-latin-squares public
-open import univalent-combinatorics.kuratowsky-finite-sets public
+open import univalent-combinatorics.kuratowski-finite-sets public
 open import univalent-combinatorics.latin-squares public
+open import univalent-combinatorics.locally-finite-types public
 open import univalent-combinatorics.main-classes-of-latin-hypercubes public
 open import univalent-combinatorics.main-classes-of-latin-squares public
 open import univalent-combinatorics.maybe public

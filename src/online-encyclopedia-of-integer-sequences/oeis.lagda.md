@@ -13,6 +13,7 @@ open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
+open import elementary-number-theory.fermat-numbers
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.kolakoski-sequence
@@ -75,6 +76,13 @@ A000079 = exp-ℕ 2
 ```agda
 A000142 : ℕ → ℕ
 A000142 = factorial-ℕ
+```
+
+### [A000215](https://oeis.org/A000215) The Fermat numbers
+
+```agda
+A000215 : ℕ → ℕ
+A000215 = fermat-number-ℕ
 ```
 
 ### [A000244](https://oeis.org/A000244) Powers of `3`

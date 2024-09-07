@@ -7,6 +7,8 @@ module elementary-number-theory.inequality-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.precategories
+
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -145,6 +147,13 @@ pr2 (pr2 (pr2 ℕ-Preorder)) = transitive-leq-ℕ
 ℕ-Poset : Poset lzero lzero
 pr1 ℕ-Poset = ℕ-Preorder
 pr2 ℕ-Poset = antisymmetric-leq-ℕ
+```
+
+### The precategory of natural numbers ordered by inequality
+
+```agda
+ℕ-Precategory : Precategory lzero lzero
+ℕ-Precategory = precategory-Preorder ℕ-Preorder
 ```
 
 ### For any two natural numbers we can decide which one is less than the other
