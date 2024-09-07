@@ -37,7 +37,8 @@
       "type": "shell",
       "command": "python3",
       "args": ["${workspaceFolder}/scripts/demote_foundation_imports.py"],
-      "problemMatcher": []
+      "problemMatcher": [],
+      "hide": true
     },
     {
       "label": "unused-imports",
@@ -48,6 +49,23 @@
       "problemMatcher": [],
       "dependsOn": ["remove-unused-imports", "demote-foundation-imports"],
       "dependsOrder": "sequence"
+    },
+    {
+      "label": "remove-unused-imports-current-file",
+      "detail": "Remove unused imports in current file",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/remove_unused_imports.py",
+      "args": ["${relativeFile}"],
+      "problemMatcher": [],
+      // "hide": true,
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      },
+      "runOptions": {
+        "runOn": "default"
+      }
     }
   ],
   "statusbar.default.hide": false
