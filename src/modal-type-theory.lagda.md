@@ -4,7 +4,12 @@
 {-# OPTIONS --cohesion --flat-split #-}
 ```
 
-## Files in the modal type theory folder
+> Insert some prose here
+
+To read more, we suggest starting with
+[crisp types](modal-type-theory.crisp-types.md).
+
+## Modules in the modal type theory namespace
 
 ```agda
 module modal-type-theory where

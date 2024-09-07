@@ -1,6 +1,6 @@
 # Online encyclopedia of integer sequences
 
-## Files in the OEIS folder
+## Modules in the OEIS namespace
 
 ```agda
 module online-encyclopedia-of-integer-sequences where

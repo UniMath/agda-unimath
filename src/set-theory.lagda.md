@@ -1,6 +1,6 @@
 # Set theory
 
-## Files in the set theory folder
+## Modules in the set theory namespace
 
 ```agda
 module set-theory where

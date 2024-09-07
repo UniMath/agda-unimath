@@ -20,7 +20,7 @@ Some core principles of higher category theory include:
 - Any valid statement or construction in category theory must respect
   isomorphisms {{#cite Makkai98}}.
 
-## Files in the Synthetic category theory folder
+## Modules in the synthetic category theory namespace
 
 ```agda
 module synthetic-category-theory where
