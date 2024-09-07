@@ -48,6 +48,14 @@ module _
 
   action-flat-family : @♭ (A → UU l2) → ♭ A → UU l2
   action-flat-family B = action-flat-crisp-family (crispen B)
+
+module _
+  {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
+  where
+
+  counit-family-flat :
+    (y : ♭ A) → action-flat-family B y → B (counit-flat y)
+  counit-family-flat (intro-flat _) = counit-flat
 ```
 
 ### The flat modality's action on maps

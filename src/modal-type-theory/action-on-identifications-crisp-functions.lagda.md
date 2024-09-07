@@ -20,12 +20,12 @@ open import modal-type-theory.crisp-identity-types
 
 ## Idea
 
-A function defined on [crisp elements](modal-type-theory.crisp-types.md)
-`f : @♭ A → B` preserves crisp
+A function defined on crisp elements `f : @♭ A → B` preserves crisp
 [identifications](foundation-core.identity-types.md), in the sense that it maps
 a crisp identification `p : x ＝ y` in `A` to an identification
 `crisp-ap f p : f x ＝ f y` in `B`. This action on identifications can be
-understood as crisp functoriality of crisp identity types.
+understood as crisp functoriality of [crisp](modal-type-theory.crisp-types.md)
+identity types.
 
 This is a strengthening of the
 [action on identifications of functions](foundation.action-on-identifications-functions.md)

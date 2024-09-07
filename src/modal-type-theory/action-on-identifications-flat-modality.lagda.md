@@ -22,8 +22,9 @@ open import modal-type-theory.flat-modality
 
 ## Idea
 
-Given a crisp [identification](foundation-core.identity-types.md) `x ＝ y` in
-`A`, then there is an identification `intro-flat x ＝ intro-flat y` in `♭ A`.
+Given a [crisp](modal-type-theory.crisp-types.md)
+[identification](foundation-core.identity-types.md) `x ＝ y` in `A`, then there
+is an identification `intro-flat x ＝ intro-flat y` in `♭ A`.
 
 ## Definitions
 
