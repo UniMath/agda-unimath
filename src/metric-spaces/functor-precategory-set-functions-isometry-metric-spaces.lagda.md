@@ -99,24 +99,11 @@ module _
       (functor-precategory-set-functions-isometry-Metric-Space l1 l2)
   is-conservative-functor-precategory-set-functions-isometry-Metric-Space
     {A} {B} f H =
-    ( isometric-inv) ,
-    ( eq-htpy-map-isometry-Metric-Space
-      ( B)
-      ( B)
-      ( comp-isometry-Metric-Space B A B f isometric-inv)
-      ( isometry-id-Metric-Space B)
-      ( is-section-map-inv-is-equiv is-equiv-f)) ,
-    ( eq-htpy-map-isometry-Metric-Space
+    is-iso-precategory-is-equiv-isometry-Metric-Space
       ( A)
-      ( A)
-      ( comp-isometry-Metric-Space A B A isometric-inv f)
-      ( isometry-id-Metric-Space A)
-      ( is-retraction-map-inv-is-equiv is-equiv-f))
-    where
-
-    is-equiv-f : is-equiv (map-isometry-Metric-Space A B f)
-    is-equiv-f =
-      is-equiv-is-invertible
+      ( B)
+      ( f)
+      ( is-equiv-is-invertible
         ( hom-inv-is-iso-Precategory
           ( Set-Precategory l1)
           { set-Metric-Space A}
@@ -129,20 +116,12 @@ module _
             { set-Metric-Space A}
             { set-Metric-Space B}
             { map-isometry-Metric-Space A B f}
-            ( H))) ( htpy-eq
+            (H)))
+        ( htpy-eq
           ( is-retraction-hom-inv-is-iso-Precategory
             ( Set-Precategory l1)
             { set-Metric-Space A}
             { set-Metric-Space B}
             { map-isometry-Metric-Space A B f}
-            ( H)))
-
-    isometric-inv : isometry-Metric-Space B A
-    isometric-inv =
-      isometry-inv-is-equiv-is-isometry-Metric-Space
-        ( A)
-        ( B)
-        ( map-isometry-Metric-Space A B f)
-        ( is-equiv-f)
-        ( is-isometry-map-isometry-Metric-Space A B f)
+            (H))))
 ```

@@ -192,12 +192,11 @@ module _
         short-isometry-Metric-Space
           ( B)
           ( A)
-          ( isometry-inv-is-equiv-is-isometry-Metric-Space
+          ( isometry-inv-is-equiv-isometry-Metric-Space
             ( A)
             ( B)
-            ( map-short-function-Metric-Space A B f)
-            ( E)
-            ( I))
+            ( map-short-function-Metric-Space A B f , I)
+            ( E))
 ```
 
 ### A function between metric spaces is a short isomorphism if and only if it an isometric equivalence between their carrier premetric spaces

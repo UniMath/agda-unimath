@@ -194,19 +194,60 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : function-carrier-type-Metric-Space A B)
-  (E : is-equiv f)
-  (I : is-isometry-Metric-Space A B f)
+  (f : isometry-Metric-Space A B)
+  (E : is-equiv (map-isometry-Metric-Space A B f))
   where
 
-  isometry-inv-is-equiv-is-isometry-Metric-Space :
+  isometry-inv-is-equiv-isometry-Metric-Space :
     isometry-Metric-Space B A
-  isometry-inv-is-equiv-is-isometry-Metric-Space =
+  isometry-inv-is-equiv-isometry-Metric-Space =
     ( map-inv-is-equiv E) ,
     ( is-isometry-map-inv-is-equiv-is-isometry-Premetric-Space
       ( premetric-Metric-Space A)
       ( premetric-Metric-Space B)
-      ( f)
+      ( map-isometry-Metric-Space A B f)
       ( E)
-      ( I))
+      ( is-isometry-map-isometry-Metric-Space A B f))
+
+  is-section-isometry-inv-is-equiv-isometry-Metric-Space :
+    ( comp-isometry-Metric-Space
+      B
+      A
+      B
+      f
+      isometry-inv-is-equiv-isometry-Metric-Space) ＝
+    ( isometry-id-Metric-Space B)
+  is-section-isometry-inv-is-equiv-isometry-Metric-Space =
+    eq-htpy-map-isometry-Metric-Space
+      ( B)
+      ( B)
+      ( comp-isometry-Metric-Space
+        B
+        A
+        B
+        f
+        isometry-inv-is-equiv-isometry-Metric-Space)
+      ( isometry-id-Metric-Space B)
+      ( is-section-map-inv-is-equiv E)
+
+  is-retraction-isometry-inv-is-equiv-isometry-Metric-Space :
+    ( comp-isometry-Metric-Space
+      A
+      B
+      A
+      isometry-inv-is-equiv-isometry-Metric-Space
+      f) ＝
+    ( isometry-id-Metric-Space A)
+  is-retraction-isometry-inv-is-equiv-isometry-Metric-Space =
+    eq-htpy-map-isometry-Metric-Space
+      ( A)
+      ( A)
+      ( comp-isometry-Metric-Space
+        A
+        B
+        A
+        isometry-inv-is-equiv-isometry-Metric-Space
+        f)
+      ( isometry-id-Metric-Space A)
+      ( is-retraction-map-inv-is-equiv E)
 ```

@@ -115,30 +115,11 @@ module _
 
   is-iso-precategory-is-equiv-isometry-Metric-Space :
     is-iso-Precategory precategory-isometry-Metric-Space {A} {B} f
-  is-iso-precategory-is-equiv-isometry-Metric-Space =
-    ( isometry-inverse) ,
-    ( ( eq-htpy-map-isometry-Metric-Space
-        ( B)
-        ( B)
-        ( comp-isometry-Metric-Space B A B f isometry-inverse)
-        ( isometry-id-Metric-Space B)
-        ( is-section-map-inv-is-equiv E)) ,
-      ( eq-htpy-map-isometry-Metric-Space
-        ( A)
-        ( A)
-        ( comp-isometry-Metric-Space A B A isometry-inverse f))
-        ( isometry-id-Metric-Space A)
-        ( is-retraction-map-inv-is-equiv E))
-    where
-
-    isometry-inverse : isometry-Metric-Space B A
-    isometry-inverse =
-      isometry-inv-is-equiv-is-isometry-Metric-Space
-        ( A)
-        ( B)
-        ( map-isometry-Metric-Space A B f)
-        ( E)
-        ( is-isometry-map-isometry-Metric-Space A B f)
+  pr1 is-iso-precategory-is-equiv-isometry-Metric-Space =
+    isometry-inv-is-equiv-isometry-Metric-Space A B f E
+  pr2 is-iso-precategory-is-equiv-isometry-Metric-Space =
+    ( is-section-isometry-inv-is-equiv-isometry-Metric-Space A B f E) ,
+    ( is-retraction-isometry-inv-is-equiv-isometry-Metric-Space A B f E)
 ```
 
 ### Isomorphic types in the precategory of metric spaces are isometrically equivalent
