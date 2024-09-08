@@ -20,6 +20,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -86,11 +87,12 @@ premetric-leq-ℝ l d x y =
 ```agda
 is-reflexive-premetric-leq-ℝ :
   {l : Level} → is-reflexive-Premetric (premetric-leq-ℝ l)
-is-reflexive-premetric-leq-ℝ d x = H , H
-  where
-
-  H : (r : ℚ) → is-in-lower-cut-ℝ x (r +ℚ rational-ℚ⁺ d) → is-in-lower-cut-ℝ x r
-  H r = le-lower-cut-ℝ x r (r +ℚ rational-ℚ⁺ d) (le-right-add-rational-ℚ⁺ r d)
+is-reflexive-premetric-leq-ℝ d x =
+  diagonal-product
+    ( (r : ℚ) →
+      is-in-lower-cut-ℝ x (r +ℚ (rational-ℚ⁺ d)) → is-in-lower-cut-ℝ x r)
+    ( λ r →
+      le-lower-cut-ℝ x r (r +ℚ rational-ℚ⁺ d) (le-right-add-rational-ℚ⁺ r d))
 
 is-symmetric-premetric-leq-ℝ :
   {l : Level} → is-symmetric-Premetric (premetric-leq-ℝ l)
