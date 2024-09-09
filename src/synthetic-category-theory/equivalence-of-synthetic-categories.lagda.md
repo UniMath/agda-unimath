@@ -59,25 +59,25 @@ module _
       ( λ s → is-section-Synthetic-Category-Theory κ μ ι C D f s)
 
   map-section-Synthetic-Category-Theory :
-    {κ : language-Synthetic-Category-Theory l} →
-    {μ : composition-Synthetic-Category-Theory κ} →
-    {ι : identity-Synthetic-Category-Theory κ} →
-    {C D : category-Synthetic-Category-Theory κ} →
-    {f : functor-Synthetic-Category-Theory κ C D} →
+    (κ : language-Synthetic-Category-Theory l) →
+    (μ : composition-Synthetic-Category-Theory κ) →
+    (ι : identity-Synthetic-Category-Theory κ) →
+    (C D : category-Synthetic-Category-Theory κ) →
+    (f : functor-Synthetic-Category-Theory κ C D) →
     section-Synthetic-Category-Theory κ μ ι C D f →
     functor-Synthetic-Category-Theory κ D C
-  map-section-Synthetic-Category-Theory sec = pr1 sec
+  map-section-Synthetic-Category-Theory κ μ ι C D f sec = pr1 sec
 
   is-section-section-Synthetic-Category-Theory :
-    {κ : language-Synthetic-Category-Theory l} →
-    {μ : composition-Synthetic-Category-Theory κ} →
-    {ι : identity-Synthetic-Category-Theory κ} →
-    {C D : category-Synthetic-Category-Theory κ} →
-    {f : functor-Synthetic-Category-Theory κ C D} →
+    (κ : language-Synthetic-Category-Theory l) →
+    (μ : composition-Synthetic-Category-Theory κ) →
+    (ι : identity-Synthetic-Category-Theory κ) →
+    (C D : category-Synthetic-Category-Theory κ) →
+    (f : functor-Synthetic-Category-Theory κ C D) →
     (sec : section-Synthetic-Category-Theory κ μ ι C D f) →
     is-section-Synthetic-Category-Theory
-      κ μ ι C D f (map-section-Synthetic-Category-Theory sec)
-  is-section-section-Synthetic-Category-Theory sec = pr2 sec
+      κ μ ι C D f (map-section-Synthetic-Category-Theory κ μ ι C D f sec)
+  is-section-section-Synthetic-Category-Theory κ μ ι C D f sec = pr2 sec
 
   is-retraction-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l) →
@@ -103,25 +103,25 @@ module _
       ( λ r → is-retraction-Synthetic-Category-Theory κ μ ι C D f r)
 
   map-retraction-Synthetic-Category-Theory :
-    {κ : language-Synthetic-Category-Theory l} →
-    {μ : composition-Synthetic-Category-Theory κ} →
-    {ι : identity-Synthetic-Category-Theory κ} →
-    {C D : category-Synthetic-Category-Theory κ} →
-    {f : functor-Synthetic-Category-Theory κ C D} →
+    (κ : language-Synthetic-Category-Theory l) →
+    (μ : composition-Synthetic-Category-Theory κ) →
+    (ι : identity-Synthetic-Category-Theory κ) →
+    (C D : category-Synthetic-Category-Theory κ) →
+    (f : functor-Synthetic-Category-Theory κ C D) →
     (retraction-Synthetic-Category-Theory κ μ ι C D f) →
     (functor-Synthetic-Category-Theory κ D C)
-  map-retraction-Synthetic-Category-Theory ret = pr1 ret
+  map-retraction-Synthetic-Category-Theory κ μ ι C D f ret = pr1 ret
 
   is-retraction-retraction-Synthetic-Category-Theory :
-    {κ : language-Synthetic-Category-Theory l} →
-    {μ : composition-Synthetic-Category-Theory κ} →
-    {ι : identity-Synthetic-Category-Theory κ} →
-    {C D : category-Synthetic-Category-Theory κ} →
-    {f : functor-Synthetic-Category-Theory κ C D} →
+    (κ : language-Synthetic-Category-Theory l) →
+    (μ : composition-Synthetic-Category-Theory κ) →
+    (ι : identity-Synthetic-Category-Theory κ) →
+    (C D : category-Synthetic-Category-Theory κ) →
+    (f : functor-Synthetic-Category-Theory κ C D) →
     (ret : retraction-Synthetic-Category-Theory κ μ ι C D f) →
     is-retraction-Synthetic-Category-Theory
-      κ μ ι C D f (map-retraction-Synthetic-Category-Theory ret)
-  is-retraction-retraction-Synthetic-Category-Theory ret = pr2 ret
+      κ μ ι C D f (map-retraction-Synthetic-Category-Theory κ μ ι C D f ret)
+  is-retraction-retraction-Synthetic-Category-Theory κ μ ι C D f ret = pr2 ret
 
   is-equivalence-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l) →
@@ -146,25 +146,25 @@ module _
       ( λ g → is-equivalence-Synthetic-Category-Theory κ μ ι C D f g)
 
   map-equivalence-Synthetic-Category-Theory :
-    {κ : language-Synthetic-Category-Theory l} →
-    {μ : composition-Synthetic-Category-Theory κ} →
-    {ι : identity-Synthetic-Category-Theory κ} →
-    {C D : category-Synthetic-Category-Theory κ} →
-    {f : functor-Synthetic-Category-Theory κ C D} →
+    (κ : language-Synthetic-Category-Theory l) →
+    (μ : composition-Synthetic-Category-Theory κ) →
+    (ι : identity-Synthetic-Category-Theory κ) →
+    (C D : category-Synthetic-Category-Theory κ) →
+    (f : functor-Synthetic-Category-Theory κ C D) →
     equivalence-Synthetic-Category-Theory κ μ ι C D f →
     functor-Synthetic-Category-Theory κ D C
-  map-equivalence-Synthetic-Category-Theory eq = pr1 eq
+  map-equivalence-Synthetic-Category-Theory κ μ ι C D f eq = pr1 eq
 
   is-equivalence-equivalence-Synthetic-Category-Theory :
-    {κ : language-Synthetic-Category-Theory l} →
-    {μ : composition-Synthetic-Category-Theory κ} →
-    {ι : identity-Synthetic-Category-Theory κ} →
-    {C D : category-Synthetic-Category-Theory κ} →
-    {f : functor-Synthetic-Category-Theory κ C D} →
+    (κ : language-Synthetic-Category-Theory l) →
+    (μ : composition-Synthetic-Category-Theory κ) →
+    (ι : identity-Synthetic-Category-Theory κ) →
+    (C D : category-Synthetic-Category-Theory κ) →
+    (f : functor-Synthetic-Category-Theory κ C D) →
     (eq : equivalence-Synthetic-Category-Theory κ μ ι C D f) →
     is-equivalence-Synthetic-Category-Theory
-      κ μ ι C D f (map-equivalence-Synthetic-Category-Theory eq)
-  is-equivalence-equivalence-Synthetic-Category-Theory eq = pr2 eq
+      κ μ ι C D f (map-equivalence-Synthetic-Category-Theory κ μ ι C D f eq)
+  is-equivalence-equivalence-Synthetic-Category-Theory κ μ ι C D f eq = pr2 eq
 ```
 
 A functor f : C → D admits a section and a retraction iff it is an equivalence
@@ -183,10 +183,10 @@ A functor f : C → D admits a section and a retraction iff it is an equivalence
     (retraction-Synthetic-Category-Theory κ μ ι C D f)
   is-equivalence-admits-section-admits-retraction-Synthetic-Category-Theory
     κ μ ι C D f eq =
-      ( map-equivalence-Synthetic-Category-Theory eq ,
-          pr1 (is-equivalence-equivalence-Synthetic-Category-Theory eq)) ,
-      ( map-equivalence-Synthetic-Category-Theory eq ,
-          pr2 (is-equivalence-equivalence-Synthetic-Category-Theory eq))
+      ( map-equivalence-Synthetic-Category-Theory κ μ ι C D f eq ,
+          pr1 (is-equivalence-equivalence-Synthetic-Category-Theory κ μ ι C D f eq)) ,
+      ( map-equivalence-Synthetic-Category-Theory κ μ ι C D f eq ,
+          pr2 (is-equivalence-equivalence-Synthetic-Category-Theory κ μ ι C D f eq))
 
   admits-section-admits-retraction-is-equivalence-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l) →
@@ -205,10 +205,10 @@ A functor f : C → D admits a section and a retraction iff it is an equivalence
   admits-section-admits-retraction-is-equivalence-Synthetic-Category-Theory
     κ μ ι ν Λ Ρ Χ Α C D f sec ret =
     let
-      s = map-section-Synthetic-Category-Theory sec
-      Ξ = is-section-section-Synthetic-Category-Theory sec
-      r = map-retraction-Synthetic-Category-Theory ret
-      Ψ = is-retraction-retraction-Synthetic-Category-Theory ret
+      s = map-section-Synthetic-Category-Theory κ μ ι C D f sec
+      Ξ = is-section-section-Synthetic-Category-Theory κ μ ι C D f sec
+      r = map-retraction-Synthetic-Category-Theory κ μ ι C D f ret
+      Ψ = is-retraction-retraction-Synthetic-Category-Theory κ μ ι C D f ret
       α = comp-iso-Synthetic-Category-Theory μ
              ( comp-iso-Synthetic-Category-Theory μ
                (  comp-iso-Synthetic-Category-Theory μ
