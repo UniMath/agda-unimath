@@ -22,7 +22,7 @@ open import metric-spaces.premetric-structures
 ## Idea
 
 A [premetric](metric-spaces.premetric-structures.md) is a
-{{#concept "pseudometric structure Agda=is-pseudometric-Premetric}} if it is
+{{#concept "pseudometric structure" Agda=is-pseudometric-Premetric}} if it is
 reflexive, symmetric, and triangular.
 
 ## Definitions
