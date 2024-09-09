@@ -152,15 +152,15 @@ Given crisp elements `x` and `y` of `A` We have a
 [commuting triangle](foundation-core.commuting-triangles-of-maps.md)
 
 ```text
-                               ♭ (x ＝ y)
-                                  ∧   |
-                     Eq-eq-flat /~    |
-                              /       |
-  (intro-flat x ＝ intro-flat y)      | counit-flat
-                              \       |
-               ap (counit-flat) \     |
-                                  ∨   ∨
-                                 (x ＝ y)
+                              ♭ (x = y)
+                                 ∧   |
+                     Eq-eq-flat /~   |
+                               /     |
+  (intro-flat x = intro-flat y)      | counit-flat
+                               \     |
+               ap (counit-flat) \    |
+                                 ∨   ∨
+                                (x = y)
 ```
 
 where the top-left map `Eq-eq-flat` is an equivalence. Thus, the right map is an
