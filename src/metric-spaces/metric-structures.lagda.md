@@ -25,8 +25,8 @@ open import metric-spaces.pseudometric-structures
 
 A [premetric structure](metric-spaces.metric-structures.md) is a
 {{#concept "metric" Disambiguation="premetric structure" Agda=is-metric-Premetric}}
-if it is a local [pseudometric](metric-spaces.lagda.md), i.e. if it is
-reflexive, symmetric, triangular, and local.
+if it is a local [pseudometric](metric-spaces.pseudometric-spaces.md), i.e. if
+it is reflexive, symmetric, triangular, and local.
 
 ## Definitions
 
