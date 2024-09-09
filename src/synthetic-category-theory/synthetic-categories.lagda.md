@@ -167,7 +167,6 @@ module _
   open inverse-Synthetic-Category-Theory public
 ```
 
-
 #### The structure of identity morphisms in the language of synthetic category theory
 
 In the language of synthetic category theory we may speak of the identity
