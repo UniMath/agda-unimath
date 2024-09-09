@@ -25,6 +25,7 @@ Some core principles of higher category theory include:
 ```agda
 module synthetic-category-theory where
 
+open import synthetic-category-theory.equivalence-of-synthetic-categories public
 open import synthetic-category-theory.synthetic-categories public
 ```
 
