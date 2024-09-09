@@ -26,8 +26,9 @@ open import metric-spaces.pseudometric-structures
 
 ## Idea
 
-A {{#concept "pseudometric space" Agda=Pseudometric-Space WD="pseudometric space" WDID=Q1397059}} is a
-[premetric space](metric-spaces.premetric-spaces.md) whose
+A
+{{#concept "pseudometric space" Agda=Pseudometric-Space WD="pseudometric space" WDID=Q1397059}}
+is a [premetric space](metric-spaces.premetric-spaces.md) whose
 [premetric](metric-spaces.premetric-structures.md) is a
 [pseudometric](metric-spaces.pseudometric-structures.md), i.e. if it is
 reflexive, symmetric, and triangular
