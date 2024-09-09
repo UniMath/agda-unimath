@@ -143,6 +143,31 @@ module _
   isomorphism-Synthetic-Category-Theory = 2-cell-Globular-Type
 ```
 
+#### Inverses of isomorphisms
+
+Isomorphisms between functors, as well as higher isomorphisms, are invertible.
+
+```agda
+module _
+  {l : Level}
+  where
+
+  record
+    inverse-Synthetic-Category-Theory
+      (κ : language-Synthetic-Category-Theory l) : UU l
+    where
+    coinductive
+    field
+      inv-iso-Synthetic-Category-Theory :
+        {C D : category-Synthetic-Category-Theory κ} →
+        {F G : functor-Synthetic-Category-Theory κ C D} →
+        (isomorphism-Synthetic-Category-Theory κ F G) →
+        (isomorphism-Synthetic-Category-Theory κ G F)
+
+  open inverse-Synthetic-Category-Theory public
+```
+
+
 #### The structure of identity morphisms in the language of synthetic category theory
 
 In the language of synthetic category theory we may speak of the identity
