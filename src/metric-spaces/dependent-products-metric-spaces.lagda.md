@@ -27,7 +27,7 @@ open import metric-spaces.short-functions-metric-spaces
 A family of [metric spaces](metric-spaces.metric-spaces.md) over a type produces
 a {{#concept "product metric space" Agda=Π-Metric-Space}} on the type of
 dependent functions into the carrier types of the family. Two functions `f` and
-`g` are in a [`d`-neighbourhood](metric-spaces.premetric-structures.md) in the
+`g` are in a [`d`-neighborhood](metric-spaces.premetric-structures.md) in the
 product structure if this holds for all the evaluations `f x` and `g x`.
 
 The evaluation functions from the product metric space to each projected metric

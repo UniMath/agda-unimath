@@ -194,7 +194,7 @@ module _
       ( λ d H → H (R d x))
 ```
 
-### A premetric is symmetric if `d`-neighbourhoods are symmetric for all positive rational number `d`
+### A premetric is symmetric if `d`-neighborhoods are symmetric for all positive rational number `d`
 
 ```agda
 module _
@@ -345,7 +345,7 @@ module _
     ( is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric B R L x)
 ```
 
-### A premetric is monotonic if any `d₁`-neighbourhoods are `d₂`-neighbourhoods for `d₁ < d₂`
+### A premetric is monotonic if any `d₁`-neighborhoods are `d₂`-neighborhoods for `d₁ < d₂`
 
 ```agda
 module _
@@ -456,7 +456,7 @@ module _
       ( T x y y d₁ (le-diff-ℚ⁺ d₁ d₂ I) (R (le-diff-ℚ⁺ d₁ d₂ I) y) H₁)
 ```
 
-### Two premetrics on a type are equal if they define the same neighbourhoods
+### Two premetrics on a type are equal if they define the same neighborhoods
 
 ```agda
 module _

@@ -39,11 +39,11 @@ open import metric-spaces.premetric-structures
 
 A [premetric](metric-spaces.premetric-structures.md) on a type `A` is
 {{#concept "closed" Disambiguation="premetric" Agda=is-closed-Premetric}} if
-`ε`-neighbourhoods satisfy the following condition:
+`ε`-neighborhoods satisfy the following condition:
 
-for any `(x y : A)`, if `x` and `y` are in a `(ε + δ)`-neighbourhood for all
+for any `(x y : A)`, if `x` and `y` are in a `(ε + δ)`-neighborhood for all
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-`δ`, then they are in a `ε`-neighbourhood.
+`δ`, then they are in a `ε`-neighborhood.
 
 ## Definitions
 

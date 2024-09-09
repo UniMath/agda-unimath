@@ -101,8 +101,8 @@ module _
   pseudometric-Metric-Space =
     premetric-Metric-Space , is-pseudometric-structure-Metric-Space
 
-  neighbourhood-Metric-Space : ℚ⁺ → Relation l2 type-Metric-Space
-  neighbourhood-Metric-Space =
+  neighborhood-Metric-Space : ℚ⁺ → Relation l2 type-Metric-Space
+  neighborhood-Metric-Space =
     neighborhood-Premetric-Space premetric-Metric-Space
 
   is-reflexive-premetric-structure-Metric-Space :
