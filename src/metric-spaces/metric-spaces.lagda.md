@@ -13,15 +13,19 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import metric-spaces.metric-structures
 open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
+open import metric-spaces.pseudometric-spaces
+open import metric-spaces.pseudometric-structures
 ```
 
 </details>
@@ -30,8 +34,12 @@ open import metric-spaces.premetric-structures
 
 A {{#concept "metric space" Agda=Metric-Space}} is a
 [premetric space](metric-spaces.premetric-spaces.md) whose
-[premetric](metric-spaces.premetric-structures.md) is reflexive symmetric local
-and triangular.
+[premetric](metric-spaces.premetric-structures.md) is reflexive, symmetric,
+triangular, and local.
+
+It is equivalent to the type of
+[pseudometric spaces](metric-spaces.pseudometric-spaces.md) whose premetric is
+local.
 
 ## Definitions
 
@@ -81,6 +89,17 @@ module _
   is-metric-structure-Metric-Space :
     is-metric-Premetric structure-Metric-Space
   is-metric-structure-Metric-Space = pr2 M
+
+  is-pseudometric-structure-Metric-Space :
+    is-pseudometric-Premetric structure-Metric-Space
+  is-pseudometric-structure-Metric-Space =
+    is-pseudometric-is-metric-Premetric
+      structure-Metric-Space
+      is-metric-structure-Metric-Space
+
+  pseudometric-Metric-Space : Pseudometric-Space l1 l2
+  pseudometric-Metric-Space =
+    premetric-Metric-Space , is-pseudometric-structure-Metric-Space
 
   neighbourhood-Metric-Space : ℚ⁺ → Relation l2 type-Metric-Space
   neighbourhood-Metric-Space =
@@ -187,6 +206,50 @@ module _
     is-indistinguishable-Metric-Space M x y → x ＝ y
   eq-indistinguishable-Metric-Space =
     map-inv-equiv equiv-indistinguishable-eq-Metric-Space
+```
+
+### The type of metric spaces is equivalent to the type of local pseudometric spaces
+
+#### The subtype of local pseudometric spaces
+
+```agda
+module _
+  (l1 l2 : Level)
+  where
+
+  is-local-prop-Pseudometric-Space :
+    subtype (l1 ⊔ l2) (Pseudometric-Space l1 l2)
+  is-local-prop-Pseudometric-Space =
+    is-local-prop-Premetric ∘ structure-Pseudometric-Space
+
+  is-local-Pseudometric-Space :
+    Pseudometric-Space l1 l2 → UU (l1 ⊔ l2)
+  is-local-Pseudometric-Space =
+    type-Prop ∘ is-local-prop-Pseudometric-Space
+
+  is-prop-is-local-Pseudometric-Space :
+    (M : Pseudometric-Space l1 l2) → is-prop (is-local-Pseudometric-Space M)
+  is-prop-is-local-Pseudometric-Space =
+    is-prop-type-Prop ∘ is-local-prop-Pseudometric-Space
+
+  local-Pseudometric-Space : UU (lsuc l1 ⊔ lsuc l2)
+  local-Pseudometric-Space = type-subtype is-local-prop-Pseudometric-Space
+```
+
+#### Equivalence between metric spaces and local pseudometric spaces
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  equiv-local-pseudometric-Metric-Space :
+    local-Pseudometric-Space l1 l2 ≃ Metric-Space l1 l2
+  equiv-local-pseudometric-Metric-Space =
+    associative-Σ
+      ( Premetric-Space l1 l2)
+      ( is-pseudometric-Premetric-Space)
+      ( is-local-Pseudometric-Space l1 l2)
 ```
 
 ## External links

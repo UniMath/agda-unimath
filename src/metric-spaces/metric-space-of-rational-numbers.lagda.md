@@ -28,7 +28,9 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
+open import metric-spaces.metric-structures
 open import metric-spaces.premetric-structures
+open import metric-spaces.pseudometric-structures
 ```
 
 </details>
@@ -114,6 +116,16 @@ pr2 (is-triangular-premetric-le-ℚ x y z d₁ d₂ Hyz Hxy) =
           ( z +ℚ (rational-ℚ⁺ d₂))
           ( pr2 Hyz)))
         ( pr2 Hxy)))
+
+is-pseudometric-premetric-le-ℚ : is-pseudometric-Premetric premetric-le-ℚ
+is-pseudometric-premetric-le-ℚ =
+  is-reflexive-premetric-le-ℚ ,
+  is-symmetric-premetric-le-ℚ ,
+  is-triangular-premetric-le-ℚ
+
+is-metric-premetric-le-ℚ : is-metric-Premetric premetric-le-ℚ
+pr1 is-metric-premetric-le-ℚ = is-pseudometric-premetric-le-ℚ
+pr2 is-metric-premetric-le-ℚ = is-local-premetric-le-ℚ
 ```
 
 ### The standard metric space of rational numbers
@@ -121,9 +133,5 @@ pr2 (is-triangular-premetric-le-ℚ x y z d₁ d₂ Hyz Hxy) =
 ```agda
 metric-space-le-ℚ : Metric-Space lzero lzero
 pr1 metric-space-le-ℚ = ℚ , premetric-le-ℚ
-pr2 metric-space-le-ℚ =
-  is-reflexive-premetric-le-ℚ ,
-  is-symmetric-premetric-le-ℚ ,
-  is-local-premetric-le-ℚ ,
-  is-triangular-premetric-le-ℚ
+pr2 metric-space-le-ℚ = is-metric-premetric-le-ℚ
 ```

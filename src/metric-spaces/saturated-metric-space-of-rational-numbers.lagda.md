@@ -28,7 +28,9 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
+open import metric-spaces.metric-structures
 open import metric-spaces.premetric-structures
+open import metric-spaces.pseudometric-structures
 open import metric-spaces.saturated-metric-spaces
 ```
 
@@ -120,6 +122,16 @@ pr2 (is-triangular-premetric-leq-ℚ x y z d₁ d₂ Hyz Hxy) =
           ( z +ℚ (rational-ℚ⁺ d₂))
           ( pr2 Hyz)))
         ( pr2 Hxy)))
+
+is-pseudometric-premetric-leq-ℚ : is-pseudometric-Premetric premetric-leq-ℚ
+is-pseudometric-premetric-leq-ℚ =
+  is-reflexive-premetric-leq-ℚ ,
+  is-symmetric-premetric-leq-ℚ ,
+  is-triangular-premetric-leq-ℚ
+
+is-metric-premetric-leq-ℚ : is-metric-Premetric premetric-leq-ℚ
+pr1 is-metric-premetric-leq-ℚ = is-pseudometric-premetric-leq-ℚ
+pr2 is-metric-premetric-leq-ℚ = is-local-premetric-leq-ℚ
 ```
 
 ### The standard saturated metric space of rational numbers
@@ -127,11 +139,7 @@ pr2 (is-triangular-premetric-leq-ℚ x y z d₁ d₂ Hyz Hxy) =
 ```agda
 metric-space-leq-ℚ : Metric-Space lzero lzero
 pr1 metric-space-leq-ℚ = ℚ , premetric-leq-ℚ
-pr2 metric-space-leq-ℚ =
-  is-reflexive-premetric-leq-ℚ ,
-  is-symmetric-premetric-leq-ℚ ,
-  is-local-premetric-leq-ℚ ,
-  is-triangular-premetric-leq-ℚ
+pr2 metric-space-leq-ℚ = is-metric-premetric-leq-ℚ
 ```
 
 ## Properties

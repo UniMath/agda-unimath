@@ -34,7 +34,9 @@ open import foundation.universe-levels
 
 open import metric-spaces.isometry-metric-spaces
 open import metric-spaces.metric-spaces
+open import metric-spaces.metric-structures
 open import metric-spaces.premetric-structures
+open import metric-spaces.pseudometric-structures
 open import metric-spaces.saturated-metric-space-of-rational-numbers
 open import metric-spaces.saturated-metric-spaces
 
@@ -152,6 +154,18 @@ pr2 (is-triangular-premetric-leq-ℝ x y z dxy dyz Hyz Hxy) r =
     ( is-in-lower-cut-ℝ x)
     ( associative-add-ℚ r (rational-ℚ⁺ dyz) (rational-ℚ⁺ dxy) ∙
       ap (add-ℚ r) (commutative-add-ℚ (rational-ℚ⁺ dyz) (rational-ℚ⁺ dxy)))
+
+is-pseudometric-premetric-leq-ℝ :
+  {l : Level} → is-pseudometric-Premetric (premetric-leq-ℝ l)
+is-pseudometric-premetric-leq-ℝ =
+  is-reflexive-premetric-leq-ℝ ,
+  is-symmetric-premetric-leq-ℝ ,
+  is-triangular-premetric-leq-ℝ
+
+is-metric-premetric-leq-ℝ :
+  {l : Level} → is-metric-Premetric (premetric-leq-ℝ l)
+pr1 is-metric-premetric-leq-ℝ = is-pseudometric-premetric-leq-ℝ
+pr2 is-metric-premetric-leq-ℝ = is-local-premetric-leq-ℝ
 ```
 
 ### The standard saturated metric space of real numbers
@@ -163,11 +177,7 @@ module _
 
   metric-space-leq-ℝ : Metric-Space (lsuc l) l
   pr1 metric-space-leq-ℝ = ℝ l , premetric-leq-ℝ l
-  pr2 metric-space-leq-ℝ =
-    is-reflexive-premetric-leq-ℝ ,
-    is-symmetric-premetric-leq-ℝ ,
-    is-local-premetric-leq-ℝ ,
-    is-triangular-premetric-leq-ℝ
+  pr2 metric-space-leq-ℝ = is-metric-premetric-leq-ℝ
 ```
 
 ## Properties

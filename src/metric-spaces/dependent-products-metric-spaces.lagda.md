@@ -14,7 +14,9 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import metric-spaces.metric-spaces
+open import metric-spaces.metric-structures
 open import metric-spaces.premetric-structures
+open import metric-spaces.pseudometric-structures
 open import metric-spaces.short-functions-metric-spaces
 ```
 
@@ -47,23 +49,33 @@ module _
   structure-Π-Metric-Space d f g =
     Π-Prop A (λ x → structure-Metric-Space (P x) d (f x) (g x))
 
-  Π-Metric-Space : Metric-Space (l ⊔ l1) (l ⊔ l2)
-  pr1 (pr1 Π-Metric-Space) = type-Π-Metric-Space
-  pr2 (pr1 Π-Metric-Space) = structure-Π-Metric-Space
-  pr2 Π-Metric-Space =
-    ( λ d f a →
-      is-reflexive-premetric-structure-Metric-Space
-        ( P a)
-        ( d)
-        ( f a)) ,
-    ( λ d f g H a →
-      is-symmetric-premetric-structure-Metric-Space
-        ( P a)
-        ( d)
-        ( f a)
-        ( g a)
-        ( H a)) ,
-    ( is-local-is-tight-Premetric
+  is-reflexive-structure-Π-Metric-Space :
+    is-reflexive-Premetric structure-Π-Metric-Space
+  is-reflexive-structure-Π-Metric-Space d f a =
+    is-reflexive-premetric-structure-Metric-Space (P a) d (f a)
+
+  is-symmetric-structure-Π-Metric-Space :
+    is-symmetric-Premetric structure-Π-Metric-Space
+  is-symmetric-structure-Π-Metric-Space d f g H a =
+    is-symmetric-premetric-structure-Metric-Space (P a) d (f a) (g a) (H a)
+
+  is-triangular-structure-Π-Metric-Space :
+    is-triangular-Premetric structure-Π-Metric-Space
+  is-triangular-structure-Π-Metric-Space f g h d₁ d₂ H K a =
+    is-triangular-premetric-structure-Metric-Space
+      ( P a)
+      ( f a)
+      ( g a)
+      ( h a)
+      ( d₁)
+      ( d₂)
+      ( H a)
+      ( K a)
+
+  is-local-structure-Π-Metric-Space :
+    is-local-Premetric structure-Π-Metric-Space
+  is-local-structure-Π-Metric-Space =
+    is-local-is-tight-Premetric
       ( structure-Π-Metric-Space)
       ( λ f g H →
         eq-htpy
@@ -72,17 +84,24 @@ module _
               ( P a)
               ( f a)
               ( g a)
-              ( λ d → H d a)))) ,
-    ( λ f g h d₁ d₂ H K a →
-      is-triangular-premetric-structure-Metric-Space
-        ( P a)
-        ( f a)
-        ( g a)
-        ( h a)
-        ( d₁)
-        ( d₂)
-        ( H a)
-        ( K a))
+              ( λ d → H d a)))
+
+  is-pseudometric-structure-Π-Metric-Space :
+    is-pseudometric-Premetric structure-Π-Metric-Space
+  is-pseudometric-structure-Π-Metric-Space =
+    is-reflexive-structure-Π-Metric-Space ,
+    is-symmetric-structure-Π-Metric-Space ,
+    is-triangular-structure-Π-Metric-Space
+
+  is-metric-structure-Π-Metric-Space :
+    is-metric-Premetric structure-Π-Metric-Space
+  is-metric-structure-Π-Metric-Space =
+    is-pseudometric-structure-Π-Metric-Space ,
+    is-local-structure-Π-Metric-Space
+
+  Π-Metric-Space : Metric-Space (l ⊔ l1) (l ⊔ l2)
+  pr1 Π-Metric-Space = type-Π-Metric-Space , structure-Π-Metric-Space
+  pr2 Π-Metric-Space = is-metric-structure-Π-Metric-Space
 ```
 
 ## Properties

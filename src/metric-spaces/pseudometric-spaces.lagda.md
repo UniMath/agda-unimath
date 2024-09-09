@@ -19,6 +19,7 @@ open import foundation.universe-levels
 open import metric-spaces.discrete-premetric-structures
 open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
+open import metric-spaces.pseudometric-structures
 ```
 
 </details>
@@ -27,38 +28,14 @@ open import metric-spaces.premetric-structures
 
 A {{#concept "pseudometric space" Agda=Pseudometric-Space}} is a
 [premetric space](metric-spaces.premetric-spaces.md) whose
-[premetric](metric-spaces.premetric-structures.md) is reflexive, symmetric, and
-triangular.
+[premetric](metric-spaces.premetric-structures.md) is a
+[pseudometric](metric-spaces.pseudometric-structures.md), i.e. if it is
+reflexive, symmetric, and triangular
 
 Indistinguishability in a pseudometric space is an
 [equivalence relation](foundation.equivalence-relations.md).
 
 ## Definitions
-
-### The property of being a pseudometric premetric
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  where
-
-  is-pseudometric-prop-Premetric : Prop (l1 ⊔ l2)
-  is-pseudometric-prop-Premetric =
-    product-Prop
-      ( is-reflexive-prop-Premetric B)
-      ( product-Prop
-        ( is-symmetric-prop-Premetric B)
-        ( is-triangular-prop-Premetric B))
-
-  is-pseudometric-Premetric : UU (l1 ⊔ l2)
-  is-pseudometric-Premetric =
-    type-Prop is-pseudometric-prop-Premetric
-
-  is-prop-is-pseudometric-Premetric :
-    is-prop is-pseudometric-Premetric
-  is-prop-is-pseudometric-Premetric =
-    is-prop-type-Prop is-pseudometric-prop-Premetric
-```
 
 ### The property of being a pseudometric premetric space
 
@@ -110,17 +87,23 @@ module _
   is-reflexive-structure-Pseudometric-Space :
     is-reflexive-Premetric structure-Pseudometric-Space
   is-reflexive-structure-Pseudometric-Space =
-    pr1 is-pseudometric-structure-Pseudometric-Space
+    is-reflexive-is-pseudometric-Premetric
+      ( structure-Pseudometric-Space)
+      ( is-pseudometric-structure-Pseudometric-Space)
 
   is-symmetric-structure-Pseudometric-Space :
     is-symmetric-Premetric structure-Pseudometric-Space
   is-symmetric-structure-Pseudometric-Space =
-    pr1 (pr2 is-pseudometric-structure-Pseudometric-Space)
+    is-symmetric-is-pseudometric-Premetric
+      ( structure-Pseudometric-Space)
+      ( is-pseudometric-structure-Pseudometric-Space)
 
   is-triangular-structure-Pseudometric-Space :
     is-triangular-Premetric structure-Pseudometric-Space
   is-triangular-structure-Pseudometric-Space =
-    pr2 (pr2 is-pseudometric-structure-Pseudometric-Space)
+    is-triangular-is-pseudometric-Premetric
+      ( structure-Pseudometric-Space)
+      ( is-pseudometric-structure-Pseudometric-Space)
 ```
 
 ### Indistinguishability in a pseudometric space
@@ -199,21 +182,6 @@ module _
       ( is-triangular-structure-Pseudometric-Space M))
 ```
 
-### The discrete premetric on a type is a pseudometric
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  is-pseudometric-discrete-Premetric :
-    is-pseudometric-Premetric (discrete-Premetric A)
-  is-pseudometric-discrete-Premetric =
-    is-reflexive-discrete-Premetric A ,
-    is-symmetric-discrete-Premetric A ,
-    is-triangular-discrete-Premetric A
-```
-
 ### Any type is a discrete pseudometric space
 
 ```agda
@@ -223,8 +191,7 @@ module _
 
   discrete-Pseudometric-Space : Pseudometric-Space l l
   pr1 discrete-Pseudometric-Space = A , discrete-Premetric A
-  pr2 discrete-Pseudometric-Space =
-    is-pseudometric-discrete-Premetric
+  pr2 discrete-Pseudometric-Space = is-pseudometric-discrete-Premetric
 ```
 
 ## See also
