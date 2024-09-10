@@ -41,8 +41,7 @@ Because every [isometry](metric-spaces.isometry-metric-spaces.md) between
 to the
 [precategory of metric spaces and short maps](metric-spaces.precategory-of-metric-spaces-and-short-functions.md).
 
-Since this functor is the idenity on objects, it is
-[split essentially surjective](category-theory.split-essentially-surjective-functors-precategories.md).
+Since this functor is the identity on objects, it is an equivalence on objects.
 
 Moreover, since the map from isometry to short maps is an
 [embedding](foundation.embeddings.md), this functor is
@@ -74,21 +73,21 @@ module _
 
 ## Properties
 
-### The precategory functor from isometries to short maps is split essentially surjective
+### The precategory functor from isometries to short maps is an equivalence on objects
 
 ```agda
 module _
   (l1 l2 : Level)
   where
 
-  is-split-essentially-surjective-functor-precategory-short-isometry-Metric-Space :
-    is-split-essentially-surjective-functor-Precategory
-      (precategory-isometry-Metric-Space)
-      (precategory-short-function-Metric-Space)
-      (functor-precategory-short-isometry-Metric-Space l1 l2)
-  is-split-essentially-surjective-functor-precategory-short-isometry-Metric-Space
-    y =
-      y , id-iso-Precategory precategory-short-function-Metric-Space {y}
+  is-equiv-obj-functor-precategory-short-isometry-Metric-Space :
+    is-equiv
+      ( obj-functor-Precategory
+        ( precategory-isometry-Metric-Space)
+        ( precategory-short-function-Metric-Space)
+        ( functor-precategory-short-isometry-Metric-Space l1 l2))
+  is-equiv-obj-functor-precategory-short-isometry-Metric-Space =
+    is-equiv-id
 ```
 
 ### The precategory functor from isometries to short maps is faithful
