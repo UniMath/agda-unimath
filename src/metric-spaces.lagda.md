@@ -9,7 +9,6 @@
 ```agda
 module metric-spaces where
 
-open import metric-spaces.apartness-relation-metric-spaces public
 open import metric-spaces.category-of-metric-spaces-and-isometries public
 open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-premetric-spaces public
