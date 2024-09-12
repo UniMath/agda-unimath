@@ -55,7 +55,7 @@ module _
 
 ### Tightness of a premetric structure
 
-A premetric is tight if any two indistinguishable elements are equal
+A premetric is {{#concept "tight" Disambiguation="premetric" Agda=is-tight-Premetric}} if any two indistinguishable elements are [equal](foundation-core.identity-types.md).
 
 ```agda
 module _

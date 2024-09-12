@@ -56,7 +56,7 @@ module _
 
 ## Properties
 
-### Indistiguishability in a reflexive premetric is reflexive
+### Indistinguishability in a reflexive premetric is reflexive
 
 ```agda
 module _
