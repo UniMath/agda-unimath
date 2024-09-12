@@ -1,3 +1,5 @@
+# Cospans of synthetic categories
+
 ```agda
 {-# OPTIONS --guardedness #-}
 

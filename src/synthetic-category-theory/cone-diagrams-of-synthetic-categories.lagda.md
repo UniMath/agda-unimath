@@ -1,3 +1,5 @@
+# Cone diagrams of synthetic categories
+
 ```agda
 {-# OPTIONS --guardedness #-}
 
@@ -15,16 +17,10 @@ open import synthetic-category-theory.synthetic-categories
 open import synthetic-category-theory.cospans-of-synthetic-categories
 ```
 
-
 ### Cone diagrams of synthetic categories
 
-#### A cone diagram over a cospan D--g-->E<--f--C with an apex T is a commutative square of the from
-T---p--->C
-|        |
-r    τ   f
-|        |
-v        v
-D---g--->E
+A cone diagram over a cospan D--g-->E<--f--C with an apex T is a pair of maps p
+: T → C, r : T → D together with a commutative square τ : f∘p ≅ g∘r.
 
 ```agda
 module _
@@ -199,7 +195,7 @@ module _
           κ μ ι Χ S T c c' ϕ)
         ( right-map-iso-of-cone-diagrams-Synthetic-Category-Theory
           κ μ ι Χ S T c c' ψ))
-      λ α → 
+      λ α →
       Σ ( isomorphism-Synthetic-Category-Theory
           ( functor-globular-type-Synthetic-Category-Theory κ
             ( T)
@@ -257,8 +253,8 @@ module _
             κ μ ι Χ S T c c' ψ)
 ```
 
-### Given a cone over S with apex T and a functor s : R → T
-### we get and induced cone over S with apex R
+Given a cone over S with apex T and a functor s : R → T we get and induced cone
+over S with apex R
 
 ```agda
 module _
@@ -301,9 +297,9 @@ module _
             ( s))))
 ```
 
-### Given a cone over S with apex T and two functors s, t : R → T together with
-### an isomorphism between s and t, we get an isomorphism of cone diagrams
-### between the cone diagrams induced by s and t. 
+Given a cone over S with apex T and two functors s, t : R → T together with an
+isomorphism between s and t, we get an isomorphism of cone diagrams between the
+cone diagrams induced by s and t.
 
 ```agda
 module _

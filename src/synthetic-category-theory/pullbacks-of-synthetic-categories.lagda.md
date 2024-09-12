@@ -1,3 +1,5 @@
+# Pullbacks of synthetic categories
+
 ```agda
 {-# OPTIONS --guardedness #-}
 

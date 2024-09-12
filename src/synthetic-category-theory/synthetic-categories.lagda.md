@@ -607,9 +607,6 @@ module _
 
 #### Pasting of commutative squares of functors
 
-A-f->B-g->C A--(gf)-->C | | | | | r τ↙ u σ↙ h ---> r στ↙ h | | | | | v v v v v
-X-s->Y-t->Z X--(ts)-->Z
-
 ```agda
 module _
   {l : Level}
@@ -834,9 +831,9 @@ module _
 open preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory public
 ```
 
-### The inverse of the associator preservers horizontal composition
+#### The inverse of the associator preservers horizontal composition
 
-```
+```agda
 module _
   {l : Level}
   where
@@ -972,7 +969,7 @@ module _
                         ( identity-isomorphism-Synthetic-Category-Theory ι)
                         ( horizontal-comp-iso-Synthetic-Category-Theory Χ
                           ( horizontal-comp-iso-Synthetic-Category-Theory Χ γ β)
-                            (α ))))
+                            (α))))
                     ( id-iso-Synthetic-Category-Theory
                       ( identity-isomorphism-Synthetic-Category-Theory ι)
                       ( inv-iso-Synthetic-Category-Theory ν
