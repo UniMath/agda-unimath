@@ -25,7 +25,9 @@ open import metric-spaces.premetric-structures
 
 A [premetric](metric-spaces.premetric-structures.md) is
 {{#concept "symmetric" Disambiguation="premetric" agda=is-symmetric-Premetric}}
-if `d`-neighborhoods are symmetric for all [positive rational numbers](elementary-number-theory.positive-rational-numbers.md) `d`.
+if `d`-neighborhoods are symmetric for all
+[positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
+`d`.
 
 ## Definitions
 
