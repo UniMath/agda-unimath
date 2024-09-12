@@ -11,6 +11,7 @@ open import foundation-core.function-types public
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-pentagons-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopy-induction
@@ -27,6 +28,38 @@ open import foundation-core.transport-along-identifications
 </details>
 
 ## Properties
+
+### Associativity of function composition
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (h : C → D) (g : B → C) (f : A → B)
+  where
+
+  associative-comp : (h ∘ g) ∘ f ＝ h ∘ (g ∘ f)
+  associative-comp = refl
+```
+
+### The Mac Lane pentagon for function composition
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} {E : UU l5}
+  {f : A → B} {g : B → C} {h : C → D} {i : D → E}
+  where
+
+  mac-lane-pentagon-comp :
+    let α₁ = (ap (_∘ f) (associative-comp i h g))
+        α₂ = (associative-comp i (h ∘ g) f)
+        α₃ = (ap (i ∘_) (associative-comp h g f))
+        α₄ = (associative-comp (i ∘ h) g f)
+        α₅ = (associative-comp i h (g ∘ f))
+    in
+      coherence-pentagon-identifications α₁ α₄ α₂ α₅ α₃
+  mac-lane-pentagon-comp = refl
+```
 
 ### Transport in a family of function types
 

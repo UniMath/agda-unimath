@@ -116,9 +116,9 @@ module _
   pr2 (equiv-unit-is-contr H) = is-equiv-terminal-map-is-contr H
 
   abstract
-    is-contr-is-equiv-const : is-equiv (terminal-map A) → is-contr A
-    pr1 (is-contr-is-equiv-const ((g , G) , (h , H))) = h star
-    pr2 (is-contr-is-equiv-const ((g , G) , (h , H))) = H
+    is-contr-is-equiv-terminal-map : is-equiv (terminal-map A) → is-contr A
+    pr1 (is-contr-is-equiv-terminal-map ((g , G) , (h , H))) = h star
+    pr2 (is-contr-is-equiv-terminal-map ((g , G) , (h , H))) = H
 ```
 
 ### The unit type is a proposition
