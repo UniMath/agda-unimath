@@ -27,7 +27,7 @@ open import metric-spaces.reflexive-premetric-structures
 
 A [premetric](metric-spaces.premetric-structures.md) is
 {{#concept "triangular" Disambiguation="premetric" agda=is-triangular-Premetric}}
-if it is additively transitive
+if it is additively transitive.
 
 ## Definitions
 
