@@ -99,7 +99,7 @@ module _
 ### Separation relation with respect to a premetric
 
 Two points `x` and `y` are
-{{#concept "separated" Disambiguation="with respect to a premetric" Agda=is-separated-pr-Premetric}}
+{{#concept "separated" Disambiguation="with respect to a premetric" Agda=is-separated-pt-Premetric}}
 in a premetric if there exists some positive rational `d` such that `x` and `y`
 are not `d`-neighbors.
 
