@@ -165,7 +165,7 @@ module _
       κ μ ι C D f (map-equivalence-Synthetic-Category-Theory κ μ ι C D f eq)
   is-equivalence-equivalence-Synthetic-Category-Theory κ μ ι C D f eq = pr2 eq
 
-  is-section-equivalence-Synthetic-Category-Theory :
+  section-equivalence-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l) →
     (μ : composition-Synthetic-Category-Theory κ) →
     (ι : identity-Synthetic-Category-Theory κ) →
@@ -174,10 +174,10 @@ module _
     (eq : equivalence-Synthetic-Category-Theory κ μ ι C D f) →
     is-section-Synthetic-Category-Theory
       κ μ ι C D f (map-equivalence-Synthetic-Category-Theory κ μ ι C D f eq)
-  is-section-equivalence-Synthetic-Category-Theory κ μ ι C D f eq =
+  section-equivalence-Synthetic-Category-Theory κ μ ι C D f eq =
     pr1 (is-equivalence-equivalence-Synthetic-Category-Theory κ μ ι C D f eq)
 
-  is-retraction-equivalence-Synthetic-Category-Theory :
+  retraction-equivalence-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l) →
     (μ : composition-Synthetic-Category-Theory κ) →
     (ι : identity-Synthetic-Category-Theory κ) →
@@ -186,7 +186,7 @@ module _
     (eq : equivalence-Synthetic-Category-Theory κ μ ι C D f) →
     is-retraction-Synthetic-Category-Theory
       κ μ ι C D f (map-equivalence-Synthetic-Category-Theory κ μ ι C D f eq)
-  is-retraction-equivalence-Synthetic-Category-Theory κ μ ι C D f eq =
+  retraction-equivalence-Synthetic-Category-Theory κ μ ι C D f eq =
     pr2 (is-equivalence-equivalence-Synthetic-Category-Theory κ μ ι C D f eq)
 ```
 
@@ -217,7 +217,7 @@ A functor f : C → D admits a section and a retraction iff it is an equivalence
     (κ : language-Synthetic-Category-Theory l) →
     (μ : composition-Synthetic-Category-Theory κ) →
     (ι : identity-Synthetic-Category-Theory κ) →
-    (ν : inverse-Synthetic-Category-Theory κ) →
+    (ν : inverse-Synthetic-Category-Theory κ μ ι) →
     (Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ) →
     (Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ) →
     (X : horizontal-composition-Synthetic-Category-Theory κ μ) →
@@ -263,7 +263,7 @@ module _
   {l : Level} {κ : language-Synthetic-Category-Theory l}
   {μ : composition-Synthetic-Category-Theory κ}
   {ι : identity-Synthetic-Category-Theory κ}
-  {ν : inverse-Synthetic-Category-Theory κ}
+  {ν : inverse-Synthetic-Category-Theory κ μ ι}
   {Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ}
   {Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ}
   {Χ : horizontal-composition-Synthetic-Category-Theory κ μ}
@@ -286,7 +286,7 @@ module _
       in
       comp-functor-Synthetic-Category-Theory μ g g' ,
       comp-iso-Synthetic-Category-Theory μ
-        ( is-section-equivalence-Synthetic-Category-Theory κ μ ι D E f' eq-f')
+        ( section-equivalence-Synthetic-Category-Theory κ μ ι D E f' eq-f')
         ( comp-iso-Synthetic-Category-Theory μ
           ( horizontal-comp-iso-Synthetic-Category-Theory Χ
             ( right-unit-law-comp-functor-Synthetic-Category-Theory Ρ f')
@@ -295,7 +295,7 @@ module _
             ( horizontal-comp-iso-Synthetic-Category-Theory Χ
               ( horizontal-comp-iso-Synthetic-Category-Theory Χ
                 ( id-iso-Synthetic-Category-Theory ι f')
-                ( is-section-equivalence-Synthetic-Category-Theory
+                ( section-equivalence-Synthetic-Category-Theory
                   κ μ ι C D f eq-f))
               ( id-iso-Synthetic-Category-Theory ι g'))
             ( comp-iso-Synthetic-Category-Theory μ
@@ -308,7 +308,7 @@ module _
                   ( g)
                   ( g')))))) ,
       comp-iso-Synthetic-Category-Theory μ
-        ( is-retraction-equivalence-Synthetic-Category-Theory κ μ ι C D f eq-f)
+        ( retraction-equivalence-Synthetic-Category-Theory κ μ ι C D f eq-f)
         ( comp-iso-Synthetic-Category-Theory μ
           ( horizontal-comp-iso-Synthetic-Category-Theory Χ
             ( right-unit-law-comp-functor-Synthetic-Category-Theory Ρ g)
@@ -317,7 +317,7 @@ module _
             ( horizontal-comp-iso-Synthetic-Category-Theory Χ
               ( horizontal-comp-iso-Synthetic-Category-Theory Χ
                 ( id-iso-Synthetic-Category-Theory ι g)
-                ( is-retraction-equivalence-Synthetic-Category-Theory
+                ( retraction-equivalence-Synthetic-Category-Theory
                   κ μ ι D E f' eq-f'))
               ( id-iso-Synthetic-Category-Theory ι f))
             ( comp-iso-Synthetic-Category-Theory μ

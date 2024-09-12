@@ -143,28 +143,19 @@ module _
   isomorphism-Synthetic-Category-Theory = 2-cell-Globular-Type
 ```
 
-#### Inverses of isomorphisms
-
-Isomorphisms between functors, as well as higher isomorphisms, are invertible.
+#### Isomorphism between isomorphisms between functors in the language of synthetic category theory
 
 ```agda
 module _
   {l : Level}
   where
 
-  record
-    inverse-Synthetic-Category-Theory
-      (κ : language-Synthetic-Category-Theory l) : UU l
-    where
-    coinductive
-    field
-      inv-iso-Synthetic-Category-Theory :
-        {C D : category-Synthetic-Category-Theory κ} →
-        {F G : functor-Synthetic-Category-Theory κ C D} →
-        (isomorphism-Synthetic-Category-Theory κ F G) →
-        (isomorphism-Synthetic-Category-Theory κ G F)
-
-  open inverse-Synthetic-Category-Theory public
+  3-isomorphism-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    {C D : category-Synthetic-Category-Theory κ}
+    {F G : functor-Synthetic-Category-Theory κ C D}
+    (α β : isomorphism-Synthetic-Category-Theory κ F G) → UU l
+  3-isomorphism-Synthetic-Category-Theory = 3-cell-Globular-Type
 ```
 
 #### The structure of identity morphisms in the language of synthetic category theory
@@ -247,6 +238,55 @@ module _
   comp-iso-Synthetic-Category-Theory μ =
     comp-functor-Synthetic-Category-Theory
       ( composition-isomorphism-Synthetic-Category-Theory μ)
+```
+
+#### Inverses of isomorphisms
+
+Isomorphisms between functors, as well as higher isomorphisms, are invertible.
+
+```agda
+module _
+  {l : Level}
+  where
+
+  record
+    inverse-Synthetic-Category-Theory
+      (κ : language-Synthetic-Category-Theory l)
+      (μ : composition-Synthetic-Category-Theory κ)
+      (ι : identity-Synthetic-Category-Theory κ) : UU l
+    where
+    coinductive
+    field
+      inv-iso-Synthetic-Category-Theory :
+        {C D : category-Synthetic-Category-Theory κ} →
+        {F G : functor-Synthetic-Category-Theory κ C D} →
+        (isomorphism-Synthetic-Category-Theory κ F G) →
+        (isomorphism-Synthetic-Category-Theory κ G F)
+      inv-iso-left-inv-Synthetic-Category-Theory :
+        {C D : category-Synthetic-Category-Theory κ} →
+        {F G : functor-Synthetic-Category-Theory κ C D} →
+        (α : isomorphism-Synthetic-Category-Theory κ F G) →
+        isomorphism-Synthetic-Category-Theory
+          ( functor-globular-type-Synthetic-Category-Theory κ C D)
+          ( comp-iso-Synthetic-Category-Theory μ
+            ( inv-iso-Synthetic-Category-Theory α) α)
+            ( id-iso-Synthetic-Category-Theory ι F)
+      inv-iso-right-inv-Synthetic-Category-Theory :
+        {C D : category-Synthetic-Category-Theory κ} →
+        {F G : functor-Synthetic-Category-Theory κ C D} →
+        (α : isomorphism-Synthetic-Category-Theory κ F G) →
+        isomorphism-Synthetic-Category-Theory
+          ( functor-globular-type-Synthetic-Category-Theory κ C D)
+          ( comp-iso-Synthetic-Category-Theory μ
+            α ( inv-iso-Synthetic-Category-Theory α))
+            ( id-iso-Synthetic-Category-Theory ι G)
+      inverse-isomorphism-Synthetic-Category-Theory :
+        {C D : category-Synthetic-Category-Theory κ} →
+        inverse-Synthetic-Category-Theory
+          ( functor-globular-type-Synthetic-Category-Theory κ C D)
+          ( composition-isomorphism-Synthetic-Category-Theory μ)
+          ( identity-isomorphism-Synthetic-Category-Theory ι)
+  open inverse-Synthetic-Category-Theory public
 ```
 
 #### Left unit law operators in the language of synthetic category theory
@@ -378,6 +418,71 @@ module _
   open horizontal-composition-Synthetic-Category-Theory public
 ```
 
+#### We can prove that taking an inverse is an idempotent operation
+
+```agda
+module _
+  {l : Level}
+  where
+
+  inverse-idempotent-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (ν : inverse-Synthetic-Category-Theory κ μ ι)
+    (Α : associative-composition-Synthetic-Category-Theory κ μ)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    (Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ)
+    (Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ)
+    {C D : category-Synthetic-Category-Theory κ}
+    {F G : functor-Synthetic-Category-Theory κ C D}
+    (α : isomorphism-Synthetic-Category-Theory κ F G) →
+    isomorphism-Synthetic-Category-Theory
+      ( functor-globular-type-Synthetic-Category-Theory κ C D)
+      ( inv-iso-Synthetic-Category-Theory ν
+        ( inv-iso-Synthetic-Category-Theory ν α))
+      ( α)
+  inverse-idempotent-Synthetic-Category-Theory κ μ ι ν Α Χ Λ Ρ α =
+    comp-iso-Synthetic-Category-Theory
+      ( composition-isomorphism-Synthetic-Category-Theory μ)
+      ( left-unit-law-comp-functor-Synthetic-Category-Theory
+        ( left-unit-law-composition-isomorphism-Synthetic-Category-Theory Λ)
+        ( α))
+      ( comp-iso-Synthetic-Category-Theory
+        ( composition-isomorphism-Synthetic-Category-Theory μ)
+        ( horizontal-comp-iso-Synthetic-Category-Theory
+          ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+          ( inv-iso-left-inv-Synthetic-Category-Theory ν
+            ( inv-iso-Synthetic-Category-Theory ν α))
+          ( id-iso-Synthetic-Category-Theory
+            ( identity-isomorphism-Synthetic-Category-Theory ι)
+            ( α)))
+        ( comp-iso-Synthetic-Category-Theory
+          ( composition-isomorphism-Synthetic-Category-Theory μ)
+          ( inv-iso-Synthetic-Category-Theory
+            ( inverse-isomorphism-Synthetic-Category-Theory ν)
+            ( associative-comp-functor-Synthetic-Category-Theory
+              ( associative-comp-isomorphism-Synthetic-Category-Theory Α)
+              ( inv-iso-Synthetic-Category-Theory ν (inv-iso-Synthetic-Category-Theory ν α))
+              ( inv-iso-Synthetic-Category-Theory ν α)
+              ( α)))
+          ( comp-iso-Synthetic-Category-Theory
+            ( composition-isomorphism-Synthetic-Category-Theory μ)
+            ( horizontal-comp-iso-Synthetic-Category-Theory
+              ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+              ( id-iso-Synthetic-Category-Theory
+                ( identity-isomorphism-Synthetic-Category-Theory ι)
+                ( inv-iso-Synthetic-Category-Theory ν (inv-iso-Synthetic-Category-Theory ν α)))
+              ( inv-iso-Synthetic-Category-Theory
+                ( inverse-isomorphism-Synthetic-Category-Theory ν)
+                ( inv-iso-left-inv-Synthetic-Category-Theory ν α)))
+            ( inv-iso-Synthetic-Category-Theory
+              ( inverse-isomorphism-Synthetic-Category-Theory ν)
+              ( right-unit-law-comp-functor-Synthetic-Category-Theory
+                ( right-unit-law-composition-isomorphism-Synthetic-Category-Theory Ρ)
+                ( inv-iso-Synthetic-Category-Theory ν (inv-iso-Synthetic-Category-Theory ν α)))))))
+```
+
 #### Identity preservation operators for horizontal composition in the language of synthetic category theory
 
 ```agda
@@ -500,6 +605,54 @@ module _
       ( comp-functor-Synthetic-Category-Theory μ g i)
 ```
 
+#### Pasting of commutative squares of functors
+
+A-f->B-g->C A--(gf)-->C | | | | | r τ↙ u σ↙ h ---> r στ↙ h | | | | | v v v v v
+X-s->Y-t->Z X--(ts)-->Z
+
+```agda
+module _
+  {l : Level}
+  where
+
+  pasting-commuting-squares-functors-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (ν : inverse-Synthetic-Category-Theory κ μ ι)
+    (α : associative-composition-Synthetic-Category-Theory κ μ)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    {A B C X Y Z : category-Synthetic-Category-Theory κ}
+    (f : functor-Synthetic-Category-Theory κ A B)
+    (g : functor-Synthetic-Category-Theory κ B C)
+    (h : functor-Synthetic-Category-Theory κ C Z)
+    (r : functor-Synthetic-Category-Theory κ A X)
+    (s : functor-Synthetic-Category-Theory κ X Y)
+    (t : functor-Synthetic-Category-Theory κ Y Z)
+    (u : functor-Synthetic-Category-Theory κ B Y) →
+    (commuting-square-functors-Synthetic-Category-Theory κ μ f u r s) →
+    (commuting-square-functors-Synthetic-Category-Theory κ μ g h u t) →
+    commuting-square-functors-Synthetic-Category-Theory κ μ
+      ( comp-functor-Synthetic-Category-Theory μ g f)
+      ( h)
+      ( r)
+      ( comp-functor-Synthetic-Category-Theory μ t s)
+  pasting-commuting-squares-functors-Synthetic-Category-Theory
+    κ μ ι ν α Χ f g h r s t u τ σ =
+      let
+        comp = comp-iso-Synthetic-Category-Theory μ
+        horcomp = horizontal-comp-iso-Synthetic-Category-Theory Χ
+        inv = inv-iso-Synthetic-Category-Theory ν
+        assoc = associative-comp-functor-Synthetic-Category-Theory α
+        id = id-iso-Synthetic-Category-Theory ι
+      in
+      comp ( inv ( assoc t s r))
+        ( comp ( horcomp (id t) τ)
+          ( comp ( assoc t u f)
+            ( comp ( horcomp σ (id f))
+              ( inv ( assoc h g f)))))
+```
+
 #### Commuting squares of isomorphisms in the language of synthetic category theory
 
 ```agda
@@ -520,6 +673,46 @@ module _
     commuting-square-functors-Synthetic-Category-Theory
       ( functor-globular-type-Synthetic-Category-Theory κ _ _)
       ( composition-isomorphism-Synthetic-Category-Theory μ)
+```
+
+#### Pasting commutative squares of isomorphisms
+
+```agda
+module _
+  {l : Level}
+  where
+
+  pasting-commuting-squares-isomorphisms-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (ν : inverse-Synthetic-Category-Theory κ μ ι)
+    (Α : associative-composition-Synthetic-Category-Theory κ μ)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    {C D : category-Synthetic-Category-Theory κ}
+    {f g h r s t : functor-Synthetic-Category-Theory κ C D}
+    (α : isomorphism-Synthetic-Category-Theory κ f g)
+    (β : isomorphism-Synthetic-Category-Theory κ g h)
+    (γ : isomorphism-Synthetic-Category-Theory κ h t)
+    (δ : isomorphism-Synthetic-Category-Theory κ f r)
+    (ε : isomorphism-Synthetic-Category-Theory κ r s)
+    (φ : isomorphism-Synthetic-Category-Theory κ s t)
+    (ξ : isomorphism-Synthetic-Category-Theory κ g s) →
+    (commuting-square-isomorphisms-Synthetic-Category-Theory κ μ α ξ δ ε) →
+    (commuting-square-isomorphisms-Synthetic-Category-Theory κ μ β γ ξ φ) →
+    commuting-square-isomorphisms-Synthetic-Category-Theory κ μ
+      ( comp-iso-Synthetic-Category-Theory μ β α)
+      ( γ)
+      ( δ)
+      ( comp-iso-Synthetic-Category-Theory μ φ ε)
+  pasting-commuting-squares-isomorphisms-Synthetic-Category-Theory κ μ ι ν Α Χ =
+      pasting-commuting-squares-functors-Synthetic-Category-Theory
+        ( functor-globular-type-Synthetic-Category-Theory κ _ _)
+        ( composition-isomorphism-Synthetic-Category-Theory μ)
+        ( identity-isomorphism-Synthetic-Category-Theory ι)
+        ( inverse-isomorphism-Synthetic-Category-Theory ν)
+        ( associative-comp-isomorphism-Synthetic-Category-Theory Α)
+        ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
 ```
 
 #### Left unit law preservation operators for horizontal composition
@@ -559,6 +752,8 @@ module _
           ( composition-isomorphism-Synthetic-Category-Theory μ)
           ( left-unit-law-composition-isomorphism-Synthetic-Category-Theory η)
           ( horizontal-composition-isomorphism-Synthetic-Category-Theory ν)
+
+open preserves-left-unit-law-composition-horizontal-composition-Synthetic-Category-Theory public
 ```
 
 #### Right unit law preservation operators for horizontal composition
@@ -598,6 +793,8 @@ module _
           ( composition-isomorphism-Synthetic-Category-Theory μ)
           ( right-unit-law-composition-isomorphism-Synthetic-Category-Theory η)
           ( horizontal-composition-isomorphism-Synthetic-Category-Theory ν)
+
+open preserves-right-unit-law-composition-horizontal-composition-Synthetic-Category-Theory public
 ```
 
 #### Associator preservation operators for horizontal composition
@@ -633,4 +830,195 @@ module _
             ( horizontal-comp-iso-Synthetic-Category-Theory ν γ β)
             ( α))
           ( associative-comp-functor-Synthetic-Category-Theory η H' G' F')
+
+open preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory public
+```
+
+### The inverse of the associator preservers horizontal composition
+
+```
+module _
+  {l : Level}
+  where
+
+  preserves-associativity-comp-functor-horizontal-comp-iso-inv-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (ν : inverse-Synthetic-Category-Theory κ μ ι)
+    (Α : associative-composition-Synthetic-Category-Theory κ μ)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    (Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ)
+    (Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ)
+    (Ξ : preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory κ μ Α Χ)
+    {C1 C2 C3 C4 : category-Synthetic-Category-Theory κ}
+    (H H' : functor-Synthetic-Category-Theory κ C3 C4)
+    (G G' : functor-Synthetic-Category-Theory κ C2 C3)
+    (F F' : functor-Synthetic-Category-Theory κ C1 C2)
+    (γ : isomorphism-Synthetic-Category-Theory κ H H')
+    (β : isomorphism-Synthetic-Category-Theory κ G G')
+    (α : isomorphism-Synthetic-Category-Theory κ F F') →
+    commuting-square-isomorphisms-Synthetic-Category-Theory κ μ
+      ( inv-iso-Synthetic-Category-Theory ν
+        ( associative-comp-functor-Synthetic-Category-Theory Α H G F))
+      ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+        ( horizontal-comp-iso-Synthetic-Category-Theory Χ γ β)
+        ( α))
+      ( horizontal-comp-iso-Synthetic-Category-Theory Χ γ
+        ( horizontal-comp-iso-Synthetic-Category-Theory Χ β α))
+      ( inv-iso-Synthetic-Category-Theory ν
+        ( associative-comp-functor-Synthetic-Category-Theory Α H' G' F'))
+  preserves-associativity-comp-functor-horizontal-comp-iso-inv-Synthetic-Category-Theory
+    κ μ ι ν Α Χ Λ Ρ Ξ H H' G G' F F' γ β α =
+    comp-iso-Synthetic-Category-Theory
+      ( composition-isomorphism-Synthetic-Category-Theory μ)
+      ( right-unit-law-comp-functor-Synthetic-Category-Theory
+        ( right-unit-law-composition-isomorphism-Synthetic-Category-Theory Ρ)
+        ( comp-iso-Synthetic-Category-Theory μ
+          ( inv-iso-Synthetic-Category-Theory ν
+            ( associative-comp-functor-Synthetic-Category-Theory Α H' G' F'))
+          ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+            ( γ)
+            ( horizontal-comp-iso-Synthetic-Category-Theory Χ β α))))
+      ( comp-iso-Synthetic-Category-Theory
+        ( composition-isomorphism-Synthetic-Category-Theory μ)
+        ( horizontal-comp-iso-Synthetic-Category-Theory
+          ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+          ( id-iso-Synthetic-Category-Theory
+            ( identity-isomorphism-Synthetic-Category-Theory ι)
+            ( comp-iso-Synthetic-Category-Theory μ
+              ( inv-iso-Synthetic-Category-Theory ν
+                ( associative-comp-functor-Synthetic-Category-Theory Α H' G' F'))
+              ( horizontal-comp-iso-Synthetic-Category-Theory Χ γ
+                ( horizontal-comp-iso-Synthetic-Category-Theory Χ β α))))
+          ( inv-iso-right-inv-Synthetic-Category-Theory ν
+            ( associative-comp-functor-Synthetic-Category-Theory Α H G F)))
+        ( comp-iso-Synthetic-Category-Theory
+          ( composition-isomorphism-Synthetic-Category-Theory μ)
+          ( associative-comp-functor-Synthetic-Category-Theory
+            ( associative-comp-isomorphism-Synthetic-Category-Theory Α)
+            ( comp-iso-Synthetic-Category-Theory μ
+              ( inv-iso-Synthetic-Category-Theory ν
+                ( associative-comp-functor-Synthetic-Category-Theory Α H' G' F'))
+              ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+                ( γ)
+                ( horizontal-comp-iso-Synthetic-Category-Theory Χ β α)))
+            ( associative-comp-functor-Synthetic-Category-Theory Α H G F)
+            ( inv-iso-Synthetic-Category-Theory ν
+              ( associative-comp-functor-Synthetic-Category-Theory Α H G F)))
+          ( comp-iso-Synthetic-Category-Theory
+            ( composition-isomorphism-Synthetic-Category-Theory μ)
+            ( horizontal-comp-iso-Synthetic-Category-Theory
+              ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+              ( inv-iso-Synthetic-Category-Theory
+                ( inverse-isomorphism-Synthetic-Category-Theory ν)
+                ( associative-comp-functor-Synthetic-Category-Theory
+                  ( associative-comp-isomorphism-Synthetic-Category-Theory Α)
+                  ( inv-iso-Synthetic-Category-Theory ν
+                    ( associative-comp-functor-Synthetic-Category-Theory Α H' G' F'))
+                  ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+                    ( γ)
+                    ( horizontal-comp-iso-Synthetic-Category-Theory Χ β α))
+                  ( associative-comp-functor-Synthetic-Category-Theory Α H G F)))
+              ( id-iso-Synthetic-Category-Theory
+                ( identity-isomorphism-Synthetic-Category-Theory ι)
+                ( inv-iso-Synthetic-Category-Theory ν
+                  ( associative-comp-functor-Synthetic-Category-Theory Α H G F))))
+            ( comp-iso-Synthetic-Category-Theory
+              ( composition-isomorphism-Synthetic-Category-Theory μ)
+              ( horizontal-comp-iso-Synthetic-Category-Theory
+                ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+                ( horizontal-comp-iso-Synthetic-Category-Theory
+                  ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+                  ( id-iso-Synthetic-Category-Theory
+                    ( identity-isomorphism-Synthetic-Category-Theory ι)
+                    ( inv-iso-Synthetic-Category-Theory ν
+                    ( associative-comp-functor-Synthetic-Category-Theory Α H' G' F')))
+                  ( inv-iso-Synthetic-Category-Theory
+                    ( inverse-isomorphism-Synthetic-Category-Theory ν)
+                    ( preserves-associativity-comp-functor-horizontal-comp-iso-Synthetic-Category-Theory
+                      Ξ γ β α)))
+                ( id-iso-Synthetic-Category-Theory
+                  ( identity-isomorphism-Synthetic-Category-Theory ι)
+                  ( inv-iso-Synthetic-Category-Theory ν
+                    ( associative-comp-functor-Synthetic-Category-Theory Α H G F))))
+              ( comp-iso-Synthetic-Category-Theory
+                ( composition-isomorphism-Synthetic-Category-Theory μ)
+                ( horizontal-comp-iso-Synthetic-Category-Theory
+                  ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+                  ( associative-comp-functor-Synthetic-Category-Theory
+                    ( associative-comp-isomorphism-Synthetic-Category-Theory Α)
+                    ( inv-iso-Synthetic-Category-Theory ν
+                      ( associative-comp-functor-Synthetic-Category-Theory Α H' G' F'))
+                    ( associative-comp-functor-Synthetic-Category-Theory Α H' G' F')
+                    ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+                      ( horizontal-comp-iso-Synthetic-Category-Theory Χ γ β)
+                      ( α)))
+                  ( id-iso-Synthetic-Category-Theory
+                    ( identity-isomorphism-Synthetic-Category-Theory ι)
+                    ( inv-iso-Synthetic-Category-Theory ν
+                      ( associative-comp-functor-Synthetic-Category-Theory Α H G F))))
+                ( comp-iso-Synthetic-Category-Theory
+                  ( composition-isomorphism-Synthetic-Category-Theory μ)
+                  ( horizontal-comp-iso-Synthetic-Category-Theory
+                    ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+                    ( horizontal-comp-iso-Synthetic-Category-Theory
+                      ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+                      ( inv-iso-Synthetic-Category-Theory
+                        ( inverse-isomorphism-Synthetic-Category-Theory ν)
+                        ( inv-iso-left-inv-Synthetic-Category-Theory ν
+                          ( associative-comp-functor-Synthetic-Category-Theory Α H' G' F')))
+                      ( id-iso-Synthetic-Category-Theory
+                        ( identity-isomorphism-Synthetic-Category-Theory ι)
+                        ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+                          ( horizontal-comp-iso-Synthetic-Category-Theory Χ γ β)
+                            (α ))))
+                    ( id-iso-Synthetic-Category-Theory
+                      ( identity-isomorphism-Synthetic-Category-Theory ι)
+                      ( inv-iso-Synthetic-Category-Theory ν
+                        ( associative-comp-functor-Synthetic-Category-Theory Α H G F))))
+                  ( horizontal-comp-iso-Synthetic-Category-Theory
+                    ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+                    ( inv-iso-Synthetic-Category-Theory
+                      ( inverse-isomorphism-Synthetic-Category-Theory ν)
+                      ( left-unit-law-comp-functor-Synthetic-Category-Theory
+                        ( left-unit-law-composition-isomorphism-Synthetic-Category-Theory Λ)
+                        ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+                          ( horizontal-comp-iso-Synthetic-Category-Theory Χ γ β)
+                          ( α))))
+                    ( id-iso-Synthetic-Category-Theory
+                      ( identity-isomorphism-Synthetic-Category-Theory ι)
+                      ( inv-iso-Synthetic-Category-Theory ν
+                        ( associative-comp-functor-Synthetic-Category-Theory Α H G F))))))))))
+```
+
+#### Preservation of isomorphisms of natural isomorphisms by horizontal composition
+
+```agda
+module _
+  {l : Level}
+  where
+
+  record
+    preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory
+      (κ : language-Synthetic-Category-Theory l)
+      (ι : identity-Synthetic-Category-Theory κ)
+      (μ : composition-Synthetic-Category-Theory κ)
+      (Χ : horizontal-composition-Synthetic-Category-Theory κ μ) : UU l
+    where
+    coinductive
+    field
+      preserves-isomorphism-horizontal-comp-iso-Synthetic-Category-Theory :
+        {C D E : category-Synthetic-Category-Theory κ}
+        {F F' : functor-Synthetic-Category-Theory κ C D}
+        {G G' : functor-Synthetic-Category-Theory κ D E}
+        {α β : isomorphism-Synthetic-Category-Theory κ F F'}
+        {γ δ : isomorphism-Synthetic-Category-Theory κ G G'} →
+        3-isomorphism-Synthetic-Category-Theory κ α β →
+        3-isomorphism-Synthetic-Category-Theory κ γ δ →
+        3-isomorphism-Synthetic-Category-Theory κ
+          ( horizontal-comp-iso-Synthetic-Category-Theory Χ γ α)
+          ( horizontal-comp-iso-Synthetic-Category-Theory Χ δ β)
+
+open preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory public
 ```
