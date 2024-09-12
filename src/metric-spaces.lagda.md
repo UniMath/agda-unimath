@@ -25,9 +25,11 @@ open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometric-equivalent-premetric-spaces public
 open import metric-spaces.isometry-metric-spaces public
 open import metric-spaces.isometry-premetric-spaces public
+open import metric-spaces.local-premetric-structures public
 open import metric-spaces.metric-space-of-rational-numbers public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.metric-structures public
+open import metric-spaces.monotonic-premetric-structures public
 open import metric-spaces.ordering-premetric-structures public
 open import metric-spaces.precategory-of-metric-spaces-and-functions public
 open import metric-spaces.precategory-of-metric-spaces-and-isometries public
@@ -36,9 +38,12 @@ open import metric-spaces.premetric-spaces public
 open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.pseudometric-structures public
+open import metric-spaces.reflexive-premetric-structures public
 open import metric-spaces.saturated-metric-space-of-rational-numbers public
 open import metric-spaces.saturated-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.short-functions-premetric-spaces public
 open import metric-spaces.subspaces-metric-spaces public
+open import metric-spaces.symmetric-premetric-structures public
+open import metric-spaces.triangular-premetric-structures public
 ```

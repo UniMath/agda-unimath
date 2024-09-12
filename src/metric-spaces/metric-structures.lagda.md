@@ -14,9 +14,14 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import metric-spaces.closed-premetric-structures
+open import metric-spaces.local-premetric-structures
+open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.ordering-premetric-structures
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures
+open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.symmetric-premetric-structures
+open import metric-spaces.triangular-premetric-structures
 ```
 
 </details>

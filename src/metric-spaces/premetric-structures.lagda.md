@@ -70,7 +70,11 @@ module _
   is-prop-neighborhood-Premetric d = is-prop-type-Relation-Prop (B d)
 ```
 
-### Two points `x` and `y` are indistinguishable in a premetric if `x` and `y` are `d`-neighbours for any positive rational `d`
+### Indistinguishable elements with respect to a premetric
+
+Two elements `x` and `y` are
+{{#concept "indistinguishable" Disambiguation="with respect to a premetric" Agda=is-indistinguishable-Premetric}}
+in a premetric if `x` and `y` are `d`-neighbors for any positive rational `d`.
 
 ```agda
 module _
@@ -92,7 +96,12 @@ module _
     is-prop-type-Prop is-indistinguishable-prop-Premetric
 ```
 
-### Two points `x` and `y` are separated in a premetric if there exists some positive rational `d` such that `x` and `y` are not `d`-neighbours
+### Separation relation with respect to a premetric
+
+Two points `x` and `y` are
+{{#concept "separated" Disambiguation="with respect to a premetric" Agda=is-separated-pr-Premetric}}
+in a premetric if there exists some positive rational `d` such that `x` and `y`
+are not `d`-neighbors.
 
 ```agda
 module _
@@ -114,145 +123,6 @@ module _
     is-prop-type-Prop is-separated-pt-prop-Premetric
 ```
 
-### A premetric is reflexive if any element is indistinguishable from itself
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  where
-
-  is-reflexive-prop-Premetric : Prop (l1 ⊔ l2)
-  is-reflexive-prop-Premetric =
-    Π-Prop ℚ⁺ (is-reflexive-prop-Relation-Prop ∘ B)
-
-  is-reflexive-Premetric : UU (l1 ⊔ l2)
-  is-reflexive-Premetric = type-Prop is-reflexive-prop-Premetric
-
-  is-prop-is-reflexive-Premetric : is-prop is-reflexive-Premetric
-  is-prop-is-reflexive-Premetric =
-    is-prop-type-Prop is-reflexive-prop-Premetric
-```
-
-### A premetric is symmetric if `d`-neighborhoods are symmetric for all positive rational number `d`
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  where
-
-  is-symmetric-prop-Premetric : Prop (l1 ⊔ l2)
-  is-symmetric-prop-Premetric =
-    Π-Prop ℚ⁺ (is-symmetric-prop-Relation-Prop ∘ B)
-
-  is-symmetric-Premetric : UU (l1 ⊔ l2)
-  is-symmetric-Premetric = type-Prop is-symmetric-prop-Premetric
-
-  is-prop-is-symmetric-Premetric : is-prop is-symmetric-Premetric
-  is-prop-is-symmetric-Premetric =
-    is-prop-type-Prop is-symmetric-prop-Premetric
-```
-
-### A premetric is local if indistinguishability has propositional fibers
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  where
-
-  is-local-prop-Premetric : Prop (l1 ⊔ l2)
-  is-local-prop-Premetric =
-    Π-Prop A (is-prop-Prop ∘ Σ A ∘ is-indistinguishable-Premetric B)
-
-  is-local-Premetric : UU (l1 ⊔ l2)
-  is-local-Premetric = type-Prop is-local-prop-Premetric
-
-  is-prop-is-local-Premetric : is-prop is-local-Premetric
-  is-prop-is-local-Premetric = is-prop-type-Prop is-local-prop-Premetric
-```
-
-### A premetric is tight if any two indistinguishable elements are equal
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  where
-
-  is-tight-Premetric : UU (l1 ⊔ l2)
-  is-tight-Premetric =
-    (x y : A) → is-indistinguishable-Premetric B x y → x ＝ y
-```
-
-### A premetric is monotonic if any `d₁`-neighborhoods are `d₂`-neighborhoods for `d₁ < d₂`
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  where
-
-  is-monotonic-prop-Premetric : Prop (l1 ⊔ l2)
-  is-monotonic-prop-Premetric =
-    Π-Prop
-      ( A)
-      ( λ x →
-        ( Π-Prop
-          ( A)
-          ( λ y →
-            ( Π-Prop
-              ( ℚ⁺)
-              ( λ d₁ →
-                ( Π-Prop
-                  ( ℚ⁺)
-                  ( λ d₂ →
-                    ( Π-Prop
-                      ( le-ℚ⁺ d₁ d₂)
-                      ( λ H →
-                        hom-Prop (B d₁ x y) (B d₂ x y))))))))))
-
-  is-monotonic-Premetric : UU (l1 ⊔ l2)
-  is-monotonic-Premetric = type-Prop is-monotonic-prop-Premetric
-
-  is-prop-is-monotonic-Premetric : is-prop is-monotonic-Premetric
-  is-prop-is-monotonic-Premetric = is-prop-type-Prop is-monotonic-prop-Premetric
-```
-
-### A premetric is triangular if it is additively transitive
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  where
-
-  is-triangular-prop-Premetric : Prop (l1 ⊔ l2)
-  is-triangular-prop-Premetric =
-    Π-Prop
-      ( A)
-      ( λ x →
-        ( Π-Prop
-          ( A)
-          ( λ y →
-            ( Π-Prop
-              ( A)
-              ( λ z →
-                Π-Prop
-                  ( ℚ⁺)
-                  ( λ d₁ →
-                    ( Π-Prop
-                      ( ℚ⁺)
-                      ( λ d₂ →
-                        hom-Prop
-                          ( B d₂ y z)
-                          ( hom-Prop
-                            ( B d₁ x y)
-                            ( B (d₁ +ℚ⁺ d₂) x z))))))))))
-
-  is-triangular-Premetric : UU (l1 ⊔ l2)
-  is-triangular-Premetric = type-Prop is-triangular-prop-Premetric
-
-  is-prop-is-triangular-Premetric : is-prop is-triangular-Premetric
-  is-prop-is-triangular-Premetric =
-    is-prop-type-Prop is-triangular-prop-Premetric
-```
-
 ## Properties
 
 ### Points separated by a premetric structure are not indistinguishable
@@ -272,191 +142,7 @@ module _
       ( S)
 ```
 
-### Indistiguishability in a reflexive premetric is reflexive
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (R : is-reflexive-Premetric B)
-  where
-
-  is-reflexive-is-indistinguishable-reflexive-Premetric :
-    is-reflexive (is-indistinguishable-Premetric B)
-  is-reflexive-is-indistinguishable-reflexive-Premetric x d = R d x
-```
-
-### In a reflexive premetric, equal elements are indistinguishable
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (H : is-reflexive-Premetric B)
-  where
-
-  indistinguishable-eq-reflexive-Premetric :
-    {x y : A} → x ＝ y → is-indistinguishable-Premetric B x y
-  indistinguishable-eq-reflexive-Premetric {x} {.x} refl d = H d x
-```
-
-### Being separated in a reflexive premetric is irreflexive
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (R : is-reflexive-Premetric B)
-  where
-
-  is-irreflexive-is-separated-pt-is-reflexive-Premetric :
-    (x : A) → ¬ (is-separated-pt-Premetric B x x)
-  is-irreflexive-is-separated-pt-is-reflexive-Premetric x =
-    elim-exists
-      ( empty-Prop)
-      ( λ d H → H (R d x))
-```
-
-### Indistiguishability in a symmetric premetric is symmetric
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (S : is-symmetric-Premetric B)
-  where
-
-  is-symmetric-is-indistinguishable-is-symmetric-Premetric :
-    is-symmetric (is-indistinguishable-Premetric B)
-  is-symmetric-is-indistinguishable-is-symmetric-Premetric x y H d =
-    S d x y (H d)
-```
-
-### Being separated in a symmetric premetric is symmetric
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (S : is-symmetric-Premetric B)
-  where
-
-  is-symmetric-is-separated-pt-is-symmetric-Premetric :
-    is-symmetric (is-separated-pt-Premetric B)
-  is-symmetric-is-separated-pt-is-symmetric-Premetric x y =
-    elim-exists
-      ( is-separated-pt-prop-Premetric B y x)
-      ( λ d I → intro-exists d (I ∘ S d y x))
-```
-
-### In a local reflexive premetric, indistinguishability is torsorial
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (R : is-reflexive-Premetric B) (L : is-local-Premetric B) (x : A)
-  where
-
-  is-torsorial-indistinguishable-local-reflexive-Premetric :
-    is-torsorial (is-indistinguishable-Premetric B x)
-  is-torsorial-indistinguishable-local-reflexive-Premetric =
-    is-proof-irrelevant-is-prop (L x) (x , λ d → R d x)
-
-  is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric :
-    (y : A) → is-equiv (indistinguishable-eq-reflexive-Premetric B R)
-  is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric =
-    fundamental-theorem-id
-      ( is-torsorial-indistinguishable-local-reflexive-Premetric)
-      ( λ y → indistinguishable-eq-reflexive-Premetric B R {x} {y})
-```
-
-### Any type equipped with a reflexive local premetric is a set
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (R : is-reflexive-Premetric B) (L : is-local-Premetric B)
-  where
-
-  is-set-has-local-reflexive-Premetric : is-set A
-  is-set-has-local-reflexive-Premetric x y =
-    is-prop-is-equiv
-      ( is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric
-        B
-        R
-        L
-        x
-        y)
-      ( is-prop-is-indistinguishable-Premetric B x y)
-```
-
-### Any tight premetric is local
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (T : is-tight-Premetric B)
-  where
-
-  is-local-is-tight-Premetric : is-local-Premetric B
-  is-local-is-tight-Premetric x =
-    is-prop-all-elements-equal
-      ( λ (u , I) (v , J) →
-        eq-type-subtype
-          ( is-indistinguishable-prop-Premetric B x)
-          ( inv (T x u I) ∙ T x v J))
-```
-
-### Any reflexive local premetric is tight
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (R : is-reflexive-Premetric B) (L : is-local-Premetric B)
-  where
-
-  is-tight-is-local-reflexive-Premetric : is-tight-Premetric B
-  is-tight-is-local-reflexive-Premetric x =
-    ( map-inv-is-equiv) ∘
-    ( is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric B R L x)
-```
-
-### Indistiguishability in a triangular premetric is transitive
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (T : is-triangular-Premetric B)
-  where
-
-  is-transitive-is-indistinguishable-triangular-Premetric :
-    is-transitive (is-indistinguishable-Premetric B)
-  is-transitive-is-indistinguishable-triangular-Premetric x y z H K d =
-    tr
-      ( λ h → neighborhood-Premetric B h x z)
-      ( eq-add-split-ℚ⁺ d)
-      ( T
-        ( x)
-        ( y)
-        ( z)
-        ( left-summand-split-ℚ⁺ d)
-        ( right-summand-split-ℚ⁺ d)
-        ( H (right-summand-split-ℚ⁺ d))
-        ( K (left-summand-split-ℚ⁺ d)))
-```
-
-### Any triangular reflexive premetric is monotonic
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (R : is-reflexive-Premetric B) (T : is-triangular-Premetric B)
-  where
-
-  is-monotonic-is-reflexive-triangular-Premetric : is-monotonic-Premetric B
-  is-monotonic-is-reflexive-triangular-Premetric x y d₁ d₂ I H₁ =
-    tr
-      ( λ d → neighborhood-Premetric B d x y)
-      ( right-diff-law-add-ℚ⁺ d₁ d₂ I)
-      ( T x y y d₁ (le-diff-ℚ⁺ d₁ d₂ I) (R (le-diff-ℚ⁺ d₁ d₂ I) y) H₁)
-```
-
-### Two premetrics on a type are equal if they define the same neighborhoods
+### Equality of premetric structures
 
 ```agda
 module _

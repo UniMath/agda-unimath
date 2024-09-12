@@ -13,7 +13,12 @@ open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import metric-spaces.local-premetric-structures
+open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-structures
+open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.symmetric-premetric-structures
+open import metric-spaces.triangular-premetric-structures
 ```
 
 </details>

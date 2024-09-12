@@ -21,11 +21,16 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import metric-spaces.local-premetric-structures
 open import metric-spaces.metric-structures
+open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-spaces
 open import metric-spaces.pseudometric-structures
+open import metric-spaces.reflexive-premetric-structures
+open import metric-spaces.symmetric-premetric-structures
+open import metric-spaces.triangular-premetric-structures
 ```
 
 </details>
