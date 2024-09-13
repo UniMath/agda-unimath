@@ -26,6 +26,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.injective-maps
 open import foundation-core.retractions
 ```
 
@@ -60,6 +61,24 @@ abstract
     is-decidable-equiv
       ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
       ( K b)
+```
+
+### Left cancellation for decidable maps
+
+If a composite `g ∘ f` is decidable and the left factor `g` is injective, then
+the right factor `f` is decidable.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → B} {g : B → C}
+  where
+
+  abstract
+    is-decidable-map-right-factor' :
+      is-decidable-map (g ∘ f) → is-injective g → is-decidable-map f
+    is-decidable-map-right-factor' GF G y with (GF (g y))
+    ... | inl q = inl (pr1 q , G (pr2 q))
+    ... | inr q = inr (λ x → q ((pr1 x) , ap g (pr2 x)))
 ```
 
 ### Retracts into types with decidable equality are decidable

@@ -38,6 +38,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 open import foundation-core.type-theoretic-principle-of-choice
@@ -264,6 +265,27 @@ module _
       is-decidable-map-comp-is-decidable-emb)
 ```
 
+### Left cancellation for decidable embeddings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → B} {g : B → C}
+  where
+
+  is-decidable-emb-right-factor' :
+      is-decidable-emb (g ∘ f) → is-emb g → is-decidable-emb f
+  is-decidable-emb-right-factor' GH G =
+    ( is-emb-right-factor g f G (is-emb-is-decidable-emb GH) ,
+      is-decidable-map-right-factor'
+        ( is-decidable-map-is-decidable-emb GH)
+        ( is-injective-is-emb G))
+
+  is-decidable-emb-right-factor :
+      is-decidable-emb (g ∘ f) → is-decidable-emb g → is-decidable-emb f
+  is-decidable-emb-right-factor GH G =
+    is-decidable-emb-right-factor' GH (is-emb-is-decidable-emb G)
+```
+
 ### Decidable embeddings are closed under homotopies
 
 ```agda
@@ -289,6 +311,28 @@ module _
     is-decidable-emb top → is-decidable-emb right → is-decidable-emb left
   is-decidable-emb-left-map-triangle T R =
     is-decidable-emb-htpy H (is-decidable-emb-comp T R)
+```
+
+### In a commuting triangle of maps, if the left and right maps are decidable embeddings so is the top map
+
+In fact, the right map need only be an embedding.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {top : A → B} {left : A → C} {right : B → C}
+  (H : left ~ right ∘ top)
+  where
+
+  is-decidable-emb-top-map-triangle' :
+    is-emb right → is-decidable-emb left → is-decidable-emb top
+  is-decidable-emb-top-map-triangle' R' L =
+    is-decidable-emb-right-factor' (is-decidable-emb-htpy (inv-htpy H) L) R'
+
+  is-decidable-emb-top-map-triangle :
+    is-decidable-emb right → is-decidable-emb left → is-decidable-emb top
+  is-decidable-emb-top-map-triangle R L =
+    is-decidable-emb-right-factor (is-decidable-emb-htpy (inv-htpy H) L) R
 ```
 
 ### Characterizing equality in the type of decidable embeddings
