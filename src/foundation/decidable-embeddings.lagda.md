@@ -45,8 +45,11 @@ open import foundation-core.type-theoretic-principle-of-choice
 
 ## Idea
 
-A map is said to be a decidable embedding if it is an embedding and its fibers
-are decidable types.
+A [map](foundation-core.function-types.md) is said to be a
+{{#concept "decidable embedding" Disambiguation="of types" Agda=is-decidable-emb}}
+if it is an [embedding](foundation-core.embeddings.md) and its
+[fibers](foundation-core.fibers-of-maps.md) are
+[decidable types](foundation.decidable-types.md).
 
 ## Definitions
 
@@ -231,26 +234,32 @@ abstract
 ### Decidable embeddings are closed under composition
 
 ```agda
-abstract
-  is-decidable-emb-comp :
-    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-    {g : B → C} {f : A → B} →
-    is-decidable-emb f → is-decidable-emb g → is-decidable-emb (g ∘ f)
-  pr1 (is-decidable-emb-comp {g = g} {f} H K) =
-    is-emb-comp _ _ (pr1 K) (pr1 H)
-  pr2 (is-decidable-emb-comp {g = g} {f} H K) x =
-    rec-coproduct
-      ( λ u →
-        is-decidable-equiv
-          ( compute-fiber-comp g f x)
-          ( is-decidable-equiv
-            ( left-unit-law-Σ-is-contr
-              ( is-proof-irrelevant-is-prop
-                ( is-prop-map-is-emb (is-emb-is-decidable-emb K) x) ( u))
-              ( u))
-            ( is-decidable-map-is-decidable-emb H (pr1 u))))
-      ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
-      ( pr2 K x)
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B}
+  (H : is-decidable-emb f) (K : is-decidable-emb g)
+  where
+
+  abstract
+    is-decidable-map-comp-is-decidable-emb :
+      is-decidable-map (g ∘ f)
+    is-decidable-map-comp-is-decidable-emb x =
+      rec-coproduct
+        ( λ u →
+          is-decidable-equiv
+            ( ( left-unit-law-Σ-is-contr
+                ( is-proof-irrelevant-is-prop
+                  ( is-prop-map-is-emb (is-emb-is-decidable-emb K) x) u)
+                ( u)) ∘e
+              ( compute-fiber-comp g f x))
+            ( is-decidable-map-is-decidable-emb H (pr1 u)))
+        ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
+        ( pr2 K x)
+
+  is-decidable-emb-comp : is-decidable-emb (g ∘ f)
+  is-decidable-emb-comp =
+    ( is-emb-comp _ _ (pr1 K) (pr1 H) ,
+      is-decidable-map-comp-is-decidable-emb)
 ```
 
 ### Decidable embeddings are closed under homotopies
@@ -260,12 +269,24 @@ abstract
   is-decidable-emb-htpy :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
     f ~ g → is-decidable-emb g → is-decidable-emb f
-  pr1 (is-decidable-emb-htpy {f = f} {g} H K) =
-    is-emb-htpy H (is-emb-is-decidable-emb K)
-  pr2 (is-decidable-emb-htpy {f = f} {g} H K) b =
-    is-decidable-equiv
-      ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
-      ( is-decidable-map-is-decidable-emb K b)
+  is-decidable-emb-htpy {f = f} {g} H K =
+    ( is-emb-htpy H (is-emb-is-decidable-emb K) ,
+      is-decidable-map-htpy H (is-decidable-map-is-decidable-emb K))
+```
+
+### In a commuting triangle of maps, if the top and right maps are decidable embeddings so is the left map
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {top : A → B} {left : A → C} {right : B → C}
+  (H : left ~ right ∘ top)
+  where
+
+  is-decidable-emb-left-map-triangle :
+    is-decidable-emb top → is-decidable-emb right → is-decidable-emb left
+  is-decidable-emb-left-map-triangle T R =
+    is-decidable-emb-htpy H (is-decidable-emb-comp T R)
 ```
 
 ### Characterizing equality in the type of decidable embeddings
@@ -341,13 +362,11 @@ equiv-precomp-decidable-emb-equiv e C =
 abstract
   is-decidable-emb-ex-falso :
     {l : Level} {X : UU l} → is-decidable-emb (ex-falso {l} {X})
-  pr1 (is-decidable-emb-ex-falso {l} {X}) = is-emb-ex-falso
-  pr2 (is-decidable-emb-ex-falso {l} {X}) x = inr pr1
+  is-decidable-emb-ex-falso = (is-emb-ex-falso , is-decidable-map-ex-falso)
 
 decidable-emb-ex-falso :
   {l : Level} {X : UU l} → empty ↪ᵈ X
-pr1 decidable-emb-ex-falso = ex-falso
-pr2 decidable-emb-ex-falso = is-decidable-emb-ex-falso
+decidable-emb-ex-falso = (ex-falso , is-decidable-emb-ex-falso)
 
 decidable-emb-is-empty :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → A ↪ᵈ B
@@ -357,7 +376,7 @@ decidable-emb-is-empty {A = A} f =
     ( decidable-emb-ex-falso)
 ```
 
-### The map on total spaces induced by a family of decidable embeddings is a decidable embeddings
+### The map on total spaces induced by a family of decidable embeddings is a decidable embedding
 
 ```agda
 module _
@@ -369,10 +388,59 @@ module _
     ((x : A) → is-decidable-emb (f x)) → is-decidable-emb (tot f)
   is-decidable-emb-tot H =
     ( is-emb-tot (λ x → is-emb-is-decidable-emb (H x)) ,
-      is-decidable-map-tot λ x → is-decidable-map-is-decidable-emb (H x))
+      is-decidable-map-tot (λ x → is-decidable-map-is-decidable-emb (H x)))
 
   decidable-emb-tot : ((x : A) → B x ↪ᵈ C x) → Σ A B ↪ᵈ Σ A C
-  pr1 (decidable-emb-tot f) = tot (λ x → map-decidable-emb (f x))
-  pr2 (decidable-emb-tot f) =
-    is-decidable-emb-tot (λ x → is-decidable-emb-map-decidable-emb (f x))
+  decidable-emb-tot f =
+    ( tot (λ x → map-decidable-emb (f x)) ,
+      is-decidable-emb-tot (λ x → is-decidable-emb-map-decidable-emb (f x)))
+```
+
+### The map on total spaces induced by a decidable embedding on the base is a decidable embedding
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3)
+  where
+
+  is-decidable-emb-map-Σ-map-base :
+    {f : A → B} → is-decidable-emb f → is-decidable-emb (map-Σ-map-base f C)
+  is-decidable-emb-map-Σ-map-base {f} H =
+    ( is-emb-map-Σ-map-base C (is-emb-is-decidable-emb H) ,
+      is-decidable-map-Σ-map-base C (is-decidable-map-is-decidable-emb H))
+
+  decidable-emb-map-Σ-map-base :
+    (f : A ↪ᵈ B) → Σ A (C ∘ map-decidable-emb f) ↪ᵈ Σ B C
+  decidable-emb-map-Σ-map-base f =
+    ( map-Σ-map-base (map-decidable-emb f) C ,
+      is-decidable-emb-map-Σ-map-base ((is-decidable-emb-map-decidable-emb f)))
+```
+
+### The functoriality of dependent pair types preserves decidable embeddings
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
+  where
+
+  is-decidable-emb-map-Σ :
+    {f : A → B} {g : (x : A) → C x → D (f x)} →
+    is-decidable-emb f →
+    ((x : A) → is-decidable-emb (g x)) →
+    is-decidable-emb (map-Σ D f g)
+  is-decidable-emb-map-Σ {f} {g} F G =
+    is-decidable-emb-left-map-triangle
+      ( triangle-map-Σ D f g)
+      ( is-decidable-emb-tot G)
+      ( is-decidable-emb-map-Σ-map-base D F)
+
+  decidable-emb-Σ :
+    (f : A ↪ᵈ B) →
+    ((x : A) → C x ↪ᵈ D (map-decidable-emb f x)) →
+    Σ A C ↪ᵈ Σ B D
+  decidable-emb-Σ f g =
+    ( ( map-Σ D (map-decidable-emb f) (λ x → map-decidable-emb (g x))) ,
+      ( is-decidable-emb-map-Σ
+        ( is-decidable-emb-map-decidable-emb f)
+        ( λ x → is-decidable-emb-map-decidable-emb (g x))))
 ```

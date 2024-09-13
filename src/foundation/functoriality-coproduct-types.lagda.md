@@ -149,6 +149,12 @@ module _
         ( is-section-fiber-fiber-map-coproduct-inl x)
         ( is-retraction-fiber-fiber-map-coproduct-inl x)
 
+  compute-fiber-inl-map-coproduct :
+    (x : A) → fiber f x ≃ fiber (map-coproduct f g) (inl x)
+  compute-fiber-inl-map-coproduct x =
+    ( fiber-map-coproduct-inl-fiber x ,
+      is-equiv-fiber-map-coproduct-inl-fiber x)
+
   fiber-map-coproduct-inr-fiber :
     (y : B) → fiber g y → fiber (map-coproduct f g) (inr y)
   pr1 (fiber-map-coproduct-inr-fiber y (b' , p)) = inr b'
@@ -184,6 +190,12 @@ module _
         ( fiber-fiber-map-coproduct-inr y)
         ( is-section-fiber-fiber-map-coproduct-inr y)
         ( is-retraction-fiber-fiber-map-coproduct-inr y)
+
+  compute-fiber-inr-map-coproduct :
+    (y : B) → fiber g y ≃ fiber (map-coproduct f g) (inr y)
+  compute-fiber-inr-map-coproduct y =
+    ( fiber-map-coproduct-inr-fiber y ,
+      is-equiv-fiber-map-coproduct-inr-fiber y)
 ```
 
 ### Functoriality of coproducts preserves equivalences
