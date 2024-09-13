@@ -196,26 +196,27 @@ equiv-Fiber-Decidable-Prop l A =
           ( equiv-product (equiv-is-prop-map-is-emb f) id-equiv))))
 ```
 
-### Any equivalence is a decidable embedding
+### Equivalences are decidable embeddings
 
 ```agda
 abstract
   is-decidable-emb-is-equiv :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
     is-equiv f → is-decidable-emb f
-  pr1 (is-decidable-emb-is-equiv H) = is-emb-is-equiv H
-  pr2 (is-decidable-emb-is-equiv H) x = inl (center (is-contr-map-is-equiv H x))
+  is-decidable-emb-is-equiv H =
+    ( is-emb-is-equiv H , is-decidable-map-is-equiv H)
+```
 
+### Identity maps are decidable embeddings
+
+```agda
 abstract
   is-decidable-emb-id :
     {l1 : Level} {A : UU l1} → is-decidable-emb (id {A = A})
-  pr1 (is-decidable-emb-id {l1} {A}) = is-emb-id
-  pr2 (is-decidable-emb-id {l1} {A}) x = inl (pair x refl)
+  is-decidable-emb-id = (is-emb-id , is-decidable-map-id)
 
-decidable-emb-id :
-  {l1 : Level} {A : UU l1} → A ↪ᵈ A
-pr1 (decidable-emb-id {l1} {A}) = id
-pr2 (decidable-emb-id {l1} {A}) = is-decidable-emb-id
+decidable-emb-id : {l1 : Level} {A : UU l1} → A ↪ᵈ A
+decidable-emb-id = (id , is-decidable-emb-id)
 ```
 
 ### Being a decidable embedding is a property

@@ -19,6 +19,8 @@ open import foundation.identity-types
 open import foundation.retracts-of-maps
 open import foundation.universe-levels
 
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -101,6 +103,25 @@ abstract
   is-decidable-map-ex-falso :
     {l : Level} {X : UU l} → is-decidable-map (ex-falso {l} {X})
   is-decidable-map-ex-falso x = inr pr1
+```
+
+### The identity map is decidable
+
+```agda
+abstract
+  is-decidable-map-id :
+    {l : Level} {X : UU l} → is-decidable-map (id {l} {X})
+  is-decidable-map-id y = inl (y , refl)
+```
+
+### Equivalences are decidable maps
+
+```agda
+abstract
+  is-decidable-map-is-equiv :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-equiv f → is-decidable-map f
+  is-decidable-map-is-equiv H x = inl (center (is-contr-map-is-equiv H x))
 ```
 
 ### The map on total spaces induced by a family of decidable maps is decidable
