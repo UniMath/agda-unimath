@@ -62,7 +62,7 @@ module _
 ### Closeness relation in a premetric
 
 Two points `x` and `y` in a type `A` are in a
-{{#concept "`d`-neighborhood" Disambiguation="in a premetric" Agda=neighbourhood-Premetric}}
+{{#concept "`d`-neighborhood" Disambiguation="in a premetric" Agda=neighborhood-Premetric}}
 in a premetric `B` for some positive rational numvber `d` if `B d x y` holds.
 
 In this case, `d` is called an
