@@ -50,6 +50,13 @@ for any `(x y : A)`, if `x` and `y` are in a `(ε + δ)`-neighborhood for all
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 `δ`, then they are in a `ε`-neighborhood.
 
+or, equivalently if for any `(x y : A)`, the subset of
+[upper bounds](metric-spaces.premetric-structures.md) on the distance between
+`x` and `y` is closed on the left:
+
+for any `(ε : ℚ⁺)`, if `ε + δ` is an upper bound of the distance between `x` and
+`y` for all `(δ : ℚ⁺)`, then so is `ε`.
+
 ## Definitions
 
 ### The property of being a closed premetric

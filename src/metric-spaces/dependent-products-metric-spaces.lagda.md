@@ -35,6 +35,10 @@ dependent functions into the carrier types of the family. Two functions `f` and
 `g` are in a [`d`-neighborhood](metric-spaces.premetric-structures.md) in the
 product structure if this holds for all the evaluations `f x` and `g x`.
 
+In this premetric, [upper bounds](metric-spaces.premetric-structures.md) on the
+distance between `f` and `g` are bounded below by the supremum of the distances
+between each `f x` and `g x`.
+
 The evaluation functions from the product metric space to each projected metric
 space are [short maps](metric-spaces.short-functions-metric-spaces.md).
 
