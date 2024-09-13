@@ -15,9 +15,9 @@ open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equality-coproduct-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
-open import foundation.equality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
