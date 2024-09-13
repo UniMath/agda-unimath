@@ -42,6 +42,10 @@ the
 
 This follows Definition 4.5.2 from {{#cite Booij2020PhD}}.
 
+In the classical interpretation, for a premetric `B` on a type `A` and some
+positive rational number `d : ℚ⁺`, `B d x y` holds for some points `(x y : A)`
+if the distance between `x` and `y` is bounded above by `d`.
+
 ## Definitions
 
 ### Premetric structures
@@ -57,6 +61,14 @@ module _
 
 ### Closeness relation in a premetric
 
+Two points `x` and `y` in a type `A` are in a
+{{#concept "`d`-neighborhood" Disambiguation="in a premetric" Agda=neighbourhood-Premetric}}
+in a premetric `B` for some positive rational numvber `d` if `B d x y` holds.
+
+In this case, `d` is called an
+{{#concept "upper bound" Disambiguation="on the distance in a premetric" Agda=is-upper-bound-dist-Premetric}}
+on the distance between `x` and `y` in the premetric `B`.
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
@@ -68,13 +80,22 @@ module _
   is-prop-neighborhood-Premetric :
     (d : ℚ⁺) (x y : A) → is-prop (neighborhood-Premetric d x y)
   is-prop-neighborhood-Premetric d = is-prop-type-Relation-Prop (B d)
+
+  is-upper-bound-dist-Premetric : A → A → ℚ⁺ → UU l2
+  is-upper-bound-dist-Premetric x y d = neighborhood-Premetric d x y
+
+  is-prop-is-upper-bound-dist-Premetric :
+    (x y : A) (d : ℚ⁺) → is-prop (is-upper-bound-dist-Premetric x y d)
+  is-prop-is-upper-bound-dist-Premetric x y d =
+    is-prop-neighborhood-Premetric d x y
 ```
 
 ### Indistinguishable elements with respect to a premetric
 
 Two elements `x` and `y` are
 {{#concept "indistinguishable" Disambiguation="with respect to a premetric" Agda=is-indistinguishable-Premetric}}
-in a premetric if `x` and `y` are `d`-neighbors for any positive rational `d`.
+in a premetric if `x` and `y` are `d`-neighbors for any positive rational `d`
+i.e. if their distance is bounded by any positive rational.
 
 ```agda
 module _
