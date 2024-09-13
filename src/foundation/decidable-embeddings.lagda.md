@@ -16,6 +16,8 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-coproduct-types
+open import foundation.equality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
@@ -490,6 +492,25 @@ module _
       ( is-decidable-emb-map-Σ
         ( is-decidable-emb-map-decidable-emb f)
         ( λ x → is-decidable-emb-map-decidable-emb (g x))))
+```
+
+### Products of decidable embeddings are decidable embeddings
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  where
+
+  is-decidable-emb-map-product :
+    {f : A → B} {g : C → D} →
+    is-decidable-emb f → is-decidable-emb g → is-decidable-emb (map-product f g)
+  is-decidable-emb-map-product (eF , dF) (eG , dG) =
+    ( is-emb-map-product eF eG , is-decidable-map-product dF dG)
+
+  decidable-emb-product :
+    A ↪ᵈ B → C ↪ᵈ D → A × C ↪ᵈ B × D
+  decidable-emb-product (f , F) (g , G) =
+    (map-product f g , is-decidable-emb-map-product F G)
 ```
 
 ### Decidable embeddings are closed under base change
