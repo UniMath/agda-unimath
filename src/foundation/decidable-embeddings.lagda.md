@@ -8,7 +8,9 @@ module foundation.decidable-embeddings where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-morphisms-arrows
 open import foundation.decidable-maps
+open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -19,6 +21,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
+open import foundation.retracts-of-maps
 open import foundation.structured-type-duality
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
@@ -29,7 +32,6 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.decidable-propositions
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -443,4 +445,50 @@ module _
       ( is-decidable-emb-map-Σ
         ( is-decidable-emb-map-decidable-emb f)
         ( λ x → is-decidable-emb-map-decidable-emb (g x))))
+```
+
+### Decidable embeddings are closed under base change
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  {f : A → B} {g : C → D}
+  where
+
+  is-decidable-prop-map-base-change :
+    cartesian-hom-arrow g f → is-decidable-prop-map f → is-decidable-prop-map g
+  is-decidable-prop-map-base-change α F d =
+    is-decidable-prop-equiv
+      ( equiv-fibers-cartesian-hom-arrow g f α d)
+      ( F (map-codomain-cartesian-hom-arrow g f α d))
+
+  is-decidable-emb-base-change :
+    cartesian-hom-arrow g f → is-decidable-emb f → is-decidable-emb g
+  is-decidable-emb-base-change α F =
+    is-decidable-emb-is-decidable-prop-map
+      ( is-decidable-prop-map-base-change α
+        ( is-decidable-prop-map-is-decidable-emb F))
+```
+
+### Decidable embeddings are closed under retracts of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f : A → B} {g : X → Y}
+  where
+
+  is-decidable-prop-map-retract-map :
+    f retract-of-map g → is-decidable-prop-map g → is-decidable-prop-map f
+  is-decidable-prop-map-retract-map R G x =
+    is-decidable-prop-retract-of
+      ( retract-fiber-retract-map f g R x)
+      ( G (map-codomain-inclusion-retract-map f g R x))
+
+  is-decidable-emb-retract-map :
+    f retract-of-map g → is-decidable-emb g → is-decidable-emb f
+  is-decidable-emb-retract-map R G =
+    is-decidable-emb-is-decidable-prop-map
+      ( is-decidable-prop-map-retract-map R
+        ( is-decidable-prop-map-is-decidable-emb G))
 ```

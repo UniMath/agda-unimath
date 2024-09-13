@@ -156,10 +156,8 @@ module _
   where
 
   is-decidable-map-base-change :
-    is-decidable-map f →
-    cartesian-hom-arrow g f →
-    is-decidable-map g
-  is-decidable-map-base-change F α d =
+    cartesian-hom-arrow g f → is-decidable-map f → is-decidable-map g
+  is-decidable-map-base-change α F d =
     is-decidable-equiv
       ( equiv-fibers-cartesian-hom-arrow g f α d)
       ( F (map-codomain-cartesian-hom-arrow g f α d))
