@@ -45,9 +45,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A {{#concept "decidable proposition" Agda=is-decidable-Prop}} is a
-[proposition](foundation-core.propositions.md) that has a
-[decidable](foundation.decidable-types.md) underlying type.
+A **decidable proposition** is a [proposition](foundation-core.propositions.md)
+that has a [decidable](foundation.decidable-types.md) underlying type.
 
 ## Properties
 
