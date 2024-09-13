@@ -243,13 +243,12 @@ abstract
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {g : B → C} {f : A → B}
-  (H : is-decidable-emb f) (K : is-decidable-emb g)
   where
 
   abstract
-    is-decidable-map-comp-is-decidable-emb :
-      is-decidable-map (g ∘ f)
-    is-decidable-map-comp-is-decidable-emb x =
+    is-decidable-map-comp-is-decidable-emb' :
+      is-decidable-emb g → is-decidable-map f → is-decidable-map (g ∘ f)
+    is-decidable-map-comp-is-decidable-emb' K H x =
       rec-coproduct
         ( λ u →
           is-decidable-equiv
@@ -258,14 +257,22 @@ module _
                   ( is-prop-map-is-emb (is-emb-is-decidable-emb K) x) u)
                 ( u)) ∘e
               ( compute-fiber-comp g f x))
-            ( is-decidable-map-is-decidable-emb H (pr1 u)))
+            ( H (pr1 u)))
         ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
-        ( pr2 K x)
+        ( is-decidable-map-is-decidable-emb K x)
 
-  is-decidable-emb-comp : is-decidable-emb (g ∘ f)
-  is-decidable-emb-comp =
+  is-decidable-map-comp-is-decidable-emb :
+    is-decidable-emb g → is-decidable-emb f → is-decidable-map (g ∘ f)
+  is-decidable-map-comp-is-decidable-emb K H =
+    is-decidable-map-comp-is-decidable-emb'
+      ( K)
+      ( is-decidable-map-is-decidable-emb H)
+
+  is-decidable-emb-comp :
+    is-decidable-emb g → is-decidable-emb f → is-decidable-emb (g ∘ f)
+  is-decidable-emb-comp K H =
     ( is-emb-comp _ _ (pr1 K) (pr1 H) ,
-      is-decidable-map-comp-is-decidable-emb)
+      is-decidable-map-comp-is-decidable-emb K H)
 ```
 
 ### Left cancellation for decidable embeddings
@@ -313,7 +320,7 @@ module _
   is-decidable-emb-left-map-triangle :
     is-decidable-emb top → is-decidable-emb right → is-decidable-emb left
   is-decidable-emb-left-map-triangle T R =
-    is-decidable-emb-htpy H (is-decidable-emb-comp T R)
+    is-decidable-emb-htpy H (is-decidable-emb-comp R T)
 ```
 
 ### In a commuting triangle of maps, if the left and right maps are decidable embeddings so is the top map
@@ -396,13 +403,13 @@ equiv-precomp-decidable-emb-equiv e C =
       equiv-iff-is-prop
         ( is-prop-is-decidable-emb g)
         ( is-prop-is-decidable-emb (g ∘ map-equiv e))
-        ( is-decidable-emb-comp (is-decidable-emb-is-equiv (pr2 e)))
+        ( λ H → is-decidable-emb-comp H (is-decidable-emb-is-equiv (pr2 e)))
         ( λ d →
           is-decidable-emb-htpy
             ( λ b → ap g (inv (is-section-map-inv-equiv e b)))
             ( is-decidable-emb-comp
-              ( is-decidable-emb-is-equiv (is-equiv-map-inv-equiv e))
-              ( d))))
+              ( d)
+              ( is-decidable-emb-is-equiv (is-equiv-map-inv-equiv e)))))
 ```
 
 ### Any map out of the empty type is a decidable embedding
