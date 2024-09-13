@@ -75,7 +75,7 @@ is-decidable-map-retraction d i (r , R) b =
     ( d (i (r b)) b)
 ```
 
-### Any map out of the empty type is a decidable embedding
+### Any map out of the empty type is decidable
 
 ```agda
 abstract
@@ -152,7 +152,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : C → D)
+  {f : A → B} {g : C → D}
   where
 
   is-decidable-map-base-change :
