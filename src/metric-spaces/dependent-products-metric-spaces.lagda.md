@@ -13,7 +13,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import metric-spaces.local-premetric-structures
+open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
@@ -61,17 +61,17 @@ module _
   is-reflexive-structure-Π-Metric-Space :
     is-reflexive-Premetric structure-Π-Metric-Space
   is-reflexive-structure-Π-Metric-Space d f a =
-    is-reflexive-premetric-structure-Metric-Space (P a) d (f a)
+    is-reflexive-structure-Metric-Space (P a) d (f a)
 
   is-symmetric-structure-Π-Metric-Space :
     is-symmetric-Premetric structure-Π-Metric-Space
   is-symmetric-structure-Π-Metric-Space d f g H a =
-    is-symmetric-premetric-structure-Metric-Space (P a) d (f a) (g a) (H a)
+    is-symmetric-structure-Metric-Space (P a) d (f a) (g a) (H a)
 
   is-triangular-structure-Π-Metric-Space :
     is-triangular-Premetric structure-Π-Metric-Space
   is-triangular-structure-Π-Metric-Space f g h d₁ d₂ H K a =
-    is-triangular-premetric-structure-Metric-Space
+    is-triangular-structure-Metric-Space
       ( P a)
       ( f a)
       ( g a)
@@ -89,7 +89,7 @@ module _
       ( λ f g H →
         eq-htpy
           ( λ a →
-            is-tight-premetric-structure-Metric-Space
+            is-tight-structure-Metric-Space
               ( P a)
               ( f a)
               ( g a)

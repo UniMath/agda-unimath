@@ -21,7 +21,7 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import metric-spaces.local-premetric-structures
+open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-spaces
@@ -110,56 +110,60 @@ module _
   neighborhood-Metric-Space =
     neighborhood-Premetric-Space premetric-Metric-Space
 
-  is-reflexive-premetric-structure-Metric-Space :
+  is-reflexive-structure-Metric-Space :
     is-reflexive-Premetric structure-Metric-Space
-  is-reflexive-premetric-structure-Metric-Space =
+  is-reflexive-structure-Metric-Space =
     is-reflexive-is-metric-Premetric
       structure-Metric-Space
       is-metric-structure-Metric-Space
 
-  is-symmetric-premetric-structure-Metric-Space :
+  is-symmetric-structure-Metric-Space :
     is-symmetric-Premetric structure-Metric-Space
-  is-symmetric-premetric-structure-Metric-Space =
+  is-symmetric-structure-Metric-Space =
     is-symmetric-is-metric-Premetric
       structure-Metric-Space
       is-metric-structure-Metric-Space
 
-  is-local-premetric-structure-Metric-Space :
+  is-local-structure-Metric-Space :
     is-local-Premetric structure-Metric-Space
-  is-local-premetric-structure-Metric-Space =
+  is-local-structure-Metric-Space =
     is-local-is-metric-Premetric
       structure-Metric-Space
       is-metric-structure-Metric-Space
 
-  is-triangular-premetric-structure-Metric-Space :
+  is-triangular-structure-Metric-Space :
     is-triangular-Premetric structure-Metric-Space
-  is-triangular-premetric-structure-Metric-Space =
+  is-triangular-structure-Metric-Space =
     is-triangular-is-metric-Premetric
       structure-Metric-Space
       is-metric-structure-Metric-Space
 
-  is-tight-premetric-structure-Metric-Space :
-    is-tight-Premetric structure-Metric-Space
-  is-tight-premetric-structure-Metric-Space =
-    is-tight-is-local-reflexive-Premetric
-      structure-Metric-Space
-      is-reflexive-premetric-structure-Metric-Space
-      is-local-premetric-structure-Metric-Space
+  is-extensional-structure-Metric-Space :
+    is-extensional-Premetric structure-Metric-Space
+  is-extensional-structure-Metric-Space =
+    is-reflexive-structure-Metric-Space ,
+    is-local-structure-Metric-Space
 
-  is-monotonic-premetric-structure-Metric-Space :
+  is-tight-structure-Metric-Space :
+    is-tight-Premetric structure-Metric-Space
+  is-tight-structure-Metric-Space =
+    is-tight-is-extensional-Premetric
+      structure-Metric-Space
+      is-extensional-structure-Metric-Space
+
+  is-monotonic-structure-Metric-Space :
     is-monotonic-Premetric structure-Metric-Space
-  is-monotonic-premetric-structure-Metric-Space =
+  is-monotonic-structure-Metric-Space =
     is-monotonic-is-reflexive-triangular-Premetric
       structure-Metric-Space
-      is-reflexive-premetric-structure-Metric-Space
-      is-triangular-premetric-structure-Metric-Space
+      is-reflexive-structure-Metric-Space
+      is-triangular-structure-Metric-Space
 
   is-set-type-Metric-Space : is-set type-Metric-Space
   is-set-type-Metric-Space =
-    is-set-has-local-reflexive-Premetric
+    is-set-has-extensional-Premetric
       structure-Metric-Space
-      is-reflexive-premetric-structure-Metric-Space
-      is-local-premetric-structure-Metric-Space
+      is-extensional-structure-Metric-Space
 
   set-Metric-Space : Set l1
   set-Metric-Space = (type-Metric-Space , is-set-type-Metric-Space)
@@ -194,11 +198,10 @@ module _
   equiv-indistinguishable-eq-Metric-Space =
     ( indistinguishable-eq-reflexive-Premetric
       ( structure-Metric-Space M)
-      ( is-reflexive-premetric-structure-Metric-Space M)) ,
-    ( is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric
+      ( is-reflexive-structure-Metric-Space M)) ,
+    ( is-fiberwise-equiv-indistinguishable-is-extensional-Premetric
       ( structure-Metric-Space M)
-      ( is-reflexive-premetric-structure-Metric-Space M)
-      ( is-local-premetric-structure-Metric-Space M)
+      ( is-extensional-structure-Metric-Space M)
       ( x)
       ( y))
 

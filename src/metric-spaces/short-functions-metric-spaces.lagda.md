@@ -189,7 +189,7 @@ module _
   is-short-constant-function-Metric-Space :
     is-short-function-Metric-Space A B (λ _ → b)
   is-short-constant-function-Metric-Space ε x y H =
-    is-reflexive-premetric-structure-Metric-Space B ε b
+    is-reflexive-structure-Metric-Space B ε b
 ```
 
 ### Any isometry between metric spaces is short

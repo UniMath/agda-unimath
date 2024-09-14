@@ -12,9 +12,9 @@ open import foundation.logical-equivalences
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.functions-metric-spaces
 open import metric-spaces.isometry-metric-spaces
-open import metric-spaces.local-premetric-structures
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
@@ -64,17 +64,17 @@ module _
   is-reflexive-structure-subset-Metric-Space :
     is-reflexive-Premetric structure-subset-Metric-Space
   is-reflexive-structure-subset-Metric-Space d x =
-    is-reflexive-premetric-structure-Metric-Space A d (pr1 x)
+    is-reflexive-structure-Metric-Space A d (pr1 x)
 
   is-symmetric-structure-subset-Metric-Space :
     is-symmetric-Premetric structure-subset-Metric-Space
   is-symmetric-structure-subset-Metric-Space d x y =
-    is-symmetric-premetric-structure-Metric-Space A d (pr1 x) (pr1 y)
+    is-symmetric-structure-Metric-Space A d (pr1 x) (pr1 y)
 
   is-triangular-structure-subset-Metric-Space :
     is-triangular-Premetric structure-subset-Metric-Space
   is-triangular-structure-subset-Metric-Space x y z =
-    is-triangular-premetric-structure-Metric-Space A (pr1 x) (pr1 y) (pr1 z)
+    is-triangular-structure-Metric-Space A (pr1 x) (pr1 y) (pr1 z)
 
   is-pseudometric-structure-subset-Metric-Space :
     is-pseudometric-Premetric structure-subset-Metric-Space
@@ -93,7 +93,7 @@ module _
       ( λ x y H →
         eq-type-subtype
           ( S)
-          ( is-tight-premetric-structure-Metric-Space A (pr1 x) (pr1 y) H)))
+          ( is-tight-structure-Metric-Space A (pr1 x) (pr1 y) H)))
 
   subspace-Metric-Space : Metric-Space (l ⊔ l1) l2
   pr1 subspace-Metric-Space =

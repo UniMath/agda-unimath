@@ -1,7 +1,7 @@
 # Local premetric structures on types
 
 ```agda
-module metric-spaces.local-premetric-structures where
+module metric-spaces.extensional-premetric-structures where
 ```
 
 <details><summary>Imports</summary>
@@ -32,6 +32,13 @@ open import metric-spaces.reflexive-premetric-structures
 A [premetric](metric-spaces.premetric-structures.md) is
 {{#concept "local" Disambiguation="premetric" agda=is-local-Premetric}} if
 indistinguishability has propositional fibers.
+
+A reflexive local premetric is called
+{{#concept "extensional" Disambiguation="premetric on a type" Agda=is-extensional-Premetric}}.
+
+Indistiguishability in an extensional premetric structure characterizes equality
+in the carrier type. In particular, any type equipped with an extensional
+premetric is [set](foundation.sets.md).
 
 ## Definitions
 
@@ -69,48 +76,28 @@ module _
     (x y : A) → is-indistinguishable-Premetric B x y → x ＝ y
 ```
 
+### The property of being an extensional premetric
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
+  where
+
+  is-extensional-prop-Premetric : Prop (l1 ⊔ l2)
+  is-extensional-prop-Premetric =
+    product-Prop
+      ( is-reflexive-prop-Premetric B)
+      ( is-local-prop-Premetric B)
+
+  is-extensional-Premetric : UU (l1 ⊔ l2)
+  is-extensional-Premetric = type-Prop is-extensional-prop-Premetric
+
+  is-prop-is-extensional-Premetric : is-prop is-extensional-Premetric
+  is-prop-is-extensional-Premetric =
+    is-prop-type-Prop is-extensional-prop-Premetric
+```
+
 ## Properties
-
-### Characterization of equality in a local reflexive premetric
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (R : is-reflexive-Premetric B) (L : is-local-Premetric B) (x : A)
-  where
-
-  is-torsorial-indistinguishable-local-reflexive-Premetric :
-    is-torsorial (is-indistinguishable-Premetric B x)
-  is-torsorial-indistinguishable-local-reflexive-Premetric =
-    is-proof-irrelevant-is-prop (L x) (x , λ d → R d x)
-
-  is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric :
-    (y : A) → is-equiv (indistinguishable-eq-reflexive-Premetric B R)
-  is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric =
-    fundamental-theorem-id
-      ( is-torsorial-indistinguishable-local-reflexive-Premetric)
-      ( λ y → indistinguishable-eq-reflexive-Premetric B R {x} {y})
-```
-
-### Any type equipped with a reflexive local premetric is a set
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (R : is-reflexive-Premetric B) (L : is-local-Premetric B)
-  where
-
-  is-set-has-local-reflexive-Premetric : is-set A
-  is-set-has-local-reflexive-Premetric x y =
-    is-prop-is-equiv
-      ( is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric
-        B
-        R
-        L
-        x
-        y)
-      ( is-prop-is-indistinguishable-Premetric B x y)
-```
 
 ### Any tight premetric is local
 
@@ -129,16 +116,56 @@ module _
           ( inv (T x u I) ∙ T x v J))
 ```
 
-### Any reflexive local premetric is tight
+### Characterization of equality in an extensional premetric
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (R : is-reflexive-Premetric B) (L : is-local-Premetric B)
+  (E : is-extensional-Premetric B) (x : A)
   where
 
-  is-tight-is-local-reflexive-Premetric : is-tight-Premetric B
-  is-tight-is-local-reflexive-Premetric x =
+  is-torsorial-indistinguishable-is-extensional-Premetric :
+    is-torsorial (is-indistinguishable-Premetric B x)
+  is-torsorial-indistinguishable-is-extensional-Premetric =
+    is-proof-irrelevant-is-prop (pr2 E x) (x , λ d → pr1 E d x)
+
+  is-fiberwise-equiv-indistinguishable-is-extensional-Premetric :
+    (y : A) → is-equiv (indistinguishable-eq-reflexive-Premetric B (pr1 E))
+  is-fiberwise-equiv-indistinguishable-is-extensional-Premetric =
+    fundamental-theorem-id
+      ( is-torsorial-indistinguishable-is-extensional-Premetric)
+      ( λ y → indistinguishable-eq-reflexive-Premetric B (pr1 E) {x} {y})
+```
+
+### Any extensional premetric is tight
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
+  (E : is-extensional-Premetric B)
+  where
+
+  is-tight-is-extensional-Premetric : is-tight-Premetric B
+  is-tight-is-extensional-Premetric x =
     ( map-inv-is-equiv) ∘
-    ( is-fiberwise-equiv-indistinguishable-local-reflexive-Premetric B R L x)
+    ( is-fiberwise-equiv-indistinguishable-is-extensional-Premetric B E x)
+```
+
+### Any type equipped with a reflexive local premetric is a set
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
+  (E : is-extensional-Premetric B)
+  where
+
+  is-set-has-extensional-Premetric : is-set A
+  is-set-has-extensional-Premetric x y =
+    is-prop-is-equiv
+      ( is-fiberwise-equiv-indistinguishable-is-extensional-Premetric
+        ( B)
+        ( E)
+        ( x)
+        ( y))
+      ( is-prop-is-indistinguishable-Premetric B x y)
 ```

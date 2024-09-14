@@ -14,7 +14,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.universe-levels
 
-open import metric-spaces.local-premetric-structures
+open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-structures
 open import metric-spaces.reflexive-premetric-structures

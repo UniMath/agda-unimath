@@ -17,7 +17,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.discrete-premetric-structures
-open import metric-spaces.local-premetric-structures
+open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures

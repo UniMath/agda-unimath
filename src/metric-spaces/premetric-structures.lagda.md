@@ -58,7 +58,7 @@ module _
   Premetric = ℚ⁺ → Relation-Prop l2 A
 ```
 
-### Closeness relation in a premetric
+### Neighborhood relation in a premetric
 
 Two points `x` and `y` in a type `A` are in a
 {{#concept "`d`-neighborhood" Disambiguation="in a premetric" Agda=neighborhood-Premetric}}

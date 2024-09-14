@@ -106,7 +106,7 @@ module _
   is-short-id-saturate-Metric-Space =
     leq-closure-monotonic-Premetric
       ( structure-Metric-Space M)
-      ( is-monotonic-premetric-structure-Metric-Space M)
+      ( is-monotonic-structure-Metric-Space M)
 
   short-id-saturate-Metric-Space :
     short-function-Metric-Space M (saturate-Metric-Space M)

@@ -29,7 +29,7 @@ open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.local-premetric-structures
+open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.ordering-premetric-structures
 open import metric-spaces.premetric-structures
