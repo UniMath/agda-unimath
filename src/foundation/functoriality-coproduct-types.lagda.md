@@ -28,6 +28,7 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
+open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -245,7 +246,50 @@ module _
     is-equiv-map-coproduct (is-equiv-map-equiv e) (is-equiv-map-equiv e')
 ```
 
-### Functoriality of coproducts preserves being surjective
+### Functoriality of coproducts preserves embeddings
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  where
+
+abstract
+  is-emb-map-coproduct :
+    {l1 l2 l3 l4 : Level}
+    {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+    {f : A → B} {g : X → Y} →
+    is-emb f → is-emb g → is-emb (map-coproduct f g)
+  is-emb-map-coproduct {f = f} {g} F G (inl x) (inl y) =
+    is-equiv-left-is-equiv-right-square
+      ( ap (map-coproduct f g))
+      ( ap f)
+      ( map-compute-eq-coproduct-inl-inl x y)
+      ( map-compute-eq-coproduct-inl-inl (f x) (f y))
+      ( λ where refl → refl)
+      ( is-equiv-map-compute-eq-coproduct-inl-inl x y)
+      ( is-equiv-map-compute-eq-coproduct-inl-inl (f x) (f y))
+      ( F x y)
+  is-emb-map-coproduct {f = f} {g} F G (inl x) (inr y) =
+    is-equiv-is-empty
+      ( ap (map-coproduct f g))
+      ( is-empty-eq-coproduct-inl-inr (f x) (g y))
+  is-emb-map-coproduct {f = f} {g} F G (inr x) (inl y) =
+    is-equiv-is-empty
+      ( ap (map-coproduct f g))
+      ( is-empty-eq-coproduct-inr-inl (g x) (f y))
+  is-emb-map-coproduct {f = f} {g} F G (inr x) (inr y) =
+    is-equiv-left-is-equiv-right-square
+      ( ap (map-coproduct f g))
+      ( ap g)
+      ( map-compute-eq-coproduct-inr-inr x y)
+      ( map-compute-eq-coproduct-inr-inr (g x) (g y))
+      ( λ where refl → refl)
+      ( is-equiv-map-compute-eq-coproduct-inr-inr x y)
+      ( is-equiv-map-compute-eq-coproduct-inr-inr (g x) (g y))
+      ( G x y)
+```
+
+### Functoriality of coproducts preserves surjections
 
 ```agda
 module _

@@ -520,6 +520,25 @@ module _
     (map-product f g , is-decidable-emb-map-product F G)
 ```
 
+### Coproducts of decidable embeddings are decidable embeddings
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
+  where
+
+abstract
+  is-decidable-emb-map-coproduct :
+    {l1 l2 l3 l4 : Level}
+    {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+    {f : A → B} {g : X → Y} →
+    is-decidable-emb f →
+    is-decidable-emb g →
+    is-decidable-emb (map-coproduct f g)
+  is-decidable-emb-map-coproduct {f = f} {g} (eF , dF) (eG , dG) =
+    ( is-emb-map-coproduct eF eG , is-decidable-map-coproduct dF dG)
+```
+
 ### Decidable embeddings are closed under base change
 
 ```agda
