@@ -68,18 +68,18 @@ this condition as being a
 ```agda
 is-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
-is-decidable-emb {Y = Y} f = is-emb f × is-decidable-map f
+is-decidable-emb f = is-emb f × is-decidable-map f
 
 abstract
   is-emb-is-decidable-emb :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
     is-decidable-emb f → is-emb f
-  is-emb-is-decidable-emb H = pr1 H
+  is-emb-is-decidable-emb = pr1
 
 is-decidable-map-is-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
   is-decidable-emb f → is-decidable-map f
-is-decidable-map-is-decidable-emb H = pr2 H
+is-decidable-map-is-decidable-emb = pr2
 ```
 
 ### Decidably propositional maps
@@ -182,7 +182,8 @@ module _
 decidable-subtype-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   (X ↪ᵈ Y) → (decidable-subtype (l1 ⊔ l2) Y)
-pr1 (decidable-subtype-decidable-emb f y) = fiber (map-decidable-emb f) y
+pr1 (decidable-subtype-decidable-emb f y) =
+  fiber (map-decidable-emb f) y
 pr2 (decidable-subtype-decidable-emb f y) =
   is-decidable-prop-map-is-decidable-emb (pr2 f) y
 ```
