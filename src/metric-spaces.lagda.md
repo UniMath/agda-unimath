@@ -27,6 +27,7 @@ open import metric-spaces.isometry-metric-spaces public
 open import metric-spaces.isometry-premetric-spaces public
 open import metric-spaces.local-premetric-structures public
 open import metric-spaces.metric-space-of-rational-numbers public
+open import metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods public
 open import metric-spaces.metric-spaces public
 open import metric-spaces.metric-structures public
 open import metric-spaces.monotonic-premetric-structures public
@@ -39,7 +40,6 @@ open import metric-spaces.premetric-structures public
 open import metric-spaces.pseudometric-spaces public
 open import metric-spaces.pseudometric-structures public
 open import metric-spaces.reflexive-premetric-structures public
-open import metric-spaces.saturated-metric-space-of-rational-numbers public
 open import metric-spaces.saturated-metric-spaces public
 open import metric-spaces.short-functions-metric-spaces public
 open import metric-spaces.short-functions-premetric-spaces public
