@@ -11,11 +11,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.decidable-maps
 open import foundation.decidable-propositions
-open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equality-coproduct-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -24,15 +22,12 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
 open import foundation.retracts-of-maps
-open import foundation.structured-type-duality
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
@@ -43,7 +38,6 @@ open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
-open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -177,31 +171,8 @@ module _
       is-decidable-emb f → is-decidable-prop-map f
     pr1 (is-decidable-prop-map-is-decidable-emb H y) =
       is-prop-map-is-decidable-emb H y
-    pr2 (is-decidable-prop-map-is-decidable-emb H y) = pr2 H y
-
-decidable-subtype-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-  (X ↪ᵈ Y) → (decidable-subtype (l1 ⊔ l2) Y)
-pr1 (decidable-subtype-decidable-emb f y) =
-  fiber (map-decidable-emb f) y
-pr2 (decidable-subtype-decidable-emb f y) =
-  is-decidable-prop-map-is-decidable-emb (pr2 f) y
-```
-
-### The type of all decidable embeddings into a type `A` is equivalent to the type of decidable subtypes of `A`
-
-```agda
-equiv-Fiber-Decidable-Prop :
-  (l : Level) {l1 : Level} (A : UU l1) →
-  Σ (UU (l1 ⊔ l)) (λ X → X ↪ᵈ A) ≃ (decidable-subtype (l1 ⊔ l) A)
-equiv-Fiber-Decidable-Prop l A =
-  ( equiv-Fiber-structure l is-decidable-prop A) ∘e
-  ( equiv-tot
-    ( λ X →
-      equiv-tot
-        ( λ f →
-          ( inv-distributive-Π-Σ) ∘e
-          ( equiv-product (equiv-is-prop-map-is-emb f) id-equiv))))
+    pr2 (is-decidable-prop-map-is-decidable-emb H y) =
+      is-decidable-map-is-decidable-emb H y
 ```
 
 ### Equivalences are decidable embeddings
