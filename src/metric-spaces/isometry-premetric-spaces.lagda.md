@@ -28,13 +28,17 @@ open import metric-spaces.premetric-spaces
 
 ## Idea
 
-A function between [premetric spaces](metric-spaces.premetric-spaces.md) is an
+A function `f` between [premetric spaces](metric-spaces.premetric-spaces.md) is
+an
 {{#concept "isometry" Disambiguation="between premetric spaces" Agda=is-isometry-Premetric-Space}}
-if it preserves and reflects
-[premetric structures](metric-spaces.premetric-structures.md).
+if any of the following equivalent conditions holds:
 
-The upper bounds on the distance between any two points and their image by an
-isometry are the same.
+- it preserves and reflects
+  [`d`-neighborhoods](metric-spaces.premetric-structures.md);
+- the upper bounds on the distance between any two points and their image by `f`
+  are the same;
+- the premetric on the domain of `f` is the preimage by `f` of the premetric on
+  its codomain.
 
 ## Definitions
 
