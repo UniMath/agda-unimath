@@ -1,4 +1,4 @@
-# Local premetric structures on types
+# Extensional premetric structures on types
 
 ```agda
 module metric-spaces.extensional-premetric-structures where
