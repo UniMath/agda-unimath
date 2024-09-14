@@ -56,6 +56,11 @@ if it is an [embedding](foundation-core.embeddings.md) and its
 [fibers](foundation-core.fibers-of-maps.md) are
 [decidable types](foundation.decidable-types.md).
 
+Equivalently, a decidable embedding is a map whose fibers are
+[decidable propositions](foundation-core.decidable-propositions.md). We refer to
+this condition as being a
+{{#concept "decidably propositional map" Disambiguation="of types" Agda=is-decidable-prop-map}}.
+
 ## Definitions
 
 ### The condition on a map of being a decidable embedding
