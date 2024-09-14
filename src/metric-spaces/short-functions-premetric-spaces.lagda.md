@@ -38,11 +38,11 @@ if any of the following three equivalent propositions holds:
 
 - it maps [`d`-neighborhoods](metric-spaces.premetric-structures.md) to
   `d`-neighborhoods;
-- any upper bound on the distance between two elements
-  also bounds the distance between their image;
+- any upper bound on the distance between two elements also bounds the distance
+  between their image;
 - the premetric on the domain of `f` is
-  [finer](metric-spaces.ordering-premetric-structures.md) than the preimage
-  of the premetric on its domain by `f`.
+  [finer](metric-spaces.ordering-premetric-structures.md) than the preimage of
+  the premetric on its domain by `f`.
 
 ## Definitions
 
