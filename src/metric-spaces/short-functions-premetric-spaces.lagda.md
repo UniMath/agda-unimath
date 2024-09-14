@@ -42,7 +42,7 @@ if any of the following three equivalent propositions holds:
   also bounds the distance between their image;
 - the premetric on the domain of `f` is
   [finer](metric-spaces.ordering-premetric-structures.md) than the preimage
-  of the premetric on its domain.
+  of the premetric on its domain by `f`.
 
 ## Definitions
 
