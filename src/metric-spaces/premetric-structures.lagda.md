@@ -40,11 +40,9 @@ is a type family of
 the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md).
 
-This follows Definition 4.5.2 from {{#cite Booij2020PhD}}.
-
-In the classical interpretation, for a premetric `B` on a type `A` and some
-positive rational number `d : ℚ⁺`, `B d x y` holds for some points `(x y : A)`
-if the distance between `x` and `y` is bounded above by `d`.
+Given a premetric `B` on `A` and some
+positive rational number `d : ℚ⁺` such that `B d x y` holds for some pair of points `x y : A`, we interpret `d` as an {{#concept "upper bound" Disambiguation="on distance in with respect to a premetric structure"}}
+on the distance between `x` and `y` with respect to the premetric.
 
 ## Definitions
 
@@ -244,6 +242,8 @@ module _
 ```
 
 ## References
+
+Our definition of a premetric follows Definition 4.5.2 from {{#cite Booij2020PhD}}.
 
 {{#bibliography}}
 
