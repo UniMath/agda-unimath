@@ -277,7 +277,7 @@ set-decidable-subset A P = set-subset A (subtype-decidable-subtype P)
 ```agda
 is-set-decidable-subtype :
   {l1 l2 : Level} {X : UU l1} → is-set (decidable-subtype l2 X)
-is-set-decidable-subtype {l1} {l2} {X} =
+is-set-decidable-subtype =
   is-set-function-type is-set-Decidable-Prop
 ```
 

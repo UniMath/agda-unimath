@@ -58,7 +58,7 @@ abstract
   is-decidable-map-htpy :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
     f ~ g → is-decidable-map g → is-decidable-map f
-  is-decidable-map-htpy {f = f} {g} H K b =
+  is-decidable-map-htpy H K b =
     is-decidable-equiv
       ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
       ( K b)
@@ -134,9 +134,7 @@ module _
     {f : (x : A) → B x → C x} →
     ((x : A) → is-decidable-map (f x)) → is-decidable-map (tot f)
   is-decidable-map-tot {f} H x =
-    is-decidable-equiv
-      ( compute-fiber-tot f x)
-      ( H (pr1 x) (pr2 x))
+    is-decidable-equiv (compute-fiber-tot f x) (H (pr1 x) (pr2 x))
 ```
 
 ### The map on total spaces induced by a decidable map on the base is decidable
