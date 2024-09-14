@@ -33,6 +33,9 @@ A function between [premetric spaces](metric-spaces.premetric-spaces.md) is an
 if it preserves and reflects
 [premetric structures](metric-spaces.premetric-structures.md).
 
+The upper bounds on the distance between any two points and their image by an
+isometry are the same.
+
 ## Definitions
 
 ### The property of being a isometry between premetric spaces

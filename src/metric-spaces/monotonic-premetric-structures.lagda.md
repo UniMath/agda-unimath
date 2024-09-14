@@ -21,7 +21,8 @@ open import metric-spaces.premetric-structures
 
 A [premetric](metric-spaces.premetric-structures.md) is
 {{#concept "monotonic" Disambiguation="premetric" Agda=is-monotonic-Premetric}}
-if any `d₁`-neighborhoods are `d₂`-neighborhoods for `d₁ < d₂`.
+if any `d₁`-neighborhoods are `d₂`-neighborhoods for `d₁ < d₂` i.e. if the
+subsets of upper bounds on the distance between any two points are upper stable.
 
 ## Definitions
 

@@ -26,9 +26,12 @@ open import metric-spaces.triangular-premetric-structures
 
 ## Idea
 
-Any [premetric structure](metric-spaces.premetric-structures.md) on a type `B`
-and map `f : A → B` defines a premetric on `A` where `x y : A` are
-`d`-neighbours in `A` if `f x` and `f y` are `d`-neighbours in `B`.
+Any [premetric structure](metric-spaces.premetric-structures.md) `U` on a type
+`B` and map `f : A → B` defines a premetric on `A` where `x y : A` are
+`d`-neighbors in `A` if `f x` and `f y` are `d`-neighbors in `U`.
+
+In this premetric, upper bounds of the distance between `(x y : A)` are upper
+bounds of the distance between `f x` and `f y` in `U`.
 
 This is the
 {{#concept "preimage" Disambiguation="of a premetric structure" Agda=preimage-Premetric}}

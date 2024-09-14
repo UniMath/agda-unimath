@@ -29,7 +29,6 @@ open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.local-premetric-structures
 open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-structures
 open import metric-spaces.reflexive-premetric-structures
@@ -45,6 +44,10 @@ A [premetric](metric-spaces.md) on a type `A` is
 {{#concept "discrete" Disambiguation="premetric structure" Agda=is-discrete-Premetric}}
 any elements in some [`d`-neighborhood](metric-spaces.premetric-structures.md)
 are [merely equal](foundation.mere-equality.md).
+
+In a discrete premetric, two points are at bounded distance if and only iff they
+are merely equal, in which case all positive rational numbers are upper bounds
+on their distance.
 
 Every type has a unique reflexive discrete premetric.
 

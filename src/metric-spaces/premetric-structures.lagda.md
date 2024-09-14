@@ -164,6 +164,10 @@ module _
 
 ### Equality of premetric structures
 
+Two premetric structures on a type are equal when they define logically
+equivalent neighborhoods, or equivalently, when the distances between any two
+points have the same upper bounds.
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (N : Premetric l2 A)

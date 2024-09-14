@@ -32,10 +32,17 @@ open import metric-spaces.premetric-spaces
 
 ## Idea
 
-A function between [premetric spaces](metric-spaces.premetric-spaces.md) is
+A function `f` between [premetric spaces](metric-spaces.premetric-spaces.md) is
 {{#concept "short" Disambiguation="function between premetric spaces" Agda=is-short-function-Premetric-Space}}
-if it maps [`d`-neighborhoods](metric-spaces.premetric-structures.md) to
-`d`-neighborhoods.
+if any of the following three equivalent propositions holds:
+
+- it maps [`d`-neighborhoods](metric-spaces.premetric-structures.md) to
+  `d`-neighborhoods;
+- any upper bound on the distance between two elements
+  also bounds the distance between their image;
+- the premetric on the domain of `f` is
+  [finer](metric-spaces.ordering-premetric-structures.md) than the preimage
+  of the premetric on its domain.
 
 ## Definitions
 
