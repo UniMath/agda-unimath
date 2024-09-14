@@ -37,8 +37,9 @@ if any of the following equivalent conditions holds:
   [`d`-neighborhoods](metric-spaces.premetric-structures.md);
 - the upper bounds on the distance between any two points and their image by `f`
   are the same;
-- the premetric on the domain of `f` is the preimage by `f` of the premetric on
-  its codomain.
+- the premetric on the domain of `f` is the
+  [preimage](metric-spaces.induced-premetric-structures-on-preimages.md) by `f`
+  of the premetric on its codomain.
 
 ## Definitions
 
