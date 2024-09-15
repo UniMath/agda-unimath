@@ -38,7 +38,8 @@ open import metric-spaces.short-functions-metric-spaces
 
 ## Idea
 
-The [short functions](metric-spaces.short-functions-metric-spaces.md) form a
+The [short functions](metric-spaces.short-functions-metric-spaces.md) between
+[metric spaces](metric-spaces.metric-spaces.md) form a
 [precategory](category-theory.precategories.md).
 
 ## Definition
@@ -288,3 +289,8 @@ module _
           ( A)))
       ( is-torsorial-isometric-is-equiv-Metric-Space A)
 ```
+
+## See also
+
+- The
+  [category of metric spaces and short functions](metric-spaces.category-of-metric-spaces-and-short-functions.md)
