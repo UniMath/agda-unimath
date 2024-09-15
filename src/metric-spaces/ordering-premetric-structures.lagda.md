@@ -17,6 +17,9 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import metric-spaces.premetric-structures
+
+open import order-theory.posets
+open import order-theory.preorders
 ```
 
 </details>
@@ -102,4 +105,20 @@ module _
       ( U)
       ( V)
       ( λ d x y → (I d x y , J d x y))
+```
+
+### The poset of premetric structures on a type
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1)
+  where
+
+  preorder-Premetric : Preorder (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+  pr1 preorder-Premetric = Premetric l2 A
+  pr2 preorder-Premetric =
+    leq-prop-Premetric , refl-leq-Premetric , transitive-leq-Premetric
+
+  poset-Premetric : Poset (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+  poset-Premetric = preorder-Premetric , antisymmetric-leq-Premetric
 ```
