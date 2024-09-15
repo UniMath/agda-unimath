@@ -253,7 +253,7 @@ Our definition of a premetric follows Definition 4.5.2 from
 
 {{#bibliography}}
 
-## See also
+## External links
 
 - [Booij premetric spaces](https://ncatlab.org/nlab/show/Booij+premetric+space)
   at $n$Lab.

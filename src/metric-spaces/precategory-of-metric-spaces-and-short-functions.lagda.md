@@ -293,4 +293,4 @@ module _
 ## See also
 
 - The
-  [category of metric spaces and short functions](metric-spaces.category-of-metric-spaces-and-short-functions.md)
+  [category of metric spaces and short functions](metric-spaces.category-of-metric-spaces-and-short-functions.md).

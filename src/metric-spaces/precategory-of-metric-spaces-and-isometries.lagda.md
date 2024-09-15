@@ -172,4 +172,4 @@ module _
 ## See Also
 
 - The
-  [category of metric spaces and isometries](metric-spaces.category-of-metric-spaces-and-isometries.md)
+  [category of metric spaces and isometries](metric-spaces.category-of-metric-spaces-and-isometries.md).
