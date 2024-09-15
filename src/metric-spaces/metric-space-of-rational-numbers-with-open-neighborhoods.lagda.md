@@ -42,15 +42,14 @@ open import metric-spaces.triangular-premetric-structures
 
 ## Idea
 
-The type of [rational numbers](elementary-number-theory.rational-numbers.md)
-equipped with the [premetric](metric-spaces.premetric-structures.md) where
-`x y : ℚ` are in `d`-neighborhood when `y < x + d` and `x < y + d` is a
-[metric space](metric-spaces.metric-spaces.md) i.e. the upper bounds on the
-distance between `x` and `y` are the strict upper bounds of both `y - x` and
-`x - y`.
-
-It is the
-{{#concept "standard metric space of rational numbers with open neighbourhhods" Agda=metric-space-le-ℚ}}
+[Srict inequality](elementary-number-theory.strict-inequality-rational-numbers.md)
+on the [rational numbers](elementary-number-theory.rational-numbers.md) induces
+a [premetric](metric-spaces.premetric-structures.md) on `ℚ` where `x y : ℚ` are
+in a `d`-neighborhood when `y < x + d` and `x < y + d`, i.e. upper bounds on the
+distance between `x` and `y` are strict upper bounds of both `y - x` and
+`x - y`. This is a [metric structure](metric-spaces.metric-structures.md) on `ℚ`
+that defines the
+{{#concept "standard metric space of rational numbers with open neighbourhhods" Agda=metric-space-le-ℚ}}.
 
 ## Definitions
 
