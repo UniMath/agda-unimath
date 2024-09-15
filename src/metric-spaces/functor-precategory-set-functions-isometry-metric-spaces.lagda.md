@@ -33,8 +33,8 @@ open import metric-spaces.precategory-of-metric-spaces-and-isometries
 
 ## Idea
 
-Because [metric spaces](metric-spaces.metric-spaces.md) is
-[set](foundation.sets.md), there's a forgetful
+Because carrier types of [metric spaces](metric-spaces.metric-spaces.md) are
+[sets](foundation.sets.md), there's a forgetful
 [functor](category-theory.functors-precategories.md) from the
 [precategory of metric spaces and isometries](metric-spaces.precategory-of-metric-spaces-and-isometries.md)
 to the [precategory of sets](foundation.category-of-sets.md).
