@@ -32,9 +32,9 @@ A
 {{#concept "Cauchy approximation" Disambiguation="in a premetric space" Agda=cauchy-approximation-Premetric-Space}}
 in a [premetric space](metric-spaces.premetric-spaces.md) is a map `f` from
 [`ℚ⁺`](elementary-number-theory.positive-rational-numbers.md) to its carrier
-type such that `f ε` and `f δ` are in a
-[(`ε + δ`)-neighborhood](metric-spaces.premetric-structures.md) for all
-`(ε δ : ℚ⁺)`.
+type such that for all `(ε δ : ℚ⁺)`, `f ε` and `f δ` are in a
+[(`ε + δ`)-neighborhood](metric-spaces.premetric-structures.md) i.e. the
+distance between `f ε` and `f δ` is bounded by `ε + δ`.
 
 This follows Definition 4.5.5 of {{#cite Booij2020PhD}} and Definition 11.2.10
 of {{#cite UF13}}.
