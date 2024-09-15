@@ -49,11 +49,11 @@ in a `d`-neighborhood when `y < x + d` and `x < y + d`, i.e. upper bounds on the
 distance between `x` and `y` are strict upper bounds of both `y - x` and
 `x - y`. This is a [metric structure](metric-spaces.metric-structures.md) on `ℚ`
 that defines the
-{{#concept "standard metric space of rational numbers with open neighbourhhods" Agda=metric-space-le-ℚ}}.
+{{#concept "standard metric space of rational numbers with open neighbourhoods" Agda=metric-space-le-ℚ}}.
 
 ## Definitions
 
-### The standard premetric on the rational numbers
+### The standard premetric on the rational numbers with open neighbourhoods
 
 ```agda
 premetric-le-ℚ : Premetric lzero ℚ
