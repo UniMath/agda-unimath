@@ -38,7 +38,7 @@ A reflexive local premetric is called
 
 Indistiguishability in an extensional premetric structure characterizes equality
 in the carrier type. In particular, any type equipped with an extensional
-premetric is [set](foundation.sets.md).
+premetric is a [set](foundation.sets.md).
 
 ## Definitions
 
@@ -151,7 +151,7 @@ module _
     ( is-fiberwise-equiv-indistinguishable-is-extensional-Premetric B E x)
 ```
 
-### Any type equipped with a reflexive local premetric is a set
+### Any type equipped with an extensional premetric is a set
 
 ```agda
 module _
