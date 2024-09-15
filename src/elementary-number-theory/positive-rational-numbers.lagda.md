@@ -184,30 +184,32 @@ module _
 ### The difference of a rational number with a lesser rational number is positive
 
 ```agda
-is-positive-diff-le-ℚ : (x y : ℚ) → le-ℚ x y → is-positive-ℚ (y -ℚ x)
-is-positive-diff-le-ℚ x y H =
-  is-positive-le-zero-ℚ
-    ( y -ℚ x)
-    ( backward-implication
-      ( iff-translate-diff-le-zero-ℚ x y)
-      ( H))
+module _
+  (x y : ℚ) (H : le-ℚ x y)
+  where
 
-positive-diff-le-ℚ : (x y : ℚ) → le-ℚ x y → ℚ⁺
-positive-diff-le-ℚ x y H = y -ℚ x , is-positive-diff-le-ℚ x y H
+  is-positive-diff-le-ℚ : is-positive-ℚ (y -ℚ x)
+  is-positive-diff-le-ℚ =
+    is-positive-le-zero-ℚ
+      ( y -ℚ x)
+      ( backward-implication
+        ( iff-translate-diff-le-zero-ℚ x y)
+        ( H))
 
-left-law-positive-diff-le-ℚ :
-  (x y : ℚ) (H : le-ℚ x y) →
-  (rational-ℚ⁺ (positive-diff-le-ℚ x y H)) +ℚ x ＝ y
-left-law-positive-diff-le-ℚ x y H =
-  associative-add-ℚ y (neg-ℚ x) x ∙
-  inv-tr (λ u → y +ℚ u ＝ y) (left-inverse-law-add-ℚ x) (right-unit-law-add-ℚ y)
+  positive-diff-le-ℚ : ℚ⁺
+  positive-diff-le-ℚ = y -ℚ x , is-positive-diff-le-ℚ
 
-right-law-positive-diff-le-ℚ :
-  (x y : ℚ) (H : le-ℚ x y) →
-  x +ℚ (rational-ℚ⁺ (positive-diff-le-ℚ x y H)) ＝ y
-right-law-positive-diff-le-ℚ x y H =
-  commutative-add-ℚ x (y -ℚ x) ∙
-  left-law-positive-diff-le-ℚ x y H
+  left-law-positive-diff-le-ℚ : (rational-ℚ⁺ positive-diff-le-ℚ) +ℚ x ＝ y
+  left-law-positive-diff-le-ℚ =
+    ( associative-add-ℚ y (neg-ℚ x) x) ∙
+    ( inv-tr
+      ( λ u → y +ℚ u ＝ y)
+      ( left-inverse-law-add-ℚ x)
+      ( right-unit-law-add-ℚ y))
+
+  right-law-positive-diff-le-ℚ : x +ℚ (rational-ℚ⁺ positive-diff-le-ℚ) ＝ y
+  right-law-positive-diff-le-ℚ =
+    commutative-add-ℚ x (y -ℚ x) ∙ left-law-positive-diff-le-ℚ
 ```
 
 ### A nonzero rational number or its negative is positive
@@ -589,28 +591,6 @@ le-right-add-rational-ℚ⁺ x d =
     ( le-ℚ x)
     ( commutative-add-ℚ x (rational-ℚ⁺ d))
     ( le-left-add-rational-ℚ⁺ x d)
-
-left-law-add-positive-diff-le-ℚ :
-  (x y : ℚ) (I : le-ℚ x y) →
-  ((rational-ℚ⁺ (positive-diff-le-ℚ x y I)) +ℚ x) ＝
-  (y)
-left-law-add-positive-diff-le-ℚ x y I =
-  ( associative-add-ℚ
-    ( y)
-    ( neg-ℚ x)
-    ( x)) ∙
-  ( ap (add-ℚ y) (left-inverse-law-add-ℚ x)) ∙
-  ( right-unit-law-add-ℚ y)
-
-right-law-add-positive-diff-le-ℚ :
-  (x y : ℚ) (I : le-ℚ x y) →
-  (x +ℚ (rational-ℚ⁺ (positive-diff-le-ℚ x y I))) ＝
-  (y)
-right-law-add-positive-diff-le-ℚ x y I =
-  ( commutative-add-ℚ
-    ( x)
-    (rational-ℚ⁺ (positive-diff-le-ℚ x y I))) ∙
-  ( left-law-add-positive-diff-le-ℚ x y I)
 ```
 
 ### Characterization of inequality on the rational numbers by the additive action of `ℚ⁺`
@@ -657,7 +637,7 @@ module _
             ( le-right-mediant-ℚ y x I)
             ( tr
               ( leq-ℚ x)
-              ( right-law-add-positive-diff-le-ℚ
+              ( right-law-positive-diff-le-ℚ
                 ( y)
                 ( mediant-ℚ y x)
                 ( le-left-mediant-ℚ y x I))
