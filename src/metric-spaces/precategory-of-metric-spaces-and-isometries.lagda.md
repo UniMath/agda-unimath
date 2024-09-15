@@ -37,7 +37,8 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-The [isometries](metric-spaces.isometry-metric-spaces.md) form a
+The [isometries](metric-spaces.isometry-metric-spaces.md) between
+[metric spaces](metric-spaces.metric-spaces.md) form a
 [precategory](category-theory.precategories.md).
 
 ## Definitions
@@ -167,3 +168,8 @@ module _
       ( equiv-tot (equiv-iso-isometric-is-equiv-Metric-Space A))
       ( is-torsorial-isometric-is-equiv-Metric-Space A)
 ```
+
+## See Also
+
+- The
+  [category of metric spaces and isometries](metric-spaces.category-of-metric-spaces-and-isometries.md)
