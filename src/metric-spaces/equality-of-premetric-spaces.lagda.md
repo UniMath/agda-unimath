@@ -104,6 +104,65 @@ module _
   (e : type-Premetric-Space A ＝ type-Premetric-Space B)
   where
 
+  is-isometry-eq-tr-structure-Premetric-Space :
+    Eq-Premetric
+      ( tr (Premetric l2) e (structure-Premetric-Space A))
+      ( structure-Premetric-Space B) →
+    is-isometry-Premetric-Space A B (map-eq e)
+  is-isometry-eq-tr-structure-Premetric-Space H d x y =
+    ( H d (map-eq e x) (map-eq e y)) ∘iff
+    ( eq-map-eq-tr-Premetric
+      ( type-Premetric-Space A)
+      ( type-Premetric-Space B)
+      ( e)
+      ( structure-Premetric-Space A)
+      ( d)
+      ( x)
+      ( y))
+
+  eq-tr-structure-is-isometry-Premetric-Space :
+    is-isometry-Premetric-Space A B (map-eq e) →
+    Eq-Premetric
+      ( tr (Premetric l2) e (structure-Premetric-Space A))
+      ( structure-Premetric-Space B)
+  eq-tr-structure-is-isometry-Premetric-Space I d x y =
+    logical-equivalence-reasoning
+      ( neighborhood-Premetric
+        ( tr (Premetric l2) e (structure-Premetric-Space A))
+        ( d)
+        ( x)
+        ( y))
+      ↔ ( neighborhood-Premetric
+          ( structure-Premetric-Space A)
+          ( d)
+          ( map-inv-eq e x)
+          ( map-inv-eq e y))
+        by
+          eq-map-inv-eq-tr-Premetric
+            ( type-Premetric-Space A)
+            ( type-Premetric-Space B)
+            ( e)
+            ( structure-Premetric-Space A)
+            ( d)
+            ( x)
+            ( y)
+      ↔ ( neighborhood-Premetric-Space
+          ( B)
+          ( d)
+          ( map-eq e (map-inv-eq e x))
+          ( map-eq e (map-inv-eq e y)))
+        by
+          I d (map-inv-eq e x) (map-inv-eq e y)
+      ↔ ( neighborhood-Premetric-Space B d x y)
+        by
+          binary-tr
+            ( λ u v →
+              neighborhood-Premetric-Space B d u v ↔
+              neighborhood-Premetric-Space B d x y)
+            ( inv (is-section-map-inv-equiv (equiv-eq e) x))
+            ( inv (is-section-map-inv-equiv (equiv-eq e) y))
+            ( id-iff)
+
   equiv-is-isometry-map-eq-tr-Premetric-Space :
     Id
       ( tr (Premetric l2) e (structure-Premetric-Space A))
@@ -120,66 +179,6 @@ module _
     ( equiv-Eq-eq-Premetric
       ( tr (Premetric l2) e (structure-Premetric-Space A))
       ( structure-Premetric-Space B))
-    where
-
-    is-isometry-eq-tr-structure-Premetric-Space :
-      Eq-Premetric
-        ( tr (Premetric l2) e (structure-Premetric-Space A))
-        ( structure-Premetric-Space B) →
-      is-isometry-Premetric-Space A B (map-eq e)
-    is-isometry-eq-tr-structure-Premetric-Space H d x y =
-      H d (map-eq e x) (map-eq e y) ∘iff
-      eq-map-eq-tr-Premetric
-        ( type-Premetric-Space A)
-        ( type-Premetric-Space B)
-        ( e)
-        ( structure-Premetric-Space A)
-        ( d)
-        ( x)
-        ( y)
-
-    eq-tr-structure-is-isometry-Premetric-Space :
-      is-isometry-Premetric-Space A B (map-eq e) →
-      Eq-Premetric
-        ( tr (Premetric l2) e (structure-Premetric-Space A))
-        ( structure-Premetric-Space B)
-    eq-tr-structure-is-isometry-Premetric-Space I d x y =
-      logical-equivalence-reasoning
-        ( neighborhood-Premetric
-          ( tr (Premetric l2) e (structure-Premetric-Space A))
-          ( d)
-          ( x)
-          ( y))
-        ↔ ( neighborhood-Premetric
-            ( structure-Premetric-Space A)
-            ( d)
-            ( map-inv-eq e x)
-            ( map-inv-eq e y))
-          by
-            eq-map-inv-eq-tr-Premetric
-              ( type-Premetric-Space A)
-              ( type-Premetric-Space B)
-              ( e)
-              ( structure-Premetric-Space A)
-              ( d)
-              ( x)
-              ( y)
-        ↔ ( neighborhood-Premetric-Space
-            ( B)
-            ( d)
-            ( map-eq e (map-inv-eq e x))
-            ( map-eq e (map-inv-eq e y)))
-          by
-            I d (map-inv-eq e x) (map-inv-eq e y)
-        ↔ ( neighborhood-Premetric-Space B d x y)
-          by
-            binary-tr
-              ( λ u v →
-                neighborhood-Premetric-Space B d u v ↔
-                neighborhood-Premetric-Space B d x y)
-              ( inv (is-section-map-inv-equiv (equiv-eq e) x))
-              ( inv (is-section-map-inv-equiv (equiv-eq e) y))
-              ( id-iff)
 ```
 
 ### Equality of premetric spaces is equivalent to isometric equality of their carrier types
