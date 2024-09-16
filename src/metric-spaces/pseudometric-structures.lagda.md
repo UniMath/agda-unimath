@@ -28,7 +28,9 @@ open import metric-spaces.triangular-premetric-structures
 
 A [premetric](metric-spaces.premetric-structures.md) is a
 {{#concept "pseudometric structure" Agda=is-pseudometric-Premetric}} if it is
-reflexive, symmetric, and triangular.
+[reflexive](metric-spaces.reflexive-premetric-structures.md),
+[symmetric](metric-spaces.symmetric-premetric-structures.md), and
+[triangular](metric-spaces.triangular-premetric-structures.md).
 
 ## Definitions
 

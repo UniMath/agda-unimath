@@ -36,7 +36,9 @@ A
 is a [premetric space](metric-spaces.premetric-spaces.md) whose
 [premetric](metric-spaces.premetric-structures.md) is a
 [pseudometric](metric-spaces.pseudometric-structures.md), i.e. if it is
-reflexive, symmetric, and triangular
+[reflexive](metric-spaces.reflexive-premetric-structures.md),
+[symmetric](metric-spaces.symmetric-premetric-structures.md), and
+[triangular](metric-spaces.triangular-premetric-structures.md).
 
 Indistinguishability in a pseudometric space is an
 [equivalence relation](foundation.equivalence-relations.md).
