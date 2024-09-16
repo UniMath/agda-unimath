@@ -106,7 +106,7 @@ module _
   inclusion-subspace-Metric-Space = inclusion-subtype S
 ```
 
-### The inclusion of a subspace is an isometry
+### The inclusion of a subspace into its ambient space is an isometry
 
 ```agda
 module _
@@ -119,4 +119,10 @@ module _
       (A)
       (inclusion-subspace-Metric-Space A S)
   is-isometry-inclusion-subspace-Metric-Space d x y = id-iff
+
+  isometry-inclusion-subspace-Metric-Space :
+    isometry-Metric-Space (subspace-Metric-Space A S) A
+  isometry-inclusion-subspace-Metric-Space =
+    inclusion-subspace-Metric-Space A S ,
+    is-isometry-inclusion-subspace-Metric-Space
 ```
