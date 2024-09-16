@@ -286,6 +286,7 @@ module _
           ( functor-globular-type-Synthetic-Category-Theory κ C D)
           ( composition-isomorphism-Synthetic-Category-Theory μ)
           ( identity-isomorphism-Synthetic-Category-Theory ι)
+
   open inverse-Synthetic-Category-Theory public
 ```
 
@@ -437,11 +438,11 @@ module _
     {C D : category-Synthetic-Category-Theory κ}
     {F G : functor-Synthetic-Category-Theory κ C D}
     (α : isomorphism-Synthetic-Category-Theory κ F G) →
-    isomorphism-Synthetic-Category-Theory
-      ( functor-globular-type-Synthetic-Category-Theory κ C D)
-      ( inv-iso-Synthetic-Category-Theory ν
-        ( inv-iso-Synthetic-Category-Theory ν α))
-      ( α)
+      isomorphism-Synthetic-Category-Theory
+        ( functor-globular-type-Synthetic-Category-Theory κ C D)
+        ( inv-iso-Synthetic-Category-Theory ν
+          ( inv-iso-Synthetic-Category-Theory ν α))
+        ( α)
   inverse-idempotent-Synthetic-Category-Theory κ μ ι ν Α Χ Λ Ρ α =
     comp-iso-Synthetic-Category-Theory
       ( composition-isomorphism-Synthetic-Category-Theory μ)
@@ -629,11 +630,11 @@ module _
     (u : functor-Synthetic-Category-Theory κ B Y) →
     (commuting-square-functors-Synthetic-Category-Theory κ μ f u r s) →
     (commuting-square-functors-Synthetic-Category-Theory κ μ g h u t) →
-    commuting-square-functors-Synthetic-Category-Theory κ μ
-      ( comp-functor-Synthetic-Category-Theory μ g f)
-      ( h)
-      ( r)
-      ( comp-functor-Synthetic-Category-Theory μ t s)
+      commuting-square-functors-Synthetic-Category-Theory κ μ
+        ( comp-functor-Synthetic-Category-Theory μ g f)
+        ( h)
+        ( r)
+        ( comp-functor-Synthetic-Category-Theory μ t s)
   pasting-commuting-squares-functors-Synthetic-Category-Theory
     κ μ ι ν α Χ f g h r s t u τ σ =
       let
@@ -643,11 +644,20 @@ module _
         assoc = associative-comp-functor-Synthetic-Category-Theory α
         id = id-iso-Synthetic-Category-Theory ι
       in
-      comp ( inv ( assoc t s r))
-        ( comp ( horcomp (id t) τ)
-          ( comp ( assoc t u f)
-            ( comp ( horcomp σ (id f))
-              ( inv ( assoc h g f)))))
+      comp-iso-Synthetic-Category-Theory μ
+        ( inv-iso-Synthetic-Category-Theory ν
+          ( associative-comp-functor-Synthetic-Category-Theory α t s r))
+        ( comp-iso-Synthetic-Category-Theory μ
+          ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+            (id-iso-Synthetic-Category-Theory ι t) τ)
+          ( comp-iso-Synthetic-Category-Theory μ
+            ( associative-comp-functor-Synthetic-Category-Theory α t u f)
+            ( comp-iso-Synthetic-Category-Theory μ
+              ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+                ( σ)
+                ( id-iso-Synthetic-Category-Theory ι f))
+              ( inv-iso-Synthetic-Category-Theory ν
+                ( associative-comp-functor-Synthetic-Category-Theory α h g f)))))
 ```
 
 #### Commuting squares of isomorphisms in the language of synthetic category theory
@@ -697,11 +707,11 @@ module _
     (ξ : isomorphism-Synthetic-Category-Theory κ g s) →
     (commuting-square-isomorphisms-Synthetic-Category-Theory κ μ α ξ δ ε) →
     (commuting-square-isomorphisms-Synthetic-Category-Theory κ μ β γ ξ φ) →
-    commuting-square-isomorphisms-Synthetic-Category-Theory κ μ
-      ( comp-iso-Synthetic-Category-Theory μ β α)
-      ( γ)
-      ( δ)
-      ( comp-iso-Synthetic-Category-Theory μ φ ε)
+      commuting-square-isomorphisms-Synthetic-Category-Theory κ μ
+        ( comp-iso-Synthetic-Category-Theory μ β α)
+        ( γ)
+        ( δ)
+        ( comp-iso-Synthetic-Category-Theory μ φ ε)
   pasting-commuting-squares-isomorphisms-Synthetic-Category-Theory κ μ ι ν Α Χ =
       pasting-commuting-squares-functors-Synthetic-Category-Theory
         ( functor-globular-type-Synthetic-Category-Theory κ _ _)

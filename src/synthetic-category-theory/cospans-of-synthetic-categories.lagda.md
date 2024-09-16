@@ -18,7 +18,7 @@ open import synthetic-category-theory.synthetic-categories
 
 ### Cospans of synthetic categories
 
-#### A cospan is a pair of maps with a common codomain
+A cospan is a pair of maps with a common codomain
 
 ```agda
 module _
@@ -26,45 +26,48 @@ module _
   where
 
   cospan-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) → UU l
-  cospan-Synthetic-Category-Theory κ =
-    Σ ( category-Synthetic-Category-Theory κ)
-      λ C → Σ ( category-Synthetic-Category-Theory κ)
-              λ D → Σ ( category-Synthetic-Category-Theory κ)
-                      λ E → Σ ( functor-Synthetic-Category-Theory κ C E)
-                              λ f → functor-Synthetic-Category-Theory κ D E
+    (κ : language-Synthetic-Category-Theory l)
+    (C D E : category-Synthetic-Category-Theory κ ) → UU l
+  cospan-Synthetic-Category-Theory κ C D E =
+    Σ ( functor-Synthetic-Category-Theory κ C E)
+      λ f → functor-Synthetic-Category-Theory κ D E
 
   left-source-cospan-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    cospan-Synthetic-Category-Theory κ →
-    category-Synthetic-Category-Theory κ
-  left-source-cospan-Synthetic-Category-Theory κ S = pr1 (pr2 S)
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ} →
+    cospan-Synthetic-Category-Theory κ C D E →
+      category-Synthetic-Category-Theory κ
+  left-source-cospan-Synthetic-Category-Theory κ {D = D} S = D
 
   right-source-cospan-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    cospan-Synthetic-Category-Theory κ →
-    category-Synthetic-Category-Theory κ
-  right-source-cospan-Synthetic-Category-Theory κ S = pr1 S
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ} →
+    cospan-Synthetic-Category-Theory κ C D E →
+      category-Synthetic-Category-Theory κ
+  right-source-cospan-Synthetic-Category-Theory κ {C = C} S = C
 
   target-cospan-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    cospan-Synthetic-Category-Theory κ →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ} →
+    cospan-Synthetic-Category-Theory κ C D E →
     category-Synthetic-Category-Theory κ
-  target-cospan-Synthetic-Category-Theory κ S = pr1 (pr2 (pr2 S))
+  target-cospan-Synthetic-Category-Theory κ {E = E} S = E
 
   left-map-cospan-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (S : cospan-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (S : cospan-Synthetic-Category-Theory κ C D E) →
     functor-Synthetic-Category-Theory κ
       ( left-source-cospan-Synthetic-Category-Theory κ S)
       ( target-cospan-Synthetic-Category-Theory κ S)
-  left-map-cospan-Synthetic-Category-Theory κ S = pr2 (pr2 (pr2 (pr2 S)))
+  left-map-cospan-Synthetic-Category-Theory κ S = pr2 S
 
   right-map-cospan-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (S : cospan-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (S : cospan-Synthetic-Category-Theory κ C D E) →
     functor-Synthetic-Category-Theory κ
       ( right-source-cospan-Synthetic-Category-Theory κ S)
       ( target-cospan-Synthetic-Category-Theory κ S)
-  right-map-cospan-Synthetic-Category-Theory κ S = pr1 (pr2 (pr2 (pr2 S)))
+  right-map-cospan-Synthetic-Category-Theory κ S = pr1 S
 ```

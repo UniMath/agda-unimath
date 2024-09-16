@@ -28,46 +28,52 @@ module _
   where
 
   cone-diagram-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
     (T : category-Synthetic-Category-Theory κ) → UU l
   cone-diagram-Synthetic-Category-Theory κ μ S T =
     Σ ( functor-Synthetic-Category-Theory
         κ T (right-source-cospan-Synthetic-Category-Theory κ S))
-      λ tr → Σ ( functor-Synthetic-Category-Theory
-              κ T (left-source-cospan-Synthetic-Category-Theory κ S))
-              λ tl → isomorphism-Synthetic-Category-Theory κ
-                    ( comp-functor-Synthetic-Category-Theory
-                      μ ( right-map-cospan-Synthetic-Category-Theory κ S) tr)
-                    ( comp-functor-Synthetic-Category-Theory
-                      μ (left-map-cospan-Synthetic-Category-Theory κ S) tl)
+      λ tr →
+        Σ ( functor-Synthetic-Category-Theory
+            κ T (left-source-cospan-Synthetic-Category-Theory κ S))
+          λ tl →
+            isomorphism-Synthetic-Category-Theory κ
+              ( comp-functor-Synthetic-Category-Theory
+                μ ( right-map-cospan-Synthetic-Category-Theory κ S) tr)
+              ( comp-functor-Synthetic-Category-Theory
+                μ (left-map-cospan-Synthetic-Category-Theory κ S) tl)
 
   apex-cone-diagram-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
     (T : category-Synthetic-Category-Theory κ) →
     cone-diagram-Synthetic-Category-Theory κ μ S T →
-    category-Synthetic-Category-Theory κ
+      category-Synthetic-Category-Theory κ
   apex-cone-diagram-Synthetic-Category-Theory κ μ S T c = T
 
   left-map-cone-diagram-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
-    (T : category-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
+    (T : category-Synthetic-Category-Theory κ)
     (c : cone-diagram-Synthetic-Category-Theory κ μ S T) →
-    functor-Synthetic-Category-Theory κ
-      ( apex-cone-diagram-Synthetic-Category-Theory κ μ S T c)
-      ( left-source-cospan-Synthetic-Category-Theory κ S)
+      functor-Synthetic-Category-Theory κ
+        ( apex-cone-diagram-Synthetic-Category-Theory κ μ S T c)
+        ( left-source-cospan-Synthetic-Category-Theory κ S)
   left-map-cone-diagram-Synthetic-Category-Theory κ μ S T c = pr1 (pr2 c)
 
   right-map-cone-diagram-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
-    (T : category-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
+    (T : category-Synthetic-Category-Theory κ)
     (c : cone-diagram-Synthetic-Category-Theory κ μ S T) →
       functor-Synthetic-Category-Theory κ
         ( apex-cone-diagram-Synthetic-Category-Theory κ μ S T c)
@@ -75,10 +81,11 @@ module _
   right-map-cone-diagram-Synthetic-Category-Theory κ μ S T c = pr1 c
 
   iso-cone-diagram-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
-    (T : category-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
+    (T : category-Synthetic-Category-Theory κ)
     (c : cone-diagram-Synthetic-Category-Theory κ μ S T) →
     isomorphism-Synthetic-Category-Theory κ
       ( comp-functor-Synthetic-Category-Theory μ
@@ -90,11 +97,12 @@ module _
   iso-cone-diagram-Synthetic-Category-Theory κ μ S T c = pr2 (pr2 c)
 
   iso-of-cone-diagrams-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (ι : identity-Synthetic-Category-Theory κ) →
-    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
     (T : category-Synthetic-Category-Theory κ) →
     cone-diagram-Synthetic-Category-Theory κ μ S T →
     cone-diagram-Synthetic-Category-Theory κ μ S T → UU l
@@ -102,28 +110,31 @@ module _
     Σ ( isomorphism-Synthetic-Category-Theory κ
         ( right-map-cone-diagram-Synthetic-Category-Theory κ μ S T c)
         ( right-map-cone-diagram-Synthetic-Category-Theory κ μ S T c'))
-      λ φr → Σ ( isomorphism-Synthetic-Category-Theory κ
-        ( left-map-cone-diagram-Synthetic-Category-Theory κ μ S T c)
-        ( left-map-cone-diagram-Synthetic-Category-Theory κ μ S T c'))
-              λ φl → commuting-square-isomorphisms-Synthetic-Category-Theory κ μ
-                    ( iso-cone-diagram-Synthetic-Category-Theory κ μ S T c)
-                    ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-                      ( id-iso-Synthetic-Category-Theory ι
-                        ( left-map-cospan-Synthetic-Category-Theory κ S))
-                      ( φl))
-                    ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-                      ( id-iso-Synthetic-Category-Theory ι
-                        ( right-map-cospan-Synthetic-Category-Theory κ S))
-                      ( φr))
-                    ( iso-cone-diagram-Synthetic-Category-Theory κ μ S T c')
+      λ φr →
+        Σ ( isomorphism-Synthetic-Category-Theory κ
+            ( left-map-cone-diagram-Synthetic-Category-Theory κ μ S T c)
+            ( left-map-cone-diagram-Synthetic-Category-Theory κ μ S T c'))
+          λ φl →
+            commuting-square-isomorphisms-Synthetic-Category-Theory κ μ
+              ( iso-cone-diagram-Synthetic-Category-Theory κ μ S T c)
+                ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+                  ( id-iso-Synthetic-Category-Theory ι
+                    ( left-map-cospan-Synthetic-Category-Theory κ S))
+                  ( φl))
+                ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+                  ( id-iso-Synthetic-Category-Theory ι
+                    ( right-map-cospan-Synthetic-Category-Theory κ S))
+                  ( φr))
+                ( iso-cone-diagram-Synthetic-Category-Theory κ μ S T c')
 
   right-map-iso-of-cone-diagrams-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (ι : identity-Synthetic-Category-Theory κ) →
-    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
-    (T : category-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
+    (T : category-Synthetic-Category-Theory κ)
     (c c' : cone-diagram-Synthetic-Category-Theory κ μ S T) →
     (iso-of-cone-diagrams-Synthetic-Category-Theory κ μ ι Χ S T c c') →
     (isomorphism-Synthetic-Category-Theory κ
@@ -133,12 +144,13 @@ module _
     κ μ ι Χ S T c c' ϕ = pr1 ϕ
 
   left-map-iso-of-cone-diagrams-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (ι : identity-Synthetic-Category-Theory κ) →
-    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
-    (T : category-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
+    (T : category-Synthetic-Category-Theory κ)
     (c c' : cone-diagram-Synthetic-Category-Theory κ μ S T) →
     (iso-of-cone-diagrams-Synthetic-Category-Theory κ μ ι Χ S T c c') →
     (isomorphism-Synthetic-Category-Theory κ
@@ -148,12 +160,13 @@ module _
     κ μ ι Χ S T c c' ϕ = pr1 (pr2 ϕ)
 
   isomorphism-iso-of-cone-diagrams-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (ι : identity-Synthetic-Category-Theory κ) →
-    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
-    (T : category-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
+    (T : category-Synthetic-Category-Theory κ)
     (c c' : cone-diagram-Synthetic-Category-Theory κ μ S T) →
     (ϕ : iso-of-cone-diagrams-Synthetic-Category-Theory κ μ ι Χ S T c c') →
     commuting-square-isomorphisms-Synthetic-Category-Theory κ μ
@@ -173,16 +186,16 @@ module _
     κ μ ι Χ S T c c' ϕ = pr2 (pr2 ϕ)
 
   iso-of-isos-of-cone-diagrams-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (ι : identity-Synthetic-Category-Theory κ) →
-    (ν : inverse-Synthetic-Category-Theory κ μ ι) →
-    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ) →
-    (Μ : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory
-      κ ι μ Χ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
-    (T : category-Synthetic-Category-Theory κ) →
-    (c c' : cone-diagram-Synthetic-Category-Theory κ μ S T) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (ν : inverse-Synthetic-Category-Theory κ μ ι)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    (Μ : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
+    (T : category-Synthetic-Category-Theory κ)
+    (c c' : cone-diagram-Synthetic-Category-Theory κ μ S T)
     (ϕ ψ : iso-of-cone-diagrams-Synthetic-Category-Theory κ μ ι Χ S T c c') →
       UU l
   iso-of-isos-of-cone-diagrams-Synthetic-Category-Theory
@@ -254,7 +267,7 @@ module _
 ```
 
 Given a cone over S with apex T and a functor s : R → T we get and induced cone
-over S with apex R
+over S with apex R.
 
 ```agda
 module _
@@ -262,18 +275,19 @@ module _
   where
 
   induced-cone-diagram-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (ι : identity-Synthetic-Category-Theory κ) →
-    (ν : inverse-Synthetic-Category-Theory κ μ ι) →
-    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ) →
-    (Α : associative-composition-Synthetic-Category-Theory κ μ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
-    (T : category-Synthetic-Category-Theory κ) →
-    (c : cone-diagram-Synthetic-Category-Theory κ μ S T) →
-    (R : category-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (ν : inverse-Synthetic-Category-Theory κ μ ι)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    (Α : associative-composition-Synthetic-Category-Theory κ μ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
+    (T : category-Synthetic-Category-Theory κ)
+    (c : cone-diagram-Synthetic-Category-Theory κ μ S T)
+    (R : category-Synthetic-Category-Theory κ)
     (s : functor-Synthetic-Category-Theory κ R T) →
-    cone-diagram-Synthetic-Category-Theory κ μ S R
+      cone-diagram-Synthetic-Category-Theory κ μ S R
   induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S T c R s =
     comp-functor-Synthetic-Category-Theory μ
       ( right-map-cone-diagram-Synthetic-Category-Theory κ μ S T c)
@@ -307,27 +321,28 @@ module _
   where
 
   induced-iso-cone-diagram-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l) →
-    (μ : composition-Synthetic-Category-Theory κ) →
-    (ι : identity-Synthetic-Category-Theory κ) →
-    (ν : inverse-Synthetic-Category-Theory κ μ ι) →
-    (Α : associative-composition-Synthetic-Category-Theory κ μ) →
-    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ) →
-    (Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ) →
-    (Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ) →
-    (Ξ : preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory κ μ Α Χ) →
-    (I : interchange-composition-Synthetic-Category-Theory κ μ Χ) →
-    (M : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ) →
-    (N : preserves-identity-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ) →
-    (S : cospan-Synthetic-Category-Theory κ) →
-    (T : category-Synthetic-Category-Theory κ) →
-    (c : cone-diagram-Synthetic-Category-Theory κ μ S T) →
-    (R : category-Synthetic-Category-Theory κ) →
+    (κ : language-Synthetic-Category-Theory l)
+    {C D E : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    (ν : inverse-Synthetic-Category-Theory κ μ ι)
+    (Α : associative-composition-Synthetic-Category-Theory κ μ)
+    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
+    (Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ)
+    (Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ)
+    (Ξ : preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory κ μ Α Χ)
+    (I : interchange-composition-Synthetic-Category-Theory κ μ Χ)
+    (M : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ)
+    (N : preserves-identity-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ)
+    (S : cospan-Synthetic-Category-Theory κ C D E)
+    (T : category-Synthetic-Category-Theory κ)
+    (c : cone-diagram-Synthetic-Category-Theory κ μ S T)
+    (R : category-Synthetic-Category-Theory κ)
     (s t : functor-Synthetic-Category-Theory κ R T) →
     isomorphism-Synthetic-Category-Theory κ s t →
-    iso-of-cone-diagrams-Synthetic-Category-Theory κ μ ι Χ S R
-      ( induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S T c R s)
-      ( induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S T c R t)
+      iso-of-cone-diagrams-Synthetic-Category-Theory κ μ ι Χ S R
+        ( induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S T c R s)
+        ( induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S T c R t)
   induced-iso-cone-diagram-Synthetic-Category-Theory
     κ μ ι ν Α Χ Λ Ρ Ξ I M N S T c R s t α =
     horizontal-comp-iso-Synthetic-Category-Theory Χ
@@ -499,7 +514,8 @@ module _
                       ( iso-cone-diagram-Synthetic-Category-Theory κ μ S T c)
                       ( α)
                       ( id-iso-Synthetic-Category-Theory ι s)))))))
-      ( preserves-associativity-comp-functor-horizontal-comp-iso-Synthetic-Category-Theory Ξ
+      ( preserves-associativity-comp-functor-horizontal-comp-iso-Synthetic-Category-Theory
+        ( Ξ)
         ( id-iso-Synthetic-Category-Theory ι
           ( left-map-cospan-Synthetic-Category-Theory κ S))
         ( id-iso-Synthetic-Category-Theory ι

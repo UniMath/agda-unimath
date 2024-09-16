@@ -28,6 +28,7 @@ module _
   record
     pullback-Synthetic-Category-Theory
       (κ : language-Synthetic-Category-Theory l)
+      {C D E : category-Synthetic-Category-Theory κ}
       (μ : composition-Synthetic-Category-Theory κ)
       (ι : identity-Synthetic-Category-Theory κ)
       (ν : inverse-Synthetic-Category-Theory κ μ ι)
@@ -39,7 +40,7 @@ module _
       (I : interchange-composition-Synthetic-Category-Theory κ μ Χ)
       (M : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ)
       (N : preserves-identity-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ)
-      (S : cospan-Synthetic-Category-Theory κ) : UU l
+      (S : cospan-Synthetic-Category-Theory κ C D E) : UU l
     where
     coinductive
     field
@@ -49,12 +50,12 @@ module _
         cone-diagram-Synthetic-Category-Theory
           κ μ S apex-pullback-Synthetic-Category-Theory
       universality-functor-pullback-Synthetic-Category-Theory :
-        (T : category-Synthetic-Category-Theory κ) →
+        (T : category-Synthetic-Category-Theory κ)
         (c : cone-diagram-Synthetic-Category-Theory κ μ S T) →
           functor-Synthetic-Category-Theory κ
             T apex-pullback-Synthetic-Category-Theory
       universality-iso-pullback-Synthetic-Category-Theory :
-        (T : category-Synthetic-Category-Theory κ) →
+        (T : category-Synthetic-Category-Theory κ)
         (c : cone-diagram-Synthetic-Category-Theory κ μ S T) →
           iso-of-cone-diagrams-Synthetic-Category-Theory κ μ ι Χ S T
             ( c)
@@ -64,8 +65,8 @@ module _
               ( T)
               ( universality-functor-pullback-Synthetic-Category-Theory T c))
       triviality-iso-of-cone-diagrams-pullback-Synthetic-Category-Theory :
-        {T : category-Synthetic-Category-Theory κ} →
-        (s t : functor-Synthetic-Category-Theory κ T apex-pullback-Synthetic-Category-Theory) →
+        {T : category-Synthetic-Category-Theory κ}
+        (s t : functor-Synthetic-Category-Theory κ T apex-pullback-Synthetic-Category-Theory)
         (H : iso-of-cone-diagrams-Synthetic-Category-Theory κ μ ι Χ S T
           (induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S
             apex-pullback-Synthetic-Category-Theory
@@ -74,19 +75,20 @@ module _
             apex-pullback-Synthetic-Category-Theory
             cone-diagram-pullback-Synthetic-Category-Theory T t)) →
           Σ ( isomorphism-Synthetic-Category-Theory κ s t)
-            λ α → iso-of-isos-of-cone-diagrams-Synthetic-Category-Theory κ μ ι ν Χ M S T
-                    ( induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S
-                      apex-pullback-Synthetic-Category-Theory
-                      cone-diagram-pullback-Synthetic-Category-Theory
-                      T s)
-                    ( induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S
-                      apex-pullback-Synthetic-Category-Theory
-                      cone-diagram-pullback-Synthetic-Category-Theory
-                      T t)
-                    ( induced-iso-cone-diagram-Synthetic-Category-Theory
-                      κ μ ι ν Α Χ Λ Ρ Ξ I M N S
-                      apex-pullback-Synthetic-Category-Theory
-                      cone-diagram-pullback-Synthetic-Category-Theory
-                      T s t α)
-                    ( H)
+            λ α →
+              iso-of-isos-of-cone-diagrams-Synthetic-Category-Theory κ μ ι ν Χ M S T
+                ( induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S
+                  apex-pullback-Synthetic-Category-Theory
+                  cone-diagram-pullback-Synthetic-Category-Theory
+                  T s)
+                ( induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S
+                  apex-pullback-Synthetic-Category-Theory
+                  cone-diagram-pullback-Synthetic-Category-Theory
+                  T t)
+                ( induced-iso-cone-diagram-Synthetic-Category-Theory
+                  κ μ ι ν Α Χ Λ Ρ Ξ I M N S
+                  apex-pullback-Synthetic-Category-Theory
+                  cone-diagram-pullback-Synthetic-Category-Theory
+                  T s t α)
+                ( H)
 ```
