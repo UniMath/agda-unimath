@@ -187,7 +187,7 @@ module _
 
 ## Properties
 
-### The standard saturated metric space of real numbers is saturated
+### The standard metric space of real numbers is saturated
 
 ```agda
 module _
