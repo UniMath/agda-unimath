@@ -1,4 +1,4 @@
-# The maybe modality
+# The maybe monad
 
 ```agda
 module foundation.maybe where
@@ -24,15 +24,23 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
 
 ## Idea
 
-The maybe modality is an operation on types that adds one point. This is used,
-for example, to define partial functions, where a partial function `f : X ⇀ Y`
-is a map `f : X → Maybe Y`.
+The
+{{#concept "maybe monad" Disambiguation="on types" Agda=Maybe WD="option type" WDID=Q7099015}}
+is an operation on types that adds one point. This is used, for example, to
+define [partial functions](foundation.partial-functions.md), where a partial
+function `f : X ⇀ Y` is a map `f : X → Maybe Y`.
+
+The maybe monad is an example of a monad that is not a
+[modality](orthogonal-factorization-systems.higher-modalities.md), since it is
+not [idempotent](foundation.idempotent-maps.md).
 
 ## Definitions
 
@@ -90,7 +98,7 @@ maybe-structure {l1} X = Σ (UU l1) (λ Y → Maybe Y ≃ X)
 
 ## Properties
 
-### The unit of Maybe is an embedding
+### The unit of `Maybe` is an embedding
 
 ```agda
 abstract
@@ -122,7 +130,7 @@ is-decidable-is-not-exception-Maybe x =
   is-decidable-neg (is-decidable-is-exception-Maybe x)
 ```
 
-### The values of the unit of the Maybe modality are not exceptions
+### The values of the unit of the `Maybe` monad are not exceptions
 
 ```agda
 abstract
@@ -176,31 +184,50 @@ eq-is-not-exception-Maybe x H =
   eq-is-value-Maybe x (is-value-is-not-exception-Maybe x H)
 ```
 
-### The two definitions of `Maybe` are equal
+### The two definitions of `Maybe` are equivalent
 
 ```agda
-equiv-Maybe-Maybe' :
-  {l1 l2 : Level} {X : UU l1} → Maybe X ≃ Maybe' X
-pr1 equiv-Maybe-Maybe' (inl x) = unit-Maybe' x
-pr1 equiv-Maybe-Maybe' (inr star) = exception-Maybe'
-pr1 (pr1 (pr2 equiv-Maybe-Maybe')) (unit-Maybe' x) = inl x
-pr1 (pr1 (pr2 equiv-Maybe-Maybe')) exception-Maybe' = inr star
-pr2 (pr1 (pr2 equiv-Maybe-Maybe')) (unit-Maybe' x) = refl
-pr2 (pr1 (pr2 equiv-Maybe-Maybe')) exception-Maybe' = refl
-pr1 (pr2 (pr2 equiv-Maybe-Maybe')) (unit-Maybe' x) = inl x
-pr1 (pr2 (pr2 equiv-Maybe-Maybe')) exception-Maybe' = inr star
-pr2 (pr2 (pr2 equiv-Maybe-Maybe')) (inl x) = refl
-pr2 (pr2 (pr2 equiv-Maybe-Maybe')) (inr star) = refl
+module _
+  {l1 l2 : Level} {X : UU l1}
+  where
+
+  map-Maybe-Maybe' : Maybe X → Maybe' X
+  map-Maybe-Maybe' (inl x) = unit-Maybe' x
+  map-Maybe-Maybe' (inr _) = exception-Maybe'
+
+  map-inv-Maybe-Maybe' : Maybe' X → Maybe X
+  map-inv-Maybe-Maybe' (unit-Maybe' x) = inl x
+  map-inv-Maybe-Maybe' exception-Maybe' = inr star
+
+  is-section-map-inv-Maybe-Maybe' :
+    is-section map-Maybe-Maybe' map-inv-Maybe-Maybe'
+  is-section-map-inv-Maybe-Maybe' (unit-Maybe' x) = refl
+  is-section-map-inv-Maybe-Maybe' exception-Maybe' = refl
+
+  is-retraction-map-inv-Maybe-Maybe' :
+    is-retraction map-Maybe-Maybe' map-inv-Maybe-Maybe'
+  is-retraction-map-inv-Maybe-Maybe' (inl x) = refl
+  is-retraction-map-inv-Maybe-Maybe' (inr x) = refl
+
+  is-equiv-map-Maybe-Maybe' : is-equiv map-Maybe-Maybe'
+  is-equiv-map-Maybe-Maybe' =
+    is-equiv-is-invertible
+      ( map-inv-Maybe-Maybe')
+      ( is-section-map-inv-Maybe-Maybe')
+      ( is-retraction-map-inv-Maybe-Maybe')
+
+  equiv-Maybe-Maybe' : Maybe X ≃ Maybe' X
+  equiv-Maybe-Maybe' = (map-Maybe-Maybe' , is-equiv-map-Maybe-Maybe')
 ```
 
-### There is a surjection from `(Maybe A + Maybe B)` to `Maybe (A + B)`
+### There is a surjection from `Maybe A + Maybe B` to `Maybe (A + B)`
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  map-maybe-coproduct : (Maybe A + Maybe B) → Maybe (A + B)
+  map-maybe-coproduct : Maybe A + Maybe B → Maybe (A + B)
   map-maybe-coproduct (inl (inl x)) = inl (inl x)
   map-maybe-coproduct (inl (inr star)) = inr star
   map-maybe-coproduct (inr (inl x)) = inl (inr x)
@@ -215,14 +242,14 @@ module _
     unit-trunc-Prop ((inl (inr star)) , refl)
 ```
 
-### There is a surjection from `(Maybe A × Maybe B)` to `Maybe (A × B)`
+### There is a surjection from `Maybe A × Maybe B` to `Maybe (A × B)`
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  map-maybe-product : (Maybe A × Maybe B) → Maybe (A × B)
+  map-maybe-product : Maybe A × Maybe B → Maybe (A × B)
   map-maybe-product (inl a , inl b) = inl (a , b)
   map-maybe-product (inl a , inr star) = inr star
   map-maybe-product (inr star , inl b) = inr star
@@ -234,3 +261,10 @@ module _
   is-surjective-map-maybe-product (inr star) =
     unit-trunc-Prop ((inr star , inr star) , refl)
 ```
+
+## External links
+
+- [maybe monad](https://ncatlab.org/nlab/show/maybe+monad) at $n$Lab
+- [Monad (category theory)#The maybe monad](<https://en.wikipedia.org/wiki/Monad_(category_theory)#The_maybe_monad>)
+  at Wikipedia
+- [Option type](https://en.wikipedia.org/wiki/Option_type) at Wikipedia
