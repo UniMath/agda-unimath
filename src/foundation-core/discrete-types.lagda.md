@@ -18,7 +18,8 @@ open import foundation-core.sets
 
 ## Idea
 
-A discrete type is a type that has decidable equality.
+A {{#concept "discrete type" Agda=Discrete-Type}} is a type that has
+[decidable equality](foundation.decidable-equality.md).
 
 ## Definition
 

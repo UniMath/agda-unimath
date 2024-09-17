@@ -27,7 +27,8 @@ open import foundation-core.propositions
 
 ## Idea
 
-A discrete type is a type that has decidable equality.
+A {{#concept "discrete type"}} is a type that has
+[decidable equality](foundation.decidable-equality.md).
 
 ## Properties
 

@@ -170,7 +170,9 @@ neg-type-Decidable-Prop A is-decidable-A =
 neg-Decidable-Prop :
   {l1 : Level} → Decidable-Prop l1 → Decidable-Prop l1
 neg-Decidable-Prop P =
-  neg-type-Decidable-Prop (type-Decidable-Prop P) (is-decidable-Decidable-Prop P)
+  neg-type-Decidable-Prop
+    ( type-Decidable-Prop P)
+    ( is-decidable-Decidable-Prop P)
 
 type-neg-Decidable-Prop :
   {l1 : Level} → Decidable-Prop l1 → UU l1

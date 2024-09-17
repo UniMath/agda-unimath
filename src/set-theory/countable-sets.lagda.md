@@ -55,7 +55,7 @@ for some [decidable subset](foundation.decidable-subtypes.md) `P` of `X`.
 
 ## Definition
 
-### First definition of countable types
+### First definition of countable sets
 
 ```agda
 module _
@@ -83,7 +83,7 @@ module _
   is-prop-is-countable = is-prop-type-Prop is-countable-Prop
 ```
 
-### Second definition of countable types
+### Second definition of countable sets
 
 ```agda
 module _
@@ -108,7 +108,7 @@ module _
   is-prop-is-countable' = is-prop-type-Prop is-countable-Prop'
 ```
 
-### Third definition of countable types
+### Third definition of countable sets
 
 If a set `X` is inhabited, then it is countable if and only if there is a
 surjective map `f : ℕ → X`. Let us call the latter as "directly countable".
