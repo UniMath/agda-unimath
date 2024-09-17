@@ -7,16 +7,16 @@ module foundation.cantors-theorem where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.action-on-identifications-functions
+open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.powersets
-open import foundation.decidable-propositions
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
-open import foundation.decidable-subtypes
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
@@ -30,16 +30,12 @@ open import foundation-core.propositions
 
 {{#concept "Cantor's theorem" Agda=theorem-Cantor WD="Cantor's theorem" WDID=Q474881}}
 shows that there is [no](foundation-core.negation.md)
-[surjective map](foundation.surjective-maps.md) from a type into its
+[surjective map](foundation.surjective-maps.md) from a type onto its
 [powerset](foundation.powersets.md).
 
 ```text
   ¬ (A ↠ 𝒫(A))
 ```
-
-Cantor's theorem generalizes _Cantor's diagonal argument_, which shows that the
-set of [infinite sequences](foundation.sequences.md) on a set with two distinct
-elements is [uncountable](set-theory.uncountable-sets.md).
 
 ## Theorem
 
@@ -91,6 +87,22 @@ module _
         ( empty-Prop)
         ( not-in-image-map-theorem-decidable-Cantor)
 ```
+
+## References
+
+A proof of Cantor's theorem first appeared in {{#cite Cantor1890/91}}, where it
+was considered in the context of [infinite sets](set-theory.infinite-sets.md).
+
+{{#bibliography}} {{#reference Cantor1890/91}}
+
+## See also
+
+- Cantor's theorem generalizes Cantor's diagonal argument, which shows that the
+  [set](foundation-core.sets.md) of
+  [infinite sequences](foundation.sequences.md) on a set with at least two
+  distinct elements is [uncountable](set-theory.uncountable-sets.md).
+- Cantor's theorem is generalized by
+  [Lawvere's fixed point theorem](foundation.lawveres-fixed-point-theorem.md)
 
 ## External links
 

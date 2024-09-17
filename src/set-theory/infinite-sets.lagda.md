@@ -24,7 +24,8 @@ open import univalent-combinatorics.standard-finite-types
 
 A [set](foundation-core.sets.md) `A` is said to be
 {{#concept "infinite" Disambiguation="set" WD="infinite set" WDID=Q205140}} if
-it contains arbitrarily large [finite](univalent-combinatorics.finite-types.md)
+it contains arbitrarily [large](set-theory.cardinalities.md)
+[finite](univalent-combinatorics.finite-types.md)
 [subsets](foundation-core.subtypes.md).
 
 ## Definition

@@ -54,8 +54,8 @@ module _
   [decidable propositions](foundation-core.decidable-propositions.md) or the
   universe of all [propositions](foundation-core.propositions.md), then we have
   an operator `B → B` with no fixed points, namely
-  [negation](foundation-core.negation.md) on propositions. Since
-  `𝒫(A) = (A → Prop)`, It follows that there can be no surjection `A → 𝒫(A)`.
+  [negation](foundation-core.negation.md). Since `𝒫(A) = (A → Prop)`, It follows
+  that there can be no surjection `A ↠ 𝒫(A)`.
 
 ## External links
 

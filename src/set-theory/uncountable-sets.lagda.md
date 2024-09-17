@@ -21,9 +21,10 @@ open import set-theory.countable-sets
 
 A [set](foundation-core.sets.md) `X` is
 {{#concept "uncountable" Disambiguation="set" Agda=is-uncountable WD="uncountable set" WDID=Q1128796}}
-if there is [no](foundation-core.negation.md)
-[surjection](foundation.surjective-maps.md) `ℕ → X + 1`. In other words, if `X`
-is not [countable](set-theory.countable-sets.md).
+if `X` is not [empty](foundation-core.empty-types.md) and there is
+[no](foundation-core.negation.md) [surjection](foundation.surjective-maps.md)
+`ℕ ↠ X`. In other words, if `X` is not
+[countable](set-theory.countable-sets.md).
 
 ## Definition
 
