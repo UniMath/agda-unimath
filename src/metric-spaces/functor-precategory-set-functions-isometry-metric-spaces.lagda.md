@@ -18,6 +18,7 @@ open import foundation.category-of-sets
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -98,30 +99,10 @@ module _
       (Set-Precategory l1)
       (functor-precategory-set-functions-isometry-Metric-Space l1 l2)
   is-conservative-functor-precategory-set-functions-isometry-Metric-Space
-    {A} {B} f H =
-    is-iso-precategory-is-equiv-isometry-Metric-Space
-      ( A)
-      ( B)
-      ( f)
-      ( is-equiv-is-invertible
-        ( hom-inv-is-iso-Precategory
-          ( Set-Precategory l1)
-          { set-Metric-Space A}
-          { set-Metric-Space B}
-          { map-isometry-Metric-Space A B f}
-          ( H))
-        ( htpy-eq
-          ( is-section-hom-inv-is-iso-Precategory
-            ( Set-Precategory l1)
-            { set-Metric-Space A}
-            { set-Metric-Space B}
-            { map-isometry-Metric-Space A B f}
-            (H)))
-        ( htpy-eq
-          ( is-retraction-hom-inv-is-iso-Precategory
-            ( Set-Precategory l1)
-            { set-Metric-Space A}
-            { set-Metric-Space B}
-            { map-isometry-Metric-Space A B f}
-            (H))))
+    {A} {B} f =
+    ( is-iso-precategory-is-equiv-isometry-Metric-Space A B f) ∘
+    ( is-equiv-is-iso-precategory-Set
+      ( set-Metric-Space A)
+      ( set-Metric-Space B)
+      ( map-isometry-Metric-Space A B f))
 ```
