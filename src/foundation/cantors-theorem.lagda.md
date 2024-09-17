@@ -1,7 +1,7 @@
 # Cantor's theorem
 
 ```agda
-module foundation.cantors-diagonal-argument where
+module foundation.cantors-theorem where
 ```
 
 <details><summary>Imports</summary>
