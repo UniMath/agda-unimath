@@ -140,8 +140,7 @@ is-decidable-function-type :
   is-decidable A → is-decidable B → is-decidable (A → B)
 is-decidable-function-type (inl a) (inl b) = inl (λ x → b)
 is-decidable-function-type (inl a) (inr g) = inr (λ h → g (h a))
-is-decidable-function-type (inr f) (inl b) = inl (ex-falso ∘ f)
-is-decidable-function-type (inr f) (inr g) = inl (ex-falso ∘ f)
+is-decidable-function-type (inr f) _ = inl (ex-falso ∘ f)
 
 is-decidable-function-type' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -152,6 +151,36 @@ is-decidable-function-type' (inl a) d with d a
 is-decidable-function-type' (inr na) d = inl (ex-falso ∘ na)
 ```
 
+### Dependent sums of a uniformly decidable family of types over a decidable base is decidable
+
+```agda
+is-decidable-Σ-uniformly-decidable-family :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  is-decidable A → (((a : A) → B a) + ((a : A) → ¬ B a)) → is-decidable (Σ A B)
+is-decidable-Σ-uniformly-decidable-family (inl a) (inl b) =
+  inl (a , b a)
+is-decidable-Σ-uniformly-decidable-family (inl a) (inr b) =
+  inr (λ x → b (pr1 x) (pr2 x))
+is-decidable-Σ-uniformly-decidable-family (inr a) _ =
+  inr (λ x → a (pr1 x))
+```
+
+### Dependent products of uniformly decidable families over decidable bases are decidable
+
+```agda
+is-decidable-Π-uniformly-decidable-family :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  is-decidable A →
+  (((a : A) → B a) + ((a : A) → ¬ (B a))) →
+  is-decidable ((a : A) → (B a))
+is-decidable-Π-uniformly-decidable-family (inl a) (inl b) =
+  inl b
+is-decidable-Π-uniformly-decidable-family (inl a) (inr b) =
+  inr (λ f → b a (f a))
+is-decidable-Π-uniformly-decidable-family (inr na) _ =
+  inl (ex-falso ∘ na)
+```
+
 ### The negation of a decidable type is decidable
 
 ```agda
@@ -160,7 +189,7 @@ is-decidable-neg :
 is-decidable-neg d = is-decidable-function-type d is-decidable-empty
 ```
 
-### Decidable types are closed under coinhabited types; retracts, and equivalences
+### Decidable types are closed under coinhabited types
 
 ```agda
 module _
@@ -171,7 +200,11 @@ module _
     (A → B) → (B → A) → is-decidable A → is-decidable B
   is-decidable-iff f g (inl a) = inl (f a)
   is-decidable-iff f g (inr na) = inr (λ b → na (g b))
+```
 
+### Decidable types are closed under retracts
+
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
@@ -180,7 +213,11 @@ module _
     A retract-of B → is-decidable B → is-decidable A
   is-decidable-retract-of (pair i (pair r H)) (inl b) = inl (r b)
   is-decidable-retract-of (pair i (pair r H)) (inr f) = inr (f ∘ i)
+```
 
+### Decidable types are closed under equivalences
+
+```agda
   is-decidable-is-equiv :
     {f : A → B} → is-equiv f → is-decidable B → is-decidable A
   is-decidable-is-equiv {f} (pair (pair g G) (pair h H)) =
@@ -259,7 +296,7 @@ is-fixed-point-is-decidable-is-inhabited {l} {X} t =
   right-unit-law-coproduct-is-empty X (¬ X) (is-nonempty-is-inhabited t)
 ```
 
-### Raising types converves decidability
+### Raising universe level conserves decidability
 
 ```agda
 module _
@@ -267,6 +304,5 @@ module _
   where
 
   is-decidable-raise : is-decidable A → is-decidable (raise l A)
-  is-decidable-raise (inl p) = inl (map-raise p)
-  is-decidable-raise (inr np) = inr (λ p' → np (map-inv-raise p'))
+  is-decidable-raise = is-decidable-equiv' (compute-raise l A)
 ```
