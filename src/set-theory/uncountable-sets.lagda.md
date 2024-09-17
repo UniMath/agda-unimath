@@ -19,7 +19,7 @@ open import set-theory.countable-sets
 
 ## Idea
 
-A [set](foundation.set-theory.md) `X` is
+A [set](foundation-core.sets.md) `X` is
 {{#concept "uncountable" Disambiguation="set" Agda=is-uncountable WD="uncountable set" WDID=Q1128796}}
 if there is [no](foundation-core.negation.md)
 [surjection](foundation.surjective-maps.md) `ℕ → X + 1`. In other words, if `X`
