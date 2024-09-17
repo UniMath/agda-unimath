@@ -38,8 +38,8 @@ open import metric-spaces.metric-spaces
 A [function](metric-spaces.functions-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is an
 {{#concept "isometry" Disambiguation="between metric spaces" Agda=is-isometry-Metric-Space}}
-if it transports is an [isometry](metric-spaces.isometry-premetric-spaces.md)
-between their carrier [premetric spaces](metric-spaces.premetric-spaces.md).
+if it is an [isometry](metric-spaces.isometry-premetric-spaces.md) between their
+carrier [premetric spaces](metric-spaces.premetric-spaces.md).
 
 ## Definitions
 
