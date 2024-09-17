@@ -1,0 +1,433 @@
+# Transposing adjunctions between types
+
+```agda
+module simplicial-type-theory.transposing-adjunctions-between-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-identifications
+open import foundation.dependent-pair-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.identity-types
+open import foundation.universe-levels
+open import foundation.function-types
+open import foundation.univalence
+open import foundation.functoriality-dependent-pair-types
+open import foundation.universal-property-equivalences
+open import foundation.postcomposition-functions
+open import foundation.precomposition-functions
+open import simplicial-type-theory.directed-edges
+open import simplicial-type-theory.fully-faithful-maps
+open import simplicial-type-theory.dependent-directed-edges
+open import simplicial-type-theory.directed-edges-dependent-pair-types
+open import simplicial-type-theory.natural-transformations
+open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-identifications-concatenation
+
+open import foundation-core.equivalences
+open import foundation-core.homotopies
+```
+
+</details>
+
+## Idea
+
+Consider a pair of maps `L : A ↔ B : R`. We say that `L` and `R` form a
+transposing adjunction given a binary family of equivalences
+
+```text
+  (x : A) (y : B) → hom B (L x) y ≃ hom A x (R y)
+```
+
+## Definitions
+
+### transposing adjoint pairs
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-transposing-adjunction : (A → B) → (B → A) → UU (l1 ⊔ l2)
+  is-transposing-adjunction L R = (x : A) (y : B) → hom▵ (L x) y ≃ hom▵ x (R y)
+
+  _⊣▵_ : (A → B) → (B → A) → UU (l1 ⊔ l2)
+  _⊣▵_ = is-transposing-adjunction
+```
+
+### transposing left adjoints
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-transposing-left-adjoint : (A → B) → UU (l1 ⊔ l2)
+  is-transposing-left-adjoint L = Σ (B → A) (is-transposing-adjunction L)
+```
+
+### transposing right adjoints
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-transposing-right-adjoint : (A → B) → UU (l1 ⊔ l2)
+  is-transposing-right-adjoint R = Σ (B → A) (λ L → is-transposing-adjunction L R)
+```
+
+### transposing adjunctions
+
+```agda
+transposing-adjunction : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+transposing-adjunction A B = Σ (A → B) is-transposing-left-adjoint
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : transposing-adjunction A B)
+  where
+
+  map-left-adjoint-transposing-adjunction : A → B
+  map-left-adjoint-transposing-adjunction = pr1 H
+
+  is-transposing-left-adjoint-map-left-adjoint-transposing-adjunction :
+    is-transposing-left-adjoint map-left-adjoint-transposing-adjunction
+  is-transposing-left-adjoint-map-left-adjoint-transposing-adjunction = pr2 H
+
+  map-right-adjoint-transposing-adjunction : B → A
+  map-right-adjoint-transposing-adjunction =
+    pr1 is-transposing-left-adjoint-map-left-adjoint-transposing-adjunction
+
+  is-transposing-adjunction-transposing-adjunction :
+    is-transposing-adjunction
+      map-left-adjoint-transposing-adjunction
+      map-right-adjoint-transposing-adjunction
+  is-transposing-adjunction-transposing-adjunction =
+    pr2 is-transposing-left-adjoint-map-left-adjoint-transposing-adjunction
+
+  is-transposing-right-adjoint-map-right-adjoint-transposing-adjunction :
+    is-transposing-right-adjoint map-right-adjoint-transposing-adjunction
+  is-transposing-right-adjoint-map-right-adjoint-transposing-adjunction =
+    ( map-left-adjoint-transposing-adjunction ,
+      is-transposing-adjunction-transposing-adjunction)
+```
+
+### The unit and counit natural transformations associated to a transposing adjunction
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  unit-is-transposing-adjunction :
+    {L : A → B} {R : B → A} →
+    is-transposing-adjunction L R → (x : A) → hom▵ x (R (L x))
+  unit-is-transposing-adjunction {L} {R} H x =
+    map-equiv (H x (L x)) (id-simplicial-hom (L x))
+
+  counit-is-transposing-adjunction :
+    {L : A → B} {R : B → A} →
+    is-transposing-adjunction L R → (y : B) → hom▵ (L (R y)) y
+  counit-is-transposing-adjunction {L} {R} H y =
+    map-inv-equiv (H (R y) y) (id-simplicial-hom (R y))
+```
+
+## Properties
+
+### The identity function is a transposing adjunction
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-transposing-adjunction-id : is-transposing-adjunction (id {A = A}) id
+  is-transposing-adjunction-id x y = id-equiv
+
+  id-transposing-adjunction : transposing-adjunction A A
+  id-transposing-adjunction = (id , id , is-transposing-adjunction-id)
+```
+
+### Equivalences are transposing adjunctions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-transposing-adjunction-is-equiv' :
+    {f : A → B} (u : is-equiv f) →
+    is-transposing-adjunction (map-inv-is-equiv u) f
+  is-transposing-adjunction-is-equiv' {f} u y x =
+    equiv-eq (ap (λ p → hom▵ p (f x)) (is-section-map-inv-is-equiv u y)) ∘e
+    equiv-action-simplicial-hom (f , u) (map-inv-is-equiv u y) x
+
+  is-transposing-adjunction-is-equiv :
+    {f : A → B} (u : is-equiv f) →
+    is-transposing-adjunction f (map-inv-is-equiv u)
+  is-transposing-adjunction-is-equiv {f} u x y =
+    inv-equiv
+      ( equiv-eq (ap (hom▵ (f x)) (is-section-map-inv-is-equiv u y)) ∘e
+        equiv-action-simplicial-hom (f , u) x (map-inv-is-equiv u y))
+
+```
+
+### Composition of transposing adjunctions
+
+Given a diagram of transposing adjunctions
+
+```text
+       R         R'
+    <----->   -------
+  A    ⊤    B    ⊤    C
+    ------>   ------>
+       L         L',
+```
+
+then we have a composite transposing adjunction `L' ∘ L ⊣ R ∘ R'`.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  is-transposing-adjunction-comp :
+    {L : A → B} {L' : B → C} {R : B → A} {R' : C → B} →
+    is-transposing-adjunction L' R' →
+    is-transposing-adjunction L R →
+    is-transposing-adjunction (L' ∘ L) (R ∘ R')
+  is-transposing-adjunction-comp {L} {L'} {R} {R'} H H' x y =
+    H' x (R' y) ∘e H (L x) y
+
+  comp-transposing-adjunction :
+    transposing-adjunction B C →
+    transposing-adjunction A B →
+    transposing-adjunction A C
+  comp-transposing-adjunction (L' , R' , H') (L , R , H) =
+    ( L' ∘ L , R ∘ R' , is-transposing-adjunction-comp H' H)
+```
+
+### Dependent products of transposing adjunctions
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  is-transposing-adjunction-Π :
+    {L : (x : A) → B x → C x} {R : (x : A) → C x → B x} →
+    ((x : A) → is-transposing-adjunction (L x) (R x)) →
+    is-transposing-adjunction (map-Π L) (map-Π R)
+  is-transposing-adjunction-Π H f g =
+    inv-equiv extensionality-simplicial-natural-transformation ∘e
+    equiv-Π-equiv-family (λ i → H i (f i) (g i)) ∘e
+    extensionality-simplicial-natural-transformation
+
+  transposing-adjunction-Π :
+    ((x : A) → transposing-adjunction (B x) (C x)) →
+    transposing-adjunction ((x : A) → B x) ((x : A) → C x)
+  transposing-adjunction-Π H =
+    ( map-Π (map-left-adjoint-transposing-adjunction ∘ H) ,
+      map-Π (map-right-adjoint-transposing-adjunction ∘ H) ,
+      is-transposing-adjunction-Π
+        ( is-transposing-adjunction-transposing-adjunction ∘ H))
+```
+
+### Postcomposition by transposing adjunctions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-transposing-adjunction-postcomp :
+    {l : Level} (X : UU l) {L : A → B} {R : B → A} →
+    is-transposing-adjunction L R →
+    is-transposing-adjunction (postcomp X L) (postcomp X R)
+  is-transposing-adjunction-postcomp X H = is-transposing-adjunction-Π (λ _ → H)
+
+  transposing-adjunction-postcomp :
+    {l : Level} (X : UU l) →
+    transposing-adjunction A B →
+    transposing-adjunction (X → A) (X → B)
+  transposing-adjunction-postcomp X H = transposing-adjunction-Π (λ _ → H)
+```
+
+### Base change of transposing adjunctions
+
+**Proof sketch.** Given a base change diagram
+
+```text
+     B' -------> B
+     | ⌟         | ∧
+     | R'      R |⊢⋮ L
+     ∨           ∨ ⋮
+     A' -------> A
+           j
+```
+
+we have an induced equivalence of fibers
+
+```text
+  Φ : (x : A') → fiber R' x ≃ fiber R (j x).
+```
+
+If `L` is a right inverse to `R`, then `L` defines a section onto the fibers of
+`R`. This gives us a composite inverse to `R'` given by
+
+```text
+  L' := Φ ∘ L ∘ j.
+```
+
+> The above should be factored out into a proposition about pullbacks of
+> sections.
+
+> This remains to be formalized.
+
+### Retracts of transposing adjunctions
+
+Maps that are retracts of transposing adjoints are transposing adjoints
+themselves.
+
+### Computing transposition of reflexivity along equivalences
+
+```text
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
+  compute-refl-eq-transposing-equiv :
+    {x : A} →
+    map-eq-transposing-equiv e refl ＝ inv (is-retraction-map-inv-equiv e x)
+  compute-refl-eq-transposing-equiv =
+    map-eq-transposing-equiv-inv
+      ( equiv-ap e _ (map-inv-equiv e _))
+      ( ap inv (coherence-map-inv-equiv e _) ∙
+        inv (ap-inv (map-equiv e) _))
+
+  compute-refl-eq-transposing-equiv-inv :
+    {x : A} →
+    map-eq-transposing-equiv-inv e refl ＝ is-retraction-map-inv-equiv e x
+  compute-refl-eq-transposing-equiv-inv {x} =
+    map-eq-transposing-equiv-inv
+      ( equiv-ap e _ _)
+      ( ( right-unit) ∙
+        ( coherence-map-inv-equiv e _))
+```
+
+### Equivalences are transposing adjoints
+
+Consider an [equivalence](foundation-core.equivalences.md) `e : A ≃ B` and two
+elements `x : A` and `y : B`. The
+{{#concept "transposition" Disambiguation="identifications along equivalences" Agda=eq-transposing-equiv}}
+is an equivalence
+
+```text
+  (e x ＝ y) ≃ (x ＝ e⁻¹ y)
+```
+
+of [identity types](foundation-core.identity-types.md). There are two ways of
+constructing this equivalence. One way uses the fact that `e⁻¹` is a
+[section](foundation-core.sections.md) of `e`, from which it follows that
+
+```text
+ (e x ＝ y) ≃ (e x ＝ e e⁻¹ y) ≃ (x ＝ e⁻¹ y).
+```
+
+In other words, the transposing of an identification `p : e x ＝ y` along `e` is
+the unique identification `q : x ＝ e⁻¹ y` equipped with an identification
+witnessing that the triangle
+
+```text
+      ap e q
+  e x ------> e (e⁻¹ y)
+     \       /
+    p \     / is-section-map-inv-equiv e y
+       \   /
+        ∨ ∨
+         y
+```
+
+commutes. The other way uses the fact that `e⁻¹` is a
+[retraction](foundation-core.retractions.md) of `e`, resulting in the
+equivalence
+
+```text
+ (e x ＝ y) ≃ (e⁻¹ e x ＝ e⁻¹ y) ≃ (x ＝ e⁻¹ y) .
+```
+
+These two equivalences are [homotopic](foundation-core.homotopies.md), as is
+shown below.
+
+> TODO
+
+### The defining commuting triangles of transposingd identifications
+
+transposingd identifications fit in
+[commuting triangles](foundation.commuting-triangles-of-identifications.md) with
+the original identifications.
+
+```text
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
+  triangle-eq-transposing-equiv :
+    {x : A} {y : B} (p : map-equiv e x ＝ y) →
+    coherence-triangle-identifications'
+      ( p)
+      ( is-section-map-inv-equiv e y)
+      ( ap (map-equiv e) (map-eq-transposing-equiv e p))
+  triangle-eq-transposing-equiv {x} {y} p =
+    ( right-whisker-concat
+      ( is-section-map-inv-equiv
+        ( equiv-ap e x (map-inv-equiv e y))
+        ( p ∙ inv (is-section-map-inv-equiv e y)))
+      ( is-section-map-inv-equiv e y)) ∙
+    ( is-section-inv-concat' (is-section-map-inv-equiv e y) p)
+
+  triangle-eq-transposing-equiv-inv :
+    {x : A} {y : B} (p : y ＝ map-equiv e x) →
+    coherence-triangle-identifications'
+      ( ap (map-equiv e) (map-eq-transposing-equiv-inv e p))
+      ( p)
+      ( is-section-map-inv-equiv e y)
+  triangle-eq-transposing-equiv-inv {x} {y} p =
+    inv
+      ( is-section-map-inv-equiv
+        ( equiv-ap e _ _)
+        ( is-section-map-inv-equiv e y ∙ p))
+
+  triangle-eq-transposing-equiv' :
+    {x : A} {y : B} (p : map-equiv e x ＝ y) →
+    coherence-triangle-identifications'
+      ( ap (map-inv-equiv e) p)
+      ( map-eq-transposing-equiv e p)
+      ( is-retraction-map-inv-equiv e x)
+  triangle-eq-transposing-equiv' {x} refl =
+    ( left-whisker-concat
+      ( is-retraction-map-inv-equiv e x)
+      ( compute-map-eq-transposing-equiv e refl)) ∙
+    ( is-section-inv-concat (is-retraction-map-inv-equiv e x) refl)
+
+  triangle-eq-transposing-equiv-inv' :
+    {x : A} {y : B} (p : y ＝ map-equiv e x) →
+    coherence-triangle-identifications
+      ( map-eq-transposing-equiv-inv e p)
+      ( is-retraction-map-inv-equiv e x)
+      ( ap (map-inv-equiv e) p)
+  triangle-eq-transposing-equiv-inv' {x} refl =
+    compute-refl-eq-transposing-equiv-inv e
+
+  right-inverse-eq-transposing-equiv :
+    {x : A} {y : B} (p : y ＝ map-equiv e x) →
+    ( ( map-eq-transposing-equiv e (inv p)) ∙
+      ( ap (map-inv-equiv e) p ∙ is-retraction-map-inv-equiv e x)) ＝
+    ( refl)
+  right-inverse-eq-transposing-equiv {x} refl =
+    ( right-whisker-concat (compute-refl-eq-transposing-equiv e) _) ∙
+    ( left-inv (is-retraction-map-inv-equiv e _))
+```

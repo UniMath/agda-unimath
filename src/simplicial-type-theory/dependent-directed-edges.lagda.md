@@ -1,7 +1,7 @@
 # Dependent directed edges
 
 ```agda
-module simplicial-type-theory.dependent-simplicial-edges where
+module simplicial-type-theory.dependent-directed-edges where
 ```
 
 <details><summary>Imports</summary>

@@ -17,6 +17,8 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
+open import foundation.disjunction
+open import foundation.retractions
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -31,6 +33,9 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import simplicial-type-theory.directed-edges
+open import simplicial-type-theory.2-simplices
+open import simplicial-type-theory.standard-simplices
+open import simplicial-type-theory.simplicial-spines
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
@@ -55,7 +60,14 @@ pictorially:
 
 The inner 2-horn has multiple defining properties:
 
-1. It is the pushout
+1. The inner 2-horn is the subtype of the standard
+   [2-simplex](simplicial-type-theory.2-simplices.md) defined by
+
+   ```text
+   Λ²₁ = {(x , y) ∈ 𝟚 × 𝟚 | (y ＝ 0₂) ∨ (x ＝ 1₂)} ⊆ Δ².
+   ```
+
+2. The inner 2-horn is the pushout
 
    ```text
             0₂
@@ -66,11 +78,131 @@ The inner 2-horn has multiple defining properties:
         𝟚 -----> Λ²₁.
    ```
 
-2. The inner 2-horn is the subtype of the standard
-   [2-simplex](simplicial-type-theory.2-simplices.md) defined by
+3. The inner 2-horn is the 2-[spine](simplicial-type-theory.spines.md).
 
-   ```text
-   Λ²₁ = {(x , y) ∈ 𝟚² | (y ＝ 0₂) ∨ (x ＝ 1₂)} ⊆ Δ².
-   ```
+## Definitions
 
-3. It is the 2-[spine](simplicial-type-theory.spines.md).
+### The inner 2-horn as a subtype of the lower simplicial triangle
+
+> TODO: replace with `subtype-spine 2`
+
+```agda
+subtype-inner-two-horn : subtype lzero (𝟚 × 𝟚)
+subtype-inner-two-horn (x , y) =
+  join-Prop (Id-Prop 𝟚-Set y 0₂) (Id-Prop 𝟚-Set x 1₂)
+
+inner-two-horn : UU
+inner-two-horn = type-subtype subtype-inner-two-horn
+
+inl-inner-two-horn : 𝟚 → inner-two-horn
+inl-inner-two-horn t = ((t , 0₂) , inl-join refl)
+
+inr-inner-two-horn : 𝟚 → inner-two-horn
+inr-inner-two-horn s = ((1₂ , s) , inr-join refl)
+```
+
+```agda
+Λ²₁ : UU
+Λ²₁ = inner-two-horn
+```
+
+### The cogap map of the inner 2-horn as a subtype of the lower simplicial triangle
+
+```agda
+module _
+  {l : Level} {A : UU l} (f g : 𝟚 → A) (p : f 1₂ ＝ g 0₂)
+  where
+
+  cogap-inner-two-horn : inner-two-horn → A
+  cogap-inner-two-horn ((x , y) , H) =
+    cogap-join A
+      ( ( λ y=0 → f x) ,
+        ( λ x=1 → g y) ,
+        ( λ (y=0 , x=1) → ap f x=1 ∙ p ∙ ap g (inv y=0)))
+      ( H)
+```
+
+### The inner 2-horn as a pushout
+
+```text
+         0₂
+     1 -----> 𝟚
+     |        |
+  1₂ |        |
+     ∨      ⌜ ∨
+     𝟚 -----> Λ²₁.
+```
+
+```agda
+pushout-inner-two-horn : UU
+pushout-inner-two-horn = pushout (point 1₂) (point 0₂)
+
+inl-pushout-inner-two-horn : 𝟚 → pushout-inner-two-horn
+inl-pushout-inner-two-horn = inl-pushout (point 1₂) (point 0₂)
+
+inr-pushout-inner-two-horn : 𝟚 → pushout-inner-two-horn
+inr-pushout-inner-two-horn = inr-pushout (point 1₂) (point 0₂)
+```
+
+### Properties
+
+### The inner 2-horn is a set
+
+```agda
+is-set-inner-two-horn : is-set inner-two-horn
+is-set-inner-two-horn =
+  is-set-type-subtype subtype-inner-two-horn (is-set-product is-set-𝟚 is-set-𝟚)
+```
+
+### The canonical map from the inner 2-horn as a pushout to the inner 2-horn as a subtype of the square
+
+```agda
+map-inner-two-horn-pushout-inner-two-horn :
+  pushout-inner-two-horn → inner-two-horn
+map-inner-two-horn-pushout-inner-two-horn =
+  cogap
+    ( point 1₂)
+    ( point 0₂)
+    ( inl-inner-two-horn ,
+      inr-inner-two-horn ,
+      λ _ → eq-type-subtype subtype-inner-two-horn refl)
+
+map-pushout-inner-two-horn-inner-two-horn :
+  inner-two-horn → pushout-inner-two-horn
+map-pushout-inner-two-horn-inner-two-horn =
+  cogap-inner-two-horn
+    ( inl-pushout-inner-two-horn)
+    ( inr-pushout-inner-two-horn)
+    ( glue-pushout (point 1₂) (point 0₂) star)
+
+-- is-retraction-map-inner-two-horn-pushout-inner-two-horn :
+--   is-retraction
+--     ( map-pushout-inner-two-horn-inner-two-horn)
+--     ( map-inner-two-horn-pushout-inner-two-horn)
+-- is-retraction-map-inner-two-horn-pushout-inner-two-horn ((x , y) , H) =
+--   dependent-cogap-join
+--     { P =
+--       λ H →
+--       map-inner-two-horn-pushout-inner-two-horn
+--         ( map-pushout-inner-two-horn-inner-two-horn ((x , y) , H)) ＝
+--       ((x , y) , H)}
+--     ( ( λ y=0 → {!  compute-inl-cogap ? ? ? ? !}) ,
+--       ( λ x=1 → {!   !}) ,
+--       {!   !})
+--     ( H)
+```
+
+### The inclusion of the 2-horn into the 2-simplex
+
+```agda
+leq-subtype-two-simplex-inner-two-horn :
+  subtype-inner-two-horn ⊆ subtype-lower-simplicial-triangle
+leq-subtype-two-simplex-inner-two-horn (x , y) =
+  cogap-join
+    ( y ≤-𝟚 x)
+    ( min-leq-eq-𝟚 , max-leq-eq-𝟚 , λ _ → eq-is-prop is-prop-leq-𝟚)
+
+inclusion-two-simplex-inner-two-horn : Λ²₁ → Δ²
+inclusion-two-simplex-inner-two-horn =
+  tot leq-subtype-two-simplex-inner-two-horn
+```

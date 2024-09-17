@@ -45,17 +45,17 @@ simplicial-comma-type :
 simplicial-comma-type {B = B} {C} f g =
   Σ B (λ b → Σ C (λ c → simplicial-hom (f b) (g c)))
 
-_↓₂_ = simplicial-comma-type
+_↓▵_ = simplicial-comma-type
 ```
 
 ## Properties
 
 ### The universal property of the simplicial comma type
 
-The comma type `f ↓₂ g` fits in a pullback diagram
+The comma type `f ↓▵ g` is the pullback in the following diagram
 
 ```text
-  f ↓₂ g --------> A^𝟚
+  f ↓▵ g --------> A^𝟚
     | ⌟             |
     |               | (source , target)
     ∨               ∨
@@ -75,14 +75,14 @@ module _
       {A = B × C} {𝟚 → A} {A × A}
       ( λ (b , c) → (f b , g c))
       ( λ α → (α 0₂ , α 1₂))
-      ( f ↓₂ g)
+      ( f ↓▵ g)
   pr1 (cone-simplicial-comma-type) (b , c , _) = (b , c)
   pr1 (pr2 (cone-simplicial-comma-type)) (_ , _ , α , _) = α
   pr2 (pr2 (cone-simplicial-comma-type)) (_ , _ , _ , α0＝fb , α1＝gc) =
     inv (eq-pair α0＝fb α1＝gc)
 
   gap-simplicial-comma-type :
-    f ↓₂ g → standard-pullback (λ (b , c) → (f b , g c)) (λ α → α 0₂ , α 1₂)
+    f ↓▵ g → standard-pullback (λ (b , c) → (f b , g c)) (λ α → α 0₂ , α 1₂)
   gap-simplicial-comma-type =
     gap
       ( λ (b , c) → (f b , g c))
@@ -94,7 +94,7 @@ module _
       {A = B × C} {𝟚 → A} {A × A}
       ( λ (b , c) → (f b , g c))
       ( λ α → α 0₂ , α 1₂)) →
-    f ↓₂ g
+    f ↓▵ g
   map-inv-gap-simplicial-comma-type ((b , c) , α , coh) =
     ( b , c , α , pair-eq (inv coh))
 

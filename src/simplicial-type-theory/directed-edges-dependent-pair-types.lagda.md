@@ -30,7 +30,7 @@ open import orthogonal-factorization-systems.extensions-of-maps
 
 open import simplicial-type-theory.action-on-directed-edges-dependent-functions
 open import simplicial-type-theory.action-on-directed-edges-functions
-open import simplicial-type-theory.dependent-simplicial-edges
+open import simplicial-type-theory.dependent-directed-edges
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
@@ -44,7 +44,7 @@ A [directed edge](simplicial-type-theory.directed-edges.md)
 `f : (x , x') →₂ (y , y')` in a
 [dependent pair type](foundation.dependent-pair-types.md) `Σ A B` consists of a
 directed edge `α : x →₂ y` in the base `A` and a
-[dependent directed edge](simplicial-type-theory.dependent-simplicial-edges.md)
+[dependent directed edge](simplicial-type-theory.dependent-directed-edges.md)
 `β` in `B` over `α` from `x'` to `y'`.
 
 ## Properties

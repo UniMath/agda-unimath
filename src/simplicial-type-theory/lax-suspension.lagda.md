@@ -1,7 +1,7 @@
 # The simplicial suspension
 
 ```agda
-module simplicial-type-theory.simplicial-suspension where
+module simplicial-type-theory.lax-suspension where
 ```
 
 <details><summary>Imports</summary>
@@ -44,8 +44,8 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-Given a type `X`, we define the {{#concept "simplicial suspension"}} of `X` as
-the [pushout](synthetic-homotopy-theory.pushouts.md)
+Given a type `X`, we define the {{#concept "lax suspension"}} of `X` as the
+[pushout](synthetic-homotopy-theory.pushouts.md)
 
 ```text
            id × 0₂ + id × 1₂
@@ -53,11 +53,22 @@ the [pushout](synthetic-homotopy-theory.pushouts.md)
       |                         |
       |                         |
       ∨                       ⌜ ∨
-      2 --------------------> Σ₂ X
+     ∂𝟚 ---------------------> Σ▵X.
 ```
 
-Intuitively, the simplicial suspension of `X` can be understood as a type
-consisting of a point at the north and south pole, and a
+or in other words the oriented pushout
+
+```text
+  X ------> 1
+  |         |
+  |    ⇗    |
+  ∨       ⌜ ∨
+  1 -----> Σ▵X.
+
+```
+
+Intuitively, the lax suspension of `X` can be understood as a type consisting of
+a point at the north and south pole, and a
 [directed edge](simplicial-type-theory.directed-edges.md) `north →₂ south` for
 every element `x : X`. It is constructed by taking the
 [cartesian product](foundation-core.cartesian-product-types.md) `X × 𝟚`, and

@@ -34,13 +34,13 @@ open import foundation-core.transport-along-identifications
 open import foundation-core.truncation-levels
 
 open import simplicial-type-theory.action-on-directed-edges-functions
-open import simplicial-type-theory.dependent-simplicial-edges
+open import simplicial-type-theory.dependent-directed-edges
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-edges-cartesian-product-types
 open import simplicial-type-theory.directed-edges-dependent-pair-types
-open import simplicial-type-theory.simplicial-natural-transformations
+open import simplicial-type-theory.natural-transformations
 open import simplicial-type-theory.simplicially-discrete-types
-open import simplicial-type-theory.simplicially-fully-faithful-maps
+open import simplicial-type-theory.fully-faithful-maps
 open import simplicial-type-theory.whiskering-directed-edges
 ```
 
@@ -553,8 +553,19 @@ is-globularly-coskeletal-right-factor-product k {A} {B} H =
 
 ### The type of equivalences between globularly coskeletal types is globularly coskeletal
 
-This would follow from closure under Σ , Π, and Id, or if globularly coskeletal
-types are closed under embeddings.
+**Proof.** The type of equivalences `A ≃ B` is a pullback
+
+```text
+  A ≃ B ---> (B → A) × (A → B) × (B → A)
+    | ⌟                   |
+    |                     |
+    ∨                     ∨
+    1 ----------> (A → A) × (B → B)
+       (id , id)
+
+```
+
+so the result follows by pullback stability.
 
 ```text
 -- module _

@@ -148,6 +148,8 @@ abstract
 
 ## Definitions
 
+### The inequality binary propositional relation on the directed interval
+
 ```agda
 leq-𝟚-Prop : (x y : 𝟚) → Prop lzero
 leq-𝟚-Prop x y = (x ≤-𝟚 y , is-prop-leq-𝟚)
@@ -162,9 +164,12 @@ max-leq-eq-𝟚 refl = max-leq-𝟚
 
 leq-eq-𝟚 : {x y : 𝟚} → x ＝ y → x ≤-𝟚 y
 leq-eq-𝟚 refl = refl-leq-𝟚
+
+leq-inv-eq-𝟚 : {x y : 𝟚} → x ＝ y → y ≤-𝟚 x
+leq-inv-eq-𝟚 = leq-eq-𝟚 ∘ inv
 ```
 
-### The poset on the directed interval
+### The poset structure on the directed interval
 
 ```agda
 𝟚-Preorder : Preorder lzero lzero
@@ -216,11 +221,11 @@ not-leq-target-source-𝟚 leq-1-0 =
 
 ### The directed relation `t ≤-𝟚 s` is equivalent to the relation `max-𝟚 t s ＝ s`
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### The directed relation `t ≤-𝟚 s` is equivalent to the relation `min-𝟚 t s ＝ t`
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### The canonical inclusion of the booleans into the directed interval is an embedding
 
@@ -232,4 +237,4 @@ is-emb-map-directed-interval-bool =
 
 ### The canonical inclusion of the booleans into the directed interval preserves and reflects its ordering
 
-This remains to be formalized.
+> This remains to be formalized.

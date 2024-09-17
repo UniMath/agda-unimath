@@ -46,7 +46,7 @@ open import orthogonal-factorization-systems.orthogonal-maps
 
 open import simplicial-type-theory.action-on-directed-edges-dependent-functions
 open import simplicial-type-theory.action-on-directed-edges-functions
-open import simplicial-type-theory.dependent-simplicial-edges
+open import simplicial-type-theory.dependent-directed-edges
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
@@ -63,10 +63,10 @@ and hence that all its
 [directed edges](simplicial-type-theory.directed-edges.md) are constant. This
 refutes the models of the
 [directed interval](simplicial-type-theory.directed-interval.md) in the booleans
-and is a differing property between the two types.
+and is a distinguishing property between the two.
 
 As a corollary we have that the universe of simplicially discrete types is
-closed under finite coproducts.
+closed under finite coproducts and contains the finite types.
 
 ## Postulate
 
@@ -108,7 +108,7 @@ is-not-retract-of-directed-interval-bool r =
     ( is-simplicially-discrete-retract r is-simplicially-discrete-bool)
 ```
 
-### The simplicially discrete types are closed under coproducts
+### Coproducts of simplicially discrete types are simplicially discrete
 
 ```agda
 module _
@@ -128,3 +128,11 @@ module _
         ( is-𝟚-null-is-simplicially-discrete is-disc-A)
         ( is-𝟚-null-is-simplicially-discrete is-disc-B))
 ```
+
+### Finite types are simplicially discrete
+
+> This remains to be formalized.
+
+### The directed interval is not finite
+
+> This remains to be formalized.

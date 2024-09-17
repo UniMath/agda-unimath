@@ -37,7 +37,7 @@ open import orthogonal-factorization-systems.null-types
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
-open import simplicial-type-theory.simplicially-fully-faithful-maps
+open import simplicial-type-theory.fully-faithful-maps
 
 open import synthetic-homotopy-theory.circle
 ```
@@ -51,7 +51,7 @@ A type `A` is
 if the canonical map
 
 ```text
-  simplicial-hom-eq : x ＝ y → x →₂ y
+  simplicial-hom-eq : (x ＝ y) → (x →₂ y)
 ```
 
 is an [equivalence](foundation-core.equivalences.md) for all `x y : A`. A

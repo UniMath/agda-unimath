@@ -91,6 +91,9 @@ module _
   simplicial-hom : A → A → UU l
   simplicial-hom = _→₂_
 
+  hom▵ : A → A → UU l
+  hom▵ = _→₂_
+
   eq-source-simplicial-hom :
     {x y : A} (f : x →₂ y) → simplicial-arrow-simplicial-hom f 0₂ ＝ x
   eq-source-simplicial-hom f = pr1 (pr2 f)

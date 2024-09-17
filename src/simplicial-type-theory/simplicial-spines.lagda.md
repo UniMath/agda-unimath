@@ -232,7 +232,7 @@ We can inductively define the 𝑛-spine as a subtype of the 𝑛-cube via t
               ⋰  ┆      /  ┆
             · ┄┄┄┄┄┄> ∙    ┆
   y   x     ∧    · ┄┄ ∧ ┄> ·
-  ∧ ∧       ┆   ∧     |   ∧
+  ∧ ∧       ┆   ∧     |   ∧–
   |/        ┆ ⋰       | ⋰
   └-> z     ∙ ------> ∙
 ```
@@ -241,10 +241,11 @@ We can inductively define the 𝑛-spine as a subtype of the 𝑛-cube via t
 subtype-spine : (n : ℕ) → subtype lzero (simplicial-cube n)
 subtype-spine 0 _ = unit-Prop
 subtype-spine 1 _ = unit-Prop
-subtype-spine (succ-ℕ (succ-ℕ n)) (t , x) =
+subtype-spine 2 (x , y) = join-Prop (Id-𝟚-Prop x 1₂) (Id-𝟚-Prop y 0₂)
+subtype-spine (succ-ℕ (succ-ℕ (succ-ℕ n))) (x , u) =
   join-Prop
-    ( is-terminal-element-simplicial-cube-Prop (succ-ℕ n) x)
-    ( (Id-𝟚-Prop t 0₂) ∧ (subtype-spine (succ-ℕ n) x))
+    ( is-terminal-element-simplicial-cube-Prop (succ-ℕ (succ-ℕ n)) u)
+    ( (Id-𝟚-Prop x 0₂) ∧ (subtype-spine (succ-ℕ (succ-ℕ n)) u))
 ```
 
 Let us work out what this definition unfolds to when `n` is `2`:
@@ -533,13 +534,11 @@ equiv-universal-property-spine n {X = X} =
     universal-property-spine n X)
 ```
 
-## Properties
+### Auxillary definitions for the 𝑛-spine as a subtype of the 𝑛-cube
 
-### The 𝑛-spine as a subtype of the 𝑛-cube
+> This remains to be formalized.
 
-This remains to be formalized.
-
-```agda
+```text
 inl-spine' : (n : ℕ) → spine' n → spine' (succ-ℕ n)
 inl-spine' zero-ℕ _ = (0₂ , star)
 inl-spine' (succ-ℕ zero-ℕ) (t , _) = ((0₂ , t) , inr-join (refl , star))
@@ -584,6 +583,8 @@ cocone-spine' = {!   !}
 --   -- where map-spine-spine' (succ-ℕ n) (x , s)
 ```
 
+## Properties
+
 ### The 1-spine is the directed interval
 
 ```text
@@ -594,4 +595,4 @@ cocone-spine' = {!   !}
   1 ≃ spine 0 ----> spine 1
 ```
 
-This remains to be formalized.
+> This remains to be formalized.

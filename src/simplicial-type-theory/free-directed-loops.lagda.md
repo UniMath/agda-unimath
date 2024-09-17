@@ -26,7 +26,7 @@ open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import simplicial-type-theory.dependent-simplicial-edges
+open import simplicial-type-theory.dependent-directed-edges
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
@@ -38,7 +38,9 @@ open import synthetic-homotopy-theory.free-loops
 
 ## Idea
 
-A {{#concept "free directed loop"}} in a type `X` consists of a
+A
+{{#concept "free directed loop" Disambiguation="in a simplicial type" Agda=free-directed-loop}}
+in a type `X` consists of a
 [directed arrow](simplicial-type-theory.simplicial-arrows.md) `α : 𝟚 → X` and an
 [identification](foundation-core.identity-types.md) `α 1₂ ＝ α 0₂`. Free
 directed loops are classified by the

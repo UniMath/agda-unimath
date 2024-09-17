@@ -44,7 +44,7 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-We define the {{#concept "simplicial join"}} of two types `A ＊₂ B` as the
+We define the {{#concept "simplicial join"}} of two types `A *▵ B` as the
 colimit of the diagram
 
 ```text
@@ -56,25 +56,35 @@ colimit of the diagram
     | id × 0₂ × id  ⋱      ⋮
     |                 ⋱    ⋮
     ∨                    ∨  ∨
-    A ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯> A ＊₂ B
+    A ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯> A *▵ B.
 ```
 
-Intuitively, we can understand `A ＊₂ B` as the universal type equipped with
+Equivalently, the lax join is the oriented pushout
+
+```text
+  A × B ------> B
+    |           |
+    |     ⇗     |
+    ∨         ⌜ ∨
+    A ------> A *▵ B.
+```
+
+Intuitively, we can understand `A *▵ B` as the universal type equipped with
 edges `a →₂ b` for every `a : A` and `b : B`.
 
 This construction satisfies the laws
 
-- $𝟚 ≃ 1 ＊₂ 1$
+- $𝟚 ≃ 1 *▵ 1$
 
-- $Δⁿ⁺¹ ≃ Δⁿ⁺¹ ＊₂ 1 ≃ 1 ＊₂ Δⁿ⁺¹$
+- $Δⁿ⁺¹ ≃ Δⁿ⁺¹ *▵ 1 ≃ 1 *▵ Δⁿ⁺¹$
 
-- $Λ²₀ ≃ 1 ＊₂ bool$
+- $Λ²₀ ≃ 1 *▵ bool$
 
-- $Λ²₂ ≃ bool ＊₂ 1$
+- $Λ²₂ ≃ bool *▵ 1$
 
-- $1 ＊₂ (-)$ is the simplicial cone
+- $1 *▵ (-)$ is the simplicial cone
 
-- $ (-) ＊₂ 1$ is the simplicial cocone
+- $ (-) \*▵ 1$ is the simplicial cocone
 
 ## Postulates
 
@@ -99,8 +109,8 @@ module _
       in-standard-simplicial-join a b 1₂ ＝ in-standard-simplicial-join a' b 1₂
 ```
 
-It remains to define and postulate the induction principle of the simplicial
-join.
+> It remains to define and postulate the induction principle of the simplicial
+> join.
 
 ## See also
 

@@ -1,7 +1,7 @@
-# Simplicial natural transformations
+# Natural transformations
 
 ```agda
-module simplicial-type-theory.simplicial-natural-transformations where
+module simplicial-type-theory.natural-transformations where
 ```
 
 <details><summary>Imports</summary>

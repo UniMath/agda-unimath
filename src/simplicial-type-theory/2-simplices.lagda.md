@@ -190,8 +190,4 @@ rec-simplicial-hom-∂Δ² f g h =
 ```agda
 simplicial-cone-Δ² : UU lzero
 simplicial-cone-Δ² = simplicial-cone 𝟚
-
--- map-simplicial-square-simplicial-cone-Δ² : simplicial-cone-Δ² → 𝟚 × 𝟚
--- map-simplicial-square-simplicial-cone-Δ² =
---   cogap-simplicial-cone (λ x y → x , y) (0₂ , 0₂) {!   !}
 ```

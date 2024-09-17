@@ -1,7 +1,7 @@
-# Simplicially fully-faithful maps
+# Fully-faithful maps
 
 ```agda
-module simplicial-type-theory.simplicially-fully-faithful-maps where
+module simplicial-type-theory.fully-faithful-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -151,20 +151,16 @@ module _
     ( id , is-simplicially-fully-faithful-id)
 ```
 
-### A map is simplicially fully faithful if and only if it is `(∂𝟚 → 𝟚)`-orthogonal
-
-This remains to be formalized.
-
 ### Equivalences are simplicially fully faithful
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-simplicially-fully-faithful-is-equiv :
-    is-equiv f → is-simplicially-fully-faithful f
-  is-simplicially-fully-faithful-is-equiv H x y =
+    {f : A → B} → is-equiv f → is-simplicially-fully-faithful f
+  is-simplicially-fully-faithful-is-equiv {f} H x y =
     is-equiv-map-Σ
       ( λ α → (α 0₂ ＝ f x) × (α 1₂ ＝ f y))
       ( is-equiv-postcomp-is-equiv f H 𝟚)
@@ -174,7 +170,17 @@ module _
           ( ap f)
           ( is-emb-is-equiv H (α 0₂) x)
           ( is-emb-is-equiv H (α 1₂) y))
+
+  equiv-action-simplicial-hom :
+    (e : A ≃ B) → (x y : A) → hom▵ x y ≃ hom▵ (map-equiv e x) (map-equiv e y)
+  equiv-action-simplicial-hom e x y =
+    ( action-simplicial-hom-function (map-equiv e) ,
+      is-simplicially-fully-faithful-is-equiv (is-equiv-map-equiv e) x y)
 ```
+
+### A map is simplicially fully faithful if and only if it is `(∂𝟚 → 𝟚)`-orthogonal
+
+> This remains to be formalized.
 
 ### To prove that a map is simplicially fully faithful, a point in the domain may be assumed
 
@@ -253,11 +259,11 @@ is-simplicially-fully-faithful-is-prop H K =
 
 ### Any map between `-1`-coskeletal types is simplicially fully faithful
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### Simplicially fully faithful maps are closed under retracts of maps
 
-This remains to be formalized.
+> This remains to be formalized.
 
 ### Simplicially fully faithful maps are closed under composition
 
