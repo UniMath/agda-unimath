@@ -8,12 +8,15 @@ module foundation.cantors-theorem where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.action-on-identifications-functions
 open import foundation.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.powersets
+open import foundation.decidable-propositions
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
+open import foundation.decidable-subtypes
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
@@ -60,6 +63,33 @@ module _
         ( H map-theorem-Cantor)
         ( empty-Prop)
         ( not-in-image-map-theorem-Cantor)
+```
+
+### Cantor's theorem for the set of decidable subtypes
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (f : X → decidable-subtype l2 X)
+  where
+
+  map-theorem-decidable-Cantor : decidable-subtype l2 X
+  map-theorem-decidable-Cantor x = neg-Decidable-Prop (f x x)
+
+  abstract
+    not-in-image-map-theorem-decidable-Cantor :
+      ¬ (fiber f map-theorem-decidable-Cantor)
+    not-in-image-map-theorem-decidable-Cantor (x , α) =
+      no-fixed-points-neg-Decidable-Prop
+        ( f x x)
+        ( iff-eq (ap (prop-Decidable-Prop) (htpy-eq α x)))
+
+  abstract
+    theorem-decidable-Cantor : ¬ (is-surjective f)
+    theorem-decidable-Cantor H =
+      apply-universal-property-trunc-Prop
+        ( H map-theorem-decidable-Cantor)
+        ( empty-Prop)
+        ( not-in-image-map-theorem-decidable-Cantor)
 ```
 
 ## External links
