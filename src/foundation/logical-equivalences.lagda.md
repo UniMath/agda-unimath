@@ -34,8 +34,9 @@ open import foundation-core.torsorial-type-families
 
 {{#concept "Logical equivalences" Agda=}} between two types `A` and `B` consist
 of a map `A → B` and a map `B → A`. The type of logical equivalences between
-types is the Curry-Howard interpretation of logical equivalences between
-[propositions](foundation-core.propositions.md).
+types is the
+[Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of logical equivalences between [propositions](foundation-core.propositions.md).
 
 ## Definition
 

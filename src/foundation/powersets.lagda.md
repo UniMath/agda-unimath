@@ -22,8 +22,10 @@ open import order-theory.preorders
 
 ## Idea
 
-The **powerset** of a type is the set of all
-[subtypes](foundation-core.subtypes.md) with respect to a given universe level.
+The {{#concept "powerset" Disambiguation="of a type" Agda=powerset}} of a type
+is the [set](foundation-core.sets.md) of all
+[subtypes](foundation-core.subtypes.md) with respect to a given
+[universe level](foundation.universe-levels.md).
 
 ## Definition
 

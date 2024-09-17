@@ -24,15 +24,20 @@ open import foundation-core.type-theoretic-principle-of-choice
 
 ## Idea
 
-A map `f : A → B` is split surjective if we can construct for every `b : B` an
-element in the fiber of `b`, meaning an element `a : A` equipped with an
-identification `f a ＝ b`.
+A map `f : A → B` is
+{{#concept "split surjective" Disambiguation="map of types" Agda=is-split-surjective}}
+if we can construct for every `b : B` an element in the
+[fiber](foundation-core.fibers-of-maps.md) of `b`, meaning an element `a : A`
+[equipped](foundation.structure.md) with an
+[identification](foundation-core.identity-types.md) `f a ＝ b`.
 
 ## Warning
 
-Note that split-surjectiveness is the Curry-Howard interpretation of
-surjectiveness. However, this is not a property, and the split surjective maps
-don't fit in a factorization system along with the injective maps.
+Note that split surjectivity is the
+[Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of surjectivity. However, this is not a
+[property](foundation-core.propositions.md), and the split surjective maps don't
+fit in a factorization system along with the injective maps.
 
 ## Definition
 
@@ -91,7 +96,7 @@ module _
   retraction-is-split-surjective-is-injective :
     is-injective f → is-split-surjective f → retraction f
   pr1 (retraction-is-split-surjective-is-injective l s) = pr1 ∘ s
-  pr2 (retraction-is-split-surjective-is-injective l s) = l ∘ (pr2 ∘ (s ∘ f))
+  pr2 (retraction-is-split-surjective-is-injective l s) = l ∘ pr2 ∘ s ∘ f
 
   is-equiv-is-split-surjective-is-injective :
     is-injective f → is-split-surjective f → is-equiv f
