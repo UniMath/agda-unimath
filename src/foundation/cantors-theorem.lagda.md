@@ -49,18 +49,17 @@ module _
   map-theorem-Cantor x = neg-Prop (f x x)
 
   abstract
-    not-in-image-map-theorem-Cantor :
-      ¬ (fiber f map-theorem-Cantor)
+    not-in-image-map-theorem-Cantor : ¬ (fiber f map-theorem-Cantor)
     not-in-image-map-theorem-Cantor (x , α) =
       no-fixed-points-neg-Prop (f x x) (iff-eq (htpy-eq α x))
 
   abstract
     theorem-Cantor : ¬ (is-surjective f)
     theorem-Cantor H =
-      ( apply-universal-property-trunc-Prop
+      apply-universal-property-trunc-Prop
         ( H map-theorem-Cantor)
         ( empty-Prop)
-        ( not-in-image-map-theorem-Cantor))
+        ( not-in-image-map-theorem-Cantor)
 ```
 
 ## External links
