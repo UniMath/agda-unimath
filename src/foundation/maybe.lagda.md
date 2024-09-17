@@ -44,12 +44,16 @@ not [idempotent](foundation.idempotent-maps.md).
 
 ## Definitions
 
-### The Maybe modality
+### The maybe monad
 
 ```agda
 Maybe : {l : Level} → UU l → UU l
 Maybe X = X + unit
+```
 
+### The inductive definition of the maybe monad
+
+```agda
 data Maybe' {l} (X : UU l) : UU l where
   unit-Maybe' : X → Maybe' X
   exception-Maybe' : Maybe' X
