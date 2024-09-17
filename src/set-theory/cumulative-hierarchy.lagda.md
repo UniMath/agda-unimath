@@ -37,9 +37,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-The cumulative hierarchy is a model of set theory. Instead of introducing it as
-a HIT, as in Section 10.4 of {{#cite UF13}}, we introduce its induction
-principle, following {{#cite dJKFX23}}.
+The {{#concept "cumulative hierarchy"}} is a model of
+[set theory](set-theory.md). Instead of introducing it as a HIT, as in Section
+10.4 of {{#cite UF13}}, we introduce its induction principle, following
+{{#cite dJKFX23}}.
 
 ## Definitions
 
@@ -58,8 +59,7 @@ has-same-image :
   {A : UU l1} {B : UU l2} {C : UU l3} →
   (A → C) → (B → C) → UU (l1 ⊔ l2 ⊔ l3)
 has-same-image {l1} {l2} {l3} {A} {B} {C} f g =
-  has-smaller-image f g ×
-    has-smaller-image g f
+  has-smaller-image f g × has-smaller-image g f
 ```
 
 ### Pseudo cumulative hierarchy
@@ -776,3 +776,10 @@ needed.
 ## References
 
 {{#bibliography}} {{#reference UF13}} {{#reference dJKFX23}}
+
+## External links
+
+- [Cumulative hierarchy](https://en.wikipedia.org/wiki/Cumulative_hierarchy) at
+  Wikipedia
+- [cumulative hierarchy](https://ncatlab.org/nlab/show/cumulative+hierarchy) at
+  $n$Lab

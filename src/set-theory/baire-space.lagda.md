@@ -16,12 +16,12 @@ open import foundation.function-extensionality
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.negation
 open import foundation.propositional-truncations
+open import foundation.sets
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.sets
 
 open import set-theory.countable-sets
 open import set-theory.uncountable-sets
@@ -31,7 +31,11 @@ open import set-theory.uncountable-sets
 
 ## Idea
 
-The Baire space is the type of functions `ℕ → ℕ`.
+The {{#concept "Baire space" Agda=baire-space}} is the
+[set](foundation-core.sets.md) of [functions](foundation-core.function-types.md)
+`ℕ → ℕ`. In other words, it is the set of
+[infinite sequences](foundation.sequences.md) of
+[natural numbers](elementary-number-theory.natural-numbers.md).
 
 ## Definition
 
@@ -42,30 +46,17 @@ baire-space = ℕ → ℕ
 
 ## Properties
 
-### The Baire Space is a set
+### The Baire space is a set
 
 ```agda
 is-set-baire-space : is-set baire-space
-is-set-baire-space f g =
-  is-prop-all-elements-equal
-    ( λ p q →
-      ( inv (is-retraction-eq-htpy p)) ∙
-      ( ( ap
-          ( eq-htpy)
-            ( eq-htpy
-              ( λ n →
-                eq-is-prop'
-                  ( is-set-ℕ (f n) (g n))
-                  ( htpy-eq p n)
-                  ( htpy-eq q n)))) ∙
-      ( is-retraction-eq-htpy q)))
+is-set-baire-space = is-set-function-type is-set-ℕ
 
 baire-space-Set : Set lzero
-pr1 baire-space-Set = baire-space
-pr2 baire-space-Set = is-set-baire-space
+baire-space-Set = (baire-space , is-set-baire-space)
 ```
 
-### The Baire Space is uncountable
+### The Baire space is uncountable
 
 ```agda
 is-uncountable-baire-space : is-uncountable baire-space-Set
@@ -80,3 +71,10 @@ is-uncountable-baire-space P =
         ( λ F →
           reductio-ad-absurdum (pr2 F) (has-no-fixed-points-succ-ℕ (pr1 F))))
 ```
+
+## External links
+
+- [Baire space (set theory)](<https://en.wikipedia.org/wiki/Baire_space_(set_theory)>)
+  at Wikipedia
+- [Baire space of sequences](https://ncatlab.org/nlab/show/Baire+space+of+sequences)
+  at $n$Lab

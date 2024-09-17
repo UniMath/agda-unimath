@@ -21,8 +21,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A set `A` is said to be infinite if it contains arbitrarily large finite
-subsets.
+A [set](foundation-core.sets.md) `A` is said to be
+{{#concept "infinite" Disambiguation="set" WD="infinite set" WDID=Q205140}} if
+it contains arbitrarily large [finite](univalent-combinatorics.finite-types.md)
+[subsets](foundation-core.subtypes.md).
 
 ## Definition
 
@@ -33,3 +35,8 @@ is-infinite-Set-Prop X = Π-Prop ℕ (λ n → mere-emb-Prop (Fin n) (type-Set X
 is-infinite-Set : {l : Level} → Set l → UU l
 is-infinite-Set X = type-Prop (is-infinite-Set-Prop X)
 ```
+
+## External links
+
+- [infinite set](https://ncatlab.org/nlab/show/infinite+set) at $n$Lab
+- [Infinite set](https://en.wikipedia.org/wiki/Infinite_set) at Wikipedia

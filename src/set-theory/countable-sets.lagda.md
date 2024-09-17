@@ -47,9 +47,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A set `X` is said to be countable if there is a surjective map `f : ℕ → X + 1`.
-Equivalently, a set `X` is countable if there is a surjective map
-`f : type-decidable-subset P → X` for some decidable subset `P` of `X`.
+A [set](foundation-core.sets.md) `X` is said to be
+{{#concept "countable" Disambiguation="set" Agda=is-countable WD="countable set" WDID=Q66707394}}
+if there is a [surjective map](foundation.surjective-maps.md) `f : ℕ → X + 1`.
+Equivalently, a set `X` is countable if there is a surjective map `f : P → X`
+for some [decidable subset](foundation.decidable-subtypes.md) `P` of `X`.
 
 ## Definition
 
@@ -289,53 +291,7 @@ module _
         ( unit-trunc-Prop (enumeration-decidable-subprojection-ℕ D)))
 ```
 
-## Useful Lemmas
-
-There is a surjection from `(Maybe A + Maybe B)` to `Maybe (A + B)`.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  map-maybe-coproduct : (Maybe A + Maybe B) → Maybe (A + B)
-  map-maybe-coproduct (inl (inl x)) = inl (inl x)
-  map-maybe-coproduct (inl (inr star)) = inr star
-  map-maybe-coproduct (inr (inl x)) = inl (inr x)
-  map-maybe-coproduct (inr (inr star)) = inr star
-
-  is-surjective-map-maybe-coproduct : is-surjective map-maybe-coproduct
-  is-surjective-map-maybe-coproduct (inl (inl x)) =
-    unit-trunc-Prop ((inl (inl x)) , refl)
-  is-surjective-map-maybe-coproduct (inl (inr x)) =
-    unit-trunc-Prop ((inr (inl x)) , refl)
-  is-surjective-map-maybe-coproduct (inr star) =
-    unit-trunc-Prop ((inl (inr star)) , refl)
-```
-
-There is a surjection from `(Maybe A × Maybe B)` to `Maybe (A × B)`.
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  map-maybe-product : (Maybe A × Maybe B) → Maybe (A × B)
-  map-maybe-product (inl a , inl b) = inl (a , b)
-  map-maybe-product (inl a , inr star) = inr star
-  map-maybe-product (inr star , inl b) = inr star
-  map-maybe-product (inr star , inr star) = inr star
-
-  is-surjective-map-maybe-product : is-surjective map-maybe-product
-  is-surjective-map-maybe-product (inl (a , b)) =
-    unit-trunc-Prop ((inl a , inl b) , refl)
-  is-surjective-map-maybe-product (inr star) =
-    unit-trunc-Prop ((inr star , inr star) , refl)
-```
-
-## Examples
-
-The set of natural numbers ℕ is itself countable.
+### The set of natural numbers ℕ is itself countable
 
 ```agda
 abstract
@@ -350,7 +306,7 @@ abstract
           ( inr star) → unit-trunc-Prop (zero-ℕ , refl)))
 ```
 
-The empty set is countable.
+### The empty set is countable
 
 ```agda
 is-countable-empty : is-countable empty-Set
@@ -360,7 +316,7 @@ is-countable-empty =
     ( unit-trunc-Prop ((λ _ → empty-Decidable-Prop) , (λ ()) , (λ ())))
 ```
 
-The unit set is countable.
+### The unit set is countable
 
 ```agda
 abstract
@@ -375,7 +331,7 @@ abstract
           ( inr star) → unit-trunc-Prop (1 , refl)))
 ```
 
-If `X` and `Y` are countable sets, then so is their coproduct `X + Y`.
+### If `X` and `Y` are countable sets, then so is their coproduct `X + Y`
 
 ```agda
 module _
@@ -399,7 +355,7 @@ module _
                 ( is-surjective-is-equiv (is-equiv-map-ℕ-to-ℕ+ℕ)))))))
 ```
 
-If `X` and `Y` are countable sets, then so is their coproduct `X × Y`.
+### If `X` and `Y` are countable sets, then so is their coproduct `X × Y`
 
 ```agda
 module _
@@ -442,7 +398,7 @@ is-countable-ℤ =
       ( is-countable-unit) (is-countable-ℕ))
 ```
 
-All standart finite sets are countable.
+### All standart finite sets are countable
 
 ```agda
 is-countable-Fin-Set : (n : ℕ) → is-countable (Fin-Set n)
@@ -451,3 +407,13 @@ is-countable-Fin-Set (succ-ℕ n) =
   is-countable-coproduct (Fin-Set n) (unit-Set)
     ( is-countable-Fin-Set n) (is-countable-unit)
 ```
+
+## See also
+
+- [Infinite sets](set-theory.infinite-sets.md)
+- [Uncountable sets](set-theory.uncountable-sets.md)
+
+## External links
+
+- [countable set](https://ncatlab.org/nlab/show/countable+set) at $n$Lab
+- [Countable set](https://en.wikipedia.org/wiki/Countable_set) at Wikipedia

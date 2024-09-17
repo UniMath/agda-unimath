@@ -7,10 +7,13 @@ module foundation.maybe where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
+open import foundation.propositional-truncations
+open import foundation.surjective-maps
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -188,4 +191,46 @@ pr1 (pr2 (pr2 equiv-Maybe-Maybe')) (unit-Maybe' x) = inl x
 pr1 (pr2 (pr2 equiv-Maybe-Maybe')) exception-Maybe' = inr star
 pr2 (pr2 (pr2 equiv-Maybe-Maybe')) (inl x) = refl
 pr2 (pr2 (pr2 equiv-Maybe-Maybe')) (inr star) = refl
+```
+
+### There is a surjection from `(Maybe A + Maybe B)` to `Maybe (A + B)`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  map-maybe-coproduct : (Maybe A + Maybe B) → Maybe (A + B)
+  map-maybe-coproduct (inl (inl x)) = inl (inl x)
+  map-maybe-coproduct (inl (inr star)) = inr star
+  map-maybe-coproduct (inr (inl x)) = inl (inr x)
+  map-maybe-coproduct (inr (inr star)) = inr star
+
+  is-surjective-map-maybe-coproduct : is-surjective map-maybe-coproduct
+  is-surjective-map-maybe-coproduct (inl (inl x)) =
+    unit-trunc-Prop ((inl (inl x)) , refl)
+  is-surjective-map-maybe-coproduct (inl (inr x)) =
+    unit-trunc-Prop ((inr (inl x)) , refl)
+  is-surjective-map-maybe-coproduct (inr star) =
+    unit-trunc-Prop ((inl (inr star)) , refl)
+```
+
+### There is a surjection from `(Maybe A × Maybe B)` to `Maybe (A × B)`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  map-maybe-product : (Maybe A × Maybe B) → Maybe (A × B)
+  map-maybe-product (inl a , inl b) = inl (a , b)
+  map-maybe-product (inl a , inr star) = inr star
+  map-maybe-product (inr star , inl b) = inr star
+  map-maybe-product (inr star , inr star) = inr star
+
+  is-surjective-map-maybe-product : is-surjective map-maybe-product
+  is-surjective-map-maybe-product (inl (a , b)) =
+    unit-trunc-Prop ((inl a , inl b) , refl)
+  is-surjective-map-maybe-product (inr star) =
+    unit-trunc-Prop ((inr star , inr star) , refl)
 ```
