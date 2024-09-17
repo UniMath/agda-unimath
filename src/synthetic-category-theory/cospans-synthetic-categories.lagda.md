@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module synthetic-category-theory.cospans-of-synthetic-categories where
+module synthetic-category-theory.cospans-synthetic-categories where
 ```
 
 ```agda

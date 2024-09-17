@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module synthetic-category-theory.cone-diagrams-of-synthetic-categories where
+module synthetic-category-theory.cone-diagrams-synthetic-categories where
 ```
 
 ```agda
@@ -14,7 +14,7 @@ open import foundation.universe-levels
 open import structured-types.globular-types
 
 open import synthetic-category-theory.synthetic-categories
-open import synthetic-category-theory.cospans-of-synthetic-categories
+open import synthetic-category-theory.cospans-synthetic-categories
 ```
 
 ### Cone diagrams of synthetic categories
