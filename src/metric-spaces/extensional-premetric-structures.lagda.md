@@ -121,20 +121,36 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
-  (E : is-extensional-Premetric B) (x : A)
+  (E : is-extensional-Premetric B)
   where
 
   is-torsorial-indistinguishable-is-extensional-Premetric :
-    is-torsorial (is-indistinguishable-Premetric B x)
-  is-torsorial-indistinguishable-is-extensional-Premetric =
+    (x : A) → is-torsorial (is-indistinguishable-Premetric B x)
+  is-torsorial-indistinguishable-is-extensional-Premetric x =
     is-proof-irrelevant-is-prop (pr2 E x) (x , λ d → pr1 E d x)
 
+  indistinguishable-eq-is-extensional-Premetric :
+    {x y : A} → (x ＝ y) → is-indistinguishable-Premetric B x y
+  indistinguishable-eq-is-extensional-Premetric =
+    indistinguishable-eq-reflexive-Premetric B (pr1 E)
+
   is-fiberwise-equiv-indistinguishable-is-extensional-Premetric :
-    (y : A) → is-equiv (indistinguishable-eq-reflexive-Premetric B (pr1 E))
-  is-fiberwise-equiv-indistinguishable-is-extensional-Premetric =
+    (x y : A) → is-equiv (indistinguishable-eq-is-extensional-Premetric {x} {y})
+  is-fiberwise-equiv-indistinguishable-is-extensional-Premetric x =
     fundamental-theorem-id
-      ( is-torsorial-indistinguishable-is-extensional-Premetric)
-      ( λ y → indistinguishable-eq-reflexive-Premetric B (pr1 E) {x} {y})
+      ( is-torsorial-indistinguishable-is-extensional-Premetric x)
+      ( λ y → indistinguishable-eq-reflexive-Premetric B (pr1 E))
+
+  equiv-eq-is-indistinguishable-is-extensional-Premetric :
+    {x y : A} → (x ＝ y) ≃ (is-indistinguishable-Premetric B x y)
+  equiv-eq-is-indistinguishable-is-extensional-Premetric {x} {y} =
+    ( indistinguishable-eq-reflexive-Premetric B (pr1 E)) ,
+    ( is-fiberwise-equiv-indistinguishable-is-extensional-Premetric x y)
+
+  eq-indistinguishable-is-extensional-Premetric :
+    {x y : A} → (is-indistinguishable-Premetric B x y) → (x ＝ y)
+  eq-indistinguishable-is-extensional-Premetric =
+    map-inv-equiv equiv-eq-is-indistinguishable-is-extensional-Premetric
 ```
 
 ### Any extensional premetric is tight

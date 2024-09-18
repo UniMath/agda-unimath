@@ -11,16 +11,19 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.premetric-spaces
 ```
 
@@ -186,4 +189,70 @@ module _
         by
           inv-iff
             ( I d (map-inv-is-equiv E x) (map-inv-is-equiv E y))
+```
+
+### Isometries preserve and reflect indistinguishability
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
+  (f : isometry-Premetric-Space A B)
+  {x y : type-Premetric-Space A}
+  where
+
+  preserves-is-indistinguishable-map-isometry-Premetric-Space :
+    ( is-indistinguishable-Premetric-Space A x y) →
+    ( is-indistinguishable-Premetric-Space
+      ( B)
+      ( map-isometry-Premetric-Space A B f x)
+      ( map-isometry-Premetric-Space A B f y))
+  preserves-is-indistinguishable-map-isometry-Premetric-Space H d =
+    forward-implication
+      ( is-isometry-map-isometry-Premetric-Space A B f d x y)
+      ( H d)
+
+  reflects-is-indistinguishable-map-isometry-Premetric-Space :
+    ( is-indistinguishable-Premetric-Space
+      ( B)
+      ( map-isometry-Premetric-Space A B f x)
+      ( map-isometry-Premetric-Space A B f y)) →
+    ( is-indistinguishable-Premetric-Space A x y)
+  reflects-is-indistinguishable-map-isometry-Premetric-Space H d =
+    backward-implication
+      ( is-isometry-map-isometry-Premetric-Space A B f d x y)
+      ( H d)
+```
+
+### Any isometry between extensional premetric spaces is an embedding
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
+  (I : is-extensional-Premetric (structure-Premetric-Space A))
+  (J : is-extensional-Premetric (structure-Premetric-Space B))
+  (f : isometry-Premetric-Space A B)
+  where
+
+  is-injective-map-isometry-is-extensional-Premetric-Space :
+    is-injective (map-isometry-Premetric-Space A B f)
+  is-injective-map-isometry-is-extensional-Premetric-Space {x} {y} =
+    ( eq-indistinguishable-is-extensional-Premetric
+      ( structure-Premetric-Space A)
+      ( I)) ∘
+    ( reflects-is-indistinguishable-map-isometry-Premetric-Space
+      ( A)
+      ( B)
+      ( f)) ∘
+    ( indistinguishable-eq-is-extensional-Premetric
+      ( structure-Premetric-Space B)
+      ( J))
+
+  is-emb-map-isometry-is-extensional-Premetric-Space :
+    is-emb (map-isometry-Premetric-Space A B f)
+  is-emb-map-isometry-is-extensional-Premetric-Space =
+    is-emb-is-injective
+      ( is-set-has-extensional-Premetric (structure-Premetric-Space B) J)
+      ( is-injective-map-isometry-is-extensional-Premetric-Space)
 ```

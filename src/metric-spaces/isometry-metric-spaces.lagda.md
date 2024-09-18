@@ -11,6 +11,7 @@ open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-extensionality
@@ -251,4 +252,22 @@ module _
         f)
       ( isometry-id-Metric-Space A)
       ( is-retraction-map-inv-is-equiv E)
+```
+
+### Any isometry between metric spaces is an embedding
+
+```agda
+module _
+  {l1 l2 l1' l2' : Level}
+  (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
+  where
+
+  is-emb-map-isometry-Metric-Space :
+      (f : isometry-Metric-Space A B) → is-emb (map-isometry-Metric-Space A B f)
+  is-emb-map-isometry-Metric-Space =
+    is-emb-map-isometry-is-extensional-Premetric-Space
+      ( premetric-Metric-Space A)
+      ( premetric-Metric-Space B)
+      ( is-extensional-structure-Metric-Space A)
+      ( is-extensional-structure-Metric-Space B)
 ```
