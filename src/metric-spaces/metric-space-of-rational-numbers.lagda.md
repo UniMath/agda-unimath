@@ -17,18 +17,22 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.extensional-premetric-structures
+open import metric-spaces.isometry-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
@@ -168,4 +172,58 @@ is-saturated-metric-space-leq-ℚ ε x y H =
         ( leq-ℚ x)
         ( associative-add-ℚ y (rational-ℚ⁺ ε) (rational-ℚ⁺ δ))
         ( pr2 (H δ)))
+```
+
+### Addition of rational numbers is isometric
+
+```agda
+module _
+  (x : ℚ)
+  where
+
+  lemma-preserves-neighborhood-add-ℚ :
+    (d : ℚ⁺) (u v : ℚ) (H : leq-ℚ u (v +ℚ rational-ℚ⁺ d)) →
+    leq-ℚ (x +ℚ u) (x +ℚ v +ℚ rational-ℚ⁺ d)
+  lemma-preserves-neighborhood-add-ℚ d u v H =
+    inv-tr
+      ( leq-ℚ (x +ℚ u))
+      ( associative-add-ℚ x v (rational-ℚ⁺ d))
+      ( preserves-leq-right-add-ℚ
+        ( x)
+        ( u)
+        ( v +ℚ rational-ℚ⁺ d)
+        ( H))
+
+  lemma-reflects-neighborhood-add-ℚ :
+    (d : ℚ⁺) (u v : ℚ) (H : leq-ℚ (x +ℚ u) (x +ℚ v +ℚ rational-ℚ⁺ d)) →
+    leq-ℚ u (v +ℚ rational-ℚ⁺ d)
+  lemma-reflects-neighborhood-add-ℚ d u v =
+    reflects-leq-right-add-ℚ x u (v +ℚ rational-ℚ⁺ d) ∘
+    tr (leq-ℚ (x +ℚ u)) (associative-add-ℚ x v (rational-ℚ⁺ d))
+
+  is-isometry-add-ℚ :
+    is-isometry-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℚ)
+      ( add-ℚ x)
+  is-isometry-add-ℚ d y z =
+    pair
+      ( map-product
+        ( lemma-preserves-neighborhood-add-ℚ d z y)
+        ( lemma-preserves-neighborhood-add-ℚ d y z))
+      ( map-product
+        ( lemma-reflects-neighborhood-add-ℚ d z y)
+        ( lemma-reflects-neighborhood-add-ℚ d y z))
+
+  is-isometry-add-ℚ' :
+    is-isometry-Metric-Space
+      ( metric-space-leq-ℚ)
+      ( metric-space-leq-ℚ)
+      ( add-ℚ' x)
+  is-isometry-add-ℚ' d y z =
+    binary-tr
+      ( λ u v → type-iff-Prop (premetric-leq-ℚ d y z) (premetric-leq-ℚ d u v))
+      ( commutative-add-ℚ x y)
+      ( commutative-add-ℚ x z)
+      ( is-isometry-add-ℚ d y z)
 ```
