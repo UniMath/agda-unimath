@@ -45,13 +45,14 @@ open import set-theory.uncountable-sets
 {{#concept "Cantor's diagonal argument" Agda=diagonal-argument-Cantor WD="Cantor's diagonal argument" WDID=Q729471}}
 is the argument Georg Cantor used to establish that
 [sets](foundation-core.sets.md) of infinite [sequences](foundation.sequences.md)
-of elements from a ([discrete](foundation-core.discrete-types.md)) set with two
-distinct elements are [uncountable](set-theory.uncountable-sets.md). The
-argument first appeared in {{#cite Cantor1890/91}}. Although it is not the first
-uncountability argument to be published, Cantor's diagonal argument is the first
-to employ a proof technique known as _diagonalization_. This proof technique is
-also used to give a generalization of the uncountability result in what is now
-known as [Cantor's theorem](foundation.cantors-theorem.md).
+of elements from a ([discrete](foundation-core.discrete-types.md)) set with
+[two distinct elements](foundation.pairs-of-distinct-elements.md) are
+[uncountable](set-theory.uncountable-sets.md). The argument first appeared in
+{{#cite Cantor1890/91}}. Although it is not the first uncountability argument to
+be published, Cantor's diagonal argument is the first to employ a proof
+technique known as _diagonalization_. This proof technique was also used to give
+a generalization of the uncountability result in what is now known as
+[Cantor's theorem](foundation.cantors-theorem.md).
 
 ## Lemma
 
