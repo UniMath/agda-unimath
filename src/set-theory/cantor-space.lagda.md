@@ -9,17 +9,21 @@ module set-theory.cantor-space where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.sets
-open import foundation.lawveres-fixed-point-theorem
-open import foundation.empty-types
 open import foundation.booleans
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.lawveres-fixed-point-theorem
 open import foundation.negation
-open import foundation.tight-apartness-relations
-open import foundation.universe-levels
 open import foundation.propositional-truncations
-open import set-theory.uncountable-sets
+open import foundation.sets
+open import foundation.tight-apartness-relations
+open import foundation.unit-type
+open import foundation.universe-levels
+
+open import set-theory.cantors-diagonal-argument
 open import set-theory.countable-sets
+open import set-theory.uncountable-sets
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -40,7 +44,7 @@ is the set of [binary](foundation.booleans.md)
 
 ```agda
 cantor-space : UU lzero
-cantor-space = ℕ → bool
+cantor-space = ℕ → Fin 2
 ```
 
 ## Properties
@@ -57,7 +61,7 @@ cantor-space-Type-With-Tight-Apartness =
 
 ```agda
 is-set-cantor-space : is-set cantor-space
-is-set-cantor-space = is-set-function-type (is-set-bool)
+is-set-cantor-space = is-set-function-type (is-set-Fin 2)
 
 cantor-space-Set : Set lzero
 cantor-space-Set = (cantor-space , is-set-cantor-space)
@@ -67,15 +71,12 @@ cantor-space-Set = (cantor-space , is-set-cantor-space)
 
 ```agda
 is-uncountable-cantor-space : is-uncountable cantor-space-Set
-is-uncountable-cantor-space P =
-  apply-universal-property-trunc-Prop
-    ( is-directly-countable-is-countable cantor-space-Set (λ _ → false) P)
-    ( empty-Prop)
-    ( λ H →
-      apply-universal-property-trunc-Prop
-        ( fixed-point-theorem-Lawvere (pr2 H) neg-bool)
-        ( empty-Prop)
-        ( λ F → reductio-ad-absurdum (pr2 F) (neq-neg-bool' (pr1 F))))
+is-uncountable-cantor-space =
+  is-uncountable-sequence-discrete-type-diagonal-argument-Cantor
+    ( Fin-Discrete-Type 2)
+    ( inr star)
+    ( inl (inr star))
+    ( neq-inr-inl)
 ```
 
 ## External links

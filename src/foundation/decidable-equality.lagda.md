@@ -66,8 +66,7 @@ has-decidable-equality-empty ()
 ### The unit type has decidable equality
 
 ```agda
-has-decidable-equality-unit :
-  has-decidable-equality unit
+has-decidable-equality-unit : has-decidable-equality unit
 has-decidable-equality-unit star star = inl refl
 ```
 

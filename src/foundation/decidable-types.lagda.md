@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.hilberts-epsilon-operators
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
@@ -30,9 +31,11 @@ open import foundation-core.retracts-of-types
 
 ## Idea
 
-A type is said to be **decidable** if we can either construct an element, or we
-can prove that it is [empty](foundation-core.empty-types.md). In other words, we
-interpret decidability via the
+A type is said to be
+{{#concept "decidable" Disambiguation="type" Agda=is-decidable}} if we can
+either construct an element, or we can prove that it is
+[empty](foundation-core.empty-types.md). In other words, we interpret
+decidability via the
 [Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
 of logic into type theory. A related concept is that a type is either
 [inhabited](foundation.inhabited-types.md) or empty, where inhabitedness of a
@@ -305,4 +308,49 @@ module _
 
   is-decidable-raise : is-decidable A → is-decidable (raise l A)
   is-decidable-raise = is-decidable-equiv' (compute-raise l A)
+```
+
+### Decidable types are inhabited or empty
+
+```agda
+is-inhabited-or-empty-is-decidable :
+  {l : Level} {A : UU l} → is-decidable A → is-inhabited-or-empty A
+is-inhabited-or-empty-is-decidable (inl x) = inl (unit-trunc-Prop x)
+is-inhabited-or-empty-is-decidable (inr y) = inr y
+```
+
+### Decidable types are merely decidable
+
+```agda
+is-merely-decidable-is-decidable :
+  {l : Level} {A : UU l} → is-decidable A → is-merely-decidable A
+is-merely-decidable-is-decidable = unit-trunc-Prop
+```
+
+### Types are inhabited or empty if and only if they are merely decidable
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-inhabited-or-empty-is-merely-decidable :
+    is-merely-decidable A → is-inhabited-or-empty A
+  is-inhabited-or-empty-is-merely-decidable =
+    rec-trunc-Prop
+      ( is-inhabited-or-empty-Prop A)
+      ( is-inhabited-or-empty-is-decidable)
+
+  is-merely-decidable-is-inhabited-or-empty :
+    is-inhabited-or-empty A → is-merely-decidable A
+  is-merely-decidable-is-inhabited-or-empty (inl |x|) =
+    rec-trunc-Prop (is-merely-decidable-Prop A) (unit-trunc-Prop ∘ inl) |x|
+  is-merely-decidable-is-inhabited-or-empty (inr y) =
+    unit-trunc-Prop (inr y)
+
+  iff-is-inhabited-or-empty-is-merely-decidable :
+    is-merely-decidable A ↔ is-inhabited-or-empty A
+  iff-is-inhabited-or-empty-is-merely-decidable =
+    ( is-inhabited-or-empty-is-merely-decidable ,
+      is-merely-decidable-is-inhabited-or-empty)
 ```

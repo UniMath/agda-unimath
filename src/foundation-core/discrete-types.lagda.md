@@ -19,7 +19,8 @@ open import foundation-core.sets
 ## Idea
 
 A {{#concept "discrete type" Agda=Discrete-Type}} is a type that has
-[decidable equality](foundation.decidable-equality.md).
+[decidable equality](foundation.decidable-equality.md). Consequently, discrete
+types are [sets](foundation-core.sets.md) by Hedberg's theorem.
 
 ## Definition
 
@@ -46,3 +47,8 @@ module _
   pr1 set-Discrete-Type = type-Discrete-Type
   pr2 set-Discrete-Type = is-set-type-Discrete-Type
 ```
+
+## External links
+
+- [classical set](https://ncatlab.org/nlab/show/classical+set) at $n$Lab
+- [decidable object](https://ncatlab.org/nlab/show/decidable+object) at $n$Lab

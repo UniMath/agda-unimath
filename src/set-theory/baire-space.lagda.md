@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -23,6 +24,7 @@ open import foundation-core.empty-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 
+open import set-theory.cantors-diagonal-argument
 open import set-theory.countable-sets
 open import set-theory.uncountable-sets
 ```
@@ -31,10 +33,11 @@ open import set-theory.uncountable-sets
 
 ## Idea
 
-The {{#concept "Baire space" Agda=baire-space}} is the
-[set](foundation-core.sets.md) of [functions](foundation-core.function-types.md)
-`ℕ → ℕ`. In other words, it is the set of
-[infinite sequences](foundation.sequences.md) of
+The
+{{#concept "Baire space" Disambiguation="as a type" Agda=baire-space WD="Baire space" WDID=Q803936}}
+is the [set](foundation-core.sets.md) of
+[functions](foundation-core.function-types.md) `ℕ → ℕ`. In other words, it is
+the set of infinite [sequences](foundation.sequences.md) of
 [natural numbers](elementary-number-theory.natural-numbers.md).
 
 ## Definition
@@ -58,18 +61,35 @@ baire-space-Set = (baire-space , is-set-baire-space)
 
 ### The Baire space is uncountable
 
+We give two proofs. The first proof uses that the successor function on the
+nautral numbers has no fixed points and applies
+[Lawvere's fixed point theorem](foundation.lawveres-fixed-point-theorem). The
+second proof uses that equality on the natural numbers is
+[decidable](foundation.decidable-types.md), and applies
+[Cantor's diagonal argument](set-theory.cantors-diagonal-argument.md).
+
 ```agda
-is-uncountable-baire-space : is-uncountable baire-space-Set
-is-uncountable-baire-space P =
-  apply-universal-property-trunc-Prop
-    ( is-directly-countable-is-countable baire-space-Set succ-ℕ P)
-    ( empty-Prop)
-    ( λ H →
-      apply-universal-property-trunc-Prop
-        ( fixed-point-theorem-Lawvere (pr2 H) succ-ℕ)
-        ( empty-Prop)
-        ( λ F →
-          reductio-ad-absurdum (pr2 F) (has-no-fixed-points-succ-ℕ (pr1 F))))
+abstract
+  is-uncountable-baire-space : is-uncountable baire-space-Set
+  is-uncountable-baire-space P =
+    apply-universal-property-trunc-Prop
+      ( is-directly-countable-is-countable baire-space-Set succ-ℕ P)
+      ( empty-Prop)
+      ( λ H →
+        apply-universal-property-trunc-Prop
+          ( fixed-point-theorem-Lawvere (pr2 H) succ-ℕ)
+          ( empty-Prop)
+          ( λ F →
+            reductio-ad-absurdum (pr2 F) (has-no-fixed-points-succ-ℕ (pr1 F))))
+
+abstract
+  is-uncountable-baire-space' : is-uncountable baire-space-Set
+  is-uncountable-baire-space' =
+    is-uncountable-sequence-discrete-type-diagonal-argument-Cantor
+      ( ℕ-Discrete-Type)
+      ( 0)
+      ( 1)
+      ( is-nonzero-one-ℕ ∘ inv)
 ```
 
 ## External links

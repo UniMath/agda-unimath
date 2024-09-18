@@ -77,7 +77,7 @@ module _
     not-in-image-map-theorem-decidable-Cantor (x , α) =
       no-fixed-points-neg-Decidable-Prop
         ( f x x)
-        ( iff-eq (ap (prop-Decidable-Prop) (htpy-eq α x)))
+        ( iff-eq (ap prop-Decidable-Prop (htpy-eq α x)))
 
   abstract
     theorem-decidable-Cantor : ¬ (is-surjective f)
@@ -90,15 +90,16 @@ module _
 
 ## References
 
-A proof of Cantor's theorem first appeared in {{#cite Cantor1890/91}}, where it
+A proof of Cantor's theorem first appeared in {{#cite Cantor1890/91}} where it
 was considered in the context of [infinite sets](set-theory.infinite-sets.md).
 
 {{#bibliography}} {{#reference Cantor1890/91}}
 
 ## See also
 
-- Cantor's theorem generalizes Cantor's diagonal argument, which shows that the
-  [set](foundation-core.sets.md) of
+- Cantor's theorem generalizes
+  [Cantor's diagonal argument](set-theory.cantors-diagonal-argument.md), which
+  shows that the [set](foundation-core.sets.md) of
   [infinite sequences](foundation.sequences.md) on a set with at least two
   distinct elements is [uncountable](set-theory.uncountable-sets.md).
 - Cantor's theorem is generalized by

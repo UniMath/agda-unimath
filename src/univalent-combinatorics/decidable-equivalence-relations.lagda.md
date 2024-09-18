@@ -220,7 +220,7 @@ equiv-Surjection-𝔽-Decidable-equivalence-relation-𝔽 {l1} A =
                                 ( number-of-elements-count count-A ,
                                   ( ( map-surjection (pr1 x) ∘
                                       map-equiv-count count-A) ,
-                                    is-surjective-precomp-equiv
+                                    is-surjective-right-comp-equiv
                                       ( is-surjective-map-surjection (pr1 x))
                                       ( equiv-count count-A)))))))))))) ∘e
         ( equiv-Surjection-Into-Set-Decidable-equivalence-relation
