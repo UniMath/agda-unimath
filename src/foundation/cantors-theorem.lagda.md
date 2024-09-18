@@ -39,26 +39,44 @@ shows that there is [no](foundation-core.negation.md)
 
 ## Theorem
 
+**Proof.** The proof is an instance of an argument _by diagonalization_. Given a
+function `f : A → 𝒫(A)` we may define an element of the powerset `𝒫(A)` that `f`
+cannot possibly hit. This subtype is defined by
+
+```text
+  B := {x ∈ A | x ∉ f(x)}
+```
+
+which is given formally by the predicate `x ↦ ¬ (f x x)`. If this subtype were
+to be hit by `f`, that would mean there is an `ξ ∈ A` such that `f(ξ) = B`. This
+would have to be a fixed point of the negation operation, since
+
+```text
+  f(ξ)(ξ) = B(ξ) = ¬ (f(ξ)(ξ))
+```
+
+but negation has no fixed points.
+
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} (f : X → powerset l2 X)
   where
 
-  map-theorem-Cantor : powerset l2 X
-  map-theorem-Cantor x = neg-Prop (f x x)
+  subtype-theorem-Cantor : powerset l2 X
+  subtype-theorem-Cantor x = neg-Prop (f x x)
 
   abstract
-    not-in-image-map-theorem-Cantor : ¬ (fiber f map-theorem-Cantor)
-    not-in-image-map-theorem-Cantor (x , α) =
-      no-fixed-points-neg-Prop (f x x) (iff-eq (htpy-eq α x))
+    not-in-image-subtype-theorem-Cantor : ¬ (fiber f subtype-theorem-Cantor)
+    not-in-image-subtype-theorem-Cantor (ξ , α) =
+      no-fixed-points-neg-Prop (f ξ ξ) (iff-eq (htpy-eq α ξ))
 
   abstract
     theorem-Cantor : ¬ (is-surjective f)
     theorem-Cantor H =
       apply-universal-property-trunc-Prop
-        ( H map-theorem-Cantor)
+        ( H subtype-theorem-Cantor)
         ( empty-Prop)
-        ( not-in-image-map-theorem-Cantor)
+        ( not-in-image-subtype-theorem-Cantor)
 ```
 
 ### Cantor's theorem for the set of decidable subtypes
@@ -103,7 +121,7 @@ was considered in the context of [infinite sets](set-theory.infinite-sets.md).
   [infinite sequences](foundation.sequences.md) on a set with at least two
   distinct elements is [uncountable](set-theory.uncountable-sets.md).
 - Cantor's theorem is generalized by
-  [Lawvere's fixed point theorem](foundation.lawveres-fixed-point-theorem.md)
+  [Lawvere's fixed point theorem](foundation.lawveres-fixed-point-theorem.md).
 
 ## External links
 
