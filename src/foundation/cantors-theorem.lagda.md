@@ -52,7 +52,7 @@ to be hit by `f`, that would mean there is an `ξ ∈ A` such that `f(ξ) = B`. 
 would have to be a fixed point of the negation operation, since
 
 ```text
-  f(ξ)(ξ) = B(ξ) = ¬ (f(ξ)(ξ))
+  f(ξ)(ξ) = B(ξ) = ¬ (f(ξ)(ξ)),
 ```
 
 but negation has no fixed points.

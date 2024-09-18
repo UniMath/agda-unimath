@@ -398,7 +398,7 @@ is-countable-ℤ =
       ( is-countable-unit) (is-countable-ℕ))
 ```
 
-### All standart finite sets are countable
+### All standard finite sets are countable
 
 ```agda
 is-countable-Fin-Set : (n : ℕ) → is-countable (Fin-Set n)

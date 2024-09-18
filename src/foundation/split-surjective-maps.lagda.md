@@ -35,7 +35,7 @@ if we can construct for every `b : B` an element in the
 
 Note that split surjectivity is the
 [Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
-of surjectivity. However, this is not a
+of [surjectivity](foundation.surjective-maps.md). However, this is not a
 [property](foundation-core.propositions.md), and the split surjective maps don't
 fit in a factorization system along with the injective maps.
 
@@ -115,3 +115,7 @@ module _
   pr2 (is-split-surjective-is-injective-is-equiv is-equiv-f) =
     is-split-surjective-is-equiv is-equiv-f
 ```
+
+## See also
+
+- [Surjective maps](foundation.surjective-maps.md)

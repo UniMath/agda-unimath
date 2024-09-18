@@ -45,19 +45,20 @@ open import set-theory.uncountable-sets
 {{#concept "Cantor's diagonal argument" Agda=diagonal-argument-Cantor WD="Cantor's diagonal argument" WDID=Q729471}}
 is the argument Georg Cantor used to establish that
 [sets](foundation-core.sets.md) of infinite [sequences](foundation.sequences.md)
-of elements from a ([discrete](foundation-core.discrete-types.md)) set with at
-least two distinct elements are [uncountable](uncountable-sets.md). The argument
-first appeared in {{#cite Cantor1890/91}}. Although it is not the first
-uncountability argument to be published, Cantor's diagonal argument is the first
-to employ a proof technique known as _diagonalization_. This proof technique is
-also used to give a generalization of the uncountability result in what is now
-known as [Cantor's theorem](foundation.cantors-theorem.md).
+of elements from a ([discrete](foundation-core.discrete-types.md)) set with two
+distinct elements are [uncountable](uncountable-sets.md). The argument first
+appeared in {{#cite Cantor1890/91}}. Although it is not the first uncountability
+argument to be published, Cantor's diagonal argument is the first to employ a
+proof technique known as _diagonalization_. This proof technique is also used to
+give a generalization of the uncountability result in what is now known as
+[Cantor's theorem](foundation.cantors-theorem.md).
 
 ## Lemma
 
 Every type `X` with an [isolated](foundation.isolated-elements.md) element `m`
-and another [distinct](foundation.pairs-of-distinct-elements.md) element `w` has
-an endofunction with no [fixed point](foundation.fixed-points-endofunctions.md).
+and another [distinct](foundation.negated-equality.md) element `w` has an
+endofunction with [no](foundation-core.negation.md)
+[fixed points](foundation.fixed-points-endofunctions.md).
 
 ```agda
 module _

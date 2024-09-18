@@ -37,9 +37,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The {{#concept "cumulative hierarchy" WD="von Neumann universe" WDID=Q77887}} is
-a model of [set theory](set-theory.md). Instead of introducing it as a HIT, as
-in Section 10.4 of {{#cite UF13}}, we introduce its induction principle
+The {{#concept "cumulative hierarchy" WD="cumulative hierarchy" WDID=Q18349448}}
+is a model of [set theory](set-theory.md). Instead of introducing it as a HIT,
+as in Section 10.4 of {{#cite UF13}}, we introduce its induction principle
 following {{#cite dJKFX23}}.
 
 ## Definitions
@@ -779,7 +779,7 @@ needed.
 
 ## External links
 
-- [Cumulative hierarchy](https://en.wikipedia.org/wiki/Cumulative_hierarchy) at
-  Wikipedia
 - [cumulative hierarchy](https://ncatlab.org/nlab/show/cumulative+hierarchy) at
   $n$Lab
+- [Cumulative hierarchy](https://en.wikipedia.org/wiki/Cumulative_hierarchy) at
+  Wikipedia

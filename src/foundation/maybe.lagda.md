@@ -54,7 +54,7 @@ Maybe X = X + unit
 ### The inductive definition of the maybe monad
 
 ```agda
-data Maybe' {l} (X : UU l) : UU l where
+data Maybe' {l : Level} (X : UU l) : UU l where
   unit-Maybe' : X → Maybe' X
   exception-Maybe' : Maybe' X
 
