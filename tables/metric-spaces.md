@@ -1,4 +1,6 @@
-| Metric space                     | File                                                                                                |
-| -------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Metric space of rational numbers | [metric-spaces.metric-space-of-rational-numbers](metric-spaces.metric-space-of-rational-numbers.md) |
-| Metric space of real numbers     | [real-numbers.metric-space-of-real-numbers](real-numbers.metric-space-of-real-numbers.md)           |
+| Metric space                                             | File                                                                                                                                                |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Metric space of Cauchy approximations in a metric space  | [metric-spaces. metric-space-of-cauchy-approximations-in-a-metric-space](metric-spaces. metric-space-of-cauchy-approximations-in-a-metric-space.md) |
+| Metric space of rational numbers                         | [metric-spaces.metric-space-of-rational-numbers](metric-spaces.metric-space-of-rational-numbers.md)                                                 |
+| Metric space of rational numbers with open neighborhoods | [metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods](metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods.md) |
+| Metric space of real numbers                             | [real-numbers.metric-space-of-real-numbers](real-numbers.metric-space-of-real-numbers.md)                                                           |
