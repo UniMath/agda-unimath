@@ -47,7 +47,10 @@ module _
 
   is-convergent-cauchy-approximation-Metric-Space : UU (l1 ⊔ l2)
   is-convergent-cauchy-approximation-Metric-Space =
-    Σ (type-Metric-Space A) (is-limit-cauchy-approximation-Metric-Space A f)
+    Σ ( type-Metric-Space A)
+      ( is-limit-cauchy-approximation-Premetric-Space
+        ( premetric-Metric-Space A)
+        ( f))
 
   is-prop-is-convergent-cauchy-approximation-Metric-Space :
     is-prop is-convergent-cauchy-approximation-Metric-Space
@@ -58,7 +61,22 @@ module _
           ( is-limit-cauchy-approximation-prop-Premetric-Space
             ( premetric-Metric-Space A)
             ( f))
-          ( all-eq-limit-cauchy-approximation-Metric-Space A f (pr2 x) (pr2 y)))
+          ( all-eq-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premertric-Space
+            ( premetric-Metric-Space A)
+            ( is-symmetric-structure-Metric-Space A)
+            ( is-triangular-structure-Metric-Space A)
+            ( is-extensional-structure-Metric-Space A)
+            ( f)
+            ( is-approximate-is-limit-cauchy-approximation-Premetric-Space
+              ( premetric-Metric-Space A)
+              ( f)
+              ( pr1 x)
+              ( pr2 x))
+            ( is-approximate-is-limit-cauchy-approximation-Premetric-Space
+              ( premetric-Metric-Space A)
+              ( f)
+              ( pr1 y)
+              ( pr2 y))))
 
   is-convergent-cauchy-approximation-prop-Metric-Space : Prop (l1 ⊔ l2)
   is-convergent-cauchy-approximation-prop-Metric-Space =
