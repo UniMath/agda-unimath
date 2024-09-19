@@ -55,7 +55,18 @@ module _
     (d : ℚ⁺) (x y : type-Premetric-Space) →
     is-prop (neighborhood-Premetric-Space d x y)
   is-prop-neighborhood-Premetric-Space =
-    is-prop-neighborhood-Premetric (structure-Premetric-Space)
+    is-prop-neighborhood-Premetric structure-Premetric-Space
+
+  is-upper-bound-dist-Premetric-Space :
+    (x y : type-Premetric-Space) (d : ℚ⁺) → UU l2
+  is-upper-bound-dist-Premetric-Space =
+    is-upper-bound-dist-Premetric structure-Premetric-Space
+
+  is-prop-is-upper-bound-dist-Premetric-Space :
+    (x y : type-Premetric-Space) (d : ℚ⁺) →
+    is-prop (is-upper-bound-dist-Premetric-Space x y d)
+  is-prop-is-upper-bound-dist-Premetric-Space =
+    is-prop-is-upper-bound-dist-Premetric structure-Premetric-Space
 
   is-indistinguishable-prop-Premetric-Space :
     (x y : type-Premetric-Space) → Prop l2
