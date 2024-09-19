@@ -30,7 +30,7 @@ a [metric space](metric-spaces.metric-spaces.md) `A` inherits the
 [product structure](metric-spaces.dependent-products-metric-spaces.md) over `A`.
 
 This is the
-{{#concept "metric space of cauchy approximations in a metric space" Agda=metric-space-cauchy-approsimxations-Metric-Space}}.
+{{#concept "metric space of cauchy approximations in a metric space" Agda=metric-space-cauchy-approximations-Metric-Space}}.
 
 ## Definitions
 
