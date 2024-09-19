@@ -74,6 +74,10 @@ module _
   metric-space-complete-Metric-Space : Metric-Space l1 l2
   metric-space-complete-Metric-Space = pr1 A
 
+  type-complete-Metric-Space : UU l1
+  type-complete-Metric-Space =
+    type-Metric-Space metric-space-complete-Metric-Space
+
   is-complete-metric-space-complete-Metric-Space :
     is-complete-Metric-Space metric-space-complete-Metric-Space
   is-complete-metric-space-complete-Metric-Space = pr2 A
