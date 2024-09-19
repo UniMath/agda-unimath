@@ -1,8 +1,6 @@
 # The standard metric space of cauchy approximations in a metric space
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
-
 module metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space where
 ```
 
