@@ -50,6 +50,7 @@ open import metric-spaces.category-of-metric-spaces-and-short-functions public
 open import metric-spaces.cauchy-approximations-metric-spaces public
 open import metric-spaces.cauchy-approximations-premetric-spaces public
 open import metric-spaces.closed-premetric-structures public
+open import metric-spaces.complete-metric-spaces public
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces public
 open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-premetric-structures public
