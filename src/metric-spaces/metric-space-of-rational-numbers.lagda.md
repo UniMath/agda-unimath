@@ -31,8 +31,11 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import metric-spaces.cauchy-approximations-metric-spaces
+open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.isometry-metric-spaces
+open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
@@ -226,4 +229,69 @@ module _
       ( commutative-add-ℚ x y)
       ( commutative-add-ℚ x z)
       ( is-isometry-add-ℚ d y z)
+```
+
+### The convergent cauchy approximation of the cannonical inclusion of positive rational numbers into the rational numbers
+
+```agda
+is-cauchy-approximation-rational-ℚ⁺ :
+  is-cauchy-approximation-Metric-Space
+    metric-space-leq-ℚ
+    rational-ℚ⁺
+is-cauchy-approximation-rational-ℚ⁺ ε δ =
+  ( leq-le-ℚ
+    { rational-ℚ⁺ δ}
+    { rational-ℚ⁺ ε +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ))}
+    ( transitive-le-ℚ
+      ( rational-ℚ⁺ δ)
+      ( rational-ℚ⁺ (ε +ℚ⁺ δ))
+      ( rational-ℚ⁺ ε +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
+      ( le-right-add-ℚ⁺
+        ( ε)
+        ( ε +ℚ⁺ δ))
+      ( le-right-add-ℚ⁺ ε δ))) ,
+  ( leq-le-ℚ
+    { rational-ℚ⁺ ε}
+    { rational-ℚ⁺ δ +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ))}
+    ( transitive-le-ℚ
+      ( rational-ℚ⁺ ε)
+      ( rational-ℚ⁺ (ε +ℚ⁺ δ))
+      ( rational-ℚ⁺ δ +ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
+      ( le-right-add-ℚ⁺
+        ( δ)
+        ( ε +ℚ⁺ δ))
+      ( le-left-add-ℚ⁺ ε δ)))
+
+cauchy-approximation-rational-ℚ⁺ :
+  cauchy-approximation-Metric-Space metric-space-leq-ℚ
+cauchy-approximation-rational-ℚ⁺ =
+  rational-ℚ⁺ , is-cauchy-approximation-rational-ℚ⁺
+
+is-zero-limit-rational-ℚ⁺ :
+  is-limit-cauchy-approximation-Premetric-Space
+    ( premetric-Metric-Space metric-space-leq-ℚ)
+    ( cauchy-approximation-rational-ℚ⁺)
+    ( zero-ℚ)
+is-zero-limit-rational-ℚ⁺ ε δ =
+  ( leq-le-ℚ
+    { zero-ℚ}
+    { rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ))}
+    ( le-zero-is-positive-ℚ
+      ( rational-ℚ⁺ (ε +ℚ⁺ (ε +ℚ⁺ δ)))
+      ( is-positive-rational-ℚ⁺
+        (ε +ℚ⁺ (ε +ℚ⁺ δ))))) ,
+  ( leq-le-ℚ
+    { rational-ℚ⁺ ε}
+    { zero-ℚ +ℚ rational-ℚ⁺ (ε +ℚ⁺ δ)}
+    ( inv-tr
+      ( le-ℚ (rational-ℚ⁺ ε))
+      ( left-unit-law-add-ℚ (rational-ℚ⁺ (ε +ℚ⁺ δ)))
+      ( le-left-add-ℚ⁺ ε δ)))
+
+convergent-rational-ℚ⁺ :
+  convergent-cauchy-approximation-Metric-Space metric-space-leq-ℚ
+convergent-rational-ℚ⁺ =
+  cauchy-approximation-rational-ℚ⁺ ,
+  zero-ℚ ,
+  is-zero-limit-rational-ℚ⁺
 ```
