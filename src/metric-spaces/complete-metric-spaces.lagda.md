@@ -24,7 +24,7 @@ open import metric-spaces.metric-spaces
 ## Idea
 
 A [metric space](metric-spaces.metric-spaces.md) is
-{{#concept "complete" Disambiguation="metric space" Agda=is-complete-Metric-Space}}
+{{#concept "complete" Disambiguation="metric space" Agda=is-complete-Metric-Space WD="complete metric space" WDID=Q848569}}
 if all its
 [Cauchy approximations](metric-spaces.cauchy-approximations-metric-spaces.md)
 are
@@ -78,3 +78,8 @@ module _
     is-complete-Metric-Space metric-space-complete-Metric-Space
   is-complete-metric-space-complete-Metric-Space = pr2 A
 ```
+
+## External links
+
+- [Complete metric space](https://en.wikipedia.org/wiki/Complete_metric_space)
+  at Wikipedia;

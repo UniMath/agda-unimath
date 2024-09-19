@@ -37,8 +37,8 @@ open import metric-spaces.triangular-premetric-structures
 
 ## Idea
 
-A {{#concept "metric space" Agda=Metric-Space}} is a
-[premetric space](metric-spaces.premetric-spaces.md) whose
+A {{#concept "metric space" Agda=Metric-Space WD="metric space" WDID=Q180953}}
+is a [premetric space](metric-spaces.premetric-spaces.md) whose
 [premetric](metric-spaces.premetric-structures.md) is reflexive, symmetric,
 triangular, and local; a [metric structure](metric-spaces.metric-structures.md).
 
@@ -262,5 +262,6 @@ module _
 
 ## External links
 
+- [Metric spaces](https://en.wikipedia.org/wiki/Metric_space) at Wikipedia;
 - [MetricSpaces.Type](https://www.cs.bham.ac.uk/~mhe/TypeTopology/MetricSpaces.Type.html)
-  at TypeTopology
+  at TypeTopology.
