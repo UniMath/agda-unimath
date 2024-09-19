@@ -91,59 +91,59 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  Convergent-cauchy-approximation-Metric-Space : UU (l1 ⊔ l2)
-  Convergent-cauchy-approximation-Metric-Space =
+  convergent-cauchy-approximation-Metric-Space : UU (l1 ⊔ l2)
+  convergent-cauchy-approximation-Metric-Space =
     type-subtype (is-convergent-cauchy-approximation-prop-Metric-Space A)
 ```
 
 ```agda
 module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
-  (f : Convergent-cauchy-approximation-Metric-Space A)
+  (f : convergent-cauchy-approximation-Metric-Space A)
   where
 
-  approximation-Convergent-cauchy-approximation-Metric-Space :
+  approximation-convergent-cauchy-approximation-Metric-Space :
     cauchy-approximation-Metric-Space A
-  approximation-Convergent-cauchy-approximation-Metric-Space = pr1 f
+  approximation-convergent-cauchy-approximation-Metric-Space = pr1 f
 
-  map-Convergent-cauchy-approximation-Metric-Space : ℚ⁺ → type-Metric-Space A
-  map-Convergent-cauchy-approximation-Metric-Space =
+  map-convergent-cauchy-approximation-Metric-Space : ℚ⁺ → type-Metric-Space A
+  map-convergent-cauchy-approximation-Metric-Space =
     map-cauchy-approximation-Metric-Space
       A
-      approximation-Convergent-cauchy-approximation-Metric-Space
+      approximation-convergent-cauchy-approximation-Metric-Space
 
-  is-cauchy-approximation-map-Convergent-cauchy-approximation-Metric-Space :
+  is-cauchy-approximation-map-convergent-cauchy-approximation-Metric-Space :
     is-cauchy-approximation-Metric-Space
       A
-      map-Convergent-cauchy-approximation-Metric-Space
-  is-cauchy-approximation-map-Convergent-cauchy-approximation-Metric-Space =
+      map-convergent-cauchy-approximation-Metric-Space
+  is-cauchy-approximation-map-convergent-cauchy-approximation-Metric-Space =
     is-cauchy-approximation-map-cauchy-approximation-Metric-Space
       A
-      approximation-Convergent-cauchy-approximation-Metric-Space
+      approximation-convergent-cauchy-approximation-Metric-Space
 
-  limit-Convergent-cauchy-approximation-Metric-Space : type-Metric-Space A
-  limit-Convergent-cauchy-approximation-Metric-Space = pr1 (pr2 f)
+  limit-convergent-cauchy-approximation-Metric-Space : type-Metric-Space A
+  limit-convergent-cauchy-approximation-Metric-Space = pr1 (pr2 f)
 
-  is-limit-limit-Convergent-cauchy-approximation-Metric-Space :
+  is-limit-limit-convergent-cauchy-approximation-Metric-Space :
     (ε δ : ℚ⁺) →
     neighborhood-Metric-Space
       ( A)
       ( ε +ℚ⁺ δ)
-      ( map-Convergent-cauchy-approximation-Metric-Space ε)
-      ( limit-Convergent-cauchy-approximation-Metric-Space)
-  is-limit-limit-Convergent-cauchy-approximation-Metric-Space = pr2 (pr2 f)
+      ( map-convergent-cauchy-approximation-Metric-Space ε)
+      ( limit-convergent-cauchy-approximation-Metric-Space)
+  is-limit-limit-convergent-cauchy-approximation-Metric-Space = pr2 (pr2 f)
 
-  is-approximate-limit-Convergent-cauchy-approximation-Metric-Space :
+  is-approximate-limit-convergent-cauchy-approximation-Metric-Space :
     (ε δ : ℚ⁺) (H : le-ℚ⁺ δ ε) →
     neighborhood-Metric-Space
       ( A)
       ( ε)
-      ( map-Convergent-cauchy-approximation-Metric-Space δ)
-      ( limit-Convergent-cauchy-approximation-Metric-Space)
-  is-approximate-limit-Convergent-cauchy-approximation-Metric-Space =
+      ( map-convergent-cauchy-approximation-Metric-Space δ)
+      ( limit-convergent-cauchy-approximation-Metric-Space)
+  is-approximate-limit-convergent-cauchy-approximation-Metric-Space =
     is-approximate-is-limit-cauchy-approximation-Premetric-Space
       ( premetric-Metric-Space A)
-      ( approximation-Convergent-cauchy-approximation-Metric-Space)
-      ( limit-Convergent-cauchy-approximation-Metric-Space)
-      ( is-limit-limit-Convergent-cauchy-approximation-Metric-Space)
+      ( approximation-convergent-cauchy-approximation-Metric-Space)
+      ( limit-convergent-cauchy-approximation-Metric-Space)
+      ( is-limit-limit-convergent-cauchy-approximation-Metric-Space)
 ```
