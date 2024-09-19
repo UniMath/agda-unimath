@@ -567,6 +567,46 @@ module _
     eq-add-split-ℚ⁺
 ```
 
+### Any two positive rational numbers have a positive rational number strictly less than both
+
+```agda
+module _
+  (x y : ℚ⁺)
+  where
+
+  strict-min-law-ℚ⁺ : Σ ℚ⁺ (λ z → (le-ℚ⁺ z x) × (le-ℚ⁺ z y))
+  strict-min-law-ℚ⁺ =
+    rec-coproduct
+      ( λ I →
+        ( mediant-zero-ℚ⁺ x) ,
+        ( le-mediant-zero-ℚ⁺ x) ,
+        ( transitive-le-ℚ
+          ( mediant-ℚ zero-ℚ (rational-ℚ⁺ x))
+          ( rational-ℚ⁺ x)
+          ( rational-ℚ⁺ y)
+          ( I)
+          ( le-mediant-zero-ℚ⁺ x)))
+      ( λ I →
+        ( mediant-zero-ℚ⁺ y) ,
+        ( concatenate-le-leq-ℚ
+          ( mediant-ℚ zero-ℚ (rational-ℚ⁺ y))
+          ( rational-ℚ⁺ y)
+          ( rational-ℚ⁺ x)
+          ( le-mediant-zero-ℚ⁺ y)
+          ( I)) ,
+        ( le-mediant-zero-ℚ⁺ y))
+      ( decide-le-leq-ℚ (rational-ℚ⁺ x) (rational-ℚ⁺ y))
+
+  strict-min-ℚ⁺ : ℚ⁺
+  strict-min-ℚ⁺ = pr1 strict-min-law-ℚ⁺
+
+  le-left-min-ℚ⁺ : le-ℚ⁺ strict-min-ℚ⁺ x
+  le-left-min-ℚ⁺ = pr1 (pr2 strict-min-law-ℚ⁺)
+
+  le-right-min-ℚ⁺ : le-ℚ⁺ strict-min-ℚ⁺ y
+  le-right-min-ℚ⁺ = pr2 (pr2 strict-min-law-ℚ⁺)
+```
+
 ### Addition with a positive rational number is an increasing map
 
 ```agda

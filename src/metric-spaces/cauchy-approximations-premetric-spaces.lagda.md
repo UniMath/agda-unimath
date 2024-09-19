@@ -99,39 +99,6 @@ module _
   is-cauchy-map-cauchy-approximation-Premetric-Space = pr2 f
 ```
 
-### Limits of a Cauchy approximation in a premetric space
-
-```agda
-module _
-  {l1 l2 : Level} (A : Premetric-Space l1 l2)
-  (f : cauchy-approximation-Premetric-Space A)
-  (l : type-Premetric-Space A)
-  where
-
-  is-limit-cauchy-approximation-prop-Premetric-Space : Prop l2
-  is-limit-cauchy-approximation-prop-Premetric-Space =
-    Π-Prop
-      ( ℚ⁺)
-      ( λ ε →
-        Π-Prop
-          ( ℚ⁺)
-          ( λ δ →
-            structure-Premetric-Space
-              ( A)
-              ( ε +ℚ⁺ δ)
-              ( map-cauchy-approximation-Premetric-Space A f ε)
-              ( l)))
-
-  is-limit-cauchy-approximation-Premetric-Space : UU l2
-  is-limit-cauchy-approximation-Premetric-Space =
-    type-Prop is-limit-cauchy-approximation-prop-Premetric-Space
-
-  is-prop-is-limit-cauchy-approximation-Premetric-Space :
-    is-prop is-limit-cauchy-approximation-Premetric-Space
-  is-prop-is-limit-cauchy-approximation-Premetric-Space =
-    is-prop-type-Prop is-limit-cauchy-approximation-prop-Premetric-Space
-```
-
 ## Properties
 
 ### Short maps between premetric spaces preserve Cauchy approximations
