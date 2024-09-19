@@ -292,6 +292,42 @@ If `L` is a right inverse to `R`, then `L` defines a section onto the fibers of
 Maps that are retracts of transposing adjoints are transposing adjoints
 themselves.
 
+**Proof.** Given a retract of maps
+
+```text
+          i            r
+    A' --------> A ---------> A'
+    |           | ∧           |
+  R'|         R |⊢| L         |R'
+    ∨           ∨ |           ∨
+    B' --------> B ---------> B'
+           j           k
+```
+
+then the functorial action of functions on directed edges gives us a binary
+family of retracts
+
+```text
+  hom A' x y ---> hom A (i x) (i y) ---> hom A' x y
+```
+
+We of course get a canonical map `L' : B' → A'` defined by the above retract of
+maps. Now, we have a chain of maps
+
+```text
+    hom A' (L' x) y
+  → hom A (i (L' x)) (i y)
+  = hom B (j x) (R (i y))
+  = hom B (j x) (j (R' y))
+  → hom B' (k (j x)) (k (j (R' y)))
+  = hom B' x (R' y)
+```
+
+and by our initial retract this total composite is an equivalence. Hence `L'` is
+a transposing adjoint to `R'`. □
+
+> This remains to be formalized.
+
 ### Computing transposition of reflexivity along equivalences
 
 ```text
