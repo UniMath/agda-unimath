@@ -9,12 +9,9 @@ module metric-spaces.convergent-cauchy-approximations-metric-spaces where
 ```agda
 open import elementary-number-theory.positive-rational-numbers
 
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import metric-spaces.cauchy-approximations-metric-spaces
