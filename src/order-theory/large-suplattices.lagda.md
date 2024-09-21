@@ -4,7 +4,7 @@
 module order-theory.large-suplattices where
 ```
 
-<detail><summary>Imports</summary>
+<details><summary>Imports</summary>
 
 ```agda
 open import foundation.dependent-pair-types
