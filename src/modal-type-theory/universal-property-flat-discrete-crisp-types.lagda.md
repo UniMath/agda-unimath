@@ -34,8 +34,8 @@ The
 {{#concept "universal property" Disambiguation="of flat discrete crisp types" Agda=universal-property-flat-discrete-crisp-type}}
 of a [flat discrete crisp type](modal-type-theory.flat-discrete-crisp-types.md)
 `A` states that under the [flat modality](modal-type-theory.flat-modality.md)
-`♭`, `A` is [colocal](orthogonal-factorization-systems.colocal-types.md) at the
-counit of `♭`.
+`♭`, `A` is [colocal](orthogonal-factorization-systems.types-colocal-at-maps.md)
+at the counit of `♭`.
 
 By this we mean that for every [crisp type](modal-type-theory.crisp-types.md)
 `B` the map
