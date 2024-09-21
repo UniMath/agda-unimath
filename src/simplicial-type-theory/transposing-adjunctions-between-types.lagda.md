@@ -236,6 +236,9 @@ module _
         ( is-transposing-adjunction-transposing-adjunction ∘ H))
 ```
 
+This is proven for families of one-sided inverse adjunctions between Rezk types
+in Appendix B of {{#cite BW23}}.
+
 ### Postcomposition by transposing adjunctions
 
 ```agda
@@ -256,6 +259,29 @@ module _
   transposing-adjunction-postcomp X H = transposing-adjunction-Π (λ _ → H)
 ```
 
+### Base change of transposing adjunctions
+
+Given a transposing right adjoint `R : A → B`, `L ⊣ R` and a map `j : B' → B`
+such that `R ∘ L ∘ j ~ j`, then the base change of `R` along `j`, `R'`, has a
+left adjoint right inverse.
+
+**Proof.** Given a homotopy `H : R ∘ L ∘ j ~ j` we obtain the cone
+
+```text
+     L ∘ j
+  B' -----> A
+  ║         |
+  ║    H    | R
+  ║         ∨
+  B' -----> B
+       j
+```
+
+which, by the universal property of base change gives us a right inverse `L'` to
+`R' : A' → B'`. Now...
+
+> This remains to be formalized
+
 ### Retracts of transposing adjunctions
 
 Maps that are retracts of transposing adjoints are transposing adjoints
@@ -265,11 +291,11 @@ themselves.
 
 ```text
           i            r
-    A' --------> A ---------> A'
-    |           | ∧           |
-  R'|         R |⊢| L         |R'
-    ∨           ∨ |           ∨
-    B' --------> B ---------> B'
+    A' --------> A --------> A'
+    |           | ∧          |
+  R'|         R |⊢| L        |R'
+    ∨           ∨ |          ∨
+    B' --------> B --------> B'
            j           k
 ```
 
@@ -296,3 +322,7 @@ and by our initial retract this total composite is an equivalence. Hence `L'` is
 a transposing adjoint to `R'`. □
 
 > This remains to be formalized.
+
+## References
+
+{{#bibliography}}
