@@ -22,6 +22,7 @@ open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.isomorphisms-of-sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -101,8 +102,7 @@ module _
   is-conservative-functor-precategory-set-functions-isometry-Metric-Space
     {A} {B} f =
     ( is-iso-precategory-is-equiv-isometry-Metric-Space A B f) ∘
-    ( is-equiv-is-iso-precategory-Set
+    ( is-equiv-is-iso-Set
       ( set-Metric-Space A)
-      ( set-Metric-Space B)
-      ( map-isometry-Metric-Space A B f))
+      ( set-Metric-Space B))
 ```

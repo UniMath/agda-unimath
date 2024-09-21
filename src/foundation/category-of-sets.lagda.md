@@ -123,34 +123,6 @@ is-category-Set-Precategory l =
 
 ## Properties
 
-### Isomorphisms in the precategory of small sets are equivalences
-
-```agda
-module _
-  {l : Level} (A B : Set l) (f : hom-Set A B)
-  where
-
-  is-equiv-is-iso-precategory-Set :
-    is-iso-Precategory (Set-Precategory l) {A} {B} f → is-equiv f
-  is-equiv-is-iso-precategory-Set H =
-    is-equiv-is-invertible
-      ( hom-inv-is-iso-Precategory (Set-Precategory l) {A} {B} {f} H)
-      ( htpy-eq
-        ( is-section-hom-inv-is-iso-Precategory
-          ( Set-Precategory l)
-          { A}
-          { B}
-          { f}
-          ( H)))
-      ( htpy-eq
-        ( is-retraction-hom-inv-is-iso-Precategory
-          ( Set-Precategory l)
-          { A}
-          { B}
-          { f}
-          ( H)))
-```
-
 ### The precategory of small sets is complete
 
 ```agda
