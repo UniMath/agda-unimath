@@ -93,7 +93,7 @@ module _
   (f : isometry-Metric-Space A B)
   where
 
-  is-equiv-is-iso-precatory-isometry-Metric-Space :
+  is-equiv-is-iso-isometry-Metric-Space :
     is-iso-Precategory precategory-isometry-Metric-Space {A} {B} f →
     is-equiv (map-isometry-Metric-Space A B f)
   is-equiv-is-iso-precatory-isometry-Metric-Space =
