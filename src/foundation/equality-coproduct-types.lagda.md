@@ -140,6 +140,11 @@ module _
     map-compute-eq-coproduct-inl-inl : Id {A = A + B} (inl x) (inl y) → x ＝ y
     map-compute-eq-coproduct-inl-inl = map-equiv compute-eq-coproduct-inl-inl
 
+    is-equiv-map-compute-eq-coproduct-inl-inl :
+      is-equiv map-compute-eq-coproduct-inl-inl
+    is-equiv-map-compute-eq-coproduct-inl-inl =
+      is-equiv-map-equiv compute-eq-coproduct-inl-inl
+
   module _
     (x : A) (y : B)
     where
@@ -220,6 +225,11 @@ module _
 
     map-compute-eq-coproduct-inr-inr : Id {A = A + B} (inr x) (inr y) → x ＝ y
     map-compute-eq-coproduct-inr-inr = map-equiv compute-eq-coproduct-inr-inr
+
+    is-equiv-map-compute-eq-coproduct-inr-inr :
+      is-equiv map-compute-eq-coproduct-inr-inr
+    is-equiv-map-compute-eq-coproduct-inr-inr =
+      is-equiv-map-equiv compute-eq-coproduct-inr-inr
 ```
 
 ### The left and right inclusions into a coproduct are embeddings
