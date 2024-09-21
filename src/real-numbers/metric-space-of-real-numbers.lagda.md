@@ -38,6 +38,7 @@ open import metric-spaces.metric-space-of-rational-numbers
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
+open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures
 open import metric-spaces.reflexive-premetric-structures
@@ -180,8 +181,11 @@ module _
   (l : Level)
   where
 
+  premetric-space-leq-ℝ : Premetric-Space (lsuc l) l
+  premetric-space-leq-ℝ = ℝ l , premetric-leq-ℝ l
+
   metric-space-leq-ℝ : Metric-Space (lsuc l) l
-  pr1 metric-space-leq-ℝ = ℝ l , premetric-leq-ℝ l
+  pr1 metric-space-leq-ℝ = premetric-space-leq-ℝ
   pr2 metric-space-leq-ℝ = is-metric-premetric-leq-ℝ
 ```
 
