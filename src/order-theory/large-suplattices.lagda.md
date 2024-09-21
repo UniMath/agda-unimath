@@ -7,21 +7,19 @@ module order-theory.large-suplattices where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.large-binary-relations
-
 open import foundation.binary-relations
-
+open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+open import order-theory.least-upper-bounds-large-posets
 open import order-theory.posets
 open import order-theory.suplattices
-open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
 ```
 
