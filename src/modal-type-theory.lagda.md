@@ -4,10 +4,18 @@
 {-# OPTIONS --cohesion --flat-split #-}
 ```
 
-> Insert some prose here
+Modal type theory is the study of type theory extended with syntactic _modal_
+operators. These are operations on types that increase the expressivity of the
+type theory in some way.
 
-To read more, we suggest starting with
-[crisp types](modal-type-theory.crisp-types.md).
+In this namespace, we consider modal extensions of Martin-Löf type theory with a
+[flat modality](modal-type-theory.flat-modality.md) `♭`,
+[sharp modality](modal-type-theory.sharp-modality.md) `♯`, and more to come. The
+[adjoint pair of modalities](modal-type-theory.flat-sharp-adjunction.md)
+`♭ ⊣ ＃` display a structure on all types referred to as _spatial_, or
+_cohesive_ structure.
+
+- To read more, continue to [crisp types](modal-type-theory.crisp-types.md).
 
 ## Modules in the modal type theory namespace
 

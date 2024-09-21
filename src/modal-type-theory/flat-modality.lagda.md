@@ -163,5 +163,6 @@ module _
 
 ## External links
 
-- [Flat Modality](https://agda.readthedocs.io/en/latest/language/flat.html) on
-  the Agda documentation pages.
+- [Flat Modality](https://agda.readthedocs.io/en/latest/language/flat.html) at
+  the Agda documentation pages
+- [flat modality](https://ncatlab.org/nlab/show/flat+modality) at $n$Lab
