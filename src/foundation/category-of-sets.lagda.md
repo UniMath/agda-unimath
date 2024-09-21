@@ -13,7 +13,6 @@ open import category-theory.cones-precategories
 open import category-theory.constant-functors
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-large-precategories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.limits-precategories
