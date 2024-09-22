@@ -62,11 +62,7 @@ data
     (X → telescope l2 n) → telescope (l1 ⊔ l2) (succ-ℕ n)
 
 open telescope public
-```
 
-A slight reformulation of `cons-telescope` for convenience:
-
-```agda
 prepend-telescope :
   {l1 l2 : Level} {n : ℕ} →
   (A : UU l1) → ({x : A} → telescope l2 n) → telescope (l1 ⊔ l2) (succ-ℕ n)

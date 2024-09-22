@@ -60,7 +60,7 @@ module _
 ## See also
 
 - [Finite types](univalent-combinatorics.finite-types.md)
-- [Kratowsky-finite sets](univalent-combinatorics.kuratowski-finite-sets.md)
+- [Kuratowski finite sets](univalent-combinatorics.kuratowski-finite-sets.md)
 
 ## References
 
