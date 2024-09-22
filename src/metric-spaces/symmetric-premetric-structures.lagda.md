@@ -27,8 +27,9 @@ A [premetric](metric-spaces.premetric-structures.md) is
 {{#concept "symmetric" Disambiguation="premetric" agda=is-symmetric-Premetric}}
 if `d`-neighborhoods are symmetric for all
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-`d`. I.e., if the upper bounds on the distance between two elements `x` and `y`
-are are the same than the upper bounds on the distance between `y` and `x`.
+`d`. I.e., the upper bounds on the distance between two elements `x` and `y` in
+a symmetric premetric are the same than the upper bounds on the distance between
+`y` and `x`.
 
 ## Definitions
 
