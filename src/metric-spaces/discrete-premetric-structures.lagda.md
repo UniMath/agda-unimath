@@ -40,7 +40,7 @@ open import metric-spaces.triangular-premetric-structures
 
 ## Idea
 
-Any type comes equipped with a cannonical
+Any type comes equipped with a canonical
 {{#concept "discrete" Disambiguation="premetric structure" Agda=is-discrete-Premetric}}
 [premetric](metric-spaces.premetric-structures.md) where `d`-neighbors are
 [merely equal](foundation.mere-equality.md) elements. This is the unique
@@ -49,15 +49,15 @@ they are merely equal, in which case they are indistinguishable.
 
 ## Definitions
 
-### The property of being a semi-discrete premetric
+### The property of being a semidiscrete premetric
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
   where
 
-  is-semi-discrete-prop-Premetric : Prop (l1 ⊔ l2)
-  is-semi-discrete-prop-Premetric =
+  is-semidiscrete-prop-Premetric : Prop (l1 ⊔ l2)
+  is-semidiscrete-prop-Premetric =
     Π-Prop
       ( ℚ⁺)
       ( λ d →
@@ -71,12 +71,12 @@ module _
                   ( B d x y)
                   ( trunc-Prop (x ＝ y)))))
 
-  is-semi-discrete-Premetric : UU (l1 ⊔ l2)
-  is-semi-discrete-Premetric = type-Prop is-semi-discrete-prop-Premetric
+  is-semidiscrete-Premetric : UU (l1 ⊔ l2)
+  is-semidiscrete-Premetric = type-Prop is-semidiscrete-prop-Premetric
 
-  is-prop-is-semi-discrete-Premetric : is-prop is-semi-discrete-Premetric
-  is-prop-is-semi-discrete-Premetric =
-    is-prop-type-Prop is-semi-discrete-prop-Premetric
+  is-prop-is-semidiscrete-Premetric : is-prop is-semidiscrete-Premetric
+  is-prop-is-semidiscrete-Premetric =
+    is-prop-type-Prop is-semidiscrete-prop-Premetric
 ```
 
 ### The property of being a discrete premetric
@@ -90,7 +90,7 @@ module _
   is-discrete-prop-Premetric =
     product-Prop
       ( is-reflexive-prop-Premetric B)
-      ( is-semi-discrete-prop-Premetric B)
+      ( is-semidiscrete-prop-Premetric B)
 
   is-discrete-Premetric : UU (l1 ⊔ l2)
   is-discrete-Premetric = type-Prop is-discrete-prop-Premetric
@@ -173,10 +173,10 @@ module _
   {l : Level} (A : UU l) (d : ℚ⁺) (x y : A)
   where
 
-  is-indistinguidhable-is-in-neighborhood-discrete-Premetric :
+  is-indistinguishable-is-in-neighborhood-discrete-Premetric :
     neighborhood-Premetric (discrete-Premetric A) d x y →
     is-indistinguishable-Premetric (discrete-Premetric A) x y
-  is-indistinguidhable-is-in-neighborhood-discrete-Premetric H d = H
+  is-indistinguishable-is-in-neighborhood-discrete-Premetric H d = H
 ```
 
 ### Any type has a unique reflexive discrete premetric
