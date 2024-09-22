@@ -50,7 +50,7 @@ functor is also
 
 ## Definition
 
-### The functor between the precatory of metric spaces and isometries to the precategory of sets and functions
+### The forgetful functor from metric spaces and isometries to sets and functions
 
 ```agda
 module _
