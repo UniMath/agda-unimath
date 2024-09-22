@@ -65,7 +65,7 @@ Poset-Large-Precategory : Large-Precategory lsuc (_⊔_)
 Poset-Large-Precategory = parametric-Poset-Large-Precategory (λ l → l) (λ l → l)
 ```
 
-### The precategory or posets at a universe level
+### The precategory of posets at a universe level
 
 ```agda
 Poset-Precategory : (l : Level) → Precategory (lsuc l) l
