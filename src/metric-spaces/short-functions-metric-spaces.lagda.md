@@ -38,8 +38,8 @@ A [function](metric-spaces.functions-metric-spaces.md) `f` between two
 {{#concept "short" Disambiguation="function between metric spaces" Agda=is-short-function-Metric-Space WD="metric map" WDID=Q2713824}}
 if it is [short](metric-spaces.short-functions-premetric-spaces.md) on their
 carrier [premetric spaces](metric-spaces.premetric-spaces.md): for any points
-`x` and `y` that are [`d`-neighbours](metric-spaces.premetric-structures.md) in
-`A`, `f x` and `f y` are `d`-neighbours in `B`.
+`x` and `y` that are `d`-[neighbors](metric-spaces.premetric-structures.md) in
+`A`, `f x` and `f y` are `d`-neighbors in `B`.
 
 ## Definitions
 

@@ -44,8 +44,7 @@ to the [precategory of sets](foundation.category-of-sets.md).
 Moreover, since the map from an isometry to its carrier map is an
 [embedding](foundation.embeddings.md), this functor is
 [faithful](category-theory.faithful-functors-precategories.md).
-
-Finally, because the inverse of an isometric equivalnce is isometric, this
+Finally, because the inverse of an isometric equivalence is an isometry, this
 functor is also
 [conservative](category-theory.conservative-functors-precategories.md).
 
@@ -71,7 +70,7 @@ module _
 
 ## Properties
 
-### The precategory functor from metric spaces and isometries to sets and functions is faithful
+### The functor from metric spaces and isometries to sets and functions is faithful
 
 ```agda
 module _
@@ -87,7 +86,7 @@ module _
     is-emb-inclusion-subtype (is-isometry-prop-Metric-Space A B)
 ```
 
-### The precategory functor from metric spaces and isometries to sets and functions is conservative
+### The functor from metric spaces and isometries to sets and functions is conservative
 
 ```agda
 module _

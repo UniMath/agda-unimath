@@ -1,4 +1,4 @@
-# The discrete premetric structure on a type
+# Discrete premetric structures
 
 ```agda
 module metric-spaces.discrete-premetric-structures where

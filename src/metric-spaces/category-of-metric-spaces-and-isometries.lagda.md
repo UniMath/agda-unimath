@@ -27,7 +27,7 @@ is a [category](category-theory.categories.md).
 
 ## Definitions
 
-### The precategory of metric spaces and isometris is a category
+### The precategory of metric spaces and isometries is a category
 
 ```agda
 module _

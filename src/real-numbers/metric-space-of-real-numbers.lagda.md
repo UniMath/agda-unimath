@@ -56,7 +56,7 @@ open import real-numbers.rational-real-numbers
 
 The type of [real numbers](real-numbers.dedekind-real-numbers.md) equipped with
 the [premetric](metric-spaces.premetric-structures.md) where `x y : ℝ` are
-`d`-neighbours when for any `r : ℚ` the following two conditions hold:
+`d`-neighbors when for any `r : ℚ` the following two conditions hold:
 
 - if `r + d` is in the lower cut of `y`, `r` is in the lower cut of `x`
 - if `r + d` is in the lower cut of `x`, `r` is in the lower cut of `y`

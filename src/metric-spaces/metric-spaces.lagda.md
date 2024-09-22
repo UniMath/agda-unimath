@@ -262,6 +262,6 @@ module _
 
 ## External links
 
-- [Metric spaces](https://en.wikipedia.org/wiki/Metric_space) at Wikipedia;
 - [MetricSpaces.Type](https://www.cs.bham.ac.uk/~mhe/TypeTopology/MetricSpaces.Type.html)
-  at TypeTopology.
+  at TypeTopology
+- [Metric spaces](https://en.wikipedia.org/wiki/Metric_space) at Wikipedia

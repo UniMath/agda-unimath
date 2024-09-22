@@ -156,7 +156,7 @@ module _
     (H d (f x) (f y)) ∘iff (K d x y)
 ```
 
-### The inverse of an isometric equivalence between premetric spaces is isometric
+### The inverse of an isometric equivalence between premetric spaces is an isometry
 
 ```agda
 module _

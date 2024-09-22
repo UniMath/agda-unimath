@@ -94,7 +94,7 @@ module _
   (f : short-function-Metric-Space A B)
   where
 
-  is-equiv-is-iso-precategory-short-function-Metric-Space :
+  is-equiv-is-iso-short-function-Metric-Space :
     is-iso-Precategory precategory-short-function-Metric-Space {A} {B} f →
     is-equiv (map-short-function-Metric-Space A B f)
   is-equiv-is-iso-precategory-short-function-Metric-Space (g , I , J) =
@@ -112,7 +112,7 @@ module _
   (f : short-function-Metric-Space A B)
   where
 
-  is-isometry-is-iso-precategory-short-function-Metric-Space :
+  is-isometry-is-iso-short-function-Metric-Space :
     is-iso-Precategory precategory-short-function-Metric-Space {A} {B} f →
     is-isometry-Metric-Space A B (map-short-function-Metric-Space A B f)
   pr1 (is-isometry-is-iso-precategory-short-function-Metric-Space I d x y) =
@@ -156,7 +156,7 @@ module _
   (f : short-function-Metric-Space A B)
   where
 
-  is-iso-is-isometric-is-equiv-precategory-short-function-Metric-Space :
+  is-iso-is-isometric-is-equiv-short-function-Metric-Space :
     is-isometric-is-equiv-Premetric-Space
       ( premetric-Metric-Space A)
       ( premetric-Metric-Space B)

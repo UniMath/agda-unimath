@@ -47,7 +47,7 @@ module _
   where
 
   id-Metric-Space : function-carrier-type-Metric-Space M M
-  id-Metric-Space x = x
+  id-Metric-Space = id
 ```
 
 ## Properties

@@ -27,7 +27,7 @@ A [premetric](metric-spaces.premetric-structures.md) is
 {{#concept "symmetric" Disambiguation="premetric" agda=is-symmetric-Premetric}}
 if `d`-neighborhoods are symmetric for all
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-`d` i.e. if the upper bounds on the distance between two elements `x` and `y`
+`d`. I.e., if the upper bounds on the distance between two elements `x` and `y`
 are are the same than the upper bounds on the distance between `y` and `x`.
 
 ## Definitions
@@ -67,7 +67,7 @@ module _
     S d x y (H d)
 ```
 
-### Being separated in a symmetric premetric is symmetric
+### The separatedness relation in a symmetric premetric is symmetric
 
 ```agda
 module _

@@ -95,7 +95,7 @@ module _
 
 ## Properties
 
-### An equality between carrier types of premmetric spaces transport the metric structures if and only if is it isometric
+### An equality between carrier types of premetric spaces transport the metric structures if and only if it is an isometry
 
 ```agda
 module _

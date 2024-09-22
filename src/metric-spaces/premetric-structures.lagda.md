@@ -62,7 +62,7 @@ module _
 
 Two points `x` and `y` in a type `A` are in a
 {{#concept "`d`-neighborhood" Disambiguation="in a premetric" Agda=neighborhood-Premetric}}
-in a premetric `B` for some positive rational numvber `d` if `B d x y` holds.
+in a premetric `B` for some positive rational number `d` if `B d x y` holds.
 
 In this case, `d` is called an
 {{#concept "upper bound" Disambiguation="on the distance in a premetric" Agda=is-upper-bound-dist-Premetric}}
@@ -93,8 +93,8 @@ module _
 
 Two elements `x` and `y` are
 {{#concept "indistinguishable" Disambiguation="with respect to a premetric" Agda=is-indistinguishable-Premetric}}
-in a premetric if `x` and `y` are `d`-neighbors for any positive rational `d`
-i.e. if their distance is bounded by any positive rational.
+in a premetric if `x` and `y` are `d`-neighbors for any positive rational `d`,
+i.e., if their distance is bounded by any positive rational.
 
 ```agda
 module _

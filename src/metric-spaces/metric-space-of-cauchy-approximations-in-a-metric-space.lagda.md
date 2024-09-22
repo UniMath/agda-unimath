@@ -1,4 +1,4 @@
-# The standard metric space of cauchy approximations in a metric space
+# The metric space of cauchy approximations in a metric space
 
 ```agda
 module metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space where
@@ -28,7 +28,7 @@ a [metric space](metric-spaces.metric-spaces.md) `A` inherits the
 [product structure](metric-spaces.dependent-products-metric-spaces.md) over `A`.
 
 This is the
-{{#concept "metric space of cauchy approximations in a metric space" Agda=metric-space-cauchy-approximations-Metric-Space}}.
+{{#concept "metric space of cauchy approximations" Disambiguation="in a metric space" Agda=metric-space-cauchy-approximations-Metric-Space}}  in a metric space.
 
 ## Definitions
 

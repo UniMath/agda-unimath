@@ -39,7 +39,7 @@ the carrier type of `A` is a
 of a
 [Cauchy approximation](metric-spaces.cauchy-approximations-premetric-spaces.md)
 `f` in `A` if `f ε` is an
-[`(ε + δ)`-neighbor](metric-spaces.premetric-structures.md) of `l` for all
+`(ε + δ)`-[neighbor](metric-spaces.premetric-structures.md) of `l` for all
 [positive rationals](elementary-number-theory.positive-rational-numbers.md)
 `(ε δ : ℚ⁺)`; this follows Definition 11.2.10 from {{#cite UF13}}.
 
@@ -118,7 +118,7 @@ module _
 
 ## Properties
 
-### Equivalence of limits and local approximates of Cauchy approximations in premetric spaces
+### Limits and local approximates of Cauchy approximations are equivalent
 
 ```agda
 module _

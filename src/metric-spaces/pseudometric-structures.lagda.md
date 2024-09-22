@@ -117,4 +117,4 @@ module _
 ## See also
 
 - Metric structures are defined in
-  [metric-spaces.metric-structures](metric-spaces.metric-structures.md).
+  [`metric-spaces.metric-structures`](metric-spaces.metric-structures.md).

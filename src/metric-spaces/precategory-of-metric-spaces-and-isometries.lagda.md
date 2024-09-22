@@ -169,7 +169,7 @@ module _
       ( is-torsorial-isometric-is-equiv-Metric-Space A)
 ```
 
-## See Also
+## See also
 
 - The
   [category of metric spaces and isometries](metric-spaces.category-of-metric-spaces-and-isometries.md).

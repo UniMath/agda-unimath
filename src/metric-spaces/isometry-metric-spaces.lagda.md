@@ -190,7 +190,7 @@ module _
       ( is-isometry-map-isometry-Metric-Space A B f))
 ```
 
-### The isometric inverse of an isometric equivalence
+### The inverse of an isometric equivalence is an isometry
 
 ```agda
 module _

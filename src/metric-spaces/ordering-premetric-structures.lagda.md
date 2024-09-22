@@ -30,8 +30,8 @@ A [premetric structure](metric-spaces.premetric-structures.md) `U` on a type `A`
 is {{#concept "finer" Disambiguation="premetric on a type" Agda=leq-Premetric}}
 than another premetric `V` if `(U d)`-neighborhoods are `(V d)`-neighborhoods
 for any
-[positive rational](elementary-number-theory.positive-rational-numbers.md) `d`
-i.e. if any upper bound on the distance between two points in `U` also bounds
+[positive rational](elementary-number-theory.positive-rational-numbers.md) `d`,
+i.e., if any upper bound on the distance between two points in `U` also bounds
 their distance in `V`.
 
 This gives a [partial order](order-theory.posets.md) on premetric structures on

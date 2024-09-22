@@ -86,4 +86,4 @@ module _
 ## External links
 
 - [Complete metric space](https://en.wikipedia.org/wiki/Complete_metric_space)
-  at Wikipedia;
+  at Wikipedia

@@ -48,7 +48,7 @@ Moreover, since the map from isometry to short maps is an
 [faithful](category-theory.faithful-functors-precategories.md).
 
 Finally, because short
-[isomorphisms](category-theory.isomorphisms-in-precategories.md) are isometric,
+[isomorphisms](category-theory.isomorphisms-in-precategories.md) are isometries,
 this functor is also
 [conservative](category-theory.conservative-functors-precategories.md).
 

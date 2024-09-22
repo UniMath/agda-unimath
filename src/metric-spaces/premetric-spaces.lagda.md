@@ -25,7 +25,7 @@ open import metric-spaces.triangular-premetric-structures
 
 ## Idea
 
-A {{#concept "premetric space" Agda=Premetric-Space}} is a type equipped a
+A {{#concept "premetric space" Agda=Premetric-Space}} is a type [equipped](foundation.structure.md) with a
 [premetric](metric-spaces.premetric-structures.md).
 
 ## Definitions
@@ -106,5 +106,5 @@ module _
   where
 
   id-Premetric-Space : function-carrier-type-Premetric-Space A A
-  id-Premetric-Space x = x
+  id-Premetric-Space = id
 ```

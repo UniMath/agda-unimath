@@ -29,7 +29,7 @@ open import metric-spaces.premetric-spaces
 
 ## Idea
 
-Equality of [metric-spaces](metric-spaces.metric-spaces.md) is equivalent to
+Equality of [metric spaces](metric-spaces.metric-spaces.md) is equivalent to
 [equality](metric-spaces.equality-of-premetric-spaces.md) of their carrier
 [premetric spaces](metric-spaces.premetric-spaces.md); therefore,
 {{#concept "isometric equality" Disambiguation="between metric spaces", Agda=isometric-eq-Metric-Space}}

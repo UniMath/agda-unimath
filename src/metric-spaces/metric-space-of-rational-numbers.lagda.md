@@ -177,7 +177,7 @@ is-saturated-metric-space-leq-ℚ ε x y H =
         ( pr2 (H δ)))
 ```
 
-### Addition of rational numbers is isometric
+### Addition of rational numbers is an isometry
 
 ```agda
 module _

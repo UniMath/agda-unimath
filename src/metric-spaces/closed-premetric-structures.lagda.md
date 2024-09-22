@@ -46,16 +46,16 @@ A [premetric](metric-spaces.premetric-structures.md) on a type `A` is
 {{#concept "closed" Disambiguation="premetric" Agda=is-closed-Premetric}} if
 `ε`-neighborhoods satisfy the following condition:
 
-for any `(x y : A)`, if `x` and `y` are in a `(ε + δ)`-neighborhood for all
-[positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
-`δ`, then they are in a `ε`-neighborhood.
+> For any `x y : A`, if `x` and `y` are in a `(ε + δ)`-neighborhood for all
+> [positive rational numbers](elementary-number-theory.positive-rational-numbers.md) >
+> `δ`, then they are in a `ε`-neighborhood.
 
-or, equivalently if for any `(x y : A)`, the subset of
+Or, equivalently if for any `(x y : A)`, the subset of
 [upper bounds](metric-spaces.premetric-structures.md) on the distance between
 `x` and `y` is closed on the left:
 
-for any `(ε : ℚ⁺)`, if `ε + δ` is an upper bound of the distance between `x` and
-`y` for all `(δ : ℚ⁺)`, then so is `ε`.
+> For any `ε : ℚ⁺`, if `ε + δ` is an upper bound of the distance between `x` and
+> `y` for all `(δ : ℚ⁺)`, then so is `ε`.
 
 ## Definitions
 
@@ -282,8 +282,7 @@ module _
   is-monotonic-closure-Premetric :
     is-monotonic-Premetric (closure-Premetric B)
   is-monotonic-closure-Premetric x y d₁ d₂ I H δ =
-    M
-      ( x)
+    M ( x)
       ( y)
       ( d₁ +ℚ⁺ δ)
       ( d₂ +ℚ⁺ δ)
