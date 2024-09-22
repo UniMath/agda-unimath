@@ -483,7 +483,11 @@ module _
         ( le-zero-is-positive-ℚ
           ( rational-ℚ⁺ x)
           ( is-positive-rational-ℚ⁺ x)))
+```
 
+### The positive difference of strictly inequal positive rational numbers
+
+```agda
 module _
   (x y : ℚ⁺) (H : le-ℚ⁺ x y)
   where
