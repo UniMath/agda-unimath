@@ -40,28 +40,24 @@ open import metric-spaces.triangular-premetric-structures
 
 ## Idea
 
-A [premetric](metric-spaces.md) on a type `A` is
+Any type comes equipped with a cannonical
 {{#concept "discrete" Disambiguation="premetric structure" Agda=is-discrete-Premetric}}
-any elements in some [`d`-neighborhood](metric-spaces.premetric-structures.md)
-are [merely equal](foundation.mere-equality.md).
-
-In a discrete premetric, two points are at bounded distance if and only iff they
-are merely equal, in which case all positive rational numbers are upper bounds
-on their distance.
-
-Every type has a unique reflexive discrete premetric.
+[premetric](metric-spaces.premetric-structures.md) where `d`-neighbors are
+[merely equal](foundation.mere-equality.md) elements. This is the unique
+reflexive premetric such that two points are at bounded distance if and only if
+they are merely equal, in which case they are indistinguishable.
 
 ## Definitions
 
-### The property of being a discrete premetric
+### The property of being a semi-discrete premetric
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
   where
 
-  is-discrete-prop-Premetric : Prop (l1 ⊔ l2)
-  is-discrete-prop-Premetric =
+  is-semi-discrete-prop-Premetric : Prop (l1 ⊔ l2)
+  is-semi-discrete-prop-Premetric =
     Π-Prop
       ( ℚ⁺)
       ( λ d →
@@ -75,6 +71,27 @@ module _
                   ( B d x y)
                   ( trunc-Prop (x ＝ y)))))
 
+  is-semi-discrete-Premetric : UU (l1 ⊔ l2)
+  is-semi-discrete-Premetric = type-Prop is-semi-discrete-prop-Premetric
+
+  is-prop-is-semi-discrete-Premetric : is-prop is-semi-discrete-Premetric
+  is-prop-is-semi-discrete-Premetric =
+    is-prop-type-Prop is-semi-discrete-prop-Premetric
+```
+
+### The property of being a discrete premetric
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Premetric l2 A)
+  where
+
+  is-discrete-prop-Premetric : Prop (l1 ⊔ l2)
+  is-discrete-prop-Premetric =
+    product-Prop
+      ( is-reflexive-prop-Premetric B)
+      ( is-semi-discrete-prop-Premetric B)
+
   is-discrete-Premetric : UU (l1 ⊔ l2)
   is-discrete-Premetric = type-Prop is-discrete-prop-Premetric
 
@@ -83,7 +100,7 @@ module _
     is-prop-type-Prop is-discrete-prop-Premetric
 ```
 
-### The standard discrete premetric on a type
+### The cannonical discrete premetric on a type
 
 ```agda
 module _
@@ -95,7 +112,9 @@ module _
 
   is-discrete-discrete-Premetric :
     is-discrete-Premetric discrete-Premetric
-  is-discrete-discrete-Premetric d x y H = H
+  is-discrete-discrete-Premetric =
+    (λ x d → unit-trunc-Prop refl) ,
+    (λ d x y → id)
 ```
 
 ## Properties
@@ -147,23 +166,45 @@ module _
           ( H))
 ```
 
+### Neighbors in the discrete premetric are indistinguishable
+
+```agda
+module _
+  {l : Level} (A : UU l) (d : ℚ⁺) (x y : A)
+  where
+
+  is-indistinguidhable-is-in-neighborhood-discrete-Premetric :
+    neighborhood-Premetric (discrete-Premetric A) d x y →
+    is-indistinguishable-Premetric (discrete-Premetric A) x y
+  is-indistinguidhable-is-in-neighborhood-discrete-Premetric H d = H
+```
+
 ### Any type has a unique reflexive discrete premetric
 
 ```agda
 module _
-  {l : Level} {A : UU l} (B : Premetric l A)
-  (R : is-reflexive-Premetric B)
-  (D : is-discrete-Premetric B)
+  {l : Level} {A : UU l}
   where
 
-  eq-discrete-is-discrete-reflexive-Premetric : B ＝ (discrete-Premetric A)
-  eq-discrete-is-discrete-reflexive-Premetric =
+  eq-discrete-is-discrete-Premetric :
+    (B : Premetric l A) (D : is-discrete-Premetric B) →
+    ((discrete-Premetric A) ＝ B)
+  eq-discrete-is-discrete-Premetric B D =
     eq-Eq-Premetric
-      ( B)
       ( discrete-Premetric A)
+      ( B)
       ( λ d x y →
-        ( ( D d x y) ,
-          ( rec-trunc-Prop
+        ( ( rec-trunc-Prop
             ( B d x y)
-            ( λ e → indistinguishable-eq-reflexive-Premetric B R e d))))
+            ( λ e → indistinguishable-eq-reflexive-Premetric B (pr1 D) e d)) ,
+          ( pr2 D d x y)))
+
+  is-contr-discrete-Premetric :
+    is-contr (Σ (Premetric l A) (is-discrete-Premetric))
+  is-contr-discrete-Premetric =
+    ( discrete-Premetric A , is-discrete-discrete-Premetric A) ,
+    ( λ (B , H) →
+      eq-type-subtype
+        ( is-discrete-prop-Premetric)
+        ( eq-discrete-is-discrete-Premetric B H))
 ```
