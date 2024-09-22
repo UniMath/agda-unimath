@@ -170,6 +170,7 @@ module _
     is-short-function-Premetric-Space A C (g ∘ f)
   is-short-comp-function-Premetric-Space H K d x y =
     H d (f x) (f y) ∘ K d x y
+
 module _
   {l1a l2a l1b l2b l1c l2c : Level}
   (A : Premetric-Space l1a l2a)

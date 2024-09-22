@@ -57,31 +57,9 @@ module _
       ( set-short-function-Metric-Space)
       ( λ {A B C} → comp-short-function-Metric-Space A B C)
       ( short-id-Metric-Space)
-      ( λ {A B C D} h g f →
-        eq-htpy-map-short-function-Metric-Space
-          ( A)
-          ( D)
-          ( comp-short-function-Metric-Space A B D
-            ( comp-short-function-Metric-Space B C D h g)
-            ( f))
-          ( comp-short-function-Metric-Space A C D
-            ( h)
-            ( comp-short-function-Metric-Space A B C g f))
-          ( λ x → refl))
-      ( λ {A B} f →
-        eq-htpy-map-short-function-Metric-Space A B
-          ( comp-short-function-Metric-Space A B B
-            ( short-id-Metric-Space B)
-            ( f))
-          ( f)
-          ( λ x → refl))
-      ( λ {A B} f →
-        eq-htpy-map-short-function-Metric-Space A B
-          ( comp-short-function-Metric-Space A A B
-            ( f)
-            ( short-id-Metric-Space A))
-          ( f)
-          ( λ x → refl))
+      ( λ {A B C D} → associative-comp-short-function-Metric-Space A B C D)
+      ( λ {A B} → left-unit-law-comp-short-function-Metric-Space A B)
+      ( λ {A B} → right-unit-law-comp-short-function-Metric-Space A B)
 ```
 
 ## Properties

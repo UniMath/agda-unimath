@@ -177,6 +177,87 @@ module _
       ( premetric-Metric-Space C)
 ```
 
+### Unit laws for composition of short maps between metric spaces
+
+```agda
+module _
+  {l1a l2a l1b l2b : Level}
+  (A : Metric-Space l1a l2a)
+  (B : Metric-Space l1b l2b)
+  (f : short-function-Metric-Space A B)
+  where
+
+  left-unit-law-comp-short-function-Metric-Space :
+    ( comp-short-function-Metric-Space A B B
+      ( short-id-Metric-Space B)
+      ( f)) ＝
+    ( f)
+  left-unit-law-comp-short-function-Metric-Space =
+    eq-htpy-map-short-function-Metric-Space
+      ( A)
+      ( B)
+      ( comp-short-function-Metric-Space
+        ( A)
+        ( B)
+        ( B)
+        ( short-id-Metric-Space B)
+        ( f))
+      ( f)
+      ( λ x → refl)
+
+  right-unit-law-comp-short-function-Metric-Space :
+    ( comp-short-function-Metric-Space A A B
+      ( f)
+      ( short-id-Metric-Space A)) ＝
+    ( f)
+  right-unit-law-comp-short-function-Metric-Space =
+    eq-htpy-map-short-function-Metric-Space
+      ( A)
+      ( B)
+      ( f)
+      ( comp-short-function-Metric-Space
+        ( A)
+        ( A)
+        ( B)
+        ( f)
+        ( short-id-Metric-Space A))
+      ( λ x → refl)
+```
+
+### Associatity of composition of short maps between metric spaces
+
+```agda
+module _
+  {l1a l2a l1b l2b l1c l2c l1d l2d : Level}
+  (A : Metric-Space l1a l2a)
+  (B : Metric-Space l1b l2b)
+  (C : Metric-Space l1c l2c)
+  (D : Metric-Space l1d l2d)
+  (h : short-function-Metric-Space C D)
+  (g : short-function-Metric-Space B C)
+  (f : short-function-Metric-Space A B)
+  where
+
+  associative-comp-short-function-Metric-Space :
+    ( comp-short-function-Metric-Space A B D
+      ( comp-short-function-Metric-Space B C D h g)
+        ( f)) ＝
+    ( comp-short-function-Metric-Space A C D
+      ( h)
+      ( comp-short-function-Metric-Space A B C g f))
+  associative-comp-short-function-Metric-Space =
+    eq-htpy-map-short-function-Metric-Space
+      ( A)
+      ( D)
+      ( comp-short-function-Metric-Space A B D
+        ( comp-short-function-Metric-Space B C D h g)
+        ( f))
+      ( comp-short-function-Metric-Space A C D
+        ( h)
+        ( comp-short-function-Metric-Space A B C g f))
+      ( λ x → refl)
+```
+
 ### Constant functions between metric spaces are short
 
 ```agda

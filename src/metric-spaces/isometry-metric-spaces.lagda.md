@@ -190,6 +190,87 @@ module _
       ( is-isometry-map-isometry-Metric-Space A B f))
 ```
 
+### Unit laws for composition of isometries between metric spaces
+
+```agda
+module _
+  {l1a l2a l1b l2b : Level}
+  (A : Metric-Space l1a l2a)
+  (B : Metric-Space l1b l2b)
+  (f : isometry-Metric-Space A B)
+  where
+
+  left-unit-law-comp-isometry-Metric-Space :
+    ( comp-isometry-Metric-Space A B B
+      (isometry-id-Metric-Space B)
+      ( f)) ＝
+    ( f)
+  left-unit-law-comp-isometry-Metric-Space =
+    eq-htpy-map-isometry-Metric-Space
+      ( A)
+      ( B)
+      ( comp-isometry-Metric-Space
+        ( A)
+        ( B)
+        ( B)
+        (isometry-id-Metric-Space B)
+        ( f))
+      ( f)
+      ( λ x → refl)
+
+  right-unit-law-comp-isometry-Metric-Space :
+    ( comp-isometry-Metric-Space A A B
+      ( f)
+      ( isometry-id-Metric-Space A)) ＝
+    ( f)
+  right-unit-law-comp-isometry-Metric-Space =
+    eq-htpy-map-isometry-Metric-Space
+      ( A)
+      ( B)
+      ( f)
+      ( comp-isometry-Metric-Space
+        ( A)
+        ( A)
+        ( B)
+        ( f)
+        ( isometry-id-Metric-Space A))
+      ( λ x → refl)
+```
+
+### Associatity of composition of isometries between metric spaces
+
+```agda
+module _
+  {l1a l2a l1b l2b l1c l2c l1d l2d : Level}
+  (A : Metric-Space l1a l2a)
+  (B : Metric-Space l1b l2b)
+  (C : Metric-Space l1c l2c)
+  (D : Metric-Space l1d l2d)
+  (h : isometry-Metric-Space C D)
+  (g : isometry-Metric-Space B C)
+  (f : isometry-Metric-Space A B)
+  where
+
+  associative-comp-isometry-Metric-Space :
+    ( comp-isometry-Metric-Space A B D
+      ( comp-isometry-Metric-Space B C D h g)
+      ( f)) ＝
+    ( comp-isometry-Metric-Space A C D
+      ( h)
+      ( comp-isometry-Metric-Space A B C g f))
+  associative-comp-isometry-Metric-Space =
+    eq-htpy-map-isometry-Metric-Space
+      ( A)
+      ( D)
+      ( comp-isometry-Metric-Space A B D
+        ( comp-isometry-Metric-Space B C D h g)
+        ( f))
+      ( comp-isometry-Metric-Space A C D
+        ( h)
+        ( comp-isometry-Metric-Space A B C g f))
+      ( λ x → refl)
+```
+
 ### The inverse of an isometric equivalence is an isometry
 
 ```agda

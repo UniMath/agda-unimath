@@ -56,31 +56,9 @@ module _
       ( set-isometry-Metric-Space)
       ( λ {A B C} → comp-isometry-Metric-Space A B C)
       ( isometry-id-Metric-Space)
-      ( λ {A B C D} h g f →
-        eq-htpy-map-isometry-Metric-Space
-          ( A)
-          ( D)
-          ( comp-isometry-Metric-Space A B D
-            ( comp-isometry-Metric-Space B C D h g)
-            ( f))
-          ( comp-isometry-Metric-Space A C D
-            ( h)
-            ( comp-isometry-Metric-Space A B C g f))
-          ( λ x → refl))
-      ( λ {A B} f →
-        eq-htpy-map-isometry-Metric-Space A B
-          ( comp-isometry-Metric-Space A B B
-            ( isometry-id-Metric-Space B)
-            ( f))
-          ( f)
-          ( λ x → refl))
-      ( λ {A B} f →
-        eq-htpy-map-isometry-Metric-Space A B
-          ( comp-isometry-Metric-Space A A B
-            ( f)
-            ( isometry-id-Metric-Space A))
-          ( f)
-          ( λ x → refl))
+      ( λ {A B C D} → associative-comp-isometry-Metric-Space A B C D)
+      ( λ {A B} → left-unit-law-comp-isometry-Metric-Space A B)
+      ( λ {A B} → right-unit-law-comp-isometry-Metric-Space A B)
 ```
 
 ## Properties
