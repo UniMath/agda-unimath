@@ -88,7 +88,6 @@ module _
   is-in-lower-neighborhood-leq-ℝ =
     type-Prop is-in-lower-neighborhood-leq-prop-ℝ
 
-
 premetric-leq-ℝ : (l : Level) → Premetric l (ℝ l)
 premetric-leq-ℝ l d x y =
   product-Prop
