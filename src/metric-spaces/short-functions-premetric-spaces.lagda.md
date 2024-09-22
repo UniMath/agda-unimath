@@ -34,7 +34,8 @@ open import metric-spaces.premetric-spaces
 
 A function `f` between [premetric spaces](metric-spaces.premetric-spaces.md) is
 {{#concept "short" Disambiguation="function between premetric spaces" Agda=is-short-function-Premetric-Space}}
-if any of the following three equivalent propositions holds:
+if any of the following three [equivalent](foundation.logical-equivalences.md)
+[propositions](foundation-core.propositions.md) holds:
 
 - it maps [`d`-neighborhoods](metric-spaces.premetric-structures.md) to
   `d`-neighborhoods;
