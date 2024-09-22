@@ -60,27 +60,27 @@ module _
   (l1 l2 : Level)
   where
 
-  complete-Metric-Space : UU (lsuc l1 ⊔ lsuc l2)
-  complete-Metric-Space =
+  Complete-Metric-Space : UU (lsuc l1 ⊔ lsuc l2)
+  Complete-Metric-Space =
     type-subtype (is-complete-prop-Metric-Space {l1} {l2})
 ```
 
 ```agda
 module _
   {l1 l2 : Level}
-  (A : complete-Metric-Space l1 l2)
+  (A : Complete-Metric-Space l1 l2)
   where
 
-  metric-space-complete-Metric-Space : Metric-Space l1 l2
-  metric-space-complete-Metric-Space = pr1 A
+  metric-space-Complete-Metric-Space : Metric-Space l1 l2
+  metric-space-Complete-Metric-Space = pr1 A
 
-  type-complete-Metric-Space : UU l1
-  type-complete-Metric-Space =
-    type-Metric-Space metric-space-complete-Metric-Space
+  type-Complete-Metric-Space : UU l1
+  type-Complete-Metric-Space =
+    type-Metric-Space metric-space-Complete-Metric-Space
 
-  is-complete-metric-space-complete-Metric-Space :
-    is-complete-Metric-Space metric-space-complete-Metric-Space
-  is-complete-metric-space-complete-Metric-Space = pr2 A
+  is-complete-metric-space-Complete-Metric-Space :
+    is-complete-Metric-Space metric-space-Complete-Metric-Space
+  is-complete-metric-space-Complete-Metric-Space = pr2 A
 ```
 
 ## External links
