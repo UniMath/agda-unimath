@@ -47,7 +47,7 @@ A [premetric](metric-spaces.premetric-structures.md) on a type `A` is
 `ε`-neighborhoods satisfy the following condition:
 
 > For any `x y : A`, if `x` and `y` are in a `(ε + δ)`-neighborhood for all
-> [positive rational numbers](elementary-number-theory.positive-rational-numbers.md) >
+> [positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
 > `δ`, then they are in a `ε`-neighborhood.
 
 Or, equivalently if for any `(x y : A)`, the subset of
