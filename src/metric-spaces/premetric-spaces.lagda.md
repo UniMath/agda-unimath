@@ -10,6 +10,7 @@ module metric-spaces.premetric-spaces where
 open import elementary-number-theory.positive-rational-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -25,7 +26,8 @@ open import metric-spaces.triangular-premetric-structures
 
 ## Idea
 
-A {{#concept "premetric space" Agda=Premetric-Space}} is a type [equipped](foundation.structure.md) with a
+A {{#concept "premetric space" Agda=Premetric-Space}} is a type
+[equipped](foundation.structure.md) with a
 [premetric](metric-spaces.premetric-structures.md).
 
 ## Definitions

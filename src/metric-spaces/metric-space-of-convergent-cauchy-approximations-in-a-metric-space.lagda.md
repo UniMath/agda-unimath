@@ -26,7 +26,8 @@ in a [metric space](metric-spaces.metric-spaces.md) inherits the
 [metric space of Cauchy approximations](metric-spaces.metric-space-of-cauchy-approximations-in-a-metric-space.md).
 
 This is the
-{{#concept "metric space of convergent Cauchy approximations" Disambiguation="in a metric space" Agda=metric-space-convergent-cauchy-approximations-Metric-Space}} in a metric space.
+{{#concept "metric space of convergent Cauchy approximations" Disambiguation="in a metric space" Agda=metric-space-convergent-cauchy-approximations-Metric-Space}}
+in a metric space.
 
 ## Definitions
 

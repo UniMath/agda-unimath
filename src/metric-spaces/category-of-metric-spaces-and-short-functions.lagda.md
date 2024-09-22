@@ -39,7 +39,7 @@ module _
     is-category-Precategory (precategory-short-function-Metric-Space {l1} {l2})
   is-category-precategory-short-function-Metric-Space A =
     fundamental-theorem-id
-      ( is-torsorial-iso-precategory-short-function-Metric-Space A)
+      ( is-torsorial-iso-short-function-Metric-Space A)
       ( iso-eq-Precategory precategory-short-function-Metric-Space A)
 ```
 

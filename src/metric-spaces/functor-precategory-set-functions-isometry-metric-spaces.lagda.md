@@ -43,9 +43,8 @@ to the [precategory of sets](foundation.category-of-sets.md).
 
 Moreover, since the map from an isometry to its carrier map is an
 [embedding](foundation.embeddings.md), this functor is
-[faithful](category-theory.faithful-functors-precategories.md).
-Finally, because the inverse of an isometric equivalence is an isometry, this
-functor is also
+[faithful](category-theory.faithful-functors-precategories.md). Finally, because
+the inverse of an isometric equivalence is an isometry, this functor is also
 [conservative](category-theory.conservative-functors-precategories.md).
 
 ## Definition

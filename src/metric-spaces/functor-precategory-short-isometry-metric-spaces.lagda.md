@@ -123,7 +123,7 @@ module _
       ( A)
       ( B)
       ( f)
-      ( is-equiv-is-iso-precategory-short-function-Metric-Space
+      ( is-equiv-is-iso-short-function-Metric-Space
         ( A)
         ( B)
         ( short-isometry-Metric-Space A B f)

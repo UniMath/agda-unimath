@@ -31,8 +31,9 @@ open import metric-spaces.premetric-structures
 
 A [premetric structure](metric-spaces.premetric-structures.md) is
 {{#concept "reflexive" Disambiguation="premetric" Agda=is-reflexive-Premetric}}
-if any element is indistinguishable from itself. I.e., a premetric structure is reflexive if all positive rational
-numbers are upper bounds of the distance between an element and itself.
+if any element is indistinguishable from itself. I.e., a premetric structure is
+reflexive if all positive rational numbers are upper bounds of the distance
+between an element and itself.
 
 ## Definitions
 

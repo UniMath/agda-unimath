@@ -27,9 +27,10 @@ open import metric-spaces.reflexive-premetric-structures
 
 A [premetric](metric-spaces.premetric-structures.md) is
 {{#concept "triangular" Disambiguation="premetric" agda=is-triangular-Premetric}}
-if it is additively transitive. I.e., if for any three elements `x`, `y`, and `z`,
-the sum of an upper bound on the distance between `x` and `y` and an upper bound
-on the distance between `y` and `z` bounds the distance between `x` and `z`.
+if it is additively transitive. I.e., if for any three elements `x`, `y`, and
+`z`, the sum of an upper bound on the distance between `x` and `y` and an upper
+bound on the distance between `y` and `z` bounds the distance between `x` and
+`z`.
 
 ## Definitions
 

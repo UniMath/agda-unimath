@@ -97,7 +97,7 @@ module _
   is-equiv-is-iso-short-function-Metric-Space :
     is-iso-Precategory precategory-short-function-Metric-Space {A} {B} f →
     is-equiv (map-short-function-Metric-Space A B f)
-  is-equiv-is-iso-precategory-short-function-Metric-Space (g , I , J) =
+  is-equiv-is-iso-short-function-Metric-Space (g , I , J) =
     is-equiv-is-invertible
       ( map-short-function-Metric-Space B A g)
       ( htpy-eq (ap (map-short-function-Metric-Space B B) I))
@@ -115,9 +115,9 @@ module _
   is-isometry-is-iso-short-function-Metric-Space :
     is-iso-Precategory precategory-short-function-Metric-Space {A} {B} f →
     is-isometry-Metric-Space A B (map-short-function-Metric-Space A B f)
-  pr1 (is-isometry-is-iso-precategory-short-function-Metric-Space I d x y) =
+  pr1 (is-isometry-is-iso-short-function-Metric-Space I d x y) =
     is-short-map-short-function-Metric-Space A B f d x y
-  pr2 (is-isometry-is-iso-precategory-short-function-Metric-Space I d x y) H =
+  pr2 (is-isometry-is-iso-short-function-Metric-Space I d x y) H =
     binary-tr
       ( neighborhood-Metric-Space A d)
         ( ap
@@ -162,7 +162,7 @@ module _
       ( premetric-Metric-Space B)
       ( map-short-function-Metric-Space A B f) →
     is-iso-Precategory precategory-short-function-Metric-Space {A} {B} f
-  is-iso-is-isometric-is-equiv-precategory-short-function-Metric-Space (E , I) =
+  is-iso-is-isometric-is-equiv-short-function-Metric-Space (E , I) =
     ( short-inverse) ,
     ( ( eq-htpy-map-short-function-Metric-Space
       ( B)
@@ -234,19 +234,19 @@ module _
         ( premetric-Metric-Space B)
         ( f))
     ( λ (is-short-f , is-iso-f) →
-      is-equiv-is-iso-precategory-short-function-Metric-Space
+      is-equiv-is-iso-short-function-Metric-Space
         ( A)
         ( B)
         ( f , is-short-f)
         ( is-iso-f) ,
-      is-isometry-is-iso-precategory-short-function-Metric-Space
+      is-isometry-is-iso-short-function-Metric-Space
         ( A)
         ( B)
         ( f , is-short-f)
         ( is-iso-f))
     ( λ (is-equiv-f , is-isometry-f) →
       is-short-is-isometry-Metric-Space A B f is-isometry-f ,
-      is-iso-is-isometric-is-equiv-precategory-short-function-Metric-Space
+      is-iso-is-isometric-is-equiv-short-function-Metric-Space
         ( A)
         ( B)
         ( f , is-short-is-isometry-Metric-Space A B f is-isometry-f)
@@ -260,10 +260,10 @@ module _
   {l1 l2 : Level}
   (A B : Metric-Space l1 l2)
   where
-  equiv-isometric-is-equiv-iso-precategory-short-function-Metric-Space :
+  equiv-isometric-is-equiv-iso-short-function-Metric-Space :
     iso-Precategory precategory-short-function-Metric-Space A B ≃
     isometric-is-equiv-Metric-Space A B
-  equiv-isometric-is-equiv-iso-precategory-short-function-Metric-Space =
+  equiv-isometric-is-equiv-iso-short-function-Metric-Space =
     equiv-tot
       ( equiv-is-isometric-is-equiv-is-iso-short-function-Metric-Space A B) ∘e
     associative-Σ
@@ -279,13 +279,13 @@ module _
   {l1 l2 : Level} (A : Metric-Space l1 l2)
   where
 
-  is-torsorial-iso-precategory-short-function-Metric-Space :
+  is-torsorial-iso-short-function-Metric-Space :
     is-torsorial (iso-Precategory precategory-short-function-Metric-Space A)
-  is-torsorial-iso-precategory-short-function-Metric-Space =
+  is-torsorial-iso-short-function-Metric-Space =
     is-contr-equiv
       ( Σ (Metric-Space l1 l2) (isometric-is-equiv-Metric-Space A))
       ( equiv-tot
-        ( equiv-isometric-is-equiv-iso-precategory-short-function-Metric-Space
+        ( equiv-isometric-is-equiv-iso-short-function-Metric-Space
           ( A)))
       ( is-torsorial-isometric-is-equiv-Metric-Space A)
 ```
