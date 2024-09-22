@@ -291,3 +291,22 @@ module _
       ( functor-precategory-Precategory C D)
       { F} {G} _ _ refl
 ```
+
+### The evaluation functor
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  ev-functor-Precategory :
+    (c : obj-Precategory C) →
+    functor-Precategory (functor-precategory-Precategory C D) D
+  pr1 (ev-functor-Precategory c) F = obj-functor-Precategory C D F c
+  pr1 (pr2 (ev-functor-Precategory c)) {F} {G} φ =
+    hom-family-natural-transformation-Precategory C D F G φ c
+  pr1 (pr2 (pr2 (ev-functor-Precategory c))) φ Ψ = refl
+  pr2 (pr2 (pr2 (ev-functor-Precategory c))) F = refl
+```

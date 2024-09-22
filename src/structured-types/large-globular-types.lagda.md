@@ -37,15 +37,15 @@ from their source to their target. For instance, given two $0$-cells `x` and
 `f` to `g`, and a $3$-cell `α` from `H` to `K`, a common depiction would be
 
 ```text
-            f
-       -----------
-     /  //     \\  \
-    /  //   α   \\  ∨
-   x  H|| ≡≡≡≡> ||K  y.
-    \  \\       //  ∧
-     \  V       V  /
-       -----------
-            g
+             f
+       -------------
+     /   //     \\   \
+    /   //   α   \\   ∨
+   x  H|| ≡≡≡≡≡≡> ||K  y.
+    \   \\       //   ∧
+     \   V       V   /
+       -------------
+             g
 ```
 
 ## Definitions

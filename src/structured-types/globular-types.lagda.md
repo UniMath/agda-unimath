@@ -34,13 +34,13 @@ from their source to their target. For instance, given two $0$-cells `x` and
 
 ```text
             f
-       -----------
-     /  //     \\  \
-    /  //   α   \\  ∨
-   x  H|| ≡≡≡≡> ||K  y.
-    \  \\       //  ∧
-     \  V       V  /
-       -----------
+       -------------
+     /   //     \\   \
+    /   //   α   \\   ∨
+   x  H|| ≡≡≡≡≡≡> ||K  y.
+    \   \\       //   ∧
+     \   V       V   /
+       -------------
             g
 ```
 
@@ -157,9 +157,9 @@ module _
     globular-structure-1-cell-globular-structure
       ( globular-structure-0-cell-Globular-Type)
 
-  globular-type-1-cell-Globular-Type :
+  1-cell-globular-type-Globular-Type :
     (x y : 0-cell-Globular-Type) → Globular-Type l2 l2
-  globular-type-1-cell-Globular-Type x y =
+  1-cell-globular-type-Globular-Type x y =
     ( 1-cell-Globular-Type x y , globular-structure-1-cell-Globular-Type x y)
 
   2-cell-Globular-Type :
@@ -174,10 +174,10 @@ module _
     globular-structure-2-cell-globular-structure
       ( globular-structure-0-cell-Globular-Type)
 
-  globular-type-2-cell-Globular-Type :
+  2-cell-globular-type-Globular-Type :
     {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) →
     Globular-Type l2 l2
-  globular-type-2-cell-Globular-Type f g =
+  2-cell-globular-type-Globular-Type f g =
     ( 2-cell-Globular-Type f g , globular-structure-2-cell-Globular-Type f g)
 
   3-cell-Globular-Type :
@@ -206,3 +206,9 @@ globular-structure-Id A =
   .globular-structure-1-cell-globular-structure x y →
     globular-structure-Id (x ＝ y)
 ```
+
+## See also
+
+- [Reflexive globular types](structured-types.reflexive-globular-types.md)
+- [Symmetric globular types](structured-types.symmetric-globular-types.md)
+- [Transitive globular types](structured-types.transitive-globular-types.md)

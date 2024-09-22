@@ -53,6 +53,7 @@ open import elementary-number-theory.eulers-totient-function public
 open import elementary-number-theory.exponentiation-natural-numbers public
 open import elementary-number-theory.factorials public
 open import elementary-number-theory.falling-factorials public
+open import elementary-number-theory.fermat-numbers public
 open import elementary-number-theory.fibonacci-sequence public
 open import elementary-number-theory.field-of-rational-numbers public
 open import elementary-number-theory.finitary-natural-numbers public

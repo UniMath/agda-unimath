@@ -300,10 +300,10 @@ module _
         ( is-section-fiber-fiber-map-Σ-map-base t)
         ( is-retraction-fiber-fiber-map-Σ-map-base t)
 
-  equiv-fiber-map-Σ-map-base-fiber :
+  compute-fiber-map-Σ-map-base :
     (t : Σ B C) → fiber f (pr1 t) ≃ fiber (map-Σ-map-base f C) t
-  pr1 (equiv-fiber-map-Σ-map-base-fiber t) = fiber-map-Σ-map-base-fiber t
-  pr2 (equiv-fiber-map-Σ-map-base-fiber t) =
+  pr1 (compute-fiber-map-Σ-map-base t) = fiber-map-Σ-map-base-fiber t
+  pr2 (compute-fiber-map-Σ-map-base t) =
     is-equiv-fiber-map-Σ-map-base-fiber t
 ```
 
@@ -320,7 +320,7 @@ module _
     is-contr-map-map-Σ-map-base is-contr-f (pair y z) =
       is-contr-equiv'
         ( fiber f y)
-        ( equiv-fiber-map-Σ-map-base-fiber f C (pair y z))
+        ( compute-fiber-map-Σ-map-base f C (pair y z))
         ( is-contr-f y)
 ```
 
