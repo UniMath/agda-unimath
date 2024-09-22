@@ -106,7 +106,7 @@ pr2
   is-retraction-retraction-left-map-triangle f g h H rg
 ```
 
-### When the domain is truncated, the type of retractions is a truncated
+### The type of retractions is `k`-truncated if the domain is `k`-truncated
 
 ```agda
 module _
