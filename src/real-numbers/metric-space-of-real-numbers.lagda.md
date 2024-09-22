@@ -64,28 +64,36 @@ the [premetric](metric-spaces.premetric-structures.md) where `x y : ℝ` are
 is a [saturated metric space](metric-spaces.saturated-metric-spaces.md).
 
 It is the
-{{#concept "standard saturated metric space of real numbers" Agda=metric-space-leq-ℝ}}.
+{{#concept "standard metric space of real numbers" Agda=metric-space-leq-ℝ}}.
 
 ## Definitions
 
-### The standard closed premetric on the real numbers
+### The standard premetric on the real numbers
 
 ```agda
-premetric-leq-ℝ : (l : Level) → Premetric l (ℝ l)
-premetric-leq-ℝ l d x y =
-  product-Prop
-    ( Π-Prop
+module _
+  {l : Level} (d : ℚ⁺) (x y : ℝ l)
+  where
+
+  is-in-lower-neighborhood-leq-prop-ℝ : Prop l
+  is-in-lower-neighborhood-leq-prop-ℝ =
+    Π-Prop
       ( ℚ)
       ( λ r →
         hom-Prop
           ( lower-cut-ℝ y (r +ℚ (rational-ℚ⁺ d)))
-          ( lower-cut-ℝ x r)))
-    ( Π-Prop
-      ( ℚ)
-      ( λ r →
-        hom-Prop
-          ( lower-cut-ℝ x (r +ℚ (rational-ℚ⁺ d)))
-          ( lower-cut-ℝ y r)))
+            ( lower-cut-ℝ x r))
+
+  is-in-lower-neighborhood-leq-ℝ : UU l
+  is-in-lower-neighborhood-leq-ℝ =
+    type-Prop is-in-lower-neighborhood-leq-prop-ℝ
+
+
+premetric-leq-ℝ : (l : Level) → Premetric l (ℝ l)
+premetric-leq-ℝ l d x y =
+  product-Prop
+    ( is-in-lower-neighborhood-leq-prop-ℝ d x y)
+    ( is-in-lower-neighborhood-leq-prop-ℝ d y x)
 ```
 
 ## Properties
@@ -195,54 +203,44 @@ module _
 
 ```agda
 module _
+  {l : Level} (x y : ℝ l) (ε : ℚ⁺)
+  (H : (δ : ℚ⁺) → is-in-lower-neighborhood-leq-ℝ (ε +ℚ⁺ δ) x y)
+  where
+
+  is-closed-lower-neighborhood-leq-ℝ :
+    is-in-lower-neighborhood-leq-ℝ ε x y
+  is-closed-lower-neighborhood-leq-ℝ r I =
+    elim-exists
+      ( lower-cut-ℝ x r)
+      ( λ r' (K , I') →
+        H ( positive-diff-le-ℚ (r +ℚ rational-ℚ⁺ ε) r' K)
+          ( r)
+          ( tr
+            ( is-in-lower-cut-ℝ y)
+            ( ( inv
+                ( right-law-positive-diff-le-ℚ
+                  ( r +ℚ rational-ℚ⁺ ε)
+                  ( r')
+                  ( K))) ∙
+              ( associative-add-ℚ
+                ( r)
+                ( rational-ℚ⁺ ε)
+                    ( r' -ℚ (r +ℚ rational-ℚ⁺ ε))))
+            ( I')))
+      ( forward-implication
+        ( is-rounded-lower-cut-ℝ y (r +ℚ rational-ℚ⁺ ε)) I)
+```
+
+```agda
+module _
   {l : Level}
   where
 
   is-saturated-metric-space-leq-ℝ :
     is-saturated-Metric-Space (metric-space-leq-ℝ l)
   is-saturated-metric-space-leq-ℝ ε x y H =
-    ( λ r Lyr →
-      elim-exists
-        ( lower-cut-ℝ x r)
-        ( λ r' (I' , Lyr') →
-          pr1
-            ( H (positive-diff-le-ℚ (r +ℚ rational-ℚ⁺ ε) r' I'))
-            ( r)
-            ( tr
-              ( is-in-lower-cut-ℝ y)
-              ( ( inv
-                  ( right-law-positive-diff-le-ℚ
-                    ( r +ℚ rational-ℚ⁺ ε)
-                    ( r')
-                    ( I'))) ∙
-                ( associative-add-ℚ
-                  ( r)
-                  ( rational-ℚ⁺ ε)
-                  ( r' -ℚ (r +ℚ rational-ℚ⁺ ε))))
-              ( Lyr')))
-        ( forward-implication
-          ( is-rounded-lower-cut-ℝ y (r +ℚ rational-ℚ⁺ ε)) Lyr)) ,
-    ( λ r Lxr →
-      elim-exists
-        ( lower-cut-ℝ y r)
-        ( λ r' (I' , Lxr') →
-          pr2
-            ( H (positive-diff-le-ℚ (r +ℚ rational-ℚ⁺ ε) r' I'))
-            ( r)
-            ( tr
-              ( is-in-lower-cut-ℝ x)
-              ( ( inv
-                  ( right-law-positive-diff-le-ℚ
-                    ( r +ℚ rational-ℚ⁺ ε)
-                    ( r')
-                    ( I'))) ∙
-                ( associative-add-ℚ
-                  ( r)
-                  ( rational-ℚ⁺ ε)
-                  ( r' -ℚ (r +ℚ rational-ℚ⁺ ε))))
-              ( Lxr')))
-        ( forward-implication
-          ( is-rounded-lower-cut-ℝ x (r +ℚ rational-ℚ⁺ ε)) Lxr))
+    ( is-closed-lower-neighborhood-leq-ℝ x y ε (pr1 ∘ H)) ,
+    ( is-closed-lower-neighborhood-leq-ℝ y x ε (pr2 ∘ H))
 ```
 
 ### Tha canonical embedding from rational to real numbers is an isometry between metric spaces
