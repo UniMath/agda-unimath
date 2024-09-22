@@ -48,7 +48,7 @@ Total-Order-Large-Precategory =
     ( parametric-Total-Order-Full-Large-Subprecategory (λ l → l) (λ l → l))
 ```
 
-### The precategory or total orders of universe level `l`
+### The precategory of total orders at a universe level
 
 ```agda
 Total-Order-Precategory : (l : Level) → Precategory (lsuc l) l

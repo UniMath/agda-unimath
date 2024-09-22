@@ -40,7 +40,7 @@ Ring-Large-Precategory =
     ( λ {l1} {l2} {R} {S} → right-unit-law-comp-hom-Ring R S)
 ```
 
-### The precategory or rings of universe level `l`
+### The precategory of rings at a universe level
 
 ```agda
 Ring-Precategory : (l : Level) → Precategory (lsuc l) l
