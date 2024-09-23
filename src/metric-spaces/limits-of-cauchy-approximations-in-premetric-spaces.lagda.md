@@ -41,7 +41,7 @@ of a
 `f` in `A` if `f ε` is an
 `(ε + δ)`-[neighbor](metric-spaces.premetric-structures.md) of `l` for all
 [positive rationals](elementary-number-theory.positive-rational-numbers.md)
-`(ε δ : ℚ⁺)`; this follows Definition 11.2.10 from {{#cite UF13}}.
+`(ε δ : ℚ⁺)`.
 
 This holds if and only if any `ε : ℚ⁺` is an is an upper bound on the distance
 between `f δ` and `l` for all positive rational numbers `δ < ε`.
@@ -233,5 +233,8 @@ module _
 ```
 
 ## References
+
+Our definition of limit of Cauchy approximation follows Definition 11.2.10 from
+{{#cite UF13}}.
 
 {{#bibliography}}
