@@ -31,6 +31,7 @@ open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
+open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures
 open import metric-spaces.reflexive-premetric-structures
@@ -137,7 +138,15 @@ pr2 is-metric-premetric-le-ℚ = is-local-premetric-le-ℚ
 ### The standard metric space of rational numbers with open neighborhoods
 
 ```agda
+premetric-space-le-ℚ : Premetric-Space lzero lzero
+premetric-space-le-ℚ = ℚ , premetric-le-ℚ
+
 metric-space-le-ℚ : Metric-Space lzero lzero
-pr1 metric-space-le-ℚ = ℚ , premetric-le-ℚ
+pr1 metric-space-le-ℚ = premetric-space-le-ℚ
 pr2 metric-space-le-ℚ = is-metric-premetric-le-ℚ
 ```
+
+## See also
+
+- The standard
+  [metric space of rational numbers](metric-spaces.metric-space-of-rational-numbers.md)

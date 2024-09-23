@@ -39,6 +39,7 @@ open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
+open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures
 open import metric-spaces.reflexive-premetric-structures
@@ -145,11 +146,14 @@ pr1 is-metric-premetric-leq-ℚ = is-pseudometric-premetric-leq-ℚ
 pr2 is-metric-premetric-leq-ℚ = is-local-premetric-leq-ℚ
 ```
 
-### The standard saturated metric space of rational numbers
+### The standard metric space of rational numbers
 
 ```agda
+premetric-space-leq-ℚ : Premetric-Space lzero lzero
+premetric-space-leq-ℚ = ℚ , premetric-leq-ℚ
+
 metric-space-leq-ℚ : Metric-Space lzero lzero
-pr1 metric-space-leq-ℚ = ℚ , premetric-leq-ℚ
+pr1 metric-space-leq-ℚ = premetric-space-leq-ℚ
 pr2 metric-space-leq-ℚ = is-metric-premetric-leq-ℚ
 ```
 
@@ -295,3 +299,8 @@ convergent-rational-ℚ⁺ =
   zero-ℚ ,
   is-zero-limit-rational-ℚ⁺
 ```
+
+## See also
+
+- The
+  [metric space of rational numbers with open neighborhoods](metric-spaces.metric-space-of-rational-numbers-with-open-neighborhoods.md)
