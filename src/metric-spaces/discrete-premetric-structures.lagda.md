@@ -29,6 +29,7 @@ open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-structures
 open import metric-spaces.reflexive-premetric-structures
@@ -177,6 +178,27 @@ module _
     neighborhood-Premetric (discrete-Premetric A) d x y →
     is-indistinguishable-Premetric (discrete-Premetric A) x y
   is-indistinguishable-is-in-neighborhood-discrete-Premetric H d = H
+```
+
+### The discrete premetric on a type is local if and only if this type is a set
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-set-is-local-discrete-Premetric :
+    is-local-Premetric (discrete-Premetric A) → is-set A
+  is-set-is-local-discrete-Premetric =
+    ( is-set-has-extensional-Premetric (discrete-Premetric A)) ∘
+    ( pair (is-reflexive-discrete-Premetric A))
+
+  is-local-is-set-discrete-Premetric :
+    is-set A → is-local-Premetric (discrete-Premetric A)
+  is-local-is-set-discrete-Premetric H =
+    is-local-is-tight-Premetric
+      ( discrete-Premetric A)
+      ( λ x y I → rec-trunc-Prop (Id-Prop (A , H) x y) id (I one-ℚ⁺))
 ```
 
 ### Any type has a unique reflexive discrete premetric
