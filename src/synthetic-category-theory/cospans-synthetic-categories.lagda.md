@@ -5,6 +5,7 @@
 
 module synthetic-category-theory.cospans-synthetic-categories where
 ```
+
 <details><summary>Imports</summary>
 
 ```agda
@@ -16,6 +17,8 @@ open import structured-types.globular-types
 
 open import synthetic-category-theory.synthetic-categories
 ```
+
+</details>
 
 ## Idea
 
@@ -34,7 +37,7 @@ module _
 
   cospan-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
-    (C E D : category-Synthetic-Category-Theory κ ) → UU l
+    (C E D : category-Synthetic-Category-Theory κ) → UU l
   cospan-Synthetic-Category-Theory κ C E D =
     Σ ( functor-Synthetic-Category-Theory κ C E)
       λ f → functor-Synthetic-Category-Theory κ D E
@@ -163,7 +166,8 @@ module _
       functor-Synthetic-Category-Theory κ
         ( right-source-cospan-Synthetic-Category-Theory κ S)
         ( right-source-cospan-Synthetic-Category-Theory κ S')
-  right-map-transformation-cospan-Synthetic-Category-Theory κ μ H = pr1 (pr2 (pr2 H))
+  right-map-transformation-cospan-Synthetic-Category-Theory κ μ H =
+    pr1 (pr2 (pr2 H))
 
   middle-map-transformation-cospan-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
@@ -189,7 +193,8 @@ module _
         ( middle-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
         ( left-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
         ( left-map-cospan-Synthetic-Category-Theory κ S')
-  left-commuting-square-transformation-cospan-Synthetic-Category-Theory κ μ H = pr1 (pr2 (pr2 (pr2 H)))
+  left-commuting-square-transformation-cospan-Synthetic-Category-Theory κ μ H =
+    pr1 (pr2 (pr2 (pr2 H)))
 
   right-commuting-square-transformation-cospan-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
@@ -203,5 +208,6 @@ module _
         ( middle-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
         ( right-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
         ( right-map-cospan-Synthetic-Category-Theory κ S')
-  right-commuting-square-transformation-cospan-Synthetic-Category-Theory κ μ H = pr2 (pr2 (pr2 (pr2 H)))
+  right-commuting-square-transformation-cospan-Synthetic-Category-Theory κ μ H =
+    pr2 (pr2 (pr2 (pr2 H)))
 ```

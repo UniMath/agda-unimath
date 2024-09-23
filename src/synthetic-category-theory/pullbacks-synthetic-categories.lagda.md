@@ -20,10 +20,12 @@ open import synthetic-category-theory.cospans-synthetic-categories
 open import synthetic-category-theory.cone-diagrams-synthetic-categories
 ```
 
+</details>
+
 ## Idea
 
-The pullback of a cospan S is a cone diagram cᵤ = (pr₀, pr₁, τᵤ) over S with apex P
-that is universal in the sense that:
+The pullback of a cospan S is a cone diagram cᵤ = (pr₀, pr₁, τᵤ) over S with
+apex P that is universal in the sense that:
 
 ```text
 1) for every cone diagram c = (t₀, t₁, τ) over S with apex T there exists a functor
@@ -105,7 +107,7 @@ module _
 open pullback-Synthetic-Category-Theory public
 ```
 
-## The left and right projection maps with domain the apex of the pullback cone.
+## The left and right projection maps with domain the apex of the pullback cone
 
 ```agda
 module _
@@ -161,9 +163,9 @@ module _
 
 ### Functoriality of pullbacks
 
-Taking pullbacks is functorial in the sense that given cospans S and S'
-and a transformations of cospans S → S', there exists a preffered functor
-between the pullback of S and the pullback of S'.
+Taking pullbacks is functorial in the sense that given cospans S and S' and a
+transformations of cospans S → S', there exists a preffered functor between the
+pullback of S and the pullback of S'.
 
 ```agda
 module _
@@ -207,7 +209,7 @@ module _
         ( comp-iso-Synthetic-Category-Theory μ
           ( horizontal-comp-iso-Synthetic-Category-Theory Χ
             ( left-commuting-square-transformation-cospan-Synthetic-Category-Theory
-               κ μ H)
+              κ μ H)
             ( id-iso-Synthetic-Category-Theory ι
               ( left-map-pullback-Synthetic-Category-Theory κ μ PB S)))
           ( comp-iso-Synthetic-Category-Theory μ
@@ -232,7 +234,7 @@ module _
                   ( horizontal-comp-iso-Synthetic-Category-Theory Χ
                     ( inv-iso-Synthetic-Category-Theory ν
                       ( right-commuting-square-transformation-cospan-Synthetic-Category-Theory
-                         κ μ H))
+                        κ μ H))
                     ( id-iso-Synthetic-Category-Theory ι
                       ( right-map-cone-diagram-Synthetic-Category-Theory κ μ
                         ( cone-diagram-pullback-Synthetic-Category-Theory PB S))))

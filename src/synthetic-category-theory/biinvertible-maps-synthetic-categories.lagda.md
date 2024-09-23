@@ -15,17 +15,17 @@ open import foundation.universe-levels
 
 open import structured-types.globular-types
 
-open import synthetic-category-theory.synthetic-categories
-open import synthetic-category-theory.sections-synthetic-categories
 open import synthetic-category-theory.retractions-synthetic-categories
+open import synthetic-category-theory.sections-synthetic-categories
+open import synthetic-category-theory.synthetic-categories
 ```
 
 </details>
 
 ## Idea
 
-A functor f: A → B is biinvertible if it has a section and a retraction.
-Note that in this library, biinvertible maps are usually called equivalences.
+A functor f: A → B is biinvertible if it has a section and a retraction. Note
+that in this library, biinvertible maps are usually called equivalences.
 
 ### The predicate of being biinvertible
 

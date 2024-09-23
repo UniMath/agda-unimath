@@ -19,10 +19,13 @@ open import synthetic-category-theory.synthetic-categories
 open import synthetic-category-theory.cospans-synthetic-categories
 ```
 
+</details>
+
 ## Idea
 
-A cone diagram over a cospan D --g--> E <--f-- C with an apex T is a pair of functors
-p : T → C and r : T → D that assemble into a commutative square of the form:
+A cone diagram over a cospan D --g--> E <--f-- C with an apex T is a pair of
+functors p : T → C and r : T → D that assemble into a commutative square of the
+form:
 
 ```text
 T --p--> C
@@ -116,9 +119,9 @@ module _
 
 ### Isomorphisms of cone diagrams
 
-An isomorphism between cone diagrams c = (tl, tr, τ) and c' = (tl', tr', τ')
-is a pair of natural isomorphisms φl : tl ≅ tl' and φr : tr ≅ tr' together with
-an isomorphism H : τ ≅ τ'.
+An isomorphism between cone diagrams c = (tl, tr, τ) and c' = (tl', tr', τ') is
+a pair of natural isomorphisms φl : tl ≅ tl' and φr : tr ≅ tr' together with an
+isomorphism H : τ ≅ τ'.
 
 ```agda
   iso-of-cone-diagrams-Synthetic-Category-Theory :
@@ -217,9 +220,9 @@ an isomorphism H : τ ≅ τ'.
 
 ## Isomorphisms of isomorphisms of cone diagrams
 
-If ϕ = (φl, φr, H) and Ψ = (ψl, ψr, K) are two isomorphisms between cone diagrams
-c and c', an isomorphism between them is a pair of isomorphisms φl ≅ ψl and φr ≅ ψr
-under which H becomes isomorphic to K.
+If ϕ = (φl, φr, H) and Ψ = (ψl, ψr, K) are two isomorphisms between cone
+diagrams c and c', an isomorphism between them is a pair of isomorphisms φl ≅ ψl
+and φr ≅ ψr under which H becomes isomorphic to K.
 
 ```agda
   iso-of-isos-of-cone-diagrams-Synthetic-Category-Theory :
@@ -305,8 +308,9 @@ under which H becomes isomorphic to K.
 
 ## Induced cones
 
-Given a cone c = (tl, tr, τ) over S with apex T and a functor s : R → T we construct
-an induced cone over S with apex R, defined as s*(c) = (tl∘s, tr∘s, τ*idₛ).
+Given a cone c = (tl, tr, τ) over S with apex T and a functor s : R → T we
+construct an induced cone over S with apex R, defined as
+s*(c) = (tl∘s, tr∘s, τ*idₛ).
 
 ```agda
 module _
@@ -353,7 +357,8 @@ module _
 ## Induced isomorphisms of cone diagrams
 
 Given a cone over S with apex T and two functors s, t : R → T together with an
-isomorphism s ≅ t, we construct an isomorphism of cone diagrams between s*(c) and t*(c).
+isomorphism s ≅ t, we construct an isomorphism of cone diagrams between s*(c)
+and t*(c).
 
 ```agda
 module _

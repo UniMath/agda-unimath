@@ -22,8 +22,8 @@ open import synthetic-category-theory.synthetic-categories
 
 ## Idea
 
-A section of a functor f: A → B is a functor g: B → A equipped
-with a natural isomorphism f∘g ≅ id.
+A section of a functor f: A → B is a functor g: B → A equipped with a natural
+isomorphism f∘g ≅ id.
 
 ### The predicate of being a section of a functor f: A → B
 
@@ -42,7 +42,7 @@ module _
   is-section-Synthetic-Category-Theory κ μ ι f s =
     isomorphism-Synthetic-Category-Theory κ
       ( comp-functor-Synthetic-Category-Theory μ f s)
-      ( id-functor-Synthetic-Category-Theory ι _ )
+      ( id-functor-Synthetic-Category-Theory ι _)
 ```
 
 ### The type of sections of a funcor f: A → B

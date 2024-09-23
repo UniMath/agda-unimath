@@ -15,20 +15,20 @@ open import foundation.universe-levels
 
 open import structured-types.globular-types
 
-open import synthetic-category-theory.synthetic-categories
-open import synthetic-category-theory.sections-synthetic-categories
-open import synthetic-category-theory.retractions-synthetic-categories
 open import synthetic-category-theory.biinvertible-maps-synthetic-categories
+open import synthetic-category-theory.retractions-synthetic-categories
+open import synthetic-category-theory.sections-synthetic-categories
+open import synthetic-category-theory.synthetic-categories
 ```
 
 </details>
 
 ## Idea
 
-A functor f: A → B is an equivalence if it has an inverse, i.e. if there exists a functor
-g: B → A and natural isomorphisms g∘f ≅ id and g∘f ≅ id. Note that this definition differs
-from the convention in the rest of this library, where equivalences are defined as biinvertible maps.
-
+A functor f: A → B is an equivalence if it has an inverse, i.e. if there exists
+a functor g: B → A and natural isomorphisms g∘f ≅ id and g∘f ≅ id. Note that
+this definition differs from the convention in the rest of this library, where
+equivalences are defined as biinvertible maps.
 
 ### The predicate of being an inverse to a functor f: A → B
 
@@ -167,7 +167,6 @@ module _
 ```
 
 ### A functor f : C → D admits is biinvertible iff it is an equivalence
-
 
 ```agda
 module _

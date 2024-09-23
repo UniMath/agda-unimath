@@ -107,7 +107,7 @@ module _
   functor-Synthetic-Category-Theory = 1-cell-Globular-Type
 ```
 
-#### The source and target of a functor.
+#### The source and target of a functor
 
 ```agda
 module _
@@ -128,8 +128,6 @@ module _
       category-Synthetic-Category-Theory κ
   target-functor-Synthetic-Category-Theory κ {D = D} f = D
 ```
-
-
 
 #### The globular type of functors between categories
 
