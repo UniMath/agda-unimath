@@ -90,11 +90,11 @@ module _
   (E : is-equiv (map-isometry-Metric-Space A B f))
   where
 
-  is-iso-precategory-is-equiv-isometry-Metric-Space :
+  is-iso-is-equiv-isometry-Metric-Space :
     is-iso-Precategory precategory-isometry-Metric-Space {A} {B} f
-  pr1 is-iso-precategory-is-equiv-isometry-Metric-Space =
+  pr1 is-iso-is-equiv-isometry-Metric-Space =
     isometry-inv-is-equiv-isometry-Metric-Space A B f E
-  pr2 is-iso-precategory-is-equiv-isometry-Metric-Space =
+  pr2 is-iso-is-equiv-isometry-Metric-Space =
     ( is-section-isometry-inv-is-equiv-isometry-Metric-Space A B f E) ,
     ( is-retraction-isometry-inv-is-equiv-isometry-Metric-Space A B f E)
 ```
@@ -126,23 +126,7 @@ module _
           ( is-equiv-Prop
             ( map-isometry-Metric-Space A B f))
           ( is-equiv-is-iso-isometry-Metric-Space A B f)
-          ( is-iso-precategory-is-equiv-isometry-Metric-Space A B f))
-```
-
-### Isomorphism in the precategory of metric spaces and isometries is torsorial
-
-```agda
-module _
-  {l1 l2 : Level} (A : Metric-Space l1 l2)
-  where
-
-  is-torsorial-iso-precategory-isometry-Metric-Space :
-    is-torsorial (iso-Precategory precategory-isometry-Metric-Space A)
-  is-torsorial-iso-precategory-isometry-Metric-Space =
-    is-contr-equiv
-      ( Σ (Metric-Space l1 l2) (isometric-is-equiv-Metric-Space A))
-      ( equiv-tot (equiv-iso-isometric-is-equiv-Metric-Space A))
-      ( is-torsorial-isometric-is-equiv-Metric-Space A)
+          ( is-iso-is-equiv-isometry-Metric-Space A B f))
 ```
 
 ## See also

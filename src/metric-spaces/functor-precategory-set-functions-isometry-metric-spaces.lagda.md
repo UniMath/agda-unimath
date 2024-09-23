@@ -99,7 +99,7 @@ module _
       (functor-precategory-set-functions-isometry-Metric-Space l1 l2)
   is-conservative-functor-precategory-set-functions-isometry-Metric-Space
     {A} {B} f =
-    ( is-iso-precategory-is-equiv-isometry-Metric-Space A B f) ∘
+    ( is-iso-is-equiv-isometry-Metric-Space A B f) ∘
     ( is-equiv-is-iso-Set
       ( set-Metric-Space A)
       ( set-Metric-Space B))

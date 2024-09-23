@@ -119,7 +119,7 @@ module _
       (precategory-short-function-Metric-Space)
       (functor-precategory-short-isometry-Metric-Space l1 l2)
   is-conservative-functor-precategory-short-isometry-Metric-Space {A} {B} f H =
-    is-iso-precategory-is-equiv-isometry-Metric-Space
+    is-iso-is-equiv-isometry-Metric-Space
       ( A)
       ( B)
       ( f)

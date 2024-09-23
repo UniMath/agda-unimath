@@ -250,24 +250,6 @@ module _
       ( is-iso-Precategory precategory-short-function-Metric-Space {A} {B})
 ```
 
-### Isomorphism in the precategory of metric spaces and short maps is torsorial
-
-```agda
-module _
-  {l1 l2 : Level} (A : Metric-Space l1 l2)
-  where
-
-  is-torsorial-iso-short-function-Metric-Space :
-    is-torsorial (iso-Precategory precategory-short-function-Metric-Space A)
-  is-torsorial-iso-short-function-Metric-Space =
-    is-contr-equiv
-      ( Σ (Metric-Space l1 l2) (isometric-is-equiv-Metric-Space A))
-      ( equiv-tot
-        ( equiv-isometric-is-equiv-iso-short-function-Metric-Space
-          ( A)))
-      ( is-torsorial-isometric-is-equiv-Metric-Space A)
-```
-
 ## See also
 
 - The
