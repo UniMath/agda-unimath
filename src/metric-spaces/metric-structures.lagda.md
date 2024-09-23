@@ -30,8 +30,9 @@ open import metric-spaces.triangular-premetric-structures
 
 A [premetric structure](metric-spaces.metric-structures.md) is a
 {{#concept "metric" Disambiguation="premetric structure" Agda=is-metric-Premetric}}
-if it is a local [pseudometric](metric-spaces.pseudometric-spaces.md), i.e. if
-it is [reflexive](metric-spaces.reflexive-premetric-structures.md),
+if it is a [local](metric-spaces.extensional-premetric-structures.md)
+[pseudometric](metric-spaces.pseudometric-spaces.md), i.e. if it is
+[reflexive](metric-spaces.reflexive-premetric-structures.md),
 [symmetric](metric-spaces.symmetric-premetric-structures.md),
 [triangular](metric-spaces.triangular-premetric-structures.md), and
 [local](metric-spaces.extensional-premetric-structures.md).
