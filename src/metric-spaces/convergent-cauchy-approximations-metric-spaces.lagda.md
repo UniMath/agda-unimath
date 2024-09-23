@@ -58,7 +58,7 @@ module _
           ( is-limit-cauchy-approximation-prop-Premetric-Space
             ( premetric-Metric-Space A)
             ( f))
-          ( all-eq-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premertric-Space
+          ( all-elements-equal-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premertric-Space
             ( premetric-Metric-Space A)
             ( is-symmetric-structure-Metric-Space A)
             ( is-triangular-structure-Metric-Space A)
