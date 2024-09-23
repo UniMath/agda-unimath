@@ -48,7 +48,7 @@ cannot possibly hit. This subtype is defined by
 ```
 
 which is given formally by the predicate `x ↦ ¬ (f x x)`. If this subtype were
-to be hit by `f`, that would mean there is an `ξ ∈ A` such that `f(ξ) = B`. This
+to be hit by `f`, that would mean there is a `ξ ∈ A` such that `f(ξ) = B`. This
 would have to be a fixed point of the negation operation, since
 
 ```text
