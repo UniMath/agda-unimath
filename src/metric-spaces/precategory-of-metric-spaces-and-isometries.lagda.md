@@ -74,13 +74,11 @@ module _
   is-equiv-is-iso-isometry-Metric-Space :
     is-iso-Precategory precategory-isometry-Metric-Space {A} {B} f →
     is-equiv (map-isometry-Metric-Space A B f)
-  is-equiv-is-iso-isometry-Metric-Space =
-    rec-Σ
-      ( λ g H →
-        is-equiv-is-invertible
-          ( map-isometry-Metric-Space B A g)
-          ( htpy-eq (ap (map-isometry-Metric-Space B B) (pr1 H)))
-          ( htpy-eq (ap (map-isometry-Metric-Space A A) (pr2 H))))
+  is-equiv-is-iso-isometry-Metric-Space (g , H) =
+    is-equiv-is-invertible
+      ( map-isometry-Metric-Space B A g)
+      ( htpy-eq (ap (map-isometry-Metric-Space B B) (pr1 H)))
+      ( htpy-eq (ap (map-isometry-Metric-Space A A) (pr2 H)))
 ```
 
 ### Isometric equivalences are isomorphisms in the precategory of metric spaces and isometries
