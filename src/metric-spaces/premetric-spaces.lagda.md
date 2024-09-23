@@ -14,6 +14,7 @@ open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import metric-spaces.discrete-premetric-structures
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.monotonic-premetric-structures
 open import metric-spaces.premetric-structures
@@ -109,4 +110,15 @@ module _
 
   id-Premetric-Space : function-carrier-type-Premetric-Space A A
   id-Premetric-Space = id
+```
+
+### Any type is a discrete premetric space
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
+  discrete-Premetric-Space : Premetric-Space l l
+  discrete-Premetric-Space = A , premetric-discrete-Premetric A
 ```

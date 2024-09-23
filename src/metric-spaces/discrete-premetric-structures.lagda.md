@@ -101,39 +101,140 @@ module _
     is-prop-type-Prop is-discrete-prop-Premetric
 ```
 
-### The cannonical discrete premetric on a type
+### The type of discrete premetrics on a type
+
+```agda
+module _
+  {l1 : Level} (l2 : Level) (A : UU l1)
+  where
+
+  Discrete-Premetric : UU (l1 ⊔ lsuc l2)
+  Discrete-Premetric = Σ (Premetric l2 A) is-discrete-Premetric
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Discrete-Premetric l2 A)
+  where
+
+  premetric-Discrete-Premetric : Premetric l2 A
+  premetric-Discrete-Premetric = pr1 B
+
+  is-discrete-premetric-Discrete-Premetric :
+    is-discrete-Premetric premetric-Discrete-Premetric
+  is-discrete-premetric-Discrete-Premetric = pr2 B
+
+  is-reflexive-premetric-Discrete-Premetric :
+    is-reflexive-Premetric premetric-Discrete-Premetric
+  is-reflexive-premetric-Discrete-Premetric =
+    pr1 is-discrete-premetric-Discrete-Premetric
+
+  is-semidiscrete-premetric-Discrete-Premetric :
+    is-semidiscrete-Premetric premetric-Discrete-Premetric
+  is-semidiscrete-premetric-Discrete-Premetric =
+    pr2 is-discrete-premetric-Discrete-Premetric
+```
+
+### The canonical discrete premetric on a type
 
 ```agda
 module _
   {l1 : Level} (A : UU l1)
   where
 
-  discrete-Premetric : Premetric l1 A
-  discrete-Premetric d x y = trunc-Prop (x ＝ y)
+  premetric-discrete-Premetric : Premetric l1 A
+  premetric-discrete-Premetric d x y = trunc-Prop (x ＝ y)
 
-  is-discrete-discrete-Premetric :
-    is-discrete-Premetric discrete-Premetric
-  is-discrete-discrete-Premetric =
+  is-discrete-premetric-discrete-Premetric :
+    is-discrete-Premetric premetric-discrete-Premetric
+  is-discrete-premetric-discrete-Premetric =
     (λ x d → unit-trunc-Prop refl) ,
     (λ d x y → id)
+
+  discrete-Premetric : Discrete-Premetric l1 A
+  discrete-Premetric =
+    premetric-discrete-Premetric ,
+    is-discrete-premetric-discrete-Premetric
 ```
 
 ## Properties
 
-### The standard discrete premetric on a type is reflexive
+### Unicity of discrete premetric structures
+
+#### Any discrete premetric on a type is equivalent to the canonical discrete premetric
 
 ```agda
 module _
-  {l : Level} (A : UU l)
+  {l1 l2 : Level} {A : UU l1} (B : Discrete-Premetric l2 A)
+  (d : ℚ⁺) (x y : A)
   where
 
-  is-reflexive-discrete-Premetric :
-    is-reflexive-Premetric (discrete-Premetric A)
-  is-reflexive-discrete-Premetric d x =
-    unit-trunc-Prop refl
+  iff-premetric-discrete-Discrete-Premetric :
+    type-iff-Prop
+      ( premetric-Discrete-Premetric B d x y)
+      ( premetric-discrete-Premetric A d x y)
+  iff-premetric-discrete-Discrete-Premetric =
+    ( is-semidiscrete-premetric-Discrete-Premetric B d x y) ,
+    ( rec-trunc-Prop
+      ( premetric-Discrete-Premetric B d x y)
+      ( λ e →
+        indistinguishable-eq-reflexive-Premetric
+          ( premetric-Discrete-Premetric B)
+          ( is-reflexive-premetric-Discrete-Premetric B)
+          ( e)
+          ( d)))
 ```
 
-### The standard discrete premetric on a type is symmetric
+#### Any two discrete premetrics on a type are equivalent
+
+```agda
+module _
+  {la lb lc : Level} {A : UU la}
+  (B : Discrete-Premetric lb A) (C : Discrete-Premetric lc A)
+  (d : ℚ⁺) (x y : A)
+  where
+
+  iff-premetric-Discrete-Premetric :
+    type-iff-Prop
+      ( premetric-Discrete-Premetric B d x y)
+      ( premetric-Discrete-Premetric C d x y)
+  iff-premetric-Discrete-Premetric =
+    ( inv-iff (iff-premetric-discrete-Discrete-Premetric C d x y)) ∘iff
+    ( iff-premetric-discrete-Discrete-Premetric B d x y)
+```
+
+#### Any two discrete premetrics on a type are equal
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B B' : Discrete-Premetric l2 A)
+  where
+
+  all-elements-equal-Discrete-Premetric : B ＝ B'
+  all-elements-equal-Discrete-Premetric =
+    eq-type-subtype
+      ( is-discrete-prop-Premetric)
+      ( eq-Eq-Premetric
+        ( premetric-Discrete-Premetric B)
+        ( premetric-Discrete-Premetric B')
+        ( iff-premetric-Discrete-Premetric B B'))
+```
+
+#### The type of discrete premetric structures on a type is a proposition
+
+```agda
+module _
+  {l1 : Level} (l2 : Level) (A : UU l1)
+  where
+
+  is-prop-Discrete-Premetric : is-prop (Discrete-Premetric l2 A)
+  is-prop-Discrete-Premetric =
+    is-prop-all-elements-equal all-elements-equal-Discrete-Premetric
+```
+
+### Properties of the canonical discrete premetric
+
+#### The canonical discrete premetric on a type is symmetric
 
 ```agda
 module _
@@ -141,14 +242,14 @@ module _
   where
 
   is-symmetric-discrete-Premetric :
-    is-symmetric-Premetric (discrete-Premetric A)
+    is-symmetric-Premetric (premetric-discrete-Premetric A)
   is-symmetric-discrete-Premetric d x y =
     rec-trunc-Prop
       ( trunc-Prop (y ＝ x))
       ( unit-trunc-Prop ∘ inv)
 ```
 
-### The standard discrete premetric on a type is triangular
+#### The canonical discrete premetric on a type is triangular
 
 ```agda
 module _
@@ -156,7 +257,7 @@ module _
   where
 
   is-triangular-discrete-Premetric :
-    is-triangular-Premetric (discrete-Premetric A)
+    is-triangular-Premetric (premetric-discrete-Premetric A)
   is-triangular-discrete-Premetric x y z d₁ d₂ H =
     rec-trunc-Prop
       ( trunc-Prop (x ＝ z))
@@ -167,7 +268,7 @@ module _
           ( H))
 ```
 
-### Neighbors in the discrete premetric are indistinguishable
+#### Neighbors in the canonical discrete premetric are indistinguishable
 
 ```agda
 module _
@@ -175,12 +276,12 @@ module _
   where
 
   is-indistinguishable-is-in-neighborhood-discrete-Premetric :
-    neighborhood-Premetric (discrete-Premetric A) d x y →
-    is-indistinguishable-Premetric (discrete-Premetric A) x y
+    neighborhood-Premetric (premetric-discrete-Premetric A) d x y →
+    is-indistinguishable-Premetric (premetric-discrete-Premetric A) x y
   is-indistinguishable-is-in-neighborhood-discrete-Premetric H d = H
 ```
 
-### The discrete premetric on a type is local if and only if this type is a set
+#### The canonical discrete premetric on a type is local if and only if this type is a set
 
 ```agda
 module _
@@ -188,45 +289,15 @@ module _
   where
 
   is-set-is-local-discrete-Premetric :
-    is-local-Premetric (discrete-Premetric A) → is-set A
+    is-local-Premetric (premetric-discrete-Premetric A) → is-set A
   is-set-is-local-discrete-Premetric =
-    ( is-set-has-extensional-Premetric (discrete-Premetric A)) ∘
-    ( pair (is-reflexive-discrete-Premetric A))
+    ( is-set-has-extensional-Premetric (premetric-discrete-Premetric A)) ∘
+    ( pair (is-reflexive-premetric-Discrete-Premetric (discrete-Premetric A)))
 
   is-local-is-set-discrete-Premetric :
-    is-set A → is-local-Premetric (discrete-Premetric A)
+    is-set A → is-local-Premetric (premetric-discrete-Premetric A)
   is-local-is-set-discrete-Premetric H =
     is-local-is-tight-Premetric
-      ( discrete-Premetric A)
+      ( premetric-discrete-Premetric A)
       ( λ x y I → rec-trunc-Prop (Id-Prop (A , H) x y) id (I one-ℚ⁺))
-```
-
-### Any type has a unique reflexive discrete premetric
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  eq-discrete-is-discrete-Premetric :
-    (B : Premetric l A) (D : is-discrete-Premetric B) →
-    ((discrete-Premetric A) ＝ B)
-  eq-discrete-is-discrete-Premetric B D =
-    eq-Eq-Premetric
-      ( discrete-Premetric A)
-      ( B)
-      ( λ d x y →
-        ( ( rec-trunc-Prop
-            ( B d x y)
-            ( λ e → indistinguishable-eq-reflexive-Premetric B (pr1 D) e d)) ,
-          ( pr2 D d x y)))
-
-  is-contr-discrete-Premetric :
-    is-contr (Σ (Premetric l A) (is-discrete-Premetric))
-  is-contr-discrete-Premetric =
-    ( discrete-Premetric A , is-discrete-discrete-Premetric A) ,
-    ( λ (B , H) →
-      eq-type-subtype
-        ( is-discrete-prop-Premetric)
-        ( eq-discrete-is-discrete-Premetric B H))
 ```

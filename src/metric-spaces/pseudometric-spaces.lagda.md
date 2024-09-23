@@ -199,7 +199,7 @@ module _
   where
 
   discrete-Pseudometric-Space : Pseudometric-Space l l
-  pr1 discrete-Pseudometric-Space = A , discrete-Premetric A
+  pr1 discrete-Pseudometric-Space = discrete-Premetric-Space A
   pr2 discrete-Pseudometric-Space = is-pseudometric-discrete-Premetric
 ```
 

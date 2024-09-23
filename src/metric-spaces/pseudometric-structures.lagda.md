@@ -85,9 +85,9 @@ module _
   where
 
   is-pseudometric-discrete-Premetric :
-    is-pseudometric-Premetric (discrete-Premetric A)
+    is-pseudometric-Premetric (premetric-discrete-Premetric A)
   is-pseudometric-discrete-Premetric =
-    is-reflexive-discrete-Premetric A ,
+    is-reflexive-premetric-Discrete-Premetric (discrete-Premetric A) ,
     is-symmetric-discrete-Premetric A ,
     is-triangular-discrete-Premetric A
 ```
