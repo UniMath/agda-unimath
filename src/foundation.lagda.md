@@ -44,7 +44,7 @@ open import foundation.binary-transport public
 open import foundation.binary-type-duality public
 open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public
-open import foundation.cantors-diagonal-argument public
+open import foundation.cantors-theorem public
 open import foundation.cartesian-morphisms-arrows public
 open import foundation.cartesian-morphisms-span-diagrams public
 open import foundation.cartesian-product-types public

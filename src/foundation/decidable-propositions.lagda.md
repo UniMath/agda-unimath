@@ -257,17 +257,6 @@ pr1 (decidable-Prop-𝔽 l) = Decidable-Prop l
 pr2 (decidable-Prop-𝔽 l) = is-finite-Decidable-Prop
 ```
 
-### The negation of a decidable proposition is a decidable proposition
-
-```agda
-neg-Decidable-Prop :
-  {l : Level} → Decidable-Prop l → Decidable-Prop l
-pr1 (neg-Decidable-Prop P) = ¬ (type-Decidable-Prop P)
-pr1 (pr2 (neg-Decidable-Prop P)) = is-prop-neg
-pr2 (pr2 (neg-Decidable-Prop P)) =
-  is-decidable-neg (is-decidable-Decidable-Prop P)
-```
-
 ### Decidable propositions are closed under retracts
 
 ```agda
@@ -297,4 +286,15 @@ module _
     B ≃ A → is-decidable-prop B → is-decidable-prop A
   is-decidable-prop-equiv' e =
     is-decidable-prop-retract-of (retract-inv-equiv e)
+```
+
+### Negation has no fixed points on decidable propositions
+
+```agda
+abstract
+  no-fixed-points-neg-Decidable-Prop :
+    {l : Level} (P : Decidable-Prop l) →
+    ¬ (type-Decidable-Prop P ↔ ¬ (type-Decidable-Prop P))
+  no-fixed-points-neg-Decidable-Prop P =
+    no-fixed-points-neg (type-Decidable-Prop P)
 ```
