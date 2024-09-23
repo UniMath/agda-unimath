@@ -42,7 +42,7 @@ pr2 (truncated-type-Prop k P) = is-trunc-is-prop k (is-prop-type-Prop P)
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (B : UU l2)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-prop-retract-of : A retract-of B → is-prop B → is-prop A

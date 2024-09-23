@@ -122,7 +122,7 @@ module _
     (κ : language-Synthetic-Category-Theory l) →
     (C D : category-Synthetic-Category-Theory κ) → Globular-Type l l
   functor-globular-type-Synthetic-Category-Theory =
-    globular-type-1-cell-Globular-Type
+    1-cell-globular-type-Globular-Type
 ```
 
 #### The sort of isomorphisms between functors in the language of synthetic category theory
@@ -141,6 +141,30 @@ module _
     {C D : category-Synthetic-Category-Theory κ}
     (F G : functor-Synthetic-Category-Theory κ C D) → UU l
   isomorphism-Synthetic-Category-Theory = 2-cell-Globular-Type
+```
+
+#### Inverses of isomorphisms
+
+Isomorphisms between functors, as well as higher isomorphisms, are invertible.
+
+```agda
+module _
+  {l : Level}
+  where
+
+  record
+    inverse-Synthetic-Category-Theory
+      (κ : language-Synthetic-Category-Theory l) : UU l
+    where
+    coinductive
+    field
+      inv-iso-Synthetic-Category-Theory :
+        {C D : category-Synthetic-Category-Theory κ} →
+        {F G : functor-Synthetic-Category-Theory κ C D} →
+        (isomorphism-Synthetic-Category-Theory κ F G) →
+        (isomorphism-Synthetic-Category-Theory κ G F)
+
+  open inverse-Synthetic-Category-Theory public
 ```
 
 #### The structure of identity morphisms in the language of synthetic category theory
@@ -610,7 +634,3 @@ module _
             ( α))
           ( associative-comp-functor-Synthetic-Category-Theory η H' G' F')
 ```
-
-## References
-
-{{#bibliography}}

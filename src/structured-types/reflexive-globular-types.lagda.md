@@ -101,6 +101,81 @@ reflexive-globular-structure l2 A =
   Σ (globular-structure l2 A) (is-reflexive-globular-structure)
 ```
 
+### Reflexivity structure on a globular type
+
+```agda
+module _
+  {l1 l2 : Level} (G : Globular-Type l1 l2)
+  where
+
+  is-reflexive-Globular-Type : UU (l1 ⊔ l2)
+  is-reflexive-Globular-Type =
+    is-reflexive-globular-structure (globular-structure-0-cell-Globular-Type G)
+```
+
+### Reflexive globular types
+
+```agda
+record
+  Reflexive-Globular-Type (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
+  where
+
+  field
+    globular-type-Reflexive-Globular-Type : Globular-Type l1 l2
+
+  0-cell-Reflexive-Globular-Type : UU l1
+  0-cell-Reflexive-Globular-Type =
+    0-cell-Globular-Type globular-type-Reflexive-Globular-Type
+
+  1-cell-Reflexive-Globular-Type :
+    0-cell-Reflexive-Globular-Type → 0-cell-Reflexive-Globular-Type → UU l2
+  1-cell-Reflexive-Globular-Type =
+    1-cell-Globular-Type globular-type-Reflexive-Globular-Type
+
+  2-cell-Reflexive-Globular-Type :
+    {x x' : 0-cell-Reflexive-Globular-Type}
+    (y y' : 1-cell-Reflexive-Globular-Type x x') → UU l2
+  2-cell-Reflexive-Globular-Type =
+    2-cell-Globular-Type globular-type-Reflexive-Globular-Type
+
+  globular-structure-Reflexive-Globular-Type :
+    globular-structure l2 0-cell-Reflexive-Globular-Type
+  globular-structure-Reflexive-Globular-Type =
+    globular-structure-0-cell-Globular-Type
+      ( globular-type-Reflexive-Globular-Type)
+
+  field
+    refl-Reflexive-Globular-Type :
+      is-reflexive-globular-structure globular-structure-Reflexive-Globular-Type
+
+  refl-0-cell-Reflexive-Globular-Type :
+    {x : 0-cell-Reflexive-Globular-Type} →
+    1-cell-Reflexive-Globular-Type x x
+  refl-0-cell-Reflexive-Globular-Type =
+    is-reflexive-1-cell-is-reflexive-globular-structure
+      ( refl-Reflexive-Globular-Type)
+      ( _)
+
+  1-cell-globular-type-Reflexive-Globular-Type :
+    (x y : 0-cell-Reflexive-Globular-Type) → Globular-Type l2 l2
+  1-cell-globular-type-Reflexive-Globular-Type =
+    1-cell-globular-type-Globular-Type globular-type-Reflexive-Globular-Type
+
+  1-cell-reflexive-globular-type-Reflexive-Globular-Type :
+    (x y : 0-cell-Reflexive-Globular-Type) → Reflexive-Globular-Type l2 l2
+  globular-type-Reflexive-Globular-Type
+    ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type x y) =
+    1-cell-globular-type-Reflexive-Globular-Type x y
+  refl-Reflexive-Globular-Type
+    ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type x y) =
+    is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+      ( refl-Reflexive-Globular-Type)
+      ( x)
+      ( y)
+
+open Reflexive-Globular-Type public
+```
+
 ## Examples
 
 ### The reflexive globular structure on a type given by its identity types
