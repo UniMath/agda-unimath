@@ -66,11 +66,23 @@ the
 ### The standard saturated premetric on the rational numbers
 
 ```agda
+lower-neighborhood-leq-prop-ℚ : (d : ℚ⁺) (x y : ℚ) → Prop lzero
+lower-neighborhood-leq-prop-ℚ d x y =
+  leq-ℚ-Prop y (x +ℚ (rational-ℚ⁺ d))
+
+lower-neighborhood-leq-ℚ : (d : ℚ⁺) (x y : ℚ) → UU lzero
+lower-neighborhood-leq-ℚ d x y = type-Prop (lower-neighborhood-leq-prop-ℚ d x y)
+
+is-prop-lower-neighborhood-leq-ℚ :
+  (d : ℚ⁺) (x y : ℚ) → is-prop (lower-neighborhood-leq-ℚ d x y)
+is-prop-lower-neighborhood-leq-ℚ d x y =
+  is-prop-type-Prop (lower-neighborhood-leq-prop-ℚ d x y)
+
 premetric-leq-ℚ : Premetric lzero ℚ
 premetric-leq-ℚ d x y =
   product-Prop
-    ( leq-ℚ-Prop y (x +ℚ (rational-ℚ⁺ d)))
-    ( leq-ℚ-Prop x (y +ℚ (rational-ℚ⁺ d)))
+    ( lower-neighborhood-leq-prop-ℚ d x y)
+    ( lower-neighborhood-leq-prop-ℚ d y x)
 ```
 
 ## Properties
@@ -185,28 +197,34 @@ is-saturated-metric-space-leq-ℚ ε x y H =
 
 ```agda
 module _
-  (x : ℚ)
+  (x u v : ℚ) (d : ℚ⁺)
   where
 
-  lemma-preserves-neighborhood-add-ℚ :
-    (d : ℚ⁺) (u v : ℚ) (H : leq-ℚ u (v +ℚ rational-ℚ⁺ d)) →
-    leq-ℚ (x +ℚ u) (x +ℚ v +ℚ rational-ℚ⁺ d)
-  lemma-preserves-neighborhood-add-ℚ d u v H =
+  preserves-lower-neighborhood-leq-add-ℚ :
+    lower-neighborhood-leq-ℚ d u v →
+    lower-neighborhood-leq-ℚ d (x +ℚ u) (x +ℚ v)
+  preserves-lower-neighborhood-leq-add-ℚ H =
     inv-tr
-      ( leq-ℚ (x +ℚ u))
-      ( associative-add-ℚ x v (rational-ℚ⁺ d))
+      ( leq-ℚ (x +ℚ v))
+      ( associative-add-ℚ x u (rational-ℚ⁺ d))
       ( preserves-leq-right-add-ℚ
         ( x)
-        ( u)
-        ( v +ℚ rational-ℚ⁺ d)
+        ( v)
+        ( u +ℚ rational-ℚ⁺ d)
         ( H))
 
-  lemma-reflects-neighborhood-add-ℚ :
-    (d : ℚ⁺) (u v : ℚ) (H : leq-ℚ (x +ℚ u) (x +ℚ v +ℚ rational-ℚ⁺ d)) →
-    leq-ℚ u (v +ℚ rational-ℚ⁺ d)
-  lemma-reflects-neighborhood-add-ℚ d u v =
-    reflects-leq-right-add-ℚ x u (v +ℚ rational-ℚ⁺ d) ∘
-    tr (leq-ℚ (x +ℚ u)) (associative-add-ℚ x v (rational-ℚ⁺ d))
+  reflects-lower-neighborhood-leq-add-ℚ :
+    lower-neighborhood-leq-ℚ d (x +ℚ u) (x +ℚ v) →
+    lower-neighborhood-leq-ℚ d u v
+  reflects-lower-neighborhood-leq-add-ℚ =
+    ( reflects-leq-right-add-ℚ x v (u +ℚ rational-ℚ⁺ d)) ∘
+    ( tr (leq-ℚ (x +ℚ v)) (associative-add-ℚ x u (rational-ℚ⁺ d)))
+```
+
+```agda
+module _
+  (x : ℚ)
+  where
 
   is-isometry-add-ℚ :
     is-isometry-Metric-Space
@@ -216,11 +234,11 @@ module _
   is-isometry-add-ℚ d y z =
     pair
       ( map-product
-        ( lemma-preserves-neighborhood-add-ℚ d z y)
-        ( lemma-preserves-neighborhood-add-ℚ d y z))
+        ( preserves-lower-neighborhood-leq-add-ℚ x y z d)
+        ( preserves-lower-neighborhood-leq-add-ℚ x z y d))
       ( map-product
-        ( lemma-reflects-neighborhood-add-ℚ d z y)
-        ( lemma-reflects-neighborhood-add-ℚ d y z))
+        ( reflects-lower-neighborhood-leq-add-ℚ x y z d)
+        ( reflects-lower-neighborhood-leq-add-ℚ x z y d))
 
   is-isometry-add-ℚ' :
     is-isometry-Metric-Space
