@@ -20,6 +20,13 @@ open import synthetic-category-theory.synthetic-categories
 
 </details>
 
+## Idea
+
+A retraction of a functor f: A → B is a functor g: B → A equipped
+with a natural isomorphism g∘f ≅ id.
+
+### The predicate of being a retraction of a functor f: A → B
+
 ```agda
 module _
   {l : Level}
@@ -38,6 +45,8 @@ module _
       ( id-functor-Synthetic-Category-Theory ι _ )
 ```
 
+### The type of retractions of a functor f: A → B
+
 ```agda
 module _
   {l : Level}
@@ -52,7 +61,11 @@ module _
   retraction-Synthetic-Category-Theory κ μ ι f =
     Σ ( functor-Synthetic-Category-Theory κ _ _)
       ( is-retraction-Synthetic-Category-Theory κ μ ι f)
+```
 
+### The components of a retraction
+
+```agda
   map-retraction-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)

@@ -22,6 +22,13 @@ open import synthetic-category-theory.retractions-synthetic-categories
 
 </details>
 
+## Idea
+
+A functor f: A → B is biinvertible if it has a section and a retraction.
+Note that in this library, biinvertible maps are usually called equivalences.
+
+### The predicate of being biinvertible
+
 ```agda
 module _
   {l : Level}
@@ -38,6 +45,8 @@ module _
       ×
     ( retraction-Synthetic-Category-Theory κ μ ι f)
 ```
+
+### The components of a proof of biinvertibility
 
 ```agda
 module _
@@ -65,6 +74,8 @@ module _
   retraction-is-biinv-Synthetic-Category-Theory κ μ ι = pr2
 ```
 
+### The type of biinvertible functors
+
 ```agda
 module _
   {l : Level}
@@ -79,6 +90,8 @@ module _
     Σ ( functor-Synthetic-Category-Theory κ C D)
       ( is-biinv-Synthetic-Category-Theory κ μ ι)
 ```
+
+### The components of a biinvertible functor
 
 ```agda
 module _

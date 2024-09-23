@@ -107,6 +107,30 @@ module _
   functor-Synthetic-Category-Theory = 1-cell-Globular-Type
 ```
 
+#### The source and target of a functor.
+
+```agda
+module _
+  {l : Level}
+  where
+
+  source-functor-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    {C D : category-Synthetic-Category-Theory κ} →
+    functor-Synthetic-Category-Theory κ C D →
+      category-Synthetic-Category-Theory κ
+  source-functor-Synthetic-Category-Theory κ {C = C} f = C
+
+  target-functor-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    {C D : category-Synthetic-Category-Theory κ} →
+    functor-Synthetic-Category-Theory κ C D →
+      category-Synthetic-Category-Theory κ
+  target-functor-Synthetic-Category-Theory κ {D = D} f = D
+```
+
+
+
 #### The globular type of functors between categories
 
 The globular type of functors from `C` to `D` in the language of synthetic
@@ -660,7 +684,7 @@ module _
                 ( associative-comp-functor-Synthetic-Category-Theory α h g f)))))
 ```
 
-#### Commuting squares of isomorphisms in the language of synthetic category theory
+#### Commutative squares of isomorphisms in the language of synthetic category theory
 
 ```agda
 module _

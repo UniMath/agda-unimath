@@ -23,6 +23,15 @@ open import synthetic-category-theory.biinvertible-maps-synthetic-categories
 
 </details>
 
+## Idea
+
+A functor f: A → B is an equivalence if it has an inverse, i.e. if there exists a functor
+g: B → A and natural isomorphisms g∘f ≅ id and g∘f ≅ id. Note that this definition differs
+from the convention in the rest of this library, where equivalences are defined as biinvertible maps.
+
+
+### The predicate of being an inverse to a functor f: A → B
+
 ```agda
 module _
   {l : Level}
@@ -41,6 +50,8 @@ module _
     ( is-retraction-Synthetic-Category-Theory κ μ ι f g)
 ```
 
+### The predicate of being an equivalence
+
 ```agda
 module _
   {l : Level}
@@ -56,7 +67,11 @@ module _
     Σ ( functor-Synthetic-Category-Theory κ _ _)
       λ g →
         ( is-inverse-Synthetic-Category-Theory κ μ ι f g)
+```
 
+### The components of a proof of being an equivalence
+
+```agda
   inverse-is-equiv-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
@@ -151,8 +166,8 @@ module _
     is-retraction-map-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H
 ```
 
-A functor f : C → D admits a section and a retraction iff it is an equivalence
-(Lemma 1.1.6. in the book.)
+### A functor f : C → D admits is biinvertible iff it is an equivalence
+
 
 ```agda
 module _
@@ -170,7 +185,6 @@ module _
   is-biinv-is-equiv-Synthetic-Category-Theory κ μ ι H =
       section-is-equiv-Synthetic-Category-Theory κ μ ι H ,
       retraction-is-equiv-Synthetic-Category-Theory κ μ ι H
-
 
   is-equiv-is-biinv-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
@@ -227,7 +241,7 @@ module _
         ( id-iso-Synthetic-Category-Theory ι _))
 ```
 
-Equivalences are closed under composition (lemma 1.1.8.)
+### Equivalences are closed under composition
 
 ```agda
 module _

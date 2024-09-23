@@ -20,6 +20,12 @@ open import synthetic-category-theory.synthetic-categories
 
 </details>
 
+## Idea
+
+A section of a functor f: A → B is a functor g: B → A equipped
+with a natural isomorphism f∘g ≅ id.
+
+### The predicate of being a section of a functor f: A → B
 
 ```agda
 module _
@@ -39,6 +45,8 @@ module _
       ( id-functor-Synthetic-Category-Theory ι _ )
 ```
 
+### The type of sections of a funcor f: A → B
+
 ```agda
 module _
   {l : Level}
@@ -53,7 +61,11 @@ module _
   section-Synthetic-Category-Theory κ μ ι f =
     Σ ( functor-Synthetic-Category-Theory κ _ _)
       ( is-section-Synthetic-Category-Theory κ μ ι f)
+```
 
+### The components of a section
+
+```agda
   map-section-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
