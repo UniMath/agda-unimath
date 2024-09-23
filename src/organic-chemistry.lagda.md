@@ -1,6 +1,6 @@
-# Organic Chemistry
+# Organic chemistry
 
-## Files in the organic chemistry folder
+## Modules in the organic chemistry namespace
 
 ```agda
 module organic-chemistry where

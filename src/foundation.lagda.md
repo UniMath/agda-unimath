@@ -4,7 +4,7 @@
 {-# OPTIONS --guardedness #-}
 ```
 
-## Files in the foundation folder
+## Modules in the foundation namespace
 
 ```agda
 module foundation where

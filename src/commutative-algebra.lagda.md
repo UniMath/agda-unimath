@@ -1,6 +1,6 @@
 # Commutative algebra
 
-## Files in the commutative algebra folder
+## Modules in the commutative algebra namespace
 
 ```agda
 module commutative-algebra where
