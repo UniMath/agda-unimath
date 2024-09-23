@@ -203,7 +203,7 @@ eq-real-rational-is-rational-ℝ x q H =
             ( λ I H' → ex-falso (pr1 H (le-lower-cut-ℝ x q r I H'))))))
 ```
 
-### The cannonical map from rationals to rational reals
+### The canonical map from rationals to rational reals
 
 ```agda
 rational-real-ℚ : ℚ → Rational-ℝ lzero

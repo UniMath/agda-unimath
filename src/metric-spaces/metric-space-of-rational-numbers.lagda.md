@@ -253,7 +253,7 @@ module _
       ( is-isometry-add-ℚ d y z)
 ```
 
-### The convergent cauchy approximation of the cannonical inclusion of positive rational numbers into the rational numbers
+### The convergent cauchy approximation of the canonical inclusion of positive rational numbers into the rational numbers
 
 ```agda
 is-cauchy-approximation-rational-ℚ⁺ :
