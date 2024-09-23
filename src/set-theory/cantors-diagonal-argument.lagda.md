@@ -49,7 +49,7 @@ of elements from a ([discrete](foundation-core.discrete-types.md)) set with
 [two distinct elements](foundation.pairs-of-distinct-elements.md) are
 [uncountable](set-theory.uncountable-sets.md). The argument first appeared in
 {{#cite Cantor1890/91}}. Although it is not the first uncountability argument to
-be published, Cantor's diagonal argument is the first to employ a proof
+be published, Cantor's diagonal argument is his first to employ a proof
 technique known as _diagonalization_. This proof technique was also used to give
 a generalization of the uncountability result in what is now known as
 [Cantor's theorem](foundation.cantors-theorem.md).
@@ -196,8 +196,5 @@ module _
 
 ## External links
 
-- [Cantor's theorem](https://ncatlab.org/nlab/show/Cantor%27s+theorem) at $n$Lab
-- [Cantor's theorem](https://en.wikipedia.org/wiki/Cantor%27s_theorem) at
-  Wikipedia
-- [Cantor's theorem](https://www.britannica.com/science/Cantors-theorem) at
-  Britannica
+- [Cantor's diagonal argument](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument)
+  at Wikipedia
