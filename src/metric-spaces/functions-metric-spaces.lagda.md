@@ -21,7 +21,8 @@ open import metric-spaces.premetric-spaces
 ## Idea
 
 {{#concept "Functions" Disambiguation="between metric spaces" Agda=function-carrier-type-Metric-Space}}
-between metric spaces are functions between their carrier types.
+between [metric spaces](metric-spaces.metric-spaces.md) are functions between
+their carrier types.
 
 ## Definitions
 
