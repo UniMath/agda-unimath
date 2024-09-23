@@ -41,10 +41,9 @@ A {{#concept "metric space" Agda=Metric-Space WD="metric space" WDID=Q180953}}
 is a [premetric space](metric-spaces.premetric-spaces.md) whose
 [premetric](metric-spaces.premetric-structures.md) is reflexive, symmetric,
 triangular, and local; a [metric structure](metric-spaces.metric-structures.md).
-
 It is equivalent to the type of
 [pseudometric spaces](metric-spaces.pseudometric-spaces.md) whose premetric is
-local.
+[local](metric-spaces.extensional-premetric-structures.md).
 
 ## Definitions
 
