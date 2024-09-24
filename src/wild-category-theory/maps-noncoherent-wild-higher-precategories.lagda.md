@@ -15,7 +15,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.globular-types
-open import structured-types.maps-globular-types
+open import structured-types.globular-maps
 
 open import wild-category-theory.noncoherent-wild-higher-precategories
 ```
@@ -60,7 +60,7 @@ record
 
     hom-globular-type-map-Noncoherent-Wild-Higher-Precategory :
       {x y : obj-Noncoherent-Wild-Higher-Precategory 𝒜} →
-      map-Globular-Type
+      globular-map
         ( hom-globular-type-Noncoherent-Wild-Higher-Precategory 𝒜 x y)
         ( hom-globular-type-Noncoherent-Wild-Higher-Precategory ℬ
           ( obj-map-Noncoherent-Wild-Higher-Precategory x)
@@ -82,7 +82,7 @@ module _
       ( obj-map-Noncoherent-Wild-Higher-Precategory F x)
       ( obj-map-Noncoherent-Wild-Higher-Precategory F y)
   hom-map-Noncoherent-Wild-Higher-Precategory =
-    0-cell-map-Globular-Type
+    0-cell-globular-map
       ( hom-globular-type-map-Noncoherent-Wild-Higher-Precategory F)
 
   2-hom-map-Noncoherent-Wild-Higher-Precategory :
@@ -93,7 +93,7 @@ module _
       ( hom-map-Noncoherent-Wild-Higher-Precategory f)
       ( hom-map-Noncoherent-Wild-Higher-Precategory g)
   2-hom-map-Noncoherent-Wild-Higher-Precategory =
-    1-cell-map-Globular-Type
+    1-cell-globular-map
       ( hom-globular-type-map-Noncoherent-Wild-Higher-Precategory F)
 
   hom-noncoherent-wild-higher-precategory-map-Noncoherent-Wild-Higher-Precategory :
@@ -113,7 +113,7 @@ module _
     .obj-map-Noncoherent-Wild-Higher-Precategory →
       hom-map-Noncoherent-Wild-Higher-Precategory
     .hom-globular-type-map-Noncoherent-Wild-Higher-Precategory →
-      globular-type-1-cell-map-Globular-Type
+      globular-type-1-cell-globular-map
         ( hom-globular-type-map-Noncoherent-Wild-Higher-Precategory F)
 ```
 
@@ -131,7 +131,7 @@ module _
     .obj-map-Noncoherent-Wild-Higher-Precategory →
       id
     .hom-globular-type-map-Noncoherent-Wild-Higher-Precategory →
-      id-map-Globular-Type _
+      id-globular-map _
 ```
 
 ### Composition of maps between noncoherent wild higher precategories
@@ -154,7 +154,7 @@ module _
       obj-map-Noncoherent-Wild-Higher-Precategory G ∘
       obj-map-Noncoherent-Wild-Higher-Precategory F
     .hom-globular-type-map-Noncoherent-Wild-Higher-Precategory →
-      comp-map-Globular-Type
+      comp-globular-map
         ( hom-globular-type-map-Noncoherent-Wild-Higher-Precategory G)
         ( hom-globular-type-map-Noncoherent-Wild-Higher-Precategory F)
 ```

@@ -15,7 +15,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.globular-types
-open import structured-types.maps-globular-types
+open import structured-types.globular-maps
 
 open import wild-category-theory.colax-functors-noncoherent-wild-higher-precategories
 open import wild-category-theory.maps-noncoherent-large-wild-higher-precategories
@@ -190,7 +190,7 @@ record
     {l1 l2 : Level}
     {x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1}
     {y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2} →
-    map-Globular-Type
+    globular-map
       ( hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory 𝒜 x y)
       ( hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory ℬ
         ( obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory x)

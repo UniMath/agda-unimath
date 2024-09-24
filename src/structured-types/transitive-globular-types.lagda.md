@@ -136,3 +136,7 @@ transitive-globular-structure-Id :
 transitive-globular-structure-Id A =
   ( globular-structure-Id A , is-transitive-globular-structure-Id A)
 ```
+
+## See also
+
+- [Composition structure on globular types](structured-types.composition-structure-globular-types.md)

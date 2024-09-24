@@ -15,7 +15,7 @@ open import foundation.universe-levels
 
 open import structured-types.globular-types
 open import structured-types.large-globular-types
-open import structured-types.maps-globular-types
+open import structured-types.globular-maps
 ```
 
 </details>
@@ -51,7 +51,7 @@ record
       {l1 l2 : Level}
       {x : 0-cell-Large-Globular-Type A l1}
       {y : 0-cell-Large-Globular-Type A l2} →
-      map-Globular-Type
+      globular-map
         ( globular-type-1-cell-Large-Globular-Type A x y)
         ( globular-type-1-cell-Large-Globular-Type B
           ( 0-cell-map-Large-Globular-Type x)
@@ -74,7 +74,7 @@ module _
       ( 0-cell-map-Large-Globular-Type F x)
       ( 0-cell-map-Large-Globular-Type F y)
   1-cell-map-Large-Globular-Type =
-    0-cell-map-Globular-Type (globular-type-1-cell-map-Large-Globular-Type F)
+    0-cell-globular-map (globular-type-1-cell-map-Large-Globular-Type F)
 
 module _
   {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} {δ : Level → Level}
@@ -92,7 +92,7 @@ module _
       ( 1-cell-map-Large-Globular-Type F f)
       ( 1-cell-map-Large-Globular-Type F g)
   2-cell-map-Large-Globular-Type =
-    1-cell-map-Globular-Type (globular-type-1-cell-map-Large-Globular-Type F)
+    1-cell-globular-map (globular-type-1-cell-map-Large-Globular-Type F)
 
 module _
   {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} {δ : Level → Level}
@@ -111,5 +111,5 @@ module _
       ( 2-cell-map-Large-Globular-Type F H)
       ( 2-cell-map-Large-Globular-Type F K)
   3-cell-map-Large-Globular-Type =
-    2-cell-map-Globular-Type (globular-type-1-cell-map-Large-Globular-Type F)
+    2-cell-globular-map (globular-type-1-cell-map-Large-Globular-Type F)
 ```
