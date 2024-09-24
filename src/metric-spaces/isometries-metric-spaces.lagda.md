@@ -1,7 +1,7 @@
 # Isometries between metric spaces
 
 ```agda
-module metric-spaces.isometry-metric-spaces where
+module metric-spaces.isometries-metric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -28,7 +28,7 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import metric-spaces.functions-metric-spaces
-open import metric-spaces.isometry-premetric-spaces
+open import metric-spaces.isometries-premetric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -39,8 +39,8 @@ open import metric-spaces.metric-spaces
 A [function](metric-spaces.functions-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is an
 {{#concept "isometry" Disambiguation="between metric spaces" Agda=is-isometry-Metric-Space}}
-if it is an [isometry](metric-spaces.isometry-premetric-spaces.md) between their
-carrier [premetric spaces](metric-spaces.premetric-spaces.md).
+if it is an [isometry](metric-spaces.isometries-premetric-spaces.md) between
+their carrier [premetric spaces](metric-spaces.premetric-spaces.md).
 
 ## Definitions
 

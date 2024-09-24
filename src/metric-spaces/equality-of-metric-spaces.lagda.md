@@ -19,8 +19,8 @@ open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import metric-spaces.equality-of-premetric-spaces
+open import metric-spaces.equivalent-isometries-premetric-spaces
 open import metric-spaces.isometric-equivalences-premetric-spaces
-open import metric-spaces.isometric-equivalent-premetric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.premetric-spaces
 ```

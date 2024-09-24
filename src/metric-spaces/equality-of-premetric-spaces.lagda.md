@@ -23,7 +23,7 @@ open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import metric-spaces.isometry-premetric-spaces
+open import metric-spaces.isometries-premetric-spaces
 open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
 ```
@@ -39,7 +39,7 @@ equivalent to equality of their carrier type with a proof that this equality
 transports the [premetric structures](metric-spaces.premetric-structures.md).
 This last condition holds if and only if the
 [natural map induced by the equality](foundation.univalence.md) of their carrier
-types is an [isometry](metric-spaces.isometry-premetric-spaces.md). It follows
+types is an [isometry](metric-spaces.isometries-premetric-spaces.md). It follows
 that
 {{#concept "isometric equality" Disambiguation="of premetric spaces" Agda=isometry-eq-Premetric-Space}}
 characterizes equality of premetric spaces.

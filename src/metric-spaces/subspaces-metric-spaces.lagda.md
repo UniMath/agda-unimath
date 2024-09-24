@@ -14,7 +14,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.functions-metric-spaces
-open import metric-spaces.isometry-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
@@ -32,7 +32,7 @@ open import metric-spaces.triangular-premetric-structures
 [Subsets](foundation.subtypes.md) of
 [metric spaces](metric-spaces.metric-spaces.md) inherit the metric structure of
 their ambient space. Moreover, the natural inclusion is an
-[isometry](metric-spaces.isometry-metric-spaces.md).
+[isometry](metric-spaces.isometries-metric-spaces.md).
 
 ## Definitions
 

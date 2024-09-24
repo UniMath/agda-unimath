@@ -29,7 +29,7 @@ open import foundation.universe-levels
 
 open import metric-spaces.equality-of-metric-spaces
 open import metric-spaces.functions-metric-spaces
-open import metric-spaces.isometry-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 ```
 
@@ -37,7 +37,7 @@ open import metric-spaces.metric-spaces
 
 ## Idea
 
-The [isometries](metric-spaces.isometry-metric-spaces.md) between
+The [isometries](metric-spaces.isometries-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) form a
 [precategory](category-theory.precategories.md).
 

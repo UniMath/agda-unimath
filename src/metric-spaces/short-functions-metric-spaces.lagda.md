@@ -24,7 +24,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import metric-spaces.functions-metric-spaces
-open import metric-spaces.isometry-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.short-functions-premetric-spaces
 ```

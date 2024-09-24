@@ -23,7 +23,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import metric-spaces.isometry-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.precategory-of-metric-spaces-and-isometries
 open import metric-spaces.precategory-of-metric-spaces-and-short-functions
 open import metric-spaces.short-functions-metric-spaces
@@ -33,7 +33,7 @@ open import metric-spaces.short-functions-metric-spaces
 
 ## Idea
 
-Because every [isometry](metric-spaces.isometry-metric-spaces.md) between
+Because every [isometry](metric-spaces.isometries-metric-spaces.md) between
 [metric spaces](metric-spaces.metric-spaces.md) is also
 [short](metric-spaces.short-functions-metric-spaces.md), there's a
 [functor](category-theory.functors-precategories.md) between the

@@ -34,7 +34,7 @@ open import foundation.universe-levels
 open import metric-spaces.cauchy-approximations-metric-spaces
 open import metric-spaces.convergent-cauchy-approximations-metric-spaces
 open import metric-spaces.extensional-premetric-structures
-open import metric-spaces.isometry-metric-spaces
+open import metric-spaces.isometries-metric-spaces
 open import metric-spaces.limits-of-cauchy-approximations-in-premetric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures

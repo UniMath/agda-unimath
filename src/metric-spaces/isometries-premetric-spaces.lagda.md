@@ -1,7 +1,7 @@
 # Isometries between premetric spaces
 
 ```agda
-module metric-spaces.isometry-premetric-spaces where
+module metric-spaces.isometries-premetric-spaces where
 ```
 
 <details><summary>Imports</summary>
