@@ -271,7 +271,7 @@ module _
       ( λ x → refl)
 ```
 
-### The inverse of an isometric equivalence is an isometry
+### The inverse of an invertible isometry is an isometry
 
 ```agda
 module _

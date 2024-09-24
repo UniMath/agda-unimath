@@ -40,7 +40,7 @@ characterize the equality of premetric spaces.
 
 ## Definitions
 
-### The type of isometric invertible maps between premetric spaces
+### The type of invertible isometries between premetric spaces
 
 ```agda
 module _

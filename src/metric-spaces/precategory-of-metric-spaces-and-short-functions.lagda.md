@@ -126,7 +126,7 @@ module _
           ( H))
 ```
 
-### A short map between metric spaces is an isomorphism if and only if its carrier map is an isometric equivalence
+### A short map between metric spaces is an isomorphism if and only if its carrier map is an invertible isometry
 
 ```agda
 module _
@@ -178,7 +178,7 @@ module _
             ( E))
 ```
 
-### A function between metric spaces is a short isomorphism if and only if it an isometric equivalence between their carrier premetric spaces
+### A function between metric spaces is a short isomorphism if and only if it an invertible isometry between their carrier premetric spaces
 
 ```agda
 module _
@@ -231,7 +231,7 @@ module _
         ( is-equiv-f , is-isometry-f))
 ```
 
-### Isomrphism in the precategory of metric spaces and short maps is equivalent to isometric equivalence
+### Two metric spaces are isomorphic in the precategory of metric spaces and short maps if and only if there is an invertible isometry between them
 
 ```agda
 module _

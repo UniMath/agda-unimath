@@ -172,7 +172,7 @@ module _
       ( is-torsorial-Id A)
 ```
 
-### Equality of metric spaces is equivalent to the existence of isometric equivalence maps between their carrier types
+### Equality of metric spaces is equivalent to the existence of invertible isometry between their carrier types
 
 ```agda
 module _
@@ -193,7 +193,7 @@ module _
     map-inv-equiv equiv-isometry-is-equiv-Metric-Space
 ```
 
-### Isometric equivalence between metric spaces is torsorial
+### The existence of invertibe isometries between metric spaces is torsorial
 
 ```agda
 module _
