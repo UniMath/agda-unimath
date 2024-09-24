@@ -34,9 +34,9 @@ Equality of [metric spaces](metric-spaces.metric-spaces.md) is equivalent to
 [premetric spaces](metric-spaces.premetric-spaces.md); therefore,
 {{#concept "isometric equality" Disambiguation="between metric spaces", Agda=isometry-eq-Metric-Space}}
 between metric spaces characterizes their equality, as well as
-[isometric equivalence](metric-spaces.isometric-equivalent-premetric-spaces.md),
-or
-[isometric equivalence maps](metric-spaces.isometric-equivalences-premetric-spaces.md)
+[isometric equivalence](metric-spaces.isometric-equivalences-premetric-spaces.md),
+and
+[equivalent isometries](metric-spaces.equivalent-isometries-premetric-spaces.md)
 between their carrier premetric spaces.
 
 ## Definitions

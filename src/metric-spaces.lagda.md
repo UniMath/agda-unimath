@@ -29,8 +29,8 @@ equipped with a [reflexive](metric-spaces.reflexive-premetric-structures.md),
 a [metric structure](metric-spaces.metric-structures.md).
 
 [Short maps](metric-spaces.short-functions-metric-spaces.md) and
-[isometries](metric-spaces.isometry-metric-spaces.md) are homomorphisms between
-metric spaces and define the
+[isometries](metric-spaces.isometries-metric-spaces.md) are homomorphisms
+between metric spaces and define the
 [category of metric space and short maps](metric-spaces.category-of-metric-spaces-and-short-functions.md)
 and the
 [category of metric spaces and isometries](metric-spaces.category-of-metric-spaces-and-isometries.md).
