@@ -17,7 +17,6 @@ open import metric-spaces.extensional-premetric-structures
 open import metric-spaces.metric-spaces
 open import metric-spaces.metric-structures
 open import metric-spaces.monotonic-premetric-structures
-open import metric-spaces.premetric-spaces
 open import metric-spaces.premetric-structures
 open import metric-spaces.pseudometric-structures
 open import metric-spaces.reflexive-premetric-structures
@@ -108,11 +107,8 @@ module _
     is-pseudometric-structure-Π-Metric-Space ,
     is-local-structure-Π-Metric-Space
 
-  Π-Premetric-Space : Premetric-Space (l ⊔ l1) (l ⊔ l2)
-  Π-Premetric-Space = type-Π-Metric-Space , structure-Π-Metric-Space
-
   Π-Metric-Space : Metric-Space (l ⊔ l1) (l ⊔ l2)
-  pr1 Π-Metric-Space = Π-Premetric-Space
+  pr1 Π-Metric-Space = type-Π-Metric-Space , structure-Π-Metric-Space
   pr2 Π-Metric-Space = is-metric-structure-Π-Metric-Space
 ```
 
