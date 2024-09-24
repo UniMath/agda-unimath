@@ -214,11 +214,11 @@ module _
   {x y : type-Premetric-Space A}
   where
 
-  all-elements-equal-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premertric-Space :
+  all-elements-equal-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premetric-Space :
     (is-approximate-cauchy-approximation-Premetric-Space A f x) →
     (is-approximate-cauchy-approximation-Premetric-Space A f y) →
     (x ＝ y)
-  all-elements-equal-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premertric-Space
+  all-elements-equal-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premetric-Space
     I J =
     eq-indistinguishable-is-extensional-Premetric
       ( structure-Premetric-Space A)
