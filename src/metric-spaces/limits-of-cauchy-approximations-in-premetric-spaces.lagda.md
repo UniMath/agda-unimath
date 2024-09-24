@@ -44,7 +44,10 @@ of a
 `(ε δ : ℚ⁺)`.
 
 This holds if and only if any `ε : ℚ⁺` is an is an upper bound on the distance
-between `f δ` and `l` for all positive rational numbers `δ < ε`.
+between `f δ` and `l` for all positive rational numbers `δ < ε` so, for
+sufficiently small `δ`s, `f δ` is an
+{{#concept "estimate" Disambiguation="of a Cauchy approximation in a premetric space" Agda=is-estimate-cauchy-approximation-Premetric-Space}}
+of `l`.
 
 ## Definitions
 
@@ -81,7 +84,7 @@ module _
     is-prop-type-Prop is-limit-cauchy-approximation-prop-Premetric-Space
 ```
 
-### Local approximates of Cauchy approximations
+### Estimates of Cauchy approximations
 
 ```agda
 module _
@@ -90,8 +93,8 @@ module _
   (l : type-Premetric-Space A)
   where
 
-  is-approximate-prop-cauchy-approximation-Premetric-Space : Prop l2
-  is-approximate-prop-cauchy-approximation-Premetric-Space =
+  is-estimate-prop-cauchy-approximation-Premetric-Space : Prop l2
+  is-estimate-prop-cauchy-approximation-Premetric-Space =
     Π-Prop
       ( ℚ⁺)
       ( λ ε →
@@ -106,19 +109,19 @@ module _
                 ( map-cauchy-approximation-Premetric-Space A f δ)
                 ( l))))
 
-  is-approximate-cauchy-approximation-Premetric-Space : UU l2
-  is-approximate-cauchy-approximation-Premetric-Space =
-    type-Prop is-approximate-prop-cauchy-approximation-Premetric-Space
+  is-estimate-cauchy-approximation-Premetric-Space : UU l2
+  is-estimate-cauchy-approximation-Premetric-Space =
+    type-Prop is-estimate-prop-cauchy-approximation-Premetric-Space
 
-  is-prop-is-approximate-cauchy-approximation-Premetric-Space :
-    is-prop is-approximate-cauchy-approximation-Premetric-Space
-  is-prop-is-approximate-cauchy-approximation-Premetric-Space =
-    is-prop-type-Prop is-approximate-prop-cauchy-approximation-Premetric-Space
+  is-prop-is-estimate-cauchy-approximation-Premetric-Space :
+    is-prop is-estimate-cauchy-approximation-Premetric-Space
+  is-prop-is-estimate-cauchy-approximation-Premetric-Space =
+    is-prop-type-Prop is-estimate-prop-cauchy-approximation-Premetric-Space
 ```
 
 ## Properties
 
-### Limits and local approximates of Cauchy approximations are equivalent
+### Limits and estimates of Cauchy approximations are equivalent
 
 ```agda
 module _
@@ -127,10 +130,10 @@ module _
   (l : type-Premetric-Space A)
   where
 
-  is-approximate-is-limit-cauchy-approximation-Premetric-Space :
+  is-estimate-is-limit-cauchy-approximation-Premetric-Space :
     is-limit-cauchy-approximation-Premetric-Space A f l →
-    is-approximate-cauchy-approximation-Premetric-Space A f l
-  is-approximate-is-limit-cauchy-approximation-Premetric-Space H ε δ I =
+    is-estimate-cauchy-approximation-Premetric-Space A f l
+  is-estimate-is-limit-cauchy-approximation-Premetric-Space H ε δ I =
     tr
       ( is-upper-bound-dist-Premetric-Space
         ( A)
@@ -139,14 +142,14 @@ module _
       ( right-diff-law-add-ℚ⁺ δ ε I)
       ( H δ (le-diff-ℚ⁺ δ ε I))
 
-  is-limit-is-approximate-cauchy-approximation-Premetric-Space :
-    is-approximate-cauchy-approximation-Premetric-Space A f l →
+  is-limit-is-estimate-cauchy-approximation-Premetric-Space :
+    is-estimate-cauchy-approximation-Premetric-Space A f l →
     is-limit-cauchy-approximation-Premetric-Space A f l
-  is-limit-is-approximate-cauchy-approximation-Premetric-Space H ε δ =
+  is-limit-is-estimate-cauchy-approximation-Premetric-Space H ε δ =
     H (ε +ℚ⁺ δ) ε (le-left-add-ℚ⁺ ε δ)
 ```
 
-### Indistinguishability of local approximates of Cauchy approximations in symmetric triangular premetric spaces
+### Indistinguishability of estimates of Cauchy approximations in symmetric triangular premetric spaces
 
 ```agda
 module _
@@ -157,11 +160,11 @@ module _
   {x y : type-Premetric-Space A}
   where
 
-  is-indistinguishable-is-approximate-cauchy-approximation-triangular-symmetric-Premetric-Space :
-    is-approximate-cauchy-approximation-Premetric-Space A f x →
-    is-approximate-cauchy-approximation-Premetric-Space A f y →
+  is-indistinguishable-is-estimate-cauchy-approximation-triangular-symmetric-Premetric-Space :
+    is-estimate-cauchy-approximation-Premetric-Space A f x →
+    is-estimate-cauchy-approximation-Premetric-Space A f y →
     is-indistinguishable-Premetric-Space A x y
-  is-indistinguishable-is-approximate-cauchy-approximation-triangular-symmetric-Premetric-Space
+  is-indistinguishable-is-estimate-cauchy-approximation-triangular-symmetric-Premetric-Space
     lim-x lim-y d =
     tr
       ( is-upper-bound-dist-Premetric-Space A x y)
@@ -202,7 +205,7 @@ module _
               ( right-summand-split-ℚ⁺ d)))))
 ```
 
-### Equality of local approximates of Cauchy approximations in symmetric triangular extensional premetric spaces
+### Equality of estimates of Cauchy approximations in symmetric triangular extensional premetric spaces
 
 ```agda
 module _
@@ -214,16 +217,16 @@ module _
   {x y : type-Premetric-Space A}
   where
 
-  all-elements-equal-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premetric-Space :
-    (is-approximate-cauchy-approximation-Premetric-Space A f x) →
-    (is-approximate-cauchy-approximation-Premetric-Space A f y) →
+  all-elements-equal-is-estimate-cauchy-approximation-triangular-symmetric-extensional-Premetric-Space :
+    (is-estimate-cauchy-approximation-Premetric-Space A f x) →
+    (is-estimate-cauchy-approximation-Premetric-Space A f y) →
     (x ＝ y)
-  all-elements-equal-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premetric-Space
+  all-elements-equal-is-estimate-cauchy-approximation-triangular-symmetric-extensional-Premetric-Space
     I J =
     eq-indistinguishable-is-extensional-Premetric
       ( structure-Premetric-Space A)
       ( E)
-      ( is-indistinguishable-is-approximate-cauchy-approximation-triangular-symmetric-Premetric-Space
+      ( is-indistinguishable-is-estimate-cauchy-approximation-triangular-symmetric-Premetric-Space
         ( A)
         ( S)
         ( T)
