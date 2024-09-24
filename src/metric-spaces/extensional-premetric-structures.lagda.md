@@ -164,9 +164,8 @@ module _
   where
 
   is-tight-is-extensional-Premetric : is-tight-Premetric B
-  is-tight-is-extensional-Premetric x =
-    ( map-inv-is-equiv) ∘
-    ( is-fiberwise-equiv-indistinguishable-is-extensional-Premetric B E x)
+  is-tight-is-extensional-Premetric x y =
+    eq-indistinguishable-is-extensional-Premetric B E
 ```
 
 ### Any type equipped with an extensional premetric is a set
