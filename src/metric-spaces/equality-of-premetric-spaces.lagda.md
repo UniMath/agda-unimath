@@ -70,25 +70,25 @@ module _
   (A : Premetric-Space l1 l2) (B : Premetric-Space l1 l2')
   where
 
-  is-isometry-eq-prop-Premetric-Space :
+  is-isometry-prop-eq-Premetric-Space :
     (type-Premetric-Space A ＝ type-Premetric-Space B) → Prop (l1 ⊔ l2 ⊔ l2')
-  is-isometry-eq-prop-Premetric-Space e =
+  is-isometry-prop-eq-Premetric-Space e =
     is-isometry-prop-Premetric-Space A B (map-eq e)
 
   is-isometry-eq-Premetric-Space :
     (type-Premetric-Space A ＝ type-Premetric-Space B) → UU (l1 ⊔ l2 ⊔ l2')
   is-isometry-eq-Premetric-Space e =
-    type-Prop (is-isometry-eq-prop-Premetric-Space e)
+    type-Prop (is-isometry-prop-eq-Premetric-Space e)
 
   is-prop-is-isometry-eq-Premetric-Space :
     (e : type-Premetric-Space A ＝ type-Premetric-Space B) →
     is-prop (is-isometry-eq-Premetric-Space e)
   is-prop-is-isometry-eq-Premetric-Space e =
-    is-prop-type-Prop (is-isometry-eq-prop-Premetric-Space e)
+    is-prop-type-Prop (is-isometry-prop-eq-Premetric-Space e)
 
   isometry-eq-Premetric-Space : UU (lsuc l1 ⊔ l2 ⊔ l2')
   isometry-eq-Premetric-Space =
-    type-subtype is-isometry-eq-prop-Premetric-Space
+    type-subtype is-isometry-prop-eq-Premetric-Space
 ```
 
 ## Properties
