@@ -261,6 +261,7 @@ module _
 
 ## External links
 
-- [MetricSpaces.Type](https://www.cs.bham.ac.uk/~mhe/TypeTopology/MetricSpaces.Type.html)
+- [`MetricSpaces.Type`](https://www.cs.bham.ac.uk/~mhe/TypeTopology/MetricSpaces.Type.html)
   at TypeTopology
+- [metric space](https://ncatlab.org/nlab/show/metric+space) at $n$Lab
 - [Metric spaces](https://en.wikipedia.org/wiki/Metric_space) at Wikipedia

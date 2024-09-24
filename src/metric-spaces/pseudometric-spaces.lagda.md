@@ -210,7 +210,7 @@ module _
 
 ## External links
 
-- [Pseudometric spaces](https://en.wikipedia.org/wiki/Pseudometric_space) at
-  Wikipedia;
 - [metric space#variations](https://ncatlab.org/nlab/show/metric+space#variations)
-  at $n$Lab.
+  at $n$Lab
+- [Pseudometric spaces](https://en.wikipedia.org/wiki/Pseudometric_space) at
+  Wikipedia
