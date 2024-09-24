@@ -1,7 +1,7 @@
-# Equivalent isometries between premetric spaces
+# Invertible isometries between premetric spaces
 
 ```agda
-module metric-spaces.equivalent-isometries-premetric-spaces where
+module metric-spaces.invertible-isometries-premetric-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -33,9 +33,9 @@ open import metric-spaces.premetric-spaces
 ## Idea
 
 A function between [premetric spaces](metric-spaces.premetric-spaces.md) is an
-{{#concept "equivalent isometry" Disambiguation="between premetric spaces" Agda=is-isometry-is-equiv-Premetric-Space}}
+{{#concept "invertible isometry" Disambiguation="between premetric spaces" Agda=is-isometry-is-equiv-Premetric-Space}}
 if it is both an [equivalence](foundation.equivalences.md) and an
-[isometry](metric-spaces.isometries-premetric-spaces.md). Equivalent isometries
+[isometry](metric-spaces.isometries-premetric-spaces.md). Invertible isometries
 characterize the equality of premetric spaces.
 
 ## Definitions
@@ -73,7 +73,7 @@ module _
 
 ## Properties
 
-### Two premetric spaces are isometrically equivalent if and only if there is an isometric invertible map between them
+### Two premetric spaces are isometrically equivalent if and only if there is an invertible isometry between them
 
 ```agda
 module _
@@ -95,7 +95,7 @@ module _
       ( is-isometry-equiv-Premetric-Space A B)
 ```
 
-### Equality of premetric types is equivalent to the existence of an isometric equivalence between them
+### Equality of premetric types is equivalent to the existence of an invertible isometry between them
 
 ```agda
 module _
@@ -110,7 +110,7 @@ module _
     equiv-isometry-equiv-eq-Premetric-Space A B
 ```
 
-### Isometric equivalence of maps between premetric spaces is torsorial
+### The existence of invertible isometries between premetric spaces is torsorial
 
 ```agda
 module _

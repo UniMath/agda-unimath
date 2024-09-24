@@ -55,12 +55,12 @@ open import metric-spaces.dependent-products-metric-spaces public
 open import metric-spaces.discrete-premetric-structures public
 open import metric-spaces.equality-of-metric-spaces public
 open import metric-spaces.equality-of-premetric-spaces public
-open import metric-spaces.equivalent-isometries-premetric-spaces public
 open import metric-spaces.extensional-premetric-structures public
 open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.functor-precategory-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-precategory-short-isometry-metric-spaces public
 open import metric-spaces.induced-premetric-structures-on-preimages public
+open import metric-spaces.invertible-isometries-premetric-spaces public
 open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-premetric-spaces public

@@ -19,7 +19,7 @@ open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import metric-spaces.equality-of-premetric-spaces
-open import metric-spaces.equivalent-isometries-premetric-spaces
+open import metric-spaces.invertible-isometries-premetric-spaces
 open import metric-spaces.isometric-equivalences-premetric-spaces
 open import metric-spaces.metric-spaces
 open import metric-spaces.premetric-spaces
@@ -36,7 +36,7 @@ Equality of [metric spaces](metric-spaces.metric-spaces.md) is equivalent to
 between metric spaces characterizes their equality, as well as
 [isometric equivalence](metric-spaces.isometric-equivalences-premetric-spaces.md),
 and
-[equivalent isometries](metric-spaces.equivalent-isometries-premetric-spaces.md)
+[invertible isometries](metric-spaces.invertible-isometries-premetric-spaces.md)
 between their carrier premetric spaces.
 
 ## Definitions
