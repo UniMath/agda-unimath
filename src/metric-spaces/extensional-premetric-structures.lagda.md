@@ -29,16 +29,18 @@ open import metric-spaces.reflexive-premetric-structures
 
 ## Idea
 
-A [premetric](metric-spaces.premetric-structures.md) is
-{{#concept "local" Disambiguation="premetric" agda=is-local-Premetric}} if
-indistinguishability has propositional fibers.
+A [premetric](metric-spaces.premetric-structures.md) structure on a type is
+called
+{{#concept "extensional" Disambiguation="premetric on a type" Agda=is-extensional-Premetric}}
+if indistinguishability characterizes equality in the carrier type. These are
+the [reflexive](metric-spaces.reflexive-premetric-structures.md) and
+{{#concept "local" Disambiguation="premetric on a type" agda=is-local-Premetric}}
+premetric structures: reflexive premetrics whose indistinguishability have
+propositional fibers.
 
-A reflexive local premetric is called
-{{#concept "extensional" Disambiguation="premetric on a type" Agda=is-extensional-Premetric}}.
-
-Indistiguishability in an extensional premetric structure characterizes equality
-in the carrier type. In particular, any type equipped with an extensional
-premetric is a [set](foundation.sets.md).
+Any type equipped with an extensional premetric is a [set](foundation.sets.md)
+and any set can be equipped with an extensional premetric (the
+[discrete premetric](metric-spaces.discrete-premetric-structures.md)).
 
 ## Definitions
 
