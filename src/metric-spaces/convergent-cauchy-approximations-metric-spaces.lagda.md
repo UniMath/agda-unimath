@@ -49,31 +49,32 @@ module _
         ( premetric-Metric-Space A)
         ( f))
 
-  is-prop-is-convergent-cauchy-approximation-Metric-Space :
-    is-prop is-convergent-cauchy-approximation-Metric-Space
-  is-prop-is-convergent-cauchy-approximation-Metric-Space =
-    is-prop-all-elements-equal
-      ( λ x y →
-        eq-type-subtype
-          ( is-limit-cauchy-approximation-prop-Premetric-Space
-            ( premetric-Metric-Space A)
-            ( f))
-          ( all-elements-equal-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premertric-Space
-            ( premetric-Metric-Space A)
-            ( is-symmetric-structure-Metric-Space A)
-            ( is-triangular-structure-Metric-Space A)
-            ( is-extensional-structure-Metric-Space A)
-            ( f)
-            ( is-approximate-is-limit-cauchy-approximation-Premetric-Space
+  abstract
+    is-prop-is-convergent-cauchy-approximation-Metric-Space :
+      is-prop is-convergent-cauchy-approximation-Metric-Space
+    is-prop-is-convergent-cauchy-approximation-Metric-Space =
+      is-prop-all-elements-equal
+        ( λ x y →
+          eq-type-subtype
+            ( is-limit-cauchy-approximation-prop-Premetric-Space
               ( premetric-Metric-Space A)
-              ( f)
-              ( pr1 x)
-              ( pr2 x))
-            ( is-approximate-is-limit-cauchy-approximation-Premetric-Space
+              ( f))
+            ( all-elements-equal-is-approximate-cauchy-approximation-triangular-symmetric-extensional-Premertric-Space
               ( premetric-Metric-Space A)
+              ( is-symmetric-structure-Metric-Space A)
+              ( is-triangular-structure-Metric-Space A)
+              ( is-extensional-structure-Metric-Space A)
               ( f)
-              ( pr1 y)
-              ( pr2 y))))
+              ( is-approximate-is-limit-cauchy-approximation-Premetric-Space
+                ( premetric-Metric-Space A)
+                ( f)
+                ( pr1 x)
+                ( pr2 x))
+              ( is-approximate-is-limit-cauchy-approximation-Premetric-Space
+                ( premetric-Metric-Space A)
+                ( f)
+                ( pr1 y)
+                ( pr2 y))))
 
   is-convergent-cauchy-approximation-prop-Metric-Space : Prop (l1 ⊔ l2)
   is-convergent-cauchy-approximation-prop-Metric-Space =
