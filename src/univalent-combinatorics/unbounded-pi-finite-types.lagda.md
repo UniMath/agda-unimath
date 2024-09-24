@@ -209,7 +209,7 @@ unit-Unbounded-π-Finite-Type : Unbounded-π-Finite-Type lzero
 unit-Unbounded-π-Finite-Type = unit , is-unbounded-π-finite-unit
 ```
 
-### Coproducts of π-finite types are π-finite
+### Coproducts of unbounded π-finite types are unbounded π-finite
 
 ```agda
 is-unbounded-π-finite-coproduct :
@@ -268,7 +268,7 @@ is-unbounded-π-finite-Maybe H =
   is-unbounded-π-finite-coproduct H is-unbounded-π-finite-unit
 ```
 
-### Any stanadard finite type is unbounded π-finite
+### The standard finite types are unbounded π-finite
 
 ```agda
 is-unbounded-π-finite-Fin :
@@ -423,7 +423,7 @@ is-unbounded-π-finite-Π H K =
         ( λ a → is-π-finite-is-unbounded-π-finite (K a) k))
 ```
 
-### Dependent sums of unbounded π-finite types
+### Dependent sums of unbounded π-finite types are unbounded π-finite
 
 The dependent sum of a family of unbounded π-finite types over an unbounded
 π-finite base is unbounded π-finite.
