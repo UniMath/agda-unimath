@@ -3,11 +3,10 @@
 ## Idea
 
 [Classical metric spaces](https://en.wikipedia.org/wiki/Metric_space#Definition)
-are sets equipped with a positive definite,
-symmetric, reflexive, and triangular binary map into the real numbers.
-Here, we follow {{#cite Booij2020PhD}} and define a
-[premetric structure](metric-spaces.premetric-structures.md) on a type as a
-family of
+are sets equipped with a positive definite, symmetric, reflexive, and triangular
+binary map into the real numbers. Here, we follow {{#cite Booij2020PhD}} and
+define a [premetric structure](metric-spaces.premetric-structures.md) on a type
+as a family of
 [propositition valued binary relations](foundation.binary-relations.md) indexed
 by the
 [positive rational numbers](elementary-number-theory.positive-rational-numbers.md).
