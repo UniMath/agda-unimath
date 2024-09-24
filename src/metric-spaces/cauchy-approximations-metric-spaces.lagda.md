@@ -69,8 +69,11 @@ module _
   map-cauchy-approximation-Metric-Space = pr1 f
 
   is-cauchy-approximation-map-cauchy-approximation-Metric-Space :
-    is-cauchy-approximation-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( map-cauchy-approximation-Metric-Space)
+    (ε δ : ℚ⁺) →
+    neighborhood-Metric-Space
+      ( A)
+      ( ε +ℚ⁺ δ)
+      ( map-cauchy-approximation-Metric-Space ε)
+      ( map-cauchy-approximation-Metric-Space δ)
   is-cauchy-approximation-map-cauchy-approximation-Metric-Space = pr2 f
 ```

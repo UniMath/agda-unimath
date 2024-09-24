@@ -110,9 +110,12 @@ module _
       approximation-convergent-cauchy-approximation-Metric-Space
 
   is-cauchy-approximation-map-convergent-cauchy-approximation-Metric-Space :
-    is-cauchy-approximation-Metric-Space
-      A
-      map-convergent-cauchy-approximation-Metric-Space
+    (ε δ : ℚ⁺) →
+    neighborhood-Metric-Space
+      ( A)
+      ( ε +ℚ⁺ δ)
+      ( map-convergent-cauchy-approximation-Metric-Space ε)
+      ( map-convergent-cauchy-approximation-Metric-Space δ)
   is-cauchy-approximation-map-convergent-cauchy-approximation-Metric-Space =
     is-cauchy-approximation-map-cauchy-approximation-Metric-Space
       A
