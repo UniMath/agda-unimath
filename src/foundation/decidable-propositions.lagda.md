@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
+open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -30,7 +31,7 @@ open import foundation-core.coproduct-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.propositions
+open import foundation-core.retracts-of-types
 open import foundation-core.sets
 open import foundation-core.small-types
 open import foundation-core.subtypes
@@ -44,7 +45,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A decidable proposition is a proposition that has a decidable underlying type.
+A **decidable proposition** is a [proposition](foundation-core.propositions.md)
+that has a [decidable](foundation.decidable-types.md) underlying type.
 
 ## Properties
 
@@ -255,13 +257,44 @@ pr1 (decidable-Prop-𝔽 l) = Decidable-Prop l
 pr2 (decidable-Prop-𝔽 l) = is-finite-Decidable-Prop
 ```
 
-### The negation of a decidable proposition is a decidable proposition
+### Decidable propositions are closed under retracts
 
 ```agda
-neg-Decidable-Prop :
-  {l : Level} → Decidable-Prop l → Decidable-Prop l
-pr1 (neg-Decidable-Prop P) = ¬ (type-Decidable-Prop P)
-pr1 (pr2 (neg-Decidable-Prop P)) = is-prop-neg
-pr2 (pr2 (neg-Decidable-Prop P)) =
-  is-decidable-neg (is-decidable-Decidable-Prop P)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-decidable-prop-retract-of :
+    A retract-of B → is-decidable-prop B → is-decidable-prop A
+  is-decidable-prop-retract-of R (p , d) =
+    ( is-prop-retract-of R p , is-decidable-retract-of R d)
+```
+
+### Decidable propositions are closed under equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-decidable-prop-equiv :
+    A ≃ B → is-decidable-prop B → is-decidable-prop A
+  is-decidable-prop-equiv e =
+    is-decidable-prop-retract-of (retract-equiv e)
+
+  is-decidable-prop-equiv' :
+    B ≃ A → is-decidable-prop B → is-decidable-prop A
+  is-decidable-prop-equiv' e =
+    is-decidable-prop-retract-of (retract-inv-equiv e)
+```
+
+### Negation has no fixed points on decidable propositions
+
+```agda
+abstract
+  no-fixed-points-neg-Decidable-Prop :
+    {l : Level} (P : Decidable-Prop l) →
+    ¬ (type-Decidable-Prop P ↔ ¬ (type-Decidable-Prop P))
+  no-fixed-points-neg-Decidable-Prop P =
+    no-fixed-points-neg (type-Decidable-Prop P)
 ```

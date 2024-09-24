@@ -1,6 +1,6 @@
 # Elementary number theory
 
-## Files in the elementary number theory folder
+## Modules in the elementary number theory namespace
 
 ```agda
 module elementary-number-theory where

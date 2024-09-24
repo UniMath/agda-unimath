@@ -4,7 +4,11 @@
 {-# OPTIONS --guardedness #-}
 ```
 
-## Files in the wild category theory folder
+## Instances of wild categories
+
+{{#include tables/wild-categories.md}}
+
+## Modules in the wild category theory namespace
 
 ```agda
 module wild-category-theory where

@@ -44,13 +44,14 @@ one which is crisp and one which is cohesive, we may in a type signature write
 ```
 
 Observe that for us to be able to assume `x` is crisp at all, we must also
-assume that the type `A` and the universe level `l` are crisp, following the
-rule that crisp hypotheses may only be formed in crisp contexts.
+assume that the type `A` and the [universe level](foundation.universe-levels.md)
+`l` are crisp, following the rule that crisp hypotheses may only be formed in
+crisp contexts.
 
-So what does it mean for `A` to be a {{#concept "crisp type"}}? Since the
-universe of types is itself a type, and every type comes equipped with cohesive
-structure, it means that the definition of `A` is indifferent to the cohesive
-structure on the universe.
+So what does it mean for `A` to be a crisp type? Since the universe of types is
+itself a type, and every type comes equipped with cohesive structure, that `A`
+is a {{#concept "crisp type"}} means that the definition of `A` is indifferent
+to the cohesive structure on the universe.
 
 Note that saying a type is crisp is very different to saying that the cohesive
 structure of the type is trivial, which one could in one way informally state as

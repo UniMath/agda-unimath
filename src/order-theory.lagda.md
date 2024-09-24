@@ -1,6 +1,6 @@
 # Order theory
 
-## Files in the order theory folder
+## Modules in the order theory namespace
 
 ```agda
 module order-theory where
