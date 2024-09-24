@@ -28,7 +28,8 @@ open import metric-spaces.precategory-of-metric-spaces-and-isometries
 
 The
 [precategory of metric spaces and isometries](metric-spaces.precategory-of-metric-spaces-and-isometries.md)
-is a [category](category-theory.categories.md).
+is a [category](category-theory.categories.md). We call this the
+{{#concept "category of metric spaces and isometries" Agda=category-isometry-Metric-Space}}.
 
 ## Definitions
 
