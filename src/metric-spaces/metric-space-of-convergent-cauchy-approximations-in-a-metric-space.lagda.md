@@ -43,5 +43,5 @@ module _
   metric-space-convergent-cauchy-approximations-Metric-Space =
     subspace-Metric-Space
       ( metric-space-cauchy-approximations-Metric-Space A)
-      ( is-convergent-cauchy-approximation-prop-Metric-Space A)
+      ( is-convergent-prop-cauchy-approximation-Metric-Space A)
 ```

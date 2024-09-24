@@ -75,8 +75,8 @@ module _
                 ( pr1 y)
                 ( pr2 y))))
 
-  is-convergent-cauchy-approximation-prop-Metric-Space : Prop (l1 ⊔ l2)
-  is-convergent-cauchy-approximation-prop-Metric-Space =
+  is-convergent-prop-cauchy-approximation-Metric-Space : Prop (l1 ⊔ l2)
+  is-convergent-prop-cauchy-approximation-Metric-Space =
     is-convergent-cauchy-approximation-Metric-Space ,
     is-prop-is-convergent-cauchy-approximation-Metric-Space
 ```
@@ -90,7 +90,7 @@ module _
 
   convergent-cauchy-approximation-Metric-Space : UU (l1 ⊔ l2)
   convergent-cauchy-approximation-Metric-Space =
-    type-subtype (is-convergent-cauchy-approximation-prop-Metric-Space A)
+    type-subtype (is-convergent-prop-cauchy-approximation-Metric-Space A)
 ```
 
 ```agda

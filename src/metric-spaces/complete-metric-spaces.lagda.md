@@ -43,7 +43,7 @@ module _
   is-complete-prop-Metric-Space =
     Π-Prop
       ( cauchy-approximation-Metric-Space A)
-      ( is-convergent-cauchy-approximation-prop-Metric-Space A)
+      ( is-convergent-prop-cauchy-approximation-Metric-Space A)
 
   is-complete-Metric-Space : UU (l1 ⊔ l2)
   is-complete-Metric-Space = type-Prop is-complete-prop-Metric-Space
