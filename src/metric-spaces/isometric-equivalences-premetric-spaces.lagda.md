@@ -1,4 +1,4 @@
-# Isometric equivalnces between premetric spaces
+# Isometric equivalences between premetric spaces
 
 ```agda
 module metric-spaces.isometric-equivalences-premetric-spaces where

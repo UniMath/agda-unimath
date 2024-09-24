@@ -81,7 +81,7 @@ module _
       ( htpy-eq (ap (map-isometry-Metric-Space A A) (pr2 H)))
 ```
 
-### Isometric equivalences are isomorphisms in the precategory of metric spaces and isometries
+### Invertible isometries are isomorphisms in the precategory of metric spaces and isometries
 
 ```agda
 module _

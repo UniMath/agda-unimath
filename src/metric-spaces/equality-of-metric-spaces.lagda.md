@@ -85,7 +85,7 @@ module _
       (premetric-Metric-Space B)
 ```
 
-### Isometric equivalence maps between metric spaces
+### Invertible isometries between metric spaces
 
 ```agda
 module _
