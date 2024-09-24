@@ -30,7 +30,7 @@ open import modal-type-theory.sharp-modality
 ## Idea
 
 We postulate that the [flat modality](modal-type-theory.flat-modality.md) `♭` is
-a crisp left adjoint to the
+a [crisp](modal-type-theory.crisp-types.md) left adjoint to the
 [sharp modality](modal-type-theory.sharp-modality.md) `♯`.
 
 In [The sharp modality](modal-type-theory.sharp-modality.md) we postulated that
@@ -38,7 +38,7 @@ In [The sharp modality](modal-type-theory.sharp-modality.md) we postulated that
 that has a
 [modal induction principle](orthogonal-factorization-systems.modal-induction.md).
 In the file
-[Sharp-Codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we
+[sharp codiscrete types](modal-type-theory.sharp-codiscrete-types.md), we
 postulated that the [subuniverse](foundation.subuniverses.md) of sharp modal
 types has appropriate closure properties. Please note that there is some
 redundancy between the postulated axioms, and they are likely to change in the
@@ -110,6 +110,8 @@ The accompanying computation principle remains to be fully formalized.
 
 ### Flat eats sharp
 
+We have equivalences `♭ (♯ A) ≃ ♭ A`.
+
 ```agda
 module _
   {@♭ l : Level} {@♭ A : UU l}
@@ -157,6 +159,8 @@ module _
 ```
 
 ### Sharp eats flat
+
+We have equivalences `♯ (♭ A) ≃ ♯ A`.
 
 ```agda
 module _

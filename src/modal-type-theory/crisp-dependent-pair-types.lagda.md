@@ -99,7 +99,7 @@ module _
 
   compute-counit-flat-Σ :
     counit-flat {A = Σ A B} ~
-    ( map-Σ B counit-flat (λ where (intro-flat _) → counit-flat)) ∘
+    ( map-Σ B counit-flat counit-family-flat) ∘
     ( map-distributive-flat-Σ)
   compute-counit-flat-Σ (intro-flat _) = refl
 ```
@@ -117,7 +117,7 @@ module _
   is-flat-discrete-crisp-Σ is-disc-B =
     is-equiv-left-map-triangle
       ( counit-flat)
-      ( map-Σ B counit-flat (λ where (intro-flat _) → counit-flat))
+      ( map-Σ B counit-flat counit-family-flat)
       ( map-distributive-flat-Σ)
       ( λ where (intro-flat _) → refl)
       ( is-equiv-map-distributive-flat-Σ)
@@ -129,7 +129,7 @@ module _
     is-fiberwise-equiv-is-equiv-map-Σ
       ( B)
       ( counit-flat)
-      ( λ where (intro-flat _) → counit-flat)
+      ( counit-family-flat)
       ( is-disc-A)
       ( is-equiv-right-map-triangle
         ( counit-flat)

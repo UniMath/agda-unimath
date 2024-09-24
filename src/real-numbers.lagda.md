@@ -1,6 +1,6 @@
 # Real numbers
 
-## Files in the real numbers folder
+## Modules in the real numbers namespace
 
 ```agda
 module real-numbers where

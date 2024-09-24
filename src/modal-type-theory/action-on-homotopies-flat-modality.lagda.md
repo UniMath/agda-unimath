@@ -22,8 +22,9 @@ open import modal-type-theory.functoriality-flat-modality
 
 ## Idea
 
-Given a crisp [homotopy](foundation-core.homotopies.md) of maps `f ~ g`, then
-there is a homotopy `♭ f ~ ♭ g` where `♭ f` is the
+Given a [crisp](modal-type-theory.crisp-types.md)
+[homotopy](foundation-core.homotopies.md) of maps `f ~ g`, then there is a
+homotopy `♭ f ~ ♭ g` where `♭ f` is the
 [functorial action of the flat modality on maps](modal-type-theory.functoriality-flat-modality.md).
 
 ## Definitions
