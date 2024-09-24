@@ -785,9 +785,10 @@ module _
 ## External links
 
 - [The Eckmann-Hilton argument](https://1lab.dev/Algebra.Magma.Unital.EckmannHilton.html)
-  at 1lab.
+  at 1lab
 - [Eckmann-Hilton argument](https://ncatlab.org/nlab/show/Eckmann-Hilton+argument)
-  at $n$Lab.
+  at $n$Lab
 - [Eckmann-Hilton argument](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument)
-  at Wikipedia.
+  at Wikipedia
 - [Eckmann-Hilton and the Hopf Fibration](https://www.youtube.com/watch?v=hU4_dVpmkKM)
+  recorded talk given by Raymond Baker at HoTT-UF 24

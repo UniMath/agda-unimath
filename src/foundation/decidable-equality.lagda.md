@@ -35,8 +35,10 @@ open import foundation-core.transport-along-identifications
 
 ## Definition
 
-A type `A` is said to have **decidable equality** if `x ＝ y` is a
-[decidable type](foundation.decidable-types.md) for every `x y : A`.
+A type `A` is said to have
+{{#concept "decidable equality" Disambiguation="type" Agda=has-decidable-equality}}
+if `x ＝ y` is a [decidable type](foundation.decidable-types.md) for every
+`x y : A`.
 
 ```agda
 has-decidable-equality : {l : Level} (A : UU l) → UU l
@@ -64,8 +66,7 @@ has-decidable-equality-empty ()
 ### The unit type has decidable equality
 
 ```agda
-has-decidable-equality-unit :
-  has-decidable-equality unit
+has-decidable-equality-unit : has-decidable-equality unit
 has-decidable-equality-unit star star = inl refl
 ```
 
@@ -326,3 +327,8 @@ module _
   has-decidable-equality-right-summand d x y =
     is-decidable-iff is-injective-inr (ap inr) (d (inr x) (inr y))
 ```
+
+## External links
+
+- [decidable equality](https://ncatlab.org/nlab/show/decidable+equality) at
+  $n$Lab

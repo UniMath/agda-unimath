@@ -22,8 +22,11 @@ open import order-theory.preorders
 
 ## Idea
 
-The **powerset** of a type is the set of all
-[subtypes](foundation-core.subtypes.md) with respect to a given universe level.
+The
+{{#concept "powerset" Disambiguation="of a type" Agda=powerset WD="power set" WDID=Q205170}}
+of a type is the [set](foundation-core.sets.md) of all
+[subtypes](foundation-core.subtypes.md) with respect to a given
+[universe level](foundation.universe-levels.md).
 
 ## Definition
 
@@ -99,3 +102,9 @@ module _
   powerset-Poset : (l2 : Level) → Poset (l1 ⊔ lsuc l2) (l1 ⊔ l2)
   powerset-Poset = poset-Large-Poset (powerset-Large-Poset A)
 ```
+
+## External links
+
+- [power object](https://ncatlab.org/nlab/show/power+object) at $n$Lab
+- [power set](https://ncatlab.org/nlab/show/power+set) at $n$Lab
+- [Power set](https://en.wikipedia.org/wiki/Power_set) at Wikipedia

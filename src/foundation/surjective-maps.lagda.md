@@ -493,23 +493,23 @@ module _
       ( is-surjective-map-surjection g)
 ```
 
-### The composite of a surjective map with an equivalence is surjective
+### The composite of a surjective map before an equivalence is surjective
 
 ```agda
-is-surjective-comp-equiv :
+is-surjective-left-comp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  (e : B ≃ C) → {f : A → B} → is-surjective f → is-surjective (map-equiv e ∘ f)
-is-surjective-comp-equiv e =
+  (e : B ≃ C) {f : A → B} → is-surjective f → is-surjective (map-equiv e ∘ f)
+is-surjective-left-comp-equiv e =
   is-surjective-comp (is-surjective-map-equiv e)
 ```
 
-### The precomposite of a surjective map with an equivalence is surjective
+### The composite of a surjective map after an equivalence is surjective
 
 ```agda
-is-surjective-precomp-equiv :
+is-surjective-right-comp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : B → C} →
   is-surjective f → (e : A ≃ B) → is-surjective (f ∘ map-equiv e)
-is-surjective-precomp-equiv H e =
+is-surjective-right-comp-equiv H e =
   is-surjective-comp H (is-surjective-map-equiv e)
 ```
 

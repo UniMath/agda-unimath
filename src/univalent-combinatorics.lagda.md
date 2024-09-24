@@ -19,7 +19,7 @@ such that all its homotopy groups up to level `k` are finite. The π-finite type
 enjoy useful closure properties, such as closedness under Σ, cartesian products,
 coproducts, and closedness under Π under a mild condition.
 
-## Files in the univalent combinatorics folder
+## Modules in the univalent combinatorics namespace
 
 ```agda
 module univalent-combinatorics where
