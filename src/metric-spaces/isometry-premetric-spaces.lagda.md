@@ -34,7 +34,7 @@ open import metric-spaces.premetric-spaces
 A function `f` between [premetric spaces](metric-spaces.premetric-spaces.md) is
 an
 {{#concept "isometry" Disambiguation="between premetric spaces" Agda=is-isometry-Premetric-Space}}
-if any of the following equivalent conditions holds:
+if any of the following equal conditions holds:
 
 - it preserves and reflects
   [`d`-neighborhoods](metric-spaces.premetric-structures.md);
@@ -52,7 +52,7 @@ if any of the following equivalent conditions holds:
 module _
   {l1 l2 l1' l2' : Level}
   (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
-  (f : function-carrier-type-Premetric-Space A B)
+  (f : map-type-Premetric-Space A B)
   where
 
   is-isometry-prop-Premetric-Space : Prop (l1 ⊔ l2 ⊔ l2')
@@ -98,7 +98,7 @@ module _
   (f : isometry-Premetric-Space A B)
   where
 
-  map-isometry-Premetric-Space : function-carrier-type-Premetric-Space A B
+  map-isometry-Premetric-Space : map-type-Premetric-Space A B
   map-isometry-Premetric-Space = pr1 f
 
   is-isometry-map-isometry-Premetric-Space :
@@ -144,8 +144,8 @@ module _
   (A : Premetric-Space l1a l2a)
   (B : Premetric-Space l1b l2b)
   (C : Premetric-Space l1c l2c)
-  (g : function-carrier-type-Premetric-Space B C)
-  (f : function-carrier-type-Premetric-Space A B)
+  (g : map-type-Premetric-Space B C)
+  (f : map-type-Premetric-Space A B)
   where
 
   preserves-isometry-comp-function-Premetric-Space :
@@ -162,7 +162,7 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
-  (f : function-carrier-type-Premetric-Space A B)
+  (f : map-type-Premetric-Space A B)
   (E : is-equiv f)
   (I : is-isometry-Premetric-Space A B f)
   where

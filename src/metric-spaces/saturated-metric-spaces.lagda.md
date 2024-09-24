@@ -120,7 +120,7 @@ module _
 module _
   {l1 l2 l1' l2' : Level} (M : Metric-Space l1 l2) (M' : Metric-Space l1' l2')
   (S' : is-saturated-Metric-Space M')
-  (f : function-carrier-type-Metric-Space M M')
+  (f : map-type-Metric-Space M M')
   where
 
   is-short-saturate-short-function-saturated-Metric-Space :

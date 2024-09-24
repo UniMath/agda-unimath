@@ -102,7 +102,7 @@ module _
     is-metric-structure-subset-Metric-Space
 
   inclusion-subspace-Metric-Space :
-    function-carrier-type-Metric-Space subspace-Metric-Space A
+    map-type-Metric-Space subspace-Metric-Space A
   inclusion-subspace-Metric-Space = inclusion-subtype S
 ```
 

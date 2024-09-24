@@ -20,7 +20,7 @@ open import metric-spaces.premetric-spaces
 
 ## Idea
 
-{{#concept "Functions" Disambiguation="between metric spaces" Agda=function-carrier-type-Metric-Space}}
+{{#concept "Functions" Disambiguation="between metric spaces" Agda=map-type-Metric-Space}}
 between [metric spaces](metric-spaces.metric-spaces.md) are functions between
 their carrier types.
 
@@ -34,9 +34,9 @@ module _
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
-  function-carrier-type-Metric-Space : UU (l1 ⊔ l1')
-  function-carrier-type-Metric-Space =
-    function-carrier-type-Premetric-Space
+  map-type-Metric-Space : UU (l1 ⊔ l1')
+  map-type-Metric-Space =
+    map-type-Premetric-Space
       ( premetric-Metric-Space A)
       ( premetric-Metric-Space B)
 ```
@@ -48,7 +48,7 @@ module _
   {l1 l2 : Level} (M : Metric-Space l1 l2)
   where
 
-  id-Metric-Space : function-carrier-type-Metric-Space M M
+  id-Metric-Space : map-type-Metric-Space M M
   id-Metric-Space = id
 ```
 
@@ -62,13 +62,13 @@ module _
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
   where
 
-  is-set-function-carrier-type-Metric-Space :
-    is-set (function-carrier-type-Metric-Space A B)
-  is-set-function-carrier-type-Metric-Space =
+  is-set-map-type-Metric-Space :
+    is-set (map-type-Metric-Space A B)
+  is-set-map-type-Metric-Space =
     is-set-Π (λ x → is-set-type-Metric-Space B)
 
-  set-function-carrier-type-Metric-Space : Set (l1 ⊔ l1')
-  set-function-carrier-type-Metric-Space =
-    function-carrier-type-Metric-Space A B ,
-    is-set-function-carrier-type-Metric-Space
+  set-map-type-Metric-Space : Set (l1 ⊔ l1')
+  set-map-type-Metric-Space =
+    map-type-Metric-Space A B ,
+    is-set-map-type-Metric-Space
 ```

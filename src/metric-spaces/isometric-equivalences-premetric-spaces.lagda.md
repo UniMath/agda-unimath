@@ -33,7 +33,7 @@ open import metric-spaces.premetric-spaces
 ## Idea
 
 A function between [premetric spaces](metric-spaces.premetric-spaces.md) is an
-{{#concept "isometric equivalence" Disambiguation="between premetric spaces" Agda=is-isometric-is-equiv-Premetric-Space}}
+{{#concept "isometric equivalence" Disambiguation="between premetric spaces" Agda=is-isometry-is-equiv-Premetric-Space}}
 if it is both an [equivalence](foundation.equivalences.md) and an
 [isometry](metric-spaces.isometry-premetric-spaces.md).
 
@@ -49,27 +49,27 @@ module _
   (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
   where
 
-  is-isometric-is-equiv-prop-Premetric-Space :
-    (f : function-carrier-type-Premetric-Space A B) → Prop (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  is-isometric-is-equiv-prop-Premetric-Space f =
+  is-isometry-is-equiv-prop-Premetric-Space :
+    (f : map-type-Premetric-Space A B) → Prop (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  is-isometry-is-equiv-prop-Premetric-Space f =
     product-Prop
       ( is-equiv-Prop f)
       ( is-isometry-prop-Premetric-Space A B f)
 
-  is-isometric-is-equiv-Premetric-Space :
-    (f : function-carrier-type-Premetric-Space A B) → UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  is-isometric-is-equiv-Premetric-Space f =
-    type-Prop (is-isometric-is-equiv-prop-Premetric-Space f)
+  is-isometry-is-equiv-Premetric-Space :
+    (f : map-type-Premetric-Space A B) → UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  is-isometry-is-equiv-Premetric-Space f =
+    type-Prop (is-isometry-is-equiv-prop-Premetric-Space f)
 
-  is-prop-is-isometric-is-equiv-Premetric-Space :
-    (f : function-carrier-type-Premetric-Space A B) →
-    is-prop (is-isometric-is-equiv-Premetric-Space f)
-  is-prop-is-isometric-is-equiv-Premetric-Space f =
-    is-prop-type-Prop (is-isometric-is-equiv-prop-Premetric-Space f)
+  is-prop-is-isometry-is-equiv-Premetric-Space :
+    (f : map-type-Premetric-Space A B) →
+    is-prop (is-isometry-is-equiv-Premetric-Space f)
+  is-prop-is-isometry-is-equiv-Premetric-Space f =
+    is-prop-type-Prop (is-isometry-is-equiv-prop-Premetric-Space f)
 
-  isometric-is-equiv-Premetric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  isometric-is-equiv-Premetric-Space =
-    type-subtype is-isometric-is-equiv-prop-Premetric-Space
+  isometry-is-equiv-Premetric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  isometry-is-equiv-Premetric-Space =
+    type-subtype is-isometry-is-equiv-prop-Premetric-Space
 ```
 
 ## Properties
@@ -82,18 +82,18 @@ module _
   (A B : Premetric-Space l1 l2)
   where
 
-  equiv-isometric-is-equiv-isometric-equiv-Premetric-Space :
-    isometric-equiv-Premetric-Space A B ≃ isometric-is-equiv-Premetric-Space A B
-  equiv-isometric-is-equiv-isometric-equiv-Premetric-Space =
+  equiv-isometry-is-equiv-isometry-equiv-Premetric-Space :
+    isometry-equiv-Premetric-Space A B ≃ isometry-is-equiv-Premetric-Space A B
+  equiv-isometry-is-equiv-isometry-equiv-Premetric-Space =
     equiv-tot
       ( λ f →
         equiv-tot
           ( λ e →
             equiv-eq (ap (is-isometry-Premetric-Space A B) refl))) ∘e
     associative-Σ
-      ( function-carrier-type-Premetric-Space A B)
+      ( map-type-Premetric-Space A B)
       ( is-equiv)
-      ( is-isometric-equiv-Premetric-Space A B)
+      ( is-isometry-equiv-Premetric-Space A B)
 ```
 
 ### Equality of premetric types is equivalent to the existence of an isometric equivalence between them
@@ -104,11 +104,11 @@ module _
   (A B : Premetric-Space l1 l2)
   where
 
-  equiv-isometric-is-equiv-eq-Premetric-Space :
-    (A ＝ B) ≃ isometric-is-equiv-Premetric-Space A B
-  equiv-isometric-is-equiv-eq-Premetric-Space =
-    equiv-isometric-is-equiv-isometric-equiv-Premetric-Space A B ∘e
-    equiv-isometric-equiv-eq-Premetric-Space A B
+  equiv-isometry-is-equiv-eq-Premetric-Space :
+    (A ＝ B) ≃ isometry-is-equiv-Premetric-Space A B
+  equiv-isometry-is-equiv-eq-Premetric-Space =
+    equiv-isometry-is-equiv-isometry-equiv-Premetric-Space A B ∘e
+    equiv-isometry-equiv-eq-Premetric-Space A B
 ```
 
 ### Isometric equivalence of maps between premetric spaces is torsorial
@@ -118,11 +118,11 @@ module _
   {l1 l2 : Level} (A : Premetric-Space l1 l2)
   where
 
-  is-torsorial-isometric-is-equiv-Premetric-Space :
-    is-torsorial (isometric-is-equiv-Premetric-Space A)
-  is-torsorial-isometric-is-equiv-Premetric-Space =
+  is-torsorial-isometry-is-equiv-Premetric-Space :
+    is-torsorial (isometry-is-equiv-Premetric-Space A)
+  is-torsorial-isometry-is-equiv-Premetric-Space =
     is-contr-equiv'
-      ( Σ (Premetric-Space l1 l2) (isometric-equiv-Premetric-Space A))
-      ( equiv-tot (equiv-isometric-is-equiv-isometric-equiv-Premetric-Space A))
-      ( is-torsorial-isometric-equiv-Premetric-Space A)
+      ( Σ (Premetric-Space l1 l2) (isometry-equiv-Premetric-Space A))
+      ( equiv-tot (equiv-isometry-is-equiv-isometry-equiv-Premetric-Space A))
+      ( is-torsorial-isometry-equiv-Premetric-Space A)
 ```

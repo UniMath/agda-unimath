@@ -145,8 +145,8 @@ module _
   (A : Pseudometric-Space l1 l2) (B : Pseudometric-Space l1' l2')
   where
 
-  function-carrier-type-Pseudometric-Space : UU (l1 ⊔ l1')
-  function-carrier-type-Pseudometric-Space =
+  map-type-Pseudometric-Space : UU (l1 ⊔ l1')
+  map-type-Pseudometric-Space =
     type-Pseudometric-Space A → type-Pseudometric-Space B
 ```
 

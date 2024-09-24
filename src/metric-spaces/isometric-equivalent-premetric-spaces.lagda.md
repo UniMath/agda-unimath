@@ -33,7 +33,7 @@ open import metric-spaces.premetric-spaces
 
 An [equivalence](foundation.equivalences.md) between the carrier types of two
 [premetric spaces](metric-spaces.premetric-spaces.md) is
-{{#concept "isometric" Disambiguation="equivalence between premetric spaces" Agda=is-isometric-equiv-Premetric-Space}}
+{{#concept "isometric" Disambiguation="equivalence between premetric spaces" Agda=is-isometry-equiv-Premetric-Space}}
 if its carrier map is an [isometry](metric-spaces.isometry-premetric-spaces.md).
 
 Isometric equivalences of metric spaces characterize equality of premetric
@@ -49,25 +49,25 @@ module _
   (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
   where
 
-  is-isometric-equiv-prop-Premetric-Space :
+  is-isometry-equiv-prop-Premetric-Space :
     (e : type-Premetric-Space A ≃ type-Premetric-Space B) → Prop (l1 ⊔ l2 ⊔ l2')
-  is-isometric-equiv-prop-Premetric-Space e =
+  is-isometry-equiv-prop-Premetric-Space e =
     is-isometry-prop-Premetric-Space A B (map-equiv e)
 
-  is-isometric-equiv-Premetric-Space :
+  is-isometry-equiv-Premetric-Space :
     (e : type-Premetric-Space A ≃ type-Premetric-Space B) → UU (l1 ⊔ l2 ⊔ l2')
-  is-isometric-equiv-Premetric-Space e =
-    type-Prop (is-isometric-equiv-prop-Premetric-Space e)
+  is-isometry-equiv-Premetric-Space e =
+    type-Prop (is-isometry-equiv-prop-Premetric-Space e)
 
-  is-prop-is-isometric-equiv-Premetric-Space :
+  is-prop-is-isometry-equiv-Premetric-Space :
     (e : type-Premetric-Space A ≃ type-Premetric-Space B) →
-    is-prop (is-isometric-equiv-Premetric-Space e)
-  is-prop-is-isometric-equiv-Premetric-Space e =
-    is-prop-type-Prop (is-isometric-equiv-prop-Premetric-Space e)
+    is-prop (is-isometry-equiv-Premetric-Space e)
+  is-prop-is-isometry-equiv-Premetric-Space e =
+    is-prop-type-Prop (is-isometry-equiv-prop-Premetric-Space e)
 
-  isometric-equiv-Premetric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
-  isometric-equiv-Premetric-Space =
-    type-subtype is-isometric-equiv-prop-Premetric-Space
+  isometry-equiv-Premetric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
+  isometry-equiv-Premetric-Space =
+    type-subtype is-isometry-equiv-prop-Premetric-Space
 ```
 
 ## Properties
@@ -80,9 +80,9 @@ module _
   (A B : Premetric-Space l1 l2)
   where
 
-  equiv-isometric-eq-equiv-Premetric-Space :
-    isometric-eq-Premetric-Space A B ≃ isometric-equiv-Premetric-Space A B
-  equiv-isometric-eq-equiv-Premetric-Space =
+  equiv-isometry-eq-equiv-Premetric-Space :
+    isometry-eq-Premetric-Space A B ≃ isometry-equiv-Premetric-Space A B
+  equiv-isometry-eq-equiv-Premetric-Space =
     equiv-Σ
       ( λ e → is-isometry-Premetric-Space A B (map-equiv e))
       ( equiv-univalence)
@@ -90,11 +90,11 @@ module _
         equiv-eq
           (ap (is-isometry-Premetric-Space A B) (eq-htpy (λ x → refl))))
 
-  equiv-isometric-equiv-eq-Premetric-Space :
-    (A ＝ B) ≃ isometric-equiv-Premetric-Space A B
-  equiv-isometric-equiv-eq-Premetric-Space =
-    equiv-isometric-eq-equiv-Premetric-Space ∘e
-    equiv-isometric-eq-Premetric-Space A B
+  equiv-isometry-equiv-eq-Premetric-Space :
+    (A ＝ B) ≃ isometry-equiv-Premetric-Space A B
+  equiv-isometry-equiv-eq-Premetric-Space =
+    equiv-isometry-eq-equiv-Premetric-Space ∘e
+    equiv-isometry-eq-Premetric-Space A B
 ```
 
 ### Isometric equivalence of premetric spaces is torsorial
@@ -104,11 +104,11 @@ module _
   {l1 l2 : Level} (A : Premetric-Space l1 l2)
   where
 
-  is-torsorial-isometric-equiv-Premetric-Space :
-    is-torsorial (isometric-equiv-Premetric-Space A)
-  is-torsorial-isometric-equiv-Premetric-Space =
+  is-torsorial-isometry-equiv-Premetric-Space :
+    is-torsorial (isometry-equiv-Premetric-Space A)
+  is-torsorial-isometry-equiv-Premetric-Space =
     is-contr-equiv'
-      ( Σ (Premetric-Space l1 l2) (isometric-eq-Premetric-Space A))
-      ( equiv-tot (equiv-isometric-eq-equiv-Premetric-Space A))
-      ( is-torsorial-isometric-eq-Premetric-Space A)
+      ( Σ (Premetric-Space l1 l2) (isometry-eq-Premetric-Space A))
+      ( equiv-tot (equiv-isometry-eq-equiv-Premetric-Space A))
+      ( is-torsorial-isometry-eq-Premetric-Space A)
 ```

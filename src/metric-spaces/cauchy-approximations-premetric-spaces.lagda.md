@@ -105,7 +105,7 @@ module _
   {l1 l2 l1' l2' : Level}
   (A : Premetric-Space l1 l2)
   (B : Premetric-Space l1' l2')
-  (f : function-carrier-type-Premetric-Space A B)
+  (f : map-type-Premetric-Space A B)
   (is-short-f : is-short-function-Premetric-Space A B f)
   (u : ℚ⁺ → type-Premetric-Space A)
   where

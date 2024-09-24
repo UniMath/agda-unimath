@@ -49,7 +49,7 @@ carrier [premetric spaces](metric-spaces.premetric-spaces.md): for any points
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : function-carrier-type-Metric-Space A B)
+  (f : map-type-Metric-Space A B)
   where
 
   is-short-function-prop-Metric-Space : Prop (l1 ⊔ l2 ⊔ l2')
@@ -80,7 +80,7 @@ module _
   set-short-function-Metric-Space : Set (l1 ⊔ l2 ⊔ l1' ⊔ l2')
   set-short-function-Metric-Space =
     set-subset
-      ( set-function-carrier-type-Metric-Space A B)
+      ( set-map-type-Metric-Space A B)
       ( is-short-function-prop-Metric-Space A B)
 
   short-function-Metric-Space : UU (l1 ⊔ l2 ⊔ l1' ⊔ l2')
@@ -96,7 +96,7 @@ module _
   (f : short-function-Metric-Space A B)
   where
 
-  map-short-function-Metric-Space : function-carrier-type-Metric-Space A B
+  map-short-function-Metric-Space : map-type-Metric-Space A B
   map-short-function-Metric-Space =
     map-short-function-Premetric-Space
       ( premetric-Metric-Space A)
@@ -279,7 +279,7 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Metric-Space l1 l2) (B : Metric-Space l1' l2')
-  (f : function-carrier-type-Metric-Space A B)
+  (f : map-type-Metric-Space A B)
   where
 
   is-short-is-isometry-Metric-Space :

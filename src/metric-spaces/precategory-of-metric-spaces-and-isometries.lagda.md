@@ -106,13 +106,13 @@ module _
   {l1 l2 : Level} (A B : Metric-Space l1 l2)
   where
 
-  equiv-iso-isometric-is-equiv-Metric-Space :
+  equiv-iso-isometry-is-equiv-Metric-Space :
     iso-Precategory precategory-isometry-Metric-Space A B ≃
-    isometric-is-equiv-Metric-Space A B
-  equiv-iso-isometric-is-equiv-Metric-Space =
+    isometry-is-equiv-Metric-Space A B
+  equiv-iso-isometry-is-equiv-Metric-Space =
     equiv-tot (λ f → commutative-product) ∘e
     associative-Σ
-      ( function-carrier-type-Metric-Space A B)
+      ( map-type-Metric-Space A B)
       ( is-isometry-Metric-Space A B)
       ( is-equiv ∘ map-isometry-Metric-Space A B) ∘e
     equiv-tot

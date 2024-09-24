@@ -53,7 +53,7 @@ if any of the following three [equivalent](foundation.logical-equivalences.md)
 module _
   {l1 l2 l1' l2' : Level}
   (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
-  (f : function-carrier-type-Premetric-Space A B)
+  (f : map-type-Premetric-Space A B)
   where
 
   is-short-function-prop-Premetric-Space : Prop (l1 ⊔ l2 ⊔ l2')
@@ -100,7 +100,7 @@ module _
   where
 
   map-short-function-Premetric-Space :
-    function-carrier-type-Premetric-Space A B
+    map-type-Premetric-Space A B
   map-short-function-Premetric-Space = pr1 f
 
   is-short-map-short-function-Premetric-Space :
@@ -160,8 +160,8 @@ module _
   (A : Premetric-Space l1a l2a)
   (B : Premetric-Space l1b l2b)
   (C : Premetric-Space l1c l2c)
-  (g : function-carrier-type-Premetric-Space B C)
-  (f : function-carrier-type-Premetric-Space A B)
+  (g : map-type-Premetric-Space B C)
+  (f : map-type-Premetric-Space A B)
   where
 
   is-short-comp-function-Premetric-Space :
@@ -201,7 +201,7 @@ module _
 module _
   {l1 l2 l1' l2' : Level}
   (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
-  (f : function-carrier-type-Premetric-Space A B)
+  (f : map-type-Premetric-Space A B)
   where
 
   is-short-is-isometry-Premetric-Space :

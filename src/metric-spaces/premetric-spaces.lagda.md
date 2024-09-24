@@ -96,8 +96,8 @@ module _
   (A : Premetric-Space l1 l2) (B : Premetric-Space l1' l2')
   where
 
-  function-carrier-type-Premetric-Space : UU (l1 ⊔ l1')
-  function-carrier-type-Premetric-Space =
+  map-type-Premetric-Space : UU (l1 ⊔ l1')
+  map-type-Premetric-Space =
     type-Premetric-Space A → type-Premetric-Space B
 ```
 
@@ -108,7 +108,7 @@ module _
   {l1 l2 : Level} (A : Premetric-Space l1 l2)
   where
 
-  id-Premetric-Space : function-carrier-type-Premetric-Space A A
+  id-Premetric-Space : map-type-Premetric-Space A A
   id-Premetric-Space = id
 ```
 
