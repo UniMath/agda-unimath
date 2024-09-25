@@ -115,7 +115,8 @@ module _
     ( equiv-eq-premetric-Metric-Space A B)
 
   eq-isometric-eq-Metric-Space : isometric-eq-Metric-Space A B → A ＝ B
-  eq-isometric-eq-Metric-Space = map-inv-equiv equiv-isometric-eq-eq-Metric-Space
+  eq-isometric-eq-Metric-Space =
+    map-inv-equiv equiv-isometric-eq-eq-Metric-Space
 ```
 
 ### Isometric equality is torsorial
