@@ -22,8 +22,8 @@ open import metric-spaces.metric-spaces
 ## Idea
 
 Since the carrier type of any [metric space](metric-spaces.metric-spaces.md) is
-[set](foundation-core.sets.md), they are the objects of a
-[precategory](category-theory.precategories.md) where morphisms are given by
+a [set](foundation-core.sets.md), they are the objects of a
+[precategory](category-theory.precategories.md) where morphisms are
 [functions](metric-spaces.functions-metric-spaces.md) between them.
 
 ## Definition
