@@ -249,7 +249,7 @@ module _
 ## References
 
 Our definition of a premetric follows Definition 4.5.2 from
-{{#cite Booij2020PhD}}.
+{{#cite Booij20PhD}}.
 
 {{#bibliography}}
 
