@@ -41,7 +41,7 @@ This last condition holds if and only if the
 [natural map induced by the equality](foundation.univalence.md) of their carrier
 types is an [isometry](metric-spaces.isometries-premetric-spaces.md). It follows
 that
-{{#concept "isometric equality" Disambiguation="of premetric spaces" Agda=isometry-eq-Premetric-Space}}
+{{#concept "isometric equality" Disambiguation="of premetric spaces" Agda=isometric-eq-Premetric-Space}}
 characterizes equality of premetric spaces.
 
 ## Definitions
@@ -86,8 +86,8 @@ module _
   is-prop-is-isometry-eq-Premetric-Space e =
     is-prop-type-Prop (is-isometry-prop-eq-Premetric-Space e)
 
-  isometry-eq-Premetric-Space : UU (lsuc l1 ⊔ l2 ⊔ l2')
-  isometry-eq-Premetric-Space =
+  isometric-eq-Premetric-Space : UU (lsuc l1 ⊔ l2 ⊔ l2')
+  isometric-eq-Premetric-Space =
     type-subtype is-isometry-prop-eq-Premetric-Space
 ```
 
@@ -186,16 +186,16 @@ module _
   {l1 l2 : Level} (A B : Premetric-Space l1 l2)
   where
 
-  equiv-isometry-eq-Premetric-Space :
-    (A ＝ B) ≃ isometry-eq-Premetric-Space A B
-  equiv-isometry-eq-Premetric-Space =
+  equiv-isometric-eq-Premetric-Space :
+    (A ＝ B) ≃ isometric-eq-Premetric-Space A B
+  equiv-isometric-eq-Premetric-Space =
     ( equiv-tot (equiv-is-isometry-map-eq-tr-Premetric-Space A B)) ∘e
     ( equiv-eq-tr-Premetric-Space A B)
 
-  eq-isometry-eq-Premetric-Space :
-    isometry-eq-Premetric-Space A B → A ＝ B
-  eq-isometry-eq-Premetric-Space =
-    map-inv-equiv equiv-isometry-eq-Premetric-Space
+  eq-isometric-eq-Premetric-Space :
+    isometric-eq-Premetric-Space A B → A ＝ B
+  eq-isometric-eq-Premetric-Space =
+    map-inv-equiv equiv-isometric-eq-Premetric-Space
 ```
 
 ### Isometric equality of premetric spaces is torsorial
@@ -205,11 +205,11 @@ module _
   {l1 l2 : Level} (A : Premetric-Space l1 l2)
   where
 
-  is-torsorial-isometry-eq-Premetric-Space :
-    is-torsorial (isometry-eq-Premetric-Space A)
-  is-torsorial-isometry-eq-Premetric-Space =
+  is-torsorial-isometric-eq-Premetric-Space :
+    is-torsorial (isometric-eq-Premetric-Space A)
+  is-torsorial-isometric-eq-Premetric-Space =
     is-contr-equiv'
       ( Σ (Premetric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-isometry-eq-Premetric-Space A))
+      ( equiv-tot (equiv-isometric-eq-Premetric-Space A))
       ( is-torsorial-Id A)
 ```

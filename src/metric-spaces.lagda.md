@@ -60,7 +60,6 @@ open import metric-spaces.functions-metric-spaces public
 open import metric-spaces.functor-category-set-functions-isometry-metric-spaces public
 open import metric-spaces.functor-category-short-isometry-metric-spaces public
 open import metric-spaces.induced-premetric-structures-on-preimages public
-open import metric-spaces.invertible-isometries-premetric-spaces public
 open import metric-spaces.isometric-equivalences-premetric-spaces public
 open import metric-spaces.isometries-metric-spaces public
 open import metric-spaces.isometries-premetric-spaces public

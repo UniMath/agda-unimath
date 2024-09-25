@@ -45,11 +45,11 @@ module _
     is-torsorial (iso-Precategory precategory-short-function-Metric-Space A)
   is-torsorial-iso-short-function-Metric-Space A =
     is-contr-equiv
-      ( Σ (Metric-Space l1 l2) (isometry-is-equiv-Metric-Space A))
+      ( Σ (Metric-Space l1 l2) (isometric-equiv-Metric-Space' A))
       ( equiv-tot
-        ( equiv-isometry-is-equiv-iso-short-function-Metric-Space
+        ( equiv-isometric-equiv-iso-short-function-Metric-Space'
           ( A)))
-      ( is-torsorial-isometry-is-equiv-Metric-Space A)
+      ( is-torsorial-isometric-equiv-Metric-Space' A)
 
   is-category-precategory-short-function-Metric-Space :
     is-category-Precategory (precategory-short-function-Metric-Space {l1} {l2})
