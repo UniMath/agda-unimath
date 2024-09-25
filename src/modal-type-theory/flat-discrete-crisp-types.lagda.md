@@ -36,8 +36,8 @@ open import modal-type-theory.functoriality-flat-modality
 
 ## Idea
 
-A crisp type is said to be
-{{$concept "flat discrete" Disambiguation="crisp type" Agda=is-flat-discrete-crisp}}
+A [crisp type](modal-type-theory.crisp-types.md) is said to be
+{{#concept "flat discrete" Disambiguation="crisp type" Agda=is-flat-discrete-crisp}}
 if it is [flat](modal-type-theory.flat-modality.md) modal. I.e. if the flat
 counit is an [equivalence](foundation-core.equivalences.md) at that type.
 
@@ -120,9 +120,9 @@ module _
 
   is-flat-discrete-crisp-equiv :
     @♭ A ≃ B → is-flat-discrete-crisp A → is-flat-discrete-crisp B
-  is-flat-discrete-crisp-equiv e bB =
+  is-flat-discrete-crisp-equiv e bA =
     is-equiv-htpy-equiv'
-      ( e ∘e (counit-flat , bB) ∘e action-flat-equiv (inv-equiv e))
+      ( e ∘e (counit-flat , bA) ∘e action-flat-equiv (inv-equiv e))
       ( λ where (intro-flat x) → is-section-map-inv-equiv e x)
 
   is-flat-discrete-crisp-equiv' :
@@ -133,7 +133,7 @@ module _
       ( λ where (intro-flat x) → is-retraction-map-inv-equiv e x)
 ```
 
-### Types `♭ A` are flat discrete
+### Types in the image of `♭` are flat discrete
 
 This is Theorem 6.18 of {{#cite Shu18}}.
 
@@ -152,15 +152,15 @@ Given crisp elements `x` and `y` of `A` We have a
 [commuting triangle](foundation-core.commuting-triangles-of-maps.md)
 
 ```text
-                               ♭ (x ＝ y)
-                                  ∧   |
-                     Eq-eq-flat /~    |
-                              /       |
-  (intro-flat x ＝ intro-flat y)      | counit-flat
-                              \       |
-               ap (counit-flat) \     |
-                                  ∨   ∨
-                                 (x ＝ y)
+                              ♭ (x = y)
+                                 ∧   |
+                     Eq-eq-flat /~   |
+                               /     |
+  (intro-flat x = intro-flat y)      | counit-flat
+                               \     |
+               ap (counit-flat) \    |
+                                 ∨   ∨
+                                (x = y)
 ```
 
 where the top-left map `Eq-eq-flat` is an equivalence. Thus, the right map is an

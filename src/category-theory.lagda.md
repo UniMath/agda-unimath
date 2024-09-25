@@ -8,7 +8,7 @@
 
 {{#include tables/precategories.md}}
 
-## Files in the category theory folder
+## Modules in the category theory namespace
 
 ```agda
 module category-theory where

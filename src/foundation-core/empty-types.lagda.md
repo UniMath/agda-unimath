@@ -91,6 +91,16 @@ equiv-is-empty f g =
   ( pair f (is-equiv-is-empty f id))
 ```
 
+### Any map into an empty type is an embedding
+
+```agda
+abstract
+  is-emb-is-empty :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    is-empty B → is-emb f
+  is-emb-is-empty f H = is-emb-is-equiv (is-equiv-is-empty f H)
+```
+
 ### The empty type is a proposition
 
 ```agda

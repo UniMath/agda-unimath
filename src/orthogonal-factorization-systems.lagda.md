@@ -4,7 +4,7 @@
 
 {{#include tables/higher-modalities.md}}
 
-## Files in the orthogonal factorization systems folder
+## Modules in the orthogonal factorization systems namespace
 
 ```agda
 module orthogonal-factorization-systems where
