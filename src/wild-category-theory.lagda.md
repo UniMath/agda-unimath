@@ -8,7 +8,7 @@
 
 {{#include tables/wild-categories.md}}
 
-## Files in the wild category theory folder
+## Modules in the wild category theory namespace
 
 ```agda
 module wild-category-theory where

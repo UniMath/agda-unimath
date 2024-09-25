@@ -20,12 +20,18 @@ Some core principles of higher category theory include:
 - Any valid statement or construction in category theory must respect
   isomorphisms {{#cite Makkai98}}.
 
-## Files in the Synthetic category theory folder
+## Modules in the synthetic category theory namespace
 
 ```agda
 module synthetic-category-theory where
 
-open import synthetic-category-theory.equivalence-of-synthetic-categories public
+open import synthetic-category-theory.cone-diagrams-synthetic-categories public
+open import synthetic-category-theory.cospans-synthetic-categories public
+open import synthetic-category-theory.equivalences-synthetic-categories public
+open import synthetic-category-theory.invertible-functors-synthetic-categories public
+open import synthetic-category-theory.pullbacks-synthetic-categories public
+open import synthetic-category-theory.retractions-synthetic-categories public
+open import synthetic-category-theory.sections-synthetic-categories public
 open import synthetic-category-theory.synthetic-categories public
 ```
 

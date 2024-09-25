@@ -196,7 +196,7 @@ is-transitive-globular-structure-pointed-Π =
       is-transitive-globular-structure-Id (pointed-2-htpy α β)
 ```
 
-#### The uniform large globular structure on pointed types
+#### The nonuniform large globular structure on pointed types
 
 ```agda
 large-globular-structure-Pointed-Type :
