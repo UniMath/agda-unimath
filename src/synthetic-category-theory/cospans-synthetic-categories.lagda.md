@@ -16,16 +16,19 @@ open import foundation.universe-levels
 open import structured-types.globular-types
 
 open import synthetic-category-theory.synthetic-categories
+open import synthetic-category-theory.equivalences-synthetic-categories
 ```
 
 </details>
 
 ## Idea
 
-A cospan is a pair of functors f, g with a common codomain:
+A {{#concept "cospan" Disambiguation="Synthetic categories"}} of
+[synthetic categories](synthetic-category-theory.synthetic-categories.md)
+is a pair of functors f, g of synthetic categories with a common codomain:
 
 ```text
-C --f--> E <--g-- D
+C --f--> E <--g-- D.
 ```
 
 ## Definition
@@ -40,17 +43,17 @@ module _
     (C E D : category-Synthetic-Category-Theory κ) → UU l
   cospan-Synthetic-Category-Theory κ C E D =
     Σ ( functor-Synthetic-Category-Theory κ C E)
-      λ f → functor-Synthetic-Category-Theory κ D E
+      ( λ f → functor-Synthetic-Category-Theory κ D E)
 ```
 
-### The components of a cospan
+### The components of a cospan of synthetic categories
 
 ```agda
   left-source-cospan-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     {C E D : category-Synthetic-Category-Theory κ} →
     cospan-Synthetic-Category-Theory κ C E D →
-      category-Synthetic-Category-Theory κ
+    category-Synthetic-Category-Theory κ
   left-source-cospan-Synthetic-Category-Theory κ {C = C} S = C
 
   right-source-cospan-Synthetic-Category-Theory :
@@ -67,29 +70,29 @@ module _
     category-Synthetic-Category-Theory κ
   target-cospan-Synthetic-Category-Theory κ {E = E} S = E
 
-  left-map-cospan-Synthetic-Category-Theory :
+  left-functor-cospan-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     {C E D : category-Synthetic-Category-Theory κ}
     (S : cospan-Synthetic-Category-Theory κ C E D) →
     functor-Synthetic-Category-Theory κ
       ( left-source-cospan-Synthetic-Category-Theory κ S)
       ( target-cospan-Synthetic-Category-Theory κ S)
-  left-map-cospan-Synthetic-Category-Theory κ = pr1
+  left-functor-cospan-Synthetic-Category-Theory κ = pr1
 
-  right-map-cospan-Synthetic-Category-Theory :
+  right-functor-cospan-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     {C E D : category-Synthetic-Category-Theory κ}
     (S : cospan-Synthetic-Category-Theory κ C E D) →
     functor-Synthetic-Category-Theory κ
       ( right-source-cospan-Synthetic-Category-Theory κ S)
       ( target-cospan-Synthetic-Category-Theory κ S)
-  right-map-cospan-Synthetic-Category-Theory κ = pr2
+  right-functor-cospan-Synthetic-Category-Theory κ = pr2
 ```
 
-## Transformations of cone diagrams
+## Transformations of cospans of synthetic categories
 
 A transformation between cospans C --f--> E <--g-- D and C'--f'--> E' <--g'-- D'
-is a commutative diagram of the form:
+is commutative diagram of the form:
 
 ```text
 C --f---> E <---g-- D
@@ -97,7 +100,7 @@ C --f---> E <---g-- D
 φ   τ⇙    χ    σ⇙   ψ
 |         |         |
 v         v         v
-C'--f'--> E' <--g'--D'
+C'--f'--> E' <--g'--D'.
 ```
 
 ```agda
@@ -115,71 +118,72 @@ module _
     Σ ( functor-Synthetic-Category-Theory κ
         ( left-source-cospan-Synthetic-Category-Theory κ S)
         ( left-source-cospan-Synthetic-Category-Theory κ S'))
-    λ φ →
-      Σ ( functor-Synthetic-Category-Theory κ
-          ( target-cospan-Synthetic-Category-Theory κ S)
-          ( target-cospan-Synthetic-Category-Theory κ S'))
-      λ χ →
+      ( λ φ →
         Σ ( functor-Synthetic-Category-Theory κ
-            ( right-source-cospan-Synthetic-Category-Theory κ S)
-            ( right-source-cospan-Synthetic-Category-Theory κ S'))
-        λ ψ →
-          Σ ( commuting-square-functors-Synthetic-Category-Theory κ μ
-              ( left-map-cospan-Synthetic-Category-Theory κ S)
-              ( χ)
-              ( φ)
-              ( left-map-cospan-Synthetic-Category-Theory κ S'))
-            λ τ →
-              commuting-square-functors-Synthetic-Category-Theory κ μ
-                ( right-map-cospan-Synthetic-Category-Theory κ S)
-                ( χ)
-                ( ψ)
-                ( right-map-cospan-Synthetic-Category-Theory κ S')
+            ( target-cospan-Synthetic-Category-Theory κ S)
+            ( target-cospan-Synthetic-Category-Theory κ S'))
+          ( λ χ →
+            Σ ( functor-Synthetic-Category-Theory κ
+                ( right-source-cospan-Synthetic-Category-Theory κ S)
+                ( right-source-cospan-Synthetic-Category-Theory κ S'))
+              ( λ ψ →
+                Σ ( commuting-square-functors-Synthetic-Category-Theory κ μ
+                    ( left-functor-cospan-Synthetic-Category-Theory κ S)
+                    ( χ)
+                    ( φ)
+                    ( left-functor-cospan-Synthetic-Category-Theory κ S'))
+                  ( λ τ →
+                    commuting-square-functors-Synthetic-Category-Theory κ μ
+                      ( right-functor-cospan-Synthetic-Category-Theory κ S)
+                      ( χ)
+                      ( ψ)
+                      ( right-functor-cospan-Synthetic-Category-Theory κ S')))))
 ```
 
-## The components of a transformation of cospans
+### The components of a transformation of cospans of synthetic categories
 
 ```agda
 module _
   {l : Level}
   where
 
-  left-map-transformation-cospan-Synthetic-Category-Theory :
+  left-functor-transformation-cospan-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
     {C C' E E' D D' : category-Synthetic-Category-Theory κ}
     {S : cospan-Synthetic-Category-Theory κ C E D}
     {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
     transformation-cospan-Synthetic-Category-Theory κ μ S S' →
-      functor-Synthetic-Category-Theory κ
-        ( left-source-cospan-Synthetic-Category-Theory κ S)
-        ( left-source-cospan-Synthetic-Category-Theory κ S')
-  left-map-transformation-cospan-Synthetic-Category-Theory κ μ H = pr1 H
+    functor-Synthetic-Category-Theory κ
+      ( left-source-cospan-Synthetic-Category-Theory κ S)
+      ( left-source-cospan-Synthetic-Category-Theory κ S')
+  left-functor-transformation-cospan-Synthetic-Category-Theory κ μ H = pr1 H
 
-  right-map-transformation-cospan-Synthetic-Category-Theory :
+  right-functor-transformation-cospan-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
     {C C' E E' D D' : category-Synthetic-Category-Theory κ}
     {S : cospan-Synthetic-Category-Theory κ C E D}
     {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
     transformation-cospan-Synthetic-Category-Theory κ μ S S' →
-      functor-Synthetic-Category-Theory κ
-        ( right-source-cospan-Synthetic-Category-Theory κ S)
-        ( right-source-cospan-Synthetic-Category-Theory κ S')
-  right-map-transformation-cospan-Synthetic-Category-Theory κ μ H =
+    functor-Synthetic-Category-Theory κ
+      ( right-source-cospan-Synthetic-Category-Theory κ S)
+      ( right-source-cospan-Synthetic-Category-Theory κ S')
+  right-functor-transformation-cospan-Synthetic-Category-Theory κ μ H =
     pr1 (pr2 (pr2 H))
 
-  middle-map-transformation-cospan-Synthetic-Category-Theory :
+  middle-functor-transformation-cospan-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
     {C C' E E' D D' : category-Synthetic-Category-Theory κ}
     {S : cospan-Synthetic-Category-Theory κ C E D}
     {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
     transformation-cospan-Synthetic-Category-Theory κ μ S S' →
-      functor-Synthetic-Category-Theory κ
-        ( target-cospan-Synthetic-Category-Theory κ S)
-        ( target-cospan-Synthetic-Category-Theory κ S')
-  middle-map-transformation-cospan-Synthetic-Category-Theory κ μ H = pr1 (pr2 H)
+    functor-Synthetic-Category-Theory κ
+      ( target-cospan-Synthetic-Category-Theory κ S)
+      ( target-cospan-Synthetic-Category-Theory κ S')
+  middle-functor-transformation-cospan-Synthetic-Category-Theory κ μ H =
+    pr1 (pr2 H)
 
   left-commuting-square-transformation-cospan-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
@@ -188,11 +192,11 @@ module _
     {S : cospan-Synthetic-Category-Theory κ C E D}
     {S' : cospan-Synthetic-Category-Theory κ C' E' D'}
     (H : transformation-cospan-Synthetic-Category-Theory κ μ S S') →
-      commuting-square-functors-Synthetic-Category-Theory κ μ
-        ( left-map-cospan-Synthetic-Category-Theory κ S)
-        ( middle-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
-        ( left-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
-        ( left-map-cospan-Synthetic-Category-Theory κ S')
+    commuting-square-functors-Synthetic-Category-Theory κ μ
+      ( left-functor-cospan-Synthetic-Category-Theory κ S)
+      ( middle-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+      ( left-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+      ( left-functor-cospan-Synthetic-Category-Theory κ S')
   left-commuting-square-transformation-cospan-Synthetic-Category-Theory κ μ H =
     pr1 (pr2 (pr2 (pr2 H)))
 
@@ -203,11 +207,54 @@ module _
     {S : cospan-Synthetic-Category-Theory κ C E D}
     {S' : cospan-Synthetic-Category-Theory κ C' E' D'}
     (H : transformation-cospan-Synthetic-Category-Theory κ μ S S') →
-      commuting-square-functors-Synthetic-Category-Theory κ μ
-        ( right-map-cospan-Synthetic-Category-Theory κ S)
-        ( middle-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
-        ( right-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
-        ( right-map-cospan-Synthetic-Category-Theory κ S')
+    commuting-square-functors-Synthetic-Category-Theory κ μ
+      ( right-functor-cospan-Synthetic-Category-Theory κ S)
+      ( middle-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+      ( right-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+      ( right-functor-cospan-Synthetic-Category-Theory κ S')
   right-commuting-square-transformation-cospan-Synthetic-Category-Theory κ μ H =
     pr2 (pr2 (pr2 (pr2 H)))
+```
+
+### Equivalences of cospans
+
+An equivalence of cospans S and S' is a transformations between S and S'
+such that all three vertical functors are equivalences.
+
+```agda
+module _
+  {l : Level}
+  where
+
+  equiv-cospan-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C C' E E' D D' : category-Synthetic-Category-Theory κ}
+    (S : cospan-Synthetic-Category-Theory κ C E D)
+    (S' : cospan-Synthetic-Category-Theory κ C' E' D') → UU l
+  equiv-cospan-Synthetic-Category-Theory κ μ ι S S' =
+    Σ ( equiv-Synthetic-Category-Theory κ μ ι
+        ( left-source-cospan-Synthetic-Category-Theory κ S)
+        ( left-source-cospan-Synthetic-Category-Theory κ S'))
+      ( λ φ →
+        Σ ( equiv-Synthetic-Category-Theory κ μ ι
+            ( target-cospan-Synthetic-Category-Theory κ S)
+            ( target-cospan-Synthetic-Category-Theory κ S'))
+          ( λ χ →
+            Σ ( equiv-Synthetic-Category-Theory κ μ ι
+                ( right-source-cospan-Synthetic-Category-Theory κ S)
+                ( right-source-cospan-Synthetic-Category-Theory κ S'))
+              ( λ ψ →
+                Σ ( commuting-square-functors-Synthetic-Category-Theory κ μ
+                    ( left-functor-cospan-Synthetic-Category-Theory κ S)
+                    ( functor-equiv-Synthetic-Category-Theory κ μ ι χ)
+                    ( functor-equiv-Synthetic-Category-Theory κ μ ι φ)
+                    ( left-functor-cospan-Synthetic-Category-Theory κ S'))
+                  ( λ τ →
+                    commuting-square-functors-Synthetic-Category-Theory κ μ
+                      ( right-functor-cospan-Synthetic-Category-Theory κ S)
+                      ( functor-equiv-Synthetic-Category-Theory κ μ ι χ)
+                      ( functor-equiv-Synthetic-Category-Theory κ μ ι ψ)
+                      ( right-functor-cospan-Synthetic-Category-Theory κ S')))))
 ```

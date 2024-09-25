@@ -1,4 +1,4 @@
-# Equivalences of synthetic categories
+# Equivalences between synthetic categories
 
 ```agda
 {-# OPTIONS --guardedness #-}
@@ -15,7 +15,6 @@ open import foundation.universe-levels
 
 open import structured-types.globular-types
 
-open import synthetic-category-theory.biinvertible-maps-synthetic-categories
 open import synthetic-category-theory.retractions-synthetic-categories
 open import synthetic-category-theory.sections-synthetic-categories
 open import synthetic-category-theory.synthetic-categories
@@ -25,30 +24,10 @@ open import synthetic-category-theory.synthetic-categories
 
 ## Idea
 
-A functor f: A → B is an equivalence if it has an inverse, i.e. if there exists
-a functor g: B → A and natural isomorphisms g∘f ≅ id and g∘f ≅ id. Note that
-this definition differs from the convention in the rest of this library, where
-equivalences are defined as biinvertible maps.
-
-### The predicate of being an inverse to a functor f: A → B
-
-```agda
-module _
-  {l : Level}
-  where
-
-  is-inverse-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l)
-    (μ : composition-Synthetic-Category-Theory κ)
-    (ι : identity-Synthetic-Category-Theory κ)
-    {C D : category-Synthetic-Category-Theory κ}
-    (f : functor-Synthetic-Category-Theory κ C D)
-    (g : functor-Synthetic-Category-Theory κ D C) → UU l
-  is-inverse-Synthetic-Category-Theory κ μ ι f g =
-    ( is-section-Synthetic-Category-Theory κ μ ι f g)
-      ×
-    ( is-retraction-Synthetic-Category-Theory κ μ ι f g)
-```
+A functor f: A → B of [synthetic categories](synthetic-category-theory.synthetic-categories.md)
+is an {{#concept "equivalence" Disambiguation="Synthetic categories}} if it has a
+[section](synthetic-category-theory.sections-synthetic-categories.md) and a
+[retraction](synthetic-category-theory.retractions-synthetic-categores.md).
 
 ### The predicate of being an equivalence
 
@@ -59,87 +38,22 @@ module _
 
   is-equiv-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
+    {C D : category-Synthetic-Category-Theory κ}
     (μ : composition-Synthetic-Category-Theory κ)
     (ι : identity-Synthetic-Category-Theory κ)
-    {C D : category-Synthetic-Category-Theory κ}
     (f : functor-Synthetic-Category-Theory κ C D) → UU l
   is-equiv-Synthetic-Category-Theory κ μ ι f =
-    Σ ( functor-Synthetic-Category-Theory κ _ _)
-      λ g →
-        ( is-inverse-Synthetic-Category-Theory κ μ ι f g)
+    ( section-Synthetic-Category-Theory κ μ ι f)
+      ×
+    ( retraction-Synthetic-Category-Theory κ μ ι f)
 ```
 
 ### The components of a proof of being an equivalence
 
 ```agda
-  inverse-is-equiv-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l)
-    (μ : composition-Synthetic-Category-Theory κ)
-    (ι : identity-Synthetic-Category-Theory κ)
-    {C D : category-Synthetic-Category-Theory κ}
-    {f : functor-Synthetic-Category-Theory κ C D} →
-    is-equiv-Synthetic-Category-Theory κ μ ι f →
-      functor-Synthetic-Category-Theory κ D C
-  inverse-is-equiv-Synthetic-Category-Theory κ μ ι = pr1
-
-  is-inverse-map-inverse-is-equiv-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l)
-    (μ : composition-Synthetic-Category-Theory κ)
-    (ι : identity-Synthetic-Category-Theory κ)
-    {C D : category-Synthetic-Category-Theory κ}
-    {f : functor-Synthetic-Category-Theory κ C D}
-    (H : is-equiv-Synthetic-Category-Theory κ μ ι f) →
-      is-inverse-Synthetic-Category-Theory κ μ ι f
-        ( inverse-is-equiv-Synthetic-Category-Theory κ μ ι H)
-  is-inverse-map-inverse-is-equiv-Synthetic-Category-Theory κ μ ι = pr2
-
-  is-section-map-inverse-is-equiv-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l)
-    (μ : composition-Synthetic-Category-Theory κ)
-    (ι : identity-Synthetic-Category-Theory κ)
-    {C D : category-Synthetic-Category-Theory κ}
-    {f : functor-Synthetic-Category-Theory κ C D}
-    (H : is-equiv-Synthetic-Category-Theory κ μ ι f) →
-      is-section-Synthetic-Category-Theory κ μ ι f
-        ( inverse-is-equiv-Synthetic-Category-Theory κ μ ι H)
-  is-section-map-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H =
-    pr1 (is-inverse-map-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H)
-
-  is-retraction-map-inverse-is-equiv-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l)
-    (μ : composition-Synthetic-Category-Theory κ)
-    (ι : identity-Synthetic-Category-Theory κ)
-    {C D : category-Synthetic-Category-Theory κ}
-    {f : functor-Synthetic-Category-Theory κ C D}
-    (H : is-equiv-Synthetic-Category-Theory κ μ ι f) →
-      is-retraction-Synthetic-Category-Theory κ μ ι f
-        ( inverse-is-equiv-Synthetic-Category-Theory κ μ ι H)
-  is-retraction-map-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H =
-    pr2 (is-inverse-map-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H)
-
-  is-section-inverse-is-equiv-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l)
-    (μ : composition-Synthetic-Category-Theory κ)
-    (ι : identity-Synthetic-Category-Theory κ)
-    {C D : category-Synthetic-Category-Theory κ}
-    {f : functor-Synthetic-Category-Theory κ C D}
-    (H : is-equiv-Synthetic-Category-Theory κ μ ι f) →
-      is-section-Synthetic-Category-Theory κ μ ι f
-        ( inverse-is-equiv-Synthetic-Category-Theory κ μ ι H)
-  is-section-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H =
-    is-section-map-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H
-
-  is-retraction-inverse-is-equiv-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l)
-    (μ : composition-Synthetic-Category-Theory κ)
-    (ι : identity-Synthetic-Category-Theory κ)
-    {C D : category-Synthetic-Category-Theory κ}
-    {f : functor-Synthetic-Category-Theory κ C D}
-    (H : is-equiv-Synthetic-Category-Theory κ μ ι f) →
-      is-retraction-Synthetic-Category-Theory κ μ ι f
-        ( inverse-is-equiv-Synthetic-Category-Theory κ μ ι H)
-  is-retraction-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H =
-    is-retraction-map-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H
+module _
+  {l : Level}
+  where
 
   section-is-equiv-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
@@ -148,10 +62,8 @@ module _
     {C D : category-Synthetic-Category-Theory κ}
     {f : functor-Synthetic-Category-Theory κ C D} →
     is-equiv-Synthetic-Category-Theory κ μ ι f →
-      section-Synthetic-Category-Theory κ μ ι f
-  section-is-equiv-Synthetic-Category-Theory κ μ ι H =
-    inverse-is-equiv-Synthetic-Category-Theory κ μ ι H ,
-    is-section-map-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H
+    section-Synthetic-Category-Theory κ μ ι f
+  section-is-equiv-Synthetic-Category-Theory κ μ ι = pr1
 
   retraction-is-equiv-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
@@ -160,156 +72,76 @@ module _
     {C D : category-Synthetic-Category-Theory κ}
     {f : functor-Synthetic-Category-Theory κ C D} →
     is-equiv-Synthetic-Category-Theory κ μ ι f →
-      retraction-Synthetic-Category-Theory κ μ ι f
-  retraction-is-equiv-Synthetic-Category-Theory κ μ ι H =
-    inverse-is-equiv-Synthetic-Category-Theory κ μ ι H ,
-    is-retraction-map-inverse-is-equiv-Synthetic-Category-Theory κ μ ι H
+    retraction-Synthetic-Category-Theory κ μ ι f
+  retraction-is-equiv-Synthetic-Category-Theory κ μ ι = pr2
 ```
 
-### A functor f : C → D admits is biinvertible iff it is an equivalence
+### The type of equivalences between two given synthetic categories
 
 ```agda
 module _
   {l : Level}
   where
 
-  is-biinv-is-equiv-Synthetic-Category-Theory :
+  equiv-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
     (ι : identity-Synthetic-Category-Theory κ)
-    {C D : category-Synthetic-Category-Theory κ}
-    {f : functor-Synthetic-Category-Theory κ C D} →
-    is-equiv-Synthetic-Category-Theory κ μ ι f →
-      is-biinv-Synthetic-Category-Theory κ μ ι f
-  is-biinv-is-equiv-Synthetic-Category-Theory κ μ ι H =
-      section-is-equiv-Synthetic-Category-Theory κ μ ι H ,
-      retraction-is-equiv-Synthetic-Category-Theory κ μ ι H
-
-  is-equiv-is-biinv-Synthetic-Category-Theory :
-    (κ : language-Synthetic-Category-Theory l)
-    (μ : composition-Synthetic-Category-Theory κ)
-    (ι : identity-Synthetic-Category-Theory κ)
-    (ν : inverse-Synthetic-Category-Theory κ μ ι)
-    (Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ)
-    (Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ)
-    (X : horizontal-composition-Synthetic-Category-Theory κ μ)
-    (Α : associative-composition-Synthetic-Category-Theory κ μ)
-    {C D : category-Synthetic-Category-Theory κ}
-    {f : functor-Synthetic-Category-Theory κ C D} →
-    is-biinv-Synthetic-Category-Theory κ μ ι f →
-      is-equiv-Synthetic-Category-Theory κ μ ι f
-  is-equiv-is-biinv-Synthetic-Category-Theory κ μ ι ν Λ Ρ Χ Α B =
-    map-section-Synthetic-Category-Theory κ μ ι
-      ( section-is-biinv-Synthetic-Category-Theory κ μ ι B) ,
-    is-section-map-section-Synthetic-Category-Theory κ μ ι
-      ( section-is-biinv-Synthetic-Category-Theory κ μ ι B) ,
-    comp-iso-Synthetic-Category-Theory μ
-      ( is-retraction-map-retraction-Synthetic-Category-Theory κ μ ι
-        ( retraction-is-biinv-Synthetic-Category-Theory κ μ ι B))
-      ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-        ( comp-iso-Synthetic-Category-Theory μ
-          ( comp-iso-Synthetic-Category-Theory μ
-            ( comp-iso-Synthetic-Category-Theory μ
-              ( comp-iso-Synthetic-Category-Theory μ
-                ( right-unit-law-comp-functor-Synthetic-Category-Theory Ρ
-                  ( map-retraction-Synthetic-Category-Theory κ μ ι
-                    ( retraction-is-biinv-Synthetic-Category-Theory κ μ ι B)))
-                ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-                  ( id-iso-Synthetic-Category-Theory ι
-                    ( map-retraction-Synthetic-Category-Theory κ μ ι
-                      ( retraction-is-biinv-Synthetic-Category-Theory κ μ ι B)))
-                  ( is-section-map-section-Synthetic-Category-Theory κ μ ι
-                    ( section-is-biinv-Synthetic-Category-Theory κ μ ι B))))
-              ( associative-comp-functor-Synthetic-Category-Theory Α
-                ( map-retraction-Synthetic-Category-Theory κ μ ι
-                  ( retraction-is-biinv-Synthetic-Category-Theory κ μ ι B))
-                ( _)
-                ( map-section-Synthetic-Category-Theory κ μ ι
-                  ( section-is-biinv-Synthetic-Category-Theory κ μ ι B))))
-            ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-              ( inv-iso-Synthetic-Category-Theory ν
-                ( is-retraction-map-retraction-Synthetic-Category-Theory κ μ ι
-                  ( retraction-is-biinv-Synthetic-Category-Theory κ μ ι B)))
-              ( id-iso-Synthetic-Category-Theory ι
-                ( map-section-Synthetic-Category-Theory κ μ ι
-                  ( section-is-biinv-Synthetic-Category-Theory κ μ ι B)))))
-          ( inv-iso-Synthetic-Category-Theory ν
-            ( left-unit-law-comp-functor-Synthetic-Category-Theory Λ
-              ( map-section-Synthetic-Category-Theory κ μ ι
-                ( section-is-biinv-Synthetic-Category-Theory κ μ ι B)))))
-        ( id-iso-Synthetic-Category-Theory ι _))
+    (C D : category-Synthetic-Category-Theory κ) → UU l
+  equiv-Synthetic-Category-Theory κ μ ι C D =
+    Σ ( functor-Synthetic-Category-Theory κ C D)
+      ( is-equiv-Synthetic-Category-Theory κ μ ι)
 ```
 
-### Equivalences are closed under composition
+### The components of an equivalence of synthetic categories
 
 ```agda
 module _
   {l : Level}
   where
 
-  equiv-comp-equiv-Synthetic-Category-Theory :
+  functor-equiv-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    {C D : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ) →
+    equiv-Synthetic-Category-Theory κ μ ι C D →
+    functor-Synthetic-Category-Theory κ C D
+  functor-equiv-Synthetic-Category-Theory κ μ ι = pr1
+
+  is-equiv-functor-equiv-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    {C D : category-Synthetic-Category-Theory κ}
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ) →
+    (H : equiv-Synthetic-Category-Theory κ μ ι C D) →
+    is-equiv-Synthetic-Category-Theory κ μ ι
+      ( functor-equiv-Synthetic-Category-Theory κ μ ι H)
+  is-equiv-functor-equiv-Synthetic-Category-Theory κ μ ι = pr2
+
+  section-functor-equiv-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
     (ι : identity-Synthetic-Category-Theory κ)
-    (ν : inverse-Synthetic-Category-Theory κ μ ι)
-    (Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ)
-    (Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ)
-    (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
-    (Α : associative-composition-Synthetic-Category-Theory κ μ)
-    {C D E : category-Synthetic-Category-Theory κ}
-    {f' : functor-Synthetic-Category-Theory κ D E}
-    {f : functor-Synthetic-Category-Theory κ C D} →
-    is-equiv-Synthetic-Category-Theory κ μ ι f' →
-    is-equiv-Synthetic-Category-Theory κ μ ι f →
-      is-equiv-Synthetic-Category-Theory κ μ ι
-        ( comp-functor-Synthetic-Category-Theory μ f' f)
-  equiv-comp-equiv-Synthetic-Category-Theory κ μ ι ν Λ Ρ Χ Α K H =
-    ( comp-functor-Synthetic-Category-Theory μ _ _) ,
-    ( comp-iso-Synthetic-Category-Theory μ
-      ( is-section-map-section-Synthetic-Category-Theory κ μ ι
-        ( section-is-equiv-Synthetic-Category-Theory κ μ ι K))
-      ( comp-iso-Synthetic-Category-Theory μ
-        ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-          ( right-unit-law-comp-functor-Synthetic-Category-Theory Ρ _)
-          ( id-iso-Synthetic-Category-Theory ι
-            ( _)))
-        ( comp-iso-Synthetic-Category-Theory μ
-          ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-            ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-              ( id-iso-Synthetic-Category-Theory ι _)
-              ( is-section-map-section-Synthetic-Category-Theory κ μ ι
-                ( section-is-equiv-Synthetic-Category-Theory κ μ ι H)))
-            ( id-iso-Synthetic-Category-Theory ι _))
-          ( comp-iso-Synthetic-Category-Theory μ
-            ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-              ( associative-comp-functor-Synthetic-Category-Theory Α _ _ _)
-              ( id-iso-Synthetic-Category-Theory ι _))
-            ( inv-iso-Synthetic-Category-Theory ν
-              ( associative-comp-functor-Synthetic-Category-Theory Α
-                ( comp-functor-Synthetic-Category-Theory μ _ _)
-                ( _)
-                ( _))))))) ,
-    comp-iso-Synthetic-Category-Theory μ
-      ( is-retraction-map-retraction-Synthetic-Category-Theory κ μ ι
-        ( retraction-is-equiv-Synthetic-Category-Theory κ μ ι H))
-      ( comp-iso-Synthetic-Category-Theory μ
-        ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-          ( right-unit-law-comp-functor-Synthetic-Category-Theory Ρ _)
-          ( id-iso-Synthetic-Category-Theory ι _))
-        ( comp-iso-Synthetic-Category-Theory μ
-          ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-            ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-              ( id-iso-Synthetic-Category-Theory ι _)
-              ( is-retraction-map-retraction-Synthetic-Category-Theory κ μ ι
-                ( retraction-is-equiv-Synthetic-Category-Theory κ μ ι K)))
-            ( id-iso-Synthetic-Category-Theory ι _))
-          ( comp-iso-Synthetic-Category-Theory μ
-            ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-              ( associative-comp-functor-Synthetic-Category-Theory Α _ _ _)
-              ( id-iso-Synthetic-Category-Theory ι _))
-            ( inv-iso-Synthetic-Category-Theory ν
-              ( associative-comp-functor-Synthetic-Category-Theory Α
-                ( comp-functor-Synthetic-Category-Theory μ _ _)
-                ( _)
-                ( _))))))
+    {C D : category-Synthetic-Category-Theory κ}
+    {f : functor-Synthetic-Category-Theory κ C D}
+    (H : equiv-Synthetic-Category-Theory κ μ ι C D) →
+    section-Synthetic-Category-Theory κ μ ι
+      ( functor-equiv-Synthetic-Category-Theory κ μ ι H)
+  section-functor-equiv-Synthetic-Category-Theory κ μ ι H =
+    section-is-equiv-Synthetic-Category-Theory κ μ ι
+      ( is-equiv-functor-equiv-Synthetic-Category-Theory κ μ ι H)
+
+  retraction-functor-equiv-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C D : category-Synthetic-Category-Theory κ}
+    {f : functor-Synthetic-Category-Theory κ C D}
+    (H : equiv-Synthetic-Category-Theory κ μ ι C D) →
+    retraction-Synthetic-Category-Theory κ μ ι
+      ( functor-equiv-Synthetic-Category-Theory κ μ ι H)
+  retraction-functor-equiv-Synthetic-Category-Theory κ μ ι H =
+    retraction-is-equiv-Synthetic-Category-Theory κ μ ι
+      ( is-equiv-functor-equiv-Synthetic-Category-Theory κ μ ι H)
 ```

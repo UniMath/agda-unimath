@@ -66,7 +66,7 @@ module _
 ### The components of a section
 
 ```agda
-  map-section-Synthetic-Category-Theory :
+  functor-section-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
     (ι : identity-Synthetic-Category-Theory κ)
@@ -74,9 +74,9 @@ module _
     {f : functor-Synthetic-Category-Theory κ C D} →
     section-Synthetic-Category-Theory κ μ ι f →
       functor-Synthetic-Category-Theory κ D C
-  map-section-Synthetic-Category-Theory κ μ ι = pr1
+  functor-section-Synthetic-Category-Theory κ μ ι = pr1
 
-  is-section-map-section-Synthetic-Category-Theory :
+  is-section-functor-section-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
     (ι : identity-Synthetic-Category-Theory κ)
@@ -84,6 +84,6 @@ module _
     {f : functor-Synthetic-Category-Theory κ C D}
     (s : section-Synthetic-Category-Theory κ μ ι f) →
       is-section-Synthetic-Category-Theory κ μ ι f
-        ( map-section-Synthetic-Category-Theory κ μ ι s)
-  is-section-map-section-Synthetic-Category-Theory κ μ ι = pr2
+        ( functor-section-Synthetic-Category-Theory κ μ ι s)
+  is-section-functor-section-Synthetic-Category-Theory κ μ ι = pr2
 ```

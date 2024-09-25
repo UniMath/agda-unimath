@@ -118,14 +118,14 @@ module _
     (κ : language-Synthetic-Category-Theory l)
     {C D : category-Synthetic-Category-Theory κ} →
     functor-Synthetic-Category-Theory κ C D →
-      category-Synthetic-Category-Theory κ
+    category-Synthetic-Category-Theory κ
   source-functor-Synthetic-Category-Theory κ {C = C} f = C
 
   target-functor-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     {C D : category-Synthetic-Category-Theory κ} →
     functor-Synthetic-Category-Theory κ C D →
-      category-Synthetic-Category-Theory κ
+    category-Synthetic-Category-Theory κ
   target-functor-Synthetic-Category-Theory κ {D = D} f = D
 ```
 
@@ -460,11 +460,11 @@ module _
     {C D : category-Synthetic-Category-Theory κ}
     {F G : functor-Synthetic-Category-Theory κ C D}
     (α : isomorphism-Synthetic-Category-Theory κ F G) →
-      isomorphism-Synthetic-Category-Theory
-        ( functor-globular-type-Synthetic-Category-Theory κ C D)
-        ( inv-iso-Synthetic-Category-Theory ν
-          ( inv-iso-Synthetic-Category-Theory ν α))
-        ( α)
+    isomorphism-Synthetic-Category-Theory
+      ( functor-globular-type-Synthetic-Category-Theory κ C D)
+      ( inv-iso-Synthetic-Category-Theory ν
+        ( inv-iso-Synthetic-Category-Theory ν α))
+      ( α)
   inverse-idempotent-Synthetic-Category-Theory κ μ ι ν Α Χ Λ Ρ α =
     comp-iso-Synthetic-Category-Theory
       ( composition-isomorphism-Synthetic-Category-Theory μ)
@@ -652,34 +652,27 @@ module _
     (u : functor-Synthetic-Category-Theory κ B Y) →
     (commuting-square-functors-Synthetic-Category-Theory κ μ f u r s) →
     (commuting-square-functors-Synthetic-Category-Theory κ μ g h u t) →
-      commuting-square-functors-Synthetic-Category-Theory κ μ
-        ( comp-functor-Synthetic-Category-Theory μ g f)
-        ( h)
-        ( r)
-        ( comp-functor-Synthetic-Category-Theory μ t s)
+    commuting-square-functors-Synthetic-Category-Theory κ μ
+      ( comp-functor-Synthetic-Category-Theory μ g f)
+      ( h)
+      ( r)
+      ( comp-functor-Synthetic-Category-Theory μ t s)
   pasting-commuting-squares-functors-Synthetic-Category-Theory
     κ μ ι ν α Χ f g h r s t u τ σ =
-      let
-        comp = comp-iso-Synthetic-Category-Theory μ
-        horcomp = horizontal-comp-iso-Synthetic-Category-Theory Χ
-        inv = inv-iso-Synthetic-Category-Theory ν
-        assoc = associative-comp-functor-Synthetic-Category-Theory α
-        id = id-iso-Synthetic-Category-Theory ι
-      in
-      comp-iso-Synthetic-Category-Theory μ
-        ( inv-iso-Synthetic-Category-Theory ν
-          ( associative-comp-functor-Synthetic-Category-Theory α t s r))
+    comp-iso-Synthetic-Category-Theory μ
+      ( inv-iso-Synthetic-Category-Theory ν
+        ( associative-comp-functor-Synthetic-Category-Theory α t s r))
+      ( comp-iso-Synthetic-Category-Theory μ
+        ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+          (id-iso-Synthetic-Category-Theory ι t) τ)
         ( comp-iso-Synthetic-Category-Theory μ
-          ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-            (id-iso-Synthetic-Category-Theory ι t) τ)
+          ( associative-comp-functor-Synthetic-Category-Theory α t u f)
           ( comp-iso-Synthetic-Category-Theory μ
-            ( associative-comp-functor-Synthetic-Category-Theory α t u f)
-            ( comp-iso-Synthetic-Category-Theory μ
-              ( horizontal-comp-iso-Synthetic-Category-Theory Χ
-                ( σ)
-                ( id-iso-Synthetic-Category-Theory ι f))
-              ( inv-iso-Synthetic-Category-Theory ν
-                ( associative-comp-functor-Synthetic-Category-Theory α h g f)))))
+            ( horizontal-comp-iso-Synthetic-Category-Theory Χ
+              ( σ)
+              ( id-iso-Synthetic-Category-Theory ι f))
+            ( inv-iso-Synthetic-Category-Theory ν
+              ( associative-comp-functor-Synthetic-Category-Theory α h g f)))))
 ```
 
 #### Commutative squares of isomorphisms in the language of synthetic category theory
@@ -729,19 +722,19 @@ module _
     (ξ : isomorphism-Synthetic-Category-Theory κ g s) →
     (commuting-square-isomorphisms-Synthetic-Category-Theory κ μ α ξ δ ε) →
     (commuting-square-isomorphisms-Synthetic-Category-Theory κ μ β γ ξ φ) →
-      commuting-square-isomorphisms-Synthetic-Category-Theory κ μ
-        ( comp-iso-Synthetic-Category-Theory μ β α)
-        ( γ)
-        ( δ)
-        ( comp-iso-Synthetic-Category-Theory μ φ ε)
+    commuting-square-isomorphisms-Synthetic-Category-Theory κ μ
+      ( comp-iso-Synthetic-Category-Theory μ β α)
+      ( γ)
+      ( δ)
+      ( comp-iso-Synthetic-Category-Theory μ φ ε)
   pasting-commuting-squares-isomorphisms-Synthetic-Category-Theory κ μ ι ν Α Χ =
-      pasting-commuting-squares-functors-Synthetic-Category-Theory
-        ( functor-globular-type-Synthetic-Category-Theory κ _ _)
-        ( composition-isomorphism-Synthetic-Category-Theory μ)
-        ( identity-isomorphism-Synthetic-Category-Theory ι)
-        ( inverse-isomorphism-Synthetic-Category-Theory ν)
-        ( associative-comp-isomorphism-Synthetic-Category-Theory Α)
-        ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+    pasting-commuting-squares-functors-Synthetic-Category-Theory
+      ( functor-globular-type-Synthetic-Category-Theory κ _ _)
+      ( composition-isomorphism-Synthetic-Category-Theory μ)
+      ( identity-isomorphism-Synthetic-Category-Theory ι)
+      ( inverse-isomorphism-Synthetic-Category-Theory ν)
+      ( associative-comp-isomorphism-Synthetic-Category-Theory Α)
+      ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
 ```
 
 #### Left unit law preservation operators for horizontal composition
@@ -863,7 +856,7 @@ module _
 open preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory public
 ```
 
-#### The inverse of the associator preservers horizontal composition
+#### We can prove that the inverse of the associator preservers horizontal composition.
 
 ```agda
 module _
@@ -1022,6 +1015,10 @@ module _
 ```
 
 #### Preservation of isomorphisms of natural isomorphisms by horizontal composition
+
+We have to assume as an additional axiom that given natural isomorphism α, α', β, β'
+with appropriate domains and codomains, together with isomorphisms α ≅ α' and β ≅ β',
+there exists an isomorphisms between the horizontal composites β * α ≅ β' * α'.
 
 ```agda
 module _

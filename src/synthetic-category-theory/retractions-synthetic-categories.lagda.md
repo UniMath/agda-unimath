@@ -66,7 +66,7 @@ module _
 ### The components of a retraction
 
 ```agda
-  map-retraction-Synthetic-Category-Theory :
+  functor-retraction-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
     (ι : identity-Synthetic-Category-Theory κ)
@@ -74,9 +74,9 @@ module _
     {f : functor-Synthetic-Category-Theory κ C D} →
     retraction-Synthetic-Category-Theory κ μ ι f →
       functor-Synthetic-Category-Theory κ D C
-  map-retraction-Synthetic-Category-Theory κ μ ι = pr1
+  functor-retraction-Synthetic-Category-Theory κ μ ι = pr1
 
-  is-retraction-map-retraction-Synthetic-Category-Theory :
+  is-retraction-functor-retraction-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
     (ι : identity-Synthetic-Category-Theory κ)
@@ -84,6 +84,6 @@ module _
     {f : functor-Synthetic-Category-Theory κ C D}
     (r : retraction-Synthetic-Category-Theory κ μ ι f) →
       is-retraction-Synthetic-Category-Theory κ μ ι f
-        ( map-retraction-Synthetic-Category-Theory κ μ ι r)
-  is-retraction-map-retraction-Synthetic-Category-Theory κ μ ι = pr2
+        ( functor-retraction-Synthetic-Category-Theory κ μ ι r)
+  is-retraction-functor-retraction-Synthetic-Category-Theory κ μ ι = pr2
 ```

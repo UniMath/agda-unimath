@@ -24,8 +24,10 @@ open import synthetic-category-theory.cone-diagrams-synthetic-categories
 
 ## Idea
 
-The pullback of a cospan S is a cone diagram cᵤ = (pr₀, pr₁, τᵤ) over S with
-apex P that is universal in the sense that:
+Consider a [cospan diagram](synthetic-category-theory.cospans-synthetic-categories.md)
+S of [synthetic categories](synthetic-category-theory.synthetic-categories.md).
+The {{#concept "pullback" Disambiguation="Synthetic categories"} of S is a cone diagram
+cᵤ = (pr₀, pr₁, τᵤ) over S with apex P that is universal in the sense that:
 
 ```text
 1) for every cone diagram c = (t₀, t₁, τ) over S with apex T there exists a functor
@@ -107,14 +109,14 @@ module _
 open pullback-Synthetic-Category-Theory public
 ```
 
-## The left and right projection maps with domain the apex of the pullback cone
+### The left and right projection functors with domain the apex of the pullback cone
 
 ```agda
 module _
   {l : Level}
   where
 
-  left-map-pullback-Synthetic-Category-Theory :
+  left-functor-pullback-Synthetic-Category-Theory :
       (κ : language-Synthetic-Category-Theory l)
       (μ : composition-Synthetic-Category-Theory κ)
       {ι : identity-Synthetic-Category-Theory κ}
@@ -130,14 +132,14 @@ module _
       (PB : pullback-Synthetic-Category-Theory κ μ ι ν Α Χ Λ Ρ Ξ I Μ Ν)
       {C E D : category-Synthetic-Category-Theory κ}
       (S : cospan-Synthetic-Category-Theory κ C E D) →
-        functor-Synthetic-Category-Theory κ
-          ( apex-pullback-Synthetic-Category-Theory PB S)
-          ( left-source-cospan-Synthetic-Category-Theory κ S)
-  left-map-pullback-Synthetic-Category-Theory κ μ PB S =
-    left-map-cone-diagram-Synthetic-Category-Theory κ μ
+      functor-Synthetic-Category-Theory κ
+        ( apex-pullback-Synthetic-Category-Theory PB S)
+        ( left-source-cospan-Synthetic-Category-Theory κ S)
+  left-functor-pullback-Synthetic-Category-Theory κ μ PB S =
+    left-functor-cone-diagram-Synthetic-Category-Theory κ μ
       ( cone-diagram-pullback-Synthetic-Category-Theory PB S)
 
-  right-map-pullback-Synthetic-Category-Theory :
+  right-functor-pullback-Synthetic-Category-Theory :
       (κ : language-Synthetic-Category-Theory l)
       (μ : composition-Synthetic-Category-Theory κ)
       {ι : identity-Synthetic-Category-Theory κ}
@@ -153,11 +155,11 @@ module _
       (PB : pullback-Synthetic-Category-Theory κ μ ι ν Α Χ Λ Ρ Ξ I Μ Ν)
       {C E D : category-Synthetic-Category-Theory κ}
       (S : cospan-Synthetic-Category-Theory κ C E D) →
-        functor-Synthetic-Category-Theory κ
-          ( apex-pullback-Synthetic-Category-Theory PB S)
-          ( right-source-cospan-Synthetic-Category-Theory κ S)
-  right-map-pullback-Synthetic-Category-Theory κ μ PB S =
-    right-map-cone-diagram-Synthetic-Category-Theory κ μ
+      functor-Synthetic-Category-Theory κ
+        ( apex-pullback-Synthetic-Category-Theory PB S)
+        ( right-source-cospan-Synthetic-Category-Theory κ S)
+  right-functor-pullback-Synthetic-Category-Theory κ μ PB S =
+    right-functor-cone-diagram-Synthetic-Category-Theory κ μ
       ( cone-diagram-pullback-Synthetic-Category-Theory PB S)
 ```
 
@@ -172,7 +174,7 @@ module _
   {l : Level}
   where
 
-  is-functorial-pullback-Synthetic-Category-Theory :
+  functor-pullback-Synthetic-Category-Theory :
       (κ : language-Synthetic-Category-Theory l)
       (μ : composition-Synthetic-Category-Theory κ)
       (ι : identity-Synthetic-Category-Theory κ)
@@ -190,58 +192,58 @@ module _
       (S : cospan-Synthetic-Category-Theory κ C E D)
       (S' : cospan-Synthetic-Category-Theory κ C' E' D') →
       transformation-cospan-Synthetic-Category-Theory κ μ S S' →
-        functor-Synthetic-Category-Theory κ
-          ( apex-pullback-Synthetic-Category-Theory PB S)
-          ( apex-pullback-Synthetic-Category-Theory PB S')
-  is-functorial-pullback-Synthetic-Category-Theory κ μ ι ν Α Χ PB S S' H =
+      functor-Synthetic-Category-Theory κ
+        ( apex-pullback-Synthetic-Category-Theory PB S)
+        ( apex-pullback-Synthetic-Category-Theory PB S')
+  functor-pullback-Synthetic-Category-Theory κ μ ι ν Α Χ PB S S' H =
     universality-functor-pullback-Synthetic-Category-Theory PB S'
       ( comp-functor-Synthetic-Category-Theory μ
-        ( right-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
-        ( right-map-pullback-Synthetic-Category-Theory κ μ PB S) ,
+        ( right-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+        ( right-functor-pullback-Synthetic-Category-Theory κ μ PB S) ,
       ( comp-functor-Synthetic-Category-Theory μ
-        ( left-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
-        ( left-map-pullback-Synthetic-Category-Theory κ μ PB S)) ,
+        ( left-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+        ( left-functor-pullback-Synthetic-Category-Theory κ μ PB S)) ,
       ( comp-iso-Synthetic-Category-Theory μ
         ( associative-comp-functor-Synthetic-Category-Theory Α
-          ( left-map-cospan-Synthetic-Category-Theory κ S')
-          ( left-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
-          ( left-map-pullback-Synthetic-Category-Theory κ μ PB S))
+          ( left-functor-cospan-Synthetic-Category-Theory κ S')
+          ( left-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+          ( left-functor-pullback-Synthetic-Category-Theory κ μ PB S))
         ( comp-iso-Synthetic-Category-Theory μ
           ( horizontal-comp-iso-Synthetic-Category-Theory Χ
             ( left-commuting-square-transformation-cospan-Synthetic-Category-Theory
               κ μ H)
             ( id-iso-Synthetic-Category-Theory ι
-              ( left-map-pullback-Synthetic-Category-Theory κ μ PB S)))
+              ( left-functor-pullback-Synthetic-Category-Theory κ μ PB S)))
           ( comp-iso-Synthetic-Category-Theory μ
             ( inv-iso-Synthetic-Category-Theory ν
               ( associative-comp-functor-Synthetic-Category-Theory Α
-                ( middle-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
-                ( left-map-cospan-Synthetic-Category-Theory κ S)
-                ( left-map-cone-diagram-Synthetic-Category-Theory κ μ
+                ( middle-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+                ( left-functor-cospan-Synthetic-Category-Theory κ S)
+                ( left-functor-cone-diagram-Synthetic-Category-Theory κ μ
                   ( cone-diagram-pullback-Synthetic-Category-Theory PB S))))
             ( comp-iso-Synthetic-Category-Theory μ
               ( horizontal-comp-iso-Synthetic-Category-Theory Χ
                 ( id-iso-Synthetic-Category-Theory ι
-                  ( middle-map-transformation-cospan-Synthetic-Category-Theory κ μ H))
+                  ( middle-functor-transformation-cospan-Synthetic-Category-Theory κ μ H))
                 ( iso-cone-diagram-Synthetic-Category-Theory κ μ
                   ( cone-diagram-pullback-Synthetic-Category-Theory PB S)))
               ( comp-iso-Synthetic-Category-Theory μ
                 ( associative-comp-functor-Synthetic-Category-Theory Α
-                  ( middle-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
-                  ( right-map-cospan-Synthetic-Category-Theory κ S)
-                  ( right-map-pullback-Synthetic-Category-Theory κ μ PB S))
+                  ( middle-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+                  ( right-functor-cospan-Synthetic-Category-Theory κ S)
+                  ( right-functor-pullback-Synthetic-Category-Theory κ μ PB S))
                 ( comp-iso-Synthetic-Category-Theory μ
                   ( horizontal-comp-iso-Synthetic-Category-Theory Χ
                     ( inv-iso-Synthetic-Category-Theory ν
                       ( right-commuting-square-transformation-cospan-Synthetic-Category-Theory
                         κ μ H))
                     ( id-iso-Synthetic-Category-Theory ι
-                      ( right-map-cone-diagram-Synthetic-Category-Theory κ μ
+                      ( right-functor-cone-diagram-Synthetic-Category-Theory κ μ
                         ( cone-diagram-pullback-Synthetic-Category-Theory PB S))))
                   ( inv-iso-Synthetic-Category-Theory ν
                     ( associative-comp-functor-Synthetic-Category-Theory Α
-                      ( right-map-cospan-Synthetic-Category-Theory κ S')
-                      ( right-map-transformation-cospan-Synthetic-Category-Theory κ μ H)
-                      ( right-map-cone-diagram-Synthetic-Category-Theory κ μ
+                      ( right-functor-cospan-Synthetic-Category-Theory κ S')
+                      ( right-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+                      ( right-functor-cone-diagram-Synthetic-Category-Theory κ μ
                         ( cone-diagram-pullback-Synthetic-Category-Theory PB S)))))))))))
 ```
