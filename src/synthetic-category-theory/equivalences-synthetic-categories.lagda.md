@@ -125,7 +125,6 @@ module _
     (μ : composition-Synthetic-Category-Theory κ)
     (ι : identity-Synthetic-Category-Theory κ)
     {C D : category-Synthetic-Category-Theory κ}
-    {f : functor-Synthetic-Category-Theory κ C D}
     (H : equiv-Synthetic-Category-Theory κ μ ι C D) →
     section-Synthetic-Category-Theory κ μ ι
       ( functor-equiv-Synthetic-Category-Theory κ μ ι H)
@@ -133,16 +132,37 @@ module _
     section-is-equiv-Synthetic-Category-Theory κ μ ι
       ( is-equiv-functor-equiv-Synthetic-Category-Theory κ μ ι H)
 
+  functor-section-functor-equiv-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C D : category-Synthetic-Category-Theory κ}
+    (H : equiv-Synthetic-Category-Theory κ μ ι C D) →
+    functor-Synthetic-Category-Theory κ D C
+  functor-section-functor-equiv-Synthetic-Category-Theory κ μ ι H =
+    functor-section-Synthetic-Category-Theory κ μ ι
+      ( section-functor-equiv-Synthetic-Category-Theory κ μ ι H)
+
   retraction-functor-equiv-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
     (μ : composition-Synthetic-Category-Theory κ)
     (ι : identity-Synthetic-Category-Theory κ)
     {C D : category-Synthetic-Category-Theory κ}
-    {f : functor-Synthetic-Category-Theory κ C D}
     (H : equiv-Synthetic-Category-Theory κ μ ι C D) →
     retraction-Synthetic-Category-Theory κ μ ι
       ( functor-equiv-Synthetic-Category-Theory κ μ ι H)
   retraction-functor-equiv-Synthetic-Category-Theory κ μ ι H =
     retraction-is-equiv-Synthetic-Category-Theory κ μ ι
       ( is-equiv-functor-equiv-Synthetic-Category-Theory κ μ ι H)
+
+  functor-retraction-functor-equiv-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C D : category-Synthetic-Category-Theory κ}
+    (H : equiv-Synthetic-Category-Theory κ μ ι C D) →
+    functor-Synthetic-Category-Theory κ D C
+  functor-retraction-functor-equiv-Synthetic-Category-Theory κ μ ι H =
+    functor-retraction-Synthetic-Category-Theory κ μ ι
+      ( retraction-functor-equiv-Synthetic-Category-Theory κ μ ι H)
 ```

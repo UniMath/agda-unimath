@@ -236,7 +236,9 @@ and φr ≅ ψr under which H becomes isomorphic to K.
     (ι : identity-Synthetic-Category-Theory κ)
     (ν : inverse-Synthetic-Category-Theory κ μ ι)
     (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
-    (Μ : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ)
+    (Μ :
+      preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory
+        κ ι μ Χ)
     {S : cospan-Synthetic-Category-Theory κ C D E}
     {T : category-Synthetic-Category-Theory κ}
     {c c' : cone-diagram-Synthetic-Category-Theory κ μ S T}
@@ -277,30 +279,36 @@ and φr ≅ ψr under which H becomes isomorphic to K.
               ( comp-iso-Synthetic-Category-Theory
                 ( composition-isomorphism-Synthetic-Category-Theory μ)
                 ( horizontal-comp-iso-Synthetic-Category-Theory
-                  ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+                  ( horizontal-composition-isomorphism-Synthetic-Category-Theory
+                    Χ)
                   ( id-iso-Synthetic-Category-Theory
                     ( identity-isomorphism-Synthetic-Category-Theory ι)
                     ( iso-cone-diagram-Synthetic-Category-Theory κ μ c'))
-                  ( preserves-isomorphism-horizontal-comp-iso-Synthetic-Category-Theory Μ
+                  ( preserves-isomorphism-horizontal-comp-iso-Synthetic-Category-Theory
+                    ( Μ)
                     ( α)
                     ( id-iso-Synthetic-Category-Theory
                       ( identity-isomorphism-Synthetic-Category-Theory ι)
                       ( id-iso-Synthetic-Category-Theory ι
-                        ( right-functor-cospan-Synthetic-Category-Theory κ S)))))
+                        ( right-functor-cospan-Synthetic-Category-Theory
+                          κ S)))))
                 ( comp-iso-Synthetic-Category-Theory
                   ( composition-isomorphism-Synthetic-Category-Theory μ)
                   ( isomorphism-iso-of-cone-diagrams-Synthetic-Category-Theory
                     κ μ ι Χ ϕ)
                   ( horizontal-comp-iso-Synthetic-Category-Theory
-                    ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
-                    ( preserves-isomorphism-horizontal-comp-iso-Synthetic-Category-Theory Μ
+                    ( horizontal-composition-isomorphism-Synthetic-Category-Theory
+                      Χ)
+                    ( preserves-isomorphism-horizontal-comp-iso-Synthetic-Category-Theory
+                      ( Μ)
                       ( inv-iso-Synthetic-Category-Theory
                         ( inverse-isomorphism-Synthetic-Category-Theory ν)
                         ( β))
                       ( id-iso-Synthetic-Category-Theory
                         ( identity-isomorphism-Synthetic-Category-Theory ι)
                         ( id-iso-Synthetic-Category-Theory ι
-                          ( left-functor-cospan-Synthetic-Category-Theory κ S))))
+                          ( left-functor-cospan-Synthetic-Category-Theory
+                            κ S))))
                     ( id-iso-Synthetic-Category-Theory
                       ( identity-isomorphism-Synthetic-Category-Theory ι)
                       ( iso-cone-diagram-Synthetic-Category-Theory
@@ -378,10 +386,16 @@ module _
     (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
     (Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ)
     (Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ)
-    (Ξ : preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory κ μ Α Χ)
+    (Ξ :
+      preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory
+        κ μ Α Χ)
     (I : interchange-composition-Synthetic-Category-Theory κ μ Χ)
-    (Μ : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ)
-    (N : preserves-identity-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ)
+    (Μ :
+      preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory
+        κ ι μ Χ)
+    (N :
+      preserves-identity-horizontal-composition-Synthetic-Category-Theory
+        κ ι μ Χ)
     (S : cospan-Synthetic-Category-Theory κ C D E)
     {T : category-Synthetic-Category-Theory κ}
     (c : cone-diagram-Synthetic-Category-Theory κ μ S T)
@@ -512,41 +526,51 @@ module _
             ( α))
           ( comp-iso-Synthetic-Category-Theory
             ( composition-isomorphism-Synthetic-Category-Theory μ)
-            ( preserves-isomorphism-horizontal-comp-iso-Synthetic-Category-Theory M
+            ( preserves-isomorphism-horizontal-comp-iso-Synthetic-Category-Theory
+              ( M)
               ( inv-iso-Synthetic-Category-Theory
                 ( inverse-isomorphism-Synthetic-Category-Theory ν)
                 ( left-unit-law-comp-functor-Synthetic-Category-Theory
-                  ( left-unit-law-composition-isomorphism-Synthetic-Category-Theory Λ)
+                  ( left-unit-law-composition-isomorphism-Synthetic-Category-Theory
+                    Λ)
                   ( α)))
               ( comp-iso-Synthetic-Category-Theory
                 ( composition-isomorphism-Synthetic-Category-Theory μ)
                 ( horizontal-comp-iso-Synthetic-Category-Theory
-                  ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
+                  ( horizontal-composition-isomorphism-Synthetic-Category-Theory
+                    Χ)
                   ( id-iso-Synthetic-Category-Theory
                     ( identity-isomorphism-Synthetic-Category-Theory ι)
                     ( iso-cone-diagram-Synthetic-Category-Theory κ μ c))
                   ( inv-iso-Synthetic-Category-Theory
                     ( inverse-isomorphism-Synthetic-Category-Theory ν)
-                    ( preserves-identity-horizontal-comp-iso-Synthetic-Category-Theory N)))
+                    ( preserves-identity-horizontal-comp-iso-Synthetic-Category-Theory
+                      N)))
                 ( inv-iso-Synthetic-Category-Theory
                   ( inverse-isomorphism-Synthetic-Category-Theory ν)
                   ( right-unit-law-comp-functor-Synthetic-Category-Theory
-                    ( right-unit-law-composition-isomorphism-Synthetic-Category-Theory Ρ)
+                    ( right-unit-law-composition-isomorphism-Synthetic-Category-Theory
+                      Ρ)
                     ( iso-cone-diagram-Synthetic-Category-Theory κ μ c)))))
             ( comp-iso-Synthetic-Category-Theory
               ( composition-isomorphism-Synthetic-Category-Theory μ)
-              ( preserves-isomorphism-horizontal-comp-iso-Synthetic-Category-Theory M
+              ( preserves-isomorphism-horizontal-comp-iso-Synthetic-Category-Theory
+                ( M)
                 ( right-unit-law-comp-functor-Synthetic-Category-Theory
-                  ( right-unit-law-composition-isomorphism-Synthetic-Category-Theory Ρ)
+                  ( right-unit-law-composition-isomorphism-Synthetic-Category-Theory
+                    Ρ)
                   ( α))
                 ( comp-iso-Synthetic-Category-Theory
                   ( composition-isomorphism-Synthetic-Category-Theory μ)
                   ( left-unit-law-comp-functor-Synthetic-Category-Theory
-                    ( left-unit-law-composition-isomorphism-Synthetic-Category-Theory Λ)
+                    ( left-unit-law-composition-isomorphism-Synthetic-Category-Theory
+                      Λ)
                     ( iso-cone-diagram-Synthetic-Category-Theory κ μ c))
                   ( horizontal-comp-iso-Synthetic-Category-Theory
-                    ( horizontal-composition-isomorphism-Synthetic-Category-Theory Χ)
-                    ( preserves-identity-horizontal-comp-iso-Synthetic-Category-Theory N)
+                    ( horizontal-composition-isomorphism-Synthetic-Category-Theory
+                      Χ)
+                    ( preserves-identity-horizontal-comp-iso-Synthetic-Category-Theory
+                      N)
                     ( id-iso-Synthetic-Category-Theory
                       ( identity-isomorphism-Synthetic-Category-Theory ι)
                       ( iso-cone-diagram-Synthetic-Category-Theory κ μ c)))))

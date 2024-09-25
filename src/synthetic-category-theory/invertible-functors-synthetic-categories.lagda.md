@@ -140,7 +140,9 @@ module _
       ( inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H)
   is-section-inverse-functor-is-invertible-functor-Synthetic-Category-Theory
     κ μ ι H =
-    pr1 (is-inverse-inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H)
+    pr1
+      ( is-inverse-inverse-functor-is-invertible-functor-Synthetic-Category-Theory
+        κ μ ι H)
 
   is-retraction-inverse-functor-is-invertible-functor-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
@@ -153,7 +155,9 @@ module _
       ( inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H)
   is-retraction-inverse-functor-is-invertible-functor-Synthetic-Category-Theory
     κ μ ι H =
-    pr2 (is-inverse-inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H)
+    pr2
+      ( is-inverse-inverse-functor-is-invertible-functor-Synthetic-Category-Theory
+        κ μ ι H)
 
   section-is-invertible-functor-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
@@ -166,7 +170,8 @@ module _
   pr1 (section-is-invertible-functor-Synthetic-Category-Theory κ μ ι H) =
     inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H
   pr2 (section-is-invertible-functor-Synthetic-Category-Theory κ μ ι H) =
-    is-section-inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H
+    is-section-inverse-functor-is-invertible-functor-Synthetic-Category-Theory
+      κ μ ι H
 
   retraction-is-invertible-functor-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
@@ -179,7 +184,8 @@ module _
   pr1 (retraction-is-invertible-functor-Synthetic-Category-Theory κ μ ι H) =
     inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H
   pr2 (retraction-is-invertible-functor-Synthetic-Category-Theory κ μ ι H) =
-    is-retraction-inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H
+    is-retraction-inverse-functor-is-invertible-functor-Synthetic-Category-Theory
+      κ μ ι H
 ```
 
 ### A functor f : C → D of synthetic categories is invertible iff it is an equivalence
@@ -215,13 +221,19 @@ module _
     {f : functor-Synthetic-Category-Theory κ C D} →
     is-equiv-Synthetic-Category-Theory κ μ ι f →
     is-invertible-functor-Synthetic-Category-Theory κ μ ι f
-  pr1 (is-invertible-functor-is-equiv-Synthetic-Category-Theory κ μ ι ν Λ Ρ Χ Α B) =
+  pr1
+    ( is-invertible-functor-is-equiv-Synthetic-Category-Theory
+      κ μ ι ν Λ Ρ Χ Α B) =
     functor-section-Synthetic-Category-Theory κ μ ι
       ( section-is-equiv-Synthetic-Category-Theory κ μ ι B)
-  pr1 (pr2 (is-invertible-functor-is-equiv-Synthetic-Category-Theory κ μ ι ν Λ Ρ Χ Α B)) =
+  pr1 (pr2
+    ( is-invertible-functor-is-equiv-Synthetic-Category-Theory
+      κ μ ι ν Λ Ρ Χ Α B)) =
     is-section-functor-section-Synthetic-Category-Theory κ μ ι
       ( section-is-equiv-Synthetic-Category-Theory κ μ ι B)
-  pr2 (pr2 (is-invertible-functor-is-equiv-Synthetic-Category-Theory κ μ ι ν Λ Ρ Χ Α B)) =
+  pr2 (pr2
+    ( is-invertible-functor-is-equiv-Synthetic-Category-Theory
+      κ μ ι ν Λ Ρ Χ Α B)) =
     comp-iso-Synthetic-Category-Theory μ
       ( is-retraction-functor-retraction-Synthetic-Category-Theory κ μ ι
         ( retraction-is-equiv-Synthetic-Category-Theory κ μ ι B))
@@ -247,7 +259,8 @@ module _
                   ( section-is-equiv-Synthetic-Category-Theory κ μ ι B))))
             ( horizontal-comp-iso-Synthetic-Category-Theory Χ
               ( inv-iso-Synthetic-Category-Theory ν
-                ( is-retraction-functor-retraction-Synthetic-Category-Theory κ μ ι
+                ( is-retraction-functor-retraction-Synthetic-Category-Theory
+                  κ μ ι
                   ( retraction-is-equiv-Synthetic-Category-Theory κ μ ι B)))
               ( id-iso-Synthetic-Category-Theory ι
                 ( functor-section-Synthetic-Category-Theory κ μ ι
@@ -282,9 +295,13 @@ module _
     is-invertible-functor-Synthetic-Category-Theory κ μ ι f →
     is-invertible-functor-Synthetic-Category-Theory κ μ ι
       ( comp-functor-Synthetic-Category-Theory μ f' f)
-  pr1 (is-invertible-functor-comp-is-invertible-functor-Synthetic-Category-Theory κ μ ι ν Λ Ρ Χ Α K H) =
+  pr1
+    ( is-invertible-functor-comp-is-invertible-functor-Synthetic-Category-Theory
+      κ μ ι ν Λ Ρ Χ Α K H) =
     comp-functor-Synthetic-Category-Theory μ _ _
-  pr1 (pr2 (is-invertible-functor-comp-is-invertible-functor-Synthetic-Category-Theory κ μ ι ν Λ Ρ Χ Α K H)) =
+  pr1 (pr2
+    ( is-invertible-functor-comp-is-invertible-functor-Synthetic-Category-Theory
+      κ μ ι ν Λ Ρ Χ Α K H)) =
     comp-iso-Synthetic-Category-Theory μ
       ( is-section-functor-section-Synthetic-Category-Theory κ μ ι
         ( section-is-invertible-functor-Synthetic-Category-Theory κ μ ι K))
@@ -298,7 +315,8 @@ module _
             ( horizontal-comp-iso-Synthetic-Category-Theory Χ
               ( id-iso-Synthetic-Category-Theory ι _)
               ( is-section-functor-section-Synthetic-Category-Theory κ μ ι
-                ( section-is-invertible-functor-Synthetic-Category-Theory κ μ ι H)))
+                ( section-is-invertible-functor-Synthetic-Category-Theory
+                  κ μ ι H)))
             ( id-iso-Synthetic-Category-Theory ι _))
           ( comp-iso-Synthetic-Category-Theory μ
             ( horizontal-comp-iso-Synthetic-Category-Theory Χ
@@ -309,7 +327,9 @@ module _
                 ( comp-functor-Synthetic-Category-Theory μ _ _)
                 ( _)
                 ( _))))))
-  pr2 (pr2 (is-invertible-functor-comp-is-invertible-functor-Synthetic-Category-Theory κ μ ι ν Λ Ρ Χ Α K H)) =
+  pr2 (pr2
+    ( is-invertible-functor-comp-is-invertible-functor-Synthetic-Category-Theory
+      κ μ ι ν Λ Ρ Χ Α K H)) =
     comp-iso-Synthetic-Category-Theory μ
       ( is-retraction-functor-retraction-Synthetic-Category-Theory κ μ ι
         ( retraction-is-invertible-functor-Synthetic-Category-Theory κ μ ι H))
@@ -322,7 +342,8 @@ module _
             ( horizontal-comp-iso-Synthetic-Category-Theory Χ
               ( id-iso-Synthetic-Category-Theory ι _)
               ( is-retraction-functor-retraction-Synthetic-Category-Theory κ μ ι
-                ( retraction-is-invertible-functor-Synthetic-Category-Theory κ μ ι K)))
+                ( retraction-is-invertible-functor-Synthetic-Category-Theory
+                  κ μ ι K)))
             ( id-iso-Synthetic-Category-Theory ι _))
           ( comp-iso-Synthetic-Category-Theory μ
             ( horizontal-comp-iso-Synthetic-Category-Theory Χ

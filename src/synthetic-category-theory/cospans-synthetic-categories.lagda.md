@@ -393,14 +393,19 @@ module _
     {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
     equiv-cospan-Synthetic-Category-Theory κ μ ι S S' →
     transformation-cospan-Synthetic-Category-Theory κ μ S S'
-  pr1 (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H) =
-    left-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H
-  pr1 (pr2 (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H)) =
-    middle-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H
-  pr1 (pr2 (pr2 (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H))) =
-    right-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H
-  pr1 (pr2 (pr2 (pr2 (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H)))) =
-    left-commuting-square-equiv-cospan-Synthetic-Category-Theory κ μ ι H
-  pr2 (pr2 (pr2 (pr2 (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H)))) =
-    right-commuting-square-equiv-cospan-Synthetic-Category-Theory κ μ ι H
+  pr1
+    ( transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H) =
+      left-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H
+  pr1 (pr2
+    ( transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H)) =
+      middle-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H
+  pr1 (pr2 (pr2
+    (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H))) =
+      right-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H
+  pr1 (pr2 (pr2 (pr2
+    ( transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H)))) =
+      left-commuting-square-equiv-cospan-Synthetic-Category-Theory κ μ ι H
+  pr2 (pr2 (pr2 (pr2
+    ( transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H)))) =
+      right-commuting-square-equiv-cospan-Synthetic-Category-Theory κ μ ι H
 ```

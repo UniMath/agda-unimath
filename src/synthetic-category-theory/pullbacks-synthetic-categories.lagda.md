@@ -17,6 +17,7 @@ open import structured-types.globular-types
 
 open import synthetic-category-theory.cone-diagrams-synthetic-categories
 open import synthetic-category-theory.cospans-synthetic-categories
+open import synthetic-category-theory.equivalences-synthetic-categories
 open import synthetic-category-theory.synthetic-categories
 ```
 
@@ -54,10 +55,16 @@ module _
       (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
       (Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ)
       (Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ)
-      (Ξ : preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory κ μ Α Χ)
+      (Ξ :
+        preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory
+          κ μ Α Χ)
       (I : interchange-composition-Synthetic-Category-Theory κ μ Χ)
-      (M : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ)
-      (N : preserves-identity-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ) : UU l
+      (M :
+        preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory
+          κ ι μ Χ)
+      (N :
+        preserves-identity-horizontal-composition-Synthetic-Category-Theory
+          κ ι μ Χ) : UU l
     where
     coinductive
     field
@@ -91,7 +98,9 @@ module _
         {C D E : category-Synthetic-Category-Theory κ}
         (S : cospan-Synthetic-Category-Theory κ C D E)
         {T : category-Synthetic-Category-Theory κ}
-        (s t : functor-Synthetic-Category-Theory κ T ( apex-pullback-Synthetic-Category-Theory S))
+        (s t :
+          functor-Synthetic-Category-Theory κ T
+            ( apex-pullback-Synthetic-Category-Theory S))
         (H : iso-of-cone-diagrams-Synthetic-Category-Theory κ μ ι Χ
           (induced-cone-diagram-Synthetic-Category-Theory κ μ ι ν Χ Α S
             ( cone-diagram-pullback-Synthetic-Category-Theory S)
@@ -127,10 +136,16 @@ module _
       {Χ : horizontal-composition-Synthetic-Category-Theory κ μ}
       {Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ}
       {Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ}
-      {Ξ : preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory κ μ Α Χ}
+      {Ξ :
+        preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory
+          κ μ Α Χ}
       {I : interchange-composition-Synthetic-Category-Theory κ μ Χ}
-      {Μ : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ}
-      {Ν : preserves-identity-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ}
+      {Μ :
+        preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory
+          κ ι μ Χ}
+      {Ν :
+        preserves-identity-horizontal-composition-Synthetic-Category-Theory
+          κ ι μ Χ}
       (PB : pullback-Synthetic-Category-Theory κ μ ι ν Α Χ Λ Ρ Ξ I Μ Ν)
       {C E D : category-Synthetic-Category-Theory κ}
       (S : cospan-Synthetic-Category-Theory κ C E D) →
@@ -150,10 +165,16 @@ module _
       {Χ : horizontal-composition-Synthetic-Category-Theory κ μ}
       {Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ}
       {Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ}
-      {Ξ : preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory κ μ Α Χ}
+      {Ξ :
+        preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory
+          κ μ Α Χ}
       {I : interchange-composition-Synthetic-Category-Theory κ μ Χ}
-      {Μ : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ}
-      {Ν : preserves-identity-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ}
+      {Μ :
+        preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory
+          κ ι μ Χ}
+      {Ν :
+        preserves-identity-horizontal-composition-Synthetic-Category-Theory
+          κ ι μ Χ}
       (PB : pullback-Synthetic-Category-Theory κ μ ι ν Α Χ Λ Ρ Ξ I Μ Ν)
       {C E D : category-Synthetic-Category-Theory κ}
       (S : cospan-Synthetic-Category-Theory κ C E D) →
@@ -185,19 +206,26 @@ module _
       (Χ : horizontal-composition-Synthetic-Category-Theory κ μ)
       {Λ : left-unit-law-composition-Synthetic-Category-Theory κ ι μ}
       {Ρ : right-unit-law-composition-Synthetic-Category-Theory κ ι μ}
-      {Ξ : preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory κ μ Α Χ}
+      {Ξ :
+        preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory
+          κ μ Α Χ}
       {I : interchange-composition-Synthetic-Category-Theory κ μ Χ}
-      {M : preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ}
-      {N : preserves-identity-horizontal-composition-Synthetic-Category-Theory κ ι μ Χ}
+      {M :
+        preserves-isomorphism-horizontal-composition-Synthetic-Category-Theory
+          κ ι μ Χ}
+      {N :
+        preserves-identity-horizontal-composition-Synthetic-Category-Theory
+          κ ι μ Χ}
       (PB : pullback-Synthetic-Category-Theory κ μ ι ν Α Χ Λ Ρ Ξ I M N)
       {C C' E E' D D' : category-Synthetic-Category-Theory κ}
-      (S : cospan-Synthetic-Category-Theory κ C E D)
-      (S' : cospan-Synthetic-Category-Theory κ C' E' D') →
+      {S : cospan-Synthetic-Category-Theory κ C E D}
+      {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
       transformation-cospan-Synthetic-Category-Theory κ μ S S' →
       functor-Synthetic-Category-Theory κ
         ( apex-pullback-Synthetic-Category-Theory PB S)
         ( apex-pullback-Synthetic-Category-Theory PB S')
-  functor-pullback-Synthetic-Category-Theory κ μ ι ν Α Χ PB S S' H =
+  functor-pullback-Synthetic-Category-Theory
+    κ μ ι ν Α Χ PB {S = S} {S' = S'} H =
     universality-functor-pullback-Synthetic-Category-Theory PB S'
       ( comp-functor-Synthetic-Category-Theory μ
         ( right-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
@@ -219,19 +247,22 @@ module _
           ( comp-iso-Synthetic-Category-Theory μ
             ( inv-iso-Synthetic-Category-Theory ν
               ( associative-comp-functor-Synthetic-Category-Theory Α
-                ( middle-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+                ( middle-functor-transformation-cospan-Synthetic-Category-Theory
+                  κ μ H)
                 ( left-functor-cospan-Synthetic-Category-Theory κ S)
                 ( left-functor-cone-diagram-Synthetic-Category-Theory κ μ
                   ( cone-diagram-pullback-Synthetic-Category-Theory PB S))))
             ( comp-iso-Synthetic-Category-Theory μ
               ( horizontal-comp-iso-Synthetic-Category-Theory Χ
                 ( id-iso-Synthetic-Category-Theory ι
-                  ( middle-functor-transformation-cospan-Synthetic-Category-Theory κ μ H))
+                  ( middle-functor-transformation-cospan-Synthetic-Category-Theory
+                    κ μ H))
                 ( iso-cone-diagram-Synthetic-Category-Theory κ μ
                   ( cone-diagram-pullback-Synthetic-Category-Theory PB S)))
               ( comp-iso-Synthetic-Category-Theory μ
                 ( associative-comp-functor-Synthetic-Category-Theory Α
-                  ( middle-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+                  ( middle-functor-transformation-cospan-Synthetic-Category-Theory
+                    κ μ H)
                   ( right-functor-cospan-Synthetic-Category-Theory κ S)
                   ( right-functor-pullback-Synthetic-Category-Theory κ μ PB S))
                 ( comp-iso-Synthetic-Category-Theory μ
@@ -241,11 +272,14 @@ module _
                         κ μ H))
                     ( id-iso-Synthetic-Category-Theory ι
                       ( right-functor-cone-diagram-Synthetic-Category-Theory κ μ
-                        ( cone-diagram-pullback-Synthetic-Category-Theory PB S))))
+                        ( cone-diagram-pullback-Synthetic-Category-Theory PB
+                          S))))
                   ( inv-iso-Synthetic-Category-Theory ν
                     ( associative-comp-functor-Synthetic-Category-Theory Α
                       ( right-functor-cospan-Synthetic-Category-Theory κ S')
-                      ( right-functor-transformation-cospan-Synthetic-Category-Theory κ μ H)
+                      ( right-functor-transformation-cospan-Synthetic-Category-Theory
+                        κ μ H)
                       ( right-functor-cone-diagram-Synthetic-Category-Theory κ μ
-                        ( cone-diagram-pullback-Synthetic-Category-Theory PB S)))))))))))
+                        ( cone-diagram-pullback-Synthetic-Category-Theory
+                          PB S)))))))))))
 ```
