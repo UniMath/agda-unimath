@@ -28,7 +28,7 @@ A functor f: A → B of
 [synthetic categories](synthetic-category-theory.synthetic-categories.md) is an
 {{#concept "equivalence" Disambiguation="Synthetic categories}} if it has a
 [section](synthetic-category-theory.sections-synthetic-categories.md) and a
-[retraction](synthetic-category-theory.retractions-synthetic-categores.md).
+[retraction](synthetic-category-theory.retractions-synthetic-categories.md).
 
 ### The predicate of being an equivalence
 
