@@ -51,7 +51,7 @@ Decidable-Total-Order-Large-Precategory =
       ( λ l → l))
 ```
 
-### The precategory or total orders of universe level `l`
+### The precategory of total orders at a universe level
 
 ```agda
 Decidable-Total-Order-Precategory : (l : Level) → Precategory (lsuc l) l

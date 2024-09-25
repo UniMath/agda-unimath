@@ -1,6 +1,6 @@
 # Lists
 
-## Files in the lists folder
+## Modules in the lists namespace
 
 ```agda
 module lists where

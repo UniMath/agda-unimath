@@ -1,6 +1,6 @@
 # Group theory
 
-## Files in the group theory folder
+## Modules in the group theory namespace
 
 ```agda
 module group-theory where

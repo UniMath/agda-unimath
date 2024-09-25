@@ -402,3 +402,7 @@ compute-rec-subuniverse-sharp =
 
 {{#bibliography}} {{#reference Shu18}} {{#reference Dlicata335/Cohesion-Agda}}
 {{#reference Felixwellen/DCHoTT-Agda}} {{#reference DavidJaz/Cohesion}}
+
+## External links
+
+- [sharp modality](https://ncatlab.org/nlab/show/sharp+modality) at $n$Lab
