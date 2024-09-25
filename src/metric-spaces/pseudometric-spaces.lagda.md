@@ -35,12 +35,10 @@ A
 {{#concept "pseudometric space" Agda=Pseudometric-Space WD="pseudometric space" WDID=Q1397059}}
 is a [premetric space](metric-spaces.premetric-spaces.md) whose
 [premetric](metric-spaces.premetric-structures.md) is a
-[pseudometric](metric-spaces.pseudometric-structures.md). I.e., a premetric is a
-pseudometric if it is
+[pseudometric](metric-spaces.pseudometric-structures.md): a
 [reflexive](metric-spaces.reflexive-premetric-structures.md),
 [symmetric](metric-spaces.symmetric-premetric-structures.md), and
-[triangular](metric-spaces.triangular-premetric-structures.md).
-
+[triangular](metric-spaces.triangular-premetric-structures.md) premetric.
 Indistinguishability in a pseudometric space is an
 [equivalence relation](foundation.equivalence-relations.md).
 
