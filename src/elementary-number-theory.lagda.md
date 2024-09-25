@@ -37,6 +37,7 @@ open import elementary-number-theory.decidable-total-order-natural-numbers publi
 open import elementary-number-theory.decidable-total-order-rational-numbers public
 open import elementary-number-theory.decidable-total-order-standard-finite-types public
 open import elementary-number-theory.decidable-types public
+open import elementary-number-theory.decreasing-sequences-natural-numbers public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.difference-rational-numbers public
 open import elementary-number-theory.dirichlet-convolution public
@@ -65,6 +66,7 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers pub
 open import elementary-number-theory.group-of-integers public
 open import elementary-number-theory.half-integers public
 open import elementary-number-theory.hardy-ramanujan-number public
+open import elementary-number-theory.increasing-sequences-natural-numbers public
 open import elementary-number-theory.inequality-integer-fractions public
 open import elementary-number-theory.inequality-integers public
 open import elementary-number-theory.inequality-natural-numbers public
@@ -145,6 +147,8 @@ open import elementary-number-theory.strict-inequality-integer-fractions public
 open import elementary-number-theory.strict-inequality-integers public
 open import elementary-number-theory.strict-inequality-natural-numbers public
 open import elementary-number-theory.strict-inequality-rational-numbers public
+open import elementary-number-theory.strictly-decreasing-sequences-natural-numbers public
+open import elementary-number-theory.strictly-increasing-sequences-natural-numbers public
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public
 open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.sums-of-natural-numbers public
