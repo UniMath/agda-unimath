@@ -25,9 +25,11 @@ open import synthetic-category-theory.synthetic-categories
 
 ## Idea
 
-A functor f: A → B of [synthetic categories](synthetic-category-theory.synthetic-categories.md) is
-{{#concept "invertible" Disambiguation="Synthetic categories"}} if it has an inverse, i.e. if
-there exists a functor g: B → A together with natural isomorphisms g∘f ≅ id and g∘f ≅ id.
+A functor f: A → B of
+[synthetic categories](synthetic-category-theory.synthetic-categories.md) is
+{{#concept "invertible" Disambiguation="Synthetic categories"}} if it has an
+inverse, i.e. if there exists a functor g: B → A together with natural
+isomorphisms g∘f ≅ id and g∘f ≅ id.
 
 ### The predicate of being an inverse to a functor f: A → B of synthetic categories
 
@@ -123,7 +125,9 @@ module _
     (H : is-invertible-functor-Synthetic-Category-Theory κ μ ι f) →
     is-inverse-Synthetic-Category-Theory κ μ ι f
       ( inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H)
-  is-inverse-inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι = pr2
+  is-inverse-inverse-functor-is-invertible-functor-Synthetic-Category-Theory
+    κ μ ι =
+    pr2
 
   is-section-inverse-functor-is-invertible-functor-Synthetic-Category-Theory :
     (κ : language-Synthetic-Category-Theory l)
@@ -134,7 +138,8 @@ module _
     (H : is-invertible-functor-Synthetic-Category-Theory κ μ ι f) →
     is-section-Synthetic-Category-Theory κ μ ι f
       ( inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H)
-  is-section-inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H =
+  is-section-inverse-functor-is-invertible-functor-Synthetic-Category-Theory
+    κ μ ι H =
     pr1 (is-inverse-inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H)
 
   is-retraction-inverse-functor-is-invertible-functor-Synthetic-Category-Theory :
@@ -146,7 +151,8 @@ module _
     (H : is-invertible-functor-Synthetic-Category-Theory κ μ ι f) →
     is-retraction-Synthetic-Category-Theory κ μ ι f
       ( inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H)
-  is-retraction-inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H =
+  is-retraction-inverse-functor-is-invertible-functor-Synthetic-Category-Theory
+    κ μ ι H =
     pr2 (is-inverse-inverse-functor-is-invertible-functor-Synthetic-Category-Theory κ μ ι H)
 
   section-is-invertible-functor-Synthetic-Category-Theory :
@@ -253,7 +259,7 @@ module _
         ( id-iso-Synthetic-Category-Theory ι _))
 ```
 
-### Invertible functors of synthetic categories are closed under composition.
+### Invertible functors of synthetic categories are closed under composition
 
 ```agda
 module _

@@ -856,7 +856,7 @@ module _
 open preserves-associativity-composition-horizontal-composition-Synthetic-Category-Theory public
 ```
 
-#### We can prove that the inverse of the associator preservers horizontal composition.
+#### We can prove that the inverse of the associator preservers horizontal composition
 
 ```agda
 module _
@@ -1016,9 +1016,10 @@ module _
 
 #### Preservation of isomorphisms of natural isomorphisms by horizontal composition
 
-We have to assume as an additional axiom that given natural isomorphism α, α', β, β'
-with appropriate domains and codomains, together with isomorphisms α ≅ α' and β ≅ β',
-there exists an isomorphisms between the horizontal composites β * α ≅ β' * α'.
+We have to assume as an additional axiom that given natural isomorphism α, α',
+β, β' with appropriate domains and codomains, together with isomorphisms α ≅ α'
+and β ≅ β', there exists an isomorphisms between the horizontal composites β _ α
+≅ β' _ α'.
 
 ```agda
 module _

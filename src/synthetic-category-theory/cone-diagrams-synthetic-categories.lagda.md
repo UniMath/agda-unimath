@@ -15,18 +15,21 @@ open import foundation.universe-levels
 
 open import structured-types.globular-types
 
-open import synthetic-category-theory.synthetic-categories
 open import synthetic-category-theory.cospans-synthetic-categories
+open import synthetic-category-theory.synthetic-categories
 ```
 
 </details>
 
 ## Idea
 
-Consider a [cospan](synthetic-category-theory.cospans-synthetic-categories.md)
-S = D --g--> E <--f-- C of [synthetic categories](synthetic-category-theory.synthetic-categories.md)
-and let T be a synthetic category. A {{#concept "cone diagram" Disambiguation="Synthetic categories}}
-over S with an apex T is a pair of functors p : T → C and r : T → D that assemble into a commutative square of the form:
+Consider a [cospan](synthetic-category-theory.cospans-synthetic-categories.md) S
+= D --g--> E <--f-- C of
+[synthetic categories](synthetic-category-theory.synthetic-categories.md) and
+let T be a synthetic category. A
+{{#concept "cone diagram" Disambiguation="Synthetic categories}} over S with an
+apex T is a pair of functors p : T → C and r : T → D that assemble into a
+commutative square of the form:
 
 ```text
 T --p--> C
@@ -222,8 +225,8 @@ isomorphism of natural isomorphisms H : τ ≅ τ'.
 ## Isomorphisms of isomorphisms of cone diagrams
 
 If ϕ = (φl, φr, H) and Ψ = (ψl, ψr, K) are two isomorphisms between cone
-diagrams c and c', an isomorphism between them is a pair of isomorphisms
-φl ≅ ψl and φr ≅ ψr under which H becomes isomorphic to K.
+diagrams c and c', an isomorphism between them is a pair of isomorphisms φl ≅ ψl
+and φr ≅ ψr under which H becomes isomorphic to K.
 
 ```agda
   iso-of-isos-of-cone-diagrams-Synthetic-Category-Theory :
@@ -309,8 +312,8 @@ diagrams c and c', an isomorphism between them is a pair of isomorphisms
 ## Induced cones
 
 Given a cone c = (tl, tr, τ) over S with apex T and a functor s : R → T we
-construct an induced cone over S with apex R, defined as
-s*(c) = (tl∘s, tr∘s, τ*idₛ).
+construct an induced cone over S with apex R, defined as s*(c) = (tl∘s, tr∘s,
+τ*idₛ).
 
 ```agda
 module _

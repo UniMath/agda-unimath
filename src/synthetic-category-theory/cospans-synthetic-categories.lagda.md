@@ -15,8 +15,8 @@ open import foundation.universe-levels
 
 open import structured-types.globular-types
 
-open import synthetic-category-theory.synthetic-categories
 open import synthetic-category-theory.equivalences-synthetic-categories
+open import synthetic-category-theory.synthetic-categories
 ```
 
 </details>
@@ -24,8 +24,8 @@ open import synthetic-category-theory.equivalences-synthetic-categories
 ## Idea
 
 A {{#concept "cospan" Disambiguation="Synthetic categories"}} of
-[synthetic categories](synthetic-category-theory.synthetic-categories.md)
-is a pair of functors f, g of synthetic categories with a common codomain:
+[synthetic categories](synthetic-category-theory.synthetic-categories.md) is a
+pair of functors f, g of synthetic categories with a common codomain:
 
 ```text
 C --f--> E <--g-- D.
@@ -218,8 +218,8 @@ module _
 
 ### Equivalences of cospans
 
-An equivalence of cospans S and S' is a transformations between S and S'
-such that all three vertical functors are equivalences.
+An equivalence of cospans S and S' is a transformations between S and S' such
+that all three vertical functors are equivalences.
 
 ```agda
 module _

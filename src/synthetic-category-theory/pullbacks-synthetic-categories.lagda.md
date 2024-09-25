@@ -15,19 +15,21 @@ open import foundation.universe-levels
 
 open import structured-types.globular-types
 
-open import synthetic-category-theory.synthetic-categories
-open import synthetic-category-theory.cospans-synthetic-categories
 open import synthetic-category-theory.cone-diagrams-synthetic-categories
+open import synthetic-category-theory.cospans-synthetic-categories
+open import synthetic-category-theory.synthetic-categories
 ```
 
 </details>
 
 ## Idea
 
-Consider a [cospan diagram](synthetic-category-theory.cospans-synthetic-categories.md)
-S of [synthetic categories](synthetic-category-theory.synthetic-categories.md).
-The {{#concept "pullback" Disambiguation="Synthetic categories"} of S is a cone diagram
-cᵤ = (pr₀, pr₁, τᵤ) over S with apex P that is universal in the sense that:
+Consider a
+[cospan diagram](synthetic-category-theory.cospans-synthetic-categories.md) S of
+[synthetic categories](synthetic-category-theory.synthetic-categories.md). The
+{{#concept "pullback" Disambiguation="Synthetic categories"} of S is a cone
+diagram cᵤ = (pr₀, pr₁, τᵤ) over S with apex P that is universal in the sense
+that:
 
 ```text
 1) for every cone diagram c = (t₀, t₁, τ) over S with apex T there exists a functor
