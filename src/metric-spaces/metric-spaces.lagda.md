@@ -248,32 +248,29 @@ module _
     map-inv-equiv equiv-indistinguishable-eq-Metric-Space
 ```
 
-### The type of metric spaces is equivalent to the type of local pseudometric spaces
+### The type of metric spaces is equivalent to the type of extensional pseudometric spaces
 
-#### The subtype of local pseudometric spaces
+#### The subtype of extensional pseudometric spaces
 
 ```agda
 module _
   (l1 l2 : Level)
   where
 
-  is-local-prop-Pseudometric-Space :
+  is-extensional-prop-Pseudometric-Space :
     subtype (l1 ⊔ l2) (Pseudometric-Space l1 l2)
-  is-local-prop-Pseudometric-Space =
+  is-extensional-prop-Pseudometric-Space =
     is-local-prop-Premetric ∘ structure-Pseudometric-Space
 
-  is-local-Pseudometric-Space :
+  is-extensional-Pseudometric-Space :
     Pseudometric-Space l1 l2 → UU (l1 ⊔ l2)
-  is-local-Pseudometric-Space =
-    type-Prop ∘ is-local-prop-Pseudometric-Space
+  is-extensional-Pseudometric-Space =
+    type-Prop ∘ is-extensional-prop-Pseudometric-Space
 
-  is-prop-is-local-Pseudometric-Space :
-    (M : Pseudometric-Space l1 l2) → is-prop (is-local-Pseudometric-Space M)
-  is-prop-is-local-Pseudometric-Space =
-    is-prop-type-Prop ∘ is-local-prop-Pseudometric-Space
-
-  local-Pseudometric-Space : UU (lsuc l1 ⊔ lsuc l2)
-  local-Pseudometric-Space = type-subtype is-local-prop-Pseudometric-Space
+  is-prop-is-extensional-Pseudometric-Space :
+    (M : Pseudometric-Space l1 l2) → is-prop (is-extensional-Pseudometric-Space M)
+  is-prop-is-extensional-Pseudometric-Space =
+    is-prop-type-Prop ∘ is-extensional-prop-Pseudometric-Space
 ```
 
 #### Equivalence between metric spaces and local pseudometric spaces
@@ -289,7 +286,7 @@ module _
     associative-Σ
       ( Premetric-Space l1 l2)
       ( is-pseudometric-Premetric-Space)
-      ( is-local-Pseudometric-Space l1 l2)
+      ( is-extensional-Pseudometric-Space l1 l2)
 ```
 
 ## External links
