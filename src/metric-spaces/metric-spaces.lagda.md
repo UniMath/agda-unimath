@@ -39,11 +39,14 @@ open import metric-spaces.triangular-premetric-structures
 
 A {{#concept "metric space" Agda=Metric-Space WD="metric space" WDID=Q180953}}
 is a [premetric space](metric-spaces.premetric-spaces.md) whose
-[premetric](metric-spaces.premetric-structures.md) is reflexive, symmetric,
-triangular, and local; a [metric structure](metric-spaces.metric-structures.md).
-It is equivalent to the type of
-[pseudometric spaces](metric-spaces.pseudometric-spaces.md) whose premetric is
-[local](metric-spaces.extensional-premetric-structures.md).
+[premetric](metric-spaces.premetric-structures.md) is
+[reflexive](metric-spaces.reflexive-premetric-structures.md),
+[symmetric](metric-spaces.symmetric-premetric-structures.md),
+[triangular](metric-spaces.triangular-premetric-structures.md), and
+[local](metric-spaces.extensional-premetric-structures.md): a
+[metric structure](metric-spaces.metric-structures.md). It is equivalent to the
+type of [pseudometric spaces](metric-spaces.pseudometric-spaces.md) whose
+premetric is local.
 
 ## Definitions
 
