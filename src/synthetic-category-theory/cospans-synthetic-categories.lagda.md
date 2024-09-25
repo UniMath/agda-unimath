@@ -258,3 +258,149 @@ module _
                       ( functor-equiv-Synthetic-Category-Theory κ μ ι ψ)
                       ( right-functor-cospan-Synthetic-Category-Theory κ S')))))
 ```
+
+### The components of an equivalence of cospans of synthetic categories
+
+```agda
+module _
+  {l : Level}
+  where
+
+  left-equiv-equiv-cospan-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C C' E E' D D' : category-Synthetic-Category-Theory κ}
+    {S : cospan-Synthetic-Category-Theory κ C E D}
+    {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
+    equiv-cospan-Synthetic-Category-Theory κ μ ι S S' →
+    equiv-Synthetic-Category-Theory κ μ ι
+      ( left-source-cospan-Synthetic-Category-Theory κ S)
+      ( left-source-cospan-Synthetic-Category-Theory κ S')
+  left-equiv-equiv-cospan-Synthetic-Category-Theory κ μ ι H = pr1 H
+
+  left-functor-equiv-cospan-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C C' E E' D D' : category-Synthetic-Category-Theory κ}
+    {S : cospan-Synthetic-Category-Theory κ C E D}
+    {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
+    equiv-cospan-Synthetic-Category-Theory κ μ ι S S' →
+    functor-Synthetic-Category-Theory κ
+      ( left-source-cospan-Synthetic-Category-Theory κ S)
+      ( left-source-cospan-Synthetic-Category-Theory κ S')
+  left-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H =
+    functor-equiv-Synthetic-Category-Theory κ μ ι
+      ( left-equiv-equiv-cospan-Synthetic-Category-Theory κ μ ι H)
+
+  middle-equiv-equiv-cospan-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C C' E E' D D' : category-Synthetic-Category-Theory κ}
+    {S : cospan-Synthetic-Category-Theory κ C E D}
+    {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
+    equiv-cospan-Synthetic-Category-Theory κ μ ι S S' →
+    equiv-Synthetic-Category-Theory κ μ ι
+      ( target-cospan-Synthetic-Category-Theory κ S)
+      ( target-cospan-Synthetic-Category-Theory κ S')
+  middle-equiv-equiv-cospan-Synthetic-Category-Theory κ μ ι H =
+    pr1 (pr2 H)
+
+  middle-functor-equiv-cospan-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C C' E E' D D' : category-Synthetic-Category-Theory κ}
+    {S : cospan-Synthetic-Category-Theory κ C E D}
+    {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
+    equiv-cospan-Synthetic-Category-Theory κ μ ι S S' →
+    functor-Synthetic-Category-Theory κ
+      ( target-cospan-Synthetic-Category-Theory κ S)
+      ( target-cospan-Synthetic-Category-Theory κ S')
+  middle-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H =
+    functor-equiv-Synthetic-Category-Theory κ μ ι
+      ( middle-equiv-equiv-cospan-Synthetic-Category-Theory κ μ ι H)
+
+  right-equiv-equiv-cospan-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C C' E E' D D' : category-Synthetic-Category-Theory κ}
+    {S : cospan-Synthetic-Category-Theory κ C E D}
+    {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
+    equiv-cospan-Synthetic-Category-Theory κ μ ι S S' →
+    equiv-Synthetic-Category-Theory κ μ ι
+      ( right-source-cospan-Synthetic-Category-Theory κ S)
+      ( right-source-cospan-Synthetic-Category-Theory κ S')
+  right-equiv-equiv-cospan-Synthetic-Category-Theory κ μ ι H =
+    pr1 (pr2 (pr2 H))
+
+  right-functor-equiv-cospan-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C C' E E' D D' : category-Synthetic-Category-Theory κ}
+    {S : cospan-Synthetic-Category-Theory κ C E D}
+    {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
+    equiv-cospan-Synthetic-Category-Theory κ μ ι S S' →
+    functor-Synthetic-Category-Theory κ
+      ( right-source-cospan-Synthetic-Category-Theory κ S)
+      ( right-source-cospan-Synthetic-Category-Theory κ S')
+  right-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H =
+    functor-equiv-Synthetic-Category-Theory κ μ ι
+      ( right-equiv-equiv-cospan-Synthetic-Category-Theory κ μ ι H)
+
+  left-commuting-square-equiv-cospan-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C C' E E' D D' : category-Synthetic-Category-Theory κ}
+    {S : cospan-Synthetic-Category-Theory κ C E D}
+    {S' : cospan-Synthetic-Category-Theory κ C' E' D'}
+    (H : equiv-cospan-Synthetic-Category-Theory κ μ ι S S') →
+      ( commuting-square-functors-Synthetic-Category-Theory κ μ
+        ( left-functor-cospan-Synthetic-Category-Theory κ S)
+        ( middle-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H)
+        ( left-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H)
+        ( left-functor-cospan-Synthetic-Category-Theory κ S'))
+  left-commuting-square-equiv-cospan-Synthetic-Category-Theory κ μ ι H =
+    pr1 (pr2 (pr2 (pr2 H)))
+
+  right-commuting-square-equiv-cospan-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C C' E E' D D' : category-Synthetic-Category-Theory κ}
+    {S : cospan-Synthetic-Category-Theory κ C E D}
+    {S' : cospan-Synthetic-Category-Theory κ C' E' D'}
+    (H : equiv-cospan-Synthetic-Category-Theory κ μ ι S S') →
+      ( commuting-square-functors-Synthetic-Category-Theory κ μ
+        ( right-functor-cospan-Synthetic-Category-Theory κ S)
+        ( middle-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H)
+        ( right-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H)
+        ( right-functor-cospan-Synthetic-Category-Theory κ S'))
+  right-commuting-square-equiv-cospan-Synthetic-Category-Theory κ μ ι H =
+    pr2 (pr2 (pr2 (pr2 H)))
+
+  transformation-cospan-equiv-cospan-Synthetic-Category-Theory :
+    (κ : language-Synthetic-Category-Theory l)
+    (μ : composition-Synthetic-Category-Theory κ)
+    (ι : identity-Synthetic-Category-Theory κ)
+    {C C' E E' D D' : category-Synthetic-Category-Theory κ}
+    {S : cospan-Synthetic-Category-Theory κ C E D}
+    {S' : cospan-Synthetic-Category-Theory κ C' E' D'} →
+    equiv-cospan-Synthetic-Category-Theory κ μ ι S S' →
+    transformation-cospan-Synthetic-Category-Theory κ μ S S'
+  pr1 (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H) =
+    left-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H
+  pr1 (pr2 (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H)) =
+    middle-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H
+  pr1 (pr2 (pr2 (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H))) =
+    right-functor-equiv-cospan-Synthetic-Category-Theory κ μ ι H
+  pr1 (pr2 (pr2 (pr2 (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H)))) =
+    left-commuting-square-equiv-cospan-Synthetic-Category-Theory κ μ ι H
+  pr2 (pr2 (pr2 (pr2 (transformation-cospan-equiv-cospan-Synthetic-Category-Theory κ μ ι H)))) =
+    right-commuting-square-equiv-cospan-Synthetic-Category-Theory κ μ ι H
+```

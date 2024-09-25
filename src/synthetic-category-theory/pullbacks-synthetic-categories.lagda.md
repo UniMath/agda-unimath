@@ -27,7 +27,7 @@ open import synthetic-category-theory.synthetic-categories
 Consider a
 [cospan diagram](synthetic-category-theory.cospans-synthetic-categories.md) S of
 [synthetic categories](synthetic-category-theory.synthetic-categories.md). The
-{{#concept "pullback" Disambiguation="Synthetic categories"} of S is a cone
+{{#concept "pullback" Disambiguation="Synthetic categories"}} of S is a cone
 diagram cᵤ = (pr₀, pr₁, τᵤ) over S with apex P that is universal in the sense
 that:
 
