@@ -4,7 +4,7 @@
 {-# OPTIONS --rewriting --guardedness #-}
 ```
 
-## Files in the synthetic homotopy theory folder
+## Modules in the synthetic homotopy theory namespace
 
 ```agda
 module synthetic-homotopy-theory where

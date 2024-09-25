@@ -38,7 +38,7 @@ For any two types `X` and `Y`, we have `(X ≃ Y) ↔ (Maybe X ≃ Maybe Y)`.
 
 ## Definition
 
-### The action of the Maybe modality on equivalences
+### The action of the maybe monad on equivalences
 
 ```agda
 equiv-Maybe :
@@ -46,7 +46,7 @@ equiv-Maybe :
 equiv-Maybe e = equiv-coproduct e id-equiv
 ```
 
-### Equivalences of Maybe-structures on a type
+### Equivalences of maybe structures on a type
 
 ```agda
 equiv-maybe-structure :

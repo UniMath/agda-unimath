@@ -1,6 +1,6 @@
 # Primitives
 
-## Files in the primitives folder
+## Modules in the primitives namespace
 
 ```agda
 module primitives where

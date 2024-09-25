@@ -1,4 +1,4 @@
-# The universal property of maybe
+# The universal property of the maybe monad
 
 ```agda
 module foundation.universal-property-maybe where
@@ -24,8 +24,10 @@ open import foundation-core.identity-types
 
 ## Idea
 
-We combine the universal property of coproducts and the unit type to obtain a
-universal property of the maybe modality.
+We combine the
+[universal property of coproducts](foundation.universal-property-coproduct-types.md)
+and the [unit type](foundation.universal-property-unit-type.md) to obtain the
+{{#concept "universal property of the maybe monad"  Agda=dependent-universal-property-Maybe}}.
 
 ## Definitions
 

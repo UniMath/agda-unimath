@@ -154,6 +154,31 @@ module _
   pr2 product-Decidable-Prop = is-decidable-prop-product-Decidable-Prop
 ```
 
+### The negation operation on decidable propositions
+
+```agda
+is-decidable-prop-neg :
+  {l1 : Level} {A : UU l1} → is-decidable A → is-decidable-prop (¬ A)
+is-decidable-prop-neg is-decidable-A =
+  ( is-prop-neg , is-decidable-neg is-decidable-A)
+
+neg-type-Decidable-Prop :
+  {l1 : Level} (A : UU l1) → is-decidable A → Decidable-Prop l1
+neg-type-Decidable-Prop A is-decidable-A =
+  ( ¬ A , is-decidable-prop-neg is-decidable-A)
+
+neg-Decidable-Prop :
+  {l1 : Level} → Decidable-Prop l1 → Decidable-Prop l1
+neg-Decidable-Prop P =
+  neg-type-Decidable-Prop
+    ( type-Decidable-Prop P)
+    ( is-decidable-Decidable-Prop P)
+
+type-neg-Decidable-Prop :
+  {l1 : Level} → Decidable-Prop l1 → UU l1
+type-neg-Decidable-Prop P = type-Decidable-Prop (neg-Decidable-Prop P)
+```
+
 ### Decidability of a propositional truncation
 
 ```agda

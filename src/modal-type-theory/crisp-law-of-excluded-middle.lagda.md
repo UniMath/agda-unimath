@@ -22,7 +22,8 @@ open import foundation-core.propositions
 ## Idea
 
 The {{#concept "crisp law of excluded middle" Agda=Crisp-LEM}} asserts that any
-crisp [proposition](foundation-core.propositions.md) `P` is
+[crisp](modal-type-theory.crisp-types.md)
+[proposition](foundation-core.propositions.md) `P` is
 [decidable](foundation.decidable-types.md).
 
 ## Definition
