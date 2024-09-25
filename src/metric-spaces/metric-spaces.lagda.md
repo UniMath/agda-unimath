@@ -38,15 +38,50 @@ open import metric-spaces.triangular-premetric-structures
 ## Idea
 
 A {{#concept "metric space" Agda=Metric-Space WD="metric space" WDID=Q180953}}
-is a [premetric space](metric-spaces.premetric-spaces.md) whose
+is a type [structured](foundation.structure.md) with a concept of distance on
+its elements.
+
+Since we operate in a constructive setting, the concept of distance is captured
+by considering upper bounds on the distance between points, rather than by a
+distance function as in the classical approach. Thus, a metric space `A` is
+defined by a family of _neighborhood_
+[relations](foundation.binary-relations.md) on it indexed by the
+[positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
+`ℚ⁺`,
+
+```text
+  N : ℚ⁺ → A → A → Prop l
+```
+
+that satisfies certain axioms. Constructing a proof of `N d x y` amounts to
+saying that _`d` is an upper bound on the distance from `x` to `y`_.
+
+The neighborhood relation on a metric space must satisfy the following axioms:
+
+- **Reflexivity.** Every positive rational `d` is an upper bound on the distance
+  from `x` to itself.
+- **Symmetry.** If `d` is an upper bound on the distance from `x` to `y`, then
+  `d` is an upper bound on the distance from `y` to `x`.
+- **Triangularity.** If `d` is an upper bound on the distance from `x` to `y`,
+  and `d'` is an upper bound on the distance from `y` to `z`, then `d + d'` is
+  an upper bound on the distance from `x` to `z`.
+
+Finally, we ask that our metric spaces are **extensional**, which amounts to the
+property of **indistinguishability of identicals**
+
+- If every positive rational `d` is an upper bound on the distance from `x` to
+  `y`, then `x` and `y` are [equal](foundation-core.identity-types.md).
+
+Put concisely, a metric space is a
+[premetric space](metric-spaces.premetric-spaces.md) whose
 [premetric](metric-spaces.premetric-structures.md) is
 [reflexive](metric-spaces.reflexive-premetric-structures.md),
 [symmetric](metric-spaces.symmetric-premetric-structures.md),
 [triangular](metric-spaces.triangular-premetric-structures.md), and
-[local](metric-spaces.extensional-premetric-structures.md): a
-[metric structure](metric-spaces.metric-structures.md). It is equivalent to the
-type of [pseudometric spaces](metric-spaces.pseudometric-spaces.md) whose
-premetric is local.
+[extensional](metric-spaces.extensional-premetric-structures.md): a
+[metric structure](metric-spaces.metric-structures.md). Equivalently, it is a
+[pseudometric space](metric-spaces.pseudometric-spaces.md) whose premetric is
+extensional.
 
 ## Definitions
 

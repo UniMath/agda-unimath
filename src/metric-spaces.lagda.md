@@ -2,38 +2,39 @@
 
 ## Idea
 
-[Classical metric spaces](https://en.wikipedia.org/wiki/Metric_space#Definition)
-are sets equipped with a positive definite, symmetric, reflexive, and triangular
-binary map into the real numbers. Here, we follow {{#cite Booij2020PhD}} and
-define a [premetric structure](metric-spaces.premetric-structures.md) on a type
-as a family of
-[propositition valued binary relations](foundation.binary-relations.md) indexed
-by the
-[positive rational numbers](elementary-number-theory.positive-rational-numbers.md).
+Metric spaces are types [structured](foundation.structure.md) with a concept of
+distance on its elements.
 
-Given a premetric
+Since we operate in a constructive setting, the concept of distance is captured
+by considering upper bounds on the distance between points, rather than by a
+distance function as in the classical approach. Thus, a metric space `A` is
+defined by a family of _neighborhood_
+[relations](foundation.binary-relations.md) on it indexed by the
+[positive rational numbers](elementary-number-theory.positive-rational-numbers.md)
+`ℚ⁺`,
 
 ```text
-  B : ℚ⁺ → A → A → Prop l
+  N : ℚ⁺ → A → A → Prop l
 ```
 
-on a type `A`, the type of `B d x y` is called a `d`-neigborhood of `x` and `y`
-and if it is inhabited we interpret `d` as an upper bound on the distance
-between `x` and `y` in the premetric `B`.
+that satisfies certain axioms. Constructing a proof of `N d x y` amounts to
+saying that _`d` is an upper bound on the distance from `x` to `y`_.
 
-In this context, a [metric space](metric-spaces.metric-spaces.md) is a type
-equipped with a [reflexive](metric-spaces.reflexive-premetric-structures.md),
-[symmetric](metric-spaces.symmetric-premetric-structures.md),
-[triangular](metric-spaces.triangular-premetric-structures.md), and
-[local](metric-spaces.extensional-premetric-structures.md) premetric structure:
-a [metric structure](metric-spaces.metric-structures.md).
+The neighborhood relation on a metric space must satisfy the following axioms:
 
-[Short maps](metric-spaces.short-functions-metric-spaces.md) and
-[isometries](metric-spaces.isometries-metric-spaces.md) are homomorphisms
-between metric spaces and define the
-[category of metric space and short maps](metric-spaces.category-of-metric-spaces-and-short-functions.md)
-and the
-[category of metric spaces and isometries](metric-spaces.category-of-metric-spaces-and-isometries.md).
+- **Reflexivity.** Every positive rational `d` is an upper bound on the distance
+  from `x` to itself.
+- **Symmetry.** If `d` is an upper bound on the distance from `x` to `y`, then
+  `d` is an upper bound on the distance from `y` to `x`.
+- **Triangularity.** If `d` is an upper bound on the distance from `x` to `y`,
+  and `d'` is an upper bound on the distance from `y` to `z`, then `d + d'` is
+  an upper bound on the distance from `x` to `z`.
+
+Finally, we ask that our metric spaces are **extensional**, which amounts to the
+property of **indistinguishability of identicals**
+
+- If every positive rational `d` is an upper bound on the distance from `x` to
+  `y`, then `x` and `y` are [equal](foundation-core.identity-types.md).
 
 ## Instances of metric spaces
 
@@ -90,4 +91,6 @@ open import metric-spaces.triangular-premetric-structures public
 
 ## References
 
-{{#bibliography}}
+Our setup for metric space theory closely follows {{#cite Booij20PhD}}.
+
+{{#bibliography}} {{#reference Booij20PhD}}
