@@ -43,9 +43,9 @@ of a
 [positive rationals](elementary-number-theory.positive-rational-numbers.md)
 `(ε δ : ℚ⁺)`.
 
-This holds if and only if any `ε : ℚ⁺` is an is an upper bound on the distance
-between `f δ` and `l` for all positive rational numbers `δ < ε` so, for
-sufficiently small `δ`s, `f δ` is an
+This holds if and only if any `ε : ℚ⁺` is an upper bound on the distance between
+`f δ` and `l` for all positive rational numbers `δ < ε` so, for sufficiently
+small `δ`s, `f δ` is an
 {{#concept "estimate" Disambiguation="of a Cauchy approximation in a premetric space" Agda=is-estimate-cauchy-approximation-Premetric-Space}}
 of `l`.
 
