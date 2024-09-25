@@ -53,8 +53,7 @@ module _
 
 ```agda
 module _
-  {l l1 l2 : Level} (A : Metric-Space l1 l2)
-  (S : subset-Metric-Space l A)
+  {l l1 l2 : Level} (A : Metric-Space l1 l2) (S : subset-Metric-Space l A)
   where
 
   structure-subset-Metric-Space : Premetric l2 (type-subtype S)
