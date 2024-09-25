@@ -273,22 +273,6 @@ module _
     is-prop-type-Prop ∘ is-extensional-prop-Pseudometric-Space
 ```
 
-#### Equivalence between metric spaces and local pseudometric spaces
-
-```agda
-module _
-  {l1 l2 : Level}
-  where
-
-  equiv-local-pseudometric-Metric-Space :
-    local-Pseudometric-Space l1 l2 ≃ Metric-Space l1 l2
-  equiv-local-pseudometric-Metric-Space =
-    associative-Σ
-      ( Premetric-Space l1 l2)
-      ( is-pseudometric-Premetric-Space)
-      ( is-extensional-Pseudometric-Space l1 l2)
-```
-
 ## External links
 
 - [`MetricSpaces.Type`](https://www.cs.bham.ac.uk/~mhe/TypeTopology/MetricSpaces.Type.html)
