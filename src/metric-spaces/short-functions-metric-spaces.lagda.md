@@ -39,7 +39,9 @@ A [function](metric-spaces.functions-metric-spaces.md) `f` between two
 if it is [short](metric-spaces.short-functions-premetric-spaces.md) on their
 carrier [premetric spaces](metric-spaces.premetric-spaces.md): for any points
 `x` and `y` that are `d`-[neighbors](metric-spaces.premetric-structures.md) in
-`A`, `f x` and `f y` are `d`-neighbors in `B`.
+`A`, `f x` and `f y` are `d`-neighbors in `B`. I.e., upper bounds of the
+distance between two points in `A` are upper bounds of the distances of their
+images.
 
 ## Definitions
 
