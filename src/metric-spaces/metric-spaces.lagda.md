@@ -198,14 +198,9 @@ module _
   equiv-indistinguishable-eq-Metric-Space :
     (x ＝ y) ≃ is-indistinguishable-Metric-Space M x y
   equiv-indistinguishable-eq-Metric-Space =
-    ( indistinguishable-eq-reflexive-Premetric
-      ( structure-Metric-Space M)
-      ( is-reflexive-structure-Metric-Space M)) ,
-    ( is-fiberwise-equiv-indistinguishable-is-extensional-Premetric
+    equiv-eq-is-indistinguishable-is-extensional-Premetric
       ( structure-Metric-Space M)
       ( is-extensional-structure-Metric-Space M)
-      ( x)
-      ( y))
 
   indistinguishable-eq-Metric-Space :
     x ＝ y → is-indistinguishable-Metric-Space M x y
