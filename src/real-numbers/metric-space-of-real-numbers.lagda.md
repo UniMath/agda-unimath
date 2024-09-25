@@ -61,9 +61,8 @@ the [premetric](metric-spaces.premetric-structures.md) where `x y : ℝ` are
 - if `r + d` is in the lower cut of `y`, `r` is in the lower cut of `x`
 - if `r + d` is in the lower cut of `x`, `r` is in the lower cut of `y`
 
-is a [saturated metric space](metric-spaces.saturated-metric-spaces.md).
-
-It is the
+is a [saturated metric space](metric-spaces.saturated-metric-spaces.md). It is
+the
 {{#concept "standard metric space of real numbers" Agda=metric-space-leq-ℝ}}.
 
 ## Definitions
