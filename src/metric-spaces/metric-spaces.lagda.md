@@ -268,7 +268,8 @@ module _
     type-Prop ∘ is-extensional-prop-Pseudometric-Space
 
   is-prop-is-extensional-Pseudometric-Space :
-    (M : Pseudometric-Space l1 l2) → is-prop (is-extensional-Pseudometric-Space M)
+    (M : Pseudometric-Space l1 l2) →
+    is-prop (is-extensional-Pseudometric-Space M)
   is-prop-is-extensional-Pseudometric-Space =
     is-prop-type-Prop ∘ is-extensional-prop-Pseudometric-Space
 ```
