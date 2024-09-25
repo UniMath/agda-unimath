@@ -147,7 +147,7 @@ module _
     (A ＝ B) ≃ isometric-equiv-Premetric-Space A B
   equiv-isometric-equiv-eq-Premetric-Space =
     equiv-isometric-eq-equiv-Premetric-Space ∘e
-    equiv-isometric-eq-Premetric-Space A B
+    equiv-isometric-eq-eq-Premetric-Space A B
 
   equiv-isometric-equiv-eq-Premetric-Space' :
     (A ＝ B) ≃ isometric-equiv-Premetric-Space' A B

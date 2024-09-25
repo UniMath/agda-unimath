@@ -186,16 +186,16 @@ module _
   {l1 l2 : Level} (A B : Premetric-Space l1 l2)
   where
 
-  equiv-isometric-eq-Premetric-Space :
+  equiv-isometric-eq-eq-Premetric-Space :
     (A ＝ B) ≃ isometric-eq-Premetric-Space A B
-  equiv-isometric-eq-Premetric-Space =
+  equiv-isometric-eq-eq-Premetric-Space =
     ( equiv-tot (equiv-is-isometry-map-eq-tr-Premetric-Space A B)) ∘e
     ( equiv-eq-tr-Premetric-Space A B)
 
   eq-isometric-eq-Premetric-Space :
     isometric-eq-Premetric-Space A B → A ＝ B
   eq-isometric-eq-Premetric-Space =
-    map-inv-equiv equiv-isometric-eq-Premetric-Space
+    map-inv-equiv equiv-isometric-eq-eq-Premetric-Space
 ```
 
 ### Isometric equality of premetric spaces is torsorial
@@ -210,6 +210,6 @@ module _
   is-torsorial-isometric-eq-Premetric-Space =
     is-contr-equiv'
       ( Σ (Premetric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-isometric-eq-Premetric-Space A))
+      ( equiv-tot (equiv-isometric-eq-eq-Premetric-Space A))
       ( is-torsorial-Id A)
 ```

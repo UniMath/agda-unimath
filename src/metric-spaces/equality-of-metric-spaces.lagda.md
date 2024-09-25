@@ -107,15 +107,15 @@ module _
   {l1 l2 : Level} (A B : Metric-Space l1 l2)
   where
 
-  equiv-isometric-eq-Metric-Space : (A ＝ B) ≃ isometric-eq-Metric-Space A B
-  equiv-isometric-eq-Metric-Space =
-    ( equiv-isometric-eq-Premetric-Space
+  equiv-isometric-eq-eq-Metric-Space : (A ＝ B) ≃ isometric-eq-Metric-Space A B
+  equiv-isometric-eq-eq-Metric-Space =
+    ( equiv-isometric-eq-eq-Premetric-Space
       ( premetric-Metric-Space A)
       ( premetric-Metric-Space B)) ∘e
     ( equiv-eq-premetric-Metric-Space A B)
 
   eq-isometric-eq-Metric-Space : isometric-eq-Metric-Space A B → A ＝ B
-  eq-isometric-eq-Metric-Space = map-inv-equiv equiv-isometric-eq-Metric-Space
+  eq-isometric-eq-Metric-Space = map-inv-equiv equiv-isometric-eq-eq-Metric-Space
 ```
 
 ### Isometric equality is torsorial
@@ -130,7 +130,7 @@ module _
   is-torsorial-isometric-eq-Metric-Space =
     is-contr-equiv'
       ( Σ (Metric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-isometric-eq-Metric-Space A))
+      ( equiv-tot (equiv-isometric-eq-eq-Metric-Space A))
       ( is-torsorial-Id A)
 ```
 
@@ -177,9 +177,9 @@ module _
   {l1 l2 : Level} (A B : Metric-Space l1 l2)
   where
 
-  equiv-isometric-equiv-Metric-Space' :
+  equiv-isometric-equiv-eq-Metric-Space' :
     (A ＝ B) ≃ isometric-equiv-Metric-Space' A B
-  equiv-isometric-equiv-Metric-Space' =
+  equiv-isometric-equiv-eq-Metric-Space' =
     ( equiv-isometric-equiv-eq-Premetric-Space'
       ( premetric-Metric-Space A)
       ( premetric-Metric-Space B)) ∘e
@@ -188,7 +188,7 @@ module _
   eq-isometric-equiv-Metric-Space' :
     isometric-equiv-Metric-Space' A B → A ＝ B
   eq-isometric-equiv-Metric-Space' =
-    map-inv-equiv equiv-isometric-equiv-Metric-Space'
+    map-inv-equiv equiv-isometric-equiv-eq-Metric-Space'
 ```
 
 ### The existence of invertibe isometries between metric spaces is torsorial
@@ -203,6 +203,6 @@ module _
   is-torsorial-isometric-equiv-Metric-Space' =
     is-contr-equiv'
       ( Σ (Metric-Space l1 l2) (Id A))
-      ( equiv-tot (equiv-isometric-equiv-Metric-Space' A))
+      ( equiv-tot (equiv-isometric-equiv-eq-Metric-Space' A))
       ( is-torsorial-Id A)
 ```
