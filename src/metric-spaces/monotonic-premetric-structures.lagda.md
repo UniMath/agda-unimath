@@ -26,7 +26,7 @@ subsets of upper bounds on the distance between any two points are upper stable.
 
 ## Definitions
 
-### The property of being a montonic premetric structure
+### The property of being a monotonic premetric structure
 
 ```agda
 module _
