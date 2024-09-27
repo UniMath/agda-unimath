@@ -58,22 +58,14 @@ module _
             ( is-limit-cauchy-approximation-prop-Premetric-Space
               ( premetric-Metric-Space A)
               ( f))
-            ( all-elements-equal-is-estimate-cauchy-approximation-triangular-symmetric-extensional-Premetric-Space
+            ( all-elements-equal-is-limit-cauchy-approximation-triangular-symmetric-extensional-Premetric-Space
               ( premetric-Metric-Space A)
               ( is-symmetric-structure-Metric-Space A)
               ( is-triangular-structure-Metric-Space A)
               ( is-extensional-structure-Metric-Space A)
               ( f)
-              ( is-estimate-is-limit-cauchy-approximation-Premetric-Space
-                ( premetric-Metric-Space A)
-                ( f)
-                ( pr1 x)
-                ( pr2 x))
-              ( is-estimate-is-limit-cauchy-approximation-Premetric-Space
-                ( premetric-Metric-Space A)
-                ( f)
-                ( pr1 y)
-                ( pr2 y))))
+              ( pr2 x)
+              ( pr2 y)))
 
   is-convergent-prop-cauchy-approximation-Metric-Space : Prop (l1 ⊔ l2)
   is-convergent-prop-cauchy-approximation-Metric-Space =
@@ -132,18 +124,4 @@ module _
       ( map-convergent-cauchy-approximation-Metric-Space ε)
       ( limit-convergent-cauchy-approximation-Metric-Space)
   is-limit-limit-convergent-cauchy-approximation-Metric-Space = pr2 (pr2 f)
-
-  is-estimate-limit-convergent-cauchy-approximation-Metric-Space :
-    (ε δ : ℚ⁺) (H : le-ℚ⁺ δ ε) →
-    neighborhood-Metric-Space
-      ( A)
-      ( ε)
-      ( map-convergent-cauchy-approximation-Metric-Space δ)
-      ( limit-convergent-cauchy-approximation-Metric-Space)
-  is-estimate-limit-convergent-cauchy-approximation-Metric-Space =
-    is-estimate-is-limit-cauchy-approximation-Premetric-Space
-      ( premetric-Metric-Space A)
-      ( approximation-convergent-cauchy-approximation-Metric-Space)
-      ( limit-convergent-cauchy-approximation-Metric-Space)
-      ( is-limit-limit-convergent-cauchy-approximation-Metric-Space)
 ```
