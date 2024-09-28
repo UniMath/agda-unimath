@@ -146,6 +146,9 @@ module _
 
   is-transitive : UU (l1 ⊔ l2)
   is-transitive = (x y z : A) → R y z → R x y → R x z
+
+  is-transitive' : UU (l1 ⊔ l2)
+  is-transitive' = {x y z : A} → R y z → R x y → R x z
 ```
 
 ### The predicate of being a transitive relation valued in propositions

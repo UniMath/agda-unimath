@@ -47,13 +47,13 @@ record
       {l : Level} →
       0-cell-Large-Globular-Type A l → 0-cell-Large-Globular-Type B (δ l)
 
-    globular-type-1-cell-map-Large-Globular-Type :
+    1-cell-globular-map-map-Large-Globular-Type :
       {l1 l2 : Level}
       {x : 0-cell-Large-Globular-Type A l1}
       {y : 0-cell-Large-Globular-Type A l2} →
       globular-map
-        ( globular-type-1-cell-Large-Globular-Type A x y)
-        ( globular-type-1-cell-Large-Globular-Type B
+        ( 1-cell-globular-type-Large-Globular-Type A x y)
+        ( 1-cell-globular-type-Large-Globular-Type B
           ( 0-cell-map-Large-Globular-Type x)
           ( 0-cell-map-Large-Globular-Type y))
 
@@ -74,7 +74,7 @@ module _
       ( 0-cell-map-Large-Globular-Type F x)
       ( 0-cell-map-Large-Globular-Type F y)
   1-cell-map-Large-Globular-Type =
-    0-cell-globular-map (globular-type-1-cell-map-Large-Globular-Type F)
+    0-cell-globular-map (1-cell-globular-map-map-Large-Globular-Type F)
 
 module _
   {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} {δ : Level → Level}
@@ -92,7 +92,7 @@ module _
       ( 1-cell-map-Large-Globular-Type F f)
       ( 1-cell-map-Large-Globular-Type F g)
   2-cell-map-Large-Globular-Type =
-    1-cell-globular-map (globular-type-1-cell-map-Large-Globular-Type F)
+    1-cell-globular-map (1-cell-globular-map-map-Large-Globular-Type F)
 
 module _
   {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} {δ : Level → Level}
@@ -111,5 +111,5 @@ module _
       ( 2-cell-map-Large-Globular-Type F H)
       ( 2-cell-map-Large-Globular-Type F K)
   3-cell-map-Large-Globular-Type =
-    2-cell-globular-map (globular-type-1-cell-map-Large-Globular-Type F)
+    2-cell-globular-map (1-cell-globular-map-map-Large-Globular-Type F)
 ```

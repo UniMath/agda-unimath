@@ -35,9 +35,17 @@ record
   {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A) : UU (l1 ⊔ l2)
   where
   coinductive
+  
   field
     is-reflexive-1-cell-is-reflexive-globular-structure :
       is-reflexive (1-cell-globular-structure G)
+
+  refl-1-cell-is-reflexive-globular-structure :
+    {x : A} → 1-cell-globular-structure G x x
+  refl-1-cell-is-reflexive-globular-structure {x} =
+    is-reflexive-1-cell-is-reflexive-globular-structure x
+
+  field
     is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure :
       (x y : A) →
       is-reflexive-globular-structure
@@ -50,10 +58,14 @@ module _
   (r : is-reflexive-globular-structure G)
   where
 
-  refl-1-cell-is-reflexive-globular-structure :
-    {x : A} → 1-cell-globular-structure G x x
-  refl-1-cell-is-reflexive-globular-structure {x} =
-    is-reflexive-1-cell-is-reflexive-globular-structure r x
+  is-reflexive-2-cell-is-reflexive-globular-structure :
+    {x y : A} → is-reflexive (2-cell-globular-structure G {x} {y})
+  is-reflexive-2-cell-is-reflexive-globular-structure =
+    is-reflexive-1-cell-is-reflexive-globular-structure
+      ( is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+        ( r)
+        ( _)
+        ( _))
 
   refl-2-cell-is-reflexive-globular-structure :
     {x y : A} {f : 1-cell-globular-structure G x y} →
@@ -111,6 +123,34 @@ module _
   is-reflexive-Globular-Type : UU (l1 ⊔ l2)
   is-reflexive-Globular-Type =
     is-reflexive-globular-structure (globular-structure-0-cell-Globular-Type G)
+
+is-reflexive-globular-type-is-reflexive-globular-structure :
+  {l1 l2 : Level} {A : UU l1} {B : globular-structure l2 A} →
+  is-reflexive-globular-structure B →
+  is-reflexive-Globular-Type (make-Globular-Type B)
+is-reflexive-1-cell-is-reflexive-globular-structure
+  ( is-reflexive-globular-type-is-reflexive-globular-structure r) =
+  is-reflexive-1-cell-is-reflexive-globular-structure r
+is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+  ( is-reflexive-globular-type-is-reflexive-globular-structure r) x y =
+  is-reflexive-globular-type-is-reflexive-globular-structure
+    ( is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+      r x y)
+
+module _
+  {l1 l2 : Level} (G : Globular-Type l1 l2) (r : is-reflexive-Globular-Type G)
+  where
+
+  is-reflexive-1-cell-is-reflexive-Globular-Type :
+    is-reflexive (1-cell-Globular-Type G)
+  is-reflexive-1-cell-is-reflexive-Globular-Type =
+    is-reflexive-1-cell-is-reflexive-globular-structure r
+
+  is-reflexive-2-cell-is-reflexive-Globular-Type :
+    {x y : 0-cell-Globular-Type G} →
+    is-reflexive (2-cell-Globular-Type G {x = x} {y = y})
+  is-reflexive-2-cell-is-reflexive-Globular-Type =
+    is-reflexive-2-cell-is-reflexive-globular-structure r 
 ```
 
 ### Reflexive globular types

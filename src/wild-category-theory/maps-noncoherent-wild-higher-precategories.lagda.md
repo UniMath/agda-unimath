@@ -113,7 +113,7 @@ module _
     .obj-map-Noncoherent-Wild-Higher-Precategory →
       hom-map-Noncoherent-Wild-Higher-Precategory
     .hom-globular-type-map-Noncoherent-Wild-Higher-Precategory →
-      globular-type-1-cell-globular-map
+      1-cell-globular-map-globular-map
         ( hom-globular-type-map-Noncoherent-Wild-Higher-Precategory F)
 ```
 

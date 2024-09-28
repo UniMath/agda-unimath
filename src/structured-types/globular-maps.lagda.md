@@ -45,7 +45,7 @@ record
     0-cell-globular-map :
       0-cell-Globular-Type A → 0-cell-Globular-Type B
 
-    globular-type-1-cell-globular-map :
+    1-cell-globular-map-globular-map :
       {x y : 0-cell-Globular-Type A} →
       globular-map
         ( 1-cell-globular-type-Globular-Type A x y)
@@ -68,7 +68,7 @@ module _
       ( 0-cell-globular-map F x)
       ( 0-cell-globular-map F y)
   1-cell-globular-map =
-    0-cell-globular-map (globular-type-1-cell-globular-map F)
+    0-cell-globular-map (1-cell-globular-map-globular-map F)
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -84,7 +84,7 @@ module _
       ( 1-cell-globular-map F f)
       ( 1-cell-globular-map F g)
   2-cell-globular-map =
-    1-cell-globular-map (globular-type-1-cell-globular-map F)
+    1-cell-globular-map (1-cell-globular-map-globular-map F)
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -101,7 +101,7 @@ module _
       ( 2-cell-globular-map F H)
       ( 2-cell-globular-map F K)
   3-cell-globular-map =
-    2-cell-globular-map (globular-type-1-cell-globular-map F)
+    2-cell-globular-map (1-cell-globular-map-globular-map F)
 ```
 
 ### The identity map on a globular type
@@ -112,7 +112,7 @@ id-globular-map :
 id-globular-map A =
   λ where
   .0-cell-globular-map → id
-  .globular-type-1-cell-globular-map {x} {y} →
+  .1-cell-globular-map-globular-map {x} {y} →
     id-globular-map (1-cell-globular-type-Globular-Type A x y)
 ```
 
@@ -129,8 +129,8 @@ comp-globular-map g f =
   λ where
   .0-cell-globular-map →
     0-cell-globular-map g ∘ 0-cell-globular-map f
-  .globular-type-1-cell-globular-map →
+  .1-cell-globular-map-globular-map →
     comp-globular-map
-      ( globular-type-1-cell-globular-map g)
-      ( globular-type-1-cell-globular-map f)
+      ( 1-cell-globular-map-globular-map g)
+      ( 1-cell-globular-map-globular-map f)
 ```

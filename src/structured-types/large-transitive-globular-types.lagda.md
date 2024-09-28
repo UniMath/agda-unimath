@@ -111,21 +111,75 @@ record
 open large-transitive-globular-structure public
 ```
 
+### The predicate of being a transitive large globular type
+
+```agda
+is-transitive-Large-Globular-Type :
+  {α : Level → Level} {β : Level → Level → Level} →
+  Large-Globular-Type α β → UUω
+is-transitive-Large-Globular-Type G =
+  is-transitive-large-globular-structure
+    ( large-globular-structure-0-cell-Large-Globular-Type G)
+```
+
 ### The type of large transitive globular types
 
 ```agda
 record
-  Large-Transitive-Globular-Type
-  (α : Level → Level) (β : Level → Level → Level) : UUω
+  is-transitive-Large-Globular-Type
+    {α : Level → Level} {β : Level → Level → Level}
+    (A : Large-Globular-Type α β) :
+    UUω
   where
-
   field
-    0-cell-Large-Transitive-Globular-Type : (l : Level) → UU (α l)
+    refl-0-cell-is-transitive-Large-Globular-Type :
+      is-transitive-Large-Relation
+        ( 0-cell-Large-Globular-Type A)
+        ( 1-cell-Large-Globular-Type A)
+    is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type :
+      {l1 l2 : Level}
+      {x : 0-cell-Large-Globular-Type A l1}
+      {y : 0-cell-Large-Globular-Type A l2} →
+      is-transitive-Globular-Type
+        ( 1-cell-globular-type-Large-Globular-Type A x y)
 
-    transitive-globular-structure-0-cell-Large-Transitive-Globular-Type :
-      large-transitive-globular-structure
-        ( β)
-        ( 0-cell-Large-Transitive-Globular-Type)
+  refl-1-cell-is-transitive-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2} →
+    is-transitive (2-cell-Large-Globular-Type A {x = x} {y = y})
+  refl-1-cell-is-transitive-Large-Globular-Type =
+    is-transitive-1-cell-is-transitive-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
+      ( is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type)
 
-open Large-Transitive-Globular-Type public
+  refl-2-cell-is-transitive-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    {f g : 1-cell-Large-Globular-Type A x y} →
+    is-transitive (3-cell-Large-Globular-Type A {f = f} {g = g})
+  refl-2-cell-is-transitive-Large-Globular-Type =
+    is-transitive-2-cell-is-transitive-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
+      ( is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type)
+
+open is-transitive-Large-Globular-Type public
 ```
+
+-- ```agda
+-- record
+--   Large-Transitive-Globular-Type
+--   (α : Level → Level) (β : Level → Level → Level) : UUω
+--   where
+
+--   field
+--     0-cell-Large-Transitive-Globular-Type : (l : Level) → UU (α l)
+
+--     transitive-globular-structure-0-cell-Large-Transitive-Globular-Type :
+--       large-transitive-globular-structure
+--         ( β)
+--         ( 0-cell-Large-Transitive-Globular-Type)
+
+-- open Large-Transitive-Globular-Type public
+-- ```

@@ -9,6 +9,7 @@ module structured-types.large-reflexive-globular-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.large-binary-relations
 open import foundation.universe-levels
 
@@ -25,6 +26,51 @@ A [large globular type](structured-types.large-globular-types.md) is
 if every $n$-cell `x` comes with a choice of $(n+1)$-cell from `x` to `x`.
 
 ## Definition
+
+### Reflexivity structure on large globular types
+
+```agda
+record
+  is-reflexive-Large-Globular-Type
+    {α : Level → Level} {β : Level → Level → Level}
+    (A : Large-Globular-Type α β) :
+    UUω
+  where
+  field
+    refl-0-cell-is-reflexive-Large-Globular-Type :
+      is-reflexive-Large-Relation
+        ( 0-cell-Large-Globular-Type A)
+        ( 1-cell-Large-Globular-Type A)
+    is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type :
+      {l1 l2 : Level}
+      {x : 0-cell-Large-Globular-Type A l1}
+      {y : 0-cell-Large-Globular-Type A l2} →
+      is-reflexive-Globular-Type
+        ( 1-cell-globular-type-Large-Globular-Type A x y)
+
+  refl-1-cell-is-reflexive-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2} →
+    is-reflexive (2-cell-Large-Globular-Type A {x = x} {y = y})
+  refl-1-cell-is-reflexive-Large-Globular-Type =
+    is-reflexive-1-cell-is-reflexive-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
+      ( is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type)
+
+  refl-2-cell-is-reflexive-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    {f g : 1-cell-Large-Globular-Type A x y} →
+    is-reflexive (3-cell-Large-Globular-Type A {f = f} {g = g})
+  refl-2-cell-is-reflexive-Large-Globular-Type =
+    is-reflexive-2-cell-is-reflexive-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
+      ( is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type)
+
+open is-reflexive-Large-Globular-Type public
+```
 
 ### Reflexivity structure on a large globular structure
 

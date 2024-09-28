@@ -156,42 +156,19 @@ construction makes essential use of the reflexivity elements of the base
 reflexive globular type.
 
 ```agda
-globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type :
-  {l1 l2 l3 l4 : Level} {G : Reflexive-Globular-Type l1 l2}
-  (H : Dependent-Reflexive-Globular-Type l3 l4 G)
-  (x : 0-cell-Reflexive-Globular-Type G) →
-  globular-structure l4 (0-cell-Dependent-Reflexive-Globular-Type H x)
-1-cell-globular-structure
-  ( globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type
-    { G = G}
-    ( H)
-    ( x))
-  ( u)
-  ( v) =
-    1-cell-Dependent-Reflexive-Globular-Type H u v
-      ( refl-0-cell-Reflexive-Globular-Type G)
-globular-structure-1-cell-globular-structure
-  ( globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type
-    { G = G}
-    ( H)
-    ( x))
-  ( u)
-  ( v) =
-  globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type
-    ( 1-cell-dependent-reflexive-globular-type-Dependent-Reflexive-Globular-Type
-      H u v)
-    ( refl-0-cell-Reflexive-Globular-Type G)
-
 family-globular-types-Dependent-Reflexive-Globular-Type :
   {l1 l2 l3 l4 : Level} {G : Reflexive-Globular-Type l1 l2}
   (H : Dependent-Reflexive-Globular-Type l3 l4 G) →
   0-cell-Reflexive-Globular-Type G → Globular-Type l3 l4
-pr1 (family-globular-types-Dependent-Reflexive-Globular-Type H x) =
+0-cell-Globular-Type
+  ( family-globular-types-Dependent-Reflexive-Globular-Type H x) =
   0-cell-Dependent-Reflexive-Globular-Type H x
-pr2 (family-globular-types-Dependent-Reflexive-Globular-Type H x) =
-  globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type
-    ( H)
-    ( x)
+1-cell-globular-type-Globular-Type
+  ( family-globular-types-Dependent-Reflexive-Globular-Type {G = G} H x) y z =
+  family-globular-types-Dependent-Reflexive-Globular-Type
+    ( 1-cell-dependent-reflexive-globular-type-Dependent-Reflexive-Globular-Type
+      H y z)
+    ( refl-0-cell-Reflexive-Globular-Type G)
 
 is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type :
   {l1 l2 l3 l4 : Level} {G : Reflexive-Globular-Type l1 l2}

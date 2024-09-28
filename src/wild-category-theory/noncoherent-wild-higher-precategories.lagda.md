@@ -117,10 +117,9 @@ module _
     pr2 (pr2 (pr2 𝒞))
 
   globular-type-Noncoherent-Wild-Higher-Precategory : Globular-Type l1 l2
-  pr1 globular-type-Noncoherent-Wild-Higher-Precategory =
-    obj-Noncoherent-Wild-Higher-Precategory
-  pr2 globular-type-Noncoherent-Wild-Higher-Precategory =
-    hom-globular-structure-Noncoherent-Wild-Higher-Precategory
+  globular-type-Noncoherent-Wild-Higher-Precategory =
+    make-Globular-Type
+      ( hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
 ```
 
 We record some common projections for noncoherent wild higher precategories.
@@ -153,13 +152,9 @@ We record some common projections for noncoherent wild higher precategories.
   hom-globular-type-Noncoherent-Wild-Higher-Precategory :
     (x y : obj-Noncoherent-Wild-Higher-Precategory) →
     Globular-Type l2 l2
-  pr1 (hom-globular-type-Noncoherent-Wild-Higher-Precategory x y) =
-    hom-Noncoherent-Wild-Higher-Precategory x y
-  pr2 (hom-globular-type-Noncoherent-Wild-Higher-Precategory x y) =
-    globular-structure-1-cell-globular-structure
-      ( hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
-      ( x)
-      ( y)
+  hom-globular-type-Noncoherent-Wild-Higher-Precategory =
+    globular-type-1-cell-globular-structure
+      hom-globular-structure-Noncoherent-Wild-Higher-Precategory
 
   hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory :
     (x y : obj-Noncoherent-Wild-Higher-Precategory) →
