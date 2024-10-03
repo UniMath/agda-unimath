@@ -76,7 +76,6 @@ module _
     ((x : A) → B x) → ((x : A) → B x) → UU (l1 ⊔ l2)
   simplicial-natural-transformation = _⇒▵_
 
-
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x} (α : f ⇒▵ g)
   where

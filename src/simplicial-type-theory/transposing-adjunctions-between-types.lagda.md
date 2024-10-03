@@ -10,25 +10,26 @@ module simplicial-type-theory.transposing-adjunctions-between-types where
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.identity-types
-open import foundation.universe-levels
 open import foundation.function-types
-open import foundation.univalence
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.universal-property-equivalences
+open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
-open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.fully-faithful-maps
-open import simplicial-type-theory.dependent-directed-edges
-open import simplicial-type-theory.directed-edges-dependent-pair-types
-open import simplicial-type-theory.natural-transformations
+open import foundation.univalence
+open import foundation.universal-property-equivalences
+open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
+
+open import simplicial-type-theory.dependent-directed-edges
+open import simplicial-type-theory.directed-edges
+open import simplicial-type-theory.directed-edges-dependent-pair-types
+open import simplicial-type-theory.fully-faithful-maps
+open import simplicial-type-theory.natural-transformations
 ```
 
 </details>
@@ -77,7 +78,8 @@ module _
   where
 
   is-transposing-right-adjoint : (A → B) → UU (l1 ⊔ l2)
-  is-transposing-right-adjoint R = Σ (B → A) (λ L → is-transposing-adjunction L R)
+  is-transposing-right-adjoint R =
+    Σ (B → A) (λ L → is-transposing-adjunction L R)
 ```
 
 ### Transposing adjunctions
@@ -252,7 +254,6 @@ module _
     inv-equiv extensionality-simplicial-natural-transformation ∘e
     equiv-Π-equiv-family (λ i → H i (f i) (g i)) ∘e
     extensionality-simplicial-natural-transformation
-
 
   is-transposing-left-adjoint-Π :
     {L : (x : I) → A x → B x} →

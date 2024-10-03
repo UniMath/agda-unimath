@@ -64,7 +64,6 @@ or in other words the oriented pushout
   |    ⇗    |
   ∨       ⌜ ∨
   1 -----> Σ▵X.
-
 ```
 
 Intuitively, the lax suspension of `X` can be understood as a type consisting of

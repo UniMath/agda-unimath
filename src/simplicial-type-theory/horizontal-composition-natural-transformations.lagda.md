@@ -29,9 +29,9 @@ open import orthogonal-factorization-systems.extensions-of-maps
 
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
-open import simplicial-type-theory.natural-transformations
 open import simplicial-type-theory.horizontal-composition-directed-edges-functions
 open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions
+open import simplicial-type-theory.natural-transformations
 open import simplicial-type-theory.simplicial-arrows
 ```
 

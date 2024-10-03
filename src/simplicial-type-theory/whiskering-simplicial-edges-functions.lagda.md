@@ -7,6 +7,8 @@ module simplicial-type-theory.whiskering-simplicial-edges-functions where
 <details><summary>Imports</summary>
 
 ```agda
+open import asimplicial-type-theory.horizontal-composition-directed-edges-functions
+
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -30,7 +32,6 @@ open import orthogonal-factorization-systems.extensions-of-maps
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.horizontal-composition-simplicial-arrows-functions
-open import asimplicial-type-theory.horizontal-composition-directed-edges-functions
 open import simplicial-type-theory.simplicial-arrows
 ```
 

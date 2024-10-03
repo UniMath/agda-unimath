@@ -17,7 +17,6 @@ open import foundation.dependent-products-pullbacks
 open import foundation.dependent-sums-pullbacks
 open import foundation.diagonal-maps-cartesian-products-of-types
 open import foundation.equivalences
-open import foundation-core.sections
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -39,6 +38,7 @@ open import foundation.whiskering-homotopies-composition
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation-core.sections
 open import foundation-core.universal-property-pullbacks
 ```
 

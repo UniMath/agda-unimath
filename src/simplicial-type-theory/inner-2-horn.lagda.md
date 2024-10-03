@@ -17,8 +17,6 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
-open import foundation.disjunction
-open import foundation.retractions
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -26,19 +24,20 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.retractions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.2-simplices
-open import simplicial-type-theory.standard-simplices
-open import simplicial-type-theory.simplicial-spines
+open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
+open import simplicial-type-theory.simplicial-spines
+open import simplicial-type-theory.standard-simplices
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.joins-of-types

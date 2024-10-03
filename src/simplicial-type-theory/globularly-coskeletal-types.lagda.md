@@ -38,9 +38,9 @@ open import simplicial-type-theory.dependent-directed-edges
 open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-edges-cartesian-product-types
 open import simplicial-type-theory.directed-edges-dependent-pair-types
+open import simplicial-type-theory.fully-faithful-maps
 open import simplicial-type-theory.natural-transformations
 open import simplicial-type-theory.simplicially-discrete-types
-open import simplicial-type-theory.fully-faithful-maps
 open import simplicial-type-theory.whiskering-directed-edges
 ```
 
@@ -562,7 +562,6 @@ is-globularly-coskeletal-right-factor-product k {A} {B} H =
     ∨                     ∨
     1 ----------> (A → A) × (B → B)
        (id , id)
-
 ```
 
 so the result follows by pullback stability.

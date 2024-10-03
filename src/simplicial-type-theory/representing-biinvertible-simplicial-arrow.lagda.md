@@ -42,8 +42,8 @@ open import simplicial-type-theory.directed-edges
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
-open import simplicial-type-theory.standard-simplices
 open import simplicial-type-theory.simplicial-cubes
+open import simplicial-type-theory.standard-simplices
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans

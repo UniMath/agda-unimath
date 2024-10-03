@@ -12,12 +12,11 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.cartesian-product-types
-open import foundation.unions-subtypes
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.empty-types
 open import foundation.embeddings
+open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -29,14 +28,15 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.unions-subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.simplicial-cubes
 open import simplicial-type-theory.directed-interval-type
 open import simplicial-type-theory.inequality-directed-interval-type
 open import simplicial-type-theory.simplicial-arrows
+open import simplicial-type-theory.simplicial-cubes
 open import simplicial-type-theory.standard-simplices
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -51,7 +51,8 @@ open import synthetic-homotopy-theory.pushouts
 ### The boundary of the standard simplices
 
 ```agda
-subtype-auxillary-face-standard-simplex : (n r : ℕ) → subtype lzero (simplicial-cube n)
+subtype-auxillary-face-standard-simplex :
+  (n r : ℕ) → subtype lzero (simplicial-cube n)
 subtype-auxillary-face-standard-simplex 0 _ _ =
   empty-Prop
 subtype-auxillary-face-standard-simplex 1 0 x =

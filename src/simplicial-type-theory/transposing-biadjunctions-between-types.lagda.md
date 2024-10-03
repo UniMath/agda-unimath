@@ -8,29 +8,30 @@ module simplicial-type-theory.transposing-biadjunctions-between-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
 open import foundation.commuting-triangles-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.identity-types
-open import foundation.universe-levels
 open import foundation.function-types
-open import foundation.univalence
-open import foundation.cartesian-product-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.universal-property-equivalences
+open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
-open import simplicial-type-theory.directed-edges
-open import simplicial-type-theory.transposing-adjunctions-between-types
-open import simplicial-type-theory.fully-faithful-maps
-open import simplicial-type-theory.dependent-directed-edges
-open import simplicial-type-theory.directed-edges-dependent-pair-types
-open import simplicial-type-theory.natural-transformations
+open import foundation.univalence
+open import foundation.universal-property-equivalences
+open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-identifications-concatenation
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
+
+open import simplicial-type-theory.dependent-directed-edges
+open import simplicial-type-theory.directed-edges
+open import simplicial-type-theory.directed-edges-dependent-pair-types
+open import simplicial-type-theory.fully-faithful-maps
+open import simplicial-type-theory.natural-transformations
+open import simplicial-type-theory.transposing-adjunctions-between-types
 ```
 
 </details>
