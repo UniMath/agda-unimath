@@ -1,7 +1,7 @@
-# Separated types
+# Types separated at maps
 
 ```agda
-module orthogonal-factorization-systems.separated-types where
+module orthogonal-factorization-systems.types-separated-at-maps where
 ```
 
 <details><summary>Imports</summary>
