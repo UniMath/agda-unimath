@@ -1,7 +1,7 @@
 # Horizontal composition of directed edges between functions
 
 ```agda
-module asimplicial-type-theory.horizontal-composition-directed-edges-functions where
+module simplicial-type-theory.horizontal-composition-directed-edges-functions where
 ```
 
 <details><summary>Imports</summary>
@@ -37,7 +37,7 @@ open import simplicial-type-theory.simplicial-arrows
 
 ## Idea
 
-Given a directed edge `α` between functions `f g : A → B` and a simplicial edge
+Given a directed edge `α` between functions `f g : A → B` and a directed edge
 `β` of functions `f' g' : B → C`, we may
 {{#concept "horizontally compose" Disambiguation="directed edges of functions" Agda=horizontal-comp-simplicial-hom}}
 them to obtain a directed edge of functions `f' ∘ f →▵ g' ∘ g`. The horizontal
