@@ -344,15 +344,9 @@ module _
 is-contr-is-local :
   {l : Level} (A : UU l) → is-local (λ (_ : empty) → star) A → is-contr A
 is-contr-is-local A is-local-A =
-  is-contr-is-equiv
+  is-contr-equiv
     ( empty → A)
-    ( λ a _ → a)
-    ( is-equiv-comp
-      ( λ a' _ → a' star)
-      ( λ a _ →
-        map-inv-is-equiv (is-equiv-map-left-unit-law-Π (λ _ → A)) a star)
-      ( is-equiv-map-inv-is-equiv (is-equiv-map-left-unit-law-Π (λ _ → A)))
-      ( is-local-A))
+    ( (precomp (λ _ → star) A , is-local-A) ∘e inv-left-unit-law-Π (λ _ → A))
     ( universal-property-empty' A)
 ```
 
