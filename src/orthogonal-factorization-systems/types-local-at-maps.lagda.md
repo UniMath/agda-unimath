@@ -1,7 +1,7 @@
 # Local types
 
 ```agda
-module orthogonal-factorization-systems.local-types where
+module orthogonal-factorization-systems.types-local-at-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -359,5 +359,5 @@ is-contr-is-local A is-local-A =
 ## See also
 
 - [Local maps](orthogonal-factorization-systems.maps-local-at-maps.md)
-- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
-- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)
+- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-at-maps.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-at-subuniverses.md)

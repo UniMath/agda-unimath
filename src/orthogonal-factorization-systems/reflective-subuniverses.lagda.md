@@ -19,11 +19,11 @@ open import foundation.retractions
 open import foundation.subuniverses
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-types
-open import orthogonal-factorization-systems.localizations-subuniverses
+open import orthogonal-factorization-systems.localizations-at-subuniverses
 open import orthogonal-factorization-systems.modal-induction
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.modal-subuniverse-induction
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
@@ -34,9 +34,10 @@ A **reflective subuniverse** is a [subuniverse](foundation.subuniverses.md) `P`
 together with a reflecting operator `○ : UU → UU` that take values in `P`, and a
 [modal unit](orthogonal-factorization-systems.modal-operators.md) `A → ○ A` for
 all [small types](foundation-core.small-types.md) `A`, with the property that
-the types in `P` are [local](orthogonal-factorization-systems.local-types.md) at
-the modal unit for every `A`. Hence the modal types with respect to `○` are
-precisely the types in the reflective subuniverse.
+the types in `P` are
+[local](orthogonal-factorization-systems.types-local-at-maps.md) at the modal
+unit for every `A`. Hence the modal types with respect to `○` are precisely the
+types in the reflective subuniverse.
 
 ## Definitions
 
@@ -236,7 +237,7 @@ module _
 ## See also
 
 - [Σ-closed reflective subuniverses](orthogonal-factorization-systems.sigma-closed-reflective-subuniverses.md)
-- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-at-subuniverses.md)
 
 ## References
 

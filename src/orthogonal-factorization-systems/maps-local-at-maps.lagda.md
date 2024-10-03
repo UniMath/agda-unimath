@@ -30,9 +30,9 @@ open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-families-of-types
-open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.orthogonal-maps
 open import orthogonal-factorization-systems.pullback-hom
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
@@ -44,7 +44,7 @@ A map `g : X → Y` is said to be
 `f : A → B`, or
 {{#concept "`f`-local" Disambiguation="maps of types" Agda=is-local-map}}, if
 all its [fibers](foundation-core.fibers-of-maps.md) are
-[`f`-local types](orthogonal-factorization-systems.local-types.md).
+[`f`-local types](orthogonal-factorization-systems.types-local-at-maps.md).
 
 ## Definition
 
@@ -109,7 +109,30 @@ module _
         ( G))
 ```
 
+### `f`-local maps are closed under base change
+
+Maps in `𝒫` are closed under base change.
+
+```agda
+module _
+  {α : Level → Level} (𝒫 : global-subuniverse α)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : C → D)
+  where
+
+  is-in-global-subuniverse-map-base-change :
+    is-in-global-subuniverse-map 𝒫 f →
+    cartesian-hom-arrow g f →
+    is-in-global-subuniverse-map 𝒫 g
+  is-in-global-subuniverse-map-base-change F α d =
+    is-closed-under-equiv-global-subuniverse 𝒫 (l1 ⊔ l2) (l3 ⊔ l4)
+      ( fiber f (map-codomain-cartesian-hom-arrow g f α d))
+      ( fiber g d)
+      ( inv-equiv (equiv-fibers-cartesian-hom-arrow g f α d))
+      ( F (map-codomain-cartesian-hom-arrow g f α d))
+```
+
 ## See also
 
-- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
-- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)
+- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-at-maps.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-at-subuniverses.md)

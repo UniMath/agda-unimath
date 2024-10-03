@@ -14,8 +14,8 @@ open import foundation-core.function-types
 open import foundation-core.propositions
 open import foundation-core.transport-along-identifications
 
-open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.types-local-at-maps
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 

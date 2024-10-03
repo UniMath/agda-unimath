@@ -13,8 +13,8 @@ open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.orthogonal-maps
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
@@ -55,5 +55,5 @@ This remains to be formalized.
 ## See also
 
 - [Local maps](orthogonal-factorization-systems.maps-local-at-maps.md)
-- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
-- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)
+- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-at-maps.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-at-subuniverses.md)

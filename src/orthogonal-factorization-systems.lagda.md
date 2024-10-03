@@ -34,9 +34,6 @@ open import orthogonal-factorization-systems.lifting-structures-on-squares publi
 open import orthogonal-factorization-systems.lifts-families-of-elements public
 open import orthogonal-factorization-systems.lifts-of-maps public
 open import orthogonal-factorization-systems.local-families-of-types public
-open import orthogonal-factorization-systems.local-types public
-open import orthogonal-factorization-systems.localizations-maps public
-open import orthogonal-factorization-systems.localizations-subuniverses public
 open import orthogonal-factorization-systems.locally-small-modal-operators public
 open import orthogonal-factorization-systems.maps-local-at-maps public
 open import orthogonal-factorization-systems.mere-lifting-properties public

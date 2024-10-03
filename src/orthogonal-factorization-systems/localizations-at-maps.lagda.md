@@ -1,7 +1,7 @@
 # Localizations at maps
 
 ```agda
-module orthogonal-factorization-systems.localizations-maps where
+module orthogonal-factorization-systems.localizations-at-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -11,8 +11,8 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-types
-open import orthogonal-factorization-systems.localizations-subuniverses
+open import orthogonal-factorization-systems.types-local-at-maps
+open import orthogonal-factorization-systems.localizations-at-subuniverses
 ```
 
 </details>
@@ -21,9 +21,9 @@ open import orthogonal-factorization-systems.localizations-subuniverses
 
 Let `f` be a map of type `A → B` and let `X` be a type. The **localization** of
 `X` at `f`, or **`f`-localization**, is an
-`f`[-local](orthogonal-factorization-systems.local-types.md) type `Y` together
-with a map `η : X → Y` with the property that every type that is `f`-local is
-also `η`-local.
+`f`[-local](orthogonal-factorization-systems.types-local-at-maps.md) type `Y`
+together with a map `η : X → Y` with the property that every type that is
+`f`-local is also `η`-local.
 
 ## Definition
 
