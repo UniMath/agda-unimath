@@ -131,10 +131,13 @@ postulate
 
 ```agda
 source-arrow-representing-biinvertible-simplicial-arrow :
-  arrow-representing-biinvertible-simplicial-arrow 0₂ ＝ {! id-simplicial-arrow\ntarget-representing-biinvertible-simplicial-arrow 0₂ !}
+  arrow-representing-biinvertible-simplicial-arrow 0₂ ＝
+  {! id-simplicial-arrow\ntarget-representing-biinvertible-simplicial-arrow 0₂ !}
   -- source-representing-biinvertible-simplicial-arrow
 source-arrow-representing-biinvertible-simplicial-arrow =
-  htpy-eq (inv compute-0-left-2-cell-representing-biinvertible-simplicial-arrow) 0₂ ∙
+  htpy-eq
+    ( inv compute-0-left-2-cell-representing-biinvertible-simplicial-arrow)
+    0₂ ∙
   {!   !} ∙
   htpy-eq compute-1-left-2-cell-representing-biinvertible-simplicial-arrow 0₂
 

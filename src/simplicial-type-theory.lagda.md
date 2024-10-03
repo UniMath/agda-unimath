@@ -15,6 +15,7 @@ open import simplicial-type-theory.action-on-directed-edges-functions public
 open import simplicial-type-theory.boundary-standard-simplices public
 open import simplicial-type-theory.comma-types public
 open import simplicial-type-theory.compositions-of-directed-edges public
+open import simplicial-type-theory.conormed-maps-between-types public
 open import simplicial-type-theory.dependent-directed-edges public
 open import simplicial-type-theory.directed-circle public
 open import simplicial-type-theory.directed-edges public
@@ -32,6 +33,7 @@ open import simplicial-type-theory.inequality-directed-interval-type public
 open import simplicial-type-theory.inner-2-horn public
 open import simplicial-type-theory.lax-suspension public
 open import simplicial-type-theory.natural-transformations public
+open import simplicial-type-theory.normed-maps-between-types public
 open import simplicial-type-theory.representing-biinvertible-simplicial-arrow public
 open import simplicial-type-theory.rewriting-directed-circle public
 open import simplicial-type-theory.simplicial-arrows public

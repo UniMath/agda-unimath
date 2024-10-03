@@ -63,7 +63,8 @@ subtype-auxillary-face-standard-simplex 2 zero-ℕ (x , y) =
   Id-Prop 𝟚-Set x y
 subtype-auxillary-face-standard-simplex 2 (succ-ℕ r) (x , y) =
   subtype-auxillary-face-standard-simplex 1 r y
-subtype-auxillary-face-standard-simplex (succ-ℕ (succ-ℕ (succ-ℕ n))) 0 (x , y , u) =
+subtype-auxillary-face-standard-simplex
+  ( succ-ℕ (succ-ℕ (succ-ℕ n))) 0 (x , y , u) =
   ( Id-Prop 𝟚-Set x y) ∧
   ( subtype-standard-simplex (succ-ℕ (succ-ℕ n)) (y , u))
 subtype-auxillary-face-standard-simplex

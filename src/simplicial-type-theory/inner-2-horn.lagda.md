@@ -143,7 +143,7 @@ inr-pushout-inner-two-horn : 𝟚 → pushout-inner-two-horn
 inr-pushout-inner-two-horn = inr-pushout (point 1₂) (point 0₂)
 ```
 
-### Properties
+## Properties
 
 ### The inner 2-horn is a set
 
