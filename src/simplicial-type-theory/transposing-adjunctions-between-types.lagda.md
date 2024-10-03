@@ -44,7 +44,7 @@ transposing adjunction given a binary family of equivalences
 
 ## Definitions
 
-### transposing adjoint pairs
+### Transposing adjoint pairs
 
 ```agda
 module _
@@ -58,7 +58,7 @@ module _
   _⊣▵_ = is-transposing-adjunction
 ```
 
-### transposing left adjoints
+### Transposing left adjoints
 
 ```agda
 module _
@@ -69,7 +69,7 @@ module _
   is-transposing-left-adjoint L = Σ (B → A) (is-transposing-adjunction L)
 ```
 
-### transposing right adjoints
+### Transposing right adjoints
 
 ```agda
 module _
@@ -80,7 +80,7 @@ module _
   is-transposing-right-adjoint R = Σ (B → A) (λ L → is-transposing-adjunction L R)
 ```
 
-### transposing adjunctions
+### Transposing adjunctions
 
 ```agda
 transposing-adjunction : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
@@ -124,13 +124,13 @@ module _
 
   unit-is-transposing-adjunction :
     {L : A → B} {R : B → A} →
-    is-transposing-adjunction L R → (x : A) → hom▵ x (R (L x))
+    is-transposing-adjunction L R → (id ⇒▵ R ∘ L)
   unit-is-transposing-adjunction {L} {R} H x =
     map-equiv (H x (L x)) (id-simplicial-hom (L x))
 
   counit-is-transposing-adjunction :
     {L : A → B} {R : B → A} →
-    is-transposing-adjunction L R → (y : B) → hom▵ (L (R y)) y
+    is-transposing-adjunction L R → (L ∘ R ⇒▵ id)
   counit-is-transposing-adjunction {L} {R} H y =
     map-inv-equiv (H (R y) y) (id-simplicial-hom (R y))
 ```
@@ -147,6 +147,12 @@ module _
   is-transposing-adjunction-id : is-transposing-adjunction (id {A = A}) id
   is-transposing-adjunction-id x y = id-equiv
 
+  is-transposing-adjoint-id : is-transposing-left-adjoint (id {A = A})
+  is-transposing-adjoint-id = id , is-transposing-adjunction-id
+
+  is-transposing-adjoint-id' : is-transposing-right-adjoint (id {A = A})
+  is-transposing-adjoint-id' = id , is-transposing-adjunction-id
+
   id-transposing-adjunction : transposing-adjunction A A
   id-transposing-adjunction = (id , id , is-transposing-adjunction-id)
 ```
@@ -155,24 +161,29 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (u : is-equiv f)
   where
 
   is-transposing-adjunction-is-equiv' :
-    {f : A → B} (u : is-equiv f) →
     is-transposing-adjunction (map-inv-is-equiv u) f
-  is-transposing-adjunction-is-equiv' {f} u y x =
+  is-transposing-adjunction-is-equiv' y x =
     equiv-eq (ap (λ p → hom▵ p (f x)) (is-section-map-inv-is-equiv u y)) ∘e
     equiv-action-simplicial-hom (f , u) (map-inv-is-equiv u y) x
 
   is-transposing-adjunction-is-equiv :
-    {f : A → B} (u : is-equiv f) →
     is-transposing-adjunction f (map-inv-is-equiv u)
-  is-transposing-adjunction-is-equiv {f} u x y =
+  is-transposing-adjunction-is-equiv x y =
     inv-equiv
       ( equiv-eq (ap (hom▵ (f x)) (is-section-map-inv-is-equiv u y)) ∘e
         equiv-action-simplicial-hom (f , u) x (map-inv-is-equiv u y))
 
+  is-transposing-left-adjoint-is-equiv : is-transposing-left-adjoint f
+  is-transposing-left-adjoint-is-equiv =
+    (map-inv-is-equiv u , is-transposing-adjunction-is-equiv)
+
+  is-transposing-right-adjoint-is-equiv : is-transposing-right-adjoint f
+  is-transposing-right-adjoint-is-equiv =
+    (map-inv-is-equiv u , is-transposing-adjunction-is-equiv')
 ```
 
 ### Composition of transposing adjunctions
@@ -202,6 +213,22 @@ module _
   is-transposing-adjunction-comp {L} {L'} {R} {R'} H H' x y =
     H' x (R' y) ∘e H (L x) y
 
+  is-transposing-left-adjoint-comp :
+    {L : A → B} {L' : B → C} →
+    is-transposing-left-adjoint L' →
+    is-transposing-left-adjoint L →
+    is-transposing-left-adjoint (L' ∘ L)
+  is-transposing-left-adjoint-comp (R' , H') (R , H) =
+    ( R ∘ R' , is-transposing-adjunction-comp H' H)
+
+  is-transposing-right-adjoint-comp :
+    {R : B → A} {R' : C → B} →
+    is-transposing-right-adjoint R →
+    is-transposing-right-adjoint R' →
+    is-transposing-right-adjoint (R ∘ R')
+  is-transposing-right-adjoint-comp (L' , H') (L , H) =
+    ( L ∘ L' , is-transposing-adjunction-comp H H')
+
   comp-transposing-adjunction :
     transposing-adjunction B C →
     transposing-adjunction A B →
@@ -214,21 +241,36 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   where
 
   is-transposing-adjunction-Π :
-    {L : (x : A) → B x → C x} {R : (x : A) → C x → B x} →
-    ((x : A) → is-transposing-adjunction (L x) (R x)) →
+    {L : (x : I) → A x → B x} {R : (x : I) → B x → A x} →
+    ((x : I) → is-transposing-adjunction (L x) (R x)) →
     is-transposing-adjunction (map-Π L) (map-Π R)
   is-transposing-adjunction-Π H f g =
     inv-equiv extensionality-simplicial-natural-transformation ∘e
     equiv-Π-equiv-family (λ i → H i (f i) (g i)) ∘e
     extensionality-simplicial-natural-transformation
 
+
+  is-transposing-left-adjoint-Π :
+    {L : (x : I) → A x → B x} →
+    ((x : I) → is-transposing-left-adjoint (L x)) →
+    is-transposing-left-adjoint (map-Π L)
+  is-transposing-left-adjoint-Π H =
+    ( map-Π (pr1 ∘ H) , is-transposing-adjunction-Π (pr2 ∘ H))
+
+  is-transposing-right-adjoint-Π :
+    {R : (x : I) → B x → A x} →
+    ((x : I) → is-transposing-right-adjoint (R x)) →
+    is-transposing-right-adjoint (map-Π R)
+  is-transposing-right-adjoint-Π H =
+    ( map-Π (pr1 ∘ H) , is-transposing-adjunction-Π (pr2 ∘ H))
+
   transposing-adjunction-Π :
-    ((x : A) → transposing-adjunction (B x) (C x)) →
-    transposing-adjunction ((x : A) → B x) ((x : A) → C x)
+    ((x : I) → transposing-adjunction (A x) (B x)) →
+    transposing-adjunction ((x : I) → A x) ((x : I) → B x)
   transposing-adjunction-Π H =
     ( map-Π (map-left-adjoint-transposing-adjunction ∘ H) ,
       map-Π (map-right-adjoint-transposing-adjunction ∘ H) ,
