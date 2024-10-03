@@ -54,6 +54,6 @@ This remains to be formalized.
 
 ## See also
 
-- [Local maps](orthogonal-factorization-systems.local-maps.md)
+- [Local maps](orthogonal-factorization-systems.maps-local-at-maps.md)
 - [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
 - [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)

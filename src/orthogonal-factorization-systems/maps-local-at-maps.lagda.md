@@ -1,7 +1,7 @@
-# Local maps
+# Maps local at maps
 
 ```agda
-module orthogonal-factorization-systems.local-maps where
+module orthogonal-factorization-systems.maps-local-at-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -46,9 +46,6 @@ A map `g : X → Y` is said to be
 all its [fibers](foundation-core.fibers-of-maps.md) are
 [`f`-local types](orthogonal-factorization-systems.local-types.md).
 
-Equivalently, the map `g` is `f`-local if and only if `f` is
-[orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to `g`.
-
 ## Definition
 
 ```agda
@@ -86,7 +83,7 @@ module _
     is-local-equiv f (equiv-fiber-terminal-map u) H
 ```
 
-### A map is `f`-local if and only if it is `f`-orthogonal
+### A map is `f`-local if it is `f`-orthogonal
 
 ```agda
 module _
@@ -111,8 +108,6 @@ module _
         ( fiber-cartesian-hom-arrow g y)
         ( G))
 ```
-
-The converse remains to be formalized.
 
 ## See also
 

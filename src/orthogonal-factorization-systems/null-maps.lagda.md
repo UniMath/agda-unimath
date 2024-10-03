@@ -30,8 +30,8 @@ open import foundation.unit-type
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-maps
 open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.maps-local-at-maps
 open import orthogonal-factorization-systems.null-families-of-types
 open import orthogonal-factorization-systems.null-types
 open import orthogonal-factorization-systems.orthogonal-maps
