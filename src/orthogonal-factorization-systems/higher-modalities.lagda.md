@@ -47,8 +47,8 @@ defining map (propositionally).
 Lastly, higher modalities must also be **identity closed** in the sense that for
 every type `X` the identity types `(x' ＝ y')` are modal for all terms
 `x' y' : ○ X`. In other words, `○ X` is
-[`○`-separated](foundation.separated-types.md). Because of this, higher
-modalities in their most general form only make sense for
+[`○`-separated](foundation.types-separated-at-subuniverses.md). Because of this,
+higher modalities in their most general form only make sense for
 [locally small modal operators](orthogonal-factorization-systems.locally-small-modal-operators.md).
 
 ## Definition

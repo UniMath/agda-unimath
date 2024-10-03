@@ -26,12 +26,12 @@ open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.maps-in-subuniverses
 open import foundation.propositional-truncations
-open import foundation.separated-types
 open import foundation.subuniverses
 open import foundation.surjective-maps
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.types-separated-at-subuniverses
 open import foundation.universe-levels
 ```
 
@@ -51,7 +51,7 @@ asserts that for any [subuniverse](foundation.subuniverses.md) `P`, and any
    i.e., a family of maps with [fibers](foundation-core.fibers-of-maps.md) in
    `P`.
 2. The [total space](foundation.dependent-pair-types.md) `Σ A B` is
-   [`P`-separated](foundation.separated-types.md), i.e., its
+   [`P`-separated](foundation.types-separated-at-subuniverses.md), i.e., its
    [identity types](foundation-core.identity-types.md) are in `P`.
 
 In other words, the extended fundamental theorem of
