@@ -11,8 +11,8 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.types-local-at-maps
 open import orthogonal-factorization-systems.localizations-at-subuniverses
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
