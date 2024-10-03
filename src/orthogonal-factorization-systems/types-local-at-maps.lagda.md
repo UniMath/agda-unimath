@@ -1,4 +1,4 @@
-# Local types
+# Types local at maps
 
 ```agda
 module orthogonal-factorization-systems.types-local-at-maps where
