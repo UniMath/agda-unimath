@@ -1,7 +1,7 @@
-# Local families of types
+# Families of types local at a map
 
 ```agda
-module orthogonal-factorization-systems.local-families-of-types where
+module orthogonal-factorization-systems.families-of-types-local-at-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -22,8 +22,8 @@ open import orthogonal-factorization-systems.types-local-at-maps
 ## Idea
 
 A family of types `B : A → UU l` is said to be
-{{#concept "local" Disambiguation="family of types" Agda=is-local-family}} at
-`f : X → Y`, or **`f`-local**, if every
+{{#concept "local" Disambiguation="family of types at a map" Agda=is-local-family}}
+at a map `f : X → Y`, or **`f`-local**, if every
 [fiber](foundation-core.fibers-of-maps.md) is.
 
 ## Definition

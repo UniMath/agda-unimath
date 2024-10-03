@@ -29,7 +29,7 @@ open import foundation.unit-type
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-families-of-types
+open import orthogonal-factorization-systems.families-of-types-local-at-maps
 open import orthogonal-factorization-systems.orthogonal-maps
 open import orthogonal-factorization-systems.pullback-hom
 open import orthogonal-factorization-systems.types-local-at-maps

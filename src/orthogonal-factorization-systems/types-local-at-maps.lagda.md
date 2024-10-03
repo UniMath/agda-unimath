@@ -56,7 +56,7 @@ We reserve the name `is-local` for when `A` does not vary over `Y`, and specify
 with `is-local-dependent-type` when it does.
 
 Note that a local dependent type is not the same as a
-[local family](orthogonal-factorization-systems.local-families-of-types.md).
+[local family](orthogonal-factorization-systems.families-of-types-local-at-maps.md).
 While a local family is a type family `P` on some other indexing type `A`, such
 that each fiber is local as a nondependent type over `Y`, a local dependent type
 is a local type that additionally may vary over `Y`. Concretely, a local
