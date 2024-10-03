@@ -34,6 +34,8 @@ open import orthogonal-factorization-systems.lifting-structures-on-squares publi
 open import orthogonal-factorization-systems.lifts-families-of-elements public
 open import orthogonal-factorization-systems.lifts-of-maps public
 open import orthogonal-factorization-systems.local-families-of-types public
+open import orthogonal-factorization-systems.localizations-at-maps public
+open import orthogonal-factorization-systems.localizations-at-subuniverses public
 open import orthogonal-factorization-systems.locally-small-modal-operators public
 open import orthogonal-factorization-systems.maps-local-at-maps public
 open import orthogonal-factorization-systems.mere-lifting-properties public
@@ -52,12 +54,13 @@ open import orthogonal-factorization-systems.raise-modalities public
 open import orthogonal-factorization-systems.reflective-modalities public
 open import orthogonal-factorization-systems.reflective-subuniverses public
 open import orthogonal-factorization-systems.regular-cd-structures public
-open import orthogonal-factorization-systems.types-separated-at-maps public
 open import orthogonal-factorization-systems.sigma-closed-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses public
 open import orthogonal-factorization-systems.stable-orthogonal-factorization-systems public
 open import orthogonal-factorization-systems.types-colocal-at-maps public
+open import orthogonal-factorization-systems.types-local-at-maps public
+open import orthogonal-factorization-systems.types-separated-at-maps public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.wide-function-classes public
 open import orthogonal-factorization-systems.wide-global-function-classes public
