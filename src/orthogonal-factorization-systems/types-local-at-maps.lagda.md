@@ -165,6 +165,26 @@ module _
   is-local-inv-equiv e = is-local-dependent-type-inv-fam-equiv f (λ _ → e)
 ```
 
+### Local types are closed under retracts
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4}
+  {f : X → Y}
+  where
+
+  is-local-retract : A retract-of B → is-local f B → is-local f A
+  is-local-retract R =
+    is-equiv-retract-map-is-equiv'
+      ( precomp f A)
+      ( precomp f B)
+      ( retract-postcomp Y R)
+      ( retract-postcomp X R)
+      ( refl-htpy)
+      ( refl-htpy)
+```
+
 ### Locality is preserved by homotopies
 
 ```agda

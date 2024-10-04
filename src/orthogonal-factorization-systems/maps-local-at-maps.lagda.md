@@ -19,12 +19,14 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
+open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.pullbacks
+open import foundation.retracts-of-maps
 open import foundation.unit-type
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
@@ -111,25 +113,38 @@ module _
 
 ### `f`-local maps are closed under base change
 
-Maps in `𝒫` are closed under base change.
+Maps local at `f` are closed under base change.
 
 ```agda
 module _
-  {α : Level → Level} (𝒫 : global-subuniverse α)
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : C → D)
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} {E : UU l5} {F : UU l6}
+  {f : A → B} {g : C → D} {g' : E → F}
   where
 
-  is-in-global-subuniverse-map-base-change :
-    is-in-global-subuniverse-map 𝒫 f →
-    cartesian-hom-arrow g f →
-    is-in-global-subuniverse-map 𝒫 g
-  is-in-global-subuniverse-map-base-change F α d =
-    is-closed-under-equiv-global-subuniverse 𝒫 (l1 ⊔ l2) (l3 ⊔ l4)
-      ( fiber f (map-codomain-cartesian-hom-arrow g f α d))
-      ( fiber g d)
-      ( inv-equiv (equiv-fibers-cartesian-hom-arrow g f α d))
-      ( F (map-codomain-cartesian-hom-arrow g f α d))
+  is-local-map-base-change :
+    is-local-map f g → cartesian-hom-arrow g' g → is-local-map f g'
+  is-local-map-base-change G α d =
+    is-local-equiv f
+      ( equiv-fibers-cartesian-hom-arrow g' g α d)
+      ( G (map-codomain-cartesian-hom-arrow g' g α d))
+```
+
+### `f`-local maps are closed under retracts
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} {E : UU l5} {F : UU l6}
+  {f : A → B} {g : C → D} {g' : E → F}
+  where
+
+  is-local-retract-map :
+    is-local-map f g → g' retract-of-map g → is-local-map f g'
+  is-local-retract-map G R d =
+    is-local-retract
+      ( retract-fiber-retract-map g' g R d)
+      ( G (map-codomain-inclusion-retract-map g' g R d))
 ```
 
 ## See also
