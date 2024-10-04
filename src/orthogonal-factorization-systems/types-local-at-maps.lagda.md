@@ -295,7 +295,7 @@ module _
     is-equiv-is-local-domains' (pr1 is-local-X)
 ```
 
-### Propositions are `f`-local if `_∘ f` has a converse
+### Propositions are `f`-local if `- ∘ f` has a converse
 
 ```agda
 module _
