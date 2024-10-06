@@ -27,10 +27,11 @@ another. Hover over the information icon for detailed usage instructions.
   </iframe>
 </div>
 
-The interactive explorer was developed by Job Petrovčič, and it's built and
-deployed outside of the agda-unimath repository, using a fork of Agda. For that
-reason the definitions in the graph may lag behind the definitions on the
-website by a few hours.
+The interactive explorer was developed by Job Petrovčič. Vojtěch Štěpančík,
+Matej Petković, and Andrej Bauer contributed invaluable suggestions and offered
+helpful support. It's built and deployed outside of the agda-unimath repository,
+using a fork of Agda. For that reason the definitions in the graph may lag
+behind the definitions on the website by a few hours.
 
 The explorer has a few known limitations. Most noticeably it doesn't recognize
 the `open import ... renaming (X to Y) public` pattern of exporting definitions,
