@@ -10,7 +10,7 @@ equal in [at most one](foundation.subterminal-types.md) way.
 
 However, both historically and in contemporary mathematics, what is commonly
 meant by set theory is also the study of a collection of related foundational
-theories whose basic notions include a _universe_ of _sets_ and a
+theories whose building blocks include a _universe_ of _sets_ and a
 propositionally valued _elementhood relation_ on the universe of sets.
 
 While this elementhood relation is not built into type theory as a fundamental
