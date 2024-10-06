@@ -34,7 +34,7 @@ A type is said to be {{#concept "sharp codiscrete" Agda=is-sharp-codiscrete}} if
 it is [sharp](modal-type-theory.sharp-modality.md) modal, i.e. if the sharp unit
 is an [equivalence](foundation-core.equivalences.md) at that type.
 
-We postulate that codiscrete types are closed under
+We postulate that sharp codiscrete types are closed under
 
 - the formation of identity types
 - the formation of dependent function types

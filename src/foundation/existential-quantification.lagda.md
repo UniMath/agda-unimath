@@ -39,9 +39,10 @@ the existential quantification,
   ∃ (x : A), (P x) := ║ Σ (x : A), (P x) ║₋₁
 ```
 
-because the Curry-Howard interpretation of the existential quantification as
-`Σ A P` does not guarantee that existential quantifications are interpreted as
-propositions.
+because the
+[Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
+of the existential quantification as `Σ A P` does not guarantee that existential
+quantifications are interpreted as propositions.
 
 The
 {{#concept "universal property" Disambiguation="of existential quantification" Agda=universal-property-exists}}

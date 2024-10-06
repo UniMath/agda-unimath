@@ -4,7 +4,7 @@
 {-# OPTIONS --guardedness #-}
 ```
 
-## Files in the structured types folder
+## Modules in the structured types namespace
 
 ```agda
 module structured-types where
