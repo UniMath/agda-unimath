@@ -37,7 +37,7 @@ open import trees.universal-multiset
 
 ## Idea
 
-{{#concept "Russell's paradox" WD="Russel's paradox" WDID=Q33401 Agda=paradox-Russel}}
+{{#concept "Russell's paradox" WD="Russell's paradox" WDID=Q33401 Agda=paradox-Russell}}
 arises when a [set](foundation-core.sets.md) of all sets is assumed to exist. In
 Russell's paradox it is of no importance that the elementhood relation takes
 values in [propositions](foundation-core.propositions.md). In other words,
@@ -170,7 +170,7 @@ no-surjection-onto-universe f H =
 
 ## External links
 
-- [Russel's paradox](https://ncatlab.org/nlab/show/Russell%27s+paradox) at
+- [Russell's paradox](https://ncatlab.org/nlab/show/Russell%27s+paradox) at
   $n$Lab
-- [Russel's paradox](https://en.wikipedia.org/wiki/Russell%27s_paradox) at
+- [Russell's paradox](https://en.wikipedia.org/wiki/Russell%27s_paradox) at
   Wikipedia

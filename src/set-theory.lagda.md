@@ -33,7 +33,7 @@ hierarchies in mathematics. This includes ideas such as
 [cardinality](set-theory.cardinalities.md) and
 [infinity](set-theory.infinite-sets.md), the
 [cumulative hierarchy](set-theory.cumulative-hierarchy.md) as a model for set
-theory, and [Russel's paradox](set-theory.russels-paradox.md).
+theory, and [Russell's paradox](set-theory.russells-paradox.md).
 
 ## Modules in the set theory namespace
 
