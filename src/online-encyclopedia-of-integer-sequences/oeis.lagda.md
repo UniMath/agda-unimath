@@ -17,6 +17,7 @@ open import elementary-number-theory.fermat-numbers
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.kolakoski-sequence
+open import elementary-number-theory.multiset-coefficients
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.pisano-periods
 
@@ -43,11 +44,40 @@ A000002 : ℕ → ℕ
 A000002 = kolakoski
 ```
 
+### [A000004](https://oeis.org/A000004) The zero sequence
+
+```agda
+A000004 : ℕ → ℕ
+A000004 _ = zero-ℕ
+```
+
+### [A000007](https://oeis.org/A000007) The characteristic function for 0
+
+```agda
+A000007 : ℕ → ℕ
+A000007 zero-ℕ = 1
+A000007 (succ-ℕ _) = 0
+```
+
 ### [A000010](https://oeis.org/A000010) Euler's totient function
 
 ```agda
 A000010 : ℕ → ℕ
 A000010 = eulers-totient-function-relatively-prime
+```
+
+### [A000012](https://oeis.org/A000012) All 1's sequence
+
+```agda
+A000012 : ℕ → ℕ
+A000012 _ = 1
+```
+
+### [A000027](https://oeis.org/A000027) The positive integers
+
+```agda
+A000027 : ℕ → ℕ
+A000027 = succ-ℕ
 ```
 
 ### [A000040](https://oeis.org/A000040) The prime numbers
@@ -132,4 +162,11 @@ A006369 = map-collatz-bijection
 ```agda
 A046859 : ℕ → ℕ
 A046859 n = ackermann n n
+```
+
+### [A088218](https://oeis.org/A088218) The total number of leaves in all rooted ordered trees with n edges
+
+```agda
+A088218 : ℕ → ℕ
+A088218 n = multiset-coefficient n n
 ```
