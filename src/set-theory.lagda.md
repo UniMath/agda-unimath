@@ -23,8 +23,8 @@ construct, there is a clear substitute for it — namely, the smallness predicat
 We can say precisely that a type `A` _is an element_ of `UU l` if `A` is
 `UU l`-small in this sense. Indeed, that `is-small l` is a predicate is
 equivalent to the [univalence axiom](foundation-core.univalence.md). This
-highlights a second connection between set theory and univalent type theory
-which is incompatible with the assumption that "set theory must be a study of
+highlights a second connection between set theory and univalent type theory that
+is incompatible with the assumption that "set theory must be a study of
 set-level mathematics".
 
 In this module, we assemble ideas historically related to the study of set
