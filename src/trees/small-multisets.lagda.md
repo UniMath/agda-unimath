@@ -33,8 +33,8 @@ open import trees.w-types
 
 A [multiset](trees.multisets.md) `X := tree-𝕎 A α` is said to be
 {{#concept "small" Disambiguation="multiset" Agda=is-small-𝕍}} with respect to a
-[universe](foundation-core.universe-levels.md) `UU l` if its symbol `A` is a
-[small type](fondation-core.small-types.md) with respect to `UU l`, and if
+[universe](foundation.universe-levels.md) `UU l` if its symbol `A` is a
+[small type](foundation-core.small-types.md) with respect to `UU l`, and if
 recursively each `α x` is a small multiset with respect to `UU l`.
 
 ## Definition

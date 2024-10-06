@@ -43,7 +43,7 @@ Russell's paradox it is of no importance that the elementhood relation takes
 values in [propositions](foundation-core.propositions.md). In other words,
 Russell's paradox arises similarly if there is a [multiset](trees.multisets.md)
 of all multisets. We will construct Russell's paradox from the assumption that a
-[universe](foundation.universe-leves.md) `𝒰` is
+[universe](foundation.universe-levels.md) `𝒰` is
 [equivalent](foundation-core.equivalences.md) to a type `A : 𝒰`. We conclude
 that there can be no universe that is contained in itself. Furthermore, using
 [replacement](foundation.replacement.md) we show that for any type `A : 𝒰`,

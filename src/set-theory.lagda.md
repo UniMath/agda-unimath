@@ -6,7 +6,7 @@ In univalent type theory, what we refer to formally as a _set_ is only in one
 sense what is clasically understood to be a "set". Namely, we say a set is a
 type whose [equality relation](foundation-core.identity-types.md) is a
 [proposition](foundation-core.propositions.md). I.e., any two elements can be
-equal in [at most one](subterminal-types.md) way.
+equal in [at most one](foundation.subterminal-types.md) way.
 
 However, both historicallly and in contemporary mathematics, what is commonly
 meant by set theory is also the study of a collection of related foundational
