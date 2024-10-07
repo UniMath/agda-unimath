@@ -4,6 +4,8 @@
 {-# OPTIONS --guardedness #-}
 ```
 
+{{#bibliography}}
+
 ## Modules in the foundation namespace
 
 ```agda

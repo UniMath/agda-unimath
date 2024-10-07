@@ -256,3 +256,7 @@ abstract
   is-0-connected-im-point' f =
     is-0-connected-im-is-0-connected-domain f is-0-connected-unit
 ```
+
+## References
+
+{{#bibliography}}
