@@ -22,7 +22,7 @@ open import structured-types.globular-types
 
 ## Idea
 
-A
+An
 {{#concept "equivalence" Disambiguation="globular types" Agda=equiv-Globular-Type}}
 `f` between [globular types](structured-types.globular-types.md) `A` and `B` is
 an equivalence `F₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`,
