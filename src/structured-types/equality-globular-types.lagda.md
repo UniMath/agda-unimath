@@ -130,32 +130,3 @@ module _
   equiv-eq-Eq-Globular-Type : Eq-Globular-Type A B ≃ (A ＝ B)
   equiv-eq-Eq-Globular-Type = eq-Eq-Globular-Type , is-equiv-eq-Eq-Globular-Type
 ```
-
-### Characterization of equality of globular types in terms of equivalences
-
-```agda
-record
-  equiv-Globular-Type
-  {l1 l2 : Level} (A B : Globular-Type l1 l2) : UU (lsuc l1 ⊔ lsuc l2)
-  where
-  coinductive
-  field
-    0-cell-equiv-Globular-Type :
-      0-cell-Globular-Type A ≃ 0-cell-Globular-Type B
-
-  map-0-cell-equiv-Globular-Type :
-    0-cell-Globular-Type A → 0-cell-Globular-Type B
-  map-0-cell-equiv-Globular-Type =
-    map-equiv 0-cell-equiv-Globular-Type
-
-  field
-    1-cell-equiv-Globular-Type :
-      (x y : 0-cell-Globular-Type A) →
-      equiv-Globular-Type
-        ( 1-cell-globular-type-Globular-Type A x y)
-        ( 1-cell-globular-type-Globular-Type B
-          ( map-0-cell-equiv-Globular-Type x)
-          ( map-0-cell-equiv-Globular-Type y))
-
-open equiv-Globular-Type public
-```
