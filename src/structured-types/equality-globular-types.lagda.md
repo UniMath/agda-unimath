@@ -32,35 +32,76 @@ open import structured-types.globular-types
 
 We postulate that [equality](foundation-core.identity-types.md) of
 [globular types](structured-types.globular-types.md) is characterized by
-equality of the 0-cells together with a binary family of equalities of the
-globular type of 1-cells over the equality of the 0-cells. This phrasing is used
-so that the extensionality principle is independent of
+equality of the 0-cells together with, coinductively, a binary family of
+equalities of the globular type of 1-cells over the equality of the 0-cells.
+This phrasing is used so that the extensionality principle is independent of
 [univalence](foundation.univalence.md).
 
 ## Definitions
 
-### Equality of globular types
+### Coinductive equality of globular types
+
+```agda
+record
+  Eq-Globular-Type
+  {l1 l2 : Level} (A : Globular-Type l1 l2) (B : Globular-Type l1 l2)
+  : UU (lsuc l1 ⊔ lsuc l2)
+  where
+  coinductive
+  field
+    0-cell-Eq-Globular-Type :
+      0-cell-Globular-Type A ＝ 0-cell-Globular-Type B
+
+  map-0-cell-Eq-Globular-Type :
+      0-cell-Globular-Type A → 0-cell-Globular-Type B
+  map-0-cell-Eq-Globular-Type = map-eq 0-cell-Eq-Globular-Type
+
+  field
+    globular-type-1-cell-Eq-Globular-Type :
+      {x y : 0-cell-Globular-Type A} →
+      Eq-Globular-Type
+        ( 1-cell-globular-type-Globular-Type A x y)
+        ( 1-cell-globular-type-Globular-Type B
+          ( map-0-cell-Eq-Globular-Type x)
+          ( map-0-cell-Eq-Globular-Type y))
+
+open Eq-Globular-Type public
+
+refl-Eq-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2) → Eq-Globular-Type A A
+refl-Eq-Globular-Type A =
+  λ where
+  .0-cell-Eq-Globular-Type → refl
+  .globular-type-1-cell-Eq-Globular-Type {x} {y} →
+    refl-Eq-Globular-Type (1-cell-globular-type-Globular-Type A x y)
+
+Eq-eq-Globular-Type :
+  {l1 l2 : Level} {A B : Globular-Type l1 l2} → A ＝ B → Eq-Globular-Type A B
+Eq-eq-Globular-Type {A = A} refl = refl-Eq-Globular-Type A
+```
+
+### Equality of globular types as a dependent sum
 
 ```agda
 module _
   {l1 l2 : Level}
   where
 
-  Eq-Globular-Type : (A B : Globular-Type l1 l2) → UU (lsuc l1 ⊔ lsuc l2)
-  Eq-Globular-Type A B =
+  Eq-Globular-Type' : (A B : Globular-Type l1 l2) → UU (lsuc l1 ⊔ lsuc l2)
+  Eq-Globular-Type' A B =
     Σ ( 0-cell-Globular-Type A ＝ 0-cell-Globular-Type B)
       ( λ p →
         (x y : 0-cell-Globular-Type A) →
         1-cell-globular-type-Globular-Type A x y ＝
         1-cell-globular-type-Globular-Type B (map-eq p x) (map-eq p y))
 
-  refl-Eq-Globular-Type : (A : Globular-Type l1 l2) → Eq-Globular-Type A A
-  refl-Eq-Globular-Type A =
+  refl-Eq-Globular-Type' : (A : Globular-Type l1 l2) → Eq-Globular-Type' A A
+  refl-Eq-Globular-Type' A =
     ( refl , refl-binary-htpy (1-cell-globular-type-Globular-Type A))
 
-  Eq-eq-Globular-Type :
-    {A B : Globular-Type l1 l2} → A ＝ B → Eq-Globular-Type A B
-  Eq-eq-Globular-Type {A} refl = refl-Eq-Globular-Type A
+  Eq-eq-Globular-Type' :
+    {A B : Globular-Type l1 l2} → A ＝ B → Eq-Globular-Type' A B
+  Eq-eq-Globular-Type' {A} refl = refl-Eq-Globular-Type' A
 ```
 
 ## Postulate
