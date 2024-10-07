@@ -14,18 +14,18 @@ theories whose building blocks include a _universe_ of _sets_ and a
 propositionally valued _elementhood relation_ on the universe of sets.
 
 While this elementhood relation is not built into type theory as a fundamental
-construct, there is one important observable instance of it — namely, the
-smallness predicate:
+construct, there is one important instance of it present — namely, the smallness
+predicate:
 
 ```text
   is-small l A := Σ (X : UU l), (A ≃ X).
 ```
 
-We can say precisely that a type `A` _is an element_ of `UU l` if `A` is
-`UU l`-small in this sense. Indeed, that `is-small l` is a predicate is
-equivalent to the [univalence axiom](foundation-core.univalence.md). This
-highlights a second connection between set theory and univalent type theory that
-is incompatible with the preconception that "set theory is a study of set-level
+We can say that a type `A` _is an element_ of `UU l` if `A` is `UU l`-small in
+this sense. Indeed, that `is-small l` is a predicate is equivalent to the
+[univalence axiom](foundation-core.univalence.md). This highlights a second
+connection between set theory and univalent type theory that is not directly
+compatible with the preconception that "set theory is a study of set-level
 mathematics".
 
 In this module, we assemble ideas historically related to the study of set
@@ -33,7 +33,7 @@ theories both as foundations of set-level mathematics, but also as a study of
 hierarchies in mathematics. This includes ideas such as
 [cardinality](set-theory.cardinalities.md) and
 [infinity](set-theory.infinite-sets.md), the
-[cumulative hierarchy](set-theory.cumulative-hierarchy.md) as a model for set
+[cumulative hierarchy](set-theory.cumulative-hierarchy.md) as a model of set
 theory, and [Russell's paradox](set-theory.russells-paradox.md).
 
 ## Modules in the set theory namespace
