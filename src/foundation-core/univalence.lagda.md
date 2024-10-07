@@ -61,6 +61,9 @@ module _
   map-eq : {A B : UU l} → A ＝ B → A → B
   map-eq = map-equiv ∘ equiv-eq
 
+  map-inv-eq : {A B : UU l} → A ＝ B → B → A
+  map-inv-eq = map-eq ∘ inv
+
   compute-equiv-eq-refl :
     {A : UU l} → equiv-eq (refl {x = A}) ＝ id-equiv
   compute-equiv-eq-refl = refl

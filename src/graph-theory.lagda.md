@@ -1,6 +1,6 @@
 # Graph theory
 
-## Files in the graph theory folder
+## Modules in the graph theory namespace
 
 ```agda
 module graph-theory where

@@ -1,6 +1,6 @@
 # Foundation core
 
-## Files in the foundation-core folder
+## Modules in the foundation-core namespace
 
 ```agda
 module foundation-core where
