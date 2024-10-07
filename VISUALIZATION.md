@@ -1,18 +1,19 @@
-# Visualization of definitions in the library
+# Interactive explorer of the library
 
-Below you may find an interactive explorer of modules and definitions in
-agda-unimath, including search and checking if one definition depends on
-another. Hover over the information icon for detailed usage instructions.
+Below is an interactive explorer of modules and definitions in agda-unimath. It
+displays various properties of the nodes in the dependency graph, and also
+allows you to determine dependencies between individual definitions. Hover over
+ⓘ for detailed usage instructions.
 
-<div id="small-display-notice" style="display:none">
+<p id="small-display-notice" style="display:none">
   ⚠ The explorer is not optimized for small screens. It may be
   difficult to control on mobile devices.
-</div>
+</p>
 
 <style>
   .sidetoc { display: none; }
   @media(max-width:1100px) {
-    #small-display-notice { display: block; }
+    #small-display-notice { display: block !important; }
   }
 </style>
 
@@ -27,11 +28,15 @@ another. Hover over the information icon for detailed usage instructions.
   </iframe>
 </div>
 
-The interactive explorer was developed by Job Petrovčič. Vojtěch Štěpančík,
-Matej Petković, and Andrej Bauer contributed invaluable suggestions and offered
-helpful support. It's built and deployed outside of the agda-unimath repository,
-using a fork of Agda. For that reason the definitions in the graph may lag
-behind the definitions on the website by a few hours.
+The interactive explorer was developed by Job Petrovčič. In addition, Vojtěch
+Štěpančík, Matej Petković, and Andrej Bauer contributed invaluable suggestions
+and offered helpful support.
+
+### Notes
+
+The explorer is built and deployed outside of the agda-unimath repository, using
+a fork of Agda. For that reason the definitions in the graph may lag behind the
+definitions on the website by a few hours.
 
 The explorer has a few known limitations. Most noticeably it doesn't recognize
 the `open import ... renaming (X to Y) public` pattern of exporting definitions,
