@@ -163,10 +163,3 @@ A006369 = map-collatz-bijection
 A046859 : ℕ → ℕ
 A046859 n = ackermann n n
 ```
-
-### [A088218](https://oeis.org/A088218) The total number of leaves in all rooted ordered trees with n edges
-
-```agda
-A088218 : ℕ → ℕ
-A088218 n = multiset-coefficient n n
-```
