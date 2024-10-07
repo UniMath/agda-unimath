@@ -42,7 +42,7 @@ _weakly_. On this page, we consider the
 {{#concept "computational identity types" Agda=computational-Id}} `x ＝ʲ y`,
 whose elements we call
 {{#concept "computational identifications" Agda=computational-Id}}. These are
-defined using the construction of the
+defined by taking the
 [strictly involutive identity types](foundation.strictly-involutive-identity-types.md):
 
 ```text
@@ -50,13 +50,14 @@ defined using the construction of the
 ```
 
 but using the [Yoneda identity types](foundation.yoneda-identity-types.md)
-(`_＝ʸ_`) as the underlying identity types:
 
 ```text
   (x ＝ʸ y) := (z : A) → (z ＝ x) → (z ＝ y),
 ```
 
-hence, their definition is
+as the underlying identity types. Both of these underlying constructions are due
+to Martín Escardó {{#cite Esc19DefinitionsEquivalence}}. Hence, the
+_computational identity type_ is
 
 ```text
   (x ＝ʲ y) := Σ (z : A) ((z ＝ʸ y) × (z ＝ʸ x)).
@@ -800,6 +801,10 @@ module _
   is-equiv-computational-eq-equiv =
     is-equiv-map-equiv equiv-computational-eq-equiv
 ```
+
+## References
+
+{{#bibliography}}
 
 ## See also
 

@@ -35,10 +35,11 @@ open import foundation-core.torsorial-type-families
 The standard definition of [identity types](foundation-core.identity-types.md)
 has the limitation that many of the basic operations only satisfy algebraic laws
 _weakly_. On this page, we consider the
-{{#concept "Yoneda identity types" Agda=yoneda-Id}}
+{{#concept "Yoneda identity types" Agda=yoneda-Id}} due to Martín Escardó
+{{#cite Esc19DefinitionsEquivalence}}
 
 ```text
-  (x ＝ʸ y) := (z : A) → (z ＝ x) → (z ＝ y)
+  (x ＝ʸ y) := (z : A) → (z ＝ x) → (z ＝ y).
 ```
 
 Through the interpretation of types as ∞-categories, where the hom-space
