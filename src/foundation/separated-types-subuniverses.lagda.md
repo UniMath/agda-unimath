@@ -1,7 +1,7 @@
 # Types separated at subuniverses
 
 ```agda
-module foundation.types-separated-at-subuniverses where
+module foundation.separated-types-subuniverses where
 ```
 
 <details><summary>Imports</summary>
