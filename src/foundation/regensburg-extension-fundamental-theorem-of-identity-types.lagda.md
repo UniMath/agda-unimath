@@ -26,12 +26,12 @@ open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.maps-in-subuniverses
 open import foundation.propositional-truncations
+open import foundation.separated-types-subuniverses
 open import foundation.subuniverses
 open import foundation.surjective-maps
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.separated-types-subuniverses
 open import foundation.universe-levels
 ```
 
