@@ -63,10 +63,12 @@ _computational identity type_ is
   (x ＝ʲ y) := Σ (z : A) ((z ＝ʸ y) × (z ＝ʸ x)).
 ```
 
-The Yoneda identity types are [equivalent](foundation-core.equivalences.md) to
-the standard identity types, but have a strictly associative and unital
-concatenation operation. We can leverage this and the strictness properties of
-the construction of the strictly involutive identity types to construct
+Both the strictly involutive identity types and Yoneda identity types are
+[equivalent](foundation-core.equivalences.md) to the standard identity types but
+satisfy further strict algebraic laws. While the strictly involutive identity
+types have a strictly involutive inverse operation and a one-sided unital
+concatenation, the Yoneda identity types have a strictly associative two-sided
+unital concatenation operation. We leverage this to define appropriate
 operations on the computational identity types that satisfy the strict algebraic
 laws
 
@@ -78,10 +80,10 @@ laws
 While the last three equalities hold by the same computations as for the
 strictly involutive identity types using the fact that `invʸ reflʸ ≐ reflʸ`,
 strict associativity relies on the strict associativity of the underlying Yoneda
-identity types. See the file about strictly involutive identity types for
-further details on computations related to the last three equalities. In
-addition to these strict algebraic laws, we also define a recursion principle
-for the computational identity types that computes strictly.
+identity types. See the page on strictly involutive identity types for further
+details on computations related to the last three equalities. In addition to
+these strict algebraic laws, we also have a recursion principle for the
+computational identity types that computes strictly.
 
 **Note.** The computational identity types do _not_ satisfy the strict laws
 
