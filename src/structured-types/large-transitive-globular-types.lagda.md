@@ -126,60 +126,50 @@ is-transitive-Large-Globular-Type G =
 
 ```agda
 record
-  is-transitive-Large-Globular-Type
-    {α : Level → Level} {β : Level → Level → Level}
-    (A : Large-Globular-Type α β) :
-    UUω
-  where
-  field
-    refl-0-cell-is-transitive-Large-Globular-Type :
-      is-transitive-Large-Relation
-        ( 0-cell-Large-Globular-Type A)
-        ( 1-cell-Large-Globular-Type A)
-    is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type :
+  Large-Transitive-Globular-Type
+    (α : Level → Level) (β : Level → Level → Level) : UUω
+    where
+
+    field
+      large-globular-type-Large-Transitive-Globular-Type :
+        Large-Globular-Type α β
+
+    0-cell-Large-Transitive-Globular-Type : (l : Level) → UU (α l)
+    0-cell-Large-Transitive-Globular-Type =
+      0-cell-Large-Globular-Type
+        large-globular-type-Large-Transitive-Globular-Type
+
+    1-cell-Large-Transitive-Globular-Type :
       {l1 l2 : Level}
-      {x : 0-cell-Large-Globular-Type A l1}
-      {y : 0-cell-Large-Globular-Type A l2} →
-      is-transitive-Globular-Type
-        ( 1-cell-globular-type-Large-Globular-Type A x y)
+      (x : 0-cell-Large-Transitive-Globular-Type l1)
+      (y : 0-cell-Large-Transitive-Globular-Type l2) → UU (β l1 l2)
+    1-cell-Large-Transitive-Globular-Type =
+      1-cell-Large-Globular-Type
+        large-globular-type-Large-Transitive-Globular-Type
 
-  refl-1-cell-is-transitive-Large-Globular-Type :
-    {l1 l2 : Level}
-    {x : 0-cell-Large-Globular-Type A l1}
-    {y : 0-cell-Large-Globular-Type A l2} →
-    is-transitive (2-cell-Large-Globular-Type A {x = x} {y = y})
-  refl-1-cell-is-transitive-Large-Globular-Type =
-    is-transitive-1-cell-is-transitive-Globular-Type
-      ( 1-cell-globular-type-Large-Globular-Type A _ _)
-      ( is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type)
+    2-cell-Large-Transitive-Globular-Type :
+      {l1 l2 : Level}
+      {x : 0-cell-Large-Transitive-Globular-Type l1}
+      {y : 0-cell-Large-Transitive-Globular-Type l2}
+      (f g : 1-cell-Large-Transitive-Globular-Type x y) → UU (β l1 l2)
+    2-cell-Large-Transitive-Globular-Type =
+      2-cell-Large-Globular-Type
+        large-globular-type-Large-Transitive-Globular-Type
 
-  refl-2-cell-is-transitive-Large-Globular-Type :
-    {l1 l2 : Level}
-    {x : 0-cell-Large-Globular-Type A l1}
-    {y : 0-cell-Large-Globular-Type A l2}
-    {f g : 1-cell-Large-Globular-Type A x y} →
-    is-transitive (3-cell-Large-Globular-Type A {f = f} {g = g})
-  refl-2-cell-is-transitive-Large-Globular-Type =
-    is-transitive-2-cell-is-transitive-Globular-Type
-      ( 1-cell-globular-type-Large-Globular-Type A _ _)
-      ( is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type)
+    3-cell-Large-Transitive-Globular-Type :
+      {l1 l2 : Level}
+      {x : 0-cell-Large-Transitive-Globular-Type l1}
+      {y : 0-cell-Large-Transitive-Globular-Type l2}
+      {f g : 1-cell-Large-Transitive-Globular-Type x y}
+      (s t : 2-cell-Large-Transitive-Globular-Type f g) → UU (β l1 l2)
+    3-cell-Large-Transitive-Globular-Type =
+      3-cell-Large-Globular-Type
+        large-globular-type-Large-Transitive-Globular-Type
 
-open is-transitive-Large-Globular-Type public
+    field
+      is-transitive-Large-Transitive-Globular-Type :
+        is-transitive-Large-Globular-Type
+          large-globular-type-Large-Transitive-Globular-Type
+
+open Large-Transitive-Globular-Type
 ```
-
--- ```agda
--- record
---   Large-Transitive-Globular-Type
---   (α : Level → Level) (β : Level → Level → Level) : UUω
---   where
-
---   field
---     0-cell-Large-Transitive-Globular-Type : (l : Level) → UU (α l)
-
---     transitive-globular-structure-0-cell-Large-Transitive-Globular-Type :
---       large-transitive-globular-structure
---         ( β)
---         ( 0-cell-Large-Transitive-Globular-Type)
-
--- open Large-Transitive-Globular-Type public
--- ```

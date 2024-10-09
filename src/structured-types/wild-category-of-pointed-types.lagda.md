@@ -198,8 +198,8 @@ uniform-pointed-map-Transitive-Globular-Type A B =
   uniform-pointed-Π-Transitive-Globular-Type A (constant-Pointed-Fam A B)
 
 comp-structure-uniform-pointed-type-Large-Globular-Type :
-  is-transitive-Large-Globular-Type pointed-type-Large-Globular-Type
-comp-structure-uniform-pointed-type-Large-Globular-Type = ?
+  is-transitive-Large-Globular-Type uniform-pointed-type-Large-Globular-Type
+comp-structure-uniform-pointed-type-Large-Globular-Type = {!!}
 ```
 
 #### The uniform large globular structure on pointed types
