@@ -219,14 +219,14 @@ module _
 **Proof:** Our goal is to show that the type
 
 ```text
-  Σ Y (λ y → ∥ Σ (Σ X (λ u → x ＝ u)) (λ v → f (inclusion v) ＝ y) ∥ )
+  Σ Y (λ y → ║ Σ (Σ X (λ u → x ＝ u)) (λ v → f (inclusion v) ＝ y) ║ )
 ```
 
 Since the type `Σ X (λ u → x ＝ u)` is contractible, the above type is
 [equivalent](foundation-core.equivalences.md) to
 
 ```text
-  Σ Y (λ y → ∥ f x ＝ y ∥ )
+  Σ Y (λ y → ║ f x ＝ y ║ )
 ```
 
 Note that the identity type `f x ＝ y` of a [set](foundation-core.sets.md) is a
