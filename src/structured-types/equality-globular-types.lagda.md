@@ -14,10 +14,10 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-homotopies
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.univalence
+open import foundation.identity-types
 open import foundation.torsorial-type-families
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.coherently-invertible-maps
