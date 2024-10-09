@@ -99,6 +99,10 @@ module _
   is-prop-is-reflexive-Relation-Prop : is-prop is-reflexive-Relation-Prop
   is-prop-is-reflexive-Relation-Prop =
     is-prop-Π (λ x → is-prop-type-Relation-Prop R x x)
+
+  is-reflexive-prop-Relation-Prop : Prop (l1 ⊔ l2)
+  is-reflexive-prop-Relation-Prop =
+    (is-reflexive-Relation-Prop , is-prop-is-reflexive-Relation-Prop)
 ```
 
 ### The predicate of being a symmetric relation
@@ -132,6 +136,10 @@ module _
   is-prop-is-symmetric-Relation-Prop =
     is-prop-iterated-Π 3
       ( λ x y r → is-prop-type-Relation-Prop R y x)
+
+  is-symmetric-prop-Relation-Prop : Prop (l1 ⊔ l2)
+  is-symmetric-prop-Relation-Prop =
+    (is-symmetric-Relation-Prop , is-prop-is-symmetric-Relation-Prop)
 ```
 
 ### The predicate of being a transitive relation
