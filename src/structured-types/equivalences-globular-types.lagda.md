@@ -75,7 +75,8 @@ module _
       ( map-0-cell-equiv-Globular-Type F x)
       ( map-0-cell-equiv-Globular-Type F y)
   equiv-1-cell-equiv-Globular-Type =
-    equiv-0-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
+    equiv-0-cell-equiv-Globular-Type
+      ( globular-type-1-cell-equiv-Globular-Type F)
 
   map-1-cell-equiv-Globular-Type :
     {x y : 0-cell-Globular-Type A} →
@@ -100,7 +101,8 @@ module _
       ( map-1-cell-equiv-Globular-Type F f)
       ( map-1-cell-equiv-Globular-Type F g)
   equiv-2-cell-equiv-Globular-Type =
-    equiv-1-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
+    equiv-1-cell-equiv-Globular-Type
+      ( globular-type-1-cell-equiv-Globular-Type F)
 
   map-2-cell-equiv-Globular-Type :
     {x y : 0-cell-Globular-Type A}
@@ -127,7 +129,8 @@ module _
       ( map-2-cell-equiv-Globular-Type F H)
       ( map-2-cell-equiv-Globular-Type F K)
   equiv-3-cell-equiv-Globular-Type =
-    equiv-2-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
+    equiv-2-cell-equiv-Globular-Type
+      ( globular-type-1-cell-equiv-Globular-Type F)
 ```
 
 ### The identity equiv on a globular type
