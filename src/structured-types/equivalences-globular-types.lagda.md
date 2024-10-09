@@ -44,12 +44,12 @@ record
   where
   coinductive
   field
-    0-cell-equiv-Globular-Type :
+    equiv-0-cell-equiv-Globular-Type :
       0-cell-Globular-Type A ≃ 0-cell-Globular-Type B
 
   map-0-cell-equiv-Globular-Type :
       0-cell-Globular-Type A → 0-cell-Globular-Type B
-  map-0-cell-equiv-Globular-Type = pr1 0-cell-equiv-Globular-Type
+  map-0-cell-equiv-Globular-Type = map-equiv equiv-0-cell-equiv-Globular-Type
 
   field
     globular-type-1-cell-equiv-Globular-Type :
@@ -68,14 +68,14 @@ module _
   (F : equiv-Globular-Type A B)
   where
 
-  1-cell-equiv-Globular-Type :
+  equiv-1-cell-equiv-Globular-Type :
     {x y : 0-cell-Globular-Type A} →
     1-cell-Globular-Type A x y ≃
     1-cell-Globular-Type B
       ( map-0-cell-equiv-Globular-Type F x)
       ( map-0-cell-equiv-Globular-Type F y)
-  1-cell-equiv-Globular-Type =
-    0-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
+  equiv-1-cell-equiv-Globular-Type =
+    equiv-0-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
 
   map-1-cell-equiv-Globular-Type :
     {x y : 0-cell-Globular-Type A} →
@@ -92,15 +92,15 @@ module _
   (F : equiv-Globular-Type A B)
   where
 
-  2-cell-equiv-Globular-Type :
+  equiv-2-cell-equiv-Globular-Type :
     {x y : 0-cell-Globular-Type A}
     {f g : 1-cell-Globular-Type A x y} →
     2-cell-Globular-Type A f g ≃
     2-cell-Globular-Type B
       ( map-1-cell-equiv-Globular-Type F f)
       ( map-1-cell-equiv-Globular-Type F g)
-  2-cell-equiv-Globular-Type =
-    1-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
+  equiv-2-cell-equiv-Globular-Type =
+    equiv-1-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
 
   map-2-cell-equiv-Globular-Type :
     {x y : 0-cell-Globular-Type A}
@@ -118,7 +118,7 @@ module _
   (F : equiv-Globular-Type A B)
   where
 
-  3-cell-equiv-Globular-Type :
+  equiv-3-cell-equiv-Globular-Type :
     {x y : 0-cell-Globular-Type A}
     {f g : 1-cell-Globular-Type A x y} →
     {H K : 2-cell-Globular-Type A f g} →
@@ -126,8 +126,8 @@ module _
     3-cell-Globular-Type B
       ( map-2-cell-equiv-Globular-Type F H)
       ( map-2-cell-equiv-Globular-Type F K)
-  3-cell-equiv-Globular-Type =
-    2-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
+  equiv-3-cell-equiv-Globular-Type =
+    equiv-2-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
 ```
 
 ### The identity equiv on a globular type
@@ -137,7 +137,7 @@ id-equiv-Globular-Type :
   {l1 l2 : Level} (A : Globular-Type l1 l2) → equiv-Globular-Type A A
 id-equiv-Globular-Type A =
   λ where
-  .0-cell-equiv-Globular-Type → id-equiv
+  .equiv-0-cell-equiv-Globular-Type → id-equiv
   .globular-type-1-cell-equiv-Globular-Type {x} {y} →
     id-equiv-Globular-Type (1-cell-globular-type-Globular-Type A x y)
 ```
@@ -153,8 +153,8 @@ comp-equiv-Globular-Type :
   equiv-Globular-Type B C → equiv-Globular-Type A B → equiv-Globular-Type A C
 comp-equiv-Globular-Type g f =
   λ where
-  .0-cell-equiv-Globular-Type →
-    0-cell-equiv-Globular-Type g ∘e 0-cell-equiv-Globular-Type f
+  .equiv-0-cell-equiv-Globular-Type →
+    equiv-0-cell-equiv-Globular-Type g ∘e equiv-0-cell-equiv-Globular-Type f
   .globular-type-1-cell-equiv-Globular-Type →
     comp-equiv-Globular-Type
       ( globular-type-1-cell-equiv-Globular-Type g)

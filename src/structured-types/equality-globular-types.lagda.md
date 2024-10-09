@@ -44,17 +44,17 @@ This phrasing is used so that the extensionality principle is independent of
 ```agda
 record
   Eq-Globular-Type
-  {l1 l2 : Level} (A : Globular-Type l1 l2) (B : Globular-Type l1 l2)
-  : UU (lsuc l1 ⊔ lsuc l2)
+  {l1 l2 : Level} (A : Globular-Type l1 l2) (B : Globular-Type l1 l2) :
+    UU (lsuc l1 ⊔ lsuc l2)
   where
   coinductive
   field
-    0-cell-Eq-Globular-Type :
+    eq-0-cell-Eq-Globular-Type :
       0-cell-Globular-Type A ＝ 0-cell-Globular-Type B
 
   map-0-cell-Eq-Globular-Type :
       0-cell-Globular-Type A → 0-cell-Globular-Type B
-  map-0-cell-Eq-Globular-Type = map-eq 0-cell-Eq-Globular-Type
+  map-0-cell-Eq-Globular-Type = map-eq eq-0-cell-Eq-Globular-Type
 
   field
     globular-type-1-cell-Eq-Globular-Type :
@@ -71,7 +71,7 @@ refl-Eq-Globular-Type :
   {l1 l2 : Level} (A : Globular-Type l1 l2) → Eq-Globular-Type A A
 refl-Eq-Globular-Type A =
   λ where
-  .0-cell-Eq-Globular-Type → refl
+  .eq-0-cell-Eq-Globular-Type → refl
   .globular-type-1-cell-Eq-Globular-Type {x} {y} →
     refl-Eq-Globular-Type (1-cell-globular-type-Globular-Type A x y)
 
