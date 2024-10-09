@@ -42,7 +42,8 @@ suppress_processing = [
   "USERS.md",
   "GRANT-ACKNOWLEDGEMENTS.md",
   "SUMMARY.md",
-  "ART.md"
+  "ART.md",
+  "VISUALIZATION.md"
 ]
 
 [preprocessor.concepts]
@@ -66,6 +67,8 @@ follow-web-links = false
 [output.html]
 default-theme = "light"
 preferred-dark-theme = "Ayu"
+# The following option is renamed to smart-punctuation in mdbook 0.4.38
+curly-quotes = true
 copy-fonts = true
 additional-css = [
   "website/css/Agda.css",

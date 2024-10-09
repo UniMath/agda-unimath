@@ -21,6 +21,7 @@ if (link) {
     'STATEMENT-OF-INCLUSION.md',
     'SUMMARY.md',
     'USERS.md',
+    'VISUALIZATION.md',
     'index.md',
   ];
   if (!fileList.includes(filename)) {
