@@ -15,7 +15,9 @@ open import foundation.binary-homotopies
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.univalence
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import foundation-core.coherently-invertible-maps
@@ -170,4 +172,12 @@ module _
 
   equiv-eq-Eq-Globular-Type : Eq-Globular-Type A B ≃ (A ＝ B)
   equiv-eq-Eq-Globular-Type = eq-Eq-Globular-Type , is-equiv-eq-Eq-Globular-Type
+
+is-torsorial-Eq-Globular-Type :
+  {l1 l2 : Level} {A : Globular-Type l1 l2} →
+  is-torsorial (Eq-Globular-Type A)
+is-torsorial-Eq-Globular-Type =
+  fundamental-theorem-id'
+    ( λ _ → Eq-eq-Globular-Type)
+    ( λ _ → is-equiv-Eq-eq-Globular-Type)
 ```
