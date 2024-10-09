@@ -42,7 +42,8 @@ suppress_processing = [
   "USERS.md",
   "GRANT-ACKNOWLEDGEMENTS.md",
   "SUMMARY.md",
-  "ART.md"
+  "ART.md",
+  "VISUALIZATION.md"
 ]
 
 [preprocessor.concepts]
@@ -53,10 +54,11 @@ wikidata-template = "https://www.wikidata.org/entity/{wikidata_id}"
 
 [preprocessor.citations]
 command = "python3 ./scripts/preprocessor_citations.py"
-bibtex_file = "references.bib"
-citation_style = "alpha"
-citation_label_style = "custom_alpha"
-error_on_unmatched_keys = true
+bibtex-file = "references.bib"
+citation-style = "alpha"
+citation-label-style = "custom_alpha"
+error-on-unmatched-keys = true
+error-on-empty-bibliography = true
 before = [ "git-metadata" ]
 
 [output.linkcheck]
@@ -65,6 +67,8 @@ follow-web-links = false
 [output.html]
 default-theme = "light"
 preferred-dark-theme = "Ayu"
+# The following option is renamed to smart-punctuation in mdbook 0.4.38
+curly-quotes = true
 copy-fonts = true
 additional-css = [
   "website/css/Agda.css",

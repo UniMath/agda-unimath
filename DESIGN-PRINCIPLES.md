@@ -28,9 +28,11 @@ makes use of several postulates.
    [`synthetic-homotopy-theory.circle`](synthetic-homotopy-theory.circle.md)
 9. **Pushouts** are postulated in
    [`synthetic-homotopy-theory.pushouts`](synthetic-homotopy-theory.pushouts.md)
-10. Various **Agda built-in types** are postulated in
+10. **Extensionality of globular types** is postulated in
+    [`structured-types.equality-globular-types`](structured-types.equality-globular-types.md).
+11. Various **Agda built-in types** are postulated in
     [`primitives`](primitives.md) and in [`reflection`](reflection.md).
-11. The **flat modality** and accompanying modalities, with propositional
+12. The **flat modality** and accompanying modalities, with propositional
     computation rules, are postulated in
     [`modal-type-theory`](modal-type-theory.md).
 
