@@ -116,7 +116,7 @@ module _
 
 ## Properties
 
-### Global subuniverses are closed under homogenous equivalences
+### Global subuniverses are closed under equivalences between types in a single universe
 
 This is true for any family of subuniverses indexed by universe levels.
 
@@ -126,14 +126,14 @@ module _
   {l : Level} {X Y : UU l}
   where
 
-  is-in-global-subuniverse-homogenous-equiv :
+  is-in-global-subuniverse-equiv-Level :
     X ≃ Y → is-in-global-subuniverse P X → is-in-global-subuniverse P Y
-  is-in-global-subuniverse-homogenous-equiv =
+  is-in-global-subuniverse-equiv-Level =
     is-in-subuniverse-equiv (subuniverse-global-subuniverse P l)
 
-  is-in-global-subuniverse-homogenous-equiv' :
+  is-in-global-subuniverse-equiv-Level' :
     X ≃ Y → is-in-global-subuniverse P Y → is-in-global-subuniverse P X
-  is-in-global-subuniverse-homogenous-equiv' =
+  is-in-global-subuniverse-equiv-Level' =
     is-in-subuniverse-equiv' (subuniverse-global-subuniverse P l)
 ```
 
