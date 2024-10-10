@@ -110,6 +110,22 @@ module _
   pr2 retraction-ap = is-retraction-is-injective-retraction
 ```
 
+### Retractions of homotopic maps
+
+Given a homotopy `H : f ~ g`, then if `g` has a retraction so does `f`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {f g : A → B}
+  where
+
+  retraction-htpy-map : f ~ g → retraction g → retraction f
+  retraction-htpy-map H G =
+    ( map-retraction g G ,
+      map-retraction g G ·l H ∙h is-retraction-map-retraction g G)
+```
+
 ### Composites of retractions are retractions
 
 ```agda
@@ -176,24 +192,33 @@ that would result in a cyclic module dependency.
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : g ∘ h ~ f)
+  (r : retraction f)
+  where
+
+  map-retraction-top-map-triangle' : B → A
+  map-retraction-top-map-triangle' = map-retraction f r ∘ g
+
+  is-retraction-map-retraction-top-map-triangle' :
+    is-retraction h map-retraction-top-map-triangle'
+  is-retraction-map-retraction-top-map-triangle' =
+    (map-retraction f r ·l H) ∙h is-retraction-map-retraction f r
+
+  retraction-top-map-triangle' : retraction h
+  pr1 retraction-top-map-triangle' =
+    map-retraction-top-map-triangle'
+  pr2 retraction-top-map-triangle' =
+    is-retraction-map-retraction-top-map-triangle'
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
   (r : retraction f)
   where
 
-  map-retraction-top-map-triangle : B → A
-  map-retraction-top-map-triangle = map-retraction f r ∘ g
-
-  is-retraction-map-retraction-top-map-triangle :
-    is-retraction h map-retraction-top-map-triangle
-  is-retraction-map-retraction-top-map-triangle =
-    ( inv-htpy (map-retraction f r ·l H)) ∙h
-    ( is-retraction-map-retraction f r)
-
   retraction-top-map-triangle : retraction h
-  pr1 retraction-top-map-triangle =
-    map-retraction-top-map-triangle
-  pr2 retraction-top-map-triangle =
-    is-retraction-map-retraction-top-map-triangle
+  retraction-top-map-triangle =
+    retraction-top-map-triangle' f g h (inv-htpy H) r
 ```
 
 ### In a commuting triangle `f ~ g ∘ h`, retractions of `g` and `h` compose to a retraction of `f`
