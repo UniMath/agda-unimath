@@ -39,7 +39,7 @@ suppress_processing = [
   "MAINTAINERS.md",
   "CONTRIBUTORS.md",
   "STATEMENT-OF-INCLUSION",
-  "USERS.md",
+  "PROJECTS.md",
   "GRANT-ACKNOWLEDGEMENTS.md",
   "SUMMARY.md",
   "ART.md",

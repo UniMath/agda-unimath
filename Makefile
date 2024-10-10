@@ -50,7 +50,7 @@ METAFILES := \
 	STATEMENT-OF-INCLUSION.md \
 	SUMMARY.md \
 	TEMPLATE.lagda.md \
-	USERS.md \
+	PROJECTS.md \
 	VISUALIZATION.md
 
 .PHONY: agdaFiles

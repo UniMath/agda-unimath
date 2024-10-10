@@ -20,7 +20,7 @@ if (link) {
     'README.md',
     'STATEMENT-OF-INCLUSION.md',
     'SUMMARY.md',
-    'USERS.md',
+    'PROJECTS.md',
     'VISUALIZATION.md',
     'index.md',
   ];
