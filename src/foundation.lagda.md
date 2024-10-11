@@ -234,6 +234,7 @@ open import foundation.iterated-cartesian-product-types public
 open import foundation.iterated-dependent-pair-types public
 open import foundation.iterated-dependent-product-types public
 open import foundation.iterating-automorphisms public
+open import foundation.iterating-dependent-functions public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
 open import foundation.kernel-span-diagrams-of-maps public
