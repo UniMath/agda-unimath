@@ -41,7 +41,7 @@ in which the _reflexive globular identities_
 hold.
 
 The Hofmann-Streicher universe of presheaves on a category `𝒞` is the presheaf
-obtained by apply the functoriality of the right adjoint `ν : Cat → Psh 𝒞` of
+obtained by applying the functoriality of the right adjoint `ν : Cat → Psh 𝒞` of
 the _category of elements functor_ `∫_𝒞 : Psh 𝒞 → Cat` to the universal
 discrete fibration `π : Pointed-Type → Type`. More specifically, the
 Hofmann-Streicher universe `(𝒰_𝒞 , El_𝒞)` is given by
