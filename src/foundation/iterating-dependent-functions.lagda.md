@@ -111,5 +111,5 @@ module _
       ( reassociate-iterate-succ-ℕ k f x)
       ( reassociate-iterate k f (f x))
       ( reassociate-iterate-dependent-succ-ℕ k g x y)
-      (reassociate-iterate-dependent k g (f x) (g x y))
+      ( reassociate-iterate-dependent k g (f x) (g x y))
 ```
