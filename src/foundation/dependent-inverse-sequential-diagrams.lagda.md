@@ -11,7 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.inverse-sequential-diagrams
-open import foundation.iterating-dependent-functions
+open import foundation.iterating-families-of-maps
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -166,7 +166,7 @@ iterated-right-shift-dependent-inverse-sequential-diagram :
   dependent-inverse-sequential-diagram l2
     ( iterated-right-shift-inverse-sequential-diagram n A)
 iterated-right-shift-dependent-inverse-sequential-diagram n A =
-  iterate-dependent n
+  iterate-family-of-maps n
     ( λ A → right-shift-dependent-inverse-sequential-diagram {A = A})
     ( A)
 ```
@@ -198,7 +198,7 @@ iterated-left-shift-dependent-inverse-sequential-diagram :
   dependent-inverse-sequential-diagram l2
     ( iterated-left-shift-inverse-sequential-diagram n A)
 iterated-left-shift-dependent-inverse-sequential-diagram n A =
-  iterate-dependent n
+  iterate-family-of-maps n
     ( λ A → left-shift-dependent-inverse-sequential-diagram {A = A})
     ( A)
 ```

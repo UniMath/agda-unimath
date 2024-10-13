@@ -1,7 +1,7 @@
-# Iterating dependent functions
+# Iterating families of maps over a map
 
 ```agda
-module foundation.iterating-dependent-functions where
+module foundation.iterating-families-of-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -37,9 +37,9 @@ open import group-theory.monoid-actions
 
 ## Idea
 
-Given a dependent map `g : (x : X) → C x → C (f x)` over a map `f : X → X` then
-`g` can be
-{{#concept "iterated" Disambiguation="dependent map of types" Agda=iterate-dependent}}
+Given a family of maps `g : (x : X) → C x → C (f x)` over a map `f : X → X`,
+then `g` can be
+{{#concept "iterated" Disambiguation="family of maps over a map of types" Agda=iterate-family-of-maps}}
 by repeatedly applying `g`.
 
 ## Definition
@@ -51,16 +51,16 @@ module _
   {l1 l2 : Level} {X : UU l1} {C : X → UU l2} {f : X → X}
   where
 
-  iterate-dependent :
+  iterate-family-of-maps :
     (k : ℕ) → ((x : X) → C x → C (f x)) → (x : X) → C x → C (iterate k f x)
-  iterate-dependent zero-ℕ g x y = y
-  iterate-dependent (succ-ℕ k) g x y =
-    g (iterate k f x) (iterate-dependent k g x y)
+  iterate-family-of-maps zero-ℕ g x y = y
+  iterate-family-of-maps (succ-ℕ k) g x y =
+    g (iterate k f x) (iterate-family-of-maps k g x y)
 
-  iterate-dependent' :
+  iterate-family-of-maps' :
     (k : ℕ) → ((x : X) → C x → C (f x)) → (x : X) → C x → C (iterate' k f x)
-  iterate-dependent' zero-ℕ g x y = y
-  iterate-dependent' (succ-ℕ k) g x y = iterate-dependent' k g (f x) (g x y)
+  iterate-family-of-maps' zero-ℕ g x y = y
+  iterate-family-of-maps' (succ-ℕ k) g x y = iterate-family-of-maps' k g (f x) (g x y)
 ```
 
 ## Properties
@@ -72,44 +72,44 @@ module _
   {l1 l2 : Level} {X : UU l1} {C : X → UU l2} {f : X → X}
   where
 
-  reassociate-iterate-dependent-succ-ℕ :
+  reassociate-iterate-family-of-maps-succ-ℕ :
     (k : ℕ) (g : (x : X) → C x → C (f x)) (x : X) (y : C x) →
     dependent-identification C
       ( reassociate-iterate-succ-ℕ k f x)
-      ( g (iterate k f x) (iterate-dependent k g x y))
-      ( iterate-dependent k g (f x) (g x y))
-  reassociate-iterate-dependent-succ-ℕ zero-ℕ g x y = refl
-  reassociate-iterate-dependent-succ-ℕ (succ-ℕ k) g x y =
+      ( g (iterate k f x) (iterate-family-of-maps k g x y))
+      ( iterate-family-of-maps k g (f x) (g x y))
+  reassociate-iterate-family-of-maps-succ-ℕ zero-ℕ g x y = refl
+  reassociate-iterate-family-of-maps-succ-ℕ (succ-ℕ k) g x y =
     equational-reasoning
       tr C
         ( reassociate-iterate-succ-ℕ (succ-ℕ k) f x)
-        ( g (iterate (succ-ℕ k) f x) (iterate-dependent (succ-ℕ k) g x y))
+        ( g (iterate (succ-ℕ k) f x) (iterate-family-of-maps (succ-ℕ k) g x y))
       ＝
       g ( iterate k f (f x))
         ( tr C
           ( reassociate-iterate-succ-ℕ k f x)
-          ( g (iterate k f x) (iterate-dependent k g x y)))
+          ( g (iterate k f x) (iterate-family-of-maps k g x y)))
       by
         tr-ap f g
           ( reassociate-iterate-succ-ℕ k f x)
-          ( iterate-dependent (succ-ℕ k) g x y)
-      ＝ g (iterate k f (f x)) (iterate-dependent k g (f x) (g x y))
+          ( iterate-family-of-maps (succ-ℕ k) g x y)
+      ＝ g (iterate k f (f x)) (iterate-family-of-maps k g (f x) (g x y))
       by
         ap
           ( g (iterate k f (f x)))
-          ( reassociate-iterate-dependent-succ-ℕ k g x y)
+          ( reassociate-iterate-family-of-maps-succ-ℕ k g x y)
 
-  reassociate-iterate-dependent :
+  reassociate-iterate-family-of-maps :
     (k : ℕ) (g : (x : X) → C x → C (f x)) (x : X) (y : C x) →
     dependent-identification C
       ( reassociate-iterate k f x)
-      ( iterate-dependent k g x y)
-      ( iterate-dependent' k g x y)
-  reassociate-iterate-dependent zero-ℕ g x y = refl
-  reassociate-iterate-dependent (succ-ℕ k) g x y =
+      ( iterate-family-of-maps k g x y)
+      ( iterate-family-of-maps' k g x y)
+  reassociate-iterate-family-of-maps zero-ℕ g x y = refl
+  reassociate-iterate-family-of-maps (succ-ℕ k) g x y =
     concat-dependent-identification C
       ( reassociate-iterate-succ-ℕ k f x)
       ( reassociate-iterate k f (f x))
-      ( reassociate-iterate-dependent-succ-ℕ k g x y)
-      ( reassociate-iterate-dependent k g (f x) (g x y))
+      ( reassociate-iterate-family-of-maps-succ-ℕ k g x y)
+      ( reassociate-iterate-family-of-maps k g (f x) (g x y))
 ```
