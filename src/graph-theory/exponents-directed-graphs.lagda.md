@@ -43,7 +43,7 @@ The universal property of the exponent gives that the type of [graph homomorphis
 - A map `f₀ : A₀ → B₀`
 - A family of maps `f₁ : (x y : A₀) → A₁ x y → B₁ (f₀ x) (f₀ y)`,
 
-as expected for a morphism of directed graphs.
+as expected for the type of morphisms of directed graphs.
 
 ## Definitions
 
