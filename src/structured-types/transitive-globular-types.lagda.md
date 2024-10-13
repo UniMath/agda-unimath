@@ -131,10 +131,10 @@ record
   Transitive-Globular-Type
     (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
   where
-  
+
   constructor
     make-Transitive-Globular-Type
-  
+
   field
     globular-type-Transitive-Globular-Type : Globular-Type l1 l2
 

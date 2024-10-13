@@ -13,9 +13,9 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import structured-types.globular-maps
 open import structured-types.globular-types
 open import structured-types.large-globular-types
-open import structured-types.globular-maps
 ```
 
 </details>

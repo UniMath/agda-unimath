@@ -21,7 +21,11 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-The {{#concept "terminal directed graph"}} is a [directed graph](graph-theory.directed-graphs.md) `1` such that the type of [graph homomorphisms](graph-theory.morphisms-directed-graphs.md) `hom A 1` is [contractible](foundation-core.contractible-types.md) for any directed graph `A`.
+The {{#concept "terminal directed graph"}} is a
+[directed graph](graph-theory.directed-graphs.md) `1` such that the type of
+[graph homomorphisms](graph-theory.morphisms-directed-graphs.md) `hom A 1` is
+[contractible](foundation-core.contractible-types.md) for any directed graph
+`A`.
 
 Concretely, the terminal directed graph `1` is defined by
 
@@ -34,7 +38,8 @@ Concretely, the terminal directed graph `1` is defined by
 
 ### The predicate of being a terminal directed graph
 
-The (small) predicate of being a terminal directed graph asserts that the type of vertices and all types of edges are contractible.
+The (small) predicate of being a terminal directed graph asserts that the type
+of vertices and all types of edges are contractible.
 
 ```agda
 module _

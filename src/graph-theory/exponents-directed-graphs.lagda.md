@@ -23,7 +23,9 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-Given two [directed graphs](graph-theory.directed-graphs.md) `A` and `B`, the {{#concept "exponent" Disambiguation="directed graph" agda=exponent-Directed-Graph}} `B^A` is the directed graph that satisfies the universal property
+Given two [directed graphs](graph-theory.directed-graphs.md) `A` and `B`, the
+{{#concept "exponent" Disambiguation="directed graph" agda=exponent-Directed-Graph}}
+`B^A` is the directed graph that satisfies the universal property
 
 ```text
   hom X B^A ≃ hom (X × A) B.
@@ -32,13 +34,19 @@ Given two [directed graphs](graph-theory.directed-graphs.md) `A` and `B`, the {{
 Concretely, the directed graph `B^A` has
 
 - The type of functions `A₀ → B₀` as its type of vertices
-- For any two functions `f₀ g₀ : A₀ → B₀`, an edge from `f₀` to `g₀` is an element of type
+- For any two functions `f₀ g₀ : A₀ → B₀`, an edge from `f₀` to `g₀` is an
+  element of type
 
   ```text
     (x y : A₀) → A₁ x y → B₁ (f₀ x) (g₀ y).
   ```
 
-The universal property of the exponent gives that the type of [graph homomorphisms](graph-theory.morphisms-directed-graphs.md) `hom A B` is [equivalent](foundation-core.equivalences.md) to the type of morphisms from the [terminal directed graph](graph-theory.terminal-directed-graphs.md) into `B^A`, which is in turn equivalent to the type of vertices `f₀` of the exponent `B^A` equipped with a loop `(B^A)₁ f f`. Indeed, this data consists of:
+The universal property of the exponent gives that the type of
+[graph homomorphisms](graph-theory.morphisms-directed-graphs.md) `hom A B` is
+[equivalent](foundation-core.equivalences.md) to the type of morphisms from the
+[terminal directed graph](graph-theory.terminal-directed-graphs.md) into `B^A`,
+which is in turn equivalent to the type of vertices `f₀` of the exponent `B^A`
+equipped with a loop `(B^A)₁ f f`. Indeed, this data consists of:
 
 - A map `f₀ : A₀ → B₀`
 - A family of maps `f₁ : (x y : A₀) → A₁ x y → B₁ (f₀ x) (f₀ y)`,
@@ -169,7 +177,7 @@ module _
       ( htpy-is-section-uncurry-hom-product-Directed-Graph f)
 
   htpy-is-retraction-uncurry-hom-product-Directed-Graph :
-    (f : hom-Directed-Graph C (exponent-Directed-Graph A B)) → 
+    (f : hom-Directed-Graph C (exponent-Directed-Graph A B)) →
     htpy-hom-Directed-Graph
       ( C)
       ( exponent-Directed-Graph A B)

@@ -17,13 +17,17 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-The {{#concpept "universal directed graph"}} `𝒢 l` at [universe level](foundation.universe-levels.md) `l` has the universe `UU l` as its type of vertices, and spans between types as its edges.
+The {{#concpept "universal directed graph"}} `𝒢 l` at
+[universe level](foundation.universe-levels.md) `l` has the universe `UU l` as
+its type of vertices, and spans between types as its edges.
 
-Specifically, the universal directed graph is a translation from category theory into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of presheaves on the representing pair of arrows
+Specifically, the universal directed graph is a translation from category theory
+into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of
+presheaves on the representing pair of arrows
 
 ```text
-      s    
-    ----->  
+      s
+    ----->
   0 -----> 1
       t
 ```
@@ -48,11 +52,13 @@ We compute a the instances of the slice category `⇉/I`:
   ```
 
   The functors `s t : ⇉/0 → ⇉/1` are given by `* ↦ s` and `* ↦ t`, respectively.
-  
+
 This means that:
 
-- The type of vertices of the universal directed graph is the universe of types `UU l`.
-- The type of edges from `X` to `Y` of the universal directed graph is the type of spans from `X` to `Y`.
+- The type of vertices of the universal directed graph is the universe of types
+  `UU l`.
+- The type of edges from `X` to `Y` of the universal directed graph is the type
+  of spans from `X` to `Y`.
 
 ## Definitions
 
@@ -67,7 +73,7 @@ module _
   edge-universal-Directed-Graph :
     (X Y : vertex-universal-Directed-Graph) → UU (l1 ⊔ lsuc l2)
   edge-universal-Directed-Graph X Y = X → Y → UU l2
-  
+
   universal-Directed-Graph : Directed-Graph (lsuc l1) (l1 ⊔ lsuc l2)
   pr1 universal-Directed-Graph = vertex-universal-Directed-Graph
   pr2 universal-Directed-Graph = edge-universal-Directed-Graph
@@ -75,7 +81,11 @@ module _
 
 ## Formalization target
 
-There is a _directed graph duality theorem_, which asserts that for any directed graph `G`, the type of morphisms `hom G 𝒰` from `G` into the universal directed graph is equivalent to the type of pairs `(H , f)` consisting of a directed graph `H` and a morphism `f : hom H G` from `H` into `G`. Such a result should be formalized in a new file called `directed-graph-duality`.
+There is a _directed graph duality theorem_, which asserts that for any directed
+graph `G`, the type of morphisms `hom G 𝒰` from `G` into the universal directed
+graph is equivalent to the type of pairs `(H , f)` consisting of a directed
+graph `H` and a morphism `f : hom H G` from `H` into `G`. Such a result should
+be formalized in a new file called `directed-graph-duality`.
 
 ## See also
 

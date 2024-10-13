@@ -10,8 +10,8 @@ module graph-theory.pullbacks-dependent-directed-graphs where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import graph-theory.directed-graphs
 open import graph-theory.dependent-directed-graphs
+open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
 ```
 
@@ -19,7 +19,12 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-Consider a [dependent directed graph](graph-theory.dependent-directed-graphs.md) `B` over a [directed graph](graph-theory.directed-graphs.md) `A`, and consider a [graph homomorphism](graph-theory.morphisms-directed-graphs.md) `f : C → A`. The {{#concept "pullback" Disambiguation="dependent directed graphs"}} `f*B` of `B` along `f` is defined by substituting the values of `f` into `B`. More precisely, `f*B` is defined by
+Consider a [dependent directed graph](graph-theory.dependent-directed-graphs.md)
+`B` over a [directed graph](graph-theory.directed-graphs.md) `A`, and consider a
+[graph homomorphism](graph-theory.morphisms-directed-graphs.md) `f : C → A`. The
+{{#concept "pullback" Disambiguation="dependent directed graphs"}} `f*B` of `B`
+along `f` is defined by substituting the values of `f` into `B`. More precisely,
+`f*B` is defined by
 
 ```text
   (f*B)₀ c := B₀ (f₀ c)
@@ -57,4 +62,3 @@ module _
   pr2 pullback-Dependent-Directed-Graph =
     edge-pullback-Dependent-Directed-Graph
 ```
-

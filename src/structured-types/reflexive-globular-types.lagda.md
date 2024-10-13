@@ -35,7 +35,7 @@ record
   {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A) : UU (l1 ⊔ l2)
   where
   coinductive
-  
+
   field
     is-reflexive-1-cell-is-reflexive-globular-structure :
       is-reflexive (1-cell-globular-structure G)
@@ -150,7 +150,7 @@ module _
     {x y : 0-cell-Globular-Type G} →
     is-reflexive (2-cell-Globular-Type G {x = x} {y = y})
   is-reflexive-2-cell-is-reflexive-Globular-Type =
-    is-reflexive-2-cell-is-reflexive-globular-structure r 
+    is-reflexive-2-cell-is-reflexive-globular-structure r
 ```
 
 ### Reflexive globular types

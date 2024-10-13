@@ -9,11 +9,13 @@
 ```agda
 module structured-types where
 
+open import structured-types.binary-globular-maps public
 open import structured-types.cartesian-products-types-equipped-with-endomorphisms public
 open import structured-types.central-h-spaces public
 open import structured-types.commuting-squares-of-pointed-homotopies public
 open import structured-types.commuting-squares-of-pointed-maps public
 open import structured-types.commuting-triangles-of-pointed-maps public
+open import structured-types.composition-structure-globular-types public
 open import structured-types.conjugation-pointed-types public
 open import structured-types.constant-pointed-maps public
 open import structured-types.contractible-pointed-types public
@@ -30,12 +32,15 @@ open import structured-types.equivalences-h-spaces public
 open import structured-types.equivalences-pointed-arrows public
 open import structured-types.equivalences-types-equipped-with-automorphisms public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
+open import structured-types.exponents-globular-types public
 open import structured-types.faithful-pointed-maps public
 open import structured-types.fibers-of-pointed-maps public
 open import structured-types.finite-multiplication-magmas public
 open import structured-types.function-h-spaces public
 open import structured-types.function-magmas public
 open import structured-types.function-wild-monoids public
+open import structured-types.globular-homotopies public
+open import structured-types.globular-maps public
 open import structured-types.globular-types public
 open import structured-types.h-spaces public
 open import structured-types.initial-pointed-type-equipped-with-automorphism public
@@ -48,7 +53,6 @@ open import structured-types.large-reflexive-globular-types public
 open import structured-types.large-symmetric-globular-types public
 open import structured-types.large-transitive-globular-types public
 open import structured-types.magmas public
-open import structured-types.globular-maps public
 open import structured-types.maps-large-globular-types public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-h-spaces public
@@ -79,6 +83,8 @@ open import structured-types.pointed-unit-type public
 open import structured-types.pointed-universal-property-contractible-types public
 open import structured-types.postcomposition-pointed-maps public
 open import structured-types.precomposition-pointed-maps public
+open import structured-types.products-families-of-globular-types public
+open import structured-types.reflexive-globular-maps public
 open import structured-types.reflexive-globular-types public
 open import structured-types.sets-equipped-with-automorphisms public
 open import structured-types.small-pointed-types public
@@ -90,7 +96,9 @@ open import structured-types.transposition-pointed-span-diagrams public
 open import structured-types.types-equipped-with-automorphisms public
 open import structured-types.types-equipped-with-endomorphisms public
 open import structured-types.uniform-pointed-homotopies public
+open import structured-types.universal-globular-type public
 open import structured-types.universal-property-pointed-equivalences public
+open import structured-types.universal-reflexive-globular-type public
 open import structured-types.unpointed-maps public
 open import structured-types.whiskering-pointed-2-homotopies-concatenation public
 open import structured-types.whiskering-pointed-homotopies-composition public

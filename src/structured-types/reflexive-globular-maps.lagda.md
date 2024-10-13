@@ -19,7 +19,10 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-A {{#concept "reflexive globular map" Agda=reflexive-globular-map}} between two [reflexive globular types](structured-types.reflexive-globular-types.md) `G` and `H` is a [globular map](structured-types.globular-maps.md) `f : G → H` equipped with
+A {{#concept "reflexive globular map" Agda=reflexive-globular-map}} between two
+[reflexive globular types](structured-types.reflexive-globular-types.md) `G` and
+`H` is a [globular map](structured-types.globular-maps.md) `f : G → H` equipped
+with
 
 ## Definitions
 
@@ -68,7 +71,7 @@ record
     UU (l1 ⊔ l2 ⊔ l4)
   where
   coinductive
-  
+
   field
     preserves-refl-0-cell-preserves-refl-globular-map :
       (x : 0-cell-Reflexive-Globular-Type G) →

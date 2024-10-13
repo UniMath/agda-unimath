@@ -20,7 +20,10 @@ open import structured-types.globular-types
 
 ## Idea
 
-Consider a family `G : I → Globular-Type` of [globular types](structured-types.globular-types.md) indexed by a type `I`. The {{#concept "indexed product" Disambiguation="family of globular types" Agda=indexed-product-Globular-Type}} `Π_I G` is the globular type given by
+Consider a family `G : I → Globular-Type` of
+[globular types](structured-types.globular-types.md) indexed by a type `I`. The
+{{#concept "indexed product" Disambiguation="family of globular types" Agda=indexed-product-Globular-Type}}
+`Π_I G` is the globular type given by
 
 ```text
   (Π_I G)₀ := (i : I) → (G i)₀

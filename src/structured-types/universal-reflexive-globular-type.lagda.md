@@ -19,7 +19,10 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-The {{#concpept "universal reflexive globular type"}} `𝒢 l` at [universe level](foundation.universe-levels.md) is a translation from category theory into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of presheaves on the reflexive globular category `Γʳ`
+The {{#concpept "universal reflexive globular type"}} `𝒢 l` at
+[universe level](foundation.universe-levels.md) is a translation from category
+theory into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of
+presheaves on the reflexive globular category `Γʳ`
 
 ```text
       s₀       s₁       s₂
@@ -42,9 +45,9 @@ hold.
 
 The Hofmann-Streicher universe of presheaves on a category `𝒞` is the presheaf
 obtained by applying the functoriality of the right adjoint `ν : Cat → Psh 𝒞` of
-the _category of elements functor_ `∫_𝒞 : Psh 𝒞 → Cat` to the universal
-discrete fibration `π : Pointed-Type → Type`. More specifically, the
-Hofmann-Streicher universe `(𝒰_𝒞 , El_𝒞)` is given by
+the _category of elements functor_ `∫_𝒞 : Psh 𝒞 → Cat` to the universal discrete
+fibration `π : Pointed-Type → Type`. More specifically, the Hofmann-Streicher
+universe `(𝒰_𝒞 , El_𝒞)` is given by
 
 ```text
      𝒰_𝒞 I := Presheaf 𝒞/I

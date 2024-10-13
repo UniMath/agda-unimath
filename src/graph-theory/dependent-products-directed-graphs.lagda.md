@@ -26,7 +26,10 @@ open import graph-theory.sections-dependent-directed-graphs
 
 ## Idea
 
-Given a [dependent directed graph](graph-theory.dependent-directed-graphs.md) `B` over a [directed graphs](graph-theory.directed-graphs.md) `A`, the {{#concept "dependent product" Disambiguation="directed graph" agda=Π-Directed-Graph}} `Π A B` is the directed graph that satisfies the universal property
+Given a [dependent directed graph](graph-theory.dependent-directed-graphs.md)
+`B` over a [directed graphs](graph-theory.directed-graphs.md) `A`, the
+{{#concept "dependent product" Disambiguation="directed graph" agda=Π-Directed-Graph}}
+`Π A B` is the directed graph that satisfies the universal property
 
 ```text
   hom X (Π A B) ≃ hom (X × A) B.
@@ -35,13 +38,19 @@ Given a [dependent directed graph](graph-theory.dependent-directed-graphs.md) `B
 Concretely, the directed graph `Π A B` has
 
 - The type of functions `(x : A₀) → B₀ x` as its type of vertices
-- For any two functions `f₀ g₀ : (x : A₀) → B₀ x`, an edge from `f₀` to `g₀` is an element of type
+- For any two functions `f₀ g₀ : (x : A₀) → B₀ x`, an edge from `f₀` to `g₀` is
+  an element of type
 
   ```text
     (x y : A₀) → A₁ x y → B₁ (f₀ x) (g₀ y).
   ```
 
-The universal property of the dependent product gives that the type of [sections](graph-theory.sections-dependent-directed-graphs.md) of `B` is [equivalent](foundation-core.equivalences.md) to the type of morphisms from the [terminal directed graph](graph-theory.terminal-directed-graphs.md) into `Π A B`, which is in turn equivalent to the type of vertices `f₀` of the Π `Π A B` equipped with a loop `(Π A B)₁ f f`. Indeed, this data consists of:
+The universal property of the dependent product gives that the type of
+[sections](graph-theory.sections-dependent-directed-graphs.md) of `B` is
+[equivalent](foundation-core.equivalences.md) to the type of morphisms from the
+[terminal directed graph](graph-theory.terminal-directed-graphs.md) into
+`Π A B`, which is in turn equivalent to the type of vertices `f₀` of the Π
+`Π A B` equipped with a loop `(Π A B)₁ f f`. Indeed, this data consists of:
 
 - A map `f₀ : A₀ → B₀`
 - A family of maps `f₁ : (x y : A₀) → A₁ x y → B₁ (f₀ x) (f₀ y)`,
@@ -206,7 +215,7 @@ module _
       ( htpy-is-section-uncurry-section-product-Directed-Graph f)
 
   htpy-is-retraction-uncurry-section-product-Directed-Graph :
-    (f : hom-Directed-Graph C (Π-Directed-Graph A B)) → 
+    (f : hom-Directed-Graph C (Π-Directed-Graph A B)) →
     htpy-hom-Directed-Graph
       ( C)
       ( Π-Directed-Graph A B)

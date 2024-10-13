@@ -21,7 +21,9 @@ open import structured-types.products-families-of-globular-types
 
 ## Idea
 
-Consider a family `G : I → Globular-Type` of [globular types](structured-types.globular-types.md) indexed by a type `I`. We construct a globular type `Π_I G`.
+Consider a family `G : I → Globular-Type` of
+[globular types](structured-types.globular-types.md) indexed by a type `I`. We
+construct a globular type `Π_I G`.
 
 ## Definitions
 
@@ -63,7 +65,7 @@ module _
 
   double-exponent-Globular-Type : Globular-Type (l1 ⊔ l2 ⊔ l3) (l1 ⊔ l2 ⊔ l4)
   double-exponent-Globular-Type =
-    double-indexed-product-Globular-Type (λ (x : A) (y : B) → G)  
+    double-indexed-product-Globular-Type (λ (x : A) (y : B) → G)
 ```
 
 ### Evaluating globular maps into exponents of globular types

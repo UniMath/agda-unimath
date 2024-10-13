@@ -23,9 +23,14 @@ open import structured-types.globular-types
 
 ## Idea
 
-The {{#concpept "universal globular type"}} `𝒢 l` at [universe level](foundation.universe-levels.md) `l` has the universe `UU l` as its type of `0`-cells, and uses iterated binary relations for its globular structure.
+The {{#concpept "universal globular type"}} `𝒢 l` at
+[universe level](foundation.universe-levels.md) `l` has the universe `UU l` as
+its type of `0`-cells, and uses iterated binary relations for its globular
+structure.
 
-Specifically, the universal globular type is a translation from category theory into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of presheaves on the globular category `Γ`
+Specifically, the universal globular type is a translation from category theory
+into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of
+presheaves on the globular category `Γ`
 
 ```text
       s₀       s₁       s₂
@@ -53,7 +58,8 @@ We compute a few instances of the slice category `Γ/I`:
     s₀ -----> 1 <----- t₀
   ```
 
-  The functors `s₀ t₀ : Γ/0 → Γ/1` are given by `* ↦ s₀` and `* ↦ t₀`, respectively.
+  The functors `s₀ t₀ : Γ/0 → Γ/1` are given by `* ↦ s₀` and `* ↦ t₀`,
+  respectively.
 
 - The slice category `Γ/2` is the free category on the graph
 
@@ -79,17 +85,28 @@ We compute a few instances of the slice category `Γ/I`:
 
   respectively.
 
-More specifically, the slice category `Γ/n` is isomorphic to the iterated suspension `Σⁿ1` of the terminal category.
-  
+More specifically, the slice category `Γ/n` is isomorphic to the iterated
+suspension `Σⁿ1` of the terminal category.
+
 This means that:
 
-- The type `0`-cells of the universal globular type is the universe of types `UU l`.
-- The type of `1`-cells from `X` to `Y` of the universal globular type is the type of spans from `X` to `Y`.
-- The type of `2`-cells between any two spans `R` and `S` from `X` to `Y` is the type of families of spans from `R x y` to `S x y` indexed by `x : X` and `y : Y`, and so on.
+- The type `0`-cells of the universal globular type is the universe of types
+  `UU l`.
+- The type of `1`-cells from `X` to `Y` of the universal globular type is the
+  type of spans from `X` to `Y`.
+- The type of `2`-cells between any two spans `R` and `S` from `X` to `Y` is the
+  type of families of spans from `R x y` to `S x y` indexed by `x : X` and
+  `y : Y`, and so on.
 
-In other words, the universal globular type `𝒰` has the universe of types as its type of `0`-cells, and for any two types `X` and `Y`, the globular type of `1`-cells is the double [exponent](structured-types.exponents-globular-types.md) `(𝒰^Y)^X` of globular types.
+In other words, the universal globular type `𝒰` has the universe of types as its
+type of `0`-cells, and for any two types `X` and `Y`, the globular type of
+`1`-cells is the double [exponent](structured-types.exponents-globular-types.md)
+`(𝒰^Y)^X` of globular types.
 
-Unfortunately, the termination checking algorithm isn't able to establish that this definition is terminating. Nevertheless, when termination checking is turned off for this definition, the types of the `n`-cells come out correctly for low values of `n`.
+Unfortunately, the termination checking algorithm isn't able to establish that
+this definition is terminating. Nevertheless, when termination checking is
+turned off for this definition, the types of the `n`-cells come out correctly
+for low values of `n`.
 
 ## Definitions
 

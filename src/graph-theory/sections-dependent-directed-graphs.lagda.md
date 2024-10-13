@@ -27,7 +27,10 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-Consider a [dependent directed graph](graph-theory.dependent-directed-graphs.md) `B` over a [directed graph](graph-theory.directed-graphs.md) `A`. A {{#concept "section" Disambiguation="dependent directed graph" Agda=section-Dependent-Directed-Graph}} `f` of `B` consists of
+Consider a [dependent directed graph](graph-theory.dependent-directed-graphs.md)
+`B` over a [directed graph](graph-theory.directed-graphs.md) `A`. A
+{{#concept "section" Disambiguation="dependent directed graph" Agda=section-Dependent-Directed-Graph}}
+`f` of `B` consists of
 
 - A dependent function `f₀ : (x : A₀) → B₀ x`
 - A family of dependent functions
@@ -38,7 +41,9 @@ Consider a [dependent directed graph](graph-theory.dependent-directed-graphs.md)
 
   indexed by `x y : A₀`.
 
-Note that [graph homomorphisms](graph-theory.morphisms-directed-graphs.md) from `A` to `B` are sections of the constant dependent directed graph at `B` over `A`.
+Note that [graph homomorphisms](graph-theory.morphisms-directed-graphs.md) from
+`A` to `B` are sections of the constant dependent directed graph at `B` over
+`A`.
 
 ## Definitions
 

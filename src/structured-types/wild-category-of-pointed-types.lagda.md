@@ -59,7 +59,8 @@ the higher cells are [identities](foundation-core.identity-types.md).
 
 #### The uniform globular structure on dependent pointed function types
 
-- The large globular type of pointed types, pointed maps, and uniform pointed homotopies
+- The large globular type of pointed types, pointed maps, and uniform pointed
+  homotopies
 
 ```agda
 uniform-globular-structure-pointed-Π :
@@ -204,162 +205,104 @@ comp-structure-uniform-pointed-type-Large-Globular-Type = {!!}
 
 #### The uniform large globular structure on pointed types
 
--- ```agda
--- is-transitive-uniform-large-globular-structure-Pointed-Type :
---   is-transitive-large-globular-structure
---     uniform-large-globular-structure-Pointed-Type
--- is-transitive-uniform-large-globular-structure-Pointed-Type =
---   λ where
---   .comp-1-cell-is-transitive-large-globular-structure g f →
---     g ∘∗ f
---   .is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
---     X Y →
---     is-transitive-uniform-globular-structure-pointed-Π
--- ```
+--
+`agda -- is-transitive-uniform-large-globular-structure-Pointed-Type : --   is-transitive-large-globular-structure --     uniform-large-globular-structure-Pointed-Type -- is-transitive-uniform-large-globular-structure-Pointed-Type = --   λ where --   .comp-1-cell-is-transitive-large-globular-structure g f → --     g ∘∗ f --   .is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure --     X Y → --     is-transitive-uniform-globular-structure-pointed-Π -- `
 
 -- #### The uniform noncoherent large wild higher precategory of pointed types
 
--- ```agda
--- uniform-Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory :
---   Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
--- uniform-Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory = {!!}
+-- ```agda -- uniform-Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory :
+-- Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_) --
+uniform-Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory = {!!}
 
--- {-
---   λ where
---   .obj-Noncoherent-Large-Wild-Higher-Precategory →
---     Pointed-Type
---   .hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
---     uniform-large-globular-structure-Pointed-Type
---   .id-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
---     is-reflexive-uniform-large-globular-structure-Pointed-Type
---   .comp-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
---     is-transitive-uniform-large-globular-structure-Pointed-Type -}
--- ```
+-- {- -- λ where -- .obj-Noncoherent-Large-Wild-Higher-Precategory → --
+Pointed-Type --
+.hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory → --
+uniform-large-globular-structure-Pointed-Type --
+.id-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory → --
+is-reflexive-uniform-large-globular-structure-Pointed-Type --
+.comp-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory → --
+is-transitive-uniform-large-globular-structure-Pointed-Type -} -- ```
 
 -- ### The nonuniform definition of the wild category of pointed types
 
 -- #### The nonuniform globular structure on dependent pointed function types
 
--- ```agda
--- globular-structure-pointed-Π :
---   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
---   globular-structure (l1 ⊔ l2) (pointed-Π A B)
--- globular-structure-pointed-Π =
---   λ where
---   .1-cell-globular-structure →
---     pointed-htpy
---   .globular-structure-1-cell-globular-structure f g
---     .1-cell-globular-structure →
---     pointed-2-htpy
---   .globular-structure-1-cell-globular-structure f g
---     .globular-structure-1-cell-globular-structure H K →
---       globular-structure-Id (pointed-2-htpy H K)
+-- ```agda -- globular-structure-pointed-Π : -- {l1 l2 : Level} {A :
+Pointed-Type l1} {B : Pointed-Fam l2 A} → -- globular-structure (l1 ⊔ l2)
+(pointed-Π A B) -- globular-structure-pointed-Π = -- λ where --
+.1-cell-globular-structure → -- pointed-htpy --
+.globular-structure-1-cell-globular-structure f g -- .1-cell-globular-structure
+→ -- pointed-2-htpy -- .globular-structure-1-cell-globular-structure f g --
+.globular-structure-1-cell-globular-structure H K → -- globular-structure-Id
+(pointed-2-htpy H K)
 
--- is-reflexive-globular-structure-pointed-Π :
---   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
---   is-reflexive-globular-structure (globular-structure-pointed-Π {A = A} {B})
--- is-reflexive-globular-structure-pointed-Π =
---   λ where
---   .is-reflexive-1-cell-is-reflexive-globular-structure →
---     refl-pointed-htpy
---   .is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure f g
---     .is-reflexive-1-cell-is-reflexive-globular-structure →
---       refl-pointed-2-htpy
---   .is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure f g
---     .is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
---       H K →
---       is-reflexive-globular-structure-Id (pointed-2-htpy H K)
+-- is-reflexive-globular-structure-pointed-Π : -- {l1 l2 : Level} {A :
+Pointed-Type l1} {B : Pointed-Fam l2 A} → -- is-reflexive-globular-structure
+(globular-structure-pointed-Π {A = A} {B}) --
+is-reflexive-globular-structure-pointed-Π = -- λ where --
+.is-reflexive-1-cell-is-reflexive-globular-structure → -- refl-pointed-htpy --
+.is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure f g --
+.is-reflexive-1-cell-is-reflexive-globular-structure → -- refl-pointed-2-htpy --
+.is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure f g --
+.is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure -- H K →
+-- is-reflexive-globular-structure-Id (pointed-2-htpy H K)
 
--- is-transitive-globular-structure-pointed-Π :
---   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
---   is-transitive-globular-structure (globular-structure-pointed-Π {A = A} {B})
--- is-transitive-globular-structure-pointed-Π =
---   λ where
---   .comp-1-cell-is-transitive-globular-structure {f} {g} {h} H K →
---     concat-pointed-htpy {f = f} {g} {h} K H
---   .is-transitive-globular-structure-1-cell-is-transitive-globular-structure H K
---     .comp-1-cell-is-transitive-globular-structure α β →
---     concat-pointed-2-htpy β α
---   .is-transitive-globular-structure-1-cell-is-transitive-globular-structure H K
---     .is-transitive-globular-structure-1-cell-is-transitive-globular-structure
---       α β →
---       is-transitive-globular-structure-Id (pointed-2-htpy α β)
--- ```
+-- is-transitive-globular-structure-pointed-Π : -- {l1 l2 : Level} {A :
+Pointed-Type l1} {B : Pointed-Fam l2 A} → -- is-transitive-globular-structure
+(globular-structure-pointed-Π {A = A} {B}) --
+is-transitive-globular-structure-pointed-Π = -- λ where --
+.comp-1-cell-is-transitive-globular-structure {f} {g} {h} H K → --
+concat-pointed-htpy {f = f} {g} {h} K H --
+.is-transitive-globular-structure-1-cell-is-transitive-globular-structure H K --
+.comp-1-cell-is-transitive-globular-structure α β → -- concat-pointed-2-htpy β α
+-- .is-transitive-globular-structure-1-cell-is-transitive-globular-structure H K
+-- .is-transitive-globular-structure-1-cell-is-transitive-globular-structure --
+α β → -- is-transitive-globular-structure-Id (pointed-2-htpy α β) -- ```
 
 -- #### The nonuniform large globular structure on pointed types
 
--- ```agda
--- large-globular-structure-Pointed-Type :
---   large-globular-structure (_⊔_) Pointed-Type
--- large-globular-structure-Pointed-Type =
---   λ where
---   .1-cell-large-globular-structure X Y →
---     (X →∗ Y)
---   .globular-structure-1-cell-large-globular-structure X Y →
---     globular-structure-pointed-Π
+-- ```agda -- large-globular-structure-Pointed-Type : --
+large-globular-structure (_⊔_) Pointed-Type --
+large-globular-structure-Pointed-Type = -- λ where --
+.1-cell-large-globular-structure X Y → -- (X →∗ Y) --
+.globular-structure-1-cell-large-globular-structure X Y → --
+globular-structure-pointed-Π
 
--- is-reflexive-large-globular-structure-Pointed-Type :
---   is-reflexive-large-globular-structure large-globular-structure-Pointed-Type
--- is-reflexive-large-globular-structure-Pointed-Type =
---   λ where
---   .is-reflexive-1-cell-is-reflexive-large-globular-structure X →
---     id-pointed-map
---   .is-reflexive-globular-structure-1-cell-is-reflexive-large-globular-structure
---     X Y →
---     is-reflexive-globular-structure-pointed-Π
+-- is-reflexive-large-globular-structure-Pointed-Type : --
+is-reflexive-large-globular-structure large-globular-structure-Pointed-Type --
+is-reflexive-large-globular-structure-Pointed-Type = -- λ where --
+.is-reflexive-1-cell-is-reflexive-large-globular-structure X → -- id-pointed-map
+-- .is-reflexive-globular-structure-1-cell-is-reflexive-large-globular-structure
+-- X Y → -- is-reflexive-globular-structure-pointed-Π
 
--- is-transitive-large-globular-structure-Pointed-Type :
---   is-transitive-large-globular-structure large-globular-structure-Pointed-Type
--- is-transitive-large-globular-structure-Pointed-Type =
---   λ where
---   .comp-1-cell-is-transitive-large-globular-structure g f →
---     g ∘∗ f
---   .is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
---     X Y →
---     is-transitive-globular-structure-pointed-Π
--- ```
+-- is-transitive-large-globular-structure-Pointed-Type : --
+is-transitive-large-globular-structure large-globular-structure-Pointed-Type --
+is-transitive-large-globular-structure-Pointed-Type = -- λ where --
+.comp-1-cell-is-transitive-large-globular-structure g f → -- g ∘∗ f --
+.is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
+-- X Y → -- is-transitive-globular-structure-pointed-Π -- ```
 
--- #### The nonuniform noncoherent large wild higher precategory of pointed types
+-- #### The nonuniform noncoherent large wild higher precategory of pointed
+types
 
--- ```agda
--- Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory :
---   Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
--- Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory = {!!}
--- {-
---   λ where
---   .obj-Noncoherent-Large-Wild-Higher-Precategory →
---     Pointed-Type
---   .hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
---     large-globular-structure-Pointed-Type
---   .id-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
---     is-reflexive-large-globular-structure-Pointed-Type
---   .comp-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
---     is-transitive-large-globular-structure-Pointed-Type -}
--- ```
+--
+`agda -- Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory : --   Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_) -- Pointed-Type-Noncoherent-Large-Wild-Higher-Precategory = {!!} -- {- --   λ where --   .obj-Noncoherent-Large-Wild-Higher-Precategory → --     Pointed-Type --   .hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory → --     large-globular-structure-Pointed-Type --   .id-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory → --     is-reflexive-large-globular-structure-Pointed-Type --   .comp-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory → --     is-transitive-large-globular-structure-Pointed-Type -} -- `
 
 -- ## Properties
 
 -- ### The left unit law for the identity pointed map
 
--- ```agda
--- module _
---   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
---   where
+-- ```agda -- module \_ -- {l1 l2 : Level} {A : Pointed-Type l1} {B :
+Pointed-Type l2} -- where
 
---   left-unit-law-id-pointed-map :
---     (f : A →∗ B) → id-pointed-map ∘∗ f ~∗ f
---   pr1 (left-unit-law-id-pointed-map f) = refl-htpy
---   pr2 (left-unit-law-id-pointed-map f) = right-unit ∙ ap-id (pr2 f)
--- ```
+-- left-unit-law-id-pointed-map : -- (f : A →∗ B) → id-pointed-map ∘∗ f ~∗ f --
+pr1 (left-unit-law-id-pointed-map f) = refl-htpy -- pr2
+(left-unit-law-id-pointed-map f) = right-unit ∙ ap-id (pr2 f) -- ```
 
 -- ### The right unit law for the identity pointed map
 
--- ```agda
--- module _
---   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
---   where
+-- ```agda -- module \_ -- {l1 l2 : Level} {A : Pointed-Type l1} {B :
+Pointed-Type l2} -- where
 
---   right-unit-law-id-pointed-map :
---     (f : A →∗ B) → f ∘∗ id-pointed-map ~∗ f
---   right-unit-law-id-pointed-map = refl-pointed-htpy
--- ```
+-- right-unit-law-id-pointed-map : -- (f : A →∗ B) → f ∘∗ id-pointed-map ~∗ f --
+right-unit-law-id-pointed-map = refl-pointed-htpy -- ```

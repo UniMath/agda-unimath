@@ -16,17 +16,21 @@ open import graph-theory.reflexive-graphs
 
 ## Idea
 
-The {{#concpept "universal reflexive graph"}} `𝒢 l` at [universe level](foundation.universe-levels.md) is a translation from category theory into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of presheaves on the reflexive graph category `Γʳ`
+The {{#concpept "universal reflexive graph"}} `𝒢 l` at
+[universe level](foundation.universe-levels.md) is a translation from category
+theory into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of
+presheaves on the reflexive graph category `Γʳ`
 
 ```text
       s
-    ----->   
+    ----->
   0 <-r--- 1,
     ----->
       t
 ```
 
-in which we have `rs = id` and `rt = id`. The Hofmann-Streicher universe of presheaves on a category `𝒞` is the presheaf
+in which we have `rs = id` and `rt = id`. The Hofmann-Streicher universe of
+presheaves on a category `𝒞` is the presheaf
 
 ```text
      𝒰_𝒞 I := Presheaf 𝒞/I
@@ -41,19 +45,20 @@ We compute a few instances of the slice category `Γʳ/I`:
 
   ```text
         s
-      ----->   
+      ----->
     1 <-r--- r
       ----->
         t
   ```
 
-  in which we have `rs = id` and `rt = id`. In other words, we have an isomorphism of categories `Γʳ/0 ≅ Γʳ`.
+  in which we have `rs = id` and `rt = id`. In other words, we have an
+  isomorphism of categories `Γʳ/0 ≅ Γʳ`.
 
 - The category Γʳ/1 is the category
 
   ```text
          s                          s
-       <-----                     ----->   
+       <-----                     ----->
     rs --r--> s -----> 1 <----- t <-r--- rt
        <-----                     ----->
          t                          t
@@ -70,7 +75,9 @@ This means that the universal reflexive graph `𝒰` can be defined as follows:
     G₀ → H₀ → Type
   ```
 
-  of binary relations from the type `G₀` of vertices of `G` to the type `H₀` of vertices of `H`.
+  of binary relations from the type `G₀` of vertices of `G` to the type `H₀` of
+  vertices of `H`.
+
 - The proof of reflexivity of a reflexive graph `G` is the relation
 
   ```text
@@ -105,7 +112,11 @@ module _
 
 ## Formalization target
 
-There is a _reflexive graph duality theorem_, which asserts that for any reflexive graph `G`, the type of morphisms `hom G 𝒰` from `G` into the universal reflexive graph is equivalent to the type of pairs `(H , f)` consisting of a reflexive graph `H` and a morphism `f : hom H G` from `H` into `G`. Such a result should be formalized in a new file called `reflexive-graph-duality`.
+There is a _reflexive graph duality theorem_, which asserts that for any
+reflexive graph `G`, the type of morphisms `hom G 𝒰` from `G` into the universal
+reflexive graph is equivalent to the type of pairs `(H , f)` consisting of a
+reflexive graph `H` and a morphism `f : hom H G` from `H` into `G`. Such a
+result should be formalized in a new file called `reflexive-graph-duality`.
 
 ## See also
 

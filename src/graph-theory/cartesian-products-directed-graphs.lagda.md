@@ -19,7 +19,9 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-Consider two [directed graphs](graph-theory.directed-graphs.md) `A := (A₀ , A₁)` and `B := (B₀ , B₁)`. The cartesian product of `A` and `B` is the directed graph `A × B` given by
+Consider two [directed graphs](graph-theory.directed-graphs.md) `A := (A₀ , A₁)`
+and `B := (B₀ , B₁)`. The cartesian product of `A` and `B` is the directed graph
+`A × B` given by
 
 ```text
   (A × B)₀ := A₀ × B₀

@@ -18,7 +18,9 @@ open import structured-types.globular-types
 
 ## Idea
 
-Consider three [globular types](structured-types.globular-types.md) `G`, `H`, and `K`. A {{#concept "binary globular map" Agda=binary-globular-map}} `f : G → H → K` consists of a binary map
+Consider three [globular types](structured-types.globular-types.md) `G`, `H`,
+and `K`. A {{#concept "binary globular map" Agda=binary-globular-map}}
+`f : G → H → K` consists of a binary map
 
 ```text
   f₀ : G₀ → H₀ → K₀
@@ -58,3 +60,27 @@ record
             ( 0-cell-binary-globular-map x y)
             ( 0-cell-binary-globular-map x' y'))
 ```
+
+### Commuting squares of binary globular maps
+
+Consider three [globular maps](structured-types.globular-maps.md) `g : G → G'`,
+`h : H → H'`, and `k : K → K'`, and consider two binary globular maps
+
+```text
+  μ : G → H → K
+  μ' : G' → H' → K'.
+```
+
+A {{#concept "commuting square of binary globular maps"}}
+
+```text
+             μ
+    G   H  ----> K
+    |   |        |
+  g |   | h      | k
+    ∨   ∨        ∨
+    G'  H' ----> K'
+             μ'
+```
+
+consists of a

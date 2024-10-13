@@ -17,12 +17,21 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-Consider a [directed graph](graph-theory.directed-graphs.md) `A`. A {{#concept "dependent directed graph}} `B` over `A` consists of:
+Consider a [directed graph](graph-theory.directed-graphs.md) `A`. A
+{{#concept "dependent directed graph}} `B` over `A` consists of:
 
 - A family `B₀ : A₀ → 𝒰` of vertices
-- A family `B₁ : (x y : A₀) → A₁ x y → B₀ x → B₀ y → 𝒰` of [binary relations](foundation.binary-relations.md) between the types of vertices `B₀`, indexed by the type of edges `A₁` in `A`.
+- A family `B₁ : (x y : A₀) → A₁ x y → B₀ x → B₀ y → 𝒰` of
+  [binary relations](foundation.binary-relations.md) between the types of
+  vertices `B₀`, indexed by the type of edges `A₁` in `A`.
 
-This definition may appear overly general. However, one can observe that the type of directed graphs itself is [equivalent](foundation-core.equivalences.md) to the type of dependent directed graphs over the [terminal directed graph](graph-theory.terminal-directed-graphs.md). Furthermore, [graph homomorphisms](graph-theory.morphisms-directed-graphs.md) into the [universal directed graph](graph-theory.universal-directed-graph.md) are equivalent to dependent directed graphs.
+This definition may appear overly general. However, one can observe that the
+type of directed graphs itself is [equivalent](foundation-core.equivalences.md)
+to the type of dependent directed graphs over the
+[terminal directed graph](graph-theory.terminal-directed-graphs.md).
+Furthermore, [graph homomorphisms](graph-theory.morphisms-directed-graphs.md)
+into the [universal directed graph](graph-theory.universal-directed-graph.md)
+are equivalent to dependent directed graphs.
 
 ## Definitions
 
