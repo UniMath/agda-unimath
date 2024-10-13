@@ -60,7 +60,8 @@ module _
   iterate-family-of-maps' :
     (k : ℕ) → ((x : X) → C x → C (f x)) → (x : X) → C x → C (iterate' k f x)
   iterate-family-of-maps' zero-ℕ g x y = y
-  iterate-family-of-maps' (succ-ℕ k) g x y = iterate-family-of-maps' k g (f x) (g x y)
+  iterate-family-of-maps' (succ-ℕ k) g x y =
+    iterate-family-of-maps' k g (f x) (g x y)
 ```
 
 ## Properties
