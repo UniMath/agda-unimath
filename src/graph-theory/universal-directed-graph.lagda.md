@@ -10,6 +10,7 @@ module graph-theory.universal-directed-graph where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import graph-theory.dependent-directed-graphs
 open import graph-theory.directed-graphs
 ```
 
@@ -62,6 +63,8 @@ This means that:
 
 ## Definitions
 
+### The universal directed graph
+
 ```agda
 module _
   (l1 l2 : Level)
@@ -77,6 +80,33 @@ module _
   universal-Directed-Graph : Directed-Graph (lsuc l1) (l1 ⊔ lsuc l2)
   pr1 universal-Directed-Graph = vertex-universal-Directed-Graph
   pr2 universal-Directed-Graph = edge-universal-Directed-Graph
+```
+
+### The universal dependent directed graph
+
+```agda
+module _
+  (l1 l2 : Level)
+  where
+
+  vertex-universal-Dependent-Directed-Graph :
+    vertex-universal-Directed-Graph l1 l2 → UU l1
+  vertex-universal-Dependent-Directed-Graph X = X
+
+  edge-universal-Dependent-Directed-Graph :
+    {X Y : vertex-universal-Directed-Graph l1 l2}
+    (R : edge-universal-Directed-Graph l1 l2 X Y) →
+    vertex-universal-Dependent-Directed-Graph X →
+    vertex-universal-Dependent-Directed-Graph Y → UU l2
+  edge-universal-Dependent-Directed-Graph R x y = R x y
+
+  universal-Dependent-Directed-Graph :
+    Dependent-Directed-Graph l1 l2 (universal-Directed-Graph l1 l2)
+  pr1 universal-Dependent-Directed-Graph =
+    vertex-universal-Dependent-Directed-Graph
+  pr2 universal-Dependent-Directed-Graph =
+    edge-universal-Dependent-Directed-Graph
+    
 ```
 
 ## Formalization target

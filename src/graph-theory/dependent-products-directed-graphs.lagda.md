@@ -260,3 +260,7 @@ module _
   pr2 ev-equiv-hom-Π-Directed-Graph =
     is-equiv-ev-section-Π-Directed-Graph
 ```
+
+## See also
+
+- [Dependent coproduct directed graphs](graph-theory.dependent-coproduct-directed-graphs.md)

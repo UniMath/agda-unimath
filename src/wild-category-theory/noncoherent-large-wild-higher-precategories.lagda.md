@@ -225,11 +225,12 @@ record
         large-globular-type-Noncoherent-Large-Wild-Precategory
 
   id-hom-Noncoherent-Large-Wild-Higher-Precategory :
-    {l1 : Level} (x : obj-Noncoherent-Large-Wild-Higher-Precategory l1) →
+    {l1 : Level} {x : obj-Noncoherent-Large-Wild-Higher-Precategory l1} →
     hom-Noncoherent-Large-Wild-Higher-Precategory x x
-  id-hom-Noncoherent-Large-Wild-Higher-Precategory =
+  id-hom-Noncoherent-Large-Wild-Higher-Precategory {l1} {x} =
     refl-0-cell-is-reflexive-Large-Globular-Type
-      id-structure-Noncoherent-Large-Wild-Higher-Precategory
+      ( id-structure-Noncoherent-Large-Wild-Higher-Precategory)
+      ( x)
 
   id-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
@@ -323,12 +324,12 @@ record
   noncoherent large wild higher precategory
 
 ```agda
-  hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Precategory :
+  hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
     (x : obj-Noncoherent-Large-Wild-Higher-Precategory l1)
     (y : obj-Noncoherent-Large-Wild-Higher-Precategory l2) →
     Noncoherent-Wild-Higher-Precategory (β l1 l2) (β l1 l2)
-  hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Precategory
+  hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
     x y =
     make-Noncoherent-Wild-Higher-Precategory
       ( hom-Noncoherent-Large-Wild-Higher-Precategory x y)
