@@ -21,7 +21,7 @@ The agda-unimath library is compatible with Agda 2.6.4 and can be compiled by
 running `make check` from the root directory of the repository. Learn more about
 using the library locally in our [installation guide](HOWTO-INSTALL.md).
 
-## Participating in the Project
+## Participating in the project
 
 If you are interested in contributing to the agda-unimath project, we encourage
 you to join the conversation in our
