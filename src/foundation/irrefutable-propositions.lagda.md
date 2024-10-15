@@ -24,7 +24,7 @@ open import foundation-core.propositions
 
 ## Idea
 
-The {{#concept "subuniverse of irrefutable propositions" Agda=Irrefutable-Prop}}
+The [subuniverse](foundation.subuniverses.md) of {{#concept "irrefutable propositions" Agda=Irrefutable-Prop}}
 consists of [propositions](foundation-core.propositions.md) `P` for which the
 [double negation](foundation.double-negation.md) `¬¬P` is true.
 
