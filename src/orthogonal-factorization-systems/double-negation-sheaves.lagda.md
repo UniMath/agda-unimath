@@ -35,9 +35,9 @@ that are [null](orthogonal-factorization-systems.null-types.md) at
 [propositions](foundation-core.propositions.md) `P` for which the
 [double negation](foundation.double-negation.md) `¬¬P` is true.
 
-Double negation sheaves were first introduced in Example 3.41 of
-{{#cite RSS20}}, and are considered in the restricted context of
-[sets](foundation-core.sets.md) in {{#cite Swan24}}.
+Double negation sheaves were first introduced in the context of Homotopy Type
+Theory in Example 3.41 of {{#cite RSS20}}, and are considered in the restricted
+context of [sets](foundation-core.sets.md) in {{#cite Swan24}}.
 
 ## Definitions
 
