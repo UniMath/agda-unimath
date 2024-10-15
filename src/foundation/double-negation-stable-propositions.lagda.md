@@ -79,3 +79,5 @@ is-double-negation-stable-neg = double-negation-elim-neg
 ## See also
 
 - [The double negation modality](foundation.double-negation-modality.md)
+- [Irrefutable propositions](foundation.irrefutable-propositions.md) are double
+  negation stable.

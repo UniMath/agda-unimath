@@ -9,6 +9,7 @@ module foundation.irrefutable-propositions where
 ```agda
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.function-types
@@ -95,12 +96,15 @@ module _
 ### The decidability of a proposition is irrefutable
 
 ```agda
+is-irrefutable-is-decidable' : {l : Level} {A : UU l} → ¬¬ (is-decidable A)
+is-irrefutable-is-decidable' H = H (inr (H ∘ inl))
+
 module _
   {l : Level} (P : Prop l)
   where
 
   is-irrefutable-is-decidable-Prop : is-irrefutable (is-decidable-Prop P)
-  is-irrefutable-is-decidable-Prop H = H (inr (H ∘ inl))
+  is-irrefutable-is-decidable-Prop = is-irrefutable-is-decidable'
 
   is-decidable-prop-Irrefutable-Prop : Irrefutable-Prop l
   is-decidable-prop-Irrefutable-Prop =
