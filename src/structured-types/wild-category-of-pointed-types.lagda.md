@@ -337,3 +337,8 @@ comp-structure-Noncoherent-Large-Wild-Higher-Precategory
   pointed-type-Noncoherent-Large-Wild-Higher-Precategory =
   is-transitive-pointed-type-Large-Globular-Type
 ```
+
+## See also
+
+- The categorical laws of pointed maps and pointed homotopies are proven in [pointed homotopies](structured-types.pointed-homotopies.md).
+- The categorical laws of pointed maps and uniform pointed homotopies are proven in [uniform pointed homotopies](structured-types.uniform-pointed-homotopies.md).
