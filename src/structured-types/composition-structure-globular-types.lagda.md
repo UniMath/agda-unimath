@@ -65,18 +65,3 @@ record
 
 open composition-Globular-Type public
 ```
-
-### Globular maps preserving globular composition structure
-
-```agda
-record
-  preserves-composition-globular-map
-    {l1 l2 l3 l4 : Level} {G : Globular-Type l1 l2} {H : Globular-Type l3 l4}
-    (c : composition-Globular-Type G) (d : composition-Globular-Type H) :
-    UU {!!}
-  where
-  coinductive
-  field
-    preserves-comp-binary-globular-map-composition-Globular-Type :
-      {x y z : 0-cell-Globular-Type G}
-```

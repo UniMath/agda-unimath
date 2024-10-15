@@ -221,6 +221,15 @@ open Reflexive-Globular-Type public
 ### The reflexive globular structure on a type given by its identity types
 
 ```agda
+is-reflexive-globular-type-Type :
+  {l : Level} (A : UU l) →
+  is-reflexive-Globular-Type (globular-type-Type A)
+is-reflexive-1-cell-is-reflexive-globular-structure
+  ( is-reflexive-globular-type-Type A) x = refl
+is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+  ( is-reflexive-globular-type-Type A) x y =
+  is-reflexive-globular-type-Type (x ＝ y)
+
 is-reflexive-globular-structure-Id :
   {l : Level} (A : UU l) →
   is-reflexive-globular-structure (globular-structure-Id A)

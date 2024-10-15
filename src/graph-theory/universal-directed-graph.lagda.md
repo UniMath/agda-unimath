@@ -104,9 +104,8 @@ module _
     Dependent-Directed-Graph l1 l2 (universal-Directed-Graph l1 l2)
   pr1 universal-Dependent-Directed-Graph =
     vertex-universal-Dependent-Directed-Graph
-  pr2 universal-Dependent-Directed-Graph =
+  pr2 universal-Dependent-Directed-Graph _ _ =
     edge-universal-Dependent-Directed-Graph
-    
 ```
 
 ## Formalization target

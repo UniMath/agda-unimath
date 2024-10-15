@@ -91,7 +91,8 @@ is-transitive-globular-structure-1-cell-is-transitive-globular-structure
 function-type-Globular-Type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
   Globular-Type (l1 ⊔ l2) (l1 ⊔ l2)
-function-type-Globular-Type A B = dependent-function-type-Globular-Type A (λ _ → B)
+function-type-Globular-Type A B =
+  dependent-function-type-Globular-Type A (λ _ → B)
 
 globular-structure-function-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → globular-structure (l1 ⊔ l2) (A → B)
@@ -129,64 +130,35 @@ is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type
   is-reflexive-function-type-Globular-Type
 
 Type-Large-Reflexive-Globular-Type : Large-Reflexive-Globular-Type lsuc (_⊔_)
-Type-Large-Reflexive-Globular-Type = ?
+large-globular-type-Large-Reflexive-Globular-Type
+  Type-Large-Reflexive-Globular-Type =
+  Type-Large-Globular-Type
+is-reflexive-Large-Reflexive-Globular-Type
+  Type-Large-Reflexive-Globular-Type =
+  is-reflexive-Type-Large-Globular-Type
+
+is-transitive-Type-Large-Globular-Type :
+  is-transitive-Large-Globular-Type Type-Large-Globular-Type
+comp-1-cell-is-transitive-large-globular-structure
+  is-transitive-Type-Large-Globular-Type g f =
+  g ∘ f
+is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
+  is-transitive-Type-Large-Globular-Type f g =
+  is-transitive-function-type-Globular-Type
 ```
 
--- ```agda
--- large-globular-structure-Type : large-globular-structure (_⊔_) (λ l → UU l)
--- large-globular-structure-Type =
---   λ where
---   .1-cell-large-globular-structure X Y → (X → Y)
---   .globular-structure-1-cell-large-globular-structure X Y → globular-structure-Π
+### The noncoherent large wild higher precategory of types
 
--- is-reflexive-large-globular-structure-Type :
---   is-reflexive-large-globular-structure large-globular-structure-Type
--- is-reflexive-large-globular-structure-Type =
---   λ where
---   .is-reflexive-1-cell-is-reflexive-large-globular-structure X → id
---   .is-reflexive-globular-structure-1-cell-is-reflexive-large-globular-structure
---     X Y →
---     is-reflexive-globular-structure-Π
-
--- is-transitive-large-globular-structure-Type :
---   is-transitive-large-globular-structure large-globular-structure-Type
--- is-transitive-large-globular-structure-Type =
---   λ where
---   .comp-1-cell-is-transitive-large-globular-structure g f → g ∘ f
---   .is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
---     X Y →
---     is-transitive-globular-structure-Π
--- ```
-
--- ### The noncoherent large wild higher precategory of types
-
--- ```agda
--- Type-Large-Globular-Type :
---   Large-Globular-Type lsuc (_⊔_)
--- 0-cell-Large-Globular-Type Type-Large-Globular-Type l1 = UU l1
--- 1-cell-globular-type-Large-Globular-Type Type-Large-Globular-Type X Y =
---   {!!}
-
--- Type-Noncoherent-Large-Wild-Higher-Precategory :
---   Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
--- large-globular-type-Noncoherent-Large-Wild-Precategory
---   Type-Noncoherent-Large-Wild-Higher-Precategory =
---   {!Type-Large-Globular-Type!}
--- id-structure-Noncoherent-Large-Wild-Higher-Precategory
---   Type-Noncoherent-Large-Wild-Higher-Precategory =
---   {!!}
--- comp-structure-Noncoherent-Large-Wild-Higher-Precategory
---   Type-Noncoherent-Large-Wild-Higher-Precategory =
---   {!!}
-
-
--- --   λ where
--- --   .obj-Noncoherent-Large-Wild-Higher-Precategory l →
--- --     UU l
--- --   .hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
--- --     large-globular-structure-Type
--- --   .id-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
--- --     is-reflexive-large-globular-structure-Type
--- --   .comp-hom-globular-structure-Noncoherent-Large-Wild-Higher-Precategory →
--- --     is-transitive-large-globular-structure-Type
--- -- ```
+```agda
+Type-Noncoherent-Large-Wild-Higher-Precategory :
+  Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
+large-globular-type-Noncoherent-Large-Wild-Precategory
+  Type-Noncoherent-Large-Wild-Higher-Precategory =
+  Type-Large-Globular-Type
+id-structure-Noncoherent-Large-Wild-Higher-Precategory
+  Type-Noncoherent-Large-Wild-Higher-Precategory =
+  is-reflexive-Type-Large-Globular-Type
+comp-structure-Noncoherent-Large-Wild-Higher-Precategory
+  Type-Noncoherent-Large-Wild-Higher-Precategory =
+  is-transitive-Type-Large-Globular-Type
+```

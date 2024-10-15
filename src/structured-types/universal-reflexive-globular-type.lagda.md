@@ -97,12 +97,6 @@ module _
   0-cell-universal-Reflexive-Globular-Type : UU (lsuc l1 ⊔ lsuc l2)
   0-cell-universal-Reflexive-Globular-Type =
     Reflexive-Globular-Type l1 l2
-
-  1-cell-reflexive-globular-type-universal-Reflexive-Globular-Type :
-    (G H : 0-cell-universal-Reflexive-Globular-Type) →
-    Reflexive-Globular-Type {!!} {!!}
-  1-cell-reflexive-globular-type-universal-Reflexive-Globular-Type G H =
-    {!!}
 ```
 
 ## See also

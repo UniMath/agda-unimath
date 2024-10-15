@@ -199,6 +199,16 @@ open Transitive-Globular-Type public
 ### The transitive globular structure on a type given by its identity types
 
 ```agda
+is-transitive-globular-type-Type :
+  {l : Level} (A : UU l) →
+  is-transitive-Globular-Type (globular-type-Type A)
+comp-1-cell-is-transitive-globular-structure
+  ( is-transitive-globular-type-Type A) q p =
+  p ∙ q
+is-transitive-globular-structure-1-cell-is-transitive-globular-structure
+  ( is-transitive-globular-type-Type A) x y =
+  is-transitive-globular-type-Type (x ＝ y)
+
 is-transitive-globular-structure-Id :
   {l : Level} (A : UU l) →
   is-transitive-globular-structure (globular-structure-Id A)
