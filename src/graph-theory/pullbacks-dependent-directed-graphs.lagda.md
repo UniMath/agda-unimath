@@ -59,6 +59,6 @@ module _
     Dependent-Directed-Graph l5 l6 C
   pr1 pullback-Dependent-Directed-Graph =
     vertex-pullback-Dependent-Directed-Graph
-  pr2 pullback-Dependent-Directed-Graph =
+  pr2 pullback-Dependent-Directed-Graph _ _ =
     edge-pullback-Dependent-Directed-Graph
 ```

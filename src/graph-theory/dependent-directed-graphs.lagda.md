@@ -44,7 +44,7 @@ Dependent-Directed-Graph :
 Dependent-Directed-Graph l3 l4 A =
   Σ ( vertex-Directed-Graph A → UU l3)
     ( λ B₀ →
-      {x y : vertex-Directed-Graph A} →
+      (x y : vertex-Directed-Graph A) →
       edge-Directed-Graph A x y → B₀ x → B₀ y → UU l4)
 
 module _
@@ -60,7 +60,7 @@ module _
     edge-Directed-Graph A x y →
     vertex-Dependent-Directed-Graph x →
     vertex-Dependent-Directed-Graph y → UU l4
-  edge-Dependent-Directed-Graph = pr2 B
+  edge-Dependent-Directed-Graph = pr2 B _ _
 ```
 
 ### Constant dependent directed graphs
@@ -85,7 +85,7 @@ module _
   constant-Dependent-Directed-Graph : Dependent-Directed-Graph l3 l4 A
   pr1 constant-Dependent-Directed-Graph =
     vertex-constant-Dependent-Directed-Graph
-  pr2 constant-Dependent-Directed-Graph =
+  pr2 constant-Dependent-Directed-Graph _ _ =
     edge-constant-Dependent-Directed-Graph
 ```
 
