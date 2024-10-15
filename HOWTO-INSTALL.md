@@ -4,7 +4,7 @@
 
 ### Quick setup
 
-To work or experiment with the `agda-unimath` library on your machine, you will
+To work or experiment with the agda-unimath library on your machine, you will
 need to have `agda` version 2.6.4 installed, and a suitable editor such as
 [Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/). The following instructions
@@ -16,7 +16,7 @@ will help you on your way right away:
 
 ### Setup for contributors
 
-In order to contribute to the `agda-unimath` library you will additionally need:
+In order to contribute to the agda-unimath library you will additionally need:
 
 1. `git`
 2. `make`
@@ -97,7 +97,7 @@ to adjust the remote addresses of your clone.
 ### Creating a branch within your clone of the library
 
 Once you've cloned the library, we highly recommend you to preserve the `master`
-branch in its original state and up to date with the official `agda-unimath`
+branch in its original state and up to date with the official agda-unimath
 repository. This means you should avoid making changes directly to the `master`
 branch.
 
@@ -122,7 +122,7 @@ working branches when necessary.
 
 ## Installing Agda {#installing-agda}
 
-The `agda-unimath` library is built and verified with Agda 2.6.4, and we provide
+The agda-unimath library is built and verified with Agda 2.6.4, and we provide
 two methods for installation: with or without the package manager
 [Nix](https://nixos.org/). Nix streamlines the installation of Agda and its
 dependencies, providing a consistent and reproducible environment for the
@@ -159,8 +159,8 @@ provided on the Agda documentation page.
 
 We recommend either [Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/) (VSCode) as your editor
-when working with the `agda-unimath` library. Both editors offer support for
-Agda development, and the choice between them is largely a matter of personal
+when working with the agda-unimath library. Both editors offer support for Agda
+development, and the choice between them is largely a matter of personal
 preference. Below, you'll find setup instructions for each editor to help you
 configure your preferred environment.
 
@@ -183,9 +183,9 @@ opening Emacs outside the project.
 
 #### Literate Agda files
 
-The `agda-unimath` library is written in literate markdown Agda. Add the
-following line to your `.emacs` file to enable Emacs to handle literate Agda
-files with the `.lagda.md` extension:
+The agda-unimath library is written in literate markdown Agda. Add the following
+line to your `.emacs` file to enable Emacs to handle literate Agda files with
+the `.lagda.md` extension:
 
 ```elisp
 (setq auto-mode-alist (cons '("\\.lagda.md$" . agda2-mode) auto-mode-alist))
@@ -193,7 +193,7 @@ files with the `.lagda.md` extension:
 
 #### Special symbols
 
-The `agda-unimath` library employs two notations for the identity type:
+The agda-unimath library employs two notations for the identity type:
 Martin-Löf's original notation `Id` and an infix notation `_＝_`. The infix
 notation's equals sign is not the standard one, but rather the
 [full width equals sign](https://codepoints.net/U+ff1d). Observe that the full
@@ -215,7 +215,7 @@ width equals sign `＝`. While you're at it, you can also add the key sequence
 
 #### 80-character limit
 
-The `agda-unimath` library maintains an 80-character limit on the length of most
+The agda-unimath library maintains an 80-character limit on the length of most
 lines in the source code (see [CODINGSTYLE](CODINGSTYLE.md#character-limit) for
 a list of exceptions). This limit is to improve readability, both in your
 programming environment and on our website. To display a vertical ruler marking
@@ -229,7 +229,7 @@ to your `.emacs` file.
 
 ### VSCode
 
-The `agda-unimath` library comes with a predefined VSCode workspace. Open the
+The agda-unimath library comes with a predefined VSCode workspace. Open the
 folder main repository folder in VSCode, and it should automatically recognize
 the workspace and apply the appropriate settings.
 
@@ -298,14 +298,14 @@ in the library.
 ## Creating a setup for contributors {#contributor-setup}
 
 We welcome and appreciate contributions from the community. If you're interested
-in contributing to the `agda-unimath` library, you can follow the instructions
+in contributing to the agda-unimath library, you can follow the instructions
 below to ensure a smooth setup and workflow. Also, please make sure to follow
 our [coding style](CODINGSTYLE.md) and
 [design principles](DESIGN-PRINCIPLES.md).
 
 ### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
 
-The `agda-unimath` library includes [pre-commit](https://pre-commit.com/) hooks
+The agda-unimath library includes [pre-commit](https://pre-commit.com/) hooks
 that enforce [basic formatting rules](CONTRIBUTING.md). These will inform you of
 some rule violations in your commits, and for most violations they will also
 automatically apply the required changes.

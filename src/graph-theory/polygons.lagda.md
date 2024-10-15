@@ -36,7 +36,7 @@ graph with vertices the underlying type of the
 [standard cyclic group](elementary-number-theory.standard-cyclic-groups.md)
 `ℤ-Mod k` and an edge from each `x ∈ ℤ-Mod k` to `x+1`. This defines for each
 `k ∈ ℕ` the type of all `k`-gons. The type of all `k`-gons is a concrete
-presentation of the [dihedral group](group-theory.dihedral-groups.md) `D_k`.
+presentation of the [dihedral group](group-theory.dihedral-groups.md) `Dₖ`.
 
 ## Definition
 
