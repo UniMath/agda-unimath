@@ -37,6 +37,7 @@ open import category-theory.copresheaf-categories public
 open import category-theory.coproducts-in-precategories public
 open import category-theory.cores-categories public
 open import category-theory.cores-precategories public
+open import category-theory.coslice-precategories public
 open import category-theory.dependent-composition-operations-over-precategories public
 open import category-theory.dependent-products-of-categories public
 open import category-theory.dependent-products-of-large-categories public
