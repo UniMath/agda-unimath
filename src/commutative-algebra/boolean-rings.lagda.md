@@ -19,7 +19,7 @@ open import ring-theory.idempotent-elements-rings
 
 ## Idea
 
-A **boolean ring** is a commutative ring in wich every element is idempotent.
+A **boolean ring** is a commutative ring in which every element is idempotent.
 
 ## Definition
 
