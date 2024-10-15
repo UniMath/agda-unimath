@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.strictly-involutive-identity-types
 open import foundation.subsingleton-induction
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
@@ -259,19 +260,14 @@ module _
   associative-composition-operation-total-precategory-Displayed-Precategory :
     associative-composition-operation-binary-family-Set
       ( hom-set-total-precategory-Displayed-Precategory)
-  pr1
-    associative-composition-operation-total-precategory-Displayed-Precategory =
-    comp-hom-total-precategory-Displayed-Precategory
-  pr1
-    ( pr2
-      associative-composition-operation-total-precategory-Displayed-Precategory
-        h g f) =
-    associative-comp-hom-total-precategory-Displayed-Precategory h g f
-  pr2
-    ( pr2
-      associative-composition-operation-total-precategory-Displayed-Precategory
-      h g f) =
-    inv (associative-comp-hom-total-precategory-Displayed-Precategory h g f)
+  associative-composition-operation-total-precategory-Displayed-Precategory =
+    ( ( comp-hom-total-precategory-Displayed-Precategory) ,
+      ( λ h g f →
+        involutive-eq-eq
+          ( associative-comp-hom-total-precategory-Displayed-Precategory
+            ( h)
+            ( g)
+            ( f))))
 
   id-hom-total-precategory-Displayed-Precategory :
     {x : obj-total-precategory-Displayed-Precategory} →
