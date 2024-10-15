@@ -18,9 +18,9 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.law-of-excluded-middle
 open import foundation.negation
-open import foundation.unit-type
 open import foundation.subtype-identity-principle
 open import foundation.subuniverses
+open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
