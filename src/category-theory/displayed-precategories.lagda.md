@@ -261,13 +261,10 @@ module _
     associative-composition-operation-binary-family-Set
       ( hom-set-total-precategory-Displayed-Precategory)
   associative-composition-operation-total-precategory-Displayed-Precategory =
-    ( ( comp-hom-total-precategory-Displayed-Precategory) ,
-      ( λ h g f →
-        involutive-eq-eq
-          ( associative-comp-hom-total-precategory-Displayed-Precategory
-            ( h)
-            ( g)
-            ( f))))
+    ( comp-hom-total-precategory-Displayed-Precategory) ,
+    ( λ h g f →
+      involutive-eq-eq
+        ( associative-comp-hom-total-precategory-Displayed-Precategory h g f))
 
   id-hom-total-precategory-Displayed-Precategory :
     {x : obj-total-precategory-Displayed-Precategory} →
