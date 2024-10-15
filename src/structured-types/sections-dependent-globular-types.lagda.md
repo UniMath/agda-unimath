@@ -1,0 +1,70 @@
+# Sections of dependent globular types
+
+```agda
+{-# OPTIONS --guardedness #-}
+
+module structured-types.sections-dependent-globular-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.universe-levels
+
+open import structured-types.dependent-globular-types
+open import structured-types.globular-types
+```
+
+</details>
+
+## Idea
+
+Consider a [dependent globular type](structured-types.dependent-globular-types.md) `H` over a [globular type](structured-types.globular-types.md) `G`. A {{#concept "section" Disambiguation="dependent globular type" Agda=section-Dependent-Globular-Type}} `f` of `H` consists of
+
+```text
+  s₀ : (x : G₀) → H₀ x
+  s' : {x y : G₀} (y : H₀ x) (y' : H₀ x') → section (H' y y').
+```
+
+## Definitions
+
+### Sections of dependent globular types
+
+```agda
+record
+  section-Dependent-Globular-Type
+    {l1 l2 l3 l4 : Level} {G : Globular-Type l1 l2}
+    (H : Dependent-Globular-Type l3 l4 G) : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  where
+  coinductive
+
+  field
+    0-cell-section-Dependent-Globular-Type :
+      (x : 0-cell-Globular-Type G) → 0-cell-Dependent-Globular-Type H x
+
+  field
+    1-cell-section-section-Dependent-Globular-Type :
+      {x x' : 0-cell-Globular-Type G} →
+      (y : 0-cell-Dependent-Globular-Type H x)
+      (y' : 0-cell-Dependent-Globular-Type H x') →
+      section-Dependent-Globular-Type
+        ( 1-cell-dependent-globular-type-Dependent-Globular-Type H y y')
+        
+open section-Dependent-Globular-Type public
+
+module _
+  {l1 l2 l3 l4 : Level} {G : Globular-Type l1 l2}
+  (H : Dependent-Globular-Type l3 l4 G)
+  (s : section-Dependent-Globular-Type H)
+  where
+
+  1-cell-section-Dependent-Globular-Type :
+    {x x' : 0-cell-Globular-Type G}
+    (y : 0-cell-Dependent-Globular-Type H x)
+    (y' : 0-cell-Dependent-Globular-Type H x')
+    (f : 1-cell-Globular-Type G x x') →
+    1-cell-Dependent-Globular-Type H y y' f
+  1-cell-section-Dependent-Globular-Type y y' =
+    0-cell-section-Dependent-Globular-Type
+      ( 1-cell-section-section-Dependent-Globular-Type s y y')
+```
