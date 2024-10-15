@@ -335,19 +335,19 @@ is an equivalence for every family `P` of `k`-truncated types. Then it follows
 that the precomposition function
 
 ```text
-  - ∘ f : ((b : B) → ∥fiber f b∥_k) → ((a : A) → ∥fiber f (f a)∥_k)
+  - ∘ f : ((b : B) → ║fiber f b║ₖ) → ((a : A) → ║fiber f (f a)║ₖ)
 ```
 
 is an equivalence. In particular, the element `λ a → η (a , refl)` in the
-codomain of this equivalence induces an element `c b : ∥fiber f b∥_k` for each
+codomain of this equivalence induces an element `c b : ║fiber f b║ₖ` for each
 `b : B`. We take these elements as our centers of contraction. Note that by
 construction, we have an identification `c (f a) ＝ η (a , refl)`.
 
-To construct a contraction of `∥fiber f b∥_k` for each `b : B`, we have to show
+To construct a contraction of `║fiber f b║ₖ` for each `b : B`, we have to show
 that
 
 ```text
-  (b : B) (u : ∥fiber f b∥_k) → c b ＝ u.
+  (b : B) (u : ║fiber f b║ₖ) → c b ＝ u.
 ```
 
 Since the type `c b ＝ u` is `k`-truncated, this type is equivalent to the type

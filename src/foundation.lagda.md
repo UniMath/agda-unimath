@@ -341,7 +341,6 @@ open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.retracts-of-maps public
 open import foundation.retracts-of-types public
-open import foundation.russells-paradox public
 open import foundation.sections public
 open import foundation.separated-types public
 open import foundation.sequences public

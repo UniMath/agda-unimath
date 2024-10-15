@@ -62,7 +62,7 @@ satisfying the following four conditions
 
 The type of {{#concept "Dedekind real numbers" Agda=ℝ}} is the type of all
 Dedekind cuts. The Dedekind real numbers will be taken as the standard
-definition of the real numbers in the `agda-unimath` library.
+definition of the real numbers in the agda-unimath library.
 
 ## Definition
 

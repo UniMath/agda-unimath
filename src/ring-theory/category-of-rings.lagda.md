@@ -21,7 +21,7 @@ open import ring-theory.precategory-of-rings
 ## Idea
 
 The [large category](category-theory.large-categories.md) `Ring-Category` of
-[rings](ring-theory.rings.md) is the large category consistsing of rings and
+[rings](ring-theory.rings.md) is the large category consisting of rings and
 [ring homomorphisms](ring-theory.homomorphisms-rings.md).
 
 ## Definitions
