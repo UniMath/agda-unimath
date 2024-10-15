@@ -4,7 +4,7 @@
 
 {{#include tables/higher-modalities.md}}
 
-## Files in the orthogonal factorization systems folder
+## Modules in the orthogonal factorization systems namespace
 
 ```agda
 module orthogonal-factorization-systems where
@@ -22,6 +22,7 @@ open import orthogonal-factorization-systems.factorization-operations-global-fun
 open import orthogonal-factorization-systems.factorizations-of-maps public
 open import orthogonal-factorization-systems.factorizations-of-maps-function-classes public
 open import orthogonal-factorization-systems.factorizations-of-maps-global-function-classes public
+open import orthogonal-factorization-systems.fiberwise-orthogonal-maps public
 open import orthogonal-factorization-systems.function-classes public
 open import orthogonal-factorization-systems.functoriality-higher-modalities public
 open import orthogonal-factorization-systems.functoriality-pullback-hom public
@@ -59,6 +60,7 @@ open import orthogonal-factorization-systems.sigma-closed-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses public
 open import orthogonal-factorization-systems.stable-orthogonal-factorization-systems public
+open import orthogonal-factorization-systems.types-colocal-at-maps public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.wide-function-classes public
 open import orthogonal-factorization-systems.wide-global-function-classes public

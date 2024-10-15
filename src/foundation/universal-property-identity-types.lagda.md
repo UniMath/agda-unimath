@@ -21,15 +21,17 @@ open import foundation.preunivalence
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.families-of-equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
-open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -86,6 +88,29 @@ is-equiv-ev-refl' :
 is-equiv-ev-refl' a = is-equiv-map-equiv (equiv-ev-refl' a)
 ```
 
+### The type of fiberwise maps from `Id a` to a torsorial type family `B` is equivalent to the type of fiberwise equivalences
+
+Note that the type of fiberwise equivalences is a
+[subtype](foundation-core.subtypes.md) of the type of fiberwise maps. By the
+[fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md),
+it is a [full subtype](foundation.full-subtypes.md), hence it is equivalent to
+the whole type of fiberwise maps.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (a : A) {B : A → UU l2}
+  (is-torsorial-B : is-torsorial B)
+  where
+
+  equiv-fam-map-fam-equiv-is-torsorial :
+    ((x : A) → (a ＝ x) ≃ B x) ≃ ((x : A) → (a ＝ x) → B x)
+  equiv-fam-map-fam-equiv-is-torsorial =
+    ( equiv-inclusion-is-full-subtype
+      ( λ h → Π-Prop A (λ a → is-equiv-Prop (h a)))
+      ( fundamental-theorem-id is-torsorial-B)) ∘e
+    ( equiv-fiberwise-equiv-fam-equiv _ _)
+```
+
 ### `Id : A → (A → 𝒰)` is an embedding
 
 We first show that [the preunivalence axiom](foundation.preunivalence.md)
@@ -138,10 +163,7 @@ module _
           ( equiv-tot
             ( λ x →
               ( equiv-ev-refl x) ∘e
-              ( equiv-inclusion-is-full-subtype
-                ( Π-Prop A ∘ (is-equiv-Prop ∘_))
-                ( fundamental-theorem-id (is-torsorial-Id a))) ∘e
-              ( distributive-Π-Σ))))
+              ( equiv-fam-map-fam-equiv-is-torsorial x (is-torsorial-Id a)))))
         ( emb-tot
           ( λ x →
             comp-emb
@@ -209,6 +231,44 @@ module _
   is-prop-total-family-of-equivalences-Id =
     is-prop-is-proof-irrelevant
       ( is-proof-irrelevant-total-family-of-equivalences-Id)
+```
+
+### The type of point-preserving fiberwise equivalences between `Id x` and a pointed torsorial type family is contractible
+
+**Proof:** Since `ev-refl` is an equivalence, it follows that its fibers are
+contractible. Explicitly, given a point `b : B a`, the type of maps
+`h : (x : A) → (a = x) → B x` such that `h a refl = b` is contractible. But the
+type of fiberwise maps is equivalent to the type of fiberwise equivalences.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {a : A} {B : A → UU l2} (b : B a)
+  (is-torsorial-B : is-torsorial B)
+  where
+
+  abstract
+    is-torsorial-pointed-fam-equiv-is-torsorial :
+      is-torsorial
+        ( λ (e : (x : A) → (a ＝ x) ≃ B x) →
+          map-equiv (e a) refl ＝ b)
+    is-torsorial-pointed-fam-equiv-is-torsorial =
+      is-contr-equiv'
+        ( fiber (ev-refl a {B = λ x _ → B x}) b)
+        ( equiv-Σ _
+          ( inv-equiv
+            ( equiv-fam-map-fam-equiv-is-torsorial a is-torsorial-B))
+          ( λ h →
+            equiv-inv-concat
+              ( inv
+                ( ap
+                  ( ev-refl a)
+                  ( is-section-map-inv-equiv
+                    ( equiv-fam-map-fam-equiv-is-torsorial a is-torsorial-B)
+                    ( h))))
+              ( b)))
+        ( is-contr-map-is-equiv
+          ( is-equiv-ev-refl a)
+          ( b))
 ```
 
 ## See also

@@ -4,7 +4,7 @@
 {-# OPTIONS --rewriting #-}
 ```
 
-## Files in the reflection folder
+## Modules in the reflection namespace
 
 ```agda
 module reflection where

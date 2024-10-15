@@ -26,6 +26,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
+open import foundation-core.discrete-types
 open import foundation-core.torsorial-type-families
 ```
 
@@ -116,6 +117,9 @@ is-decidable-Eq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-Eq-ℕ m n
 has-decidable-equality-ℕ : has-decidable-equality ℕ
 has-decidable-equality-ℕ x y =
   is-decidable-iff (eq-Eq-ℕ x y) Eq-eq-ℕ (is-decidable-Eq-ℕ x y)
+
+ℕ-Discrete-Type : Discrete-Type lzero
+ℕ-Discrete-Type = (ℕ , has-decidable-equality-ℕ)
 
 decidable-eq-ℕ : ℕ → ℕ → Decidable-Prop lzero
 pr1 (decidable-eq-ℕ m n) = (m ＝ n)

@@ -25,7 +25,9 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is a set if its identity types are propositions.
+A type is a {{#concept "set" Agda=is-set}} if its
+[identity types](foundation-core.identity-types.md) are
+[propositions](foundation-core.propositions.md).
 
 ## Definition
 
@@ -84,6 +86,27 @@ module _
     axiom-K-is-set H x p =
       ( inv (contraction (is-proof-irrelevant-is-prop (H x x) refl) refl)) ∙
       ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
+```
+
+### A type is a set if and only if it satisfies uniqueness of identity proofs
+
+A type `A` is said to satisfy
+{{#concept "uniqueness of identity proofs" Agda=has-uip}} if for all elements
+`x y : A` all equality proofs `x ＝ y` are equal.
+
+```agda
+has-uip : {l : Level} → UU l → UU l
+has-uip A = (x y : A) → all-elements-equal (x ＝ y)
+
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-set-has-uip : is-set A → has-uip A
+  is-set-has-uip is-set-A x y = eq-is-prop' (is-set-A x y)
+
+  has-uip-is-set : has-uip A → is-set A
+  has-uip-is-set uip-A x y = is-prop-all-elements-equal (uip-A x y)
 ```
 
 ### If a reflexive binary relation maps into the identity type of `A`, then `A` is a set

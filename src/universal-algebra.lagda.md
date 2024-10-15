@@ -1,6 +1,6 @@
-# Universal Algebra
+# Universal algebra
 
-## Files in the universal algebra folder
+## Modules in the universal algebra namespace
 
 ```agda
 module universal-algebra where

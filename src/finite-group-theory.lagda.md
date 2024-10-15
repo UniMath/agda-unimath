@@ -1,6 +1,6 @@
 # Finite group theory
 
-## Files in the finite group theory folder
+## Modules in the finite group theory namespace
 
 ```agda
 module finite-group-theory where

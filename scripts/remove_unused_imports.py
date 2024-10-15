@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ ./scripts/remove_unused_imports.py
+# $ ./scripts/remove_unused_imports.py [optional: path_to_file_or_folder ...]
 
 import os
+import sys
 import pathlib
 import shutil
 import utils
@@ -91,8 +92,27 @@ def process_agda_file(agda_file, agda_options, root, temp_dir):
             f"'{agda_module}' No unused imports.")
 
 
+def get_agda_files(path):
+    if os.path.isfile(path):
+        return [path] if utils.is_agda_file(pathlib.Path(path)) else []
+    elif os.path.isdir(path):
+        def filter_agda_files(f): return utils.is_agda_file(pathlib.Path(f)) and os.path.dirname(f) != path
+        return list(filter(filter_agda_files, utils.get_files_recursive(path)))
+    else:
+        utils.multithread.thread_safe_print(f"Warning: '{path}' is not a valid file or directory. Skipping.")
+        return []
+
+
 if __name__ == '__main__':
     root = 'src'
+    if len(sys.argv) > 1:
+        input_paths = sys.argv[1:]
+        # root = os.path.commonpath(input_paths)  # Find common root for all inputs
+    else:
+        # Default behavior when no argument is provided
+        root = 'src'
+        input_paths = [root]
+
     temp_dir = 'temp'
     status = 0
     agda_options = '--without-K --exact-split --no-import-sorts --auto-inline --no-caching'
@@ -100,16 +120,24 @@ if __name__ == '__main__':
     temp_root = os.path.join(root, temp_dir)
     shutil.rmtree(temp_root, ignore_errors=True)
 
-    def filter_agda_files(f): return utils.is_agda_file(
-        pathlib.Path(f)) and os.path.dirname(f) != root
+    # Get Agda files based on the inputs
+    agda_files = []
+    for path in input_paths:
+        agda_files.extend(get_agda_files(path))
 
-    # Sort the files by most recently changed
-    agda_files = sorted(
-        filter(filter_agda_files, utils.get_files_recursive(root)), key=lambda t: -os.stat(t).st_mtime)
+    if not agda_files:
+        utils.multithread.thread_safe_print("No Agda files found in the specified paths.")
+        sys.exit(1)
+
+    # Sort the files by Git modification status and last commit date
+    def sort_key(file):
+        return (-int(utils.is_file_modified(file)), -utils.get_git_last_modified(file))
+
+    sorted_agda_files = sorted(agda_files, key=sort_key)
 
     with ThreadPoolExecutor() as executor:
         executor.map(lambda file: process_agda_file(
-            file, agda_options, root, temp_dir), agda_files)
+            file, agda_options, root, temp_dir), sorted_agda_files)
 
     shutil.rmtree(temp_root)
     sys.exit(status)

@@ -315,7 +315,7 @@ equiv-type-subtype :
   ( Σ A P) ≃ (Σ A Q)
 pr1 (equiv-type-subtype is-subtype-P is-subtype-Q f g) = tot f
 pr2 (equiv-type-subtype is-subtype-P is-subtype-Q f g) =
-  is-equiv-tot-is-fiberwise-equiv {f = f}
+  is-equiv-tot-is-fiberwise-equiv
     ( λ x →
       is-equiv-has-converse-is-prop
         ( is-subtype-P x)
@@ -359,7 +359,7 @@ abstract
     (is-subtype-P : is-subtype P) (is-subtype-Q : is-subtype Q)
     (f : A → B) (g : (x : A) → P x → Q (f x)) →
     (is-equiv-f : is-equiv f) →
-    ((y : B) → (Q y) → P (map-inv-is-equiv is-equiv-f y)) →
+    ((y : B) → Q y → P (map-inv-is-equiv is-equiv-f y)) →
     is-equiv (map-Σ Q f g)
   is-equiv-subtype-is-equiv' {P = P} {Q}
     is-subtype-P is-subtype-Q f g is-equiv-f h =

@@ -13,9 +13,11 @@ open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
+open import elementary-number-theory.fermat-numbers
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.kolakoski-sequence
+open import elementary-number-theory.multiset-coefficients
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.pisano-periods
 
@@ -42,11 +44,40 @@ A000002 : ℕ → ℕ
 A000002 = kolakoski
 ```
 
+### [A000004](https://oeis.org/A000004) The zero sequence
+
+```agda
+A000004 : ℕ → ℕ
+A000004 _ = zero-ℕ
+```
+
+### [A000007](https://oeis.org/A000007) The characteristic function for 0
+
+```agda
+A000007 : ℕ → ℕ
+A000007 zero-ℕ = 1
+A000007 (succ-ℕ _) = 0
+```
+
 ### [A000010](https://oeis.org/A000010) Euler's totient function
 
 ```agda
 A000010 : ℕ → ℕ
 A000010 = eulers-totient-function-relatively-prime
+```
+
+### [A000012](https://oeis.org/A000012) All 1's sequence
+
+```agda
+A000012 : ℕ → ℕ
+A000012 _ = 1
+```
+
+### [A000027](https://oeis.org/A000027) The positive integers
+
+```agda
+A000027 : ℕ → ℕ
+A000027 = succ-ℕ
 ```
 
 ### [A000040](https://oeis.org/A000040) The prime numbers
@@ -75,6 +106,13 @@ A000079 = exp-ℕ 2
 ```agda
 A000142 : ℕ → ℕ
 A000142 = factorial-ℕ
+```
+
+### [A000215](https://oeis.org/A000215) The Fermat numbers
+
+```agda
+A000215 : ℕ → ℕ
+A000215 = fermat-number-ℕ
 ```
 
 ### [A000244](https://oeis.org/A000244) Powers of `3`

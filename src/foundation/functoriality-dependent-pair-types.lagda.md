@@ -187,7 +187,7 @@ module _
     is-trunc-map-map-Σ-map-base k {f} C H y =
       is-trunc-equiv' k
         ( fiber f (pr1 y))
-        ( equiv-fiber-map-Σ-map-base-fiber f C y)
+        ( compute-fiber-map-Σ-map-base f C y)
         ( H (pr1 y))
 
   abstract

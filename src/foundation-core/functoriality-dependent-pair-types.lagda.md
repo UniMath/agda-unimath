@@ -19,6 +19,8 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.retracts-of-types
 open import foundation-core.transport-along-identifications
 ```
 
@@ -234,6 +236,26 @@ module _
     is-equiv-tot-is-fiberwise-equiv (λ x → is-equiv-map-equiv (e x))
 ```
 
+### The action of `tot` on retracts
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  retraction-tot :
+    {f : (x : A) → B x → C x} →
+    ((x : A) → retraction (f x)) → retraction (tot f)
+  pr1 (retraction-tot {f} r) (x , z) =
+    ( x , map-retraction (f x) (r x) z)
+  pr2 (retraction-tot {f} r) (x , z) =
+    eq-pair-eq-fiber (is-retraction-map-retraction (f x) (r x) z)
+
+  retract-tot : ((x : A) → (B x) retract-of (C x)) → (Σ A B) retract-of (Σ A C)
+  pr1 (retract-tot r) = tot (λ x → inclusion-retract (r x))
+  pr2 (retract-tot r) = retraction-tot (λ x → retraction-retract (r x))
+```
+
 ### The fibers of `map-Σ-map-base`
 
 ```agda
@@ -276,10 +298,10 @@ module _
         ( is-section-fiber-fiber-map-Σ-map-base t)
         ( is-retraction-fiber-fiber-map-Σ-map-base t)
 
-  equiv-fiber-map-Σ-map-base-fiber :
+  compute-fiber-map-Σ-map-base :
     (t : Σ B C) → fiber f (pr1 t) ≃ fiber (map-Σ-map-base f C) t
-  pr1 (equiv-fiber-map-Σ-map-base-fiber t) = fiber-map-Σ-map-base-fiber t
-  pr2 (equiv-fiber-map-Σ-map-base-fiber t) =
+  pr1 (compute-fiber-map-Σ-map-base t) = fiber-map-Σ-map-base-fiber t
+  pr2 (compute-fiber-map-Σ-map-base t) =
     is-equiv-fiber-map-Σ-map-base-fiber t
 ```
 
@@ -296,7 +318,7 @@ module _
     is-contr-map-map-Σ-map-base is-contr-f (pair y z) =
       is-contr-equiv'
         ( fiber f y)
-        ( equiv-fiber-map-Σ-map-base-fiber f C (pair y z))
+        ( compute-fiber-map-Σ-map-base f C (pair y z))
         ( is-contr-f y)
 ```
 

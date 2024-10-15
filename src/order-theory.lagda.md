@@ -1,6 +1,6 @@
 # Order theory
 
-## Files in the order theory folder
+## Modules in the order theory namespace
 
 ```agda
 module order-theory where
@@ -82,6 +82,7 @@ open import order-theory.order-preserving-maps-large-posets public
 open import order-theory.order-preserving-maps-large-preorders public
 open import order-theory.order-preserving-maps-posets public
 open import order-theory.order-preserving-maps-preorders public
+open import order-theory.ordinals public
 open import order-theory.posets public
 open import order-theory.powers-of-large-locales public
 open import order-theory.precategory-of-decidable-total-orders public
