@@ -9,14 +9,11 @@ module orthogonal-factorization-systems.double-negation-sheaves where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.double-negation
 open import foundation.double-negation-stable-propositions
 open import foundation.empty-types
 open import foundation.irrefutable-propositions
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
@@ -24,12 +21,8 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.transport-along-identifications
 
-open import orthogonal-factorization-systems.local-types
-open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.null-types
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
 </details>
