@@ -53,16 +53,18 @@ that in one sense preserves this additional structure, see
 ```agda
 record
   map-Noncoherent-Large-Wild-Higher-Precategory
-  {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} (δ : Level → Level)
-  (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1)
-  (ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2) : UUω
+    {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} (δ : Level → Level)
+    (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1)
+    (ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2) : UUω
   where
+  
   field
     obj-map-Noncoherent-Large-Wild-Higher-Precategory :
       {l : Level} →
       obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l →
       obj-Noncoherent-Large-Wild-Higher-Precategory ℬ (δ l)
 
+  field
     hom-globular-type-map-Noncoherent-Large-Wild-Higher-Precategory :
       {l1 l2 : Level}
       {x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1}
@@ -73,26 +75,17 @@ record
           ( obj-map-Noncoherent-Large-Wild-Higher-Precategory x)
           ( obj-map-Noncoherent-Large-Wild-Higher-Precategory y))
 
-open map-Noncoherent-Large-Wild-Higher-Precategory public
-
-module _
-  {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} {δ : Level → Level}
-  {𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1}
-  {ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2}
-  (F : map-Noncoherent-Large-Wild-Higher-Precategory δ 𝒜 ℬ)
-  where
-
   hom-map-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
     {x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1}
     {y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2} →
     hom-Noncoherent-Large-Wild-Higher-Precategory 𝒜 x y →
     hom-Noncoherent-Large-Wild-Higher-Precategory ℬ
-      ( obj-map-Noncoherent-Large-Wild-Higher-Precategory F x)
-      ( obj-map-Noncoherent-Large-Wild-Higher-Precategory F y)
+      ( obj-map-Noncoherent-Large-Wild-Higher-Precategory x)
+      ( obj-map-Noncoherent-Large-Wild-Higher-Precategory y)
   hom-map-Noncoherent-Large-Wild-Higher-Precategory =
     0-cell-globular-map
-      ( hom-globular-type-map-Noncoherent-Large-Wild-Higher-Precategory F)
+      ( hom-globular-type-map-Noncoherent-Large-Wild-Higher-Precategory)
 
   2-hom-map-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
@@ -105,7 +98,16 @@ module _
       ( hom-map-Noncoherent-Large-Wild-Higher-Precategory g)
   2-hom-map-Noncoherent-Large-Wild-Higher-Precategory =
     1-cell-globular-map
-      ( hom-globular-type-map-Noncoherent-Large-Wild-Higher-Precategory F)
+      ( hom-globular-type-map-Noncoherent-Large-Wild-Higher-Precategory)
+
+open map-Noncoherent-Large-Wild-Higher-Precategory public
+
+module _
+  {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} {δ : Level → Level}
+  {𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1}
+  {ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2}
+  (F : map-Noncoherent-Large-Wild-Higher-Precategory δ 𝒜 ℬ)
+  where
 
   hom-noncoherent-wild-higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
@@ -122,12 +124,20 @@ module _
         ( obj-map-Noncoherent-Large-Wild-Higher-Precategory F y))
   hom-noncoherent-wild-higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory
     x y =
+      λ where
+      .obj-map-Noncoherent-Wild-Higher-Precategory →
+        hom-map-Noncoherent-Large-Wild-Higher-Precategory F
+      .hom-globular-type-map-Noncoherent-Wild-Higher-Precategory →
+        {!!}
+
+{-
     λ where
     .obj-map-Noncoherent-Wild-Higher-Precategory →
       hom-map-Noncoherent-Large-Wild-Higher-Precategory
     .hom-globular-type-map-Noncoherent-Wild-Higher-Precategory →
       1-cell-globular-map-globular-map
-        ( hom-globular-type-map-Noncoherent-Large-Wild-Higher-Precategory F)
+        ( hom-globular-type-map-Noncoherent-Large-Wild-Higher-Precategory)
+-}
 ```
 
 ### The identity map on a noncoherent large wild higher precategory
