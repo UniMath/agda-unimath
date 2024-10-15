@@ -13,6 +13,7 @@ open import foundation.negation
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.function-types
 open import foundation-core.propositions
 ```
 
@@ -57,7 +58,7 @@ module _
 
 ```agda
 is-double-negation-stable-empty : is-double-negation-stable empty-Prop
-is-double-negation-stable-empty e = e (λ where ())
+is-double-negation-stable-empty e = e id
 ```
 
 ### The unit proposition is double negation stable
