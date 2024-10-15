@@ -40,7 +40,7 @@ with respect to `μ` is an operation
 
 The general notion of whiskering is introduced in order to establish a clear
 naming scheme for all the variations of whiskering that exist in the
-`agda-unimath` library:
+agda-unimath library:
 
 1. In
    [whiskering identifications with respect to concatenation](foundation.whiskering-identifications-concatenation.md)

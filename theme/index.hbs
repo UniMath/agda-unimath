@@ -12,6 +12,26 @@
     <base href="{{ base_url }}">
     {{/if}}
 
+    <!-- Open Graph meta tags -->
+    <meta property="og:image" content="https://unimath.github.io/agda-unimath/website/images/agda-unimath-logo.svg" />
+    <meta property="og:site_name" content="agda-unimath" />
+
+    <!-- Structured data markup -->
+    <script type="application/ld+json">
+    {
+      "@context" : "https://schema.org",
+      "@type" : "WebSite",
+      "name" : "agda-unimath",
+      "url" : "https://unimath.github.io/agda-unimath/",
+      "logo": "https://unimath.github.io/agda-unimath/website/images/agda-unimath-logo.svg",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://unimath.github.io/agda-unimath/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+
 
     <!-- Custom HTML head -->
     {{> head}}
