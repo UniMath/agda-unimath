@@ -160,7 +160,7 @@ A001477 : ℕ → ℕ
 A001477 = id
 ```
 
-### [A003090](https://oeis.org/A003090) The natural numbers
+### [A003090](https://oeis.org/A003090) The number of main classes of Latin squares of order `n`
 
 ```agda
 A003090 : ℕ → ℕ
