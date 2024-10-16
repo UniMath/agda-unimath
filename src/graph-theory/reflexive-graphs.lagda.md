@@ -55,4 +55,4 @@ module _
 - [Graph](https://www.wikidata.org/entity/Q141488) on Wikidata
 - [Directed graph](https://en.wikipedia.org/wiki/Directed_graph) at Wikipedia
 - [Reflexive graph](https://mathworld.wolfram.com/ReflexiveGraph.html) at
-  Wolfram Mathworld
+  Wolfram MathWorld

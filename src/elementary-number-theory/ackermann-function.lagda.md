@@ -14,8 +14,9 @@ open import elementary-number-theory.natural-numbers
 
 ## Idea
 
-The Ackermann function is a fast growing binary operation on the natural
-numbers.
+The
+{{#concept "Ackermann function" WD="Ackermann function" WDID=Q341835 Agda=ackermann}}
+is a fast growing binary operation on the natural numbers.
 
 ## Definition
 
