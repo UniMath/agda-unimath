@@ -80,8 +80,8 @@ catalan-numbers =
 
 ### Binomial difference formula for the Catalan numbers
 
-The Catalan numbers may be computed as a difference of consecutive binomial
-coefficients
+The Catalan numbers may be computed as a distance between two consecutive
+binomial coefficients
 
 $$
 C_n = {2n \choose n} - {2n \choose n + 1}.
