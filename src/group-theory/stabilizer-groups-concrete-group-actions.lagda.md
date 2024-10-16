@@ -91,6 +91,6 @@ module _
 - [Fixed points and stabilizer subgroups](https://en.wikipedia.org/wiki/Group_action#Fixed_points_and_stabilizer_subgroups)
   at Wikipedia
 - [Isotropy Group](https://mathworld.wolfram.com/IsotropyGroup.html) at Wolfram
-  Mathworld
+  MathWorld
 - [Isotropy group](https://encyclopediaofmath.org/wiki/Isotropy_group) at
   Encyclopedia of Mathematics

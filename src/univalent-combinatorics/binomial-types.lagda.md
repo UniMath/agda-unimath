@@ -59,7 +59,8 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The {{#concept "binomial types" Agda=binomial-type}} are a categorification of
-the binomial coefficients. The binomial type `(A choose B)` is the type of
+the [binomial coefficients](elementary-number-theory.binomial-coefficients.md).
+The binomial type `(A choose B)` is the type of
 [decidable embeddings](foundation.decidable-embeddings.md) from types
 [merely equivalent](foundation.mere-equivalences.md) to `B` into `A`.
 

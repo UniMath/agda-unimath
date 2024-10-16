@@ -63,4 +63,4 @@ Labeled-Finite-Directed-Graph = Σ ℕ (λ n → Fin n → Fin n → ℕ)
 - [Directed graph](https://www.wikidata.org/entity/Q1137726) on Wikdiata
 - [Directed graph](https://en.wikipedia.org/wiki/Directed_graph) at Wikipedia
 - [Directed graph](https://mathworld.wolfram.com/DirectedGraph.html) at Wolfram
-  Mathworld
+  MathWorld

@@ -20,8 +20,12 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The binomial coefficient `(n choose k)` measures how many decidable subsets of
-`Fin n` there are of size `k`.
+The
+{{#concept "binomial coefficient" WD="binomial coefficient" WDID=Q209875 Agda=binomial-coefficient-ℕ}}
+`(n choose k)` measures
+[how many decidable subsets](univalent-combinatorics.counting-decidable-subtypes.md)
+of size `k` there are of a
+[finite type](univalent-combinatorics.finite-types.md) of size `n`.
 
 ## Definition
 
@@ -68,3 +72,16 @@ is-one-on-diagonal-binomial-coefficient-ℕ (succ-ℕ n) =
     ( is-one-on-diagonal-binomial-coefficient-ℕ n)
     ( is-zero-binomial-coefficient-ℕ n (succ-ℕ n) (succ-le-ℕ n))
 ```
+
+## See also
+
+- [Binomial types](univalent-combinatorics.binomial-types.md)
+
+## External links
+
+- [Binomial coefficients](https://www.britannica.com/science/binomial-coefficient)
+  at Britannica
+- [Binomial coefficient](https://en.wikipedia.org/wiki/Binomial_coefficient) at
+  Wikipedia
+- [Binomial Coefficient](https://mathworld.wolfram.com/BinomialCoefficient.html)
+  at Wolfram MathWorld

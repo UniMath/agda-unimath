@@ -72,4 +72,4 @@ Simple-Undirected-Graph l1 l2 =
   at Wikipedia
 - [Simple graph](https://www.wikidata.org/entity/Q15838309) on Wikidata
 - [Simple graph](https://mathworld.wolfram.com/SimpleGraph.html) at Wolfram
-  Mathworld
+  MathWorld

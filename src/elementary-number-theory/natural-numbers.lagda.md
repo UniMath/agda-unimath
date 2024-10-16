@@ -21,9 +21,10 @@ open import foundation-core.negation
 
 ## Idea
 
-The **natural numbers** is an inductively generated type by the zero element and
-the successor function. The induction principle for the natural numbers works to
-construct sections of type families over the natural numbers.
+The {{#concept "natural numbers" WD="natural number" WDID=Q21199 Agda=ℕ}} is an
+inductively generated type by the zero element and the successor function. The
+induction principle for the natural numbers works to construct sections of type
+families over the natural numbers.
 
 ## Definitions
 
