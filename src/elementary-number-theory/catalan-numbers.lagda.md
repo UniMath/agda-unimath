@@ -80,12 +80,24 @@ catalan-numbers =
 
 ### Binomial difference formula for the Catalan numbers
 
-The Catalan numbers may be computed as a distance between two consecutive
-binomial coefficients
+The Catalan numbers may be computed as a
+[distance](elementary-number-theory.distance-natural-numbers.md) between two
+consecutive binomial coefficients
+
+$$
+C_n = \lvert{2n \choose n} - {2n \choose n + 1}\rvert.
+$$
+
+Since ${2n \choose n}$ in general is larger than or equal to
+${2n \choose n + 1}$, this distance is equal to the difference
 
 $$
 C_n = {2n \choose n} - {2n \choose n + 1}.
 $$
+
+However, we prefer the use of the distance binary operation on natural numbers
+in general at it is a total function on natural numbers, and allows us to skip
+proving this inequality.
 
 ```agda
 catalan-numbers-binomial : ℕ → ℕ
