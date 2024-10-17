@@ -52,6 +52,12 @@ module _
   {l1 l2 : Level} (G : Globular-Type l1 l2)
   (r : is-reflexive-Globular-Type G)
   where
+
+  refl-1-cell-is-reflexive-Globular-Type :
+    {x : 0-cell-Globular-Type G} →
+    1-cell-Globular-Type G x x
+  refl-1-cell-is-reflexive-Globular-Type =
+    is-reflexive-1-cell-is-reflexive-Globular-Type r _
   
   is-reflexive-2-cell-is-reflexive-Globular-Type :
     {x y : 0-cell-Globular-Type G} →
@@ -59,6 +65,14 @@ module _
   is-reflexive-2-cell-is-reflexive-Globular-Type =
     is-reflexive-1-cell-is-reflexive-Globular-Type
       ( is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type r)
+
+  refl-2-cell-is-reflexive-Globular-Type :
+    {x y : 0-cell-Globular-Type G} {f : 1-cell-Globular-Type G x y} →
+    2-cell-Globular-Type G f f
+  refl-2-cell-is-reflexive-Globular-Type =
+    is-reflexive-1-cell-is-reflexive-Globular-Type
+      ( is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type r)
+      ( _)
 
   is-reflexive-2-cell-globular-type-is-reflexive-Globular-Type :
     {x y : 0-cell-Globular-Type G} →
@@ -80,6 +94,15 @@ module _
     is-reflexive (3-cell-Globular-Type G {x} {y} {f} {g})
   is-reflexive-3-cell-is-reflexive-Globular-Type =
     is-reflexive-2-cell-is-reflexive-Globular-Type
+      ( 1-cell-globular-type-Globular-Type G _ _)
+      ( is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type r)
+
+  refl-3-cell-is-reflexive-Globular-Type :
+    {x y : 0-cell-Globular-Type G} →
+    {f g : 1-cell-Globular-Type G x y} →
+    {s : 2-cell-Globular-Type G f g} → 3-cell-Globular-Type G s s
+  refl-3-cell-is-reflexive-Globular-Type =
+    refl-2-cell-is-reflexive-Globular-Type
       ( 1-cell-globular-type-Globular-Type G _ _)
       ( is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type r)
 

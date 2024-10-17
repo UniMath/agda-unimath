@@ -56,7 +56,6 @@ record
     is-reflexive (2-cell-Large-Globular-Type A {x = x} {y = y})
   refl-1-cell-is-reflexive-Large-Globular-Type =
     is-reflexive-1-cell-is-reflexive-Globular-Type
-      ( 1-cell-globular-type-Large-Globular-Type A _ _)
       ( is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type)
 
   refl-2-cell-is-reflexive-Large-Globular-Type :
@@ -291,7 +290,7 @@ module _
     2-cell-large-globular-structure G f f
   refl-2-cell-is-reflexive-large-globular-structure {x = x} {y} {f} =
     is-reflexive-1-cell-is-reflexive-globular-structure
-      ( is-reflexive-globular-structure-1-cell-is-reflexive-large-globular-structure
+      ( is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type
         ( r)
         ( x)
         ( y))

@@ -23,7 +23,7 @@ open import structured-types.reflexive-globular-types
 A {{#concept "reflexive globular map" Agda=reflexive-globular-map}} between two
 [reflexive globular types](structured-types.reflexive-globular-types.md) `G` and
 `H` is a [globular map](structured-types.globular-maps.md) `f : G → H` equipped
-with a family of 2-cells
+with a family of [identifications](foundation-core.identity-types.md)
 
 ```text
   (x : G₀) → f₁ (Gᵣ x) ＝ Hᵣ (f₀ x)

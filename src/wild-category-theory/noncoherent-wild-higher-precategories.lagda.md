@@ -73,161 +73,169 @@ Noncoherent-Wild-Higher-Precategory l1 l2 =
     ( λ X → is-reflexive-Globular-Type X × is-transitive-Globular-Type X)
 
 make-Noncoherent-Wild-Higher-Precategory :
-  {l1 l2 : Level} →
-  (obj-Noncoherent-Wild-Higher-Precategory : UU l1)
-  (hom-globular-structure-Noncoherent-Wild-Higher-Precategory :
-    globular-structure l2 obj-Noncoherent-Wild-Higher-Precategory) →
-  ( is-reflexive-globular-structure
-    hom-globular-structure-Noncoherent-Wild-Higher-Precategory) →
-  ( is-transitive-globular-structure
-    hom-globular-structure-Noncoherent-Wild-Higher-Precategory) →
-  Noncoherent-Wild-Higher-Precategory l1 l2
-make-Noncoherent-Wild-Higher-Precategory obj hom id comp =
-  ( make-Globular-Type hom , id , {!comp!})
+  {l1 l2 : Level} {X : Globular-Type l1 l2} → is-reflexive-Globular-Type X →
+  is-transitive-Globular-Type X → Noncoherent-Wild-Higher-Precategory l1 l2
+make-Noncoherent-Wild-Higher-Precategory id comp =
+  ( _ , id , comp)
 
 {-# INLINE make-Noncoherent-Wild-Higher-Precategory #-}
 
--- module _
---   {l1 l2 : Level} (𝒞 : Noncoherent-Wild-Higher-Precategory l1 l2)
---   where
+module _
+  {l1 l2 : Level} (𝒞 : Noncoherent-Wild-Higher-Precategory l1 l2)
+  where
 
---   obj-Noncoherent-Wild-Higher-Precategory : UU l1
---   obj-Noncoherent-Wild-Higher-Precategory = pr1 𝒞
+  globular-type-Noncoherent-Wild-Higher-Precategory : Globular-Type l1 l2
+  globular-type-Noncoherent-Wild-Higher-Precategory = pr1 𝒞
 
---   hom-globular-structure-Noncoherent-Wild-Higher-Precategory :
---     globular-structure l2 obj-Noncoherent-Wild-Higher-Precategory
---   hom-globular-structure-Noncoherent-Wild-Higher-Precategory = pr1 (pr2 𝒞)
+  obj-Noncoherent-Wild-Higher-Precategory : UU l1
+  obj-Noncoherent-Wild-Higher-Precategory =
+    0-cell-Globular-Type globular-type-Noncoherent-Wild-Higher-Precategory
+```
 
---   id-hom-globular-structure-Noncoherent-Wild-Higher-Precategory :
---     is-reflexive-globular-structure
---       ( hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
---   id-hom-globular-structure-Noncoherent-Wild-Higher-Precategory =
---     pr1 (pr2 (pr2 𝒞))
+- Morphisms in a noncoherent wild higher precategory
 
---   comp-hom-globular-structure-Noncoherent-Wild-Higher-Precategory :
---     is-transitive-globular-structure
---       ( hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
---   comp-hom-globular-structure-Noncoherent-Wild-Higher-Precategory =
---     pr2 (pr2 (pr2 𝒞))
+```agda
+  hom-globular-type-Noncoherent-Wild-Higher-Precategory :
+    (x y : obj-Noncoherent-Wild-Higher-Precategory) →
+    Globular-Type l2 l2
+  hom-globular-type-Noncoherent-Wild-Higher-Precategory =
+    1-cell-globular-type-Globular-Type
+      globular-type-Noncoherent-Wild-Higher-Precategory
 
---   globular-type-Noncoherent-Wild-Higher-Precategory : Globular-Type l1 l2
---   globular-type-Noncoherent-Wild-Higher-Precategory =
---     make-Globular-Type
---       ( hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
--- ```
+  hom-Noncoherent-Wild-Higher-Precategory :
+    obj-Noncoherent-Wild-Higher-Precategory →
+    obj-Noncoherent-Wild-Higher-Precategory →
+    UU l2
+  hom-Noncoherent-Wild-Higher-Precategory =
+    1-cell-Globular-Type globular-type-Noncoherent-Wild-Higher-Precategory
+```
 
--- We record some common projections for noncoherent wild higher precategories.
+- Identity morphisms in a noncoherent wild higher precategory
 
--- ```agda
---   hom-Noncoherent-Wild-Higher-Precategory :
---     obj-Noncoherent-Wild-Higher-Precategory →
---     obj-Noncoherent-Wild-Higher-Precategory →
---     UU l2
---   hom-Noncoherent-Wild-Higher-Precategory =
---     1-cell-globular-structure
---       ( hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
+```agda
+  id-structure-Noncoherent-Wild-Higher-Precategory :
+    is-reflexive-Globular-Type globular-type-Noncoherent-Wild-Higher-Precategory
+  id-structure-Noncoherent-Wild-Higher-Precategory =
+    pr1 (pr2 𝒞)
 
---   id-hom-Noncoherent-Wild-Higher-Precategory :
---     {x : obj-Noncoherent-Wild-Higher-Precategory} →
---     hom-Noncoherent-Wild-Higher-Precategory x x
---   id-hom-Noncoherent-Wild-Higher-Precategory =
---     refl-1-cell-is-reflexive-globular-structure
---       ( id-hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
+  id-hom-Noncoherent-Wild-Higher-Precategory :
+    {x : obj-Noncoherent-Wild-Higher-Precategory} →
+    hom-Noncoherent-Wild-Higher-Precategory x x
+  id-hom-Noncoherent-Wild-Higher-Precategory {x} = 
+    refl-1-cell-is-reflexive-Globular-Type
+      globular-type-Noncoherent-Wild-Higher-Precategory
+      id-structure-Noncoherent-Wild-Higher-Precategory
 
---   comp-hom-Noncoherent-Wild-Higher-Precategory :
---     {x y z : obj-Noncoherent-Wild-Higher-Precategory} →
---     hom-Noncoherent-Wild-Higher-Precategory y z →
---     hom-Noncoherent-Wild-Higher-Precategory x y →
---     hom-Noncoherent-Wild-Higher-Precategory x z
---   comp-hom-Noncoherent-Wild-Higher-Precategory =
---     comp-1-cell-is-transitive-globular-structure
---       ( comp-hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
+  id-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
+    {x y : obj-Noncoherent-Wild-Higher-Precategory} →
+    is-reflexive-Globular-Type
+      ( hom-globular-type-Noncoherent-Wild-Higher-Precategory x y)
+  id-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory =
+    is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
+      id-structure-Noncoherent-Wild-Higher-Precategory
+```
 
---   hom-globular-type-Noncoherent-Wild-Higher-Precategory :
---     (x y : obj-Noncoherent-Wild-Higher-Precategory) →
---     Globular-Type l2 l2
---   hom-globular-type-Noncoherent-Wild-Higher-Precategory =
---     globular-type-1-cell-globular-structure
---       hom-globular-structure-Noncoherent-Wild-Higher-Precategory
+- Composition in a noncoherent wild higher precategory
 
---   hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory :
---     (x y : obj-Noncoherent-Wild-Higher-Precategory) →
---     Noncoherent-Wild-Higher-Precategory l2 l2
---   hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
---     x y =
---     make-Noncoherent-Wild-Higher-Precategory
---       ( hom-Noncoherent-Wild-Higher-Precategory x y)
---       ( globular-structure-1-cell-globular-structure
---         ( hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
---         ( x)
---         ( y))
---       ( is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
---         ( id-hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
---         ( x)
---         ( y))
---       ( is-transitive-globular-structure-1-cell-is-transitive-globular-structure
---         ( comp-hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
---         ( x)
---         ( y))
--- ```
+```agda
+  comp-structure-Noncoherent-Wild-Higher-Precategory :
+    is-transitive-Globular-Type
+      globular-type-Noncoherent-Wild-Higher-Precategory
+  comp-structure-Noncoherent-Wild-Higher-Precategory =
+    pr2 (pr2 𝒞)
 
--- ```agda
---   2-hom-Noncoherent-Wild-Higher-Precategory :
---     {x y : obj-Noncoherent-Wild-Higher-Precategory} →
---     hom-Noncoherent-Wild-Higher-Precategory x y →
---     hom-Noncoherent-Wild-Higher-Precategory x y →
---     UU l2
---   2-hom-Noncoherent-Wild-Higher-Precategory =
---     2-cell-globular-structure
---       ( hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
+  comp-hom-Noncoherent-Wild-Higher-Precategory :
+    {x y z : obj-Noncoherent-Wild-Higher-Precategory} →
+    hom-Noncoherent-Wild-Higher-Precategory y z →
+    hom-Noncoherent-Wild-Higher-Precategory x y →
+    hom-Noncoherent-Wild-Higher-Precategory x z
+  comp-hom-Noncoherent-Wild-Higher-Precategory =
+    comp-1-cell-is-transitive-Globular-Type
+      comp-structure-Noncoherent-Wild-Higher-Precategory
 
---   id-2-hom-Noncoherent-Wild-Higher-Precategory :
---     {x y : obj-Noncoherent-Wild-Higher-Precategory}
---     {f : hom-Noncoherent-Wild-Higher-Precategory x y} →
---     2-hom-Noncoherent-Wild-Higher-Precategory f f
---   id-2-hom-Noncoherent-Wild-Higher-Precategory =
---     refl-2-cell-is-reflexive-globular-structure
---       ( id-hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
+  comp-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
+    {x y : obj-Noncoherent-Wild-Higher-Precategory} →
+    is-transitive-Globular-Type
+      ( hom-globular-type-Noncoherent-Wild-Higher-Precategory x y)
+  comp-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory =
+    is-transitive-1-cell-globular-type-is-transitive-Globular-Type
+      comp-structure-Noncoherent-Wild-Higher-Precategory
+```
 
---   comp-2-hom-Noncoherent-Wild-Higher-Precategory :
---     {x y : obj-Noncoherent-Wild-Higher-Precategory}
---     {f g h : hom-Noncoherent-Wild-Higher-Precategory x y} →
---     2-hom-Noncoherent-Wild-Higher-Precategory g h →
---     2-hom-Noncoherent-Wild-Higher-Precategory f g →
---     2-hom-Noncoherent-Wild-Higher-Precategory f h
---   comp-2-hom-Noncoherent-Wild-Higher-Precategory =
---     comp-2-cell-is-transitive-globular-structure
---       ( comp-hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
--- ```
+- The noncoherent wild higher precategory of morphisms between two objects in a noncoherent wild higher precategory
 
--- ```agda
---   3-hom-Noncoherent-Wild-Higher-Precategory :
---     {x y : obj-Noncoherent-Wild-Higher-Precategory}
---     {f g : hom-Noncoherent-Wild-Higher-Precategory x y} →
---     2-hom-Noncoherent-Wild-Higher-Precategory f g →
---     2-hom-Noncoherent-Wild-Higher-Precategory f g →
---     UU l2
---   3-hom-Noncoherent-Wild-Higher-Precategory =
---     3-cell-globular-structure
---       ( hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
+```agda
+  hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory :
+    (x y : obj-Noncoherent-Wild-Higher-Precategory) →
+    Noncoherent-Wild-Higher-Precategory l2 l2
+  hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
+    x y =
+    make-Noncoherent-Wild-Higher-Precategory
+      ( id-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory
+        {x} {y})
+      ( comp-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory)
+```
 
---   id-3-hom-Noncoherent-Wild-Higher-Precategory :
---     {x y : obj-Noncoherent-Wild-Higher-Precategory}
---     {f g : hom-Noncoherent-Wild-Higher-Precategory x y}
---     {H : 2-hom-Noncoherent-Wild-Higher-Precategory f g} →
---     3-hom-Noncoherent-Wild-Higher-Precategory H H
---   id-3-hom-Noncoherent-Wild-Higher-Precategory =
---     refl-3-cell-is-reflexive-globular-structure
---       ( id-hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
+- 2-Morphisms in a noncoherent wild higher precategory
 
---   comp-3-hom-Noncoherent-Wild-Higher-Precategory :
---     {x y : obj-Noncoherent-Wild-Higher-Precategory}
---     {f g : hom-Noncoherent-Wild-Higher-Precategory x y}
---     {H K L : 2-hom-Noncoherent-Wild-Higher-Precategory f g} →
---     3-hom-Noncoherent-Wild-Higher-Precategory K L →
---     3-hom-Noncoherent-Wild-Higher-Precategory H K →
---     3-hom-Noncoherent-Wild-Higher-Precategory H L
---   comp-3-hom-Noncoherent-Wild-Higher-Precategory =
---     comp-3-cell-is-transitive-globular-structure
---       ( comp-hom-globular-structure-Noncoherent-Wild-Higher-Precategory)
--- ```
+```agda
+  2-hom-Noncoherent-Wild-Higher-Precategory :
+    {x y : obj-Noncoherent-Wild-Higher-Precategory} →
+    hom-Noncoherent-Wild-Higher-Precategory x y →
+    hom-Noncoherent-Wild-Higher-Precategory x y →
+    UU l2
+  2-hom-Noncoherent-Wild-Higher-Precategory =
+    2-cell-Globular-Type globular-type-Noncoherent-Wild-Higher-Precategory
+
+  id-2-hom-Noncoherent-Wild-Higher-Precategory :
+    {x y : obj-Noncoherent-Wild-Higher-Precategory}
+    {f : hom-Noncoherent-Wild-Higher-Precategory x y} →
+    2-hom-Noncoherent-Wild-Higher-Precategory f f
+  id-2-hom-Noncoherent-Wild-Higher-Precategory =
+    refl-2-cell-is-reflexive-Globular-Type
+      globular-type-Noncoherent-Wild-Higher-Precategory
+      id-structure-Noncoherent-Wild-Higher-Precategory
+
+  comp-2-hom-Noncoherent-Wild-Higher-Precategory :
+    {x y : obj-Noncoherent-Wild-Higher-Precategory}
+    {f g h : hom-Noncoherent-Wild-Higher-Precategory x y} →
+    2-hom-Noncoherent-Wild-Higher-Precategory g h →
+    2-hom-Noncoherent-Wild-Higher-Precategory f g →
+    2-hom-Noncoherent-Wild-Higher-Precategory f h
+  comp-2-hom-Noncoherent-Wild-Higher-Precategory =
+    comp-2-cell-is-transitive-Globular-Type
+      comp-structure-Noncoherent-Wild-Higher-Precategory
+```
+
+- 3-Morphisms in a noncoherent wild higher precategory
+
+```agda
+  3-hom-Noncoherent-Wild-Higher-Precategory :
+    {x y : obj-Noncoherent-Wild-Higher-Precategory}
+    {f g : hom-Noncoherent-Wild-Higher-Precategory x y} →
+    2-hom-Noncoherent-Wild-Higher-Precategory f g →
+    2-hom-Noncoherent-Wild-Higher-Precategory f g → UU l2
+  3-hom-Noncoherent-Wild-Higher-Precategory =
+    3-cell-Globular-Type globular-type-Noncoherent-Wild-Higher-Precategory
+
+  id-3-hom-Noncoherent-Wild-Higher-Precategory :
+    {x y : obj-Noncoherent-Wild-Higher-Precategory}
+    {f g : hom-Noncoherent-Wild-Higher-Precategory x y}
+    {H : 2-hom-Noncoherent-Wild-Higher-Precategory f g} →
+    3-hom-Noncoherent-Wild-Higher-Precategory H H
+  id-3-hom-Noncoherent-Wild-Higher-Precategory =
+    refl-3-cell-is-reflexive-Globular-Type
+      globular-type-Noncoherent-Wild-Higher-Precategory
+      id-structure-Noncoherent-Wild-Higher-Precategory
+
+  comp-3-hom-Noncoherent-Wild-Higher-Precategory :
+    {x y : obj-Noncoherent-Wild-Higher-Precategory}
+    {f g : hom-Noncoherent-Wild-Higher-Precategory x y}
+    {H K L : 2-hom-Noncoherent-Wild-Higher-Precategory f g} →
+    3-hom-Noncoherent-Wild-Higher-Precategory K L →
+    3-hom-Noncoherent-Wild-Higher-Precategory H K →
+    3-hom-Noncoherent-Wild-Higher-Precategory H L
+  comp-3-hom-Noncoherent-Wild-Higher-Precategory =
+    comp-3-cell-is-transitive-Globular-Type
+      comp-structure-Noncoherent-Wild-Higher-Precategory
+```

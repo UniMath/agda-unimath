@@ -174,56 +174,45 @@ open Transitive-Globular-Type public
 ### The predicate of being a transitive globular structure
 
 ```agda
-record
-  is-transitive-globular-structure
-  {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A) : UU (l1 ⊔ l2)
-  where
-  coinductive
-  field
-    comp-1-cell-is-transitive-globular-structure :
-      is-transitive' (1-cell-globular-structure G)
-
-    is-transitive-globular-structure-1-cell-is-transitive-globular-structure :
-      (x y : A) →
-      is-transitive-globular-structure
-        ( globular-structure-1-cell-globular-structure G x y)
-
-open is-transitive-globular-structure public
-
+is-transitive-globular-structure :
+  {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A) → UU (l1 ⊔ l2)
+is-transitive-globular-structure G =
+  is-transitive-Globular-Type (make-Globular-Type G)
+  
 module _
   {l1 l2 : Level} {A : UU l1} {G : globular-structure l2 A}
-  (r : is-transitive-globular-structure G)
+  (t : is-transitive-globular-structure G)
   where
+
+  comp-1-cell-is-transitive-globular-structure :
+    is-transitive' (1-cell-globular-structure G)
+  comp-1-cell-is-transitive-globular-structure =
+    comp-1-cell-is-transitive-Globular-Type t
+
+  is-transitive-globular-structure-1-cell-is-transitive-globular-structure :
+    {x y : A} →
+    is-transitive-globular-structure
+      ( globular-structure-1-cell-globular-structure G x y)
+  is-transitive-globular-structure-1-cell-is-transitive-globular-structure =
+    is-transitive-1-cell-globular-type-is-transitive-Globular-Type t
 
   comp-2-cell-is-transitive-globular-structure :
     {x y : A} → is-transitive' (2-cell-globular-structure G {x} {y})
   comp-2-cell-is-transitive-globular-structure {x} {y} =
-    comp-1-cell-is-transitive-globular-structure
-      ( is-transitive-globular-structure-1-cell-is-transitive-globular-structure
-        ( r)
-        ( x)
-        ( y))
+    comp-2-cell-is-transitive-Globular-Type t
 
   is-transitive-globular-structure-2-cell-is-transitive-globular-structure :
-    {x y : A} (f g : 1-cell-globular-structure G x y) →
+    {x y : A} {f g : 1-cell-globular-structure G x y} →
     is-transitive-globular-structure
       ( globular-structure-2-cell-globular-structure G f g)
-  is-transitive-globular-structure-2-cell-is-transitive-globular-structure
-    { x} {y} =
-    is-transitive-globular-structure-1-cell-is-transitive-globular-structure
-      ( is-transitive-globular-structure-1-cell-is-transitive-globular-structure
-        ( r)
-        ( x)
-        ( y))
+  is-transitive-globular-structure-2-cell-is-transitive-globular-structure =
+    is-transitive-2-cell-globular-type-is-transitive-Globular-Type t
 
   comp-3-cell-is-transitive-globular-structure :
     {x y : A} {f g : 1-cell-globular-structure G x y} →
     is-transitive' (3-cell-globular-structure G {x} {y} {f} {g})
-  comp-3-cell-is-transitive-globular-structure {x} {y} {f} {g} =
-    comp-1-cell-is-transitive-globular-structure
-      ( is-transitive-globular-structure-2-cell-is-transitive-globular-structure
-        ( f)
-        ( g))
+  comp-3-cell-is-transitive-globular-structure =
+    comp-3-cell-is-transitive-Globular-Type t
 ```
 
 ### The type of transitive globular structures on a type
@@ -244,7 +233,8 @@ is-transitive-globular-type-Type :
   {l : Level} (A : UU l) →
   is-transitive-Globular-Type (globular-type-Type A)
 comp-1-cell-is-transitive-Globular-Type
-  ( is-transitive-globular-type-Type A) q p = p ∙ q
+  ( is-transitive-globular-type-Type A) q p =
+  p ∙ q
 is-transitive-1-cell-globular-type-is-transitive-Globular-Type
   ( is-transitive-globular-type-Type A) {x} {y} =
   is-transitive-globular-type-Type (x ＝ y)
@@ -252,10 +242,10 @@ is-transitive-1-cell-globular-type-is-transitive-Globular-Type
 is-transitive-globular-structure-Id :
   {l : Level} (A : UU l) →
   is-transitive-globular-structure (globular-structure-Id A)
-comp-1-cell-is-transitive-globular-structure
+comp-1-cell-is-transitive-Globular-Type
   ( is-transitive-globular-structure-Id A) q p = p ∙ q
-is-transitive-globular-structure-1-cell-is-transitive-globular-structure
-  ( is-transitive-globular-structure-Id A) x y =
+is-transitive-1-cell-globular-type-is-transitive-Globular-Type
+  ( is-transitive-globular-structure-Id A) {x} {y} =
   is-transitive-globular-structure-Id (x ＝ y)
 
 transitive-globular-structure-Id :
