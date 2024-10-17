@@ -110,12 +110,12 @@ module _
           ( pointed-adjoint-structure-map-Prespectrum A n)
     ~∗ pointed-adjoint-structure-map-Prespectrum A n
       by
-        left-unit-law-id-pointed-map
+        left-unit-law-comp-pointed-map
           ( pointed-adjoint-structure-map-Prespectrum A n)
     ~∗ pointed-adjoint-structure-map-Prespectrum A n ∘∗ id-pointed-map
       by
         inv-pointed-htpy
-          ( right-unit-law-id-pointed-map
+          ( right-unit-law-comp-pointed-map
             ( pointed-adjoint-structure-map-Prespectrum A n))
 
   id-map-Prespectrum : map-Prespectrum A A
