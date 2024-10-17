@@ -144,3 +144,36 @@ Given a pair of maps `f` and `g`, the pullback-hom produces a new map
          ∨  ∨               ∨  ∨
       B' → Y' ---------> A' → Y'.
 ```
+
+## Definitions
+
+### Functorial action on maps of the pullback-hom
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  {l1' l2' l3' l4' : Level}
+  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
+  (f' : A' → B') (g' : X' → Y')
+  where
+
+  map-pullback-hom :
+    hom-cospan-diagram
+      ( precomp f' Y')
+      ( postcomp A' g')
+      ( precomp f Y)
+      ( postcomp A g) →
+    hom-arrow f' g' → hom-arrow f g
+  map-pullback-hom =
+    map-is-pullback
+      ( precomp f Y)
+      ( postcomp A g)
+      ( precomp f' Y')
+      ( postcomp A' g')
+      ( cone-hom-arrow-pullback-hom f g)
+      ( cone-hom-arrow-pullback-hom f' g')
+      ( is-pullback-cone-hom-arrow-pullback-hom f g)
+      ( is-pullback-cone-hom-arrow-pullback-hom f' g')
+```
