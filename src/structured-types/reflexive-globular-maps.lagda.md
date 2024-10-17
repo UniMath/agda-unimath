@@ -9,6 +9,7 @@ module structured-types.reflexive-globular-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.globular-maps
@@ -22,45 +23,19 @@ open import structured-types.reflexive-globular-types
 A {{#concept "reflexive globular map" Agda=reflexive-globular-map}} between two
 [reflexive globular types](structured-types.reflexive-globular-types.md) `G` and
 `H` is a [globular map](structured-types.globular-maps.md) `f : G → H` equipped
-with
+with a family of 2-cells
+
+```text
+  (x : G₀) → f₁ (Gᵣ x) ＝ Hᵣ (f₀ x)
+```
+
+from the image of the reflexivity cell at `x` in `G` to the reflexivity cell at `f₀ x`, such that the globular map `f' : G' x y → H' (f₀ x) (f₀ y)` is again reflexive.
+
+Note: In some settings it may be preferred to work with globular maps preserving reflexivity cells up to a higher cell. This notion of maps between reflexive globular types is the notion of [lax reflexive globular maps](structured-types.lax-reflexive-globular-maps.md).
 
 ## Definitions
 
-### Globular maps between reflexive globular types
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (G : Reflexive-Globular-Type l1 l2) (H : Reflexive-Globular-Type l3 l4)
-  where
-
-  globular-map-Reflexive-Globular-Type : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  globular-map-Reflexive-Globular-Type =
-    globular-map
-      ( globular-type-Reflexive-Globular-Type G)
-      ( globular-type-Reflexive-Globular-Type H)
-
-module _
-  {l1 l2 l3 l4 : Level}
-  (G : Reflexive-Globular-Type l1 l2) (H : Reflexive-Globular-Type l3 l4)
-  (f : globular-map-Reflexive-Globular-Type G H)
-  where
-
-  0-cell-globular-map-Reflexive-Globular-Type :
-    0-cell-Reflexive-Globular-Type G → 0-cell-Reflexive-Globular-Type H
-  0-cell-globular-map-Reflexive-Globular-Type =
-    0-cell-globular-map f
-
-  1-cell-globular-map-globular-map-Reflexive-Globular-Type :
-    {x y : 0-cell-Reflexive-Globular-Type G} →
-    globular-map-Reflexive-Globular-Type
-      ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type G x y)
-      ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type H _ _)
-  1-cell-globular-map-globular-map-Reflexive-Globular-Type =
-    1-cell-globular-map-globular-map f
-```
-
-### The predicate of preserving reflexivity
+### The predicate of lax preserving reflexivity
 
 ```agda
 record
@@ -75,9 +50,8 @@ record
   field
     preserves-refl-0-cell-preserves-refl-globular-map :
       (x : 0-cell-Reflexive-Globular-Type G) →
-      2-cell-Reflexive-Globular-Type H
-        ( 1-cell-globular-map f (refl-0-cell-Reflexive-Globular-Type G {x}))
-        ( refl-0-cell-Reflexive-Globular-Type H)
+      1-cell-globular-map f (refl-0-cell-Reflexive-Globular-Type G {x}) ＝
+      refl-0-cell-Reflexive-Globular-Type H
 
   field
     preserves-refl-1-cell-globular-map-globular-map :
@@ -90,7 +64,7 @@ record
 open preserves-refl-globular-map
 ```
 
-### Reflexive globular maps
+### Lax reflexive globular maps
 
 ```agda
 record
@@ -136,10 +110,8 @@ record
 
   preserves-refl-0-cell-reflexive-globular-map :
     ( x : 0-cell-Reflexive-Globular-Type G) →
-    2-cell-Reflexive-Globular-Type H
-      ( 1-cell-reflexive-globular-map
-        ( refl-0-cell-Reflexive-Globular-Type G {x}))
-      ( refl-0-cell-Reflexive-Globular-Type H)
+    1-cell-reflexive-globular-map (refl-0-cell-Reflexive-Globular-Type G {x}) ＝
+    refl-0-cell-Reflexive-Globular-Type H
   preserves-refl-0-cell-reflexive-globular-map =
     preserves-refl-0-cell-preserves-refl-globular-map
       preserves-refl-reflexive-globular-map

@@ -15,6 +15,8 @@ open import foundation.universe-levels
 open import structured-types.dependent-globular-types
 open import structured-types.globular-maps
 open import structured-types.globular-types
+open import structured-types.pullbacks-dependent-globular-types
+open import structured-types.sections-dependent-globular-types
 ```
 
 </details>
@@ -51,10 +53,21 @@ module _
   0-cell-Σ-Globular-Type =
     0-cell-Globular-Type (Σ-Globular-Type H)
 
+  1-cell-globular-type-Σ-Globular-Type :
+    (x y : 0-cell-Σ-Globular-Type) → Globular-Type (l2 ⊔ l4) (l2 ⊔ l4)
+  1-cell-globular-type-Σ-Globular-Type =
+    1-cell-globular-type-Globular-Type (Σ-Globular-Type H)
+
   1-cell-Σ-Globular-Type :
     (x y : 0-cell-Globular-Type (Σ-Globular-Type H)) → UU (l2 ⊔ l4)
   1-cell-Σ-Globular-Type =
     1-cell-Globular-Type (Σ-Globular-Type H)
+
+  2-cell-globular-type-Σ-Globular-Type :
+    {x y : 0-cell-Σ-Globular-Type}
+    (f g : 1-cell-Σ-Globular-Type x y) → Globular-Type (l2 ⊔ l4) (l2 ⊔ l4)
+  2-cell-globular-type-Σ-Globular-Type =
+    2-cell-globular-type-Globular-Type (Σ-Globular-Type H)
 
   2-cell-Σ-Globular-Type :
     {x y : 0-cell-Σ-Globular-Type} →
@@ -74,4 +87,83 @@ pr1-Σ-Globular-Type :
 1-cell-globular-map-globular-map (pr1-Σ-Globular-Type H) =
   pr1-Σ-Globular-Type
     ( 1-cell-dependent-globular-type-Dependent-Globular-Type H _ _)
+
+module _
+  {l1 l2 l3 l4 : Level} {G : Globular-Type l1 l2}
+  (H : Dependent-Globular-Type l3 l4 G)
+  where
+
+  0-cell-pr1-Σ-Globular-Type :
+    0-cell-Σ-Globular-Type H → 0-cell-Globular-Type G
+  0-cell-pr1-Σ-Globular-Type =
+    0-cell-globular-map (pr1-Σ-Globular-Type H)
+
+  1-cell-globular-map-pr1-Σ-Globular-Type :
+    (x y : 0-cell-Σ-Globular-Type H) →
+    globular-map
+      ( 1-cell-globular-type-Σ-Globular-Type H x y)
+      ( 1-cell-globular-type-Globular-Type G
+        ( 0-cell-pr1-Σ-Globular-Type x)
+        ( 0-cell-pr1-Σ-Globular-Type y))
+  1-cell-globular-map-pr1-Σ-Globular-Type x y =
+    1-cell-globular-map-globular-map (pr1-Σ-Globular-Type H)
+
+  1-cell-pr1-Σ-Globular-Type :
+    {x y : 0-cell-Σ-Globular-Type H} →
+    1-cell-Σ-Globular-Type H x y →
+    1-cell-Globular-Type G
+      ( 0-cell-pr1-Σ-Globular-Type x)
+      ( 0-cell-pr1-Σ-Globular-Type y)
+  1-cell-pr1-Σ-Globular-Type =
+    1-cell-globular-map (pr1-Σ-Globular-Type H)
+```
+
+### The second projection of a dependent coproduct of globular types
+
+```agda
+pr2-Σ-Globular-Type :
+  {l1 l2 l3 l4 : Level} {G : Globular-Type l1 l2}
+  (H : Dependent-Globular-Type l3 l4 G) →
+  section-Dependent-Globular-Type
+    ( pullback-Dependent-Globular-Type (pr1-Σ-Globular-Type H) H)
+0-cell-section-Dependent-Globular-Type (pr2-Σ-Globular-Type H) = pr2
+1-cell-section-section-Dependent-Globular-Type (pr2-Σ-Globular-Type H) =
+  pr2-Σ-Globular-Type
+    ( 1-cell-dependent-globular-type-Dependent-Globular-Type H _ _)
+
+module _
+  {l1 l2 l3 l4 : Level} {G : Globular-Type l1 l2}
+  (H : Dependent-Globular-Type l3 l4 G)
+  where
+
+  0-cell-pr2-Σ-Globular-Type :
+    (x : 0-cell-Σ-Globular-Type H) →
+    0-cell-pullback-Dependent-Globular-Type (pr1-Σ-Globular-Type H) H x
+  0-cell-pr2-Σ-Globular-Type =
+    0-cell-section-Dependent-Globular-Type (pr2-Σ-Globular-Type H)
+
+  1-cell-section-pr2-Σ-Globular-Type :
+    {x x' : 0-cell-Σ-Globular-Type H} →
+    section-Dependent-Globular-Type
+      ( 1-cell-dependent-globular-type-pullback-Dependent-Globular-Type
+        ( pr1-Σ-Globular-Type H)
+        ( H)
+        ( 0-cell-pr2-Σ-Globular-Type x)
+        ( 0-cell-pr2-Σ-Globular-Type x'))
+  1-cell-section-pr2-Σ-Globular-Type =
+    1-cell-section-section-Dependent-Globular-Type (pr2-Σ-Globular-Type H)
+
+  1-cell-pr2-Σ-Globular-Type :
+    {x x' : 0-cell-Σ-Globular-Type H}
+    (f : 1-cell-Σ-Globular-Type H x x') →
+    1-cell-pullback-Dependent-Globular-Type
+      ( pr1-Σ-Globular-Type H)
+      ( H)
+      ( 0-cell-pr2-Σ-Globular-Type x)
+      ( 0-cell-pr2-Σ-Globular-Type x')
+      ( f)
+  1-cell-pr2-Σ-Globular-Type =
+    1-cell-section-Dependent-Globular-Type
+      ( pullback-Dependent-Globular-Type (pr1-Σ-Globular-Type H) H)
+      ( pr2-Σ-Globular-Type H)
 ```

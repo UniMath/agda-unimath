@@ -27,8 +27,12 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-Consider two [dependent directed graphs](graph-theory.dependent-directed-graphs.md) `H` and `K` over a [directed graph](graph-theory.directed-graphs.md) `G`.
-A {{#concept "equivalence of dependent directed graphs" Agda=hom-Dependent-Directed-Graph}} from `H` to `K` consists of a [family of equivalences](foundation.families-of-equivalences.md)
+Consider two
+[dependent directed graphs](graph-theory.dependent-directed-graphs.md) `H` and
+`K` over a [directed graph](graph-theory.directed-graphs.md) `G`. A
+{{#concept "equivalence of dependent directed graphs" Agda=hom-Dependent-Directed-Graph}}
+from `H` to `K` consists of a
+[family of equivalences](foundation.families-of-equivalences.md)
 
 ```text
   e₀ : {x : G₀} → H₀ x ≃ K₀ x
@@ -41,7 +45,6 @@ of vertices, and a family of [equivalences](foundation-core.equivalences.md)
 ```
 
 of edges.
-
 
 ## Definitions
 
@@ -69,12 +72,12 @@ module _
           ( map-equiv (e x) y)
           ( map-equiv (e x') y'))
 
-  equiv-vertex-equiv-Dependent-Directed-Graph :
+  vertex-equiv-equiv-Dependent-Directed-Graph :
     equiv-Dependent-Directed-Graph →
     fam-equiv
       ( vertex-Dependent-Directed-Graph H)
       ( vertex-Dependent-Directed-Graph K)
-  equiv-vertex-equiv-Dependent-Directed-Graph = pr1
+  vertex-equiv-equiv-Dependent-Directed-Graph = pr1
 
   vertex-equiv-Dependent-Directed-Graph :
     equiv-Dependent-Directed-Graph →
@@ -82,9 +85,9 @@ module _
     vertex-Dependent-Directed-Graph H x →
     vertex-Dependent-Directed-Graph K x
   vertex-equiv-Dependent-Directed-Graph e {x} =
-    map-equiv (equiv-vertex-equiv-Dependent-Directed-Graph e x)
+    map-equiv (vertex-equiv-equiv-Dependent-Directed-Graph e x)
 
-  equiv-edge-equiv-Dependent-Directed-Graph :
+  edge-equiv-equiv-Dependent-Directed-Graph :
     (e : equiv-Dependent-Directed-Graph) →
     {x x' : vertex-Directed-Graph G}
     (a : edge-Directed-Graph G x x')
@@ -94,7 +97,7 @@ module _
     edge-Dependent-Directed-Graph K a
       ( vertex-equiv-Dependent-Directed-Graph e y)
       ( vertex-equiv-Dependent-Directed-Graph e y')
-  equiv-edge-equiv-Dependent-Directed-Graph e a =
+  edge-equiv-equiv-Dependent-Directed-Graph e a =
     pr2 e _ _ a
 
   edge-equiv-Dependent-Directed-Graph :
@@ -108,7 +111,7 @@ module _
       ( vertex-equiv-Dependent-Directed-Graph e y)
       ( vertex-equiv-Dependent-Directed-Graph e y')
   edge-equiv-Dependent-Directed-Graph e a =
-    map-equiv (equiv-edge-equiv-Dependent-Directed-Graph e a _ _)
+    map-equiv (edge-equiv-equiv-Dependent-Directed-Graph e a _ _)
 ```
 
 ### The identity equivalence of a dependent directed graph

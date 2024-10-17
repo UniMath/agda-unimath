@@ -83,7 +83,7 @@ record
 
 ```agda
   field
-    large-globular-type-Noncoherent-Large-Wild-Precategory :
+    large-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
       Large-Globular-Type α β
 ```
 
@@ -93,7 +93,7 @@ record
   obj-Noncoherent-Large-Wild-Higher-Precategory : (l : Level) → UU (α l)
   obj-Noncoherent-Large-Wild-Higher-Precategory =
     0-cell-Large-Globular-Type
-      large-globular-type-Noncoherent-Large-Wild-Precategory
+      large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
 - The globular type of morphisms between two objects in a noncoherent large wild
@@ -107,7 +107,7 @@ record
     Globular-Type (β l1 l2) (β l1 l2)
   hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory =
     1-cell-globular-type-Large-Globular-Type
-      large-globular-type-Noncoherent-Large-Wild-Precategory
+      large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 
   hom-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
@@ -116,7 +116,7 @@ record
     UU (β l1 l2)
   hom-Noncoherent-Large-Wild-Higher-Precategory =
     1-cell-Large-Globular-Type
-      large-globular-type-Noncoherent-Large-Wild-Precategory
+      large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
 - The globular structure on the type of objects of a noncoherent large wild
@@ -127,7 +127,7 @@ record
     large-globular-structure β obj-Noncoherent-Large-Wild-Higher-Precategory
   globular-structure-obj-Noncoherent-Large-Wild-Higher-Precategory =
     large-globular-structure-0-cell-Large-Globular-Type
-      large-globular-type-Noncoherent-Large-Wild-Precategory
+      large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
 - The globular type of 2-morphisms is a noncoherent large wild higher
@@ -142,7 +142,7 @@ record
     Globular-Type (β l1 l2) (β l1 l2)
   2-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory =
     2-cell-globular-type-Large-Globular-Type
-      large-globular-type-Noncoherent-Large-Wild-Precategory
+      large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 
   2-hom-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
@@ -151,7 +151,7 @@ record
     (f g : hom-Noncoherent-Large-Wild-Higher-Precategory x y) → UU (β l1 l2)
   2-hom-Noncoherent-Large-Wild-Higher-Precategory =
     2-cell-Large-Globular-Type
-      large-globular-type-Noncoherent-Large-Wild-Precategory
+      large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
 - The globular structure on the type of morphisms between two objects in a
@@ -167,7 +167,7 @@ record
       ( hom-Noncoherent-Large-Wild-Higher-Precategory x y)
   globular-structure-hom-Noncoherent-Large-Wild-Higher-Precategory =
     globular-structure-1-cell-Large-Globular-Type
-      large-globular-type-Noncoherent-Large-Wild-Precategory
+      large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
 - The globular type of 3-morphisms in a noncoherent large wild higher
@@ -183,7 +183,7 @@ record
     Globular-Type (β l1 l2) (β l1 l2)
   3-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory =
     3-cell-globular-type-Large-Globular-Type
-      large-globular-type-Noncoherent-Large-Wild-Precategory
+      large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 
   3-hom-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
@@ -212,7 +212,7 @@ record
       ( 2-hom-Noncoherent-Large-Wild-Higher-Precategory f g)
   globular-structure-2-hom-Noncoherent-Large-Wild-Higher-Precategory =
     globular-structure-2-cell-Large-Globular-Type
-      large-globular-type-Noncoherent-Large-Wild-Precategory
+      large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
 - The structure of identity morphisms in a noncoherent large wild higher
@@ -222,7 +222,7 @@ record
   field
     id-structure-Noncoherent-Large-Wild-Higher-Precategory :
       is-reflexive-Large-Globular-Type
-        large-globular-type-Noncoherent-Large-Wild-Precategory
+        large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 
   id-hom-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 : Level} {x : obj-Noncoherent-Large-Wild-Higher-Precategory l1} →

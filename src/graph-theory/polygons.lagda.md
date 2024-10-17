@@ -100,7 +100,7 @@ module _
   mere-equiv-vertex-Polygon : mere-equiv (ℤ-Mod k) vertex-Polygon
   mere-equiv-vertex-Polygon =
     map-trunc-Prop
-      ( equiv-vertex-equiv-Undirected-Graph
+      ( vertex-equiv-equiv-Undirected-Graph
         ( standard-polygon-Undirected-Graph k)
         ( undirected-graph-Polygon))
       ( mere-equiv-Polygon)

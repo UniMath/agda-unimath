@@ -315,7 +315,8 @@ globular-type-Type : {l : Level} → UU l → Globular-Type l l
   globular-type-Type (x ＝ y)
 
 globular-structure-Id : {l : Level} (A : UU l) → globular-structure l A
-1-cell-globular-structure (globular-structure-Id A) x y = x ＝ y
+1-cell-globular-structure (globular-structure-Id A) x y =
+  x ＝ y
 globular-structure-1-cell-globular-structure (globular-structure-Id A) x y =
   globular-structure-Id (x ＝ y)
 ```

@@ -45,10 +45,10 @@ record
   field
     1-cell-section-section-Dependent-Globular-Type :
       {x x' : 0-cell-Globular-Type G} →
-      (y : 0-cell-Dependent-Globular-Type H x)
-      (y' : 0-cell-Dependent-Globular-Type H x') →
       section-Dependent-Globular-Type
-        ( 1-cell-dependent-globular-type-Dependent-Globular-Type H y y')
+        ( 1-cell-dependent-globular-type-Dependent-Globular-Type H
+          ( 0-cell-section-Dependent-Globular-Type x)
+          ( 0-cell-section-Dependent-Globular-Type x'))
         
 open section-Dependent-Globular-Type public
 
@@ -60,11 +60,12 @@ module _
 
   1-cell-section-Dependent-Globular-Type :
     {x x' : 0-cell-Globular-Type G}
-    (y : 0-cell-Dependent-Globular-Type H x)
-    (y' : 0-cell-Dependent-Globular-Type H x')
     (f : 1-cell-Globular-Type G x x') →
-    1-cell-Dependent-Globular-Type H y y' f
-  1-cell-section-Dependent-Globular-Type y y' =
+    1-cell-Dependent-Globular-Type H
+      ( 0-cell-section-Dependent-Globular-Type s x)
+      ( 0-cell-section-Dependent-Globular-Type s x')
+      ( f)
+  1-cell-section-Dependent-Globular-Type =
     0-cell-section-Dependent-Globular-Type
-      ( 1-cell-section-section-Dependent-Globular-Type s y y')
+      ( 1-cell-section-section-Dependent-Globular-Type s)
 ```

@@ -37,8 +37,8 @@ $(n+1)$-cells
 ```agda
 record
   globular-map
-  {l1 l2 l3 l4 : Level} (A : Globular-Type l1 l2) (B : Globular-Type l3 l4)
-  : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+    {l1 l2 l3 l4 : Level} (A : Globular-Type l1 l2) (B : Globular-Type l3 l4) :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   where
   coinductive
   field
@@ -76,6 +76,18 @@ module _
   (F : globular-map A B)
   where
 
+  2-cell-globular-map-globular-map :
+    {x y : 0-cell-Globular-Type A}
+    (f g : 1-cell-Globular-Type A x y) →
+    globular-map
+      ( 2-cell-globular-type-Globular-Type A f g)
+      ( 2-cell-globular-type-Globular-Type B
+        ( 1-cell-globular-map F f)
+        ( 1-cell-globular-map F g))
+  2-cell-globular-map-globular-map f g =
+    1-cell-globular-map-globular-map
+      ( 1-cell-globular-map-globular-map F)
+
   2-cell-globular-map :
     {x y : 0-cell-Globular-Type A}
     {f g : 1-cell-Globular-Type A x y} →
@@ -91,6 +103,21 @@ module _
   {A : Globular-Type l1 l2} {B : Globular-Type l3 l4}
   (F : globular-map A B)
   where
+
+{-
+  3-cell-globular-map-globular-map :
+    {x y : 0-cell-Globular-Type A}
+    {f g : 1-cell-Globular-Type A x y}
+    (s t : 2-cell-Globular-Type A f g) →
+    globular-map
+      ( 3-cell-globular-type-Globular-Type A s t)
+      ( 3-cell-globular-type-Globular-Type B
+        ( 2-cell-globular-map F s)
+        ( 2-cell-globular-map F t))
+  3-cell-globular-map-globular-map s t =
+    2-cell-globular-map-globular-map
+      ( 1-cell-globular-map-globular-map F)
+-}
 
   3-cell-globular-map :
     {x y : 0-cell-Globular-Type A}
