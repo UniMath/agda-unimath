@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-morphisms-arrows
 open import foundation.functoriality-pullbacks
 open import foundation.homotopies
 open import foundation.homotopies-morphisms-arrows
@@ -141,30 +142,23 @@ Given a pair of maps `f` and `g`, the pullback-hom produces a new map
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
-  {l1' l2' l3' l4' : Level}
-  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
+  {l11 l12 l13 l14 l21 l22 l23 l24 : Level}
+  {A1 : UU l11} {B1 : UU l12} {X1 : UU l13} {Y1 : UU l14}
+  {A2 : UU l21} {B2 : UU l22} {X2 : UU l23} {Y2 : UU l24}
+  (f1 : A1 → B1) (g1 : X1 → Y1)
+  (f2 : A2 → B2) (g2 : X2 → Y2)
   where
 
   map-pullback-hom :
     hom-cospan-diagram
-      ( precomp f' Y')
-      ( postcomp A' g')
-      ( precomp f Y)
-      ( postcomp A g) →
-    hom-arrow f' g' →
-    hom-arrow f g
+      ( cospan-diagram-hom-arrow f2 g2)
+      ( cospan-diagram-hom-arrow f1 g1) →
+    hom-arrow f2 g2 →
+    hom-arrow f1 g1
   map-pullback-hom =
-    map-is-pullback
-      ( precomp f Y)
-      ( postcomp A g)
-      ( precomp f' Y')
-      ( postcomp A' g')
-      ( cone-hom-arrow-pullback-hom f g)
-      ( cone-hom-arrow-pullback-hom f' g')
-      ( is-pullback-cone-hom-arrow-pullback-hom f g)
-      ( is-pullback-cone-hom-arrow-pullback-hom f' g')
+    map-pullback-cone
+      ( cospan-diagram-hom-arrow f2 g2)
+      ( cospan-diagram-hom-arrow f1 g1)
+      ( pullback-cone-hom-arrow-pullback-hom f2 g2)
+      ( pullback-cone-hom-arrow-pullback-hom f1 g1)
 ```
