@@ -41,15 +41,17 @@ The construction of the
 There is a commuting triangle of ∞-categories
 
 ```text
-  pairs of arrows of types -----> exponentiated cospan diagrams
-                    \                 /
-                     \               /
-                      ∨             ∨
-                      arrows of types
+  [pairs of arrows of types] ---> [exponentiated cospan diagrams]
+                     \                 /
+                      \               /
+                       ∨             ∨
+                      [arrows of types]
 ```
 
 that maps pairs of arrows to their pullback-hom. We refer to either of the
 vertical functors as the pullback-hom functor.
+
+### Functoriality of pullback-homs on exponentiated cospan diagrams
 
 By [functoriality of pullbacks](foundation.functoriality-pullbacks.md), there is
 a functor that maps cospan diagrams of the form
@@ -98,9 +100,11 @@ we thus have a commuting cube given by the functorial action of pullbacks
       B' → Y' ---------> A' → Y'.
 ```
 
-Now, there is moreover a bifunctor mapping pairs of arrows to cospan diagrams of
-the form described above. This bifunctor is contravariant in the left argument
-and covariant in the right. I.e., a pair of morphisms of arrows `F : f' ⇒ f` and
+### Functoriality of pullback-homs on pairs of morphisms of arrows
+
+There is a bifunctor mapping pairs of arrows to cospan diagrams of the form
+described above. This bifunctor is contravariant in the left argument and
+covariant in the right. I.e., a pair of morphisms of arrows `F : f' ⇒ f` and
 `G : g ⇒ g'` gives a morphism of cospan diagrams
 
 ```text
@@ -131,20 +135,6 @@ Given a pair of maps `f` and `g`, the pullback-hom produces a new map
      (f ⇒ g) -----> (f' ⇒ g').
 ```
 
-```text
-                                    A → X
-                                ∧  /  |
-                 f ⇒ g -------/  /    |
-                   | ⌟         ∨      |
-      f' ⇒ g' ---------> A' → X'      |
-         | ⌟       ∨        |         ∨
-         |       B → Y ---- | ----> A → Y
-         |      /           |      /
-         |    /             |    /
-         ∨  ∨               ∨  ∨
-      B' → Y' ---------> A' → Y'.
-```
-
 ## Definitions
 
 ### Functorial action on maps of the pullback-hom
@@ -165,7 +155,8 @@ module _
       ( postcomp A' g')
       ( precomp f Y)
       ( postcomp A g) →
-    hom-arrow f' g' → hom-arrow f g
+    hom-arrow f' g' →
+    hom-arrow f g
   map-pullback-hom =
     map-is-pullback
       ( precomp f Y)
