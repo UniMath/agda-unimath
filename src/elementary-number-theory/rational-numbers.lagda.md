@@ -25,9 +25,14 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.retracts-of-types
+open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.universe-levels
+
+open import set-theory.countable-sets
 ```
 
 </details>
@@ -157,11 +162,15 @@ abstract
 ℚ-Set : Set lzero
 pr1 ℚ-Set = ℚ
 pr2 ℚ-Set = is-set-ℚ
+```
 
+### The rationals are a retract of the integer fractions
+
+```agda
 abstract
   is-retraction-rational-fraction-ℚ :
     (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
-  is-retraction-rational-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
+  is-retraction-rational-fraction-ℚ ((m , n , n-pos) , p) =
     eq-pair-Σ
       ( eq-pair
         ( eq-quotient-div-is-one-ℤ _ _ p (div-left-gcd-ℤ m n))
@@ -169,6 +178,25 @@ abstract
           ( eq-quotient-div-is-one-ℤ _ _ p (div-right-gcd-ℤ m n))
           ( eq-is-prop (is-prop-is-positive-ℤ n))))
       ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (m , n , n-pos)))
+
+section-rational-fraction-ℤ : section rational-fraction-ℤ
+section-rational-fraction-ℤ = (fraction-ℚ , is-retraction-rational-fraction-ℚ)
+
+retract-integer-fraction-ℚ : ℚ retract-of fraction-ℤ
+retract-integer-fraction-ℚ =
+  ( fraction-ℚ , rational-fraction-ℤ , is-retraction-rational-fraction-ℚ)
+```
+
+### The rationals are countable
+
+```agda
+is-countable-ℚ : is-countable ℚ-Set
+is-countable-ℚ =
+  is-countable-retract-of
+    ( set-fraction-ℤ)
+    ( ℚ-Set)
+    ( retract-integer-fraction-ℚ)
+    ( is-countable-fraction-ℤ)
 ```
 
 ### Two fractions with the same numerator and same denominator are equal

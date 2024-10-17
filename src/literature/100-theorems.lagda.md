@@ -12,7 +12,10 @@ module literature.100-theorems where
 
 ### [3. The Denumerability of the Rational Numbers](https://www.cs.ru.nl/~freek/100/#3) {#3}
 
-> This is not yet formalized.
+```agda
+open import elementary-number-theory.rational-numbers using
+  ( is-countable-ℚ)
+```
 
 ### [11. The Infinitude of Primes](https://www.cs.ru.nl/~freek/100/#11) {#11}
 

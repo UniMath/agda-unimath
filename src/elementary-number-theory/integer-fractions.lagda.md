@@ -24,15 +24,17 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
+
+open import set-theory.countable-sets
 ```
 
 </details>
 
 ## Idea
 
-The type of integer fractions is the type of pairs `n/m` consisting of an
-integer `n` and a positive integer `m`. The type of rational numbers is a
-retract of the type of fractions.
+The type of {{#concept "integer fractions" Agda=fraction-ℤ}} is the type of
+pairs `n/m` consisting of an integer `n` and a positive integer `m`. The type of
+rational numbers is a retract of the type of fractions.
 
 ## Definitions
 
@@ -122,6 +124,9 @@ abstract
 abstract
   is-set-fraction-ℤ : is-set fraction-ℤ
   is-set-fraction-ℤ = is-set-Σ is-set-ℤ (λ _ → is-set-positive-ℤ)
+
+set-fraction-ℤ : Set lzero
+set-fraction-ℤ = fraction-ℤ , is-set-fraction-ℤ
 ```
 
 ```agda
@@ -259,4 +264,16 @@ abstract
   is-nonzero-gcd-numerator-denominator-fraction-ℤ x =
     is-nonzero-is-positive-ℤ
       ( is-positive-gcd-numerator-denominator-fraction-ℤ x)
+```
+
+### The set of integer fractions is countable
+
+```agda
+is-countable-fraction-ℤ : is-countable set-fraction-ℤ
+is-countable-fraction-ℤ =
+  is-countable-product
+    ( ℤ-Set)
+    ( set-positive-ℤ)
+    ( is-countable-ℤ)
+    ( is-countable-positive-ℤ)
 ```
