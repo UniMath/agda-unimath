@@ -407,9 +407,10 @@ module _
 ### A type family `C` over `B` satisfies the universal property of the family of fibers of a map `f : A → B` if and only if the constant map `C b → (fiber f b → C b)` is an equivalence for every `b : B`
 
 In other words, the dependent type `C` is
-`f`-[local](orthogonal-factorization-systems.local-types.md) if its fiber over
-`b` is `fiber f b`-[null](orthogonal-factorization-systems.null-types.md) for
-every `b : B`.
+`f`-[local](orthogonal-factorization-systems.types-local-at-maps.md) if its
+fiber over `b` is
+`fiber f b`-[null](orthogonal-factorization-systems.null-types.md) for every
+`b : B`.
 
 This condition simplifies, for example, the proof that
 [connected maps](foundation.connected-maps.md) satisfy a dependent universal

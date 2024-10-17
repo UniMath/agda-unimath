@@ -45,10 +45,10 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.lifting-structures-on-squares
-open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.null-maps
 open import orthogonal-factorization-systems.orthogonal-maps
 open import orthogonal-factorization-systems.pullback-hom
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
