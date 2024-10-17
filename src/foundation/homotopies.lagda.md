@@ -19,7 +19,6 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.commuting-squares-of-identifications
 open import foundation-core.dependent-identifications
@@ -27,7 +26,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.transport-along-identifications
-open import foundation-core.whiskering-identifications-concatenation
+open import foundation-core.whiskering-homotopies-concatenation
 ```
 
 </details>
@@ -144,6 +143,72 @@ module _
     { K K' : g ~ h} → K ~ K' →
     ( H ∙h K) ~ (H' ∙h K')
   horizontal-concat-htpy² α β x = horizontal-concat-Id² (α x) (β x)
+```
+
+### Unit laws for horizontal concatenation of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (a : A) → B a}
+  {H H' : f ~ g}
+  where
+
+  compute-right-refl-htpy-horizontal-concat-htpy² :
+    (α : H ~ H') (K : g ~ h) →
+    horizontal-concat-htpy² α refl-htpy ~ right-whisker-concat-htpy α K
+  compute-right-refl-htpy-horizontal-concat-htpy² α K x =
+    compute-right-refl-horizontal-concat-Id² (α x)
+
+  compute-left-refl-htpy-horizontal-concat-htpy² :
+    (K : h ~ f) (α : H ~ H') →
+    horizontal-concat-htpy² refl-htpy α ~ left-whisker-concat-htpy K α
+  compute-left-refl-htpy-horizontal-concat-htpy² K α x =
+    compute-left-refl-horizontal-concat-Id² (α x)
+```
+
+### Vertical inverses distribute over horizontal concatenation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (a : A) → B a}
+  {H H' : f ~ g} {K K' : g ~ h}
+  where
+
+  distributive-inv-horizontal-concat-htpy² :
+    (α : H ~ H') (β : K ~ K) →
+    inv-htpy (horizontal-concat-htpy² α β) ~
+    horizontal-concat-htpy² (inv-htpy α) (inv-htpy β)
+  distributive-inv-horizontal-concat-htpy² α β x =
+    distributive-inv-horizontal-concat-Id² (α x) (β x)
+```
+
+### The interchange law for horizontal composition of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (a : A) → B a}
+  {H H' H'' : f ~ g} (α : H ~ H') (α' : H' ~ H'') {K K' K'' : g ~ h}
+  (β : K ~ K') (β' : K' ~ K'')
+  where
+
+  interchange-htpy² :
+    horizontal-concat-htpy² (α ∙h α') (β ∙h β') ~
+    (horizontal-concat-htpy² α β) ∙h (horizontal-concat-htpy² α' β')
+  interchange-htpy² x = interchange-Id² (α x) (α' x) (β x) (β' x)
+```
+
+### Three dimensional concatenation of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (a : A) → B a}
+  where
+
+  z-concat-htpy³ :
+    {H K : f ~ g} {L M : g ~ h} {α β : H ~ K} {δ ε : L ~ M}
+    (γ : α ~ β) (η : δ ~ ε) →
+    horizontal-concat-htpy² α δ ~ horizontal-concat-htpy² β ε
+  z-concat-htpy³ γ η x = z-concat-Id³ (γ x) (η x)
 ```
 
 ### Transposing homotopies is an equivalence
@@ -285,27 +350,6 @@ module _
           ( H a0)
           ( H a1))
         ( inv right-unit))
-```
-
-### Eckmann-Hilton for homotopies
-
-```agda
-htpy-swap-nat-right-htpy :
-  {l0 l1 l2 : Level} {X : UU l0} {Y : UU l1} {Z : UU l2}
-  {f g : X → Y} {f' g' : Y → Z} (H' : f' ~ g')
-  (H : f ~ g) →
-  (right-whisker-comp H' f ∙h left-whisker-comp g' H) ~
-  (left-whisker-comp f' H ∙h right-whisker-comp H' g)
-htpy-swap-nat-right-htpy H' H x =
-    nat-htpy H' (H x)
-
-eckmann-hilton-htpy :
-  {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
-  (H ∙h K) ~ (K ∙h H)
-eckmann-hilton-htpy H K x =
-  ( inv (left-whisker-concat (H x) (ap-id (K x))) ∙
-  ( htpy-swap-nat-right-htpy H K x)) ∙
-  ( right-whisker-concat (ap-id (K x)) (H x))
 ```
 
 ### Action on identifications at `eq-htpy`

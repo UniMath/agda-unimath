@@ -31,6 +31,9 @@ The {{#concept "law of excluded middle" Agda=LEM}} asserts that any
 ```agda
 LEM : (l : Level) → UU (lsuc l)
 LEM l = (P : Prop l) → is-decidable (type-Prop P)
+
+prop-LEM : (l : Level) → Prop (lsuc l)
+prop-LEM l = Π-Prop (Prop l) (is-decidable-Prop)
 ```
 
 ## Properties

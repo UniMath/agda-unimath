@@ -17,6 +17,7 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -57,9 +58,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The binomial types are a categorification of the binomial coefficients. The
-binomial type `(A choose B)` is the type of decidable embeddings from types
-merely equal to `B` into `A`.
+The {{#concept "binomial types" Agda=binomial-type}} are a categorification of
+the [binomial coefficients](elementary-number-theory.binomial-coefficients.md).
+The binomial type `(A choose B)` is the type of
+[decidable embeddings](foundation.decidable-embeddings.md) from types
+[merely equivalent](foundation.mere-equivalences.md) to `B` into `A`.
 
 ## Definitions
 

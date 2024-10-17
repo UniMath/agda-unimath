@@ -234,6 +234,9 @@ pr2 bool-𝔽 = is-finite-bool
 neq-neg-bool : (b : bool) → b ≠ neg-bool b
 neq-neg-bool true ()
 neq-neg-bool false ()
+
+neq-neg-bool' : (b : bool) → neg-bool b ≠ b
+neq-neg-bool' b = neq-neg-bool b ∘ inv
 ```
 
 ### Boolean negation is an involution

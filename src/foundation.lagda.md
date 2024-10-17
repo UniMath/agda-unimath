@@ -4,7 +4,7 @@
 {-# OPTIONS --guardedness #-}
 ```
 
-## Files in the foundation folder
+## Modules in the foundation namespace
 
 ```agda
 module foundation where
@@ -45,7 +45,7 @@ open import foundation.binary-transport public
 open import foundation.binary-type-duality public
 open import foundation.booleans public
 open import foundation.cantor-schroder-bernstein-escardo public
-open import foundation.cantors-diagonal-argument public
+open import foundation.cantors-theorem public
 open import foundation.cartesian-morphisms-arrows public
 open import foundation.cartesian-morphisms-span-diagrams public
 open import foundation.cartesian-product-types public
@@ -54,6 +54,7 @@ open import foundation.category-of-families-of-sets public
 open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.codiagonal-maps-of-types public
+open import foundation.coherently-idempotent-maps public
 open import foundation.coherently-invertible-maps public
 open import foundation.coinhabited-pairs-of-types public
 open import foundation.commuting-cubes-of-maps public
@@ -136,6 +137,7 @@ open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-modality public
+open import foundation.double-negation-stable-propositions public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
 open import foundation.effective-maps-equivalence-relations public
@@ -230,6 +232,7 @@ open import foundation.intersections-subtypes public
 open import foundation.inverse-sequential-diagrams public
 open import foundation.invertible-maps public
 open import foundation.involutions public
+open import foundation.irrefutable-propositions public
 open import foundation.isolated-elements public
 open import foundation.isomorphisms-of-sets public
 open import foundation.iterated-cartesian-product-types public
@@ -252,12 +255,15 @@ open import foundation.lifts-types public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
+open import foundation.maps-in-global-subuniverses public
+open import foundation.maps-in-subuniverses public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.mere-functions public
 open import foundation.mere-logical-equivalences public
+open import foundation.mere-path-cosplit-maps public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
@@ -280,6 +286,7 @@ open import foundation.multivariable-sections public
 open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
+open import foundation.null-homotopic-maps public
 open import foundation.operations-span-diagrams public
 open import foundation.operations-spans public
 open import foundation.operations-spans-families-of-types public
@@ -290,6 +297,7 @@ open import foundation.partial-functions public
 open import foundation.partial-sequences public
 open import foundation.partitions public
 open import foundation.path-algebra public
+open import foundation.path-cosplit-maps public
 open import foundation.path-split-maps public
 open import foundation.perfect-images public
 open import foundation.permutations-spans-families-of-types public
@@ -338,7 +346,6 @@ open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.retracts-of-maps public
 open import foundation.retracts-of-types public
-open import foundation.russells-paradox public
 open import foundation.sections public
 open import foundation.separated-types public
 open import foundation.sequences public
@@ -469,5 +476,6 @@ open import foundation.whiskering-homotopies-composition public
 open import foundation.whiskering-homotopies-concatenation public
 open import foundation.whiskering-identifications-concatenation public
 open import foundation.whiskering-operations public
+open import foundation.wild-category-of-types public
 open import foundation.yoneda-identity-types public
 ```

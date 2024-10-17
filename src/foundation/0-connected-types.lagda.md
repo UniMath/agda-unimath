@@ -8,10 +8,12 @@ module foundation.0-connected-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.fiber-inclusions
 open import foundation.functoriality-set-truncation
+open import foundation.images
 open import foundation.inhabited-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
@@ -179,7 +181,7 @@ is-0-connected-equiv' :
 is-0-connected-equiv' e = is-0-connected-equiv (inv-equiv e)
 ```
 
-### `0-connected` types are closed under cartesian products
+### `0`-connected types are closed under cartesian products
 
 ```agda
 module _
@@ -195,6 +197,15 @@ module _
       ( is-contr-product p1 p2)
 ```
 
+### The unit type is `0`-connected
+
+```agda
+abstract
+  is-0-connected-unit : is-0-connected unit
+  is-0-connected-unit =
+    is-contr-equiv' unit equiv-unit-trunc-unit-Set is-contr-unit
+```
+
 ### A contractible type is `0`-connected
 
 ```agda
@@ -203,4 +214,45 @@ is-0-connected-is-contr :
   is-contr X → is-0-connected X
 is-0-connected-is-contr X p =
   is-contr-equiv X (inv-equiv (equiv-unit-trunc-Set (X , is-set-is-contr p))) p
+```
+
+### The image of a function with a `0`-connected domain is `0`-connected
+
+```agda
+abstract
+  is-0-connected-im-is-0-connected-domain :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    is-0-connected A → is-0-connected (im f)
+  is-0-connected-im-is-0-connected-domain {A = A} {B} f C =
+    apply-universal-property-trunc-Prop
+      ( is-inhabited-is-0-connected C)
+      ( is-contr-Prop _)
+      ( λ a →
+        is-contr-equiv'
+          ( im (map-trunc-Set f))
+          ( equiv-trunc-im-Set f)
+          ( is-contr-im
+            ( trunc-Set B)
+            ( unit-trunc-Set a)
+            ( apply-dependent-universal-property-trunc-Set'
+              ( λ x →
+                set-Prop
+                  ( Id-Prop
+                    ( trunc-Set B)
+                    ( map-trunc-Set f x)
+                    ( map-trunc-Set f (unit-trunc-Set a))))
+              ( λ a' →
+                apply-universal-property-trunc-Prop
+                  ( mere-eq-is-0-connected C a' a)
+                  ( Id-Prop
+                    ( trunc-Set B)
+                    ( map-trunc-Set f (unit-trunc-Set a'))
+                    ( map-trunc-Set f (unit-trunc-Set a)))
+                  ( λ where refl → refl)))))
+
+abstract
+  is-0-connected-im-point' :
+    {l1 : Level} {A : UU l1} (f : unit → A) → is-0-connected (im f)
+  is-0-connected-im-point' f =
+    is-0-connected-im-is-0-connected-domain f is-0-connected-unit
 ```

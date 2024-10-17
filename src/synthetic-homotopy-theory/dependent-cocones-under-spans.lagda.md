@@ -27,6 +27,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.retractions
 open import foundation.sections
+open import foundation.span-diagrams
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.transport-along-higher-identifications
@@ -104,6 +105,13 @@ module _
         ( horizontal-map-dependent-cocone (f s))
         ( vertical-map-dependent-cocone (g s))
     coherence-square-dependent-cocone = pr2 (pr2 d)
+
+dependent-cocone-span-diagram :
+  { l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3} {X : UU l4}
+  ( c : cocone-span-diagram 𝒮 X) (P : X → UU l5) →
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
+dependent-cocone-span-diagram {𝒮 = 𝒮} =
+  dependent-cocone (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮)
 ```
 
 ### Cocones equipped with dependent cocones
@@ -188,6 +196,13 @@ pr1 (pr2 (dependent-cocone-map f g c P h)) b =
   h (vertical-map-cocone f g c b)
 pr2 (pr2 (dependent-cocone-map f g c P h)) s =
   apd h (coherence-square-cocone f g c s)
+
+dependent-cocone-map-span-diagram :
+  { l1 l2 l3 l4 l5 : Level} {𝒮 : span-diagram l1 l2 l3} {X : UU l4}
+  ( c : cocone-span-diagram 𝒮 X) (P : X → UU l5) →
+  ( (x : X) → P x) → dependent-cocone-span-diagram c P
+dependent-cocone-map-span-diagram {𝒮 = 𝒮} c =
+  dependent-cocone-map (left-map-span-diagram 𝒮) (right-map-span-diagram 𝒮) c
 ```
 
 ## Properties

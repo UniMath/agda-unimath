@@ -578,7 +578,7 @@ square commute (almost) trivially.
         ( f)
         ( g)
         ( cocone-pushout f g)
-        ( dup-pushout f g))
+        ( up-pushout f g))
       ( refl-htpy)
       ( λ _ →
         inv

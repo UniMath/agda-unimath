@@ -218,3 +218,27 @@ def get_git_tracked_files():
     git_output = subprocess.check_output(['git', 'ls-files'], text=True)
     git_tracked_files = map(pathlib.Path, git_output.strip().split('\n'))
     return git_tracked_files
+
+def get_git_last_modified(file_path):
+    try:
+        # Get the last commit date for the file
+        output = subprocess.check_output(
+            ['git', 'log', '-1', '--format=%at', file_path],
+            stderr=subprocess.DEVNULL
+        )
+        output_str = output.strip()
+        if output_str:
+            return int(output_str)
+        else:
+            # Output is empty, file may be untracked
+            return os.path.getmtime(file_path)
+    except subprocess.CalledProcessError:
+        # If the git command fails, fall back to filesystem modification time
+        return os.path.getmtime(file_path)
+
+def is_file_modified(file_path):
+    try:
+        subprocess.check_output(['git', 'diff', '--quiet', file_path], stderr=subprocess.DEVNULL)
+        return False
+    except subprocess.CalledProcessError:
+        return True

@@ -45,4 +45,4 @@ complete-Undirected-Graph-𝔽 X =
 - [Complete graph](https://www.wikidata.org/entity/Q45715) on Wikidata
 - [Complete graph](https://en.wikipedia.org/wiki/Complete_graph) on Wikipedia
 - [Complete graph](https://mathworld.wolfram.com/CompleteGraph.html) at Wolfram
-  Mathworld
+  MathWorld
