@@ -54,14 +54,15 @@ open import elementary-number-theory.binomial-theorem-natural-numbers using
 
 > This is not yet formalized.
 
-### [60. Bezout's Theorem](https://www.cs.ru.nl/~freek/100/#60) {#60}
+### [60. Bezout's Lemma](https://www.cs.ru.nl/~freek/100/#60) {#60}
+
+Note that the 60th theorem in Freek's list is listed as "Bezout's Theorem", while the linked theorems are formalizations of Bezout's lemma, even though these are different statements.
 
 ```agda
 open import elementary-number-theory.bezouts-lemma-integers using
   ( bezouts-lemma-ℤ)
 open import elementary-number-theory.bezouts-lemma-natural-numbers using
   ( bezouts-lemma-ℕ)
-```
 
 ### [63. Cantor's Theorem](https://www.cs.ru.nl/~freek/100/#63) {#63}
 
