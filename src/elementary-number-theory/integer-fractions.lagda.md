@@ -125,8 +125,8 @@ abstract
   is-set-fraction-ℤ : is-set fraction-ℤ
   is-set-fraction-ℤ = is-set-Σ is-set-ℤ (λ _ → is-set-positive-ℤ)
 
-set-fraction-ℤ : Set lzero
-set-fraction-ℤ = fraction-ℤ , is-set-fraction-ℤ
+fraction-ℤ-Set : Set lzero
+fraction-ℤ-Set = fraction-ℤ , is-set-fraction-ℤ
 ```
 
 ```agda
@@ -269,11 +269,11 @@ abstract
 ### The set of integer fractions is countable
 
 ```agda
-is-countable-fraction-ℤ : is-countable set-fraction-ℤ
+is-countable-fraction-ℤ : is-countable fraction-ℤ-Set
 is-countable-fraction-ℤ =
   is-countable-product
     ( ℤ-Set)
-    ( set-positive-ℤ)
+    ( positive-ℤ-Set)
     ( is-countable-ℤ)
     ( is-countable-positive-ℤ)
 ```

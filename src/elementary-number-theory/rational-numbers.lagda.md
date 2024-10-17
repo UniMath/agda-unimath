@@ -193,7 +193,7 @@ retract-integer-fraction-ℚ =
 is-countable-ℚ : is-countable ℚ-Set
 is-countable-ℚ =
   is-countable-retract-of
-    ( set-fraction-ℤ)
+    ( fraction-ℤ-Set)
     ( ℚ-Set)
     ( retract-integer-fraction-ℚ)
     ( is-countable-fraction-ℤ)

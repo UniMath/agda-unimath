@@ -127,8 +127,8 @@ is-set-positive-ℤ : is-set positive-ℤ
 is-set-positive-ℤ =
   is-set-type-subtype subtype-positive-ℤ is-set-ℤ
 
-set-positive-ℤ : Set lzero
-set-positive-ℤ = positive-ℤ , is-set-positive-ℤ
+positive-ℤ-Set : Set lzero
+positive-ℤ-Set = positive-ℤ , is-set-positive-ℤ
 ```
 
 ### The successor of a positive integer is positive
@@ -192,10 +192,10 @@ pr2 equiv-positive-int-ℕ = is-equiv-positive-int-ℕ
 ### The set of positive integers is countable
 
 ```agda
-is-countable-positive-ℤ : is-countable set-positive-ℤ
+is-countable-positive-ℤ : is-countable positive-ℤ-Set
 is-countable-positive-ℤ =
   is-countable-is-directly-countable
-    ( set-positive-ℤ)
+    ( positive-ℤ-Set)
     ( one-positive-ℤ)
     ( intro-exists
       ( positive-int-ℕ)
