@@ -46,6 +46,20 @@ open import foundation.whiskering-homotopies-composition
 The construction of [morphisms of arrows](foundation.morphisms-arrows.md) is
 functorial.
 
+There is a commuting triangle of ∞-categories
+
+```text
+  [pairs of morphisms of arrows] ----> [exponentiated cospan diagrams]
+                        \                     /
+                         \                   /
+                          ∨                 ∨
+                         [morphisms of arrows]
+```
+
+that maps pairs of morphisms of arrows to the bicomposition morphism of arrows.
+We may refer to either of the vertical functors as the functorial action of
+morphisms of arrows.
+
 ## Definitions
 
 ### The type of morphisms of arrows as a pullback
@@ -131,7 +145,7 @@ module _
   pullback-cone-hom-arrow :
     pullback-cone cospan-diagram-hom-arrow (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   pullback-cone-hom-arrow =
-    ( ( hom-arrow f g , cone-hom-arrow') , is-pullback-hom-arrow)
+    ( (hom-arrow f g , cone-hom-arrow') , is-pullback-hom-arrow)
 ```
 
 ### The bifunctorial map on morphisms of arrows inducing morphisms of the associated cospan diagrams of morphisms of arrows
@@ -167,9 +181,8 @@ and this construction is bifunctorial.
 module _
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
+  (f : A → B) (g : X → Y) (f' : A' → B') (g' : X' → Y')
   where
 
   map-hom-cospan-diagram-hom-arrows :
@@ -189,19 +202,18 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
-  {l1' l2' l3' l4' : Level}
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
+  (f : A → B) (g : X → Y) (f' : A' → B') (g' : X' → Y')
   where
 
   map-hom-arrow-hom-cospan-diagram :
     hom-cospan-diagram
       ( cospan-diagram-hom-arrow f g)
       ( cospan-diagram-hom-arrow f' g') →
-    hom-arrow f g → hom-arrow f' g'
+    hom-arrow f g →
+    hom-arrow f' g'
   map-hom-arrow-hom-cospan-diagram =
     map-pullback-cone
       ( cospan-diagram-hom-arrow f g)
@@ -214,12 +226,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
+  {l1 l2 l3 l4 l1' l2' l3' l4'  : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
-  {l1' l2' l3' l4' : Level}
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
+  (f : A → B) (g : X → Y) (f' : A' → B') (g' : X' → Y')
   where
 
   map-hom-arrow :
@@ -237,9 +247,8 @@ module _
 module _
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
+  (f : A → B) (g : X → Y) (f' : A' → B') (g' : X' → Y')
   where
 
   htpy-eq-map-hom-cospan-diagram-hom-arrows :
@@ -303,10 +312,10 @@ module _
 module _
   {l1 l2 l3 l4 l1' l2' l3' l4' l1'' l2'' l3'' l4'' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
   {A'' : UU l1''} {B'' : UU l2''} {X'' : UU l3''} {Y'' : UU l4''}
+  (f : A → B) (g : X → Y)
+  (f' : A' → B') (g' : X' → Y')
   (f'' : A'' → B'') (g'' : X'' → Y'')
   where
 
@@ -477,10 +486,10 @@ module _
 module _
   {l1 l2 l3 l4 l1' l2' l3' l4' l1'' l2'' l3'' l4'' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
   {A'' : UU l1''} {B'' : UU l2''} {X'' : UU l3''} {Y'' : UU l4''}
+  (f : A → B) (g : X → Y)
+  (f' : A' → B') (g' : X' → Y')
   (f'' : A'' → B'') (g'' : X'' → Y'')
   where
 
@@ -575,10 +584,10 @@ module _
 module _
   {l1 l2 l3 l4 l1' l2' l3' l4' l1'' l2'' l3'' l4'' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
   {A'' : UU l1''} {B'' : UU l2''} {X'' : UU l3''} {Y'' : UU l4''}
+  (f : A → B) (g : X → Y)
+  (f' : A' → B') (g' : X' → Y')
   (f'' : A'' → B'') (g'' : X'' → Y'')
   where
 
@@ -616,9 +625,8 @@ module _
 module _
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
+  (f : A → B) (g : X → Y) (f' : A' → B') (g' : X' → Y')
   where
 
   abstract
