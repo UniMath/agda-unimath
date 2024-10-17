@@ -33,7 +33,8 @@ open import foundation-core.type-theoretic-principle-of-choice
 ## Idea
 
 Given functions `f : A → B` and `g : X → Y` the
-{{#concept "bicomposition function"}} is the map
+{{#concept "bicomposition function" Disambiguation="types" Agda=bicomp}} is the
+map
 
 ```text
   g ∘ - ∘ f : (B → X) → (A → Y)

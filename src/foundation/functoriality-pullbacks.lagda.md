@@ -30,10 +30,8 @@ open import foundation-core.pullbacks
 
 ## Idea
 
-Given a morphism of two [cospan diagrams](foundation.cospan-diagrams.md)
-
 The construction of the [standard pullback](foundation-core.pullbacks.md) is
-functorial in...
+functorial.
 
 ## Definitions
 

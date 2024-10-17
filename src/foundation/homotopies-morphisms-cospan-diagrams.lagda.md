@@ -46,14 +46,14 @@ Given two [cospan diagrams](foundation.cospan-diagrams.md) `𝒮` and `𝒯`, an
 a
 {{#concept "homotopy" Disambiguation="of morphisms of cospan diagrams of types" Agda=htpy-hom-cospan-diagram}}
 `h ~ h'` consists of pairwise homotopies of the vertical maps, such that the
-obvious left and right diagrams commute:
+left and right diagrams commute:
 
 ```text
   f' ∘ hA --------> f' ∘ hA'        g' ∘ hB --------> g' ∘ hB'
      |                 |               |                 |
    H |                 | H'   and    K |                 | K'
      ∨                 ∨               ∨                 ∨
-  hX ∘ f --------> hX' ∘ f          hX ∘ g --------> hX' ∘ g
+  hX ∘ f --------> hX' ∘ f          hX ∘ g --------> hX' ∘ g.
 ```
 
 ## Definitions
@@ -210,7 +210,7 @@ module _
     (h ＝ h') ≃ htpy-hom-cospan-diagram 𝒮 𝒯 h h'
   extensionality-hom-cospan-diagram h h' =
     ( htpy-eq-hom-cospan-diagram h h' ,
-    is-equiv-htpy-eq-hom-cospan-diagram h h')
+      is-equiv-htpy-eq-hom-cospan-diagram h h')
 
   eq-htpy-hom-cospan-diagram :
     (h h' : hom-cospan-diagram 𝒮 𝒯) → htpy-hom-cospan-diagram 𝒮 𝒯 h h' → h ＝ h'

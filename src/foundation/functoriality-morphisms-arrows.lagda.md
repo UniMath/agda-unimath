@@ -46,8 +46,6 @@ open import foundation.whiskering-homotopies-composition
 The construction of [morphisms of arrows](foundation.morphisms-arrows.md) is
 functorial.
 
-<!-- TODO draw some pretty diagrams -->
-
 ## Definitions
 
 ### The type of morphisms of arrows as a pullback
@@ -548,7 +546,7 @@ module _
 
 ### The bifunctorial action of morphisms of arrows preserves identities
 
-**Proof.** Follows by that functors compose.
+**Proof.** This follows by the fact that functors compose.
 
 ```agda
 module _
@@ -571,7 +569,7 @@ module _
 
 ### The bifunctorial action of morphisms of arrows preserves composition
 
-**Proof.** Follows by that functors compose.
+**Proof.** This follows by the fact that functors compose.
 
 ```agda
 module _
@@ -612,7 +610,7 @@ module _
 
 ### The bifunctorial action of morphisms of arrows preserves homotopies
 
-**Proof.** Follows by that functors can be composed.
+**Proof.** This follows by the fact that functors compose.
 
 ```agda
 module _

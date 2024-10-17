@@ -51,8 +51,6 @@ There is a commuting triangle of ∞-categories
 that maps pairs of arrows to their pullback-hom. We refer to either of the
 vertical functors as the pullback-hom functor.
 
-<!-- TODO "functorialtiy of the pullback-hom consists of multiple pieces..." -->
-
 By [functoriality of pullbacks](foundation.functoriality-pullbacks.md), there is
 a functor that maps cospan diagrams of the form
 
@@ -65,7 +63,7 @@ to the type of [morphisms of arrows](foundation.morphisms-arrows.md) from `f` to
 `g`
 
 ```text
-      f → g -------> A → X
+      f ⇒ g -------> A → X
         | ⌟            |
         |              | g ∘ -
         ∨              ∨
@@ -87,11 +85,11 @@ For every morphism of cospan diagrams of this form
 we thus have a commuting cube given by the functorial action of pullbacks
 
 ```text
-                 f → g -----------> A → X
+                 f ⇒ g -----------> A → X
                 /  | ⌟             /  |
               /    |             /    |
             ∨      |           ∨      |
-      f' → g' ---------> A' → X'      |
+      f' ⇒ g' ---------> A' → X'      |
          | ⌟       ∨        |         ∨
          |       B → Y ---- | ----> A → Y
          |      /           |      /
@@ -102,8 +100,8 @@ we thus have a commuting cube given by the functorial action of pullbacks
 
 Now, there is moreover a bifunctor mapping pairs of arrows to cospan diagrams of
 the form described above. This bifunctor is contravariant in the left argument
-and covariant in the right. I.e., a pair of morphisms of arrows `F : f' → f` and
-`G : g → g'` gives a morphism of cospan diagrams
+and covariant in the right. I.e., a pair of morphisms of arrows `F : f' ⇒ f` and
+`G : g ⇒ g'` gives a morphism of cospan diagrams
 
 ```text
             - ∘ f           g ∘ -
@@ -122,23 +120,23 @@ a bifunctorial action that we call the
 {{#concept "bifunctoriality of the pullback-hom" Disambiguation="on types"}}.
 
 Given a pair of maps `f` and `g`, the pullback-hom produces a new map
-`f ⋔ g : (B → X) → (f → g)`, and given morphisms of arrows `F : f' → f` and
-`G : g → g'`, we obtain a morphism of the following arrows
+`f ⋔ g : (B → X) → (f ⇒ g)`, and given morphisms of arrows `F : f' ⇒ f` and
+`G : g ⇒ g'`, we obtain a morphism of the following arrows
 
 ```text
      (B → X) -----> (B' → X')
         |               |
   f ⋔ g |               | f' ⋔ g'
         ∨               ∨
-     (f → g) -----> (f' → g')
+     (f ⇒ g) -----> (f' ⇒ g').
 ```
 
 ```text
                                     A → X
                                 ∧  /  |
-                 f → g -------/  /    |
+                 f ⇒ g -------/  /    |
                    | ⌟         ∨      |
-      f' → g' ---------> A' → X'      |
+      f' ⇒ g' ---------> A' → X'      |
          | ⌟       ∨        |         ∨
          |       B → Y ---- | ----> A → Y
          |      /           |      /

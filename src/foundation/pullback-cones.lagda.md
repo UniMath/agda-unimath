@@ -43,7 +43,8 @@ open import foundation-core.whiskering-identifications-concatenation
 
 A [cone](foundation.cones-over-cospan-diagrams.md) `𝑐` over a
 [cospan diagram](foundation.cospans.md) `A -f-> X <-g- B` with domain `C` is a
-{{#concept "pullback cone" Disambiguation="of types"}} if its gap map
+{{#concept "pullback cone" Disambiguation="of types" Agda=pullback-cone}} if its
+gap map
 
 ```text
   C → standard-pullback f g
