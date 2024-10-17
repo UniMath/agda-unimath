@@ -13,6 +13,7 @@ open import foundation.functoriality-truncation
 open import foundation.images
 open import foundation.injective-maps
 open import foundation.propositional-truncations
+open import foundation.retracts-of-types
 open import foundation.set-truncations
 open import foundation.sets
 open import foundation.slice
@@ -163,6 +164,15 @@ module _
       is-equiv-htpy-equiv
         ( equiv-trunc-Σ-Set A B)
         ( htpy-map-equiv-trunc-Σ-Set)
+```
+
+### The set truncation functor preserves retracts
+
+```agda
+retract-trunc-Set :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (A retract-of B) → (type-trunc-Set A) retract-of (type-trunc-Set B)
+retract-trunc-Set = retract-of-trunc-retract-of
 ```
 
 ### The set truncation functor preserves injective maps
