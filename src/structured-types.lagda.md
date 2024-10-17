@@ -4,7 +4,7 @@
 {-# OPTIONS --guardedness #-}
 ```
 
-## Files in the structured types folder
+## Modules in the structured types namespace
 
 ```agda
 module structured-types where
@@ -24,6 +24,8 @@ open import structured-types.dependent-products-pointed-types public
 open import structured-types.dependent-products-wild-monoids public
 open import structured-types.dependent-reflexive-globular-types public
 open import structured-types.dependent-types-equipped-with-automorphisms public
+open import structured-types.equality-globular-types public
+open import structured-types.equivalences-globular-types public
 open import structured-types.equivalences-h-spaces public
 open import structured-types.equivalences-pointed-arrows public
 open import structured-types.equivalences-types-equipped-with-automorphisms public
@@ -92,6 +94,7 @@ open import structured-types.universal-property-pointed-equivalences public
 open import structured-types.unpointed-maps public
 open import structured-types.whiskering-pointed-2-homotopies-concatenation public
 open import structured-types.whiskering-pointed-homotopies-composition public
+open import structured-types.wild-category-of-pointed-types public
 open import structured-types.wild-groups public
 open import structured-types.wild-loops public
 open import structured-types.wild-monoids public

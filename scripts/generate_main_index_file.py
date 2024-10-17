@@ -105,7 +105,7 @@ you need to change the template in ./scripts/generate_main_index_file.py
   - [Maintainers](MAINTAINERS.md)
   - [Contributors](CONTRIBUTORS.md)
   - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
-  - [Projects using Agda-Unimath](USERS.md)
+  - [Projects using agda-unimath](PROJECTS.md)
   - [Grant acknowledgements](GRANT-ACKNOWLEDGEMENTS.md)
 - [Guides](HOWTO-INSTALL.md)
   - [Installing the library](HOWTO-INSTALL.md)
@@ -117,8 +117,9 @@ you need to change the template in ./scripts/generate_main_index_file.py
   - [Guidelines for mixfix operators](MIXFIX-OPERATORS.md)
   - [Citing sources](CITING-SOURCES.md)
   - [Citing the library](CITE-THIS-LIBRARY.md)
-- [Library contents](SUMMARY.md)
+- [Library explorer](VISUALIZATION.md)
 - [Art](ART.md)
+- [Full list of library contents](SUMMARY.md)
 {literature_index}
 
 # The agda-unimath library

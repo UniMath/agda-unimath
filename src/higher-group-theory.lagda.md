@@ -1,6 +1,6 @@
 # Higher group theory
 
-## Files in the higher group theory folder
+## Modules in the higher group theory namespace
 
 ```agda
 module higher-group-theory where

@@ -32,10 +32,10 @@ open import foundation-core.sets
 
 ## Idea
 
-The {{#concept "axiom of choice" Agda=AC-0}} asserts that for every family of
-[inhabited](foundation.inhabited-types.md) types `B` indexed by a
-[set](foundation-core.sets.md) `A`, the type of sections of that family
-`(x : A) → B x` is inhabited.
+The {{#concept "axiom of choice" WD="axiom of choice" WDID=Q179692 Agda=AC-0}}
+asserts that for every family of [inhabited](foundation.inhabited-types.md)
+types `B` indexed by a [set](foundation-core.sets.md) `A`, the type of sections
+of that family `(x : A) → B x` is inhabited.
 
 ## Definition
 

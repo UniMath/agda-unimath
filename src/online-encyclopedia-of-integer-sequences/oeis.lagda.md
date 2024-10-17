@@ -8,6 +8,7 @@ module online-encyclopedia-of-integer-sequences.oeis where
 
 ```agda
 open import elementary-number-theory.ackermann-function
+open import elementary-number-theory.catalan-numbers
 open import elementary-number-theory.cofibonacci
 open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.eulers-totient-function
@@ -17,12 +18,15 @@ open import elementary-number-theory.fermat-numbers
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.infinitude-of-primes
 open import elementary-number-theory.kolakoski-sequence
+open import elementary-number-theory.multiset-coefficients
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.pisano-periods
 
 open import finite-group-theory.finite-groups
 
 open import foundation.function-types
+
+open import univalent-combinatorics.main-classes-of-latin-squares
 ```
 
 </details>
@@ -43,11 +47,40 @@ A000002 : ℕ → ℕ
 A000002 = kolakoski
 ```
 
+### [A000004](https://oeis.org/A000004) The zero sequence
+
+```agda
+A000004 : ℕ → ℕ
+A000004 _ = zero-ℕ
+```
+
+### [A000007](https://oeis.org/A000007) The characteristic function for 0
+
+```agda
+A000007 : ℕ → ℕ
+A000007 zero-ℕ = 1
+A000007 (succ-ℕ _) = 0
+```
+
 ### [A000010](https://oeis.org/A000010) Euler's totient function
 
 ```agda
 A000010 : ℕ → ℕ
 A000010 = eulers-totient-function-relatively-prime
+```
+
+### [A000012](https://oeis.org/A000012) All 1's sequence
+
+```agda
+A000012 : ℕ → ℕ
+A000012 _ = 1
+```
+
+### [A000027](https://oeis.org/A000027) The positive integers
+
+```agda
+A000027 : ℕ → ℕ
+A000027 = succ-ℕ
 ```
 
 ### [A000040](https://oeis.org/A000040) The prime numbers
@@ -69,6 +102,13 @@ A000045 = Fibonacci-ℕ
 ```agda
 A000079 : ℕ → ℕ
 A000079 = exp-ℕ 2
+```
+
+### [A000108](https://oeis.org/A000108) The Catalan numbers
+
+```agda
+A000108 : ℕ → ℕ
+A000108 = catalan-numbers
 ```
 
 ### [A000142](https://oeis.org/A000142) Factorials
@@ -118,6 +158,13 @@ A001177 = cofibonacci
 ```agda
 A001477 : ℕ → ℕ
 A001477 = id
+```
+
+### [A003090](https://oeis.org/A003090) The number of main classes of Latin squares of order `n`
+
+```agda
+A003090 : ℕ → ℕ
+A003090 = number-of-main-classes-of-Latin-squares-of-order
 ```
 
 ### [A006369](https://oeis.org/A006369) Collatz' bijection
