@@ -17,6 +17,7 @@ open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.identity-types
 open import foundation-core.negation
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
@@ -83,6 +84,11 @@ module _
       {f : A → B} → is-set B → is-injective f → is-prop-map f
     is-prop-map-is-injective {f} H I =
       is-prop-map-is-emb (is-emb-is-injective H I)
+
+emb-injection :
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) →
+  injection A (type-Set B) → A ↪ (type-Set B)
+emb-injection B = tot (λ f → is-emb-is-injective (is-set-type-Set B))
 ```
 
 ### For a map between sets, being injective is a property
