@@ -32,7 +32,7 @@ open import synthetic-homotopy-theory.suspensions-of-types
 
 ## Idea
 
-A [prespectrum](synthetic-homotopy-theory.prespecra.md) is
+A [prespectrum](synthetic-homotopy-theory.prespectra.md) is
 {{#concept "connective" Disambiguation="prespectrum" Agda=is-connective-Prespectrum}}
 if the $n$'th type in the [sequence](foundation.sequences.md) is
 $n$-[connected](foundation.connected-types.md).
