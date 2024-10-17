@@ -54,6 +54,15 @@ open import elementary-number-theory.binomial-theorem-natural-numbers using
 
 > This is not yet formalized.
 
+### [60. Bezout's Theorem](https://www.cs.ru.nl/~freek/100/#60) {#60}
+
+```agda
+open import elementary-number-theory.bezouts-lemma-integers using
+  ( bezouts-lemma-ℤ)
+open import elementary-number-theory.bezouts-lemma-natural-numbers using
+  ( bezouts-lemma-ℕ)
+```
+
 ### [63. Cantor's Theorem](https://www.cs.ru.nl/~freek/100/#63) {#63}
 
 ```agda
