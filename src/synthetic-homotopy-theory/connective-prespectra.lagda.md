@@ -32,8 +32,9 @@ open import synthetic-homotopy-theory.suspensions-of-types
 
 ## Idea
 
-A [prespectrum] is {{#concept "connective" Agda=is-connective-Prespectrum}} if
-the $n$th type in the [sequence](foundation.sequences.md) is
+A [prespectrum](synthetic-homotopy-theory.prespecra.md) is
+{{#concept "connective" Disambiguation="prespectrum" Agda=is-connective-Prespectrum}}
+if the $n$'th type in the [sequence](foundation.sequences.md) is
 $n$-[connected](foundation.connected-types.md).
 
 ### The predicate on prespectra of being connective

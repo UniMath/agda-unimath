@@ -34,10 +34,11 @@ open import synthetic-homotopy-theory.suspensions-of-types
 
 ## Idea
 
-A [spectrum] is {{#concept "connective" Agda=is-connective-Spectrum}} if the
-underlying [prespectrum](synthetic-homotopy-theory.prespectra.md) is
+A [spectrum](synthetic-homotopy-theory.spectra.md) is
+{{#concept "connective" Disambiguation="spectrum" Agda=is-connective-Spectrum}}
+if the underlying [prespectrum](synthetic-homotopy-theory.prespectra.md) is
 [connective](synthetic-homotopy-theory.connective-prespectra.md). I.e., if the
-$n$th type in the [sequence](foundation.sequences.md) is
+$n$'th type in the [sequence](foundation.sequences.md) is
 $n$-[connected](foundation.connected-types.md) for all $n$.
 
 ### The predicate on spectra of being connective
