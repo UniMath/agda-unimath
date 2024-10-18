@@ -20,7 +20,7 @@ open import graph-theory.reflexive-graphs
 Consider a [reflexive graph](graph-theory.reflexive-graphs.md) `A`. A
 {{#concept "dependent reflexive graph}} `B` over `A` consists of:
 
-- A family `B₀ : A₀ → 𝒰` of vertices
+- A family `B₀ : A₀ → 𝒰` of types as the type family of vertices
 - A family `B₁ : {x y : A₀} → A₁ x y → B₀ x → B₀ y → 𝒰` of
   [binary relations](foundation.binary-relations.md) between the types of
   vertices `B₀`, indexed by the type of edges `A₁` in `A`.
@@ -33,6 +33,12 @@ to the type of dependent reflexive graphs over the
 Furthermore, [graph homomorphisms](graph-theory.morphisms-reflexive-graphs.md)
 into the [universal reflexive graph](graph-theory.universal-reflexive-graph.md)
 are equivalent to dependent reflexive graphs.
+
+Alternatively, a dependent reflexive graph `B` over `A` can be defined by
+
+- A family `B₀ : A₀ → Reflexive-Graph` of reflexive graphs as the type family of vertices
+- A family `B₁ : {x y : A₀} → A₁ x y → (B₀ x)₀ → (B₀ y)₀ → 𝒰`.
+- A family `Bᵣ : (x : A₀) → B₁ (Aᵣ x) ＝ (B₀ x)₁
 
 ## Definitions
 

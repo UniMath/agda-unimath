@@ -65,7 +65,7 @@ map-Noncoherent-Large-Wild-Higher-Precategory δ 𝒜 ℬ =
     ( large-globular-type-Noncoherent-Large-Wild-Higher-Precategory ℬ)
 
 module _
-  {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} (δ : Level → Level)
+  {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} {δ : Level → Level}
   (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1)
   (ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2)
   (F : map-Noncoherent-Large-Wild-Higher-Precategory δ 𝒜 ℬ)
