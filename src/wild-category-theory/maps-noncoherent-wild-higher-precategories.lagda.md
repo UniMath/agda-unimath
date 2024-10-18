@@ -133,9 +133,9 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  {𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2}
-  {ℬ : Noncoherent-Wild-Higher-Precategory l3 l4}
-  {𝒞 : Noncoherent-Wild-Higher-Precategory l5 l6}
+  (𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2)
+  (ℬ : Noncoherent-Wild-Higher-Precategory l3 l4)
+  (𝒞 : Noncoherent-Wild-Higher-Precategory l5 l6)
   (G : map-Noncoherent-Wild-Higher-Precategory ℬ 𝒞)
   (F : map-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ)
   where
