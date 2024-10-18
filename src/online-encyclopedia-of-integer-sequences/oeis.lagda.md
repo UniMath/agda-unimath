@@ -8,6 +8,7 @@ module online-encyclopedia-of-integer-sequences.oeis where
 
 ```agda
 open import elementary-number-theory.ackermann-function
+open import elementary-number-theory.catalan-numbers
 open import elementary-number-theory.cofibonacci
 open import elementary-number-theory.collatz-bijection
 open import elementary-number-theory.eulers-totient-function
@@ -24,6 +25,8 @@ open import elementary-number-theory.pisano-periods
 open import finite-group-theory.finite-groups
 
 open import foundation.function-types
+
+open import univalent-combinatorics.main-classes-of-latin-squares
 ```
 
 </details>
@@ -101,6 +104,13 @@ A000079 : ℕ → ℕ
 A000079 = exp-ℕ 2
 ```
 
+### [A000108](https://oeis.org/A000108) The Catalan numbers
+
+```agda
+A000108 : ℕ → ℕ
+A000108 = catalan-numbers
+```
+
 ### [A000142](https://oeis.org/A000142) Factorials
 
 ```agda
@@ -148,6 +158,13 @@ A001177 = cofibonacci
 ```agda
 A001477 : ℕ → ℕ
 A001477 = id
+```
+
+### [A003090](https://oeis.org/A003090) The number of main classes of Latin squares of order `n`
+
+```agda
+A003090 : ℕ → ℕ
+A003090 = number-of-main-classes-of-Latin-squares-of-order
 ```
 
 ### [A006369](https://oeis.org/A006369) Collatz' bijection

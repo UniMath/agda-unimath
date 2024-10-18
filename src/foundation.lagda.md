@@ -136,6 +136,7 @@ open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-modality public
+open import foundation.double-negation-stable-propositions public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
 open import foundation.effective-maps-equivalence-relations public
@@ -228,6 +229,7 @@ open import foundation.intersections-subtypes public
 open import foundation.inverse-sequential-diagrams public
 open import foundation.invertible-maps public
 open import foundation.involutions public
+open import foundation.irrefutable-propositions public
 open import foundation.isolated-elements public
 open import foundation.isomorphisms-of-sets public
 open import foundation.iterated-cartesian-product-types public

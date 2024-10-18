@@ -54,4 +54,4 @@ is-prop-is-regular-Undirected-Graph X G =
 - [Regular graph](https://www.wikidata.org/entity/Q826467) on Wikidata
 - [Regular graph](https://en.wikipedia.org/wiki/Regular_graph) at Wikipedia
 - [Regular graph](https://mathworld.wolfram.com/RegularGraph.html) at Wolfram
-  Mathworld
+  MathWorld
