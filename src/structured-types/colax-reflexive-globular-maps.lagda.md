@@ -19,7 +19,7 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-A {{#concept "colax reflexive globular map" Agda=reflexive-globular-map}}
+A {{#concept "colax reflexive globular map" Agda=colax-reflexive-globular-map}}
 between two
 [reflexive globular types](structured-types.reflexive-globular-types.md) `G` and
 `H` is a [globular map](structured-types.globular-maps.md) `f : G → H` equipped
@@ -159,6 +159,8 @@ record
   is-colax-reflexive-colax-reflexive-globular-map
     1-cell-colax-reflexive-globular-map-colax-reflexive-globular-map =
     is-colax-reflexive-2-cell-globular-map-is-colax-reflexive-globular-map
+
+open colax-reflexive-globular-map public
 ```
 
 ### The identity colax reflexive globular map
@@ -184,10 +186,10 @@ is-colax-reflexive-1-cell-globular-map-is-colax-reflexive-globular-map
 id-colax-reflexive-globular-map :
   {l1 l2 : Level} (G : Reflexive-Globular-Type l1 l2) →
   colax-reflexive-globular-map G G
-colax-reflexive-globular-map.globular-map-colax-reflexive-globular-map
+globular-map-colax-reflexive-globular-map
   ( id-colax-reflexive-globular-map G) =
   map-id-colax-reflexive-globular-map G
-colax-reflexive-globular-map.is-colax-reflexive-colax-reflexive-globular-map
+is-colax-reflexive-colax-reflexive-globular-map
   ( id-colax-reflexive-globular-map G) =
   ( is-colax-reflexive-id-colax-reflexive-globular-map G)
 ```

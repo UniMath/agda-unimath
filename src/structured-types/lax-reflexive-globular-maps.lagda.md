@@ -19,7 +19,7 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-A {{#concept "lax reflexive globular map" Agda=reflexive-globular-map}}
+A {{#concept "lax reflexive globular map" Agda=lax-reflexive-globular-map}}
 between two
 [reflexive globular types](structured-types.reflexive-globular-types.md) `G` and
 `H` is a [globular map](structured-types.globular-maps.md) `f : G → H` equipped
@@ -160,6 +160,8 @@ record
   is-lax-reflexive-lax-reflexive-globular-map
     1-cell-lax-reflexive-globular-map-lax-reflexive-globular-map =
     is-lax-reflexive-2-cell-globular-map-is-lax-reflexive-globular-map
+
+open lax-reflexive-globular-map public
 ```
 
 ### The identity lax reflexive globular map
@@ -185,10 +187,10 @@ is-lax-reflexive-1-cell-globular-map-is-lax-reflexive-globular-map
 id-lax-reflexive-globular-map :
   {l1 l2 : Level} (G : Reflexive-Globular-Type l1 l2) →
   lax-reflexive-globular-map G G
-lax-reflexive-globular-map.globular-map-lax-reflexive-globular-map
+globular-map-lax-reflexive-globular-map
   ( id-lax-reflexive-globular-map G) =
   map-id-lax-reflexive-globular-map G
-lax-reflexive-globular-map.is-lax-reflexive-lax-reflexive-globular-map
+is-lax-reflexive-lax-reflexive-globular-map
   ( id-lax-reflexive-globular-map G) =
   ( is-lax-reflexive-id-lax-reflexive-globular-map G)
 ```
