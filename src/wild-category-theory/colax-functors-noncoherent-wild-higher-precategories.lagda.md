@@ -52,6 +52,44 @@ in `ℬ`.
 
 ## Definitions
 
+### The predicate on maps on noncoherent wild higher precategories of preserving identity structure
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2)
+  (ℬ : Noncoherent-Wild-Higher-Precategory l3 l4)
+  (F : map-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ)
+  where
+  
+  preserves-id-structure-map-Noncoherent-Wild-Higher-Precategory :
+    UU (l1 ⊔ l2 ⊔ l4)
+  preserves-id-structure-map-Noncoherent-Wild-Higher-Precategory =
+    is-colax-reflexive-globular-map
+      ( reflexive-globular-type-Noncoherent-Wild-Higher-Precategory 𝒜)
+      ( reflexive-globular-type-Noncoherent-Wild-Higher-Precategory ℬ)
+      ( F)
+```
+
+### The predicate on maps of noncoherent wild higher precategories of preserving composition structure
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2)
+  (ℬ : Noncoherent-Wild-Higher-Precategory l3 l4)
+  (F : map-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ)
+  where
+
+  preserves-comp-structure-map-Noncoherent-Wild-Higher-Precategory :
+    UU (l1 ⊔ l2 ⊔ l4)
+  preserves-comp-structure-map-Noncoherent-Wild-Higher-Precategory =
+    is-colax-transitive-globular-map
+      ( transitive-globular-type-Noncoherent-Wild-Higher-Precategory 𝒜)
+      ( transitive-globular-type-Noncoherent-Wild-Higher-Precategory ℬ)
+      ( F)
+```
+
 ### The predicate of being a colax functor between noncoherent wild higher precategories
 
 ```agda
@@ -66,10 +104,7 @@ record
   
   field
     is-reflexive-is-colax-functor-Noncoherent-Wild-Higher-Precategory :
-      is-colax-reflexive-globular-map
-        ( reflexive-globular-type-Noncoherent-Wild-Higher-Precategory 𝒜)
-        ( reflexive-globular-type-Noncoherent-Wild-Higher-Precategory ℬ)
-        ( F)
+      preserves-id-structure-map-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ F
 
   preserves-id-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory :
     (x : obj-Noncoherent-Wild-Higher-Precategory 𝒜) →
@@ -94,10 +129,7 @@ record
 
   field
     is-transitive-is-colax-functor-Noncoherent-Wild-Higher-Precategory :
-      is-colax-transitive-globular-map
-        ( transitive-globular-type-Noncoherent-Wild-Higher-Precategory 𝒜)
-        ( transitive-globular-type-Noncoherent-Wild-Higher-Precategory ℬ)
-        ( F)
+      preserves-comp-structure-map-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ F
 
   preserves-comp-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory :
     {x y z : obj-Noncoherent-Wild-Higher-Precategory 𝒜}
@@ -156,7 +188,11 @@ colax-functor-Noncoherent-Wild-Higher-Precategory :
 colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ =
   Σ ( map-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ)
     ( is-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ)
+```
 
+- The action of colax functors on objects, morphisms, and higher morphisms
+
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   {𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2}
@@ -168,20 +204,11 @@ module _
     map-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ
   map-colax-functor-Noncoherent-Wild-Higher-Precategory = pr1 F
 
-  is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory :
-    is-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ
-      ( map-colax-functor-Noncoherent-Wild-Higher-Precategory)
-  is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory = pr2 F
-
   obj-colax-functor-Noncoherent-Wild-Higher-Precategory :
     obj-Noncoherent-Wild-Higher-Precategory 𝒜 →
     obj-Noncoherent-Wild-Higher-Precategory ℬ
-  obj-colax-functor-Noncoherent-Wild-Higher-Precategory = {!!}
-
-{-
-    obj-map-Noncoherent-Wild-Higher-Precategory
-      ( map-colax-functor-Noncoherent-Wild-Higher-Precategory)
--}
+  obj-colax-functor-Noncoherent-Wild-Higher-Precategory =
+    0-cell-globular-map map-colax-functor-Noncoherent-Wild-Higher-Precategory
 
   hom-colax-functor-Noncoherent-Wild-Higher-Precategory :
     {x y : obj-Noncoherent-Wild-Higher-Precategory 𝒜} →
@@ -189,148 +216,145 @@ module _
     hom-Noncoherent-Wild-Higher-Precategory ℬ
       ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory x)
       ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory y)
-  hom-colax-functor-Noncoherent-Wild-Higher-Precategory = {!!}
+  hom-colax-functor-Noncoherent-Wild-Higher-Precategory =
+    1-cell-globular-map map-colax-functor-Noncoherent-Wild-Higher-Precategory
+
+  hom-globular-map-colax-functor-Noncoherent-Wild-Higher-Precategory :
+    {x y : obj-Noncoherent-Wild-Higher-Precategory 𝒜} →
+    globular-map
+      ( hom-globular-type-Noncoherent-Wild-Higher-Precategory 𝒜 x y)
+      ( hom-globular-type-Noncoherent-Wild-Higher-Precategory ℬ
+        ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory x)
+        ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory y))
+  hom-globular-map-colax-functor-Noncoherent-Wild-Higher-Precategory =
+    1-cell-globular-map-globular-map
+      map-colax-functor-Noncoherent-Wild-Higher-Precategory
+
+  2-hom-colax-functor-Noncoherent-Wild-Higher-Precategory :
+    {x y : obj-Noncoherent-Wild-Higher-Precategory 𝒜}
+    {f g : hom-Noncoherent-Wild-Higher-Precategory 𝒜 x y} →
+    2-hom-Noncoherent-Wild-Higher-Precategory 𝒜 f g →
+    2-hom-Noncoherent-Wild-Higher-Precategory ℬ
+      ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory f)
+      ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory g)
+  2-hom-colax-functor-Noncoherent-Wild-Higher-Precategory =
+    2-cell-globular-map map-colax-functor-Noncoherent-Wild-Higher-Precategory
+
+  is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory :
+    is-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ
+      ( map-colax-functor-Noncoherent-Wild-Higher-Precategory)
+  is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory = pr2 F
+```
+
+- Preservation by colax functors of identity morphisms
+
+```agda
+  preserves-id-hom-colax-functor-Noncoherent-Wild-Higher-Precategory :
+    (x : obj-Noncoherent-Wild-Higher-Precategory 𝒜) →
+    2-hom-Noncoherent-Wild-Higher-Precategory ℬ
+      ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory
+        ( id-hom-Noncoherent-Wild-Higher-Precategory 𝒜 {x}))
+      ( id-hom-Noncoherent-Wild-Higher-Precategory ℬ
+        { obj-colax-functor-Noncoherent-Wild-Higher-Precategory x})
+  preserves-id-hom-colax-functor-Noncoherent-Wild-Higher-Precategory =
+    preserves-id-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory
+      ( is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory)
+    
+```
+
+- Preservation by colax functors of composition
+
+```agda
+  preserves-comp-hom-colax-functor-Noncoherent-Wild-Higher-Precategory :
+    {x y z : obj-Noncoherent-Wild-Higher-Precategory 𝒜}
+    (g : hom-Noncoherent-Wild-Higher-Precategory 𝒜 y z)
+    (f : hom-Noncoherent-Wild-Higher-Precategory 𝒜 x y) →
+    2-hom-Noncoherent-Wild-Higher-Precategory ℬ
+      ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory
+        ( comp-hom-Noncoherent-Wild-Higher-Precategory 𝒜 g f))
+      ( comp-hom-Noncoherent-Wild-Higher-Precategory ℬ
+        ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory g)
+        ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory f))
+  preserves-comp-hom-colax-functor-Noncoherent-Wild-Higher-Precategory =
+    preserves-comp-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory
+      ( is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory)
+```
+
+- The induced colax functor on the wild category of morphisms between two objects
+
+```agda
+  hom-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory :
+    (x y : obj-Noncoherent-Wild-Higher-Precategory 𝒜) →
+    colax-functor-Noncoherent-Wild-Higher-Precategory
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
+        ( 𝒜)
+        ( x)
+        ( y))
+      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
+        ( ℬ)
+        ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory x)
+        ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory y))
+  hom-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory x y =
+    ( hom-globular-map-colax-functor-Noncoherent-Wild-Higher-Precategory ,
+      is-colax-functor-hom-globular-map-is-colax-functor-Noncoherent-Wild-Higher-Precategory
+        is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory)
+```
+
+### The identity colax functor on a noncoherent wild higher precategory
+
+```agda
+is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory :
+  {l1 l2 : Level} (𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2) →
+  is-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 𝒜
+    ( id-map-Noncoherent-Wild-Higher-Precategory 𝒜)
+is-reflexive-is-colax-functor-Noncoherent-Wild-Higher-Precategory
+  ( is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜) =
+  is-colax-reflexive-id-colax-reflexive-globular-map
+    ( reflexive-globular-type-Noncoherent-Wild-Higher-Precategory 𝒜)
+is-transitive-is-colax-functor-Noncoherent-Wild-Higher-Precategory (is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜) = {!!}
 
 {-
-    hom-map-Noncoherent-Wild-Higher-Precategory
-      map-colax-functor-Noncoherent-Wild-Higher-Precategory
+  λ where
+    .preserves-id-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory
+      x →
+      id-2-hom-Noncoherent-Wild-Higher-Precategory 𝒜
+    .preserves-comp-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory
+      g f →
+      id-2-hom-Noncoherent-Wild-Higher-Precategory 𝒜
+    .is-colax-functor-map-hom-Noncoherent-Wild-Higher-Precategory x y →
+      is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory
+        ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
+          ( 𝒜)
+          ( x)
+          ( y))
 -}
 
---   preserves-id-hom-colax-functor-Noncoherent-Wild-Higher-Precategory :
---     (x : obj-Noncoherent-Wild-Higher-Precategory 𝒜) →
---     2-hom-Noncoherent-Wild-Higher-Precategory ℬ
---       ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory
---         ( id-hom-Noncoherent-Wild-Higher-Precategory 𝒜 {x}))
---       ( id-hom-Noncoherent-Wild-Higher-Precategory ℬ
---         { obj-colax-functor-Noncoherent-Wild-Higher-Precategory x})
---   preserves-id-hom-colax-functor-Noncoherent-Wild-Higher-Precategory =
---     preserves-id-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory
---       ( is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory)
+id-colax-functor-Noncoherent-Wild-Higher-Precategory :
+  {l1 l2 : Level} (𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2) →
+  colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 𝒜
+id-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 =
+  ( id-map-Noncoherent-Wild-Higher-Precategory 𝒜 ,
+    is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜)
+```
 
---   preserves-comp-hom-colax-functor-Noncoherent-Wild-Higher-Precategory :
---     {x y z : obj-Noncoherent-Wild-Higher-Precategory 𝒜}
---     (g : hom-Noncoherent-Wild-Higher-Precategory 𝒜 y z)
---     (f : hom-Noncoherent-Wild-Higher-Precategory 𝒜 x y) →
---     2-hom-Noncoherent-Wild-Higher-Precategory ℬ
---       ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory
---         ( comp-hom-Noncoherent-Wild-Higher-Precategory 𝒜 g f))
---       ( comp-hom-Noncoherent-Wild-Higher-Precategory ℬ
---         ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory g)
---         ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory f))
---   preserves-comp-hom-colax-functor-Noncoherent-Wild-Higher-Precategory =
---     preserves-comp-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory
---       ( is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory)
+### Composition of colax functors between noncoherent wild higher precategories
 
---   2-hom-colax-functor-Noncoherent-Wild-Higher-Precategory :
---     {x y : obj-Noncoherent-Wild-Higher-Precategory 𝒜}
---     {f g : hom-Noncoherent-Wild-Higher-Precategory 𝒜 x y} →
---     2-hom-Noncoherent-Wild-Higher-Precategory 𝒜 f g →
---     2-hom-Noncoherent-Wild-Higher-Precategory ℬ
---       ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory f)
---       ( hom-colax-functor-Noncoherent-Wild-Higher-Precategory g)
---   2-hom-colax-functor-Noncoherent-Wild-Higher-Precategory =
---     2-hom-map-Noncoherent-Wild-Higher-Precategory
---       map-colax-functor-Noncoherent-Wild-Higher-Precategory
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2}
+  {ℬ : Noncoherent-Wild-Higher-Precategory l3 l4}
+  {𝒞 : Noncoherent-Wild-Higher-Precategory l5 l6}
+  (G : colax-functor-Noncoherent-Wild-Higher-Precategory ℬ 𝒞)
+  (F : colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ)
+  where
 
---   hom-globular-map-map-colax-functor-Noncoherent-Wild-Higher-Precategory :
---     {x y : obj-Noncoherent-Wild-Higher-Precategory 𝒜} →
---     globular-map
---       ( hom-globular-type-Noncoherent-Wild-Higher-Precategory 𝒜 x y)
---       ( hom-globular-type-Noncoherent-Wild-Higher-Precategory ℬ
---         ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory x)
---         ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory y))
---   hom-globular-map-map-colax-functor-Noncoherent-Wild-Higher-Precategory =
---     hom-globular-map-map-Noncoherent-Wild-Higher-Precategory
---       ( map-colax-functor-Noncoherent-Wild-Higher-Precategory)
-
---   map-hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Wild-Higher-Precategory :
---     (x y : obj-Noncoherent-Wild-Higher-Precategory 𝒜) →
---     map-Noncoherent-Wild-Higher-Precategory
---       ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
---         ( 𝒜)
---         ( x)
---         ( y))
---       ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
---         ( ℬ)
---         ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory x)
---         ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory y))
---   map-hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Wild-Higher-Precategory =
---     hom-noncoherent-wild-higher-precategory-map-Noncoherent-Wild-Higher-Precategory
---       ( map-colax-functor-Noncoherent-Wild-Higher-Precategory)
-
---   hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Wild-Higher-Precategory :
---     (x y : obj-Noncoherent-Wild-Higher-Precategory 𝒜) →
---     colax-functor-Noncoherent-Wild-Higher-Precategory
---       ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
---         ( 𝒜)
---         ( x)
---         ( y))
---       ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
---         ( ℬ)
---         ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory x)
---         ( obj-colax-functor-Noncoherent-Wild-Higher-Precategory y))
---   hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Wild-Higher-Precategory
---     x y =
---     ( map-hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Wild-Higher-Precategory
---         ( x)
---         ( y) ,
---       is-colax-functor-hom-globular-map-is-colax-functor-Noncoherent-Wild-Higher-Precategory
---         ( is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory)
---         ( x)
---         ( y))
--- ```
-
--- ### The identity colax functor on a noncoherent wild higher precategory
-
--- ```agda
--- is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory :
---   {l1 l2 : Level} (𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2) →
---   is-colax-functor-Noncoherent-Wild-Higher-Precategory
---     ( id-map-Noncoherent-Wild-Higher-Precategory 𝒜)
--- is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 = ?
-
--- {-
---   λ where
---     .preserves-id-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory
---       x →
---       id-2-hom-Noncoherent-Wild-Higher-Precategory 𝒜
---     .preserves-comp-hom-is-colax-functor-Noncoherent-Wild-Higher-Precategory
---       g f →
---       id-2-hom-Noncoherent-Wild-Higher-Precategory 𝒜
---     .is-colax-functor-map-hom-Noncoherent-Wild-Higher-Precategory x y →
---       is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory
---         ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
---           ( 𝒜)
---           ( x)
---           ( y))
--- -}
-
--- id-colax-functor-Noncoherent-Wild-Higher-Precategory :
---   {l1 l2 : Level} (𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2) →
---   colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 𝒜
--- id-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 =
---   ( id-map-Noncoherent-Wild-Higher-Precategory 𝒜 ,
---     is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜)
--- ```
-
--- ### Composition of colax functors between noncoherent wild higher precategories
-
--- ```agda
--- module _
---   {l1 l2 l3 l4 l5 l6 : Level}
---   {𝒜 : Noncoherent-Wild-Higher-Precategory l1 l2}
---   {ℬ : Noncoherent-Wild-Higher-Precategory l3 l4}
---   {𝒞 : Noncoherent-Wild-Higher-Precategory l5 l6}
---   (G : colax-functor-Noncoherent-Wild-Higher-Precategory ℬ 𝒞)
---   (F : colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ)
---   where
-
---   map-comp-colax-functor-Noncoherent-Wild-Higher-Precategory :
---     map-Noncoherent-Wild-Higher-Precategory 𝒜 𝒞
---   map-comp-colax-functor-Noncoherent-Wild-Higher-Precategory =
---     comp-map-Noncoherent-Wild-Higher-Precategory
---       ( map-colax-functor-Noncoherent-Wild-Higher-Precategory G)
---       ( map-colax-functor-Noncoherent-Wild-Higher-Precategory F)
+  map-comp-colax-functor-Noncoherent-Wild-Higher-Precategory :
+    map-Noncoherent-Wild-Higher-Precategory 𝒜 𝒞
+  map-comp-colax-functor-Noncoherent-Wild-Higher-Precategory =
+    comp-map-Noncoherent-Wild-Higher-Precategory
+      ( map-colax-functor-Noncoherent-Wild-Higher-Precategory G)
+      ( map-colax-functor-Noncoherent-Wild-Higher-Precategory F)
 
 -- is-colax-functor-comp-colax-functor-Noncoherent-Wild-Higher-Precategory :
 --   {l1 l2 l3 l4 l5 l6 : Level}

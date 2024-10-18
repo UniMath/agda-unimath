@@ -33,10 +33,20 @@ from the image of the reflexivity cell at `x` in `G` to the reflexivity cell at
 `f₀ x`, such that the globular map `f' : G' x y → H' (f₀ x) (f₀ y)` is again
 colax reflexive.
 
-Note: When reflexive globular types are viewed as type-valued presheaves over
+### Lack of composition for colax reflexive globular maps
+
+Note that the colax reflexive globular maps lack composition. For the composition of `g` and `f` to exist, there should be a `2`-cell from `g (f (refl G x))` to `refl K (g (f x))`, we need to compose the 2-cell that `g` preserves reflexivity with the action of `g` on the 2-cell that `f` preserves reflexivity. However, since the reflexive globular type `G` is not assumed to be [transitive](structured-types.transitive-globular-types.md), it might lack such instances of the compositions.
+
+### Colax reflexive globular maps versus the morphisms of presheaves on the reflexive globe category
+
+When reflexive globular types are viewed as type-valued presheaves over
 the reflexive globe category, the resulting notion of morphism is that of
 [reflexive globular maps](structured-types.reflexive-globular-maps.md), which is
 stricter than the notion of colax reflexive globular maps.
+
+### Lax versus colax
+
+The notion of [lax reflexive globular map](structured-types.lax-reflexive-globular-maps.md) is almost the same, except with the direction of the 2-cell reversed. In general, the direction of lax coherence cells is determined by applying the morphism componentwise first, and then the operations, while the direction of colax coherence cells is determined by first applying the operations and then the morphism.
 
 ## Definitions
 
@@ -150,3 +160,39 @@ record
     1-cell-colax-reflexive-globular-map-colax-reflexive-globular-map =
     is-colax-reflexive-2-cell-globular-map-is-colax-reflexive-globular-map
 ```
+
+### The identity colax reflexive globular map
+
+```agda
+map-id-colax-reflexive-globular-map :
+  {l1 l2 : Level} (G : Reflexive-Globular-Type l1 l2) →
+  globular-map-Reflexive-Globular-Type G G
+map-id-colax-reflexive-globular-map G = id-globular-map _
+
+is-colax-reflexive-id-colax-reflexive-globular-map :
+  {l1 l2 : Level} (G : Reflexive-Globular-Type l1 l2) →
+  is-colax-reflexive-globular-map G G (map-id-colax-reflexive-globular-map G)
+preserves-refl-1-cell-is-colax-reflexive-globular-map
+  ( is-colax-reflexive-id-colax-reflexive-globular-map G)
+  x =
+  refl-2-cell-Reflexive-Globular-Type G
+is-colax-reflexive-1-cell-globular-map-is-colax-reflexive-globular-map
+  ( is-colax-reflexive-id-colax-reflexive-globular-map G) =
+  is-colax-reflexive-id-colax-reflexive-globular-map
+    ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type G _ _)
+
+id-colax-reflexive-globular-map :
+  {l1 l2 : Level} (G : Reflexive-Globular-Type l1 l2) →
+  colax-reflexive-globular-map G G
+colax-reflexive-globular-map.globular-map-colax-reflexive-globular-map
+  ( id-colax-reflexive-globular-map G) =
+  map-id-colax-reflexive-globular-map G
+colax-reflexive-globular-map.is-colax-reflexive-colax-reflexive-globular-map
+  ( id-colax-reflexive-globular-map G) =
+  ( is-colax-reflexive-id-colax-reflexive-globular-map G)
+```
+
+## See also
+
+- [Lax reflexive globular maps](structured-types.lax-reflexive-globular-maps.md)
+- [Reflexive globular maps](structured-types.reflexive-globular-maps.md)

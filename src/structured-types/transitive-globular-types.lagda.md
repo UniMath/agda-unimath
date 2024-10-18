@@ -112,7 +112,11 @@ record
 
   constructor
     make-Transitive-Globular-Type
+```
 
+- The underlying globular type of a transitive globular type
+
+```agda
   field
     globular-type-Transitive-Globular-Type : Globular-Type l1 l2
 
@@ -161,7 +165,11 @@ record
   globular-structure-Transitive-Globular-Type =
     globular-structure-0-cell-Globular-Type
       ( globular-type-Transitive-Globular-Type)
+```
 
+- The composition structure of a transitive globular type
+
+```agda
   field
     is-transitive-Transitive-Globular-Type :
       is-transitive-Globular-Type globular-type-Transitive-Globular-Type
@@ -196,6 +204,18 @@ record
   is-transitive-Transitive-Globular-Type
     ( 1-cell-transitive-globular-type-Transitive-Globular-Type x y) =
     is-transitive-1-cell-globular-type-is-transitive-Globular-Type
+      is-transitive-Transitive-Globular-Type
+
+  2-cell-transitive-globular-type-Transitive-Globular-Type :
+    {x y : 0-cell-Transitive-Globular-Type} →
+    (f g : 1-cell-Transitive-Globular-Type x y) →
+    Transitive-Globular-Type l2 l2
+  globular-type-Transitive-Globular-Type
+    ( 2-cell-transitive-globular-type-Transitive-Globular-Type f g) =
+    2-cell-globular-type-Transitive-Globular-Type f g
+  is-transitive-Transitive-Globular-Type
+    ( 2-cell-transitive-globular-type-Transitive-Globular-Type f g) =
+    is-transitive-2-cell-globular-type-is-transitive-Globular-Type
       is-transitive-Transitive-Globular-Type
 
 open Transitive-Globular-Type public
@@ -334,3 +354,4 @@ transitive-globular-structure-Id A =
 ## See also
 
 - [Composition structure on globular types](structured-types.composition-structure-globular-types.md)
+- [Noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md) are globular types that are both [reflexive](structured-types.reflexive-globular-types.md) and transitive.

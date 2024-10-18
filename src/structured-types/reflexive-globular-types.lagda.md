@@ -124,7 +124,11 @@ module _
 record
   Reflexive-Globular-Type (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
   where
+```
 
+- The underlying globular type of a reflexive globular type
+
+```agda
   field
     globular-type-Reflexive-Globular-Type : Globular-Type l1 l2
 
@@ -148,7 +152,11 @@ record
   globular-structure-Reflexive-Globular-Type =
     globular-structure-0-cell-Globular-Type
       ( globular-type-Reflexive-Globular-Type)
+```
 
+- The reflexivity structure of a reflexive globular type
+
+```agda
   field
     refl-Reflexive-Globular-Type :
       is-reflexive-Globular-Type globular-type-Reflexive-Globular-Type
@@ -166,6 +174,16 @@ record
   1-cell-globular-type-Reflexive-Globular-Type =
     1-cell-globular-type-Globular-Type globular-type-Reflexive-Globular-Type
 
+  refl-2-cell-Reflexive-Globular-Type :
+    {x y : 0-cell-Reflexive-Globular-Type}
+    {f : 1-cell-Reflexive-Globular-Type x y} →
+    2-cell-Reflexive-Globular-Type f f
+  refl-2-cell-Reflexive-Globular-Type =
+    is-reflexive-2-cell-is-reflexive-Globular-Type
+      ( globular-type-Reflexive-Globular-Type)
+      ( refl-Reflexive-Globular-Type)
+      ( _)
+
   refl-2-cell-globular-type-Reflexive-Globular-Type :
     {x y : 0-cell-Reflexive-Globular-Type} →
     is-reflexive-Globular-Type
@@ -173,7 +191,11 @@ record
   refl-2-cell-globular-type-Reflexive-Globular-Type =
     is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
       refl-Reflexive-Globular-Type
+```
 
+- The reflexive globular type of 1-cells of a reflexive globular type
+
+```agda
   1-cell-reflexive-globular-type-Reflexive-Globular-Type :
     (x y : 0-cell-Reflexive-Globular-Type) → Reflexive-Globular-Type l2 l2
   globular-type-Reflexive-Globular-Type
@@ -327,3 +349,5 @@ is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
 ## See also
 
 - [Lax reflexive globular maps](structured-types.colax-reflexive-globular-maps.md)
+- [Reflexive globular maps](structured-tyeps.reflexive-globular-maps.md)
+- [Noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md) are globular types that are both reflexive and [transitive](structured-types.transitive-globular-types.md).
