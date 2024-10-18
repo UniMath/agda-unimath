@@ -59,6 +59,9 @@ is-prop-is-decidable-prop X =
         ( is-prop-is-prop X)
         ( is-prop-is-decidable (pr1 H)))
 
+is-decidable-type-Prop : {l : Level} → Prop l → UU l
+is-decidable-type-Prop P = is-decidable (type-Prop P)
+
 is-decidable-prop-Prop :
   {l : Level} (A : UU l) → Prop l
 pr1 (is-decidable-prop-Prop A) = is-decidable-prop A

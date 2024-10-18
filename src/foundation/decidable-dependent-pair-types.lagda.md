@@ -24,7 +24,27 @@ open import foundation-core.functoriality-dependent-pair-types
 
 ## Idea
 
-We describe conditions under which dependent sums are decidable.
+We describe conditions under which
+[dependent sums](foundation.dependent-pair-types.md) are
+[decidable](foundation.decidable-types.md)
+
+## Properites
+
+### Dependent sums of a uniformly decidable family of types
+
+```agda
+is-decidable-Σ-uniformly-decidable-family :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  is-decidable A → (((a : A) → B a) + ((a : A) → ¬ B a)) → is-decidable (Σ A B)
+is-decidable-Σ-uniformly-decidable-family (inl a) (inl b) =
+  inl (a , b a)
+is-decidable-Σ-uniformly-decidable-family (inl a) (inr b) =
+  inr (λ x → b (pr1 x) (pr2 x))
+is-decidable-Σ-uniformly-decidable-family (inr a) _ =
+  inr (λ x → a (pr1 x))
+```
+
+### Decidability of dependent sums over coproducts
 
 ```agda
 is-decidable-Σ-coproduct :
@@ -35,7 +55,11 @@ is-decidable-Σ-coproduct {l1} {l2} {l3} {A} {B} C dA dB =
   is-decidable-equiv
     ( right-distributive-Σ-coproduct A B C)
     ( is-decidable-coproduct dA dB)
+```
 
+### Decidability of dependent sums over `Maybe`
+
+```agda
 is-decidable-Σ-Maybe :
   {l1 l2 : Level} {A : UU l1} {B : Maybe A → UU l2} →
   is-decidable (Σ A (B ∘ unit-Maybe)) → is-decidable (B exception-Maybe) →
@@ -45,7 +69,11 @@ is-decidable-Σ-Maybe {l1} {l2} {A} {B} dA de =
     ( is-decidable-equiv
       ( left-unit-law-Σ (B ∘ inr))
       ( de))
+```
 
+### Decidability of dependent sums over equivalences
+
+```agda
 is-decidable-Σ-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} {D : B → UU l4}
   (e : A ≃ B) (f : (x : A) → C x ≃ D (map-equiv e x)) →

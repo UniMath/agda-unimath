@@ -154,36 +154,6 @@ is-decidable-function-type' (inl a) d with d a
 is-decidable-function-type' (inr na) d = inl (ex-falso ∘ na)
 ```
 
-### Dependent sums of a uniformly decidable family of types over a decidable base is decidable
-
-```agda
-is-decidable-Σ-uniformly-decidable-family :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-decidable A → (((a : A) → B a) + ((a : A) → ¬ B a)) → is-decidable (Σ A B)
-is-decidable-Σ-uniformly-decidable-family (inl a) (inl b) =
-  inl (a , b a)
-is-decidable-Σ-uniformly-decidable-family (inl a) (inr b) =
-  inr (λ x → b (pr1 x) (pr2 x))
-is-decidable-Σ-uniformly-decidable-family (inr a) _ =
-  inr (λ x → a (pr1 x))
-```
-
-### Dependent products of uniformly decidable families over decidable bases are decidable
-
-```agda
-is-decidable-Π-uniformly-decidable-family :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-decidable A →
-  (((a : A) → B a) + ((a : A) → ¬ (B a))) →
-  is-decidable ((a : A) → (B a))
-is-decidable-Π-uniformly-decidable-family (inl a) (inl b) =
-  inl b
-is-decidable-Π-uniformly-decidable-family (inl a) (inr b) =
-  inr (λ f → b a (f a))
-is-decidable-Π-uniformly-decidable-family (inr na) _ =
-  inl (ex-falso ∘ na)
-```
-
 ### The negation of a decidable type is decidable
 
 ```agda
