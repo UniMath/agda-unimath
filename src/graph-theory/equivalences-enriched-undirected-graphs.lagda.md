@@ -92,11 +92,11 @@ module _
       ( undirected-graph-Enriched-Undirected-Graph A B H)
   equiv-undirected-graph-equiv-Enriched-Undirected-Graph = pr1 e
 
-  equiv-vertex-equiv-Enriched-Undirected-Graph :
+  vertex-equiv-equiv-Enriched-Undirected-Graph :
     vertex-Enriched-Undirected-Graph A B G ≃
     vertex-Enriched-Undirected-Graph A B H
-  equiv-vertex-equiv-Enriched-Undirected-Graph =
-    equiv-vertex-equiv-Undirected-Graph
+  vertex-equiv-equiv-Enriched-Undirected-Graph =
+    vertex-equiv-equiv-Undirected-Graph
       ( undirected-graph-Enriched-Undirected-Graph A B G)
       ( undirected-graph-Enriched-Undirected-Graph A B H)
       ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
@@ -128,13 +128,13 @@ module _
       ( undirected-graph-Enriched-Undirected-Graph A B H)
       ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)
 
-  equiv-edge-equiv-Enriched-Undirected-Graph :
+  edge-equiv-equiv-Enriched-Undirected-Graph :
     ( p : unordered-pair-vertices-Enriched-Undirected-Graph A B G) →
     edge-Enriched-Undirected-Graph A B G p ≃
     edge-Enriched-Undirected-Graph A B H
       ( unordered-pair-vertices-equiv-Enriched-Undirected-Graph p)
-  equiv-edge-equiv-Enriched-Undirected-Graph =
-    equiv-edge-equiv-Undirected-Graph
+  edge-equiv-equiv-Enriched-Undirected-Graph =
+    edge-equiv-equiv-Undirected-Graph
       ( undirected-graph-Enriched-Undirected-Graph A B G)
       ( undirected-graph-Enriched-Undirected-Graph A B H)
       ( equiv-undirected-graph-equiv-Enriched-Undirected-Graph)

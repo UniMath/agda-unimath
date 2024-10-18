@@ -85,7 +85,7 @@ module _
   equiv-node-fiber-equiv-Directed-Tree =
     equiv-Σ
       ( λ y → walk-Directed-Tree T y (node-equiv-Directed-Tree S T f x))
-      ( equiv-node-equiv-Directed-Tree S T f)
+      ( node-equiv-equiv-Directed-Tree S T f)
       ( λ y → equiv-walk-equiv-Directed-Tree S T f {y} {x})
 
   node-fiber-equiv-Directed-Tree :
@@ -106,7 +106,7 @@ module _
       ( λ e →
         walk-equiv-Directed-Tree S T f v ＝
         cons-walk-Directed-Graph e (walk-equiv-Directed-Tree S T f w))
-      ( equiv-edge-equiv-Directed-Tree S T f y z)
+      ( edge-equiv-equiv-Directed-Tree S T f y z)
       ( λ e →
         equiv-ap
           ( equiv-walk-equiv-Directed-Tree S T f)

@@ -48,6 +48,7 @@ module _
 ## See also
 
 - [Large reflexive graphs](graph-theory.large-reflexive-graphs.md)
+- [The universal reflexive graph](graph-theory.universal-reflexive-graph.md)
 
 ## External links
 
