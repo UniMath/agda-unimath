@@ -34,15 +34,15 @@ that the cube is presented as a lattice
             A'
           / | \
          /  |  \
-        /   |   \
+        ∨   ∨   ∨
        B'   A    C'
        |\ /   \ /|
        | \     / |
-       |/ \   / \|
+       ∨∨ ∨   ∨ ∨∨
        B    D'   C
         \   |   /
          \  |  /
-          \ | /
+          ∨ ∨ ∨
             D
 ```
 

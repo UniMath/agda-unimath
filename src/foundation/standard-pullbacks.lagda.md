@@ -168,9 +168,22 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   where
 
+  coherence-Eq-standard-pullback :
+    (t t' : standard-pullback f g) →
+    vertical-map-standard-pullback t ＝
+    vertical-map-standard-pullback t' →
+    horizontal-map-standard-pullback t ＝
+    horizontal-map-standard-pullback t' →
+    UU l3
+  coherence-Eq-standard-pullback (a , b , p) (a' , b' , p') α β =
+    ap f α ∙ p' ＝ p ∙ ap g β
+
   Eq-standard-pullback : (t t' : standard-pullback f g) → UU (l1 ⊔ l2 ⊔ l3)
   Eq-standard-pullback (a , b , p) (a' , b' , p') =
-    Σ (a ＝ a') (λ α → Σ (b ＝ b') (λ β → ap f α ∙ p' ＝ p ∙ ap g β))
+    Σ ( a ＝ a')
+      ( λ α →
+        Σ ( b ＝ b')
+          ( coherence-Eq-standard-pullback (a , b , p) (a' , b' , p') α))
 
   refl-Eq-standard-pullback :
     (t : standard-pullback f g) → Eq-standard-pullback t t
@@ -197,7 +210,7 @@ module _
         ( λ y → id-equiv)
         ( λ p' → equiv-concat' p' (inv right-unit) ∘e equiv-inv p p'))
 
-  map-extensionality-standard-pullback :
+  eq-Eq-standard-pullback :
     { s t : standard-pullback f g}
     ( α : vertical-map-standard-pullback s ＝ vertical-map-standard-pullback t)
     ( β :
@@ -206,7 +219,7 @@ module _
     ( ( ap f α ∙ coherence-square-standard-pullback t) ＝
       ( coherence-square-standard-pullback s ∙ ap g β)) →
     s ＝ t
-  map-extensionality-standard-pullback {s} {t} α β γ =
+  eq-Eq-standard-pullback {s} {t} α β γ =
     map-inv-equiv (extensionality-standard-pullback s t) (α , β , γ)
 ```
 
@@ -538,7 +551,7 @@ module _
         ( map-fold-cone-standard-pullback)
         ( map-inv-fold-cone-standard-pullback)
     is-section-map-inv-fold-cone-standard-pullback ((a , b) , (x , α)) =
-      map-extensionality-standard-pullback
+      eq-Eq-standard-pullback
         ( map-product f g)
         ( diagonal-product X)
         ( refl)
@@ -567,7 +580,7 @@ module _
         ( map-fold-cone-standard-pullback)
         ( map-inv-fold-cone-standard-pullback)
     is-retraction-map-inv-fold-cone-standard-pullback (a , b , p) =
-      map-extensionality-standard-pullback f g
+      eq-Eq-standard-pullback f g
         ( refl)
         ( refl)
         ( inv
