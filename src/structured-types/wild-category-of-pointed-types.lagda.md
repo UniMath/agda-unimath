@@ -105,7 +105,7 @@ is-reflexive-uniform-pointed-map-Globular-Type A B =
 
 id-structure-uniform-pointed-type-Large-Globular-Type :
   is-reflexive-Large-Globular-Type uniform-pointed-type-Large-Globular-Type
-refl-0-cell-is-reflexive-Large-Globular-Type
+refl-1-cell-is-reflexive-Large-Globular-Type
   id-structure-uniform-pointed-type-Large-Globular-Type A =
   id-pointed-map
 is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type
@@ -176,7 +176,7 @@ comp-structure-Noncoherent-Large-Wild-Higher-Precategory
 
 #### The large globular type of pointed types, pointed maps, and nonuniform pointed homotopies
 
-```agda  
+```agda
 pointed-htpy-Globular-Type :
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
   (f g : pointed-Π A B) → Globular-Type (l1 ⊔ l2) (l1 ⊔ l2)
@@ -266,7 +266,7 @@ pointed-map-Reflexive-Globular-Type A B =
 
 is-reflexive-pointed-type-Large-Globular-Type :
   is-reflexive-Large-Globular-Type pointed-type-Large-Globular-Type
-refl-0-cell-is-reflexive-Large-Globular-Type
+refl-1-cell-is-reflexive-Large-Globular-Type
   is-reflexive-pointed-type-Large-Globular-Type A = id-pointed-map
 is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type
   is-reflexive-pointed-type-Large-Globular-Type =
@@ -340,5 +340,8 @@ comp-structure-Noncoherent-Large-Wild-Higher-Precategory
 
 ## See also
 
-- The categorical laws of pointed maps and pointed homotopies are proven in [pointed homotopies](structured-types.pointed-homotopies.md).
-- The categorical laws of pointed maps and uniform pointed homotopies are proven in [uniform pointed homotopies](structured-types.uniform-pointed-homotopies.md).
+- The categorical laws of pointed maps and pointed homotopies are proven in
+  [pointed homotopies](structured-types.pointed-homotopies.md).
+- The categorical laws of pointed maps and uniform pointed homotopies are proven
+  in
+  [uniform pointed homotopies](structured-types.uniform-pointed-homotopies.md).

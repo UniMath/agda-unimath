@@ -53,12 +53,12 @@ module _
   (r : is-reflexive-Globular-Type G)
   where
 
-  refl-1-cell-is-reflexive-Globular-Type :
+  refl-2-cell-is-reflexive-Globular-Type :
     {x : 0-cell-Globular-Type G} →
     1-cell-Globular-Type G x x
-  refl-1-cell-is-reflexive-Globular-Type =
+  refl-2-cell-is-reflexive-Globular-Type =
     is-reflexive-1-cell-is-reflexive-Globular-Type r _
-  
+
   is-reflexive-2-cell-is-reflexive-Globular-Type :
     {x y : 0-cell-Globular-Type G} →
     is-reflexive (2-cell-Globular-Type G {x} {y})
@@ -66,10 +66,10 @@ module _
     is-reflexive-1-cell-is-reflexive-Globular-Type
       ( is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type r)
 
-  refl-2-cell-is-reflexive-Globular-Type :
+  refl-3-cell-is-reflexive-Globular-Type :
     {x y : 0-cell-Globular-Type G} {f : 1-cell-Globular-Type G x y} →
     2-cell-Globular-Type G f f
-  refl-2-cell-is-reflexive-Globular-Type =
+  refl-3-cell-is-reflexive-Globular-Type =
     is-reflexive-1-cell-is-reflexive-Globular-Type
       ( is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type r)
       ( _)
@@ -97,12 +97,12 @@ module _
       ( 1-cell-globular-type-Globular-Type G _ _)
       ( is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type r)
 
-  refl-3-cell-is-reflexive-Globular-Type :
+  refl-4-cell-is-reflexive-Globular-Type :
     {x y : 0-cell-Globular-Type G} →
     {f g : 1-cell-Globular-Type G x y} →
     {s : 2-cell-Globular-Type G f g} → 3-cell-Globular-Type G s s
-  refl-3-cell-is-reflexive-Globular-Type =
-    refl-2-cell-is-reflexive-Globular-Type
+  refl-4-cell-is-reflexive-Globular-Type =
+    refl-3-cell-is-reflexive-Globular-Type
       ( 1-cell-globular-type-Globular-Type G _ _)
       ( is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type r)
 
@@ -153,10 +153,10 @@ record
     refl-Reflexive-Globular-Type :
       is-reflexive-Globular-Type globular-type-Reflexive-Globular-Type
 
-  refl-0-cell-Reflexive-Globular-Type :
+  refl-1-cell-Reflexive-Globular-Type :
     {x : 0-cell-Reflexive-Globular-Type} →
     1-cell-Reflexive-Globular-Type x x
-  refl-0-cell-Reflexive-Globular-Type =
+  refl-1-cell-Reflexive-Globular-Type =
     is-reflexive-1-cell-is-reflexive-Globular-Type
       ( refl-Reflexive-Globular-Type)
       ( _)
@@ -166,11 +166,11 @@ record
   1-cell-globular-type-Reflexive-Globular-Type =
     1-cell-globular-type-Globular-Type globular-type-Reflexive-Globular-Type
 
-  refl-1-cell-globular-type-Reflexive-Globular-Type :
+  refl-2-cell-globular-type-Reflexive-Globular-Type :
     {x y : 0-cell-Reflexive-Globular-Type} →
     is-reflexive-Globular-Type
       ( 1-cell-globular-type-Reflexive-Globular-Type x y)
-  refl-1-cell-globular-type-Reflexive-Globular-Type =
+  refl-2-cell-globular-type-Reflexive-Globular-Type =
     is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
       refl-Reflexive-Globular-Type
 
@@ -181,7 +181,7 @@ record
     1-cell-globular-type-Reflexive-Globular-Type x y
   refl-Reflexive-Globular-Type
     ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type x y) =
-    refl-1-cell-globular-type-Reflexive-Globular-Type
+    refl-2-cell-globular-type-Reflexive-Globular-Type
 
 open Reflexive-Globular-Type public
 ```
@@ -204,9 +204,9 @@ module _
   is-reflexive-1-cell-is-reflexive-globular-structure =
     is-reflexive-1-cell-is-reflexive-Globular-Type r
 
-  refl-1-cell-is-reflexive-globular-structure :
+  refl-2-cell-is-reflexive-globular-structure :
     {x : A} → 1-cell-globular-structure G x x
-  refl-1-cell-is-reflexive-globular-structure =
+  refl-2-cell-is-reflexive-globular-structure =
     is-reflexive-1-cell-is-reflexive-Globular-Type r _
 
   is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure :
@@ -221,10 +221,10 @@ module _
   is-reflexive-2-cell-is-reflexive-globular-structure {x} {y} =
     is-reflexive-2-cell-is-reflexive-Globular-Type (make-Globular-Type G) r
 
-  refl-2-cell-is-reflexive-globular-structure :
+  refl-3-cell-is-reflexive-globular-structure :
     {x y : A} {f : 1-cell-globular-structure G x y} →
     2-cell-globular-structure G f f
-  refl-2-cell-is-reflexive-globular-structure =
+  refl-3-cell-is-reflexive-globular-structure =
     is-reflexive-2-cell-is-reflexive-globular-structure _
 
   is-reflexive-globular-structure-2-cell-is-reflexive-globular-structure :
@@ -243,13 +243,13 @@ module _
   is-reflexive-3-cell-is-reflexive-globular-structure =
     is-reflexive-3-cell-is-reflexive-Globular-Type (make-Globular-Type G) r
 
-  refl-3-cell-is-reflexive-globular-structure :
+  refl-4-cell-is-reflexive-globular-structure :
     {x y : A}
     {f g : 1-cell-globular-structure G x y}
     {H : 2-cell-globular-structure G f g} →
     3-cell-globular-structure G H H
-  refl-3-cell-is-reflexive-globular-structure {x} {y} {f} {g} {H} =
-    is-reflexive-3-cell-is-reflexive-globular-structure _ 
+  refl-4-cell-is-reflexive-globular-structure {x} {y} {f} {g} {H} =
+    is-reflexive-3-cell-is-reflexive-globular-structure _
 ```
 
 ### The type of reflexive globular structures
@@ -263,7 +263,9 @@ reflexive-globular-structure l2 A =
 
 ### Globular maps between reflexive globular types
 
-Since there are at least two notions of morphism between reflexive globular types, both of which have an underlying globular map, we record here the definition of globular maps between reflexive globular types.
+Since there are at least two notions of morphism between reflexive globular
+types, both of which have an underlying globular map, we record here the
+definition of globular maps between reflexive globular types.
 
 ```agda
 module _
@@ -324,4 +326,4 @@ is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
 
 ## See also
 
-- [Lax reflexive globular maps](structured-types.lax-reflexive-globular-maps.md)
+- [Lax reflexive globular maps](structured-types.colax-reflexive-globular-maps.md)

@@ -186,7 +186,7 @@ record
     2-hom-map-Noncoherent-Large-Wild-Higher-Precategory
       map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
-  hom-globular-type-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
+  hom-globular-map-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
     {x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1}
     {y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2} →
@@ -195,8 +195,8 @@ record
       ( hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory ℬ
         ( obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory x)
         ( obj-colax-functor-Noncoherent-Large-Wild-Higher-Precategory y))
-  hom-globular-type-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
-    hom-globular-type-map-Noncoherent-Large-Wild-Higher-Precategory
+  hom-globular-map-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
+    hom-globular-map-map-Noncoherent-Large-Wild-Higher-Precategory
       ( map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
 
   map-hom-noncoherent-wild-higher-precategory-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :

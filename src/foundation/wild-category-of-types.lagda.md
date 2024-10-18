@@ -122,7 +122,7 @@ Type-Large-Globular-Type : Large-Globular-Type lsuc (_⊔_)
 
 is-reflexive-Type-Large-Globular-Type :
   is-reflexive-Large-Globular-Type Type-Large-Globular-Type
-refl-0-cell-is-reflexive-Large-Globular-Type
+refl-1-cell-is-reflexive-Large-Globular-Type
   is-reflexive-Type-Large-Globular-Type X =
   id
 is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type

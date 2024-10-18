@@ -10,6 +10,7 @@ module structured-types.large-globular-maps where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -124,4 +125,40 @@ record
     2-cell-globular-map 1-cell-globular-map-large-globular-map
 
 open large-globular-map public
+```
+
+### Large identity globular maps
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (A : Large-Globular-Type α β)
+  where
+
+  id-large-globular-map : large-globular-map id A A
+  0-cell-large-globular-map id-large-globular-map =
+    id
+  1-cell-globular-map-large-globular-map id-large-globular-map =
+    id-globular-map (1-cell-globular-type-Large-Globular-Type A _ _)
+```
+
+### Composition of large globular maps
+
+```agda
+module _
+  {α1 α2 α3 δ1 δ2 : Level → Level} {β1 β2 β3 : Level → Level → Level}
+  {A : Large-Globular-Type α1 β1}
+  {B : Large-Globular-Type α2 β2}
+  {C : Large-Globular-Type α3 β3}
+  where
+
+  comp-large-globular-map :
+    (g : large-globular-map δ2 B C) (f : large-globular-map δ1 A B) →
+    large-globular-map (δ2 ∘ δ1) A C
+  0-cell-large-globular-map (comp-large-globular-map g f) =
+    0-cell-large-globular-map g ∘ 0-cell-large-globular-map f
+  1-cell-globular-map-large-globular-map (comp-large-globular-map g f) =
+    comp-globular-map
+      ( 1-cell-globular-map-large-globular-map g)
+      ( 1-cell-globular-map-large-globular-map f)
 ```

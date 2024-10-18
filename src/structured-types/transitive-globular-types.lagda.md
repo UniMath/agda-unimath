@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import structured-types.globular-maps
 open import structured-types.globular-types
 ```
 
@@ -119,16 +120,34 @@ record
   0-cell-Transitive-Globular-Type =
     0-cell-Globular-Type globular-type-Transitive-Globular-Type
 
+  1-cell-globular-type-Transitive-Globular-Type :
+    (x y : 0-cell-Transitive-Globular-Type) → Globular-Type l2 l2
+  1-cell-globular-type-Transitive-Globular-Type =
+    1-cell-globular-type-Globular-Type globular-type-Transitive-Globular-Type
+
   1-cell-Transitive-Globular-Type :
     0-cell-Transitive-Globular-Type → 0-cell-Transitive-Globular-Type → UU l2
   1-cell-Transitive-Globular-Type =
     1-cell-Globular-Type globular-type-Transitive-Globular-Type
+
+  2-cell-globular-type-Transitive-Globular-Type :
+    {x y : 0-cell-Transitive-Globular-Type}
+    (f g : 1-cell-Transitive-Globular-Type x y) → Globular-Type l2 l2
+  2-cell-globular-type-Transitive-Globular-Type =
+    2-cell-globular-type-Globular-Type globular-type-Transitive-Globular-Type
 
   2-cell-Transitive-Globular-Type :
     {x y : 0-cell-Transitive-Globular-Type}
     (f g : 1-cell-Transitive-Globular-Type x y) → UU l2
   2-cell-Transitive-Globular-Type =
     2-cell-Globular-Type globular-type-Transitive-Globular-Type
+
+  3-cell-globular-type-Transitive-Globular-Type :
+    {x y : 0-cell-Transitive-Globular-Type}
+    {f g : 1-cell-Transitive-Globular-Type x y}
+    (s t : 2-cell-Transitive-Globular-Type f g) → Globular-Type l2 l2
+  3-cell-globular-type-Transitive-Globular-Type =
+    3-cell-globular-type-Globular-Type globular-type-Transitive-Globular-Type
 
   3-cell-Transitive-Globular-Type :
     {x y : 0-cell-Transitive-Globular-Type}
@@ -166,6 +185,17 @@ record
     is-transitive' (3-cell-Transitive-Globular-Type {x} {y} {f} {g})
   comp-3-cell-Transitive-Globular-Type =
     comp-3-cell-is-transitive-Globular-Type
+      is-transitive-Transitive-Globular-Type
+
+  1-cell-transitive-globular-type-Transitive-Globular-Type :
+    (x y : 0-cell-Transitive-Globular-Type) →
+    Transitive-Globular-Type l2 l2
+  globular-type-Transitive-Globular-Type
+    ( 1-cell-transitive-globular-type-Transitive-Globular-Type x y) =
+    1-cell-globular-type-Transitive-Globular-Type x y
+  is-transitive-Transitive-Globular-Type
+    ( 1-cell-transitive-globular-type-Transitive-Globular-Type x y) =
+    is-transitive-1-cell-globular-type-is-transitive-Globular-Type
       is-transitive-Transitive-Globular-Type
 
 open Transitive-Globular-Type public
@@ -222,6 +252,53 @@ transitive-globular-structure :
   {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
 transitive-globular-structure l2 A =
   Σ (globular-structure l2 A) (is-transitive-globular-structure)
+```
+
+### Globular maps between transitive globular types
+
+Since there are at least two notions of morphism between transitive globular
+types, both of which have an underlying globular map, we record here the
+definition of globular maps between transitive globular types.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (G : Transitive-Globular-Type l1 l2) (H : Transitive-Globular-Type l3 l4)
+  where
+
+  globular-map-Transitive-Globular-Type : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  globular-map-Transitive-Globular-Type =
+    globular-map
+      ( globular-type-Transitive-Globular-Type G)
+      ( globular-type-Transitive-Globular-Type H)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (G : Transitive-Globular-Type l1 l2) (H : Transitive-Globular-Type l3 l4)
+  (f : globular-map-Transitive-Globular-Type G H)
+  where
+
+  0-cell-globular-map-Transitive-Globular-Type :
+    0-cell-Transitive-Globular-Type G → 0-cell-Transitive-Globular-Type H
+  0-cell-globular-map-Transitive-Globular-Type =
+    0-cell-globular-map f
+
+  1-cell-globular-map-globular-map-Transitive-Globular-Type :
+    {x y : 0-cell-Transitive-Globular-Type G} →
+    globular-map-Transitive-Globular-Type
+      ( 1-cell-transitive-globular-type-Transitive-Globular-Type G x y)
+      ( 1-cell-transitive-globular-type-Transitive-Globular-Type H _ _)
+  1-cell-globular-map-globular-map-Transitive-Globular-Type =
+    1-cell-globular-map-globular-map f
+
+  1-cell-globular-map-Transitive-Globular-Type :
+    {x y : 0-cell-Transitive-Globular-Type G} →
+    1-cell-Transitive-Globular-Type G x y →
+    1-cell-Transitive-Globular-Type H
+      ( 0-cell-globular-map-Transitive-Globular-Type x)
+      ( 0-cell-globular-map-Transitive-Globular-Type y)
+  1-cell-globular-map-Transitive-Globular-Type =
+    1-cell-globular-map f
 ```
 
 ## Examples

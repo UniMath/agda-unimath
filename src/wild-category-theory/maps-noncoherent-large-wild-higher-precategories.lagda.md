@@ -126,60 +126,41 @@ module _
         ( ℬ)
         ( obj-map-Noncoherent-Large-Wild-Higher-Precategory x)
         ( obj-map-Noncoherent-Large-Wild-Higher-Precategory y))
-  hom-noncoherent-wild-higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory x y =
-    {!!}
-
-{-
-    λ where
-    .obj-map-Noncoherent-Wild-Higher-Precategory →
-      hom-map-Noncoherent-Large-Wild-Higher-Precategory
-    .hom-globular-map-map-Noncoherent-Wild-Higher-Precategory →
-      1-cell-globular-map-globular-map
-        ( hom-globular-map-map-Noncoherent-Large-Wild-Higher-Precategory)
--}
+  hom-noncoherent-wild-higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory
+    _ _ =
+    1-cell-globular-map-large-globular-map F
 ```
 
--- ### The identity map on a noncoherent large wild higher precategory
+### The identity map on a noncoherent large wild higher precategory
 
--- ```agda
--- module _
---   {α : Level → Level} {β : Level → Level → Level}
---   (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α β)
---   where
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α β)
+  where
 
---   id-map-Noncoherent-Large-Wild-Higher-Precategory :
---     map-Noncoherent-Large-Wild-Higher-Precategory (λ l → l) 𝒜 𝒜
---   id-map-Noncoherent-Large-Wild-Higher-Precategory =
---     λ where
---     .obj-map-Noncoherent-Large-Wild-Higher-Precategory →
---       id
---     .hom-globular-map-map-Noncoherent-Large-Wild-Higher-Precategory →
---       id-globular-map _
--- ```
+  id-map-Noncoherent-Large-Wild-Higher-Precategory :
+    map-Noncoherent-Large-Wild-Higher-Precategory (λ l → l) 𝒜 𝒜
+  id-map-Noncoherent-Large-Wild-Higher-Precategory =
+    id-large-globular-map _
+```
 
--- ### Composition of maps of noncoherent large wild higher precategories
+### Composition of maps of noncoherent large wild higher precategories
 
--- ```agda
--- module _
---   {α1 α2 α3 : Level → Level}
---   {β1 β2 β3 : Level → Level → Level}
---   {δ1 δ2 : Level → Level}
---   {𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1}
---   {ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2}
---   {𝒞 : Noncoherent-Large-Wild-Higher-Precategory α3 β3}
---   (G : map-Noncoherent-Large-Wild-Higher-Precategory δ2 ℬ 𝒞)
---   (F : map-Noncoherent-Large-Wild-Higher-Precategory δ1 𝒜 ℬ)
---   where
+```agda
+module _
+  {α1 α2 α3 : Level → Level}
+  {β1 β2 β3 : Level → Level → Level}
+  {δ1 δ2 : Level → Level}
+  {𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1}
+  {ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2}
+  {𝒞 : Noncoherent-Large-Wild-Higher-Precategory α3 β3}
+  (G : map-Noncoherent-Large-Wild-Higher-Precategory δ2 ℬ 𝒞)
+  (F : map-Noncoherent-Large-Wild-Higher-Precategory δ1 𝒜 ℬ)
+  where
 
---   comp-map-Noncoherent-Large-Wild-Higher-Precategory :
---     map-Noncoherent-Large-Wild-Higher-Precategory (λ l → δ2 (δ1 l)) 𝒜 𝒞
---   comp-map-Noncoherent-Large-Wild-Higher-Precategory =
---     λ where
---     .obj-map-Noncoherent-Large-Wild-Higher-Precategory →
---       obj-map-Noncoherent-Large-Wild-Higher-Precategory G ∘
---       obj-map-Noncoherent-Large-Wild-Higher-Precategory F
---     .hom-globular-map-map-Noncoherent-Large-Wild-Higher-Precategory →
---       comp-globular-map
---         ( hom-globular-map-map-Noncoherent-Large-Wild-Higher-Precategory G)
---         ( hom-globular-map-map-Noncoherent-Large-Wild-Higher-Precategory F)
--- ```
+  comp-map-Noncoherent-Large-Wild-Higher-Precategory :
+    map-Noncoherent-Large-Wild-Higher-Precategory (λ l → δ2 (δ1 l)) 𝒜 𝒞
+  comp-map-Noncoherent-Large-Wild-Higher-Precategory =
+    comp-large-globular-map G F
+```

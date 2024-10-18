@@ -29,9 +29,14 @@ with a family of [identifications](foundation-core.identity-types.md)
   (x : G₀) → f₁ (Gᵣ x) ＝ Hᵣ (f₀ x)
 ```
 
-from the image of the reflexivity cell at `x` in `G` to the reflexivity cell at `f₀ x`, such that the globular map `f' : G' x y → H' (f₀ x) (f₀ y)` is again reflexive.
+from the image of the reflexivity cell at `x` in `G` to the reflexivity cell at
+`f₀ x`, such that the globular map `f' : G' x y → H' (f₀ x) (f₀ y)` is again
+reflexive.
 
-Note: In some settings it may be preferred to work with globular maps preserving reflexivity cells up to a higher cell. This notion of maps between reflexive globular types is the notion of [lax reflexive globular maps](structured-types.lax-reflexive-globular-maps.md).
+Note: In some settings it may be preferred to work with globular maps preserving
+reflexivity cells up to a higher cell. This notion of maps between reflexive
+globular types is the notion of
+[lax reflexive globular maps](structured-types.colax-reflexive-globular-maps.md).
 
 ## Definitions
 
@@ -48,13 +53,13 @@ record
   coinductive
 
   field
-    preserves-refl-0-cell-preserves-refl-globular-map :
+    preserves-refl-1-cell-preserves-refl-globular-map :
       (x : 0-cell-Reflexive-Globular-Type G) →
-      1-cell-globular-map f (refl-0-cell-Reflexive-Globular-Type G {x}) ＝
-      refl-0-cell-Reflexive-Globular-Type H
+      1-cell-globular-map f (refl-1-cell-Reflexive-Globular-Type G {x}) ＝
+      refl-1-cell-Reflexive-Globular-Type H
 
   field
-    preserves-refl-1-cell-globular-map-globular-map :
+    preserves-refl-2-cell-globular-map-globular-map :
       {x y : 0-cell-Reflexive-Globular-Type G} →
       preserves-refl-globular-map
         ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type G x y)
@@ -108,15 +113,15 @@ record
       preserves-refl-globular-map G H
         globular-map-reflexive-globular-map
 
-  preserves-refl-0-cell-reflexive-globular-map :
+  preserves-refl-1-cell-reflexive-globular-map :
     ( x : 0-cell-Reflexive-Globular-Type G) →
-    1-cell-reflexive-globular-map (refl-0-cell-Reflexive-Globular-Type G {x}) ＝
-    refl-0-cell-Reflexive-Globular-Type H
-  preserves-refl-0-cell-reflexive-globular-map =
-    preserves-refl-0-cell-preserves-refl-globular-map
+    1-cell-reflexive-globular-map (refl-1-cell-Reflexive-Globular-Type G {x}) ＝
+    refl-1-cell-Reflexive-Globular-Type H
+  preserves-refl-1-cell-reflexive-globular-map =
+    preserves-refl-1-cell-preserves-refl-globular-map
       preserves-refl-reflexive-globular-map
 
-  preserves-refl-1-cell-globular-map-reflexive-globular-map :
+  preserves-refl-2-cell-globular-map-reflexive-globular-map :
     { x y : 0-cell-Reflexive-Globular-Type G} →
     preserves-refl-globular-map
       ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type G x y)
@@ -124,8 +129,8 @@ record
         ( 0-cell-reflexive-globular-map x)
         ( 0-cell-reflexive-globular-map y))
       ( 1-cell-globular-map-reflexive-globular-map)
-  preserves-refl-1-cell-globular-map-reflexive-globular-map =
-    preserves-refl-1-cell-globular-map-globular-map
+  preserves-refl-2-cell-globular-map-reflexive-globular-map =
+    preserves-refl-2-cell-globular-map-globular-map
       preserves-refl-reflexive-globular-map
 
   1-cell-reflexive-globular-map-reflexive-globular-map :
@@ -140,5 +145,5 @@ record
     1-cell-globular-map-reflexive-globular-map
   preserves-refl-reflexive-globular-map
     1-cell-reflexive-globular-map-reflexive-globular-map =
-    preserves-refl-1-cell-globular-map-reflexive-globular-map
+    preserves-refl-2-cell-globular-map-reflexive-globular-map
 ```

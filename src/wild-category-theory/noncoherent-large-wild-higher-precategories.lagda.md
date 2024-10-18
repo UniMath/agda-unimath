@@ -194,8 +194,8 @@ record
     2-hom-Noncoherent-Large-Wild-Higher-Precategory f g →
     UU (β l1 l2)
   3-hom-Noncoherent-Large-Wild-Higher-Precategory =
-    3-cell-large-globular-structure
-      ( globular-structure-obj-Noncoherent-Large-Wild-Higher-Precategory)
+    3-cell-Large-Globular-Type
+      large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
 - The globular structure on the type of 2-morphisms in a noncoherent large wild
@@ -228,7 +228,7 @@ record
     {l1 : Level} {x : obj-Noncoherent-Large-Wild-Higher-Precategory l1} →
     hom-Noncoherent-Large-Wild-Higher-Precategory x x
   id-hom-Noncoherent-Large-Wild-Higher-Precategory {l1} {x} =
-    refl-0-cell-is-reflexive-Large-Globular-Type
+    refl-1-cell-is-reflexive-Large-Globular-Type
       ( id-structure-Noncoherent-Large-Wild-Higher-Precategory)
       ( x)
 
@@ -249,7 +249,7 @@ record
     (f : hom-Noncoherent-Large-Wild-Higher-Precategory x y) →
     2-hom-Noncoherent-Large-Wild-Higher-Precategory f f
   id-2-hom-Noncoherent-Large-Wild-Higher-Precategory =
-    refl-1-cell-is-reflexive-Large-Globular-Type
+    refl-2-cell-is-reflexive-Large-Globular-Type
       id-structure-Noncoherent-Large-Wild-Higher-Precategory
 
   id-3-hom-Noncoherent-Large-Wild-Higher-Precategory :
@@ -260,7 +260,7 @@ record
     (s : 2-hom-Noncoherent-Large-Wild-Higher-Precategory f g) →
     3-hom-Noncoherent-Large-Wild-Higher-Precategory s s
   id-3-hom-Noncoherent-Large-Wild-Higher-Precategory =
-    refl-2-cell-is-reflexive-Large-Globular-Type
+    refl-3-cell-is-reflexive-Large-Globular-Type
       id-structure-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
@@ -269,8 +269,8 @@ record
 ```agda
   field
     comp-structure-Noncoherent-Large-Wild-Higher-Precategory :
-      is-transitive-large-globular-structure
-        globular-structure-obj-Noncoherent-Large-Wild-Higher-Precategory
+      is-transitive-Large-Globular-Type
+        large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 
   comp-hom-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 l3 : Level}
@@ -281,17 +281,17 @@ record
     hom-Noncoherent-Large-Wild-Higher-Precategory x y →
     hom-Noncoherent-Large-Wild-Higher-Precategory x z
   comp-hom-Noncoherent-Large-Wild-Higher-Precategory =
-    comp-1-cell-is-transitive-large-globular-structure
+    comp-1-cell-is-transitive-Large-Globular-Type
       comp-structure-Noncoherent-Large-Wild-Higher-Precategory
 
   comp-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
     {l1 l2 : Level}
-    (x : obj-Noncoherent-Large-Wild-Higher-Precategory l1)
-    (y : obj-Noncoherent-Large-Wild-Higher-Precategory l2) →
-    is-transitive-globular-structure
-      ( globular-structure-hom-Noncoherent-Large-Wild-Higher-Precategory x y)
+    {x : obj-Noncoherent-Large-Wild-Higher-Precategory l1}
+    {y : obj-Noncoherent-Large-Wild-Higher-Precategory l2} →
+    is-transitive-Globular-Type
+      ( hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory x y)
   comp-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory =
-    is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
+    is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type
       comp-structure-Noncoherent-Large-Wild-Higher-Precategory
 
   comp-2-hom-Noncoherent-Large-Wild-Higher-Precategory :
@@ -303,7 +303,7 @@ record
     2-hom-Noncoherent-Large-Wild-Higher-Precategory f g →
     2-hom-Noncoherent-Large-Wild-Higher-Precategory f h
   comp-2-hom-Noncoherent-Large-Wild-Higher-Precategory =
-    comp-2-cell-is-transitive-large-globular-structure
+    comp-2-cell-is-transitive-Large-Globular-Type
       comp-structure-Noncoherent-Large-Wild-Higher-Precategory
 
   comp-3-hom-Noncoherent-Large-Wild-Higher-Precategory :
@@ -316,7 +316,7 @@ record
     3-hom-Noncoherent-Large-Wild-Higher-Precategory r s →
     3-hom-Noncoherent-Large-Wild-Higher-Precategory r t
   comp-3-hom-Noncoherent-Large-Wild-Higher-Precategory =
-    comp-3-cell-is-transitive-large-globular-structure
+    comp-3-cell-is-transitive-Large-Globular-Type
       comp-structure-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
@@ -331,12 +331,11 @@ record
     Noncoherent-Wild-Higher-Precategory (β l1 l2) (β l1 l2)
   hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
     x y =
-    make-Noncoherent-Wild-Higher-Precategory
-      ( hom-Noncoherent-Large-Wild-Higher-Precategory x y)
-      ( globular-structure-hom-Noncoherent-Large-Wild-Higher-Precategory x y)
-      ( id-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory)
-      ( comp-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory
-        x y)
+      make-Noncoherent-Wild-Higher-Precategory
+        ( id-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory
+          { x = x}
+          { y})
+        ( comp-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory)
 
 open Noncoherent-Large-Wild-Higher-Precategory public
 ```
