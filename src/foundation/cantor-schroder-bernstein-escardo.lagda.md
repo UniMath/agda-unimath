@@ -10,6 +10,7 @@ module foundation.cantor-schroder-bernstein-escardo where
 open import foundation.action-on-identifications-functions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
 open import foundation.perfect-images
 open import foundation.split-surjective-maps
@@ -21,8 +22,8 @@ open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 open import foundation-core.negation
+open import foundation-core.sets
 ```
 
 </details>
@@ -170,6 +171,21 @@ module _
     map-Cantor-Schröder-Bernstein-Escardó f g
   pr2 (Cantor-Schröder-Bernstein-Escardó f g) =
     is-equiv-map-Cantor-Schröder-Bernstein-Escardó f g
+```
+
+## Corollaries
+
+### The Cantor–Schröder–Bernstein theorem
+
+```agda
+Cantor-Schröder-Bernstein :
+  {l1 l2 : Level} (lem : LEM (l1 ⊔ l2))
+  (A : Set l1) (B : Set l2) →
+  injection (type-Set A) (type-Set B) →
+  injection (type-Set B) (type-Set A) →
+  (type-Set A) ≃ (type-Set B)
+Cantor-Schröder-Bernstein lem A B f g =
+  Cantor-Schröder-Bernstein-Escardó lem (emb-injection B f) (emb-injection A g)
 ```
 
 ## References

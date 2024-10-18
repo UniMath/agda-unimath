@@ -105,7 +105,7 @@ you need to change the template in ./scripts/generate_main_index_file.py
   - [Maintainers](MAINTAINERS.md)
   - [Contributors](CONTRIBUTORS.md)
   - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
-  - [Projects using Agda-Unimath](PROJECTS.md)
+  - [Projects using agda-unimath](PROJECTS.md)
   - [Grant acknowledgements](GRANT-ACKNOWLEDGEMENTS.md)
 - [Guides](HOWTO-INSTALL.md)
   - [Installing the library](HOWTO-INSTALL.md)

@@ -13,6 +13,7 @@ open import orthogonal-factorization-systems.cd-structures public
 open import orthogonal-factorization-systems.cellular-maps public
 open import orthogonal-factorization-systems.closed-modalities public
 open import orthogonal-factorization-systems.double-lifts-families-of-elements public
+open import orthogonal-factorization-systems.double-negation-sheaves public
 open import orthogonal-factorization-systems.extensions-double-lifts-families-of-elements public
 open import orthogonal-factorization-systems.extensions-lifts-families-of-elements public
 open import orthogonal-factorization-systems.extensions-of-maps public

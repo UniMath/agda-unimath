@@ -140,5 +140,5 @@ module _
 - [Commutator](https://en.wikipedia.org/wiki/Commutator#Group_theory) at
   Wikipedia
 - [Commutator](https://mathworld.wolfram.com/Commutator.html) at Wolfram
-  Mathworld
+  MathWorld
 - [Group commutator](https://ncatlab.org/nlab/show/group+commutator) at $n$Lab

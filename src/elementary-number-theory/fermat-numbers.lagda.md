@@ -20,8 +20,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-{{#concept "Fermat numbers"}} are numbers of the form $F_n := 2^{2^n}+1$. The
-first five Fermat numbers are
+{{#concept "Fermat numbers" WD="Fermat number" WDID=Q207264 Agda=fermat-number-ℕ}}
+are numbers of the form $F_n := 2^{2^n}+1$. The first five Fermat numbers are
 
 ```text
   3, 5, 17, 257, and 65537.
@@ -72,3 +72,8 @@ recursive-fermat-number-ℕ =
           ( λ i → f (nat-Fin (succ-ℕ n) i) (upper-bound-nat-Fin n i)))
         ( 2))
 ```
+
+## External link
+
+- [Fermat number](https://en.wikipedia.org/wiki/Fermat_number) at Wikipedia
+- [A000215](https://oeis.org/A000215) in the OEIS

@@ -35,14 +35,19 @@ open import foundation.universe-levels
 
 ## Idea
 
-We show, using the sieve of Eratosthenes and the well-ordering principle of `ℕ`,
-that there are infinitely many primes. Consequently we obtain the function that
-returns for each `n` the `n`-th prime, and we obtain the function that counts
-the number of primes below a number `n`.
+We show, using the
+[sieve of Eratosthenes](elementary-number-theory.sieve-of-eratosthenes.md) and
+the
+[well-ordering principle of `ℕ`](elementary-number-theory.well-ordering-principle-natural-numbers.md),
+that there are infinitely many
+[primes](elementary-number-theory.prime-numbers.md). Consequently we obtain the
+function that returns for each `n` the `n`-th prime, and we obtain the function
+that counts the number of primes below a number `n`.
 
 ## Definition
 
-We begin by stating the infinitude of primes in type theory.
+We begin by stating the
+{{#concept "infinitude of primes" Agda=Infinitude-Of-Primes-ℕ}} in type theory.
 
 ```agda
 Infinitude-Of-Primes-ℕ : UU lzero

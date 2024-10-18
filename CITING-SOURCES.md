@@ -31,7 +31,7 @@ not available, please define them as empty fields. E.g. `publisher = {},`.
 
 If you are unsure about how to structure your BibLaTeX entry, it may be useful
 to know that the references are checked by the `linkcheck` GitHub workflow, so
-when you post your pull request to `agda-unimath` you can refer to the CI for
+when you post your pull request to agda-unimath you can refer to the CI for
 possible issues.
 
 **Note:** If the citation label of your reference is not being generated

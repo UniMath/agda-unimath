@@ -149,4 +149,4 @@ This remains to be formalized.
 - [Cycle graph](https://www.wikidata.org/entity/Q622506) on Wikidata
 - [Cycle graph](https://en.wikipedia.org/wiki/Cycle_graph) at Wikipedia
 - [Cycle graph](https://mathworld.wolfram.com/CycleGraph.html) at Wolfram
-  Mathworld
+  MathWorld
