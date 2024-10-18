@@ -60,6 +60,12 @@ infixl 35 _+𝕋_
 _+𝕋_ = add-𝕋
 ```
 
+```agda
+succ-succ-add-𝕋 : 𝕋 → 𝕋 → 𝕋
+succ-succ-add-𝕋 x neg-two-𝕋 = x
+succ-succ-add-𝕋 x (succ-𝕋 y) = succ-𝕋 (succ-succ-add-𝕋 x y)
+```
+
 ### Iterated successor functions on truncation levels
 
 Although we can define an addition operation on truncation levels, when it comes
