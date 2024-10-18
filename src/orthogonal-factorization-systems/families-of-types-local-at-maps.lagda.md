@@ -1,7 +1,7 @@
-# Local families of types
+# Families of types local at a map
 
 ```agda
-module orthogonal-factorization-systems.local-families-of-types where
+module orthogonal-factorization-systems.families-of-types-local-at-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -13,8 +13,8 @@ open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.orthogonal-maps
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
@@ -22,8 +22,8 @@ open import orthogonal-factorization-systems.orthogonal-maps
 ## Idea
 
 A family of types `B : A → UU l` is said to be
-{{#concept "local" Disambiguation="family of types" Agda=is-local-family}} at
-`f : X → Y`, or **`f`-local**, if every
+{{#concept "local" Disambiguation="family of types at a map" Agda=is-local-family}}
+at a map `f : X → Y`, or **`f`-local**, if every
 [fiber](foundation-core.fibers-of-maps.md) is.
 
 ## Definition
@@ -54,6 +54,6 @@ This remains to be formalized.
 
 ## See also
 
-- [Local maps](orthogonal-factorization-systems.local-maps.md)
-- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
-- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)
+- [Local maps](orthogonal-factorization-systems.maps-local-at-maps.md)
+- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-at-maps.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-at-subuniverses.md)
