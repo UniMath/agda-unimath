@@ -38,11 +38,13 @@ open import category-theory.coproducts-in-precategories public
 open import category-theory.cores-categories public
 open import category-theory.cores-precategories public
 open import category-theory.coslice-precategories public
+open import category-theory.dependent-composition-operations-over-precategories public
 open import category-theory.dependent-products-of-categories public
 open import category-theory.dependent-products-of-large-categories public
 open import category-theory.dependent-products-of-large-precategories public
 open import category-theory.dependent-products-of-precategories public
 open import category-theory.discrete-categories public
+open import category-theory.displayed-precategories public
 open import category-theory.embedding-maps-precategories public
 open import category-theory.embeddings-precategories public
 open import category-theory.endomorphisms-in-categories public
