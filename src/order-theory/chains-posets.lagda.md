@@ -30,6 +30,8 @@ A {{#concept "chain" Disambiguation="in a poset" Agda=chain-Poset}} in a
 
 ## Definition
 
+### The predicate on subsets of posets to be a chain
+
 ```agda
 module _
   {l1 l2 l3 : Level} (X : Poset l1 l2) (S : Subposet l3 X)
