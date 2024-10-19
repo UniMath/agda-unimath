@@ -149,7 +149,8 @@ module _
     ( map-equiv e , map-inv-equiv e , is-retraction-map-inv-equiv e)
 
   retract-inv-equiv : B ≃ A → A retract-of B
-  retract-inv-equiv = retract-equiv ∘ inv-equiv
+  retract-inv-equiv e =
+    ( map-inv-equiv e , map-equiv e , is-section-map-inv-equiv e)
 ```
 
 ### Being an equivalence is a property
