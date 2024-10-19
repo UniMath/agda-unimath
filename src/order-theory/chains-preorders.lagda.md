@@ -21,8 +21,10 @@ open import order-theory.total-preorders
 
 ## Idea
 
-A **chain** in a preorder `P` is a subtype `S` of `P` such that the ordering of
-`P` restricted to `S` is linear.
+A {{#concept "chain" Disambiguation="in a preorder" Agda=chain-Preorder}} in a
+[preorder](order-theory.preorders.md) `P` is a
+[subtype](foundation-core.subtypes.md) `S` of `P` such that the ordering of `P`
+restricted to `S` is [linear](order-theory.total-preorders.md).
 
 ## Definition
 
@@ -92,3 +94,8 @@ module _
   is-prop-inclusion-chain-Preorder C D =
     is-prop-type-Prop (inclusion-chain-Preorder-Prop C D)
 ```
+
+## External links
+
+- [chain#in order theory](https://ncatlab.org/nlab/show/chain#in_order_theory)
+  at $n$Lab

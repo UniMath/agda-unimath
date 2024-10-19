@@ -22,8 +22,10 @@ open import order-theory.posets
 
 ## Idea
 
-A **chain** in a poset `P` is a subtype `S` of `P` such that the ordering of `P`
-restricted to `S` is linear.
+A {{#concept "chain" Disambiguation="in a poset" Agda=chain-Poset}} in a
+[poset](order-theory.posets.md) `P` is a [subtype](foundation-core.subtypes.md)
+`S` of `P` such that the ordering of `P` restricted to `S` is
+[linear](order-theory.total-orders.md).
 
 ## Definition
 
@@ -88,3 +90,8 @@ module _
   is-prop-inclusion-chain-Poset =
     is-prop-inclusion-chain-Preorder (preorder-Poset X)
 ```
+
+## External links
+
+- [chain#in order theory](https://ncatlab.org/nlab/show/chain#in_order_theory)
+  at $n$Lab
