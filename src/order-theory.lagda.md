@@ -102,7 +102,6 @@ open import order-theory.similarity-of-order-preserving-maps-large-posets public
 open import order-theory.similarity-of-order-preserving-maps-large-preorders public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
-open import order-theory.subtypes-leq-posets public
 open import order-theory.suplattices public
 open import order-theory.top-elements-large-posets public
 open import order-theory.top-elements-posets public
