@@ -50,7 +50,7 @@ module _
       ( Poset l1 l2)
       ( λ X →
           function-Prop
-            ( (C : chain-Poset l3 X) → has-chain-upper-bound X C)
+            ( (C : chain-Poset l3 X) → has-upper-bound-chain-Poset X C)
             ( ∃ (type-Poset X) (is-maximal-element-prop-Poset X)))
 
   zorns-lemma : UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
@@ -73,7 +73,8 @@ module _
           ( is-inhabited (type-Poset X))
           ( function-Prop
             ( (C : chain-Poset l3 X) →
-              is-inhabited (type-chain-Poset X C) → has-chain-upper-bound X C)
+              is-inhabited (type-chain-Poset X C) →
+              has-upper-bound-chain-Poset X C)
             ( ∃ (type-Poset X) (is-maximal-element-prop-Poset X))))
 
   inhabited-zorns-lemma : UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
@@ -112,13 +113,13 @@ module _
   inhabited-zorns-lemma-zorns-lemma zorn X is-inhabited-X H =
     zorn X chain-upper-bound
     where
-    chain-upper-bound : (C : chain-Poset l3 X) → has-chain-upper-bound X C
+    chain-upper-bound : (C : chain-Poset l3 X) → has-upper-bound-chain-Poset X C
     chain-upper-bound C with lem (is-inhabited-Prop (type-chain-Poset X C))
     ... | inl is-inhabited-C = H C is-inhabited-C
     ... | inr is-empty-C =
       apply-universal-property-trunc-Prop
         ( is-inhabited-X)
-        ( has-chain-upper-bound-Prop X C)
+        ( has-upper-bound-chain-prop-Poset X C)
         ( λ x →
           intro-exists x (λ w → ex-falso (is-empty-C (unit-trunc-Prop w))))
 
