@@ -20,8 +20,8 @@ open import foundation-core.coproduct-types
 open import foundation-core.propositions
 
 open import order-theory.chains-posets
-open import order-theory.maximal-elements-posets
 open import order-theory.posets
+open import order-theory.top-elements-posets
 open import order-theory.upper-bounds-chains-posets
 ```
 
@@ -51,7 +51,7 @@ module _
       ( λ X →
           function-Prop
             ( (C : chain-Poset l3 X) → has-upper-bound-chain-Poset X C)
-            ( ∃ (type-Poset X) (is-maximal-element-prop-Poset X)))
+            ( ∃ (type-Poset X) (is-top-element-prop-Poset X)))
 
   zorns-lemma : UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   zorns-lemma = type-Prop zorns-lemma-Prop
@@ -75,7 +75,7 @@ module _
             ( (C : chain-Poset l3 X) →
               is-inhabited (type-chain-Poset X C) →
               has-upper-bound-chain-Poset X C)
-            ( ∃ (type-Poset X) (is-maximal-element-prop-Poset X))))
+            ( ∃ (type-Poset X) (is-top-element-prop-Poset X))))
 
   inhabited-zorns-lemma : UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   inhabited-zorns-lemma = type-Prop inhabited-zorns-lemma-Prop

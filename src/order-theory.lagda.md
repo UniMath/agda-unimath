@@ -75,7 +75,6 @@ open import order-theory.lower-sets-large-posets public
 open import order-theory.lower-types-preorders public
 open import order-theory.maximal-chains-posets public
 open import order-theory.maximal-chains-preorders public
-open import order-theory.maximal-elements-posets public
 open import order-theory.meet-semilattices public
 open import order-theory.meet-suplattices public
 open import order-theory.nuclei-large-locales public
