@@ -1,7 +1,7 @@
 # Zorn's lemma
 
 ```agda
-module order-theory.zorn where
+module order-theory.zorns-lemma where
 ```
 
 <details><summary>Imports</summary>

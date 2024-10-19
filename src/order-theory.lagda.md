@@ -115,5 +115,5 @@ open import order-theory.upper-bounds-posets public
 open import order-theory.upper-sets-large-posets public
 open import order-theory.well-founded-orders public
 open import order-theory.well-founded-relations public
-open import order-theory.zorn public
+open import order-theory.zorns-lemma public
 ```
