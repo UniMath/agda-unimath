@@ -1,7 +1,7 @@
-# Local maps
+# Maps local at maps
 
 ```agda
-module orthogonal-factorization-systems.local-maps where
+module orthogonal-factorization-systems.maps-local-at-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -19,20 +19,22 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-fibers-of-maps
+open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.pullbacks
+open import foundation.retracts-of-maps
 open import foundation.unit-type
 open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-families-of-types
-open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.families-of-types-local-at-maps
 open import orthogonal-factorization-systems.orthogonal-maps
 open import orthogonal-factorization-systems.pullback-hom
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
@@ -44,10 +46,7 @@ A map `g : X → Y` is said to be
 `f : A → B`, or
 {{#concept "`f`-local" Disambiguation="maps of types" Agda=is-local-map}}, if
 all its [fibers](foundation-core.fibers-of-maps.md) are
-[`f`-local types](orthogonal-factorization-systems.local-types.md).
-
-Equivalently, the map `g` is `f`-local if and only if `f` is
-[orthogonal](orthogonal-factorization-systems.orthogonal-maps.md) to `g`.
+[`f`-local types](orthogonal-factorization-systems.types-local-at-maps.md).
 
 ## Definition
 
@@ -86,7 +85,7 @@ module _
     is-local-equiv f (equiv-fiber-terminal-map u) H
 ```
 
-### A map is `f`-local if and only if it is `f`-orthogonal
+### A map is `f`-local if it is `f`-orthogonal
 
 ```agda
 module _
@@ -112,9 +111,43 @@ module _
         ( G))
 ```
 
-The converse remains to be formalized.
+### `f`-local maps are closed under base change
+
+Maps local at `f` are closed under base change.
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} {E : UU l5} {F : UU l6}
+  {f : A → B} {g : C → D} {g' : E → F}
+  where
+
+  is-local-map-base-change :
+    is-local-map f g → cartesian-hom-arrow g' g → is-local-map f g'
+  is-local-map-base-change G α d =
+    is-local-equiv f
+      ( equiv-fibers-cartesian-hom-arrow g' g α d)
+      ( G (map-codomain-cartesian-hom-arrow g' g α d))
+```
+
+### `f`-local maps are closed under retracts
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} {E : UU l5} {F : UU l6}
+  {f : A → B} {g : C → D} {g' : E → F}
+  where
+
+  is-local-retract-map :
+    is-local-map f g → g' retract-of-map g → is-local-map f g'
+  is-local-retract-map G R d =
+    is-local-retract
+      ( retract-fiber-retract-map g' g R d)
+      ( G (map-codomain-inclusion-retract-map g' g R d))
+```
 
 ## See also
 
-- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
-- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)
+- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-at-maps.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-at-subuniverses.md)

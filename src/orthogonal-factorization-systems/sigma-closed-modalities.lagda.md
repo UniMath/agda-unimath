@@ -21,8 +21,8 @@ open import orthogonal-factorization-systems.modal-operators
 
 A [modal operator](orthogonal-factorization-systems.modal-operators.md) with
 unit is **Σ-closed** if its [subuniverse](foundation.subuniverses.md) of modal
-types is [Σ-closed](foundation.sigma-closed-subuniverses.md). I.e. if `Σ A B` is
-modal whenever `B` is a family of modal types over modal base `A`.
+types is [Σ-closed](foundation.sigma-closed-subuniverses.md). I.e., if `Σ A B`
+is modal whenever `B` is a family of modal types over modal base `A`.
 
 ## Definition
 
