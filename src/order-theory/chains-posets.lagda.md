@@ -28,7 +28,7 @@ A {{#concept "chain" Disambiguation="in a poset" Agda=chain-Poset}} in a
 `S` of `P` such that the ordering of `P` restricted to `S` is
 [linear](order-theory.total-orders.md).
 
-## Definition
+## Definitions
 
 ### The predicate on subsets of posets to be a chain
 
@@ -93,5 +93,5 @@ module _
 
 ## External links
 
-- [chain#in order theory](https://ncatlab.org/nlab/show/chain#in_order_theory)
+- [chain, in order theory](https://ncatlab.org/nlab/show/chain#in_order_theory)
   at $n$Lab

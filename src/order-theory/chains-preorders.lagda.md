@@ -26,7 +26,9 @@ A {{#concept "chain" Disambiguation="in a preorder" Agda=chain-Preorder}} in a
 [subtype](foundation-core.subtypes.md) `S` of `P` such that the ordering of `P`
 restricted to `S` is [linear](order-theory.total-preorders.md).
 
-## Definition
+## Definitions
+
+### The predicate on subsets of preorders to be a chain
 
 ```agda
 module _
@@ -42,7 +44,11 @@ module _
 
   is-prop-is-chain-Subpreorder : is-prop is-chain-Subpreorder
   is-prop-is-chain-Subpreorder = is-prop-type-Prop is-chain-prop-Subpreorder
+```
 
+### Chains in preorders
+
+```agda
 chain-Preorder :
   {l1 l2 : Level} (l : Level) (X : Preorder l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l)
 chain-Preorder l X =
@@ -88,5 +94,5 @@ module _
 
 ## External links
 
-- [chain#in order theory](https://ncatlab.org/nlab/show/chain#in_order_theory)
+- [chain, in order theory](https://ncatlab.org/nlab/show/chain#in_order_theory)
   at $n$Lab
