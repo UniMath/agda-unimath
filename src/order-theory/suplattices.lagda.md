@@ -9,6 +9,7 @@ module order-theory.suplattices where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -37,7 +38,7 @@ module _
   is-suplattice-Poset-Prop =
     Π-Prop
       (UU l3)
-      (λ I →
+      ( λ I →
         Π-Prop
           ( I → type-Poset P)
           ( λ f → has-least-upper-bound-family-of-elements-Poset-Prop P f))
@@ -119,10 +120,20 @@ module _
 
   is-least-upper-bound-sup-Suplattice :
     {I : UU l3} (x : I → type-Suplattice) →
-    is-least-upper-bound-family-of-elements-Poset poset-Suplattice x
+    is-least-upper-bound-family-of-elements-Poset
+      ( poset-Suplattice)
+      ( x)
       ( sup-Suplattice x)
   is-least-upper-bound-sup-Suplattice =
     is-least-upper-bound-sup-is-suplattice-Poset
       ( poset-Suplattice)
       ( is-suplattice-Suplattice)
+
+  leq-sup-Suplattice :
+    {I : UU l3} (x : I → type-Suplattice) (i : I) →
+    leq-Suplattice (x i) (sup-Suplattice x)
+  leq-sup-Suplattice x =
+    backward-implication
+      ( is-least-upper-bound-sup-Suplattice x (sup-Suplattice x))
+      ( refl-leq-Suplattice (sup-Suplattice x))
 ```
