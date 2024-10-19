@@ -14,6 +14,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.fibers-of-maps
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -21,9 +22,11 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositional-maps
+open import foundation.propositions
 open import foundation.retracts-of-maps
 open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
@@ -31,12 +34,10 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
-open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 ```
 
@@ -79,20 +80,30 @@ is-decidable-map-is-decidable-emb = pr2
 ### Decidably propositional maps
 
 ```agda
-is-decidable-prop-map :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
-is-decidable-prop-map {Y = Y} f = (y : Y) → is-decidable-prop (fiber f y)
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
 
-abstract
-  is-prop-map-is-decidable-prop-map :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-    is-decidable-prop-map f → is-prop-map f
-  is-prop-map-is-decidable-prop-map H y = pr1 (H y)
+  is-decidable-prop-map : (X → Y) → UU (l1 ⊔ l2)
+  is-decidable-prop-map f = (y : Y) → is-decidable-prop (fiber f y)
 
-is-decidable-map-is-decidable-prop-map :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-  is-decidable-prop-map f → is-decidable-map f
-is-decidable-map-is-decidable-prop-map H y = pr2 (H y)
+  is-prop-is-decidable-prop-map :
+    (f : X → Y) → is-prop (is-decidable-prop-map f)
+  is-prop-is-decidable-prop-map f =
+    is-prop-Π (λ y → is-prop-is-decidable-prop (fiber f y))
+
+  is-decidable-prop-map-Prop : (X → Y) → Prop (l1 ⊔ l2)
+  is-decidable-prop-map-Prop f =
+    ( is-decidable-prop-map f , is-prop-is-decidable-prop-map f)
+
+  abstract
+    is-prop-map-is-decidable-prop-map :
+      {f : X → Y} → is-decidable-prop-map f → is-prop-map f
+    is-prop-map-is-decidable-prop-map H y = pr1 (H y)
+
+  is-decidable-map-is-decidable-prop-map :
+    {f : X → Y} → is-decidable-prop-map f → is-decidable-map f
+  is-decidable-map-is-decidable-prop-map H y = pr2 (H y)
 ```
 
 ### The type of decidable embeddings
@@ -135,17 +146,6 @@ pr2 (emb-decidable-emb e) = is-emb-map-decidable-emb e
 
 ## Properties
 
-### Being a decidably propositional map is a proposition
-
-```agda
-abstract
-  is-prop-is-decidable-prop-map :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
-    is-prop (is-decidable-prop-map f)
-  is-prop-is-decidable-prop-map f =
-    is-prop-Π (λ y → is-prop-is-decidable-prop (fiber f y))
-```
-
 ### Any map of which the fibers are decidable propositions is a decidable embedding
 
 ```agda
@@ -175,6 +175,26 @@ module _
       is-decidable-map-is-decidable-emb H y
 ```
 
+### The first projection map of a dependent sum of decidable propositions is a decidable embedding
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (Q : A → Decidable-Prop l2)
+  where
+
+  is-decidable-prop-map-pr1 :
+    is-decidable-prop-map (pr1 {B = type-Decidable-Prop ∘ Q})
+  is-decidable-prop-map-pr1 y =
+    is-decidable-prop-equiv
+      ( equiv-fiber-pr1 (type-Decidable-Prop ∘ Q) y)
+      ( is-decidable-prop-type-Decidable-Prop (Q y))
+
+  is-decidable-emb-pr1 :
+    is-decidable-emb (pr1 {B = type-Decidable-Prop ∘ Q})
+  is-decidable-emb-pr1 =
+    is-decidable-emb-is-decidable-prop-map is-decidable-prop-map-pr1
+```
+
 ### Equivalences are decidable embeddings
 
 ```agda
@@ -189,13 +209,16 @@ abstract
 ### Identity maps are decidable embeddings
 
 ```agda
-abstract
-  is-decidable-emb-id :
-    {l1 : Level} {A : UU l1} → is-decidable-emb (id {A = A})
-  is-decidable-emb-id = (is-emb-id , is-decidable-map-id)
+is-decidable-emb-id :
+  {l : Level} {A : UU l} → is-decidable-emb (id {A = A})
+is-decidable-emb-id = (is-emb-id , is-decidable-map-id)
 
-decidable-emb-id : {l1 : Level} {A : UU l1} → A ↪ᵈ A
+decidable-emb-id : {l : Level} {A : UU l} → A ↪ᵈ A
 decidable-emb-id = (id , is-decidable-emb-id)
+
+is-decidable-prop-map-id :
+  {l : Level} {A : UU l} → is-decidable-prop-map (id {A = A})
+is-decidable-prop-map-id y = is-decidable-prop-is-contr (is-torsorial-Id' y)
 ```
 
 ### Being a decidable embedding is a property
@@ -250,6 +273,17 @@ module _
   is-decidable-emb-comp K H =
     ( is-emb-comp _ _ (pr1 K) (pr1 H) ,
       is-decidable-map-comp-is-decidable-emb K H)
+
+  abstract
+    is-decidable-prop-map-comp :
+      is-decidable-prop-map g →
+      is-decidable-prop-map f →
+      is-decidable-prop-map (g ∘ f)
+    is-decidable-prop-map-comp K H =
+      is-decidable-prop-map-is-decidable-emb
+        ( is-decidable-emb-comp
+          ( is-decidable-emb-is-decidable-prop-map K)
+          ( is-decidable-emb-is-decidable-prop-map H))
 ```
 
 ### Left cancellation for decidable embeddings
@@ -360,9 +394,9 @@ abstract
       ( htpy-eq-decidable-emb f)
 
 eq-htpy-decidable-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A ↪ᵈ B} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪ᵈ B) →
   htpy-decidable-emb f g → f ＝ g
-eq-htpy-decidable-emb {f = f} {g} =
+eq-htpy-decidable-emb f g =
   map-inv-is-equiv (is-equiv-htpy-eq-decidable-emb f g)
 ```
 
@@ -560,4 +594,63 @@ module _
     is-decidable-emb-is-decidable-prop-map
       ( is-decidable-prop-map-retract-map R
         ( is-decidable-prop-map-is-decidable-emb G))
+```
+
+### A type is a decidable proposition if and only if its terminal map is a decidable embedding
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-decidable-prop-is-decidable-emb-terminal-map :
+    is-decidable-emb (terminal-map A) → is-decidable-prop A
+  is-decidable-prop-is-decidable-emb-terminal-map H =
+    is-decidable-prop-equiv'
+      ( equiv-fiber-terminal-map star)
+      ( is-decidable-prop-map-is-decidable-emb H star)
+
+  is-decidable-emb-terminal-map-is-decidable-prop :
+    is-decidable-prop A → is-decidable-emb (terminal-map A)
+  is-decidable-emb-terminal-map-is-decidable-prop H =
+    is-decidable-emb-is-decidable-prop-map
+      ( λ y → is-decidable-prop-equiv (equiv-fiber-terminal-map y) H)
+```
+
+### If a dependent sum of propositions over a proposition is decidable, then the family is a family of decidable propositions
+
+```agda
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2)
+  where
+
+  is-decidable-prop-family-is-decidable-Σ :
+    is-decidable (Σ (type-Prop P) (type-Prop ∘ Q)) →
+    (p : type-Prop P) → is-decidable (type-Prop (Q p))
+  is-decidable-prop-family-is-decidable-Σ H p =
+    is-decidable-equiv'
+      ( equiv-fiber-pr1 (type-Prop ∘ Q) p)
+      ( is-decidable-map-is-decidable-emb
+        ( is-decidable-emb-right-factor'
+          ( is-decidable-emb-terminal-map-is-decidable-prop
+            ( is-prop-Σ (is-prop-type-Prop P) (is-prop-type-Prop ∘ Q) , H))
+          ( is-emb-terminal-map-is-prop (is-prop-type-Prop P)))
+          ( p))
+```
+
+### A dependent sum of decidable propositions over a decidable proposition is a decidable proposition
+
+```agda
+module _
+  {l1 l2 : Level} (P : UU l1) (Q : P → UU l2)
+  where
+
+  is-decidable-prop-Σ :
+    is-decidable-prop P → ((x : P) → is-decidable-prop (Q x)) →
+    is-decidable-prop (Σ P Q)
+  is-decidable-prop-Σ p q =
+    is-decidable-prop-is-decidable-emb-terminal-map
+      ( is-decidable-emb-comp
+        ( is-decidable-emb-terminal-map-is-decidable-prop p)
+        ( is-decidable-emb-pr1 (λ x → Q x , q x)))
 ```
