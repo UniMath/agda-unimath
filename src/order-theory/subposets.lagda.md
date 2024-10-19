@@ -30,8 +30,12 @@ ordering on `P`, subposets have again the structure of a poset.
 ### Subposets
 
 ```agda
+Subposet :
+  {l1 l2 : Level} (l3 : Level) → Poset l1 l2 → UU (l1 ⊔ lsuc l3)
+Subposet l3 P = Subpreorder l3 (preorder-Poset P)
+
 module _
-  {l1 l2 l3 : Level} (X : Poset l1 l2) (S : type-Poset X → Prop l3)
+  {l1 l2 l3 : Level} (X : Poset l1 l2) (S : Subposet l3 X)
   where
 
   type-Subposet : UU (l1 ⊔ l3)
@@ -80,8 +84,7 @@ module _
   where
 
   module _
-    {l3 l4 : Level} (S : type-Poset X → Prop l3)
-    (T : type-Poset X → Prop l4)
+    {l3 l4 : Level} (S : Subposet l3 X) (T : Subposet l4 X)
     where
 
     inclusion-Subposet-Prop : Prop (l1 ⊔ l3 ⊔ l4)
@@ -96,14 +99,12 @@ module _
       is-prop-inclusion-Subpreorder (preorder-Poset X) S T
 
   refl-inclusion-Subposet :
-    {l3 : Level} (S : type-Poset X → Prop l3) →
-    inclusion-Subposet S S
+    {l3 : Level} (S : Subposet l3 X) → inclusion-Subposet S S
   refl-inclusion-Subposet = refl-inclusion-Subpreorder (preorder-Poset X)
 
   transitive-inclusion-Subposet :
-    {l3 l4 l5 : Level} (S : type-Poset X → Prop l3)
-    (T : type-Poset X → Prop l4)
-    (U : type-Poset X → Prop l5) →
+    {l3 l4 l5 : Level}
+    (S : Subposet l3 X) (T : Subposet l4 X) (U : Subposet l5 X) →
     inclusion-Subposet T U →
     inclusion-Subposet S T →
     inclusion-Subposet S U

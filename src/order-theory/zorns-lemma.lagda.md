@@ -51,7 +51,7 @@ module _
       ( λ X →
           function-Prop
             ( (C : chain-Poset l3 X) → has-chain-upper-bound X C)
-            ( ∃ (type-Poset X) (is-maximal-element-Poset-Prop X)))
+            ( ∃ (type-Poset X) (is-maximal-element-prop-Poset X)))
 
   zorns-lemma : UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   zorns-lemma = type-Prop zorns-lemma-Prop
@@ -74,7 +74,7 @@ module _
           ( function-Prop
             ( (C : chain-Poset l3 X) →
               is-inhabited (type-chain-Poset X C) → has-chain-upper-bound X C)
-            ( ∃ (type-Poset X) (is-maximal-element-Poset-Prop X))))
+            ( ∃ (type-Poset X) (is-maximal-element-prop-Poset X))))
 
   inhabited-zorns-lemma : UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   inhabited-zorns-lemma = type-Prop inhabited-zorns-lemma-Prop
