@@ -52,6 +52,7 @@ open import order-theory.ideals-preorders public
 open import order-theory.inhabited-finite-total-orders public
 open import order-theory.interval-subposets public
 open import order-theory.join-semilattices public
+open import order-theory.knaster-tarski-fixed-point-theorem public
 open import order-theory.large-frames public
 open import order-theory.large-locales public
 open import order-theory.large-meet-semilattices public
