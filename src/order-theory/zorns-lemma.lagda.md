@@ -33,7 +33,7 @@ open import order-theory.upper-bounds-chains-posets
 states that a [poset](order-theory.posets.md) where every
 [chain](order-theory.chains-posets.md) has an
 [upper bound](order-theory.upper-bounds-chains-posets.md) has a
-[maximal element](order-theory.maximal-elements.md).
+[top element](order-theory.top-elements-posets.md).
 
 ## Statement
 
