@@ -9,6 +9,7 @@
 | Standard pullbacks                                    | [`foundation.standard-pullbacks`](foundation.standard-pullbacks.md)                                                             |
 | Pullbacks (foundation-core)                           | [`foundation-core.pullbacks`](foundation-core.pullbacks.md)                                                                     |
 | Pullbacks (foundation)                                | [`foundation.pullbacks`](foundation.pullbacks.md)                                                                               |
+| Pullback cones                                        | [`foundation.pullback-cones`](foundation.pullback-cones.md)                                                                     |
 | Functoriality of pullbacks                            | [`foundation.functoriality-pullbacks`](foundation.functoriality-pullbacks.md)                                                   |
 | Cartesian morphisms of arrows                         | [`foundation.cartesian-morphisms-arrows`](foundation.cartesian-morphisms-arrows.md)                                             |
 | Dependent products of pullbacks                       | [`foundation.dependent-products-pullbacks`](foundation.dependent-products-pullbacks.md)                                         |
