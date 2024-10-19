@@ -46,7 +46,7 @@ a least and a greatest [fixed point](foundation.fixed-points-endofunctions.md).
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
+  {l1 l2 : Level}
   (𝒜 : Suplattice l1 l2 (l1 ⊔ l2))
   (f : type-Suplattice 𝒜 → type-Suplattice 𝒜)
   (F : preserves-order-Poset (poset-Suplattice 𝒜) (poset-Suplattice 𝒜) f)
@@ -123,7 +123,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
+  {l1 l2 : Level}
   (𝒜 : Inflattice l1 l2 (l1 ⊔ l2))
   (f : type-Inflattice 𝒜 → type-Inflattice 𝒜)
   (F : preserves-order-Poset (poset-Inflattice 𝒜) (poset-Inflattice 𝒜) f)
