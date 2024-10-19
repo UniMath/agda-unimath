@@ -43,7 +43,11 @@ module _
 
   is-prop-is-chain-Subposet : is-prop is-chain-Subposet
   is-prop-is-chain-Subposet = is-prop-is-chain-Subpreorder (preorder-Poset X) S
+```
 
+### Chains in posets
+
+```agda
 chain-Poset :
   {l1 l2 : Level} (l : Level) (X : Poset l1 l2) → UU (l1 ⊔ l2 ⊔ lsuc l)
 chain-Poset l X = chain-Preorder l (preorder-Poset X)
