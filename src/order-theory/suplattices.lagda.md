@@ -22,8 +22,11 @@ open import order-theory.posets
 
 ## Idea
 
-An **`l`-suplattice** is a poset which has all least upper bounds of families of
-elements indexed by a type of universe level `l`.
+An `l`-{{#concept "suplattice"  Agda=Suplattice}} is a
+[poset](order-theory.posets.md) which has all
+[least upper bounds](order-theory.least-upper-bounds-posets.md) of families of
+elements indexed by a type of [universe level](foundation.universe-levels.md)
+`l`.
 
 ## Definitions
 
@@ -137,3 +140,7 @@ module _
       ( is-least-upper-bound-sup-Suplattice x (sup-Suplattice x))
       ( refl-leq-Suplattice (sup-Suplattice x))
 ```
+
+## External links
+
+- [suplattice](https://ncatlab.org/nlab/show/suplattice) at $n$Lab
