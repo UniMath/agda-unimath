@@ -637,20 +637,3 @@ module _
           ( is-emb-terminal-map-is-prop (is-prop-type-Prop P)))
           ( p))
 ```
-
-### A dependent sum of decidable propositions over a decidable proposition is a decidable proposition
-
-```agda
-module _
-  {l1 l2 : Level} (P : UU l1) (Q : P → UU l2)
-  where
-
-  is-decidable-prop-Σ :
-    is-decidable-prop P → ((x : P) → is-decidable-prop (Q x)) →
-    is-decidable-prop (Σ P Q)
-  is-decidable-prop-Σ p q =
-    is-decidable-prop-is-decidable-emb-terminal-map
-      ( is-decidable-emb-comp
-        ( is-decidable-emb-terminal-map-is-decidable-prop p)
-        ( is-decidable-emb-pr1 (λ x → Q x , q x)))
-```
