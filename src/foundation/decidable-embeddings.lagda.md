@@ -237,6 +237,18 @@ abstract
             ( λ y → is-prop-is-decidable (is-prop-map-is-emb (pr1 H) y))))
 ```
 
+### Decidable embeddings are closed under homotopies
+
+```agda
+abstract
+  is-decidable-emb-htpy :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
+    f ~ g → is-decidable-emb g → is-decidable-emb f
+  is-decidable-emb-htpy {f = f} {g} H K =
+    ( is-emb-htpy H (is-emb-is-decidable-emb K) ,
+      is-decidable-map-htpy H (is-decidable-map-is-decidable-emb K))
+```
+
 ### Decidable embeddings are closed under composition
 
 ```agda
@@ -305,18 +317,6 @@ module _
       is-decidable-emb (g ∘ f) → is-decidable-emb g → is-decidable-emb f
   is-decidable-emb-right-factor GH G =
     is-decidable-emb-right-factor' GH (is-emb-is-decidable-emb G)
-```
-
-### Decidable embeddings are closed under homotopies
-
-```agda
-abstract
-  is-decidable-emb-htpy :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
-    f ~ g → is-decidable-emb g → is-decidable-emb f
-  is-decidable-emb-htpy {f = f} {g} H K =
-    ( is-emb-htpy H (is-emb-is-decidable-emb K) ,
-      is-decidable-map-htpy H (is-decidable-map-is-decidable-emb K))
 ```
 
 ### In a commuting triangle of maps, if the top and right maps are decidable embeddings so is the left map

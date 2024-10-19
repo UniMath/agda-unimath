@@ -7,29 +7,21 @@ module foundation.locale-of-propositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.large-locale-of-propositions
-open import foundation.logical-equivalences
-open import foundation.propositional-extensionality
 open import foundation.unit-type
-open import foundation.universal-property-cartesian-product-types
+open import foundation.logical-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.propositions
 
-open import order-theory.frames
 open import order-theory.large-posets
 open import order-theory.large-preorders
-open import order-theory.least-upper-bounds-posets
-open import order-theory.locales
-open import order-theory.meet-semilattices
 open import order-theory.posets
+open import order-theory.top-elements-posets
 open import order-theory.preorders
 open import order-theory.suplattices
-open import order-theory.top-elements-posets
 ```
 
 </details>
@@ -77,14 +69,10 @@ is-greatest-binary-lower-bound-meet-has-meets-Poset
 
 ### The largest element in the poset of propositions
 
-```text
+```agda
 has-top-element-Prop-Locale :
-  has-top-element-Poset Prop-Poset
-top-has-top-element-Poset
-  has-top-element-Prop-Locale = unit-Prop
-is-top-element-top-has-top-element-Poset
-  has-top-element-Prop-Locale P p =
-  star
+  {l : Level} → has-top-element-Poset (Prop-Poset l)
+has-top-element-Prop-Locale {l} = (raise-unit-Prop l , λ _ _ → raise-star)
 ```
 
 ### The poset of propositions is a meet-semilattice

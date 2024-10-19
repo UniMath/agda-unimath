@@ -10,25 +10,13 @@ module order-theory.knaster-tarski-fixed-point-theorem where
 open import foundation.dependent-pair-types
 open import foundation.fixed-points-endofunctions
 open import foundation.identity-types
-open import foundation.large-binary-relations
 open import foundation.logical-equivalences
-open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.inflattices
-open import order-theory.large-meet-semilattices
-open import order-theory.large-posets
-open import order-theory.large-preorders
-open import order-theory.large-suplattices
-open import order-theory.least-upper-bounds-large-posets
-open import order-theory.meet-semilattices
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
-open import order-theory.preorders
 open import order-theory.suplattices
-open import order-theory.top-elements-large-posets
-open import order-theory.upper-bounds-large-posets
 ```
 
 </details>

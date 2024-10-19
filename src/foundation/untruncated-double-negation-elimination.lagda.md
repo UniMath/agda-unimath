@@ -8,23 +8,20 @@ module foundation.untruncated-double-negation-elimination where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.conjunction
-open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.evaluation-functions
-open import foundation.existential-quantification
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
 ```
@@ -55,6 +52,41 @@ module _
 ```
 
 ## Properties
+
+### Double negation elimination is preserved by logical equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  has-double-negation-elim-iff :
+    A ↔ B → has-double-negation-elim B → has-double-negation-elim A
+  has-double-negation-elim-iff e H =
+    backward-implication e ∘ H ∘ map-double-negation (forward-implication e)
+
+  has-double-negation-elim-iff' :
+    B ↔ A → has-double-negation-elim B → has-double-negation-elim A
+  has-double-negation-elim-iff' e = has-double-negation-elim-iff (inv-iff e)
+```
+
+### Double negation elimination is preserved by equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  has-double-negation-elim-equiv :
+    A ≃ B → has-double-negation-elim B → has-double-negation-elim A
+  has-double-negation-elim-equiv e =
+    has-double-negation-elim-iff (iff-equiv e)
+
+  has-double-negation-elim-equiv' :
+    B ≃ A → has-double-negation-elim B → has-double-negation-elim A
+  has-double-negation-elim-equiv' e =
+    has-double-negation-elim-iff' (iff-equiv e)
+```
 
 ### The empty proposition has double negation elimination
 
