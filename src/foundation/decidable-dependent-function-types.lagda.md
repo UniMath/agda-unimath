@@ -15,7 +15,10 @@ open import foundation.universal-property-maybe
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
+open import foundation-core.empty-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.negation
 ```
 
 </details>

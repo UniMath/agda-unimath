@@ -18,6 +18,7 @@ open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.negation
 ```
 
 </details>
@@ -51,7 +52,7 @@ is-decidable-Σ-coproduct :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A + B → UU l3) →
   is-decidable (Σ A (C ∘ inl)) → is-decidable (Σ B (C ∘ inr)) →
   is-decidable (Σ (A + B) C)
-is-decidable-Σ-coproduct {l1} {l2} {l3} {A} {B} C dA dB =
+is-decidable-Σ-coproduct {A = A} {B} C dA dB =
   is-decidable-equiv
     ( right-distributive-Σ-coproduct A B C)
     ( is-decidable-coproduct dA dB)

@@ -17,6 +17,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -96,7 +97,8 @@ module _
   is-decidable-prop-type-Decidable-Prop = pr2 P
 
   is-decidable-prop-Decidable-Prop : Prop l
-  pr1 is-decidable-prop-Decidable-Prop = is-decidable type-Decidable-Prop
+  pr1 is-decidable-prop-Decidable-Prop =
+    is-decidable type-Decidable-Prop
   pr2 is-decidable-prop-Decidable-Prop =
     is-prop-is-decidable is-prop-type-Decidable-Prop
 ```
@@ -113,6 +115,14 @@ pr1 empty-Decidable-Prop = empty
 pr2 empty-Decidable-Prop = is-decidable-prop-empty
 ```
 
+### Empty types are decidable propositions
+
+```agda
+is-decidable-prop-is-empty :
+  {l : Level} {A : UU l} → is-empty A → is-decidable-prop A
+is-decidable-prop-is-empty H = is-prop-is-empty H , inr H
+```
+
 ### The unit type is a decidable proposition
 
 ```agda
@@ -123,6 +133,14 @@ pr2 is-decidable-prop-unit = inl star
 unit-Decidable-Prop : Decidable-Prop lzero
 pr1 unit-Decidable-Prop = unit
 pr2 unit-Decidable-Prop = is-decidable-prop-unit
+```
+
+### Contractible types are decidable propositions
+
+```agda
+is-decidable-prop-is-contr :
+  {l : Level} {A : UU l} → is-contr A → is-decidable-prop A
+is-decidable-prop-is-contr H = is-prop-is-contr H , inl (center H)
 ```
 
 ### The product of two decidable propositions is a decidable proposition
