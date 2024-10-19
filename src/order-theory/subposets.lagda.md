@@ -76,7 +76,7 @@ module _
   pr2 poset-Subposet = antisymmetric-leq-Subposet
 ```
 
-### Inclusion of sub-posets
+### Inclusion of subposets
 
 ```agda
 module _
@@ -87,9 +87,9 @@ module _
     {l3 l4 : Level} (S : Subposet l3 X) (T : Subposet l4 X)
     where
 
-    inclusion-Subposet-Prop : Prop (l1 ⊔ l3 ⊔ l4)
-    inclusion-Subposet-Prop =
-      inclusion-Subpreorder-Prop (preorder-Poset X) S T
+    inclusion-prop-Subposet : Prop (l1 ⊔ l3 ⊔ l4)
+    inclusion-prop-Subposet =
+      inclusion-prop-Subpreorder (preorder-Poset X) S T
 
     inclusion-Subposet : UU (l1 ⊔ l3 ⊔ l4)
     inclusion-Subposet = inclusion-Subpreorder (preorder-Poset X) S T
@@ -111,9 +111,9 @@ module _
   transitive-inclusion-Subposet =
     transitive-inclusion-Subpreorder (preorder-Poset X)
 
-  sub-poset-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
-  pr1 (sub-poset-Preorder l) = type-Poset X → Prop l
-  pr1 (pr2 (sub-poset-Preorder l)) = inclusion-Subposet-Prop
-  pr1 (pr2 (pr2 (sub-poset-Preorder l))) = refl-inclusion-Subposet
-  pr2 (pr2 (pr2 (sub-poset-Preorder l))) = transitive-inclusion-Subposet
+  subposet-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
+  pr1 (subposet-Preorder l) = Subposet l X
+  pr1 (pr2 (subposet-Preorder l)) = inclusion-prop-Subposet
+  pr1 (pr2 (pr2 (subposet-Preorder l))) = refl-inclusion-Subposet
+  pr2 (pr2 (pr2 (subposet-Preorder l))) = transitive-inclusion-Subposet
 ```

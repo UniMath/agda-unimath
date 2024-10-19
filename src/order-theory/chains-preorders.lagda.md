@@ -73,7 +73,7 @@ module _
 
   inclusion-prop-chain-Preorder : Prop (l1 ⊔ l3 ⊔ l4)
   inclusion-prop-chain-Preorder =
-    inclusion-Subpreorder-Prop X
+    inclusion-prop-Subpreorder X
       ( subpreorder-chain-Preorder X C)
       ( subpreorder-chain-Preorder X D)
 
