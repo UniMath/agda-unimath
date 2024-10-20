@@ -8,6 +8,7 @@ module order-theory.opposite-large-posets where
 
 ```agda
 open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-large-posets
 open import order-theory.opposite-large-preorders
 open import order-theory.large-posets
 
@@ -90,6 +91,20 @@ module _
     make-Large-Poset
       large-preorder-opposite-Large-Poset
       antisymmetric-leq-opposite-Large-Poset
+```
+
+### The opposite functorial action on order preserving maps of large posets
+
+```agda
+module _
+  {αP αQ : Level → Level} {βP βQ : Level → Level → Level} {γ : Level → Level}
+  {P : Large-Poset αP βP} {Q : Large-Poset αQ βQ}
+  where
+
+  opposite-hom-Large-Poset :
+    hom-Large-Poset γ P Q →
+    hom-Large-Poset γ (opposite-Large-Poset P) (opposite-Large-Poset Q)
+  opposite-hom-Large-Poset = opposite-hom-Large-Preorder
 ```
 
 ## Properties

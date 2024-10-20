@@ -161,19 +161,22 @@ module _
     Π-Large-Meet-Semilattice {I = A} (λ _ → Prop-Large-Meet-Semilattice)
 ```
 
-### Maps of types give order preserving maps on their powersets
+### The powerset suplattice
 
 ```agda
-hom-map-type-powerset-Large-Poset :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  hom-Large-Poset (λ l → l) (powerset-Large-Poset B) (powerset-Large-Poset A)
-hom-map-type-powerset-Large-Poset f =
-  make-hom-Large-Preorder
-    ( λ B' x → B' (f x))
-    ( λ B' B'' B'⊆B'' x B'fx → B'⊆B'' (f x) B'fx)
-```
+module _
+  {l1 : Level} (A : UU l1)
+  where
 
-If `f` is an embedding, then `f(A) ≃ A`...
+  powerset-Large-Suplattice :
+    Large-Suplattice (λ l2 → lsuc l2 ⊔ l1) (λ l2 l3 → l2 ⊔ l3 ⊔ l1) lzero
+  powerset-Large-Suplattice =
+    Π-Large-Suplattice {I = A} (λ _ → Prop-Large-Suplattice)
+
+  powerset-Suplattice :
+    (l2 l3 : Level) → Suplattice (l1 ⊔ lsuc l2 ⊔ lsuc l3) (l1 ⊔ l2 ⊔ l3) l2
+  powerset-Suplattice = suplattice-Large-Suplattice powerset-Large-Suplattice
+```
 
 ## See also
 

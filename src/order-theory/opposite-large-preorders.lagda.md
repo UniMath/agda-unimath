@@ -8,6 +8,7 @@ module order-theory.opposite-large-preorders where
 
 ```agda
 open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-large-preorders
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -77,6 +78,23 @@ module _
       transitive-leq-opposite-Large-Preorder
 ```
 
+### The opposite functorial action on order preserving maps of large posets
+
+```agda
+module _
+  {αP αQ : Level → Level} {βP βQ : Level → Level → Level} {γ : Level → Level}
+  {P : Large-Preorder αP βP} {Q : Large-Preorder αQ βQ}
+  where
+
+  opposite-hom-Large-Preorder :
+    hom-Large-Preorder γ P Q →
+    hom-Large-Preorder γ (opposite-Large-Preorder P) (opposite-Large-Preorder Q)
+  opposite-hom-Large-Preorder f =
+    make-hom-Large-Preorder
+      ( map-hom-Large-Preorder f)
+      ( λ x y p → preserves-order-hom-Large-Preorder f y x p)
+```
+
 ## Properties
 
 ### The opposite large preorder construction is a strict involution
@@ -89,4 +107,14 @@ module _
   is-involution-opposite-Large-Preorder :
     opposite-Large-Preorder (opposite-Large-Preorder P) ＝ω P
   is-involution-opposite-Large-Preorder = reflω
+
+module _
+  {αP αQ : Level → Level} {βP βQ : Level → Level → Level} {γ : Level → Level}
+  (P : Large-Preorder αP βP) (Q : Large-Preorder αQ βQ)
+  (f : hom-Large-Preorder γ P Q)
+  where
+
+  is-involution-opposite-hom-Large-Preorder :
+    opposite-hom-Large-Preorder (opposite-hom-Large-Preorder f) ＝ω f
+  is-involution-opposite-hom-Large-Preorder = reflω
 ```

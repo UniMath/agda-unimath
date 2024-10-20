@@ -7,9 +7,13 @@ module foundation.preimages-of-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.powersets
 open import foundation.universe-levels
 
 open import foundation-core.subtypes
+
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
 ```
 
 </details>
@@ -28,3 +32,20 @@ preimage-subtype :
   subtype l3 B → subtype l3 A
 preimage-subtype f S a = S (f a)
 ```
+
+### Maps of types give order preserving maps on their powersets
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  preimage-hom-powerset :
+    hom-Large-Poset (λ l → l) (powerset-Large-Poset B) (powerset-Large-Poset A)
+  preimage-hom-powerset f =
+    make-hom-Large-Preorder
+      ( preimage-subtype f)
+      ( λ B' B'' B'⊆B'' x B'fx → B'⊆B'' (f x) B'fx)
+```
+
+If `f` is an embedding, then `f(A) ≃ A`...

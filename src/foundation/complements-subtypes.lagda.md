@@ -13,6 +13,15 @@ open import foundation.double-negation-stable-subtypes
 open import foundation.double-negation-stable-propositions
 open import foundation.full-subtypes
 open import foundation.negation
+open import foundation.powersets
+open import foundation.postcomposition-functions
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.opposite-large-posets
+open import order-theory.order-preserving-maps-posets
+open import order-theory.order-preserving-maps-preorders
+open import order-theory.posets
+open import order-theory.large-posets
 open import foundation.propositional-truncations
 open import foundation.unions-subtypes
 open import foundation.universe-levels
@@ -91,4 +100,19 @@ module _
     is-full-union-subtype-complement-subtype
       ( subtype-decidable-subtype P)
       ( is-decidable-decidable-subtype P)
+```
+
+### Taking complements gives a contravariant endooperator on the powerset posets
+
+```agda
+neg-hom-powerset :
+  {l1 : Level} {A : UU l1} →
+  hom-Large-Poset
+    ( λ l → l)
+    ( powerset-Large-Poset A)
+    ( opposite-Large-Poset (powerset-Large-Poset A))
+neg-hom-powerset =
+  make-hom-Large-Preorder
+    ( λ P x → neg-Prop (P x))
+    ( λ P Q f x → map-neg (f x))
 ```
