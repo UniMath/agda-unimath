@@ -7,19 +7,19 @@ module order-theory.opposite-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.large-preorders
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.opposite-large-preorders
-open import order-theory.large-posets
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.sets
 open import foundation.large-identity-types
 open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
+
+open import order-theory.large-posets
+open import order-theory.large-preorders
+open import order-theory.opposite-large-preorders
+open import order-theory.order-preserving-maps-large-posets
 ```
 
 </details>
@@ -45,7 +45,8 @@ module _
     opposite-Large-Preorder (large-preorder-Large-Poset P)
 
   type-opposite-Large-Poset : (l : Level) → UU (α l)
-  type-opposite-Large-Poset = type-Large-Preorder large-preorder-opposite-Large-Poset
+  type-opposite-Large-Poset =
+    type-Large-Preorder large-preorder-opposite-Large-Poset
 
   leq-prop-opposite-Large-Poset :
     {l1 l2 : Level}

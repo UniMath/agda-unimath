@@ -9,25 +9,26 @@ module foundation.complements-subtypes where
 ```agda
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
-open import foundation.double-negation-stable-subtypes
 open import foundation.double-negation-stable-propositions
+open import foundation.double-negation-stable-subtypes
 open import foundation.full-subtypes
 open import foundation.negation
-open import foundation.powersets
 open import foundation.postcomposition-functions
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.opposite-large-posets
-open import order-theory.order-preserving-maps-posets
-open import order-theory.order-preserving-maps-preorders
-open import order-theory.posets
-open import order-theory.large-posets
+open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.subtypes
+
+open import order-theory.large-posets
+open import order-theory.opposite-large-posets
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.order-preserving-maps-posets
+open import order-theory.order-preserving-maps-preorders
+open import order-theory.posets
 ```
 
 </details>

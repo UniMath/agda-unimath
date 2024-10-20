@@ -9,13 +9,10 @@ module foundation.images-embeddings where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.powersets
+open import foundation.propositional-maps
 open import foundation.propositional-truncations
 open import foundation.slice
-open import foundation.powersets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import foundation.propositional-maps
 open import foundation.subtype-identity-principle
 open import foundation.surjective-maps
 open import foundation.universe-levels
@@ -35,6 +32,10 @@ open import foundation-core.subtypes
 open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.order-preserving-maps-posets
 ```
 
 </details>
@@ -69,7 +70,8 @@ module _
   pr1 (map-unit-im-emb a) = map-emb f a
   pr2 (map-unit-im-emb a) = a , refl
 
-  triangle-unit-im-emb : coherence-triangle-maps (map-emb f) inclusion-im-emb map-unit-im-emb
+  triangle-unit-im-emb :
+    coherence-triangle-maps (map-emb f) inclusion-im-emb map-unit-im-emb
   triangle-unit-im-emb a = refl
 
   unit-im-emb : hom-slice (map-emb f) inclusion-im-emb
@@ -156,7 +158,8 @@ abstract
   is-emb-inclusion-im-emb :
     {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A ↪ X) →
     is-emb (inclusion-im-emb f)
-  is-emb-inclusion-im-emb f = is-emb-inclusion-subtype (λ x → fiber (map-emb f) x , is-prop-map-emb f x)
+  is-emb-inclusion-im-emb f =
+    is-emb-inclusion-subtype (λ x → fiber (map-emb f) x , is-prop-map-emb f x)
 
 emb-im-emb :
   {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A ↪ X) → im-emb f ↪ X
@@ -171,7 +174,8 @@ abstract
   is-injective-inclusion-im-emb :
     {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A ↪ X) →
     is-injective (inclusion-im-emb f)
-  is-injective-inclusion-im-emb f = is-injective-is-emb (is-emb-inclusion-im-emb f)
+  is-injective-inclusion-im-emb f =
+    is-injective-is-emb (is-emb-inclusion-im-emb f)
 ```
 
 ### The unit map of the image is surjective
@@ -203,7 +207,8 @@ im-emb-Truncated-Type :
   {l1 l2 : Level} (k : 𝕋) (X : Truncated-Type l1 (succ-𝕋 k)) {A : UU l2}
   (f : A ↪ type-Truncated-Type X) → Truncated-Type (l1 ⊔ l2) (succ-𝕋 k)
 pr1 (im-emb-Truncated-Type k X f) = im-emb f
-pr2 (im-emb-Truncated-Type k X f) = is-trunc-im-emb k f (is-trunc-type-Truncated-Type X)
+pr2 (im-emb-Truncated-Type k X f) =
+  is-trunc-im-emb k f (is-trunc-type-Truncated-Type X)
 ```
 
 ## Idea

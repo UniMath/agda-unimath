@@ -13,8 +13,8 @@ open import category-theory.large-precategories
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
-open import foundation.large-identity-types
 open import foundation.identity-types
+open import foundation.large-identity-types
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels

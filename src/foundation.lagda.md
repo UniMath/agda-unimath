@@ -219,6 +219,7 @@ open import foundation.identity-systems public
 open import foundation.identity-truncated-types public
 open import foundation.identity-types public
 open import foundation.images public
+open import foundation.images-embeddings public
 open import foundation.images-subtypes public
 open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public

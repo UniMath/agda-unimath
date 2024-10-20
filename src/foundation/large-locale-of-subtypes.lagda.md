@@ -14,16 +14,16 @@ open import foundation.universe-levels
 open import foundation-core.identity-types
 open import foundation-core.sets
 
+open import order-theory.bottom-elements-large-posets
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-locales
-open import order-theory.large-preorders
-open import order-theory.top-elements-large-posets
-open import order-theory.bottom-elements-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
+open import order-theory.large-preorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.powers-of-large-locales
+open import order-theory.top-elements-large-posets
 ```
 
 </details>

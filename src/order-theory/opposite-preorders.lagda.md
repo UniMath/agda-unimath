@@ -7,16 +7,15 @@ module order-theory.opposite-preorders where
 <details><summary>Imports</summary>
 
 ```agda
-open import order-theory.preorders
-
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.sets
-open import foundation.identity-types
 open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
+
+open import order-theory.preorders
 ```
 
 </details>
