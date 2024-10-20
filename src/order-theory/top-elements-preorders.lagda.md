@@ -18,8 +18,10 @@ open import order-theory.preorders
 
 ## Idea
 
-A **largest element** in a preorder `P` is an element `t` such that `x ≤ t`
-holds for every `x : P`.
+A
+{{#concept "largest element" Disambiguation="in a preorder" WD="maximal and minimal elements" WDID=Q1475294 Agda=is-top-element-Preorder}}
+in a [preorder](order-theory.preorders.md) `P` is an element `t` such that
+`x ≤ t` holds for every `x : P`.
 
 ## Definition
 
@@ -43,3 +45,9 @@ module _
   has-top-element-Preorder : UU (l1 ⊔ l2)
   has-top-element-Preorder = Σ (type-Preorder X) is-top-element-Preorder
 ```
+
+## External links
+
+- [Maximal and minimal elements](https://en.wikipedia.org/wiki/Maximal_and_minimal_elements)
+  at Wikipedia
+- [maximal element](https://ncatlab.org/nlab/show/maximal+element) at $n$Lab

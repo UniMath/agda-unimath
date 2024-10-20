@@ -220,6 +220,6 @@ module _
     A retract-of B →
     is-connected k B →
     is-connected k A
-  is-connected-retract-of R c =
-    is-contr-retract-of (type-trunc k B) (retract-of-trunc-retract-of R) c
+  is-connected-retract-of R =
+    is-contr-retract-of (type-trunc k B) (retract-of-trunc-retract-of R)
 ```

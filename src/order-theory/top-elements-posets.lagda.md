@@ -62,3 +62,9 @@ module _
   pr1 has-top-element-prop-Poset = has-top-element-Poset
   pr2 has-top-element-prop-Poset = is-prop-has-top-element-Poset
 ```
+
+## External links
+
+- [Maximal and minimal elements](https://en.wikipedia.org/wiki/Maximal_and_minimal_elements)
+  at Wikipedia
+- [maximal element](https://ncatlab.org/nlab/show/maximal+element) at $n$Lab
