@@ -16,6 +16,7 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.opposite-preorders
+open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 open import order-theory.preorders
 ```
@@ -78,6 +79,19 @@ module _
     ( preorder-opposite-Poset , antisymmetric-leq-opposite-Poset)
 ```
 
+### The opposite functorial action on order preserving maps of posets
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
+  where
+
+  opposite-hom-Poset :
+    hom-Poset P Q → hom-Poset (opposite-Poset P) (opposite-Poset Q)
+  opposite-hom-Poset =
+    opposite-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+```
+
 ## Properties
 
 ### The opposite poset construction is a strict involution
@@ -89,4 +103,18 @@ module _
 
   is-involution-opposite-Poset : opposite-Poset (opposite-Poset P) ＝ P
   is-involution-opposite-Poset = refl
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (P : Poset l1 l2) (Q : Poset l3 l4)
+  (f : hom-Poset P Q)
+  where
+
+  is-involution-opposite-hom-Poset :
+    opposite-hom-Poset
+      ( opposite-Poset P)
+      ( opposite-Poset Q)
+      ( opposite-hom-Poset P Q f) ＝
+    f
+  is-involution-opposite-hom-Poset = refl
 ```

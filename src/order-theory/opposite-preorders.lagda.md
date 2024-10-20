@@ -15,6 +15,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import order-theory.order-preserving-maps-preorders
 open import order-theory.preorders
 ```
 
@@ -67,6 +68,21 @@ module _
       transitive-leq-opposite-Preorder)
 ```
 
+### The opposite functorial action on order preserving maps of preorders
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (P : Preorder l1 l2) (Q : Preorder l3 l4)
+  where
+
+  opposite-hom-Preorder :
+    hom-Preorder P Q →
+    hom-Preorder (opposite-Preorder P) (opposite-Preorder Q)
+  opposite-hom-Preorder f =
+    ( map-hom-Preorder P Q f) ,
+    ( λ x y p → preserves-order-map-hom-Preorder P Q f y x p)
+```
+
 ## Properties
 
 ### The opposite preorder construction is a strict involution
@@ -78,4 +94,18 @@ module _
 
   is-involution-opposite-Preorder : opposite-Preorder (opposite-Preorder P) ＝ P
   is-involution-opposite-Preorder = refl
+
+module _
+  {l1 l2 l3 l4 : Level}
+  (P : Preorder l1 l2) (Q : Preorder l3 l4)
+  (f : hom-Preorder P Q)
+  where
+
+  is-involution-opposite-hom-Preorder :
+    opposite-hom-Preorder
+      ( opposite-Preorder P)
+      ( opposite-Preorder Q)
+      ( opposite-hom-Preorder P Q f) ＝
+    f
+  is-involution-opposite-hom-Preorder = refl
 ```

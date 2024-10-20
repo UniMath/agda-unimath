@@ -120,4 +120,18 @@ module _
   is-involution-opposite-Large-Poset :
     opposite-Large-Poset (opposite-Large-Poset P) ＝ω P
   is-involution-opposite-Large-Poset = reflω
+
+module _
+  {αP αQ : Level → Level} {βP βQ : Level → Level → Level} {γ : Level → Level}
+  (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
+  (f : hom-Large-Poset γ P Q)
+  where
+
+  is-involution-opposite-hom-Large-Poset :
+    opposite-hom-Large-Poset
+      { P = opposite-Large-Poset P}
+      { opposite-Large-Poset Q}
+      ( opposite-hom-Large-Poset {P = P} {Q} f) ＝ω
+    f
+  is-involution-opposite-hom-Large-Poset = reflω
 ```
