@@ -41,7 +41,7 @@ if there is a map
 
 We say a type `A` satisfies
 {{#concept "double negation elimination" Agda="on a type"}} if there is an
-implicaton
+implication
 
 ```text
   ¬¬A ⇒ ║A║₋₁.
@@ -62,7 +62,7 @@ module _
 
 ## Properties
 
-### If the type is a propositon, then having double negation elimination is a property
+### Having double negation elimination is a property for propositions
 
 ```agda
 is-prop-has-double-negation-elim :
@@ -123,29 +123,25 @@ module _
     has-double-negation-elim-iff' (iff-retract e)
 ```
 
-### The empty proposition has double negation elimination
+### Double negation elimination for empty types
 
 ```agda
 double-negation-elim-empty : has-double-negation-elim empty
 double-negation-elim-empty e = e id
-```
 
-### Empty types are double negation stable propositions
-
-```agda
 double-negation-elim-is-empty :
   {l : Level} {A : UU l} → is-empty A → has-double-negation-elim A
 double-negation-elim-is-empty H q = ex-falso (q H)
 ```
 
-### The unit proposition has double negation elimination
+### Double negation elimination for the unit type
 
 ```agda
 double-negation-elim-unit : has-double-negation-elim unit
 double-negation-elim-unit _ = star
 ```
 
-### Contractible types are double negation stable
+### Double negation elimination for the contractible types
 
 ```agda
 double-negation-elim-is-contr :
@@ -153,7 +149,7 @@ double-negation-elim-is-contr :
 double-negation-elim-is-contr H _ = center H
 ```
 
-### The negation of a type has double negation elimination
+### Double negation elimination for negations of types
 
 ```agda
 double-negation-elim-neg :
@@ -161,27 +157,7 @@ double-negation-elim-neg :
 double-negation-elim-neg A f p = f (ev p)
 ```
 
-### Function types into double negations have double negation elimination
-
-```agda
-module _
-  {l1 l2 : Level} {P : UU l1} {Q : UU l2}
-  where
-
-  double-negation-elim-exp-neg-neg :
-    has-double-negation-elim (P → ¬¬ Q)
-  double-negation-elim-exp-neg-neg f p =
-    double-negation-elim-neg
-      ( ¬ Q)
-      ( map-double-negation (λ (g : P → ¬¬ Q) → g p) f)
-
-  double-negation-elim-exp :
-    has-double-negation-elim Q →
-    has-double-negation-elim (P → Q)
-  double-negation-elim-exp H f p = H (λ nq → f (λ g → nq (g p)))
-```
-
-### Universal quantification over double negations have double negation elimination
+### Double negation elimination for uiversal quantification over double negations
 
 ```agda
 module _
@@ -201,7 +177,25 @@ module _
   double-negation-elim-for-all H f p = H p (λ nq → f (λ g → nq (g p)))
 ```
 
-### Decidable propositions are double negation stable
+### Double negation elimination for function types into double negations
+
+```agda
+module _
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2}
+  where
+
+  double-negation-elim-exp-neg-neg :
+    has-double-negation-elim (P → ¬¬ Q)
+  double-negation-elim-exp-neg-neg =
+    double-negation-elim-for-all-neg-neg
+
+  double-negation-elim-exp :
+    has-double-negation-elim Q →
+    has-double-negation-elim (P → Q)
+  double-negation-elim-exp q = double-negation-elim-for-all (λ _ → q)
+```
+
+### Double negation elimination for ecidable propositions
 
 ```text
 double-negation-elim-is-decidable :
@@ -209,7 +203,7 @@ double-negation-elim-is-decidable :
 double-negation-elim-is-decidable = double-negation-elim-is-decidable
 ```
 
-### Dependent sums of types with double negation elimination over a double negation stable proposition have double negation elimination
+### Double negation elimination for dependent sums of types with double negation elimination over a double negation stable proposition
 
 ```agda
 double-negation-elim-Σ-is-prop-base :
@@ -232,7 +226,7 @@ double-negation-elim-Σ-is-decidable-prop-base (H , d) =
   double-negation-elim-Σ-is-prop-base H (double-negation-elim-is-decidable d)
 ```
 
-### The product of two types with double negation elimination has double negation elimination
+### Double negation elimination for products of types with double negation elimination
 
 ```agda
 double-negation-elim-product :

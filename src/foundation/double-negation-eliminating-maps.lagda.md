@@ -45,7 +45,8 @@ if its [fibers](foundation-core.fibers-of-maps.md) satisfy
 [untruncated double negation elimination](foundation.double-negation-elimination.md).
 I.e., for every `y : B`, if `fiber f y` is
 [irrefutable](foundation.irrefutable-propositions.md), then we do in fact have
-an element of the fiber `p : fiber f y`. So we have a map
+an element of the fiber `p : fiber f y`. In other words, double negation
+eliminating maps come [equipped](foundation.structure.md) with a map
 
 ```text
   (y : B) → ¬¬ (fiber f y) → fiber f y.
