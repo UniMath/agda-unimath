@@ -168,7 +168,7 @@ module _
 ```agda
 empty-Double-Negation-Stable-Prop : Double-Negation-Stable-Prop lzero
 empty-Double-Negation-Stable-Prop =
-  empty , is-prop-empty , double-negation-elim-empty
+  ( empty , is-prop-empty , double-negation-elim-empty)
 ```
 
 ### The unit proposition is double negation stable
@@ -176,7 +176,7 @@ empty-Double-Negation-Stable-Prop =
 ```agda
 unit-Double-Negation-Stable-Prop : Double-Negation-Stable-Prop lzero
 unit-Double-Negation-Stable-Prop =
-  unit , is-prop-unit , double-negation-elim-unit
+  ( unit , is-prop-unit , double-negation-elim-unit)
 ```
 
 ```agda
