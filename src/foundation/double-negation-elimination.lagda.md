@@ -32,7 +32,7 @@ open import foundation-core.propositions
 ## Idea
 
 We say a type `A` satisfies
-{{#concept "untruncated double negation elimination" Agda="on a type" Agda=has-double-negation-elim}}
+{{#concept "untruncated double negation elimination" Disambiguation="on a type" Agda=has-double-negation-elim}}
 if there is a map
 
 ```text
@@ -40,8 +40,8 @@ if there is a map
 ```
 
 We say a type `A` satisfies
-{{#concept "double negation elimination" Agda="on a type"}} if there is an
-implication
+{{#concept "double negation elimination" Disambiguation="on a type"}} if there
+is an implication
 
 ```text
   ¬¬A ⇒ ║A║₋₁.
