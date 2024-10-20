@@ -268,6 +268,20 @@ double-negation-stable-prop-Decidable-Prop (A , H , d) =
   ( A , H , double-negation-elim-is-decidable d)
 ```
 
+### Negations of types are double negation stable propositions
+
+```agda
+neg-type-Double-Negation-Stable-Prop :
+  {l : Level} → UU l → Double-Negation-Stable-Prop l
+neg-type-Double-Negation-Stable-Prop A =
+  ( ¬ A , is-prop-neg , double-negation-elim-neg A)
+
+neg-Double-Negation-Stable-Prop :
+  {l : Level} → Double-Negation-Stable-Prop l → Double-Negation-Stable-Prop l
+neg-Double-Negation-Stable-Prop P =
+  neg-type-Double-Negation-Stable-Prop (type-Double-Negation-Stable-Prop P)
+```
+
 ### Universal quantification over double negation stable propositions is double negation stable
 
 ```agda
@@ -372,7 +386,8 @@ product-Double-Negation-Stable-Prop A B =
 abstract
   no-fixed-points-neg-Double-Negation-Stable-Prop :
     {l : Level} (P : Double-Negation-Stable-Prop l) →
-    ¬ (type-Double-Negation-Stable-Prop P ↔ ¬ (type-Double-Negation-Stable-Prop P))
+    ¬ (type-Double-Negation-Stable-Prop P ↔
+    ¬ (type-Double-Negation-Stable-Prop P))
   no-fixed-points-neg-Double-Negation-Stable-Prop P =
     no-fixed-points-neg (type-Double-Negation-Stable-Prop P)
 ```

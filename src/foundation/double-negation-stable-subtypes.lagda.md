@@ -168,12 +168,16 @@ module _
       ( y)
 
   compute-type-double-negation-stable-type-double-negation-stable-emb :
-    type-double-negation-stable-subtype double-negation-stable-subtype-double-negation-stable-emb ≃ X
+    type-double-negation-stable-subtype
+      double-negation-stable-subtype-double-negation-stable-emb ≃
+    X
   compute-type-double-negation-stable-type-double-negation-stable-emb =
     equiv-total-fiber (map-double-negation-stable-emb f)
 
   inv-compute-type-double-negation-stable-type-double-negation-stable-emb :
-    X ≃ type-double-negation-stable-subtype double-negation-stable-subtype-double-negation-stable-emb
+    X ≃
+    type-double-negation-stable-subtype
+      double-negation-stable-subtype-double-negation-stable-emb
   inv-compute-type-double-negation-stable-type-double-negation-stable-emb =
     inv-equiv-total-fiber (map-double-negation-stable-emb f)
 ```
@@ -223,7 +227,8 @@ module _
 
   abstract
     is-trunc-type-double-negation-stable-subtype :
-      is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) (type-double-negation-stable-subtype P)
+      is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k)
+      (type-double-negation-stable-subtype P)
     is-trunc-type-double-negation-stable-subtype =
       is-trunc-type-subtype k (subtype-double-negation-stable-subtype P)
 
@@ -250,13 +255,15 @@ module _
       is-1-type-type-subtype (subtype-double-negation-stable-subtype P)
 
 prop-double-negation-stable-subprop :
-  {l1 l2 : Level} (A : Prop l1) (P : double-negation-stable-subtype l2 (type-Prop A)) →
+  {l1 l2 : Level} (A : Prop l1)
+  (P : double-negation-stable-subtype l2 (type-Prop A)) →
   Prop (l1 ⊔ l2)
 prop-double-negation-stable-subprop A P =
   prop-subprop A (subtype-double-negation-stable-subtype P)
 
 set-double-negation-stable-subset :
-  {l1 l2 : Level} (A : Set l1) (P : double-negation-stable-subtype l2 (type-Set A)) →
+  {l1 l2 : Level} (A : Set l1)
+  (P : double-negation-stable-subtype l2 (type-Set A)) →
   Set (l1 ⊔ l2)
 set-double-negation-stable-subset A P =
   set-subset A (subtype-double-negation-stable-subtype P)
@@ -290,7 +297,9 @@ module _
     (P ＝ Q) ≃ has-same-elements-double-negation-stable-subtype Q
   extensionality-double-negation-stable-subtype =
     extensionality-Π P
-      ( λ x Q → (type-Double-Negation-Stable-Prop (P x)) ↔ (type-Double-Negation-Stable-Prop Q))
+      ( λ x Q →
+        ( type-Double-Negation-Stable-Prop (P x)) ↔
+        ( type-Double-Negation-Stable-Prop Q))
       ( λ x Q → extensionality-Double-Negation-Stable-Prop (P x) Q)
 
   has-same-elements-eq-double-negation-stable-subtype :
@@ -306,7 +315,8 @@ module _
     map-inv-equiv (extensionality-double-negation-stable-subtype Q)
 
   refl-extensionality-double-negation-stable-subtype :
-    map-equiv (extensionality-double-negation-stable-subtype P) refl ＝ (λ x → pair id id)
+    map-equiv (extensionality-double-negation-stable-subtype P) refl ＝
+    (λ x → id , id)
   refl-extensionality-double-negation-stable-subtype = refl
 ```
 
