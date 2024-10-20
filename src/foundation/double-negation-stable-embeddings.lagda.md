@@ -53,13 +53,13 @@ open import foundation-core.torsorial-type-families
 A [map](foundation-core.function-types.md) is said to be a
 {{#concept "double negation stable embedding" Disambiguation="of types" Agda=is-double-negation-stable-emb}}
 if it is an [embedding](foundation-core.embeddings.md) and its
-[fibers](foundation-core.fibers-of-maps.md) are
-[decidable types](foundation.decidable-types.md).
+[fibers](foundation-core.fibers-of-maps.md) satisfy
+[double negation elimination](foundation.double-negation-elimination.md).
 
 Equivalently, a double negation stable embedding is a map whose fibers are
-[decidable propositions](foundation-core.decidable-propositions.md). We refer to
-this condition as being a
-{{#concept "decidably propositional map" Disambiguation="of types" Agda=is-double-negation-stable-prop-map}}.
+[double negation stable propositions](foundation-core.double-negation-stable-propositions.md).
+We refer to this condition as being a
+{{#concept "double negation stable propositional map" Disambiguation="of types" Agda=is-double-negation-stable-prop-map}}.
 
 ## Definitions
 
@@ -167,7 +167,7 @@ pr2 (emb-double-negation-stable-emb e) = is-emb-map-double-negation-stable-emb e
 
 ## Properties
 
-### Any map of which the fibers are decidable propositions is a double negation stable embedding
+### Any map of which the fibers are double negation stable propositions is a double negation stable embedding
 
 ```agda
 module _
@@ -191,7 +191,7 @@ module _
       is-double-negation-eliminating-map-is-double-negation-stable-emb H y
 ```
 
-### The first projection map of a dependent sum of decidable propositions is a double negation stable embedding
+### The first projection map of a dependent sum of double negation stable propositions is a double negation stable embedding
 
 ```agda
 module _
@@ -708,7 +708,7 @@ module _
         is-double-negation-stable-prop-equiv (equiv-fiber-terminal-map y) H)
 ```
 
-### If a dependent sum of propositions over a proposition is decidable, then the family is a family of decidable propositions
+### If a dependent sum of propositions over a proposition is double negation stable, then the family is a family of double negation stable propositions
 
 ```agda
 module _
