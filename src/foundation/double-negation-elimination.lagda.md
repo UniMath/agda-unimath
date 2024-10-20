@@ -36,7 +36,7 @@ We say a type `A` satisfies
 if there is a map
 
 ```text
-  ¬¬A → A
+  ¬¬A → A.
 ```
 
 ## Definitions

@@ -16,18 +16,25 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.double-negation
 open import foundation.double-negation-elimination
+open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.existential-quantification
+open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.propositional-extensionality
 open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.function-types
+open import foundation-core.identity-types
 open import foundation-core.retracts-of-types
 ```
 
@@ -118,6 +125,11 @@ module _
     is-prop-type-is-double-negation-stable-prop
       ( is-double-negation-stable-prop-type-Double-Negation-Stable-Prop)
 
+  prop-Double-Negation-Stable-Prop : Prop l
+  prop-Double-Negation-Stable-Prop =
+    ( type-Double-Negation-Stable-Prop ,
+      is-prop-type-Double-Negation-Stable-Prop)
+
   has-double-negation-elim-type-Double-Negation-Stable-Prop :
     has-double-negation-elim type-Double-Negation-Stable-Prop
   has-double-negation-elim-type-Double-Negation-Stable-Prop =
@@ -127,7 +139,68 @@ module _
 
 ## Properties
 
-### Double negation elimination is preserved by retracts
+### The forgetful map from double negation stable propositions to propositions is an embedding
+
+```agda
+is-emb-prop-Double-Negation-Stable-Prop :
+  {l : Level} → is-emb (prop-Double-Negation-Stable-Prop {l})
+is-emb-prop-Double-Negation-Stable-Prop =
+  is-emb-tot
+    ( λ X →
+      is-emb-inclusion-subtype
+        ( λ H →
+          has-double-negation-elim X , is-prop-has-double-negation-elim H))
+
+emb-prop-Double-Negation-Stable-Prop :
+  {l : Level} → Double-Negation-Stable-Prop l ↪ Prop l
+emb-prop-Double-Negation-Stable-Prop =
+  ( prop-Double-Negation-Stable-Prop , is-emb-prop-Double-Negation-Stable-Prop)
+```
+
+### The subuniverse of double negation stable propositions is a set
+
+```agda
+is-set-Double-Negation-Stable-Prop :
+  {l : Level} → is-set (Double-Negation-Stable-Prop l)
+is-set-Double-Negation-Stable-Prop {l} =
+  is-set-emb emb-prop-Double-Negation-Stable-Prop is-set-type-Prop
+
+set-Double-Negation-Stable-Prop : (l : Level) → Set (lsuc l)
+set-Double-Negation-Stable-Prop l =
+  ( Double-Negation-Stable-Prop l , is-set-Double-Negation-Stable-Prop)
+```
+
+### Extensionality of double negation stable propositions
+
+```agda
+module _
+  {l : Level} (P Q : Double-Negation-Stable-Prop l)
+  where
+
+  extensionality-Double-Negation-Stable-Prop :
+    ( P ＝ Q) ≃
+    ( type-Double-Negation-Stable-Prop P ↔ type-Double-Negation-Stable-Prop Q)
+  extensionality-Double-Negation-Stable-Prop =
+    ( propositional-extensionality
+      ( prop-Double-Negation-Stable-Prop P)
+      ( prop-Double-Negation-Stable-Prop Q)) ∘e
+    ( equiv-ap-emb emb-prop-Double-Negation-Stable-Prop)
+
+  iff-eq-Double-Negation-Stable-Prop :
+    P ＝ Q →
+    type-Double-Negation-Stable-Prop P ↔ type-Double-Negation-Stable-Prop Q
+  iff-eq-Double-Negation-Stable-Prop =
+    map-equiv extensionality-Double-Negation-Stable-Prop
+
+  eq-iff-Double-Negation-Stable-Prop :
+    (type-Double-Negation-Stable-Prop P → type-Double-Negation-Stable-Prop Q) →
+    (type-Double-Negation-Stable-Prop Q → type-Double-Negation-Stable-Prop P) →
+    P ＝ Q
+  eq-iff-Double-Negation-Stable-Prop f g =
+    map-inv-equiv extensionality-Double-Negation-Stable-Prop (pair f g)
+```
+
+### Double negation stable propositions are preserved by retracts
 
 ```agda
 module _
@@ -145,7 +218,7 @@ module _
       ( has-double-negation-elim-is-double-negation-stable-prop H))
 ```
 
-### Double negation elimination is preserved by equivalences
+### Double negation stable propositions are preserved by equivalences
 
 ```agda
 module _
@@ -189,9 +262,9 @@ is-double-negation-stable-prop-is-contr H =
 ### Decidable propositions are double negation stable
 
 ```agda
-decidable-prop-Double-Negation-Stable-Prop :
+double-negation-stable-prop-Decidable-Prop :
   {l : Level} → Decidable-Prop l → Double-Negation-Stable-Prop l
-decidable-prop-Double-Negation-Stable-Prop (A , H , d) =
+double-negation-stable-prop-Decidable-Prop (A , H , d) =
   ( A , H , double-negation-elim-is-decidable d)
 ```
 
@@ -291,6 +364,17 @@ product-Double-Negation-Stable-Prop A B =
   ( is-double-negation-stable-prop-product
     ( is-double-negation-stable-prop-type-Double-Negation-Stable-Prop A)
     ( is-double-negation-stable-prop-type-Double-Negation-Stable-Prop B))
+```
+
+### Negation has no fixed points on double negation stable propositions
+
+```agda
+abstract
+  no-fixed-points-neg-Double-Negation-Stable-Prop :
+    {l : Level} (P : Double-Negation-Stable-Prop l) →
+    ¬ (type-Double-Negation-Stable-Prop P ↔ ¬ (type-Double-Negation-Stable-Prop P))
+  no-fixed-points-neg-Double-Negation-Stable-Prop P =
+    no-fixed-points-neg (type-Double-Negation-Stable-Prop P)
 ```
 
 ## See also
