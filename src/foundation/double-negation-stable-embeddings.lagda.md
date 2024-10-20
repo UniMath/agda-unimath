@@ -15,6 +15,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation-eliminating-maps
+open import foundation.double-negation-elimination
 open import foundation.double-negation-stable-propositions
 open import foundation.embeddings
 open import foundation.fibers-of-maps
@@ -33,7 +34,6 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
-open import foundation.untruncated-double-negation-elimination
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types

@@ -15,6 +15,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.double-negation-eliminating-maps
+open import foundation.double-negation-elimination
 open import foundation.double-negation-stable-propositions
 open import foundation.functoriality-dependent-function-types
 open import foundation.iterated-dependent-product-types
@@ -25,7 +26,6 @@ open import foundation.negation
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
-open import foundation.untruncated-double-negation-elimination
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types

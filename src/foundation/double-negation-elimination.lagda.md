@@ -1,7 +1,7 @@
 # Double negation elimination
 
 ```agda
-module foundation.untruncated-double-negation-elimination where
+module foundation.double-negation-elimination where
 ```
 
 <details><summary>Imports</summary>

@@ -136,6 +136,7 @@ open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-eliminating-maps public
+open import foundation.double-negation-elimination public
 open import foundation.double-negation-modality public
 open import foundation.double-negation-stable-embeddings public
 open import foundation.double-negation-stable-propositions public
@@ -466,7 +467,6 @@ open import foundation.unordered-pairs public
 open import foundation.unordered-pairs-of-types public
 open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
-open import foundation.untruncated-double-negation-elimination public
 open import foundation.vectors-set-quotients public
 open import foundation.weak-function-extensionality public
 open import foundation.weak-limited-principle-of-omniscience public

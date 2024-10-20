@@ -12,12 +12,12 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-elimination
 open import foundation.function-types
 open import foundation.negation
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
-open import foundation.untruncated-double-negation-elimination
 
 open import foundation-core.propositions
 ```
