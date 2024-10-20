@@ -53,124 +53,119 @@ type-Cantor-Schröder-Bernstein-Escardó l1 l2 =
 ```agda
 module _
   {l1 l2 : Level} (lem : LEM (l1 ⊔ l2))
+  {X : UU l1} {Y : UU l2} (f : X ↪ Y) (g : Y ↪ X)
   where
 
-  module _
-    {X : UU l1} {Y : UU l2} (f : X ↪ Y) (g : Y ↪ X)
+  map-Cantor-Schröder-Bernstein-Escardó' :
+    (x : X) → is-decidable (is-perfect-image (map-emb f) (map-emb g) x) → Y
+  map-Cantor-Schröder-Bernstein-Escardó' x (inl y) =
+    inverse-of-perfect-image x y
+  map-Cantor-Schröder-Bernstein-Escardó' x (inr y) =
+    map-emb f x
+
+  map-Cantor-Schröder-Bernstein-Escardó : X → Y
+  map-Cantor-Schröder-Bernstein-Escardó x =
+    map-Cantor-Schröder-Bernstein-Escardó' x
+      ( is-decidable-is-perfect-image-is-emb-LEM lem (is-emb-map-emb g) x)
+
+  is-injective-map-Cantor-Schröder-Bernstein-Escardó :
+    is-injective map-Cantor-Schröder-Bernstein-Escardó
+  is-injective-map-Cantor-Schröder-Bernstein-Escardó {x} {x'} =
+    l (is-decidable-is-perfect-image-is-emb-LEM lem (is-emb-map-emb g) x)
+    (is-decidable-is-perfect-image-is-emb-LEM lem (is-emb-map-emb g) x')
     where
+    l :
+      (d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x))
+      (d' : is-decidable (is-perfect-image (map-emb f) (map-emb g) x')) →
+      ( map-Cantor-Schröder-Bernstein-Escardó' x d) ＝
+      ( map-Cantor-Schröder-Bernstein-Escardó' x' d') →
+      x ＝ x'
+    l (inl ρ) (inl ρ') p =
+      ( inv (is-section-inverse-of-perfect-image x ρ)) ∙
+      ( ap (map-emb g) p ∙ is-section-inverse-of-perfect-image x' ρ')
+    l (inl ρ) (inr nρ') p =
+      ex-falso (perfect-image-has-distinct-image x' x nρ' ρ (inv p))
+    l (inr nρ) (inl ρ') p =
+      ex-falso (perfect-image-has-distinct-image x x' nρ ρ' p)
+    l (inr nρ) (inr nρ') p =
+      is-injective-is-emb (is-emb-map-emb f) p
 
-    map-Cantor-Schröder-Bernstein-Escardó' :
-      (x : X) → is-decidable (is-perfect-image (map-emb f) (map-emb g) x) → Y
-    map-Cantor-Schröder-Bernstein-Escardó' x (inl y) =
-      inverse-of-perfect-image x y
-    map-Cantor-Schröder-Bernstein-Escardó' x (inr y) =
-      map-emb f x
-
-    map-Cantor-Schröder-Bernstein-Escardó :
-      X → Y
-    map-Cantor-Schröder-Bernstein-Escardó x =
-      map-Cantor-Schröder-Bernstein-Escardó' x
-        ( is-decidable-is-perfect-image-is-emb (is-emb-map-emb g) lem x)
-
-    is-injective-map-Cantor-Schröder-Bernstein-Escardó :
-      is-injective map-Cantor-Schröder-Bernstein-Escardó
-    is-injective-map-Cantor-Schröder-Bernstein-Escardó {x} {x'} =
-      l (is-decidable-is-perfect-image-is-emb (is-emb-map-emb g) lem x)
-      (is-decidable-is-perfect-image-is-emb (is-emb-map-emb g) lem x')
+  is-split-surjective-map-Cantor-Schröder-Bernstein-Escardó :
+    is-split-surjective map-Cantor-Schröder-Bernstein-Escardó
+  is-split-surjective-map-Cantor-Schröder-Bernstein-Escardó y =
+    pair x p
+    where
+    a :
+      is-decidable
+        ( is-perfect-image (map-emb f) (map-emb g) (map-emb g y)) →
+      Σ ( X)
+        ( λ x →
+          ( (d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x)) →
+            map-Cantor-Schröder-Bernstein-Escardó' x d ＝ y))
+    a (inl γ) =
+      pair (map-emb g y) ψ
       where
-      l :
-        (d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x))
-        (d' : is-decidable (is-perfect-image (map-emb f) (map-emb g) x')) →
-        ( map-Cantor-Schröder-Bernstein-Escardó' x d) ＝
-        ( map-Cantor-Schröder-Bernstein-Escardó' x' d') →
-        x ＝ x'
-      l (inl ρ) (inl ρ') p =
-        inv (is-section-inverse-of-perfect-image x ρ) ∙
-          (ap (map-emb g) p ∙ is-section-inverse-of-perfect-image x' ρ')
-      l (inl ρ) (inr nρ') p =
-        ex-falso (perfect-image-has-distinct-image x' x nρ' ρ (inv p))
-      l (inr nρ) (inl ρ') p =
-        ex-falso (perfect-image-has-distinct-image x x' nρ ρ' p)
-      l (inr nρ) (inr nρ') p =
-        is-injective-is-emb (is-emb-map-emb f) p
-
-    is-split-surjective-map-Cantor-Schröder-Bernstein-Escardó :
-      is-split-surjective map-Cantor-Schröder-Bernstein-Escardó
-    is-split-surjective-map-Cantor-Schröder-Bernstein-Escardó y =
-      pair x p
+      ψ :
+        ( d :
+          is-decidable
+            ( is-perfect-image (map-emb f) (map-emb g) (map-emb g y))) →
+        map-Cantor-Schröder-Bernstein-Escardó' (map-emb g y) d ＝ y
+      ψ (inl v') =
+        is-retraction-inverse-of-perfect-image
+          { is-emb-g = is-emb-map-emb g}
+          ( y)
+          ( v')
+      ψ (inr v) = ex-falso (v γ)
+    a (inr γ) =
+      pair x ψ
       where
-      a :
-        is-decidable
-          ( is-perfect-image (map-emb f) (map-emb g) (map-emb g y)) →
-        Σ ( X)
-          ( λ x →
-            ( (d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x)) →
-              map-Cantor-Schröder-Bernstein-Escardó' x d ＝ y))
-      a (inl γ) =
-        pair (map-emb g y) ψ
-        where
-        ψ :
-          ( d :
-            is-decidable
-              ( is-perfect-image (map-emb f) (map-emb g) (map-emb g y))) →
-          map-Cantor-Schröder-Bernstein-Escardó' (map-emb g y) d ＝ y
-        ψ (inl v') =
-          is-retraction-inverse-of-perfect-image
-            { is-emb-g = is-emb-map-emb g}
-            ( y)
-            ( v')
-        ψ (inr v) = ex-falso (v γ)
-      a (inr γ) =
-        pair x ψ
-        where
-        w :
-          Σ ( fiber (map-emb f) y)
-            ( λ s → ¬ (is-perfect-image (map-emb f) (map-emb g) (pr1 s)))
-        w =
-          not-perfect-image-has-not-perfect-fiber
-            ( is-emb-map-emb f)
-            ( is-emb-map-emb g)
-            ( lem)
-            ( y)
-            ( γ)
-        x : X
-        x = pr1 (pr1 w)
-        p : map-emb f x ＝ y
-        p = pr2 (pr1 w)
-        ψ :
-          ( d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x)) →
-          map-Cantor-Schröder-Bernstein-Escardó' x d ＝ y
-        ψ (inl v) = ex-falso ((pr2 w) v)
-        ψ (inr v) = p
-      b :
-        Σ ( X)
-          ( λ x →
-            ( (d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x)) →
-              map-Cantor-Schröder-Bernstein-Escardó' x d ＝ y))
-      b =
-        a ( is-decidable-is-perfect-image-is-emb
-            ( is-emb-map-emb g)
-            ( lem)
-            ( map-emb g y))
+      w :
+        Σ ( fiber (map-emb f) y)
+          ( λ s → ¬ (is-perfect-image (map-emb f) (map-emb g) (pr1 s)))
+      w =
+        has-not-perfect-fiber-is-not-perfect-image-LEM lem
+          ( is-emb-map-emb f)
+          ( is-emb-map-emb g)
+          ( y)
+          ( γ)
       x : X
-      x = pr1 b
-      p : map-Cantor-Schröder-Bernstein-Escardó x ＝ y
-      p = pr2 b (is-decidable-is-perfect-image-is-emb (is-emb-map-emb g) lem x)
+      x = pr1 (pr1 w)
+      p : map-emb f x ＝ y
+      p = pr2 (pr1 w)
+      ψ :
+        ( d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x)) →
+        map-Cantor-Schröder-Bernstein-Escardó' x d ＝ y
+      ψ (inl v) = ex-falso ((pr2 w) v)
+      ψ (inr v) = p
+    b :
+      Σ ( X)
+        ( λ x →
+          ( (d : is-decidable (is-perfect-image (map-emb f) (map-emb g) x)) →
+            map-Cantor-Schröder-Bernstein-Escardó' x d ＝ y))
+    b =
+      a ( is-decidable-is-perfect-image-is-emb-LEM lem
+          ( is-emb-map-emb g)
+          ( map-emb g y))
+    x : X
+    x = pr1 b
+    p : map-Cantor-Schröder-Bernstein-Escardó x ＝ y
+    p =
+      pr2 b (is-decidable-is-perfect-image-is-emb-LEM lem (is-emb-map-emb g) x)
 
-    is-equiv-map-Cantor-Schröder-Bernstein-Escardó :
-      is-equiv map-Cantor-Schröder-Bernstein-Escardó
-    is-equiv-map-Cantor-Schröder-Bernstein-Escardó =
-      is-equiv-is-split-surjective-is-injective
-        map-Cantor-Schröder-Bernstein-Escardó
-        is-injective-map-Cantor-Schröder-Bernstein-Escardó
-        is-split-surjective-map-Cantor-Schröder-Bernstein-Escardó
+  is-equiv-map-Cantor-Schröder-Bernstein-Escardó :
+    is-equiv map-Cantor-Schröder-Bernstein-Escardó
+  is-equiv-map-Cantor-Schröder-Bernstein-Escardó =
+    is-equiv-is-split-surjective-is-injective
+      map-Cantor-Schröder-Bernstein-Escardó
+      is-injective-map-Cantor-Schröder-Bernstein-Escardó
+      is-split-surjective-map-Cantor-Schröder-Bernstein-Escardó
 
-  Cantor-Schröder-Bernstein-Escardó :
-    type-Cantor-Schröder-Bernstein-Escardó l1 l2
-  pr1 (Cantor-Schröder-Bernstein-Escardó f g) =
-    map-Cantor-Schröder-Bernstein-Escardó f g
-  pr2 (Cantor-Schröder-Bernstein-Escardó f g) =
-    is-equiv-map-Cantor-Schröder-Bernstein-Escardó f g
+Cantor-Schröder-Bernstein-Escardó :
+  {l1 l2 : Level} (lem : LEM (l1 ⊔ l2)) →
+  type-Cantor-Schröder-Bernstein-Escardó l1 l2
+Cantor-Schröder-Bernstein-Escardó lem f g =
+  ( map-Cantor-Schröder-Bernstein-Escardó lem f g ,
+    is-equiv-map-Cantor-Schröder-Bernstein-Escardó lem f g)
 ```
 
 ## Corollaries

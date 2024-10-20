@@ -17,6 +17,7 @@ open import foundation.negation
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.untruncated-double-negation-elimination
 
 open import foundation-core.propositions
 ```
