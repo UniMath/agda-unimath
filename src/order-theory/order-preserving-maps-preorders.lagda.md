@@ -49,8 +49,8 @@ module _
           ( type-Preorder P)
           ( λ y →
             hom-Prop
-              ( leq-Preorder-Prop P x y)
-              ( leq-Preorder-Prop Q (f x) (f y))))
+              ( leq-prop-Preorder P x y)
+              ( leq-prop-Preorder Q (f x) (f y))))
 
   preserves-order-Preorder :
     (type-Preorder P → type-Preorder Q) → UU (l1 ⊔ l2 ⊔ l4)

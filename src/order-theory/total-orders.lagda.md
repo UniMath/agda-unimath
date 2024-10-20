@@ -81,7 +81,7 @@ module _
   type-Total-Order = type-Poset poset-Total-Order
 
   leq-Total-Order-Prop : (x y : type-Total-Order) → Prop l2
-  leq-Total-Order-Prop = leq-Poset-Prop poset-Total-Order
+  leq-Total-Order-Prop = leq-prop-Poset poset-Total-Order
 
   leq-Total-Order : (x y : type-Total-Order) → UU l2
   leq-Total-Order = leq-Poset poset-Total-Order

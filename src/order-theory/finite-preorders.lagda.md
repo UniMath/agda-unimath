@@ -48,7 +48,7 @@ module _
   is-finite-Preorder-Prop =
     product-Prop
       ( is-finite-Prop (type-Preorder P))
-      ( is-decidable-leq-Preorder-Prop P)
+      ( is-decidable-leq-prop-Preorder P)
 
   is-finite-Preorder : UU (l1 ⊔ l2)
   is-finite-Preorder = type-Prop is-finite-Preorder-Prop

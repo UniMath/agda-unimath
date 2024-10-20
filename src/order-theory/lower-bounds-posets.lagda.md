@@ -34,7 +34,7 @@ module _
 
   is-binary-lower-bound-Poset-Prop : Prop l2
   is-binary-lower-bound-Poset-Prop =
-    product-Prop (leq-Poset-Prop P x a) (leq-Poset-Prop P x b)
+    product-Prop (leq-prop-Poset P x a) (leq-prop-Poset P x b)
 
   is-binary-lower-bound-Poset : UU l2
   is-binary-lower-bound-Poset =
@@ -65,7 +65,7 @@ module _
 
   is-lower-bound-family-of-elements-Poset-Prop : type-Poset P → Prop (l2 ⊔ l3)
   is-lower-bound-family-of-elements-Poset-Prop z =
-    Π-Prop I (λ i → leq-Poset-Prop P z (x i))
+    Π-Prop I (λ i → leq-prop-Poset P z (x i))
 
   is-lower-bound-family-of-elements-Poset : type-Poset P → UU (l2 ⊔ l3)
   is-lower-bound-family-of-elements-Poset z =

@@ -1,0 +1,93 @@
+# Opposite posets
+
+```agda
+module order-theory.opposite-posets where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import order-theory.preorders
+open import order-theory.opposite-preorders
+open import order-theory.posets
+
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.sets
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.universe-levels
+```
+
+</details>
+
+## Idea
+
+Let `X` be a [poset](order-theory.posets.md), its
+{{#concept "opposite" Disambiguation="poset" Agda=opposite-Poset}} `Xᵒᵖ` is
+given by reversing the relation.
+
+## Definition
+
+### The opposite poset
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2)
+  where
+
+  preorder-opposite-Poset : Preorder l1 l2
+  preorder-opposite-Poset =
+    opposite-Preorder (preorder-Poset P)
+
+  type-opposite-Poset : UU l1
+  type-opposite-Poset = type-Preorder preorder-opposite-Poset
+
+  leq-prop-opposite-Poset : (X Y : type-opposite-Poset) → Prop l2
+  leq-prop-opposite-Poset =
+    leq-prop-Preorder preorder-opposite-Poset
+
+  leq-opposite-Poset : (X Y : type-opposite-Poset) → UU l2
+  leq-opposite-Poset =
+    leq-Preorder preorder-opposite-Poset
+
+  transitive-leq-opposite-Poset :
+    (X Y Z : type-opposite-Poset) →
+    leq-opposite-Poset Y Z →
+    leq-opposite-Poset X Y →
+    leq-opposite-Poset X Z
+  transitive-leq-opposite-Poset =
+    transitive-leq-Preorder preorder-opposite-Poset
+
+  refl-leq-opposite-Poset :
+    (X : type-opposite-Poset) → leq-opposite-Poset X X
+  refl-leq-opposite-Poset =
+    refl-leq-Preorder preorder-opposite-Poset
+
+  antisymmetric-leq-opposite-Poset :
+    (X Y : type-opposite-Poset) →
+    leq-opposite-Poset X Y →
+    leq-opposite-Poset Y X →
+    X ＝ Y
+  antisymmetric-leq-opposite-Poset X Y p q =
+    antisymmetric-leq-Poset P X Y q p
+
+  opposite-Poset : Poset l1 l2
+  opposite-Poset =
+    ( preorder-opposite-Poset , antisymmetric-leq-opposite-Poset)
+```
+
+## Properties
+
+### The opposite poset construction is a strict involution
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2)
+  where
+
+  is-involution-opposite-Poset : opposite-Poset (opposite-Poset P) ＝ P
+  is-involution-opposite-Poset = refl
+```

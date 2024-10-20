@@ -83,8 +83,8 @@ module _
   type-Suplattice : UU l1
   type-Suplattice = type-Poset poset-Suplattice
 
-  leq-Suplattice-Prop : (x y : type-Suplattice) → Prop l2
-  leq-Suplattice-Prop = leq-Poset-Prop poset-Suplattice
+  leq-prop-Suplattice : (x y : type-Suplattice) → Prop l2
+  leq-prop-Suplattice = leq-prop-Poset poset-Suplattice
 
   leq-Suplattice : (x y : type-Suplattice) → UU l2
   leq-Suplattice = leq-Poset poset-Suplattice

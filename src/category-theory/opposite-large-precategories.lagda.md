@@ -13,6 +13,7 @@ open import category-theory.large-precategories
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
+open import foundation.large-identity-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
@@ -140,6 +141,18 @@ module _
 ```
 
 ## Properties
+
+### The opposite large precategory construction is a strict involution
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (C : Large-Precategory α β)
+  where
+
+  is-involution-opposite-Large-Precategory :
+    opposite-Large-Precategory (opposite-Large-Precategory C) ＝ω C
+  is-involution-opposite-Large-Precategory = reflω
+```
 
 ### Computing the isomorphism sets of the opposite large precategory
 

@@ -326,6 +326,18 @@ module _
       ( is-double-negation-stable-prop-map-comp
         ( is-double-negation-stable-prop-map-is-double-negation-stable-emb K)
         ( is-double-negation-stable-prop-map-is-double-negation-stable-emb H))
+
+comp-double-negation-stable-emb :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+  B ↪¬¬ C → A ↪¬¬ B → A ↪¬¬ C
+comp-double-negation-stable-emb (g , G) (f , F) =
+  ( g ∘ f , is-double-negation-stable-emb-comp G F)
+
+infixr 15 _∘¬¬_
+_∘¬¬_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+  B ↪¬¬ C → A ↪¬¬ B → A ↪¬¬ C
+_∘¬¬_ = comp-double-negation-stable-emb
 ```
 
 ### Left cancellation for double negation stable embeddings

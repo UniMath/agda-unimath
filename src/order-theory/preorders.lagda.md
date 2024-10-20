@@ -47,14 +47,14 @@ module _
   type-Preorder : UU l1
   type-Preorder = pr1 X
 
-  leq-Preorder-Prop : Relation-Prop l2 type-Preorder
-  leq-Preorder-Prop = pr1 (pr2 X)
+  leq-prop-Preorder : Relation-Prop l2 type-Preorder
+  leq-prop-Preorder = pr1 (pr2 X)
 
   leq-Preorder : (x y : type-Preorder) → UU l2
-  leq-Preorder x y = type-Prop (leq-Preorder-Prop x y)
+  leq-Preorder x y = type-Prop (leq-prop-Preorder x y)
 
   is-prop-leq-Preorder : (x y : type-Preorder) → is-prop (leq-Preorder x y)
-  is-prop-leq-Preorder = is-prop-type-Relation-Prop leq-Preorder-Prop
+  is-prop-leq-Preorder = is-prop-type-Relation-Prop leq-prop-Preorder
 
   concatenate-eq-leq-Preorder :
     {x y z : type-Preorder} → x ＝ y → leq-Preorder y z → leq-Preorder x z
@@ -66,7 +66,7 @@ module _
 
   le-Preorder-Prop : Relation-Prop (l1 ⊔ l2) type-Preorder
   le-Preorder-Prop x y =
-    product-Prop (x ≠ y , is-prop-neg) (leq-Preorder-Prop x y)
+    product-Prop (x ≠ y , is-prop-neg) (leq-prop-Preorder x y)
 
   le-Preorder : Relation (l1 ⊔ l2) type-Preorder
   le-Preorder x y = type-Prop (le-Preorder-Prop x y)
@@ -140,13 +140,13 @@ module _
   precategory-Preorder =
     make-Precategory
       ( type-Preorder X)
-      ( λ x y → set-Prop (leq-Preorder-Prop X x y))
+      ( λ x y → set-Prop (leq-prop-Preorder X x y))
       ( λ {x} {y} {z} → is-transitive-leq-Preorder X x y z)
       ( refl-leq-Preorder X)
       ( λ {x} {y} {z} {w} h g f →
-        eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x w)))
-      ( λ {x} {y} f → eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x y)))
-      ( λ {x} {y} f → eq-is-prop (is-prop-type-Prop (leq-Preorder-Prop X x y)))
+        eq-is-prop (is-prop-type-Prop (leq-prop-Preorder X x w)))
+      ( λ {x} {y} f → eq-is-prop (is-prop-type-Prop (leq-prop-Preorder X x y)))
+      ( λ {x} {y} f → eq-is-prop (is-prop-type-Prop (leq-prop-Preorder X x y)))
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)

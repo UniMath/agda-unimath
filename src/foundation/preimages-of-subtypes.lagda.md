@@ -16,8 +16,9 @@ open import foundation-core.subtypes
 
 ## Idea
 
-The preimage of a subtype `S ⊆ B` under a map `f : A → B` is the subtype of `A`
-consisting of elements `a` such that `f a ∈ S`.
+The {{#concept "preimage" Disambiguation="of a subtype" Agda=preimage-subtype}}
+of a [subtype](foundation-core.subtypes.md) `S ⊆ B` under a map `f : A → B` is
+the subtype of `A` consisting of elements `a` such that `f a ∈ S`.
 
 ## Definition
 

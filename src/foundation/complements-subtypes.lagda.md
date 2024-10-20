@@ -9,6 +9,8 @@ module foundation.complements-subtypes where
 ```agda
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
+open import foundation.double-negation-stable-subtypes
+open import foundation.double-negation-stable-propositions
 open import foundation.full-subtypes
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -23,8 +25,10 @@ open import foundation-core.subtypes
 
 ## Idea
 
-The **complement** of a [subtype](foundation-core.subtypes.md) `P` of `A`
-consists of the elements that are not in `P`.
+The
+{{#concept "complement" Disambiguation="of a subtype" Agda=complement-subtype}}
+of a [subtype](foundation-core.subtypes.md) `P` of `A` consists of the elements
+that are not in `P`.
 
 ## Definition
 
@@ -45,6 +49,16 @@ complement-decidable-subtype P x = neg-Decidable-Prop (P x)
 ```
 
 ## Properties
+
+### Complements of subtypes are double negation stable
+
+```agda
+complement-double-negation-stable-subtype' :
+  {l1 l2 : Level} {A : UU l1} →
+  subtype l2 A → double-negation-stable-subtype l2 A
+complement-double-negation-stable-subtype' P x =
+  neg-type-Double-Negation-Stable-Prop (is-in-subtype P x)
+```
 
 ### The union of a subtype `P` with its complement is the full subtype if and only if `P` is a decidable subtype
 

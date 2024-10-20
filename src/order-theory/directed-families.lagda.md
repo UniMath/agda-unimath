@@ -42,7 +42,7 @@ is-directed-family-Poset-Prop P I x =
         ( λ j →
           ∃ ( type-Inhabited-Type I)
             ( λ k →
-              leq-Poset-Prop P (x i) (x k) ∧ leq-Poset-Prop P (x j) (x k))))
+              leq-prop-Poset P (x i) (x k) ∧ leq-prop-Poset P (x j) (x k))))
 
 is-directed-family-Poset :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)

@@ -28,17 +28,17 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  is-top-element-Preorder-Prop : type-Preorder X → Prop (l1 ⊔ l2)
-  is-top-element-Preorder-Prop x =
-    Π-Prop (type-Preorder X) (λ y → leq-Preorder-Prop X y x)
+  is-top-element-prop-Preorder : type-Preorder X → Prop (l1 ⊔ l2)
+  is-top-element-prop-Preorder x =
+    Π-Prop (type-Preorder X) (λ y → leq-prop-Preorder X y x)
 
   is-top-element-Preorder : type-Preorder X → UU (l1 ⊔ l2)
-  is-top-element-Preorder x = type-Prop (is-top-element-Preorder-Prop x)
+  is-top-element-Preorder x = type-Prop (is-top-element-prop-Preorder x)
 
   is-prop-is-top-element-Preorder :
     (x : type-Preorder X) → is-prop (is-top-element-Preorder x)
   is-prop-is-top-element-Preorder x =
-    is-prop-type-Prop (is-top-element-Preorder-Prop x)
+    is-prop-type-Prop (is-top-element-prop-Preorder x)
 
   has-top-element-Preorder : UU (l1 ⊔ l2)
   has-top-element-Preorder = Σ (type-Preorder X) is-top-element-Preorder

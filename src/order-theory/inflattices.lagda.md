@@ -83,8 +83,8 @@ module _
   type-Inflattice : UU l1
   type-Inflattice = type-Poset poset-Inflattice
 
-  leq-Inflattice-Prop : (x y : type-Inflattice) → Prop l2
-  leq-Inflattice-Prop = leq-Poset-Prop poset-Inflattice
+  leq-prop-Inflattice : (x y : type-Inflattice) → Prop l2
+  leq-prop-Inflattice = leq-prop-Poset poset-Inflattice
 
   leq-Inflattice : (x y : type-Inflattice) → UU l2
   leq-Inflattice = leq-Poset poset-Inflattice

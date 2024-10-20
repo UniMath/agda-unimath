@@ -296,6 +296,18 @@ module _
         ( is-decidable-emb-comp
           ( is-decidable-emb-is-decidable-prop-map K)
           ( is-decidable-emb-is-decidable-prop-map H))
+
+comp-decidable-emb :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+  B ↪ᵈ C → A ↪ᵈ B → A ↪ᵈ C
+comp-decidable-emb (g , G) (f , F) =
+  ( g ∘ f , is-decidable-emb-comp G F)
+
+infixr 15 _∘ᵈ_
+_∘ᵈ_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+  B ↪ᵈ C → A ↪ᵈ B → A ↪ᵈ C
+_∘ᵈ_ = comp-decidable-emb
 ```
 
 ### Left cancellation for decidable embeddings

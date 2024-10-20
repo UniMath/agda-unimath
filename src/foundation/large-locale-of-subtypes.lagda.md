@@ -16,6 +16,9 @@ open import foundation-core.sets
 
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-locales
+open import order-theory.large-preorders
+open import order-theory.top-elements-large-posets
+open import order-theory.bottom-elements-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-suplattices
@@ -27,8 +30,9 @@ open import order-theory.powers-of-large-locales
 
 ## Idea
 
-The **large locale of subtypes** of a type `A` is the
-[power locale](order-theory.powers-of-large-locales.md) `A → Prop-Large-Locale`.
+The {{#concept "large locale of subtypes" Agda=powerset-Large-Locale}} of a type
+`A` is the [power locale](order-theory.powers-of-large-locales.md)
+`A → Prop-Large-Locale`.
 
 ## Definition
 
@@ -40,6 +44,11 @@ module _
   powerset-Large-Locale :
     Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3) lzero
   powerset-Large-Locale = power-Large-Locale A Prop-Large-Locale
+
+  large-preorder-powerset-Large-Locale :
+    Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+  large-preorder-powerset-Large-Locale =
+    large-preorder-Large-Locale powerset-Large-Locale
 
   large-poset-powerset-Large-Locale :
     Large-Poset (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
@@ -168,4 +177,16 @@ module _
     sup-powerset-Large-Locale (λ j → meet-powerset-Large-Locale x (y j))
   distributive-meet-sup-powerset-Large-Locale =
     distributive-meet-sup-Large-Locale (powerset-Large-Locale A)
+
+  has-top-element-powerset-Large-Locale :
+    has-top-element-Large-Poset (large-poset-powerset-Large-Locale A)
+  has-top-element-powerset-Large-Locale =
+    has-top-element-Large-Locale (powerset-Large-Locale A)
+
+  has-bottom-element-powerset-Large-Locale :
+    has-bottom-element-Large-Poset (large-poset-powerset-Large-Locale A)
+  has-bottom-element-powerset-Large-Locale =
+    has-bottom-element-Π-Large-Poset
+      ( λ _ → Prop-Large-Poset)
+      ( λ _ → has-bottom-element-Prop-Large-Locale)
 ```
