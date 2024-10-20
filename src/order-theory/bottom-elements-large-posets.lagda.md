@@ -20,7 +20,7 @@ open import order-theory.large-posets
 We say that a [large poset](order-theory.large-posets.md) `P` has a
 {{#concept "least element" Disambiguation="in a large poset" Agda=is-bottom-element-Large-Poset}}
 if it comes equipped with an element `t : type-Large-Poset P lzero` such that
-`t ≤ x` holds for every `x : P`
+`t ≤ x` holds for every `x : P`.
 
 ## Definition
 

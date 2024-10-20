@@ -37,9 +37,6 @@ implications between them. [Conjunction](foundation.conjunction.md) gives this
 [existential quantification](foundation.existential-quantification.md) gives it
 the structure of a [suplattice](order-theory.suplattices.md).
 
-**Note.** The collection of all propositions is because we do not assume
-[propositional resizing](foundation.propositional-resizing.md).
-
 ## Definitions
 
 ### The preorder of propositions
