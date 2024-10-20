@@ -8,25 +8,19 @@ module foundation.constructive-cantor-schroder-bernstein-escardo where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.decidable-embeddings
-open import foundation.double-negation-stable-embeddings
-open import foundation.decidable-types
-open import foundation.fixed-points-endofunctions
-open import order-theory.opposite-large-posets
-open import foundation.negation
 open import foundation.complements-subtypes
-open import foundation.images-embeddings
-open import foundation.propositional-maps
-open import foundation.powersets
+open import foundation.decidable-embeddings
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation-stable-embeddings
+open import foundation.fixed-points-endofunctions
+open import foundation.images-embeddings
 open import foundation.injective-maps
-open import foundation.propositional-resizing
-
-open import order-theory.knaster-tarski-fixed-point-theorem
-open import order-theory.order-preserving-maps-posets
-open import order-theory.order-preserving-maps-large-posets
-
+open import foundation.negation
 open import foundation.perfect-images
+open import foundation.powersets
+open import foundation.propositional-maps
+open import foundation.propositional-resizing
 open import foundation.split-surjective-maps
 open import foundation.universe-levels
 
@@ -36,8 +30,12 @@ open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
-open import foundation-core.negation
 open import foundation-core.sets
+
+open import order-theory.knaster-tarski-fixed-point-theorem
+open import order-theory.opposite-large-posets
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-posets
 ```
 
 </details>
