@@ -37,12 +37,21 @@ open import foundation-core.homotopies
 
 </details>
 
-## Definition
+## Idea
 
 A [map](foundation-core.function-types.md) is said to be
 {{#concept "double negation eliminating" Disambiguation="map of types" Agda=is-double-negation-eliminating-map}}
 if its [fibers](foundation-core.fibers-of-maps.md) satisfy
 [untruncated double negation elimination](foundation.untruncated-double-negation-elimination.md).
+I.e., for every `y : B`, if `fiber f y` is
+[irrefutable](foundation.irrefutable-propositions.md), then we do in fact have
+an element of the fiber `p : fiber f y`. So we have a map
+
+```text
+  (y : B) → ¬¬ (fiber f y) → fiber f y.
+```
+
+## Definintion
 
 ```agda
 module _
@@ -240,12 +249,12 @@ module _
   {f : A → B} {g : X → Y}
   where
 
-  has-double-negation-elim-retract-map :
+  is-double-negation-eliminating-retract-map :
     f retract-of-map g →
     is-double-negation-eliminating-map g →
     is-double-negation-eliminating-map f
-  has-double-negation-elim-retract-map R G x =
-    has-double-negation-elim-iff
-      ( iff-retract (retract-fiber-retract-map f g R x))
+  is-double-negation-eliminating-retract-map R G x =
+    has-double-negation-elim-retract
+      ( retract-fiber-retract-map f g R x)
       ( G (map-codomain-inclusion-retract-map f g R x))
 ```
