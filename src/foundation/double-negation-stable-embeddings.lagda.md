@@ -24,6 +24,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.retracts-of-maps
@@ -289,61 +290,65 @@ abstract
 
 ### Double negation stable embeddings are closed under composition
 
-```text
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {g : B → C} {f : A → B}
   where
 
-  abstract
-    is-double-negation-eliminating-map-comp-is-double-negation-stable-emb' :
-      is-double-negation-stable-emb g →
-      is-double-negation-eliminating-map f →
-      is-double-negation-eliminating-map (g ∘ f)
-    is-double-negation-eliminating-map-comp-is-double-negation-stable-emb'
-      K H x =
-      rec-coproduct
-        ( λ u →
-          is-decidable-equiv
-            ( ( left-unit-law-Σ-is-contr
-                ( is-proof-irrelevant-is-prop
-                  ( is-prop-map-is-emb
-                    ( is-emb-is-double-negation-stable-emb K)
-                    ( x))
-                  ( u))
-                ( u)) ∘e
-              ( compute-fiber-comp g f x))
-            ( H (pr1 u)))
-        ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
-        ( is-double-negation-eliminating-map-is-double-negation-stable-emb K x)
+  -- abstract
+  --   is-double-negation-eliminating-map-comp-is-double-negation-stable-emb' :
+  --     is-double-negation-stable-emb g →
+  --     is-double-negation-eliminating-map f →
+  --     is-double-negation-eliminating-map (g ∘ f)
+  --   is-double-negation-eliminating-map-comp-is-double-negation-stable-emb'
+  --     K H z nngfz =
+  --       map-inv-compute-fiber-comp g f z
+  --         ( is-double-negation-eliminating-map-is-double-negation-stable-emb K z
+  --           ( λ x → nngfz λ w → x (f (pr1 w) , pr2 w)) ,
+  --             H (pr1 (pr2 K z (λ x → nngfz (λ w → x (f (pr1 w) , pr2 w))))) λ x → x ({!  !} , {!   !}))
+      -- rec-coproduct
+      --   ( λ u →
+      --     is-decidable-equiv
+      --       ( ( left-unit-law-Σ-is-contr
+      --           ( is-proof-irrelevant-is-prop
+      --             ( is-prop-map-is-emb
+      --               ( is-emb-is-double-negation-stable-emb K)
+      --               ( x))
+      --             ( u))
+      --           ( u)) ∘e
+      --         ( compute-fiber-comp g f x))
+      --       ( H (pr1 u)))
+      --   ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
+      --   ( is-double-negation-eliminating-map-is-double-negation-stable-emb K x)
 
-  is-double-negation-eliminating-map-comp-is-double-negation-stable-emb :
-    is-double-negation-stable-emb g →
-    is-double-negation-stable-emb f →
-    is-double-negation-eliminating-map (g ∘ f)
-  is-double-negation-eliminating-map-comp-is-double-negation-stable-emb K H =
-    is-double-negation-eliminating-map-comp-is-double-negation-stable-emb'
-      ( K)
-      ( is-double-negation-eliminating-map-is-double-negation-stable-emb H)
+  -- is-double-negation-eliminating-map-comp-is-double-negation-stable-emb :
+  --   is-double-negation-stable-emb g →
+  --   is-double-negation-stable-emb f →
+  --   is-double-negation-eliminating-map (g ∘ f)
+  -- is-double-negation-eliminating-map-comp-is-double-negation-stable-emb K H =
+  --   is-double-negation-eliminating-map-comp-is-double-negation-stable-emb'
+  --     ( K)
+  --     ( is-double-negation-eliminating-map-is-double-negation-stable-emb H)
+
+  is-double-negation-stable-prop-map-comp :
+    is-double-negation-stable-prop-map g →
+    is-double-negation-stable-prop-map f →
+    is-double-negation-stable-prop-map (g ∘ f)
+  is-double-negation-stable-prop-map-comp K H z =
+    is-double-negation-stable-prop-equiv
+      ( compute-fiber-comp g f z)
+      ( is-double-negation-stable-prop-Σ (K z) (H ∘ pr1))
 
   is-double-negation-stable-emb-comp :
     is-double-negation-stable-emb g →
     is-double-negation-stable-emb f →
     is-double-negation-stable-emb (g ∘ f)
   is-double-negation-stable-emb-comp K H =
-    ( is-emb-comp _ _ (pr1 K) (pr1 H) ,
-      is-double-negation-eliminating-map-comp-is-double-negation-stable-emb K H)
-
-  abstract
-    is-double-negation-stable-prop-map-comp :
-      is-double-negation-stable-prop-map g →
-      is-double-negation-stable-prop-map f →
-      is-double-negation-stable-prop-map (g ∘ f)
-    is-double-negation-stable-prop-map-comp K H =
-      is-double-negation-stable-prop-map-is-double-negation-stable-emb
-        ( is-double-negation-stable-emb-comp
-          ( is-double-negation-stable-emb-is-double-negation-stable-prop-map K)
-          ( is-double-negation-stable-emb-is-double-negation-stable-prop-map H))
+    is-double-negation-stable-emb-is-double-negation-stable-prop-map
+      ( is-double-negation-stable-prop-map-comp
+        ( is-double-negation-stable-prop-map-is-double-negation-stable-emb K)
+        ( is-double-negation-stable-prop-map-is-double-negation-stable-emb H))
 ```
 
 ### Left cancellation for double negation stable embeddings
@@ -375,7 +380,7 @@ module _
 
 ### In a commuting triangle of maps, if the top and right maps are double negation stable embeddings so is the left map
 
-```text
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {top : A → B} {left : A → C} {right : B → C}
@@ -470,7 +475,7 @@ eq-htpy-double-negation-stable-emb f g =
 
 ### Precomposing double negation stable embeddings with equivalences
 
-```text
+```agda
 equiv-precomp-double-negation-stable-emb-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
   (C : UU l3) → (B ↪¬¬ C) ≃ (A ↪¬¬ C)
@@ -496,7 +501,7 @@ equiv-precomp-double-negation-stable-emb-equiv e C =
 
 ### Any map out of the empty type is a double negation stable embedding
 
-```text
+```agda
 abstract
   is-double-negation-stable-emb-ex-falso :
     {l : Level} {X : UU l} → is-double-negation-stable-emb (ex-falso {l} {X})
@@ -565,7 +570,7 @@ module _
 
 ### The functoriality of dependent pair types preserves double negation stable embeddings
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
   where
