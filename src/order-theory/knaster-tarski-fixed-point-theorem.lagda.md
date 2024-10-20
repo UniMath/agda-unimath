@@ -27,6 +27,10 @@ The
 {{#concept "Knaster–Tarski fixed point theorem" WD="Knaster–Tarski theorem" WDID=Q609612}}
 states that every order preserving endomap `f : 𝒜 → 𝒜` on a complete lattice has
 a least and a greatest [fixed point](foundation.fixed-points-endofunctions.md).
+Indeed, any order preserving endomap on a
+[suplattice](order-theory.suplattices.md) has a greatest fixed point andany
+order preserving endomap on an [inflattice](order-theory.inflattices.md) has a
+least fixed point.
 
 ## Theorem
 

@@ -42,10 +42,8 @@ module _
 
   preimage-hom-powerset :
     hom-Large-Poset (λ l → l) (powerset-Large-Poset B) (powerset-Large-Poset A)
-  preimage-hom-powerset f =
+  preimage-hom-powerset =
     make-hom-Large-Preorder
       ( preimage-subtype f)
       ( λ B' B'' B'⊆B'' x B'fx → B'⊆B'' (f x) B'fx)
 ```
-
-If `f` is an embedding, then `f(A) ≃ A`...
