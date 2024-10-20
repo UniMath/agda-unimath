@@ -71,16 +71,25 @@ is-double-negation-stable-emb :
 is-double-negation-stable-emb f =
   is-emb f × is-double-negation-eliminating-map f
 
-abstract
-  is-emb-is-double-negation-stable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-    is-double-negation-stable-emb f → is-emb f
-  is-emb-is-double-negation-stable-emb = pr1
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y}
+  (F : is-double-negation-stable-emb f)
+  where
 
-is-double-negation-eliminating-map-is-double-negation-stable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-  is-double-negation-stable-emb f → is-double-negation-eliminating-map f
-is-double-negation-eliminating-map-is-double-negation-stable-emb = pr2
+  is-emb-is-double-negation-stable-emb : is-emb f
+  is-emb-is-double-negation-stable-emb = pr1 F
+
+  is-double-negation-eliminating-map-is-double-negation-stable-emb :
+    is-double-negation-eliminating-map f
+  is-double-negation-eliminating-map-is-double-negation-stable-emb = pr2 F
+
+  is-prop-map-is-double-negation-stable-emb : is-prop-map f
+  is-prop-map-is-double-negation-stable-emb =
+    is-prop-map-is-emb is-emb-is-double-negation-stable-emb
+
+  is-injective-is-double-negation-stable-emb : is-injective f
+  is-injective-is-double-negation-stable-emb =
+    is-injective-is-emb is-emb-is-double-negation-stable-emb
 ```
 
 ### Double negation stable propositional maps
@@ -104,10 +113,9 @@ module _
     ( is-double-negation-stable-prop-map f ,
       is-prop-is-double-negation-stable-prop-map f)
 
-  abstract
-    is-prop-map-is-double-negation-stable-prop-map :
-      {f : X → Y} → is-double-negation-stable-prop-map f → is-prop-map f
-    is-prop-map-is-double-negation-stable-prop-map H y = pr1 (H y)
+  is-prop-map-is-double-negation-stable-prop-map :
+    {f : X → Y} → is-double-negation-stable-prop-map f → is-prop-map f
+  is-prop-map-is-double-negation-stable-prop-map H y = pr1 (H y)
 
   is-double-negation-eliminating-map-is-double-negation-stable-prop-map :
     {f : X → Y} →
@@ -173,12 +181,6 @@ module _
       is-emb-is-prop-map (is-prop-map-is-double-negation-stable-prop-map H)
     pr2 (is-double-negation-stable-emb-is-double-negation-stable-prop-map H) =
       is-double-negation-eliminating-map-is-double-negation-stable-prop-map H
-
-  abstract
-    is-prop-map-is-double-negation-stable-emb :
-      is-double-negation-stable-emb f → is-prop-map f
-    is-prop-map-is-double-negation-stable-emb H =
-      is-prop-map-is-emb (is-emb-is-double-negation-stable-emb H)
 
   abstract
     is-double-negation-stable-prop-map-is-double-negation-stable-emb :
@@ -296,40 +298,15 @@ module _
   {g : B → C} {f : A → B}
   where
 
-  -- abstract
-  --   is-double-negation-eliminating-map-comp-is-double-negation-stable-emb' :
-  --     is-double-negation-stable-emb g →
-  --     is-double-negation-eliminating-map f →
-  --     is-double-negation-eliminating-map (g ∘ f)
-  --   is-double-negation-eliminating-map-comp-is-double-negation-stable-emb'
-  --     K H z nngfz =
-  --       map-inv-compute-fiber-comp g f z
-  --         ( is-double-negation-eliminating-map-is-double-negation-stable-emb K z
-  --           ( λ x → nngfz λ w → x (f (pr1 w) , pr2 w)) ,
-  --             H (pr1 (pr2 K z (λ x → nngfz (λ w → x (f (pr1 w) , pr2 w))))) λ x → x ({!  !} , {!   !}))
-      -- rec-coproduct
-      --   ( λ u →
-      --     is-decidable-equiv
-      --       ( ( left-unit-law-Σ-is-contr
-      --           ( is-proof-irrelevant-is-prop
-      --             ( is-prop-map-is-emb
-      --               ( is-emb-is-double-negation-stable-emb K)
-      --               ( x))
-      --             ( u))
-      --           ( u)) ∘e
-      --         ( compute-fiber-comp g f x))
-      --       ( H (pr1 u)))
-      --   ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
-      --   ( is-double-negation-eliminating-map-is-double-negation-stable-emb K x)
-
-  -- is-double-negation-eliminating-map-comp-is-double-negation-stable-emb :
-  --   is-double-negation-stable-emb g →
-  --   is-double-negation-stable-emb f →
-  --   is-double-negation-eliminating-map (g ∘ f)
-  -- is-double-negation-eliminating-map-comp-is-double-negation-stable-emb K H =
-  --   is-double-negation-eliminating-map-comp-is-double-negation-stable-emb'
-  --     ( K)
-  --     ( is-double-negation-eliminating-map-is-double-negation-stable-emb H)
+  is-double-negation-eliminating-map-comp-is-double-negation-stable-emb :
+    is-double-negation-stable-emb g →
+    is-double-negation-eliminating-map f →
+    is-double-negation-eliminating-map (g ∘ f)
+  is-double-negation-eliminating-map-comp-is-double-negation-stable-emb G F =
+    is-double-negation-eliminating-map-comp
+      ( is-injective-is-double-negation-stable-emb G)
+      ( is-double-negation-eliminating-map-is-double-negation-stable-emb G)
+      ( F)
 
   is-double-negation-stable-prop-map-comp :
     is-double-negation-stable-prop-map g →

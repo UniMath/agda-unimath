@@ -90,6 +90,53 @@ is-double-negation-eliminating-map-is-decidable-map H y =
   double-negation-elim-is-decidable (H y)
 ```
 
+### Composition of double negation eliminating maps
+
+Given a composition `g ∘ f` of double negation eliminating maps where the left
+factor `g` is injective, then the composition is double negation eliminating.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B}
+  where
+
+  fiber-left-is-double-negation-eliminating-map-left :
+    is-double-negation-eliminating-map g →
+    (z : C) → ¬¬ (fiber (g ∘ f) z) → fiber g z
+  fiber-left-is-double-negation-eliminating-map-left G z nngfz =
+    G z (λ x → nngfz (λ w → x (f (pr1 w) , pr2 w)))
+
+  fiber-right-is-double-negation-eliminating-map-comp :
+    is-injective g →
+    (G : is-double-negation-eliminating-map g) →
+    is-double-negation-eliminating-map f →
+    (z : C) (nngfz : ¬¬ (fiber (g ∘ f) z)) →
+    fiber f (pr1 (fiber-left-is-double-negation-eliminating-map-left G z nngfz))
+  fiber-right-is-double-negation-eliminating-map-comp H G F z nngfz =
+    F ( pr1
+        ( fiber-left-is-double-negation-eliminating-map-left G z nngfz))
+          ( λ x →
+            nngfz
+              ( λ w →
+                x ( pr1 w ,
+                    H ( pr2 w ∙
+                        inv
+                          ( pr2
+                            ( fiber-left-is-double-negation-eliminating-map-left
+                                G z nngfz))))))
+
+  is-double-negation-eliminating-map-comp :
+    is-injective g →
+    is-double-negation-eliminating-map g →
+    is-double-negation-eliminating-map f →
+    is-double-negation-eliminating-map (g ∘ f)
+  is-double-negation-eliminating-map-comp H G F z nngfz =
+    map-inv-compute-fiber-comp g f z
+      ( ( fiber-left-is-double-negation-eliminating-map-left G z nngfz) ,
+        ( fiber-right-is-double-negation-eliminating-map-comp H G F z nngfz))
+```
+
 ### Left cancellation for double negation eliminating maps
 
 If a composite `g ∘ f` is double negation eliminating and the left factor `g` is
