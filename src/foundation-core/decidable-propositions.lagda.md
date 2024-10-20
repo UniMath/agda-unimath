@@ -34,9 +34,9 @@ A {{#concept "decidable proposition" Agda=is-decidable-Prop}} is a
 [proposition](foundation-core.propositions.md) that has a
 [decidable](foundation.decidable-types.md) underlying type.
 
-## Definition
+## Definitions
 
-### The property a proposition of being decidable
+### The property of a proposition of being decidable
 
 ```agda
 is-prop-is-decidable :
