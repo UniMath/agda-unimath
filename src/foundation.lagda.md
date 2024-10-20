@@ -137,6 +137,7 @@ open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-eliminating-maps public
 open import foundation.double-negation-modality public
+open import foundation.double-negation-stable-embeddings public
 open import foundation.double-negation-stable-propositions public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public

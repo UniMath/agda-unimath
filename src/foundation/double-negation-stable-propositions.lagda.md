@@ -16,8 +16,10 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.double-negation
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.negation
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-quantification
@@ -26,7 +28,7 @@ open import foundation.untruncated-double-negation-elimination
 
 open import foundation-core.contractible-types
 open import foundation-core.function-types
-open import foundation-core.propositions
+open import foundation-core.retracts-of-types
 ```
 
 </details>
@@ -125,6 +127,42 @@ module _
 
 ## Properties
 
+### Double negation elimination is preserved by retracts
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-double-negation-stable-prop-retract :
+    A retract-of B →
+    is-double-negation-stable-prop B →
+    is-double-negation-stable-prop A
+  is-double-negation-stable-prop-retract e H =
+    ( is-prop-retract-of e
+      ( is-prop-type-is-double-negation-stable-prop H)) ,
+    ( has-double-negation-elim-retract e
+      ( has-double-negation-elim-is-double-negation-stable-prop H))
+```
+
+### Double negation elimination is preserved by equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-double-negation-stable-prop-equiv :
+    A ≃ B → is-double-negation-stable-prop B → is-double-negation-stable-prop A
+  is-double-negation-stable-prop-equiv e =
+    is-double-negation-stable-prop-retract (retract-equiv e)
+
+  is-double-negation-stable-prop-equiv' :
+    B ≃ A → is-double-negation-stable-prop B → is-double-negation-stable-prop A
+  is-double-negation-stable-prop-equiv' e =
+    is-double-negation-stable-prop-retract (retract-inv-equiv e)
+```
+
 ### The empty proposition is double negation stable
 
 ```agda
@@ -139,6 +177,13 @@ empty-Double-Negation-Stable-Prop =
 unit-Double-Negation-Stable-Prop : Double-Negation-Stable-Prop lzero
 unit-Double-Negation-Stable-Prop =
   unit , is-prop-unit , double-negation-elim-unit
+```
+
+```agda
+is-double-negation-stable-prop-is-contr :
+  {l : Level} {A : UU l} → is-contr A → is-double-negation-stable-prop A
+is-double-negation-stable-prop-is-contr H =
+  (is-prop-is-contr H , double-negation-elim-is-contr H)
 ```
 
 ### Decidable propositions are double negation stable
@@ -246,17 +291,6 @@ product-Double-Negation-Stable-Prop A B =
   ( is-double-negation-stable-prop-product
     ( is-double-negation-stable-prop-type-Double-Negation-Stable-Prop A)
     ( is-double-negation-stable-prop-type-Double-Negation-Stable-Prop B))
-```
-
-### Existential quantification over a double negation stable predicate is double negation stable
-
-```agda
-double-negation-elim-∃ :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  ((a : A) → has-double-negation-elim (B a)) →
-  has-double-negation-elim (exists-structure A B)
-double-negation-elim-∃ b nn∃ =
-  intro-exists {!   !} (b {!   !} λ nb → nn∃ (λ ab → {!   !}))
 ```
 
 ## See also

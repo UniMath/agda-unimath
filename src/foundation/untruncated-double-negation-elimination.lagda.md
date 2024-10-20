@@ -16,6 +16,7 @@ open import foundation.empty-types
 open import foundation.evaluation-functions
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -53,6 +54,14 @@ module _
 
 ## Properties
 
+### If the type is a propositon, then having double negation elimination is a property
+
+```agda
+is-prop-has-double-negation-elim :
+  {l : Level} {A : UU l} → is-prop A → is-prop (has-double-negation-elim A)
+is-prop-has-double-negation-elim = is-prop-function-type
+```
+
 ### Double negation elimination is preserved by logical equivalences
 
 ```agda
@@ -86,6 +95,24 @@ module _
     B ≃ A → has-double-negation-elim B → has-double-negation-elim A
   has-double-negation-elim-equiv' e =
     has-double-negation-elim-iff' (iff-equiv e)
+```
+
+### Double negation elimination is preserved by retracts
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  has-double-negation-elim-retract :
+    A retract-of B → has-double-negation-elim B → has-double-negation-elim A
+  has-double-negation-elim-retract e =
+    has-double-negation-elim-iff (iff-retract e)
+
+  has-double-negation-elim-retract' :
+    B retract-of A → has-double-negation-elim B → has-double-negation-elim A
+  has-double-negation-elim-retract' e =
+    has-double-negation-elim-iff' (iff-retract e)
 ```
 
 ### The empty proposition has double negation elimination
