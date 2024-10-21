@@ -56,18 +56,26 @@ between `X` and `Y`.
 type-constructive-Cantor-Schröder-Bernstein-Escardó :
   (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
 type-constructive-Cantor-Schröder-Bernstein-Escardó l1 l2 =
+  {X : UU l1} {Y : UU l2} → (X ↪ᵈ Y) → (Y ↪ᵈ X) → X ≃ Y
+
+type-constructive-Cantor-Schröder-Bernstein-Escardó' :
+  (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
+type-constructive-Cantor-Schröder-Bernstein-Escardó' l1 l2 =
   {X : UU l1} {Y : UU l2} → (X ↪¬¬ Y) → (Y ↪¬¬ X) → X ≃ Y
 ```
 
 ## Proof
 
-**Proof.** We begin by observing that given a double negation stable embedding,
+**Proof.** Let us begin by assuming we have two arbitrary embeddings `f : X ↪ Y`
+and `g : Y ↪ X`. In general, these need not be equivalences, so we need to
+construct a "correction" so that we are left with a pair of mutual inverses.
 
-```text
-  f : X → Y
-```
-
-then the image of `f` gives a decomposition of `Y`, `Y ≃ f(X) + Y\f(X) + ε`.
+We will proceed by finding a pair of subtypes that are left fixed by a roundtrip
+around taking direct images of `f` and `g` and their complements. If we begin by
+considering the entirety of `X` and taking its direct image under `f`, we are
+left with a subtype of `Y` that need not be full. By translating to the
+complement, we have a close measure of "everything that `f` does not hit. This
+is what we need to correct for...
 
 ```text
         X                           Y
@@ -84,17 +92,12 @@ then the image of `f` gives a decomposition of `Y`, `Y ≃ f(X) + Y\f(X) + ε`.
     \_______/                   \_______/
 ```
 
-the ??? fixed point theorem says that at some point this operation stabilizes,
-giving us a subtype `S ⊆ X` such that
+appropriate fixed point theorems, such as the Knaster–Tarski fixed point
+theorem, or Adamek's fixed point theorem?, says that at some point this
+operation stabilizes, giving us a subtype `S ⊆ X` such that
 
 ```text
   X\g(Y\f(S)) = S.
-```
-
-By double negation stability we also have the equation
-
-```text
-  g(Y\f(S)) = X\S.
 ```
 
 ```text
@@ -118,18 +121,44 @@ Dually, we also have a least fixed point `T` of the endooperator
   B ↦ Y\(f(X\g(B)))
 ```
 
-that satisfies `g(Y\f(T)) = Y\T`. But this gives us two further fixed points:
+But this gives us two further fixed points: that satisfies `g(Y\f(T)) = Y\T`.
 
 ```text
-  X\g(Y\f(X\g(S))) = X\g(S)    and    Y\f(X\g(Y\f(T))) = Y\f(T)
+  Y\f(X\g(Y\f(S))) = Y\f(S)    and    X\g(Y\f(X\g(T))) = X\g(T)
 ```
 
-If we can prove that `S` and `T` are decidable, then we can finish the proof in
-the classical way.
+So if `S` and `T` are greatest fixed points, we have
 
 ```text
-  S ∪ X\S = X\g(Y\f(S)) ∪ g(Y\f(S))
+  X\g(T) ⊆ S    and    Y\f(S) ⊆ T
 ```
+
+If `g` is double negation stable we also have the equality
+
+```text
+  g(Y\f(S)) = X\S.
+```
+
+This gives us an inverse map `g⁻¹ : X\S → Y` and similarly there is an inverse
+map `f⁻¹ : Y\T → X`. Now, if `S` and `f(S)` were decidable subtypes, we could
+define a new total map `h : X → Y` by
+
+```text
+  h(x) = f  (x)  if  x ∈ S
+  h(x) = g⁻¹(x)  if  x ∉ S
+```
+
+and a converse map
+
+```text
+  h'(x) = f⁻¹(x)  if  x ∈ f(S)
+  h'(x) = g  (x)  if  x ∉ f(S).
+```
+
+Clearly, this gives a pair of mutually inverse maps.
+
+Here we're not using the existence of `T` at all, nor that `S` is a greatest
+fixed point or that `g` satisfies any decidability property.
 
 ```agda
 module _
