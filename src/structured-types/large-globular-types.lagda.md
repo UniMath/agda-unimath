@@ -141,10 +141,26 @@ record
   field
     0-cell-Large-Globular-Type :
       (l : Level) → UU (α l)
-    globular-structure-0-cell-Large-Globular-Type :
-      large-globular-structure β 0-cell-Large-Globular-Type
+    1-cell-globular-type-Large-Globular-Type :
+      {l1 l2 : Level}
+      (x : 0-cell-Large-Globular-Type l1)
+      (y : 0-cell-Large-Globular-Type l2) →
+      Globular-Type (β l1 l2) (β l1 l2)
 
 open Large-Globular-Type public
+
+make-Large-Globular-Type :
+  {α : Level → Level} {β : Level → Level → Level} →
+  {A : (l : Level) → UU (α l)} →
+  large-globular-structure β A → Large-Globular-Type α β
+0-cell-Large-Globular-Type
+  ( make-Large-Globular-Type {A = A} B) =
+  A
+1-cell-globular-type-Large-Globular-Type
+  ( make-Large-Globular-Type B)
+  x y =
+  make-Globular-Type
+    ( globular-structure-1-cell-large-globular-structure B x y)
 
 module _
   {α : Level → Level} {β : Level → Level → Level} (A : Large-Globular-Type α β)
@@ -155,36 +171,102 @@ module _
     (x : 0-cell-Large-Globular-Type A l1)
     (y : 0-cell-Large-Globular-Type A l2) →
     UU (β l1 l2)
-  1-cell-Large-Globular-Type =
-    1-cell-large-globular-structure
-      ( globular-structure-0-cell-Large-Globular-Type A)
+  1-cell-Large-Globular-Type x y =
+    0-cell-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A x y)
+
+  2-cell-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    (f g : 1-cell-Large-Globular-Type x y) → UU (β l1 l2)
+  2-cell-Large-Globular-Type =
+    1-cell-Globular-Type ( 1-cell-globular-type-Large-Globular-Type A _ _)
+
+  3-cell-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    {f g : 1-cell-Large-Globular-Type x y}
+    (s t : 2-cell-Large-Globular-Type f g) → UU (β l1 l2)
+  3-cell-Large-Globular-Type =
+    2-cell-Globular-Type ( 1-cell-globular-type-Large-Globular-Type A _ _)
+
+  4-cell-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    {f g : 1-cell-Large-Globular-Type x y}
+    {s t : 2-cell-Large-Globular-Type f g}
+    (u v : 3-cell-Large-Globular-Type s t) → UU (β l1 l2)
+  4-cell-Large-Globular-Type =
+    3-cell-Globular-Type ( 1-cell-globular-type-Large-Globular-Type A _ _)
+
+  5-cell-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    {f g : 1-cell-Large-Globular-Type x y}
+    {s t : 2-cell-Large-Globular-Type f g}
+    {u v : 3-cell-Large-Globular-Type s t}
+    (a b : 4-cell-Large-Globular-Type u v) → UU (β l1 l2)
+  5-cell-Large-Globular-Type =
+    4-cell-Globular-Type ( 1-cell-globular-type-Large-Globular-Type A _ _)
+
+  2-cell-globular-type-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    (f g : 1-cell-Large-Globular-Type x y) →
+    Globular-Type (β l1 l2) (β l1 l2)
+  2-cell-globular-type-Large-Globular-Type =
+    1-cell-globular-type-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
+
+  3-cell-globular-type-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    {f g : 1-cell-Large-Globular-Type x y}
+    (s t : 2-cell-Large-Globular-Type f g) →
+    Globular-Type (β l1 l2) (β l1 l2)
+  3-cell-globular-type-Large-Globular-Type =
+    2-cell-globular-type-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
+
+  4-cell-globular-type-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    {f g : 1-cell-Large-Globular-Type x y}
+    {s t : 2-cell-Large-Globular-Type f g}
+    (u v : 3-cell-Large-Globular-Type s t) →
+    Globular-Type (β l1 l2) (β l1 l2)
+  4-cell-globular-type-Large-Globular-Type =
+    3-cell-globular-type-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
+
+  5-cell-globular-type-Large-Globular-Type :
+    {l1 l2 : Level}
+    {x : 0-cell-Large-Globular-Type A l1}
+    {y : 0-cell-Large-Globular-Type A l2}
+    {f g : 1-cell-Large-Globular-Type x y}
+    {s t : 2-cell-Large-Globular-Type f g}
+    {u v : 3-cell-Large-Globular-Type s t}
+    (a b : 4-cell-Large-Globular-Type u v) →
+    Globular-Type (β l1 l2) (β l1 l2)
+  5-cell-globular-type-Large-Globular-Type =
+    4-cell-globular-type-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
 
   globular-structure-1-cell-Large-Globular-Type :
     {l1 l2 : Level}
     (x : 0-cell-Large-Globular-Type A l1)
     (y : 0-cell-Large-Globular-Type A l2) →
     globular-structure (β l1 l2) (1-cell-Large-Globular-Type x y)
-  globular-structure-1-cell-Large-Globular-Type =
-    globular-structure-1-cell-large-globular-structure
-      ( globular-structure-0-cell-Large-Globular-Type A)
-
-  globular-type-1-cell-Large-Globular-Type :
-    {l1 l2 : Level}
-    (x : 0-cell-Large-Globular-Type A l1)
-    (y : 0-cell-Large-Globular-Type A l2) →
-    Globular-Type (β l1 l2) (β l1 l2)
-  globular-type-1-cell-Large-Globular-Type x y =
-    ( 1-cell-Large-Globular-Type x y ,
-      globular-structure-1-cell-Large-Globular-Type x y)
-
-  2-cell-Large-Globular-Type :
-    {l1 l2 : Level}
-    {x : 0-cell-Large-Globular-Type A l1}
-    {y : 0-cell-Large-Globular-Type A l2}
-    (p q : 1-cell-Large-Globular-Type x y) → UU (β l1 l2)
-  2-cell-Large-Globular-Type {x = x} {y} =
-    1-cell-globular-structure
-      ( globular-structure-1-cell-Large-Globular-Type x y)
+  globular-structure-1-cell-Large-Globular-Type x y =
+    globular-structure-0-cell-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A x y)
 
   globular-structure-2-cell-Large-Globular-Type :
     {l1 l2 : Level}
@@ -193,26 +275,38 @@ module _
     (f g : 1-cell-Large-Globular-Type x y) →
     globular-structure (β l1 l2) (2-cell-Large-Globular-Type f g)
   globular-structure-2-cell-Large-Globular-Type =
-    globular-structure-2-cell-large-globular-structure
-      ( globular-structure-0-cell-Large-Globular-Type A)
+    globular-structure-1-cell-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
 
-  globular-type-2-cell-Large-Globular-Type :
+  globular-structure-3-cell-Large-Globular-Type :
     {l1 l2 : Level}
     {x : 0-cell-Large-Globular-Type A l1}
     {y : 0-cell-Large-Globular-Type A l2}
-    (f g : 1-cell-Large-Globular-Type x y) →
-    Globular-Type (β l1 l2) (β l1 l2)
-  globular-type-2-cell-Large-Globular-Type f g =
-    ( 2-cell-Large-Globular-Type f g ,
-      globular-structure-2-cell-Large-Globular-Type f g)
+    {f g : 1-cell-Large-Globular-Type x y}
+    (s t : 2-cell-Large-Globular-Type f g) →
+    globular-structure (β l1 l2) (3-cell-Large-Globular-Type s t)
+  globular-structure-3-cell-Large-Globular-Type =
+    globular-structure-2-cell-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
 
-  3-cell-Large-Globular-Type :
+  globular-structure-4-cell-Large-Globular-Type :
     {l1 l2 : Level}
     {x : 0-cell-Large-Globular-Type A l1}
     {y : 0-cell-Large-Globular-Type A l2}
-    {p q : 1-cell-Large-Globular-Type x y}
-    (H K : 2-cell-Large-Globular-Type p q) → UU (β l1 l2)
-  3-cell-Large-Globular-Type {x = x} {y} =
-    2-cell-globular-structure
-      ( globular-structure-1-cell-Large-Globular-Type x y)
+    {f g : 1-cell-Large-Globular-Type x y}
+    {s t : 2-cell-Large-Globular-Type f g}
+    (u v : 3-cell-Large-Globular-Type s t) →
+    globular-structure (β l1 l2) (4-cell-Large-Globular-Type u v)
+  globular-structure-4-cell-Large-Globular-Type =
+    globular-structure-3-cell-Globular-Type
+      ( 1-cell-globular-type-Large-Globular-Type A _ _)
+
+  large-globular-structure-0-cell-Large-Globular-Type :
+    large-globular-structure β (0-cell-Large-Globular-Type A)
+  1-cell-large-globular-structure
+    large-globular-structure-0-cell-Large-Globular-Type =
+    1-cell-Large-Globular-Type
+  globular-structure-1-cell-large-globular-structure
+    large-globular-structure-0-cell-Large-Globular-Type =
+    globular-structure-1-cell-Large-Globular-Type
 ```

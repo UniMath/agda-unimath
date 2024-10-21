@@ -602,17 +602,17 @@ equiv-walk-of-length-equiv-Directed-Graph :
     ( vertex-equiv-Directed-Graph G H f y)
 equiv-walk-of-length-equiv-Directed-Graph G H f zero-ℕ =
   equiv-raise _ _
-    ( equiv-ap (equiv-vertex-equiv-Directed-Graph G H f) _ _)
+    ( equiv-ap (vertex-equiv-equiv-Directed-Graph G H f) _ _)
 equiv-walk-of-length-equiv-Directed-Graph G H f (succ-ℕ n) =
   equiv-Σ
     ( λ z →
       ( edge-Directed-Graph H (vertex-equiv-Directed-Graph G H f _) z) ×
       ( walk-of-length-Directed-Graph H n z
         ( vertex-equiv-Directed-Graph G H f _)))
-    ( equiv-vertex-equiv-Directed-Graph G H f)
+    ( vertex-equiv-equiv-Directed-Graph G H f)
     ( λ z →
       equiv-product
-        ( equiv-edge-equiv-Directed-Graph G H f _ _)
+        ( edge-equiv-equiv-Directed-Graph G H f _ _)
         ( equiv-walk-of-length-equiv-Directed-Graph G H f n))
 ```
 
