@@ -15,6 +15,7 @@ open import foundation.double-negation
 open import foundation.double-negation-elimination
 open import foundation.function-types
 open import foundation.negation
+open import foundation.empty-types
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -108,7 +109,7 @@ module _
     double-negation-elim-neg (¬ (type-Prop P))
 ```
 
-### The decidability of a proposition is irrefutable
+### Decidability is irrefutable
 
 ```agda
 is-irrefutable-is-decidable : {l : Level} {A : UU l} → ¬¬ (is-decidable A)
@@ -124,4 +125,13 @@ module _
   is-decidable-prop-Irrefutable-Prop : Irrefutable-Prop l
   is-decidable-prop-Irrefutable-Prop =
     make-Irrefutable-Prop (is-decidable-Prop P) is-irrefutable-is-decidable-Prop
+```
+
+### Double negation elimination is irrefutable
+
+```agda
+is-irrefutable-double-negation-elim :
+  {l : Level} {A : UU l} → ¬¬ (has-double-negation-elim A)
+is-irrefutable-double-negation-elim H =
+  H (λ x → ex-falso (x (λ a → H (λ _ → a))))
 ```
