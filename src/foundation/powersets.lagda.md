@@ -180,9 +180,8 @@ module _
 
 ## See also
 
-- [the locale of subtypes](foundation.locale-of-subtypes.md)
 - [the large locale of subtypes](foundation.large-locale-of-subtypes.md)
-- [preimages of subtypes](foundation.preimages-subtypes.md)
+- [preimages of subtypes](foundation.preimages-of-subtypes.md)
 - [images of subtypes](foundation.images-subtypes.md)
 
 ## External links

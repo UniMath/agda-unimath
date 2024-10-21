@@ -57,7 +57,7 @@ if it is an [embedding](foundation-core.embeddings.md) and its
 [double negation elimination](foundation.double-negation-elimination.md).
 
 Equivalently, a double negation stable embedding is a map whose fibers are
-[double negation stable propositions](foundation-core.double-negation-stable-propositions.md).
+[double negation stable propositions](foundation.double-negation-stable-propositions.md).
 We refer to this condition as being a
 {{#concept "double negation stable propositional map" Disambiguation="of types" Agda=is-double-negation-stable-prop-map}}.
 

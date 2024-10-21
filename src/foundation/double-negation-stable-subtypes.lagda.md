@@ -45,7 +45,7 @@ open import foundation-core.truncation-levels
 A
 {{#concept "double negation stable subtype" Disambiguation="of a type" Agda=is-double-negation-stable-subtype Agda=double-negation-stable-subtype}}
 of a type consists of a family of
-[double negation stable propositions](foundation-core.double-negation-stable-propositions.md)
+[double negation stable propositions](foundation.double-negation-stable-propositions.md)
 over it.
 
 ## Definitions
