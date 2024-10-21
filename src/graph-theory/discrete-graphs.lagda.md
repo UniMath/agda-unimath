@@ -66,7 +66,7 @@ module _
 
   is-discrete-prop-Reflexive-Graph : Prop (l1 ⊔ l2)
   is-discrete-prop-Reflexive-Graph =
-    is-discrete-prop-Graph (graph-Reflexive-Graph G)
+    is-discrete-prop-Graph (directed-graph-Reflexive-Graph G)
 
   is-discrete-Reflexive-Graph : UU (l1 ⊔ l2)
   is-discrete-Reflexive-Graph =

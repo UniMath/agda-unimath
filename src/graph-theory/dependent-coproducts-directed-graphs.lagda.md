@@ -116,4 +116,4 @@ module _
 
 ## See also
 
-- [Dependent product directed graphs](graph-theory.dependent-product-directed-graphs.md)
+- [Dependent product directed graphs](graph-theory.dependent-products-directed-graphs.md)

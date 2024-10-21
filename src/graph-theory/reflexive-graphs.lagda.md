@@ -26,23 +26,24 @@ A {{#concept "reflexive graph" Agda=Reflexive-Graph}} is a
 ```agda
 Reflexive-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Reflexive-Graph l1 l2 =
-  Σ (UU l1) (λ V → Σ (V → V → UU l2) (λ E → (v : V) → E v v))
+  Σ ( Directed-Graph l1 l2)
+    ( λ G → (x : vertex-Directed-Graph G) → edge-Directed-Graph G x x)
 
 module _
   {l1 l2 : Level} (G : Reflexive-Graph l1 l2)
   where
 
+  directed-graph-Reflexive-Graph : Directed-Graph l1 l2
+  directed-graph-Reflexive-Graph = pr1 G
+
   vertex-Reflexive-Graph : UU l1
-  vertex-Reflexive-Graph = pr1 G
+  vertex-Reflexive-Graph = vertex-Directed-Graph directed-graph-Reflexive-Graph
 
   edge-Reflexive-Graph : vertex-Reflexive-Graph → vertex-Reflexive-Graph → UU l2
-  edge-Reflexive-Graph = pr1 (pr2 G)
+  edge-Reflexive-Graph = edge-Directed-Graph directed-graph-Reflexive-Graph
 
   refl-Reflexive-Graph : (x : vertex-Reflexive-Graph) → edge-Reflexive-Graph x x
-  refl-Reflexive-Graph = pr2 (pr2 G)
-
-  graph-Reflexive-Graph : Directed-Graph l1 l2
-  graph-Reflexive-Graph = vertex-Reflexive-Graph , edge-Reflexive-Graph
+  refl-Reflexive-Graph = pr2 G
 ```
 
 ## See also

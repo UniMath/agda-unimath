@@ -263,4 +263,4 @@ module _
 
 ## See also
 
-- [Dependent coproduct directed graphs](graph-theory.dependent-coproduct-directed-graphs.md)
+- [Dependent coproduct directed graphs](graph-theory.dependent-coproducts-directed-graphs.md)
