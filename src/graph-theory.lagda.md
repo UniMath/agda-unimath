@@ -46,6 +46,7 @@ open import graph-theory.matchings public
 open import graph-theory.mere-equivalences-undirected-graphs public
 open import graph-theory.morphisms-dependent-directed-graphs public
 open import graph-theory.morphisms-directed-graphs public
+open import graph-theory.morphisms-reflexive-graphs public
 open import graph-theory.morphisms-undirected-graphs public
 open import graph-theory.neighbors-undirected-graphs public
 open import graph-theory.orientations-undirected-graphs public
@@ -60,6 +61,7 @@ open import graph-theory.sections-dependent-directed-graphs public
 open import graph-theory.simple-undirected-graphs public
 open import graph-theory.stereoisomerism-enriched-undirected-graphs public
 open import graph-theory.terminal-directed-graphs public
+open import graph-theory.terminal-reflexive-graphs public
 open import graph-theory.totally-faithful-morphisms-undirected-graphs public
 open import graph-theory.trails-directed-graphs public
 open import graph-theory.trails-undirected-graphs public
