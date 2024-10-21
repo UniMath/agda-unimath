@@ -90,11 +90,10 @@ uniform-pointed-type-Large-Globular-Type :
 is-reflexive-uniform-pointed-Π-Globular-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A) →
   is-reflexive-Globular-Type (uniform-pointed-Π-Globular-Type A B)
-is-reflexive-1-cell-is-reflexive-globular-structure
+is-reflexive-1-cell-is-reflexive-Globular-Type
   ( is-reflexive-uniform-pointed-Π-Globular-Type A B) =
   refl-uniform-pointed-htpy
-is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
-  ( is-reflexive-uniform-pointed-Π-Globular-Type A B) f g =
+is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type (is-reflexive-uniform-pointed-Π-Globular-Type A B) {f} {g} =
   is-reflexive-uniform-pointed-Π-Globular-Type A (eq-value-Pointed-Fam f g)
 
 is-reflexive-uniform-pointed-map-Globular-Type :
@@ -119,11 +118,11 @@ is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type
 is-transitive-uniform-pointed-Π-Globular-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A) →
   is-transitive-Globular-Type (uniform-pointed-Π-Globular-Type A B)
-comp-1-cell-is-transitive-globular-structure
+comp-1-cell-is-transitive-Globular-Type
   ( is-transitive-uniform-pointed-Π-Globular-Type A B) {f} {g} {h} K H =
   concat-uniform-pointed-htpy {f = f} {g} {h} H K
-is-transitive-globular-structure-1-cell-is-transitive-globular-structure
-  ( is-transitive-uniform-pointed-Π-Globular-Type A B) f g =
+is-transitive-1-cell-globular-type-is-transitive-Globular-Type
+  ( is-transitive-uniform-pointed-Π-Globular-Type A B) {f} {g} =
   is-transitive-uniform-pointed-Π-Globular-Type A (eq-value-Pointed-Fam f g)
 
 uniform-pointed-Π-Transitive-Globular-Type :
@@ -148,12 +147,12 @@ uniform-pointed-map-Transitive-Globular-Type A B =
 
 comp-structure-uniform-pointed-type-Large-Globular-Type :
   is-transitive-Large-Globular-Type uniform-pointed-type-Large-Globular-Type
-comp-1-cell-is-transitive-large-globular-structure
+comp-1-cell-is-transitive-Large-Globular-Type
   comp-structure-uniform-pointed-type-Large-Globular-Type g f =
   g ∘∗ f
-is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
+is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type
   comp-structure-uniform-pointed-type-Large-Globular-Type =
-  is-transitive-uniform-pointed-map-Globular-Type
+  is-transitive-uniform-pointed-Π-Globular-Type _ _
 ```
 
 #### The noncoherent large wild higher precategory of pointed types, pointed maps, and uniform pointed homotopies
@@ -161,7 +160,7 @@ is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
 ```agda
 uniform-pointed-type-Noncoherent-Large-Wild-Higher-Precategory :
   Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
-large-globular-type-Noncoherent-Large-Wild-Precategory
+large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
   uniform-pointed-type-Noncoherent-Large-Wild-Higher-Precategory =
   uniform-pointed-type-Large-Globular-Type
 id-structure-Noncoherent-Large-Wild-Higher-Precategory
@@ -215,12 +214,12 @@ is-reflexive-pointed-htpy-Globular-Type :
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
   (f g : pointed-Π A B) →
   is-reflexive-Globular-Type (pointed-htpy-Globular-Type f g)
-is-reflexive-1-cell-is-reflexive-globular-structure
+is-reflexive-1-cell-is-reflexive-Globular-Type
   ( is-reflexive-pointed-htpy-Globular-Type f g) =
   refl-pointed-2-htpy
-is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
-  ( is-reflexive-pointed-htpy-Globular-Type f g) H K =
-  is-reflexive-globular-type-Type (pointed-2-htpy H K)
+is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
+  ( is-reflexive-pointed-htpy-Globular-Type f g) =
+  is-reflexive-globular-type-Type (pointed-2-htpy _ _)
 
 pointed-htpy-Reflexive-Globular-Type :
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
@@ -235,12 +234,12 @@ refl-Reflexive-Globular-Type
 is-reflexive-pointed-Π-Globular-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A) →
   is-reflexive-Globular-Type (pointed-Π-Globular-Type A B)
-is-reflexive-1-cell-is-reflexive-globular-structure
+is-reflexive-1-cell-is-reflexive-Globular-Type
   ( is-reflexive-pointed-Π-Globular-Type A B) =
   refl-pointed-htpy
-is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
   ( is-reflexive-pointed-Π-Globular-Type A B) =
-  is-reflexive-pointed-htpy-Globular-Type
+  is-reflexive-pointed-htpy-Globular-Type _ _
 
 pointed-Π-Reflexive-Globular-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A) →
@@ -289,22 +288,22 @@ is-transitive-pointed-htpy-Globular-Type :
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
   (f g : pointed-Π A B) →
   is-transitive-Globular-Type (pointed-htpy-Globular-Type f g)
-comp-1-cell-is-transitive-globular-structure
+comp-1-cell-is-transitive-Globular-Type
   ( is-transitive-pointed-htpy-Globular-Type f g) K H =
   concat-pointed-2-htpy H K
-is-transitive-globular-structure-1-cell-is-transitive-globular-structure
-  ( is-transitive-pointed-htpy-Globular-Type f g) H K =
-  is-transitive-globular-type-Type (pointed-2-htpy H K)
+is-transitive-1-cell-globular-type-is-transitive-Globular-Type
+  ( is-transitive-pointed-htpy-Globular-Type f g) =
+  is-transitive-globular-type-Type (pointed-2-htpy _ _)
 
 is-transitive-pointed-Π-Globular-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A) →
   is-transitive-Globular-Type (pointed-Π-Globular-Type A B)
-comp-1-cell-is-transitive-globular-structure
+comp-1-cell-is-transitive-Globular-Type
   ( is-transitive-pointed-Π-Globular-Type A B) K H =
   concat-pointed-htpy H K
-is-transitive-globular-structure-1-cell-is-transitive-globular-structure
+is-transitive-1-cell-globular-type-is-transitive-Globular-Type
   ( is-transitive-pointed-Π-Globular-Type A B) =
-  is-transitive-pointed-htpy-Globular-Type
+  is-transitive-pointed-htpy-Globular-Type _ _
 
 is-transitive-pointed-map-Globular-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
@@ -314,12 +313,12 @@ is-transitive-pointed-map-Globular-Type A B =
 
 is-transitive-pointed-type-Large-Globular-Type :
   is-transitive-Large-Globular-Type pointed-type-Large-Globular-Type
-comp-1-cell-is-transitive-large-globular-structure
+comp-1-cell-is-transitive-Large-Globular-Type
   is-transitive-pointed-type-Large-Globular-Type g f =
   g ∘∗ f
-is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
+is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type
   is-transitive-pointed-type-Large-Globular-Type =
-  is-transitive-pointed-map-Globular-Type
+  is-transitive-pointed-map-Globular-Type _ _
 ```
 
 #### The noncoherent large wild higher precategory of pointed types, pointed maps, and nonuniform pointed homotopies
@@ -327,7 +326,7 @@ is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
 ```agda
 pointed-type-Noncoherent-Large-Wild-Higher-Precategory :
   Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
-large-globular-type-Noncoherent-Large-Wild-Precategory
+large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
   pointed-type-Noncoherent-Large-Wild-Higher-Precategory =
   pointed-type-Large-Globular-Type
 id-structure-Noncoherent-Large-Wild-Higher-Precategory

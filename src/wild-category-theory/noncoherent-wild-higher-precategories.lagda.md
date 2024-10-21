@@ -123,7 +123,6 @@ module _
     hom-Noncoherent-Wild-Higher-Precategory x x
   id-hom-Noncoherent-Wild-Higher-Precategory {x} =
     refl-2-cell-is-reflexive-Globular-Type
-      globular-type-Noncoherent-Wild-Higher-Precategory
       id-structure-Noncoherent-Wild-Higher-Precategory
 
   id-structure-hom-globular-type-Noncoherent-Wild-Higher-Precategory :
@@ -230,7 +229,6 @@ module _
     2-hom-Noncoherent-Wild-Higher-Precategory f f
   id-2-hom-Noncoherent-Wild-Higher-Precategory =
     refl-3-cell-is-reflexive-Globular-Type
-      globular-type-Noncoherent-Wild-Higher-Precategory
       id-structure-Noncoherent-Wild-Higher-Precategory
 
   comp-2-hom-Noncoherent-Wild-Higher-Precategory :

@@ -176,17 +176,15 @@ is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type :
   (x : 0-cell-Reflexive-Globular-Type G) →
   is-reflexive-Globular-Type
     ( family-globular-types-Dependent-Reflexive-Globular-Type H x)
-is-reflexive-1-cell-is-reflexive-globular-structure
+is-reflexive-1-cell-is-reflexive-Globular-Type
   ( is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type H x) =
   refl-1-cell-Dependent-Reflexive-Globular-Type H
-is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
   ( is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type
-    { G = G} H x)
-  ( u)
-  ( v) =
+    {G = G} H x) =
   is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type
     ( 1-cell-dependent-reflexive-globular-type-Dependent-Reflexive-Globular-Type
-      H u v)
+      H _ _)
     ( refl-1-cell-Reflexive-Globular-Type G)
 
 module _

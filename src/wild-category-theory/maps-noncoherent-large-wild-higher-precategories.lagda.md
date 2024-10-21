@@ -152,9 +152,9 @@ module _
   {α1 α2 α3 : Level → Level}
   {β1 β2 β3 : Level → Level → Level}
   {δ1 δ2 : Level → Level}
-  {𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1}
-  {ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2}
-  {𝒞 : Noncoherent-Large-Wild-Higher-Precategory α3 β3}
+  (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1)
+  (ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2)
+  (𝒞 : Noncoherent-Large-Wild-Higher-Precategory α3 β3)
   (G : map-Noncoherent-Large-Wild-Higher-Precategory δ2 ℬ 𝒞)
   (F : map-Noncoherent-Large-Wild-Higher-Precategory δ1 𝒜 ℬ)
   where

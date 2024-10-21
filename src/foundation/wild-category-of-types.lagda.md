@@ -68,20 +68,21 @@ globular-structure-Π {A = A} {B = B} =
 is-reflexive-dependent-function-type-Globular-Type :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-reflexive-Globular-Type (dependent-function-type-Globular-Type A B)
-is-reflexive-1-cell-is-reflexive-globular-structure
-  is-reflexive-dependent-function-type-Globular-Type f = refl-htpy
-is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
-  is-reflexive-dependent-function-type-Globular-Type f g =
+is-reflexive-1-cell-is-reflexive-Globular-Type
+  is-reflexive-dependent-function-type-Globular-Type f =
+  refl-htpy
+is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
+  is-reflexive-dependent-function-type-Globular-Type =
   is-reflexive-dependent-function-type-Globular-Type
 
 is-transitive-dependent-function-type-Globular-Type :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-transitive-Globular-Type (dependent-function-type-Globular-Type A B)
-comp-1-cell-is-transitive-globular-structure
+comp-1-cell-is-transitive-Globular-Type
   is-transitive-dependent-function-type-Globular-Type K H =
   H ∙h K
-is-transitive-globular-structure-1-cell-is-transitive-globular-structure
-  is-transitive-dependent-function-type-Globular-Type f g =
+is-transitive-1-cell-globular-type-is-transitive-Globular-Type
+  is-transitive-dependent-function-type-Globular-Type =
   is-transitive-dependent-function-type-Globular-Type
 ```
 
@@ -139,11 +140,11 @@ is-reflexive-Large-Reflexive-Globular-Type
 
 is-transitive-Type-Large-Globular-Type :
   is-transitive-Large-Globular-Type Type-Large-Globular-Type
-comp-1-cell-is-transitive-large-globular-structure
+comp-1-cell-is-transitive-Large-Globular-Type
   is-transitive-Type-Large-Globular-Type g f =
   g ∘ f
-is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
-  is-transitive-Type-Large-Globular-Type f g =
+is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type
+  is-transitive-Type-Large-Globular-Type =
   is-transitive-function-type-Globular-Type
 ```
 
@@ -152,7 +153,7 @@ is-transitive-globular-structure-1-cell-is-transitive-large-globular-structure
 ```agda
 Type-Noncoherent-Large-Wild-Higher-Precategory :
   Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
-large-globular-type-Noncoherent-Large-Wild-Precategory
+large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
   Type-Noncoherent-Large-Wild-Higher-Precategory =
   Type-Large-Globular-Type
 id-structure-Noncoherent-Large-Wild-Higher-Precategory

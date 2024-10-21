@@ -336,6 +336,32 @@ record
           { x = x}
           { y})
         ( comp-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory)
+```
+
+- The underlying reflexive globular type of a noncoherent large wild higher precategory
+
+```agda
+  large-reflexive-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
+    Large-Reflexive-Globular-Type α β
+  large-globular-type-Large-Reflexive-Globular-Type
+    large-reflexive-globular-type-Noncoherent-Large-Wild-Higher-Precategory =
+    large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
+  is-reflexive-Large-Reflexive-Globular-Type
+    large-reflexive-globular-type-Noncoherent-Large-Wild-Higher-Precategory =
+    id-structure-Noncoherent-Large-Wild-Higher-Precategory
+```
+
+- The underlying transitive globular type of a noncoherent large wild higher precategory
+
+```agda
+  large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
+    Large-Transitive-Globular-Type α β
+  large-globular-type-Large-Transitive-Globular-Type
+    large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory =
+    large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
+  is-transitive-Large-Transitive-Globular-Type
+    large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory =
+    comp-structure-Noncoherent-Large-Wild-Higher-Precategory
 
 open Noncoherent-Large-Wild-Higher-Precategory public
 ```
