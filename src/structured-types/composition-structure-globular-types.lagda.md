@@ -22,7 +22,7 @@ open import structured-types.globular-types
 A
 {{#concept "composition structure" Disambiguation="globular type" Agda=composition-Globular-Type}}
 on a [globular type](structured-types.globular-types.md) `G` consists of a
-[binary globular map]
+[binary globular map](structured-types.binary-globular-maps.md)
 
 ```text
   - ∘ - : G' y z → G' x y → G' x z,

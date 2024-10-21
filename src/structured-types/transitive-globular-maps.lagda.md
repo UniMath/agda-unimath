@@ -24,7 +24,7 @@ open import structured-types.transitive-globular-types
 A {{#concept "transitive globular map" Agda=transitive-globular-map}} between
 two [transitive globular types](structured-types.transitive-globular-types.md)
 `G` and `H` is a [globular map](structured-types.globular-maps.md) `f : G → H`
-equipped with a family of [identifications](foundation-core.identifications.md)
+equipped with a family of [identifications](foundation-core.identity-types.md)
 
 ```text
   f₁ (q ∘G p) ＝ f₁ q ∘H f₁ p
