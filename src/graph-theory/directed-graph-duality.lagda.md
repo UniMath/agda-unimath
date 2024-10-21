@@ -30,7 +30,7 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-{{#concept "Directed graph duality}} is an
+{{#concept "Directed graph duality" Agda=duality-Directed-Graph}} is an
 [equivalence](foundation-core.equivalences.md) between
 [dependent directed graphs](graph-theory.dependent-directed-graphs.md) over a
 [directed graph](graph-theory.directed-graphs.md) `G` and

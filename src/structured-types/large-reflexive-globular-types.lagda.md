@@ -24,7 +24,7 @@ open import structured-types.reflexive-globular-types
 ## Idea
 
 A [large globular type](structured-types.large-globular-types.md) is
-{{#concept "reflexive" Disambiguation="large globular type" Agda=is-reflexive-large-globular-structure}}
+{{#concept "reflexive" Disambiguation="large globular type" Agda=is-reflexive-Large-Globular-Type}}
 if every $n$-cell `x` comes with a choice of $(n+1)$-cell from `x` to `x`.
 
 ## Definition

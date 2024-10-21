@@ -18,7 +18,7 @@ open import graph-theory.directed-graphs
 ## Idea
 
 Consider a [directed graph](graph-theory.directed-graphs.md) `A`. A
-{{#concept "dependent directed graph}} `B` over `A` consists of:
+{{#concept "dependent directed graph" Agda=Dependent-Directed-Graph}} `B` over `A` consists of:
 
 - A family `B₀ : A₀ → 𝒰` of vertices
 - A family `B₁ : (x y : A₀) → A₁ x y → B₀ x → B₀ y → 𝒰` of

@@ -19,7 +19,7 @@ open import structured-types.transitive-globular-types
 
 ## Idea
 
-A {{#concept "colax transitive globular map" Agda=transitive-globular-map}}
+A {{#concept "colax transitive globular map" Agda=colax-transitive-globular-map}}
 between two
 [transitive globular types](structured-types.transitive-globular-types.md) `G`
 and `H` is a [globular map](structured-types.globular-maps.md) `f : G → H`

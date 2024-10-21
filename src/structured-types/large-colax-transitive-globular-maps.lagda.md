@@ -23,7 +23,7 @@ open import structured-types.transitive-globular-types
 ## Idea
 
 A
-{{#concept "large colax transitive globular map" Agda=large-transitive-globular-map}}
+{{#concept "large colax transitive globular map" Agda=large-colax-transitive-globular-map}}
 between two
 [large transitive globular types](structured-types.large-transitive-globular-types.md)
 `G` and `H` is a [large globular map](structured-types.large-globular-maps.md)

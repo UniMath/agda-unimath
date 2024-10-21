@@ -18,7 +18,7 @@ open import graph-theory.reflexive-graphs
 ## Idea
 
 Consider a [reflexive graph](graph-theory.reflexive-graphs.md) `A`. A
-{{#concept "dependent reflexive graph}} `B` over `A` consists of:
+{{#concept "dependent reflexive graph" Agda=Dependent-Reflexive-Graph}} `B` over `A` consists of:
 
 - A family `B₀ : A₀ → 𝒰` of types as the type family of vertices
 - A family `B₁ : {x y : A₀} → A₁ x y → B₀ x → B₀ y → 𝒰` of
