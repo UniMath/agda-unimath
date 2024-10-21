@@ -42,7 +42,7 @@ of edges from `(y , w)` to `(z , v)` consist of an edge `e : y → z` such that
 _Note:_ The fiber of a directed graphs should not be confused with the
 [fiber of a morphism of directed graphs](graph-theory.fibers-morphisms-directed-graphs.md),
 which is the
-[dependent directed graph](graph-theory.dependent-directed-graph.md) consisting
+[dependent directed graph](graph-theory.dependent-directed-graphs.md) consisting
 of the [fibers](foundation-core.fibers-of-maps.md) of the actions on vertices
 and edges.
 

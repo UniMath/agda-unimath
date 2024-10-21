@@ -67,7 +67,8 @@ module _
     Dependent-Directed-Graph l3 l4 (directed-graph-Reflexive-Graph A)
   dependent-directed-graph-Dependent-Reflexive-Graph = pr1 B
 
-  vertex-Dependent-Reflexive-Graph : vertex-Reflexive-Graph A → UU l3
+  vertex-Dependent-Reflexive-Graph :
+    vertex-Reflexive-Graph A → UU l3
   vertex-Dependent-Reflexive-Graph =
     vertex-Dependent-Directed-Graph
       dependent-directed-graph-Dependent-Reflexive-Graph
@@ -81,39 +82,48 @@ module _
     edge-Dependent-Directed-Graph
       dependent-directed-graph-Dependent-Reflexive-Graph
 
-  refl-Dependent-Directed-Graph :
-    (x : vertex-Reflexive-Graph A) (y : vertex-Dependent-Reflexive-Graph x) →
+  refl-Dependent-Reflexive-Graph :
+    {x : vertex-Reflexive-Graph A} (y : vertex-Dependent-Reflexive-Graph x) →
     edge-Dependent-Reflexive-Graph (refl-Reflexive-Graph A x) y y
-  refl-Dependent-Directed-Graph = pr2 B
+  refl-Dependent-Reflexive-Graph = pr2 B _
 ```
 
 ### Constant dependent reflexive graphs
 
--- ```agda
--- module _
---   {l1 l2 l3 l4 : Level} (A : Reflexive-Graph l1 l2) (B : Reflexive-Graph l3 l4)
---   where
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Reflexive-Graph l1 l2) (B : Reflexive-Graph l3 l4)
+  where
 
---   vertex-constant-Dependent-Reflexive-Graph :
---     vertex-Reflexive-Graph A → UU l3
---   vertex-constant-Dependent-Reflexive-Graph x = vertex-Reflexive-Graph B
+  vertex-constant-Dependent-Reflexive-Graph :
+    vertex-Reflexive-Graph A → UU l3
+  vertex-constant-Dependent-Reflexive-Graph x = vertex-Reflexive-Graph B
 
---   edge-constant-Dependent-Reflexive-Graph :
---     {x y : vertex-Reflexive-Graph A} →
---     edge-Reflexive-Graph A x y →
---     vertex-constant-Dependent-Reflexive-Graph x →
---     vertex-constant-Dependent-Reflexive-Graph y → UU l4
---   edge-constant-Dependent-Reflexive-Graph e =
---     edge-Reflexive-Graph B
+  edge-constant-Dependent-Reflexive-Graph :
+    {x y : vertex-Reflexive-Graph A} →
+    edge-Reflexive-Graph A x y →
+    vertex-constant-Dependent-Reflexive-Graph x →
+    vertex-constant-Dependent-Reflexive-Graph y → UU l4
+  edge-constant-Dependent-Reflexive-Graph _ =
+    edge-Reflexive-Graph B
 
---   constant-Dependent-Reflexive-Graph : Dependent-Reflexive-Graph l3 l4 A
---   pr1 constant-Dependent-Reflexive-Graph =
---     vertex-constant-Dependent-Reflexive-Graph
---   pr2 constant-Dependent-Reflexive-Graph =
---     edge-constant-Dependent-Reflexive-Graph
--- ```
+  refl-constant-Dependent-Reflexive-Graph :
+    (x : vertex-Reflexive-Graph A)
+    (y : vertex-constant-Dependent-Reflexive-Graph x) →
+    edge-constant-Dependent-Reflexive-Graph (refl-Reflexive-Graph A x) y y
+  refl-constant-Dependent-Reflexive-Graph _ =
+    refl-Reflexive-Graph B
 
--- ## See also
+  constant-Dependent-Reflexive-Graph : Dependent-Reflexive-Graph l3 l4 A
+  pr1 (pr1 constant-Dependent-Reflexive-Graph) =
+    vertex-constant-Dependent-Reflexive-Graph
+  pr2 (pr1 constant-Dependent-Reflexive-Graph) _ _ =
+    edge-constant-Dependent-Reflexive-Graph
+  pr2 constant-Dependent-Reflexive-Graph =
+    refl-constant-Dependent-Reflexive-Graph
+```
 
--- - The [universal reflexive graph](graph-theory.universal-reflexive-graph.md)
--- - [Pullbacks of dependent reflexive graphs](graph-theory.pullbacks-dependent-reflexive-graphs.md)
+## See also
+
+- The [universal reflexive graph](graph-theory.universal-reflexive-graph.md)
+- [Pullbacks of dependent reflexive graphs](graph-theory.pullbacks-dependent-reflexive-graphs.md)

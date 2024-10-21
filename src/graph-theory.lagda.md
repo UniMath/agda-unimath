@@ -53,6 +53,7 @@ open import graph-theory.orientations-undirected-graphs public
 open import graph-theory.paths-undirected-graphs public
 open import graph-theory.polygons public
 open import graph-theory.pullbacks-dependent-directed-graphs public
+open import graph-theory.pullbacks-dependent-reflexive-graphs public
 open import graph-theory.raising-universe-levels-directed-graphs public
 open import graph-theory.reflecting-maps-undirected-graphs public
 open import graph-theory.reflexive-graphs public

@@ -32,4 +32,5 @@ A {{#concept "standard globular homotopy"}} between `H : f ~ g` consists of
 ```
 
 where `f'` and `g'` are the globular maps between the
-[globular types](structured-types.globular-types.md) `G' x y` and `H' (f₀ x) (f₀ y)`
+[globular types](structured-types.globular-types.md) `G' x y` and
+`H' (f₀ x) (f₀ y)`
