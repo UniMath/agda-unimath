@@ -1,4 +1,4 @@
-# Reflexive globular maps
+# Large reflexive globular maps
 
 ```agda
 {-# OPTIONS --guardedness #-}
@@ -22,22 +22,30 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-A {{#concept "large reflexive globular map" Agda=large-reflexive-globular-map}} between two
-[large reflexive globular types](structured-types.large-reflexive-globular-types.md) `G` and
-`H` is a [large globular map](structured-types.large-globular-maps.md) `f : G → H` equipped
-with a family of [identifications](foundation-core.identity-types.md)
+A {{#concept "large reflexive globular map" Agda=large-reflexive-globular-map}}
+between two
+[large reflexive globular types](structured-types.large-reflexive-globular-types.md)
+`G` and `H` is a [large globular map](structured-types.large-globular-maps.md)
+`f : G → H` equipped with a family of
+[identifications](foundation-core.identity-types.md)
 
 ```text
   (x : G₀) → f₁ (Gᵣ x) ＝ Hᵣ (f₀ x)
 ```
 
 from the image of the reflexivity cell at `x` in `G` to the reflexivity cell at
-`f₀ x`, such that the [globular map](structured-types.globular-maps.md) `f' : G' x y → H' (f₀ x) (f₀ y)` is [reflexive](structured-types.reflexive-globular-maps.md).
+`f₀ x`, such that the [globular map](structured-types.globular-maps.md)
+`f' : G' x y → H' (f₀ x) (f₀ y)` is
+[reflexive](structured-types.reflexive-globular-maps.md).
 
-Note: In some settings it may be preferred to work with large globular maps preserving
-reflexivity cells up to a higher cell. The two notions of maps between reflexive
-globular types preserving the reflexivity structure up to a higher cell are, depending of the direction of the coherence cells, the notions of
-[large colax reflexive globular maps](structured-types.large-colax-reflexive-globular-maps.md) and [large lax reflexive globular maps](structured-types.large-lax-reflexive-globular-maps.md).
+Note: In some settings it may be preferred to work with large globular maps
+preserving reflexivity cells up to a higher cell. The two notions of maps
+between reflexive globular types preserving the reflexivity structure up to a
+higher cell are, depending of the direction of the coherence cells, the notions
+of
+[large colax reflexive globular maps](structured-types.large-colax-reflexive-globular-maps.md)
+and
+[large lax reflexive globular maps](structured-types.large-lax-reflexive-globular-maps.md).
 
 ## Definitions
 

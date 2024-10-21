@@ -35,8 +35,11 @@ reflexive.
 
 Note: In some settings it may be preferred to work with globular maps preserving
 reflexivity cells up to a higher cell. The two notions of maps between reflexive
-globular types preserving the reflexivity structure up to a higher cell are, depending of the direction of the coherence cells, the notions of
-[colax reflexive globular maps](structured-types.colax-reflexive-globular-maps.md) and [lax reflexive globular maps](structured-types.lax-reflexive-globular-maps.md).
+globular types preserving the reflexivity structure up to a higher cell are,
+depending of the direction of the coherence cells, the notions of
+[colax reflexive globular maps](structured-types.colax-reflexive-globular-maps.md)
+and
+[lax reflexive globular maps](structured-types.lax-reflexive-globular-maps.md).
 
 ## Definitions
 

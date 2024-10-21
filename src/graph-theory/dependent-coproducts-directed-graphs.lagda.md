@@ -21,7 +21,10 @@ open import graph-theory.sections-dependent-directed-graphs
 
 ## Idea
 
-Consider a [dependent directed graph](graph-theory.dependent-directed-graphs.md) `H` over a [directed graph](graph-theory.directed-graphs.md) `G`. The {{#concept "dependent coproduct" Disambiguation="directed graphs" Agda=Σ-Directed-Graph}} `Σ G H` is the directed graph given by
+Consider a [dependent directed graph](graph-theory.dependent-directed-graphs.md)
+`H` over a [directed graph](graph-theory.directed-graphs.md) `G`. The
+{{#concept "dependent coproduct" Disambiguation="directed graphs" Agda=Σ-Directed-Graph}}
+`Σ G H` is the directed graph given by
 
 ```text
   (Σ G H)₀ := Σ G₀ H₀

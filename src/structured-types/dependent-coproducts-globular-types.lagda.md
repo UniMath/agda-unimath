@@ -23,7 +23,11 @@ open import structured-types.sections-dependent-globular-types
 
 ## Idea
 
-Consider a [dependent globular type](structured-types.dependent-globular-types.md) `H` over a [globular type](structured-types.globular-types.md) `G`. The {{#concept "dependent coproduct" Disambiguation="globular types" Agda=Σ-Globular-Type}} `Σ G H` of `H` is the globular type given by
+Consider a
+[dependent globular type](structured-types.dependent-globular-types.md) `H` over
+a [globular type](structured-types.globular-types.md) `G`. The
+{{#concept "dependent coproduct" Disambiguation="globular types" Agda=Σ-Globular-Type}}
+`Σ G H` of `H` is the globular type given by
 
 ```text
   (Σ G H)₀ := Σ G₀ H₀

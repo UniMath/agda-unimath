@@ -93,7 +93,10 @@ is-reflexive-uniform-pointed-Π-Globular-Type :
 is-reflexive-1-cell-is-reflexive-Globular-Type
   ( is-reflexive-uniform-pointed-Π-Globular-Type A B) =
   refl-uniform-pointed-htpy
-is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type (is-reflexive-uniform-pointed-Π-Globular-Type A B) {f} {g} =
+is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
+  ( is-reflexive-uniform-pointed-Π-Globular-Type A B)
+  { f}
+  { g} =
   is-reflexive-uniform-pointed-Π-Globular-Type A (eq-value-Pointed-Fam f g)
 
 is-reflexive-uniform-pointed-map-Globular-Type :

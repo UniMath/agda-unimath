@@ -28,8 +28,11 @@ A
 {{#concept "map" Disambiguation="between noncoherent wild higher precategories" Agda=map-Noncoherent-Wild-Higher-Precategory}}
 `f` between
 [noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md)
-`𝒜` and `ℬ` is a [globular map](structured-types.globular-maps.md) between their underlying [globular types](structured-types.globular-types.md). More specifically, a map `F` between noncoherent wild higher precategories consists of a map on objects `F₀ : obj 𝒜 → obj ℬ`, and for every
-pair of $n$-morphisms `f` and `g`, a map of $(n+1)$-morphisms
+`𝒜` and `ℬ` is a [globular map](structured-types.globular-maps.md) between their
+underlying [globular types](structured-types.globular-types.md). More
+specifically, a map `F` between noncoherent wild higher precategories consists
+of a map on objects `F₀ : obj 𝒜 → obj ℬ`, and for every pair of $n$-morphisms
+`f` and `g`, a map of $(n+1)$-morphisms
 
 ```text
   Fₙ₊₁ : (𝑛+1)-hom 𝒞 f g → (𝑛+1)-hom 𝒟 (Fₙ f) (Fₙ g).
@@ -62,7 +65,7 @@ module _
   (ℬ : Noncoherent-Wild-Higher-Precategory l3 l4)
   (F : map-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ)
   where
-  
+
   obj-map-Noncoherent-Wild-Higher-Precategory :
     obj-Noncoherent-Wild-Higher-Precategory 𝒜 →
     obj-Noncoherent-Wild-Higher-Precategory ℬ
@@ -111,7 +114,8 @@ module _
         ( ℬ)
         ( obj-map-Noncoherent-Wild-Higher-Precategory x)
         ( obj-map-Noncoherent-Wild-Higher-Precategory y))
-  hom-noncoherent-wild-higher-precategory-map-Noncoherent-Wild-Higher-Precategory x y =
+  hom-noncoherent-wild-higher-precategory-map-Noncoherent-Wild-Higher-Precategory
+    x y =
     1-cell-globular-map-globular-map F
 ```
 

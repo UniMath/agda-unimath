@@ -16,8 +16,8 @@ open import foundation.universe-levels
 
 open import structured-types.globular-maps
 open import structured-types.globular-types
-open import structured-types.large-globular-types
 open import structured-types.large-globular-maps
+open import structured-types.large-globular-types
 
 open import wild-category-theory.maps-noncoherent-wild-higher-precategories
 open import wild-category-theory.noncoherent-large-wild-higher-precategories

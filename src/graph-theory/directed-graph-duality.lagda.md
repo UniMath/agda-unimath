@@ -30,7 +30,14 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-{{#concept "Directed graph duality}} is an [equivalence](foundation-core.equivalences.md) between [dependent directed graphs](graph-theory.dependent-directed-graphs.md) over a [directed graph](graph-theory.directed-graphs.md) `G` and [morphisms of directed graphs](graph-theory.morphisms-directed-graphs.md) into `G`. This result is analogous to [type duality](foundation.type-duality.md), which asserts that type families over a type `A` are equivalently described as maps into `A`.
+{{#concept "Directed graph duality}} is an
+[equivalence](foundation-core.equivalences.md) between
+[dependent directed graphs](graph-theory.dependent-directed-graphs.md) over a
+[directed graph](graph-theory.directed-graphs.md) `G` and
+[morphisms of directed graphs](graph-theory.morphisms-directed-graphs.md) into
+`G`. This result is analogous to [type duality](foundation.type-duality.md),
+which asserts that type families over a type `A` are equivalently described as
+maps into `A`.
 
 ## Definitions
 

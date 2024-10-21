@@ -19,8 +19,9 @@ open import structured-types.transitive-globular-types
 
 ## Idea
 
-A {{#concept "lax transitive globular map" Agda=transitive-globular-map}} between
-two [transitive globular types](structured-types.transitive-globular-types.md) `G`
+A {{#concept "lax transitive globular map" Agda=transitive-globular-map}}
+between two
+[transitive globular types](structured-types.transitive-globular-types.md) `G`
 and `H` is a [globular map](structured-types.globular-maps.md) `f : G → H`
 equipped with a family of 2-cells
 
@@ -28,12 +29,18 @@ equipped with a family of 2-cells
   H₂ (f₁ (q ∘G p)) (f₁ q ∘H f₁ p)
 ```
 
-from the image of the composite of two 1-cells `q` and `p` in `G` to the composite of `f₁ q` and `f₁ p` in `H`, such that the globular map `f' : G' x y → H' (f₀ x) (f₀ y)` is again lax
-transitive.
+from the image of the composite of two 1-cells `q` and `p` in `G` to the
+composite of `f₁ q` and `f₁ p` in `H`, such that the globular map
+`f' : G' x y → H' (f₀ x) (f₀ y)` is again lax transitive.
 
 ### Lack of identity lax transitive globular maps
 
-Note that the lax transitive globular maps lack an identity morphism. For an identity morphism to exist on a transitive globular type `G`, there should be a `2`-cell from `q ∘G p` to `q ∘G p` for every composable pair of `1`-cells `q` and `p`. However, since the transitive globular type `G` is not assumed to be [reflexive](structured-types.reflexive-globular-types.md), it might lack such instances of the reflexivity cells.
+Note that the lax transitive globular maps lack an identity morphism. For an
+identity morphism to exist on a transitive globular type `G`, there should be a
+`2`-cell from `q ∘G p` to `q ∘G p` for every composable pair of `1`-cells `q`
+and `p`. However, since the transitive globular type `G` is not assumed to be
+[reflexive](structured-types.reflexive-globular-types.md), it might lack such
+instances of the reflexivity cells.
 
 ## Definitions
 

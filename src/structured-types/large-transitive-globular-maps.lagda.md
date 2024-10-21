@@ -10,8 +10,8 @@ module structured-types.large-transitive-globular-maps where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.identity-types
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.large-globular-maps
@@ -24,16 +24,21 @@ open import structured-types.transitive-globular-types
 
 ## Idea
 
-A {{#concept "large transitive globular map" Agda=large-transitive-globular-map}} between
-two [large transitive globular types](structured-types.large-transitive-globular-types.md) `G`
-and `H` is a [large globular map](structured-types.large-globular-maps.md) `f : G → H`
-equipped with a family of [identifications](foundation-core.identity-types.md)
+A
+{{#concept "large transitive globular map" Agda=large-transitive-globular-map}}
+between two
+[large transitive globular types](structured-types.large-transitive-globular-types.md)
+`G` and `H` is a [large globular map](structured-types.large-globular-maps.md)
+`f : G → H` equipped with a family of
+[identifications](foundation-core.identity-types.md)
 
 ```text
   f₁ (q ∘G p) ＝ f₁ q ∘H f₁ p
 ```
 
-from the image of the composite of two 1-cells `q` and `p` in `G` to the composite of `f₁ q` and `f₁ p` in `H`, such that the globular map `f' : G' x y → H' (f₀ x) (f₀ y)` is again transitive.
+from the image of the composite of two 1-cells `q` and `p` in `G` to the
+composite of `f₁ q` and `f₁ p` in `H`, such that the globular map
+`f' : G' x y → H' (f₀ x) (f₀ y)` is again transitive.
 
 ## Definitions
 

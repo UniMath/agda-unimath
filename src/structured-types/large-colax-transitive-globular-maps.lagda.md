@@ -12,9 +12,9 @@ module structured-types.large-colax-transitive-globular-maps where
 open import foundation.function-types
 open import foundation.universe-levels
 
+open import structured-types.colax-transitive-globular-maps
 open import structured-types.large-globular-maps
 open import structured-types.large-transitive-globular-types
-open import structured-types.colax-transitive-globular-maps
 open import structured-types.transitive-globular-types
 ```
 
@@ -22,21 +22,30 @@ open import structured-types.transitive-globular-types
 
 ## Idea
 
-A {{#concept "large colax transitive globular map" Agda=large-transitive-globular-map}} between
-two [large transitive globular types](structured-types.large-transitive-globular-types.md) `G`
-and `H` is a [large globular map](structured-types.large-globular-maps.md) `f : G → H`
-equipped with a family of 2-cells
+A
+{{#concept "large colax transitive globular map" Agda=large-transitive-globular-map}}
+between two
+[large transitive globular types](structured-types.large-transitive-globular-types.md)
+`G` and `H` is a [large globular map](structured-types.large-globular-maps.md)
+`f : G → H` equipped with a family of 2-cells
 
 ```text
   H₂ (f₁ (q ∘G p)) (f₁ q ∘H f₁ p)
 ```
 
-from the image of the composite of two 1-cells `q` and `p` in `G` to the composite of `f₁ q` and `f₁ p` in `H`, such that the globular map `f' : G' x y → H' (f₀ x) (f₀ y)` is again colax
-transitive.
+from the image of the composite of two 1-cells `q` and `p` in `G` to the
+composite of `f₁ q` and `f₁ p` in `H`, such that the globular map
+`f' : G' x y → H' (f₀ x) (f₀ y)` is again colax transitive.
 
 ### Lack of identity large colax transitive globular maps
 
-Note that the large colax transitive globular maps lack an identity morphism. For an identity morphism to exist on a transitive globular type `G`, there should be a `2`-cell from `q ∘G p` to `q ∘G p` for every composable pair of `1`-cells `q` and `p`. However, since the large transitive globular type `G` is not assumed to be [reflexive](structured-types.large-reflexive-globular-types.md), it might lack such instances of the reflexivity cells.
+Note that the large colax transitive globular maps lack an identity morphism.
+For an identity morphism to exist on a transitive globular type `G`, there
+should be a `2`-cell from `q ∘G p` to `q ∘G p` for every composable pair of
+`1`-cells `q` and `p`. However, since the large transitive globular type `G` is
+not assumed to be
+[reflexive](structured-types.large-reflexive-globular-types.md), it might lack
+such instances of the reflexivity cells.
 
 ## Definitions
 
@@ -99,7 +108,8 @@ record
     0-cell-Large-Transitive-Globular-Type G l1 →
     0-cell-Large-Transitive-Globular-Type H (γ l1)
   0-cell-large-colax-transitive-globular-map =
-    0-cell-large-globular-map large-globular-map-large-colax-transitive-globular-map
+    0-cell-large-globular-map
+      large-globular-map-large-colax-transitive-globular-map
 
   1-cell-large-colax-transitive-globular-map :
     {l1 l2 : Level}
@@ -236,7 +246,9 @@ is-colax-transitive-comp-large-colax-transitive-globular-map :
   is-colax-transitive-large-globular-map G K
     ( map-comp-large-colax-transitive-globular-map G H K g f)
 preserves-comp-1-cell-is-colax-transitive-large-globular-map
-  ( is-colax-transitive-comp-large-colax-transitive-globular-map G H K g f) q p =
+  ( is-colax-transitive-comp-large-colax-transitive-globular-map G H K g f)
+  ( q)
+  ( p) =
   comp-2-cell-Large-Transitive-Globular-Type K
     ( preserves-comp-1-cell-large-colax-transitive-globular-map g _ _)
     ( 2-cell-large-colax-transitive-globular-map g

@@ -23,7 +23,11 @@ open import structured-types.globular-types
 
 ## Idea
 
-Consider a [globular map](structured-types.globular-maps.md) `f : H → G` between two [globular types](structured-types.globular-types.md) `H` and `G`. The {{#concept "fiber" Disambiguation="globular map" Agda=fiber-globular-map}} of `f` is a [dependent globular type](structured-types.dependent-globular-types.md) `fib_f` given by
+Consider a [globular map](structured-types.globular-maps.md) `f : H → G` between
+two [globular types](structured-types.globular-types.md) `H` and `G`. The
+{{#concept "fiber" Disambiguation="globular map" Agda=fiber-globular-map}} of
+`f` is a [dependent globular type](structured-types.dependent-globular-types.md)
+`fib_f` given by
 
 ```text
   (fib_f)₀ x := fib f₀ x
@@ -41,7 +45,7 @@ fiber-globular-map :
   (f : globular-map H G) →
   Dependent-Globular-Type (l1 ⊔ l3) (l2 ⊔ l4) G
 0-cell-Dependent-Globular-Type
-  ( fiber-globular-map H G f)=
+  ( fiber-globular-map H G f) =
   fiber (0-cell-globular-map f)
 1-cell-dependent-globular-type-Dependent-Globular-Type
   ( fiber-globular-map H G f) {x} {x'} (y , refl) (y' , refl) =

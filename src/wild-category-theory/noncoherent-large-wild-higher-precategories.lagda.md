@@ -338,7 +338,8 @@ record
         ( comp-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory)
 ```
 
-- The underlying reflexive globular type of a noncoherent large wild higher precategory
+- The underlying reflexive globular type of a noncoherent large wild higher
+  precategory
 
 ```agda
   large-reflexive-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
@@ -351,7 +352,8 @@ record
     id-structure-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The underlying transitive globular type of a noncoherent large wild higher precategory
+- The underlying transitive globular type of a noncoherent large wild higher
+  precategory
 
 ```agda
   large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory :

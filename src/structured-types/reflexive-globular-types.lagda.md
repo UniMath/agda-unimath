@@ -345,4 +345,6 @@ is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
 - [Colax reflexive globular maps](structured-types.colax-reflexive-globular-maps.md)
 - [Lax reflexive globular maps](structured-types.lax-reflexive-globular-maps.md)
 - [Reflexive globular maps](structured-tyeps.reflexive-globular-maps.md)
-- [Noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md) are globular types that are both reflexive and [transitive](structured-types.transitive-globular-types.md).
+- [Noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md)
+  are globular types that are both reflexive and
+  [transitive](structured-types.transitive-globular-types.md).

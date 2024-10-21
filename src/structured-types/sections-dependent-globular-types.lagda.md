@@ -19,7 +19,11 @@ open import structured-types.globular-types
 
 ## Idea
 
-Consider a [dependent globular type](structured-types.dependent-globular-types.md) `H` over a [globular type](structured-types.globular-types.md) `G`. A {{#concept "section" Disambiguation="dependent globular type" Agda=section-Dependent-Globular-Type}} `f` of `H` consists of
+Consider a
+[dependent globular type](structured-types.dependent-globular-types.md) `H` over
+a [globular type](structured-types.globular-types.md) `G`. A
+{{#concept "section" Disambiguation="dependent globular type" Agda=section-Dependent-Globular-Type}}
+`f` of `H` consists of
 
 ```text
   s₀ : (x : G₀) → H₀ x
@@ -49,7 +53,7 @@ record
         ( 1-cell-dependent-globular-type-Dependent-Globular-Type H
           ( 0-cell-section-Dependent-Globular-Type x)
           ( 0-cell-section-Dependent-Globular-Type x'))
-        
+
 open section-Dependent-Globular-Type public
 
 module _

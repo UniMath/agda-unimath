@@ -38,7 +38,7 @@ record
     (A : Large-Globular-Type α β) :
     UUω
   where
-  
+
   field
     refl-1-cell-is-reflexive-Large-Globular-Type :
       is-reflexive-Large-Relation

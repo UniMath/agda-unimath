@@ -22,16 +22,17 @@ open import structured-types.transitive-globular-types
 ## Idea
 
 A {{#concept "transitive globular map" Agda=transitive-globular-map}} between
-two [transitive globular types](structured-types.transitive-globular-types.md) `G`
-and `H` is a [globular map](structured-types.globular-maps.md) `f : G → H`
+two [transitive globular types](structured-types.transitive-globular-types.md)
+`G` and `H` is a [globular map](structured-types.globular-maps.md) `f : G → H`
 equipped with a family of [identifications](foundation-core.identifications.md)
 
 ```text
   f₁ (q ∘G p) ＝ f₁ q ∘H f₁ p
 ```
 
-from the image of the composite of two 1-cells `q` and `p` in `G` to the composite of `f₁ q` and `f₁ p` in `H`, such that the globular map `f' : G' x y → H' (f₀ x) (f₀ y)` is again
-transitive.
+from the image of the composite of two 1-cells `q` and `p` in `G` to the
+composite of `f₁ q` and `f₁ p` in `H`, such that the globular map
+`f' : G' x y → H' (f₀ x) (f₀ y)` is again transitive.
 
 ## Definitions
 
@@ -141,7 +142,7 @@ record
     (q : 1-cell-Transitive-Globular-Type G y z)
     (p : 1-cell-Transitive-Globular-Type G x y) →
     1-cell-transitive-globular-map
-      ( comp-1-cell-Transitive-Globular-Type G q p) ＝ 
+      ( comp-1-cell-Transitive-Globular-Type G q p) ＝
     comp-1-cell-Transitive-Globular-Type H
       ( 1-cell-transitive-globular-map q)
       ( 1-cell-transitive-globular-map p)

@@ -24,7 +24,8 @@ Consider a [reflexive graph](graph-theory.reflexive-graphs.md) `A`. A
 - A family `B₁ : {x y : A₀} → A₁ x y → B₀ x → B₀ y → 𝒰` of
   [binary relations](foundation.binary-relations.md) between the types of
   vertices `B₀`, indexed by the type of edges `A₁` in `A`.
-- A family of elements `Bᵣ : (x : A₀) (y : B₀ x) → B₁ (Aᵣ x) y y` witnessing the reflexivity of `B₁` over the reflexivity `Aᵣ` of `A₁`.
+- A family of elements `Bᵣ : (x : A₀) (y : B₀ x) → B₁ (Aᵣ x) y y` witnessing the
+  reflexivity of `B₁` over the reflexivity `Aᵣ` of `A₁`.
 
 This definition may appear overly general. However, one can observe that the
 type of reflexive graphs itself is [equivalent](foundation-core.equivalences.md)
@@ -36,7 +37,8 @@ are equivalent to dependent reflexive graphs.
 
 Alternatively, a dependent reflexive graph `B` over `A` can be defined by
 
-- A family `B₀ : A₀ → Reflexive-Graph` of reflexive graphs as the type family of vertices
+- A family `B₀ : A₀ → Reflexive-Graph` of reflexive graphs as the type family of
+  vertices
 - A family `B₁ : {x y : A₀} → A₁ x y → (B₀ x)₀ → (B₀ y)₀ → 𝒰`.
 - A family `Bᵣ : (x : A₀) → B₁ (Aᵣ x) ＝ (B₀ x)₁
 

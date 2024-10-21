@@ -20,7 +20,12 @@ open import structured-types.globular-types
 
 ## Idea
 
-Consider a [dependent globular type](structured-types.dependent-globular-types.md) `H` over `G`, and consider a [globular map](structured-types.globular-maps.md) `f : K → G`. The {{#concept "pullback" Disambiguation="dependent globular types" agda=pullback-Dependent-Globular-Type}} of `H` along `f` is the dependent globular type `f*H` given by
+Consider a
+[dependent globular type](structured-types.dependent-globular-types.md) `H` over
+`G`, and consider a [globular map](structured-types.globular-maps.md)
+`f : K → G`. The
+{{#concept "pullback" Disambiguation="dependent globular types" agda=pullback-Dependent-Globular-Type}}
+of `H` along `f` is the dependent globular type `f*H` given by
 
 ```text
   (f*H)₀ x := H₀ (f₀ x)

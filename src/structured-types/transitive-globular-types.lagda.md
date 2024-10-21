@@ -228,7 +228,7 @@ is-transitive-globular-structure :
   {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A) → UU (l1 ⊔ l2)
 is-transitive-globular-structure G =
   is-transitive-Globular-Type (make-Globular-Type G)
-  
+
 module _
   {l1 l2 : Level} {A : UU l1} {G : globular-structure l2 A}
   (t : is-transitive-globular-structure G)
@@ -354,4 +354,6 @@ transitive-globular-structure-Id A =
 ## See also
 
 - [Composition structure on globular types](structured-types.composition-structure-globular-types.md)
-- [Noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md) are globular types that are both [reflexive](structured-types.reflexive-globular-types.md) and transitive.
+- [Noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md)
+  are globular types that are both
+  [reflexive](structured-types.reflexive-globular-types.md) and transitive.

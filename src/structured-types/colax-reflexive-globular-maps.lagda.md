@@ -35,18 +35,30 @@ colax reflexive.
 
 ### Lack of composition for colax reflexive globular maps
 
-Note that the colax reflexive globular maps lack composition. For the composition of `g` and `f` to exist, there should be a `2`-cell from `g (f (refl G x))` to `refl K (g (f x))`, we need to compose the 2-cell that `g` preserves reflexivity with the action of `g` on the 2-cell that `f` preserves reflexivity. However, since the reflexive globular type `G` is not assumed to be [transitive](structured-types.transitive-globular-types.md), it might lack such instances of the compositions.
+Note that the colax reflexive globular maps lack composition. For the
+composition of `g` and `f` to exist, there should be a `2`-cell from
+`g (f (refl G x))` to `refl K (g (f x))`, we need to compose the 2-cell that `g`
+preserves reflexivity with the action of `g` on the 2-cell that `f` preserves
+reflexivity. However, since the reflexive globular type `G` is not assumed to be
+[transitive](structured-types.transitive-globular-types.md), it might lack such
+instances of the compositions.
 
 ### Colax reflexive globular maps versus the morphisms of presheaves on the reflexive globe category
 
-When reflexive globular types are viewed as type-valued presheaves over
-the reflexive globe category, the resulting notion of morphism is that of
+When reflexive globular types are viewed as type-valued presheaves over the
+reflexive globe category, the resulting notion of morphism is that of
 [reflexive globular maps](structured-types.reflexive-globular-maps.md), which is
 stricter than the notion of colax reflexive globular maps.
 
 ### Lax versus colax
 
-The notion of [lax reflexive globular map](structured-types.lax-reflexive-globular-maps.md) is almost the same, except with the direction of the 2-cell reversed. In general, the direction of lax coherence cells is determined by applying the morphism componentwise first, and then the operations, while the direction of colax coherence cells is determined by first applying the operations and then the morphism.
+The notion of
+[lax reflexive globular map](structured-types.lax-reflexive-globular-maps.md) is
+almost the same, except with the direction of the 2-cell reversed. In general,
+the direction of lax coherence cells is determined by applying the morphism
+componentwise first, and then the operations, while the direction of colax
+coherence cells is determined by first applying the operations and then the
+morphism.
 
 ## Definitions
 

@@ -12,9 +12,9 @@ module structured-types.large-lax-reflexive-globular-maps where
 open import foundation.function-types
 open import foundation.universe-levels
 
-open import structured-types.lax-reflexive-globular-maps
 open import structured-types.large-globular-maps
 open import structured-types.large-reflexive-globular-types
+open import structured-types.lax-reflexive-globular-maps
 open import structured-types.reflexive-globular-types
 ```
 
@@ -22,26 +22,41 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-A {{#concept "large lax reflexive globular map" Agda=large-lax-reflexive-globular-map}}
+A
+{{#concept "large lax reflexive globular map" Agda=large-lax-reflexive-globular-map}}
 between two
-[large reflexive globular types](structured-types.large-reflexive-globular-types.md) `G` and
-`H` is a [large globular map](structured-types.large-globular-maps.md) `f : G → H` equipped
-with a family of 2-cells
+[large reflexive globular types](structured-types.large-reflexive-globular-types.md)
+`G` and `H` is a [large globular map](structured-types.large-globular-maps.md)
+`f : G → H` equipped with a family of 2-cells
 
 ```text
   (x : G₀) → H₂ (f₁ (Gᵣ x)) (Hᵣ (f₀ x))
 ```
 
 from the image of the reflexivity cell at `x` in `G` to the reflexivity cell at
-`f₀ x`, such that the [globular map](structured-types.globular-maps.md) `f' : G' x y → H' (f₀ x) (f₀ y)` is [lax reflexive](structured-types.lax-reflexive-globular-maps.md).
+`f₀ x`, such that the [globular map](structured-types.globular-maps.md)
+`f' : G' x y → H' (f₀ x) (f₀ y)` is
+[lax reflexive](structured-types.lax-reflexive-globular-maps.md).
 
 ### Lack of composition for lax reflexive globular maps
 
-Note that the large lax reflexive globular maps lack composition. For the composition of `g` and `f` to exist, there should be a `2`-cell from `g (f (refl G x))` to `refl K (g (f x))`, we need to compose the 2-cell that `g` preserves reflexivity with the action of `g` on the 2-cell that `f` preserves reflexivity. However, since the reflexive globular type `G` is not assumed to be [transitive](structured-types.transitive-globular-types.md), it might lack such instances of the compositions.
+Note that the large lax reflexive globular maps lack composition. For the
+composition of `g` and `f` to exist, there should be a `2`-cell from
+`g (f (refl G x))` to `refl K (g (f x))`, we need to compose the 2-cell that `g`
+preserves reflexivity with the action of `g` on the 2-cell that `f` preserves
+reflexivity. However, since the reflexive globular type `G` is not assumed to be
+[transitive](structured-types.transitive-globular-types.md), it might lack such
+instances of the compositions.
 
 ### Lax versus colax
 
-The notion of [large colax reflexive globular map](structured-types.large-lax-reflexive-globular-maps.md) is almost the same, except with the direction of the 2-cell reversed. In general, the direction of lax coherence cells is determined by applying the morphism componentwise first, and then the operations, while the direction of colax coherence cells is determined by first applying the operations and then the morphism.
+The notion of
+[large colax reflexive globular map](structured-types.large-lax-reflexive-globular-maps.md)
+is almost the same, except with the direction of the 2-cell reversed. In
+general, the direction of lax coherence cells is determined by applying the
+morphism componentwise first, and then the operations, while the direction of
+colax coherence cells is determined by first applying the operations and then
+the morphism.
 
 ## Definitions
 

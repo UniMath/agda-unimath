@@ -26,15 +26,22 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-Consider a [morphism](graph-theory.morphisms-directed-graphs.md) `f : H → G` of [directed graphs](graph-theory.directed-graphs.md). The {{#concept "fiber" Disambiguation="morphisms of directed graphs"}} of `f` is the [dependent directed graph](graph-theory.dependent-directed-graphs.md) `fib_f` over `G` given by
+Consider a [morphism](graph-theory.morphisms-directed-graphs.md) `f : H → G` of
+[directed graphs](graph-theory.directed-graphs.md). The
+{{#concept "fiber" Disambiguation="morphisms of directed graphs"}} of `f` is the
+[dependent directed graph](graph-theory.dependent-directed-graphs.md) `fib_f`
+over `G` given by
 
 ```text
   (fib_f)₀ x := fib f₀
   (fib_f)₁ e (y , refl) (y' , refl) := fib f₁ e.
 ```
 
-_Note:_ The fiber of a morphism of directed graphs should not be confused with the [fiber of a directed graph at a vertex](graph-theory.fibers-directed-graphs.md), which are the [directed trees](trees.directed-trees.md)
-of which the type of nodes consists of vertices `y` equipped with a
+_Note:_ The fiber of a morphism of directed graphs should not be confused with
+the
+[fiber of a directed graph at a vertex](graph-theory.fibers-directed-graphs.md),
+which are the [directed trees](trees.directed-trees.md) of which the type of
+nodes consists of vertices `y` equipped with a
 [walk](graph-theory.walks-directed-graphs.md) `w` from `y` to `x`, and the type
 of edges from `(y , w)` to `(z , v)` consist of an edge `e : y → z` such that
 `w ＝ cons e v`.
@@ -168,7 +175,7 @@ module _
     equiv-fiber-pr1 _
 
   vertex-compute-fiber-pr1-Σ-Directed-Graph :
-    {x : vertex-Directed-Graph G} → 
+    {x : vertex-Directed-Graph G} →
     vertex-fiber-pr1-Σ-Directed-Graph x →
     vertex-Dependent-Directed-Graph H x
   vertex-compute-fiber-pr1-Σ-Directed-Graph =
