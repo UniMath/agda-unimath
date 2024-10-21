@@ -35,7 +35,7 @@ module _
   is-binary-upper-bound-Poset-Prop :
     (x y z : type-Poset P) → Prop l2
   is-binary-upper-bound-Poset-Prop x y z =
-    product-Prop (leq-Poset-Prop P x z) (leq-Poset-Prop P y z)
+    product-Prop (leq-prop-Poset P x z) (leq-prop-Poset P y z)
 
   is-binary-upper-bound-Poset :
     (x y z : type-Poset P) → UU l2
@@ -70,7 +70,7 @@ module _
     {l : Level} {I : UU l} → (I → type-Poset P) → type-Poset P →
     Prop (l2 ⊔ l)
   is-upper-bound-family-of-elements-Poset-Prop {l} {I} f z =
-    Π-Prop I (λ i → leq-Poset-Prop P (f i) z)
+    Π-Prop I (λ i → leq-prop-Poset P (f i) z)
 
   is-upper-bound-family-of-elements-Poset :
     {l : Level} {I : UU l} → (I → type-Poset P) → type-Poset P →

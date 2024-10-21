@@ -61,7 +61,7 @@ module _
   type-Lattice = type-Poset poset-Lattice
 
   leq-lattice-Prop : (x y : type-Lattice) → Prop l2
-  leq-lattice-Prop = leq-Poset-Prop poset-Lattice
+  leq-lattice-Prop = leq-prop-Poset poset-Lattice
 
   leq-Lattice : (x y : type-Lattice) → UU l2
   leq-Lattice = leq-Poset poset-Lattice

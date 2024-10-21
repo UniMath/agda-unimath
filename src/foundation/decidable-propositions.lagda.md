@@ -114,8 +114,7 @@ module _
       is-retraction-map-inv-equiv-bool-Decidable-Prop'
 
   equiv-bool-Decidable-Prop' :
-    ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q)))) ≃
-    bool
+    ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q)))) ≃ bool
   pr1 equiv-bool-Decidable-Prop' = map-equiv-bool-Decidable-Prop'
   pr2 equiv-bool-Decidable-Prop' = is-equiv-map-equiv-bool-Decidable-Prop'
 

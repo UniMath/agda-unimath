@@ -228,7 +228,7 @@ module _
 
   suplattice-Large-Suplattice :
     (l1 l2 : Level) →
-    Suplattice (α (γ ⊔ l1 ⊔ l2)) (β (γ ⊔ l1 ⊔ l2) (γ ⊔ l1 ⊔ l2)) (l1)
+    Suplattice (α (γ ⊔ l1 ⊔ l2)) (β (γ ⊔ l1 ⊔ l2) (γ ⊔ l1 ⊔ l2)) l1
   pr1 (suplattice-Large-Suplattice l1 l2) =
     poset-Large-Suplattice (γ ⊔ l1 ⊔ l2)
   pr2 (suplattice-Large-Suplattice l1 l2) =
