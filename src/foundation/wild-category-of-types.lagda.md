@@ -11,6 +11,7 @@ module foundation.wild-category-of-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.globular-type-of-functions
 open import foundation.homotopies
 open import foundation.isomorphisms-of-sets
 open import foundation.sets
@@ -42,75 +43,10 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 
 The
 {{#concept "wild category of types" Agda=Type-Noncoherent-Large-Wild-Higher-Precategory}}
-consists of types and functions and homotopies.
+consists of types and [functions](foundation.dependent-function-types.md) and
+[homotopies](foundation-core.homotopies.md).
 
 ## Definitions
-
-### The globular type of dependent function types
-
-```agda
-dependent-function-type-Globular-Type :
-  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) →
-  Globular-Type (l1 ⊔ l2) (l1 ⊔ l2)
-0-cell-Globular-Type (dependent-function-type-Globular-Type A B) =
-  (x : A) → B x
-1-cell-globular-type-Globular-Type
-  ( dependent-function-type-Globular-Type A B) f g =
-  dependent-function-type-Globular-Type A (eq-value f g)
-
-globular-structure-Π :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  globular-structure (l1 ⊔ l2) ((x : A) → B x)
-globular-structure-Π {A = A} {B = B} =
-  globular-structure-0-cell-Globular-Type
-    ( dependent-function-type-Globular-Type A B)
-
-is-reflexive-dependent-function-type-Globular-Type :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-reflexive-Globular-Type (dependent-function-type-Globular-Type A B)
-is-reflexive-1-cell-is-reflexive-Globular-Type
-  is-reflexive-dependent-function-type-Globular-Type f =
-  refl-htpy
-is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
-  is-reflexive-dependent-function-type-Globular-Type =
-  is-reflexive-dependent-function-type-Globular-Type
-
-is-transitive-dependent-function-type-Globular-Type :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-transitive-Globular-Type (dependent-function-type-Globular-Type A B)
-comp-1-cell-is-transitive-Globular-Type
-  is-transitive-dependent-function-type-Globular-Type K H =
-  H ∙h K
-is-transitive-1-cell-globular-type-is-transitive-Globular-Type
-  is-transitive-dependent-function-type-Globular-Type =
-  is-transitive-dependent-function-type-Globular-Type
-```
-
-### The globular type of function types
-
-```agda
-function-type-Globular-Type :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  Globular-Type (l1 ⊔ l2) (l1 ⊔ l2)
-function-type-Globular-Type A B =
-  dependent-function-type-Globular-Type A (λ _ → B)
-
-globular-structure-function-type :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → globular-structure (l1 ⊔ l2) (A → B)
-globular-structure-function-type = globular-structure-Π
-
-is-reflexive-function-type-Globular-Type :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-reflexive-Globular-Type (function-type-Globular-Type A B)
-is-reflexive-function-type-Globular-Type {l1} {l2} {A} {B} =
-  is-reflexive-dependent-function-type-Globular-Type
-
-is-transitive-function-type-Globular-Type :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-transitive-Globular-Type (function-type-Globular-Type A B)
-is-transitive-function-type-Globular-Type =
-  is-transitive-dependent-function-type-Globular-Type
-```
 
 ### The large globular type of types
 
@@ -146,6 +82,14 @@ comp-1-cell-is-transitive-Large-Globular-Type
 is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type
   is-transitive-Type-Large-Globular-Type =
   is-transitive-function-type-Globular-Type
+
+Type-Large-Transitive-Globular-Type : Large-Transitive-Globular-Type lsuc (_⊔_)
+large-globular-type-Large-Transitive-Globular-Type
+  Type-Large-Transitive-Globular-Type =
+  Type-Large-Globular-Type
+is-transitive-Large-Transitive-Globular-Type
+  Type-Large-Transitive-Globular-Type =
+  is-transitive-Type-Large-Globular-Type
 ```
 
 ### The noncoherent large wild higher precategory of types

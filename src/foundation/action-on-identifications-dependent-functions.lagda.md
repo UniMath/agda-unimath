@@ -43,6 +43,10 @@ apd :
 apd f refl = refl
 ```
 
+## Properties
+
+### The action on identifications of dependent functions over dependent functions
+
 ## See also
 
 - [Action of functions on identifications](foundation.action-on-identifications-functions.md)

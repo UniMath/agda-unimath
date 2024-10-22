@@ -8,6 +8,7 @@ module graph-theory.dependent-reflexive-graphs where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.universe-levels
 
 open import graph-theory.dependent-directed-graphs
@@ -86,6 +87,27 @@ module _
     {x : vertex-Reflexive-Graph A} (y : vertex-Dependent-Reflexive-Graph x) →
     edge-Dependent-Reflexive-Graph (refl-Reflexive-Graph A x) y y
   refl-Dependent-Reflexive-Graph = pr2 B _
+```
+
+### An equivalent definition of dependent reflexive graphs
+
+The second definition of dependent reflexive graphs is more closely equivalent to the concept of morphisms into the [universal reflexive graph](graph-theory.universal-reflexive-graph.md).
+
+```agda
+Dependent-Reflexive-Graph' :
+  {l1 l2 : Level} (l3 l4 : Level) → Reflexive-Graph l1 l2 →
+  UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
+Dependent-Reflexive-Graph' l3 l4 G =
+  Σ ( Σ ( vertex-Reflexive-Graph G → Reflexive-Graph l3 l4)
+        ( λ H →
+          (x y : vertex-Reflexive-Graph G)
+          (e : edge-Reflexive-Graph G x y) →
+          vertex-Reflexive-Graph (H x) → vertex-Reflexive-Graph (H y) → UU l4))
+    ( λ (H₀ , H₁) →
+      (x : vertex-Reflexive-Graph G)
+      (u v : vertex-Reflexive-Graph (H₀ x)) →
+      H₁ x x (refl-Reflexive-Graph G x) u v ≃
+      edge-Reflexive-Graph (H₀ x) u v)
 ```
 
 ### Constant dependent reflexive graphs

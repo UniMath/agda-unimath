@@ -103,15 +103,15 @@ module _
   edge-equiv-Dependent-Directed-Graph :
     (e : equiv-Dependent-Directed-Graph) →
     {x x' : vertex-Directed-Graph G}
-    (a : edge-Directed-Graph G x x')
+    {a : edge-Directed-Graph G x x'}
     {y : vertex-Dependent-Directed-Graph H x}
     {y' : vertex-Dependent-Directed-Graph H x'} →
     edge-Dependent-Directed-Graph H a y y' →
     edge-Dependent-Directed-Graph K a
       ( vertex-equiv-Dependent-Directed-Graph e y)
       ( vertex-equiv-Dependent-Directed-Graph e y')
-  edge-equiv-Dependent-Directed-Graph e a =
-    map-equiv (edge-equiv-equiv-Dependent-Directed-Graph e a _ _)
+  edge-equiv-Dependent-Directed-Graph e =
+    map-equiv (edge-equiv-equiv-Dependent-Directed-Graph e _ _ _)
 ```
 
 ### The identity equivalence of a dependent directed graph
@@ -122,11 +122,11 @@ module _
   (H : Dependent-Directed-Graph l3 l4 G)
   where
 
-  equiv-vertex-id-equiv-Dependent-Directed-Graph :
+  vertex-equiv-id-equiv-Dependent-Directed-Graph :
     fam-equiv
       ( vertex-Dependent-Directed-Graph H)
       ( vertex-Dependent-Directed-Graph H)
-  equiv-vertex-id-equiv-Dependent-Directed-Graph x = id-equiv
+  vertex-equiv-id-equiv-Dependent-Directed-Graph x = id-equiv
 
   vertex-id-equiv-Dependent-Directed-Graph :
     {x : vertex-Directed-Graph G} →
@@ -148,7 +148,7 @@ module _
   id-equiv-Dependent-Directed-Graph :
     equiv-Dependent-Directed-Graph H H
   pr1 id-equiv-Dependent-Directed-Graph =
-    equiv-vertex-id-equiv-Dependent-Directed-Graph
+    vertex-equiv-id-equiv-Dependent-Directed-Graph
   pr2 id-equiv-Dependent-Directed-Graph _ _ =
     equiv-edge-id-equiv-Dependent-Directed-Graph
 ```
@@ -163,22 +163,23 @@ module _
   (H : Dependent-Directed-Graph l3 l4 G)
   where
 
-  is-torsorial-equiv-Dependent-Directed-Graph :
-    is-torsorial (equiv-Dependent-Directed-Graph {l5 = l3} {l6 = l4} H)
-  is-torsorial-equiv-Dependent-Directed-Graph =
-    is-torsorial-Eq-structure
-      ( is-torsorial-equiv-fam (vertex-Dependent-Directed-Graph H))
-      ( vertex-Dependent-Directed-Graph H , id-equiv-fam _)
-      ( is-torsorial-Eq-Π
-        ( λ x →
-          is-torsorial-Eq-Π
-            ( λ x' →
-              is-torsorial-Eq-Π
-                ( λ a →
-                  is-torsorial-Eq-Π
-                    ( λ y →
-                      is-torsorial-Eq-Π
-                        ( λ y' → is-torsorial-equiv _))))))
+  abstract
+    is-torsorial-equiv-Dependent-Directed-Graph :
+      is-torsorial (equiv-Dependent-Directed-Graph {l5 = l3} {l6 = l4} H)
+    is-torsorial-equiv-Dependent-Directed-Graph =
+      is-torsorial-Eq-structure
+        ( is-torsorial-equiv-fam (vertex-Dependent-Directed-Graph H))
+        ( vertex-Dependent-Directed-Graph H , id-equiv-fam _)
+        ( is-torsorial-Eq-Π
+          ( λ x →
+            is-torsorial-Eq-Π
+              ( λ x' →
+                is-torsorial-Eq-Π
+                  ( λ a →
+                    is-torsorial-Eq-Π
+                      ( λ y →
+                        is-torsorial-Eq-Π
+                          ( λ y' → is-torsorial-equiv _))))))
 
   equiv-eq-Dependent-Directed-Graph :
     (K : Dependent-Directed-Graph l3 l4 G) →
@@ -186,13 +187,14 @@ module _
   equiv-eq-Dependent-Directed-Graph K refl =
     id-equiv-Dependent-Directed-Graph H
 
-  is-equiv-equiv-eq-Dependent-Directed-Graph :
-    (K : Dependent-Directed-Graph l3 l4 G) →
-    is-equiv (equiv-eq-Dependent-Directed-Graph K)
-  is-equiv-equiv-eq-Dependent-Directed-Graph =
-    fundamental-theorem-id
-      is-torsorial-equiv-Dependent-Directed-Graph
-      equiv-eq-Dependent-Directed-Graph
+  abstract
+    is-equiv-equiv-eq-Dependent-Directed-Graph :
+      (K : Dependent-Directed-Graph l3 l4 G) →
+      is-equiv (equiv-eq-Dependent-Directed-Graph K)
+    is-equiv-equiv-eq-Dependent-Directed-Graph =
+      fundamental-theorem-id
+        is-torsorial-equiv-Dependent-Directed-Graph
+        equiv-eq-Dependent-Directed-Graph
 
   extensionality-Dependent-Directed-Graph :
     (K : Dependent-Directed-Graph l3 l4 G) →

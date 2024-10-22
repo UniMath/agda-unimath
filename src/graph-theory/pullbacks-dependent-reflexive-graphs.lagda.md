@@ -79,4 +79,11 @@ module _
       ( λ u → edge-Dependent-Reflexive-Graph B u y y)
       ( inv (refl-hom-Reflexive-Graph C A f x))
       ( refl-Dependent-Reflexive-Graph B y)
+
+  pullback-Dependent-Reflexive-Graph :
+    Dependent-Reflexive-Graph l5 l6 C
+  pr1 pullback-Dependent-Reflexive-Graph =
+    dependent-directed-graph-pullback-Dependent-Reflexive-Graph
+  pr2 pullback-Dependent-Reflexive-Graph _ =
+    refl-pullback-Dependent-Reflexive-Graph
 ```

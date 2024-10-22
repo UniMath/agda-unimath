@@ -302,3 +302,7 @@ module _
         ( inv-dependent-identification B p p'))
   distributive-inv-concat-dependent-identification refl refl refl refl = refl
 ```
+
+## See also
+
+- [Doubly dependent identifications](foundation.doubly-dependent-identifications.md)
