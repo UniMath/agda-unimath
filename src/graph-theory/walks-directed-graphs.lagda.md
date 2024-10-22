@@ -650,7 +650,7 @@ module _
   square-compute-total-walk-of-length-equiv-Directed-Graph
     x y (succ-ℕ n , z , f , w) =
     ap
-      ( cons-walk-Directed-Graph (edge-equiv-Directed-Graph G H e x z f))
+      ( cons-walk-Directed-Graph (edge-equiv-Directed-Graph G H e f))
       ( square-compute-total-walk-of-length-equiv-Directed-Graph z y (n , w))
 
   is-equiv-walk-equiv-Directed-Graph :

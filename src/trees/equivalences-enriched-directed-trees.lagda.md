@@ -165,7 +165,7 @@ module _
       ( equiv-directed-tree-equiv-Enriched-Directed-Tree)
 
   edge-equiv-Enriched-Directed-Tree :
-    (x y : node-Enriched-Directed-Tree A B S) →
+    {x y : node-Enriched-Directed-Tree A B S} →
     edge-Enriched-Directed-Tree A B S x y →
     edge-Enriched-Directed-Tree A B T
       ( node-equiv-Enriched-Directed-Tree x)
@@ -326,7 +326,7 @@ module _
       ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
 
   edge-comp-equiv-Enriched-Directed-Tree :
-    (x y : node-Enriched-Directed-Tree A B R) →
+    {x y : node-Enriched-Directed-Tree A B R} →
     edge-Enriched-Directed-Tree A B R x y →
     edge-Enriched-Directed-Tree A B T
       ( node-comp-equiv-Enriched-Directed-Tree x)
