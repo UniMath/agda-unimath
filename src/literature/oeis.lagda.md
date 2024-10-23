@@ -10,7 +10,6 @@ module literature.oeis where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.ackermann-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -172,8 +171,8 @@ open import elementary-number-theory.collatz-bijection using
 ### [A046859](https://oeis.org/A046859) The main diagonal of the Ackermann–Péter function
 
 ```agda
-A046859 : ℕ → ℕ
-A046859 n = ackermann n n
+open import elementary-number-theory.ackermann-function using
+  ( simplified-ackermann-ℕ)
 ```
 
 ## References

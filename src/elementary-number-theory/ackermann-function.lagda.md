@@ -20,9 +20,21 @@ is a fast growing binary operation on the natural numbers.
 
 ## Definition
 
+### The Ackermann-Péter function
+
 ```agda
-ackermann : ℕ → ℕ → ℕ
-ackermann zero-ℕ n = succ-ℕ n
-ackermann (succ-ℕ m) zero-ℕ = ackermann m 1
-ackermann (succ-ℕ m) (succ-ℕ n) = ackermann m (ackermann (succ-ℕ m) n)
+ackermann-péter-ℕ : ℕ → ℕ → ℕ
+ackermann-péter-ℕ zero-ℕ n =
+  succ-ℕ n
+ackermann-péter-ℕ (succ-ℕ m) zero-ℕ =
+  ackermann-péter-ℕ m 1
+ackermann-péter-ℕ (succ-ℕ m) (succ-ℕ n) =
+  ackermann-péter-ℕ m (ackermann-péter-ℕ (succ-ℕ m) n)
+```
+
+### The simplified Ackermann function
+
+```agda
+simplified-ackermann-ℕ : ℕ → ℕ
+simplified-ackermann-ℕ n = ackermann-péter-ℕ n n
 ```
