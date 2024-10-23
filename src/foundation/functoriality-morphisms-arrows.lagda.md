@@ -226,7 +226,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l1' l2' l3' l4'  : Level}
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
   (f : A → B) (g : X → Y) (f' : A' → B') (g' : X' → Y')
