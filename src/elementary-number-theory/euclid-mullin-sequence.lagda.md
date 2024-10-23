@@ -8,9 +8,9 @@ module elementary-number-theory.euclid-mullin-sequence where
 
 ```agda
 open import elementary-number-theory.fundamental-theorem-of-arithmetic
-open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.products-of-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 
 open import foundation.dependent-pair-types
@@ -24,13 +24,21 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The {{#concept "Euclid-Mullin sequence" Agda=euclid-mullin-ℕ WDID=Q5406148 WD="Euclid-Mullin sequence"}} is a [sequence](foundation.sequences.md) of [natural numbers](elementary-number-theory.natural-numbers.md), which is defined by [strong induction](elementary-number-theory.strong-induction-natural-numbers.md) by
+The
+{{#concept "Euclid-Mullin sequence" Agda=euclid-mullin-ℕ WDID=Q5406148 WD="Euclid-Mullin sequence"}}
+is a [sequence](foundation.sequences.md) of
+[natural numbers](elementary-number-theory.natural-numbers.md), which is defined
+by
+[strong induction](elementary-number-theory.strong-induction-natural-numbers.md)
+by
 
 ```text
   euclid-mullin-ℕ 0 := 2,
 ```
 
-and `euclid-mullin-ℕ (n + 1)` is the least [prime factor](elementary-number-theory.prime numbers.md) of the product of all previous entries in the Euclid-Mullin sequence.
+and `euclid-mullin-ℕ (n + 1)` is the least [prime
+factor](elementary-number-theory.prime numbers.md) of the product of all
+previous entries in the Euclid-Mullin sequence.
 
 ## Definitions
 
@@ -45,7 +53,8 @@ euclid-mullin-ℕ =
     ( 2)
     ( λ n f →
       nat-least-nontrivial-divisor-ℕ'
-        ( succ-ℕ (Π-ℕ (succ-ℕ n) (λ i → euclid-mullin-ℕ (nat-Fin (succ-ℕ n) i)))))
+        ( succ-ℕ
+          ( Π-ℕ (succ-ℕ n) (λ i → euclid-mullin-ℕ (nat-Fin (succ-ℕ n) i)))))
 
 compute-euclid-mullin-0-ℕ : euclid-mullin-ℕ 0 ＝ 2
 compute-euclid-mullin-0-ℕ = refl
@@ -57,7 +66,8 @@ compute-euclid-mullin-2-ℕ : euclid-mullin-ℕ 2 ＝ 7
 compute-euclid-mullin-2-ℕ = refl
 ```
 
-The following computations also type-check, but take a very long time to terminate.
+The following computations also type-check, but take a very long time to
+terminate.
 
 ```text
 compute-euclid-mullin-3-ℕ : euclid-mullin-ℕ 3 ＝ 43
