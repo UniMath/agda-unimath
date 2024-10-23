@@ -38,7 +38,7 @@ by
 
 and `euclid-mullin-ℕ (n + 1)` is the least [prime
 factor](elementary-number-theory.prime numbers.md) of the product of all
-previous entries in the Euclid-Mullin sequence.
+previous entries in the Euclid–Mullin sequence plus one.
 
 ## Definitions
 
