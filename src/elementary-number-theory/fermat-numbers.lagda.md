@@ -28,7 +28,7 @@ are numbers of the form $F_n := 2^{2^n}+1$. The first five Fermat numbers are
 ```
 
 The sequence of Fermat numbers is listed as A000215 in the
-[Online Encyclopedia of Integer Sequences](online-encyclopedia-of-integer-sequences.oeis.md).
+[Online Encyclopedia of Integer Sequences](literature.oeis.md).
 
 Alternatively, the Fermat numbers can be defined with
 [strong induction](elementary-number-theory.strong-induction-natural-numbers.md)
