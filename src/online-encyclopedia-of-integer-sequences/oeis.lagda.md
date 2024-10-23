@@ -140,7 +140,7 @@ A000720 : ℕ → ℕ
 A000720 = prime-counting-ℕ
 ```
 
-### [A000945](https://oeis.org/A000945) The Euclid-Mullin sequence
+### [A000945](https://oeis.org/A000945) The Euclid–Mullin sequence
 
 ```agda
 A000945 : ℕ → ℕ
