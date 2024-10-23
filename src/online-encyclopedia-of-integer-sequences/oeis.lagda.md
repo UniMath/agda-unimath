@@ -11,6 +11,7 @@ open import elementary-number-theory.ackermann-function
 open import elementary-number-theory.catalan-numbers
 open import elementary-number-theory.cofibonacci
 open import elementary-number-theory.collatz-bijection
+open import elementary-number-theory.euclid-mullin-sequence
 open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.factorials
@@ -137,6 +138,13 @@ A000244 = exp-ℕ 3
 ```agda
 A000720 : ℕ → ℕ
 A000720 = prime-counting-ℕ
+```
+
+### [A000945](https://oeis.org/A000945) The Euclid–Mullin sequence
+
+```agda
+A000945 : ℕ → ℕ
+A000945 = euclid-mullin-ℕ
 ```
 
 ### [A001175](https://oeis.org/A001175) Pisano periods
