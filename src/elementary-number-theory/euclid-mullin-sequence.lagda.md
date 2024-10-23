@@ -1,4 +1,4 @@
-# The Euclid-Mullin sequence
+# The Euclid–Mullin sequence
 
 ```agda
 module elementary-number-theory.euclid-mullin-sequence where
