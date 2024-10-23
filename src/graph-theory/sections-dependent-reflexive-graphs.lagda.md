@@ -34,8 +34,9 @@ open import graph-theory.sections-dependent-directed-graphs
 
 ## Idea
 
-Consider a [dependent reflexive graph](graph-theory.dependent-reflexive-graphs.md)
-`B` over a [reflexive graph](graph-theory.reflexive-graphs.md) `A`. A
+Consider a
+[dependent reflexive graph](graph-theory.dependent-reflexive-graphs.md) `B` over
+a [reflexive graph](graph-theory.reflexive-graphs.md) `A`. A
 {{#concept "section" Disambiguation="dependent reflexive graph" Agda=section-Dependent-Reflexive-Graph}}
 `f` of `B` consists of
 
@@ -185,7 +186,7 @@ module _
                 ( H₀ x)))
             ( refl-section-Dependent-Reflexive-Graph B f x))
           ( H₁ (refl-Reflexive-Graph A x))
-          ( doubly-dependent-identification-refl-Reflexive-Relation
+          ( binary-dependent-identification-refl-Reflexive-Relation
             ( edge-Dependent-Reflexive-Graph B (refl-Reflexive-Graph A x) ,
               refl-Dependent-Reflexive-Graph B)
             ( H₀ x))

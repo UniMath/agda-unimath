@@ -85,7 +85,7 @@ module _
         ( λ y → edge-hom-Directed-Graph)
 ```
 
-### Composition of morphisms graphs
+### Composition of morphisms of directed graphs
 
 ```agda
 module _
@@ -117,7 +117,7 @@ module _
   pr2 (comp-hom-Directed-Graph g f) = edge-comp-hom-Directed-Graph g f
 ```
 
-### Identity morphisms graphs
+### Identity morphisms of directed graphs
 
 ```agda
 module _

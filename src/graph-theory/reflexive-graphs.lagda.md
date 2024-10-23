@@ -8,7 +8,7 @@ module graph-theory.reflexive-graphs where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.doubly-dependent-identifications
+open import foundation.binary-dependent-identifications
 open import foundation.identity-types
 open import foundation.reflexive-relations
 open import foundation.universe-levels
@@ -53,13 +53,13 @@ module _
   pr1 reflexive-relation-Reflexive-Graph = edge-Reflexive-Graph
   pr2 reflexive-relation-Reflexive-Graph = refl-Reflexive-Graph
 
-  doubly-dependent-identification-refl-Reflexive-Graph :
+  binary-dependent-identification-refl-Reflexive-Graph :
     {x y : vertex-Reflexive-Graph} (p : x ＝ y) →
-    doubly-dependent-identification edge-Reflexive-Graph p p
+    binary-dependent-identification edge-Reflexive-Graph p p
       ( refl-Reflexive-Graph x)
       ( refl-Reflexive-Graph y)
-  doubly-dependent-identification-refl-Reflexive-Graph =
-    doubly-dependent-identification-refl-Reflexive-Relation
+  binary-dependent-identification-refl-Reflexive-Graph =
+    binary-dependent-identification-refl-Reflexive-Relation
       reflexive-relation-Reflexive-Graph
 ```
 
