@@ -293,6 +293,12 @@ least-nontrivial-divisor-ℕ n H =
 nat-least-nontrivial-divisor-ℕ : (n : ℕ) → le-ℕ 1 n → ℕ
 nat-least-nontrivial-divisor-ℕ n H = pr1 (least-nontrivial-divisor-ℕ n H)
 
+nat-least-nontrivial-divisor-ℕ' : ℕ → ℕ
+nat-least-nontrivial-divisor-ℕ' zero-ℕ = 0
+nat-least-nontrivial-divisor-ℕ' (succ-ℕ zero-ℕ) = 1
+nat-least-nontrivial-divisor-ℕ' (succ-ℕ (succ-ℕ n)) =
+  nat-least-nontrivial-divisor-ℕ (succ-ℕ (succ-ℕ n)) star
+
 le-one-least-nontrivial-divisor-ℕ :
   (n : ℕ) (H : le-ℕ 1 n) → le-ℕ 1 (nat-least-nontrivial-divisor-ℕ n H)
 le-one-least-nontrivial-divisor-ℕ n H =
