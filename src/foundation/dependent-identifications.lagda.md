@@ -305,4 +305,4 @@ module _
 
 ## See also
 
-- [Doubly dependent identifications](foundation.binary-dependent-identifications.md)
+- [Binary dependent identifications](foundation.binary-dependent-identifications.md)

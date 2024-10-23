@@ -29,7 +29,7 @@ from `c : C x y` to `c' : C x' y'` over `p` and `q` is a
 
 ## Definitions
 
-### Doubly dependent identifications
+### Binary dependent identifications
 
 ```agda
 module _
