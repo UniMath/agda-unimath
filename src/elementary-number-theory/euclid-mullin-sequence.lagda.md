@@ -25,7 +25,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The
-{{#concept "Euclid-Mullin sequence" Agda=euclid-mullin-ℕ WDID=Q5406148 WD="Euclid-Mullin sequence"}}
+{{#concept "Euclid–Mullin sequence" Agda=euclid-mullin-ℕ WDID=Q5406148 WD="Euclid-Mullin sequence"}}
 is a [sequence](foundation.sequences.md) of
 [natural numbers](elementary-number-theory.natural-numbers.md), which is defined
 by
