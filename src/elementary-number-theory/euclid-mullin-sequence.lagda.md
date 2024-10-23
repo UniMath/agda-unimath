@@ -42,7 +42,7 @@ previous entries in the Euclid-Mullin sequence.
 
 ## Definitions
 
-### The Euclid-Mullin sequence
+### The Euclid–Mullin sequence
 
 ```agda
 {-# TERMINATING #-}
