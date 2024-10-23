@@ -111,14 +111,14 @@ module _
   edge-equiv-Undirected-Graph f p =
     map-equiv (edge-equiv-equiv-Undirected-Graph f p)
 
-  equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph :
+  edge-equiv-standard-unordered-pair-vertices-equiv-Undirected-Graph :
     (e : equiv-Undirected-Graph) (x y : vertex-Undirected-Graph G) →
     edge-Undirected-Graph G (standard-unordered-pair x y) ≃
     edge-Undirected-Graph H
       ( standard-unordered-pair
         ( vertex-equiv-Undirected-Graph e x)
         ( vertex-equiv-Undirected-Graph e y))
-  equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y =
+  edge-equiv-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y =
     ( equiv-tr
       ( edge-Undirected-Graph H)
       ( standard-unordered-pair-vertices-equiv-Undirected-Graph e x y)) ∘e
@@ -133,7 +133,7 @@ module _
         ( vertex-equiv-Undirected-Graph e y))
   edge-standard-unordered-pair-vertices-equiv-Undirected-Graph e x y =
     map-equiv
-      ( equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph
+      ( edge-equiv-standard-unordered-pair-vertices-equiv-Undirected-Graph
           e x y)
 
   hom-equiv-Undirected-Graph :

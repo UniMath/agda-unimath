@@ -134,7 +134,7 @@ module _
     vertex-Dependent-Directed-Graph H x
   vertex-id-equiv-Dependent-Directed-Graph = id
 
-  equiv-edge-id-equiv-Dependent-Directed-Graph :
+  edge-equiv-id-equiv-Dependent-Directed-Graph :
     {x x' : vertex-Directed-Graph G}
     (a : edge-Directed-Graph G x x')
     (y : vertex-Dependent-Directed-Graph H x)
@@ -143,14 +143,14 @@ module _
     edge-Dependent-Directed-Graph H a
       ( vertex-id-equiv-Dependent-Directed-Graph y)
       ( vertex-id-equiv-Dependent-Directed-Graph y')
-  equiv-edge-id-equiv-Dependent-Directed-Graph a y y' = id-equiv
+  edge-equiv-id-equiv-Dependent-Directed-Graph a y y' = id-equiv
 
   id-equiv-Dependent-Directed-Graph :
     equiv-Dependent-Directed-Graph H H
   pr1 id-equiv-Dependent-Directed-Graph =
     vertex-equiv-id-equiv-Dependent-Directed-Graph
   pr2 id-equiv-Dependent-Directed-Graph _ _ =
-    equiv-edge-id-equiv-Dependent-Directed-Graph
+    edge-equiv-id-equiv-Dependent-Directed-Graph
 ```
 
 ## Properties

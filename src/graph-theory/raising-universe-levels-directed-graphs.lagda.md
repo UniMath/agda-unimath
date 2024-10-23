@@ -36,28 +36,28 @@ module _
   vertex-raise-Directed-Graph : UU (l1 ⊔ l3)
   vertex-raise-Directed-Graph = raise l3 (vertex-Directed-Graph G)
 
-  equiv-vertex-compute-raise-Directed-Graph :
+  vertex-equiv-compute-raise-Directed-Graph :
     vertex-Directed-Graph G ≃ vertex-raise-Directed-Graph
-  equiv-vertex-compute-raise-Directed-Graph =
+  vertex-equiv-compute-raise-Directed-Graph =
     compute-raise l3 (vertex-Directed-Graph G)
 
   vertex-compute-raise-Directed-Graph :
     vertex-Directed-Graph G → vertex-raise-Directed-Graph
   vertex-compute-raise-Directed-Graph =
-    map-equiv equiv-vertex-compute-raise-Directed-Graph
+    map-equiv vertex-equiv-compute-raise-Directed-Graph
 
   edge-raise-Directed-Graph :
     (x y : vertex-raise-Directed-Graph) → UU (l2 ⊔ l4)
   edge-raise-Directed-Graph (map-raise x) (map-raise y) =
     raise l4 (edge-Directed-Graph G x y)
 
-  equiv-edge-compute-raise-Directed-Graph :
+  edge-equiv-compute-raise-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
     edge-Directed-Graph G x y ≃
     edge-raise-Directed-Graph
       ( vertex-compute-raise-Directed-Graph x)
       ( vertex-compute-raise-Directed-Graph y)
-  equiv-edge-compute-raise-Directed-Graph x y =
+  edge-equiv-compute-raise-Directed-Graph x y =
     compute-raise l4 (edge-Directed-Graph G x y)
 
   edge-compute-raise-Directed-Graph :
@@ -67,7 +67,7 @@ module _
       ( vertex-compute-raise-Directed-Graph x)
       ( vertex-compute-raise-Directed-Graph y)
   edge-compute-raise-Directed-Graph x y =
-    map-equiv (equiv-edge-compute-raise-Directed-Graph x y)
+    map-equiv (edge-equiv-compute-raise-Directed-Graph x y)
 
   raise-Directed-Graph : Directed-Graph (l1 ⊔ l3) (l2 ⊔ l4)
   pr1 raise-Directed-Graph = vertex-raise-Directed-Graph
@@ -75,8 +75,8 @@ module _
 
   compute-raise-Directed-Graph :
     equiv-Directed-Graph G raise-Directed-Graph
-  pr1 compute-raise-Directed-Graph = equiv-vertex-compute-raise-Directed-Graph
-  pr2 compute-raise-Directed-Graph = equiv-edge-compute-raise-Directed-Graph
+  pr1 compute-raise-Directed-Graph = vertex-equiv-compute-raise-Directed-Graph
+  pr2 compute-raise-Directed-Graph = edge-equiv-compute-raise-Directed-Graph
 
   walk-raise-Directed-Graph :
     (x y : vertex-raise-Directed-Graph) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)

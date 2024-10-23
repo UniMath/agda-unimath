@@ -38,8 +38,8 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-An {{#concept "equivalence of directed graphs" Agda=equiv-Directed-Graph}} from a
-[directed graph](graph-theory.directed-graphs.md) `(V,E)` to a directed graph
+An {{#concept "equivalence of directed graphs" Agda=equiv-Directed-Graph}} from
+a [directed graph](graph-theory.directed-graphs.md) `(V,E)` to a directed graph
 `(V',E')` consists of an [equivalence](foundation-core.equivalences.md)
 `e : V ≃ V'` of vertices, and a family of equivalences `E x y ≃ E' (e x) (e y)`
 of edges indexed by `x y : V`.
@@ -186,24 +186,24 @@ module _
   (g : equiv-Directed-Graph H K) (f : equiv-Directed-Graph G H)
   where
 
-  equiv-vertex-comp-equiv-Directed-Graph :
+  vertex-equiv-comp-equiv-Directed-Graph :
     vertex-Directed-Graph G ≃ vertex-Directed-Graph K
-  equiv-vertex-comp-equiv-Directed-Graph =
+  vertex-equiv-comp-equiv-Directed-Graph =
     ( vertex-equiv-equiv-Directed-Graph H K g) ∘e
     ( vertex-equiv-equiv-Directed-Graph G H f)
 
   vertex-comp-equiv-Directed-Graph :
     vertex-Directed-Graph G → vertex-Directed-Graph K
   vertex-comp-equiv-Directed-Graph =
-    map-equiv equiv-vertex-comp-equiv-Directed-Graph
+    map-equiv vertex-equiv-comp-equiv-Directed-Graph
 
-  equiv-edge-comp-equiv-Directed-Graph :
+  edge-equiv-comp-equiv-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
     edge-Directed-Graph G x y ≃
     edge-Directed-Graph K
       ( vertex-comp-equiv-Directed-Graph x)
       ( vertex-comp-equiv-Directed-Graph y)
-  equiv-edge-comp-equiv-Directed-Graph x y =
+  edge-equiv-comp-equiv-Directed-Graph x y =
     ( edge-equiv-equiv-Directed-Graph H K g
       ( vertex-equiv-Directed-Graph G H f x)
       ( vertex-equiv-Directed-Graph G H f y)) ∘e
@@ -216,14 +216,14 @@ module _
       ( vertex-comp-equiv-Directed-Graph x)
       ( vertex-comp-equiv-Directed-Graph y)
   edge-comp-equiv-Directed-Graph x y =
-    map-equiv (equiv-edge-comp-equiv-Directed-Graph x y)
+    map-equiv (edge-equiv-comp-equiv-Directed-Graph x y)
 
   comp-equiv-Directed-Graph :
     equiv-Directed-Graph G K
   pr1 comp-equiv-Directed-Graph =
-    equiv-vertex-comp-equiv-Directed-Graph
+    vertex-equiv-comp-equiv-Directed-Graph
   pr2 comp-equiv-Directed-Graph =
-    equiv-edge-comp-equiv-Directed-Graph
+    edge-equiv-comp-equiv-Directed-Graph
 ```
 
 ### Homotopies of equivalences of directed graphs
@@ -349,9 +349,9 @@ module _
   (f : equiv-Directed-Graph G H)
   where
 
-  equiv-vertex-inv-equiv-Directed-Graph :
+  vertex-equiv-inv-equiv-Directed-Graph :
     vertex-Directed-Graph H ≃ vertex-Directed-Graph G
-  equiv-vertex-inv-equiv-Directed-Graph =
+  vertex-equiv-inv-equiv-Directed-Graph =
     inv-equiv (vertex-equiv-equiv-Directed-Graph G H f)
 
   vertex-inv-equiv-Directed-Graph :
@@ -371,18 +371,18 @@ module _
   is-retraction-vertex-inv-equiv-Directed-Graph =
     is-retraction-map-inv-equiv (vertex-equiv-equiv-Directed-Graph G H f)
 
-  is-equiv-vertex-inv-equiv-Directed-Graph :
+  is-vertex-equiv-inv-equiv-Directed-Graph :
     is-equiv vertex-inv-equiv-Directed-Graph
-  is-equiv-vertex-inv-equiv-Directed-Graph =
+  is-vertex-equiv-inv-equiv-Directed-Graph =
     is-equiv-map-inv-equiv (vertex-equiv-equiv-Directed-Graph G H f)
 
-  equiv-edge-inv-equiv-Directed-Graph :
+  edge-equiv-inv-equiv-Directed-Graph :
     (x y : vertex-Directed-Graph H) →
     edge-Directed-Graph H x y ≃
     edge-Directed-Graph G
       ( vertex-inv-equiv-Directed-Graph x)
       ( vertex-inv-equiv-Directed-Graph y)
-  equiv-edge-inv-equiv-Directed-Graph x y =
+  edge-equiv-inv-equiv-Directed-Graph x y =
     ( inv-equiv
       ( edge-equiv-equiv-Directed-Graph G H f
         ( vertex-inv-equiv-Directed-Graph x)
@@ -399,15 +399,15 @@ module _
       ( vertex-inv-equiv-Directed-Graph x)
       ( vertex-inv-equiv-Directed-Graph y)
   edge-inv-equiv-Directed-Graph =
-    map-equiv (equiv-edge-inv-equiv-Directed-Graph _ _)
+    map-equiv (edge-equiv-inv-equiv-Directed-Graph _ _)
 
   hom-inv-equiv-Directed-Graph : hom-Directed-Graph H G
   pr1 hom-inv-equiv-Directed-Graph = vertex-inv-equiv-Directed-Graph
   pr2 hom-inv-equiv-Directed-Graph _ _ = edge-inv-equiv-Directed-Graph
 
   inv-equiv-Directed-Graph : equiv-Directed-Graph H G
-  pr1 inv-equiv-Directed-Graph = equiv-vertex-inv-equiv-Directed-Graph
-  pr2 inv-equiv-Directed-Graph = equiv-edge-inv-equiv-Directed-Graph
+  pr1 inv-equiv-Directed-Graph = vertex-equiv-inv-equiv-Directed-Graph
+  pr2 inv-equiv-Directed-Graph = edge-equiv-inv-equiv-Directed-Graph
 
   vertex-is-section-inv-equiv-Directed-Graph :
     ( vertex-equiv-Directed-Graph G H f ∘ vertex-inv-equiv-Directed-Graph) ~ id

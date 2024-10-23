@@ -61,7 +61,7 @@ module _
         edge-Undirected-Graph H
           ( standard-unordered-pair (vertex-equiv-Undirected-Graph G H e x) y))
       ( vertex-equiv-equiv-Undirected-Graph G H e)
-      ( equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph
+      ( edge-equiv-standard-unordered-pair-vertices-equiv-Undirected-Graph
           G H e x)
 
   neighbor-equiv-Undirected-Graph :

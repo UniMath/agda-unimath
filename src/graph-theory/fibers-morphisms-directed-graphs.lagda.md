@@ -167,11 +167,11 @@ module _
   edge-fiber-pr1-Σ-Directed-Graph =
     edge-Dependent-Directed-Graph fiber-pr1-Σ-Directed-Graph
 
-  equiv-vertex-compute-fiber-pr1-Σ-Directed-Graph :
+  vertex-equiv-compute-fiber-pr1-Σ-Directed-Graph :
     fam-equiv
       ( vertex-fiber-pr1-Σ-Directed-Graph)
       ( vertex-Dependent-Directed-Graph H)
-  equiv-vertex-compute-fiber-pr1-Σ-Directed-Graph =
+  vertex-equiv-compute-fiber-pr1-Σ-Directed-Graph =
     equiv-fiber-pr1 _
 
   vertex-compute-fiber-pr1-Σ-Directed-Graph :
@@ -181,7 +181,7 @@ module _
   vertex-compute-fiber-pr1-Σ-Directed-Graph =
     map-fiber-pr1 _ _
 
-  equiv-edge-compute-fiber-pr1-Σ-Directed-Graph :
+  edge-equiv-compute-fiber-pr1-Σ-Directed-Graph :
     {x x' : vertex-Directed-Graph G}
     (a : edge-Directed-Graph G x x') →
     (y : vertex-fiber-pr1-Σ-Directed-Graph x) →
@@ -190,13 +190,25 @@ module _
     edge-Dependent-Directed-Graph H a
       ( vertex-compute-fiber-pr1-Σ-Directed-Graph y)
       ( vertex-compute-fiber-pr1-Σ-Directed-Graph y')
-  equiv-edge-compute-fiber-pr1-Σ-Directed-Graph a (y , refl) (y' , refl) =
+  edge-equiv-compute-fiber-pr1-Σ-Directed-Graph a (y , refl) (y' , refl) =
     equiv-fiber-pr1 _ _
+
+  edge-compute-fiber-pr1-Σ-Directed-Graph :
+    {x x' : vertex-Directed-Graph G}
+    {a : edge-Directed-Graph G x x'} →
+    {y : vertex-fiber-pr1-Σ-Directed-Graph x} →
+    {y' : vertex-fiber-pr1-Σ-Directed-Graph x'} →
+    edge-fiber-pr1-Σ-Directed-Graph a y y' →
+    edge-Dependent-Directed-Graph H a
+      ( vertex-compute-fiber-pr1-Σ-Directed-Graph y)
+      ( vertex-compute-fiber-pr1-Σ-Directed-Graph y')
+  edge-compute-fiber-pr1-Σ-Directed-Graph =
+    map-equiv (edge-equiv-compute-fiber-pr1-Σ-Directed-Graph _ _ _)
 
   compute-fiber-pr1-Σ-Directed-Graph :
     equiv-Dependent-Directed-Graph fiber-pr1-Σ-Directed-Graph H
   pr1 compute-fiber-pr1-Σ-Directed-Graph =
-    equiv-vertex-compute-fiber-pr1-Σ-Directed-Graph
+    vertex-equiv-compute-fiber-pr1-Σ-Directed-Graph
   pr2 compute-fiber-pr1-Σ-Directed-Graph _ _ =
-    equiv-edge-compute-fiber-pr1-Σ-Directed-Graph
+    edge-equiv-compute-fiber-pr1-Σ-Directed-Graph
 ```

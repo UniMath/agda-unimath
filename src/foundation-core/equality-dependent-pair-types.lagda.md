@@ -71,11 +71,11 @@ module _
 
   eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
   eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
-
+  
   ap-pr1-eq-pair-eq-fiber :
     {x : A} {s t : B x} (p : s ＝ t) → ap pr1 (eq-pair-eq-fiber p) ＝ refl
   ap-pr1-eq-pair-eq-fiber refl = refl
-
+  
   is-retraction-pair-eq-Σ :
     (s t : Σ A B) → pair-eq-Σ {s} {t} ∘ eq-pair-Σ' {s} {t} ~ id {A = Eq-Σ s t}
   is-retraction-pair-eq-Σ (pair x y) (pair .x .y) (pair refl refl) = refl
@@ -153,6 +153,20 @@ tr-eq-pair-Σ :
   tr C (eq-pair-Σ p q) u ＝
   tr (λ x → C (a1 , x)) q (tr C (eq-pair-Σ p refl) u)
 tr-eq-pair-Σ C refl refl u = refl
+```
+
+### The action of `pr1` on identifcations of the form `eq-pair-Σ`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  ap-pr1-eq-pair-Σ :
+    {x x' : A} {y : B x} {y' : B x'}
+    (p : x ＝ x') (q : dependent-identification B p y y') →
+    ap pr1 (eq-pair-Σ p q) ＝ p
+  ap-pr1-eq-pair-Σ refl refl = refl
 ```
 
 ## See also

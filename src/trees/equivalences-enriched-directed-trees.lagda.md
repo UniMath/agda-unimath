@@ -295,10 +295,10 @@ module _
       ( equiv-directed-tree-equiv-Enriched-Directed-Tree A B S T g)
       ( equiv-directed-tree-equiv-Enriched-Directed-Tree A B R S f)
 
-  equiv-node-comp-equiv-Enriched-Directed-Tree :
+  node-equiv-comp-equiv-Enriched-Directed-Tree :
     node-Enriched-Directed-Tree A B R ≃
     node-Enriched-Directed-Tree A B T
-  equiv-node-comp-equiv-Enriched-Directed-Tree =
+  node-equiv-comp-equiv-Enriched-Directed-Tree =
     node-equiv-equiv-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B R)
       ( directed-tree-Enriched-Directed-Tree A B T)
@@ -313,13 +313,13 @@ module _
       ( directed-tree-Enriched-Directed-Tree A B T)
       ( equiv-directed-tree-comp-equiv-Enriched-Directed-Tree)
 
-  equiv-edge-comp-equiv-Enriched-Directed-Tree :
+  edge-equiv-comp-equiv-Enriched-Directed-Tree :
     (x y : node-Enriched-Directed-Tree A B R) →
     edge-Enriched-Directed-Tree A B R x y ≃
     edge-Enriched-Directed-Tree A B T
       ( node-comp-equiv-Enriched-Directed-Tree x)
       ( node-comp-equiv-Enriched-Directed-Tree y)
-  equiv-edge-comp-equiv-Enriched-Directed-Tree =
+  edge-equiv-comp-equiv-Enriched-Directed-Tree =
     edge-equiv-equiv-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B R)
       ( directed-tree-Enriched-Directed-Tree A B T)

@@ -248,9 +248,9 @@ module _
       ( g)
       ( f)
 
-  equiv-node-comp-equiv-Directed-Tree :
+  node-equiv-comp-equiv-Directed-Tree :
     node-Directed-Tree R ≃ node-Directed-Tree T
-  equiv-node-comp-equiv-Directed-Tree =
+  node-equiv-comp-equiv-Directed-Tree =
     node-equiv-equiv-Directed-Tree R T comp-equiv-Directed-Tree
 
   node-comp-equiv-Directed-Tree :
@@ -258,13 +258,13 @@ module _
   node-comp-equiv-Directed-Tree =
     node-equiv-Directed-Tree R T comp-equiv-Directed-Tree
 
-  equiv-edge-comp-equiv-Directed-Tree :
+  edge-equiv-comp-equiv-Directed-Tree :
     (x y : node-Directed-Tree R) →
     edge-Directed-Tree R x y ≃
     edge-Directed-Tree T
       ( node-comp-equiv-Directed-Tree x)
       ( node-comp-equiv-Directed-Tree y)
-  equiv-edge-comp-equiv-Directed-Tree =
+  edge-equiv-comp-equiv-Directed-Tree =
     edge-equiv-equiv-Directed-Tree R T comp-equiv-Directed-Tree
 
   edge-comp-equiv-Directed-Tree :
@@ -513,10 +513,10 @@ module _
       ( graph-Directed-Tree T)
       ( f)
 
-  equiv-node-inv-equiv-Directed-Tree :
+  node-equiv-inv-equiv-Directed-Tree :
     node-Directed-Tree T ≃ node-Directed-Tree S
-  equiv-node-inv-equiv-Directed-Tree =
-    equiv-vertex-inv-equiv-Directed-Graph
+  node-equiv-inv-equiv-Directed-Tree =
+    vertex-equiv-inv-equiv-Directed-Graph
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( f)
@@ -541,14 +541,14 @@ module _
       ( graph-Directed-Tree T)
       ( f)
 
-  equiv-edge-inv-equiv-Directed-Tree :
+  edge-equiv-inv-equiv-Directed-Tree :
     (x y : node-Directed-Tree T) →
     edge-Directed-Tree T x y ≃
     edge-Directed-Tree S
       ( node-inv-equiv-Directed-Tree x)
       ( node-inv-equiv-Directed-Tree y)
-  equiv-edge-inv-equiv-Directed-Tree =
-    equiv-edge-inv-equiv-Directed-Graph
+  edge-equiv-inv-equiv-Directed-Tree =
+    edge-equiv-inv-equiv-Directed-Graph
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( f)
