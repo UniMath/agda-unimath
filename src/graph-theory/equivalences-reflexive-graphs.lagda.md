@@ -21,17 +21,20 @@ open import graph-theory.reflexive-graphs
 
 ## Idea
 
-An {{#concept "equivalence of reflexive graphs" Agda=equiv-Reflexive-Graph}} from a
-[reflexive graph](graph-theory.reflexive-graphs.md) `(V,E,r)` to a reflexive graph
-`(V',E',r')` consists of an [equivalence](graph-theory.equivalences-directed-graphs.md) `(e₀, e₁)` of directed graphs from `(V,E)` to `(V',E')` equipped with an identification
+An {{#concept "equivalence of reflexive graphs" Agda=equiv-Reflexive-Graph}}
+from a [reflexive graph](graph-theory.reflexive-graphs.md) `(V,E,r)` to a
+reflexive graph `(V',E',r')` consists of an
+[equivalence](graph-theory.equivalences-directed-graphs.md) `(e₀, e₁)` of
+directed graphs from `(V,E)` to `(V',E')` equipped with an identification
 
 ```text
   e₁ (r x) ＝ r' (e₀ x)
 ```
 
-for each `x : V`. More specifically, an equivalence of reflexive graphs consists of an [equivalence](foundation-core.equivalences.md)
-`e₀ : V ≃ V'` of vertices, a family of equivalences `e₁ : E x y ≃ E' (e x) (e y)`
-of edges indexed by `x y : V`, and a family of identifications
+for each `x : V`. More specifically, an equivalence of reflexive graphs consists
+of an [equivalence](foundation-core.equivalences.md) `e₀ : V ≃ V'` of vertices,
+a family of equivalences `e₁ : E x y ≃ E' (e x) (e y)` of edges indexed by
+`x y : V`, and a family of identifications
 
 ```text
   e₁ (r x) ＝ r' (e₀ x)
@@ -170,4 +173,3 @@ module _
   pr2 (pr1 hom-equiv-Reflexive-Graph) _ _ = edge-equiv-Reflexive-Graph
   pr2 hom-equiv-Reflexive-Graph = refl-equiv-Reflexive-Graph
 ```
-

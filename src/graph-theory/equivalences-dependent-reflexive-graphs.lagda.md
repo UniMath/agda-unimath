@@ -210,7 +210,7 @@ module _
 
 ### The identity equivalence of a dependent reflexive graph
 
-````agda
+```agda
 module _
   {l1 l2 l3 l4 : Level} {G : Reflexive-Graph l1 l2}
   (H : Dependent-Reflexive-Graph l3 l4 G)

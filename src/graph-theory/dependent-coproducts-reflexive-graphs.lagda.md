@@ -14,10 +14,10 @@ open import foundation.universe-levels
 open import graph-theory.dependent-coproducts-directed-graphs
 open import graph-theory.dependent-reflexive-graphs
 open import graph-theory.directed-graphs
-open import graph-theory.reflexive-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-reflexive-graphs
 open import graph-theory.pullbacks-dependent-reflexive-graphs
+open import graph-theory.reflexive-graphs
 open import graph-theory.sections-dependent-directed-graphs
 open import graph-theory.sections-dependent-reflexive-graphs
 ```
@@ -26,8 +26,9 @@ open import graph-theory.sections-dependent-reflexive-graphs
 
 ## Idea
 
-Consider a [dependent reflexive graph](graph-theory.dependent-reflexive-graphs.md)
-`H` over a [reflexive graph](graph-theory.reflexive-graphs.md) `G`. The
+Consider a
+[dependent reflexive graph](graph-theory.dependent-reflexive-graphs.md) `H` over
+a [reflexive graph](graph-theory.reflexive-graphs.md) `G`. The
 {{#concept "dependent coproduct" Disambiguation="reflexive graphs" Agda=Σ-Reflexive-Graph}}
 `Σ G H` is the reflexive graph given by
 
@@ -111,7 +112,7 @@ module _
     edge-pr1-Σ-Reflexive-Graph (refl-Σ-Reflexive-Graph H x) ＝
     refl-Reflexive-Graph G (vertex-pr1-Σ-Reflexive-Graph x)
   refl-pr1-Σ-Reflexive-Graph x = refl
-  
+
   pr1-Σ-Reflexive-Graph : hom-Reflexive-Graph (Σ-Reflexive-Graph H) G
   pr1 pr1-Σ-Reflexive-Graph = hom-directed-graph-pr1-Σ-Reflexive-Graph
   pr2 pr1-Σ-Reflexive-Graph = refl-pr1-Σ-Reflexive-Graph

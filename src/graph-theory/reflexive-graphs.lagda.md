@@ -7,8 +7,8 @@ module graph-theory.reflexive-graphs where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.binary-dependent-identifications
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.reflexive-relations
 open import foundation.universe-levels

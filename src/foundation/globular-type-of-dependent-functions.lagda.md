@@ -23,11 +23,20 @@ open import structured-types.transitive-globular-types
 ## Idea
 
 The
-{{#concept "globular type of dependent functions" Agda=dependent-function-type-Globular-Type}} is the [globular type](structured-types.globular-types.md) consisting of [dependent functions](foundation.dependent-function-types.md) and [homotopies](foundation-core.homotopies.md) between them. Since homotopies are themselves defined to be certain dependent functions, they directly provide a globular structure on dependent function types.
+{{#concept "globular type of dependent functions" Agda=dependent-function-type-Globular-Type}}
+is the [globular type](structured-types.globular-types.md) consisting of
+[dependent functions](foundation.dependent-function-types.md) and
+[homotopies](foundation-core.homotopies.md) between them. Since homotopies are
+themselves defined to be certain dependent functions, they directly provide a
+globular structure on dependent function types.
 
-The globular type of dependent functions of a type family `B` over `A` is [reflexive](structured-types.reflexive-globular-types.md) and [transitive](structured-types.transitive-globular-types.md), so it is a [noncoherent wild higher precategory](wild-category-theory.noncoherent-wild-higher-precategories.md).
+The globular type of dependent functions of a type family `B` over `A` is
+[reflexive](structured-types.reflexive-globular-types.md) and
+[transitive](structured-types.transitive-globular-types.md), so it is a
+[noncoherent wild higher precategory](wild-category-theory.noncoherent-wild-higher-precategories.md).
 
-The structures defined in this file are used to define the [noncoherent large wild higher precategory of types](foundation.wild-category-of-types.md).
+The structures defined in this file are used to define the
+[noncoherent large wild higher precategory of types](foundation.wild-category-of-types.md).
 
 ## Definitions
 

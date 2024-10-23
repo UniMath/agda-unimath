@@ -91,7 +91,9 @@ module _
 
 ### An equivalent definition of dependent reflexive graphs
 
-The second definition of dependent reflexive graphs is more closely equivalent to the concept of morphisms into the [universal reflexive graph](graph-theory.universal-reflexive-graph.md).
+The second definition of dependent reflexive graphs is more closely equivalent
+to the concept of morphisms into the
+[universal reflexive graph](graph-theory.universal-reflexive-graph.md).
 
 ```agda
 Dependent-Reflexive-Graph' :

@@ -15,6 +15,7 @@ open import graph-theory.complete-undirected-graphs public
 open import graph-theory.connected-undirected-graphs public
 open import graph-theory.cycles-undirected-graphs public
 open import graph-theory.dependent-coproducts-directed-graphs public
+open import graph-theory.dependent-coproducts-reflexive-graphs public
 open import graph-theory.dependent-directed-graphs public
 open import graph-theory.dependent-products-directed-graphs public
 open import graph-theory.dependent-reflexive-graphs public
@@ -28,14 +29,17 @@ open import graph-theory.embeddings-directed-graphs public
 open import graph-theory.embeddings-undirected-graphs public
 open import graph-theory.enriched-undirected-graphs public
 open import graph-theory.equivalences-dependent-directed-graphs public
+open import graph-theory.equivalences-dependent-reflexive-graphs public
 open import graph-theory.equivalences-directed-graphs public
 open import graph-theory.equivalences-enriched-undirected-graphs public
+open import graph-theory.equivalences-reflexive-graphs public
 open import graph-theory.equivalences-undirected-graphs public
 open import graph-theory.eulerian-circuits-undirected-graphs public
 open import graph-theory.exponents-directed-graphs public
 open import graph-theory.faithful-morphisms-undirected-graphs public
 open import graph-theory.fibers-directed-graphs public
 open import graph-theory.fibers-morphisms-directed-graphs public
+open import graph-theory.fibers-morphisms-reflexive-graphs public
 open import graph-theory.finite-graphs public
 open import graph-theory.geometric-realizations-undirected-graphs public
 open import graph-theory.higher-directed-graphs public
@@ -59,6 +63,7 @@ open import graph-theory.reflecting-maps-undirected-graphs public
 open import graph-theory.reflexive-graphs public
 open import graph-theory.regular-undirected-graphs public
 open import graph-theory.sections-dependent-directed-graphs public
+open import graph-theory.sections-dependent-reflexive-graphs public
 open import graph-theory.simple-undirected-graphs public
 open import graph-theory.stereoisomerism-enriched-undirected-graphs public
 open import graph-theory.terminal-directed-graphs public
