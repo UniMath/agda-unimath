@@ -54,8 +54,8 @@ module _
   type-Poset : UU l1
   type-Poset = type-Preorder preorder-Poset
 
-  leq-Poset-Prop : (x y : type-Poset) → Prop l2
-  leq-Poset-Prop = leq-Preorder-Prop preorder-Poset
+  leq-prop-Poset : (x y : type-Poset) → Prop l2
+  leq-prop-Poset = leq-prop-Preorder preorder-Poset
 
   leq-Poset : (x y : type-Poset) → UU l2
   leq-Poset = leq-Preorder preorder-Poset

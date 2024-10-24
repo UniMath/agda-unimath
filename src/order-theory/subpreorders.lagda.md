@@ -46,7 +46,7 @@ module _
   eq-type-Subpreorder x y = eq-type-subtype S
 
   leq-Subpreorder-Prop : (x y : type-Subpreorder) → Prop l2
-  leq-Subpreorder-Prop x y = leq-Preorder-Prop P (pr1 x) (pr1 y)
+  leq-Subpreorder-Prop x y = leq-prop-Preorder P (pr1 x) (pr1 y)
 
   leq-Subpreorder : (x y : type-Subpreorder) → UU l2
   leq-Subpreorder x y = type-Prop (leq-Subpreorder-Prop x y)

@@ -56,7 +56,7 @@ module _
       ( λ y →
         iff-Prop
           ( is-binary-lower-bound-Poset-Prop P a b y)
-          ( leq-Poset-Prop P y x))
+          ( leq-prop-Poset P y x))
 
   is-greatest-binary-lower-bound-Poset : type-Poset P → UU (l1 ⊔ l2)
   is-greatest-binary-lower-bound-Poset x =
@@ -187,8 +187,8 @@ module _
       ( type-Poset P)
       ( λ y →
         iff-Prop
-          ( Π-Prop I (λ i → leq-Poset-Prop P y (a i)))
-          ( leq-Poset-Prop P y x))
+          ( Π-Prop I (λ i → leq-prop-Poset P y (a i)))
+          ( leq-prop-Poset P y x))
 
   is-greatest-lower-bound-family-of-elements-Poset :
     type-Poset P → UU (l1 ⊔ l2 ⊔ l3)

@@ -12,6 +12,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
+open import foundation.double-negation-elimination
 open import foundation.function-types
 open import foundation.negation
 open import foundation.subuniverses
@@ -80,6 +81,20 @@ module _
 
 ## Properties
 
+### Provable propositions are irrefutable
+
+```agda
+module _
+  {l : Level} (P : Prop l)
+  where
+
+  is-irrefutable-is-inhabited : type-Prop P → is-irrefutable P
+  is-irrefutable-is-inhabited = intro-double-negation
+
+is-irrefutable-unit : is-irrefutable unit-Prop
+is-irrefutable-unit = is-irrefutable-is-inhabited unit-Prop star
+```
+
 ### If it is irrefutable that a proposition is irrefutable, then the proposition is irrefutable
 
 ```agda
@@ -109,18 +124,4 @@ module _
   is-decidable-prop-Irrefutable-Prop : Irrefutable-Prop l
   is-decidable-prop-Irrefutable-Prop =
     make-Irrefutable-Prop (is-decidable-Prop P) is-irrefutable-is-decidable-Prop
-```
-
-### Provable propositions are irrefutable
-
-```agda
-module _
-  {l : Level} (P : Prop l)
-  where
-
-  is-irrefutable-is-inhabited : type-Prop P → is-irrefutable P
-  is-irrefutable-is-inhabited = intro-double-negation
-
-is-irrefutable-unit : is-irrefutable unit-Prop
-is-irrefutable-unit = is-irrefutable-is-inhabited unit-Prop star
 ```

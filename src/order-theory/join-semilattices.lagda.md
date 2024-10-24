@@ -308,7 +308,7 @@ module _
   leq-Order-Theoretic-Join-Semilattice-Prop :
     (x y : type-Order-Theoretic-Join-Semilattice) → Prop l2
   leq-Order-Theoretic-Join-Semilattice-Prop =
-    leq-Poset-Prop poset-Order-Theoretic-Join-Semilattice
+    leq-prop-Poset poset-Order-Theoretic-Join-Semilattice
 
   leq-Order-Theoretic-Join-Semilattice :
     (x y : type-Order-Theoretic-Join-Semilattice) → UU l2
