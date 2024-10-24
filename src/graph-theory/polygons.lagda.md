@@ -97,26 +97,26 @@ module _
   edge-Polygon : unordered-pair-vertices-Polygon → UU lzero
   edge-Polygon = edge-Undirected-Graph undirected-graph-Polygon
 
-  mere-equiv-vertex-Polygon : mere-equiv (ℤ-Mod k) vertex-Polygon
-  mere-equiv-vertex-Polygon =
+  vertex-mere-equiv-Polygon : mere-equiv (ℤ-Mod k) vertex-Polygon
+  vertex-mere-equiv-Polygon =
     map-trunc-Prop
-      ( equiv-vertex-equiv-Undirected-Graph
+      ( vertex-equiv-equiv-Undirected-Graph
         ( standard-polygon-Undirected-Graph k)
         ( undirected-graph-Polygon))
       ( mere-equiv-Polygon)
 
   is-finite-vertex-Polygon : is-nonzero-ℕ k → is-finite vertex-Polygon
   is-finite-vertex-Polygon H =
-    is-finite-mere-equiv mere-equiv-vertex-Polygon (is-finite-ℤ-Mod H)
+    is-finite-mere-equiv vertex-mere-equiv-Polygon (is-finite-ℤ-Mod H)
 
   is-set-vertex-Polygon : is-set vertex-Polygon
   is-set-vertex-Polygon =
-    is-set-mere-equiv' mere-equiv-vertex-Polygon (is-set-ℤ-Mod k)
+    is-set-mere-equiv' vertex-mere-equiv-Polygon (is-set-ℤ-Mod k)
 
   has-decidable-equality-vertex-Polygon : has-decidable-equality vertex-Polygon
   has-decidable-equality-vertex-Polygon =
     has-decidable-equality-mere-equiv'
-      ( mere-equiv-vertex-Polygon)
+      ( vertex-mere-equiv-Polygon)
       ( has-decidable-equality-ℤ-Mod k)
 ```
 

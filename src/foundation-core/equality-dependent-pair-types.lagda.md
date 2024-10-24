@@ -155,6 +155,20 @@ tr-eq-pair-Σ :
 tr-eq-pair-Σ C refl refl u = refl
 ```
 
+### The action of `pr1` on identifcations of the form `eq-pair-Σ`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  ap-pr1-eq-pair-Σ :
+    {x x' : A} {y : B x} {y' : B x'}
+    (p : x ＝ x') (q : dependent-identification B p y y') →
+    ap pr1 (eq-pair-Σ p q) ＝ p
+  ap-pr1-eq-pair-Σ refl refl = refl
+```
+
 ## See also
 
 - Equality proofs in cartesian product types are characterized in

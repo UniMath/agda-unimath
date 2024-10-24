@@ -79,3 +79,7 @@ module _
         ( span-type-family-Π B)
         ( universal-property-dependent-function-types-Π B)
 ```
+
+## See also
+
+- [The globular type of dependent functions](foundation.globular-type-of-dependent-functions.md)

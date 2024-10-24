@@ -135,10 +135,10 @@ module _
 
   fiber-vertex-reflexive-graph-Displayed-Large-Reflexive-Graph :
     Reflexive-Graph (α2 l) (β2 l l)
-  pr1 fiber-vertex-reflexive-graph-Displayed-Large-Reflexive-Graph =
+  pr1 (pr1 fiber-vertex-reflexive-graph-Displayed-Large-Reflexive-Graph) =
     vertex-Displayed-Large-Reflexive-Graph H x
-  pr1 (pr2 fiber-vertex-reflexive-graph-Displayed-Large-Reflexive-Graph) =
+  pr2 (pr1 fiber-vertex-reflexive-graph-Displayed-Large-Reflexive-Graph) =
     edge-Displayed-Large-Reflexive-Graph H (refl-Large-Reflexive-Graph G x)
-  pr2 (pr2 fiber-vertex-reflexive-graph-Displayed-Large-Reflexive-Graph) =
+  pr2 fiber-vertex-reflexive-graph-Displayed-Large-Reflexive-Graph =
     refl-Displayed-Large-Reflexive-Graph H
 ```
