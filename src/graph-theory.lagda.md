@@ -7,6 +7,7 @@ module graph-theory where
 
 open import graph-theory.acyclic-undirected-graphs public
 open import graph-theory.cartesian-products-directed-graphs public
+open import graph-theory.cartesian-products-reflexive-graphs public
 open import graph-theory.circuits-undirected-graphs public
 open import graph-theory.closed-walks-undirected-graphs public
 open import graph-theory.complete-bipartite-graphs public
@@ -18,6 +19,7 @@ open import graph-theory.dependent-coproducts-directed-graphs public
 open import graph-theory.dependent-coproducts-reflexive-graphs public
 open import graph-theory.dependent-directed-graphs public
 open import graph-theory.dependent-products-directed-graphs public
+open import graph-theory.dependent-products-reflexive-graphs public
 open import graph-theory.dependent-reflexive-graphs public
 open import graph-theory.directed-graph-duality public
 open import graph-theory.directed-graph-structures-on-standard-finite-sets public

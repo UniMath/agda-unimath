@@ -49,8 +49,9 @@ The universal property of the dependent product gives that the type of
 [sections](graph-theory.sections-dependent-directed-graphs.md) of `B` is
 [equivalent](foundation-core.equivalences.md) to the type of morphisms from the
 [terminal directed graph](graph-theory.terminal-directed-graphs.md) into
-`Π A B`, which is in turn equivalent to the type of vertices `f₀` of the Π
-`Π A B` equipped with a loop `(Π A B)₁ f f`. Indeed, this data consists of:
+`Π A B`, which is in turn equivalent to the type of vertices `f₀` of the
+dependent product `Π A B` equipped with a loop `(Π A B)₁ f f`. Indeed, this data
+consists of:
 
 - A map `f₀ : A₀ → B₀`
 - A family of maps `f₁ : (x y : A₀) → A₁ x y → B₁ (f₀ x) (f₀ y)`,
@@ -59,7 +60,7 @@ as expected for the type of sections of a dependent directed graph.
 
 ## Definitions
 
-### The Π of directed graphs
+### The dependent product of directed graphs
 
 ```agda
 module _
@@ -85,9 +86,9 @@ module _
 
 ## Properties
 
-### The Π directed graph satisfies the universal property of the Π
+### The dependent product of directed graphs satisfies the universal property of the dependent product
 
-#### The evaluation of a morphism into an Π of directed graphs
+#### The evaluation of a morphism into a dependent product of directed graphs
 
 ```agda
 module _
@@ -172,7 +173,7 @@ module _
     edge-uncurry-section-product-Directed-Graph
 ```
 
-#### The equivalence of the adjunction between products and Πs of directed graphs
+#### The equivalence of the adjunction between products and dependent products of directed graphs
 
 ```agda
 module _
@@ -196,8 +197,13 @@ module _
       ( ev-section-Π-Directed-Graph A B C
         ( uncurry-section-product-Directed-Graph A B C f))
       ( f)
-  pr1 (htpy-is-section-uncurry-section-product-Directed-Graph f) = refl-htpy
-  pr2 (htpy-is-section-uncurry-section-product-Directed-Graph f) = refl-htpy
+  htpy-is-section-uncurry-section-product-Directed-Graph f =
+    refl-htpy-section-Dependent-Directed-Graph
+      ( pullback-Dependent-Directed-Graph
+        ( product-Directed-Graph C A)
+        ( pr2-product-Directed-Graph C A)
+        ( B))
+      ( f)
 
   is-section-uncurry-section-product-Directed-Graph :
     is-section
@@ -222,10 +228,8 @@ module _
       ( uncurry-section-product-Directed-Graph A B C
         ( ev-section-Π-Directed-Graph A B C f))
       ( f)
-  pr1 (htpy-is-retraction-uncurry-section-product-Directed-Graph f) =
-    refl-htpy
-  pr2 (htpy-is-retraction-uncurry-section-product-Directed-Graph f) x y =
-    refl-htpy
+  htpy-is-retraction-uncurry-section-product-Directed-Graph f =
+    refl-htpy-hom-Directed-Graph C (Π-Directed-Graph A B) f
 
   is-retraction-uncurry-section-product-Directed-Graph :
     is-retraction

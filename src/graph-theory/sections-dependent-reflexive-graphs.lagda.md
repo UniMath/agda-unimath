@@ -10,6 +10,7 @@ module graph-theory.sections-dependent-reflexive-graphs where
 open import foundation.action-on-identifications-binary-dependent-functions
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -172,18 +173,10 @@ module _
         (x : vertex-Reflexive-Graph A) →
         coherence-square-identifications
           ( ap
-            ( ( tr
-                ( edge-Dependent-Reflexive-Graph B
-                  ( refl-Reflexive-Graph A x)
-                  ( vertex-section-Dependent-Reflexive-Graph B g x))
-                ( H₀ x)) ∘
-              ( tr
-                ( λ u →
-                  edge-Dependent-Reflexive-Graph B
-                    ( refl-Reflexive-Graph A x)
-                    ( u)
-                    ( vertex-section-Dependent-Reflexive-Graph B f x))
-                ( H₀ x)))
+            ( binary-tr
+              ( edge-Dependent-Reflexive-Graph B (refl-Reflexive-Graph A x))
+              ( H₀ x)
+              ( H₀ x))
             ( refl-section-Dependent-Reflexive-Graph B f x))
           ( H₁ (refl-Reflexive-Graph A x))
           ( binary-dependent-identification-refl-Reflexive-Relation
