@@ -15,8 +15,9 @@ open import elementary-number-theory.natural-numbers
 ## Idea
 
 The
-{{#concept "Ackermann function" WD="Ackermann function" WDID=Q341835 Agda=ackermann}}
-is a fast growing binary operation on the natural numbers.
+{{#concept "Ackermann-Péter function" WD="Ackermann function" WDID=Q341835 Agda=ackermann-péter-ℕ}}
+is a fast growing binary operation on the
+[natural numbers](elementary-number-theory.natural-numbers.md).
 
 ## Definition
 
