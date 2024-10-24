@@ -12,6 +12,7 @@ module orthogonal-factorization-systems where
 open import orthogonal-factorization-systems.cd-structures public
 open import orthogonal-factorization-systems.cellular-maps public
 open import orthogonal-factorization-systems.closed-modalities public
+open import orthogonal-factorization-systems.continuation-modalities public
 open import orthogonal-factorization-systems.double-lifts-families-of-elements public
 open import orthogonal-factorization-systems.double-negation-sheaves public
 open import orthogonal-factorization-systems.extensions-double-lifts-families-of-elements public
@@ -30,6 +31,8 @@ open import orthogonal-factorization-systems.functoriality-pullback-hom public
 open import orthogonal-factorization-systems.global-function-classes public
 open import orthogonal-factorization-systems.higher-modalities public
 open import orthogonal-factorization-systems.identity-modality public
+open import orthogonal-factorization-systems.large-lawvere-tierney-topologies public
+open import orthogonal-factorization-systems.lawvere-tierney-topologies public
 open import orthogonal-factorization-systems.lifting-operations public
 open import orthogonal-factorization-systems.lifting-structures-on-squares public
 open import orthogonal-factorization-systems.lifts-families-of-elements public
