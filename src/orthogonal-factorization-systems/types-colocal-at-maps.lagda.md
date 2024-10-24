@@ -57,8 +57,8 @@ Equivalently, `A` is colocal if
    `f`.
 
 The notion of `f`-colocal types is dual to
-[`f`-local types](orthogonal-factorization-systems.local-types.md), which is a
-type such that the
+[`f`-local types](orthogonal-factorization-systems.types-local-at-maps.md),
+which is a type such that the
 [precomposition map](foundation-core.precomposition-functions.md)
 
 ```text
