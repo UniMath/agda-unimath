@@ -7,6 +7,7 @@ module foundation.functoriality-cartesian-product-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.morphisms-arrows
@@ -21,6 +22,8 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.retractions
+open import foundation-core.retracts-of-types
 ```
 
 </details>
@@ -126,8 +129,8 @@ module _
 
   map-inv-map-product :
     (f : A → C) (g : B → D) → is-equiv f → is-equiv g → C × D → A × B
-  pr1 (map-inv-map-product f g H K (c , d)) = map-inv-is-equiv H c
-  pr2 (map-inv-map-product f g H K (c , d)) = map-inv-is-equiv K d
+  map-inv-map-product f g H K =
+    map-product (map-inv-is-equiv H) (map-inv-is-equiv K)
 
   is-section-map-inv-map-product :
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
@@ -158,6 +161,40 @@ module _
   pr1 (equiv-product (f , is-equiv-f) (g , is-equiv-g)) = map-product f g
   pr2 (equiv-product (f , is-equiv-f) (g , is-equiv-g)) =
     is-equiv-map-product f g is-equiv-f is-equiv-g
+```
+
+### Functoriality of products preserves retractions
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  where
+
+  map-retraction-map-product :
+    (f : A → C) (g : B → D) → retraction f → retraction g → C × D → A × B
+  map-retraction-map-product f g H K =
+    map-product (map-retraction f H) (map-retraction g K)
+
+  retraction-map-retraction-map-product :
+    (f : A → C) (g : B → D) (H : retraction f) (K : retraction g) →
+    is-retraction
+      ( map-product f g)
+      ( map-product (map-retraction f H) (map-retraction g K))
+  retraction-map-retraction-map-product f g H K =
+    htpy-map-product
+      ( is-retraction-map-retraction f H)
+      ( is-retraction-map-retraction g K)
+
+  retraction-map-product :
+    (f : A → C) (g : B → D) →
+    retraction f → retraction g → retraction (map-product f g)
+  retraction-map-product f g H K =
+    ( map-retraction-map-product f g H K ,
+      retraction-map-retraction-map-product f g H K)
+
+  retract-map-product : A retract-of C → B retract-of D → A × B retract-of C × D
+  retract-map-product (f , retraction-f) (g , retraction-g) =
+    ( map-product f g , retraction-map-product f g retraction-f retraction-g)
 ```
 
 ### Functoriality of products preserves equivalences in either factor
@@ -282,6 +319,34 @@ module _
       ( htpy-map-product
         ( coh-hom-arrow f g α)
         ( coh-hom-arrow h i β)))
+```
+
+### Computing the action on paths of the functorial action of cartesian products
+
+We have an equivalence of maps
+
+```text
+                                      pair-eq
+              ((a , x) = (a' , x')) -----------> (a = a') × (x = x')
+                       |                 ~                |
+                       |                                  |
+  ap (map-product f g) |                                  | map-product (ap f) (ap g)
+                       |                                  |
+                       ∨                 ~                ∨
+          ((f a , g x) = (f a' , g x')) ---> (f a = f a') × (g x = g x')
+                                      pair-eq
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) {a a' : A} {x x' : X}
+  where
+
+  compute-ap-map-product :
+    pair-eq ∘ ap (map-product f g) ~
+    map-product (ap f {a} {a'}) (ap g {x} {x'}) ∘ pair-eq
+  compute-ap-map-product refl = refl
 ```
 
 ## See also

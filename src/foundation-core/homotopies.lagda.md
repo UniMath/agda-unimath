@@ -309,6 +309,18 @@ inv-nat-htpy-id :
 inv-nat-htpy-id H p = inv (nat-htpy-id H p)
 ```
 
+### Conjugation by homotopies
+
+Given a homotopy `H : f ~ g` we obtain a natural map `f x ＝ f y → g x ＝ g y`
+given by conjugation by `H`.
+
+```agda
+conjugate-htpy :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B}
+  (H : f ~ g) {x y : A} → f x ＝ f y → g x ＝ g y
+conjugate-htpy H {x} {y} p = inv (H x) ∙ (p ∙ H y)
+```
+
 ### Homotopies preserve the laws of the action on identity types
 
 ```agda

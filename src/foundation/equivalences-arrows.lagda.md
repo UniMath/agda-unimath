@@ -13,6 +13,9 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.morphisms-arrows
+open import foundation.retractions
+open import foundation.retracts-of-maps
+open import foundation.sections
 open import foundation.span-diagrams
 open import foundation.spans
 open import foundation.universe-levels
@@ -28,13 +31,13 @@ An {{#concept "equivalence of arrows"}} from a function `f : A → B` to a
 function `g : X → Y` is a [morphism of arrows](foundation.morphisms-arrows.md)
 
 ```text
-        i
-    A -----> X
-    |   ≃    |
-  f |        | g
-    ∨   ≃    ∨
-    B -----> Y
-        j
+         i
+    A ------> X
+    |    ≃    |
+  f |         | g
+    ∨    ≃    ∨
+    B ------> Y
+         j
 ```
 
 in which `i` and `j` are [equivalences](foundation-core.equivalences.md).
@@ -288,4 +291,46 @@ module _
   cartesian-hom-equiv-arrow : cartesian-hom-arrow f g
   pr1 cartesian-hom-equiv-arrow = hom-equiv-arrow f g α
   pr2 cartesian-hom-equiv-arrow = is-cartesian-equiv-arrow
+```
+
+### Retractions are preserved by equivalences of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  reflects-retraction-equiv-arrow :
+    equiv-arrow f g → retraction g → retraction f
+  reflects-retraction-equiv-arrow α =
+    retraction-retract-map-retraction' f g
+      ( retract-equiv (equiv-domain-equiv-arrow f g α))
+      ( map-codomain-equiv-arrow f g α)
+      ( coh-equiv-arrow f g α)
+
+  preserves-retraction-equiv-arrow :
+    equiv-arrow g f → retraction g → retraction f
+  preserves-retraction-equiv-arrow α =
+    reflects-retraction-equiv-arrow (inv-equiv-arrow g f α)
+```
+
+### Sections are preserved by equivalences of arrows
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  preserves-section-equiv-arrow : equiv-arrow f g → section f → section g
+  preserves-section-equiv-arrow α =
+    section-retract-map-section' g f
+      ( map-domain-equiv-arrow f g α)
+      ( retract-inv-equiv (equiv-codomain-equiv-arrow f g α))
+      ( coh-equiv-arrow f g α)
+
+  reflects-section-equiv-arrow : equiv-arrow g f → section f → section g
+  reflects-section-equiv-arrow α =
+    preserves-section-equiv-arrow (inv-equiv-arrow g f α)
 ```
