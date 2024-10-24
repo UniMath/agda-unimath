@@ -7,6 +7,7 @@ module graph-theory.morphisms-directed-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-dependent-identifications
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -144,12 +145,12 @@ module _
     Σ ( vertex-hom-Directed-Graph G H f ~ vertex-hom-Directed-Graph G H g)
       ( λ α →
         ( x y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
-        binary-tr
+        binary-dependent-identification
           ( edge-Directed-Graph H)
           ( α x)
           ( α y)
-          ( edge-hom-Directed-Graph G H f e) ＝
-        edge-hom-Directed-Graph G H g e)
+          ( edge-hom-Directed-Graph G H f e)
+          ( edge-hom-Directed-Graph G H g e))
 
   module _
     (f g : hom-Directed-Graph G H) (α : htpy-hom-Directed-Graph f g)
@@ -161,12 +162,12 @@ module _
 
     edge-htpy-hom-Directed-Graph :
       (x y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
-      binary-tr
+      binary-dependent-identification
         ( edge-Directed-Graph H)
         ( vertex-htpy-hom-Directed-Graph x)
         ( vertex-htpy-hom-Directed-Graph y)
-        ( edge-hom-Directed-Graph G H f e) ＝
-      edge-hom-Directed-Graph G H g e
+        ( edge-hom-Directed-Graph G H f e)
+        ( edge-hom-Directed-Graph G H g e)
     edge-htpy-hom-Directed-Graph = pr2 α
 
   refl-htpy-hom-Directed-Graph :
