@@ -108,7 +108,9 @@ module _
   where
 
   counit-flat-hom-cospan-diagram :
-    hom-cospan-diagram (action-flat-map f) (action-flat-map g) f g
+    hom-cospan-diagram
+      ( ♭ A , ♭ B , ♭ X , action-flat-map f , action-flat-map g)
+      ( A , B , X , f , g)
   counit-flat-hom-cospan-diagram =
     ( counit-flat ,
       counit-flat ,
@@ -118,10 +120,8 @@ module _
 
   compute-counit-flat-standard-pullback :
     ( map-standard-pullback
-      ( f)
-      ( g)
-      ( action-flat-map f)
-      ( action-flat-map g)
+      ( ♭ A , ♭ B , ♭ X , action-flat-map f , action-flat-map g)
+      ( A , B , X , f , g)
       ( counit-flat-hom-cospan-diagram)) ∘
     ( map-distributive-flat-standard-pullback f g) ~
     counit-flat {A = standard-pullback f g}

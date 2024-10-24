@@ -118,7 +118,7 @@ module _
     is-section-inv-gap-total-product-fibers :
       (gap-total-product-fibers ∘ inv-gap-total-product-fibers) ~ id
     is-section-inv-gap-total-product-fibers (a , b , p) =
-      map-extensionality-standard-pullback f g refl refl
+      eq-Eq-standard-pullback f g refl refl
         ( inv right-unit ∙ inv right-unit)
 
   abstract

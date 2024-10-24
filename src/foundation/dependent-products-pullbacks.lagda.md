@@ -101,7 +101,7 @@ module _
     is-section-map-inv-standard-pullback-Π h =
       eq-htpy
         ( λ i →
-          map-extensionality-standard-pullback (f i) (g i) refl refl
+          eq-Eq-standard-pullback (f i) (g i) refl refl
             ( inv
               ( ( right-unit) ∙
                 ( htpy-eq (is-section-eq-htpy (λ i → pr2 (pr2 (h i)))) i))))
@@ -110,7 +110,7 @@ module _
     is-retraction-map-inv-standard-pullback-Π :
       is-retraction (map-standard-pullback-Π) (map-inv-standard-pullback-Π)
     is-retraction-map-inv-standard-pullback-Π (α , β , γ) =
-      map-extensionality-standard-pullback
+      eq-Eq-standard-pullback
         ( map-Π f)
         ( map-Π g)
         ( refl)
@@ -149,7 +149,7 @@ module _
   triangle-map-standard-pullback-Π h =
     eq-htpy
       ( λ i →
-        map-extensionality-standard-pullback
+        eq-Eq-standard-pullback
           ( f i)
           ( g i)
           ( refl)

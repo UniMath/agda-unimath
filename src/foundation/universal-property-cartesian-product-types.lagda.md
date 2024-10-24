@@ -158,7 +158,7 @@ Next, we show that cartesian products are a special case of pullbacks.
     is-section-inv-gap-cartesian-product :
       is-section gap-cartesian-product inv-gap-cartesian-product
     is-section-inv-gap-cartesian-product (a , b , p) =
-      map-extensionality-standard-pullback
+      eq-Eq-standard-pullback
         ( terminal-map A)
         ( terminal-map B)
         ( refl)
