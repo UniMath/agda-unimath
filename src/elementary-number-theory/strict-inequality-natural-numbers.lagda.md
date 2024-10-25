@@ -318,6 +318,21 @@ le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
   le-leq-neq-ℕ {x} {y} l (λ p → f (ap succ-ℕ p))
 ```
 
+### `x < x + y` for any nonzero natural number `y`
+
+```agda
+le-add-succ-ℕ :
+  (x y : ℕ) → x <-ℕ x +ℕ (succ-ℕ y)
+le-add-succ-ℕ zero-ℕ y = star
+le-add-succ-ℕ (succ-ℕ x) y =
+  concatenate-le-eq-ℕ (le-add-succ-ℕ x y) (inv (left-successor-law-add-ℕ x y))
+
+le-add-ℕ :
+  (x y : ℕ) → is-nonzero-ℕ y → x <-ℕ x +ℕ y
+le-add-ℕ x zero-ℕ H = ex-falso (H refl)
+le-add-ℕ x (succ-ℕ y) H = le-add-succ-ℕ x y
+```
+
 ### If `1 < x` and `1 < y`, then `1 < xy`
 
 ```agda

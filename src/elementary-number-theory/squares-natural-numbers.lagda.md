@@ -13,6 +13,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -67,6 +68,8 @@ square-root-ℕ _ (root , _) = root
 
 ### Squares of successors
 
+For any `n` we have `(n + 1)² ＝ (n + 2)n + 1
+
 ```agda
 square-succ-ℕ :
   (n : ℕ) →
@@ -93,6 +96,85 @@ square-succ-succ-ℕ n =
       ( ap-add-ℕ {square-ℕ n +ℕ 2 *ℕ n} {2 *ℕ (n +ℕ 2)}
         ( refl)
         ( left-distributive-mul-add-ℕ 2 n 2))
+```
+
+### Any number is less than its own square
+
+**Proof.** The proof is by induction. Since `0` is the least natural number, be base case is trivial. Now consider a natural number `n` such that `n ≤ n²`. Then we have
+
+```text
+  (n + 1 ≤ (n + 1)²) ↔ n + 1 ≤ (n + 2) * n + 1
+                     ↔ n ≤ n² + n + n.
+```
+
+The last inequality follows by the following chain of inequalities
+
+```text
+  n ≤ n²            -- by the induction hypothesis
+    ≤ n² + n        -- since a ≤ a + b for any a,b
+    ≤ n² + n + n    -- since a ≤ a + b for any a,b
+```
+
+```agda
+lower-bound-square-ℕ :
+  (n : ℕ) → n ≤-ℕ square-ℕ n
+lower-bound-square-ℕ zero-ℕ = star
+lower-bound-square-ℕ (succ-ℕ n) =
+  concatenate-leq-eq-ℕ
+    ( succ-ℕ n)
+    ( transitive-leq-ℕ
+      ( n)
+      ( square-ℕ n)
+      ( square-ℕ n +ℕ n +ℕ n)
+      ( transitive-leq-ℕ
+        ( square-ℕ n)
+        ( square-ℕ n +ℕ n)
+        ( square-ℕ n +ℕ n +ℕ n)
+        ( leq-add-ℕ (square-ℕ n +ℕ n) n)
+        ( leq-add-ℕ (square-ℕ n) n))
+      ( lower-bound-square-ℕ n))
+    ( inv (square-succ-ℕ n))
+```
+
+### If a number `n` has a square root, then the square root is at most `n`
+
+```agda
+upper-bound-square-root-ℕ :
+  (n : ℕ) (H : is-square-ℕ n) → square-root-ℕ n H ≤-ℕ n
+upper-bound-square-root-ℕ .(square-ℕ x) (x , refl) =
+  lower-bound-square-ℕ x
+```
+
+### Any number greater than 1 is strictly less than its square
+
+```agda
+strict-lower-bound-square-ℕ :
+  (n : ℕ) → 1 <-ℕ n → n <-ℕ square-ℕ n
+strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ zero-ℕ)) H = star
+strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ (succ-ℕ n))) H =
+  concatenate-le-eq-ℕ
+    { n +ℕ 3}
+    ( transitive-le-ℕ
+      ( n +ℕ 2)
+      ( square-ℕ (n +ℕ 2))
+      ( square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2) +ℕ (n +ℕ 2))
+      ( strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ n)) star)
+      ( transitive-le-ℕ
+        ( square-ℕ (n +ℕ 2))
+        ( square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2))
+        ( square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2) +ℕ (n +ℕ 2))
+        ( le-add-succ-ℕ (square-ℕ (n +ℕ 2)) (n +ℕ 1))
+        ( le-add-succ-ℕ (square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2)) (n +ℕ 1))))
+    ( inv (square-succ-ℕ (succ-ℕ (succ-ℕ n))))
+```
+
+### If a number `n` greater than 1 has a square root, then its square root is strictly smaller than `n`
+
+```agda
+strict-upper-bound-square-root-ℕ :
+  (n : ℕ) → 1 <-ℕ n → (H : is-square-ℕ n) → square-root-ℕ n H <-ℕ n
+strict-upper-bound-square-root-ℕ ._ B (succ-ℕ (succ-ℕ x) , refl) =
+  strict-lower-bound-square-ℕ (x +ℕ 2) star
 ```
 
 ### `n > √n` for `n > 1`
