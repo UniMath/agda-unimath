@@ -13,6 +13,7 @@ open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
@@ -64,15 +65,15 @@ module _
     {x y z : type-Preorder} → leq-Preorder x y → y ＝ z → leq-Preorder x z
   concatenate-leq-eq-Preorder H refl = H
 
-  le-Preorder-Prop : Relation-Prop (l1 ⊔ l2) type-Preorder
-  le-Preorder-Prop x y =
+  le-prop-Preorder : Relation-Prop (l1 ⊔ l2) type-Preorder
+  le-prop-Preorder x y =
     product-Prop (x ≠ y , is-prop-neg) (leq-prop-Preorder x y)
 
   le-Preorder : Relation (l1 ⊔ l2) type-Preorder
-  le-Preorder x y = type-Prop (le-Preorder-Prop x y)
+  le-Preorder x y = type-Prop (le-prop-Preorder x y)
 
   is-prop-le-Preorder : (x y : type-Preorder) → is-prop (le-Preorder x y)
-  is-prop-le-Preorder = is-prop-type-Relation-Prop le-Preorder-Prop
+  is-prop-le-Preorder = is-prop-type-Relation-Prop le-prop-Preorder
 
   is-reflexive-leq-Preorder : is-reflexive (leq-Preorder)
   is-reflexive-leq-Preorder = pr1 (pr2 (pr2 X))
@@ -167,3 +168,19 @@ module _
 ```
 
 It remains to show that these constructions form inverses to eachother.
+
+### Resizing the underlying type of a preorder
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  where
+
+  resize-type-Preorder :
+    (P : Preorder l2 l3) → A ≃ type-Preorder P → Preorder l1 l3
+  resize-type-Preorder P e =
+    ( ( A) ,
+      ( λ x y → leq-prop-Preorder P (map-equiv e x) (map-equiv e y)) ,
+      ( λ x → refl-leq-Preorder P (map-equiv e x)) ,
+      ( λ x y z → transitive-leq-Preorder P (pr1 e x) (pr1 e y) (pr1 e z)))
+```

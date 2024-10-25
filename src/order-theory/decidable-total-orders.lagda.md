@@ -90,7 +90,7 @@ module _
   le-Decidable-Total-Order-Prop :
     (x y : type-Decidable-Total-Order) → Prop (l1 ⊔ l2)
   le-Decidable-Total-Order-Prop =
-    le-Poset-Prop poset-Decidable-Total-Order
+    le-prop-Poset poset-Decidable-Total-Order
 
   le-Decidable-Total-Order :
     (x y : type-Decidable-Total-Order) → UU (l1 ⊔ l2)

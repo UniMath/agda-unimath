@@ -10,7 +10,7 @@ module foundation.complements-subtypes where
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.double-negation-stable-propositions
-open import foundation.double-negation-stable-subtypes
+open import logic.double-negation-stable-subtypes
 open import foundation.full-subtypes
 open import foundation.negation
 open import foundation.postcomposition-functions

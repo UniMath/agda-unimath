@@ -1,7 +1,7 @@
 # Double negation eliminating maps
 
 ```agda
-module foundation.double-negation-eliminating-maps where
+module logic.double-negation-eliminating-maps where
 ```
 
 <details><summary>Imports</summary>

@@ -12,7 +12,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-propositions
-open import foundation.double-negation-stable-subtypes
+open import logic.double-negation-stable-subtypes
 open import foundation.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.negation

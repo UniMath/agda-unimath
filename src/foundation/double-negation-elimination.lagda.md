@@ -13,6 +13,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
+open import foundation.coproduct-types
 open import foundation.evaluation-functions
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -121,6 +122,26 @@ module _
     B retract-of A → has-double-negation-elim B → has-double-negation-elim A
   has-double-negation-elim-retract' e =
     has-double-negation-elim-iff' (iff-retract e)
+```
+
+### If the negation of a type with double negation elimination is decidable, then the type is decidable
+
+**Note.** It is an established fact that both the property of satisfying double
+negation elimination, and the property of having decidable negation, are
+strictly weaker conditions than being decidable. Therefore, this result
+demonstrates that they are independent too.
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  is-decidable-is-decidable-neg-has-double-negation-elim :
+    has-double-negation-elim A → is-decidable (¬ A) → is-decidable A
+  is-decidable-is-decidable-neg-has-double-negation-elim f (inl nx) =
+    inr nx
+  is-decidable-is-decidable-neg-has-double-negation-elim f (inr nnx) =
+    inl (f nnx)
 ```
 
 ### Double negation elimination for empty types

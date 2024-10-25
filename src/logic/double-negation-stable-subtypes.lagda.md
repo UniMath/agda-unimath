@@ -1,7 +1,7 @@
 # Double negation stable subtypes
 
 ```agda
-module foundation.double-negation-stable-subtypes where
+module logic.double-negation-stable-subtypes where
 ```
 
 <details><summary>Imports</summary>
@@ -10,9 +10,9 @@ module foundation.double-negation-stable-subtypes where
 open import foundation.1-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation-eliminating-maps
+open import logic.double-negation-eliminating-maps
 open import foundation.double-negation-elimination
-open import foundation.double-negation-stable-embeddings
+open import logic.double-negation-stable-embeddings
 open import foundation.double-negation-stable-propositions
 open import foundation.equality-dependent-function-types
 open import foundation.functoriality-cartesian-product-types

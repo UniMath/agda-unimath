@@ -133,5 +133,5 @@ module _
 is-irrefutable-double-negation-elim :
   {l : Level} {A : UU l} → ¬¬ (has-double-negation-elim A)
 is-irrefutable-double-negation-elim H =
-  H (λ x → ex-falso (x (λ a → H (λ _ → a))))
+  H (λ f → ex-falso (f (λ a → H (λ _ → a))))
 ```

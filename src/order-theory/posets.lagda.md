@@ -16,6 +16,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -77,8 +78,8 @@ module _
   transitive-leq-Poset : is-transitive leq-Poset
   transitive-leq-Poset = transitive-leq-Preorder preorder-Poset
 
-  le-Poset-Prop : (x y : type-Poset) → Prop (l1 ⊔ l2)
-  le-Poset-Prop = le-Preorder-Prop preorder-Poset
+  le-prop-Poset : (x y : type-Poset) → Prop (l1 ⊔ l2)
+  le-prop-Poset = le-prop-Preorder preorder-Poset
 
   le-Poset : (x y : type-Poset) → UU (l1 ⊔ l2)
   le-Poset = le-Preorder preorder-Poset
@@ -188,3 +189,19 @@ module _
 ```
 
 It remains to show that these constructions form inverses to eachother.
+
+### Resizing the underlying type of a poset
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  where
+
+  resize-type-Poset :
+    (P : Poset l2 l3) → A ≃ type-Poset P → Poset l1 l3
+  resize-type-Poset P e =
+    ( resize-type-Preorder (preorder-Poset P) e ,
+      ( λ x y p q →
+      is-injective-equiv e
+        ( antisymmetric-leq-Poset P (map-equiv e x) (map-equiv e y) p q)))
+```
