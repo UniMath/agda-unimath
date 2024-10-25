@@ -10,8 +10,11 @@ module graph-theory.universal-directed-graph where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import graph-theory.base-change-dependent-directed-graphs
 open import graph-theory.dependent-directed-graphs
 open import graph-theory.directed-graphs
+open import graph-theory.equivalences-dependent-directed-graphs
+open import graph-theory.morphisms-directed-graphs
 ```
 
 </details>
@@ -115,6 +118,61 @@ module _
     vertex-universal-Dependent-Directed-Graph
   pr2 universal-Dependent-Directed-Graph _ _ =
     edge-universal-Dependent-Directed-Graph
+```
+
+## Properties
+
+### Every dependent directed graph is a base change of the universal dependent directed graph
+
+#### The characteristic morphism of a dependent directed graph
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {G : Directed-Graph l1 l2} (H : Dependent-Directed-Graph l3 l4 G)
+  where
+
+  vertex-characteristic-hom-Dependent-Directed-Graph :
+    vertex-Directed-Graph G → UU l3
+  vertex-characteristic-hom-Dependent-Directed-Graph =
+    vertex-Dependent-Directed-Graph H
+
+  edge-characteristic-hom-Dependent-Directed-Graph :
+    {x y : vertex-Directed-Graph G} (e : edge-Directed-Graph G x y) →
+    vertex-characteristic-hom-Dependent-Directed-Graph x →
+    vertex-characteristic-hom-Dependent-Directed-Graph y →
+    UU l4
+  edge-characteristic-hom-Dependent-Directed-Graph =
+    edge-Dependent-Directed-Graph H
+
+  characteristic-hom-Dependent-Directed-Graph :
+    hom-Directed-Graph G (universal-Directed-Graph l3 l4)
+  pr1 characteristic-hom-Dependent-Directed-Graph =
+    vertex-characteristic-hom-Dependent-Directed-Graph
+  pr2 characteristic-hom-Dependent-Directed-Graph _ _ =
+    edge-characteristic-hom-Dependent-Directed-Graph
+```
+
+#### Base change of the universal dependent directed graph along the characteristic morphism of a dependent directed graph
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {G : Directed-Graph l1 l2} (H : Dependent-Directed-Graph l3 l4 G)
+  where
+
+  base-change-universal-graph-characteristic-hom-Dependent-Directed-Graph :
+    Dependent-Directed-Graph l3 l4 G
+  base-change-universal-graph-characteristic-hom-Dependent-Directed-Graph =
+    base-change-Dependent-Directed-Graph G
+      ( characteristic-hom-Dependent-Directed-Graph H)
+      ( universal-Dependent-Directed-Graph l3 l4)
+
+  compute-base-change-universal-graph-characteristic-hom-Dependent-Directed-Graph :
+    equiv-Dependent-Directed-Graph H
+      base-change-universal-graph-characteristic-hom-Dependent-Directed-Graph
+  compute-base-change-universal-graph-characteristic-hom-Dependent-Directed-Graph =
+    id-equiv-Dependent-Directed-Graph H
 ```
 
 ## See also
