@@ -1,7 +1,7 @@
-# De Morgan propositions
+# De Morgan types
 
 ```agda
-module logic.de-morgan-propositions where
+module logic.de-morgan-types where
 ```
 
 <details><summary>Imports</summary>
@@ -147,6 +147,20 @@ is-de-morgan-is-decidable-neg :
   {l : Level} {A : UU l} → is-decidable (¬ A) → is-de-morgan-type A
 is-de-morgan-is-decidable-neg x B q =
   unit-trunc-Prop (is-de-morgan-is-decidable-neg-left x q)
+```
+
+### Decidable types are De Morgan
+
+```agda
+is-decidable-neg-is-decidable :
+  {l : Level} {A : UU l} → is-decidable A → is-decidable (¬ A)
+is-decidable-neg-is-decidable (inl x) = inr (intro-double-negation x)
+is-decidable-neg-is-decidable (inr x) = inl x
+
+is-de-morgan-is-decidable :
+  {l : Level} {A : UU l} → is-decidable A → is-de-morgan-type A
+is-de-morgan-is-decidable H =
+  is-de-morgan-is-decidable-neg (is-decidable-neg-is-decidable H)
 ```
 
 ## External links

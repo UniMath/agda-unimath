@@ -135,7 +135,7 @@ open import foundation.discrete-types public
 open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
-open import foundation.double-negation-elimination public
+open import logic.double-negation-elimination public
 open import foundation.double-negation-modality public
 open import foundation.double-negation-stable-propositions public
 open import foundation.double-powersets public
