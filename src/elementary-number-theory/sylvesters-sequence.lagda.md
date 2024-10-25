@@ -18,8 +18,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-{{#concept "Sylvester's sequence" WD="Sylvester's sequence" WDID=Q2293800 Agda=sylvesters-sequence-ℕ}} is the
-[sequence](foundation.sequences.md) `s` of
+{{#concept "Sylvester's sequence" WD="Sylvester's sequence" WDID=Q2293800 Agda=sylvesters-sequence-ℕ}}
+is the [sequence](foundation.sequences.md) `s` of
 [natural numbers](elementary-number-theory.natural-numbers.md) in which `s n` is
 the successor of the
 [product](elementary-number-theory.products-of-natural-numbers.md) of all the
@@ -32,8 +32,8 @@ $$
 The first few entries in this sequence are `s 0 = 2`, `s 1 = 3`, `s 2 = 7`, and
 `s 3 = 43`.
 
-Sylvester's sequence is listed as [A000058](https://oeis.org/A000058) in the [OEIS](literature.oeis.md)
-{{#cite oeis}}.
+Sylvester's sequence is listed as [A000058](https://oeis.org/A000058) in the
+[OEIS](literature.oeis.md) {{#cite oeis}}.
 
 ## Definitions
 
