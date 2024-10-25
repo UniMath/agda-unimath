@@ -45,8 +45,6 @@ previous entries in the Euclid–Mullin sequence plus one.
 ### The Euclid–Mullin sequence
 
 ```agda
-{-# TERMINATING #-}
-
 euclid-mullin-ℕ : ℕ → ℕ
 euclid-mullin-ℕ =
   strong-rec-ℕ
@@ -54,7 +52,9 @@ euclid-mullin-ℕ =
     ( λ n f →
       nat-least-nontrivial-divisor-ℕ'
         ( succ-ℕ
-          ( Π-ℕ (succ-ℕ n) (λ i → euclid-mullin-ℕ (nat-Fin (succ-ℕ n) i)))))
+          ( Π-ℕ
+            ( succ-ℕ n)
+            ( λ i → f (nat-Fin (succ-ℕ n) i) (upper-bound-nat-Fin n i)))))
 
 compute-euclid-mullin-0-ℕ : euclid-mullin-ℕ 0 ＝ 2
 compute-euclid-mullin-0-ℕ = refl
