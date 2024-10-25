@@ -14,8 +14,8 @@ open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import graph-theory.dependent-coproducts-directed-graphs
 open import graph-theory.dependent-directed-graphs
+open import graph-theory.dependent-sums-directed-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.equivalences-dependent-directed-graphs
 open import graph-theory.equivalences-directed-graphs
@@ -37,7 +37,7 @@ over `G` given by
   (fib_f)₁ e (y , refl) (y' , refl) := fib f₁ e.
 ```
 
-_Note:_ The fiber of a morphism of directed graphs should not be confused with
+**Note:** The fiber of a morphism of directed graphs should not be confused with
 the
 [fiber of a directed graph at a vertex](graph-theory.fibers-directed-graphs.md),
 which are the [directed trees](trees.directed-trees.md) of which the type of
@@ -139,7 +139,7 @@ module _
     refl-htpy-hom-Directed-Graph H G f
 ```
 
-### The fibers of the first projection of a dependent coproduct directed graph
+### The fibers of the first projection of a dependent sums of directed graph
 
 ```agda
 module _

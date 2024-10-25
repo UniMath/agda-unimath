@@ -6,6 +6,8 @@
 module graph-theory where
 
 open import graph-theory.acyclic-undirected-graphs public
+open import graph-theory.base-change-dependent-directed-graphs public
+open import graph-theory.base-change-dependent-reflexive-graphs public
 open import graph-theory.cartesian-products-directed-graphs public
 open import graph-theory.cartesian-products-reflexive-graphs public
 open import graph-theory.circuits-undirected-graphs public
@@ -15,12 +17,12 @@ open import graph-theory.complete-multipartite-graphs public
 open import graph-theory.complete-undirected-graphs public
 open import graph-theory.connected-undirected-graphs public
 open import graph-theory.cycles-undirected-graphs public
-open import graph-theory.dependent-coproducts-directed-graphs public
-open import graph-theory.dependent-coproducts-reflexive-graphs public
 open import graph-theory.dependent-directed-graphs public
 open import graph-theory.dependent-products-directed-graphs public
 open import graph-theory.dependent-products-reflexive-graphs public
 open import graph-theory.dependent-reflexive-graphs public
+open import graph-theory.dependent-sums-directed-graphs public
+open import graph-theory.dependent-sums-reflexive-graphs public
 open import graph-theory.directed-graph-duality public
 open import graph-theory.directed-graph-structures-on-standard-finite-sets public
 open import graph-theory.directed-graphs public
@@ -37,7 +39,6 @@ open import graph-theory.equivalences-enriched-undirected-graphs public
 open import graph-theory.equivalences-reflexive-graphs public
 open import graph-theory.equivalences-undirected-graphs public
 open import graph-theory.eulerian-circuits-undirected-graphs public
-open import graph-theory.exponents-directed-graphs public
 open import graph-theory.faithful-morphisms-undirected-graphs public
 open import graph-theory.fibers-directed-graphs public
 open import graph-theory.fibers-morphisms-directed-graphs public
@@ -46,6 +47,7 @@ open import graph-theory.finite-graphs public
 open import graph-theory.geometric-realizations-undirected-graphs public
 open import graph-theory.higher-directed-graphs public
 open import graph-theory.hypergraphs public
+open import graph-theory.internal-hom-directed-graphs public
 open import graph-theory.large-higher-directed-graphs public
 open import graph-theory.large-reflexive-graphs public
 open import graph-theory.matchings public
@@ -58,8 +60,6 @@ open import graph-theory.neighbors-undirected-graphs public
 open import graph-theory.orientations-undirected-graphs public
 open import graph-theory.paths-undirected-graphs public
 open import graph-theory.polygons public
-open import graph-theory.pullbacks-dependent-directed-graphs public
-open import graph-theory.pullbacks-dependent-reflexive-graphs public
 open import graph-theory.raising-universe-levels-directed-graphs public
 open import graph-theory.reflecting-maps-undirected-graphs public
 open import graph-theory.reflexive-graphs public

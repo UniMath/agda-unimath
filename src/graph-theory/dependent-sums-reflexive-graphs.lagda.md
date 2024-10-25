@@ -1,7 +1,7 @@
-# Dependent coproducts reflexive graphs
+# Dependent sums reflexive graphs
 
 ```agda
-module graph-theory.dependent-coproducts-reflexive-graphs where
+module graph-theory.dependent-sums-reflexive-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -11,12 +11,12 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import graph-theory.dependent-coproducts-directed-graphs
+open import graph-theory.base-change-dependent-reflexive-graphs
 open import graph-theory.dependent-reflexive-graphs
+open import graph-theory.dependent-sums-directed-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-reflexive-graphs
-open import graph-theory.pullbacks-dependent-reflexive-graphs
 open import graph-theory.reflexive-graphs
 open import graph-theory.sections-dependent-directed-graphs
 open import graph-theory.sections-dependent-reflexive-graphs
@@ -29,7 +29,7 @@ open import graph-theory.sections-dependent-reflexive-graphs
 Consider a
 [dependent reflexive graph](graph-theory.dependent-reflexive-graphs.md) `H` over
 a [reflexive graph](graph-theory.reflexive-graphs.md) `G`. The
-{{#concept "dependent coproduct" Disambiguation="reflexive graphs" Agda=Σ-Reflexive-Graph}}
+{{#concept "dependent sum" Disambiguation="reflexive graphs" Agda=Σ-Reflexive-Graph}}
 `Σ G H` is the reflexive graph given by
 
 ```text
@@ -40,7 +40,7 @@ a [reflexive graph](graph-theory.reflexive-graphs.md) `G`. The
 
 ## Definitions
 
-### The dependent coproduct of reflexive graphs
+### The dependent sum of reflexive graphs
 
 ```agda
 module _
@@ -72,7 +72,7 @@ module _
   pr2 Σ-Reflexive-Graph = refl-Σ-Reflexive-Graph
 ```
 
-### The first projection of the dependent coproduct reflexive graph
+### The first projection of the dependent sums of reflexive graph
 
 ```agda
 module _
@@ -118,7 +118,7 @@ module _
   pr2 pr1-Σ-Reflexive-Graph = refl-pr1-Σ-Reflexive-Graph
 ```
 
-### The second projection of the dependent coproduct reflexive graph
+### The second projection of the dependent sums of reflexive graph
 
 ```agda
 module _
@@ -128,7 +128,7 @@ module _
 
   section-dependent-directed-graph-pr2-Σ-Reflexive-Graph :
     section-dependent-directed-graph-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( Σ-Reflexive-Graph H)
         ( pr1-Σ-Reflexive-Graph H)
         ( H))
@@ -137,14 +137,14 @@ module _
 
   vertex-pr2-Σ-Reflexive-Graph :
     (x : vertex-Σ-Reflexive-Graph H) →
-    vertex-pullback-Dependent-Reflexive-Graph
+    vertex-base-change-Dependent-Reflexive-Graph
       ( Σ-Reflexive-Graph H)
       ( pr1-Σ-Reflexive-Graph H)
       ( H)
       ( x)
   vertex-pr2-Σ-Reflexive-Graph =
     vertex-section-dependent-directed-graph-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( Σ-Reflexive-Graph H)
         ( pr1-Σ-Reflexive-Graph H)
         ( H))
@@ -153,7 +153,7 @@ module _
   edge-pr2-Σ-Reflexive-Graph :
     {x y : vertex-Σ-Reflexive-Graph H}
     (e : edge-Σ-Reflexive-Graph H x y) →
-    edge-pullback-Dependent-Reflexive-Graph
+    edge-base-change-Dependent-Reflexive-Graph
       ( Σ-Reflexive-Graph H)
       ( pr1-Σ-Reflexive-Graph H)
       ( H)
@@ -162,7 +162,7 @@ module _
       ( vertex-pr2-Σ-Reflexive-Graph y)
   edge-pr2-Σ-Reflexive-Graph =
     edge-section-dependent-directed-graph-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( Σ-Reflexive-Graph H)
         ( pr1-Σ-Reflexive-Graph H)
         ( H))
@@ -176,7 +176,7 @@ module _
 
   pr2-Σ-Reflexive-Graph :
     section-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( Σ-Reflexive-Graph H)
         ( pr1-Σ-Reflexive-Graph H)
         ( H))

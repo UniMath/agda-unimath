@@ -14,7 +14,7 @@ open import foundation.spans
 open import foundation.universe-levels
 
 open import structured-types.dependent-globular-types
-open import structured-types.exponents-globular-types
+open import structured-types.exponentials-globular-types
 open import structured-types.globular-maps
 open import structured-types.globular-types
 ```
@@ -29,7 +29,7 @@ its type of `0`-cells, and uses iterated binary relations for its globular
 structure.
 
 Specifically, the universal globular type is a translation from category theory
-into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of
+into type theory of the Hofmann–Streicher universe {{#cite Awodey22}} of
 presheaves on the globular category `Γ`
 
 ```text
@@ -39,7 +39,7 @@ presheaves on the globular category `Γ`
       t₀       t₁       t₂
 ```
 
-The Hofmann-Streicher universe of presheaves on a category `𝒞` is the presheaf
+The Hofmann–Streicher universe of presheaves on a category `𝒞` is the presheaf
 
 ```text
      𝒰_𝒞 I := Presheaf 𝒞/I
@@ -100,8 +100,9 @@ This means that:
 
 In other words, the universal globular type `𝒰` has the universe of types as its
 type of `0`-cells, and for any two types `X` and `Y`, the globular type of
-`1`-cells is the double [exponent](structured-types.exponents-globular-types.md)
-`(𝒰^Y)^X` of globular types.
+`1`-cells is the double
+[exponent](structured-types.exponentials-globular-types.md) `(𝒰^Y)^X` of
+globular types.
 
 Unfortunately, the termination checking algorithm isn't able to establish that
 this definition is terminating. Nevertheless, when termination checking is
@@ -123,8 +124,8 @@ universal-Globular-Type :
 0-cell-Globular-Type (universal-Globular-Type l1 l2) =
   0-cell-universal-Globular-Type l1 l2
 1-cell-globular-type-Globular-Type (universal-Globular-Type l1 l2) X Y =
-  exponent-Globular-Type X
-    ( exponent-Globular-Type Y (universal-Globular-Type l2 l2))
+  exponential-Globular-Type X
+    ( exponential-Globular-Type Y (universal-Globular-Type l2 l2))
 
 1-cell-universal-Globular-Type :
   {l1 l2 : Level} (X Y : UU l1) → UU (l1 ⊔ lsuc l2)
@@ -167,8 +168,8 @@ dependent-globular-type-hom-universal-Globular-Type :
   {x} {x'} y y' =
   dependent-globular-type-hom-universal-Globular-Type
     ( 1-cell-globular-type-Globular-Type G x x')
-    ( ev-hom-exponent-Globular-Type
-      ( ev-hom-exponent-Globular-Type
+    ( ev-hom-exponential-Globular-Type
+      ( ev-hom-exponential-Globular-Type
         ( 1-cell-globular-map-globular-map h {x} {x'})
         ( y))
       ( y'))

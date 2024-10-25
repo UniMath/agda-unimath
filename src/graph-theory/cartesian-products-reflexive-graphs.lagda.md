@@ -24,8 +24,9 @@ open import graph-theory.reflexive-graphs
 ## Idea
 
 Consider two [reflexive graphs](graph-theory.reflexive-graphs.md)
-`A := (A₀ , A₁)` and `B := (B₀ , B₁)`. The cartesian product of `A` and `B` is
-the reflexive graph `A × B` given by
+`A := (A₀ , A₁)` and `B := (B₀ , B₁)`. The
+{{#concept "cartesian product" Disambiguation="reflexive graphs" Agda=product-Reflexive-Graph}}
+of `A` and `B` is the reflexive graph `A × B` given by
 
 ```text
   (A × B)₀ := A₀ × B₀

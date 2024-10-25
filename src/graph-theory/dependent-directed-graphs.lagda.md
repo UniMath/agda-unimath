@@ -26,9 +26,10 @@ Consider a [directed graph](graph-theory.directed-graphs.md) `A`. A
   [binary relations](foundation.binary-relations.md) between the types of
   vertices `B₀`, indexed by the type of edges `A₁` in `A`.
 
-This definition may appear overly general. However, one can observe that the
-type of directed graphs itself is [equivalent](foundation-core.equivalences.md)
-to the type of dependent directed graphs over the
+To see that this is a sensible definition of dependent directed graphs, observe
+that the type of directed graphs itself is
+[equivalent](foundation-core.equivalences.md) to the type of dependent directed
+graphs over the
 [terminal directed graph](graph-theory.terminal-directed-graphs.md).
 Furthermore, [graph homomorphisms](graph-theory.morphisms-directed-graphs.md)
 into the [universal directed graph](graph-theory.universal-directed-graph.md)
@@ -93,4 +94,4 @@ module _
 ## See also
 
 - The [universal directed graph](graph-theory.universal-directed-graph.md)
-- [Pullbacks of dependent directed graphs](graph-theory.pullbacks-dependent-directed-graphs.md)
+- [base change of dependent directed graphs](graph-theory.base-change-dependent-directed-graphs.md)

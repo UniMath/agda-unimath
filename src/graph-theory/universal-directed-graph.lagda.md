@@ -18,12 +18,13 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-The {{#concpept "universal directed graph"}} `𝒢 l` at
-[universe level](foundation.universe-levels.md) `l` has the universe `UU l` as
-its type of vertices, and spans between types as its edges.
+The {{#concpept "universal directed graph" Agda=universal-Directed-Graph}} `𝒢 l`
+at [universe level](foundation.universe-levels.md) `l` is the
+[directed graph](graph-theory.directed-graphs.md) that has the universe `UU l`
+as its type of vertices, and spans between types as its edges.
 
 Specifically, the universal directed graph is a translation from category theory
-into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of
+into type theory of the Hofmann–Streicher universe {{#cite Awodey22}} of
 presheaves on the representing pair of arrows
 
 ```text
@@ -33,7 +34,7 @@ presheaves on the representing pair of arrows
       t
 ```
 
-The Hofmann-Streicher universe of presheaves on a category `𝒞` is the presheaf
+The Hofmann–Streicher universe of presheaves on a category `𝒞` is the presheaf
 
 ```text
      𝒰_𝒞 I := Presheaf 𝒞/I
@@ -60,6 +61,14 @@ This means that:
   `UU l`.
 - The type of edges from `X` to `Y` of the universal directed graph is the type
   of spans from `X` to `Y`.
+
+There is a
+[directed graph duality theorem](graph-theory.directed-graph-duality.md), which
+asserts that for any directed graph `G`, the type of
+[morphisms](graph-theory.morphisms-directed-graphs.md) `hom G 𝒰` from `G` into
+the universal directed graph is [equivalent](foundation-core.equivalences.md) to
+the type of pairs `(H , f)` consisting of a directed graph `H` and a morphism
+`f : hom H G` from `H` into `G`.
 
 ## Definitions
 
@@ -108,14 +117,7 @@ module _
     edge-universal-Dependent-Directed-Graph
 ```
 
-## Formalization target
-
-There is a _directed graph duality theorem_, which asserts that for any directed
-graph `G`, the type of morphisms `hom G 𝒰` from `G` into the universal directed
-graph is equivalent to the type of pairs `(H , f)` consisting of a directed
-graph `H` and a morphism `f : hom H G` from `H` into `G`. Such a result should
-be formalized in a new file called `directed-graph-duality`.
-
 ## See also
 
 - [The universal reflexive graph](graph-theory.universal-reflexive-graph.md)
+- [Directed graph duality](graph-theory.directed-graph-duality.md)

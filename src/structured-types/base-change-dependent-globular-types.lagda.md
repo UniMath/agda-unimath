@@ -1,9 +1,9 @@
-# Pullbacks of dependent globular types
+# Base change of dependent globular types
 
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.pullbacks-dependent-globular-types where
+module structured-types.base-change-dependent-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -24,7 +24,7 @@ Consider a
 [dependent globular type](structured-types.dependent-globular-types.md) `H` over
 `G`, and consider a [globular map](structured-types.globular-maps.md)
 `f : K → G`. The
-{{#concept "pullback" Disambiguation="dependent globular types" agda=pullback-Dependent-Globular-Type}}
+{{#concept "base change" Disambiguation="dependent globular types" agda=base-change-Dependent-Globular-Type}}
 of `H` along `f` is the dependent globular type `f*H` given by
 
 ```text
@@ -35,18 +35,18 @@ of `H` along `f` is the dependent globular type `f*H` given by
 ## Definitions
 
 ```agda
-pullback-Dependent-Globular-Type :
+base-change-Dependent-Globular-Type :
   {l1 l2 l3 l4 l5 l6 : Level}
   {G : Globular-Type l1 l2} {K : Globular-Type l3 l4}
   (f : globular-map K G) →
   Dependent-Globular-Type l5 l6 G → Dependent-Globular-Type l5 l6 K
 0-cell-Dependent-Globular-Type
-  ( pullback-Dependent-Globular-Type f H)
+  ( base-change-Dependent-Globular-Type f H)
   ( x) =
   0-cell-Dependent-Globular-Type H (0-cell-globular-map f x)
 1-cell-dependent-globular-type-Dependent-Globular-Type
-  ( pullback-Dependent-Globular-Type f H) y y' =
-  pullback-Dependent-Globular-Type
+  ( base-change-Dependent-Globular-Type f H) y y' =
+  base-change-Dependent-Globular-Type
     ( 1-cell-globular-map-globular-map f)
     ( 1-cell-dependent-globular-type-Dependent-Globular-Type H y y')
 
@@ -56,26 +56,26 @@ module _
   (f : globular-map K G) (H : Dependent-Globular-Type l5 l6 G)
   where
 
-  0-cell-pullback-Dependent-Globular-Type :
+  0-cell-base-change-Dependent-Globular-Type :
     0-cell-Globular-Type K → UU l5
-  0-cell-pullback-Dependent-Globular-Type =
-    0-cell-Dependent-Globular-Type (pullback-Dependent-Globular-Type f H)
+  0-cell-base-change-Dependent-Globular-Type =
+    0-cell-Dependent-Globular-Type (base-change-Dependent-Globular-Type f H)
 
-  1-cell-dependent-globular-type-pullback-Dependent-Globular-Type :
+  1-cell-dependent-globular-type-base-change-Dependent-Globular-Type :
     {x x' : 0-cell-Globular-Type K}
-    (y : 0-cell-pullback-Dependent-Globular-Type x)
-    (y' : 0-cell-pullback-Dependent-Globular-Type x') →
+    (y : 0-cell-base-change-Dependent-Globular-Type x)
+    (y' : 0-cell-base-change-Dependent-Globular-Type x') →
     Dependent-Globular-Type l6 l6
       ( 1-cell-globular-type-Globular-Type K x x')
-  1-cell-dependent-globular-type-pullback-Dependent-Globular-Type =
+  1-cell-dependent-globular-type-base-change-Dependent-Globular-Type =
     1-cell-dependent-globular-type-Dependent-Globular-Type
-      ( pullback-Dependent-Globular-Type f H)
+      ( base-change-Dependent-Globular-Type f H)
 
-  1-cell-pullback-Dependent-Globular-Type :
+  1-cell-base-change-Dependent-Globular-Type :
     {x x' : 0-cell-Globular-Type K}
-    (y : 0-cell-pullback-Dependent-Globular-Type x)
-    (y' : 0-cell-pullback-Dependent-Globular-Type x') →
+    (y : 0-cell-base-change-Dependent-Globular-Type x)
+    (y' : 0-cell-base-change-Dependent-Globular-Type x') →
     1-cell-Globular-Type K x x' → UU l6
-  1-cell-pullback-Dependent-Globular-Type =
-    1-cell-Dependent-Globular-Type (pullback-Dependent-Globular-Type f H)
+  1-cell-base-change-Dependent-Globular-Type =
+    1-cell-Dependent-Globular-Type (base-change-Dependent-Globular-Type f H)
 ```

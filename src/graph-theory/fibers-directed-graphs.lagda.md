@@ -39,7 +39,7 @@ nodes consists of vertices `y` equipped with a
 of edges from `(y , w)` to `(z , v)` consist of an edge `e : y → z` such that
 `w ＝ cons e v`.
 
-_Note:_ The fiber of a directed graphs should not be confused with the
+**Note:** The fiber of a directed graphs should not be confused with the
 [fiber of a morphism of directed graphs](graph-theory.fibers-morphisms-directed-graphs.md),
 which is the
 [dependent directed graph](graph-theory.dependent-directed-graphs.md) consisting

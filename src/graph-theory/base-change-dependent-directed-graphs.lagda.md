@@ -1,7 +1,7 @@
-# Pullbacks of dependent directed graphs
+# Base change of dependent directed graphs
 
 ```agda
-module graph-theory.pullbacks-dependent-directed-graphs where
+module graph-theory.base-change-dependent-directed-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -22,9 +22,9 @@ open import graph-theory.morphisms-directed-graphs
 Consider a [dependent directed graph](graph-theory.dependent-directed-graphs.md)
 `B` over a [directed graph](graph-theory.directed-graphs.md) `A`, and consider a
 [graph homomorphism](graph-theory.morphisms-directed-graphs.md) `f : C → A`. The
-{{#concept "pullback" Disambiguation="dependent directed graphs"}} `f*B` of `B`
-along `f` is defined by substituting the values of `f` into `B`. More precisely,
-`f*B` is defined by
+{{#concept "base change" Disambiguation="dependent directed graphs" Agda=base-change-Dependent-Directed-Graph}}
+`f*B` of `B` along `f` is defined by substituting the values of `f` into `B`.
+More precisely, `f*B` is defined by
 
 ```text
   (f*B)₀ c := B₀ (f₀ c)
@@ -33,7 +33,7 @@ along `f` is defined by substituting the values of `f` into `B`. More precisely,
 
 ## Definitions
 
-### The pullback of dependent directed graphs
+### Base change of dependent directed graphs
 
 ```agda
 module _
@@ -43,22 +43,22 @@ module _
   (B : Dependent-Directed-Graph l5 l6 A)
   where
 
-  vertex-pullback-Dependent-Directed-Graph :
+  vertex-base-change-Dependent-Directed-Graph :
     (c : vertex-Directed-Graph C) → UU l5
-  vertex-pullback-Dependent-Directed-Graph c =
+  vertex-base-change-Dependent-Directed-Graph c =
     vertex-Dependent-Directed-Graph B (vertex-hom-Directed-Graph C A f c)
 
-  edge-pullback-Dependent-Directed-Graph :
+  edge-base-change-Dependent-Directed-Graph :
     {x y : vertex-Directed-Graph C} (e : edge-Directed-Graph C x y) →
-    vertex-pullback-Dependent-Directed-Graph x →
-    vertex-pullback-Dependent-Directed-Graph y → UU l6
-  edge-pullback-Dependent-Directed-Graph e =
+    vertex-base-change-Dependent-Directed-Graph x →
+    vertex-base-change-Dependent-Directed-Graph y → UU l6
+  edge-base-change-Dependent-Directed-Graph e =
     edge-Dependent-Directed-Graph B (edge-hom-Directed-Graph C A f e)
 
-  pullback-Dependent-Directed-Graph :
+  base-change-Dependent-Directed-Graph :
     Dependent-Directed-Graph l5 l6 C
-  pr1 pullback-Dependent-Directed-Graph =
-    vertex-pullback-Dependent-Directed-Graph
-  pr2 pullback-Dependent-Directed-Graph _ _ =
-    edge-pullback-Dependent-Directed-Graph
+  pr1 base-change-Dependent-Directed-Graph =
+    vertex-base-change-Dependent-Directed-Graph
+  pr2 base-change-Dependent-Directed-Graph _ _ =
+    edge-base-change-Dependent-Directed-Graph
 ```

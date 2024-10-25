@@ -1,7 +1,7 @@
-# Dependent coproducts directed graphs
+# Dependent sums directed graphs
 
 ```agda
-module graph-theory.dependent-coproducts-directed-graphs where
+module graph-theory.dependent-sums-directed-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -10,10 +10,10 @@ module graph-theory.dependent-coproducts-directed-graphs where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import graph-theory.base-change-dependent-directed-graphs
 open import graph-theory.dependent-directed-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
-open import graph-theory.pullbacks-dependent-directed-graphs
 open import graph-theory.sections-dependent-directed-graphs
 ```
 
@@ -23,7 +23,7 @@ open import graph-theory.sections-dependent-directed-graphs
 
 Consider a [dependent directed graph](graph-theory.dependent-directed-graphs.md)
 `H` over a [directed graph](graph-theory.directed-graphs.md) `G`. The
-{{#concept "dependent coproduct" Disambiguation="directed graphs" Agda=Σ-Directed-Graph}}
+{{#concept "dependent sum" Disambiguation="directed graphs" Agda=Σ-Directed-Graph}}
 `Σ G H` is the directed graph given by
 
 ```text
@@ -33,7 +33,7 @@ Consider a [dependent directed graph](graph-theory.dependent-directed-graphs.md)
 
 ## Definitions
 
-### The dependent coproduct of directed graphs
+### The dependent sum of directed graphs
 
 ```agda
 module _
@@ -56,7 +56,7 @@ module _
   pr2 Σ-Directed-Graph = edge-Σ-Directed-Graph
 ```
 
-### The first projection of the dependent coproduct directed graph
+### The first projection of the dependent sums of directed graph
 
 ```agda
 module _
@@ -82,7 +82,7 @@ module _
   pr2 pr1-Σ-Directed-Graph _ _ = edge-pr1-Σ-Directed-Graph
 ```
 
-### The second projection of the dependent coproduct directed graph
+### The second projection of the dependent sums of directed graph
 
 ```agda
 module _
@@ -106,7 +106,7 @@ module _
 
   pr2-Σ-Directed-Graph :
     section-Dependent-Directed-Graph
-      ( pullback-Dependent-Directed-Graph
+      ( base-change-Dependent-Directed-Graph
         ( Σ-Directed-Graph H)
         ( pr1-Σ-Directed-Graph H)
         ( H))

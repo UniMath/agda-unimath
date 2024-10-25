@@ -31,13 +31,13 @@ open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import graph-theory.base-change-dependent-reflexive-graphs
 open import graph-theory.cartesian-products-reflexive-graphs
 open import graph-theory.dependent-products-directed-graphs
 open import graph-theory.dependent-reflexive-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-reflexive-graphs
-open import graph-theory.pullbacks-dependent-reflexive-graphs
 open import graph-theory.reflexive-graphs
 open import graph-theory.sections-dependent-reflexive-graphs
 ```
@@ -161,7 +161,7 @@ module _
 
   section-dependent-directed-graph-ev-section-Π-Reflexive-Graph :
     section-dependent-directed-graph-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( product-Reflexive-Graph C A)
         ( pr2-product-Reflexive-Graph C A)
         ( B))
@@ -172,7 +172,7 @@ module _
 
   ev-section-Π-Reflexive-Graph :
     section-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( product-Reflexive-Graph C A)
         ( pr2-product-Reflexive-Graph C A)
         ( B))
@@ -191,7 +191,7 @@ module _
   (C : Reflexive-Graph l5 l6)
   (f :
     section-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( product-Reflexive-Graph C A)
         ( pr2-product-Reflexive-Graph C A)
         ( B)))
@@ -205,7 +205,7 @@ module _
       (y : vertex-Reflexive-Graph A) → vertex-Dependent-Reflexive-Graph B y
     vertex-vertex-uncurry-section-product-Reflexive-Graph y =
       vertex-section-Dependent-Reflexive-Graph
-        ( pullback-Dependent-Reflexive-Graph
+        ( base-change-Dependent-Reflexive-Graph
           ( product-Reflexive-Graph C A)
           ( pr2-product-Reflexive-Graph C A)
           ( B))
@@ -219,7 +219,7 @@ module _
         ( vertex-vertex-uncurry-section-product-Reflexive-Graph y')
     edge-vertex-uncurry-section-product-Reflexive-Graph e =
       edge-section-Dependent-Reflexive-Graph
-        ( pullback-Dependent-Reflexive-Graph
+        ( base-change-Dependent-Reflexive-Graph
           ( product-Reflexive-Graph C A)
           ( pr2-product-Reflexive-Graph C A)
           ( B))
@@ -234,7 +234,7 @@ module _
         ( vertex-vertex-uncurry-section-product-Reflexive-Graph y)
     refl-vertex-uncurry-section-product-Reflexive-Graph y =
       refl-section-Dependent-Reflexive-Graph
-        ( pullback-Dependent-Reflexive-Graph
+        ( base-change-Dependent-Reflexive-Graph
           ( product-Reflexive-Graph C A)
           ( pr2-product-Reflexive-Graph C A)
           ( B))
@@ -265,7 +265,7 @@ module _
       ( vertex-uncurry-section-product-Reflexive-Graph x')
   edge-uncurry-section-product-Reflexive-Graph d y y' e =
     edge-section-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( product-Reflexive-Graph C A)
         ( pr2-product-Reflexive-Graph C A)
         ( B))
@@ -309,12 +309,12 @@ module _
   htpy-is-section-uncurry-section-product-Reflexive-Graph :
     ( f :
       section-Dependent-Reflexive-Graph
-        ( pullback-Dependent-Reflexive-Graph
+        ( base-change-Dependent-Reflexive-Graph
           ( product-Reflexive-Graph C A)
           ( pr2-product-Reflexive-Graph C A)
           ( B))) →
     htpy-section-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( product-Reflexive-Graph C A)
         ( pr2-product-Reflexive-Graph C A)
         ( B))
@@ -334,7 +334,7 @@ module _
       ( uncurry-section-product-Reflexive-Graph A B C)
   is-section-uncurry-section-product-Reflexive-Graph f =
     eq-htpy-section-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( product-Reflexive-Graph C A)
         ( pr2-product-Reflexive-Graph C A)
         ( B))
@@ -590,7 +590,7 @@ module _
   ev-equiv-hom-Π-Reflexive-Graph :
     hom-Reflexive-Graph C (Π-Reflexive-Graph A B) ≃
     section-Dependent-Reflexive-Graph
-      ( pullback-Dependent-Reflexive-Graph
+      ( base-change-Dependent-Reflexive-Graph
         ( product-Reflexive-Graph C A)
         ( pr2-product-Reflexive-Graph C A)
         ( B))
@@ -602,4 +602,4 @@ module _
 
 ## See also
 
-- [Dependent coproduct reflexive graphs](graph-theory.dependent-coproducts-reflexive-graphs.md)
+- [dependent sums of reflexive graphs](graph-theory.dependent-sums-reflexive-graphs.md)

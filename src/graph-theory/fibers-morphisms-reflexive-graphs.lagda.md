@@ -19,9 +19,9 @@ open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import graph-theory.dependent-coproducts-reflexive-graphs
 open import graph-theory.dependent-directed-graphs
 open import graph-theory.dependent-reflexive-graphs
+open import graph-theory.dependent-sums-reflexive-graphs
 open import graph-theory.equivalences-dependent-directed-graphs
 open import graph-theory.equivalences-dependent-reflexive-graphs
 open import graph-theory.equivalences-reflexive-graphs
@@ -202,7 +202,7 @@ module _
         ( inv (ap-id (refl-hom-Reflexive-Graph H G f x))))
 ```
 
-### The fibers of the first projection of a dependent coproduct reflexive graph
+### The fibers of the first projection of a dependent sums of reflexive graph
 
 ```agda
 module _

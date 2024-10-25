@@ -7,8 +7,12 @@ module graph-theory.universal-reflexive-graph where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import graph-theory.dependent-directed-graphs
+open import graph-theory.dependent-reflexive-graphs
+open import graph-theory.directed-graphs
 open import graph-theory.reflexive-graphs
 ```
 
@@ -16,10 +20,10 @@ open import graph-theory.reflexive-graphs
 
 ## Idea
 
-The {{#concpept "universal reflexive graph"}} `𝒢 l` at
-[universe level](foundation.universe-levels.md) is a translation from category
-theory into type theory of the Hofmann-Streicher universe {{#cite Awodey22}} of
-presheaves on the reflexive graph category `Γʳ`
+The {{#concpept "universal reflexive graph" Agda=universal-Reflexive-Graph}}
+`𝒢 l` at [universe level](foundation.universe-levels.md) is a translation from
+category theory into type theory of the Hofmann–Streicher universe
+{{#cite Awodey22}} of presheaves on the reflexive graph category `Γʳ`
 
 ```text
       s
@@ -29,15 +33,15 @@ presheaves on the reflexive graph category `Γʳ`
       t
 ```
 
-in which we have `rs = id` and `rt = id`. The Hofmann-Streicher universe of
+in which we have `rs = id` and `rt = id`. The Hofmann–Streicher universe of
 presheaves on a category `𝒞` is the presheaf
 
 ```text
      𝒰_𝒞 I := Presheaf 𝒞/I
-  El_𝒞 I A := A *,
+  El_𝒞 I A := A 0,
 ```
 
-where `*` is the terminal object of `𝒞/I`, i.e., the identity morphism on `I`.
+where `0` is the terminal object of `𝒞/I`, i.e., the identity morphism on `I`.
 
 We compute a few instances of the slice category `Γʳ/I`:
 
@@ -66,9 +70,11 @@ We compute a few instances of the slice category `Γʳ/I`:
 
   in which we have `rs = id` and `rt = id`.
 
-This means that the universal reflexive graph `𝒰` can be defined as follows:
+This means that the universal reflexive graph `𝒰` can be defined type
+theoretically as follows:
 
-- The type of vertices of `𝒰` is the type of reflexive graphs.
+- The type of vertices of `𝒰` is the type of
+  [reflexive graphs](graph-theory.reflexive-graphs.md).
 - The type of edges from `G` to `H` is the type
 
   ```text
@@ -108,6 +114,60 @@ module _
     edge-universal-Reflexvie-Graph G G
   refl-universal-Reflexive-Graph G =
     edge-Reflexive-Graph G
+
+  directed-graph-universal-Reflexive-Graph :
+    Directed-Graph (lsuc l1 ⊔ lsuc l2) (l1 ⊔ lsuc l2)
+  pr1 directed-graph-universal-Reflexive-Graph =
+    vertex-universal-Reflexive-Graph
+  pr2 directed-graph-universal-Reflexive-Graph =
+    edge-universal-Reflexvie-Graph
+
+  universal-Reflexive-Graph :
+    Reflexive-Graph (lsuc l1 ⊔ lsuc l2) (l1 ⊔ lsuc l2)
+  pr1 universal-Reflexive-Graph = directed-graph-universal-Reflexive-Graph
+  pr2 universal-Reflexive-Graph = refl-universal-Reflexive-Graph
+```
+
+### The universal dependent directed graph
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  vertex-universal-Dependent-Reflexive-Graph :
+    (G : vertex-universal-Reflexive-Graph l1 l2) → UU l1
+  vertex-universal-Dependent-Reflexive-Graph G =
+    vertex-Reflexive-Graph G
+
+  edge-universal-Dependent-Reflexive-Graph :
+    (G H : vertex-universal-Reflexive-Graph l1 l2)
+    (R : edge-universal-Reflexvie-Graph l1 l2 G H) →
+    vertex-universal-Dependent-Reflexive-Graph G →
+    vertex-universal-Dependent-Reflexive-Graph H → UU l2
+  edge-universal-Dependent-Reflexive-Graph G H R x y = R x y
+
+  refl-universal-Dependent-Reflexive-Graph :
+    (G : vertex-universal-Reflexive-Graph l1 l2)
+    (x : vertex-universal-Dependent-Reflexive-Graph G) →
+    edge-universal-Dependent-Reflexive-Graph G G
+      ( refl-universal-Reflexive-Graph l1 l2 G) x x
+  refl-universal-Dependent-Reflexive-Graph G x = refl-Reflexive-Graph G x
+
+  dependent-directed-graph-universal-Dependent-Reflexive-Graph :
+    Dependent-Directed-Graph l1 l2
+      ( directed-graph-universal-Reflexive-Graph l1 l2)
+  pr1 dependent-directed-graph-universal-Dependent-Reflexive-Graph =
+    vertex-universal-Dependent-Reflexive-Graph
+  pr2 dependent-directed-graph-universal-Dependent-Reflexive-Graph =
+    edge-universal-Dependent-Reflexive-Graph
+
+  universal-Dependent-Reflexive-Graph :
+    Dependent-Reflexive-Graph l1 l2 (universal-Reflexive-Graph l1 l2)
+  pr1 universal-Dependent-Reflexive-Graph =
+    dependent-directed-graph-universal-Dependent-Reflexive-Graph
+  pr2 universal-Dependent-Reflexive-Graph =
+    refl-universal-Dependent-Reflexive-Graph
 ```
 
 ## Formalization target

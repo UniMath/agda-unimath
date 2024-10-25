@@ -1,9 +1,9 @@
-# Dependent coproducts of globular types
+# Dependent sums of globular types
 
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.dependent-coproducts-globular-types where
+module structured-types.dependent-sums-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -12,10 +12,10 @@ module structured-types.dependent-coproducts-globular-types where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import structured-types.base-change-dependent-globular-types
 open import structured-types.dependent-globular-types
 open import structured-types.globular-maps
 open import structured-types.globular-types
-open import structured-types.pullbacks-dependent-globular-types
 open import structured-types.sections-dependent-globular-types
 ```
 
@@ -26,7 +26,7 @@ open import structured-types.sections-dependent-globular-types
 Consider a
 [dependent globular type](structured-types.dependent-globular-types.md) `H` over
 a [globular type](structured-types.globular-types.md) `G`. The
-{{#concept "dependent coproduct" Disambiguation="globular types" Agda=Σ-Globular-Type}}
+{{#concept "dependent sum" Disambiguation="globular types" Agda=Σ-Globular-Type}}
 `Σ G H` of `H` is the globular type given by
 
 ```text
@@ -36,7 +36,7 @@ a [globular type](structured-types.globular-types.md) `G`. The
 
 ## Definitions
 
-### Dependent coproducts of dependent globular types
+### Dependent sums of dependent globular types
 
 ```agda
 Σ-Globular-Type :
@@ -80,7 +80,7 @@ module _
     2-cell-Globular-Type (Σ-Globular-Type H)
 ```
 
-### The first projection out of the dependent coproduct of a dependent globular type
+### The first projection out of the dependent sum of a dependent globular type
 
 ```agda
 pr1-Σ-Globular-Type :
@@ -122,14 +122,14 @@ module _
     1-cell-globular-map (pr1-Σ-Globular-Type H)
 ```
 
-### The second projection of a dependent coproduct of globular types
+### The second projection of a dependent sum of globular types
 
 ```agda
 pr2-Σ-Globular-Type :
   {l1 l2 l3 l4 : Level} {G : Globular-Type l1 l2}
   (H : Dependent-Globular-Type l3 l4 G) →
   section-Dependent-Globular-Type
-    ( pullback-Dependent-Globular-Type (pr1-Σ-Globular-Type H) H)
+    ( base-change-Dependent-Globular-Type (pr1-Σ-Globular-Type H) H)
 0-cell-section-Dependent-Globular-Type (pr2-Σ-Globular-Type H) = pr2
 1-cell-section-section-Dependent-Globular-Type (pr2-Σ-Globular-Type H) =
   pr2-Σ-Globular-Type
@@ -142,14 +142,14 @@ module _
 
   0-cell-pr2-Σ-Globular-Type :
     (x : 0-cell-Σ-Globular-Type H) →
-    0-cell-pullback-Dependent-Globular-Type (pr1-Σ-Globular-Type H) H x
+    0-cell-base-change-Dependent-Globular-Type (pr1-Σ-Globular-Type H) H x
   0-cell-pr2-Σ-Globular-Type =
     0-cell-section-Dependent-Globular-Type (pr2-Σ-Globular-Type H)
 
   1-cell-section-pr2-Σ-Globular-Type :
     {x x' : 0-cell-Σ-Globular-Type H} →
     section-Dependent-Globular-Type
-      ( 1-cell-dependent-globular-type-pullback-Dependent-Globular-Type
+      ( 1-cell-dependent-globular-type-base-change-Dependent-Globular-Type
         ( pr1-Σ-Globular-Type H)
         ( H)
         ( 0-cell-pr2-Σ-Globular-Type x)
@@ -160,7 +160,7 @@ module _
   1-cell-pr2-Σ-Globular-Type :
     {x x' : 0-cell-Σ-Globular-Type H}
     (f : 1-cell-Σ-Globular-Type H x x') →
-    1-cell-pullback-Dependent-Globular-Type
+    1-cell-base-change-Dependent-Globular-Type
       ( pr1-Σ-Globular-Type H)
       ( H)
       ( 0-cell-pr2-Σ-Globular-Type x)
@@ -168,6 +168,6 @@ module _
       ( f)
   1-cell-pr2-Σ-Globular-Type =
     1-cell-section-Dependent-Globular-Type
-      ( pullback-Dependent-Globular-Type (pr1-Σ-Globular-Type H) H)
+      ( base-change-Dependent-Globular-Type (pr1-Σ-Globular-Type H) H)
       ( pr2-Σ-Globular-Type H)
 ```

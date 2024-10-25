@@ -9,6 +9,7 @@
 ```agda
 module structured-types where
 
+open import structured-types.base-change-dependent-globular-types public
 open import structured-types.binary-globular-maps public
 open import structured-types.cartesian-products-types-equipped-with-endomorphisms public
 open import structured-types.central-h-spaces public
@@ -22,19 +23,19 @@ open import structured-types.conjugation-pointed-types public
 open import structured-types.constant-pointed-maps public
 open import structured-types.contractible-pointed-types public
 open import structured-types.cyclic-types public
-open import structured-types.dependent-coproducts-globular-types public
 open import structured-types.dependent-globular-types public
 open import structured-types.dependent-products-h-spaces public
 open import structured-types.dependent-products-pointed-types public
 open import structured-types.dependent-products-wild-monoids public
 open import structured-types.dependent-reflexive-globular-types public
+open import structured-types.dependent-sums-globular-types public
 open import structured-types.dependent-types-equipped-with-automorphisms public
 open import structured-types.equality-globular-types public
 open import structured-types.equivalences-h-spaces public
 open import structured-types.equivalences-pointed-arrows public
 open import structured-types.equivalences-types-equipped-with-automorphisms public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
-open import structured-types.exponents-globular-types public
+open import structured-types.exponentials-globular-types public
 open import structured-types.faithful-pointed-maps public
 open import structured-types.fibers-globular-maps public
 open import structured-types.fibers-of-pointed-maps public
@@ -96,7 +97,6 @@ open import structured-types.pointed-universal-property-contractible-types publi
 open import structured-types.postcomposition-pointed-maps public
 open import structured-types.precomposition-pointed-maps public
 open import structured-types.products-families-of-globular-types public
-open import structured-types.pullbacks-dependent-globular-types public
 open import structured-types.reflexive-globular-maps public
 open import structured-types.reflexive-globular-types public
 open import structured-types.sections-dependent-globular-types public

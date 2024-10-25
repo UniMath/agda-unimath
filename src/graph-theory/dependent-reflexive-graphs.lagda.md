@@ -30,9 +30,10 @@ Consider a [reflexive graph](graph-theory.reflexive-graphs.md) `A`. A
 - A family of elements `Bᵣ : (x : A₀) (y : B₀ x) → B₁ (Aᵣ x) y y` witnessing the
   reflexivity of `B₁` over the reflexivity `Aᵣ` of `A₁`.
 
-This definition may appear overly general. However, one can observe that the
-type of reflexive graphs itself is [equivalent](foundation-core.equivalences.md)
-to the type of dependent reflexive graphs over the
+To see that this is a sensible definition of dependent reflexive graphs, observe
+that the type of reflexive graphs itself is
+[equivalent](foundation-core.equivalences.md) to the type of dependent reflexive
+graphs over the
 [terminal reflexive graph](graph-theory.terminal-reflexive-graphs.md).
 Furthermore, [graph homomorphisms](graph-theory.morphisms-reflexive-graphs.md)
 into the [universal reflexive graph](graph-theory.universal-reflexive-graph.md)
@@ -43,7 +44,11 @@ Alternatively, a dependent reflexive graph `B` over `A` can be defined by
 - A family `B₀ : A₀ → Reflexive-Graph` of reflexive graphs as the type family of
   vertices
 - A family `B₁ : {x y : A₀} → A₁ x y → (B₀ x)₀ → (B₀ y)₀ → 𝒰`.
-- A family `Bᵣ : (x : A₀) → B₁ (Aᵣ x) ＝ (B₀ x)₁
+- A [family of equivalences](foundation.families-of-equivalences.md) `Bᵣ : (x :
+  A₀) (y y' : B₀ x) → B₁ (Aᵣ x) y y' ≃ (B₀ x)₁ y y'.
+
+This definition is more closely related to the concept of morphism into the
+universal reflexive graph.
 
 ## Definitions
 
@@ -150,4 +155,4 @@ module _
 ## See also
 
 - The [universal reflexive graph](graph-theory.universal-reflexive-graph.md)
-- [Pullbacks of dependent reflexive graphs](graph-theory.pullbacks-dependent-reflexive-graphs.md)
+- [base change of dependent reflexive graphs](graph-theory.base-change-dependent-reflexive-graphs.md)

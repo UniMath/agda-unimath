@@ -29,7 +29,7 @@ open import graph-theory.directed-graphs
 
 Consider two
 [dependent directed graphs](graph-theory.dependent-directed-graphs.md) `H` and
-`K` over a [directed graph](graph-theory.directed-graphs.md) `G`. A
+`K` over a [directed graph](graph-theory.directed-graphs.md) `G`. An
 {{#concept "equivalence of dependent directed graphs" Agda=equiv-Dependent-Directed-Graph}}
 from `H` to `K` consists of a
 [family of equivalences](foundation.families-of-equivalences.md)

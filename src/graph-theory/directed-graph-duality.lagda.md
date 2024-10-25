@@ -17,8 +17,8 @@ open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import graph-theory.dependent-coproducts-directed-graphs
 open import graph-theory.dependent-directed-graphs
+open import graph-theory.dependent-sums-directed-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.equivalences-dependent-directed-graphs
 open import graph-theory.equivalences-directed-graphs

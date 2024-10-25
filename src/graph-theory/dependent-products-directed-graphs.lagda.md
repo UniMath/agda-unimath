@@ -14,11 +14,11 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.universe-levels
 
+open import graph-theory.base-change-dependent-directed-graphs
 open import graph-theory.cartesian-products-directed-graphs
 open import graph-theory.dependent-directed-graphs
 open import graph-theory.directed-graphs
 open import graph-theory.morphisms-directed-graphs
-open import graph-theory.pullbacks-dependent-directed-graphs
 open import graph-theory.sections-dependent-directed-graphs
 ```
 
@@ -116,7 +116,7 @@ module _
 
   ev-section-Π-Directed-Graph :
     section-Dependent-Directed-Graph
-      ( pullback-Dependent-Directed-Graph
+      ( base-change-Dependent-Directed-Graph
         ( product-Directed-Graph C A)
         ( pr2-product-Directed-Graph C A)
         ( B))
@@ -133,7 +133,7 @@ module _
   (C : Directed-Graph l5 l6)
   (f :
     section-Dependent-Directed-Graph
-      ( pullback-Dependent-Directed-Graph
+      ( base-change-Dependent-Directed-Graph
         ( product-Directed-Graph C A)
         ( pr2-product-Directed-Graph C A)
         ( B)))
@@ -143,7 +143,7 @@ module _
     vertex-Directed-Graph C → vertex-Π-Directed-Graph A B
   vertex-uncurry-section-product-Directed-Graph c a =
     vertex-section-Dependent-Directed-Graph
-      ( pullback-Dependent-Directed-Graph
+      ( base-change-Dependent-Directed-Graph
         ( product-Directed-Graph C A)
         ( pr2-product-Directed-Graph C A)
         ( B))
@@ -158,7 +158,7 @@ module _
       ( vertex-uncurry-section-product-Directed-Graph y)
   edge-uncurry-section-product-Directed-Graph c c' d a a' e =
     edge-section-Dependent-Directed-Graph
-      ( pullback-Dependent-Directed-Graph
+      ( base-change-Dependent-Directed-Graph
         ( product-Directed-Graph C A)
         ( pr2-product-Directed-Graph C A)
         ( B))
@@ -185,12 +185,12 @@ module _
   htpy-is-section-uncurry-section-product-Directed-Graph :
     ( f :
       section-Dependent-Directed-Graph
-        ( pullback-Dependent-Directed-Graph
+        ( base-change-Dependent-Directed-Graph
           ( product-Directed-Graph C A)
           ( pr2-product-Directed-Graph C A)
           ( B))) →
     htpy-section-Dependent-Directed-Graph
-      ( pullback-Dependent-Directed-Graph
+      ( base-change-Dependent-Directed-Graph
         ( product-Directed-Graph C A)
         ( pr2-product-Directed-Graph C A)
         ( B))
@@ -199,7 +199,7 @@ module _
       ( f)
   htpy-is-section-uncurry-section-product-Directed-Graph f =
     refl-htpy-section-Dependent-Directed-Graph
-      ( pullback-Dependent-Directed-Graph
+      ( base-change-Dependent-Directed-Graph
         ( product-Directed-Graph C A)
         ( pr2-product-Directed-Graph C A)
         ( B))
@@ -211,7 +211,7 @@ module _
       ( uncurry-section-product-Directed-Graph A B C)
   is-section-uncurry-section-product-Directed-Graph f =
     eq-htpy-section-Dependent-Directed-Graph
-      ( pullback-Dependent-Directed-Graph
+      ( base-change-Dependent-Directed-Graph
         ( product-Directed-Graph C A)
         ( pr2-product-Directed-Graph C A)
         ( B))
@@ -255,7 +255,7 @@ module _
   ev-equiv-hom-Π-Directed-Graph :
     hom-Directed-Graph C (Π-Directed-Graph A B) ≃
     section-Dependent-Directed-Graph
-      ( pullback-Dependent-Directed-Graph
+      ( base-change-Dependent-Directed-Graph
         ( product-Directed-Graph C A)
         ( pr2-product-Directed-Graph C A)
         ( B))
@@ -267,4 +267,4 @@ module _
 
 ## See also
 
-- [Dependent coproduct directed graphs](graph-theory.dependent-coproducts-directed-graphs.md)
+- [dependent sums of directed graphs](graph-theory.dependent-sums-directed-graphs.md)
