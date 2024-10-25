@@ -84,6 +84,13 @@ open import elementary-number-theory.fibonacci-sequence using
   ( Fibonacci-ℕ)
 ```
 
+### [A000058](https://oeis.org/A000058) Sylvester's sequence
+
+```agda
+open import elementary-number-theory.sylvesters-sequence using
+  ( sylvesters-sequence-ℕ)
+```
+
 ### [A000079](https://oeis.org/A000079) Powers of `2`
 
 ```agda
