@@ -21,7 +21,7 @@ A {{#concept "sequence" Agda=sequence}} of elements of type `A` is a map `â„• â†
 from the [natural numbers](elementary-number-theory.natural-numbers.md) into
 `A`.
 
-For a list of sequences from the
+For a list of number sequences from the
 [On-Line Encyclopedia of Integer Sequences](https://oeis.org) {{#cite oeis}}
 that are formalized in agda-unimath, see the page
 [`literature.oeis`](literature.oeis.md).
