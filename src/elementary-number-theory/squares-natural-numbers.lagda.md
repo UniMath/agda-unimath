@@ -100,7 +100,9 @@ square-succ-succ-ℕ n =
 
 ### Any number is less than its own square
 
-**Proof.** The proof is by induction. Since `0` is the least natural number, be base case is trivial. Now consider a natural number `n` such that `n ≤ n²`. Then we have
+**Proof.** The proof is by induction. Since `0` is the least natural number, be
+base case is trivial. Now consider a natural number `n` such that `n ≤ n²`. Then
+we have
 
 ```text
   (n + 1 ≤ (n + 1)²) ↔ n + 1 ≤ (n + 2) * n + 1
