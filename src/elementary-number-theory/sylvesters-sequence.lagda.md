@@ -32,7 +32,7 @@ $$
 The first few entries in this sequence are `s 0 = 2`, `s 1 = 3`, `s 2 = 7`, and
 `s 3 = 43`.
 
-Sylvester's sequence is listed as A000058 in the [OEIS](literature.oeis.md)
+Sylvester's sequence is listed as [A000058](https://oeis.org/A000058) in the [OEIS](literature.oeis.md)
 {{#cite oeis}}.
 
 ## Definitions
