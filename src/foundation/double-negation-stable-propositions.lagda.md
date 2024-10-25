@@ -15,7 +15,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.double-negation
-open import foundation.double-negation-elimination
+open import logic.double-negation-elimination
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences

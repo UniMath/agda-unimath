@@ -14,8 +14,7 @@ open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import logic.double-negation-eliminating-maps
-open import foundation.double-negation-elimination
+open import logic.double-negation-elimination
 open import foundation.double-negation-stable-propositions
 open import foundation.embeddings
 open import foundation.fibers-of-maps
@@ -44,6 +43,8 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.torsorial-type-families
+
+open import logic.double-negation-eliminating-maps
 ```
 
 </details>
@@ -54,7 +55,7 @@ A [map](foundation-core.function-types.md) is said to be a
 {{#concept "double negation stable embedding" Disambiguation="of types" Agda=is-double-negation-stable-emb}}
 if it is an [embedding](foundation-core.embeddings.md) and its
 [fibers](foundation-core.fibers-of-maps.md) satisfy
-[double negation elimination](foundation.double-negation-elimination.md).
+[double negation elimination](logic.double-negation-elimination.md).
 
 Equivalently, a double negation stable embedding is a map whose fibers are
 [double negation stable propositions](foundation.double-negation-stable-propositions.md).

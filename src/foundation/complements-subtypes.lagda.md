@@ -10,7 +10,6 @@ module foundation.complements-subtypes where
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.double-negation-stable-propositions
-open import logic.double-negation-stable-subtypes
 open import foundation.full-subtypes
 open import foundation.negation
 open import foundation.postcomposition-functions
@@ -21,6 +20,8 @@ open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.subtypes
+
+open import logic.double-negation-stable-subtypes
 
 open import order-theory.large-posets
 open import order-theory.opposite-large-posets

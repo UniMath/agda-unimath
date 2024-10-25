@@ -8,9 +8,8 @@ module logic.de-morgan-sheaves where
 
 ```agda
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import logic.de-morgans-law
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.irrefutable-propositions
@@ -23,6 +22,8 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
+
+open import logic.de-morgans-law
 
 open import orthogonal-factorization-systems.null-types
 ```

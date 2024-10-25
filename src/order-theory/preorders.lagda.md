@@ -12,8 +12,8 @@ open import category-theory.precategories
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.function-types
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation

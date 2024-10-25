@@ -15,7 +15,7 @@ open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
-open import foundation.double-negation-elimination
+open import logic.double-negation-elimination
 open import foundation.empty-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
@@ -42,7 +42,7 @@ open import foundation-core.homotopies
 A [map](foundation-core.function-types.md) is said to be
 {{#concept "double negation eliminating" Disambiguation="map of types" Agda=is-double-negation-eliminating-map}}
 if its [fibers](foundation-core.fibers-of-maps.md) satisfy
-[untruncated double negation elimination](foundation.double-negation-elimination.md).
+[untruncated double negation elimination](logic.double-negation-elimination.md).
 I.e., for every `y : B`, if `fiber f y` is
 [irrefutable](foundation.irrefutable-propositions.md), then we do in fact have
 an element of the fiber `p : fiber f y`. In other words, double negation

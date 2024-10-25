@@ -1,19 +1,19 @@
 # Double negation elimination
 
 ```agda
-module foundation.double-negation-elimination where
+module logic.double-negation-elimination where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
-open import foundation.coproduct-types
 open import foundation.evaluation-functions
 open import foundation.logical-equivalences
 open import foundation.negation

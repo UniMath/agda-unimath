@@ -12,7 +12,6 @@ open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-propositions
-open import logic.double-negation-stable-subtypes
 open import foundation.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -24,6 +23,8 @@ open import foundation.universe-levels
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
+
+open import logic.double-negation-stable-subtypes
 ```
 
 </details>

@@ -7,21 +7,21 @@ module logic.de-morgans-law where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
+open import foundation.conjunction
+open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.cartesian-product-types
+open import foundation.disjunction
+open import foundation.double-negation
+open import foundation.empty-types
+open import foundation.evaluation-functions
+open import foundation.function-types
+open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
-open import foundation.negation
-open import foundation.logical-equivalences
-open import foundation.double-negation
-open import foundation.conjunction
-open import foundation.empty-types
-open import foundation.evaluation-functions
-open import foundation.disjunction
-open import foundation.function-types
-open import foundation.coproduct-types
 open import foundation-core.propositions
 
 open import univalent-combinatorics.2-element-types
