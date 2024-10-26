@@ -107,6 +107,14 @@ is-nonnegative-is-square-ℤ : {a : ℤ} → is-square-ℤ a → is-nonnegative-
 is-nonnegative-is-square-ℤ (r , refl) = is-nonnegative-square-ℤ r
 ```
 
+### The square of an integer is equal to the square of its negative
+
+```agda
+compute-square-neg-ℤ :
+  (a : ℤ) → square-ℤ a ＝ square-ℤ (neg-ℤ a)
+compute-square-neg-ℤ a = inv (double-negative-law-mul-ℤ a a)
+```
+
 ### The squares in ℤ are exactly the squares in ℕ
 
 ```agda
@@ -209,38 +217,35 @@ Consider a integer `n`. The following are equivalent:
 - Its square is divisible by 4.
 
 ```text
-div-four-square-is-even-ℕ :
-  (n : ℕ) → is-even-ℕ n → div-ℕ 4 (square-ℕ n)
-pr1 (div-four-square-is-even-ℕ .(m *ℕ 2) (m , refl)) =
-  square-ℕ m
-pr2 (div-four-square-is-even-ℕ .(m *ℕ 2) (m , refl)) =
-  inv (distributive-square-mul-ℕ m 2)
+div-four-square-is-even-ℤ :
+  (a : ℤ) → is-even-ℤ a → div-ℤ 4 (square-ℤ a)
+dif-four-square-is-even-ℤ = ?
 
-is-even-square-is-even-ℕ :
-  (n : ℕ) → is-even-ℕ n → is-even-ℕ (square-ℕ n)
-is-even-square-is-even-ℕ .(m *ℕ 2) (m , refl) =
-  is-even-div-4-ℕ _ (div-four-square-is-even-ℕ (m *ℕ 2) (m , refl))
+is-even-square-is-even-ℤ :
+  (n : ℤ) → is-even-ℤ n → is-even-ℤ (square-ℤ n)
+is-even-square-is-even-ℤ .(m *ℤ 2) (m , refl) =
+  is-even-div-4-ℤ _ (div-four-square-is-even-ℤ (m *ℤ 2) (m , refl))
 
-is-even-is-even-square-ℕ :
-  (n : ℕ) → is-even-ℕ (square-ℕ n) → is-even-ℕ n
-is-even-is-even-square-ℕ zero-ℕ H = is-even-zero-ℕ
-is-even-is-even-square-ℕ (succ-ℕ zero-ℕ) (zero-ℕ , ())
-is-even-is-even-square-ℕ (succ-ℕ zero-ℕ) (succ-ℕ k , ())
-is-even-is-even-square-ℕ (succ-ℕ (succ-ℕ n)) (m , p) =
-  is-even-succ-succ-is-even-ℕ n
-    ( is-even-is-even-square-ℕ n
-      ( is-even-left-summand-ℕ
-        ( square-ℕ n)
-        ( 4 *ℕ n)
-        ( is-even-div-4-ℕ (4 *ℕ n) (n , commutative-mul-ℕ n 4))
-        ( is-even-left-summand-ℕ
-          ( square-ℕ n +ℕ 4 *ℕ n)
+is-even-is-even-square-ℤ :
+  (n : ℤ) → is-even-ℤ (square-ℤ n) → is-even-ℤ n
+is-even-is-even-square-ℤ zero-ℤ H = is-even-zero-ℤ
+is-even-is-even-square-ℤ (succ-ℤ zero-ℤ) (zero-ℤ , ())
+is-even-is-even-square-ℤ (succ-ℤ zero-ℤ) (succ-ℤ k , ())
+is-even-is-even-square-ℤ (succ-ℤ (succ-ℤ n)) (m , p) =
+  is-even-succ-succ-is-even-ℤ n
+    ( is-even-is-even-square-ℤ n
+      ( is-even-left-summand-ℤ
+        ( square-ℤ n)
+        ( 4 *ℤ n)
+        ( is-even-div-4-ℤ (4 *ℤ n) (n , commutative-mul-ℤ n 4))
+        ( is-even-left-summand-ℤ
+          ( square-ℤ n +ℤ 4 *ℤ n)
           ( 4)
           ( 2 , refl)
-          ( m , p ∙ square-succ-succ-ℕ n))))
+          ( m , p ∙ square-succ-succ-ℤ n))))
 
-is-even-div-four-square-ℕ :
-  (n : ℕ) → div-ℕ 4 (square-ℕ n) → is-even-ℕ n
-is-even-div-four-square-ℕ n H =
-  is-even-is-even-square-ℕ n (is-even-div-4-ℕ (square-ℕ n) H)
+is-even-div-four-square-ℤ :
+  (n : ℤ) → div-ℤ 4 (square-ℤ n) → is-even-ℤ n
+is-even-div-four-square-ℤ n H =
+  is-even-is-even-square-ℤ n (is-even-div-4-ℤ (square-ℤ n) H)
 ```

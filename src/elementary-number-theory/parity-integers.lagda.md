@@ -1,25 +1,15 @@
-# Parity of the natural numbers
+# Parity of the integers
 
 ```agda
-module elementary-number-theory.parity-natural-numbers where
+module elementary-number-theory.parity-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.equality-natural-numbers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
-open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.integers
 
-open import foundation.action-on-identifications-functions
-open import foundation.decidable-types
-open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.function-types
-open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
 ```
@@ -29,31 +19,33 @@ open import foundation.universe-levels
 ## Idea
 
 {{#concept "Parity" WD="parity" WDID=Q141160}}
-[partitions](foundation.partitions.md) the [natural
-numbers](elementary-number-theory.natural numbers.md) into two
+[partitions](foundation.partitions.md) the
+[integers](elementary-number-theory.integers.md) into two
 [classes](foundation.equivalence-relations.md): the
-{{#concept "even" Disambiguation="natural number" Agda=is-even-ℤ WD="even number" WDID=Q13366104}}
+{{#concept "even" Disambiguation="integer" Agda=is-even-ℤ WD="even number" WDID=Q13366104}}
 and the
-{{#concept "odd" Disambiguation="natural number" Agda=is-odd-ℤ WD="odd number" WDID=Q13366129}}
-natural numbers. Even natural numbers are those that are
-[divisible](elementary-number-theory.divisibility-natural numbers.md) by two,
-and odd natural numbers are those that aren't.
+{{#concept "odd" Disambiguation="integer" Agda=is-odd-ℤ WD="odd number" WDID=Q13366129}}
+integers. Even integers are those that are
+[divisible](elementary-number-theory.divisibility-integers.md) by two, and odd
+integers are those that aren't.
 
-## Definition
+## Definitions
+
+### Even and odd integers
 
 ```agda
-is-even-ℕ : ℕ → UU lzero
-is-even-ℕ n = div-ℕ 2 n
+is-even-ℤ : ℤ → UU lzero
+is-even-ℤ a = div-ℤ (int-ℕ 2) a
 
-is-odd-ℕ : ℕ → UU lzero
-is-odd-ℕ n = ¬ (is-even-ℕ n)
+is-odd-ℤ : ℤ → UU lzero
+is-odd-ℤ a = ¬ (is-even-ℤ a)
 ```
 
 ## Properties
 
 ### Being even or odd is decidable
 
-```agda
+```text
 is-decidable-is-even-ℕ : (x : ℕ) → is-decidable (is-even-ℕ x)
 is-decidable-is-even-ℕ x = is-decidable-div-ℕ 2 x
 
@@ -63,7 +55,7 @@ is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
 
 ### `0` is an even natural number
 
-```agda
+```text
 is-even-zero-ℕ : is-even-ℕ 0
 is-even-zero-ℕ = div-zero-ℕ 2
 
@@ -73,7 +65,7 @@ is-odd-one-ℕ H = Eq-eq-ℕ (is-one-div-one-ℕ 2 H)
 
 ### A natural number `x` is even if and only if `x + 2` is even
 
-```agda
+```text
 is-even-is-even-succ-succ-ℕ :
   (n : ℕ) → is-even-ℕ (succ-ℕ (succ-ℕ n)) → is-even-ℕ n
 pr1 (is-even-is-even-succ-succ-ℕ n (succ-ℕ d , p)) = d
@@ -88,7 +80,7 @@ pr2 (is-even-succ-succ-is-even-ℕ n (d , p)) = ap (succ-ℕ ∘ succ-ℕ) p
 
 ### A natural number `x` is odd if and only if `x + 2` is odd
 
-```agda
+```text
 is-odd-is-odd-succ-succ-ℕ :
   (n : ℕ) → is-odd-ℕ (succ-ℕ (succ-ℕ n)) → is-odd-ℕ n
 is-odd-is-odd-succ-succ-ℕ n = map-neg (is-even-succ-succ-is-even-ℕ n)
@@ -100,7 +92,7 @@ is-odd-succ-succ-is-odd-ℕ n = map-neg (is-even-is-even-succ-succ-ℕ n)
 
 ### If a natural number `x` is odd, then `x + 1` is even
 
-```agda
+```text
 is-even-succ-is-odd-ℕ :
   (n : ℕ) → is-odd-ℕ n → is-even-ℕ (succ-ℕ n)
 is-even-succ-is-odd-ℕ zero-ℕ p = ex-falso (p is-even-zero-ℕ)
@@ -113,7 +105,7 @@ is-even-succ-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
 
 ### If a natural number `x` is even, then `x + 1` is odd
 
-```agda
+```text
 is-odd-succ-is-even-ℕ :
   (n : ℕ) → is-even-ℕ n → is-odd-ℕ (succ-ℕ n)
 is-odd-succ-is-even-ℕ zero-ℕ p = is-odd-one-ℕ
@@ -126,7 +118,7 @@ is-odd-succ-is-even-ℕ (succ-ℕ (succ-ℕ n)) p =
 
 ### If a natural number `x + 1` is odd, then `x` is even
 
-```agda
+```text
 is-even-is-odd-succ-ℕ :
   (n : ℕ) → is-odd-ℕ (succ-ℕ n) → is-even-ℕ n
 is-even-is-odd-succ-ℕ n p =
@@ -137,7 +129,7 @@ is-even-is-odd-succ-ℕ n p =
 
 ### If a natural number `x + 1` is even, then `x` is odd
 
-```agda
+```text
 is-odd-is-even-succ-ℕ :
   (n : ℕ) → is-even-ℕ (succ-ℕ n) → is-odd-ℕ n
 is-odd-is-even-succ-ℕ n p =
@@ -148,7 +140,7 @@ is-odd-is-even-succ-ℕ n p =
 
 ### A natural number `x` is odd if and only if there is a natural number `y` such that `succ-ℕ (y *ℕ 2) ＝ x`
 
-```agda
+```text
 has-odd-expansion : ℕ → UU lzero
 has-odd-expansion x = Σ ℕ (λ y → (succ-ℕ (y *ℕ 2)) ＝ x)
 
@@ -168,7 +160,7 @@ has-odd-expansion-is-odd (succ-ℕ (succ-ℕ n)) p =
 
 ### A number is even if and only if it is divisible by an even number
 
-```agda
+```text
 is-even-div-is-even-ℕ :
   (n m : ℕ) → is-even-ℕ m → div-ℕ m n → is-even-ℕ n
 is-even-div-is-even-ℕ ._ ._ (m' , refl) (k , refl) =
@@ -181,7 +173,7 @@ is-even-div-4-ℕ n = is-even-div-is-even-ℕ n 4 (2 , refl)
 
 ### If any two out of `x`, `y`, and `x + y` are even, then so is the third
 
-```agda
+```text
 is-even-add-ℕ :
   (m n : ℕ) → is-even-ℕ m → is-even-ℕ n → is-even-ℕ (add-ℕ m n)
 is-even-add-ℕ = div-add-ℕ 2

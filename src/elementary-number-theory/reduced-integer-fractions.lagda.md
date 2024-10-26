@@ -38,10 +38,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "reduced fraction" Agda=reduced-fraction-ℤ}} is a
+A {{#concept "reduced fraction" Agda=is-reduced-fraction-ℤ}} is a
 [fraction](elementary-number-theory.integer-fractions.md) in which its numerator
 and denominator are
-[coprime](elementary-number-theory.relatively-prime-integers.md).
+[coprime](elementary-number-theory.relatively-prime-integers.md). In the module
+[`elementary-number-theory.rational-numbers`](elementary-number-theory.rational-numbers.md)
+we will define the type `ℚ` of rational numbers to be the type of reduced
+integer fractions.
 
 ## Definitions
 
@@ -582,3 +585,7 @@ unique-reduce-fraction-ℤ x y H =
           ( eq-is-prop
             ( is-prop-is-positive-ℤ (int-reduce-denominator-fraction-ℤ y))))))
 ```
+
+## See also
+
+- [The type of rational numbers](elementary-number-theory.rational-numbers.md)

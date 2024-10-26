@@ -113,6 +113,7 @@ open import elementary-number-theory.nonzero-integers public
 open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.nonzero-rational-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
+open import elementary-number-theory.parity-integers public
 open import elementary-number-theory.parity-natural-numbers public
 open import elementary-number-theory.peano-arithmetic public
 open import elementary-number-theory.pisano-periods public
