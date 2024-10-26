@@ -66,7 +66,11 @@ is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
 ```agda
 is-even-zero-ℕ : is-even-ℕ 0
 is-even-zero-ℕ = div-zero-ℕ 2
+```
 
+### `1` is an odd natural number
+
+```agda
 is-odd-one-ℕ : is-odd-ℕ 1
 is-odd-one-ℕ H = Eq-eq-ℕ (is-one-div-one-ℕ 2 H)
 ```

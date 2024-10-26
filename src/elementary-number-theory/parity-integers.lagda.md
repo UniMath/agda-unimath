@@ -7,9 +7,14 @@ module elementary-number-theory.parity-integers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-integers
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.parity-natural-numbers
 
+open import foundation.decidable-types
 open import foundation.negation
 open import foundation.universe-levels
 ```
@@ -43,54 +48,124 @@ is-odd-ℤ a = ¬ (is-even-ℤ a)
 
 ## Properties
 
+### A natural number is even if and only if it is even as an integer
+
+```agda
+is-even-int-is-even-ℕ : (n : ℕ) → is-even-ℕ n → is-even-ℤ (int-ℕ n)
+is-even-int-is-even-ℕ n H = div-int-div-ℕ H
+
+is-even-is-even-int-ℕ : (n : ℕ) → is-even-ℤ (int-ℕ n) → is-even-ℕ n
+is-even-is-even-int-ℕ n H = div-div-int-ℕ H
+```
+
+### A natural number is odd if and only if it is odd as an integer
+
+```agda
+is-odd-int-is-odd-ℕ : (n : ℕ) → is-odd-ℕ n → is-odd-ℤ (int-ℕ n)
+is-odd-int-is-odd-ℕ n H K = H (is-even-is-even-int-ℕ n K)
+
+is-odd-is-odd-int-ℕ : (n : ℕ) → is-odd-ℤ (int-ℕ n) → is-odd-ℕ n
+is-odd-is-odd-int-ℕ n H K = H (is-even-int-is-even-ℕ n K)
+```
+
+### An integer is even if and only if its absolute value is an even integer
+
+```agda
+is-even-int-abs-is-even-ℤ :
+  (a : ℤ) → is-even-ℤ a → is-even-ℤ (int-abs-ℤ a)
+is-even-int-abs-is-even-ℤ a =
+  div-sim-unit-ℤ
+    ( refl-sim-unit-ℤ (int-ℕ 2))
+    ( symmetric-sim-unit-ℤ (int-abs-ℤ a) a (sim-unit-abs-ℤ a))
+
+is-even-is-even-int-abs-ℤ :
+  (a : ℤ) → is-even-ℤ (int-abs-ℤ a) → is-even-ℤ a
+is-even-is-even-int-abs-ℤ a =
+  div-sim-unit-ℤ
+    ( refl-sim-unit-ℤ (int-ℕ 2))
+    ( sim-unit-abs-ℤ a)
+
+is-even-abs-is-even-ℤ :
+  (a : ℤ) → is-even-ℤ a → is-even-ℕ (abs-ℤ a)
+is-even-abs-is-even-ℤ a H =
+  is-even-is-even-int-ℕ (abs-ℤ a) (is-even-int-abs-is-even-ℤ a H)
+
+is-even-is-even-abs-ℤ :
+  (a : ℤ) → is-even-ℕ (abs-ℤ a) → is-even-ℤ a
+is-even-is-even-abs-ℤ a H =
+  is-even-is-even-int-abs-ℤ a (is-even-int-is-even-ℕ (abs-ℤ a) H)
+```
+
+### An integer is odd if and only if its absolute value is an odd integer
+
+```agda
+is-odd-int-abs-is-odd-ℤ : (a : ℤ) → is-odd-ℤ a → is-odd-ℤ (int-abs-ℤ a)
+is-odd-int-abs-is-odd-ℤ a H K = H (is-even-is-even-int-abs-ℤ a K)
+
+is-odd-is-odd-int-abs-ℤ : (a : ℤ) → is-odd-ℤ (int-abs-ℤ a) → is-odd-ℤ a
+is-odd-is-odd-int-abs-ℤ a H K = H (is-even-int-abs-is-even-ℤ a K)
+
+is-odd-abs-is-odd-ℤ : (a : ℤ) → is-odd-ℤ a → is-odd-ℕ (abs-ℤ a)
+is-odd-abs-is-odd-ℤ a H K = H (is-even-is-even-abs-ℤ a K)
+
+is-odd-is-odd-abs-ℤ : (a : ℤ) → is-odd-ℕ (abs-ℤ a) → is-odd-ℤ a
+is-odd-is-odd-abs-ℤ a H K = H (is-even-abs-is-even-ℤ a K)
+```
+
 ### Being even or odd is decidable
 
-```text
-is-decidable-is-even-ℕ : (x : ℕ) → is-decidable (is-even-ℕ x)
-is-decidable-is-even-ℕ x = is-decidable-div-ℕ 2 x
+```agda
+is-decidable-is-even-ℤ :
+  (a : ℤ) → is-decidable (is-even-ℤ a)
+is-decidable-is-even-ℤ a =
+  is-decidable-iff
+    ( is-even-is-even-abs-ℤ a)
+    ( is-even-abs-is-even-ℤ a)
+    ( is-decidable-is-even-ℕ (abs-ℤ a))
 
-is-decidable-is-odd-ℕ : (x : ℕ) → is-decidable (is-odd-ℕ x)
-is-decidable-is-odd-ℕ x = is-decidable-neg (is-decidable-is-even-ℕ x)
+is-decidable-is-odd-ℤ : (a : ℤ) → is-decidable (is-odd-ℤ a)
+is-decidable-is-odd-ℤ a = is-decidable-neg (is-decidable-is-even-ℤ a)
 ```
 
-### `0` is an even natural number
+### `0` is an even integer
 
-```text
-is-even-zero-ℕ : is-even-ℕ 0
-is-even-zero-ℕ = div-zero-ℕ 2
-
-is-odd-one-ℕ : is-odd-ℕ 1
-is-odd-one-ℕ H = Eq-eq-ℕ (is-one-div-one-ℕ 2 H)
+```agda
+is-even-zero-ℤ : is-even-ℤ (int-ℕ 0)
+is-even-zero-ℤ = is-even-int-is-even-ℕ 0 is-even-zero-ℕ
 ```
 
-### A natural number `x` is even if and only if `x + 2` is even
+### `1` is an odd integer
 
-```text
-is-even-is-even-succ-succ-ℕ :
-  (n : ℕ) → is-even-ℕ (succ-ℕ (succ-ℕ n)) → is-even-ℕ n
-pr1 (is-even-is-even-succ-succ-ℕ n (succ-ℕ d , p)) = d
-pr2 (is-even-is-even-succ-succ-ℕ n (succ-ℕ d , p)) =
-  is-injective-succ-ℕ (is-injective-succ-ℕ p)
-
-is-even-succ-succ-is-even-ℕ :
-  (n : ℕ) → is-even-ℕ n → is-even-ℕ (succ-ℕ (succ-ℕ n))
-pr1 (is-even-succ-succ-is-even-ℕ n (d , p)) = succ-ℕ d
-pr2 (is-even-succ-succ-is-even-ℕ n (d , p)) = ap (succ-ℕ ∘ succ-ℕ) p
+```agda
+is-odd-one-ℤ : is-odd-ℤ (int-ℕ 1)
+is-odd-one-ℤ = is-odd-int-is-odd-ℕ 1 is-odd-one-ℕ
 ```
 
-### A natural number `x` is odd if and only if `x + 2` is odd
+### A integer `x` is even if and only if `x + 2` is even
 
-```text
-is-odd-is-odd-succ-succ-ℕ :
-  (n : ℕ) → is-odd-ℕ (succ-ℕ (succ-ℕ n)) → is-odd-ℕ n
-is-odd-is-odd-succ-succ-ℕ n = map-neg (is-even-succ-succ-is-even-ℕ n)
+```agda
+is-even-is-even-add-two-ℤ :
+  (a : ℤ) → is-even-ℤ (a +ℤ int-ℕ 2) → is-even-ℤ a
+is-even-is-even-add-two-ℤ a =
+  div-left-summand-ℤ (int-ℕ 2) a (int-ℕ 2) (refl-div-ℤ (int-ℕ 2))
 
-is-odd-succ-succ-is-odd-ℕ :
-  (n : ℕ) → is-odd-ℕ n → is-odd-ℕ (succ-ℕ (succ-ℕ n))
-is-odd-succ-succ-is-odd-ℕ n = map-neg (is-even-is-even-succ-succ-ℕ n)
+is-even-add-two-is-even-ℤ :
+  (a : ℤ) → is-even-ℤ a → is-even-ℤ (a +ℤ int-ℕ 2)
+is-even-add-two-is-even-ℤ a H =
+  div-add-ℤ (int-ℕ 2) a (int-ℕ 2) H (refl-div-ℤ (int-ℕ 2))
 ```
 
-### If a natural number `x` is odd, then `x + 1` is even
+### A integer `x` is odd if and only if `x + 2` is odd
+
+```agda
+is-odd-is-odd-add-two-ℤ : (a : ℤ) → is-odd-ℤ (a +ℤ int-ℕ 2) → is-odd-ℤ a
+is-odd-is-odd-add-two-ℤ a H K = H (is-even-add-two-is-even-ℤ a K)
+
+is-odd-add-two-is-odd-ℤ : (a : ℤ) → is-odd-ℤ a → is-odd-ℤ (a +ℤ int-ℕ 2)
+is-odd-add-two-is-odd-ℤ a H K = H (is-even-is-even-add-two-ℤ a K)
+```
+
+### If a integer `x` is odd, then `x + 1` is even
 
 ```text
 is-even-succ-is-odd-ℕ :
@@ -103,7 +178,7 @@ is-even-succ-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
     ( is-even-succ-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p))
 ```
 
-### If a natural number `x` is even, then `x + 1` is odd
+### If a integer `x` is even, then `x + 1` is odd
 
 ```text
 is-odd-succ-is-even-ℕ :
@@ -116,7 +191,7 @@ is-odd-succ-is-even-ℕ (succ-ℕ (succ-ℕ n)) p =
     ( is-odd-succ-is-even-ℕ n (is-even-is-even-succ-succ-ℕ n p))
 ```
 
-### If a natural number `x + 1` is odd, then `x` is even
+### If a integer `x + 1` is odd, then `x` is even
 
 ```text
 is-even-is-odd-succ-ℕ :
@@ -127,7 +202,7 @@ is-even-is-odd-succ-ℕ n p =
     ( is-even-succ-is-odd-ℕ (succ-ℕ n) p)
 ```
 
-### If a natural number `x + 1` is even, then `x` is odd
+### If a integer `x + 1` is even, then `x` is odd
 
 ```text
 is-odd-is-even-succ-ℕ :
@@ -138,7 +213,7 @@ is-odd-is-even-succ-ℕ n p =
     ( is-odd-succ-is-even-ℕ (succ-ℕ n) p)
 ```
 
-### A natural number `x` is odd if and only if there is a natural number `y` such that `succ-ℕ (y *ℕ 2) ＝ x`
+### A integer `x` is odd if and only if there is a integer `y` such that `succ-ℕ (y *ℕ 2) ＝ x`
 
 ```text
 has-odd-expansion : ℕ → UU lzero

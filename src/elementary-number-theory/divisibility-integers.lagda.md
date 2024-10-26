@@ -202,16 +202,6 @@ is-zero-is-zero-div-ℤ : (x k : ℤ) → div-ℤ k x → is-zero-ℤ k → is-z
 is-zero-is-zero-div-ℤ x .zero-ℤ k-div-x refl = is-zero-div-zero-ℤ x k-div-x
 ```
 
-### If `x` divides both `y` and `z`, then it divides `y + z`
-
-```agda
-div-add-ℤ : (x y z : ℤ) → div-ℤ x y → div-ℤ x z → div-ℤ x (y +ℤ z)
-pr1 (div-add-ℤ x y z (pair d p) (pair e q)) = d +ℤ e
-pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
-  ( right-distributive-mul-add-ℤ d e x) ∙
-  ( ap-add-ℤ p q)
-```
-
 ### If `x` divides `y` then `x` divides any multiple of `y`
 
 ```agda
@@ -244,6 +234,40 @@ pr2 (neg-div-ℤ x y (pair d p)) =
       by neg-neg-ℤ (d *ℤ x)
     ＝ y
       by p
+```
+
+### If `x` divides both `y` and `z`, then it divides `y + z`
+
+```agda
+div-add-ℤ : (x y z : ℤ) → div-ℤ x y → div-ℤ x z → div-ℤ x (y +ℤ z)
+pr1 (div-add-ℤ x y z (pair d p) (pair e q)) = d +ℤ e
+pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
+  ( right-distributive-mul-add-ℤ d e x) ∙
+  ( ap-add-ℤ p q)
+
+div-right-summand-ℤ :
+  (x y z : ℤ) → div-ℤ x y → div-ℤ x (y +ℤ z) → div-ℤ x z
+div-right-summand-ℤ x y z H K =
+  tr
+    ( div-ℤ x)
+    ( is-retraction-left-add-neg-ℤ y z)
+    ( div-add-ℤ x
+      ( neg-ℤ y)
+      ( y +ℤ z)
+      ( div-neg-ℤ x y H)
+      ( K))
+
+div-left-summand-ℤ :
+  (x y z : ℤ) → div-ℤ x z → div-ℤ x (y +ℤ z) → div-ℤ x y
+div-left-summand-ℤ x y z H K =
+  tr
+    ( div-ℤ x)
+    ( is-retraction-right-add-neg-ℤ z y)
+    ( div-add-ℤ x
+      ( y +ℤ z)
+      ( neg-ℤ z)
+      ( K)
+      ( div-neg-ℤ x z H))
 ```
 
 ### Multiplication preserves divisibility
