@@ -350,11 +350,11 @@ left-distributive-mul-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
     ( ( ap-dist-ℕ
         ( right-successor-law-mul-ℕ (succ-ℕ k) m)
         ( right-successor-law-mul-ℕ (succ-ℕ k) n)) ∙
-      ( ( translation-invariant-dist-ℕ
-          ( succ-ℕ k)
-          ( (succ-ℕ k) *ℕ m)
-          ( (succ-ℕ k) *ℕ n)) ∙
-        ( inv (left-distributive-mul-dist-ℕ m n (succ-ℕ k)))))
+      ( translation-invariant-dist-ℕ'
+        ( succ-ℕ k)
+        ( succ-ℕ k *ℕ m)
+        ( succ-ℕ k *ℕ n)) ∙
+      ( inv (left-distributive-mul-dist-ℕ m n (succ-ℕ k))))
 
 right-distributive-mul-dist-ℕ :
   (x y k : ℕ) → (dist-ℕ x y) *ℕ k ＝ dist-ℕ (x *ℕ k) (y *ℕ k)

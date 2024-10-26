@@ -9,15 +9,19 @@ module elementary-number-theory.squares-natural-numbers where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.decidable-types
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.unit-type
@@ -75,12 +79,17 @@ square-succ-ℕ :
   (n : ℕ) →
   square-ℕ (succ-ℕ n) ＝ succ-ℕ ((succ-ℕ (succ-ℕ n)) *ℕ n)
 square-succ-ℕ n =
-  ( right-successor-law-mul-ℕ (succ-ℕ n) n) ∙
-  ( commutative-add-ℕ (succ-ℕ n) ((succ-ℕ n) *ℕ n))
+  right-successor-law-mul-ℕ (succ-ℕ n) n
+```
 
+### Squares of double successors
+
+For any `n` we have `(n + 2)² ＝ n² + 4n + 4`
+
+```agda
 square-succ-succ-ℕ :
   (n : ℕ) →
-  square-ℕ (succ-ℕ (succ-ℕ n)) ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ 2 *ℕ n +ℕ 4
+  square-ℕ (succ-ℕ (succ-ℕ n)) ＝ square-ℕ n +ℕ 4 *ℕ n +ℕ 4
 square-succ-succ-ℕ n =
   equational-reasoning
   square-ℕ (n +ℕ 2)
@@ -96,9 +105,71 @@ square-succ-succ-ℕ n =
       ( ap-add-ℕ {square-ℕ n +ℕ 2 *ℕ n} {2 *ℕ (n +ℕ 2)}
         ( refl)
         ( left-distributive-mul-add-ℕ 2 n 2))
+  ＝ square-ℕ n +ℕ (2 *ℕ n +ℕ 2 *ℕ n +ℕ 4)
+    by
+      associative-add-ℕ (square-ℕ n) (2 *ℕ n) (2 *ℕ n +ℕ 4)
+  ＝ square-ℕ n +ℕ 4 *ℕ n +ℕ 4
+    by
+      ap
+        ( add-ℕ (square-ℕ n))
+        ( ap
+          ( add-ℕ' 4)
+          ( ( inv (associative-add-ℕ (2 *ℕ n) (0 +ℕ n) n)) ∙
+            ( inv (ap (add-ℕ' n) (associative-add-ℕ (2 *ℕ n) 0 n)))))
 ```
 
-### Any number is less than its own square
+### The square function is order preserving
+
+```agda
+preserves-order-square-ℕ :
+  (m n : ℕ) → m ≤-ℕ n → square-ℕ m ≤-ℕ square-ℕ n
+preserves-order-square-ℕ m n H =
+  preserves-leq-mul-ℕ m n m n H H
+
+preserves-strict-order-square-ℕ :
+  (m n : ℕ) → m <-ℕ n → square-ℕ m <-ℕ square-ℕ n
+preserves-strict-order-square-ℕ m n H =
+  preserves-strict-order-mul-ℕ m n m n H H
+```
+
+### The square function reflects the order on the natural numbers
+
+For any two natural numbers `m` and `n` we have `m² ≤ n² → m ≤ n` and `m² < n² → m < n`.
+
+```agda
+reflects-order-square-ℕ :
+  (m n : ℕ) → square-ℕ m ≤-ℕ square-ℕ n → m ≤-ℕ n
+reflects-order-square-ℕ m n H =
+  leq-not-le-ℕ n m
+    ( λ K →
+      contradiction-le-ℕ
+        ( square-ℕ n)
+        ( square-ℕ m)
+        ( preserves-strict-order-square-ℕ n m K)
+        ( H))
+
+reflects-strict-order-square-ℕ :
+  (m n : ℕ) → square-ℕ m <-ℕ square-ℕ n → m <-ℕ n
+reflects-strict-order-square-ℕ m n H =
+  le-not-leq-ℕ n m
+    ( λ K →
+      contradiction-le-ℕ
+        ( square-ℕ m)
+        ( square-ℕ n)
+        ( H)
+        ( preserves-order-square-ℕ n m K))
+```
+
+### Squares distribute over multiplication
+
+```agda
+distributive-square-mul-ℕ :
+  (m n : ℕ) → square-ℕ (m *ℕ n) ＝ square-ℕ m *ℕ square-ℕ n
+distributive-square-mul-ℕ m n =
+  interchange-law-mul-mul-ℕ m n m n
+```
+
+### Any number is less than or equal to its own square
 
 **Proof.** The proof is by induction. Since `0` is the least natural number, be
 base case is trivial. Now consider a natural number `n` such that `n ≤ n²`. Then
@@ -179,82 +250,107 @@ strict-upper-bound-square-root-ℕ ._ B (succ-ℕ (succ-ℕ x) , refl) =
   strict-lower-bound-square-ℕ (x +ℕ 2) star
 ```
 
-### `n > √n` for `n > 1`
-
-The idea is to assume `n = m + 2 ≤ sqrt(m + 2)` for some `m : ℕ` and derive a
-contradiction by squaring both sides of the inequality
+### If `n² ≤ n`, then `n ≤ 1`
 
 ```agda
-greater-than-square-root-ℕ :
-  (n root : ℕ) → ¬ ((n +ℕ 2 ≤-ℕ root) × (n +ℕ 2 ＝ square-ℕ root))
-greater-than-square-root-ℕ n root (pf-leq , pf-eq) =
-  reflects-leq-left-add-ℕ
-    ( square-ℕ root)
-    ( square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2)
-    ( 0)
-    ( tr
-      ( leq-ℕ (square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2 +ℕ square-ℕ root))
-      ( inv (left-unit-law-add-ℕ (square-ℕ root)))
-      ( concatenate-eq-leq-ℕ
-        ( square-ℕ root)
-        ( inv
-          ( lemma ∙
-            ( ap-add-ℕ {square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2} {n +ℕ 2}
-              ( refl)
-              ( pf-eq))))
-        ( preserves-leq-mul-ℕ (n +ℕ 2) root (n +ℕ 2) root pf-leq pf-leq)))
-  where
-  lemma : square-ℕ (n +ℕ 2) ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2 +ℕ n +ℕ 2
-  lemma =
-    equational-reasoning
-    square-ℕ (n +ℕ 2)
-    ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ 2 *ℕ n +ℕ 4
-      by (square-succ-succ-ℕ n)
-    ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ (n +ℕ 2 +ℕ n +ℕ 2)
-      by
-        ( ap-add-ℕ {square-ℕ n +ℕ 2 *ℕ n} {2 *ℕ n +ℕ 4}
-          ( refl)
-          ( equational-reasoning
-            2 *ℕ n +ℕ 4
-            ＝ n +ℕ n +ℕ 2 +ℕ 2
-              by
-                ( ap-add-ℕ {2 *ℕ n} {4}
-                  ( left-two-law-mul-ℕ n)
-                  ( refl))
-            ＝ n +ℕ 2 +ℕ 2 +ℕ n
-              by (commutative-add-ℕ n (n +ℕ 2 +ℕ 2))
-            ＝ n +ℕ 2 +ℕ (2 +ℕ n)
-              by (associative-add-ℕ (n +ℕ 2) 2 n)
-            ＝ n +ℕ 2 +ℕ (n +ℕ 2)
-              by
-                ( ap-add-ℕ {n +ℕ 2} {2 +ℕ n}
-                  ( refl)
-                  ( commutative-add-ℕ 2 n))))
-    ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2 +ℕ n +ℕ 2
-      by
-        ( inv
-          ( associative-add-ℕ
-            ( square-ℕ n +ℕ 2 *ℕ n)
-            ( n +ℕ 2)
-            ( n +ℕ 2)))
+leq-one-leq-square-ℕ :
+  (n : ℕ) → square-ℕ n ≤-ℕ n → n ≤-ℕ 1
+leq-one-leq-square-ℕ zero-ℕ H = star
+leq-one-leq-square-ℕ (succ-ℕ zero-ℕ) H = star
+leq-one-leq-square-ℕ (succ-ℕ (succ-ℕ n)) H =
+  ex-falso
+    ( contradiction-le-ℕ
+      ( n +ℕ 2)
+      ( square-ℕ (n +ℕ 2))
+      ( strict-lower-bound-square-ℕ (n +ℕ 2) star)
+      ( H))
 ```
 
-### Squareness in ℕ is decidable
+### If the square root of a perfect square `n` is greater than or equal to `n`, then `n ≤ 1`
 
 ```agda
-is-decidable-big-root :
-  (n : ℕ) → is-decidable (Σ ℕ (λ root → (n ≤-ℕ root) × (n ＝ square-ℕ root)))
-is-decidable-big-root 0 = inl (0 , star , refl)
-is-decidable-big-root 1 = inl (1 , star , refl)
-is-decidable-big-root (succ-ℕ (succ-ℕ n)) =
-  inr (λ H → greater-than-square-root-ℕ n (pr1 H) (pr2 H))
+leq-one-leq-square-root-ℕ :
+  (n : ℕ) (H : is-square-ℕ n) → n ≤-ℕ square-root-ℕ n H → n ≤-ℕ 1
+leq-one-leq-square-root-ℕ ._ (x , refl) H =
+  leq-one-leq-square-ℕ (square-ℕ x) (preserves-order-square-ℕ (square-ℕ x) x H)
+```
+
+### The strict inequality `n² < n` never holds
+
+```agda
+not-le-square-ℕ :
+  (n : ℕ) → ¬ (square-ℕ n <-ℕ n)
+not-le-square-ℕ n H =
+  contradiction-le-ℕ
+    ( square-ℕ n)
+    ( n)
+    ( H)
+    ( lower-bound-square-ℕ n)
+```
+
+### Being a square natural number is decidable
+
+```agda
+has-greater-root-ℕ : (n : ℕ) → UU lzero
+has-greater-root-ℕ n = Σ ℕ (λ x → (n ≤-ℕ x) × (n ＝ square-ℕ x))
+
+is-decidable-has-greater-root-ℕ :
+  (n : ℕ) → is-decidable (has-greater-root-ℕ n)
+is-decidable-has-greater-root-ℕ 0 = inl (0 , star , refl)
+is-decidable-has-greater-root-ℕ 1 = inl (1 , star , refl)
+is-decidable-has-greater-root-ℕ (succ-ℕ (succ-ℕ n)) =
+  inr ( λ (x , b , p) → leq-one-leq-square-root-ℕ (n +ℕ 2) (x , p) b)
 
 is-decidable-is-square-ℕ : (n : ℕ) → is-decidable (is-square-ℕ n)
 is-decidable-is-square-ℕ n =
   is-decidable-Σ-ℕ n
     ( λ x → n ＝ square-ℕ x)
     ( λ x → has-decidable-equality-ℕ n (square-ℕ x))
-    ( is-decidable-big-root n)
+    ( is-decidable-has-greater-root-ℕ n)
+```
+
+### Equivalent characterizations of a number being even in terms of its square
+
+Consider a natural number `n`. The following are equivalent:
+- The number `n` is even.
+- Its square is even.
+- Its square is divisible by 4.
+
+```agda
+div-four-square-is-even-ℕ :
+  (n : ℕ) → is-even-ℕ n → div-ℕ 4 (square-ℕ n)
+pr1 (div-four-square-is-even-ℕ .(m *ℕ 2) (m , refl)) =
+  square-ℕ m
+pr2 (div-four-square-is-even-ℕ .(m *ℕ 2) (m , refl)) =
+  inv (distributive-square-mul-ℕ m 2)
+
+is-even-square-is-even-ℕ :
+  (n : ℕ) → is-even-ℕ n → is-even-ℕ (square-ℕ n)
+is-even-square-is-even-ℕ .(m *ℕ 2) (m , refl) =
+  is-even-div-4-ℕ _ (div-four-square-is-even-ℕ (m *ℕ 2) (m , refl))
+
+is-even-is-even-square-ℕ :
+  (n : ℕ) → is-even-ℕ (square-ℕ n) → is-even-ℕ n
+is-even-is-even-square-ℕ zero-ℕ H = is-even-zero-ℕ
+is-even-is-even-square-ℕ (succ-ℕ zero-ℕ) (zero-ℕ , ())
+is-even-is-even-square-ℕ (succ-ℕ zero-ℕ) (succ-ℕ k , ())
+is-even-is-even-square-ℕ (succ-ℕ (succ-ℕ n)) (m , p) =
+  is-even-succ-succ-is-even-ℕ n
+    ( is-even-is-even-square-ℕ n
+      ( is-even-left-summand-ℕ
+        ( square-ℕ n)
+        ( 4 *ℕ n)
+        ( is-even-div-4-ℕ (4 *ℕ n) (n , commutative-mul-ℕ n 4))
+        ( is-even-left-summand-ℕ
+          ( square-ℕ n +ℕ 4 *ℕ n)
+          ( 4)
+          ( 2 , refl)
+          ( m , p ∙ square-succ-succ-ℕ n))))
+
+is-even-div-four-square-ℕ :
+  (n : ℕ) → div-ℕ 4 (square-ℕ n) → is-even-ℕ n
+is-even-div-four-square-ℕ n H =
+  is-even-is-even-square-ℕ n (is-even-div-4-ℕ (square-ℕ n) H)
 ```
 
 ## See also

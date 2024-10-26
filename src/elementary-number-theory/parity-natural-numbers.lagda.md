@@ -7,6 +7,7 @@ module elementary-number-theory.parity-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
@@ -156,4 +157,33 @@ has-odd-expansion-is-odd (succ-ℕ (succ-ℕ n)) p =
   where
   s : has-odd-expansion n
   s = has-odd-expansion-is-odd n (is-odd-is-odd-succ-succ-ℕ n p)
+```
+
+### A number is even if and only if it is divisible by an even number
+
+```agda
+is-even-div-is-even-ℕ :
+  (n m : ℕ) → is-even-ℕ m → div-ℕ m n → is-even-ℕ n
+is-even-div-is-even-ℕ ._ ._ (m' , refl) (k , refl) =
+  k *ℕ m' , associative-mul-ℕ k m' 2
+
+is-even-div-4-ℕ :
+  (n : ℕ) → div-ℕ 4 n → is-even-ℕ n
+is-even-div-4-ℕ n = is-even-div-is-even-ℕ n 4 (2 , refl)
+```
+
+### If any two out of `x`, `y`, and `x + y` are even, then so is the third
+
+```agda
+is-even-add-ℕ :
+  (m n : ℕ) → is-even-ℕ m → is-even-ℕ n → is-even-ℕ (add-ℕ m n)
+is-even-add-ℕ = div-add-ℕ 2
+
+is-even-left-summand-ℕ :
+  (m n : ℕ) → is-even-ℕ n → is-even-ℕ (add-ℕ m n) → is-even-ℕ m
+is-even-left-summand-ℕ = div-left-summand-ℕ 2
+
+is-even-right-summand-ℕ :
+  (m n : ℕ) → is-even-ℕ m → is-even-ℕ (add-ℕ m n) → is-even-ℕ n
+is-even-right-summand-ℕ = div-right-summand-ℕ 2
 ```
