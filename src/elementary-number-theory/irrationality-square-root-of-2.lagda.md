@@ -7,7 +7,14 @@ module elementary-number-theory.irrationality-square-root-of-2 where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integer-fractions
+open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.reduced-integer-fractions
 
+open import foundation.identity-types
+open import foundation.negation
 ```
 
 </details>
@@ -46,6 +53,7 @@ a reduced fraction.
 
 ```agda
 not-two-square-reduced-fraction-ℤ :
-  ?
-not-two-square-reduced-fraction-ℤ = ?
+  (x : fraction-ℤ) (H : is-reduced-fraction-ℤ x) →
+  ¬ (sim-fraction-ℤ (mul-fraction-ℤ x x) (in-fraction-ℤ (int-ℕ 2)))
+not-two-square-reduced-fraction-ℤ x H K = {!!}
 ```

@@ -38,12 +38,14 @@ open import foundation.universe-levels
 
 ## Idea
 
-A reduced fraction is a fraction in which its numerator and denominator are
-coprime.
+A {{#concept "reduced fraction" Agda=reduced-fraction-ℤ}} is a
+[fraction](elementary-number-theory.integer-fractions.md) in which its
+numerator and denominator are
+[coprime](elementary-number-theory.relatively-prime-integers.md).
 
 ## Definitions
 
-### Reduced fraction
+### The predicate of being a reduced fraction
 
 ```agda
 is-reduced-fraction-ℤ : fraction-ℤ → UU lzero

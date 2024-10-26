@@ -378,6 +378,24 @@ interchange-law-mul-mul-ℤ =
     associative-mul-ℤ
 ```
 
+### Swapping the order of multiplication from one side
+
+```agda
+right-swap-mul-ℤ :
+  (x y z : ℤ) → (x *ℤ y) *ℤ z ＝ (x *ℤ z) *ℤ y
+right-swap-mul-ℤ x y z =
+  associative-mul-ℤ x y z ∙
+  ap (x *ℤ_) (commutative-mul-ℤ y z) ∙
+  inv (associative-mul-ℤ x z y)
+
+left-swap-mul-ℤ :
+  (x y z : ℤ) → x *ℤ (y *ℤ z) ＝ y *ℤ (x *ℤ z)
+left-swap-mul-ℤ x y z =
+  inv (associative-mul-ℤ x y z) ∙
+  ap (_*ℤ z) (commutative-mul-ℤ x y) ∙
+  associative-mul-ℤ y x z
+```
+
 ### Computing multiplication of integers that come from natural numbers
 
 ```agda
