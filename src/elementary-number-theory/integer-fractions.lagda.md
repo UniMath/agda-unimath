@@ -136,7 +136,7 @@ fraction-ℤ-Set = fraction-ℤ , is-set-fraction-ℤ
 
 ### The standard equivalence relation on integer fractions
 
-Two integer fractions `a/b` and `c/d` are said to be equivalent if they satisfy
+Two integer fractions `a/b` and `c/d` are said to be equivalent if they satisfy the equation
 
 ```text
   ad ＝ cb.
@@ -148,7 +148,7 @@ This relation is obviously reflexive and symmetric. To see that it is transitive
   (af)d ＝ (eb)d → af ＝ eb.
 ```
 
-Therefore it suffices to show that `d(af) ＝ d(eb)`. To see this, we calculate
+Therefore it suffices to show that `(af)d ＝ (eb)d`. To see this, we calculate
 
 ```text
   (af)d ＝ (ad)f ＝ (cb)f ＝ (cf)b ＝ (ed)b ＝ (eb)d.
@@ -176,14 +176,10 @@ symmetric-sim-fraction-ℤ x y r = inv r
 abstract
   transitive-sim-fraction-ℤ : is-transitive sim-fraction-ℤ
   transitive-sim-fraction-ℤ (a , b , pb) y@(c , d , pd) (e , f , pf) s r =
-    is-injective-right-mul-ℤ
-      ( denominator-fraction-ℤ y)
+    is-injective-right-mul-ℤ d
       ( is-nonzero-denominator-fraction-ℤ y)
-      ( right-swap-mul-ℤ a f d ∙
-        ap (_*ℤ f) r ∙
-        right-swap-mul-ℤ c b f ∙
-        ap (_*ℤ b) s ∙
-        right-swap-mul-ℤ e d b)
+      ( right-swap-mul-ℤ a f d ∙ ap (_*ℤ f) r ∙
+        right-swap-mul-ℤ c b f ∙ ap (_*ℤ b) s ∙ right-swap-mul-ℤ e d b)
 
 equivalence-relation-sim-fraction-ℤ : equivalence-relation lzero fraction-ℤ
 pr1 equivalence-relation-sim-fraction-ℤ = sim-fraction-ℤ-Prop

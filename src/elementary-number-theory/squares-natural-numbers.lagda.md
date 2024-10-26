@@ -72,14 +72,22 @@ square-root-ℕ _ (root , _) = root
 
 ### Squares of successors
 
-For any `n` we have `(n + 1)² ＝ (n + 2)n + 1
+For any `n` we have the equations
+
+```text
+  (n + 1)² ＝ (n + 2)n + 1
+  (n + 1)² ＝ n² + 2n + 1.
+```
 
 ```agda
-square-succ-ℕ :
-  (n : ℕ) →
-  square-ℕ (succ-ℕ n) ＝ succ-ℕ ((succ-ℕ (succ-ℕ n)) *ℕ n)
-square-succ-ℕ n =
+square-succ-ℕ' :
+  (n : ℕ) → square-ℕ (succ-ℕ n) ＝ (n +ℕ 2) *ℕ n +ℕ 1
+square-succ-ℕ' n =
   right-successor-law-mul-ℕ (succ-ℕ n) n
+
+square-succ-ℕ : (n : ℕ) → square-ℕ (succ-ℕ n) ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ 1
+square-succ-ℕ n =
+  square-succ-ℕ' n ∙ ap succ-ℕ (right-distributive-mul-add-ℕ n 2 n)
 ```
 
 ### Squares of double successors
@@ -134,7 +142,8 @@ preserves-strict-order-square-ℕ m n H =
 
 ### The square function reflects the order on the natural numbers
 
-For any two natural numbers `m` and `n` we have `m² ≤ n² → m ≤ n` and `m² < n² → m < n`.
+For any two natural numbers `m` and `n` we have `m² ≤ n² → m ≤ n` and
+`m² < n² → m < n`.
 
 ```agda
 reflects-order-square-ℕ :
@@ -206,7 +215,7 @@ lower-bound-square-ℕ (succ-ℕ n) =
         ( leq-add-ℕ (square-ℕ n +ℕ n) n)
         ( leq-add-ℕ (square-ℕ n) n))
       ( lower-bound-square-ℕ n))
-    ( inv (square-succ-ℕ n))
+    ( inv (square-succ-ℕ' n))
 ```
 
 ### If a number `n` has a square root, then the square root is at most `n`
@@ -238,7 +247,7 @@ strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ (succ-ℕ n))) H =
         ( square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2) +ℕ (n +ℕ 2))
         ( le-add-succ-ℕ (square-ℕ (n +ℕ 2)) (n +ℕ 1))
         ( le-add-succ-ℕ (square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2)) (n +ℕ 1))))
-    ( inv (square-succ-ℕ (succ-ℕ (succ-ℕ n))))
+    ( inv (square-succ-ℕ' (succ-ℕ (succ-ℕ n))))
 ```
 
 ### If a number `n` greater than 1 has a square root, then its square root is strictly smaller than `n`
@@ -312,6 +321,7 @@ is-decidable-is-square-ℕ n =
 ### Equivalent characterizations of a number being even in terms of its square
 
 Consider a natural number `n`. The following are equivalent:
+
 - The number `n` is even.
 - Its square is even.
 - Its square is divisible by 4.

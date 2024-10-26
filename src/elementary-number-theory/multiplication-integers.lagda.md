@@ -160,6 +160,11 @@ left-successor-law-mul-ℤ (inr (inl star)) l =
   inv (right-unit-law-add-ℤ l)
 left-successor-law-mul-ℤ (inr (inr n)) l = refl
 
+left-successor-law-mul-ℤ' :
+  (k l : ℤ) → succ-ℤ k *ℤ l ＝ k *ℤ l +ℤ l
+left-successor-law-mul-ℤ' k l =
+  left-successor-law-mul-ℤ k l ∙ commutative-add-ℤ l (k *ℤ l)
+
 left-predecessor-law-mul-ℤ :
   (k l : ℤ) → (pred-ℤ k) *ℤ l ＝ (neg-ℤ l) +ℤ (k *ℤ l)
 left-predecessor-law-mul-ℤ (inl n) l = refl
@@ -173,6 +178,11 @@ left-predecessor-law-mul-ℤ (inr (inr (succ-ℕ x))) l =
     ( _+ℤ ((in-pos-ℤ x) *ℤ l))
     ( inv (left-inverse-law-add-ℤ l))) ∙
   ( associative-add-ℤ (neg-ℤ l) l ((in-pos-ℤ x) *ℤ l))
+
+left-predecessor-law-mul-ℤ' :
+  (k l : ℤ) → pred-ℤ k *ℤ l ＝ k *ℤ l -ℤ l
+left-predecessor-law-mul-ℤ' k l =
+  left-predecessor-law-mul-ℤ k l ∙ commutative-add-ℤ (neg-ℤ l) (k *ℤ l)
 
 right-successor-law-mul-ℤ :
   (k l : ℤ) → k *ℤ (succ-ℤ l) ＝ k +ℤ (k *ℤ l)
@@ -212,6 +222,11 @@ right-successor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
               ( inv (left-successor-law-add-ℤ (in-pos-ℤ n) l))))) ∙
         ( associative-add-ℤ (inr (inr (succ-ℕ n))) l ((inr (inr n)) *ℤ l)))))
 
+right-successor-law-mul-ℤ' :
+  (k l : ℤ) → k *ℤ succ-ℤ l ＝ k *ℤ l +ℤ k
+right-successor-law-mul-ℤ' k l =
+  right-successor-law-mul-ℤ k l ∙ commutative-add-ℤ k (k *ℤ l)
+
 right-predecessor-law-mul-ℤ :
   (k l : ℤ) → k *ℤ (pred-ℤ l) ＝ (neg-ℤ k) +ℤ (k *ℤ l)
 right-predecessor-law-mul-ℤ (inl zero-ℕ) l =
@@ -245,6 +260,30 @@ right-predecessor-law-mul-ℤ (inr (inr (succ-ℕ n))) l =
             ( ( ap pred-ℤ (commutative-add-ℤ l (inl n))) ∙
               ( inv (left-predecessor-law-add-ℤ (inl n) l))))) ∙
         ( associative-add-ℤ (inl (succ-ℕ n)) l ((inr (inr n)) *ℤ l)))))
+
+right-predecessor-law-mul-ℤ' :
+  (k l : ℤ) → k *ℤ pred-ℤ l ＝ k *ℤ l -ℤ k
+right-predecessor-law-mul-ℤ' k l =
+  right-predecessor-law-mul-ℤ k l ∙ commutative-add-ℤ (neg-ℤ k) (k *ℤ l)
+
+double-successor-law-mul-ℤ :
+  (k l : ℤ) → succ-ℤ k *ℤ succ-ℤ l ＝ k *ℤ l +ℤ k +ℤ l +ℤ int-ℕ 1
+double-successor-law-mul-ℤ k l =
+  left-successor-law-mul-ℤ' k (succ-ℤ l) ∙
+  ap-add-ℤ
+    ( right-successor-law-mul-ℤ' k l)
+    ( inv (right-add-one-ℤ l)) ∙
+  inv (associative-add-ℤ (k *ℤ l +ℤ k) l (int-ℕ 1))
+
+double-predecessor-law-mul-ℤ :
+  (k l : ℤ) → pred-ℤ k *ℤ pred-ℤ l ＝ ((k *ℤ l -ℤ k) -ℤ l) +ℤ int-ℕ 1
+double-predecessor-law-mul-ℤ k l =
+  left-predecessor-law-mul-ℤ' k (pred-ℤ l) ∙
+  ap-add-ℤ
+    ( right-predecessor-law-mul-ℤ' k l)
+    ( ap neg-ℤ (inv (right-add-neg-one-ℤ l)) ∙
+      distributive-neg-add-ℤ l neg-one-ℤ) ∙
+  inv (associative-add-ℤ (k *ℤ l -ℤ k) (neg-ℤ l) (int-ℕ 1))
 ```
 
 ### Multiplication on the integers distributes on the right over addition
@@ -338,6 +377,25 @@ left-distributive-mul-add-ℤ m k l =
   commutative-mul-ℤ m (k +ℤ l) ∙
     ( ( right-distributive-mul-add-ℤ k l m) ∙
       ( ap-add-ℤ (commutative-mul-ℤ k m) (commutative-mul-ℤ l m)))
+```
+
+### Distributivity of multiplication over addition on both sides
+
+For any four integers `a`, `b`, `c`, and `d` we have
+
+```text
+  (a + b)(c + d) ＝ (ac + ad) + (bc + bd).
+```
+
+```agda
+double-distributive-mul-add-ℤ :
+  (a b c d : ℤ) →
+  (a +ℤ b) *ℤ (c +ℤ d) ＝ (a *ℤ c +ℤ a *ℤ d) +ℤ (b *ℤ c +ℤ b *ℤ d)
+double-distributive-mul-add-ℤ a b c d =
+  right-distributive-mul-add-ℤ a b (c +ℤ d) ∙
+  ap-add-ℤ
+    ( left-distributive-mul-add-ℤ a c d)
+    ( left-distributive-mul-add-ℤ b c d)
 ```
 
 ### Right multiplication by the negative of an integer is the negative of the multiplication
