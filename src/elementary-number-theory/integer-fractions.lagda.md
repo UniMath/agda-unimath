@@ -136,13 +136,16 @@ fraction-ℤ-Set = fraction-ℤ , is-set-fraction-ℤ
 
 ### The standard equivalence relation on integer fractions
 
-Two integer fractions `a/b` and `c/d` are said to be equivalent if they satisfy the equation
+Two integer fractions `a/b` and `c/d` are said to be equivalent if they satisfy
+the equation
 
 ```text
   ad ＝ cb.
 ```
 
-This relation is obviously reflexive and symmetric. To see that it is transitive, suppose that `a/b ~ c/d` and that `c/d ~ e/f`. Since `d` is positive, we have the implication
+This relation is obviously reflexive and symmetric. To see that it is
+transitive, suppose that `a/b ~ c/d` and that `c/d ~ e/f`. Since `d` is
+positive, we have the implication
 
 ```text
   (af)d ＝ (eb)d → af ＝ eb.

@@ -39,8 +39,8 @@ open import foundation.universe-levels
 ## Idea
 
 A {{#concept "reduced fraction" Agda=reduced-fraction-ℤ}} is a
-[fraction](elementary-number-theory.integer-fractions.md) in which its
-numerator and denominator are
+[fraction](elementary-number-theory.integer-fractions.md) in which its numerator
+and denominator are
 [coprime](elementary-number-theory.relatively-prime-integers.md).
 
 ## Definitions

@@ -62,6 +62,3 @@ not-two-square-reduced-fraction-ℤ :
 not-two-square-reduced-fraction-ℤ x@(a , b , pb) H K =
   {!!}
 ```
-
-Id (mul-ℤ (mul-ℤ a a) (inr (inr 0)))
-(add-ℤ (mul-ℤ b b) (mul-ℤ b b))

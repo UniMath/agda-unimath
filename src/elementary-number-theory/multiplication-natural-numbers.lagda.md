@@ -279,7 +279,7 @@ is-nonzero-right-factor-mul-ℕ :
 is-nonzero-right-factor-mul-ℕ x .zero-ℕ H refl = H (right-zero-law-mul-ℕ x)
 ```
 
-### If $(x+1)y = x+1$ then it follows that $y = 1$.
+### If $(x+1)y = x+1$ then it follows that $y = 1$
 
 ```agda
 is-one-is-right-unit-mul-ℕ :
