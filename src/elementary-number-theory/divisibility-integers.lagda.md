@@ -236,7 +236,7 @@ pr2 (neg-div-ℤ x y (pair d p)) =
       by p
 ```
 
-### If `x` divides both `y` and `z`, then it divides `y + z`
+### If `x` divides two out of the three integers `y`, `z`, and `y + z`, then it divides the third
 
 ```agda
 div-add-ℤ : (x y z : ℤ) → div-ℤ x y → div-ℤ x z → div-ℤ x (y +ℤ z)
