@@ -13,6 +13,7 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.commutative-semiring-of-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.products-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types
@@ -22,7 +23,7 @@ open import foundation.identity-types
 
 ## Idea
 
-The exponent `m^n` is the number obtained by multiplying `m` with itself `n`
+The {{#concept "exponential" Agda=exp-ℕ WD="exponentiation" WDID=Q33456}} $m^n$ of two [natural numbers](elementary-number-theory.natural-numbers.md) is the number obtained by multiplying $m$ with itself $n$
 times.
 
 ## Definition
@@ -73,7 +74,7 @@ exp-mul-ℕ x (succ-ℕ y) z =
     ( inv (right-distributive-exp-mul-ℕ (x ^ℕ y) x z)))
 ```
 
-### The exponent `m^n` is always nonzero
+### The exponent $m^n$ is always nonzero
 
 ```agda
 is-nonzero-exp-ℕ :
@@ -81,4 +82,14 @@ is-nonzero-exp-ℕ :
 is-nonzero-exp-ℕ m zero-ℕ p = is-nonzero-one-ℕ
 is-nonzero-exp-ℕ m (succ-ℕ n) p =
   is-nonzero-mul-ℕ (m ^ℕ n) m (is-nonzero-exp-ℕ m n p) p
+```
+
+### The exponent $m^n$ is equal to the $n$-fold product of $m$
+
+```agda
+compute-constant-product-ℕ :
+  (m n : ℕ) → Π-ℕ n (λ _ → m) ＝ exp-ℕ m n
+compute-constant-product-ℕ m zero-ℕ = refl
+compute-constant-product-ℕ m (succ-ℕ n) =
+  ap (_*ℕ m) (compute-constant-product-ℕ m n)
 ```
