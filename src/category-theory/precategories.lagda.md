@@ -11,6 +11,7 @@ open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.nonunital-precategories
 open import category-theory.set-magmoids
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
@@ -314,6 +315,71 @@ module _
   total-hom-truncated-type-is-trunc-obj-Precategory =
     total-hom-truncated-type-is-trunc-obj-Nonunital-Precategory
       ( nonunital-precategory-Precategory C)
+```
+
+### Coherence between the left and right unit law of a precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  coh-unit-laws-comp-hom-Precategory :
+    {x : obj-Precategory C} →
+    left-unit-law-comp-hom-Precategory C (id-hom-Precategory C {x = x}) ＝
+    right-unit-law-comp-hom-Precategory C (id-hom-Precategory C {x = x})
+  coh-unit-laws-comp-hom-Precategory {x} =
+    eq-is-prop
+      ( is-set-hom-Precategory C x x
+        ( comp-hom-Precategory C (id-hom-Precategory C) (id-hom-Precategory C))
+        ( id-hom-Precategory C))
+```
+
+### Coherence between the associativity law and the unit laws of a precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  coh-associative-left-unit-law-comp-hom-Precategory :
+    {x y z : obj-Precategory C}
+    {f : hom-Precategory C x y} {g : hom-Precategory C y z} →
+    ( associative-comp-hom-Precategory C (id-hom-Precategory C) g f) ∙
+    ( left-unit-law-comp-hom-Precategory C (comp-hom-Precategory C g f)) ＝
+    ( ap
+      ( comp-hom-Precategory' C f)
+      ( left-unit-law-comp-hom-Precategory C g))
+  coh-associative-left-unit-law-comp-hom-Precategory {x} {y} {z} {f} {g} =
+      eq-is-prop
+      ( is-set-hom-Precategory C x z
+        ( comp-hom-Precategory C
+          ( comp-hom-Precategory C (id-hom-Precategory C) g)
+          ( f))
+        ( comp-hom-Precategory C g f))
+
+  coh-associative-left-unit-law-comp-hom-Precategory'' :
+    {x y : obj-Precategory C} {f : hom-Precategory C x y} →
+    ( associative-comp-hom-Precategory C
+      ( id-hom-Precategory C)
+      ( id-hom-Precategory C)
+      ( f)) ∙
+    left-unit-law-comp-hom-Precategory C
+      ( comp-hom-Precategory C (id-hom-Precategory C) f) ∙
+    left-unit-law-comp-hom-Precategory C f ＝
+    ( ap
+      ( comp-hom-Precategory' C f)
+      ( left-unit-law-comp-hom-Precategory C (id-hom-Precategory C))) ∙
+    ( left-unit-law-comp-hom-Precategory C f)
+  coh-associative-left-unit-law-comp-hom-Precategory'' {x} {y} {f} =
+    eq-is-prop
+      ( is-set-hom-Precategory C x y
+        ( comp-hom-Precategory C
+          ( comp-hom-Precategory C
+            ( id-hom-Precategory C)
+            ( id-hom-Precategory C))
+          ( f))
+        ( f))
 ```
 
 ## See also
