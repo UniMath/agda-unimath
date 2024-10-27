@@ -42,14 +42,14 @@ over it.
 
 Thus, a displayed precategory `𝒟` over `𝒞` consists of
 
-- a family of objects `ob 𝒟` indexed by `ob 𝒞`,
+- a family of objects `obj 𝒟` indexed by `obj 𝒞`,
 - a family of hom-[sets](foundation-core.sets.md)
 
   ```text
-  hom 𝒟 : hom 𝒞 x y → ob 𝒟 x → ob 𝒟 y → Set,
+  hom 𝒟 : hom 𝒞 x y → obj 𝒟 x → obj 𝒟 y → Set,
   ```
 
-  for every pair `x y : ob 𝒞`, and
+  for every pair `x y : obj 𝒞`, and
 
 - a dependent composition operation
 
@@ -71,7 +71,7 @@ Thus, a displayed precategory `𝒟` over `𝒞` consists of
   identity morphisms
 
   ```text
-    id 𝒟 : (x : ob 𝒞) (x' : ob 𝒟 x) → hom 𝒟 (id 𝒞 x) x' x'
+    id 𝒟 : (x : obj 𝒞) (x' : obj 𝒟 x) → hom 𝒟 (id 𝒞 x) x' x'
   ```
 
   which is a dependent left and right unit in the sense that the dependent
@@ -195,7 +195,7 @@ Given a displayed precategory `𝒟` over `𝒞`, the total structure `∫D` who
 objects are
 
 ```text
-  ob ∫D := Σ (x : ob 𝒞) (ob 𝒟 x)
+  obj ∫D := Σ (x : obj 𝒞) (obj 𝒟 x)
 ```
 
 and hom-sets are
@@ -327,7 +327,7 @@ module _
 
 ### The fiber precategory of a displayed precategory over an object
 
-Given a displayed precategory `𝒟` over `𝒞`, the fiber of `𝒟` over `x : ob 𝒞`
+Given a displayed precategory `𝒟` over `𝒞`, the fiber of `𝒟` over `x : obj 𝒞`
 defines a precategory.
 
 ```agda

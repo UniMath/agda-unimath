@@ -317,7 +317,7 @@ module _
       ( nonunital-precategory-Precategory C)
 ```
 
-### Higher coherences in a precategory
+### Coherence between the left and right unit law of a precategory
 
 ```agda
 module _
@@ -334,6 +334,8 @@ module _
         ( comp-hom-Precategory C (id-hom-Precategory C) (id-hom-Precategory C))
         ( id-hom-Precategory C))
 ```
+
+### Coherence between the associativity law and the unit laws of a precategory
 
 ```agda
 module _
