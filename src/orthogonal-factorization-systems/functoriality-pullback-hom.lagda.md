@@ -39,7 +39,29 @@ open import orthogonal-factorization-systems.pullback-hom
 
 The construction of the
 [pullback-hom](orthogonal-factorization-systems.pullback-hom.md) is functorial.
-There is a commuting triangle of ∞-categories
+I.e., we have a functorial action on pairs of
+[morphisms of arrows](foundation.morphisms-arrows.md)
+
+```text
+  (α : f' ⇒ f, β : g ⇒ g') ↦ α ⋔ β : (f ⋔ g) ⇒ (f' ⋔ g')
+```
+
+We construct this action as the restriction of a more general action on
+morphisms of _exponentiated cospan diagrams_ of the form:
+
+```text
+            - ∘ f           g ∘ -
+   (B → Y) ------> (A → Y) <------ (A → X)
+      |               |               |
+      |               |               |
+      ∨     - ∘ f'    ∨    g' ∘ -     ∨
+  (B' → Y') ----> (A' → Y') <---- (A' → X').
+```
+
+In general, such morphisms need not necessarily come from pairs of morphisms of
+the underlying arrows.
+
+This gives us a commuting triangle of functors
 
 ```text
   [pairs of arrows of types] ---> [exponentiated cospan diagrams]
@@ -49,8 +71,8 @@ There is a commuting triangle of ∞-categories
                       [arrows of types]
 ```
 
-that maps pairs of arrows to their pullback-hom. We refer to either of the
-vertical functors as the pullback-hom functor.
+where the functorial action of the pullback-hom on arrows is the left vertical
+arrow.
 
 ### Functoriality of pullback-homs on exponentiated cospan diagrams
 
@@ -66,12 +88,12 @@ to the type of [morphisms of arrows](foundation.morphisms-arrows.md) from `f` to
 `g`
 
 ```text
-      f ⇒ g -------> A → X
-        | ⌟            |
-        |              | g ∘ -
-        ∨              ∨
-      B → Y -------> A → Y.
-             - ∘ f
+  f ⇒ g -------> A → X
+    | ⌟            |
+    |              | g ∘ -
+    ∨              ∨
+  B → Y -------> A → Y.
+          - ∘ f
 ```
 
 For every morphism of cospan diagrams of this form
@@ -101,12 +123,15 @@ we thus have a commuting cube given by the functorial action of pullbacks
       B' → Y' ---------> A' → Y'.
 ```
 
+This is the
+{{#concept "functorial action of pullback-homs on exponentiated cospan diagrams"}}.
+
 ### Functoriality of pullback-homs on pairs of morphisms of arrows
 
 There is a bifunctor mapping pairs of arrows to cospan diagrams of the form
 described above. This bifunctor is contravariant in the left argument and
-covariant in the right. I.e., a pair of morphisms of arrows `F : f' ⇒ f` and
-`G : g ⇒ g'` gives a morphism of cospan diagrams
+covariant in the right. I.e., a pair of morphisms of arrows `f' ⇒ f` and
+`g ⇒ g'` gives a morphism of cospan diagrams
 
 ```text
             - ∘ f           g ∘ -
@@ -125,8 +150,8 @@ a bifunctorial action that we call the
 {{#concept "bifunctoriality of the pullback-hom" Disambiguation="on types"}}.
 
 Given a pair of maps `f` and `g`, the pullback-hom produces a new map
-`f ⋔ g : (B → X) → (f ⇒ g)`, and given morphisms of arrows `F : f' ⇒ f` and
-`G : g ⇒ g'`, we obtain a morphism of the following arrows
+`f ⋔ g : (B → X) → (f ⇒ g)`, and given morphisms of arrows `f' ⇒ f` and
+`g ⇒ g'`, we obtain a morphism of pullback-hom arrows
 
 ```text
      (B → X) -----> (B' → X')

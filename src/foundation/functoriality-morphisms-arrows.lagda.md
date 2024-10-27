@@ -44,25 +44,55 @@ open import foundation.whiskering-homotopies-composition
 ## Idea
 
 The construction of [morphisms of arrows](foundation.morphisms-arrows.md) is
-functorial.
-
-There is a commuting triangle of ∞-categories
+functorial. We have a functorial action on pairs of
+[morphisms of arrows](foundation.morphisms-arrows.md)
 
 ```text
-  [pairs of morphisms of arrows] ----> [exponentiated cospan diagrams]
-                        \                     /
-                         \                   /
-                          ∨                 ∨
-                         [morphisms of arrows]
+  (α : f' ⇒ f, β : g ⇒ g') ↦ α ⇒ β : (f ⇒ g) → (f' ⇒ g')
 ```
 
-that maps pairs of morphisms of arrows to the bicomposition morphism of arrows.
-We may refer to either of the vertical functors as the functorial action of
-morphisms of arrows.
+We construct this functorial action as the restriction of a more general action
+on morphisms of _exponentiated cospan diagrams_ of the form:
+
+```text
+            - ∘ f           g ∘ -
+   (B → Y) ------> (A → Y) <------ (A → X)
+      |               |               |
+      |               |               |
+      ∨     - ∘ f'    ∨    g' ∘ -     ∨
+  (B' → Y') ----> (A' → Y') <---- (A' → X').
+```
+
+In general, such morphisms need not necessarily come from pairs of morphisms of
+the underlying arrows.
+
+This gives us a commuting triangle of functors
+
+```text
+  [pairs of arrows of types] ---> [exponentiated cospan diagrams]
+                     \                 /
+                      \               /
+                       ∨             ∨
+                      [arrows of types]
+```
+
+where the functorial action of morphisms of arrows is the left vertical arrow.
 
 ## Definitions
 
 ### The type of morphisms of arrows as a pullback
+
+Given two maps `f : A → B` and `g : X → Y`, then the type of morphisms of arrows
+from `f` to `g` is the pullback
+
+```text
+  hom-arrow f g ---------> (A → X)
+        | ⌟                   |
+        |                     | g ∘ -
+        ∨                     ∨
+     (B → Y) ------------> (A → Y).
+                 - ∘ f
+```
 
 ```agda
 module _
