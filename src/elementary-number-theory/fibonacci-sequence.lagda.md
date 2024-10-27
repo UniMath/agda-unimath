@@ -22,6 +22,27 @@ open import foundation.transport-along-identifications
 
 </details>
 
+## Idea
+
+The
+{{#concept "Fibonacci sequence" WD="Fibonacci sequence" WDID=Q23835349 Agda=Fibonacci-ℕ}}
+is a recursively defined [sequence](foundation.sequences.md) of
+[natural numbers](elementary-number-theory.natural-numbers.md) given by the
+equations
+
+```text
+  Fₙ₊₂ = Fₙ₊₁ + Fₙ,   where F₀ = 0 and F₁ = 1
+```
+
+A number in this sequence is called a
+{{#concept "Fibonacci number" WD="Fibonacci number" WDID=Q47577}}. The first few
+Fibonacci numbers are
+
+```text
+  n    0   1   2   3   4   5   6   7   8   9
+  Fₙ   0   1   1   2   3   5   8  13  21  34
+```
+
 ## Definitions
 
 ### The standard definition using pattern matching
@@ -93,34 +114,34 @@ Fibonacci-add-ℕ m zero-ℕ =
     ( inv (right-zero-law-mul-ℕ (Fibonacci-ℕ m)))
 Fibonacci-add-ℕ m (succ-ℕ n) =
   ( ap Fibonacci-ℕ (inv (left-successor-law-add-ℕ m (succ-ℕ n)))) ∙
-  ( ( Fibonacci-add-ℕ (succ-ℕ m) n) ∙
-    ( ( ap
-        ( _+ℕ ((Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n)))
-        ( right-distributive-mul-add-ℕ
-          ( Fibonacci-ℕ (succ-ℕ m))
-          ( Fibonacci-ℕ m)
-          ( Fibonacci-ℕ (succ-ℕ n)))) ∙
-      ( ( associative-add-ℕ
-          ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
-          ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
-          ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n))) ∙
-        ( ( ap
-            ( ((Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n))) +ℕ_)
-            ( commutative-add-ℕ
-              ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
-              ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n)))) ∙
-          ( ( inv
-              ( associative-add-ℕ
-                ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
-                ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n))
-                ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))) ∙
-            ( ap
-              ( _+ℕ ((Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))
-              ( inv
-                ( left-distributive-mul-add-ℕ
-                  ( Fibonacci-ℕ (succ-ℕ m))
-                  ( Fibonacci-ℕ (succ-ℕ n))
-                  ( Fibonacci-ℕ n)))))))))
+  ( Fibonacci-add-ℕ (succ-ℕ m) n) ∙
+  ( ap
+    ( _+ℕ ((Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n)))
+    ( right-distributive-mul-add-ℕ
+      ( Fibonacci-ℕ (succ-ℕ m))
+      ( Fibonacci-ℕ m)
+      ( Fibonacci-ℕ (succ-ℕ n)))) ∙
+  ( associative-add-ℕ
+    ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
+    ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
+    ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n))) ∙
+  ( ap
+    ( ((Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n))) +ℕ_)
+    ( commutative-add-ℕ
+      ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
+      ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n)))) ∙
+  ( inv
+    ( associative-add-ℕ
+      ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ (succ-ℕ n)))
+      ( (Fibonacci-ℕ (succ-ℕ m)) *ℕ (Fibonacci-ℕ n))
+      ( (Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))) ∙
+  ( ap
+    ( _+ℕ ((Fibonacci-ℕ m) *ℕ (Fibonacci-ℕ (succ-ℕ n))))
+    ( inv
+      ( left-distributive-mul-add-ℕ
+        ( Fibonacci-ℕ (succ-ℕ m))
+        ( Fibonacci-ℕ (succ-ℕ n))
+        ( Fibonacci-ℕ n))))
 ```
 
 ### Consecutive Fibonacci numbers are relatively prime
@@ -204,3 +225,9 @@ preserves-div-Fibonacci-ℕ :
 preserves-div-Fibonacci-ℕ m n H =
   div-Fibonacci-div-ℕ (Fibonacci-ℕ m) m n H (refl-div-ℕ (Fibonacci-ℕ m))
 ```
+
+## External links
+
+- [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence) at
+  Wikipedia
+- [A000045](https://oeis.org/A000045) in the OEIS

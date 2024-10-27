@@ -159,4 +159,4 @@ peano-9-ℕ P = ind-ℕ {P = type-Prop ∘ P}
 - [Peano axioms](https://www.britannica.com/science/Peano-axioms) at Britannica
 - [Peano axioms](https://en.wikipedia.org/wiki/Peano_axioms) at Wikipedia
 - [Peano's Axioms](https://mathworld.wolfram.com/PeanosAxioms.html) at Wolfram
-  Mathworld
+  MathWorld

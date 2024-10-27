@@ -53,31 +53,37 @@ open import lists.sorted-lists
 
 ## Idea
 
-The **fundamental theorem of arithmetic** asserts that every nonzero natural
-number can be written as a product of primes, and this product is unique up to
-the order of the factors.
+The
+{{#concept "fundamental theorem of arithmetic" WD="fundamental theorem of arithmetic" WDID=Q670235 Agda=fundamental-theorem-arithmetic-list-ℕ}}
+asserts that every
+[nonzero](elementary-number-theory.nonzero-natural-numbers.md)
+[natural number](elementary-number-theory.natural-numbers.md) can be written as
+a [product](elementary-number-theory.products-of-natural-numbers.md) of
+[primes](elementary-number-theory.prime-numbers.md), and this product is
+[unique](foundation-core.contractible-types.md) up to the order of the factors.
 
 The uniqueness of the prime factorization of a natural number can be expressed
 in several ways:
 
-- We can find a unique list of primes `p₁ ≤ p₂ ≤ ⋯ ≤ pᵢ` of which the product is
-  equal to `n`
-- The type of finite sets `X` equipped with functions `p : X → Σ ℕ is-prime-ℕ`
-  and `m : X → positive-ℕ` such that the product of `pₓᵐ⁽ˣ⁾` is equal to `n` is
-  contractible.
+- We can find a unique [list](lists.lists.md) of primes `p₁ ≤ p₂ ≤ ⋯ ≤ pᵢ` of
+  which the product is equal to `n`
+- The type of [finite sets](univalent-combinatorics.finite-types.md) `X`
+  [equipped](foundation.structure.md) with functions `p : X → Σ ℕ is-prime-ℕ`
+  and `m : X → positive-ℕ` such that the product of `pₓᵐ⁽ˣ⁾` is
+  [equal](foundation-core.identity-types.md) to `n` is contractible.
 
-Note that the univalence axiom is neccessary to prove the second uniqueness
-property of prime factorizations.
+Note that the [univalence axiom](foundation-core.univalence.md) is neccessary to
+prove the second uniqueness property of prime factorizations.
 
 ## Definitions
 
 ### Prime decomposition of a natural number with lists
 
-A list of natural numbers is a prime decomposition of a natural number `n` if :
+A list of natural numbers is a prime decomposition of a natural number `n` if:
 
-- The list is sorted
+- The list is sorted.
 - Every element of the list is prime.
-- The product of the element of the list is equal to `n`
+- The product of the element of the list is equal to `n`.
 
 ```agda
 is-prime-list-ℕ :
@@ -286,6 +292,12 @@ least-nontrivial-divisor-ℕ n H =
 
 nat-least-nontrivial-divisor-ℕ : (n : ℕ) → le-ℕ 1 n → ℕ
 nat-least-nontrivial-divisor-ℕ n H = pr1 (least-nontrivial-divisor-ℕ n H)
+
+nat-least-nontrivial-divisor-ℕ' : ℕ → ℕ
+nat-least-nontrivial-divisor-ℕ' zero-ℕ = 0
+nat-least-nontrivial-divisor-ℕ' (succ-ℕ zero-ℕ) = 1
+nat-least-nontrivial-divisor-ℕ' (succ-ℕ (succ-ℕ n)) =
+  nat-least-nontrivial-divisor-ℕ (succ-ℕ (succ-ℕ n)) star
 
 le-one-least-nontrivial-divisor-ℕ :
   (n : ℕ) (H : le-ℕ 1 n) → le-ℕ 1 (nat-least-nontrivial-divisor-ℕ n H)
@@ -1075,3 +1087,8 @@ pr1 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
 pr2 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
   is-prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq
 ```
+
+## External links
+
+- [Fundamental theorem of arithmetic](https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic)
+  at Wikipedia

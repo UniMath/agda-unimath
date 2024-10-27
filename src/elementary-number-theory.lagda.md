@@ -48,6 +48,7 @@ open import elementary-number-theory.divisibility-natural-numbers public
 open import elementary-number-theory.divisibility-standard-finite-types public
 open import elementary-number-theory.equality-integers public
 open import elementary-number-theory.equality-natural-numbers public
+open import elementary-number-theory.euclid-mullin-sequence public
 open import elementary-number-theory.euclidean-division-natural-numbers public
 open import elementary-number-theory.eulers-totient-function public
 open import elementary-number-theory.exponentiation-natural-numbers public
@@ -148,6 +149,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers public
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public
 open import elementary-number-theory.strong-induction-natural-numbers public
 open import elementary-number-theory.sums-of-natural-numbers public
+open import elementary-number-theory.sylvesters-sequence public
 open import elementary-number-theory.taxicab-numbers public
 open import elementary-number-theory.telephone-numbers public
 open import elementary-number-theory.triangular-numbers public

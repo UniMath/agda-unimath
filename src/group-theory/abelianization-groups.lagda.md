@@ -442,4 +442,4 @@ is-adjoint-pair-Adjunction-Large-Precategory
 - [Abelianization](https://en.wikipedia.org/wiki/Commutator_subgroup#Abelianization)
   at Wikipedia
 - [Abelianization](https://mathworld.wolfram.com/Abelianization.html) at Wolfram
-  Mathworld
+  MathWorld
