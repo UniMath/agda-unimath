@@ -5,6 +5,7 @@
 ```agda
 module higher-group-theory where
 
+open import higher-group-theory.abelian-higher-groups public
 open import higher-group-theory.cartesian-products-higher-groups public
 open import higher-group-theory.conjugation public
 open import higher-group-theory.cyclic-higher-groups public
