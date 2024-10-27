@@ -31,14 +31,14 @@ open import foundation.universe-levels
 ## Idea
 
 Given a [precategory](category-theory.precategories.md) `C`, a **dependent
-composition structure** `D` over `C` is a family of types `ob D` over `ob C` and
+composition structure** `D` over `C` is a family of types `obj D` over `obj C` and
 a family of _hom-[sets](foundation-core.sets.md)_
 
 ```text
-hom D : hom C x y → ob D x → ob D y → Set
+hom D : hom C x y → obj D x → obj D y → Set
 ```
 
-for every pair `x y : ob C`, equipped with a **dependent composition operation**
+for every pair `x y : obj C`, equipped with a **dependent composition operation**
 
 ```text
   comp D : hom D g y' z' → hom D f x' y' → hom D (g ∘ f) x' z'.
