@@ -23,8 +23,9 @@ open import foundation.identity-types
 
 ## Idea
 
-The {{#concept "exponential" Agda=exp-ℕ WD="exponentiation" WDID=Q33456}} $m^n$ of two [natural numbers](elementary-number-theory.natural-numbers.md) is the number obtained by multiplying $m$ with itself $n$
-times.
+The {{#concept "exponential" Agda=exp-ℕ WD="exponentiation" WDID=Q33456}} $m^n$
+of two [natural numbers](elementary-number-theory.natural-numbers.md) is the
+number obtained by multiplying $m$ with itself $n$ times.
 
 ## Definition
 

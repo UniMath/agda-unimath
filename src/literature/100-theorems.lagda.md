@@ -12,12 +12,16 @@ module literature.100-theorems where
 
 ### [3. The Denumerability of the Rational Numbers](https://www.cs.ru.nl/~freek/100/#3) {#3}
 
+Author: Fredrik Bakke
+
 ```agda
 open import elementary-number-theory.rational-numbers using
   ( is-countable-ℚ)
 ```
 
 ### [11. The Infinitude of Primes](https://www.cs.ru.nl/~freek/100/#11) {#11}
+
+Author: Egbert Rijke
 
 ```agda
 open import elementary-number-theory.infinitude-of-primes using
@@ -30,6 +34,13 @@ open import elementary-number-theory.infinitude-of-primes using
 
 ### [25. Schröder–Bernstein Theorem](https://www.cs.ru.nl/~freek/100/#25) {#25}
 
+Author: Elif Uskuplu
+
+Note: The formalization of the Cantor-Schröder-Bernstein theorem in agda-unimath
+is a generalization of the statement to all types, i.e., it is not restricted to
+sets. This generalization is originally due to Martin-Escardó, hence we refer to
+the generalization as the Cantor-Schröder-Bernstein-Escardó theorem.
+
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo using
   ( Cantor-Schröder-Bernstein)
@@ -37,7 +48,11 @@ open import foundation.cantor-schroder-bernstein-escardo using
 
 ### [44. The Binomial Theorem](https://www.cs.ru.nl/~freek/100/#44) {#44}
 
+Author: Egbert Rijke
+
 ```agda
+open import commutative-algebra.binomial-theorem-commutative-rings using
+  ( binomial-theorem-Commutative-Ring)
 open import commutative-algebra.binomial-theorem-commutative-semirings using
   ( binomial-theorem-Commutative-Semiring)
 open import ring-theory.binomial-theorem-rings using
@@ -52,9 +67,16 @@ open import elementary-number-theory.binomial-theorem-natural-numbers using
 
 ### [52. The Number of Subsets of a Set](https://www.cs.ru.nl/~freek/100/#52) {#52}
 
-> This is not yet formalized.
+Author: Egbert Rijke
+
+```agda
+open import univalent-combinatorics.decidable-subtypes using
+  ( number-of-elements-decidable-subtype-is-finite)
+```
 
 ### [60. Bezout's Lemma](https://www.cs.ru.nl/~freek/100/#60) {#60}
+
+Author: Brian Lu
 
 Note that the 60th theorem in Freek's list is listed as "Bezout's Theorem",
 while the linked theorems are formalizations of Bezout's lemma, even though
@@ -69,12 +91,16 @@ open import elementary-number-theory.bezouts-lemma-natural-numbers using
 
 ### [63. Cantor's Theorem](https://www.cs.ru.nl/~freek/100/#63) {#63}
 
+Author: Egbert Rijke
+
 ```agda
 open import foundation.cantors-theorem using
   ( theorem-Cantor)
 ```
 
 ### [69. Greatest Common Divisor Algorithm](https://www.cs.ru.nl/~freek/100/#69) {#69}
+
+Author: Egbert Rijke
 
 ```agda
 open import
@@ -84,6 +110,8 @@ open import
 
 ### [74. The Principle of Mathematical Induction](https://www.cs.ru.nl/~freek/100/#74) {#74}
 
+Author: Egbert Rijke
+
 ```agda
 open import elementary-number-theory.natural-numbers using
   ( ind-ℕ)
@@ -91,12 +119,16 @@ open import elementary-number-theory.natural-numbers using
 
 ### [80. The Fundamental Theorem of Arithmetic](https://www.cs.ru.nl/~freek/100/#80) {#80}
 
+Author: Victor Blanchi
+
 ```agda
 open import elementary-number-theory.fundamental-theorem-of-arithmetic using
   ( fundamental-theorem-arithmetic-list-ℕ)
 ```
 
 ### [91. The Triangle Inequality](https://www.cs.ru.nl/~freek/100/#91) {#91}
+
+Author: malarbol
 
 ```agda
 open import real-numbers.metric-space-of-real-numbers using

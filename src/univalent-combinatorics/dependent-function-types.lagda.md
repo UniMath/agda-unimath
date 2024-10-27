@@ -83,7 +83,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   (c : count A) (d : (x : A) → count (B x))
   where
-  
+
   count-Π : count ((x : A) → B x)
   count-Π =
     count-equiv'
@@ -110,7 +110,7 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   abstract
     is-finite-Π :
       is-finite A → ((x : A) → is-finite (B x)) → is-finite ((x : A) → B x)
@@ -122,7 +122,7 @@ module _
             ( finite-choice f g)
             ( is-finite-Prop ((x : A) → B x))
             ( λ h → unit-trunc-Prop (count-Π e h)))
-  
+
     is-finite-Π' :
       is-finite A → ((x : A) → is-finite (B x)) → is-finite ({x : A} → B x)
     is-finite-Π' f g =

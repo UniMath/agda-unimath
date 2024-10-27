@@ -37,7 +37,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (c : count A) (d : count B)
   where
-  
+
   count-function-type : count (A → B)
   count-function-type = count-Π c (λ _ → d)
 
@@ -45,7 +45,7 @@ module _
     number-of-elements-count count-function-type ＝
     exp-ℕ (number-of-elements-count d) (number-of-elements-count c)
   number-of-elements-count-function-type =
-    number-of-elements-count-Π c (λ _ → d) ∙ 
+    number-of-elements-count-Π c (λ _ → d) ∙
     compute-constant-product-ℕ
       ( number-of-elements-count d)
       ( number-of-elements-count c)
