@@ -31,7 +31,9 @@ open import foundation.unit-type
 The {{#concept "absolute value" Disambiguation="of an integer" Agda=abs-ℤ}} of
 an integer is the natural number with the same distance from `0`.
 
-## Definition
+## Definitions
+
+### The absolute value of an integer
 
 ```agda
 abs-ℤ : ℤ → ℕ
