@@ -91,6 +91,10 @@ module _
 
 ### The type of decidable subtypes of a finite type is finite
 
+The computation of the number of subsets of a finite sets is the 52nd theorem on
+Freek Wiedijk's list of [100 theorems](literature.100-theorems.md)
+{{#cite 100theorems}}.
+
 ```agda
 is-finite-decidable-subtype-is-finite :
   {l1 l2 : Level} {X : UU l1} →
@@ -207,3 +211,7 @@ is-decidable-subtype-is-finite-has-decidable-eq S dec-A fin-S a =
         ( λ x → inr λ S-a → x (( (a , S-a) , refl)))
         ( is-decidable-Σ-count count-S λ s → dec-A a (pr1 s)))
 ```
+
+## References
+
+{{#bibliography}}
