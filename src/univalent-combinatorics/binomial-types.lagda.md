@@ -77,7 +77,7 @@ binomial-type-Level l X Y =
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type-Level l3 X Y)
   where
-  
+
   type-binomial-type-Level : UU l3
   type-binomial-type-Level = type-component-UU-Level (pr1 Z)
 
@@ -109,7 +109,7 @@ binomial-type {l1} {l2} X Y = binomial-type-Level (l1 ⊔ l2) X Y
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y)
   where
-  
+
   type-binomial-type : UU (l1 ⊔ l2)
   type-binomial-type = type-component-UU-Level (pr1 Z)
 
@@ -146,7 +146,8 @@ binomial-type' {l1} {l2} A B = binomial-type-Level' (l1 ⊔ l2) A B
 
 ### The small binomial types
 
-Note that the universe level of `small-binomial-type` is lower that the universe level of `binomial-type`.
+Note that the universe level of `small-binomial-type` is lower that the universe
+level of `binomial-type`.
 
 ```agda
 small-binomial-type :
@@ -154,7 +155,6 @@ small-binomial-type :
 small-binomial-type A B =
   Σ (A → bool) (λ f → mere-equiv B (fiber f true))
 ```
-
 
 ## Properties
 
