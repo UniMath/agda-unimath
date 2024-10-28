@@ -43,6 +43,8 @@ the generalization as the Cantor-Schröder-Bernstein-Escardó theorem.
 
 ```agda
 open import foundation.cantor-schroder-bernstein-escardo using
+  ( Cantor-Schröder-Bernstein-Escardó)
+open import foundation.cantor-schroder-bernstein-escardo using
   ( Cantor-Schröder-Bernstein)
 ```
 
@@ -74,7 +76,7 @@ open import univalent-combinatorics.decidable-subtypes using
   ( number-of-elements-decidable-subtype-is-finite)
 ```
 
-### [58. Formula for the number of combinations](https://www.cs.ru.nl/~freek/100/#58)
+### [58. Formula for the number of combinations](https://www.cs.ru.nl/~freek/100/#58) {#58}
 
 Author: Egbert Rijke
 

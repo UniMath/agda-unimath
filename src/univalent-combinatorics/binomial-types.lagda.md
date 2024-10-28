@@ -387,6 +387,10 @@ equiv-binomial-type e f =
 
 ### Computation of the number of elements of the binomial type `((Fin n) (Fin m))`
 
+The computation of the number of subsets of a given cardinality of a finite set
+is the 58th theorem on Freek Wiedijk's list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
 ```agda
 binomial-type-Fin :
   (n m : ℕ) → binomial-type (Fin n) (Fin m) ≃ Fin (binomial-coefficient-ℕ n m)
@@ -457,3 +461,7 @@ pr2 (binomial-type-𝔽 A B) =
     ( compute-small-binomial-type (type-𝔽 A) (type-𝔽 B))
     ( is-finite-binomial-type (is-finite-type-𝔽 A) (is-finite-type-𝔽 B))
 ```
+
+## References
+
+{{#bibliography}}

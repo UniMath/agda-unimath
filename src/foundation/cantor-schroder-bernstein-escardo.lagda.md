@@ -38,6 +38,9 @@ Escardó proved that a Cantor–Schröder–Bernstein theorem also holds for
 [embed](foundation-core.embeddings.md) into each other, then the types are
 [equivalent](foundation-core.equivalences.md). {{#cite Esc21}}
 
+The Cantor–Schröder–Bernstein theorem is the 25th theorem on Freek Wiedijk's
+list of [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
 ## Statement
 
 ```agda

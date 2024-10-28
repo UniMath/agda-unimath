@@ -61,6 +61,10 @@ predicate `P : ℕ → UU lzero` given by
 is decidable, because `P z ⇔ [y]_x | [z]_x` in `ℤ/x`. The least positive `z`
 such that `P z` holds is `gcd x y`.
 
+Bézout's Lemma is the 60th theorem on Freek Wiedijk's list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}. It was
+originally added to agda-unimath by [Brian Lu](https://blu-bird.github.io).
+
 ## Definitions
 
 ```agda
@@ -1944,3 +1948,7 @@ bezouts-lemma-eqn-ℕ :
 bezouts-lemma-eqn-ℕ x y H =
   minimal-positive-distance-eqn x y H ∙ bezouts-lemma-ℕ x y H
 ```
+
+## References
+
+{{#bibliography}}

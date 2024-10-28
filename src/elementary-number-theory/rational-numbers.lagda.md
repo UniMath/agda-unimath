@@ -39,8 +39,24 @@ open import set-theory.countable-sets
 
 ## Idea
 
-The type of rational numbers is the quotient of the type of fractions, by the
-equivalence relation given by `(n/m) ~ (n'/m') := Id (n *ℤ m') (n' *ℤ m)`.
+The type of
+{{#concept "rational numbers" Agda=ℚ WD="rational number" WDID=Q1244890}} is the
+[quotient](foundation.set-quotients.md) of the type of
+[integer fractions](elementary-number-theory.integer-fractions.md) by the
+[equivalence relation](foundation.equivalence-relations.md) given by
+
+$$
+\frac{n}{m} \sim \frac{n'}{m'} := nm' = n'm.
+$$
+
+Since the
+[reduced fractions](elementary-number-theory.reduced-integer-fractions.md) are
+[canonical representatives](foundation.choice-of-representatives-equivalence-relation.md)
+of the similarity relation on fractions, we simply define the
+[set](foundation.sets.md) `ℚ` to be the type of reduced fractions and we obtain
+the
+[universal property of the set quotient](foundation.universal-property-set-quotient.md)
+from the fact that each equivalence class has a unique canonical representative.
 
 ## Definitions
 
@@ -189,6 +205,10 @@ retract-integer-fraction-ℚ =
 
 ### The rationals are countable
 
+The denumerability of the rational numbers is the third theorem on Freek
+Wiedijk's list of [100 theorems](literature.100-theorems.md)
+{{#cite 100theorems}}.
+
 ```agda
 is-countable-ℚ : is-countable ℚ-Set
 is-countable-ℚ =
@@ -288,3 +308,7 @@ reflecting-map-sim-fraction :
 pr1 reflecting-map-sim-fraction = rational-fraction-ℤ
 pr2 reflecting-map-sim-fraction {x} {y} H = eq-ℚ-sim-fraction-ℤ x y H
 ```
+
+## References
+
+{{#bibliography}}
