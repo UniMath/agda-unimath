@@ -43,6 +43,7 @@ open import foundation.universe-levels
 open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.double-counting
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -416,6 +417,24 @@ eq-cardinality H K =
       apply-universal-property-trunc-Prop K
         ( Id-Prop ℕ-Set _ _)
         ( λ f → is-equivalence-injective-Fin (inv-equiv f ∘e e)))
+```
+
+### Equivalent finite types have the same cardinality
+
+```agda
+eq-cardinality-equiv-is-finite :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  (H : is-finite A) (K : is-finite B) →
+  number-of-elements-is-finite H ＝ number-of-elements-is-finite K
+eq-cardinality-equiv-is-finite e H K =
+  map-universal-property-trunc-Prop
+    ( Id-Prop ℕ-Set _ _)
+    ( λ c@(n , f) →
+      eq-cardinality
+        ( has-cardinality-is-finite H)
+        ( unit-trunc-Prop (inv-equiv e ∘e f)) ∙
+      compute-number-of-elements-is-finite c K)
+    ( K)
 ```
 
 ### Any finite type is a set

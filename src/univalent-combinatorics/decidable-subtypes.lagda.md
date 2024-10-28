@@ -9,8 +9,10 @@ open import foundation.decidable-subtypes public
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
@@ -95,6 +97,17 @@ is-finite-decidable-subtype-is-finite :
   is-finite X → is-finite (decidable-subtype l2 X)
 is-finite-decidable-subtype-is-finite H =
   is-finite-function-type H is-finite-Decidable-Prop
+
+number-of-elements-decidable-subtype-is-finite :
+  {l1 l2 : Level} {X : UU l1} (H : is-finite X) →
+  number-of-elements-is-finite
+    ( is-finite-decidable-subtype-is-finite {l2 = l2} H) ＝
+  exp-ℕ 2 (number-of-elements-is-finite H)
+number-of-elements-decidable-subtype-is-finite {l1} {l2} H =
+  number-of-elements-function-type H is-finite-Decidable-Prop ∙
+  ap
+    ( λ x → exp-ℕ x (number-of-elements-is-finite H))
+    ( number-of-elements-Decidable-Prop {l2})
 
 Subset-𝔽 :
   {l1 : Level} (l2 : Level) → 𝔽 l1 → 𝔽 (l1 ⊔ lsuc l2)
