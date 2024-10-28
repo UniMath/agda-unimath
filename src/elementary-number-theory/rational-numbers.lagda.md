@@ -55,7 +55,7 @@ Since the
 of the similarity relation on fractions, we simply define the
 [set](foundation.sets.md) `ℚ` to be the type of reduced fractions and we obtain
 the
-[universal property of the set quotient](foundation.universal-property-set-quotient.md)
+[universal property of the set quotient](foundation.universal-property-set-quotients.md)
 from the fact that each equivalence class has a unique canonical representative.
 
 ## Definitions
