@@ -83,9 +83,9 @@ is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
 
 ### The induction principle of ℕ
 
-The induction principle of the natural numbers is the 74th theorem on Freek
-Wiedijk's list of [100 theorems](literature.100-theorems.md)
-{{#cite 100theorems}}.
+The induction principle of the natural numbers is the 74th theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda
 ind-ℕ :
