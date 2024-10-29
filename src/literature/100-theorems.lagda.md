@@ -1,4 +1,4 @@
-# Formalizing 100 Theorems
+# Freek Wiedijk's 100 Theorems
 
 This file records formalized results from
 [Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/)

@@ -9,7 +9,7 @@ typed programming language [Agda](https://github.com/agda/agda).
 </a>
 
 The library project was created by
-[Elisabeth Stenholm](https://elisabeth.bonnevier.one),
+[Elisabeth Stenholm](https://elisabeth.stenholm.one),
 [Jonathan Prieto-Cubides](https://jonaprieto.github.io), and
 [Egbert Rijke](https://egbertrijke.github.io), and is currently being maintained
 by Egbert Rijke, [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke),

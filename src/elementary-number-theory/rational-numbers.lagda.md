@@ -205,9 +205,9 @@ retract-integer-fraction-ℚ =
 
 ### The rationals are countable
 
-The denumerability of the rational numbers is the third theorem on Freek
-Wiedijk's list of [100 theorems](literature.100-theorems.md)
-{{#cite 100theorems}}.
+The denumerability of the rational numbers is the third theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda
 is-countable-ℚ : is-countable ℚ-Set
