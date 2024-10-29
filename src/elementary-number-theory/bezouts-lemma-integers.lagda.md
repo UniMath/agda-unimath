@@ -38,6 +38,11 @@ open import foundation.unit-type
 
 </details>
 
+Bézout's Lemma is the 60th theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}. It was
+originally added to agda-unimath by [Bryan Lu](https://blu-bird.github.io).
+
 ## Lemma
 
 ```agda
@@ -532,3 +537,7 @@ div-right-factor-coprime-ℕ x y z H K =
         ( tr (div-ℤ (int-ℕ x)) (inv (mul-int-ℕ y z)) (div-int-div-ℕ H))
       ( eq-gcd-gcd-int-ℕ x y ∙ ap int-ℕ K))
 ```
+
+## References
+
+{{#bibliography}}

@@ -121,7 +121,7 @@ le-one-is-prime-ℕ (succ-ℕ (succ-ℕ n)) x = star
 
 ```agda
 is-prop-is-prime-ℕ :
-  (n : ℕ) → is-prop (is-prime-ℕ n)
+  (n : ℕ) → is-prop (is-prime-ℕ n)
 is-prop-is-prime-ℕ n =
   is-prop-Π
     ( λ x →

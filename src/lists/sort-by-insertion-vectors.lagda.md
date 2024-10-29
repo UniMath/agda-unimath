@@ -206,7 +206,7 @@ module _
 
   eq-permute-vec-permutation-insertion-sort-vec :
     {n : ℕ}
-    (v : vec (type-Decidable-Total-Order X) n) →
+    (v : vec (type-Decidable-Total-Order X) n) →
     insertion-sort-vec v ＝ permute-vec n v (permutation-insertion-sort-vec v)
   eq-permute-vec-permutation-insertion-sort-vec {0} empty-vec = refl
   eq-permute-vec-permutation-insertion-sort-vec {1} (x ∷ empty-vec) = refl
@@ -308,12 +308,12 @@ module _
   is-sorting-insertion-sort-vec {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ v) =
     helper-is-sorting-insertion-sort-vec
       ( x)
-      ( head-vec (insertion-sort-vec (y ∷ v)))
+      ( head-vec (insertion-sort-vec (y ∷ v)))
       ( tail-vec (insertion-sort-vec (y ∷ v)))
       ( is-leq-or-strict-greater-Decidable-Total-Order X _ _)
       ( tr
         ( λ l → is-sorted-vec X l)
-        ( inv (cons-head-tail-vec n (insertion-sort-vec (y ∷ v))))
+        ( inv (cons-head-tail-vec n (insertion-sort-vec (y ∷ v))))
         ( is-sorting-insertion-sort-vec (y ∷ v)))
 ```
 
