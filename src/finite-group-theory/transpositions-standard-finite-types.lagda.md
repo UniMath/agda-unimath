@@ -469,7 +469,7 @@ htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin :
 htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin n x neq =
   ( ( htpy-whisker-conjugate
         ( map-transposition-Fin
-          ( succ-ℕ (succ-ℕ n))
+          ( succ-ℕ (succ-ℕ n))
           ( inl-Fin (succ-ℕ n) x)
           ( neg-two-Fin (succ-ℕ n))
           ( neq ∘ is-injective-inl-Fin (succ-ℕ n)))
