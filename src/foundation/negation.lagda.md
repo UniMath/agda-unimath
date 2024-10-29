@@ -58,6 +58,15 @@ reductio-ad-absurdum : {l1 l2 : Level} {P : UU l1} {Q : UU l2} → P → ¬ P �
 reductio-ad-absurdum p np = ex-falso (np p)
 ```
 
+### Logically equivalent types have logically equivalent negations
+
+```agda
+iff-neg :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
+  (X ↔ Y) → (¬ X ↔ ¬ Y)
+iff-neg e = (map-neg (backward-implication e) , map-neg (forward-implication e))
+```
+
 ### Equivalent types have equivalent negations
 
 ```agda
@@ -65,10 +74,7 @@ equiv-neg :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   (X ≃ Y) → (¬ X ≃ ¬ Y)
 equiv-neg {l1} {l2} {X} {Y} e =
-  equiv-iff'
-    ( neg-type-Prop X)
-    ( neg-type-Prop Y)
-    ( pair (map-neg (map-inv-equiv e)) (map-neg (map-equiv e)))
+  equiv-iff' (neg-type-Prop X) (neg-type-Prop Y) (iff-neg (iff-equiv e))
 ```
 
 ### Negation has no fixed points

@@ -15,7 +15,6 @@ open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
-open import logic.double-negation-elimination
 open import foundation.empty-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
@@ -33,6 +32,8 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+
+open import logic.double-negation-elimination
 ```
 
 </details>

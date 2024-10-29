@@ -9,10 +9,10 @@ module logic.de-morgan-sheaves where
 ```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
-open import foundation.decidable-types
 open import foundation.irrefutable-propositions
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -37,8 +37,7 @@ open import orthogonal-factorization-systems.null-types
 [null](orthogonal-factorization-systems.null-types.md) at propositions of the
 form `¬P ∨ ¬¬P`.
 
-De Morgan sheaves are closely related to, but a strictly weaker notion than that
-of
+De Morgan sheaves are closely related to, but a strictly weaker notion than
 [double negation sheaves](orthogonal-factorization-systems.double-negation-sheaves.md).
 
 ## Definitions
@@ -64,7 +63,7 @@ is-prop-is-de-morgan-sheaf {A = A} =
 A type is null at `¬P ∨ ¬¬ P` for all types `P` if and only if it is local at
 `(¬ P ∨ ¬ Q) ⇒ ¬ (P ∧ Q)` for all types `P` and `Q`.
 
-> TODO
+> TODO: check this
 
 ### The empty type is a De Morgan sheaf
 

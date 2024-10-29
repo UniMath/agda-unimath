@@ -23,9 +23,13 @@ open import order-theory.posets
 
 ## Idea
 
-A **directed family of elements** in a poset `P` consists of an inhabited type
-`I` and a map `x : I → P` such that for any two elements `i j : I` there exists
-an element `k : I` such that both `x i ≤ x k` and `x j ≤ x k` hold.
+A
+{{#concept "directed family of elements" WD="upward directed set" WDID=Q1513048 Agda=directed-family-Poset}}
+in a [poset](order-theory.posets.md) `P` consists of an
+[inhabited type](foundation.inhabited-types.md) `I` and a map `x : I → P` such
+that for any two elements `i j : I` there
+[exists](foundaiton.existential-quantification.md) an element `k : I` such that
+both `x i ≤ x k` and `x j ≤ x k` hold.
 
 ## Definition
 
