@@ -97,7 +97,7 @@ is-unit-is-neg-one-ℤ .neg-one-ℤ refl = is-unit-neg-one-ℤ
 
 ## Properties
 
-### The product `xy` is a unit if and only if both `x` and `y` are units
+### The product $xy$ is a unit if and only if both $x$ and $y$ are units
 
 ```agda
 is-unit-mul-ℤ :

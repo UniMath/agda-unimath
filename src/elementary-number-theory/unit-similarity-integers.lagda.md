@@ -10,13 +10,19 @@ module elementary-number-theory.unit-similarity-integers where
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.nonzero-integers
 open import elementary-number-theory.unit-integers
 
+open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.decidable-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -75,11 +81,11 @@ presim-unit-sim-unit-ℤ {inr (inr x)} {inr (inr y)} H =
 ```agda
 is-nonzero-presim-unit-ℤ :
   {x y : ℤ} → presim-unit-ℤ x y → is-nonzero-ℤ x → is-nonzero-ℤ y
-is-nonzero-presim-unit-ℤ {x} {y} (pair (pair v (pair u α)) β) f p =
-  Eq-eq-ℤ (ap (_*ℤ u) (inv q) ∙ (commutative-mul-ℤ v u ∙ α))
+is-nonzero-presim-unit-ℤ {x} {y} ((v , (u , (α , α'))) , β) f p =
+  Eq-eq-ℤ (ap (_*ℤ u) (inv q) ∙ commutative-mul-ℤ v u ∙ α')
   where
   q : is-zero-ℤ v
-  q = is-injective-right-mul-ℤ x f {v} {zero-ℤ} (β ∙ p)
+  q = is-injective-right-mul-ℤ x f (β ∙ p)
 
 is-nonzero-sim-unit-ℤ :
   {x y : ℤ} → sim-unit-ℤ x y → is-nonzero-ℤ x → is-nonzero-ℤ y

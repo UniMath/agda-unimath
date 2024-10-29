@@ -19,6 +19,8 @@ open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.nonzero-integers
 open import elementary-number-theory.positive-and-negative-integers
+open import elementary-number-theory.unit-integers
+open import elementary-number-theory.unit-similarity-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
@@ -102,9 +104,9 @@ concatenate-eq-div-eq-ℤ refl p refl = p
 ```agda
 div-is-unit-ℤ :
   (x y : ℤ) → is-unit-ℤ x → div-ℤ x y
-pr1 (div-is-unit-ℤ x y (pair d p)) = y *ℤ d
-pr2 (div-is-unit-ℤ x y (pair d p)) =
-  associative-mul-ℤ y d x ∙ (ap (y *ℤ_) p ∙ right-unit-law-mul-ℤ y)
+pr1 (div-is-unit-ℤ x y (d , p , q)) = y *ℤ d
+pr2 (div-is-unit-ℤ x y (d , p , q)) =
+  associative-mul-ℤ y d x ∙ (ap (y *ℤ_) q ∙ right-unit-law-mul-ℤ y)
 ```
 
 ### Divisibility by a nonzero integer is a property
@@ -322,122 +324,6 @@ pr2 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) =
               ( is-nonnegative-eq-ℤ (inv p) (is-nonnegative-int-ℕ y))
               ( star)))) ∙
         ( p)))
-```
-
-### An integer is a unit if and only if it is `1` or `-1`
-
-```agda
-is-one-or-neg-one-ℤ : ℤ → UU lzero
-is-one-or-neg-one-ℤ x = (is-one-ℤ x) + (is-neg-one-ℤ x)
-
-is-unit-one-ℤ : is-unit-ℤ one-ℤ
-is-unit-one-ℤ = refl-div-ℤ one-ℤ
-
-one-unit-ℤ : unit-ℤ
-pr1 one-unit-ℤ = one-ℤ
-pr2 one-unit-ℤ = is-unit-one-ℤ
-
-is-unit-is-one-ℤ :
-  (x : ℤ) → is-one-ℤ x → is-unit-ℤ x
-is-unit-is-one-ℤ .one-ℤ refl = is-unit-one-ℤ
-
-is-unit-neg-one-ℤ : is-unit-ℤ neg-one-ℤ
-pr1 is-unit-neg-one-ℤ = neg-one-ℤ
-pr2 is-unit-neg-one-ℤ = refl
-
-neg-one-unit-ℤ : unit-ℤ
-pr1 neg-one-unit-ℤ = neg-one-ℤ
-pr2 neg-one-unit-ℤ = is-unit-neg-one-ℤ
-
-is-unit-is-neg-one-ℤ :
-  (x : ℤ) → is-neg-one-ℤ x → is-unit-ℤ x
-is-unit-is-neg-one-ℤ .neg-one-ℤ refl = is-unit-neg-one-ℤ
-
-is-unit-is-one-or-neg-one-ℤ :
-  (x : ℤ) → is-one-or-neg-one-ℤ x → is-unit-ℤ x
-is-unit-is-one-or-neg-one-ℤ x (inl p) = is-unit-is-one-ℤ x p
-is-unit-is-one-or-neg-one-ℤ x (inr p) = is-unit-is-neg-one-ℤ x p
-
-is-one-or-neg-one-is-unit-ℤ :
-  (x : ℤ) → is-unit-ℤ x → is-one-or-neg-one-ℤ x
-is-one-or-neg-one-is-unit-ℤ (inl zero-ℕ) (pair d p) = inr refl
-is-one-or-neg-one-is-unit-ℤ (inl (succ-ℕ x)) (pair (inl zero-ℕ) p) =
-  ex-falso (Eq-eq-ℤ (inv p ∙ compute-mul-ℤ neg-one-ℤ (inl (succ-ℕ x))))
-is-one-or-neg-one-is-unit-ℤ (inl (succ-ℕ x)) (pair (inl (succ-ℕ d)) p) =
-  ex-falso (Eq-eq-ℤ (inv p ∙ compute-mul-ℤ (inl (succ-ℕ d)) (inl (succ-ℕ x))))
-is-one-or-neg-one-is-unit-ℤ (inl (succ-ℕ x)) (pair (inr (inl star)) p) =
-  ex-falso (Eq-eq-ℤ (inv p ∙ compute-mul-ℤ zero-ℤ (inl (succ-ℕ x))))
-is-one-or-neg-one-is-unit-ℤ (inl (succ-ℕ x)) (pair (inr (inr zero-ℕ)) p) =
-  ex-falso (Eq-eq-ℤ (inv p ∙ compute-mul-ℤ one-ℤ (inl (succ-ℕ x))))
-is-one-or-neg-one-is-unit-ℤ (inl (succ-ℕ x)) (pair (inr (inr (succ-ℕ d))) p) =
-  ex-falso
-    ( Eq-eq-ℤ (inv p ∙ compute-mul-ℤ (inr (inr (succ-ℕ d))) (inl (succ-ℕ x))))
-is-one-or-neg-one-is-unit-ℤ (inr (inl star)) (pair d p) =
-  ex-falso (Eq-eq-ℤ (inv (right-zero-law-mul-ℤ d) ∙ p))
-is-one-or-neg-one-is-unit-ℤ (inr (inr zero-ℕ)) (pair d p) = inl refl
-is-one-or-neg-one-is-unit-ℤ (inr (inr (succ-ℕ x))) (pair (inl zero-ℕ) p) =
-  ex-falso (Eq-eq-ℤ (inv p ∙ compute-mul-ℤ neg-one-ℤ (inr (inr (succ-ℕ x)))))
-is-one-or-neg-one-is-unit-ℤ (inr (inr (succ-ℕ x))) (pair (inl (succ-ℕ d)) p) =
-  ex-falso
-    ( Eq-eq-ℤ (inv p ∙ compute-mul-ℤ (inl (succ-ℕ d)) (inr (inr (succ-ℕ x)))))
-is-one-or-neg-one-is-unit-ℤ (inr (inr (succ-ℕ x))) (pair (inr (inl star)) p) =
-  ex-falso (Eq-eq-ℤ (inv p ∙ compute-mul-ℤ zero-ℤ (inr (inr (succ-ℕ x)))))
-is-one-or-neg-one-is-unit-ℤ (inr (inr (succ-ℕ x))) (pair (inr (inr zero-ℕ)) p) =
-  ex-falso (Eq-eq-ℤ (inv p ∙ compute-mul-ℤ one-ℤ (inr (inr (succ-ℕ x)))))
-is-one-or-neg-one-is-unit-ℤ
-  (inr (inr (succ-ℕ x))) (pair (inr (inr (succ-ℕ d))) p) =
-  ex-falso
-    ( Eq-eq-ℤ
-      ( inv p ∙ compute-mul-ℤ (inr (inr (succ-ℕ d))) (inr (inr (succ-ℕ x)))))
-```
-
-### Units are idempotent
-
-```agda
-idempotent-is-unit-ℤ : {x : ℤ} → is-unit-ℤ x → x *ℤ x ＝ one-ℤ
-idempotent-is-unit-ℤ {x} H =
-  f (is-one-or-neg-one-is-unit-ℤ x H)
-  where
-  f : is-one-or-neg-one-ℤ x → x *ℤ x ＝ one-ℤ
-  f (inl refl) = refl
-  f (inr refl) = refl
-
-abstract
-  is-one-is-unit-int-ℕ : (x : ℕ) → is-unit-ℤ (int-ℕ x) → is-one-ℕ x
-  is-one-is-unit-int-ℕ x H with is-one-or-neg-one-is-unit-ℤ (int-ℕ x) H
-  ... | inl p = is-injective-int-ℕ p
-  ... | inr p = ex-falso (tr is-nonnegative-ℤ p (is-nonnegative-int-ℕ x))
-```
-
-### The product `xy` is a unit if and only if both `x` and `y` are units
-
-```agda
-is-unit-mul-ℤ :
-  (x y : ℤ) → is-unit-ℤ x → is-unit-ℤ y → is-unit-ℤ (x *ℤ y)
-pr1 (is-unit-mul-ℤ x y (pair d p) (pair e q)) = e *ℤ d
-pr2 (is-unit-mul-ℤ x y (pair d p) (pair e q)) =
-  ( associative-mul-ℤ e d (x *ℤ y)) ∙
-    ( ( ap
-        ( e *ℤ_)
-        ( ( inv (associative-mul-ℤ d x y)) ∙
-          ( ap (_*ℤ y) p))) ∙
-      ( q))
-
-mul-unit-ℤ : unit-ℤ → unit-ℤ → unit-ℤ
-pr1 (mul-unit-ℤ (pair x H) (pair y K)) = x *ℤ y
-pr2 (mul-unit-ℤ (pair x H) (pair y K)) = is-unit-mul-ℤ x y H K
-
-is-unit-left-factor-mul-ℤ :
-  (x y : ℤ) → is-unit-ℤ (x *ℤ y) → is-unit-ℤ x
-pr1 (is-unit-left-factor-mul-ℤ x y (pair d p)) = d *ℤ y
-pr2 (is-unit-left-factor-mul-ℤ x y (pair d p)) =
-  associative-mul-ℤ d y x ∙ (ap (d *ℤ_) (commutative-mul-ℤ y x) ∙ p)
-
-is-unit-right-factor-ℤ :
-  (x y : ℤ) → is-unit-ℤ (x *ℤ y) → is-unit-ℤ y
-is-unit-right-factor-ℤ x y (pair d p) =
-  is-unit-left-factor-mul-ℤ y x
-    ( pair d (ap (d *ℤ_) (commutative-mul-ℤ y x) ∙ p))
 ```
 
 ### `sim-unit-ℤ x y` holds if and only if `x|y` and `y|x`
