@@ -145,7 +145,7 @@ equiv-product-iterated-product-lists (cons x p) q =
 ```agda
 permutation-iterated-product-Fin-Π :
   {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) → UU l
-permutation-iterated-product-Fin-Π n A t =
+permutation-iterated-product-Fin-Π n A t =
   iterated-product-Fin-Π n (A ∘ map-equiv t)
 
 equiv-permutation-iterated-product-Fin-Π :
@@ -162,7 +162,7 @@ eq-permutation-iterated-product-Fin-Π n A t =
 
 permutation-iterated-product-Fin-recursive :
   {l : Level} (n : ℕ) (A : (Fin n → UU l)) (t : Permutation n) → UU l
-permutation-iterated-product-Fin-recursive n A t =
+permutation-iterated-product-Fin-recursive n A t =
   iterated-product-Fin-recursive n (A ∘ map-equiv t)
 
 equiv-permutation-iterated-product-Fin-recursive :
