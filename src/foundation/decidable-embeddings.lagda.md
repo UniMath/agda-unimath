@@ -65,16 +65,20 @@ is-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
 is-decidable-emb f = is-emb f × is-decidable-map f
 
-abstract
-  is-emb-is-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
-    is-decidable-emb f → is-emb f
-  is-emb-is-decidable-emb = pr1
+is-emb-is-decidable-emb :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
+  is-decidable-emb f → is-emb f
+is-emb-is-decidable-emb = pr1
 
 is-decidable-map-is-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
   is-decidable-emb f → is-decidable-map f
 is-decidable-map-is-decidable-emb = pr2
+
+is-injective-is-decidable-emb :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
+  is-decidable-emb f → is-injective f
+is-injective-is-decidable-emb = is-injective-is-emb ∘ is-emb-is-decidable-emb
 ```
 
 ### Decidably propositional maps
@@ -260,18 +264,10 @@ module _
   abstract
     is-decidable-map-comp-is-decidable-emb' :
       is-decidable-emb g → is-decidable-map f → is-decidable-map (g ∘ f)
-    is-decidable-map-comp-is-decidable-emb' K H x =
-      rec-coproduct
-        ( λ u →
-          is-decidable-equiv
-            ( ( left-unit-law-Σ-is-contr
-                ( is-proof-irrelevant-is-prop
-                  ( is-prop-map-is-emb (is-emb-is-decidable-emb K) x) u)
-                ( u)) ∘e
-              ( compute-fiber-comp g f x))
-            ( H (pr1 u)))
-        ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
-        ( is-decidable-map-is-decidable-emb K x)
+    is-decidable-map-comp-is-decidable-emb' K =
+      is-decidable-map-comp
+        ( is-injective-is-decidable-emb K)
+        ( is-decidable-map-is-decidable-emb K)
 
   is-decidable-map-comp-is-decidable-emb :
     is-decidable-emb g → is-decidable-emb f → is-decidable-map (g ∘ f)

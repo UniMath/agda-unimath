@@ -64,6 +64,31 @@ abstract
       ( K b)
 ```
 
+### Composition of decidable maps
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B}
+  where
+
+  abstract
+    is-decidable-map-comp :
+      is-injective g →
+      is-decidable-map g →
+      is-decidable-map f →
+      is-decidable-map (g ∘ f)
+    is-decidable-map-comp H G F x =
+      rec-coproduct
+        ( λ u →
+          is-decidable-iff
+            (λ v → (pr1 v) , ap g (pr2 v) ∙ pr2 u)
+            (λ w → pr1 w , H (pr2 w ∙ inv (pr2 u)))
+            ( F (pr1 u)))
+        ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
+        ( G x)
+```
+
 ### Left cancellation for decidable maps
 
 If a composite `g ∘ f` is decidable and the left factor `g` is injective, then
