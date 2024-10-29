@@ -616,33 +616,33 @@ is-least-element-head-list-fundamental-theorem-arithmetic-succ-ℕ :
     ( ℕ-Decidable-Total-Order)
     ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
     ( list-fundamental-theorem-arithmetic-ℕ
-      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( leq-one-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
-        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( preserves-leq-succ-ℕ 1 x H)))
 is-least-element-head-list-fundamental-theorem-arithmetic-succ-ℕ x H =
   is-least-element-list-least-prime-divisor-ℕ
     ( x)
     ( H)
     ( list-fundamental-theorem-arithmetic-ℕ
-      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( leq-one-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
-        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( preserves-leq-succ-ℕ 1 x H)))
     ( is-list-of-nontrivial-divisors-fundamental-theorem-arithmetic-ℕ
-      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( leq-one-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
-        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( preserves-leq-succ-ℕ 1 x H)))
 
 is-sorted-least-element-list-fundamental-theorem-arithmetic-ℕ :
-  (x : ℕ) → (H : leq-ℕ 1 x) →
+  (x : ℕ) → (H : leq-ℕ 1 x) →
   is-sorted-least-element-list
     ( ℕ-Decidable-Total-Order)
     ( list-fundamental-theorem-arithmetic-ℕ x H)
