@@ -95,42 +95,17 @@ concatenate-eq-div-eq-ℤ :
 concatenate-eq-div-eq-ℤ refl p refl = p
 ```
 
-### Unit integers
+## Properties
+
+### A unit integer divides every integer
 
 ```agda
-is-unit-ℤ : ℤ → UU lzero
-is-unit-ℤ x = div-ℤ x one-ℤ
-
-unit-ℤ : UU lzero
-unit-ℤ = Σ ℤ is-unit-ℤ
-
-int-unit-ℤ : unit-ℤ → ℤ
-int-unit-ℤ = pr1
-
-is-unit-int-unit-ℤ : (x : unit-ℤ) → is-unit-ℤ (int-unit-ℤ x)
-is-unit-int-unit-ℤ = pr2
-
 div-is-unit-ℤ :
   (x y : ℤ) → is-unit-ℤ x → div-ℤ x y
 pr1 (div-is-unit-ℤ x y (pair d p)) = y *ℤ d
 pr2 (div-is-unit-ℤ x y (pair d p)) =
   associative-mul-ℤ y d x ∙ (ap (y *ℤ_) p ∙ right-unit-law-mul-ℤ y)
 ```
-
-### The equivalence relation `sim-unit-ℤ`
-
-We define the equivalence relation `sim-unit-ℤ` in such a way that
-`sim-unit-ℤ x y` is always a proposition.
-
-```agda
-presim-unit-ℤ : ℤ → ℤ → UU lzero
-presim-unit-ℤ x y = Σ unit-ℤ (λ u → (pr1 u) *ℤ x ＝ y)
-
-sim-unit-ℤ : ℤ → ℤ → UU lzero
-sim-unit-ℤ x y = ¬ (is-zero-ℤ x × is-zero-ℤ y) → presim-unit-ℤ x y
-```
-
-## Properties
 
 ### Divisibility by a nonzero integer is a property
 
@@ -465,121 +440,6 @@ is-unit-right-factor-ℤ x y (pair d p) =
     ( pair d (ap (d *ℤ_) (commutative-mul-ℤ y x) ∙ p))
 ```
 
-### The relations `presim-unit-ℤ` and `sim-unit-ℤ` are logically equivalent
-
-```agda
-sim-unit-presim-unit-ℤ :
-  {x y : ℤ} → presim-unit-ℤ x y → sim-unit-ℤ x y
-sim-unit-presim-unit-ℤ {x} {y} H f = H
-
-presim-unit-sim-unit-ℤ :
-  {x y : ℤ} → sim-unit-ℤ x y → presim-unit-ℤ x y
-presim-unit-sim-unit-ℤ {inl x} {inl y} H = H (λ t → Eq-eq-ℤ (pr1 t))
-presim-unit-sim-unit-ℤ {inl x} {inr y} H = H (λ t → Eq-eq-ℤ (pr1 t))
-presim-unit-sim-unit-ℤ {inr x} {inl y} H = H (λ t → Eq-eq-ℤ (pr2 t))
-pr1 (presim-unit-sim-unit-ℤ {inr (inl star)} {inr (inl star)} H) = one-unit-ℤ
-pr2 (presim-unit-sim-unit-ℤ {inr (inl star)} {inr (inl star)} H) = refl
-presim-unit-sim-unit-ℤ {inr (inl star)} {inr (inr y)} H =
-  H (λ t → Eq-eq-ℤ (pr2 t))
-presim-unit-sim-unit-ℤ {inr (inr x)} {inr (inl star)} H =
-  H (λ t → Eq-eq-ℤ (pr1 t))
-presim-unit-sim-unit-ℤ {inr (inr x)} {inr (inr y)} H =
-  H (λ t → Eq-eq-ℤ (pr1 t))
-```
-
-### The relations `presim-unit-ℤ` and `sim-unit-ℤ` relate `zero-ℤ` only to itself
-
-```agda
-is-nonzero-presim-unit-ℤ :
-  {x y : ℤ} → presim-unit-ℤ x y → is-nonzero-ℤ x → is-nonzero-ℤ y
-is-nonzero-presim-unit-ℤ {x} {y} (pair (pair v (pair u α)) β) f p =
-  Eq-eq-ℤ (ap (_*ℤ u) (inv q) ∙ (commutative-mul-ℤ v u ∙ α))
-  where
-  q : is-zero-ℤ v
-  q = is-injective-right-mul-ℤ x f {v} {zero-ℤ} (β ∙ p)
-
-is-nonzero-sim-unit-ℤ :
-  {x y : ℤ} → sim-unit-ℤ x y → is-nonzero-ℤ x → is-nonzero-ℤ y
-is-nonzero-sim-unit-ℤ H f =
-  is-nonzero-presim-unit-ℤ (H (f ∘ pr1)) f
-
-is-zero-sim-unit-ℤ :
-  {x y : ℤ} → sim-unit-ℤ x y → is-zero-ℤ x → is-zero-ℤ y
-is-zero-sim-unit-ℤ {x} {y} H p =
-  double-negation-elim-is-decidable
-    ( has-decidable-equality-ℤ y zero-ℤ)
-    ( λ g → g (inv (β g) ∙ (ap ((u g) *ℤ_) p ∙ right-zero-law-mul-ℤ (u g))))
-  where
-  K : is-nonzero-ℤ y → presim-unit-ℤ x y
-  K g = H (λ (u , v) → g v)
-  u : is-nonzero-ℤ y → ℤ
-  u g = pr1 (pr1 (K g))
-  v : is-nonzero-ℤ y → ℤ
-  v g = pr1 (pr2 (pr1 (K g)))
-  β : (g : is-nonzero-ℤ y) → (u g) *ℤ x ＝ y
-  β g = pr2 (K g)
-```
-
-### The relations `presim-unit-ℤ` and `sim-unit-ℤ` are equivalence relations
-
-```agda
-refl-presim-unit-ℤ : is-reflexive presim-unit-ℤ
-pr1 (refl-presim-unit-ℤ x) = one-unit-ℤ
-pr2 (refl-presim-unit-ℤ x) = left-unit-law-mul-ℤ x
-
-refl-sim-unit-ℤ : is-reflexive sim-unit-ℤ
-refl-sim-unit-ℤ x f = refl-presim-unit-ℤ x
-
-presim-unit-eq-ℤ : {x y : ℤ} → x ＝ y → presim-unit-ℤ x y
-presim-unit-eq-ℤ {x} refl = refl-presim-unit-ℤ x
-
-sim-unit-eq-ℤ : {x y : ℤ} → x ＝ y → sim-unit-ℤ x y
-sim-unit-eq-ℤ {x} refl = refl-sim-unit-ℤ x
-
-symmetric-presim-unit-ℤ : is-symmetric presim-unit-ℤ
-symmetric-presim-unit-ℤ x y (pair (pair u H) p) =
-  f (is-one-or-neg-one-is-unit-ℤ u H)
-  where
-  f : is-one-or-neg-one-ℤ u → presim-unit-ℤ y x
-  pr1 (f (inl refl)) = one-unit-ℤ
-  pr2 (f (inl refl)) = inv p
-  pr1 (f (inr refl)) = neg-one-unit-ℤ
-  pr2 (f (inr refl)) = inv (inv (neg-neg-ℤ x) ∙ ap (neg-one-ℤ *ℤ_) p)
-
-symmetric-sim-unit-ℤ : is-symmetric sim-unit-ℤ
-symmetric-sim-unit-ℤ x y H f =
-  symmetric-presim-unit-ℤ x y (H (λ p → f (pair (pr2 p) (pr1 p))))
-
-is-nonzero-sim-unit-ℤ' :
-  {x y : ℤ} → sim-unit-ℤ x y → is-nonzero-ℤ y → is-nonzero-ℤ x
-is-nonzero-sim-unit-ℤ' {x} {y} H =
-  is-nonzero-sim-unit-ℤ (symmetric-sim-unit-ℤ x y H)
-
-is-zero-sim-unit-ℤ' :
-  {x y : ℤ} → sim-unit-ℤ x y → is-zero-ℤ y → is-zero-ℤ x
-is-zero-sim-unit-ℤ' {x} {y} H = is-zero-sim-unit-ℤ (symmetric-sim-unit-ℤ x y H)
-
-transitive-presim-unit-ℤ : is-transitive presim-unit-ℤ
-transitive-presim-unit-ℤ x y z (pair (pair v K) q) (pair (pair u H) p) =
-  f (is-one-or-neg-one-is-unit-ℤ u H) (is-one-or-neg-one-is-unit-ℤ v K)
-  where
-  f : is-one-or-neg-one-ℤ u → is-one-or-neg-one-ℤ v → presim-unit-ℤ x z
-  pr1 (f (inl refl) (inl refl)) = one-unit-ℤ
-  pr2 (f (inl refl) (inl refl)) = p ∙ q
-  pr1 (f (inl refl) (inr refl)) = neg-one-unit-ℤ
-  pr2 (f (inl refl) (inr refl)) = ap neg-ℤ p ∙ q
-  pr1 (f (inr refl) (inl refl)) = neg-one-unit-ℤ
-  pr2 (f (inr refl) (inl refl)) = p ∙ q
-  pr1 (f (inr refl) (inr refl)) = one-unit-ℤ
-  pr2 (f (inr refl) (inr refl)) = inv (neg-neg-ℤ x) ∙ (ap neg-ℤ p ∙ q)
-
-transitive-sim-unit-ℤ : is-transitive sim-unit-ℤ
-transitive-sim-unit-ℤ x y z K H f =
-  transitive-presim-unit-ℤ x y z
-    ( K (λ (p , q) → f (is-zero-sim-unit-ℤ' H p , q)))
-    ( H (λ (p , q) → f (p , is-zero-sim-unit-ℤ K q)))
-```
-
 ### `sim-unit-ℤ x y` holds if and only if `x|y` and `y|x`
 
 ```agda
@@ -624,7 +484,7 @@ pr2 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
     ( ( ap
         ( ((int-unit-ℤ v) *ℤ d) *ℤ_)
         ( ( inv (associative-mul-ℤ (int-unit-ℤ u) (int-unit-ℤ u) x)) ∙
-          ( ap (_*ℤ x) (idempotent-is-unit-ℤ (is-unit-int-unit-ℤ u))))) ∙
+          ( ap (_*ℤ x) (idempotent-is-unit-ℤ (is-unit-unit-ℤ u))))) ∙
       ( ( associative-mul-ℤ (int-unit-ℤ v) d x) ∙
         ( ( ap ((int-unit-ℤ v) *ℤ_) p) ∙
           ( r)))))
@@ -634,17 +494,21 @@ div-sim-unit-ℤ :
   div-ℤ x y → div-ℤ x' y'
 div-sim-unit-ℤ {x} {y} {x'} {y'} H K =
   div-presim-unit-ℤ (presim-unit-sim-unit-ℤ H) (presim-unit-sim-unit-ℤ K)
+```
 
-div-int-abs-div-ℤ :
+### An integer `x` divides an integer `y` if and only if its absolute value `|x|` divides `y`
+
+```agda
+div-int-abs-divisor-div-ℤ :
   {x y : ℤ} → div-ℤ x y → div-ℤ (int-abs-ℤ x) y
-div-int-abs-div-ℤ {x} {y} =
+div-int-abs-divisor-div-ℤ {x} {y} =
   div-sim-unit-ℤ
     ( symmetric-sim-unit-ℤ (int-abs-ℤ x) x (sim-unit-abs-ℤ x))
     ( refl-sim-unit-ℤ y)
 
-div-div-int-abs-ℤ :
+div-div-int-abs-divisor-ℤ :
   {x y : ℤ} → div-ℤ (int-abs-ℤ x) y → div-ℤ x y
-div-div-int-abs-ℤ {x} {y} =
+div-div-int-abs-divisor-ℤ {x} {y} =
   div-sim-unit-ℤ (sim-unit-abs-ℤ x) (refl-sim-unit-ℤ y)
 ```
 
@@ -660,7 +524,7 @@ is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz
   with
   ( is-one-or-neg-one-is-unit-ℤ
     ( int-unit-ℤ (pr1 (H (λ u → nz (pr1 u)))))
-    ( is-unit-int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))))
+    ( is-unit-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))))
 is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos =
   inl
     ( equational-reasoning

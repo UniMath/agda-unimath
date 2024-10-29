@@ -127,13 +127,13 @@ is-common-divisor-int-abs-is-common-divisor-ℤ :
   {x y d : ℤ} →
   is-common-divisor-ℤ x y d → is-common-divisor-ℤ x y (int-abs-ℤ d)
 is-common-divisor-int-abs-is-common-divisor-ℤ =
-  map-product div-int-abs-div-ℤ div-int-abs-div-ℤ
+  map-product div-int-abs-divisor-div-ℤ div-int-abs-divisor-div-ℤ
 
 is-common-divisor-is-common-divisor-int-abs-ℤ :
   {x y d : ℤ} →
   is-common-divisor-ℤ x y (int-abs-ℤ d) → is-common-divisor-ℤ x y d
 is-common-divisor-is-common-divisor-int-abs-ℤ =
-  map-product div-div-int-abs-ℤ div-div-int-abs-ℤ
+  map-product div-div-int-abs-divisor-ℤ div-div-int-abs-divisor-ℤ
 
 is-common-divisor-is-gcd-ℤ :
   (a b d : ℤ) → is-gcd-ℤ a b d → is-common-divisor-ℤ a b d
@@ -147,7 +147,7 @@ is-gcd-int-is-gcd-ℕ :
   {x y d : ℕ} → is-gcd-ℕ x y d → is-gcd-ℤ (int-ℕ x) (int-ℕ y) (int-ℕ d)
 pr1 (is-gcd-int-is-gcd-ℕ {x} {y} {d} H) = is-nonnegative-int-ℕ d
 pr1 (pr2 (is-gcd-int-is-gcd-ℕ {x} {y} {d} H) k) =
-  ( ( ( ( div-div-int-abs-ℤ) ∘
+  ( ( ( ( div-div-int-abs-divisor-ℤ) ∘
         ( div-int-div-ℕ)) ∘
       ( pr1 (H (abs-ℤ k)))) ∘
     ( is-common-divisor-is-common-divisor-int-ℕ)) ∘
@@ -157,7 +157,7 @@ pr2 (pr2 (is-gcd-int-is-gcd-ℕ {x} {y} {d} H) k) =
         ( is-common-divisor-int-is-common-divisor-ℕ)) ∘
       ( pr2 (H (abs-ℤ k)))) ∘
     ( div-div-int-ℕ)) ∘
-  ( div-int-abs-div-ℤ)
+  ( div-int-abs-divisor-div-ℤ)
 
 is-gcd-is-gcd-int-ℕ :
   {x y d : ℕ} → is-gcd-ℤ (int-ℕ x) (int-ℕ y) (int-ℕ d) → is-gcd-ℕ x y d

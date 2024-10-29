@@ -788,8 +788,8 @@ has-no-fixed-points-succ-Fin {succ-ℕ k} x =
 is-decidable-div-ℤ : (d x : ℤ) → is-decidable (div-ℤ d x)
 is-decidable-div-ℤ d x =
   is-decidable-iff
-    ( div-div-int-abs-ℤ ∘ div-is-zero-mod-ℤ (abs-ℤ d) x)
-    ( is-zero-mod-div-ℤ (abs-ℤ d) x ∘ div-int-abs-div-ℤ)
+    ( div-div-int-abs-divisor-ℤ ∘ div-is-zero-mod-ℤ (abs-ℤ d) x)
+    ( is-zero-mod-div-ℤ (abs-ℤ d) x ∘ div-int-abs-divisor-div-ℤ)
     ( has-decidable-equality-ℤ-Mod
       ( abs-ℤ d)
       ( mod-ℤ (abs-ℤ d) x)
