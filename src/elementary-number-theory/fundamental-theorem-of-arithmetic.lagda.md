@@ -75,8 +75,9 @@ in several ways:
 Note that the [univalence axiom](foundation-core.univalence.md) is neccessary to
 prove the second uniqueness property of prime factorizations.
 
-The fundamental theorem of arithmetic is the 80th theorem on Freek Wiedijk's
-list of [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+The fundamental theorem of arithmetic is the 80th theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ## Definitions
 
