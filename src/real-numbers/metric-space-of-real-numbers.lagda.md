@@ -98,7 +98,8 @@ premetric-leq-ℝ l d x y =
 
 ### The standard premetric on the real numbers is a metric structure
 
-The triangle inequality is the 91st theorem on Freek Wiedijk's list of
+The triangle inequality is the 91st theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
 [100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
 
 ```agda
