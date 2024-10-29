@@ -2,7 +2,7 @@
 
 The agda-unimath library is a community formalization project for univalent
 mathematics in [Agda](https://github.com/agda/agda). The library project was
-created by [Elisabeth Stenholm](https://elisabeth.bonnevier.one), Jonathan
+created by [Elisabeth Stenholm](https://elisabeth.stenholm.one), Jonathan
 Prieto-Cubides, and [Egbert Rijke](https://egbertrijke.github.io), and is
 currently being maintained by Egbert Rijke,
 [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke), and
