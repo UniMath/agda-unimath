@@ -43,10 +43,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-On this page we define the {{#concept "divisibility" Disambiguation="integers" Agda=div-ℤ WD="divisibility" WDID=Q5284415}} relation on the [integers](elementary-number-theory.integers.md).
+On this page we define the
+{{#concept "divisibility" Disambiguation="integers" Agda=div-ℤ WD="divisibility" WDID=Q5284415}}
+relation on the [integers](elementary-number-theory.integers.md).
 
 An integer `m` is said to **divide** an integer `n` if there exists an integer
-`k` equipped with an [identification](foundation-core.identity-types.md) `km ＝ n`. Using the
+`k` equipped with an [identification](foundation-core.identity-types.md)
+`km ＝ n`. Using the
 [Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
 of logic into type theory, we express divisibility as follows:
 
@@ -54,8 +57,9 @@ of logic into type theory, we express divisibility as follows:
   div-ℤ m n := Σ (k : ℤ), k *ℤ m ＝ n.
 ```
 
-If `n` is a [nonzero integer](elementary-number-theory.nonzero-integers.md), then `div-ℤ m n` is always a [proposition](foundation-core.propositions.md) in the
-sense that the type `div-ℤ m n` contains at most one element.
+If `n` is a [nonzero integer](elementary-number-theory.nonzero-integers.md),
+then `div-ℤ m n` is always a [proposition](foundation-core.propositions.md) in
+the sense that the type `div-ℤ m n` contains at most one element.
 
 ## Definitions
 
