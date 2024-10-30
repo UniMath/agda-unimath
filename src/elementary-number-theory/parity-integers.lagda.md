@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.unit-similarity-integers
 
+open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.negation
 open import foundation.universe-levels
@@ -142,7 +143,7 @@ is-odd-one-ℤ : is-odd-ℤ (int-ℕ 1)
 is-odd-one-ℤ = is-odd-int-is-odd-ℕ 1 is-odd-one-ℕ
 ```
 
-### A integer `x` is even if and only if `x + 2` is even
+### An integer `x` is even if and only if `x + 2` is even
 
 ```agda
 is-even-is-even-add-two-ℤ :
@@ -156,7 +157,7 @@ is-even-add-two-is-even-ℤ a H =
   div-add-ℤ (int-ℕ 2) a (int-ℕ 2) H (refl-div-ℤ (int-ℕ 2))
 ```
 
-### A integer `x` is odd if and only if `x + 2` is odd
+### An integer `x` is odd if and only if `x + 2` is odd
 
 ```agda
 is-odd-is-odd-add-two-ℤ : (a : ℤ) → is-odd-ℤ (a +ℤ int-ℕ 2) → is-odd-ℤ a
@@ -166,20 +167,23 @@ is-odd-add-two-is-odd-ℤ : (a : ℤ) → is-odd-ℤ a → is-odd-ℤ (a +ℤ in
 is-odd-add-two-is-odd-ℤ a H K = H (is-even-is-even-add-two-ℤ a K)
 ```
 
-### If a integer `x` is odd, then `x + 1` is even
+### If an integer `x` is even, then `x + 1` is odd
 
-```text
-is-even-succ-is-odd-ℕ :
-  (n : ℕ) → is-odd-ℕ n → is-even-ℕ (succ-ℕ n)
-is-even-succ-is-odd-ℕ zero-ℕ p = ex-falso (p is-even-zero-ℕ)
-is-even-succ-is-odd-ℕ (succ-ℕ zero-ℕ) p = (1 , refl)
-is-even-succ-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
-  is-even-succ-succ-is-even-ℕ
-    ( succ-ℕ n)
-    ( is-even-succ-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p))
+```agda
+is-odd-succ-is-even-ℤ :
+  (a : ℤ) → is-even-ℤ a → is-odd-ℤ (a +ℤ one-ℤ)
+is-odd-succ-is-even-ℤ a H K = {!!}
 ```
 
-### If a integer `x` is even, then `x + 1` is odd
+### If an integer `x` is odd, then `x + 1` is even
+
+```agda
+is-even-succ-is-odd-ℤ :
+  (a : ℤ) → is-odd-ℤ a → is-even-ℤ (a +ℤ one-ℤ)
+is-even-succ-is-odd-ℤ a H = {!a!}
+```
+
+### If an integer `x` is even, then `x + 1` is odd
 
 ```text
 is-odd-succ-is-even-ℕ :
@@ -192,7 +196,7 @@ is-odd-succ-is-even-ℕ (succ-ℕ (succ-ℕ n)) p =
     ( is-odd-succ-is-even-ℕ n (is-even-is-even-succ-succ-ℕ n p))
 ```
 
-### If a integer `x + 1` is odd, then `x` is even
+### If an integer `x + 1` is odd, then `x` is even
 
 ```text
 is-even-is-odd-succ-ℕ :
@@ -203,7 +207,7 @@ is-even-is-odd-succ-ℕ n p =
     ( is-even-succ-is-odd-ℕ (succ-ℕ n) p)
 ```
 
-### If a integer `x + 1` is even, then `x` is odd
+### If an integer `x + 1` is even, then `x` is odd
 
 ```text
 is-odd-is-even-succ-ℕ :
@@ -214,7 +218,7 @@ is-odd-is-even-succ-ℕ n p =
     ( is-odd-succ-is-even-ℕ (succ-ℕ n) p)
 ```
 
-### A integer `x` is odd if and only if there is a integer `y` such that `succ-ℕ (y *ℕ 2) ＝ x`
+### An integer `x` is odd if and only if there is an integer `y` such that `succ-ℕ (y *ℕ 2) ＝ x`
 
 ```text
 has-odd-expansion : ℕ → UU lzero

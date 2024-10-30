@@ -22,6 +22,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -53,6 +54,9 @@ studied in
 ```agda
 is-unit-ℤ : ℤ → UU lzero
 is-unit-ℤ = is-invertible-element-Commutative-Ring ℤ-Commutative-Ring
+
+is-nonunit-ℤ : ℤ → UU lzero
+is-nonunit-ℤ a = ¬ is-unit-ℤ a
 
 unit-ℤ : UU lzero
 unit-ℤ = type-group-of-units-Commutative-Ring ℤ-Commutative-Ring
@@ -164,6 +168,34 @@ is-one-or-neg-one-is-unit-ℤ
   ex-falso
     ( Eq-eq-ℤ
       ( inv q ∙ compute-mul-ℤ (inr (inr (succ-ℕ d))) (inr (inr (succ-ℕ x)))))
+```
+
+### Some examples of integers that aren't units
+
+```agda
+abstract
+  is-nonunit-zero-ℤ : is-nonunit-ℤ zero-ℤ
+  is-nonunit-zero-ℤ H
+    with
+    is-one-or-neg-one-is-unit-ℤ zero-ℤ H
+  ... | inl ()
+  ... | inr ()
+
+abstract
+  is-nonunit-two-ℤ : is-nonunit-ℤ (int-ℕ 2)
+  is-nonunit-two-ℤ H
+    with
+    is-one-or-neg-one-is-unit-ℤ (int-ℕ 2) H
+  ... | inl ()
+  ... | inr ()
+
+abstract
+  is-nonunit-three-ℤ : is-nonunit-ℤ (int-ℕ 3)
+  is-nonunit-three-ℤ H
+    with
+    is-one-or-neg-one-is-unit-ℤ (int-ℕ 3) H
+  ... | inl ()
+  ... | inr ()
 ```
 
 ### Unit integers are idempotent
