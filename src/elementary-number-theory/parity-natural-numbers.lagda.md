@@ -32,9 +32,9 @@ open import foundation.universe-levels
 [partitions](foundation.partitions.md) the [natural
 numbers](elementary-number-theory.natural numbers.md) into two
 [classes](foundation.equivalence-relations.md): the
-{{#concept "even" Disambiguation="natural number" Agda=is-even-ℤ WD="even number" WDID=Q13366104}}
+{{#concept "even" Disambiguation="natural number" Agda=is-even-ℕ WD="even number" WDID=Q13366104}}
 and the
-{{#concept "odd" Disambiguation="natural number" Agda=is-odd-ℤ WD="odd number" WDID=Q13366129}}
+{{#concept "odd" Disambiguation="natural number" Agda=is-odd-ℕ WD="odd number" WDID=Q13366129}}
 natural numbers. Even natural numbers are those that are
 [divisible](elementary-number-theory.divisibility-natural numbers.md) by two,
 and odd natural numbers are those that aren't.

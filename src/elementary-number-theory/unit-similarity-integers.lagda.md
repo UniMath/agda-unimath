@@ -7,9 +7,11 @@ module elementary-number-theory.unit-similarity-integers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.equality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonzero-integers
 open import elementary-number-theory.unit-integers
 
@@ -172,4 +174,64 @@ transitive-sim-unit-ℤ x y z K H f =
   transitive-presim-unit-ℤ x y z
     ( K (λ (p , q) → f (is-zero-sim-unit-ℤ' H p , q)))
     ( H (λ (p , q) → f (p , is-zero-sim-unit-ℤ K q)))
+```
+
+### `sim-unit-ℤ |x| x` holds
+
+```agda
+sim-unit-abs-ℤ : (x : ℤ) → sim-unit-ℤ (int-abs-ℤ x) x
+pr1 (sim-unit-abs-ℤ (inl x) f) = neg-one-unit-ℤ
+pr2 (sim-unit-abs-ℤ (inl x) f) = refl
+sim-unit-abs-ℤ (inr (inl star)) = refl-sim-unit-ℤ zero-ℤ
+sim-unit-abs-ℤ (inr (inr x)) = refl-sim-unit-ℤ (inr (inr x))
+```
+
+### If we have that `sim-unit-ℤ x y`, then they must differ only by sign
+
+```agda
+is-plus-or-minus-sim-unit-ℤ :
+  {x y : ℤ} → sim-unit-ℤ x y → is-plus-or-minus-ℤ x y
+is-plus-or-minus-sim-unit-ℤ {x} {y} H with ( is-decidable-is-zero-ℤ x)
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inl z =
+  inl (z ∙ inv (is-zero-sim-unit-ℤ H z))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz
+  with
+  ( is-one-or-neg-one-is-unit-ℤ
+    ( int-unit-ℤ (pr1 (H (λ u → nz (pr1 u)))))
+    ( is-unit-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inl pos =
+  inl
+    ( equational-reasoning
+      x
+      ＝ one-ℤ *ℤ x
+        by (inv (left-unit-law-mul-ℤ x))
+      ＝ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) *ℤ x
+        by inv (ap (_*ℤ x) pos)
+      ＝ y
+        by pr2 (H (λ u → nz (pr1 u))))
+is-plus-or-minus-sim-unit-ℤ {x} {y} H | inr nz | inr p =
+  inr
+    ( equational-reasoning
+      neg-ℤ x
+      ＝ (int-unit-ℤ (pr1 (H (λ u → nz (pr1 u))))) *ℤ x
+        by ap (_*ℤ x) (inv p)
+      ＝ y
+        by pr2 (H (λ u → nz (pr1 u))))
+```
+
+### If `sim-unit-ℤ x y` holds and both `x` and `y` have the same sign, then `x ＝ y`
+
+```agda
+eq-sim-unit-is-nonnegative-ℤ :
+  {a b : ℤ} → is-nonnegative-ℤ a → is-nonnegative-ℤ b → sim-unit-ℤ a b → a ＝ b
+eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K =
+  rec-coproduct
+    ( id)
+    ( λ K' →
+      eq-is-zero-ℤ
+        ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ H
+          ( is-nonnegative-eq-ℤ (inv K') H'))
+        ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ H'
+          ( is-nonnegative-eq-ℤ (inv (neg-neg-ℤ a) ∙ ap neg-ℤ K') H)))
+    ( is-plus-or-minus-sim-unit-ℤ K)
 ```
