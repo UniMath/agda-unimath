@@ -17,8 +17,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negation
@@ -30,15 +30,20 @@ open import foundation.universe-levels
 
 ## Idea
 
-Two [integers](elementary-number-theory.integers.md) $a$ and $b$ are said to be {{#concept "unit similar" Disambiguation="integers" Agda=sim-unit-ℤ}} if
+Two [integers](elementary-number-theory.integers.md) $a$ and $b$ are said to be
+{{#concept "unit similar" Disambiguation="integers" Agda=sim-unit-ℤ}} if
 
 ```text
 ¬ (is-nonzero-ℤ a × is-nonzero-ℤ b) → Σ (u : unit-ℤ) ua=b.
 ```
 
-The idea is that $a$ and $b$ are unit similar if there exists a [unit integer](elementary-number-theory.unit-integers.md) $u$ such that $ua=b$. However, this type is not a proposition if both $a$ and $b$ are $0$. The unit similarity relation has therefore a slightly more complicated expression.
+The idea is that $a$ and $b$ are unit similar if there exists a
+[unit integer](elementary-number-theory.unit-integers.md) $u$ such that $ua=b$.
+However, this type is not a proposition if both $a$ and $b$ are $0$. The unit
+similarity relation has therefore a slightly more complicated expression.
 
-The unit similarity relation is an [equivalence relation](foundation.equivalence-relations.md) on the integers.
+The unit similarity relation is an
+[equivalence relation](foundation.equivalence-relations.md) on the integers.
 
 ## Definitions
 
@@ -168,4 +173,3 @@ transitive-sim-unit-ℤ x y z K H f =
     ( K (λ (p , q) → f (is-zero-sim-unit-ℤ' H p , q)))
     ( H (λ (p , q) → f (p , is-zero-sim-unit-ℤ K q)))
 ```
-

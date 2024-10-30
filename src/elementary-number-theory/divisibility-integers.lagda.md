@@ -157,6 +157,16 @@ is-zero-div-zero-ℤ :
 is-zero-div-zero-ℤ x (pair d p) = inv p ∙ right-zero-law-mul-ℤ d
 ```
 
+### An integer is a unit if and only if it divides $1$
+
+```agda
+div-one-is-unit-ℤ : (x : ℤ) → is-unit-ℤ x → div-ℤ x one-ℤ
+div-one-is-unit-ℤ x (d , p , q) = (d , q)
+
+is-unit-div-one-ℤ : (x : ℤ) → div-ℤ x one-ℤ → is-unit-ℤ x
+is-unit-div-one-ℤ x (d , p) = (d , commutative-mul-ℤ x d ∙ p , p)
+```
+
 ### The quotient of `x` by one is `x`
 
 ```agda
@@ -337,13 +347,14 @@ antisymmetric-div-ℤ x y (pair d p) (pair e q) H =
   f : is-decidable (is-zero-ℤ x) → presim-unit-ℤ x y
   f (inl refl) = presim-unit-eq-ℤ (inv (right-zero-law-mul-ℤ d) ∙ p)
   pr1 (pr1 (f (inr g))) = d
-  pr1 (pr2 (pr1 (f (inr g)))) = e
-  pr2 (pr2 (pr1 (f (inr g)))) =
-    is-injective-left-mul-ℤ x g
-      ( ( commutative-mul-ℤ x (e *ℤ d)) ∙
-        ( ( associative-mul-ℤ e d x) ∙
-          ( ( ap (e *ℤ_) p) ∙
-            ( q ∙ inv (right-unit-law-mul-ℤ x)))))
+  pr2 (pr1 (f (inr g))) =
+    is-unit-div-one-ℤ d
+      ( e ,
+        is-injective-left-mul-ℤ x g
+          ( ( commutative-mul-ℤ x (e *ℤ d)) ∙
+            ( ( associative-mul-ℤ e d x) ∙
+              ( ( ap (e *ℤ_) p) ∙
+                ( q ∙ inv (right-unit-law-mul-ℤ x))))))
   pr2 (f (inr g)) = p
 ```
 

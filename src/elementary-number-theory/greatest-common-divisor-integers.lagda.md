@@ -17,6 +17,8 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
+open import elementary-number-theory.unit-integers
+open import elementary-number-theory.unit-similarity-integers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -316,7 +318,7 @@ is-commutative-gcd-ℤ x y =
 is-one-is-gcd-one-ℤ : {b x : ℤ} → is-gcd-ℤ one-ℤ b x → is-one-ℤ x
 is-one-is-gcd-one-ℤ {b} {x} H with
   ( is-one-or-neg-one-is-unit-ℤ x
-    ( pr1 (is-common-divisor-is-gcd-ℤ one-ℤ b x H)))
+    ( is-unit-div-one-ℤ x (pr1 (is-common-divisor-is-gcd-ℤ one-ℤ b x H))))
 ... | inl p = p
 ... | inr p = ex-falso (tr is-nonnegative-ℤ p (pr1 H))
 
@@ -330,7 +332,7 @@ is-one-gcd-one-ℤ b = is-one-is-gcd-one-ℤ (is-gcd-gcd-ℤ one-ℤ b)
 is-one-is-gcd-one-ℤ' : {a x : ℤ} → is-gcd-ℤ a one-ℤ x → is-one-ℤ x
 is-one-is-gcd-one-ℤ' {a} {x} H with
   ( is-one-or-neg-one-is-unit-ℤ x
-    ( pr2 (is-common-divisor-is-gcd-ℤ a one-ℤ x H)))
+    ( is-unit-div-one-ℤ x (pr2 (is-common-divisor-is-gcd-ℤ a one-ℤ x H))))
 ... | inl p = p
 ... | inr p = ex-falso (tr is-nonnegative-ℤ p (pr1 H))
 

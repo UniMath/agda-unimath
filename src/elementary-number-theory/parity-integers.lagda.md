@@ -13,6 +13,7 @@ open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.unit-similarity-integers
 
 open import foundation.decidable-types
 open import foundation.negation

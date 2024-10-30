@@ -36,8 +36,9 @@ open import ring-theory.groups-of-units-rings
 
 ## Idea
 
-The {{#concept "group of units" Disambiguation="commutative ring" WD="unit" WDID=Q118084}} of a
-[commutative ring](commutative-algebra.commutative-rings.md) `A` is the
+The
+{{#concept "group of units" Disambiguation="commutative ring" WD="unit" WDID=Q118084}}
+of a [commutative ring](commutative-algebra.commutative-rings.md) `A` is the
 [abelian group](group-theory.abelian-groups.md) consisting of all the
 [invertible elements](commutative-algebra.invertible-elements-commutative-rings.md)
 in `A`. Equivalently, the group of units of `A` is the
@@ -340,7 +341,7 @@ preserves-id-functor-Large-Precategory
 module _
   {l : Level} (A : Commutative-Ring l)
   where
-  
+
   neg-group-of-units-Commutative-Ring :
     type-group-of-units-Commutative-Ring A →
     type-group-of-units-Commutative-Ring A

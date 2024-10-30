@@ -31,13 +31,20 @@ open import foundation.universe-levels
 
 ## Idea
 
-An [integer](elementary-number-theory.integers.md) $a$ is said to be a {{#concept "unit" Disambiguation="integer" Agda=unit-ℤ  WD="unit" WDID=Q118084}} if it [divides](elementary-number-theory.divisibility-integers.md) the integer $1$, i.e., if there exists an integer $b$ such that
+An [integer](elementary-number-theory.integers.md) $a$ is said to be a
+{{#concept "unit" Disambiguation="integer" Agda=unit-ℤ  WD="unit" WDID=Q118084}}
+if it [divides](elementary-number-theory.divisibility-integers.md) the integer
+$1$, i.e., if there exists an integer $b$ such that
 
 $$
 ab=1.
 $$
 
-Note that the predicate of being a unit is expressed without explicitly referring to divisibility of the integers in order to avoid cyclic dependencies in the library. Some properties of divisibility involving unit integers are studied in [`elementary-number-theory.divisibility-integers`](elementary-number-theory.divisibility-integers.md`).
+Note that the predicate of being a unit is expressed without explicitly
+referring to divisibility of the integers in order to avoid cyclic dependencies
+in the library. Some properties of divisibility involving unit integers are
+studied in
+[`elementary-number-theory.divisibility-integers`](elementary-number-theory.divisibility-integers.md`).
 
 ## Definitions
 

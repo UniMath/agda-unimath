@@ -34,8 +34,9 @@ open import ring-theory.rings
 
 ## Idea
 
-The {{#concept "group of units" Disambiguation="ring" WD="unit" WDID=Q118084}} of a [ring](ring-theory.rings.md) `R` is the
-[group](group-theory.groups.md) consisting of all the
+The {{#concept "group of units" Disambiguation="ring" WD="unit" WDID=Q118084}}
+of a [ring](ring-theory.rings.md) `R` is the [group](group-theory.groups.md)
+consisting of all the
 [invertible elements](ring-theory.invertible-elements-rings.md) in `R`.
 Equivalently, the group of units of `R` is the
 [core](group-theory.cores-monoids.md) of the multiplicative
@@ -284,7 +285,7 @@ preserves-id-functor-Large-Precategory
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   neg-group-of-units-Ring :
     type-group-of-units-Ring R → type-group-of-units-Ring R
   pr1 (neg-group-of-units-Ring (x , H)) = neg-Ring R x
