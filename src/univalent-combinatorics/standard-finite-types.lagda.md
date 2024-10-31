@@ -180,6 +180,47 @@ is-not-contractible-Fin (succ-ℕ (succ-ℕ k)) f C =
   neq-inl-inr (eq-is-contr' C (neg-two-Fin (succ-ℕ k)) (neg-one-Fin (succ-ℕ k)))
 ```
 
+### The zero elements in the standard finite types
+
+```agda
+zero-Fin : (k : ℕ) → Fin (succ-ℕ k)
+zero-Fin zero-ℕ = inr star
+zero-Fin (succ-ℕ k) = inl (zero-Fin k)
+
+is-zero-Fin : (k : ℕ) → Fin k → UU lzero
+is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
+
+is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
+is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
+
+is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
+is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
+```
+
+### The successor function on the standard finite types
+
+```agda
+skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
+skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
+skip-zero-Fin (succ-ℕ k) (inr star) = inr star
+
+succ-Fin : (k : ℕ) → Fin k → Fin k
+succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
+succ-Fin (succ-ℕ k) (inr star) = (zero-Fin k)
+
+Fin-Type-With-Endomorphism : ℕ → Type-With-Endomorphism lzero
+pr1 (Fin-Type-With-Endomorphism k) = Fin k
+pr2 (Fin-Type-With-Endomorphism k) = succ-Fin k
+```
+
+### The bounded successor function on the standard finite types
+
+```agda
+bounded-succ-Fin : (k : ℕ) → Fin k → Fin k
+bounded-succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
+bounded-succ-Fin (succ-ℕ k) (inr star) = inr star
+```
+
 ### The inclusion of `Fin k` into `ℕ`
 
 ```agda
@@ -232,37 +273,17 @@ pr1 (emb-nat-Fin k) = nat-Fin k
 pr2 (emb-nat-Fin k) = is-emb-nat-Fin k
 ```
 
-### The zero elements in the standard finite types
+### The retraction of `ℕ` into `Fin k`
 
 ```agda
-zero-Fin : (k : ℕ) → Fin (succ-ℕ k)
-zero-Fin zero-ℕ = inr star
-zero-Fin (succ-ℕ k) = inl (zero-Fin k)
-
-is-zero-Fin : (k : ℕ) → Fin k → UU lzero
-is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
-
-is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
-is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
-
-is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
-is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
-```
-
-### The successor function on the standard finite types
-
-```agda
-skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
-skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
-skip-zero-Fin (succ-ℕ k) (inr star) = inr star
-
-succ-Fin : (k : ℕ) → Fin k → Fin k
-succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
-succ-Fin (succ-ℕ k) (inr star) = (zero-Fin k)
-
-Fin-Type-With-Endomorphism : ℕ → Type-With-Endomorphism lzero
-pr1 (Fin-Type-With-Endomorphism k) = Fin k
-pr2 (Fin-Type-With-Endomorphism k) = succ-Fin k
+Fin-nat : (k : ℕ) → ℕ → Fin (succ-ℕ k)
+Fin-nat 0 0 = zero-Fin 0
+Fin-nat 0 (succ-ℕ n) = zero-Fin 0
+Fin-nat (succ-ℕ k) 0 = zero-Fin (succ-ℕ k)
+Fin-nat (succ-ℕ k) (succ-ℕ n) =
+  bounded-succ-Fin
+    ( succ-ℕ (succ-ℕ k))
+    ( inl-Fin (succ-ℕ k) (Fin-nat k n))
 ```
 
 ```agda
