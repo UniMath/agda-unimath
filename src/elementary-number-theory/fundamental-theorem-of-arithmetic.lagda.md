@@ -169,7 +169,7 @@ is-prop-is-nontrivial-divisor-ℕ :
 is-prop-is-nontrivial-divisor-ℕ n x =
   is-prop-Σ
     ( is-prop-le-ℕ 1 x)
-    ( λ p → is-prop-div-ℕ x n (is-nonzero-le-ℕ 1 x p))
+    ( λ p → is-prop-div-ℕ x n (inl (is-nonzero-le-ℕ 1 x p)))
 
 is-nontrivial-divisor-ℕ-Prop : (n x : ℕ) → Prop lzero
 pr1 (is-nontrivial-divisor-ℕ-Prop n x) = is-nontrivial-divisor-ℕ n x

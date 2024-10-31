@@ -172,15 +172,26 @@ is-odd-add-two-is-odd-ℤ a H K = H (is-even-is-even-add-two-ℤ a K)
 ```agda
 is-odd-succ-is-even-ℤ :
   (a : ℤ) → is-even-ℤ a → is-odd-ℤ (a +ℤ one-ℤ)
-is-odd-succ-is-even-ℤ a H K = {!!}
+is-odd-succ-is-even-ℤ a H K =
+  is-odd-one-ℤ (div-right-summand-ℤ (int-ℕ 2) a one-ℤ H K)
+```
+
+### If an integer `x + 1` is even, then `x` is odd
+
+```agda
+is-odd-is-even-succ-ℤ :
+  (a : ℤ) → is-even-ℤ (a +ℤ one-ℤ) → is-odd-ℤ a
+is-odd-is-even-succ-ℤ a H K =
+  is-odd-one-ℤ (div-right-summand-ℤ (int-ℕ 2) a one-ℤ K H)
 ```
 
 ### If an integer `x` is odd, then `x + 1` is even
 
-```agda
+```text
 is-even-succ-is-odd-ℤ :
   (a : ℤ) → is-odd-ℤ a → is-even-ℤ (a +ℤ one-ℤ)
-is-even-succ-is-odd-ℤ a H = {!a!}
+is-even-succ-is-odd-ℤ a H with is-decidable-div-ℤ (int-ℕ 2) (a +ℤ one-ℤ)
+... | d = {!!}
 ```
 
 ### If an integer `x` is even, then `x + 1` is odd

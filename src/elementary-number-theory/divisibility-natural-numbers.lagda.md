@@ -8,7 +8,9 @@ module elementary-number-theory.divisibility-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.decidable-types
 open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -16,15 +18,23 @@ open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
+open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -34,8 +44,9 @@ open import foundation.universe-levels
 
 ## Idea
 
+On this page we define the {{#concept "divisibility" Disambiguation="natural numbers" Agda=div-ℕ WD="divisibility" WDID=Q5284415}} relation on the [natural numbers](elementary-number-theory.natural-numbers.md).
 A natural number `m` is said to **divide** a natural number `n` if there exists
-a natural number `k` equipped with an identification `km ＝ n`. Using the
+a natural number `k` equipped with an [identification](foundation-core.identifications.md) `km ＝ n`. Using the
 [Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
 of logic into type theory, we express divisibility as follows:
 
@@ -43,32 +54,75 @@ of logic into type theory, we express divisibility as follows:
   div-ℕ m n := Σ (k : ℕ), k *ℕ m ＝ n.
 ```
 
-If `n` is a nonzero natural number, then `div-ℕ m n` is always a proposition in
+If `n` is a [nonzero natural number](elementary-number-theory.nonzero-natural-numbers.md), then the type `div-ℕ m n` is always a [proposition](foundation-core.propositions.md) in
 the sense that the type `div-ℕ m n` contains at most one element.
+
+The divisibility relation is [logically equivalent](foundation.logical-equivalences.md), though not [equivalent](foundation-core.equivalences.md), to the
+{{#concept "bounded divisibility" Disambiguation="natural numbers" Agda=bounded-div-ℕ}} relation, which is defined by
+
+```text
+  bounded-div-ℕ m n := Σ (k : ℕ), (k ≤ n) × (k *ℕ m ＝ n).
+```
+
+The discrepancy between divisibility and bounded divisibility is manifested at `(0 , 0)`. Note that `div-ℕ 0 0 ≃ ℕ`, while `bounded-div-ℕ 0 0` is [contractible](foundation-core.contractible-types.md). For all other values we have `div-ℕ m n ≃ bounded-div-ℕ m n`.
+
+The notion of bounded divisibility has several advantages over ordinary divisibility: Bounded divisibility is always a proposition, and the proof that divisibility is decidable uses the proof that bounded divisibility is decidable.
 
 ## Definitions
 
+### The divisibility relation on the natural numbers
+
 ```agda
-div-ℕ : ℕ → ℕ → UU lzero
-div-ℕ m n = Σ ℕ (λ k → k *ℕ m ＝ n)
+module _
+  (m n : ℕ)
+  where
+  
+  div-ℕ : UU lzero
+  div-ℕ = Σ ℕ (λ k → k *ℕ m ＝ n)
 
-quotient-div-ℕ : (x y : ℕ) → div-ℕ x y → ℕ
-quotient-div-ℕ x y H = pr1 H
+  quotient-div-ℕ : div-ℕ → ℕ
+  quotient-div-ℕ = pr1
 
-eq-quotient-div-ℕ :
-  (x y : ℕ) (H : div-ℕ x y) → (quotient-div-ℕ x y H) *ℕ x ＝ y
-eq-quotient-div-ℕ x y H = pr2 H
+  eq-quotient-div-ℕ : (H : div-ℕ) → quotient-div-ℕ H *ℕ m ＝ n
+  eq-quotient-div-ℕ = pr2
 
-eq-quotient-div-ℕ' :
-  (x y : ℕ) (H : div-ℕ x y) → x *ℕ (quotient-div-ℕ x y H) ＝ y
-eq-quotient-div-ℕ' x y H =
-  commutative-mul-ℕ x (quotient-div-ℕ x y H) ∙ eq-quotient-div-ℕ x y H
-
-div-quotient-div-ℕ :
-  (d x : ℕ) (H : div-ℕ d x) → div-ℕ (quotient-div-ℕ d x H) x
-pr1 (div-quotient-div-ℕ d x (u , p)) = d
-pr2 (div-quotient-div-ℕ d x (u , p)) = commutative-mul-ℕ d u ∙ p
+  eq-quotient-div-ℕ' : (H : div-ℕ) → m *ℕ quotient-div-ℕ H ＝ n
+  eq-quotient-div-ℕ' H =
+    commutative-mul-ℕ m (quotient-div-ℕ H) ∙ eq-quotient-div-ℕ H
 ```
+
+### The bounded divisibility predicate
+
+```agda
+module _
+  (m n : ℕ)
+  where
+  
+  bounded-div-ℕ : UU lzero
+  bounded-div-ℕ = Σ ℕ (λ k → (k ≤-ℕ n) × (k *ℕ m ＝ n))
+
+  quotient-bounded-div-ℕ : bounded-div-ℕ → ℕ
+  quotient-bounded-div-ℕ = pr1
+
+  upper-bound-quotient-bounded-div-ℕ :
+    (H : bounded-div-ℕ) → quotient-bounded-div-ℕ H ≤-ℕ n
+  upper-bound-quotient-bounded-div-ℕ H = pr1 (pr2 H)
+
+  eq-quotient-bounded-div-ℕ :
+    (H : bounded-div-ℕ) → quotient-bounded-div-ℕ H *ℕ m ＝ n
+  eq-quotient-bounded-div-ℕ H = pr2 (pr2 H)
+
+  eq-quotient-bounded-div-ℕ' :
+    (H : bounded-div-ℕ) → m *ℕ quotient-bounded-div-ℕ H ＝ n
+  eq-quotient-bounded-div-ℕ' H =
+    commutative-mul-ℕ m (quotient-bounded-div-ℕ H) ∙ eq-quotient-bounded-div-ℕ H
+
+  div-bounded-div-ℕ : bounded-div-ℕ → div-ℕ m n
+  pr1 (div-bounded-div-ℕ H) = quotient-bounded-div-ℕ H
+  pr2 (div-bounded-div-ℕ H) = eq-quotient-bounded-div-ℕ H
+```
+
+## Properties
 
 ### Concatenating equality and divisibility
 
@@ -86,68 +140,31 @@ concatenate-eq-div-eq-ℕ :
 concatenate-eq-div-eq-ℕ refl p refl = p
 ```
 
-## Properties
+### The quotient of `n` by a number `m` it is divisible by also divides `n`
 
-### The quotients of a natural number `n` by two natural numbers `p` and `q` are equal if `p` and `q` are equal
+```agda
+div-quotient-div-ℕ :
+  (m n : ℕ) (H : div-ℕ m n) → div-ℕ (quotient-div-ℕ m n H) n
+pr1 (div-quotient-div-ℕ m n (u , p)) = m
+pr2 (div-quotient-div-ℕ m n (u , p)) = commutative-mul-ℕ m u ∙ p
+```
+
+### The quotients of a natural number `n` by two natural numbers `c` and `d` are equal if `c` and `d` are equal
 
 ```agda
 eq-quotient-div-eq-div-ℕ :
-  (x y z : ℕ) → is-nonzero-ℕ x → x ＝ y →
-  (H : div-ℕ x z) → (I : div-ℕ y z) →
-  quotient-div-ℕ x z H ＝ quotient-div-ℕ y z I
-eq-quotient-div-eq-div-ℕ x y z n e H I =
-  is-injective-left-mul-ℕ
-    ( x)
-    ( n)
-  ( tr
-    ( λ p →
-      x *ℕ (quotient-div-ℕ x z H) ＝
-      p *ℕ (quotient-div-ℕ y z I))
-    ( inv e)
-    ( commutative-mul-ℕ x (quotient-div-ℕ x z H) ∙
-      ( eq-quotient-div-ℕ x z H ∙
-        ( inv (eq-quotient-div-ℕ y z I) ∙
-          commutative-mul-ℕ (quotient-div-ℕ y z I) y))))
-```
-
-### Divisibility by a nonzero natural number is a property
-
-```agda
-is-prop-div-ℕ : (k x : ℕ) → is-nonzero-ℕ k → is-prop (div-ℕ k x)
-is-prop-div-ℕ k x f = is-prop-map-is-emb (is-emb-right-mul-ℕ k f) x
-```
-
-### The divisibility relation is a partial order on the natural numbers
-
-```agda
-refl-div-ℕ : is-reflexive div-ℕ
-pr1 (refl-div-ℕ x) = 1
-pr2 (refl-div-ℕ x) = left-unit-law-mul-ℕ x
-
-div-eq-ℕ : (x y : ℕ) → x ＝ y → div-ℕ x y
-div-eq-ℕ x .x refl = refl-div-ℕ x
-
-antisymmetric-div-ℕ : is-antisymmetric div-ℕ
-antisymmetric-div-ℕ zero-ℕ zero-ℕ H K = refl
-antisymmetric-div-ℕ zero-ℕ (succ-ℕ y) (pair k p) K =
-  inv (right-zero-law-mul-ℕ k) ∙ p
-antisymmetric-div-ℕ (succ-ℕ x) zero-ℕ H (pair l q) =
-  inv q ∙ right-zero-law-mul-ℕ l
-antisymmetric-div-ℕ (succ-ℕ x) (succ-ℕ y) (pair k p) (pair l q) =
-  ( inv (left-unit-law-mul-ℕ (succ-ℕ x))) ∙
-  ( ( ap
-      ( _*ℕ (succ-ℕ x))
-      ( inv
-        ( is-one-right-is-one-mul-ℕ l k
-          ( is-one-is-left-unit-mul-ℕ (l *ℕ k) x
-            ( ( associative-mul-ℕ l k (succ-ℕ x)) ∙
-              ( ap (l *ℕ_) p ∙ q)))))) ∙
-    ( p))
-
-transitive-div-ℕ : is-transitive div-ℕ
-pr1 (transitive-div-ℕ x y z (pair l q) (pair k p)) = l *ℕ k
-pr2 (transitive-div-ℕ x y z (pair l q) (pair k p)) =
-  associative-mul-ℕ l k x ∙ (ap (l *ℕ_) p ∙ q)
+  (c d n : ℕ) → is-nonzero-ℕ c → c ＝ d →
+  (H : div-ℕ c n) → (I : div-ℕ d n) →
+  quotient-div-ℕ c n H ＝ quotient-div-ℕ d n I
+eq-quotient-div-eq-div-ℕ c d n N p H I =
+  is-injective-left-mul-ℕ c N
+    ( tr
+      ( λ x → c *ℕ quotient-div-ℕ c n H ＝ x *ℕ quotient-div-ℕ d n I)
+      ( inv p)
+      ( commutative-mul-ℕ c (quotient-div-ℕ c n H) ∙
+        eq-quotient-div-ℕ c n H ∙
+        inv (eq-quotient-div-ℕ d n I) ∙
+        commutative-mul-ℕ (quotient-div-ℕ d n I) d))
 ```
 
 ### If `x` is nonzero and `d | x`, then `d ≤ x`
@@ -184,6 +201,133 @@ le-div-succ-ℕ d x H f = le-leq-neq-ℕ (leq-div-succ-ℕ d x H) f
 
 le-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → d ≠ x → le-ℕ d x
 le-div-ℕ d x H K f = le-leq-neq-ℕ (leq-div-ℕ d x H K) f
+```
+
+### Divisibility is logically equivalent to bounded divisibility
+
+```agda
+bounded-div-div-ℕ : (m n : ℕ) → div-ℕ m n → bounded-div-ℕ m n
+bounded-div-div-ℕ m zero-ℕ (q , p) = (0 , refl-leq-ℕ 0 , left-zero-law-mul-ℕ m)
+bounded-div-div-ℕ m (succ-ℕ n) (q , p) =
+  ( q , leq-quotient-div-ℕ m (succ-ℕ n) (is-nonzero-succ-ℕ n) (q , p) , p)
+
+logical-equivalence-bounded-div-div-ℕ :
+  (m n : ℕ) → bounded-div-ℕ m n ↔ div-ℕ m n
+pr1 (logical-equivalence-bounded-div-div-ℕ m n) =
+  div-bounded-div-ℕ m n
+pr2 (logical-equivalence-bounded-div-div-ℕ m n) =
+  bounded-div-div-ℕ m n
+```
+
+### Bounded divisibility is decidable
+
+```agda
+is-decidable-bounded-div-ℕ :
+  (m n : ℕ) → is-decidable (bounded-div-ℕ m n)
+is-decidable-bounded-div-ℕ m n =
+  is-decidable-bounded-Σ-ℕ'
+    ( n)
+    ( λ x → mul-ℕ x m ＝ n)
+    ( λ x → has-decidable-equality-ℕ (mul-ℕ x m) n)
+```
+
+### Divisibility is decidable
+
+```agda
+is-decidable-div-ℕ :
+  (m n : ℕ) → is-decidable (div-ℕ m n)
+is-decidable-div-ℕ m n =
+  is-decidable-iff
+    ( div-bounded-div-ℕ m n)
+    ( bounded-div-div-ℕ m n)
+    ( is-decidable-bounded-div-ℕ m n)
+```
+
+### Divisibility is a property except at `(0,0)`
+
+```agda
+is-prop-div-ℕ :
+  (k x : ℕ) → is-nonzero-ℕ k + is-nonzero-ℕ x → is-prop (div-ℕ k x)
+is-prop-div-ℕ k x (inl H) = is-prop-map-is-emb (is-emb-right-mul-ℕ k H) x
+is-prop-div-ℕ zero-ℕ x (inr H) =
+  is-prop-is-proof-irrelevant
+    ( λ (q , p) → ex-falso (H (inv p ∙ right-zero-law-mul-ℕ q)))
+is-prop-div-ℕ (succ-ℕ k) x (inr H) =
+  is-prop-map-is-emb (is-emb-right-mul-ℕ (succ-ℕ k) (is-nonzero-succ-ℕ k)) x
+
+div-ℕ-Decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → Decidable-Prop lzero
+pr1 (div-ℕ-Decidable-Prop d x H) = div-ℕ d x
+pr1 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-prop-div-ℕ d x (inl H)
+pr2 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-decidable-div-ℕ d x
+```
+
+### Bounded divisibility is a property
+
+```agda
+abstract
+  is-prop-bounded-div-ℕ :
+    (k n : ℕ) → is-prop (bounded-div-ℕ k n)
+  is-prop-bounded-div-ℕ zero-ℕ n =
+    is-prop-all-elements-equal
+      ( λ (q , b , p) (q' , b' , p') →
+        eq-type-subtype
+          ( λ u → product-Prop (leq-ℕ-Prop u n) (Id-Prop ℕ-Set _ _))
+          ( is-zero-leq-zero-ℕ q
+            ( concatenate-leq-eq-ℕ q b (inv p ∙ right-zero-law-mul-ℕ q)) ∙
+            inv
+              ( is-zero-leq-zero-ℕ q'
+                ( concatenate-leq-eq-ℕ q' b'
+                  ( inv p' ∙ right-zero-law-mul-ℕ q')))))
+  is-prop-bounded-div-ℕ (succ-ℕ k) n =
+    is-prop-equiv
+      ( equiv-right-swap-Σ ∘e inv-associative-Σ ℕ (λ x → x ≤-ℕ n) _)
+      ( is-prop-Σ
+        ( is-prop-div-ℕ (succ-ℕ k) n (inl (is-nonzero-succ-ℕ k)))
+        ( λ (x , H) → is-prop-leq-ℕ x n))
+
+bounded-div-ℕ-Prop : (k n : ℕ) → Prop lzero
+pr1 (bounded-div-ℕ-Prop k n) = bounded-div-ℕ k n
+pr2 (bounded-div-ℕ-Prop k n) = is-prop-bounded-div-ℕ k n
+
+bounded-div-ℕ-Decidable-Prop : (k n : ℕ) → Decidable-Prop lzero
+pr1 (bounded-div-ℕ-Decidable-Prop k n) = bounded-div-ℕ k n
+pr1 (pr2 (bounded-div-ℕ-Decidable-Prop k n)) = is-prop-bounded-div-ℕ k n
+pr2 (pr2 (bounded-div-ℕ-Decidable-Prop k n)) = is-decidable-bounded-div-ℕ k n
+```
+
+### The divisibility relation is a partial order on the natural numbers
+
+The [poset](order-theory.posets.md) of natural numbers ordered by divisibility is defined in [`elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility`](elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility.md).
+
+```agda
+refl-div-ℕ : is-reflexive div-ℕ
+pr1 (refl-div-ℕ x) = 1
+pr2 (refl-div-ℕ x) = left-unit-law-mul-ℕ x
+
+div-eq-ℕ : (x y : ℕ) → x ＝ y → div-ℕ x y
+div-eq-ℕ x .x refl = refl-div-ℕ x
+
+antisymmetric-div-ℕ : is-antisymmetric div-ℕ
+antisymmetric-div-ℕ zero-ℕ zero-ℕ H K = refl
+antisymmetric-div-ℕ zero-ℕ (succ-ℕ y) (pair k p) K =
+  inv (right-zero-law-mul-ℕ k) ∙ p
+antisymmetric-div-ℕ (succ-ℕ x) zero-ℕ H (pair l q) =
+  inv q ∙ right-zero-law-mul-ℕ l
+antisymmetric-div-ℕ (succ-ℕ x) (succ-ℕ y) (pair k p) (pair l q) =
+  ( inv (left-unit-law-mul-ℕ (succ-ℕ x))) ∙
+  ( ( ap
+      ( _*ℕ (succ-ℕ x))
+      ( inv
+        ( is-one-right-is-one-mul-ℕ l k
+          ( is-one-is-left-unit-mul-ℕ (l *ℕ k) x
+            ( ( associative-mul-ℕ l k (succ-ℕ x)) ∙
+              ( ap (l *ℕ_) p ∙ q)))))) ∙
+    ( p))
+
+transitive-div-ℕ : is-transitive div-ℕ
+pr1 (transitive-div-ℕ x y z (pair l q) (pair k p)) = l *ℕ k
+pr2 (transitive-div-ℕ x y z (pair l q) (pair k p)) =
+  associative-mul-ℕ l k x ∙ (ap (l *ℕ_) p ∙ q)
 ```
 
 ### `1` divides any number

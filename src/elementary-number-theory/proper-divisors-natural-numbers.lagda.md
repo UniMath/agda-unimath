@@ -16,6 +16,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -64,7 +65,9 @@ is-prop-is-proper-divisor-ℕ : (n d : ℕ) → is-prop (is-proper-divisor-ℕ n
 is-prop-is-proper-divisor-ℕ n zero-ℕ (pair f g) =
   ex-falso (f (inv (is-zero-div-zero-ℕ n g)))
 is-prop-is-proper-divisor-ℕ n (succ-ℕ d) =
-  is-prop-product is-prop-neg (is-prop-div-ℕ (succ-ℕ d) n (is-nonzero-succ-ℕ d))
+  is-prop-product
+    ( is-prop-neg)
+    ( is-prop-div-ℕ (succ-ℕ d) n (inl (is-nonzero-succ-ℕ d)))
 ```
 
 ### If a natural number has a proper divisor, then `1` is a proper divisor
