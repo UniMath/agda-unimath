@@ -404,3 +404,36 @@ div-div-int-abs-divisor-ℤ :
 div-div-int-abs-divisor-ℤ {x} {y} =
   div-sim-unit-ℤ (sim-unit-abs-ℤ x) (refl-sim-unit-ℤ y)
 ```
+
+### An integer `a` divides an integer `b` if and only if the natural number `|a|` divides the natural number `|b|`
+
+```agda
+div-abs-div-ℤ :
+  (a b : ℤ) → div-ℤ a b → div-ℕ (abs-ℤ a) (abs-ℤ b)
+div-abs-div-ℤ a b H =
+  div-div-int-ℕ
+    ( div-sim-unit-ℤ
+      ( symmetric-sim-unit-ℤ _ _ (sim-unit-abs-ℤ a))
+      ( symmetric-sim-unit-ℤ _ _ (sim-unit-abs-ℤ b))
+      ( H))
+
+div-div-abs-ℤ :
+  (a b : ℤ) → div-ℕ (abs-ℤ a) (abs-ℤ b) → div-ℤ a b
+div-div-abs-ℤ a b H =
+  div-sim-unit-ℤ
+    ( sim-unit-abs-ℤ a)
+    ( sim-unit-abs-ℤ b)
+    ( div-int-div-ℕ H)
+```
+
+### Divisibility on the integers is decidable
+
+```agda
+is-decidable-div-ℤ :
+  (a b : ℤ) → is-decidable (div-ℤ a b)
+is-decidable-div-ℤ a b =
+  is-decidable-iff
+    ( div-div-abs-ℤ a b)
+    ( div-abs-div-ℤ a b)
+    ( is-decidable-div-ℕ _ _)
+```

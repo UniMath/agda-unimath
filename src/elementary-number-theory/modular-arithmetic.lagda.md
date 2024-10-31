@@ -783,20 +783,6 @@ has-no-fixed-points-succ-Fin {succ-ℕ k} x =
   has-no-fixed-points-succ-ℤ-Mod (succ-ℕ k) x
 ```
 
-### Divisibility is decidable
-
-```agda
-is-decidable-div-ℤ : (d x : ℤ) → is-decidable (div-ℤ d x)
-is-decidable-div-ℤ d x =
-  is-decidable-iff
-    ( div-div-int-abs-divisor-ℤ ∘ div-is-zero-mod-ℤ (abs-ℤ d) x)
-    ( is-zero-mod-div-ℤ (abs-ℤ d) x ∘ div-int-abs-divisor-div-ℤ)
-    ( has-decidable-equality-ℤ-Mod
-      ( abs-ℤ d)
-      ( mod-ℤ (abs-ℤ d) x)
-      ( zero-ℤ-Mod (abs-ℤ d)))
-```
-
 ### `mod-ℤ` is surjective
 
 ```agda

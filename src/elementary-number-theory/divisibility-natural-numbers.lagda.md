@@ -44,9 +44,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-On this page we define the {{#concept "divisibility" Disambiguation="natural numbers" Agda=div-ℕ WD="divisibility" WDID=Q5284415}} relation on the [natural numbers](elementary-number-theory.natural-numbers.md).
+On this page we define the
+{{#concept "divisibility" Disambiguation="natural numbers" Agda=div-ℕ WD="divisibility" WDID=Q5284415}}
+relation on the [natural numbers](elementary-number-theory.natural-numbers.md).
 A natural number `m` is said to **divide** a natural number `n` if there exists
-a natural number `k` equipped with an [identification](foundation-core.identifications.md) `km ＝ n`. Using the
+a natural number `k` equipped with an
+[identification](foundation-core.identifications.md) `km ＝ n`. Using the
 [Curry–Howard interpretation](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)
 of logic into type theory, we express divisibility as follows:
 
@@ -54,19 +57,30 @@ of logic into type theory, we express divisibility as follows:
   div-ℕ m n := Σ (k : ℕ), k *ℕ m ＝ n.
 ```
 
-If `n` is a [nonzero natural number](elementary-number-theory.nonzero-natural-numbers.md), then the type `div-ℕ m n` is always a [proposition](foundation-core.propositions.md) in
-the sense that the type `div-ℕ m n` contains at most one element.
+If `n` is a
+[nonzero natural number](elementary-number-theory.nonzero-natural-numbers.md),
+then the type `div-ℕ m n` is always a
+[proposition](foundation-core.propositions.md) in the sense that the type
+`div-ℕ m n` contains at most one element.
 
-The divisibility relation is [logically equivalent](foundation.logical-equivalences.md), though not [equivalent](foundation-core.equivalences.md), to the
-{{#concept "bounded divisibility" Disambiguation="natural numbers" Agda=bounded-div-ℕ}} relation, which is defined by
+The divisibility relation is
+[logically equivalent](foundation.logical-equivalences.md), though not
+[equivalent](foundation-core.equivalences.md), to the
+{{#concept "bounded divisibility" Disambiguation="natural numbers" Agda=bounded-div-ℕ}}
+relation, which is defined by
 
 ```text
   bounded-div-ℕ m n := Σ (k : ℕ), (k ≤ n) × (k *ℕ m ＝ n).
 ```
 
-The discrepancy between divisibility and bounded divisibility is manifested at `(0 , 0)`. Note that `div-ℕ 0 0 ≃ ℕ`, while `bounded-div-ℕ 0 0` is [contractible](foundation-core.contractible-types.md). For all other values we have `div-ℕ m n ≃ bounded-div-ℕ m n`.
+The discrepancy between divisibility and bounded divisibility is manifested at
+`(0 , 0)`. Note that `div-ℕ 0 0 ≃ ℕ`, while `bounded-div-ℕ 0 0` is
+[contractible](foundation-core.contractible-types.md). For all other values we
+have `div-ℕ m n ≃ bounded-div-ℕ m n`.
 
-The notion of bounded divisibility has several advantages over ordinary divisibility: Bounded divisibility is always a proposition, and the proof that divisibility is decidable uses the proof that bounded divisibility is decidable.
+The notion of bounded divisibility has several advantages over ordinary
+divisibility: Bounded divisibility is always a proposition, and the proof that
+divisibility is decidable uses the proof that bounded divisibility is decidable.
 
 ## Definitions
 
@@ -76,7 +90,7 @@ The notion of bounded divisibility has several advantages over ordinary divisibi
 module _
   (m n : ℕ)
   where
-  
+
   div-ℕ : UU lzero
   div-ℕ = Σ ℕ (λ k → k *ℕ m ＝ n)
 
@@ -97,7 +111,7 @@ module _
 module _
   (m n : ℕ)
   where
-  
+
   bounded-div-ℕ : UU lzero
   bounded-div-ℕ = Σ ℕ (λ k → (k ≤-ℕ n) × (k *ℕ m ＝ n))
 
@@ -297,7 +311,9 @@ pr2 (pr2 (bounded-div-ℕ-Decidable-Prop k n)) = is-decidable-bounded-div-ℕ k 
 
 ### The divisibility relation is a partial order on the natural numbers
 
-The [poset](order-theory.posets.md) of natural numbers ordered by divisibility is defined in [`elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility`](elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility.md).
+The [poset](order-theory.posets.md) of natural numbers ordered by divisibility
+is defined in
+[`elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility`](elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility.md).
 
 ```agda
 refl-div-ℕ : is-reflexive div-ℕ
