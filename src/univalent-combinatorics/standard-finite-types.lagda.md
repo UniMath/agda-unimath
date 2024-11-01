@@ -273,19 +273,6 @@ pr1 (emb-nat-Fin k) = nat-Fin k
 pr2 (emb-nat-Fin k) = is-emb-nat-Fin k
 ```
 
-### The retraction of `ℕ` into `Fin k`
-
-```agda
-Fin-nat : (k : ℕ) → ℕ → Fin (succ-ℕ k)
-Fin-nat 0 0 = zero-Fin 0
-Fin-nat 0 (succ-ℕ n) = zero-Fin 0
-Fin-nat (succ-ℕ k) 0 = zero-Fin (succ-ℕ k)
-Fin-nat (succ-ℕ k) (succ-ℕ n) =
-  bounded-succ-Fin
-    ( succ-ℕ (succ-ℕ k))
-    ( inl-Fin (succ-ℕ k) (Fin-nat k n))
-```
-
 ```agda
 is-zero-nat-zero-Fin : {k : ℕ} → is-zero-ℕ (nat-Fin (succ-ℕ k) (zero-Fin k))
 is-zero-nat-zero-Fin {zero-ℕ} = refl

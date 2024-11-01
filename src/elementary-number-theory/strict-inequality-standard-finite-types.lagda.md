@@ -27,7 +27,6 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Definitions
 
-
 ### The strict inequality relation on the standard finite types
 
 ```agda
@@ -63,6 +62,11 @@ is-prop-preserves-le-Fin n m f =
   is-prop-le-Fin m (f a) (f b)
 ```
 
+### A map `Fin (succ-ℕ m) → Fin (succ-ℕ n)` preserving strict inequality restricts to a map `Fin m → Fin n`
+
+#### The induced map obtained by restricting
+
+```agda
 restriction-preserves-le-Fin' :
   (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
   (preserves-le-Fin (succ-ℕ m) (succ-ℕ n) f) →
@@ -80,14 +84,18 @@ restriction-preserves-le-Fin :
   Fin m → Fin n
 restriction-preserves-le-Fin m n f pf x =
   restriction-preserves-le-Fin' m n f pf x (f (inl x)) refl
+```
 
+#### The induced map is indeed a restriction
+
+```agda
 inl-restriction-preserves-le-Fin' :
   (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
   (pf : preserves-le-Fin (succ-ℕ m) (succ-ℕ n) f) →
   (x : Fin m) →
   (rx : Fin (succ-ℕ n)) →
   (px : f (inl x) ＝ rx) →
-  inl (restriction-preserves-le-Fin' m n f pf x rx px) ＝ f (inl x)
+  inl-Fin n (restriction-preserves-le-Fin' m n f pf x rx px) ＝ f (inl-Fin m x)
 inl-restriction-preserves-le-Fin' (succ-ℕ m) n f pf x (inl a) px = inv px
 inl-restriction-preserves-le-Fin' (succ-ℕ m) n f pf x (inr a) px =
   ex-falso
@@ -98,10 +106,14 @@ inl-restriction-preserves-le-Fin :
   (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
   (pf : preserves-le-Fin (succ-ℕ m) (succ-ℕ n) f) →
   (x : Fin m) →
-  inl (restriction-preserves-le-Fin m n f pf x) ＝ f (inl x)
+  inl-Fin n (restriction-preserves-le-Fin m n f pf x) ＝ f (inl-Fin m x)
 inl-restriction-preserves-le-Fin m n f pf x =
   inl-restriction-preserves-le-Fin' m n f pf x (f (inl x)) refl
+```
 
+#### The induced map preserves strict inequality
+
+```agda
 preserves-le-restriction-preserves-le-Fin' :
   (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
   (pf : preserves-le-Fin (succ-ℕ m) (succ-ℕ n) f) →
@@ -118,18 +130,18 @@ preserves-le-restriction-preserves-le-Fin' :
 preserves-le-restriction-preserves-le-Fin'
   (succ-ℕ m) n f pf a b (inl x) pa (inl y) pb H =
   tr (le-Fin (succ-ℕ n) (inl x)) pb
-    (tr (λ - → le-Fin (succ-ℕ n) - (f (inl b))) pa
-    (pf (inl a) (inl b) H))
+    ( tr (λ - → le-Fin (succ-ℕ n) - (f (inl b))) pa
+    ( pf (inl a) (inl b) H))
 preserves-le-restriction-preserves-le-Fin'
   (succ-ℕ m) n f pf a b (inl x) pa (inr y) pb H =
   ex-falso
-    (tr (λ - → le-Fin (succ-ℕ n) - (f (inr star))) pb
-      (pf (inl b) (inr star) star))
+    ( tr (λ - → le-Fin (succ-ℕ n) - (f (inr star))) pb
+      ( pf (inl b) (inr star) star))
 preserves-le-restriction-preserves-le-Fin'
   (succ-ℕ m) n f pf a b (inr x) pa y pb H =
   ex-falso
-    (tr (λ - → le-Fin (succ-ℕ n) - (f (inr star))) pa
-      (pf (inl a) (inr star) star))
+    ( tr (λ - → le-Fin (succ-ℕ n) - (f (inr star))) pa
+      ( pf (inl a) (inr star) star))
 
 preserves-le-restriction-preserves-le-Fin :
   (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
@@ -137,8 +149,12 @@ preserves-le-restriction-preserves-le-Fin :
   preserves-le-Fin m n (restriction-preserves-le-Fin m n f pf)
 preserves-le-restriction-preserves-le-Fin m n f pf a b H =
   preserves-le-restriction-preserves-le-Fin' m n f pf a b
-    (f (inl a)) refl (f (inl b)) refl H
+    ( f (inl a)) refl (f (inl b)) refl H
+```
 
+### A strict inequality preserving map implies an inequality of cardinalities
+
+```agda
 leq-preserves-le-Fin :
   (m n : ℕ) → (f : Fin m → Fin n) →
   preserves-le-Fin m n f → leq-ℕ m n
@@ -150,7 +166,11 @@ leq-preserves-le-Fin (succ-ℕ (succ-ℕ m)) (succ-ℕ n) f pf =
   leq-preserves-le-Fin (succ-ℕ m) n
     ( restriction-preserves-le-Fin (succ-ℕ m) n f pf)
     ( preserves-le-restriction-preserves-le-Fin (succ-ℕ m) n f pf)
+```
 
+### Composition of strict inequality preserving maps
+
+```agda
 comp-preserves-le-Fin :
   (m n o : ℕ)
   (g : Fin n → Fin o)
