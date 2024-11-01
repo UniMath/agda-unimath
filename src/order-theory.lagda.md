@@ -102,6 +102,8 @@ open import order-theory.preorders public
 open import order-theory.principal-lower-sets-large-posets public
 open import order-theory.principal-upper-sets-large-posets public
 open import order-theory.reflective-galois-connections-large-posets public
+open import order-theory.resizing-posets public
+open import order-theory.resizing-preorders public
 open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public

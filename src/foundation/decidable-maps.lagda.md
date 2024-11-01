@@ -97,8 +97,8 @@ module _
       rec-coproduct
         ( λ u →
           is-decidable-iff
-            (λ v → (pr1 v) , ap g (pr2 v) ∙ pr2 u)
-            (λ w → pr1 w , H (pr2 w ∙ inv (pr2 u)))
+            ( λ v → (pr1 v) , ap g (pr2 v) ∙ pr2 u)
+            ( λ w → pr1 w , H (pr2 w ∙ inv (pr2 u)))
             ( F (pr1 u)))
         ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
         ( G x)

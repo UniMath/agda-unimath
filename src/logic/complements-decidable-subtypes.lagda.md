@@ -7,12 +7,12 @@ module logic.complements-decidable-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.complements-subtypes
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.double-negation-stable-propositions
 open import foundation.full-subtypes
 open import foundation.negation
-open import foundation.complements-subtypes
 open import foundation.postcomposition-functions
 open import foundation.powersets
 open import foundation.propositional-truncations

@@ -148,16 +148,41 @@ the right factor `f` is De Morgan.
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → B} {g : B → C}
-  (GF : is-de-morgan-map (g ∘ f))
   where
 
   is-de-morgan-map-right-factor' :
-    is-injective g → is-de-morgan-map f
-  is-de-morgan-map-right-factor' H y =
+    is-injective g →
+    is-de-morgan-map (g ∘ f) →
+    is-de-morgan-map f
+  is-de-morgan-map-right-factor' H GF y =
     rec-coproduct
       ( λ ngfy → inl (λ p → ngfy (pr1 p , ap g (pr2 p))))
       ( λ nngfy → inr (λ nq → nngfy λ p → nq (pr1 p , H (pr2 p))))
       ( GF (g y))
+```
+
+### Composition of De Morgan maps with decidable maps
+
+If a composite `g ∘ f` is De Morgan and the left factor `g` is injective, then
+the right factor `f` is De Morgan.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → B} {g : B → C}
+  where
+
+  is-de-morgan-map-comp-is-decidable-map :
+    is-injective g → is-decidable-map g → is-de-morgan-map f →
+    is-de-morgan-map (g ∘ f)
+  is-de-morgan-map-comp-is-decidable-map H G F y =
+    rec-coproduct
+      ( λ u →
+        is-de-morgan-iff
+          ( λ v → (pr1 v) , ap g (pr2 v) ∙ pr2 u)
+          ( λ w → pr1 w , H (pr2 w ∙ inv (pr2 u)))
+          ( F (pr1 u)))
+      ( λ ng → inl (λ u → ng (f (pr1 u) , pr2 u)))
+      ( G y)
 ```
 
 ### Any map out of the empty type is De Morgan

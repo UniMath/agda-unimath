@@ -31,6 +31,7 @@ open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
@@ -242,6 +243,33 @@ is-de-morgan-prop-is-contr H =
 is-de-morgan-prop-is-empty :
   {l : Level} {P : UU l} → is-empty P → is-de-morgan-prop P
 is-de-morgan-prop-is-empty H = is-prop-is-empty H , is-de-morgan-is-empty H
+```
+
+### Dependent sums of De Morgan propositions over decidable propositions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  is-de-morgan-prop-Σ' :
+    is-decidable-prop A → ((x : A) → is-de-morgan (B x)) → is-de-morgan (Σ A B)
+  is-de-morgan-prop-Σ' (is-prop-A , inl a) b =
+    rec-coproduct
+      ( λ nb → inl λ ab → nb (tr B (eq-is-prop is-prop-A) (pr2 ab)))
+      ( λ x → inr (λ z → x (λ b → z (a , b))))
+      ( b a)
+  is-de-morgan-prop-Σ' (is-prop-A , inr na) b = inl (λ ab → na (pr1 ab))
+
+  is-de-morgan-prop-Σ :
+    is-decidable-prop A →
+    ((x : A) → is-de-morgan-prop (B x)) →
+    is-de-morgan-prop (Σ A B)
+  is-de-morgan-prop-Σ a b =
+    ( is-prop-Σ
+      ( is-prop-type-is-decidable-prop a)
+      ( is-prop-type-is-de-morgan-prop ∘ b)) ,
+    ( is-de-morgan-prop-Σ' a (is-de-morgan-type-is-de-morgan-prop ∘ b))
 ```
 
 ## External links

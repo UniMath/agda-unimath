@@ -288,52 +288,46 @@ abstract
 
 ### De Morgan embeddings are closed under composition
 
-```text
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {g : B → C} {f : A → B}
   where
 
-  is-de-morgan-map-comp-is-de-morgan-emb :
-    is-de-morgan-emb g →
+  is-de-morgan-map-comp-is-decidable-emb :
+    is-decidable-emb g →
     is-de-morgan-map f →
     is-de-morgan-map (g ∘ f)
-  is-de-morgan-map-comp-is-de-morgan-emb G F =
-    is-de-morgan-map-comp
-      ( is-injective-is-de-morgan-emb G)
-      ( is-de-morgan-map-is-de-morgan-emb G)
+  is-de-morgan-map-comp-is-decidable-emb G F =
+    is-de-morgan-map-comp-is-decidable-map
+      ( is-injective-is-decidable-emb G)
+      ( is-decidable-map-is-decidable-emb G)
       ( F)
 
-  is-de-morgan-prop-map-comp :
-    is-de-morgan-prop-map g →
+  is-de-morgan-prop-map-comp-is-decidable-prop-map :
+    is-decidable-prop-map g →
     is-de-morgan-prop-map f →
     is-de-morgan-prop-map (g ∘ f)
-  is-de-morgan-prop-map-comp K H z =
+  is-de-morgan-prop-map-comp-is-decidable-prop-map K H z =
     is-de-morgan-prop-equiv
       ( compute-fiber-comp g f z)
       ( is-de-morgan-prop-Σ (K z) (H ∘ pr1))
 
-  is-de-morgan-emb-comp :
-    is-de-morgan-emb g →
+  is-de-morgan-emb-comp-is-decidable-emb :
+    is-decidable-emb g →
     is-de-morgan-emb f →
     is-de-morgan-emb (g ∘ f)
-  is-de-morgan-emb-comp K H =
+  is-de-morgan-emb-comp-is-decidable-emb K H =
     is-de-morgan-emb-is-de-morgan-prop-map
-      ( is-de-morgan-prop-map-comp
-        ( is-de-morgan-prop-map-is-de-morgan-emb K)
+      ( is-de-morgan-prop-map-comp-is-decidable-prop-map
+        ( is-decidable-prop-map-is-decidable-emb K)
         ( is-de-morgan-prop-map-is-de-morgan-emb H))
 
 comp-de-morgan-emb :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
-  B ↪ᵈᵐ C → A ↪ᵈᵐ B → A ↪ᵈᵐ C
+  B ↪ᵈ C → A ↪ᵈᵐ B → A ↪ᵈᵐ C
 comp-de-morgan-emb (g , G) (f , F) =
-  ( g ∘ f , is-de-morgan-emb-comp G F)
-
-infixr 15 _∘¬¬_
-_∘¬¬_ :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
-  B ↪ᵈᵐ C → A ↪ᵈᵐ B → A ↪ᵈᵐ C
-_∘¬¬_ = comp-de-morgan-emb
+  ( g ∘ f , is-de-morgan-emb-comp-is-decidable-emb G F)
 ```
 
 ### Left cancellation for De Morgan embeddings
@@ -350,8 +344,8 @@ module _
   is-de-morgan-emb-right-factor' GH G =
     ( is-emb-right-factor g f G (is-emb-is-de-morgan-emb GH) ,
       is-de-morgan-map-right-factor'
-        ( is-de-morgan-map-is-de-morgan-emb GH)
-        ( is-injective-is-emb G))
+        ( is-injective-is-emb G)
+        ( is-de-morgan-map-is-de-morgan-emb GH))
 
   is-de-morgan-emb-right-factor :
       is-de-morgan-emb (g ∘ f) →
@@ -365,20 +359,20 @@ module _
 
 ### In a commuting triangle of maps, if the top and right maps are De Morgan embeddings so is the left map
 
-```text
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   {top : A → B} {left : A → C} {right : B → C}
   (H : left ~ right ∘ top)
   where
 
-  is-de-morgan-emb-left-map-triangle :
+  is-de-morgan-emb-left-map-triangle-is-decidable-emb-top :
     is-de-morgan-emb top →
-    is-de-morgan-emb right →
+    is-decidable-emb right →
     is-de-morgan-emb left
-  is-de-morgan-emb-left-map-triangle T R =
+  is-de-morgan-emb-left-map-triangle-is-decidable-emb-top T R =
     is-de-morgan-emb-htpy H
-      ( is-de-morgan-emb-comp R T)
+      ( is-de-morgan-emb-comp-is-decidable-emb R T)
 ```
 
 ### In a commuting triangle of maps, if the left and right maps are De Morgan embeddings so is the top map
@@ -458,32 +452,6 @@ eq-htpy-de-morgan-emb f g =
   map-inv-is-equiv (is-equiv-htpy-eq-de-morgan-emb f g)
 ```
 
-### Precomposing De Morgan embeddings with equivalences
-
-```text
-equiv-precomp-de-morgan-emb-equiv :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  (C : UU l3) → (B ↪ᵈᵐ C) ≃ (A ↪ᵈᵐ C)
-equiv-precomp-de-morgan-emb-equiv e C =
-  equiv-Σ
-    ( is-de-morgan-emb)
-    ( equiv-precomp e C)
-    ( λ g →
-      equiv-iff-is-prop
-        ( is-prop-is-de-morgan-emb g)
-        ( is-prop-is-de-morgan-emb (g ∘ map-equiv e))
-        ( λ H →
-          is-de-morgan-emb-comp H
-            ( is-de-morgan-emb-is-equiv (pr2 e)))
-        ( λ d →
-          is-de-morgan-emb-htpy
-            ( λ b → ap g (inv (is-section-map-inv-equiv e b)))
-            ( is-de-morgan-emb-comp
-              ( d)
-              ( is-de-morgan-emb-is-equiv
-                ( is-equiv-map-inv-equiv e)))))
-```
-
 ### Any map out of the empty type is a De Morgan embedding
 
 ```agda
@@ -497,10 +465,6 @@ de-morgan-emb-ex-falso :
   {l : Level} {X : UU l} → empty ↪ᵈᵐ X
 de-morgan-emb-ex-falso =
   ( ex-falso , is-de-morgan-emb-ex-falso)
-
--- de-morgan-emb-is-empty :
---   {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → A ↪ᵈᵐ B
--- de-morgan-emb-is-empty {A = A} f = ?
 ```
 
 ### The map on total spaces induced by a family of De Morgan embeddings is a De Morgan embedding
@@ -550,40 +514,38 @@ module _
         ( is-de-morgan-emb-map-de-morgan-emb f))
 ```
 
-### The functoriality of dependent pair types preserves De Morgan embeddings
+### The functoriality of dependent pair types on De Morgan embeddings
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
   where
 
   is-de-morgan-emb-map-Σ :
     {f : A → B} {g : (x : A) → C x → D (f x)} →
-    is-de-morgan-emb f →
+    is-decidable-emb f →
     ((x : A) → is-de-morgan-emb (g x)) →
     is-de-morgan-emb (map-Σ D f g)
   is-de-morgan-emb-map-Σ {f} {g} F G =
-    is-de-morgan-emb-left-map-triangle
+    is-de-morgan-emb-left-map-triangle-is-decidable-emb-top
       ( triangle-map-Σ D f g)
       ( is-de-morgan-emb-tot G)
-      ( is-de-morgan-emb-map-Σ-map-base D F)
+      ( is-decidable-emb-map-Σ-map-base D F)
 
   de-morgan-emb-Σ :
-    (f : A ↪ᵈᵐ B) →
-    ((x : A) → C x ↪ᵈᵐ D (map-de-morgan-emb f x)) →
+    (f : A ↪ᵈ B) →
+    ((x : A) → C x ↪ᵈᵐ D (map-decidable-emb f x)) →
     Σ A C ↪ᵈᵐ Σ B D
   de-morgan-emb-Σ f g =
-    ( ( map-Σ D
-        ( map-de-morgan-emb f)
-        ( map-de-morgan-emb ∘ g)) ,
+    ( ( map-Σ D (map-decidable-emb f) (map-de-morgan-emb ∘ g)) ,
       ( is-de-morgan-emb-map-Σ
-        ( is-de-morgan-emb-map-de-morgan-emb f)
+        ( is-decidable-emb-map-decidable-emb f)
         ( is-de-morgan-emb-map-de-morgan-emb ∘ g)))
 ```
 
 ### Products of De Morgan embeddings are De Morgan embeddings
 
-```text
+```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   where
