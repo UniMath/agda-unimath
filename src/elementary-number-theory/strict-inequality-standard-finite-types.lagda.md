@@ -27,6 +27,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Definitions
 
+
+### The strict inequality relation on the standard finite types
+
 ```agda
 le-Fin-Prop : (k : ℕ) → Fin k → Fin k → Prop lzero
 le-Fin-Prop (succ-ℕ k) (inl x) (inl y) = le-Fin-Prop k x y
@@ -39,7 +42,11 @@ le-Fin k x y = type-Prop (le-Fin-Prop k x y)
 is-prop-le-Fin :
   (k : ℕ) (x y : Fin k) → is-prop (le-Fin k x y)
 is-prop-le-Fin k x y = is-prop-type-Prop (le-Fin-Prop k x y)
+```
 
+### The predicate on maps between standard finite types of preserving strict inequality
+
+```agda
 preserves-le-Fin : (n m : ℕ) → (Fin n → Fin m) → UU lzero
 preserves-le-Fin n m f =
   (a b : Fin n) →
@@ -54,6 +61,7 @@ is-prop-preserves-le-Fin n m f =
   is-prop-Π λ b →
   is-prop-Π λ p →
   is-prop-le-Fin m (f a) (f b)
+```
 
 restriction-preserves-le-Fin' :
   (m n : ℕ) (f : Fin (succ-ℕ m) → Fin (succ-ℕ n)) →
