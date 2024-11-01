@@ -17,8 +17,9 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
 open import foundation.universe-levels
+
+open import foundation-core.torsorial-type-families
 
 open import order-theory.preorders
 ```

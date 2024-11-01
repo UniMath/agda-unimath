@@ -12,14 +12,15 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.logical-equivalences
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.least-upper-bounds-posets
 open import order-theory.posets
+open import order-theory.resizing-posets
 ```
 
 </details>
@@ -167,25 +168,22 @@ module _
     is-least-upper-bound-family-of-elements-Poset poset-resize-type-Suplattice x
       ( sup-resize-type-Suplattice x)
   is-least-upper-bound-sup-resize-type-Suplattice x u =
-      ( λ y →
-        concatenate-eq-leq-Poset
+      ( concatenate-eq-leq-Poset
           ( poset-Suplattice P)
-          ( is-section-map-inv-equiv e (sup-Suplattice P (map-equiv e ∘ x)))
-          ( pr1
-            ( is-least-upper-bound-sup-Suplattice P (map-equiv e ∘ x) (map-equiv e u))
-            ( y))) ,
-      ( λ v i →
-        pr2
+          ( is-section-map-inv-equiv e (sup-Suplattice P (map-equiv e ∘ x))) ∘
+        pr1
           ( is-least-upper-bound-sup-Suplattice P
             ( map-equiv e ∘ x)
-            ( map-equiv e u))
+            ( map-equiv e u))) ,
+      ( pr2
+          ( is-least-upper-bound-sup-Suplattice P
+            ( map-equiv e ∘ x)
+            ( map-equiv e u)) ∘
           ( concatenate-eq-leq-Poset
             ( poset-Suplattice P)
             ( inv
               ( is-section-map-inv-equiv e
-                ( sup-Suplattice P (map-equiv e ∘ x))))
-            ( v))
-          ( i))
+                ( sup-Suplattice P (map-equiv e ∘ x))))))
 
   is-suplattice-resize-type-Suplattice :
     is-suplattice-Poset l4 poset-resize-type-Suplattice

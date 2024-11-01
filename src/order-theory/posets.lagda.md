@@ -189,19 +189,3 @@ module _
 ```
 
 It remains to show that these constructions form inverses to eachother.
-
-### Resizing the underlying type of a poset
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1}
-  where
-
-  resize-type-Poset :
-    (P : Poset l2 l3) → A ≃ type-Poset P → Poset l1 l3
-  resize-type-Poset P e =
-    ( resize-type-Preorder (preorder-Poset P) e ,
-      ( λ x y p q →
-      is-injective-equiv e
-        ( antisymmetric-leq-Poset P (map-equiv e x) (map-equiv e y) p q)))
-```

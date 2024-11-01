@@ -168,23 +168,3 @@ module _
 ```
 
 It remains to show that these constructions form inverses to eachother.
-
-### Resizing the underlying type of a preorder
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1}
-  where
-
-  resize-type-Preorder :
-    (P : Preorder l2 l3) → A ≃ type-Preorder P → Preorder l1 l3
-  resize-type-Preorder P e =
-    ( ( A) ,
-      ( λ x y → leq-prop-Preorder P (map-equiv e x) (map-equiv e y)) ,
-      ( λ x → refl-leq-Preorder P (map-equiv e x)) ,
-      ( λ x y z →
-        transitive-leq-Preorder P
-          ( map-equiv e x)
-          ( map-equiv e y)
-          ( map-equiv e z)))
-```
