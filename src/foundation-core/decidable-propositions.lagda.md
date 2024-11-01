@@ -205,16 +205,21 @@ module _
       ( is-prop-type-is-decidable-prop ∘ K)
 
   is-decidable-is-decidable-prop-Σ : is-decidable (Σ P Q)
-  is-decidable-is-decidable-prop-Σ with is-decidable-type-is-decidable-prop H
-  ... | inl x =
+  is-decidable-is-decidable-prop-Σ =
     rec-coproduct
-      ( λ y → inl (x , y))
-      ( λ ny →
-        inr
-          ( λ xy →
-            ny (tr Q (eq-is-prop (is-prop-type-is-decidable-prop H)) (pr2 xy))))
-      ( is-decidable-type-is-decidable-prop (K x))
-  ... | inr nx = inr (λ xy → nx (pr1 xy))
+      ( λ x →
+        rec-coproduct
+          ( λ y → inl (x , y))
+          ( λ ny →
+            inr
+              ( λ xy →
+                ny
+                  ( tr Q
+                    ( eq-is-prop (is-prop-type-is-decidable-prop H))
+                    ( pr2 xy))))
+          ( is-decidable-type-is-decidable-prop (K x)))
+      ( λ nx → inr (λ xy → nx (pr1 xy)))
+      ( is-decidable-type-is-decidable-prop H)
 
   is-decidable-prop-Σ : is-decidable-prop (Σ P Q)
   is-decidable-prop-Σ =

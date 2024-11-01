@@ -26,6 +26,7 @@ open import foundation-core.propositions
 
 open import logic.de-morgans-law
 
+open import orthogonal-factorization-systems.double-negation-sheaves
 open import orthogonal-factorization-systems.null-types
 ```
 
@@ -34,8 +35,8 @@ open import orthogonal-factorization-systems.null-types
 ## Idea
 
 {{#concept "De morgan sheaves" Agda=is-de-morgan-sheaf}} are types that are
-[null](orthogonal-factorization-systems.null-types.md) at propositions of the
-form `¬P ∨ ¬¬P`.
+[null](orthogonal-factorization-systems.null-types.md) at
+[propositions](foundation-core.propositions.md) of the form `¬P ∨ ¬¬P`.
 
 De Morgan sheaves are closely related to, but a strictly weaker notion than
 [double negation sheaves](orthogonal-factorization-systems.double-negation-sheaves.md).
@@ -57,13 +58,6 @@ is-prop-is-de-morgan-sheaf {A = A} =
 ```
 
 ## Properties
-
-### A type is a De Morgan sheaf if and only if it is local at the De Morgan implication
-
-A type is null at `¬P ∨ ¬¬ P` for all types `P` if and only if it is local at
-`(¬ P ∨ ¬ Q) ⇒ ¬ (P ∧ Q)` for all types `P` and `Q`.
-
-> TODO: check this
 
 ### The empty type is a De Morgan sheaf
 
@@ -87,16 +81,19 @@ is-de-morgan-sheaf-is-contr is-contr-A P =
 
 ### Double negation sheaves are De Morgan sheaves
 
-> TODO
-
-### Types that are De Morgan sheaves are De Morgan
-
-> TODO
-
-### De Morgan types are De Morgan sheaves
-
-> TODO
+```agda
+is-de-morgan-sheaf-is-double-negation-sheaf :
+  {l1 l2 : Level} {A : UU l1} →
+  is-double-negation-sheaf l2 A →
+  is-de-morgan-sheaf l2 A
+is-de-morgan-sheaf-is-double-negation-sheaf H P =
+  H (is-decidable-prop-Irrefutable-Prop (neg-type-Prop P))
+```
 
 ## References
 
 {{#bibliography}}
+
+## External links
+
+- [De Morganization](https://ncatlab.org/nlab/show/De+Morganization) at $n$Lab

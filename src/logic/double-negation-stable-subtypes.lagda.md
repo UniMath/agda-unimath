@@ -10,7 +10,6 @@ module logic.double-negation-stable-subtypes where
 open import foundation.1-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import logic.double-negation-elimination
 open import foundation.double-negation-stable-propositions
 open import foundation.equality-dependent-function-types
 open import foundation.functoriality-cartesian-product-types
@@ -36,6 +35,7 @@ open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
 open import logic.double-negation-eliminating-maps
+open import logic.double-negation-elimination
 open import logic.double-negation-stable-embeddings
 ```
 

@@ -14,7 +14,6 @@ open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import logic.double-negation-elimination
 open import foundation.double-negation-stable-propositions
 open import foundation.embeddings
 open import foundation.fibers-of-maps
@@ -45,6 +44,7 @@ open import foundation-core.injective-maps
 open import foundation-core.torsorial-type-families
 
 open import logic.double-negation-eliminating-maps
+open import logic.double-negation-elimination
 ```
 
 </details>

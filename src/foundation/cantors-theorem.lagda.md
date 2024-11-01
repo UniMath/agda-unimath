@@ -138,6 +138,33 @@ module _
         ( not-in-image-map-theorem-double-negation-stable-Cantor)
 ```
 
+### Cantor's theorem for the set of de morgan subtypes
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (f : X → de-morgan-subtype l2 X)
+  where
+
+  map-theorem-de-morgan-Cantor : de-morgan-subtype l2 X
+  map-theorem-de-morgan-Cantor x = neg-De-morgan-Prop (f x x)
+
+  abstract
+    not-in-image-map-theorem-de-morgan-Cantor :
+      ¬ (fiber f map-theorem-de-morgan-Cantor)
+    not-in-image-map-theorem-de-morgan-Cantor (x , α) =
+      no-fixed-points-neg-De-morgan-Prop
+        ( f x x)
+        ( iff-eq (ap prop-De-morgan-Prop (htpy-eq α x)))
+
+  abstract
+    theorem-de-morgan-Cantor : ¬ (is-surjective f)
+    theorem-de-morgan-Cantor H =
+      apply-universal-property-trunc-Prop
+        ( H map-theorem-de-morgan-Cantor)
+        ( empty-Prop)
+        ( not-in-image-map-theorem-de-morgan-Cantor)
+```
+
 ## References
 
 A proof of Cantor's theorem first appeared in {{#cite Cantor1890/91}} where it

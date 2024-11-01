@@ -91,7 +91,7 @@ De-Morgans-Law = {l1 l2 : Level} → De-Morgans-Law-Level l1 l2
 
 ## Properties
 
-### The constructive De Morgan's laws
+### The constructively valid De Morgan's laws
 
 ```agda
 module _

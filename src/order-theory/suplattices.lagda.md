@@ -1,6 +1,7 @@
 # Suplattices
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
 module order-theory.suplattices where
 ```
 
@@ -9,7 +10,10 @@ module order-theory.suplattices where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.logical-equivalences
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -44,13 +48,13 @@ module _
       ( λ I →
         Π-Prop
           ( I → type-Poset P)
-          ( λ f → has-least-upper-bound-family-of-elements-Poset-Prop P f))
+          ( has-least-upper-bound-family-of-elements-Poset-Prop P))
 
   is-suplattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-suplattice-Poset = type-Prop is-suplattice-Poset-Prop
 
-  is-prop-suplattice-Poset : is-prop is-suplattice-Poset
-  is-prop-suplattice-Poset = is-prop-type-Prop is-suplattice-Poset-Prop
+  is-prop-is-suplattice-Poset : is-prop is-suplattice-Poset
+  is-prop-is-suplattice-Poset = is-prop-type-Prop is-suplattice-Poset-Prop
 
 module _
   {l1 l2 l3 : Level} (P : Poset l1 l2) (H : is-suplattice-Poset l3 P)
@@ -139,6 +143,60 @@ module _
     backward-implication
       ( is-least-upper-bound-sup-Suplattice x (sup-Suplattice x))
       ( refl-leq-Suplattice (sup-Suplattice x))
+```
+
+### Resizing the underlying type of a suplattice
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1}
+  (P : Suplattice l2 l3 l4) (e : A ≃ type-Suplattice P)
+  where
+
+  poset-resize-type-Suplattice : Poset l1 l3
+  poset-resize-type-Suplattice =
+    resize-type-Poset (poset-Suplattice P) e
+
+  sup-resize-type-Suplattice :
+    {I : UU l4} → (I → A) → A
+  sup-resize-type-Suplattice x =
+    map-inv-equiv e (sup-Suplattice P (map-equiv e ∘ x))
+
+  is-least-upper-bound-sup-resize-type-Suplattice :
+    {I : UU l4} (x : I → A) →
+    is-least-upper-bound-family-of-elements-Poset poset-resize-type-Suplattice x
+      ( sup-resize-type-Suplattice x)
+  is-least-upper-bound-sup-resize-type-Suplattice x u =
+      ( λ y →
+        concatenate-eq-leq-Poset
+          ( poset-Suplattice P)
+          ( is-section-map-inv-equiv e (sup-Suplattice P (map-equiv e ∘ x)))
+          ( pr1
+            ( is-least-upper-bound-sup-Suplattice P (map-equiv e ∘ x) (map-equiv e u))
+            ( y))) ,
+      ( λ v i →
+        pr2
+          ( is-least-upper-bound-sup-Suplattice P
+            ( map-equiv e ∘ x)
+            ( map-equiv e u))
+          ( concatenate-eq-leq-Poset
+            ( poset-Suplattice P)
+            ( inv
+              ( is-section-map-inv-equiv e
+                ( sup-Suplattice P (map-equiv e ∘ x))))
+            ( v))
+          ( i))
+
+  is-suplattice-resize-type-Suplattice :
+    is-suplattice-Poset l4 poset-resize-type-Suplattice
+  is-suplattice-resize-type-Suplattice I x =
+    ( sup-resize-type-Suplattice x ,
+      is-least-upper-bound-sup-resize-type-Suplattice x)
+
+  resize-type-Suplattice : Suplattice l1 l3 l4
+  resize-type-Suplattice =
+    ( poset-resize-type-Suplattice ,
+      is-suplattice-resize-type-Suplattice)
 ```
 
 ## External links

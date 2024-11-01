@@ -173,6 +173,10 @@ module _
     (A → B) → (B → A) → is-decidable A → is-decidable B
   is-decidable-iff f g (inl a) = inl (f a)
   is-decidable-iff f g (inr na) = inr (λ b → na (g b))
+
+  is-decidable-iff' :
+    (A ↔ B) → is-decidable A → is-decidable B
+  is-decidable-iff' (f , g) = is-decidable-iff f g
 ```
 
 ### Decidable types are closed under retracts

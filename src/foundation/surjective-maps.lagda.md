@@ -445,7 +445,7 @@ module _
 
   abstract
     is-surjective-left-map-triangle :
-      (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+      (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h) →
       is-surjective g → is-surjective h → is-surjective f
     is-surjective-left-map-triangle f g h H is-surj-g is-surj-h x =
       apply-universal-property-trunc-Prop

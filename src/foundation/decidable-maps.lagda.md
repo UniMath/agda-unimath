@@ -33,12 +33,16 @@ open import foundation-core.retractions
 
 </details>
 
-## Definition
+## Idea
 
 A [map](foundation-core.function-types.md) is said to be
 {{#concept "decidable" Disambiguation="map of types" Agda=is-decidable-map}} if
 its [fibers](foundation-core.fibers-of-maps.md) are
 [decidable types](foundation.decidable-types.md).
+
+## Definition
+
+### The structure on a map of decidability
 
 ```agda
 module _
@@ -47,6 +51,17 @@ module _
 
   is-decidable-map : (A → B) → UU (l1 ⊔ l2)
   is-decidable-map f = (y : B) → is-decidable (fiber f y)
+```
+
+### The type of decidabile maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  decidable-map : UU (l1 ⊔ l2)
+  decidable-map = Σ (A → B) (is-decidable-map)
 ```
 
 ## Properties
@@ -102,9 +117,11 @@ module _
   abstract
     is-decidable-map-right-factor' :
       is-decidable-map (g ∘ f) → is-injective g → is-decidable-map f
-    is-decidable-map-right-factor' GF G y with (GF (g y))
-    ... | inl q = inl (pr1 q , G (pr2 q))
-    ... | inr q = inr (λ x → q ((pr1 x) , ap g (pr2 x)))
+    is-decidable-map-right-factor' GF G y =
+      rec-coproduct
+        ( λ q → inl (pr1 q , G (pr2 q)))
+        ( λ q → inr (λ x → q ((pr1 x) , ap g (pr2 x))))
+        ( GF (g y))
 ```
 
 ### Retracts into types with decidable equality are decidable

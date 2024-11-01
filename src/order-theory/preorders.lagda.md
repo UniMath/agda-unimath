@@ -182,5 +182,9 @@ module _
     ( ( A) ,
       ( λ x y → leq-prop-Preorder P (map-equiv e x) (map-equiv e y)) ,
       ( λ x → refl-leq-Preorder P (map-equiv e x)) ,
-      ( λ x y z → transitive-leq-Preorder P (pr1 e x) (pr1 e y) (pr1 e z)))
+      ( λ x y z →
+        transitive-leq-Preorder P
+          ( map-equiv e x)
+          ( map-equiv e y)
+          ( map-equiv e z)))
 ```
