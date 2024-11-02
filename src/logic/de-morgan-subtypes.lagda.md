@@ -9,14 +9,11 @@ module logic.de-morgan-subtypes where
 ```agda
 open import foundation.1-types
 open import foundation.coproduct-types
-open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.logical-equivalences
-open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.sets
 open import foundation.structured-type-duality
@@ -31,7 +28,6 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
-open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
@@ -39,8 +35,6 @@ open import logic.de-morgan-embeddings
 open import logic.de-morgan-maps
 open import logic.de-morgan-propositions
 open import logic.de-morgan-types
-open import logic.double-negation-eliminating-maps
-open import logic.double-negation-elimination
 ```
 
 </details>

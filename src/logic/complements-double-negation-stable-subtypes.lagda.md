@@ -40,12 +40,12 @@ open import order-theory.posets
 The
 {{#concept "complement" Disambiguation="of a double negation stable subtype" Agda=complement-double-negation-stable-subtype}}
 of a
-[double-negation-stable subtype](foundation.double-negation-stable-subtypes.md)
+[double negation stable subtype](foundation.double-negation-stable-subtypes.md)
 `B ⊆ A` consists of the elements that are not in `B`.
 
 ## Definition
 
-### Complements of double-negation-stable subtypes
+### Complements of double negation stable subtypes
 
 ```agda
 complement-double-negation-stable-subtype :

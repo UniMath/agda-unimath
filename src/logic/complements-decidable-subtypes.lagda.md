@@ -8,10 +8,15 @@ module logic.complements-decidable-subtypes where
 
 ```agda
 open import foundation.complements-subtypes
+open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.double-negation-stable-propositions
+open import foundation.evaluation-functions
 open import foundation.full-subtypes
+open import foundation.involutions
 open import foundation.negation
 open import foundation.postcomposition-functions
 open import foundation.powersets
@@ -54,6 +59,21 @@ complement-decidable-subtype P x = neg-Decidable-Prop (P x)
 
 ## Properties
 
+### Taking complements is an involution on decidable subtypes
+
+```agda
+is-involution-complement-decidable-subtype :
+  {l1 l2 : Level} {A : UU l1} →
+  is-involution (complement-decidable-subtype {l1} {l2} {A})
+is-involution-complement-decidable-subtype P =
+  eq-has-same-elements-decidable-subtype
+    ( complement-decidable-subtype (complement-decidable-subtype P))
+    ( P)
+    ( λ x →
+      double-negation-elim-is-decidable (is-decidable-decidable-subtype P x) ,
+      ev)
+```
+
 ### The union of a subtype `P` with its complement is the full subtype if and only if `P` is a decidable subtype
 
 ```agda
@@ -85,19 +105,4 @@ module _
     is-full-union-subtype-complement-subtype
       ( subtype-decidable-subtype P)
       ( is-decidable-decidable-subtype P)
-```
-
-### Taking complements gives a contravariant involution on the decidable powerset posets
-
-```text
-neg-hom-powerset :
-  {l1 : Level} {A : UU l1} →
-  hom-Large-Poset
-    ( λ l → l)
-    ( powerset-Large-Poset A)
-    ( opposite-Large-Poset (powerset-Large-Poset A))
-neg-hom-powerset =
-  make-hom-Large-Preorder
-    ( λ P x → neg-Prop (P x))
-    ( λ P Q f x → map-neg (f x))
 ```
