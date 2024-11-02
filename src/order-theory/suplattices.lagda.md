@@ -146,57 +146,6 @@ module _
       ( refl-leq-Suplattice (sup-Suplattice x))
 ```
 
-### Resizing the underlying type of a suplattice
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1}
-  (P : Suplattice l2 l3 l4) (e : A ≃ type-Suplattice P)
-  where
-
-  poset-resize-type-Suplattice : Poset l1 l3
-  poset-resize-type-Suplattice =
-    resize-type-Poset (poset-Suplattice P) e
-
-  sup-resize-type-Suplattice :
-    {I : UU l4} → (I → A) → A
-  sup-resize-type-Suplattice x =
-    map-inv-equiv e (sup-Suplattice P (map-equiv e ∘ x))
-
-  is-least-upper-bound-sup-resize-type-Suplattice :
-    {I : UU l4} (x : I → A) →
-    is-least-upper-bound-family-of-elements-Poset poset-resize-type-Suplattice x
-      ( sup-resize-type-Suplattice x)
-  is-least-upper-bound-sup-resize-type-Suplattice x u =
-      ( concatenate-eq-leq-Poset
-          ( poset-Suplattice P)
-          ( is-section-map-inv-equiv e (sup-Suplattice P (map-equiv e ∘ x))) ∘
-        pr1
-          ( is-least-upper-bound-sup-Suplattice P
-            ( map-equiv e ∘ x)
-            ( map-equiv e u))) ,
-      ( pr2
-          ( is-least-upper-bound-sup-Suplattice P
-            ( map-equiv e ∘ x)
-            ( map-equiv e u)) ∘
-          ( concatenate-eq-leq-Poset
-            ( poset-Suplattice P)
-            ( inv
-              ( is-section-map-inv-equiv e
-                ( sup-Suplattice P (map-equiv e ∘ x))))))
-
-  is-suplattice-resize-type-Suplattice :
-    is-suplattice-Poset l4 poset-resize-type-Suplattice
-  is-suplattice-resize-type-Suplattice I x =
-    ( sup-resize-type-Suplattice x ,
-      is-least-upper-bound-sup-resize-type-Suplattice x)
-
-  resize-type-Suplattice : Suplattice l1 l3 l4
-  resize-type-Suplattice =
-    ( poset-resize-type-Suplattice ,
-      is-suplattice-resize-type-Suplattice)
-```
-
 ## External links
 
 - [suplattice](https://ncatlab.org/nlab/show/suplattice) at $n$Lab
