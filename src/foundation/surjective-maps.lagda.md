@@ -239,15 +239,21 @@ abstract
 ### Any equivalence is surjective
 
 ```agda
-is-surjective-is-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-  is-equiv f → is-surjective f
-is-surjective-is-equiv H = is-surjective-has-section (pr1 H)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
-is-surjective-map-equiv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  is-surjective (map-equiv e)
-is-surjective-map-equiv e = is-surjective-is-equiv (is-equiv-map-equiv e)
+  is-surjective-is-equiv : {f : A → B} → is-equiv f → is-surjective f
+  is-surjective-is-equiv H = is-surjective-has-section (pr1 H)
+
+  is-surjective-map-equiv : (e : A ≃ B) → is-surjective (map-equiv e)
+  is-surjective-map-equiv e = is-surjective-is-equiv (is-equiv-map-equiv e)
+
+  surjection-equiv : A ≃ B → A ↠ B
+  surjection-equiv e = map-equiv e , is-surjective-map-equiv e
+
+  surjection-inv-equiv : B ≃ A → A ↠ B
+  surjection-inv-equiv e = surjection-equiv (inv-equiv e)
 ```
 
 ### The identity function is surjective
