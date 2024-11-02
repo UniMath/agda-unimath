@@ -7,20 +7,25 @@ module order-theory.supremum-preserving-maps-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.booleans
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.evaluation-functions
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.raising-universe-levels
+open import foundation.small-types
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import order-theory.least-upper-bounds-posets
+open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
 ```
 
@@ -30,15 +35,44 @@ open import order-theory.posets
 
 A map `f : P → Q` between the underlying types of two
 [posets](order-theory.posets.md) is said to be
-{{#concept "supremum preserving" Disambiguation="map of posets" Agda=preserves-suprema-Poset}}
+{{#concept "supremum preserving" Disambiguation="map of posets" Agda=preserves-suprema-map-Poset}}
 
 ```text
   f(⋃ᵢxᵢ) = ⋃ᵢf(xᵢ)
 ```
 
-for every family `x₍₋₎ : I → P` with a supremum in `P`.
+for every family `x₍₋₎ : I → P` with a
+[supremum](order-theory.least-upper-bounds-posets.md) in `P`.
 
-## Definition
+## Definitions
+
+### The predicate of preserving a supremum
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
+  (f : type-Poset P → type-Poset Q)
+  {I : UU l5} (x : I → type-Poset P)
+  where
+
+  preserves-supremum-map-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  preserves-supremum-map-Poset =
+    (y : has-least-upper-bound-family-of-elements-Poset P x) →
+    is-least-upper-bound-family-of-elements-Poset Q (f ∘ x) (f (pr1 y))
+
+  is-prop-preserves-supremum-map-Poset :
+    is-prop preserves-supremum-map-Poset
+  is-prop-preserves-supremum-map-Poset =
+    is-prop-Π
+      ( λ y →
+        is-prop-is-least-upper-bound-family-of-elements-Poset Q
+          ( f ∘ x)
+          ( f (pr1 y)))
+
+  preserves-supremum-prop-map-Poset : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  preserves-supremum-prop-map-Poset =
+    preserves-supremum-map-Poset , is-prop-preserves-supremum-map-Poset
+```
 
 ### Supremum preserving maps
 
@@ -47,42 +81,30 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  preserves-suprema-Poset :
+  preserves-suprema-map-Poset :
     (l5 : Level) → (type-Poset P → type-Poset Q) →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
-  preserves-suprema-Poset l5 f =
+  preserves-suprema-map-Poset l5 f =
     {I : UU l5} (x : I → type-Poset P)
     (y : has-least-upper-bound-family-of-elements-Poset P x) →
     is-least-upper-bound-family-of-elements-Poset Q (f ∘ x) (f (pr1 y))
 
-  is-prop-preserves-suprema-Poset :
+  is-prop-preserves-suprema-map-Poset :
     {l5 : Level} (f : type-Poset P → type-Poset Q) →
-    is-prop (preserves-suprema-Poset l5 f)
-  is-prop-preserves-suprema-Poset f =
+    is-prop (preserves-suprema-map-Poset l5 f)
+  is-prop-preserves-suprema-map-Poset f =
     is-prop-implicit-Π
-      ( λ I →
-        is-prop-Π
-          ( λ x →
-            is-prop-Π
-              ( λ y →
-                is-prop-is-least-upper-bound-family-of-elements-Poset Q
-                  ( f ∘ x)
-                  ( f (pr1 y)))))
+      ( λ I → is-prop-Π (is-prop-preserves-supremum-map-Poset P Q f))
 
-  preserves-suprema-prop-Poset :
+  preserves-suprema-prop-map-Poset :
     (l5 : Level) →
     (type-Poset P → type-Poset Q) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
-  preserves-suprema-prop-Poset l5 f =
-    preserves-suprema-Poset l5 f , (is-prop-preserves-suprema-Poset f)
-
-  -- preserves-suprema-Poset :
-  --   (type-Poset P → type-Poset Q) → UU {!   !}
-  -- preserves-suprema-Poset f =
-  --   type-Prop (preserves-suprema-prop-Poset f)
+  preserves-suprema-prop-map-Poset l5 f =
+    preserves-suprema-map-Poset l5 f , (is-prop-preserves-suprema-map-Poset f)
 
   hom-sup-Poset : (l5 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
   hom-sup-Poset l5 =
-    Σ (type-Poset P → type-Poset Q) (preserves-suprema-Poset l5)
+    Σ (type-Poset P → type-Poset Q) (preserves-suprema-map-Poset l5)
 
   map-hom-sup-Poset :
     {l5 : Level} → hom-sup-Poset l5 → type-Poset P → type-Poset Q
@@ -90,7 +112,7 @@ module _
 
   preserves-suprema-map-hom-sup-Poset :
     {l5 : Level} (f : hom-sup-Poset l5) →
-    preserves-suprema-Poset l5 (map-hom-sup-Poset f)
+    preserves-suprema-map-Poset l5 (map-hom-sup-Poset f)
   preserves-suprema-map-hom-sup-Poset = pr2
 
   sup-map-hom-sup-Poset :
@@ -100,6 +122,52 @@ module _
     has-least-upper-bound-family-of-elements-Poset Q (map-hom-sup-Poset f ∘ x)
   sup-map-hom-sup-Poset f {x = x} y =
     ( map-hom-sup-Poset f (pr1 y) , preserves-suprema-map-hom-sup-Poset f x y)
+```
+
+## Properties
+
+### Supremum preserving maps preserve suprema over small types
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
+  where
+
+  preserves-small-supremum-preserves-suprema-map-Poset :
+    {f : type-Poset P → type-Poset Q} → preserves-suprema-map-Poset P Q l5 f →
+    {I : UU l6} (u : is-small l5 I) (x : I → type-Poset P) →
+    preserves-supremum-map-Poset P Q f (x ∘ map-inv-equiv-is-small u)
+  preserves-small-supremum-preserves-suprema-map-Poset H u x =
+    H (x ∘ map-inv-equiv-is-small u)
+```
+
+### Supremum preserving maps preserve order
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
+  where
+
+  abstract
+    preserves-order-preserves-suprema-map-Poset :
+      {f : type-Poset P → type-Poset Q} →
+      preserves-suprema-map-Poset P Q l5 f →
+      preserves-order-Poset P Q f
+    preserves-order-preserves-suprema-map-Poset {f} H x y p =
+      pr2
+        ( preserves-small-supremum-preserves-suprema-map-Poset P Q H
+          ( Raise l5 bool)
+          ( family-of-elements-has-least-binary-upper-bound-Poset P x y
+            ( has-least-binary-upper-bound-leq-Poset P x y p))
+          ( y ,
+            λ z →
+            ( ( ev (map-raise false)) ,
+              ( λ where
+                u (map-raise true) → transitive-leq-Poset P x y z u p
+                u (map-raise false) → u)))
+          ( f y))
+        ( refl-leq-Poset Q (f y))
+        ( map-raise true)
 ```
 
 ### Homotopies of supremum preserving maps
@@ -124,7 +192,7 @@ module _
   is-torsorial-htpy-hom-sup-Poset f =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy (map-hom-sup-Poset P Q f))
-      ( is-prop-preserves-suprema-Poset P Q)
+      ( is-prop-preserves-suprema-map-Poset P Q)
       ( map-hom-sup-Poset P Q f)
       ( refl-htpy)
       ( preserves-suprema-map-hom-sup-Poset P Q f)
@@ -155,7 +223,7 @@ module _
   where
 
   preserves-suprema-id-Poset :
-    {l3 : Level} → preserves-suprema-Poset P P l3 (id {A = type-Poset P})
+    {l3 : Level} → preserves-suprema-map-Poset P P l3 (id {A = type-Poset P})
   preserves-suprema-id-Poset x y = pr2 y
 
   id-hom-sup-Poset : (l3 : Level) → hom-sup-Poset P P l3
@@ -172,7 +240,7 @@ module _
 
   preserves-suprema-comp-Poset :
     (g : hom-sup-Poset Q R l7) (f : hom-sup-Poset P Q l7) →
-    preserves-suprema-Poset P R l7
+    preserves-suprema-map-Poset P R l7
       ( map-hom-sup-Poset Q R g ∘ map-hom-sup-Poset P Q f)
   preserves-suprema-comp-Poset g f x y H =
     preserves-suprema-map-hom-sup-Poset Q R g

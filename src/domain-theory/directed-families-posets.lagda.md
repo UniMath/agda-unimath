@@ -1,7 +1,7 @@
 # Directed families in posets
 
 ```agda
-module domain-theory.directed-families where
+module domain-theory.directed-families-posets where
 ```
 
 <details><summary>Imports</summary>
@@ -31,7 +31,9 @@ that for any two elements `i j : I` there
 [exists](foundaiton.existential-quantification.md) an element `k : I` such that
 both `x i ≤ x k` and `x j ≤ x k` hold.
 
-## Definition
+## Definitions
+
+### The predicate on a family of being directed
 
 ```agda
 is-directed-family-Poset-Prop :
@@ -52,7 +54,11 @@ is-directed-family-Poset :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
   (α : type-Inhabited-Type I → type-Poset P) → UU (l2 ⊔ l3)
 is-directed-family-Poset P I x = type-Prop (is-directed-family-Poset-Prop P I x)
+```
 
+### The type of directed families in a poset
+
+```agda
 directed-family-Poset :
   {l1 l2 : Level} (l3 : Level) → Poset l1 l2 → UU (l1 ⊔ l2 ⊔ lsuc l3)
 directed-family-Poset l3 P =
