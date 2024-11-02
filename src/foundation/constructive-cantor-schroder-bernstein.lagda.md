@@ -11,10 +11,14 @@ module foundation.constructive-cantor-schroder-bernstein where
 open import foundation.action-on-identifications-functions
 open import foundation.complements-subtypes
 open import foundation.decidable-embeddings
+open import foundation.decidable-maps
+open import foundation.decidable-propositions
+open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import logic.double-negation-stable-embeddings
 open import foundation.fixed-points-endofunctions
+open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.images-embeddings
 open import foundation.injective-maps
 open import foundation.negation
@@ -23,6 +27,7 @@ open import foundation.powersets
 open import foundation.propositional-maps
 open import foundation.propositional-resizing
 open import foundation.split-surjective-maps
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
@@ -33,12 +38,16 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.sets
 
+open import logic.de-morgan-maps
+open import logic.double-negation-stable-embeddings
+
+open import order-theory.inflattices
 open import order-theory.knaster-tarski-fixed-point-theorem
 open import order-theory.opposite-large-posets
 open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-posets
+open import order-theory.resizing-suplattices
 open import order-theory.suplattices
-open import order-theory.inflattices
 ```
 
 </details>
@@ -59,11 +68,6 @@ type-constructive-Cantor-Schröder-Bernstein :
   (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
 type-constructive-Cantor-Schröder-Bernstein l1 l2 =
   {X : UU l1} {Y : UU l2} → (X ↪ᵈ Y) → (Y ↪ᵈ X) → X ≃ Y
-
--- type-constructive-Cantor-Schröder-Bernstein' :
---   (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
--- type-constructive-Cantor-Schröder-Bernstein' l1 l2 =
---   {X : UU l1} {Y : UU l2} → (X ↪ᵈ Y) → (Y ↪ᵈᵐ X) → X ≃ Y
 ```
 
 ## Proof
@@ -142,9 +146,9 @@ If `g` is double negation stable we also have the equality
   g(Y\f(S)) = X\S.
 ```
 
-This gives us an inverse map `g⁻¹ : X\S → Y` and similarly there is an inverse
-map `f⁻¹ : Y\T → X`. Now, if `S` and `f(S)` were decidable subtypes, we could
-define a new total map `h : X → Y` by
+Since `f` and `g` are embeddings, this gives us inverse maps `g⁻¹ : X\S → Y` and
+`f⁻¹ : Y\T → X`. Now, if `S` and `f(S)` were decidable subtypes, we could define
+a new total map `h : X → Y` by
 
 ```text
   h(x) = f  (x)  if  x ∈ S
@@ -154,18 +158,16 @@ define a new total map `h : X → Y` by
 and a converse map
 
 ```text
-  h'(x) = f⁻¹(x)  if  x ∈ f(S)
-  h'(x) = g  (x)  if  x ∉ f(S).
+  h⁻¹(x) = f⁻¹(x)  if  x ∈ f(S)
+  h⁻¹(x) = g  (x)  if  x ∉ f(S).
 ```
-
-Clearly, this gives a pair of mutually inverse maps.
 
 Here we're not using the existence of `T` at all, nor that `S` is a greatest
 fixed point or that `g` satisfies decidability, only double negation stability.
+However, to show that `h⁻¹` is a right inverse of `h` on `Y\f(S)`, we need
+decidability of `g` as well.
 
 ```agda
-
-
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪ Y)
   where
@@ -186,12 +188,12 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪ Y) (g : Y ↪ X)
   where
 
-  hom-powerset-Cantor-Schröder-Bernstein :
+  hom-large-powerset-Cantor-Schröder-Bernstein :
     hom-Large-Poset
       ( λ l3 → l1 ⊔ l2 ⊔ l3)
       ( powerset-Large-Poset X)
       ( powerset-Large-Poset X)
-  hom-powerset-Cantor-Schröder-Bernstein =
+  hom-large-powerset-Cantor-Schröder-Bernstein =
     comp-hom-Large-Poset
       ( powerset-Large-Poset X)
       ( opposite-Large-Poset (powerset-Large-Poset Y))
@@ -202,64 +204,98 @@ module _
         ( hom-half-way-powerset-Cantor-Schröder-Bernstein g))
       ( hom-half-way-powerset-Cantor-Schröder-Bernstein f)
 
-  hom-small-powerset-Cantor-Schröder-Bernstein :
-    (l : Level) →
+  hom-powerset-Cantor-Schröder-Bernstein :
     hom-Poset
-      ( powerset-Poset l X)
-      ( powerset-Poset (l1 ⊔ l2 ⊔ l) X)
-  hom-small-powerset-Cantor-Schröder-Bernstein =
+      ( powerset-Poset (l1 ⊔ l2) X)
+      ( powerset-Poset (l1 ⊔ l2) X)
+  hom-powerset-Cantor-Schröder-Bernstein =
     hom-poset-hom-Large-Poset
       ( powerset-Large-Poset X)
       ( powerset-Large-Poset X)
-      ( hom-powerset-Cantor-Schröder-Bernstein)
-
+      ( hom-large-powerset-Cantor-Schröder-Bernstein)
+      ( l1 ⊔ l2)
 ```
 
 ### Impredicative proof using the Knaster–Tarski fixed point theorem
 
-```text
+```agda
 module _
-  {l1 l2 : Level} (resize-prop : propositional-resizing (l1 ⊔ l2) (l1 ⊔ l2))
+  {l1 l2 : Level}
+  (resize-prop : propositional-resizing-Level (l1 ⊔ l2) (l1 ⊔ l2))
   {X : UU l1} {Y : UU l2} (f : X ↪ Y) (g : Y ↪ X)
   where
 
   fixed-point-domain-Cantor-Schröder-Bernstein :
-    fixed-point {!   !}
-      -- ( map-hom-Poset
-      --   ( powerset-Poset (l1 ⊔ l2) X)
-      --   ( powerset-Poset (l1 ⊔ l2) X)
-      --   ( hom-small-powerset-Cantor-Schröder-Bernstein f g (l1 ⊔ l2)))
+    fixed-point
+      ( map-hom-Poset
+        ( powerset-Poset (l1 ⊔ l2) X)
+        ( powerset-Poset (l1 ⊔ l2) X)
+        ( hom-powerset-Cantor-Schröder-Bernstein f g))
   fixed-point-domain-Cantor-Schröder-Bernstein =
     fixed-point-knaster-tarski-Suplattice
-      ( resize-type-Suplattice (powerset-Suplattice X {!   !} {!   !}) {!   !}) {!   !} {!   !}
+      ( resize-type-Suplattice
+        ( powerset-Suplattice X {! l1 ⊔ l2 !} lzero)
+        {!   !})
+      {!  hom-powerset-Cantor-Schröder-Bernstein f g !}
+      {!   !}
+      -- ( resize-type-Suplattice (powerset-Suplattice X {!   !} {!   !}) {!   !}) {!   !} {!   !}
 ```
 
 Since the fixed point is an image of `g` by double negation stability, it must
 be decidable.
 
-```text
+```agda
 module _
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪ Y) (g : Y ↪¬¬ X)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪ Y) (g : Y ↪ X)
   (S :
     fixed-point
       ( map-hom-Poset
         ( powerset-Poset (l1 ⊔ l2) X)
         ( powerset-Poset (l1 ⊔ l2) X)
-        ( hom-small-powerset-Cantor-Schröder-Bernstein f g (l1 ⊔ l2))))
+        ( hom-powerset-Cantor-Schröder-Bernstein f g)))
   where
 
   is-decidable-subtype-fixed-point-Cantor-Schröder-Bernstein :
-    is-decidable-subtype S
+    is-decidable-map (map-emb f) →
+    is-de-morgan-map (map-emb g) →
+    is-decidable-subtype (pr1 S)
+  is-decidable-subtype-fixed-point-Cantor-Schröder-Bernstein F G x =
+    tr is-decidable (ap pr1 (htpy-eq (pr2 S) x))
+      ( rec-coproduct
+        ( λ ngx → inl (ngx ∘ pr1))
+        ( λ nngx → rec-coproduct {!   !} {!   !} (F {!   !}))
+        ( G x))
 
-  map-impredicative-Cantor-Schröder-Bernstein : X → Y
+  is-decidable-subtype-fixed-point-Cantor-Schröder-Bernstein' :
+    is-decidable-map (map-emb f) →
+    is-decidable-map (map-emb g) →
+    is-decidable-subtype (pr1 S)
+  is-decidable-subtype-fixed-point-Cantor-Schröder-Bernstein' F G x =
+    tr is-decidable (ap pr1 (htpy-eq (pr2 S) x))
+      ( rec-coproduct
+        ( λ gx →
+          rec-coproduct
+            (λ fx → inr λ h → h (gx , {!   !}))
+            (λ nfgx → {!   !})
+            ( F (pr1 gx)))
+        ( λ ngx → inl (ngx ∘ pr1))
+        ( G x))
+
+  -- is-decidable-subtype-fixed-point-Cantor-Schröder-Bernstein' :
+  --   is-decidable-map (map-emb g) →
+  --   is-decidable-subtype (pr1 S)
+  -- is-decidable-subtype-fixed-point-Cantor-Schröder-Bernstein' G x with (G x)
+  -- ... | inl y = tr is-decidable (ap pr1 (htpy-eq (pr2 S) x)) (inr λ np → np (y , λ h → {!  !}))
+  -- ... | inr y = tr is-decidable (ap pr1 (htpy-eq (pr2 S) x)) (inl (y ∘ pr1))
+    -- tr is-decidable (ap pr1 (htpy-eq (pr2 S) x)) ({!   !})
 ```
 
 We can define mutual inverse maps from the given fixed point. For the inverse
-map we need decidability of `f`.
+map we need decidability of `f` and `g`.
 
 ```text
 module _
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪ᵈ Y) (g : Y ↪¬¬ X)
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪ᵈ Y) (g : Y ↪ᵈ X)
   (S :
     fixed-point
       ( map-hom-Poset
@@ -268,8 +304,8 @@ module _
         ( hom-small-powerset-Cantor-Schröder-Bernstein f g (l1 ⊔ l2))))
   where
 
-
   map-inv-impredicative-Cantor-Schröder-Bernstein : Y → X
+  map-inv-impredicative-Cantor-Schröder-Bernstein = ?
 
   is-section-map-inv-impredicative-Cantor-Schröder-Bernstein :
     is-section
