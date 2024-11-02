@@ -7,6 +7,8 @@ module domain-theory.directed-complete-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import domain-theory.directed-families
+
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -16,7 +18,6 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.directed-families
 open import order-theory.least-upper-bounds-posets
 open import order-theory.posets
 ```
@@ -27,7 +28,7 @@ open import order-theory.posets
 
 A {{#concept "directed complete poset"  Agda=Directed-Complete-Poset}} is a
 [poset](order-theory.posets.md) such that all
-[directed families](order-theory.directed-families.md) have
+[directed families](domain-theory.directed-families.md) have
 [least upper bounds](order-theory.least-upper-bounds-posets.md).
 
 ## Definitions
@@ -70,7 +71,7 @@ module _
   is-least-upper-bound-sup-is-directed-complete-Poset F = pr2 (H F)
 ```
 
-### Suplattices
+### Directed complete posets
 
 ```agda
 Directed-Complete-Poset :
