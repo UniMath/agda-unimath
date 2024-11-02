@@ -20,11 +20,11 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.order-preserving-maps-posets
 open import order-theory.least-upper-bounds-posets
+open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
-open import order-theory.suplattices
 open import order-theory.resizing-posets
+open import order-theory.suplattices
 ```
 
 </details>
