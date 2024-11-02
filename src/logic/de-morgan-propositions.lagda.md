@@ -272,6 +272,42 @@ module _
     ( is-de-morgan-prop-Σ' a (is-de-morgan-type-is-de-morgan-prop ∘ b))
 ```
 
+### The negation operation on decidable propositions
+
+```agda
+is-de-morgan-prop-neg :
+  {l1 : Level} {A : UU l1} → is-de-morgan A → is-de-morgan-prop (¬ A)
+is-de-morgan-prop-neg is-de-morgan-A =
+  ( is-prop-neg , is-de-morgan-neg is-de-morgan-A)
+
+neg-type-De-Morgan-Prop :
+  {l1 : Level} (A : UU l1) → is-de-morgan A → De-Morgan-Prop l1
+neg-type-De-Morgan-Prop A is-de-morgan-A =
+  ( ¬ A , is-de-morgan-prop-neg is-de-morgan-A)
+
+neg-De-Morgan-Prop :
+  {l1 : Level} → De-Morgan-Prop l1 → De-Morgan-Prop l1
+neg-De-Morgan-Prop P =
+  neg-type-De-Morgan-Prop
+    ( type-De-Morgan-Prop P)
+    ( is-de-morgan-type-De-Morgan-Prop P)
+
+type-neg-De-Morgan-Prop :
+  {l1 : Level} → De-Morgan-Prop l1 → UU l1
+type-neg-De-Morgan-Prop P = type-De-Morgan-Prop (neg-De-Morgan-Prop P)
+```
+
+### Negation has no fixed points on decidable propositions
+
+```agda
+abstract
+  no-fixed-points-neg-De-Morgan-Prop :
+    {l : Level} (P : De-Morgan-Prop l) →
+    ¬ (type-De-Morgan-Prop P ↔ ¬ (type-De-Morgan-Prop P))
+  no-fixed-points-neg-De-Morgan-Prop P =
+    no-fixed-points-neg (type-De-Morgan-Prop P)
+```
+
 ## External links
 
 - [De Morgan laws, in constructive mathematics](https://ncatlab.org/nlab/show/De+Morgan+laws#in_constructive_mathematics)

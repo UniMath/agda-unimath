@@ -358,6 +358,13 @@ module _
     inr (is-irrefutable-product nna nnb)
 ```
 
+### The negation of a De Morgan type is De Morgan
+
+```agda
+is-de-morgan-neg : {l : Level} {A : UU l} → is-de-morgan A → is-de-morgan (¬ A)
+is-de-morgan-neg = is-decidable-neg
+```
+
 ## External links
 
 - [De Morgan laws, in constructive mathematics](https://ncatlab.org/nlab/show/De+Morgan+laws#in_constructive_mathematics)

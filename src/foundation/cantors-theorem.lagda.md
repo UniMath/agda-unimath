@@ -24,6 +24,8 @@ open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
 
+open import logic.de-morgan-propositions
+open import logic.de-morgan-subtypes
 open import logic.double-negation-stable-subtypes
 ```
 
@@ -146,15 +148,15 @@ module _
   where
 
   map-theorem-de-morgan-Cantor : de-morgan-subtype l2 X
-  map-theorem-de-morgan-Cantor x = neg-De-morgan-Prop (f x x)
+  map-theorem-de-morgan-Cantor x = neg-De-Morgan-Prop (f x x)
 
   abstract
     not-in-image-map-theorem-de-morgan-Cantor :
       ¬ (fiber f map-theorem-de-morgan-Cantor)
     not-in-image-map-theorem-de-morgan-Cantor (x , α) =
-      no-fixed-points-neg-De-morgan-Prop
+      no-fixed-points-neg-De-Morgan-Prop
         ( f x x)
-        ( iff-eq (ap prop-De-morgan-Prop (htpy-eq α x)))
+        ( iff-eq (ap prop-De-Morgan-Prop (htpy-eq α x)))
 
   abstract
     theorem-de-morgan-Cantor : ¬ (is-surjective f)
