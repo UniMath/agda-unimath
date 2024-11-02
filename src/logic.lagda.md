@@ -4,6 +4,7 @@
 module logic where
 
 open import logic.complements-decidable-subtypes public
+open import logic.complements-double-negation-stable-subtypes public
 open import logic.de-morgan-embeddings public
 open import logic.de-morgan-maps public
 open import logic.de-morgan-propositions public
