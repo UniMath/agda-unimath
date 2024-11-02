@@ -1,7 +1,6 @@
 # Suplattices
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
 module order-theory.suplattices where
 ```
 

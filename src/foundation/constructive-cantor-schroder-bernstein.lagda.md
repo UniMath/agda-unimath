@@ -1,7 +1,6 @@
 # The constructive Cantor–Schröder–Bernstein theorem
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
 module foundation.constructive-cantor-schroder-bernstein where
 ```
 
