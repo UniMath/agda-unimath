@@ -79,8 +79,8 @@ module _
   (C : chain-Poset l3 X) (D : chain-Poset l4 X)
   where
 
-  inclusion-chain-prop-Poset : Prop (l1 ⊔ l3 ⊔ l4)
-  inclusion-chain-prop-Poset =
+  inclusion-prop-chain-Poset : Prop (l1 ⊔ l3 ⊔ l4)
+  inclusion-prop-chain-Poset =
     inclusion-prop-chain-Preorder (preorder-Poset X) C D
 
   inclusion-chain-Poset : UU (l1 ⊔ l3 ⊔ l4)
@@ -93,5 +93,7 @@ module _
 
 ## External links
 
+- [Total order, chains](https://en.wikipedia.org/wiki/Total_order#Chains) at
+  Wikipedia
 - [chain, in order theory](https://ncatlab.org/nlab/show/chain#in_order_theory)
   at $n$Lab
