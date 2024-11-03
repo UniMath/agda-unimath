@@ -299,11 +299,10 @@ module _
     is-scott-continuous-map-Poset P R l7
       ( map-scott-continuous-hom-Poset Q R g ∘
         map-scott-continuous-hom-Poset P Q f)
-  is-scott-continuous-comp-Poset g f x y H =
+  is-scott-continuous-comp-Poset g f x y =
     is-scott-continuous-map-scott-continuous-hom-Poset Q R g
       ( directed-family-hom-Poset P Q (hom-scott-continuous-hom-Poset P Q f) x)
       ( sup-map-scott-continuous-hom-Poset P Q f x y)
-      ( H)
 
   comp-scott-continuous-hom-Poset :
     (g : scott-continuous-hom-Poset Q R l7)

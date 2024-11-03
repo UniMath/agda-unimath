@@ -27,14 +27,14 @@ open import order-theory.posets
 ## Idea
 
 A
-{{#concept "directed complete poset" WD="complete partial order" WDID=Q3082805  Agda=Directed-Complete-Poset}}
+{{#concept "directed complete poset" WD="complete partial order" WDID=Q3082805 Agda=Directed-Complete-Poset}}
 is a [poset](order-theory.posets.md) such that all
 [directed families](domain-theory.directed-families-posets.md) have
 [least upper bounds](order-theory.least-upper-bounds-posets.md).
 
 ## Definitions
 
-### The predicate on posets of being an directed complete poset
+### The predicate on posets of being a directed complete poset
 
 ```agda
 module _
@@ -46,7 +46,7 @@ module _
     Π-Prop
       ( directed-family-Poset l3 P)
       ( λ F →
-        has-least-upper-bound-family-of-elements-Poset-Prop P
+        has-least-upper-bound-family-of-elements-prop-Poset P
           ( family-directed-family-Poset P F))
 
   is-directed-complete-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)

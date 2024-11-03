@@ -19,6 +19,7 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -57,13 +58,29 @@ module _
   is-prop-leq-Preorder : (x y : type-Preorder) → is-prop (leq-Preorder x y)
   is-prop-leq-Preorder = is-prop-type-Relation-Prop leq-prop-Preorder
 
+  concatenate-eq-leq-Preorder' :
+    {x y z : type-Preorder} → x ＝ y → leq-Preorder x z → leq-Preorder y z
+  concatenate-eq-leq-Preorder' {z = z} = tr (λ p → leq-Preorder p z)
+
   concatenate-eq-leq-Preorder :
     {x y z : type-Preorder} → x ＝ y → leq-Preorder y z → leq-Preorder x z
-  concatenate-eq-leq-Preorder refl = id
+  concatenate-eq-leq-Preorder p = concatenate-eq-leq-Preorder' (inv p)
 
   concatenate-leq-eq-Preorder :
     {x y z : type-Preorder} → leq-Preorder x y → y ＝ z → leq-Preorder x z
-  concatenate-leq-eq-Preorder H refl = H
+  concatenate-leq-eq-Preorder {x} H p = tr (leq-Preorder x) p H
+
+  concatenate-eq-leq-eq-Preorder' :
+    {x y z w : type-Preorder} →
+    x ＝ y → leq-Preorder x z → z ＝ w → leq-Preorder y w
+  concatenate-eq-leq-eq-Preorder' p H q =
+    concatenate-eq-leq-Preorder' p (concatenate-leq-eq-Preorder H q)
+
+  concatenate-eq-leq-eq-Preorder :
+    {x y z w : type-Preorder} →
+    x ＝ y → leq-Preorder y z → z ＝ w → leq-Preorder x w
+  concatenate-eq-leq-eq-Preorder p H q =
+    concatenate-eq-leq-Preorder p (concatenate-leq-eq-Preorder H q)
 
   le-prop-Preorder : Relation-Prop (l1 ⊔ l2) type-Preorder
   le-prop-Preorder x y =

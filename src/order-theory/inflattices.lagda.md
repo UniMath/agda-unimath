@@ -44,7 +44,7 @@ module _
       ( λ I →
         Π-Prop
           ( I → type-Poset P)
-          ( λ f → has-greatest-lower-bound-family-of-elements-Poset-Prop P f))
+          ( λ f → has-greatest-lower-bound-family-of-elements-prop-Poset P f))
 
   is-inflattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-inflattice-Poset = type-Prop is-inflattice-Poset-Prop

@@ -66,23 +66,23 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  is-upper-bound-family-of-elements-Poset-Prop :
+  is-upper-bound-family-of-elements-prop-Poset :
     {l : Level} {I : UU l} → (I → type-Poset P) → type-Poset P →
     Prop (l2 ⊔ l)
-  is-upper-bound-family-of-elements-Poset-Prop {l} {I} f z =
+  is-upper-bound-family-of-elements-prop-Poset {l} {I} f z =
     Π-Prop I (λ i → leq-prop-Poset P (f i) z)
 
   is-upper-bound-family-of-elements-Poset :
     {l : Level} {I : UU l} → (I → type-Poset P) → type-Poset P →
     UU (l2 ⊔ l)
   is-upper-bound-family-of-elements-Poset f z =
-    type-Prop (is-upper-bound-family-of-elements-Poset-Prop f z)
+    type-Prop (is-upper-bound-family-of-elements-prop-Poset f z)
 
   is-prop-is-upper-bound-family-of-elements-Poset :
     {l : Level} {I : UU l} (f : I → type-Poset P) (z : type-Poset P) →
     is-prop (is-upper-bound-family-of-elements-Poset f z)
   is-prop-is-upper-bound-family-of-elements-Poset f z =
-    is-prop-type-Prop (is-upper-bound-family-of-elements-Poset-Prop f z)
+    is-prop-type-Prop (is-upper-bound-family-of-elements-prop-Poset f z)
 ```
 
 ## Properties

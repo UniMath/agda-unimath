@@ -19,8 +19,10 @@ open import foundation-core.function-types
 
 ## Idea
 
-Hilbert's $ε$-operator at a type `A` is a map `type-trunc-Prop A → A`. Contrary
-to Hilbert, we will not assume that such an operator exists for each type `A`.
+{{#concept "Hilbert's $ε$-operator"}} at a type `A` is a map
+`type-trunc-Prop A → A`. Contrary to Hilbert, we will not assume that such an
+operator exists for each type `A`. Some authors also refer to this as _split
+support_. {{#cite KECA17}}
 
 ## Definition
 
@@ -46,3 +48,12 @@ to Hilbert, we will not assume that such an operator exists for each type `A`.
 ε-operator-equiv' e f =
   (map-inv-equiv e ∘ f) ∘ (map-trunc-Prop (map-equiv e))
 ```
+
+## References
+
+{{#bibliography}}
+
+## External links
+
+- [Epsilon calculus](https://en.wikipedia.org/wiki/Epsilon_calculus) at
+  Wikipedia

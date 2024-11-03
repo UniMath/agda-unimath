@@ -64,6 +64,10 @@ module _
   is-prop-leq-Poset : (x y : type-Poset) → is-prop (leq-Poset x y)
   is-prop-leq-Poset = is-prop-leq-Preorder preorder-Poset
 
+  concatenate-eq-leq-Poset' :
+    {x y z : type-Poset} → x ＝ y → leq-Poset x z → leq-Poset y z
+  concatenate-eq-leq-Poset' = concatenate-eq-leq-Preorder' preorder-Poset
+
   concatenate-eq-leq-Poset :
     {x y z : type-Poset} → x ＝ y → leq-Poset y z → leq-Poset x z
   concatenate-eq-leq-Poset = concatenate-eq-leq-Preorder preorder-Poset
@@ -71,6 +75,14 @@ module _
   concatenate-leq-eq-Poset :
     {x y z : type-Poset} → leq-Poset x y → y ＝ z → leq-Poset x z
   concatenate-leq-eq-Poset = concatenate-leq-eq-Preorder preorder-Poset
+
+  concatenate-eq-leq-eq-Poset :
+    {x y z w : type-Poset} → x ＝ y → leq-Poset y z → z ＝ w → leq-Poset x w
+  concatenate-eq-leq-eq-Poset = concatenate-eq-leq-eq-Preorder preorder-Poset
+
+  concatenate-eq-leq-eq-Poset' :
+    {x y z w : type-Poset} → x ＝ y → leq-Poset x z → z ＝ w → leq-Poset y w
+  concatenate-eq-leq-eq-Poset' = concatenate-eq-leq-eq-Preorder' preorder-Poset
 
   refl-leq-Poset : is-reflexive leq-Poset
   refl-leq-Poset = refl-leq-Preorder preorder-Poset

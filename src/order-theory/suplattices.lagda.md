@@ -48,7 +48,7 @@ module _
       ( λ I →
         Π-Prop
           ( I → type-Poset P)
-          ( has-least-upper-bound-family-of-elements-Poset-Prop P))
+          ( has-least-upper-bound-family-of-elements-prop-Poset P))
 
   is-suplattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-suplattice-Poset = type-Prop is-suplattice-Poset-Prop

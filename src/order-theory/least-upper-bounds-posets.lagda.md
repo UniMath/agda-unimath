@@ -137,8 +137,7 @@ module _
 
   all-elements-equal-has-least-binary-upper-bound-Poset :
     all-elements-equal has-least-binary-upper-bound-Poset
-  all-elements-equal-has-least-binary-upper-bound-Poset
-    (pair u H) (pair v K) =
+  all-elements-equal-has-least-binary-upper-bound-Poset (u , H) (v , K) =
     eq-type-subtype
       ( is-least-binary-upper-bound-Poset-Prop P a b)
       ( antisymmetric-leq-Poset P u v
@@ -153,10 +152,10 @@ module _
     is-prop-all-elements-equal
       all-elements-equal-has-least-binary-upper-bound-Poset
 
-  has-least-binary-upper-bound-Poset-Prop : Prop (l1 ⊔ l2)
-  pr1 has-least-binary-upper-bound-Poset-Prop =
+  has-least-binary-upper-bound-prop-Poset : Prop (l1 ⊔ l2)
+  pr1 has-least-binary-upper-bound-prop-Poset =
     has-least-binary-upper-bound-Poset
-  pr2 has-least-binary-upper-bound-Poset-Prop =
+  pr2 has-least-binary-upper-bound-prop-Poset =
     is-prop-has-least-binary-upper-bound-Poset
 
 module _
@@ -183,9 +182,9 @@ module _
   {l1 l2 l3 : Level} (P : Poset l1 l2) {I : UU l3} (a : I → type-Poset P)
   where
 
-  is-least-upper-bound-family-of-elements-Poset-Prop :
+  is-least-upper-bound-family-of-elements-prop-Poset :
     type-Poset P → Prop (l1 ⊔ l2 ⊔ l3)
-  is-least-upper-bound-family-of-elements-Poset-Prop x =
+  is-least-upper-bound-family-of-elements-prop-Poset x =
     Π-Prop
       ( type-Poset P)
       ( λ y →
@@ -196,13 +195,13 @@ module _
   is-least-upper-bound-family-of-elements-Poset :
     type-Poset P → UU (l1 ⊔ l2 ⊔ l3)
   is-least-upper-bound-family-of-elements-Poset z =
-    type-Prop (is-least-upper-bound-family-of-elements-Poset-Prop z)
+    type-Prop (is-least-upper-bound-family-of-elements-prop-Poset z)
 
   is-prop-is-least-upper-bound-family-of-elements-Poset :
     (z : type-Poset P) →
     is-prop (is-least-upper-bound-family-of-elements-Poset z)
   is-prop-is-least-upper-bound-family-of-elements-Poset z =
-    is-prop-type-Prop (is-least-upper-bound-family-of-elements-Poset-Prop z)
+    is-prop-type-Prop (is-least-upper-bound-family-of-elements-prop-Poset z)
 
 module _
   {l1 l2 l3 : Level} (P : Poset l1 l2) {I : UU l3} {a : I → type-Poset P}
@@ -247,7 +246,7 @@ module _
   all-elements-equal-has-least-upper-bound-family-of-elements-Poset
     ( x , H) (y , K) =
     eq-type-subtype
-      ( is-least-upper-bound-family-of-elements-Poset-Prop P a)
+      ( is-least-upper-bound-family-of-elements-prop-Poset P a)
       ( antisymmetric-leq-Poset P x y
         ( forward-implication-is-least-upper-bound-family-of-elements-Poset
           ( P)
@@ -268,10 +267,10 @@ module _
     is-prop-all-elements-equal
       all-elements-equal-has-least-upper-bound-family-of-elements-Poset
 
-  has-least-upper-bound-family-of-elements-Poset-Prop : Prop (l1 ⊔ l2 ⊔ l3)
-  pr1 has-least-upper-bound-family-of-elements-Poset-Prop =
+  has-least-upper-bound-family-of-elements-prop-Poset : Prop (l1 ⊔ l2 ⊔ l3)
+  pr1 has-least-upper-bound-family-of-elements-prop-Poset =
     has-least-upper-bound-family-of-elements-Poset
-  pr2 has-least-upper-bound-family-of-elements-Poset-Prop =
+  pr2 has-least-upper-bound-family-of-elements-prop-Poset =
     is-prop-has-least-upper-bound-family-of-elements-Poset
 
 module _

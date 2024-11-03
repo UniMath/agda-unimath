@@ -252,7 +252,7 @@ module _
       ( λ x →
         Π-Prop
           ( type-Poset P)
-          ( has-least-binary-upper-bound-Poset-Prop P x))
+          ( has-least-binary-upper-bound-prop-Poset P x))
 
   is-join-semilattice-Poset : UU (l1 ⊔ l2)
   is-join-semilattice-Poset = type-Prop is-join-semilattice-Poset-Prop
