@@ -297,6 +297,32 @@ type-neg-De-Morgan-Prop :
 type-neg-De-Morgan-Prop P = type-De-Morgan-Prop (neg-De-Morgan-Prop P)
 ```
 
+### Propositional truncations of De Morgan types are De Morgan propositions
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  is-de-morgan-prop-trunc-Prop :
+    is-de-morgan A → is-de-morgan-prop (type-trunc-Prop A)
+  is-de-morgan-prop-trunc-Prop a =
+    ( is-prop-type-trunc-Prop , is-de-morgan-trunc a)
+```
+
+### Disjunctions of De Morgan types are De Morgan propositions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-de-morgan-prop-disjunction :
+    is-de-morgan A → is-de-morgan B → is-de-morgan-prop (disjunction-type A B)
+  is-de-morgan-prop-disjunction a b =
+    is-de-morgan-prop-trunc-Prop (is-de-morgan-coproduct a b)
+```
+
 ### Negation has no fixed points on decidable propositions
 
 ```agda

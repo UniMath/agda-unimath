@@ -23,6 +23,8 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.retracts-of-types
+open import foundation.truncation-levels
+open import foundation.truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -342,6 +344,22 @@ module _
   is-de-morgan-equiv = is-de-morgan-iff' (iff-equiv' e)
 ```
 
+### The truncation of a De Morgan type is De Morgan
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  is-de-morgan-trunc : {k : 𝕋} → is-de-morgan A → is-de-morgan (type-trunc k A)
+  is-de-morgan-trunc {neg-two-𝕋} a =
+    is-de-morgan-is-contr is-trunc-type-trunc
+  is-de-morgan-trunc {succ-𝕋 k} (inl na) =
+    inl (map-universal-property-trunc (empty-Truncated-Type k) na)
+  is-de-morgan-trunc {succ-𝕋 k} (inr nna) =
+    inr (λ nn|a| → nna (λ a → nn|a| (unit-trunc a)))
+```
+
 ### Products of De Morgan types are De Morgan
 
 ```agda
@@ -356,6 +374,27 @@ module _
     inl (λ ab → nb (pr2 ab))
   is-de-morgan-product (inr nna) (inr nnb) =
     inr (is-irrefutable-product nna nnb)
+```
+
+### Coproducts of De Morgan types are De Morgan
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-de-morgan-coproduct :
+    is-de-morgan A → is-de-morgan B → is-de-morgan (A + B)
+  is-de-morgan-coproduct (inl na) (inl nb) =
+    inl (rec-coproduct na nb)
+  is-de-morgan-coproduct (inl na) (inr nnb) =
+    inr (λ nab → nnb (λ nb → nab (inr nb)))
+  is-de-morgan-coproduct (inr nna) _ =
+    inr (λ nab → nna (λ na → nab (inl na)))
+
+  is-de-morgan-disjunction :
+    is-de-morgan A → is-de-morgan B → is-de-morgan (disjunction-type A B)
+  is-de-morgan-disjunction a b = is-de-morgan-trunc (is-de-morgan-coproduct a b)
 ```
 
 ### The negation of a De Morgan type is De Morgan

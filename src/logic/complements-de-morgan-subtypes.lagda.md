@@ -7,6 +7,7 @@ module logic.complements-de-morgan-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.complements-subtypes
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -22,6 +23,7 @@ open import foundation.universe-levels
 
 open import foundation-core.function-types
 
+open import logic.complements-decidable-subtypes
 open import logic.de-morgan-propositions
 open import logic.de-morgan-subtypes
 
@@ -63,4 +65,42 @@ is-decidable-complement-de-morgan-subtype :
   is-decidable-subtype
     ( subtype-de-morgan-subtype (complement-de-morgan-subtype P))
 is-decidable-complement-de-morgan-subtype P = is-de-morgan-de-morgan-subtype P
+```
+
+### The union of the complement of a subtype `P` with its double complement is the full subtype if and only if `P` is De Morgan
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  is-full-union-complement-subtype-double-complement-subtype :
+    (P : subtype l2 A) → is-de-morgan-subtype P →
+    is-full-subtype
+      ( union-subtype
+        ( complement-subtype P)
+        ( complement-subtype (complement-subtype P)))
+  is-full-union-complement-subtype-double-complement-subtype P =
+    is-full-union-subtype-complement-subtype (complement-subtype P)
+
+  is-de-morgan-subtype-is-full-union-complement-subtype-double-complement-subtype :
+    (P : subtype l2 A) →
+    is-full-subtype
+      ( union-subtype
+        ( complement-subtype P)
+        ( complement-subtype (complement-subtype P))) →
+    is-de-morgan-subtype P
+  is-de-morgan-subtype-is-full-union-complement-subtype-double-complement-subtype
+    P =
+    is-decidable-subtype-is-full-union-subtype-complement-subtype
+      ( complement-subtype P)
+
+  is-full-union-subtype-complement-de-morgan-subtype :
+    (P : de-morgan-subtype l2 A) →
+    is-full-subtype
+      ( union-de-morgan-subtype P (complement-de-morgan-subtype P))
+  is-full-union-subtype-complement-de-morgan-subtype P =
+    is-full-union-complement-subtype-double-complement-subtype
+      ( subtype-de-morgan-subtype P)
+      ( is-de-morgan-de-morgan-subtype P)
 ```
