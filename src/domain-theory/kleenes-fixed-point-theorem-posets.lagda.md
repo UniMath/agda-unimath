@@ -40,11 +40,11 @@ open import order-theory.upper-bounds-posets
 ## Idea
 
 {{#concept "Kleene's fixed point theorem" Disambiguation="posets" WD="Kleene fixed-point theorem" WDID=Q3527263}}
-states that given an [ω-continuous](domain-theory.ω-continuous-maps-posets.md)
-endomap `f : 𝒜 → 𝒜` on a [poset](domain-theory.posets.md) `𝒜`, then for every
-`x ∈ 𝒜` such that `x ≤ f x`, the ω-transfinite application of `f` to `x`, given
-that it exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of
-`f`:
+states that given an
+[ω-continuous](domain-theory.omega-continuous-maps-posets.md) endomap
+`f : 𝒜 → 𝒜` on a [poset](domain-theory.posets.md) `𝒜`, then for every `x ∈ 𝒜`
+such that `x ≤ f x`, the ω-transfinite application of `f` to `x`, given that it
+exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of `f`:
 
 ```text
   x ≤ f(x) ≤ f²(x) ≤ … ≤ fⁿ(x) ≤ … ≤ fω(x) = f(fω(x)) = ….

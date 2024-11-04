@@ -67,7 +67,7 @@ still applies.
 
 ## Definitions
 
-### The predicate of preserving the supremum of a directed family
+### The predicate of preserving the supremum of an ω-chain
 
 ```agda
 module _
