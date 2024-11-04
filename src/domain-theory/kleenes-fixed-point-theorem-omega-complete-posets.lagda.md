@@ -94,7 +94,7 @@ module _
   hom-construction-kleene-hom-ω-Complete-Poset :
     hom-Poset ℕ-Poset (poset-ω-Complete-Poset 𝒜)
   hom-construction-kleene-hom-ω-Complete-Poset =
-     hom-construction-kleene-hom-Poset (poset-ω-Complete-Poset 𝒜) H x p
+    hom-construction-kleene-hom-Poset (poset-ω-Complete-Poset 𝒜) H x p
 
 module _
   {l1 l2 : Level}
@@ -189,7 +189,8 @@ module _
       ( p)
 
   is-fixed-point-construction-kleene-ω-Complete-Poset :
-    f (point-construction-kleene-ω-Complete-Poset) ＝ point-construction-kleene-ω-Complete-Poset
+    f ( point-construction-kleene-ω-Complete-Poset) ＝
+    point-construction-kleene-ω-Complete-Poset
   is-fixed-point-construction-kleene-ω-Complete-Poset =
     is-fixed-point-construction-kleene-hom-ω-Complete-Poset 𝒜
       ( preserves-order-is-ω-continuous-ω-Complete-Poset 𝒜 𝒜 F)
@@ -215,7 +216,11 @@ module _
   {l1 l2 : Level}
   (𝒜 : ω-Complete-Poset l1 l2)
   {f : type-ω-Complete-Poset 𝒜 → type-ω-Complete-Poset 𝒜}
-  (H : preserves-order-Poset (poset-ω-Complete-Poset 𝒜) (poset-ω-Complete-Poset 𝒜) f)
+  (H :
+    preserves-order-Poset
+      ( poset-ω-Complete-Poset 𝒜)
+      ( poset-ω-Complete-Poset 𝒜)
+      ( f))
   (b@(⊥ , b') : has-bottom-element-Poset (poset-ω-Complete-Poset 𝒜))
   (F :
     preserves-ω-supremum-ω-Complete-Poset 𝒜 𝒜 f

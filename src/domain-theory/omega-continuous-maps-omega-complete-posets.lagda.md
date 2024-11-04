@@ -93,7 +93,8 @@ module _
   is-prop-preserves-ω-supremum-ω-Complete-Poset =
     is-prop-Π
       ( λ y →
-        is-prop-is-least-upper-bound-family-of-elements-Poset (poset-ω-Complete-Poset Q)
+        is-prop-is-least-upper-bound-family-of-elements-Poset
+          ( poset-ω-Complete-Poset Q)
           ( f ∘ map-hom-Poset ℕ-Poset (poset-ω-Complete-Poset P) x)
           ( f (pr1 y)))
 
@@ -108,7 +109,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : ω-Complete-Poset l1 l2) (Q : ω-Complete-Poset l3 l4)
+  {l1 l2 l3 l4 : Level}
+  (P : ω-Complete-Poset l1 l2) (Q : ω-Complete-Poset l3 l4)
   where
 
   is-ω-continuous-ω-Complete-Poset :
@@ -130,7 +132,8 @@ module _
     is-prop-Π (is-prop-preserves-ω-supremum-ω-Complete-Poset P Q f)
 
   is-ω-continuous-prop-ω-Complete-Poset :
-    (type-ω-Complete-Poset P → type-ω-Complete-Poset Q) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+    (type-ω-Complete-Poset P → type-ω-Complete-Poset Q) →
+    Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-ω-continuous-prop-ω-Complete-Poset f =
     ( is-ω-continuous-ω-Complete-Poset f) ,
     ( is-prop-is-ω-continuous-ω-Complete-Poset f)
@@ -140,7 +143,9 @@ module _
     ω-continuous-hom-Poset (poset-ω-Complete-Poset P) (poset-ω-Complete-Poset Q)
 
   map-ω-continuous-hom-ω-Complete-Poset :
-    ω-continuous-hom-ω-Complete-Poset → type-ω-Complete-Poset P → type-ω-Complete-Poset Q
+    ω-continuous-hom-ω-Complete-Poset →
+    type-ω-Complete-Poset P →
+    type-ω-Complete-Poset Q
   map-ω-continuous-hom-ω-Complete-Poset = pr1
 
   is-ω-continuous-ω-continuous-hom-ω-Complete-Poset :
@@ -154,7 +159,8 @@ module _
     has-least-upper-bound-family-of-elements-Poset (poset-ω-Complete-Poset P)
       ( map-hom-Poset ℕ-Poset (poset-ω-Complete-Poset P) x) →
     has-least-upper-bound-family-of-elements-Poset (poset-ω-Complete-Poset Q)
-      ( map-ω-continuous-hom-ω-Complete-Poset f ∘ map-hom-Poset ℕ-Poset (poset-ω-Complete-Poset P) x)
+      ( map-ω-continuous-hom-ω-Complete-Poset f ∘
+        map-hom-Poset ℕ-Poset (poset-ω-Complete-Poset P) x)
   sup-map-ω-continuous-hom-ω-Complete-Poset f x y =
     ( map-ω-continuous-hom-ω-Complete-Poset f (pr1 y) ,
       is-ω-continuous-ω-continuous-hom-ω-Complete-Poset f x y)
@@ -166,7 +172,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : ω-Complete-Poset l1 l2) (Q : ω-Complete-Poset l3 l4)
+  {l1 l2 l3 l4 : Level}
+  (P : ω-Complete-Poset l1 l2) (Q : ω-Complete-Poset l3 l4)
   where
 
   abstract
@@ -184,13 +191,17 @@ module _
             ( y ,
               ( λ z →
                 ( λ g → g 1) ,
-                ( λ q → ind-ℕ (transitive-leq-ω-Complete-Poset P x y z q p) (λ _ _ → q))))
+                ( λ q →
+                  ind-ℕ
+                    ( transitive-leq-ω-Complete-Poset P x y z q p)
+                    ( λ _ _ → q))))
             ( f y))
         ( refl-leq-ω-Complete-Poset Q (f y))
         ( 0)
 
   hom-ω-continuous-hom-ω-Complete-Poset :
-    ω-continuous-hom-ω-Complete-Poset P Q → hom-Poset (poset-ω-Complete-Poset P) (poset-ω-Complete-Poset Q)
+    ω-continuous-hom-ω-Complete-Poset P Q →
+    hom-Poset (poset-ω-Complete-Poset P) (poset-ω-Complete-Poset Q)
   hom-ω-continuous-hom-ω-Complete-Poset f =
     map-ω-continuous-hom-ω-Complete-Poset P Q f ,
     preserves-order-is-ω-continuous-ω-Complete-Poset
@@ -201,13 +212,15 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : ω-Complete-Poset l1 l2) (Q : ω-Complete-Poset l3 l4)
+  {l1 l2 l3 l4 : Level}
+  (P : ω-Complete-Poset l1 l2) (Q : ω-Complete-Poset l3 l4)
   where
 
   htpy-ω-continuous-hom-ω-Complete-Poset :
     (f g : ω-continuous-hom-ω-Complete-Poset P Q) → UU (l1 ⊔ l3)
   htpy-ω-continuous-hom-ω-Complete-Poset f g =
-    map-ω-continuous-hom-ω-Complete-Poset P Q f ~ map-ω-continuous-hom-ω-Complete-Poset P Q g
+    map-ω-continuous-hom-ω-Complete-Poset P Q f ~
+    map-ω-continuous-hom-ω-Complete-Poset P Q g
 
   refl-htpy-ω-continuous-hom-ω-Complete-Poset :
     (f : ω-continuous-hom-ω-Complete-Poset P Q) →
@@ -276,7 +289,9 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
-  (P : ω-Complete-Poset l1 l2) (Q : ω-Complete-Poset l3 l4) (R : ω-Complete-Poset l5 l6)
+  (P : ω-Complete-Poset l1 l2)
+  (Q : ω-Complete-Poset l3 l4)
+  (R : ω-Complete-Poset l5 l6)
   where
 
   is-ω-continuous-comp-ω-Complete-Poset :
@@ -308,7 +323,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : ω-Complete-Poset l1 l2) (Q : ω-Complete-Poset l3 l4)
+  {l1 l2 l3 l4 : Level}
+  (P : ω-Complete-Poset l1 l2) (Q : ω-Complete-Poset l3 l4)
   where
 
   left-unit-law-comp-ω-continuous-hom-ω-Complete-Poset :
