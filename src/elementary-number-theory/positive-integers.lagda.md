@@ -18,6 +18,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -25,9 +26,12 @@ open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import set-theory.countable-sets
 ```
 
 </details>
@@ -122,6 +126,9 @@ is-nonzero-is-positive-ℤ {inr (inr x)} H ()
 is-set-positive-ℤ : is-set positive-ℤ
 is-set-positive-ℤ =
   is-set-type-subtype subtype-positive-ℤ is-set-ℤ
+
+positive-ℤ-Set : Set lzero
+positive-ℤ-Set = positive-ℤ , is-set-positive-ℤ
 ```
 
 ### The successor of a positive integer is positive
@@ -180,6 +187,19 @@ pr2 (pr2 is-equiv-positive-int-ℕ) = is-retraction-nat-positive-ℤ
 equiv-positive-int-ℕ : ℕ ≃ positive-ℤ
 pr1 equiv-positive-int-ℕ = positive-int-ℕ
 pr2 equiv-positive-int-ℕ = is-equiv-positive-int-ℕ
+```
+
+### The set of positive integers is countable
+
+```agda
+is-countable-positive-ℤ : is-countable positive-ℤ-Set
+is-countable-positive-ℤ =
+  is-countable-is-directly-countable
+    ( positive-ℤ-Set)
+    ( one-positive-ℤ)
+    ( intro-exists
+      ( positive-int-ℕ)
+      ( is-surjective-is-equiv is-equiv-positive-int-ℕ))
 ```
 
 ## See also

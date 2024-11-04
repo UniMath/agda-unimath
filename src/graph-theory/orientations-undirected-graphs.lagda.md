@@ -48,4 +48,4 @@ module _
 - [Orientation (graph theory)](<https://en.wikipedia.org/wiki/Orientation_(graph_theory)>)
   at Wikipedia
 - [Graph orientation](https://mathworld.wolfram.com/GraphOrientation.html) at
-  Wolfram Mathworld
+  Wolfram MathWorld

@@ -9,6 +9,7 @@ module elementary-number-theory.strict-inequality-natural-numbers where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -315,4 +316,11 @@ le-leq-neq-ℕ {zero-ℕ} {zero-ℕ} l f = ex-falso (f refl)
 le-leq-neq-ℕ {zero-ℕ} {succ-ℕ y} l f = star
 le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
   le-leq-neq-ℕ {x} {y} l (λ p → f (ap succ-ℕ p))
+```
+
+### If `1 < x` and `1 < y`, then `1 < xy`
+
+```agda
+le-one-mul-ℕ : (x y : ℕ) → 1 <-ℕ x → 1 <-ℕ y → 1 <-ℕ (x *ℕ y)
+le-one-mul-ℕ (succ-ℕ (succ-ℕ x)) (succ-ℕ (succ-ℕ y)) star star = star
 ```

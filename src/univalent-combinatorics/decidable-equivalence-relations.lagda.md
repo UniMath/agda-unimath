@@ -116,7 +116,7 @@ module _
     (x : type-𝔽 A) → (y : type-𝔽 A) → is-finite (rel-Decidable-Relation R x y)
   is-finite-relation-Decidable-Relation-𝔽 x y =
     unit-trunc-Prop
-      ( count-Decidable-Prop
+      ( count-type-Decidable-Prop
         ( relation-Decidable-Relation R x y)
         ( is-decidable-Decidable-Relation R x y))
 

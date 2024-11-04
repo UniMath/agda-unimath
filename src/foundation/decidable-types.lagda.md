@@ -245,13 +245,8 @@ double-negation-elim-is-decidable (inl x) p = x
 double-negation-elim-is-decidable (inr x) p = ex-falso (p x)
 ```
 
-### The double negation of `is-decidable` is always provable
-
-```agda
-double-negation-is-decidable : {l : Level} {P : UU l} → ¬¬ (is-decidable P)
-double-negation-is-decidable {P = P} f =
-  map-neg (inr {A = P} {B = ¬ P}) f (map-neg (inl {A = P} {B = ¬ P}) f)
-```
+See also
+[double negation stable propositions](foundation.double-negation-stable-propositions.md).
 
 ### Decidable types have ε-operators
 
@@ -354,3 +349,8 @@ module _
     ( is-inhabited-or-empty-is-merely-decidable ,
       is-merely-decidable-is-inhabited-or-empty)
 ```
+
+## See also
+
+- That decidablity is irrefutable is shown in
+  [`foundation.irrefutable-propositions`](foundation.irrefutable-propositions.md).

@@ -28,9 +28,11 @@ allows you to determine dependencies between individual definitions. Hover over
   </iframe>
 </div>
 
-The interactive explorer was developed by Job Petrovčič. In addition, Vojtěch
-Štěpančík, Matej Petković, and Andrej Bauer contributed invaluable suggestions
-and offered helpful support.
+The interactive explorer was developed by
+[Job Petrovčič](https://github.com/JobPetrovcic). In addition,
+[Vojtěch Štěpančík](https://vojtechstep.eu/), Matej Petković, and
+[Andrej Bauer](https://www.andrej.com) contributed invaluable suggestions and
+offered helpful support.
 
 ### Notes
 

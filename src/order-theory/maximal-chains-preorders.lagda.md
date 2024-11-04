@@ -37,7 +37,7 @@ module _
       ( λ D →
         function-Prop
           ( inclusion-chain-Preorder X C D)
-          ( inclusion-chain-Preorder-Prop X D C))
+          ( inclusion-prop-chain-Preorder X D C))
 
   is-maximal-chain-Preorder :
     {l3 : Level} → chain-Preorder l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)

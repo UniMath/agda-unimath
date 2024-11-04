@@ -60,7 +60,7 @@ Labeled-Finite-Directed-Graph = Σ ℕ (λ n → Fin n → Fin n → ℕ)
 
 - [Digraph](https://ncatlab.org/nlab/show/digraph) at $n$Lab
 - [Directed graph](https://ncatlab.org/nlab/show/directed+graph) at $n$Lab
-- [Directed graph](https://www.wikidata.org/entity/Q1137726) on Wikdiata
+- [Directed graph](https://www.wikidata.org/entity/Q1137726) on Wikidata
 - [Directed graph](https://en.wikipedia.org/wiki/Directed_graph) at Wikipedia
 - [Directed graph](https://mathworld.wolfram.com/DirectedGraph.html) at Wolfram
-  Mathworld
+  MathWorld
