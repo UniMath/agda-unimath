@@ -93,10 +93,10 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  is-scott-continuous-map-Poset :
+  is-scott-continuous-Poset :
     (l5 : Level) → (type-Poset P → type-Poset Q) →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
-  is-scott-continuous-map-Poset l5 f =
+  is-scott-continuous-Poset l5 f =
     (x : directed-family-Poset l5 P)
     (y :
       has-least-upper-bound-family-of-elements-Poset P
@@ -105,22 +105,22 @@ module _
       ( f ∘ family-directed-family-Poset P x)
       ( f (pr1 y))
 
-  is-prop-is-scott-continuous-map-Poset :
+  is-prop-is-scott-continuous-Poset :
     {l5 : Level} (f : type-Poset P → type-Poset Q) →
-    is-prop (is-scott-continuous-map-Poset l5 f)
-  is-prop-is-scott-continuous-map-Poset f =
+    is-prop (is-scott-continuous-Poset l5 f)
+  is-prop-is-scott-continuous-Poset f =
     is-prop-Π (is-prop-preserves-supremum-directed-family-map-Poset P Q f)
 
-  is-scott-continuous-prop-map-Poset :
+  is-scott-continuous-prop-Poset :
     (l5 : Level) →
     (type-Poset P → type-Poset Q) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
-  is-scott-continuous-prop-map-Poset l5 f =
-    ( is-scott-continuous-map-Poset l5 f) ,
-    ( is-prop-is-scott-continuous-map-Poset f)
+  is-scott-continuous-prop-Poset l5 f =
+    ( is-scott-continuous-Poset l5 f) ,
+    ( is-prop-is-scott-continuous-Poset f)
 
   scott-continuous-hom-Poset : (l5 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
   scott-continuous-hom-Poset l5 =
-    Σ (type-Poset P → type-Poset Q) (is-scott-continuous-map-Poset l5)
+    Σ (type-Poset P → type-Poset Q) (is-scott-continuous-Poset l5)
 
   map-scott-continuous-hom-Poset :
     {l5 : Level} → scott-continuous-hom-Poset l5 → type-Poset P → type-Poset Q
@@ -128,7 +128,7 @@ module _
 
   is-scott-continuous-map-scott-continuous-hom-Poset :
     {l5 : Level} (f : scott-continuous-hom-Poset l5) →
-    is-scott-continuous-map-Poset l5 (map-scott-continuous-hom-Poset f)
+    is-scott-continuous-Poset l5 (map-scott-continuous-hom-Poset f)
   is-scott-continuous-map-scott-continuous-hom-Poset = pr2
 
   sup-map-scott-continuous-hom-Poset :
@@ -152,14 +152,14 @@ module _
   {l1 l2 l3 l4 l5 l6 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  preserves-small-supremum-directed-family-is-scott-continuous-map-Poset :
+  preserves-small-supremum-directed-family-is-scott-continuous-Poset :
     {f : type-Poset P → type-Poset Q} →
-    is-scott-continuous-map-Poset P Q l5 f →
+    is-scott-continuous-Poset P Q l5 f →
     (x : directed-family-Poset l6 P)
     (u : is-small l5 (type-directed-family-Poset P x)) →
     preserves-supremum-directed-family-map-Poset P Q f
       ( reindex-inv-equiv-directed-family-Poset P x (equiv-is-small u))
-  preserves-small-supremum-directed-family-is-scott-continuous-map-Poset H x u =
+  preserves-small-supremum-directed-family-is-scott-continuous-Poset H x u =
     H (reindex-inv-equiv-directed-family-Poset P x (equiv-is-small u))
 ```
 
@@ -171,13 +171,13 @@ module _
   where
 
   abstract
-    preserves-order-is-scott-continuous-map-Poset :
+    preserves-order-is-scott-continuous-Poset :
       {f : type-Poset P → type-Poset Q} →
-      is-scott-continuous-map-Poset P Q l5 f →
+      is-scott-continuous-Poset P Q l5 f →
       preserves-order-Poset P Q f
-    preserves-order-is-scott-continuous-map-Poset {f} H x y p =
+    preserves-order-is-scott-continuous-Poset {f} H x y p =
       pr2
-        ( preserves-small-supremum-directed-family-is-scott-continuous-map-Poset
+        ( preserves-small-supremum-directed-family-is-scott-continuous-Poset
           ( P)
           ( Q)
           ( H)
@@ -207,7 +207,7 @@ module _
     scott-continuous-hom-Poset P Q l5 → hom-Poset P Q
   hom-scott-continuous-hom-Poset f =
     map-scott-continuous-hom-Poset P Q f ,
-    preserves-order-is-scott-continuous-map-Poset
+    preserves-order-is-scott-continuous-Poset
       ( is-scott-continuous-map-scott-continuous-hom-Poset P Q f)
 ```
 
@@ -241,7 +241,7 @@ module _
   is-torsorial-htpy-scott-continuous-hom-Poset f =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy (map-scott-continuous-hom-Poset P Q f))
-      ( is-prop-is-scott-continuous-map-Poset P Q)
+      ( is-prop-is-scott-continuous-Poset P Q)
       ( map-scott-continuous-hom-Poset P Q f)
       ( refl-htpy)
       ( is-scott-continuous-map-scott-continuous-hom-Poset P Q f)
@@ -277,7 +277,7 @@ module _
   where
 
   is-scott-continuous-id-Poset :
-    {l3 : Level} → is-scott-continuous-map-Poset P P l3 (id {A = type-Poset P})
+    {l3 : Level} → is-scott-continuous-Poset P P l3 (id {A = type-Poset P})
   is-scott-continuous-id-Poset x y = pr2 y
 
   id-scott-continuous-hom-Poset :
@@ -296,7 +296,7 @@ module _
   is-scott-continuous-comp-Poset :
     (g : scott-continuous-hom-Poset Q R l7)
     (f : scott-continuous-hom-Poset P Q l7) →
-    is-scott-continuous-map-Poset P R l7
+    is-scott-continuous-Poset P R l7
       ( map-scott-continuous-hom-Poset Q R g ∘
         map-scott-continuous-hom-Poset P Q f)
   is-scott-continuous-comp-Poset g f x y =

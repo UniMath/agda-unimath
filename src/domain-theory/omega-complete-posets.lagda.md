@@ -23,6 +23,7 @@ open import foundation.universe-levels
 open import order-theory.least-upper-bounds-posets
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
+open import order-theory.upper-bounds-posets
 ```
 
 </details>
@@ -162,6 +163,17 @@ module _
     is-least-upper-bound-sup-is-ω-complete-Poset
       ( poset-ω-Complete-Poset)
       ( is-ω-complete-ω-Complete-Poset)
+
+  is-upper-bound-sup-ω-Complete-Poset :
+    (x : hom-Poset ℕ-Poset poset-ω-Complete-Poset) →
+    is-upper-bound-family-of-elements-Poset
+      ( poset-ω-Complete-Poset)
+      ( map-hom-Poset ℕ-Poset poset-ω-Complete-Poset x)
+      ( sup-ω-Complete-Poset x)
+  is-upper-bound-sup-ω-Complete-Poset x =
+    is-upper-bound-is-least-upper-bound-family-of-elements-Poset
+      ( poset-ω-Complete-Poset)
+      ( is-least-upper-bound-sup-ω-Complete-Poset x)
 
   leq-sup-ω-Complete-Poset :
     (x : hom-Poset ℕ-Poset poset-ω-Complete-Poset)

@@ -108,10 +108,10 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  preserves-ω-chains-Poset :
+  is-ω-continuous-Poset :
     (type-Poset P → type-Poset Q) →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  preserves-ω-chains-Poset f =
+  is-ω-continuous-Poset f =
     (x : hom-Poset ℕ-Poset P)
     (y :
       has-least-upper-bound-family-of-elements-Poset P
@@ -120,30 +120,30 @@ module _
       ( f ∘ map-hom-Poset ℕ-Poset P x)
       ( f (pr1 y))
 
-  is-prop-preserves-ω-chains-Poset :
+  is-prop-is-ω-continuous-Poset :
     (f : type-Poset P → type-Poset Q) →
-    is-prop (preserves-ω-chains-Poset f)
-  is-prop-preserves-ω-chains-Poset f =
+    is-prop (is-ω-continuous-Poset f)
+  is-prop-is-ω-continuous-Poset f =
     is-prop-Π (is-prop-preserves-ω-supremum-map-Poset P Q f)
 
-  is-ω-continuous-prop-map-Poset :
+  is-ω-continuous-prop-Poset :
     (type-Poset P → type-Poset Q) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-ω-continuous-prop-map-Poset f =
-    ( preserves-ω-chains-Poset f) ,
-    ( is-prop-preserves-ω-chains-Poset f)
+  is-ω-continuous-prop-Poset f =
+    ( is-ω-continuous-Poset f) ,
+    ( is-prop-is-ω-continuous-Poset f)
 
   ω-continuous-hom-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   ω-continuous-hom-Poset =
-    Σ (type-Poset P → type-Poset Q) (preserves-ω-chains-Poset)
+    Σ (type-Poset P → type-Poset Q) (is-ω-continuous-Poset)
 
   map-ω-continuous-hom-Poset :
     ω-continuous-hom-Poset → type-Poset P → type-Poset Q
   map-ω-continuous-hom-Poset = pr1
 
-  preserves-ω-chains-ω-continuous-hom-Poset :
+  is-ω-continuous-ω-continuous-hom-Poset :
     (f : ω-continuous-hom-Poset) →
-    preserves-ω-chains-Poset (map-ω-continuous-hom-Poset f)
-  preserves-ω-chains-ω-continuous-hom-Poset = pr2
+    is-ω-continuous-Poset (map-ω-continuous-hom-Poset f)
+  is-ω-continuous-ω-continuous-hom-Poset = pr2
 
   sup-map-ω-continuous-hom-Poset :
     (f : ω-continuous-hom-Poset) →
@@ -154,7 +154,7 @@ module _
       ( map-ω-continuous-hom-Poset f ∘ map-hom-Poset ℕ-Poset P x)
   sup-map-ω-continuous-hom-Poset f x y =
     ( map-ω-continuous-hom-Poset f (pr1 y) ,
-      preserves-ω-chains-ω-continuous-hom-Poset f x y)
+      is-ω-continuous-ω-continuous-hom-Poset f x y)
 ```
 
 ## Properties
@@ -167,11 +167,11 @@ module _
   where
 
   abstract
-    preserves-order-preserves-ω-chains-Poset :
+    preserves-order-is-ω-continuous-Poset :
       {f : type-Poset P → type-Poset Q} →
-      preserves-ω-chains-Poset P Q f →
+      is-ω-continuous-Poset P Q f →
       preserves-order-Poset P Q f
-    preserves-order-preserves-ω-chains-Poset {f} H x y p =
+    preserves-order-is-ω-continuous-Poset {f} H x y p =
       pr2
         ( H ( hom-ind-ℕ-Poset P
               ( rec-ℕ x (λ _ _ → y))
@@ -188,8 +188,8 @@ module _
     ω-continuous-hom-Poset P Q → hom-Poset P Q
   hom-ω-continuous-hom-Poset f =
     map-ω-continuous-hom-Poset P Q f ,
-    preserves-order-preserves-ω-chains-Poset
-      ( preserves-ω-chains-ω-continuous-hom-Poset P Q f)
+    preserves-order-is-ω-continuous-Poset
+      ( is-ω-continuous-ω-continuous-hom-Poset P Q f)
 ```
 
 ### Homotopies of ω-continuous maps
@@ -222,10 +222,10 @@ module _
   is-torsorial-htpy-ω-continuous-hom-Poset f =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy (map-ω-continuous-hom-Poset P Q f))
-      ( is-prop-preserves-ω-chains-Poset P Q)
+      ( is-prop-is-ω-continuous-Poset P Q)
       ( map-ω-continuous-hom-Poset P Q f)
       ( refl-htpy)
-      ( preserves-ω-chains-ω-continuous-hom-Poset P Q f)
+      ( is-ω-continuous-ω-continuous-hom-Poset P Q f)
 
   is-equiv-htpy-eq-ω-continuous-hom-Poset :
     (f g : ω-continuous-hom-Poset P Q) →
@@ -258,7 +258,7 @@ module _
   where
 
   is-ω-continuous-id-Poset :
-    preserves-ω-chains-Poset P P (id {A = type-Poset P})
+    is-ω-continuous-Poset P P (id {A = type-Poset P})
   is-ω-continuous-id-Poset x y = pr2 y
 
   id-ω-continuous-hom-Poset : ω-continuous-hom-Poset P P
@@ -276,14 +276,14 @@ module _
   is-ω-continuous-comp-Poset :
     (g : ω-continuous-hom-Poset Q R)
     (f : ω-continuous-hom-Poset P Q) →
-    preserves-ω-chains-Poset P R
+    is-ω-continuous-Poset P R
       ( map-ω-continuous-hom-Poset Q R g ∘
         map-ω-continuous-hom-Poset P Q f)
   is-ω-continuous-comp-Poset g f c y =
-    preserves-ω-chains-ω-continuous-hom-Poset Q R g
+    is-ω-continuous-ω-continuous-hom-Poset Q R g
       ( comp-hom-Poset ℕ-Poset P Q (hom-ω-continuous-hom-Poset P Q f) c)
       ( map-ω-continuous-hom-Poset P Q f (pr1 y) ,
-        preserves-ω-chains-ω-continuous-hom-Poset P Q f c y)
+        is-ω-continuous-ω-continuous-hom-Poset P Q f c y)
 
   comp-ω-continuous-hom-Poset :
     (g : ω-continuous-hom-Poset Q R)
