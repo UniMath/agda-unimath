@@ -76,8 +76,8 @@ module _
   (x : hom-Poset ℕ-Poset P)
   where
 
-  preserves-ω-supremum-map-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  preserves-ω-supremum-map-Poset =
+  preserves-ω-supremum-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  preserves-ω-supremum-Poset =
     (y :
       has-least-upper-bound-family-of-elements-Poset P
         ( map-hom-Poset ℕ-Poset P x)) →
@@ -85,20 +85,20 @@ module _
       ( f ∘ map-hom-Poset ℕ-Poset P x)
       ( f (pr1 y))
 
-  is-prop-preserves-ω-supremum-map-Poset :
-    is-prop preserves-ω-supremum-map-Poset
-  is-prop-preserves-ω-supremum-map-Poset =
+  is-prop-preserves-ω-supremum-Poset :
+    is-prop preserves-ω-supremum-Poset
+  is-prop-preserves-ω-supremum-Poset =
     is-prop-Π
       ( λ y →
         is-prop-is-least-upper-bound-family-of-elements-Poset Q
           ( f ∘ map-hom-Poset ℕ-Poset P x)
           ( f (pr1 y)))
 
-  preserves-ω-supremum-prop-map-Poset :
+  preserves-ω-supremum-prop-Poset :
     Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  preserves-ω-supremum-prop-map-Poset =
-    preserves-ω-supremum-map-Poset ,
-    is-prop-preserves-ω-supremum-map-Poset
+  preserves-ω-supremum-prop-Poset =
+    preserves-ω-supremum-Poset ,
+    is-prop-preserves-ω-supremum-Poset
 ```
 
 ### The predicate on a map of posets of being ω-continuous
@@ -124,7 +124,7 @@ module _
     (f : type-Poset P → type-Poset Q) →
     is-prop (is-ω-continuous-Poset f)
   is-prop-is-ω-continuous-Poset f =
-    is-prop-Π (is-prop-preserves-ω-supremum-map-Poset P Q f)
+    is-prop-Π (is-prop-preserves-ω-supremum-Poset P Q f)
 
   is-ω-continuous-prop-Poset :
     (type-Poset P → type-Poset Q) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
