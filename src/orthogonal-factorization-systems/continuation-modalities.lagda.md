@@ -67,7 +67,7 @@ module _
 
 ## Properties
 
-### Continuations on propositions form uniquely eliminating modalities
+### The continuation monad on a proposition forms a uniquely eliminating modality
 
 ```agda
 is-uniquely-eliminating-modality-continuation-modality :

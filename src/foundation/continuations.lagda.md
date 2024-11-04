@@ -54,7 +54,7 @@ on `R` is the functorial construction defined on types by
 
 ## Definitions
 
-### The continuation operator
+### The operator of the continuation monad
 
 ```agda
 continuation :
@@ -71,7 +71,7 @@ map-continuation :
 map-continuation f c g = c (g ∘ f)
 ```
 
-### The unit of the continuation operation
+### The unit of the continuation monad
 
 ```agda
 unit-continuation :
@@ -156,7 +156,7 @@ continuation-Prop R A =
   ( continuation (type-Prop R) A , is-prop-continuation (is-prop-type-Prop R))
 ```
 
-### Computing `continuation` at the unit type
+### Computing `continuation R` on the unit type
 
 We have the [equivalence](foundation-core.equivalences.md)
 
@@ -174,7 +174,7 @@ module _
     equiv-precomp (inv-left-unit-law-function-type R) R
 ```
 
-### Computing `continuation` at the empty type
+### Computing `continuation R` on the empty type
 
 We have the equivalence
 
