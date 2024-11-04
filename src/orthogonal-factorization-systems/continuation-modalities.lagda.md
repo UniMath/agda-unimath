@@ -112,7 +112,7 @@ preserves-unit-continuation-modality R =
     ( preserves-unit-continuation-modality')
 ```
 
-We must verify that continuations distribute over products. Notice that for a
+We must verify that continuations distribute over [products](foundation.cartesian-product-types.md). Notice that for a
 general type `R`, there are two canonical candidates for a map
 
 ```text
