@@ -63,7 +63,7 @@ record
 open is-large-lawvere-tierney-topology public
 ```
 
-### The large set of Lawvere-Tierney topologies
+### The large type of Lawvere-Tierney topologies
 
 ```agda
 record
