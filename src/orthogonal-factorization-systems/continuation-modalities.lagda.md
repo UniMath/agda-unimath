@@ -39,7 +39,7 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ## Idea
 
 Given a [proposition](foundation-core.propositions.md) `R`, the
-[continuations](foundation.continuations.md) on `R`
+[continuations monad](foundation.continuations.md) on `R`
 
 ```text
   A ↦ ((A → R) → R)
@@ -88,11 +88,11 @@ is-uniquely-eliminating-modality-continuation-modality l R P =
         ( c))
 ```
 
-This proof is a generalization of Example 1.9 in {{#cite RSS20}}, where the
-special case when `R` is the [empty type](foundation-core.empty-types.md) is
-considered.
+This proof is a generalization of the proof given in Example 1.9 of
+{{#cite RSS20}}, where the special case when `R` is the
+[empty type](foundation-core.empty-types.md) is considered.
 
-### Continuations on propositions define Lawvere–Tierney topologies
+### The continuation monad on a proposition defines a Lawvere–Tierney topology
 
 Every operator taking values in propositions that has a unit map trivially
 preserves the unit type.
@@ -112,8 +112,9 @@ preserves-unit-continuation-modality R =
     ( preserves-unit-continuation-modality')
 ```
 
-We must verify that continuations distribute over [products](foundation.cartesian-product-types.md). Notice that for a
-general type `R`, there are two canonical candidates for a map
+We must verify that continuations distribute over
+[products](foundation.cartesian-product-types.md). Notice that for a general
+type `R`, there are two canonical candidates for a map
 
 ```text
   continuation R A × continuation R B → continuation R (A × B)

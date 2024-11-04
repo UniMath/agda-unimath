@@ -1,4 +1,4 @@
-# Continuations
+# The continuation monad
 
 ```agda
 module foundation.continuations where
@@ -44,14 +44,13 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 
 ## Idea
 
-Given a type `R`,
-{{#concept "continuations" Disambiguation="on a type" Agda=continuation}} on `R`
+Given a type `R`, the
+{{#concept "continuation monad" Disambiguation="on a type" Agda=continuation}}
+on `R` is the functorial construction defined on types by
 
 ```text
-  A ↦ ((A → R) → R)
+  A ↦ ((A → R) → R).
 ```
-
-defines a monad on types.
 
 ## Definitions
 
@@ -63,7 +62,7 @@ continuation :
 continuation R A = (A → R) → R
 ```
 
-### The functorial action on maps of continuations
+### The functorial action of the continuation monad on maps
 
 ```agda
 map-continuation :
@@ -80,16 +79,18 @@ unit-continuation :
 unit-continuation = ev
 ```
 
-### Maps into continuations extend along the unit
+### Maps into `continuation R A` extend along the unit
 
-Every `f` as in the following diagram extends along the unit of its domain
+Every `f` as in the following diagram
+[extends](orthogonal-factorization-systems.extensions-of-maps.md) along the unit
+of its domain
 
 ```text
                f
-         A ----------> continuation R B
-         |             ∧
-     η_A |           ⋰
-         ∨         ⋰
+         A -------> continuation R B
+         |           ∧
+     η_A |         ⋰
+         ∨       ⋰
   continuation R A.
 ```
 
@@ -113,7 +114,7 @@ module _
     ( extend-continuation f , is-extension-extend-continuation f)
 ```
 
-### The monoidal multiplication operation on continuations
+### The monoidal multiplication operation of the continuation monad
 
 ```agda
 mul-continuation :
@@ -124,7 +125,7 @@ mul-continuation f c = f (ev c)
 
 ## Properties
 
-### The right unit law for continuations
+### The right unit law for the continuation monad
 
 ```agda
 module _
@@ -136,7 +137,7 @@ module _
   right-unit-law-mul-continuation = refl-htpy
 ```
 
-### Continuations on propositions are propositions
+### The continuation monad on propositions gives propositions
 
 ```agda
 is-prop-continuation :
@@ -155,7 +156,7 @@ continuation-Prop R A =
   ( continuation (type-Prop R) A , is-prop-continuation (is-prop-type-Prop R))
 ```
 
-### Computing continuations at the unit type
+### Computing `continuation` at the unit type
 
 We have the [equivalence](foundation-core.equivalences.md)
 
@@ -173,7 +174,7 @@ module _
     equiv-precomp (inv-left-unit-law-function-type R) R
 ```
 
-### Computing continuations at the empty type
+### Computing `continuation` at the empty type
 
 We have the equivalence
 
