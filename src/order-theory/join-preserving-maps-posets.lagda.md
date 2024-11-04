@@ -35,7 +35,7 @@ open import order-theory.posets
 
 A map `f : P → Q` between the underlying types of two
 [posets](order-theory.posets.md) is said to be
-{{#concept "join preserving" Disambiguation="map of posets" Agda=preserves-joins-map-Poset}}
+{{#concept "join preserving" Disambiguation="map of posets" Agda=preserves-joins-Poset}}
 if for every pair of elements `x, y : P` with a
 [least upper bound](order-theory.least-upper-bounds-posets.md) `z`, we have
 `f z` is the least upper bound of `f x` and `f y`.
@@ -51,14 +51,14 @@ module _
   (x y : type-Poset P)
   where
 
-  preserves-join-map-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  preserves-join-map-Poset =
+  preserves-join-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  preserves-join-Poset =
     (s : has-least-binary-upper-bound-Poset P x y) →
     is-least-binary-upper-bound-Poset Q (f x) (f y) (f (pr1 s))
 
-  is-prop-preserves-join-map-Poset :
-    is-prop preserves-join-map-Poset
-  is-prop-preserves-join-map-Poset =
+  is-prop-preserves-join-Poset :
+    is-prop preserves-join-Poset
+  is-prop-preserves-join-Poset =
     is-prop-Π
       ( λ s →
         is-prop-is-least-binary-upper-bound-Poset Q
@@ -66,9 +66,9 @@ module _
           ( f y)
           ( f (pr1 s)))
 
-  preserves-join-prop-map-Poset : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  preserves-join-prop-map-Poset =
-    preserves-join-map-Poset , is-prop-preserves-join-map-Poset
+  preserves-join-prop-Poset : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  preserves-join-prop-Poset =
+    preserves-join-Poset , is-prop-preserves-join-Poset
 ```
 
 ### Join preserving maps
@@ -78,37 +78,37 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  preserves-joins-map-Poset :
+  preserves-joins-Poset :
     (type-Poset P → type-Poset Q) →
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  preserves-joins-map-Poset f =
+  preserves-joins-Poset f =
     (x y : type-Poset P)
     (s : has-least-binary-upper-bound-Poset P x y) →
     is-least-binary-upper-bound-Poset Q (f x) (f y) (f (pr1 s))
 
-  is-prop-preserves-joins-map-Poset :
+  is-prop-preserves-joins-Poset :
     (f : type-Poset P → type-Poset Q) →
-    is-prop (preserves-joins-map-Poset f)
-  is-prop-preserves-joins-map-Poset f =
+    is-prop (preserves-joins-Poset f)
+  is-prop-preserves-joins-Poset f =
     is-prop-Π
-      ( λ x → is-prop-Π (is-prop-preserves-join-map-Poset P Q f x))
+      ( λ x → is-prop-Π (is-prop-preserves-join-Poset P Q f x))
 
-  preserves-joins-prop-map-Poset :
+  preserves-joins-prop-Poset :
     (type-Poset P → type-Poset Q) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  preserves-joins-prop-map-Poset f =
-    ( preserves-joins-map-Poset f , is-prop-preserves-joins-map-Poset f)
+  preserves-joins-prop-Poset f =
+    ( preserves-joins-Poset f , is-prop-preserves-joins-Poset f)
 
   hom-join-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-join-Poset =
-    Σ (type-Poset P → type-Poset Q) (preserves-joins-map-Poset)
+    Σ (type-Poset P → type-Poset Q) (preserves-joins-Poset)
 
   map-hom-join-Poset : hom-join-Poset → type-Poset P → type-Poset Q
   map-hom-join-Poset = pr1
 
-  preserves-joins-map-hom-join-Poset :
+  preserves-joins-hom-join-Poset :
     (f : hom-join-Poset) →
-    preserves-joins-map-Poset (map-hom-join-Poset f)
-  preserves-joins-map-hom-join-Poset = pr2
+    preserves-joins-Poset (map-hom-join-Poset f)
+  preserves-joins-hom-join-Poset = pr2
 
   sup-map-hom-join-Poset :
     (f : hom-join-Poset) {x y : type-Poset P} →
@@ -117,7 +117,7 @@ module _
       ( map-hom-join-Poset f x)
       ( map-hom-join-Poset f y)
   sup-map-hom-join-Poset f {x} {y} s =
-    ( map-hom-join-Poset f (pr1 s) , preserves-joins-map-hom-join-Poset f x y s)
+    ( map-hom-join-Poset f (pr1 s) , preserves-joins-hom-join-Poset f x y s)
 ```
 
 ## Properties
@@ -130,11 +130,11 @@ module _
   where
 
   abstract
-    preserves-order-preserves-joins-map-Poset :
+    preserves-order-preserves-joins-Poset :
       {f : type-Poset P → type-Poset Q} →
-      preserves-joins-map-Poset P Q f →
+      preserves-joins-Poset P Q f →
       preserves-order-Poset P Q f
-    preserves-order-preserves-joins-map-Poset {f} H x y p =
+    preserves-order-preserves-joins-Poset {f} H x y p =
       pr1
         ( pr2
           ( H x y (y , is-least-binary-upper-bound-leq-Poset P x y p) (f y))
@@ -163,10 +163,10 @@ module _
   is-torsorial-htpy-hom-join-Poset f =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy (map-hom-join-Poset P Q f))
-      ( is-prop-preserves-joins-map-Poset P Q)
+      ( is-prop-preserves-joins-Poset P Q)
       ( map-hom-join-Poset P Q f)
       ( refl-htpy)
-      ( preserves-joins-map-hom-join-Poset P Q f)
+      ( preserves-joins-hom-join-Poset P Q f)
 
   is-equiv-htpy-eq-hom-join-Poset :
     (f g : hom-join-Poset P Q) → is-equiv (htpy-eq-hom-join-Poset f g)
@@ -194,7 +194,7 @@ module _
   where
 
   preserves-joins-id-Poset :
-    preserves-joins-map-Poset P P (id {A = type-Poset P})
+    preserves-joins-Poset P P (id {A = type-Poset P})
   preserves-joins-id-Poset x y s = pr2 s
 
   id-hom-join-Poset : hom-join-Poset P P
@@ -211,10 +211,10 @@ module _
 
   preserves-joins-comp-Poset :
     (g : hom-join-Poset Q R) (f : hom-join-Poset P Q) →
-    preserves-joins-map-Poset P R
+    preserves-joins-Poset P R
       ( map-hom-join-Poset Q R g ∘ map-hom-join-Poset P Q f)
   preserves-joins-comp-Poset g f x y s =
-    preserves-joins-map-hom-join-Poset Q R g
+    preserves-joins-hom-join-Poset Q R g
       ( map-hom-join-Poset P Q f x)
       ( map-hom-join-Poset P Q f y)
       ( sup-map-hom-join-Poset P Q f s)
