@@ -60,7 +60,7 @@ defines a monad on types.
 ```agda
 continuation :
   {l1 l2 : Level} (R : UU l1) (A : UU l2) → UU (l1 ⊔ l2)
-continuation R A = ((A → R) → R)
+continuation R A = (A → R) → R
 ```
 
 ### The functorial action on maps of continuations
