@@ -11,6 +11,7 @@ open import domain-theory.directed-families-posets
 
 open import elementary-number-theory.decidable-total-order-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.natural-numbers
 
 open import foundation.booleans
 open import foundation.dependent-pair-types
@@ -31,6 +32,7 @@ open import foundation.surjective-maps
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
+open import order-theory.join-preserving-maps-posets
 open import order-theory.least-upper-bounds-posets
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
@@ -43,14 +45,25 @@ open import order-theory.posets
 A map `f : P → Q` between the underlying types of two
 [posets](order-theory.posets.md) is said to be
 {{#concept "ω-continuous" Disambiguation="map of posets" Agda=ω-continuous-map-Poset}}
+if it maps the supremum of every ascending
+[chain](order-theory.chains-posets.md)
 
 ```text
-  f(⋃ᵢxᵢ) = ⋃ᵢf(xᵢ)
+  x₀ ≤ x₁ ≤ x₂ ≤ ­… ≤ xₙ ≤ xₙ₊₁ ≤ … ≤ xω
 ```
 
-for every [directed family](domain-theory.directed-families-posets.md)
-`x₍₋₎ : I → P` with a [supremum](order-theory.least-upper-bounds-posets.md) in
-`P`.
+to the supremum of the image of the ascending chain
+
+```text
+  f x₀ ≤ f x₁ ≤ f x₂ ≤ ­… ≤ f xₙ ≤ f xₙ₊₁ ≤ … ≤ f xω.
+```
+
+In other words, `f(⋃ᵢxᵢ) = ⋃ᵢf(xᵢ)` for all ascending chains `x₍₋₎ : ℕ → P`.
+
+The ω-continuity condition is a proper generalization of
+[Scott-continuity](domain-theory.scott-continuous-functions-posets.md) for which
+[Kleene's fixed point theorem](domain-theory.kleenes-fixed-point-theorem-omega-complete-posets.md)
+still applies.
 
 ## Definitions
 
@@ -159,33 +172,17 @@ module _
       is-ω-continuous-map-Poset P Q f →
       preserves-order-Poset P Q f
     preserves-order-is-ω-continuous-map-Poset {f} H x y p =
-      pr2 (H ((λ n → {!   !}) , {!   !}) ({!   !} , {!   !}) (f y)) {! p  !} {!   !}
-      -- pr2
-      --   ( preserves-small-supremum-omega-is-ω-continuous-map-Poset
-      --     ( P)
-      --     ( Q)
-      --     ( H)
-      --     ( ( bool , unit-trunc-Prop true) ,
-      --       rec-bool x y ,
-      --       λ where
-      --       true true →
-      --         intro-exists true (refl-leq-Poset P x , refl-leq-Poset P x)
-      --       true false →
-      --         intro-exists false (p , refl-leq-Poset P y)
-      --       false true →
-      --         intro-exists false (refl-leq-Poset P y , p)
-      --       false false →
-      --         intro-exists false (refl-leq-Poset P y , refl-leq-Poset P y))
-      --     ( Raise l5 bool)
-      --     ( y ,
-      --       λ z →
-      --       ( ( ev (map-raise false)) ,
-      --         ( λ where
-      --           u (map-raise true) → transitive-leq-Poset P x y z u p
-      --           u (map-raise false) → u)))
-      --     ( f y))
-      --   ( refl-leq-Poset Q (f y))
-      --   ( map-raise true)
+      pr2
+        ( H ( hom-ind-ℕ-Poset P
+              ( rec-ℕ x (λ _ _ → y))
+              ( ind-ℕ p (λ _ _ → refl-leq-Poset P y)))
+            ( y ,
+              ( λ z →
+                ( λ g → g 1) ,
+                ( λ q → ind-ℕ (transitive-leq-Poset P x y z q p) (λ _ _ → q))))
+            ( f y))
+        ( refl-leq-Poset Q (f y))
+        ( 0)
 
   hom-ω-continuous-hom-Poset :
     ω-continuous-hom-Poset P Q → hom-Poset P Q

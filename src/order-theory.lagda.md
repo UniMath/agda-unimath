@@ -53,6 +53,7 @@ open import order-theory.inhabited-chains-posets public
 open import order-theory.inhabited-chains-preorders public
 open import order-theory.inhabited-finite-total-orders public
 open import order-theory.interval-subposets public
+open import order-theory.join-preserving-maps-posets public
 open import order-theory.join-semilattices public
 open import order-theory.knaster-tarski-fixed-point-theorem public
 open import order-theory.large-frames public

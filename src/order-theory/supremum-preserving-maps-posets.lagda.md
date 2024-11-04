@@ -24,6 +24,7 @@ open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
+open import order-theory.join-preserving-maps-posets
 open import order-theory.least-upper-bounds-posets
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
@@ -36,6 +37,7 @@ open import order-theory.posets
 A map `f : P → Q` between the underlying types of two
 [posets](order-theory.posets.md) is said to be
 {{#concept "supremum preserving" Disambiguation="map of posets" Agda=preserves-suprema-map-Poset}}
+if
 
 ```text
   f(⋃ᵢxᵢ) = ⋃ᵢf(xᵢ)
@@ -141,6 +143,27 @@ module _
     H (x ∘ map-inv-equiv-is-small u)
 ```
 
+### Supremum preserving maps preserve joins
+
+```text
+module _
+  {l1 l2 l3 l4 l5 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
+  where
+
+  abstract
+    preserves-joins-preserves-suprema-map-Poset :
+      {f : type-Poset P → type-Poset Q} →
+      preserves-suprema-map-Poset P Q l5 f →
+      preserves-joins-map-Poset P Q f
+    preserves-joins-preserves-suprema-map-Poset {f} H x y s =
+      is-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset
+        ( Q)
+        ( rec-bool (f x) (f y))
+        ( f (pr1 s) , ？) -- TODO
+```
+
+> From this property the next would be a simple corollary.
+
 ### Supremum preserving maps preserve order
 
 ```agda
@@ -242,11 +265,10 @@ module _
     (g : hom-sup-Poset Q R l7) (f : hom-sup-Poset P Q l7) →
     preserves-suprema-map-Poset P R l7
       ( map-hom-sup-Poset Q R g ∘ map-hom-sup-Poset P Q f)
-  preserves-suprema-comp-Poset g f x y H =
+  preserves-suprema-comp-Poset g f x y =
     preserves-suprema-map-hom-sup-Poset Q R g
       ( map-hom-sup-Poset P Q f ∘ x)
       ( sup-map-hom-sup-Poset P Q f y)
-      ( H)
 
   comp-hom-sup-Poset :
     (g : hom-sup-Poset Q R l7) (f : hom-sup-Poset P Q l7) →

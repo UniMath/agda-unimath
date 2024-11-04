@@ -334,6 +334,36 @@ module _
     is-least-upper-bound-family-of-elements-has-least-binary-upper-bound-Poset
 ```
 
+### Least upper bounds of families over the booleans as binary least upper bounds
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (x : bool → type-Poset P)
+  (H : has-least-upper-bound-family-of-elements-Poset P x)
+  where
+
+  least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset :
+    type-Poset P
+  least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset =
+    pr1 H
+
+  is-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset :
+    is-least-binary-upper-bound-Poset P
+      ( x true)
+      ( x false)
+      ( least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset)
+  is-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset z =
+    ( λ f →
+      pr1 (pr2 H z) (ind-bool (λ i → leq-Poset P (x i) z) (pr1 f) (pr2 f))) ,
+    ( λ u → pr2 (pr2 H z) u true , pr2 (pr2 H z) u false)
+
+  has-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset :
+    has-least-binary-upper-bound-Poset P (x true) (x false)
+  has-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset =
+    least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset ,
+    is-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset
+```
+
 ### if $a ≤ b$ then $b$ is the least binary upper bound of $a$ and $b$
 
 ```agda
