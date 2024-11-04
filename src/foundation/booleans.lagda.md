@@ -197,6 +197,32 @@ pr1 bool-Set = bool
 pr2 bool-Set = is-set-bool
 ```
 
+### The "is true" predicate on booleans
+
+```agda
+is-true : bool → UU lzero
+is-true = Eq-bool true
+
+is-prop-is-true : (b : bool) → is-prop (is-true b)
+is-prop-is-true = is-prop-Eq-bool true
+
+is-true-Prop : bool → Prop lzero
+is-true-Prop b = is-true b , is-prop-is-true b
+```
+
+### The "is false" predicate on booleans
+
+```agda
+is-false : bool → UU lzero
+is-false = Eq-bool false
+
+is-prop-is-false : (b : bool) → is-prop (is-false b)
+is-prop-is-false = is-prop-Eq-bool false
+
+is-false-Prop : bool → Prop lzero
+is-false-Prop b = is-false b , is-prop-is-false b
+```
+
 ### The type of booleans is equivalent to `Fin 2`
 
 ```agda

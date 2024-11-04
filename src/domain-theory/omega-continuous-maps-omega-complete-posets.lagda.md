@@ -1,4 +1,4 @@
-# ω-continuous maps between ω-complete posets
+# ω-Continuous maps between ω-complete posets
 
 ```agda
 module domain-theory.omega-continuous-maps-omega-complete-posets where

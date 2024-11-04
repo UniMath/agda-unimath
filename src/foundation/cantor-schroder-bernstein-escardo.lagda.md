@@ -41,8 +41,9 @@ Escardó proved that a Cantor–Schröder–Bernstein theorem also holds for
 ## Statement
 
 ```agda
-type-Cantor-Schröder-Bernstein-Escardó : (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
-type-Cantor-Schröder-Bernstein-Escardó l1 l2 =
+statement-Cantor-Schröder-Bernstein-Escardó :
+  (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
+statement-Cantor-Schröder-Bernstein-Escardó l1 l2 =
   {X : UU l1} {Y : UU l2} → (X ↪ Y) → (Y ↪ X) → X ≃ Y
 ```
 
@@ -162,7 +163,7 @@ module _
 
 Cantor-Schröder-Bernstein-Escardó :
   {l1 l2 : Level} (lem : LEM (l1 ⊔ l2)) →
-  type-Cantor-Schröder-Bernstein-Escardó l1 l2
+  statement-Cantor-Schröder-Bernstein-Escardó l1 l2
 Cantor-Schröder-Bernstein-Escardó lem f g =
   ( map-Cantor-Schröder-Bernstein-Escardó lem f g ,
     is-equiv-map-Cantor-Schröder-Bernstein-Escardó lem f g)

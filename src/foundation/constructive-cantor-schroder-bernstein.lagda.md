@@ -53,19 +53,21 @@ open import order-theory.suplattices
 
 ## Idea
 
+We consider a constructive refinement of the Cantor–Schröder–Bernstein theorem.
+
 The Cantor–Schröder–Bernstein theorem asserts that, assuming
 [the law of excluded middle](foundation.law-of-excluded-middle.md), every pair
 of mutually [embedding](foundation-core.embeddings.md) types `f : X ↪ Y` and
 `g : Y ↪ X` are equivalent. Here, we generalize this statement by dropping the
 assumption of the law of excluded middle, and rather considering embeddings that
-satisfy certain classicality assumptions.
+satisfy certain computability assumptions.
 
 ## Statement
 
 ```agda
-type-constructive-Cantor-Schröder-Bernstein :
+statement-constructive-Cantor-Schröder-Bernstein :
   (l1 l2 : Level) → UU (lsuc (l1 ⊔ l2))
-type-constructive-Cantor-Schröder-Bernstein l1 l2 =
+statement-constructive-Cantor-Schröder-Bernstein l1 l2 =
   {X : UU l1} {Y : UU l2} → (X ↪ᵈ Y) → (Y ↪ᵈ X) → X ≃ Y
 ```
 
@@ -231,12 +233,13 @@ module _
         ( powerset-Poset (l1 ⊔ l2) X)
         ( hom-powerset-Cantor-Schröder-Bernstein f g))
   fixed-point-domain-Cantor-Schröder-Bernstein =
-    fixed-point-knaster-tarski-Suplattice
-      ( resize-type-Suplattice
-        ( powerset-Suplattice X {! l1 ⊔ l2 !} lzero)
-        {!   !})
-      {!  hom-powerset-Cantor-Schröder-Bernstein f g !}
-      {!   !}
+    fixed-point-knaster-tarski-Suplattice {!   !} {!   !} {!   !}
+      -- ( resize-type-Suplattice
+      --   ( powerset-Suplattice X {! l1 ⊔ l2 !} lzero)
+      --   {!   !})
+      -- {!  hom-powerset-Cantor-Schröder-Bernstein f g !}
+      -- {!   !}
+
       -- ( resize-type-Suplattice (powerset-Suplattice X {!   !} {!   !}) {!   !}) {!   !} {!   !}
 ```
 
@@ -328,14 +331,22 @@ module _
 ### Proof using Kleene's fixed point theorem
 
 Assuming that `g` is a De Morgan embedding, the operator
-`¬X\g(Y\f(-)) : 𝒫(X) → 𝒫(X)` is Scott continuous:
+`¬X\g(Y\f(-)) : 𝒫(X) → 𝒫(X)` is ω-continuous:
 
 ```text
   X\g(Y\f(⋃ᵢUᵢ)) = X\g(Y\(⋃ᵢfᵢ(Uᵢ)))   unions commute with images
                  = X\g(⋂ᵢY\f(Uᵢ))      constructively valid De Morgan law
                  = X\(⋂ᵢg(Y\f(Uᵢ)))    meets commute with images
-                 = ⋃ᵢ(X\g(Y\f(Uᵢ)))    g is De Morgan
+                 = ⋃ᵢ(X\g(Y\f(Uᵢ)))    g is De Morgan -- ?
 ```
+
+The final step is not automatic. In fact, if we were not to consider that
+`U ⊆ X\g(Y\f(U))`, this would be equivalent to
+[Markov's principle](logic.markovs-principle.md).
+
+Let us consider it in more detail. Let `Pᵢ` be a countable family of
+propositions such that `Pᵢ ⇒ Pᵢ₊₁`. Then `∃ i (¬ Pᵢ) ⇒ ¬ (∀ i, Pᵢ)`. If `Pᵢ` are
+De Morgan
 
 Kleene's fixed point theorem then states that, given a starting point
 `U : 𝒫(X)`, the sequence
