@@ -106,4 +106,4 @@ module _
 - [Complete bipartite graph](https://en.wikipedia.org/wiki/Complete_bipartite_graph)
   at Wikipedia
 - [Complete bipartite graphs](https://mathworld.wolfram.com/CompleteBipartiteGraph.html)
-  at Wolfram Mathworld
+  at Wolfram MathWorld

@@ -53,4 +53,4 @@ module _
 - [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
   Wikipedia
 - [Trail](https://www.wikidata.org/entity/Q17455228) on Wikidata
-- [Trail](https://mathworld.wolfram.com/Trail.html) at Wolfram Mathworld
+- [Trail](https://mathworld.wolfram.com/Trail.html) at Wolfram MathWorld

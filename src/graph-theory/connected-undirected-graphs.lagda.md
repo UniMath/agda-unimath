@@ -54,4 +54,4 @@ module _
 - [Connectivity (graph theory)](<https://en.wikipedia.org/wiki/Connectivity_(graph_theory)>)
   on Wikipedia
 - [Connected graph](https://mathworld.wolfram.com/ConnectedGraph.html) at
-  Wolfram Mathworld
+  Wolfram MathWorld

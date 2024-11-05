@@ -7,11 +7,13 @@ module foundation.maybe where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
+open import foundation.existential-quantification
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-empty-type
@@ -49,6 +51,22 @@ not [idempotent](foundation.idempotent-maps.md).
 ```agda
 Maybe : {l : Level} → UU l → UU l
 Maybe X = X + unit
+
+unit-Maybe : {l : Level} {X : UU l} → X → Maybe X
+unit-Maybe = inl
+
+exception-Maybe : {l : Level} {X : UU l} → Maybe X
+exception-Maybe = inr star
+
+extend-Maybe :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Maybe Y) → Maybe X → Maybe Y
+extend-Maybe f (inl x) = f x
+extend-Maybe f (inr *) = inr *
+
+map-Maybe :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → Maybe X → Maybe Y
+map-Maybe f (inl x) = inl (f x)
+map-Maybe f (inr *) = inr *
 ```
 
 ### The inductive definition of the maybe monad
@@ -59,12 +77,6 @@ data Maybe' {l : Level} (X : UU l) : UU l where
   exception-Maybe' : Maybe' X
 
 {-# BUILTIN MAYBE Maybe' #-}
-
-unit-Maybe : {l : Level} {X : UU l} → X → Maybe X
-unit-Maybe = inl
-
-exception-Maybe : {l : Level} {X : UU l} → Maybe X
-exception-Maybe {l} {X} = inr star
 ```
 
 ### The predicate of being an exception
@@ -148,7 +160,7 @@ abstract
 ```agda
 decide-Maybe :
   {l : Level} {X : UU l} (x : Maybe X) → is-value-Maybe x + is-exception-Maybe x
-decide-Maybe (inl x) = inl (pair x refl)
+decide-Maybe (inl x) = inl (x , refl)
 decide-Maybe (inr star) = inr refl
 ```
 
@@ -159,7 +171,7 @@ abstract
   is-not-exception-is-value-Maybe :
     {l1 : Level} {X : UU l1} (x : Maybe X) →
     is-value-Maybe x → is-not-exception-Maybe x
-  is-not-exception-is-value-Maybe {l1} {X} .(inl x) (pair x refl) =
+  is-not-exception-is-value-Maybe {l1} {X} .(inl x) (x , refl) =
     is-not-exception-unit-Maybe x
 ```
 
@@ -222,6 +234,39 @@ module _
 
   equiv-Maybe-Maybe' : Maybe X ≃ Maybe' X
   equiv-Maybe-Maybe' = (map-Maybe-Maybe' , is-equiv-map-Maybe-Maybe')
+```
+
+### The extension of surjective maps is surjective
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-surjective-extend-is-surjective-Maybe :
+    {f : A → Maybe B} → is-surjective f → is-surjective (extend-Maybe f)
+  is-surjective-extend-is-surjective-Maybe {f} F y =
+    elim-exists
+      ( exists-structure-Prop (Maybe A) (λ z → extend-Maybe f z ＝ y))
+      ( λ x p → intro-exists (inl x) p)
+      ( F y)
+```
+
+### The functorial action of `Maybe` preserves surjective maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-surjective-map-is-surjective-Maybe :
+    {f : A → B} → is-surjective f → is-surjective (map-Maybe f)
+  is-surjective-map-is-surjective-Maybe {f} F (inl y) =
+    elim-exists
+      ( exists-structure-Prop (Maybe A) (λ z → map-Maybe f z ＝ inl y))
+      ( λ x p → intro-exists (inl x) (ap inl p))
+      ( F y)
+  is-surjective-map-is-surjective-Maybe F (inr *) = intro-exists (inr *) refl
 ```
 
 ### There is a surjection from `Maybe A + Maybe B` to `Maybe (A + B)`

@@ -98,6 +98,10 @@ premetric-leq-ℝ l d x y =
 
 ### The standard premetric on the real numbers is a metric structure
 
+The triangle inequality is the 91st theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
 ```agda
 is-reflexive-premetric-leq-ℝ :
   {l : Level} → is-reflexive-Premetric (premetric-leq-ℝ l)
@@ -258,3 +262,7 @@ is-isometry-metric-space-leq-real-ℚ d x y =
       ( leq-add-positive-le-le-add-positive-ℚ x y d)
       ( leq-add-positive-le-le-add-positive-ℚ y x d))
 ```
+
+## References
+
+{{#bibliography}}

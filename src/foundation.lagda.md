@@ -30,6 +30,7 @@ open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
 open import foundation.bands public
 open import foundation.base-changes-span-diagrams public
+open import foundation.bicomposition-functions public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public
@@ -84,6 +85,7 @@ open import foundation.connected-types public
 open import foundation.constant-maps public
 open import foundation.constant-span-diagrams public
 open import foundation.constant-type-families public
+open import foundation.continuations public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
 open import foundation.copartial-elements public
@@ -136,6 +138,7 @@ open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-modality public
+open import foundation.double-negation-stable-propositions public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
 open import foundation.effective-maps-equivalence-relations public
@@ -194,6 +197,7 @@ open import foundation.functoriality-dependent-function-types public
 open import foundation.functoriality-dependent-pair-types public
 open import foundation.functoriality-fibers-of-maps public
 open import foundation.functoriality-function-types public
+open import foundation.functoriality-morphisms-arrows public
 open import foundation.functoriality-propositional-truncation public
 open import foundation.functoriality-pullbacks public
 open import foundation.functoriality-sequential-limits public
@@ -207,6 +211,7 @@ open import foundation.higher-homotopies-morphisms-arrows public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
 open import foundation.homotopies-morphisms-arrows public
+open import foundation.homotopies-morphisms-cospan-diagrams public
 open import foundation.homotopy-algebra public
 open import foundation.homotopy-induction public
 open import foundation.homotopy-preorder-of-types public
@@ -229,6 +234,7 @@ open import foundation.intersections-subtypes public
 open import foundation.inverse-sequential-diagrams public
 open import foundation.invertible-maps public
 open import foundation.involutions public
+open import foundation.irrefutable-propositions public
 open import foundation.isolated-elements public
 open import foundation.isomorphisms-of-sets public
 open import foundation.iterated-cartesian-product-types public
@@ -327,6 +333,7 @@ open import foundation.propositional-maps public
 open import foundation.propositional-resizing public
 open import foundation.propositional-truncations public
 open import foundation.propositions public
+open import foundation.pullback-cones public
 open import foundation.pullbacks public
 open import foundation.pullbacks-subtypes public
 open import foundation.quasicoherently-idempotent-maps public
