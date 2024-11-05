@@ -291,7 +291,7 @@ has-odd-expansion-is-odd-ℤ (inl (succ-ℕ zero-ℕ)) H =
 has-odd-expansion-is-odd-ℤ (inl (succ-ℕ (succ-ℕ a))) H =
   {!!}
   where
-  t = has-odd-expansion-is-odd-ℤ (inl a) ?
+  t = has-odd-expansion-is-odd-ℤ (inl a) {!!}
 has-odd-expansion-is-odd-ℤ (inr a) H = {!!}
 ```
 
