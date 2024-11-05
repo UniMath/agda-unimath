@@ -75,6 +75,10 @@ in several ways:
 Note that the [univalence axiom](foundation-core.univalence.md) is neccessary to
 prove the second uniqueness property of prime factorizations.
 
+The fundamental theorem of arithmetic is the 80th theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
 ## Definitions
 
 ### Prime decomposition of a natural number with lists
@@ -612,33 +616,33 @@ is-least-element-head-list-fundamental-theorem-arithmetic-succ-ℕ :
     ( ℕ-Decidable-Total-Order)
     ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
     ( list-fundamental-theorem-arithmetic-ℕ
-      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( leq-one-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
-        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( preserves-leq-succ-ℕ 1 x H)))
 is-least-element-head-list-fundamental-theorem-arithmetic-succ-ℕ x H =
   is-least-element-list-least-prime-divisor-ℕ
     ( x)
     ( H)
     ( list-fundamental-theorem-arithmetic-ℕ
-      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( leq-one-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
-        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( preserves-leq-succ-ℕ 1 x H)))
     ( is-list-of-nontrivial-divisors-fundamental-theorem-arithmetic-ℕ
-      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+      ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( leq-one-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
-        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( preserves-leq-succ-ℕ 1 x H)))
 
 is-sorted-least-element-list-fundamental-theorem-arithmetic-ℕ :
-  (x : ℕ) → (H : leq-ℕ 1 x) →
+  (x : ℕ) → (H : leq-ℕ 1 x) →
   is-sorted-least-element-list
     ( ℕ-Decidable-Total-Order)
     ( list-fundamental-theorem-arithmetic-ℕ x H)
@@ -1092,3 +1096,7 @@ pr2 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
 
 - [Fundamental theorem of arithmetic](https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic)
   at Wikipedia
+
+## References
+
+{{#bibliography}}

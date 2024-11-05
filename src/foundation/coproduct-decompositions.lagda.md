@@ -302,7 +302,7 @@ module _
             ( pr1
               ( compute-left-matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
                 ( pr1 y)
-                ( inv (pr2 y))))) ∙
+                ( inv (pr2 y))))) ∙
           ap
             inl
             ( eq-pair-Σ
@@ -365,7 +365,7 @@ module _
             ( pr1
               ( compute-right-matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
                 ( pr1 y)
-                ( inv (pr2 y))))) ∙
+                ( inv (pr2 y))))) ∙
           ap
             inr
             ( eq-pair-Σ
