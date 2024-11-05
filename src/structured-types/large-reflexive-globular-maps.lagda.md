@@ -43,9 +43,9 @@ preserving reflexivity cells up to a higher cell. The two notions of maps
 between reflexive globular types preserving the reflexivity structure up to a
 higher cell are, depending of the direction of the coherence cells, the notions
 of
-[large colax reflexive globular maps](structured-types.large-colax-reflexive-globular-maps.md)
+[large colaxly reflexive globular maps](structured-types.large-colaxly-reflexive-globular-maps.md)
 and
-[large lax reflexive globular maps](structured-types.large-lax-reflexive-globular-maps.md).
+[large laxly reflexive globular maps](structured-types.large-laxly-reflexive-globular-maps.md).
 
 ## Definitions
 

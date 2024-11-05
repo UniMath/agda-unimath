@@ -20,7 +20,7 @@ open import foundation-core.identity-types
 ## Idea
 
 A {{#concept "reflexive relation" Agda=Reflexive-Relation}} on a type `A` is a
-type-valued [binary relation](foundation.binary-relations.md) `R : A → A → 𝒰`
+type valued [binary relation](foundation.binary-relations.md) `R : A → A → 𝒰`
 [equipped](foundation.structure.md) with a proof `r : (x : A) → R x x`.
 
 ## Definitions
