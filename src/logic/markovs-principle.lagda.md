@@ -102,9 +102,28 @@ Markov's-Principle = is-markovian ℕ
 
 ## Properties
 
+### A type is Markovian if and only if it is Markovian at any universe level
+
+> This remains to be formalized.
+
 ### A type is Markovian if and only if it is Markovian at all universe levels
 
 > This remains to be formalized.
+
+### Markov's principle is constructively valid for ascending chains of decidable propositions
+
+**Proof.** Assume given a descending chain of propositions `Pᵢ ⇒ Pᵢ₊₁` indexed
+by the natural numbers `ℕ`. This gives a subtype `𝒫` of `ℕ` given by `i ∈ 𝒫` iff
+`Pᵢ` is true. Observe that if `i ∈ 𝒫` then every `j ≥ i` is also in `𝒫`, and
+there must exist a least `k ∈ 𝒫`. Therefore, `𝒫 = Σ (m ∈ ℕ) (m ≥ k)` for some
+`k`. So, if `¬∀Pᵢ` it is necessarily the case that `¬P₀`.
+
+```agda
+markov-descending-chain-ℕ :
+  {l : Level} (P : ℕ → UU l)
+  (H : (n : ℕ) → P n → P (succ-ℕ n)) → ¬ ((n : ℕ) → P n) → Σ ℕ (¬_ ∘ P)
+markov-descending-chain-ℕ P H q = (0 , λ x → q (ind-ℕ x H))
+```
 
 ## See also
 
