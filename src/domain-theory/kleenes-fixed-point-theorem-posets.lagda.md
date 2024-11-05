@@ -43,27 +43,28 @@ open import order-theory.upper-bounds-posets
 states that given an
 [ω-continuous](domain-theory.omega-continuous-maps-posets.md) endomap
 `f : 𝒜 → 𝒜` on a [poset](domain-theory.posets.md) `𝒜`, then for every `x ∈ 𝒜`
-such that `x ≤ f x`, the ω-transfinite application of `f` to `x`, given that it
-exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of `f`:
+such that `x ≤ f x`, the ω-transfinite application of `f` to `x`,`f^ω(x)`, given
+that it exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of
+`f`:
 
 ```text
-  x ≤ f(x) ≤ f²(x) ≤ … ≤ fⁿ(x) ≤ … ≤ fω(x) = f(fω(x)) = ….
+  x ≤ f(x) ≤ f²(x) ≤ … ≤ fⁿ(x) ≤ … ≤ f^ω(x) = f(^fω(x)) = ….
 ```
 
 If `𝒜` has a [bottom element](order-theory.bottom-elements-posets.md) `⊥`, then
-this construction gives a least fixed point of `f`.
+this construction applied to `⊥` gives a least fixed point of `f`.
 
 **Duality.** Of course, since the structure of posets is self-dual, there is a
 dual Kleene's fixed point theorem that, for every ω-cocontinuous endomap `f` and
 point `y ∈ 𝒜`, if `f(y) ≤ y`, then the ω-transfinite application of `f` to `y`,
-given that it exists, gives a fixed point of `f`:
+`f^ω(y)`, given that it exists, gives a fixed point of `f`:
 
 ```text
-  … = f(fω(y)) = fω(y) ≤ … ≤ fⁿ(y) ≤ … ≤ f²(y) ≤ f(y) ≤ y.
+  … = f(f^ω(y)) = f^ω(y) ≤ … ≤ fⁿ(y) ≤ … ≤ f²(y) ≤ f(y) ≤ y.
 ```
 
-If `𝒜` has a [top element](order-theory.top-elements-posets.md), then this
-construction gives a greatest fixed point of `f`.
+If `𝒜` has a [top element](order-theory.top-elements-posets.md) `⊤`, then this
+construction applied to `⊤` gives a greatest fixed point of `f`.
 
 ## Construction
 

@@ -47,16 +47,16 @@ states that given an
 [ω-continuous](domain-theory.omega-continuous-maps-omega-complete-posets.md)
 endomap `f : 𝒜 → 𝒜` on an
 [ω-complete poset](domain-theoryomega-complete-posets.md) `𝒜`, then for every
-`x ∈ 𝒜` such that `x ≤ f x`, the ω-transfinite application of `f` to `x`, given
-that it exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of
-`f`:
+`x ∈ 𝒜` such that `x ≤ f x`, the ω-transfinite application of `f` to `x`,
+`f^ω(x)`, given that it exists, is a
+[fixed point](foundation.fixed-points-endofunctions.md) of `f`:
 
 ```text
-  x ≤ f(x) ≤ f²(x) ≤ … ≤ fⁿ(x) ≤ … ≤ fω(x) = f(fω(x)) = ….
+  x ≤ f(x) ≤ f²(x) ≤ … ≤ fⁿ(x) ≤ … ≤ f^ω(x) = f(f^ω(x)) = ….
 ```
 
 If `𝒜` has a [bottom element](order-theory.bottom-elements-posets.md) `⊥`, then
-this construction gives a least fixed point of `f`.
+this construction applied to `⊥` gives a least fixed point of `f`.
 
 ## Construction
 
