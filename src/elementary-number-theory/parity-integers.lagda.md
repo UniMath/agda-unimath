@@ -9,14 +9,20 @@ module elementary-number-theory.parity-integers where
 ```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.difference-integers
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.unit-similarity-integers
 
 open import foundation.coproduct-types
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.fibers-of-maps
+open import foundation.identity-types
 open import foundation.negation
 open import foundation.universe-levels
 ```
@@ -38,14 +44,39 @@ integers are those that aren't.
 
 ## Definitions
 
-### Even and odd integers
+### Even integers
 
 ```agda
 is-even-ℤ : ℤ → UU lzero
 is-even-ℤ a = div-ℤ (int-ℕ 2) a
+```
 
+### The bi-infinite sequence of even integers
+
+```agda
+even-integer-ℤ : ℤ → ℤ
+even-integer-ℤ a = int-ℕ 2 *ℤ a
+```
+
+### Odd integers
+
+```agda
 is-odd-ℤ : ℤ → UU lzero
 is-odd-ℤ a = ¬ (is-even-ℤ a)
+```
+
+### The bi-infinite sequence of odd integers
+
+```agda
+odd-integer-ℤ : ℤ → ℤ
+odd-integer-ℤ a = int-ℕ 2 *ℤ a +ℤ one-ℤ
+```
+
+### The type of odd expansions of an integer
+
+```agda
+has-odd-expansion-ℤ : ℤ → UU lzero
+has-odd-expansion-ℤ = fiber odd-integer-ℤ
 ```
 
 ## Properties
@@ -129,18 +160,35 @@ is-decidable-is-odd-ℤ : (a : ℤ) → is-decidable (is-odd-ℤ a)
 is-decidable-is-odd-ℤ a = is-decidable-neg (is-decidable-is-even-ℤ a)
 ```
 
+### An integer is even if and only if it is not odd
+
+```agda
+is-even-is-not-odd-ℤ :
+  (a : ℤ) → ¬ (is-odd-ℤ a) → is-even-ℤ a
+is-even-is-not-odd-ℤ a =
+  double-negation-elim-is-decidable (is-decidable-is-even-ℤ a)
+```
+
 ### `0` is an even integer
 
 ```agda
-is-even-zero-ℤ : is-even-ℤ (int-ℕ 0)
+is-even-zero-ℤ : is-even-ℤ zero-ℤ
 is-even-zero-ℤ = is-even-int-is-even-ℕ 0 is-even-zero-ℕ
 ```
 
 ### `1` is an odd integer
 
 ```agda
-is-odd-one-ℤ : is-odd-ℤ (int-ℕ 1)
+is-odd-one-ℤ : is-odd-ℤ one-ℤ
 is-odd-one-ℤ = is-odd-int-is-odd-ℕ 1 is-odd-one-ℕ
+```
+
+### `-1` is an odd integer
+
+```agda
+is-odd-neg-one-ℤ : is-odd-ℤ neg-one-ℤ
+is-odd-neg-one-ℤ H =
+  is-odd-one-ℤ (div-left-summand-ℤ (int-ℕ 2) one-ℤ neg-one-ℤ H is-even-zero-ℤ)
 ```
 
 ### An integer `x` is even if and only if `x + 2` is even
@@ -176,6 +224,15 @@ is-odd-succ-is-even-ℤ a H K =
   is-odd-one-ℤ (div-right-summand-ℤ (int-ℕ 2) a one-ℤ H K)
 ```
 
+### If an integer `x` is even, then `x - 1` is odd
+
+```agda
+is-odd-pred-is-even-ℤ :
+  (a : ℤ) → is-even-ℤ a → is-odd-ℤ (a -ℤ one-ℤ)
+is-odd-pred-is-even-ℤ a H K =
+  is-odd-neg-one-ℤ (div-right-summand-ℤ (int-ℕ 2) a neg-one-ℤ H K)
+```
+
 ### If an integer `x + 1` is even, then `x` is odd
 
 ```agda
@@ -185,26 +242,22 @@ is-odd-is-even-succ-ℤ a H K =
   is-odd-one-ℤ (div-right-summand-ℤ (int-ℕ 2) a one-ℤ K H)
 ```
 
-### If an integer `x` is odd, then `x + 1` is even
+### If an integer `x - 1` is even, then `x` is odd
 
-```text
-is-even-succ-is-odd-ℤ :
-  (a : ℤ) → is-odd-ℤ a → is-even-ℤ (a +ℤ one-ℤ)
-is-even-succ-is-odd-ℤ a H with is-decidable-div-ℤ (int-ℕ 2) (a +ℤ one-ℤ)
-... | d = {!!}
+```agda
+is-odd-is-even-pred-ℤ :
+  (a : ℤ) → is-even-ℤ (a -ℤ one-ℤ) → is-odd-ℤ a
+is-odd-is-even-pred-ℤ a H K =
+  is-odd-neg-one-ℤ (div-right-summand-ℤ (int-ℕ 2) a neg-one-ℤ K H)
 ```
 
-### If an integer `x` is even, then `x + 1` is odd
+### If an integer `x` is odd, then `x + 1` is even
 
-```text
-is-odd-succ-is-even-ℕ :
-  (n : ℕ) → is-even-ℕ n → is-odd-ℕ (succ-ℕ n)
-is-odd-succ-is-even-ℕ zero-ℕ p = is-odd-one-ℕ
-is-odd-succ-is-even-ℕ (succ-ℕ zero-ℕ) p = ex-falso (is-odd-one-ℕ p)
-is-odd-succ-is-even-ℕ (succ-ℕ (succ-ℕ n)) p =
-  is-odd-succ-succ-is-odd-ℕ
-    ( succ-ℕ n)
-    ( is-odd-succ-is-even-ℕ n (is-even-is-even-succ-succ-ℕ n p))
+```agda
+is-even-succ-is-odd-ℤ :
+  (a : ℤ) → is-odd-ℤ a → is-even-ℤ (a +ℤ one-ℤ)
+is-even-succ-is-odd-ℤ a H =
+  is-even-is-not-odd-ℤ (a +ℤ one-ℤ) ( λ K → {!!})
 ```
 
 ### If an integer `x + 1` is odd, then `x` is even
@@ -218,34 +271,42 @@ is-even-is-odd-succ-ℕ n p =
     ( is-even-succ-is-odd-ℕ (succ-ℕ n) p)
 ```
 
-### If an integer `x + 1` is even, then `x` is odd
+### An integer is odd if and only if it has an odd expansion
 
-```text
-is-odd-is-even-succ-ℕ :
-  (n : ℕ) → is-even-ℕ (succ-ℕ n) → is-odd-ℕ n
-is-odd-is-even-succ-ℕ n p =
-  is-odd-is-odd-succ-succ-ℕ
-    ( n)
-    ( is-odd-succ-is-even-ℕ (succ-ℕ n) p)
+```agda
+is-odd-has-odd-expansion-ℤ : (a : ℤ) → has-odd-expansion-ℤ a → is-odd-ℤ a
+is-odd-has-odd-expansion-ℤ ._ (x , refl) =
+  is-odd-succ-is-even-ℤ (int-ℕ 2 *ℤ x) (x , commutative-mul-ℤ x (int-ℕ 2))
+
+has-odd-expansion-neg-one-ℤ : has-odd-expansion-ℤ neg-one-ℤ
+pr1 has-odd-expansion-neg-one-ℤ = neg-one-ℤ
+pr2 has-odd-expansion-neg-one-ℤ = refl
+
+has-odd-expansion-is-odd-ℤ :
+  (a : ℤ) → is-odd-ℤ a → has-odd-expansion-ℤ a
+has-odd-expansion-is-odd-ℤ (inl zero-ℕ) H =
+  has-odd-expansion-neg-one-ℤ
+has-odd-expansion-is-odd-ℤ (inl (succ-ℕ zero-ℕ)) H =
+  ex-falso (H (neg-one-ℤ , refl))
+has-odd-expansion-is-odd-ℤ (inl (succ-ℕ (succ-ℕ a))) H =
+  {!!}
+  where
+  t = has-odd-expansion-is-odd-ℤ (inl a) ?
+has-odd-expansion-is-odd-ℤ (inr a) H = {!!}
 ```
 
-### An integer `x` is odd if and only if there is an integer `y` such that `succ-ℕ (y *ℕ 2) ＝ x`
-
 ```text
-has-odd-expansion : ℕ → UU lzero
-has-odd-expansion x = Σ ℕ (λ y → (succ-ℕ (y *ℕ 2)) ＝ x)
-
-is-odd-has-odd-expansion : (n : ℕ) → has-odd-expansion n → is-odd-ℕ n
-is-odd-has-odd-expansion .(succ-ℕ (m *ℕ 2)) (m , refl) =
+is-odd-has-odd-expansion-ℕ : (n : ℕ) → has-odd-expansion-ℕ n → is-odd-ℕ n
+is-odd-has-odd-expansion-ℕ .(succ-ℕ (m *ℕ 2)) (m , refl) =
   is-odd-succ-is-even-ℕ (m *ℕ 2) (m , refl)
 
-has-odd-expansion-is-odd : (n : ℕ) → is-odd-ℕ n → has-odd-expansion n
+has-odd-expansion-is-odd : (n : ℕ) → is-odd-ℕ n → has-odd-expansion-ℕ n
 has-odd-expansion-is-odd zero-ℕ p = ex-falso (p is-even-zero-ℕ)
 has-odd-expansion-is-odd (succ-ℕ zero-ℕ) p = 0 , refl
 has-odd-expansion-is-odd (succ-ℕ (succ-ℕ n)) p =
   ( succ-ℕ (pr1 s)) , ap (succ-ℕ ∘ succ-ℕ) (pr2 s)
   where
-  s : has-odd-expansion n
+  s : has-odd-expansion-ℕ n
   s = has-odd-expansion-is-odd n (is-odd-is-odd-succ-succ-ℕ n p)
 ```
 

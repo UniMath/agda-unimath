@@ -367,19 +367,19 @@ div-presim-unit-ℤ :
   {x y x' y' : ℤ} → presim-unit-ℤ x x' → presim-unit-ℤ y y' →
   div-ℤ x y → div-ℤ x' y'
 pr1 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
-  ((int-unit-ℤ v) *ℤ d) *ℤ (int-unit-ℤ u)
+  (int-unit-ℤ v *ℤ d) *ℤ (int-unit-ℤ u)
 pr2 (div-presim-unit-ℤ {x} {y} {x'} {y'} (pair u q) (pair v r) (pair d p)) =
   ( ap ((((int-unit-ℤ v) *ℤ d) *ℤ (int-unit-ℤ u)) *ℤ_) (inv q)) ∙
   ( ( associative-mul-ℤ
-      ( (int-unit-ℤ v) *ℤ d)
+      ( int-unit-ℤ v *ℤ d)
       ( int-unit-ℤ u)
-      ( (int-unit-ℤ u) *ℤ x)) ∙
+      ( int-unit-ℤ u *ℤ x)) ∙
     ( ( ap
-        ( ((int-unit-ℤ v) *ℤ d) *ℤ_)
+        ( (int-unit-ℤ v *ℤ d) *ℤ_)
         ( ( inv (associative-mul-ℤ (int-unit-ℤ u) (int-unit-ℤ u) x)) ∙
           ( ap (_*ℤ x) (idempotent-is-unit-ℤ (is-unit-unit-ℤ u))))) ∙
       ( ( associative-mul-ℤ (int-unit-ℤ v) d x) ∙
-        ( ( ap ((int-unit-ℤ v) *ℤ_) p) ∙
+        ( ( ap (int-unit-ℤ v *ℤ_) p) ∙
           ( r)))))
 
 div-sim-unit-ℤ :
