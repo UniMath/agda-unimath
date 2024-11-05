@@ -19,7 +19,7 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-The {{#concpept "universal reflexive globular type"}} `𝒢 l` at
+The {{#concept "universal reflexive globular type"}} `𝒢 l` at
 [universe level](foundation.universe-levels.md) is a translation from category
 theory into type theory of the Hofmann–Streicher universe {{#cite Awodey22}} of
 presheaves on the reflexive globular category `Γʳ`

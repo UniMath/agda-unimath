@@ -20,7 +20,7 @@ open import graph-theory.reflexive-graphs
 
 ## Idea
 
-The {{#concpept "universal reflexive graph" Agda=universal-Reflexive-Graph}}
+The {{#concept "universal reflexive graph" Agda=universal-Reflexive-Graph}}
 `𝒢 l` at [universe level](foundation.universe-levels.md) is a translation from
 category theory into type theory of the Hofmann–Streicher universe
 {{#cite Awodey22}} of presheaves on the reflexive graph category `Γʳ`

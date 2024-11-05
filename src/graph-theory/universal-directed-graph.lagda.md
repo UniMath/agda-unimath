@@ -21,7 +21,7 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-The {{#concpept "universal directed graph" Agda=universal-Directed-Graph}} `𝒢 l`
+The {{#concept "universal directed graph" Agda=universal-Directed-Graph}} `𝒢 l`
 at [universe level](foundation.universe-levels.md) `l` is the
 [directed graph](graph-theory.directed-graphs.md) that has the universe `UU l`
 as its type of vertices, and spans between types as its edges.

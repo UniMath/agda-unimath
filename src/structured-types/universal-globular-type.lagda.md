@@ -23,7 +23,7 @@ open import structured-types.globular-types
 
 ## Idea
 
-The {{#concpept "universal globular type"}} `𝒢 l` at
+The {{#concept "universal globular type"}} `𝒢 l` at
 [universe level](foundation.universe-levels.md) `l` has the universe `UU l` as
 its type of `0`-cells, and uses iterated binary relations for its globular
 structure.
