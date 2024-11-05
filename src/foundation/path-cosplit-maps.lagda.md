@@ -497,7 +497,7 @@ module _
         ( G x y)
 ```
 
-### Coroducts of path-cosplit maps are path-cosplit
+### Coproducts of path-cosplit maps are path-cosplit
 
 ```agda
 abstract
