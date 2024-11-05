@@ -30,7 +30,7 @@ between two
 `f : G → H` equipped with a family of 2-cells
 
 ```text
-  H₂ (f₁ (q ∘G p)) (f₁ q ∘H f₁ p)
+  H₂ (f₁ q ∘H f₁ p) (f₁ (q ∘G p))
 ```
 
 from the image of the composite of two 1-cells `q` and `p` in `G` to the

@@ -46,7 +46,7 @@ The Hofmann–Streicher universe of presheaves on a category `𝒞` is the presh
 
 where `*` is the terminal object of `𝒞/I`, i.e., the identity morphism on `I`.
 
-We compute a the instances of the slice category `⇉/I`:
+We compute the instances of the slice category `⇉/I`:
 
 - The slice category `⇉/0` is the terminal category.
 - The slice category `⇉/1` is the representing cospan

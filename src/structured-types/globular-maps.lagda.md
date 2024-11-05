@@ -104,7 +104,6 @@ module _
   (F : globular-map A B)
   where
 
-{-
   3-cell-globular-map-globular-map :
     {x y : 0-cell-Globular-Type A}
     {f g : 1-cell-Globular-Type A x y}
@@ -114,11 +113,10 @@ module _
       ( 3-cell-globular-type-Globular-Type B
         ( 2-cell-globular-map F s)
         ( 2-cell-globular-map F t))
-  3-cell-globular-map-globular-map s t =
+  3-cell-globular-map-globular-map =
     2-cell-globular-map-globular-map
       ( 1-cell-globular-map-globular-map F)
--}
-
+    
   3-cell-globular-map :
     {x y : 0-cell-Globular-Type A}
     {f g : 1-cell-Globular-Type A x y} →
@@ -136,11 +134,15 @@ module _
 ```agda
 id-globular-map :
   {l1 l2 : Level} (A : Globular-Type l1 l2) → globular-map A A
-id-globular-map A =
+0-cell-globular-map (id-globular-map A) = id
+1-cell-globular-map-globular-map (id-globular-map A) =
+  id-globular-map (1-cell-globular-type-Globular-Type A _ _)
+
+{-
   λ where
   .0-cell-globular-map → id
   .1-cell-globular-map-globular-map {x} {y} →
-    id-globular-map (1-cell-globular-type-Globular-Type A x y)
+    id-globular-map (1-cell-globular-type-Globular-Type A x y) -}
 ```
 
 ### Composition of maps of globular types

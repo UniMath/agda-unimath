@@ -11,6 +11,7 @@ module structured-types.binary-globular-maps where
 ```agda
 open import foundation.universe-levels
 
+open import structured-types.globular-maps
 open import structured-types.globular-types
 ```
 
@@ -60,27 +61,3 @@ record
             ( 0-cell-binary-globular-map x y)
             ( 0-cell-binary-globular-map x' y'))
 ```
-
-### Commuting squares of binary globular maps
-
-Consider three [globular maps](structured-types.globular-maps.md) `g : G → G'`,
-`h : H → H'`, and `k : K → K'`, and consider two binary globular maps
-
-```text
-  μ : G → H → K
-  μ' : G' → H' → K'.
-```
-
-A {{#concept "commuting square of binary globular maps"}}
-
-```text
-             μ
-    G   H  ----> K
-    |   |        |
-  g |   | h      | k
-    ∨   ∨        ∨
-    G'  H' ----> K'
-             μ'
-```
-
-consists of a
