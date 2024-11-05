@@ -16,8 +16,8 @@ open import foundation.universe-levels
 
 open import structured-types.globular-maps
 open import structured-types.globular-types
-open import structured-types.large-colaxly-reflexive-globular-maps
-open import structured-types.large-colaxly-transitive-globular-maps
+open import structured-types.large-colax-reflexive-globular-maps
+open import structured-types.large-colax-transitive-globular-maps
 open import structured-types.large-globular-maps
 
 open import wild-category-theory.colax-functors-noncoherent-wild-higher-precategories
@@ -66,7 +66,7 @@ preserves-id-structure-map-Noncoherent-Large-Wild-Higher-Precategory :
   (ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2)
   (F : map-Noncoherent-Large-Wild-Higher-Precategory γ 𝒜 ℬ) → UUω
 preserves-id-structure-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 ℬ F =
-  is-colaxly-reflexive-large-globular-map
+  is-colax-reflexive-large-globular-map
     ( large-reflexive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
       𝒜)
     ( large-reflexive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
@@ -84,7 +84,7 @@ preserves-comp-structure-map-Noncoherent-Large-Wild-Higher-Precategory :
   (ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2)
   (F : map-Noncoherent-Large-Wild-Higher-Precategory γ 𝒜 ℬ) → UUω
 preserves-comp-structure-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 ℬ F =
-  is-colaxly-transitive-large-globular-map
+  is-colax-transitive-large-globular-map
     ( large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
       𝒜)
     ( large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
@@ -128,7 +128,7 @@ record
       ( id-hom-Noncoherent-Large-Wild-Higher-Precategory ℬ
         { x = obj-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 ℬ F x})
   preserves-id-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
-    preserves-refl-1-cell-is-colaxly-reflexive-large-globular-map
+    preserves-refl-1-cell-is-colax-reflexive-large-globular-map
       preserves-id-structure-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
   preserves-id-structure-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
@@ -142,7 +142,7 @@ record
         ℬ _ _)
       ( 1-cell-globular-map-large-globular-map F)
   preserves-id-structure-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
-    is-colaxly-reflexive-1-cell-globular-map-is-colaxly-reflexive-large-globular-map
+    is-colax-reflexive-1-cell-globular-map-is-colax-reflexive-large-globular-map
       preserves-id-structure-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
   preserves-comp-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
@@ -159,7 +159,7 @@ record
         ( hom-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 ℬ F g)
         ( hom-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 ℬ F f))
   preserves-comp-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
-    preserves-comp-1-cell-is-colaxly-transitive-large-globular-map
+    preserves-comp-1-cell-is-colax-transitive-large-globular-map
       preserves-comp-structure-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
   preserves-comp-structure-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
@@ -173,7 +173,7 @@ record
         ℬ _ _)
       ( 1-cell-globular-map-large-globular-map F)
   preserves-comp-structure-hom-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
-    is-colaxly-transitive-1-cell-globular-map-is-colaxly-transitive-large-globular-map
+    is-colax-transitive-1-cell-globular-map-is-colax-transitive-large-globular-map
       preserves-comp-structure-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
   is-colax-functor-hom-is-colax-functor-map-Noncoherent-Large-Wild-Higher-Precategory :
@@ -278,17 +278,17 @@ record
     preserves-id-structure-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
       is-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
-  colaxly-reflexive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
-    large-colaxly-reflexive-globular-map δ
+  colax-reflexive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
+    large-colax-reflexive-globular-map δ
       ( large-reflexive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
         𝒜)
       ( large-reflexive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
         ℬ)
-  large-globular-map-large-colaxly-reflexive-globular-map
-    colaxly-reflexive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
+  large-globular-map-large-colax-reflexive-globular-map
+    colax-reflexive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
-  is-colaxly-reflexive-large-colaxly-reflexive-globular-map
-    colaxly-reflexive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
+  is-colax-reflexive-large-colax-reflexive-globular-map
+    colax-reflexive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     preserves-id-structure-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
   preserves-id-hom-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
@@ -329,17 +329,17 @@ record
     preserves-comp-structure-is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
       is-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
-  colaxly-transitive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
-    large-colaxly-transitive-globular-map δ
+  colax-transitive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
+    large-colax-transitive-globular-map δ
       ( large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
         𝒜)
       ( large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
         ℬ)
-  large-globular-map-large-colaxly-transitive-globular-map
-    colaxly-transitive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
+  large-globular-map-large-colax-transitive-globular-map
+    colax-transitive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
-  is-colaxly-transitive-large-colaxly-transitive-globular-map
-    colaxly-transitive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
+  is-colax-transitive-large-colax-transitive-globular-map
+    colax-transitive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     preserves-comp-structure-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
   preserves-comp-hom-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
@@ -436,18 +436,18 @@ module _
     preserves-id-structure-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 𝒜
       ( id-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜)
   preserves-id-structure-id-colax-functor-Noncoherent-Large-Wild-Higher-Precatory =
-    is-colaxly-reflexive-id-large-colaxly-reflexive-globular-map
+    is-colax-reflexive-id-large-colax-reflexive-globular-map
       ( large-reflexive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
         𝒜)
 
   preserves-comp-structure-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     preserves-comp-structure-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 𝒜
       ( id-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜)
-  preserves-comp-1-cell-is-colaxly-transitive-large-globular-map
+  preserves-comp-1-cell-is-colax-transitive-large-globular-map
     preserves-comp-structure-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
       g f =
     id-2-hom-Noncoherent-Large-Wild-Higher-Precategory 𝒜 _
-  is-colaxly-transitive-1-cell-globular-map-is-colaxly-transitive-large-globular-map
+  is-colax-transitive-1-cell-globular-map-is-colax-transitive-large-globular-map
     preserves-comp-structure-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     preserves-comp-structure-id-colax-functor-Noncoherent-Wild-Higher-Precategory
       ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
@@ -497,7 +497,7 @@ module _
   preserves-id-structure-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
     preserves-id-structure-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 𝒞
       map-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
-  preserves-refl-1-cell-is-colaxly-reflexive-large-globular-map
+  preserves-refl-1-cell-is-colax-reflexive-large-globular-map
     preserves-id-structure-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
       x =
       comp-2-hom-Noncoherent-Large-Wild-Higher-Precategory 𝒞
@@ -508,7 +508,7 @@ module _
           ( preserves-id-hom-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
             ( F)
             ( _)))
-  is-colaxly-reflexive-1-cell-globular-map-is-colaxly-reflexive-large-globular-map
+  is-colax-reflexive-1-cell-globular-map-is-colax-reflexive-large-globular-map
     preserves-id-structure-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     preserves-id-structure-comp-colax-functor-Noncoherent-Wild-Higher-Precategory
       ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
@@ -526,16 +526,16 @@ module _
     preserves-comp-structure-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 𝒞
       map-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
   preserves-comp-structure-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
-    is-colaxly-transitive-comp-large-colaxly-transitive-globular-map
+    is-colax-transitive-comp-large-colax-transitive-globular-map
       ( large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
         𝒜)
       ( large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
         ℬ)
       ( large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory
         𝒞)
-      ( colaxly-transitive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
+      ( colax-transitive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
         G)
-      ( colaxly-transitive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
+      ( colax-transitive-map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
         F)
 
   is-colax-functor-comp-colax-functor-Noncoherent-Large-Wild-Precategory :

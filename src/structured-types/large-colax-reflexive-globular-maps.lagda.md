@@ -1,9 +1,9 @@
-# Large colaxly reflexive globular maps
+# Large colax reflexive globular maps
 
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.large-colaxly-reflexive-globular-maps where
+module structured-types.large-colax-reflexive-globular-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -12,7 +12,7 @@ module structured-types.large-colaxly-reflexive-globular-maps where
 open import foundation.function-types
 open import foundation.universe-levels
 
-open import structured-types.colaxly-reflexive-globular-maps
+open import structured-types.colax-reflexive-globular-maps
 open import structured-types.large-globular-maps
 open import structured-types.large-reflexive-globular-types
 open import structured-types.reflexive-globular-types
@@ -23,7 +23,7 @@ open import structured-types.reflexive-globular-types
 ## Idea
 
 A
-{{#concept "large colaxly reflexive globular map" Agda=large-colaxly-reflexive-globular-map}}
+{{#concept "large colax reflexive globular map" Agda=large-colax-reflexive-globular-map}}
 between two
 [large reflexive globular types](structured-types.large-reflexive-globular-types.md)
 `G` and `H` is a [large globular map](structured-types.large-globular-maps.md)
@@ -36,11 +36,11 @@ between two
 from the image of the reflexivity cell at `x` in `G` to the reflexivity cell at
 `f₀ x`, such that the [globular map](structured-types.globular-maps.md)
 `f' : G' x y → H' (f₀ x) (f₀ y)` is
-[colaxly reflexive](structured-types.colaxly-reflexive-globular-maps.md).
+[colax reflexive](structured-types.colax-reflexive-globular-maps.md).
 
-### Lack of composition for colaxly reflexive globular maps
+### Lack of composition for colax reflexive globular maps
 
-Note that the large colaxly reflexive globular maps lack composition. For the
+Note that the large colax reflexive globular maps lack composition. For the
 composition of `g` and `f` to exist, there should be a `2`-cell from
 `g (f (refl G x))` to `refl K (g (f x))`, we need to compose the 2-cell that `g`
 preserves reflexivity with the action of `g` on the 2-cell that `f` preserves
@@ -51,7 +51,7 @@ instances of the compositions.
 ### Lax versus colax
 
 The notion of
-[large laxly reflexive globular map](structured-types.large-laxly-reflexive-globular-maps.md)
+[large lax reflexive globular map](structured-types.large-lax-reflexive-globular-maps.md)
 is almost the same, except with the direction of the 2-cell reversed. In
 general, the direction of lax coherence cells is determined by applying the
 morphism componentwise first, and then the operations, while the direction of
@@ -64,7 +64,7 @@ the morphism.
 
 ```agda
 record
-  is-colaxly-reflexive-large-globular-map
+  is-colax-reflexive-large-globular-map
     {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} {γ : Level → Level}
     (G : Large-Reflexive-Globular-Type α1 β1)
     (H : Large-Reflexive-Globular-Type α2 β2)
@@ -73,7 +73,7 @@ record
   coinductive
 
   field
-    preserves-refl-1-cell-is-colaxly-reflexive-large-globular-map :
+    preserves-refl-1-cell-is-colax-reflexive-large-globular-map :
       {l1 : Level}
       (x : 0-cell-Large-Reflexive-Globular-Type G l1) →
       2-cell-Large-Reflexive-Globular-Type H
@@ -82,150 +82,150 @@ record
         ( refl-1-cell-Large-Reflexive-Globular-Type H)
 
   field
-    is-colaxly-reflexive-1-cell-globular-map-is-colaxly-reflexive-large-globular-map :
+    is-colax-reflexive-1-cell-globular-map-is-colax-reflexive-large-globular-map :
       {l1 l2 : Level}
       {x : 0-cell-Large-Reflexive-Globular-Type G l1}
       {y : 0-cell-Large-Reflexive-Globular-Type G l2} →
-      is-colaxly-reflexive-globular-map
+      is-colax-reflexive-globular-map
         ( 1-cell-reflexive-globular-type-Large-Reflexive-Globular-Type G x y)
         ( 1-cell-reflexive-globular-type-Large-Reflexive-Globular-Type H _ _)
         ( 1-cell-globular-map-large-globular-map f)
 
-open is-colaxly-reflexive-large-globular-map public
+open is-colax-reflexive-large-globular-map public
 ```
 
-### Colaxly reflexive globular maps
+### Colax reflexive globular maps
 
 ```agda
 record
-  large-colaxly-reflexive-globular-map
+  large-colax-reflexive-globular-map
     {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} (γ : Level → Level)
     (G : Large-Reflexive-Globular-Type α1 β1)
     (H : Large-Reflexive-Globular-Type α2 β2) : UUω
   where
 
   field
-    large-globular-map-large-colaxly-reflexive-globular-map :
+    large-globular-map-large-colax-reflexive-globular-map :
       large-globular-map-Large-Reflexive-Globular-Type γ G H
 
-  0-cell-large-colaxly-reflexive-globular-map :
+  0-cell-large-colax-reflexive-globular-map :
     {l1 : Level} →
     0-cell-Large-Reflexive-Globular-Type G l1 →
     0-cell-Large-Reflexive-Globular-Type H (γ l1)
-  0-cell-large-colaxly-reflexive-globular-map =
+  0-cell-large-colax-reflexive-globular-map =
     0-cell-large-globular-map
-      large-globular-map-large-colaxly-reflexive-globular-map
+      large-globular-map-large-colax-reflexive-globular-map
 
-  1-cell-large-colaxly-reflexive-globular-map :
+  1-cell-large-colax-reflexive-globular-map :
     {l1 l2 : Level}
     {x : 0-cell-Large-Reflexive-Globular-Type G l1}
     {y : 0-cell-Large-Reflexive-Globular-Type G l2} →
     1-cell-Large-Reflexive-Globular-Type G x y →
     1-cell-Large-Reflexive-Globular-Type H
-      ( 0-cell-large-colaxly-reflexive-globular-map x)
-      ( 0-cell-large-colaxly-reflexive-globular-map y)
-  1-cell-large-colaxly-reflexive-globular-map =
+      ( 0-cell-large-colax-reflexive-globular-map x)
+      ( 0-cell-large-colax-reflexive-globular-map y)
+  1-cell-large-colax-reflexive-globular-map =
     1-cell-large-globular-map
-      large-globular-map-large-colaxly-reflexive-globular-map
+      large-globular-map-large-colax-reflexive-globular-map
 
-  1-cell-globular-map-large-colaxly-reflexive-globular-map :
+  1-cell-globular-map-large-colax-reflexive-globular-map :
     {l1 l2 : Level}
     {x : 0-cell-Large-Reflexive-Globular-Type G l1}
     {y : 0-cell-Large-Reflexive-Globular-Type G l2} →
     globular-map-Reflexive-Globular-Type
       ( 1-cell-reflexive-globular-type-Large-Reflexive-Globular-Type G x y)
       ( 1-cell-reflexive-globular-type-Large-Reflexive-Globular-Type H
-        ( 0-cell-large-colaxly-reflexive-globular-map x)
-        ( 0-cell-large-colaxly-reflexive-globular-map y))
-  1-cell-globular-map-large-colaxly-reflexive-globular-map =
+        ( 0-cell-large-colax-reflexive-globular-map x)
+        ( 0-cell-large-colax-reflexive-globular-map y))
+  1-cell-globular-map-large-colax-reflexive-globular-map =
     1-cell-globular-map-large-globular-map
-      large-globular-map-large-colaxly-reflexive-globular-map
+      large-globular-map-large-colax-reflexive-globular-map
 
   field
-    is-colaxly-reflexive-large-colaxly-reflexive-globular-map :
-      is-colaxly-reflexive-large-globular-map G H
-        large-globular-map-large-colaxly-reflexive-globular-map
+    is-colax-reflexive-large-colax-reflexive-globular-map :
+      is-colax-reflexive-large-globular-map G H
+        large-globular-map-large-colax-reflexive-globular-map
 
-  preserves-refl-1-cell-large-colaxly-reflexive-globular-map :
+  preserves-refl-1-cell-large-colax-reflexive-globular-map :
     {l1 : Level}
     (x : 0-cell-Large-Reflexive-Globular-Type G l1) →
     2-cell-Large-Reflexive-Globular-Type H
-      ( 1-cell-large-colaxly-reflexive-globular-map
+      ( 1-cell-large-colax-reflexive-globular-map
         ( refl-1-cell-Large-Reflexive-Globular-Type G {x = x}))
       ( refl-1-cell-Large-Reflexive-Globular-Type H)
-  preserves-refl-1-cell-large-colaxly-reflexive-globular-map =
-    preserves-refl-1-cell-is-colaxly-reflexive-large-globular-map
-      is-colaxly-reflexive-large-colaxly-reflexive-globular-map
+  preserves-refl-1-cell-large-colax-reflexive-globular-map =
+    preserves-refl-1-cell-is-colax-reflexive-large-globular-map
+      is-colax-reflexive-large-colax-reflexive-globular-map
 
-  is-colaxly-reflexive-2-cell-globular-map-is-colaxly-reflexive-large-globular-map :
+  is-colax-reflexive-2-cell-globular-map-is-colax-reflexive-large-globular-map :
     {l1 l2 : Level}
     {x : 0-cell-Large-Reflexive-Globular-Type G l1}
     {y : 0-cell-Large-Reflexive-Globular-Type G l2} →
-    is-colaxly-reflexive-globular-map
+    is-colax-reflexive-globular-map
       ( 1-cell-reflexive-globular-type-Large-Reflexive-Globular-Type G x y)
       ( 1-cell-reflexive-globular-type-Large-Reflexive-Globular-Type H
-        ( 0-cell-large-colaxly-reflexive-globular-map x)
-        ( 0-cell-large-colaxly-reflexive-globular-map y))
-      ( 1-cell-globular-map-large-colaxly-reflexive-globular-map)
-  is-colaxly-reflexive-2-cell-globular-map-is-colaxly-reflexive-large-globular-map =
-    is-colaxly-reflexive-1-cell-globular-map-is-colaxly-reflexive-large-globular-map
-      is-colaxly-reflexive-large-colaxly-reflexive-globular-map
+        ( 0-cell-large-colax-reflexive-globular-map x)
+        ( 0-cell-large-colax-reflexive-globular-map y))
+      ( 1-cell-globular-map-large-colax-reflexive-globular-map)
+  is-colax-reflexive-2-cell-globular-map-is-colax-reflexive-large-globular-map =
+    is-colax-reflexive-1-cell-globular-map-is-colax-reflexive-large-globular-map
+      is-colax-reflexive-large-colax-reflexive-globular-map
 
-  1-cell-colaxly-reflexive-globular-map-large-colaxly-reflexive-globular-map :
+  1-cell-colax-reflexive-globular-map-large-colax-reflexive-globular-map :
     {l1 l2 : Level}
     {x : 0-cell-Large-Reflexive-Globular-Type G l1}
     {y : 0-cell-Large-Reflexive-Globular-Type G l2} →
-    colaxly-reflexive-globular-map
+    colax-reflexive-globular-map
       ( 1-cell-reflexive-globular-type-Large-Reflexive-Globular-Type G x y)
       ( 1-cell-reflexive-globular-type-Large-Reflexive-Globular-Type H
-        ( 0-cell-large-colaxly-reflexive-globular-map x)
-        ( 0-cell-large-colaxly-reflexive-globular-map y))
-  globular-map-colaxly-reflexive-globular-map
-    1-cell-colaxly-reflexive-globular-map-large-colaxly-reflexive-globular-map =
-    1-cell-globular-map-large-colaxly-reflexive-globular-map
-  is-colaxly-reflexive-colaxly-reflexive-globular-map
-    1-cell-colaxly-reflexive-globular-map-large-colaxly-reflexive-globular-map =
-    is-colaxly-reflexive-2-cell-globular-map-is-colaxly-reflexive-large-globular-map
+        ( 0-cell-large-colax-reflexive-globular-map x)
+        ( 0-cell-large-colax-reflexive-globular-map y))
+  globular-map-colax-reflexive-globular-map
+    1-cell-colax-reflexive-globular-map-large-colax-reflexive-globular-map =
+    1-cell-globular-map-large-colax-reflexive-globular-map
+  is-colax-reflexive-colax-reflexive-globular-map
+    1-cell-colax-reflexive-globular-map-large-colax-reflexive-globular-map =
+    is-colax-reflexive-2-cell-globular-map-is-colax-reflexive-large-globular-map
 
-open large-colaxly-reflexive-globular-map public
+open large-colax-reflexive-globular-map public
 ```
 
-### The identity large colaxly reflexive globular map
+### The identity large colax reflexive globular map
 
 ```agda
-map-id-large-colaxly-reflexive-globular-map :
+map-id-large-colax-reflexive-globular-map :
   {α : Level → Level} {β : Level → Level → Level}
   (G : Large-Reflexive-Globular-Type α β) →
   large-globular-map-Large-Reflexive-Globular-Type id G G
-map-id-large-colaxly-reflexive-globular-map G = id-large-globular-map _
+map-id-large-colax-reflexive-globular-map G = id-large-globular-map _
 
-is-colaxly-reflexive-id-large-colaxly-reflexive-globular-map :
+is-colax-reflexive-id-large-colax-reflexive-globular-map :
   {α : Level → Level} {β : Level → Level → Level}
   (G : Large-Reflexive-Globular-Type α β) →
-  is-colaxly-reflexive-large-globular-map G G
-    ( map-id-large-colaxly-reflexive-globular-map G)
-preserves-refl-1-cell-is-colaxly-reflexive-large-globular-map
-  ( is-colaxly-reflexive-id-large-colaxly-reflexive-globular-map G)
+  is-colax-reflexive-large-globular-map G G
+    ( map-id-large-colax-reflexive-globular-map G)
+preserves-refl-1-cell-is-colax-reflexive-large-globular-map
+  ( is-colax-reflexive-id-large-colax-reflexive-globular-map G)
   x =
   refl-2-cell-Large-Reflexive-Globular-Type G
-is-colaxly-reflexive-1-cell-globular-map-is-colaxly-reflexive-large-globular-map
-  ( is-colaxly-reflexive-id-large-colaxly-reflexive-globular-map G) =
-  is-colaxly-reflexive-id-colaxly-reflexive-globular-map
+is-colax-reflexive-1-cell-globular-map-is-colax-reflexive-large-globular-map
+  ( is-colax-reflexive-id-large-colax-reflexive-globular-map G) =
+  is-colax-reflexive-id-colax-reflexive-globular-map
     ( 1-cell-reflexive-globular-type-Large-Reflexive-Globular-Type G _ _)
 
-id-large-colaxly-reflexive-globular-map :
+id-large-colax-reflexive-globular-map :
   {α : Level → Level} {β : Level → Level → Level}
   (G : Large-Reflexive-Globular-Type α β) →
-  large-colaxly-reflexive-globular-map id G G
-large-globular-map-large-colaxly-reflexive-globular-map
-  ( id-large-colaxly-reflexive-globular-map G) =
-  map-id-large-colaxly-reflexive-globular-map G
-is-colaxly-reflexive-large-colaxly-reflexive-globular-map
-  ( id-large-colaxly-reflexive-globular-map G) =
-  ( is-colaxly-reflexive-id-large-colaxly-reflexive-globular-map G)
+  large-colax-reflexive-globular-map id G G
+large-globular-map-large-colax-reflexive-globular-map
+  ( id-large-colax-reflexive-globular-map G) =
+  map-id-large-colax-reflexive-globular-map G
+is-colax-reflexive-large-colax-reflexive-globular-map
+  ( id-large-colax-reflexive-globular-map G) =
+  ( is-colax-reflexive-id-large-colax-reflexive-globular-map G)
 ```
 
 ## See also
 
-- [Laxly reflexive globular maps](structured-types.laxly-reflexive-globular-maps.md)
+- [Lax reflexive globular maps](structured-types.lax-reflexive-globular-maps.md)
 - [Reflexive globular maps](structured-types.reflexive-globular-maps.md)
