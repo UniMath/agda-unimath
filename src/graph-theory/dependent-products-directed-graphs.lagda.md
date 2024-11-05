@@ -32,7 +32,7 @@ Given a [dependent directed graph](graph-theory.dependent-directed-graphs.md)
 `Π A B` is the directed graph that satisfies the universal property
 
 ```text
-  hom X (Π A B) ≃ section (X × A) B.
+  hom X (Π A B) ≃ section (X × A) (pr2* B).
 ```
 
 Concretely, the directed graph `Π A B` has

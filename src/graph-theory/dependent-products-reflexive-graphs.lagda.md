@@ -52,7 +52,7 @@ Given a [dependent reflexive graph](graph-theory.dependent-reflexive-graphs.md)
 `Π A B` is the reflexive graph that satisfies the universal property
 
 ```text
-  hom X (Π A B) ≃ section (X × A) B.
+  hom X (Π A B) ≃ section (X × A) (pr2* B).
 ```
 
 Concretely, the reflexive graph `Π A B` has
