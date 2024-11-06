@@ -29,6 +29,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -133,8 +134,17 @@ is-decidable-map-retraction :
 is-decidable-map-retraction d i (r , R) b =
   is-decidable-iff
     ( λ (p : i (r b) ＝ b) → r b , p)
-    ( λ t → ap (i ∘ r) (inv (pr2 t)) ∙ (ap i (R (pr1 t)) ∙ pr2 t))
+    ( λ t → ap (i ∘ r) (inv (pr2 t)) ∙ ap i (R (pr1 t)) ∙ pr2 t)
     ( d (i (r b)) b)
+```
+
+### Maps with sections are decidable
+
+```agda
+is-decidable-map-section :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (i : A → B) → section i → is-decidable-map i
+is-decidable-map-section i (s , S) b = inl (s b , S b)
 ```
 
 ### Any map out of the empty type is decidable
