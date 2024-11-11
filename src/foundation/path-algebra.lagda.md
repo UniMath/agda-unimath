@@ -128,6 +128,30 @@ module _
   unit-law-assoc-110' refl refl = refl
 ```
 
+### Second-order associators
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z u v : A}
+  (p : x ＝ y) (q : y ＝ z) (r : z ＝ u) (s : u ＝ v)
+  where
+
+  assoc²-1 : ((p ∙ q) ∙ r) ∙ s ＝ p ∙ ((q ∙ r) ∙ s)
+  assoc²-1 = ap (_∙ s) (assoc p q r) ∙ assoc p (q ∙ r) s
+
+  assoc²-2 : (p ∙ (q ∙ r)) ∙ s ＝ p ∙ (q ∙ (r ∙ s))
+  assoc²-2 = assoc p (q ∙ r) s ∙ ap (p ∙_) (assoc q r s)
+
+  assoc²-3 : ((p ∙ q) ∙ r) ∙ s ＝ p ∙ (q ∙ (r ∙ s))
+  assoc²-3 = assoc (p ∙ q) r s ∙ assoc p q (r ∙ s)
+
+  assoc²-4 : (p ∙ q) ∙ (r ∙ s) ＝ p ∙ ((q ∙ r) ∙ s)
+  assoc²-4 = assoc p q (r ∙ s) ∙ ap (p ∙_) (inv (assoc q r s))
+
+  assoc²-5 : (p ∙ q) ∙ (r ∙ s) ＝ (p ∙ (q ∙ r)) ∙ s
+  assoc²-5 = inv (assoc (p ∙ q) r s) ∙ ap (_∙ s) (assoc p q r)
+```
+
 ## Properties of 2-paths
 
 ### Definition of vertical and horizontal concatenation in identity types of identity types (a type of 2-paths)
