@@ -180,20 +180,20 @@ dependent-globular-type-hom-universal-Globular-Type :
 ```agda
 {-# TERMINATING #-}
 
-hom-universal-globular-type-Dependent-Globular-Type :
+characteristic-globular-map-Dependent-Globular-Type :
   {l1 l2 l3 l4 : Level} {G : Globular-Type l1 l2}
   (H : Dependent-Globular-Type l3 l4 G) →
   globular-map G (universal-Globular-Type l3 l4)
 0-cell-globular-map
-  ( hom-universal-globular-type-Dependent-Globular-Type {G = G} H) =
+  ( characteristic-globular-map-Dependent-Globular-Type {G = G} H) =
   0-cell-Dependent-Globular-Type H
 1-cell-globular-map-globular-map
-  ( hom-universal-globular-type-Dependent-Globular-Type {G = G} H) {x} {x'} =
+  ( characteristic-globular-map-Dependent-Globular-Type {G = G} H) {x} {x'} =
   bind-family-globular-maps
     ( λ y →
       bind-family-globular-maps
         ( λ y' →
-          hom-universal-globular-type-Dependent-Globular-Type
+          characteristic-globular-map-Dependent-Globular-Type
             ( 1-cell-dependent-globular-type-Dependent-Globular-Type H y y')))
 ```
 

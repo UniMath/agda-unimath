@@ -29,7 +29,7 @@ of `H` along `f` is the dependent globular type `f*H` given by
 
 ```text
   (f*H)₀ x := H₀ (f₀ x)
-  (f*H)₁ y y' := H₁
+  (f*H)₁ y y' := H₁.
 ```
 
 ## Definitions
