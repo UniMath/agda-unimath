@@ -40,13 +40,17 @@ module _
   where
 
   is-inhabited-interval : UU (l1 ⊔ l2)
-  is-inhabited-interval = is-inhabited (type-Poset (poset-interval-Subposet P x y))
+  is-inhabited-interval =
+    is-inhabited (type-Poset (poset-interval-Subposet P x y))
 
   inhabited-intervals : UU (l1 ⊔ l2)
-  inhabited-intervals = Σ (type-Poset P × type-Poset P) (λ (p , q) → is-inhabited-interval)
+  inhabited-intervals =
+    Σ (type-Poset P × type-Poset P) (λ (p , q) → is-inhabited-interval)
 
   interval-maps : UU (l1 ⊔ l2 ⊔ l3)
   interval-maps = inhabited-intervals → type-Commutative-Ring R
 ```
 
-WIP: complete this definition after _R-modules_ have been defined
+WIP: complete this definition after _R-modules_ have been defined. Defining
+convolution of maps would be aided as well with a lemma on 'unordered' addition
+in abelian groups over finite sets.
