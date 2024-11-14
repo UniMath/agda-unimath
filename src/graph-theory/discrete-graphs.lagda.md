@@ -24,38 +24,43 @@ open import graph-theory.reflexive-graphs
 
 ## Idea
 
-A [directed graph](graph-theory.directed-graphs.md) `G ≐ (V , E)` is said to be
-{{#concept "discrete" Disambiguation="graph" Agda=is-discrete-Graph}} if, for
-every vertex `x : V`, the type family of edges with source `x`, `E x`, is
-[torsorial](foundation-core.torsorial-type-families.md). In other words, if the
-[dependent sum](foundation.dependent-pair-types.md) `Σ (y : V), (E x y)` is
+A [reflexive graph](graph-theory.reflexive-graphs.md) `G ≐ (V , E , r)` is said
+to be
+{{#concept "discrete" Disambiguation="reflexive graph" Agda=is-discrete-Reflexive-Graph}}
+if, for every vertex `x : V`, the type family of edges with source `x`, `E x`,
+is [torsorial](foundation-core.torsorial-type-families.md). In other words, if
+the [dependent sum](foundation.dependent-pair-types.md) `Σ (y : V), (E x y)` is
 [contractible](foundation-core.contractible-types.md) for every `x`. The
-{{#concept "standard discrete graph"}} associated to a type `X` is the graph
-whose vertices are elements of `X`, and edges are
+{{#concept "standard discrete graph"}} associated to a type `X` is the reflexive
+graph whose vertices are elements of `X`, and edges are
 [identifications](foundation-core.identity-types.md),
 
 ```text
   E x y := (x ＝ y).
 ```
 
-## Definitions
+More generally, a [directed graph](graph-theory.directed-graphs.md)
+`G ≐ (V , E)` is said to be
+{{#concept "discrete" Disambiguation="directed graph" Agda=is-discrete-Directed-Graph}}
+if it is reflexive and discrete as a reflexive graph. Being discrete for
+directed graphs is therefore not a property.
 
-### The predicate on graphs of being discrete
+Note that the directed graph with `V := ℕ` the
+[natural numbers](elementary-number-theory.natural-numbers.md) and
+`E m n := (m + 1 ＝ n)` as in
 
-```agda
-module _
-  {l1 l2 : Level} (G : Directed-Graph l1 l2)
-  where
-
-  is-discrete-prop-Graph : Prop (l1 ⊔ l2)
-  is-discrete-prop-Graph = is-discrete-prop-Relation (edge-Directed-Graph G)
-
-  is-discrete-Graph : UU (l1 ⊔ l2)
-  is-discrete-Graph = type-Prop is-discrete-prop-Graph
-
-  is-prop-is-discrete-Graph : is-prop is-discrete-Graph
-  is-prop-is-discrete-Graph = is-prop-type-Prop is-discrete-prop-Graph
+```text
+  0 ---> 1 ---> 2 ---> ⋯
 ```
+
+satisfies the condition that the type family `E m` is torsorial for every
+`m : ℕ`, simply because `E` is a
+[functional correspondence](foundation.functional-correspondences.md).
+
+The condition that the edge relation on a directed graph is torsorial is
+therefore not sufficient as a condition of being discrete.
+
+## Definitions
 
 ### The predicate on reflexive graphs of being discrete
 
@@ -66,7 +71,8 @@ module _
 
   is-discrete-prop-Reflexive-Graph : Prop (l1 ⊔ l2)
   is-discrete-prop-Reflexive-Graph =
-    is-discrete-prop-Graph (graph-Reflexive-Graph G)
+    is-discrete-prop-Reflexive-Relation
+      ( edge-reflexive-relation-Reflexive-Graph G)
 
   is-discrete-Reflexive-Graph : UU (l1 ⊔ l2)
   is-discrete-Reflexive-Graph =
@@ -75,4 +81,15 @@ module _
   is-prop-is-discrete-Reflexive-Graph : is-prop is-discrete-Reflexive-Graph
   is-prop-is-discrete-Reflexive-Graph =
     is-prop-type-Prop is-discrete-prop-Reflexive-Graph
+```
+
+### The predicate on graphs of being discrete
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
+  where
+
+  is-discrete-Directed-Graph : UU (l1 ⊔ l2)
+  is-discrete-Directed-Graph = is-discrete-Relation (edge-Directed-Graph G)
 ```
