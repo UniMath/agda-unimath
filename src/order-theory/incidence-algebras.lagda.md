@@ -27,9 +27,10 @@ open import order-theory.posets
 For a [locally finite poset](order-theory.locally-finite-posets.md) 'P' and
 [commutative ring](commutative-algebra.commutative-rings.md) 'R', there is a
 canonical 'R'-associative algebra whose undderlying 'R'-module are the set-maps
-from the nonempty intervals of 'P' to 'R' (which we constructify as the
-inhabited intervals), and whose multiplication is given by a "convolution" of
-maps. This is the **incidence algebra** of 'P' over 'R'.
+from the nonempty [intervals](order-theory.interval-subposets.md) of 'P' to 'R'
+(which we constructify as the inhabited intervals), and whose multiplication is
+given by a "convolution" of maps. This is the **incidence algebra** of 'P' over
+'R'.
 
 ## Definition
 
@@ -39,16 +40,8 @@ module _
   (x y : type-Poset P) (R : Commutative-Ring l3)
   where
 
-  is-inhabited-interval : UU (l1 ⊔ l2)
-  is-inhabited-interval =
-    is-inhabited (type-Poset (poset-interval-Subposet P x y))
-
-  inhabited-intervals : UU (l1 ⊔ l2)
-  inhabited-intervals =
-    Σ (type-Poset P × type-Poset P) (λ (p , q) → is-inhabited-interval)
-
-  interval-maps : UU (l1 ⊔ l2 ⊔ l3)
-  interval-maps = inhabited-intervals → type-Commutative-Ring R
+  interval-map : UU (l1 ⊔ l2 ⊔ l3)
+  interval-map = inhabited-interval P x y → type-Commutative-Ring R
 ```
 
 WIP: complete this definition after _R-modules_ have been defined. Defining
