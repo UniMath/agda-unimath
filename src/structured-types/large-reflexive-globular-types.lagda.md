@@ -29,7 +29,7 @@ if every $n$-cell `x` comes with a choice of $(n+1)$-cell from `x` to `x`.
 
 ## Definition
 
-### The predicate of being a reflexive large globular type
+### Reflexivity structure on large globular types
 
 ```agda
 record

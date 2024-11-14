@@ -36,7 +36,7 @@ at every level $n$.
 
 ## Definitions
 
-### The predicate of being a transitive globular type
+### Transitivity structure on globular types
 
 ```agda
 record

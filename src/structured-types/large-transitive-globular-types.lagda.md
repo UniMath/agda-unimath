@@ -34,7 +34,7 @@ at every level $n$.
 
 ## Definition
 
-### The predicate of being a transitive large globular type
+### Transitivity structure on large globular types
 
 ```agda
 record

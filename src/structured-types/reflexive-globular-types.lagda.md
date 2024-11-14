@@ -28,7 +28,7 @@ if every $n$-cell `x` comes with a choice of $(n+1)$-cell from `x` to `x`.
 
 ## Definitions
 
-### The predicate of being a reflexive globular type
+### Reflexivity structure on globular types
 
 ```agda
 record
