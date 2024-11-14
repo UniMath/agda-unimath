@@ -19,7 +19,8 @@ open import structured-types.globular-types
 
 ## Idea
 
-The {{#concept "unit globular type" Agda=unit-Globular-Type}} is the [globular type](structured-types.globular-types.md) `𝟏` given by
+The {{#concept "unit globular type" Agda=unit-Globular-Type}} is the
+[globular type](structured-types.globular-types.md) `𝟏` given by
 
 ```text
   𝟏₀ := unit

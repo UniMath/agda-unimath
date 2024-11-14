@@ -24,13 +24,21 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-Consider two [reflexive globular types](structured-types.reflexive-globular-types.md) `G` and `H`, and a binary family
+Consider two
+[reflexive globular types](structured-types.reflexive-globular-types.md) `G` and
+`H`, and a binary family
 
 ```text
   K : G₀ → H₀ → Reflexive-Globular-Type
 ```
 
-of reflexive globular types, indexed over the 0-cells of `G` and `H`. Furthermore, consider a [binary dependent reflexive globular type](structured-types.binary-dependent-reflexive-globular-types.md) `L` over `G` and `H`. We say that `L` is a {{#concept "pointwise extension" Disambiguation="binary family of reflexive globular types" Agda=is-pointwise-extension-Binary-Dependent-Reflexive-Globular-Type}} of `K` if it comes equipped with a family of [reflexive globular equivalences](structured-types.reflexive-globular-equivalences.md)
+of reflexive globular types, indexed over the 0-cells of `G` and `H`.
+Furthermore, consider a
+[binary dependent reflexive globular type](structured-types.binary-dependent-reflexive-globular-types.md)
+`L` over `G` and `H`. We say that `L` is a
+{{#concept "pointwise extension" Disambiguation="binary family of reflexive globular types" Agda=is-pointwise-extension-binary-family-reflexive-globular-types}}
+of `K` if it comes equipped with a family of
+[reflexive globular equivalences](structured-types.reflexive-globular-equivalences.md)
 
 ```text
   (x : point G) (y : point H) → ev-point L x y ≃ K x₀ y₀.
@@ -77,4 +85,3 @@ module _
     Σ ( Binary-Dependent-Reflexive-Globular-Type l7 l8 G H)
       ( is-pointwise-extension-binary-family-reflexive-globular-types K)
 ```
-

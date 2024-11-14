@@ -16,10 +16,10 @@ open import foundation.universe-levels
 
 open import structured-types.dependent-globular-types
 open import structured-types.dependent-reflexive-globular-types
-open import structured-types.reflexive-globular-equivalences
 open import structured-types.globular-types
 open import structured-types.points-globular-types
 open import structured-types.points-reflexive-globular-types
+open import structured-types.reflexive-globular-equivalences
 open import structured-types.reflexive-globular-types
 ```
 
@@ -27,13 +27,22 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-Consider a family of [reflexive globular types](structured-types.reflexive-globular-types.md) `H : G₀ → Reflexive-Globular-Type` indexed by the 0-cells of a reflexive globular type `G` and consider a [dependent reflexive globular type](structured-types.dependent-reflexive-globular-types.md) `K` over `G`. We say that `K` is a {{#concept "pointwise extension" Disambiguation="family of reflexive globular types"}} of `H` if it comes equipped with a family of [reflexive globular equivalences](structured-types.reflexive-globular-equivalences.md)
+Consider a family of
+[reflexive globular types](structured-types.reflexive-globular-types.md)
+`H : G₀ → Reflexive-Globular-Type` indexed by the 0-cells of a reflexive
+globular type `G` and consider a
+[dependent reflexive globular type](structured-types.dependent-reflexive-globular-types.md)
+`K` over `G`. We say that `K` is a
+{{#concept "pointwise extension" Disambiguation="family of reflexive globular types"}}
+of `H` if it comes equipped with a family of
+[reflexive globular equivalences](structured-types.reflexive-globular-equivalences.md)
 
 ```text
   ev-point K x ≃ H x₀
 ```
 
-indexed by the [points](structured-types.points-reflexive-globular-types.md) of `G`.
+indexed by the [points](structured-types.points-reflexive-globular-types.md) of
+`G`.
 
 ## Definitions
 

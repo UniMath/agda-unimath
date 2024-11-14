@@ -20,23 +20,34 @@ open import structured-types.reflexive-globular-equivalences
 open import structured-types.reflexive-globular-types
 ```
 
-**Disclaimer.** The contents of this file are experimental, and likely to be changed or reconsidered.
+</details>
+
+**Disclaimer.** The contents of this file are experimental, and likely to be
+changed or reconsidered.
 
 ## Idea
 
-An {{#concept "superglobular type" Agda=Extensive-Globular-Type}} is a [reflexive globular type](structured-types.reflexive-globular-types.md) `G` such that the binary family of globular types
+An {{#concept "superglobular type" Agda=Superglobular-Type}} is a
+[reflexive globular type](structured-types.reflexive-globular-types.md) `G` such
+that the binary family of globular types
 
 ```text
   G' : G₀ → G₀ → Globular-Type
 ```
 
-of 1-cells and higher cells [extends pointwise](structured-types.pointwise-extensions-binary-families-globular-types.md) to a [binary dependent globular type](structured-types.binary-dependent-globular-types.md). More specifically, a superglobular type consists of a reflexive globular type `G` equipped with a binary dependent globular type
+of 1-cells and higher cells
+[extends pointwise](structured-types.pointwise-extensions-binary-families-globular-types.md)
+to a
+[binary dependent globular type](structured-types.binary-dependent-globular-types.md).
+More specifically, a superglobular type consists of a reflexive globular type
+`G` equipped with a binary dependent globular type
 
 ```text
   H : Binary-Dependent-Globular-Type l2 l2 G G
 ```
 
-and a family of [globular equivalences](structured-types.globular-equivalences.md)
+and a family of
+[globular equivalences](structured-types.globular-equivalences.md)
 
 ```text
   (x y : G₀) → ev-point H x y ≃ G' x y.
@@ -64,7 +75,9 @@ The low-dimensional data of a superglobular type is therefore as follows:
        H₂ (Gᵣ x) (Gᵣ y) u v ≃ G₃ (e₁ u) (e₁ v)
 ```
 
-Note that the type of pairs `(Gₙ₊₁ , eₙ)` in this structure is [contractible](foundation-core.contractible-types.md). An equivalent way of presenting the low-dimensional data of a superglobular type is therefore:
+Note that the type of pairs `(Gₙ₊₁ , eₙ)` in this structure is
+[contractible](foundation-core.contractible-types.md). An equivalent way of
+presenting the low-dimensional data of a superglobular type is therefore:
 
 ```text
   G₀ : Type
@@ -79,7 +92,6 @@ Note that the type of pairs `(Gₙ₊₁ , eₙ)` in this structure is [contract
        (p : H₂ s s') (q : H₂ t t') → H₁ s t → H₁ s' t' → Type
 ```
 
-
 ## Definitions
 
 ### The predicate of being a superglobular type
@@ -88,7 +100,7 @@ Note that the type of pairs `(Gₙ₊₁ , eₙ)` in this structure is [contract
 module _
   {l1 l2 : Level} (l3 l4 : Level) (G : Reflexive-Globular-Type l1 l2)
   where
-  
+
   is-superglobular-Reflexive-Globular-Type : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
   is-superglobular-Reflexive-Globular-Type =
     pointwise-extension-binary-family-reflexive-globular-types l3 l4 G G

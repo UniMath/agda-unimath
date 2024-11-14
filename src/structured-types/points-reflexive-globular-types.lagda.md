@@ -19,9 +19,20 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-Consider a [reflexive globular type](structured-types.reflexive-globular-types.md) `G`. A {{#concept "point" Disambiguation="reflexive globular type" Agda=point-Reflexive-Globular-Type}} of `G` is a 0-cell of `G`. Equivalently, a point of `G` is a [reflexive globular map](structured-types.reflexive-globular-maps.md) from the [unit reflexive globular type](structured-types.unit-reflexive-globular-type.md) into `G`.
+Consider a
+[reflexive globular type](structured-types.reflexive-globular-types.md) `G`. A
+{{#concept "point" Disambiguation="reflexive globular type" Agda=point-Reflexive-Globular-Type}}
+of `G` is a 0-cell of `G`. Equivalently, a point of `G` is a
+[reflexive globular map](structured-types.reflexive-globular-maps.md) from the
+[unit reflexive globular type](structured-types.unit-reflexive-globular-type.md)
+into `G`.
 
-The definition of points of reflexive globular types is much simpler than the definition of [points](structured-types.points-globular-types.md) of ordinary [globular types](structured-types.globular-types.md). This is due to the condition that reflexive globular maps preserve reflexivity, and therefore the type of higher cells relating the underlying 0-cell to itself is [contractible](foundation-core.contractible-types.md).
+The definition of points of reflexive globular types is much simpler than the
+definition of [points](structured-types.points-globular-types.md) of ordinary
+[globular types](structured-types.globular-types.md). This is due to the
+condition that reflexive globular maps preserve reflexivity, and therefore the
+type of higher cells relating the underlying 0-cell to itself is
+[contractible](foundation-core.contractible-types.md).
 
 ## Definitions
 

@@ -25,7 +25,14 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-Consider a [reflexive globular map](structured-types.reflexive-globular-maps.md) `f : G → H` between [reflexive globular types](structured-types.reflexive-globular-types.md) `G` and `H`, and consider a [dependent reflexive globular type](structured-types.dependent-reflexive-globular-types.md) `K` over `H`. The {{#concept "base change" Disambiguation="dependent reflexive globular types" Agda=base-change-Dependent-Reflexive-Globular-Type}} `f*K` is the dependent reflexive globular type over `G` given by
+Consider a [reflexive globular map](structured-types.reflexive-globular-maps.md)
+`f : G → H` between
+[reflexive globular types](structured-types.reflexive-globular-types.md) `G` and
+`H`, and consider a
+[dependent reflexive globular type](structured-types.dependent-reflexive-globular-types.md)
+`K` over `H`. The
+{{#concept "base change" Disambiguation="dependent reflexive globular types" Agda=base-change-Dependent-Reflexive-Globular-Type}}
+`f*K` is the dependent reflexive globular type over `G` given by
 
 ```text
   (f*K)₀ x := K₀ (f₀ x)

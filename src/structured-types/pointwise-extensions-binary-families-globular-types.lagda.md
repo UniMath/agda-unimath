@@ -20,15 +20,24 @@ open import structured-types.globular-types
 open import structured-types.points-globular-types
 ```
 
+</details>
+
 ## Idea
 
-Consider two [globular types](structured-types.globular-types.md) `G` and `H`, and a binary family
+Consider two [globular types](structured-types.globular-types.md) `G` and `H`,
+and a binary family
 
 ```text
   K : G₀ → H₀ → Globular-Type
 ```
 
-of globular types, indexed over the 0-cells of `G` and `H`. Furthermore, consider a [binary dependent globular type](structured-types.binary-dependent-globular-types.md) `L` over `G` and `H`. We say that `L` is a {{#concept "pointwise extension" Disambiguation="binary family of globular types" Agda=is-pointwise-extension-Binary-Dependent-Globular-Type}} of `K` if it comes equipped with a family of [globular equivalences](structured-types.globular-equivalences.md)
+of globular types, indexed over the 0-cells of `G` and `H`. Furthermore,
+consider a
+[binary dependent globular type](structured-types.binary-dependent-globular-types.md)
+`L` over `G` and `H`. We say that `L` is a
+{{#concept "pointwise extension" Disambiguation="binary family of globular types" Agda=is-pointwise-extension-binary-family-globular-types}}
+of `K` if it comes equipped with a family of
+[globular equivalences](structured-types.globular-equivalences.md)
 
 ```text
   (x : point G) (y : point H) → ev-point L x y ≃ K x₀ y₀.

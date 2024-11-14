@@ -19,7 +19,9 @@ open import structured-types.points-globular-types
 
 ## Idea
 
-Consider two [globular types](structured-types.globular-types.md) `G` and `H`. A {{#concept "binary dependent globular type" Agda=Binary-Dependent-Globular-Type}} `K` over `G` and `H` consists of
+Consider two [globular types](structured-types.globular-types.md) `G` and `H`. A
+{{#concept "binary dependent globular type" Agda=Binary-Dependent-Globular-Type}}
+`K` over `G` and `H` consists of
 
 ```text
   K₀ : G₀ → H₀ → Type

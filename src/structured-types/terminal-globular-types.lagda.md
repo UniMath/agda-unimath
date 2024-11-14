@@ -20,9 +20,11 @@ open import structured-types.globular-types
 
 ## Idea
 
-A [globular type](structured-types.globular-types.md) `G` is said to be {{#concept "terminal" Disambiguation="globular type" Agda=is-terminal-Globular-Type}} if for any globular type `H` the type of [globular maps](structured-types.globular-maps.md) `H → G` is [contractible](foundation-core.contractible-types.md).
-
-The standard {{#concept "terminal globular type" Agda=terminal-Globular-Type}} is the [unit globular type](structured-types.unit-globular-type.md).
+A [globular type](structured-types.globular-types.md) `G` is said to be
+{{#concept "terminal" Disambiguation="globular type" Agda=is-terminal-Globular-Type}}
+if for any globular type `H` the type of
+[globular maps](structured-types.globular-maps.md) `H → G` is
+[contractible](foundation-core.contractible-types.md).
 
 ## Definitions
 

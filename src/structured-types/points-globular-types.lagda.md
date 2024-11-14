@@ -21,7 +21,12 @@ open import structured-types.unit-globular-type
 
 ## Idea
 
-A {{#concept "point" Disambiguation="globular type" Agda=point-Globular-Type}} of a [globular type](structured-types.globular-types.md) `G` consists of a 0-cell `x₀ : G₀` and a point in the globular type `G' x₀ x₀` of 1-cells from `x₀` to itself. Equivalently, a point is a [globular map](structured-types.globular-maps.md) from the [unit globular type](structured-types.unit-globular-types.md) `𝟏` to `G`.
+A {{#concept "point" Disambiguation="globular type" Agda=point-Globular-Type}}
+of a [globular type](structured-types.globular-types.md) `G` consists of a
+0-cell `x₀ : G₀` and a point in the globular type `G' x₀ x₀` of 1-cells from
+`x₀` to itself. Equivalently, a point is a
+[globular map](structured-types.globular-maps.md) from the
+[unit globular type](structured-types.unit-globular-type.md) `𝟏` to `G`.
 
 ## Definitions
 

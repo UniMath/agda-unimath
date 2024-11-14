@@ -21,15 +21,26 @@ open import structured-types.reflexive-globular-types
 
 ## Idea
 
-Consider two [reflexive globular types](structured-types.reflexive-globular-types.md) `G` and `H`. A {{#concept "binary dependent reflexive globular type" Agda=Binary-Dependent-Reflexive-Globular-Type}} `K` over `G` and `H` consists of a [binary dependent globular type](structured-types.binary-dependent-globular-types.md) `K` over `G` and `H` equipped with reflexivity structure `Kᵣ`.
+Consider two
+[reflexive globular types](structured-types.reflexive-globular-types.md) `G` and
+`H`. A
+{{#concept "binary dependent reflexive globular type" Agda=Binary-Dependent-Reflexive-Globular-Type}}
+`K` over `G` and `H` consists of a
+[binary dependent globular type](structured-types.binary-dependent-globular-types.md)
+`K` over `G` and `H` equipped with reflexivity structure `Kᵣ`.
 
-A binary dependent globular type `K` over reflexive globular types `G` and `H` is said to be {{#concept "reflexive" Disambiguation="binary dependent globular type"}} if it comes equipped with
+A binary dependent globular type `K` over reflexive globular types `G` and `H`
+is said to be
+{{#concept "reflexive" Disambiguation="binary dependent globular type"}} if it
+comes equipped with
 
 ```text
   Kᵣ : {x : G₀} {y : H₀} (u : K₀ x y) → K₁ (Gᵣ x) (Gᵣ y) u u,
 ```
 
-such that the binary dependent globular type `K' s t u v` over `G' x x'` and `H' y y'` comes equipped with reflexivity structure for every `s : G₁ x x'` and `t : H₁ y y'`.
+such that the binary dependent globular type `K' s t u v` over `G' x x'` and
+`H' y y'` comes equipped with reflexivity structure for every `s : G₁ x x'` and
+`t : H₁ y y'`.
 
 ## Definitions
 
@@ -174,7 +185,7 @@ record
     refl-1-cell-binary-dependent-reflexive-globular-type-Binary-Dependent-Reflexive-Globular-Type
       ( s)
       ( t)
-     
+
 open Binary-Dependent-Reflexive-Globular-Type public
 ```
 
