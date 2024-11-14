@@ -29,7 +29,7 @@ open import foundation-core.subtypes
 ## Idea
 
 A
-{{#concept "functional dependent correspondence" Agda=is-functional-dependent-correspondence}}
+{{#concept "functional (dependent) correspondence" Agda=is-functional-correspondence}}
 is a dependent binary correspondence `C : Π (a : A) → B a → 𝒰` from a type `A`
 to a type family `B` over `A` such that for every `a : A` the type family
 `C a : B a → Type` is [torsorial](foundation-core.torsorial-type-families.md).
