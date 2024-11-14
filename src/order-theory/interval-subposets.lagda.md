@@ -52,6 +52,10 @@ module _
   is-inhabited-interval =
     is-inhabited (type-Poset (poset-interval-Subposet X x y))
 
+dule _
+  {l1 l2 : Level} (X : Poset l1 l2)
+  where
+  
   inhabited-interval : UU (l1 ⊔ l2)
   inhabited-interval =
     Σ (type-Poset X × type-Poset X) (λ (p , q) → is-inhabited-interval)
