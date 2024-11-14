@@ -114,7 +114,7 @@ record
     make-Transitive-Globular-Type
 ```
 
-- The underlying globular type of a transitive globular type
+**The underlying globular type of a transitive globular type**
 
 ```agda
   field
@@ -167,7 +167,7 @@ record
       ( globular-type-Transitive-Globular-Type)
 ```
 
-- The composition structure of a transitive globular type
+**The composition structure of a transitive globular type**
 
 ```agda
   field

@@ -79,7 +79,7 @@ record
   where
 ```
 
-- The underlying large globular type of a noncoherent large wild precategory
+**The underlying large globular type of a noncoherent large wild precategory**
 
 ```agda
   field
@@ -87,7 +87,7 @@ record
       Large-Globular-Type α β
 ```
 
-- The type of objects of a noncoherent large wild higher precategory
+**The type of objects of a noncoherent large wild higher precategory**
 
 ```agda
   obj-Noncoherent-Large-Wild-Higher-Precategory : (l : Level) → UU (α l)
@@ -96,8 +96,8 @@ record
       large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The globular type of morphisms between two objects in a noncoherent large wild
-  higher precategory
+**The globular type of morphisms between two objects in a noncoherent large **
+**wild higher precategory**
 
 ```agda
   hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
@@ -119,8 +119,8 @@ record
       large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The globular structure on the type of objects of a noncoherent large wild
-  higher precategory
+**The globular structure on the type of objects of a noncoherent large wild **
+**higher precategory**
 
 ```agda
   globular-structure-obj-Noncoherent-Large-Wild-Higher-Precategory :
@@ -130,8 +130,8 @@ record
       large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The globular type of 2-morphisms is a noncoherent large wild higher
-  precategory
+**The globular type of 2-morphisms is a noncoherent large wild higher **
+**precategory**
 
 ```agda
   2-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
@@ -154,8 +154,8 @@ record
       large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The globular structure on the type of morphisms between two objects in a
-  noncoherent large wild higher precategory
+**The globular structure on the type of morphisms between two objects in a **
+**noncoherent large wild higher precategory**
 
 ```agda
   globular-structure-hom-Noncoherent-Large-Wild-Higher-Precategory :
@@ -170,8 +170,8 @@ record
       large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The globular type of 3-morphisms in a noncoherent large wild higher
-  precategory
+**The globular type of 3-morphisms in a noncoherent large wild higher **
+**precategory**
 
 ```agda
   3-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
@@ -198,8 +198,8 @@ record
       large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The globular structure on the type of 2-morphisms in a noncoherent large wild
-  higher precategory
+**The globular structure on the type of 2-morphisms in a noncoherent large **
+**wild higher precategory**
 
 ```agda
   globular-structure-2-hom-Noncoherent-Large-Wild-Higher-Precategory :
@@ -215,8 +215,8 @@ record
       large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The structure of identity morphisms in a noncoherent large wild higher
-  precategory
+**The structure of identity morphisms in a noncoherent large wild higher **
+**precategory**
 
 ```agda
   field
@@ -264,7 +264,7 @@ record
       id-structure-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The structure of composition in a noncoherent large wild higher precategory
+**The structure of composition in a noncoherent large wild higher precategory**
 
 ```agda
   field
@@ -320,8 +320,8 @@ record
       comp-structure-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The noncoherent wild higher precategory of morphisms between two object in a
-  noncoherent large wild higher precategory
+**The noncoherent wild higher precategory of morphisms between two object in **
+**a noncoherent large wild higher precategory**
 
 ```agda
   hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory :
@@ -338,8 +338,8 @@ record
         ( comp-structure-hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory)
 ```
 
-- The underlying reflexive globular type of a noncoherent large wild higher
-  precategory
+**The underlying reflexive globular type of a noncoherent large wild higher **
+**precategory**
 
 ```agda
   large-reflexive-globular-type-Noncoherent-Large-Wild-Higher-Precategory :
@@ -352,8 +352,8 @@ record
     id-structure-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-- The underlying transitive globular type of a noncoherent large wild higher
-  precategory
+**The underlying transitive globular type of a noncoherent large wild higher **
+**precategory**
 
 ```agda
   large-transitive-globular-type-Noncoherent-Large-Wild-Higher-Precategory :

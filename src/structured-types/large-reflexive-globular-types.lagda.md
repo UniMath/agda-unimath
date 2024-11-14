@@ -107,7 +107,7 @@ record
   where
 ```
 
-- The underlying large globular type of a large reflexive globular type
+**The underlying large globular type of a large reflexive globular type**
 
 ```agda
   field
@@ -274,7 +274,7 @@ record
       large-globular-type-Large-Reflexive-Globular-Type
 ```
 
-- The reflexivity structure of a large reflexive globular type
+**The reflexivity structure of a large reflexive globular type**
 
 ```agda
   field

@@ -192,7 +192,7 @@ colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ =
     ( is-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 ℬ)
 ```
 
-- The action of colax functors on objects, morphisms, and higher morphisms
+**The action of colax functors on objects, morphisms, and higher morphisms**
 
 ```agda
 module _
@@ -248,7 +248,7 @@ module _
   is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory = pr2 F
 ```
 
-- Preservation by colax functors of identity morphisms
+**Preservation by colax functors of identity morphisms**
 
 ```agda
   preserves-id-hom-colax-functor-Noncoherent-Wild-Higher-Precategory :
@@ -275,7 +275,7 @@ module _
       is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory
 ```
 
-- Preservation by colax functors of composition
+**Preservation by colax functors of composition**
 
 ```agda
   preserves-comp-hom-colax-functor-Noncoherent-Wild-Higher-Precategory :
@@ -305,8 +305,8 @@ module _
       is-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory
 ```
 
-- The induced colax functor on the wild category of morphisms between two
-  objects
+**The induced colax functor on the wild category of morphisms between two **
+**objects**
 
 ```agda
   hom-colax-functor-colax-functor-Noncoherent-Wild-Higher-Precategory :

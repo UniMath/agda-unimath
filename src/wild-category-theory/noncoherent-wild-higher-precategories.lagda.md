@@ -92,7 +92,7 @@ module _
     0-cell-Globular-Type globular-type-Noncoherent-Wild-Higher-Precategory
 ```
 
-- Morphisms in a noncoherent wild higher precategory
+**Morphisms in a noncoherent wild higher precategory**
 
 ```agda
   hom-globular-type-Noncoherent-Wild-Higher-Precategory :
@@ -110,7 +110,7 @@ module _
     1-cell-Globular-Type globular-type-Noncoherent-Wild-Higher-Precategory
 ```
 
-- Identity morphisms in a noncoherent wild higher precategory
+**Identity morphisms in a noncoherent wild higher precategory**
 
 ```agda
   id-structure-Noncoherent-Wild-Higher-Precategory :
@@ -152,7 +152,7 @@ module _
       ( y)
 ```
 
-- Composition in a noncoherent wild higher precategory
+**Composition in a noncoherent wild higher precategory**
 
 ```agda
   comp-structure-Noncoherent-Wild-Higher-Precategory :
@@ -197,8 +197,8 @@ module _
       ( y)
 ```
 
-- The noncoherent wild higher precategory of morphisms between two objects in a
-  noncoherent wild higher precategory
+**The noncoherent wild higher precategory of morphisms between two objects in **
+**a noncoherent wild higher precategory**
 
 ```agda
   hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory :
@@ -212,7 +212,7 @@ module _
       ( comp-structure-hom-globular-type-Noncoherent-Wild-Higher-Precategory)
 ```
 
-- 2-Morphisms in a noncoherent wild higher precategory
+**2-Morphisms in a noncoherent wild higher precategory**
 
 ```agda
   2-hom-Noncoherent-Wild-Higher-Precategory :
@@ -242,7 +242,7 @@ module _
       comp-structure-Noncoherent-Wild-Higher-Precategory
 ```
 
-- 3-Morphisms in a noncoherent wild higher precategory
+**3-Morphisms in a noncoherent wild higher precategory**
 
 ```agda
   3-hom-Noncoherent-Wild-Higher-Precategory :
