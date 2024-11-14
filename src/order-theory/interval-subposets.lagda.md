@@ -52,7 +52,7 @@ module _
   is-inhabited-interval =
     is-inhabited (type-Poset (poset-interval-Subposet X x y))
 
-dule _
+module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
   
