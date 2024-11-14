@@ -46,9 +46,9 @@ module _
   (L : Binary-Dependent-Globular-Type l7 l8 G H)
   where
 
-  is-extension-binary-family-globular-types :
+  is-pointwise-extension-binary-family-globular-types :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8)
-  is-extension-binary-family-globular-types =
+  is-pointwise-extension-binary-family-globular-types =
     (x : point-Globular-Type G) (y : point-Globular-Type H) →
     globular-equiv
       ( ev-point-Binary-Dependent-Globular-Type L x y)
@@ -64,9 +64,9 @@ module _
   (K : 0-cell-Globular-Type G → 0-cell-Globular-Type H → Globular-Type l5 l6)
   where
 
-  extension-binary-family-globular-types :
+  pointwise-extension-binary-family-globular-types :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ lsuc l7 ⊔ lsuc l8)
-  extension-binary-family-globular-types =
+  pointwise-extension-binary-family-globular-types =
     Σ ( Binary-Dependent-Globular-Type l7 l8 G H)
-      ( is-extension-binary-family-globular-types K)
+      ( is-pointwise-extension-binary-family-globular-types K)
 ```

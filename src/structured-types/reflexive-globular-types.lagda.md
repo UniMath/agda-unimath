@@ -26,7 +26,7 @@ A [globular type](structured-types.globular-types.md) is
 {{#concept "reflexive" Disambiguation="globular type" Agda=is-reflexive-globular-structure}}
 if every $n$-cell `x` comes with a choice of $(n+1)$-cell from `x` to `x`.
 
-## Definition
+## Definitions
 
 ### The predicate of being a reflexive globular type
 
@@ -143,6 +143,13 @@ record
     (y y' : 1-cell-Reflexive-Globular-Type x x') → UU l2
   2-cell-Reflexive-Globular-Type =
     2-cell-Globular-Type globular-type-Reflexive-Globular-Type
+
+  3-cell-Reflexive-Globular-Type :
+    {x x' : 0-cell-Reflexive-Globular-Type}
+    {y y' : 1-cell-Reflexive-Globular-Type x x'} →
+    (z z' : 2-cell-Reflexive-Globular-Type y y') → UU l2
+  3-cell-Reflexive-Globular-Type =
+    3-cell-Globular-Type globular-type-Reflexive-Globular-Type
 
   globular-structure-Reflexive-Globular-Type :
     globular-structure l2 0-cell-Reflexive-Globular-Type

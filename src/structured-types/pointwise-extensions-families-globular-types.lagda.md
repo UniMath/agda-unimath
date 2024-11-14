@@ -22,7 +22,7 @@ open import structured-types.points-globular-types
 
 ## Idea
 
-Consider a family of [globular types](structured-types.globular-types.md) `H : G₀ → Globular-Type` indexed by the 0-cells of a globular type `G` and consider a [dependent globular type](structured-types.dependent-globular-types.md) `K` over `G`. We say that `K` is a {{#concept "pointwise extension" Disambiguation="family of globular types"}} of `H` if it comes equipped with a family of [globular equivalences](structured-types.globular-equivalences.md)
+Consider a family of [globular types](structured-types.globular-types.md) `H : G₀ → Globular-Type` indexed by the 0-cells of a globular type `G` and consider a [dependent globular type](structured-types.dependent-globular-types.md) `K` over `G`. We say that `K` is a {{#concept "pointwise extension" Disambiguation="family of globular types" Agda=is-pointwise-extension-family-of-globular-types-Dependent-Globular-Type}} of `H` if it comes equipped with a family of [globular equivalences](structured-types.globular-equivalences.md)
 
 ```text
   ev-point K x ≃ H x₀

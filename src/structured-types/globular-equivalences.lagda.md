@@ -15,6 +15,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import structured-types.globular-maps
 open import structured-types.globular-types
 ```
 
@@ -60,6 +61,15 @@ record
           ( 0-cell-globular-equiv y))
 
 open globular-equiv public
+
+globular-map-globular-equiv :
+  {l1 l2 l3 l4 : Level}
+  {A : Globular-Type l1 l2} {B : Globular-Type l3 l4} →
+  globular-equiv A B → globular-map A B
+0-cell-globular-map (globular-map-globular-equiv e) =
+  map-equiv (0-cell-equiv-globular-equiv e)
+1-cell-globular-map-globular-map (globular-map-globular-equiv e) =
+  globular-map-globular-equiv (1-cell-globular-equiv-globular-equiv e)
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -132,7 +142,7 @@ module _
       ( 1-cell-globular-equiv-globular-equiv e)
 ```
 
-### The identity equiv on a globular type
+### The identity equivalence on a globular type
 
 ```agda
 id-globular-equiv :

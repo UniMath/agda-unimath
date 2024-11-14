@@ -46,7 +46,7 @@ record
 
   field
     1-cell-binary-dependent-globular-type-Binary-Dependent-Globular-Type :
-      (x x' : 0-cell-Globular-Type G) (y y' : 0-cell-Globular-Type H) →
+      {x x' : 0-cell-Globular-Type G} {y y' : 0-cell-Globular-Type H} →
       0-cell-Binary-Dependent-Globular-Type x y →
       0-cell-Binary-Dependent-Globular-Type x' y' →
       Binary-Dependent-Globular-Type l6 l6
@@ -70,7 +70,7 @@ module _
   1-cell-Binary-Dependent-Globular-Type u v =
     0-cell-Binary-Dependent-Globular-Type
       ( 1-cell-binary-dependent-globular-type-Binary-Dependent-Globular-Type K
-        _ _ _ _ u v)
+        u v)
 ```
 
 ### Evaluating binary dependent globular types at a pair of points
@@ -90,7 +90,7 @@ ev-point-Binary-Dependent-Globular-Type :
   ( ev-point-Binary-Dependent-Globular-Type K x y) u v =
   ev-point-Binary-Dependent-Globular-Type
     ( 1-cell-binary-dependent-globular-type-Binary-Dependent-Globular-Type
-      K _ _ _ _ u v)
+      K u v)
     ( 1-cell-point-point-Globular-Type x)
     ( 1-cell-point-point-Globular-Type y)
 ```

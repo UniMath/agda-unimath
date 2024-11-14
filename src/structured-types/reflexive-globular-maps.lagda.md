@@ -62,14 +62,14 @@ record
       refl-1-cell-Reflexive-Globular-Type H
 
   field
-    preserves-refl-2-cell-globular-map-preserves-refl-globular-map :
+    preserves-refl-1-cell-globular-map-preserves-refl-globular-map :
       {x y : 0-cell-Reflexive-Globular-Type G} →
       preserves-refl-globular-map
         ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type G x y)
         ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type H _ _)
         ( 1-cell-globular-map-globular-map-Reflexive-Globular-Type G H f)
 
-open preserves-refl-globular-map
+open preserves-refl-globular-map public
 ```
 
 ### Reflexive globular maps
@@ -133,7 +133,7 @@ record
         ( 0-cell-reflexive-globular-map y))
       ( 1-cell-globular-map-reflexive-globular-map)
   preserves-refl-2-cell-globular-map-reflexive-globular-map =
-    preserves-refl-2-cell-globular-map-preserves-refl-globular-map
+    preserves-refl-1-cell-globular-map-preserves-refl-globular-map
       preserves-refl-reflexive-globular-map
 
   1-cell-reflexive-globular-map-reflexive-globular-map :
