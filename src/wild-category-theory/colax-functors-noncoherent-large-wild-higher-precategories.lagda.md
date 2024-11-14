@@ -464,7 +464,7 @@ module _
     preserves-comp-structure-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
   id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
-    colax-functor-Noncoherent-Large-Wild-Higher-Precategory id 𝒜 𝒜
+    colax-functor-Noncoherent-Large-Wild-Higher-Precategory (λ l → l) 𝒜 𝒜
   map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
     id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     id-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜
@@ -488,7 +488,7 @@ module _
   where
 
   map-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
-    map-Noncoherent-Large-Wild-Higher-Precategory (δ2 ∘ δ1) 𝒜 𝒞
+    map-Noncoherent-Large-Wild-Higher-Precategory (λ l → δ2 (δ1 l)) 𝒜 𝒞
   map-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory =
     comp-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 ℬ 𝒞
       ( map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory G)
@@ -549,7 +549,10 @@ module _
     preserves-comp-structure-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 
   comp-colax-functor-Noncoherent-Large-Wild-Precategory :
-    colax-functor-Noncoherent-Large-Wild-Higher-Precategory (δ2 ∘ δ1) 𝒜 𝒞
+    colax-functor-Noncoherent-Large-Wild-Higher-Precategory
+      ( λ l → δ2 (δ1 l))
+      ( 𝒜)
+      ( 𝒞)
   map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
     comp-colax-functor-Noncoherent-Large-Wild-Precategory =
     map-comp-colax-functor-Noncoherent-Large-Wild-Higher-Precategory

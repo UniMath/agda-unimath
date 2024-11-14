@@ -135,7 +135,7 @@ module _
   (A : Large-Globular-Type α β)
   where
 
-  id-large-globular-map : large-globular-map id A A
+  id-large-globular-map : large-globular-map (λ l → l) A A
   0-cell-large-globular-map id-large-globular-map =
     id
   1-cell-globular-map-large-globular-map id-large-globular-map =
@@ -154,7 +154,7 @@ module _
 
   comp-large-globular-map :
     (g : large-globular-map δ2 B C) (f : large-globular-map δ1 A B) →
-    large-globular-map (δ2 ∘ δ1) A C
+    large-globular-map (λ l → δ2 (δ1 l)) A C
   0-cell-large-globular-map (comp-large-globular-map g f) =
     0-cell-large-globular-map g ∘ 0-cell-large-globular-map f
   1-cell-globular-map-large-globular-map (comp-large-globular-map g f) =

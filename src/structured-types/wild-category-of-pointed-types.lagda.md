@@ -84,7 +84,7 @@ uniform-pointed-type-Large-Globular-Type :
   uniform-pointed-map-Globular-Type
 ```
 
-#### Identity structure on the large globular type of uniform pointed types
+#### Identity structure on the large globular type of pointed types, pointed maps, and uniform pointed homotopies
 
 ```agda
 is-reflexive-uniform-pointed-Π-Globular-Type :
@@ -115,7 +115,7 @@ is-reflexive-1-cell-globular-type-is-reflexive-Large-Globular-Type
   is-reflexive-uniform-pointed-map-Globular-Type _ _
 ```
 
-#### Composition structure on the large globular type of uniform pointed types
+#### Composition structure on the large globular type of pointed types, pointed maps, and uniform pointed homotopies
 
 ```agda
 is-transitive-uniform-pointed-Π-Globular-Type :
@@ -210,7 +210,7 @@ pointed-type-Large-Globular-Type :
   pointed-map-Globular-Type
 ```
 
-#### Identity structure on the large globular type of nonuniform pointed types
+#### Identity structure on the large globular type of nonpointed types, pointed maps, and uniform pointed homotopies
 
 ```agda
 is-reflexive-pointed-htpy-Globular-Type :
@@ -284,7 +284,7 @@ is-reflexive-Large-Reflexive-Globular-Type
   is-reflexive-pointed-type-Large-Globular-Type
 ```
 
-#### Composition structure on the large globular type of nonuniform pointed types
+#### Composition structure on the large globular type of nonpointed types, pointed maps, and uniform pointed homotopies
 
 ```agda
 is-transitive-pointed-htpy-Globular-Type :

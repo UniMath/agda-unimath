@@ -34,7 +34,7 @@ A
 [noncoherent large wild higher precategories](wild-category-theory.noncoherent-large-wild-higher-precategories.md)
 `𝒜` and `ℬ` is a [large globular map](structured-types.large-globular-maps.md)
 between their underlying
-[large globular-types](structured-types.large-globular-types.md). More
+[large globular types](structured-types.large-globular-types.md). More
 specifically, maps between noncoherent large wild higher precategories consist
 of a map on objects `F₀ : obj 𝒜 → obj ℬ`, and for every pair of $n$-morphisms
 `f` and `g`, a map of $(n+1)$-morphisms
