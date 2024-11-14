@@ -30,7 +30,7 @@ if, for every element `x : A`, the type family `R x` is
 [contractible](foundation-core.contractible-types.md) for every `x`.
 
 The
-{{#concept "standard discrete relation" Disambiguation="binary relations valued in types"}}
+{{#concept "standard discrete relation" Disambiguation="reflexive relations valued in types"}}
 on a type `X` is the relation defined by
 [identifications](foundation-core.identity-types.md),
 
