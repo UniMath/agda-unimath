@@ -41,7 +41,7 @@ module _
   where
 
   interval-map : UU (l1 ⊔ l2 ⊔ l3)
-  interval-map = inhabited-interval P x y → type-Commutative-Ring R
+  interval-map = inhabited-interval P → type-Commutative-Ring R
 ```
 
 WIP: complete this definition after _R-modules_ have been defined. Defining
