@@ -123,7 +123,7 @@ record
   where
 ```
 
-**The underlying globular type of a reflexive globular type**
+The underlying globular type of a reflexive globular type:
 
 ```agda
   field
@@ -158,7 +158,7 @@ record
       ( globular-type-Reflexive-Globular-Type)
 ```
 
-**The reflexivity structure of a reflexive globular type**
+The reflexivity structure of a reflexive globular type:
 
 ```agda
   field
@@ -196,7 +196,7 @@ record
       refl-Reflexive-Globular-Type
 ```
 
-**The reflexive globular type of 1-cells of a reflexive globular type**
+The reflexive globular type of 1-cells of a reflexive globular type:
 
 ```agda
   1-cell-reflexive-globular-type-Reflexive-Globular-Type :

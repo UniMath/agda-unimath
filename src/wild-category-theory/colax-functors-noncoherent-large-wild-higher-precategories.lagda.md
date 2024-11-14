@@ -209,7 +209,7 @@ record
   where
 ```
 
-**The underlying large globular map of a colax functor**
+The underlying large globular map of a colax functor:
 
 ```agda
   field
@@ -268,7 +268,7 @@ record
         ( map-colax-functor-Noncoherent-Large-Wild-Higher-Precategory)
 ```
 
-**Preservation of the identity structure**
+Preservation of the identity structure:
 
 ```agda
   preserves-id-structure-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
@@ -319,7 +319,7 @@ record
       is-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-**Preservation of the composition structure**
+Preservation of the composition structure:
 
 ```agda
   preserves-comp-structure-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
@@ -375,7 +375,7 @@ record
       is-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-**The globular map on hom-types is again a colax functor**
+The globular map on hom-types is again a colax functor:
 
 ```agda
   is-colax-functor-hom-colax-functor-colax-functor-Noncoherent-Large-Wild-Higher-Precategory :
