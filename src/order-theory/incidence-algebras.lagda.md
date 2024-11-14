@@ -24,8 +24,8 @@ open import order-theory.posets
 
 ## Idea
 
-For a [locally finite poset](order-theory.locally-finite-posets) 'P' and
-[commutative ring](commutative-algebra.commutative-rings) 'R', there is a
+For a [locally finite poset](order-theory.locally-finite-posets.md) 'P' and
+[commutative ring](commutative-algebra.commutative-rings.md) 'R', there is a
 canonical 'R'-associative algebra whose undderlying 'R'-module are the set-maps
 from the nonempty intervals of 'P' to 'R' (which we constructify as the
 inhabited intervals), and whose multiplication is given by a "convolution" of
