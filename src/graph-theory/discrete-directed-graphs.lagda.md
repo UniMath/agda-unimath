@@ -10,6 +10,11 @@ module graph-theory.discrete-directed-graphs where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.discrete-binary-relations
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.homotopies
+open import foundation.retractions
+open import foundation.sections
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -17,6 +22,7 @@ open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 
 open import graph-theory.directed-graphs
+open import graph-theory.morphisms-directed-graphs
 open import graph-theory.reflexive-graphs
 ```
 
@@ -76,6 +82,88 @@ module _
     is-prop is-discrete-Directed-Graph
   is-prop-is-discrete-Directed-Graph =
     is-prop-is-discrete-Relation (edge-Directed-Graph G)
+```
+
+### The standard discrete directed graph
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  where
+
+  discrete-Directed-Graph : Directed-Graph l lzero
+  pr1 discrete-Directed-Graph = A
+  pr2 discrete-Directed-Graph x y = empty
+```
+
+## Properties
+
+### Morphisms from a standard discrete directed graph are maps into vertices
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (G : Directed-Graph l1 l2)
+  where
+
+  ev-hom-discrete-Directed-Graph :
+    hom-Directed-Graph (discrete-Directed-Graph A) G →
+    A → vertex-Directed-Graph G
+  ev-hom-discrete-Directed-Graph =
+    vertex-hom-Directed-Graph (discrete-Directed-Graph _) G
+
+  map-inv-ev-hom-discrete-Directed-Graph :
+    (A → vertex-Directed-Graph G) →
+    hom-Directed-Graph (discrete-Directed-Graph A) G
+  pr1 (map-inv-ev-hom-discrete-Directed-Graph f) = f
+  pr2 (map-inv-ev-hom-discrete-Directed-Graph f) x y ()
+
+  is-section-map-inv-ev-hom-discrete-Directed-Graph :
+    is-section
+      ( ev-hom-discrete-Directed-Graph)
+      ( map-inv-ev-hom-discrete-Directed-Graph)
+  is-section-map-inv-ev-hom-discrete-Directed-Graph f = refl
+
+  htpy-is-retraction-map-inv-ev-hom-discrete-Directed-Graph :
+    (f : hom-Directed-Graph (discrete-Directed-Graph A) G) →
+    htpy-hom-Directed-Graph
+      ( discrete-Directed-Graph A)
+      ( G)
+      ( map-inv-ev-hom-discrete-Directed-Graph
+        ( ev-hom-discrete-Directed-Graph f))
+      ( f)
+  pr1 (htpy-is-retraction-map-inv-ev-hom-discrete-Directed-Graph f) =
+    refl-htpy
+  pr2 (htpy-is-retraction-map-inv-ev-hom-discrete-Directed-Graph f) x y ()
+
+  is-retraction-map-inv-ev-hom-discrete-Directed-Graph :
+    is-retraction
+      ( ev-hom-discrete-Directed-Graph)
+      ( map-inv-ev-hom-discrete-Directed-Graph)
+  is-retraction-map-inv-ev-hom-discrete-Directed-Graph f =
+    eq-htpy-hom-Directed-Graph
+      ( discrete-Directed-Graph A)
+      ( G)
+      ( map-inv-ev-hom-discrete-Directed-Graph
+        ( ev-hom-discrete-Directed-Graph f))
+      ( f)
+      ( htpy-is-retraction-map-inv-ev-hom-discrete-Directed-Graph f)
+
+  abstract
+    is-equiv-ev-hom-discrete-Directed-Graph :
+      is-equiv ev-hom-discrete-Directed-Graph
+    is-equiv-ev-hom-discrete-Directed-Graph =
+      is-equiv-is-invertible
+        map-inv-ev-hom-discrete-Directed-Graph
+        is-section-map-inv-ev-hom-discrete-Directed-Graph
+        is-retraction-map-inv-ev-hom-discrete-Directed-Graph
+
+  ev-equiv-hom-discrete-Directed-Graph :
+    hom-Directed-Graph (discrete-Directed-Graph A) G ≃
+    (A → vertex-Directed-Graph G)
+  pr1 ev-equiv-hom-discrete-Directed-Graph =
+    ev-hom-discrete-Directed-Graph
+  pr2 ev-equiv-hom-discrete-Directed-Graph =
+    is-equiv-ev-hom-discrete-Directed-Graph
 ```
 
 ## See also
