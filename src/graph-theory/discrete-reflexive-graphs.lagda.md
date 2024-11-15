@@ -9,7 +9,7 @@ module graph-theory.discrete-reflexive-graphs where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.discrete-relations
+open import foundation.discrete-reflexive-relations
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -38,12 +38,6 @@ graph whose vertices are elements of `X`, and edges are
 ```text
   E x y := (x ＝ y).
 ```
-
-More generally, a [directed graph](graph-theory.directed-graphs.md)
-`G ≐ (V , E)` is said to be
-{{#concept "discrete" Disambiguation="directed graph" Agda=is-discrete-Directed-Graph}}
-if it is reflexive and discrete as a reflexive graph. Being discrete for
-directed graphs is therefore not a property.
 
 ## Definitions
 
