@@ -1,7 +1,7 @@
-# Discrete relations
+# Discrete reflexive relations
 
 ```agda
-module foundation.discrete-relations where
+module foundation.discrete-reflexive-relations where
 ```
 
 <details><summary>Imports</summary>
@@ -29,33 +29,12 @@ if, for every element `x : A`, the type family `R x` is
 [dependent sum](foundation.dependent-pair-types.md) `Σ (y : A), (R x y)` is
 [contractible](foundation-core.contractible-types.md) for every `x`.
 
-The
-{{#concept "standard discrete relation" Disambiguation="reflexive relations valued in types"}}
-on a type `X` is the relation defined by
-[identifications](foundation-core.identity-types.md),
+The {{#concept "standard discrete reflexive relation"}} on a type `X` is the
+relation defined by [identifications](foundation-core.identity-types.md),
 
 ```text
   R x y := (x ＝ y).
 ```
-
-More generally, a binary relation `R` on `A` is said to be
-{{#concept "discrete" Disambiguation="binary relation" Agda=is-discrete-Relation}}
-if it is reflexive and discrete as a reflexive relation. Being discrete for
-binary relations is therefore not a property.
-
-Note that the directed relation on
-[natural numbers](elementary-number-theory.natural-numbers.md) and
-`E m n := (m + 1 ＝ n)` as in
-
-```text
-  0 ---> 1 ---> 2 ---> ⋯
-```
-
-satisfies the condition that the type family `E m` is torsorial for every
-`m : ℕ`, simply because the relation `E` is a
-[functional correspondence](foundation.functional-correspondences.md). The
-condition that a binary relation is torsorial is therefore not sufficient as a
-condition of being discrete.
 
 ## Definitions
 
@@ -80,26 +59,22 @@ module _
     is-prop-type-Prop is-discrete-prop-Reflexive-Relation
 ```
 
-### The predicate on relations of being discrete
+## Properties
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
-  where
-
-  is-discrete-Relation : UU (l1 ⊔ l2)
-  is-discrete-Relation =
-    Σ (is-reflexive R) (λ r → is-discrete-Reflexive-Relation (R , r))
-```
-
-### The standard discrete relation on a type
+### The identity relation is discrete
 
 ```agda
 module _
   {l : Level} (A : UU l)
   where
 
-  is-discrete-Id-Relation : is-discrete-Relation (Id {A = A})
-  pr1 is-discrete-Id-Relation x = refl
-  pr2 is-discrete-Id-Relation = is-torsorial-Id
+  is-discrete-Id-Reflexive-Relation :
+    is-discrete-Reflexive-Relation (Id-Reflexive-Relation A)
+  is-discrete-Id-Reflexive-Relation = is-torsorial-Id
 ```
+
+## See also
+
+- [Discrete binary relations](foundation.discrete-binary-relations.md)
+- [Discrete directed graphs](graph-theory.discrete-directed-graphs.md)
+- [Discrete reflexive graphs](graph-theory.discrete-reflexive-graphs.md)

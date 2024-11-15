@@ -1,7 +1,7 @@
-# Discrete graphs
+# Discrete reflexive graphs
 
 ```agda
-module graph-theory.discrete-graphs where
+module graph-theory.discrete-reflexive-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -45,21 +45,6 @@ More generally, a [directed graph](graph-theory.directed-graphs.md)
 if it is reflexive and discrete as a reflexive graph. Being discrete for
 directed graphs is therefore not a property.
 
-Note that the directed graph with `V := ℕ` the
-[natural numbers](elementary-number-theory.natural-numbers.md) and
-`E m n := (m + 1 ＝ n)` as in
-
-```text
-  0 ---> 1 ---> 2 ---> ⋯
-```
-
-satisfies the condition that the type family `E m` is torsorial for every
-`m : ℕ`, simply because `E` is a
-[functional correspondence](foundation.functional-correspondences.md).
-
-The condition that the edge relation on a directed graph is torsorial is
-therefore not sufficient as a condition of being discrete.
-
 ## Definitions
 
 ### The predicate on reflexive graphs of being discrete
@@ -83,13 +68,6 @@ module _
     is-prop-type-Prop is-discrete-prop-Reflexive-Graph
 ```
 
-### The predicate on graphs of being discrete
+## See also
 
-```agda
-module _
-  {l1 l2 : Level} (G : Directed-Graph l1 l2)
-  where
-
-  is-discrete-Directed-Graph : UU (l1 ⊔ l2)
-  is-discrete-Directed-Graph = is-discrete-Relation (edge-Directed-Graph G)
-```
+- [Discrete directed graphs](graph-theory.discrete-directed-graphs.md)
