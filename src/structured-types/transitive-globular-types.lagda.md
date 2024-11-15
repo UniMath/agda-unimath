@@ -321,36 +321,6 @@ module _
     1-cell-globular-map f
 ```
 
-## Examples
-
-### The transitive globular structure on a type given by its identity types
-
-```agda
-is-transitive-globular-type-Type :
-  {l : Level} (A : UU l) →
-  is-transitive-Globular-Type (globular-type-Type A)
-comp-1-cell-is-transitive-Globular-Type
-  ( is-transitive-globular-type-Type A) q p =
-  p ∙ q
-is-transitive-1-cell-globular-type-is-transitive-Globular-Type
-  ( is-transitive-globular-type-Type A) {x} {y} =
-  is-transitive-globular-type-Type (x ＝ y)
-
-is-transitive-globular-structure-Id :
-  {l : Level} (A : UU l) →
-  is-transitive-globular-structure (globular-structure-Id A)
-comp-1-cell-is-transitive-Globular-Type
-  ( is-transitive-globular-structure-Id A) q p = p ∙ q
-is-transitive-1-cell-globular-type-is-transitive-Globular-Type
-  ( is-transitive-globular-structure-Id A) {x} {y} =
-  is-transitive-globular-structure-Id (x ＝ y)
-
-transitive-globular-structure-Id :
-  {l : Level} (A : UU l) → transitive-globular-structure l A
-transitive-globular-structure-Id A =
-  ( globular-structure-Id A , is-transitive-globular-structure-Id A)
-```
-
 ## See also
 
 - [Composition structure on globular types](structured-types.composition-structure-globular-types.md)

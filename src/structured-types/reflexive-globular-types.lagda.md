@@ -322,31 +322,6 @@ module _
     1-cell-globular-map-globular-map f
 ```
 
-## Examples
-
-### The reflexive globular structure on a type given by its identity types
-
-```agda
-is-reflexive-globular-type-Type :
-  {l : Level} (A : UU l) →
-  is-reflexive-Globular-Type (globular-type-Type A)
-is-reflexive-1-cell-is-reflexive-Globular-Type
-  ( is-reflexive-globular-type-Type A) _ =
-  refl
-is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
-  ( is-reflexive-globular-type-Type A) {x} {y} =
-  is-reflexive-globular-type-Type (x ＝ y)
-
-is-reflexive-globular-structure-Id :
-  {l : Level} (A : UU l) →
-  is-reflexive-globular-structure (globular-structure-Id A)
-is-reflexive-1-cell-is-reflexive-Globular-Type
-  ( is-reflexive-globular-structure-Id A) x = refl
-is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
-  ( is-reflexive-globular-structure-Id A) {x} {y} =
-  is-reflexive-globular-structure-Id (x ＝ y)
-```
-
 ## See also
 
 - [Colax reflexive globular maps](structured-types.colax-reflexive-globular-maps.md)

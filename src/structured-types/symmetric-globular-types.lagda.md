@@ -22,76 +22,89 @@ open import structured-types.globular-types
 ## Idea
 
 We say a [globular type](structured-types.globular-types.md) is
-{{#concept "symmetric" Disambiguation="globular type" Agda=is-symmetric-globular-structure}}
+{{#concept "symmetric" Disambiguation="globular type" Agda=is-symmetric-Globular-Type}}
 if there is a symmetry action on its $n$-cells for positive $n$, mapping
 $n$-cells from `x` to `y` to $n$-cells from `y` to `x`.
 
 ## Definition
 
-### Symmetry structure on a globular structure
+### Symmetry structure on a globular type
 
 ```agda
 record
-  is-symmetric-globular-structure
-  {l1 l2 : Level} {A : UU l1} (G : globular-structure l2 A) : UU (l1 ⊔ l2)
+  is-symmetric-Globular-Type
+    {l1 l2 : Level} (G : Globular-Type l1 l2) : UU (l1 ⊔ l2)
   where
   coinductive
+
   field
-    is-symmetric-1-cell-is-symmetric-globular-structure :
-      is-symmetric (1-cell-globular-structure G)
-    is-symmetric-globular-structure-1-cell-is-symmetric-globular-structure :
-      (x y : A) →
-      is-symmetric-globular-structure
-        ( globular-structure-1-cell-globular-structure G x y)
+    is-symmetric-1-cell-is-symmetric-Globular-Type :
+      is-symmetric (1-cell-Globular-Type G)
 
-open is-symmetric-globular-structure public
+  field
+    is-symmetric-1-cell-globular-type-is-symmetric-Globular-Type :
+      (x y : 0-cell-Globular-Type G) →
+      is-symmetric-Globular-Type (1-cell-globular-type-Globular-Type G x y)
 
-module _
-  {l1 l2 : Level} {A : UU l1} {G : globular-structure l2 A}
-  (r : is-symmetric-globular-structure G)
+open is-symmetric-Globular-Type public
+```
+
+### Symmetric globular types
+
+```agda
+record
+  Symmetric-Globular-Type
+    (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
   where
 
-  sym-1-cell-is-symmetric-globular-structure :
-    {x y : A} →
-    1-cell-globular-structure G x y → 1-cell-globular-structure G y x
-  sym-1-cell-is-symmetric-globular-structure {x} {y} =
-    is-symmetric-1-cell-is-symmetric-globular-structure r x y
+  field
+    globular-type-Symmetric-Globular-Type : Globular-Type l1 l2
 
-  sym-2-cell-is-symmetric-globular-structure :
-    {x y : A} {f g : 1-cell-globular-structure G x y} →
-    2-cell-globular-structure G f g →
-    2-cell-globular-structure G g f
-  sym-2-cell-is-symmetric-globular-structure {x} {y} {f} {g} =
-    is-symmetric-1-cell-is-symmetric-globular-structure
-      ( is-symmetric-globular-structure-1-cell-is-symmetric-globular-structure
-        ( r)
-        ( x)
-        ( y))
-      ( f)
-      ( g)
-```
+  0-cell-Symmetric-Globular-Type : UU l1
+  0-cell-Symmetric-Globular-Type =
+    0-cell-Globular-Type globular-type-Symmetric-Globular-Type
 
-### The type of symmetric globular structures
+  1-cell-globular-type-Symmetric-Globular-Type :
+    (x y : 0-cell-Symmetric-Globular-Type) →
+    Globular-Type l2 l2
+  1-cell-globular-type-Symmetric-Globular-Type =
+    1-cell-globular-type-Globular-Type globular-type-Symmetric-Globular-Type
 
-```agda
-symmetric-globular-structure :
-  {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
-symmetric-globular-structure l2 A =
-  Σ (globular-structure l2 A) (is-symmetric-globular-structure)
-```
+  1-cell-Symmetric-Globular-Type :
+    (x y : 0-cell-Symmetric-Globular-Type) → UU l2
+  1-cell-Symmetric-Globular-Type =
+    1-cell-Globular-Type globular-type-Symmetric-Globular-Type
 
-## Examples
+  field
+    is-symmetric-Symmetric-Globular-Type :
+      is-symmetric-Globular-Type globular-type-Symmetric-Globular-Type
 
-### The symmetric globular structure on a type given by its identity types
+  inv-1-cell-Symmetric-Globular-Type :
+    {x y : 0-cell-Symmetric-Globular-Type} →
+    1-cell-Symmetric-Globular-Type x y → 1-cell-Symmetric-Globular-Type y x
+  inv-1-cell-Symmetric-Globular-Type =
+    is-symmetric-1-cell-is-symmetric-Globular-Type
+      is-symmetric-Symmetric-Globular-Type
+      _
+      _
 
-```agda
-is-symmetric-globular-structure-Id :
-  {l : Level} (A : UU l) →
-  is-symmetric-globular-structure (globular-structure-Id A)
-is-symmetric-globular-structure-Id A =
-  λ where
-  .is-symmetric-1-cell-is-symmetric-globular-structure x y →
-    inv
-  .is-symmetric-globular-structure-1-cell-is-symmetric-globular-structure x y →
-    is-symmetric-globular-structure-Id (x ＝ y)
+  is-symmetric-1-cell-globular-type-Symmetric-Globular-Type :
+    (x y : 0-cell-Symmetric-Globular-Type) →
+    is-symmetric-Globular-Type
+      ( 1-cell-globular-type-Symmetric-Globular-Type x y)
+  is-symmetric-1-cell-globular-type-Symmetric-Globular-Type =
+    is-symmetric-1-cell-globular-type-is-symmetric-Globular-Type
+      is-symmetric-Symmetric-Globular-Type
+
+  1-cell-symmetric-globular-type-Symmetric-Globular-Type :
+    (x y : 0-cell-Symmetric-Globular-Type) →
+    Symmetric-Globular-Type l2 l2
+  globular-type-Symmetric-Globular-Type
+    ( 1-cell-symmetric-globular-type-Symmetric-Globular-Type x y) =
+    1-cell-globular-type-Symmetric-Globular-Type x y
+  is-symmetric-Symmetric-Globular-Type
+    ( 1-cell-symmetric-globular-type-Symmetric-Globular-Type x y) =
+    is-symmetric-1-cell-globular-type-Symmetric-Globular-Type x y
+
+open Symmetric-Globular-Type public
 ```

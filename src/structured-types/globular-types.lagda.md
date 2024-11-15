@@ -51,6 +51,12 @@ equivalently have started by defining globular types, and then define globular
 structures on a type as binary families of globular types on it, but this is a
 special property of globular types.
 
+Every type has the structure of a globular type, where the globular structure is
+obtained from the [identity type](foundation-core.identity-types.md). The
+globular type obtained from a type `A` and its iterated identity types is called
+the
+[standard discrete globular type](structured-types.standard-discrete-globular-types.md).
+
 ## Definitions
 
 ### The structure of a globular type
@@ -304,25 +310,10 @@ globular-structure-5-cell-Globular-Type A =
     ( 1-cell-globular-type-Globular-Type A _ _)
 ```
 
-## Examples
-
-### The globular structure on a type given by its identity types
-
-```agda
-globular-type-Type : {l : Level} → UU l → Globular-Type l l
-0-cell-Globular-Type (globular-type-Type A) = A
-1-cell-globular-type-Globular-Type (globular-type-Type A) x y =
-  globular-type-Type (x ＝ y)
-
-globular-structure-Id : {l : Level} (A : UU l) → globular-structure l A
-1-cell-globular-structure (globular-structure-Id A) x y =
-  x ＝ y
-globular-structure-1-cell-globular-structure (globular-structure-Id A) x y =
-  globular-structure-Id (x ＝ y)
-```
-
 ## See also
 
+- [Discrete globular types](structured-types.discrete-globular-types.md)
 - [Reflexive globular types](structured-types.reflexive-globular-types.md)
+- [Superglobular types](structured-types.superglobular-types.md)
 - [Symmetric globular types](structured-types.symmetric-globular-types.md)
 - [Transitive globular types](structured-types.transitive-globular-types.md)
