@@ -92,32 +92,40 @@ module _
   {l : Level}
   where
 
-  discrete-Globular-Type : UU l → Globular-Type l l
-  0-cell-Globular-Type (discrete-Globular-Type A) =
+  globular-type-discrete-Reflexive-Globular-Type : UU l → Globular-Type l l
+  0-cell-Globular-Type (globular-type-discrete-Reflexive-Globular-Type A) =
     A
-  1-cell-globular-type-Globular-Type ( discrete-Globular-Type A) x y =
-    discrete-Globular-Type (x ＝ y)
+  1-cell-globular-type-Globular-Type
+    ( globular-type-discrete-Reflexive-Globular-Type A)
+    ( x)
+    ( y) =
+    globular-type-discrete-Reflexive-Globular-Type (x ＝ y)
 
-  refl-discrete-Globular-Type :
-    {A : UU l} → is-reflexive-Globular-Type (discrete-Globular-Type A)
-  is-reflexive-1-cell-is-reflexive-Globular-Type refl-discrete-Globular-Type x =
+  refl-discrete-Reflexive-Globular-Type :
+    {A : UU l} →
+    is-reflexive-Globular-Type
+      ( globular-type-discrete-Reflexive-Globular-Type A)
+  is-reflexive-1-cell-is-reflexive-Globular-Type
+    refl-discrete-Reflexive-Globular-Type
+    x =
     refl
   is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
-    refl-discrete-Globular-Type =
-    refl-discrete-Globular-Type
+    refl-discrete-Reflexive-Globular-Type =
+    refl-discrete-Reflexive-Globular-Type
 
   discrete-Reflexive-Globular-Type :
     (A : UU l) → Reflexive-Globular-Type l l
   globular-type-Reflexive-Globular-Type (discrete-Reflexive-Globular-Type A) =
-    discrete-Globular-Type A
+    globular-type-discrete-Reflexive-Globular-Type A
   refl-Reflexive-Globular-Type (discrete-Reflexive-Globular-Type A) =
-    refl-discrete-Globular-Type
+    refl-discrete-Reflexive-Globular-Type
 
   is-discrete-standard-Discrete-Reflexive-Globular-Type :
     {A : UU l} →
     is-discrete-Reflexive-Globular-Type (discrete-Reflexive-Globular-Type A)
   is-torsorial-1-cell-is-discrete-Reflexive-Globular-Type
-    is-discrete-standard-Discrete-Reflexive-Globular-Type x =
+    is-discrete-standard-Discrete-Reflexive-Globular-Type
+    x =
     is-torsorial-Id x
   is-discrete-1-cell-reflexive-globular-type-is-discrete-Reflexive-Globular-Type
     is-discrete-standard-Discrete-Reflexive-Globular-Type x y =
@@ -135,37 +143,37 @@ module _
 
 ## Properties
 
-### The standard discrete globular types are transitive
+### The standard discrete reflexive globular types are transitive
 
 ```agda
-is-transitive-discrete-Globular-Type :
+is-transitive-discrete-Reflexive-Globular-Type :
   {l : Level} {A : UU l} →
-  is-transitive-Globular-Type (discrete-Globular-Type A)
+  is-transitive-Globular-Type (globular-type-discrete-Reflexive-Globular-Type A)
 comp-1-cell-is-transitive-Globular-Type
-  is-transitive-discrete-Globular-Type q p =
+  is-transitive-discrete-Reflexive-Globular-Type q p =
   p ∙ q
 is-transitive-1-cell-globular-type-is-transitive-Globular-Type
-  is-transitive-discrete-Globular-Type =
-  is-transitive-discrete-Globular-Type
+  is-transitive-discrete-Reflexive-Globular-Type =
+  is-transitive-discrete-Reflexive-Globular-Type
 
 discrete-Transitive-Globular-Type :
   {l : Level} (A : UU l) → Transitive-Globular-Type l l
 globular-type-Transitive-Globular-Type (discrete-Transitive-Globular-Type A) =
-  discrete-Globular-Type A
+  globular-type-discrete-Reflexive-Globular-Type A
 is-transitive-Transitive-Globular-Type (discrete-Transitive-Globular-Type A) =
-  is-transitive-discrete-Globular-Type
+  is-transitive-discrete-Reflexive-Globular-Type
 ```
 
-### The standard discrete globular types are symmetric
+### The standard discrete reflexive globular types are symmetric
 
 ```agda
-is-symmetric-discrete-Globular-Type :
+is-symmetric-discrete-Reflexive-Globular-Type :
   {l : Level} {A : UU l} →
-  is-symmetric-Globular-Type (discrete-Globular-Type A)
+  is-symmetric-Globular-Type (globular-type-discrete-Reflexive-Globular-Type A)
 is-symmetric-1-cell-is-symmetric-Globular-Type
-  is-symmetric-discrete-Globular-Type a b =
+  is-symmetric-discrete-Reflexive-Globular-Type a b =
   inv
 is-symmetric-1-cell-globular-type-is-symmetric-Globular-Type
-  is-symmetric-discrete-Globular-Type x y =
-  is-symmetric-discrete-Globular-Type
+  is-symmetric-discrete-Reflexive-Globular-Type x y =
+  is-symmetric-discrete-Reflexive-Globular-Type
 ```

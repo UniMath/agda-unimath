@@ -23,6 +23,7 @@ open import structured-types.commuting-squares-of-pointed-maps public
 open import structured-types.commuting-triangles-of-pointed-maps public
 open import structured-types.composition-structure-globular-types public
 open import structured-types.conjugation-pointed-types public
+open import structured-types.constant-globular-types public
 open import structured-types.constant-pointed-maps public
 open import structured-types.contractible-pointed-types public
 open import structured-types.cyclic-types public
@@ -34,6 +35,8 @@ open import structured-types.dependent-reflexive-globular-types public
 open import structured-types.dependent-sums-globular-types public
 open import structured-types.dependent-types-equipped-with-automorphisms public
 open import structured-types.discrete-globular-types public
+open import structured-types.discrete-reflexive-globular-types public
+open import structured-types.empty-globular-types public
 open import structured-types.equality-globular-types public
 open import structured-types.equivalences-h-spaces public
 open import structured-types.equivalences-pointed-arrows public
@@ -113,7 +116,6 @@ open import structured-types.reflexive-globular-types public
 open import structured-types.sections-dependent-globular-types public
 open import structured-types.sets-equipped-with-automorphisms public
 open import structured-types.small-pointed-types public
-open import structured-types.standard-discrete-globular-types public
 open import structured-types.superglobular-types public
 open import structured-types.symmetric-elements-involutive-types public
 open import structured-types.symmetric-globular-types public

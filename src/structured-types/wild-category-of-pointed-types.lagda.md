@@ -16,6 +16,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 open import foundation.whiskering-identifications-concatenation
 
+open import structured-types.discrete-reflexive-globular-types
 open import structured-types.globular-types
 open import structured-types.large-globular-types
 open import structured-types.large-reflexive-globular-types
@@ -27,7 +28,6 @@ open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.reflexive-globular-types
-open import structured-types.discrete-reflexive-globular-types
 open import structured-types.transitive-globular-types
 open import structured-types.uniform-pointed-homotopies
 
@@ -185,7 +185,7 @@ pointed-htpy-Globular-Type :
   (f g : pointed-Π A B) → Globular-Type (l1 ⊔ l2) (l1 ⊔ l2)
 0-cell-Globular-Type (pointed-htpy-Globular-Type f g) = f ~∗ g
 1-cell-globular-type-Globular-Type (pointed-htpy-Globular-Type f g) H K =
-  discrete-Globular-Type (pointed-2-htpy H K)
+  globular-type-discrete-Reflexive-Globular-Type (pointed-2-htpy H K)
 
 pointed-Π-Globular-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A) →
@@ -223,7 +223,7 @@ is-reflexive-1-cell-is-reflexive-Globular-Type
   refl-pointed-2-htpy
 is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
   ( is-reflexive-pointed-htpy-Globular-Type f g) =
-  refl-discrete-Globular-Type
+  refl-discrete-Reflexive-Globular-Type
 
 pointed-htpy-Reflexive-Globular-Type :
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
@@ -297,7 +297,7 @@ comp-1-cell-is-transitive-Globular-Type
   concat-pointed-2-htpy H K
 is-transitive-1-cell-globular-type-is-transitive-Globular-Type
   ( is-transitive-pointed-htpy-Globular-Type f g) =
-  is-transitive-discrete-Globular-Type
+  is-transitive-discrete-Reflexive-Globular-Type
 
 is-transitive-pointed-Π-Globular-Type :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A) →

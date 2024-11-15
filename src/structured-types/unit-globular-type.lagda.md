@@ -12,6 +12,7 @@ module structured-types.unit-globular-type where
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import structured-types.constant-globular-types
 open import structured-types.globular-types
 ```
 
@@ -20,6 +21,8 @@ open import structured-types.globular-types
 ## Idea
 
 The {{#concept "unit globular type" Agda=unit-Globular-Type}} is the
+[constant globular type](structured-types.constant-globular-types.md) at the
+[unit type](foundation.unit-type.md). That is, the unit globular type is the
 [globular type](structured-types.globular-types.md) `𝟏` given by
 
 ```text
@@ -33,6 +36,5 @@ The {{#concept "unit globular type" Agda=unit-Globular-Type}} is the
 
 ```agda
 unit-Globular-Type : Globular-Type lzero lzero
-0-cell-Globular-Type unit-Globular-Type = unit
-1-cell-globular-type-Globular-Type unit-Globular-Type x y = unit-Globular-Type
+unit-Globular-Type = constant-Globular-Type unit
 ```

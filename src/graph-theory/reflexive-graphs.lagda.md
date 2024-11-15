@@ -48,10 +48,10 @@ module _
   refl-Reflexive-Graph : (x : vertex-Reflexive-Graph) → edge-Reflexive-Graph x x
   refl-Reflexive-Graph = pr2 G
 
-  reflexive-relation-Reflexive-Graph :
+  edge-reflexive-relation-Reflexive-Graph :
     Reflexive-Relation l2 vertex-Reflexive-Graph
-  pr1 reflexive-relation-Reflexive-Graph = edge-Reflexive-Graph
-  pr2 reflexive-relation-Reflexive-Graph = refl-Reflexive-Graph
+  pr1 edge-reflexive-relation-Reflexive-Graph = edge-Reflexive-Graph
+  pr2 edge-reflexive-relation-Reflexive-Graph = refl-Reflexive-Graph
 
   binary-dependent-identification-refl-Reflexive-Graph :
     {x y : vertex-Reflexive-Graph} (p : x ＝ y) →
@@ -60,7 +60,7 @@ module _
       ( refl-Reflexive-Graph y)
   binary-dependent-identification-refl-Reflexive-Graph =
     binary-dependent-identification-refl-Reflexive-Relation
-      reflexive-relation-Reflexive-Graph
+      edge-reflexive-relation-Reflexive-Graph
 ```
 
 ## See also
