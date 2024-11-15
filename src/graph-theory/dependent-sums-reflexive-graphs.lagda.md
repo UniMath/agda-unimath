@@ -7,14 +7,20 @@ module graph-theory.dependent-sums-reflexive-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import graph-theory.base-change-dependent-reflexive-graphs
 open import graph-theory.dependent-reflexive-graphs
 open import graph-theory.dependent-sums-directed-graphs
 open import graph-theory.directed-graphs
+open import graph-theory.discrete-dependent-reflexive-graphs
+open import graph-theory.discrete-reflexive-graphs
 open import graph-theory.morphisms-directed-graphs
 open import graph-theory.morphisms-reflexive-graphs
 open import graph-theory.reflexive-graphs
@@ -184,6 +190,46 @@ module _
     section-dependent-directed-graph-pr2-Σ-Reflexive-Graph
   pr2 pr2-Σ-Reflexive-Graph =
     refl-pr2-Σ-Reflexive-Graph
+```
+
+## Properties
+
+### Discreteness of dependent sum reflexive graphs
+
+If `G` is a discrete reflexive graph and `H` is a dependent reflexive graph over `G`, then `H` is discrete if and only if the [dependent sum graph](graph-theory.dependent-sums-reflexive-graphs.md) `Σ G H` is a discrete reflexive graph.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {G : Reflexive-Graph l1 l2}
+  (H : Dependent-Reflexive-Graph l3 l4 G)
+  where
+
+  abstract
+    is-discrete-Σ-is-discrete-Dependent-Reflexive-Graph :
+      is-discrete-Reflexive-Graph G →
+      is-discrete-Dependent-Reflexive-Graph H →
+      is-discrete-Reflexive-Graph (Σ-Reflexive-Graph H)
+    is-discrete-Σ-is-discrete-Dependent-Reflexive-Graph d c (x , y) =
+      is-torsorial-Eq-structure
+        ( d x)
+        ( x , refl-Reflexive-Graph G x)
+        ( c x y)
+
+  abstract
+    is-discrete-is-discrete-Σ-Reflexive-Graph :
+      is-discrete-Reflexive-Graph G →
+      is-discrete-Reflexive-Graph (Σ-Reflexive-Graph H) →
+      is-discrete-Dependent-Reflexive-Graph H
+    is-discrete-is-discrete-Σ-Reflexive-Graph d c x y =
+      is-contr-equiv'
+        ( Σ ( Σ ( vertex-Reflexive-Graph G)
+                ( vertex-Dependent-Reflexive-Graph H))
+            ( λ (x' , y') →
+              Σ ( edge-Reflexive-Graph G x x')
+                ( λ e → edge-Dependent-Reflexive-Graph H e y y')))
+        ( left-unit-law-Σ-is-contr (d x) (x , refl-Reflexive-Graph G x) ∘e
+          interchange-Σ-Σ (λ x' y' e → edge-Dependent-Reflexive-Graph H e y y'))
+        ( c (x , y))
 ```
 
 ## See also

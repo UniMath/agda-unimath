@@ -152,6 +152,22 @@ module _
     refl-constant-Dependent-Reflexive-Graph
 ```
 
+### Evaluating dependent reflexive graphs at a point
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {G : Reflexive-Graph l1 l2}
+  (H : Dependent-Reflexive-Graph l3 l4 G) (x : vertex-Reflexive-Graph G)
+  where
+
+  ev-point-Dependent-Reflexive-Graph : Reflexive-Graph l3 l4
+  pr1 (pr1 ev-point-Dependent-Reflexive-Graph) =
+    vertex-Dependent-Reflexive-Graph H x
+  pr2 (pr1 ev-point-Dependent-Reflexive-Graph) =
+    edge-Dependent-Reflexive-Graph H (refl-Reflexive-Graph G x)
+  pr2 ev-point-Dependent-Reflexive-Graph =
+    refl-Dependent-Reflexive-Graph H
+```
 ## See also
 
 - The [universal reflexive graph](graph-theory.universal-reflexive-graph.md)
