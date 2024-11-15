@@ -35,7 +35,7 @@ a [reflexive graph](graph-theory.reflexive-graphs.md) `G`. The
 ```text
   (Σ G H)₀ := Σ G₀ H₀
   (Σ G H)₁ (x , y) (x' , y') := Σ (e : G₁ x x') (H₁ e y y')
-  (Σ G H)ᵣ (x , y) := (Gᵣ x , Hᵣ y).
+  refl (Σ G H) (x , y) := (refl G x , refl H y).
 ```
 
 ## Definitions

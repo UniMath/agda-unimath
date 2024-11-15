@@ -28,7 +28,7 @@ given by
 ```text
   𝟏₀ := unit
   𝟏' x y := 𝟏
-  𝟏ᵣ x := star.
+  refl 𝟏 x := star.
 ```
 
 ## Definitions

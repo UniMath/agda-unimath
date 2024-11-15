@@ -61,18 +61,18 @@ The low-dimensional data of a superglobular type is therefore as follows:
   G₁ : (x y : G₀) → Type
   H₀ : (x y : G₀) → Type
   e₀ : {x y : G₀} → H₀ x y ≃ G₀ x y
-  Gᵣ : (x : G₀) → G₁ x x
+  refl G : (x : G₀) → G₁ x x
 
   G₂ : {x y : G₀} (s t : G₁ x y) → Type
   H₁ : {x x' y y' : G₀} → G₁ x x' → G₁ y y' → H₀ x y → H₀ x' y' → Type
-  e₁ : {x y : G₀} {s t : H₀ x y} → H₁ (Gᵣ x) (Gᵣ y) s t ≃ G₂ (e₀ s) (e₀ t)
-  Gᵣ : {x y : G₀} (s : G₁ x y) → G₂ s s
+  e₁ : {x y : G₀} {s t : H₀ x y} → H₁ (refl G x) (refl G y) s t ≃ G₂ (e₀ s) (e₀ t)
+  refl G : {x y : G₀} (s : G₁ x y) → G₂ s s
 
   G₃ : {x y : G₀} {s t : G₁ x y} (u v : G₂ s t) → Type
   H₂ : {x x' y y' : G₀} {s s' : G₁ x x'} {t t' : G₁ y y'}
        (p : G₂ s s') (q : G₂ t t') → H₁ s t → H₁ s' t' → Type
   e₂ : {x y : G₀} {s t : H₀ x y} {u v : H₁
-       H₂ (Gᵣ x) (Gᵣ y) u v ≃ G₃ (e₁ u) (e₁ v)
+       H₂ (refl G x) (refl G y) u v ≃ G₃ (e₁ u) (e₁ v)
 ```
 
 Note that the type of pairs `(Gₙ₊₁ , eₙ)` in this structure is
@@ -83,10 +83,10 @@ presenting the low-dimensional data of a superglobular type is therefore:
   G₀ : Type
 
   H₀ : (x y : G₀) → Type
-  Gᵣ : (x : G₀) → H₀ x x
+  refl G : (x : G₀) → H₀ x x
 
   H₁ : {x x' y y' : G₀} → H₁ x x' → H₁ y y' → H₀ x y → H₀ x' y' → Type
-  Gᵣ : {x y : G₀} (s : H₀ x y) → H₁ (Gᵣ x) (Gᵣ y) s s
+  refl G : {x y : G₀} (s : H₀ x y) → H₁ (refl G x) (refl G y) s s
 
   H₂ : {x x' y y' : G₀} {s s' : H₁ x x'} {t t' : H₁ y y'}
        (p : H₂ s s') (q : H₂ t t') → H₁ s t → H₁ s' t' → Type

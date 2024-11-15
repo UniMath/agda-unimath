@@ -31,7 +31,7 @@ of `A` and `B` is the reflexive graph `A × B` given by
 ```text
   (A × B)₀ := A₀ × B₀
   (A × B)₁ (x , y) (x' , y') := A₁ x x' × B₁ y y'
-  (A × B)ᵣ (x , y) := (Aᵣ x , Bᵣ y).
+  refl (A × B) (x , y) := (refl A x , refl B y).
 ```
 
 ## Definitions

@@ -30,7 +30,7 @@ between two
 [identifications](foundation-core.identity-types.md)
 
 ```text
-  (x : G₀) → f₁ (Gᵣ x) ＝ Hᵣ (f₀ x)
+  (x : G₀) → f₁ (refl G x) ＝ refl H (f₀ x)
 ```
 
 from the image of the reflexivity cell at `x` in `G` to the reflexivity cell at

@@ -40,7 +40,7 @@ from `H` to `K` consists of
 ```text
   α₀ : (x : G₀) → H₀ x ≃ K₀ x
   α₁ : (x x' : G₀) (e : G₁ x x') (y : H₀ x) (y' : H₀ x') → H₁ e y y' ≃ K₁ e (α₀ y) (α₀ y')
-  αᵣ : (x : G₀) (y : H₀ x) → α₁ (Gᵣ x) (Hᵣ y) ＝ Kᵣ x (α₀ y).
+  refl α : (x : G₀) (y : H₀ x) → α₁ (refl G x) (refl H y) ＝ refl K x (α₀ y).
 ```
 
 ## Definitions

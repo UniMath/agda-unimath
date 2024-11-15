@@ -30,7 +30,7 @@ between two
 `f : G → H` equipped with a family of 2-cells
 
 ```text
-  (x : G₀) → H₂ (f₁ (Gᵣ x)) (Hᵣ (f₀ x))
+  (x : G₀) → H₂ (f₁ (refl G x)) (refl H (f₀ x))
 ```
 
 from the image of the reflexivity cell at `x` in `G` to the reflexivity cell at

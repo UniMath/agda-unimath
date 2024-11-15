@@ -39,11 +39,11 @@ of `H`, a family of maps `f₁` from the edges `G₁ x y` in `G` to the edges
 [identification](foundation-core.identity-types.md)
 
 ```text
-  fᵣ : f₁ (Gᵣ x) ＝ Hᵣ (f₀ x)
+  preserves-refl f : f₁ (refl G x) ＝ refl H (f₀ x)
 ```
 
-from the image of the reflexivity edge `Gᵣ x` to the reflexivity edge at `f₀ x`
-in `H`.
+from the image of the reflexivity edge `refl G x` to the reflexivity edge at
+`f₀ x` in `H`.
 
 ## Definitions
 

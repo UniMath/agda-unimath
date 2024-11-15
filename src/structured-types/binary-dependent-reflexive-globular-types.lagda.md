@@ -27,7 +27,7 @@ Consider two
 {{#concept "binary dependent reflexive globular type" Agda=Binary-Dependent-Reflexive-Globular-Type}}
 `K` over `G` and `H` consists of a
 [binary dependent globular type](structured-types.binary-dependent-globular-types.md)
-`K` over `G` and `H` equipped with reflexivity structure `Kᵣ`.
+`K` over `G` and `H` equipped with reflexivity structure `refl K`.
 
 A binary dependent globular type `K` over reflexive globular types `G` and `H`
 is said to be
@@ -35,7 +35,7 @@ is said to be
 comes equipped with
 
 ```text
-  Kᵣ : {x : G₀} {y : H₀} (u : K₀ x y) → K₁ (Gᵣ x) (Gᵣ y) u u,
+  refl K : {x : G₀} {y : H₀} (u : K₀ x y) → K₁ (refl G x) (refl G y) u u,
 ```
 
 such that the binary dependent globular type `K' s t u v` over `G' x x'` and

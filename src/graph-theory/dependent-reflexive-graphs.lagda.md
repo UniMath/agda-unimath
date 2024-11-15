@@ -27,8 +27,8 @@ Consider a [reflexive graph](graph-theory.reflexive-graphs.md) `A`. A
 - A family `B₁ : {x y : A₀} → A₁ x y → B₀ x → B₀ y → 𝒰` of
   [binary relations](foundation.binary-relations.md) between the types of
   vertices `B₀`, indexed by the type of edges `A₁` in `A`.
-- A family of elements `Bᵣ : (x : A₀) (y : B₀ x) → B₁ (Aᵣ x) y y` witnessing the
-  reflexivity of `B₁` over the reflexivity `Aᵣ` of `A₁`.
+- A family of elements `refl B : (x : A₀) (y : B₀ x) → B₁ (refl A x) y y`
+  witnessing the reflexivity of `B₁` over the reflexivity `refl A` of `A₁`.
 
 To see that this is a sensible definition of dependent reflexive graphs, observe
 that the type of reflexive graphs itself is
@@ -44,8 +44,8 @@ Alternatively, a dependent reflexive graph `B` over `A` can be defined by
 - A family `B₀ : A₀ → Reflexive-Graph` of reflexive graphs as the type family of
   vertices
 - A family `B₁ : {x y : A₀} → A₁ x y → (B₀ x)₀ → (B₀ y)₀ → 𝒰`.
-- A [family of equivalences](foundation.families-of-equivalences.md) `Bᵣ : (x :
-  A₀) (y y' : B₀ x) → B₁ (Aᵣ x) y y' ≃ (B₀ x)₁ y y'.
+- A [family of equivalences](foundation.families-of-equivalences.md) `refl B :
+  (x : A₀) (y y' : B₀ x) → B₁ (refl A x) y y' ≃ (B₀ x)₁ y y'.
 
 This definition is more closely related to the concept of morphism into the
 universal reflexive graph.

@@ -43,7 +43,7 @@ the [dependent reflexive graph](graph-theory.dependent-reflexive-graphs.md)
 ```text
   (fib_f)₀ x := fib f₀
   (fib_f)₁ e (y , refl) (y' , refl) := fib f₁ e
-  (fib_f)ᵣ (y , refl) := (Hᵣ x , fᵣ x).
+  refl (fib_f) (y , refl) := (refl H x , preserves-refl f x).
 ```
 
 ## Definitions

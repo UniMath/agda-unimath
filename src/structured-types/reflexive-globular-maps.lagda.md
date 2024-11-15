@@ -26,7 +26,7 @@ A {{#concept "reflexive globular map" Agda=reflexive-globular-map}} between two
 with a family of [identifications](foundation-core.identity-types.md)
 
 ```text
-  (x : G₀) → f₁ (Gᵣ x) ＝ Hᵣ (f₀ x)
+  (x : G₀) → f₁ (refl G x) ＝ refl H (f₀ x)
 ```
 
 from the image of the reflexivity cell at `x` in `G` to the reflexivity cell at
