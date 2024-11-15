@@ -104,7 +104,7 @@ record
   where
 
   constructor make-is-colax-functor-Noncoherent-Wild-Higher-Precategory
-  
+
   coinductive
 
   field
