@@ -34,6 +34,7 @@ open import structured-types.dependent-products-wild-monoids public
 open import structured-types.dependent-reflexive-globular-types public
 open import structured-types.dependent-sums-globular-types public
 open import structured-types.dependent-types-equipped-with-automorphisms public
+open import structured-types.discrete-dependent-reflexive-globular-types public
 open import structured-types.discrete-globular-types public
 open import structured-types.discrete-reflexive-globular-types public
 open import structured-types.empty-globular-types public

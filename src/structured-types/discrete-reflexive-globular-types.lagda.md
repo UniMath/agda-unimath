@@ -177,3 +177,9 @@ is-symmetric-1-cell-globular-type-is-symmetric-Globular-Type
   is-symmetric-discrete-Reflexive-Globular-Type x y =
   is-symmetric-discrete-Reflexive-Globular-Type
 ```
+
+## See also
+
+- [Discrete dependent reflexive globular types](structured-types.discrete-dependent-reflexive-globular-types.md)
+- [Discrete globular types](structured-types.discrete-globular-types.md)
+- [Discrete reflexive graphs](graph-theory.discrete-reflexive-graphs.md)
