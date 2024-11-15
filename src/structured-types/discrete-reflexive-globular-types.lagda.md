@@ -1,9 +1,9 @@
-# The standard discrete globular types
+# Discrete reflexive globular types
 
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.standard-discrete-globular-types where
+module structured-types.discrete-reflexive-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -13,7 +13,6 @@ open import foundation.identity-types
 open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
-open import structured-types.discrete-globular-types
 open import structured-types.globular-types
 open import structured-types.reflexive-globular-types
 open import structured-types.symmetric-globular-types
@@ -24,16 +23,69 @@ open import structured-types.transitive-globular-types
 
 ## Idea
 
+A [reflexive globular type](structured-types.reflexive-globular-types.md) is
+said to be
+{{#concept "discrete" Disambiguation="reflexive globular type" Agda=is-discrete-Reflexive-Globular-Type}}
+if:
+
+- For every 0-cell `x` the type family `G₁ x` of 1-cells out of `x` is
+  [torsorial](foundation-core.torsorial-type-families.md), and
+- For every two 0-cells `x` and `y` the reflexive globular type `G' x y` is
+  discrete.
+
 The {{#concept "standard discrete globular type"}} at a type `A` is the
 [globular type](structured-types.globular-types.md) obtained from the iterated
 [identity types](foundation-core.identity-types.md) on `A`. This globular type
 is [reflexive](structured-types.reflexive-globular-types.md),
 [transitive](structured-types.transitive-globular-types.md), and indeed
-[discrete](structured-types.discrete-globular-types.md).
+[discrete](structured-types.discrete-reflexive-globular-types.md).
 
 ## Definitions
 
-### The standard discrete globular types
+### The predicate of being a discrete reflexive globular type
+
+```agda
+record
+  is-discrete-Reflexive-Globular-Type
+    {l1 l2 : Level} (G : Reflexive-Globular-Type l1 l2) : UU (l1 ⊔ l2)
+  where
+  coinductive
+
+  field
+    is-torsorial-1-cell-is-discrete-Reflexive-Globular-Type :
+      (x : 0-cell-Reflexive-Globular-Type G) →
+      is-torsorial (1-cell-Reflexive-Globular-Type G x)
+
+  field
+    is-discrete-1-cell-reflexive-globular-type-is-discrete-Reflexive-Globular-Type :
+      (x y : 0-cell-Reflexive-Globular-Type G) →
+      is-discrete-Reflexive-Globular-Type
+        ( 1-cell-reflexive-globular-type-Reflexive-Globular-Type G x y)
+
+open is-discrete-Reflexive-Globular-Type public
+```
+
+### Discrete reflexive globular types
+
+```agda
+record
+  Discrete-Reflexive-Globular-Type
+    (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
+  where
+
+  field
+    reflexive-globular-type-Discrete-Reflexive-Globular-Type :
+      Reflexive-Globular-Type l1 l2
+
+  field
+    is-discrete-Discrete-Reflexive-Globular-Type :
+      is-discrete-Reflexive-Globular-Type
+        reflexive-globular-type-Discrete-Reflexive-Globular-Type
+
+open Discrete-Reflexive-Globular-Type public
+```
+
+### The standard discrete reflexive globular types
 
 ```agda
 module _
@@ -61,24 +113,24 @@ module _
   refl-Reflexive-Globular-Type (discrete-Reflexive-Globular-Type A) =
     refl-discrete-Globular-Type
 
-  is-discrete-standard-Discrete-Globular-Type :
+  is-discrete-standard-Discrete-Reflexive-Globular-Type :
     {A : UU l} →
     is-discrete-Reflexive-Globular-Type (discrete-Reflexive-Globular-Type A)
   is-torsorial-1-cell-is-discrete-Reflexive-Globular-Type
-    is-discrete-standard-Discrete-Globular-Type x =
+    is-discrete-standard-Discrete-Reflexive-Globular-Type x =
     is-torsorial-Id x
   is-discrete-1-cell-reflexive-globular-type-is-discrete-Reflexive-Globular-Type
-    is-discrete-standard-Discrete-Globular-Type x y =
-    is-discrete-standard-Discrete-Globular-Type
+    is-discrete-standard-Discrete-Reflexive-Globular-Type x y =
+    is-discrete-standard-Discrete-Reflexive-Globular-Type
 
-  standard-Discrete-Globular-Type :
-    UU l → Discrete-Globular-Type l l
-  reflexive-globular-type-Discrete-Globular-Type
-    ( standard-Discrete-Globular-Type A) =
+  standard-Discrete-Reflexive-Globular-Type :
+    UU l → Discrete-Reflexive-Globular-Type l l
+  reflexive-globular-type-Discrete-Reflexive-Globular-Type
+    ( standard-Discrete-Reflexive-Globular-Type A) =
     discrete-Reflexive-Globular-Type A
-  is-discrete-Discrete-Globular-Type
-    ( standard-Discrete-Globular-Type A) =
-    is-discrete-standard-Discrete-Globular-Type
+  is-discrete-Discrete-Reflexive-Globular-Type
+    ( standard-Discrete-Reflexive-Globular-Type A) =
+    is-discrete-standard-Discrete-Reflexive-Globular-Type
 ```
 
 ## Properties

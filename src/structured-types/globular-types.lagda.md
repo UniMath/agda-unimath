@@ -55,7 +55,7 @@ Every type has the structure of a globular type, where the globular structure is
 obtained from the [identity type](foundation-core.identity-types.md). The
 globular type obtained from a type `A` and its iterated identity types is called
 the
-[standard discrete globular type](structured-types.standard-discrete-globular-types.md).
+[standard discrete reflexive globular type](structured-types.discrete-reflexive-globular-types.md).
 
 ## Definitions
 
@@ -312,7 +312,7 @@ globular-structure-5-cell-Globular-Type A =
 
 ## See also
 
-- [Discrete globular types](structured-types.discrete-globular-types.md)
+- [Discrete reflexive globular types](structured-types.discrete-reflexive-globular-types.md)
 - [Reflexive globular types](structured-types.reflexive-globular-types.md)
 - [Superglobular types](structured-types.superglobular-types.md)
 - [Symmetric globular types](structured-types.symmetric-globular-types.md)

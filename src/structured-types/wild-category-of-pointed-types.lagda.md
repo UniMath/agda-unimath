@@ -27,7 +27,7 @@ open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.reflexive-globular-types
-open import structured-types.standard-discrete-globular-types
+open import structured-types.discrete-reflexive-globular-types
 open import structured-types.transitive-globular-types
 open import structured-types.uniform-pointed-homotopies
 
