@@ -103,6 +103,9 @@ record
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   where
 
+  constructor
+    make-colax-reflexive-globular-map
+
   field
     globular-map-colax-reflexive-globular-map :
       globular-map-Reflexive-Globular-Type G H

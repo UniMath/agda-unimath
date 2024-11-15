@@ -55,6 +55,7 @@ record
     (f : globular-map-Transitive-Globular-Type G H) :
     UU (l1 ⊔ l2 ⊔ l4)
   where
+
   coinductive
 
   field
@@ -90,6 +91,9 @@ record
     (H : Transitive-Globular-Type l3 l4) :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   where
+
+  constructor
+    make-colax-transitive-globular-map
 
   field
     globular-map-colax-transitive-globular-map :

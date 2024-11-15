@@ -104,6 +104,9 @@ record
     (H : Large-Reflexive-Globular-Type α2 β2) : UUω
   where
 
+  constructor
+    make-large-colax-reflexive-globular-map
+
   field
     large-globular-map-large-colax-reflexive-globular-map :
       large-globular-map-Large-Reflexive-Globular-Type γ G H
