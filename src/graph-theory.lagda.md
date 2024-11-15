@@ -26,6 +26,7 @@ open import graph-theory.dependent-sums-reflexive-graphs public
 open import graph-theory.directed-graph-duality public
 open import graph-theory.directed-graph-structures-on-standard-finite-sets public
 open import graph-theory.directed-graphs public
+open import graph-theory.discrete-dependent-reflexive-graphs public
 open import graph-theory.discrete-directed-graphs public
 open import graph-theory.discrete-reflexive-graphs public
 open import graph-theory.displayed-large-reflexive-graphs public

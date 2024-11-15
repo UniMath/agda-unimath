@@ -196,7 +196,10 @@ module _
 
 ### Discreteness of dependent sum reflexive graphs
 
-If `G` is a discrete reflexive graph and `H` is a dependent reflexive graph over `G`, then `H` is discrete if and only if the [dependent sum graph](graph-theory.dependent-sums-reflexive-graphs.md) `Σ G H` is a discrete reflexive graph.
+If `G` is a discrete reflexive graph and `H` is a dependent reflexive graph over
+`G`, then `H` is discrete if and only if the
+[dependent sum graph](graph-theory.dependent-sums-reflexive-graphs.md) `Σ G H`
+is a discrete reflexive graph.
 
 ```agda
 module _

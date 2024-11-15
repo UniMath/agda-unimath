@@ -65,3 +65,4 @@ module _
 ## See also
 
 - [Discrete directed graphs](graph-theory.discrete-directed-graphs.md)
+- [Discrete dependent reflexive graphs](graph-theory.discrete-dependent-reflexive-graphs.md)
