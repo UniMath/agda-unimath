@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.large-globular-types where
+module globular-types.large-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -12,7 +12,7 @@ module structured-types.large-globular-types where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
+open import globular-types.globular-types
 ```
 
 </details>
@@ -22,7 +22,7 @@ open import structured-types.globular-types
 A {{#concept "large globular type" Agda=Large-Globular-Type}} is a hierarchy of
 types indexed by universe levels, [equipped](foundation.structure.md) with a
 [large binary relation](foundation.large-binary-relations.md) valued in
-[globular types](structured-types.globular-types.md).
+[globular types](globular-types.globular-types.md).
 
 Thus, a large globular type consists of a base hierarchy of types indexed by
 universe levels `A` called the _$0$-cells_, and for every pair of $0$-cells, a

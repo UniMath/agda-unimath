@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.transitive-globular-types where
+module globular-types.transitive-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
+open import globular-types.globular-types
 ```
 
 </details>
@@ -21,7 +21,7 @@ open import structured-types.globular-types
 ## Idea
 
 A {{#concept "transitive globular type" Agda=Transitive-Globular-Type}} is a
-[globular type](structured-types.globular-types.md) `A`
+[globular type](globular-types.globular-types.md) `A`
 [equipped](foundation.structure.md) with a binary operator
 
 ```text

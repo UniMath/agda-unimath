@@ -12,7 +12,7 @@ module synthetic-category-theory.synthetic-categories where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
+open import globular-types.globular-types
 ```
 
 </details>
@@ -63,7 +63,7 @@ category theory.
 In synthetic category theory we may speak of categories, functors, isomorphisms
 between them, isomorphisms between those, and so forth. The sorts in the
 language of synthetic category theory are therefore organized in a
-[globular type](structured-types.globular-types.md).
+[globular type](globular-types.globular-types.md).
 
 ```agda
 module _
