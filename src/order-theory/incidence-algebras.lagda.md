@@ -24,13 +24,13 @@ open import order-theory.posets
 
 ## Idea
 
-For a [locally finite poset](order-theory.locally-finite-posets.md) 'P' and
-[commutative ring](commutative-algebra.commutative-rings.md) 'R', there is a
-canonical 'R'-associative algebra whose underlying 'R'-module are the set-maps
-from the nonempty [intervals](order-theory.interval-subposets.md) of 'P' to 'R'
+For a [locally finite poset](order-theory.locally-finite-posets.md) `P` and
+[commutative ring](commutative-algebra.commutative-rings.md) `R`, there is a
+canonical `R`-associative algebra whose underlying `R`-module are the set-maps
+from the nonempty [intervals](order-theory.interval-subposets.md) of `P` to `R`
 (which we constructify as the inhabited intervals), and whose multiplication is
-given by a "convolution" of maps. This is the **incidence algebra** of 'P' over
-'R'.
+given by a "convolution" of maps. This is the **incidence algebra** of `P` over
+`R`.
 
 ## Definition
 
