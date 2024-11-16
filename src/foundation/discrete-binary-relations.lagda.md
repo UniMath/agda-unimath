@@ -28,9 +28,16 @@ adjoint to the forgetful functor `(V , E) ↦ (V , ∅)`.
 The condition of discreteness of binary relations compares to the condition of
 [discreteness](foundation.discrete-reflexive-relations.md) of
 [reflexive relations](foundation.reflexive-relations.md) in the sense that both
-conditions imply initiality. A discrete binary relation is initial becauase it is empty, while a discrete reflexive relation is initial because it is [torsorial](foundation-core.torsorial-type-families.md) and hence it is an [identity system](foundation.identity-systems.md).
+conditions imply initiality. A discrete binary relation is initial becauase it
+is empty, while a discrete reflexive relation is initial because it is
+[torsorial](foundation-core.torsorial-type-families.md) and hence it is an
+[identity system](foundation.identity-systems.md).
 
-**Note:** It is also possible to impose the torsoriality condition on an arbitrary binary relation. However, this leads to the concept of [functional correspondence](foundation.functional-correspondences.md). That is, a binary relation `R` on `A` such that `R x` is torsorial for every `x : A` is the graph of a function.
+**Note:** It is also possible to impose the torsoriality condition on an
+arbitrary binary relation. However, this leads to the concept of
+[functional correspondence](foundation.functional-correspondences.md). That is,
+a binary relation `R` on `A` such that `R x` is torsorial for every `x : A` is
+the graph of a function.
 
 ## Definitions
 
