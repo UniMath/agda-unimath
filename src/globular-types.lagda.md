@@ -1,6 +1,12 @@
 # Globular types
 
 ```agda
+{-# OPTIONS --guardedness #-}
+```
+
+## Files in the `globular-types` namespace
+
+```agda
 module globular-types where
 
 open import globular-types.dependent-globular-types public
