@@ -4,7 +4,7 @@
 {-# OPTIONS --guardedness #-}
 ```
 
-## Files in the `globular-types` namespace
+## Modules in the globular types namespace
 
 ```agda
 module globular-types where
