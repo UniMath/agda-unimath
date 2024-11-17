@@ -29,7 +29,7 @@ in `𝒞` is a morphism `f : x → y` in `𝒞` [equipped](foundation.structure.
 - a $2$-morphism `is-split-epi : f ∘ s → id`, where `∘` and `id` denote
   composition of morphisms and the identity morphism given by the transitive and
   reflexive structure on the underlying
-  [globular type](structured-types.globular-types.md), respectively
+  [globular type](globular-types.globular-types.md), respectively
 - a proof `is-iso-is-split-epi : is-iso is-split-epi`, which shows that the
   above $2$-morphism is itself an isomorphism
 - a morphism `r : y → x`
