@@ -21,14 +21,15 @@ open import globular-types.globular-types
 open import globular-types.large-globular-types
 open import globular-types.large-reflexive-globular-types
 open import globular-types.large-transitive-globular-types
+open import globular-types.reflexive-globular-types
+open import globular-types.transitive-globular-types
+
 open import structured-types.pointed-2-homotopies
 open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-families-of-types
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import globular-types.reflexive-globular-types
-open import globular-types.transitive-globular-types
 open import structured-types.uniform-pointed-homotopies
 
 open import wild-category-theory.noncoherent-large-wild-higher-precategories

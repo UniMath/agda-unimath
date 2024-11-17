@@ -34,9 +34,9 @@ A
 [noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md)
 `𝒜` and `ℬ` is a
 [map of noncoherent wild higher precategories](wild-category-theory.maps-noncoherent-wild-higher-precategories.md)
-which is [colax reflexive](globular-types.colax-reflexive-globular-maps.md)
-and [colax transitive](globular-types.colax-transitive-globular-maps.md). This
-means that for every $n$-morphism `f` in `𝒜`, where we take $0$-morphisms to be
+which is [colax reflexive](globular-types.colax-reflexive-globular-maps.md) and
+[colax transitive](globular-types.colax-transitive-globular-maps.md). This means
+that for every $n$-morphism `f` in `𝒜`, where we take $0$-morphisms to be
 objects, there is an $(n+1)$-morphism
 
 ```text
