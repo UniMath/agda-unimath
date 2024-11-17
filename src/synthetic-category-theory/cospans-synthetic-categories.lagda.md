@@ -13,7 +13,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
+open import globular-types.globular-types
 
 open import synthetic-category-theory.equivalences-synthetic-categories
 open import synthetic-category-theory.synthetic-categories
