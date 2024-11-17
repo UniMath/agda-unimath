@@ -14,11 +14,11 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.colax-reflexive-globular-maps
-open import structured-types.colax-transitive-globular-maps
-open import structured-types.globular-maps
-open import structured-types.globular-types
-open import structured-types.reflexive-globular-types
+open import globular-types.colax-reflexive-globular-maps
+open import globular-types.colax-transitive-globular-maps
+open import globular-types.globular-maps
+open import globular-types.globular-types
+open import globular-types.reflexive-globular-types
 
 open import wild-category-theory.maps-noncoherent-wild-higher-precategories
 open import wild-category-theory.noncoherent-wild-higher-precategories
@@ -34,8 +34,8 @@ A
 [noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md)
 `𝒜` and `ℬ` is a
 [map of noncoherent wild higher precategories](wild-category-theory.maps-noncoherent-wild-higher-precategories.md)
-which is [colax reflexive](structured-types.colax-reflexive-globular-maps.md)
-and [colax transitive](structured-types.colax-transitive-globular-maps.md). This
+which is [colax reflexive](globular-types.colax-reflexive-globular-maps.md)
+and [colax transitive](globular-types.colax-transitive-globular-maps.md). This
 means that for every $n$-morphism `f` in `𝒜`, where we take $0$-morphisms to be
 objects, there is an $(n+1)$-morphism
 

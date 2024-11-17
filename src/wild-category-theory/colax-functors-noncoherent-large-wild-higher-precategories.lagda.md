@@ -14,11 +14,11 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-maps
-open import structured-types.globular-types
-open import structured-types.large-colax-reflexive-globular-maps
-open import structured-types.large-colax-transitive-globular-maps
-open import structured-types.large-globular-maps
+open import globular-types.globular-maps
+open import globular-types.globular-types
+open import globular-types.large-colax-reflexive-globular-maps
+open import globular-types.large-colax-transitive-globular-maps
+open import globular-types.large-globular-maps
 
 open import wild-category-theory.colax-functors-noncoherent-wild-higher-precategories
 open import wild-category-theory.maps-noncoherent-large-wild-higher-precategories

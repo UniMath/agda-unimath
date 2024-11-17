@@ -14,9 +14,9 @@ open import foundation.universe-levels
 
 open import foundation-core.homotopies
 
-open import structured-types.globular-types
-open import structured-types.reflexive-globular-types
-open import structured-types.transitive-globular-types
+open import globular-types.globular-types
+open import globular-types.reflexive-globular-types
+open import globular-types.transitive-globular-types
 ```
 
 </details>
@@ -24,7 +24,7 @@ open import structured-types.transitive-globular-types
 ## Idea
 
 The {{#concept "globular type of functions" Agda=function-type-Globular-Type}}
-is the [globular type](structured-types.globular-types.md) consisting of
+is the [globular type](globular-types.globular-types.md) consisting of
 [functions](foundation.function-types.md) and
 [homotopies](foundation-core.homotopies.md) between them. Since functions are
 dependent functions of constant type families, we define the globular type of
@@ -32,8 +32,8 @@ functions in terms of the
 [globular type of dependent functions](foundation.globular-type-of-dependent-functions.md).
 
 The globular type of functions of a type family `B` over `A` is
-[reflexive](structured-types.reflexive-globular-types.md) and
-[transitive](structured-types.transitive-globular-types.md), so it is a
+[reflexive](globular-types.reflexive-globular-types.md) and
+[transitive](globular-types.transitive-globular-types.md), so it is a
 [noncoherent wild higher precategory](wild-category-theory.noncoherent-wild-higher-precategories.md).
 
 The structures defined in this file are used to define the

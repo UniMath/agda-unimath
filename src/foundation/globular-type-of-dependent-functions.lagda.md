@@ -13,9 +13,9 @@ open import foundation.universe-levels
 
 open import foundation-core.homotopies
 
-open import structured-types.globular-types
-open import structured-types.reflexive-globular-types
-open import structured-types.transitive-globular-types
+open import globular-types.globular-types
+open import globular-types.reflexive-globular-types
+open import globular-types.transitive-globular-types
 ```
 
 </details>
@@ -24,15 +24,15 @@ open import structured-types.transitive-globular-types
 
 The
 {{#concept "globular type of dependent functions" Agda=dependent-function-type-Globular-Type}}
-is the [globular type](structured-types.globular-types.md) consisting of
+is the [globular type](globular-types.globular-types.md) consisting of
 [dependent functions](foundation.dependent-function-types.md) and
 [homotopies](foundation-core.homotopies.md) between them. Since homotopies are
 themselves defined to be certain dependent functions, they directly provide a
 globular structure on dependent function types.
 
 The globular type of dependent functions of a type family `B` over `A` is
-[reflexive](structured-types.reflexive-globular-types.md) and
-[transitive](structured-types.transitive-globular-types.md), so it is a
+[reflexive](globular-types.reflexive-globular-types.md) and
+[transitive](globular-types.transitive-globular-types.md), so it is a
 [noncoherent wild higher precategory](wild-category-theory.noncoherent-wild-higher-precategories.md).
 
 The structures defined in this file are used to define the

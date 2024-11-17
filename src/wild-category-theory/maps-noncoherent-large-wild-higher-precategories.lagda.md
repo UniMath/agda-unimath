@@ -14,10 +14,10 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-maps
-open import structured-types.globular-types
-open import structured-types.large-globular-maps
-open import structured-types.large-globular-types
+open import globular-types.globular-maps
+open import globular-types.globular-types
+open import globular-types.large-globular-maps
+open import globular-types.large-globular-types
 
 open import wild-category-theory.maps-noncoherent-wild-higher-precategories
 open import wild-category-theory.noncoherent-large-wild-higher-precategories
@@ -32,9 +32,9 @@ A
 {{#concept "map" Disambiguation="between noncoherent large wild higher precategories" Agda=map-Noncoherent-Large-Wild-Higher-Precategory}}
 `f` between
 [noncoherent large wild higher precategories](wild-category-theory.noncoherent-large-wild-higher-precategories.md)
-`𝒜` and `ℬ` is a [large globular map](structured-types.large-globular-maps.md)
+`𝒜` and `ℬ` is a [large globular map](globular-types.large-globular-maps.md)
 between their underlying
-[large globular types](structured-types.large-globular-types.md). More
+[large globular types](globular-types.large-globular-types.md). More
 specifically, maps between noncoherent large wild higher precategories consist
 of a map on objects `F₀ : obj 𝒜 → obj ℬ`, and for every pair of $n$-morphisms
 `f` and `g`, a map of $(n+1)$-morphisms

@@ -14,8 +14,8 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-maps
-open import structured-types.globular-types
+open import globular-types.globular-maps
+open import globular-types.globular-types
 
 open import wild-category-theory.noncoherent-wild-higher-precategories
 ```
@@ -28,8 +28,8 @@ A
 {{#concept "map" Disambiguation="between noncoherent wild higher precategories" Agda=map-Noncoherent-Wild-Higher-Precategory}}
 `f` between
 [noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md)
-`𝒜` and `ℬ` is a [globular map](structured-types.globular-maps.md) between their
-underlying [globular types](structured-types.globular-types.md). More
+`𝒜` and `ℬ` is a [globular map](globular-types.globular-maps.md) between their
+underlying [globular types](globular-types.globular-types.md). More
 specifically, a map `F` between noncoherent wild higher precategories consists
 of a map on objects `F₀ : obj 𝒜 → obj ℬ`, and for every pair of $n$-morphisms
 `f` and `g`, a map of $(n+1)$-morphisms
