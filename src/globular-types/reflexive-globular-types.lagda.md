@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.reflexive-globular-types where
+module globular-types.reflexive-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,14 +14,14 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
+open import globular-types.globular-types
 ```
 
 </details>
 
 ## Idea
 
-A [globular type](structured-types.globular-types.md) is
+A [globular type](globular-types.globular-types.md) is
 {{#concept "reflexive" Disambiguation="globular type" Agda=is-reflexive-globular-structure}}
 if every $n$-cell `x` comes with a choice of $(n+1)$-cell from `x` to `x`.
 
