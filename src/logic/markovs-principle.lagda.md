@@ -43,8 +43,9 @@ if, for every decidable subtype `𝒫` of `A`, if `𝒫` is not full then there 
 element of `A` that is not in `𝒫`.
 
 Markov's principle is an example of a _constructive taboo_. That is, it is a
-principle that is not provable in constructive mathematics, although, it does
-not imply the [law of excluded middle](foundation.law-of-excluded-middle.md).
+principle that is not generally provable in constructive mathematics, although,
+it does not imply the
+[law of excluded middle](foundation.law-of-excluded-middle.md).
 
 ## Definitions
 
