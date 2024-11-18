@@ -16,6 +16,8 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import logic.double-negation-elimination
+
 open import orthogonal-factorization-systems.continuation-modalities
 open import orthogonal-factorization-systems.large-lawvere-tierney-topologies
 open import orthogonal-factorization-systems.lawvere-tierney-topologies

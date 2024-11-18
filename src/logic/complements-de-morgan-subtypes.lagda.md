@@ -90,7 +90,10 @@ module _
   is-full-union-subtype-complement-de-morgan-subtype :
     (P : de-morgan-subtype l2 A) →
     is-full-subtype
-      ( union-de-morgan-subtype P (complement-de-morgan-subtype P))
+      ( union-subtype
+        ( complement-subtype (subtype-de-morgan-subtype P))
+        ( complement-subtype
+          ( complement-subtype (subtype-de-morgan-subtype P))))
   is-full-union-subtype-complement-de-morgan-subtype P =
     is-full-union-complement-subtype-double-complement-subtype
       ( subtype-de-morgan-subtype P)

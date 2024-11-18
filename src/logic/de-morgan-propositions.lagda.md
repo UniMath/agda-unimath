@@ -321,6 +321,17 @@ module _
     is-de-morgan A → is-de-morgan B → is-de-morgan-prop (disjunction-type A B)
   is-de-morgan-prop-disjunction a b =
     is-de-morgan-prop-trunc-Prop (is-de-morgan-coproduct a b)
+
+module _
+  {l1 l2 : Level} (P : De-Morgan-Prop l1) (Q : De-Morgan-Prop l2)
+  where
+
+  disjunction-De-Morgan-Prop : De-Morgan-Prop (l1 ⊔ l2)
+  disjunction-De-Morgan-Prop =
+    disjunction-type (type-De-Morgan-Prop P) (type-De-Morgan-Prop Q) ,
+    is-de-morgan-prop-disjunction
+      ( is-de-morgan-type-De-Morgan-Prop P)
+      ( is-de-morgan-type-De-Morgan-Prop Q)
 ```
 
 ### Negation has no fixed points on decidable propositions
