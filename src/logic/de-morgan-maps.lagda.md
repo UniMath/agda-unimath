@@ -55,11 +55,12 @@ A [map](foundation-core.function-types.md) is said to be
 {{#concept "De Morgan" Disambiguation="map of types" Agda=is-de-morgan-map}} if
 the [negation](foundation-core.negation.md) of its
 [fibers](foundation-core.fibers-of-maps.md) are
-[decidable](foundation.decidable-types.md). I.e., for every `y : B`, if
-`fiber f y` is either [empty](foundation.empty-types.md) or
-[irrefutable](foundation.irrefutable-propositions.md). This is an equivalent,
-but [small](foundation.small-types.md) condition that is equivallent to asking
-that they satisfy [De Morgan's law](logic.de-morgans-law.md).
+[decidable](foundation.decidable-types.md). I.e., the map `f : A → B` is De
+Morgan if for every `y : B`, the fiber `fiber f y` is either
+[empty](foundation.empty-types.md) or
+[irrefutable](foundation.irrefutable-propositions.md). This is equivalent to
+asking that the fibers satisfy [De Morgan's law](logic.de-morgans-law.md), but
+is a [small](foundation.small-types.md) condition.
 
 ## Definintion
 
@@ -157,14 +158,14 @@ module _
   is-de-morgan-map-right-factor' H GF y =
     rec-coproduct
       ( λ ngfy → inl (λ p → ngfy (pr1 p , ap g (pr2 p))))
-      ( λ nngfy → inr (λ nq → nngfy λ p → nq (pr1 p , H (pr2 p))))
+      ( λ nngfy → inr (λ nq → nngfy (λ p → nq (pr1 p , H (pr2 p)))))
       ( GF (g y))
 ```
 
 ### Composition of De Morgan maps with decidable maps
 
-If a composite `g ∘ f` is De Morgan and the left factor `g` is injective, then
-the right factor `f` is De Morgan.
+If `g` is a decidable injection and `f` is a De Morgan map, then `g ∘ f` is De
+Morgan.
 
 ```agda
 module _
@@ -172,7 +173,9 @@ module _
   where
 
   is-de-morgan-map-comp-is-decidable-map :
-    is-injective g → is-decidable-map g → is-de-morgan-map f →
+    is-injective g →
+    is-decidable-map g →
+    is-de-morgan-map f →
     is-de-morgan-map (g ∘ f)
   is-de-morgan-map-comp-is-decidable-map H G F y =
     rec-coproduct
