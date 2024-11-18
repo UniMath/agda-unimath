@@ -61,7 +61,7 @@ if it is an [embedding](foundation-core.embeddings.md) and the
 [decidable](foundation-core.decidable-maps.md).
 
 Equivalently, a De Morgan embedding is a map whose fibers are
-[De Morgan propositions](foundation.de-morgan-propositions.md). We refer to this
+[De Morgan propositions](logic.de-morgan-propositions.md). We refer to this
 condition as being a
 {{#concept "De Morgan propositional map" Disambiguation="of types" Agda=is-de-morgan-prop-map}}.
 

@@ -137,7 +137,6 @@ is-irrefutable-de-morgans-law u =
 ## See also
 
 - [De Morgan types](logic.de-morgan-types.md)
-- [De Morgan sheaves](logic.de-morgan-sheaves.md)
 
 ## External links
 
