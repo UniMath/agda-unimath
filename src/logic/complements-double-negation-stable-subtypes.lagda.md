@@ -23,14 +23,6 @@ open import foundation.universe-levels
 open import foundation-core.function-types
 
 open import logic.double-negation-stable-subtypes
-
-open import order-theory.large-posets
-open import order-theory.opposite-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.order-preserving-maps-posets
-open import order-theory.order-preserving-maps-preorders
-open import order-theory.posets
 ```
 
 </details>

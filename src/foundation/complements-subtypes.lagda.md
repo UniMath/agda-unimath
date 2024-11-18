@@ -22,14 +22,6 @@ open import foundation-core.function-types
 open import foundation-core.subtypes
 
 open import logic.double-negation-stable-subtypes
-
-open import order-theory.large-posets
-open import order-theory.opposite-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.order-preserving-maps-posets
-open import order-theory.order-preserving-maps-preorders
-open import order-theory.posets
 ```
 
 </details>
@@ -61,19 +53,4 @@ complement-double-negation-stable-subtype' :
   subtype l2 A → double-negation-stable-subtype l2 A
 complement-double-negation-stable-subtype' P x =
   neg-type-Double-Negation-Stable-Prop (is-in-subtype P x)
-```
-
-### Taking complements gives a contravariant endooperator on the powerset posets
-
-```agda
-neg-hom-powerset :
-  {l1 : Level} {A : UU l1} →
-  hom-Large-Poset
-    ( λ l → l)
-    ( powerset-Large-Poset A)
-    ( opposite-Large-Poset (powerset-Large-Poset A))
-neg-hom-powerset =
-  make-hom-Large-Preorder
-    ( λ P x → neg-Prop (P x))
-    ( λ P Q f x → map-neg (f x))
 ```

@@ -26,14 +26,6 @@ open import foundation-core.function-types
 open import logic.complements-decidable-subtypes
 open import logic.de-morgan-propositions
 open import logic.de-morgan-subtypes
-
-open import order-theory.large-posets
-open import order-theory.opposite-large-posets
-open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.order-preserving-maps-posets
-open import order-theory.order-preserving-maps-preorders
-open import order-theory.posets
 ```
 
 </details>
