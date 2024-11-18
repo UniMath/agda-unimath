@@ -126,8 +126,8 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
 
 ### The dependent precomposition map at a dependent pair type
 
-Given a map `f : X → Y` and a family `B : (y : Y) → A y → 𝒰` we have an
-equivalence of maps
+Given a map `f : X → Y` and a family `B : (y : Y) → A y → 𝒰` we have a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
                                      precomp-Π f (λ y → Σ (A y) (B y))

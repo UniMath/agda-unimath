@@ -32,8 +32,8 @@ A **uniquely eliminating modality** is a _higher mode of logic_ defined in terms
 of a monadic
 [modal operator](orthogonal-factorization-systems.modal-operators.md) `○`
 satisfying a certain
-[locality](orthogonal-factorization-systems.types-local-at-maps.md) condition.
-Namely, that dependent precomposition by the modal unit `unit-○` is an
+[locality](orthogonal-factorization-systems.types-local-at-maps.md) condition,
+namely that dependent precomposition by the modal unit `unit-○` is an
 equivalence for type families over types in the image of the operator:
 
 ```text

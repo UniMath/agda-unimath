@@ -217,7 +217,8 @@ module _
 
 ### The precomposition map at a dependent pair type
 
-Given a map `f : X → Y` and a family `B : A → 𝒰` we have an equivalence of maps
+Given a map `f : X → Y` and a family `B : A → 𝒰` we have a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
 
 ```text
                                 precomp f (Σ A B)

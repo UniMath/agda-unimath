@@ -22,11 +22,11 @@ open import orthogonal-factorization-systems.types-local-at-maps
 Let `P` be a [subuniverse](foundation.subuniverses.md). Given a type `X`, its
 **localization** at `P`, or **`P`-localization**, is a type `Y` in `P` and a map
 `η : X → Y` such that every type in `P` is
-`η`[-local](orthogonal-factorization-systems.types-local-at-maps.md). I.e. for
+`η`[-local](orthogonal-factorization-systems.types-local-at-maps.md). I.e., for
 every `Z` in `P`, the [precomposition map](foundation-core.function-types.md)
 
 ```text
-  _∘ η : (Y → Z) → (X → Z)
+  - ∘ η : (Y → Z) → (X → Z)
 ```
 
 is an [equivalence](foundation-core.equivalences.md).
