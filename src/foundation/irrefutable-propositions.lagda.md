@@ -151,9 +151,9 @@ module _
   {l : Level} (P : Prop l)
   where
 
-  is-irrefutable-is-irrefutable-is-irrefutable :
+  is-idempotent-is-irrefutable :
     is-irrefutable (is-irrefutable-Prop P) → is-irrefutable P
-  is-irrefutable-is-irrefutable-is-irrefutable =
+  is-idempotent-is-irrefutable =
     double-negation-elim-neg (¬ (type-Prop P))
 ```
 

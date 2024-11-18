@@ -133,6 +133,11 @@ is-irrefutable-de-morgans-law u =
   u (λ _ → inl (λ x → u (λ f → inr (λ y → f (x , y)))))
 ```
 
+## See also
+
+- [De Morgan types](logic.de-morgan-types.md)
+- [De Morgan sheaves](logic.de-morgan-sheaves.md)
+
 ## External links
 
 - [De Morgan laws, in constructive mathematics](https://ncatlab.org/nlab/show/De+Morgan+laws#in_constructive_mathematics)

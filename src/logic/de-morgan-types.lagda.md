@@ -14,8 +14,11 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.identity-types
 open import foundation.double-negation
 open import foundation.empty-types
+open import foundation.truncations
+open import foundation.precomposition-functions
 open import foundation.evaluation-functions
 open import foundation.function-types
 open import foundation.irrefutable-propositions
@@ -194,7 +197,7 @@ module _
       ( H (¬ A) (λ f → pr2 f (pr1 f)))
 ```
 
-### If the negation of a proposition is decidable then it satisfies De Morgan's law
+### If the negation of a type is decidable then it satisfies De Morgan's law
 
 ```agda
 module _
@@ -238,6 +241,13 @@ module _
     satisfies-de-morgans-law-type' (type-De-Morgan-Type A)
   satisfies-de-morgans-law-type-De-Morgan-Type' =
     satisfies-de-morgans-law-is-de-morgan' (is-de-morgan-type-De-Morgan-Type A)
+```
+
+### It is irrefutable that a type is De Morgan
+
+```agda
+is-irrefutable-is-de-morgan : {l : Level} {A : UU l} → ¬¬ (is-de-morgan A)
+is-irrefutable-is-de-morgan = is-irrefutable-is-decidable
 ```
 
 ### Decidable types are De Morgan
@@ -344,6 +354,23 @@ module _
   is-de-morgan-equiv = is-de-morgan-iff' (iff-equiv' e)
 ```
 
+### Equivalent types have equivalent De Morgan predicates
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  iff-is-de-morgan : A ↔ B → is-de-morgan A ↔ is-de-morgan B
+  iff-is-de-morgan e = iff-is-decidable (iff-neg e)
+
+  equiv-iff-is-de-morgan : A ↔ B → is-de-morgan A ≃ is-de-morgan B
+  equiv-iff-is-de-morgan e = equiv-is-decidable (equiv-iff-neg e)
+
+  equiv-is-de-morgan : A ≃ B → is-de-morgan A ≃ is-de-morgan B
+  equiv-is-de-morgan e = equiv-iff-is-de-morgan (iff-equiv e)
+```
+
 ### The truncation of a De Morgan type is De Morgan
 
 ```agda
@@ -358,6 +385,24 @@ module _
     inl (map-universal-property-trunc (empty-Truncated-Type k) na)
   is-de-morgan-trunc {succ-𝕋 k} (inr nna) =
     inr (λ nn|a| → nna (λ a → nn|a| (unit-trunc a)))
+```
+
+### If the truncation of a type is De Morgan then the type is De Morgan
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  equiv-is-de-morgan-trunc :
+    {k : 𝕋} → is-de-morgan (type-trunc (succ-𝕋 k) A) ≃ is-de-morgan A
+  equiv-is-de-morgan-trunc {k} =
+    equiv-is-decidable
+      ( map-neg unit-trunc , is-truncation-trunc (empty-Truncated-Type k))
+
+  is-de-morgan-is-de-morgan-trunc :
+    {k : 𝕋} → is-de-morgan (type-trunc (succ-𝕋 k) A) → is-de-morgan A
+  is-de-morgan-is-de-morgan-trunc = map-equiv equiv-is-de-morgan-trunc
 ```
 
 ### Products of De Morgan types are De Morgan
@@ -403,6 +448,14 @@ module _
 is-de-morgan-neg : {l : Level} {A : UU l} → is-de-morgan A → is-de-morgan (¬ A)
 is-de-morgan-neg = is-decidable-neg
 ```
+
+### The identity types of De Morgan types are not generally De Morgan
+
+Consider any type `A`, then its suspension `ΣA` is De Morgan since it is
+inhabited. However, its identity type `N ＝ S` is equivalent to `A`, so cannot
+be De Morgan unless `A` is.
+
+> This remains to be formalized.
 
 ## External links
 

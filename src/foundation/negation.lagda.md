@@ -15,6 +15,7 @@ open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.equivalences
+open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
 
@@ -34,7 +35,7 @@ using propositions as types. Thus, the negation of a type `A` is the type
 
 ```agda
 is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
-is-prop-neg {A = A} = is-prop-function-type is-prop-empty
+is-prop-neg = is-prop-function-type is-prop-empty
 
 neg-type-Prop : {l1 : Level} → UU l1 → Prop l1
 neg-type-Prop A = ¬ A , is-prop-neg
@@ -49,6 +50,9 @@ infix 25 ¬'_
 
 ¬'_ : {l1 : Level} → Prop l1 → Prop l1
 ¬'_ = neg-Prop
+
+eq-neg : {l : Level} {A : UU l} {p q : ¬ A} → p ＝ q
+eq-neg = eq-is-prop is-prop-neg
 ```
 
 ### Reductio ad absurdum
@@ -61,20 +65,27 @@ reductio-ad-absurdum p np = ex-falso (np p)
 ### Logically equivalent types have logically equivalent negations
 
 ```agda
-iff-neg :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-  (X ↔ Y) → (¬ X ↔ ¬ Y)
-iff-neg e = (map-neg (backward-implication e) , map-neg (forward-implication e))
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  iff-neg : X ↔ Y → ¬ X ↔ ¬ Y
+  iff-neg e = map-neg (backward-implication e) , map-neg (forward-implication e)
+
+  equiv-iff-neg : X ↔ Y → ¬ X ≃ ¬ Y
+  equiv-iff-neg e =
+    equiv-iff' (neg-type-Prop X) (neg-type-Prop Y) (iff-neg e)
 ```
 
 ### Equivalent types have equivalent negations
 
 ```agda
-equiv-neg :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-  (X ≃ Y) → (¬ X ≃ ¬ Y)
-equiv-neg {l1} {l2} {X} {Y} e =
-  equiv-iff' (neg-type-Prop X) (neg-type-Prop Y) (iff-neg (iff-equiv e))
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  equiv-neg : X ≃ Y → ¬ X ≃ ¬ Y
+  equiv-neg e = equiv-iff-neg (iff-equiv e)
 ```
 
 ### Negation has no fixed points
