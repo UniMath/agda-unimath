@@ -1,5 +1,7 @@
 # Domain theory
 
+## Modules in the domain theory namespace
+
 ```agda
 module domain-theory where
 
