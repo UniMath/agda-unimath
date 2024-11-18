@@ -89,6 +89,11 @@ has-decidable-equality-is-finite-type-𝔽-Kuratowski X =
   has-decidable-equality-is-finite
 ```
 
+### Kuratowski finite sets are Markovian
+
+> This remains to be formalized.
+> ([Markov's principle](logic.markovs-principle.md))
+
 ## See also
 
 - [Finite types](univalent-combinatorics.finite-types.md)
