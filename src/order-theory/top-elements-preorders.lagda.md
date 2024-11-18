@@ -32,7 +32,7 @@ module _
 
   is-top-element-prop-Preorder : type-Preorder X → Prop (l1 ⊔ l2)
   is-top-element-prop-Preorder x =
-    Π-Prop (type-Preorder X) (λ y → leq-Preorder-Prop X y x)
+    Π-Prop (type-Preorder X) (λ y → leq-prop-Preorder X y x)
 
   is-top-element-Preorder : type-Preorder X → UU (l1 ⊔ l2)
   is-top-element-Preorder x = type-Prop (is-top-element-prop-Preorder x)

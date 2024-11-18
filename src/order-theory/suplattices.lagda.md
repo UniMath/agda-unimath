@@ -9,6 +9,10 @@ module order-theory.suplattices where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -21,8 +25,11 @@ open import order-theory.posets
 
 ## Idea
 
-An **`l`-suplattice** is a poset which has all least upper bounds of families of
-elements indexed by a type of universe level `l`.
+An `l`-{{#concept "suplattice"  Agda=Suplattice}} is a
+[poset](order-theory.posets.md) which has all
+[least upper bounds](order-theory.least-upper-bounds-posets.md) of families of
+elements indexed by a type of [universe level](foundation.universe-levels.md)
+`l`.
 
 ## Definitions
 
@@ -37,16 +44,16 @@ module _
   is-suplattice-Poset-Prop =
     Π-Prop
       (UU l3)
-      (λ I →
+      ( λ I →
         Π-Prop
           ( I → type-Poset P)
-          ( λ f → has-least-upper-bound-family-of-elements-Poset-Prop P f))
+          ( has-least-upper-bound-family-of-elements-prop-Poset P))
 
   is-suplattice-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-suplattice-Poset = type-Prop is-suplattice-Poset-Prop
 
-  is-prop-suplattice-Poset : is-prop is-suplattice-Poset
-  is-prop-suplattice-Poset = is-prop-type-Prop is-suplattice-Poset-Prop
+  is-prop-is-suplattice-Poset : is-prop is-suplattice-Poset
+  is-prop-is-suplattice-Poset = is-prop-type-Prop is-suplattice-Poset-Prop
 
 module _
   {l1 l2 l3 : Level} (P : Poset l1 l2) (H : is-suplattice-Poset l3 P)
@@ -79,8 +86,8 @@ module _
   type-Suplattice : UU l1
   type-Suplattice = type-Poset poset-Suplattice
 
-  leq-Suplattice-Prop : (x y : type-Suplattice) → Prop l2
-  leq-Suplattice-Prop = leq-Poset-Prop poset-Suplattice
+  leq-prop-Suplattice : (x y : type-Suplattice) → Prop l2
+  leq-prop-Suplattice = leq-prop-Poset poset-Suplattice
 
   leq-Suplattice : (x y : type-Suplattice) → UU l2
   leq-Suplattice = leq-Poset poset-Suplattice
@@ -119,10 +126,24 @@ module _
 
   is-least-upper-bound-sup-Suplattice :
     {I : UU l3} (x : I → type-Suplattice) →
-    is-least-upper-bound-family-of-elements-Poset poset-Suplattice x
+    is-least-upper-bound-family-of-elements-Poset
+      ( poset-Suplattice)
+      ( x)
       ( sup-Suplattice x)
   is-least-upper-bound-sup-Suplattice =
     is-least-upper-bound-sup-is-suplattice-Poset
       ( poset-Suplattice)
       ( is-suplattice-Suplattice)
+
+  leq-sup-Suplattice :
+    {I : UU l3} (x : I → type-Suplattice) (i : I) →
+    leq-Suplattice (x i) (sup-Suplattice x)
+  leq-sup-Suplattice x =
+    backward-implication
+      ( is-least-upper-bound-sup-Suplattice x (sup-Suplattice x))
+      ( refl-leq-Suplattice (sup-Suplattice x))
 ```
+
+## External links
+
+- [suplattice](https://ncatlab.org/nlab/show/suplattice) at $n$Lab

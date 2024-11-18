@@ -11,6 +11,7 @@ open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.order-preserving-maps-posets
 open import order-theory.similarity-of-elements-large-posets
 ```
 
@@ -79,6 +80,28 @@ module _
     preserves-order-map-Large-Poset P Q map-hom-Large-Poset
   preserves-order-hom-Large-Poset =
     preserves-order-hom-Large-Preorder f
+```
+
+### The induced order preserving maps on small posets
+
+```agda
+module _
+  {αP αQ : Level → Level} {βP βQ : Level → Level → Level} {γ : Level → Level}
+  (P : Large-Poset αP βP)
+  (Q : Large-Poset αQ βQ)
+  (f : hom-Large-Poset γ P Q)
+  where
+
+  hom-poset-hom-Large-Poset :
+    (l : Level) →
+    hom-Poset
+      ( poset-Large-Poset P l)
+      ( poset-Large-Poset Q (γ l))
+  hom-poset-hom-Large-Poset =
+    hom-preorder-hom-Large-Preorder
+      ( large-preorder-Large-Poset P)
+      ( large-preorder-Large-Poset Q)
+      ( f)
 ```
 
 ### The identity order preserving map on a large poset

@@ -30,21 +30,21 @@ module _
   {l1 l2 : Level} (X : Preorder l1 l2)
   where
 
-  is-decidable-leq-Preorder-Prop : Prop (l1 ⊔ l2)
-  is-decidable-leq-Preorder-Prop =
+  is-decidable-leq-prop-Preorder : Prop (l1 ⊔ l2)
+  is-decidable-leq-prop-Preorder =
     Π-Prop
       ( type-Preorder X)
       ( λ x →
         Π-Prop
           ( type-Preorder X)
-          ( λ y → is-decidable-Prop (leq-Preorder-Prop X x y)))
+          ( λ y → is-decidable-Prop (leq-prop-Preorder X x y)))
 
   is-decidable-leq-Preorder : UU (l1 ⊔ l2)
-  is-decidable-leq-Preorder = type-Prop is-decidable-leq-Preorder-Prop
+  is-decidable-leq-Preorder = type-Prop is-decidable-leq-prop-Preorder
 
   is-prop-is-decidable-leq-Preorder : is-prop is-decidable-leq-Preorder
   is-prop-is-decidable-leq-Preorder =
-    is-prop-type-Prop is-decidable-leq-Preorder-Prop
+    is-prop-type-Prop is-decidable-leq-prop-Preorder
 
 Decidable-Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Decidable-Preorder l1 l2 = Σ (Preorder l1 l2) is-decidable-leq-Preorder
@@ -66,7 +66,7 @@ module _
   leq-Decidable-Preorder-Prop :
     (x y : type-Decidable-Preorder) → Prop l2
   leq-Decidable-Preorder-Prop =
-    leq-Preorder-Prop preorder-Decidable-Preorder
+    leq-prop-Preorder preorder-Decidable-Preorder
 
   leq-Decidable-Preorder :
     (x y : type-Decidable-Preorder) → UU l2
