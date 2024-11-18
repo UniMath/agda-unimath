@@ -34,8 +34,8 @@ open import logic.de-morgan-subtypes
 
 The
 {{#concept "complement" Disambiguation="of a De Morgan subtype" Agda=complement-de-morgan-subtype}}
-of a [De Morgan subtype](foundation.de-morgan-subtypes.md) `B ⊆ A` consists of
-the elements that are not in `B`.
+of a [De Morgan subtype](logic.de-morgan-subtypes.md) `B ⊆ A` consists of the
+elements that are not in `B`.
 
 ## Definition
 

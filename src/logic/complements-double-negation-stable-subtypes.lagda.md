@@ -31,8 +31,7 @@ open import logic.double-negation-stable-subtypes
 
 The
 {{#concept "complement" Disambiguation="of a double negation stable subtype" Agda=complement-double-negation-stable-subtype}}
-of a
-[double negation stable subtype](foundation.double-negation-stable-subtypes.md)
+of a [double negation stable subtype](logic.double-negation-stable-subtypes.md)
 `B ⊆ A` consists of the elements that are not in `B`.
 
 ## Definition

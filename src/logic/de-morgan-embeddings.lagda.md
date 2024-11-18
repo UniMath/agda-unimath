@@ -58,7 +58,7 @@ A [map](foundation-core.function-types.md) is said to be a
 if it is an [embedding](foundation-core.embeddings.md) and the
 [negations](foundation-core.negation.md) of its
 [fibers](foundation-core.fibers-of-maps.md) are
-[decidable](foundation-core.decidable-maps.md).
+[decidable](foundation.decidable-maps.md).
 
 Equivalently, a De Morgan embedding is a map whose fibers are
 [De Morgan propositions](logic.de-morgan-propositions.md). We refer to this
