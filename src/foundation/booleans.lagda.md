@@ -259,6 +259,13 @@ pr2 equiv-bool-Fin-two-ℕ =
 is-finite-bool : is-finite bool
 is-finite-bool = is-finite-equiv equiv-bool-Fin-two-ℕ (is-finite-Fin 2)
 
+number-of-elements-bool : number-of-elements-is-finite is-finite-bool ＝ 2
+number-of-elements-bool =
+  inv
+    ( compute-number-of-elements-is-finite
+      ( 2 , equiv-bool-Fin-two-ℕ)
+      ( is-finite-bool))
+
 bool-𝔽 : 𝔽 lzero
 pr1 bool-𝔽 = bool
 pr2 bool-𝔽 = is-finite-bool

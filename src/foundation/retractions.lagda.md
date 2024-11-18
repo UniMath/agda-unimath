@@ -9,16 +9,21 @@ open import foundation-core.retractions public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coslice
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.retracts-of-types
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
 ```
 
 </details>
@@ -68,11 +73,22 @@ is-retraction-retraction-left-map-triangle f g h H (l , L) (k , K) =
         ( retraction-left-map-triangle f g h H (l , L) (k , K))))
     ( k , K)
     ( k ·l L)
-    ( ( inv-htpy-assoc-htpy
+    ( homotopy-reasoning
+      (((k ∘ l) ·l inv-htpy H) ∙h ((k ∘ l) ·l H ∙h (k ·l (L ·r h) ∙h K)))
+      ~ (inv-htpy ((k ∘ l) ·l H) ∙h ((k ∘ l) ·l H ∙h (k ·l (L ·r h) ∙h K)))
+      by
+        ap-concat-htpy'
+          ( (k ∘ l) ·l H ∙h (k ·l (L ·r h) ∙h K))
+          ( left-whisker-inv-htpy (k ∘ l) H)
+      ~ ((inv-htpy ((k ∘ l) ·l H) ∙h (k ∘ l) ·l H) ∙h (k ·l (L ·r h) ∙h K))
+      by
+      ( inv-htpy-assoc-htpy
         ( inv-htpy ((k ∘ l) ·l H))
         ( (k ∘ l) ·l H)
-        ( (k ·l (L ·r h)) ∙h K)) ∙h
-      ( ap-concat-htpy' ((k ·l (L ·r h)) ∙h K) (left-inv-htpy ((k ∘ l) ·l H))))
+        ( (k ·l (L ·r h)) ∙h K))
+      ~ (k ·l L ·r h ∙h is-retraction-map-retraction h (k , K))
+      by
+        ap-concat-htpy' ((k ·l (L ·r h)) ∙h K) (left-inv-htpy ((k ∘ l) ·l H)))
 
 retraction-right-factor-retract-of-retraction-left-factor :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -88,4 +104,41 @@ pr2
   ( pr2
     ( retraction-right-factor-retract-of-retraction-left-factor f g h H rg)) =
   is-retraction-retraction-left-map-triangle f g h H rg
+```
+
+### The type of retractions is `k`-truncated if the domain is `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-trunc-retraction : is-trunc k A → is-trunc k (retraction f)
+  is-trunc-retraction is-trunc-A =
+    is-trunc-Σ
+      ( is-trunc-function-type k is-trunc-A)
+      ( λ r →
+        is-trunc-Π k (λ x → is-trunc-succ-is-trunc k is-trunc-A (r (f x)) x))
+```
+
+### When the domain is contractible, the type of retractions is contractible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-contr-retraction : is-contr A → is-contr (retraction f)
+  is-contr-retraction = is-trunc-retraction
+```
+
+### When the domain is a proposition, the type of retractions is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-prop-retraction : is-prop A → is-prop (retraction f)
+  is-prop-retraction = is-trunc-retraction
 ```

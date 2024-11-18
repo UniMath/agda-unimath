@@ -14,8 +14,8 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
-open import structured-types.maps-globular-types
+open import globular-types.globular-maps
+open import globular-types.globular-types
 
 open import wild-category-theory.colax-functors-noncoherent-wild-higher-precategories
 open import wild-category-theory.maps-noncoherent-large-wild-higher-precategories

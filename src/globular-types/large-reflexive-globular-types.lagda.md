@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.large-reflexive-globular-types where
+module globular-types.large-reflexive-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -12,15 +12,15 @@ module structured-types.large-reflexive-globular-types where
 open import foundation.large-binary-relations
 open import foundation.universe-levels
 
-open import structured-types.large-globular-types
-open import structured-types.reflexive-globular-types
+open import globular-types.large-globular-types
+open import globular-types.reflexive-globular-types
 ```
 
 </details>
 
 ## Idea
 
-A [large globular type](structured-types.large-globular-types.md) is
+A [large globular type](globular-types.large-globular-types.md) is
 {{#concept "reflexive" Disambiguation="large globular type" Agda=is-reflexive-large-globular-structure}}
 if every $n$-cell `x` comes with a choice of $(n+1)$-cell from `x` to `x`.
 

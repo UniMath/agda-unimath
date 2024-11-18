@@ -84,12 +84,14 @@ def get_author_element_for_file(filename, include_contributors, contributors):
             'HEAD', '--', filename
         ], capture_output=True, text=True, check=True).stdout.splitlines()
 
-        # Collect authors and sort by number of commits
-        author_names = [
-            author['displayName']
-            for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
-        ]
-        attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
+        # If all commits to a file are chore commits, then there are no authors
+        if raw_authors_git_output:
+          # Collect authors and sort by number of commits
+          author_names = [
+              author['displayName']
+              for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
+          ]
+          attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
 
     file_log_output = subprocess.run([
         'git', 'log',

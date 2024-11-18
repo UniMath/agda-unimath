@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-coproduct-types
@@ -247,9 +248,22 @@ is-finite-type-Decidable-Prop P =
 ### The type of decidable propositions of any universe level is finite
 
 ```agda
+count-Decidable-Prop :
+  {l : Level} → count (Decidable-Prop l)
+pr1 count-Decidable-Prop = 2
+pr2 count-Decidable-Prop =
+  inv-equiv equiv-bool-Decidable-Prop ∘e equiv-bool-Fin-two-ℕ
+
 is-finite-Decidable-Prop : {l : Level} → is-finite (Decidable-Prop l)
-is-finite-Decidable-Prop {l} =
-  is-finite-equiv' equiv-bool-Decidable-Prop is-finite-bool
+is-finite-Decidable-Prop {l} = unit-trunc-Prop count-Decidable-Prop
+
+number-of-elements-Decidable-Prop :
+  {l : Level} → number-of-elements-is-finite (is-finite-Decidable-Prop {l}) ＝ 2
+number-of-elements-Decidable-Prop =
+  inv
+    ( compute-number-of-elements-is-finite
+      ( count-Decidable-Prop)
+      ( is-finite-Decidable-Prop))
 
 decidable-Prop-𝔽 : (l : Level) → 𝔽 (lsuc l)
 pr1 (decidable-Prop-𝔽 l) = Decidable-Prop l

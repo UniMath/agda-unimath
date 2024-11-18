@@ -147,7 +147,7 @@ module _
                 ( λ p' →
                   is-contr-equiv'
                     ( p ＝ p')
-                    ( equiv-ap-emb (emb-inl (type-Prop P) (type-Prop Q)))
+                    ( equiv-ap-emb emb-inl)
                     ( is-prop-type-Prop P p p'))))) ∘e
           ( equiv-dependent-universal-property-coproduct (inl p ＝_))))
       ( equiv-tot
@@ -158,7 +158,7 @@ module _
                 ( λ q' →
                   is-contr-equiv'
                     ( q ＝ q')
-                    ( equiv-ap-emb (emb-inr (type-Prop P) (type-Prop Q)))
+                    ( equiv-ap-emb emb-inr)
                     ( is-prop-type-Prop Q q q'))))) ∘e
           ( equiv-dependent-universal-property-coproduct (inr q ＝_))))) ∘e
     ( right-distributive-Σ-coproduct

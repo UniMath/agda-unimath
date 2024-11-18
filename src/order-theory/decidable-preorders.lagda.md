@@ -46,7 +46,7 @@ module _
   is-prop-is-decidable-leq-Preorder =
     is-prop-type-Prop is-decidable-leq-prop-Preorder
 
-Decidable-Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Decidable-Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Decidable-Preorder l1 l2 = Σ (Preorder l1 l2) is-decidable-leq-Preorder
 
 module _

@@ -62,6 +62,10 @@ would have to be a fixed point of the negation operation, since
 
 but negation has no fixed points.
 
+Cantor's theorem is the 63rd theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} (f : X → powerset l2 X)

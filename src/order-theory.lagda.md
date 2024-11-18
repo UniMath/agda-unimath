@@ -48,6 +48,7 @@ open import order-theory.homomorphisms-meet-semilattices public
 open import order-theory.homomorphisms-meet-sup-lattices public
 open import order-theory.homomorphisms-sup-lattices public
 open import order-theory.ideals-preorders public
+open import order-theory.incidence-algebras public
 open import order-theory.inflattices public
 open import order-theory.inhabited-chains-posets public
 open import order-theory.inhabited-chains-preorders public

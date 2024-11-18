@@ -23,12 +23,12 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 
-open import structured-types.globular-types
-open import structured-types.large-globular-types
-open import structured-types.large-reflexive-globular-types
-open import structured-types.large-transitive-globular-types
-open import structured-types.reflexive-globular-types
-open import structured-types.transitive-globular-types
+open import globular-types.globular-types
+open import globular-types.large-globular-types
+open import globular-types.large-reflexive-globular-types
+open import globular-types.large-transitive-globular-types
+open import globular-types.reflexive-globular-types
+open import globular-types.transitive-globular-types
 
 open import wild-category-theory.isomorphisms-in-noncoherent-large-wild-higher-precategories
 open import wild-category-theory.isomorphisms-in-noncoherent-wild-higher-precategories

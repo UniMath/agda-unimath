@@ -73,11 +73,8 @@ abstract
   number-of-elements-count-product :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-A : count A)
     (count-B : count B) →
-    Id
-      ( number-of-elements-count
-        ( count-product count-A count-B))
-      ( ( number-of-elements-count count-A) *ℕ
-        ( number-of-elements-count count-B))
+    number-of-elements-count (count-product count-A count-B) ＝
+    number-of-elements-count count-A *ℕ number-of-elements-count count-B
   number-of-elements-count-product (pair k e) (pair l f) = refl
 
 equiv-left-factor :

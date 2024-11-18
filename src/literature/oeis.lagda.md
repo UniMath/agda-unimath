@@ -1,32 +1,19 @@
 # Sequences of the online encyclopedia of integer sequences
 
+This file records formalized sequences of the
+[Online Encyclopedia of Integer Sequences](https://oeis.org) {{#cite oeis}}.
+
 ```agda
-module online-encyclopedia-of-integer-sequences.oeis where
+module literature.oeis where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.ackermann-function
-open import elementary-number-theory.catalan-numbers
-open import elementary-number-theory.cofibonacci
-open import elementary-number-theory.collatz-bijection
-open import elementary-number-theory.eulers-totient-function
 open import elementary-number-theory.exponentiation-natural-numbers
-open import elementary-number-theory.factorials
-open import elementary-number-theory.fermat-numbers
-open import elementary-number-theory.fibonacci-sequence
-open import elementary-number-theory.infinitude-of-primes
-open import elementary-number-theory.kolakoski-sequence
-open import elementary-number-theory.multiset-coefficients
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.pisano-periods
-
-open import finite-group-theory.finite-groups
 
 open import foundation.function-types
-
-open import univalent-combinatorics.main-classes-of-latin-squares
 ```
 
 </details>
@@ -36,15 +23,15 @@ open import univalent-combinatorics.main-classes-of-latin-squares
 ### [A000001](https://oeis.org/A000001) The number of groups of order `n`
 
 ```agda
-A000001 : ℕ → ℕ
-A000001 = number-of-groups-of-order
+open import finite-group-theory.finite-groups using
+  ( number-of-groups-of-order)
 ```
 
 ### [A000002](https://oeis.org/A000002) The Kolakoski sequence
 
 ```agda
-A000002 : ℕ → ℕ
-A000002 = kolakoski
+open import elementary-number-theory.kolakoski-sequence using
+  ( kolakoski)
 ```
 
 ### [A000004](https://oeis.org/A000004) The zero sequence
@@ -65,8 +52,8 @@ A000007 (succ-ℕ _) = 0
 ### [A000010](https://oeis.org/A000010) Euler's totient function
 
 ```agda
-A000010 : ℕ → ℕ
-A000010 = eulers-totient-function-relatively-prime
+open import elementary-number-theory.eulers-totient-function using
+  ( eulers-totient-function-relatively-prime)
 ```
 
 ### [A000012](https://oeis.org/A000012) All 1's sequence
@@ -86,15 +73,22 @@ A000027 = succ-ℕ
 ### [A000040](https://oeis.org/A000040) The prime numbers
 
 ```agda
-A000040 : ℕ → ℕ
-A000040 = prime-ℕ
+open import elementary-number-theory.infinitude-of-primes using
+  ( prime-ℕ)
 ```
 
 ### [A000045](https://oeis.org/A000045) The Fibonacci sequence
 
 ```agda
-A000045 : ℕ → ℕ
-A000045 = Fibonacci-ℕ
+open import elementary-number-theory.fibonacci-sequence using
+  ( Fibonacci-ℕ)
+```
+
+### [A000058](https://oeis.org/A000058) Sylvester's sequence
+
+```agda
+open import elementary-number-theory.sylvesters-sequence using
+  ( sylvesters-sequence-ℕ)
 ```
 
 ### [A000079](https://oeis.org/A000079) Powers of `2`
@@ -107,22 +101,22 @@ A000079 = exp-ℕ 2
 ### [A000108](https://oeis.org/A000108) The Catalan numbers
 
 ```agda
-A000108 : ℕ → ℕ
-A000108 = catalan-numbers
+open import elementary-number-theory.catalan-numbers using
+  ( catalan-numbers)
 ```
 
 ### [A000142](https://oeis.org/A000142) Factorials
 
 ```agda
-A000142 : ℕ → ℕ
-A000142 = factorial-ℕ
+open import elementary-number-theory.factorials using
+  ( factorial-ℕ)
 ```
 
 ### [A000215](https://oeis.org/A000215) The Fermat numbers
 
 ```agda
-A000215 : ℕ → ℕ
-A000215 = fermat-number-ℕ
+open import elementary-number-theory.fermat-numbers using
+  ( fermat-number-ℕ)
 ```
 
 ### [A000244](https://oeis.org/A000244) Powers of `3`
@@ -135,22 +129,29 @@ A000244 = exp-ℕ 3
 ### [A000720](https://oeis.org/A000720) The prime counting function
 
 ```agda
-A000720 : ℕ → ℕ
-A000720 = prime-counting-ℕ
+open import elementary-number-theory.infinitude-of-primes using
+  ( prime-counting-ℕ)
+```
+
+### [A000945](https://oeis.org/A000945) The Euclid–Mullin sequence
+
+```agda
+open import elementary-number-theory.euclid-mullin-sequence using
+  ( euclid-mullin-ℕ)
 ```
 
 ### [A001175](https://oeis.org/A001175) Pisano periods
 
 ```agda
-A001175 : ℕ → ℕ
-A001175 = pisano-period
+open import elementary-number-theory.pisano-periods using
+  ( pisano-period)
 ```
 
 ### [A001177](https://oeis.org/A001177) The cofibonacci sequence
 
 ```agda
-A001177 : ℕ → ℕ
-A001177 = cofibonacci
+open import elementary-number-theory.cofibonacci using
+  ( cofibonacci)
 ```
 
 ### [A001477](https://oeis.org/A001477) The natural numbers
@@ -163,20 +164,24 @@ A001477 = id
 ### [A003090](https://oeis.org/A003090) The number of main classes of Latin squares of order `n`
 
 ```agda
-A003090 : ℕ → ℕ
-A003090 = number-of-main-classes-of-Latin-squares-of-order
+open import univalent-combinatorics.main-classes-of-latin-squares using
+  ( number-of-main-classes-of-Latin-squares-of-order)
 ```
 
 ### [A006369](https://oeis.org/A006369) Collatz' bijection
 
 ```agda
-A006369 : ℕ → ℕ
-A006369 = map-collatz-bijection
+open import elementary-number-theory.collatz-bijection using
+  ( map-collatz-bijection)
 ```
 
 ### [A046859](https://oeis.org/A046859) The main diagonal of the Ackermann–Péter function
 
 ```agda
-A046859 : ℕ → ℕ
-A046859 n = ackermann n n
+open import elementary-number-theory.ackermann-function using
+  ( simplified-ackermann-ℕ)
 ```
+
+## References
+
+{{#bibliography}}

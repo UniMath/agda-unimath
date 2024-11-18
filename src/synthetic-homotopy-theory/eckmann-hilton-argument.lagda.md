@@ -791,4 +791,5 @@ module _
 - [Eckmann-Hilton argument](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument)
   at Wikipedia
 - [Eckmann-Hilton and the Hopf Fibration](https://www.youtube.com/watch?v=hU4_dVpmkKM)
-  recorded talk given by Raymond Baker at HoTT-UF 24
+  recorded talk given by [Raymond Baker](https://morphismz.github.io) at HoTT-UF
+  24

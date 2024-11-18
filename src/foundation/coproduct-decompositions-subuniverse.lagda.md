@@ -104,7 +104,7 @@ module _
 
   right-iterated-binary-coproduct-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
   right-iterated-binary-coproduct-Decomposition-subuniverse =
-    Σ ( binary-coproduct-Decomposition-subuniverse P X)
+    Σ ( binary-coproduct-Decomposition-subuniverse P X)
       ( λ d →
         binary-coproduct-Decomposition-subuniverse P
           ( right-summand-binary-coproduct-Decomposition-subuniverse P X d))
@@ -242,12 +242,12 @@ module _
     is-torsorial-Eq-structure
       ( is-torsorial-equiv-subuniverse P
         ( left-summand-binary-coproduct-Decomposition-subuniverse P A X))
-      ( left-summand-binary-coproduct-Decomposition-subuniverse P A X ,
+      ( left-summand-binary-coproduct-Decomposition-subuniverse P A X ,
         id-equiv)
       ( is-torsorial-Eq-structure
         ( is-torsorial-equiv-subuniverse P
-          ( right-summand-binary-coproduct-Decomposition-subuniverse P A X))
-        ( right-summand-binary-coproduct-Decomposition-subuniverse P A X ,
+          ( right-summand-binary-coproduct-Decomposition-subuniverse P A X))
+        ( right-summand-binary-coproduct-Decomposition-subuniverse P A X ,
           id-equiv)
         ( is-torsorial-htpy-equiv
           ( equiv-coproduct id-equiv id-equiv ∘e
