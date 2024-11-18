@@ -35,12 +35,12 @@ A
 or
 {{#concept "localization" Disambiguation="subuniverse" Agda=reflective-subuniverse}},
 is a [subuniverse](foundation.subuniverses.md) `𝒫` together with a reflecting
-operator on the [universe](foundation.universe-levels.md) `L : 𝒰 → 𝒰` that takes values in `𝒫`, and a
-family of unit maps `η : A → LA` for all types `A` in `𝒰`, with the property that
-the types in `𝒫` are
-[local](orthogonal-factorization-systems.local-types.md) at the unit for every
-`A`. Hence the local types with respect to `L` are precisely the types in the
-reflective subuniverse.
+operator on the [universe](foundation.universe-levels.md) `L : 𝒰 → 𝒰` that takes
+values in `𝒫`, and a family of unit maps `η : A → LA` for all types `A` in `𝒰`,
+with the property that the types in `𝒫` are
+[local](orthogonal-factorization-systems.types-local-at-maps.md) at the unit for
+every `A`. Hence the local types with respect to `L` are precisely the types in
+the reflective subuniverse.
 
 ## Definitions
 
