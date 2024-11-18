@@ -45,3 +45,9 @@ LPO =
 - [The principle of omniscience](foundation.principle-of-omniscience.md)
 - [The lesser limited principle of omniscience](foundation.lesser-limited-principle-of-omniscience.md)
 - [The weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
+- [Markov's principle](logic.markovs-principle.md)
+
+## External links
+
+- [limited principle of omniscience](https://ncatlab.org/nlab/show/limited+principle+of+omniscience)
+  at $n$Lab

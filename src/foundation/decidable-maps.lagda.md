@@ -29,16 +29,21 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
 
-## Definition
+## Idea
 
 A [map](foundation-core.function-types.md) is said to be
 {{#concept "decidable" Disambiguation="map of types" Agda=is-decidable-map}} if
 its [fibers](foundation-core.fibers-of-maps.md) are
 [decidable types](foundation.decidable-types.md).
+
+## Definition
+
+### The structure on a map of decidability
 
 ```agda
 module _
@@ -47,6 +52,28 @@ module _
 
   is-decidable-map : (A → B) → UU (l1 ⊔ l2)
   is-decidable-map f = (y : B) → is-decidable (fiber f y)
+```
+
+### The type of decidabile maps
+
+```agda
+infix 5 _→ᵈ_
+
+_→ᵈ_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+A →ᵈ B = Σ (A → B) (is-decidable-map)
+
+decidable-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+decidable-map = _→ᵈ_
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A →ᵈ B)
+  where
+
+  map-decidable-map : A → B
+  map-decidable-map = pr1 f
+
+  is-decidable-decidable-map : is-decidable-map map-decidable-map
+  is-decidable-decidable-map = pr2 f
 ```
 
 ## Properties
@@ -64,10 +91,36 @@ abstract
       ( K b)
 ```
 
+### Composition of decidable maps
+
+The composite `g ∘ f` of two decidable maps is decidable if `g` is injective.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B}
+  where
+
+  abstract
+    is-decidable-map-comp :
+      is-injective g →
+      is-decidable-map g →
+      is-decidable-map f →
+      is-decidable-map (g ∘ f)
+    is-decidable-map-comp H G F x =
+      rec-coproduct
+        ( λ u →
+          is-decidable-iff
+            ( λ v → (pr1 v) , ap g (pr2 v) ∙ pr2 u)
+            ( λ w → pr1 w , H (pr2 w ∙ inv (pr2 u)))
+            ( F (pr1 u)))
+        ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
+        ( G x)
+```
+
 ### Left cancellation for decidable maps
 
-If a composite `g ∘ f` is decidable and the left factor `g` is injective, then
-the right factor `f` is decidable.
+If a composite `g ∘ f` is decidable and `g` is injective then `f` is decidable.
 
 ```agda
 module _
@@ -77,9 +130,11 @@ module _
   abstract
     is-decidable-map-right-factor' :
       is-decidable-map (g ∘ f) → is-injective g → is-decidable-map f
-    is-decidable-map-right-factor' GF G y with (GF (g y))
-    ... | inl q = inl (pr1 q , G (pr2 q))
-    ... | inr q = inr (λ x → q ((pr1 x) , ap g (pr2 x)))
+    is-decidable-map-right-factor' GF G y =
+      rec-coproduct
+        ( λ q → inl (pr1 q , G (pr2 q)))
+        ( λ q → inr (λ x → q ((pr1 x) , ap g (pr2 x))))
+        ( GF (g y))
 ```
 
 ### Retracts into types with decidable equality are decidable
@@ -91,8 +146,17 @@ is-decidable-map-retraction :
 is-decidable-map-retraction d i (r , R) b =
   is-decidable-iff
     ( λ (p : i (r b) ＝ b) → r b , p)
-    ( λ t → ap (i ∘ r) (inv (pr2 t)) ∙ (ap i (R (pr1 t)) ∙ pr2 t))
+    ( λ t → ap (i ∘ r) (inv (pr2 t)) ∙ ap i (R (pr1 t)) ∙ pr2 t)
     ( d (i (r b)) b)
+```
+
+### Maps with sections are decidable
+
+```agda
+is-decidable-map-section :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (i : A → B) → section i → is-decidable-map i
+is-decidable-map-section i (s , S) b = inl (s b , S b)
 ```
 
 ### Any map out of the empty type is decidable

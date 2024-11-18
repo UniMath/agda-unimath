@@ -7,15 +7,12 @@ module foundation.double-negation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
-open import foundation-core.function-types
 open import foundation-core.propositions
 ```
 
@@ -94,45 +91,13 @@ double-negation-linearity-implication {P = P} {Q = Q} f =
   ( λ (p : P) → map-neg (inr {A = P → Q} {B = Q → P}) f (λ _ → p))
 ```
 
-### Cases of double negation elimination
-
-```agda
-double-negation-elim-neg : {l : Level} (P : UU l) → ¬¬¬ P → ¬ P
-double-negation-elim-neg P f p = f (λ g → g p)
-
-double-negation-elim-product :
-  {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-  ¬¬ ((¬¬ P) × (¬¬ Q)) → (¬¬ P) × (¬¬ Q)
-pr1 (double-negation-elim-product {P = P} {Q = Q} f) =
-  double-negation-elim-neg (¬ P) (map-double-negation pr1 f)
-pr2 (double-negation-elim-product {P = P} {Q = Q} f) =
-  double-negation-elim-neg (¬ Q) (map-double-negation pr2 f)
-
-double-negation-elim-exp :
-  {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-  ¬¬ (P → ¬¬ Q) → (P → ¬¬ Q)
-double-negation-elim-exp {P = P} {Q = Q} f p =
-  double-negation-elim-neg
-    ( ¬ Q)
-    ( map-double-negation (λ (g : P → ¬¬ Q) → g p) f)
-
-double-negation-elim-for-all :
-  {l1 l2 : Level} {P : UU l1} {Q : P → UU l2} →
-  ¬¬ ((p : P) → ¬¬ (Q p)) → (p : P) → ¬¬ (Q p)
-double-negation-elim-for-all {P = P} {Q = Q} f p =
-  double-negation-elim-neg
-    ( ¬ (Q p))
-    ( map-double-negation (λ (g : (u : P) → ¬¬ (Q u)) → g p) f)
-```
-
 ### Maps into double negations extend along `intro-double-negation`
 
 ```agda
 double-negation-extend :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   (P → ¬¬ Q) → (¬¬ P → ¬¬ Q)
-double-negation-extend {P = P} {Q = Q} f =
-  double-negation-elim-neg (¬ Q) ∘ (map-double-negation f)
+double-negation-extend {P = P} {Q = Q} f nnp nq = nnp (λ p → f p nq)
 ```
 
 ### The double negation of a type is logically equivalent to the double negation of its propositional truncation

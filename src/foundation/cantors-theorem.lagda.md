@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
+open import foundation.double-negation-stable-propositions
 open import foundation.function-extensionality
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -22,6 +23,10 @@ open import foundation.universe-levels
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
+
+open import logic.de-morgan-propositions
+open import logic.de-morgan-subtypes
+open import logic.double-negation-stable-subtypes
 ```
 
 </details>
@@ -108,6 +113,62 @@ module _
         ( H map-theorem-decidable-Cantor)
         ( empty-Prop)
         ( not-in-image-map-theorem-decidable-Cantor)
+```
+
+### Cantor's theorem for the set of double negation stable subtypes
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (f : X → double-negation-stable-subtype l2 X)
+  where
+
+  map-theorem-double-negation-stable-Cantor :
+    double-negation-stable-subtype l2 X
+  map-theorem-double-negation-stable-Cantor x =
+    neg-Double-Negation-Stable-Prop (f x x)
+
+  abstract
+    not-in-image-map-theorem-double-negation-stable-Cantor :
+      ¬ (fiber f map-theorem-double-negation-stable-Cantor)
+    not-in-image-map-theorem-double-negation-stable-Cantor (x , α) =
+      no-fixed-points-neg-Double-Negation-Stable-Prop
+        ( f x x)
+        ( iff-eq (ap prop-Double-Negation-Stable-Prop (htpy-eq α x)))
+
+  abstract
+    theorem-double-negation-stable-Cantor : ¬ (is-surjective f)
+    theorem-double-negation-stable-Cantor H =
+      apply-universal-property-trunc-Prop
+        ( H map-theorem-double-negation-stable-Cantor)
+        ( empty-Prop)
+        ( not-in-image-map-theorem-double-negation-stable-Cantor)
+```
+
+### Cantor's theorem for the set of De Morgan subtypes
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (f : X → de-morgan-subtype l2 X)
+  where
+
+  map-theorem-de-morgan-Cantor : de-morgan-subtype l2 X
+  map-theorem-de-morgan-Cantor x = neg-De-Morgan-Prop (f x x)
+
+  abstract
+    not-in-image-map-theorem-de-morgan-Cantor :
+      ¬ (fiber f map-theorem-de-morgan-Cantor)
+    not-in-image-map-theorem-de-morgan-Cantor (x , α) =
+      no-fixed-points-neg-De-Morgan-Prop
+        ( f x x)
+        ( iff-eq (ap prop-De-Morgan-Prop (htpy-eq α x)))
+
+  abstract
+    theorem-de-morgan-Cantor : ¬ (is-surjective f)
+    theorem-de-morgan-Cantor H =
+      apply-universal-property-trunc-Prop
+        ( H map-theorem-de-morgan-Cantor)
+        ( empty-Prop)
+        ( not-in-image-map-theorem-de-morgan-Cantor)
 ```
 
 ## References

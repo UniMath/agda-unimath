@@ -126,6 +126,10 @@ module _
   abstract
     eq-is-proof-irrelevant : is-proof-irrelevant A → all-elements-equal A
     eq-is-proof-irrelevant = eq-is-prop' ∘ is-prop-is-proof-irrelevant
+
+abstract
+  eq-type-Prop : {l : Level} (P : Prop l) → {x y : type-Prop P} → x ＝ y
+  eq-type-Prop P = eq-is-prop (is-prop-type-Prop P)
 ```
 
 ### Propositions are closed under equivalences

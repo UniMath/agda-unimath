@@ -11,12 +11,15 @@ open import foundation-core.propositions public
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.fibers-of-maps
 open import foundation.logical-equivalences
 open import foundation.retracts-of-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.propositional-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -62,6 +65,24 @@ abstract
   is-prop-emb :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B) → is-prop B → is-prop A
   is-prop-emb = is-trunc-emb neg-two-𝕋
+```
+
+### A type is a proposition if and only if it embeds into the unit type
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  abstract
+    is-prop-is-emb-terminal-map : is-emb (terminal-map A) → is-prop A
+    is-prop-is-emb-terminal-map H =
+      is-prop-is-emb (terminal-map A) H is-prop-unit
+
+  abstract
+    is-emb-terminal-map-is-prop : is-prop A → is-emb (terminal-map A)
+    is-emb-terminal-map-is-prop H =
+      is-emb-is-prop-map (λ y → is-prop-equiv (equiv-fiber-terminal-map y) H)
 ```
 
 ### Two equivalent types are equivalently propositions

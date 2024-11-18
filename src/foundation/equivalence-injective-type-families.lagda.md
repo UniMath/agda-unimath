@@ -37,9 +37,7 @@ as a map.
 
 **Note.** The concept of equivalence injective type family as considered here is
 unrelated to the concept of "injective type" as studied by Martín Escardó in
-_Injective types in univalent mathematics_
-([arXiv:1903.01211](https://arxiv.org/abs/1903.01211),
-[TypeTopology](https://www.cs.bham.ac.uk/~mhe/TypeTopology/InjectiveTypes.index.html)).
+_Injective types in univalent mathematics_ {{#cite Esc21b}}.
 
 ## Definition
 
@@ -108,3 +106,7 @@ module _
   pr1 is-equivalence-injective-Prop = is-equivalence-injective P
   pr2 is-equivalence-injective-Prop = is-prop-is-equivalence-injective
 ```
+
+## References
+
+{{#bibliography}}
