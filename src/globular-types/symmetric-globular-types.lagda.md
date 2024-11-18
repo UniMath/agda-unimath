@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.symmetric-globular-types where
+module globular-types.symmetric-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -14,14 +14,14 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
+open import globular-types.globular-types
 ```
 
 </details>
 
 ## Idea
 
-We say a [globular type](structured-types.globular-types.md) is
+We say a [globular type](globular-types.globular-types.md) is
 {{#concept "symmetric" Disambiguation="globular type" Agda=is-symmetric-globular-structure}}
 if there is a symmetry action on its $n$-cells for positive $n$, mapping
 $n$-cells from `x` to `y` to $n$-cells from `y` to `x`.

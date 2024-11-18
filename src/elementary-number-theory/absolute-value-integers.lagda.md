@@ -28,8 +28,8 @@ open import foundation.unit-type
 
 ## Idea
 
-The absolute value of an integer is the natural number with the same distance
-from `0`.
+The {{#concept "absolute value" Disambiguation="of an integer" Agda=abs-ℤ}} of
+an integer is the natural number with the same distance from `0`.
 
 ## Definition
 

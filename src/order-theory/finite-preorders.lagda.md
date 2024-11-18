@@ -173,7 +173,7 @@ module _
   pr2 is-finite-preorder-Preorder-𝔽 = is-decidable-leq-Preorder-𝔽
 ```
 
-### Decidable sub-preorders of finite preorders
+### Decidable subpreorders of finite preorders
 
 ```agda
 module _

@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.maps-globular-types where
+module globular-types.globular-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +14,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
+open import globular-types.globular-types
 ```
 
 </details>
@@ -22,8 +22,8 @@ open import structured-types.globular-types
 ## Idea
 
 A {{#concept "map" Disambiguation="globular types" Agda=map-Globular-Type}} `f`
-between [globular types](structured-types.globular-types.md) `A` and `B` is a
-map `F₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`, a map of
+between [globular types](globular-types.globular-types.md) `A` and `B` is a map
+`F₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`, a map of
 $(n+1)$-cells
 
 ```text

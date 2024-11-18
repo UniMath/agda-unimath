@@ -76,8 +76,9 @@ this condition is equivalent to the condition that `Σ A B` is `P`-separated.
 
 This theorem was stated and proven for the first time during the
 [Interactions of Proof Assistants and Mathematics](https://itp-school-2023.github.io)
-summer school in Regensburg, 2023, as part of Egbert Rijke's tutorial on
-formalization in agda-unimath.
+summer school in Regensburg, 2023, as part of
+[Egbert Rijke](https://egbertrijke.github.io)'s tutorial on formalization in
+agda-unimath.
 
 ## Theorem
 

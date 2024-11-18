@@ -624,6 +624,6 @@ module _
           ( is-finite-type-𝔽 X)
           ( λ _ →
             is-finite-Π
-              ( is-finite-type-𝔽 X)
+              ( is-finite-type-𝔽 X)
               ( λ _ → is-finite-eq-𝔽 X)))
 ```

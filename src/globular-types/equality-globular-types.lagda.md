@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.equality-globular-types where
+module globular-types.equality-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -25,7 +25,7 @@ open import foundation-core.equivalences
 open import foundation-core.retractions
 open import foundation-core.sections
 
-open import structured-types.globular-types
+open import globular-types.globular-types
 ```
 
 </details>
@@ -33,10 +33,10 @@ open import structured-types.globular-types
 ## Idea
 
 We postulate that [equality](foundation-core.identity-types.md) of
-[globular types](structured-types.globular-types.md) is characterized by
-equality of the 0-cells together with, coinductively, a binary family of
-equalities of the globular type of 1-cells over the equality of the 0-cells.
-This phrasing is used so that the extensionality principle is independent of
+[globular types](globular-types.globular-types.md) is characterized by equality
+of the 0-cells together with, coinductively, a binary family of equalities of
+the globular type of 1-cells over the equality of the 0-cells. This phrasing is
+used so that the extensionality principle is independent of
 [univalence](foundation.univalence.md).
 
 ## Definitions

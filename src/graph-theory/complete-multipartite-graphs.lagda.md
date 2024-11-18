@@ -94,4 +94,4 @@ module _
 - [Multipartite graph](https://en.wikipedia.org/wiki/Multipartite_graph) on
   Wikipedia
 - [Complete multipartite graph](https://mathworld.wolfram.com/CompleteMultipartiteGraph.html)
-  on Wolfram Mathworld
+  on Wolfram MathWorld
