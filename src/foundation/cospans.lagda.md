@@ -55,8 +55,7 @@ a morphism of cospan diagrams, as input. Examples of this kind include
 cospan :
   {l1 l2 : Level} (l : Level) (A : UU l1) (B : UU l2) →
   UU (l1 ⊔ l2 ⊔ lsuc l)
-cospan l A B =
-  Σ (UU l) (λ X → (A → X) × (B → X))
+cospan l A B = Σ (UU l) (λ X → (A → X) × (B → X))
 
 module _
   {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2} (c : cospan l A B)
@@ -70,6 +69,22 @@ module _
 
   right-map-cospan : B → codomain-cospan
   right-map-cospan = pr2 (pr2 c)
+```
+
+### The identity cospan
+
+```agda
+id-cospan : {l : Level} (A : UU l) → cospan l A A
+id-cospan A = (A , id , id)
+```
+
+### The swapping operation on cospans
+
+```agda
+swap-cospan :
+  {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2} →
+  cospan l A B → cospan l B A
+swap-cospan (C , f , g) = (C , g , f)
 ```
 
 ## See also

@@ -471,7 +471,7 @@ module _
     element-two-elements-transposition ≠
     other-element-two-elements-transposition
   neq-elements-two-elements-transposition =
-    pr1 (pr2 (pr2 two-elements-transposition))
+    pr1 (pr2 (pr2 two-elements-transposition))
 
   abstract
     cases-eq-two-elements-transposition :
@@ -1239,7 +1239,7 @@ module _
     ( ( ap
         ( λ w →
           map-equiv
-            ( standard-transposition H npyz ∘e standard-transposition H npxy)
+            ( standard-transposition H npyz ∘e standard-transposition H npxy)
             ( w))
         ( is-fixed-point-standard-transposition
           ( H)

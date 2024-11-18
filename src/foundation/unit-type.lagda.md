@@ -83,6 +83,9 @@ raise-terminal-map {l2 = l2} A = const A raise-star
 
 compute-raise-unit : (l : Level) → unit ≃ raise-unit l
 compute-raise-unit l = compute-raise l unit
+
+inv-compute-raise-unit : (l : Level) → raise-unit l ≃ unit
+inv-compute-raise-unit l = inv-compute-raise l unit
 ```
 
 ## Properties

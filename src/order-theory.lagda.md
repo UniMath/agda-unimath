@@ -49,6 +49,7 @@ open import order-theory.homomorphisms-meet-semilattices public
 open import order-theory.homomorphisms-meet-sup-lattices public
 open import order-theory.homomorphisms-sup-lattices public
 open import order-theory.ideals-preorders public
+open import order-theory.incidence-algebras public
 open import order-theory.inhabited-finite-total-orders public
 open import order-theory.interval-subposets public
 open import order-theory.join-semilattices public
@@ -107,9 +108,11 @@ open import order-theory.top-elements-posets public
 open import order-theory.top-elements-preorders public
 open import order-theory.total-orders public
 open import order-theory.total-preorders public
+open import order-theory.upper-bounds-chains-posets public
 open import order-theory.upper-bounds-large-posets public
 open import order-theory.upper-bounds-posets public
 open import order-theory.upper-sets-large-posets public
 open import order-theory.well-founded-orders public
 open import order-theory.well-founded-relations public
+open import order-theory.zorns-lemma public
 ```

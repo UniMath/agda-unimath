@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
+open import foundation.retracts-of-types
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
@@ -285,6 +286,21 @@ automorphism-Π :
   ( (a : A) → B a) ≃ ((a : A) → B a)
 pr1 (automorphism-Π e f) = map-automorphism-Π e f
 pr2 (automorphism-Π e f) = is-equiv-map-automorphism-Π e f
+```
+
+### Families of retracts induce retracts of dependent function types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
+
+  retract-Π-retract-family :
+    (r : (i : I) → A i retract-of B i) →
+    ((i : I) → A i) retract-of ((i : I) → B i)
+  retract-Π-retract-family r =
+    ( map-Π (inclusion-retract ∘ r) ,
+      retraction-map-Π-fiberwise-retraction (retraction-retract ∘ r))
 ```
 
 ## See also

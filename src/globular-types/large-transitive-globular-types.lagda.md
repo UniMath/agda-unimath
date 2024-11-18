@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.large-transitive-globular-types where
+module globular-types.large-transitive-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -11,8 +11,8 @@ module structured-types.large-transitive-globular-types where
 ```agda
 open import foundation.universe-levels
 
-open import structured-types.large-globular-types
-open import structured-types.transitive-globular-types
+open import globular-types.large-globular-types
+open import globular-types.transitive-globular-types
 ```
 
 </details>
@@ -21,7 +21,7 @@ open import structured-types.transitive-globular-types
 
 A
 {{#concept "large transitive globular type" Agda=Large-Transitive-Globular-Type}}
-is a [large globular type](structured-types.large-globular-types.md) `A`
+is a [large globular type](globular-types.large-globular-types.md) `A`
 [equipped](foundation.structure.md) with a binary operator
 
 ```text

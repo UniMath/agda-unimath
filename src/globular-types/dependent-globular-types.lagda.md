@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.dependent-globular-types where
+module globular-types.dependent-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -12,14 +12,14 @@ module structured-types.dependent-globular-types where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
+open import globular-types.globular-types
 ```
 
 </details>
 
 ## Idea
 
-Consider a [globular type](structured-types.globular-types.md) `G`. A
+Consider a [globular type](globular-types.globular-types.md) `G`. A
 {{#concept "dependent globular type" Agda=Dependent-Globular-Type}} over `G`
 consists of a type family `H₀ : G₀ → 𝒰`, and for any two `0`-cells `x y : G₀` in
 `G` a binary family of dependent globular types
@@ -67,4 +67,4 @@ module _
 
 ## See also
 
-- [Dependent reflexive globular types](structured-types.dependent-reflexive-globular-types.md)
+- [Dependent reflexive globular types](globular-types.dependent-reflexive-globular-types.md)

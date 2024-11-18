@@ -66,82 +66,71 @@ The binomial type `(A choose B)` is the type of
 
 ## Definitions
 
+### Binomial types of a given universe level
+
 ```agda
 binomial-type-Level :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (lsuc l ⊔ l1 ⊔ l2)
 binomial-type-Level l X Y =
   Σ (component-UU-Level l Y) (λ Z → type-component-UU-Level Z ↪ᵈ X)
 
-type-binomial-type-Level :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
-  binomial-type-Level l3 X Y → UU l3
-type-binomial-type-Level Z = type-component-UU-Level (pr1 Z)
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type-Level l3 X Y)
+  where
 
-abstract
-  mere-compute-binomial-type-Level :
-    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
-    (Z : binomial-type-Level l3 X Y) →
-    mere-equiv Y (type-binomial-type-Level Z)
-  mere-compute-binomial-type-Level Z = mere-equiv-component-UU-Level (pr1 Z)
+  type-binomial-type-Level : UU l3
+  type-binomial-type-Level = type-component-UU-Level (pr1 Z)
 
-decidable-emb-binomial-type-Level :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type-Level l3 X Y) →
-  type-binomial-type-Level Z ↪ᵈ X
-decidable-emb-binomial-type-Level Z = pr2 Z
+  abstract
+    mere-compute-binomial-type-Level :
+      mere-equiv Y type-binomial-type-Level
+    mere-compute-binomial-type-Level = mere-equiv-component-UU-Level (pr1 Z)
 
-map-decidable-emb-binomial-type-Level :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type-Level l3 X Y) →
-  type-binomial-type-Level Z → X
-map-decidable-emb-binomial-type-Level Z =
-  map-decidable-emb (decidable-emb-binomial-type-Level Z)
+  decidable-emb-binomial-type-Level : type-binomial-type-Level ↪ᵈ X
+  decidable-emb-binomial-type-Level = pr2 Z
 
-abstract
-  is-emb-map-emb-binomial-type-Level :
-    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
-    (Z : binomial-type-Level l3 X Y) →
-    is-emb (map-decidable-emb-binomial-type-Level Z)
-  is-emb-map-emb-binomial-type-Level Z =
-    is-emb-map-decidable-emb (decidable-emb-binomial-type-Level Z)
+  map-decidable-emb-binomial-type-Level : type-binomial-type-Level → X
+  map-decidable-emb-binomial-type-Level =
+    map-decidable-emb decidable-emb-binomial-type-Level
+
+  abstract
+    is-emb-map-emb-binomial-type-Level :
+      is-emb map-decidable-emb-binomial-type-Level
+    is-emb-map-emb-binomial-type-Level =
+      is-emb-map-decidable-emb decidable-emb-binomial-type-Level
 ```
 
 ### The standard binomial types
-
-We now define the standard binomial types.
 
 ```agda
 binomial-type : {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (lsuc (l1 ⊔ l2))
 binomial-type {l1} {l2} X Y = binomial-type-Level (l1 ⊔ l2) X Y
 
-type-binomial-type :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → binomial-type X Y → UU (l1 ⊔ l2)
-type-binomial-type Z = type-component-UU-Level (pr1 Z)
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y)
+  where
 
-abstract
-  mere-compute-binomial-type :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
-    mere-equiv Y (type-binomial-type Z)
-  mere-compute-binomial-type Z = mere-equiv-component-UU-Level (pr1 Z)
+  type-binomial-type : UU (l1 ⊔ l2)
+  type-binomial-type = type-component-UU-Level (pr1 Z)
 
-decidable-emb-binomial-type :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
-  type-binomial-type Z ↪ᵈ X
-decidable-emb-binomial-type Z = pr2 Z
+  abstract
+    mere-compute-binomial-type : mere-equiv Y type-binomial-type
+    mere-compute-binomial-type = mere-equiv-component-UU-Level (pr1 Z)
 
-map-decidable-emb-binomial-type :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
-  type-binomial-type Z → X
-map-decidable-emb-binomial-type Z =
-  map-decidable-emb (decidable-emb-binomial-type Z)
+  decidable-emb-binomial-type : type-binomial-type ↪ᵈ X
+  decidable-emb-binomial-type = pr2 Z
 
-abstract
-  is-emb-map-emb-binomial-type :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
-    is-emb (map-decidable-emb-binomial-type Z)
-  is-emb-map-emb-binomial-type Z =
-    is-emb-map-decidable-emb (decidable-emb-binomial-type Z)
+  map-decidable-emb-binomial-type : type-binomial-type → X
+  map-decidable-emb-binomial-type =
+    map-decidable-emb decidable-emb-binomial-type
+
+  abstract
+    is-emb-map-emb-binomial-type : is-emb map-decidable-emb-binomial-type
+    is-emb-map-emb-binomial-type =
+      is-emb-map-decidable-emb decidable-emb-binomial-type
 ```
 
-### Proposition 17.5.6
+### The type of decidable subtypes of `A` such that the total space is merely equivalent to a given finite type
 
 ```agda
 binomial-type-Level' :
@@ -150,6 +139,28 @@ binomial-type-Level' l A B =
   Σ ( A → Decidable-Prop l)
     ( λ P → mere-equiv B (Σ A (type-Decidable-Prop ∘ P)))
 
+binomial-type' :
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc (l1 ⊔ l2))
+binomial-type' {l1} {l2} A B = binomial-type-Level' (l1 ⊔ l2) A B
+```
+
+### The small binomial types
+
+Note that the universe level of `small-binomial-type` is lower that the universe
+level of `binomial-type`.
+
+```agda
+small-binomial-type :
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+small-binomial-type A B =
+  Σ (A → bool) (λ f → mere-equiv B (fiber f true))
+```
+
+## Properties
+
+### The binomial type `(A B)` is equivalent to the type of decidable subtypes of `A` such that the total space is merely equivalent to `B`
+
+```agda
 compute-binomial-type-Level :
   (l : Level) {l1 l2 : Level} (A : UU l1) (B : UU l2) →
   binomial-type-Level (l1 ⊔ l) A B ≃ binomial-type-Level' (l1 ⊔ l) A B
@@ -168,10 +179,6 @@ compute-binomial-type-Level l {l1} {l2} A B =
     ( equiv-tot (λ X → commutative-product))) ∘e
   ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪ᵈ A))
 
-binomial-type' :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc (l1 ⊔ l2))
-binomial-type' {l1} {l2} A B = binomial-type-Level' (l1 ⊔ l2) A B
-
 compute-binomial-type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
   binomial-type A B ≃ binomial-type' A B
@@ -179,16 +186,9 @@ compute-binomial-type {l1} {l2} A B =
   compute-binomial-type-Level (l1 ⊔ l2) A B
 ```
 
-### Remark 17.5.7
-
-Note that the universe level of `small-binomial-type` is lower.
+### The bionmial type `(A B)` is equivalent to the small binomial type at `A` and `B`
 
 ```agda
-small-binomial-type :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
-small-binomial-type A B =
-  Σ (A → bool) (λ f → mere-equiv B (fiber f true))
-
 compute-small-binomial-type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
   binomial-type A B ≃ small-binomial-type A B
@@ -203,6 +203,8 @@ compute-small-binomial-type A B =
           ( B)))) ∘e
   ( compute-binomial-type A B)
 ```
+
+### The binomial type `(A ∅)` is contractible
 
 ```agda
 abstract
@@ -223,7 +225,11 @@ abstract
           ( is-proof-irrelevant-is-prop
             ( is-prop-is-decidable-emb ex-falso)
             ( is-decidable-emb-ex-falso))))
+```
 
+### The binomial type `(∅ A)` is empty
+
+```agda
 abstract
   binomial-type-empty-under :
     {l : Level} {X : UU l} →
@@ -233,7 +239,11 @@ abstract
       ( λ x →
         apply-universal-property-trunc-Prop (pr2 (pr1 Y)) empty-Prop
           ( λ e → map-decidable-emb (pr2 Y) (map-equiv e x)))
+```
 
+### A recursive law for the binomial types
+
+```agda
 abstract
   recursion-binomial-type' :
     {l1 l2 : Level} (A : UU l1) (B : UU l2) →
@@ -342,7 +352,7 @@ abstract
     ( compute-binomial-type (Maybe A) (Maybe B))
 ```
 
-### Theorem 17.5.9
+### The small binomial types are invariant under equivalences
 
 ```agda
 equiv-small-binomial-type :
@@ -361,7 +371,11 @@ equiv-small-binomial-type {l1} {l2} {l3} {l4} {A} {A'} {B} {B'} e f =
                     is-contr-map-is-equiv (is-equiv-map-equiv e) (pr1 u))) ∘e
                 ( compute-fiber-comp P (map-equiv e) true))) B) ∘e
           ( equiv-precomp-equiv f (fiber P true))))
+```
 
+### The binomial types are invariant under equivalences
+
+```agda
 equiv-binomial-type :
   {l1 l2 l3 l4 : Level} {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} →
   (A ≃ A') → (B ≃ B') → binomial-type A' B' ≃ binomial-type A B
@@ -369,7 +383,15 @@ equiv-binomial-type e f =
   ( ( inv-equiv (compute-small-binomial-type _ _)) ∘e
     ( equiv-small-binomial-type e f)) ∘e
   ( compute-small-binomial-type _ _)
+```
 
+### Computation of the number of elements of the binomial type `((Fin n) (Fin m))`
+
+The computation of the number of subsets of a given cardinality of a finite set
+is the 58th theorem on [Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
+```agda
 binomial-type-Fin :
   (n m : ℕ) → binomial-type (Fin n) (Fin m) ≃ Fin (binomial-coefficient-ℕ n m)
 binomial-type-Fin zero-ℕ zero-ℕ =
@@ -439,3 +461,7 @@ pr2 (binomial-type-𝔽 A B) =
     ( compute-small-binomial-type (type-𝔽 A) (type-𝔽 B))
     ( is-finite-binomial-type (is-finite-type-𝔽 A) (is-finite-type-𝔽 B))
 ```
+
+## References
+
+{{#bibliography}}

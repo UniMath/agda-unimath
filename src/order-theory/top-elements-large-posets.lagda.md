@@ -17,9 +17,10 @@ open import order-theory.large-posets
 
 ## Idea
 
-We say that a [large poset](order-theory.large-posets.md) `P` has a **largest
-element** if it comes equipped with an element `t : type-Large-Poset P lzero`
-such that `x ≤ t` holds for every `x : P`
+We say that a [large poset](order-theory.large-posets.md) `P` has a
+{{#concept "largest element" Disambiguation="in a large poset" WD="maximal and minimal elements" WDID=Q1475294 Agda=is-top-element-Large-Poset}}
+if it comes equipped with an element `t : type-Large-Poset P lzero` such that
+`x ≤ t` holds for every `x : P`
 
 ## Definition
 

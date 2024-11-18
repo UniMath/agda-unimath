@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.maps-large-globular-types where
+module globular-types.large-globular-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -13,9 +13,9 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
-open import structured-types.large-globular-types
-open import structured-types.maps-globular-types
+open import globular-types.globular-maps
+open import globular-types.globular-types
+open import globular-types.large-globular-types
 ```
 
 </details>
@@ -24,7 +24,7 @@ open import structured-types.maps-globular-types
 
 A
 {{#concept "map" Disambiguation="large globular types" Agda=map-Large-Globular-Type}}
-`f` between [large globular types](structured-types.large-globular-types.md) `A`
+`f` between [large globular types](globular-types.large-globular-types.md) `A`
 and `B` is a map `F₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`,
 a map of $(n+1)$-cells
 
