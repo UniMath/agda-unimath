@@ -1,17 +1,18 @@
 # Directed complete posets
 
 ```agda
-module order-theory.directed-complete-posets where
+module domain-theory.directed-complete-posets where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import domain-theory.directed-families-posets
+
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.directed-families
 open import order-theory.least-upper-bounds-posets
 open import order-theory.posets
 ```
