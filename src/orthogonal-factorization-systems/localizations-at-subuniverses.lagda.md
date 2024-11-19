@@ -1,7 +1,7 @@
 # Localizations at subuniverses
 
 ```agda
-module orthogonal-factorization-systems.localizations-subuniverses where
+module orthogonal-factorization-systems.localizations-at-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -12,7 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
@@ -22,11 +22,11 @@ open import orthogonal-factorization-systems.local-types
 Let `P` be a [subuniverse](foundation.subuniverses.md). Given a type `X`, its
 **localization** at `P`, or **`P`-localization**, is a type `Y` in `P` and a map
 `η : X → Y` such that every type in `P` is
-`η`[-local](orthogonal-factorization-systems.local-types.md). I.e. for every `Z`
-in `P`, the [precomposition map](foundation-core.function-types.md)
+`η`[-local](orthogonal-factorization-systems.types-local-at-maps.md). I.e., for
+every `Z` in `P`, the [precomposition map](foundation-core.function-types.md)
 
 ```text
-  _∘ η : (Y → Z) → (X → Z)
+  - ∘ η : (Y → Z) → (X → Z)
 ```
 
 is an [equivalence](foundation-core.equivalences.md).
@@ -112,7 +112,7 @@ This is Proposition 5.1.2 in _Classifying Types_, and remains to be formalized.
 
 ## See also
 
-- [Localizations at maps](orthogonal-factorization-systems.localizations-maps.md)
+- [Localizations at maps](orthogonal-factorization-systems.localizations-at-maps.md)
 
 ## References
 
