@@ -33,22 +33,23 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 
 ## Idea
 
-A **higher modality** is a _higher mode of logic_ defined in terms of a monadic
+A {{#concept "higher modality" Disambiguation="on types" Agda=higher-modality}}
+is a _higher mode of logic_ defined in terms of an monadic
 [modal operator](orthogonal-factorization-systems.modal-operators.md) `○`
 satisfying a certain induction principle.
 
-The induction principle states that for every type `X` and family
-`P : ○ X → UU`, to define a dependent map `(x' : ○ X) → ○ (P x')` it suffices to
-define it on the image of the modal unit, i.e. `(x : X) → ○ (P (unit-○ x))`.
-Moreover, it satisfies a computation principle stating that when evaluating a
-map defined in this manner on the image of the modal unit, one recovers the
-defining map (propositionally).
+The induction principle states that for every type `X` and family `P : ○ X → 𝒰`,
+to define a dependent map `(x' : ○ X) → ○ (P x')` it suffices to define it on
+the image of the modal unit, i.e. `(x : X) → ○ (P (unit-○ x))`. Moreover, it
+satisfies a computation principle stating that when evaluating a map defined in
+this manner on the image of the modal unit, one recovers the defining map
+(propositionally).
 
 Lastly, higher modalities must also be **identity closed** in the sense that for
 every type `X` the identity types `(x' ＝ y')` are modal for all terms
 `x' y' : ○ X`. In other words, `○ X` is
-[`○`-separated](foundation.separated-types.md). Because of this, higher
-modalities in their most general form only make sense for
+[`○`-separated](foundation.separated-types-subuniverses.md). Because of this,
+(small) higher modalities in their most general form only make sense for
 [locally small modal operators](orthogonal-factorization-systems.locally-small-modal-operators.md).
 
 ## Definition

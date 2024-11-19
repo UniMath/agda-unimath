@@ -26,6 +26,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -212,4 +213,37 @@ module _
       ( equiv-funext)
       ( precomp-Π f (eq-value g h))
       ( compute-htpy-eq-ap-precomp)
+```
+
+### The precomposition map at a dependent pair type
+
+Given a map `f : X → Y` and a family `B : A → 𝒰` we have a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
+
+```text
+                                precomp f (Σ A B)
+             (Y → Σ A B) ------------------------------> (X → Σ A B)
+                  |                                           |
+                ~ |                                           | ~
+                  ∨                                           ∨
+  Σ (a : Y → A) ((y : Y) → B (a y)) --------> Σ (a : X → A) ((x : X) → B (a x)).
+                  map-Σ (precomp f A) (λ a → precomp f (B ∘ a))
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {A : UU l3} {B : A → UU l4}
+  {f : X → Y}
+  where
+
+  coherence-precomp-Σ :
+    coherence-square-maps
+      ( precomp f (Σ A B))
+      ( map-distributive-Π-Σ)
+      ( map-distributive-Π-Σ)
+      ( map-Σ
+        ( λ a → (x : X) → B (a x))
+        ( precomp f A)
+        ( λ a → precomp-Π f (B ∘ a)))
+  coherence-precomp-Σ = coherence-precomp-Π-Σ
 ```

@@ -16,10 +16,14 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.function-types
+open import foundation-core.transport-along-identifications
+
 open import orthogonal-factorization-systems.continuation-modalities
 open import orthogonal-factorization-systems.large-lawvere-tierney-topologies
 open import orthogonal-factorization-systems.lawvere-tierney-topologies
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.types-local-at-maps
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
