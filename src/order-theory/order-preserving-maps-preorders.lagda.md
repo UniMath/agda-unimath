@@ -17,8 +17,9 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
 open import foundation.universe-levels
+
+open import foundation-core.torsorial-type-families
 
 open import order-theory.preorders
 ```
@@ -49,8 +50,8 @@ module _
           ( type-Preorder P)
           ( λ y →
             hom-Prop
-              ( leq-Preorder-Prop P x y)
-              ( leq-Preorder-Prop Q (f x) (f y))))
+              ( leq-prop-Preorder P x y)
+              ( leq-prop-Preorder Q (f x) (f y))))
 
   preserves-order-Preorder :
     (type-Preorder P → type-Preorder Q) → UU (l1 ⊔ l2 ⊔ l4)

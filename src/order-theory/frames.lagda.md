@@ -213,7 +213,7 @@ module _
   is-set-type-Frame = is-set-type-Poset poset-Frame
 
   leq-Frame-Prop : (x y : type-Frame) → Prop l1
-  leq-Frame-Prop = leq-Poset-Prop poset-Frame
+  leq-Frame-Prop = leq-prop-Poset poset-Frame
 
   leq-Frame : (x y : type-Frame) → UU l1
   leq-Frame = leq-Poset poset-Frame

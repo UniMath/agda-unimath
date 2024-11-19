@@ -24,9 +24,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Statement
 
-The {{#concept "Weak Limited Principle of Omniscience"}} asserts that for any
-[sequence](foundation.sequences.md) `f : ℕ → Fin 2` either `f n ＝ 0` for all
-`n : ℕ` or not. In particular, it is a restricted form of the
+The {{#concept "weak limited principle of omniscience"}} (WLPO) asserts that for
+any [sequence](foundation.sequences.md) `f : ℕ → Fin 2` either `f n ＝ 0` for
+all `n : ℕ` or not. In particular, it is a restricted form of the
 [law of excluded middle](foundation.law-of-excluded-middle.md).
 
 ```agda
@@ -48,3 +48,9 @@ WLPO = type-Prop WLPO-Prop
 - [The principle of omniscience](foundation.principle-of-omniscience.md)
 - [The limited principle of omniscience](foundation.limited-principle-of-omniscience.md)
 - [The lesser limited principle of omniscience](foundation.lesser-limited-principle-of-omniscience.md)
+- [Markov's principle](logic.markovs-principle.md)
+
+## External links
+
+- [weak limited principle of omniscience](https://ncatlab.org/nlab/show/weak+limited+principle+of+omniscience)
+  at $n$Lab

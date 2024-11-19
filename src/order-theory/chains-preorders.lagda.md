@@ -94,5 +94,7 @@ module _
 
 ## External links
 
+- [Total order, chains](https://en.wikipedia.org/wiki/Total_order#Chains) at
+  Wikipedia
 - [chain, in order theory](https://ncatlab.org/nlab/show/chain#in_order_theory)
   at $n$Lab

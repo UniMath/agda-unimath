@@ -19,8 +19,11 @@ open import order-theory.preorders
 
 ## Idea
 
-A **maximal chain** in a preorder `P` is a chain `C` in `P` such that for every
-chain `D` in `P` we have `C ⊆ D ⇒ D ⊆ C`.
+A
+{{#concept "maximal chain" Disambiguation="in a preorder" Agda=maximal-chain-Preorder}}
+in a [preorder](order-theory.preorders.md) `P` is a
+[chain](order-theory.chains-preorders.md) `C` in `P` such that for any chain `D`
+we have `C ⊆ D ⇒ C ＝ D`.
 
 ## Definition
 

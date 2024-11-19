@@ -85,6 +85,7 @@ open import foundation.connected-types public
 open import foundation.constant-maps public
 open import foundation.constant-span-diagrams public
 open import foundation.constant-type-families public
+open import foundation.constructive-cantor-schroder-bernstein public
 open import foundation.continuations public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
@@ -221,6 +222,7 @@ open import foundation.identity-systems public
 open import foundation.identity-truncated-types public
 open import foundation.identity-types public
 open import foundation.images public
+open import foundation.images-embeddings public
 open import foundation.images-subtypes public
 open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
@@ -256,6 +258,7 @@ open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.lifts-types public
 open import foundation.limited-principle-of-omniscience public
+open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.maps-in-global-subuniverses public

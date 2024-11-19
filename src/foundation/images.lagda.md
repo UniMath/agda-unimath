@@ -36,7 +36,9 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-The **image** of a map is a type that satisfies the
+The
+{{#concept "image" Disambiguation="of a map" WD="image" WDID=Q860623 Agda=im}}
+of a map is a type that satisfies the
 [universal property of the image](foundation.universal-property-image.md) of a
 map.
 
@@ -73,7 +75,7 @@ module _
 
 ## Properties
 
-### We characterize the identity type of im f
+### We characterize the identity type of `im f`
 
 ```agda
 module _
@@ -216,3 +218,8 @@ im-1-Type :
   (f : A → type-1-Type X) → 1-Type (l1 ⊔ l2)
 im-1-Type X f = im-Truncated-Type zero-𝕋 X f
 ```
+
+## External links
+
+- [Image (mathematics)](<https://en.wikipedia.org/wiki/Image_(mathematics)>) at
+  Wikipedia
