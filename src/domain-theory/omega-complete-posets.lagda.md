@@ -33,13 +33,15 @@ open import order-theory.upper-bounds-posets
 An
 {{#concept "ω-complete poset" WD="complete partial order" WDID=Q3082805  Agda=ω-Complete-Poset}}
 is a [poset](order-theory.posets.md) `P` such that every ascending
-[chain](order-theory.chains-posets.md)
+ω-[chain](order-theory.chains-posets.md)
 
 ```text
-  α₀ ≤ α₁ ≤ α₂ ≤ ⋯
+  α₀ ≤ α₁ ≤ α₂ ≤ α₃ ≤ …
 ```
 
-in `P` has a [supremum](order-theory.least-upper-bounds--posets.md) in `P`.
+in `P`, i.e., ascending chain indexed by the
+[natural numbers](elementary-number-theory.natural-numbers.md), has a
+[supremum](order-theory.least-upper-bounds--posets.md) `αω` in `P`.
 
 ## Definitions
 

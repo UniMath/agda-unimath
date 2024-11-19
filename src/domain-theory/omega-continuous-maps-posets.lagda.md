@@ -42,11 +42,11 @@ open import order-theory.posets
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two
+A map `f : P → Q` between the carrier types of two
 [posets](order-theory.posets.md) is said to be
-{{#concept "ω-continuous" Disambiguation="map of posets" Agda=ω-continuous-map-Poset}}
+{{#concept "ω-continuous" Disambiguation="map of posets" Agda=ω-continuous-hom-Poset}}
 if it maps the supremum of every ascending
-[chain](order-theory.chains-posets.md)
+ω-[chain](order-theory.chains-posets.md)
 
 ```text
   x₀ ≤ x₁ ≤ x₂ ≤ ­… ≤ xₙ ≤ xₙ₊₁ ≤ … ≤ xω

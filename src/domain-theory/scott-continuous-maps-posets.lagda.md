@@ -38,9 +38,9 @@ open import order-theory.posets
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two
+A map `f : P → Q` between the carrier types of two
 [posets](order-theory.posets.md) is said to be
-{{#concept "Scott-continuous" Disambiguation="map of posets" WD="Scott continuity" WDID=Q895815 Agda=scott-continuous-map-Poset}}
+{{#concept "Scott-continuous" Disambiguation="map of posets" WD="Scott continuity" WDID=Q895815 Agda=scott-continuous-hom-Poset}}
 if
 
 ```text
