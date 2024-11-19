@@ -39,7 +39,8 @@ graph whose vertices are elements of `X`, and edges are
   E x y := (x ＝ y).
 ```
 
-For any type `A` there is a {{#concept "standard discrete reflexive graph"}}
+For any type `A` there is a
+{{#concept "standard discrete reflexive graph" Agda=standard-Discrete-Reflexive-Graph}}
 `Δ A`, which is defined by
 
 ```text
