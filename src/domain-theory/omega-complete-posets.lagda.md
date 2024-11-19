@@ -41,7 +41,7 @@ is a [poset](order-theory.posets.md) `P` such that every ascending
 
 in `P`, i.e., ascending chain indexed by the
 [natural numbers](elementary-number-theory.natural-numbers.md), has a
-[supremum](order-theory.least-upper-bounds--posets.md) `αω` in `P`.
+[supremum](order-theory.least-upper-bounds-posets.md) `αω` in `P`.
 
 ## Definitions
 

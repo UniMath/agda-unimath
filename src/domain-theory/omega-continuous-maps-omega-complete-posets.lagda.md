@@ -45,7 +45,7 @@ open import order-theory.posets
 ## Idea
 
 A map `f : P → Q` between the carrier types of two
-[ω-complete posets](order-theory.omega-complete-posets.md) is said to be
+[ω-complete posets](domain-theory.omega-complete-posets.md) is said to be
 {{#concept "ω-continuous" Disambiguation="map of ω-complete posets" Agda=ω-continuous-hom-ω-Complete-Poset}}
 if it maps the supremum of every ascending
 ω-[chain](order-theory.chains-posets.md)
@@ -64,7 +64,7 @@ In other words, `f(⋃ᵢxᵢ) = ⋃ᵢf(xᵢ)` for all ascending chains `x₍�
 follows that `f` preserves the order of `P` if it is ω-continuous.
 
 The ω-continuity condition is a proper generalization of
-[Scott-continuity](domain-theory.scott-continuous-functions-posets.md) for which
+[Scott-continuity](domain-theory.scott-continuous-maps-posets.md) for which
 [Kleene's fixed point theorem](domain-theory.kleenes-fixed-point-theorem-omega-complete-posets.md)
 still applies.
 

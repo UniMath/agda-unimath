@@ -46,7 +46,7 @@ open import order-theory.upper-bounds-posets
 states that given an
 [ω-continuous](domain-theory.omega-continuous-maps-omega-complete-posets.md)
 endomap `f : 𝒜 → 𝒜` on an
-[ω-complete poset](domain-theoryomega-complete-posets.md) `𝒜`, then for every
+[ω-complete poset](domain-theory.omega-complete-posets.md) `𝒜`, then for every
 `x ∈ 𝒜` such that `x ≤ f x`, the ω-transfinite application of `f` to `x`,
 `f^ω(x)`, given that it exists, is a
 [fixed point](foundation.fixed-points-endofunctions.md) of `f`:

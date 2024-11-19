@@ -35,7 +35,7 @@ A
 in a [poset](order-theory.posets.md) `P` consists of an
 [inhabited type](foundation.inhabited-types.md) `I` and a map `x : I → P` such
 that for any two elements `i j : I` there
-[exists](foundaiton.existential-quantification.md) an element `k : I` such that
+[exists](foundation.existential-quantification.md) an element `k : I` such that
 both `x i ≤ x k` and `x j ≤ x k` hold.
 
 ## Definitions

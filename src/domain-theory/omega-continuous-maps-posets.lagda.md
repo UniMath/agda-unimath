@@ -62,7 +62,7 @@ In other words, `f(⋃ᵢxᵢ) = ⋃ᵢf(xᵢ)` for all ascending chains `x₍�
 follows that `f` preserves the order of `P` if it is ω-continuous.
 
 The ω-continuity condition is a proper generalization of
-[Scott-continuity](domain-theory.scott-continuous-functions-posets.md) for which
+[Scott-continuity](domain-theory.scott-continuous-maps-posets.md) for which
 [Kleene's fixed point theorem](domain-theory.kleenes-fixed-point-theorem-omega-complete-posets.md)
 still applies.
 
