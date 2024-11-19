@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.dependent-reflexive-globular-types where
+module globular-types.dependent-reflexive-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -12,21 +12,20 @@ module structured-types.dependent-reflexive-globular-types where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import structured-types.dependent-globular-types
-open import structured-types.globular-types
-open import structured-types.reflexive-globular-types
+open import globular-types.dependent-globular-types
+open import globular-types.globular-types
+open import globular-types.reflexive-globular-types
 ```
 
 </details>
 
 ## Idea
 
-Consider a
-[reflexive globular type](structured-types.reflexive-globular-types.md) `G`
-equipped with a reflexivity element `ρ`. A
+Consider a [reflexive globular type](globular-types.reflexive-globular-types.md)
+`G` equipped with a reflexivity element `ρ`. A
 {{#concept "dependent reflexive globular type" Agda=Dependent-Reflexive-Globular-Type}}
 over `G` consists of a
-[dependent globular type](structured-types.dependent-globular-types.md) `H` over
+[dependent globular type](globular-types.dependent-globular-types.md) `H` over
 `G` equipped with a reflexivity element `ρ'` consisting of
 
 ```text

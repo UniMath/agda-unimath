@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.large-symmetric-globular-types where
+module globular-types.large-symmetric-globular-types where
 ```
 
 <details><summary>Imports</summary>
@@ -12,15 +12,15 @@ module structured-types.large-symmetric-globular-types where
 open import foundation.large-binary-relations
 open import foundation.universe-levels
 
-open import structured-types.large-globular-types
-open import structured-types.symmetric-globular-types
+open import globular-types.large-globular-types
+open import globular-types.symmetric-globular-types
 ```
 
 </details>
 
 ## Idea
 
-We say a [large globular type](structured-types.large-globular-types.md) is
+We say a [large globular type](globular-types.large-globular-types.md) is
 {{#concept "symmetric" Disambiguation="large globular type" Agda=is-symmetric-large-globular-structure}}
 if there is a symmetry action on its $n$-cells for positive $n$, mapping
 $n$-cells from `x` to `y` to $n$-cells from `y` to `x`.

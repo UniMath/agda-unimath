@@ -3,7 +3,7 @@
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module structured-types.equivalences-globular-types where
+module globular-types.globular-equivalences where
 ```
 
 <details><summary>Imports</summary>
@@ -15,7 +15,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
+open import globular-types.globular-types
 ```
 
 </details>
@@ -24,9 +24,9 @@ open import structured-types.globular-types
 
 An
 {{#concept "equivalence" Disambiguation="globular types" Agda=equiv-Globular-Type}}
-`f` between [globular types](structured-types.globular-types.md) `A` and `B` is
-an equivalence `F₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`,
-an equivalence of $(n+1)$-cells
+`f` between [globular types](globular-types.globular-types.md) `A` and `B` is an
+equivalence `F₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`, an
+equivalence of $(n+1)$-cells
 
 ```text
   Fₙ₊₁ : (𝑛+1)-Cell A x y ≃ (𝑛+1)-Cell B (Fₙ x) (Fₙ y).
