@@ -1,4 +1,4 @@
-# Homomorphisms of meet sup lattices
+# Homomorphisms of meet-suplattices
 
 ```agda
 module order-theory.homomorphisms-meet-suplattices where
