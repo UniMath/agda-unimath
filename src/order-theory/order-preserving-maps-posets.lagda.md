@@ -1,4 +1,4 @@
-# Order preserving maps on posets
+# Order preserving maps between posets
 
 ```agda
 module order-theory.order-preserving-maps-posets where

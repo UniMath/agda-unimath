@@ -17,6 +17,7 @@ open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
+open import foundation.small-types
 open import foundation.universe-levels
 
 open import order-theory.order-preserving-maps-preorders
@@ -29,8 +30,7 @@ open import order-theory.preorders
 
 Given a [preorder](order-theory.preorders.md) `P` on a
 [small](foundation.small-types.md) carrier type `X`, then there is an equivalent
-{{#concept "resized preorder" Agda=resize-type-Preorder}} on the small
-equivalent.
+{{#concept "resized preorder" Agda=resize-Preorder}} on the small equivalent.
 
 ## Definition
 
@@ -38,56 +38,60 @@ equivalent.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1}
+  {l1 l2 l3 : Level}
   where
 
-  resize-type-Preorder :
-    (P : Preorder l2 l3) → A ≃ type-Preorder P → Preorder l1 l3
-  resize-type-Preorder P e =
+  resize-Preorder :
+    (P : Preorder l1 l2) → is-small l3 (type-Preorder P) → Preorder l3 l2
+  resize-Preorder P (A , e) =
     ( ( A) ,
-      ( λ x y → leq-prop-Preorder P (map-equiv e x) (map-equiv e y)) ,
-      ( λ x → refl-leq-Preorder P (map-equiv e x)) ,
+      ( λ x y → leq-prop-Preorder P (map-inv-equiv e x) (map-inv-equiv e y)) ,
+      ( λ x → refl-leq-Preorder P (map-inv-equiv e x)) ,
       ( λ x y z →
         transitive-leq-Preorder P
-          ( map-equiv e x)
-          ( map-equiv e y)
-          ( map-equiv e z)))
+          ( map-inv-equiv e x)
+          ( map-inv-equiv e y)
+          ( map-inv-equiv e z)))
 ```
 
 ### The resizing structure equivalence
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (P : Preorder l2 l3) (e : A ≃ type-Preorder P)
+  {l1 l2 l3 : Level} (P : Preorder l1 l2) (H : is-small l3 (type-Preorder P))
   where
 
-  hom-resize-type-Preorder : hom-Preorder (resize-type-Preorder P e) P
-  pr1 hom-resize-type-Preorder = map-equiv e
-  pr2 hom-resize-type-Preorder _ _ = id
+  hom-resize-Preorder : hom-Preorder (resize-Preorder P H) P
+  pr1 hom-resize-Preorder = map-inv-equiv-is-small H
+  pr2 hom-resize-Preorder _ _ = id
 
-  hom-inv-resize-type-Preorder : hom-Preorder P (resize-type-Preorder P e)
-  pr1 hom-inv-resize-type-Preorder = map-inv-equiv e
-  pr2 hom-inv-resize-type-Preorder x y v =
+  hom-inv-resize-Preorder : hom-Preorder P (resize-Preorder P H)
+  pr1 hom-inv-resize-Preorder = map-equiv-is-small H
+  pr2 hom-inv-resize-Preorder x y v =
     concatenate-leq-eq-Preorder P
-      ( concatenate-eq-leq-Preorder P (is-section-map-inv-equiv e x) v)
-      ( inv (is-section-map-inv-equiv e y))
+      ( concatenate-eq-leq-Preorder P
+        ( is-retraction-map-inv-equiv (equiv-is-small H) x)
+        ( v))
+      ( inv (is-retraction-map-inv-equiv (equiv-is-small H) y))
 
-  is-right-inverse-hom-inv-resize-type-Preorder :
+  is-right-inverse-hom-inv-resize-Preorder :
     htpy-hom-Preorder P P
-      ( comp-hom-Preorder P (resize-type-Preorder P e) P
-        ( hom-resize-type-Preorder)
-        ( hom-inv-resize-type-Preorder))
+      ( comp-hom-Preorder P (resize-Preorder P H) P
+        ( hom-resize-Preorder)
+        ( hom-inv-resize-Preorder))
       ( id-hom-Preorder P)
-  is-right-inverse-hom-inv-resize-type-Preorder = is-section-map-inv-equiv e
+  is-right-inverse-hom-inv-resize-Preorder =
+    is-retraction-map-inv-equiv (equiv-is-small H)
 
-  is-left-inverse-hom-inv-resize-type-Preorder :
-    htpy-hom-Preorder (resize-type-Preorder P e) (resize-type-Preorder P e)
+  is-left-inverse-hom-inv-resize-Preorder :
+    htpy-hom-Preorder (resize-Preorder P H) (resize-Preorder P H)
       ( comp-hom-Preorder
-        ( resize-type-Preorder P e)
+        ( resize-Preorder P H)
         ( P)
-        ( resize-type-Preorder P e)
-        ( hom-inv-resize-type-Preorder)
-        ( hom-resize-type-Preorder))
-      ( id-hom-Preorder (resize-type-Preorder P e))
-  is-left-inverse-hom-inv-resize-type-Preorder = is-retraction-map-inv-equiv e
+        ( resize-Preorder P H)
+        ( hom-inv-resize-Preorder)
+        ( hom-resize-Preorder))
+      ( id-hom-Preorder (resize-Preorder P H))
+  is-left-inverse-hom-inv-resize-Preorder =
+    is-section-map-inv-equiv (equiv-is-small H)
 ```

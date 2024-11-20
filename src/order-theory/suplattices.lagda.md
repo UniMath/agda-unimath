@@ -19,13 +19,15 @@ open import foundation.universe-levels
 
 open import order-theory.least-upper-bounds-posets
 open import order-theory.posets
+open import order-theory.upper-bounds-posets
 ```
 
 </details>
 
 ## Idea
 
-An `l`-{{#concept "suplattice"  Agda=Suplattice}} is a
+Consider a [universe level](foundation.universe-levels.md) `l`. An
+`l`-{{#concept "suplattice"  Agda=Suplattice}} is a
 [poset](order-theory.posets.md) which has all
 [least upper bounds](order-theory.least-upper-bounds-posets.md) of families of
 elements indexed by a type of [universe level](foundation.universe-levels.md)
@@ -135,10 +137,13 @@ module _
       ( poset-Suplattice)
       ( is-suplattice-Suplattice)
 
-  leq-sup-Suplattice :
-    {I : UU l3} (x : I → type-Suplattice) (i : I) →
-    leq-Suplattice (x i) (sup-Suplattice x)
-  leq-sup-Suplattice x =
+  is-upper-bound-family-of-elements-sup-Suplattice :
+    {I : UU l3} (x : I → type-Suplattice) →
+    is-upper-bound-family-of-elements-Poset
+      ( poset-Suplattice)
+      ( x)
+      ( sup-Suplattice x)
+  is-upper-bound-family-of-elements-sup-Suplattice x =
     backward-implication
       ( is-least-upper-bound-sup-Suplattice x (sup-Suplattice x))
       ( refl-leq-Suplattice (sup-Suplattice x))

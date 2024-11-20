@@ -48,7 +48,7 @@ states that given an
 endomap `f : 𝒜 → 𝒜` on an
 [ω-complete poset](domain-theory.omega-complete-posets.md) `𝒜`, then for every
 `x ∈ 𝒜` such that `x ≤ f x`, the ω-transfinite application of `f` to `x`,
-`f^ω(x)`, given that it exists, is a
+`f^ω(x)`, which exists by ω-completeness, is a
 [fixed point](foundation.fixed-points-endofunctions.md) of `f`:
 
 ```text

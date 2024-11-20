@@ -43,9 +43,8 @@ open import order-theory.upper-bounds-posets
 states that given an
 [ω-continuous](domain-theory.omega-continuous-maps-posets.md) endomap
 `f : 𝒜 → 𝒜` on a [poset](order-theory.posets.md) `𝒜`, then for every `x ∈ 𝒜`
-such that `x ≤ f x`, the ω-transfinite application of `f` to `x`,`f^ω(x)`, given
-that it exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of
-`f`:
+such that `x ≤ f x`, the ω-transfinite application of `f` to `x`,`f^ω(x)`, if it
+exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of `f`:
 
 ```text
   x ≤ f(x) ≤ f²(x) ≤ … ≤ fⁿ(x) ≤ … ≤ f^ω(x) = f(^fω(x)) = ….

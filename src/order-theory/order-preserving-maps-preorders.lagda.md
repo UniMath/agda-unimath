@@ -1,4 +1,4 @@
-# Order preserving maps on preorders
+# Order preserving maps between preorders
 
 ```agda
 module order-theory.order-preserving-maps-preorders where

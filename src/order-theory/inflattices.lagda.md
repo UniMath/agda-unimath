@@ -15,6 +15,7 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-posets
+open import order-theory.lower-bounds-posets
 open import order-theory.posets
 ```
 
@@ -22,7 +23,8 @@ open import order-theory.posets
 
 ## Idea
 
-An `l`-{{#concept "inflattice"  Agda=Inflattice}} is a
+Consider a [universe level](foundation.universe-levels.md) `l`. An
+`l`-{{#concept "inflattice"  Agda=Inflattice}} is a
 [poset](order-theory.posets.md) which has all
 [greatest lower bounds](order-theory.greatest-lower-bounds-posets.md) of
 families of elements indexed by a type at
@@ -132,10 +134,13 @@ module _
       ( poset-Inflattice)
       ( is-inflattice-Inflattice)
 
-  leq-inf-Inflattice :
-    {I : UU l3} (x : I → type-Inflattice) (i : I) →
-    leq-Inflattice (inf-Inflattice x) (x i)
-  leq-inf-Inflattice x =
+  is-lower-bound-family-of-elements-inf-Inflattice :
+    {I : UU l3} (x : I → type-Inflattice) →
+    is-lower-bound-family-of-elements-Poset
+      ( poset-Inflattice)
+      ( x)
+      ( inf-Inflattice x)
+  is-lower-bound-family-of-elements-inf-Inflattice x =
     backward-implication
       ( is-greatest-lower-bound-inf-Inflattice x (inf-Inflattice x))
       ( refl-leq-Inflattice (inf-Inflattice x))

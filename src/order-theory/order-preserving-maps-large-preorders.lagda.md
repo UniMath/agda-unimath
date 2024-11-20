@@ -76,7 +76,7 @@ module _
   open hom-Large-Preorder public
 ```
 
-### The induced order preserving maps on small preorders
+### The induced order preserving maps between small preorders
 
 ```agda
 module _

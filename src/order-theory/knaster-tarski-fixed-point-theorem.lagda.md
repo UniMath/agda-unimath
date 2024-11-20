@@ -70,7 +70,7 @@ module _
         transitive-leq-Suplattice 𝒜 _ _ _
           ( F ( pr1 w)
               ( point-knaster-tarski-Suplattice)
-              ( leq-sup-Suplattice 𝒜 _ w))
+              ( is-upper-bound-family-of-elements-sup-Suplattice 𝒜 _ w))
           ( pr2 w))
 
   geq-point-knaster-tarski-Suplattice :
@@ -78,7 +78,8 @@ module _
       ( f point-knaster-tarski-Suplattice)
       ( point-knaster-tarski-Suplattice)
   geq-point-knaster-tarski-Suplattice =
-    leq-sup-Suplattice 𝒜 family-of-elements-knaster-tarski-Suplattice
+    is-upper-bound-family-of-elements-sup-Suplattice 𝒜
+      ( family-of-elements-knaster-tarski-Suplattice)
       ( f point-knaster-tarski-Suplattice ,
         F point-knaster-tarski-Suplattice
           ( f point-knaster-tarski-Suplattice)
@@ -103,7 +104,7 @@ module _
     (x : fixed-point f) →
     leq-Suplattice 𝒜 (pr1 x) point-knaster-tarski-Suplattice
   greatest-fixed-point-knaster-tarski-Suplattice (x , p) =
-    leq-sup-Suplattice 𝒜 _
+    is-upper-bound-family-of-elements-sup-Suplattice 𝒜 _
       ( x ,
         concatenate-leq-eq-Poset
           ( poset-Suplattice 𝒜)
@@ -146,14 +147,15 @@ module _
       ( λ w →
         transitive-leq-Inflattice 𝒜 _ _ _
           ( pr2 w)
-          ( F _ _ (leq-inf-Inflattice 𝒜 _ w)))
+          ( F _ _ (is-lower-bound-family-of-elements-inf-Inflattice 𝒜 _ w)))
 
   leq-point-knaster-tarski-Inflattice :
     leq-Inflattice 𝒜
       ( point-knaster-tarski-Inflattice)
       ( f point-knaster-tarski-Inflattice)
   leq-point-knaster-tarski-Inflattice =
-    leq-inf-Inflattice 𝒜 family-of-elements-knaster-tarski-Inflattice
+    is-lower-bound-family-of-elements-inf-Inflattice 𝒜
+      ( family-of-elements-knaster-tarski-Inflattice)
       ( f point-knaster-tarski-Inflattice ,
         F (f point-knaster-tarski-Inflattice)
           ( point-knaster-tarski-Inflattice)
@@ -178,7 +180,7 @@ module _
     (x : fixed-point f) →
     leq-Inflattice 𝒜 point-knaster-tarski-Inflattice (pr1 x)
   least-fixed-point-knaster-tarski-Inflattice (x , p) =
-    leq-inf-Inflattice 𝒜 _
+    is-lower-bound-family-of-elements-inf-Inflattice 𝒜 _
       ( x ,
         concatenate-eq-leq-Poset
           ( poset-Inflattice 𝒜)

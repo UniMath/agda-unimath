@@ -277,13 +277,13 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  is-scott-continuous-id-Poset :
+  is-scott-continuous-id-hom-Poset :
     {l3 : Level} → is-scott-continuous-Poset P P l3 (id {A = type-Poset P})
-  is-scott-continuous-id-Poset x y = pr2 y
+  is-scott-continuous-id-hom-Poset x = pr2
 
   id-scott-continuous-hom-Poset :
     (l3 : Level) → scott-continuous-hom-Poset P P l3
-  id-scott-continuous-hom-Poset l3 = id , is-scott-continuous-id-Poset
+  id-scott-continuous-hom-Poset l3 = id , is-scott-continuous-id-hom-Poset
 ```
 
 ### Composing Scott-continuous maps
@@ -294,13 +294,13 @@ module _
   (P : Poset l1 l2) (Q : Poset l3 l4) (R : Poset l5 l6)
   where
 
-  is-scott-continuous-comp-Poset :
+  is-scott-continuous-comp-scott-continuous-hom-Poset :
     (g : scott-continuous-hom-Poset Q R l7)
     (f : scott-continuous-hom-Poset P Q l7) →
     is-scott-continuous-Poset P R l7
       ( map-scott-continuous-hom-Poset Q R g ∘
         map-scott-continuous-hom-Poset P Q f)
-  is-scott-continuous-comp-Poset g f x y =
+  is-scott-continuous-comp-scott-continuous-hom-Poset g f x y =
     is-scott-continuous-map-scott-continuous-hom-Poset Q R g
       ( directed-family-hom-Poset P Q (hom-scott-continuous-hom-Poset P Q f) x)
       ( sup-map-scott-continuous-hom-Poset P Q f x y)
@@ -312,7 +312,7 @@ module _
   comp-scott-continuous-hom-Poset g f =
     map-scott-continuous-hom-Poset Q R g ∘
     map-scott-continuous-hom-Poset P Q f ,
-    is-scott-continuous-comp-Poset g f
+    is-scott-continuous-comp-scott-continuous-hom-Poset g f
 ```
 
 ### Unit laws for composition of Scott-continuous maps

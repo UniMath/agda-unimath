@@ -1,4 +1,4 @@
-# Join preserving maps on posets
+# Join preserving maps between posets
 
 ```agda
 module order-theory.join-preserving-maps-posets where
@@ -98,26 +98,28 @@ module _
   preserves-joins-prop-Poset f =
     ( preserves-joins-Poset f , is-prop-preserves-joins-Poset f)
 
-  hom-join-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  hom-join-Poset =
+  join-preserving-hom-Poset : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  join-preserving-hom-Poset =
     Σ (type-Poset P → type-Poset Q) (preserves-joins-Poset)
 
-  map-hom-join-Poset : hom-join-Poset → type-Poset P → type-Poset Q
-  map-hom-join-Poset = pr1
+  map-join-preserving-hom-Poset :
+    join-preserving-hom-Poset → type-Poset P → type-Poset Q
+  map-join-preserving-hom-Poset = pr1
 
-  preserves-joins-hom-join-Poset :
-    (f : hom-join-Poset) →
-    preserves-joins-Poset (map-hom-join-Poset f)
-  preserves-joins-hom-join-Poset = pr2
+  preserves-joins-join-preserving-hom-Poset :
+    (f : join-preserving-hom-Poset) →
+    preserves-joins-Poset (map-join-preserving-hom-Poset f)
+  preserves-joins-join-preserving-hom-Poset = pr2
 
-  sup-map-hom-join-Poset :
-    (f : hom-join-Poset) {x y : type-Poset P} →
+  sup-map-join-preserving-hom-Poset :
+    (f : join-preserving-hom-Poset) {x y : type-Poset P} →
     has-least-binary-upper-bound-Poset P x y →
     has-least-binary-upper-bound-Poset Q
-      ( map-hom-join-Poset f x)
-      ( map-hom-join-Poset f y)
-  sup-map-hom-join-Poset f {x} {y} s =
-    ( map-hom-join-Poset f (pr1 s) , preserves-joins-hom-join-Poset f x y s)
+      ( map-join-preserving-hom-Poset f x)
+      ( map-join-preserving-hom-Poset f y)
+  sup-map-join-preserving-hom-Poset f {x} {y} s =
+    ( map-join-preserving-hom-Poset f (pr1 s) ,
+      preserves-joins-join-preserving-hom-Poset f x y s)
 ```
 
 ## Properties
@@ -148,42 +150,53 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  htpy-hom-join-Poset : (f g : hom-join-Poset P Q) → UU (l1 ⊔ l3)
-  htpy-hom-join-Poset f g = map-hom-join-Poset P Q f ~ map-hom-join-Poset P Q g
+  htpy-join-preserving-hom-Poset :
+    (f g : join-preserving-hom-Poset P Q) → UU (l1 ⊔ l3)
+  htpy-join-preserving-hom-Poset f g =
+    map-join-preserving-hom-Poset P Q f ~ map-join-preserving-hom-Poset P Q g
 
-  refl-htpy-hom-join-Poset : (f : hom-join-Poset P Q) → htpy-hom-join-Poset f f
-  refl-htpy-hom-join-Poset f = refl-htpy
+  refl-htpy-join-preserving-hom-Poset :
+    (f : join-preserving-hom-Poset P Q) → htpy-join-preserving-hom-Poset f f
+  refl-htpy-join-preserving-hom-Poset f = refl-htpy
 
-  htpy-eq-hom-join-Poset :
-    (f g : hom-join-Poset P Q) → f ＝ g → htpy-hom-join-Poset f g
-  htpy-eq-hom-join-Poset f .f refl = refl-htpy-hom-join-Poset f
+  htpy-eq-join-preserving-hom-Poset :
+    (f g : join-preserving-hom-Poset P Q) →
+    f ＝ g → htpy-join-preserving-hom-Poset f g
+  htpy-eq-join-preserving-hom-Poset f .f refl =
+    refl-htpy-join-preserving-hom-Poset f
 
-  is-torsorial-htpy-hom-join-Poset :
-    (f : hom-join-Poset P Q) → is-torsorial (htpy-hom-join-Poset f)
-  is-torsorial-htpy-hom-join-Poset f =
+  is-torsorial-htpy-join-preserving-hom-Poset :
+    (f : join-preserving-hom-Poset P Q) →
+    is-torsorial (htpy-join-preserving-hom-Poset f)
+  is-torsorial-htpy-join-preserving-hom-Poset f =
     is-torsorial-Eq-subtype
-      ( is-torsorial-htpy (map-hom-join-Poset P Q f))
+      ( is-torsorial-htpy (map-join-preserving-hom-Poset P Q f))
       ( is-prop-preserves-joins-Poset P Q)
-      ( map-hom-join-Poset P Q f)
+      ( map-join-preserving-hom-Poset P Q f)
       ( refl-htpy)
-      ( preserves-joins-hom-join-Poset P Q f)
+      ( preserves-joins-join-preserving-hom-Poset P Q f)
 
-  is-equiv-htpy-eq-hom-join-Poset :
-    (f g : hom-join-Poset P Q) → is-equiv (htpy-eq-hom-join-Poset f g)
-  is-equiv-htpy-eq-hom-join-Poset f =
+  is-equiv-htpy-eq-join-preserving-hom-Poset :
+    (f g : join-preserving-hom-Poset P Q) →
+    is-equiv (htpy-eq-join-preserving-hom-Poset f g)
+  is-equiv-htpy-eq-join-preserving-hom-Poset f =
     fundamental-theorem-id
-      ( is-torsorial-htpy-hom-join-Poset f)
-      ( htpy-eq-hom-join-Poset f)
+      ( is-torsorial-htpy-join-preserving-hom-Poset f)
+      ( htpy-eq-join-preserving-hom-Poset f)
 
-  extensionality-hom-join-Poset :
-    (f g : hom-join-Poset P Q) → (f ＝ g) ≃ htpy-hom-join-Poset f g
-  pr1 (extensionality-hom-join-Poset f g) = htpy-eq-hom-join-Poset f g
-  pr2 (extensionality-hom-join-Poset f g) = is-equiv-htpy-eq-hom-join-Poset f g
+  extensionality-join-preserving-hom-Poset :
+    (f g : join-preserving-hom-Poset P Q) →
+    (f ＝ g) ≃ htpy-join-preserving-hom-Poset f g
+  pr1 (extensionality-join-preserving-hom-Poset f g) =
+    htpy-eq-join-preserving-hom-Poset f g
+  pr2 (extensionality-join-preserving-hom-Poset f g) =
+    is-equiv-htpy-eq-join-preserving-hom-Poset f g
 
-  eq-htpy-hom-join-Poset :
-    (f g : hom-join-Poset P Q) → htpy-hom-join-Poset f g → f ＝ g
-  eq-htpy-hom-join-Poset f g =
-    map-inv-is-equiv (is-equiv-htpy-eq-hom-join-Poset f g)
+  eq-htpy-join-preserving-hom-Poset :
+    (f g : join-preserving-hom-Poset P Q) →
+    htpy-join-preserving-hom-Poset f g → f ＝ g
+  eq-htpy-join-preserving-hom-Poset f g =
+    map-inv-is-equiv (is-equiv-htpy-eq-join-preserving-hom-Poset f g)
 ```
 
 ### The identity join preserving map
@@ -193,12 +206,12 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  preserves-joins-id-Poset :
+  preserves-joins-id-hom-Poset :
     preserves-joins-Poset P P (id {A = type-Poset P})
-  preserves-joins-id-Poset x y s = pr2 s
+  preserves-joins-id-hom-Poset x y s = pr2 s
 
-  id-hom-join-Poset : hom-join-Poset P P
-  id-hom-join-Poset = id , preserves-joins-id-Poset
+  id-join-preserving-hom-Poset : join-preserving-hom-Poset P P
+  id-join-preserving-hom-Poset = id , preserves-joins-id-hom-Poset
 ```
 
 ### Composing join preserving maps
@@ -209,22 +222,24 @@ module _
   (P : Poset l1 l2) (Q : Poset l3 l4) (R : Poset l5 l6)
   where
 
-  preserves-joins-comp-Poset :
-    (g : hom-join-Poset Q R) (f : hom-join-Poset P Q) →
+  preserves-joins-comp-join-preserving-hom-Poset :
+    (g : join-preserving-hom-Poset Q R)
+    (f : join-preserving-hom-Poset P Q) →
     preserves-joins-Poset P R
-      ( map-hom-join-Poset Q R g ∘ map-hom-join-Poset P Q f)
-  preserves-joins-comp-Poset g f x y s =
-    preserves-joins-hom-join-Poset Q R g
-      ( map-hom-join-Poset P Q f x)
-      ( map-hom-join-Poset P Q f y)
-      ( sup-map-hom-join-Poset P Q f s)
+      ( map-join-preserving-hom-Poset Q R g ∘
+        map-join-preserving-hom-Poset P Q f)
+  preserves-joins-comp-join-preserving-hom-Poset g f x y s =
+    preserves-joins-join-preserving-hom-Poset Q R g
+      ( map-join-preserving-hom-Poset P Q f x)
+      ( map-join-preserving-hom-Poset P Q f y)
+      ( sup-map-join-preserving-hom-Poset P Q f s)
 
-  comp-hom-join-Poset :
-    (g : hom-join-Poset Q R) (f : hom-join-Poset P Q) →
-    hom-join-Poset P R
-  comp-hom-join-Poset g f =
-    map-hom-join-Poset Q R g ∘ map-hom-join-Poset P Q f ,
-    preserves-joins-comp-Poset g f
+  comp-join-preserving-hom-Poset :
+    (g : join-preserving-hom-Poset Q R) (f : join-preserving-hom-Poset P Q) →
+    join-preserving-hom-Poset P R
+  comp-join-preserving-hom-Poset g f =
+    map-join-preserving-hom-Poset Q R g ∘ map-join-preserving-hom-Poset P Q f ,
+    preserves-joins-comp-join-preserving-hom-Poset g f
 ```
 
 ### Unit laws for composition of join preserving maps
@@ -234,21 +249,21 @@ module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  left-unit-law-comp-hom-join-Poset :
-    (f : hom-join-Poset P Q) →
-    ( comp-hom-join-Poset P Q Q (id-hom-join-Poset Q) f) ＝ f
-  left-unit-law-comp-hom-join-Poset f =
-    eq-htpy-hom-join-Poset P Q
-      ( comp-hom-join-Poset P Q Q (id-hom-join-Poset Q) f)
+  left-unit-law-comp-join-preserving-hom-Poset :
+    (f : join-preserving-hom-Poset P Q) →
+    comp-join-preserving-hom-Poset P Q Q (id-join-preserving-hom-Poset Q) f ＝ f
+  left-unit-law-comp-join-preserving-hom-Poset f =
+    eq-htpy-join-preserving-hom-Poset P Q
+      ( comp-join-preserving-hom-Poset P Q Q (id-join-preserving-hom-Poset Q) f)
       ( f)
       ( refl-htpy)
 
-  right-unit-law-comp-hom-join-Poset :
-    (f : hom-join-Poset P Q) →
-    (comp-hom-join-Poset P P Q f (id-hom-join-Poset P)) ＝ f
-  right-unit-law-comp-hom-join-Poset f =
-    eq-htpy-hom-join-Poset P Q
-      ( comp-hom-join-Poset P P Q f (id-hom-join-Poset P))
+  right-unit-law-comp-join-preserving-hom-Poset :
+    (f : join-preserving-hom-Poset P Q) →
+    comp-join-preserving-hom-Poset P P Q f (id-join-preserving-hom-Poset P) ＝ f
+  right-unit-law-comp-join-preserving-hom-Poset f =
+    eq-htpy-join-preserving-hom-Poset P Q
+      ( comp-join-preserving-hom-Poset P P Q f (id-join-preserving-hom-Poset P))
       ( f)
       ( refl-htpy)
 ```
@@ -260,23 +275,35 @@ module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   (P : Poset l1 l2) (Q : Poset l3 l4)
   (R : Poset l5 l6) (S : Poset l7 l8)
-  (h : hom-join-Poset R S)
-  (g : hom-join-Poset Q R)
-  (f : hom-join-Poset P Q)
+  (h : join-preserving-hom-Poset R S)
+  (g : join-preserving-hom-Poset Q R)
+  (f : join-preserving-hom-Poset P Q)
   where
 
-  associative-comp-hom-join-Poset :
-    comp-hom-join-Poset P Q S (comp-hom-join-Poset Q R S h g) f ＝
-    comp-hom-join-Poset P R S h (comp-hom-join-Poset P Q R g f)
-  associative-comp-hom-join-Poset =
-    eq-htpy-hom-join-Poset P S
-      ( comp-hom-join-Poset P Q S (comp-hom-join-Poset Q R S h g) f)
-      ( comp-hom-join-Poset P R S h (comp-hom-join-Poset P Q R g f))
+  associative-comp-join-preserving-hom-Poset :
+    comp-join-preserving-hom-Poset P Q S
+      ( comp-join-preserving-hom-Poset Q R S h g)
+      ( f) ＝
+    comp-join-preserving-hom-Poset P R S
+      ( h)
+      ( comp-join-preserving-hom-Poset P Q R g f)
+  associative-comp-join-preserving-hom-Poset =
+    eq-htpy-join-preserving-hom-Poset P S
+      ( comp-join-preserving-hom-Poset P Q S
+        ( comp-join-preserving-hom-Poset Q R S h g)
+        ( f))
+      ( comp-join-preserving-hom-Poset P R S
+        ( h)
+        ( comp-join-preserving-hom-Poset P Q R g f))
       ( refl-htpy)
 
-  involutive-eq-associative-comp-hom-join-Poset :
-    comp-hom-join-Poset P Q S (comp-hom-join-Poset Q R S h g) f ＝ⁱ
-    comp-hom-join-Poset P R S h (comp-hom-join-Poset P Q R g f)
-  involutive-eq-associative-comp-hom-join-Poset =
-    involutive-eq-eq associative-comp-hom-join-Poset
+  involutive-eq-associative-comp-join-preserving-hom-Poset :
+    comp-join-preserving-hom-Poset P Q S
+      ( comp-join-preserving-hom-Poset Q R S h g)
+      ( f) ＝ⁱ
+    comp-join-preserving-hom-Poset P R S
+      ( h)
+      ( comp-join-preserving-hom-Poset P Q R g f)
+  involutive-eq-associative-comp-join-preserving-hom-Poset =
+    involutive-eq-eq associative-comp-join-preserving-hom-Poset
 ```

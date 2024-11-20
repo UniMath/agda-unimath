@@ -40,13 +40,13 @@ both `x i ≤ x k` and `x j ≤ x k` hold.
 
 ## Definitions
 
-### The predicate on a family of being directed
+### The predicate on a family of elements of a poset of being directed
 
 ```agda
-is-directed-family-Poset-Prop :
+is-directed-prop-family-Poset :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
   (x : type-Inhabited-Type I → type-Poset P) → Prop (l2 ⊔ l3)
-is-directed-family-Poset-Prop P I x =
+is-directed-prop-family-Poset P I x =
   ∀'
     ( type-Inhabited-Type I)
     ( λ i →
@@ -60,10 +60,10 @@ is-directed-family-Poset-Prop P I x =
 is-directed-family-Poset :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
   (α : type-Inhabited-Type I → type-Poset P) → UU (l2 ⊔ l3)
-is-directed-family-Poset P I x = type-Prop (is-directed-family-Poset-Prop P I x)
+is-directed-family-Poset P I x = type-Prop (is-directed-prop-family-Poset P I x)
 ```
 
-### The type of directed families in a poset
+### The type of directed families of elements in a poset
 
 ```agda
 directed-family-Poset :
@@ -114,7 +114,8 @@ module _
   is-inhabited-type-reindex-directed-family-Poset :
     is-inhabited type-reindex-directed-family-Poset
   is-inhabited-type-reindex-directed-family-Poset =
-    is-inhabited-surjects-onto f (is-inhabited-type-directed-family-Poset P x)
+    is-inhabited-domain-surjection f
+      ( is-inhabited-type-directed-family-Poset P x)
 
   inhabited-type-reindex-directed-family-Poset : Inhabited-Type l4
   inhabited-type-reindex-directed-family-Poset =
@@ -134,7 +135,7 @@ module _
     is-directed-family-reindex-directed-family-Poset u v =
       elim-exists
         ( exists-structure-Prop type-reindex-directed-family-Poset _)
-        (λ z y →
+        ( λ z y →
           rec-trunc-Prop
             ( exists-structure-Prop type-reindex-directed-family-Poset _)
             ( λ p →
@@ -177,7 +178,7 @@ module _
     reindex-directed-family-Poset P x (surjection-inv-equiv f)
 ```
 
-### Mapping directed families in a poset under an order preserving map
+### The action of order preserving maps on directed families
 
 ```agda
 module _

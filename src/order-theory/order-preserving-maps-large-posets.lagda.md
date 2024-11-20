@@ -82,7 +82,7 @@ module _
     preserves-order-hom-Large-Preorder f
 ```
 
-### The induced order preserving maps on small posets
+### The induced order preserving maps between small posets
 
 ```agda
 module _
