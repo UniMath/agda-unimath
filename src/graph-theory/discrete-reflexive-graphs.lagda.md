@@ -100,10 +100,10 @@ module _
   where
 
   discrete-Reflexive-Graph : Reflexive-Graph l1 l1
-  pr1 discrete-Reflexive-Graph = A
-  pr1 (pr2 discrete-Reflexive-Graph) = Id
-  pr2 (pr2 discrete-Reflexive-Graph) a = refl
-
+  pr1 (pr1 discrete-Reflexive-Graph) = A
+  pr2 (pr1 discrete-Reflexive-Graph) = Id
+  pr2 discrete-Reflexive-Graph x = refl
+  
   is-discrete-discrete-Reflexive-Graph :
     is-discrete-Reflexive-Graph discrete-Reflexive-Graph
   is-discrete-discrete-Reflexive-Graph =
