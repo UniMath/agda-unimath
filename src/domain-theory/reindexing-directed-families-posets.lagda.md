@@ -32,7 +32,14 @@ open import order-theory.posets
 
 ## Idea
 
-TODO
+Given a [directed family](domain-theory.directed-families-posets.md) `x : J → P`
+in a [poset](order-theory.posets.md) `P` and a
+[surjection](foundation.surjective-maps.md) `f : I ↠ J`, then we can
+{{#concept "reindex" Disambiguation="directed family in a poset" Agda=reindex-directed-family-Poset}}
+the directed family `x` by `f` to obtain another directed family
+`x ∘ f : I → P`. The requirement that `f` is surjective guarantees that
+[upper bounds](order-theory.upper-bounds-posets.md) in `x` also
+[exist](foundation.existential-quantification.md) in `x ∘ f`.
 
 ## Definitions
 
