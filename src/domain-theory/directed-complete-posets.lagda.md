@@ -34,7 +34,7 @@ is a [poset](order-theory.posets.md) such that all
 
 ## Definitions
 
-### The predicate on posets of being a directed complete
+### The predicate on posets of being directed complete
 
 ```agda
 module _

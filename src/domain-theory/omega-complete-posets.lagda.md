@@ -45,7 +45,7 @@ in `P`, i.e., ascending chain indexed by the
 
 ## Definitions
 
-### The predicate on posets of being a ω-complete
+### The predicate on posets of being ω-complete
 
 ```agda
 module _
