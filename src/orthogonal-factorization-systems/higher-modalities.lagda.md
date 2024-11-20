@@ -366,7 +366,7 @@ module _
       ( map-inv-equiv-is-small is-small-x'=y')
       ( is-retraction-map-inv-is-equiv is-modal-small-x'=y'
         ( map-equiv-is-small is-small-x'=y' p))) ∙
-    ( is-retraction-map-inv-equiv (equiv-is-small is-small-x'=y') p)
+    ( is-retraction-map-inv-equiv-is-small is-small-x'=y' p)
     where
       is-small-x'=y' = is-locally-small-operator-higher-modality m X x' y'
       is-modal-small-x'=y' =
@@ -457,14 +457,11 @@ module _
 
   is-modal-operator-type-higher-modality :
     is-modal (unit-higher-modality m) (operator-higher-modality m X)
-  pr1 (pr1 is-modal-operator-type-higher-modality) =
-    map-inv-unit-higher-modality
-  pr2 (pr1 is-modal-operator-type-higher-modality) =
-    is-section-map-inv-unit-higher-modality
-  pr1 (pr2 is-modal-operator-type-higher-modality) =
-    map-inv-unit-higher-modality
-  pr2 (pr2 is-modal-operator-type-higher-modality) =
-    is-retraction-map-inv-unit-higher-modality
+  is-modal-operator-type-higher-modality =
+    is-equiv-is-invertible
+      map-inv-unit-higher-modality
+      is-section-map-inv-unit-higher-modality
+      is-retraction-map-inv-unit-higher-modality
 ```
 
 ### Higher modalities are uniquely eliminating modalities
@@ -499,14 +496,11 @@ module _
   is-equiv-ind-higher-modality :
     {X : UU l} (P : operator-higher-modality m X → UU l) →
     is-equiv (ind-higher-modality m P)
-  pr1 (pr1 (is-equiv-ind-higher-modality P)) =
-    precomp-Π (unit-higher-modality m) (operator-higher-modality m ∘ P)
-  pr2 (pr1 (is-equiv-ind-higher-modality P)) =
-    is-retraction-ind-higher-modality P
-  pr1 (pr2 (is-equiv-ind-higher-modality P)) =
-    precomp-Π (unit-higher-modality m) (operator-higher-modality m ∘ P)
-  pr2 (pr2 (is-equiv-ind-higher-modality P)) =
-    is-section-ind-higher-modality m
+  is-equiv-ind-higher-modality P =
+    is-equiv-is-invertible
+      ( precomp-Π (unit-higher-modality m) (operator-higher-modality m ∘ P))
+      ( is-retraction-ind-higher-modality P)
+      ( is-section-ind-higher-modality m)
 
   equiv-ind-higher-modality :
     {X : UU l} (P : operator-higher-modality m X → UU l) →

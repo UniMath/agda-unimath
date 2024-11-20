@@ -1,7 +1,7 @@
 # Homomorphisms of suplattices
 
 ```agda
-module order-theory.homomorphisms-sup-lattices where
+module order-theory.homomorphisms-suplattices where
 ```
 
 <details><summary>Imports</summary>
