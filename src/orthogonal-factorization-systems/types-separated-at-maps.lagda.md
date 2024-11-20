@@ -1,7 +1,7 @@
-# Separated types
+# Types separated at maps
 
 ```agda
-module orthogonal-factorization-systems.separated-types where
+module orthogonal-factorization-systems.types-separated-at-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +10,7 @@ module orthogonal-factorization-systems.separated-types where
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
@@ -19,7 +19,7 @@ open import orthogonal-factorization-systems.local-types
 
 A type `A` is said to be **separated** with respect to a map `f`, or
 **`f`-separated**, if its [identity types](foundation-core.identity-types.md)
-are [`f`-local](orthogonal-factorization-systems.local-types.md).
+are [`f`-local](orthogonal-factorization-systems.types-local-at-maps.md).
 
 ## Definition
 

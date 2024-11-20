@@ -39,6 +39,24 @@ graph whose vertices are elements of `X`, and edges are
   E x y := (x ＝ y).
 ```
 
+For any type `A` there is a
+{{#concept "standard discrete reflexive graph" Agda=standard-Discrete-Reflexive-Graph}}
+`Δ A`, which is defined by
+
+```text
+  (Δ A)₀ := A
+  (Δ A)₁ := Id A
+  refl (Δ A) := refl
+```
+
+Since torsorial type families are
+[identity systems](foundation.identity-systems.md), it follows that a reflexive
+graph is discrete precisely when its edge relation is initial. In other words,
+the inclusion of the discrete reflexive graphs into the reflexive graphs
+satisfies the universal property of being left adjoint to the forgetful functor
+`G ↦ Δ G₀`, mapping a reflexive graph to the standard discrete graph on its type
+of vertices.
+
 ## Definitions
 
 ### The predicate on reflexive graphs of being discrete
@@ -60,6 +78,41 @@ module _
   is-prop-is-discrete-Reflexive-Graph : is-prop is-discrete-Reflexive-Graph
   is-prop-is-discrete-Reflexive-Graph =
     is-prop-type-Prop is-discrete-prop-Reflexive-Graph
+```
+
+### Discrete reflexive graphs
+
+```agda
+module _
+  (l1 l2 : Level)
+  where
+
+  Discrete-Reflexive-Graph : UU (lsuc l1 ⊔ lsuc l2)
+  Discrete-Reflexive-Graph =
+    Σ (Reflexive-Graph l1 l2) is-discrete-Reflexive-Graph
+```
+
+### The standard discrete reflexive graph
+
+```agda
+module _
+  {l1 : Level} (A : UU l1)
+  where
+
+  discrete-Reflexive-Graph : Reflexive-Graph l1 l1
+  pr1 discrete-Reflexive-Graph = A
+  pr1 (pr2 discrete-Reflexive-Graph) = Id
+  pr2 (pr2 discrete-Reflexive-Graph) a = refl
+
+  is-discrete-discrete-Reflexive-Graph :
+    is-discrete-Reflexive-Graph discrete-Reflexive-Graph
+  is-discrete-discrete-Reflexive-Graph =
+    is-torsorial-Id
+
+  standard-Discrete-Reflexive-Graph :
+    Discrete-Reflexive-Graph l1 l1
+  pr1 standard-Discrete-Reflexive-Graph = discrete-Reflexive-Graph
+  pr2 standard-Discrete-Reflexive-Graph = is-discrete-discrete-Reflexive-Graph
 ```
 
 ## See also
