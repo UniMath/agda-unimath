@@ -14,6 +14,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -21,18 +22,19 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.torsorial-type-families
 ```
 
 </details>
 
 ## Idea
 
-A functional dependent correspondence is a dependent binary correspondence
-`C : Π (a : A) → B a → 𝒰` from a type `A` to a type family `B` over `A` such
-that for every `a : A` the type `Σ (b : B a), C a b` is contractible. The type
-of dependent functions from `A` to `B` is equivalent to the type of functional
-dependent correspondences.
+A
+{{#concept "functional (dependent) correspondence" Agda=is-functional-correspondence}}
+is a dependent binary correspondence `C : Π (a : A) → B a → 𝒰` from a type `A`
+to a type family `B` over `A` such that for every `a : A` the type family
+`C a : B a → Type` is [torsorial](foundation-core.torsorial-type-families.md).
+The type of dependent functions from `A` to `B` is equivalent to the type of
+functional dependent correspondences.
 
 ## Definition
 
@@ -41,7 +43,7 @@ is-functional-correspondence-Prop :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (a : A) → B a → UU l3) →
   Prop (l1 ⊔ l2 ⊔ l3)
 is-functional-correspondence-Prop {A = A} {B} C =
-  Π-Prop A (λ x → is-contr-Prop (Σ (B x) (C x)))
+  Π-Prop A (λ x → is-torsorial-Prop (C x))
 
 is-functional-correspondence :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (a : A) → B a → UU l3) →

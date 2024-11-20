@@ -130,7 +130,8 @@ open import foundation.diagonal-maps-of-types public
 open import foundation.diagonal-span-diagrams public
 open import foundation.diagonals-of-maps public
 open import foundation.diagonals-of-morphisms-arrows public
-open import foundation.discrete-relations public
+open import foundation.discrete-binary-relations public
+open import foundation.discrete-reflexive-relations public
 open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
@@ -349,7 +350,7 @@ open import foundation.retractions public
 open import foundation.retracts-of-maps public
 open import foundation.retracts-of-types public
 open import foundation.sections public
-open import foundation.separated-types public
+open import foundation.separated-types-subuniverses public
 open import foundation.sequences public
 open import foundation.sequential-limits public
 open import foundation.set-presented-types public
