@@ -40,9 +40,9 @@ module _
   {l1 l2 l3 l4 : Level} (P : Preorder l1 l2) (Q : Preorder l3 l4)
   where
 
-  preserves-order-Preorder-Prop :
+  preserves-order-prop-Preorder :
     (type-Preorder P → type-Preorder Q) → Prop (l1 ⊔ l2 ⊔ l4)
-  preserves-order-Preorder-Prop f =
+  preserves-order-prop-Preorder f =
     Π-Prop
       ( type-Preorder P)
       ( λ x →
@@ -56,13 +56,13 @@ module _
   preserves-order-Preorder :
     (type-Preorder P → type-Preorder Q) → UU (l1 ⊔ l2 ⊔ l4)
   preserves-order-Preorder f =
-    type-Prop (preserves-order-Preorder-Prop f)
+    type-Prop (preserves-order-prop-Preorder f)
 
   is-prop-preserves-order-Preorder :
     (f : type-Preorder P → type-Preorder Q) →
     is-prop (preserves-order-Preorder f)
   is-prop-preserves-order-Preorder f =
-    is-prop-type-Prop (preserves-order-Preorder-Prop f)
+    is-prop-type-Prop (preserves-order-prop-Preorder f)
 
   hom-Preorder : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Preorder =
