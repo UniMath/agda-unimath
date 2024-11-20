@@ -12,5 +12,6 @@ open import domain-theory.kleenes-fixed-point-theorem-posets public
 open import domain-theory.omega-complete-posets public
 open import domain-theory.omega-continuous-maps-omega-complete-posets public
 open import domain-theory.omega-continuous-maps-posets public
+open import domain-theory.reindexing-directed-families-posets public
 open import domain-theory.scott-continuous-maps-posets public
 ```

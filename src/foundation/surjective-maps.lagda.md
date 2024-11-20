@@ -851,9 +851,9 @@ module _
       ( is-inhabited-Prop A)
       ( rec-trunc-Prop (is-inhabited-Prop A) (unit-trunc-Prop ∘ pr1) ∘ F)
 
-  is-inhabited-domain-surjection :
+  is-inhabited-surjection :
     A ↠ B → is-inhabited B → is-inhabited A
-  is-inhabited-domain-surjection f =
+  is-inhabited-surjection f =
     is-inhabited-is-surjective (is-surjective-map-surjection f)
 ```
 

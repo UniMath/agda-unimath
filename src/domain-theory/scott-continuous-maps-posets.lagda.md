@@ -8,6 +8,7 @@ module domain-theory.scott-continuous-maps-posets where
 
 ```agda
 open import domain-theory.directed-families-posets
+open import domain-theory.reindexing-directed-families-posets
 
 open import foundation.booleans
 open import foundation.dependent-pair-types

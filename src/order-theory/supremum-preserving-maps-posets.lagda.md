@@ -149,22 +149,7 @@ module _
 
 ### Supremum preserving maps preserve joins
 
-```text
-module _
-  {l1 l2 l3 l4 l5 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
-  where
-
-  abstract
-    preserves-joins-preserves-suprema-Poset :
-      {f : type-Poset P → type-Poset Q} →
-      preserves-suprema-Poset P Q l5 f →
-      preserves-joins-Poset P Q f
-    preserves-joins-preserves-suprema-Poset {f} H x y s =
-      is-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset
-        ( Q)
-        ( rec-bool (f x) (f y))
-        ( f (pr1 s) , ？) -- TODO
-```
+> This remains to be formalized.
 
 From this property the next is a simple corollary.
 
