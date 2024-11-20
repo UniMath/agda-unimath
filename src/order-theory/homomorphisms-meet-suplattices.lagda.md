@@ -1,7 +1,7 @@
 # Homomorphisms of meet sup lattices
 
 ```agda
-module order-theory.homomorphisms-meet-sup-lattices where
+module order-theory.homomorphisms-meet-suplattices where
 ```
 
 <details><summary>Imports</summary>
@@ -13,7 +13,7 @@ open import foundation.function-types
 open import foundation.universe-levels
 
 open import order-theory.homomorphisms-meet-semilattices
-open import order-theory.homomorphisms-sup-lattices
+open import order-theory.homomorphisms-suplattices
 open import order-theory.meet-suplattices
 open import order-theory.order-preserving-maps-posets
 ```

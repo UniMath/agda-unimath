@@ -45,8 +45,8 @@ open import order-theory.homomorphisms-large-locales public
 open import order-theory.homomorphisms-large-meet-semilattices public
 open import order-theory.homomorphisms-large-suplattices public
 open import order-theory.homomorphisms-meet-semilattices public
-open import order-theory.homomorphisms-meet-sup-lattices public
-open import order-theory.homomorphisms-sup-lattices public
+open import order-theory.homomorphisms-meet-suplattices public
+open import order-theory.homomorphisms-suplattices public
 open import order-theory.ideals-preorders public
 open import order-theory.incidence-algebras public
 open import order-theory.inflattices public
