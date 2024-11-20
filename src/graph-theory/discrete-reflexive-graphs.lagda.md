@@ -103,7 +103,7 @@ module _
   pr1 (pr1 discrete-Reflexive-Graph) = A
   pr2 (pr1 discrete-Reflexive-Graph) = Id
   pr2 discrete-Reflexive-Graph x = refl
-  
+
   is-discrete-discrete-Reflexive-Graph :
     is-discrete-Reflexive-Graph discrete-Reflexive-Graph
   is-discrete-discrete-Reflexive-Graph =
