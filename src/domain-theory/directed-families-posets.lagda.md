@@ -40,7 +40,7 @@ both `x i ≤ x k` and `x j ≤ x k` hold.
 
 ## Definitions
 
-### The predicate on a family of elements of a poset of being directed
+### The predicate on a family of elements in a poset of being directed
 
 ```agda
 is-directed-prop-family-Poset :
