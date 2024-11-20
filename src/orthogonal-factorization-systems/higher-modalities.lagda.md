@@ -365,7 +365,7 @@ module _
       ( map-inv-equiv-is-small is-small-x'=y')
       ( is-retraction-map-inv-is-equiv is-modal-small-x'=y'
         ( map-equiv-is-small is-small-x'=y' p))) ∙
-    ( is-retraction-map-inv-equiv (equiv-is-small is-small-x'=y') p)
+    ( is-retraction-map-inv-equiv-is-small is-small-x'=y') p)
     where
       is-small-x'=y' = is-locally-small-operator-higher-modality m X x' y'
       is-modal-small-x'=y' =

@@ -70,9 +70,9 @@ module _
   pr2 hom-inv-resize-Preorder x y v =
     concatenate-leq-eq-Preorder P
       ( concatenate-eq-leq-Preorder P
-        ( is-retraction-map-inv-equiv (equiv-is-small H) x)
+        ( is-retraction-map-inv-equiv-is-small H x)
         ( v))
-      ( inv (is-retraction-map-inv-equiv (equiv-is-small H) y))
+      ( inv (is-retraction-map-inv-equiv-is-small H y))
 
   is-right-inverse-hom-inv-resize-Preorder :
     htpy-hom-Preorder P P
@@ -81,7 +81,7 @@ module _
         ( hom-inv-resize-Preorder))
       ( id-hom-Preorder P)
   is-right-inverse-hom-inv-resize-Preorder =
-    is-retraction-map-inv-equiv (equiv-is-small H)
+    is-retraction-map-inv-equiv-is-small H
 
   is-left-inverse-hom-inv-resize-Preorder :
     htpy-hom-Preorder (resize-Preorder P H) (resize-Preorder P H)
@@ -93,5 +93,5 @@ module _
         ( hom-resize-Preorder))
       ( id-hom-Preorder (resize-Preorder P H))
   is-left-inverse-hom-inv-resize-Preorder =
-    is-section-map-inv-equiv (equiv-is-small H)
+    is-section-map-inv-equiv-is-small H
 ```

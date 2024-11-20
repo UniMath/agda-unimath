@@ -63,8 +63,7 @@ module _
   is-least-upper-bound-sup-resize-Suplattice x u =
       ( concatenate-eq-leq-Poset
           ( poset-Suplattice P)
-          ( is-retraction-map-inv-equiv
-            ( equiv-is-small H)
+          ( is-retraction-map-inv-equiv-is-small H
             ( sup-Suplattice P (map-inv-equiv-is-small H ∘ x))) ∘
         pr1
           ( is-least-upper-bound-sup-Suplattice P
@@ -77,7 +76,7 @@ module _
           ( concatenate-eq-leq-Poset
             ( poset-Suplattice P)
             ( inv
-              ( is-retraction-map-inv-equiv (equiv-is-small H)
+              ( is-retraction-map-inv-equiv-is-small H
                 ( sup-Suplattice P (map-inv-equiv-is-small H ∘ x))))))
 
   is-suplattice-resize-Suplattice :
