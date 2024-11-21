@@ -317,7 +317,6 @@ open import foundation.precomposition-dependent-functions public
 open import foundation.precomposition-functions public
 open import foundation.precomposition-functions-into-subuniverses public
 open import foundation.precomposition-type-families public
-open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public
 open import foundation.preunivalent-type-families public
 open import foundation.principle-of-omniscience public
