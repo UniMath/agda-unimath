@@ -154,7 +154,7 @@ abstract
       ( trunc-Prop (fiber (map-unit-im f) (y , z)))
       ( α)
     where
-    α : fiber f y → type-Prop (trunc-Prop (fiber (map-unit-im f) (y , z)))
+    α : fiber f y → type-trunc-Prop (fiber (map-unit-im f) (y , z))
     α (x , p) = unit-trunc-Prop (x , eq-type-subtype (trunc-Prop ∘ fiber f) p)
 ```
 
