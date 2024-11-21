@@ -302,6 +302,7 @@ open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-cosplit-maps public
 open import foundation.path-split-maps public
+open import foundation.path-split-type-families public
 open import foundation.perfect-images public
 open import foundation.permutations-spans-families-of-types public
 open import foundation.pi-decompositions public

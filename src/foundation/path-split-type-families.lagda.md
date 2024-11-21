@@ -7,20 +7,20 @@ module foundation.path-split-type-families where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.transport-along-identifications
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.sections
-open import foundation-core.subtypes
-open import foundation.embeddings
-open import foundation-core.equality-dependent-pair-types
 open import foundation-core.dependent-identifications
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.sections
+open import foundation-core.subtypes
 ```
 
 </details>
@@ -87,7 +87,6 @@ module _
   {l1 l2 : Level} {A : UU l1} {P : A → UU l2}
   (H : is-path-split-family P)
   where
-
 
   all-elements-equal-is-path-split-family : {x : A} (u v : P x) → u ＝ v
   all-elements-equal-is-path-split-family u v = H refl u v
