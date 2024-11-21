@@ -74,7 +74,7 @@ module _
     type-Poset poset-Meet-Suplattice
 
   leq-meet-suplattice-Prop : (x y : type-Meet-Suplattice) → Prop l1
-  leq-meet-suplattice-Prop = leq-Poset-Prop poset-Meet-Suplattice
+  leq-meet-suplattice-Prop = leq-prop-Poset poset-Meet-Suplattice
 
   leq-Meet-Suplattice : (x y : type-Meet-Suplattice) → UU l1
   leq-Meet-Suplattice = leq-Poset poset-Meet-Suplattice

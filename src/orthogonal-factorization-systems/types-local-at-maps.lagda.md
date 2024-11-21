@@ -1,7 +1,7 @@
-# Local types
+# Types local at maps
 
 ```agda
-module orthogonal-factorization-systems.local-types where
+module orthogonal-factorization-systems.types-local-at-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -56,7 +56,7 @@ We reserve the name `is-local` for when `A` does not vary over `Y`, and specify
 with `is-local-dependent-type` when it does.
 
 Note that a local dependent type is not the same as a
-[local family](orthogonal-factorization-systems.local-families-of-types.md).
+[local family](orthogonal-factorization-systems.families-of-types-local-at-maps.md).
 While a local family is a type family `P` on some other indexing type `A`, such
 that each fiber is local as a nondependent type over `Y`, a local dependent type
 is a local type that additionally may vary over `Y`. Concretely, a local
@@ -163,6 +163,26 @@ module _
 
   is-local-inv-equiv : B ≃ A → is-local f B → is-local f A
   is-local-inv-equiv e = is-local-dependent-type-inv-fam-equiv f (λ _ → e)
+```
+
+### Local types are closed under retracts
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {X : UU l1} {Y : UU l2} {A : UU l3} {B : UU l4}
+  {f : X → Y}
+  where
+
+  is-local-retract : A retract-of B → is-local f B → is-local f A
+  is-local-retract R =
+    is-equiv-retract-map-is-equiv'
+      ( precomp f A)
+      ( precomp f B)
+      ( retract-postcomp Y R)
+      ( retract-postcomp X R)
+      ( refl-htpy)
+      ( refl-htpy)
 ```
 
 ### Locality is preserved by homotopies
@@ -275,7 +295,7 @@ module _
     is-equiv-is-local-domains' (pr1 is-local-X)
 ```
 
-### Propositions are `f`-local if `_∘ f` has a converse
+### Propositions are `f`-local if `- ∘ f` has a converse
 
 ```agda
 module _
@@ -344,20 +364,14 @@ module _
 is-contr-is-local :
   {l : Level} (A : UU l) → is-local (λ (_ : empty) → star) A → is-contr A
 is-contr-is-local A is-local-A =
-  is-contr-is-equiv
+  is-contr-equiv
     ( empty → A)
-    ( λ a _ → a)
-    ( is-equiv-comp
-      ( λ a' _ → a' star)
-      ( λ a _ →
-        map-inv-is-equiv (is-equiv-map-left-unit-law-Π (λ _ → A)) a star)
-      ( is-equiv-map-inv-is-equiv (is-equiv-map-left-unit-law-Π (λ _ → A)))
-      ( is-local-A))
+    ( (precomp (λ _ → star) A , is-local-A) ∘e inv-left-unit-law-Π (λ _ → A))
     ( universal-property-empty' A)
 ```
 
 ## See also
 
-- [Local maps](orthogonal-factorization-systems.local-maps.md)
-- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
-- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)
+- [Local maps](orthogonal-factorization-systems.maps-local-at-maps.md)
+- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-at-maps.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-at-subuniverses.md)

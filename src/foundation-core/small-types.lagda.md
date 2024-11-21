@@ -22,11 +22,14 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -63,6 +66,25 @@ module _
 
   map-inv-equiv-is-small : type-is-small → A
   map-inv-equiv-is-small = map-inv-equiv equiv-is-small
+
+  is-section-map-inv-equiv-is-small :
+    is-section map-equiv-is-small map-inv-equiv-is-small
+  is-section-map-inv-equiv-is-small =
+    is-section-map-inv-equiv equiv-is-small
+
+  is-retraction-map-inv-equiv-is-small :
+    is-retraction map-equiv-is-small map-inv-equiv-is-small
+  is-retraction-map-inv-equiv-is-small =
+    is-retraction-map-inv-equiv equiv-is-small
+
+  coherence-map-inv-equiv-is-small :
+    coherence-is-coherently-invertible
+      ( map-equiv-is-small)
+      ( map-inv-equiv-is-small)
+      ( is-section-map-inv-equiv-is-small)
+      ( is-retraction-map-inv-equiv-is-small)
+  coherence-map-inv-equiv-is-small =
+    coherence-map-inv-equiv equiv-is-small
 ```
 
 ### The subuniverse of `UU l1`-small types in `UU l2`
@@ -95,20 +117,22 @@ module _
 ### Being small is a property
 
 ```agda
-is-prop-is-small :
-  (l : Level) {l1 : Level} (A : UU l1) → is-prop (is-small l A)
-is-prop-is-small l A =
-  is-prop-is-proof-irrelevant
-    ( λ Xe →
-      is-contr-equiv'
-        ( Σ (UU l) (λ Y → (pr1 Xe) ≃ Y))
-        ( equiv-tot ((λ Y → equiv-precomp-equiv (pr2 Xe) Y)))
-        ( is-torsorial-equiv (pr1 Xe)))
+module _
+  (l : Level) {l1 : Level} (A : UU l1)
+  where
 
-is-small-Prop :
-  (l : Level) {l1 : Level} (A : UU l1) → Prop (lsuc l ⊔ l1)
-pr1 (is-small-Prop l A) = is-small l A
-pr2 (is-small-Prop l A) = is-prop-is-small l A
+  is-proof-irrelevant-is-small : is-proof-irrelevant (is-small l A)
+  is-proof-irrelevant-is-small (X , e) =
+    is-contr-equiv'
+      ( Σ (UU l) (λ Y → X ≃ Y))
+      ( equiv-tot (equiv-precomp-equiv e))
+      ( is-torsorial-equiv X)
+
+  is-prop-is-small : is-prop (is-small l A)
+  is-prop-is-small = is-prop-is-proof-irrelevant is-proof-irrelevant-is-small
+
+  is-small-Prop : Prop (lsuc l ⊔ l1)
+  is-small-Prop = is-small l A , is-prop-is-small
 ```
 
 ### Any type in `UU l1` is `l1`-small
@@ -119,7 +143,7 @@ pr1 (is-small' {A = A}) = A
 pr2 is-small' = id-equiv
 ```
 
-### Every type of universe level `l1` is `l1 ⊔ l2`-small
+### Every type of universe level `l1` is `(l1 ⊔ l2)`-small
 
 ```agda
 module _
@@ -136,7 +160,7 @@ module _
   pr2 is-contr-is-small-lmax x = eq-is-prop (is-prop-is-small (l1 ⊔ l2) X)
 ```
 
-### Every type of universe level `l` is `UU (lsuc l)`-small
+### Every type of universe level `l` is `(lsuc l)`-small
 
 ```agda
 is-small-lsuc : {l : Level} (X : UU l) → is-small (lsuc l) X
