@@ -218,4 +218,4 @@ module _
 - [Commutator subgroup](https://en.wikipedia.org/wiki/Commutator_subgroup) at
   Wikipedia
 - [Commutator subgroup](https://mathworld.wolfram.com/CommutatorSubgroup.html)
-  at Wolfram Mathworld
+  at Wolfram MathWorld

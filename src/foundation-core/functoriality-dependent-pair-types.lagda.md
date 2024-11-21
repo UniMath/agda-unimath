@@ -7,11 +7,15 @@ module foundation-core.functoriality-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.families-of-equivalences
@@ -21,7 +25,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.retracts-of-types
-open import foundation-core.transport-along-identifications
+open import foundation-core.sections
 ```
 
 </details>
@@ -82,7 +86,7 @@ module _
 
   triangle-map-Σ :
     (f : A → B) (g : (x : A) → C x → D (f x)) →
-    (map-Σ f g) ~ (map-Σ-map-base f D ∘ tot g)
+    map-Σ f g ~ map-Σ-map-base f D ∘ tot g
   triangle-map-Σ f g t = refl
 ```
 
@@ -305,6 +309,78 @@ module _
     is-equiv-fiber-map-Σ-map-base-fiber t
 ```
 
+### The fibers of `map-Σ`
+
+We compute the fibers of `map-Σ` first in terms of `fiber'` and then in terms of
+`fiber`.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} (D : B → UU l4)
+  (f : A → B) (g : (x : A) → C x → D (f x)) (t : Σ B D)
+  where
+
+  fiber-map-Σ' : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  fiber-map-Σ' =
+    Σ (fiber' f (pr1 t)) (λ s → fiber' (g (pr1 s)) (tr D (pr2 s) (pr2 t)))
+
+  map-fiber-map-Σ' : fiber' (map-Σ D f g) t → fiber-map-Σ'
+  map-fiber-map-Σ' ((a , c) , refl) = (a , refl) , (c , refl)
+
+  map-inv-fiber-map-Σ' : fiber-map-Σ' → fiber' (map-Σ D f g) t
+  map-inv-fiber-map-Σ' ((a , p) , (c , q)) = ((a , c) , eq-pair-Σ p q)
+
+  abstract
+    is-section-map-inv-fiber-map-Σ' :
+      is-section map-fiber-map-Σ' map-inv-fiber-map-Σ'
+    is-section-map-inv-fiber-map-Σ' ((a , refl) , (c , refl)) = refl
+
+  abstract
+    is-retraction-map-inv-fiber-map-Σ' :
+      is-retraction map-fiber-map-Σ' map-inv-fiber-map-Σ'
+    is-retraction-map-inv-fiber-map-Σ' ((a , c) , refl) = refl
+
+  is-equiv-map-fiber-map-Σ' : is-equiv map-fiber-map-Σ'
+  is-equiv-map-fiber-map-Σ' =
+    is-equiv-is-invertible
+      map-inv-fiber-map-Σ'
+      is-section-map-inv-fiber-map-Σ'
+      is-retraction-map-inv-fiber-map-Σ'
+
+  compute-fiber-map-Σ' : fiber' (map-Σ D f g) t ≃ fiber-map-Σ'
+  compute-fiber-map-Σ' = (map-fiber-map-Σ' , is-equiv-map-fiber-map-Σ')
+
+  fiber-map-Σ : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  fiber-map-Σ =
+    Σ (fiber f (pr1 t)) (λ s → fiber (g (pr1 s)) (inv-tr D (pr2 s) (pr2 t)))
+
+  map-fiber-map-Σ : fiber (map-Σ D f g) t → fiber-map-Σ
+  map-fiber-map-Σ ((a , c) , refl) = (a , refl) , (c , refl)
+
+  map-inv-fiber-map-Σ : fiber-map-Σ → fiber (map-Σ D f g) t
+  map-inv-fiber-map-Σ ((a , refl) , c , refl) = ((a , c) , refl)
+
+  abstract
+    is-section-map-inv-fiber-map-Σ :
+      is-section map-fiber-map-Σ map-inv-fiber-map-Σ
+    is-section-map-inv-fiber-map-Σ ((a , refl) , (c , refl)) = refl
+
+  abstract
+    is-retraction-map-inv-fiber-map-Σ :
+      is-retraction map-fiber-map-Σ map-inv-fiber-map-Σ
+    is-retraction-map-inv-fiber-map-Σ ((a , c) , refl) = refl
+
+  is-equiv-map-fiber-map-Σ : is-equiv map-fiber-map-Σ
+  is-equiv-map-fiber-map-Σ =
+    is-equiv-is-invertible
+      map-inv-fiber-map-Σ
+      is-section-map-inv-fiber-map-Σ
+      is-retraction-map-inv-fiber-map-Σ
+
+  compute-fiber-map-Σ : fiber (map-Σ D f g) t ≃ fiber-map-Σ
+  compute-fiber-map-Σ = (map-fiber-map-Σ , is-equiv-map-fiber-map-Σ)
+```
+
 ### If `f : A → B` is a contractible map, then so is `map-Σ-map-base f C`
 
 ```agda
@@ -396,16 +472,16 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
   where
 
   fiber-triangle :
-    (x : X) → (fiber f x) → (fiber g x)
+    (x : X) → fiber f x → fiber g x
   pr1 (fiber-triangle .(f a) (pair a refl)) = h a
   pr2 (fiber-triangle .(f a) (pair a refl)) = inv (H a)
 
   square-tot-fiber-triangle :
-    ( h ∘ (map-equiv-total-fiber f)) ~
+    ( h ∘ map-equiv-total-fiber f) ~
     ( map-equiv-total-fiber g ∘ tot fiber-triangle)
   square-tot-fiber-triangle (pair .(f a) (pair a refl)) = refl
 ```
@@ -420,7 +496,7 @@ module _
 
   abstract
     is-fiberwise-equiv-is-equiv-triangle :
-      (E : is-equiv h) → is-fiberwise-equiv (fiber-triangle f g h H)
+      is-equiv h → is-fiberwise-equiv (fiber-triangle f g h H)
     is-fiberwise-equiv-is-equiv-triangle E =
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-top-is-equiv-bottom-square
@@ -455,8 +531,57 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  compute-map-Σ-id : map-Σ B id (λ x → id) ~ id
+  compute-map-Σ-id : map-Σ B id (λ _ → id) ~ id
   compute-map-Σ-id = refl-htpy
+```
+
+### `map-Σ` preserves composition of maps
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3}
+  {A' : A → UU l4} {B' : B → UU l5} {C' : C → UU l6}
+  {f : A → B} {f' : (x : A) → A' x → B' (f x)}
+  {g : B → C} {g' : (y : B) → B' y → C' (g y)}
+  where
+
+  preserves-comp-map-Σ :
+    map-Σ C' (g ∘ f) (λ x x' → g' (f x) (f' x x')) ~
+    map-Σ C' g g' ∘ map-Σ B' f f'
+  preserves-comp-map-Σ = refl-htpy
+```
+
+### Computing the action on identifications of `tot`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {X : A → UU l2} {Y : A → UU l3}
+  (g : (a : A) → X a → Y a) {a a' : A} {x : X a} {x' : X a'}
+  where
+
+  compute-ap-tot :
+    pair-eq-Σ ∘ ap (tot g) {a , x} {a' , x'} ~
+    tot (λ p q → inv (preserves-tr g p x) ∙ ap (g a') q) ∘ pair-eq-Σ
+  compute-ap-tot refl = refl
+```
+
+### Computing the action on identifications of the functorial action of Σ
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : A → UU l3} (Y : B → UU l4)
+  (f : A → B) (g : (a : A) → X a → Y (f a)) {a a' : A} {x : X a} {x' : X a'}
+  where
+
+  compute-ap-map-Σ :
+    pair-eq-Σ ∘ ap (map-Σ Y f g) ~
+    map-Σ
+      ( λ p → dependent-identification Y p (g a x) (g a' x'))
+      ( ap f {a} {a'})
+      ( λ p q → tr-ap f g p x ∙ ap (g a') q) ∘
+    pair-eq-Σ
+  compute-ap-map-Σ refl = refl
 ```
 
 ## See also

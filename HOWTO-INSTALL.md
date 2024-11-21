@@ -303,7 +303,7 @@ below to ensure a smooth setup and workflow. Also, please make sure to follow
 our [coding style](CODINGSTYLE.md) and
 [design principles](DESIGN-PRINCIPLES.md).
 
-### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
+### Pre-commit hooks and Python dependencies {#pre-commit-hooks}
 
 The agda-unimath library includes [pre-commit](https://pre-commit.com/) hooks
 that enforce [basic formatting rules](CONTRIBUTING.md). These will inform you of
@@ -333,7 +333,7 @@ Keep in mind that `pre-commit` is also a part of the Continuous Integration
 (CI), so any PR that violates the enforced conventions will be automatically
 blocked from merging.
 
-### <a name="build-website"></a>Building and viewing the website locally
+### Building and viewing the website locally {#build-website}
 
 The build process for the website uses the
 [Rust language](https://www.rust-lang.org/)'s package manager `cargo`. To

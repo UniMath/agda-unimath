@@ -7,6 +7,7 @@ module orthogonal-factorization-systems.null-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalences
@@ -29,9 +30,9 @@ open import foundation.universal-property-family-of-fibers-of-maps
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.local-maps
-open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.maps-local-at-maps
 open import orthogonal-factorization-systems.orthogonal-maps
+open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
@@ -226,4 +227,14 @@ module _
   is-local-is-null-fiber :
     (A : UU l3) → ((x : X) → is-null (fiber f x) A) → is-local f A
   is-local-is-null-fiber A = is-local-dependent-type-is-null-fiber (λ _ → A)
+```
+
+### Contractible types are null at all types
+
+```agda
+is-null-is-contr :
+  {l1 l2 : Level} {A : UU l1} (B : UU l2) → is-contr A → is-null B A
+is-null-is-contr {A = A} B is-contr-A =
+  is-null-is-local-terminal-map B A
+    ( is-local-is-contr (terminal-map B) A is-contr-A)
 ```

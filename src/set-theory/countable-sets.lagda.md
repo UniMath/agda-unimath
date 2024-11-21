@@ -20,6 +20,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
+open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -30,6 +31,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
+open import foundation.retracts-of-types
 open import foundation.sets
 open import foundation.shifting-sequences
 open import foundation.surjective-maps
@@ -289,6 +291,92 @@ module _
       ( is-countable-Prop X)
       ( λ D →
         ( unit-trunc-Prop (enumeration-decidable-subprojection-ℕ D)))
+```
+
+### If a countable set surjects onto a set, then the set is countable
+
+```agda
+module _
+  {l1 l2 : Level} (A : Set l1) (B : Set l2)
+  where
+
+  is-directly-countable-is-directly-countably-indexed' :
+    {f : type-Set A → type-Set B} → is-surjective f →
+    is-directly-countable A → is-directly-countable B
+  is-directly-countable-is-directly-countably-indexed' {f} F =
+    elim-exists
+      ( is-directly-countable-Prop B)
+      ( λ g G → intro-exists (f ∘ g) (is-surjective-comp F G))
+
+  is-directly-countable-is-directly-countably-indexed :
+    (type-Set A ↠ type-Set B) →
+    is-directly-countable A →
+    is-directly-countable B
+  is-directly-countable-is-directly-countably-indexed (f , F) =
+    is-directly-countable-is-directly-countably-indexed' F
+
+  is-countable-is-countably-indexed' :
+    {f : type-Set A → type-Set B} →
+    is-surjective f →
+    is-countable A →
+    is-countable B
+  is-countable-is-countably-indexed' {f} F =
+    elim-exists
+      ( is-countable-Prop B)
+      ( λ g G →
+        intro-exists
+          ( map-Maybe f ∘ g)
+          ( is-surjective-comp (is-surjective-map-is-surjective-Maybe F) G))
+
+  is-countable-is-countably-indexed :
+    (type-Set A ↠ type-Set B) →
+    is-countable A →
+    is-countable B
+  is-countable-is-countably-indexed (f , F) =
+    is-countable-is-countably-indexed' F
+```
+
+### Retracts of countable sets are countable
+
+```agda
+module _
+  {l1 l2 : Level} (A : Set l1) (B : Set l2)
+  (R : (type-Set B) retract-of (type-Set A))
+  where
+
+  is-directly-countable-retract-of :
+    is-directly-countable A → is-directly-countable B
+  is-directly-countable-retract-of =
+    is-directly-countable-is-directly-countably-indexed' A B
+      { map-retraction-retract R}
+      ( is-surjective-has-section
+        ( inclusion-retract R , is-retraction-map-retraction-retract R))
+
+  is-countable-retract-of :
+    is-countable A → is-countable B
+  is-countable-retract-of =
+    is-countable-is-countably-indexed' A B
+      { map-retraction-retract R}
+      ( is-surjective-has-section
+        ( inclusion-retract R , is-retraction-map-retraction-retract R))
+```
+
+### Countable sets are closed under equivalences
+
+```agda
+module _
+  {l1 l2 : Level} (A : Set l1) (B : Set l2) (e : type-Set B ≃ type-Set A)
+  where
+
+  is-directly-countable-equiv :
+    is-directly-countable A → is-directly-countable B
+  is-directly-countable-equiv =
+    is-directly-countable-retract-of A B (retract-equiv e)
+
+  is-countable-equiv :
+    is-countable A → is-countable B
+  is-countable-equiv =
+    is-countable-retract-of A B (retract-equiv e)
 ```
 
 ### The set of natural numbers ℕ is itself countable

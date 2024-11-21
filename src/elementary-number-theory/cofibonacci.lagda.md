@@ -30,11 +30,18 @@ open import foundation.universe-levels
 
 ## Idea
 
-The [**cofibonacci sequence**][1] is the unique function G : ℕ → ℕ satisfying
-the property that
+The {{#concept "cofibonacci sequence" Agda=cofibonacci}} is the unique function
+`G : ℕ → ℕ` satisfying the property that
 
 ```text
   div-ℕ (G m) n ↔ div-ℕ m (Fibonacci-ℕ n).
+```
+
+The sequence starts
+
+```text
+  n   0   1   2   3   4   5   6   7   8   9  10  11  12  13
+  Gₙ  1   3   4   6   5  12   8   6  12  15  10  12   7  24  ⋯
 ```
 
 ## Definitions
@@ -141,4 +148,4 @@ is-left-adjoint-cofibonacci m n = {!!}
 
 ## External links
 
-[1]: https://oeis.org/A001177
+- [A001177](https://oeis.org/A001177) in the OEIS

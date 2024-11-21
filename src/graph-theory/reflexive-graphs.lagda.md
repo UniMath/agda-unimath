@@ -8,6 +8,7 @@ module graph-theory.reflexive-graphs where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.reflexive-relations
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -41,6 +42,11 @@ module _
   refl-Reflexive-Graph : (x : vertex-Reflexive-Graph) → edge-Reflexive-Graph x x
   refl-Reflexive-Graph = pr2 (pr2 G)
 
+  edge-reflexive-relation-Reflexive-Graph :
+    Reflexive-Relation l2 vertex-Reflexive-Graph
+  pr1 edge-reflexive-relation-Reflexive-Graph = edge-Reflexive-Graph
+  pr2 edge-reflexive-relation-Reflexive-Graph = refl-Reflexive-Graph
+
   graph-Reflexive-Graph : Directed-Graph l1 l2
   graph-Reflexive-Graph = vertex-Reflexive-Graph , edge-Reflexive-Graph
 ```
@@ -55,4 +61,4 @@ module _
 - [Graph](https://www.wikidata.org/entity/Q141488) on Wikidata
 - [Directed graph](https://en.wikipedia.org/wiki/Directed_graph) at Wikipedia
 - [Reflexive graph](https://mathworld.wolfram.com/ReflexiveGraph.html) at
-  Wolfram Mathworld
+  Wolfram MathWorld

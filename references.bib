@@ -1,3 +1,15 @@
+@online{1000+theorems,
+  title  = {1000+ theorems},
+  author = {Freek Wiedijk},
+  url    = {https://1000-plus.github.io/}
+}
+
+@online{100theorems,
+  title  = {Formalizing 100 Theorems},
+  author = {Freek Wiedijk},
+  url    = {https://www.cs.ru.nl/~freek/100/}
+}
+
 @article{AKS15,
   title       = {Univalent Categories and the {{Rezk}} Completion},
   author      = {Ahrens, Benedikt and Kapulkin, Krzysztof and Shulman, Michael},
@@ -24,6 +36,22 @@
   archiveprefix = {arXiv},
   eprintclass   = {math},
   primaryclass  = {math.CT}
+}
+
+@article{AL19,
+  title       = {Displayed Categories},
+  author      = {Ahrens, Benedikt and {{LeFanu}} Lumsdaine, Peter},
+  doi         = {10.23638/LMCS-15(1:20)2019},
+  journal     = {{Logical Methods in Computer Science}},
+  volume      = {15},
+  issue       = {1},
+  year        = {2019},
+  month       = {03},
+  keywords    = {Mathematics - Category Theory ; Mathematics - Logic ; 18A15, 03B15, 03B70 ; F.4.1},
+  eprint      = {1705.04296},
+  eprinttype  = {arxiv},
+  eprintclass = {math},
+  langid      = {english}
 }
 
 @online{BCDE21,
@@ -79,7 +107,7 @@
   langid    = {hungarian}
 }
 
-@online{BvDR18,
+@inproceedings{BvDR18,
   title       = {Higher {{Groups}} in {{Homotopy Type Theory}}},
   author      = {Buchholtz, Ulrik and van Doorn, Floris and Rijke, Egbert},
   date        = {2018-02-12},
@@ -89,8 +117,15 @@
   eprinttype  = {arxiv},
   eprintclass = {cs, math},
   abstract    = {We present a development of the theory of higher groups, including infinity groups and connective spectra, in homotopy type theory. An infinity group is simply the loops in a pointed, connected type, where the group structure comes from the structure inherent in the identity types of Martin-L\"of type theory. We investigate ordinary groups from this viewpoint, as well as higher dimensional groups and groups that can be delooped more than once. A major result is the stabilization theorem, which states that if an $n$-type can be delooped $n+2$ times, then it is an infinite loop type. Most of the results have been formalized in the Lean proof assistant.},
-  pubstate    = {preprint},
-  keywords    = {03B15,Computer Science - Logic in Computer Science,F.4.1,Mathematics - Algebraic Topology,Mathematics - Logic}
+  isbn        = {9781450355834},
+  doi         = {10.1145/3209108.3209150},
+  pages       = {205--214},
+  numpages    = {10},
+  location    = {Oxford, United Kingdom},
+  booktitle   = {Proceedings of the 33rd Annual ACM/IEEE Symposium on Logic in Computer Science},
+  address     = {New York, NY, USA},
+  publisher   = {Association for Computing Machinery},
+  series      = {LICS '18}
 }
 
 @article{BW23,
@@ -479,10 +514,27 @@
   primaryclass  = {math.CT}
 }
 
-@online{OEIS,
-  title        = {The {{On-Line Encyclopedia}} of {{Integer Sequences}} ({{OEIS}})},
-  organization = {{{OEIS}} Foundation Inc.},
-  url          = {https://oeis.org/}
+@online{oeis,
+  title        = {The {{On-Line Encyclopedia}} of {{Integer Sequences}}},
+  author       = {OEIS Foundation Inc.},
+  date         = {1996},
+  citeas       = {OEIS},
+  url          = {https://oeis.org},
+  howpublished = {website},
+}
+
+@phdthesis{Qui16,
+  title = {Lawvere–Tierney sheafification in Homotopy Type Theory},
+  author = {Quirin, Kevin},
+  url = {https://kevinquirin.github.io/thesis/main.pdf},
+  year = {2016},
+  month = dec,
+  number = {2016EMNA0298},
+  school = {École des Mines de Nantes},
+  abstract = {The main goal of this thesis is to define an extension of Gödel not-not translation to all truncated types, in the setting of homotopy type theory. This goal will use some existing theories, like Lawvere–Tierney sheaves theory in toposes, we will adapt in the setting of homotopy type theory. In particular, we will define a Lawvere–Tierney sheafification functor, which is the main theorem presented in this thesis.
+  To define it, we will need some concepts, either already defined in type theory, either not existing yet. In particular, we will define a theory of colimits over graphs as well as their truncated version, and the notion of truncated modalities, based on the existing definition of modalities.
+  Almost all the result presented in this thesis are formalized with the proof assistant Coq together with the library [HoTT/Coq].},
+  langid = {english}
 }
 
 @book{Rie17,
@@ -698,6 +750,16 @@
   abstract  = {Sequential colimits are an important class of higher inductive types. We present a self-contained and fully formalized proof of the conjecture that in homotopy type theory sequential colimits appropriately commute with Σ-types. This result allows us to give short proofs of a number of useful corollaries, some of which were conjectured in other works: the commutativity of sequential colimits with identity types, with homotopy fibers, loop spaces, and truncations, and the preservation of the properties of truncatedness and connectedness under sequential colimits. Our entire development carries over to (∞, 1)-toposes using Shulman's recent interpretation of homotopy type theory into these structures.},
   isbn      = {978-1-4503-7104-9},
   keywords  = {higher inductive types,homotopy type theory,sequential colimits}
+}
+
+@misc{Swan24,
+  title         = {Oracle modalities},
+  author        = {Swan, Andrew W},
+  year          = {2024},
+  eprint        = {2406.05818},
+  archiveprefix = {arXiv},
+  eprintclass   = {math},
+  primaryclass  = {math.LO}
 }
 
 @book{SymmetryBook,

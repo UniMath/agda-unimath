@@ -25,17 +25,38 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.retracts-of-types
+open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.universe-levels
+
+open import set-theory.countable-sets
 ```
 
 </details>
 
 ## Idea
 
-The type of rational numbers is the quotient of the type of fractions, by the
-equivalence relation given by `(n/m) ~ (n'/m') := Id (n *ℤ m') (n' *ℤ m)`.
+The type of
+{{#concept "rational numbers" Agda=ℚ WD="rational number" WDID=Q1244890}} is the
+[quotient](foundation.set-quotients.md) of the type of
+[integer fractions](elementary-number-theory.integer-fractions.md) by the
+[equivalence relation](foundation.equivalence-relations.md) given by
+
+$$
+\frac{n}{m} \sim \frac{n'}{m'} := nm' = n'm.
+$$
+
+Since the
+[reduced fractions](elementary-number-theory.reduced-integer-fractions.md) are
+[canonical representatives](foundation.choice-of-representatives-equivalence-relation.md)
+of the similarity relation on fractions, we simply define the
+[set](foundation.sets.md) `ℚ` to be the type of reduced fractions and we obtain
+the
+[universal property of the set quotient](foundation.universal-property-set-quotients.md)
+from the fact that each equivalence class has a unique canonical representative.
 
 ## Definitions
 
@@ -157,11 +178,15 @@ abstract
 ℚ-Set : Set lzero
 pr1 ℚ-Set = ℚ
 pr2 ℚ-Set = is-set-ℚ
+```
 
+### The rationals are a retract of the integer fractions
+
+```agda
 abstract
   is-retraction-rational-fraction-ℚ :
     (x : ℚ) → rational-fraction-ℤ (fraction-ℚ x) ＝ x
-  is-retraction-rational-fraction-ℚ (pair (pair m (pair n n-pos)) p) =
+  is-retraction-rational-fraction-ℚ ((m , n , n-pos) , p) =
     eq-pair-Σ
       ( eq-pair
         ( eq-quotient-div-is-one-ℤ _ _ p (div-left-gcd-ℤ m n))
@@ -169,6 +194,29 @@ abstract
           ( eq-quotient-div-is-one-ℤ _ _ p (div-right-gcd-ℤ m n))
           ( eq-is-prop (is-prop-is-positive-ℤ n))))
       ( eq-is-prop (is-prop-is-reduced-fraction-ℤ (m , n , n-pos)))
+
+section-rational-fraction-ℤ : section rational-fraction-ℤ
+section-rational-fraction-ℤ = (fraction-ℚ , is-retraction-rational-fraction-ℚ)
+
+retract-integer-fraction-ℚ : ℚ retract-of fraction-ℤ
+retract-integer-fraction-ℚ =
+  ( fraction-ℚ , rational-fraction-ℤ , is-retraction-rational-fraction-ℚ)
+```
+
+### The rationals are countable
+
+The denumerability of the rational numbers is the third theorem on
+[Freek Wiedijk's](http://www.cs.ru.nl/F.Wiedijk/) list of
+[100 theorems](literature.100-theorems.md) {{#cite 100theorems}}.
+
+```agda
+is-countable-ℚ : is-countable ℚ-Set
+is-countable-ℚ =
+  is-countable-retract-of
+    ( fraction-ℤ-Set)
+    ( ℚ-Set)
+    ( retract-integer-fraction-ℚ)
+    ( is-countable-fraction-ℤ)
 ```
 
 ### Two fractions with the same numerator and same denominator are equal
@@ -260,3 +308,7 @@ reflecting-map-sim-fraction :
 pr1 reflecting-map-sim-fraction = rational-fraction-ℤ
 pr2 reflecting-map-sim-fraction {x} {y} H = eq-ℚ-sim-fraction-ℤ x y H
 ```
+
+## References
+
+{{#bibliography}}

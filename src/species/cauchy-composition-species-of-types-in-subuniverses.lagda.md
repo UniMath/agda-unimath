@@ -348,7 +348,7 @@ module _
             ( C1)
             ( C2)
             ( S)
-            ( cauchy-composition-unit-species-subuniverse P Q C4)
+            ( cauchy-composition-unit-species-subuniverse P Q C4)
             ( inclusion-subuniverse P X)) ∘e
           ( ( equiv-Σ-extension-species-subuniverse
               ( P)
@@ -431,7 +431,7 @@ module _
                   ( λ y →
                     cauchy-composition-species-types
                       ( Σ-extension-species-subuniverse
-                        ( P)
+                        ( P)
                         ( subuniverse-global-subuniverse Q l4)
                         ( T))
                       ( Σ-extension-species-subuniverse

@@ -384,11 +384,11 @@ module _
 
   retraction-retract-map-retraction' : retraction f
   retraction-retract-map-retraction' =
-    retraction-top-map-triangle
+    retraction-top-map-triangle'
       ( g ∘ inclusion-retract R₀)
       ( i₁)
       ( f)
-      ( inv-htpy i)
+      ( i)
       ( retraction-comp g (inclusion-retract R₀) s (retraction-retract R₀))
 
 module _

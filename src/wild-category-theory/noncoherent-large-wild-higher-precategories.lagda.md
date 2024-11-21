@@ -20,10 +20,10 @@ open import foundation.sets
 open import foundation.strictly-involutive-identity-types
 open import foundation.universe-levels
 
-open import structured-types.globular-types
-open import structured-types.large-globular-types
-open import structured-types.large-reflexive-globular-types
-open import structured-types.large-transitive-globular-types
+open import globular-types.globular-types
+open import globular-types.large-globular-types
+open import globular-types.large-reflexive-globular-types
+open import globular-types.large-transitive-globular-types
 
 open import wild-category-theory.noncoherent-wild-higher-precategories
 ```
@@ -43,7 +43,7 @@ A _large noncoherent wild higher precategory_ `𝒞` is a structure that attempt
 at capturing the structure of a large higher precategory to the $0$'th order. It
 consists of in some sense all of the operations and none of the coherence of a
 large higher precategory. Thus, it is defined as a
-[large globular type](structured-types.large-globular-types.md) with families of
+[large globular type](globular-types.large-globular-types.md) with families of
 $n$-morphisms labeled as "identities"
 
 ```text
@@ -59,8 +59,8 @@ and a composition operation at every dimension
 
 Entirely concretely, we define a
 {{#concept "noncoherent large wild higher precategory" Agda=Noncoherent-Large-Wild-Higher-Precategory}}
-to be a [reflexive](structured-types.reflexive-globular-types.md) and
-[transitive](structured-types.transitive-globular-types.md) large globular type.
+to be a [reflexive](globular-types.reflexive-globular-types.md) and
+[transitive](globular-types.transitive-globular-types.md) large globular type.
 We call the 0-cells the _objects_, the 1-cells the _morphisms_ and the higher
 cells the _$n$-morphisms_. The reflexivities are called the _identity
 morphisms_, and the transitivity operations are branded as _composition of

@@ -19,8 +19,11 @@ open import order-theory.posets
 
 ## Idea
 
-A **maximal chain** in a poset `P` is a chain `C` in `P` such that for any chain
-`D` we have `C ⊆ D ⇒ C ＝ D`.
+A
+{{#concept "maximal chain" Disambiguation="in a poset" Agda=maximal-chain-Poset}}
+in a [poset](order-theory.posets.md) `P` is a
+[chain](order-theory.chains-posets.md) `C` in `P` such that for any chain `D` we
+have `C ⊆ D ⇒ C ＝ D`.
 
 ## Definition
 

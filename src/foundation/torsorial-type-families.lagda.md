@@ -113,5 +113,5 @@ module _
 
 ### See also
 
-- [Discrete relations](foundation.discrete-relations.md) are binary torsorial
-  type families.
+- [Discrete reflexive relations](foundation.discrete-reflexive-relations.md) are
+  binary torsorial type families.

@@ -37,7 +37,9 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ## Idea
 
-The type of integers is an extension of the type of natural numbers including
+The type of {{#concept "integers" WD="integer" WDID=Q12503 Agda=ℤ}} is an
+extension of the type of
+[natural numbers](elementary-number-theory.natural-numbers.md) including
 negative whole numbers.
 
 ## Definitions

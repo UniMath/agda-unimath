@@ -39,7 +39,7 @@ of the family of elements `a` to the type family `B` is a family of elements
   (i : I) → B i (a i).
 ```
 
-An important special case occurs when `a : I → A` is a family of elements of a
+An important special case occurs when `a : I → A` is a family of elements in a
 fixed type `A`, and `B` is a type family over `A`. In this case, a
 {{#concept "lift" Disambiguation="family of elements" Agda=lift-family-of-elements}}
 of the family of elements `a` is a family of elements

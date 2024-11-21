@@ -65,6 +65,17 @@ module _
   ind-bool pt pf false = pf
 ```
 
+### The recursion principle of the booleans
+
+```agda
+module _
+  {l : Level} {P : UU l}
+  where
+
+  rec-bool : P → P → bool → P
+  rec-bool = ind-bool (λ _ → P)
+```
+
 ### The `if_then_else` function
 
 ```agda
@@ -73,8 +84,7 @@ module _
   where
 
   if_then_else_ : bool → A → A → A
-  if true then x else y = x
-  if false then x else y = y
+  if b then x else y = rec-bool x y b
 ```
 
 ### Raising universe levels of the booleans
@@ -187,6 +197,32 @@ pr1 bool-Set = bool
 pr2 bool-Set = is-set-bool
 ```
 
+### The "is true" predicate on booleans
+
+```agda
+is-true : bool → UU lzero
+is-true = Eq-bool true
+
+is-prop-is-true : (b : bool) → is-prop (is-true b)
+is-prop-is-true = is-prop-Eq-bool true
+
+is-true-Prop : bool → Prop lzero
+is-true-Prop b = is-true b , is-prop-is-true b
+```
+
+### The "is false" predicate on booleans
+
+```agda
+is-false : bool → UU lzero
+is-false = Eq-bool false
+
+is-prop-is-false : (b : bool) → is-prop (is-false b)
+is-prop-is-false = is-prop-Eq-bool false
+
+is-false-Prop : bool → Prop lzero
+is-false-Prop b = is-false b , is-prop-is-false b
+```
+
 ### The type of booleans is equivalent to `Fin 2`
 
 ```agda
@@ -222,6 +258,13 @@ pr2 equiv-bool-Fin-two-ℕ =
 ```agda
 is-finite-bool : is-finite bool
 is-finite-bool = is-finite-equiv equiv-bool-Fin-two-ℕ (is-finite-Fin 2)
+
+number-of-elements-bool : number-of-elements-is-finite is-finite-bool ＝ 2
+number-of-elements-bool =
+  inv
+    ( compute-number-of-elements-is-finite
+      ( 2 , equiv-bool-Fin-two-ℕ)
+      ( is-finite-bool))
 
 bool-𝔽 : 𝔽 lzero
 pr1 bool-𝔽 = bool
