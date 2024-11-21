@@ -256,6 +256,7 @@ open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.lifts-types public
 open import foundation.limited-principle-of-omniscience public
+open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.maps-in-global-subuniverses public
