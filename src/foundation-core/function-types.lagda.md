@@ -24,6 +24,9 @@ Functions are primitive in Agda. Here we construct some basic functions
 id : {l : Level} {A : UU l} → A → A
 id a = a
 
+id' : {l : Level} (A : UU l) → A → A
+id' A = id
+
 idω : {A : UUω} → A → A
 idω a = a
 ```
