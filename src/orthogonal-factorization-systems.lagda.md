@@ -17,7 +17,7 @@ open import orthogonal-factorization-systems.double-lifts-families-of-elements p
 open import orthogonal-factorization-systems.double-negation-sheaves public
 open import orthogonal-factorization-systems.extensions-double-lifts-families-of-elements public
 open import orthogonal-factorization-systems.extensions-lifts-families-of-elements public
-open import orthogonal-factorization-systems.extensions-of-maps public
+open import orthogonal-factorization-systems.extensions-maps public
 open import orthogonal-factorization-systems.factorization-operations public
 open import orthogonal-factorization-systems.factorization-operations-function-classes public
 open import orthogonal-factorization-systems.factorization-operations-global-function-classes public
@@ -37,7 +37,7 @@ open import orthogonal-factorization-systems.lawvere-tierney-topologies public
 open import orthogonal-factorization-systems.lifting-operations public
 open import orthogonal-factorization-systems.lifting-structures-on-squares public
 open import orthogonal-factorization-systems.lifts-families-of-elements public
-open import orthogonal-factorization-systems.lifts-of-maps public
+open import orthogonal-factorization-systems.lifts-maps public
 open import orthogonal-factorization-systems.localizations-at-maps public
 open import orthogonal-factorization-systems.localizations-at-subuniverses public
 open import orthogonal-factorization-systems.locally-small-modal-operators public
