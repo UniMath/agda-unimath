@@ -233,43 +233,41 @@ module _
       ( inclusion-retract-reflective-global-subuniverse)
       ( map-retraction-retract-reflective-global-subuniverse)
   is-retraction-map-retraction-retract-reflective-global-subuniverse =
-    inv-htpy
-      ( preserves-comp-map-reflective-global-subuniverse 𝒫
-        ( map-retraction-retract R)
-        ( inclusion-retract R)) ∙h
-    preserves-htpy-map-reflective-global-subuniverse 𝒫
-      ( is-retraction-map-retraction-retract R) ∙h
-    preserves-id-map-reflective-global-subuniverse 𝒫
+    is-retraction-map-retraction-retract-localization-global-subuniverse
+      ( global-subuniverse-reflective-global-subuniverse 𝒫)
+      ( is-reflective-reflective-global-subuniverse 𝒫 X)
+      ( is-reflective-reflective-global-subuniverse 𝒫 Y)
+      ( R)
 
   retraction-retract-reflective-global-subuniverse :
     retraction
       ( inclusion-retract-reflective-global-subuniverse)
   retraction-retract-reflective-global-subuniverse =
-    map-retraction-retract-reflective-global-subuniverse ,
-    is-retraction-map-retraction-retract-reflective-global-subuniverse
+    retraction-retract-localization-global-subuniverse
+      ( global-subuniverse-reflective-global-subuniverse 𝒫)
+      ( is-reflective-reflective-global-subuniverse 𝒫 X)
+      ( is-reflective-reflective-global-subuniverse 𝒫 Y)
+      ( R)
 
   retract-reflective-global-subuniverse :
     ( type-reflection-reflective-global-subuniverse 𝒫 X) retract-of
     ( type-reflection-reflective-global-subuniverse 𝒫 Y)
   retract-reflective-global-subuniverse =
-    ( map-reflective-global-subuniverse 𝒫 (inclusion-retract R)) ,
-    ( retraction-retract-reflective-global-subuniverse)
+    retract-localization-global-subuniverse
+      ( global-subuniverse-reflective-global-subuniverse 𝒫)
+      ( is-reflective-reflective-global-subuniverse 𝒫 X)
+      ( is-reflective-reflective-global-subuniverse 𝒫 Y)
+      ( R)
 
   is-in-reflective-global-subuniverse-retract :
     is-in-reflective-global-subuniverse 𝒫 Y →
     is-in-reflective-global-subuniverse 𝒫 X
-  is-in-reflective-global-subuniverse-retract H =
-    is-in-reflective-global-subuniverse-is-equiv-unit 𝒫
-      ( is-equiv-retract-map-is-equiv'
-        ( unit-reflective-global-subuniverse 𝒫 X)
-        ( unit-reflective-global-subuniverse 𝒫 Y)
-        ( R)
-        ( retract-reflective-global-subuniverse)
-        ( naturality-map-reflective-global-subuniverse 𝒫
-          ( inclusion-retract R))
-        ( naturality-map-reflective-global-subuniverse 𝒫
-          ( map-retraction-retract R))
-        ( is-equiv-unit-is-in-reflective-global-subuniverse 𝒫 H))
+  is-in-reflective-global-subuniverse-retract =
+    is-in-global-subuniverse-retract-localization-global-subuniverse
+      ( global-subuniverse-reflective-global-subuniverse 𝒫)
+      ( is-reflective-reflective-global-subuniverse 𝒫 X)
+      ( is-reflective-reflective-global-subuniverse 𝒫 Y)
+      ( R)
 ```
 
 ## References

@@ -24,6 +24,8 @@ open import foundation.identity-types
 open import foundation.precomposition-functions
 open import foundation.propositions
 open import foundation.retractions
+open import foundation.retracts-of-maps
+open import foundation.retracts-of-types
 open import foundation.subuniverses
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -281,6 +283,96 @@ module _
   preserves-comp-map-localization-global-subuniverse =
     preserves-comp-map-localization-global-subuniverse' 𝒫
       LX LY (reflection-localization-global-subuniverse LZ) g f
+```
+
+### Localizations are closed under retracts
+
+**Proof.** Let `X` and `Y` be types with localizations in a global subuniverse
+`𝒫`. Moreover, assume `X` is a retract of `Y` and that `Y ∈ 𝒫`. then applying
+the functoriality of localizations at global subuniverses we have a retract of
+maps
+
+```text
+        i           r
+  X --------> Y --------> X
+  |           |           |
+  |           |           |
+  ∨    Li     ∨    Lr     ∨
+  LX -------> LY ------> LX
+```
+
+since the middle vertical map is an equivalence, so is the outer vertical map.
+
+```agda
+module _
+  {α : Level → Level} (𝒫 : global-subuniverse α)
+  {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2}
+  (LX : localization-global-subuniverse 𝒫 l3 X)
+  (LY : localization-global-subuniverse 𝒫 l4 Y)
+  (R : X retract-of Y)
+  where
+
+  inclusion-retract-localization-global-subuniverse :
+    type-localization-global-subuniverse LX →
+    type-localization-global-subuniverse LY
+  inclusion-retract-localization-global-subuniverse =
+    map-localization-global-subuniverse 𝒫 LX LY (inclusion-retract R)
+
+  map-retraction-retract-localization-global-subuniverse :
+    type-localization-global-subuniverse LY →
+    type-localization-global-subuniverse LX
+  map-retraction-retract-localization-global-subuniverse =
+    map-localization-global-subuniverse 𝒫 LY LX (map-retraction-retract R)
+
+  is-retraction-map-retraction-retract-localization-global-subuniverse :
+    is-retraction
+      ( inclusion-retract-localization-global-subuniverse)
+      ( map-retraction-retract-localization-global-subuniverse)
+  is-retraction-map-retraction-retract-localization-global-subuniverse =
+    inv-htpy
+      ( preserves-comp-map-localization-global-subuniverse 𝒫 LX LY LX
+        ( map-retraction-retract R)
+        ( inclusion-retract R)) ∙h
+    preserves-htpy-map-localization-global-subuniverse 𝒫 LX LX
+      ( is-retraction-map-retraction-retract R) ∙h
+    preserves-id-map-localization-global-subuniverse 𝒫 LX
+
+  retraction-retract-localization-global-subuniverse :
+    retraction
+      ( inclusion-retract-localization-global-subuniverse)
+  retraction-retract-localization-global-subuniverse =
+    map-retraction-retract-localization-global-subuniverse ,
+    is-retraction-map-retraction-retract-localization-global-subuniverse
+
+  retract-localization-global-subuniverse :
+    ( type-localization-global-subuniverse LX) retract-of
+    ( type-localization-global-subuniverse LY)
+  retract-localization-global-subuniverse =
+    ( map-localization-global-subuniverse 𝒫 LX LY (inclusion-retract R)) ,
+    ( retraction-retract-localization-global-subuniverse)
+
+  is-in-global-subuniverse-retract-localization-global-subuniverse :
+    is-in-global-subuniverse 𝒫 Y →
+    is-in-global-subuniverse 𝒫 X
+  is-in-global-subuniverse-retract-localization-global-subuniverse H =
+    is-in-global-subuniverse-is-equiv-unit-universal-property-localization-global-subuniverse
+      ( 𝒫)
+      ( reflection-localization-global-subuniverse LX)
+      ( up-localization-global-subuniverse LX)
+      ( is-equiv-retract-map-is-equiv'
+        ( unit-localization-global-subuniverse LX)
+        ( unit-localization-global-subuniverse LY)
+        ( R)
+        ( retract-localization-global-subuniverse)
+        ( naturality-map-localization-global-subuniverse 𝒫 LX LY
+          ( inclusion-retract R))
+        ( naturality-map-localization-global-subuniverse 𝒫 LY LX
+          ( map-retraction-retract R))
+        ( is-equiv-unit-is-in-global-subuniverse-universal-property-localization-global-subuniverse
+          ( 𝒫)
+          ( reflection-localization-global-subuniverse LY)
+          ( up-localization-global-subuniverse LY)
+          ( H)))
 ```
 
 ## References
