@@ -183,7 +183,7 @@ module _
 
 ## Properties
 
-### The functorial action of on maps of types with localizations preserves identity functions
+### The functorial action on maps of types with localizations preserves identity functions
 
 ```agda
 module _
@@ -206,7 +206,7 @@ module _
     htpy-eq eq-preserves-id-map-localization-global-subuniverse
 ```
 
-### The functorial action of on maps of types with localizations preserves composition
+### The functorial action on maps of types with localizations preserves composition
 
 ```agda
 module _
@@ -241,7 +241,9 @@ module _
           ( ap
             ( map-localization-global-subuniverse' 𝒫 LY LZ g ∘_)
             ( eq-naturality-map-localization-global-subuniverse 𝒫 LX LY f) ∙
-            ap (_∘ f) (eq-naturality-map-localization-global-subuniverse' 𝒫 LY LZ g)))
+            ap
+              ( _∘ f)
+              ( eq-naturality-map-localization-global-subuniverse' 𝒫 LY LZ g)))
     ＝ ( map-localization-global-subuniverse' 𝒫 LY LZ g ∘
         map-localization-global-subuniverse 𝒫 LX LY f)
     by

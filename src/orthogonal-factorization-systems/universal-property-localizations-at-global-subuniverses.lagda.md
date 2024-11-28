@@ -347,7 +347,8 @@ module _
               ( inclusion-extension-type-global-subuniverse 𝒫 LX)}))
 
   is-equiv-map-essentially-unique-universal-property-localization-global-subuniverse :
-    is-equiv map-essentially-unique-universal-property-localization-global-subuniverse
+    is-equiv
+      map-essentially-unique-universal-property-localization-global-subuniverse
   is-equiv-map-essentially-unique-universal-property-localization-global-subuniverse =
     is-equiv-is-invertible
       map-inv-essentially-unique-universal-property-localization-global-subuniverse

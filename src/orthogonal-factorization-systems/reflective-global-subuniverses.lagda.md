@@ -9,26 +9,26 @@ module orthogonal-factorization-systems.reflective-global-subuniverses where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.cones-over-cospan-diagrams
 open import foundation.contractible-types
+open import foundation.cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.equivalences-arrows
 open import foundation.extensions-types-global-subuniverses
 open import foundation.extensions-types-subuniverses
 open import foundation.function-extensionality
-open import foundation.functoriality-dependent-pair-types
 open import foundation.function-types
-open import foundation.universal-property-pullbacks
-open import foundation.cospan-diagrams
-open import foundation.precomposition-functions
-open import foundation.cones-over-cospan-diagrams
-open import foundation.equivalences-arrows
-open import foundation.pullback-cones
+open import foundation.functoriality-dependent-pair-types
 open import foundation.global-subuniverses
 open import foundation.identity-types
+open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.pullback-cones
 open import foundation.retractions
 open import foundation.subuniverses
 open import foundation.unit-type
+open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.localizations-at-global-subuniverses
@@ -427,7 +427,8 @@ If `A` and `B` are `𝒫`-types, then the type of equivalences `A ≃ B` is agai
 `𝒫`-type. While this would follow straightforwardly from the above result and
 univalence, we give a proof that is independent of the univalence axiom.
 
-This is Corollary 5.1.23 in {{#cite Rij19}}.
+This is Corollary 5.1.23 in {{#cite Rij19}} and Proposition 2.18 in
+{{#cite CORS20}}.
 
 ```agda
 module _

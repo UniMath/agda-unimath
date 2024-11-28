@@ -165,7 +165,8 @@ module _
   is-emb-extension-type-extension-type-global-subuniverse :
     is-emb (extension-type-extension-type-global-subuniverse 𝒫)
   is-emb-extension-type-extension-type-global-subuniverse =
-    is-emb-is-prop-map is-prop-map-extension-type-extension-type-global-subuniverse
+    is-emb-is-prop-map
+      is-prop-map-extension-type-extension-type-global-subuniverse
 ```
 
 ### Characterization of identifications of extensions of types in a subuniverse

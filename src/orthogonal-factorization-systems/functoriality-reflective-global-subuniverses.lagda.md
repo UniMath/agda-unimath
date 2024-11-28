@@ -1,4 +1,4 @@
-# Functoriality of localizations at global subuniverses
+# Functoriality of reflective global subuniverses
 
 ```agda
 module orthogonal-factorization-systems.functoriality-reflective-global-subuniverses where
@@ -131,7 +131,7 @@ module _
 
 ## Properties
 
-### The functorial action of on maps of types with localizations preserves identity functions
+### The functorial action on maps of types with localizations preserves identity functions
 
 ```agda
 module _
@@ -154,7 +154,7 @@ module _
       ( is-reflective-reflective-global-subuniverse 𝒫 X)
 ```
 
-### The functorial action of on maps of types with localizations preserves composition
+### The functorial action on maps of types with localizations preserves composition
 
 ```agda
 module _

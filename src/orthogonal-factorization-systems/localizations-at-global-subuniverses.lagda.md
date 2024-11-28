@@ -7,41 +7,39 @@ module orthogonal-factorization-systems.localizations-at-global-subuniverses whe
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.cones-over-cospan-diagrams
 open import foundation.constant-maps
-open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
-open import foundation.dependent-pair-types
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.cospan-diagrams
-open import foundation.cones-over-cospan-diagrams
-open import foundation.pullback-cones
+open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.sequential-limits
-open import foundation.cartesian-product-types
-open import foundation.whiskering-homotopies-composition
 open import foundation.equivalences-arrows
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.extensions-types
-open import foundation.function-extensionality
 open import foundation.extensions-types-global-subuniverses
 open import foundation.fibers-of-maps
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
-open import foundation.universal-property-dependent-pair-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.global-subuniverses
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
+open import foundation.pullback-cones
 open import foundation.pullbacks
+open import foundation.sequential-limits
 open import foundation.singleton-induction
 open import foundation.subuniverses
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
+open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
 open import orthogonal-factorization-systems.orthogonal-maps
 open import orthogonal-factorization-systems.pullback-hom

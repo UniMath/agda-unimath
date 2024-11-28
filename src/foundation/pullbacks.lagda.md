@@ -126,7 +126,8 @@ The type of equivalences `A ≃ B` can be presented as the following pullback.
                     (f , g , h) ↦ (h ∘ f , f ∘ g)
 ```
 
-This presentation can be found as Proposition 2.18 in {{#cite CORS20}}.
+This presentation can be found as Proposition 2.18 in {{#cite CORS20}} and
+Corollary 5.1.23 in {{#cite Rij19}}.
 
 ```agda
 module _
