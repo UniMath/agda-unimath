@@ -419,7 +419,7 @@ logically equivalent conditions:
 4. The map `η` has a retraction.
 5. The precomposition map `- ∘ η` has a section at `X`.
 
-This is Proposition 5.1.3 in {{#cite Rik19}}.
+This is Proposition 5.1.3 in {{#cite Rij19}}.
 
 #### A type with a `𝒫`-localization is in `𝒫` if and only if the unit is an equivalence
 
