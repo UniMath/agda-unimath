@@ -45,14 +45,23 @@ open import orthogonal-factorization-systems.universal-property-localizations-at
 
 A
 {{#concept "reflective global subuniverse" Disambiguation="of types" Agda=reflective-global-subuniverse}},
-or
-{{#concept "localization" Disambiguation="subuniverse" Agda=reflective-global-subuniverse}},
-is a [global subuniverse](foundation.global-subuniverses.md) `𝒫` together with a
-reflecting operator on types `L` that takes values in `𝒫`, and a family of unit
-maps `η : A → LA` for all types `A`, with the property that the types in `𝒫` are
-[local](orthogonal-factorization-systems.types-local-at-maps.md) at the unit for
-every `A`. Hence the local types with respect to `L` are precisely the types in
-the reflective global subuniverse.
+or **localization**, is a
+[global subuniverse](foundation.global-subuniverses.md) `𝒫` together with a
+reflecting operator `L` on types giving
+[localizations](orthogonal-factorization-systems.localizations-global-subuniverses.md)
+at `𝒫`. I.e., for every type `A` there is a type `LA ∈ 𝒫` equipped with a _unit
+map_
+
+```text
+  η : A → LA
+```
+
+satisfying the
+[universal property of localizations](orthogonal-factorization-systems.universal-property-localizations-global-subuniverses.md).
+This states that every type in `𝒫` is
+[local](orthogonal-factorization-systems.types-local-at-maps.md) at the unit
+`η`. As a consequence, the local types with respect to `L` are precisely the
+types in `𝒫`.
 
 ## Definitions
 
