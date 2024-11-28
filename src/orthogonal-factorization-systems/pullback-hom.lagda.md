@@ -560,7 +560,7 @@ module _
       ( postcomp A g)
       ( precomp f Y h)
       ( refl)
-      ( compute-eq-htpy-ap-precomp f (pr2 (map-distributive-Π-Σ H)))
+      ( coherence-eq-htpy-ap-precomp f (pr2 (map-distributive-Π-Σ H)))
 ```
 
 ## Table of files about pullbacks

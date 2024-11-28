@@ -199,28 +199,41 @@ module _
   (f : A → B) {g h : B → C}
   where
 
-  compute-htpy-eq-ap-precomp :
+  coherence-htpy-eq-ap-precomp :
     coherence-square-maps
       ( ap (precomp f C))
       ( htpy-eq)
       ( htpy-eq)
       ( precomp-Π f (eq-value g h))
-  compute-htpy-eq-ap-precomp =
-    compute-htpy-eq-ap-precomp-Π f
+  coherence-htpy-eq-ap-precomp =
+    coherence-htpy-eq-ap-precomp-Π f
 
-  compute-eq-htpy-ap-precomp :
+  coherence-htpy-eq-ap-precomp' :
+    coherence-square-maps'
+      ( ap (precomp f C))
+      ( htpy-eq)
+      ( htpy-eq)
+      ( precomp-Π f (eq-value g h))
+  coherence-htpy-eq-ap-precomp' =
+    coherence-htpy-eq-ap-precomp-Π' f
+
+  coherence-eq-htpy-ap-precomp :
     coherence-square-maps
       ( precomp-Π f (eq-value g h))
       ( eq-htpy)
       ( eq-htpy)
       ( ap (precomp f C))
-  compute-eq-htpy-ap-precomp =
-    vertical-inv-equiv-coherence-square-maps
-      ( ap (precomp f C))
-      ( equiv-funext)
-      ( equiv-funext)
+  coherence-eq-htpy-ap-precomp =
+    coherence-eq-htpy-ap-precomp-Π f
+
+  coherence-eq-htpy-ap-precomp' :
+    coherence-square-maps'
       ( precomp-Π f (eq-value g h))
-      ( compute-htpy-eq-ap-precomp)
+      ( eq-htpy)
+      ( eq-htpy)
+      ( ap (precomp f C))
+  coherence-eq-htpy-ap-precomp' =
+    coherence-eq-htpy-ap-precomp-Π' f
 ```
 
 ### The precomposition map at a dependent pair type

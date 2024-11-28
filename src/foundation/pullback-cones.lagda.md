@@ -15,6 +15,10 @@ open import foundation.dependent-universal-property-equivalences
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.pullbacks
+open import foundation.unit-type
+open import foundation.universal-property-cartesian-product-types
+open import foundation.cartesian-product-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.multivariable-homotopies
@@ -224,6 +228,56 @@ swap-pullback-cone 𝒮 ((C , c) , pb-C) =
 id-pullback-cone :
   {l : Level} (A : UU l) → pullback-cone (id-cospan-diagram A) l
 id-pullback-cone A = ((A , id-cone A) , is-pullback-id-cone A)
+```
+
+### The identity type pullback cone
+
+```agda
+module _
+  {l : Level} {A : UU l} (x y : A)
+  where
+
+  cospan-diagram-Id : cospan-diagram lzero lzero l
+  cospan-diagram-Id = (unit , unit , A , point x , point y)
+
+  pullback-cone-Id : pullback-cone cospan-diagram-Id l
+  pullback-cone-Id = (((x ＝ y) , cone-Id x y) , is-pullback-Id x y)
+```
+
+### The type of equivalences pullback cone
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  cospan-diagram-equiv : cospan-diagram (l1 ⊔ l2) lzero (l1 ⊔ l2)
+  cospan-diagram-equiv =
+    ( (A → B) × (B → A) × (B → A) ,
+      unit ,
+      (A → A) × (B → B) ,
+      (λ (f , g , h) → h ∘ f , f ∘ g) ,
+      point (id' A , id' B))
+
+  pullback-cone-equiv : pullback-cone cospan-diagram-equiv (l1 ⊔ l2)
+  pullback-cone-equiv = (A ≃ B , cone-equiv) , is-pullback-equiv
+```
+
+### The cartesian product pullback cone
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  cospan-diagram-cartesian-product : cospan-diagram l1 l2 lzero
+  cospan-diagram-cartesian-product =
+    ( A , B , unit , terminal-map A , terminal-map B)
+
+  pullback-cone-cartesian-product :
+    pullback-cone cospan-diagram-cartesian-product (l1 ⊔ l2)
+  pullback-cone-cartesian-product =
+    (A × B , cone-cartesian-product A B) , is-pullback-cartesian-product A B
 ```
 
 ## Table of files about pullbacks

@@ -15,7 +15,14 @@ open import foundation.equivalences
 open import foundation.extensions-types-global-subuniverses
 open import foundation.extensions-types-subuniverses
 open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
 open import foundation.function-types
+open import foundation.universal-property-pullbacks
+open import foundation.cospan-diagrams
+open import foundation.precomposition-functions
+open import foundation.cones-over-cospan-diagrams
+open import foundation.equivalences-arrows
+open import foundation.pullback-cones
 open import foundation.global-subuniverses
 open import foundation.identity-types
 open import foundation.propositions
@@ -30,7 +37,6 @@ open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.modal-subuniverse-induction
 open import orthogonal-factorization-systems.types-local-at-maps
 open import orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses
-open import orthogonal-factorization-systems.universal-property-localizations-at-subuniverses
 ```
 
 </details>
@@ -279,11 +285,177 @@ module _
       ( is-reflective-reflective-global-subuniverse 𝒫 A)
 ```
 
+### Reflective global subuniverses are closed under dependent products
+
+```agda
+module _
+  {α β : Level → Level} (𝒫 : reflective-global-subuniverse α β)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  is-in-reflective-global-subuniverse-Π :
+    ((x : A) → is-in-reflective-global-subuniverse 𝒫 (B x)) →
+    is-in-reflective-global-subuniverse 𝒫 ((x : A) → B x)
+  is-in-reflective-global-subuniverse-Π H =
+    is-in-global-subuniverse-Π-localization-global-subuniverse
+      ( global-subuniverse-reflective-global-subuniverse 𝒫)
+      ( H)
+      ( is-reflective-reflective-global-subuniverse 𝒫 ((x : A) → B x))
+```
+
+### Reflective global subuniverses are closed under exponentials
+
+```agda
+module _
+  {α β : Level → Level} (𝒫 : reflective-global-subuniverse α β)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-in-reflective-global-subuniverse-exponential :
+    is-in-reflective-global-subuniverse 𝒫 B →
+    is-in-reflective-global-subuniverse 𝒫 (A → B)
+  is-in-reflective-global-subuniverse-exponential H =
+    is-in-global-subuniverse-exponential-localization-global-subuniverse
+      ( global-subuniverse-reflective-global-subuniverse 𝒫)
+      ( H)
+      ( is-reflective-reflective-global-subuniverse 𝒫 (A → B))
+```
+
 ### Reflective global subuniverses are closed under pullbacks
+
+Consider a pullback square
+
+```text
+          q
+    C --------> B
+    | ⌟         |
+  p |           | g
+    ∨           ∨
+    A --------> X
+          f
+```
+
+then if `A`, `B` and `X` are in `𝒫`, then so is `C`.
+
+This is Proposition 5.1.19 in {{#cite Rij19}}.
+
+**Proof.** We have a commuting square
+
+```text
+                  - ∘ η
+       (LC → C) --------> (C → C)
+           |                 |
+           |                 |
+  cone-map |                 | cone-map
+           |                 |
+           ∨                 ∨
+      cone f g LC ····> cone f g C
+```
+
+where the bottom horizontal map is an equivalence by the assumptions that `A`,
+`B` and `X` are `𝒫`-local. The two vertical maps are equivalences by the
+assumption that `C` is a pullback and so the top map must be an equivalence as
+well.
+
+```agda
+module _
+  {α β : Level → Level} (𝒫 : reflective-global-subuniverse α β)
+  {l1 l2 l3 l4 : Level}
+  {𝒮 : cospan-diagram l1 l2 l3}
+  (c : pullback-cone 𝒮 l4)
+  where
+
+  is-in-reflective-global-subuniverse-pullback :
+    is-in-reflective-global-subuniverse 𝒫 (cospanning-type-cospan-diagram 𝒮) →
+    is-in-reflective-global-subuniverse 𝒫 (left-type-cospan-diagram 𝒮) →
+    is-in-reflective-global-subuniverse 𝒫 (right-type-cospan-diagram 𝒮) →
+    is-in-reflective-global-subuniverse 𝒫 (domain-pullback-cone 𝒮 c)
+  is-in-reflective-global-subuniverse-pullback =
+    is-in-global-subuniverse-pullback-localization-global-subuniverse
+      ( global-subuniverse-reflective-global-subuniverse 𝒫)
+      ( c)
+      ( is-reflective-reflective-global-subuniverse 𝒫
+        ( domain-pullback-cone 𝒮 c))
+```
+
+### Reflective global subuniverses are closed under cartesian product types
+
+This is Corollary 5.1.20 in {{#cite Rij19}}.
+
+```agda
+module _
+  {α β : Level → Level} (𝒫 : reflective-global-subuniverse α β)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-in-reflective-global-subuniverse-cartesian-product :
+    is-in-reflective-global-subuniverse 𝒫 A →
+    is-in-reflective-global-subuniverse 𝒫 B →
+    is-in-reflective-global-subuniverse 𝒫 (A × B)
+  is-in-reflective-global-subuniverse-cartesian-product H K =
+    is-in-global-subuniverse-cartesian-product-localization-global-subuniverse
+      ( global-subuniverse-reflective-global-subuniverse 𝒫)
+      ( is-in-reflective-global-subuniverse-unit 𝒫)
+      ( H)
+      ( K)
+      ( is-reflective-reflective-global-subuniverse 𝒫 (A × B))
+```
 
 ### Reflective global subuniverses are closed under identity types
 
+This is Corollary 5.1.21 in {{#cite Rij19}}.
+
+```agda
+module _
+  {α β : Level → Level} (𝒫 : reflective-global-subuniverse α β)
+  {l : Level} {A : UU l} (x y : A) (H : is-in-reflective-global-subuniverse 𝒫 A)
+  where
+
+  is-in-reflective-global-subuniverse-Id :
+    is-in-reflective-global-subuniverse 𝒫 (x ＝ y)
+  is-in-reflective-global-subuniverse-Id =
+    is-in-global-subuniverse-Id-localization-global-subuniverse
+      ( global-subuniverse-reflective-global-subuniverse 𝒫)
+      ( is-in-reflective-global-subuniverse-unit 𝒫)
+      ( H)
+      ( is-reflective-reflective-global-subuniverse 𝒫 (x ＝ y))
+```
+
+### Reflective global subuniverses are closed under types of equivalences
+
+If `A` and `B` are `𝒫`-types, then the type of equivalences `A ≃ B` is again a
+`𝒫`-type. While this would follow straightforwardly from the above result and
+univalence, we give a proof that is independent of the univalence axiom.
+
+This is Corollary 5.1.23 in {{#cite Rij19}}.
+
+```agda
+module _
+  {α β : Level → Level} (𝒫 : reflective-global-subuniverse α β)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (H : is-in-reflective-global-subuniverse 𝒫 A)
+  (K : is-in-reflective-global-subuniverse 𝒫 B)
+  where
+
+  is-in-reflective-global-subuniverse-equiv :
+    is-in-reflective-global-subuniverse 𝒫 (A ≃ B)
+  is-in-reflective-global-subuniverse-equiv =
+    is-in-reflective-global-subuniverse-pullback 𝒫
+      pullback-cone-equiv
+      (is-in-reflective-global-subuniverse-cartesian-product 𝒫
+        ( is-in-reflective-global-subuniverse-exponential 𝒫 H)
+        ( is-in-reflective-global-subuniverse-exponential 𝒫 K))
+      (is-in-reflective-global-subuniverse-cartesian-product 𝒫
+        ( is-in-reflective-global-subuniverse-exponential 𝒫 K)
+        ( is-in-reflective-global-subuniverse-cartesian-product 𝒫
+          ( is-in-reflective-global-subuniverse-exponential 𝒫 H)
+          ( is-in-reflective-global-subuniverse-exponential 𝒫 H)))
+      ( is-in-reflective-global-subuniverse-unit 𝒫)
+```
+
 ### Reflective global subuniverses are closed under sequential limits
+
+> This remains to be formalized.
 
 ## See also
 
