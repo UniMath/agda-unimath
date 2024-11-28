@@ -74,13 +74,13 @@ module _
   (X : UU l3) (Y : UU l4) (η : X → Y)
   where
 
-  is-localization-subuniverse-is-localization :
+  is-subuniverse-localization-is-localization :
     is-localization l4 f X Y η →
-    is-localization-subuniverse (is-local-Prop f) X Y
-  pr1 (is-localization-subuniverse-is-localization is-localization-Y) =
+    is-subuniverse-localization (is-local-Prop f) X Y
+  pr1 (is-subuniverse-localization-is-localization is-localization-Y) =
     pr1 is-localization-Y
-  pr1 (pr2 (is-localization-subuniverse-is-localization is-localization-Y)) = η
-  pr2 (pr2 (is-localization-subuniverse-is-localization is-localization-Y))
+  pr1 (pr2 (is-subuniverse-localization-is-localization is-localization-Y)) = η
+  pr2 (pr2 (is-subuniverse-localization-is-localization is-localization-Y))
     Z is-local-Z =
       pr2 is-localization-Y Z is-local-Z
 ```

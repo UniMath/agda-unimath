@@ -36,7 +36,6 @@ open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.modal-subuniverse-induction
 open import orthogonal-factorization-systems.types-local-at-maps
 open import orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses
-open import orthogonal-factorization-systems.universal-property-localizations-at-subuniverses
 ```
 
 </details>
