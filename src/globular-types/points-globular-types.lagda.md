@@ -41,7 +41,6 @@ record point-Globular-Type
   field
     0-cell-point-Globular-Type : 0-cell-Globular-Type G
 
-  field
     1-cell-point-point-Globular-Type :
       point-Globular-Type
         ( 1-cell-globular-type-Globular-Type G
@@ -53,7 +52,7 @@ open point-Globular-Type public
 1-cell-point-Globular-Type :
   {l1 l2 : Level} (G : Globular-Type l1 l2) (x : point-Globular-Type G) →
   1-cell-Globular-Type G
-    (0-cell-point-Globular-Type x)
+    ( 0-cell-point-Globular-Type x)
     ( 0-cell-point-Globular-Type x)
 1-cell-point-Globular-Type G x =
   0-cell-point-Globular-Type (1-cell-point-point-Globular-Type x)

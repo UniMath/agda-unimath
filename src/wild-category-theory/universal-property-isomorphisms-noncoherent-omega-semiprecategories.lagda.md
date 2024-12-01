@@ -31,15 +31,15 @@ open import wild-category-theory.precomposition-morphisms-noncoherent-omega-semi
 
 Given a morphism `f : 𝒞₁ x y` in a
 [noncoherent ω-semiprecategory](wild-category-theory.noncoherent-omega-semiprecategories.md)
-with the structure of a [point](globular-types.points-globular-types.md), `f`
-satisfies the
+with the structure of a [point](globular-types.points-globular-types.md), then
+`f` satisfies the
 {{#concept "universal property of isomorphisms" Disambiguation="in a noncoherent ω-semiprecategory"}}
 if
 [precomposition](wild-category-theory.precomposition-morphisms-noncoherent-omega-semiprecategories.md)
 and
 [postcomposition](wild-category-theory.postcomposition-morphisms-noncoherent-omega-semiprecategories.md)
-of by `f` is a [globular equivalence](globular-types.globular-equivalences.md)
-for every object `z`.
+by `f` is a [globular equivalence](globular-types.globular-equivalences.md) for
+every object `z`.
 
 ## Definitions
 
