@@ -13,6 +13,7 @@ open import foundation.universe-levels
 
 open import globular-types.globular-maps
 open import globular-types.globular-types
+open import globular-types.points-globular-types
 ```
 
 </details>
@@ -97,4 +98,30 @@ module _
     0-cell-binary-globular-map
       ( 1-cell-binary-globular-map-binary-globular-map
         ( 1-cell-binary-globular-map-binary-globular-map F))
+```
+
+### Evaluating one of the arguments of a binary globular map
+
+```agda
+ev-left-binary-globular-map :
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {G : Globular-Type l1 l2} {H : Globular-Type l3 l4} {K : Globular-Type l5 l6}
+  (F : binary-globular-map G H K) (x : point-Globular-Type G) → globular-map H K
+0-cell-globular-map (ev-left-binary-globular-map F x) =
+  0-cell-binary-globular-map F (0-cell-point-Globular-Type x)
+1-cell-globular-map-globular-map (ev-left-binary-globular-map F x) =
+  ev-left-binary-globular-map
+    ( 1-cell-binary-globular-map-binary-globular-map F)
+    ( 1-cell-point-point-Globular-Type x)
+
+ev-right-binary-globular-map :
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {G : Globular-Type l1 l2} {H : Globular-Type l3 l4} {K : Globular-Type l5 l6}
+  (F : binary-globular-map G H K) (x : point-Globular-Type H) → globular-map G K
+0-cell-globular-map (ev-right-binary-globular-map F x) y =
+  0-cell-binary-globular-map F y (0-cell-point-Globular-Type x)
+1-cell-globular-map-globular-map (ev-right-binary-globular-map F x) =
+  ev-right-binary-globular-map
+    ( 1-cell-binary-globular-map-binary-globular-map F)
+    ( 1-cell-point-point-Globular-Type x)
 ```
