@@ -37,7 +37,7 @@ module _
 
   is-upper-bound-chain-prop-Poset : type-Poset X → Prop (l1 ⊔ l2 ⊔ l3)
   is-upper-bound-chain-prop-Poset =
-    is-upper-bound-family-of-elements-Poset-Prop X
+    is-upper-bound-family-of-elements-prop-Poset X
       ( inclusion-type-chain-Poset X C)
 
   is-upper-bound-chain-Poset : type-Poset X → UU (l1 ⊔ l2 ⊔ l3)
