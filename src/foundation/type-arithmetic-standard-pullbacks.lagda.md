@@ -7,12 +7,12 @@ module foundation.type-arithmetic-standard-pullbacks where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.standard-pullbacks
-open import foundation.cones-over-cospan-diagrams
 open import foundation.standard-ternary-pullbacks
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -20,10 +20,10 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.sections
-open import foundation-core.retractions
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -131,12 +131,27 @@ module _
       ( refl-htpy)
       ( refl-htpy)
 
+  is-equiv-map-inv-left-associative-standard-pullback :
+    is-equiv map-inv-left-associative-standard-pullback
+  is-equiv-map-inv-left-associative-standard-pullback =
+    is-equiv-is-invertible
+      ( map-left-associative-standard-pullback)
+      ( refl-htpy)
+      ( refl-htpy)
+
   compute-left-associative-standard-pullback :
     standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i ≃
     standard-ternary-pullback f g h i
   compute-left-associative-standard-pullback =
     ( map-left-associative-standard-pullback ,
       is-equiv-map-left-associative-standard-pullback)
+
+  compute-inv-left-associative-standard-pullback :
+    standard-ternary-pullback f g h i ≃
+    standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i
+  compute-inv-left-associative-standard-pullback =
+    ( map-inv-left-associative-standard-pullback ,
+      is-equiv-map-inv-left-associative-standard-pullback)
 ```
 
 #### Computing the right associated iterated dependent pullback
@@ -168,12 +183,27 @@ module _
       ( refl-htpy)
       ( refl-htpy)
 
+  is-equiv-map-inv-right-associative-standard-pullback :
+    is-equiv map-inv-right-associative-standard-pullback
+  is-equiv-map-inv-right-associative-standard-pullback =
+    is-equiv-is-invertible
+      ( map-right-associative-standard-pullback)
+      ( refl-htpy)
+      ( refl-htpy)
+
   compute-right-associative-standard-pullback :
     standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i}) ≃
     standard-ternary-pullback f g h i
   compute-right-associative-standard-pullback =
     ( map-right-associative-standard-pullback ,
       is-equiv-map-right-associative-standard-pullback)
+
+  compute-inv-right-associative-standard-pullback :
+    standard-ternary-pullback f g h i ≃
+    standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i})
+  compute-inv-right-associative-standard-pullback =
+    ( map-inv-right-associative-standard-pullback ,
+      is-equiv-map-inv-right-associative-standard-pullback)
 ```
 
 #### Standard pullbacks are associative
@@ -189,8 +219,15 @@ module _
     standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i ≃
     standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i})
   associative-standard-pullback =
-    ( inv-equiv (compute-right-associative-standard-pullback f g h i)) ∘e
+    ( compute-inv-right-associative-standard-pullback f g h i) ∘e
     ( compute-left-associative-standard-pullback f g h i)
+
+  inv-associative-standard-pullback :
+    standard-pullback f (g ∘ vertical-map-standard-pullback {f = h} {g = i}) ≃
+    standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i
+  inv-associative-standard-pullback =
+    ( compute-inv-left-associative-standard-pullback f g h i) ∘e
+    ( compute-right-associative-standard-pullback f g h i)
 
   map-associative-standard-pullback :
     standard-pullback (h ∘ horizontal-map-standard-pullback {f = f} {g = g}) i →

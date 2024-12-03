@@ -381,6 +381,7 @@ open import foundation.split-idempotent-maps public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
 open import foundation.standard-pullbacks public
+open import foundation.standard-ternary-pullbacks public
 open import foundation.strict-symmetrization-binary-relations public
 open import foundation.strictly-involutive-identity-types public
 open import foundation.strictly-right-unital-concatenation-identifications public
@@ -433,6 +434,7 @@ open import foundation.type-arithmetic-coproduct-types public
 open import foundation.type-arithmetic-dependent-function-types public
 open import foundation.type-arithmetic-dependent-pair-types public
 open import foundation.type-arithmetic-empty-type public
+open import foundation.type-arithmetic-standard-pullbacks public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.type-duality public
 open import foundation.type-theoretic-principle-of-choice public
