@@ -51,6 +51,7 @@ record
     {l1 l2 : Level} (G : Globular-Type l1 l2) : UU (l1 ⊔ l2)
   where
   coinductive
+
   field
     comp-binary-globular-map-composition-Globular-Type :
       {x y z : 0-cell-Globular-Type G} →
@@ -59,6 +60,8 @@ record
         ( 1-cell-globular-type-Globular-Type G x y)
         ( 1-cell-globular-type-Globular-Type G x z)
 
+
+  field
     composition-1-cell-globular-type-Globular-Type :
       {x y : 0-cell-Globular-Type G} →
       composition-Globular-Type
@@ -170,3 +173,4 @@ is-transitive-1-cell-globular-type-is-transitive-Globular-Type
 ## See also
 
 - [Noncoherent wild $\omega$-semiprecategories](wild-category-theory.noncoherent-wild-omega-semiprecategories.md)
+

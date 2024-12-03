@@ -8,10 +8,13 @@ module order-theory.least-upper-bounds-posets where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.booleans
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -56,7 +59,7 @@ module _
       ( λ y →
         iff-Prop
           ( is-binary-upper-bound-Poset-Prop P a b y)
-          ( leq-Poset-Prop P x y))
+          ( leq-prop-Poset P x y))
 
   is-least-binary-upper-bound-Poset : type-Poset P → UU (l1 ⊔ l2)
   is-least-binary-upper-bound-Poset x =
@@ -134,8 +137,7 @@ module _
 
   all-elements-equal-has-least-binary-upper-bound-Poset :
     all-elements-equal has-least-binary-upper-bound-Poset
-  all-elements-equal-has-least-binary-upper-bound-Poset
-    (pair u H) (pair v K) =
+  all-elements-equal-has-least-binary-upper-bound-Poset (u , H) (v , K) =
     eq-type-subtype
       ( is-least-binary-upper-bound-Poset-Prop P a b)
       ( antisymmetric-leq-Poset P u v
@@ -150,10 +152,10 @@ module _
     is-prop-all-elements-equal
       all-elements-equal-has-least-binary-upper-bound-Poset
 
-  has-least-binary-upper-bound-Poset-Prop : Prop (l1 ⊔ l2)
-  pr1 has-least-binary-upper-bound-Poset-Prop =
+  has-least-binary-upper-bound-prop-Poset : Prop (l1 ⊔ l2)
+  pr1 has-least-binary-upper-bound-prop-Poset =
     has-least-binary-upper-bound-Poset
-  pr2 has-least-binary-upper-bound-Poset-Prop =
+  pr2 has-least-binary-upper-bound-prop-Poset =
     is-prop-has-least-binary-upper-bound-Poset
 
 module _
@@ -180,26 +182,26 @@ module _
   {l1 l2 l3 : Level} (P : Poset l1 l2) {I : UU l3} (a : I → type-Poset P)
   where
 
-  is-least-upper-bound-family-of-elements-Poset-Prop :
+  is-least-upper-bound-family-of-elements-prop-Poset :
     type-Poset P → Prop (l1 ⊔ l2 ⊔ l3)
-  is-least-upper-bound-family-of-elements-Poset-Prop x =
+  is-least-upper-bound-family-of-elements-prop-Poset x =
     Π-Prop
       ( type-Poset P)
       ( λ y →
         iff-Prop
-          ( Π-Prop I (λ i → leq-Poset-Prop P (a i) y))
-          ( leq-Poset-Prop P x y))
+          ( Π-Prop I (λ i → leq-prop-Poset P (a i) y))
+          ( leq-prop-Poset P x y))
 
   is-least-upper-bound-family-of-elements-Poset :
     type-Poset P → UU (l1 ⊔ l2 ⊔ l3)
   is-least-upper-bound-family-of-elements-Poset z =
-    type-Prop (is-least-upper-bound-family-of-elements-Poset-Prop z)
+    type-Prop (is-least-upper-bound-family-of-elements-prop-Poset z)
 
   is-prop-is-least-upper-bound-family-of-elements-Poset :
     (z : type-Poset P) →
     is-prop (is-least-upper-bound-family-of-elements-Poset z)
   is-prop-is-least-upper-bound-family-of-elements-Poset z =
-    is-prop-type-Prop (is-least-upper-bound-family-of-elements-Poset-Prop z)
+    is-prop-type-Prop (is-least-upper-bound-family-of-elements-prop-Poset z)
 
 module _
   {l1 l2 l3 : Level} (P : Poset l1 l2) {I : UU l3} {a : I → type-Poset P}
@@ -244,7 +246,7 @@ module _
   all-elements-equal-has-least-upper-bound-family-of-elements-Poset
     ( x , H) (y , K) =
     eq-type-subtype
-      ( is-least-upper-bound-family-of-elements-Poset-Prop P a)
+      ( is-least-upper-bound-family-of-elements-prop-Poset P a)
       ( antisymmetric-leq-Poset P x y
         ( forward-implication-is-least-upper-bound-family-of-elements-Poset
           ( P)
@@ -265,10 +267,10 @@ module _
     is-prop-all-elements-equal
       all-elements-equal-has-least-upper-bound-family-of-elements-Poset
 
-  has-least-upper-bound-family-of-elements-Poset-Prop : Prop (l1 ⊔ l2 ⊔ l3)
-  pr1 has-least-upper-bound-family-of-elements-Poset-Prop =
+  has-least-upper-bound-family-of-elements-prop-Poset : Prop (l1 ⊔ l2 ⊔ l3)
+  pr1 has-least-upper-bound-family-of-elements-prop-Poset =
     has-least-upper-bound-family-of-elements-Poset
-  pr2 has-least-upper-bound-family-of-elements-Poset-Prop =
+  pr2 has-least-upper-bound-family-of-elements-prop-Poset =
     is-prop-has-least-upper-bound-family-of-elements-Poset
 
 module _
@@ -288,4 +290,95 @@ module _
         ( a)
         ( x , H)
         ( y , K))
+```
+
+## Properties
+
+### Binary least upper bounds as least upper bounds of families
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (a b : type-Poset P)
+  (H : has-least-binary-upper-bound-Poset P a b)
+  where
+
+  family-of-elements-has-least-binary-upper-bound-Poset :
+    bool → type-Poset P
+  family-of-elements-has-least-binary-upper-bound-Poset = rec-bool a b
+
+  least-upper-bound-family-of-elements-has-least-binary-upper-bound-Poset :
+    type-Poset P
+  least-upper-bound-family-of-elements-has-least-binary-upper-bound-Poset =
+    pr1 H
+
+  is-least-upper-bound-family-of-elements-has-least-binary-upper-bound-Poset :
+    is-least-upper-bound-family-of-elements-Poset P
+      ( family-of-elements-has-least-binary-upper-bound-Poset)
+      ( least-upper-bound-family-of-elements-has-least-binary-upper-bound-Poset)
+  is-least-upper-bound-family-of-elements-has-least-binary-upper-bound-Poset x =
+    ( λ f → pr1 (pr2 H x) (f true , f false)) ,
+    ( λ u →
+      ind-bool
+        ( λ z →
+          leq-Poset P
+            ( family-of-elements-has-least-binary-upper-bound-Poset z)
+            ( x))
+        ( pr1 (pr2 (pr2 H x) u))
+        ( pr2 (pr2 (pr2 H x) u)))
+
+  has-least-upper-bound-family-of-elements-has-least-binary-upper-bound-Poset :
+    has-least-upper-bound-family-of-elements-Poset P
+      ( family-of-elements-has-least-binary-upper-bound-Poset)
+  has-least-upper-bound-family-of-elements-has-least-binary-upper-bound-Poset =
+    least-upper-bound-family-of-elements-has-least-binary-upper-bound-Poset ,
+    is-least-upper-bound-family-of-elements-has-least-binary-upper-bound-Poset
+```
+
+### Least upper bounds of families over the booleans as binary least upper bounds
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (x : bool → type-Poset P)
+  (H : has-least-upper-bound-family-of-elements-Poset P x)
+  where
+
+  least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset :
+    type-Poset P
+  least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset =
+    pr1 H
+
+  is-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset :
+    is-least-binary-upper-bound-Poset P
+      ( x true)
+      ( x false)
+      ( least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset)
+  is-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset z =
+    ( λ f →
+      pr1 (pr2 H z) (ind-bool (λ i → leq-Poset P (x i) z) (pr1 f) (pr2 f))) ,
+    ( λ u → pr2 (pr2 H z) u true , pr2 (pr2 H z) u false)
+
+  has-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset :
+    has-least-binary-upper-bound-Poset P (x true) (x false)
+  has-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset =
+    least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset ,
+    is-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset
+```
+
+### if $a ≤ b$ then $b$ is the least binary upper bound of $a$ and $b$
+
+```agda
+module _
+  {l1 l2 : Level} (P : Poset l1 l2) (a b : type-Poset P) (p : leq-Poset P a b)
+  where
+
+  is-least-binary-upper-bound-leq-Poset :
+    is-least-binary-upper-bound-Poset P a b b
+  is-least-binary-upper-bound-leq-Poset x =
+      ( λ f → pr2 f) ,
+      ( λ f → transitive-leq-Poset P a b x f p , f)
+
+  has-least-binary-upper-bound-leq-Poset :
+    has-least-binary-upper-bound-Poset P a b
+  has-least-binary-upper-bound-leq-Poset =
+    ( b , is-least-binary-upper-bound-leq-Poset)
 ```

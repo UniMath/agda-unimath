@@ -70,7 +70,7 @@ The low-dimensional data of a superglobular type is therefore as follows:
   G₃ : {x y : G₀} {s t : G₁ x y} (u v : G₂ s t) → Type
   H₂ : {x x' y y' : G₀} {s s' : G₁ x x'} {t t' : G₁ y y'}
        (p : G₂ s s') (q : G₂ t t') → H₁ s t → H₁ s' t' → Type
-  e₂ : {x y : G₀} {s t : H₀ x y} {u v : H₁
+  e₂ : {x y : G₀} {s t : H₀ x y} {u v : H₁ (refl G x) (refl G y) s t} →
        H₂ (refl G x) (refl G y) u v ≃ G₃ (e₁ u) (e₁ v)
 ```
 

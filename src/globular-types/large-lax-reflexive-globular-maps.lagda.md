@@ -70,7 +70,6 @@ record
     (H : Large-Reflexive-Globular-Type α2 β2)
     (f : large-globular-map-Large-Reflexive-Globular-Type γ G H) : UUω
   where
-  coinductive
 
   field
     preserves-refl-1-cell-is-lax-reflexive-large-globular-map :

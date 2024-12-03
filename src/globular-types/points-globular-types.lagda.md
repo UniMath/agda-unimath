@@ -41,6 +41,7 @@ record point-Globular-Type
   field
     0-cell-point-Globular-Type : 0-cell-Globular-Type G
 
+  field
     1-cell-point-point-Globular-Type :
       point-Globular-Type
         ( 1-cell-globular-type-Globular-Type G

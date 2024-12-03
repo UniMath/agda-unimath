@@ -58,7 +58,6 @@ record
     (H : Large-Transitive-Globular-Type α2 β2)
     (f : large-globular-map-Large-Transitive-Globular-Type γ G H) : UUω
   where
-  coinductive
 
   field
     preserves-comp-1-cell-is-lax-transitive-large-globular-map :
