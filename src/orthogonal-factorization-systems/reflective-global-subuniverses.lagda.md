@@ -48,7 +48,7 @@ A
 or **localization**, is a
 [global subuniverse](foundation.global-subuniverses.md) `𝒫` together with a
 reflecting operator `L` on types giving
-[localizations](orthogonal-factorization-systems.localizations-global-subuniverses.md)
+[localizations](orthogonal-factorization-systems.localizations-at-global-subuniverses.md)
 at `𝒫`. I.e., for every type `A` there is a type `LA ∈ 𝒫` equipped with a _unit
 map_
 
@@ -57,7 +57,7 @@ map_
 ```
 
 satisfying the
-[universal property of localizations](orthogonal-factorization-systems.universal-property-localizations-global-subuniverses.md).
+[universal property of localizations](orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses.md).
 This states that every type in `𝒫` is
 [local](orthogonal-factorization-systems.types-local-at-maps.md) at the unit
 `η`. As a consequence, the local types with respect to `L` are precisely the

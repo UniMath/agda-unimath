@@ -64,7 +64,7 @@ every `Z` in `𝒫`, the [precomposition map](foundation-core.function-types.md)
 ```
 
 is an [equivalence](foundation-core.equivalences.md). This is referred to as the
-[universal property of localizations](orthogonal-factorization-systems.universal-property-localizations-global-subuniverses.md).
+[universal property of localizations](orthogonal-factorization-systems.universal-property-localizations-at-global-subuniverses.md).
 
 ## Definitions
 
