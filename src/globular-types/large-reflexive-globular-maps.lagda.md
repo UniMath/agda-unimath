@@ -60,7 +60,6 @@ record
     (f : large-globular-map-Large-Reflexive-Globular-Type γ G H) :
     UUω
   where
-  coinductive
 
   field
     preserves-refl-1-cell-preserves-refl-large-globular-map :

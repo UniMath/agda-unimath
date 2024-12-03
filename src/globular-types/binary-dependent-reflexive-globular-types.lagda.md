@@ -31,8 +31,8 @@ Consider two
 
 A binary dependent globular type `K` over reflexive globular types `G` and `H`
 is said to be
-{{#concept "reflexive" Disambiguation="binary dependent globular type"}} if it
-comes equipped with
+{{#concept "reflexive" Disambiguation="binary dependent globular type" Agda=is-reflexive-Binary-Dependent-Globular-Type}}
+if it comes equipped with
 
 ```text
   refl K : {x : G₀} {y : H₀} (u : K₀ x y) → K₁ (refl G x) (refl G y) u u,
