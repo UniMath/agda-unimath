@@ -9,19 +9,19 @@ module globular-types.homotopies-globular-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.action-on-identifications-functions
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.whiskering-homotopies-composition
-open import foundation.homotopies
-open import foundation.transport-along-pairs-of-identifications
 open import foundation.dependent-identifications
+open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.transport-along-pairs-of-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies-composition
 
-open import globular-types.globular-types
-open import globular-types.globular-maps
 open import globular-types.globular-equivalences
+open import globular-types.globular-maps
+open import globular-types.globular-types
 ```
 
 </details>

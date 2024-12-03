@@ -76,6 +76,7 @@ open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.composite-maps-in-inverse-sequential-diagrams public
 open import foundation.composition-algebra public
+open import foundation.composition-spans public
 open import foundation.computational-identity-types public
 open import foundation.cones-over-cospan-diagrams public
 open import foundation.cones-over-inverse-sequential-diagrams public

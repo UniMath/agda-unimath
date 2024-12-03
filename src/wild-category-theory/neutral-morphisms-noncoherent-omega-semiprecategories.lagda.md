@@ -17,8 +17,8 @@ open import foundation.universe-levels
 open import globular-types.binary-globular-maps
 open import globular-types.composition-structure-globular-types
 open import globular-types.globular-equivalences
-open import globular-types.globular-types
 open import globular-types.globular-maps
+open import globular-types.globular-types
 open import globular-types.homotopies-globular-maps
 open import globular-types.points-globular-types
 
@@ -50,10 +50,10 @@ is-right-neutral-point-Noncoherent-ω-Semiprecategory :
 is-right-neutral-point-Noncoherent-ω-Semiprecategory 𝒞 x =
   (z : obj-Noncoherent-ω-Semiprecategory 𝒞) →
   htpy-globular-map
-     ( precomp-globular-map-hom-Noncoherent-ω-Semiprecategory 𝒞
+    ( precomp-globular-map-hom-Noncoherent-ω-Semiprecategory 𝒞
         ( 1-cell-point-point-Globular-Type x)
         ( z))
-     ( id-globular-map
+    ( id-globular-map
       ( hom-globular-type-Noncoherent-ω-Semiprecategory 𝒞
         ( 0-cell-point-Globular-Type x)
         ( z)))
@@ -69,10 +69,10 @@ is-left-neutral-point-Noncoherent-ω-Semiprecategory :
 is-left-neutral-point-Noncoherent-ω-Semiprecategory 𝒞 x =
   (z : obj-Noncoherent-ω-Semiprecategory 𝒞) →
   htpy-globular-map
-     ( postcomp-globular-map-hom-Noncoherent-ω-Semiprecategory 𝒞
+    ( postcomp-globular-map-hom-Noncoherent-ω-Semiprecategory 𝒞
         ( 1-cell-point-point-Globular-Type x)
         ( z))
-     ( id-globular-map
+    ( id-globular-map
       ( hom-globular-type-Noncoherent-ω-Semiprecategory 𝒞
         ( z)
         ( 0-cell-point-Globular-Type x)))
