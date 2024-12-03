@@ -35,7 +35,7 @@ open import foundation.universe-levels
 ## Idea
 
 Consider a type `X`. An
-{{#concept "extension" Disambiguation="type in global subuniverse" Agda=extension-type-global-global-subuniverse}}
+{{#concept "extension" Disambiguation="type in global subuniverse" Agda=extension-type-global-subuniverse}}
 of `X` in a [global subuniverse](foundation.global-subuniverses.md) `𝒫` is an
 object in the [coslice](foundation.coslice.md) under `X` in `𝒫`, i.e., it
 consists of a type `Y` in `𝒫` and a map `f : X → Y`.

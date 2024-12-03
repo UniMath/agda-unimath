@@ -53,7 +53,7 @@ open import orthogonal-factorization-systems.universal-property-localizations-at
 
 Let `𝒫` be a [global subuniverse](foundation.global-subuniverses.md). Given a
 type `X`, its
-{{#concept "localization" Disambiguation="at a global subuniverse of types" Agda=is-localization-global-subuniverse}}
+{{#concept "localization" Disambiguation="at a global subuniverse of types" Agda=localization-global-subuniverse}}
 at `𝒫`, or **`𝒫`-localization**, is a type `LX` in `𝒫` and a map `η : X → LX`
 such that every type in `𝒫` is
 `η`-[local](orthogonal-factorization-systems.types-local-at-maps.md). I.e., for
@@ -63,7 +63,8 @@ every `Z` in `𝒫`, the [precomposition map](foundation-core.function-types.md)
   - ∘ η : (LX → Z) → (X → Z)
 ```
 
-is an [equivalence](foundation-core.equivalences.md).
+is an [equivalence](foundation-core.equivalences.md). This is referred to as the
+[universal property of localizations](orthogonal-factorization-systems.universal-property-localizations-global-subuniverses.md).
 
 ## Definitions
 
