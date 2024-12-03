@@ -60,7 +60,6 @@ record
         ( 1-cell-globular-type-Globular-Type G x y)
         ( 1-cell-globular-type-Globular-Type G x z)
 
-
   field
     composition-1-cell-globular-type-Globular-Type :
       {x y : 0-cell-Globular-Type G} →
@@ -173,4 +172,3 @@ is-transitive-1-cell-globular-type-is-transitive-Globular-Type
 ## See also
 
 - [Noncoherent wild $\omega$-semiprecategories](wild-category-theory.noncoherent-wild-omega-semiprecategories.md)
-
