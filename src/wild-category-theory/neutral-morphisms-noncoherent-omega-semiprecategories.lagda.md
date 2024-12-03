@@ -1,4 +1,4 @@
-# Neutral morphisms in noncoherent ω-semiprecategories
+# Neutral points in noncoherent ω-semiprecategories
 
 ```agda
 {-# OPTIONS --guardedness --allow-unsolved-metas #-}
@@ -32,11 +32,12 @@ open import wild-category-theory.precomposition-morphisms-noncoherent-omega-semi
 
 ## Idea
 
-We say an endomorphism `f : 𝒞₁ x y` in a
+We say a point `x` in a
 [noncoherent ω-semiprecategory](wild-category-theory.noncoherent-omega-semiprecategories.md)
 `𝒞` is
-{{#concept "neutral" Disambiguation="endomorphism in a noncoherent ω-semiprecategory" Agda=is-neutral-obj-Noncoherent-ω-Semiprecategory}}
-if the precomposition and postcomposition maps are homotopic to identity maps.
+{{#concept "neutral" Disambiguation="point in a noncoherent ω-semiprecategory" Agda=is-neutral-point-Noncoherent-ω-Semiprecategory}}
+if the precomposition and postcomposition globular maps at the distinguished
+endomorphism `f : 𝒞₁ x x` are homotopic to identity maps.
 
 ## Definitions
 
@@ -89,5 +90,3 @@ is-neutral-point-Noncoherent-ω-Semiprecategory 𝒞 x =
   ( is-right-neutral-point-Noncoherent-ω-Semiprecategory 𝒞 x) ×
   ( is-left-neutral-point-Noncoherent-ω-Semiprecategory 𝒞 x)
 ```
-
-## Properties
