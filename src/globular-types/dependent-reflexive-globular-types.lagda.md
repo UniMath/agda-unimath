@@ -14,6 +14,7 @@ open import foundation.universe-levels
 
 open import globular-types.dependent-globular-types
 open import globular-types.globular-types
+open import globular-types.points-reflexive-globular-types
 open import globular-types.reflexive-globular-types
 ```
 
@@ -48,11 +49,11 @@ record
   where
   coinductive
   field
-    refl-0-cell-is-reflexive-Dependent-Globular-Type :
+    refl-1-cell-is-reflexive-Dependent-Globular-Type :
       {x : 0-cell-Reflexive-Globular-Type G}
       (y : 0-cell-Dependent-Globular-Type H x) →
       1-cell-Dependent-Globular-Type H y y
-        ( refl-0-cell-Reflexive-Globular-Type G)
+        ( refl-1-cell-Reflexive-Globular-Type G)
 
     is-reflexive-1-cell-dependent-globular-type-Dependent-Globular-Type :
       {x x' : 0-cell-Reflexive-Globular-Type G}
@@ -108,13 +109,13 @@ record
       is-reflexive-Dependent-Globular-Type G
         ( dependent-globular-type-Dependent-Reflexive-Globular-Type)
 
-  refl-0-cell-Dependent-Reflexive-Globular-Type :
+  refl-1-cell-Dependent-Reflexive-Globular-Type :
     {x : 0-cell-Reflexive-Globular-Type G}
     (y : 0-cell-Dependent-Reflexive-Globular-Type x) →
     1-cell-Dependent-Reflexive-Globular-Type y y
-      ( refl-0-cell-Reflexive-Globular-Type G)
-  refl-0-cell-Dependent-Reflexive-Globular-Type =
-    refl-0-cell-is-reflexive-Dependent-Globular-Type
+      ( refl-1-cell-Reflexive-Globular-Type G)
+  refl-1-cell-Dependent-Reflexive-Globular-Type =
+    refl-1-cell-is-reflexive-Dependent-Globular-Type
       ( refl-Dependent-Reflexive-Globular-Type)
 
   is-reflexive-1-cell-dependent-globular-type-Dependent-Reflexive-Globular-Type :
@@ -155,42 +156,19 @@ construction makes essential use of the reflexivity elements of the base
 reflexive globular type.
 
 ```agda
-globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type :
-  {l1 l2 l3 l4 : Level} {G : Reflexive-Globular-Type l1 l2}
-  (H : Dependent-Reflexive-Globular-Type l3 l4 G)
-  (x : 0-cell-Reflexive-Globular-Type G) →
-  globular-structure l4 (0-cell-Dependent-Reflexive-Globular-Type H x)
-1-cell-globular-structure
-  ( globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type
-    { G = G}
-    ( H)
-    ( x))
-  ( u)
-  ( v) =
-    1-cell-Dependent-Reflexive-Globular-Type H u v
-      ( refl-0-cell-Reflexive-Globular-Type G)
-globular-structure-1-cell-globular-structure
-  ( globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type
-    { G = G}
-    ( H)
-    ( x))
-  ( u)
-  ( v) =
-  globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type
-    ( 1-cell-dependent-reflexive-globular-type-Dependent-Reflexive-Globular-Type
-      H u v)
-    ( refl-0-cell-Reflexive-Globular-Type G)
-
 family-globular-types-Dependent-Reflexive-Globular-Type :
   {l1 l2 l3 l4 : Level} {G : Reflexive-Globular-Type l1 l2}
   (H : Dependent-Reflexive-Globular-Type l3 l4 G) →
   0-cell-Reflexive-Globular-Type G → Globular-Type l3 l4
-pr1 (family-globular-types-Dependent-Reflexive-Globular-Type H x) =
+0-cell-Globular-Type
+  ( family-globular-types-Dependent-Reflexive-Globular-Type H x) =
   0-cell-Dependent-Reflexive-Globular-Type H x
-pr2 (family-globular-types-Dependent-Reflexive-Globular-Type H x) =
-  globular-structure-family-globular-types-Dependent-Reflexive-Globular-Type
-    ( H)
-    ( x)
+1-cell-globular-type-Globular-Type
+  ( family-globular-types-Dependent-Reflexive-Globular-Type {G = G} H x) y z =
+  family-globular-types-Dependent-Reflexive-Globular-Type
+    ( 1-cell-dependent-reflexive-globular-type-Dependent-Reflexive-Globular-Type
+      H y z)
+    ( refl-1-cell-Reflexive-Globular-Type G)
 
 is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type :
   {l1 l2 l3 l4 : Level} {G : Reflexive-Globular-Type l1 l2}
@@ -198,18 +176,16 @@ is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type :
   (x : 0-cell-Reflexive-Globular-Type G) →
   is-reflexive-Globular-Type
     ( family-globular-types-Dependent-Reflexive-Globular-Type H x)
-is-reflexive-1-cell-is-reflexive-globular-structure
+is-reflexive-1-cell-is-reflexive-Globular-Type
   ( is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type H x) =
-  refl-0-cell-Dependent-Reflexive-Globular-Type H
-is-reflexive-globular-structure-1-cell-is-reflexive-globular-structure
+  refl-1-cell-Dependent-Reflexive-Globular-Type H
+is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
   ( is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type
-    { G = G} H x)
-  ( u)
-  ( v) =
+    {G = G} H x) =
   is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type
     ( 1-cell-dependent-reflexive-globular-type-Dependent-Reflexive-Globular-Type
-      H u v)
-    ( refl-0-cell-Reflexive-Globular-Type G)
+      H _ _)
+    ( refl-1-cell-Reflexive-Globular-Type G)
 
 module _
   {l1 l2 l3 l4 : Level} {G : Reflexive-Globular-Type l1 l2}
@@ -224,4 +200,50 @@ module _
   refl-Reflexive-Globular-Type
     ( family-reflexive-globular-types-Dependent-Reflexive-Globular-Type x) =
     is-reflexive-family-globular-types-Dependent-Reflexive-Globular-Type H x
+```
+
+### Evaluating dependent reflexive globular types at points
+
+```agda
+globular-type-ev-point-Dependent-Reflexive-Globular-Type :
+  {l1 l2 l3 l4 : Level} {G : Reflexive-Globular-Type l1 l2}
+  (H : Dependent-Reflexive-Globular-Type l3 l4 G)
+  (x : point-Reflexive-Globular-Type G) →
+  Globular-Type l3 l4
+0-cell-Globular-Type
+  ( globular-type-ev-point-Dependent-Reflexive-Globular-Type H x) =
+  0-cell-Dependent-Reflexive-Globular-Type H x
+1-cell-globular-type-Globular-Type
+  ( globular-type-ev-point-Dependent-Reflexive-Globular-Type {G = G} H x) y y' =
+  globular-type-ev-point-Dependent-Reflexive-Globular-Type
+    ( 1-cell-dependent-reflexive-globular-type-Dependent-Reflexive-Globular-Type
+      H y y')
+    ( refl-1-cell-Reflexive-Globular-Type G)
+
+refl-ev-point-Dependent-Reflexive-Globular-Type :
+  {l1 l2 l3 l4 : Level} {G : Reflexive-Globular-Type l1 l2}
+  (H : Dependent-Reflexive-Globular-Type l3 l4 G)
+  (x : point-Reflexive-Globular-Type G) →
+  is-reflexive-Globular-Type
+    ( globular-type-ev-point-Dependent-Reflexive-Globular-Type H x)
+is-reflexive-1-cell-is-reflexive-Globular-Type
+  ( refl-ev-point-Dependent-Reflexive-Globular-Type H x) =
+  refl-1-cell-Dependent-Reflexive-Globular-Type H
+is-reflexive-1-cell-globular-type-is-reflexive-Globular-Type
+  ( refl-ev-point-Dependent-Reflexive-Globular-Type {G = G} H x) =
+  refl-ev-point-Dependent-Reflexive-Globular-Type
+    ( 1-cell-dependent-reflexive-globular-type-Dependent-Reflexive-Globular-Type
+      H _ _)
+    ( refl-1-cell-Reflexive-Globular-Type G)
+
+ev-point-Dependent-Reflexive-Globular-Type :
+  {l1 l2 l3 l4 : Level} {G : Reflexive-Globular-Type l1 l2}
+  (H : Dependent-Reflexive-Globular-Type l3 l4 G)
+  (x : point-Reflexive-Globular-Type G) →
+  Reflexive-Globular-Type l3 l4
+globular-type-Reflexive-Globular-Type
+  ( ev-point-Dependent-Reflexive-Globular-Type H x) =
+  globular-type-ev-point-Dependent-Reflexive-Globular-Type H x
+refl-Reflexive-Globular-Type (ev-point-Dependent-Reflexive-Globular-Type H x) =
+  refl-ev-point-Dependent-Reflexive-Globular-Type H x
 ```
