@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import globular-types.globular-types
+open import globular-types.points-globular-types
 ```
 
 </details>
@@ -63,6 +64,21 @@ module _
   1-cell-Dependent-Globular-Type y y' =
     0-cell-Dependent-Globular-Type
       ( 1-cell-dependent-globular-type-Dependent-Globular-Type H y y')
+```
+
+### Evaluating dependent globular types at points
+
+```agda
+ev-point-Dependent-Globular-Type :
+  {l1 l2 l3 l4 : Level} {G : Globular-Type l1 l2}
+  (H : Dependent-Globular-Type l3 l4 G) (x : point-Globular-Type G) →
+  Globular-Type l3 l4
+0-cell-Globular-Type (ev-point-Dependent-Globular-Type H x) =
+  0-cell-Dependent-Globular-Type H (0-cell-point-Globular-Type x)
+1-cell-globular-type-Globular-Type (ev-point-Dependent-Globular-Type H x) y y' =
+  ev-point-Dependent-Globular-Type
+    ( 1-cell-dependent-globular-type-Dependent-Globular-Type H y y')
+    ( 1-cell-point-point-Globular-Type x)
 ```
 
 ## See also

@@ -120,11 +120,11 @@ module _
 
   fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph :
     Reflexive-Graph lzero (β2 l l)
-  pr1 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph = unit
-  pr1 (pr2 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph)
+  pr1 (pr1 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph) =
+    unit
+  pr2 (pr1 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph)
     _ _ =
     edge-Wide-Displayed-Large-Reflexive-Graph H (refl-Large-Reflexive-Graph G x)
-  pr2 (pr2 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph)
-    _ =
+  pr2 fiber-vertex-reflexive-graph-Wide-Displayed-Large-Reflexive-Graph _ =
     refl-Wide-Displayed-Large-Reflexive-Graph H x
 ```
