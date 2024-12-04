@@ -552,6 +552,7 @@ has-finitely-many-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                     ( trunc-Prop _)
                     ( ( λ (ω , r) →
                         unit-trunc-Prop
+                          { A = Σ (type-trunc-Set (a ＝ a)) (type-Prop ∘ P)}
                           ( ( unit-trunc-Set ω) ,
                             ( map-inv-equiv
                               ( compute-P ω)
@@ -604,10 +605,10 @@ abstract
               ( is-0-connected-im-is-0-connected-domain
                 ( f ∘ inr)
                 ( is-0-connected-unit))
-              ( ( λ a →
-                  has-finitely-many-connected-components-equiv'
-                    ( equiv-Eq-eq-im (f ∘ inr) a a)
-                    ( H (pr1 a) (pr1 a))))
+              ( λ a →
+                has-finitely-many-connected-components-equiv'
+                  ( equiv-Eq-eq-im (f ∘ inr) a a)
+                  ( H (pr1 a) (pr1 a)))
               ( λ x → K (pr1 x)))))
       where
       g : ((Σ (im (f ∘ inl)) (B ∘ pr1)) + (Σ (im (f ∘ inr)) (B ∘ pr1))) ≃

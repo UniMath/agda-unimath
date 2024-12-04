@@ -10,6 +10,7 @@ module modal-type-theory.transport-along-crisp-identifications where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -119,6 +120,17 @@ crisp-tr-ap {A = A} {B} {C} {D} f g {x} p z =
     ( p)
 ```
 
+### Substitution law for crisp transport
+
+```agda
+substitution-law-crisp-tr :
+  {@♭ l1 l2 l3 : Level} {@♭ X : UU l1} {@♭ A : UU l2} (@♭ B : @♭ A → UU l3)
+  (@♭ f : X → A)
+  {@♭ x y : X} (@♭ p : x ＝ y) {@♭ x' : B (f x)} →
+  crisp-tr B (ap f p) x' ＝ crisp-tr (λ (@♭ x : X) → B (f x)) p x'
+substitution-law-crisp-tr B f p {x'} = crisp-tr-ap f (λ _ → id) p x'
+```
+
 ### Computing maps out of crisp identity types as crisp transports
 
 ```agda
@@ -151,19 +163,4 @@ crisp-tr-Id-right :
   crisp-tr (a ＝_) q p ＝ (p ∙ q)
 crisp-tr-Id-right {a = a} q p =
   crisp-based-ind-Id (λ y q → crisp-tr (a ＝_) q p ＝ (p ∙ q)) (inv right-unit) q
-```
-
-### Substitution law for crisp transport
-
-```agda
-substitution-law-crisp-tr :
-  {@♭ l1 l2 l3 : Level} {@♭ X : UU l1} {@♭ A : UU l2} (@♭ B : @♭ A → UU l3)
-  (@♭ f : X → A)
-  {@♭ x y : X} (@♭ p : x ＝ y) {@♭ x' : B (f x)} →
-  crisp-tr B (ap f p) x' ＝ crisp-tr (λ (@♭ x : X) → B (f x)) p x'
-substitution-law-crisp-tr {X = X} B f p {x'} =
-  crisp-based-ind-Id
-    ( λ y p → crisp-tr B (ap f p) x' ＝ crisp-tr (λ (@♭ x : X) → B (f x)) p x')
-    ( refl)
-    ( p)
 ```

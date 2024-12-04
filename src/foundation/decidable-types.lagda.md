@@ -7,24 +7,27 @@ module foundation.decidable-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.hilberts-epsilon-operators
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.retracts-of-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.retracts-of-types
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -154,36 +157,6 @@ is-decidable-function-type' (inl a) d with d a
 is-decidable-function-type' (inr na) d = inl (ex-falso ∘ na)
 ```
 
-### Dependent sums of a uniformly decidable family of types over a decidable base is decidable
-
-```agda
-is-decidable-Σ-uniformly-decidable-family :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-decidable A → (((a : A) → B a) + ((a : A) → ¬ B a)) → is-decidable (Σ A B)
-is-decidable-Σ-uniformly-decidable-family (inl a) (inl b) =
-  inl (a , b a)
-is-decidable-Σ-uniformly-decidable-family (inl a) (inr b) =
-  inr (λ x → b (pr1 x) (pr2 x))
-is-decidable-Σ-uniformly-decidable-family (inr a) _ =
-  inr (λ x → a (pr1 x))
-```
-
-### Dependent products of uniformly decidable families over decidable bases are decidable
-
-```agda
-is-decidable-Π-uniformly-decidable-family :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-decidable A →
-  (((a : A) → B a) + ((a : A) → ¬ (B a))) →
-  is-decidable ((a : A) → (B a))
-is-decidable-Π-uniformly-decidable-family (inl a) (inl b) =
-  inl b
-is-decidable-Π-uniformly-decidable-family (inl a) (inr b) =
-  inr (λ f → b a (f a))
-is-decidable-Π-uniformly-decidable-family (inr na) _ =
-  inl (ex-falso ∘ na)
-```
-
 ### The negation of a decidable type is decidable
 
 ```agda
@@ -202,7 +175,18 @@ module _
   is-decidable-iff :
     (A → B) → (B → A) → is-decidable A → is-decidable B
   is-decidable-iff f g (inl a) = inl (f a)
-  is-decidable-iff f g (inr na) = inr (λ b → na (g b))
+  is-decidable-iff f g (inr na) = inr (na ∘ g)
+
+  is-decidable-iff' :
+    A ↔ B → is-decidable A → is-decidable B
+  is-decidable-iff' (f , g) = is-decidable-iff f g
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  iff-is-decidable : A ↔ B → is-decidable A ↔ is-decidable B
+  iff-is-decidable e = is-decidable-iff' e , is-decidable-iff' (inv-iff e)
 ```
 
 ### Decidable types are closed under retracts
@@ -214,26 +198,66 @@ module _
 
   is-decidable-retract-of :
     A retract-of B → is-decidable B → is-decidable A
-  is-decidable-retract-of (pair i (pair r H)) (inl b) = inl (r b)
-  is-decidable-retract-of (pair i (pair r H)) (inr f) = inr (f ∘ i)
+  is-decidable-retract-of R = is-decidable-iff' (iff-retract' R)
 ```
 
 ### Decidable types are closed under equivalences
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
   is-decidable-is-equiv :
     {f : A → B} → is-equiv f → is-decidable B → is-decidable A
-  is-decidable-is-equiv {f} (pair (pair g G) (pair h H)) =
-    is-decidable-retract-of (pair f (pair h H))
+  is-decidable-is-equiv {f} H =
+    is-decidable-retract-of (retract-equiv (f , H))
 
   is-decidable-equiv :
-    (e : A ≃ B) → is-decidable B → is-decidable A
+    A ≃ B → is-decidable B → is-decidable A
   is-decidable-equiv e = is-decidable-iff (map-inv-equiv e) (map-equiv e)
 
-is-decidable-equiv' :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  is-decidable A → is-decidable B
-is-decidable-equiv' e = is-decidable-equiv (inv-equiv e)
+  is-decidable-equiv' :
+    A ≃ B → is-decidable A → is-decidable B
+  is-decidable-equiv' e = is-decidable-iff (map-equiv e) (map-inv-equiv e)
+```
+
+### Equivalent types have equivalent decidability predicates
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
+  map-equiv-is-decidable : is-decidable A → is-decidable B
+  map-equiv-is-decidable = is-decidable-equiv' e
+
+  map-inv-equiv-is-decidable : is-decidable B → is-decidable A
+  map-inv-equiv-is-decidable = is-decidable-equiv e
+
+  is-section-map-inv-equiv-is-decidable :
+    is-section map-equiv-is-decidable map-inv-equiv-is-decidable
+  is-section-map-inv-equiv-is-decidable (inl x) =
+    ap inl (is-section-map-inv-equiv e x)
+  is-section-map-inv-equiv-is-decidable (inr x) =
+    ap inr eq-neg
+
+  is-retraction-map-inv-equiv-is-decidable :
+    is-retraction map-equiv-is-decidable map-inv-equiv-is-decidable
+  is-retraction-map-inv-equiv-is-decidable (inl x) =
+    ap inl (is-retraction-map-inv-equiv e x)
+  is-retraction-map-inv-equiv-is-decidable (inr x) =
+    ap inr eq-neg
+
+  is-equiv-map-equiv-is-decidable : is-equiv map-equiv-is-decidable
+  is-equiv-map-equiv-is-decidable =
+    is-equiv-is-invertible
+      map-inv-equiv-is-decidable
+      is-section-map-inv-equiv-is-decidable
+      is-retraction-map-inv-equiv-is-decidable
+
+  equiv-is-decidable : is-decidable A ≃ is-decidable B
+  equiv-is-decidable = map-equiv-is-decidable , is-equiv-map-equiv-is-decidable
 ```
 
 ### Decidability implies double negation elimination

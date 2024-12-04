@@ -144,11 +144,8 @@ module _
   unique-dependent-function-trunc B f =
     is-contr-equiv'
       ( fiber (precomp-Π-Truncated-Type unit-trunc B) f)
-      ( equiv-tot
-        ( λ h → equiv-funext))
-      ( is-contr-map-is-equiv
-        ( dependent-universal-property-trunc B)
-        ( f))
+      ( equiv-tot (λ h → equiv-funext))
+      ( is-contr-map-is-equiv (dependent-universal-property-trunc B) f)
 
   apply-dependent-universal-property-trunc :
     {l2 : Level} (B : type-trunc k A → Truncated-Type l2 k) →

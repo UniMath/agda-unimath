@@ -9,6 +9,7 @@ module foundation-core.fibers-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.strictly-right-unital-concatenation-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -371,6 +372,76 @@ module _
     Σ (fiber g x) (λ t → fiber h (pr1 t)) ≃ fiber (g ∘ h) x
   pr1 inv-compute-fiber-comp = map-inv-compute-fiber-comp
   pr2 inv-compute-fiber-comp = is-equiv-map-inv-compute-fiber-comp
+```
+
+### Fibers of homotopic maps are equivalent
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {f g : A → B} (H : g ~ f) (y : B)
+  where
+
+  map-equiv-fiber-htpy : fiber f y → fiber g y
+  map-equiv-fiber-htpy (x , p) = x , H x ∙ᵣ p
+
+  map-inv-equiv-fiber-htpy : fiber g y → fiber f y
+  map-inv-equiv-fiber-htpy (x , p) = x , inv (H x) ∙ᵣ p
+
+  is-section-map-inv-equiv-fiber-htpy :
+    is-section map-equiv-fiber-htpy map-inv-equiv-fiber-htpy
+  is-section-map-inv-equiv-fiber-htpy (x , refl) =
+    eq-Eq-fiber g (g x) refl (inv (right-inv-right-strict-concat (H x)))
+
+  is-retraction-map-inv-equiv-fiber-htpy :
+    is-retraction map-equiv-fiber-htpy map-inv-equiv-fiber-htpy
+  is-retraction-map-inv-equiv-fiber-htpy (x , refl) =
+    eq-Eq-fiber f (f x) refl (inv (left-inv-right-strict-concat (H x)))
+
+  is-equiv-map-equiv-fiber-htpy : is-equiv map-equiv-fiber-htpy
+  is-equiv-map-equiv-fiber-htpy =
+    is-equiv-is-invertible
+      map-inv-equiv-fiber-htpy
+      is-section-map-inv-equiv-fiber-htpy
+      is-retraction-map-inv-equiv-fiber-htpy
+
+  equiv-fiber-htpy : fiber f y ≃ fiber g y
+  equiv-fiber-htpy = map-equiv-fiber-htpy , is-equiv-map-equiv-fiber-htpy
+```
+
+We repeat the construction for `fiber'`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {f g : A → B} (H : g ~ f) (y : B)
+  where
+
+  map-equiv-fiber-htpy' : fiber' f y → fiber' g y
+  map-equiv-fiber-htpy' (x , p) = (x , p ∙ inv (H x))
+
+  map-inv-equiv-fiber-htpy' : fiber' g y → fiber' f y
+  map-inv-equiv-fiber-htpy' (x , p) = (x , p ∙ H x)
+
+  is-section-map-inv-equiv-fiber-htpy' :
+    is-section map-equiv-fiber-htpy' map-inv-equiv-fiber-htpy'
+  is-section-map-inv-equiv-fiber-htpy' (x , p) =
+    ap (pair x) (is-retraction-inv-concat' (H x) p)
+
+  is-retraction-map-inv-equiv-fiber-htpy' :
+    is-retraction map-equiv-fiber-htpy' map-inv-equiv-fiber-htpy'
+  is-retraction-map-inv-equiv-fiber-htpy' (x , p) =
+    ap (pair x) (is-section-inv-concat' (H x) p)
+
+  is-equiv-map-equiv-fiber-htpy' : is-equiv map-equiv-fiber-htpy'
+  is-equiv-map-equiv-fiber-htpy' =
+    is-equiv-is-invertible
+      map-inv-equiv-fiber-htpy'
+      is-section-map-inv-equiv-fiber-htpy'
+      is-retraction-map-inv-equiv-fiber-htpy'
+
+  equiv-fiber-htpy' : fiber' f y ≃ fiber' g y
+  equiv-fiber-htpy' = map-equiv-fiber-htpy' , is-equiv-map-equiv-fiber-htpy'
 ```
 
 ## Table of files about fibers of maps
