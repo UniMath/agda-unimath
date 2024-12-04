@@ -15,6 +15,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import globular-types.globular-maps
 open import globular-types.globular-types
 ```
 
@@ -22,14 +23,13 @@ open import globular-types.globular-types
 
 ## Idea
 
-An
-{{#concept "equivalence" Disambiguation="globular types" Agda=equiv-Globular-Type}}
-`f` between [globular types](globular-types.globular-types.md) `A` and `B` is an
-equivalence `F₀` of $0$-cells, and for every pair of $n$-cells `x` and `y`, an
-equivalence of $(n+1)$-cells
+A {{#concept "globular equivalence" Agda=globular-equiv}} `e` between
+[globular types](globular-types.globular-types.md) `A` and `B` consists of an
+[equivalence](foundation-core.equivalences.md) `e₀` of $0$-cells, and for every
+pair of $n$-cells `x` and `y`, an equivalence of $(n+1)$-cells
 
 ```text
-  Fₙ₊₁ : (𝑛+1)-Cell A x y ≃ (𝑛+1)-Cell B (Fₙ x) (Fₙ y).
+  eₙ₊₁ : (𝑛+1)-Cell A x y ≃ (𝑛+1)-Cell B (eₙ x) (eₙ y).
 ```
 
 ## Definitions
@@ -38,128 +38,137 @@ equivalence of $(n+1)$-cells
 
 ```agda
 record
-  equiv-Globular-Type
-  {l1 l2 l3 l4 : Level} (A : Globular-Type l1 l2) (B : Globular-Type l3 l4)
-  : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  globular-equiv
+    {l1 l2 l3 l4 : Level} (A : Globular-Type l1 l2) (B : Globular-Type l3 l4) :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   where
   coinductive
+
   field
-    equiv-0-cell-equiv-Globular-Type :
+    0-cell-equiv-globular-equiv :
       0-cell-Globular-Type A ≃ 0-cell-Globular-Type B
 
-  map-0-cell-equiv-Globular-Type :
-      0-cell-Globular-Type A → 0-cell-Globular-Type B
-  map-0-cell-equiv-Globular-Type = map-equiv equiv-0-cell-equiv-Globular-Type
+  0-cell-globular-equiv : 0-cell-Globular-Type A → 0-cell-Globular-Type B
+  0-cell-globular-equiv = map-equiv 0-cell-equiv-globular-equiv
 
   field
-    globular-type-1-cell-equiv-Globular-Type :
+    1-cell-globular-equiv-globular-equiv :
       {x y : 0-cell-Globular-Type A} →
-      equiv-Globular-Type
+      globular-equiv
         ( 1-cell-globular-type-Globular-Type A x y)
         ( 1-cell-globular-type-Globular-Type B
-          ( map-0-cell-equiv-Globular-Type x)
-          ( map-0-cell-equiv-Globular-Type y))
+          ( 0-cell-globular-equiv x)
+          ( 0-cell-globular-equiv y))
 
-open equiv-Globular-Type public
+open globular-equiv public
+
+globular-map-globular-equiv :
+  {l1 l2 l3 l4 : Level}
+  {A : Globular-Type l1 l2} {B : Globular-Type l3 l4} →
+  globular-equiv A B → globular-map A B
+0-cell-globular-map (globular-map-globular-equiv e) =
+  map-equiv (0-cell-equiv-globular-equiv e)
+1-cell-globular-map-globular-map (globular-map-globular-equiv e) =
+  globular-map-globular-equiv (1-cell-globular-equiv-globular-equiv e)
 
 module _
   {l1 l2 l3 l4 : Level}
   {A : Globular-Type l1 l2} {B : Globular-Type l3 l4}
-  (F : equiv-Globular-Type A B)
+  (e : globular-equiv A B)
   where
 
-  equiv-1-cell-equiv-Globular-Type :
+  1-cell-equiv-globular-equiv :
     {x y : 0-cell-Globular-Type A} →
     1-cell-Globular-Type A x y ≃
     1-cell-Globular-Type B
-      ( map-0-cell-equiv-Globular-Type F x)
-      ( map-0-cell-equiv-Globular-Type F y)
-  equiv-1-cell-equiv-Globular-Type =
-    equiv-0-cell-equiv-Globular-Type
-      ( globular-type-1-cell-equiv-Globular-Type F)
+      ( 0-cell-globular-equiv e x)
+      ( 0-cell-globular-equiv e y)
+  1-cell-equiv-globular-equiv =
+    0-cell-equiv-globular-equiv
+      ( 1-cell-globular-equiv-globular-equiv e)
 
-  map-1-cell-equiv-Globular-Type :
+  1-cell-globular-equiv :
     {x y : 0-cell-Globular-Type A} →
     1-cell-Globular-Type A x y →
     1-cell-Globular-Type B
-      ( map-0-cell-equiv-Globular-Type F x)
-      ( map-0-cell-equiv-Globular-Type F y)
-  map-1-cell-equiv-Globular-Type =
-    map-0-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
+      ( 0-cell-globular-equiv e x)
+      ( 0-cell-globular-equiv e y)
+  1-cell-globular-equiv =
+    0-cell-globular-equiv (1-cell-globular-equiv-globular-equiv e)
 
 module _
   {l1 l2 l3 l4 : Level}
   {A : Globular-Type l1 l2} {B : Globular-Type l3 l4}
-  (F : equiv-Globular-Type A B)
+  (e : globular-equiv A B)
   where
 
-  equiv-2-cell-equiv-Globular-Type :
+  2-cell-equiv-globular-equiv :
     {x y : 0-cell-Globular-Type A}
     {f g : 1-cell-Globular-Type A x y} →
     2-cell-Globular-Type A f g ≃
     2-cell-Globular-Type B
-      ( map-1-cell-equiv-Globular-Type F f)
-      ( map-1-cell-equiv-Globular-Type F g)
-  equiv-2-cell-equiv-Globular-Type =
-    equiv-1-cell-equiv-Globular-Type
-      ( globular-type-1-cell-equiv-Globular-Type F)
+      ( 1-cell-globular-equiv e f)
+      ( 1-cell-globular-equiv e g)
+  2-cell-equiv-globular-equiv =
+    1-cell-equiv-globular-equiv
+      ( 1-cell-globular-equiv-globular-equiv e)
 
-  map-2-cell-equiv-Globular-Type :
+  2-cell-globular-equiv :
     {x y : 0-cell-Globular-Type A}
     {f g : 1-cell-Globular-Type A x y} →
     2-cell-Globular-Type A f g →
     2-cell-Globular-Type B
-      ( map-1-cell-equiv-Globular-Type F f)
-      ( map-1-cell-equiv-Globular-Type F g)
-  map-2-cell-equiv-Globular-Type =
-    map-1-cell-equiv-Globular-Type (globular-type-1-cell-equiv-Globular-Type F)
+      ( 1-cell-globular-equiv e f)
+      ( 1-cell-globular-equiv e g)
+  2-cell-globular-equiv =
+    1-cell-globular-equiv (1-cell-globular-equiv-globular-equiv e)
 
 module _
   {l1 l2 l3 l4 : Level}
   {A : Globular-Type l1 l2} {B : Globular-Type l3 l4}
-  (F : equiv-Globular-Type A B)
+  (e : globular-equiv A B)
   where
 
-  equiv-3-cell-equiv-Globular-Type :
+  3-cell-equiv-globular-equiv :
     {x y : 0-cell-Globular-Type A}
     {f g : 1-cell-Globular-Type A x y} →
     {H K : 2-cell-Globular-Type A f g} →
     3-cell-Globular-Type A H K ≃
     3-cell-Globular-Type B
-      ( map-2-cell-equiv-Globular-Type F H)
-      ( map-2-cell-equiv-Globular-Type F K)
-  equiv-3-cell-equiv-Globular-Type =
-    equiv-2-cell-equiv-Globular-Type
-      ( globular-type-1-cell-equiv-Globular-Type F)
+      ( 2-cell-globular-equiv e H)
+      ( 2-cell-globular-equiv e K)
+  3-cell-equiv-globular-equiv =
+    2-cell-equiv-globular-equiv
+      ( 1-cell-globular-equiv-globular-equiv e)
 ```
 
-### The identity equiv on a globular type
+### The identity equivalence on a globular type
 
 ```agda
-id-equiv-Globular-Type :
-  {l1 l2 : Level} (A : Globular-Type l1 l2) → equiv-Globular-Type A A
-id-equiv-Globular-Type A =
+id-globular-equiv :
+  {l1 l2 : Level} (A : Globular-Type l1 l2) → globular-equiv A A
+id-globular-equiv A =
   λ where
-  .equiv-0-cell-equiv-Globular-Type → id-equiv
-  .globular-type-1-cell-equiv-Globular-Type {x} {y} →
-    id-equiv-Globular-Type (1-cell-globular-type-Globular-Type A x y)
+  .0-cell-equiv-globular-equiv → id-equiv
+  .1-cell-globular-equiv-globular-equiv {x} {y} →
+    id-globular-equiv (1-cell-globular-type-Globular-Type A x y)
 ```
 
 ### Composition of equivalences of globular types
 
 ```agda
-comp-equiv-Globular-Type :
+comp-globular-equiv :
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : Globular-Type l1 l2}
   {B : Globular-Type l3 l4}
   {C : Globular-Type l5 l6} →
-  equiv-Globular-Type B C → equiv-Globular-Type A B → equiv-Globular-Type A C
-comp-equiv-Globular-Type g f =
+  globular-equiv B C → globular-equiv A B → globular-equiv A C
+comp-globular-equiv g f =
   λ where
-  .equiv-0-cell-equiv-Globular-Type →
-    equiv-0-cell-equiv-Globular-Type g ∘e equiv-0-cell-equiv-Globular-Type f
-  .globular-type-1-cell-equiv-Globular-Type →
-    comp-equiv-Globular-Type
-      ( globular-type-1-cell-equiv-Globular-Type g)
-      ( globular-type-1-cell-equiv-Globular-Type f)
+  .0-cell-equiv-globular-equiv →
+    0-cell-equiv-globular-equiv g ∘e 0-cell-equiv-globular-equiv f
+  .1-cell-globular-equiv-globular-equiv →
+    comp-globular-equiv
+      ( 1-cell-globular-equiv-globular-equiv g)
+      ( 1-cell-globular-equiv-globular-equiv f)
 ```

@@ -7,6 +7,7 @@ module graph-theory.morphisms-directed-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-dependent-identifications
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -85,7 +86,7 @@ module _
         ( λ y → edge-hom-Directed-Graph)
 ```
 
-### Composition of morphisms graphs
+### Composition of morphisms of directed graphs
 
 ```agda
 module _
@@ -117,7 +118,7 @@ module _
   pr2 (comp-hom-Directed-Graph g f) = edge-comp-hom-Directed-Graph g f
 ```
 
-### Identity morphisms graphs
+### Identity morphisms of directed graphs
 
 ```agda
 module _
@@ -144,12 +145,12 @@ module _
     Σ ( vertex-hom-Directed-Graph G H f ~ vertex-hom-Directed-Graph G H g)
       ( λ α →
         ( x y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
-        binary-tr
+        binary-dependent-identification
           ( edge-Directed-Graph H)
           ( α x)
           ( α y)
-          ( edge-hom-Directed-Graph G H f e) ＝
-        edge-hom-Directed-Graph G H g e)
+          ( edge-hom-Directed-Graph G H f e)
+          ( edge-hom-Directed-Graph G H g e))
 
   module _
     (f g : hom-Directed-Graph G H) (α : htpy-hom-Directed-Graph f g)
@@ -161,12 +162,12 @@ module _
 
     edge-htpy-hom-Directed-Graph :
       (x y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
-      binary-tr
+      binary-dependent-identification
         ( edge-Directed-Graph H)
         ( vertex-htpy-hom-Directed-Graph x)
         ( vertex-htpy-hom-Directed-Graph y)
-        ( edge-hom-Directed-Graph G H f e) ＝
-      edge-hom-Directed-Graph G H g e
+        ( edge-hom-Directed-Graph G H f e)
+        ( edge-hom-Directed-Graph G H g e)
     edge-htpy-hom-Directed-Graph = pr2 α
 
   refl-htpy-hom-Directed-Graph :
@@ -209,6 +210,84 @@ module _
     (f g : hom-Directed-Graph G H) → htpy-hom-Directed-Graph f g → (f ＝ g)
   eq-htpy-hom-Directed-Graph f g =
     map-inv-equiv (extensionality-hom-Directed-Graph f g)
+```
+
+### The left unit law of composition of morphisms of directed graphs
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)
+  (f : hom-Directed-Graph G H)
+  where
+
+  vertex-left-unit-law-comp-hom-Directed-Graph :
+    vertex-comp-hom-Directed-Graph G H H (id-hom-Directed-Graph H) f ~
+    vertex-hom-Directed-Graph G H f
+  vertex-left-unit-law-comp-hom-Directed-Graph = refl-htpy
+
+  edge-left-unit-law-comp-hom-Directed-Graph :
+    {x y : vertex-Directed-Graph G} →
+    edge-comp-hom-Directed-Graph G H H (id-hom-Directed-Graph H) f x y ~
+    edge-hom-Directed-Graph G H f
+  edge-left-unit-law-comp-hom-Directed-Graph = refl-htpy
+
+  left-unit-law-comp-hom-Directed-Graph :
+    htpy-hom-Directed-Graph G H
+      ( comp-hom-Directed-Graph G H H (id-hom-Directed-Graph H) f)
+      ( f)
+  pr1 left-unit-law-comp-hom-Directed-Graph =
+    vertex-left-unit-law-comp-hom-Directed-Graph
+  pr2 left-unit-law-comp-hom-Directed-Graph _ _ =
+    edge-left-unit-law-comp-hom-Directed-Graph
+```
+
+### The right unit law of composition of morphisms of directed graphs
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)
+  (f : hom-Directed-Graph G H)
+  where
+
+  vertex-right-unit-law-comp-hom-Directed-Graph :
+    vertex-comp-hom-Directed-Graph G G H f (id-hom-Directed-Graph G) ~
+    vertex-hom-Directed-Graph G H f
+  vertex-right-unit-law-comp-hom-Directed-Graph = refl-htpy
+
+  edge-right-unit-law-comp-hom-Directed-Graph :
+    {x y : vertex-Directed-Graph G} →
+    edge-comp-hom-Directed-Graph G G H f (id-hom-Directed-Graph G) x y ~
+    edge-hom-Directed-Graph G H f
+  edge-right-unit-law-comp-hom-Directed-Graph = refl-htpy
+
+  right-unit-law-comp-hom-Directed-Graph :
+    htpy-hom-Directed-Graph G H
+      ( comp-hom-Directed-Graph G G H f (id-hom-Directed-Graph G))
+      ( f)
+  pr1 right-unit-law-comp-hom-Directed-Graph =
+    vertex-right-unit-law-comp-hom-Directed-Graph
+  pr2 right-unit-law-comp-hom-Directed-Graph _ _ =
+    edge-right-unit-law-comp-hom-Directed-Graph
+```
+
+### Associativity of composition of morphisms of directed graphs
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  (G : Directed-Graph l1 l2) (H : Directed-Graph l3 l4)
+  (K : Directed-Graph l5 l6) (L : Directed-Graph l7 l8)
+  (h : hom-Directed-Graph K L)
+  (g : hom-Directed-Graph H K)
+  (f : hom-Directed-Graph G H)
+  where
+
+  associative-comp-hom-Directed-Graph :
+    htpy-hom-Directed-Graph G L
+      ( comp-hom-Directed-Graph G H L (comp-hom-Directed-Graph H K L h g) f)
+      ( comp-hom-Directed-Graph G K L h (comp-hom-Directed-Graph G H K g f))
+  associative-comp-hom-Directed-Graph =
+    refl-htpy-hom-Directed-Graph G L _
 ```
 
 ## External links

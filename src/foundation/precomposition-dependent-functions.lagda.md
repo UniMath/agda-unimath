@@ -10,6 +10,7 @@ open import foundation-core.precomposition-dependent-functions public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.dependent-universal-property-equivalences
 open import foundation.function-extensionality
 open import foundation.universe-levels
@@ -17,10 +18,12 @@ open import foundation.universe-levels
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
+open import foundation-core.type-theoretic-principle-of-choice
 ```
 
 </details>
@@ -119,4 +122,38 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
         ( funext g h)
         ( funext (g ∘ f) (h ∘ f))
         ( H g h))
+```
+
+### The dependent precomposition map at a dependent pair type
+
+Given a map `f : X → Y` and a family `B : (y : Y) → A y → 𝒰` we have a
+[commuting square](foundation-core.commuting-squares-of-maps.md)
+
+```text
+                                     precomp-Π f (λ y → Σ (A y) (B y))
+            ((y : Y) → Σ (A y) (B y)) -----------------------------> ((x : X) → Σ (A (f x)) (B (f x)))
+                       |                                                          |
+                     ~ |                                                          | ~
+                       ∨                                                          ∨
+  Σ (a : (y : Y) → A y) ((y : Y) → B y (a y)) --------> Σ (a : (x : X) → A (f x)) ((x : X) → B (f x) (a x)).
+                       map-Σ (precomp-Π f A) (λ a → precomp-Π f (λ y → B y (a y)))
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {X : UU l1} {Y : UU l2} {A : Y → UU l3} {B : (y : Y) → A y → UU l4}
+  {f : X → Y}
+  where
+
+  coherence-precomp-Π-Σ :
+    coherence-square-maps
+      ( precomp-Π f (λ y → Σ (A y) (B y)))
+      ( map-distributive-Π-Σ)
+      ( map-distributive-Π-Σ)
+      ( map-Σ
+        ( λ a → (x : X) → B (f x) (a x))
+        ( precomp-Π f A)
+        ( λ a → precomp-Π f (λ y → B y (a y))))
+  coherence-precomp-Π-Σ = refl-htpy
 ```

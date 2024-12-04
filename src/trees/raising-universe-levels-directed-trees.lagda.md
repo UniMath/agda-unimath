@@ -40,10 +40,10 @@ module _
   node-raise-Directed-Tree : UU (l1 ⊔ l3)
   node-raise-Directed-Tree = vertex-Directed-Graph graph-raise-Directed-Tree
 
-  equiv-node-compute-raise-Directed-Tree :
+  node-equiv-compute-raise-Directed-Tree :
     node-Directed-Tree T ≃ node-raise-Directed-Tree
-  equiv-node-compute-raise-Directed-Tree =
-    equiv-vertex-compute-raise-Directed-Graph l3 l4 (graph-Directed-Tree T)
+  node-equiv-compute-raise-Directed-Tree =
+    vertex-equiv-compute-raise-Directed-Graph l3 l4 (graph-Directed-Tree T)
 
   node-compute-raise-Directed-Tree :
     node-Directed-Tree T → node-raise-Directed-Tree
@@ -54,14 +54,14 @@ module _
     (x y : node-raise-Directed-Tree) → UU (l2 ⊔ l4)
   edge-raise-Directed-Tree = edge-Directed-Graph graph-raise-Directed-Tree
 
-  equiv-edge-compute-raise-Directed-Tree :
+  edge-equiv-compute-raise-Directed-Tree :
     (x y : node-Directed-Tree T) →
     edge-Directed-Tree T x y ≃
     edge-raise-Directed-Tree
       ( node-compute-raise-Directed-Tree x)
       ( node-compute-raise-Directed-Tree y)
-  equiv-edge-compute-raise-Directed-Tree =
-    equiv-edge-compute-raise-Directed-Graph l3 l4 (graph-Directed-Tree T)
+  edge-equiv-compute-raise-Directed-Tree =
+    edge-equiv-compute-raise-Directed-Graph l3 l4 (graph-Directed-Tree T)
 
   edge-compute-raise-Directed-Tree :
     (x y : node-Directed-Tree T) →
