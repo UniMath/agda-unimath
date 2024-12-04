@@ -6,6 +6,7 @@
 module order-theory where
 
 open import order-theory.accessible-elements-relations public
+open import order-theory.bottom-elements-large-posets public
 open import order-theory.bottom-elements-posets public
 open import order-theory.bottom-elements-preorders public
 open import order-theory.chains-posets public
@@ -27,8 +28,6 @@ open import order-theory.dependent-products-large-meet-semilattices public
 open import order-theory.dependent-products-large-posets public
 open import order-theory.dependent-products-large-preorders public
 open import order-theory.dependent-products-large-suplattices public
-open import order-theory.directed-complete-posets public
-open import order-theory.directed-families public
 open import order-theory.distributive-lattices public
 open import order-theory.finite-coverings-locales public
 open import order-theory.finite-posets public
@@ -46,12 +45,18 @@ open import order-theory.homomorphisms-large-locales public
 open import order-theory.homomorphisms-large-meet-semilattices public
 open import order-theory.homomorphisms-large-suplattices public
 open import order-theory.homomorphisms-meet-semilattices public
-open import order-theory.homomorphisms-meet-sup-lattices public
-open import order-theory.homomorphisms-sup-lattices public
+open import order-theory.homomorphisms-meet-suplattices public
+open import order-theory.homomorphisms-suplattices public
 open import order-theory.ideals-preorders public
+open import order-theory.incidence-algebras public
+open import order-theory.inflattices public
+open import order-theory.inhabited-chains-posets public
+open import order-theory.inhabited-chains-preorders public
 open import order-theory.inhabited-finite-total-orders public
 open import order-theory.interval-subposets public
+open import order-theory.join-preserving-maps-posets public
 open import order-theory.join-semilattices public
+open import order-theory.knaster-tarski-fixed-point-theorem public
 open import order-theory.large-frames public
 open import order-theory.large-locales public
 open import order-theory.large-meet-semilattices public
@@ -78,6 +83,10 @@ open import order-theory.maximal-chains-preorders public
 open import order-theory.meet-semilattices public
 open import order-theory.meet-suplattices public
 open import order-theory.nuclei-large-locales public
+open import order-theory.opposite-large-posets public
+open import order-theory.opposite-large-preorders public
+open import order-theory.opposite-posets public
+open import order-theory.opposite-preorders public
 open import order-theory.order-preserving-maps-large-posets public
 open import order-theory.order-preserving-maps-large-preorders public
 open import order-theory.order-preserving-maps-posets public
@@ -95,6 +104,9 @@ open import order-theory.preorders public
 open import order-theory.principal-lower-sets-large-posets public
 open import order-theory.principal-upper-sets-large-posets public
 open import order-theory.reflective-galois-connections-large-posets public
+open import order-theory.resizing-posets public
+open import order-theory.resizing-preorders public
+open import order-theory.resizing-suplattices public
 open import order-theory.similarity-of-elements-large-posets public
 open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.similarity-of-order-preserving-maps-large-posets public
@@ -102,6 +114,7 @@ open import order-theory.similarity-of-order-preserving-maps-large-preorders pub
 open import order-theory.subposets public
 open import order-theory.subpreorders public
 open import order-theory.suplattices public
+open import order-theory.supremum-preserving-maps-posets public
 open import order-theory.top-elements-large-posets public
 open import order-theory.top-elements-posets public
 open import order-theory.top-elements-preorders public

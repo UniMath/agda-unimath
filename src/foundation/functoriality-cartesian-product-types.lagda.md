@@ -35,7 +35,7 @@ The **functorial action** of the
 `f : A → B` and `g : C → D` and returns a map
 
 ```text
-  f × g : A × B → C × D`
+  f × g : A × B → C × D
 ```
 
 between the cartesian product types. This functorial action is _bifunctorial_ in

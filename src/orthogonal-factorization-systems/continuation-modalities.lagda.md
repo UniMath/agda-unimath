@@ -29,8 +29,8 @@ open import foundation.universal-property-equivalences
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.large-lawvere-tierney-topologies
-open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.types-local-at-maps
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 

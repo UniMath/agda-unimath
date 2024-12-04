@@ -133,6 +133,24 @@ module _
     is-equiv-is-contr _ is-contr-A is-contr-B
 ```
 
+### Contractibility of the base of a contractible dependent sum
+
+Given a type `A` and a type family over it `B`, then if the dependent sum
+`Σ A B` is contractible, it follows that if there is a section `(x : A) → B x`
+then `A` is contractible.
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
+  where
+
+  abstract
+    is-contr-base-is-contr-Σ' :
+      ((x : A) → B x) → is-contr (Σ A B) → is-contr A
+    is-contr-base-is-contr-Σ' s =
+      is-contr-retract-of (Σ A B) ((λ a → a , s a) , pr1 , refl-htpy)
+```
+
 ### Contractibility of cartesian product types
 
 Given two types `A` and `B`, the following are equivalent:

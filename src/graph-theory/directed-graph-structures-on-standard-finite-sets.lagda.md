@@ -22,7 +22,7 @@ open import univalent-combinatorics.standard-finite-types
 A
 {{#concept "directed graph structure" WD="directed graph" WDID=Q1137726 Agda=structure-directed-graph-Fin}}
 on a [standard finite set](univalent-combinatorics.standard-finite-types.md)
-`Fin n` is a [binary type-valued relation](foundation.binary-relations.md)
+`Fin n` is a [binary type valued relation](foundation.binary-relations.md)
 
 ```text
   Fin n → Fin n → 𝒰.
