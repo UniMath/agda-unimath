@@ -524,6 +524,17 @@ module _
 
 ### Computing the fiber map between the vertical maps in the pullback-hom square
 
+We have an equivalence of arrows
+
+```text
+                                      ~
+      (Π (b : B), fiber g (h b)) ----------> fiber (g ∘ -) h
+                  |                                 |
+                  |                                 |
+                  ∨                   ~             ∨
+  (Π (a : A) → (fiber g (h (f a)))) ----> fiber (g ∘ -) (h ∘ f)
+```
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
@@ -549,7 +560,7 @@ module _
       ( postcomp A g)
       ( precomp f Y h)
       ( refl)
-      ( compute-eq-htpy-ap-precomp f (pr2 (map-distributive-Π-Σ H)))
+      ( coherence-eq-htpy-ap-precomp f (pr2 (map-distributive-Π-Σ H)))
 ```
 
 ## Table of files about pullbacks

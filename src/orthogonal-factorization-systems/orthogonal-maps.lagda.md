@@ -61,8 +61,8 @@ The map `f : A → B` is said to be
 {{#concept "orthogonal" Disambiguation="maps of types" Agda=is-orthogonal}} to
 `g : X → Y` if any of the following equivalent definitions hold
 
-1. Their [pullback-hom](orthogonal-factorization-systems.pullback-hom.md) is an
-   equivalence.
+1. Their [pullback-hom](orthogonal-factorization-systems.pullback-hom.md)
+   `f ⋔ g` is an equivalence.
 
 2. There is a [unique](foundation-core.contractible-types.md)
    [lifting operation](orthogonal-factorization-systems.lifting-operations.md)
@@ -108,6 +108,8 @@ module _
   is-orthogonal : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-orthogonal = is-equiv (pullback-hom f g)
 
+  infix 6 _⊥_
+  _⊥_ : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   _⊥_ = is-orthogonal
 
   is-prop-is-orthogonal : is-prop is-orthogonal
@@ -319,6 +321,28 @@ module _
 ```
 
 ### Being orthogonal means satisfying the fiber condition for orthogonal maps
+
+**Proof.** The exponential square is a pullback if and only if the induced map
+on fibers of the vertical maps
+
+```text
+  fiber (g ∘ -) h → fiber (g ∘ -) (h ∘ f)
+```
+
+is an equivalence for all `h`, and this map is equivalent to the relevant fiber
+map
+
+```text
+                                      ~
+      (Π (b : B), fiber g (h b)) ----------> fiber (g ∘ -) h
+                  |                                 |
+                  |                                 |
+                  ∨                   ~             ∨
+  (Π (a : A) → (fiber g (h (f a)))) ----> fiber (g ∘ -) (h ∘ f),
+```
+
+hence the fiber condition is satisified if and only if `f` and `g` are
+orthogonal.
 
 ```agda
 module _

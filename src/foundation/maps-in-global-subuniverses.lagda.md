@@ -65,7 +65,7 @@ module _
     is-in-global-subuniverse-map 𝒫 (terminal-map A) →
     is-in-global-subuniverse 𝒫 A
   is-in-global-subuniverse-is-in-global-subuniverse-terminal-map H =
-    is-closed-under-equiv-global-subuniverse 𝒫 l1 l1
+    is-closed-under-equiv-global-subuniverse 𝒫
       ( fiber (terminal-map A) star)
       ( A)
       ( equiv-fiber-terminal-map star)
@@ -75,7 +75,7 @@ module _
     is-in-global-subuniverse 𝒫 A →
     is-in-global-subuniverse-map 𝒫 (terminal-map A)
   is-in-global-subuniverse-terminal-map-is-in-global-subuniverse H u =
-    is-closed-under-equiv-global-subuniverse 𝒫 l1 l1
+    is-closed-under-equiv-global-subuniverse 𝒫
       ( A)
       ( fiber (terminal-map A) u)
       ( inv-equiv-fiber-terminal-map u)
@@ -98,7 +98,7 @@ module _
     cartesian-hom-arrow g f →
     is-in-global-subuniverse-map 𝒫 g
   is-in-global-subuniverse-map-base-change F α d =
-    is-closed-under-equiv-global-subuniverse 𝒫 (l1 ⊔ l2) (l3 ⊔ l4)
+    is-closed-under-equiv-global-subuniverse 𝒫
       ( fiber f (map-codomain-cartesian-hom-arrow g f α d))
       ( fiber g d)
       ( inv-equiv (equiv-fibers-cartesian-hom-arrow g f α d))
