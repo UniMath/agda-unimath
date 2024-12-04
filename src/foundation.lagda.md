@@ -20,6 +20,7 @@ open import foundation.action-on-equivalences-type-families public
 open import foundation.action-on-equivalences-type-families-over-subuniverses public
 open import foundation.action-on-higher-identifications-functions public
 open import foundation.action-on-homotopies-functions public
+open import foundation.action-on-identifications-binary-dependent-functions public
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public
 open import foundation.action-on-identifications-functions public
@@ -31,6 +32,7 @@ open import foundation.axiom-of-choice public
 open import foundation.bands public
 open import foundation.base-changes-span-diagrams public
 open import foundation.bicomposition-functions public
+open import foundation.binary-dependent-identifications public
 open import foundation.binary-embeddings public
 open import foundation.binary-equivalences public
 open import foundation.binary-equivalences-unordered-pairs-of-types public
@@ -208,6 +210,8 @@ open import foundation.functoriality-truncation public
 open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.global-subuniverses public
+open import foundation.globular-type-of-dependent-functions public
+open import foundation.globular-type-of-functions public
 open import foundation.higher-homotopies-morphisms-arrows public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
