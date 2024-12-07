@@ -28,49 +28,19 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Euclidean division is division with remainder, i.e., the Euclidean division of
-`n` by `d` is the largest natural number `k ≤ n/d`, and the remainder is the
-unique natural number `r < d` such that `kd + r = n`.
+{{#concept "Euclidean division" Agda=euclidean-division-ℕ}} is a binary operation on the [natural numbers](elementary-number-theory.natural-numbers.md) given by division with remainder. In other words, the Euclidean division of
+`n` by `d` gives the unique pair of natural numbers `q` and `r<d` such that the identification `kd + r ＝ n` holds.
+
+There are several ways of defining Euclidean division. Since we have already defined modular arithmetic independently, we can define the Euclidean division of a natural number `n` by `d` as the data consisting of:
+- A natural number `r`
+- A proof that `r` is congruent to `n` modulo `d`
+- A proof that if `d ≠ 0`, then `r < d`.
+
+Given that `r` is congruent to `n` modulo `d` we obtain a number `q` such that `d * q = dist-ℕ r x`, where `dist-ℕ` is the [distance function](elementary-number-theory.distance-natural-numbers.md). This number `q` is the quotient after Euclidean division.
+
+Note that if `d ＝ 0`, then the unique natural number that is congruent to `n` modulo `d` is the number `n` itself. The type of this data is therefore always [contractible](foundation-core.contractible-types.md), even in the case `d ＝ 0`.
 
 ## Definitions
-
-### Euclidean division via an array of natural numbers
-
-The following definition produces for each `k : ℕ` a sequence of sequences as
-follows:
-
-```text
-    This is column k
-      ↓
-  0,…,0,0,0,0,0,0,0,…  -- The sequence at row 0 is the constant sequence
-  1,0,…,0,0,0,0,0,0,…  -- We append 1's at the start
-      ⋮
-  1,…,1,0,…,0,0,0,0,…  -- This is row k+1
-  2,1,…,1,0,0,0,0,0,…  -- After k+1 steps we append 2's at the start
-      ⋮
-  2,…,2,1,…,1,0,…,0,…  -- This is row 2(k+1)
-  3,2,…,2,1,…,1,0,0,…  -- After another k+1 steps we append 3's at the start
-      ⋮
-```
-
-This produces an array of natural numbers. We find the quotient of the euclidean
-division of `n` by `k+1` in the `k`-th column of the `n`-th row of this array.
-We will arbitrarily set the quotient of the euclidean division of `n` by `0` to
-`0` in this definition.
-
-```agda
-array-quotient-euclidean-division-ℕ : ℕ → ℕ → ℕ → ℕ
-array-quotient-euclidean-division-ℕ k zero-ℕ m = zero-ℕ
-array-quotient-euclidean-division-ℕ k (succ-ℕ n) zero-ℕ =
-  succ-ℕ (array-quotient-euclidean-division-ℕ k n k)
-array-quotient-euclidean-division-ℕ k (succ-ℕ n) (succ-ℕ m) =
-  array-quotient-euclidean-division-ℕ k n m
-
-quotient-euclidean-division-ℕ' : ℕ → ℕ → ℕ
-quotient-euclidean-division-ℕ' zero-ℕ n = zero-ℕ
-quotient-euclidean-division-ℕ' (succ-ℕ k) n =
-  array-quotient-euclidean-division-ℕ k n k
-```
 
 ### Euclidean division via modular arithmetic
 
@@ -137,9 +107,40 @@ eq-euclidean-division-ℕ (succ-ℕ k) x =
     ( leq-nat-mod-succ-ℕ k x))
 ```
 
+### Euclidean division via an array of natural numbers
+
+The following definition produces for each `k : ℕ` a sequence of sequences as
+follows:
+
+```text
+    This is column k
+      ↓
+  0,…,0,0,0,0,0,0,0,…  -- The sequence at row 0 is the constant sequence
+  1,0,…,0,0,0,0,0,0,…  -- We append 1's at the start
+      ⋮
+  1,…,1,0,…,0,0,0,0,…  -- This is row k+1
+  2,1,…,1,0,0,0,0,0,…  -- After k+1 steps we append 2's at the start
+      ⋮
+  2,…,2,1,…,1,0,…,0,…  -- This is row 2(k+1)
+  3,2,…,2,1,…,1,0,0,…  -- After another k+1 steps we append 3's at the start
+      ⋮
+```
+
+This produces an array of natural numbers. We find the quotient of the euclidean
+division of `n` by `k+1` in the `k`-th column of the `n`-th row of this array.
+We will arbitrarily set the quotient of the euclidean division of `n` by `0` to
+`0` in this definition.
+
 ```agda
-map-extended-euclidean-algorithm : ℕ × ℕ → ℕ × ℕ
-pr1 (map-extended-euclidean-algorithm (pair x y)) = y
-pr2 (map-extended-euclidean-algorithm (pair x y)) =
-  remainder-euclidean-division-ℕ y x
+array-quotient-euclidean-division-ℕ : ℕ → ℕ → ℕ → ℕ
+array-quotient-euclidean-division-ℕ k zero-ℕ m = zero-ℕ
+array-quotient-euclidean-division-ℕ k (succ-ℕ n) zero-ℕ =
+  succ-ℕ (array-quotient-euclidean-division-ℕ k n k)
+array-quotient-euclidean-division-ℕ k (succ-ℕ n) (succ-ℕ m) =
+  array-quotient-euclidean-division-ℕ k n m
+
+quotient-euclidean-division-ℕ' : ℕ → ℕ → ℕ
+quotient-euclidean-division-ℕ' zero-ℕ n = zero-ℕ
+quotient-euclidean-division-ℕ' (succ-ℕ k) n =
+  array-quotient-euclidean-division-ℕ k n k
 ```

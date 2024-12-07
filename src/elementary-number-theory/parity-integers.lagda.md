@@ -24,6 +24,7 @@ open import foundation.empty-types
 open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -80,6 +81,26 @@ has-odd-expansion-ℤ = fiber odd-integer-ℤ
 ```
 
 ## Properties
+
+### Even integers are closed under equality
+
+```agda
+is-even-eq-ℤ : {a b : ℤ} → a ＝ b → is-even-ℤ b → is-even-ℤ a
+is-even-eq-ℤ refl H = H
+
+is-even-eq-ℤ' : {a b : ℤ} → a ＝ b → is-even-ℤ a → is-even-ℤ b
+is-even-eq-ℤ' refl H = H
+```
+
+### Odd integers are closed under equality
+
+```agda
+is-odd-eq-ℤ : {a b : ℤ} → a ＝ b → is-odd-ℤ b → is-odd-ℤ a
+is-odd-eq-ℤ refl H = H
+
+is-odd-eq-ℤ' : {a b : ℤ} → a ＝ b → is-odd-ℤ a → is-odd-ℤ b
+is-odd-eq-ℤ' refl H = H
+```
 
 ### A natural number is even if and only if it is even as an integer
 
@@ -215,49 +236,91 @@ is-odd-add-two-is-odd-ℤ : (a : ℤ) → is-odd-ℤ a → is-odd-ℤ (a +ℤ in
 is-odd-add-two-is-odd-ℤ a H K = H (is-even-is-even-add-two-ℤ a K)
 ```
 
+### Either `a` or `a + 1` is even
+
+```agda
+is-even-or-is-even-add-one-ℤ :
+  (a : ℤ) → is-even-ℤ a + is-even-ℤ (a +ℤ one-ℤ)
+is-even-or-is-even-add-one-ℤ (inl zero-ℕ) = inr is-even-zero-ℤ
+is-even-or-is-even-add-one-ℤ (inl (succ-ℕ x)) = {!!}
+is-even-or-is-even-add-one-ℤ (inr (inl star)) = inl is-even-zero-ℤ
+is-even-or-is-even-add-one-ℤ (inr (inr x)) = {!!}
+```
+
 ### If an integer `x` is even, then `x + 1` is odd
 
 ```agda
-is-odd-succ-is-even-ℤ :
+is-odd-add-one-is-even-ℤ :
   (a : ℤ) → is-even-ℤ a → is-odd-ℤ (a +ℤ one-ℤ)
-is-odd-succ-is-even-ℤ a H K =
+is-odd-add-one-is-even-ℤ a H K =
   is-odd-one-ℤ (div-right-summand-ℤ (int-ℕ 2) a one-ℤ H K)
 ```
 
 ### If an integer `x` is even, then `x - 1` is odd
 
 ```agda
-is-odd-pred-is-even-ℤ :
+is-odd-add-neg-one-is-even-ℤ :
   (a : ℤ) → is-even-ℤ a → is-odd-ℤ (a -ℤ one-ℤ)
-is-odd-pred-is-even-ℤ a H K =
+is-odd-add-neg-one-is-even-ℤ a H K =
   is-odd-neg-one-ℤ (div-right-summand-ℤ (int-ℕ 2) a neg-one-ℤ H K)
 ```
 
 ### If an integer `x + 1` is even, then `x` is odd
 
 ```agda
-is-odd-is-even-succ-ℤ :
+is-odd-is-even-add-one-ℤ :
   (a : ℤ) → is-even-ℤ (a +ℤ one-ℤ) → is-odd-ℤ a
-is-odd-is-even-succ-ℤ a H K =
+is-odd-is-even-add-one-ℤ a H K =
   is-odd-one-ℤ (div-right-summand-ℤ (int-ℕ 2) a one-ℤ K H)
 ```
 
-### If an integer `x - 1` is even, then `x` is odd
+### If an integer `a - 1` is even, then `a` is odd
 
 ```agda
-is-odd-is-even-pred-ℤ :
+is-odd-is-even-add-neg-one-ℤ :
   (a : ℤ) → is-even-ℤ (a -ℤ one-ℤ) → is-odd-ℤ a
-is-odd-is-even-pred-ℤ a H K =
+is-odd-is-even-add-neg-one-ℤ a H K =
   is-odd-neg-one-ℤ (div-right-summand-ℤ (int-ℕ 2) a neg-one-ℤ K H)
 ```
 
 ### If an integer `x` is odd, then `x + 1` is even
 
 ```agda
-is-even-succ-is-odd-ℤ :
+is-even-add-one-is-odd-ℤ :
   (a : ℤ) → is-odd-ℤ a → is-even-ℤ (a +ℤ one-ℤ)
-is-even-succ-is-odd-ℤ a H =
-  is-even-is-not-odd-ℤ (a +ℤ one-ℤ) ( λ K → {!!})
+is-even-add-one-is-odd-ℤ a H =
+  is-even-is-not-odd-ℤ
+    ( a +ℤ one-ℤ)
+    ( λ K →
+      {!is-odd-!})
+```
+
+### If an integer is even, then its predecessor is odd
+
+```agda
+is-odd-pred-is-even-ℤ :
+  (a : ℤ) → is-even-ℤ a → is-odd-ℤ (pred-ℤ a)
+is-odd-pred-is-even-ℤ a H =
+  is-odd-eq-ℤ (is-right-add-neg-one-pred-ℤ a) (is-odd-add-neg-one-is-even-ℤ a H)
+```
+
+### If the successor of an integer `a` is even, then `a` is odd
+
+```agda
+is-odd-is-even-succ-ℤ :
+  (a : ℤ) → is-even-ℤ (succ-ℤ a) → is-odd-ℤ a
+is-odd-is-even-succ-ℤ a H =
+  is-odd-is-even-add-one-ℤ a (is-even-eq-ℤ' (is-right-add-one-succ-ℤ a) H)
+```
+
+### If the predecessor of an integer is even, then it is odd
+
+```agda
+is-odd-is-even-pred-ℤ :
+  (a : ℤ) → is-even-ℤ (pred-ℤ a) → is-odd-ℤ a
+is-odd-is-even-pred-ℤ a H =
+  is-odd-is-even-add-neg-one-ℤ a
+    ( is-even-eq-ℤ' (is-right-add-neg-one-pred-ℤ a) H)
 ```
 
 ### If an integer `x + 1` is odd, then `x` is even
@@ -276,7 +339,7 @@ is-even-is-odd-succ-ℕ n p =
 ```agda
 is-odd-has-odd-expansion-ℤ : (a : ℤ) → has-odd-expansion-ℤ a → is-odd-ℤ a
 is-odd-has-odd-expansion-ℤ ._ (x , refl) =
-  is-odd-succ-is-even-ℤ (int-ℕ 2 *ℤ x) (x , commutative-mul-ℤ x (int-ℕ 2))
+  is-odd-add-one-is-even-ℤ (int-ℕ 2 *ℤ x) (x , commutative-mul-ℤ x (int-ℕ 2))
 
 has-odd-expansion-neg-one-ℤ : has-odd-expansion-ℤ neg-one-ℤ
 pr1 has-odd-expansion-neg-one-ℤ = neg-one-ℤ

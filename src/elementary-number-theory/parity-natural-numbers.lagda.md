@@ -16,6 +16,8 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.cartesian-product-types
+open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -80,6 +82,26 @@ has-odd-expansion-ℕ n = fiber odd-number-ℕ n
 ```
 
 ## Properties
+
+### Even natural numbers are closed under equality
+
+```agda
+is-even-eq-ℕ : {m n : ℕ} → m ＝ n → is-even-ℕ n → is-even-ℕ m
+is-even-eq-ℕ refl H = H
+
+is-even-eq-ℕ' : {m n : ℕ} → m ＝ n → is-even-ℕ m → is-even-ℕ n
+is-even-eq-ℕ' refl H = H
+```
+
+### Odd natural numbers are closed under equality
+
+```agda
+is-odd-eq-ℕ : {m n : ℕ} → m ＝ n → is-odd-ℕ n → is-odd-ℕ m
+is-odd-eq-ℕ refl H = H
+
+is-odd-eq-ℕ' : {m n : ℕ} → m ＝ n → is-odd-ℕ m → is-odd-ℕ n
+is-odd-eq-ℕ' refl H = H
+```
 
 ### Being even or odd is decidable
 
@@ -271,3 +293,88 @@ is-even-right-summand-is-odd-ℕ m (succ-ℕ (succ-ℕ n)) H K =
     ( is-even-right-summand-is-odd-ℕ m n H
       ( is-odd-is-odd-succ-succ-ℕ (m +ℕ n) K))
 ```
+
+### If one of the summands is even and the other is odd, then the sum is odd
+
+```agda
+is-odd-add-is-odd-left-summand-ℕ :
+  (m n : ℕ) → is-odd-ℕ m → is-even-ℕ n → is-odd-ℕ (m +ℕ n)
+is-odd-add-is-odd-left-summand-ℕ m n H K L =
+  H (is-even-left-summand-ℕ m n K L)
+
+is-odd-add-is-odd-right-summand-ℕ :
+  (m n : ℕ) → is-even-ℕ m → is-odd-ℕ n → is-odd-ℕ (m +ℕ n)
+is-odd-add-is-odd-right-summand-ℕ m n H K L =
+  K (is-even-right-summand-ℕ m n H L)
+```
+
+### Either `n` or `n + 1` is even
+
+```agda
+abstract
+  is-even-or-is-even-succ-ℕ :
+    (n : ℕ) → is-even-ℕ n + is-even-ℕ (succ-ℕ n)
+  is-even-or-is-even-succ-ℕ n
+    with
+    is-decidable-is-even-ℕ n
+  ... | inl H = inl H
+  ... | inr H = inr (is-even-succ-is-odd-ℕ n H)
+```
+
+### Either `n` or `n + 1` is odd
+
+```agda
+abstract
+  is-odd-or-is-odd-succ-ℕ :
+    (n : ℕ) → is-odd-ℕ n + is-odd-ℕ (succ-ℕ n)
+  is-odd-or-is-odd-succ-ℕ n
+    with
+    is-decidable-is-odd-ℕ n
+  ... | inl H = inl H
+  ... | inr H = inr (is-odd-succ-is-even-ℕ n (is-even-is-not-odd-ℕ n H))
+```
+
+### The sum `n + n` is even
+
+```agda
+is-even-add-self-ℕ : (n : ℕ) → is-even-ℕ (n +ℕ n)
+is-even-add-self-ℕ n = (n , right-two-law-mul-ℕ n)
+```
+
+### The sum `n + (n + 1)` is odd
+
+```agda
+is-odd-add-succ-self-ℕ :
+  (n : ℕ) → is-odd-ℕ (n +ℕ succ-ℕ n)
+is-odd-add-succ-self-ℕ n =
+  is-odd-succ-is-even-ℕ (n +ℕ n) (is-even-add-self-ℕ n)
+```
+
+### The product `n(n + 1)` is even
+
+```agda
+abstract
+  is-even-mul-succ-ℕ :
+    (n : ℕ) → is-even-ℕ (n *ℕ succ-ℕ n)
+  is-even-mul-succ-ℕ n
+    with is-even-or-is-even-succ-ℕ n
+  ... | inl H =
+    is-even-div-is-even-ℕ
+      ( n *ℕ succ-ℕ n)
+      ( n)
+      ( H)
+      ( succ-ℕ n , commutative-mul-ℕ (succ-ℕ n) n)
+  ... | inr H =
+    is-even-div-is-even-ℕ
+      ( n *ℕ succ-ℕ n)
+      ( succ-ℕ n)
+      ( H)
+      ( n , refl)
+```
+
+## See also
+
+Further laws of parity are proven in other files, e.g.:
+
+- [Parity of integers](elementary-number-theory.parity-integers.md)
+- [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)
