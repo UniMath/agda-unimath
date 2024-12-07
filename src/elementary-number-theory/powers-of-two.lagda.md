@@ -65,12 +65,14 @@ abstract
     ( λ k f →
       ( λ where
         ( inl x) →
-          ( let s = has-odd-expansion-is-odd k (is-odd-is-even-succ-ℕ k x)
+          ( let s = has-odd-expansion-is-odd-ℕ k (is-odd-is-even-succ-ℕ k x)
             in
-              pair
-                ( 0 , (succ-ℕ (pr1 s)))
-                ( ( ap ((succ-ℕ ∘ succ-ℕ) ∘ succ-ℕ) (left-unit-law-add-ℕ _)) ∙
-                  ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 s)))))
+            ( ( 0 , succ-ℕ (pr1 s)) ,
+              ( ap
+                ( succ-ℕ ∘ succ-ℕ)
+                ( left-unit-law-add-ℕ _ ∙
+                  ap succ-ℕ (commutative-mul-ℕ (pr1 s) 2) ∙
+                  pr2 s))))
         ( inr x) →
           ( let e : is-even-ℕ k
                 e = is-even-is-odd-succ-ℕ k x
@@ -122,16 +124,25 @@ is-pair-expansion-unique zero-ℕ (succ-ℕ u') v v' p =
   ex-falso (s t)
   where
   s : is-odd-ℕ (succ-ℕ (0 +ℕ (v *ℕ 2)))
-  s = is-odd-has-odd-expansion _
-    ( v , ap succ-ℕ (inv (left-unit-law-add-ℕ _)))
+  s =
+    is-odd-has-odd-expansion-ℕ _
+    ( v ,
+      ap
+        ( succ-ℕ)
+        ( commutative-mul-ℕ 2 v ∙
+          inv (left-unit-law-add-ℕ _)))
   t : is-even-ℕ (succ-ℕ (0 +ℕ (v *ℕ 2)))
   t = tr is-even-ℕ (inv p) (div-mul-ℕ' _ 2 _ ((exp-ℕ 2 u') , refl))
 is-pair-expansion-unique (succ-ℕ u) zero-ℕ v v' p =
   ex-falso (s t)
   where
   s : is-odd-ℕ (succ-ℕ (0 +ℕ (v' *ℕ 2)))
-  s = is-odd-has-odd-expansion _
-    ( v' , ap succ-ℕ (inv (left-unit-law-add-ℕ _)))
+  s =
+    is-odd-has-odd-expansion-ℕ _
+      ( v' ,
+        ap
+          ( succ-ℕ)
+          ( commutative-mul-ℕ 2 v' ∙ inv (left-unit-law-add-ℕ _)))
   t : is-even-ℕ (succ-ℕ (0 +ℕ (v' *ℕ 2)))
   t = tr is-even-ℕ p (div-mul-ℕ' _ 2 _ ((exp-ℕ 2 u) , refl))
 is-pair-expansion-unique (succ-ℕ u) (succ-ℕ u') v v' p =

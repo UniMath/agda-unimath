@@ -1038,26 +1038,3 @@ equiv-neg-Fin :
 pr1 (equiv-neg-Fin k) = neg-Fin k
 pr2 (equiv-neg-Fin k) = is-equiv-neg-Fin k
 ```
-
-## Properties
-
-### Divisibility is a decidable relation on `ℕ`
-
-```agda
-is-decidable-div-ℕ : (d x : ℕ) → is-decidable (div-ℕ d x)
-is-decidable-div-ℕ zero-ℕ x =
-  is-decidable-iff
-    ( div-eq-ℕ zero-ℕ x)
-    ( inv ∘ (is-zero-div-zero-ℕ x))
-    ( is-decidable-is-zero-ℕ' x)
-is-decidable-div-ℕ (succ-ℕ d) x =
-  is-decidable-iff
-    ( div-is-zero-mod-succ-ℕ d x)
-    ( is-zero-mod-succ-ℕ d x)
-    ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
-
-div-ℕ-Decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → Decidable-Prop lzero
-pr1 (div-ℕ-Decidable-Prop d x H) = div-ℕ d x
-pr1 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-prop-div-ℕ d x H
-pr2 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-decidable-div-ℕ d x
-```

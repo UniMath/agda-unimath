@@ -138,6 +138,25 @@ abstract
       associative-add-ℕ
 ```
 
+### Swapping iterated addition
+
+```agda
+abstract
+  right-swap-add-ℕ :
+    (x y z : ℕ) → (x +ℕ y) +ℕ z ＝ (x +ℕ z) +ℕ y
+  right-swap-add-ℕ x y z =
+    associative-add-ℕ x y z ∙
+    ap (add-ℕ x) (commutative-add-ℕ y z) ∙
+    inv (associative-add-ℕ x z y)
+
+  left-swap-add-ℕ :
+    (x y z : ℕ) → x +ℕ (y +ℕ z) ＝ y +ℕ (x +ℕ z)
+  left-swap-add-ℕ x y z =
+    inv (associative-add-ℕ x y z) ∙
+    ap (add-ℕ' z) (commutative-add-ℕ x y) ∙
+    associative-add-ℕ y x z
+```
+
 ### Addition by a fixed element on either side is injective
 
 ```agda
