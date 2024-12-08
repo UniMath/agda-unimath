@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.suspensions-of-types where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.booleans
 open import foundation.commuting-squares-of-identifications
 open import foundation.connected-types
 open import foundation.constant-maps
@@ -18,6 +19,7 @@ open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
@@ -25,8 +27,11 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
+open import foundation.surjective-maps
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
@@ -488,9 +493,9 @@ module _
         ( c)))
 
   is-section-htpy-htpy-function-out-of-suspension :
-    ( ( htpy-function-out-of-suspension-htpy) ∘
-      ( htpy-htpy-function-out-of-suspension)) ~
-    ( id)
+    is-section
+      htpy-function-out-of-suspension-htpy
+      htpy-htpy-function-out-of-suspension
   is-section-htpy-htpy-function-out-of-suspension c =
     ( ap
       ( htpy-function-out-of-suspension-htpy)
@@ -516,12 +521,43 @@ module _
         ( is-section-htpy-htpy-function-out-of-suspension c))
 ```
 
+### The booleans surject onto suspensions
+
+```agda
+module _
+  {l : Level} {X : UU l}
+  where
+
+  map-surjection-bool-suspension : bool → suspension X
+  map-surjection-bool-suspension true = north-suspension
+  map-surjection-bool-suspension false = south-suspension
+
+  is-surjective-map-surjection-bool-suspension :
+    is-surjective map-surjection-bool-suspension
+  is-surjective-map-surjection-bool-suspension =
+    dependent-cogap-suspension
+      ( λ x → ║ fiber map-surjection-bool-suspension x ║₋₁)
+      ( unit-trunc-Prop (true , refl) ,
+        unit-trunc-Prop (false , refl) ,
+        ( λ _ →
+          eq-type-Prop
+            ( trunc-Prop
+              ( fiber
+                ( map-surjection-bool-suspension)
+                ( south-suspension)))))
+
+  surjection-bool-suspension : bool ↠ suspension X
+  surjection-bool-suspension =
+    map-surjection-bool-suspension ,
+    is-surjective-map-surjection-bool-suspension
+```
+
 ### The suspension of a contractible type is contractible
 
 ```agda
 is-contr-suspension-is-contr :
   {l : Level} {X : UU l} → is-contr X → is-contr (suspension X)
-is-contr-suspension-is-contr {l} {X} is-contr-X =
+is-contr-suspension-is-contr {X = X} is-contr-X =
   is-contr-is-equiv'
     ( unit)
     ( pr1 (pr2 (cocone-suspension X)))

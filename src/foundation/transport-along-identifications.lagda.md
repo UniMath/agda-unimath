@@ -78,4 +78,9 @@ tr-loop :
   {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (q : a0 ＝ a0) →
   tr (λ y → y ＝ y) p q ＝ (inv p ∙ q) ∙ p
 tr-loop refl q = inv right-unit
+
+tr-loop-self :
+  {l1 : Level} {A : UU l1} {a : A} (p : a ＝ a) →
+  tr (λ y → y ＝ y) p p ＝ p
+tr-loop-self p = tr-loop p p ∙ ap (_∙ p) (left-inv p)
 ```

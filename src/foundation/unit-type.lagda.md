@@ -109,19 +109,41 @@ module _
   abstract
     is-equiv-terminal-map-is-contr :
       is-contr A → is-equiv (terminal-map A)
-    pr1 (pr1 (is-equiv-terminal-map-is-contr H)) = ind-unit (center H)
-    pr2 (pr1 (is-equiv-terminal-map-is-contr H)) = ind-unit refl
-    pr1 (pr2 (is-equiv-terminal-map-is-contr H)) x = center H
-    pr2 (pr2 (is-equiv-terminal-map-is-contr H)) = contraction H
+    is-equiv-terminal-map-is-contr H =
+      is-equiv-is-invertible (λ _ → center H) (λ _ → refl) (contraction H)
 
   equiv-unit-is-contr : is-contr A → A ≃ unit
-  pr1 (equiv-unit-is-contr H) = terminal-map A
-  pr2 (equiv-unit-is-contr H) = is-equiv-terminal-map-is-contr H
+  equiv-unit-is-contr H = terminal-map A , is-equiv-terminal-map-is-contr H
 
   abstract
     is-contr-is-equiv-terminal-map : is-equiv (terminal-map A) → is-contr A
-    pr1 (is-contr-is-equiv-terminal-map ((g , G) , (h , H))) = h star
-    pr2 (is-contr-is-equiv-terminal-map ((g , G) , (h , H))) = H
+    is-contr-is-equiv-terminal-map ((g , G) , (h , H)) = h star , H
+```
+
+### Any contractible type is equivalent to the raised unit type
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  abstract
+    is-equiv-raise-terminal-map-is-contr :
+      is-contr A → is-equiv (raise-terminal-map {l2 = l2} A)
+    is-equiv-raise-terminal-map-is-contr H =
+      is-equiv-is-invertible
+        ( λ _ → center H)
+        ( λ where (map-raise x) → refl)
+        ( contraction H)
+
+  equiv-raise-unit-is-contr : is-contr A → A ≃ raise-unit l2
+  equiv-raise-unit-is-contr H =
+    raise-terminal-map A , is-equiv-raise-terminal-map-is-contr H
+
+  abstract
+    is-contr-is-equiv-raise-terminal-map :
+      is-equiv (raise-terminal-map {l2 = l2} A) → is-contr A
+    is-contr-is-equiv-raise-terminal-map ((g , G) , (h , H)) = h raise-star , H
 ```
 
 ### The unit type is a proposition
