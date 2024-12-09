@@ -55,12 +55,12 @@ open import synthetic-homotopy-theory.universal-property-suspensions
 
 ## Idea
 
-The **suspension** of a type `X` is the
-[pushout](synthetic-homotopy-theory.pushouts.md) of the
+The {{#concept "suspension" WD="suspension" WDID=Q1307987 Agda=suspension}} of a
+type `X` is the [pushout](synthetic-homotopy-theory.pushouts.md) of the
 [span](foundation.spans.md)
 
 ```text
-unit <-- X --> unit
+  1 <--- X ---> 1
 ```
 
 Suspensions play an important role in synthetic homotopy theory. For example,

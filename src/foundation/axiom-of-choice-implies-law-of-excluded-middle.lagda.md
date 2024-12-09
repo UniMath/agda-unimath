@@ -33,7 +33,8 @@ open import synthetic-homotopy-theory.suspensions-of-types
 
 The [axiom of choice](foundation.axiom-of-choice.md) implies the
 [law of excluded middle](foundation.law-of-excluded-middle.md). This is often
-referred to as {{#concept "Diaconescu's theorem" Agda=lem-AC-0}}.
+referred to as
+{{#concept "Diaconescu's theorem" WD="Diaconescu's theorem" WDID=Q3527059 Agda=lem-AC-0}}.
 
 ## Theorem
 
@@ -49,7 +50,7 @@ and `S` are the _poles_ of `ΣP`. There is a surjection from the
 [inhabited](foundation.inhabited-types.md) family over `ΣP`. Applying the axiom
 of choice to this family, we obtain a
 [mere](foundation.propositional-truncations.md)
-[section](fondation-core.sections.md) `s` of `f` which thus exhibits `P` as a
+[section](foundation-core.sections.md) `s` of `f` which thus exhibits `P` as a
 [logical equivalent](foundation.logical-equivalences.md) to `f⁻¹ N ＝ f⁻¹ S`.
 The latter is an [equation](foundation-core.identity-types.md) of booleans, and
 the booleans have [decidable equality](foundation.decidable-equality.md) so `P`
