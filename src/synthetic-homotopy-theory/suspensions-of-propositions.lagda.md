@@ -7,56 +7,29 @@ module synthetic-homotopy-theory.suspensions-of-propositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-dependent-functions
-open import foundation.action-on-identifications-functions
 open import foundation.booleans
-open import foundation.commuting-squares-of-identifications
-open import foundation.commuting-triangles-of-identifications
-open import foundation.connected-types
-open import foundation.constant-maps
 open import foundation.contractible-types
-open import foundation.dependent-function-types
-open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.diagonal-maps-of-types
-open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.path-algebra
-open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
 open import foundation.sets
 open import foundation.subsingleton-induction
 open import foundation.surjective-maps
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
-open import foundation.truncated-types
-open import foundation.truncation-levels
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies-composition
 
-open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-suspension-structures
-open import synthetic-homotopy-theory.dependent-universal-property-suspensions
-open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-types
-open import synthetic-homotopy-theory.universal-property-pushouts
-open import synthetic-homotopy-theory.universal-property-suspensions
 
 open import univalent-combinatorics.kuratowski-finite-sets
 ```
@@ -147,25 +120,26 @@ module _
         ( eq-value
           ( Eq-north-suspension-Prop)
           ( Eq-south-suspension-Prop))
-        ( ( compute-north-cogap-suspension
-              suspension-structure-Eq-north-suspension-Prop ∙
-            inv
+        ( ( ( compute-north-cogap-suspension
+              ( suspension-structure-Eq-north-suspension-Prop)) ∙
+            ( inv
               ( eq-equiv
                 ( equiv-raise-unit-is-contr
-                  ( is-proof-irrelevant-type-Prop P x))) ∙
-            inv
+                  ( is-proof-irrelevant-type-Prop P x)))) ∙
+            ( inv
               ( compute-north-cogap-suspension
-                  suspension-structure-Eq-south-suspension-Prop)) ,
-          ( compute-south-cogap-suspension
-              suspension-structure-Eq-north-suspension-Prop ∙
-            eq-equiv
+                ( suspension-structure-Eq-south-suspension-Prop)))) ,
+          ( ( compute-south-cogap-suspension
+              ( suspension-structure-Eq-north-suspension-Prop)) ∙
+            ( eq-equiv
               ( equiv-raise-unit-is-contr
-                ( is-proof-irrelevant-type-Prop P x)) ∙
-            inv
+                ( is-proof-irrelevant-type-Prop P x))) ∙
+            ( inv
               ( compute-south-cogap-suspension
-                  suspension-structure-Eq-south-suspension-Prop)) ,
+                ( suspension-structure-Eq-south-suspension-Prop)))) ,
           ind-subsingleton
-            ( is-prop-type-Prop P) x
+            ( is-prop-type-Prop P)
+            ( x)
             ( eq-is-contr
               ( is-contr-equiv
                 ( type-Prop P ≃ raise-unit l)
@@ -173,9 +147,9 @@ module _
                   equiv-binary-concat
                     ( inv
                       ( compute-south-cogap-suspension
-                          suspension-structure-Eq-north-suspension-Prop))
+                        ( suspension-structure-Eq-north-suspension-Prop)))
                     ( compute-south-cogap-suspension
-                        suspension-structure-Eq-south-suspension-Prop))
+                      ( suspension-structure-Eq-south-suspension-Prop)))
                 ( is-contr-equiv-is-contr
                   ( is-proof-irrelevant-type-Prop P x)
                   ( is-contr-raise-unit)))))
@@ -263,16 +237,16 @@ The observational equality on the suspension of a proposition is propositional.
     is-prop-Eq-north-suspension-Prop =
       dependent-cogap-suspension
         ( λ x → is-prop (Eq-north-suspension-Prop x))
-        ( inv-tr
-          ( is-prop)
-          ( compute-north-cogap-suspension
-              suspension-structure-Eq-north-suspension-Prop)
-          ( is-prop-raise-unit) ,
-          inv-tr
+        ( ( inv-tr
+            ( is-prop)
+            ( compute-north-cogap-suspension
+              ( suspension-structure-Eq-north-suspension-Prop))
+            ( is-prop-raise-unit)) ,
+          ( inv-tr
             ( is-prop)
             ( compute-south-cogap-suspension
-                suspension-structure-Eq-north-suspension-Prop)
-            ( is-prop-type-Prop P) ,
+              ( suspension-structure-Eq-north-suspension-Prop))
+            ( is-prop-type-Prop P)) ,
           ( λ _ →
             eq-is-prop
               ( is-prop-is-prop (Eq-north-suspension-Prop south-suspension))))
@@ -283,16 +257,16 @@ The observational equality on the suspension of a proposition is propositional.
     is-prop-Eq-south-suspension-Prop =
       dependent-cogap-suspension
         ( λ x → is-prop (Eq-south-suspension-Prop x))
-        ( inv-tr
-          ( is-prop)
-          ( compute-north-cogap-suspension
-              suspension-structure-Eq-south-suspension-Prop)
-          ( is-prop-type-Prop P) ,
-          inv-tr
+        ( ( inv-tr
+            ( is-prop)
+            ( compute-north-cogap-suspension
+              ( suspension-structure-Eq-south-suspension-Prop))
+            ( is-prop-type-Prop P)) ,
+          ( inv-tr
             ( is-prop)
             ( compute-south-cogap-suspension
-                suspension-structure-Eq-south-suspension-Prop)
-            ( is-prop-raise-unit) ,
+              ( suspension-structure-Eq-south-suspension-Prop))
+            ( is-prop-raise-unit)) ,
           ( λ _ →
             eq-is-prop
               ( is-prop-is-prop (Eq-south-suspension-Prop south-suspension))))
@@ -307,14 +281,14 @@ The observational equality on the suspension of a proposition is propositional.
             ( is-prop)
             ( htpy-eq
               ( compute-north-cogap-suspension
-                  suspension-structure-Eq-suspension-Prop)
+                ( suspension-structure-Eq-suspension-Prop))
               ( y))
             ( is-prop-Eq-north-suspension-Prop y)) ,
           ( inv-tr
             ( is-prop)
             ( htpy-eq
               ( compute-south-cogap-suspension
-                  suspension-structure-Eq-suspension-Prop)
+                ( suspension-structure-Eq-suspension-Prop))
               ( y))
             ( is-prop-Eq-south-suspension-Prop y)) ,
           ( λ _ →
@@ -330,22 +304,22 @@ The observational equality characterizes equality in `ΣP`.
   refl-Eq-suspension-Prop =
     dependent-cogap-suspension
       ( λ x → Eq-suspension-Prop x x)
-      ( map-inv-eq
-        ( ( htpy-eq
+      ( ( map-inv-eq
+          ( ( htpy-eq
+              ( compute-north-cogap-suspension
+                ( suspension-structure-Eq-suspension-Prop))
+              ( north-suspension)) ∙
             ( compute-north-cogap-suspension
-                suspension-structure-Eq-suspension-Prop)
-            ( north-suspension)) ∙
-          ( compute-north-cogap-suspension
-              suspension-structure-Eq-north-suspension-Prop))
-        ( raise-star) ,
-        map-inv-eq
-        ( ( htpy-eq
+              ( suspension-structure-Eq-north-suspension-Prop)))
+          ( raise-star)) ,
+        ( map-inv-eq
+          ( ( htpy-eq
+              ( compute-south-cogap-suspension
+                ( suspension-structure-Eq-suspension-Prop))
+              ( south-suspension)) ∙
             ( compute-south-cogap-suspension
-                suspension-structure-Eq-suspension-Prop)
-            ( south-suspension)) ∙
-          ( compute-south-cogap-suspension
-              suspension-structure-Eq-south-suspension-Prop))
-        ( raise-star) ,
+              ( suspension-structure-Eq-south-suspension-Prop)))
+          ( raise-star)) ,
         ( λ _ →
           eq-is-contr
             ( inv-tr
