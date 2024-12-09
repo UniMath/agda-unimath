@@ -13,26 +13,15 @@ open import foundation.booleans
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.equivalence-induction
-open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
-open import foundation.postcomposition-functions
 open import foundation.propositional-truncations
-open import foundation.retractions
-open import foundation.retracts-of-types
-open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.propositions
 open import foundation.universe-levels
-open import foundation.weak-function-extensionality
 
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport-along-identifications
 
 open import synthetic-homotopy-theory.suspensions-of-propositions
 open import synthetic-homotopy-theory.suspensions-of-types
@@ -43,17 +32,35 @@ open import synthetic-homotopy-theory.suspensions-of-types
 ## Idea
 
 The [axiom of choice](foundation.axiom-of-choice.md) implies the
-[law of excluded middle](foundation.law-of-excluded-middle.md). This is usually
-recognized as {{#concept "Diaconescu's theorem"}}.
+[law of excluded middle](foundation.law-of-excluded-middle.md). This is often
+referred to as {{#concept "Diaconescu's theorem" Agda=lem-AC-0}}.
 
 ## Theorem
 
 We follow the proof given under Theorem 10.1.14 in {{#cite UF13}}.
 
+**Proof.** Given a [proposition](foundation-core.propositions.md) `P`, then its
+[suspension](synthetic-homotopy-theory.suspensions-of-propositions.md) `ΣP` is a
+[set](foundation-core.sets.md) with the property that `(N ＝ S) ≃ ΣP`, where `N`
+and `S` are the _poles_ of `ΣP`. There is a surjection from the
+[booleans](foundation.booleans.md) onto the suspension `f : bool ↠ ΣP` such that
+`f true ≐ N` and `f false ≐ S`. Its
+[fiber family](foundation-core.fibers-of-maps.md) is in other words an
+[inhabited](foundation.inhabited-types.md) family over `ΣP`. Applying the axiom
+of choice to this family, we obtain a
+[mere](foundation.propositional-truncations.md)
+[section](fondation-core.sections.md) `s` of `f` which thus exhibits `P` as a
+[logical equivalent](foundation.logical-equivalences.md) to `f⁻¹ N ＝ f⁻¹ S`.
+The latter is an [equation](foundation-core.identity-types.md) of booleans, and
+the booleans have [decidable equality](foundation.decidable-equality.md) so `P`
+must also be [decidable](foundation.decidable-propositions.md).
+
 ```agda
-lem-AC-0 :
-  {l : Level} → level-AC-0 l l → LEM l
-lem-AC-0 ac P =
+instance-lem-AC-0 :
+  {l : Level} (P : Prop l) →
+  instance-AC-0 (suspension-set-Prop P) (fiber map-surjection-bool-suspension) →
+  is-decidable-type-Prop P
+instance-lem-AC-0 P ac-P =
   rec-trunc-Prop
     ( is-decidable-Prop P)
     ( λ s →
@@ -67,10 +74,13 @@ lem-AC-0 ac P =
         ( has-decidable-equality-bool
           ( pr1 (s north-suspension))
           ( pr1 (s south-suspension))))
-    ( ac
-      ( suspension-set-Prop P)
-      ( fiber map-surjection-bool-suspension)
-      ( is-surjective-map-surjection-bool-suspension))
+    ( ac-P is-surjective-map-surjection-bool-suspension)
+
+lem-AC-0 :
+  {l : Level} → level-AC-0 l l → LEM l
+lem-AC-0 ac P =
+  instance-lem-AC-0 P
+    ( ac (suspension-set-Prop P) (fiber map-surjection-bool-suspension))
 ```
 
 ## References
