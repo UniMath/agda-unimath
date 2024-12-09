@@ -40,8 +40,10 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A map `f : A → B` is said to be a `k`-equivalence if the map
-`map-trunc k f : trunc k A → trunc k B` is an equivalence.
+A map `f : A → B` is said to be a
+{{#concept "`k`-equivalence" Disambiguation="truncations of types" Agda=truncation-equivalence}}
+if the map `map-trunc k f : trunc k A → trunc k B` is an
+[equivalence](foundation-core.equivalences.md).
 
 ## Definition
 
@@ -300,11 +302,11 @@ We consider the following composition of maps
 
 ```text
    fiber f b = Σ A (λ a → f a = b)
-             → Σ A (λ a → ║ f a ＝ b ║)
-             ≃ Σ A (λ a → | f a | = | b |
-             ≃ Σ A (λ a → ║ f ║ | a | = | b |)
-             → Σ ║ A ║ (λ t → ║ f ║ t = | b |)
-             = fiber ║ f ║ | b |
+             → Σ A (λ a → ║f a ＝ b║)
+             ≃ Σ A (λ a → |f a| = |b|)
+             ≃ Σ A (λ a → ║f║ |a| = |b|)
+             → Σ ║A║ (λ t → ║f║ t = |b|)
+             = fiber ║f║ |b|
 ```
 
 where the first and last maps are `k`-equivalences.

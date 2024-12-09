@@ -7,6 +7,7 @@ module foundation.unit-type where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.diagonal-maps-of-types
 open import foundation.raising-universe-levels
@@ -18,6 +19,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
+open import foundation-core.retractions
 open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -96,7 +98,12 @@ inv-compute-raise-unit l = inv-compute-raise l unit
 abstract
   is-contr-unit : is-contr unit
   pr1 is-contr-unit = star
-  pr2 is-contr-unit star = refl
+  pr2 is-contr-unit _ = refl
+
+abstract
+  is-contr-raise-unit : {l1 : Level} → is-contr (raise-unit l1)
+  is-contr-raise-unit {l1} =
+    is-contr-equiv' unit (compute-raise l1 unit) is-contr-unit
 ```
 
 ### Any contractible type is equivalent to the unit type
@@ -106,22 +113,58 @@ module _
   {l : Level} {A : UU l}
   where
 
-  abstract
-    is-equiv-terminal-map-is-contr :
-      is-contr A → is-equiv (terminal-map A)
-    pr1 (pr1 (is-equiv-terminal-map-is-contr H)) = ind-unit (center H)
-    pr2 (pr1 (is-equiv-terminal-map-is-contr H)) = ind-unit refl
-    pr1 (pr2 (is-equiv-terminal-map-is-contr H)) x = center H
-    pr2 (pr2 (is-equiv-terminal-map-is-contr H)) = contraction H
+  is-equiv-terminal-map-is-contr : is-contr A → is-equiv (terminal-map A)
+  is-equiv-terminal-map-is-contr H =
+    is-equiv-is-invertible (λ _ → center H) (λ _ → refl) (contraction H)
 
   equiv-unit-is-contr : is-contr A → A ≃ unit
-  pr1 (equiv-unit-is-contr H) = terminal-map A
-  pr2 (equiv-unit-is-contr H) = is-equiv-terminal-map-is-contr H
+  equiv-unit-is-contr H = terminal-map A , is-equiv-terminal-map-is-contr H
 
-  abstract
-    is-contr-is-equiv-terminal-map : is-equiv (terminal-map A) → is-contr A
-    pr1 (is-contr-is-equiv-terminal-map ((g , G) , (h , H))) = h star
-    pr2 (is-contr-is-equiv-terminal-map ((g , G) , (h , H))) = H
+  is-contr-retraction-terminal-map : retraction (terminal-map A) → is-contr A
+  is-contr-retraction-terminal-map (h , H) = h star , H
+
+  is-contr-is-equiv-terminal-map : is-equiv (terminal-map A) → is-contr A
+  is-contr-is-equiv-terminal-map H =
+    is-contr-retraction-terminal-map (retraction-is-equiv H)
+
+  is-contr-equiv-unit : A ≃ unit → is-contr A
+  is-contr-equiv-unit e = map-inv-equiv e star , is-retraction-map-inv-equiv e
+```
+
+### Any contractible type is equivalent to the raised unit type
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  is-equiv-raise-terminal-map-is-contr :
+    is-contr A → is-equiv (raise-terminal-map {l2 = l2} A)
+  is-equiv-raise-terminal-map-is-contr H =
+    is-equiv-is-invertible
+      ( λ _ → center H)
+      ( λ where (map-raise x) → refl)
+      ( contraction H)
+
+  equiv-raise-unit-is-contr : is-contr A → A ≃ raise-unit l2
+  equiv-raise-unit-is-contr H =
+    raise-terminal-map A , is-equiv-raise-terminal-map-is-contr H
+
+  is-contr-retraction-raise-terminal-map :
+    retraction (raise-terminal-map {l2 = l2} A) → is-contr A
+  is-contr-retraction-raise-terminal-map (h , H) = h raise-star , H
+
+  is-contr-is-equiv-raise-terminal-map :
+    is-equiv (raise-terminal-map {l2 = l2} A) → is-contr A
+  is-contr-is-equiv-raise-terminal-map H =
+    is-contr-retraction-raise-terminal-map (retraction-is-equiv H)
+
+  is-contr-equiv-raise-unit : A ≃ raise-unit l2 → is-contr A
+  is-contr-equiv-raise-unit e =
+    ( map-inv-equiv e raise-star) ,
+    ( λ x →
+      ap (map-inv-equiv e) (eq-is-contr is-contr-raise-unit) ∙
+      is-retraction-map-inv-equiv e x)
 ```
 
 ### The unit type is a proposition
@@ -132,8 +175,14 @@ abstract
   is-prop-unit = is-prop-is-contr is-contr-unit
 
 unit-Prop : Prop lzero
-pr1 unit-Prop = unit
-pr2 unit-Prop = is-prop-unit
+unit-Prop = unit , is-prop-unit
+
+abstract
+  is-prop-raise-unit : {l1 : Level} → is-prop (raise-unit l1)
+  is-prop-raise-unit {l1} = is-prop-equiv' (compute-raise l1 unit) is-prop-unit
+
+raise-unit-Prop : (l1 : Level) → Prop l1
+raise-unit-Prop l1 = raise-unit l1 , is-prop-raise-unit
 ```
 
 ### The unit type is a set
@@ -144,36 +193,14 @@ abstract
   is-set-unit = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-unit
 
 unit-Set : Set lzero
-pr1 unit-Set = unit
-pr2 unit-Set = is-set-unit
-```
-
-```agda
-abstract
-  is-contr-raise-unit :
-    {l1 : Level} → is-contr (raise-unit l1)
-  is-contr-raise-unit {l1} =
-    is-contr-equiv' unit (compute-raise l1 unit) is-contr-unit
+unit-Set = unit , is-set-unit
 
 abstract
-  is-prop-raise-unit :
-    {l1 : Level} → is-prop (raise-unit l1)
-  is-prop-raise-unit {l1} =
-    is-prop-equiv' (compute-raise l1 unit) is-prop-unit
-
-raise-unit-Prop :
-  (l1 : Level) → Prop l1
-pr1 (raise-unit-Prop l1) = raise-unit l1
-pr2 (raise-unit-Prop l1) = is-prop-raise-unit
-
-abstract
-  is-set-raise-unit :
-    {l1 : Level} → is-set (raise-unit l1)
+  is-set-raise-unit : {l1 : Level} → is-set (raise-unit l1)
   is-set-raise-unit = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-raise-unit
 
 raise-unit-Set : (l1 : Level) → Set l1
-pr1 (raise-unit-Set l1) = raise-unit l1
-pr2 (raise-unit-Set l1) = is-set-raise-unit
+raise-unit-Set l1 = raise-unit l1 , is-set-raise-unit
 ```
 
 ### All parallel maps into `unit` are equal

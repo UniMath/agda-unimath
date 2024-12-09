@@ -29,6 +29,7 @@ open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
 open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
+open import foundation.axiom-of-choice-implies-law-of-excluded-middle public
 open import foundation.bands public
 open import foundation.base-changes-span-diagrams public
 open import foundation.bicomposition-functions public
@@ -260,6 +261,7 @@ open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.lifts-types public
 open import foundation.limited-principle-of-omniscience public
+open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.maps-in-global-subuniverses public
@@ -306,6 +308,7 @@ open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-cosplit-maps public
 open import foundation.path-split-maps public
+open import foundation.path-split-type-families public
 open import foundation.perfect-images public
 open import foundation.permutations-spans-families-of-types public
 open import foundation.pi-decompositions public
@@ -319,7 +322,6 @@ open import foundation.precomposition-dependent-functions public
 open import foundation.precomposition-functions public
 open import foundation.precomposition-functions-into-subuniverses public
 open import foundation.precomposition-type-families public
-open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public
 open import foundation.preunivalent-type-families public
 open import foundation.principle-of-omniscience public

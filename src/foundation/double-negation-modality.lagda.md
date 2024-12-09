@@ -19,6 +19,8 @@ open import foundation.universe-levels
 open import foundation-core.function-types
 open import foundation-core.transport-along-identifications
 
+open import logic.double-negation-elimination
+
 open import orthogonal-factorization-systems.continuation-modalities
 open import orthogonal-factorization-systems.large-lawvere-tierney-topologies
 open import orthogonal-factorization-systems.lawvere-tierney-topologies

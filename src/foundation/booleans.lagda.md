@@ -7,7 +7,10 @@ module foundation.booleans where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-equality
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
 open import foundation.involutions
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
@@ -193,8 +196,20 @@ abstract
       ( λ x y → eq-Eq-bool)
 
 bool-Set : Set lzero
-pr1 bool-Set = bool
-pr2 bool-Set = is-set-bool
+bool-Set = bool , is-set-bool
+```
+
+### The booleans have decidable equality
+
+```agda
+has-decidable-equality-bool : has-decidable-equality bool
+has-decidable-equality-bool true true = inl refl
+has-decidable-equality-bool true false = inr neq-true-false-bool
+has-decidable-equality-bool false true = inr neq-false-true-bool
+has-decidable-equality-bool false false = inl refl
+
+bool-Discrete-Type : Discrete-Type lzero
+bool-Discrete-Type = bool , has-decidable-equality-bool
 ```
 
 ### The "is true" predicate on booleans

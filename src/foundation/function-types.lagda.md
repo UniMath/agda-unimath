@@ -111,6 +111,11 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {x y : A} (B : A → UU l2) (C : UU l3)
   where
 
+  tr-function-type-fixed-codomain :
+    (p : x ＝ y) (f : B x → C) →
+    tr (λ a → B a → C) p f ＝ f ∘ tr B (inv p)
+  tr-function-type-fixed-codomain refl f = refl
+
   compute-dependent-identification-function-type-fixed-codomain :
     (p : x ＝ y) (f : B x → C) (g : B y → C) →
     ((b : B x) → f b ＝ g (tr B p b)) ≃
@@ -125,6 +130,19 @@ module _
   map-compute-dependent-identification-function-type-fixed-codomain p f g =
     map-equiv
       ( compute-dependent-identification-function-type-fixed-codomain p f g)
+```
+
+### Transport in a family of function types with fixed domain
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {x y : A} (B : UU l2) (C : A → UU l3)
+  where
+
+  tr-function-type-fixed-domain :
+    (p : x ＝ y) (f : B → C x) →
+    tr (λ a → B → C a) p f ＝ tr C p ∘ f
+  tr-function-type-fixed-domain refl f = refl
 ```
 
 ### Relation between `compute-dependent-identification-function-type` and `preserves-tr`
@@ -216,7 +234,7 @@ module _
                 ( H s)
                 ( k s)
                 ( l s)))
-            ( λ k l s → inv-equiv (equiv-funext)))) ∙
+            ( λ k l s → inv-equiv equiv-funext))) ∙
         ( eq-htpy-refl-htpy (h (i s))))
 ```
 

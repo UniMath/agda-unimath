@@ -36,6 +36,8 @@ open import foundation-core.propositions
 open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+
+open import logic.double-negation-stable-subtypes
 ```
 
 </details>
@@ -225,6 +227,16 @@ module _
           ( S)
           ( x)))
       ( iff-universes-Decidable-Prop l l' (S x))
+```
+
+### Decidable subtypes are double negation stable
+
+```agda
+is-double-negation-stable-decicable-subtype :
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A) →
+  is-double-negation-stable-subtype (subtype-decidable-subtype P)
+is-double-negation-stable-decicable-subtype P x =
+  double-negation-elim-is-decidable (is-decidable-decidable-subtype P x)
 ```
 
 ### A decidable subtype of a `k+1`-truncated type is `k+1`-truncated
