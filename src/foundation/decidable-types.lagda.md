@@ -199,6 +199,10 @@ module _
   is-decidable-retract-of :
     A retract-of B → is-decidable B → is-decidable A
   is-decidable-retract-of R = is-decidable-iff' (iff-retract' R)
+
+  is-decidable-retract-of' :
+    A retract-of B → is-decidable A → is-decidable B
+  is-decidable-retract-of' R = is-decidable-iff' (inv-iff (iff-retract' R))
 ```
 
 ### Decidable types are closed under equivalences

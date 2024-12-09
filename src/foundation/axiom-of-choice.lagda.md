@@ -39,24 +39,42 @@ of that family `(x : A) → B x` is inhabited.
 
 ## Definition
 
+### The untruncated axiom of choice
+
+```agda
+instance-AC : {l1 l2 : Level} (A : UU l1) → (A → UU l2) → UU (l1 ⊔ l2)
+instance-AC A B =
+  ((x : A) → is-inhabited (B x)) → is-inhabited ((x : A) → B x)
+```
+
 ### The axiom of choice restricted to sets
 
 ```agda
-AC-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-AC-Set l1 l2 =
-  (A : Set l1) (B : type-Set A → Set l2) →
-  ((x : type-Set A) → is-inhabited (type-Set (B x))) →
-  is-inhabited ((x : type-Set A) → type-Set (B x))
+instance-AC-Set :
+  {l1 l2 : Level} (A : Set l1) → (type-Set A → Set l2) → UU (l1 ⊔ l2)
+instance-AC-Set A B = instance-AC (type-Set A) (type-Set ∘ B)
+
+level-AC-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+level-AC-Set l1 l2 =
+  (A : Set l1) (B : type-Set A → Set l2) → instance-AC-Set A B
+
+AC-Set : UUω
+AC-Set = {l1 l2 : Level} → level-AC-Set l1 l2
 ```
 
 ### The axiom of choice
 
 ```agda
-AC-0 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-AC-0 l1 l2 =
-  (A : Set l1) (B : type-Set A → UU l2) →
-  ((x : type-Set A) → is-inhabited (B x)) →
-  is-inhabited ((x : type-Set A) → B x)
+instance-AC-0 :
+  {l1 l2 : Level} (A : Set l1) → (type-Set A → UU l2) → UU (l1 ⊔ l2)
+instance-AC-0 A = instance-AC (type-Set A)
+
+level-AC-0 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+level-AC-0 l1 l2 =
+  (A : Set l1) (B : type-Set A → UU l2) → instance-AC-0 A B
+
+AC-0 : UUω
+AC-0 = {l1 l2 : Level} → level-AC-0 l1 l2
 ```
 
 ## Properties
@@ -65,7 +83,7 @@ AC-0 l1 l2 =
 
 ```agda
 is-set-projective-AC-0 :
-  {l1 l2 l3 : Level} → AC-0 l2 (l1 ⊔ l2) →
+  {l1 l2 l3 : Level} → level-AC-0 l2 (l1 ⊔ l2) →
   (X : UU l3) → is-set-projective l1 l2 X
 is-set-projective-AC-0 ac X A B f h =
   map-trunc-Prop
@@ -79,7 +97,7 @@ is-set-projective-AC-0 ac X A B f h =
 AC-0-is-set-projective :
   {l1 l2 : Level} →
   ({l : Level} (X : UU l) → is-set-projective (l1 ⊔ l2) l1 X) →
-  AC-0 l1 l2
+  level-AC-0 l1 l2
 AC-0-is-set-projective H A B K =
   map-trunc-Prop
     ( map-equiv (equiv-Π-section-pr1 {B = B}) ∘ tot (λ g → htpy-eq))
@@ -89,3 +107,7 @@ AC-0-is-set-projective H A B K =
         ( pr1 , (λ a → map-trunc-Prop (map-inv-fiber-pr1 B a) (K a)))
         ( id))
 ```
+
+## See also
+
+- [The axiom of choice implies the law of excluded middle](foundation.axiom-of-choice-implies-law-of-excluded-middle.md)
