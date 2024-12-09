@@ -234,7 +234,7 @@ module _
                 ( H s)
                 ( k s)
                 ( l s)))
-            ( λ k l s → inv-equiv (equiv-funext)))) ∙
+            ( λ k l s → inv-equiv equiv-funext))) ∙
         ( eq-htpy-refl-htpy (h (i s))))
 ```
 

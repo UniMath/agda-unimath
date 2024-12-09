@@ -555,19 +555,20 @@ module _
 ### The suspension of a contractible type is contractible
 
 ```agda
-is-contr-suspension-is-contr :
-  {l : Level} {X : UU l} → is-contr X → is-contr (suspension X)
-is-contr-suspension-is-contr {X = X} is-contr-X =
-  is-contr-is-equiv'
-    ( unit)
-    ( pr1 (pr2 (cocone-suspension X)))
-    ( is-equiv-universal-property-pushout
-      ( terminal-map X)
-      ( terminal-map X)
-      ( cocone-suspension X)
-      ( is-equiv-is-contr (terminal-map X) is-contr-X is-contr-unit)
-      ( up-suspension' X))
-    ( is-contr-unit)
+abstract
+  is-contr-suspension-is-contr :
+    {l : Level} {X : UU l} → is-contr X → is-contr (suspension X)
+  is-contr-suspension-is-contr {X = X} is-contr-X =
+    is-contr-is-equiv'
+      ( unit)
+      ( pr1 (pr2 (cocone-suspension X)))
+      ( is-equiv-universal-property-pushout
+        ( terminal-map X)
+        ( terminal-map X)
+        ( cocone-suspension X)
+        ( is-equiv-is-contr (terminal-map X) is-contr-X is-contr-unit)
+        ( up-suspension' X))
+      ( is-contr-unit)
 ```
 
 ### Suspensions increase connectedness
