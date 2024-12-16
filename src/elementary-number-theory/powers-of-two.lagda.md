@@ -74,33 +74,47 @@ abstract
                   ap succ-ℕ (commutative-mul-ℕ (pr1 s) 2) ∙
                   pr2 s))))
         ( inr x) →
-          ( let e : is-even-ℕ k
-                e = is-even-is-odd-succ-ℕ k x
+          ( let
+            e : is-even-ℕ k
+            e = is-even-is-odd-succ-ℕ k x
 
-                t : (pr1 e) ≤-ℕ k
-                t = leq-quotient-div-ℕ' 2 k is-nonzero-two-ℕ e
+            t : quotient-div-ℕ 2 k e ≤-ℕ k
+            t = upper-bound-quotient-div-ℕ 2 k e
 
-                s : (pair-expansion (pr1 e))
-                s = f (pr1 e) t (is-decidable-is-even-ℕ (pr1 e))
+            s : (pair-expansion (quotient-div-ℕ 2 k e))
+            s =
+              f (quotient-div-ℕ 2 k e)
+                ( t)
+                ( is-decidable-is-even-ℕ (quotient-div-ℕ 2 k e))
             in
-              pair
-                ( succ-ℕ (pr1 (pr1 s)) , pr2 (pr1 s))
-                ( ( ap
-                    ( _*ℕ (succ-ℕ ((pr2 (pr1 s)) *ℕ 2)))
-                    ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
-                  ( ( associative-mul-ℕ 2
-                      ( exp-ℕ 2 (pr1 (pr1 s)))
-                      ( succ-ℕ ((pr2 (pr1 s)) *ℕ 2))) ∙
-                    ( ( ap (2 *ℕ_) (pr2 s)) ∙
-                      ( ( ap succ-ℕ
-                          ( left-successor-law-add-ℕ (0 +ℕ (pr1 e)) (pr1 e))) ∙
+            pair
+              ( succ-ℕ (pr1 (pr1 s)) , pr2 (pr1 s))
+              ( ( ap
+                  ( _*ℕ (succ-ℕ ((pr2 (pr1 s)) *ℕ 2)))
+                  ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
+                ( ( associative-mul-ℕ
+                    ( 2)
+                    ( exp-ℕ 2 (pr1 (pr1 s)))
+                    ( succ-ℕ ((pr2 (pr1 s)) *ℕ 2))) ∙
+                  ( ( ap (2 *ℕ_) (pr2 s)) ∙
+                    ( ( ap
+                        ( succ-ℕ)
+                        ( ( left-successor-law-add-ℕ
+                            ( 0 +ℕ quotient-div-ℕ 2 k e)
+                            ( quotient-div-ℕ 2 k e)))) ∙
+                      ( ( ap
+                          ( succ-ℕ ∘ succ-ℕ)
+                          ( ap
+                            ( _+ℕ quotient-div-ℕ 2 k e)
+                            ( left-unit-law-add-ℕ (quotient-div-ℕ 2 k e)))) ∙
                         ( ( ap
                             ( succ-ℕ ∘ succ-ℕ)
-                            ( ap (_+ℕ (pr1 e)) (left-unit-law-add-ℕ (pr1 e)))) ∙
-                          ( ( ap
-                              ( succ-ℕ ∘ succ-ℕ)
-                              ( inv (right-two-law-mul-ℕ (pr1 e)))) ∙
-                              ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 e))))))))))))
+                            ( inv
+                              ( right-two-law-mul-ℕ
+                                ( quotient-div-ℕ 2 k e)))) ∙
+                          ( ap
+                            ( succ-ℕ ∘ succ-ℕ)
+                            ( eq-quotient-div-ℕ 2 k e)))))))))))
     ( n)
 
 has-pair-expansion : (n : ℕ) → pair-expansion n

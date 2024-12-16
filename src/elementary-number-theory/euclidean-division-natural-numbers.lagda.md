@@ -10,6 +10,7 @@ module elementary-number-theory.euclidean-division-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -143,4 +144,18 @@ quotient-euclidean-division-ℕ' : ℕ → ℕ → ℕ
 quotient-euclidean-division-ℕ' zero-ℕ n = zero-ℕ
 quotient-euclidean-division-ℕ' (succ-ℕ k) n =
   array-quotient-euclidean-division-ℕ k n k
+```
+
+## Properties
+
+### If `d` divides a number `n`, then its quotient by euclidean division is its quotient by division
+
+Suppose `q * d ＝ n`. Then the congruence class `r` of `n` modulo `d` is `0`, so the distance between `r` and `n` is `n`. 
+
+```text
+compute-euclidean-division-div-ℕ :
+  (d n : ℕ) (H : div-ℕ d n) →
+  quotient-euclidean-division-ℕ d n ＝ quotient-div-ℕ d n H
+compute-euclidean-division-div-ℕ d n H =
+  {!eq-quotient-div-eq-is-nonzero-divisor-ℕ!}
 ```

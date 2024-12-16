@@ -75,7 +75,7 @@ $$
 We prove this claim to avoid an early division by two, and the proof is by induction on $n$. In the base case both sides of the equality are $0$. For the inductive step, assume that $2 \cdot \sum_{i\leq n} i ＝ n(n+1)$. Then we can compute
 
 $$
-2 \cdot \sum_{i\leq n+1} i = 2 \cdot \left(\sum_{i\leq n} i\right)+ 2(n+1) = n(n+1) + 2(n+1) = (n+1)(n+2).
+2 \cdot \sum_{i\leq n+1} i = 2 \cdot \left(\sum_{i\leq n} i\right)+ 2(n+1) = n(n+1) + ((n+1) + (n+1)) = (n+1)(n+2).
 $$
 
 ```agda

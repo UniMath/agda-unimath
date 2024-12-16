@@ -77,11 +77,21 @@ abstract
     (x : ℕ) → zero-ℕ *ℕ x ＝ zero-ℕ
   left-zero-law-mul-ℕ x = refl
 
+  left-zero-law-mul-is-zero-ℕ :
+    (x y : ℕ) → is-zero-ℕ x → is-zero-ℕ (x *ℕ y)
+  left-zero-law-mul-is-zero-ℕ .zero-ℕ y refl =
+    left-zero-law-mul-ℕ y
+
   right-zero-law-mul-ℕ :
     (x : ℕ) → x *ℕ zero-ℕ ＝ zero-ℕ
   right-zero-law-mul-ℕ zero-ℕ = refl
   right-zero-law-mul-ℕ (succ-ℕ x) =
     ( right-unit-law-add-ℕ (x *ℕ zero-ℕ)) ∙ (right-zero-law-mul-ℕ x)
+
+  right-zero-law-mul-is-zero-ℕ :
+    (x y : ℕ) → is-zero-ℕ y → is-zero-ℕ (x *ℕ y)
+  right-zero-law-mul-is-zero-ℕ x .zero-ℕ refl =
+    right-zero-law-mul-ℕ x
 ```
 
 ### The unit laws for multiplication
