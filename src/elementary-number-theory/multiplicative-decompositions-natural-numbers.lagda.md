@@ -17,6 +17,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nontrivial-divisors-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -24,15 +25,24 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.concatenation-lists
 open import lists.lists
-open import lists.predicates-on-lists
+open import lists.universal-quantification-lists
 ```
 
 </details>
 
 ## Idea
 
-A {{#concept "multiplicative decomposition" Disambiguation="natural numbers" Agda=is-multiplicative-decomposition-ℕ}} of a [natural number](elementary-number-theory.natural-numbers.md) `n` is a [list](lists.lists.md) `l` of natural numbers [strictly greater than](elementary-number-theory.strict-inequality-natural-numbers.md) `1`, such that the [product](elementary-number-theory.multiplication-lists-of-natural-numbers.md) of the numbers in this list is [equal to](foundation-core.identity-types.md) `n`.
+A
+{{#concept "multiplicative decomposition" Disambiguation="natural numbers" Agda=is-multiplicative-decomposition-ℕ}}
+of a [natural number](elementary-number-theory.natural-numbers.md) `n` is a
+[list](lists.lists.md) `l` of natural numbers
+[strictly greater than](elementary-number-theory.strict-inequality-natural-numbers.md)
+`1`, such that the
+[product](elementary-number-theory.multiplication-lists-of-natural-numbers.md)
+of the numbers in this list is [equal to](foundation-core.identity-types.md)
+`n`.
 
 ## Definitions
 
@@ -47,19 +57,18 @@ module _
   is-multiplicative-decomposition-list-ℕ :
     UU lzero
   is-multiplicative-decomposition-list-ℕ =
-    for-all-list ℕ (le-ℕ-Prop 1) l ×
-    (mul-list-ℕ l ＝ n)
+    ( for-all-list l (le-ℕ 1)) × (mul-list-ℕ l ＝ n)
 
   is-prop-is-multiplicative-decomposition-list-ℕ :
     is-prop (is-multiplicative-decomposition-list-ℕ)
   is-prop-is-multiplicative-decomposition-list-ℕ =
     is-prop-product
-      ( is-prop-for-all-list ℕ (le-ℕ-Prop 1) l)
+      ( is-prop-for-all-list l (le-ℕ-Prop 1))
       ( is-set-ℕ (mul-list-ℕ l) n)
 
   le-one-list-is-multiplicative-decomposition-list-ℕ :
     is-multiplicative-decomposition-list-ℕ →
-    for-all-list ℕ (le-ℕ-Prop 1) l
+    for-all-list l (le-ℕ 1)
   le-one-list-is-multiplicative-decomposition-list-ℕ = pr1
 
   eq-is-multiplicative-decomposition-list-ℕ :
@@ -75,7 +84,7 @@ module _
 ```agda
 is-multiplicative-decomposition-mul-list-ℕ :
   (l : list ℕ) →
-  for-all-list ℕ (le-ℕ-Prop 1) l →
+  for-all-list l (le-ℕ 1) →
   is-multiplicative-decomposition-list-ℕ (mul-list-ℕ l) l
 pr1 (is-multiplicative-decomposition-mul-list-ℕ l H) = H
 pr2 (is-multiplicative-decomposition-mul-list-ℕ l H) = refl
@@ -96,7 +105,7 @@ module _
 
   le-one-tail-list-is-multiplicative-decomposition-cons-list-ℕ :
     is-multiplicative-decomposition-list-ℕ n (cons x l) →
-    for-all-list ℕ (le-ℕ-Prop 1) l
+    for-all-list l (le-ℕ 1)
   le-one-tail-list-is-multiplicative-decomposition-cons-list-ℕ H =
     pr2 (le-one-list-is-multiplicative-decomposition-list-ℕ n (cons x l) H)
 ```
@@ -159,4 +168,24 @@ is-list-of-nontrivial-divisors-is-multiplicative-decomposition-list-ℕ
         ( is-multiplicative-decomposition-mul-list-ℕ l
           ( le-one-tail-list-is-multiplicative-decomposition-cons-list-ℕ n x l
             ( H)))))
+```
+
+### The concatenation of two multiplicative decompositions is a multiplicative decomposition
+
+```agda
+is-multiplicative-decomposition-concat-list-ℕ :
+  (n m : ℕ) (p q : list ℕ) →
+  is-multiplicative-decomposition-list-ℕ n p →
+  is-multiplicative-decomposition-list-ℕ m q →
+  is-multiplicative-decomposition-list-ℕ (n *ℕ m) (concat-list p q)
+pr1 (is-multiplicative-decomposition-concat-list-ℕ n m l k H K) =
+  for-all-concat-list l k
+    ( le-ℕ 1)
+    ( le-one-list-is-multiplicative-decomposition-list-ℕ n l H)
+    ( le-one-list-is-multiplicative-decomposition-list-ℕ m k K)
+pr2 (is-multiplicative-decomposition-concat-list-ℕ n m l k H K) =
+  eq-mul-list-concat-list-ℕ l k ∙
+  ap-mul-ℕ
+    ( eq-is-multiplicative-decomposition-list-ℕ n l H)
+    ( eq-is-multiplicative-decomposition-list-ℕ m k K)
 ```

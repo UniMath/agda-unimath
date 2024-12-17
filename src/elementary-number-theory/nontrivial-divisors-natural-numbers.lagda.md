@@ -25,16 +25,23 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.lists
-open import lists.predicates-on-lists
+open import lists.universal-quantification-lists
 ```
 
 </details>
 
 ## Idea
 
-A {{#concept "nontrivial divisor"}} of a [natural number](elementary-number-theory.natural-numbers.md) is a [divisor](elementary-number-theory.divisibility-natural-numbers.md) [strictly greater](elementary-number-theory.strict-inequality-natural-numbers.md) than `1`.
+A {{#concept "nontrivial divisor"}} of a
+[natural number](elementary-number-theory.natural-numbers.md) is a
+[divisor](elementary-number-theory.divisibility-natural-numbers.md)
+[strictly greater](elementary-number-theory.strict-inequality-natural-numbers.md)
+than `1`.
 
-Every number strictly greater than `1` has a least nontrivial divisor, which is a [prime number](elementary-number-theory.prime-numbers.md). This fact is essential in the [Fundamental Theorem of Arithmetic](elementary-number-theory.fundamental-theorem-of-arithmetic.md).
+Every number strictly greater than `1` has a least nontrivial divisor, which is
+a [prime number](elementary-number-theory.prime-numbers.md). This fact is
+essential in the
+[Fundamental Theorem of Arithmetic](elementary-number-theory.fundamental-theorem-of-arithmetic.md).
 
 ## Definitions
 
@@ -46,10 +53,10 @@ Nontrivial divisors of a natural number are divisors strictly greater than `1`.
 module _
   (n x : ℕ)
   where
-  
+
   is-nontrivial-divisor-ℕ : UU lzero
   is-nontrivial-divisor-ℕ = (1 <-ℕ x) × (div-ℕ x n)
-  
+
   is-prop-is-nontrivial-divisor-ℕ : is-prop is-nontrivial-divisor-ℕ
   is-prop-is-nontrivial-divisor-ℕ =
     is-prop-Σ
@@ -74,8 +81,8 @@ module _
 ```agda
 is-list-of-nontrivial-divisors-ℕ :
   ℕ → list ℕ → UU lzero
-is-list-of-nontrivial-divisors-ℕ n =
-  for-all-list ℕ (is-nontrivial-divisor-ℕ-Prop n)
+is-list-of-nontrivial-divisors-ℕ n l =
+  for-all-list l (is-nontrivial-divisor-ℕ n)
 ```
 
 ## Properties
@@ -118,7 +125,7 @@ is-list-of-nontrivial-divisors-div-ℕ :
   is-list-of-nontrivial-divisors-ℕ x l → is-list-of-nontrivial-divisors-ℕ y l
 is-list-of-nontrivial-divisors-div-ℕ x y d nil H = raise-star
 pr1 (is-list-of-nontrivial-divisors-div-ℕ x y d (cons z l) (H , K)) =
-  is-nontrivial-divisor-div-ℕ z x y d H 
+  is-nontrivial-divisor-div-ℕ z x y d H
 pr2 (is-list-of-nontrivial-divisors-div-ℕ x y d (cons z l) (H , K)) =
   is-list-of-nontrivial-divisors-div-ℕ x y d l K
 ```
@@ -236,6 +243,23 @@ quotient-div-least-prime-divisor-ℕ x H =
     ( nat-least-prime-divisor-ℕ x H)
     ( x)
     ( div-least-prime-divisor-ℕ x H)
+
+div-quotient-div-least-prime-divisor-ℕ :
+  (x : ℕ) (H : 1 <-ℕ x) → div-ℕ (quotient-div-least-prime-divisor-ℕ x H) x
+div-quotient-div-least-prime-divisor-ℕ x H =
+  div-quotient-div-ℕ
+    ( nat-least-prime-divisor-ℕ x H)
+    ( x)
+    ( div-least-prime-divisor-ℕ x H)
+
+leq-one-quotient-div-least-prime-divisor-ℕ :
+  (x : ℕ) (H : 1 <-ℕ x) → 1 ≤-ℕ quotient-div-least-prime-divisor-ℕ x H
+leq-one-quotient-div-least-prime-divisor-ℕ x H =
+  leq-one-quotient-div-ℕ
+    ( nat-least-prime-divisor-ℕ x H)
+    ( x)
+    ( div-least-prime-divisor-ℕ x H)
+    ( leq-le-ℕ 1 x H)
 
 upper-bound-quotient-div-least-prime-divisor-ℕ :
   (x : ℕ) (H : 1 <-ℕ succ-ℕ x) →

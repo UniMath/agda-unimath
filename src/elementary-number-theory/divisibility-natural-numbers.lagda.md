@@ -540,6 +540,11 @@ leq-one-quotient-div-ℕ d x H K =
     ( x)
     ( div-quotient-div-ℕ d x H)
     ( K)
+
+leq-one-quotient-div-is-nonzero-ℕ :
+  (d x : ℕ) (H : div-ℕ d x) → is-nonzero-ℕ x → leq-ℕ 1 (quotient-div-ℕ d x H)
+leq-one-quotient-div-is-nonzero-ℕ d x H N =
+  leq-one-quotient-div-ℕ d x H (leq-one-is-nonzero-ℕ x N)
 ```
 
 ### `a/a ＝ 1`

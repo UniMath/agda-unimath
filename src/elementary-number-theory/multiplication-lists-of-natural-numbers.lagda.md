@@ -21,7 +21,7 @@ open import foundation.identity-types
 open import lists.concatenation-lists
 open import lists.lists
 open import lists.permutation-lists
-open import lists.predicates-on-lists
+open import lists.universal-quantification-lists
 ```
 
 </details>
@@ -45,8 +45,7 @@ mul-list-ℕ = fold-list 1 mul-ℕ
 
 ```agda
 leq-one-mul-list-ℕ :
-  (l : list ℕ) (H : for-all-list ℕ (leq-ℕ-Prop 1) l) →
-  1 ≤-ℕ mul-list-ℕ l
+  (l : list ℕ) (H : for-all-list l (leq-ℕ 1)) → 1 ≤-ℕ mul-list-ℕ l
 leq-one-mul-list-ℕ nil H = refl-leq-ℕ 1
 leq-one-mul-list-ℕ (cons n l) (H , K) =
   preserves-leq-mul-ℕ 1 n 1 (mul-list-ℕ l) H (leq-one-mul-list-ℕ l K)

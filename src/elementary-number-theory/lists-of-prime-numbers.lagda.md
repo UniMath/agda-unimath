@@ -17,14 +17,16 @@ open import foundation.universe-levels
 
 open import lists.functoriality-lists
 open import lists.lists
-open import lists.predicates-on-lists
+open import lists.universal-quantification-lists
 ```
 
 </details>
 
 ## Idea
 
-A {{#concept "list of prime numbers"}} is a [list](lists.lists.md) of [natural numbers](elementary-number-theory.natural-numbers.md) such that each number in the list is [prime](elementary-number-theory.prime-numbers.md).
+A {{#concept "list of prime numbers"}} is a [list](lists.lists.md) of
+[natural numbers](elementary-number-theory.natural-numbers.md) such that each
+number in the list is [prime](elementary-number-theory.prime-numbers.md).
 
 ## Definitions
 
@@ -33,11 +35,11 @@ A {{#concept "list of prime numbers"}} is a [list](lists.lists.md) of [natural n
 ```agda
 is-prime-list-ℕ :
   list ℕ → UU lzero
-is-prime-list-ℕ = for-all-list ℕ is-prime-ℕ-Prop
+is-prime-list-ℕ l = for-all-list l is-prime-ℕ
 
 is-prop-is-prime-list-ℕ :
   (l : list ℕ) → is-prop (is-prime-list-ℕ l)
-is-prop-is-prime-list-ℕ = is-prop-for-all-list ℕ is-prime-ℕ-Prop
+is-prop-is-prime-list-ℕ l = is-prop-for-all-list l is-prime-ℕ-Prop
 ```
 
 ## Properties
@@ -51,4 +53,3 @@ is-prime-list-list-Prime-ℕ nil = raise-star
 is-prime-list-list-Prime-ℕ (cons x l) =
   ( is-prime-Prime-ℕ x , is-prime-list-list-Prime-ℕ l)
 ```
-
