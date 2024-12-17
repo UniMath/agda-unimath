@@ -65,40 +65,56 @@ abstract
     ( λ k f →
       ( λ where
         ( inl x) →
-          ( let s = has-odd-expansion-is-odd k (is-odd-is-even-succ-ℕ k x)
+          ( let s = has-odd-expansion-is-odd-ℕ k (is-odd-is-even-succ-ℕ k x)
             in
-              pair
-                ( 0 , (succ-ℕ (pr1 s)))
-                ( ( ap ((succ-ℕ ∘ succ-ℕ) ∘ succ-ℕ) (left-unit-law-add-ℕ _)) ∙
-                  ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 s)))))
+            ( ( 0 , succ-ℕ (pr1 s)) ,
+              ( ap
+                ( succ-ℕ ∘ succ-ℕ)
+                ( left-unit-law-add-ℕ _ ∙
+                  ap succ-ℕ (commutative-mul-ℕ (pr1 s) 2) ∙
+                  pr2 s))))
         ( inr x) →
-          ( let e : is-even-ℕ k
-                e = is-even-is-odd-succ-ℕ k x
+          ( let
+            e : is-even-ℕ k
+            e = is-even-is-odd-succ-ℕ k x
 
-                t : (pr1 e) ≤-ℕ k
-                t = leq-quotient-div-ℕ' 2 k is-nonzero-two-ℕ e
+            t : quotient-div-ℕ 2 k e ≤-ℕ k
+            t = upper-bound-quotient-div-ℕ 2 k e
 
-                s : (pair-expansion (pr1 e))
-                s = f (pr1 e) t (is-decidable-is-even-ℕ (pr1 e))
+            s : (pair-expansion (quotient-div-ℕ 2 k e))
+            s =
+              f (quotient-div-ℕ 2 k e)
+                ( t)
+                ( is-decidable-is-even-ℕ (quotient-div-ℕ 2 k e))
             in
-              pair
-                ( succ-ℕ (pr1 (pr1 s)) , pr2 (pr1 s))
-                ( ( ap
-                    ( _*ℕ (succ-ℕ ((pr2 (pr1 s)) *ℕ 2)))
-                    ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
-                  ( ( associative-mul-ℕ 2
-                      ( exp-ℕ 2 (pr1 (pr1 s)))
-                      ( succ-ℕ ((pr2 (pr1 s)) *ℕ 2))) ∙
-                    ( ( ap (2 *ℕ_) (pr2 s)) ∙
-                      ( ( ap succ-ℕ
-                          ( left-successor-law-add-ℕ (0 +ℕ (pr1 e)) (pr1 e))) ∙
+            pair
+              ( succ-ℕ (pr1 (pr1 s)) , pr2 (pr1 s))
+              ( ( ap
+                  ( _*ℕ (succ-ℕ ((pr2 (pr1 s)) *ℕ 2)))
+                  ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
+                ( ( associative-mul-ℕ
+                    ( 2)
+                    ( exp-ℕ 2 (pr1 (pr1 s)))
+                    ( succ-ℕ ((pr2 (pr1 s)) *ℕ 2))) ∙
+                  ( ( ap (2 *ℕ_) (pr2 s)) ∙
+                    ( ( ap
+                        ( succ-ℕ)
+                        ( ( left-successor-law-add-ℕ
+                            ( 0 +ℕ quotient-div-ℕ 2 k e)
+                            ( quotient-div-ℕ 2 k e)))) ∙
+                      ( ( ap
+                          ( succ-ℕ ∘ succ-ℕ)
+                          ( ap
+                            ( _+ℕ quotient-div-ℕ 2 k e)
+                            ( left-unit-law-add-ℕ (quotient-div-ℕ 2 k e)))) ∙
                         ( ( ap
                             ( succ-ℕ ∘ succ-ℕ)
-                            ( ap (_+ℕ (pr1 e)) (left-unit-law-add-ℕ (pr1 e)))) ∙
-                          ( ( ap
-                              ( succ-ℕ ∘ succ-ℕ)
-                              ( inv (right-two-law-mul-ℕ (pr1 e)))) ∙
-                              ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 e))))))))))))
+                            ( inv
+                              ( right-two-law-mul-ℕ
+                                ( quotient-div-ℕ 2 k e)))) ∙
+                          ( ap
+                            ( succ-ℕ ∘ succ-ℕ)
+                            ( eq-quotient-div-ℕ 2 k e)))))))))))
     ( n)
 
 has-pair-expansion : (n : ℕ) → pair-expansion n
@@ -122,16 +138,25 @@ is-pair-expansion-unique zero-ℕ (succ-ℕ u') v v' p =
   ex-falso (s t)
   where
   s : is-odd-ℕ (succ-ℕ (0 +ℕ (v *ℕ 2)))
-  s = is-odd-has-odd-expansion _
-    ( v , ap succ-ℕ (inv (left-unit-law-add-ℕ _)))
+  s =
+    is-odd-has-odd-expansion-ℕ _
+    ( v ,
+      ap
+        ( succ-ℕ)
+        ( commutative-mul-ℕ 2 v ∙
+          inv (left-unit-law-add-ℕ _)))
   t : is-even-ℕ (succ-ℕ (0 +ℕ (v *ℕ 2)))
   t = tr is-even-ℕ (inv p) (div-mul-ℕ' _ 2 _ ((exp-ℕ 2 u') , refl))
 is-pair-expansion-unique (succ-ℕ u) zero-ℕ v v' p =
   ex-falso (s t)
   where
   s : is-odd-ℕ (succ-ℕ (0 +ℕ (v' *ℕ 2)))
-  s = is-odd-has-odd-expansion _
-    ( v' , ap succ-ℕ (inv (left-unit-law-add-ℕ _)))
+  s =
+    is-odd-has-odd-expansion-ℕ _
+      ( v' ,
+        ap
+          ( succ-ℕ)
+          ( commutative-mul-ℕ 2 v' ∙ inv (left-unit-law-add-ℕ _)))
   t : is-even-ℕ (succ-ℕ (0 +ℕ (v' *ℕ 2)))
   t = tr is-even-ℕ p (div-mul-ℕ' _ 2 _ ((exp-ℕ 2 u) , refl))
 is-pair-expansion-unique (succ-ℕ u) (succ-ℕ u') v v' p =

@@ -27,6 +27,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negated-equality
+open import foundation.negation
 open import foundation.propositions
 open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
@@ -224,24 +225,39 @@ is-prime-two-ℕ =
 ### If a prime number `p` divides a nonzero number `x`, then `x/p < x`
 
 ```agda
-le-quotient-div-is-prime-ℕ :
+strict-upper-bound-quotient-div-is-prime-ℕ :
   (p x : ℕ) → is-nonzero-ℕ x → is-prime-ℕ p →
-  (H : div-ℕ p x) → le-ℕ (quotient-div-ℕ p x H) x
-le-quotient-div-is-prime-ℕ p x N P H =
+  (H : div-ℕ p x) → quotient-div-ℕ p x H <-ℕ x
+strict-upper-bound-quotient-div-is-prime-ℕ p x N P H =
   le-quotient-div-ℕ p x N H (is-not-one-is-prime-ℕ p P)
 ```
 
 ### If a prime number `p` divides a number `x + 1`, then `(x + 1)/p ≤ x`
 
+Note that this upper bound is slightly sharper than the usual upper bound `x + 1` we get for arbitrary quotients of divisible natural numbers.
+
 ```agda
-leq-quotient-div-is-prime-ℕ :
+upper-bound-quotient-div-is-prime-ℕ :
   (p x : ℕ) → is-prime-ℕ p →
-  (H : div-ℕ p (succ-ℕ x)) → leq-ℕ (quotient-div-ℕ p (succ-ℕ x) H) x
-leq-quotient-div-is-prime-ℕ p x P H =
+  (H : div-ℕ p (succ-ℕ x)) → quotient-div-ℕ p (succ-ℕ x) H ≤-ℕ x
+upper-bound-quotient-div-is-prime-ℕ p x P H =
   leq-le-succ-ℕ
     ( quotient-div-ℕ p (succ-ℕ x) H)
     ( x)
-    ( le-quotient-div-is-prime-ℕ p (succ-ℕ x) (is-nonzero-succ-ℕ x) P H)
+    ( strict-upper-bound-quotient-div-is-prime-ℕ p
+      ( succ-ℕ x)
+      ( is-nonzero-succ-ℕ x)
+      ( P)
+      ( H))
+```
+
+### The number `1` has no prime divisors
+
+```agda
+no-prime-divisors-one-ℕ :
+  (p : ℕ) → is-prime-ℕ p → ¬ (div-ℕ p 1)
+no-prime-divisors-one-ℕ p H K =
+  is-not-one-is-prime-ℕ p H (is-one-div-one-ℕ p K)
 ```
 
 ## See also
