@@ -27,9 +27,9 @@ open import real-numbers.dedekind-real-numbers
 
 ## Idea
 
-We introduce {{#concept "addition" Disambiguation="real numbers" Agda=add-ℝ}} on
-the [Dedekind real numbers](real-numbers.dedekind-rational-numbers.md) and
-derive its basic properties.
+We introduce addition on the
+[Dedekind real numbers](real-numbers.dedekind-rational-numbers.md) and derive
+its basic properties.
 
 ## Definition
 
