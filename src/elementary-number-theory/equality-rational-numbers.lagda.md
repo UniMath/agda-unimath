@@ -12,7 +12,6 @@ open import elementary-number-theory.rational-numbers
 
 open import foundation.identity-types
 open import foundation.universe-levels
-
 ```
 
 </details>
@@ -37,9 +36,9 @@ Eq-eq-ℚ {x} {.x} refl = refl-Eq-ℚ x
 
 eq-Eq-ℚ : (x y : ℚ) → Eq-ℚ x y → x ＝ y
 eq-Eq-ℚ x y H = equational-reasoning
-  x ＝ rational-fraction-ℤ (fraction-ℚ x) by inv (is-retraction-rational-fraction-ℚ x)
-  ＝ rational-fraction-ℤ (fraction-ℚ y)  by eq-ℚ-sim-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y) H
+  x ＝ rational-fraction-ℤ (fraction-ℚ x)
+    by inv (is-retraction-rational-fraction-ℚ x)
+  ＝ rational-fraction-ℤ (fraction-ℚ y)
+    by eq-ℚ-sim-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y) H
   ＝ y by is-retraction-rational-fraction-ℚ y
-
-
 ```
