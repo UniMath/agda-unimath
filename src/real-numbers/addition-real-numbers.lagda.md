@@ -28,8 +28,8 @@ open import real-numbers.dedekind-real-numbers
 ## Idea
 
 We introduce addition on the
-[Dedekind real numbers](real-numbers.dedekind-rational-numbers.md) and derive
-its basic properties.
+[Dedekind real numbers](real-numbers.dedekind-real-numbers.md) and derive its
+basic properties.
 
 ## Definition
 
