@@ -150,38 +150,38 @@ concatenate-eq-leq-ℤ y refl H = H
 ### Addition on the integers preserves inequality
 
 ```agda
-preserves-leq-left-add-ℤ :
+preserves-order-left-add-ℤ :
   (z x y : ℤ) → leq-ℤ x y → leq-ℤ (x +ℤ z) (y +ℤ z)
-preserves-leq-left-add-ℤ z x y =
+preserves-order-left-add-ℤ z x y =
   is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ y x z))
 
-preserves-leq-right-add-ℤ :
+preserves-order-right-add-ℤ :
   (z x y : ℤ) → leq-ℤ x y → leq-ℤ (z +ℤ x) (z +ℤ y)
-preserves-leq-right-add-ℤ z x y =
+preserves-order-right-add-ℤ z x y =
   is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ y x z))
 
-preserves-leq-add-ℤ :
+preserves-order-add-ℤ :
   {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (a +ℤ c) (b +ℤ d)
-preserves-leq-add-ℤ {a} {b} {c} {d} H K =
+preserves-order-add-ℤ {a} {b} {c} {d} H K =
   transitive-leq-ℤ
     ( a +ℤ c)
     ( b +ℤ c)
     ( b +ℤ d)
-    ( preserves-leq-right-add-ℤ b c d K)
-    ( preserves-leq-left-add-ℤ c a b H)
+    ( preserves-order-right-add-ℤ b c d K)
+    ( preserves-order-left-add-ℤ c a b H)
 ```
 
 ### Addition on the integers reflects inequality
 
 ```agda
-reflects-leq-left-add-ℤ :
+reflects-order-left-add-ℤ :
   (z x y : ℤ) → leq-ℤ (x +ℤ z) (y +ℤ z) → leq-ℤ x y
-reflects-leq-left-add-ℤ z x y =
+reflects-order-left-add-ℤ z x y =
   is-nonnegative-eq-ℤ (right-translation-diff-ℤ y x z)
 
-reflects-leq-right-add-ℤ :
+reflects-order-right-add-ℤ :
   (z x y : ℤ) → leq-ℤ (z +ℤ x) (z +ℤ y) → leq-ℤ x y
-reflects-leq-right-add-ℤ z x y =
+reflects-order-right-add-ℤ z x y =
   is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
 ```
 
@@ -199,6 +199,113 @@ leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
     ( ap (_-ℤ (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
       ap ((int-ℕ (succ-ℕ y)) -ℤ_) (succ-int-ℕ x)))
   ( leq-int-ℕ x y H)
+```
+
+### Transposing summands in inequalities
+
+```agda
+transpose-left-summand-leq-ℤ :
+  (a b c : ℤ) → a ≤-ℤ b +ℤ c → neg-ℤ b +ℤ a ≤-ℤ c
+transpose-left-summand-leq-ℤ a b c H =
+  reflects-order-right-add-ℤ b
+    ( neg-ℤ b +ℤ a)
+    ( c)
+    ( concatenate-eq-leq-ℤ (b +ℤ c) (is-section-left-add-neg-ℤ b a) H)
+
+inv-transpose-left-summand-leq-ℤ :
+  (a b c : ℤ) → neg-ℤ b +ℤ a ≤-ℤ c → a ≤-ℤ b +ℤ c
+inv-transpose-left-summand-leq-ℤ a b c H =
+  concatenate-eq-leq-ℤ
+    ( b +ℤ c)
+    ( inv (is-section-left-add-neg-ℤ b a))
+    ( preserves-order-right-add-ℤ b (neg-ℤ b +ℤ a) c H)
+
+transpose-left-summand-leq-ℤ' :
+  (a b c : ℤ) → b +ℤ a ≤-ℤ c → a ≤-ℤ neg-ℤ b +ℤ c
+transpose-left-summand-leq-ℤ' a b c H =
+  inv-transpose-left-summand-leq-ℤ a (neg-ℤ b) c
+    ( concatenate-eq-leq-ℤ c (ap (add-ℤ' a) (neg-neg-ℤ b)) H)
+
+inv-transpose-left-summand-leq-ℤ' :
+  (a b c : ℤ) → a ≤-ℤ neg-ℤ b +ℤ c → b +ℤ a ≤-ℤ c
+inv-transpose-left-summand-leq-ℤ' a b c H =
+  concatenate-eq-leq-ℤ c
+    ( ap (add-ℤ' a) (inv (neg-neg-ℤ b)))
+    ( transpose-left-summand-leq-ℤ a (neg-ℤ b) c H)
+
+transpose-right-summand-leq-ℤ :
+  (a b c : ℤ) → a ≤-ℤ b +ℤ c → a +ℤ neg-ℤ c ≤-ℤ b
+transpose-right-summand-leq-ℤ a b c H =
+  reflects-order-left-add-ℤ c
+    ( a +ℤ neg-ℤ c)
+    ( b)
+    ( concatenate-eq-leq-ℤ (b +ℤ c) (is-section-right-add-neg-ℤ c a) H)
+
+inv-transpose-right-summand-leq-ℤ :
+  (a b c : ℤ) → a +ℤ neg-ℤ c ≤-ℤ b → a ≤-ℤ b +ℤ c
+inv-transpose-right-summand-leq-ℤ a b c H =
+  concatenate-eq-leq-ℤ
+    ( b +ℤ c)
+    ( inv (is-section-right-add-neg-ℤ c a))
+    ( preserves-order-left-add-ℤ c (a +ℤ neg-ℤ c) b H)
+
+transpose-right-summand-leq-ℤ' :
+  (a b c : ℤ) → a +ℤ c ≤-ℤ b → a ≤-ℤ b +ℤ neg-ℤ c
+transpose-right-summand-leq-ℤ' a b c H =
+  inv-transpose-right-summand-leq-ℤ a b
+    ( neg-ℤ c)
+    ( concatenate-eq-leq-ℤ b (ap (add-ℤ a) (neg-neg-ℤ c)) H)
+
+inv-transpose-right-summand-leq-ℤ' :
+  (a b c : ℤ) → a ≤-ℤ b +ℤ neg-ℤ c → a +ℤ c ≤-ℤ b
+inv-transpose-right-summand-leq-ℤ' a b c H =
+  concatenate-eq-leq-ℤ b
+    ( ap (add-ℤ a) (inv (neg-neg-ℤ c)))
+    ( transpose-right-summand-leq-ℤ a b (neg-ℤ c) H)
+```
+
+### The operation taking integers to their negatives reverses their order
+
+**Proof.** If `a ≤ b`, then `b - a` is nonnegative. Note that `b - a ＝ (-a) - (-b)`, which is therefore also nonnegative, implying that `-b ≤ -a`.
+
+```agda
+reverses-order-neg-ℤ :
+  (a b : ℤ) → a ≤-ℤ b → neg-ℤ b ≤-ℤ neg-ℤ a
+reverses-order-neg-ℤ a b =
+  tr
+    ( is-nonnegative-ℤ)
+    ( ( commutative-add-ℤ b (neg-ℤ a)) ∙
+      ( ap (add-ℤ (neg-ℤ a)) (inv (neg-neg-ℤ b))))
+```
+
+### The operation taking integers to their negative reversely reflects their order
+
+```agda
+reversely-reflects-order-neg-ℤ :
+  (a b : ℤ) → neg-ℤ a ≤-ℤ neg-ℤ b → b ≤-ℤ a
+reversely-reflects-order-neg-ℤ a b =
+  tr
+    ( is-nonnegative-ℤ)
+    ( ap (add-ℤ (neg-ℤ b)) (neg-neg-ℤ a) ∙ commutative-add-ℤ (neg-ℤ b) a)
+```
+
+### Transposing negatives in inequalities
+
+```agda
+transpose-right-neg-leq-ℤ :
+  (a b : ℤ) → b ≤-ℤ neg-ℤ a → a ≤-ℤ neg-ℤ b
+transpose-right-neg-leq-ℤ a b H =
+  reversely-reflects-order-neg-ℤ
+    ( neg-ℤ b)
+    ( a)
+    ( concatenate-eq-leq-ℤ (neg-ℤ a) (neg-neg-ℤ b) H)
+
+transpose-left-neg-leq-ℤ :
+  (a b : ℤ) → neg-ℤ b ≤-ℤ a → neg-ℤ a ≤-ℤ b
+transpose-left-neg-leq-ℤ a b H =
+  reversely-reflects-order-neg-ℤ b
+    ( neg-ℤ a)
+    ( concatenate-leq-eq-ℤ (neg-ℤ b) H (inv (neg-neg-ℤ a)))
 ```
 
 ### The partially ordered set of integers ordered by inequality

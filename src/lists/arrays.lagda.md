@@ -24,6 +24,7 @@ open import foundation.universe-levels
 
 open import linear-algebra.vectors
 
+open import lists.elementhood-relation-lists
 open import lists.lists
 
 open import univalent-combinatorics.involution-standard-finite-types
@@ -34,8 +35,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An array is a pair of a natural number `n`, and a function from `Fin n` to `A`.
-We show that arrays and lists are equivalent.
+An {{#concept "array" Agda=array}} is a pair consisting of a [natural number](elementary-number-theory.natural-numbers.md) `n`, and a [functional vector](linear-algebra.vectors.md) of `n` elements of `A`. The concept of array is [equivalent](foundation-core.equivalences.md) to the concept of [list](lists.lists.md).
+
+## Definitions
+
+### Arrays
 
 ```agda
 array : {l : Level} → UU l → UU l
@@ -84,16 +88,6 @@ module _
   revert-array (n , t) = (n , λ k → t (opposite-Fin n k))
 ```
 
-### The definition of `fold-vec`
-
-```agda
-fold-vec :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B)) →
-  {n : ℕ} → vec A n → B
-fold-vec b μ {0} _ = b
-fold-vec b μ (a ∷ l) = μ a (fold-vec b μ l)
-```
-
 ## Properties
 
 ### The types of lists and arrays are equivalent
@@ -125,6 +119,12 @@ module _
     ap
       ( λ v → succ-ℕ (pr1 v) , (x ∷ (pr2 v)))
       ( is-retraction-vec-list (n , v))
+```
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
 
   list-array : array A → list A
   list-array (n , t) = list-vec n (listed-vec-functional-vec n t)

@@ -8,6 +8,8 @@ module elementary-number-theory.parity-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.congruence-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
@@ -26,6 +28,7 @@ open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -82,6 +85,15 @@ has-odd-expansion-ℕ n = fiber odd-number-ℕ n
 ```
 
 ## Properties
+
+### The `n`th even number is even
+
+```agda
+is-even-even-number-ℕ :
+  (n : ℕ) → is-even-ℕ (even-number-ℕ n)
+pr1 (is-even-even-number-ℕ n) = n
+pr2 (is-even-even-number-ℕ n) = commutative-mul-ℕ n 2
+```
 
 ### Even natural numbers are closed under equality
 
@@ -242,6 +254,48 @@ is-even-div-is-even-ℕ ._ ._ (m' , refl) (k , refl) =
 is-even-div-4-ℕ :
   (n : ℕ) → div-ℕ 4 n → is-even-ℕ n
 is-even-div-4-ℕ n = is-even-div-is-even-ℕ n 4 (2 , refl)
+```
+
+### A number is even if and only if it is congruent to `0` modulo `2`
+
+```agda
+is-0-mod-2-is-even-ℕ :
+  (n : ℕ) → is-even-ℕ n → n ≡ 0 mod-ℕ 2
+is-0-mod-2-is-even-ℕ =
+  cong-zero-div-ℕ 2
+
+is-even-is-0-mod-2-ℕ :
+  (n : ℕ) → n ≡ 0 mod-ℕ 2 → is-even-ℕ n
+is-even-is-0-mod-2-ℕ =
+  div-cong-zero-ℕ 2
+```
+
+### A natural number is odd if and only if it is congruent to `1` modulo `2`
+
+```agda
+is-1-mod-2-has-odd-expansion-ℕ :
+  (n : ℕ) → has-odd-expansion-ℕ n → n ≡ 1 mod-ℕ 2
+is-1-mod-2-has-odd-expansion-ℕ ._ (k , refl) =
+  translation-invariant-cong-ℕ' 2
+    ( 2 *ℕ k)
+    ( 0)
+    ( 1)
+    ( is-0-mod-2-is-even-ℕ
+      ( 2 *ℕ k)
+      ( is-even-even-number-ℕ k ))
+
+is-1-mod-2-is-odd-ℕ :
+  (n : ℕ) → is-odd-ℕ n → n ≡ 1 mod-ℕ 2
+is-1-mod-2-is-odd-ℕ n H =
+  is-1-mod-2-has-odd-expansion-ℕ n (has-odd-expansion-is-odd-ℕ n H)
+
+is-odd-is-1-mod-2-ℕ :
+  (n : ℕ) → n ≡ 1 mod-ℕ 2 → is-odd-ℕ n
+is-odd-is-1-mod-2-ℕ zero-ℕ H K =
+  is-not-one-two-ℕ (is-one-div-one-ℕ 2 H)
+is-odd-is-1-mod-2-ℕ (succ-ℕ n) H K =
+  is-odd-one-ℕ
+    ( div-right-summand-ℕ 2 n 1 (tr (div-ℕ 2) (right-unit-law-dist-ℕ n) H) K)
 ```
 
 ### If any two out of `x`, `y`, and `x + y` are even, then so is the third

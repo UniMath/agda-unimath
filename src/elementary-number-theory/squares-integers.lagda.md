@@ -1,4 +1,4 @@
-# Squares in the integers
+# Squares of integers
 
 ```agda
 module elementary-number-theory.squares-integers where
@@ -16,6 +16,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.multiplication-positive-and-negative-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonnegative-integers
+open import elementary-number-theory.parity-integers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.squares-natural-numbers
@@ -35,6 +36,18 @@ open import foundation-core.transport-along-identifications
 ```
 
 </details>
+
+## Idea
+
+The {{#concept "square" Disambiguation="integer" Agda=square-ℤ}} `a²` of
+an [integer](elementary-number-theory.integers.md) `a` is the
+[product](elementary-number-theory.multiplication-natural-numbers.md)
+
+```text
+  a² := a * a
+```
+
+of `a` with itself.
 
 ## Definitions
 
@@ -215,6 +228,12 @@ Consider a integer `n`. The following are equivalent:
 - The number `n` is even.
 - Its square is even.
 - Its square is divisible by 4.
+
+```agda
+div-four-square-is-even-ℤ :
+  (a : ℤ) → is-even-ℤ a → div-ℤ 4 (square-ℤ a)
+div-four-square-is-even-ℤ a H = ?
+```
 
 ```text
 div-four-square-is-even-ℤ :

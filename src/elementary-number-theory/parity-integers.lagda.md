@@ -9,6 +9,7 @@ module elementary-number-theory.parity-integers where
 ```agda
 open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.integers
@@ -22,8 +23,11 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.fibers-of-maps
+open import foundation.function-types
+open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -239,6 +243,14 @@ is-odd-add-two-is-odd-ℤ a H K = H (is-even-is-even-add-two-ℤ a K)
 ### Either `a` or `a + 1` is even
 
 ```agda
+is-even-or-is-even-add-one-int-ℕ :
+  (n : ℕ) → is-even-ℤ (int-ℕ n) + is-even-ℤ (int-ℕ n +ℤ one-ℤ)
+is-even-or-is-even-add-one-int-ℕ n =
+  map-coproduct
+    ( is-even-int-is-even-ℕ n)
+    ( tr is-even-ℤ (inv (add-int-ℕ n 1)) ∘ is-even-int-is-even-ℕ (succ-ℕ n))
+    ( is-even-or-is-even-succ-ℕ n)
+
 is-even-or-is-even-add-one-ℤ :
   (a : ℤ) → is-even-ℤ a + is-even-ℤ (a +ℤ one-ℤ)
 is-even-or-is-even-add-one-ℤ (inl zero-ℕ) = inr is-even-zero-ℤ

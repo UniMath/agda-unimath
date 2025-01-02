@@ -363,8 +363,8 @@ preserves-is-common-divisor-mul-ℕ :
   is-common-divisor-ℕ (k *ℕ a) (k *ℕ b) (k *ℕ d)
 preserves-is-common-divisor-mul-ℕ k a b d =
   map-product
-    ( preserves-div-mul-ℕ k d a)
-    ( preserves-div-mul-ℕ k d b)
+    ( preserves-div-left-mul-ℕ k d a)
+    ( preserves-div-left-mul-ℕ k d b)
 
 reflects-is-common-divisor-mul-ℕ :
   (k a b d : ℕ) → is-nonzero-ℕ k →

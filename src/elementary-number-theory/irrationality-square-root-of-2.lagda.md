@@ -14,6 +14,7 @@ open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.reduced-integer-fractions
+open import elementary-number-theory.squares-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -58,7 +59,7 @@ a reduced fraction.
 ```text
 not-two-square-reduced-fraction-ℤ :
   (x : fraction-ℤ) (H : is-reduced-fraction-ℤ x) →
-  ¬ (sim-fraction-ℤ (mul-fraction-ℤ x x) (in-fraction-ℤ (int-ℕ 2)))
+  ¬ sim-fraction-ℤ (mul-fraction-ℤ x x) (in-fraction-ℤ (int-ℕ 2))
 not-two-square-reduced-fraction-ℤ x@(a , b , pb) H K =
   {!!}
 ```

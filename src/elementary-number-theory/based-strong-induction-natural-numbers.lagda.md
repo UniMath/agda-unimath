@@ -412,7 +412,7 @@ based-strong-ind-ℕ' :
   (p0 : P k (refl-leq-ℕ k)) →
   (pS : (x : ℕ) → (H : k ≤-ℕ x) →
     based-□-≤-ℕ' k P x →
-    P (succ-ℕ x) (preserves-leq-succ-ℕ k x H))
+    P (succ-ℕ x) (leq-succ-leq-ℕ k x H))
   (n : ℕ) → (H : k ≤-ℕ n) → P n H
 based-strong-ind-ℕ' {l} k P p0 pS n H =
   based-strong-ind-ℕ
@@ -425,10 +425,10 @@ based-strong-ind-ℕ' {l} k P p0 pS n H =
       ( p0))
     ( λ x H p →
       apply-dependent-universal-property-contr
-        ( preserves-leq-succ-ℕ k x H)
+        ( leq-succ-leq-ℕ k x H)
         ( is-proof-irrelevant-is-prop
           ( is-prop-leq-ℕ k (succ-ℕ x))
-          ( preserves-leq-succ-ℕ k x H))
+          ( leq-succ-leq-ℕ k x H))
         ( P (succ-ℕ x))
         ( pS x H ( compute-base-□-≤-ℕ' k P x p)))
     ( n)

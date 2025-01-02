@@ -60,7 +60,7 @@ mod-three-ℕ = mod-succ-ℕ 2
 ```agda
 cong-nat-succ-Fin :
   (k : ℕ) (x : Fin k) →
-  cong-ℕ k (nat-Fin k (succ-Fin k x)) (succ-ℕ (nat-Fin k x))
+  nat-Fin k (succ-Fin k x) ≡ succ-ℕ (nat-Fin k x) mod-ℕ k
 cong-nat-succ-Fin (succ-ℕ k) (inl x) =
   cong-identification-ℕ
     ( succ-ℕ k)
@@ -77,7 +77,7 @@ cong-nat-succ-Fin (succ-ℕ k) (inr _) =
     ( cong-zero-ℕ' (succ-ℕ k))
 
 cong-nat-mod-succ-ℕ :
-  (k x : ℕ) → cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
+  (k x : ℕ) → nat-Fin (succ-ℕ k) (mod-succ-ℕ k x) ≡ x mod-ℕ succ-ℕ k
 cong-nat-mod-succ-ℕ k zero-ℕ = cong-is-zero-nat-zero-Fin
 cong-nat-mod-succ-ℕ k (succ-ℕ x) =
   transitive-cong-ℕ
@@ -93,7 +93,7 @@ cong-nat-mod-succ-ℕ k (succ-ℕ x) =
 
 ```agda
 cong-eq-mod-succ-ℕ :
-  (k x y : ℕ) → mod-succ-ℕ k x ＝ mod-succ-ℕ k y → cong-ℕ (succ-ℕ k) x y
+  (k x y : ℕ) → mod-succ-ℕ k x ＝ mod-succ-ℕ k y → x ≡ y mod-ℕ succ-ℕ k
 cong-eq-mod-succ-ℕ k x y p =
   concatenate-cong-eq-cong-ℕ {succ-ℕ k} {x}
     ( symmetric-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
@@ -106,7 +106,7 @@ cong-eq-mod-succ-ℕ k x y p =
 
 ```agda
 eq-mod-succ-cong-ℕ :
-  (k x y : ℕ) → cong-ℕ (succ-ℕ k) x y → mod-succ-ℕ k x ＝ mod-succ-ℕ k y
+  (k x y : ℕ) → x ≡ y mod-ℕ succ-ℕ k → mod-succ-ℕ k x ＝ mod-succ-ℕ k y
 eq-mod-succ-cong-ℕ k x y H =
   eq-cong-nat-Fin
     ( succ-ℕ k)
@@ -211,18 +211,14 @@ ap-add-Fin k p q = ap-binary (add-Fin k) p q
 
 cong-add-Fin :
   {k : ℕ} (x y : Fin k) →
-  cong-ℕ k (nat-Fin k (add-Fin k x y)) ((nat-Fin k x) +ℕ (nat-Fin k y))
+  nat-Fin k (add-Fin k x y) ≡ (nat-Fin k x) +ℕ (nat-Fin k y) mod-ℕ k
 cong-add-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k ((nat-Fin (succ-ℕ k) x) +ℕ (nat-Fin (succ-ℕ k) y))
 
 cong-add-ℕ :
   {k : ℕ} (x y : ℕ) →
-  cong-ℕ
-    ( succ-ℕ k)
-    ( add-ℕ
-      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
-      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
-    ( x +ℕ y)
+  nat-Fin (k +ℕ 1) (mod-succ-ℕ k x) +ℕ nat-Fin (k +ℕ 1) (mod-succ-ℕ k y) ≡
+  x +ℕ y mod-ℕ k +ℕ 1
 cong-add-ℕ {k} x y =
   transitive-cong-ℕ
     ( succ-ℕ k)
@@ -243,14 +239,6 @@ cong-add-ℕ {k} x y =
       ( x)
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
       ( cong-nat-mod-succ-ℕ k x))
-
-congruence-add-ℕ :
-  (k : ℕ) {x y x' y' : ℕ} →
-  cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (x +ℕ y) (x' +ℕ y')
-congruence-add-ℕ k {x} {y} {x'} {y'} H K =
-  transitive-cong-ℕ k (x +ℕ y) (x +ℕ y') (x' +ℕ y')
-    ( translation-invariant-cong-ℕ' k x x' y' H)
-    ( translation-invariant-cong-ℕ k y y' x K)
 
 mod-succ-add-ℕ :
   (k x y : ℕ) →
@@ -291,7 +279,7 @@ ap-dist-Fin k p q = ap-binary (dist-Fin k) p q
 
 cong-dist-Fin :
   {k : ℕ} (x y : Fin k) →
-  cong-ℕ k (nat-Fin k (dist-Fin k x y)) (dist-ℕ (nat-Fin k x) (nat-Fin k y))
+  nat-Fin k (dist-Fin k x y) ≡ dist-ℕ (nat-Fin k x) (nat-Fin k y) mod-ℕ k
 cong-dist-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y))
 ```
@@ -306,7 +294,7 @@ neg-Fin (succ-ℕ k) x =
 
 cong-neg-Fin :
   {k : ℕ} (x : Fin k) →
-  cong-ℕ k (nat-Fin k (neg-Fin k x)) (dist-ℕ (nat-Fin k x) k)
+  nat-Fin k (neg-Fin k x) ≡ dist-ℕ (nat-Fin k x) k mod-ℕ k
 cong-neg-Fin {succ-ℕ k} x =
   cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
 ```
@@ -330,7 +318,7 @@ ap-mul-Fin k p q = ap-binary (mul-Fin k) p q
 
 cong-mul-Fin :
   {k : ℕ} (x y : Fin k) →
-  cong-ℕ k (nat-Fin k (mul-Fin k x y)) ((nat-Fin k x) *ℕ (nat-Fin k y))
+  nat-Fin k (mul-Fin k x y) ≡ (nat-Fin k x) *ℕ (nat-Fin k y) mod-ℕ k
 cong-mul-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k ((nat-Fin (succ-ℕ k) x) *ℕ (nat-Fin (succ-ℕ k) y))
 ```

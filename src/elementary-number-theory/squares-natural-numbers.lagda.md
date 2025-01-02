@@ -1,4 +1,4 @@
-# Squares in the natural numbers
+# Squares of natural numbers
 
 ```agda
 module elementary-number-theory.squares-natural-numbers where
@@ -8,7 +8,9 @@ module elementary-number-theory.squares-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.decidable-types
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
@@ -132,7 +134,7 @@ square-succ-succ-ℕ n =
 preserves-order-square-ℕ :
   (m n : ℕ) → m ≤-ℕ n → square-ℕ m ≤-ℕ square-ℕ n
 preserves-order-square-ℕ m n H =
-  preserves-leq-mul-ℕ m n m n H H
+  preserves-order-mul-ℕ m n m n H H
 
 preserves-strict-order-square-ℕ :
   (m n : ℕ) → m <-ℕ n → square-ℕ m <-ℕ square-ℕ n
@@ -327,6 +329,11 @@ Consider a natural number `n`. The following are equivalent:
 - Its square is divisible by 4.
 
 ```agda
+compute-square-even-number-ℕ :
+  (n : ℕ) → square-ℕ (even-number-ℕ n) ＝ 4 *ℕ square-ℕ n
+compute-square-even-number-ℕ n =
+  distributive-square-mul-ℕ 2 n
+
 div-four-square-is-even-ℕ :
   (n : ℕ) → is-even-ℕ n → div-ℕ 4 (square-ℕ n)
 pr1 (div-four-square-is-even-ℕ .(m *ℕ 2) (m , refl)) =
@@ -363,6 +370,122 @@ is-even-div-four-square-ℕ n H =
   is-even-is-even-square-ℕ n (is-even-div-4-ℕ (square-ℕ n) H)
 ```
 
+### Equivalent characterizations of a number being odd in terms of its square
+
+Consider a natural number `n`. The following are equivalent:
+
+- The number `n` is odd.
+- Its square is odd.
+- Its square is congruent to `1` modulo `4`.
+- Its square is congruent to `1` modulo `8`.
+
+**Proof.** If `n` is of the form `2k + 1`, then its square is of the form
+`4k(k+1) + 1`. Since the number `k(k + 1)` is even, it follows that the square
+of an odd number is congruent to `1` modulo `8`. Further more, since squares of
+even numbers are even, and hence not congruent to `1` modulo `8`, we get a
+logical equivalence.
+
+```agda
+square-odd-number-ℕ : ℕ → ℕ
+square-odd-number-ℕ n = 4 *ℕ square-ℕ n +ℕ 4 *ℕ n +ℕ 1
+
+square-odd-number-ℕ' : ℕ → ℕ
+square-odd-number-ℕ' n = 4 *ℕ (n *ℕ (n +ℕ 1)) +ℕ 1
+
+compute-square-odd-number-ℕ :
+  (n : ℕ) → square-ℕ (odd-number-ℕ n) ＝ square-odd-number-ℕ n
+compute-square-odd-number-ℕ n =
+  square-succ-ℕ (2 *ℕ n) ∙
+  ap
+    ( succ-ℕ)
+    ( ap-add-ℕ
+      ( compute-square-even-number-ℕ n)
+      ( inv (associative-mul-ℕ 2 2 n)))
+
+compute-square-odd-number-ℕ' :
+  (n : ℕ) → square-ℕ (odd-number-ℕ n) ＝ square-odd-number-ℕ' n
+compute-square-odd-number-ℕ' n =
+  compute-square-odd-number-ℕ n ∙
+  inv
+    ( ap
+      ( succ-ℕ)
+      ( ( ap (4 *ℕ_) ( right-successor-law-mul-ℕ n n)) ∙
+        ( left-distributive-mul-add-ℕ 4 (square-ℕ n) n)))
+
+compute-distance-to-1-square-odd-number-ℕ :
+  (n : ℕ) → dist-ℕ (square-ℕ (odd-number-ℕ n)) 1 ＝ 4 *ℕ (n *ℕ (n +ℕ 1))
+compute-distance-to-1-square-odd-number-ℕ n =
+  ( ap (λ x → dist-ℕ x 1) (compute-square-odd-number-ℕ' n)) ∙
+  ( right-unit-law-dist-ℕ _)
+
+has-odd-expansion-square-has-odd-expansion-ℕ :
+  (n : ℕ) → has-odd-expansion-ℕ n → has-odd-expansion-ℕ (square-ℕ n)
+pr1 (has-odd-expansion-square-has-odd-expansion-ℕ ._ (k , refl)) =
+  2 *ℕ (k *ℕ (k +ℕ 1))
+pr2 (has-odd-expansion-square-has-odd-expansion-ℕ ._ (k , refl)) =
+  inv
+    ( ( compute-square-odd-number-ℕ' k) ∙
+      ( ap succ-ℕ (associative-mul-ℕ 2 2 (k *ℕ (k +ℕ 1)))))
+
+is-odd-square-is-odd-ℕ :
+  (n : ℕ) → is-odd-ℕ n → is-odd-ℕ (square-ℕ n)
+is-odd-square-is-odd-ℕ n H =
+  is-odd-has-odd-expansion-ℕ
+    ( square-ℕ n)
+    ( has-odd-expansion-square-has-odd-expansion-ℕ n
+      ( has-odd-expansion-is-odd-ℕ n H))
+
+is-odd-is-odd-square-ℕ :
+  (n : ℕ) → is-odd-ℕ (square-ℕ n) → is-odd-ℕ n
+is-odd-is-odd-square-ℕ n =
+  map-neg (is-even-square-is-even-ℕ n)
+
+is-1-mod-4-square-has-odd-expansion-ℕ :
+  (n : ℕ) → has-odd-expansion-ℕ n → square-ℕ n ≡ 1 mod-ℕ 4
+is-1-mod-4-square-has-odd-expansion-ℕ ._ (k , refl) =
+  tr
+    ( div-ℕ 4)
+    ( inv (compute-distance-to-1-square-odd-number-ℕ k))
+    ( div-mul-ℕ' (k *ℕ (k +ℕ 1)) 4 4 (refl-div-ℕ 4))
+
+is-1-mod-8-square-has-odd-expansion-ℕ :
+  (n : ℕ) → has-odd-expansion-ℕ n → square-ℕ n ≡ 1 mod-ℕ 8
+is-1-mod-8-square-has-odd-expansion-ℕ ._ (k , refl) =
+  tr
+    ( div-ℕ 8)
+    ( inv (compute-distance-to-1-square-odd-number-ℕ k))
+    ( preserves-div-mul-ℕ 4 2 4
+      ( k *ℕ (k +ℕ 1))
+      ( refl-div-ℕ 4)
+      ( is-even-mul-succ-ℕ k))
+
+is-1-mod-8-square-is-odd-ℕ :
+  (n : ℕ) → is-odd-ℕ n → square-ℕ n ≡ 1 mod-ℕ 8
+is-1-mod-8-square-is-odd-ℕ n H =
+  is-1-mod-8-square-has-odd-expansion-ℕ n (has-odd-expansion-is-odd-ℕ n H)
+```
+
+### Any two odd squares are congruent modulo `8`
+
+This solves exercise 6 of section 2.1 in {{#cite "andrews94"}}.
+
+```agda
+cong-8-square-odd-number-ℕ :
+  (m n : ℕ) → is-odd-ℕ m → is-odd-ℕ n → square-ℕ m ≡ square-ℕ n mod-ℕ 8
+cong-8-square-odd-number-ℕ m n H K =
+  transitive-cong-ℕ 8
+    ( square-ℕ m)
+    ( 1)
+    ( square-ℕ n)
+    ( symmetric-cong-ℕ 8 (square-ℕ n) 1 (is-1-mod-8-square-is-odd-ℕ n K))
+    ( is-1-mod-8-square-is-odd-ℕ m H)
+```
+
 ## See also
 
 - [Cubes of natural numbers](elementary-number-theory.cubes-natural-numbers.md)
+- [Squares of integers](elementary-number-theory.squares-integers.md)
+
+## References
+
+{{#bibliography}}

@@ -94,7 +94,7 @@ predecessor-law-abs-ℤ (inr (inl star)) =
 predecessor-law-abs-ℤ (inr (inr zero-ℕ)) =
   star
 predecessor-law-abs-ℤ (inr (inr (succ-ℕ x))) =
-  preserves-leq-succ-ℕ x (succ-ℕ x) (succ-leq-ℕ x)
+  leq-succ-leq-ℕ x (succ-ℕ x) (succ-leq-ℕ x)
 ```
 
 ### `|x + 1| ≤ |x| + 1`
@@ -105,7 +105,7 @@ successor-law-abs-ℤ :
 successor-law-abs-ℤ (inl zero-ℕ) =
   star
 successor-law-abs-ℤ (inl (succ-ℕ x)) =
-  preserves-leq-succ-ℕ x (succ-ℕ x) (succ-leq-ℕ x)
+  leq-succ-leq-ℕ x (succ-ℕ x) (succ-leq-ℕ x)
 successor-law-abs-ℤ (inr (inl star)) =
   refl-leq-ℕ zero-ℕ
 successor-law-abs-ℤ (inr (inr x)) =

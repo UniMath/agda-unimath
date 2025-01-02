@@ -255,9 +255,9 @@ decide-leq-succ-ℕ (succ-ℕ m) (succ-ℕ n) l =
 ### If `m` is less than `n`, then it is less than `n+1`
 
 ```agda
-preserves-leq-succ-ℕ :
+leq-succ-leq-ℕ :
   (m n : ℕ) → m ≤-ℕ n → m ≤-ℕ succ-ℕ n
-preserves-leq-succ-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
+leq-succ-leq-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
 ```
 
 ### The successor of `n` is not less than or equal to `n`
@@ -300,41 +300,41 @@ contradiction-leq-ℕ' m n K H = contradiction-leq-ℕ m n H K
 ### Addition preserves inequality of natural numbers
 
 ```agda
-preserves-leq-left-add-ℕ :
+preserves-order-left-add-ℕ :
   (k m n : ℕ) → m ≤-ℕ n → m +ℕ k ≤-ℕ n +ℕ k
-preserves-leq-left-add-ℕ zero-ℕ m n = id
-preserves-leq-left-add-ℕ (succ-ℕ k) m n H = preserves-leq-left-add-ℕ k m n H
+preserves-order-left-add-ℕ zero-ℕ m n = id
+preserves-order-left-add-ℕ (succ-ℕ k) m n H = preserves-order-left-add-ℕ k m n H
 
-preserves-leq-right-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → k +ℕ m ≤-ℕ k +ℕ n
-preserves-leq-right-add-ℕ k m n H =
+preserves-order-right-add-ℕ : (k m n : ℕ) → m ≤-ℕ n → k +ℕ m ≤-ℕ k +ℕ n
+preserves-order-right-add-ℕ k m n H =
   concatenate-eq-leq-eq-ℕ
     ( commutative-add-ℕ k m)
-    ( preserves-leq-left-add-ℕ k m n H)
+    ( preserves-order-left-add-ℕ k m n H)
     ( commutative-add-ℕ n k)
 
-preserves-leq-add-ℕ :
+preserves-order-add-ℕ :
   {m m' n n' : ℕ} → m ≤-ℕ m' → n ≤-ℕ n' → m +ℕ n ≤-ℕ m' +ℕ n'
-preserves-leq-add-ℕ {m} {m'} {n} {n'} H K =
+preserves-order-add-ℕ {m} {m'} {n} {n'} H K =
   transitive-leq-ℕ
     ( m +ℕ n)
     ( m' +ℕ n)
     ( m' +ℕ n')
-    ( preserves-leq-right-add-ℕ m' n n' K)
-    ( preserves-leq-left-add-ℕ n m m' H)
+    ( preserves-order-right-add-ℕ m' n n' K)
+    ( preserves-order-left-add-ℕ n m m' H)
 ```
 
 ### Addition reflects inequality of natural numbers
 
 ```agda
-reflects-leq-left-add-ℕ :
+reflects-order-left-add-ℕ :
   (k m n : ℕ) → m +ℕ k ≤-ℕ n +ℕ k → m ≤-ℕ n
-reflects-leq-left-add-ℕ zero-ℕ m n = id
-reflects-leq-left-add-ℕ (succ-ℕ k) m n = reflects-leq-left-add-ℕ k m n
+reflects-order-left-add-ℕ zero-ℕ m n = id
+reflects-order-left-add-ℕ (succ-ℕ k) m n = reflects-order-left-add-ℕ k m n
 
-reflects-leq-right-add-ℕ :
+reflects-order-right-add-ℕ :
   (k m n : ℕ) → k +ℕ m ≤-ℕ k +ℕ n → m ≤-ℕ n
-reflects-leq-right-add-ℕ k m n H =
-  reflects-leq-left-add-ℕ k m n
+reflects-order-right-add-ℕ k m n H =
+  reflects-order-left-add-ℕ k m n
     ( concatenate-eq-leq-eq-ℕ
       ( commutative-add-ℕ m k)
       ( H)
@@ -392,32 +392,32 @@ leq-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l p =
 ### Multiplication preserves inequality of natural numbers
 
 ```agda
-preserves-leq-left-mul-ℕ :
+preserves-order-left-mul-ℕ :
   (k m n : ℕ) → m ≤-ℕ n → m *ℕ k ≤-ℕ n *ℕ k
-preserves-leq-left-mul-ℕ k zero-ℕ n p = star
-preserves-leq-left-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
-  preserves-leq-left-add-ℕ k
+preserves-order-left-mul-ℕ k zero-ℕ n p = star
+preserves-order-left-mul-ℕ k (succ-ℕ m) (succ-ℕ n) p =
+  preserves-order-left-add-ℕ k
     ( m *ℕ k)
     ( n *ℕ k)
-    ( preserves-leq-left-mul-ℕ k m n p)
+    ( preserves-order-left-mul-ℕ k m n p)
 
-preserves-leq-right-mul-ℕ :
+preserves-order-right-mul-ℕ :
   (k m n : ℕ) → m ≤-ℕ n → k *ℕ m ≤-ℕ k *ℕ n
-preserves-leq-right-mul-ℕ k m n H =
+preserves-order-right-mul-ℕ k m n H =
   concatenate-eq-leq-eq-ℕ
     ( commutative-mul-ℕ k m)
-    ( preserves-leq-left-mul-ℕ k m n H)
+    ( preserves-order-left-mul-ℕ k m n H)
     ( commutative-mul-ℕ n k)
 
-preserves-leq-mul-ℕ :
+preserves-order-mul-ℕ :
   (m m' n n' : ℕ) → m ≤-ℕ m' → n ≤-ℕ n' → m *ℕ n ≤-ℕ m' *ℕ n'
-preserves-leq-mul-ℕ m m' n n' H K =
+preserves-order-mul-ℕ m m' n n' H K =
   transitive-leq-ℕ
     ( m *ℕ n)
     ( m' *ℕ n)
     ( m' *ℕ n')
-    ( preserves-leq-right-mul-ℕ m' n n' K)
-    ( preserves-leq-left-mul-ℕ n m m' H)
+    ( preserves-order-right-mul-ℕ m' n n' K)
+    ( preserves-order-left-mul-ℕ n m m' H)
 ```
 
 ### Multiplication by a nonzero natural number reflects inequality of natural numbers
@@ -428,7 +428,7 @@ reflects-order-mul-succ-ℕ :
 reflects-order-mul-succ-ℕ k zero-ℕ n p = star
 reflects-order-mul-succ-ℕ k (succ-ℕ m) (succ-ℕ n) p =
   reflects-order-mul-succ-ℕ k m n
-    ( reflects-leq-left-add-ℕ
+    ( reflects-order-left-add-ℕ
       ( succ-ℕ k)
       ( m *ℕ (succ-ℕ k))
       ( n *ℕ (succ-ℕ k))
@@ -468,7 +468,7 @@ leq-mul-ℕ k x =
   concatenate-eq-leq-ℕ
     ( x *ℕ succ-ℕ k)
     ( inv (right-unit-law-mul-ℕ x))
-    ( preserves-leq-right-mul-ℕ x 1 (succ-ℕ k) (leq-zero-ℕ k))
+    ( preserves-order-right-mul-ℕ x 1 (succ-ℕ k) (leq-zero-ℕ k))
 
 leq-mul-ℕ' :
   (k x : ℕ) → x ≤-ℕ succ-ℕ k *ℕ x

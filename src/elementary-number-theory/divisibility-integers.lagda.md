@@ -293,13 +293,20 @@ div-left-summand-ℤ x y z H K =
 
 ```agda
 preserves-div-mul-ℤ :
+  (k l x y : ℤ) → div-ℤ k x → div-ℤ l y → div-ℤ (k *ℤ l) (x *ℤ y)
+pr1 (preserves-div-mul-ℤ k l x y (q , α) (p , β)) = q *ℤ p
+pr2 (preserves-div-mul-ℤ k l x y (q , α) (p , β)) =
+  interchange-law-mul-mul-ℤ q p k l ∙ ap-mul-ℤ α β
+
+preserves-div-left-mul-ℤ :
   (k x y : ℤ) → div-ℤ x y → div-ℤ (k *ℤ x) (k *ℤ y)
-pr1 (preserves-div-mul-ℤ k x y (pair q p)) = q
-pr2 (preserves-div-mul-ℤ k x y (pair q p)) =
-  ( inv (associative-mul-ℤ q k x)) ∙
-    ( ( ap (_*ℤ x) (commutative-mul-ℤ q k)) ∙
-      ( ( associative-mul-ℤ k q x) ∙
-        ( ap (k *ℤ_) p)))
+preserves-div-left-mul-ℤ k x y H =
+  preserves-div-mul-ℤ k x k y (refl-div-ℤ k) H
+
+preserves-div-right-mul-ℤ :
+  (k x y : ℤ) → div-ℤ x y → div-ℤ (x *ℤ k) (y *ℤ k)
+preserves-div-right-mul-ℤ k x y H =
+  preserves-div-mul-ℤ x k y k H (refl-div-ℤ k)
 ```
 
 ### Multiplication by a nonzero number reflects divisibility
@@ -335,7 +342,7 @@ div-div-quotient-div-ℤ x y d H K =
   tr
     ( div-ℤ (d *ℤ x))
     ( eq-quotient-div-ℤ' d y H)
-    ( preserves-div-mul-ℤ d x (quotient-div-ℤ d y H) K)
+    ( preserves-div-left-mul-ℤ d x (quotient-div-ℤ d y H) K)
 ```
 
 ### `sim-unit-ℤ x y` holds if and only if `x|y` and `y|x`

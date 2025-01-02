@@ -328,7 +328,7 @@ successor-step-list-of-primes-fundamental-theorem-arithmetic-ℕ n N f =
         ( nat-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
         ( succ-ℕ n)
         ( div-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
-        ( preserves-leq-succ-ℕ 1 n N))
+        ( leq-succ-leq-ℕ 1 n N))
       ( upper-bound-quotient-div-least-prime-divisor-ℕ n (le-succ-leq-ℕ 1 n N)))
 
 list-of-primes-fundamental-theorem-arithmetic-ℕ :
@@ -361,7 +361,7 @@ compute-list-of-primes-fundamental-theorem-arithmetic-succ-ℕ :
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
         ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
-        ( preserves-leq-succ-ℕ 1 x H)))
+        ( leq-succ-leq-ℕ 1 x H)))
 compute-list-of-primes-fundamental-theorem-arithmetic-succ-ℕ x H =
   compute-succ-based-strong-ind-ℕ
     ( 1)
@@ -385,7 +385,7 @@ compute-list-fundamental-theorem-arithmetic-succ-ℕ :
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
         ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
-        ( preserves-leq-succ-ℕ 1 x H)))
+        ( leq-succ-leq-ℕ 1 x H)))
 compute-list-fundamental-theorem-arithmetic-succ-ℕ x H =
   ap
     ( map-list nat-Prime-ℕ)
@@ -439,7 +439,7 @@ is-multiplicative-decomposition-list-fundamental-theorem-arithmetic-ℕ =
                 ( nat-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
                 ( succ-ℕ n)
                 ( div-least-prime-divisor-ℕ (succ-ℕ n) (le-succ-leq-ℕ 1 n N))
-                ( preserves-leq-succ-ℕ 1 n N))
+                ( leq-succ-leq-ℕ 1 n N))
               ( upper-bound-quotient-div-least-prime-divisor-ℕ
                 ( n)
                 ( le-succ-leq-ℕ 1 n N))))) ∙
@@ -496,7 +496,7 @@ is-least-element-head-list-fundamental-theorem-arithmetic-succ-ℕ :
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
         ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
-        ( preserves-leq-succ-ℕ 1 x H)))
+        ( leq-succ-leq-ℕ 1 x H)))
 is-least-element-head-list-fundamental-theorem-arithmetic-succ-ℕ x H =
   is-least-element-list-least-prime-divisor-ℕ
     ( x)

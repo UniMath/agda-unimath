@@ -474,13 +474,20 @@ is-one-div-ℕ x y H K = is-one-div-one-ℕ x (div-right-summand-ℕ x y 1 H K)
 
 ```agda
 preserves-div-mul-ℕ :
+  (k l x y : ℕ) → div-ℕ k x → div-ℕ l y → div-ℕ (k *ℕ l) (x *ℕ y)
+pr1 (preserves-div-mul-ℕ k l x y (q , α) (p , β)) = q *ℕ p
+pr2 (preserves-div-mul-ℕ k l x y (q , α) (p , β)) =
+  interchange-law-mul-mul-ℕ q p k l ∙ ap-mul-ℕ α β
+
+preserves-div-left-mul-ℕ :
   (k x y : ℕ) → div-ℕ x y → div-ℕ (k *ℕ x) (k *ℕ y)
-pr1 (preserves-div-mul-ℕ k x y (q , p)) = q
-pr2 (preserves-div-mul-ℕ k x y (q , p)) =
-  ( inv (associative-mul-ℕ q k x)) ∙
-    ( ( ap (_*ℕ x) (commutative-mul-ℕ q k)) ∙
-      ( ( associative-mul-ℕ k q x) ∙
-        ( ap (k *ℕ_) p)))
+preserves-div-left-mul-ℕ k x y =
+  preserves-div-mul-ℕ k x k y (refl-div-ℕ k)
+
+preserves-div-right-mul-ℕ :
+  (k x y : ℕ) → div-ℕ x y → div-ℕ (x *ℕ k) (y *ℕ k)
+preserves-div-right-mul-ℕ k x y H =
+  preserves-div-mul-ℕ x k y k H (refl-div-ℕ k)
 ```
 
 ### Multiplication by a nonzero number reflects divisibility
@@ -516,7 +523,7 @@ div-div-quotient-div-ℕ x y d H K =
   tr
     ( div-ℕ (d *ℕ x))
     ( eq-quotient-div-ℕ' d y H)
-    ( preserves-div-mul-ℕ d x (quotient-div-ℕ d y H) K)
+    ( preserves-div-left-mul-ℕ d x (quotient-div-ℕ d y H) K)
 ```
 
 ### If `d` divides a nonzero number `x`, then the quotient `x/d` is also nonzero
