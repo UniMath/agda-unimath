@@ -1,4 +1,4 @@
-# Horizontal composition of higher spans
+# Horizontal composition of spans of spans
 
 ```agda
 module foundation.horizontal-composition-spans-of-spans where
