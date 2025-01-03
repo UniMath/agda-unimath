@@ -221,6 +221,7 @@ open import foundation.homotopies-morphisms-cospan-diagrams public
 open import foundation.homotopy-algebra public
 open import foundation.homotopy-induction public
 open import foundation.homotopy-preorder-of-types public
+open import foundation.horizontal-composition-spans-of-spans public
 open import foundation.idempotent-maps public
 open import foundation.identity-systems public
 open import foundation.identity-truncated-types public
