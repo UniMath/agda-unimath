@@ -377,6 +377,7 @@ open import foundation.span-diagrams public
 open import foundation.span-diagrams-families-of-types public
 open import foundation.spans public
 open import foundation.spans-families-of-types public
+open import foundation.spans-of-spans public
 open import foundation.split-idempotent-maps public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
