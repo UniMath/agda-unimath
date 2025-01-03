@@ -48,8 +48,8 @@ Given two [spans](foundation.spans.md) `F` and `G` from `A` to `B` and two spans
 
 then we may
 {{#concept "horizontally compose" Disambiguation="spans of spans" Agda=horizontal-comp-span-of-spans}}
-`α` and `β` to obtain a span of spans from `H ∘ F` to `I ∘ G`. The horizontal
-composite is given by the span of spans
+`α` and `β` to obtain a span of spans from `H ∘ F` to `I ∘ G` denoted as
+`α ∙ β`. Explicitly, the horizontal composite is given by the span of spans
 
 ```text
   F₀ ×_B H₀ ---------> C
