@@ -41,7 +41,7 @@ spans `β` from `G` to `H`
       /  ↑  \
      /   α₀  \
     ∨    ↓    ∨
-  A <--- G₀---> B
+  A <--- G₀---> B,
     ∧    ↑    ∧
      \   β₀  /
       \  ↓  /
@@ -49,9 +49,10 @@ spans `β` from `G` to `H`
 ```
 
 then we may
-{{#concept "vertically compose" Disambiguation="spans of types" Agda=vertical-comp-span-of-spans-of-spans}}
-the two spans of spans, denoted `β ∘ α`. The underlying span of the vertical
-composite is given by the composition of the underlying spans.
+{{#concept "vertically compose" Disambiguation="spans of spans of types" Agda=vertical-comp-span-of-spans-of-spans}}
+the two spans of spans to obtain a span of spans `β ∘ α` from `F` to `H`. The
+underlying span of the vertical composite is given by the composition of the
+underlying spans.
 
 ## Definitions
 
