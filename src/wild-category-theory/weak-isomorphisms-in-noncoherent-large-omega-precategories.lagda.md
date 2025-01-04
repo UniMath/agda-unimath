@@ -33,14 +33,35 @@ in `𝒞` is a morphism `f : x → y` in `𝒞` [equipped](foundation.structure.
 - a $2$-morphism `ε : 𝒞₂ (r ∘ f) id`
 - a witness that `ε` is a weak isomorphism.
 
-This definition of a weak isomorphism mirrors the definition of
-[biinvertible maps](foundation-core.equivalences.md) between types.
+Thus, the specified data is a commuting diagram of the form
 
-Note that a noncoherent large ω-precategory is the most general setting that
-allows us to _define_ weak isomorphisms in large wild categories, but because of
-the missing coherences, we cannot show any of the expected properties. For
-example we cannot show that all identities are weak isomorphisms, or that weak
-isomorphisms compose.
+```text
+  y ========= y
+    \  ~⇓η  ∧   \
+   s \     /f    \ r
+      ∨   /  ~⇓ε  ∨
+        x ========= x
+```
+
+where `η` and `ε` again are weak isomorphisms in their respective
+hom-ω-categories.
+
+> **Disclaimer.** It is not established that the proposed structure of a weak
+> isomorphism is fully coherent, and may be subject to change in the future.
+
+While a noncoherent ω-precategory is the most general setting that allows us to
+_define_ weak isomorphisms, the missing coherences obstruct us from showing many
+of the expected properties. For example, we cannot show that all identities are
+weak isomorphisms or that weak isomorphisms compose.
+
+The concept of weak isomorphisms in ω-categories is strictly weaker than the
+concept of _isomorphisms_. Indeed, the coindutive nature of this concept allows
+us, in an informal sense, to postpone providing a witness that `s` or `r` are
+"proper" inverses to `f` all the way up to infinity. To take an example,
+consider the ω-category of spans and higher spans. In this ω-category every
+morphism is a weak isomorphism since every morphism is a biadjoint, but not
+every morphism is an isomorphism. Moreover, this ω-category is univalent with
+respect to isomorphisms, but not with respect to all weak isomorphisms.
 
 ## Definitions
 
