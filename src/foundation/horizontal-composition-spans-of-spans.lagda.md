@@ -1,4 +1,4 @@
-# Horizontal composition of higher spans
+# Horizontal composition of spans of spans
 
 ```agda
 module foundation.horizontal-composition-spans-of-spans where
@@ -48,15 +48,16 @@ Given two [spans](foundation.spans.md) `F` and `G` from `A` to `B` and two spans
 
 then we may
 {{#concept "horizontally compose" Disambiguation="spans of spans" Agda=horizontal-comp-span-of-spans}}
-`α` and `β` to obtain a span of spans from `H ∘ F` to `I ∘ G`. The horizontal
-composite is given by the span of spans
+`α` and `β` to obtain a span of spans `α ∙ β` from `H ∘ F` to `I ∘ G`.
+Explicitly, the horizontal composite is given by the unique construction of a
+span of spans
 
 ```text
-  F₀ ×_B H₀ ---------> C
-     |    ↖            ∧
-     |    α₀ ×_B β₀    |
-     ∨            ↘    |
-     A <----------- G₀ ×_B I₀.
+  F₀ ×_B H₀ ----------> C
+      |    ↖            ∧
+      |    α₀ ×_B β₀    |
+      ∨            ↘    |
+      A <---------- G₀ ×_B I₀.
 ```
 
 **Note.** There are four equivalent, but judgmentally different choices of
@@ -70,8 +71,8 @@ spanning type `α₀ ×_B β₀` of the horizontal composite. We pick
       F₀ ---------> B
 ```
 
-as this is the only choice that avoids inversions of coherences as part of the
-construction.
+as this choice avoids inversions of coherences as part of the construction,
+given our choice of orientation for coherences of spans of spans.
 
 ## Definitions
 

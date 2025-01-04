@@ -480,6 +480,7 @@ open import foundation.unordered-pairs-of-types public
 open import foundation.unordered-tuples public
 open import foundation.unordered-tuples-of-types public
 open import foundation.vectors-set-quotients public
+open import foundation.vertical-composition-spans-of-spans public
 open import foundation.weak-function-extensionality public
 open import foundation.weak-limited-principle-of-omniscience public
 open import foundation.weakly-constant-maps public
