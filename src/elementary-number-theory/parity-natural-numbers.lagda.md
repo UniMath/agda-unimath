@@ -409,6 +409,6 @@ is-odd-add-succ-self-ℕ n =
 Further laws of parity are proven in other files, e.g.:
 
 - [Parity of integers](elementary-number-theory.parity-integers.md)
-- [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)
+- [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md). Here we also show that the sum of the first $n$ odd numbers is $n^2$.
 - The fact that the pronic numbers $n(n+1)$ are even is proven in
   [Pronic numbers](elementary-number-theory.pronic-numbers.md).

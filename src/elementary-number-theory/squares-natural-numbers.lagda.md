@@ -20,6 +20,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.pronic-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.sums-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -33,6 +34,8 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.transport-along-identifications
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -531,6 +534,32 @@ module _
       ( refl)
       ( bounded-div-div-ℕ (square-ℕ m) (square-ℕ n) K)
       ( bounded-div-square-ℕ)
+```
+
+### The $n$th square is the sum of the first $n$ odd numbers
+
+We show that
+
+$$
+  1 + 3 + \cdots + (2n+1) = n^2.
+$$
+
+This solves exercise 5 in section 1.2 of {{#cite "Andrews94"}}.
+
+```agda
+sum-of-odd-numbers-ℕ : ℕ → ℕ
+sum-of-odd-numbers-ℕ n =
+  sum-Fin-ℕ n (λ i → odd-number-ℕ (nat-Fin n i))
+
+compute-sum-of-odd-numbers-ℕ :
+  (n : ℕ) → sum-of-odd-numbers-ℕ n ＝ square-ℕ n
+compute-sum-of-odd-numbers-ℕ zero-ℕ = refl
+compute-sum-of-odd-numbers-ℕ (succ-ℕ zero-ℕ) = refl
+compute-sum-of-odd-numbers-ℕ (succ-ℕ (succ-ℕ n)) =
+  ( ap
+    ( _+ℕ odd-number-ℕ (succ-ℕ n))
+    ( compute-sum-of-odd-numbers-ℕ (succ-ℕ n))) ∙
+  ( inv (square-succ-ℕ (succ-ℕ n)))
 ```
 
 ## See also
