@@ -1,9 +1,9 @@
-# Colax functors between large noncoherent wild higher precategories
+# Colax functors between large noncoherent ω-precategories
 
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module wild-category-theory.colax-functors-noncoherent-large-wild-higher-precategories where
+module wild-category-theory.colax-functors-noncoherent-large-omega-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -20,11 +20,11 @@ open import globular-types.large-colax-reflexive-globular-maps
 open import globular-types.large-colax-transitive-globular-maps
 open import globular-types.large-globular-maps
 
-open import wild-category-theory.colax-functors-noncoherent-wild-higher-precategories
-open import wild-category-theory.maps-noncoherent-large-wild-higher-precategories
-open import wild-category-theory.maps-noncoherent-wild-higher-precategories
-open import wild-category-theory.noncoherent-large-wild-higher-precategories
-open import wild-category-theory.noncoherent-wild-higher-precategories
+open import wild-category-theory.colax-functors-noncoherent-omega-precategories
+open import wild-category-theory.maps-noncoherent-large-omega-precategories
+open import wild-category-theory.maps-noncoherent-omega-precategories
+open import wild-category-theory.noncoherent-large-omega-precategories
+open import wild-category-theory.noncoherent-omega-precategories
 ```
 
 </details>
@@ -32,11 +32,11 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 ## Idea
 
 A
-{{#concept "colax functor" Disambiguation="between noncoherent large wild higher precategories" Agda=colax-functor-Noncoherent-Large-Wild-Higher-Precategory}}
+{{#concept "colax functor" Disambiguation="between noncoherent large ω-precategories" Agda=colax-functor-Noncoherent-Large-Wild-Higher-Precategory}}
 `f` between
-[noncoherent large wild higher precategories](wild-category-theory.noncoherent-large-wild-higher-precategories.md)
+[noncoherent large ω-precategories](wild-category-theory.noncoherent-large-omega-precategories.md)
 `𝒜` and `ℬ` is a
-[map of noncoherent large wild higher precategories](wild-category-theory.maps-noncoherent-large-wild-higher-precategories.md)
+[map of noncoherent large ω-precategories](wild-category-theory.maps-noncoherent-large-omega-precategories.md)
 that preserves identity morphisms and composition _colaxly_. This means that for
 every $n$-morphism `f` in `𝒜`, where we take $0$-morphisms to be objects, there
 is an $(n+1)$-morphism
@@ -56,7 +56,7 @@ in `ℬ`.
 
 ## Definitions
 
-### The predicate on maps between large noncoherent wild higher precategories of preserving the identity structure
+### The predicate on maps between large noncoherent ω-precategories of preserving the identity structure
 
 ```agda
 preserves-id-structure-map-Noncoherent-Large-Wild-Higher-Precategory :
@@ -74,7 +74,7 @@ preserves-id-structure-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 ℬ F 
     ( F)
 ```
 
-### The predicate on maps between large noncoherent wild higher precategories of preserving the composition structure
+### The predicate on maps between large noncoherent ω-precategories of preserving the composition structure
 
 ```agda
 preserves-comp-structure-map-Noncoherent-Large-Wild-Higher-Precategory :
@@ -92,7 +92,7 @@ preserves-comp-structure-map-Noncoherent-Large-Wild-Higher-Precategory 𝒜 ℬ 
     ( F)
 ```
 
-### The predicate of being a colax functor between noncoherent wild higher precategories
+### The predicate of being a colax functor between noncoherent ω-precategories
 
 ```agda
 record
@@ -197,7 +197,7 @@ record
 open is-colax-functor-Noncoherent-Large-Wild-Higher-Precategory public
 ```
 
-### The type of colax functors between noncoherent wild higher precategories
+### The type of colax functors between noncoherent ω-precategories
 
 ```agda
 record
@@ -467,7 +467,7 @@ module _
     is-colax-functor-id-colax-functor-Noncoherent-Large-Wild-Higher-Precategory
 ```
 
-### Composition of colax functors between noncoherent wild higher precategories
+### Composition of colax functors between noncoherent ω-precategories
 
 ```agda
 module _

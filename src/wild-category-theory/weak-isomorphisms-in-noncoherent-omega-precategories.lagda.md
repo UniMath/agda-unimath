@@ -1,9 +1,9 @@
-# Isomorphisms in noncoherent wild higher precategories
+# Isomorphisms in noncoherent ω-precategories
 
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module wild-category-theory.isomorphisms-in-noncoherent-wild-higher-precategories where
+module wild-category-theory.weak-isomorphisms-in-noncoherent-omega-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -12,7 +12,7 @@ module wild-category-theory.isomorphisms-in-noncoherent-wild-higher-precategorie
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import wild-category-theory.noncoherent-wild-higher-precategories
+open import wild-category-theory.noncoherent-omega-precategories
 ```
 
 </details>
@@ -20,9 +20,9 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 ## Idea
 
 Consider a
-[noncoherent wild higher precategory](wild-category-theory.noncoherent-wild-higher-precategories.md)
+[noncoherent wild higher precategory](wild-category-theory.noncoherent-omega-precategories.md)
 `𝒞`. An
-{{#concept "isomorphism" Disambiguation="in noncoherent wild higher precategories" Agda=is-iso-Noncoherent-Wild-Higher-Precategory}}
+{{#concept "isomorphism" Disambiguation="in noncoherent ω-precategories" Agda=is-iso-Noncoherent-Wild-Higher-Precategory}}
 in `𝒞` is a morphism `f : x → y` in `𝒞` [equipped](foundation.structure.md) with
 
 - a morphism `s : y → x`
@@ -218,4 +218,4 @@ module _
 
 ## See also
 
-- [Isomorphisms in noncoherent large wild higher precategories](wild-category-theory.isomorphisms-in-noncoherent-large-wild-higher-precategories.md)
+- [Isomorphisms in noncoherent large ω-precategories](wild-category-theory.isomorphisms-in-noncoherent-large-omega-precategories.md)

@@ -1,9 +1,9 @@
-# Colax functors between noncoherent wild higher precategories
+# Colax functors between noncoherent ω-precategories
 
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module wild-category-theory.colax-functors-noncoherent-wild-higher-precategories where
+module wild-category-theory.colax-functors-noncoherent-omega-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -20,8 +20,8 @@ open import globular-types.globular-maps
 open import globular-types.globular-types
 open import globular-types.reflexive-globular-types
 
-open import wild-category-theory.maps-noncoherent-wild-higher-precategories
-open import wild-category-theory.noncoherent-wild-higher-precategories
+open import wild-category-theory.maps-noncoherent-omega-precategories
+open import wild-category-theory.noncoherent-omega-precategories
 ```
 
 </details>
@@ -29,11 +29,11 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 ## Idea
 
 A
-{{#concept "colax functor" Disambiguation="between noncoherent wild higher precategories" Agda=colax-functor-Noncoherent-Wild-Higher-Precategory}}
+{{#concept "colax functor" Disambiguation="between noncoherent ω-precategories" Agda=colax-functor-Noncoherent-Wild-Higher-Precategory}}
 `F` between
-[noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md)
+[noncoherent ω-precategories](wild-category-theory.noncoherent-omega-precategories.md)
 `𝒜` and `ℬ` is a
-[map of noncoherent wild higher precategories](wild-category-theory.maps-noncoherent-wild-higher-precategories.md)
+[map of noncoherent ω-precategories](wild-category-theory.maps-noncoherent-omega-precategories.md)
 which is [colax reflexive](globular-types.colax-reflexive-globular-maps.md) and
 [colax transitive](globular-types.colax-transitive-globular-maps.md). This means
 that for every $n$-morphism `f` in `𝒜`, where we take $0$-morphisms to be
@@ -54,7 +54,7 @@ in `ℬ`.
 
 ## Definitions
 
-### The predicate on maps on noncoherent wild higher precategories of preserving identity structure
+### The predicate on maps on noncoherent ω-precategories of preserving identity structure
 
 ```agda
 module _
@@ -73,7 +73,7 @@ module _
       ( F)
 ```
 
-### The predicate on maps of noncoherent wild higher precategories of preserving composition structure
+### The predicate on maps of noncoherent ω-precategories of preserving composition structure
 
 ```agda
 module _
@@ -92,7 +92,7 @@ module _
       ( F)
 ```
 
-### The predicate of being a colax functor between noncoherent wild higher precategories
+### The predicate of being a colax functor between noncoherent ω-precategories
 
 ```agda
 record
@@ -182,7 +182,7 @@ record
 open is-colax-functor-Noncoherent-Wild-Higher-Precategory public
 ```
 
-### The type of colax functors between noncoherent wild higher precategories
+### The type of colax functors between noncoherent ω-precategories
 
 ```agda
 colax-functor-Noncoherent-Wild-Higher-Precategory :
@@ -378,7 +378,7 @@ id-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜 =
     is-colax-functor-id-colax-functor-Noncoherent-Wild-Higher-Precategory 𝒜)
 ```
 
-### Composition of colax functors between noncoherent wild higher precategories
+### Composition of colax functors between noncoherent ω-precategories
 
 ```agda
 module _

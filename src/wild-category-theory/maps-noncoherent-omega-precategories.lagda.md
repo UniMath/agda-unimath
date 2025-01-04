@@ -1,9 +1,9 @@
-# Maps between noncoherent wild higher precategories
+# Maps between noncoherent ω-precategories
 
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module wild-category-theory.maps-noncoherent-wild-higher-precategories where
+module wild-category-theory.maps-noncoherent-omega-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +17,7 @@ open import foundation.universe-levels
 open import globular-types.globular-maps
 open import globular-types.globular-types
 
-open import wild-category-theory.noncoherent-wild-higher-precategories
+open import wild-category-theory.noncoherent-omega-precategories
 ```
 
 </details>
@@ -25,29 +25,29 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 ## Idea
 
 A
-{{#concept "map" Disambiguation="between noncoherent wild higher precategories" Agda=map-Noncoherent-Wild-Higher-Precategory}}
+{{#concept "map" Disambiguation="between noncoherent ω-precategories" Agda=map-Noncoherent-Wild-Higher-Precategory}}
 `f` between
-[noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md)
+[noncoherent ω-precategories](wild-category-theory.noncoherent-omega-precategories.md)
 `𝒜` and `ℬ` is a [globular map](globular-types.globular-maps.md) between their
 underlying [globular types](globular-types.globular-types.md). More
-specifically, a map `F` between noncoherent wild higher precategories consists
-of a map on objects `F₀ : obj 𝒜 → obj ℬ`, and for every pair of $n$-morphisms
-`f` and `g`, a map of $(n+1)$-morphisms
+specifically, a map `F` between noncoherent ω-precategories consists of a map on
+objects `F₀ : obj 𝒜 → obj ℬ`, and for every pair of $n$-morphisms `f` and `g`, a
+map of $(n+1)$-morphisms
 
 ```text
   Fₙ₊₁ : (𝑛+1)-hom 𝒞 f g → (𝑛+1)-hom 𝒟 (Fₙ f) (Fₙ g).
 ```
 
-A map between noncoherent wild higher precategories does not have to preserve
-the identities or composition in any shape or form, and is the least structured
-notion of a "morphism" between noncoherent wild higher precategories. For a
-notion of "morphism" between noncoherent wild higher precategories that in one
-sense preserves this additional structure, see
-[colax functors between noncoherent wild higher precategories](wild-category-theory.colax-functors-noncoherent-wild-higher-precategories.md).
+A map between noncoherent ω-precategories does not have to preserve the
+identities or composition in any shape or form, and is the least structured
+notion of a "morphism" between noncoherent ω-precategories. For a notion of
+"morphism" between noncoherent ω-precategories that in one sense preserves this
+additional structure, see
+[colax functors between noncoherent ω-precategories](wild-category-theory.colax-functors-noncoherent-omega-precategories.md).
 
 ## Definitions
 
-### Maps between noncoherent wild higher precategories
+### Maps between noncoherent ω-precategories
 
 ```agda
 map-Noncoherent-Wild-Higher-Precategory :
@@ -132,7 +132,7 @@ module _
     id-globular-map _
 ```
 
-### Composition of maps between noncoherent wild higher precategories
+### Composition of maps between noncoherent ω-precategories
 
 ```agda
 module _

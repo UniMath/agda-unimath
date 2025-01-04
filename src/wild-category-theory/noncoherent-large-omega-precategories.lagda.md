@@ -1,9 +1,9 @@
-# Noncoherent large wild higher precategories
+# Noncoherent large ω-precategories
 
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module wild-category-theory.noncoherent-large-wild-higher-precategories where
+module wild-category-theory.noncoherent-large-omega-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -27,7 +27,7 @@ open import globular-types.large-transitive-globular-types
 open import globular-types.reflexive-globular-types
 open import globular-types.transitive-globular-types
 
-open import wild-category-theory.noncoherent-wild-higher-precategories
+open import wild-category-theory.noncoherent-omega-precategories
 ```
 
 </details>
@@ -70,7 +70,7 @@ morphisms_.
 
 ## Definitions
 
-### Noncoherent large wild higher precategories
+### Noncoherent large ω-precategories
 
 ```agda
 record

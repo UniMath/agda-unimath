@@ -1,9 +1,9 @@
-# Noncoherent wild higher precategories
+# Noncoherent ω-precategories
 
 ```agda
 {-# OPTIONS --guardedness #-}
 
-module wild-category-theory.noncoherent-wild-higher-precategories where
+module wild-category-theory.noncoherent-omega-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -64,7 +64,7 @@ transitivity operations are branded as _composition of morphisms_.
 
 ## Definitions
 
-### Noncoherent wild higher precategories
+### Noncoherent ω-precategories
 
 ```agda
 Noncoherent-Wild-Higher-Precategory : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)

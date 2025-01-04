@@ -31,10 +31,10 @@ open import globular-types.large-transitive-globular-types
 open import globular-types.reflexive-globular-types
 open import globular-types.transitive-globular-types
 
-open import wild-category-theory.isomorphisms-in-noncoherent-large-wild-higher-precategories
-open import wild-category-theory.isomorphisms-in-noncoherent-wild-higher-precategories
-open import wild-category-theory.noncoherent-large-wild-higher-precategories
-open import wild-category-theory.noncoherent-wild-higher-precategories
+open import wild-category-theory.isomorphisms-in-noncoherent-large-omega-precategories
+open import wild-category-theory.isomorphisms-in-noncoherent-omega-precategories
+open import wild-category-theory.noncoherent-large-omega-precategories
+open import wild-category-theory.noncoherent-omega-precategories
 ```
 
 </details>
