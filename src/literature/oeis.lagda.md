@@ -45,6 +45,13 @@ A000004 : ℕ → ℕ
 A000004 _ = zero-ℕ
 ```
 
+### A000005 -- The number of divisors
+
+```agda
+open import elementary-number-theory.number-of-divisors using
+  ( number-of-divisors-ℕ)
+```
+
 OEIS: [A000004](https://oeis.org/A000004)
 
 ### A000007 -- The characteristic function for 0
