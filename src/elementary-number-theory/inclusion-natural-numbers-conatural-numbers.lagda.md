@@ -16,6 +16,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.existential-quantification
 open import foundation.injective-maps
+open import foundation.universe-levels
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.surjective-maps
@@ -69,12 +70,12 @@ is-injective-conatural-ℕ {succ-ℕ x} {succ-ℕ y} p =
 The canonical inclusion of the natural numbers is not surjective because it does
 not hit the point at infinity.
 
-```agda
+```text
 neq-infinity-conatural-ℕ : (n : ℕ) → conatural-ℕ n ≠ infinity-ℕ∞
 neq-infinity-conatural-ℕ zero-ℕ = neq-infinity-zero-ℕ∞
 neq-infinity-conatural-ℕ (succ-ℕ n) p =
   neq-infinity-conatural-ℕ n
-    ( is-injective-succ-ℕ∞ (p ∙ is-infinite-infinity-ℕ∞))
+    ( is-injective-succ-ℕ∞ (p ∙ {! is-infinite-successor-condition-infinity-ℕ∞  !}))
 
 is-not-surjective-conatural-ℕ : ¬ (is-surjective conatural-ℕ)
 is-not-surjective-conatural-ℕ H =
