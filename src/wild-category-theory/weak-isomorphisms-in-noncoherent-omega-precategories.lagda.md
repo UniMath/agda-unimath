@@ -23,18 +23,14 @@ Consider a
 [noncoherent ω-precategory](wild-category-theory.noncoherent-omega-precategories.md)
 `𝒞`. A
 {{#concept "weak isomorphism" Disambiguation="in noncoherent ω-precategories" Agda=is-weak-iso-Noncoherent-ω-Precategory}}
-in `𝒞` is a morphism `f : x → y` in `𝒞` [equipped](foundation.structure.md) with
+in `𝒞` is a morphism `f : 𝒞₁ x y` [equipped](foundation.structure.md) with
 
-- a morphism `s : y → x`
-- a $2$-morphism `ε : f ∘ s → id`, where `∘` and `id` denote composition of
-  morphisms and the identity morphism given by the transitive and reflexive
-  structure on the underlying [globular type](globular-types.globular-types.md),
-  respectively
-- a proof `is-weak-iso ε`, which shows that the above $2$-morphism is itself a
-  weak isomorphism
-- a morphism `r : y → x`
-- a $2$-morphism `η : id → r ∘ f`
-- a proof `is-weak-iso η`.
+- a morphism `s : 𝒞₁ y x`
+- a $2$-morphism `η : 𝒞₂ id (f ∘ s)`
+- a witness that `η` is itself a weak isomorphism
+- another morphism `r : 𝒞₁ y x`
+- a $2$-morphism `ε : 𝒞₂ (r ∘ f) id`
+- a witness that `ε` is a weak isomorphism.
 
 This definition of a weak isomorphism mirrors the definition of
 [biinvertible maps](foundation-core.equivalences.md) between types.
@@ -60,35 +56,39 @@ record
   field
     hom-section-is-weak-iso-Noncoherent-ω-Precategory :
       hom-Noncoherent-ω-Precategory 𝒞 y x
-    is-split-epi-is-weak-iso-Noncoherent-ω-Precategory :
+
+    unit-is-weak-iso-Noncoherent-ω-Precategory :
       2-hom-Noncoherent-ω-Precategory 𝒞
+        ( id-hom-Noncoherent-ω-Precategory 𝒞)
         ( comp-hom-Noncoherent-ω-Precategory 𝒞
           ( f)
           ( hom-section-is-weak-iso-Noncoherent-ω-Precategory))
-        ( id-hom-Noncoherent-ω-Precategory 𝒞)
-    is-weak-iso-is-split-epi-is-weak-iso-Noncoherent-ω-Precategory :
+
+    is-weak-iso-unit-is-weak-iso-Noncoherent-ω-Precategory :
       is-weak-iso-Noncoherent-ω-Precategory
         ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
           ( 𝒞)
           ( y)
           ( y))
-        ( is-split-epi-is-weak-iso-Noncoherent-ω-Precategory)
+        ( unit-is-weak-iso-Noncoherent-ω-Precategory)
 
     hom-retraction-is-weak-iso-Noncoherent-ω-Precategory :
       hom-Noncoherent-ω-Precategory 𝒞 y x
-    is-split-mono-is-weak-iso-Noncoherent-ω-Precategory :
+
+    counit-is-weak-iso-Noncoherent-ω-Precategory :
       2-hom-Noncoherent-ω-Precategory 𝒞
         ( comp-hom-Noncoherent-ω-Precategory 𝒞
           ( hom-retraction-is-weak-iso-Noncoherent-ω-Precategory)
           ( f))
         ( id-hom-Noncoherent-ω-Precategory 𝒞)
-    is-weak-iso-is-split-mono-is-weak-iso-Noncoherent-ω-Precategory :
+
+    is-weak-iso-counit-is-weak-iso-Noncoherent-ω-Precategory :
       is-weak-iso-Noncoherent-ω-Precategory
         ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
           ( 𝒞)
           ( x)
           ( x))
-        ( is-split-mono-is-weak-iso-Noncoherent-ω-Precategory)
+        ( counit-is-weak-iso-Noncoherent-ω-Precategory)
 
 open is-weak-iso-Noncoherent-ω-Precategory public
 ```
@@ -129,41 +129,41 @@ module _
     hom-section-is-weak-iso-Noncoherent-ω-Precategory
       ( is-weak-iso-hom-weak-iso-Noncoherent-ω-Precategory)
 
-  is-split-epi-weak-iso-Noncoherent-ω-Precategory :
+  unit-weak-iso-Noncoherent-ω-Precategory :
     2-hom-Noncoherent-ω-Precategory 𝒞
+      ( id-hom-Noncoherent-ω-Precategory 𝒞)
       ( comp-hom-Noncoherent-ω-Precategory 𝒞
         ( hom-weak-iso-Noncoherent-ω-Precategory)
         ( hom-section-weak-iso-Noncoherent-ω-Precategory))
-      ( id-hom-Noncoherent-ω-Precategory 𝒞)
-  is-split-epi-weak-iso-Noncoherent-ω-Precategory =
-    is-split-epi-is-weak-iso-Noncoherent-ω-Precategory
+  unit-weak-iso-Noncoherent-ω-Precategory =
+    unit-is-weak-iso-Noncoherent-ω-Precategory
       ( is-weak-iso-hom-weak-iso-Noncoherent-ω-Precategory)
 
-  is-weak-iso-is-split-epi-weak-iso-Noncoherent-ω-Precategory :
+  is-weak-iso-unit-weak-iso-Noncoherent-ω-Precategory :
     is-weak-iso-Noncoherent-ω-Precategory
       ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
         ( 𝒞)
         ( y)
         ( y))
-      ( is-split-epi-weak-iso-Noncoherent-ω-Precategory)
-  is-weak-iso-is-split-epi-weak-iso-Noncoherent-ω-Precategory =
-    is-weak-iso-is-split-epi-is-weak-iso-Noncoherent-ω-Precategory
+      ( unit-weak-iso-Noncoherent-ω-Precategory)
+  is-weak-iso-unit-weak-iso-Noncoherent-ω-Precategory =
+    is-weak-iso-unit-is-weak-iso-Noncoherent-ω-Precategory
       ( is-weak-iso-hom-weak-iso-Noncoherent-ω-Precategory)
 
-  iso-is-split-epi-weak-iso-Noncoherent-ω-Precategory :
+  weak-iso-unit-weak-iso-Noncoherent-ω-Precategory :
     weak-iso-Noncoherent-ω-Precategory
       ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
         ( 𝒞)
         ( y)
         ( y))
+      ( id-hom-Noncoherent-ω-Precategory 𝒞)
       ( comp-hom-Noncoherent-ω-Precategory 𝒞
         ( hom-weak-iso-Noncoherent-ω-Precategory)
         ( hom-section-weak-iso-Noncoherent-ω-Precategory))
-      ( id-hom-Noncoherent-ω-Precategory 𝒞)
-  pr1 iso-is-split-epi-weak-iso-Noncoherent-ω-Precategory =
-    is-split-epi-weak-iso-Noncoherent-ω-Precategory
-  pr2 iso-is-split-epi-weak-iso-Noncoherent-ω-Precategory =
-    is-weak-iso-is-split-epi-weak-iso-Noncoherent-ω-Precategory
+  pr1 weak-iso-unit-weak-iso-Noncoherent-ω-Precategory =
+    unit-weak-iso-Noncoherent-ω-Precategory
+  pr2 weak-iso-unit-weak-iso-Noncoherent-ω-Precategory =
+    is-weak-iso-unit-weak-iso-Noncoherent-ω-Precategory
 
   hom-retraction-weak-iso-Noncoherent-ω-Precategory :
     hom-Noncoherent-ω-Precategory 𝒞 y x
@@ -171,28 +171,28 @@ module _
     hom-retraction-is-weak-iso-Noncoherent-ω-Precategory
       ( is-weak-iso-hom-weak-iso-Noncoherent-ω-Precategory)
 
-  is-split-mono-weak-iso-Noncoherent-ω-Precategory :
+  counit-weak-iso-Noncoherent-ω-Precategory :
     2-hom-Noncoherent-ω-Precategory 𝒞
       ( comp-hom-Noncoherent-ω-Precategory 𝒞
         ( hom-retraction-weak-iso-Noncoherent-ω-Precategory)
         ( hom-weak-iso-Noncoherent-ω-Precategory))
       ( id-hom-Noncoherent-ω-Precategory 𝒞)
-  is-split-mono-weak-iso-Noncoherent-ω-Precategory =
-    is-split-mono-is-weak-iso-Noncoherent-ω-Precategory
+  counit-weak-iso-Noncoherent-ω-Precategory =
+    counit-is-weak-iso-Noncoherent-ω-Precategory
       ( is-weak-iso-hom-weak-iso-Noncoherent-ω-Precategory)
 
-  is-weak-iso-is-split-mono-weak-iso-Noncoherent-ω-Precategory :
+  is-weak-iso-counit-weak-iso-Noncoherent-ω-Precategory :
     is-weak-iso-Noncoherent-ω-Precategory
       ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
         ( 𝒞)
         ( x)
         ( x))
-      ( is-split-mono-weak-iso-Noncoherent-ω-Precategory)
-  is-weak-iso-is-split-mono-weak-iso-Noncoherent-ω-Precategory =
-    is-weak-iso-is-split-mono-is-weak-iso-Noncoherent-ω-Precategory
+      ( counit-weak-iso-Noncoherent-ω-Precategory)
+  is-weak-iso-counit-weak-iso-Noncoherent-ω-Precategory =
+    is-weak-iso-counit-is-weak-iso-Noncoherent-ω-Precategory
       ( is-weak-iso-hom-weak-iso-Noncoherent-ω-Precategory)
 
-  iso-is-split-mono-weak-iso-Noncoherent-ω-Precategory :
+  weak-iso-counit-weak-iso-Noncoherent-ω-Precategory :
     weak-iso-Noncoherent-ω-Precategory
       ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
         ( 𝒞)
@@ -202,10 +202,10 @@ module _
         ( hom-retraction-weak-iso-Noncoherent-ω-Precategory)
         ( hom-weak-iso-Noncoherent-ω-Precategory))
       ( id-hom-Noncoherent-ω-Precategory 𝒞)
-  pr1 iso-is-split-mono-weak-iso-Noncoherent-ω-Precategory =
-    is-split-mono-weak-iso-Noncoherent-ω-Precategory
-  pr2 iso-is-split-mono-weak-iso-Noncoherent-ω-Precategory =
-    is-weak-iso-is-split-mono-weak-iso-Noncoherent-ω-Precategory
+  pr1 weak-iso-counit-weak-iso-Noncoherent-ω-Precategory =
+    counit-weak-iso-Noncoherent-ω-Precategory
+  pr2 weak-iso-counit-weak-iso-Noncoherent-ω-Precategory =
+    is-weak-iso-counit-weak-iso-Noncoherent-ω-Precategory
 ```
 
 ## See also
