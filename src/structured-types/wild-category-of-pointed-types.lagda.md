@@ -57,7 +57,7 @@ the higher cells are [identities](foundation-core.identity-types.md).
 
 ## Definitions
 
-### The noncoherent large wild higher precategory of pointed types, pointed maps, and uniform pointed homotopies
+### The noncoherent large ω-precategory of pointed types, pointed maps, and uniform pointed homotopies
 
 #### The large globular type of pointed types, pointed maps, and uniform pointed homotopies
 
@@ -160,7 +160,7 @@ is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type
   is-transitive-uniform-pointed-Π-Globular-Type _ _
 ```
 
-#### The noncoherent large wild higher precategory of pointed types, pointed maps, and uniform pointed homotopies
+#### The noncoherent large ω-precategory of pointed types, pointed maps, and uniform pointed homotopies
 
 ```agda
 uniform-pointed-type-Noncoherent-Large-ω-Precategory :
@@ -176,7 +176,7 @@ comp-structure-Noncoherent-Large-ω-Precategory
   comp-structure-uniform-pointed-type-Large-Globular-Type
 ```
 
-### The noncoherent large wild higher precategory of pointed types, pointed maps, and nonuniform homotopies
+### The noncoherent large ω-precategory of pointed types, pointed maps, and nonuniform homotopies
 
 #### The large globular type of pointed types, pointed maps, and nonuniform pointed homotopies
 
@@ -326,7 +326,7 @@ is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type
   is-transitive-pointed-map-Globular-Type _ _
 ```
 
-#### The noncoherent large wild higher precategory of pointed types, pointed maps, and nonuniform pointed homotopies
+#### The noncoherent large ω-precategory of pointed types, pointed maps, and nonuniform pointed homotopies
 
 ```agda
 pointed-type-Noncoherent-Large-ω-Precategory :

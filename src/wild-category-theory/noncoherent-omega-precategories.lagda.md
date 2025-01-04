@@ -34,14 +34,13 @@ It is an important open problem known as the _coherence problem_ to define a
 fully coherent notion of $∞$-category in univalent type theory. The subject of
 _wild category theory_ attempts to recover some of the benefits of $∞$-category
 theory without tackling this problem. We introduce, as one of our basic building
-blocks in this subject, the notion of a _noncoherent wild higher precategory_.
+blocks in this subject, the notion of a _noncoherent ω-precategory_.
 
-A _noncoherent wild higher precategory_ `𝒞` is a structure that attempts at
-capturing the structure of a higher precategory to the $0$'th order. It consists
-of in some sense all of the operations and none of the coherence of a higher
-precategory. Thus, it is defined as a
-[globular type](globular-types.globular-types.md) with families of $n$-morphisms
-labeled as "identities"
+A _noncoherent ω-precategory_ `𝒞` is a structure that attempts at capturing the
+structure of a higher precategory to the $0$'th order. It consists of in some
+sense all of the operations and none of the coherence of a higher precategory.
+Thus, it is defined as a [globular type](globular-types.globular-types.md) with
+families of $n$-morphisms labeled as "identities"
 
 ```text
   id-hom : (x : 𝑛-Cell 𝒞) → (𝑛+1)-Cell 𝒞 x x
@@ -55,8 +54,8 @@ and a composition operation at every dimension
 ```
 
 Entirely concretely, we define a
-{{#concept "noncoherent wild higher precategory" Agda=Noncoherent-ω-Precategory}}
-to be a [reflexive](globular-types.reflexive-globular-types.md) and
+{{#concept "noncoherent ω-precategory" Agda=Noncoherent-ω-Precategory}} to be a
+[reflexive](globular-types.reflexive-globular-types.md) and
 [transitive](globular-types.transitive-globular-types.md) globular type. We call
 the 0-cells the _objects_, the 1-cells the _morphisms_ and the higher cells the
 _$n$-morphisms_. The reflexivities are called the _identity morphisms_, and the
@@ -92,7 +91,7 @@ module _
     0-cell-Globular-Type globular-type-Noncoherent-ω-Precategory
 ```
 
-Morphisms in a noncoherent wild higher precategory:
+Morphisms in a noncoherent ω-precategory:
 
 ```agda
   hom-globular-type-Noncoherent-ω-Precategory :
@@ -110,7 +109,7 @@ Morphisms in a noncoherent wild higher precategory:
     1-cell-Globular-Type globular-type-Noncoherent-ω-Precategory
 ```
 
-Identity morphisms in a noncoherent wild higher precategory:
+Identity morphisms in a noncoherent ω-precategory:
 
 ```agda
   id-structure-Noncoherent-ω-Precategory :
@@ -152,7 +151,7 @@ Identity morphisms in a noncoherent wild higher precategory:
       ( y)
 ```
 
-Composition in a noncoherent wild higher precategory:
+Composition in a noncoherent ω-precategory:
 
 ```agda
   comp-structure-Noncoherent-ω-Precategory :
@@ -197,8 +196,8 @@ Composition in a noncoherent wild higher precategory:
       ( y)
 ```
 
-The noncoherent wild higher precategory of morphisms between two objects in a
-noncoherent wild higher precategory:
+The noncoherent ω-precategory of morphisms between two objects in a noncoherent
+ω-precategory:
 
 ```agda
   hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory :
@@ -212,7 +211,7 @@ noncoherent wild higher precategory:
       ( comp-structure-hom-globular-type-Noncoherent-ω-Precategory)
 ```
 
-2-Morphisms in a noncoherent wild higher precategory:
+2-Morphisms in a noncoherent ω-precategory:
 
 ```agda
   2-hom-Noncoherent-ω-Precategory :
@@ -242,7 +241,7 @@ noncoherent wild higher precategory:
       comp-structure-Noncoherent-ω-Precategory
 ```
 
-3-Morphisms in a noncoherent wild higher precategory:
+3-Morphisms in a noncoherent ω-precategory:
 
 ```agda
   3-hom-Noncoherent-ω-Precategory :

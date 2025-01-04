@@ -92,7 +92,7 @@ is-transitive-Large-Transitive-Globular-Type
   is-transitive-Type-Large-Globular-Type
 ```
 
-### The noncoherent large wild higher precategory of types
+### The noncoherent large ω-precategory of types
 
 ```agda
 Type-Noncoherent-Large-ω-Precategory :

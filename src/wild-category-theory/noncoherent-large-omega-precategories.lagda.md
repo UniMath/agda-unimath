@@ -41,8 +41,8 @@ theory without tackling this problem. We introduce, as one of our basic building
 blocks in this subject, the notion of a _large noncoherent wild higher
 precategory_.
 
-A _large noncoherent wild higher precategory_ `𝒞` is a structure that attempts
-at capturing the structure of a large higher precategory to the $0$'th order. It
+A _large noncoherent ω-precategory_ `𝒞` is a structure that attempts at
+capturing the structure of a large higher precategory to the $0$'th order. It
 consists of in some sense all of the operations and none of the coherence of a
 large higher precategory. Thus, it is defined as a
 [large globular type](globular-types.large-globular-types.md) with families of
@@ -60,7 +60,7 @@ and a composition operation at every dimension
 ```
 
 Entirely concretely, we define a
-{{#concept "noncoherent large wild higher precategory" Agda=Noncoherent-Large-ω-Precategory}}
+{{#concept "noncoherent large ω-precategory" Agda=Noncoherent-Large-ω-Precategory}}
 to be a [reflexive](globular-types.reflexive-globular-types.md) and
 [transitive](globular-types.transitive-globular-types.md) large globular type.
 We call the 0-cells the _objects_, the 1-cells the _morphisms_ and the higher
@@ -87,7 +87,7 @@ The underlying large globular type of a noncoherent large wild precategory:
       Large-Globular-Type α β
 ```
 
-The type of objects of a noncoherent large wild higher precategory:
+The type of objects of a noncoherent large ω-precategory:
 
 ```agda
   obj-Noncoherent-Large-ω-Precategory : (l : Level) → UU (α l)
@@ -130,7 +130,7 @@ precategory:
       large-globular-type-Noncoherent-Large-ω-Precategory
 ```
 
-The globular type of 2-morphisms is a noncoherent large wild higher precategory:
+The globular type of 2-morphisms is a noncoherent large ω-precategory:
 
 ```agda
   2-hom-globular-type-Noncoherent-Large-ω-Precategory :
@@ -154,7 +154,7 @@ The globular type of 2-morphisms is a noncoherent large wild higher precategory:
 ```
 
 The globular structure on the type of morphisms between two objects in a
-noncoherent large wild higher precategory:
+noncoherent large ω-precategory:
 
 ```agda
   globular-structure-hom-Noncoherent-Large-ω-Precategory :
@@ -169,7 +169,7 @@ noncoherent large wild higher precategory:
       large-globular-type-Noncoherent-Large-ω-Precategory
 ```
 
-The globular type of 3-morphisms in a noncoherent large wild higher precategory:
+The globular type of 3-morphisms in a noncoherent large ω-precategory:
 
 ```agda
   3-hom-globular-type-Noncoherent-Large-ω-Precategory :
@@ -262,7 +262,7 @@ precategory:
       id-structure-Noncoherent-Large-ω-Precategory
 ```
 
-The structure of composition in a noncoherent large wild higher precategory:
+The structure of composition in a noncoherent large ω-precategory:
 
 ```agda
   field
@@ -318,8 +318,8 @@ The structure of composition in a noncoherent large wild higher precategory:
       comp-structure-Noncoherent-Large-ω-Precategory
 ```
 
-The noncoherent wild higher precategory of morphisms between two object in a
-noncoherent large wild higher precategory:
+The noncoherent ω-precategory of morphisms between two object in a noncoherent
+large ω-precategory:
 
 ```agda
   hom-noncoherent-ω-precategory-Noncoherent-Large-ω-Precategory :

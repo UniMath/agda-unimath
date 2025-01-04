@@ -119,7 +119,7 @@ module _
     1-cell-globular-map-globular-map F
 ```
 
-### The identity map on a noncoherent wild higher precategory
+### The identity map on a noncoherent ω-precategory
 
 ```agda
 module _

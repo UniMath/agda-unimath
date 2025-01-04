@@ -324,7 +324,7 @@ The induced colax functor on the wild category of morphisms between two objects:
         is-colax-functor-colax-functor-Noncoherent-ω-Precategory)
 ```
 
-### The identity colax functor on a noncoherent wild higher precategory
+### The identity colax functor on a noncoherent ω-precategory
 
 ```agda
 map-id-colax-functor-Noncoherent-ω-Precategory :

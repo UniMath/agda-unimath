@@ -420,7 +420,7 @@ The globular map on hom-types is again a colax functor:
 open colax-functor-Noncoherent-Large-ω-Precategory public
 ```
 
-### The identity colax functor on a noncoherent large wild higher precategory
+### The identity colax functor on a noncoherent large ω-precategory
 
 ```agda
 module _
