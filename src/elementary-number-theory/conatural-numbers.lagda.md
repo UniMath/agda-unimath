@@ -64,14 +64,14 @@ record ℕ∞ : UU lzero
 open ℕ∞ public
 ```
 
-### The zero element in the conatural numbers
+### The zero element of the conatural numbers
 
 ```agda
 zero-ℕ∞ : ℕ∞
 decons-ℕ∞ zero-ℕ∞ = exception-Maybe
 ```
 
-### The element at infinity in the conatural numbers
+### The element at infinity of the conatural numbers
 
 ```agda
 infinity-ℕ∞ : ℕ∞

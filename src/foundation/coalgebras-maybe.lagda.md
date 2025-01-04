@@ -51,11 +51,3 @@ module _
   map-coalgebra-Maybe : type-coalgebra-Maybe → Maybe type-coalgebra-Maybe
   map-coalgebra-Maybe = pr2 X
 ```
-
-### Coalgebra map
-
-```agda
--- coalgebra-structure-map-Maybe :
---   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} → coalgebra-structure-Maybe X → (Y → X) → coalgebra-structure-Maybe Y
--- coalgebra-structure-map-Maybe f g = {!   !}
-```

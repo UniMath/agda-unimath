@@ -29,7 +29,8 @@ open import foundation-core.identity-types
 
 A [conatural number](elementary-number-theory.conatural-numbers.md) `x` is
 {{#concept "positive" Disambiguation="conatural number" Agda=is-infinite-ℕ∞}} if
-it is not zero.
+it has a predecessor. In other words, if it is not
+[zero](elementary-number-theory.zero-conatural-numbers.md).
 
 ## Definitions
 

@@ -25,10 +25,23 @@ enjoys many universal properties, among others:
 2. It classifies downward-stable subsets of the natural numbers.
 3. It is the final coalgebra of the [maybe monad](foundation.maybe.md).
 
-On this page we consider the last of these. Thus, a `Maybe`-coalgebra
-`X → Maybe X` satisfies the
+On this page we consider the last of these. Thus, a
+`Maybe`-[coalgebra](foundation.coalgebras-maybe.md) `η : X → Maybe X` satisfies
+the
 {{#concept "universal property of the conatural numbers" Agda=universal-property-ℕ∞}}
-if the
+if, for every other `Maybe`-coalgebra `η' : Y → Maybe Y` there is a
+[unique](foundation-core.contractible-types.md)
+[coalgebra homomorphism](foundation.morphisms-coalgebras-maybe.md)
+
+```text
+            f
+     Y ----------> X
+     |             |
+   η'|             | η
+     ∨             ∨
+  Maybe Y ----> Maybe X.
+         Maybe f
+```
 
 ## Definitions
 

@@ -30,7 +30,7 @@ if it is its own predecessor
   decons-ℕ∞ x ＝ inl x
 ```
 
-or, equivalently, if it is its own successor
+or, [equivalently](foundation-core.equivalences.md), if it is its own successor
 
 ```text
   x ＝ succ-ℕ∞ x.
@@ -50,7 +50,14 @@ is-infinite-successor-condition-ℕ∞ x = x ＝ succ-ℕ∞ x
 
 ## Properties
 
-### blabla
+### The point at infinity is infinite
+
+```agda
+is-infinite-infinity-ℕ∞ : is-infinite-ℕ∞ infinity-ℕ∞
+is-infinite-infinity-ℕ∞ = refl
+```
+
+### The two definitions of being infinite agree
 
 ```agda
 is-infinite-is-infinite-successor-condition-ℕ∞ :
@@ -71,6 +78,8 @@ is-infinite-successor-condition-cons-is-infinite-cons-ℕ∞ x =
     ( decons-ℕ∞ x)
 ```
 
+> It remains to formalize the full equivalence.
+
 ### The point at infinity is unique
 
 ```text
@@ -80,11 +89,4 @@ eq-is-infinite-successor-condition-ℕ∞ :
   is-infinite-successor-condition-ℕ∞ y →
   x ＝ y
 eq-is-infinite-successor-condition-ℕ∞ x y p q =
-```
-
-### The point at infinity is infinite
-
-```agda
-is-infinite-infinity-ℕ∞ : is-infinite-ℕ∞ infinity-ℕ∞
-is-infinite-infinity-ℕ∞ = refl
 ```
