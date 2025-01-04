@@ -15,6 +15,7 @@ open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
 open import foundation.morphisms-arrows
 open import foundation.standard-pullbacks
+open import foundation.type-arithmetic-standard-pullbacks
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
