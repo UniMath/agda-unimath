@@ -28,7 +28,7 @@ open import foundation-core.identity-types
 ## Idea
 
 A [conatural number](elementary-number-theory.conatural-numbers.md) `x` is
-{{#concept "positive" Disambiguation="conatural number" Agda=is-infinite-ℕ∞}} if
+{{#concept "positive" Disambiguation="conatural number" Agda=is-positive-ℕ∞}} if
 it has a predecessor. In other words, if it is not
 [zero](elementary-number-theory.zero-conatural-numbers.md).
 

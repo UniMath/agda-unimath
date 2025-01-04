@@ -28,7 +28,7 @@ enjoys many universal properties, among others:
 On this page we consider the last of these. Thus, a
 `Maybe`-[coalgebra](foundation.coalgebras-maybe.md) `η : X → Maybe X` satisfies
 the
-{{#concept "universal property of the conatural numbers" Agda=universal-property-ℕ∞}}
+{{#concept "universal property of the conatural numbers" Agda=universal-property-conatural-numbers}}
 if, for every other `Maybe`-coalgebra `η' : Y → Maybe Y` there is a
 [unique](foundation-core.contractible-types.md)
 [coalgebra homomorphism](foundation.morphisms-coalgebras-maybe.md)
