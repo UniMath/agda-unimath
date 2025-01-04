@@ -55,6 +55,7 @@ open import foundation.cartesian-products-set-quotients public
 open import foundation.category-of-families-of-sets public
 open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
+open import foundation.coalgebras-maybe public
 open import foundation.codiagonal-maps-of-types public
 open import foundation.coherently-idempotent-maps public
 open import foundation.coherently-invertible-maps public
@@ -276,6 +277,7 @@ open import foundation.mere-path-cosplit-maps public
 open import foundation.monomorphisms public
 open import foundation.morphisms-arrows public
 open import foundation.morphisms-binary-relations public
+open import foundation.morphisms-coalgebras-maybe public
 open import foundation.morphisms-cospan-diagrams public
 open import foundation.morphisms-cospans public
 open import foundation.morphisms-double-arrows public
