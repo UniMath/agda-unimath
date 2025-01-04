@@ -76,6 +76,7 @@ open import elementary-number-theory.initial-segments-natural-numbers public
 open import elementary-number-theory.integer-fractions public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
+open import elementary-number-theory.irrationality-square-root-of-2 public
 open import elementary-number-theory.jacobi-symbol public
 open import elementary-number-theory.kolakoski-sequence public
 open import elementary-number-theory.legendre-symbol public
@@ -112,6 +113,7 @@ open import elementary-number-theory.nonzero-integers public
 open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.nonzero-rational-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
+open import elementary-number-theory.parity-integers public
 open import elementary-number-theory.parity-natural-numbers public
 open import elementary-number-theory.peano-arithmetic public
 open import elementary-number-theory.pisano-periods public
@@ -157,6 +159,8 @@ open import elementary-number-theory.triangular-numbers public
 open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.type-arithmetic-natural-numbers public
 open import elementary-number-theory.unit-elements-standard-finite-types public
+open import elementary-number-theory.unit-integers public
+open import elementary-number-theory.unit-similarity-integers public
 open import elementary-number-theory.unit-similarity-standard-finite-types public
 open import elementary-number-theory.universal-property-integers public
 open import elementary-number-theory.universal-property-natural-numbers public

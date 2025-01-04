@@ -247,7 +247,7 @@ upper-bound-nat-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → leq-ℕ (nat-Fin (succ-ℕ k) x) k
 upper-bound-nat-Fin zero-ℕ (inr star) = star
 upper-bound-nat-Fin (succ-ℕ k) (inl x) =
-  preserves-leq-succ-ℕ (nat-Fin (succ-ℕ k) x) k (upper-bound-nat-Fin k x)
+  leq-succ-leq-ℕ (nat-Fin (succ-ℕ k) x) k (upper-bound-nat-Fin k x)
 upper-bound-nat-Fin (succ-ℕ k) (inr star) = refl-leq-ℕ (succ-ℕ k)
 
 upper-bound-nat-Fin' :

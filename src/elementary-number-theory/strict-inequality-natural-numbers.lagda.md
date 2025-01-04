@@ -251,6 +251,16 @@ leq-not-le-ℕ (succ-ℕ m) zero-ℕ H = star
 leq-not-le-ℕ (succ-ℕ m) (succ-ℕ n) H = leq-not-le-ℕ m n H
 ```
 
+### If `m ≰ n` then `n < m`
+
+```agda
+le-not-leq-ℕ : (m n : ℕ) → ¬ (m ≤-ℕ n) → n <-ℕ m
+le-not-leq-ℕ zero-ℕ zero-ℕ H = ex-falso (H star)
+le-not-leq-ℕ zero-ℕ (succ-ℕ n) H = ex-falso (H star)
+le-not-leq-ℕ (succ-ℕ m) zero-ℕ H = star
+le-not-leq-ℕ (succ-ℕ m) (succ-ℕ n) H = le-not-leq-ℕ m n H
+```
+
 ### If `x < y` then `x ≤ y`
 
 ```agda
@@ -318,9 +328,96 @@ le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
   le-leq-neq-ℕ {x} {y} l (λ p → f (ap succ-ℕ p))
 ```
 
+### `x < x + y` for any nonzero natural number `y`
+
+```agda
+le-add-succ-ℕ :
+  (x y : ℕ) → x <-ℕ x +ℕ (succ-ℕ y)
+le-add-succ-ℕ zero-ℕ y = star
+le-add-succ-ℕ (succ-ℕ x) y =
+  concatenate-le-eq-ℕ (le-add-succ-ℕ x y) (inv (left-successor-law-add-ℕ x y))
+
+le-add-ℕ :
+  (x y : ℕ) → is-nonzero-ℕ y → x <-ℕ x +ℕ y
+le-add-ℕ x zero-ℕ H = ex-falso (H refl)
+le-add-ℕ x (succ-ℕ y) H = le-add-succ-ℕ x y
+```
+
 ### If `1 < x` and `1 < y`, then `1 < xy`
 
 ```agda
 le-one-mul-ℕ : (x y : ℕ) → 1 <-ℕ x → 1 <-ℕ y → 1 <-ℕ (x *ℕ y)
 le-one-mul-ℕ (succ-ℕ (succ-ℕ x)) (succ-ℕ (succ-ℕ y)) star star = star
+```
+
+### Addition is strictly order preserving
+
+```agda
+preserves-strict-order-left-add-ℕ :
+  (a b c : ℕ) → a <-ℕ b → a +ℕ c <-ℕ b +ℕ c
+preserves-strict-order-left-add-ℕ zero-ℕ (succ-ℕ b) c H =
+  concatenate-eq-le-eq-ℕ
+    ( left-unit-law-add-ℕ c)
+    ( le-add-succ-ℕ c b)
+    ( commutative-add-ℕ c (succ-ℕ b))
+preserves-strict-order-left-add-ℕ (succ-ℕ a) (succ-ℕ b) c H =
+  concatenate-eq-le-eq-ℕ
+    ( left-successor-law-add-ℕ a c)
+    ( preserves-strict-order-left-add-ℕ a b c H)
+    ( inv (left-successor-law-add-ℕ b c))
+
+preserves-strict-order-right-add-ℕ :
+  (a c d : ℕ) → c <-ℕ d → a +ℕ c <-ℕ a +ℕ d
+preserves-strict-order-right-add-ℕ a c d H =
+  concatenate-eq-le-eq-ℕ
+    ( commutative-add-ℕ a c)
+    ( preserves-strict-order-left-add-ℕ c d a H)
+    ( commutative-add-ℕ d a)
+
+preserves-strict-order-add-ℕ :
+  (a b c d : ℕ) → a <-ℕ b → c <-ℕ d → a +ℕ c <-ℕ b +ℕ d
+preserves-strict-order-add-ℕ a b c d H K =
+  transitive-le-ℕ
+    ( a +ℕ c)
+    ( b +ℕ c)
+    ( b +ℕ d)
+    ( preserves-strict-order-left-add-ℕ a b c H)
+    ( preserves-strict-order-right-add-ℕ b c d K)
+```
+
+### Multiplication is strictly order preserving
+
+```agda
+preserves-strict-order-mul-ℕ :
+  (a b c d : ℕ) → a <-ℕ b → c <-ℕ d → a *ℕ c <-ℕ b *ℕ d
+preserves-strict-order-mul-ℕ zero-ℕ (succ-ℕ b) zero-ℕ (succ-ℕ d) H K = star
+preserves-strict-order-mul-ℕ zero-ℕ (succ-ℕ b) (succ-ℕ c) (succ-ℕ d) H K = star
+preserves-strict-order-mul-ℕ (succ-ℕ a) (succ-ℕ b) zero-ℕ (succ-ℕ d) H K =
+  concatenate-eq-le-ℕ
+    { a *ℕ 0}
+    { 0}
+    { succ-ℕ b *ℕ succ-ℕ d}
+    ( right-zero-law-mul-ℕ a)
+    ( star)
+preserves-strict-order-mul-ℕ (succ-ℕ a) (succ-ℕ b) (succ-ℕ c) (succ-ℕ d) H K =
+  concatenate-eq-le-eq-ℕ
+    { succ-ℕ a *ℕ succ-ℕ c}
+    { a *ℕ c +ℕ a +ℕ c +ℕ 1}
+    { b *ℕ d +ℕ b +ℕ d +ℕ 1}
+    { succ-ℕ b *ℕ succ-ℕ d}
+    ( double-successor-law-mul-ℕ a c)
+    ( preserves-strict-order-add-ℕ
+      ( a *ℕ c +ℕ a)
+      ( b *ℕ d +ℕ b)
+      ( c)
+      ( d)
+      ( preserves-strict-order-add-ℕ
+        ( a *ℕ c)
+        ( b *ℕ d)
+        ( a)
+        ( b)
+        ( preserves-strict-order-mul-ℕ a b c d H K)
+        ( H))
+      ( K))
+    ( inv (double-successor-law-mul-ℕ b d))
 ```

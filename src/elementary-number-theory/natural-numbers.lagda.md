@@ -141,6 +141,12 @@ is-nonzero-two-ℕ ()
 
 is-not-one-two-ℕ : is-not-one-ℕ 2
 is-not-one-two-ℕ ()
+
+is-nonzero-three-ℕ : is-nonzero-ℕ 3
+is-nonzero-three-ℕ ()
+
+is-nonzero-four-ℕ : is-nonzero-ℕ 4
+is-nonzero-four-ℕ ()
 ```
 
 ## See also

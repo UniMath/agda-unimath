@@ -8,17 +8,20 @@ module elementary-number-theory.multiplication-lists-of-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 
 open import lists.concatenation-lists
 open import lists.lists
 open import lists.permutation-lists
+open import lists.universal-quantification-lists
 ```
 
 </details>
@@ -37,6 +40,16 @@ mul-list-ℕ = fold-list 1 mul-ℕ
 ```
 
 ## Properties
+
+### The product of any list of natural numbers greater than one is greater than one
+
+```agda
+leq-one-mul-list-ℕ :
+  (l : list ℕ) (H : for-all-list l (leq-ℕ 1)) → 1 ≤-ℕ mul-list-ℕ l
+leq-one-mul-list-ℕ nil H = refl-leq-ℕ 1
+leq-one-mul-list-ℕ (cons n l) (H , K) =
+  preserves-order-mul-ℕ 1 n 1 (mul-list-ℕ l) H (leq-one-mul-list-ℕ l K)
+```
 
 ### `mul-list-ℕ` is invariant by permutation
 
