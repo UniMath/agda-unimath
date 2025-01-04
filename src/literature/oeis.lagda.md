@@ -165,6 +165,15 @@ A000244 = exp-ℕ 3
 
 OEIS: [A000244](https://oeis.org/A000244)
 
+### A000330 -- The square pyramidal numbers
+
+```agda
+open import elementary-number-theory.square-pyramidal-numbers using
+  ( square-pyramidal-number-ℕ)
+```
+
+OEIS: [A000330](https://oeis.org/A000330)
+
 ### A000720 -- The prime counting function
 
 ```agda

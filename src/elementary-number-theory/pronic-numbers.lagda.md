@@ -21,7 +21,7 @@ open import foundation.identity-types
 
 ## Idea
 
-The {{#concept "pronic numbers" Agda=pronic-number-ℕ WD="pronic number" WDID=Q1486643}} are the natural numbers
+The {{#concept "pronic numbers" Agda=pronic-number-ℕ WD="pronic number" WDID=Q1486643}} are the [natural numbers](elementary-number-theory.natural-numbers.md)
 of the form
 
 $$
@@ -81,5 +81,7 @@ compute-pronic-number-succ-ℕ n =
 
 ## See also
 
-- [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)
 - [Nicomachus's Theorem](elementary-number-theory.nicomachuss-theorem.md)
+- [Square pyramidal numbers](elementary-number-theory.square-pyramidal-numbers.md)
+- [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)
+- [Triangular numbers](elementary-number-theory.triangular-numbers.md)

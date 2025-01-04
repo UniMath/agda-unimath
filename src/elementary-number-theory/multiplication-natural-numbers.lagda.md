@@ -230,6 +230,24 @@ interchange-law-mul-mul-ℕ =
     associative-mul-ℕ
 ```
 
+### Swapping the order of multiplication
+
+```agda
+left-swap-mul-ℕ :
+  (m n x : ℕ) → m *ℕ (n *ℕ x) ＝ n *ℕ (m *ℕ x)
+left-swap-mul-ℕ m n x =
+  ( inv (associative-mul-ℕ m n x)) ∙
+  ( ap (_*ℕ x) (commutative-mul-ℕ m n)) ∙
+  ( associative-mul-ℕ n m x)
+
+right-swap-mul-ℕ :
+  (x m n : ℕ) → (x *ℕ m) *ℕ n ＝ (x *ℕ n) *ℕ m
+right-swap-mul-ℕ x m n =
+  ( associative-mul-ℕ x m n) ∙
+  ( ap (x *ℕ_) (commutative-mul-ℕ m n)) ∙
+  ( inv (associative-mul-ℕ x n m))
+```
+
 ### Multiplication by a nonzero natural number is injective
 
 ```agda

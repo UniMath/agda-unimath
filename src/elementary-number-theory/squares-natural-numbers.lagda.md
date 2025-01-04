@@ -536,6 +536,7 @@ module _
 ## See also
 
 - [Cubes of natural numbers](elementary-number-theory.cubes-natural-numbers.md)
+- [Square pyramidal numbers](elementary-number-theory.square-pyramidal-numbers.md)
 - [Squares of integers](elementary-number-theory.squares-integers.md)
 
 ## References
