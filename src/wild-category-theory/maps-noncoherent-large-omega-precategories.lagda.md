@@ -29,7 +29,7 @@ open import wild-category-theory.noncoherent-omega-precategories
 ## Idea
 
 A
-{{#concept "map" Disambiguation="between noncoherent large ω-precategories" Agda=map-Noncoherent-Large-Wild-Higher-Precategory}}
+{{#concept "map" Disambiguation="between noncoherent large ω-precategories" Agda=map-Noncoherent-Large-ω-Precategory}}
 `f` between
 [noncoherent large ω-precategories](wild-category-theory.noncoherent-large-omega-precategories.md)
 `𝒜` and `ℬ` is a [large globular map](globular-types.large-globular-maps.md)
@@ -55,78 +55,78 @@ this additional structure, see
 ### Maps between noncoherent large ω-precategories
 
 ```agda
-map-Noncoherent-Large-Wild-Higher-Precategory :
+map-Noncoherent-Large-ω-Precategory :
   {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} (δ : Level → Level)
-  (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1)
-  (ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2) → UUω
-map-Noncoherent-Large-Wild-Higher-Precategory δ 𝒜 ℬ =
+  (𝒜 : Noncoherent-Large-ω-Precategory α1 β1)
+  (ℬ : Noncoherent-Large-ω-Precategory α2 β2) → UUω
+map-Noncoherent-Large-ω-Precategory δ 𝒜 ℬ =
   large-globular-map δ
-    ( large-globular-type-Noncoherent-Large-Wild-Higher-Precategory 𝒜)
-    ( large-globular-type-Noncoherent-Large-Wild-Higher-Precategory ℬ)
+    ( large-globular-type-Noncoherent-Large-ω-Precategory 𝒜)
+    ( large-globular-type-Noncoherent-Large-ω-Precategory ℬ)
 
 module _
   {α1 α2 : Level → Level} {β1 β2 : Level → Level → Level} {δ : Level → Level}
-  (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1)
-  (ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2)
-  (F : map-Noncoherent-Large-Wild-Higher-Precategory δ 𝒜 ℬ)
+  (𝒜 : Noncoherent-Large-ω-Precategory α1 β1)
+  (ℬ : Noncoherent-Large-ω-Precategory α2 β2)
+  (F : map-Noncoherent-Large-ω-Precategory δ 𝒜 ℬ)
   where
 
-  obj-map-Noncoherent-Large-Wild-Higher-Precategory :
+  obj-map-Noncoherent-Large-ω-Precategory :
     {l : Level} →
-    obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l →
-    obj-Noncoherent-Large-Wild-Higher-Precategory ℬ (δ l)
-  obj-map-Noncoherent-Large-Wild-Higher-Precategory =
+    obj-Noncoherent-Large-ω-Precategory 𝒜 l →
+    obj-Noncoherent-Large-ω-Precategory ℬ (δ l)
+  obj-map-Noncoherent-Large-ω-Precategory =
     0-cell-large-globular-map F
 
-  hom-globular-map-map-Noncoherent-Large-Wild-Higher-Precategory :
+  hom-globular-map-map-Noncoherent-Large-ω-Precategory :
     {l1 l2 : Level}
-    {x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1}
-    {y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2} →
+    {x : obj-Noncoherent-Large-ω-Precategory 𝒜 l1}
+    {y : obj-Noncoherent-Large-ω-Precategory 𝒜 l2} →
     globular-map
-      ( hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory 𝒜 x y)
-      ( hom-globular-type-Noncoherent-Large-Wild-Higher-Precategory ℬ
-        ( obj-map-Noncoherent-Large-Wild-Higher-Precategory x)
-        ( obj-map-Noncoherent-Large-Wild-Higher-Precategory y))
-  hom-globular-map-map-Noncoherent-Large-Wild-Higher-Precategory =
+      ( hom-globular-type-Noncoherent-Large-ω-Precategory 𝒜 x y)
+      ( hom-globular-type-Noncoherent-Large-ω-Precategory ℬ
+        ( obj-map-Noncoherent-Large-ω-Precategory x)
+        ( obj-map-Noncoherent-Large-ω-Precategory y))
+  hom-globular-map-map-Noncoherent-Large-ω-Precategory =
     1-cell-globular-map-large-globular-map F
 
-  hom-map-Noncoherent-Large-Wild-Higher-Precategory :
+  hom-map-Noncoherent-Large-ω-Precategory :
     {l1 l2 : Level}
-    {x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1}
-    {y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2} →
-    hom-Noncoherent-Large-Wild-Higher-Precategory 𝒜 x y →
-    hom-Noncoherent-Large-Wild-Higher-Precategory ℬ
-      ( obj-map-Noncoherent-Large-Wild-Higher-Precategory x)
-      ( obj-map-Noncoherent-Large-Wild-Higher-Precategory y)
-  hom-map-Noncoherent-Large-Wild-Higher-Precategory =
+    {x : obj-Noncoherent-Large-ω-Precategory 𝒜 l1}
+    {y : obj-Noncoherent-Large-ω-Precategory 𝒜 l2} →
+    hom-Noncoherent-Large-ω-Precategory 𝒜 x y →
+    hom-Noncoherent-Large-ω-Precategory ℬ
+      ( obj-map-Noncoherent-Large-ω-Precategory x)
+      ( obj-map-Noncoherent-Large-ω-Precategory y)
+  hom-map-Noncoherent-Large-ω-Precategory =
     1-cell-large-globular-map F
 
-  2-hom-map-Noncoherent-Large-Wild-Higher-Precategory :
+  2-hom-map-Noncoherent-Large-ω-Precategory :
     {l1 l2 : Level}
-    {x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1}
-    {y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2}
-    {f g : hom-Noncoherent-Large-Wild-Higher-Precategory 𝒜 x y} →
-    2-hom-Noncoherent-Large-Wild-Higher-Precategory 𝒜 f g →
-    2-hom-Noncoherent-Large-Wild-Higher-Precategory ℬ
-      ( hom-map-Noncoherent-Large-Wild-Higher-Precategory f)
-      ( hom-map-Noncoherent-Large-Wild-Higher-Precategory g)
-  2-hom-map-Noncoherent-Large-Wild-Higher-Precategory =
+    {x : obj-Noncoherent-Large-ω-Precategory 𝒜 l1}
+    {y : obj-Noncoherent-Large-ω-Precategory 𝒜 l2}
+    {f g : hom-Noncoherent-Large-ω-Precategory 𝒜 x y} →
+    2-hom-Noncoherent-Large-ω-Precategory 𝒜 f g →
+    2-hom-Noncoherent-Large-ω-Precategory ℬ
+      ( hom-map-Noncoherent-Large-ω-Precategory f)
+      ( hom-map-Noncoherent-Large-ω-Precategory g)
+  2-hom-map-Noncoherent-Large-ω-Precategory =
     2-cell-large-globular-map F
 
-  hom-noncoherent-wild-higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory :
+  hom-noncoherent-ω-precategory-map-Noncoherent-Large-ω-Precategory :
     {l1 l2 : Level}
-    (x : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l1)
-    (y : obj-Noncoherent-Large-Wild-Higher-Precategory 𝒜 l2) →
-    map-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+    (x : obj-Noncoherent-Large-ω-Precategory 𝒜 l1)
+    (y : obj-Noncoherent-Large-ω-Precategory 𝒜 l2) →
+    map-Noncoherent-ω-Precategory
+      ( hom-noncoherent-ω-precategory-Noncoherent-Large-ω-Precategory
         ( 𝒜)
         ( x)
         ( y))
-      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Large-Wild-Higher-Precategory
+      ( hom-noncoherent-ω-precategory-Noncoherent-Large-ω-Precategory
         ( ℬ)
-        ( obj-map-Noncoherent-Large-Wild-Higher-Precategory x)
-        ( obj-map-Noncoherent-Large-Wild-Higher-Precategory y))
-  hom-noncoherent-wild-higher-precategory-map-Noncoherent-Large-Wild-Higher-Precategory
+        ( obj-map-Noncoherent-Large-ω-Precategory x)
+        ( obj-map-Noncoherent-Large-ω-Precategory y))
+  hom-noncoherent-ω-precategory-map-Noncoherent-Large-ω-Precategory
     _ _ =
     1-cell-globular-map-large-globular-map F
 ```
@@ -136,12 +136,12 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level}
-  (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α β)
+  (𝒜 : Noncoherent-Large-ω-Precategory α β)
   where
 
-  id-map-Noncoherent-Large-Wild-Higher-Precategory :
-    map-Noncoherent-Large-Wild-Higher-Precategory (λ l → l) 𝒜 𝒜
-  id-map-Noncoherent-Large-Wild-Higher-Precategory =
+  id-map-Noncoherent-Large-ω-Precategory :
+    map-Noncoherent-Large-ω-Precategory (λ l → l) 𝒜 𝒜
+  id-map-Noncoherent-Large-ω-Precategory =
     id-large-globular-map _
 ```
 
@@ -152,15 +152,15 @@ module _
   {α1 α2 α3 : Level → Level}
   {β1 β2 β3 : Level → Level → Level}
   {δ1 δ2 : Level → Level}
-  (𝒜 : Noncoherent-Large-Wild-Higher-Precategory α1 β1)
-  (ℬ : Noncoherent-Large-Wild-Higher-Precategory α2 β2)
-  (𝒞 : Noncoherent-Large-Wild-Higher-Precategory α3 β3)
-  (G : map-Noncoherent-Large-Wild-Higher-Precategory δ2 ℬ 𝒞)
-  (F : map-Noncoherent-Large-Wild-Higher-Precategory δ1 𝒜 ℬ)
+  (𝒜 : Noncoherent-Large-ω-Precategory α1 β1)
+  (ℬ : Noncoherent-Large-ω-Precategory α2 β2)
+  (𝒞 : Noncoherent-Large-ω-Precategory α3 β3)
+  (G : map-Noncoherent-Large-ω-Precategory δ2 ℬ 𝒞)
+  (F : map-Noncoherent-Large-ω-Precategory δ1 𝒜 ℬ)
   where
 
-  comp-map-Noncoherent-Large-Wild-Higher-Precategory :
-    map-Noncoherent-Large-Wild-Higher-Precategory (λ l → δ2 (δ1 l)) 𝒜 𝒞
-  comp-map-Noncoherent-Large-Wild-Higher-Precategory =
+  comp-map-Noncoherent-Large-ω-Precategory :
+    map-Noncoherent-Large-ω-Precategory (λ l → δ2 (δ1 l)) 𝒜 𝒞
+  comp-map-Noncoherent-Large-ω-Precategory =
     comp-large-globular-map G F
 ```

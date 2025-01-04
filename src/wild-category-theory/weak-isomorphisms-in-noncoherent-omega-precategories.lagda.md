@@ -22,7 +22,7 @@ open import wild-category-theory.noncoherent-omega-precategories
 Consider a
 [noncoherent wild higher precategory](wild-category-theory.noncoherent-omega-precategories.md)
 `𝒞`. An
-{{#concept "isomorphism" Disambiguation="in noncoherent ω-precategories" Agda=is-iso-Noncoherent-Wild-Higher-Precategory}}
+{{#concept "isomorphism" Disambiguation="in noncoherent ω-precategories" Agda=is-iso-Noncoherent-ω-Precategory}}
 in `𝒞` is a morphism `f : x → y` in `𝒞` [equipped](foundation.structure.md) with
 
 - a morphism `s : y → x`
@@ -59,161 +59,161 @@ compose.
 
 ```agda
 record
-  is-iso-Noncoherent-Wild-Higher-Precategory
-  {l1 l2 : Level} (𝒞 : Noncoherent-Wild-Higher-Precategory l1 l2)
-  {x y : obj-Noncoherent-Wild-Higher-Precategory 𝒞}
-  (f : hom-Noncoherent-Wild-Higher-Precategory 𝒞 x y) : UU l2
+  is-iso-Noncoherent-ω-Precategory
+  {l1 l2 : Level} (𝒞 : Noncoherent-ω-Precategory l1 l2)
+  {x y : obj-Noncoherent-ω-Precategory 𝒞}
+  (f : hom-Noncoherent-ω-Precategory 𝒞 x y) : UU l2
   where
   coinductive
   field
-    hom-section-is-iso-Noncoherent-Wild-Higher-Precategory :
-      hom-Noncoherent-Wild-Higher-Precategory 𝒞 y x
-    is-split-epi-is-iso-Noncoherent-Wild-Higher-Precategory :
-      2-hom-Noncoherent-Wild-Higher-Precategory 𝒞
-        ( comp-hom-Noncoherent-Wild-Higher-Precategory 𝒞
+    hom-section-is-iso-Noncoherent-ω-Precategory :
+      hom-Noncoherent-ω-Precategory 𝒞 y x
+    is-split-epi-is-iso-Noncoherent-ω-Precategory :
+      2-hom-Noncoherent-ω-Precategory 𝒞
+        ( comp-hom-Noncoherent-ω-Precategory 𝒞
           ( f)
-          ( hom-section-is-iso-Noncoherent-Wild-Higher-Precategory))
-        ( id-hom-Noncoherent-Wild-Higher-Precategory 𝒞)
-    is-iso-is-split-epi-is-iso-Noncoherent-Wild-Higher-Precategory :
-      is-iso-Noncoherent-Wild-Higher-Precategory
-        ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
+          ( hom-section-is-iso-Noncoherent-ω-Precategory))
+        ( id-hom-Noncoherent-ω-Precategory 𝒞)
+    is-iso-is-split-epi-is-iso-Noncoherent-ω-Precategory :
+      is-iso-Noncoherent-ω-Precategory
+        ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
           ( 𝒞)
           ( y)
           ( y))
-        ( is-split-epi-is-iso-Noncoherent-Wild-Higher-Precategory)
+        ( is-split-epi-is-iso-Noncoherent-ω-Precategory)
 
-    hom-retraction-is-iso-Noncoherent-Wild-Higher-Precategory :
-      hom-Noncoherent-Wild-Higher-Precategory 𝒞 y x
-    is-split-mono-is-iso-Noncoherent-Wild-Higher-Precategory :
-      2-hom-Noncoherent-Wild-Higher-Precategory 𝒞
-        ( comp-hom-Noncoherent-Wild-Higher-Precategory 𝒞
-          ( hom-retraction-is-iso-Noncoherent-Wild-Higher-Precategory)
+    hom-retraction-is-iso-Noncoherent-ω-Precategory :
+      hom-Noncoherent-ω-Precategory 𝒞 y x
+    is-split-mono-is-iso-Noncoherent-ω-Precategory :
+      2-hom-Noncoherent-ω-Precategory 𝒞
+        ( comp-hom-Noncoherent-ω-Precategory 𝒞
+          ( hom-retraction-is-iso-Noncoherent-ω-Precategory)
           ( f))
-        ( id-hom-Noncoherent-Wild-Higher-Precategory 𝒞)
-    is-iso-is-split-mono-is-iso-Noncoherent-Wild-Higher-Precategory :
-      is-iso-Noncoherent-Wild-Higher-Precategory
-        ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
+        ( id-hom-Noncoherent-ω-Precategory 𝒞)
+    is-iso-is-split-mono-is-iso-Noncoherent-ω-Precategory :
+      is-iso-Noncoherent-ω-Precategory
+        ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
           ( 𝒞)
           ( x)
           ( x))
-        ( is-split-mono-is-iso-Noncoherent-Wild-Higher-Precategory)
+        ( is-split-mono-is-iso-Noncoherent-ω-Precategory)
 
-open is-iso-Noncoherent-Wild-Higher-Precategory public
+open is-iso-Noncoherent-ω-Precategory public
 ```
 
 ### Isomorphisms in a noncoherent wild higher precategory
 
 ```agda
-iso-Noncoherent-Wild-Higher-Precategory :
-  {l1 l2 : Level} (𝒞 : Noncoherent-Wild-Higher-Precategory l1 l2)
-  (x y : obj-Noncoherent-Wild-Higher-Precategory 𝒞) →
+iso-Noncoherent-ω-Precategory :
+  {l1 l2 : Level} (𝒞 : Noncoherent-ω-Precategory l1 l2)
+  (x y : obj-Noncoherent-ω-Precategory 𝒞) →
   UU l2
-iso-Noncoherent-Wild-Higher-Precategory 𝒞 x y =
-  Σ ( hom-Noncoherent-Wild-Higher-Precategory 𝒞 x y)
-    ( is-iso-Noncoherent-Wild-Higher-Precategory 𝒞)
+iso-Noncoherent-ω-Precategory 𝒞 x y =
+  Σ ( hom-Noncoherent-ω-Precategory 𝒞 x y)
+    ( is-iso-Noncoherent-ω-Precategory 𝒞)
 ```
 
 ### Components of an isomorphism in a noncoherent wild higher precategory
 
 ```agda
 module _
-  {l1 l2 : Level} {𝒞 : Noncoherent-Wild-Higher-Precategory l1 l2}
-  {x y : obj-Noncoherent-Wild-Higher-Precategory 𝒞}
-  (f : iso-Noncoherent-Wild-Higher-Precategory 𝒞 x y)
+  {l1 l2 : Level} {𝒞 : Noncoherent-ω-Precategory l1 l2}
+  {x y : obj-Noncoherent-ω-Precategory 𝒞}
+  (f : iso-Noncoherent-ω-Precategory 𝒞 x y)
   where
 
-  hom-iso-Noncoherent-Wild-Higher-Precategory :
-    hom-Noncoherent-Wild-Higher-Precategory 𝒞 x y
-  hom-iso-Noncoherent-Wild-Higher-Precategory = pr1 f
+  hom-iso-Noncoherent-ω-Precategory :
+    hom-Noncoherent-ω-Precategory 𝒞 x y
+  hom-iso-Noncoherent-ω-Precategory = pr1 f
 
-  is-iso-hom-iso-Noncoherent-Wild-Higher-Precategory :
-    is-iso-Noncoherent-Wild-Higher-Precategory 𝒞
-      ( hom-iso-Noncoherent-Wild-Higher-Precategory)
-  is-iso-hom-iso-Noncoherent-Wild-Higher-Precategory = pr2 f
+  is-iso-hom-iso-Noncoherent-ω-Precategory :
+    is-iso-Noncoherent-ω-Precategory 𝒞
+      ( hom-iso-Noncoherent-ω-Precategory)
+  is-iso-hom-iso-Noncoherent-ω-Precategory = pr2 f
 
-  hom-section-iso-Noncoherent-Wild-Higher-Precategory :
-    hom-Noncoherent-Wild-Higher-Precategory 𝒞 y x
-  hom-section-iso-Noncoherent-Wild-Higher-Precategory =
-    hom-section-is-iso-Noncoherent-Wild-Higher-Precategory
-      ( is-iso-hom-iso-Noncoherent-Wild-Higher-Precategory)
+  hom-section-iso-Noncoherent-ω-Precategory :
+    hom-Noncoherent-ω-Precategory 𝒞 y x
+  hom-section-iso-Noncoherent-ω-Precategory =
+    hom-section-is-iso-Noncoherent-ω-Precategory
+      ( is-iso-hom-iso-Noncoherent-ω-Precategory)
 
-  is-split-epi-iso-Noncoherent-Wild-Higher-Precategory :
-    2-hom-Noncoherent-Wild-Higher-Precategory 𝒞
-      ( comp-hom-Noncoherent-Wild-Higher-Precategory 𝒞
-        ( hom-iso-Noncoherent-Wild-Higher-Precategory)
-        ( hom-section-iso-Noncoherent-Wild-Higher-Precategory))
-      ( id-hom-Noncoherent-Wild-Higher-Precategory 𝒞)
-  is-split-epi-iso-Noncoherent-Wild-Higher-Precategory =
-    is-split-epi-is-iso-Noncoherent-Wild-Higher-Precategory
-      ( is-iso-hom-iso-Noncoherent-Wild-Higher-Precategory)
+  is-split-epi-iso-Noncoherent-ω-Precategory :
+    2-hom-Noncoherent-ω-Precategory 𝒞
+      ( comp-hom-Noncoherent-ω-Precategory 𝒞
+        ( hom-iso-Noncoherent-ω-Precategory)
+        ( hom-section-iso-Noncoherent-ω-Precategory))
+      ( id-hom-Noncoherent-ω-Precategory 𝒞)
+  is-split-epi-iso-Noncoherent-ω-Precategory =
+    is-split-epi-is-iso-Noncoherent-ω-Precategory
+      ( is-iso-hom-iso-Noncoherent-ω-Precategory)
 
-  is-iso-is-split-epi-iso-Noncoherent-Wild-Higher-Precategory :
-    is-iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
+  is-iso-is-split-epi-iso-Noncoherent-ω-Precategory :
+    is-iso-Noncoherent-ω-Precategory
+      ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
         ( 𝒞)
         ( y)
         ( y))
-      ( is-split-epi-iso-Noncoherent-Wild-Higher-Precategory)
-  is-iso-is-split-epi-iso-Noncoherent-Wild-Higher-Precategory =
-    is-iso-is-split-epi-is-iso-Noncoherent-Wild-Higher-Precategory
-      ( is-iso-hom-iso-Noncoherent-Wild-Higher-Precategory)
+      ( is-split-epi-iso-Noncoherent-ω-Precategory)
+  is-iso-is-split-epi-iso-Noncoherent-ω-Precategory =
+    is-iso-is-split-epi-is-iso-Noncoherent-ω-Precategory
+      ( is-iso-hom-iso-Noncoherent-ω-Precategory)
 
-  iso-is-split-epi-iso-Noncoherent-Wild-Higher-Precategory :
-    iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
+  iso-is-split-epi-iso-Noncoherent-ω-Precategory :
+    iso-Noncoherent-ω-Precategory
+      ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
         ( 𝒞)
         ( y)
         ( y))
-      ( comp-hom-Noncoherent-Wild-Higher-Precategory 𝒞
-        ( hom-iso-Noncoherent-Wild-Higher-Precategory)
-        ( hom-section-iso-Noncoherent-Wild-Higher-Precategory))
-      ( id-hom-Noncoherent-Wild-Higher-Precategory 𝒞)
-  pr1 iso-is-split-epi-iso-Noncoherent-Wild-Higher-Precategory =
-    is-split-epi-iso-Noncoherent-Wild-Higher-Precategory
-  pr2 iso-is-split-epi-iso-Noncoherent-Wild-Higher-Precategory =
-    is-iso-is-split-epi-iso-Noncoherent-Wild-Higher-Precategory
+      ( comp-hom-Noncoherent-ω-Precategory 𝒞
+        ( hom-iso-Noncoherent-ω-Precategory)
+        ( hom-section-iso-Noncoherent-ω-Precategory))
+      ( id-hom-Noncoherent-ω-Precategory 𝒞)
+  pr1 iso-is-split-epi-iso-Noncoherent-ω-Precategory =
+    is-split-epi-iso-Noncoherent-ω-Precategory
+  pr2 iso-is-split-epi-iso-Noncoherent-ω-Precategory =
+    is-iso-is-split-epi-iso-Noncoherent-ω-Precategory
 
-  hom-retraction-iso-Noncoherent-Wild-Higher-Precategory :
-    hom-Noncoherent-Wild-Higher-Precategory 𝒞 y x
-  hom-retraction-iso-Noncoherent-Wild-Higher-Precategory =
-    hom-retraction-is-iso-Noncoherent-Wild-Higher-Precategory
-      ( is-iso-hom-iso-Noncoherent-Wild-Higher-Precategory)
+  hom-retraction-iso-Noncoherent-ω-Precategory :
+    hom-Noncoherent-ω-Precategory 𝒞 y x
+  hom-retraction-iso-Noncoherent-ω-Precategory =
+    hom-retraction-is-iso-Noncoherent-ω-Precategory
+      ( is-iso-hom-iso-Noncoherent-ω-Precategory)
 
-  is-split-mono-iso-Noncoherent-Wild-Higher-Precategory :
-    2-hom-Noncoherent-Wild-Higher-Precategory 𝒞
-      ( comp-hom-Noncoherent-Wild-Higher-Precategory 𝒞
-        ( hom-retraction-iso-Noncoherent-Wild-Higher-Precategory)
-        ( hom-iso-Noncoherent-Wild-Higher-Precategory))
-      ( id-hom-Noncoherent-Wild-Higher-Precategory 𝒞)
-  is-split-mono-iso-Noncoherent-Wild-Higher-Precategory =
-    is-split-mono-is-iso-Noncoherent-Wild-Higher-Precategory
-      ( is-iso-hom-iso-Noncoherent-Wild-Higher-Precategory)
+  is-split-mono-iso-Noncoherent-ω-Precategory :
+    2-hom-Noncoherent-ω-Precategory 𝒞
+      ( comp-hom-Noncoherent-ω-Precategory 𝒞
+        ( hom-retraction-iso-Noncoherent-ω-Precategory)
+        ( hom-iso-Noncoherent-ω-Precategory))
+      ( id-hom-Noncoherent-ω-Precategory 𝒞)
+  is-split-mono-iso-Noncoherent-ω-Precategory =
+    is-split-mono-is-iso-Noncoherent-ω-Precategory
+      ( is-iso-hom-iso-Noncoherent-ω-Precategory)
 
-  is-iso-is-split-mono-iso-Noncoherent-Wild-Higher-Precategory :
-    is-iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
+  is-iso-is-split-mono-iso-Noncoherent-ω-Precategory :
+    is-iso-Noncoherent-ω-Precategory
+      ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
         ( 𝒞)
         ( x)
         ( x))
-      ( is-split-mono-iso-Noncoherent-Wild-Higher-Precategory)
-  is-iso-is-split-mono-iso-Noncoherent-Wild-Higher-Precategory =
-    is-iso-is-split-mono-is-iso-Noncoherent-Wild-Higher-Precategory
-      ( is-iso-hom-iso-Noncoherent-Wild-Higher-Precategory)
+      ( is-split-mono-iso-Noncoherent-ω-Precategory)
+  is-iso-is-split-mono-iso-Noncoherent-ω-Precategory =
+    is-iso-is-split-mono-is-iso-Noncoherent-ω-Precategory
+      ( is-iso-hom-iso-Noncoherent-ω-Precategory)
 
-  iso-is-split-mono-iso-Noncoherent-Wild-Higher-Precategory :
-    iso-Noncoherent-Wild-Higher-Precategory
-      ( hom-noncoherent-wild-higher-precategory-Noncoherent-Wild-Higher-Precategory
+  iso-is-split-mono-iso-Noncoherent-ω-Precategory :
+    iso-Noncoherent-ω-Precategory
+      ( hom-noncoherent-ω-precategory-Noncoherent-ω-Precategory
         ( 𝒞)
         ( x)
         ( x))
-      ( comp-hom-Noncoherent-Wild-Higher-Precategory 𝒞
-        ( hom-retraction-iso-Noncoherent-Wild-Higher-Precategory)
-        ( hom-iso-Noncoherent-Wild-Higher-Precategory))
-      ( id-hom-Noncoherent-Wild-Higher-Precategory 𝒞)
-  pr1 iso-is-split-mono-iso-Noncoherent-Wild-Higher-Precategory =
-    is-split-mono-iso-Noncoherent-Wild-Higher-Precategory
-  pr2 iso-is-split-mono-iso-Noncoherent-Wild-Higher-Precategory =
-    is-iso-is-split-mono-iso-Noncoherent-Wild-Higher-Precategory
+      ( comp-hom-Noncoherent-ω-Precategory 𝒞
+        ( hom-retraction-iso-Noncoherent-ω-Precategory)
+        ( hom-iso-Noncoherent-ω-Precategory))
+      ( id-hom-Noncoherent-ω-Precategory 𝒞)
+  pr1 iso-is-split-mono-iso-Noncoherent-ω-Precategory =
+    is-split-mono-iso-Noncoherent-ω-Precategory
+  pr2 iso-is-split-mono-iso-Noncoherent-ω-Precategory =
+    is-iso-is-split-mono-iso-Noncoherent-ω-Precategory
 ```
 
 ## See also

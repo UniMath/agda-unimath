@@ -41,7 +41,7 @@ open import wild-category-theory.noncoherent-omega-precategories
 ## Idea
 
 The
-{{#concept "wild category of pointed types" Agda=uniform-pointed-type-Noncoherent-Large-Wild-Higher-Precategory Agda=pointed-type-Noncoherent-Large-Wild-Higher-Precategory}}
+{{#concept "wild category of pointed types" Agda=uniform-pointed-type-Noncoherent-Large-ω-Precategory Agda=pointed-type-Noncoherent-Large-ω-Precategory}}
 consists of [pointed types](structured-types.pointed-types.md),
 [pointed functions](structured-types.pointed-maps.md), and
 [pointed homotopies](structured-types.pointed-homotopies.md).
@@ -163,16 +163,16 @@ is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type
 #### The noncoherent large wild higher precategory of pointed types, pointed maps, and uniform pointed homotopies
 
 ```agda
-uniform-pointed-type-Noncoherent-Large-Wild-Higher-Precategory :
-  Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
-large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
-  uniform-pointed-type-Noncoherent-Large-Wild-Higher-Precategory =
+uniform-pointed-type-Noncoherent-Large-ω-Precategory :
+  Noncoherent-Large-ω-Precategory lsuc (_⊔_)
+large-globular-type-Noncoherent-Large-ω-Precategory
+  uniform-pointed-type-Noncoherent-Large-ω-Precategory =
   uniform-pointed-type-Large-Globular-Type
-id-structure-Noncoherent-Large-Wild-Higher-Precategory
-  uniform-pointed-type-Noncoherent-Large-Wild-Higher-Precategory =
+id-structure-Noncoherent-Large-ω-Precategory
+  uniform-pointed-type-Noncoherent-Large-ω-Precategory =
   id-structure-uniform-pointed-type-Large-Globular-Type
-comp-structure-Noncoherent-Large-Wild-Higher-Precategory
-  uniform-pointed-type-Noncoherent-Large-Wild-Higher-Precategory =
+comp-structure-Noncoherent-Large-ω-Precategory
+  uniform-pointed-type-Noncoherent-Large-ω-Precategory =
   comp-structure-uniform-pointed-type-Large-Globular-Type
 ```
 
@@ -329,16 +329,16 @@ is-transitive-1-cell-globular-type-is-transitive-Large-Globular-Type
 #### The noncoherent large wild higher precategory of pointed types, pointed maps, and nonuniform pointed homotopies
 
 ```agda
-pointed-type-Noncoherent-Large-Wild-Higher-Precategory :
-  Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
-large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
-  pointed-type-Noncoherent-Large-Wild-Higher-Precategory =
+pointed-type-Noncoherent-Large-ω-Precategory :
+  Noncoherent-Large-ω-Precategory lsuc (_⊔_)
+large-globular-type-Noncoherent-Large-ω-Precategory
+  pointed-type-Noncoherent-Large-ω-Precategory =
   pointed-type-Large-Globular-Type
-id-structure-Noncoherent-Large-Wild-Higher-Precategory
-  pointed-type-Noncoherent-Large-Wild-Higher-Precategory =
+id-structure-Noncoherent-Large-ω-Precategory
+  pointed-type-Noncoherent-Large-ω-Precategory =
   is-reflexive-pointed-type-Large-Globular-Type
-comp-structure-Noncoherent-Large-Wild-Higher-Precategory
-  pointed-type-Noncoherent-Large-Wild-Higher-Precategory =
+comp-structure-Noncoherent-Large-ω-Precategory
+  pointed-type-Noncoherent-Large-ω-Precategory =
   is-transitive-pointed-type-Large-Globular-Type
 ```
 
