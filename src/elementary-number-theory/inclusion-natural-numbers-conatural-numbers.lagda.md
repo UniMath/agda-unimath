@@ -16,7 +16,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.existential-quantification
 open import foundation.injective-maps
-open import foundation.universe-levels
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.surjective-maps
