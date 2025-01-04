@@ -147,6 +147,15 @@ open import elementary-number-theory.fermat-numbers using
 
 OEIS: [A000215](https://oeis.org/A000215)
 
+### A000217 -- The triangular numbers
+
+```agda
+open import elementary-number-theory.triangular-numbers using
+  ( triangular-number-ℕ)
+```
+
+OEIS: [A000217](https://oeis.org/A000217)
+
 ### A000244 -- Powers of `3`
 
 ```agda
@@ -200,6 +209,15 @@ A001477 = id
 ```
 
 OEIS: [A001477](https://oeis.org/A001477)
+
+### A002378 -- The pronic numbers
+
+```agda
+open import elementary-number-theory.pronic-numbers using
+  ( pronic-number-ℕ)
+```
+
+OEIS: [A002378](https://oeis.org/A002378)
 
 ### A003090 -- The number of main classes of Latin squares of order `n`
 

@@ -335,3 +335,5 @@ neq-mul-ℕ m n p =
 
 - [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)
 - [Cubes of natural numbers](elementary-number-theory.cubes-natural-numbers.md)
+- [Pronic numbers](elementary-number-theory.pronic-numbers.md), i.e., numbers of
+  the form $n(n+1)$.

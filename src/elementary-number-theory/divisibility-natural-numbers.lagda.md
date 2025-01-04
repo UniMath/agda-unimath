@@ -207,6 +207,19 @@ module _
       ( bounded-div-quotient-bounded-div-ℕ m n (bounded-div-div-ℕ m n H))
 ```
 
+### The quotient by divisibility of two equal dividends by two equal divisors are equal
+
+```agda
+compute-quotient-div-ℕ :
+  {m m' n n' : ℕ} (q : m ＝ m') (p : n ＝ n')
+  (H : div-ℕ m n) (K : div-ℕ m' n') →
+  quotient-div-ℕ m n H ＝ quotient-div-ℕ m' n' K
+compute-quotient-div-ℕ q p H K =
+  compute-quotient-bounded-div-ℕ q p
+    ( bounded-div-div-ℕ _ _ H)
+    ( bounded-div-div-ℕ _ _ K)
+```
+
 ### Concatenating equality and divisibility
 
 ```agda

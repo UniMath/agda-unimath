@@ -182,11 +182,12 @@ module _
 ```agda
 module _
   {l1 : Level} {A : ℤ → UU l1} (d : (x : ℤ) → is-decidable (A x))
+  (b : ℤ) (H : (a : ℤ) → A a → b ≤-ℤ a) ((a , x) : Σ ℤ A)
   where
 
   lower-bounded-well-ordering-principle-ℤ :
-    (b : ℤ) (H : (a : ℤ) → A a → b ≤-ℤ a) → Σ ℤ A → minimal-element-ℤ A
-  lower-bounded-well-ordering-principle-ℤ b H (a , x) =
+    minimal-element-ℤ A
+  lower-bounded-well-ordering-principle-ℤ =
     translation-minimal-element-ℤ A b
       ( well-ordering-principle-nonnegative-ℤ
         ( λ c → d (c +ℤ b))
@@ -196,6 +197,20 @@ module _
             ( is-retraction-right-add-neg-ℤ b c)
             ( H (c +ℤ b) z) )
         ( diff-ℤ a b , tr A (inv (is-section-right-add-neg-ℤ b a)) x))
+
+  integer-lower-bounded-well-ordering-principle-ℤ : ℤ
+  integer-lower-bounded-well-ordering-principle-ℤ =
+    pr1 lower-bounded-well-ordering-principle-ℤ
+
+  structure-lower-bounded-well-ordering-principle-ℤ :
+    A integer-lower-bounded-well-ordering-principle-ℤ
+  structure-lower-bounded-well-ordering-principle-ℤ =
+    pr1 (pr2 lower-bounded-well-ordering-principle-ℤ)
+
+  is-least-element-integer-lower-bounded-well-ordering-principle-ℤ :
+    (a : ℤ) → A a → integer-lower-bounded-well-ordering-principle-ℤ ≤-ℤ a
+  is-least-element-integer-lower-bounded-well-ordering-principle-ℤ =
+    pr2 (pr2 lower-bounded-well-ordering-principle-ℤ)
 ```
 
 ### The upper bounded well-ordering principle for the integers
@@ -203,15 +218,30 @@ module _
 ```agda
 module _
   {l1 : Level} {A : ℤ → UU l1} (d : (x : ℤ) → is-decidable (A x))
+  (b : ℤ) (H : (a : ℤ) → A a → a ≤-ℤ b) ((a , x) : Σ ℤ A)
   where
 
   upper-bounded-well-ordering-principle-ℤ :
-    (b : ℤ) (H : (a : ℤ) → A a → a ≤-ℤ b) → Σ ℤ A → maximal-element-ℤ A
-  upper-bounded-well-ordering-principle-ℤ b H (a , x) =
+    maximal-element-ℤ A
+  upper-bounded-well-ordering-principle-ℤ =
     reflect-minimal-element-ℤ A
       ( lower-bounded-well-ordering-principle-ℤ
         ( λ x → d (neg-ℤ x))
         ( neg-ℤ b)
         ( λ x y → transpose-left-neg-leq-ℤ b x (H (neg-ℤ x) y))
         ( neg-ℤ a , tr A (inv (neg-neg-ℤ a)) x))
+
+  integer-upper-bounded-well-ordering-principle-ℤ : ℤ
+  integer-upper-bounded-well-ordering-principle-ℤ =
+    pr1 upper-bounded-well-ordering-principle-ℤ
+
+  structure-upper-bounded-well-ordering-principle-ℤ :
+    A integer-upper-bounded-well-ordering-principle-ℤ
+  structure-upper-bounded-well-ordering-principle-ℤ =
+    pr1 (pr2 upper-bounded-well-ordering-principle-ℤ)
+
+  is-largest-element-integer-upper-bounded-well-ordering-principle-ℤ :
+    (a : ℤ) → A a → a ≤-ℤ integer-upper-bounded-well-ordering-principle-ℤ
+  is-largest-element-integer-upper-bounded-well-ordering-principle-ℤ =
+    pr2 (pr2 upper-bounded-well-ordering-principle-ℤ)
 ```

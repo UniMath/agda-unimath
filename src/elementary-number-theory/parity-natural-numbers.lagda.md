@@ -404,31 +404,11 @@ is-odd-add-succ-self-ℕ n =
   is-odd-succ-is-even-ℕ (n +ℕ n) (is-even-add-self-ℕ n)
 ```
 
-### The product `n(n + 1)` is even
-
-```agda
-abstract
-  is-even-mul-succ-ℕ :
-    (n : ℕ) → is-even-ℕ (n *ℕ succ-ℕ n)
-  is-even-mul-succ-ℕ n
-    with is-even-or-is-even-succ-ℕ n
-  ... | inl H =
-    is-even-div-is-even-ℕ
-      ( n *ℕ succ-ℕ n)
-      ( n)
-      ( H)
-      ( succ-ℕ n , commutative-mul-ℕ (succ-ℕ n) n)
-  ... | inr H =
-    is-even-div-is-even-ℕ
-      ( n *ℕ succ-ℕ n)
-      ( succ-ℕ n)
-      ( H)
-      ( n , refl)
-```
-
 ## See also
 
 Further laws of parity are proven in other files, e.g.:
 
 - [Parity of integers](elementary-number-theory.parity-integers.md)
 - [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md)
+- The fact that the pronic numbers $n(n+1)$ are even is proven in
+  [Pronic numbers](elementary-number-theory.pronic-numbers.md).

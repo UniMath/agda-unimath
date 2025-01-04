@@ -28,13 +28,20 @@ open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import order-theory.decidable-posets
+open import order-theory.decidable-preorders
+open import order-theory.decidable-total-preorders
+open import order-theory.decidable-total-orders
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.total-preorders
+open import order-theory.total-orders
 ```
 
 </details>
@@ -48,6 +55,15 @@ to the integer `y` if the
 defines the
 {{#concept "standard ordering" Disambiguation="integers" Agda=leq-ℤ}} on the
 integers.
+
+Alternatively, the standard ordering can be defined as a `data` type by specifying the constructors
+
+```text
+  r : (x : ℤ) → x ≤ x
+  s : (x y : ℤ) → x ≤ y → x ≤ y + 1.
+```
+
+We will introduce both orderings and prove that they are equivalent.
 
 ## Definition
 
@@ -65,6 +81,29 @@ is-prop-leq-ℤ x y = is-prop-type-Prop (leq-ℤ-Prop x y)
 
 infix 30 _≤-ℤ_
 _≤-ℤ_ = leq-ℤ
+```
+
+### Inductive definition of inequality on the integers
+
+```agda
+data
+  inductive-leq-ℤ :
+    ℤ → ℤ → UU lzero
+  where
+  
+  refl-inductive-leq-ℤ :
+    (a : ℤ) → inductive-leq-ℤ a a
+
+  succ-inductive-leq-ℤ :
+    (a b : ℤ) → inductive-leq-ℤ a b → inductive-leq-ℤ a (succ-ℤ b)
+
+refl-inductive-leq-ℤ' :
+  (a b : ℤ) → a ＝ b → inductive-leq-ℤ a b
+refl-inductive-leq-ℤ' a .a refl = refl-inductive-leq-ℤ a
+
+succ-inductive-leq-ℤ' :
+  (a b c : ℤ) (p : succ-ℤ b ＝ c) → inductive-leq-ℤ a b → inductive-leq-ℤ a c
+succ-inductive-leq-ℤ' a b .(succ-ℤ b) refl H = succ-inductive-leq-ℤ a b H
 ```
 
 ## Properties
@@ -116,19 +155,44 @@ linear-leq-ℤ x y =
     ( decide-is-negative-is-nonnegative-ℤ)
 ```
 
-### An integer is lesser than its successor
+### The partially ordered set of integers ordered by inequality
 
 ```agda
-succ-leq-ℤ : (k : ℤ) → leq-ℤ k (succ-ℤ k)
-succ-leq-ℤ k =
-  is-nonnegative-eq-ℤ
-    ( inv
-      ( ( left-successor-law-add-ℤ k (neg-ℤ k)) ∙
-        ( ap succ-ℤ (right-inverse-law-add-ℤ k))))
-    ( star)
+ℤ-Preorder : Preorder lzero lzero
+pr1 ℤ-Preorder = ℤ
+pr1 (pr2 ℤ-Preorder) = leq-ℤ-Prop
+pr1 (pr2 (pr2 ℤ-Preorder)) = refl-leq-ℤ
+pr2 (pr2 (pr2 ℤ-Preorder)) = transitive-leq-ℤ
 
-leq-ℤ-succ-leq-ℤ : (k l : ℤ) → leq-ℤ k l → leq-ℤ k (succ-ℤ l)
-leq-ℤ-succ-leq-ℤ k l = transitive-leq-ℤ k l (succ-ℤ l) (succ-leq-ℤ l)
+ℤ-Decidable-Preorder : Decidable-Preorder lzero lzero
+pr1 ℤ-Decidable-Preorder = ℤ-Preorder
+pr2 ℤ-Decidable-Preorder = is-decidable-leq-ℤ
+
+ℤ-Poset : Poset lzero lzero
+pr1 ℤ-Poset = ℤ-Preorder
+pr2 ℤ-Poset x y = antisymmetric-leq-ℤ
+
+ℤ-Decidable-Poset : Decidable-Poset lzero lzero
+pr1 ℤ-Decidable-Poset = ℤ-Poset
+pr2 ℤ-Decidable-Poset = is-decidable-leq-ℤ
+
+ℤ-Total-Preorder : Total-Preorder lzero lzero
+pr1 ℤ-Total-Preorder = ℤ-Preorder
+pr2 ℤ-Total-Preorder x y = unit-trunc-Prop (linear-leq-ℤ x y)
+
+ℤ-Decidable-Total-Preorder : Decidable-Total-Preorder lzero lzero
+pr1 ℤ-Decidable-Total-Preorder = ℤ-Preorder
+pr1 (pr2 ℤ-Decidable-Total-Preorder) x y = unit-trunc-Prop (linear-leq-ℤ x y)
+pr2 (pr2 ℤ-Decidable-Total-Preorder) = is-decidable-leq-ℤ
+
+ℤ-Total-Order : Total-Order lzero lzero
+pr1 ℤ-Total-Order = ℤ-Poset
+pr2 ℤ-Total-Order x y = unit-trunc-Prop (linear-leq-ℤ x y)
+
+ℤ-Decidable-Total-Order : Decidable-Total-Order lzero lzero
+pr1 ℤ-Decidable-Total-Order = ℤ-Poset
+pr1 (pr2 ℤ-Decidable-Total-Order) x y = unit-trunc-Prop (linear-leq-ℤ x y)
+pr2 (pr2 ℤ-Decidable-Total-Order) = is-decidable-leq-ℤ
 ```
 
 ### Chaining rules for equality and inequality
@@ -145,6 +209,87 @@ concatenate-leq-eq-ℤ x H refl = H
 concatenate-eq-leq-ℤ :
   {x x' : ℤ} (y : ℤ) → x' ＝ x → leq-ℤ x y → leq-ℤ x' y
 concatenate-eq-leq-ℤ y refl H = H
+```
+
+### An integer is lesser than its successor
+
+```agda
+succ-leq-ℤ : (k : ℤ) → leq-ℤ k (succ-ℤ k)
+succ-leq-ℤ k =
+  is-nonnegative-eq-ℤ
+    ( inv
+      ( ( left-successor-law-add-ℤ k (neg-ℤ k)) ∙
+        ( ap succ-ℤ (right-inverse-law-add-ℤ k))))
+    ( star)
+
+leq-succ-leq-ℤ : (k l : ℤ) → leq-ℤ k l → leq-ℤ k (succ-ℤ l)
+leq-succ-leq-ℤ k l = transitive-leq-ℤ k l (succ-ℤ l) (succ-leq-ℤ l)
+```
+
+### The inductively defined inequality on the integers is valued in propositions
+
+```agda
+contradiction-inductive-leq-ℤ :
+  (x y : ℤ) (p : x ＝ succ-ℤ y) → ¬ (inductive-leq-ℤ x y)
+contradiction-inductive-leq-ℤ x .x p (refl-inductive-leq-ℤ .x) =
+  has-no-fixed-points-succ-ℤ x (inv p)
+contradiction-inductive-leq-ℤ x .(succ-ℤ b) p (succ-inductive-leq-ℤ .x b H) = {!!}
+
+all-elements-equal-inductive-leq-ℤ :
+  (x y z : ℤ) (p : y ＝ z) (H : inductive-leq-ℤ x y) (K : inductive-leq-ℤ x z) →
+  tr (inductive-leq-ℤ x) p H ＝ K
+all-elements-equal-inductive-leq-ℤ x .x .x p
+  ( refl-inductive-leq-ℤ .x)
+  ( refl-inductive-leq-ℤ .x) =
+  ap
+    ( λ t → tr (inductive-leq-ℤ x) t (refl-inductive-leq-ℤ x))
+    ( eq-is-prop (is-set-ℤ x x) {p} {refl})
+all-elements-equal-inductive-leq-ℤ x .x ._ p
+  ( refl-inductive-leq-ℤ .x)
+  ( succ-inductive-leq-ℤ .x b K) = {!!}
+all-elements-equal-inductive-leq-ℤ x .(succ-ℤ b) .x p (succ-inductive-leq-ℤ .x b H) (refl-inductive-leq-ℤ .x) = {!!}
+all-elements-equal-inductive-leq-ℤ x .(succ-ℤ b) .(succ-ℤ b₁) p (succ-inductive-leq-ℤ .x b H) (succ-inductive-leq-ℤ .x b₁ K) = {!!}
+```
+
+### Inequality on the integers is equivalent to the inductively defined inequality on the integers
+
+```agda
+leq-inductive-leq-ℤ :
+  (a b : ℤ) → inductive-leq-ℤ a b → a ≤-ℤ b
+leq-inductive-leq-ℤ a .a (refl-inductive-leq-ℤ .a) =
+  refl-leq-ℤ a
+leq-inductive-leq-ℤ a .(succ-ℤ b) (succ-inductive-leq-ℤ .a b H) =
+  leq-succ-leq-ℤ a b (leq-inductive-leq-ℤ a b H)
+
+inductive-leq-leq-ℤ' :
+  (a b c : ℤ) (p : diff-ℤ b a ＝ c) → is-nonnegative-ℤ c → inductive-leq-ℤ a b
+inductive-leq-leq-ℤ' a b (inr (inl star)) p H =
+  refl-inductive-leq-ℤ' a b (inv (eq-diff-ℤ p))
+inductive-leq-leq-ℤ' a b (inr (inr zero-ℕ)) p star =
+  succ-inductive-leq-ℤ' a a b
+    ( is-left-add-one-succ-ℤ a ∙
+      ap (_+ℤ a) (inv p) ∙
+      is-section-right-add-neg-ℤ a b)
+    ( refl-inductive-leq-ℤ a)
+inductive-leq-leq-ℤ' a b (inr (inr (succ-ℕ x))) p star =
+  succ-inductive-leq-ℤ' a
+    ( a +ℤ inr (inr x))
+    ( b)
+    ( inv (right-successor-law-add-ℤ a (inr (inr x))) ∙
+      ap (a +ℤ_) (inv p) ∙
+      commutative-add-ℤ a (diff-ℤ b a) ∙
+      is-section-right-add-neg-ℤ a b)
+    ( inductive-leq-leq-ℤ' a
+      ( a +ℤ inr (inr x))
+      ( inr (inr x))
+      ( commutative-add-ℤ (a +ℤ inr (inr x)) (neg-ℤ a) ∙
+        is-retraction-left-add-neg-ℤ a (inr (inr x)))
+      ( star))
+
+inductive-leq-leq-ℤ :
+  (a b : ℤ) → a ≤-ℤ b → inductive-leq-ℤ a b
+inductive-leq-leq-ℤ a b =
+  inductive-leq-leq-ℤ' a b (diff-ℤ b a) refl
 ```
 
 ### Addition on the integers preserves inequality
@@ -266,7 +411,9 @@ inv-transpose-right-summand-leq-ℤ' a b c H =
 
 ### The operation taking integers to their negatives reverses their order
 
-**Proof.** If `a ≤ b`, then `b - a` is nonnegative. Note that `b - a ＝ (-a) - (-b)`, which is therefore also nonnegative, implying that `-b ≤ -a`.
+**Proof.** If `a ≤ b`, then `b - a` is nonnegative. Note that
+`b - a ＝ (-a) - (-b)`, which is therefore also nonnegative, implying that
+`-b ≤ -a`.
 
 ```agda
 reverses-order-neg-ℤ :
@@ -306,17 +453,6 @@ transpose-left-neg-leq-ℤ a b H =
   reversely-reflects-order-neg-ℤ b
     ( neg-ℤ a)
     ( concatenate-leq-eq-ℤ (neg-ℤ b) H (inv (neg-neg-ℤ a)))
-```
-
-### The partially ordered set of integers ordered by inequality
-
-```agda
-ℤ-Preorder : Preorder lzero lzero
-ℤ-Preorder =
-  (ℤ , leq-ℤ-Prop , refl-leq-ℤ , transitive-leq-ℤ)
-
-ℤ-Poset : Poset lzero lzero
-ℤ-Poset = (ℤ-Preorder , λ x y → antisymmetric-leq-ℤ)
 ```
 
 ### An integer `x` is nonnegative if and only if `0 ≤ x`
@@ -390,6 +526,15 @@ module _
           ( zero-ℤ)
           ( leq-zero-is-nonpositive-ℤ y H)
           ( I))
+```
+
+### A positive integer is greater than or equal to `0`
+
+```agda
+leq-zero-is-positive-ℤ :
+  (x : ℤ) → is-positive-ℤ x → zero-ℤ ≤-ℤ x
+leq-zero-is-positive-ℤ x H =
+  leq-zero-is-nonnegative-ℤ x (is-nonnegative-is-positive-ℤ H)
 ```
 
 ## See also

@@ -8,6 +8,7 @@ module elementary-number-theory.squares-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.bounded-divisibility-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.distance-natural-numbers
@@ -17,6 +18,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.pronic-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -126,6 +128,12 @@ square-succ-succ-ℕ n =
           ( add-ℕ' 4)
           ( ( inv (associative-add-ℕ (2 *ℕ n) (0 +ℕ n) n)) ∙
             ( inv (ap (add-ℕ' n) (associative-add-ℕ (2 *ℕ n) 0 n)))))
+
+square-succ-succ-ℕ' :
+  (n : ℕ) → square-ℕ (succ-ℕ (succ-ℕ n)) ＝ square-ℕ n +ℕ 4 *ℕ (n +ℕ 1)
+square-succ-succ-ℕ' n =
+  square-succ-succ-ℕ n ∙
+  ap (square-ℕ n +ℕ_) (inv (left-distributive-mul-add-ℕ 4 n 1))
 ```
 
 ### The square function is order preserving
@@ -457,7 +465,7 @@ is-1-mod-8-square-has-odd-expansion-ℕ ._ (k , refl) =
     ( preserves-div-mul-ℕ 4 2 4
       ( k *ℕ (k +ℕ 1))
       ( refl-div-ℕ 4)
-      ( is-even-mul-succ-ℕ k))
+      ( is-even-pronic-number-ℕ k))
 
 is-1-mod-8-square-is-odd-ℕ :
   (n : ℕ) → is-odd-ℕ n → square-ℕ n ≡ 1 mod-ℕ 8
@@ -479,6 +487,50 @@ cong-8-square-odd-number-ℕ m n H K =
     ( square-ℕ n)
     ( symmetric-cong-ℕ 8 (square-ℕ n) 1 (is-1-mod-8-square-is-odd-ℕ n K))
     ( is-1-mod-8-square-is-odd-ℕ m H)
+```
+
+### Squaring preserves divisibility
+
+```agda
+module _
+  (m n : ℕ) (H : div-ℕ m n)
+  where
+
+  quotient-div-square-ℕ : ℕ
+  quotient-div-square-ℕ = square-ℕ (quotient-div-ℕ m n H)
+
+  upper-bound-quotient-div-square-ℕ :
+    quotient-div-square-ℕ ≤-ℕ square-ℕ n
+  upper-bound-quotient-div-square-ℕ =
+    preserves-order-square-ℕ
+      ( quotient-div-ℕ m n H)
+      ( n)
+      ( upper-bound-quotient-div-ℕ m n H)
+
+  eq-quotient-div-square-ℕ :
+    quotient-div-square-ℕ *ℕ square-ℕ m ＝ square-ℕ n
+  eq-quotient-div-square-ℕ =
+    inv (distributive-square-mul-ℕ (quotient-div-ℕ m n H) m) ∙
+    ap square-ℕ (eq-quotient-div-ℕ m n H)
+
+  bounded-div-square-ℕ : bounded-div-ℕ (square-ℕ m) (square-ℕ n)
+  pr1 bounded-div-square-ℕ = quotient-div-square-ℕ
+  pr1 (pr2 bounded-div-square-ℕ) = upper-bound-quotient-div-square-ℕ
+  pr2 (pr2 bounded-div-square-ℕ) = eq-quotient-div-square-ℕ
+
+  preserves-div-square-ℕ : div-ℕ (square-ℕ m) (square-ℕ n)
+  pr1 preserves-div-square-ℕ = quotient-div-square-ℕ
+  pr2 preserves-div-square-ℕ = eq-quotient-div-square-ℕ
+
+  compute-quotient-div-square-ℕ :
+    (K : div-ℕ (square-ℕ m) (square-ℕ n)) →
+    quotient-div-ℕ (square-ℕ m) (square-ℕ n) K ＝ quotient-div-square-ℕ
+  compute-quotient-div-square-ℕ K =
+    compute-quotient-bounded-div-ℕ
+      ( refl)
+      ( refl)
+      ( bounded-div-div-ℕ (square-ℕ m) (square-ℕ n) K)
+      ( bounded-div-square-ℕ)
 ```
 
 ## See also

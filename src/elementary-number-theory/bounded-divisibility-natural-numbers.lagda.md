@@ -224,6 +224,21 @@ pr1 (pr2 (bounded-div-ℕ-Decidable-Prop k n)) = is-prop-bounded-div-ℕ k n
 pr2 (pr2 (bounded-div-ℕ-Decidable-Prop k n)) = is-decidable-bounded-div-ℕ k n
 ```
 
+### The quotient of two numbers by any two proofs bounded divisibility are the same
+
+```agda
+compute-quotient-bounded-div-ℕ :
+  {m m' n n' : ℕ} (q : m ＝ m') (p : n ＝ n')
+  (H : bounded-div-ℕ m n) (K : bounded-div-ℕ m' n') →
+  quotient-bounded-div-ℕ m n H ＝ quotient-bounded-div-ℕ m' n' K
+compute-quotient-bounded-div-ℕ refl refl H K =
+  ap
+    ( quotient-bounded-div-ℕ _ _)
+    { H}
+    { K}
+    ( eq-is-prop (is-prop-bounded-div-ℕ _ _))
+```
+
 ### `0` is bounded divisible by any natural number
 
 ```agda

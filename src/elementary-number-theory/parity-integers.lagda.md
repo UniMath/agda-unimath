@@ -12,12 +12,15 @@ open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.difference-integers
 open import elementary-number-theory.divisibility-integers
+open import elementary-number-theory.inequality-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
+open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.unit-similarity-integers
 
+open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -357,17 +360,26 @@ has-odd-expansion-neg-one-ℤ : has-odd-expansion-ℤ neg-one-ℤ
 pr1 has-odd-expansion-neg-one-ℤ = neg-one-ℤ
 pr2 has-odd-expansion-neg-one-ℤ = refl
 
+is-even-integer-below-ℤ :
+  (a b : ℤ) → UU lzero
+is-even-integer-below-ℤ a b = is-even-ℤ b × (b ≤-ℤ a)
+
+is-decidable-is-even-integer-below-ℤ :
+  (a b : ℤ) → is-decidable (is-even-integer-below-ℤ a b)
+is-decidable-is-even-integer-below-ℤ a b =
+  is-decidable-product (is-decidable-is-even-ℤ b) (is-decidable-leq-ℤ b a)
+
+instance-even-integer-below-ℤ :
+  (a : ℤ) → Σ ℤ (is-even-integer-below-ℤ a)
+instance-even-integer-below-ℤ (inl x) = {!!}
+instance-even-integer-below-ℤ (inr (inl x)) =
+  ( zero-ℤ , is-even-zero-ℤ , refl-leq-ℤ zero-ℤ)
+instance-even-integer-below-ℤ (inr (inr x)) =
+  ( zero-ℤ , is-even-zero-ℤ , leq-zero-is-positive-ℤ (inr (inr x)) star)
+
 has-odd-expansion-is-odd-ℤ :
   (a : ℤ) → is-odd-ℤ a → has-odd-expansion-ℤ a
-has-odd-expansion-is-odd-ℤ (inl zero-ℕ) H =
-  has-odd-expansion-neg-one-ℤ
-has-odd-expansion-is-odd-ℤ (inl (succ-ℕ zero-ℕ)) H =
-  ex-falso (H (neg-one-ℤ , refl))
-has-odd-expansion-is-odd-ℤ (inl (succ-ℕ (succ-ℕ a))) H =
-  {!!}
-  where
-  t = has-odd-expansion-is-odd-ℤ (inl a) {!!}
-has-odd-expansion-is-odd-ℤ (inr a) H = {!!}
+has-odd-expansion-is-odd-ℤ a H = {!!}
 ```
 
 ```text
