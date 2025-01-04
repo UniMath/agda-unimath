@@ -93,8 +93,8 @@ compute-decons-ℕ∞ x | inr q = refl
 ```agda
 coit-ℕ∞ : {l : Level} {A : UU l} → (A → Maybe A) → A → ℕ∞
 decons-ℕ∞ (coit-ℕ∞ f x) with f x
-decons-ℕ∞ (coit-ℕ∞ f x) | (inl a) = unit-Maybe (coit-ℕ∞ f a)
-decons-ℕ∞ (coit-ℕ∞ f x) | (inr _) = exception-Maybe
+decons-ℕ∞ (coit-ℕ∞ f x) | inl a = unit-Maybe (coit-ℕ∞ f a)
+decons-ℕ∞ (coit-ℕ∞ f x) | inr _ = exception-Maybe
 ```
 
 ### The corecursor function for conatural numbers
@@ -102,7 +102,7 @@ decons-ℕ∞ (coit-ℕ∞ f x) | (inr _) = exception-Maybe
 ```agda
 corec-ℕ∞ : {l : Level} {A : UU l} → (A → ℕ∞ + Maybe A) → A → ℕ∞
 decons-ℕ∞ (corec-ℕ∞ f x) with f x
-decons-ℕ∞ (corec-ℕ∞ f x) | (inl q) = unit-Maybe q
+decons-ℕ∞ (corec-ℕ∞ f x) | inl q = unit-Maybe q
 decons-ℕ∞ (corec-ℕ∞ f x) | inr (inl a) = unit-Maybe (corec-ℕ∞ f a)
 decons-ℕ∞ (corec-ℕ∞ f x) | inr (inr *) = inr *
 ```
