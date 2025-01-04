@@ -27,6 +27,7 @@ open import elementary-number-theory.cofibonacci public
 open import elementary-number-theory.collatz-bijection public
 open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.commutative-semiring-of-natural-numbers public
+open import elementary-number-theory.conatural-numbers public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions public
