@@ -1,5 +1,9 @@
 # Elementary number theory
 
+```agda
+{-# OPTIONS --guardedness #-}
+```
+
 ## Modules in the elementary number theory namespace
 
 ```agda
