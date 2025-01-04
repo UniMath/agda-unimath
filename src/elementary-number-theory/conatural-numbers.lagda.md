@@ -83,7 +83,7 @@ decons-ℕ∞' : ℕ∞ → Maybe ℕ∞
 decons-ℕ∞' x = rec-coproduct inl inr (decons-ℕ∞ x)
 
 compute-decons-ℕ∞ : decons-ℕ∞' ~ decons-ℕ∞
-compute-decons-ℕ∞ x with (decons-ℕ∞ x)
+compute-decons-ℕ∞ x with decons-ℕ∞ x
 compute-decons-ℕ∞ x | inl q = refl
 compute-decons-ℕ∞ x | inr q = refl
 ```

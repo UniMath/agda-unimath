@@ -68,18 +68,18 @@ is-positive-infinity-ℕ∞ = is-positive-succ-ℕ∞ infinity-ℕ∞
 
 ```agda
 is-decidable-is-positive-ℕ∞ : (x : ℕ∞) → is-decidable (is-positive-ℕ∞ x)
-is-decidable-is-positive-ℕ∞ x with (decons-ℕ∞ x)
-is-decidable-is-positive-ℕ∞ x | (inl y) = inl (is-positive-succ-ℕ∞ y)
-is-decidable-is-positive-ℕ∞ x | (inr _) = inr is-not-positive-zero-ℕ∞
+is-decidable-is-positive-ℕ∞ x with decons-ℕ∞ x
+is-decidable-is-positive-ℕ∞ x | inl y = inl (is-positive-succ-ℕ∞ y)
+is-decidable-is-positive-ℕ∞ x | inr _ = inr is-not-positive-zero-ℕ∞
 ```
 
 ### A conatural number is positive if and only if it is nonzero
 
 ```agda
 is-positive-is-not-zero-ℕ∞ : (x : ℕ∞) → ¬ (is-zero-ℕ∞ x) → is-positive-ℕ∞ x
-is-positive-is-not-zero-ℕ∞ x H with (decons-ℕ∞ x)
-is-positive-is-not-zero-ℕ∞ x H | (inl y) = y , refl
-is-positive-is-not-zero-ℕ∞ x H | (inr *) = ex-falso (H refl)
+is-positive-is-not-zero-ℕ∞ x H with decons-ℕ∞ x
+is-positive-is-not-zero-ℕ∞ x H | inl y = y , refl
+is-positive-is-not-zero-ℕ∞ x H | inr * = ex-falso (H refl)
 
 is-not-zero-is-positive-ℕ∞ : (x : ℕ∞) → is-positive-ℕ∞ x → ¬ (is-zero-ℕ∞ x)
 is-not-zero-is-positive-ℕ∞ x = is-not-exception-is-value-Maybe (decons-ℕ∞ x)
