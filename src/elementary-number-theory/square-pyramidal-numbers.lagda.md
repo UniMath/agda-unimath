@@ -64,7 +64,7 @@ $$
 In order to prove this, we first show that the sequence $a_n := n(n+1)(2n+1)$ satisfies the recurrence
 
 $$
-  a_{n+1} = a(n) + 6(n+1)^2.
+  a_{n+1} = a_n + 6(n+1)^2.
 $$
 
 By this recurrence it follows that each $a_n$ is [divisible](elementary-number-theory.divisibility-natural-numbers.md) by $6$, and that $a_n$ is $6$ times the $n$th pyramidal number.
