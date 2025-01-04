@@ -139,6 +139,10 @@ neq-zero-succ-ℕ∞ x p = is-not-exception-unit-Maybe x (ap decons-ℕ∞ p)
 neq-zero-infinity-ℕ∞ : infinity-ℕ∞ ≠ zero-ℕ∞
 neq-zero-infinity-ℕ∞ p =
   is-not-exception-unit-Maybe infinity-ℕ∞ (ap decons-ℕ∞ p)
+
+neq-infinity-zero-ℕ∞ : zero-ℕ∞ ≠ infinity-ℕ∞
+neq-infinity-zero-ℕ∞ =
+  is-symmetric-nonequal infinity-ℕ∞ zero-ℕ∞ neq-zero-infinity-ℕ∞
 ```
 
 ### The constructor function is a section of the deconstructor
