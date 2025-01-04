@@ -73,6 +73,7 @@ open import elementary-number-theory.inequality-integers public
 open import elementary-number-theory.inequality-natural-numbers public
 open import elementary-number-theory.inequality-rational-numbers public
 open import elementary-number-theory.inequality-standard-finite-types public
+open import elementary-number-theory.infinite-conatural-numbers public
 open import elementary-number-theory.infinitude-of-primes public
 open import elementary-number-theory.initial-segments-natural-numbers public
 open import elementary-number-theory.integer-fractions public
@@ -119,6 +120,7 @@ open import elementary-number-theory.peano-arithmetic public
 open import elementary-number-theory.pisano-periods public
 open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
 open import elementary-number-theory.positive-and-negative-integers public
+open import elementary-number-theory.positive-conatural-numbers public
 open import elementary-number-theory.positive-integer-fractions public
 open import elementary-number-theory.positive-integers public
 open import elementary-number-theory.positive-rational-numbers public
@@ -165,4 +167,5 @@ open import elementary-number-theory.universal-property-natural-numbers public
 open import elementary-number-theory.upper-bounds-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public
+open import elementary-number-theory.zero-conatural-numbers public
 ```
