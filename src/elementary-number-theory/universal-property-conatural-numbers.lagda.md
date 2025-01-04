@@ -1,0 +1,51 @@
+# The universal property of the conatural numbers
+
+```agda
+module elementary-number-theory.universal-property-conatural-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.coalgebras-maybe
+open import foundation.contractible-types
+open import foundation.morphisms-coalgebras-maybe
+open import foundation.universe-levels
+```
+
+</details>
+
+## Idea
+
+The [conatural numbers](elementary-number-theory.conatural-numbers.md) `ℕ∞`
+enjoys many universal properties, among others:
+
+1. It is the one-point compactification of the
+   [natural numbers](elementary-number-theory.natural-numbers.md).
+2. It classifies downward-stable subsets of the natural numbers.
+3. It is the final coalgebra of the [maybe monad](foundation.maybe.md).
+
+On this page we consider the last of these. Thus, a `Maybe`-coalgebra
+`X → Maybe X` satisfies the
+{{#concept "universal property of the conatural numbers" Agda=universal-property-ℕ∞}}
+if the
+
+## Definitions
+
+### The universal property of the conatural numbers at a universe level
+
+```agda
+universal-property-conatural-numbers-Level :
+  {l1 : Level} → coalgebra-Maybe l1 → (l : Level) → UU (l1 ⊔ lsuc l)
+universal-property-conatural-numbers-Level N∞ l =
+  (X : coalgebra-Maybe l) → is-contr (hom-coalgebra-Maybe X N∞)
+```
+
+### The universal property of the conatural numbers at a universe level
+
+```agda
+universal-property-conatural-numbers :
+  {l1 : Level} → coalgebra-Maybe l1 → UUω
+universal-property-conatural-numbers N∞ =
+  {l : Level} → universal-property-conatural-numbers-Level N∞ l
+```

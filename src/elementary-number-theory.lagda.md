@@ -162,6 +162,7 @@ open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.type-arithmetic-natural-numbers public
 open import elementary-number-theory.unit-elements-standard-finite-types public
 open import elementary-number-theory.unit-similarity-standard-finite-types public
+open import elementary-number-theory.universal-property-conatural-numbers public
 open import elementary-number-theory.universal-property-integers public
 open import elementary-number-theory.universal-property-natural-numbers public
 open import elementary-number-theory.upper-bounds-natural-numbers public
