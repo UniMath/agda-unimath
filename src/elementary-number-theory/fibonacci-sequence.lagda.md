@@ -8,16 +8,19 @@ module elementary-number-theory.fibonacci-sequence where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.relatively-prime-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.transport-along-identifications
+open import foundation.unit-type
 ```
 
 </details>
@@ -226,8 +229,91 @@ preserves-div-Fibonacci-ℕ m n H =
   div-Fibonacci-div-ℕ (Fibonacci-ℕ m) m n H (refl-div-ℕ (Fibonacci-ℕ m))
 ```
 
+### LeVeque's strict bound on the growth of the Fibonacci numbers
+
+The $n$th Fibonacci number is always strictly less than $(\frac{7}{4})^n$. This claim appears on pages 7 and 8 in section 1.2 of {{#cite "Leveque12volI"}} as an example of a proof by induction.
+
+**Proof.** We will show by induction that $4^n F(n) < 7^n$. In the base case the claim reduces to the strict inequality $0 < 1$, which is true. Furthermore, we have that $4 F(1) = 4 < 7$. For the inductive step, assume that $4^n F(n) < 7^n$ and that $4^{n+1} F(n+1) < 7^{n+1}$. Then we have
+
+$$
+  4^{n+2} F(n+2) = 4^{n+2} F(n+1) + 4^{n+2} F(n) < 4\cdot 7^{n+1} + 4^2\cdot 7^n = 44\cdot 7^n < 7^{n+2}.
+$$
+
+```agda
+leveque-strict-bound-Fibonacci-ℕ :
+  (n : ℕ) → exp-ℕ 4 n *ℕ Fibonacci-ℕ n <-ℕ exp-ℕ 7 n
+leveque-strict-bound-Fibonacci-ℕ zero-ℕ = star
+leveque-strict-bound-Fibonacci-ℕ (succ-ℕ zero-ℕ) = star
+leveque-strict-bound-Fibonacci-ℕ (succ-ℕ (succ-ℕ n)) =
+  concatenate-eq-le-ℕ
+    { exp-ℕ 4 (n +ℕ 2) *ℕ Fibonacci-ℕ (n +ℕ 2)}
+    { 4 *ℕ (exp-ℕ 4 (n +ℕ 1) *ℕ Fibonacci-ℕ (n +ℕ 1)) +ℕ
+      16 *ℕ (exp-ℕ 4 n *ℕ Fibonacci-ℕ n)}
+    { exp-ℕ 7 (n +ℕ 2)}
+    ( ( left-distributive-mul-add-ℕ
+        ( exp-ℕ 4 (n +ℕ 2))
+        ( Fibonacci-ℕ (succ-ℕ n))
+        ( Fibonacci-ℕ n)) ∙
+      ( ap-add-ℕ
+        ( ( ap
+            ( _*ℕ Fibonacci-ℕ (succ-ℕ n))
+            ( commutative-mul-ℕ (exp-ℕ 4 (n +ℕ 1)) 4)) ∙
+          ( associative-mul-ℕ 4 (exp-ℕ 4 (n +ℕ 1)) (Fibonacci-ℕ (succ-ℕ n))))
+        ( ( ap
+            ( _*ℕ Fibonacci-ℕ n)
+            ( ( associative-mul-ℕ (exp-ℕ 4 n) 4 4) ∙
+              ( commutative-mul-ℕ (exp-ℕ 4 n) 16))) ∙
+          ( associative-mul-ℕ 16 (exp-ℕ 4 n) (Fibonacci-ℕ n)))))
+    ( concatenate-le-eq-le-ℕ
+      ( 4 *ℕ (exp-ℕ 4 (n +ℕ 1) *ℕ Fibonacci-ℕ (succ-ℕ n)) +ℕ
+        16 *ℕ (exp-ℕ 4 n *ℕ Fibonacci-ℕ n))
+      ( 4 *ℕ exp-ℕ 7 (succ-ℕ n) +ℕ 16 *ℕ exp-ℕ 7 n)
+      ( 44 *ℕ exp-ℕ 7 n)
+      ( exp-ℕ 7 (n +ℕ 2))
+      ( preserves-strict-order-add-ℕ
+        ( 4 *ℕ (exp-ℕ 4 (n +ℕ 1) *ℕ Fibonacci-ℕ (succ-ℕ n)))
+        ( 4 *ℕ exp-ℕ 7 (succ-ℕ n))
+        ( 16 *ℕ (exp-ℕ 4 n *ℕ Fibonacci-ℕ n))
+        ( 16 *ℕ exp-ℕ 7 n)
+        ( preserves-strict-order-left-mul-ℕ 4
+          ( exp-ℕ 4 (n +ℕ 1) *ℕ Fibonacci-ℕ (succ-ℕ n))
+          ( exp-ℕ 7 (succ-ℕ n))
+          ( is-nonzero-succ-ℕ 3)
+          ( leveque-strict-bound-Fibonacci-ℕ (succ-ℕ n)))
+        ( preserves-strict-order-left-mul-ℕ 16
+          ( exp-ℕ 4 n *ℕ Fibonacci-ℕ n)
+          ( exp-ℕ 7 n)
+          ( is-nonzero-succ-ℕ 15)
+          ( leveque-strict-bound-Fibonacci-ℕ n)))
+      ( ( ap-add-ℕ
+          { 4 *ℕ exp-ℕ 7 (succ-ℕ n)}
+          { 16 *ℕ exp-ℕ 7 n}
+          { 28 *ℕ exp-ℕ 7 n}
+          { 16 *ℕ exp-ℕ 7 n}
+          ( ( ap (4 *ℕ_) (commutative-mul-ℕ (exp-ℕ 7 n) 7)) ∙
+            ( inv (associative-mul-ℕ 4 7 (exp-ℕ 7 n))))
+          ( refl)) ∙
+        ( inv (right-distributive-mul-add-ℕ 28 16 (exp-ℕ 7 n))))
+      ( concatenate-le-eq-ℕ
+        { 44 *ℕ exp-ℕ 7 n}
+        { 49 *ℕ exp-ℕ 7 n}
+        { exp-ℕ 7 (n +ℕ 2)}
+        ( preserves-strict-order-right-mul-ℕ
+          ( exp-ℕ 7 n)
+          ( 44)
+          ( 49)
+          ( is-nonzero-exp-ℕ 7 n (is-nonzero-succ-ℕ 6))
+          ( star))
+        ( ( commutative-mul-ℕ 49 (exp-ℕ 7 n)) ∙
+          ( inv (associative-mul-ℕ (exp-ℕ 7 n) 7 7)))))
+```
+
 ## External links
 
 - [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence) at
   Wikipedia
 - [A000045](https://oeis.org/A000045) in the OEIS
+
+## References
+
+{{#bibliography}}

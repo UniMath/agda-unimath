@@ -144,6 +144,11 @@ transitive-le-ℕ : (n m l : ℕ) → (le-ℕ n m) → (le-ℕ m l) → (le-ℕ 
 transitive-le-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ l) p q = star
 transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-le-ℕ n m l p q
+
+concatenate-le-eq-le-ℕ :
+  (a b c d : ℕ) → a <-ℕ b → b ＝ c → c <-ℕ d → a <-ℕ d
+concatenate-le-eq-le-ℕ a b .b d H refl K =
+  transitive-le-ℕ a b d H K
 ```
 
 ### A sharper variant of transitivity
@@ -420,4 +425,65 @@ preserves-strict-order-mul-ℕ (succ-ℕ a) (succ-ℕ b) (succ-ℕ c) (succ-ℕ 
         ( H))
       ( K))
     ( inv (double-successor-law-mul-ℕ b d))
+```
+
+### Multiplication by a nonzero natural number on the left or right is strictly order preserving
+
+```agda
+preserves-strict-order-left-mul-succ-ℕ :
+  (k x y : ℕ) → x <-ℕ y → succ-ℕ k *ℕ x <-ℕ succ-ℕ k *ℕ y
+preserves-strict-order-left-mul-succ-ℕ zero-ℕ x y H =
+  concatenate-eq-le-eq-ℕ (left-unit-law-mul-ℕ x) H (inv (left-unit-law-mul-ℕ y))
+preserves-strict-order-left-mul-succ-ℕ (succ-ℕ k) x y H =
+  concatenate-eq-le-eq-ℕ
+    ( left-successor-law-mul-ℕ (succ-ℕ k) x)
+    ( preserves-strict-order-add-ℕ
+      ( succ-ℕ k *ℕ x)
+      ( succ-ℕ k *ℕ y)
+      ( x)
+      ( y)
+      ( preserves-strict-order-left-mul-succ-ℕ k x y H)
+      ( H))
+    ( inv (left-successor-law-mul-ℕ (succ-ℕ k) y))
+
+preserves-strict-order-left-mul-is-successor-ℕ :
+  (k x y : ℕ) → is-successor-ℕ k → x <-ℕ y → k *ℕ x <-ℕ k *ℕ y
+preserves-strict-order-left-mul-is-successor-ℕ .(succ-ℕ l) x y (l , refl) =
+  preserves-strict-order-left-mul-succ-ℕ l x y
+
+preserves-strict-order-left-mul-ℕ :
+  (k x y : ℕ) → is-nonzero-ℕ k → x <-ℕ y → k *ℕ x <-ℕ k *ℕ y
+preserves-strict-order-left-mul-ℕ k x y H =
+  preserves-strict-order-left-mul-is-successor-ℕ k x y
+    ( is-successor-is-nonzero-ℕ H)
+
+preserves-strict-order-right-mul-succ-ℕ :
+  (k x y : ℕ) → x <-ℕ y → x *ℕ succ-ℕ k <-ℕ y *ℕ succ-ℕ k
+preserves-strict-order-right-mul-succ-ℕ zero-ℕ x y H =
+  concatenate-eq-le-eq-ℕ
+    ( right-unit-law-mul-ℕ x)
+    ( H)
+    ( inv (right-unit-law-mul-ℕ y))
+preserves-strict-order-right-mul-succ-ℕ (succ-ℕ k) x y H =
+  concatenate-eq-le-eq-ℕ
+    ( right-successor-law-mul-ℕ x (succ-ℕ k))
+    ( preserves-strict-order-add-ℕ
+      ( x *ℕ succ-ℕ k)
+      ( y *ℕ succ-ℕ k)
+      ( x)
+      ( y)
+      ( preserves-strict-order-right-mul-succ-ℕ k x y H)
+      ( H))
+    ( inv (right-successor-law-mul-ℕ y (succ-ℕ k)))
+
+preserves-strict-order-right-mul-is-successor-ℕ :
+  (k x y : ℕ) → is-successor-ℕ k → x <-ℕ y → x *ℕ k <-ℕ y *ℕ k
+preserves-strict-order-right-mul-is-successor-ℕ .(succ-ℕ l) x y (l , refl) =
+  preserves-strict-order-right-mul-succ-ℕ l x y
+
+preserves-strict-order-right-mul-ℕ :
+  (k x y : ℕ) → is-nonzero-ℕ k → x <-ℕ y → x *ℕ k <-ℕ y *ℕ k
+preserves-strict-order-right-mul-ℕ k x y H =
+  preserves-strict-order-right-mul-is-successor-ℕ k x y
+    ( is-successor-is-nonzero-ℕ H)
 ```
