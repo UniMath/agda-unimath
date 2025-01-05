@@ -60,7 +60,11 @@ le-one-Π-ℕ :
   (k : ℕ) (f : Fin k → ℕ) →
   0 <-ℕ k → ((i : Fin k) → 1 <-ℕ f i) → 1 <-ℕ Π-ℕ k f
 le-one-Π-ℕ (succ-ℕ zero-ℕ) f H K =
-  concatenate-le-eq-ℕ (K (inr star)) (inv (unit-law-Π-ℕ f (inr star)))
+  concatenate-le-eq-ℕ 1
+    ( f (inr star))
+    ( Π-ℕ 1 f)
+    ( K (inr star))
+    ( inv (unit-law-Π-ℕ f (inr star)))
 le-one-Π-ℕ (succ-ℕ (succ-ℕ k)) f H K =
   le-one-mul-ℕ
     ( Π-ℕ (succ-ℕ k) (f ∘ inl))

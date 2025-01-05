@@ -97,6 +97,20 @@ square-succ-ℕ n =
   square-succ-ℕ' n ∙ ap succ-ℕ (right-distributive-mul-add-ℕ n 2 n)
 ```
 
+### Squares of nonzero numbers are nonzero
+
+```agda
+is-nonzero-square-is-successor-ℕ :
+  (n : ℕ) → is-successor-ℕ n → is-nonzero-ℕ (square-ℕ n)
+is-nonzero-square-is-successor-ℕ ._ (n , refl) =
+  is-nonzero-is-successor-ℕ ((n +ℕ 2) *ℕ n , square-succ-ℕ' n)
+
+is-nonzero-square-is-nonzero-ℕ :
+  (n : ℕ) → is-nonzero-ℕ n → is-nonzero-ℕ (square-ℕ n)
+is-nonzero-square-is-nonzero-ℕ n H =
+  is-nonzero-square-is-successor-ℕ n (is-successor-is-nonzero-ℕ H)
+```
+
 ### Squares of double successors
 
 For any `n` we have `(n + 2)² ＝ n² + 4n + 4`
@@ -180,6 +194,11 @@ reflects-strict-order-square-ℕ m n H =
         ( square-ℕ n)
         ( H)
         ( preserves-order-square-ℕ n m K))
+
+le-zero-le-zero-square-ℕ :
+  (n : ℕ) → 0 <-ℕ square-ℕ n → 0 <-ℕ n
+le-zero-le-zero-square-ℕ n =
+  reflects-strict-order-square-ℕ 0 n
 ```
 
 ### Squares distribute over multiplication
@@ -248,7 +267,9 @@ strict-lower-bound-square-ℕ :
 strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ zero-ℕ)) H = star
 strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ (succ-ℕ n))) H =
   concatenate-le-eq-ℕ
-    { n +ℕ 3}
+    ( n +ℕ 3)
+    ( (n +ℕ 4) *ℕ (n +ℕ 2) +ℕ 1)
+    ( square-ℕ (n +ℕ 3))
     ( transitive-le-ℕ
       ( n +ℕ 2)
       ( square-ℕ (n +ℕ 2))
@@ -260,7 +281,7 @@ strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ (succ-ℕ n))) H =
         ( square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2) +ℕ (n +ℕ 2))
         ( le-add-succ-ℕ (square-ℕ (n +ℕ 2)) (n +ℕ 1))
         ( le-add-succ-ℕ (square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2)) (n +ℕ 1))))
-    ( inv (square-succ-ℕ' (succ-ℕ (succ-ℕ n))))
+    ( inv (square-succ-ℕ' (n +ℕ 2)))
 ```
 
 ### If a number `n` greater than 1 has a square root, then its square root is strictly smaller than `n`

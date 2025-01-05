@@ -14,9 +14,11 @@ open import elementary-number-theory.commutative-semiring-of-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.products-of-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types
+open import foundation.unit-type
 ```
 
 </details>
@@ -48,6 +50,9 @@ power-ℕ = power-Commutative-Semiring ℕ-Commutative-Semiring
 ### Tarski's high school arithmetic laws for exponentiation
 
 ```agda
+right-unit-law-exp-ℕ : (n : ℕ) → exp-ℕ n 1 ＝ n
+right-unit-law-exp-ℕ n = left-unit-law-mul-ℕ n
+
 annihilation-law-exp-ℕ : (n : ℕ) → 1 ^ℕ n ＝ 1
 annihilation-law-exp-ℕ zero-ℕ = refl
 annihilation-law-exp-ℕ (succ-ℕ n) =
@@ -75,14 +80,22 @@ exp-mul-ℕ x (succ-ℕ y) z =
     ( inv (right-distributive-exp-mul-ℕ (x ^ℕ y) x z)))
 ```
 
-### The exponent $m^n$ is always nonzero
+### The exponent $m^n$ is nonzero if $m$ is nonzero
 
 ```agda
 is-nonzero-exp-ℕ :
   (m n : ℕ) → is-nonzero-ℕ m → is-nonzero-ℕ (m ^ℕ n)
-is-nonzero-exp-ℕ m zero-ℕ p = is-nonzero-one-ℕ
+is-nonzero-exp-ℕ m zero-ℕ p =
+  is-nonzero-one-ℕ
 is-nonzero-exp-ℕ m (succ-ℕ n) p =
   is-nonzero-mul-ℕ (m ^ℕ n) m (is-nonzero-exp-ℕ m n p) p
+
+le-zero-exp-ℕ :
+  (m n : ℕ) → 0 <-ℕ m → 0 <-ℕ m ^ℕ n
+le-zero-exp-ℕ m zero-ℕ H =
+  star
+le-zero-exp-ℕ m (succ-ℕ n) H =
+  preserves-strict-order-mul-ℕ 0 (m ^ℕ n) 0 m (le-zero-exp-ℕ m n H) H
 ```
 
 ### The exponent $m^n$ is equal to the $n$-fold product of $m$

@@ -11,10 +11,12 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.squares-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -231,81 +233,141 @@ preserves-div-Fibonacci-ℕ m n H =
 
 ### LeVeque's strict bound on the growth of the Fibonacci numbers
 
-The $n$th Fibonacci number is always strictly less than $(\frac{7}{4})^n$. This claim appears on pages 7 and 8 in section 1.2 of {{#cite "Leveque12volI"}} as an example of a proof by induction.
-
-**Proof.** We will show by induction that $4^n F(n) < 7^n$. In the base case the claim reduces to the strict inequality $0 < 1$, which is true. Furthermore, we have that $4 F(1) = 4 < 7$. For the inductive step, assume that $4^n F(n) < 7^n$ and that $4^{n+1} F(n+1) < 7^{n+1}$. Then we have
+The $n$th Fibonacci number is always strictly less than $(\frac{7}{4})^n$. This claim appears on pages 7 and 8 in section 1.2 of {{#cite "Leveque12volI"}} as an instructive example of a proof by induction. The upper bound works for any fraction $\frac{b}{a}$ where $a(b+a)<b^2$, i.e., any fraction that is larger than the golden ratio. Another close estimate is
 
 $$
-  4^{n+2} F(n+2) = 4^{n+2} F(n+1) + 4^{n+2} F(n) < 4\cdot 7^{n+1} + 4^2\cdot 7^n = 44\cdot 7^n < 7^{n+2}.
+  F(n) < \left(\frac{13}{8}\right)^n,
+$$
+
+because $13^2-8\cdot 21=169-168=1$. More generally, for any $n$ the ratio $F_{2n+1}/F_{2n}$ is greater than the golden ratio, because $F_{2n+1}^2-F_{2n}F_{2n+2}=1$.
+
+**Proof.** Suppose that $a(b + a) < b^2$. We will show by induction that $a^n F(n) < b^n$. In the base case $n=0$ the claim reduces to the strict inequality $0 < 1$, which is true. In the base case $n=1$ we have to show that $a\cdot F(1) = a < b$. To see this, note recall that squaring reflects the strict ordering of the natural numbers (this means that $x^2<y^2$ implies $x<y$), and we have $a^2\leq a(b+a)<b^2$. For the inductive step, assume that $a^n F(n) < b^n$ and that $a^{n+1} F(n+1) < b^{n+1}$. Then we have
+
+$$
+  a^{n+2} F(n+2) = a^{n+2} F(n+1) + a^{n+2} F(n) < a\cdot b^{n+1} + a^2\cdot b^n = (a\cdot(b+a))\cdot b^n < b^{n+2}.
 $$
 
 ```agda
 leveque-strict-bound-Fibonacci-ℕ :
-  (n : ℕ) → exp-ℕ 4 n *ℕ Fibonacci-ℕ n <-ℕ exp-ℕ 7 n
-leveque-strict-bound-Fibonacci-ℕ zero-ℕ = star
-leveque-strict-bound-Fibonacci-ℕ (succ-ℕ zero-ℕ) = star
-leveque-strict-bound-Fibonacci-ℕ (succ-ℕ (succ-ℕ n)) =
+  (n a b : ℕ) → a *ℕ (b +ℕ a) <-ℕ square-ℕ b →
+  exp-ℕ a n *ℕ Fibonacci-ℕ n <-ℕ exp-ℕ b n
+leveque-strict-bound-Fibonacci-ℕ zero-ℕ a b H = star
+leveque-strict-bound-Fibonacci-ℕ (succ-ℕ zero-ℕ) a b H =
+  concatenate-eq-le-eq-ℕ
+    ( exp-ℕ a 1 *ℕ 1)
+    ( a)
+    ( b)
+    ( exp-ℕ b 1)
+    ( right-unit-law-mul-ℕ (exp-ℕ a 1) ∙ right-unit-law-exp-ℕ a)
+    ( reflects-strict-order-square-ℕ a b
+      ( concatenate-leq-le-ℕ
+        ( square-ℕ a)
+        ( a *ℕ (b +ℕ a))
+        ( square-ℕ b)
+        ( preserves-order-right-mul-ℕ a a (b +ℕ a) (leq-add-ℕ' a b))
+        ( H)))
+    ( inv (right-unit-law-exp-ℕ b))
+leveque-strict-bound-Fibonacci-ℕ (succ-ℕ (succ-ℕ n)) zero-ℕ b H =
   concatenate-eq-le-ℕ
-    { exp-ℕ 4 (n +ℕ 2) *ℕ Fibonacci-ℕ (n +ℕ 2)}
-    { 4 *ℕ (exp-ℕ 4 (n +ℕ 1) *ℕ Fibonacci-ℕ (n +ℕ 1)) +ℕ
-      16 *ℕ (exp-ℕ 4 n *ℕ Fibonacci-ℕ n)}
-    { exp-ℕ 7 (n +ℕ 2)}
+    ( exp-ℕ 0 (n +ℕ 2) *ℕ Fibonacci-ℕ (n +ℕ 2))
+    ( 0)
+    ( exp-ℕ b (n +ℕ 2))
+    ( ( right-swap-mul-ℕ (exp-ℕ 0 (n +ℕ 1)) 0 (Fibonacci-ℕ (n +ℕ 2))) ∙
+      ( right-zero-law-mul-ℕ (exp-ℕ 0 (n +ℕ 1) *ℕ Fibonacci-ℕ (n +ℕ 2))))
+    ( le-zero-exp-ℕ b
+      ( n +ℕ 2)
+      ( reflects-strict-order-square-ℕ 0 b
+        ( le-zero-le-ℕ (0 *ℕ (b +ℕ 0)) (square-ℕ b) H)))
+leveque-strict-bound-Fibonacci-ℕ
+  ( succ-ℕ (succ-ℕ n))
+  ( succ-ℕ a)
+  ( b)
+  ( H) =
+  concatenate-eq-le-ℕ
+    ( exp-ℕ (succ-ℕ a) (n +ℕ 2) *ℕ Fibonacci-ℕ (n +ℕ 2))
+    ( succ-ℕ a *ℕ (exp-ℕ (succ-ℕ a) (n +ℕ 1) *ℕ Fibonacci-ℕ (n +ℕ 1)) +ℕ
+      square-ℕ (succ-ℕ a) *ℕ (exp-ℕ (succ-ℕ a) n *ℕ Fibonacci-ℕ n))
+    ( exp-ℕ b (n +ℕ 2))
     ( ( left-distributive-mul-add-ℕ
-        ( exp-ℕ 4 (n +ℕ 2))
+        ( exp-ℕ (succ-ℕ a) (n +ℕ 2))
         ( Fibonacci-ℕ (succ-ℕ n))
         ( Fibonacci-ℕ n)) ∙
-      ( ap-add-ℕ
+       ap-add-ℕ
         ( ( ap
             ( _*ℕ Fibonacci-ℕ (succ-ℕ n))
-            ( commutative-mul-ℕ (exp-ℕ 4 (n +ℕ 1)) 4)) ∙
-          ( associative-mul-ℕ 4 (exp-ℕ 4 (n +ℕ 1)) (Fibonacci-ℕ (succ-ℕ n))))
+            ( commutative-mul-ℕ (exp-ℕ (succ-ℕ a) (n +ℕ 1)) (succ-ℕ a))) ∙
+          ( associative-mul-ℕ
+            ( succ-ℕ a)
+            ( exp-ℕ (succ-ℕ a) (n +ℕ 1))
+            ( Fibonacci-ℕ (succ-ℕ n))))
         ( ( ap
             ( _*ℕ Fibonacci-ℕ n)
-            ( ( associative-mul-ℕ (exp-ℕ 4 n) 4 4) ∙
-              ( commutative-mul-ℕ (exp-ℕ 4 n) 16))) ∙
-          ( associative-mul-ℕ 16 (exp-ℕ 4 n) (Fibonacci-ℕ n)))))
+            ( ( associative-mul-ℕ (exp-ℕ (succ-ℕ a) n) (succ-ℕ a) (succ-ℕ a)) ∙
+              ( commutative-mul-ℕ
+                ( exp-ℕ (succ-ℕ a) n)
+                ( square-ℕ (succ-ℕ a))))) ∙
+          ( associative-mul-ℕ
+            ( square-ℕ (succ-ℕ a))
+            ( exp-ℕ (succ-ℕ a) n)
+            ( Fibonacci-ℕ n))))
     ( concatenate-le-eq-le-ℕ
-      ( 4 *ℕ (exp-ℕ 4 (n +ℕ 1) *ℕ Fibonacci-ℕ (succ-ℕ n)) +ℕ
-        16 *ℕ (exp-ℕ 4 n *ℕ Fibonacci-ℕ n))
-      ( 4 *ℕ exp-ℕ 7 (succ-ℕ n) +ℕ 16 *ℕ exp-ℕ 7 n)
-      ( 44 *ℕ exp-ℕ 7 n)
-      ( exp-ℕ 7 (n +ℕ 2))
+      ( succ-ℕ a *ℕ (exp-ℕ (succ-ℕ a) (n +ℕ 1) *ℕ Fibonacci-ℕ (succ-ℕ n)) +ℕ
+        square-ℕ (succ-ℕ a) *ℕ (exp-ℕ (succ-ℕ a) n *ℕ Fibonacci-ℕ n))
+      ( succ-ℕ a *ℕ exp-ℕ b (succ-ℕ n) +ℕ square-ℕ (succ-ℕ a) *ℕ exp-ℕ b n)
+      ( (succ-ℕ a *ℕ (b +ℕ succ-ℕ a)) *ℕ exp-ℕ b n)
+      ( exp-ℕ b (n +ℕ 2))
       ( preserves-strict-order-add-ℕ
-        ( 4 *ℕ (exp-ℕ 4 (n +ℕ 1) *ℕ Fibonacci-ℕ (succ-ℕ n)))
-        ( 4 *ℕ exp-ℕ 7 (succ-ℕ n))
-        ( 16 *ℕ (exp-ℕ 4 n *ℕ Fibonacci-ℕ n))
-        ( 16 *ℕ exp-ℕ 7 n)
-        ( preserves-strict-order-left-mul-ℕ 4
-          ( exp-ℕ 4 (n +ℕ 1) *ℕ Fibonacci-ℕ (succ-ℕ n))
-          ( exp-ℕ 7 (succ-ℕ n))
-          ( is-nonzero-succ-ℕ 3)
-          ( leveque-strict-bound-Fibonacci-ℕ (succ-ℕ n)))
-        ( preserves-strict-order-left-mul-ℕ 16
-          ( exp-ℕ 4 n *ℕ Fibonacci-ℕ n)
-          ( exp-ℕ 7 n)
-          ( is-nonzero-succ-ℕ 15)
-          ( leveque-strict-bound-Fibonacci-ℕ n)))
-      ( ( ap-add-ℕ
-          { 4 *ℕ exp-ℕ 7 (succ-ℕ n)}
-          { 16 *ℕ exp-ℕ 7 n}
-          { 28 *ℕ exp-ℕ 7 n}
-          { 16 *ℕ exp-ℕ 7 n}
-          ( ( ap (4 *ℕ_) (commutative-mul-ℕ (exp-ℕ 7 n) 7)) ∙
-            ( inv (associative-mul-ℕ 4 7 (exp-ℕ 7 n))))
-          ( refl)) ∙
-        ( inv (right-distributive-mul-add-ℕ 28 16 (exp-ℕ 7 n))))
+        ( succ-ℕ a *ℕ (exp-ℕ (succ-ℕ a) (n +ℕ 1) *ℕ Fibonacci-ℕ (succ-ℕ n)))
+        ( succ-ℕ a *ℕ exp-ℕ b (succ-ℕ n))
+        ( square-ℕ (succ-ℕ a) *ℕ (exp-ℕ (succ-ℕ a) n *ℕ Fibonacci-ℕ n))
+        ( square-ℕ (succ-ℕ a) *ℕ exp-ℕ b n)
+        ( preserves-strict-order-left-mul-ℕ
+          ( succ-ℕ a)
+          ( exp-ℕ (succ-ℕ a) (n +ℕ 1) *ℕ Fibonacci-ℕ (succ-ℕ n))
+          ( exp-ℕ b (succ-ℕ n))
+          ( is-nonzero-succ-ℕ a)
+          ( leveque-strict-bound-Fibonacci-ℕ
+            ( succ-ℕ n)
+            ( succ-ℕ a)
+            ( b)
+            ( H)))
+        ( preserves-strict-order-left-mul-ℕ (square-ℕ (succ-ℕ a))
+          ( exp-ℕ (succ-ℕ a) n *ℕ Fibonacci-ℕ n)
+          ( exp-ℕ b n)
+          ( is-nonzero-square-is-nonzero-ℕ (succ-ℕ a) (is-nonzero-succ-ℕ a))
+          ( leveque-strict-bound-Fibonacci-ℕ n (succ-ℕ a) b H)))
+      ( ( ap
+          ( _+ℕ square-ℕ (succ-ℕ a) *ℕ exp-ℕ b n)
+          ( ap (succ-ℕ a *ℕ_) (commutative-mul-ℕ (exp-ℕ b n) b) ∙
+            inv (associative-mul-ℕ (succ-ℕ a) b (exp-ℕ b n)))) ∙
+        ( inv
+          ( right-distributive-mul-add-ℕ
+            ( succ-ℕ a *ℕ b)
+            ( square-ℕ (succ-ℕ a))
+            ( exp-ℕ b n))) ∙
+        ( ap
+          ( _*ℕ exp-ℕ b n)
+          ( inv (left-distributive-mul-add-ℕ (succ-ℕ a) b (succ-ℕ a)))))
       ( concatenate-le-eq-ℕ
-        { 44 *ℕ exp-ℕ 7 n}
-        { 49 *ℕ exp-ℕ 7 n}
-        { exp-ℕ 7 (n +ℕ 2)}
+        ( (succ-ℕ a *ℕ (b +ℕ succ-ℕ a)) *ℕ exp-ℕ b n)
+        ( square-ℕ b *ℕ exp-ℕ b n)
+        ( exp-ℕ b (n +ℕ 2))
         ( preserves-strict-order-right-mul-ℕ
-          ( exp-ℕ 7 n)
-          ( 44)
-          ( 49)
-          ( is-nonzero-exp-ℕ 7 n (is-nonzero-succ-ℕ 6))
-          ( star))
-        ( ( commutative-mul-ℕ 49 (exp-ℕ 7 n)) ∙
-          ( inv (associative-mul-ℕ (exp-ℕ 7 n) 7 7)))))
+          ( exp-ℕ b n)
+          ( succ-ℕ a *ℕ (b +ℕ succ-ℕ a))
+          ( square-ℕ b)
+          ( is-nonzero-exp-ℕ b n
+            ( is-nonzero-le-ℕ 0 b
+              ( reflects-strict-order-square-ℕ 0 b
+                ( le-zero-le-ℕ (succ-ℕ a *ℕ (b +ℕ succ-ℕ a)) (square-ℕ b) H))))
+          ( H))
+        ( ( commutative-mul-ℕ (square-ℕ b) (exp-ℕ b n)) ∙
+          ( inv (associative-mul-ℕ (exp-ℕ b n) b b)))))
+
+instance-7/4-leveque-strict-bound-Fibonacci-ℕ :
+  (n : ℕ) → exp-ℕ 4 n *ℕ Fibonacci-ℕ n <-ℕ exp-ℕ 7 n
+instance-7/4-leveque-strict-bound-Fibonacci-ℕ n =
+  leveque-strict-bound-Fibonacci-ℕ n 4 7 star
 ```
 
 ## External links

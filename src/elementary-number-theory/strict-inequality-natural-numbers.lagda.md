@@ -57,16 +57,16 @@ _<-ℕ_ = le-ℕ
 
 ```agda
 concatenate-eq-le-eq-ℕ :
-  {x y z w : ℕ} → x ＝ y → le-ℕ y z → z ＝ w → le-ℕ x w
-concatenate-eq-le-eq-ℕ refl p refl = p
+  (x y z w : ℕ) → x ＝ y → le-ℕ y z → z ＝ w → le-ℕ x w
+concatenate-eq-le-eq-ℕ x y z .z refl p refl = p
 
 concatenate-eq-le-ℕ :
-  {x y z : ℕ} → x ＝ y → le-ℕ y z → le-ℕ x z
-concatenate-eq-le-ℕ refl p = p
+  (x y z : ℕ) → x ＝ y → le-ℕ y z → le-ℕ x z
+concatenate-eq-le-ℕ x .x z refl p = p
 
 concatenate-le-eq-ℕ :
-  {x y z : ℕ} → le-ℕ x y → y ＝ z → le-ℕ x z
-concatenate-le-eq-ℕ p refl = p
+  (x y z : ℕ) → le-ℕ x y → y ＝ z → le-ℕ x z
+concatenate-le-eq-ℕ x y .y p refl = p
 ```
 
 ### Strict inequality on the natural numbers is decidable
@@ -90,9 +90,9 @@ is-nonzero-le-ℕ m .zero-ℕ () refl
 ### Any nonzero natural number is strictly greater than `0`
 
 ```agda
-le-is-nonzero-ℕ : (n : ℕ) → is-nonzero-ℕ n → le-ℕ zero-ℕ n
-le-is-nonzero-ℕ zero-ℕ H = H refl
-le-is-nonzero-ℕ (succ-ℕ n) H = star
+le-zero-is-nonzero-ℕ : (n : ℕ) → is-nonzero-ℕ n → le-ℕ zero-ℕ n
+le-zero-is-nonzero-ℕ zero-ℕ H = H refl
+le-zero-is-nonzero-ℕ (succ-ℕ n) H = star
 ```
 
 ### No natural number is strictly less than zero
@@ -102,6 +102,14 @@ contradiction-le-zero-ℕ :
   (m : ℕ) → (le-ℕ m zero-ℕ) → empty
 contradiction-le-zero-ℕ zero-ℕ ()
 contradiction-le-zero-ℕ (succ-ℕ m) ()
+```
+
+### Any natural number strictly greater than another natural number is strictly greater than `0`
+
+```agda
+le-zero-le-ℕ :
+  (m n : ℕ) → m <-ℕ n → 0 <-ℕ n
+le-zero-le-ℕ m (succ-ℕ n) H = star
 ```
 
 ### No successor is strictly less than one
@@ -192,7 +200,7 @@ subtraction-le-ℕ (succ-ℕ n) (succ-ℕ m) p =
 
 le-subtraction-ℕ : (n m l : ℕ) → is-nonzero-ℕ l → l +ℕ n ＝ m → le-ℕ n m
 le-subtraction-ℕ zero-ℕ m l q p =
-  tr (λ x → le-ℕ zero-ℕ x) p (le-is-nonzero-ℕ l q)
+  tr (λ x → le-ℕ zero-ℕ x) p (le-zero-is-nonzero-ℕ l q)
 le-subtraction-ℕ (succ-ℕ n) (succ-ℕ m) l q p =
   le-subtraction-ℕ n m l q (is-injective-succ-ℕ p)
 ```
@@ -218,17 +226,17 @@ preserves-le-succ-ℕ m n H =
 
 ```agda
 concatenate-leq-le-ℕ :
-  {x y z : ℕ} → x ≤-ℕ y → le-ℕ y z → le-ℕ x z
-concatenate-leq-le-ℕ {zero-ℕ} {zero-ℕ} {succ-ℕ z} H K = star
-concatenate-leq-le-ℕ {zero-ℕ} {succ-ℕ y} {succ-ℕ z} H K = star
-concatenate-leq-le-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
-  concatenate-leq-le-ℕ {x} {y} {z} H K
+  (x y z : ℕ) → x ≤-ℕ y → le-ℕ y z → le-ℕ x z
+concatenate-leq-le-ℕ zero-ℕ zero-ℕ (succ-ℕ z) H K = star
+concatenate-leq-le-ℕ zero-ℕ (succ-ℕ y) (succ-ℕ z) H K = star
+concatenate-leq-le-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) H K =
+  concatenate-leq-le-ℕ x y z H K
 
 concatenate-le-leq-ℕ :
-  {x y z : ℕ} → le-ℕ x y → y ≤-ℕ z → le-ℕ x z
-concatenate-le-leq-ℕ {zero-ℕ} {succ-ℕ y} {succ-ℕ z} H K = star
-concatenate-le-leq-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
-  concatenate-le-leq-ℕ {x} {y} {z} H K
+  (x y z : ℕ) → le-ℕ x y → y ≤-ℕ z → le-ℕ x z
+concatenate-le-leq-ℕ zero-ℕ (succ-ℕ y) (succ-ℕ z) H K = star
+concatenate-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) H K =
+  concatenate-le-leq-ℕ x y z H K
 ```
 
 ### If `m < n` then `n ≰ m`
@@ -337,10 +345,14 @@ le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
 
 ```agda
 le-add-succ-ℕ :
-  (x y : ℕ) → x <-ℕ x +ℕ (succ-ℕ y)
+  (x y : ℕ) → x <-ℕ x +ℕ succ-ℕ y
 le-add-succ-ℕ zero-ℕ y = star
 le-add-succ-ℕ (succ-ℕ x) y =
-  concatenate-le-eq-ℕ (le-add-succ-ℕ x y) (inv (left-successor-law-add-ℕ x y))
+  concatenate-le-eq-ℕ x
+    ( x +ℕ succ-ℕ y)
+    ( succ-ℕ x +ℕ y)
+    ( le-add-succ-ℕ x y)
+    ( inv (left-successor-law-add-ℕ x y))
 
 le-add-ℕ :
   (x y : ℕ) → is-nonzero-ℕ y → x <-ℕ x +ℕ y
@@ -362,11 +374,19 @@ preserves-strict-order-left-add-ℕ :
   (a b c : ℕ) → a <-ℕ b → a +ℕ c <-ℕ b +ℕ c
 preserves-strict-order-left-add-ℕ zero-ℕ (succ-ℕ b) c H =
   concatenate-eq-le-eq-ℕ
+    ( 0 +ℕ c)
+    ( c)
+    ( c +ℕ succ-ℕ b)
+    ( succ-ℕ b +ℕ c)
     ( left-unit-law-add-ℕ c)
     ( le-add-succ-ℕ c b)
     ( commutative-add-ℕ c (succ-ℕ b))
 preserves-strict-order-left-add-ℕ (succ-ℕ a) (succ-ℕ b) c H =
   concatenate-eq-le-eq-ℕ
+    ( succ-ℕ a +ℕ c)
+    ( succ-ℕ (a +ℕ c))
+    ( succ-ℕ (b +ℕ c))
+    ( succ-ℕ b +ℕ c)
     ( left-successor-law-add-ℕ a c)
     ( preserves-strict-order-left-add-ℕ a b c H)
     ( inv (left-successor-law-add-ℕ b c))
@@ -375,6 +395,10 @@ preserves-strict-order-right-add-ℕ :
   (a c d : ℕ) → c <-ℕ d → a +ℕ c <-ℕ a +ℕ d
 preserves-strict-order-right-add-ℕ a c d H =
   concatenate-eq-le-eq-ℕ
+    ( a +ℕ c)
+    ( c +ℕ a)
+    ( d +ℕ a)
+    ( a +ℕ d)
     ( commutative-add-ℕ a c)
     ( preserves-strict-order-left-add-ℕ c d a H)
     ( commutative-add-ℕ d a)
@@ -399,17 +423,17 @@ preserves-strict-order-mul-ℕ zero-ℕ (succ-ℕ b) zero-ℕ (succ-ℕ d) H K =
 preserves-strict-order-mul-ℕ zero-ℕ (succ-ℕ b) (succ-ℕ c) (succ-ℕ d) H K = star
 preserves-strict-order-mul-ℕ (succ-ℕ a) (succ-ℕ b) zero-ℕ (succ-ℕ d) H K =
   concatenate-eq-le-ℕ
-    { a *ℕ 0}
-    { 0}
-    { succ-ℕ b *ℕ succ-ℕ d}
+    ( a *ℕ 0)
+    ( 0)
+    ( succ-ℕ b *ℕ succ-ℕ d)
     ( right-zero-law-mul-ℕ a)
     ( star)
 preserves-strict-order-mul-ℕ (succ-ℕ a) (succ-ℕ b) (succ-ℕ c) (succ-ℕ d) H K =
   concatenate-eq-le-eq-ℕ
-    { succ-ℕ a *ℕ succ-ℕ c}
-    { a *ℕ c +ℕ a +ℕ c +ℕ 1}
-    { b *ℕ d +ℕ b +ℕ d +ℕ 1}
-    { succ-ℕ b *ℕ succ-ℕ d}
+    ( succ-ℕ a *ℕ succ-ℕ c)
+    ( a *ℕ c +ℕ a +ℕ c +ℕ 1)
+    ( b *ℕ d +ℕ b +ℕ d +ℕ 1)
+    ( succ-ℕ b *ℕ succ-ℕ d)
     ( double-successor-law-mul-ℕ a c)
     ( preserves-strict-order-add-ℕ
       ( a *ℕ c +ℕ a)
@@ -433,9 +457,20 @@ preserves-strict-order-mul-ℕ (succ-ℕ a) (succ-ℕ b) (succ-ℕ c) (succ-ℕ 
 preserves-strict-order-left-mul-succ-ℕ :
   (k x y : ℕ) → x <-ℕ y → succ-ℕ k *ℕ x <-ℕ succ-ℕ k *ℕ y
 preserves-strict-order-left-mul-succ-ℕ zero-ℕ x y H =
-  concatenate-eq-le-eq-ℕ (left-unit-law-mul-ℕ x) H (inv (left-unit-law-mul-ℕ y))
+  concatenate-eq-le-eq-ℕ
+    ( 1 *ℕ x)
+    ( x)
+    ( y)
+    ( 1 *ℕ y)
+    ( left-unit-law-mul-ℕ x)
+    ( H)
+    ( inv (left-unit-law-mul-ℕ y))
 preserves-strict-order-left-mul-succ-ℕ (succ-ℕ k) x y H =
   concatenate-eq-le-eq-ℕ
+    ( succ-ℕ (succ-ℕ k) *ℕ x)
+    ( succ-ℕ k *ℕ x +ℕ x)
+    ( succ-ℕ k *ℕ y +ℕ y)
+    ( succ-ℕ (succ-ℕ k) *ℕ y)
     ( left-successor-law-mul-ℕ (succ-ℕ k) x)
     ( preserves-strict-order-add-ℕ
       ( succ-ℕ k *ℕ x)
@@ -461,11 +496,19 @@ preserves-strict-order-right-mul-succ-ℕ :
   (k x y : ℕ) → x <-ℕ y → x *ℕ succ-ℕ k <-ℕ y *ℕ succ-ℕ k
 preserves-strict-order-right-mul-succ-ℕ zero-ℕ x y H =
   concatenate-eq-le-eq-ℕ
+    ( x *ℕ 1)
+    ( x)
+    ( y)
+    ( y *ℕ 1)
     ( right-unit-law-mul-ℕ x)
     ( H)
     ( inv (right-unit-law-mul-ℕ y))
 preserves-strict-order-right-mul-succ-ℕ (succ-ℕ k) x y H =
   concatenate-eq-le-eq-ℕ
+    ( x *ℕ succ-ℕ (succ-ℕ k))
+    ( x *ℕ succ-ℕ k +ℕ x)
+    ( y *ℕ succ-ℕ k +ℕ y)
+    ( y *ℕ succ-ℕ (succ-ℕ k))
     ( right-successor-law-mul-ℕ x (succ-ℕ k))
     ( preserves-strict-order-add-ℕ
       ( x *ℕ succ-ℕ k)
