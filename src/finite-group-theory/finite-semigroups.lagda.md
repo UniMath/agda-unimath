@@ -211,20 +211,24 @@ is-π-finite-Semigroup-of-Order {l} n =
     ( is-untruncated-π-finite-Semigroup-of-Order 1 n)
 ```
 
-### The function that returns for each `n` the number of semigroups of order `n` up to isomorphism
+### The number of semigroups of a given order up to isomorphism
+
+The number of semigroups of order `n` is listed as
+[A027851](https://oeis.org/A027851) in the [OEIS](literature.oeis.md)
+{{#cite oeis}}.
 
 ```agda
-number-of-semi-groups-of-order : ℕ → ℕ
-number-of-semi-groups-of-order n =
+number-of-semigroups-of-order : ℕ → ℕ
+number-of-semigroups-of-order n =
   number-of-connected-components
     ( is-untruncated-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
 
-mere-equiv-number-of-semi-groups-of-order :
+mere-equiv-number-of-semigroups-of-order :
   (n : ℕ) →
   mere-equiv
-    ( Fin (number-of-semi-groups-of-order n))
+    ( Fin (number-of-semigroups-of-order n))
     ( type-trunc-Set (Semigroup-of-Order lzero n))
-mere-equiv-number-of-semi-groups-of-order n =
+mere-equiv-number-of-semigroups-of-order n =
   mere-equiv-number-of-connected-components
     ( is-untruncated-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
 ```
@@ -264,3 +268,7 @@ is-finite-structure-semigroup-𝔽 X =
                       ( m (m x y) z)
                       ( m x (m y z)))))))
 ```
+
+## References
+
+{{#bibliography}}

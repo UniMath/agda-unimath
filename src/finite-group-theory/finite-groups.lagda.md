@@ -427,7 +427,11 @@ is-π-finite-Group-of-Order n =
     ( is-untruncated-π-finite-Group-of-Order 1 n)
 ```
 
-### The counting function for the number of groups of order `n`
+### The number of groups of a given order up to isomorphism
+
+The number of groups of order `n` is listed as
+[A000001](https://oeis.org/A000001) in the [OEIS](literature.oeis.md)
+{{#cite oeis}}.
 
 ```agda
 number-of-groups-of-order : ℕ → ℕ
@@ -484,3 +488,7 @@ module _
                     ( is-finite-type-𝔽 X)
                     ( λ x → is-finite-eq-𝔽 X)))))
 ```
+
+## References
+
+{{#bibliography}}

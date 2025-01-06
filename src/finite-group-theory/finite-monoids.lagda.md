@@ -216,7 +216,11 @@ is-π-finite-Monoid-of-Order n =
     ( is-untruncated-π-finite-Monoid-of-Order 1 n)
 ```
 
-### The function that returns for any `n` the number of monoids of order `n` up to isomorphism
+### The number of monoids of a given order up to isomorphism
+
+The number of monoids of order `n` is listed as
+[A058129](https://oeis.org/A058129) in the [OEIS](literature.oeis.md)
+{{#cite oeis}}.
 
 ```agda
 number-of-monoids-of-order : ℕ → ℕ
@@ -286,3 +290,7 @@ is-finite-structure-monoid-𝔽 X =
     ( is-finite-structure-semigroup-𝔽 X)
     ( λ m → is-finite-is-unital-Semigroup-𝔽 (X , m))
 ```
+
+## References
+
+{{#bibliography}}
