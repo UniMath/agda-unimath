@@ -171,9 +171,9 @@ is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
 
 ```agda
 is-π-finite-Main-Class-Latin-Hypercube-of-Order :
-  (n m : ℕ) → is-truncated-π-finite 1 (Main-Class-Latin-Hypercube-of-Order n m)
+  (n m : ℕ) → is-π-finite 1 (Main-Class-Latin-Hypercube-of-Order n m)
 is-π-finite-Main-Class-Latin-Hypercube-of-Order n m =
-  is-truncated-π-finite-is-untruncated-π-finite 1
+  is-π-finite-is-untruncated-π-finite 1
     ( is-1-type-Main-Class-Latin-Hypercube-of-Order n m)
     ( is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order 1 n m)
 ```

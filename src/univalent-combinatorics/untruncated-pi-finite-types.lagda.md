@@ -71,7 +71,7 @@ homotopy groups up to level `n` at all base points are finite.
 
 ## Definitions
 
-### Untruncated π-finite types
+### The untruncated πₙ-finiteness predicate
 
 ```agda
 is-untruncated-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
@@ -90,6 +90,17 @@ is-prop-is-untruncated-π-finite :
 is-prop-is-untruncated-π-finite k X =
   is-prop-type-Prop (is-untruncated-π-finite-Prop k X)
 
+has-finitely-many-connected-components-is-untruncated-π-finite :
+  {l : Level} (k : ℕ) {A : UU l} →
+  is-untruncated-π-finite k A → has-finitely-many-connected-components A
+has-finitely-many-connected-components-is-untruncated-π-finite zero-ℕ H = H
+has-finitely-many-connected-components-is-untruncated-π-finite (succ-ℕ k) H =
+  pr1 H
+```
+
+### The subuniverse untruncated πₙ-finite types
+
+```agda
 Untruncated-π-Finite-Type : (l : Level) (k : ℕ) → UU (lsuc l)
 Untruncated-π-Finite-Type l k = Σ (UU l) (is-untruncated-π-finite k)
 
@@ -101,13 +112,6 @@ is-untruncated-π-finite-type-Untruncated-π-Finite-Type :
   {l : Level} (k : ℕ) (A : Untruncated-π-Finite-Type l k) →
   is-untruncated-π-finite k (type-Untruncated-π-Finite-Type {l} k A)
 is-untruncated-π-finite-type-Untruncated-π-Finite-Type k = pr2
-
-has-finitely-many-connected-components-is-untruncated-π-finite :
-  {l : Level} (k : ℕ) {A : UU l} →
-  is-untruncated-π-finite k A → has-finitely-many-connected-components A
-has-finitely-many-connected-components-is-untruncated-π-finite zero-ℕ H = H
-has-finitely-many-connected-components-is-untruncated-π-finite (succ-ℕ k) H =
-  pr1 H
 ```
 
 ## Properties

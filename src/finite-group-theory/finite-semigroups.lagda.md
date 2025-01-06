@@ -204,9 +204,9 @@ is-untruncated-π-finite-Semigroup-of-Order k n =
     ( is-untruncated-π-finite-Semigroup-of-Order' k n)
 
 is-π-finite-Semigroup-of-Order :
-  {l : Level} (n : ℕ) → is-truncated-π-finite 1 (Semigroup-of-Order l n)
+  {l : Level} (n : ℕ) → is-π-finite 1 (Semigroup-of-Order l n)
 is-π-finite-Semigroup-of-Order {l} n =
-  is-truncated-π-finite-is-untruncated-π-finite 1
+  is-π-finite-is-untruncated-π-finite 1
     ( is-1-type-Semigroup-of-Order n)
     ( is-untruncated-π-finite-Semigroup-of-Order 1 n)
 ```

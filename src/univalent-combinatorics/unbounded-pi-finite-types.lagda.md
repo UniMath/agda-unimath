@@ -344,17 +344,17 @@ is-finite-is-unbounded-π-finite H K =
 ### π-finite types are unbounded π-finite
 
 ```agda
-is-unbounded-π-finite-is-truncated-π-finite :
+is-unbounded-π-finite-is-π-finite :
   {l : Level} (k : ℕ) {A : UU l} →
-  is-truncated-π-finite k A → is-unbounded-π-finite A
-is-unbounded-π-finite-is-truncated-π-finite zero-ℕ =
+  is-π-finite k A → is-unbounded-π-finite A
+is-unbounded-π-finite-is-π-finite zero-ℕ =
   is-unbounded-π-finite-is-finite
-is-unbounded-π-finite-is-truncated-π-finite (succ-ℕ k) H =
+is-unbounded-π-finite-is-π-finite (succ-ℕ k) H =
   λ where
   .has-finitely-many-connected-components-is-unbounded-π-finite →
     pr1 H
   .is-unbounded-π-finite-Id-is-unbounded-π-finite x y →
-    is-unbounded-π-finite-is-truncated-π-finite k (pr2 H x y)
+    is-unbounded-π-finite-is-π-finite k (pr2 H x y)
 ```
 
 ### Unbounded π-finite types are types that are untruncated πₙ-finite for all `n`

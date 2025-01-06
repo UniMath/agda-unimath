@@ -67,7 +67,7 @@ is-untruncated-π-finite-Main-Class-Latin-Square-of-Order k =
   is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order k 2
 
 is-π-finite-Main-Class-Latin-Square-of-Order :
-  (m : ℕ) → is-truncated-π-finite 1 (Main-Class-Latin-Square-of-Order m)
+  (m : ℕ) → is-π-finite 1 (Main-Class-Latin-Square-of-Order m)
 is-π-finite-Main-Class-Latin-Square-of-Order =
   is-π-finite-Main-Class-Latin-Hypercube-of-Order 2
 ```

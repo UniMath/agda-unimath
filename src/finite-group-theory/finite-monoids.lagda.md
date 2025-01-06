@@ -209,9 +209,9 @@ is-untruncated-π-finite-Monoid-of-Order {l} k n =
           ( is-finite-is-unital-Semigroup n X)))
 
 is-π-finite-Monoid-of-Order :
-  {l : Level} (n : ℕ) → is-truncated-π-finite 1 (Monoid-of-Order l n)
+  {l : Level} (n : ℕ) → is-π-finite 1 (Monoid-of-Order l n)
 is-π-finite-Monoid-of-Order n =
-  is-truncated-π-finite-is-untruncated-π-finite 1
+  is-π-finite-is-untruncated-π-finite 1
     ( is-1-type-Monoid-of-Order n)
     ( is-untruncated-π-finite-Monoid-of-Order 1 n)
 ```
