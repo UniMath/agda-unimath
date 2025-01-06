@@ -314,16 +314,16 @@ open import elementary-number-theory.ackermann-function using
   ( simplified-ackermann-ℕ)
 ```
 
-<<<<<<< HEAD
 OEIS: [A046859](https://oeis.org/A046859)
-=======
-### [A058129](https://oeis.org/A058129) The number of monoids of order `n` up to isomorphism
+
+### A058129 -- The number of monoids of order `n` up to isomorphism
 
 ```agda
 open import finite-group-theory.finite-monoids using
   ( number-of-monoids-of-order)
 ```
->>>>>>> 871a0295de0f8e48d52561158d55e9c7fdd69ab9
+
+OEIS: [A058129](https://oeis.org/A058129)
 
 ## References
 
