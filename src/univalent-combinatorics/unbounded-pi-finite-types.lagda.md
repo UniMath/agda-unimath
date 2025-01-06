@@ -45,7 +45,10 @@ A type is
 {{#concept "unbounded π-finite" Disambiguation="type" Agda=is-unbounded-π-finite Agda=Unbounded-Unbounded-π-Finite-Type}}
 if it has [finitely](univalent-combinatorics.finite-types.md) many
 [connected components](foundation.connected-components.md) and all of its
-homotopy groups at all base points and all dimensions are finite.
+homotopy groups at all base points and all dimensions are finite. Unbounded
+π-finiteness can be understood as an ∞-dimensional analogue of
+[Kuratowski finitneness](univalent-combinatorics.kuratowski-finite-sets.md)
+{{#cite Anel24}}.
 
 ## Definitions
 
@@ -444,7 +447,10 @@ abstract
 
 ## References
 
-{{#bibliography}} {{#reference Anel24}}
+The category of unbounded π-finite spaces is considered in great detail in
+{{#cite Anel24}}.
+
+{{#bibliography}}
 
 ## External links
 
