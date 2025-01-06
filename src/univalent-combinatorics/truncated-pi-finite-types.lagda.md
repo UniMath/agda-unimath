@@ -1,4 +1,4 @@
-# Truncated π-finite types
+# π-finite types
 
 ```agda
 module univalent-combinatorics.truncated-pi-finite-types where
@@ -27,15 +27,16 @@ open import univalent-combinatorics.pi-finite-types
 ## Idea
 
 A type is
-{{#concept "truncated πₙ-finite" Disambiguation="type" Agda=is-truncated-π-finite Agda=Truncated-π-Finite}}
+{{#concept "πₙ-finite" Disambiguation="type" Agda=is-truncated-π-finite Agda=Truncated-π-Finite}}
 if it has [finitely](univalent-combinatorics.finite-types.md) many
 [connected components](foundation.connected-components.md), all of its homotopy
 groups up to level `n` at all base points are finite, and all higher homotopy
-groups are [trivial](group-theory.trivial-groups.md).
+groups are [trivial](group-theory.trivial-groups.md). A type is
+{{#concept "π-finite"}} if it is πₙ-finite for some `n`.
 
 ## Definitions
 
-### Truncated π-finite types
+### π-finite types
 
 ```agda
 is-truncated-π-finite-Prop : {l : Level} (k : ℕ) → UU l → Prop l
@@ -65,7 +66,7 @@ has-finitely-many-connected-components-is-truncated-π-finite (succ-ℕ k) = pr1
 
 ## Properties
 
-### Truncated πₙ-finite types are n-truncated
+### πₙ-finite types are n-truncated
 
 ```agda
 is-trunc-is-truncated-π-finite :
@@ -76,34 +77,38 @@ is-trunc-is-truncated-π-finite (succ-ℕ k) H x y =
   is-trunc-is-truncated-π-finite k (pr2 H x y)
 ```
 
-### πₙ-finite n-truncated types are truncated πₙ-finite
+### Untruncated πₙ-finite n-truncated types are πₙ-finite
 
 ```agda
-is-truncated-π-finite-is-π-finite :
+is-truncated-π-finite-is-untruncated-π-finite :
   {l : Level} (k : ℕ) {A : UU l} → is-trunc (truncation-level-ℕ k) A →
-  is-π-finite k A → is-truncated-π-finite k A
-is-truncated-π-finite-is-π-finite zero-ℕ H K =
-  is-finite-is-π-finite zero-ℕ H K
-pr1 (is-truncated-π-finite-is-π-finite (succ-ℕ k) H K) = pr1 K
-pr2 (is-truncated-π-finite-is-π-finite (succ-ℕ k) H K) x y =
-  is-truncated-π-finite-is-π-finite k (H x y) (pr2 K x y)
+  is-untruncated-π-finite k A → is-truncated-π-finite k A
+is-truncated-π-finite-is-untruncated-π-finite zero-ℕ H K =
+  is-finite-is-untruncated-π-finite zero-ℕ H K
+pr1 (is-truncated-π-finite-is-untruncated-π-finite (succ-ℕ k) H K) = pr1 K
+pr2 (is-truncated-π-finite-is-untruncated-π-finite (succ-ℕ k) H K) x y =
+  is-truncated-π-finite-is-untruncated-π-finite k (H x y) (pr2 K x y)
 ```
 
-### Truncated πₙ-finite types are πₙ-finite
+### πₙ-finite types are untruncated πₙ-finite
 
 ```agda
-is-π-finite-is-truncated-π-finite :
+is-untruncated-π-finite-is-truncated-π-finite :
   {l : Level} (k : ℕ) {A : UU l} →
-  is-truncated-π-finite k A → is-π-finite k A
-is-π-finite-is-truncated-π-finite zero-ℕ H =
+  is-truncated-π-finite k A → is-untruncated-π-finite k A
+is-untruncated-π-finite-is-truncated-π-finite zero-ℕ H =
   is-finite-equiv
     ( equiv-unit-trunc-Set (_ , (is-set-is-finite H)))
     ( H)
-pr1 (is-π-finite-is-truncated-π-finite (succ-ℕ k) H) = pr1 H
-pr2 (is-π-finite-is-truncated-π-finite (succ-ℕ k) H) x y =
-  is-π-finite-is-truncated-π-finite k (pr2 H x y)
+pr1 (is-untruncated-π-finite-is-truncated-π-finite (succ-ℕ k) H) = pr1 H
+pr2 (is-untruncated-π-finite-is-truncated-π-finite (succ-ℕ k) H) x y =
+  is-untruncated-π-finite-is-truncated-π-finite k (pr2 H x y)
 ```
 
 ## See also
 
 - [Unbounded π-finite types](univalent-combinatorics.unbounded-pi-finite-types.md)
+
+## External links
+
+- [pi-finite type](https://ncatlab.org/nlab/show/pi-finite+type) at $n$Lab

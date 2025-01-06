@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.finite-semigroups
 
+open import foundation.1-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -39,13 +40,16 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.truncated-pi-finite-types
 ```
 
 </details>
 
 ## Idea
 
-A finite monoid is a monoid of which the underlying type is finite.
+A {{#concept "finite monoid" Agda=Monoid-𝔽}} is a
+[monoid](group-theory.monoids.md) of which the underlying type is
+[finite](univalent-combinatorics.finite-types.md).
 
 ## Definition
 
@@ -125,6 +129,14 @@ module _
 ```agda
 Monoid-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
 Monoid-of-Order l n = Σ (Monoid l) (λ M → mere-equiv (Fin n) (type-Monoid M))
+
+Monoid-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
+Monoid-of-Order' l n =
+    Σ (Semigroup-of-Order l n) (λ X → is-unital-Semigroup (pr1 X))
+
+compute-Monoid-of-Order :
+  {l : Level} (n : ℕ) → Monoid-of-Order l n ≃ Monoid-of-Order' l n
+compute-Monoid-of-Order n = equiv-right-swap-Σ
 ```
 
 ## Properties
@@ -162,23 +174,46 @@ is-finite-is-unital-Semigroup {l} n X =
                     ( x))))))
 ```
 
-### The type of monoids of order `n` is π-finite
+### The type of monoids of order `n` is a 1-type
 
 ```agda
-is-π-finite-Monoid-of-Order :
-  {l : Level} (k n : ℕ) → is-π-finite k (Monoid-of-Order l n)
-is-π-finite-Monoid-of-Order {l} k n =
-  is-π-finite-equiv k e
-    ( is-π-finite-Σ k
-      ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
+is-1-type-Monoid-of-Order' :
+  {l : Level} (n : ℕ) → is-1-type (Monoid-of-Order' l n)
+is-1-type-Monoid-of-Order' n =
+  is-1-type-Σ
+    ( is-1-type-Semigroup-of-Order n)
+    ( λ G →
+      is-1-type-is-set (is-set-is-finite (is-finite-is-unital-Semigroup n G)))
+
+is-1-type-Monoid-of-Order :
+  {l : Level} (n : ℕ) → is-1-type (Monoid-of-Order l n)
+is-1-type-Monoid-of-Order {l} n =
+  is-1-type-equiv
+    ( Monoid-of-Order' l n)
+    ( compute-Monoid-of-Order n)
+    ( is-1-type-Monoid-of-Order' n)
+```
+
+### The type of monoids of order `n` is π₁-finite
+
+```agda
+is-untruncated-π-finite-Monoid-of-Order :
+  {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Monoid-of-Order l n)
+is-untruncated-π-finite-Monoid-of-Order {l} k n =
+  is-untruncated-π-finite-equiv k
+    ( compute-Monoid-of-Order n)
+    ( is-untruncated-π-finite-Σ k
+      ( is-untruncated-π-finite-Semigroup-of-Order (succ-ℕ k) n)
       ( λ X →
-        is-π-finite-is-finite k
+        is-untruncated-π-finite-is-finite k
           ( is-finite-is-unital-Semigroup n X)))
-  where
-  e :
-    Monoid-of-Order l n ≃
-    Σ (Semigroup-of-Order l n) (λ X → is-unital-Semigroup (pr1 X))
-  e = equiv-right-swap-Σ
+
+is-π-finite-Monoid-of-Order :
+  {l : Level} (n : ℕ) → is-truncated-π-finite 1 (Monoid-of-Order l n)
+is-π-finite-Monoid-of-Order n =
+  is-truncated-π-finite-is-untruncated-π-finite 1
+    ( is-1-type-Monoid-of-Order n)
+    ( is-untruncated-π-finite-Monoid-of-Order 1 n)
 ```
 
 ### The function that returns for any `n` the number of monoids of order `n` up to isomorphism
@@ -187,7 +222,7 @@ is-π-finite-Monoid-of-Order {l} k n =
 number-of-monoids-of-order : ℕ → ℕ
 number-of-monoids-of-order n =
   number-of-connected-components
-    ( is-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
+    ( is-untruncated-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
 
 mere-equiv-number-of-monoids-of-order :
   (n : ℕ) →
@@ -196,7 +231,7 @@ mere-equiv-number-of-monoids-of-order :
     ( type-trunc-Set (Monoid-of-Order lzero n))
 mere-equiv-number-of-monoids-of-order n =
   mere-equiv-number-of-connected-components
-    ( is-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
+    ( is-untruncated-π-finite-Monoid-of-Order {lzero} zero-ℕ n)
 ```
 
 ### For any finite semigroup `G`, being unital is a property

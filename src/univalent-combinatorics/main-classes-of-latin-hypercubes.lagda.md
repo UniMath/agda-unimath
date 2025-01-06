@@ -9,6 +9,7 @@ module univalent-combinatorics.main-classes-of-latin-hypercubes where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -25,11 +26,14 @@ open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.truncated-pi-finite-types
 ```
 
 </details>
 
-## Definition
+## Definitions
+
+### The type of main classes of Latin hypercubes
 
 ```agda
 Main-Class-Latin-Hypercube : (l1 l2 : Level) (n : ℕ) → UU (lsuc l1 ⊔ lsuc l2)
@@ -54,7 +58,7 @@ Main-Class-Latin-Hypercube l1 l2 n =
                       ( a))))))
 ```
 
-### The groupoid of main classes of Latin hypercubes of fixed finite order
+### The type of main classes of Latin hypercubes of fixed finite order
 
 ```agda
 Main-Class-Latin-Hypercube-of-Order : (n m : ℕ) → UU (lsuc lzero)
@@ -84,24 +88,42 @@ Main-Class-Latin-Hypercube-of-Order n m =
 
 ## Properties
 
-### The groupoid of main classes of Latin hypercubes of finite order is π-finite
+### The type of main classes of Latin hypercubes of fixed finite order is a groupoid
 
 ```agda
-is-π-finite-Main-Class-Latin-Hypercube-of-Order :
-  (k n m : ℕ) → is-π-finite k (Main-Class-Latin-Hypercube-of-Order n m)
-is-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
-  is-π-finite-Σ k
-    ( is-π-finite-Σ
+is-1-type-Main-Class-Latin-Hypercube-of-Order :
+  (n m : ℕ) → is-1-type (Main-Class-Latin-Hypercube-of-Order n m)
+is-1-type-Main-Class-Latin-Hypercube-of-Order n m =
+  is-1-type-Σ
+    ( is-1-type-unordered-tuple (succ-ℕ n) (is-1-type-UU-Fin m))
+    ( λ A →
+      is-1-type-Σ
+        ( is-1-type-function-type (is-1-type-is-set is-set-Decidable-Prop))
+        ( λ R →
+          is-1-type-Π
+            ( λ i →
+              is-1-type-Π (λ f → is-1-type-is-prop is-property-is-contr))))
+```
+
+### The groupoid of main classes of Latin hypercubes of finite order is unbounded π-finite
+
+```agda
+is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order :
+  (k n m : ℕ) →
+  is-untruncated-π-finite k (Main-Class-Latin-Hypercube-of-Order n m)
+is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
+  is-untruncated-π-finite-Σ k
+    ( is-untruncated-π-finite-Σ
       ( succ-ℕ k)
-      ( is-π-finite-UU-Fin (succ-ℕ (succ-ℕ k)) (succ-ℕ n))
+      ( is-untruncated-π-finite-UU-Fin (succ-ℕ (succ-ℕ k)) (succ-ℕ n))
       ( λ X →
-        is-π-finite-Π
+        is-untruncated-π-finite-Π
           ( succ-ℕ k)
           ( is-finite-type-UU-Fin (succ-ℕ n) X)
-          ( λ i → is-π-finite-UU-Fin (succ-ℕ k) m)))
+          ( λ i → is-untruncated-π-finite-UU-Fin (succ-ℕ k) m)))
     ( λ A →
-      is-π-finite-Σ k
-        ( is-π-finite-is-finite
+      is-untruncated-π-finite-Σ k
+        ( is-untruncated-π-finite-is-finite
           ( succ-ℕ k)
           ( is-finite-Π
             ( is-finite-Π
@@ -113,7 +135,7 @@ is-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
                   ( element-unordered-tuple (succ-ℕ n) A i)))
             ( λ f → is-finite-Decidable-Prop)))
         ( λ R →
-          is-π-finite-is-finite k
+          is-untruncated-π-finite-is-finite k
             ( is-finite-Π
               ( is-finite-type-UU-Fin
                 ( succ-ℕ n)
@@ -145,13 +167,24 @@ is-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
                             ( element-unordered-tuple (succ-ℕ n) A i)))))))))
 ```
 
+### The groupoid of main classes of Latin hypercubes of finite order is π₁-finite
+
+```agda
+is-π-finite-Main-Class-Latin-Hypercube-of-Order :
+  (n m : ℕ) → is-truncated-π-finite 1 (Main-Class-Latin-Hypercube-of-Order n m)
+is-π-finite-Main-Class-Latin-Hypercube-of-Order n m =
+  is-truncated-π-finite-is-untruncated-π-finite 1
+    ( is-1-type-Main-Class-Latin-Hypercube-of-Order n m)
+    ( is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order 1 n m)
+```
+
 ### The sequence of main classes of Latin hypercubes of fixed finite order
 
 ```agda
 number-of-main-classes-of-Latin-hypercubes-of-order : ℕ → ℕ → ℕ
 number-of-main-classes-of-Latin-hypercubes-of-order n m =
   number-of-elements-is-finite
-    ( is-π-finite-Main-Class-Latin-Hypercube-of-Order 0 n m)
+    ( is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order 0 n m)
 
 mere-equiv-number-of-main-classes-of-Latin-hypercubes-of-order :
   (n m : ℕ) →
@@ -161,5 +194,5 @@ mere-equiv-number-of-main-classes-of-Latin-hypercubes-of-order :
       ( Main-Class-Latin-Hypercube-of-Order n m))
 mere-equiv-number-of-main-classes-of-Latin-hypercubes-of-order n m =
   mere-equiv-is-finite
-    ( is-π-finite-Main-Class-Latin-Hypercube-of-Order 0 n m)
+    ( is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order 0 n m)
 ```
