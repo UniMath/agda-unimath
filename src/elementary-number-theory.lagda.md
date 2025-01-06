@@ -1,5 +1,9 @@
 # Elementary number theory
 
+```agda
+{-# OPTIONS --guardedness #-}
+```
+
 ## Modules in the elementary number theory namespace
 
 ```agda
@@ -27,6 +31,7 @@ open import elementary-number-theory.cofibonacci public
 open import elementary-number-theory.collatz-bijection public
 open import elementary-number-theory.collatz-conjecture public
 open import elementary-number-theory.commutative-semiring-of-natural-numbers public
+open import elementary-number-theory.conatural-numbers public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.cross-multiplication-difference-integer-fractions public
@@ -66,11 +71,13 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers pub
 open import elementary-number-theory.group-of-integers public
 open import elementary-number-theory.half-integers public
 open import elementary-number-theory.hardy-ramanujan-number public
+open import elementary-number-theory.inclusion-natural-numbers-conatural-numbers public
 open import elementary-number-theory.inequality-integer-fractions public
 open import elementary-number-theory.inequality-integers public
 open import elementary-number-theory.inequality-natural-numbers public
 open import elementary-number-theory.inequality-rational-numbers public
 open import elementary-number-theory.inequality-standard-finite-types public
+open import elementary-number-theory.infinite-conatural-numbers public
 open import elementary-number-theory.infinitude-of-primes public
 open import elementary-number-theory.initial-segments-natural-numbers public
 open import elementary-number-theory.integer-fractions public
@@ -117,6 +124,7 @@ open import elementary-number-theory.peano-arithmetic public
 open import elementary-number-theory.pisano-periods public
 open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
 open import elementary-number-theory.positive-and-negative-integers public
+open import elementary-number-theory.positive-conatural-numbers public
 open import elementary-number-theory.positive-integer-fractions public
 open import elementary-number-theory.positive-integers public
 open import elementary-number-theory.positive-rational-numbers public
@@ -158,9 +166,11 @@ open import elementary-number-theory.twin-prime-conjecture public
 open import elementary-number-theory.type-arithmetic-natural-numbers public
 open import elementary-number-theory.unit-elements-standard-finite-types public
 open import elementary-number-theory.unit-similarity-standard-finite-types public
+open import elementary-number-theory.universal-property-conatural-numbers public
 open import elementary-number-theory.universal-property-integers public
 open import elementary-number-theory.universal-property-natural-numbers public
 open import elementary-number-theory.upper-bounds-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-natural-numbers public
 open import elementary-number-theory.well-ordering-principle-standard-finite-types public
+open import elementary-number-theory.zero-conatural-numbers public
 ```
