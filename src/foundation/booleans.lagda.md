@@ -216,10 +216,10 @@ bool-Discrete-Type = bool , has-decidable-equality-bool
 
 ```agda
 is-true : bool → UU lzero
-is-true = Eq-bool true
+is-true = _＝ true
 
 is-prop-is-true : (b : bool) → is-prop (is-true b)
-is-prop-is-true = is-prop-Eq-bool true
+is-prop-is-true b = is-set-bool b true
 
 is-true-Prop : bool → Prop lzero
 is-true-Prop b = is-true b , is-prop-is-true b
@@ -229,13 +229,25 @@ is-true-Prop b = is-true b , is-prop-is-true b
 
 ```agda
 is-false : bool → UU lzero
-is-false = Eq-bool false
+is-false = _＝ false
 
 is-prop-is-false : (b : bool) → is-prop (is-false b)
-is-prop-is-false = is-prop-Eq-bool false
+is-prop-is-false b = is-set-bool b false
 
 is-false-Prop : bool → Prop lzero
 is-false-Prop b = is-false b , is-prop-is-false b
+```
+
+### A boolean cannot be both true and false
+
+```agda
+not-is-false-is-true : (x : bool) → is-true x → ¬ (is-false x)
+not-is-false-is-true true t ()
+not-is-false-is-true false () f
+
+not-is-true-is-false : (x : bool) → is-false x → ¬ (is-true x)
+not-is-true-is-false true () f
+not-is-true-is-false false t ()
 ```
 
 ### The type of booleans is equivalent to `Fin 2`
