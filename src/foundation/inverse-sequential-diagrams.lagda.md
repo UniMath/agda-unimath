@@ -79,8 +79,7 @@ pr2 (right-shift-inverse-sequential-diagram A) n =
   map-inverse-sequential-diagram A (succ-ℕ n)
 
 iterated-right-shift-inverse-sequential-diagram :
-  {l : Level} (n : ℕ) →
-  inverse-sequential-diagram l → inverse-sequential-diagram l
+  {l : Level} → ℕ → inverse-sequential-diagram l → inverse-sequential-diagram l
 iterated-right-shift-inverse-sequential-diagram n =
   iterate n right-shift-inverse-sequential-diagram
 ```

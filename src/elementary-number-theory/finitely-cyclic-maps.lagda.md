@@ -58,7 +58,10 @@ module _
     (f : X → X) (H : is-finitely-cyclic-map f) →
     (f ∘ map-inv-is-finitely-cyclic-map f H) ~ id
   is-section-map-inv-is-finitely-cyclic-map f H x =
-    ( iterate-succ-ℕ (length-path-is-finitely-cyclic-map H (f x) x) f x) ∙
+    ( reassociate-iterate-succ-ℕ
+      ( length-path-is-finitely-cyclic-map H (f x) x)
+      ( f)
+      ( x)) ∙
     ( eq-is-finitely-cyclic-map H (f x) x)
 
   is-retraction-map-inv-is-finitely-cyclic-map :
@@ -70,7 +73,7 @@ module _
       ( inv (eq-is-finitely-cyclic-map H (f x) x))) ∙
     ( ( ap
         ( iterate (length-path-is-finitely-cyclic-map H (f (f x)) (f x)) f)
-          ( iterate-succ-ℕ
+          ( reassociate-iterate-succ-ℕ
             ( length-path-is-finitely-cyclic-map H (f x) x) f (f x))) ∙
       ( ( iterate-iterate
           ( length-path-is-finitely-cyclic-map H (f (f x)) (f x))
