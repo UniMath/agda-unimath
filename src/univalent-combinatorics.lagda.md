@@ -18,7 +18,7 @@ level `k` π-finite type is a type that has finitely many connected components,
 such that all its homotopy groups up to level `k` are finite and all its
 homotopy groups above level `k` are trivial. The π-finite types enjoy useful
 closure properties, such as closedness under Σ, cartesian products, coproducts,
-and closedness under Π under a mild condition.
+and closedness under Π under a mild condition {{#cite Anel24}}.
 
 ## Modules in the univalent combinatorics namespace
 
@@ -117,3 +117,7 @@ open import univalent-combinatorics.unlabeled-rooted-trees public
 open import univalent-combinatorics.unlabeled-trees public
 open import univalent-combinatorics.untruncated-pi-finite-types public
 ```
+
+## References
+
+{{#bibliography}}
