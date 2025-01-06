@@ -86,7 +86,7 @@ open import univalent-combinatorics.orientations-complete-undirected-graph publi
 open import univalent-combinatorics.orientations-cubes public
 open import univalent-combinatorics.partitions public
 open import univalent-combinatorics.petri-nets public
-open import univalent-combinatorics.pi-finite-types public
+open import univalent-combinatorics.untruncated-pi-finite-types public
 open import univalent-combinatorics.pigeonhole-principle public
 open import univalent-combinatorics.presented-pi-finite-types public
 open import univalent-combinatorics.quotients-finite-types public

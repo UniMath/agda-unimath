@@ -19,7 +19,7 @@ open import foundation.universe-levels
 
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
-open import univalent-combinatorics.pi-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>
