@@ -11,8 +11,11 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
 
@@ -71,4 +74,13 @@ le-one-Π-ℕ (succ-ℕ (succ-ℕ k)) f H K =
     ( f (inr star))
     ( le-one-Π-ℕ (succ-ℕ k) (f ∘ inl) star (K ∘ inl))
     ( K (inr star))
+```
+
+### Products preserve pointwise identifications
+
+```agda
+preserves-htpy-Π-ℕ :
+  (k : ℕ) {f g : Fin k → ℕ} (H : f ~ g) → Π-ℕ k f ＝ Π-ℕ k g
+preserves-htpy-Π-ℕ k H =
+  ap (Π-ℕ k) (eq-htpy H)
 ```

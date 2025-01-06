@@ -236,10 +236,16 @@ preserves-div-Fibonacci-ℕ m n H =
 The $n$th Fibonacci number is always strictly less than $(\frac{7}{4})^n$. This claim appears on pages 7 and 8 in section 1.2 of {{#cite "Leveque12volI"}} as an instructive example of a proof by induction. The upper bound works for any fraction $\frac{b}{a}$ where $a(b+a)<b^2$, i.e., any fraction that is larger than the golden ratio. Another close estimate is
 
 $$
-  F(n) < \left(\frac{13}{8}\right)^n,
+  F_n < \left(\frac{13}{8}\right)^n,
 $$
 
-because $13^2-8\cdot 21=169-168=1$. More generally, for any $n$ the ratio $F_{2n+1}/F_{2n}$ is greater than the golden ratio, because $F_{2n+1}^2-F_{2n}F_{2n+2}=1$.
+because $13^2-8\cdot 21=169-168=1$. More generally, for any $n$ the ratio $F_{2n+1}/F_{2n}$ is greater than the golden ratio, because $F_{2n+1}^2-F_{2n}F_{2n+2}=1$. Therefore it follows that
+
+$$
+ F_k < \left(\frac{F_{2n+1}}{F_{2n}}\right)^k
+$$
+
+As a corollary, we obtain that $F_{2n}^n F_n < F_{2n+1}^n$ for all $n$, which in fact are terms in ratios that converge to $\sqrt{5}$, and that $F_{2n}^{2n+1}<F_{2n+1}^{2n}$.
 
 **Proof.** Suppose that $a(b + a) < b^2$. We will show by induction that $a^n F(n) < b^n$. In the base case $n=0$ the claim reduces to the strict inequality $0 < 1$, which is true. In the base case $n=1$ we have to show that $a\cdot F(1) = a < b$. To see this, note recall that squaring reflects the strict ordering of the natural numbers (this means that $x^2<y^2$ implies $x<y$), and we have $a^2\leq a(b+a)<b^2$. For the inductive step, assume that $a^n F(n) < b^n$ and that $a^{n+1} F(n+1) < b^{n+1}$. Then we have
 
@@ -248,11 +254,11 @@ $$
 $$
 
 ```agda
-leveque-strict-bound-Fibonacci-ℕ :
+leveque-strict-exponential-bound-Fibonacci-ℕ :
   (n a b : ℕ) → a *ℕ (b +ℕ a) <-ℕ square-ℕ b →
   exp-ℕ a n *ℕ Fibonacci-ℕ n <-ℕ exp-ℕ b n
-leveque-strict-bound-Fibonacci-ℕ zero-ℕ a b H = star
-leveque-strict-bound-Fibonacci-ℕ (succ-ℕ zero-ℕ) a b H =
+leveque-strict-exponential-bound-Fibonacci-ℕ zero-ℕ a b H = star
+leveque-strict-exponential-bound-Fibonacci-ℕ (succ-ℕ zero-ℕ) a b H =
   concatenate-eq-le-eq-ℕ
     ( exp-ℕ a 1 *ℕ 1)
     ( a)
@@ -267,7 +273,7 @@ leveque-strict-bound-Fibonacci-ℕ (succ-ℕ zero-ℕ) a b H =
         ( preserves-order-right-mul-ℕ a a (b +ℕ a) (leq-add-ℕ' a b))
         ( H)))
     ( inv (right-unit-law-exp-ℕ b))
-leveque-strict-bound-Fibonacci-ℕ (succ-ℕ (succ-ℕ n)) zero-ℕ b H =
+leveque-strict-exponential-bound-Fibonacci-ℕ (succ-ℕ (succ-ℕ n)) zero-ℕ b H =
   concatenate-eq-le-ℕ
     ( exp-ℕ 0 (n +ℕ 2) *ℕ Fibonacci-ℕ (n +ℕ 2))
     ( 0)
@@ -278,7 +284,7 @@ leveque-strict-bound-Fibonacci-ℕ (succ-ℕ (succ-ℕ n)) zero-ℕ b H =
       ( n +ℕ 2)
       ( reflects-strict-order-square-ℕ 0 b
         ( le-zero-le-ℕ (0 *ℕ (b +ℕ 0)) (square-ℕ b) H)))
-leveque-strict-bound-Fibonacci-ℕ
+leveque-strict-exponential-bound-Fibonacci-ℕ
   ( succ-ℕ (succ-ℕ n))
   ( succ-ℕ a)
   ( b)
@@ -326,7 +332,7 @@ leveque-strict-bound-Fibonacci-ℕ
           ( exp-ℕ (succ-ℕ a) (n +ℕ 1) *ℕ Fibonacci-ℕ (succ-ℕ n))
           ( exp-ℕ b (succ-ℕ n))
           ( is-nonzero-succ-ℕ a)
-          ( leveque-strict-bound-Fibonacci-ℕ
+          ( leveque-strict-exponential-bound-Fibonacci-ℕ
             ( succ-ℕ n)
             ( succ-ℕ a)
             ( b)
@@ -335,7 +341,7 @@ leveque-strict-bound-Fibonacci-ℕ
           ( exp-ℕ (succ-ℕ a) n *ℕ Fibonacci-ℕ n)
           ( exp-ℕ b n)
           ( is-nonzero-square-is-nonzero-ℕ (succ-ℕ a) (is-nonzero-succ-ℕ a))
-          ( leveque-strict-bound-Fibonacci-ℕ n (succ-ℕ a) b H)))
+          ( leveque-strict-exponential-bound-Fibonacci-ℕ n (succ-ℕ a) b H)))
       ( ( ap
           ( _+ℕ square-ℕ (succ-ℕ a) *ℕ exp-ℕ b n)
           ( ap (succ-ℕ a *ℕ_) (commutative-mul-ℕ (exp-ℕ b n) b) ∙
@@ -364,10 +370,10 @@ leveque-strict-bound-Fibonacci-ℕ
         ( ( commutative-mul-ℕ (square-ℕ b) (exp-ℕ b n)) ∙
           ( inv (associative-mul-ℕ (exp-ℕ b n) b b)))))
 
-instance-7/4-leveque-strict-bound-Fibonacci-ℕ :
+instance-7/4-leveque-strict-exponential-bound-Fibonacci-ℕ :
   (n : ℕ) → exp-ℕ 4 n *ℕ Fibonacci-ℕ n <-ℕ exp-ℕ 7 n
-instance-7/4-leveque-strict-bound-Fibonacci-ℕ n =
-  leveque-strict-bound-Fibonacci-ℕ n 4 7 star
+instance-7/4-leveque-strict-exponential-bound-Fibonacci-ℕ n =
+  leveque-strict-exponential-bound-Fibonacci-ℕ n 4 7 star
 ```
 
 ## External links

@@ -191,7 +191,7 @@ has-decidable-equality-count (pair k e) =
   has-decidable-equality-equiv' e (has-decidable-equality-Fin k)
 ```
 
-### This with a count are either inhabited or empty
+### Types with a count are either inhabited or empty
 
 ```agda
 is-inhabited-or-empty-count :
