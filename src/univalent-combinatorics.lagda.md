@@ -86,7 +86,6 @@ open import univalent-combinatorics.orientations-complete-undirected-graph publi
 open import univalent-combinatorics.orientations-cubes public
 open import univalent-combinatorics.partitions public
 open import univalent-combinatorics.petri-nets public
-open import univalent-combinatorics.untruncated-pi-finite-types public
 open import univalent-combinatorics.pigeonhole-principle public
 open import univalent-combinatorics.presented-pi-finite-types public
 open import univalent-combinatorics.quotients-finite-types public
@@ -116,4 +115,5 @@ open import univalent-combinatorics.universal-property-standard-finite-types pub
 open import univalent-combinatorics.unlabeled-partitions public
 open import univalent-combinatorics.unlabeled-rooted-trees public
 open import univalent-combinatorics.unlabeled-trees public
+open import univalent-combinatorics.untruncated-pi-finite-types public
 ```

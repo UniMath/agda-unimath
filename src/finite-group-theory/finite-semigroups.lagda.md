@@ -32,9 +32,9 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.function-types
-open import univalent-combinatorics.untruncated-pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.truncated-pi-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>

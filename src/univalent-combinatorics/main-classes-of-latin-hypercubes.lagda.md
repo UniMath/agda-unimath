@@ -24,9 +24,9 @@ open import univalent-combinatorics.complements-isolated-elements
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.untruncated-pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.truncated-pi-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>
