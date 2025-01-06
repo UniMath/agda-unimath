@@ -88,7 +88,7 @@ module _
 
 ## Comment
 
-It is likely that this "finitary De Morgan's law" can be generalized to families
+It is likely that this finitary De Morgan's law can be generalized to families
 of De Morgan types indexed by _searchable types_ in the sense of Escardó
 {{#cite Esc08}}.
 
