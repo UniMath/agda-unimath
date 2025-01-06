@@ -183,9 +183,10 @@ module _
     ({l' : Level} (B : UU l') → ¬ (A × B) → ¬ A + ¬ B) → is-de-morgan A
   is-de-morgan-satisfies-de-morgans-law' H = H (¬ A) (λ f → pr2 f (pr1 f))
 
-  is-merely-decidable-neg-satisfies-de-morgan :
+  is-merely-decidable-neg-satisfies-de-morgans-law :
     satisfies-de-morgans-law-type A → is-merely-decidable (¬ A)
-  is-merely-decidable-neg-satisfies-de-morgan H = H (¬ A) (λ f → pr2 f (pr1 f))
+  is-merely-decidable-neg-satisfies-de-morgans-law H =
+    H (¬ A) (λ f → pr2 f (pr1 f))
 
   is-de-morgan-satisfies-de-morgans-law :
     satisfies-de-morgans-law-type A → is-de-morgan A
