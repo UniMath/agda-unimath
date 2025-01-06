@@ -18,5 +18,6 @@ open import logic.double-negation-eliminating-maps public
 open import logic.double-negation-elimination public
 open import logic.double-negation-stable-embeddings public
 open import logic.double-negation-stable-subtypes public
+open import logic.markovian-types public
 open import logic.markovs-principle public
 ```
