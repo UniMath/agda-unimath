@@ -33,7 +33,7 @@ are numbers of the form $F_n := 2^{2^n}+1$. The first five Fermat numbers are
 ```
 
 The sequence of Fermat numbers is listed as A000215 in the
-[Online Encyclopedia of Integer Sequences](literature.oeis.md) {{#cite "OEIS"}}.
+[Online Encyclopedia of Integer Sequences](literature.oeis.md) {{#cite OEIS}}.
 
 Alternatively, the Fermat numbers can be defined with
 [strong induction](elementary-number-theory.strong-induction-natural-numbers.md)
@@ -45,13 +45,17 @@ F (n + 1) := 2 + Π_{i≤n} F_i
 ```
 
 This recurrence implies that any two Fermat numbers are
-[relatively prime](elementary-number-theory.relatively-prime-natural-numbers.md), because it follows from this recurrence that any divisor of two distinct Fermat numbers must divide the number $2$. Since the Fermat numbers are all odd, this implies that any divisor of two distinct Fermat numbers must be the number $1$.
+[relatively prime](elementary-number-theory.relatively-prime-natural-numbers.md),
+because it follows from this recurrence that any divisor of two distinct Fermat
+numbers must divide the number $2$. Since the Fermat numbers are all odd, this
+implies that any divisor of two distinct Fermat numbers must be the number $1$.
 
 Goldbach used this observation to prove the
-[infinitude of primes](elementary-number-theory.infinitude-of-primes.md) {{#cite "AZ18"}} : Since
-there are infinitely many Fermat numbers, and all of them are relatively prime,
-there must be infinitely many prime numbers. Fermat numbers also feature in a
-series of long-standing open problems in mathematics, including:
+[infinitude of primes](elementary-number-theory.infinitude-of-primes.md)
+{{#cite AZ18}} : Since there are infinitely many Fermat numbers, and all of them
+are relatively prime, there must be infinitely many prime numbers. Fermat
+numbers also feature in a series of long-standing open problems in mathematics,
+including:
 
 - Are there infinitely many prime Fermat numbers?
 - Is $F_n$ composite for all $n\geq 5$?
@@ -104,12 +108,13 @@ $$
 
 ```text
 fermat-number-succ-ℕ :
-  (n : ℕ) → fermat-number-ℕ (succ-ℕ n) ＝ 
+  (n : ℕ) → fermat-number-ℕ (succ-ℕ n) ＝
 ```
 
 ### The two definitions of the Fermat numbers agree
 
-**Proof.** The proof is by strong induction on the natural numbers. The base case holds by reflexivity. For the inductive step, assume that
+**Proof.** The proof is by strong induction on the natural numbers. The base
+case holds by reflexivity. For the inductive step, assume that
 
 ```agda
 compute-recursive-fermat-number-ℕ :
@@ -130,7 +135,9 @@ compute-recursive-fermat-number-ℕ =
 
 ### Any two distinct Fermat numbers are relatively prime
 
-**Proof.** By the recursive definition of the Fermat numbers, we have that $F_{n+1}=(\prod_{n=0}^n F_n) + 2$. This implies that if $d$ divides $F_m$ and $F_n$ for some $n>m$, then $d|2$. However, the Fermat numbers are odd, so $d=1$.
+**Proof.** By the recursive definition of the Fermat numbers, we have that
+$F_{n+1}=(\prod_{n=0}^n F_n) + 2$. This implies that if $d$ divides $F_m$ and
+$F_n$ for some $n>m$, then $d|2$. However, the Fermat numbers are odd, so $d=1$.
 
 ```agda
 is-one-div-fermat-number-ℕ :

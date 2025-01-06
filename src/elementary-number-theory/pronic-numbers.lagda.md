@@ -27,8 +27,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The {{#concept "pronic numbers" Agda=pronic-number-ℕ WD="pronic number" WDID=Q1486643}} are the [natural numbers](elementary-number-theory.natural-numbers.md)
-of the form
+The
+{{#concept "pronic numbers" Agda=pronic-number-ℕ WD="pronic number" WDID=Q1486643}}
+are the [natural numbers](elementary-number-theory.natural-numbers.md) of the
+form
 
 $$
   n(n+1).
@@ -41,9 +43,9 @@ $$
 $$
 
 The sequence `0, 2, 6, 12, 20, 30, 42, ⋯` of pronic numbers is listed as
-[A002378](https://oeis.org/A002378) in the OEIS {{#cite "OEIS"}}. The $n$th
-pronic number is [even](elementary-number-theory.parity-natural-numbers.md) for
-every $n$, and it is twice the $n$th
+[A002378](https://oeis.org/A002378) in the OEIS {{#cite OEIS}}. The $n$th pronic
+number is [even](elementary-number-theory.parity-natural-numbers.md) for every
+$n$, and it is twice the $n$th
 [triangular number](elementary-number-theory.triangular-numbers.md).
 
 ## Definitions
@@ -106,7 +108,7 @@ compute-pronic-number-succ-ℕ n =
 The sum of the pronic numbers from $1$ to $n$ is given by the identity
 
 $$
-  \sum_{k=0}^n k(k+1) = \frac{n(n+1)(n+3)}{3} = 2\binom{n+3}{3} 
+  \sum_{k=0}^n k(k+1) = \frac{n(n+1)(n+3)}{3} = 2\binom{n+3}{3}
 $$
 
 This sequence of numbers starts out as
@@ -115,7 +117,9 @@ $$
   0,\ 2,  8,\ 20,\ 40,\ 70,\ \ldots
 $$
 
-and it is listed as A007290 in the [OEIS](literature.oeis.md) {{#cite "OEIS"}}. The computation of the sum of pronic numbers is stated as exercise 4 in section 1.2 of {{#cite "Andrews94}}.
+and it is listed as A007290 in the [OEIS](literature.oeis.md) {{#cite OEIS}}.
+The computation of the sum of pronic numbers is stated as exercise 4 in section
+1.2 of {{#cite Andrews94}}.
 
 ```agda
 sum-of-pronic-numbers-ℕ : ℕ → ℕ

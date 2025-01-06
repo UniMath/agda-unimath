@@ -499,7 +499,7 @@ is-1-mod-8-square-is-odd-ℕ n H =
 
 ### Any two odd squares are congruent modulo `8`
 
-This solves exercise 6 of section 2.1 in {{#cite "andrews94"}}.
+This solves exercise 6 of section 2.1 in {{#cite Andrews94}}.
 
 ```agda
 cong-8-square-odd-number-ℕ :
@@ -565,7 +565,7 @@ $$
   1 + 3 + \cdots + (2n+1) = n^2.
 $$
 
-This solves exercise 5 in section 1.2 of {{#cite "Andrews94"}}.
+This solves exercise 5 in section 1.2 of {{#cite Andrews94}}.
 
 ```agda
 sum-of-odd-numbers-ℕ : ℕ → ℕ

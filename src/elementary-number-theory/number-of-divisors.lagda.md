@@ -26,13 +26,19 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The {{#concept "number of divisors" Agda=number-of-divisors-ℕ OEIS=A000005 WDID=Q12890701 WD="number of divisors"}} $\tau(n)$ of a [natural number](elementary-number-theory.natural-numbers.md) $n$ is the number of natural numbers $d \leq n$ that [divide](elementary-number-theory.divisibility.natural-numbers.md) the number $n$, i.e.,
+The
+{{#concept "number of divisors" Agda=number-of-divisors-ℕ OEIS=A000005 WDID=Q12890701 WD="number of divisors"}}
+$\tau(n)$ of a [natural number](elementary-number-theory.natural-numbers.md) $n$
+is the number of natural numbers $d \leq n$ that
+[divide](elementary-number-theory.divisibility.natural-numbers.md) the number
+$n$, i.e.,
 
 $$
   \tau(n) := |\{d \in \mathbb{N} \mid d|n\}|.
 $$
 
-The number of divisors function is listed as A000005 in the [OEIS](literature.oeis.md) {{#cite "OEIS"}}.
+The number of divisors function is listed as A000005 in the
+[OEIS](literature.oeis.md) {{#cite OEIS}}.
 
 ## Definitions
 
@@ -62,7 +68,8 @@ pr2 (pr2 (pr2 (quotient-type-of-divisors-ℕ n (d , H)))) =
 
 ### The number of divisors function
 
-Note that the entry `number-of-elements-decidable-subtype` refers to `count-decidable-subtype'`, which is `abstract` and therefore doesn't compute.
+Note that the entry `number-of-elements-decidable-subtype` refers to
+`count-decidable-subtype'`, which is `abstract` and therefore doesn't compute.
 
 ```agda
 count-type-of-divisors-ℕ :
@@ -81,7 +88,10 @@ number-of-divisors-ℕ n =
 
 ### Involution on the type of divisors
 
-For every natural number `n : ℕ`, the map `d ↦ n/d` mapping a divisor of `n` to its quotient is an involution. This operation has a fixed point precisely when `n` is a [square number](elementary-number-theory.square-natural-numbers.md).
+For every natural number `n : ℕ`, the map `d ↦ n/d` mapping a divisor of `n` to
+its quotient is an involution. This operation has a fixed point precisely when
+`n` is a [square number](elementary-number-theory.square-natural-numbers.md).
 
 ```agda
+
 ```

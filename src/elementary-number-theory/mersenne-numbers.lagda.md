@@ -45,7 +45,7 @@ mersenne-number-ℕ n =
 
 Some sources only refer to numbers of the form $2^p-1$ with $p$ prime as
 Mersenne numbers. The sequence $n ↦ 2^{p(n)}-1$, where $p(n)$ is the $n$th prime
-number, is listed as A001348 in the [OEIS](literature.oeis.md) {{#cite "OEIS"}}.
+number, is listed as A001348 in the [OEIS](literature.oeis.md) {{#cite OEIS}}.
 The first few numbers in this sequence are
 
 ```text

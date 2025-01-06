@@ -190,7 +190,10 @@ prime-counting-ℕ (succ-ℕ n) =
 
 ### A very weak lower bound on the prime counting function
 
-In section 2.2 of {{#cite "HW08"}}, Hardy and Wright illustrate how Euclid's proof of the infinitued of primes can be used to derive a lower bound on the prime counting function. This lower bound is extremely weak, but could nevertheless be found illustrative.
+In section 2.2 of {{#cite HW08}}, Hardy and Wright illustrate how Euclid's proof
+of the infinitued of primes can be used to derive a lower bound on the prime
+counting function. This lower bound is extremely weak, but could nevertheless be
+found illustrative.
 
 ## References
 

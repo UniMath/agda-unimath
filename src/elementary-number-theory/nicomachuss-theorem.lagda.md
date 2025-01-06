@@ -44,16 +44,17 @@ $$
 
 This identity is a common exercise in introductory sections on mathematical
 induction. As such, it can be found as exercise 2 in section 1.2 of
-{{#cite "Andrews94}}, or exercise 2(c) of section 1.2 in
-{{#cite "Leveque12volI"}}.
+{{#cite Andrews94}}, or exercise 2(c) of section 1.2 in {{#cite Leveque12volI}}.
 
-**Proof.** Recall that the $n$th triangular number is $n(n+1)/2$. We will prove by induction that
+**Proof.** Recall that the $n$th triangular number is $n(n+1)/2$. We will prove
+by induction that
 
 $$
   4\sum_{k=0}^n k^3 = 4\left(\sum_{k=0}^n k \right)^2.
 $$
 
-This allows us to avoid carrying along division by 4 throughout the proof. In the base case we have
+This allows us to avoid carrying along division by 4 throughout the proof. In
+the base case we have
 
 $$
   4\sum_{k=0}^0 k^3 = 4·0^3 = 4·0^2 = 4(0·1/2)^2.
@@ -71,7 +72,7 @@ where the last step follows by algebra. This completes the proof.
 
 ### The square of the pronic number of a successor
 
-We have `((n + 1) * (n + 2))² ＝ (n * (n + 1))² + 4 * (n + 1)³
+We have `((n + 1) _ (n + 2))² ＝ (n _ (n + 1))² + 4 \* (n + 1)³
 
 ```agda
 compute-square-pronic-number-succ-ℕ :

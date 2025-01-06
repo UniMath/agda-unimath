@@ -27,19 +27,24 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The $n$th {{#concept "square pyramidal number" Agda=square-pyramidal-number-ℕ OEIS=A000330 WDID=Q18949 WD="square pyramidal number"}} is the [sum](elementary-number-theory.sums-of-natural-numbers.md) of [squares](elementary-number-theory.squares-natural-numbers.md)
+The $n$th
+{{#concept "square pyramidal number" Agda=square-pyramidal-number-ℕ OEIS=A000330 WDID=Q18949 WD="square pyramidal number"}}
+is the [sum](elementary-number-theory.sums-of-natural-numbers.md) of
+[squares](elementary-number-theory.squares-natural-numbers.md)
 
 $$
   1^2 + 2^2 + \cdots + n^2.
 $$
 
-A common exercise in mathematical induction states that the $n$th square pyramidal number is equal to
+A common exercise in mathematical induction states that the $n$th square
+pyramidal number is equal to
 
 $$
   \frac{n(n+1)(2n+1)}{6}.
 $$
 
-The sequence of square pyramidal numbers is listed as A000330 in the [OEIS](literature.oeis.md) {{#cite "OEIS"}}.
+The sequence of square pyramidal numbers is listed as A000330 in the
+[OEIS](literature.oeis.md) {{#cite OEIS}}.
 
 ## Definitions
 
@@ -61,15 +66,20 @@ $$
   \sum_{k=0}^n k^2 ＝ \frac{n(n+1)(2n+1)}{6}.
 $$
 
-In order to prove this, we first show that the sequence $a_n := n(n+1)(2n+1)$ satisfies the recurrence
+In order to prove this, we first show that the sequence $a_n := n(n+1)(2n+1)$
+satisfies the recurrence
 
 $$
   a_{n+1} = a_n + 6(n+1)^2.
 $$
 
-By this recurrence it follows that each $a_n$ is [divisible](elementary-number-theory.divisibility-natural-numbers.md) by $6$, and that $a_n$ is $6$ times the $n$th pyramidal number.
+By this recurrence it follows that each $a_n$ is
+[divisible](elementary-number-theory.divisibility-natural-numbers.md) by $6$,
+and that $a_n$ is $6$ times the $n$th pyramidal number.
 
-The computation of the square pyramidal numbers is a common exercise in elementary number theory texts, such as exercise 1 of section 1.2 in {{#cite "Andrews94}}.
+The computation of the square pyramidal numbers is a common exercise in
+elementary number theory texts, such as exercise 1 of section 1.2 in
+{{#cite Andrews94}}.
 
 ```agda
 dividend-square-pyramidal-number-ℕ : ℕ → ℕ
