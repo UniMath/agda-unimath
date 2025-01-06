@@ -683,5 +683,5 @@ pr2 (Untruncated-π-Finite-Type-Σ k A B) =
 
 ## See also
 
-- [π-finite types](univalent-combinatorics.truncated-pi-finite-types.md)
+- [π-finite types](univalent-combinatorics.pi-finite-types.md)
 - [Unbounded π-finite types](univalent-combinatorics.unbounded-pi-finite-types.md)

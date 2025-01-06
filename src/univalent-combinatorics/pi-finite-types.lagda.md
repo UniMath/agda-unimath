@@ -1,7 +1,7 @@
 # π-finite types
 
 ```agda
-module univalent-combinatorics.truncated-pi-finite-types where
+module univalent-combinatorics.pi-finite-types where
 ```
 
 <details><summary>Imports</summary>

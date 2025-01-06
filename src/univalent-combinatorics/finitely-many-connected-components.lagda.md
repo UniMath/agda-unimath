@@ -220,5 +220,5 @@ has-finitely-many-connected-components-finite-Π {B = B} H K =
 ## See also
 
 - [Kuratowski finite sets](univalent-combinatorics.kuratowski-finite-sets.md)
-- [π-finite types](univalent-combinatorics.truncated-pi-finite-types.md)
+- [π-finite types](univalent-combinatorics.pi-finite-types.md)
 - [Unbounded π-finite types](univalent-combinatorics.unbounded-pi-finite-types.md)

@@ -86,6 +86,7 @@ open import univalent-combinatorics.orientations-complete-undirected-graph publi
 open import univalent-combinatorics.orientations-cubes public
 open import univalent-combinatorics.partitions public
 open import univalent-combinatorics.petri-nets public
+open import univalent-combinatorics.pi-finite-types public
 open import univalent-combinatorics.pigeonhole-principle public
 open import univalent-combinatorics.presented-pi-finite-types public
 open import univalent-combinatorics.quotients-finite-types public
@@ -107,7 +108,6 @@ open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
 open import univalent-combinatorics.symmetric-difference public
 open import univalent-combinatorics.trivial-sigma-decompositions public
-open import univalent-combinatorics.truncated-pi-finite-types public
 open import univalent-combinatorics.type-duality public
 open import univalent-combinatorics.unbounded-pi-finite-types public
 open import univalent-combinatorics.unions-subtypes public
