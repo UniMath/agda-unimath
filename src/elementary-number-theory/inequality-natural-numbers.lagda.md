@@ -532,5 +532,5 @@ leq-left-factor-eq-ℕ m n .(m *ℕ n) H refl =
 
 ## See also
 
-- Strict inequality of the natural numbers is defined in
-  [`strict-inequality-natural-numbers`](elementary-number-theory.strict-inequality-natural-numbers.md)
+- [The bounded natural numbers](elementary-number-theory.bounded-natural-numbers.md)
+- [Strict inequality of the natural numbers](elementary-number-theory.strict-inequality-natural-numbers.md)

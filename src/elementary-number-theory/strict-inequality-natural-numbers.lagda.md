@@ -530,3 +530,7 @@ preserves-strict-order-right-mul-ℕ k x y H =
   preserves-strict-order-right-mul-is-successor-ℕ k x y
     ( is-successor-is-nonzero-ℕ H)
 ```
+
+## See also
+
+- [The strictly bounded natural numbers](elementary-number-theory.strictly-bounded-natural-numbers.md)

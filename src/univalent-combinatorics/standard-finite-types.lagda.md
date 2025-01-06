@@ -491,3 +491,9 @@ is-preunivalent-Fin : is-preunivalent Fin
 is-preunivalent-Fin =
   is-preunivalent-retraction-equiv-tr-Set Fin-Set retraction-equiv-tr-Fin
 ```
+
+## See also
+
+- [The bounded natural numbers](elementary-number-theory.bounded-natural-numbers.md)
+- [The strictly bounded natural numbers](elementary-number-theory.strictly-bounded-natural-numbers.md)
+- [Modular arithmetic on the standard finite types](elementary-number-theory.modular-arithmetic-standard-finite-types.md)

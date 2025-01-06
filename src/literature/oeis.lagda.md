@@ -100,6 +100,15 @@ open import elementary-number-theory.infinitude-of-primes using
 
 OEIS: [A000040](https://oeis.org/A000040)
 
+### A000043 -- The Mersenne exponents
+
+```agda
+open import elementary-number-theory.mersenne-exponents using
+  ( is-mersenne-exponent-ℕ)
+```
+
+OEIS: [A000043](https://oeis.org/A000043)
+
 ### A000045 -- The Fibonacci sequence
 
 ```agda
@@ -163,6 +172,15 @@ open import elementary-number-theory.triangular-numbers using
 
 OEIS: [A000217](https://oeis.org/A000217)
 
+### A000225 -- Mersenne numbers
+
+```agda
+open import elementary-number-theory.mersenne-numbers using
+  ( mersenne-number-ℕ)
+```
+
+OEIS: [A000225](https://oeis.org/A000225)
+
 ### A000244 -- Powers of `3`
 
 ```agda
@@ -216,6 +234,15 @@ open import elementary-number-theory.cofibonacci using
 ```
 
 OEIS: [A001177](https://oeis.org/A001177)
+
+### A001348 -- The Mersenne numbers (at primes)
+
+```agda
+open import elementary-number-theory.mersenne-numbers using
+  ( mersenne-number-prime-ℕ)
+```
+
+OEIS: [A001348](https://oeis.org/A001348)
 
 ### A001477 -- The natural numbers
 
