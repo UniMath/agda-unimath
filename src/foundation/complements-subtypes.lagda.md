@@ -39,7 +39,7 @@ open import order-theory.posets
 The
 {{#concept "complement" Disambiguation="of a subtype" Agda=complement-subtype}}
 of a [subtype](foundation-core.subtypes.md) `P ⊆ A` consists of the elements
-that are not in `P`.
+that are [not](foundation-core.negation.md) in `P`.
 
 ## Definition
 
