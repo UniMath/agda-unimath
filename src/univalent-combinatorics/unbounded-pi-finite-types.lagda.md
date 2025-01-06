@@ -34,7 +34,7 @@ open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.truncated-pi-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>
@@ -341,49 +341,53 @@ is-finite-is-unbounded-π-finite H K =
     ( has-finitely-many-connected-components-is-unbounded-π-finite K)
 ```
 
-### Truncated π-finite types are unbounded π-finite
+### π-finite types are unbounded π-finite
 
 ```agda
-is-unbounded-π-finite-is-truncated-π-finite :
+is-unbounded-π-finite-is-π-finite :
   {l : Level} (k : ℕ) {A : UU l} →
-  is-truncated-π-finite k A → is-unbounded-π-finite A
-is-unbounded-π-finite-is-truncated-π-finite zero-ℕ =
+  is-π-finite k A → is-unbounded-π-finite A
+is-unbounded-π-finite-is-π-finite zero-ℕ =
   is-unbounded-π-finite-is-finite
-is-unbounded-π-finite-is-truncated-π-finite (succ-ℕ k) H =
+is-unbounded-π-finite-is-π-finite (succ-ℕ k) H =
   λ where
   .has-finitely-many-connected-components-is-unbounded-π-finite →
     pr1 H
   .is-unbounded-π-finite-Id-is-unbounded-π-finite x y →
-    is-unbounded-π-finite-is-truncated-π-finite k (pr2 H x y)
+    is-unbounded-π-finite-is-π-finite k (pr2 H x y)
 ```
 
-### Unbounded π-finite types are types that are πₙ-finite for all `n`
+### Unbounded π-finite types are types that are untruncated πₙ-finite for all `n`
 
 ```agda
 is-unbounded-π-finite-Id-is-unbounded-π-finite' :
   {l : Level} {A : UU l} →
-  ((k : ℕ) → is-π-finite k A) →
+  ((k : ℕ) → is-untruncated-π-finite k A) →
   (x y : A) →
-  (k : ℕ) → is-π-finite k (x ＝ y)
+  (k : ℕ) → is-untruncated-π-finite k (x ＝ y)
 is-unbounded-π-finite-Id-is-unbounded-π-finite' H x y k = pr2 (H (succ-ℕ k)) x y
 
-is-unbounded-π-finite-is-π-finite :
-  {l : Level} {A : UU l} → ((k : ℕ) → is-π-finite k A) → is-unbounded-π-finite A
-is-unbounded-π-finite-is-π-finite H =
+is-unbounded-π-finite-is-untruncated-π-finite :
+  {l : Level} {A : UU l} →
+  ((k : ℕ) → is-untruncated-π-finite k A) →
+  is-unbounded-π-finite A
+is-unbounded-π-finite-is-untruncated-π-finite H =
   λ where
   .has-finitely-many-connected-components-is-unbounded-π-finite → H 0
   .is-unbounded-π-finite-Id-is-unbounded-π-finite x y →
-    is-unbounded-π-finite-is-π-finite
+    is-unbounded-π-finite-is-untruncated-π-finite
       ( is-unbounded-π-finite-Id-is-unbounded-π-finite' H x y)
 
-is-π-finite-is-unbounded-π-finite :
-  {l : Level} {A : UU l} → is-unbounded-π-finite A → (k : ℕ) → is-π-finite k A
-is-π-finite-is-unbounded-π-finite H zero-ℕ =
+is-untruncated-π-finite-is-unbounded-π-finite :
+  {l : Level} {A : UU l} →
+  is-unbounded-π-finite A →
+  (k : ℕ) → is-untruncated-π-finite k A
+is-untruncated-π-finite-is-unbounded-π-finite H zero-ℕ =
   has-finitely-many-connected-components-is-unbounded-π-finite H
-pr1 (is-π-finite-is-unbounded-π-finite H (succ-ℕ k)) =
-  is-π-finite-is-unbounded-π-finite H zero-ℕ
-pr2 (is-π-finite-is-unbounded-π-finite H (succ-ℕ k)) x y =
-  is-π-finite-is-unbounded-π-finite
+pr1 (is-untruncated-π-finite-is-unbounded-π-finite H (succ-ℕ k)) =
+  is-untruncated-π-finite-is-unbounded-π-finite H zero-ℕ
+pr2 (is-untruncated-π-finite-is-unbounded-π-finite H (succ-ℕ k)) x y =
+  is-untruncated-π-finite-is-unbounded-π-finite
     ( is-unbounded-π-finite-Id-is-unbounded-π-finite H x y)
     ( k)
 ```
@@ -412,7 +416,7 @@ is-unbounded-π-finite-Π H K =
 ```
 
 Instead, we give a proof using the description of unbounded π-finite types as
-types that are πₙ-finite for all n.
+types that are untruncated πₙ-finite for all n.
 
 ```agda
 is-unbounded-π-finite-Π :
@@ -420,10 +424,10 @@ is-unbounded-π-finite-Π :
   is-finite A → ((a : A) → is-unbounded-π-finite (B a)) →
   is-unbounded-π-finite ((a : A) → B a)
 is-unbounded-π-finite-Π H K =
-  is-unbounded-π-finite-is-π-finite
+  is-unbounded-π-finite-is-untruncated-π-finite
     ( λ k →
-      is-π-finite-Π k H
-        ( λ a → is-π-finite-is-unbounded-π-finite (K a) k))
+      is-untruncated-π-finite-Π k H
+        ( λ a → is-untruncated-π-finite-is-unbounded-π-finite (K a) k))
 ```
 
 ### Dependent sums of unbounded π-finite types are unbounded π-finite
@@ -438,11 +442,11 @@ abstract
     is-unbounded-π-finite A → ((x : A) → is-unbounded-π-finite (B x)) →
     is-unbounded-π-finite (Σ A B)
   is-unbounded-π-finite-Σ H K =
-    is-unbounded-π-finite-is-π-finite
+    is-unbounded-π-finite-is-untruncated-π-finite
       ( λ k →
-        is-π-finite-Σ k
-          ( is-π-finite-is-unbounded-π-finite H (succ-ℕ k))
-          ( λ x → is-π-finite-is-unbounded-π-finite (K x) k))
+        is-untruncated-π-finite-Σ k
+          ( is-untruncated-π-finite-is-unbounded-π-finite H (succ-ℕ k))
+          ( λ x → is-untruncated-π-finite-is-unbounded-π-finite (K x) k))
 ```
 
 ## References

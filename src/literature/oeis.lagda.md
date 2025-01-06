@@ -298,6 +298,15 @@ open import elementary-number-theory.collatz-bijection using
 
 OEIS: [A006369](https://oeis.org/A006369)
 
+### A027851 -- The number of semigroups of order `n` up to isomorphism
+
+```agda
+open import finite-group-theory.finite-semigroups using
+  ( number-of-semigroups-of-order)
+```
+
+OEIS: [A027851](https://oeis.org/A027851)
+
 ### A046859 -- The main diagonal of the Ackermann–Péter function
 
 ```agda
@@ -305,7 +314,16 @@ open import elementary-number-theory.ackermann-function using
   ( simplified-ackermann-ℕ)
 ```
 
+<<<<<<< HEAD
 OEIS: [A046859](https://oeis.org/A046859)
+=======
+### [A058129](https://oeis.org/A058129) The number of monoids of order `n` up to isomorphism
+
+```agda
+open import finite-group-theory.finite-monoids using
+  ( number-of-monoids-of-order)
+```
+>>>>>>> 871a0295de0f8e48d52561158d55e9c7fdd69ab9
 
 ## References
 

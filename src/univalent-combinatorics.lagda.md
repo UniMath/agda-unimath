@@ -15,9 +15,10 @@ the isomorphic objects are identified by the univalence axiom. Univalence can
 therefore help with counting finite structures up to isomorphism. The main piece
 of machinery that helps in this task is the general notion of π-finiteness. A
 level `k` π-finite type is a type that has finitely many connected components,
-such that all its homotopy groups up to level `k` are finite. The π-finite types
-enjoy useful closure properties, such as closedness under Σ, cartesian products,
-coproducts, and closedness under Π under a mild condition.
+such that all its homotopy groups up to level `k` are finite and all its
+homotopy groups above level `k` are trivial. The π-finite types enjoy useful
+closure properties, such as closedness under Σ, cartesian products, coproducts,
+and closedness under Π under a mild condition {{#cite Anel24}}.
 
 ## Modules in the univalent combinatorics namespace
 
@@ -107,7 +108,6 @@ open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
 open import univalent-combinatorics.symmetric-difference public
 open import univalent-combinatorics.trivial-sigma-decompositions public
-open import univalent-combinatorics.truncated-pi-finite-types public
 open import univalent-combinatorics.type-duality public
 open import univalent-combinatorics.unbounded-pi-finite-types public
 open import univalent-combinatorics.unions-subtypes public
@@ -115,4 +115,9 @@ open import univalent-combinatorics.universal-property-standard-finite-types pub
 open import univalent-combinatorics.unlabeled-partitions public
 open import univalent-combinatorics.unlabeled-rooted-trees public
 open import univalent-combinatorics.unlabeled-trees public
+open import univalent-combinatorics.untruncated-pi-finite-types public
 ```
+
+## References
+
+{{#bibliography}}
