@@ -15,9 +15,10 @@ the isomorphic objects are identified by the univalence axiom. Univalence can
 therefore help with counting finite structures up to isomorphism. The main piece
 of machinery that helps in this task is the general notion of π-finiteness. A
 level `k` π-finite type is a type that has finitely many connected components,
-such that all its homotopy groups up to level `k` are finite. The π-finite types
-enjoy useful closure properties, such as closedness under Σ, cartesian products,
-coproducts, and closedness under Π under a mild condition.
+such that all its homotopy groups up to level `k` are finite and all its
+homotopy groups above level `k` are trivial. The π-finite types enjoy useful
+closure properties, such as closedness under Σ, cartesian products, coproducts,
+and closedness under Π under a mild condition.
 
 ## Modules in the univalent combinatorics namespace
 
