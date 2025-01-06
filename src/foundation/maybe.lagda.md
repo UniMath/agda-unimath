@@ -26,6 +26,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
+open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
 ```
@@ -87,6 +88,12 @@ is-exception-Maybe {l} {X} x = (x ＝ exception-Maybe)
 
 is-not-exception-Maybe : {l : Level} {X : UU l} → Maybe X → UU l
 is-not-exception-Maybe x = ¬ (is-exception-Maybe x)
+
+is-prop-is-exception-Maybe :
+  {l : Level} {X : UU l} (x : Maybe X) → is-prop (is-exception-Maybe x)
+is-prop-is-exception-Maybe (inl x) ()
+is-prop-is-exception-Maybe (inr x) =
+  is-prop-equiv (compute-eq-coproduct-inr-inr x star) (is-set-unit x star)
 ```
 
 ### The predicate of being a value
@@ -131,19 +138,23 @@ abstract
   is-injective-unit-Maybe = is-injective-inl
 ```
 
-### Being an exception is decidable
+### Being an exception is a decidable proposition
 
 ```agda
-is-decidable-is-exception-Maybe :
-  {l : Level} {X : UU l} (x : Maybe X) → is-decidable (is-exception-Maybe x)
-is-decidable-is-exception-Maybe {l} {X} (inl x) =
-  inr (λ p → ex-falso (is-empty-eq-coproduct-inl-inr x star p))
-is-decidable-is-exception-Maybe (inr star) = inl refl
+module _
+  {l : Level} {X : UU l}
+  where
 
-is-decidable-is-not-exception-Maybe :
-  {l : Level} {X : UU l} (x : Maybe X) → is-decidable (is-not-exception-Maybe x)
-is-decidable-is-not-exception-Maybe x =
-  is-decidable-neg (is-decidable-is-exception-Maybe x)
+  is-decidable-is-exception-Maybe :
+    (x : Maybe X) → is-decidable (is-exception-Maybe x)
+  is-decidable-is-exception-Maybe (inl x) =
+    inr (λ p → ex-falso (is-empty-eq-coproduct-inl-inr x star p))
+  is-decidable-is-exception-Maybe (inr star) = inl refl
+
+  is-decidable-is-not-exception-Maybe :
+    (x : Maybe X) → is-decidable (is-not-exception-Maybe x)
+  is-decidable-is-not-exception-Maybe x =
+    is-decidable-neg (is-decidable-is-exception-Maybe x)
 ```
 
 ### The values of the unit of the `Maybe` monad are not exceptions
@@ -152,7 +163,19 @@ is-decidable-is-not-exception-Maybe x =
 abstract
   is-not-exception-unit-Maybe :
     {l : Level} {X : UU l} (x : X) → is-not-exception-Maybe (unit-Maybe x)
-  is-not-exception-unit-Maybe {l} {X} x ()
+  is-not-exception-unit-Maybe x ()
+```
+
+### The unit of `Maybe` is not surjective
+
+```agda
+abstract
+  is-not-surjective-unit-Maybe :
+    {l : Level} {X : UU l} → ¬ (is-surjective (unit-Maybe {X = X}))
+  is-not-surjective-unit-Maybe H =
+    rec-trunc-Prop empty-Prop
+      ( λ p → is-not-exception-unit-Maybe (pr1 p) (pr2 p))
+      ( H exception-Maybe)
 ```
 
 ### For any element of type `Maybe X` we can decide whether it is a value or an exception

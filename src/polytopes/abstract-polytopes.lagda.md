@@ -7,7 +7,8 @@ module polytopes.abstract-polytopes where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory
+open import elementary-number-theory.inequality-standard-finite-types
+open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
