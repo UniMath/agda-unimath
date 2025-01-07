@@ -98,7 +98,7 @@ compute-succ-recursive-fermat-number-ℕ =
 
 ## Properties
 
-### The Fermat number at a successor
+### The Fermat number of a successor
 
 Any Fermat number of the form $F(n+1)=2^{2^{n+1}}+1$ can be computed as
 

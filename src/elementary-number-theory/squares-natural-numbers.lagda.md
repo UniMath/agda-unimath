@@ -559,6 +559,64 @@ module _
       ( bounded-div-square-ℕ)
 ```
 
+### Squares of sums of natural numbers
+
+```agda
+square-add-ℕ :
+  (m n : ℕ) → square-ℕ (m +ℕ n) ＝ square-ℕ m +ℕ 2 *ℕ (m *ℕ n) +ℕ square-ℕ n
+square-add-ℕ m n =
+  ( double-distributive-mul-add-ℕ m n m n) ∙
+  ( ap
+    ( _+ℕ square-ℕ n)
+    ( ( associative-add-ℕ (square-ℕ m) (m *ℕ n) (n *ℕ m)) ∙
+      ( ap
+        ( square-ℕ m +ℕ_)
+        ( ( ap (m *ℕ n +ℕ_) (commutative-mul-ℕ n m)) ∙
+          ( inv (left-two-law-mul-ℕ (m *ℕ n)))))))
+```
+
+### The formula for the distance between squares
+
+The formula for the distance between squares is more commonly known as the formula for the difference of squares. However, since we prefer using the distance operation on the natural numbers over the partial difference operation, we will state and prove the analogous formula using the distance function.
+
+The formula for the difference of squares of integers is formalized in its usual form.
+
+```agda
+distance-of-squares-ℕ' :
+  (m n k : ℕ) → m +ℕ k ＝ n →
+  dist-ℕ (square-ℕ m) (square-ℕ n) ＝ dist-ℕ m n *ℕ (m +ℕ n)
+distance-of-squares-ℕ' m ._ k refl =
+  ( ap
+    ( dist-ℕ (square-ℕ m))
+    ( ( square-add-ℕ m k) ∙
+      ( associative-add-ℕ (square-ℕ m) (2 *ℕ (m *ℕ k)) (square-ℕ k)))) ∙
+  ( dist-add-ℕ (square-ℕ m) (2 *ℕ (m *ℕ k) +ℕ square-ℕ k)) ∙
+  ( ap
+    ( _+ℕ square-ℕ k)
+    ( inv (associative-mul-ℕ 2 m k) ∙ ap (_*ℕ k) (left-two-law-mul-ℕ m))) ∙
+  ( inv (right-distributive-mul-add-ℕ (m +ℕ m) k k)) ∙
+  ( ap (_*ℕ k) (associative-add-ℕ m m k)) ∙
+  ( commutative-mul-ℕ (m +ℕ (m +ℕ k)) k) ∙
+  ( ap (_*ℕ (m +ℕ (m +ℕ k))) (inv (dist-add-ℕ m k)))
+
+abstract
+  distance-of-squares-ℕ :
+    (m n : ℕ) → dist-ℕ (square-ℕ m) (square-ℕ n) ＝ dist-ℕ m n *ℕ (m +ℕ n)
+  distance-of-squares-ℕ m n
+    with
+    linear-leq-ℕ m n
+  ... | inl H =
+    distance-of-squares-ℕ' m n
+      ( pr1 (subtraction-leq-ℕ m n H))
+      ( commutative-add-ℕ m _ ∙ pr2 (subtraction-leq-ℕ m n H))
+  ... | inr H =
+    ( symmetric-dist-ℕ (square-ℕ m) (square-ℕ n)) ∙
+    ( distance-of-squares-ℕ' n m
+      ( pr1 (subtraction-leq-ℕ n m H))
+      ( commutative-add-ℕ n _ ∙ pr2 (subtraction-leq-ℕ n m H))) ∙
+    ( ap-mul-ℕ (symmetric-dist-ℕ n m) (commutative-add-ℕ n m))
+```
+
 ### The $n$th square is the sum of the first $n$ odd numbers
 
 We show that

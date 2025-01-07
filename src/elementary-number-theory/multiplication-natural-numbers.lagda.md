@@ -183,6 +183,16 @@ abstract
     ( ( left-distributive-mul-add-ℕ z x y) ∙
       ( ( ap (_+ℕ (z *ℕ y)) (commutative-mul-ℕ z x)) ∙
         ( ap ((x *ℕ z) +ℕ_) (commutative-mul-ℕ z y))))
+
+abstract
+  double-distributive-mul-add-ℕ :
+    (w x y z : ℕ) → (w +ℕ x) *ℕ (y +ℕ z) ＝ w *ℕ y +ℕ w *ℕ z +ℕ x *ℕ y +ℕ x *ℕ z
+  double-distributive-mul-add-ℕ w x y z =
+    ( right-distributive-mul-add-ℕ w x (y +ℕ z)) ∙
+    ( ap-add-ℕ
+      ( left-distributive-mul-add-ℕ w y z)
+      ( left-distributive-mul-add-ℕ x y z)) ∙
+    ( inv (associative-add-ℕ (w *ℕ y +ℕ w *ℕ z) (x *ℕ y) (x *ℕ z)))
 ```
 
 ### Multiplication is associative
