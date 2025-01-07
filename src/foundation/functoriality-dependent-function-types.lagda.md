@@ -103,15 +103,8 @@ module _
             ( f (map-inv-equiv e (map-equiv e a')))
             ( h (map-inv-equiv e (map-equiv e a')))))
       ( coherence-map-inv-equiv e a')) ∙
-    ( ( tr-ap
-        ( map-equiv e)
-        ( λ _ → id)
-        ( is-retraction-map-inv-equiv e a')
-        ( map-equiv
-          ( f (map-inv-equiv e (map-equiv e a')))
-          ( h (map-inv-equiv e (map-equiv e a'))))) ∙
-      ( α ( map-inv-equiv e (map-equiv e a'))
-          ( is-retraction-map-inv-equiv e a')))
+    ( substitution-law-tr B (map-equiv e) (is-retraction-map-inv-equiv e a')) ∙
+    ( α (map-inv-equiv e (map-equiv e a')) (is-retraction-map-inv-equiv e a'))
     where
     α :
       (x : A') (p : x ＝ a') →

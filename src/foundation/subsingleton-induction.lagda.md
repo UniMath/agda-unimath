@@ -60,11 +60,17 @@ compute-ind-is-subsingleton is-subsingleton-A a = pr2 (is-subsingleton-A a)
 
 ```agda
 abstract
-  ind-subsingleton :
-    {l1 l2 : Level} {A : UU l1} (is-prop-A : is-prop A)
+  ind-subsingleton' :
+    {l1 l2 : Level} {A : UU l1} → is-proof-irrelevant A →
     {B : A → UU l2} (a : A) → B a → (x : A) → B x
-  ind-subsingleton is-prop-A {B} a =
-    ind-singleton a (is-proof-irrelevant-is-prop is-prop-A a) B
+  ind-subsingleton' H {B} a = ind-singleton a (H a) B
+
+abstract
+  ind-subsingleton :
+    {l1 l2 : Level} {A : UU l1} → is-prop A →
+    {B : A → UU l2} (a : A) → B a → (x : A) → B x
+  ind-subsingleton is-prop-A =
+    ind-subsingleton' (is-proof-irrelevant-is-prop is-prop-A)
 
 abstract
   compute-ind-subsingleton :
@@ -78,18 +84,30 @@ abstract
 ### A type satisfies subsingleton induction if and only if it is a proposition
 
 ```agda
+is-subsingleton-is-proof-irrelevant :
+  {l1 l2 : Level} {A : UU l1} → is-proof-irrelevant A → is-subsingleton l2 A
+is-subsingleton-is-proof-irrelevant H {B} a =
+  is-singleton-is-contr a (H a) B
+
 is-subsingleton-is-prop :
   {l1 l2 : Level} {A : UU l1} → is-prop A → is-subsingleton l2 A
-is-subsingleton-is-prop is-prop-A {B} a =
-  is-singleton-is-contr a (is-proof-irrelevant-is-prop is-prop-A a) B
+is-subsingleton-is-prop is-prop-A =
+  is-subsingleton-is-proof-irrelevant (is-proof-irrelevant-is-prop is-prop-A)
+
+abstract
+  is-proof-irrelevant-ind-subsingleton :
+    {l1 : Level} (A : UU l1) →
+    ({l2 : Level} {B : A → UU l2} (a : A) → B a → (x : A) → B x) →
+    is-proof-irrelevant A
+  is-proof-irrelevant-ind-subsingleton A S a =
+    is-contr-ind-singleton A a (λ B → S {B = B} a)
 
 abstract
   is-prop-ind-subsingleton :
     {l1 : Level} (A : UU l1) →
     ({l2 : Level} {B : A → UU l2} (a : A) → B a → (x : A) → B x) → is-prop A
   is-prop-ind-subsingleton A S =
-    is-prop-is-proof-irrelevant
-      ( λ a → is-contr-ind-singleton A a (λ B → S {B = B} a))
+    is-prop-is-proof-irrelevant (is-proof-irrelevant-ind-subsingleton A S)
 
 abstract
   is-prop-is-subsingleton :
