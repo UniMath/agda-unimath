@@ -8,6 +8,7 @@ module elementary-number-theory.fermat-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -106,9 +107,13 @@ $$
   F(n+1)-2=(2^{2^n})^2-1=(2^{2^n}+1)(2^{2^n}-1)=F(n)(F(n)-2).
 $$
 
-```text
-fermat-number-succ-ℕ :
-  (n : ℕ) → fermat-number-ℕ (succ-ℕ n) ＝
+```agda
+dist-fermat-number-succ-two-ℕ :
+  (n : ℕ) →
+  dist-ℕ 2 (fermat-number-ℕ (succ-ℕ n)) ＝
+  Π-ℕ (succ-ℕ n) (λ k → fermat-number-ℕ (nat-Fin (succ-ℕ n) k))
+dist-fermat-number-succ-two-ℕ n =
+  {!!}
 ```
 
 ### The two definitions of the Fermat numbers agree

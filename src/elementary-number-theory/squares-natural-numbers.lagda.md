@@ -14,6 +14,7 @@ open import elementary-number-theory.decidable-types
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -77,6 +78,16 @@ square-root-ℕ _ (root , _) = root
 ```
 
 ## Properties
+
+### Squares are second powers
+
+The equality `square-ℕ n ＝ n ^ℕ 2` holds by definition.
+
+```agda
+compute-exp-2-ℕ :
+  (n : ℕ) → square-ℕ n ＝ n ^ℕ 2
+compute-exp-2-ℕ n = refl
+```
 
 ### Squares of successors
 
