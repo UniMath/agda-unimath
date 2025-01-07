@@ -40,7 +40,7 @@ This condition is a direct rephrasing of stating that the
 [action on identifications](foundation.action-on-identifications-functions.md)
 of the first projection map `Σ A P → A` has a
 [section](foundation-core.sections.md), and in this way is closely related to
-the concept of [path-split maps](foundation-core.path-splt-maps.md).
+the concept of [path-split maps](foundation-core.path-split-maps.md).
 
 ## Definitions
 
