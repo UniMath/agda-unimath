@@ -31,26 +31,26 @@ open import globular-types.transitive-globular-types
 ## Idea
 
 It is an important open problem known as the _coherence problem_ to define a
-fully coherent notion of $∞$-category in univalent type theory. The subject of
-_wild category theory_ attempts to recover some of the benefits of $∞$-category
-theory without tackling this problem. We introduce, as one of our basic building
-blocks in this subject, the notion of a _noncoherent ω-precategory_.
+fully coherent notion of $∞$-category or higher variants in univalent type
+theory. The subject of _wild category theory_ attempts to recover some of the
+benefits of $∞$-category theory without tackling this problem. We introduce, as
+one of our basic building blocks in this subject, the notion of a _noncoherent
+ω-precategory_.
 
 A _noncoherent ω-precategory_ `𝒞` is a structure that attempts at capturing the
-structure of a higher precategory to the $0$'th order. It consists of in some
-sense all of the operations and none of the coherence of a higher precategory.
-Thus, it is defined as a [globular type](globular-types.globular-types.md) with
-families of $n$-morphisms labeled as "identities"
+structure of an ω-category to the $0$'th order. It consists of in some sense all
+of the operations and none of the coherence. Thus, it is defined as a
+[globular type](globular-types.globular-types.md) with families of $n$-morphisms
+labeled as "identities"
 
 ```text
-  id-hom : (x : 𝑛-Cell 𝒞) → (𝑛+1)-Cell 𝒞 x x
+  id-hom : (x : 𝒞ₙ) → 𝒞ₙ₊₁ x x
 ```
 
 and a composition operation at every dimension
 
 ```text
-  comp-hom :
-    {x y z : 𝑛-Cell 𝒞} → (𝑛+1)-Cell 𝒞 y z → (𝑛+1)-Cell 𝒞 x y → (𝑛+1)-Cell 𝒞 x z.
+  comp-hom : {x y z : 𝒞ₙ} → 𝒞ₙ₊₁ y z → 𝒞ₙ₊₁ x y → 𝒞ₙ₊₁ x z.
 ```
 
 Entirely concretely, we define a

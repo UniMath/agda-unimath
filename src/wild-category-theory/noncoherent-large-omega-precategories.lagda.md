@@ -35,28 +35,26 @@ open import wild-category-theory.noncoherent-omega-precategories
 ## Idea
 
 It is an important open problem known as the _coherence problem_ to define a
-fully coherent notion of $∞$-category in univalent type theory. The subject of
-_wild category theory_ attempts to recover some of the benefits of $∞$-category
-theory without tackling this problem. We introduce, as one of our basic building
-blocks in this subject, the notion of a _large noncoherent wild higher
-precategory_.
+fully coherent notion of $∞$-category or higher variants in univalent type
+theory. The subject of _wild category theory_ attempts to recover some of the
+benefits of $∞$-category theory without tackling this problem. We introduce, as
+one of our basic building blocks in this subject, the notion of a _noncoherent
+large ω-precategory_.
 
-A _large noncoherent ω-precategory_ `𝒞` is a structure that attempts at
-capturing the structure of a large higher precategory to the $0$'th order. It
-consists of in some sense all of the operations and none of the coherence of a
-large higher precategory. Thus, it is defined as a
-[large globular type](globular-types.large-globular-types.md) with families of
-$n$-morphisms labeled as "identities"
+A _noncoherent large ω-precategory_ `𝒞` is a structure that attempts at
+capturing the structure of a large ω-category to the $0$'th order. It consists
+of in some sense all of the operations and none of the coherence. Thus, it is
+defined as a [large globular type](globular-types.large-globular-types.md) with
+families of $n$-morphisms labeled as "identities"
 
 ```text
-  id-hom : (x : 𝑛-Cell 𝒞) → (𝑛+1)-Cell 𝒞 x x
+  id-hom : (x : 𝒞ₙ) → 𝒞ₙ₊₁ x x
 ```
 
 and a composition operation at every dimension
 
 ```text
-  comp-hom :
-    {x y z : 𝑛-Cell 𝒞} → (𝑛+1)-Cell 𝒞 y z → (𝑛+1)-Cell 𝒞 x y → (𝑛+1)-Cell 𝒞 x z.
+  comp-hom : {x y z : 𝒞ₙ} → 𝒞ₙ₊₁ y z → 𝒞ₙ₊₁ x y → 𝒞ₙ₊₁ x z.
 ```
 
 Entirely concretely, we define a
@@ -96,8 +94,8 @@ The type of objects of a noncoherent large ω-precategory:
       large-globular-type-Noncoherent-Large-ω-Precategory
 ```
 
-The globular type of morphisms between two objects in a noncoherent large wild
-higher precategory:
+The globular type of morphisms between two objects in a noncoherent large
+ω-precategory:
 
 ```agda
   hom-globular-type-Noncoherent-Large-ω-Precategory :
@@ -119,8 +117,8 @@ higher precategory:
       large-globular-type-Noncoherent-Large-ω-Precategory
 ```
 
-The globular structure on the type of objects of a noncoherent large wild higher
-precategory:
+The globular structure on the type of objects of a noncoherent large
+ω-precategory:
 
 ```agda
   globular-structure-obj-Noncoherent-Large-ω-Precategory :
@@ -196,8 +194,8 @@ The globular type of 3-morphisms in a noncoherent large ω-precategory:
       large-globular-type-Noncoherent-Large-ω-Precategory
 ```
 
-The globular structure on the type of 2-morphisms in a noncoherent large wild
-higher precategory:
+The globular structure on the type of 2-morphisms in a noncoherent large
+ω-precategory:
 
 ```agda
   globular-structure-2-hom-Noncoherent-Large-ω-Precategory :
@@ -213,8 +211,7 @@ higher precategory:
       large-globular-type-Noncoherent-Large-ω-Precategory
 ```
 
-The structure of identity morphisms in a noncoherent large wild higher
-precategory:
+The structure of identity morphisms in a noncoherent large ω-precategory:
 
 ```agda
   field
@@ -336,8 +333,7 @@ large ω-precategory:
         ( comp-structure-hom-globular-type-Noncoherent-Large-ω-Precategory)
 ```
 
-The underlying reflexive globular type of a noncoherent large wild higher
-precategory:
+The underlying reflexive globular type of a noncoherent large ω-precategory:
 
 ```agda
   large-reflexive-globular-type-Noncoherent-Large-ω-Precategory :
@@ -350,8 +346,7 @@ precategory:
     id-structure-Noncoherent-Large-ω-Precategory
 ```
 
-The underlying transitive globular type of a noncoherent large wild higher
-precategory:
+The underlying transitive globular type of a noncoherent large ω-precategory:
 
 ```agda
   large-transitive-globular-type-Noncoherent-Large-ω-Precategory :
