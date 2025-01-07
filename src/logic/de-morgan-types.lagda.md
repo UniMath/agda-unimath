@@ -60,15 +60,18 @@ constructive mathematics. The odd one out is
 Indeed, this would state that we could constructively deduce from a proof that
 not both of `P` and `Q` are true, which of `P` and `Q` that is false. This
 logical law is what we refer to as [De Morgan's Law](logic.de-morgans-law.md).
-If a type `P` is such that for every other type `Q`, the De Morgan implication
+If a type `P` is such that for every other type `Q`, _the De Morgan implication_
 
 ```text
   ¬ (P ∧ Q) ⇒ (¬ P) ∨ (¬ Q)
 ```
 
-holds, we say `P` is {{#concept "De Morgan" Disambiguation="type"}}.
+holds, we say `P` is
+{{#concept "De Morgan" Disambiguation="type" Agda=is-de-morgan Agda=De-Morgan-Type Agda=satisfies-de-morgans-law-type}}.
 
-Equivalently, a type is De Morgan iff its negation is decidable. Since this is a
+Equivalently, a type is De Morgan [iff](foundation.logical-equivalences.md) its
+[negation](foundation-core.negation.md) is
+[decidable](foundation.decidable-types.md). Since this is a
 [small](foundation.small-types.md) condition, it is frequently more convenient
 to use and is what we take as the main definition.
 

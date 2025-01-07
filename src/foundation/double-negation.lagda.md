@@ -119,6 +119,11 @@ abstract
     map-double-negation unit-trunc-Prop
 ```
 
+## See also
+
+- [Double negation elimination](logic.double-negation-elimination.md)
+- [Irrefutable propositions](foundation.irrefutable-propositions.md)
+
 ## Table of files about propositional logic
 
 The following table gives an overview of basic constructions in propositional

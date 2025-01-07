@@ -29,7 +29,7 @@ The {{#concept "lesser limited principle of omniscience" Agda=LLPO}} (LLPO)
 asserts that for any [sequence](foundation.sequences.md) of
 [booleans](foundation.booleans.md) `f : ℕ → bool` such that `f n` is true for
 [at most one](foundation-core.propositions.md) `n`, then either `f n` is false
-for all even `n` or `f n` false for all odd `n`.
+for all even `n` or `f n` is false for all odd `n`.
 
 ```agda
 prop-LLPO : Prop lzero

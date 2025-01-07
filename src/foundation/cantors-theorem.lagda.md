@@ -90,6 +90,9 @@ module _
 
 ### Cantor's theorem for the set of decidable subtypes
 
+**Statement.** There is no surjective map from a type `X` to its set of
+decidable subtypes `𝒫ᵈ(X)`.
+
 ```agda
 module _
   {l1 l2 : Level} {X : UU l1} (f : X → decidable-subtype l2 X)
@@ -116,6 +119,9 @@ module _
 ```
 
 ### Cantor's theorem for the set of double negation stable subtypes
+
+**Statement.** There is no surjective map from a type `X` to its set of double
+negation stable subtypes `𝒫^¬¬(X)`.
 
 ```agda
 module _
@@ -145,6 +151,9 @@ module _
 ```
 
 ### Cantor's theorem for the set of De Morgan subtypes
+
+**Statement.** There is no surjective map from a type `X` to its set of De
+Morgan subtypes `𝒫ᵈᵐ(X)`.
 
 ```agda
 module _

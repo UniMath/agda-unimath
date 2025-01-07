@@ -114,7 +114,8 @@ AC0-is-set-projective H A B K =
 
 ## See also
 
-- [The axiom of choice implies the law of excluded middle](foundation.axiom-of-choice-implies-law-of-excluded-middle.md)
+- [Diaconescu's theorem](foundation.diaconescus-theorem.md), which states that
+  the axiom of choice implies the law of excluded middle.
 
 ## References
 

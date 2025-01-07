@@ -50,13 +50,13 @@ module _
   eq-base-eq-pair : {s t : Σ A B} → s ＝ t → pr1 s ＝ pr1 t
   eq-base-eq-pair = ap pr1
 
-  dependent-eq-family-eq-pair :
+  dependent-identification-eq-pair :
     {s t : Σ A B} (p : s ＝ t) →
     dependent-identification B (eq-base-eq-pair p) (pr2 s) (pr2 t)
-  dependent-eq-family-eq-pair {s} p = tr-ap pr1 (λ x _ → pr2 x) p (pr1 s)
+  dependent-identification-eq-pair {s} p = tr-ap pr1 (λ x _ → pr2 x) p (pr1 s)
 
   pair-eq-Σ : {s t : Σ A B} → s ＝ t → Eq-Σ s t
-  pair-eq-Σ p = eq-base-eq-pair p , dependent-eq-family-eq-pair p
+  pair-eq-Σ p = eq-base-eq-pair p , dependent-identification-eq-pair p
 
   eq-pair-eq-base :
     {x y : A} {s : B x} (p : x ＝ y) → (x , s) ＝ (y , tr B p s)
@@ -127,7 +127,7 @@ module _
   where
 
   lift-eq-Σ :
-    {x y : A} (p : x ＝ y) (b : B x) → pair x b ＝ pair y (tr B p b)
+    {x y : A} (p : x ＝ y) (b : B x) → (x , b) ＝ (y , tr B p b)
   lift-eq-Σ refl b = refl
 ```
 

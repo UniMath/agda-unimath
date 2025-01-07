@@ -1,7 +1,7 @@
-# The axiom of choice implies the law of excluded middle
+# Diaconescu's theorem
 
 ```agda
-module foundation.axiom-of-choice-implies-law-of-excluded-middle where
+module foundation.diaconescus-theorem where
 ```
 
 <details><summary>Imports</summary>
@@ -34,7 +34,7 @@ open import synthetic-homotopy-theory.suspensions-of-types
 The [axiom of choice](foundation.axiom-of-choice.md) implies the
 [law of excluded middle](foundation.law-of-excluded-middle.md). This is often
 referred to as
-{{#concept "Diaconescu's theorem" WD="Diaconescu's theorem" WDID=Q3527059 Agda=lem-AC0}}.
+{{#concept "Diaconescu's theorem" WD="Diaconescu's theorem" WDID=Q3527059 Agda=theorem-Diaconescu}}.
 
 ## Theorem
 
@@ -57,13 +57,13 @@ the booleans have [decidable equality](foundation.decidable-equality.md) so `P`
 must also be [decidable](foundation.decidable-propositions.md).
 
 ```agda
-instance-lem-AC0 :
+instance-theorem-Diaconescu :
   {l : Level} (P : Prop l) →
   instance-choice₀
     ( suspension-set-Prop P)
     ( fiber map-surjection-bool-suspension) →
   is-decidable-type-Prop P
-instance-lem-AC0 P ac-P =
+instance-theorem-Diaconescu P ac-P =
   rec-trunc-Prop
     ( is-decidable-Prop P)
     ( λ s →
@@ -79,10 +79,10 @@ instance-lem-AC0 P ac-P =
           ( pr1 (s south-suspension))))
     ( ac-P is-surjective-map-surjection-bool-suspension)
 
-lem-AC0 :
+theorem-Diaconescu :
   {l : Level} → level-AC0 l l → LEM l
-lem-AC0 ac P =
-  instance-lem-AC0 P
+theorem-Diaconescu ac P =
+  instance-theorem-Diaconescu P
     ( ac (suspension-set-Prop P) (fiber map-surjection-bool-suspension))
 ```
 

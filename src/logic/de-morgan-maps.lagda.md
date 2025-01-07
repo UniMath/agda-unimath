@@ -57,10 +57,9 @@ the [negation](foundation-core.negation.md) of its
 [fibers](foundation-core.fibers-of-maps.md) are
 [decidable](foundation.decidable-types.md). I.e., the map `f : A → B` is De
 Morgan if for every `y : B`, the fiber `fiber f y` is either
-[empty](foundation.empty-types.md) or
-[irrefutable](foundation.irrefutable-propositions.md). This is equivalent to
-asking that the fibers satisfy [De Morgan's law](logic.de-morgans-law.md), but
-is a [small](foundation.small-types.md) condition.
+[empty](foundation.empty-types.md) or not empty. This is equivalent to asking
+that the fibers satisfy [De Morgan's law](logic.de-morgans-law.md), but is a
+[small](foundation.small-types.md) condition.
 
 ## Definintion
 

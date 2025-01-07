@@ -39,7 +39,7 @@ tr B refl b = b
 
 ## Properties
 
-### Transporting along the action on identifications of a function
+### The dependent action of a family of maps over a map on identifications in the base type
 
 ```agda
 tr-ap :

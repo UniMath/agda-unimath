@@ -36,6 +36,12 @@ and `v` _over_ p. This condition is
 [equivalent](foundation.logical-equivalences.md) to asking that `P` is a family
 of [propositions](foundation-core.propositions.md).
 
+This condition is a direct rephrasing of stating that the
+[action on identifications](foundation.action-on-identifications-functions.md)
+of the first projection map `Σ A P → A` has a
+[section](foundation-core.sections.md), and in this way is closely related to
+the concept of [path-split maps](foundation-core.path-splt-maps.md).
+
 ## Definitions
 
 ### Path-split type families
@@ -80,7 +86,7 @@ module _
 
 ### The fibers of a path-split type family are propositions
 
-We give two proofs, one using the previous result and one more direct.
+We give two proofs, one is direct and the other uses the previous result.
 
 ```agda
 module _

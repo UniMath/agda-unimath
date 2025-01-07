@@ -54,7 +54,7 @@ module _
   is-decidable-map f = (y : B) → is-decidable (fiber f y)
 ```
 
-### The type of decidabile maps
+### The type of decidable maps
 
 ```agda
 infix 5 _→ᵈ_
