@@ -28,6 +28,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.negation
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -201,6 +202,16 @@ le-zero-le-zero-square-ℕ n =
   reflects-strict-order-square-ℕ 0 n
 ```
 
+### The square function is injective
+
+```agda
+is-injective-square-ℕ : is-injective square-ℕ
+is-injective-square-ℕ {x} {y} p =
+  antisymmetric-leq-ℕ x y
+    ( reflects-order-square-ℕ x y (leq-eq-ℕ (square-ℕ x) (square-ℕ y) p))
+    ( reflects-order-square-ℕ y x (leq-eq-ℕ (square-ℕ y) (square-ℕ x) (inv p)))
+```
+
 ### Squares distribute over multiplication
 
 ```agda
@@ -210,44 +221,18 @@ distributive-square-mul-ℕ m n =
   interchange-law-mul-mul-ℕ m n m n
 ```
 
-### Any number is less than or equal to its own square
-
-**Proof.** The proof is by induction. Since `0` is the least natural number, be
-base case is trivial. Now consider a natural number `n` such that `n ≤ n²`. Then
-we have
-
-```text
-  (n + 1 ≤ (n + 1)²) ↔ n + 1 ≤ (n + 2) * n + 1
-                     ↔ n ≤ n² + n + n.
-```
-
-The last inequality follows by the following chain of inequalities
-
-```text
-  n ≤ n²            -- by the induction hypothesis
-    ≤ n² + n        -- since a ≤ a + b for any a,b
-    ≤ n² + n + n    -- since a ≤ a + b for any a,b
-```
+### The square function is inflationary
 
 ```agda
-lower-bound-square-ℕ :
+is-inflationary-square-ℕ :
   (n : ℕ) → n ≤-ℕ square-ℕ n
-lower-bound-square-ℕ zero-ℕ = star
-lower-bound-square-ℕ (succ-ℕ n) =
-  concatenate-leq-eq-ℕ
-    ( succ-ℕ n)
-    ( transitive-leq-ℕ
-      ( n)
-      ( square-ℕ n)
-      ( square-ℕ n +ℕ n +ℕ n)
-      ( transitive-leq-ℕ
-        ( square-ℕ n)
-        ( square-ℕ n +ℕ n)
-        ( square-ℕ n +ℕ n +ℕ n)
-        ( leq-add-ℕ (square-ℕ n +ℕ n) n)
-        ( leq-add-ℕ (square-ℕ n) n))
-      ( lower-bound-square-ℕ n))
-    ( inv (square-succ-ℕ' n))
+is-inflationary-square-ℕ zero-ℕ =
+  star
+is-inflationary-square-ℕ (succ-ℕ n) =
+  concatenate-eq-leq-ℕ
+    ( square-ℕ (succ-ℕ n))
+    ( inv (right-unit-law-mul-ℕ (succ-ℕ n)))
+    ( preserves-order-right-mul-ℕ (succ-ℕ n) 1 (succ-ℕ n) star)
 ```
 
 ### If a number `n` has a square root, then the square root is at most `n`
@@ -256,16 +241,16 @@ lower-bound-square-ℕ (succ-ℕ n) =
 upper-bound-square-root-ℕ :
   (n : ℕ) (H : is-square-ℕ n) → square-root-ℕ n H ≤-ℕ n
 upper-bound-square-root-ℕ .(square-ℕ x) (x , refl) =
-  lower-bound-square-ℕ x
+  is-inflationary-square-ℕ x
 ```
 
 ### Any number greater than 1 is strictly less than its square
 
 ```agda
-strict-lower-bound-square-ℕ :
+strict-is-inflationary-square-ℕ :
   (n : ℕ) → 1 <-ℕ n → n <-ℕ square-ℕ n
-strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ zero-ℕ)) H = star
-strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ (succ-ℕ n))) H =
+strict-is-inflationary-square-ℕ (succ-ℕ (succ-ℕ zero-ℕ)) H = star
+strict-is-inflationary-square-ℕ (succ-ℕ (succ-ℕ (succ-ℕ n))) H =
   concatenate-le-eq-ℕ
     ( n +ℕ 3)
     ( (n +ℕ 4) *ℕ (n +ℕ 2) +ℕ 1)
@@ -274,7 +259,7 @@ strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ (succ-ℕ n))) H =
       ( n +ℕ 2)
       ( square-ℕ (n +ℕ 2))
       ( square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2) +ℕ (n +ℕ 2))
-      ( strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ n)) star)
+      ( strict-is-inflationary-square-ℕ (succ-ℕ (succ-ℕ n)) star)
       ( transitive-le-ℕ
         ( square-ℕ (n +ℕ 2))
         ( square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2))
@@ -290,7 +275,7 @@ strict-lower-bound-square-ℕ (succ-ℕ (succ-ℕ (succ-ℕ n))) H =
 strict-upper-bound-square-root-ℕ :
   (n : ℕ) → 1 <-ℕ n → (H : is-square-ℕ n) → square-root-ℕ n H <-ℕ n
 strict-upper-bound-square-root-ℕ ._ B (succ-ℕ (succ-ℕ x) , refl) =
-  strict-lower-bound-square-ℕ (x +ℕ 2) star
+  strict-is-inflationary-square-ℕ (x +ℕ 2) star
 ```
 
 ### If `n² ≤ n`, then `n ≤ 1`
@@ -305,7 +290,7 @@ leq-one-leq-square-ℕ (succ-ℕ (succ-ℕ n)) H =
     ( contradiction-le-ℕ
       ( n +ℕ 2)
       ( square-ℕ (n +ℕ 2))
-      ( strict-lower-bound-square-ℕ (n +ℕ 2) star)
+      ( strict-is-inflationary-square-ℕ (n +ℕ 2) star)
       ( H))
 ```
 
@@ -328,7 +313,7 @@ not-le-square-ℕ n H =
     ( square-ℕ n)
     ( n)
     ( H)
-    ( lower-bound-square-ℕ n)
+    ( is-inflationary-square-ℕ n)
 ```
 
 ### Being a square natural number is decidable
@@ -350,6 +335,23 @@ is-decidable-is-square-ℕ n =
     ( λ x → n ＝ square-ℕ x)
     ( λ x → has-decidable-equality-ℕ n (square-ℕ x))
     ( is-decidable-has-greater-root-ℕ n)
+```
+
+### Any number divides its own square
+
+In other words, the squaring function is inflationary with respect to divisibility.
+
+```agda
+is-inflationary-bounded-div-square-ℕ :
+  (n : ℕ) → bounded-div-ℕ n (square-ℕ n)
+pr1 (is-inflationary-bounded-div-square-ℕ n) = n
+pr1 (pr2 (is-inflationary-bounded-div-square-ℕ n)) = is-inflationary-square-ℕ n
+pr2 (pr2 (is-inflationary-bounded-div-square-ℕ n)) = refl
+
+is-inflationary-div-square-ℕ :
+  (n : ℕ) → div-ℕ n (square-ℕ n)
+is-inflationary-div-square-ℕ n =
+  div-bounded-div-ℕ n (square-ℕ n) (is-inflationary-bounded-div-square-ℕ n)
 ```
 
 ### Equivalent characterizations of a number being even in terms of its square
