@@ -29,7 +29,6 @@ open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
 open import foundation.automorphisms public
 open import foundation.axiom-of-choice public
-open import foundation.diaconescus-theorem public
 open import foundation.bands public
 open import foundation.base-changes-span-diagrams public
 open import foundation.bicomposition-functions public
@@ -130,6 +129,7 @@ open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
 open import foundation.descent-equivalences public
+open import foundation.diaconescus-theorem public
 open import foundation.diagonal-maps-cartesian-products-of-types public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonal-span-diagrams public
