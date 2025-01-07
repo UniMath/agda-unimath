@@ -129,6 +129,7 @@ open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
 open import foundation.descent-equivalences public
+open import foundation.diaconescus-theorem public
 open import foundation.diagonal-maps-cartesian-products-of-types public
 open import foundation.diagonal-maps-of-types public
 open import foundation.diagonal-span-diagrams public
@@ -264,6 +265,7 @@ open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.lifts-types public
 open import foundation.limited-principle-of-omniscience public
+open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.maps-in-global-subuniverses public
@@ -311,6 +313,7 @@ open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-cosplit-maps public
 open import foundation.path-split-maps public
+open import foundation.path-split-type-families public
 open import foundation.perfect-images public
 open import foundation.permutations-spans-families-of-types public
 open import foundation.pi-decompositions public
@@ -324,7 +327,6 @@ open import foundation.precomposition-dependent-functions public
 open import foundation.precomposition-functions public
 open import foundation.precomposition-functions-into-subuniverses public
 open import foundation.precomposition-type-families public
-open import foundation.preimages-of-subtypes public
 open import foundation.preunivalence public
 open import foundation.preunivalent-type-families public
 open import foundation.principle-of-omniscience public
@@ -443,6 +445,7 @@ open import foundation.type-arithmetic-standard-pullbacks public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.type-duality public
 open import foundation.type-theoretic-principle-of-choice public
+open import foundation.uniformly-decidable-type-families public
 open import foundation.unions-subtypes public
 open import foundation.uniqueness-image public
 open import foundation.uniqueness-quantification public

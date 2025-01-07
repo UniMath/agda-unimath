@@ -109,6 +109,23 @@ module _
   compute-fiber-postcomp h = compute-coherence-triangle-fiber-postcomp (f ∘ h)
 ```
 
+### Computing the fiber of the postcomposition function at the identity function
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  (f : X → Y)
+  where
+
+  compute-fiber-id-postcomp :
+    ((x : Y) → fiber f x) ≃ fiber (postcomp Y f) id
+  compute-fiber-id-postcomp = compute-Π-fiber-postcomp Y f id
+
+  inv-compute-fiber-id-postcomp :
+    fiber (postcomp Y f) id ≃ ((x : Y) → fiber f x)
+  inv-compute-fiber-id-postcomp = inv-compute-Π-fiber-postcomp Y f id
+```
+
 ### Postcomposition and equivalences
 
 #### A map `f` is an equivalence if and only if postcomposing by `f` is an equivalence
