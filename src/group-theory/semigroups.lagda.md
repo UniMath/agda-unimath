@@ -19,15 +19,16 @@ open import foundation.universe-levels
 
 ## Idea
 
-**Semigroups** are [sets](foundation-core.sets.md) equipped with an associative
-binary operation.
+{{#concept "Semigroups" WDID=Q207348 WD="semigroup" Agda=Semigroup}} are
+[sets](foundation-core.sets.md) [equipped](foundation.structure.md) with an
+associative binary operation.
 
 ## Definitions
 
 ```agda
 has-associative-mul : {l : Level} (X : UU l) → UU l
 has-associative-mul X =
-  Σ (X → X → X) (λ μ → (x y z : X) → Id (μ (μ x y) z) (μ x (μ y z)))
+  Σ (X → X → X) (λ μ → (x y z : X) → μ (μ x y) z ＝ μ x (μ y z))
 
 has-associative-mul-Set :
   {l : Level} (X : Set l) → UU l

@@ -9,6 +9,7 @@ module finite-group-theory.finite-semigroups where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.1-types
 open import foundation.decidable-propositions
 open import foundation.equivalences
 open import foundation.function-types
@@ -18,9 +19,11 @@ open import foundation.mere-equivalences
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import group-theory.category-of-semigroups
 open import group-theory.semigroups
 
 open import univalent-combinatorics.dependent-function-types
@@ -31,6 +34,7 @@ open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>
@@ -129,6 +133,38 @@ Semigroup-of-Order l n =
 
 ## Properties
 
+### The two definitions of semigroups of order `n` agree
+
+```agda
+compute-Semigroup-of-Order :
+  {l : Level} (n : ℕ) → Semigroup-of-Order l n ≃ Semigroup-of-Order' l n
+compute-Semigroup-of-Order {l} n =
+  ( equiv-Σ
+    ( has-associative-mul ∘ type-UU-Fin n)
+    ( ( right-unit-law-Σ-is-contr
+        ( λ X →
+          is-proof-irrelevant-is-prop
+            ( is-prop-is-set _)
+            ( is-set-is-finite (is-finite-has-cardinality n (pr2 X))))) ∘e
+      ( equiv-right-swap-Σ))
+    ( λ X → id-equiv)) ∘e
+  ( equiv-right-swap-Σ
+    { A = Set l}
+    { B = has-associative-mul-Set}
+    { C = mere-equiv (Fin n) ∘ type-Set})
+```
+
+### The type of semigroups of order `n` is a 1-type
+
+```agda
+is-1-type-Semigroup-of-Order :
+  {l : Level} (n : ℕ) → is-1-type (Semigroup-of-Order l n)
+is-1-type-Semigroup-of-Order n =
+  is-1-type-type-subtype
+    ( mere-equiv-Prop (Fin n) ∘ type-Semigroup)
+    ( is-1-type-Semigroup)
+```
+
 ### If `X` is finite, then there are finitely many associative operations on `X`
 
 ```agda
@@ -147,57 +183,54 @@ is-finite-has-associative-mul H =
                   is-finite-eq (has-decidable-equality-is-finite H)))))
 ```
 
-### The type of semigroups of order `n` is π-finite
+### The type of semigroups of order `n` is π₁-finite
 
 ```agda
-is-π-finite-Semigroup-of-Order' :
-  {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order' l n)
-is-π-finite-Semigroup-of-Order' k n =
-  is-π-finite-Σ k
-    ( is-π-finite-UU-Fin (succ-ℕ k) n)
+is-untruncated-π-finite-Semigroup-of-Order' :
+  {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Semigroup-of-Order' l n)
+is-untruncated-π-finite-Semigroup-of-Order' k n =
+  is-untruncated-π-finite-Σ k
+    ( is-untruncated-π-finite-UU-Fin (succ-ℕ k) n)
     ( λ x →
-      is-π-finite-is-finite k
+      is-untruncated-π-finite-is-finite k
         ( is-finite-has-associative-mul
           ( is-finite-type-UU-Fin n x)))
 
+is-untruncated-π-finite-Semigroup-of-Order :
+  {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Semigroup-of-Order l n)
+is-untruncated-π-finite-Semigroup-of-Order k n =
+  is-untruncated-π-finite-equiv k
+    ( compute-Semigroup-of-Order n)
+    ( is-untruncated-π-finite-Semigroup-of-Order' k n)
+
 is-π-finite-Semigroup-of-Order :
-  {l : Level} (k n : ℕ) → is-π-finite k (Semigroup-of-Order l n)
-is-π-finite-Semigroup-of-Order {l} k n =
-  is-π-finite-equiv k e
-    ( is-π-finite-Semigroup-of-Order' k n)
-  where
-  e : Semigroup-of-Order l n ≃ Semigroup-of-Order' l n
-  e = ( equiv-Σ
-        ( has-associative-mul ∘ type-UU-Fin n)
-        ( ( right-unit-law-Σ-is-contr
-            ( λ X →
-              is-proof-irrelevant-is-prop
-                ( is-prop-is-set _)
-                ( is-set-is-finite (is-finite-has-cardinality n (pr2 X))))) ∘e
-          ( equiv-right-swap-Σ))
-        ( λ X → id-equiv)) ∘e
-      ( equiv-right-swap-Σ
-        { A = Set l}
-        { B = has-associative-mul-Set}
-        { C = mere-equiv (Fin n) ∘ type-Set})
+  {l : Level} (n : ℕ) → is-π-finite 1 (Semigroup-of-Order l n)
+is-π-finite-Semigroup-of-Order {l} n =
+  is-π-finite-is-untruncated-π-finite 1
+    ( is-1-type-Semigroup-of-Order n)
+    ( is-untruncated-π-finite-Semigroup-of-Order 1 n)
 ```
 
-### The function that returns for each `n` the number of semigroups of order `n` up to isomorphism
+### The number of semigroups of a given order up to isomorphism
+
+The number of semigroups of order `n` is listed as
+[A027851](https://oeis.org/A027851) in the [OEIS](literature.oeis.md)
+{{#cite oeis}}.
 
 ```agda
-number-of-semi-groups-of-order : ℕ → ℕ
-number-of-semi-groups-of-order n =
+number-of-semigroups-of-order : ℕ → ℕ
+number-of-semigroups-of-order n =
   number-of-connected-components
-    ( is-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
+    ( is-untruncated-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
 
-mere-equiv-number-of-semi-groups-of-order :
+mere-equiv-number-of-semigroups-of-order :
   (n : ℕ) →
   mere-equiv
-    ( Fin (number-of-semi-groups-of-order n))
+    ( Fin (number-of-semigroups-of-order n))
     ( type-trunc-Set (Semigroup-of-Order lzero n))
-mere-equiv-number-of-semi-groups-of-order n =
+mere-equiv-number-of-semigroups-of-order n =
   mere-equiv-number-of-connected-components
-    ( is-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
+    ( is-untruncated-π-finite-Semigroup-of-Order {lzero} zero-ℕ n)
 ```
 
 ### There is a finite number of ways to equip a finite type with the structure of a semigroup
@@ -235,3 +268,7 @@ is-finite-structure-semigroup-𝔽 X =
                       ( m (m x y) z)
                       ( m x (m y z)))))))
 ```
+
+## References
+
+{{#bibliography}}
