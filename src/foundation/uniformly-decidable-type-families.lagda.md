@@ -35,8 +35,8 @@ open import foundation-core.identity-types
 ## Idea
 
 A type family `B : A → 𝒰` is
-{{#concept "uniformly decidable" Agda=is-uniformly-decidable-type-family}} if
-there either is an element of every fiber `B x`, or every fiber is
+{{#concept "uniformly decidable" Agda=is-uniformly-decidable-family}} if there
+either is an element of every fiber `B x`, or every fiber is
 [empty](foundation-core.empty-types.md).
 
 ## Definitions
