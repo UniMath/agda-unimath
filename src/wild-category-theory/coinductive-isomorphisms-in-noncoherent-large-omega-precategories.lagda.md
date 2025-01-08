@@ -46,8 +46,8 @@ Thus, the specified data is a commuting diagram of the form
 where `η` and `ε` again are coinductive isomorphisms in their respective
 hom-ω-categories.
 
-> **Disclaimer.** It is not established that the proposed definition of a
-> coinductive isomorphism is fully coherent, and may be subject to change in the
+> **Disclaimer.** We do not assert that the proposed definition of a coinductive
+> isomorphism is fully coherent, and thus it may be subject to change in the
 > future.
 
 While a noncoherent ω-precategory is the most general setting that allows us to
