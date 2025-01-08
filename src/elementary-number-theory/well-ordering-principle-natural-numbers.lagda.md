@@ -34,6 +34,11 @@ The {{#concept "well-ordering principle of the natural numbers" WDID=Q2488476 WD
 of [decidable types](foundation.decidable-types.md) over ℕ equipped with a natural number `n` and an element
 `p : P n`, we can find a least natural number `n₀` with an element `p₀ : P n₀`.
 
+The well-ordering principle has some useful consequences:
+- For any family `P` of decidable types equipped with a natural number `n ≥ b` and an element `p : P n` we can find a least natural number `n₀ ≥ b` with an element `p₀ : P n₀`.
+- For any family `P` of decidable types equipped with an element `n ≤ b` and an element `p : P n` we can find a largest natural number `n₁ ≤ b` with an element `p₁ : P n₁`.
+- For any strictly inflationary map `f : ℕ → ℕ` such that `f 0 ≤ b` we can find a largest natural number `n₁` such that `f n₁ ≤ b`.
+
 ## Theorem
 
 ```agda

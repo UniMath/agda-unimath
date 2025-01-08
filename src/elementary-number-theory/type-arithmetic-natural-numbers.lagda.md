@@ -13,7 +13,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
-open import elementary-number-theory.powers-of-two
+open import elementary-number-theory.2-adic-decomposition
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types

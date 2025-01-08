@@ -11,13 +11,17 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.products-of-natural-numbers
+open import elementary-number-theory.squares-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.negated-equality
+open import foundation.unit-type
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -99,6 +103,14 @@ compute-succ-recursive-fermat-number-ℕ =
 
 ## Properties
 
+### Every Fermat number is greater than $2$
+
+```agda
+leq-two-fermat-number-ℕ :
+  (n : ℕ) → 2 ≤-ℕ fermat-number-ℕ n
+leq-two-fermat-number-ℕ n = leq-one-exp-ℕ 2 (2 ^ℕ n) star
+```
+
 ### The Fermat number of a successor
 
 Any Fermat number of the form $F(n+1)=2^{2^{n+1}}+1$ can be computed as
@@ -108,12 +120,29 @@ $$
 $$
 
 ```agda
-dist-fermat-number-succ-two-ℕ :
+dist-fermat-number-two-ℕ :
   (n : ℕ) →
-  dist-ℕ 2 (fermat-number-ℕ (succ-ℕ n)) ＝
-  Π-ℕ (succ-ℕ n) (λ k → fermat-number-ℕ (nat-Fin (succ-ℕ n) k))
-dist-fermat-number-succ-two-ℕ n =
-  {!!}
+  dist-ℕ (fermat-number-ℕ n) 2 ＝
+  Π-ℕ n (λ k → fermat-number-ℕ (nat-Fin n k))
+dist-fermat-number-two-ℕ zero-ℕ = refl
+dist-fermat-number-two-ℕ (succ-ℕ n) =
+  ap (λ x → dist-ℕ x 1) (ap (2 ^ℕ_) (exp-succ-ℕ n 2) ∙ exp-mul-ℕ (2 ^ℕ n) 2) ∙
+  distance-of-squares-ℕ (2 ^ℕ 2 ^ℕ n) 1 ∙
+  ap (_*ℕ fermat-number-ℕ n) (dist-fermat-number-two-ℕ n)
+
+compute-fermat-number-ℕ :
+  (n : ℕ) →
+  fermat-number-ℕ n ＝ Π-ℕ n (λ k → fermat-number-ℕ (nat-Fin n k)) +ℕ 2
+compute-fermat-number-ℕ n =
+  ( inv
+    ( rewrite-right-dist-add-ℕ 2
+      ( Π-ℕ n (λ k → fermat-number-ℕ (nat-Fin n k)))
+      ( fermat-number-ℕ n)
+      ( leq-two-fermat-number-ℕ n)
+      ( inv
+        ( ( symmetric-dist-ℕ 2 (fermat-number-ℕ n)) ∙
+          ( dist-fermat-number-two-ℕ n))))) ∙
+  ( commutative-add-ℕ 2 (Π-ℕ n (λ k → fermat-number-ℕ (nat-Fin n k))))
 ```
 
 ### The two definitions of the Fermat numbers agree
@@ -135,7 +164,7 @@ compute-recursive-fermat-number-ℕ =
         ( preserves-htpy-Π-ℕ
           ( succ-ℕ n)
           ( λ i → H (nat-Fin (succ-ℕ n) i) (upper-bound-nat-Fin n i)))) ∙
-      {!!})
+      ( inv (compute-fermat-number-ℕ (succ-ℕ n))))
 ```
 
 ### Any two distinct Fermat numbers are relatively prime

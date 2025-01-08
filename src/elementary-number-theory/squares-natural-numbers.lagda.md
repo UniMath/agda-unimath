@@ -60,7 +60,7 @@ of `n` with itself.
 
 ```agda
 square-ℕ : ℕ → ℕ
-square-ℕ n = mul-ℕ n n
+square-ℕ n = n *ℕ n
 ```
 
 ### The predicate of being a square of a natural number

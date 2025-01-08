@@ -131,7 +131,7 @@ open import elementary-number-theory.positive-integer-fractions public
 open import elementary-number-theory.positive-integers public
 open import elementary-number-theory.positive-rational-numbers public
 open import elementary-number-theory.powers-integers public
-open import elementary-number-theory.powers-of-two public
+open import elementary-number-theory.2-adic-decomposition public
 open import elementary-number-theory.prime-numbers public
 open import elementary-number-theory.products-of-natural-numbers public
 open import elementary-number-theory.proper-divisors-natural-numbers public

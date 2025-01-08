@@ -8,11 +8,13 @@ module elementary-number-theory.parity-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.bounded-divisibility-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -29,6 +31,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -52,29 +55,57 @@ and odd natural numbers are those that aren't.
 ### Even natural numbers
 
 ```agda
-is-even-ℕ : ℕ → UU lzero
-is-even-ℕ n = div-ℕ 2 n
+is-even-ℕ :
+  ℕ → UU lzero
+is-even-ℕ n =
+  div-ℕ 2 n
+
+quotient-is-even-ℕ :
+  (n : ℕ) → is-even-ℕ n → ℕ
+quotient-is-even-ℕ =
+  quotient-div-ℕ 2
+
+upper-bound-quotient-is-even-ℕ :
+  (n : ℕ) (H : is-even-ℕ n) → quotient-is-even-ℕ n H ≤-ℕ n
+upper-bound-quotient-is-even-ℕ =
+  upper-bound-quotient-div-ℕ 2
+
+eq-quotient-is-even-ℕ :
+  (n : ℕ) (H : is-even-ℕ n) → quotient-is-even-ℕ n H *ℕ 2 ＝ n
+eq-quotient-is-even-ℕ =
+  eq-quotient-div-ℕ 2
+
+eq-quotient-is-even-ℕ' :
+  (n : ℕ) (H : is-even-ℕ n) → 2 *ℕ quotient-is-even-ℕ n H ＝ n
+eq-quotient-is-even-ℕ' =
+  eq-quotient-div-ℕ' 2
 ```
 
 ### The sequence of even numbers
 
 ```agda
-even-number-ℕ : ℕ → ℕ
-even-number-ℕ n = 2 *ℕ n
+even-number-ℕ :
+  ℕ → ℕ
+even-number-ℕ n =
+  2 *ℕ n
 ```
 
 ### Odd natural numbers
 
 ```agda
-is-odd-ℕ : ℕ → UU lzero
-is-odd-ℕ n = ¬ (is-even-ℕ n)
+is-odd-ℕ :
+  ℕ → UU lzero
+is-odd-ℕ n =
+  ¬ (is-even-ℕ n)
 ```
 
 ### The sequence of odd numbers
 
 ```agda
-odd-number-ℕ : ℕ → ℕ
-odd-number-ℕ n = succ-ℕ (2 *ℕ n)
+odd-number-ℕ :
+  ℕ → ℕ
+odd-number-ℕ n =
+  succ-ℕ (2 *ℕ n)
 ```
 
 ### The predicate of having an odd expansion
@@ -298,6 +329,34 @@ is-odd-is-1-mod-2-ℕ (succ-ℕ n) H K =
     ( div-right-summand-ℕ 2 n 1 (tr (div-ℕ 2) (right-unit-law-dist-ℕ n) H) K)
 ```
 
+### If a successor number `n + 1` is even, then its quotient after division by `2` is at most `n`
+
+**Proof.** Suppose that `q * 2 ＝ n + 1` for some natural number `q`. Then `q` is a successor, say `q ＝ q' + 1`. It follows that
+
+```text
+  q + 1 ≤ q + q' + 1 ＝ q + q ＝ q * 2 ＝ n + 1.
+```
+
+This implies that `q ≤ n`.
+
+```agda
+upper-bound-quotient-bounded-div-two-succ-ℕ :
+  (n : ℕ) (H : bounded-div-ℕ 2 (succ-ℕ n)) →
+  quotient-bounded-div-ℕ 2 (succ-ℕ n) H ≤-ℕ n
+upper-bound-quotient-bounded-div-two-succ-ℕ n (succ-ℕ q , H , p) =
+  concatenate-leq-eq-ℕ
+    ( succ-ℕ (succ-ℕ q))
+    ( preserves-order-right-add-ℕ (succ-ℕ q) 1 (succ-ℕ q) star)
+    ( inv (right-two-law-mul-ℕ (succ-ℕ q)) ∙ p)
+
+upper-bound-quotient-is-even-succ-ℕ :
+  (n : ℕ) (H : is-even-ℕ (succ-ℕ n)) →
+  quotient-is-even-ℕ (succ-ℕ n) H ≤-ℕ n
+upper-bound-quotient-is-even-succ-ℕ n H =
+  upper-bound-quotient-bounded-div-two-succ-ℕ n
+    ( bounded-div-div-ℕ 2 (succ-ℕ n) H)
+```
+
 ### If any two out of `x`, `y`, and `x + y` are even, then so is the third
 
 ```agda
@@ -402,6 +461,18 @@ is-odd-add-succ-self-ℕ :
   (n : ℕ) → is-odd-ℕ (n +ℕ succ-ℕ n)
 is-odd-add-succ-self-ℕ n =
   is-odd-succ-is-even-ℕ (n +ℕ n) (is-even-add-self-ℕ n)
+```
+
+### Odd numbers are nonzero
+
+```agda
+is-nonzero-odd-number-ℕ :
+  (n : ℕ) → is-nonzero-ℕ (odd-number-ℕ n)
+is-nonzero-odd-number-ℕ n = is-nonzero-succ-ℕ (2 *ℕ n)
+
+is-nonzero-is-odd-ℕ :
+  (n : ℕ) → is-odd-ℕ n → is-nonzero-ℕ n
+is-nonzero-is-odd-ℕ .zero-ℕ H refl = H is-even-zero-ℕ
 ```
 
 ## See also

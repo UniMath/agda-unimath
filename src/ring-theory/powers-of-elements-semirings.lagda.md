@@ -49,6 +49,20 @@ module _
   power-one-Semiring = power-unit-Monoid (multiplicative-monoid-Semiring R)
 ```
 
+### `0ⁿ⁺¹ ＝ 0`
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  power-zero-succ-Semiring :
+    (n : ℕ) → power-Semiring R (succ-ℕ n) (zero-Semiring R) ＝ zero-Semiring R
+  power-zero-succ-Semiring zero-ℕ = refl
+  power-zero-succ-Semiring (succ-ℕ n) =
+    right-zero-law-mul-Semiring R (power-Semiring R (succ-ℕ n) (zero-Semiring R))
+```
+
 ### `xⁿ⁺¹ = xⁿx`
 
 ```agda

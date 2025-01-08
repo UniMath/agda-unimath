@@ -10,13 +10,16 @@ module elementary-number-theory.exponentiation-natural-numbers where
 open import commutative-algebra.powers-of-elements-commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.bounded-divisibility-natural-numbers
 open import elementary-number-theory.commutative-semiring-of-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.products-of-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.unit-type
 ```
@@ -125,6 +128,13 @@ le-zero-exp-ℕ m (succ-ℕ (succ-ℕ n)) H =
     ( m)
     ( le-zero-exp-ℕ m (succ-ℕ n) H)
     ( H)
+
+leq-one-exp-ℕ :
+  (m n : ℕ) → 1 ≤-ℕ m → 1 ≤-ℕ m ^ℕ n
+leq-one-exp-ℕ m n H =
+  leq-one-is-nonzero-ℕ
+    ( m ^ℕ n)
+    ( is-nonzero-exp-ℕ m n (is-nonzero-leq-one-ℕ m H))
 ```
 
 ### The exponent $m^n$ is equal to the $n$-fold product of $m$
@@ -136,4 +146,14 @@ compute-constant-product-ℕ m zero-ℕ = refl
 compute-constant-product-ℕ m (succ-ℕ zero-ℕ) = left-unit-law-add-ℕ m
 compute-constant-product-ℕ m (succ-ℕ (succ-ℕ n)) =
   ap (_*ℕ m) (compute-constant-product-ℕ m (succ-ℕ n))
+```
+
+### The base of the exponent divides its successor exponents
+
+```text
+bounded-div-exp-succ-ℕ :
+  (m n : ℕ) → bounded-div-ℕ m (m ^ℕ succ-ℕ n)
+pr1 (bounded-div-exp-succ-ℕ m n) = m ^ℕ n
+pr1 (pr2 (bounded-div-exp-succ-ℕ m n)) = {!!}
+pr2 (pr2 (bounded-div-exp-succ-ℕ m n)) = {!!}
 ```

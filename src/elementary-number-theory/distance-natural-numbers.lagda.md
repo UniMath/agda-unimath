@@ -150,7 +150,7 @@ triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
 
 ```agda
 is-additive-right-inverse-dist-ℕ :
-  (x y : ℕ) → x ≤-ℕ y → x +ℕ (dist-ℕ x y) ＝ y
+  (x y : ℕ) → x ≤-ℕ y → x +ℕ dist-ℕ x y ＝ y
 is-additive-right-inverse-dist-ℕ zero-ℕ zero-ℕ H = refl
 is-additive-right-inverse-dist-ℕ zero-ℕ (succ-ℕ y) star =
   left-unit-law-add-ℕ (succ-ℕ y)
