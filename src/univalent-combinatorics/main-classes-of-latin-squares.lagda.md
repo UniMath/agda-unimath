@@ -9,6 +9,7 @@ module univalent-combinatorics.main-classes-of-latin-squares where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.1-types
 open import foundation.mere-equivalences
 open import foundation.set-truncations
 open import foundation.universe-levels
@@ -16,14 +17,18 @@ open import foundation.universe-levels
 open import univalent-combinatorics.main-classes-of-latin-hypercubes
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>
 
 ## Idea
 
-The groupoid of main classes of latin squares consists of unordered triples of
-inhabited types equipped with a ternary 1-1 correspondence.
+The [groupoid](foundation.1-types.md) of
+{{#concept "main classes of latin squares" Agda=Main-Class-Latin-Squares}}
+consists of [unordered triples](foundation.unordered-tuples.md) of
+[inhabited](foundation.inhabited-types.md) types
+[equipped](foundation.structure.md) with a ternary 1-1 correspondence.
 
 ## Definition
 
@@ -44,13 +49,27 @@ Main-Class-Latin-Square-of-Order m =
 
 ## Properties
 
-### The groupoid of main classes of latin squares of fixed order is π-finite
+### The groupoid of main classes of latin squares of fixed order is a groupoid
 
 ```agda
+is-1-type-Main-Class-Latin-Square-of-Order :
+  (m : ℕ) → is-1-type (Main-Class-Latin-Square-of-Order m)
+is-1-type-Main-Class-Latin-Square-of-Order =
+  is-1-type-Main-Class-Latin-Hypercube-of-Order 2
+```
+
+### The groupoid of main classes of latin squares of fixed order is π₁-finite
+
+```agda
+is-untruncated-π-finite-Main-Class-Latin-Square-of-Order :
+  (k m : ℕ) → is-untruncated-π-finite k (Main-Class-Latin-Square-of-Order m)
+is-untruncated-π-finite-Main-Class-Latin-Square-of-Order k =
+  is-untruncated-π-finite-Main-Class-Latin-Hypercube-of-Order k 2
+
 is-π-finite-Main-Class-Latin-Square-of-Order :
-  (k m : ℕ) → is-π-finite k (Main-Class-Latin-Square-of-Order m)
-is-π-finite-Main-Class-Latin-Square-of-Order k m =
-  is-π-finite-Main-Class-Latin-Hypercube-of-Order k 2 m
+  (m : ℕ) → is-π-finite 1 (Main-Class-Latin-Square-of-Order m)
+is-π-finite-Main-Class-Latin-Square-of-Order =
+  is-π-finite-Main-Class-Latin-Hypercube-of-Order 2
 ```
 
 ### The sequence of the number of main classes of latin squares of finite order

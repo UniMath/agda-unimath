@@ -9,12 +9,15 @@ module foundation.unordered-tuples where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.1-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.postcomposition-functions
 open import foundation.structure-identity-principle
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
@@ -36,8 +39,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An **unordered `n`-tuple** of elements of a type `A` consists of an `n`-element
-set `X` equipped with a map `X → A`.
+An
+{{#concept "unordered `n`-tuple" WDID=Q43851442 WD="unordered 𝑛-tuple" Agda=unordered-tuple}}
+of elements of a type `A` consists of an
+[`n`-element set](univalent-combinatorics.finite-types.md) `X`
+[equipped](foundation.structure.md) with a map `X → A`.
 
 ## Definition
 
@@ -171,6 +177,28 @@ module _
     (eq-Eq-unordered-tuple x y ∘ Eq-eq-unordered-tuple x y) ~ id
   is-retraction-eq-Eq-unordered-tuple x y =
     is-retraction-map-inv-is-equiv (is-equiv-Eq-eq-unordered-tuple x y)
+```
+
+### The type of unordered tuples in a truncated type is truncated
+
+```agda
+is-trunc-succ-succ-succ-unordered-tuple :
+  {l : Level} (k : 𝕋) (n : ℕ) {A : UU l} →
+  is-trunc (succ-𝕋 (succ-𝕋 (succ-𝕋 k))) A →
+  is-trunc (succ-𝕋 (succ-𝕋 (succ-𝕋 k))) (unordered-tuple n A)
+is-trunc-succ-succ-succ-unordered-tuple k n H =
+  is-trunc-Σ
+    ( is-trunc-is-1-type k (is-1-type-UU-Fin n))
+    ( λ X → is-trunc-function-type (succ-𝕋 (succ-𝕋 (succ-𝕋 k))) H)
+```
+
+### The type of unordered tuples in a 1-type is a 1-type
+
+```agda
+is-1-type-unordered-tuple :
+  {l : Level} (n : ℕ) {A : UU l} →
+  is-1-type A → is-1-type (unordered-tuple n A)
+is-1-type-unordered-tuple = is-trunc-succ-succ-succ-unordered-tuple neg-two-𝕋
 ```
 
 ### Functoriality of unordered tuples

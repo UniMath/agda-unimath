@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import finite-group-theory.finite-monoids
 open import finite-group-theory.finite-semigroups
 
+open import foundation.1-types
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.decidable-equality
@@ -30,6 +31,7 @@ open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import group-theory.category-of-groups
 open import group-theory.commuting-elements-groups
 open import group-theory.groups
 open import group-theory.monoids
@@ -51,6 +53,7 @@ open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.function-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
 </details>
@@ -329,9 +332,25 @@ module _
 ```agda
 Group-of-Order : (l : Level) (n : ℕ) → UU (lsuc l)
 Group-of-Order l n = Σ (Group l) (λ G → mere-equiv (Fin n) (type-Group G))
+
+Group-of-Order' : (l : Level) (n : ℕ) → UU (lsuc l)
+Group-of-Order' l n =
+  Σ (Semigroup-of-Order l n) (λ X → is-group-Semigroup (pr1 X))
+
+compute-Group-of-Order :
+  {l : Level} (n : ℕ) → Group-of-Order l n ≃ Group-of-Order' l n
+compute-Group-of-Order n = equiv-right-swap-Σ
 ```
 
 ## Properties
+
+### The type of groups of order `n` is a 1-type
+
+```agda
+is-1-type-Group-of-Order : {l : Level} (n : ℕ) → is-1-type (Group-of-Order l n)
+is-1-type-Group-of-Order n =
+  is-1-type-type-subtype (mere-equiv-Prop (Fin n) ∘ type-Group) is-1-type-Group
+```
 
 ### The type `is-group-Semigroup G` is finite for any semigroup of fixed finite order
 
@@ -384,26 +403,41 @@ is-finite-is-group-Semigroup {l} n G =
                         ( pair n e)
                         ( mul-Semigroup (pr1 G) x (i x))
                         ( pr1 u)))))))
+```
+
+### The type of groups of order `n` is π₁-finite
+
+```agda
+is-untruncated-π-finite-Group-of-Order :
+  {l : Level} (k n : ℕ) → is-untruncated-π-finite k (Group-of-Order l n)
+is-untruncated-π-finite-Group-of-Order {l} k n =
+  is-untruncated-π-finite-equiv k
+    ( compute-Group-of-Order n)
+    ( is-untruncated-π-finite-Σ k
+      ( is-untruncated-π-finite-Semigroup-of-Order (succ-ℕ k) n)
+      ( λ X →
+        is-untruncated-π-finite-is-finite k
+          ( is-finite-is-group-Semigroup n X)))
 
 is-π-finite-Group-of-Order :
-  {l : Level} (k n : ℕ) → is-π-finite k (Group-of-Order l n)
-is-π-finite-Group-of-Order {l} k n =
-  is-π-finite-equiv k e
-    ( is-π-finite-Σ k
-      ( is-π-finite-Semigroup-of-Order (succ-ℕ k) n)
-      ( λ X →
-        is-π-finite-is-finite k
-          ( is-finite-is-group-Semigroup n X)))
-  where
-  e :
-    Group-of-Order l n ≃
-    Σ (Semigroup-of-Order l n) (λ X → is-group-Semigroup (pr1 X))
-  e = equiv-right-swap-Σ
+  {l : Level} (n : ℕ) → is-π-finite 1 (Group-of-Order l n)
+is-π-finite-Group-of-Order n =
+  is-π-finite-is-untruncated-π-finite 1
+    ( is-1-type-Group-of-Order n)
+    ( is-untruncated-π-finite-Group-of-Order 1 n)
+```
 
+### The number of groups of a given order up to isomorphism
+
+The number of groups of order `n` is listed as
+[A000001](https://oeis.org/A000001) in the [OEIS](literature.oeis.md)
+{{#cite oeis}}.
+
+```agda
 number-of-groups-of-order : ℕ → ℕ
 number-of-groups-of-order n =
   number-of-connected-components
-    ( is-π-finite-Group-of-Order {lzero} zero-ℕ n)
+    ( is-untruncated-π-finite-Group-of-Order {lzero} zero-ℕ n)
 
 mere-equiv-number-of-groups-of-order :
   (n : ℕ) →
@@ -412,7 +446,7 @@ mere-equiv-number-of-groups-of-order :
     ( type-trunc-Set (Group-of-Order lzero n))
 mere-equiv-number-of-groups-of-order n =
   mere-equiv-number-of-connected-components
-    ( is-π-finite-Group-of-Order {lzero} zero-ℕ n)
+    ( is-untruncated-π-finite-Group-of-Order {lzero} zero-ℕ n)
 ```
 
 ### There is a finite number of ways to equip a finite type with the structure of a group
@@ -454,3 +488,7 @@ module _
                     ( is-finite-type-𝔽 X)
                     ( λ x → is-finite-eq-𝔽 X)))))
 ```
+
+## References
+
+{{#bibliography}}
