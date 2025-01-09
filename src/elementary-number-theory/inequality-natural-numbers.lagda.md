@@ -239,6 +239,14 @@ succ-leq-ℕ zero-ℕ = star
 succ-leq-ℕ (succ-ℕ n) = succ-leq-ℕ n
 ```
 
+### If `m` is less than `n`, then it is less than `n+1`
+
+```agda
+leq-succ-leq-ℕ :
+  (m n : ℕ) → m ≤-ℕ n → m ≤-ℕ succ-ℕ n
+leq-succ-leq-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
+```
+
 ### Any natural number less than or equal to `n+1` is either less than or equal to `n` or it is `n+1`
 
 ```agda
@@ -250,14 +258,23 @@ decide-leq-succ-ℕ (succ-ℕ m) zero-ℕ l =
   inr (ap succ-ℕ (is-zero-leq-zero-ℕ m l))
 decide-leq-succ-ℕ (succ-ℕ m) (succ-ℕ n) l =
   map-coproduct id (ap succ-ℕ) (decide-leq-succ-ℕ m n l)
+
+decide-leq-refl-succ-ℕ :
+  {n : ℕ} → decide-leq-succ-ℕ (succ-ℕ n) n (refl-leq-ℕ n) ＝ inr refl
+decide-leq-refl-succ-ℕ {zero-ℕ} = refl
+decide-leq-refl-succ-ℕ {succ-ℕ n} =
+  ap (map-coproduct id (ap succ-ℕ)) decide-leq-refl-succ-ℕ
 ```
 
-### If `m` is less than `n`, then it is less than `n+1`
+### The inequality `m ≤ n` holds if and only if either `m ＝ n` or the inequality `m + 1 ≤ n` holds
 
 ```agda
-leq-succ-leq-ℕ :
-  (m n : ℕ) → m ≤-ℕ n → m ≤-ℕ succ-ℕ n
-leq-succ-leq-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
+decide-leq-ℕ :
+  (m n : ℕ) → m ≤-ℕ n → (m ＝ n) + (succ-ℕ m ≤-ℕ n)
+decide-leq-ℕ m zero-ℕ H = inl (is-zero-leq-zero-ℕ m H)
+decide-leq-ℕ zero-ℕ (succ-ℕ n) H = inr (leq-zero-ℕ n)
+decide-leq-ℕ (succ-ℕ m) (succ-ℕ n) H =
+  map-coproduct (ap succ-ℕ) id (decide-leq-ℕ m n H)
 ```
 
 ### The successor of `n` is not less than or equal to `n`
@@ -267,24 +284,6 @@ neg-succ-leq-ℕ :
   (n : ℕ) → ¬ (succ-ℕ n ≤-ℕ n)
 neg-succ-leq-ℕ zero-ℕ = id
 neg-succ-leq-ℕ (succ-ℕ n) = neg-succ-leq-ℕ n
-```
-
-### If `m ≤ n + 1` then either `m ≤ n` or `m = n + 1`
-
-```agda
-cases-leq-succ-ℕ :
-  {m n : ℕ} → m ≤-ℕ succ-ℕ n → (m ≤-ℕ n) + (m ＝ succ-ℕ n)
-cases-leq-succ-ℕ {zero-ℕ} {n} star = inl star
-cases-leq-succ-ℕ {succ-ℕ m} {zero-ℕ} p =
-  inr (ap succ-ℕ (antisymmetric-leq-ℕ m zero-ℕ p star))
-cases-leq-succ-ℕ {succ-ℕ m} {succ-ℕ n} p =
-  map-coproduct id (ap succ-ℕ) (cases-leq-succ-ℕ p)
-
-cases-leq-succ-reflexive-leq-ℕ :
-  {n : ℕ} → cases-leq-succ-ℕ {succ-ℕ n} {n} (refl-leq-ℕ n) ＝ inr refl
-cases-leq-succ-reflexive-leq-ℕ {zero-ℕ} = refl
-cases-leq-succ-reflexive-leq-ℕ {succ-ℕ n} =
-  ap (map-coproduct id (ap succ-ℕ)) cases-leq-succ-reflexive-leq-ℕ
 ```
 
 ### `m ≤ n` if and only if `n + 1 ≰ m`
