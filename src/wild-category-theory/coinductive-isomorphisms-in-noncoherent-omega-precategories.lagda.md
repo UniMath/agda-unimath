@@ -237,3 +237,7 @@ module _
 ## See also
 
 - [Coinductive isomorphisms in noncoherent large ω-precategories](wild-category-theory.coinductive-isomorphisms-in-noncoherent-large-omega-precategories.md)
+
+## References
+
+{{#bibliography}}
