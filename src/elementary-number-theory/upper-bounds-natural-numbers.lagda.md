@@ -1,4 +1,4 @@
-# Bounds for structured natural numbers
+# Upper bounds for structured natural numbers
 
 ```agda
 module elementary-number-theory.upper-bounds-natural-numbers where
@@ -268,4 +268,15 @@ structure-least-upper-bound-is-decidable-fam-ℕ P d n H m p =
   double-negation-elim-is-decidable
     ( d n)
     ( is-nonempty-structure-is-in-family-is-least-upper-bound-ℕ P n H m p)
+```
+
+### Any upper bound equipped with structure is a least upper bound
+
+```agda
+is-least-upper-bound-is-upper-bound-ℕ :
+  {l : Level} (P : ℕ → UU l) (n : ℕ) →
+  P n → is-upper-bound-ℕ P n → is-least-upper-bound-ℕ P n
+pr1 (is-least-upper-bound-is-upper-bound-ℕ P n p H m) K = K n p
+pr2 (is-least-upper-bound-is-upper-bound-ℕ P n p H m) K x q =
+  transitive-leq-ℕ x n m K (H x q)
 ```

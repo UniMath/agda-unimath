@@ -10,6 +10,8 @@ module elementary-number-theory.well-ordering-principle-natural-numbers where
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.maximal-structured-natural-numbers
+open import elementary-number-theory.minimal-structured-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.upper-bounds-natural-numbers
 
@@ -52,25 +54,6 @@ The well-ordering principle has some useful consequences:
   [strictly inflationary map](order-theory.inflationary-maps-strictly-ordered-types.md)
   `f : ℕ → ℕ` such that `f 0 ≤ b` we can find a largest natural number `n₁` such
   that `f n₁ ≤ b`.
-
-## Definitions
-
-### Minimal elements
-
-```agda
-minimal-element-ℕ :
-  {l : Level} (P : ℕ → UU l) → UU l
-minimal-element-ℕ P = Σ ℕ (λ n → P n × is-lower-bound-ℕ P n)
-```
-
-### Bounded maximal elements
-
-```agda
-bounded-maximal-element-ℕ :
-  {l : Level} (P : ℕ → UU l) (b : ℕ) → UU l
-bounded-maximal-element-ℕ P b =
-  Σ ℕ (λ n → n ≤-ℕ b × P n × is-upper-bound-ℕ P n)
-```
 
 ## Theorems
 
@@ -242,8 +225,8 @@ module _
   bounded-maximal-element-decidable-family-ℕ :
     (n : ℕ) → n ≤-ℕ b → P n → bounded-maximal-element-ℕ P b
   bounded-maximal-element-decidable-family-ℕ n H p =
-    ( nat-bounded-maximal-element-decidable-family-ℕ ,
-      upper-bound-nat-bounded-maximal-element-decidable-family-ℕ ,
-      structure-nat-bounded-maximal-element-decidable-family-ℕ ,
-      is-upper-bound-nat-bounded-maximal-element-decidable-family-ℕ)
+    ( ( nat-bounded-maximal-element-decidable-family-ℕ) ,
+      ( upper-bound-nat-bounded-maximal-element-decidable-family-ℕ ,
+        structure-nat-bounded-maximal-element-decidable-family-ℕ) ,
+      {!!} {- is-upper-bound-nat-bounded-maximal-element-decidable-family-ℕ -})
 ```

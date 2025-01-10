@@ -1,4 +1,4 @@
-# Lower bounds of type families over the natural numbers
+# Lower bounds for structured natural numbers
 
 ```agda
 module elementary-number-theory.lower-bounds-natural-numbers where
@@ -255,4 +255,15 @@ structure-largest-lower-bound-is-decidable-fam-ℕ P d n H =
   double-negation-elim-is-decidable
     ( d n)
     ( is-nonempty-structure-is-in-family-is-largest-lower-bound-ℕ P n H)
+```
+
+### Any lower bound equipped with structure is a largest lower bound
+
+```agda
+is-largest-lower-bound-is-lower-bound-ℕ :
+  {l : Level} (P : ℕ → UU l) (n : ℕ) →
+  P n → is-lower-bound-ℕ P n → is-largest-lower-bound-ℕ P n
+pr1 (is-largest-lower-bound-is-lower-bound-ℕ P n p H m) K = K n p
+pr2 (is-largest-lower-bound-is-lower-bound-ℕ P n p H m) K x q =
+  transitive-leq-ℕ m n x (H x q) K
 ```
