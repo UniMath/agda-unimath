@@ -63,7 +63,9 @@ that `s` or `r` are "proper" inverses to `f`. To take an example, consider the
 ω-category of spans and higher spans. In this ω-category every morphism is a
 coinductive isomorphism since every morphism is a biadjoint, but not every
 morphism is an isomorphism. Moreover, this ω-category is univalent with respect
-to isomorphisms, but not with respect to all coinductive isomorphisms.
+to isomorphisms, but not with respect to all coinductive isomorphisms. More
+generally, every morphism in an "ω-catgory with duals" is a coinductive
+isomorphism {{#cite Cheng07}}.
 
 ## Definitions
 
