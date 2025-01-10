@@ -8,11 +8,15 @@ module elementary-number-theory.maximal-structured-natural-numbers where
 
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.lower-bounds-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.upper-bounds-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -114,3 +118,54 @@ module _
       ( is-upper-bound-bounded-maximal-element-ℕ)
 ```
 
+## Properties
+
+### The type of maximal elements of a subtype has at most one element
+
+```agda
+module _
+  {l1 : Level} (P : ℕ → Prop l1)
+  where
+
+  all-elements-equal-maximal-element-ℕ :
+    all-elements-equal (maximal-element-ℕ (λ n → type-Prop (P n)))
+  all-elements-equal-maximal-element-ℕ
+    (x , p , l) (y , q , k) =
+    eq-type-subtype
+      ( λ n →
+        product-Prop
+          ( _  , is-prop-type-Prop (P n))
+          ( is-upper-bound-ℕ-Prop (type-Prop ∘ P) n))
+      ( antisymmetric-leq-ℕ x y (k x p) (l y q))
+
+  is-prop-maximal-element-ℕ :
+    is-prop (maximal-element-ℕ (λ n → type-Prop (P n)))
+  is-prop-maximal-element-ℕ =
+    is-prop-all-elements-equal all-elements-equal-maximal-element-ℕ
+
+  maximal-element-ℕ-Prop : Prop l1
+  pr1 maximal-element-ℕ-Prop = maximal-element-ℕ (λ n → type-Prop (P n))
+  pr2 maximal-element-ℕ-Prop = is-prop-maximal-element-ℕ
+```
+
+### A natural number is a largest lower bound if and only if it is a maximal element of the type of lower bounds
+
+```agda
+module _
+  {l : Level} (P : ℕ → UU l) (n : ℕ)
+  where
+
+  is-maximal-lower-bound-is-largest-lower-bound-ℕ :
+    is-largest-lower-bound-ℕ P n → is-maximal-element-ℕ (is-lower-bound-ℕ P) n
+  pr1 (is-maximal-lower-bound-is-largest-lower-bound-ℕ H) =
+    is-lower-bound-is-largest-lower-bound-ℕ P n H
+  pr2 (is-maximal-lower-bound-is-largest-lower-bound-ℕ H) m K =
+    leq-is-largest-lower-bound-ℕ P n H m K
+
+  is-largest-lower-bound-is-maximal-lower-bound-ℕ :
+    is-maximal-element-ℕ (is-lower-bound-ℕ P) n → is-largest-lower-bound-ℕ P n
+  pr1 (is-largest-lower-bound-is-maximal-lower-bound-ℕ H m) K =
+    pr2 H m K
+  pr2 (is-largest-lower-bound-is-maximal-lower-bound-ℕ H m) K x p =
+    transitive-leq-ℕ m n x (pr1 H x p) K
+```

@@ -11,6 +11,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -279,4 +280,41 @@ is-least-upper-bound-is-upper-bound-ℕ :
 pr1 (is-least-upper-bound-is-upper-bound-ℕ P n p H m) K = K n p
 pr2 (is-least-upper-bound-is-upper-bound-ℕ P n p H m) K x q =
   transitive-leq-ℕ x n m K (H x q)
+```
+
+### Any element greater than an upper bound is an upper bound
+
+```agda
+is-upper-bound-leq-is-upper-bound-ℕ :
+  {l : Level} (P : ℕ → UU l) →
+  (b : ℕ) → is-upper-bound-ℕ P b →
+  (n : ℕ) → b ≤-ℕ n → is-upper-bound-ℕ P n
+is-upper-bound-leq-is-upper-bound-ℕ P b H n K x p =
+  transitive-leq-ℕ x b n K (H x p)
+```
+
+### Being an upper bound of a decidable type family is decidable, given an upper bound
+
+```agda
+is-decidable-is-upper-bound-ℕ' :
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) →
+  (b : ℕ) → is-upper-bound-ℕ P b → is-decidable (P b) →
+  (n : ℕ) → is-decidable (is-upper-bound-ℕ P n)
+is-decidable-is-upper-bound-ℕ' P d zero-ℕ H e n =
+  inl (is-upper-bound-leq-is-upper-bound-ℕ P 0 H n (leq-zero-ℕ n))
+is-decidable-is-upper-bound-ℕ' P d (succ-ℕ b) H (inl p) n =
+  is-decidable-iff'
+    ( inv-iff (is-least-upper-bound-is-upper-bound-ℕ P (succ-ℕ b) p H n))
+    ( is-decidable-leq-ℕ (succ-ℕ b) n)
+is-decidable-is-upper-bound-ℕ' P d (succ-ℕ b) H (inr f) =
+  is-decidable-is-upper-bound-ℕ' P d b
+    ( decrease-is-upper-bound-ℕ P b H f)
+    ( d b)
+
+is-decidable-is-upper-bound-ℕ :
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) →
+  (b : ℕ) → is-upper-bound-ℕ P b →
+  (n : ℕ) → is-decidable (is-upper-bound-ℕ P n)
+is-decidable-is-upper-bound-ℕ P d b H =
+  is-decidable-is-upper-bound-ℕ' P d b H (d b)
 ```
