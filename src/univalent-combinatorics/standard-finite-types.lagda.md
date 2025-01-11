@@ -237,8 +237,8 @@ strict-upper-bound-nat-Fin (succ-ℕ k) (inl x) =
     ( nat-Fin k x)
     ( k)
     ( succ-ℕ k)
-    ( strict-upper-bound-nat-Fin k x)
     ( succ-le-ℕ k)
+    ( strict-upper-bound-nat-Fin k x)
 strict-upper-bound-nat-Fin (succ-ℕ k) (inr star) =
   succ-le-ℕ k
 

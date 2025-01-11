@@ -27,6 +27,8 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import order-theory.strictly-ordered-types
 ```
 
 </details>
@@ -121,12 +123,12 @@ contradiction-le-one-ℕ zero-ℕ ()
 contradiction-le-one-ℕ (succ-ℕ n) ()
 ```
 
-### The strict inequality on the natural numbers is anti-reflexive
+### The strict inequality on the natural numbers is irreflexive
 
 ```agda
-anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n <-ℕ n)
-anti-reflexive-le-ℕ zero-ℕ ()
-anti-reflexive-le-ℕ (succ-ℕ n) = anti-reflexive-le-ℕ n
+irreflexive-le-ℕ : (n : ℕ) → ¬ (n <-ℕ n)
+irreflexive-le-ℕ zero-ℕ ()
+irreflexive-le-ℕ (succ-ℕ n) = irreflexive-le-ℕ n
 ```
 
 ### If `x < y` then `x ≠ y`
@@ -148,7 +150,7 @@ antisymmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
 ### The strict inequality on the natural numbers is transitive
 
 ```agda
-transitive-le-ℕ : (n m l : ℕ) → (le-ℕ n m) → (le-ℕ m l) → (le-ℕ n l)
+transitive-le-ℕ : (n m l : ℕ) → (le-ℕ m l) → (le-ℕ n m) → (le-ℕ n l)
 transitive-le-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ l) p q = star
 transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-le-ℕ n m l p q
@@ -156,7 +158,7 @@ transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
 concatenate-le-eq-le-ℕ :
   (a b c d : ℕ) → a <-ℕ b → b ＝ c → c <-ℕ d → a <-ℕ d
 concatenate-le-eq-le-ℕ a b .b d H refl K =
-  transitive-le-ℕ a b d H K
+  transitive-le-ℕ a b d K H
 ```
 
 ### A sharper variant of transitivity
@@ -184,6 +186,16 @@ linear-le-ℕ zero-ℕ (succ-ℕ y) = inl star
 linear-le-ℕ (succ-ℕ x) zero-ℕ = inr (inr star)
 linear-le-ℕ (succ-ℕ x) (succ-ℕ y) =
   map-coproduct id (map-coproduct (ap succ-ℕ) id) (linear-le-ℕ x y)
+```
+
+### The strictly ordered type of natural numbers
+
+```agda
+ℕ-Strictly-Ordered-Type : Strictly-Ordered-Type lzero lzero
+pr1 ℕ-Strictly-Ordered-Type = ℕ
+pr1 (pr2 ℕ-Strictly-Ordered-Type) = le-ℕ-Prop
+pr1 (pr2 (pr2 ℕ-Strictly-Ordered-Type)) = irreflexive-le-ℕ
+pr2 (pr2 (pr2 ℕ-Strictly-Ordered-Type)) = transitive-le-ℕ
 ```
 
 ### `n < m` if and only if there exists a nonzero natural number `l` such that `n + l = m`
@@ -219,7 +231,7 @@ succ-le-ℕ (succ-ℕ n) = succ-le-ℕ n
 preserves-le-succ-ℕ :
   (m n : ℕ) → le-ℕ m n → le-ℕ m (succ-ℕ n)
 preserves-le-succ-ℕ m n H =
-  transitive-le-ℕ m n (succ-ℕ n) H (succ-le-ℕ n)
+  transitive-le-ℕ m n (succ-ℕ n) (succ-le-ℕ n) H
 ```
 
 ### Concatenating strict and nonstrict inequalities
@@ -410,8 +422,8 @@ preserves-strict-order-add-ℕ a b c d H K =
     ( a +ℕ c)
     ( b +ℕ c)
     ( b +ℕ d)
-    ( preserves-strict-order-left-add-ℕ a b c H)
     ( preserves-strict-order-right-add-ℕ b c d K)
+    ( preserves-strict-order-left-add-ℕ a b c H)
 ```
 
 ### Multiplication is strictly order preserving
