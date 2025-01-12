@@ -56,9 +56,27 @@ This property doesn't seem to have a widely recognized name, so we use an explic
 maximal-value-bound-input-property-map-ℕ :
   (ℕ → ℕ) → UU lzero
 maximal-value-bound-input-property-map-ℕ f =
-  (n : ℕ) → maximal-element-ℕ (λ k → f k ≤-ℕ n)
+  (n k : ℕ) → f k ≤-ℕ n → maximal-element-ℕ (λ k → f k ≤-ℕ n)
 ```
 
 ## Properties
 
-### Any finite map satisfies the maximal value-bound input property
+### Any finite map on the natural numbers satisfies the maximal value-bound input property
+
+**Proof.** Consider a map $f : \mathbb{N} \to \mathbb{N}$ with finite fibers, and consider natural numbers $n$ and $k$ such that $f(k) \leq n$. Since $f$ has finite fibers, it follows that the type
+
+$$
+  \sum_{i:\mathbb{N}}f(i)\leq n
+$$
+
+is a finite decidable subtype of the natural numbers
+
+```agda
+module _
+  (f : ℕ → ℕ)
+  where
+
+  maximal-value-bound-input-property-is-finite-map-ℕ :
+    is-finite-map-ℕ f → maximal-value-bound-input-property-map-ℕ f
+  maximal-value-bound-input-property-is-finite-map-ℕ H = {!!}
+```

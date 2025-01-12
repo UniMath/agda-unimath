@@ -295,6 +295,14 @@ is-upper-bound-leq-is-upper-bound-ℕ P b H n K x p =
 
 ### Being an upper bound of a decidable type family is decidable, given an upper bound
 
+The type family `is-upper-bound-ℕ P` is an example of a type family `Q` over the natural numbers satisfying
+
+```text
+  Q b → Π (n : ℕ), is-decidable (Q n)
+```
+
+for any natural number `b`.
+
 ```agda
 is-decidable-is-upper-bound-ℕ' :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) →
