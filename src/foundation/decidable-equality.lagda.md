@@ -43,12 +43,6 @@ if `x ＝ y` is a [decidable type](foundation.decidable-types.md) for every
 `x y : A`.
 
 ```agda
-has-based-decidable-equality : {l : Level} (A : UU l) → A → UU l
-has-based-decidable-equality A x = (y : A) → is-decidable (x ＝ y)
-
-has-based-decidable-equality' : {l : Level} (A : UU l) → A → UU l
-has-based-decidable-equality' A x = (y : A) → is-decidable (y ＝ x)
-
 has-decidable-equality : {l : Level} → UU l → UU l
 has-decidable-equality A = (x y : A) → is-decidable (x ＝ y)
 ```
@@ -225,26 +219,6 @@ pr1 (has-decidable-equality-Prop X) = has-decidable-equality X
 pr2 (has-decidable-equality-Prop X) = is-prop-has-decidable-equality
 ```
 
-### Types with decidable equality are closed under dependent pair types
-
-```agda
-abstract
-  has-decidable-equality-Σ :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-    has-decidable-equality A → ((x : A) → has-decidable-equality (B x)) →
-    has-decidable-equality (Σ A B)
-  has-decidable-equality-Σ {B = B} dA dB (x , y) (x' , y') with dA x x'
-  ... | inr np = inr (λ r → np (ap pr1 r))
-  ... | inl p =
-    is-decidable-iff eq-pair-Σ' pair-eq-Σ
-      ( is-decidable-equiv
-        ( left-unit-law-Σ-is-contr
-          ( is-proof-irrelevant-is-prop
-            ( is-set-has-decidable-equality dA x x') p)
-          ( p))
-        ( dB x' (tr _ p y) y'))
-```
-
 ### A product of types with decidable equality has decidable equality
 
 ```agda
@@ -286,6 +260,26 @@ has-decidable-equality-right-factor :
 has-decidable-equality-right-factor d a x y with d (a , x) (a , y)
 ... | inl p = inl (ap pr2 p)
 ... | inr np = inr (λ q → np (eq-pair-eq-fiber q))
+```
+
+### Types with decidable equality are closed under dependent pair types
+
+```agda
+abstract
+  has-decidable-equality-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    has-decidable-equality A → ((x : A) → has-decidable-equality (B x)) →
+    has-decidable-equality (Σ A B)
+  has-decidable-equality-Σ {B = B} dA dB (x , y) (x' , y') with dA x x'
+  ... | inr np = inr (λ r → np (ap pr1 r))
+  ... | inl p =
+    is-decidable-iff eq-pair-Σ' pair-eq-Σ
+      ( is-decidable-equiv
+        ( left-unit-law-Σ-is-contr
+          ( is-proof-irrelevant-is-prop
+            ( is-set-has-decidable-equality dA x x') p)
+          ( p))
+        ( dB x' (tr _ p y) y'))
 ```
 
 ### A family of types over a type with decidable equality and decidable total space is a family of types with decidable equality
