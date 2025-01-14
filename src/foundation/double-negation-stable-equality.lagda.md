@@ -182,7 +182,7 @@ abstract
       ( λ d →
         is-prop-Π
         ( λ y →
-           is-prop-function-type
+          is-prop-function-type
             ( is-prop-based-Id-has-based-double-negation-stable-equality d y)))
 
 abstract
@@ -259,7 +259,8 @@ module _
   where
 
   has-double-negation-stable-equality-coproduct :
-    has-double-negation-stable-equality A → has-double-negation-stable-equality B →
+    has-double-negation-stable-equality A →
+    has-double-negation-stable-equality B →
     has-double-negation-stable-equality (A + B)
   has-double-negation-stable-equality-coproduct dA dB (inl x) (inl y) =
     has-double-negation-elim-iff (is-injective-inl , ap inl) (dA x y)

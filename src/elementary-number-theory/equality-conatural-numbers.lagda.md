@@ -15,22 +15,22 @@ open import foundation.coherently-invertible-maps
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
-open import foundation.negation
-open import foundation.functoriality-coproduct-types
-open import foundation.tight-apartness-relations
 open import foundation.double-negation-stable-equality
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.maybe
+open import foundation.negation
 open import foundation.retractions
 open import foundation.retracts-of-types
 open import foundation.sections
 open import foundation.sets
+open import foundation.tight-apartness-relations
 open import foundation.torsorial-type-families
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -78,7 +78,6 @@ The following does not pass Agda's termination checker if we omit the
 intermediate data type `Eq-Maybe-ℕ∞`.
 
 ```agda
-
 refl-Eq-Maybe-ℕ∞ : {x : Maybe ℕ∞} → Eq-Maybe-ℕ∞ x x
 
 refl-Eq-ℕ∞ : {x : ℕ∞} → Eq-ℕ∞ x x
@@ -316,7 +315,7 @@ is-set-ℕ∞ =
 
 ### The type of conaturals has a tight apartness relation
 
-```agda
+```text
 cases-is-cotransitive-Eq-Maybe-ℕ∞ :
   (x y z : Maybe ℕ∞) →
   ¬ (Eq-Maybe-ℕ∞ x y) →
@@ -341,5 +340,4 @@ cases-is-cotransitive-Eq-Maybe-ℕ∞ (inl x) (inl y) (inl z) np =
 cases-is-cotransitive-Eq-Maybe-ℕ∞ (inl x) (inl y) (inr x₁) np = {!   !}
 cases-is-cotransitive-Eq-Maybe-ℕ∞ (inl x) (inr y) z np = {!   !}
 cases-is-cotransitive-Eq-Maybe-ℕ∞ (inr x) y z np = {!   !}
-
 ```
