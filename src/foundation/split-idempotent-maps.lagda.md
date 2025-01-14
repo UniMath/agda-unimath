@@ -21,11 +21,13 @@ open import foundation.homotopy-algebra
 open import foundation.homotopy-induction
 open import foundation.idempotent-maps
 open import foundation.inverse-sequential-diagrams
-open import foundation.path-algebra
+open import foundation.locally-small-types
+open import foundation.path-cosplit-maps
 open import foundation.quasicoherently-idempotent-maps
 open import foundation.retracts-of-types
 open import foundation.sequential-limits
 open import foundation.structure-identity-principle
+open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
@@ -1197,6 +1199,23 @@ module _
   is-small-retract is-small-A r =
     is-small-retract'
       ( comp-retract (retract-equiv (equiv-is-small is-small-A)) r)
+```
+
+### Locally small types are closed under path cosplittings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-locally-small-path-cosplitting :
+    is-locally-small l3 A →
+    path-cosplit-map neg-one-𝕋 B A →
+    is-locally-small l3 B
+  is-locally-small-path-cosplitting H r x y =
+    is-small-retract
+      ( H (map-path-cosplit-map r x) (map-path-cosplit-map r y))
+      ( ap (map-path-cosplit-map r) , is-path-cosplit-path-cosplit-map r x y)
 ```
 
 ## References

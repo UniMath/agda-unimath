@@ -11,23 +11,27 @@ open import foundation.apartness-relations
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.identity-types
-open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.sets
 ```
 
 </details>
 
 ## Idea
 
-A [relation](foundation.binary-relations.md) `R` is said to be **tight** if for
-every `x y : A` we have `¬ (R x y) → (x ＝ y)`.
+A [relation](foundation.binary-relations.md) `R` is said to be
+{{#concept "tight" Disambiguation="binary relation" Agda=is-tight}} if for every
+`x y : A` we have `¬ (R x y) → (x ＝ y)`.
 
-## Definition
+## Definitions
+
+### The tightness predicate
 
 ```agda
 module _
@@ -92,6 +96,30 @@ module _
   apart-Type-With-Tight-Apartness =
     apart-Type-With-Apartness type-with-apartness-Type-With-Tight-Apartness
 
+  antirefl-apart-Type-With-Tight-Apartness :
+    is-antireflexive rel-apart-Type-With-Tight-Apartness
+  antirefl-apart-Type-With-Tight-Apartness =
+    antirefl-apart-Type-With-Apartness
+      type-with-apartness-Type-With-Tight-Apartness
+
+  consistent-apart-Type-With-Tight-Apartness :
+    is-consistent rel-apart-Type-With-Tight-Apartness
+  consistent-apart-Type-With-Tight-Apartness =
+    consistent-apart-Type-With-Apartness
+      type-with-apartness-Type-With-Tight-Apartness
+
+  symmetric-apart-Type-With-Tight-Apartness :
+    is-symmetric apart-Type-With-Tight-Apartness
+  symmetric-apart-Type-With-Tight-Apartness =
+    symmetric-apart-Type-With-Apartness
+      type-with-apartness-Type-With-Tight-Apartness
+
+  cotransitive-apart-Type-With-Tight-Apartness :
+    is-cotransitive rel-apart-Type-With-Tight-Apartness
+  cotransitive-apart-Type-With-Tight-Apartness =
+    cotransitive-apart-Type-With-Apartness
+      type-with-apartness-Type-With-Tight-Apartness
+
   is-tight-apart-Type-With-Tight-Apartness :
     is-tight rel-apart-Type-With-Tight-Apartness
   is-tight-apart-Type-With-Tight-Apartness = pr2 X
@@ -116,12 +144,38 @@ is-tight-apartness-function-into-Type-With-Tight-Apartness Y f g H =
         ( λ u → H ( unit-trunc-Prop (x , u))))
 
 exp-Type-With-Tight-Apartness :
-  {l1 l2 l3 : Level} (X : UU l1) → Type-With-Tight-Apartness l2 l3 →
+  {l1 l2 l3 : Level} (X : UU l1) →
+  Type-With-Tight-Apartness l2 l3 →
   Type-With-Tight-Apartness (l1 ⊔ l2) (l1 ⊔ l3)
 pr1 (exp-Type-With-Tight-Apartness X Y) =
   exp-Type-With-Apartness X (type-with-apartness-Type-With-Tight-Apartness Y)
 pr2 (exp-Type-With-Tight-Apartness X Y) =
   is-tight-apartness-function-into-Type-With-Tight-Apartness Y
+```
+
+### Types with tight apartness relations are sets
+
+```agda
+is-set-has-tight-antireflexive-relation :
+  {l1 l2 : Level} {A : UU l1}
+  {R : A → A → UU l2} →
+  ((x : A) → ¬ (R x x)) → ((x y : A) → ¬ (R x y) → x ＝ y) → is-set A
+is-set-has-tight-antireflexive-relation {R = R} =
+  is-set-prop-in-id (λ x y → ¬ (R x y)) (λ x y → is-prop-neg)
+
+is-set-type-Type-With-Tight-Apartness :
+  {l1 l2 : Level} (A : Type-With-Tight-Apartness l1 l2) →
+  is-set (type-Type-With-Tight-Apartness A)
+is-set-type-Type-With-Tight-Apartness A =
+  is-set-has-tight-antireflexive-relation
+    ( antirefl-apart-Type-With-Tight-Apartness A)
+    ( is-tight-apart-Type-With-Tight-Apartness A)
+
+set-Type-With-Tight-Apartness :
+  {l1 l2 : Level} (A : Type-With-Tight-Apartness l1 l2) →
+  Set l1
+set-Type-With-Tight-Apartness A =
+  ( type-Type-With-Tight-Apartness A , is-set-type-Type-With-Tight-Apartness A)
 ```
 
 ## References

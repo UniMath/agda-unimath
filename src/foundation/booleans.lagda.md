@@ -38,8 +38,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The type of **booleans** is a
-[2-element type](univalent-combinatorics.2-element-types.md) with elements
+The type of {{#concept "booleans" WD="Boolean domain" WDID=Q3269980 Agda=bool}}
+is a [2-element type](univalent-combinatorics.2-element-types.md) with elements
 `true false : bool`, which is used for reasoning with
 [decidable propositions](foundation-core.decidable-propositions.md).
 
