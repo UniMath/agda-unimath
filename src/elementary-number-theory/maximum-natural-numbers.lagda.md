@@ -269,7 +269,7 @@ is-attained-max-standard-finite-family-succ-ℕ n f =
 
 ```agda
 is-upper-bound-max-standard-finite-family-ℕ :
-  (n : ℕ) (f : Fin n → ℕ) → (i : Fin n) →
+  (n : ℕ) (f : Fin n → ℕ) (i : Fin n) →
   f i ≤-ℕ max-standard-finite-family-ℕ n f
 is-upper-bound-max-standard-finite-family-ℕ (succ-ℕ n) f (inl x) =
   transitive-leq-ℕ

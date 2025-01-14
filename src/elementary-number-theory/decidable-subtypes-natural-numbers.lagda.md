@@ -7,6 +7,7 @@ module elementary-number-theory.decidable-subtypes-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.bounded-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.maximal-structured-natural-numbers
 open import elementary-number-theory.maximum-natural-numbers
@@ -22,12 +23,16 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.decidable-subtypes
 ```
 
 </details>
@@ -60,7 +65,7 @@ module _
           ( p))
 ```
 
-### Finite decidable subtypes of the natural numbers have a maximal element
+### Inhatbited finite decidable subtypes of the natural numbers have a maximal element
 
 ```agda
 module _
@@ -129,5 +134,25 @@ module _
     apply-twice-universal-property-trunc-Prop H K
       ( maximal-element-ℕ-Prop (subtype-decidable-subtype P))
       ( maximal-element-count-type-decidable-subtype-ℕ)
+```
+
+### Decidable subtypes with a maximal element are finite
+
+```agda
+module _
+  {l : Level} (P : decidable-subtype l ℕ)
+  where
+
+  is-finite-maximal-element-decidable-subtype-ℕ :
+    maximal-element-ℕ (is-in-decidable-subtype P) →
+    is-finite (type-decidable-subtype P)
+  is-finite-maximal-element-decidable-subtype-ℕ (m , H , K) =
+    is-finite-equiv
+      ( ( right-unit-law-Σ-is-contr
+          ( λ (x , p) → is-proof-irrelevant-leq-ℕ x m (K x p))) ∘e
+        ( equiv-right-swap-Σ))
+      ( is-finite-type-decidable-subtype
+        ( P ∘ pr1)
+        ( is-finite-bounded-ℕ m))
 ```
 

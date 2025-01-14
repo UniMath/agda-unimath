@@ -23,6 +23,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -114,6 +115,11 @@ count-bounded-ℕ :
   (n : ℕ) → count (bounded-ℕ n)
 pr1 (count-bounded-ℕ n) = succ-ℕ n
 pr2 (count-bounded-ℕ n) = equiv-count-bounded-ℕ n
+
+is-finite-bounded-ℕ :
+  (n : ℕ) → is-finite (bounded-ℕ n)
+is-finite-bounded-ℕ n =
+  is-finite-count (count-bounded-ℕ n)
 ```
 
 ## See also

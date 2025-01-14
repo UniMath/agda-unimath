@@ -10,21 +10,26 @@ module elementary-number-theory.inequality-natural-numbers where
 open import category-theory.precategories
 
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
+open import foundation.sections
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -77,6 +82,11 @@ is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
 leq-ℕ-Prop : ℕ → ℕ → Prop lzero
 pr1 (leq-ℕ-Prop m n) = leq-ℕ m n
 pr2 (leq-ℕ-Prop m n) = is-prop-leq-ℕ m n
+
+is-proof-irrelevant-leq-ℕ :
+  (m n : ℕ) → m ≤-ℕ n → is-contr (m ≤-ℕ n)
+is-proof-irrelevant-leq-ℕ m n =
+  is-proof-irrelevant-is-prop (is-prop-leq-ℕ m n)
 ```
 
 ### Inequality on the natural numbers is decidable
@@ -247,36 +257,6 @@ leq-succ-leq-ℕ :
 leq-succ-leq-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
 ```
 
-### Any natural number less than or equal to `n+1` is either less than or equal to `n` or it is `n+1`
-
-```agda
-decide-leq-succ-ℕ :
-  (m n : ℕ) → m ≤-ℕ succ-ℕ n → (m ≤-ℕ n) + (m ＝ succ-ℕ n)
-decide-leq-succ-ℕ zero-ℕ zero-ℕ l = inl star
-decide-leq-succ-ℕ zero-ℕ (succ-ℕ n) l = inl star
-decide-leq-succ-ℕ (succ-ℕ m) zero-ℕ l =
-  inr (ap succ-ℕ (is-zero-leq-zero-ℕ m l))
-decide-leq-succ-ℕ (succ-ℕ m) (succ-ℕ n) l =
-  map-coproduct id (ap succ-ℕ) (decide-leq-succ-ℕ m n l)
-
-decide-leq-refl-succ-ℕ :
-  {n : ℕ} → decide-leq-succ-ℕ (succ-ℕ n) n (refl-leq-ℕ n) ＝ inr refl
-decide-leq-refl-succ-ℕ {zero-ℕ} = refl
-decide-leq-refl-succ-ℕ {succ-ℕ n} =
-  ap (map-coproduct id (ap succ-ℕ)) decide-leq-refl-succ-ℕ
-```
-
-### The inequality `m ≤ n` holds if and only if either `m ＝ n` or the inequality `m + 1 ≤ n` holds
-
-```agda
-decide-leq-ℕ :
-  (m n : ℕ) → m ≤-ℕ n → (m ＝ n) + (succ-ℕ m ≤-ℕ n)
-decide-leq-ℕ m zero-ℕ H = inl (is-zero-leq-zero-ℕ m H)
-decide-leq-ℕ zero-ℕ (succ-ℕ n) H = inr (leq-zero-ℕ n)
-decide-leq-ℕ (succ-ℕ m) (succ-ℕ n) H =
-  map-coproduct (ap succ-ℕ) id (decide-leq-ℕ m n H)
-```
-
 ### The successor of `n` is not less than or equal to `n`
 
 ```agda
@@ -294,6 +274,68 @@ contradiction-leq-ℕ (succ-ℕ m) (succ-ℕ n) H K = contradiction-leq-ℕ m n 
 
 contradiction-leq-ℕ' : (m n : ℕ) → succ-ℕ n ≤-ℕ m → ¬ (m ≤-ℕ n)
 contradiction-leq-ℕ' m n K H = contradiction-leq-ℕ m n H K
+```
+
+### Any natural number less than or equal to `n+1` is either less than or equal to `n` or it is `n+1`
+
+```agda
+decide-leq-succ-ℕ :
+  (m n : ℕ) → m ≤-ℕ succ-ℕ n → (m ≤-ℕ n) + (m ＝ succ-ℕ n)
+decide-leq-succ-ℕ zero-ℕ zero-ℕ l = inl star
+decide-leq-succ-ℕ zero-ℕ (succ-ℕ n) l = inl star
+decide-leq-succ-ℕ (succ-ℕ m) zero-ℕ l =
+  inr (ap succ-ℕ (is-zero-leq-zero-ℕ m l))
+decide-leq-succ-ℕ (succ-ℕ m) (succ-ℕ n) l =
+  map-coproduct id (ap succ-ℕ) (decide-leq-succ-ℕ m n l)
+
+inv-decide-leq-succ-ℕ :
+  (m n : ℕ) → (m ≤-ℕ n) + (m ＝ succ-ℕ n) → m ≤-ℕ succ-ℕ n
+inv-decide-leq-succ-ℕ m n (inl H) =
+  transitive-leq-ℕ m n (succ-ℕ n) (leq-succ-leq-ℕ n n (refl-leq-ℕ n)) H
+inv-decide-leq-succ-ℕ m n (inr p) =
+  leq-eq-ℕ m (succ-ℕ n) p
+
+all-elements-equal-cases-leq-succ-ℕ :
+  (m n : ℕ) → all-elements-equal ((m ≤-ℕ n) + (m ＝ succ-ℕ n))
+all-elements-equal-cases-leq-succ-ℕ m n (inl H) (inl K) =
+  ap inl (eq-is-prop (is-prop-leq-ℕ m n))
+all-elements-equal-cases-leq-succ-ℕ .(succ-ℕ n) n (inl H) (inr refl) =
+  ex-falso (neg-succ-leq-ℕ n H)
+all-elements-equal-cases-leq-succ-ℕ .(succ-ℕ n) n (inr refl) (inl K) =
+  ex-falso (neg-succ-leq-ℕ n K)
+all-elements-equal-cases-leq-succ-ℕ .(succ-ℕ n) n (inr refl) (inr q) =
+  ap inr (eq-is-prop (is-set-ℕ (succ-ℕ n) (succ-ℕ n)))
+
+is-prop-cases-leq-succ-ℕ :
+  (m n : ℕ) → is-prop ((m ≤-ℕ n) + (m ＝ succ-ℕ n))
+is-prop-cases-leq-succ-ℕ m n =
+  is-prop-all-elements-equal (all-elements-equal-cases-leq-succ-ℕ m n)
+
+compute-leq-succ-ℕ :
+  (m n : ℕ) → m ≤-ℕ succ-ℕ n ≃ (m ≤-ℕ n) + (m ＝ succ-ℕ n)
+compute-leq-succ-ℕ m n =
+  equiv-iff-is-prop
+    ( is-prop-leq-ℕ m (succ-ℕ n))
+    ( is-prop-cases-leq-succ-ℕ m n)
+    ( decide-leq-succ-ℕ m n)
+    ( inv-decide-leq-succ-ℕ m n)
+
+decide-leq-refl-succ-ℕ :
+  {n : ℕ} → decide-leq-succ-ℕ (succ-ℕ n) n (refl-leq-ℕ n) ＝ inr refl
+decide-leq-refl-succ-ℕ {zero-ℕ} = refl
+decide-leq-refl-succ-ℕ {succ-ℕ n} =
+  ap (map-coproduct id (ap succ-ℕ)) decide-leq-refl-succ-ℕ
+```
+
+### The inequality `m ≤ n` holds if and only if either `m ＝ n` or the inequality `m + 1 ≤ n` holds
+
+```agda
+decide-leq-ℕ :
+  (m n : ℕ) → m ≤-ℕ n → (m ＝ n) + (succ-ℕ m ≤-ℕ n)
+decide-leq-ℕ m zero-ℕ H = inl (is-zero-leq-zero-ℕ m H)
+decide-leq-ℕ zero-ℕ (succ-ℕ n) H = inr (leq-zero-ℕ n)
+decide-leq-ℕ (succ-ℕ m) (succ-ℕ n) H =
+  map-coproduct (ap succ-ℕ) id (decide-leq-ℕ m n H)
 ```
 
 ### Addition preserves inequality of natural numbers
