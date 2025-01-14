@@ -197,11 +197,6 @@ module _
 
 > The converse remains to be formalized.
 
-## See also
-
-- [Collapsable types](foundation.collapsable-types.md) are types equipped with a
-  weakly constant endomap.
-
 ## References
 
 {{#bibliography}} {{#reference KECA17}}
