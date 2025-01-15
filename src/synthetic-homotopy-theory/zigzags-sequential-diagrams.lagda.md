@@ -247,10 +247,9 @@ module _
   (z : zigzag-sequential-diagram A B)
   where
 
-  hom-diagram-zigzag-sequential-diagram : hom-sequential-diagram A B
-  pr1 hom-diagram-zigzag-sequential-diagram =
-    map-zigzag-sequential-diagram z
-  pr2 hom-diagram-zigzag-sequential-diagram n =
+  naturality-map-hom-diagram-zigzag-sequential-diagram :
+    naturality-hom-sequential-diagram A B (map-zigzag-sequential-diagram z)
+  naturality-map-hom-diagram-zigzag-sequential-diagram n =
     horizontal-pasting-up-diagonal-coherence-triangle-maps
       ( map-sequential-diagram A n)
       ( map-zigzag-sequential-diagram z n)
@@ -258,6 +257,12 @@ module _
       ( map-sequential-diagram B n)
       ( inv-htpy (upper-triangle-zigzag-sequential-diagram z n))
       ( lower-triangle-zigzag-sequential-diagram z n)
+
+  hom-diagram-zigzag-sequential-diagram : hom-sequential-diagram A B
+  pr1 hom-diagram-zigzag-sequential-diagram =
+    map-zigzag-sequential-diagram z
+  pr2 hom-diagram-zigzag-sequential-diagram =
+    naturality-map-hom-diagram-zigzag-sequential-diagram
 
 module _
   {l1 l2 : Level} {A : sequential-diagram l1} {B : sequential-diagram l2}
