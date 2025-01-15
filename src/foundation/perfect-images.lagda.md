@@ -10,7 +10,10 @@ module foundation.perfect-images where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-maps
+open import foundation.decidable-embeddings
 open import foundation.decidable-maps
+open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -24,6 +27,7 @@ open import foundation.negation
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.weak-limited-principle-of-omniscience
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
@@ -40,6 +44,7 @@ open import foundation-core.transport-along-identifications
 
 open import logic.double-negation-eliminating-maps
 open import logic.double-negation-elimination
+open import logic.double-negation-stable-embeddings
 ```
 
 </details>
@@ -84,16 +89,14 @@ module _
     (n : ℕ) → (p : fiber (iterate n (g ∘ f)) a) → fiber g (pr1 p)
 
   equiv-is-perfect-image-is-perfect-image' :
-    (a : A) →
-    is-perfect-image' a ≃
-    is-perfect-image f g a
+    (a : A) → is-perfect-image' a ≃ is-perfect-image f g a
   equiv-is-perfect-image-is-perfect-image' a =
     equivalence-reasoning
-      ((n : ℕ) (p : fiber (iterate n (g ∘ f)) a) → fiber g (pr1 p))
-      ≃ ((n : ℕ) (a₀ : A) → iterate n (g ∘ f) a₀ ＝ a → fiber g a₀)
-      by equiv-Π-equiv-family (λ n → equiv-ev-pair)
-      ≃ ((a₀ : A) (n : ℕ) → iterate n (g ∘ f) a₀ ＝ a → fiber g a₀)
-      by equiv-swap-Π
+    ((n : ℕ) (p : fiber (iterate n (g ∘ f)) a) → fiber g (pr1 p))
+    ≃ ((n : ℕ) (a₀ : A) → iterate n (g ∘ f) a₀ ＝ a → fiber g a₀)
+    by equiv-Π-equiv-family (λ n → equiv-ev-pair)
+    ≃ ((a₀ : A) (n : ℕ) → iterate n (g ∘ f) a₀ ＝ a → fiber g a₀)
+    by equiv-swap-Π
 ```
 
 ### Nonperfect images
@@ -170,10 +173,10 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-perfect-image-is-fiber :
+  fiber-is-perfect-image :
     {f : A → B} {g : B → A} → (a : A) →
     is-perfect-image f g a → fiber g a
-  is-perfect-image-is-fiber a ρ = ρ a 0 refl
+  fiber-is-perfect-image a ρ = ρ a 0 refl
 ```
 
 One can define a map from `A` to `B` restricting the domain to the perfect
@@ -189,13 +192,13 @@ module _
   inverse-of-perfect-image :
     (a : A) → is-perfect-image f g a → B
   inverse-of-perfect-image a ρ =
-    pr1 (is-perfect-image-is-fiber a ρ)
+    pr1 (fiber-is-perfect-image a ρ)
 
   is-section-inverse-of-perfect-image :
     (a : A) (ρ : is-perfect-image f g a) →
     g (inverse-of-perfect-image a ρ) ＝ a
   is-section-inverse-of-perfect-image a ρ =
-    pr2 (is-perfect-image-is-fiber a ρ)
+    pr2 (fiber-is-perfect-image a ρ)
 ```
 
 ```agda
@@ -357,6 +360,62 @@ module _
         ( is-injective-g)
         ( b)
         ( nρ))
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {f : A → B} {g : B → A}
+  (G : is-double-negation-stable-emb g)
+  (F : is-double-negation-stable-emb f)
+  where
+
+  has-not-perfect-fiber-is-not-perfect-image :
+    (b : B) → ¬ (is-perfect-image f g (g b)) →
+    has-not-perfect-fiber f g b
+  has-not-perfect-fiber-is-not-perfect-image =
+    has-not-perfect-fiber-is-not-perfect-image'
+      ( is-double-negation-eliminating-map-is-double-negation-stable-emb G)
+      ( is-injective-is-double-negation-stable-emb G)
+      ( is-double-negation-eliminating-map-is-double-negation-stable-emb F)
+      ( is-prop-map-is-double-negation-stable-emb F)
+```
+
+### Assuming the weak limited principle of omniscience
+
+```agda
+module _
+  {l1 l2 : Level} (wlpo : level-WLPO (l1 ⊔ l2)) {A : UU l1} {B : UU l2}
+  {f : A → B} {g : B → A}
+  (is-decidable-emb-g : is-decidable-emb g)
+  (is-decidable-emb-f : is-decidable-emb f)
+  where
+
+  is-decidable-emb-iterate-comp : (n : ℕ) → is-decidable-emb (iterate n (g ∘ f))
+  is-decidable-emb-iterate-comp zero-ℕ = is-decidable-emb-id
+  is-decidable-emb-iterate-comp (succ-ℕ n) =
+    is-decidable-emb-comp
+      ( is-decidable-emb-comp is-decidable-emb-g is-decidable-emb-f)
+      ( is-decidable-emb-iterate-comp n)
+
+  is-decidable-is-perfect-image'-WLPO :
+    (a : A) → is-decidable (is-perfect-image' f g a)
+  is-decidable-is-perfect-image'-WLPO a =
+    wlpo
+      ( λ n →
+        Π-Decidable-Prop
+          ( fiber (iterate n (g ∘ f)) a ,
+            is-decidable-prop-map-is-decidable-emb
+              ( is-decidable-emb-iterate-comp n)
+              ( a))
+          ( λ p →
+            fiber g (pr1 p) ,
+            is-decidable-prop-map-is-decidable-emb is-decidable-emb-g (pr1 p)))
+
+  is-decidable-is-perfect-image-WLPO :
+    (a : A) → is-decidable (is-perfect-image f g a)
+  is-decidable-is-perfect-image-WLPO a =
+    is-decidable-equiv'
+      ( equiv-is-perfect-image-is-perfect-image' f g a)
+      ( is-decidable-is-perfect-image'-WLPO a)
 ```
 
 ### The classical story

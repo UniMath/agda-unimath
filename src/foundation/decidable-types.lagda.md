@@ -148,6 +148,11 @@ is-decidable-function-type (inl a) (inl b) = inl (λ x → b)
 is-decidable-function-type (inl a) (inr g) = inr (λ h → g (h a))
 is-decidable-function-type (inr f) _ = inl (ex-falso ∘ f)
 
+-- is-decidable-function-type'' :
+--   {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-decidable B → is-decidable (A → B)
+-- is-decidable-function-type'' (inl b) = inl (λ _ → b)
+-- is-decidable-function-type'' (inr nb) = inr λ f → {! nb   !}
+
 is-decidable-function-type' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → (A → is-decidable B) → is-decidable (A → B)
