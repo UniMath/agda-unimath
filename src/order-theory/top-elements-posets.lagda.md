@@ -21,7 +21,7 @@ open import order-theory.top-elements-preorders
 ## Idea
 
 A
-{{#concept "largest element" Disambiguation="in a poset" Agda=is-top-element-Poset}}
+{{#concept "largest element" Disambiguation="in a poset" WD="maximal and minimal elements" WDID=Q1475294 Agda=is-top-element-Poset}}
 in a [poset](order-theory.posets.md) is an element `t` such that `x ≤ t` holds
 for every `x : P`.
 
