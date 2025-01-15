@@ -99,7 +99,8 @@ numbers up to, and including, a given upper bound.
 
 ```agda
 bounded-sum-ℕ : (N : ℕ) → ((i : ℕ) → leq-ℕ i N → ℕ) → ℕ
-bounded-sum-ℕ zero-ℕ f = zero-ℕ
+bounded-sum-ℕ zero-ℕ f =
+  f 0 (refl-leq-ℕ 0)
 bounded-sum-ℕ (succ-ℕ N) f =
   add-ℕ
     ( bounded-sum-ℕ N (λ x H → f x (leq-succ-leq-ℕ x N H)))

@@ -46,6 +46,8 @@ $$
   (m , n) \mapsto 2^m(2n + 1) - 1.
 $$
 
+The exponent $k$ such that the 2-adic decomposition of $n$ is $2^k \cdot m=n$ is called the {{#concept "2-adic valuation" Disambiguation="natural numbers" Agda=valuation-2-adic-decomposition-ℕ}} of $n$.
+
 ## Definitions
 
 ### The $2$-adic composition function
@@ -66,15 +68,15 @@ module _
   (n : ℕ) (d : 2-adic-decomposition-ℕ n)
   where
 
-  exponent-2-adic-decomposition-ℕ : ℕ
-  exponent-2-adic-decomposition-ℕ = pr1 d
+  valuation-2-adic-decomposition-ℕ : ℕ
+  valuation-2-adic-decomposition-ℕ = pr1 d
 
   index-odd-factor-2-adic-decomposition-ℕ : ℕ
   index-odd-factor-2-adic-decomposition-ℕ = pr1 (pr2 d)
 
   eq-2-adic-decomposition-ℕ :
     2-adic-composition-ℕ
-      exponent-2-adic-decomposition-ℕ
+      valuation-2-adic-decomposition-ℕ
       index-odd-factor-2-adic-decomposition-ℕ ＝
     n
   eq-2-adic-decomposition-ℕ = pr2 (pr2 d)
@@ -147,7 +149,7 @@ module _
     ℕ
   exponent-even-case-2-adic-decomposition-is-even-or-odd-ℕ =
     succ-ℕ
-      ( exponent-2-adic-decomposition-ℕ
+      ( valuation-2-adic-decomposition-ℕ
         ( q)
         ( 2-adic-decomposition-quotient-even-case-2-adic-decomposition-is-even-or-odd-ℕ))
   

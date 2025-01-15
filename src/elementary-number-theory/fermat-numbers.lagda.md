@@ -237,11 +237,11 @@ is-one-div-fermat-number-le-ℕ m (succ-ℕ n) d H K L =
 is-one-is-common-divisor-fermat-number-ℕ :
   (m n d : ℕ) → m ≠ n →
   is-common-divisor-ℕ (fermat-number-ℕ m) (fermat-number-ℕ n) d → is-one-ℕ d
-is-one-is-common-divisor-fermat-number-ℕ m n d H (K , L)
-  with
-  decide-le-neq-ℕ m n H
-... | inl u = is-one-div-fermat-number-le-ℕ m n d u K L
-... | inr u = is-one-div-fermat-number-le-ℕ n m d u L K
+is-one-is-common-divisor-fermat-number-ℕ m n d H (K , L) =
+  rec-coproduct
+    ( λ u → is-one-div-fermat-number-le-ℕ m n d u K L)
+    ( λ u → is-one-div-fermat-number-le-ℕ n m d u L K)
+    ( decide-le-neq-ℕ m n H)
 
 is-relatively-prime-fermat-number-ℕ :
   (m n : ℕ) → m ≠ n →
