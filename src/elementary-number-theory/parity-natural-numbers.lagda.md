@@ -18,6 +18,8 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.prime-numbers
+open import elementary-number-theory.proper-divisors-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -278,13 +280,33 @@ has-odd-expansion-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
 
 ```agda
 is-even-div-is-even-ℕ :
-  (n m : ℕ) → is-even-ℕ m → div-ℕ m n → is-even-ℕ n
+  (m n : ℕ) → is-even-ℕ m → div-ℕ m n → is-even-ℕ n
 is-even-div-is-even-ℕ ._ ._ (m' , refl) (k , refl) =
   k *ℕ m' , associative-mul-ℕ k m' 2
 
 is-even-div-4-ℕ :
   (n : ℕ) → div-ℕ 4 n → is-even-ℕ n
-is-even-div-4-ℕ n = is-even-div-is-even-ℕ n 4 (2 , refl)
+is-even-div-4-ℕ n = is-even-div-is-even-ℕ 4 n (2 , refl)
+```
+
+### Any divisor of an odd number is odd
+
+```agda
+is-odd-div-is-odd-ℕ :
+  (m n : ℕ) → is-odd-ℕ n → div-ℕ m n → is-odd-ℕ m
+is-odd-div-is-odd-ℕ m n H K L =
+  H (is-even-div-is-even-ℕ m n L K)
+```
+
+### Any odd divisor of `2` is equal to `1`
+
+```agda
+is-one-is-odd-div-two-ℕ :
+  (n : ℕ) → div-ℕ n 2 → is-odd-ℕ n → is-one-ℕ n
+is-one-is-odd-div-two-ℕ n H K =
+  is-one-is-proper-divisor-two-ℕ n
+    ( ( neq-neg-div-ℕ 2 n K ∘ inv) ,
+      ( H))
 ```
 
 ### A number is even if and only if it is congruent to `0` modulo `2`

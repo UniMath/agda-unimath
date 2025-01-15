@@ -325,6 +325,9 @@ pr2 (refl-div-ℕ x) = left-unit-law-mul-ℕ x
 div-eq-ℕ : (x y : ℕ) → x ＝ y → div-ℕ x y
 div-eq-ℕ x .x refl = refl-div-ℕ x
 
+neq-neg-div-ℕ : (x y : ℕ) → ¬ div-ℕ x y → x ≠ y
+neq-neg-div-ℕ x y H p = H (div-eq-ℕ x y p)
+
 antisymmetric-div-ℕ : is-antisymmetric div-ℕ
 antisymmetric-div-ℕ zero-ℕ zero-ℕ H K = refl
 antisymmetric-div-ℕ zero-ℕ (succ-ℕ y) (k , p) K =

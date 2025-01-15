@@ -12,6 +12,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.relatively-prime-natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -27,12 +28,21 @@ The {{#concept "factorial" WD="factorial" WDID=Q120976 Agda=factorial-ℕ}} `n!`
 of a number `n`, counts the number of ways to linearly order `n` distinct
 objects.
 
-## Definition
+## Definitions
+
+### Factorial numbers
 
 ```agda
 factorial-ℕ : ℕ → ℕ
 factorial-ℕ 0 = 1
 factorial-ℕ (succ-ℕ m) = (factorial-ℕ m) *ℕ (succ-ℕ m)
+```
+
+### Successors of factorial numbers
+
+```agda
+succ-factorial-ℕ : ℕ → ℕ
+succ-factorial-ℕ n = succ-ℕ (factorial-ℕ n)
 ```
 
 ## Properties
@@ -73,7 +83,28 @@ leq-factorial-ℕ (succ-ℕ n) =
     ( is-nonzero-factorial-ℕ n)
 ```
 
+### Any two consecutive successor factorials are relatively prime
+
+This property is stated as exercise 53 in section 1.2 of {{#cite NZM}}.
+
+```agda
+is-one-is-common-divisor-consecutive-succ-factorial-ℕ :
+  (n d : ℕ) →
+  div-ℕ d (succ-factorial-ℕ n) → div-ℕ d (succ-factorial-ℕ (succ-ℕ n)) →
+  is-one-ℕ d
+is-one-is-common-divisor-consecutive-succ-factorial-ℕ n d H K = {!!}
+
+is-relatively-prime-consecutive-succ-factorial-ℕ :
+  (n : ℕ) →
+  is-relatively-prime-ℕ (succ-factorial-ℕ n) (succ-factorial-ℕ (succ-ℕ n))
+is-relatively-prime-consecutive-succ-factorial-ℕ n = {!!}
+```
+
 ## External links
 
 - [Factorial](https://en.wikipedia.org/wiki/Factorial) at Wikipedia
 - [A000142](https://oeis.org/A000142) in the OEIS
+
+## References
+
+{{#bibliography}}

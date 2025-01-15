@@ -7,12 +7,14 @@ module elementary-number-theory.products-of-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
@@ -21,6 +23,7 @@ open import foundation.unit-type
 
 open import lists.lists
 
+open import univalent-combinatorics.skipping-element-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -83,4 +86,34 @@ preserves-htpy-Π-ℕ :
   (k : ℕ) {f g : Fin k → ℕ} (H : f ~ g) → Π-ℕ k f ＝ Π-ℕ k g
 preserves-htpy-Π-ℕ k H =
   ap (Π-ℕ k) (eq-htpy H)
+```
+
+### Any factor of a product of natural numbers divides the product
+
+```agda
+quotient-div-factor-Π-ℕ :
+  (k : ℕ) (f : Fin k → ℕ) (i : Fin k) → ℕ
+quotient-div-factor-Π-ℕ (succ-ℕ k) f i =
+  Π-ℕ k (f ∘ skip-Fin k i)
+
+eq-quotient-div-factor-Π-ℕ :
+  (k : ℕ) (f : Fin k → ℕ) (i : Fin k) →
+  quotient-div-factor-Π-ℕ k f i *ℕ f i ＝ Π-ℕ k f
+eq-quotient-div-factor-Π-ℕ (succ-ℕ zero-ℕ) f (inr star) =
+  refl
+eq-quotient-div-factor-Π-ℕ (succ-ℕ (succ-ℕ k)) f (inl i) =
+  ( right-swap-mul-ℕ
+    ( Π-ℕ k (f ∘ inl ∘ skip-Fin k i))
+    ( f (inr star))
+    ( f (inl i))) ∙
+  ( ap (_*ℕ f (inr star)) (eq-quotient-div-factor-Π-ℕ (succ-ℕ k) (f ∘ inl) i))
+eq-quotient-div-factor-Π-ℕ (succ-ℕ (succ-ℕ k)) f (inr star) =
+  refl
+
+div-factor-Π-ℕ :
+  (k : ℕ) (f : Fin k → ℕ) (i : Fin k) → div-ℕ (f i) (Π-ℕ k f)
+pr1 (div-factor-Π-ℕ k f i) =
+  quotient-div-factor-Π-ℕ k f i
+pr2 (div-factor-Π-ℕ k f i) =
+  eq-quotient-div-factor-Π-ℕ k f i
 ```

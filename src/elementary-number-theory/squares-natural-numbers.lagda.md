@@ -270,13 +270,13 @@ strict-is-inflationary-square-ℕ (succ-ℕ (succ-ℕ (succ-ℕ n))) H =
       ( n +ℕ 2)
       ( square-ℕ (n +ℕ 2))
       ( square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2) +ℕ (n +ℕ 2))
-      ( strict-is-inflationary-square-ℕ (succ-ℕ (succ-ℕ n)) star)
       ( transitive-le-ℕ
         ( square-ℕ (n +ℕ 2))
         ( square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2))
         ( square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2) +ℕ (n +ℕ 2))
-        ( le-add-succ-ℕ (square-ℕ (n +ℕ 2)) (n +ℕ 1))
-        ( le-add-succ-ℕ (square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2)) (n +ℕ 1))))
+        ( le-add-succ-ℕ (square-ℕ (n +ℕ 2) +ℕ (n +ℕ 2)) (n +ℕ 1))
+        ( le-add-succ-ℕ (square-ℕ (n +ℕ 2)) (n +ℕ 1)))
+      ( strict-is-inflationary-square-ℕ (succ-ℕ (succ-ℕ n)) star))
     ( inv (square-succ-ℕ' (n +ℕ 2)))
 ```
 

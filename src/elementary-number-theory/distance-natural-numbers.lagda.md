@@ -29,10 +29,12 @@ open import foundation.universe-levels
 ## Idea
 
 The
-{{#concept "distance function" Disambiguation="between natural numbers" Agda=dist-ℕ}}
+{{#concept "distance function" Disambiguation="natural numbers" Agda=dist-ℕ}}
 between [natural numbers](elementary-number-theory.natural-numbers.md) measures
-how far two natural numbers are apart. In the agda-unimath library we often
-prefer to work with `dist-ℕ` over the partially defined subtraction operation.
+how far two natural numbers are apart. If the [inequality](elementary-number-theory.inequality-natural-numbers.md) $x \leq y$ holds, then the distance between $x$ and $y$ is the unique natural number $d$ equipped with an [identification](foundation-core.identity-types.md) $x + d = y$.
+
+**Note.** In the agda-unimath library, we often
+prefer to work with `dist-ℕ` over the subtraction operation, which is either partially defined or it returns nonsensical values. Not only is the distance function sensibly defined for any pair of natural numbers, but it also satisfies the more pleasant and predictable properties of a [metric](metric-spaces.metric-spaces.md).
 
 ## Definition
 
@@ -104,39 +106,39 @@ right-unit-law-dist-ℕ (succ-ℕ n) = refl
 
 ```agda
 triangle-inequality-dist-ℕ :
-  (m n k : ℕ) → (dist-ℕ m n) ≤-ℕ ((dist-ℕ m k) +ℕ (dist-ℕ k n))
+  (m n k : ℕ) → dist-ℕ m n ≤-ℕ dist-ℕ m k +ℕ dist-ℕ k n
 triangle-inequality-dist-ℕ zero-ℕ zero-ℕ zero-ℕ = star
 triangle-inequality-dist-ℕ zero-ℕ zero-ℕ (succ-ℕ k) = star
 triangle-inequality-dist-ℕ zero-ℕ (succ-ℕ n) zero-ℕ =
   tr
-    ( leq-ℕ (succ-ℕ n))
+    ( succ-ℕ n ≤-ℕ_)
     ( inv (left-unit-law-add-ℕ (succ-ℕ n)))
     ( refl-leq-ℕ (succ-ℕ n))
 triangle-inequality-dist-ℕ zero-ℕ (succ-ℕ n) (succ-ℕ k) =
   concatenate-eq-leq-eq-ℕ
     ( inv (ap succ-ℕ (left-unit-law-dist-ℕ n)))
     ( triangle-inequality-dist-ℕ zero-ℕ n k)
-    ( ( ap (succ-ℕ ∘ (_+ℕ (dist-ℕ k n))) (left-unit-law-dist-ℕ k)) ∙
+    ( ( ap (succ-ℕ ∘ (_+ℕ dist-ℕ k n)) (left-unit-law-dist-ℕ k)) ∙
       ( inv (left-successor-law-add-ℕ k (dist-ℕ k n))))
 triangle-inequality-dist-ℕ (succ-ℕ m) zero-ℕ zero-ℕ = refl-leq-ℕ (succ-ℕ m)
 triangle-inequality-dist-ℕ (succ-ℕ m) zero-ℕ (succ-ℕ k) =
   concatenate-eq-leq-eq-ℕ
     ( inv (ap succ-ℕ (right-unit-law-dist-ℕ m)))
     ( triangle-inequality-dist-ℕ m zero-ℕ k)
-    ( ap (succ-ℕ ∘ ((dist-ℕ m k) +ℕ_)) (right-unit-law-dist-ℕ k))
+    ( ap (succ-ℕ ∘ (dist-ℕ m k +ℕ_)) (right-unit-law-dist-ℕ k))
 triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) zero-ℕ =
   concatenate-leq-eq-ℕ
     ( dist-ℕ m n)
     ( transitive-leq-ℕ
       ( dist-ℕ m n)
-      ( succ-ℕ ((dist-ℕ m zero-ℕ) +ℕ (dist-ℕ zero-ℕ n)))
-      ( succ-ℕ (succ-ℕ ((dist-ℕ m zero-ℕ) +ℕ (dist-ℕ zero-ℕ n))))
-      ( succ-leq-ℕ (succ-ℕ ((dist-ℕ m zero-ℕ) +ℕ (dist-ℕ zero-ℕ n))))
+      ( succ-ℕ (dist-ℕ m zero-ℕ +ℕ dist-ℕ zero-ℕ n))
+      ( succ-ℕ (succ-ℕ (dist-ℕ m zero-ℕ +ℕ dist-ℕ zero-ℕ n)))
+      ( succ-leq-ℕ (succ-ℕ (dist-ℕ m zero-ℕ +ℕ dist-ℕ zero-ℕ n)))
       ( transitive-leq-ℕ
         ( dist-ℕ m n)
-        ( (dist-ℕ m zero-ℕ) +ℕ (dist-ℕ zero-ℕ n))
-        ( succ-ℕ ((dist-ℕ m zero-ℕ) +ℕ (dist-ℕ zero-ℕ n)))
-        ( succ-leq-ℕ ((dist-ℕ m zero-ℕ) +ℕ (dist-ℕ zero-ℕ n)))
+        ( dist-ℕ m zero-ℕ +ℕ dist-ℕ zero-ℕ n)
+        ( succ-ℕ (dist-ℕ m zero-ℕ +ℕ dist-ℕ zero-ℕ n))
+        ( succ-leq-ℕ (dist-ℕ m zero-ℕ +ℕ dist-ℕ zero-ℕ n))
         ( triangle-inequality-dist-ℕ m n zero-ℕ)))
     ( ( ap
         ( succ-ℕ ∘ succ-ℕ)
@@ -185,7 +187,7 @@ rewrite-right-dist-add-ℕ x .(dist-ℕ x z) z H refl =
   is-additive-right-inverse-dist-ℕ x z H
 
 is-difference-dist-ℕ :
-  (x y : ℕ) → x ≤-ℕ y → x +ℕ (dist-ℕ x y) ＝ y
+  (x y : ℕ) → x ≤-ℕ y → x +ℕ dist-ℕ x y ＝ y
 is-difference-dist-ℕ zero-ℕ zero-ℕ H = refl
 is-difference-dist-ℕ zero-ℕ (succ-ℕ y) H = left-unit-law-add-ℕ (succ-ℕ y)
 is-difference-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
@@ -193,7 +195,7 @@ is-difference-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
   ( ap succ-ℕ (is-difference-dist-ℕ x y H))
 
 is-difference-dist-ℕ' :
-  (x y : ℕ) → x ≤-ℕ y → (dist-ℕ x y) +ℕ x ＝ y
+  (x y : ℕ) → x ≤-ℕ y → dist-ℕ x y +ℕ x ＝ y
 is-difference-dist-ℕ' x y H =
   ( commutative-add-ℕ (dist-ℕ x y) x) ∙
   ( is-difference-dist-ℕ x y H)
@@ -213,8 +215,8 @@ dist-add-ℕ' x y = symmetric-dist-ℕ (x +ℕ y) x ∙ dist-add-ℕ x y
 
 ```agda
 triangle-equality-dist-ℕ :
-  (x y z : ℕ) → (x ≤-ℕ y) → (y ≤-ℕ z) →
-  (dist-ℕ x y) +ℕ (dist-ℕ y z) ＝ dist-ℕ x z
+  (x y z : ℕ) → x ≤-ℕ y → y ≤-ℕ z →
+  dist-ℕ x y +ℕ dist-ℕ y z ＝ dist-ℕ x z
 triangle-equality-dist-ℕ zero-ℕ zero-ℕ zero-ℕ H1 H2 = refl
 triangle-equality-dist-ℕ zero-ℕ zero-ℕ (succ-ℕ z) star star =
   ap succ-ℕ (left-unit-law-add-ℕ z)
@@ -227,40 +229,40 @@ triangle-equality-dist-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) H1 H2 =
 cases-dist-ℕ :
   (x y z : ℕ) → UU lzero
 cases-dist-ℕ x y z =
-  ( (dist-ℕ x y) +ℕ (dist-ℕ y z) ＝ dist-ℕ x z) +
-  ( ( (dist-ℕ y z) +ℕ (dist-ℕ x z) ＝ dist-ℕ x y) +
-    ( (dist-ℕ x z) +ℕ (dist-ℕ x y) ＝ dist-ℕ y z))
+  ( dist-ℕ x y +ℕ dist-ℕ y z ＝ dist-ℕ x z) +
+  ( ( dist-ℕ y z +ℕ dist-ℕ x z ＝ dist-ℕ x y) +
+    ( dist-ℕ x z +ℕ dist-ℕ x y ＝ dist-ℕ y z))
 
 is-total-dist-ℕ :
   (x y z : ℕ) → cases-dist-ℕ x y z
 is-total-dist-ℕ x y z with order-three-elements-ℕ x y z
-is-total-dist-ℕ x y z | inl (inl (pair H1 H2)) =
+is-total-dist-ℕ x y z | inl (inl (H1 , H2)) =
   inl (triangle-equality-dist-ℕ x y z H1 H2)
-is-total-dist-ℕ x y z | inl (inr (pair H1 H2)) =
+is-total-dist-ℕ x y z | inl (inr (H1 , H2)) =
   inr
     ( inl
       ( ( commutative-add-ℕ (dist-ℕ y z) (dist-ℕ x z)) ∙
-        ( ( ap ((dist-ℕ x z) +ℕ_) (symmetric-dist-ℕ y z)) ∙
+        ( ( ap (dist-ℕ x z +ℕ_) (symmetric-dist-ℕ y z)) ∙
           ( triangle-equality-dist-ℕ x z y H1 H2))))
-is-total-dist-ℕ x y z | inr (inl (inl (pair H1 H2))) =
+is-total-dist-ℕ x y z | inr (inl (inl (H1 , H2))) =
   inr
     ( inl
-      ( ( ap ((dist-ℕ y z) +ℕ_) (symmetric-dist-ℕ x z)) ∙
+      ( ( ap (dist-ℕ y z +ℕ_) (symmetric-dist-ℕ x z)) ∙
         ( ( triangle-equality-dist-ℕ y z x H1 H2) ∙
           ( symmetric-dist-ℕ y x))))
-is-total-dist-ℕ x y z | inr (inl (inr (pair H1 H2))) =
+is-total-dist-ℕ x y z | inr (inl (inr (H1 , H2))) =
   inr
     ( inr
-      ( ( ap ((dist-ℕ x z) +ℕ_) (symmetric-dist-ℕ x y)) ∙
+      ( ( ap (dist-ℕ x z +ℕ_) (symmetric-dist-ℕ x y)) ∙
         ( ( commutative-add-ℕ (dist-ℕ x z) (dist-ℕ y x)) ∙
           ( triangle-equality-dist-ℕ y x z H1 H2))))
-is-total-dist-ℕ x y z | inr (inr (inl (pair H1 H2))) =
+is-total-dist-ℕ x y z | inr (inr (inl (H1 , H2))) =
   inr
     ( inr
-      ( ( ap (_+ℕ (dist-ℕ x y)) (symmetric-dist-ℕ x z)) ∙
+      ( ( ap (_+ℕ dist-ℕ x y) (symmetric-dist-ℕ x z)) ∙
         ( ( triangle-equality-dist-ℕ z x y H1 H2) ∙
           ( symmetric-dist-ℕ z y))))
-is-total-dist-ℕ x y z | inr (inr (inr (pair H1 H2))) =
+is-total-dist-ℕ x y z | inr (inr (inr (H1 , H2))) =
   inl
     ( ( ap-add-ℕ (symmetric-dist-ℕ x y) (symmetric-dist-ℕ y z)) ∙
       ( ( commutative-add-ℕ (dist-ℕ y x) (dist-ℕ z y)) ∙
@@ -283,7 +285,7 @@ leq-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
 
 ```agda
 strict-upper-bound-dist-ℕ :
-  (b x y : ℕ) → le-ℕ x b → le-ℕ y b → le-ℕ (dist-ℕ x y) b
+  (b x y : ℕ) → x <-ℕ b → y <-ℕ b → dist-ℕ x y <-ℕ b
 strict-upper-bound-dist-ℕ (succ-ℕ b) zero-ℕ y H K = K
 strict-upper-bound-dist-ℕ (succ-ℕ b) (succ-ℕ x) zero-ℕ H K = H
 strict-upper-bound-dist-ℕ (succ-ℕ b) (succ-ℕ x) (succ-ℕ y) H K =
@@ -294,14 +296,14 @@ strict-upper-bound-dist-ℕ (succ-ℕ b) (succ-ℕ x) (succ-ℕ y) H K =
 
 ```agda
 right-successor-law-dist-ℕ :
-  (x y : ℕ) → leq-ℕ x y → dist-ℕ x (succ-ℕ y) ＝ succ-ℕ (dist-ℕ x y)
+  (x y : ℕ) → x ≤-ℕ y → dist-ℕ x (succ-ℕ y) ＝ succ-ℕ (dist-ℕ x y)
 right-successor-law-dist-ℕ zero-ℕ zero-ℕ star = refl
 right-successor-law-dist-ℕ zero-ℕ (succ-ℕ y) star = refl
 right-successor-law-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
   right-successor-law-dist-ℕ x y H
 
 left-successor-law-dist-ℕ :
-  (x y : ℕ) → leq-ℕ y x → dist-ℕ (succ-ℕ x) y ＝ succ-ℕ (dist-ℕ x y)
+  (x y : ℕ) → y ≤-ℕ x → dist-ℕ (succ-ℕ x) y ＝ succ-ℕ (dist-ℕ x y)
 left-successor-law-dist-ℕ zero-ℕ zero-ℕ star = refl
 left-successor-law-dist-ℕ (succ-ℕ x) zero-ℕ star = refl
 left-successor-law-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
@@ -330,7 +332,7 @@ translation-invariant-dist-ℕ' k m n =
 
 ```agda
 left-distributive-mul-dist-ℕ :
-  (m n k : ℕ) → k *ℕ (dist-ℕ m n) ＝ dist-ℕ (k *ℕ m) (k *ℕ n)
+  (m n k : ℕ) → k *ℕ dist-ℕ m n ＝ dist-ℕ (k *ℕ m) (k *ℕ n)
 left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ zero-ℕ = refl
 left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ (succ-ℕ k) =
   left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ k
@@ -357,7 +359,7 @@ left-distributive-mul-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
       ( inv (left-distributive-mul-dist-ℕ m n (succ-ℕ k))))
 
 right-distributive-mul-dist-ℕ :
-  (x y k : ℕ) → (dist-ℕ x y) *ℕ k ＝ dist-ℕ (x *ℕ k) (y *ℕ k)
+  (x y k : ℕ) → dist-ℕ x y *ℕ k ＝ dist-ℕ (x *ℕ k) (y *ℕ k)
 right-distributive-mul-dist-ℕ x y k =
   ( commutative-mul-ℕ (dist-ℕ x y) k) ∙
   ( ( left-distributive-mul-dist-ℕ x y k) ∙

@@ -87,15 +87,9 @@ is-section-fin-strictly-bounded-ℕ :
 is-section-fin-strictly-bounded-ℕ (succ-ℕ n) i =
   eq-type-subtype
     ( λ x → le-ℕ-Prop x (succ-ℕ n))
-    ( eq-cong-le-ℕ
-      ( succ-ℕ n)
-      ( nat-Fin (succ-ℕ n) (fin-strictly-bounded-ℕ (succ-ℕ n) i))
+    ( eq-nat-mod-succ-ℕ n
       ( nat-strictly-bounded-ℕ (succ-ℕ n) i)
-      ( strict-upper-bound-nat-Fin
-        ( succ-ℕ n)
-        ( fin-strictly-bounded-ℕ (succ-ℕ n) i))
-      ( strict-upper-bound-nat-strictly-bounded-ℕ (succ-ℕ n) i)
-      ( cong-nat-mod-succ-ℕ n (nat-strictly-bounded-ℕ (succ-ℕ n) i)))
+      ( strict-upper-bound-nat-strictly-bounded-ℕ (succ-ℕ n) i))
 
 is-retraction-fin-strictly-bounded-ℕ :
   (n : ℕ) →

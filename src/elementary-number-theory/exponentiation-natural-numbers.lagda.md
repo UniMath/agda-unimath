@@ -12,6 +12,7 @@ open import commutative-algebra.powers-of-elements-commutative-semirings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.bounded-divisibility-natural-numbers
 open import elementary-number-theory.commutative-semiring-of-natural-numbers
+open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -150,10 +151,24 @@ compute-constant-product-ℕ m (succ-ℕ (succ-ℕ n)) =
 
 ### The base of the exponent divides its successor exponents
 
-```text
-bounded-div-exp-succ-ℕ :
-  (m n : ℕ) → bounded-div-ℕ m (m ^ℕ succ-ℕ n)
-pr1 (bounded-div-exp-succ-ℕ m n) = m ^ℕ n
-pr1 (pr2 (bounded-div-exp-succ-ℕ m n)) = {!!}
-pr2 (pr2 (bounded-div-exp-succ-ℕ m n)) = {!!}
+```agda
+div-exp-succ-ℕ :
+  (m n : ℕ) → div-ℕ m (m ^ℕ succ-ℕ n)
+pr1 (div-exp-succ-ℕ m n) = m ^ℕ n
+pr2 (div-exp-succ-ℕ m n) = inv (exp-succ-ℕ n m)
+
+div-exp-is-successor-ℕ :
+  (m n : ℕ) → is-successor-ℕ n → div-ℕ m (m ^ℕ n)
+div-exp-is-successor-ℕ m .(succ-ℕ k) (k , refl) =
+  div-exp-succ-ℕ m k
+
+div-exp-ℕ :
+  (m n : ℕ) → is-nonzero-ℕ n → div-ℕ m (m ^ℕ n)
+div-exp-ℕ m n H =
+  div-exp-is-successor-ℕ m n (is-successor-is-nonzero-ℕ H)
+
+bounded-div-exp-ℕ :
+  (m n : ℕ) → is-nonzero-ℕ n → bounded-div-ℕ m (m ^ℕ n)
+bounded-div-exp-ℕ m n H =
+  bounded-div-div-ℕ m (m ^ℕ n) (div-exp-ℕ m n H)
 ```

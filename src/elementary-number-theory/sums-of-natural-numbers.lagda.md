@@ -8,6 +8,7 @@ module elementary-number-theory.sums-of-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -28,6 +29,7 @@ open import foundation.whiskering-homotopies-composition
 open import lists.lists
 
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.skipping-element-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -169,4 +171,38 @@ leq-sum-Fin-ℕ (succ-ℕ k) f (inl x) =
     ( leq-sum-Fin-ℕ k (f ∘ inl) x)
 leq-sum-Fin-ℕ (succ-ℕ k) f (inr x) =
   leq-add-ℕ' (f (inr x)) (sum-Fin-ℕ k (f ∘ inl))
+```
+
+### The difference between a summand and the sum of natural numbers
+
+```agda
+sum-skip-Fin-ℕ :
+  (k : ℕ) (f : Fin k → ℕ) (i : Fin k) → ℕ
+sum-skip-Fin-ℕ (succ-ℕ k) f i =
+  sum-Fin-ℕ k (f ∘ skip-Fin k i)
+
+eq-sum-skip-Fin-ℕ :
+  (k : ℕ) (f : Fin k → ℕ) (i : Fin k) →
+  sum-skip-Fin-ℕ k f i +ℕ f i ＝ sum-Fin-ℕ k f
+eq-sum-skip-Fin-ℕ (succ-ℕ zero-ℕ) f (inr star) =
+  refl
+eq-sum-skip-Fin-ℕ (succ-ℕ (succ-ℕ k)) f (inl i) =
+  ( right-swap-add-ℕ
+    ( sum-Fin-ℕ k (f ∘ inl ∘ skip-Fin k i))
+    ( f (inr star))
+    ( f (inl i))) ∙
+  ( ap (_+ℕ f (inr star)) (eq-sum-skip-Fin-ℕ (succ-ℕ k) (f ∘ inl) i))
+eq-sum-skip-Fin-ℕ (succ-ℕ (succ-ℕ k)) f (inr star) =
+  refl
+
+compute-dist-summand-sum-Fin-ℕ :
+  (k : ℕ) (f : Fin k → ℕ) (i : Fin k) →
+  dist-ℕ (f i) (sum-Fin-ℕ k f) ＝ sum-skip-Fin-ℕ k f i
+compute-dist-summand-sum-Fin-ℕ k f i =
+  inv
+    ( rewrite-left-add-dist-ℕ
+      ( sum-skip-Fin-ℕ k f i)
+      ( f i)
+      ( sum-Fin-ℕ k f)
+      ( eq-sum-skip-Fin-ℕ k f i))
 ```

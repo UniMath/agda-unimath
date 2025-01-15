@@ -285,10 +285,10 @@ module _
   maximal-structured-value-bound-input-property-is-finite-map-ℕ :
     maximal-structured-value-bound-input-property-ℕ P f
   maximal-structured-value-bound-input-property-is-finite-map-ℕ n k K p =
-    ( nat-bounded-maximal-element-ℕ
+    ( ( nat-bounded-maximal-element-ℕ
         ( λ x → is-value-bound-input-ℕ f n x × P (f x))
         ( nat-maximal-value-bound-input-property-is-finite-map-ℕ f H n k K)
-        ( b) ,
+        ( b)) ,
       ( structure-bounded-maximal-element-ℕ
           ( λ x → is-value-bound-input-ℕ f n x × P (f x))
           ( nat-maximal-value-bound-input-property-is-finite-map-ℕ f H n k K)
@@ -299,10 +299,10 @@ module _
           ( nat-maximal-value-bound-input-property-is-finite-map-ℕ f H n k K)
           ( b)
           ( x)
-          ( is-upper-bound-nat-maximal-value-bound-input-property-is-finite-map-ℕ
-            f H n k K x u ,
-            u ,
-            v)))
+          ( ( is-upper-bound-nat-maximal-value-bound-input-property-is-finite-map-ℕ
+              f H n k K x u) ,
+            ( u) ,
+            ( v))))
     where
 
     b =

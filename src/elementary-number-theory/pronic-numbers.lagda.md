@@ -79,14 +79,14 @@ abstract
     with is-even-or-is-even-succ-ℕ n
   ... | inl H =
     is-even-div-is-even-ℕ
-      ( pronic-number-ℕ n)
       ( n)
+      ( pronic-number-ℕ n)
       ( H)
       ( succ-ℕ n , commutative-mul-ℕ (succ-ℕ n) n)
   ... | inr H =
     is-even-div-is-even-ℕ
-      ( pronic-number-ℕ n)
       ( succ-ℕ n)
+      ( pronic-number-ℕ n)
       ( H)
       ( n , refl)
 ```
