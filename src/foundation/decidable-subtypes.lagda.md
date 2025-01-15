@@ -239,16 +239,6 @@ is-double-negation-stable-decicable-subtype P x =
   double-negation-elim-is-decidable (is-decidable-decidable-subtype P x)
 ```
 
-### Decidable subtypes are De Morgan
-
-```text
-is-de-morgan-decicable-subtype :
-  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A) →
-  is-de-morgan-subtype (subtype-decidable-subtype P)
-is-de-morgan-decicable-subtype P x =
-  is-de-morgan-is-decidable (is-decidable-decidable-subtype P x)
-```
-
 ### A decidable subtype of a `k+1`-truncated type is `k+1`-truncated
 
 ```agda

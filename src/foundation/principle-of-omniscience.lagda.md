@@ -20,8 +20,8 @@ open import foundation-core.propositions
 ## Idea
 
 A type `X` is said to satisfy the
-{{#concept "principle of omniscience" Agda=is-omniscient}} if every
-[decidable subtype](foundation.decidable-subtypes.md) of `X` is either
+{{#concept "principle of omniscience" Disambiguation="type" Agda=is-omniscient}}
+if every [decidable subtype](foundation.decidable-subtypes.md) of `X` is either
 [inhabited](foundation.inhabited-types.md) or
 [empty](foundation-core.empty-types.md).
 

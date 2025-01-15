@@ -54,15 +54,26 @@ module _
   is-decidable-map f = (y : B) → is-decidable (fiber f y)
 ```
 
-### The type of decidabile maps
+### The type of decidable maps
 
 ```agda
+infix 5 _→ᵈ_
+
+_→ᵈ_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+A →ᵈ B = Σ (A → B) (is-decidable-map)
+
+decidable-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+decidable-map = _→ᵈ_
+
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A →ᵈ B)
   where
 
-  decidable-map : UU (l1 ⊔ l2)
-  decidable-map = Σ (A → B) (is-decidable-map)
+  map-decidable-map : A → B
+  map-decidable-map = pr1 f
+
+  is-decidable-decidable-map : is-decidable-map map-decidable-map
+  is-decidable-decidable-map = pr2 f
 ```
 
 ## Properties
@@ -81,6 +92,8 @@ abstract
 ```
 
 ### Composition of decidable maps
+
+The composite `g ∘ f` of two decidable maps is decidable if `g` is injective.
 
 ```agda
 module _
@@ -107,8 +120,7 @@ module _
 
 ### Left cancellation for decidable maps
 
-If a composite `g ∘ f` is decidable and the left factor `g` is injective, then
-the right factor `f` is decidable.
+If a composite `g ∘ f` is decidable and `g` is injective then `f` is decidable.
 
 ```agda
 module _

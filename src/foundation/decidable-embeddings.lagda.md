@@ -114,38 +114,34 @@ module _
 
 ```agda
 infix 5 _↪ᵈ_
-_↪ᵈ_ :
-  {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
+_↪ᵈ_ : {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
 X ↪ᵈ Y = Σ (X → Y) is-decidable-emb
 
-map-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪ᵈ Y → X → Y
-map-decidable-emb e = pr1 e
+decidable-emb : {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
+decidable-emb = _↪ᵈ_
 
-abstract
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈ Y)
+  where
+
+  map-decidable-emb : X → Y
+  map-decidable-emb = pr1 e
+
   is-decidable-emb-map-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈ Y) →
-    is-decidable-emb (map-decidable-emb e)
-  is-decidable-emb-map-decidable-emb e = pr2 e
+    is-decidable-emb map-decidable-emb
+  is-decidable-emb-map-decidable-emb = pr2 e
 
-abstract
-  is-emb-map-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈ Y) →
-    is-emb (map-decidable-emb e)
-  is-emb-map-decidable-emb e =
-    is-emb-is-decidable-emb (is-decidable-emb-map-decidable-emb e)
+  is-emb-map-decidable-emb : is-emb map-decidable-emb
+  is-emb-map-decidable-emb =
+    is-emb-is-decidable-emb is-decidable-emb-map-decidable-emb
 
-abstract
   is-decidable-map-map-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈ Y) →
-    is-decidable-map (map-decidable-emb e)
-  is-decidable-map-map-decidable-emb e =
-    is-decidable-map-is-decidable-emb (is-decidable-emb-map-decidable-emb e)
+    is-decidable-map map-decidable-emb
+  is-decidable-map-map-decidable-emb =
+    is-decidable-map-is-decidable-emb is-decidable-emb-map-decidable-emb
 
-emb-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪ᵈ Y → X ↪ Y
-pr1 (emb-decidable-emb e) = map-decidable-emb e
-pr2 (emb-decidable-emb e) = is-emb-map-decidable-emb e
+  emb-decidable-emb : X ↪ Y
+  emb-decidable-emb = map-decidable-emb , is-emb-map-decidable-emb
 ```
 
 ## Properties

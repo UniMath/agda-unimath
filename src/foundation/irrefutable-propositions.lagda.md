@@ -184,7 +184,7 @@ is-irrefutable-double-negation-elim H =
   H (λ f → ex-falso (f (λ a → H (λ _ → a))))
 ```
 
-### Dependent sums of of irrefutable propositions
+### Dependent sums of irrefutable propositions
 
 ```agda
 module _

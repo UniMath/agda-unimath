@@ -34,15 +34,15 @@ is a [poset](order-theory.posets.md) such that all
 
 ## Definitions
 
-### The predicate on posets of being a directed complete poset
+### The predicate on posets of being directed complete
 
 ```agda
 module _
   {l1 l2 : Level} (l3 : Level) (P : Poset l1 l2)
   where
 
-  is-directed-complete-Poset-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
-  is-directed-complete-Poset-Prop =
+  is-directed-complete-prop-Poset : Prop (l1 ⊔ l2 ⊔ lsuc l3)
+  is-directed-complete-prop-Poset =
     Π-Prop
       ( directed-family-Poset l3 P)
       ( λ F →
@@ -51,11 +51,11 @@ module _
 
   is-directed-complete-Poset : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-directed-complete-Poset =
-    type-Prop is-directed-complete-Poset-Prop
+    type-Prop is-directed-complete-prop-Poset
 
   is-prop-is-directed-complete-Poset : is-prop is-directed-complete-Poset
   is-prop-is-directed-complete-Poset =
-    is-prop-type-Prop is-directed-complete-Poset-Prop
+    is-prop-type-Prop is-directed-complete-prop-Poset
 
 module _
   {l1 l2 l3 : Level} (P : Poset l1 l2) (H : is-directed-complete-Poset l3 P)
@@ -155,13 +155,13 @@ module _
       ( poset-Directed-Complete-Poset)
       ( is-directed-complete-Directed-Complete-Poset)
 
-  leq-sup-Directed-Complete-Poset :
+  is-upper-bound-sup-Directed-Complete-Poset :
     (x : directed-family-Poset l3 poset-Directed-Complete-Poset)
     (i : type-directed-family-Poset poset-Directed-Complete-Poset x) →
     leq-Directed-Complete-Poset
       ( family-directed-family-Poset poset-Directed-Complete-Poset x i)
       ( sup-Directed-Complete-Poset x)
-  leq-sup-Directed-Complete-Poset x =
+  is-upper-bound-sup-Directed-Complete-Poset x =
     backward-implication
       ( is-least-upper-bound-sup-Directed-Complete-Poset
         ( x)

@@ -134,36 +134,36 @@ _↪¬¬_ :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
 X ↪¬¬ Y = Σ (X → Y) is-double-negation-stable-emb
 
-map-double-negation-stable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪¬¬ Y → X → Y
-map-double-negation-stable-emb e = pr1 e
+double-negation-stable-emb :
+  {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
+double-negation-stable-emb = _↪¬¬_
 
-abstract
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪¬¬ Y)
+  where
+
+  map-double-negation-stable-emb : X → Y
+  map-double-negation-stable-emb = pr1 e
+
   is-double-negation-stable-emb-map-double-negation-stable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪¬¬ Y) →
-    is-double-negation-stable-emb (map-double-negation-stable-emb e)
-  is-double-negation-stable-emb-map-double-negation-stable-emb e = pr2 e
+    is-double-negation-stable-emb map-double-negation-stable-emb
+  is-double-negation-stable-emb-map-double-negation-stable-emb = pr2 e
 
-abstract
   is-emb-map-double-negation-stable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪¬¬ Y) →
-    is-emb (map-double-negation-stable-emb e)
-  is-emb-map-double-negation-stable-emb e =
+    is-emb map-double-negation-stable-emb
+  is-emb-map-double-negation-stable-emb =
     is-emb-is-double-negation-stable-emb
-      ( is-double-negation-stable-emb-map-double-negation-stable-emb e)
+      is-double-negation-stable-emb-map-double-negation-stable-emb
 
-abstract
   is-double-negation-eliminating-map-map-double-negation-stable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪¬¬ Y) →
-    is-double-negation-eliminating-map (map-double-negation-stable-emb e)
-  is-double-negation-eliminating-map-map-double-negation-stable-emb e =
+    is-double-negation-eliminating-map map-double-negation-stable-emb
+  is-double-negation-eliminating-map-map-double-negation-stable-emb =
     is-double-negation-eliminating-map-is-double-negation-stable-emb
-      ( is-double-negation-stable-emb-map-double-negation-stable-emb e)
+      is-double-negation-stable-emb-map-double-negation-stable-emb
 
-emb-double-negation-stable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪¬¬ Y → X ↪ Y
-pr1 (emb-double-negation-stable-emb e) = map-double-negation-stable-emb e
-pr2 (emb-double-negation-stable-emb e) = is-emb-map-double-negation-stable-emb e
+  emb-double-negation-stable-emb : X ↪ Y
+  emb-double-negation-stable-emb =
+    map-double-negation-stable-emb , is-emb-map-double-negation-stable-emb
 ```
 
 ## Properties

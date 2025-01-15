@@ -44,11 +44,11 @@ open import logic.de-morgan-types
 A
 {{#concept "De Morgan subtype" Disambiguation="of a type" Agda=is-de-morgan-subtype Agda=de-morgan-subtype}}
 of a type consists of a family of
-[De Morgan propositions](foundation.de-morgan-propositions.md) over it.
+[De Morgan propositions](logic.de-morgan-propositions.md) over it.
 
 ## Definitions
 
-### Decidable subtypes
+### De Morgan subtypes
 
 ```agda
 is-de-morgan-subtype-Prop :

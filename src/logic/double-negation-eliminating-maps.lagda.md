@@ -55,6 +55,8 @@ eliminating maps come [equipped](foundation.structure.md) with a map
 
 ## Definintion
 
+### Double negation elimination structure on a map
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -63,6 +65,30 @@ module _
   is-double-negation-eliminating-map : (A → B) → UU (l1 ⊔ l2)
   is-double-negation-eliminating-map f =
     (y : B) → has-double-negation-elim (fiber f y)
+```
+
+### The type of double negation eliminating maps
+
+```agda
+infix 5 _→¬¬_
+
+_→¬¬_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+A →¬¬ B = Σ (A → B) (is-double-negation-eliminating-map)
+
+double-negation-eliminating-map :
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+double-negation-eliminating-map = _→¬¬_
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A →¬¬ B)
+  where
+
+  map-double-negation-eliminating-map : A → B
+  map-double-negation-eliminating-map = pr1 f
+
+  is-double-negation-eliminating-double-negation-eliminating-map :
+    is-double-negation-eliminating-map map-double-negation-eliminating-map
+  is-double-negation-eliminating-double-negation-eliminating-map = pr2 f
 ```
 
 ## Properties

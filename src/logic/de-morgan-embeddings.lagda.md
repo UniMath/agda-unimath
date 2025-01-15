@@ -58,10 +58,10 @@ A [map](foundation-core.function-types.md) is said to be a
 if it is an [embedding](foundation-core.embeddings.md) and the
 [negations](foundation-core.negation.md) of its
 [fibers](foundation-core.fibers-of-maps.md) are
-[decidable](foundation-core.decidable-maps.md).
+[decidable](foundation.decidable-maps.md).
 
 Equivalently, a De Morgan embedding is a map whose fibers are
-[De Morgan propositions](foundation.de-morgan-propositions.md). We refer to this
+[De Morgan propositions](logic.de-morgan-propositions.md). We refer to this
 condition as being a
 {{#concept "De Morgan propositional map" Disambiguation="of types" Agda=is-de-morgan-prop-map}}.
 
@@ -130,40 +130,32 @@ module _
 
 ```agda
 infix 5 _↪ᵈᵐ_
-_↪ᵈᵐ_ :
-  {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-X ↪ᵈᵐ Y = Σ (X → Y) is-de-morgan-emb
+_↪ᵈᵐ_ : {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
+X ↪ᵈᵐ Y = Σ (X → Y) (is-de-morgan-emb)
 
-map-de-morgan-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪ᵈᵐ Y → X → Y
-map-de-morgan-emb e = pr1 e
+de-morgan-emb : {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
+de-morgan-emb = _↪ᵈᵐ_
 
-abstract
-  is-de-morgan-emb-map-de-morgan-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈᵐ Y) →
-    is-de-morgan-emb (map-de-morgan-emb e)
-  is-de-morgan-emb-map-de-morgan-emb e = pr2 e
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈᵐ Y)
+  where
 
-abstract
-  is-emb-map-de-morgan-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈᵐ Y) →
-    is-emb (map-de-morgan-emb e)
-  is-emb-map-de-morgan-emb e =
-    is-emb-is-de-morgan-emb
-      ( is-de-morgan-emb-map-de-morgan-emb e)
+  map-de-morgan-emb : X → Y
+  map-de-morgan-emb = pr1 e
 
-abstract
-  is-de-morgan-map-map-de-morgan-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈᵐ Y) →
-    is-de-morgan-map (map-de-morgan-emb e)
-  is-de-morgan-map-map-de-morgan-emb e =
-    is-de-morgan-map-is-de-morgan-emb
-      ( is-de-morgan-emb-map-de-morgan-emb e)
+  is-de-morgan-emb-map-de-morgan-emb : is-de-morgan-emb map-de-morgan-emb
+  is-de-morgan-emb-map-de-morgan-emb = pr2 e
 
-emb-de-morgan-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪ᵈᵐ Y → X ↪ Y
-pr1 (emb-de-morgan-emb e) = map-de-morgan-emb e
-pr2 (emb-de-morgan-emb e) = is-emb-map-de-morgan-emb e
+  is-emb-map-de-morgan-emb : is-emb map-de-morgan-emb
+  is-emb-map-de-morgan-emb =
+    is-emb-is-de-morgan-emb is-de-morgan-emb-map-de-morgan-emb
+
+  is-de-morgan-map-map-de-morgan-emb : is-de-morgan-map map-de-morgan-emb
+  is-de-morgan-map-map-de-morgan-emb =
+    is-de-morgan-map-is-de-morgan-emb is-de-morgan-emb-map-de-morgan-emb
+
+  emb-de-morgan-emb : X ↪ Y
+  emb-de-morgan-emb = map-de-morgan-emb , is-emb-map-de-morgan-emb
 ```
 
 ## Properties
@@ -341,19 +333,19 @@ module _
       is-de-morgan-emb (g ∘ f) →
       is-emb g →
       is-de-morgan-emb f
-  is-de-morgan-emb-right-factor' GH G =
-    ( is-emb-right-factor g f G (is-emb-is-de-morgan-emb GH) ,
+  is-de-morgan-emb-right-factor' GF G =
+    ( is-emb-right-factor g f G (is-emb-is-de-morgan-emb GF) ,
       is-de-morgan-map-right-factor'
         ( is-injective-is-emb G)
-        ( is-de-morgan-map-is-de-morgan-emb GH))
+        ( is-de-morgan-map-is-de-morgan-emb GF))
 
   is-de-morgan-emb-right-factor :
       is-de-morgan-emb (g ∘ f) →
       is-de-morgan-emb g →
       is-de-morgan-emb f
-  is-de-morgan-emb-right-factor GH G =
+  is-de-morgan-emb-right-factor GF G =
     is-de-morgan-emb-right-factor'
-      ( GH)
+      ( GF)
       ( is-emb-is-de-morgan-emb G)
 ```
 
@@ -371,8 +363,7 @@ module _
     is-decidable-emb right →
     is-de-morgan-emb left
   is-de-morgan-emb-left-map-triangle-is-decidable-emb-top T R =
-    is-de-morgan-emb-htpy H
-      ( is-de-morgan-emb-comp-is-decidable-emb R T)
+    is-de-morgan-emb-htpy H (is-de-morgan-emb-comp-is-decidable-emb R T)
 ```
 
 ### In a commuting triangle of maps, if the left and right maps are De Morgan embeddings so is the top map

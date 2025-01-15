@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.evaluation-functions
+open import foundation.hilberts-epsilon-operators
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.retracts-of-types
@@ -38,14 +39,6 @@ if there is a map
 
 ```text
   ¬¬A → A.
-```
-
-We say a type `A` satisfies
-{{#concept "double negation elimination" Disambiguation="on a type"}} if there
-is an implication
-
-```text
-  ¬¬A ⇒ ║A║₋₁.
 ```
 
 ## Definitions
@@ -126,11 +119,6 @@ module _
 
 ### If the negation of a type with double negation elimination is decidable, then the type is decidable
 
-**Note.** It is an established fact that both the property of satisfying double
-negation elimination, and the property of having decidable negation, are
-strictly weaker conditions than being decidable. Therefore, this result
-demonstrates that they are independent too.
-
 ```agda
 module _
   {l1 : Level} {A : UU l1}
@@ -143,6 +131,11 @@ module _
   is-decidable-is-decidable-neg-has-double-negation-elim f (inr nnx) =
     inl (f nnx)
 ```
+
+**Remark.** It is an established fact that both the property of satisfying
+double negation elimination, and the property of having decidable negation, are
+strictly weaker conditions than being decidable. Therefore, this result
+demonstrates that they are independent too.
 
 ### Double negation elimination for empty types
 
@@ -162,7 +155,7 @@ double-negation-elim-unit : has-double-negation-elim unit
 double-negation-elim-unit _ = star
 ```
 
-### Double negation elimination for the contractible types
+### Double negation elimination for contractible types
 
 ```agda
 double-negation-elim-is-contr :
@@ -178,7 +171,7 @@ double-negation-elim-neg :
 double-negation-elim-neg A f p = f (ev p)
 ```
 
-### Double negation elimination for uiversal quantification over double negations
+### Double negation elimination for universal quantification over double negations
 
 ```agda
 module _
@@ -216,7 +209,7 @@ module _
   double-negation-elim-exp q = double-negation-elim-for-all (λ _ → q)
 ```
 
-### Double negation elimination for ecidable propositions
+### Double negation elimination for decidable propositions
 
 ```text
 double-negation-elim-is-decidable :
@@ -257,6 +250,17 @@ double-negation-elim-product :
   has-double-negation-elim (A × B)
 double-negation-elim-product f g h =
   f (λ na → h (na ∘ pr1)) , g (λ nb → h (nb ∘ pr2))
+```
+
+### If a type satisfies untruncated double negation elimination then it has a Hilbert ε-operator
+
+```agda
+ε-operator-Hilbert-has-double-negation-elim :
+  {l1 : Level} {A : UU l1} →
+  has-double-negation-elim A →
+  ε-operator-Hilbert A
+ε-operator-Hilbert-has-double-negation-elim {A = A} H =
+  H ∘ double-negation-double-negation-type-trunc-Prop A ∘ intro-double-negation
 ```
 
 ## See also

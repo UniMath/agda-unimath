@@ -44,11 +44,11 @@ open import order-theory.posets
 
 ## Idea
 
-A map `f : P → Q` between the underlying types of two
-[ω-complete posets](order-theory.omega-complete-posets.md) is said to be
-{{#concept "ω-continuous" Disambiguation="map of ω-complete posets" Agda=ω-continuous-map-ω-Complete-Poset}}
+A map `f : P → Q` between the carrier types of two
+[ω-complete posets](domain-theory.omega-complete-posets.md) is said to be
+{{#concept "ω-continuous" Disambiguation="map of ω-complete posets" Agda=ω-continuous-hom-ω-Complete-Poset}}
 if it maps the supremum of every ascending
-[chain](order-theory.chains-posets.md)
+ω-[chain](order-theory.chains-posets.md)
 
 ```text
   x₀ ≤ x₁ ≤ x₂ ≤ ­… ≤ xₙ ≤ xₙ₊₁ ≤ … ≤ xω
@@ -57,13 +57,14 @@ if it maps the supremum of every ascending
 to the supremum of the image of the ascending chain
 
 ```text
-  f x₀ ≤ f x₁ ≤ f x₂ ≤ ­… ≤ f xₙ ≤ f xₙ₊₁ ≤ … ≤ f xω.
+  { f xᵢ | i : ℕ }
 ```
 
-In other words, `f(⋃ᵢxᵢ) = ⋃ᵢf(xᵢ)` for all ascending chains `x₍₋₎ : ℕ → P`.
+In other words, `f(⋃ᵢxᵢ) = ⋃ᵢf(xᵢ)` for all ascending chains `x₍₋₎ : ℕ → P`. It
+follows that `f` preserves the order of `P` if it is ω-continuous.
 
 The ω-continuity condition is a proper generalization of
-[Scott-continuity](domain-theory.scott-continuous-functions-posets.md) for which
+[Scott-continuity](domain-theory.scott-continuous-maps-posets.md) for which
 [Kleene's fixed point theorem](domain-theory.kleenes-fixed-point-theorem-omega-complete-posets.md)
 still applies.
 
@@ -294,13 +295,13 @@ module _
   (R : ω-Complete-Poset l5 l6)
   where
 
-  is-ω-continuous-comp-ω-Complete-Poset :
+  is-ω-continuous-comp-ω-continuous-hom-ω-Complete-Poset :
     (g : ω-continuous-hom-ω-Complete-Poset Q R)
     (f : ω-continuous-hom-ω-Complete-Poset P Q) →
     is-ω-continuous-ω-Complete-Poset P R
       ( map-ω-continuous-hom-ω-Complete-Poset Q R g ∘
         map-ω-continuous-hom-ω-Complete-Poset P Q f)
-  is-ω-continuous-comp-ω-Complete-Poset g f c y =
+  is-ω-continuous-comp-ω-continuous-hom-ω-Complete-Poset g f c y =
     is-ω-continuous-ω-continuous-hom-ω-Complete-Poset Q R g
       ( comp-hom-Poset ℕ-Poset
         ( poset-ω-Complete-Poset P)
@@ -316,7 +317,7 @@ module _
   comp-ω-continuous-hom-ω-Complete-Poset g f =
     map-ω-continuous-hom-ω-Complete-Poset Q R g ∘
     map-ω-continuous-hom-ω-Complete-Poset P Q f ,
-    is-ω-continuous-comp-ω-Complete-Poset g f
+    is-ω-continuous-comp-ω-continuous-hom-ω-Complete-Poset g f
 ```
 
 ### Unit laws for composition of ω-continuous maps

@@ -1,4 +1,4 @@
-# ω-complete posets
+# ω-Complete posets
 
 ```agda
 module domain-theory.omega-complete-posets where
@@ -33,25 +33,27 @@ open import order-theory.upper-bounds-posets
 An
 {{#concept "ω-complete poset" WD="complete partial order" WDID=Q3082805  Agda=ω-Complete-Poset}}
 is a [poset](order-theory.posets.md) `P` such that every ascending
-[chain](order-theory.chains-posets.md)
+ω-[chain](order-theory.chains-posets.md)
 
 ```text
-  ℕ → P
+  α₀ ≤ α₁ ≤ α₂ ≤ α₃ ≤ …
 ```
 
-has a [supremum](order-theory.least-upper-bounds--posets.md) in `P`.
+in `P`, i.e., ascending chain indexed by the
+[natural numbers](elementary-number-theory.natural-numbers.md), has a
+[supremum](order-theory.least-upper-bounds-posets.md) `αω` in `P`.
 
 ## Definitions
 
-### The predicate on posets of being an ω-complete poset
+### The predicate on posets of being ω-complete
 
 ```agda
 module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  is-ω-complete-Poset-Prop : Prop (l1 ⊔ l2)
-  is-ω-complete-Poset-Prop =
+  is-ω-complete-prop-Poset : Prop (l1 ⊔ l2)
+  is-ω-complete-prop-Poset =
     Π-Prop
       ( hom-Poset ℕ-Poset P)
       ( λ F →
@@ -60,11 +62,11 @@ module _
 
   is-ω-complete-Poset : UU (l1 ⊔ l2)
   is-ω-complete-Poset =
-    type-Prop is-ω-complete-Poset-Prop
+    type-Prop is-ω-complete-prop-Poset
 
   is-prop-is-ω-complete-Poset : is-prop is-ω-complete-Poset
   is-prop-is-ω-complete-Poset =
-    is-prop-type-Prop is-ω-complete-Poset-Prop
+    is-prop-type-Prop is-ω-complete-prop-Poset
 
 module _
   {l1 l2 : Level} (P : Poset l1 l2) (H : is-ω-complete-Poset P)
@@ -174,21 +176,4 @@ module _
     is-upper-bound-is-least-upper-bound-family-of-elements-Poset
       ( poset-ω-Complete-Poset)
       ( is-least-upper-bound-sup-ω-Complete-Poset x)
-
-  leq-sup-ω-Complete-Poset :
-    (x : hom-Poset ℕ-Poset poset-ω-Complete-Poset)
-    (i : ℕ) →
-    leq-ω-Complete-Poset
-      ( map-hom-Poset ℕ-Poset poset-ω-Complete-Poset x i)
-      ( sup-ω-Complete-Poset x)
-  leq-sup-ω-Complete-Poset x =
-    backward-implication
-      ( is-least-upper-bound-sup-ω-Complete-Poset
-        ( x)
-        ( sup-ω-Complete-Poset x))
-      ( refl-leq-ω-Complete-Poset (sup-ω-Complete-Poset x))
 ```
-
-## External links
-
-- [dcpo](https://ncatlab.org/nlab/show/dcpo) at $n$Lab

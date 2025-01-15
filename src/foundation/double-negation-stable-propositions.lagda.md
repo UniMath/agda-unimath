@@ -201,7 +201,7 @@ module _
     map-inv-equiv extensionality-Double-Negation-Stable-Prop (pair f g)
 ```
 
-### Double negation stable propositions are preserved by retracts
+### Double negation stable propositions are closed under retracts
 
 ```agda
 module _
@@ -219,7 +219,7 @@ module _
       ( has-double-negation-elim-is-double-negation-stable-prop H))
 ```
 
-### Double negation stable propositions are preserved by equivalences
+### Double negation stable propositions are closed under equivalences
 
 ```agda
 module _
@@ -322,7 +322,7 @@ exp-Double-Negation-Stable-Prop :
 exp-Double-Negation-Stable-Prop A B = Π-Double-Negation-Stable-Prop A (λ _ → B)
 ```
 
-### Dependent sums of double negation stable types over a decidable proposition are double negation stable
+### Dependent sums of double negation stable propositions over double negation stable propositions are double negation stable
 
 ```agda
 is-double-negation-stable-prop-Σ :

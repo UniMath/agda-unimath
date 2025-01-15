@@ -100,7 +100,7 @@ module _
 
 ## Properties
 
-### Chains in a poset from order preserving maps from a total order
+### Any order preserving maps from a total order into a poset induces a chain
 
 ```agda
 module _

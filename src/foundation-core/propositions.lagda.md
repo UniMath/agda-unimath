@@ -130,6 +130,12 @@ module _
 abstract
   eq-type-Prop : {l : Level} (P : Prop l) → {x y : type-Prop P} → x ＝ y
   eq-type-Prop P = eq-is-prop (is-prop-type-Prop P)
+
+abstract
+  is-proof-irrelevant-type-Prop :
+    {l : Level} (P : Prop l) → is-proof-irrelevant (type-Prop P)
+  is-proof-irrelevant-type-Prop P =
+    is-proof-irrelevant-is-prop (is-prop-type-Prop P)
 ```
 
 ### Propositions are closed under equivalences
@@ -185,6 +191,25 @@ pr2 (Σ-Prop P Q) =
   is-prop-Σ
     ( is-prop-type-Prop P)
     ( λ p → is-prop-type-Prop (Q p))
+```
+
+### If `Σ A B` is a proposition and there is a section `(x : A) → B x` then `A` is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (s : (x : A) → B x)
+  where
+
+  is-proof-irrelevant-base-is-proof-irrelevant-Σ' :
+    is-proof-irrelevant (Σ A B) → is-proof-irrelevant A
+  is-proof-irrelevant-base-is-proof-irrelevant-Σ' H a =
+    is-contr-base-is-contr-Σ' A B s (H (a , s a))
+
+  is-prop-base-is-prop-Σ' : is-prop (Σ A B) → is-prop A
+  is-prop-base-is-prop-Σ' H =
+    is-prop-is-proof-irrelevant
+      ( is-proof-irrelevant-base-is-proof-irrelevant-Σ'
+          ( is-proof-irrelevant-is-prop H))
 ```
 
 ### Propositions are closed under cartesian product types

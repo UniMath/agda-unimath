@@ -9,35 +9,35 @@ module logic.de-morgan-sheaves where
 ```agda
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.decidable-subtypes
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.double-negation
-open import foundation.fibers-of-maps
 open import foundation.diagonal-maps-of-types
-open import foundation.unit-type
-open import foundation.subtypes
-open import foundation.precomposition-functions
+open import foundation.double-negation
+open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.propositional-truncations
-open import foundation.universal-property-propositional-truncation
+open import foundation.fibers-of-maps
+open import foundation.identity-types
 open import foundation.irrefutable-propositions
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.identity-types
-open import foundation.embeddings
+open import foundation.precomposition-functions
+open import foundation.propositional-truncations
+open import foundation.subtypes
 open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-propositional-truncation
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
 
-open import logic.de-morgans-law
-open import logic.de-morgan-types
-open import logic.double-negation-stable-subtypes
-open import foundation.decidable-subtypes
 open import logic.de-morgan-maps
+open import logic.de-morgan-types
+open import logic.de-morgans-law
+open import logic.double-negation-stable-subtypes
 
 open import orthogonal-factorization-systems.double-negation-sheaves
 open import orthogonal-factorization-systems.null-types
@@ -103,7 +103,8 @@ module _
 
   is-de-morgan-is-idempotent-is-de-morgan' :
     (is-de-morgan (is-de-morgan A) → is-de-morgan A) → is-de-morgan A
-  is-de-morgan-is-idempotent-is-de-morgan' f = f (inr is-irrefutable-is-de-morgan)
+  is-de-morgan-is-idempotent-is-de-morgan' f =
+    f (inr is-irrefutable-is-de-morgan)
 ```
 
 ### The empty type is a De Morgan sheaf

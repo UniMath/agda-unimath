@@ -176,11 +176,17 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
+  noncontractibility-coproduct-is-contr' :
+    is-contr A → is-contr B → noncontractibility' (A + B) 1
+  noncontractibility-coproduct-is-contr' HA HB =
+    inl (center HA) , inr (center HB) , neq-inl-inr
+
   abstract
     is-not-contractible-coproduct-is-contr :
       is-contr A → is-contr B → is-not-contractible (A + B)
-    is-not-contractible-coproduct-is-contr HA HB HAB =
-      neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr HAB)
+    is-not-contractible-coproduct-is-contr HA HB =
+      is-not-contractible-noncontractibility
+        ( 1 , noncontractibility-coproduct-is-contr' HA HB)
 ```
 
 ### Coproducts of mutually exclusive propositions are propositions

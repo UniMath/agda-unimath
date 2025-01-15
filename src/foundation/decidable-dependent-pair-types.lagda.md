@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.maybe
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-unit-type
+open import foundation.uniformly-decidable-type-families
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
@@ -36,7 +37,9 @@ We describe conditions under which
 ```agda
 is-decidable-Σ-uniformly-decidable-family :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  is-decidable A → (((a : A) → B a) + ((a : A) → ¬ B a)) → is-decidable (Σ A B)
+  is-decidable A →
+  is-uniformly-decidable-family B →
+  is-decidable (Σ A B)
 is-decidable-Σ-uniformly-decidable-family (inl a) (inl b) =
   inl (a , b a)
 is-decidable-Σ-uniformly-decidable-family (inl a) (inr b) =
@@ -65,27 +68,22 @@ is-decidable-Σ-Maybe :
   {l1 l2 : Level} {A : UU l1} {B : Maybe A → UU l2} →
   is-decidable (Σ A (B ∘ unit-Maybe)) → is-decidable (B exception-Maybe) →
   is-decidable (Σ (Maybe A) B)
-is-decidable-Σ-Maybe {l1} {l2} {A} {B} dA de =
+is-decidable-Σ-Maybe {A = A} {B} dA de =
   is-decidable-Σ-coproduct B dA
-    ( is-decidable-equiv
-      ( left-unit-law-Σ (B ∘ inr))
-      ( de))
+    ( is-decidable-equiv (left-unit-law-Σ (B ∘ inr)) de)
 ```
 
 ### Decidability of dependent sums over equivalences
 
 ```agda
-is-decidable-Σ-equiv :
+module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} {D : B → UU l4}
-  (e : A ≃ B) (f : (x : A) → C x ≃ D (map-equiv e x)) →
-  is-decidable (Σ A C) → is-decidable (Σ B D)
-is-decidable-Σ-equiv {D = D} e f =
-  is-decidable-equiv' (equiv-Σ D e f)
+  (e : A ≃ B) (f : (x : A) → C x ≃ D (map-equiv e x))
+  where
 
-is-decidable-Σ-equiv' :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} {D : B → UU l4}
-  (e : A ≃ B) (f : (x : A) → C x ≃ D (map-equiv e x)) →
-  is-decidable (Σ B D) → is-decidable (Σ A C)
-is-decidable-Σ-equiv' {D = D} e f =
-  is-decidable-equiv (equiv-Σ D e f)
+  is-decidable-Σ-equiv : is-decidable (Σ A C) → is-decidable (Σ B D)
+  is-decidable-Σ-equiv = is-decidable-equiv' (equiv-Σ D e f)
+
+  is-decidable-Σ-equiv' : is-decidable (Σ B D) → is-decidable (Σ A C)
+  is-decidable-Σ-equiv' = is-decidable-equiv (equiv-Σ D e f)
 ```

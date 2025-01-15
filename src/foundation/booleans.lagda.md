@@ -7,7 +7,10 @@ module foundation.booleans where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-equality
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
 open import foundation.involutions
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
@@ -193,8 +196,58 @@ abstract
       ( λ x y → eq-Eq-bool)
 
 bool-Set : Set lzero
-pr1 bool-Set = bool
-pr2 bool-Set = is-set-bool
+bool-Set = bool , is-set-bool
+```
+
+### The booleans have decidable equality
+
+```agda
+has-decidable-equality-bool : has-decidable-equality bool
+has-decidable-equality-bool true true = inl refl
+has-decidable-equality-bool true false = inr neq-true-false-bool
+has-decidable-equality-bool false true = inr neq-false-true-bool
+has-decidable-equality-bool false false = inl refl
+
+bool-Discrete-Type : Discrete-Type lzero
+bool-Discrete-Type = bool , has-decidable-equality-bool
+```
+
+### The "is true" predicate on booleans
+
+```agda
+is-true : bool → UU lzero
+is-true = _＝ true
+
+is-prop-is-true : (b : bool) → is-prop (is-true b)
+is-prop-is-true b = is-set-bool b true
+
+is-true-Prop : bool → Prop lzero
+is-true-Prop b = is-true b , is-prop-is-true b
+```
+
+### The "is false" predicate on booleans
+
+```agda
+is-false : bool → UU lzero
+is-false = _＝ false
+
+is-prop-is-false : (b : bool) → is-prop (is-false b)
+is-prop-is-false b = is-set-bool b false
+
+is-false-Prop : bool → Prop lzero
+is-false-Prop b = is-false b , is-prop-is-false b
+```
+
+### A boolean cannot be both true and false
+
+```agda
+not-is-false-is-true : (x : bool) → is-true x → ¬ (is-false x)
+not-is-false-is-true true t ()
+not-is-false-is-true false () f
+
+not-is-true-is-false : (x : bool) → is-false x → ¬ (is-true x)
+not-is-true-is-false true () f
+not-is-true-is-false false t ()
 ```
 
 ### The "is true" predicate on booleans

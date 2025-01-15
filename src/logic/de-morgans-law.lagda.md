@@ -48,8 +48,9 @@ constructive mathematics. The odd one out is
 ```
 
 Indeed, this would state that we could constructively deduce from a proof that
-neither `P` nor `Q` is true, which of `P` is false or `Q` is false. This logical
-law is what we refer to as {{#concept "De Morgan's Law" Agda=De-Morgans-Law}}.
+not both of `P` and `Q` are true, which of `P` and `Q` that is false. This
+logical law is what we refer to as
+{{#concept "De Morgan's Law" Agda=De-Morgans-Law}}.
 
 ## Definition
 
@@ -136,7 +137,6 @@ is-irrefutable-de-morgans-law u =
 ## See also
 
 - [De Morgan types](logic.de-morgan-types.md)
-- [De Morgan sheaves](logic.de-morgan-sheaves.md)
 
 ## External links
 

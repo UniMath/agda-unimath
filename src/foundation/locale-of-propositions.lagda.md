@@ -7,6 +7,7 @@ module foundation.locale-of-propositions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.large-locale-of-propositions
@@ -16,8 +17,12 @@ open import foundation.universe-levels
 
 open import foundation-core.function-types
 
+open import order-theory.frames
+open import order-theory.greatest-lower-bounds-posets
 open import order-theory.large-posets
 open import order-theory.large-preorders
+open import order-theory.meet-semilattices
+open import order-theory.meet-suplattices
 open import order-theory.posets
 open import order-theory.preorders
 open import order-theory.suplattices
@@ -53,17 +58,6 @@ Prop-Poset : (l : Level) → Poset (lsuc l) l
 Prop-Poset = poset-Large-Poset Prop-Large-Poset
 ```
 
-### Meets in the poset of propositions
-
-```text
-has-meets-Prop-Locale :
-  has-meets-Poset Prop-Poset
-meet-has-meets-Poset has-meets-Prop-Locale = conjunction-Prop
-is-greatest-binary-lower-bound-meet-has-meets-Poset
-  has-meets-Prop-Locale P Q R =
-  is-greatest-binary-lower-bound-conjunction-Prop P Q R
-```
-
 ### The largest element in the poset of propositions
 
 ```agda
@@ -72,39 +66,58 @@ has-top-element-Prop-Locale :
 has-top-element-Prop-Locale {l} = (raise-unit-Prop l , λ _ _ → raise-star)
 ```
 
-### The poset of propositions is a meet-semilattice
+### Meets in the poset of propositions
 
-```text
+```agda
 is-meet-semilattice-Prop-Locale :
-  is-meet-semilattice-Poset Prop-Poset
-has-meets-is-meet-semilattice-Poset
-  is-meet-semilattice-Prop-Locale =
-  has-meets-Prop-Locale
-has-top-element-is-meet-semilattice-Poset
-  is-meet-semilattice-Prop-Locale =
-  has-top-element-Prop-Locale
+  {l : Level} → is-meet-semilattice-Poset (Prop-Poset l)
+is-meet-semilattice-Prop-Locale P Q =
+  ( P ∧ Q , is-greatest-binary-lower-bound-conjunction-Prop P Q)
+
+Prop-Order-Theoretic-Meet-Semilattice :
+  (l : Level) → Order-Theoretic-Meet-Semilattice (lsuc l) l
+Prop-Order-Theoretic-Meet-Semilattice l =
+  Prop-Poset l , is-meet-semilattice-Prop-Locale
+
+Prop-Meet-Semilattice :
+  (l : Level) → Meet-Semilattice (lsuc l)
+Prop-Meet-Semilattice l =
+  meet-semilattice-Order-Theoretic-Meet-Semilattice
+    ( Prop-Order-Theoretic-Meet-Semilattice l)
 ```
 
 ### Suprema in the poset of propositions
 
 ```agda
+is-suplattice-lzero-Prop-Locale :
+  {l : Level} → is-suplattice-Poset lzero (Prop-Poset l)
+is-suplattice-lzero-Prop-Locale I P = (∃ I P , inv-iff ∘ up-exists)
+
 is-suplattice-Prop-Locale :
-  (l : Level) → is-suplattice-Poset l (Prop-Poset l)
-is-suplattice-Prop-Locale l I P = (∃ I P , inv-iff ∘ up-exists)
+  {l : Level} → is-suplattice-Poset l (Prop-Poset l)
+is-suplattice-Prop-Locale I P = (∃ I P , inv-iff ∘ up-exists)
+
+Prop-Suplattice :
+  (l : Level) → Suplattice (lsuc l) l l
+Prop-Suplattice l = Prop-Poset l , is-suplattice-Prop-Locale
+```
+
+```text
+is-meet-suplattice-Prop-Locale :
+  {l : Level} → is-meet-suplattice-Meet-Semilattice l (Prop-Meet-Semilattice l)
+is-meet-suplattice-Prop-Locale I P = ？
+
+Prop-Meet-Suplattice :
+  (l : Level) → Meet-Suplattice (lsuc l) l
+Prop-Meet-Suplattice l =
+  Prop-Meet-Semilattice l , is-meet-suplattice-Prop-Locale
 ```
 
 ### The frame of propositions
 
 ```text
-Prop-Frame : Frame lsuc (_⊔_) lzero
-poset-Frame Prop-Frame =
-  Prop-Poset
-is-meet-semilattice-Frame Prop-Frame =
-  is-meet-semilattice-Prop-Locale
-is-suplattice-Frame Prop-Frame =
-  is-suplattice-Prop-Locale
-distributive-meet-sup-Frame Prop-Frame =
-  eq-distributive-conjunction-exists
+Prop-Frame : (l : Level) → Frame (lsuc l) l
+Prop-Frame l = Prop-Meet-Suplattice l , ？
 ```
 
 ### The locale of propositions

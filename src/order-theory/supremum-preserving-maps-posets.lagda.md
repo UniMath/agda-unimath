@@ -1,4 +1,4 @@
-# Supremum preserving maps on posets
+# Supremum preserving maps between posets
 
 ```agda
 module order-theory.supremum-preserving-maps-posets where
@@ -104,26 +104,30 @@ module _
   preserves-suprema-prop-Poset l5 f =
     preserves-suprema-Poset l5 f , (is-prop-preserves-suprema-Poset f)
 
-  hom-sup-Poset : (l5 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
-  hom-sup-Poset l5 =
+  supremum-preserving-hom-Poset :
+    (l5 : Level) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l5)
+  supremum-preserving-hom-Poset l5 =
     Σ (type-Poset P → type-Poset Q) (preserves-suprema-Poset l5)
 
-  map-hom-sup-Poset :
-    {l5 : Level} → hom-sup-Poset l5 → type-Poset P → type-Poset Q
-  map-hom-sup-Poset = pr1
+  map-supremum-preserving-hom-Poset :
+    {l5 : Level} → supremum-preserving-hom-Poset l5 →
+    type-Poset P → type-Poset Q
+  map-supremum-preserving-hom-Poset = pr1
 
-  preserves-suprema-hom-sup-Poset :
-    {l5 : Level} (f : hom-sup-Poset l5) →
-    preserves-suprema-Poset l5 (map-hom-sup-Poset f)
-  preserves-suprema-hom-sup-Poset = pr2
+  preserves-suprema-supremum-preserving-hom-Poset :
+    {l5 : Level} (f : supremum-preserving-hom-Poset l5) →
+    preserves-suprema-Poset l5 (map-supremum-preserving-hom-Poset f)
+  preserves-suprema-supremum-preserving-hom-Poset = pr2
 
-  sup-map-hom-sup-Poset :
-    {l5 : Level} (f : hom-sup-Poset l5) →
+  sup-map-supremum-preserving-hom-Poset :
+    {l5 : Level} (f : supremum-preserving-hom-Poset l5) →
     {I : UU l5} {x : I → type-Poset P} →
     has-least-upper-bound-family-of-elements-Poset P x →
-    has-least-upper-bound-family-of-elements-Poset Q (map-hom-sup-Poset f ∘ x)
-  sup-map-hom-sup-Poset f {x = x} y =
-    ( map-hom-sup-Poset f (pr1 y) , preserves-suprema-hom-sup-Poset f x y)
+    has-least-upper-bound-family-of-elements-Poset Q
+      ( map-supremum-preserving-hom-Poset f ∘ x)
+  sup-map-supremum-preserving-hom-Poset f {x = x} y =
+    ( map-supremum-preserving-hom-Poset f (pr1 y) ,
+      preserves-suprema-supremum-preserving-hom-Poset f x y)
 ```
 
 ## Properties
@@ -145,24 +149,9 @@ module _
 
 ### Supremum preserving maps preserve joins
 
-```text
-module _
-  {l1 l2 l3 l4 l5 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
-  where
+> This remains to be formalized.
 
-  abstract
-    preserves-joins-preserves-suprema-Poset :
-      {f : type-Poset P → type-Poset Q} →
-      preserves-suprema-Poset P Q l5 f →
-      preserves-joins-Poset P Q f
-    preserves-joins-preserves-suprema-Poset {f} H x y s =
-      is-least-binary-upper-bound-has-least-upper-bound-family-of-elements-Poset
-        ( Q)
-        ( rec-bool (f x) (f y))
-        ( f (pr1 s) , ？) -- TODO
-```
-
-> From this property the next would be a simple corollary.
+From this property the next is a simple corollary.
 
 ### Supremum preserving maps preserve order
 
@@ -200,42 +189,55 @@ module _
   {l1 l2 l3 l4 l5 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  htpy-hom-sup-Poset : (f g : hom-sup-Poset P Q l5) → UU (l1 ⊔ l3)
-  htpy-hom-sup-Poset f g = map-hom-sup-Poset P Q f ~ map-hom-sup-Poset P Q g
+  htpy-supremum-preserving-hom-Poset :
+    (f g : supremum-preserving-hom-Poset P Q l5) → UU (l1 ⊔ l3)
+  htpy-supremum-preserving-hom-Poset f g =
+    map-supremum-preserving-hom-Poset P Q f ~
+    map-supremum-preserving-hom-Poset P Q g
 
-  refl-htpy-hom-sup-Poset : (f : hom-sup-Poset P Q l5) → htpy-hom-sup-Poset f f
-  refl-htpy-hom-sup-Poset f = refl-htpy
+  refl-htpy-supremum-preserving-hom-Poset :
+    (f : supremum-preserving-hom-Poset P Q l5) →
+    htpy-supremum-preserving-hom-Poset f f
+  refl-htpy-supremum-preserving-hom-Poset f = refl-htpy
 
-  htpy-eq-hom-sup-Poset :
-    (f g : hom-sup-Poset P Q l5) → f ＝ g → htpy-hom-sup-Poset f g
-  htpy-eq-hom-sup-Poset f .f refl = refl-htpy-hom-sup-Poset f
+  htpy-eq-supremum-preserving-hom-Poset :
+    (f g : supremum-preserving-hom-Poset P Q l5) →
+    f ＝ g → htpy-supremum-preserving-hom-Poset f g
+  htpy-eq-supremum-preserving-hom-Poset f .f refl =
+    refl-htpy-supremum-preserving-hom-Poset f
 
-  is-torsorial-htpy-hom-sup-Poset :
-    (f : hom-sup-Poset P Q l5) → is-torsorial (htpy-hom-sup-Poset f)
-  is-torsorial-htpy-hom-sup-Poset f =
+  is-torsorial-htpy-supremum-preserving-hom-Poset :
+    (f : supremum-preserving-hom-Poset P Q l5) →
+    is-torsorial (htpy-supremum-preserving-hom-Poset f)
+  is-torsorial-htpy-supremum-preserving-hom-Poset f =
     is-torsorial-Eq-subtype
-      ( is-torsorial-htpy (map-hom-sup-Poset P Q f))
+      ( is-torsorial-htpy (map-supremum-preserving-hom-Poset P Q f))
       ( is-prop-preserves-suprema-Poset P Q)
-      ( map-hom-sup-Poset P Q f)
+      ( map-supremum-preserving-hom-Poset P Q f)
       ( refl-htpy)
-      ( preserves-suprema-hom-sup-Poset P Q f)
+      ( preserves-suprema-supremum-preserving-hom-Poset P Q f)
 
-  is-equiv-htpy-eq-hom-sup-Poset :
-    (f g : hom-sup-Poset P Q l5) → is-equiv (htpy-eq-hom-sup-Poset f g)
-  is-equiv-htpy-eq-hom-sup-Poset f =
+  is-equiv-htpy-eq-supremum-preserving-hom-Poset :
+    (f g : supremum-preserving-hom-Poset P Q l5) →
+    is-equiv (htpy-eq-supremum-preserving-hom-Poset f g)
+  is-equiv-htpy-eq-supremum-preserving-hom-Poset f =
     fundamental-theorem-id
-      ( is-torsorial-htpy-hom-sup-Poset f)
-      ( htpy-eq-hom-sup-Poset f)
+      ( is-torsorial-htpy-supremum-preserving-hom-Poset f)
+      ( htpy-eq-supremum-preserving-hom-Poset f)
 
-  extensionality-hom-sup-Poset :
-    (f g : hom-sup-Poset P Q l5) → (f ＝ g) ≃ htpy-hom-sup-Poset f g
-  pr1 (extensionality-hom-sup-Poset f g) = htpy-eq-hom-sup-Poset f g
-  pr2 (extensionality-hom-sup-Poset f g) = is-equiv-htpy-eq-hom-sup-Poset f g
+  extensionality-supremum-preserving-hom-Poset :
+    (f g : supremum-preserving-hom-Poset P Q l5) →
+    (f ＝ g) ≃ htpy-supremum-preserving-hom-Poset f g
+  pr1 (extensionality-supremum-preserving-hom-Poset f g) =
+    htpy-eq-supremum-preserving-hom-Poset f g
+  pr2 (extensionality-supremum-preserving-hom-Poset f g) =
+    is-equiv-htpy-eq-supremum-preserving-hom-Poset f g
 
-  eq-htpy-hom-sup-Poset :
-    (f g : hom-sup-Poset P Q l5) → htpy-hom-sup-Poset f g → f ＝ g
-  eq-htpy-hom-sup-Poset f g =
-    map-inv-is-equiv (is-equiv-htpy-eq-hom-sup-Poset f g)
+  eq-htpy-supremum-preserving-hom-Poset :
+    (f g : supremum-preserving-hom-Poset P Q l5) →
+    htpy-supremum-preserving-hom-Poset f g → f ＝ g
+  eq-htpy-supremum-preserving-hom-Poset f g =
+    map-inv-is-equiv (is-equiv-htpy-eq-supremum-preserving-hom-Poset f g)
 ```
 
 ### The identity supremum preserving map
@@ -245,12 +247,13 @@ module _
   {l1 l2 : Level} (P : Poset l1 l2)
   where
 
-  preserves-suprema-id-Poset :
+  preserves-suprema-id-hom-Poset :
     {l3 : Level} → preserves-suprema-Poset P P l3 (id {A = type-Poset P})
-  preserves-suprema-id-Poset x y = pr2 y
+  preserves-suprema-id-hom-Poset x y = pr2 y
 
-  id-hom-sup-Poset : (l3 : Level) → hom-sup-Poset P P l3
-  id-hom-sup-Poset l3 = id , preserves-suprema-id-Poset
+  id-supremum-preserving-hom-Poset :
+    (l3 : Level) → supremum-preserving-hom-Poset P P l3
+  id-supremum-preserving-hom-Poset l3 = id , preserves-suprema-id-hom-Poset
 ```
 
 ### Composing supremum preserving maps
@@ -261,21 +264,25 @@ module _
   (P : Poset l1 l2) (Q : Poset l3 l4) (R : Poset l5 l6)
   where
 
-  preserves-suprema-comp-Poset :
-    (g : hom-sup-Poset Q R l7) (f : hom-sup-Poset P Q l7) →
+  preserves-suprema-comp-supremum-preserving-hom-Poset :
+    (g : supremum-preserving-hom-Poset Q R l7)
+    (f : supremum-preserving-hom-Poset P Q l7) →
     preserves-suprema-Poset P R l7
-      ( map-hom-sup-Poset Q R g ∘ map-hom-sup-Poset P Q f)
-  preserves-suprema-comp-Poset g f x y =
-    preserves-suprema-hom-sup-Poset Q R g
-      ( map-hom-sup-Poset P Q f ∘ x)
-      ( sup-map-hom-sup-Poset P Q f y)
+      ( map-supremum-preserving-hom-Poset Q R g ∘
+        map-supremum-preserving-hom-Poset P Q f)
+  preserves-suprema-comp-supremum-preserving-hom-Poset g f x y =
+    preserves-suprema-supremum-preserving-hom-Poset Q R g
+      ( map-supremum-preserving-hom-Poset P Q f ∘ x)
+      ( sup-map-supremum-preserving-hom-Poset P Q f y)
 
-  comp-hom-sup-Poset :
-    (g : hom-sup-Poset Q R l7) (f : hom-sup-Poset P Q l7) →
-    hom-sup-Poset P R l7
-  comp-hom-sup-Poset g f =
-    map-hom-sup-Poset Q R g ∘ map-hom-sup-Poset P Q f ,
-    preserves-suprema-comp-Poset g f
+  comp-supremum-preserving-hom-Poset :
+    (g : supremum-preserving-hom-Poset Q R l7)
+    (f : supremum-preserving-hom-Poset P Q l7) →
+    supremum-preserving-hom-Poset P R l7
+  comp-supremum-preserving-hom-Poset g f =
+    map-supremum-preserving-hom-Poset Q R g ∘
+    map-supremum-preserving-hom-Poset P Q f ,
+    preserves-suprema-comp-supremum-preserving-hom-Poset g f
 ```
 
 ### Unit laws for composition of supremum preserving maps
@@ -285,21 +292,31 @@ module _
   {l1 l2 l3 l4 l5 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
   where
 
-  left-unit-law-comp-hom-sup-Poset :
-    (f : hom-sup-Poset P Q l5) →
-    ( comp-hom-sup-Poset P Q Q (id-hom-sup-Poset Q l5) f) ＝ f
-  left-unit-law-comp-hom-sup-Poset f =
-    eq-htpy-hom-sup-Poset P Q
-      ( comp-hom-sup-Poset P Q Q (id-hom-sup-Poset Q l5) f)
+  left-unit-law-comp-supremum-preserving-hom-Poset :
+    (f : supremum-preserving-hom-Poset P Q l5) →
+    comp-supremum-preserving-hom-Poset P Q Q
+      ( id-supremum-preserving-hom-Poset Q l5)
+      ( f) ＝
+    f
+  left-unit-law-comp-supremum-preserving-hom-Poset f =
+    eq-htpy-supremum-preserving-hom-Poset P Q
+      ( comp-supremum-preserving-hom-Poset P Q Q
+        ( id-supremum-preserving-hom-Poset Q l5)
+        ( f))
       ( f)
       ( refl-htpy)
 
-  right-unit-law-comp-hom-sup-Poset :
-    (f : hom-sup-Poset P Q l5) →
-    (comp-hom-sup-Poset P P Q f (id-hom-sup-Poset P l5)) ＝ f
-  right-unit-law-comp-hom-sup-Poset f =
-    eq-htpy-hom-sup-Poset P Q
-      ( comp-hom-sup-Poset P P Q f (id-hom-sup-Poset P l5))
+  right-unit-law-comp-supremum-preserving-hom-Poset :
+    (f : supremum-preserving-hom-Poset P Q l5) →
+    comp-supremum-preserving-hom-Poset P P Q
+      ( f)
+      ( id-supremum-preserving-hom-Poset P l5) ＝
+    f
+  right-unit-law-comp-supremum-preserving-hom-Poset f =
+    eq-htpy-supremum-preserving-hom-Poset P Q
+      ( comp-supremum-preserving-hom-Poset P P Q
+        ( f)
+        ( id-supremum-preserving-hom-Poset P l5))
       ( f)
       ( refl-htpy)
 ```
@@ -311,23 +328,35 @@ module _
   {l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
   (P : Poset l1 l2) (Q : Poset l3 l4)
   (R : Poset l5 l6) (S : Poset l7 l8)
-  (h : hom-sup-Poset R S l9)
-  (g : hom-sup-Poset Q R l9)
-  (f : hom-sup-Poset P Q l9)
+  (h : supremum-preserving-hom-Poset R S l9)
+  (g : supremum-preserving-hom-Poset Q R l9)
+  (f : supremum-preserving-hom-Poset P Q l9)
   where
 
-  associative-comp-hom-sup-Poset :
-    comp-hom-sup-Poset P Q S (comp-hom-sup-Poset Q R S h g) f ＝
-    comp-hom-sup-Poset P R S h (comp-hom-sup-Poset P Q R g f)
-  associative-comp-hom-sup-Poset =
-    eq-htpy-hom-sup-Poset P S
-      ( comp-hom-sup-Poset P Q S (comp-hom-sup-Poset Q R S h g) f)
-      ( comp-hom-sup-Poset P R S h (comp-hom-sup-Poset P Q R g f))
+  associative-comp-supremum-preserving-hom-Poset :
+    comp-supremum-preserving-hom-Poset P Q S
+      ( comp-supremum-preserving-hom-Poset Q R S h g)
+      ( f) ＝
+    comp-supremum-preserving-hom-Poset P R S
+      ( h)
+      ( comp-supremum-preserving-hom-Poset P Q R g f)
+  associative-comp-supremum-preserving-hom-Poset =
+    eq-htpy-supremum-preserving-hom-Poset P S
+      ( comp-supremum-preserving-hom-Poset P Q S
+        ( comp-supremum-preserving-hom-Poset Q R S h g)
+        ( f))
+      ( comp-supremum-preserving-hom-Poset P R S
+        ( h)
+        ( comp-supremum-preserving-hom-Poset P Q R g f))
       ( refl-htpy)
 
-  involutive-eq-associative-comp-hom-sup-Poset :
-    comp-hom-sup-Poset P Q S (comp-hom-sup-Poset Q R S h g) f ＝ⁱ
-    comp-hom-sup-Poset P R S h (comp-hom-sup-Poset P Q R g f)
-  involutive-eq-associative-comp-hom-sup-Poset =
-    involutive-eq-eq associative-comp-hom-sup-Poset
+  involutive-eq-associative-comp-supremum-preserving-hom-Poset :
+    comp-supremum-preserving-hom-Poset P Q S
+      ( comp-supremum-preserving-hom-Poset Q R S h g)
+      ( f) ＝ⁱ
+    comp-supremum-preserving-hom-Poset P R S
+      ( h)
+      ( comp-supremum-preserving-hom-Poset P Q R g f)
+  involutive-eq-associative-comp-supremum-preserving-hom-Poset =
+    involutive-eq-eq associative-comp-supremum-preserving-hom-Poset
 ```

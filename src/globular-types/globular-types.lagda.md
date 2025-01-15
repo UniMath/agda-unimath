@@ -51,6 +51,12 @@ equivalently have started by defining globular types, and then define globular
 structures on a type as binary families of globular types on it, but this is a
 special property of globular types.
 
+Every type has the structure of a globular type, where the globular structure is
+obtained from the [identity type](foundation-core.identity-types.md). The
+globular type obtained from a type `A` and its iterated identity types is called
+the
+[standard discrete reflexive globular type](globular-types.discrete-reflexive-globular-types.md).
+
 ## Definitions
 
 ### The structure of a globular type
@@ -74,7 +80,7 @@ record
 open globular-structure public
 ```
 
-#### Iterated projections for globular structures
+#### Infrastructure for globular structures
 
 ```agda
 module _
@@ -132,83 +138,182 @@ module _
 ### The type of globular types
 
 ```agda
-Globular-Type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Globular-Type l1 l2 = Σ (UU l1) (globular-structure l2)
-
-module _
-  {l1 l2 : Level} (A : Globular-Type l1 l2)
+record
+  Globular-Type
+    (l1 l2 : Level) : UU (lsuc l1 ⊔ lsuc l2)
   where
+  coinductive
+  field
+    0-cell-Globular-Type : UU l1
+    1-cell-globular-type-Globular-Type :
+      (x y : 0-cell-Globular-Type) → Globular-Type l2 l2
 
-  0-cell-Globular-Type : UU l1
-  0-cell-Globular-Type = pr1 A
+open Globular-Type public
 
-  globular-structure-0-cell-Globular-Type :
-    globular-structure l2 0-cell-Globular-Type
-  globular-structure-0-cell-Globular-Type = pr2 A
+make-Globular-Type :
+  {l1 l2 : Level} {A : UU l1} →
+  globular-structure l2 A → Globular-Type l1 l2
+0-cell-Globular-Type
+  ( make-Globular-Type {A = A} B) = A
+1-cell-globular-type-Globular-Type
+  ( make-Globular-Type B)
+  x y =
+  make-Globular-Type
+    ( globular-structure-1-cell-globular-structure B x y)
 
-  1-cell-Globular-Type : (x y : 0-cell-Globular-Type) → UU l2
-  1-cell-Globular-Type =
-    1-cell-globular-structure globular-structure-0-cell-Globular-Type
+globular-type-1-cell-globular-structure :
+  {l1 l2 : Level} {A : UU l1} (B : globular-structure l2 A) →
+  (x y : A) → Globular-Type l2 l2
+globular-type-1-cell-globular-structure B x y =
+  make-Globular-Type
+    ( globular-structure-1-cell-globular-structure B x y)
 
-  globular-structure-1-cell-Globular-Type :
-    (x y : 0-cell-Globular-Type) →
-    globular-structure l2 (1-cell-Globular-Type x y)
-  globular-structure-1-cell-Globular-Type =
-    globular-structure-1-cell-globular-structure
-      ( globular-structure-0-cell-Globular-Type)
+globular-type-2-cell-globular-structure :
+  {l1 l2 : Level} {A : UU l1} (B : globular-structure l2 A) →
+  {x y : A} (f g : 1-cell-globular-structure B x y) → Globular-Type l2 l2
+globular-type-2-cell-globular-structure B f g =
+  make-Globular-Type
+    ( globular-structure-2-cell-globular-structure B f g)
 
-  1-cell-globular-type-Globular-Type :
-    (x y : 0-cell-Globular-Type) → Globular-Type l2 l2
-  1-cell-globular-type-Globular-Type x y =
-    ( 1-cell-Globular-Type x y , globular-structure-1-cell-Globular-Type x y)
+1-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  (x y : 0-cell-Globular-Type A) → UU l2
+1-cell-Globular-Type A x y =
+  0-cell-Globular-Type (1-cell-globular-type-Globular-Type A x y)
 
-  2-cell-Globular-Type :
-    {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) → UU l2
-  2-cell-Globular-Type =
-    2-cell-globular-structure globular-structure-0-cell-Globular-Type
+2-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  (f g : 1-cell-Globular-Type A x y) → UU l2
+2-cell-Globular-Type A =
+  1-cell-Globular-Type (1-cell-globular-type-Globular-Type A _ _)
 
-  globular-structure-2-cell-Globular-Type :
-    {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) →
-    globular-structure l2 (2-cell-Globular-Type f g)
-  globular-structure-2-cell-Globular-Type =
-    globular-structure-2-cell-globular-structure
-      ( globular-structure-0-cell-Globular-Type)
+3-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  {f g : 1-cell-Globular-Type A x y}
+  (s t : 2-cell-Globular-Type A f g) → UU l2
+3-cell-Globular-Type A =
+  2-cell-Globular-Type (1-cell-globular-type-Globular-Type A _ _)
 
-  2-cell-globular-type-Globular-Type :
-    {x y : 0-cell-Globular-Type} (f g : 1-cell-Globular-Type x y) →
-    Globular-Type l2 l2
-  2-cell-globular-type-Globular-Type f g =
-    ( 2-cell-Globular-Type f g , globular-structure-2-cell-Globular-Type f g)
+4-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  {f g : 1-cell-Globular-Type A x y}
+  {s t : 2-cell-Globular-Type A f g}
+  (u v : 3-cell-Globular-Type A s t) → UU l2
+4-cell-Globular-Type A =
+  3-cell-Globular-Type (1-cell-globular-type-Globular-Type A _ _)
 
-  3-cell-Globular-Type :
-    {x y : 0-cell-Globular-Type} {f g : 1-cell-Globular-Type x y}
-    (H K : 2-cell-Globular-Type f g) → UU l2
-  3-cell-Globular-Type =
-    3-cell-globular-structure globular-structure-0-cell-Globular-Type
+5-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  {f g : 1-cell-Globular-Type A x y}
+  {s t : 2-cell-Globular-Type A f g}
+  {u v : 3-cell-Globular-Type A s t}
+  (α β : 4-cell-Globular-Type A u v) → UU l2
+5-cell-Globular-Type A =
+  4-cell-Globular-Type (1-cell-globular-type-Globular-Type A _ _)
 
-  4-cell-Globular-Type :
-    {x y : 0-cell-Globular-Type} {f g : 1-cell-Globular-Type x y}
-    {H K : 2-cell-Globular-Type f g} (α β : 3-cell-Globular-Type H K) → UU l2
-  4-cell-Globular-Type =
-    4-cell-globular-structure globular-structure-0-cell-Globular-Type
-```
+2-cell-globular-type-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  (f g : 1-cell-Globular-Type A x y) → Globular-Type l2 l2
+2-cell-globular-type-Globular-Type A =
+  1-cell-globular-type-Globular-Type (1-cell-globular-type-Globular-Type A _ _)
 
-## Examples
+3-cell-globular-type-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  {f g : 1-cell-Globular-Type A x y}
+  (s t : 2-cell-Globular-Type A f g) → Globular-Type l2 l2
+3-cell-globular-type-Globular-Type A =
+  1-cell-globular-type-Globular-Type (2-cell-globular-type-Globular-Type A _ _)
 
-### The globular structure on a type given by its identity types
+4-cell-globular-type-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  {f g : 1-cell-Globular-Type A x y}
+  {s t : 2-cell-Globular-Type A f g}
+  (u v : 3-cell-Globular-Type A s t) → Globular-Type l2 l2
+4-cell-globular-type-Globular-Type A =
+  1-cell-globular-type-Globular-Type (3-cell-globular-type-Globular-Type A _ _)
 
-```agda
-globular-structure-Id : {l : Level} (A : UU l) → globular-structure l A
-globular-structure-Id A =
-  λ where
-  .1-cell-globular-structure x y →
-    x ＝ y
-  .globular-structure-1-cell-globular-structure x y →
-    globular-structure-Id (x ＝ y)
+5-cell-globular-type-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  {f g : 1-cell-Globular-Type A x y}
+  {s t : 2-cell-Globular-Type A f g}
+  {u v : 3-cell-Globular-Type A s t}
+  (α β : 4-cell-Globular-Type A u v) → Globular-Type l2 l2
+5-cell-globular-type-Globular-Type A =
+  1-cell-globular-type-Globular-Type (4-cell-globular-type-Globular-Type A _ _)
+
+globular-structure-0-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2) →
+  globular-structure l2 (0-cell-Globular-Type A)
+1-cell-globular-structure
+  ( globular-structure-0-cell-Globular-Type A) =
+  1-cell-Globular-Type A
+globular-structure-1-cell-globular-structure
+  ( globular-structure-0-cell-Globular-Type A) x y =
+  globular-structure-0-cell-Globular-Type
+    ( 1-cell-globular-type-Globular-Type A x y)
+
+globular-structure-1-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2) (x y : 0-cell-Globular-Type A) →
+  globular-structure l2 (1-cell-Globular-Type A x y)
+globular-structure-1-cell-Globular-Type A x y =
+  globular-structure-0-cell-Globular-Type
+    ( 1-cell-globular-type-Globular-Type A x y)
+
+globular-structure-2-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  (f g : 1-cell-Globular-Type A x y) →
+  globular-structure l2 (2-cell-Globular-Type A f g)
+globular-structure-2-cell-Globular-Type A =
+  globular-structure-1-cell-Globular-Type
+    ( 1-cell-globular-type-Globular-Type A _ _)
+
+globular-structure-3-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  {f g : 1-cell-Globular-Type A x y}
+  (s t : 2-cell-Globular-Type A f g) →
+  globular-structure l2 (3-cell-Globular-Type A s t)
+globular-structure-3-cell-Globular-Type A =
+  globular-structure-2-cell-Globular-Type
+    ( 1-cell-globular-type-Globular-Type A _ _)
+
+globular-structure-4-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  {f g : 1-cell-Globular-Type A x y}
+  {s t : 2-cell-Globular-Type A f g}
+  (u v : 3-cell-Globular-Type A s t) →
+  globular-structure l2 (4-cell-Globular-Type A u v)
+globular-structure-4-cell-Globular-Type A =
+  globular-structure-3-cell-Globular-Type
+    ( 1-cell-globular-type-Globular-Type A _ _)
+
+globular-structure-5-cell-Globular-Type :
+  {l1 l2 : Level} (A : Globular-Type l1 l2)
+  {x y : 0-cell-Globular-Type A}
+  {f g : 1-cell-Globular-Type A x y}
+  {s t : 2-cell-Globular-Type A f g}
+  {u v : 3-cell-Globular-Type A s t}
+  (α β : 4-cell-Globular-Type A u v) →
+  globular-structure l2 (5-cell-Globular-Type A α β)
+globular-structure-5-cell-Globular-Type A =
+  globular-structure-4-cell-Globular-Type
+    ( 1-cell-globular-type-Globular-Type A _ _)
 ```
 
 ## See also
 
+- [Discrete reflexive globular types](globular-types.discrete-reflexive-globular-types.md)
 - [Reflexive globular types](globular-types.reflexive-globular-types.md)
+- [Superglobular types](globular-types.superglobular-types.md)
 - [Symmetric globular types](globular-types.symmetric-globular-types.md)
 - [Transitive globular types](globular-types.transitive-globular-types.md)

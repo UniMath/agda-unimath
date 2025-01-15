@@ -27,7 +27,8 @@ An
 {{#concept "inhabited chain" Disambiguation="in a preorder" Agda=inhabited-chain-Preorder}}
 in a [preorder](order-theory.preorders.md) `P` is a
 [subtype](foundation-core.subtypes.md) `S` of `P` such that the ordering of `P`
-restricted to `S` is [linear](order-theory.total-preorders.md).
+restricted to `S` is [linear](order-theory.total-preorders.md) and
+[inhabited](foundation.inhabited-types.md).
 
 ## Definitions
 

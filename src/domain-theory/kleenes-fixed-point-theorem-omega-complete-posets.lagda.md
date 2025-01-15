@@ -46,9 +46,9 @@ open import order-theory.upper-bounds-posets
 states that given an
 [ω-continuous](domain-theory.omega-continuous-maps-omega-complete-posets.md)
 endomap `f : 𝒜 → 𝒜` on an
-[ω-complete poset](domain-theoryomega-complete-posets.md) `𝒜`, then for every
+[ω-complete poset](domain-theory.omega-complete-posets.md) `𝒜`, then for every
 `x ∈ 𝒜` such that `x ≤ f x`, the ω-transfinite application of `f` to `x`,
-`f^ω(x)`, given that it exists, is a
+`f^ω(x)`, which exists by ω-completeness, is a
 [fixed point](foundation.fixed-points-endofunctions.md) of `f`:
 
 ```text
@@ -264,10 +264,10 @@ module _
       ( F)
 ```
 
-### Kleene's least fixed point theorem for order preserving endomaps on posets with a bottom element
+### Kleene's least fixed point theorem for order preserving endomaps on ω-complete posets with a bottom element
 
-If `𝒜` has a bottom element, then Kleene's fixed point construction gives a
-least fixed point of `f`.
+If `𝒜` has a bottom element, then Kleene's fixed point construction on this
+element gives a least fixed point of `f`.
 
 ```agda
 module _

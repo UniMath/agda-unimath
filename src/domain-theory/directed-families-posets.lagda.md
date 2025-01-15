@@ -35,18 +35,18 @@ A
 in a [poset](order-theory.posets.md) `P` consists of an
 [inhabited type](foundation.inhabited-types.md) `I` and a map `x : I → P` such
 that for any two elements `i j : I` there
-[exists](foundaiton.existential-quantification.md) an element `k : I` such that
+[exists](foundation.existential-quantification.md) an element `k : I` such that
 both `x i ≤ x k` and `x j ≤ x k` hold.
 
 ## Definitions
 
-### The predicate on a family of being directed
+### The predicate on a family of elements in a poset of being directed
 
 ```agda
-is-directed-family-Poset-Prop :
+is-directed-prop-family-Poset :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
   (x : type-Inhabited-Type I → type-Poset P) → Prop (l2 ⊔ l3)
-is-directed-family-Poset-Prop P I x =
+is-directed-prop-family-Poset P I x =
   ∀'
     ( type-Inhabited-Type I)
     ( λ i →
@@ -60,10 +60,10 @@ is-directed-family-Poset-Prop P I x =
 is-directed-family-Poset :
   {l1 l2 l3 : Level} (P : Poset l1 l2) (I : Inhabited-Type l3)
   (α : type-Inhabited-Type I → type-Poset P) → UU (l2 ⊔ l3)
-is-directed-family-Poset P I x = type-Prop (is-directed-family-Poset-Prop P I x)
+is-directed-family-Poset P I x = type-Prop (is-directed-prop-family-Poset P I x)
 ```
 
-### The type of directed families in a poset
+### The type of directed families of elements in a poset
 
 ```agda
 directed-family-Poset :
@@ -100,84 +100,7 @@ module _
   is-directed-family-directed-family-Poset = pr2 (pr2 x)
 ```
 
-### Reindexing directed families in a poset
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (x : directed-family-Poset l3 P)
-  {I : UU l4} (f : I ↠ type-directed-family-Poset P x)
-  where
-
-  type-reindex-directed-family-Poset : UU l4
-  type-reindex-directed-family-Poset = I
-
-  is-inhabited-type-reindex-directed-family-Poset :
-    is-inhabited type-reindex-directed-family-Poset
-  is-inhabited-type-reindex-directed-family-Poset =
-    is-inhabited-surjects-onto f (is-inhabited-type-directed-family-Poset P x)
-
-  inhabited-type-reindex-directed-family-Poset : Inhabited-Type l4
-  inhabited-type-reindex-directed-family-Poset =
-    type-reindex-directed-family-Poset ,
-    is-inhabited-type-reindex-directed-family-Poset
-
-  family-reindex-directed-family-Poset :
-    type-reindex-directed-family-Poset → type-Poset P
-  family-reindex-directed-family-Poset =
-    family-directed-family-Poset P x ∘ map-surjection f
-
-  abstract
-    is-directed-family-reindex-directed-family-Poset :
-      is-directed-family-Poset P
-        inhabited-type-reindex-directed-family-Poset
-        family-reindex-directed-family-Poset
-    is-directed-family-reindex-directed-family-Poset u v =
-      elim-exists
-        ( exists-structure-Prop type-reindex-directed-family-Poset _)
-        (λ z y →
-          rec-trunc-Prop
-            ( exists-structure-Prop type-reindex-directed-family-Poset _)
-            ( λ p →
-              intro-exists
-                ( pr1 p)
-                ( concatenate-leq-eq-Poset P
-                    ( pr1 y)
-                    ( ap (family-directed-family-Poset P x) (inv (pr2 p))) ,
-                  concatenate-leq-eq-Poset P
-                    ( pr2 y)
-                    ( ap (family-directed-family-Poset P x) (inv (pr2 p)))))
-            ( is-surjective-map-surjection f z))
-        ( is-directed-family-directed-family-Poset P x
-          ( map-surjection f u)
-          ( map-surjection f v))
-
-  reindex-directed-family-Poset : directed-family-Poset l4 P
-  reindex-directed-family-Poset =
-    inhabited-type-reindex-directed-family-Poset ,
-    family-reindex-directed-family-Poset ,
-    is-directed-family-reindex-directed-family-Poset
-```
-
-### Reindexing directed families in a poset by an equivalence
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (x : directed-family-Poset l3 P)
-  {I : UU l4}
-  where
-
-  reindex-equiv-directed-family-Poset :
-    I ≃ type-directed-family-Poset P x → directed-family-Poset l4 P
-  reindex-equiv-directed-family-Poset f =
-    reindex-directed-family-Poset P x (surjection-equiv f)
-
-  reindex-inv-equiv-directed-family-Poset :
-    type-directed-family-Poset P x ≃ I → directed-family-Poset l4 P
-  reindex-inv-equiv-directed-family-Poset f =
-    reindex-directed-family-Poset P x (surjection-inv-equiv f)
-```
-
-### Mapping directed families in a poset under an order preserving map
+### The action of order preserving maps on directed families
 
 ```agda
 module _

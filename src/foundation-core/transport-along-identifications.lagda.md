@@ -39,6 +39,47 @@ tr B refl b = b
 
 ## Properties
 
+### The dependent action of a family of maps over a map on identifications in the base type
+
+```agda
+tr-ap :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
+  (f : A → C) (g : (x : A) → B x → D (f x))
+  {x y : A} (p : x ＝ y) (z : B x) →
+  tr D (ap f p) (g x z) ＝ g y (tr B p z)
+tr-ap f g refl z = refl
+```
+
+### Every family of maps preserves transport
+
+```agda
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  (f : (i : I) → A i → B i)
+  where
+
+  preserves-tr :
+    {i j : I} (p : i ＝ j) (x : A i) →
+    f j (tr A p x) ＝ tr B p (f i x)
+  preserves-tr refl x = refl
+
+  compute-preserves-tr :
+    {i j : I} (p : i ＝ j) (x : A i) →
+    preserves-tr p x ＝
+    inv (tr-ap id f p x) ∙ ap (λ q → tr B q (f i x)) (ap-id p)
+  compute-preserves-tr refl x = refl
+```
+
+### Substitution law for transport
+
+```agda
+substitution-law-tr :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (B : A → UU l3) (f : X → A)
+  {x y : X} (p : x ＝ y) {x' : B (f x)} →
+  tr B (ap f p) x' ＝ tr (B ∘ f) p x'
+substitution-law-tr B f p {x'} = tr-ap f (λ _ → id) p x'
+```
+
 ### Transport preserves concatenation of identifications
 
 ```agda
@@ -70,34 +111,12 @@ module _
   eq-transpose-tr' refl q = q
 ```
 
-### Every family of maps preserves transport
-
-```agda
-preserves-tr :
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (f : (i : I) → A i → B i)
-  {i j : I} (p : i ＝ j) (x : A i) →
-  f j (tr A p x) ＝ tr B p (f i x)
-preserves-tr f refl x = refl
-```
-
-### Transporting along the action on identifications of a function
-
-```agda
-tr-ap :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
-  (f : A → C) (g : (x : A) → B x → D (f x))
-  {x y : A} (p : x ＝ y) (z : B x) →
-  tr D (ap f p) (g x z) ＝ g y (tr B p z)
-tr-ap f g refl z = refl
-```
-
 ### Computing maps out of identity types as transports
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {a : A}
-  (f : (x : A) → (a ＝ x) → B x)
+  (f : (x : A) → a ＝ x → B x)
   where
 
   compute-map-out-of-identity-type :
@@ -110,7 +129,7 @@ module _
 ```agda
 tr-Id-left :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
-  tr (_＝ a) q p ＝ (inv q ∙ p)
+  tr (_＝ a) q p ＝ inv q ∙ p
 tr-Id-left refl p = refl
 ```
 
@@ -119,16 +138,6 @@ tr-Id-left refl p = refl
 ```agda
 tr-Id-right :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
-  tr (a ＝_) q p ＝ (p ∙ q)
+  tr (a ＝_) q p ＝ p ∙ q
 tr-Id-right refl p = inv right-unit
-```
-
-### Substitution law for transport
-
-```agda
-substitution-law-tr :
-  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (B : A → UU l3) (f : X → A)
-  {x y : X} (p : x ＝ y) {x' : B (f x)} →
-  tr B (ap f p) x' ＝ tr (B ∘ f) p x'
-substitution-law-tr B f refl = refl
 ```

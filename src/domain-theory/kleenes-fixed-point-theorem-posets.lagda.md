@@ -42,10 +42,9 @@ open import order-theory.upper-bounds-posets
 {{#concept "Kleene's fixed point theorem" Disambiguation="posets" WD="Kleene fixed-point theorem" WDID=Q3527263}}
 states that given an
 [ω-continuous](domain-theory.omega-continuous-maps-posets.md) endomap
-`f : 𝒜 → 𝒜` on a [poset](domain-theory.posets.md) `𝒜`, then for every `x ∈ 𝒜`
-such that `x ≤ f x`, the ω-transfinite application of `f` to `x`,`f^ω(x)`, given
-that it exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of
-`f`:
+`f : 𝒜 → 𝒜` on a [poset](order-theory.posets.md) `𝒜`, then for every `x ∈ 𝒜`
+such that `x ≤ f x`, the ω-transfinite application of `f` to `x`,`f^ω(x)`, if it
+exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of `f`:
 
 ```text
   x ≤ f(x) ≤ f²(x) ≤ … ≤ fⁿ(x) ≤ … ≤ f^ω(x) = f(^fω(x)) = ….
@@ -54,8 +53,8 @@ that it exists, is a [fixed point](foundation.fixed-points-endofunctions.md) of
 If `𝒜` has a [bottom element](order-theory.bottom-elements-posets.md) `⊥`, then
 this construction applied to `⊥` gives a least fixed point of `f`.
 
-**Duality.** Of course, since the structure of posets is self-dual, there is a
-dual Kleene's fixed point theorem that, for every ω-cocontinuous endomap `f` and
+**Duality.** Since the structure of posets is self-dual, there is a dual
+Kleene's fixed point theorem that, for every ω-cocontinuous endomap `f` and
 point `y ∈ 𝒜`, if `f(y) ≤ y`, then the ω-transfinite application of `f` to `y`,
 `f^ω(y)`, given that it exists, gives a fixed point of `f`:
 
@@ -274,8 +273,8 @@ module _
 
 ### Kleene's least fixed point theorem for order preserving endomaps on posets with a bottom element
 
-If `𝒜` has a bottom element, then Kleene's fixed point construction gives a
-least fixed point of `f`.
+If `𝒜` has a bottom element, then Kleene's fixed point construction applied to
+this element gives a least fixed point of `f`.
 
 ```agda
 module _
@@ -329,8 +328,8 @@ module _
 
 ### Kleene's least fixed point theorem for order preserving endomaps on posets with a bottom element
 
-If `𝒜` has a bottom element, then Kleene's fixed point construction gives a
-least fixed point of `f`.
+If `𝒜` has a bottom element, then Kleene's fixed point construction applied to
+this element gives a least fixed point of `f`.
 
 ```agda
 module _

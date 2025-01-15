@@ -14,16 +14,15 @@ open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
-open import foundation.identity-types
 open import foundation.double-negation
 open import foundation.empty-types
-open import foundation.truncations
-open import foundation.precomposition-functions
 open import foundation.evaluation-functions
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.irrefutable-propositions
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.precomposition-functions
 open import foundation.propositional-truncations
 open import foundation.retracts-of-types
 open import foundation.truncation-levels
@@ -58,18 +57,21 @@ constructive mathematics. The odd one out is
   ¬ (P ∧ Q) ⇒ (¬ P) ∨ (¬ Q).
 ```
 
-Indeed, this law would imply that we could constructively decide from a proof
-that neither `P` nor `Q` is true, one of `P` and `Q` that is false. This logical
-law is what we refer to as [De Morgan's Law](logic.de-morgans-law.md). If a type
-`P` is such that for every other type `Q`, the De Morgan implication
+Indeed, this would state that we could constructively deduce from a proof that
+not both of `P` and `Q` are true, which of `P` and `Q` that is false. This
+logical law is what we refer to as [De Morgan's Law](logic.de-morgans-law.md).
+If a type `P` is such that for every other type `Q`, _the De Morgan implication_
 
 ```text
   ¬ (P ∧ Q) ⇒ (¬ P) ∨ (¬ Q)
 ```
 
-holds, we say `P` is {{#concept "De Morgan" Disambiguation="type"}}.
+holds, we say `P` is
+{{#concept "De Morgan" Disambiguation="type" Agda=is-de-morgan Agda=De-Morgan-Type Agda=satisfies-de-morgans-law-type}}.
 
-Equivalently, a type is De Morgan iff its negation is decidable. Since this is a
+Equivalently, a type is De Morgan [iff](foundation.logical-equivalences.md) its
+[negation](foundation-core.negation.md) is
+[decidable](foundation.decidable-types.md). Since this is a
 [small](foundation.small-types.md) condition, it is frequently more convenient
 to use and is what we take as the main definition.
 
@@ -184,9 +186,10 @@ module _
     ({l' : Level} (B : UU l') → ¬ (A × B) → ¬ A + ¬ B) → is-de-morgan A
   is-de-morgan-satisfies-de-morgans-law' H = H (¬ A) (λ f → pr2 f (pr1 f))
 
-  is-merely-decidable-neg-satisfies-de-morgan :
+  is-merely-decidable-neg-satisfies-de-morgans-law :
     satisfies-de-morgans-law-type A → is-merely-decidable (¬ A)
-  is-merely-decidable-neg-satisfies-de-morgan H = H (¬ A) (λ f → pr2 f (pr1 f))
+  is-merely-decidable-neg-satisfies-de-morgans-law H =
+    H (¬ A) (λ f → pr2 f (pr1 f))
 
   is-de-morgan-satisfies-de-morgans-law :
     satisfies-de-morgans-law-type A → is-de-morgan A

@@ -60,8 +60,8 @@ module _
       ( λ y →
         edge-Undirected-Graph H
           ( standard-unordered-pair (vertex-equiv-Undirected-Graph G H e x) y))
-      ( equiv-vertex-equiv-Undirected-Graph G H e)
-      ( equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph
+      ( vertex-equiv-equiv-Undirected-Graph G H e)
+      ( edge-equiv-standard-unordered-pair-vertices-equiv-Undirected-Graph
           G H e x)
 
   neighbor-equiv-Undirected-Graph :

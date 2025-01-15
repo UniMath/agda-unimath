@@ -51,7 +51,7 @@ pr2 (pr2 ℕ-Decidable-Total-Order) = is-decidable-leq-ℕ
 
 ## Properties
 
-### Defining order preserving maps out of the natural numbers by induction
+### Maps out of the natural numbers that preserve order by induction
 
 ```agda
 module _

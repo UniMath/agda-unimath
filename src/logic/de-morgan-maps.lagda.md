@@ -57,10 +57,9 @@ the [negation](foundation-core.negation.md) of its
 [fibers](foundation-core.fibers-of-maps.md) are
 [decidable](foundation.decidable-types.md). I.e., the map `f : A → B` is De
 Morgan if for every `y : B`, the fiber `fiber f y` is either
-[empty](foundation.empty-types.md) or
-[irrefutable](foundation.irrefutable-propositions.md). This is equivalent to
-asking that the fibers satisfy [De Morgan's law](logic.de-morgans-law.md), but
-is a [small](foundation.small-types.md) condition.
+[empty](foundation.empty-types.md) or not empty. This is equivalent to asking
+that the fibers satisfy [De Morgan's law](logic.de-morgans-law.md), but is a
+[small](foundation.small-types.md) condition.
 
 ## Definintion
 
@@ -85,12 +84,23 @@ module _
 ### The type of De Morgan maps
 
 ```agda
+infix 5 _→ᵈᵐ_
+
+_→ᵈᵐ_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+A →ᵈᵐ B = Σ (A → B) (is-de-morgan-map)
+
+de-morgan-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+de-morgan-map = _→ᵈᵐ_
+
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A →ᵈᵐ B)
   where
 
-  de-morgan-map : UU (l1 ⊔ l2)
-  de-morgan-map = Σ (A → B) (is-de-morgan-map)
+  map-de-morgan-map : A → B
+  map-de-morgan-map = pr1 f
+
+  is-de-morgan-de-morgan-map : is-de-morgan-map map-de-morgan-map
+  is-de-morgan-de-morgan-map = pr2 f
 ```
 
 ### Self-De-Morgan maps

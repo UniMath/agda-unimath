@@ -33,7 +33,8 @@ An
 {{#concept "inhabited chain" Disambiguation="in a poset" Agda=inhabited-chain-Poset}}
 in a [poset](order-theory.posets.md) `P` is a
 [subtype](foundation-core.subtypes.md) `S` of `P` such that the ordering of `P`
-restricted to `S` is [linear](order-theory.total-posets.md).
+restricted to `S` is [linear](order-theory.total-orders.md) and
+[inhabited](foundation.inhabited-types.md).
 
 ## Definitions
 

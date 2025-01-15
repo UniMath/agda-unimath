@@ -157,11 +157,9 @@ module _
 
   is-contr-Σ-is-prop :
     ((x : A) → is-prop (B x)) → ((x : A) → B x → a ＝ x) → is-contr (Σ A B)
-  pr1 (is-contr-Σ-is-prop p f) = pair a b
-  pr2 (is-contr-Σ-is-prop p f) (pair x y) =
-    eq-type-subtype
-      ( λ x' → pair (B x') (p x'))
-      ( f x y)
+  pr1 (is-contr-Σ-is-prop p f) = a , b
+  pr2 (is-contr-Σ-is-prop p f) (x , y) =
+    eq-type-subtype (λ x' → B x' , p x') (f x y)
 ```
 
 ### The diagonal of contractible types
