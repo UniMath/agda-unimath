@@ -46,7 +46,7 @@ statement-Cantor-Schröder-Bernstein-WLPO l1 l2 =
 
 ## Proof
 
-### The law of excluded middle implies Cantor-Schröder-Bernstein-WLPO
+### The weak limited principle of omniscience implies Cantor-Schröder-Bernstein-WLPO
 
 ```agda
 module _
