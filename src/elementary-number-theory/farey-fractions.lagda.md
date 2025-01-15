@@ -7,7 +7,8 @@ module elementary-number-theory.farey-fractions where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.integer-fractions
+-- open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
 
 open import foundation.universe-levels
 ```
@@ -67,9 +68,53 @@ mutual
       adjacent-farey-fraction (mediant-farey-fraction x y H) y
 ```
 
-### The inclusion of Farey fractions into the integer fractions
+### Unbounded Farey fractions
+
+Egbert conjectures that the type of unbounded Farey fractions is equivalent to the type of rational numbers in a canonical way.
 
 ```agda
+mutual
+
+  data
+    unbounded-farey-fraction : UU lzero
+    where
+
+    farey-integer :
+      ℤ → unbounded-farey-fraction
+
+    mediant-unbounded-farey-fraction :
+      (x y : unbounded-farey-fraction) →
+      adjacent-unbounded-farey-fraction x y → unbounded-farey-fraction
+
+  data
+    adjacent-unbounded-farey-fraction :
+      unbounded-farey-fraction → unbounded-farey-fraction → UU lzero
+    where
+
+    adjacent-farey-integer-succ :
+      (a : ℤ) →
+      adjacent-unbounded-farey-fraction
+        ( farey-integer a)
+        ( farey-integer (succ-ℤ a))
+
+    right-adjacent-mediant-unbounded-farey-fraction :
+      (x y : unbounded-farey-fraction)
+      (H : adjacent-unbounded-farey-fraction x y) →
+      adjacent-unbounded-farey-fraction
+        ( x)
+        ( mediant-unbounded-farey-fraction x y H)
+
+    left-adjacent-mediant-unbounded-farey-fraction :
+      (x y : unbounded-farey-fraction)
+      (H : adjacent-unbounded-farey-fraction x y) →
+      adjacent-unbounded-farey-fraction
+        ( mediant-unbounded-farey-fraction x y H)
+        ( y)
+```
+
+### The inclusion of Farey fractions into the integer fractions
+
+```text
 integer-fraction-farey-fraction :
   farey-fraction → fraction-ℤ
 integer-fraction-farey-fraction = ?
