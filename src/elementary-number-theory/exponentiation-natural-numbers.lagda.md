@@ -15,18 +15,25 @@ open import elementary-number-theory.commutative-semiring-of-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.strictly-inflationary-functions-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.products-of-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
+open import elementary-number-theory.strong-induction-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
+open import foundation.decidable-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
+open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import order-theory.order-preserving-maps-posets
 open import order-theory.strict-order-preserving-maps
@@ -38,23 +45,53 @@ open import order-theory.strict-order-preserving-maps
 
 The {{#concept "exponential" Agda=exp-ℕ WD="exponentiation" WDID=Q33456}} $m^n$
 of two [natural numbers](elementary-number-theory.natural-numbers.md) is the
-number obtained by multiplying $m$ with itself $n$ times.
+number obtained by multiplying $m$ with itself $n$ times. We use the following terminology in our formalization and naming scheme:
+
+- The number $m^n$ is the **$n$th power** of $m$.
+- The number $m^n$ is an **exponential**.
+- The number $n$ in $m^n$ is called the **exponent** of the exponential.
+- The number $m$ in $m^n$ is the **base** of the exponential.
+- The operation $m,n \mapsto m^n$ is called **exponentiation**.
+- The function $n \mapsto m^n$ is the **exponentiation function** with base $m$.
+- The function $m \mapsto m^n$ is the **$n$th power function**. Specific instances are [squaring](elementary-number-theory.squares-natural-numbers.md) and [cubing](elementary-number-theory.cubes-natural-numbers.md).
 
 The natural numbers satisfy Tarski's high school arithmetic laws for exponentiation.
 
 ## Definition
 
-### Exponentiation of natural numbers
+### Powers of natural numbers
+
+The function `power-ℕ n : ℕ → ℕ` defines $n$th power of a natural number $m$.
 
 ```agda
 power-ℕ : ℕ → ℕ → ℕ
 power-ℕ = power-Commutative-Semiring ℕ-Commutative-Semiring
+```
 
+### The predicate of being an $n$th power
+
+```agda
+is-power-ℕ : ℕ → ℕ → UU lzero
+is-power-ℕ m n = fiber (power-ℕ n) m
+```
+
+### Exponentiation of natural numbers
+
+The function `exp-ℕ : ℕ → ℕ → ℕ` defines the exponentiation map $m,n \mapsto m^n$. Note that this is just the power function, with the order of its arguments swapped.
+
+```agda
 exp-ℕ : ℕ → ℕ → ℕ
 exp-ℕ m n = power-ℕ n m
 
 infixr 45 _^ℕ_
 _^ℕ_ = exp-ℕ
+```
+
+### The predicate of being an exponential of a given natural number
+
+```agda
+is-exponential-ℕ : ℕ → ℕ → UU lzero
+is-exponential-ℕ m n = fiber (exp-ℕ m) n
 ```
 
 ## Properties
@@ -212,6 +249,8 @@ is-zero-exponent-is-one-exp-ℕ m zero-ℕ H K =
 is-zero-exponent-is-one-exp-ℕ m (succ-ℕ n) H p =
   ex-falso
     ( neq-le-ℕ
+      ( 1)
+      ( m ^ℕ n *ℕ m)
       ( concatenate-leq-le-ℕ 1
         ( m ^ℕ n)
         ( m ^ℕ n *ℕ m)
@@ -302,4 +341,66 @@ preserves-strict-order-exponent-exp-ℕ m H (succ-ℕ n) (succ-ℕ k) K =
       ( is-nonzero-le-ℕ 1 m H)
       ( preserves-strict-order-exponent-exp-ℕ m H n k K))
     ( inv (exp-succ-ℕ m k))
+```
+
+### The function $n \mapsto m^n$ is strictly inflationary for any $1<m$
+
+```agda
+is-strictly-inflationary-exp-ℕ :
+  (m : ℕ) → 1 <-ℕ m → is-strictly-inflationary-ℕ (m ^ℕ_)
+is-strictly-inflationary-exp-ℕ m H zero-ℕ = star
+is-strictly-inflationary-exp-ℕ m H (succ-ℕ n) = {!!}
+```
+
+n + 1 < m^n + 1 ≤ m^{n+1}
+
+### The exponential function $n \mapsto m^n$ if a decidable function for any $m$
+
+```agda
+leq-one-exp-zero-ℕ :
+  (n : ℕ) → exp-ℕ 0 n ≤-ℕ 1
+leq-one-exp-zero-ℕ zero-ℕ = refl-leq-ℕ 1
+leq-one-exp-zero-ℕ (succ-ℕ n) =
+  concatenate-eq-leq-ℕ 1
+    ( exp-succ-ℕ 0 n ∙ right-zero-law-mul-ℕ (0 ^ℕ n))
+    ( star)
+
+is-decidable-map-exp-zero-ℕ :
+  is-decidable-map (exp-ℕ 0)
+is-decidable-map-exp-zero-ℕ zero-ℕ =
+  inl (1 , refl)
+is-decidable-map-exp-zero-ℕ (succ-ℕ zero-ℕ) =
+  inl (0 , refl)
+is-decidable-map-exp-zero-ℕ (succ-ℕ (succ-ℕ n)) =
+  inr
+    ( λ (k , p) →
+      concatenate-eq-leq-ℕ 1 (inv p) (leq-one-exp-zero-ℕ k))
+
+is-decidable-map-exp-one-ℕ :
+  is-decidable-map (exp-ℕ 1)
+is-decidable-map-exp-one-ℕ n =
+  rec-coproduct
+    ( λ p → inl (0 , p))
+    ( λ H → inr (λ (k , p) → H (inv (annihilation-law-exp-ℕ k) ∙ p)))
+    ( has-decidable-equality-ℕ 1 n)
+
+is-decidable-map-exp-ℕ :
+  (m : ℕ) → is-decidable-map (exp-ℕ m)
+is-decidable-map-exp-ℕ zero-ℕ zero-ℕ =
+  inl (1 , refl)
+is-decidable-map-exp-ℕ (succ-ℕ m) zero-ℕ =
+  inr
+    ( λ (k , p) →
+      neq-le-ℕ 0
+        ( succ-ℕ m ^ℕ k)
+        ( le-zero-exp-ℕ (succ-ℕ m) k star)
+        ( inv p))
+is-decidable-map-exp-ℕ zero-ℕ (succ-ℕ zero-ℕ) =
+  inl (0 , refl)
+is-decidable-map-exp-ℕ zero-ℕ (succ-ℕ (succ-ℕ n)) =
+  inr
+    ( λ (k , p) →
+      concatenate-eq-leq-ℕ 1 (inv p) (leq-one-exp-zero-ℕ k))
+is-decidable-map-exp-ℕ (succ-ℕ m) (succ-ℕ n) =
+  {!!}
 ```

@@ -134,9 +134,9 @@ irreflexive-le-ℕ (succ-ℕ n) = irreflexive-le-ℕ n
 ### If `x < y` then `x ≠ y`
 
 ```agda
-neq-le-ℕ : {m n : ℕ} → m <-ℕ n → m ≠ n
-neq-le-ℕ {zero-ℕ} {succ-ℕ n} H = is-nonzero-succ-ℕ n ∘ inv
-neq-le-ℕ {succ-ℕ m} {succ-ℕ n} H p = neq-le-ℕ H (is-injective-succ-ℕ p)
+neq-le-ℕ : (m n : ℕ) → m <-ℕ n → m ≠ n
+neq-le-ℕ zero-ℕ (succ-ℕ n) H = is-nonzero-succ-ℕ n ∘ inv
+neq-le-ℕ (succ-ℕ m) (succ-ℕ n) H p = neq-le-ℕ m n H (is-injective-succ-ℕ p)
 ```
 
 ### The strict inequality on the natural numbers is antisymmetric

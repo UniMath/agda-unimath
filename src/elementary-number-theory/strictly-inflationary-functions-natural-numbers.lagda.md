@@ -9,16 +9,22 @@ module
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.decidable-types
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import order-theory.inflationary-maps-strictly-ordered-types
+
+open import univalent-combinatorics.dependent-pair-types
 ```
 
 </details>
@@ -80,14 +86,20 @@ is-inflationary-strictly-inflationary-map-ℕ f n =
     ( is-strictly-inflationary-strictly-inflationary-map-ℕ f n)
 ```
 
-### Being a value of a strictly inflationary map is decidable
+### Strictly inflationary maps are decidable
 
 ```agda
 is-decidable-fiber-strictly-inflationary-map-ℕ :
   (f : strictly-inflationary-map-ℕ) →
-  is-decidable-fam (fiber-strictly-inflationary-map-ℕ f)
-is-decidable-fiber-strictly-inflationary-map-ℕ = {!!}
+  is-decidable-map (map-strictly-inflationary-map-ℕ f)
+is-decidable-fiber-strictly-inflationary-map-ℕ (f , H) n =
+  is-decidable-iff
+    ( λ (x , K , p) → (x , p))
+    ( λ (x , p) → (x , concatenate-le-eq-ℕ x (f x) n (H x) p , p))
+    ( is-decidable-strictly-bounded-Σ-ℕ' n
+      ( λ x → f x ＝ n)
+      ( λ x → has-decidable-equality-ℕ (f x) n))
 ```
 
-### For any strictly inflationary map $f$ with $f(0) \leq b$, there is a maximal number $k$ such that $f(k) \leq b$
+
 

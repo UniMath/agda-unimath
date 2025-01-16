@@ -7,9 +7,12 @@ module elementary-number-theory.farey-fractions where
 <details><summary>Imports</summary>
 
 ```agda
--- open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.integers
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.identity-types
 open import foundation.universe-levels
 ```
 
@@ -31,7 +34,13 @@ The Farey fractions ℱ can be inductively generated mutually with a binary rela
   𝓁 : (x y : ℱ) (r : ℛ x y) → ℛ (𝓂 x y r) y
 ```
 
-The operation $m$ returns the {{#concept "mediant" Disambiguation="Farey fractions"}} of two adjacent Farey fractions.
+The operation $m$ returns the {{#concept "mediant" Disambiguation="Farey fractions"}} of two adjacent Farey fractions. The elements $0$ and $1$ in the type of Farey fractions represent the Farey fractions $0/1$ and $1/1$. Given two adjacent Farey fractions representing $a/b$ and $c/d$, the mediant of $a/b$ and $c/d$ is the Farey fraction representing
+
+$$
+  \frac{a+c}{b+d}.
+$$
+
+The mediant of any two adjacent Farey fractions representing reduced fractions $a/b$ and $c/d$ represents again a reduced fraction. 
 
 Farey fractions appear in Chapter 3 of {{#cite HW08}}, but they are covered in more detail in Chapter 6 of {{#cite NZM}}. 
 
@@ -68,57 +77,92 @@ mutual
       adjacent-farey-fraction (mediant-farey-fraction x y H) y
 ```
 
-### Unbounded Farey fractions
-
-Egbert conjectures that the type of unbounded Farey fractions is equivalent to the type of rational numbers in a canonical way.
-
-```agda
-mutual
-
-  data
-    unbounded-farey-fraction : UU lzero
-    where
-
-    farey-integer :
-      ℤ → unbounded-farey-fraction
-
-    mediant-unbounded-farey-fraction :
-      (x y : unbounded-farey-fraction) →
-      adjacent-unbounded-farey-fraction x y → unbounded-farey-fraction
-
-  data
-    adjacent-unbounded-farey-fraction :
-      unbounded-farey-fraction → unbounded-farey-fraction → UU lzero
-    where
-
-    adjacent-farey-integer-succ :
-      (a : ℤ) →
-      adjacent-unbounded-farey-fraction
-        ( farey-integer a)
-        ( farey-integer (succ-ℤ a))
-
-    right-adjacent-mediant-unbounded-farey-fraction :
-      (x y : unbounded-farey-fraction)
-      (H : adjacent-unbounded-farey-fraction x y) →
-      adjacent-unbounded-farey-fraction
-        ( x)
-        ( mediant-unbounded-farey-fraction x y H)
-
-    left-adjacent-mediant-unbounded-farey-fraction :
-      (x y : unbounded-farey-fraction)
-      (H : adjacent-unbounded-farey-fraction x y) →
-      adjacent-unbounded-farey-fraction
-        ( mediant-unbounded-farey-fraction x y H)
-        ( y)
-```
-
 ### The inclusion of Farey fractions into the integer fractions
 
-```text
-integer-fraction-farey-fraction :
-  farey-fraction → fraction-ℤ
-integer-fraction-farey-fraction = ?
+```agda
+numerator-farey-fraction :
+  farey-fraction → ℕ
+numerator-farey-fraction zero-farey-fraction =
+  0
+numerator-farey-fraction one-farey-fraction =
+  1
+numerator-farey-fraction (mediant-farey-fraction x y H) =
+  numerator-farey-fraction x +ℕ numerator-farey-fraction y
+
+denominator-farey-fraction :
+  farey-fraction → ℕ
+denominator-farey-fraction zero-farey-fraction =
+  1
+denominator-farey-fraction one-farey-fraction =
+  1
+denominator-farey-fraction (mediant-farey-fraction x y H) =
+  denominator-farey-fraction x +ℕ denominator-farey-fraction y
 ```
+
+## Properties
+
+### Any two adjacent Farey fractions $a/b$ and $c/d$ satisfy $bc = ad + 1$
+
+Equivalently, two adjacent Farey fractions $a/b$ and $c/d$ satisfy the relation
+
+$$
+  bc - ad = 1.
+$$
+
+This is also known as the **characteristic property of adjacent Farey fractions**.
+
+```agda
+characteristic-property-adjacent-farey-fraction :
+  (x y : farey-fraction) (r : adjacent-farey-fraction x y) →
+  denominator-farey-fraction x *ℕ numerator-farey-fraction y ＝
+  numerator-farey-fraction x *ℕ denominator-farey-fraction y +ℕ 1
+characteristic-property-adjacent-farey-fraction ._ ._
+  adjacent-zero-one-farey-fraction =
+  refl
+characteristic-property-adjacent-farey-fraction x ._
+  ( right-adjacent-mediant-farey-fraction .x y r) =
+  left-distributive-mul-add-ℕ
+    ( denominator-farey-fraction x)
+    ( numerator-farey-fraction x)
+    ( numerator-farey-fraction y) ∙
+  ap-add-ℕ
+    ( commutative-mul-ℕ
+      ( denominator-farey-fraction x)
+      ( numerator-farey-fraction x))
+    ( characteristic-property-adjacent-farey-fraction x y r) ∙
+  ap
+    ( succ-ℕ)
+    ( inv
+      ( left-distributive-mul-add-ℕ
+        ( numerator-farey-fraction x)
+        ( denominator-farey-fraction x)
+        ( denominator-farey-fraction y)))
+characteristic-property-adjacent-farey-fraction ._ y
+  ( left-adjacent-mediant-farey-fraction x .y r) =
+  right-distributive-mul-add-ℕ
+    ( denominator-farey-fraction x)
+    ( denominator-farey-fraction y)
+    ( numerator-farey-fraction y) ∙
+  ap-add-ℕ
+    ( characteristic-property-adjacent-farey-fraction x y r)
+    ( commutative-mul-ℕ
+      ( denominator-farey-fraction y)
+      ( numerator-farey-fraction y)) ∙
+  left-successor-law-add-ℕ
+    ( numerator-farey-fraction x *ℕ denominator-farey-fraction y)
+    ( numerator-farey-fraction y *ℕ denominator-farey-fraction y) ∙
+  ap
+    ( succ-ℕ)
+    ( inv
+      ( right-distributive-mul-add-ℕ
+        ( numerator-farey-fraction x)
+        ( numerator-farey-fraction y)
+        ( denominator-farey-fraction y)))
+```
+
+## See also
+
+- [Unbounded Farey fractions](elementary-number-theory.unbounded-farey-fractions.md)
 
 ## References
 

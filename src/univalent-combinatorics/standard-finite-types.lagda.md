@@ -258,9 +258,19 @@ is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inl y} p =
   ap inl (is-injective-nat-Fin k p)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inr star} p =
-  ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin k x) p)
+  ex-falso
+    ( neq-le-ℕ
+      ( nat-Fin k x)
+      ( nat-Fin (succ-ℕ k) (inr star))
+      ( strict-upper-bound-nat-Fin k x)
+      ( p))
 is-injective-nat-Fin (succ-ℕ k) {inr star} {inl y} p =
-  ex-falso (neq-le-ℕ (strict-upper-bound-nat-Fin k y) (inv p))
+  ex-falso
+    ( neq-le-ℕ
+      ( nat-Fin (succ-ℕ k) (inl y))
+      ( nat-Fin (succ-ℕ k) (inr star))
+      ( strict-upper-bound-nat-Fin k y)
+      ( inv p))
 is-injective-nat-Fin (succ-ℕ k) {inr star} {inr star} p =
   refl
 
