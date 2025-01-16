@@ -225,6 +225,58 @@ module _
     ap (tr B' (H a)) (F a) ∙ apd sB (H a)
 
 module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {A' : A → UU l3} {B' : B → UU l4}
+  {f g : A → B}
+  (H : f ~ g)
+  {f' : {a : A} → A' a → B' (f a)}
+  {g' : {a : A} → A' a → B' (g a)}
+  (H' : htpy-over B' H f' g')
+  (sA : (a : A) → A' a)
+  (sB : (b : B) → B' b)
+  (F : section-map-over f f' sA sB)
+  (G : section-map-over g g' sA sB)
+  where
+
+  inv-section-htpy-over :
+    section-htpy-over H H' sA sB F G →
+    section-htpy-over
+      ( inv-htpy H)
+      ( inv-htpy-over B' H f' g' H')
+      ( sA)
+      ( sB)
+      ( G)
+      ( F)
+  inv-section-htpy-over α =
+    ind-htpy f
+      ( λ g H →
+        {g' : {a : A} → A' a → B' (g a)} →
+        (H' : htpy-over B' H f' g') →
+        (G : section-map-over g g' sA sB) →
+        section-htpy-over H H' sA sB F G →
+        section-htpy-over
+          ( inv-htpy H)
+          ( inv-htpy-over B' H f' g' H')
+          sA sB G F)
+      ( λ H' G α a →
+        ind-htpy f'
+          ( λ g'a H'a →
+            (Ga : g'a (sA a) ＝ sB (f a)) →
+            (αa : H'a (sA a) ∙ Ga ＝ ap (tr B' refl) (F a) ∙ apd sB refl) →
+            map-eq-transpose-equiv-inv (equiv-tr B' refl) (inv (H'a (sA a))) ∙ F a ＝
+            ap (tr B' refl) Ga ∙ apd sB refl)
+          ( λ Ga αa →
+            ap (_∙ F a) (compute-refl-eq-transpose-equiv-inv (equiv-tr B' refl)) ∙
+            inv (right-unit ∙ ap-id _ ∙ (αa ∙ right-unit ∙ ap-id _)))
+          ( H')
+          ( G a)
+          ( α a))
+      ( H)
+      ( H')
+      ( G)
+      ( α)
+
+module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   {A' : A → UU l5} {B' : B → UU l6} {C' : C → UU l7} {D' : D → UU l8}
@@ -487,6 +539,27 @@ module _
     H' (sA a) ∙ G a ＝
     ap (tr X' (H a) ∘ m') (F a) ∙ ap (tr X' (H a)) (M (f a)) ∙ apd sX (H a)
 
+
+  open import foundation.functoriality-dependent-function-types
+  equiv-get-section-triangle-over' :
+    (H : coherence-triangle-maps' g m f) →
+    (H' : htpy-over X' H (m' ∘ f') g') →
+    section-triangle-over' H H' ≃
+    section-htpy-over H H' sA sX
+      ( comp-section-map-over m f m' f' sA sB sX M F)
+      ( G)
+  equiv-get-section-triangle-over' H H' =
+    equiv-Π-equiv-family
+      ( λ a →
+        equiv-concat'
+          ( H' (sA a) ∙ G a)
+          ( ap
+            ( _∙ apd sX (H a))
+            ( ( ap
+                ( _∙ ap (tr X' (H a)) (M (f a)))
+                ( ap-comp (tr X' (H a)) m' (F a))) ∙
+              ( inv (ap-concat (tr X' (H a)) (ap m' (F a)) (M (f a)))))))
+
   unget-section-triangle-over' :
     (H : coherence-triangle-maps' g m f) →
     (H' : htpy-over X' H (m' ∘ f') g') →
@@ -494,15 +567,18 @@ module _
     section-htpy-over H H' sA sX
       ( comp-section-map-over m f m' f' sA sB sX M F)
       ( G)
-  unget-section-triangle-over' H H' α =
-    α ∙h
-    ( λ a →
-      ap
-        ( _∙ apd sX (H a))
-        ( ( ap
-            ( _∙ ap (tr X' (H a)) (M (f a)))
-            ( ap-comp (tr X' (H a)) m' (F a))) ∙
-          ( inv (ap-concat (tr X' (H a)) (ap m' (F a)) (M (f a))))))
+  unget-section-triangle-over' H H' =
+    map-equiv (equiv-get-section-triangle-over' H H')
+
+  get-section-triangle-over' :
+    (H : coherence-triangle-maps' g m f) →
+    (H' : htpy-over X' H (m' ∘ f') g') →
+    section-htpy-over H H' sA sX
+      ( comp-section-map-over m f m' f' sA sB sX M F)
+      ( G) →
+    section-triangle-over' H H'
+  get-section-triangle-over' H H' =
+    map-inv-equiv (equiv-get-section-triangle-over' H H')
 
   -- actually ≐ section-triangle-over 🤔
   -- section-triangle-over-inv :
@@ -1637,10 +1713,26 @@ module _
           ( λ p → mid n {p})
           ( inv-htpy (λ p → bottom1 n {p}))
           ( λ p → bottom2 n {p})
-          ( {!inv-htpy-over!})
+          ( inv-htpy-over QAn (λ p → bottom1 n {p}) g'n (m'n ∘ f'n) (top1 n))
           ( top2 n)
-          ( {!!})
-          ( {!!})
+          ( get-section-triangle-over' fn gn mn f'n g'n m'n sAn sBn sAn
+            ( λ p → left n {p})
+            ( λ p → far n {p})
+            ( λ p → mid n {p})
+            ( inv-htpy (λ p → bottom1 n {p}))
+            ( inv-htpy-over QAn (λ p → bottom1 n {p}) g'n (m'n ∘ f'n) (top1 n))
+            ( inv-section-htpy-over
+              ( λ p → bottom1 n {p})
+              ( top1 n)
+              sAn sAn _ _
+              (unget-section-triangle-over fn gn mn f'n g'n m'n sAn sBn sAn
+                ( λ p → left n {p})
+                ( λ p → far n {p})
+                ( λ p → mid n {p})
+                ( λ p → bottom1 n {p})
+                ( top1 n)
+                ( prism1 n))))
+          ( prism2 n)
 
     KS-in-diagram :
       (s : spanning-type-span-diagram 𝒮) (n : ℕ) →
