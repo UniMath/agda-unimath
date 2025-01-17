@@ -1,7 +1,7 @@
 # The zigzag construction of identity types of pushouts
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --lossy-unification --allow-unsolved-metas #-}
 
 module synthetic-homotopy-theory.zigzag-construction-identity-type-pushouts where
 ```
@@ -52,6 +52,7 @@ open import synthetic-homotopy-theory.sections-descent-data-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.zigzags-sequential-diagrams
 
+open import synthetic-homotopy-theory.functoriality-stuff
 open import synthetic-homotopy-theory.stuff-over
 ```
 
@@ -1113,6 +1114,31 @@ module _
        ∙ ap (tr (vertices.QBn s) (sides.bottom s n)) (sides.near s n)
        ∙ apd (vertices.sBn s) (sides.bottom s n)
     KS-in-diagram = cube.cube
+
+    alt-ind-coherence :
+      (s : spanning-type-span-diagram 𝒮)
+      (p : left-id-pushout 𝒮 a₀ (left-map-span-diagram 𝒮 s)) →
+      {!!}
+      -- map-family-descent-data-pushout R _ (pr1 ind-singleton-zigzag-id-pushout' (left-map-span-diagram 𝒮 s , p)) ＝
+      -- pr1 (pr2 ind-singleton-zigzag-id-pushout') (right-map-span-diagram 𝒮 s , concat-s-inf 𝒮 a₀ s p)
+    alt-ind-coherence s p =
+      big-thm.thm
+        ( up-standard-sequential-colimit)
+        ( up-shift-cocone-sequential-diagram 1 up-standard-sequential-colimit)
+        ( hom-diagram-zigzag-sequential-diagram
+            ( zigzag-sequential-diagram-zigzag-id-pushout 𝒮 a₀ s))
+        ( ev-pair
+          ( left-family-descent-data-pushout R)
+          ( left-map-span-diagram 𝒮 s))
+        ( ev-pair
+          ( right-family-descent-data-pushout R)
+          ( right-map-span-diagram 𝒮 s))
+        ( λ {p} → map-family-descent-data-pushout R (s , p))
+        ( {!!})
+        ( {!!})
+        ( {!!})
+        ( {!!})
+        ( p)
 
   is-identity-system-zigzag-id-pushout :
     is-identity-system-descent-data-pushout
