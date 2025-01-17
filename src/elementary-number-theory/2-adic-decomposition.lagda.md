@@ -12,6 +12,7 @@ open import elementary-number-theory.based-strong-induction-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.largest-power-divisors-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
@@ -24,6 +25,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.split-surjective-maps
 open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -74,6 +76,10 @@ module _
   index-odd-factor-2-adic-decomposition-ℕ : ℕ
   index-odd-factor-2-adic-decomposition-ℕ = pr1 (pr2 d)
 
+  odd-factor-2-adic-decomposition-ℕ : ℕ
+  odd-factor-2-adic-decomposition-ℕ =
+    odd-number-ℕ index-odd-factor-2-adic-decomposition-ℕ
+
   eq-2-adic-decomposition-ℕ :
     2-adic-composition-ℕ
       valuation-2-adic-decomposition-ℕ
@@ -121,77 +127,91 @@ pr2 (pr2 (2-adic-decomposition-is-odd-ℕ n H)) =
 
 ### Every nonzero natural number has a $2$-adic decomposition
 
-The proof is by [based strong induction](elementary-number-theory.based-strong-induction-natural-numbers.md).
-We have already seen that every odd natural number has a $2$-adic expansion.
-If $1 \leq x$ is an even number, then write $x = 2 \cdot y$. Given a $2$-adic decomposition $(k , l)$ of the number $y$, it follows that $(k + 1 , l)$ is a $2$-adic decomposition of $x$, because
-
-$$
-  2^{k+1}(2l + 1) = 2(2^k(2l + 1)) = 2*y = x.
-$$
-
-```text
+```agda
 module _
-  (x : ℕ) (H : 1 ≤-ℕ x)
-  (f :
-    based-□-≤-ℕ 1 (λ y → is-even-ℕ y + is-odd-ℕ y → 2-adic-decomposition-ℕ y) x)
-  (K@(q , p) : is-even-ℕ (succ-ℕ x))
+  (n : ℕ) (H : 1 ≤-ℕ n)
   where
-
-  2-adic-decomposition-quotient-even-case-2-adic-decomposition-is-even-or-odd-ℕ :
-    2-adic-decomposition-ℕ q
-  2-adic-decomposition-quotient-even-case-2-adic-decomposition-is-even-or-odd-ℕ =
-    f ( q)
-      ( leq-one-quotient-div-ℕ 2 (succ-ℕ x) K (leq-zero-ℕ x))
-      ( upper-bound-quotient-is-even-succ-ℕ x K)
-      ( is-decidable-is-even-ℕ q)
-
-  exponent-even-case-2-adic-decomposition-is-even-or-odd-ℕ :
+  
+  valuation-2-adic-decomposition-nat-ℕ :
     ℕ
-  exponent-even-case-2-adic-decomposition-is-even-or-odd-ℕ =
-    succ-ℕ
-      ( valuation-2-adic-decomposition-ℕ
-        ( q)
-        ( 2-adic-decomposition-quotient-even-case-2-adic-decomposition-is-even-or-odd-ℕ))
+  valuation-2-adic-decomposition-nat-ℕ =
+    valuation-largest-power-divisor-ℕ 2 n star H
   
-  even-case-2-adic-decomposition-is-even-or-odd-ℕ :
-    2-adic-decomposition-ℕ (succ-ℕ x)
-  even-case-2-adic-decomposition-is-even-or-odd-ℕ =
-    ( succ-ℕ (pr1 d) , pr1 (pr2 d) , {!!})
-    where
+  div-exp-valuation-2-adic-decomposition-nat-ℕ :
+    div-ℕ (2 ^ℕ valuation-2-adic-decomposition-nat-ℕ) n
+  div-exp-valuation-2-adic-decomposition-nat-ℕ =
+    div-exp-valuation-largest-power-divisor-ℕ 2 n star H
 
-    d =
-      f ( q)
-        ( leq-one-quotient-div-ℕ 2 (succ-ℕ x) K (leq-zero-ℕ x))
-        {!!}
-        {!!}
-  
-2-adic-decomposition-is-even-or-odd-ℕ :
-  (n : ℕ) → 1 ≤-ℕ n → is-even-ℕ n + is-odd-ℕ n →
-  2-adic-decomposition-ℕ n
-2-adic-decomposition-is-even-or-odd-ℕ =
-  based-strong-ind-ℕ 1
-    ( λ x → (is-even-ℕ x + is-odd-ℕ x) → 2-adic-decomposition-ℕ x)
-    ( rec-coproduct
-      ( λ H → ex-falso (is-odd-one-ℕ H))
-      ( 2-adic-decomposition-is-odd-ℕ 1))
-    ( λ x H f →
-      rec-coproduct
-        ( even-case-2-adic-decomposition-is-even-or-odd-ℕ x H f
-          {-
-          λ K@(q , p) →
-          let
-          
-          L : 2-adic-decomposition-ℕ q
-d          L =
-            f ( q)
-              ( leq-one-quotient-div-ℕ 2 (succ-ℕ x) K (leq-zero-ℕ x))
-              {! upper-bound-quotient-div-ℕ 2 (succ-ℕ x) K!}
-              {!!}
-          in
-          {!f q (leq-one-quotient-div-ℕ 2 (succ-ℕ x) K (leq-zero-ℕ x)) ? ?!}
-          -})
-        ( 2-adic-decomposition-is-odd-ℕ (succ-ℕ x)))
+  is-upper-bound-valuation-2-adic-decomposition-nat-ℕ :
+    (k : ℕ) → div-ℕ (2 ^ℕ k) n → k ≤-ℕ valuation-2-adic-decomposition-nat-ℕ
+  is-upper-bound-valuation-2-adic-decomposition-nat-ℕ =
+    is-upper-bound-valuation-largest-power-divisor-ℕ 2 n star H
+
+  odd-factor-2-adic-decomposition-nat-ℕ :
+    ℕ
+  odd-factor-2-adic-decomposition-nat-ℕ =
+    quotient-div-ℕ
+      ( 2 ^ℕ valuation-2-adic-decomposition-nat-ℕ)
+      ( n)
+      ( div-exp-valuation-2-adic-decomposition-nat-ℕ)
+
+  is-odd-odd-factor-2-adic-decomposition-nat-ℕ :
+    is-odd-ℕ odd-factor-2-adic-decomposition-nat-ℕ
+  is-odd-odd-factor-2-adic-decomposition-nat-ℕ K =
+    neg-succ-leq-ℕ
+      ( valuation-2-adic-decomposition-nat-ℕ)
+      ( is-upper-bound-valuation-2-adic-decomposition-nat-ℕ
+        ( succ-ℕ valuation-2-adic-decomposition-nat-ℕ)
+        ( tr
+          ( is-divisor-ℕ n)
+          ( inv (exp-succ-ℕ 2 valuation-2-adic-decomposition-nat-ℕ))
+          ( div-div-quotient-div-ℕ 2 n
+            ( 2 ^ℕ valuation-2-adic-decomposition-nat-ℕ)
+            ( div-exp-valuation-2-adic-decomposition-nat-ℕ)
+            ( K))))
+
+  has-odd-expansion-odd-factor-2-adic-decomposition-nat-ℕ :
+    has-odd-expansion-ℕ odd-factor-2-adic-decomposition-nat-ℕ
+  has-odd-expansion-odd-factor-2-adic-decomposition-nat-ℕ =
+    has-odd-expansion-is-odd-ℕ
+      odd-factor-2-adic-decomposition-nat-ℕ
+      is-odd-odd-factor-2-adic-decomposition-nat-ℕ
+
+  index-odd-factor-2-adic-decomposition-nat-ℕ :
+    ℕ
+  index-odd-factor-2-adic-decomposition-nat-ℕ =
+    pr1 has-odd-expansion-odd-factor-2-adic-decomposition-nat-ℕ
+
+  eq-index-odd-factor-2-adic-decomposition-nat-ℕ :
+    odd-number-ℕ index-odd-factor-2-adic-decomposition-nat-ℕ ＝
+    odd-factor-2-adic-decomposition-nat-ℕ
+  eq-index-odd-factor-2-adic-decomposition-nat-ℕ =
+    pr2 has-odd-expansion-odd-factor-2-adic-decomposition-nat-ℕ
+
+  eq-2-adic-decomposition-nat-ℕ :
+    2-adic-composition-ℕ
+      ( valuation-2-adic-decomposition-nat-ℕ)
+      ( index-odd-factor-2-adic-decomposition-nat-ℕ) ＝
+    n
+  eq-2-adic-decomposition-nat-ℕ =
+    ( ap
+      ( 2 ^ℕ valuation-2-adic-decomposition-nat-ℕ *ℕ_)
+      ( eq-index-odd-factor-2-adic-decomposition-nat-ℕ)) ∙
+    ( eq-quotient-div-ℕ'
+      ( 2 ^ℕ valuation-2-adic-decomposition-nat-ℕ)
+      ( n)
+      ( div-exp-valuation-2-adic-decomposition-nat-ℕ))
+
+  2-adic-decomposition-nat-ℕ :
+    2-adic-decomposition-ℕ n
+  pr1 2-adic-decomposition-nat-ℕ =
+    valuation-2-adic-decomposition-nat-ℕ
+  pr1 (pr2 2-adic-decomposition-nat-ℕ) =
+    index-odd-factor-2-adic-decomposition-nat-ℕ
+  pr2 (pr2 2-adic-decomposition-nat-ℕ) =
+    eq-2-adic-decomposition-nat-ℕ
 ```
+
 
 ```text
 pair-expansion : ℕ → UU lzero

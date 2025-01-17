@@ -111,6 +111,13 @@ module _
   pr2 (div-bounded-div-ℕ H) = eq-quotient-bounded-div-ℕ m n H
 ```
 
+### The predicate of being a divisor of a natural number
+
+```agda
+is-divisor-ℕ : ℕ → ℕ → UU lzero
+is-divisor-ℕ n x = div-ℕ x n
+```
+
 ## Properties
 
 ### If `n` is divisible by a number `m` with proof of divisibility `(q , p)`, then `n` is divisible by the number `q`.

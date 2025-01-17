@@ -24,6 +24,7 @@ open import elementary-number-theory.strong-induction-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.decidable-embeddings
 open import foundation.decidable-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -37,6 +38,8 @@ open import foundation.universe-levels
 
 open import order-theory.order-preserving-maps-posets
 open import order-theory.strict-order-preserving-maps
+
+open import univalent-combinatorics.finite-maps
 ```
 
 </details>
@@ -347,14 +350,40 @@ preserves-strict-order-exponent-exp-ℕ m H (succ-ℕ n) (succ-ℕ k) K =
 
 ```agda
 is-strictly-inflationary-exp-ℕ :
-  (m : ℕ) → 1 <-ℕ m → is-strictly-inflationary-ℕ (m ^ℕ_)
+  (m : ℕ) → 1 <-ℕ m → is-strictly-inflationary-map-ℕ (m ^ℕ_)
 is-strictly-inflationary-exp-ℕ m H zero-ℕ = star
-is-strictly-inflationary-exp-ℕ m H (succ-ℕ n) = {!!}
+is-strictly-inflationary-exp-ℕ m H (succ-ℕ zero-ℕ) = H
+is-strictly-inflationary-exp-ℕ m H (succ-ℕ (succ-ℕ n)) =
+  concatenate-leq-le-leq-ℕ
+    ( succ-ℕ (succ-ℕ n))
+    ( succ-ℕ n *ℕ 2)
+    ( m ^ℕ succ-ℕ n *ℕ 2)
+    ( m ^ℕ succ-ℕ (succ-ℕ n))
+    ( concatenate-leq-eq-ℕ
+      ( n +ℕ 2)
+      ( preserves-order-add-ℕ
+        { succ-ℕ n}
+        { succ-ℕ n *ℕ 1}
+        { 1}
+        { succ-ℕ n}
+        ( leq-eq-ℕ
+          ( succ-ℕ n)
+          ( succ-ℕ n *ℕ 1)
+          ( inv (right-unit-law-mul-ℕ (succ-ℕ n))))
+        ( leq-zero-ℕ n))
+      ( inv (right-successor-law-mul-ℕ (succ-ℕ n) 1)))
+    ( preserves-strict-order-right-mul-ℕ 2
+      ( succ-ℕ n)
+      ( m ^ℕ succ-ℕ n)
+      ( is-nonzero-succ-ℕ 1)
+      ( is-strictly-inflationary-exp-ℕ m H (succ-ℕ n)))
+    ( concatenate-leq-eq-ℕ
+      ( m ^ℕ succ-ℕ n *ℕ 2)
+      ( preserves-order-right-mul-ℕ (m ^ℕ succ-ℕ n) 2 m (leq-succ-le-ℕ 1 m H))
+      ( inv (exp-succ-ℕ m (succ-ℕ n))))
 ```
 
-n + 1 < m^n + 1 ≤ m^{n+1}
-
-### The exponential function $n \mapsto m^n$ if a decidable function for any $m$
+### The exponential function $n \mapsto m^n$ if a decidable function
 
 ```agda
 leq-one-exp-zero-ℕ :
@@ -386,21 +415,29 @@ is-decidable-map-exp-one-ℕ n =
 
 is-decidable-map-exp-ℕ :
   (m : ℕ) → is-decidable-map (exp-ℕ m)
-is-decidable-map-exp-ℕ zero-ℕ zero-ℕ =
-  inl (1 , refl)
-is-decidable-map-exp-ℕ (succ-ℕ m) zero-ℕ =
-  inr
-    ( λ (k , p) →
-      neq-le-ℕ 0
-        ( succ-ℕ m ^ℕ k)
-        ( le-zero-exp-ℕ (succ-ℕ m) k star)
-        ( inv p))
-is-decidable-map-exp-ℕ zero-ℕ (succ-ℕ zero-ℕ) =
-  inl (0 , refl)
-is-decidable-map-exp-ℕ zero-ℕ (succ-ℕ (succ-ℕ n)) =
-  inr
-    ( λ (k , p) →
-      concatenate-eq-leq-ℕ 1 (inv p) (leq-one-exp-zero-ℕ k))
-is-decidable-map-exp-ℕ (succ-ℕ m) (succ-ℕ n) =
-  {!!}
+is-decidable-map-exp-ℕ zero-ℕ =
+  is-decidable-map-exp-zero-ℕ
+is-decidable-map-exp-ℕ (succ-ℕ zero-ℕ) =
+  is-decidable-map-exp-one-ℕ
+is-decidable-map-exp-ℕ (succ-ℕ (succ-ℕ m)) =
+  is-decidable-map-is-strictly-inflationary-map-ℕ
+    ( is-strictly-inflationary-exp-ℕ (succ-ℕ (succ-ℕ m)) star)
+```
+
+### The exponential function is a decidable embedding if its base is strictly greater than $1$
+
+```agda
+is-decidable-emb-exp-ℕ :
+  (m : ℕ) → 1 <-ℕ m → is-decidable-emb (exp-ℕ m)
+pr1 (is-decidable-emb-exp-ℕ m H) = is-emb-exp-ℕ m H
+pr2 (is-decidable-emb-exp-ℕ m H) = is-decidable-map-exp-ℕ m
+```
+
+### The exponential function is a finite map if its base is strictly greater than $1$
+
+```agda
+is-finite-map-exp-ℕ :
+  (m : ℕ) → 1 <-ℕ m → is-finite-map (exp-ℕ m)
+is-finite-map-exp-ℕ m H =
+  is-finite-map-is-decidable-emb (is-decidable-emb-exp-ℕ m H)
 ```

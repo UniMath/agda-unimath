@@ -12,7 +12,10 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
+open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.negation
 open import foundation.universe-levels
 ```
 
@@ -34,7 +37,7 @@ The Farey fractions ℱ can be inductively generated mutually with a binary rela
   𝓁 : (x y : ℱ) (r : ℛ x y) → ℛ (𝓂 x y r) y
 ```
 
-The operation $m$ returns the {{#concept "mediant" Disambiguation="Farey fractions"}} of two adjacent Farey fractions. The elements $0$ and $1$ in the type of Farey fractions represent the Farey fractions $0/1$ and $1/1$. Given two adjacent Farey fractions representing $a/b$ and $c/d$, the mediant of $a/b$ and $c/d$ is the Farey fraction representing
+The operation $m$ returns the {{#concept "mediant" Disambiguation="Farey fractions" Agda=mediant-farey-fraction}} of two adjacent Farey fractions. The elements $0$ and $1$ in the type of Farey fractions represent the Farey fractions $0/1$ and $1/1$. Given two adjacent Farey fractions representing $a/b$ and $c/d$, the mediant of $a/b$ and $c/d$ is the Farey fraction representing
 
 $$
   \frac{a+c}{b+d}.
@@ -158,6 +161,26 @@ characteristic-property-adjacent-farey-fraction ._ y
         ( numerator-farey-fraction x)
         ( numerator-farey-fraction y)
         ( denominator-farey-fraction y)))
+```
+
+### There is no adjacency from any Farey fraction to $0$
+
+```agda
+not-adjacent-zero-farey-fraction :
+  (x : farey-fraction) → ¬ adjacent-farey-fraction x zero-farey-fraction
+not-adjacent-zero-farey-fraction ._
+  ( left-adjacent-mediant-farey-fraction x ._ r) = 
+  not-adjacent-zero-farey-fraction x r
+```
+
+### There is no adjacency from $1$ to any Farey fraction
+
+```agda
+not-adjacent-one-farey-fraction :
+  (x : farey-fraction) → ¬ adjacent-farey-fraction one-farey-fraction x
+not-adjacent-one-farey-fraction
+  ( mediant-farey-fraction one-farey-fraction y s) r =
+  not-adjacent-one-farey-fraction y s
 ```
 
 ## See also

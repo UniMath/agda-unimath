@@ -263,6 +263,11 @@ concatenate-le-leq-ℕ :
 concatenate-le-leq-ℕ zero-ℕ (succ-ℕ y) (succ-ℕ z) H K = star
 concatenate-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) H K =
   concatenate-le-leq-ℕ x y z H K
+
+concatenate-leq-le-leq-ℕ :
+  (w x y z : ℕ) → w ≤-ℕ x → x <-ℕ y → y ≤-ℕ z → w <-ℕ z
+concatenate-leq-le-leq-ℕ w x y z H K L =
+  concatenate-leq-le-ℕ w x z H (concatenate-le-leq-ℕ x y z K L)
 ```
 
 ### If `m < n` then `n ≰ m`
@@ -555,6 +560,26 @@ preserves-strict-order-right-mul-ℕ :
 preserves-strict-order-right-mul-ℕ k x y H =
   preserves-strict-order-right-mul-is-successor-ℕ k x y
     ( is-successor-is-nonzero-ℕ H)
+```
+
+### Multiplying with a nonzero element is an inflationary function
+
+```agda
+is-inflationary-left-mul-ℕ :
+  (k n : ℕ) → is-nonzero-ℕ k → n ≤-ℕ k *ℕ n
+is-inflationary-left-mul-ℕ k n H =
+  concatenate-eq-leq-ℕ
+    ( k *ℕ n)
+    ( inv (left-unit-law-mul-ℕ n))
+    ( preserves-order-left-mul-ℕ n 1 k (leq-one-is-nonzero-ℕ k H))
+
+is-inflationary-right-mul-ℕ :
+  (k n : ℕ) → is-nonzero-ℕ k → n ≤-ℕ n *ℕ k
+is-inflationary-right-mul-ℕ k n H =
+  concatenate-leq-eq-ℕ
+    ( n)
+    ( is-inflationary-left-mul-ℕ k n H)
+    ( commutative-mul-ℕ k n)
 ```
 
 ## See also

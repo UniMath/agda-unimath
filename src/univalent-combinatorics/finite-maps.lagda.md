@@ -9,6 +9,9 @@ module univalent-combinatorics.finite-maps where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.decidable-embeddings
+open import foundation.decidable-propositions
+open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.propositions
 open import foundation.universe-levels
@@ -42,4 +45,19 @@ module _
 
   is-prop-is-finite-map : is-prop is-finite-map
   is-prop-is-finite-map = is-prop-type-Prop is-finite-prop-map
+```
+
+## Properties
+
+### Decidable embeddings are finite maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-finite-map-is-decidable-emb :
+    is-decidable-emb f → is-finite-map f
+  is-finite-map-is-decidable-emb H x =
+    is-finite-is-decidable-prop (is-decidable-prop-map-is-decidable-emb H x)
 ```
