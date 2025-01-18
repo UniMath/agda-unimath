@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        agda: ['2.7.0.1']
+        agda: ['2.7.0_1']
 
     steps:
       - name: Checkout our repository
@@ -24,7 +24,7 @@ jobs:
           path: repo
 
       - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.5.0
+        uses:
         with:
           agda-version: ${{ matrix.agda }}
 
