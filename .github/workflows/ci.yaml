@@ -38,7 +38,7 @@ jobs:
         with:
           path: master
       - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.1.0
+        uses: wenkokke/setup-agda@v2.5.0
         with:
           agda-version: ${{ matrix.agda }}
 
