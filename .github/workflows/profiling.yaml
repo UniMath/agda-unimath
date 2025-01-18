@@ -28,12 +28,10 @@ jobs:
         with:
           agda-version: ${{ matrix.agda }}
 
-      - name: Agda version
-        run: agda --version
-
       - name: Typecheck library with profiling
         run: |
           cd repo
+          agda --version
           mkdir -p temp
           make check-profile 2> temp/memory-results.txt | tee temp/benchmark-results.txt
 

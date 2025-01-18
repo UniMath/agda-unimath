@@ -43,9 +43,6 @@ jobs:
         with:
           agda-version: ${{ matrix.agda }}
 
-      - name: Agda version
-        run: agda --version
-
       - uses: actions/cache/restore@v3
         id: cache-agda-formalization
         name: Restore Agda formalization cache
