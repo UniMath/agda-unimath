@@ -2,8 +2,8 @@
   description = "agda-unimath";
 
   inputs = {
-    # Unstable is needed for Agda 2.6.4, latest stable 23.05 only has 2.6.3
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Stable 24.11 has Agda 2.7.0.1
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.11";
     flake-utils.url = "github:numtide/flake-utils";
     # Nixpkgs with tested versions of mdbook crates;
     # may be removed once we backport new mdbook assets to our

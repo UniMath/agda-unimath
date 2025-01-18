@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        agda: ['2.6.4']
+        agda: ['2.7.0.1']
 
     steps:
       - name: Checkout our repository
