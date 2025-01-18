@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        agda: ['2.7.0_1']
+        agda: ['2.7.0']
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -42,6 +42,9 @@ jobs:
         uses: wenkokke/setup-agda@v2.5.0
         with:
           agda-version: ${{ matrix.agda }}
+
+      - name: Agda version
+        run: agda --version
 
       - uses: actions/cache/restore@v3
         id: cache-agda-formalization

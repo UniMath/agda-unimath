@@ -31,7 +31,7 @@ jobs:
     strategy:
       matrix:
         os: [macOS-13, ubuntu-latest]
-        agda: ['2.7.0_1']
+        agda: ['2.7.0']
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v3
@@ -41,6 +41,9 @@ jobs:
         uses: wenkokke/setup-agda@v2.5.0
         with:
           agda-version: ${{ matrix.agda }}
+
+      - name: Agda version
+        run: agda --version
 
       - uses: actions/cache/restore@v3
         id: cache-agda-formalization
