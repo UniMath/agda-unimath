@@ -45,11 +45,18 @@ module _
 
 ```agda
   refl-Eq-Σ : (s : Σ A B) → Eq-Σ s s
-  pr1 (refl-Eq-Σ (pair a b)) = refl
-  pr2 (refl-Eq-Σ (pair a b)) = refl
+  refl-Eq-Σ s = refl , refl
+
+  eq-base-eq-pair : {s t : Σ A B} → s ＝ t → pr1 s ＝ pr1 t
+  eq-base-eq-pair = ap pr1
+
+  dependent-identification-eq-pair :
+    {s t : Σ A B} (p : s ＝ t) →
+    dependent-identification B (eq-base-eq-pair p) (pr2 s) (pr2 t)
+  dependent-identification-eq-pair {s} p = tr-ap pr1 (λ x _ → pr2 x) p (pr1 s)
 
   pair-eq-Σ : {s t : Σ A B} → s ＝ t → Eq-Σ s t
-  pair-eq-Σ {s} refl = refl-Eq-Σ s
+  pair-eq-Σ p = eq-base-eq-pair p , dependent-identification-eq-pair p
 
   eq-pair-eq-base :
     {x y : A} {s : B x} (p : x ＝ y) → (x , s) ＝ (y , tr B p s)
@@ -78,11 +85,11 @@ module _
 
   is-retraction-pair-eq-Σ :
     (s t : Σ A B) → pair-eq-Σ {s} {t} ∘ eq-pair-Σ' {s} {t} ~ id {A = Eq-Σ s t}
-  is-retraction-pair-eq-Σ (pair x y) (pair .x .y) (pair refl refl) = refl
+  is-retraction-pair-eq-Σ (x , y) (.x , .y) (refl , refl) = refl
 
   is-section-pair-eq-Σ :
-    (s t : Σ A B) → ((eq-pair-Σ' {s} {t}) ∘ (pair-eq-Σ {s} {t})) ~ id
-  is-section-pair-eq-Σ (pair x y) .(pair x y) refl = refl
+    (s t : Σ A B) → eq-pair-Σ' {s} {t} ∘ pair-eq-Σ {s} {t} ~ id
+  is-section-pair-eq-Σ (x , y) .(x , y) refl = refl
 
   abstract
     is-equiv-eq-pair-Σ : (s t : Σ A B) → is-equiv (eq-pair-Σ' {s} {t})
@@ -110,14 +117,6 @@ module _
 
   η-pair : (t : Σ A B) → (pair (pr1 t) (pr2 t)) ＝ t
   η-pair t = refl
-
-  eq-base-eq-pair-Σ : {s t : Σ A B} → (s ＝ t) → (pr1 s ＝ pr1 t)
-  eq-base-eq-pair-Σ p = pr1 (pair-eq-Σ p)
-
-  dependent-eq-family-eq-pair-Σ :
-    {s t : Σ A B} → (p : s ＝ t) →
-    dependent-identification B (eq-base-eq-pair-Σ p) (pr2 s) (pr2 t)
-  dependent-eq-family-eq-pair-Σ p = pr2 (pair-eq-Σ p)
 ```
 
 ### Lifting equality to the total space
@@ -128,7 +127,7 @@ module _
   where
 
   lift-eq-Σ :
-    {x y : A} (p : x ＝ y) (b : B x) → (pair x b) ＝ (pair y (tr B p b))
+    {x y : A} (p : x ＝ y) (b : B x) → (x , b) ＝ (y , tr B p b)
   lift-eq-Σ refl b = refl
 ```
 
@@ -148,7 +147,7 @@ tr-Σ C refl z = refl
 ```agda
 tr-eq-pair-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A}
-  {B : A → UU l2} {b0 : B a0} {b1 : B a1} (C : (Σ A B) → UU l3)
+  {B : A → UU l2} {b0 : B a0} {b1 : B a1} (C : Σ A B → UU l3)
   (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) (u : C (a0 , b0)) →
   tr C (eq-pair-Σ p q) u ＝
   tr (λ x → C (a1 , x)) q (tr C (eq-pair-Σ p refl) u)

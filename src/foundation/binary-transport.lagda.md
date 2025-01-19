@@ -37,7 +37,7 @@ module _
   where
 
   binary-tr : (p : x ＝ x') (q : y ＝ y') → C x y → C x' y'
-  binary-tr p q c = tr (C _) q (tr (λ u → C u _) p c)
+  binary-tr p q c = tr (C x') q (tr (λ u → C u y) p c)
 
   is-equiv-binary-tr : (p : x ＝ x') (q : y ＝ y') → is-equiv (binary-tr p q)
   is-equiv-binary-tr refl refl = is-equiv-id

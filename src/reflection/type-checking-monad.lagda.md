@@ -161,7 +161,9 @@ postulate
   declare-data :
     Name-Agda → ℕ → Term-Agda → type-Type-Checker unit
   define-data :
-    Name-Agda → list (Name-Agda × Term-Agda) → type-Type-Checker unit
+    Name-Agda →
+    list (Name-Agda × Quantity-Argument-Agda × Term-Agda) →
+    type-Type-Checker unit
 ```
 
 ## Bindings

@@ -120,6 +120,7 @@ open import synthetic-homotopy-theory.spheres public
 open import synthetic-homotopy-theory.suspension-prespectra public
 open import synthetic-homotopy-theory.suspension-structures public
 open import synthetic-homotopy-theory.suspensions-of-pointed-types public
+open import synthetic-homotopy-theory.suspensions-of-propositions public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.tangent-spheres public
 open import synthetic-homotopy-theory.total-cocones-families-sequential-diagrams public

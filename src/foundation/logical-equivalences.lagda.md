@@ -220,6 +220,10 @@ iff-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A ≃ B) → (A ↔ B)
 pr1 (iff-equiv e) = map-equiv e
 pr2 (iff-equiv e) = map-inv-equiv e
 
+iff-equiv' : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A ≃ B) → (B ↔ A)
+pr1 (iff-equiv' e) = map-inv-equiv e
+pr2 (iff-equiv' e) = map-equiv e
+
 is-injective-iff-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-injective (iff-equiv {A = A} {B})
 is-injective-iff-equiv p = eq-htpy-equiv (pr1 (htpy-eq-iff p))
