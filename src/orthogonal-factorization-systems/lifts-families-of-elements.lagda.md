@@ -53,7 +53,7 @@ A family of elements equipped with a dependent lift is a
 elements equipped with a lift is a {{#concept "lifted family of elements"}}.
 
 To see how these families relate to
-[lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md), consider the
+[lifts of maps](orthogonal-factorization-systems.lifts-maps.md), consider the
 lifting diagram
 
 ```text
@@ -215,4 +215,4 @@ module _
 ## See also
 
 - [Double lifts of families of elements](orthogonal-factorization-systems.double-lifts-families-of-elements.md)
-- [Lifts of maps](orthogonal-factorization-systems.lifts-of-maps.md)
+- [Lifts of maps](orthogonal-factorization-systems.lifts-maps.md)

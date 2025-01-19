@@ -16,6 +16,7 @@ open import foundation.universe-levels
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
@@ -227,4 +228,15 @@ module _
   point-injection : injection unit A
   pr1 point-injection = point x
   pr2 point-injection = is-injective-point
+```
+
+### The map `point x` has a retraction for every `x`
+
+```agda
+module _
+  {l : Level} {A : UU l} (x : A)
+  where
+
+  retraction-point : retraction (point x)
+  retraction-point = terminal-map A , refl-htpy
 ```

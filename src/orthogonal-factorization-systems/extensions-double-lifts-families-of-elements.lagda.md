@@ -296,5 +296,5 @@ module _
 ## See also
 
 - [Extensions of lifts of families of elements](orthogonal-factorization-systems.extensions-lifts-families-of-elements.md)
-- [Extensions of maps](orthogonal-factorization-systems.extensions-of-maps.md)
+- [Extensions of maps](orthogonal-factorization-systems.extensions-maps.md)
 - [The universal property of the family of fibers of a map](foundation.universal-property-family-of-fibers-of-maps.md)

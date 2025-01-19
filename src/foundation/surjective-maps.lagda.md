@@ -48,7 +48,7 @@ open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 ```
 
 </details>

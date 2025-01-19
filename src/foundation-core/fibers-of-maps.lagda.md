@@ -231,9 +231,7 @@ module _
   map-fiber-pr1 ((x , y) , p) = tr B p y
 
   map-inv-fiber-pr1 : B a → fiber (pr1 {B = B}) a
-  pr1 (pr1 (map-inv-fiber-pr1 b)) = a
-  pr2 (pr1 (map-inv-fiber-pr1 b)) = b
-  pr2 (map-inv-fiber-pr1 b) = refl
+  map-inv-fiber-pr1 b = (a , b) , refl
 
   is-section-map-inv-fiber-pr1 :
     is-section map-fiber-pr1 map-inv-fiber-pr1
