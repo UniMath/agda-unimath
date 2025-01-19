@@ -327,6 +327,6 @@ module _
 - [Colax reflexive globular maps](globular-types.colax-reflexive-globular-maps.md)
 - [Lax reflexive globular maps](globular-types.lax-reflexive-globular-maps.md)
 - [Reflexive globular maps](globular-types.reflexive-globular-maps.md)
-- [Noncoherent wild higher precategories](wild-category-theory.noncoherent-wild-higher-precategories.md)
+- [Noncoherent ω-precategories](wild-category-theory.noncoherent-omega-precategories.md)
   are globular types that are both reflexive and
   [transitive](globular-types.transitive-globular-types.md).

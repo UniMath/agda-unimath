@@ -31,10 +31,8 @@ open import globular-types.large-transitive-globular-types
 open import globular-types.reflexive-globular-types
 open import globular-types.transitive-globular-types
 
-open import wild-category-theory.isomorphisms-in-noncoherent-large-wild-higher-precategories
-open import wild-category-theory.isomorphisms-in-noncoherent-wild-higher-precategories
-open import wild-category-theory.noncoherent-large-wild-higher-precategories
-open import wild-category-theory.noncoherent-wild-higher-precategories
+open import wild-category-theory.noncoherent-large-omega-precategories
+open import wild-category-theory.noncoherent-omega-precategories
 ```
 
 </details>
@@ -42,7 +40,7 @@ open import wild-category-theory.noncoherent-wild-higher-precategories
 ## Idea
 
 The
-{{#concept "wild category of types" Agda=Type-Noncoherent-Large-Wild-Higher-Precategory}}
+{{#concept "wild category of types" Agda=Type-Noncoherent-Large-ω-Precategory}}
 consists of types and [functions](foundation.dependent-function-types.md) and
 [homotopies](foundation-core.homotopies.md).
 
@@ -92,18 +90,18 @@ is-transitive-Large-Transitive-Globular-Type
   is-transitive-Type-Large-Globular-Type
 ```
 
-### The noncoherent large wild higher precategory of types
+### The noncoherent large ω-precategory of types
 
 ```agda
-Type-Noncoherent-Large-Wild-Higher-Precategory :
-  Noncoherent-Large-Wild-Higher-Precategory lsuc (_⊔_)
-large-globular-type-Noncoherent-Large-Wild-Higher-Precategory
-  Type-Noncoherent-Large-Wild-Higher-Precategory =
+Type-Noncoherent-Large-ω-Precategory :
+  Noncoherent-Large-ω-Precategory lsuc (_⊔_)
+large-globular-type-Noncoherent-Large-ω-Precategory
+  Type-Noncoherent-Large-ω-Precategory =
   Type-Large-Globular-Type
-id-structure-Noncoherent-Large-Wild-Higher-Precategory
-  Type-Noncoherent-Large-Wild-Higher-Precategory =
+id-structure-Noncoherent-Large-ω-Precategory
+  Type-Noncoherent-Large-ω-Precategory =
   is-reflexive-Type-Large-Globular-Type
-comp-structure-Noncoherent-Large-Wild-Higher-Precategory
-  Type-Noncoherent-Large-Wild-Higher-Precategory =
+comp-structure-Noncoherent-Large-ω-Precategory
+  Type-Noncoherent-Large-ω-Precategory =
   is-transitive-Type-Large-Globular-Type
 ```
