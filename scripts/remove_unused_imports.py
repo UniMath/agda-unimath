@@ -139,5 +139,5 @@ if __name__ == '__main__':
         executor.map(lambda file: process_agda_file(
             file, agda_options, root, temp_dir), sorted_agda_files)
 
-    shutil.rmtree(temp_root)
+    # shutil.rmtree(temp_root)
     sys.exit(status)

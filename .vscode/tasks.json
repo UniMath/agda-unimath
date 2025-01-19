@@ -59,12 +59,12 @@
       "problemMatcher": [],
       // "hide": true,
       "presentation": {
-        "reveal": "silent",
         "revealProblems": "onProblem",
-        "close": true
+        "close": false
       },
       "runOptions": {
-        "runOn": "default"
+        "runOn": "default",
+        "instanceLimit": 99
       }
     }
   ],

@@ -27,8 +27,9 @@ open import foundation-core.propositions
 
 ## Idea
 
-An **apartness relation** on a type `A` is a
-[relation](foundation.binary-relations.md) `R` which is
+An
+{{#concept "apartness relation" Disambiguation="types" WD="apartness relation" WDID=Q4779193 Agda=Apartness-Relation Agda=is-apartness-relation}}
+on a type `A` is a [relation](foundation.binary-relations.md) `R` which is
 
 - **Antireflexive:** For any `a : A` we have `¬ (R a a)`
 - **Symmetric:** For any `a b : A` we have `R a b → R b a`
@@ -56,7 +57,7 @@ module _
 
   is-cotransitive-Prop : Prop (l1 ⊔ l2)
   is-cotransitive-Prop =
-    ∀' A (λ a → ∀' A (λ b → ∀' A (λ c → R a b ⇒ (R a c ∨ R b c))))
+    ∀' A (λ a → ∀' A (λ b → ∀' A (λ c → R a b ⇒ (R a c) ∨ (R b c))))
 
   is-cotransitive : UU (l1 ⊔ l2)
   is-cotransitive = type-Prop is-cotransitive-Prop
