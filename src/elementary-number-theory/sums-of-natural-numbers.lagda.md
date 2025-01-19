@@ -98,7 +98,8 @@ This function defines the sum of a family of natural numbers indexed by natural
 numbers up to, and including, a given upper bound.
 
 ```agda
-bounded-sum-ℕ : (N : ℕ) → ((i : ℕ) → leq-ℕ i N → ℕ) → ℕ
+bounded-sum-ℕ :
+  (N : ℕ) → ((i : ℕ) → leq-ℕ i N → ℕ) → ℕ
 bounded-sum-ℕ zero-ℕ f =
   f 0 (refl-leq-ℕ 0)
 bounded-sum-ℕ (succ-ℕ N) f =
@@ -113,8 +114,10 @@ This function defines the sum of a family of natural numbers indexed by natural
 numbers up to, but not including, a given upper bound.
 
 ```agda
-strictly-bounded-sum-ℕ : (u : ℕ) → ((x : ℕ) → le-ℕ x u → ℕ) → ℕ
-strictly-bounded-sum-ℕ zero-ℕ f = zero-ℕ
+strictly-bounded-sum-ℕ :
+  (u : ℕ) → ((x : ℕ) → le-ℕ x u → ℕ) → ℕ
+strictly-bounded-sum-ℕ zero-ℕ f =
+  zero-ℕ
 strictly-bounded-sum-ℕ (succ-ℕ u) f =
   add-ℕ
     ( strictly-bounded-sum-ℕ u (λ x H → f x (preserves-le-succ-ℕ x u H)))

@@ -23,6 +23,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.propositions
 open import foundation.split-surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.unit-type
@@ -212,6 +213,21 @@ module _
     eq-2-adic-decomposition-nat-ℕ
 ```
 
+### If $2^km$ is a $2$-adic decomposition of a number $n$, then $2^k$ is the largest power divisor of $n$ base $2$
+
+```agda
+largest-power-divisor-2-adic-decomposition-ℕ :
+  (n : ℕ) → 2-adic-decomposition-ℕ n → {!!}
+largest-power-divisor-2-adic-decomposition-ℕ = {!!}
+```
+
+### The type of 2-adic decompositions of any natural number is a proposition
+
+```agda
+all-elements-equal-2-adic-decomposition-ℕ :
+  (n : ℕ) → all-elements-equal (2-adic-decomposition-ℕ n)
+all-elements-equal-2-adic-decomposition-ℕ n (k , m , p) (k' , m' , p') = {!!}
+```
 
 ```text
 pair-expansion : ℕ → UU lzero

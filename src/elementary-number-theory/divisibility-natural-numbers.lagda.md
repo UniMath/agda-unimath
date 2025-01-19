@@ -714,6 +714,29 @@ le-quotient-div-ℕ d x f H g =
       ( upper-bound-quotient-div-ℕ d x H))
 ```
 
+### If `m` is nonzero, then `a | b` if and only if `ma | mb`
+
+```agda
+reflects-div-left-mul-ℕ :
+  (m a b : ℕ) → is-nonzero-ℕ m → div-ℕ (m *ℕ a) (m *ℕ b) → div-ℕ a b
+pr1 (reflects-div-left-mul-ℕ m a b H K) = quotient-div-ℕ (m *ℕ a) (m *ℕ b) K
+pr2 (reflects-div-left-mul-ℕ m a b H K) =
+  is-injective-left-mul-ℕ m H
+    ( ( left-swap-mul-ℕ m
+        ( quotient-div-ℕ (m *ℕ a) (m *ℕ b) K)
+        ( a)) ∙
+      ( eq-quotient-div-ℕ (m *ℕ a) (m *ℕ b) K))
+
+reflects-div-right-mul-ℕ :
+  (m a b : ℕ) → is-nonzero-ℕ m → div-ℕ (a *ℕ m) (b *ℕ m) → div-ℕ a b
+reflects-div-right-mul-ℕ m a b H K =
+  reflects-div-left-mul-ℕ m a b H
+    ( concatenate-eq-div-eq-ℕ
+      ( commutative-mul-ℕ m a)
+      ( K)
+      ( commutative-mul-ℕ b m))
+```
+
 ## See also
 
 - [Bounded divisibility of natural numbers](elementary-number-theory.bounded-divisibility-natural-numbers.md)

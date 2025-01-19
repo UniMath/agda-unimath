@@ -18,6 +18,7 @@ open import elementary-number-theory.upper-bounds-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.universe-levels
 ```
 
@@ -34,6 +35,14 @@ The {{#concept "largest power divisor" Disambiguation="natural numbers" Agda=lar
 ```agda
 is-power-divisor-ℕ : ℕ → ℕ → ℕ → UU lzero
 is-power-divisor-ℕ m n x = is-exponential-ℕ m x × div-ℕ x n
+```
+
+### The predicate of being the largest power divisor of a natural number
+
+```agda
+is-largest-power-divisor-ℕ : ℕ → ℕ → ℕ → UU lzero
+is-largest-power-divisor-ℕ m n x =
+  (y : ℕ) → is-power-divisor-ℕ m n y ↔ div-ℕ y x
 ```
 
 ### The largest power divisor of a natural number
@@ -88,6 +97,11 @@ module _
       ( largest-power-divisor-ℕ)
       ( k)
       ( leq-div-ℕ (m ^ℕ k) n (is-nonzero-leq-one-ℕ n K) L , L)
+
+  is-largest-power-divisor-valuation-largest-power-divisor-ℕ :
+    is-largest-power-divisor-ℕ m n valuation-largest-power-divisor-ℕ
+  is-largest-power-divisor-valuation-largest-power-divisor-ℕ =
+    {!is-least-upper-bound-is-upper-bound-ℕ!}
 ```
 
 ## See also

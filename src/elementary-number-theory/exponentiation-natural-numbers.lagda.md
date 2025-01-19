@@ -12,6 +12,7 @@ open import commutative-algebra.powers-of-elements-commutative-semirings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.bounded-divisibility-natural-numbers
 open import elementary-number-theory.commutative-semiring-of-natural-numbers
+open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
@@ -95,6 +96,15 @@ _^ℕ_ = exp-ℕ
 ```agda
 is-exponential-ℕ : ℕ → ℕ → UU lzero
 is-exponential-ℕ m n = fiber (exp-ℕ m) n
+
+valuation-is-exponential-ℕ :
+  (m n : ℕ) → is-exponential-ℕ m n → ℕ
+valuation-is-exponential-ℕ m n = pr1
+
+eq-valuation-is-exponential-ℕ :
+  (m n : ℕ) (H : is-exponential-ℕ m n) →
+  exp-ℕ m (valuation-is-exponential-ℕ m n H) ＝ n
+eq-valuation-is-exponential-ℕ m n = pr2
 ```
 
 ## Properties
@@ -225,6 +235,11 @@ div-exp-succ-ℕ :
   (m n : ℕ) → div-ℕ m (m ^ℕ succ-ℕ n)
 pr1 (div-exp-succ-ℕ m n) = m ^ℕ n
 pr2 (div-exp-succ-ℕ m n) = inv (exp-succ-ℕ m n)
+
+div-exp-succ-ℕ' :
+  (m n : ℕ) → div-ℕ (m ^ℕ n) (m ^ℕ succ-ℕ n)
+pr1 (div-exp-succ-ℕ' m n) = m
+pr2 (div-exp-succ-ℕ' m n) = inv (exp-succ-ℕ' m n)
 
 div-exp-is-successor-ℕ :
   (m n : ℕ) → is-successor-ℕ n → div-ℕ m (m ^ℕ n)
@@ -440,4 +455,82 @@ is-finite-map-exp-ℕ :
   (m : ℕ) → 1 <-ℕ m → is-finite-map (exp-ℕ m)
 is-finite-map-exp-ℕ m H =
   is-finite-map-is-decidable-emb (is-decidable-emb-exp-ℕ m H)
+```
+
+### Exponentiation with base $m>1$ reflects divisibility into inequality
+
+```agda
+leq-exponent-div-exp-ℕ :
+  (m n k : ℕ) → 1 <-ℕ m → div-ℕ (m ^ℕ k) (m ^ℕ n) → k ≤-ℕ n
+leq-exponent-div-exp-ℕ m zero-ℕ zero-ℕ H K = refl-leq-ℕ 0
+leq-exponent-div-exp-ℕ m zero-ℕ (succ-ℕ k) H K =
+  neq-le-ℕ 1 m H
+    ( inv (is-one-div-one-ℕ (m ^ℕ succ-ℕ k) K) ∙
+      exp-succ-ℕ m k ∙
+      ap
+        ( λ x → m ^ℕ x *ℕ m)
+        ( is-zero-leq-zero-ℕ k
+          ( leq-exponent-div-exp-ℕ m 0 k H
+            ( transitive-div-ℕ
+              ( m ^ℕ k)
+              ( m ^ℕ succ-ℕ k)
+              ( 1)
+              ( K)
+              ( div-exp-succ-ℕ' m k)))) ∙
+      left-unit-law-mul-ℕ m)
+leq-exponent-div-exp-ℕ m (succ-ℕ n) zero-ℕ H K = leq-zero-ℕ (succ-ℕ n)
+leq-exponent-div-exp-ℕ m (succ-ℕ n) (succ-ℕ k) H K =
+  leq-exponent-div-exp-ℕ m n k H
+    ( reflects-div-right-mul-ℕ m
+      ( m ^ℕ k)
+      ( m ^ℕ n)
+      ( is-nonzero-le-ℕ 1 m H)
+      ( concatenate-eq-div-eq-ℕ (inv (exp-succ-ℕ m k)) K (exp-succ-ℕ m n)))
+```
+
+### If $m^k \mid m^n$ and $m$ is nonzero, then its quotient is $m^{d(n,k)}$
+
+In the case where $m=0$ we have $0^n \mid 0^n$. For any nonzero number $n$ this would give $0 \mid 0$. The quotient of $0$ divided by $0$ is the unique number $k \leq 0$ such that $k\cdot 0=0$, i.e., it is $0$. However, since $d(n,n)=0$ we have $m^{d(n,n)}=1$, which isn't the quotient under our definitions.
+
+
+```agda
+valuation-is-exponent-div-exp-exp-ℕ :
+  (m n k : ℕ) → is-nonzero-ℕ m → div-ℕ (m ^ℕ k) (m ^ℕ n) → ℕ
+valuation-is-exponent-div-exp-exp-ℕ m n k H K =
+  dist-ℕ n k
+
+eq-valuation-is-exponent-div-exp-exp-ℕ :
+  (m n k : ℕ) (H : is-nonzero-ℕ m) (K : div-ℕ (m ^ℕ k) (m ^ℕ n)) →
+  exp-ℕ m (valuation-is-exponent-div-exp-exp-ℕ m n k H K) ＝
+  quotient-div-ℕ (m ^ℕ k) (m ^ℕ n) K
+eq-valuation-is-exponent-div-exp-exp-ℕ zero-ℕ n k H K =
+  ex-falso (H refl)
+eq-valuation-is-exponent-div-exp-exp-ℕ (succ-ℕ zero-ℕ) n k H K =
+  annihilation-law-exp-ℕ (dist-ℕ n k) ∙
+  compute-quotient-div-ℕ
+    ( inv (annihilation-law-exp-ℕ k))
+    ( inv (annihilation-law-exp-ℕ n))
+    ( refl-div-ℕ 1)
+    ( K)
+eq-valuation-is-exponent-div-exp-exp-ℕ (succ-ℕ (succ-ℕ m)) n k H K =
+  is-injective-left-mul-ℕ
+    ( succ-ℕ (succ-ℕ m) ^ℕ k)
+    ( is-nonzero-exp-ℕ (succ-ℕ (succ-ℕ m)) k H)
+    ( inv (left-distributive-exp-add-ℕ k (dist-ℕ n k)) ∙
+      ap (succ-ℕ (succ-ℕ m) ^ℕ_) (ap (k +ℕ_) (symmetric-dist-ℕ n k) ∙
+      is-difference-dist-ℕ k n
+        ( leq-exponent-div-exp-ℕ (succ-ℕ (succ-ℕ m)) n k star K)) ∙
+      inv
+        ( eq-quotient-div-ℕ'
+          ( succ-ℕ (succ-ℕ m) ^ℕ k)
+          ( succ-ℕ (succ-ℕ m) ^ℕ n)
+          ( K)))
+
+is-exponent-div-exp-exp-ℕ :
+  (m n k : ℕ) → is-nonzero-ℕ m → (K : div-ℕ (m ^ℕ k) (m ^ℕ n)) →
+  is-exponential-ℕ m (quotient-div-ℕ (m ^ℕ k) (m ^ℕ n) K)
+pr1 (is-exponent-div-exp-exp-ℕ m n k H K) =
+  valuation-is-exponent-div-exp-exp-ℕ m n k H K
+pr2 (is-exponent-div-exp-exp-ℕ m n k H K) =
+  eq-valuation-is-exponent-div-exp-exp-ℕ m n k H K
 ```

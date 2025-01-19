@@ -60,7 +60,8 @@ module _
     (n : ℕ) → power-Semiring R (succ-ℕ n) (zero-Semiring R) ＝ zero-Semiring R
   power-zero-succ-Semiring zero-ℕ = refl
   power-zero-succ-Semiring (succ-ℕ n) =
-    right-zero-law-mul-Semiring R (power-Semiring R (succ-ℕ n) (zero-Semiring R))
+    right-zero-law-mul-Semiring R
+      ( power-Semiring R (succ-ℕ n) (zero-Semiring R))
 ```
 
 ### `xⁿ⁺¹ = xⁿx`
