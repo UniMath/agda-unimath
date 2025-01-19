@@ -1368,7 +1368,7 @@ remainder-min-dist-succ-x-is-distance x y =
     coeff-nonnegative : leq-ℤ one-ℤ ((int-ℕ q) *ℤ (int-ℕ s))
     coeff-nonnegative = tr (leq-ℤ one-ℤ)
       (inv (mul-int-ℕ q s)) (leq-int-ℕ 1 (q *ℕ s)
-        (leq-succ-le-ℕ 0 (q *ℕ s) (le-is-nonzero-ℕ (q *ℕ s)
+        (leq-succ-le-ℕ 0 (q *ℕ s) (le-zero-is-nonzero-ℕ (q *ℕ s)
           (is-nonzero-mul-ℕ q s quotient-min-dist-succ-x-nonzero
             min-dist-succ-x-coeff-nonzero))))
 

@@ -206,15 +206,12 @@ convert-based-succ-based-ℕ
         ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n))))
           +ℕ_)
     ( is-zero-nat-zero-Fin {k})) ∙
-  ( ( ap
-      ( ((succ-ℕ k) *ℕ_) ∘ succ-ℕ)
-      ( convert-based-succ-based-ℕ (succ-ℕ k) n)) ∙
-    ( ( right-successor-law-mul-ℕ
-        ( succ-ℕ k)
-        ( succ-ℕ (convert-based-ℕ (succ-ℕ k) n))) ∙
-      ( commutative-add-ℕ
-        ( succ-ℕ k)
-        ( (succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))))
+  ( ap
+    ( ((succ-ℕ k) *ℕ_) ∘ succ-ℕ)
+    ( convert-based-succ-based-ℕ (succ-ℕ k) n)) ∙
+  ( ( right-successor-law-mul-ℕ
+      ( succ-ℕ k)
+      ( succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))
 
 is-section-inv-convert-based-ℕ :
   (k n : ℕ) → convert-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n) ＝ n

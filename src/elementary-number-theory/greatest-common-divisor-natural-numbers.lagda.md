@@ -15,6 +15,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.minimal-structured-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -169,7 +170,7 @@ abstract
     well-ordering-principle-ℕ
       ( is-multiple-of-gcd-ℕ a b)
       ( is-decidable-is-multiple-of-gcd-ℕ a b)
-      ( pair (a +ℕ b) (sum-is-multiple-of-gcd-ℕ a b))
+      ( sum-is-multiple-of-gcd-ℕ a b)
 
 gcd-ℕ : ℕ → ℕ → ℕ
 gcd-ℕ a b = pr1 (GCD-ℕ a b)
@@ -363,8 +364,8 @@ preserves-is-common-divisor-mul-ℕ :
   is-common-divisor-ℕ (k *ℕ a) (k *ℕ b) (k *ℕ d)
 preserves-is-common-divisor-mul-ℕ k a b d =
   map-product
-    ( preserves-div-mul-ℕ k d a)
-    ( preserves-div-mul-ℕ k d b)
+    ( preserves-div-left-mul-ℕ k d a)
+    ( preserves-div-left-mul-ℕ k d b)
 
 reflects-is-common-divisor-mul-ℕ :
   (k a b d : ℕ) → is-nonzero-ℕ k →

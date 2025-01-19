@@ -57,9 +57,9 @@ is-decidable-is-multiple-of-cofibonacci :
   (m x : ℕ) → is-decidable (is-multiple-of-cofibonacci m x)
 is-decidable-is-multiple-of-cofibonacci m x =
   is-decidable-function-type
-    ( is-decidable-is-nonzero-ℕ m)
+    ( is-decidable-zero-is-nonzero-ℕ m)
     ( is-decidable-product
-      ( is-decidable-is-nonzero-ℕ x)
+      ( is-decidable-zero-is-nonzero-ℕ x)
       ( is-decidable-div-ℕ m (Fibonacci-ℕ x)))
 
 cofibonacci-multiple : (m : ℕ) → Σ ℕ (is-multiple-of-cofibonacci m)

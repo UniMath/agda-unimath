@@ -80,7 +80,7 @@ module _
     hom-Preorder (opposite-Preorder P) (opposite-Preorder Q)
   opposite-hom-Preorder f =
     ( map-hom-Preorder P Q f) ,
-    ( λ x y p → preserves-order-map-hom-Preorder P Q f y x p)
+    ( λ x y p → preserves-order-hom-Preorder P Q f y x p)
 ```
 
 ## Properties

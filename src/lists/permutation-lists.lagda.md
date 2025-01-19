@@ -24,6 +24,7 @@ open import linear-algebra.functoriality-vectors
 open import linear-algebra.vectors
 
 open import lists.arrays
+open import lists.elementhood-relation-lists
 open import lists.functoriality-lists
 open import lists.lists
 open import lists.permutation-vectors

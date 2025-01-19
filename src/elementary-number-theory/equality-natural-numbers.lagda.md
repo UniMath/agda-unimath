@@ -132,8 +132,8 @@ is-decidable-is-zero-ℕ n = has-decidable-equality-ℕ n zero-ℕ
 is-decidable-is-zero-ℕ' : (n : ℕ) → is-decidable (is-zero-ℕ' n)
 is-decidable-is-zero-ℕ' n = has-decidable-equality-ℕ zero-ℕ n
 
-is-decidable-is-nonzero-ℕ : (n : ℕ) → is-decidable (is-nonzero-ℕ n)
-is-decidable-is-nonzero-ℕ n =
+is-decidable-zero-is-nonzero-ℕ : (n : ℕ) → is-decidable (is-nonzero-ℕ n)
+is-decidable-zero-is-nonzero-ℕ n =
   is-decidable-neg (is-decidable-is-zero-ℕ n)
 
 is-decidable-is-one-ℕ : (n : ℕ) → is-decidable (is-one-ℕ n)
