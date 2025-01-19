@@ -140,6 +140,11 @@ module _
   is-decidable-map-map-decidable-emb =
     is-decidable-map-is-decidable-emb is-decidable-emb-map-decidable-emb
 
+  is-injective-map-decidable-emb :
+    is-injective map-decidable-emb
+  is-injective-map-decidable-emb =
+    is-injective-is-decidable-emb is-decidable-emb-map-decidable-emb
+
   emb-decidable-emb : X ↪ Y
   emb-decidable-emb = map-decidable-emb , is-emb-map-decidable-emb
 ```

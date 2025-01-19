@@ -15,6 +15,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.unit-type
+open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -224,6 +225,16 @@ module _
   is-decidable-prop-Σ : is-decidable-prop (Σ P Q)
   is-decidable-prop-Σ =
     ( is-prop-is-decidable-prop-Σ , is-decidable-is-decidable-prop-Σ)
+
+Σ-Decidable-Prop :
+  {l1 l2 : Level} →
+  (P : Decidable-Prop l1) →
+  (type-Decidable-Prop P → Decidable-Prop l2) → Decidable-Prop (l1 ⊔ l2)
+Σ-Decidable-Prop P Q =
+  ( Σ (type-Decidable-Prop P) (type-Decidable-Prop ∘ Q) ,
+    is-decidable-prop-Σ
+      ( is-decidable-prop-type-Decidable-Prop P)
+      ( is-decidable-prop-type-Decidable-Prop ∘ Q))
 ```
 
 ### The negation operation on decidable propositions
@@ -249,6 +260,78 @@ neg-Decidable-Prop P =
 type-neg-Decidable-Prop :
   {l1 : Level} → Decidable-Prop l1 → UU l1
 type-neg-Decidable-Prop P = type-Decidable-Prop (neg-Decidable-Prop P)
+```
+
+### Function types between decidable propositions
+
+```agda
+module _
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2}
+  where
+
+  is-decidable-prop-function-type' :
+    is-decidable P → (P → is-decidable-prop Q) → is-decidable-prop (P → Q)
+  is-decidable-prop-function-type' H K =
+    ( rec-coproduct
+      ( λ p → is-prop-function-type (is-prop-type-is-decidable-prop (K p)))
+      ( λ np → is-prop-is-contr (universal-property-empty-is-empty P np Q))
+      ( H)) ,
+    ( is-decidable-function-type' H (is-decidable-type-is-decidable-prop ∘ K))
+
+  is-decidable-prop-function-type :
+    is-decidable P → is-decidable-prop Q → is-decidable-prop (P → Q)
+  is-decidable-prop-function-type H K =
+    ( is-prop-function-type (is-prop-type-is-decidable-prop K)) ,
+    ( is-decidable-function-type H (is-decidable-type-is-decidable-prop K))
+
+hom-Decidable-Prop :
+  {l1 l2 : Level} →
+  Decidable-Prop l1 → Decidable-Prop l2 → Decidable-Prop (l1 ⊔ l2)
+hom-Decidable-Prop P Q =
+  ( type-Decidable-Prop P → type-Decidable-Prop Q) ,
+  ( is-decidable-prop-function-type
+    ( is-decidable-Decidable-Prop P)
+    ( is-decidable-prop-type-Decidable-Prop Q))
+```
+
+### Dependent products of decidable propositions
+
+```agda
+module _
+  {l1 l2 : Level} {P : UU l1} {Q : P → UU l2}
+  where
+
+  is-decidable-Π-is-decidable-prop :
+    is-decidable-prop P →
+    ((x : P) → is-decidable-prop (Q x)) →
+    is-decidable ((x : P) → Q x)
+  is-decidable-Π-is-decidable-prop H K =
+    rec-coproduct
+      ( λ x →
+        rec-coproduct
+          ( λ y →
+            inl (λ x' → tr Q (eq-is-prop (is-prop-type-is-decidable-prop H)) y))
+          ( λ ny → inr (λ f → ny (f x)))
+          ( is-decidable-type-is-decidable-prop (K x)))
+      ( λ nx → inl (λ x' → ex-falso (nx x')))
+      ( is-decidable-type-is-decidable-prop H)
+
+  is-decidable-prop-Π :
+    is-decidable-prop P →
+    ((x : P) → is-decidable-prop (Q x)) →
+    is-decidable-prop ((x : P) → Q x)
+  is-decidable-prop-Π H K =
+    ( is-prop-Π (is-prop-type-is-decidable-prop ∘ K)) ,
+    ( is-decidable-Π-is-decidable-prop H K)
+
+Π-Decidable-Prop :
+  {l1 l2 : Level} (P : Decidable-Prop l1) →
+  (type-Decidable-Prop P → Decidable-Prop l2) → Decidable-Prop (l1 ⊔ l2)
+Π-Decidable-Prop P Q =
+  ( (x : type-Decidable-Prop P) → type-Decidable-Prop (Q x)) ,
+  ( is-decidable-prop-Π
+    ( is-decidable-prop-type-Decidable-Prop P)
+    ( is-decidable-prop-type-Decidable-Prop ∘ Q))
 ```
 
 ### Decidability of a propositional truncation
