@@ -68,6 +68,14 @@ Poset-Large-Precategory = parametric-Poset-Large-Precategory (λ l → l) (λ l 
 ### The precategory of posets at a universe level
 
 ```agda
-Poset-Precategory : (l : Level) → Precategory (lsuc l) l
-Poset-Precategory = precategory-Large-Precategory Poset-Large-Precategory
+Poset-Precategory : (l1 l2 : Level) → Precategory (lsuc l1 ⊔ lsuc l2) (l1 ⊔ l2)
+Poset-Precategory l1 l2 =
+  make-Precategory
+    ( Poset l1 l2)
+    ( hom-set-Poset)
+    ( λ {P} {Q} {R} → comp-hom-Poset P Q R)
+    ( id-hom-Poset)
+    ( λ {P} {Q} {R} {S} → associative-comp-hom-Poset P Q R S)
+    ( λ {P} {Q} → left-unit-law-comp-hom-Poset P Q)
+    ( λ {P} {Q} → right-unit-law-comp-hom-Poset P Q)
 ```

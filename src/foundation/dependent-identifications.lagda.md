@@ -298,3 +298,7 @@ module _
         ( inv-dependent-identification B p p'))
   distributive-inv-concat-dependent-identification refl refl refl refl = refl
 ```
+
+## See also
+
+- [Binary dependent identifications](foundation.binary-dependent-identifications.md)

@@ -7,11 +7,13 @@ module foundation.equality-cartesian-product-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -36,7 +38,7 @@ module _
   where
 
   Eq-product : (s t : A × B) → UU (l1 ⊔ l2)
-  Eq-product s t = ((pr1 s) ＝ (pr1 t)) × ((pr2 s) ＝ (pr2 t))
+  Eq-product s t = (pr1 s ＝ pr1 t) × (pr2 s ＝ pr2 t)
 ```
 
 ## Properties
@@ -49,23 +51,22 @@ module _
   where
 
   eq-pair' : {s t : A × B} → Eq-product s t → s ＝ t
-  eq-pair' {pair x y} {pair .x .y} (pair refl refl) = refl
+  eq-pair' (p , q) = ap-binary pair p q
 
-  eq-pair :
-    {s t : A × B} → (pr1 s) ＝ (pr1 t) → (pr2 s) ＝ (pr2 t) → s ＝ t
-  eq-pair p q = eq-pair' (pair p q)
+  eq-pair : {s t : A × B} → pr1 s ＝ pr1 t → pr2 s ＝ pr2 t → s ＝ t
+  eq-pair p q = eq-pair' (p , q)
 
   pair-eq : {s t : A × B} → s ＝ t → Eq-product s t
   pr1 (pair-eq α) = ap pr1 α
   pr2 (pair-eq α) = ap pr2 α
 
   is-retraction-pair-eq :
-    {s t : A × B} → ((pair-eq {s} {t}) ∘ (eq-pair' {s} {t})) ~ id
-  is-retraction-pair-eq {pair x y} {pair .x .y} (pair refl refl) = refl
+    {s t : A × B} → pair-eq {s} {t} ∘ eq-pair' {s} {t} ~ id
+  is-retraction-pair-eq (refl , refl) = refl
 
   is-section-pair-eq :
-    {s t : A × B} → ((eq-pair' {s} {t}) ∘ (pair-eq {s} {t})) ~ id
-  is-section-pair-eq {pair x y} {pair .x .y} refl = refl
+    {s t : A × B} → eq-pair' {s} {t} ∘ pair-eq {s} {t} ~ id
+  is-section-pair-eq refl = refl
 
   abstract
     is-equiv-eq-pair :
@@ -99,13 +100,13 @@ module _
 
   triangle-eq-pair :
     {a0 a1 : A} {b0 b1 : B} (p : a0 ＝ a1) (q : b0 ＝ b1) →
-    eq-pair p q ＝ ((eq-pair p refl) ∙ (eq-pair refl q))
-  triangle-eq-pair refl refl = refl
+    eq-pair p q ＝ eq-pair p refl ∙ eq-pair refl q
+  triangle-eq-pair refl q = refl
 
   triangle-eq-pair' :
     {a0 a1 : A} {b0 b1 : B} (p : a0 ＝ a1) (q : b0 ＝ b1) →
-    eq-pair p q ＝ ((eq-pair refl q) ∙ (eq-pair p refl))
-  triangle-eq-pair' refl refl = refl
+    eq-pair p q ＝ eq-pair refl q ∙ eq-pair p refl
+  triangle-eq-pair' p refl = refl
 ```
 
 ### `eq-pair` preserves concatenation
@@ -114,9 +115,7 @@ module _
 eq-pair-concat :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {x x' x'' : A} {y y' y'' : B}
   (p : x ＝ x') (p' : x' ＝ x'') (q : y ＝ y') (q' : y' ＝ y'') →
-  ( eq-pair {s = pair x y} {t = pair x'' y''} (p ∙ p') (q ∙ q')) ＝
-  ( ( eq-pair {s = pair x y} {t = pair x' y'} p q) ∙
-    ( eq-pair p' q'))
+  eq-pair (p ∙ p') (q ∙ q') ＝ eq-pair p q ∙ eq-pair p' q'
 eq-pair-concat refl p' refl q' = refl
 ```
 
@@ -126,13 +125,13 @@ eq-pair-concat refl p' refl q' = refl
 ap-pr1-eq-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
-  ap pr1 (eq-pair {s = pair x y} {pair x' y'} p q) ＝ p
+  ap pr1 (eq-pair p q) ＝ p
 ap-pr1-eq-pair refl refl = refl
 
 ap-pr2-eq-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
-  ap pr2 (eq-pair {s = pair x y} {pair x' y'} p q) ＝ q
+  ap pr2 (eq-pair p q) ＝ q
 ap-pr2-eq-pair refl refl = refl
 ```
 
@@ -155,12 +154,12 @@ module _
 ```agda
   left-unit-law-tr-eq-pair :
     (C : A × B → UU l3) (q : b0 ＝ b1) (u : C (a0 , b0)) →
-    (tr C (eq-pair refl q) u) ＝ tr (λ x → C (a0 , x)) q u
+    tr C (eq-pair refl q) u ＝ tr (λ x → C (a0 , x)) q u
   left-unit-law-tr-eq-pair C refl u = refl
 
   right-unit-law-tr-eq-pair :
     (C : A × B → UU l3) (p : a0 ＝ a1) (u : C (a0 , b0)) →
-    (tr C (eq-pair p refl) u) ＝ tr (λ x → C (x , b0)) p u
+    tr C (eq-pair p refl) u ＝ tr (λ x → C (x , b0)) p u
   right-unit-law-tr-eq-pair C refl u = refl
 ```
 

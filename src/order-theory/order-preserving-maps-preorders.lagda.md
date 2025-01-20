@@ -1,4 +1,4 @@
-# Order preserving maps on preorders
+# Order preserving maps between preorders
 
 ```agda
 module order-theory.order-preserving-maps-preorders where
@@ -17,8 +17,9 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.strictly-involutive-identity-types
 open import foundation.subtype-identity-principle
-open import foundation.torsorial-type-families
 open import foundation.universe-levels
+
+open import foundation-core.torsorial-type-families
 
 open import order-theory.preorders
 ```
@@ -39,9 +40,9 @@ module _
   {l1 l2 l3 l4 : Level} (P : Preorder l1 l2) (Q : Preorder l3 l4)
   where
 
-  preserves-order-Preorder-Prop :
+  preserves-order-prop-Preorder :
     (type-Preorder P → type-Preorder Q) → Prop (l1 ⊔ l2 ⊔ l4)
-  preserves-order-Preorder-Prop f =
+  preserves-order-prop-Preorder f =
     Π-Prop
       ( type-Preorder P)
       ( λ x →
@@ -49,19 +50,19 @@ module _
           ( type-Preorder P)
           ( λ y →
             hom-Prop
-              ( leq-Preorder-Prop P x y)
-              ( leq-Preorder-Prop Q (f x) (f y))))
+              ( leq-prop-Preorder P x y)
+              ( leq-prop-Preorder Q (f x) (f y))))
 
   preserves-order-Preorder :
     (type-Preorder P → type-Preorder Q) → UU (l1 ⊔ l2 ⊔ l4)
   preserves-order-Preorder f =
-    type-Prop (preserves-order-Preorder-Prop f)
+    type-Prop (preserves-order-prop-Preorder f)
 
   is-prop-preserves-order-Preorder :
     (f : type-Preorder P → type-Preorder Q) →
     is-prop (preserves-order-Preorder f)
   is-prop-preserves-order-Preorder f =
-    is-prop-type-Prop (preserves-order-Preorder-Prop f)
+    is-prop-type-Prop (preserves-order-prop-Preorder f)
 
   hom-Preorder : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   hom-Preorder =

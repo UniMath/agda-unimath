@@ -133,6 +133,10 @@ module equiv {l1 l2 : Level} where
     Σ E (λ e → (Id (st e) x) × (Id (tg e) y))
 ```
 
+## See also
+
+- [The universal directed graph](graph-theory.universal-directed-graph.md)
+
 ## External links
 
 - [Digraph](https://ncatlab.org/nlab/show/digraph) at $n$Lab

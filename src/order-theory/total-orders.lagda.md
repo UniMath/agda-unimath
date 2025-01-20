@@ -23,10 +23,12 @@ open import order-theory.total-preorders
 
 ## Idea
 
-A **total order**, or a **linear order**, is a [poset](order-theory.posets.md)
-`P` such that for every two elements `x` and `y` in `P` the
+A
+{{#concept "total order" Disambiguation="on a type" WD="total order" WDID=Q369377 Agda=Total-Order}},
+or a **linear order**, is a [poset](order-theory.posets.md) `P` such that for
+every two elements `x` and `y` in `P` the
 [disjunction](foundation.disjunction.md) `(x ≤ y) ∨ (y ≤ x)` holds. In other
-words, total orders are totally ordered in the sense that any two elements are
+words, total orders are _totally ordered_ in the sense that any two elements are
 comparable.
 
 ## Definitions
@@ -81,7 +83,7 @@ module _
   type-Total-Order = type-Poset poset-Total-Order
 
   leq-Total-Order-Prop : (x y : type-Total-Order) → Prop l2
-  leq-Total-Order-Prop = leq-Poset-Prop poset-Total-Order
+  leq-Total-Order-Prop = leq-prop-Poset poset-Total-Order
 
   leq-Total-Order : (x y : type-Total-Order) → UU l2
   leq-Total-Order = leq-Poset poset-Total-Order
@@ -115,3 +117,9 @@ module _
   set-Total-Order : Set l1
   set-Total-Order = set-Poset poset-Total-Order
 ```
+
+## External links
+
+- [Total order](https://en.wikipedia.org/wiki/Total_order) at Wikipedia
+- [total order](https://ncatlab.org/nlab/show/total+order) at $n$Lab
+- [Total orders](https://1lab.dev/Order.Total.html) at 1lab

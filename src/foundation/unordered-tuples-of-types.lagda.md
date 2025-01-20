@@ -27,7 +27,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An unordered tuple of types is an unordered tuple of elements in a universe
+An {{#concept "unordered tuple of types" Agda=unordered-tuple-types}} is an
+[unordered tuple](foundation.unordered-tuples.md) of elements in a universe.
 
 ## Definitions
 

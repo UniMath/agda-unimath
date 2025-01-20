@@ -86,7 +86,7 @@ module _
   where
 
   suspension-structure : UU (l1 ⊔ l2)
-  suspension-structure = Σ Y (λ N → Σ Y (λ S → (x : X) → N ＝ S))
+  suspension-structure = Σ Y (λ N → Σ Y (λ S → X → N ＝ S))
 
 module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}

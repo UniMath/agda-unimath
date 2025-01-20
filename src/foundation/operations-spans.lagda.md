@@ -138,3 +138,8 @@ module _
   pr2 (pr2 right-concat-equiv-arrow-span) =
     right-map-right-concat-equiv-arrow-span
 ```
+
+## See also
+
+- [Composition of spans](foundation.composition-spans.md)
+- [Opposite spans](foundation.opposite-spans.md)

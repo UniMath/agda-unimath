@@ -20,8 +20,10 @@ open import order-theory.posets
 
 ## Idea
 
-A **bottom element** in a poset `P` is an element `b` such that `b ≤ x` holds
-for every element `x : P`.
+A
+{{#concept "bottom element" Disambiguation="in a poset" Agda=is-bottom-element-Poset}}
+in a [poset](order-theory.posets.md) `P` is an element `b` such that `b ≤ x`
+holds for every element `x : P`.
 
 ## Definition
 
