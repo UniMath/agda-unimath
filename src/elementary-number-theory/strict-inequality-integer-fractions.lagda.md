@@ -339,3 +339,15 @@ module _
             ( numerator-fraction-ℤ x)
             ( denominator-fraction-ℤ y))))
 ```
+
+### Negation reverses the order of strict inequality on rational numbers
+
+```agda
+module _
+  (x y : fraction-ℤ) (H : le-fraction-ℤ x y)
+  where
+
+  neg-le-fraction-ℤ :
+    le-fraction-ℤ (neg-fraction-ℤ y) (neg-fraction-ℤ y)
+
+```
