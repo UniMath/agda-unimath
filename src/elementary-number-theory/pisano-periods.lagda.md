@@ -108,7 +108,7 @@ compute-fibonacci-pair-Fin :
   (k : ℕ) (n : ℕ) →
   Id
     ( fibonacci-pair-Fin k n)
-    ( mod-succ-ℕ k (Fibonacci-ℕ n) , mod-succ-ℕ k (Fibonacci-ℕ (succ-ℕ n)))
+    ( mod-succ-ℕ k (fibonacci-ℕ n) , mod-succ-ℕ k (fibonacci-ℕ (succ-ℕ n)))
 compute-fibonacci-pair-Fin k zero-ℕ = refl
 compute-fibonacci-pair-Fin k (succ-ℕ zero-ℕ) =
   ap-binary pair refl (right-unit-law-add-Fin k (one-Fin k))
@@ -121,8 +121,8 @@ compute-fibonacci-pair-Fin k (succ-ℕ (succ-ℕ n)) =
         ( ap pr1 (compute-fibonacci-pair-Fin k (succ-ℕ n)))) ∙
       ( inv
         ( mod-succ-add-ℕ k
-          ( Fibonacci-ℕ (succ-ℕ (succ-ℕ n)))
-          ( Fibonacci-ℕ (succ-ℕ n)))))
+          ( fibonacci-ℕ (succ-ℕ (succ-ℕ n)))
+          ( fibonacci-ℕ (succ-ℕ n)))))
 ```
 
 ### Repetitions in the Fibonacci sequence on `Fin (k + 1) × Fin (k + 1)`
@@ -235,10 +235,10 @@ is-nonzero-pisano-period k p =
 
 ```agda
 div-fibonacci-pisano-period :
-  (k : ℕ) → div-ℕ (succ-ℕ k) (Fibonacci-ℕ (pisano-period k))
+  (k : ℕ) → div-ℕ (succ-ℕ k) (fibonacci-ℕ (pisano-period k))
 div-fibonacci-pisano-period k =
   div-is-zero-mod-succ-ℕ k
-    ( Fibonacci-ℕ (pisano-period k))
+    ( fibonacci-ℕ (pisano-period k))
     ( ( ap pr1 (inv (compute-fibonacci-pair-Fin k (pisano-period k)))) ∙
       ( inv
         ( ap pr1

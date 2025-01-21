@@ -26,7 +26,15 @@ open import foundation.sets
 
 </details>
 
-## Definition
+## Idea
+
+The {{#concept "addition" Disambiguation="natural numbers" Agda=_+ℕ_}} operation on the [natural numbers](elementary-number-theory.natural-numbers.md) is a binary operation $m,n\mapsto m+n$ on the natural numbers given by $n$ times iteratively taking the successor of the number $m$.
+
+The notation $+$ for addition and $-$ for subtraction appeared first in print in 1489 in _Behende und hüpsche Rechenung auff allen Kauffmanschafft_ by [Johannes Widmann](https://en.wikipedia.org/wiki/Johannes_Widmann), for example on page 327 of {{#cite Widmann1489}}.
+
+## Definitions
+
+### Addition on the natural numbers
 
 ```agda
 add-ℕ : ℕ → ℕ → ℕ
@@ -227,3 +235,7 @@ abstract
 
 - The commutative monoid of the natural numbers with addition is defined in
   [`monoid-of-natural-numbers-with-addition`](elementary-number-theory.monoid-of-natural-numbers-with-addition.md).
+
+## References
+
+{{#bibliography}}

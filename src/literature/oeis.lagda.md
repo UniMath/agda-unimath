@@ -115,7 +115,7 @@ OEIS: [A000043](https://oeis.org/A000043)
 
 ```agda
 open import elementary-number-theory.fibonacci-sequence using
-  ( Fibonacci-ℕ)
+  ( fibonacci-ℕ)
 ```
 
 OEIS: [A000045](https://oeis.org/A000045)

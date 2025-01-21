@@ -119,6 +119,23 @@ has-odd-expansion-ℕ n = fiber odd-number-ℕ n
 
 ## Properties
 
+### The $n+1$st even number
+
+```agda
+even-number-succ-ℕ :
+  (n : ℕ) → even-number-ℕ (succ-ℕ n) ＝ even-number-ℕ n +ℕ 2
+even-number-succ-ℕ n = left-distributive-mul-add-ℕ 2 n 1
+```
+
+### The $n+1$st odd number
+
+```agda
+odd-number-succ-ℕ :
+  (n : ℕ) → odd-number-ℕ (succ-ℕ n) ＝ 2 *ℕ n +ℕ 3
+odd-number-succ-ℕ n =
+  ap succ-ℕ (even-number-succ-ℕ n)
+```
+
 ### The `n`th even number is even
 
 ```agda
