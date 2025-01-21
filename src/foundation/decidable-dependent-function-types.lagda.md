@@ -108,7 +108,8 @@ is-decidable-Π-Maybe {B = B} du de =
 
 ### Dependent products of decidable propositions over a π₀-trivial base are decidable propositions
 
-In other words, the base is empty or 0-connected.
+Assuming the base `A` is empty or 0-connected, a dependent product of decidable
+propositions over `A` is again a decidable proposition.
 
 ```agda
 module _

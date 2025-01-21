@@ -158,23 +158,24 @@ module _
 
 ## Properties
 
-If `g` is an embedding then being a perfect image for `g` is a property.
+### If `g` is an embedding then being a perfect image for `g` is a property
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f : A → B} {g : B → A} (is-emb-g : is-emb g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
   where
 
   is-prop-is-perfect-image-is-emb :
-    (a : A) → is-prop (is-perfect-image f g a)
-  is-prop-is-perfect-image-is-emb a =
-    is-prop-iterated-Π 3 (λ a₀ n p → is-prop-map-is-emb is-emb-g a₀)
+    is-emb g → (a : A) → is-prop (is-perfect-image f g a)
+  is-prop-is-perfect-image-is-emb G a =
+    is-prop-iterated-Π 3 (λ a₀ n p → is-prop-map-is-emb G a₀)
 
-  is-perfect-image-Prop : A → Prop (l1 ⊔ l2)
-  pr1 (is-perfect-image-Prop a) = is-perfect-image f g a
-  pr2 (is-perfect-image-Prop a) = is-prop-is-perfect-image-is-emb a
+  is-perfect-image-Prop : is-emb g → A → Prop (l1 ⊔ l2)
+  pr1 (is-perfect-image-Prop G a) = is-perfect-image f g a
+  pr2 (is-perfect-image-Prop G a) = is-prop-is-perfect-image-is-emb G a
 ```
+
+### Fibers over perfect images
 
 If `a` is a perfect image for `g`, then `a` has a preimage under `g`. Just take
 `n = zero` in the definition.
@@ -206,16 +207,19 @@ module _
   is-section-inverse-of-perfect-image a ρ = pr2 (fiber-is-perfect-image a ρ)
 ```
 
+When `g` is also injective, the map gives a kind of
+[retraction](foundation-core.retractions.md) of `g`.
+
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f : A → B} {g : B → A} (G : is-injective g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
   where
 
   is-retraction-inverse-of-perfect-image :
+    is-injective g →
     (b : B) (ρ : is-perfect-image f g (g b)) →
     inverse-of-perfect-image (g b) ρ ＝ b
-  is-retraction-inverse-of-perfect-image b ρ =
+  is-retraction-inverse-of-perfect-image G b ρ =
     G (is-section-inverse-of-perfect-image (g b) ρ)
 ```
 
@@ -228,8 +232,7 @@ module _
 
   previous-perfect-image-at' :
     (a : A) (n : ℕ) →
-    is-perfect-image-at' f g (g (f a)) (succ-ℕ n) →
-    is-perfect-image-at' f g a n
+    is-perfect-image-at' f g (g (f a)) (succ-ℕ n) → is-perfect-image-at' f g a n
   previous-perfect-image-at' a n γ (a₀ , p) = γ (a₀ , ap (g ∘ f) p)
 
   previous-perfect-image' :
@@ -241,8 +244,8 @@ module _
   previous-perfect-image a γ a₀ n p = γ a₀ (succ-ℕ n) (ap (g ∘ f) p)
 ```
 
-Perfect images goes to a disjoint place under `inverse-of-perfect-image` than
-`f`
+Perfect images of `g` relative to `f` not mapped to the image of `f` under
+`inverse-of-perfect-image`.
 
 ```agda
 module _
@@ -267,7 +270,12 @@ module _
     v = tr (λ a' → ¬ (is-perfect-image f g a')) q s
 ```
 
-### Decidability of being a perfect image at a natural number
+### Decidability of perfect images
+
+Assuming `g` and `f` are decidable embedding, then for every natural number
+`n : ℕ` and every element `a : A` it is decidable whether `a` is a perfect image
+of `g` relative to `f` after `n` iterations. In fact, the map `f` need only be
+propositionally decidable and π₀-trivial.
 
 ```agda
 module _
@@ -306,92 +314,73 @@ module _
       ( is-inhabited-or-empty-map-is-decidable-map F)
 ```
 
-### The constructive story
-
-#### Untruncated double negation elimination on nonperfect fibers
+### Double negation elimination on nonperfect fibers
 
 If we assume that `g` is a double negation eliminating map, we can prove that if
 `is-nonperfect-image a` does not hold, then we have `is-perfect-image a`.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f : A → B} {g : B → A} (G : is-double-negation-eliminating-map g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
   where
 
   double-negation-elim-is-perfect-image :
+    is-double-negation-eliminating-map g →
     (a : A) → ¬ (is-nonperfect-image a) → is-perfect-image f g a
-  double-negation-elim-is-perfect-image a nρ a₀ n p =
+  double-negation-elim-is-perfect-image G a nρ a₀ n p =
     G a₀ (λ a₁ → nρ (a₀ , n , p , a₁))
 ```
 
-The following property states that if `g (b)` is not a perfect image, then `b`
-has an `f` fiber `a` that is not a perfect image for `g`. Again, we need to
-assume law of excluded middle and that both `g` and `f` are embedding.
+If `g(b)` is not a perfect image, then `b` has an `f`-fiber `a` that is not a
+perfect image for `g`.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f : A → B} {g : B → A}
-  (G : is-double-negation-eliminating-map g)
-  (b : B)
-  (nρ : ¬ (is-perfect-image f g (g b)))
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
   where
 
   is-irrefutable-is-nonperfect-image-is-not-perfect-image :
+    (G : is-double-negation-eliminating-map g)
+    (b : B) (nρ : ¬ (is-perfect-image f g (g b))) →
     ¬¬ (is-nonperfect-image {f = f} (g b))
-  is-irrefutable-is-nonperfect-image-is-not-perfect-image nμ =
+  is-irrefutable-is-nonperfect-image-is-not-perfect-image G b nρ nμ =
     nρ (double-negation-elim-is-perfect-image G (g b) nμ)
 
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
-  (is-injective-g : is-injective g) (b : B)
-  where
-
   has-nonperfect-fiber-is-nonperfect-image :
+    is-injective g → (b : B) →
     is-nonperfect-image {f = f} (g b) → has-nonperfect-fiber f g b
-  has-nonperfect-fiber-is-nonperfect-image (x₀ , zero-ℕ , u) =
+  has-nonperfect-fiber-is-nonperfect-image G b (x₀ , zero-ℕ , u) =
     ex-falso (pr2 u (b , inv (pr1 u)))
-  has-nonperfect-fiber-is-nonperfect-image (x₀ , succ-ℕ n , u) =
-    ( iterate n (g ∘ f) x₀ , is-injective-g (pr1 u)) ,
+  has-nonperfect-fiber-is-nonperfect-image G b (x₀ , succ-ℕ n , u) =
+    ( iterate n (g ∘ f) x₀ , G (pr1 u)) ,
     ( λ s → pr2 u (s x₀ n refl))
 
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f : A → B} {g : B → A}
-  (is-double-negation-eliminating-g : is-double-negation-eliminating-map g)
-  (is-injective-g : is-injective g)
-  (b : B) (nρ : ¬ (is-perfect-image f g (g b)))
-  where
-
   is-irrefutable-has-nonperfect-fiber-is-not-perfect-image :
+    is-double-negation-eliminating-map g → is-injective g →
+    (b : B) (nρ : ¬ (is-perfect-image f g (g b))) →
     ¬¬ (has-nonperfect-fiber f g b)
-  is-irrefutable-has-nonperfect-fiber-is-not-perfect-image t =
-    is-irrefutable-is-nonperfect-image-is-not-perfect-image
-      ( is-double-negation-eliminating-g)
-      ( b)
-      ( nρ)
-      ( λ s → t (has-nonperfect-fiber-is-nonperfect-image is-injective-g b s))
+  is-irrefutable-has-nonperfect-fiber-is-not-perfect-image G G' b nρ t =
+    is-irrefutable-is-nonperfect-image-is-not-perfect-image G b nρ
+      ( λ s → t (has-nonperfect-fiber-is-nonperfect-image G' b s))
+```
 
+If `f` is π₀-trivial and has double negation elimination, then
+
+```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f : A → B} {g : B → A}
-  (is-double-negation-eliminating-f : is-double-negation-eliminating-map f)
-  (is-π₀-trivial-f : is-π₀-trivial-map' f)
-  (b : B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
   where
 
   double-negation-elim-has-nonperfect-fiber :
-    has-double-negation-elim (has-nonperfect-fiber f g b)
-  double-negation-elim-has-nonperfect-fiber =
-    double-negation-elim-Σ-all-elements-merely-equal-base
-      ( is-π₀-trivial-f b)
-      ( is-double-negation-eliminating-f b)
+    is-double-negation-eliminating-map f →
+    is-π₀-trivial-map' f →
+    (b : B) → has-double-negation-elim (has-nonperfect-fiber f g b)
+  double-negation-elim-has-nonperfect-fiber F F' b =
+    double-negation-elim-Σ-all-elements-merely-equal-base (F' b) (F b)
       ( λ p → double-negation-elim-neg (is-perfect-image f g (pr1 p)))
 
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  {f : A → B} {g : B → A}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
   (is-double-negation-eliminating-g : is-double-negation-eliminating-map g)
   (is-injective-g : is-injective g)
   (is-double-negation-eliminating-f : is-double-negation-eliminating-map f)
