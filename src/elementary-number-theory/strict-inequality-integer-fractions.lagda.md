@@ -26,6 +26,7 @@ open import elementary-number-theory.positive-integers
 open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
@@ -340,14 +341,16 @@ module _
             ( denominator-fraction-ℤ y))))
 ```
 
-### Negation reverses the order of strict inequality on rational numbers
+### Negation reverses the order of strict inequality on integer fractions
 
 ```agda
-module _
-  (x y : fraction-ℤ) (H : le-fraction-ℤ x y)
-  where
-
-  neg-le-fraction-ℤ :
-    le-fraction-ℤ (neg-fraction-ℤ y) (neg-fraction-ℤ y)
-
+neg-le-fraction-ℤ :
+  (x y : fraction-ℤ) →
+  le-fraction-ℤ x y →
+  le-fraction-ℤ (neg-fraction-ℤ y) (neg-fraction-ℤ x)
+neg-le-fraction-ℤ (m , n , p) (m' , n' , p') H =
+  binary-tr le-ℤ
+    (inv (left-negative-law-mul-ℤ m' n))
+    (inv (left-negative-law-mul-ℤ m n'))
+    (neg-le-ℤ (m *ℤ n') (m' *ℤ n) H)
 ```
