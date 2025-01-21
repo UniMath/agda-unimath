@@ -1,4 +1,4 @@
-# The Cantor–Schröder–Bernstein-WLPO theorem
+# The Cantor–Schröder–Bernstein-Escardó theorem
 
 ```agda
 module foundation.cantor-schroder-bernstein-wlpo where
@@ -7,17 +7,24 @@ module foundation.cantor-schroder-bernstein-wlpo where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.decidable-embeddings
 open import foundation.decidable-maps
+open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.double-negation
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.injective-maps
 open import foundation.law-of-excluded-middle
+open import foundation.maps-with-hilbert-epsilon-operators
 open import foundation.perfect-images
 open import foundation.pi-0-trivial-maps
+open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.universe-levels
@@ -30,6 +37,7 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.negation
+open import foundation-core.propositional-maps
 open import foundation-core.sets
 
 open import logic.double-negation-eliminating-maps
@@ -59,16 +67,18 @@ an equivalence.
 module _
   {l1 l2 : Level}
   {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
-  (F : is-double-negation-eliminating-map f)
-  (G : is-double-negation-eliminating-map g)
   (G' : is-injective g)
+  (G : is-double-negation-eliminating-map g)
+  (F : is-double-negation-eliminating-map f)
   where
 
   map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein :
     (x : A) → is-decidable (is-perfect-image f g x) → B
-  map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein x (inl y) =
-    inverse-of-perfect-image x y
-  map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein x (inr y) =
+  map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
+    x (inl γ) =
+    inverse-of-perfect-image x γ
+  map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
+    x (inr nγ) =
     f x
 
   compute-map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein :
@@ -78,11 +88,11 @@ module _
     map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
       ( g y) d ＝
     y
-  compute-map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein y γ
-    ( inl v') =
+  compute-map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
+    y γ (inl v') =
     is-retraction-inverse-of-perfect-image G' y v'
-  compute-map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein y γ
-    ( inr v) =
+  compute-map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
+    y γ (inr v) =
     ex-falso (v γ)
 
   compute-map-construction-is-not-perfect-image-Cantor-Schröder-Bernstein :
@@ -131,16 +141,21 @@ module _
           F' y d)
       ( d') ＝
     y
-  is-section-map-section-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein F' y (inl γ) =
-    compute-map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein y γ
-  is-section-map-section-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein F' y (inr nγ) =
+  is-section-map-section-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
+    F' y (inl γ) =
+    compute-map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
+    y γ
+  is-section-map-section-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
+    F' y (inr nγ) =
     compute-map-construction-is-not-perfect-image-Cantor-Schröder-Bernstein
         F' y nγ
 
   map-construction-Cantor-Schröder-Bernstein :
     (D : (x : A) → is-decidable (is-perfect-image f g x)) → A → B
   map-construction-Cantor-Schröder-Bernstein D x =
-    map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein x (D x)
+    map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
+      ( x)
+      ( D x)
 
   map-section-construction-Cantor-Schröder-Bernstein :
     (F' : is-π₀-trivial-map' f) →
@@ -181,8 +196,12 @@ Injectivity of the constructed map.
     {x x' : A}
     (d : is-decidable (is-perfect-image f g x))
     (d' : is-decidable (is-perfect-image f g x')) →
-    ( map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein x d) ＝
-    ( map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein x' d') →
+    ( map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
+      ( x)
+      ( d)) ＝
+    ( map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
+      ( x')
+      ( d')) →
     x ＝ x'
   is-injective-map-construction-is-decidable-is-perfect-image-Cantor-Schröder-Bernstein
     F' { x} {x'} (inl ρ) (inl ρ') p =
@@ -239,17 +258,41 @@ Therefore, `A ≃ B`.
 In fact, it suffices to assume that `f` is decidable, π₀-trivial, and injective.
 
 ```agda
+module _
+  {l1 l2 : Level} (wlpo : level-WLPO (l1 ⊔ l2))
+  {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
+  (G : is-decidable-emb g) (F : is-decidable-map f) (F' : is-π₀-trivial-map' f)
+  where
+
+  abstract
+    is-decidable-is-perfect-image'-WLPO :
+      (a : A) → is-decidable (is-perfect-image' f g a)
+    is-decidable-is-perfect-image'-WLPO a =
+      wlpo
+        ( λ n →
+          is-perfect-image-at' f g a n ,
+          is-decidable-prop-is-perfect-image-at' G F F' a n)
+
+  is-decidable-is-perfect-image-WLPO :
+    (a : A) → is-decidable (is-perfect-image f g a)
+  is-decidable-is-perfect-image-WLPO a =
+    is-decidable-equiv'
+      ( compute-is-perfect-image f g a)
+      ( is-decidable-is-perfect-image'-WLPO a)
+```
+
+```agda
 generalized-Cantor-Schröder-Bernstein-WLPO :
   {l1 l2 : Level} → level-WLPO (l1 ⊔ l2) →
-  {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
-  (G : is-decidable-emb g) →
-  (F : is-decidable-map f) (F' : is-π₀-trivial-map' f) (F'' : is-injective f) →
+  {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
+  is-decidable-emb g →
+  is-decidable-map f → is-π₀-trivial-map' f → is-injective f →
   A ≃ B
 generalized-Cantor-Schröder-Bernstein-WLPO wlpo G F F' F'' =
   equiv-construction-Cantor-Schröder-Bernstein
-    ( is-double-negation-eliminating-map-is-decidable-map F)
-    ( is-double-negation-eliminating-map-is-decidable-emb G)
     ( is-injective-is-decidable-emb G)
+    ( is-double-negation-eliminating-map-is-decidable-emb G)
+    ( is-double-negation-eliminating-map-is-decidable-map F)
     ( F')
     ( F'')
     ( is-decidable-is-perfect-image-WLPO wlpo
@@ -275,19 +318,54 @@ Cantor-Schröder-Bernstein-WLPO wlpo (f , F) (g , G) =
   Cantor-Schröder-Bernstein-WLPO' wlpo G F
 ```
 
-### The generalized Cantor-Schröder-Bernstein-Escardó theorem assuming the law of excluded middle
+### The slightly generalized Cantor-Schröder-Bernstein-Escardó theorem assuming the law of excluded middle
 
-Assuming the law of excluded middle, then given two types `A` and `B` such that
-there is a π₀-trivial injection `A → B` and an embedding `B ↪ A`, then `A` and
-`B` are equivalent.
+Assuming the [law of exluded middle](foundation.law-of-excluded-middle.md), then
+given two types `A` and `B` such that there is a π₀-trivial injection `A → B`
+equipped with a Hilbert ε-operator, and an embedding `B ↪ A`, then `A` and `B`
+are equivalent.
 
-```text
+```agda
 generalized-Cantor-Schröder-Bernstein-LEM :
   {l1 l2 : Level} → LEM (l1 ⊔ l2) →
   {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
+  (G : is-emb g) →
   (F : is-π₀-trivial-map' f) →
   (F' : is-injective f) →
-  (G : is-emb g) →
+  (εF : ε-operator-map-Hilbert f) →
   A ≃ B
-generalized-Cantor-Schröder-Bernstein-LEM lem F F' G = {! equiv-construction-Cantor-Schröder-Bernstein   !}
+generalized-Cantor-Schröder-Bernstein-LEM lem {f = f} {g} G F F' εF =
+  equiv-construction-Cantor-Schröder-Bernstein
+    ( is-injective-is-emb G)
+    ( is-double-negation-eliminating-map-is-decidable-map
+      ( λ y → lem (fiber g y , is-prop-map-is-emb G y)))
+    ( λ y →
+      ( λ nnf →
+        εF
+          ( y)
+          ( double-negation-elim-is-decidable
+            ( lem (trunc-Prop (fiber f y)))
+            ( map-double-negation unit-trunc-Prop nnf))))
+    ( F)
+    ( F')
+    ( lem ∘ is-perfect-image-Prop G)
+```
+
+```agda
+Cantor-Schröder-Bernstein-Escardó'' :
+  {l1 l2 : Level} → LEM (l1 ⊔ l2) →
+  {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
+  is-emb g → is-emb f → A ≃ B
+Cantor-Schröder-Bernstein-Escardó'' lem {f = f} {g} G F =
+  Cantor-Schröder-Bernstein-WLPO'
+    ( λ P → lem (Π-Prop ℕ (prop-Decidable-Prop ∘ P)))
+    ( G , λ y → lem (fiber g y , is-prop-map-is-emb G y))
+    ( F , λ y → lem (fiber f y , is-prop-map-is-emb F y))
+
+Cantor-Schröder-Bernstein-Escardó' :
+  {l1 l2 : Level} → LEM (l1 ⊔ l2) →
+  {A : UU l1} {B : UU l2} →
+  A ↪ B → B ↪ A → A ≃ B
+Cantor-Schröder-Bernstein-Escardó' lem (f , F) (g , G) =
+  Cantor-Schröder-Bernstein-Escardó'' lem G F
 ```

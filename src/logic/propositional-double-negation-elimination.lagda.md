@@ -116,12 +116,14 @@ module _
   where
 
   has-prop-double-negation-elim-retract :
-    A retract-of B → has-prop-double-negation-elim B → has-prop-double-negation-elim A
+    A retract-of B →
+    has-prop-double-negation-elim B → has-prop-double-negation-elim A
   has-prop-double-negation-elim-retract e =
     has-prop-double-negation-elim-iff (iff-retract e)
 
   has-prop-double-negation-elim-retract' :
-    B retract-of A → has-prop-double-negation-elim B → has-prop-double-negation-elim A
+    B retract-of A →
+    has-prop-double-negation-elim B → has-prop-double-negation-elim A
   has-prop-double-negation-elim-retract' e =
     has-prop-double-negation-elim-iff' (iff-retract e)
 ```

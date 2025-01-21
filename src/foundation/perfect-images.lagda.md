@@ -21,6 +21,7 @@ open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.double-negation-stable-propositions
 open import foundation.functoriality-dependent-function-types
+open import foundation.inhabited-types
 open import foundation.iterated-dependent-product-types
 open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle
@@ -28,6 +29,7 @@ open import foundation.mere-equality
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.pi-0-trivial-maps
+open import foundation.propositional-truncations
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
@@ -48,6 +50,8 @@ open import foundation-core.transport-along-identifications
 open import logic.double-negation-eliminating-maps
 open import logic.double-negation-elimination
 open import logic.double-negation-stable-embeddings
+open import logic.propositionally-decidable-maps
+open import logic.propositionally-double-negation-eliminating-maps
 ```
 
 </details>
@@ -62,9 +66,10 @@ also the following chain
   a₀ --> f (a₀) --> g(f(a₀)) --> f(g(f(a₀))) --> ... --> (g ◦ f)ⁿ(a₀) ＝ a
 ```
 
-We say `a₀` is an {{#concept "origin"}} for `a`, and `a` is a
-{{#concept "perfect image" Agda=is-perfect-image}} for `g` if any origin of `a`
-is in the [image](foundation.images.md) of `g`.
+We say `a₀` is an {{#concept "origin" Disambiguation="perfect image"}} for `a`,
+and `a` is a {{#concept "perfect image" Agda=is-perfect-image}} for `g`
+_relative to `f`_ if any origin of `a` is in the [image](foundation.images.md)
+of `g`.
 
 ## Definitions
 
@@ -91,8 +96,7 @@ module _
   is-perfect-image-at' a n = (p : fiber (iterate n (g ∘ f)) a) → fiber g (pr1 p)
 
   is-perfect-image' : (a : A) → UU (l1 ⊔ l2)
-  is-perfect-image' a =
-    (n : ℕ) → is-perfect-image-at' a n
+  is-perfect-image' a = (n : ℕ) → is-perfect-image-at' a n
 
   compute-is-perfect-image :
     (a : A) → is-perfect-image' a ≃ is-perfect-image f g a
@@ -107,7 +111,8 @@ module _
 
 ### Nonperfect images
 
-We can talk about origins of `a` which are not images of `g`.
+We can talk about origins of `a` which are not perfect images of `g` relative to
+`f`.
 
 ```agda
 module _
@@ -153,7 +158,7 @@ module _
 
 ## Properties
 
-TODO: prose here
+If `g` is an embedding then being a perfect image for `g` is a property.
 
 ```agda
 module _
@@ -262,10 +267,51 @@ module _
     v = tr (λ a' → ¬ (is-perfect-image f g a')) q s
 ```
 
+### Decidability of being a perfect image at a natural number
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
+  where
+
+  is-decidable-prop-is-perfect-image-at'' :
+    is-decidable-emb g → is-inhabited-or-empty-map f → is-π₀-trivial-map' f →
+    (a : A) (n : ℕ) → is-decidable-prop (is-perfect-image-at' f g a n)
+  is-decidable-prop-is-perfect-image-at'' G F F' a n =
+    is-decidable-prop-Π-all-elements-merely-equal-base'
+    ( λ x → fiber g (pr1 x) , is-decidable-prop-map-is-decidable-emb G (pr1 x))
+    ( is-π₀-trivial-map'-iterate
+      ( is-π₀-trivial-map'-comp
+        ( is-π₀-trivial-map'-is-emb (is-emb-is-decidable-emb G))
+        ( F'))
+      ( n)
+      ( a))
+    ( is-inhabited-or-empty-map-iterate-is-π₀-trivial-map'
+      ( is-inhabited-or-empty-map-comp-is-π₀-trivial-map'
+        ( is-π₀-trivial-map'-is-emb (is-emb-is-decidable-emb G))
+        ( is-inhabited-or-empty-map-is-decidable-map
+          ( is-decidable-map-is-decidable-emb G))
+        ( F))
+      ( is-π₀-trivial-map'-comp
+        ( is-π₀-trivial-map'-is-emb (is-emb-is-decidable-emb G))
+        ( F'))
+      ( n)
+      ( a))
+
+  is-decidable-prop-is-perfect-image-at' :
+    is-decidable-emb g → is-decidable-map f → is-π₀-trivial-map' f →
+    (a : A) (n : ℕ) → is-decidable-prop (is-perfect-image-at' f g a n)
+  is-decidable-prop-is-perfect-image-at' G F =
+    is-decidable-prop-is-perfect-image-at'' G
+      ( is-inhabited-or-empty-map-is-decidable-map F)
+```
+
 ### The constructive story
 
+#### Untruncated double negation elimination on nonperfect fibers
+
 If we assume that `g` is a double negation eliminating map, we can prove that if
-`is-nonperfect-image a` does not hold, we have `is-perfect-image a`.
+`is-nonperfect-image a` does not hold, then we have `is-perfect-image a`.
 
 ```agda
 module _
@@ -292,8 +338,9 @@ module _
   (nρ : ¬ (is-perfect-image f g (g b)))
   where
 
-  not-not-is-nonperfect-image : ¬¬ (is-nonperfect-image {f = f} (g b))
-  not-not-is-nonperfect-image nμ =
+  is-irrefutable-is-nonperfect-image-is-not-perfect-image :
+    ¬¬ (is-nonperfect-image {f = f} (g b))
+  is-irrefutable-is-nonperfect-image-is-not-perfect-image nμ =
     nρ (double-negation-elim-is-perfect-image G (g b) nμ)
 
 module _
@@ -317,10 +364,10 @@ module _
   (b : B) (nρ : ¬ (is-perfect-image f g (g b)))
   where
 
-  not-not-has-nonperfect-fiber-is-not-perfect-image :
+  is-irrefutable-has-nonperfect-fiber-is-not-perfect-image :
     ¬¬ (has-nonperfect-fiber f g b)
-  not-not-has-nonperfect-fiber-is-not-perfect-image t =
-    not-not-is-nonperfect-image
+  is-irrefutable-has-nonperfect-fiber-is-not-perfect-image t =
+    is-irrefutable-is-nonperfect-image-is-not-perfect-image
       ( is-double-negation-eliminating-g)
       ( b)
       ( nρ)
@@ -349,8 +396,7 @@ module _
   (is-injective-g : is-injective g)
   (is-double-negation-eliminating-f : is-double-negation-eliminating-map f)
   (is-π₀-trivial-f : is-π₀-trivial-map' f)
-  (b : B)
-  (nρ : ¬ (is-perfect-image f g (g b)))
+  (b : B) (nρ : ¬ (is-perfect-image f g (g b)))
   where
 
   has-nonperfect-fiber-is-not-perfect-image :
@@ -360,7 +406,7 @@ module _
       ( is-double-negation-eliminating-f)
       ( is-π₀-trivial-f)
       ( b)
-      ( not-not-has-nonperfect-fiber-is-not-perfect-image
+      ( is-irrefutable-has-nonperfect-fiber-is-not-perfect-image
         ( is-double-negation-eliminating-g)
         ( is-injective-g)
         ( b)
@@ -380,158 +426,7 @@ module _
     pr2 fiber-has-nonperfect-fiber-is-not-perfect-image
 
   is-not-perfect-image-has-nonperfect-fiber-is-not-perfect-image :
-     ¬ (is-perfect-image f g element-has-nonperfect-fiber-is-not-perfect-image)
+    ¬ (is-perfect-image f g element-has-nonperfect-fiber-is-not-perfect-image)
   is-not-perfect-image-has-nonperfect-fiber-is-not-perfect-image =
     pr2 has-nonperfect-fiber-is-not-perfect-image
-
-module _
-  {l1 : Level} {A : UU l1} {f : A → A}
-  (is-decidable-f : is-decidable-map f)
-  (is-π₀-trivial-f : is-π₀-trivial-map' f)
-  where
-
-  is-decidable-map-iterate-is-π₀-trivial-map' :
-    (n : ℕ) → is-decidable-map (iterate n f)
-  is-decidable-map-iterate-is-π₀-trivial-map' zero-ℕ = is-decidable-map-id
-  is-decidable-map-iterate-is-π₀-trivial-map' (succ-ℕ n) =
-    is-decidable-map-comp-is-π₀-trivial-map'
-      ( is-π₀-trivial-f)
-      ( is-decidable-f)
-      ( is-decidable-map-iterate-is-π₀-trivial-map' n)
-
-module _
-  {l1 : Level} {A : UU l1} {f : A → A}
-  (is-π₀-trivial-f : is-π₀-trivial-map' f)
-  where
-
-  is-π₀-trivial-map'-iterate :
-    (n : ℕ) → is-π₀-trivial-map' (iterate n f)
-  is-π₀-trivial-map'-iterate zero-ℕ = is-π₀-trivial-map'-id
-  is-π₀-trivial-map'-iterate (succ-ℕ n) =
-    is-π₀-trivial-map'-comp is-π₀-trivial-f (is-π₀-trivial-map'-iterate n)
-```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
-  (G : is-decidable-emb g) (F : is-decidable-map f) (F' : is-π₀-trivial-map' f)
-  where
-
-  is-decidable-prop-is-perfect-image-at' :
-    (a : A) (n : ℕ) → is-decidable-prop (is-perfect-image-at' f g a n)
-  is-decidable-prop-is-perfect-image-at' a n =
-    is-decidable-prop-Π-all-elements-merely-equal-base
-      ( λ x →
-        fiber g (pr1 x) ,
-        is-decidable-prop-map-is-decidable-emb G (pr1 x))
-      ( is-π₀-trivial-map'-iterate
-        ( is-π₀-trivial-map'-comp
-          ( is-π₀-trivial-map'-is-emb (is-emb-is-decidable-emb G))
-          ( F'))
-        ( n)
-        ( a))
-      ( is-decidable-map-iterate-is-π₀-trivial-map'
-        ( is-decidable-map-comp-is-π₀-trivial-map'
-          ( is-π₀-trivial-map'-is-emb (is-emb-is-decidable-emb G))
-          ( is-decidable-map-is-decidable-emb G)
-        ( F))
-        ( is-π₀-trivial-map'-comp
-          ( is-π₀-trivial-map'-is-emb (is-emb-is-decidable-emb G))
-          ( F'))
-        ( n)
-        ( a))
-```
-
-### Assuming the weak limited principle of omniscience
-
-```agda
-module _
-  {l1 l2 : Level}
-  (wlpo : level-WLPO (l1 ⊔ l2))
-  {A : UU l1} {B : UU l2}
-  {f : A → B} {g : B → A}
-  (G : is-decidable-emb g)
-  (F : is-decidable-map f)
-  (F' : is-π₀-trivial-map' f)
-  where
-
-  abstract
-    is-decidable-is-perfect-image'-WLPO :
-      (a : A) → is-decidable (is-perfect-image' f g a)
-    is-decidable-is-perfect-image'-WLPO a =
-      wlpo
-        ( λ n →
-          is-perfect-image-at' f g a n ,
-          is-decidable-prop-is-perfect-image-at' G F F' a n)
-
-  is-decidable-is-perfect-image-WLPO :
-    (a : A) → is-decidable (is-perfect-image f g a)
-  is-decidable-is-perfect-image-WLPO a =
-    is-decidable-equiv'
-      ( compute-is-perfect-image f g a)
-      ( is-decidable-is-perfect-image'-WLPO a)
-```
-
-### The classical story
-
-If `g` is an [embedding](foundation-core.embeddings.md), then
-`is-perfect-image a` is a [proposition](foundation-core.propositions.md). In
-this case, if we assume the
-[law of exluded middle](foundation.law-of-excluded-middle.md), we can show
-`is-perfect-image a` is a [decidable type](foundation.decidable-types.md) for
-any `a : A`.
-
-```agda
-module _
-  {l1 l2 : Level} (lem : LEM (l1 ⊔ l2)) {A : UU l1} {B : UU l2}
-  {f : A → B} {g : B → A} (is-emb-g : is-emb g)
-  where
-
-  is-decidable-is-perfect-image-is-emb-LEM :
-    (a : A) → is-decidable (is-perfect-image f g a)
-  is-decidable-is-perfect-image-is-emb-LEM a =
-    lem (is-perfect-image-Prop is-emb-g a)
-```
-
-If we assume the law of excluded middle and `g` is an embedding, we can prove
-that if `is-nonperfect-image a` does not hold, we have `is-perfect-image a`.
-
-```agda
-module _
-  {l1 l2 : Level} (lem : LEM (l1 ⊔ l2))
-  {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
-  (is-emb-g : is-emb g)
-  where
-
-  double-negation-elim-is-perfect-image-LEM :
-    (a : A) → ¬ (is-nonperfect-image a) → is-perfect-image f g a
-  double-negation-elim-is-perfect-image-LEM =
-    double-negation-elim-is-perfect-image
-      ( is-double-negation-eliminating-map-is-decidable-map
-        ( λ y → lem (fiber g y , is-prop-map-is-emb is-emb-g y)))
-```
-
-The following property states that if `g (b)` is not a perfect image, then `b`
-has an `f` fiber `a` that is not a perfect image for `g`. Again, we need to
-assume law of excluded middle and that both `g` and `f` are embedding.
-
-```agda
-module _
-  {l1 l2 : Level} (lem : LEM (l1 ⊔ l2))
-  {A : UU l1} {B : UU l2} {f : A → B} {g : B → A}
-  (is-emb-f : is-emb f) (is-emb-g : is-emb g)
-  where
-
-  has-nonperfect-fiber-is-not-perfect-image-LEM :
-      (b : B) →
-      ¬ (is-perfect-image f g (g b)) →
-      has-nonperfect-fiber f g b
-  has-nonperfect-fiber-is-not-perfect-image-LEM =
-    has-nonperfect-fiber-is-not-perfect-image
-      ( is-double-negation-eliminating-map-is-decidable-map
-        ( λ y → lem (fiber g y , is-prop-map-is-emb is-emb-g y)))
-      ( is-injective-is-emb is-emb-g)
-      ( is-double-negation-eliminating-map-is-decidable-map
-        ( λ y → lem (fiber f y , is-prop-map-is-emb is-emb-f y)))
-      ( λ y p q → mere-eq-eq (eq-is-prop (is-prop-map-is-emb is-emb-f y)))
 ```

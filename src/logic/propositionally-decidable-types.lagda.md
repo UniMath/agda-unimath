@@ -266,7 +266,8 @@ is-inhabited-or-empty-product (inr na) dB = inr (na ∘ pr1)
 
 is-inhabited-or-empty-product' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-inhabited-or-empty A → (A → is-inhabited-or-empty B) → is-inhabited-or-empty (A × B)
+  is-inhabited-or-empty A → (A → is-inhabited-or-empty B) →
+  is-inhabited-or-empty (A × B)
 is-inhabited-or-empty-product' (inl a) dB =
   rec-trunc-Prop
     ( is-inhabited-or-empty-Prop _)
@@ -297,7 +298,9 @@ is-inhabited-or-empty-right-factor (inr nx) a = inr (λ b → nx (a , b))
 ```agda
 is-inhabited-or-empty-function-type :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-inhabited-or-empty A → is-inhabited-or-empty B → is-inhabited-or-empty (A → B)
+  is-inhabited-or-empty A →
+  is-inhabited-or-empty B →
+  is-inhabited-or-empty (A → B)
 is-inhabited-or-empty-function-type (inl a) (inl b) =
   inl (rec-trunc-Prop (trunc-Prop _) (λ y → unit-trunc-Prop (λ _ → y)) b)
 is-inhabited-or-empty-function-type (inl a) (inr nb) =

@@ -7,6 +7,8 @@ module foundation.decidable-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
@@ -33,6 +35,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
+open import foundation-core.iterating-functions
 open import foundation-core.retractions
 open import foundation-core.sections
 ```
@@ -96,6 +99,43 @@ abstract
       ( K b)
 ```
 
+### Maps with sections are decidable
+
+```agda
+is-decidable-map-section :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  (i : A → B) → section i → is-decidable-map i
+is-decidable-map-section i (s , S) b = inl (s b , S b)
+```
+
+### Any map out of the empty type is decidable
+
+```agda
+abstract
+  is-decidable-map-ex-falso :
+    {l : Level} {X : UU l} → is-decidable-map (ex-falso {l} {X})
+  is-decidable-map-ex-falso x = inr pr1
+```
+
+### The identity map is decidable
+
+```agda
+abstract
+  is-decidable-map-id :
+    {l : Level} {X : UU l} → is-decidable-map (id {l} {X})
+  is-decidable-map-id y = inl (y , refl)
+```
+
+### Equivalences are decidable maps
+
+```agda
+abstract
+  is-decidable-map-is-equiv :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-equiv f → is-decidable-map f
+  is-decidable-map-is-equiv H x = inl (center (is-contr-map-is-equiv H x))
+```
+
 ### Composition of decidable maps
 
 The composite `g ∘ f` of two decidable maps is decidable if `g` is injective.
@@ -141,6 +181,21 @@ module _
       is-decidable-equiv
         ( compute-fiber-comp g f x)
         ( is-decidable-Σ-all-elements-merely-equal-base (H x) (G x) (F ∘ pr1))
+
+module _
+  {l1 : Level} {A : UU l1} {f : A → A}
+  (is-decidable-f : is-decidable-map f)
+  (is-π₀-trivial-f : is-π₀-trivial-map' f)
+  where
+
+  is-decidable-map-iterate-is-π₀-trivial-map' :
+    (n : ℕ) → is-decidable-map (iterate n f)
+  is-decidable-map-iterate-is-π₀-trivial-map' zero-ℕ = is-decidable-map-id
+  is-decidable-map-iterate-is-π₀-trivial-map' (succ-ℕ n) =
+    is-decidable-map-comp-is-π₀-trivial-map'
+      ( is-π₀-trivial-f)
+      ( is-decidable-f)
+      ( is-decidable-map-iterate-is-π₀-trivial-map' n)
 ```
 
 ### Left cancellation for decidable maps
@@ -173,43 +228,6 @@ is-decidable-map-retraction d i (r , R) b =
     ( λ (p : i (r b) ＝ b) → r b , p)
     ( λ t → ap (i ∘ r) (inv (pr2 t)) ∙ ap i (R (pr1 t)) ∙ pr2 t)
     ( d (i (r b)) b)
-```
-
-### Maps with sections are decidable
-
-```agda
-is-decidable-map-section :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  (i : A → B) → section i → is-decidable-map i
-is-decidable-map-section i (s , S) b = inl (s b , S b)
-```
-
-### Any map out of the empty type is decidable
-
-```agda
-abstract
-  is-decidable-map-ex-falso :
-    {l : Level} {X : UU l} → is-decidable-map (ex-falso {l} {X})
-  is-decidable-map-ex-falso x = inr pr1
-```
-
-### The identity map is decidable
-
-```agda
-abstract
-  is-decidable-map-id :
-    {l : Level} {X : UU l} → is-decidable-map (id {l} {X})
-  is-decidable-map-id y = inl (y , refl)
-```
-
-### Equivalences are decidable maps
-
-```agda
-abstract
-  is-decidable-map-is-equiv :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    is-equiv f → is-decidable-map f
-  is-decidable-map-is-equiv H x = inl (center (is-contr-map-is-equiv H x))
 ```
 
 ### The map on total spaces induced by a family of decidable maps is decidable

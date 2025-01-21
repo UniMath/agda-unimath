@@ -24,6 +24,8 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.negation
+
+open import logic.propositionally-decidable-types
 ```
 
 </details>
@@ -115,4 +117,28 @@ is-decidable-Σ-all-elements-merely-equal-base {B = B} H (inl x) K =
     ( K x)
 is-decidable-Σ-all-elements-merely-equal-base H (inr nx) K =
   inr (map-neg pr1 nx)
+
+is-inhabited-or-empty-Σ-all-elements-merely-equal-base :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  all-elements-merely-equal A →
+  is-inhabited-or-empty A →
+  ((x : A) → is-inhabited-or-empty (B x)) →
+  is-inhabited-or-empty (Σ A B)
+is-inhabited-or-empty-Σ-all-elements-merely-equal-base {A = A} {B} H dA dB =
+  elim-is-inhabited-or-empty-Prop
+    ( is-inhabited-or-empty-Prop (Σ A B))
+    ( λ a →
+      elim-is-inhabited-or-empty-Prop
+        ( is-inhabited-or-empty-Prop (Σ A B))
+        ( λ b → inl (unit-trunc-Prop (a , b)))
+        ( λ nb →
+          inr
+            ( λ x →
+              rec-trunc-Prop
+                ( empty-Prop)
+                ( λ p → nb (tr B p (pr2 x)))
+                ( H (pr1 x) a)))
+        ( dB a))
+    ( λ na → inr (map-neg pr1 na))
+    ( dA)
 ```

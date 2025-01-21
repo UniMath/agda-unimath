@@ -62,8 +62,16 @@ prop-level-LLPO l =
       function-Prop
         ( is-prop (Σ ℕ (type-Decidable-Prop ∘ f)))
         ( disjunction-Prop
-          ( ∀' ℕ (λ n → function-Prop (is-even-ℕ n) (neg-Prop (prop-Decidable-Prop (f n)))))
-          ( ∀' ℕ (λ n → function-Prop (is-odd-ℕ n) (neg-Prop (prop-Decidable-Prop (f n)))))))
+          ( ∀' ℕ
+            ( λ n →
+              function-Prop
+                ( is-even-ℕ n)
+                ( neg-Prop (prop-Decidable-Prop (f n)))))
+          ( ∀' ℕ
+            ( λ n →
+              function-Prop
+                ( is-odd-ℕ n)
+                ( neg-Prop (prop-Decidable-Prop (f n)))))))
 ```
 
 ## See also

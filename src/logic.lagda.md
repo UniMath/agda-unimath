@@ -21,5 +21,7 @@ open import logic.double-negation-stable-subtypes public
 open import logic.markovian-types public
 open import logic.markovs-principle public
 open import logic.propositional-double-negation-elimination public
+open import logic.propositionally-decidable-maps public
 open import logic.propositionally-decidable-types public
+open import logic.propositionally-double-negation-eliminating-maps public
 ```

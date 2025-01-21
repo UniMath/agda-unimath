@@ -7,6 +7,8 @@ module foundation.pi-0-trivial-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
@@ -15,7 +17,6 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
-open import foundation.iterating-functions
 open import foundation.mere-equality
 open import foundation.retracts-of-maps
 open import foundation.universe-levels
@@ -30,6 +31,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
+open import foundation-core.iterating-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.retractions
@@ -92,4 +94,15 @@ module _
       all-elements-merely-equal-equiv
         ( compute-fiber-comp g f y)
         ( all-elements-merely-equal-Σ (G y) (F ∘ pr1))
+
+module _
+  {l1 : Level} {A : UU l1} {f : A → A}
+  (is-π₀-trivial-f : is-π₀-trivial-map' f)
+  where
+
+  is-π₀-trivial-map'-iterate :
+    (n : ℕ) → is-π₀-trivial-map' (iterate n f)
+  is-π₀-trivial-map'-iterate zero-ℕ = is-π₀-trivial-map'-id
+  is-π₀-trivial-map'-iterate (succ-ℕ n) =
+    is-π₀-trivial-map'-comp is-π₀-trivial-f (is-π₀-trivial-map'-iterate n)
 ```
