@@ -26,13 +26,17 @@ open import foundation-core.sets
 
 </details>
 
-## Statement
+## Idea
 
 The {{#concept "lesser limited principle of omniscience" Agda=LLPO}} (LLPO)
 asserts that for any [sequence](foundation.sequences.md) of
 [booleans](foundation.booleans.md) `f : ℕ → bool` such that `f n` is true for
 [at most one](foundation-core.propositions.md) `n`, then either `f n` is false
 for all even `n` or `f n` is false for all odd `n`.
+
+## Definitions
+
+### The small lesser limited principle of omniscience
 
 ```agda
 prop-bool-LLPO : Prop lzero
@@ -53,6 +57,8 @@ is-prop-bool-LLPO : is-prop bool-LLPO
 is-prop-bool-LLPO = is-prop-type-Prop prop-bool-LLPO
 ```
 
+### The lesser limited principle of omniscience with respect to a universe level
+
 ```agda
 prop-level-LLPO : (l : Level) → Prop (lsuc l)
 prop-level-LLPO l =
@@ -72,6 +78,19 @@ prop-level-LLPO l =
               function-Prop
                 ( is-odd-ℕ n)
                 ( neg-Prop (prop-Decidable-Prop (f n)))))))
+
+level-LLPO : (l : Level) → UU (lsuc l)
+level-LLPO l = type-Prop (prop-level-LLPO l)
+
+is-prop-level-LLPO : {l : Level} → is-prop (level-LLPO l)
+is-prop-level-LLPO {l} = is-prop-type-Prop (prop-level-LLPO l)
+```
+
+### The lesser limited principle of omniscience
+
+```agda
+LLPO : UUω
+LLPO = {l : Level} → level-LLPO l
 ```
 
 ## See also
