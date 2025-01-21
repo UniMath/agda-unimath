@@ -25,13 +25,17 @@ open import order-theory.inflationary-maps-posets
 
 ## Idea
 
-A function $f : \mathbb{N} \to \mathbb{N}$ is an {{#concept "inflationary function" Disambiguation="natural numbers" Agda=is-inflationary-ℕ}} if the implication
+A function $f : \mathbb{N} \to \mathbb{N}$ is an
+{{#concept "inflationary function" Disambiguation="natural numbers" Agda=is-inflationary-ℕ}}
+if the implication
 
 $$
   (x \leq y) \to (f(x) \leq f(y))
 $$
 
-holds for every $x,y:\mathbb{N}$. If $f$ is an inflationary function on the natural numbers such that $f(0) \leq b$ for some natural number $b$, then there is a maximal natural number $k$ such that $f(k) \leq b$.
+holds for every $x,y:\mathbb{N}$. If $f$ is an inflationary function on the
+natural numbers such that $f(0) \leq b$ for some natural number $b$, then there
+is a maximal natural number $k$ such that $f(k) \leq b$.
 
 ## Definitions
 
@@ -78,4 +82,3 @@ is-decidable-fiber-inflationary-map-ℕ = {!!}
 ```
 
 ### For any inflationary map $f$ with $f(0) \leq b$, there is a maximal number $k$ such that $f(k) \leq b$
-

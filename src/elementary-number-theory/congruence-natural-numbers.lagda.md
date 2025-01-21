@@ -29,15 +29,30 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Two [natural numbers](elementary-number-theory.natural-numbers.md) `x` and `y` are said to be {{#concept "congruent" Disambiguation="natural numbers" Agda=cong-ℕ WDID=Q3773677 WD="congruence of integers"}} modulo `k` if their [distance](elementary-number-theory.distance-natural-numbers.md) `dist-ℕ x y` is [divisible](elementary-number-theory.divisibility-natural-numbers.md) by `k`, i.e., if
+Two [natural numbers](elementary-number-theory.natural-numbers.md) `x` and `y`
+are said to be
+{{#concept "congruent" Disambiguation="natural numbers" Agda=cong-ℕ WDID=Q3773677 WD="congruence of integers"}}
+modulo `k` if their
+[distance](elementary-number-theory.distance-natural-numbers.md) `dist-ℕ x y` is
+[divisible](elementary-number-theory.divisibility-natural-numbers.md) by `k`,
+i.e., if
 
 ```text
   k | dist-ℕ x y.
 ```
 
-For each natural number `k`, the congruence relation modulo `k` defines an [equivalence relation](foundation.equivalence-relations.md). Furthermore, the congruence relations respect [addition](elementary-number-theory.addition-natural-numbers.md) and [multiplication](elementary-number-theory.multiplication-natural-numbers.md).
+For each natural number `k`, the congruence relation modulo `k` defines an
+[equivalence relation](foundation.equivalence-relations.md). Furthermore, the
+congruence relations respect
+[addition](elementary-number-theory.addition-natural-numbers.md) and
+[multiplication](elementary-number-theory.multiplication-natural-numbers.md).
 
-[Quotienting](foundation.set-quotients.md) by the congruence relation leads to [modular arithmetic](elementary-number-theory.modular-arithmetic.md). Properties of the congruence relation with respect to the [standard finite types](univalent-combinatorics.standard-finite-types.md) are formalized in the file [`modular-arithmetic-standard-finite-types`](elementary-number-theory.modular-arithmetic-standard-finite-types.md).
+[Quotienting](foundation.set-quotients.md) by the congruence relation leads to
+[modular arithmetic](elementary-number-theory.modular-arithmetic.md). Properties
+of the congruence relation with respect to the
+[standard finite types](univalent-combinatorics.standard-finite-types.md) are
+formalized in the file
+[`modular-arithmetic-standard-finite-types`](elementary-number-theory.modular-arithmetic-standard-finite-types.md).
 
 ## Properties
 

@@ -29,17 +29,34 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-{{#concept "Euclidean division" Agda=euclidean-division-ℕ}} is a binary operation on the [natural numbers](elementary-number-theory.natural-numbers.md) that returns the division with remainder. In other words, the Euclidean division of
-`n` by `d` gives the unique pair of natural numbers `q` and `r < d` such that the identification `qd + r ＝ n` holds.
+{{#concept "Euclidean division" Agda=euclidean-division-ℕ}} is a binary
+operation on the [natural numbers](elementary-number-theory.natural-numbers.md)
+that returns the division with remainder. In other words, the Euclidean division
+of `n` by `d` gives the unique pair of natural numbers `q` and `r < d` such that
+the identification `qd + r ＝ n` holds.
 
-There are several ways of specifying Euclidean division. Since we have already defined the [congruence relations](elementary-number-theory.congruence-natural-numbers.md) independently, we can define the Euclidean division of a natural number `n` by `d` as the data consisting of:
-- A natural number `r`, called the {{#concept "remainder" Disambiguation="Euclidean division of natural numbers" Agda=remainder-euclidean-division-ℕ}}
+There are several ways of specifying Euclidean division. Since we have already
+defined the
+[congruence relations](elementary-number-theory.congruence-natural-numbers.md)
+independently, we can define the Euclidean division of a natural number `n` by
+`d` as the data consisting of:
+
+- A natural number `r`, called the
+  {{#concept "remainder" Disambiguation="Euclidean division of natural numbers" Agda=remainder-euclidean-division-ℕ}}
 - A proof that `r` is congruent to `n` modulo `d`
 - A proof that if `d ≠ 0`, then `r < d`.
 
-Given that `r` is congruent to `n` modulo `d` we obtain a number `q` such that `d * q = dist-ℕ r x`, where `dist-ℕ` is the [distance function](elementary-number-theory.distance-natural-numbers.md). This number `q` is the {{#concept "quotient" Disambiguation="Euclidean divistion of naturalnumbers" Agda=quotient-euclidean-division-ℕ}} after Euclidean division.
+Given that `r` is congruent to `n` modulo `d` we obtain a number `q` such that
+`d * q = dist-ℕ r x`, where `dist-ℕ` is the
+[distance function](elementary-number-theory.distance-natural-numbers.md). This
+number `q` is the
+{{#concept "quotient" Disambiguation="Euclidean divistion of naturalnumbers" Agda=quotient-euclidean-division-ℕ}}
+after Euclidean division.
 
-Note that if `d ＝ 0`, then the unique natural number that is congruent to `n` modulo `d` is the number `n` itself. The type of this data is therefore always [contractible](foundation-core.contractible-types.md), even in the case `d ＝ 0`.
+Note that if `d ＝ 0`, then the unique natural number that is congruent to `n`
+modulo `d` is the number `n` itself. The type of this data is therefore always
+[contractible](foundation-core.contractible-types.md), even in the case
+`d ＝ 0`.
 
 ## Definitions
 
@@ -150,7 +167,8 @@ quotient-euclidean-division-ℕ' (succ-ℕ k) n =
 
 ### If `d` divides a number `n`, then its quotient by euclidean division is its quotient by division
 
-Suppose `q * d ＝ n`. Then the congruence class `r` of `n` modulo `d` is `0`, so the distance between `r` and `n` is `n`. 
+Suppose `q * d ＝ n`. Then the congruence class `r` of `n` modulo `d` is `0`, so
+the distance between `r` and `n` is `n`.
 
 ```text
 compute-euclidean-division-div-ℕ :

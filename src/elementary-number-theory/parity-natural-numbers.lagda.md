@@ -370,7 +370,8 @@ is-odd-is-1-mod-2-ℕ (succ-ℕ n) H K =
 
 ### If a successor number `n + 1` is even, then its quotient after division by `2` is at most `n`
 
-**Proof.** Suppose that `q * 2 ＝ n + 1` for some natural number `q`. Then `q` is a successor, say `q ＝ q' + 1`. It follows that
+**Proof.** Suppose that `q * 2 ＝ n + 1` for some natural number `q`. Then `q`
+is a successor, say `q ＝ q' + 1`. It follows that
 
 ```text
   q + 1 ≤ q + q' + 1 ＝ q + q ＝ q * 2 ＝ n + 1.
@@ -519,6 +520,7 @@ is-nonzero-is-odd-ℕ .zero-ℕ H refl = H is-even-zero-ℕ
 Further laws of parity are proven in other files, e.g.:
 
 - [Parity of integers](elementary-number-theory.parity-integers.md)
-- [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md). Here we also show that the sum of the first $n$ odd numbers is $n^2$.
+- [Squares of natural numbers](elementary-number-theory.squares-natural-numbers.md).
+  Here we also show that the sum of the first $n$ odd numbers is $n^2$.
 - The fact that the pronic numbers $n(n+1)$ are even is proven in
   [Pronic numbers](elementary-number-theory.pronic-numbers.md).

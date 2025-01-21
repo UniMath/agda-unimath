@@ -215,7 +215,8 @@ pr2 (has-fixed-point-quotient-divisor-is-square-ℕ n H) =
 
 ### The type of fixed points of the involution on the type of divisors is a proposition
 
-This essentially claims that only the square root of a square can be the fixed point of the involution on the type of divisors.
+This essentially claims that only the square root of a square can be the fixed
+point of the involution on the type of divisors.
 
 ```agda
 all-elements-equal-fixed-point-quotient-divisor-ℕ :
@@ -239,4 +240,11 @@ is-prop-fixed-point-quotient-divisor-ℕ n =
 
 ## Remarks
 
-In the properties above we have shown that the quotient operation on the type of divisors of any natural number $n$ is an involution with at most one fixed point, and it has a fixed point if and only if $n$ is square. This implies that the number of divisors is odd if and only if $n$ is a square. However, in the agda-unimath library we don't have the appropriate infrastructure yet for counting the elements of types with involutions. The conclusion that the number of divisors of $n$ is odd if and only if $n$ is a square will be formalized in the future.
+In the properties above we have shown that the quotient operation on the type of
+divisors of any natural number $n$ is an involution with at most one fixed
+point, and it has a fixed point if and only if $n$ is square. This implies that
+the number of divisors is odd if and only if $n$ is a square. However, in the
+agda-unimath library we don't have the appropriate infrastructure yet for
+counting the elements of types with involutions. The conclusion that the number
+of divisors of $n$ is odd if and only if $n$ is a square will be formalized in
+the future.

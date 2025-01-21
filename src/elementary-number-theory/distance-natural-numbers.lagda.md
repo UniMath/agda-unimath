@@ -31,10 +31,17 @@ open import foundation.universe-levels
 The
 {{#concept "distance function" Disambiguation="natural numbers" Agda=dist-ℕ}}
 between [natural numbers](elementary-number-theory.natural-numbers.md) measures
-how far two natural numbers are apart. If the [inequality](elementary-number-theory.inequality-natural-numbers.md) $x \leq y$ holds, then the distance between $x$ and $y$ is the unique natural number $d$ equipped with an [identification](foundation-core.identity-types.md) $x + d = y$.
+how far two natural numbers are apart. If the
+[inequality](elementary-number-theory.inequality-natural-numbers.md) $x \leq y$
+holds, then the distance between $x$ and $y$ is the unique natural number $d$
+equipped with an [identification](foundation-core.identity-types.md)
+$x + d = y$.
 
-**Note.** In the agda-unimath library, we often
-prefer to work with `dist-ℕ` over the subtraction operation, which is either partially defined or it returns nonsensical values. Not only is the distance function sensibly defined for any pair of natural numbers, but it also satisfies the more pleasant and predictable properties of a [metric](metric-spaces.metric-spaces.md).
+**Note.** In the agda-unimath library, we often prefer to work with `dist-ℕ`
+over the subtraction operation, which is either partially defined or it returns
+nonsensical values. Not only is the distance function sensibly defined for any
+pair of natural numbers, but it also satisfies the more pleasant and predictable
+properties of a [metric](metric-spaces.metric-spaces.md).
 
 ## Definition
 

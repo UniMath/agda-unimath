@@ -36,7 +36,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The {{#concept "maximum" Disambiguation="natural numbers" Agda=max-ℕ}} of two [natural numbers](elementary-number-theory.natural-numbers.md) is a binary operation that returns the largest of two natural numbers. It is defined recursively by
+The {{#concept "maximum" Disambiguation="natural numbers" Agda=max-ℕ}} of two
+[natural numbers](elementary-number-theory.natural-numbers.md) is a binary
+operation that returns the largest of two natural numbers. It is defined
+recursively by
 
 ```text
   max-ℕ 0 n = n
@@ -44,7 +47,9 @@ The {{#concept "maximum" Disambiguation="natural numbers" Agda=max-ℕ}} of two 
   max-ℕ (m + 1) (n + 1) = (max m n) + 1.
 ```
 
-Furthermore, we define the maximum of any [standard finite](univalent-combinatorics.standard-finite-types.md) family of natural numbers.
+Furthermore, we define the maximum of any
+[standard finite](univalent-combinatorics.standard-finite-types.md) family of
+natural numbers.
 
 ## Definition
 

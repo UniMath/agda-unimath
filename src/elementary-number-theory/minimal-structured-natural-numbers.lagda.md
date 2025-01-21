@@ -27,7 +27,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider a type family $P$ over $\mathbb{N}$. A {{#concept "minimal structured natural number" Agda=minimal-element-ℕ}} in $P$ is a natural number $n$ equipped with an element $p : P(n)$ such that $n$ is a [lower bound](elementary-number-theory.lower-bounds-natural-numbers.md) for $P$.
+Consider a type family $P$ over $\mathbb{N}$. A
+{{#concept "minimal structured natural number" Agda=minimal-element-ℕ}} in $P$
+is a natural number $n$ equipped with an element $p : P(n)$ such that $n$ is a
+[lower bound](elementary-number-theory.lower-bounds-natural-numbers.md) for $P$.
 
 ## Definitions
 
@@ -100,11 +103,12 @@ module _
 
 ### Shifting minimal elements
 
-If $P(0)$ is a decidable type, then we can obtain a minimal structured element of $P$ from a minimal structured element of $n\mapsto P(n+1)$.
+If $P(0)$ is a decidable type, then we can obtain a minimal structured element
+of $P$ from a minimal structured element of $n\mapsto P(n+1)$.
 
 ```agda
 module _
-  {l : Level} (P : ℕ → UU l) 
+  {l : Level} (P : ℕ → UU l)
   where
 
   shift-minimal-element-ℕ :

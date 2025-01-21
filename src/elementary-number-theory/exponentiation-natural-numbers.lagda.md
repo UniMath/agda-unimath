@@ -49,7 +49,8 @@ open import univalent-combinatorics.finite-maps
 
 The {{#concept "exponential" Agda=exp-ℕ WD="exponentiation" WDID=Q33456}} $m^n$
 of two [natural numbers](elementary-number-theory.natural-numbers.md) is the
-number obtained by multiplying $m$ with itself $n$ times. We use the following terminology in our formalization and naming scheme:
+number obtained by multiplying $m$ with itself $n$ times. We use the following
+terminology in our formalization and naming scheme:
 
 - The number $m^n$ is the **$n$th power** of $m$.
 - The number $m^n$ is an **exponential**.
@@ -57,9 +58,12 @@ number obtained by multiplying $m$ with itself $n$ times. We use the following t
 - The number $m$ in $m^n$ is the **base** of the exponential.
 - The operation $m,n \mapsto m^n$ is called **exponentiation**.
 - The function $n \mapsto m^n$ is the **exponentiation function** with base $m$.
-- The function $m \mapsto m^n$ is the **$n$th power function**. Specific instances are [squaring](elementary-number-theory.squares-natural-numbers.md) and [cubing](elementary-number-theory.cubes-natural-numbers.md).
+- The function $m \mapsto m^n$ is the **$n$th power function**. Specific
+  instances are [squaring](elementary-number-theory.squares-natural-numbers.md)
+  and [cubing](elementary-number-theory.cubes-natural-numbers.md).
 
-The natural numbers satisfy Tarski's high school arithmetic laws for exponentiation.
+The natural numbers satisfy Tarski's high school arithmetic laws for
+exponentiation.
 
 ## Definition
 
@@ -81,7 +85,9 @@ is-power-ℕ m n = fiber (power-ℕ n) m
 
 ### Exponentiation of natural numbers
 
-The function `exp-ℕ : ℕ → ℕ → ℕ` defines the exponentiation map $m,n \mapsto m^n$. Note that this is just the power function, with the order of its arguments swapped.
+The function `exp-ℕ : ℕ → ℕ → ℕ` defines the exponentiation map
+$m,n \mapsto m^n$. Note that this is just the power function, with the order of
+its arguments swapped.
 
 ```agda
 exp-ℕ : ℕ → ℕ → ℕ
@@ -490,8 +496,10 @@ leq-exponent-div-exp-ℕ m (succ-ℕ n) (succ-ℕ k) H K =
 
 ### If $m^k \mid m^n$ and $m$ is nonzero, then its quotient is $m^{d(n,k)}$
 
-In the case where $m=0$ we have $0^n \mid 0^n$. For any nonzero number $n$ this would give $0 \mid 0$. The quotient of $0$ divided by $0$ is the unique number $k \leq 0$ such that $k\cdot 0=0$, i.e., it is $0$. However, since $d(n,n)=0$ we have $m^{d(n,n)}=1$, which isn't the quotient under our definitions.
-
+In the case where $m=0$ we have $0^n \mid 0^n$. For any nonzero number $n$ this
+would give $0 \mid 0$. The quotient of $0$ divided by $0$ is the unique number
+$k \leq 0$ such that $k\cdot 0=0$, i.e., it is $0$. However, since $d(n,n)=0$ we
+have $m^{d(n,n)}=1$, which isn't the quotient under our definitions.
 
 ```agda
 valuation-is-exponent-div-exp-exp-ℕ :

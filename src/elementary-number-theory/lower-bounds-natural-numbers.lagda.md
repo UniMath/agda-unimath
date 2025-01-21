@@ -30,14 +30,29 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider a type family $P$ over the [natural numbers](elementary-number-theory.natural-numbers.md). A {{#concept "structured natural number"}} is simply a natural number $n$ equipped with an element $P(n)$. In this file we consider various upper bounds for structured natural numbers, and relations between them. This file builds the prerequisite infrastructure for the [well-ordering principle](elementary-number-theory.well-ordering-principle-natural-numbers.md) of the natural numbers, and its direct consequences.
+Consider a type family $P$ over the
+[natural numbers](elementary-number-theory.natural-numbers.md). A
+{{#concept "structured natural number"}} is simply a natural number $n$ equipped
+with an element $P(n)$. In this file we consider various upper bounds for
+structured natural numbers, and relations between them. This file builds the
+prerequisite infrastructure for the
+[well-ordering principle](elementary-number-theory.well-ordering-principle-natural-numbers.md)
+of the natural numbers, and its direct consequences.
 
-- A natural number $n$ is said to be a {{#concept "lower bound" Disambiguation="structured natural numbers" Agda=is-lower-bound-ℕ}} if there is a
-function from $P(x)$ to the type $n \leq x$ for all $x : \mathbb{N}$.
-- A natural number $n$ is said to be a {{#concept "strict lower bound" Disambiguation="structured natural numbers" Agda=is-strict-lower-bound-ℕ}} if there is a
-function from $P(x)$ to the type $n < x$ for all $x : \mathbb{N}$.
-- A natural number $n$ is said to be a {{#concept "largest lower bound" Disambiguation="structured natural numbers" Agda=is-largest-lower-bound-ℕ}} if any natural number $x$ is a lower bound if and only if $x \leq n$.
-- A natural number $n$ is said to be a {{#concept "largest strict lower bound" Disambiguation="structured natural numbers" Agda=is-largest-strict-lower-bound-ℕ}} if any natural number $x$ is a strict lower bound if and only if $x \leq n$.
+- A natural number $n$ is said to be a
+  {{#concept "lower bound" Disambiguation="structured natural numbers" Agda=is-lower-bound-ℕ}}
+  if there is a function from $P(x)$ to the type $n \leq x$ for all
+  $x : \mathbb{N}$.
+- A natural number $n$ is said to be a
+  {{#concept "strict lower bound" Disambiguation="structured natural numbers" Agda=is-strict-lower-bound-ℕ}}
+  if there is a function from $P(x)$ to the type $n < x$ for all
+  $x : \mathbb{N}$.
+- A natural number $n$ is said to be a
+  {{#concept "largest lower bound" Disambiguation="structured natural numbers" Agda=is-largest-lower-bound-ℕ}}
+  if any natural number $x$ is a lower bound if and only if $x \leq n$.
+- A natural number $n$ is said to be a
+  {{#concept "largest strict lower bound" Disambiguation="structured natural numbers" Agda=is-largest-strict-lower-bound-ℕ}}
+  if any natural number $x$ is a strict lower bound if and only if $x \leq n$.
 
 ## Definitions
 

@@ -220,7 +220,7 @@ subtraction-le-ℕ zero-ℕ m p =
 subtraction-le-ℕ (succ-ℕ n) (succ-ℕ m) p =
   ( pr1 P , pr1 (pr2 P) , ap succ-ℕ (pr2 (pr2 P)))
   where
-  
+
   P : Σ ℕ (λ l' → (is-nonzero-ℕ l') × (l' +ℕ n ＝ m))
   P = subtraction-le-ℕ n m p
 

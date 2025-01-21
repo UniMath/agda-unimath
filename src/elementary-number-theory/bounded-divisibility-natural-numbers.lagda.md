@@ -34,9 +34,25 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider two [natural numbers](elementary-number-theory.natural-numbers.md) `m` and `n`. The {{#concept "bounded divisibility relation" Disambiguation="natural numbers" Agda=bounded-div-ℕ}} is a [binary relation](foundation.binary-relations.md) on the type of [natural numbers](elementary-number-theory.natural-numbers.md), where we say that a number `n` is bounded divisible by `m` if there is an integer `q ≤ n` such that `q * m ＝ n`.
+Consider two [natural numbers](elementary-number-theory.natural-numbers.md) `m`
+and `n`. The
+{{#concept "bounded divisibility relation" Disambiguation="natural numbers" Agda=bounded-div-ℕ}}
+is a [binary relation](foundation.binary-relations.md) on the type of
+[natural numbers](elementary-number-theory.natural-numbers.md), where we say
+that a number `n` is bounded divisible by `m` if there is an integer `q ≤ n`
+such that `q * m ＝ n`.
 
-The bounded divisibility relation is a slight strengthening of the [divisibility relation](elementary-number-theory.divisibility-natural-numbers.md) by ensuring that the quotient is bounded from above by `n`. This ensures that the bounded divisibility relation is valued in [propositions](foundation-core.propositions.md) for all `m` and `n`, unlike the divisibility relation. Since the bounded divisibility relation is [logically equivalent](foundation.logical-equivalences.md) to the divisibility relation, but it is always valued in the propositions, we use the bounded divisibility relation in the definition of the [poset](order-theory.posets.md) of the [natural numbers ordered by division](elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility.md).
+The bounded divisibility relation is a slight strengthening of the
+[divisibility relation](elementary-number-theory.divisibility-natural-numbers.md)
+by ensuring that the quotient is bounded from above by `n`. This ensures that
+the bounded divisibility relation is valued in
+[propositions](foundation-core.propositions.md) for all `m` and `n`, unlike the
+divisibility relation. Since the bounded divisibility relation is
+[logically equivalent](foundation.logical-equivalences.md) to the divisibility
+relation, but it is always valued in the propositions, we use the bounded
+divisibility relation in the definition of the [poset](order-theory.posets.md)
+of the
+[natural numbers ordered by division](elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility.md).
 
 ## Definitions
 
@@ -81,7 +97,9 @@ is-nonzero-quotient-bounded-div-ℕ m n N H refl =
 
 ### If a nonzero number `n` is bounded divisible by `m`, then `m` is bounded from above by `n`
 
-**Proof.** Suppose that `q ≤ n` is such that `q * m ＝ n`. Since `n` is assumed to be nonzero, it follows that `q` is nonzero. Therefore it follows that `m ≤ q * m = n`.
+**Proof.** Suppose that `q ≤ n` is such that `q * m ＝ n`. Since `n` is assumed
+to be nonzero, it follows that `q` is nonzero. Therefore it follows that
+`m ≤ q * m = n`.
 
 ```agda
 upper-bound-divisor-bounded-div-ℕ :
@@ -140,7 +158,8 @@ concatenate-eq-bounded-div-eq-ℕ refl p refl = p
 
 ### The quotients of a natural number `n` by two natural numbers `c` and `d` are equal if `c` and `d` are equal
 
-Since the quotient is defined in terms of explicit proofs of divisibility, we assume arbitrary proofs of dibisibility on both sides.
+Since the quotient is defined in terms of explicit proofs of divisibility, we
+assume arbitrary proofs of dibisibility on both sides.
 
 ```agda
 eq-quotient-bounded-div-eq-divisor-ℕ :
@@ -160,7 +179,9 @@ eq-quotient-bounded-div-eq-divisor-ℕ c d n N p H I =
 
 ### If two natural numbers are equal and one is divisible by a number `d`, then the other is divisible by `d` and their quotients are the same
 
-The first part of the claim was proven above. Since the quotient is defined in terms of explicit proofs of divisibility, we assume arbitrary proofs of dibisibility on both sides.
+The first part of the claim was proven above. Since the quotient is defined in
+terms of explicit proofs of divisibility, we assume arbitrary proofs of
+dibisibility on both sides.
 
 ```agda
 eq-quotient-bounded-div-eq-is-nonzero-divisor-ℕ :
@@ -366,7 +387,7 @@ upper-bound-quotient-transitive-bounded-div-ℕ (succ-ℕ m) n k K H =
     ( k)
     ( is-nonzero-succ-ℕ m)
     ( eq-quotient-transitive-bounded-div-ℕ (succ-ℕ m) n k K H)
-  
+
 transitive-bounded-div-ℕ : is-transitive bounded-div-ℕ
 pr1 (transitive-bounded-div-ℕ m n k K H) =
   quotient-transitive-bounded-div-ℕ m n k K H

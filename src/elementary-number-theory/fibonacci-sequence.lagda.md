@@ -53,7 +53,9 @@ Fibonacci numbers are
   Fₙ   0   1   1   2   3   5   8  13  21  34
 ```
 
-The Fibonacci sequence was introduced by [Leonardo Fibonacci](https://en.wikipedia.org/wiki/Fibonacci) in 1202 in his book _Liber Abaci_ {{#cite Fibonacci1202}}.
+The Fibonacci sequence was introduced by
+[Leonardo Fibonacci](https://en.wikipedia.org/wiki/Fibonacci) in 1202 in his
+book _Liber Abaci_ {{#cite Fibonacci1202}}.
 
 ## Definitions
 
@@ -91,7 +93,9 @@ Such a function is easy to give with induction, using the map $ℕ² → ℕ²$ 
 takes a pair `(m,n)` to the pair `(n,n+m)`. Starting the iteration with `(0,1)`
 we obtain the Fibonacci sequence by taking the first projection.
 
-Furthermore, it is possible to define the fibonacci sequence without using cartesian products, mimicing the above idea using $\mathbb{N} \to \matbb{N}$ instead of $\mathbb{N}^2$.
+Furthermore, it is possible to define the fibonacci sequence without using
+cartesian products, mimicing the above idea using $\mathbb{N} \to \matbb{N}$
+instead of $\mathbb{N}^2$.
 
 ```agda
 shift-one :
@@ -385,21 +389,24 @@ le-bounded-sum-fibonacci-even-ℕ n =
 
 ### A strict bound on the growth of the Fibonacci numbers
 
-The $n$th Fibonacci number is always strictly less than $\phi^n$, where $\phi$ is the golden ratio. This strict inequality is due to Édouard Lucas, who proved it in the late 19th century {{#cite lucas1891}}. We will prove a rational version of this claim by showing that $F_n<(\frac{b}{a})^n$ for any rational number $\frac{b}{a}>\phi$
+The $n$th Fibonacci number is always strictly less than $\phi^n$, where $\phi$
+is the golden ratio. This strict inequality is due to Édouard Lucas, who proved
+it in the late 19th century {{#cite lucas1891}}. We will prove a rational
+version of this claim by showing that $F_n<(\frac{b}{a})^n$ for any rational
+number $\frac{b}{a}>\phi$
 
 A variation of this claim also appears on pages 7 and 8 in section 1.2 of
 {{#cite Leveque12volI}} as an instructive example of a proof by induction, where
-he shows that $F_n<(\frac{7}{4})^n$. This
-upper bound works for any
-fraction $\frac{b}{a}$ where $a(b+a)<b^2$, i.e., any fraction that is larger
-than the golden ratio. Another close estimate is
+he shows that $F_n<(\frac{7}{4})^n$. This upper bound works for any fraction
+$\frac{b}{a}$ where $a(b+a)<b^2$, i.e., any fraction that is larger than the
+golden ratio. Another close estimate is
 
 $$
   F_n < \left(\frac{13}{8}\right)^n,
 $$
 
-because $13^2-8\cdot 21=169-168=1$ by Cassini's identity. More generally, for any $n$ the ratio
-$F_{2n+1}/F_{2n}$ is greater than the golden ratio, because
+because $13^2-8\cdot 21=169-168=1$ by Cassini's identity. More generally, for
+any $n$ the ratio $F_{2n+1}/F_{2n}$ is greater than the golden ratio, because
 $F_{2n+1}^2-F_{2n}F_{2n+2}=1$. Therefore it follows that
 
 $$

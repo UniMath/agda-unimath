@@ -41,15 +41,24 @@ open import foundation-core.injective-maps
 
 ## Idea
 
-The {{#concept "2-adic decomposition" Agda=2-adic-decomposition-ℕ}} of a [natural number](elementary-number-theory.natural-numbers.md) $n$ is a factorization of $n$ into a [power](elementary-number-theory.exponentiation-natural-numbers.md) of $2$ and an [odd](elementary-number-theory.parity-natural-numbers.md) natural number.
+The {{#concept "2-adic decomposition" Agda=2-adic-decomposition-ℕ}} of a
+[natural number](elementary-number-theory.natural-numbers.md) $n$ is a
+factorization of $n$ into a
+[power](elementary-number-theory.exponentiation-natural-numbers.md) of $2$ and
+an [odd](elementary-number-theory.parity-natural-numbers.md) natural number.
 
-The $2$-adic decomposition of the natural numbers can be used to construct an [equivalence](foundation-core.equivalences.md) $\mathbb{N}\times\mathbb{N} \simeq \mathbb{N}$ by mapping
+The $2$-adic decomposition of the natural numbers can be used to construct an
+[equivalence](foundation-core.equivalences.md)
+$\mathbb{N}\times\mathbb{N} \simeq \mathbb{N}$ by mapping
 
 $$
   (m , n) \mapsto 2^m(2n + 1) - 1.
 $$
 
-The exponent $k$ such that the 2-adic decomposition of $n$ is $2^k \cdot m=n$ is called the {{#concept "2-adic valuation" Disambiguation="natural numbers" Agda=valuation-2-adic-decomposition-ℕ}} of $n$.
+The exponent $k$ such that the 2-adic decomposition of $n$ is $2^k \cdot m=n$ is
+called the
+{{#concept "2-adic valuation" Disambiguation="natural numbers" Agda=valuation-2-adic-decomposition-ℕ}}
+of $n$.
 
 ## Definitions
 
@@ -132,12 +141,12 @@ pr2 (pr2 (2-adic-decomposition-is-odd-ℕ n H)) =
 module _
   (n : ℕ) (H : 1 ≤-ℕ n)
   where
-  
+
   valuation-2-adic-decomposition-nat-ℕ :
     ℕ
   valuation-2-adic-decomposition-nat-ℕ =
     valuation-largest-power-divisor-ℕ 2 n star H
-  
+
   div-exp-valuation-2-adic-decomposition-nat-ℕ :
     div-ℕ (2 ^ℕ valuation-2-adic-decomposition-nat-ℕ) n
   div-exp-valuation-2-adic-decomposition-nat-ℕ =

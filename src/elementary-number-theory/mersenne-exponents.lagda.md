@@ -19,7 +19,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "Mersenne exponent" Agda=mersenne-exponent-ℕ OEIS=A000043}} is a [prime number](elementary-number-theory.prime-numbers.md) $p$ such that the [Mersenne number](elementary-number-theory.mersenne-numbers.md) $M_p$ is a [Mersenne prime](elementary-number-theory.mersenne-primes.md).
+A {{#concept "Mersenne exponent" Agda=mersenne-exponent-ℕ OEIS=A000043}} is a
+[prime number](elementary-number-theory.prime-numbers.md) $p$ such that the
+[Mersenne number](elementary-number-theory.mersenne-numbers.md) $M_p$ is a
+[Mersenne prime](elementary-number-theory.mersenne-primes.md).
 
 ## Definitions
 

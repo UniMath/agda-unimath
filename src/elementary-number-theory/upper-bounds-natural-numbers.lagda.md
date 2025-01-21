@@ -31,14 +31,29 @@ open import foundation.universe-levels
 
 ## Idea
 
-Consider a type family $P$ over the [natural numbers](elementary-number-theory.natural-numbers.md). A {{#concept "structured natural number"}} is simply a natural number $n$ equipped with an element $P(n)$. In this file we consider various upper bounds for structured natural numbers, and relations between them. This file builds the prerequisite infrastructure for the [well-ordering principle](elementary-number-theory.well-ordering-principle-natural-numbers.md) of the natural numbers, and its direct consequences.
+Consider a type family $P$ over the
+[natural numbers](elementary-number-theory.natural-numbers.md). A
+{{#concept "structured natural number"}} is simply a natural number $n$ equipped
+with an element $P(n)$. In this file we consider various upper bounds for
+structured natural numbers, and relations between them. This file builds the
+prerequisite infrastructure for the
+[well-ordering principle](elementary-number-theory.well-ordering-principle-natural-numbers.md)
+of the natural numbers, and its direct consequences.
 
-- A natural number $n$ is said to be an {{#concept "upper bound" Disambiguation="structured natural numbers" Agda=is-upper-bound-ℕ}} if there is a
-function from $P(x)$ to the type $x \leq n$ for all $x : \mathbb{N}$.
-- A natural number $n$ is said to be a {{#concept "strict upper bound" Disambiguation="structured natural numbers" Agda=is-strict-upper-bound-ℕ}} if there is a
-function from $P(x)$ to the type $x < n$ for all $x : \mathbb{N}$.
-- A natural number $n$ is said to be a {{#concept "least upper bound" Disambiguation="structured natural numbers" Agda=is-least-upper-bound-ℕ}} if any natural number $x$ is an upper bound if and only if $n \leq x$.
-- A natural number $n$ is said to be a {{#concept "least strict upper bound" Disambiguation="structured natural numbers" Agda=is-least-strict-upper-bound-ℕ}} if any natural number $x$ is a strict upper bound if and only if $n \leq x$.
+- A natural number $n$ is said to be an
+  {{#concept "upper bound" Disambiguation="structured natural numbers" Agda=is-upper-bound-ℕ}}
+  if there is a function from $P(x)$ to the type $x \leq n$ for all
+  $x : \mathbb{N}$.
+- A natural number $n$ is said to be a
+  {{#concept "strict upper bound" Disambiguation="structured natural numbers" Agda=is-strict-upper-bound-ℕ}}
+  if there is a function from $P(x)$ to the type $x < n$ for all
+  $x : \mathbb{N}$.
+- A natural number $n$ is said to be a
+  {{#concept "least upper bound" Disambiguation="structured natural numbers" Agda=is-least-upper-bound-ℕ}}
+  if any natural number $x$ is an upper bound if and only if $n \leq x$.
+- A natural number $n$ is said to be a
+  {{#concept "least strict upper bound" Disambiguation="structured natural numbers" Agda=is-least-strict-upper-bound-ℕ}}
+  if any natural number $x$ is a strict upper bound if and only if $n \leq x$.
 
 ## Definitions
 
@@ -295,7 +310,8 @@ is-upper-bound-leq-is-upper-bound-ℕ P b H n K x p =
 
 ### Being an upper bound of a decidable type family is decidable, given an upper bound
 
-The type family `is-upper-bound-ℕ P` is an example of a type family `Q` over the natural numbers satisfying
+The type family `is-upper-bound-ℕ P` is an example of a type family `Q` over the
+natural numbers satisfying
 
 ```text
   Q b → Π (n : ℕ), is-decidable (Q n)

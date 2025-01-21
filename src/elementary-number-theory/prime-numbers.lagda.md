@@ -39,7 +39,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "prime number" Agda=is-prime-ℕ WDID=Q49008 WD="prime number"}} is a [natural number](elementary-number-theory.natural-numbers.md) of which 1 is the only [proper divisor](elementary-number-theory.proper-divisors-natural-numbers.md).
+A {{#concept "prime number" Agda=is-prime-ℕ WDID=Q49008 WD="prime number"}} is a
+[natural number](elementary-number-theory.natural-numbers.md) of which 1 is the
+only
+[proper divisor](elementary-number-theory.proper-divisors-natural-numbers.md).
 
 ## Definition
 
@@ -265,7 +268,8 @@ strict-upper-bound-quotient-div-is-prime-ℕ p x N P H =
 
 ### If a prime number `p` divides a number `x + 1`, then `(x + 1)/p ≤ x`
 
-Note that this upper bound is slightly sharper than the usual upper bound `x + 1` we get for arbitrary quotients of divisible natural numbers.
+Note that this upper bound is slightly sharper than the usual upper bound
+`x + 1` we get for arbitrary quotients of divisible natural numbers.
 
 ```agda
 upper-bound-quotient-div-is-prime-ℕ :

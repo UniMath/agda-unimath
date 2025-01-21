@@ -33,10 +33,20 @@ open import order-theory.preorders
 
 The **poset of natural numbers ordered by divisibility** consists of the
 [natural numbers](elementary-number-theory.natural-numbers.md) and its ordering
-is defined by [bounded divisibility](elementary-number-theory.bounded-divisibility-natural-numbers.md), i.e., the type `m ≤ n` is defined to be the type of natural numbers `q ≤ n` such that `q * m ＝ n`.
+is defined by
+[bounded divisibility](elementary-number-theory.bounded-divisibility-natural-numbers.md),
+i.e., the type `m ≤ n` is defined to be the type of natural numbers `q ≤ n` such
+that `q * m ＝ n`.
 
-Recall that bounded divisibility is [logically equivalent](foundation.logical-equivalences.md) to the more standard [divisibility relation](elementar-number-theory.divisibility-natural-numbers.md). However, the divisibility relation `m | n` is only valued in the [propositions](foundation.propositions.md) when both `m` and `n`
-are [nonzero](elementary-number-theory.nonzero-natural-numbers.md). On the other hand, bounded divisibility is always valued in propositions. By using bounded divisibility we avoid the need for [propoositional truncation](foundation.propositional-truncations.md).
+Recall that bounded divisibility is
+[logically equivalent](foundation.logical-equivalences.md) to the more standard
+[divisibility relation](elementar-number-theory.divisibility-natural-numbers.md).
+However, the divisibility relation `m | n` is only valued in the
+[propositions](foundation.propositions.md) when both `m` and `n` are
+[nonzero](elementary-number-theory.nonzero-natural-numbers.md). On the other
+hand, bounded divisibility is always valued in propositions. By using bounded
+divisibility we avoid the need for
+[propoositional truncation](foundation.propositional-truncations.md).
 
 ## Definition
 

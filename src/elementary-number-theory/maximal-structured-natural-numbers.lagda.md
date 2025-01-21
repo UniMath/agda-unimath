@@ -22,9 +22,16 @@ open import foundation.universe-levels
 
 </details>
 
-Consider a type family $P$ over $\mathbb{N}$. A {{#concept "maximal structured natural number" Agda=maximal-element-ℕ}} in $P$ is a natural number $n$ equipped with an element $p : P(n)$ such that $n$ is an [upper bound](elementary-number-theory.upper-bounds-natural-numbers.md) for $P$.
+Consider a type family $P$ over $\mathbb{N}$. A
+{{#concept "maximal structured natural number" Agda=maximal-element-ℕ}} in $P$
+is a natural number $n$ equipped with an element $p : P(n)$ such that $n$ is an
+[upper bound](elementary-number-theory.upper-bounds-natural-numbers.md) for $P$.
 
-Forthermore, a {{#concept "bounded maximal structured natural number" Agda=bounded-maximal-element-ℕ}} in $P$ with bound $b$ is a natural number $n \leq b$ equipped with an element $p : P(n)$ such that $n$ is an upper bound of for the type family $x \mapsto (x \leq b) × P(x)$.
+Forthermore, a
+{{#concept "bounded maximal structured natural number" Agda=bounded-maximal-element-ℕ}}
+in $P$ with bound $b$ is a natural number $n \leq b$ equipped with an element
+$p : P(n)$ such that $n$ is an upper bound of for the type family
+$x \mapsto (x \leq b) × P(x)$.
 
 ## Definitions
 

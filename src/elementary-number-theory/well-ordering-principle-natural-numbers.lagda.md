@@ -75,7 +75,7 @@ well-ordering-principle-ℕ' P d (inr f) (succ-ℕ n) p =
 module _
   {l : Level} (P : ℕ → UU l) (d : is-decidable-fam P) {n : ℕ} (p : P n)
   where
-  
+
   well-ordering-principle-ℕ :
     minimal-element-ℕ P
   well-ordering-principle-ℕ =

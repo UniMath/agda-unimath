@@ -26,7 +26,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-The {{#concept "largest power divisor" Disambiguation="natural numbers" Agda=largest-power-divisor-ℕ}} of a [natural number](elementary-number-theory.natural-numbers.md) $n$ with base $m$ is the [largest number](elementary-number-theory.maximal-structured-natural-numbers.md) of the form $m^k$ that [divides](elementary-number-theory.divisibility-natural-numbers.md) $n$.
+The
+{{#concept "largest power divisor" Disambiguation="natural numbers" Agda=largest-power-divisor-ℕ}}
+of a [natural number](elementary-number-theory.natural-numbers.md) $n$ with base
+$m$ is the
+[largest number](elementary-number-theory.maximal-structured-natural-numbers.md)
+of the form $m^k$ that
+[divides](elementary-number-theory.divisibility-natural-numbers.md) $n$.
 
 ## Definitions
 
@@ -51,7 +57,7 @@ is-largest-power-divisor-ℕ m n x =
 module _
   (m n : ℕ) (H : 1 <-ℕ m) (K : 1 ≤-ℕ n)
   where
-  
+
   largest-power-divisor-ℕ :
     maximal-element-ℕ
       ( is-structured-value-bound-input-ℕ (is-divisor-ℕ n) (m ^ℕ_) n)

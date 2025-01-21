@@ -39,8 +39,8 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-The {{#concept "square" Disambiguation="integer" Agda=square-ℤ}} `a²` of
-an [integer](elementary-number-theory.integers.md) `a` is the
+The {{#concept "square" Disambiguation="integer" Agda=square-ℤ}} `a²` of an
+[integer](elementary-number-theory.integers.md) `a` is the
 [product](elementary-number-theory.multiplication-natural-numbers.md)
 
 ```text

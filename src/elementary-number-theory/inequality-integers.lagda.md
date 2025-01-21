@@ -56,7 +56,8 @@ defines the
 {{#concept "standard ordering" Disambiguation="integers" Agda=leq-ℤ}} on the
 integers.
 
-Alternatively, the standard ordering can be defined as a `data` type by specifying the constructors
+Alternatively, the standard ordering can be defined as a `data` type by
+specifying the constructors
 
 ```text
   r : (x : ℤ) → x ≤ x
@@ -90,7 +91,7 @@ data
   inductive-leq-ℤ :
     ℤ → ℤ → UU lzero
   where
-  
+
   refl-inductive-leq-ℤ :
     (a : ℤ) → inductive-leq-ℤ a a
 

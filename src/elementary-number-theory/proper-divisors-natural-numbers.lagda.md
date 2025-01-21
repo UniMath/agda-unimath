@@ -32,7 +32,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "proper divisor" Disambituation="natural numbers" Agda=is-proper-divisor-ℕ}} of a [natural number](elementary-number-theory.natural-numbers.md) `n` is a natural number `d ≠ n` that
+A
+{{#concept "proper divisor" Disambituation="natural numbers" Agda=is-proper-divisor-ℕ}}
+of a [natural number](elementary-number-theory.natural-numbers.md) `n` is a
+natural number `d ≠ n` that
 [divides](elementary-number-theory.divisbility-natural-numbers.md) `n`.
 
 ## Definitions

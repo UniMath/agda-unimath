@@ -67,7 +67,8 @@ then the type `div-ℕ m n` is always a
 The divisibility relation is
 [logically equivalent](foundation.logical-equivalences.md), though not
 [equivalent](foundation-core.equivalences.md), to the
-[bounded divisibility relation](elementary-number-theory.bounded-divisibility-natural-numbers.md), which is defined by
+[bounded divisibility relation](elementary-number-theory.bounded-divisibility-natural-numbers.md),
+which is defined by
 
 ```text
   bounded-div-ℕ m n := Σ (k : ℕ), (k ≤ n) × (k *ℕ m ＝ n).
@@ -78,15 +79,24 @@ The discrepancy between divisibility and bounded divisibility is manifested at
 [contractible](foundation-core.contractible-types.md). For all other values we
 have `div-ℕ m n ≃ bounded-div-ℕ m n`.
 
-When a natural number `n is divisible by a natural number `m`, with an element `H : div-ℕ m n`, then we define the {{#concept "quotient" Disambiguation="divisibility of natural numbers" Agda=quotient-div-ℕ}} to be the unique number `q ≤ n` such that `q * m ＝ n`. 
+When a natural number
+`n is divisible by a natural number `m`, with an element `H : div-ℕ m
+n`, then we define the {{#concept "quotient" Disambiguation="divisibility of natural numbers" Agda=quotient-div-ℕ}} to be the unique number `q
+≤ n`such that`q \* m ＝ n`.
 
 ## Definitions
 
 ### The divisibility relation on the natural numbers
 
-We introduce the divisibility relation on the natural numbers, and some infrastructure.
+We introduce the divisibility relation on the natural numbers, and some
+infrastructure.
 
-**Note:** Perhaps a more natural name for `pr1-div-ℕ`, the number `q` such that `q * d ＝ n`, would be `quotient-div-ℕ`. However, since the divisibility relation is not always a proposition, the quotient could have some undesirable properties. Later in this file, we will define `quotient-div-ℕ` to the the quotient of the bounded divisibility relation, which is logically equivalent to the divisibility relation.
+**Note:** Perhaps a more natural name for `pr1-div-ℕ`, the number `q` such that
+`q * d ＝ n`, would be `quotient-div-ℕ`. However, since the divisibility
+relation is not always a proposition, the quotient could have some undesirable
+properties. Later in this file, we will define `quotient-div-ℕ` to the the
+quotient of the bounded divisibility relation, which is logically equivalent to
+the divisibility relation.
 
 ```agda
 module _
@@ -245,7 +255,8 @@ concatenate-eq-div-eq-ℕ refl p refl = p
 
 ### The quotients of a natural number `n` by two natural numbers `c` and `d` are equal if `c` and `d` are equal
 
-Since the quotient is defined in terms of explicit proofs of divisibility, we assume arbitrary proofs of dibisibility on both sides.
+Since the quotient is defined in terms of explicit proofs of divisibility, we
+assume arbitrary proofs of dibisibility on both sides.
 
 ```agda
 eq-quotient-div-eq-divisor-ℕ :
@@ -265,7 +276,9 @@ eq-quotient-div-eq-divisor-ℕ c d n N p H I =
 
 ### If two natural numbers are equal and one is divisible by a number `d`, then the other is divisible by `d` and their quotients are the same
 
-The first part of the claim was proven above. Since the quotient is defined in terms of explicit proofs of divisibility, we assume arbitrary proofs of dibisibility on both sides.
+The first part of the claim was proven above. Since the quotient is defined in
+terms of explicit proofs of divisibility, we assume arbitrary proofs of
+dibisibility on both sides.
 
 ```agda
 eq-quotient-div-eq-is-nonzero-divisor-ℕ :

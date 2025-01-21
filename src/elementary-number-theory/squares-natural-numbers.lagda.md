@@ -350,7 +350,8 @@ is-decidable-is-square-ℕ n =
 
 ### Any number divides its own square
 
-In other words, the squaring function is inflationary with respect to divisibility.
+In other words, the squaring function is inflationary with respect to
+divisibility.
 
 ```agda
 is-inflationary-bounded-div-square-ℕ :
@@ -588,9 +589,13 @@ square-add-ℕ m n =
 
 ### The formula for the distance between squares
 
-The formula for the distance between squares is more commonly known as the formula for the difference of squares. However, since we prefer using the distance operation on the natural numbers over the partial difference operation, we will state and prove the analogous formula using the distance function.
+The formula for the distance between squares is more commonly known as the
+formula for the difference of squares. However, since we prefer using the
+distance operation on the natural numbers over the partial difference operation,
+we will state and prove the analogous formula using the distance function.
 
-The formula for the difference of squares of integers is formalized in its usual form.
+The formula for the difference of squares of integers is formalized in its usual
+form.
 
 ```agda
 distance-of-squares-ℕ' :

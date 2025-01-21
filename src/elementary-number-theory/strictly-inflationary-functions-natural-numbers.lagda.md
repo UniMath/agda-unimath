@@ -31,13 +31,17 @@ open import univalent-combinatorics.dependent-pair-types
 
 ## Idea
 
-A function $f : \mathbb{N} \to \mathbb{N}$ is a {{#concept "strictly inflationary function" Disambiguation="natural numbers" Agda=is-strictly-inflationary-ℕ}} if the implication
+A function $f : \mathbb{N} \to \mathbb{N}$ is a
+{{#concept "strictly inflationary function" Disambiguation="natural numbers" Agda=is-strictly-inflationary-ℕ}}
+if the implication
 
 $$
   (x < y) \to (f(x) < f(y))
 $$
 
-holds for every $x,y:\mathbb{N}$. If $f$ is a strictly inflationary function on the natural numbers such that $f(0) \leq b$ for some natural number $b$, then there is a maximal natural number $k$ such that $f(k) \leq b$.
+holds for every $x,y:\mathbb{N}$. If $f$ is a strictly inflationary function on
+the natural numbers such that $f(0) \leq b$ for some natural number $b$, then
+there is a maximal natural number $k$ such that $f(k) \leq b$.
 
 ## Definitions
 
@@ -105,6 +109,3 @@ is-decidable-map-strictly-inflationary-map-ℕ :
 is-decidable-map-strictly-inflationary-map-ℕ (f , H) n =
   is-decidable-map-is-strictly-inflationary-map-ℕ H n
 ```
-
-
-

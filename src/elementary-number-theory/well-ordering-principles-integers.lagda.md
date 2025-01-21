@@ -33,12 +33,27 @@ open import foundation.universe-levels
 
 ## Idea
 
-The [poset of integers](elementary-number-theory.inequality-integers.md) does not satisfy the [well-ordering principle of the natural numbers](elementary-number-theory.well-ordering-principle-natural-numbers.md). However, there are several useful approximations of the well-ordering principle for the [integers](elementary-number-theory.integers.md) that are worth recording:
+The [poset of integers](elementary-number-theory.inequality-integers.md) does
+not satisfy the
+[well-ordering principle of the natural numbers](elementary-number-theory.well-ordering-principle-natural-numbers.md).
+However, there are several useful approximations of the well-ordering principle
+for the [integers](elementary-number-theory.integers.md) that are worth
+recording:
 
-- For every family `A` of [decidable types](foundation.decidable-types.md) over `ℤ` that
-is bounded from below and comes equipped with an integer `a` and an element of type `A a`, we can find a least integer `a₀` equipped with an element of type `A a₀`. Here, a type family `A` over the integers is bounded from below if it comes equipped with a [lower bound](order-theory.lower-bounds-posets.md) `b` such that `b ≤ x` for all `x : ℤ` equipped with an element of type `A x`.
-- For every family `A` of [decidable types](foundation.decidable-types.md) over `ℤ` that
-is bounded from above and comes equipped with an integer `a` and an element of type `A a`, we can find a largest integer `a₀` equipped with an element of type `A a₀`. Here, a type family `A` over the integers is bounded from above if it comes equipped with an [upper bound](order-theory.lower-bounds-posets.md) `b` such that `x ≤ b` for all `x : ℤ` equipped with an element of type `A x`.
+- For every family `A` of [decidable types](foundation.decidable-types.md) over
+  `ℤ` that is bounded from below and comes equipped with an integer `a` and an
+  element of type `A a`, we can find a least integer `a₀` equipped with an
+  element of type `A a₀`. Here, a type family `A` over the integers is bounded
+  from below if it comes equipped with a
+  [lower bound](order-theory.lower-bounds-posets.md) `b` such that `b ≤ x` for
+  all `x : ℤ` equipped with an element of type `A x`.
+- For every family `A` of [decidable types](foundation.decidable-types.md) over
+  `ℤ` that is bounded from above and comes equipped with an integer `a` and an
+  element of type `A a`, we can find a largest integer `a₀` equipped with an
+  element of type `A a₀`. Here, a type family `A` over the integers is bounded
+  from above if it comes equipped with an
+  [upper bound](order-theory.lower-bounds-posets.md) `b` such that `x ≤ b` for
+  all `x : ℤ` equipped with an element of type `A x`.
 
 ## Definitions
 
@@ -119,7 +134,12 @@ module _
 
 ### The well-ordering principle for the nonnegative integers
 
-The {{#concept "well-ordering principle for the nonnegative integers" Agda=well-ordering-principle-nonnegative-ℤ}} states that for any family `A` of decidable types over `ℤ` such that the implication `A x → is-nonnegative-ℤ x` holds for any `x : ℤ`, if we are given an element `(a , a) : Σ ℤ A` then there is a minimal integer `a₀` equipped with an element of type `A a₀`.
+The
+{{#concept "well-ordering principle for the nonnegative integers" Agda=well-ordering-principle-nonnegative-ℤ}}
+states that for any family `A` of decidable types over `ℤ` such that the
+implication `A x → is-nonnegative-ℤ x` holds for any `x : ℤ`, if we are given an
+element `(a , a) : Σ ℤ A` then there is a minimal integer `a₀` equipped with an
+element of type `A a₀`.
 
 ```agda
 module _
@@ -136,10 +156,10 @@ module _
   pr2 (pr2 (well-ordering-principle-nonnegative-ℤ' H (n , x , K))) b y =
     concatenate-leq-eq-ℤ (int-ℕ n) (leq-int-ℕ n m (K m (tr A (inv α) y))) α
     where
-    
+
     m : ℕ
     m = nat-nonnegative-ℤ (b , H b y)
-    
+
     α : int-ℕ m ＝ b
     α = ap pr1 (is-section-nat-nonnegative-ℤ (b , H b y))
 
@@ -162,7 +182,12 @@ module _
 
 ### The well-ordering principle for the positive integers
 
-The {{#concept "well-ordering principle for the positive integers" Agda=well-ordering-principle-positive-ℤ}} states that for any family `A` of decidable types over `ℤ` such that the implication `A x → is-positive-ℤ x` holds for any `x : ℤ`, if we are given an element `(a , a) : Σ ℤ A` then there is a minimal integer `a₀` equipped with an element of type `A a₀`.
+The
+{{#concept "well-ordering principle for the positive integers" Agda=well-ordering-principle-positive-ℤ}}
+states that for any family `A` of decidable types over `ℤ` such that the
+implication `A x → is-positive-ℤ x` holds for any `x : ℤ`, if we are given an
+element `(a , a) : Σ ℤ A` then there is a minimal integer `a₀` equipped with an
+element of type `A a₀`.
 
 ```agda
 module _

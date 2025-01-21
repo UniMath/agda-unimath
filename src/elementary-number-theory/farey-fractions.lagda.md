@@ -23,9 +23,14 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "Farey fraction" Agda=farey-fraction}} is a [reduced](elementary-number-theory.reduced-integer-fractions.md) [integer fraction](elementary-number-theory.integer-fractions.md) between $0$ and $1$ inclusive. More specifically, a Farey fraction of order $n$ is a reduced integer fraction between $0$ and $1$ whose denominator does not exceed $n$.
+A {{#concept "Farey fraction" Agda=farey-fraction}} is a
+[reduced](elementary-number-theory.reduced-integer-fractions.md)
+[integer fraction](elementary-number-theory.integer-fractions.md) between $0$
+and $1$ inclusive. More specifically, a Farey fraction of order $n$ is a reduced
+integer fraction between $0$ and $1$ whose denominator does not exceed $n$.
 
-The Farey fractions ℱ can be inductively generated mutually with a binary relation $R$ with the following constructors:
+The Farey fractions ℱ can be inductively generated mutually with a binary
+relation $R$ with the following constructors:
 
 ```text
   0 : ℱ
@@ -37,15 +42,22 @@ The Farey fractions ℱ can be inductively generated mutually with a binary rela
   𝓁 : (x y : ℱ) (r : ℛ x y) → ℛ (𝓂 x y r) y
 ```
 
-The operation $m$ returns the {{#concept "mediant" Disambiguation="Farey fractions" Agda=mediant-farey-fraction}} of two adjacent Farey fractions. The elements $0$ and $1$ in the type of Farey fractions represent the Farey fractions $0/1$ and $1/1$. Given two adjacent Farey fractions representing $a/b$ and $c/d$, the mediant of $a/b$ and $c/d$ is the Farey fraction representing
+The operation $m$ returns the
+{{#concept "mediant" Disambiguation="Farey fractions" Agda=mediant-farey-fraction}}
+of two adjacent Farey fractions. The elements $0$ and $1$ in the type of Farey
+fractions represent the Farey fractions $0/1$ and $1/1$. Given two adjacent
+Farey fractions representing $a/b$ and $c/d$, the mediant of $a/b$ and $c/d$ is
+the Farey fraction representing
 
 $$
   \frac{a+c}{b+d}.
 $$
 
-The mediant of any two adjacent Farey fractions representing reduced fractions $a/b$ and $c/d$ represents again a reduced fraction. 
+The mediant of any two adjacent Farey fractions representing reduced fractions
+$a/b$ and $c/d$ represents again a reduced fraction.
 
-Farey fractions appear in Chapter 3 of {{#cite HW08}}, but they are covered in more detail in Chapter 6 of {{#cite NZM}}. 
+Farey fractions appear in Chapter 3 of {{#cite HW08}}, but they are covered in
+more detail in Chapter 6 of {{#cite NZM}}.
 
 ## Definitions
 
@@ -112,7 +124,8 @@ $$
   bc - ad = 1.
 $$
 
-This is also known as the **characteristic property of adjacent Farey fractions**.
+This is also known as the **characteristic property of adjacent Farey
+fractions**.
 
 ```agda
 characteristic-property-adjacent-farey-fraction :
@@ -169,7 +182,7 @@ characteristic-property-adjacent-farey-fraction ._ y
 not-adjacent-zero-farey-fraction :
   (x : farey-fraction) → ¬ adjacent-farey-fraction x zero-farey-fraction
 not-adjacent-zero-farey-fraction ._
-  ( left-adjacent-mediant-farey-fraction x ._ r) = 
+  ( left-adjacent-mediant-farey-fraction x ._ r) =
   not-adjacent-zero-farey-fraction x r
 ```
 

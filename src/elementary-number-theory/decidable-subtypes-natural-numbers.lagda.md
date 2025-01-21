@@ -39,9 +39,18 @@ open import univalent-combinatorics.decidable-subtypes
 
 ## Idea
 
-In this file we study [decidable subtypes](foundation.decidable-subtypes.md) of the [natural numbers](elementary-number-theory.natural-numbers.md). The type of all decidable subtypes of the natural numbers is the *decidable powerset of the natural numbers*.
+In this file we study [decidable subtypes](foundation.decidable-subtypes.md) of
+the [natural numbers](elementary-number-theory.natural-numbers.md). The type of
+all decidable subtypes of the natural numbers is the _decidable powerset of the
+natural numbers_.
 
-As a direct consequence of the [well-ordering principle](elementary-number-theory.well-ordering-principle-natural-numbers.md) of the natural numbers, which is formulated for decidable structures over the natural numbers, it follows that every [inhabited](foundation.inhabited-subtypes.md) decidable subtype of the natural numbers has a least element. We also show that every finite decidable subtype has a largest element.
+As a direct consequence of the
+[well-ordering principle](elementary-number-theory.well-ordering-principle-natural-numbers.md)
+of the natural numbers, which is formulated for decidable structures over the
+natural numbers, it follows that every
+[inhabited](foundation.inhabited-subtypes.md) decidable subtype of the natural
+numbers has a least element. We also show that every finite decidable subtype
+has a largest element.
 
 ## Properties
 
@@ -155,4 +164,3 @@ module _
         ( P ∘ pr1)
         ( is-finite-bounded-ℕ m))
 ```
-

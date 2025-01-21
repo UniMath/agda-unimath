@@ -41,11 +41,20 @@ open import univalent-combinatorics.decidable-subtypes
 
 ## Idea
 
-A map $f : A \to \mathbb{N}$ is said to be a {{#concept "finite map" Disambiguation="natural numbers"}} if its [fibers](foundation-core.finite-types.md) are [finite](univalent-combinatorics.finite-types.md).
+A map $f : A \to \mathbb{N}$ is said to be a
+{{#concept "finite map" Disambiguation="natural numbers"}} if its
+[fibers](foundation-core.finite-types.md) are
+[finite](univalent-combinatorics.finite-types.md).
 
-Finite maps are [decidable](elementary-number-theory.decidable-maps-natural-numbers.md). Every finite map $f : \mathbb{N} \to \mathbb{N}$ has a definite lowest value, and for every finite map $f : \mathbb{N} \to \mathbb{N}$ that takes a value below $B$ there is a largest number $k$ such that $f(k) \leq b$.
+Finite maps are
+[decidable](elementary-number-theory.decidable-maps-natural-numbers.md). Every
+finite map $f : \mathbb{N} \to \mathbb{N}$ has a definite lowest value, and for
+every finite map $f : \mathbb{N} \to \mathbb{N}$ that takes a value below $B$
+there is a largest number $k$ such that $f(k) \leq b$.
 
-The condition that $f : \mathbb{N} \to \mathbb{N}$ is finite is equivalent to the condition that for every natural number $n$, if $f$ has a value below $n$ there is a maximal number $k$ such that $f(k)\leq n$.
+The condition that $f : \mathbb{N} \to \mathbb{N}$ is finite is equivalent to
+the condition that for every natural number $n$, if $f$ has a value below $n$
+there is a maximal number $k$ such that $f(k)\leq n$.
 
 ## Definitions
 
@@ -58,7 +67,7 @@ module _
 
   is-finite-prop-map-ℕ : Prop l
   is-finite-prop-map-ℕ = is-finite-prop-map f
-  
+
   is-finite-map-ℕ : UU l
   is-finite-map-ℕ = is-finite-map f
 
@@ -68,9 +77,12 @@ module _
 
 ### The maximal value-bound input property of a function on the natural numbers
 
-The maximal value-bound input property asserts that for every natural number $n$ there is a maximal number $k$ for which $f(k)\leq n$. Note that it is not necessarily the case that the value $f(k)$ is itself maximal.
+The maximal value-bound input property asserts that for every natural number $n$
+there is a maximal number $k$ for which $f(k)\leq n$. Note that it is not
+necessarily the case that the value $f(k)$ is itself maximal.
 
-This property doesn't seem to have a widely recognized name, so we use an explicit descriptor. Suggestions are welcome.
+This property doesn't seem to have a widely recognized name, so we use an
+explicit descriptor. Suggestions are welcome.
 
 ```agda
 module _
@@ -141,7 +153,7 @@ module _
 module _
   {l : Level} (P : ℕ → Prop l)
   where
-  
+
   is-structured-value-bound-input-subtype-ℕ :
     (f : ℕ → ℕ) (n : ℕ) → subtype l ℕ
   pr1 (is-structured-value-bound-input-subtype-ℕ f n k) =
@@ -157,7 +169,7 @@ module _
 module _
   {l : Level} (P : decidable-subtype l ℕ)
   where
-  
+
   is-structured-value-bound-input-decidable-subtype-ℕ :
     (f : ℕ → ℕ) (n : ℕ) → decidable-subtype l ℕ
   pr1 (is-structured-value-bound-input-decidable-subtype-ℕ f n k) =
@@ -188,7 +200,9 @@ maximal-structured-value-bound-input-property-ℕ P f =
 
 ### Any finite map on the natural numbers satisfies the maximal value-bound input property
 
-**Proof.** Consider a map $f : \mathbb{N} \to \mathbb{N}$ with finite fibers, and consider natural numbers $n$ and $k$ such that $f(k) \leq n$. Since $f$ has finite fibers, it follows that the type
+**Proof.** Consider a map $f : \mathbb{N} \to \mathbb{N}$ with finite fibers,
+and consider natural numbers $n$ and $k$ such that $f(k) \leq n$. Since $f$ has
+finite fibers, it follows that the type
 
 $$
   \sum_{i:\mathbb{N}}f(i)\leq n
@@ -196,13 +210,16 @@ $$
 
 is a finite decidable subtype of the natural numbers, with at least one element.
 
-For the converse, suppose that $f$ satisfies the maximal value-bound input property. The fiber of $f$ at $n$ is a decidable subtype of the type
+For the converse, suppose that $f$ satisfies the maximal value-bound input
+property. The fiber of $f$ at $n$ is a decidable subtype of the type
 
 $$
   \sum_{i:\mathbb{N}}f(i)\leq n.
 $$
 
-Since the type above itself is a decidable subtype of the natural numbers with a maximal element, it is finite. It therefore follows that the fiber of $f$ at $n$ is finite.
+Since the type above itself is a decidable subtype of the natural numbers with a
+maximal element, it is finite. It therefore follows that the fiber of $f$ at $n$
+is finite.
 
 ```agda
 module _
@@ -270,11 +287,20 @@ Consider the following data:
 - A family $P$ of decidable types over the natural numbers
 - A finite map $f$
 - A natural number $n$
-- A natural number $k$ such that $f(k) \leq n$ equipped with an element of type $P(f(k))$.
+- A natural number $k$ such that $f(k) \leq n$ equipped with an element of type
+  $P(f(k))$.
 
-Then there is a largest natural number $m$ such that $f(m) \leq n$ equipped with an element of type $P(f(m))$.
+Then there is a largest natural number $m$ such that $f(m) \leq n$ equipped with
+an element of type $P(f(m))$.
 
-**Example.** For any natural number $1 \leq n$ there exists a largest number $m$ such that $m^2 \mid n$. Indeed, if we let $P(x)$ be the decidable predicate that $x$ divides $n$ and $f$ the [squaring function](elementary-number-theory.squares-natural-numbers.md). The squaring function has finite fibers and we have $1^2 \leq n$ and $1^2 \mid n$. The theorem thus gives us a largest number $m$ such that $m^2 \mid n$. We carry out this example in the module about [Square-free decompositions](elementary-number-theory.square-free-decompositions-natural-numbers.md).
+**Example.** For any natural number $1 \leq n$ there exists a largest number $m$
+such that $m^2 \mid n$. Indeed, if we let $P(x)$ be the decidable predicate that
+$x$ divides $n$ and $f$ the
+[squaring function](elementary-number-theory.squares-natural-numbers.md). The
+squaring function has finite fibers and we have $1^2 \leq n$ and $1^2 \mid n$.
+The theorem thus gives us a largest number $m$ such that $m^2 \mid n$. We carry
+out this example in the module about
+[Square-free decompositions](elementary-number-theory.square-free-decompositions-natural-numbers.md).
 
 ```agda
 module _

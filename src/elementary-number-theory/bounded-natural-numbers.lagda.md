@@ -31,13 +31,16 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The type of {{#concept "bounded natural numbers" Agda=bounded-ℕ}} with upper bound $n$ is the type
+The type of {{#concept "bounded natural numbers" Agda=bounded-ℕ}} with upper
+bound $n$ is the type
 
 $$
   \mathbb{N}_{\leq n} := \{k : ℕ \mid k \leq n\}.
 $$
 
-The type $\mathbb{N}_{\leq n}$ is [equivalent](foundation-core.equivalences.md) to the [standard finite type](univalent-combinatorics.standard-finite-types.md) $\mathsf{Fin}(n+1)$.
+The type $\mathbb{N}_{\leq n}$ is [equivalent](foundation-core.equivalences.md)
+to the [standard finite type](univalent-combinatorics.standard-finite-types.md)
+$\mathsf{Fin}(n+1)$.
 
 ## Definition
 

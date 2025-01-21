@@ -29,13 +29,17 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The type of {{#concept "strictly bounded natural numbers" Agda=strictly-bounded-ℕ}} with strict upper bound $n$ is the type
+The type of
+{{#concept "strictly bounded natural numbers" Agda=strictly-bounded-ℕ}} with
+strict upper bound $n$ is the type
 
 $$
   \mathbb{N}_{< n} := \{k : ℕ \mid k < n\}.
 $$
 
-The type $\mathbb{N}_{\leq n}$ is [equivalent](foundation-core.equivalences.md) to the [standard finite type](univalent-combinatorics.standard-finite-types.md) $\mathsf{Fin}(n+1)$.
+The type $\mathbb{N}_{\leq n}$ is [equivalent](foundation-core.equivalences.md)
+to the [standard finite type](univalent-combinatorics.standard-finite-types.md)
+$\mathsf{Fin}(n+1)$.
 
 ## Definition
 
