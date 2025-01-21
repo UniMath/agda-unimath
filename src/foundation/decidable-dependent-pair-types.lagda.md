@@ -9,7 +9,11 @@ module foundation.decidable-dependent-pair-types where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.maybe
+open import foundation.mere-equality
+open import foundation.propositional-truncations
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.uniformly-decidable-type-families
@@ -31,6 +35,21 @@ We describe conditions under which
 [decidable](foundation.decidable-types.md)
 
 ## Properites
+
+### Decidability of dependent sums over equivalences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} {D : B → UU l4}
+  (e : A ≃ B) (f : (x : A) → C x ≃ D (map-equiv e x))
+  where
+
+  is-decidable-Σ-equiv : is-decidable (Σ A C) → is-decidable (Σ B D)
+  is-decidable-Σ-equiv = is-decidable-equiv' (equiv-Σ D e f)
+
+  is-decidable-Σ-equiv' : is-decidable (Σ B D) → is-decidable (Σ A C)
+  is-decidable-Σ-equiv' = is-decidable-equiv (equiv-Σ D e f)
+```
 
 ### Dependent sums of a uniformly decidable family of types
 
@@ -66,24 +85,34 @@ is-decidable-Σ-coproduct {A = A} {B} C dA dB =
 ```agda
 is-decidable-Σ-Maybe :
   {l1 l2 : Level} {A : UU l1} {B : Maybe A → UU l2} →
-  is-decidable (Σ A (B ∘ unit-Maybe)) → is-decidable (B exception-Maybe) →
+  is-decidable (Σ A (B ∘ unit-Maybe)) →
+  is-decidable (B exception-Maybe) →
   is-decidable (Σ (Maybe A) B)
 is-decidable-Σ-Maybe {A = A} {B} dA de =
   is-decidable-Σ-coproduct B dA
     ( is-decidable-equiv (left-unit-law-Σ (B ∘ inr)) de)
 ```
 
-### Decidability of dependent sums over equivalences
+### Decidability of dependent sums over π₀-trivial bases
 
 ```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3} {D : B → UU l4}
-  (e : A ≃ B) (f : (x : A) → C x ≃ D (map-equiv e x))
-  where
-
-  is-decidable-Σ-equiv : is-decidable (Σ A C) → is-decidable (Σ B D)
-  is-decidable-Σ-equiv = is-decidable-equiv' (equiv-Σ D e f)
-
-  is-decidable-Σ-equiv' : is-decidable (Σ B D) → is-decidable (Σ A C)
-  is-decidable-Σ-equiv' = is-decidable-equiv (equiv-Σ D e f)
+is-decidable-Σ-all-elements-merely-equal-base :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  all-elements-merely-equal A →
+  is-decidable A →
+  ((x : A) → is-decidable (B x)) →
+  is-decidable (Σ A B)
+is-decidable-Σ-all-elements-merely-equal-base {B = B} H (inl x) K =
+  rec-coproduct
+    ( λ y → inl (x , y))
+    ( λ ny →
+      inr
+        ( λ ab →
+          rec-trunc-Prop
+            ( empty-Prop)
+            ( λ p → ny (tr B p (pr2 ab)))
+            ( H (pr1 ab) x)))
+    ( K x)
+is-decidable-Σ-all-elements-merely-equal-base H (inr nx) K =
+  inr (map-neg pr1 nx)
 ```

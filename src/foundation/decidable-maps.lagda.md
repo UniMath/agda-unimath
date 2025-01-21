@@ -10,13 +10,18 @@ module foundation.decidable-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-morphisms-arrows
 open import foundation.coproduct-types
+open import foundation.decidable-dependent-pair-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.pi-0-trivial-maps
+open import foundation.propositional-truncations
 open import foundation.retracts-of-maps
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -41,7 +46,7 @@ A [map](foundation-core.function-types.md) is said to be
 its [fibers](foundation-core.fibers-of-maps.md) are
 [decidable types](foundation.decidable-types.md).
 
-## Definition
+## Definitions
 
 ### The structure on a map of decidability
 
@@ -116,6 +121,26 @@ module _
             ( F (pr1 u)))
         ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
         ( G x)
+```
+
+The composite `g ∘ f` of two decidable maps is decidable if `g` is π₀-trivial.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B}
+  where
+
+  abstract
+    is-decidable-map-comp-is-π₀-trivial-map' :
+      is-π₀-trivial-map' g →
+      is-decidable-map g →
+      is-decidable-map f →
+      is-decidable-map (g ∘ f)
+    is-decidable-map-comp-is-π₀-trivial-map' H G F x =
+      is-decidable-equiv
+        ( compute-fiber-comp g f x)
+        ( is-decidable-Σ-all-elements-merely-equal-base (H x) (G x) (F ∘ pr1))
 ```
 
 ### Left cancellation for decidable maps

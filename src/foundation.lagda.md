@@ -317,6 +317,7 @@ open import foundation.path-split-maps public
 open import foundation.path-split-type-families public
 open import foundation.perfect-images public
 open import foundation.permutations-spans-families-of-types public
+open import foundation.pi-0-trivial-maps public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public

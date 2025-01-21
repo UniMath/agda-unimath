@@ -117,7 +117,7 @@ module _
         map-Cantor-Schröder-Bernstein-Escardó' (map-emb g y) d ＝ y
       ψ (inl v') =
         is-retraction-inverse-of-perfect-image
-          { is-emb-g = is-emb-map-emb g}
+          ( is-injective-emb g)
           ( y)
           ( v')
       ψ (inr v) = ex-falso (v γ)
@@ -128,7 +128,7 @@ module _
         Σ ( fiber (map-emb f) y)
           ( λ s → ¬ (is-perfect-image (map-emb f) (map-emb g) (pr1 s)))
       w =
-        has-not-perfect-fiber-is-not-perfect-image-LEM lem
+        has-nonperfect-fiber-is-not-perfect-image-LEM lem
           ( is-emb-map-emb f)
           ( is-emb-map-emb g)
           ( y)

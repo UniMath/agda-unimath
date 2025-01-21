@@ -12,7 +12,6 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.negation
-open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
@@ -305,16 +304,13 @@ module _
     is-decidable-prop P →
     ((x : P) → is-decidable-prop (Q x)) →
     is-decidable ((x : P) → Q x)
-  is-decidable-Π-is-decidable-prop H K =
+  is-decidable-Π-is-decidable-prop (H , inl x) K =
     rec-coproduct
-      ( λ x →
-        rec-coproduct
-          ( λ y →
-            inl (λ x' → tr Q (eq-is-prop (is-prop-type-is-decidable-prop H)) y))
-          ( λ ny → inr (λ f → ny (f x)))
-          ( is-decidable-type-is-decidable-prop (K x)))
-      ( λ nx → inl (λ x' → ex-falso (nx x')))
-      ( is-decidable-type-is-decidable-prop H)
+      ( λ y → inl (λ x' → tr Q (eq-is-prop H) y))
+      ( λ ny → inr (λ f → ny (f x)))
+      ( is-decidable-type-is-decidable-prop (K x))
+  is-decidable-Π-is-decidable-prop (H , inr nx) K =
+    inl (λ x' → ex-falso (nx x'))
 
   is-decidable-prop-Π :
     is-decidable-prop P →
@@ -332,40 +328,4 @@ module _
   ( is-decidable-prop-Π
     ( is-decidable-prop-type-Decidable-Prop P)
     ( is-decidable-prop-type-Decidable-Prop ∘ Q))
-```
-
-### Decidability of a propositional truncation
-
-```agda
-abstract
-  is-prop-is-decidable-trunc-Prop :
-    {l : Level} (A : UU l) → is-prop (is-decidable (type-trunc-Prop A))
-  is-prop-is-decidable-trunc-Prop A =
-    is-prop-is-decidable is-prop-type-trunc-Prop
-
-is-decidable-trunc-Prop : {l : Level} → UU l → Prop l
-pr1 (is-decidable-trunc-Prop A) = is-decidable (type-trunc-Prop A)
-pr2 (is-decidable-trunc-Prop A) = is-prop-is-decidable-trunc-Prop A
-
-is-decidable-trunc-Prop-is-merely-decidable :
-  {l : Level} (A : UU l) →
-  is-merely-decidable A → is-decidable (type-trunc-Prop A)
-is-decidable-trunc-Prop-is-merely-decidable A =
-  map-universal-property-trunc-Prop
-    ( is-decidable-trunc-Prop A)
-    ( f)
-  where
-  f : is-decidable A → type-Prop (is-decidable-trunc-Prop A)
-  f (inl a) = inl (unit-trunc-Prop a)
-  f (inr f) = inr (map-universal-property-trunc-Prop empty-Prop f)
-
-is-merely-decidable-is-decidable-trunc-Prop :
-  {l : Level} (A : UU l) →
-  is-decidable (type-trunc-Prop A) → is-merely-decidable A
-is-merely-decidable-is-decidable-trunc-Prop A (inl x) =
-  apply-universal-property-trunc-Prop x
-    ( is-merely-decidable-Prop A)
-    ( unit-trunc-Prop ∘ inl)
-is-merely-decidable-is-decidable-trunc-Prop A (inr f) =
-  unit-trunc-Prop (inr (f ∘ unit-trunc-Prop))
 ```
