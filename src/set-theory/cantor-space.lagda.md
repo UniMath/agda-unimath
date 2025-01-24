@@ -13,6 +13,7 @@ open import foundation.booleans
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
+open import foundation.double-negation-stable-equality
 open import foundation.lawveres-fixed-point-theorem
 open import foundation.negation
 open import foundation.propositional-truncations
@@ -55,6 +56,16 @@ cantor-space = ℕ → bool
 cantor-space-Type-With-Tight-Apartness : Type-With-Tight-Apartness lzero lzero
 cantor-space-Type-With-Tight-Apartness =
   function-into-Type-With-Tight-Apartness ℕ bool-Type-With-Tight-Apartness
+```
+
+### The cantor space has double negation stable equality
+
+```agda
+has-double-negation-stable-equality-cantor-space :
+  has-double-negation-stable-equality cantor-space
+has-double-negation-stable-equality-cantor-space =
+  has-double-negation-stable-equality-type-Type-With-Tight-Apartness
+    cantor-space-Type-With-Tight-Apartness
 ```
 
 ### The cantor space is a set

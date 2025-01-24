@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+
 module elementary-number-theory.equality-conatural-numbers where
 ```
 
@@ -42,14 +43,16 @@ open import logic.double-negation-elimination
 
 ## Idea
 
-We postulate that [equality](foundation-core.identity-types.md) of
-[conatural numbers](elementary-number-theory.conatural-numbers.md) is
-characterized by equality of...
-
-The formalizations are borrowed from the Cubical Agda and TypeTopology
-libraries.
+We characterize [equality](foundation-core.identity-types.md) of
+[conatural numbers](elementary-number-theory.conatural-numbers.md).
 
 ## Definitions
+
+### Observational equality on the conaturals
+
+We borrow a trick from the cubical Agda library in our definition of the
+observational equality predicate on conatural numbers, `Eq-ℕ∞`, so that our
+definition passes Agda's termination checker.
 
 ```agda
 record Eq-ℕ∞ (x y : ℕ∞) : UU lzero
@@ -74,6 +77,8 @@ record Eq-ℕ∞ x y where
 open Eq-ℕ∞ public
 ```
 
+### Observational equality on the conaturals is reflexive
+
 The following does not pass Agda's termination checker if we omit the
 intermediate data type `Eq-Maybe-ℕ∞`.
 
@@ -92,14 +97,14 @@ refl-Eq-Maybe-ℕ∞' {inr x} = star
 ```
 
 ```agda
-Eq-Eq-Maybe-ℕ∞ : {x y : Maybe ℕ∞} → x ＝ y → Eq-Maybe-ℕ∞ x y
-Eq-Eq-Maybe-ℕ∞ refl = refl-Eq-Maybe-ℕ∞
+Eq-Maybe-eq-ℕ∞ : {x y : Maybe ℕ∞} → x ＝ y → Eq-Maybe-ℕ∞ x y
+Eq-Maybe-eq-ℕ∞ refl = refl-Eq-Maybe-ℕ∞
 
 Eq-eq-ℕ∞ : {x y : ℕ∞} → x ＝ y → Eq-ℕ∞ x y
 Eq-eq-ℕ∞ refl = refl-Eq-ℕ∞
 
-Eq-Eq-Maybe-ℕ∞' : {x y : Maybe ℕ∞} → x ＝ y → Eq-Maybe-ℕ∞' x y
-Eq-Eq-Maybe-ℕ∞' refl = refl-Eq-Maybe-ℕ∞'
+Eq-Maybe-eq-ℕ∞' : {x y : Maybe ℕ∞} → x ＝ y → Eq-Maybe-ℕ∞' x y
+Eq-Maybe-eq-ℕ∞' refl = refl-Eq-Maybe-ℕ∞'
 ```
 
 ## Postulates
@@ -175,14 +180,14 @@ is-torsorial-Eq-ℕ∞ =
 
 ## Properties
 
-### The deconstructor function on conaturals is injective
+### The deconstructor function on the conaturals is injective
 
 ```agda
 Eq-eq-decons-ℕ∞ : {x y : ℕ∞} → decons-ℕ∞ x ＝ decons-ℕ∞ y → Eq-ℕ∞ x y
-Eq-eq-decons-ℕ∞ p = cons-Eq-ℕ∞ (Eq-Eq-Maybe-ℕ∞ p)
+Eq-eq-decons-ℕ∞ = cons-Eq-ℕ∞ ∘ Eq-Maybe-eq-ℕ∞
 
 is-injective-decons-ℕ∞ : is-injective decons-ℕ∞
-is-injective-decons-ℕ∞ p = eq-Eq-ℕ∞ (Eq-eq-decons-ℕ∞ p)
+is-injective-decons-ℕ∞ = eq-Eq-ℕ∞ ∘ Eq-eq-decons-ℕ∞
 ```
 
 ### The conaturals are a fixed point of the Maybe monad
@@ -318,26 +323,33 @@ is-set-ℕ∞ =
 ```text
 cases-is-cotransitive-Eq-Maybe-ℕ∞ :
   (x y z : Maybe ℕ∞) →
-  ¬ (Eq-Maybe-ℕ∞ x y) →
-  ¬ (Eq-Maybe-ℕ∞ x z) + ¬ (Eq-Maybe-ℕ∞ z y)
+  ¬ (Eq-Maybe-ℕ∞ x y) → ¬ (Eq-Maybe-ℕ∞ x z) + ¬ (Eq-Maybe-ℕ∞ z y)
 
 cases-is-cotransitive-Eq-ℕ∞ :
-  (x y z : ℕ∞) →
-  ¬ (Eq-ℕ∞ x y) →
-  ¬ (Eq-ℕ∞ x z) + ¬ (Eq-ℕ∞ z y)
-cases-is-cotransitive-Eq-ℕ∞ x y z np =
-  map-coproduct
-    ( map-neg decons-Eq-ℕ∞)
-    ( map-neg decons-Eq-ℕ∞)
-    ( cases-is-cotransitive-Eq-Maybe-ℕ∞
-      ( decons-ℕ∞ x)
-      ( decons-ℕ∞ y)
-      ( decons-ℕ∞ z)
-      ( map-neg cons-Eq-ℕ∞ np))
+  (x y z : ℕ∞) → ¬ (Eq-ℕ∞ x y) → ¬ (Eq-ℕ∞ x z) + ¬ (Eq-ℕ∞ z y)
+cases-is-cotransitive-Eq-ℕ∞ x y z np with
+  cases-is-cotransitive-Eq-Maybe-ℕ∞
+    ( decons-ℕ∞ x)
+    ( decons-ℕ∞ y)
+    ( decons-ℕ∞ z)
+    ( map-neg cons-Eq-ℕ∞ np)
+... | (inl nx) = inl (map-neg (Eq-Maybe-eq-ℕ∞ ∘ ap decons-ℕ∞ ∘ eq-Eq-ℕ∞) nx)
+... | (inr ny) = inr (map-neg (Eq-Maybe-eq-ℕ∞ ∘ ap decons-ℕ∞ ∘ eq-Eq-ℕ∞) ny)
 
-cases-is-cotransitive-Eq-Maybe-ℕ∞ (inl x) (inl y) (inl z) np =
-  map-coproduct (map-neg {! cons-Eq-Maybe-ℕ∞  !}) {!   !} (cases-is-cotransitive-Eq-ℕ∞ x y z (map-neg cons-Eq-Maybe-ℕ∞ np))
-cases-is-cotransitive-Eq-Maybe-ℕ∞ (inl x) (inl y) (inr x₁) np = {!   !}
-cases-is-cotransitive-Eq-Maybe-ℕ∞ (inl x) (inr y) z np = {!   !}
-cases-is-cotransitive-Eq-Maybe-ℕ∞ (inr x) y z np = {!   !}
+cases-is-cotransitive-Eq-Maybe-ℕ∞ (inl x) (inl y) (inl z) np with
+  cases-is-cotransitive-Eq-ℕ∞ x y z (map-neg cons-Eq-Maybe-ℕ∞ np)
+... | (inl nx) = inl (map-neg (Eq-eq-ℕ∞ ∘ is-injective-inl ∘ eq-Eq-Maybe-ℕ∞) nx)
+... | (inr ny) = inr (map-neg (Eq-eq-ℕ∞ ∘ is-injective-inl ∘ eq-Eq-Maybe-ℕ∞) ny)
+cases-is-cotransitive-Eq-Maybe-ℕ∞ (inl x) (inl y) (inr z) np =
+  inl (map-neg decons-Eq-Maybe-ℕ∞ id)
+cases-is-cotransitive-Eq-Maybe-ℕ∞ (inl x) (inr y) (inl z) np =
+  inr (map-neg decons-Eq-Maybe-ℕ∞ id)
+cases-is-cotransitive-Eq-Maybe-ℕ∞ (inl x) (inr y) (inr z) np =
+  inl (map-neg decons-Eq-Maybe-ℕ∞ id)
+cases-is-cotransitive-Eq-Maybe-ℕ∞ (inr x) y (inl z) np =
+  inl (map-neg decons-Eq-Maybe-ℕ∞ id)
+cases-is-cotransitive-Eq-Maybe-ℕ∞ (inr x) (inl y) (inr z) np =
+  inr (map-neg decons-Eq-Maybe-ℕ∞ id)
+cases-is-cotransitive-Eq-Maybe-ℕ∞ (inr x) (inr y) (inr z) np =
+  ex-falso (np (cons-Eq-Maybe-ℕ∞ star))
 ```

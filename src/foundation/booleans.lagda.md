@@ -7,6 +7,7 @@ module foundation.booleans where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.apartness-relations
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -14,6 +15,7 @@ open import foundation.discrete-types
 open import foundation.involutions
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
+open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -210,6 +212,14 @@ has-decidable-equality-bool false false = inl refl
 
 bool-Discrete-Type : Discrete-Type lzero
 bool-Discrete-Type = bool , has-decidable-equality-bool
+```
+
+### The booleans have a tight apartness relation
+
+```agda
+bool-Type-With-Tight-Apartness : Type-With-Tight-Apartness lzero lzero
+bool-Type-With-Tight-Apartness =
+  type-with-tight-apartness-Discrete-Type bool-Discrete-Type
 ```
 
 ### The "is true" predicate on booleans
