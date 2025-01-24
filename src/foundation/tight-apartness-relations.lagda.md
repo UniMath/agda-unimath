@@ -91,6 +91,12 @@ Type-With-Tight-Apartness l1 l2 =
   Σ ( Type-With-Apartness l1 l2)
     ( λ X → is-tight (rel-apart-Type-With-Apartness X))
 
+make-Type-With-Tight-Apartness :
+  {l1 l2 : Level} {X : UU l1} →
+  Tight-Apartness-Relation l2 X →
+  Type-With-Tight-Apartness l1 l2
+make-Type-With-Tight-Apartness {X = X} (R , t) = ((X , R) , t)
+
 module _
   {l1 l2 : Level} (X : Type-With-Tight-Apartness l1 l2)
   where
@@ -101,6 +107,12 @@ module _
   type-Type-With-Tight-Apartness : UU l1
   type-Type-With-Tight-Apartness =
     type-Type-With-Apartness type-with-apartness-Type-With-Tight-Apartness
+
+  apartness-relation-Type-With-Tight-Apartness :
+    Apartness-Relation l2 type-Type-With-Tight-Apartness
+  apartness-relation-Type-With-Tight-Apartness =
+    apartness-relation-Type-With-Apartness
+      ( type-with-apartness-Type-With-Tight-Apartness)
 
   rel-apart-Type-With-Tight-Apartness :
     Relation-Prop l2 type-Type-With-Tight-Apartness
@@ -139,6 +151,12 @@ module _
   is-tight-apart-Type-With-Tight-Apartness :
     is-tight rel-apart-Type-With-Tight-Apartness
   is-tight-apart-Type-With-Tight-Apartness = pr2 X
+
+  tight-apartness-relation-Type-With-Tight-Apartness :
+    Tight-Apartness-Relation l2 type-Type-With-Tight-Apartness
+  tight-apartness-relation-Type-With-Tight-Apartness =
+    ( apartness-relation-Type-With-Tight-Apartness ,
+      is-tight-apart-Type-With-Tight-Apartness)
 ```
 
 ## Properties
@@ -194,6 +212,16 @@ type-subtype-Tight-Apartness-Relation :
   Tight-Apartness-Relation l3 X → Tight-Apartness-Relation l3 (type-subtype P)
 type-subtype-Tight-Apartness-Relation P R =
   restriction-Tight-Apartness-Relation (injection-subtype P) R
+
+subtype-Type-With-Tight-Apartness :
+  {l1 l2 l3 : Level}
+  ( X : Type-With-Tight-Apartness l1 l2)
+  ( P : subtype l3 (type-Type-With-Tight-Apartness X)) →
+  Type-With-Tight-Apartness (l1 ⊔ l3) l2
+subtype-Type-With-Tight-Apartness X P =
+  make-Type-With-Tight-Apartness
+    ( type-subtype-Tight-Apartness-Relation P
+      ( tight-apartness-relation-Type-With-Tight-Apartness X))
 ```
 
 ### Tight apartness on the type of dependent functions into a family of types with tight apartness
