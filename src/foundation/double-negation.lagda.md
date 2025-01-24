@@ -42,6 +42,9 @@ intro-double-negation p f = f p
 map-double-negation :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} → (P → Q) → ¬¬ P → ¬¬ Q
 map-double-negation f = map-neg (map-neg f)
+
+elim-triple-negation : {l : Level} {P : UU l} → ¬¬¬ P → ¬ P
+elim-triple-negation = map-neg intro-double-negation
 ```
 
 ## Properties

@@ -19,7 +19,6 @@ open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.sets
-open import foundation.tight-apartness-relations
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -42,8 +41,9 @@ A type `A` is said to have
 {{#concept "double negation stable equality" Disambiguation="type" Agda=has-double-negation-stable-equality}}
 if `x ＝ y` has
 [double negation elimination](logic.double-negation-elimination.md) for every
-`x y : A`. By the fundamental theorem of identity types, types with double
-negation stable equality are sets.
+`x y : A`. By the
+[fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md),
+types with double negation stable equality are [sets](foundation-core.sets.md).
 
 ## Definitions
 
@@ -111,16 +111,6 @@ module _
     has-double-negation-stable-equality A → is-set A
   is-set-has-double-negation-stable-equality H x =
     is-prop-based-Id-has-based-double-negation-stable-equality (H x)
-```
-
-### A type with double negation stable equality is a type whose negated equality relation is tight
-
-```agda
-is-tight-nonequal-has-double-negation-stable-equality :
-  {l : Level} {A : UU l} →
-  has-double-negation-stable-equality A →
-  is-tight (nonequal-Prop {A = A})
-is-tight-nonequal-has-double-negation-stable-equality H x y = H x y
 ```
 
 ### Types with double negation stable equality are closed under injections
@@ -286,7 +276,11 @@ module _
 
 ## See also
 
-- [Tight apartness relations](foundation.tight-apartness-relations.md)
+- Every type with a
+  [tight apartness relation](foundation.tight-apartness-relations.md) has double
+  negation stable equality. Conversely, every type with double negation stable
+  equality has a tight, symmetric, antireflexive relation. However, this
+  relation need not be cotransitive.
 
 ## External links
 
