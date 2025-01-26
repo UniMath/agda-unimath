@@ -27,12 +27,16 @@ open import trees.well-founded-trees
 
 ## Idea
 
-An {{#concept "ordinal" Agda=is-ordinal Agda=Ordinal}} is a type `X` equipped
-with a propositional relation `_<_` that is
+An
+{{#concept "ordinal" WDID=Q191780 WD="ordinal number" Agda=is-ordinal Agda=Ordinal}}
+is a type `X` [equipped](foundation.structure.md) with a
+[propositional](foundation-core.propositions.md)
+[relation](foundation.binary-relations.md) `_<_` that is
 
-- Well-founded: a structure on which it is well-defined to do induction.
-- Transitive: if `x < y` and `y < z` then `x < z`.
-- Extensional: `x ＝ y` precisely if they are greater than the same elements.
+- **Well-founded:** a structure on which it is well-defined to do induction.
+- **Transitive:** if `x < y` and `y < z` then `x < z`.
+- **Extensional:** `x ＝ y` precisely if they are greater than the same
+  elements.
 
 In other words, it is a [well-founded tree](trees.well-founded-trees.md) that is
 `Prop`-valued and extensional.

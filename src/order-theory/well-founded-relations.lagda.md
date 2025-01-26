@@ -25,7 +25,7 @@ open import order-theory.preorders
 Given a type `X` equipped with a
 [binary relation](foundation.binary-relations.md) `_∈_ : X → X → Type` we say
 that the relation `_∈_` is
-{{#concept "well-founded" Disambiguation="binary relation" Agda=is-well-founded-Relation Agda=Well-Founded-Relation}}
+{{#concept "well-founded" Disambiguation="binary relation" WDID=Q338021 WD="well-founded relation" Agda=is-well-founded-Relation Agda=Well-Founded-Relation}}
 if all elements of `X` are
 [accessible](order-theory.accessible-elements-relations.md) with respect to
 `_∈_`.
