@@ -31,8 +31,8 @@ A map `f : A → B` is said to be
 {{#concept "weakly constant" Disambiguation="map of types" Agda=is-weakly-constant}},
 or **steady**, if any two elements in `A` are mapped to
 [identical elements](foundation-core.identity-types.md) in `B`. This concept is
-considered in {{#cite KECA17}} where it is in particular used to give a
-[generalization of Hedberg's theorem](foundation.generalized-hedbergs-theorem.md).
+considered in {{#cite KECA17}} where it is, in particular, used to give a
+generalization of Hedberg's theorem.
 
 ## Definitions
 

@@ -10,21 +10,22 @@ module category-theory.representing-arrow-category where
 open import category-theory.categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
-open import order-theory.posets
 
 open import foundation.booleans
-open import foundation.logical-operations-booleans
-open import foundation.inequality-booleans
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.inequality-booleans
 open import foundation.logical-equivalences
+open import foundation.logical-operations-booleans
 open import foundation.propositions
-open import foundation.decidable-propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import order-theory.posets
 ```
 
 </details>
