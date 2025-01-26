@@ -81,7 +81,7 @@ One important fact about split idempotent maps is that every
 [quasicoherently idempotent map](foundation.quasicoherently-idempotent-maps.md)
 splits, and conversely, every split idempotent map is quasicoherently
 idempotent. In fact, the type of proofs of split idempotence for an endomap `f`
-is a retract of the type of proofs of quasicoherent idempotence.
+is a retract of the type of proofs of quasicoherent idempotence. {{#cite Shu17}}
 
 ## Definitions
 
@@ -1001,11 +1001,12 @@ Note, in particular, that the left-hand square is the inductive hypothesis.
               ( ap f (I (a (second-succ-ℕ n))))) ∙
           ( ap
             ( ξ n ∙_)
-            ( ap
-              ( ap (f ∘ f) (α (succ-ℕ n)) ∙_)
-              ( coh-is-quasicoherently-idempotent H
-                ( a (succ-ℕ (succ-ℕ n)))) ∙
-            ( inv (nat-htpy I (α (succ-ℕ n)))))) ∙
+            ( ( ap
+                ( ap (f ∘ f) (α (succ-ℕ n)) ∙_)
+                ( coh-is-quasicoherently-idempotent
+                  ( H)
+                  ( a (succ-ℕ (succ-ℕ n))))) ∙
+              ( inv (nat-htpy I (α (succ-ℕ n)))))) ∙
           ( inv (assoc (ξ n) (I (a (succ-ℕ n))) (ap f (α (succ-ℕ n)))))))
       where
         ξ :
