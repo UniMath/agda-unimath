@@ -214,3 +214,8 @@ leq-and-bool'' :
 leq-and-bool'' {true} {true} {true} p q = star
 leq-and-bool'' {false} {y} {z} p q = star
 ```
+
+## See also
+
+- The underlying category of the poset of booleans is called
+  [the representing arrow category](category-theory.representing-arrow-category.md).

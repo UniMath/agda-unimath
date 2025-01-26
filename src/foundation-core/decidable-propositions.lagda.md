@@ -19,6 +19,7 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
+open import foundation-core.sets
 open import foundation-core.empty-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -116,6 +117,9 @@ module _
     is-decidable type-Decidable-Prop
   pr2 is-decidable-prop-Decidable-Prop =
     is-prop-is-decidable is-prop-type-Decidable-Prop
+
+  set-Decidable-Prop : Set l
+  set-Decidable-Prop = set-Prop prop-Decidable-Prop
 ```
 
 ### The empty type is a decidable proposition

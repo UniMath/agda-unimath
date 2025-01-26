@@ -323,6 +323,8 @@ retract-cantor-space-increasing-binary-sequence-ℕ =
 
 ### Increasing binary sequences are order preserving maps
 
+> TODO
+
 ## See also
 
 - [The conatural numbers](elementary-number-theory.conatural-numbers.md)
