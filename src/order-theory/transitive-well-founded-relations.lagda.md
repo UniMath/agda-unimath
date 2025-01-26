@@ -120,3 +120,20 @@ module _
     transitive-leq-Well-Founded-Relation
       ( well-founded-relation-Transitive-Well-Founded-Relation R)
 ```
+
+## Properties
+
+### Less than implies less than or equal
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (R : Transitive-Well-Founded-Relation l2 X)
+  where
+
+  leq-le-Transitive-Well-Founded-Relation :
+    {x y : X} →
+    le-Transitive-Well-Founded-Relation R x y →
+    leq-Transitive-Well-Founded-Relation R x y
+  leq-le-Transitive-Well-Founded-Relation {x} {y} p u q =
+    is-transitive-le-Transitive-Well-Founded-Relation R u x y p q
+```
