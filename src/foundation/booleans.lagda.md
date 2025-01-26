@@ -29,6 +29,8 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.decidable-propositions
+open import foundation-core.empty-types
 open import foundation-core.sections
 open import foundation-core.sets
 
@@ -148,32 +150,12 @@ neq-true-false-bool : true ≠ false
 neq-true-false-bool ()
 ```
 
-## Structure
-
-### The boolean operators
+### The standard interpretation of booleans as decidable propositions
 
 ```agda
-neg-bool : bool → bool
-neg-bool true = false
-neg-bool false = true
-
-conjunction-bool : bool → bool → bool
-conjunction-bool true true = true
-conjunction-bool true false = false
-conjunction-bool false true = false
-conjunction-bool false false = false
-
-disjunction-bool : bool → bool → bool
-disjunction-bool true true = true
-disjunction-bool true false = true
-disjunction-bool false true = true
-disjunction-bool false false = false
-
-implication-bool : bool → bool → bool
-implication-bool true true = true
-implication-bool true false = false
-implication-bool false true = true
-implication-bool false false = true
+decidable-prop-bool : bool → Decidable-Prop lzero
+decidable-prop-bool true = unit-Decidable-Prop
+decidable-prop-bool false = empty-Decidable-Prop
 ```
 
 ## Properties
@@ -306,37 +288,6 @@ number-of-elements-bool =
 bool-𝔽 : 𝔽 lzero
 pr1 bool-𝔽 = bool
 pr2 bool-𝔽 = is-finite-bool
-```
-
-### Boolean negation has no fixed points
-
-```agda
-neq-neg-bool : (b : bool) → b ≠ neg-bool b
-neq-neg-bool true ()
-neq-neg-bool false ()
-
-neq-neg-bool' : (b : bool) → neg-bool b ≠ b
-neq-neg-bool' b = neq-neg-bool b ∘ inv
-```
-
-### Boolean negation is an involution
-
-```agda
-is-involution-neg-bool : is-involution neg-bool
-is-involution-neg-bool true = refl
-is-involution-neg-bool false = refl
-```
-
-### Boolean negation is an equivalence
-
-```agda
-abstract
-  is-equiv-neg-bool : is-equiv neg-bool
-  is-equiv-neg-bool = is-equiv-is-involution is-involution-neg-bool
-
-equiv-neg-bool : bool ≃ bool
-pr1 equiv-neg-bool = neg-bool
-pr2 equiv-neg-bool = is-equiv-neg-bool
 ```
 
 ### The constant function `const bool b` is not an equivalence
