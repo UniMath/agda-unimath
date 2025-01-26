@@ -144,4 +144,4 @@ module _
 ## See also
 
 - A well-founded relation that is transitive is a
-  [well-founded tree](trees.well-founded-trees.md).
+  [transitive well-founded relation](order-theory.transitive-well-founded-relations.md).

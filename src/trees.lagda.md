@@ -64,5 +64,4 @@ open import trees.universal-tree public
 open import trees.w-type-of-natural-numbers public
 open import trees.w-type-of-propositions public
 open import trees.w-types public
-open import trees.well-founded-trees public
 ```

@@ -18,9 +18,8 @@ open import foundation.universe-levels
 
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.transitive-well-founded-relations
 open import order-theory.well-founded-relations
-
-open import trees.well-founded-trees
 ```
 
 </details>
@@ -38,8 +37,9 @@ is a type `X` [equipped](foundation.structure.md) with a
 - **Extensional:** `x ＝ y` precisely if they are greater than the same
   elements.
 
-In other words, it is a [well-founded tree](trees.well-founded-trees.md) that is
-`Prop`-valued and extensional.
+In other words, it is a
+[transitive well-founded relation](order-theory.transitive-well-founded-relations.md)
+that is `Prop`-valued and extensional.
 
 ## Definitions
 
@@ -62,7 +62,7 @@ module _
 
   is-ordinal : UU (l1 ⊔ l2)
   is-ordinal =
-    ( is-well-founded-tree-Relation (type-Relation-Prop R)) ×
+    ( is-transitive-well-founded-relation-Relation (type-Relation-Prop R)) ×
     ( extensionality-principle-Ordinal R)
 ```
 
@@ -88,44 +88,51 @@ module _
   is-ordinal-Ordinal : is-ordinal le-prop-Ordinal
   is-ordinal-Ordinal = pr2 (pr2 O)
 
-  is-well-founded-tree-le-Ordinal :
-    is-well-founded-tree-Relation le-Ordinal
-  is-well-founded-tree-le-Ordinal = pr1 is-ordinal-Ordinal
+  is-transitive-well-founded-relation-le-Ordinal :
+    is-transitive-well-founded-relation-Relation le-Ordinal
+  is-transitive-well-founded-relation-le-Ordinal = pr1 is-ordinal-Ordinal
 
-  well-founded-tree-Ordinal : Well-Founded-Tree l1 l2
-  well-founded-tree-Ordinal =
-    ( type-Ordinal , le-Ordinal , is-well-founded-tree-le-Ordinal)
+  transitive-well-founded-relation-Ordinal :
+    Transitive-Well-Founded-Relation l2 type-Ordinal
+  transitive-well-founded-relation-Ordinal =
+    ( le-Ordinal , is-transitive-well-founded-relation-le-Ordinal)
 
   is-extensional-Ordinal : extensionality-principle-Ordinal le-prop-Ordinal
   is-extensional-Ordinal = pr2 is-ordinal-Ordinal
 
   is-transitive-le-Ordinal : is-transitive le-Ordinal
   is-transitive-le-Ordinal =
-    is-transitive-le-Well-Founded-Tree well-founded-tree-Ordinal
+    is-transitive-le-Transitive-Well-Founded-Relation
+      transitive-well-founded-relation-Ordinal
 
   is-well-founded-relation-le-Ordinal : is-well-founded-Relation le-Ordinal
   is-well-founded-relation-le-Ordinal =
-    is-well-founded-relation-le-Well-Founded-Tree
-      well-founded-tree-Ordinal
+    is-well-founded-relation-le-Transitive-Well-Founded-Relation
+      transitive-well-founded-relation-Ordinal
 
   well-founded-relation-Ordinal : Well-Founded-Relation l2 type-Ordinal
   well-founded-relation-Ordinal =
-    well-founded-relation-Well-Founded-Tree well-founded-tree-Ordinal
+    well-founded-relation-Transitive-Well-Founded-Relation
+      transitive-well-founded-relation-Ordinal
 
   is-asymmetric-le-Ordinal : is-asymmetric le-Ordinal
   is-asymmetric-le-Ordinal =
-    is-asymmetric-le-Well-Founded-Tree well-founded-tree-Ordinal
+    is-asymmetric-le-Transitive-Well-Founded-Relation
+      transitive-well-founded-relation-Ordinal
 
   is-irreflexive-le-Ordinal : is-irreflexive le-Ordinal
   is-irreflexive-le-Ordinal =
-    is-irreflexive-le-Well-Founded-Tree well-founded-tree-Ordinal
+    is-irreflexive-le-Transitive-Well-Founded-Relation
+      transitive-well-founded-relation-Ordinal
 ```
 
 The associated reflexive relation on an ordinal.
 
 ```agda
   leq-Ordinal : Relation (l1 ⊔ l2) type-Ordinal
-  leq-Ordinal = leq-Well-Founded-Tree well-founded-tree-Ordinal
+  leq-Ordinal =
+    leq-Transitive-Well-Founded-Relation
+      transitive-well-founded-relation-Ordinal
 
   is-prop-leq-Ordinal : {x y : type-Ordinal} → is-prop (leq-Ordinal x y)
   is-prop-leq-Ordinal {y = y} =
@@ -137,11 +144,14 @@ The associated reflexive relation on an ordinal.
   leq-prop-Ordinal x y = (leq-Ordinal x y , is-prop-leq-Ordinal)
 
   refl-leq-Ordinal : is-reflexive leq-Ordinal
-  refl-leq-Ordinal = refl-leq-Well-Founded-Tree well-founded-tree-Ordinal
+  refl-leq-Ordinal =
+    refl-leq-Transitive-Well-Founded-Relation
+      transitive-well-founded-relation-Ordinal
 
   transitive-leq-Ordinal : is-transitive leq-Ordinal
   transitive-leq-Ordinal =
-    transitive-leq-Well-Founded-Tree well-founded-tree-Ordinal
+    transitive-leq-Transitive-Well-Founded-Relation
+      transitive-well-founded-relation-Ordinal
 
   antisymmetric-leq-Ordinal : is-antisymmetric leq-Ordinal
   antisymmetric-leq-Ordinal x y p q =
