@@ -102,15 +102,15 @@ module _
     is-asymmetric-is-accessible-element-Relation _∈_ (w x)
 
 module _
-  {l1 l2 : Level} {X : UU l1} (ϵ : Well-Founded-Relation l2 X)
+  {l1 l2 : Level} {X : UU l1} (R : Well-Founded-Relation l2 X)
   where
 
   is-irreflexive-le-Well-Founded-Relation :
-    is-irreflexive (rel-Well-Founded-Relation ϵ)
+    is-irreflexive (rel-Well-Founded-Relation R)
   is-irreflexive-le-Well-Founded-Relation =
     is-irreflexive-is-asymmetric
-      ( rel-Well-Founded-Relation ϵ)
-      ( is-asymmetric-le-Well-Founded-Relation ϵ)
+      ( rel-Well-Founded-Relation R)
+      ( is-asymmetric-le-Well-Founded-Relation R)
 ```
 
 ### The associated reflexive relation of a well-founded relation
