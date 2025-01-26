@@ -9,21 +9,21 @@ module order-theory.decidable-total-orders where
 ```agda
 open import foundation.binary-relations
 open import foundation.coproduct-types
-open import foundation.decidable-propositions
-open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.decidable-types
-open import foundation.propositions
 open import foundation.decidable-equality
+open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.discrete-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.decidable-posets
-open import order-theory.similarity-of-elements-posets
 open import order-theory.decidable-total-preorders
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.similarity-of-elements-posets
 open import order-theory.total-orders
 ```
 

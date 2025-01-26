@@ -8,20 +8,20 @@ module order-theory.decidable-posets where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.decidable-equality
 open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.discrete-types
-open import foundation.decidable-equality
-open import foundation.decidable-types
 open import foundation.universe-levels
 
 open import order-theory.decidable-preorders
 open import order-theory.posets
-open import order-theory.similarity-of-elements-posets
 open import order-theory.preorders
+open import order-theory.similarity-of-elements-posets
 ```
 
 </details>

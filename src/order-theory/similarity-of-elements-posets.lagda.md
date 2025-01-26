@@ -7,11 +7,11 @@ module order-theory.similarity-of-elements-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
-open import foundation.binary-relations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.torsorial-type-families

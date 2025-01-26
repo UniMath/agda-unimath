@@ -7,9 +7,9 @@ module order-theory.similarity-of-elements-preorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.binary-relations
 open import foundation.propositions
 open import foundation.reflexive-relations
 open import foundation.universe-levels
@@ -61,7 +61,7 @@ module _
 
   refl-sim-Preorder :
     is-reflexive-Relation-Prop (sim-prop-Preorder P)
-  refl-sim-Preorder x = refl-leq-Preorder P x ,  refl-leq-Preorder P x
+  refl-sim-Preorder x = refl-leq-Preorder P x , refl-leq-Preorder P x
 ```
 
 ### The similarity relation is transitive

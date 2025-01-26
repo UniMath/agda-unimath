@@ -8,23 +8,18 @@ module foundation.inequality-booleans where
 
 ```agda
 open import foundation.apartness-relations
-open import foundation.decidable-equality
-open import foundation.decidable-types
-open import foundation.unit-type
 open import foundation.booleans
-open import order-theory.posets
-open import order-theory.preorders
-open import order-theory.total-orders
-open import order-theory.decidable-total-orders
-open import foundation.empty-types
-open import foundation.dependent-pair-types
+open import foundation.decidable-equality
 open import foundation.decidable-propositions
+open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.discrete-types
 open import foundation.disjunction
-open import foundation.logical-operations-booleans
+open import foundation.empty-types
 open import foundation.involutions
-open import foundation.propositional-truncations
+open import foundation.logical-operations-booleans
 open import foundation.negated-equality
+open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.tight-apartness-relations
 open import foundation.unit-type
@@ -32,7 +27,6 @@ open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.coproduct-types
-open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -42,6 +36,11 @@ open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.sets
+
+open import order-theory.decidable-total-orders
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.total-orders
 
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -171,12 +170,12 @@ leq-or-bool' {true} {false} = star
 leq-or-bool' {false} {true} = star
 leq-or-bool' {false} {false} = star
 
-leq-left-or-bool :  {x y : bool} → leq-bool x y → leq-bool (or-bool x y) y
+leq-left-or-bool : {x y : bool} → leq-bool x y → leq-bool (or-bool x y) y
 leq-left-or-bool {true} {true} p = star
 leq-left-or-bool {false} {true} p = star
 leq-left-or-bool {false} {false} p = star
 
-leq-right-or-bool :  {x y : bool} → leq-bool x y → leq-bool (or-bool y x) y
+leq-right-or-bool : {x y : bool} → leq-bool x y → leq-bool (or-bool y x) y
 leq-right-or-bool {x} {true} p = star
 leq-right-or-bool {false} {false} p = star
 
@@ -202,11 +201,11 @@ leq-and-bool' {true} {true} = star
 leq-and-bool' {true} {false} = star
 leq-and-bool' {false} {y} = star
 
-leq-left-and-bool :  {x y : bool} → leq-bool x y → leq-bool x (and-bool x y)
+leq-left-and-bool : {x y : bool} → leq-bool x y → leq-bool x (and-bool x y)
 leq-left-and-bool {true} {true} p = star
 leq-left-and-bool {false} {y} p = star
 
-leq-right-and-bool :  {x y : bool} → leq-bool x y → leq-bool x (and-bool y x)
+leq-right-and-bool : {x y : bool} → leq-bool x y → leq-bool x (and-bool y x)
 leq-right-and-bool {true} {true} p = star
 leq-right-and-bool {false} {y} p = star
 

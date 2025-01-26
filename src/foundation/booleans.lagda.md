@@ -21,6 +21,7 @@ open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.coproduct-types
+open import foundation-core.decidable-propositions
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -29,8 +30,6 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.decidable-propositions
-open import foundation-core.empty-types
 open import foundation-core.sections
 open import foundation-core.sets
 

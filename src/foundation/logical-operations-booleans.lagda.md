@@ -8,6 +8,7 @@ module foundation.logical-operations-booleans where
 
 ```agda
 open import foundation.apartness-relations
+open import foundation.booleans
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -15,13 +16,13 @@ open import foundation.discrete-types
 open import foundation.involutions
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
-open import foundation.booleans
 open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.coproduct-types
+open import foundation-core.decidable-propositions
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -30,8 +31,6 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.decidable-propositions
-open import foundation-core.empty-types
 open import foundation-core.sections
 open import foundation-core.sets
 
