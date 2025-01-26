@@ -156,7 +156,8 @@ module _
   is-set-type-Poset =
     is-set-prop-in-id
       ( λ x y → leq-Poset X x y × leq-Poset X y x)
-      ( λ x y → is-prop-product (is-prop-leq-Poset X x y) (is-prop-leq-Poset X y x))
+      ( λ x y →
+        is-prop-product (is-prop-leq-Poset X x y) (is-prop-leq-Poset X y x))
       ( λ x → refl-leq-Poset X x , refl-leq-Poset X x)
       ( λ x y (H , K) → antisymmetric-leq-Poset X x y H K)
 
