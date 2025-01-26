@@ -13,10 +13,14 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.discrete-types
+open import foundation.decidable-equality
+open import foundation.decidable-types
 open import foundation.universe-levels
 
 open import order-theory.decidable-preorders
 open import order-theory.posets
+open import order-theory.similarity-of-elements-posets
 open import order-theory.preorders
 ```
 
@@ -24,10 +28,12 @@ open import order-theory.preorders
 
 ## Idea
 
-A **decidable poset** is a poset of which the ordering relation is decidable. It
-follows that decidable posets have decidable equality.
+A {{#concept "decidable poset"}} is a [poset](order-theory.posets.md) of which
+the ordering relation is [decidable](foundation.decidable-types.md). It follows
+that decidable posets have
+[decidable equality](foundation.decidable-equality.md).
 
-## Definition
+## Definitions
 
 ```agda
 module _
@@ -110,4 +116,36 @@ module _
 
   set-Decidable-Poset : Set l1
   set-Decidable-Poset = set-Poset poset-Decidable-Poset
+```
+
+## Properties
+
+### Decidable posets have decidable equality
+
+**Proof.** By antisymmetry, equality `x ＝ y` in a poset is characterized by
+smiliarity, `(x ≤ y) × (y ≤ x)`, and this is a decidable type.
+
+```agda
+module _
+  {l1 l2 : Level} (P : Decidable-Poset l1 l2)
+  where
+
+  is-decidable-sim-Decidable-Poset :
+    {x y : type-Decidable-Poset P} →
+    is-decidable (sim-Poset (poset-Decidable-Poset P) x y)
+  is-decidable-sim-Decidable-Poset {x} {y} =
+    is-decidable-product
+      ( is-decidable-leq-Decidable-Poset P x y)
+      ( is-decidable-leq-Decidable-Poset P y x)
+
+  has-decidable-equality-type-Decidable-Poset :
+    has-decidable-equality (type-Decidable-Poset P)
+  has-decidable-equality-type-Decidable-Poset x y =
+    is-decidable-equiv
+      ( extensionality-Poset (poset-Decidable-Poset P) x y)
+      ( is-decidable-sim-Decidable-Poset)
+
+  discrete-type-Decidable-Poset : Discrete-Type l1
+  discrete-type-Decidable-Poset =
+    ( type-Decidable-Poset P , has-decidable-equality-type-Decidable-Poset)
 ```
