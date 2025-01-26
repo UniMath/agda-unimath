@@ -80,60 +80,6 @@ is-prop-leq-bool {x} {y} = is-prop-type-Prop (leq-bool-Prop x y)
 
 ## Properties
 
-```agda
-leq-or-bool : {x y : bool} → leq-bool x (or-bool x y)
-leq-or-bool {true} {y} = star
-leq-or-bool {false} {y} = star
-
-leq-or-bool' : {x y : bool} → leq-bool y (or-bool x y)
-leq-or-bool' {true} {true} = star
-leq-or-bool' {true} {false} = star
-leq-or-bool' {false} {true} = star
-leq-or-bool' {false} {false} = star
-
-leq-left-or-bool :  {x y : bool} → leq-bool x y → leq-bool (or-bool x y) y
-leq-left-or-bool {true} {true} p = star
-leq-left-or-bool {false} {true} p = star
-leq-left-or-bool {false} {false} p = star
-
-leq-right-or-bool :  {x y : bool} → leq-bool x y → leq-bool (or-bool y x) y
-leq-right-or-bool {x} {true} p = star
-leq-right-or-bool {false} {false} p = star
-
-leq-or-bool'' :
-  {x y z : bool} → leq-bool x z → leq-bool y z → leq-bool (or-bool x y) z
-leq-or-bool'' {true} {y} {true} p q = star
-leq-or-bool'' {false} {true} {true} p q = star
-leq-or-bool'' {false} {false} {true} p q = star
-leq-or-bool'' {false} {false} {false} p q = star
-```
-
-```agda
-leq-and-bool : {x y : bool} → leq-bool (and-bool x y) x
-leq-and-bool {true} {true} = star
-leq-and-bool {false} {true} = star
-leq-and-bool {true} {false} = star
-leq-and-bool {false} {false} = star
-
-leq-and-bool' : {x y : bool} → leq-bool (and-bool x y) y
-leq-and-bool' {true} {true} = star
-leq-and-bool' {true} {false} = star
-leq-and-bool' {false} {y} = star
-
-leq-left-and-bool :  {x y : bool} → leq-bool x y → leq-bool x (and-bool x y)
-leq-left-and-bool {true} {true} p = star
-leq-left-and-bool {false} {y} p = star
-
-leq-right-and-bool :  {x y : bool} → leq-bool x y → leq-bool x (and-bool y x)
-leq-right-and-bool {true} {true} p = star
-leq-right-and-bool {false} {y} p = star
-
-leq-and-bool'' :
-  {x y z : bool} → leq-bool x y → leq-bool x z → leq-bool x (and-bool y z)
-leq-and-bool'' {true} {true} {true} p q = star
-leq-and-bool'' {false} {y} {z} p q = star
-```
-
 ### Reflexivity
 
 ```agda
@@ -210,4 +156,62 @@ bool-Decidable-Total-Order =
   ( bool-Poset ,
     ( λ x y → linear-leq-bool {x} {y}) ,
     ( λ x y → is-decidable-Decidable-Prop (leq-bool-Decidable-Prop x y)))
+```
+
+### Interactions between the inequality relation and the disjunction operation
+
+```agda
+leq-or-bool : {x y : bool} → leq-bool x (or-bool x y)
+leq-or-bool {true} {y} = star
+leq-or-bool {false} {y} = star
+
+leq-or-bool' : {x y : bool} → leq-bool y (or-bool x y)
+leq-or-bool' {true} {true} = star
+leq-or-bool' {true} {false} = star
+leq-or-bool' {false} {true} = star
+leq-or-bool' {false} {false} = star
+
+leq-left-or-bool :  {x y : bool} → leq-bool x y → leq-bool (or-bool x y) y
+leq-left-or-bool {true} {true} p = star
+leq-left-or-bool {false} {true} p = star
+leq-left-or-bool {false} {false} p = star
+
+leq-right-or-bool :  {x y : bool} → leq-bool x y → leq-bool (or-bool y x) y
+leq-right-or-bool {x} {true} p = star
+leq-right-or-bool {false} {false} p = star
+
+leq-or-bool'' :
+  {x y z : bool} → leq-bool x z → leq-bool y z → leq-bool (or-bool x y) z
+leq-or-bool'' {true} {y} {true} p q = star
+leq-or-bool'' {false} {true} {true} p q = star
+leq-or-bool'' {false} {false} {true} p q = star
+leq-or-bool'' {false} {false} {false} p q = star
+```
+
+### Interactions between the inequality relation and the conjunction operation
+
+```agda
+leq-and-bool : {x y : bool} → leq-bool (and-bool x y) x
+leq-and-bool {true} {true} = star
+leq-and-bool {false} {true} = star
+leq-and-bool {true} {false} = star
+leq-and-bool {false} {false} = star
+
+leq-and-bool' : {x y : bool} → leq-bool (and-bool x y) y
+leq-and-bool' {true} {true} = star
+leq-and-bool' {true} {false} = star
+leq-and-bool' {false} {y} = star
+
+leq-left-and-bool :  {x y : bool} → leq-bool x y → leq-bool x (and-bool x y)
+leq-left-and-bool {true} {true} p = star
+leq-left-and-bool {false} {y} p = star
+
+leq-right-and-bool :  {x y : bool} → leq-bool x y → leq-bool x (and-bool y x)
+leq-right-and-bool {true} {true} p = star
+leq-right-and-bool {false} {y} p = star
+
+leq-and-bool'' :
+  {x y z : bool} → leq-bool x y → leq-bool x z → leq-bool x (and-bool y z)
+leq-and-bool'' {true} {true} {true} p q = star
+leq-and-bool'' {false} {y} {z} p q = star
 ```
