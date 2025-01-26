@@ -41,7 +41,7 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-A **directed tree** is a directed graph `G` equipped with a rood `r : G` such
+A **directed tree** is a directed graph `G` equipped with a root `r : G` such
 that for every vertex `x : G` the type of walks from `x` to `r` is contractible.
 
 ## Definition
