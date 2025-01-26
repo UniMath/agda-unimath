@@ -16,8 +16,8 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.preorders
 open import order-theory.posets
+open import order-theory.preorders
 open import order-theory.well-founded-relations
 
 open import trees.well-founded-trees

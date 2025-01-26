@@ -78,7 +78,8 @@ module _
   is-asymmetric-le-Well-Founded-Tree :
     is-asymmetric le-Well-Founded-Tree
   is-asymmetric-le-Well-Founded-Tree =
-    is-asymmetric-le-Well-Founded-Relation well-founded-relation-Well-Founded-Tree
+    is-asymmetric-le-Well-Founded-Relation
+      ( well-founded-relation-Well-Founded-Tree)
 
   is-irreflexive-le-Well-Founded-Tree :
     is-irreflexive le-Well-Founded-Tree
