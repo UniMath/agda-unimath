@@ -100,9 +100,9 @@ module _
   is-extensional-Ordinal : extensionality-principle-Ordinal le-prop-Ordinal
   is-extensional-Ordinal = pr2 is-ordinal-Ordinal
 
-  is-transitive-le-Ordinal : is-transitive le-Ordinal
-  is-transitive-le-Ordinal =
-    is-transitive-le-Transitive-Well-Founded-Relation
+  transitive-le-Ordinal : is-transitive le-Ordinal
+  transitive-le-Ordinal =
+    transitive-le-Transitive-Well-Founded-Relation
       transitive-well-founded-relation-Ordinal
 
   is-well-founded-relation-le-Ordinal : is-well-founded-Relation le-Ordinal
@@ -146,6 +146,12 @@ The associated reflexive relation on an ordinal.
   refl-leq-Ordinal : is-reflexive leq-Ordinal
   refl-leq-Ordinal =
     refl-leq-Transitive-Well-Founded-Relation
+      transitive-well-founded-relation-Ordinal
+
+  leq-eq-Ordinal :
+    {x y : type-Ordinal} → x ＝ y → leq-Ordinal x y
+  leq-eq-Ordinal =
+    leq-eq-Transitive-Well-Founded-Relation
       transitive-well-founded-relation-Ordinal
 
   transitive-leq-Ordinal : is-transitive leq-Ordinal
