@@ -143,12 +143,11 @@ The associated reflexive relation on an ordinal.
   antisymmetric-leq-Ordinal x y p q =
     is-extensional-Ordinal x y (λ u → p u , q u)
 
+  is-preorder-leq-Ordinal : is-preorder-Relation-Prop leq-prop-Ordinal
+  is-preorder-leq-Ordinal = (refl-leq-Ordinal , transitive-leq-Ordinal)
+
   preorder-Ordinal : Preorder l1 (l1 ⊔ l2)
-  preorder-Ordinal =
-    ( type-Ordinal ,
-      leq-prop-Ordinal ,
-      refl-leq-Ordinal ,
-      transitive-leq-Ordinal)
+  preorder-Ordinal = (type-Ordinal , leq-prop-Ordinal , is-preorder-leq-Ordinal)
 
   poset-Ordinal : Poset l1 (l1 ⊔ l2)
   poset-Ordinal = (preorder-Ordinal , antisymmetric-leq-Ordinal)
