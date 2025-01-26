@@ -13,8 +13,11 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
+open import order-theory.preorders
+open import order-theory.posets
 open import order-theory.well-founded-relations
 
 open import trees.well-founded-trees
@@ -107,12 +110,16 @@ module _
 
   is-asymmetric-le-Ordinal : is-asymmetric le-Ordinal
   is-asymmetric-le-Ordinal =
-    is-asymmetric-le-Well-Founded-Relation well-founded-relation-Ordinal
+    is-asymmetric-le-Well-Founded-Tree well-founded-tree-Ordinal
 
   is-irreflexive-le-Ordinal : is-irreflexive le-Ordinal
   is-irreflexive-le-Ordinal =
-    is-irreflexive-le-Well-Founded-Relation well-founded-relation-Ordinal
+    is-irreflexive-le-Well-Founded-Tree well-founded-tree-Ordinal
+```
 
+The associated reflexive relation on an ordinal.
+
+```agda
   leq-Ordinal : Relation (l1 ⊔ l2) type-Ordinal
   leq-Ordinal = leq-Well-Founded-Tree well-founded-tree-Ordinal
 
@@ -135,4 +142,20 @@ module _
   antisymmetric-leq-Ordinal : is-antisymmetric leq-Ordinal
   antisymmetric-leq-Ordinal x y p q =
     is-extensional-Ordinal x y (λ u → p u , q u)
+
+  preorder-Ordinal : Preorder l1 (l1 ⊔ l2)
+  preorder-Ordinal =
+    ( type-Ordinal ,
+      leq-prop-Ordinal ,
+      refl-leq-Ordinal ,
+      transitive-leq-Ordinal)
+
+  poset-Ordinal : Poset l1 (l1 ⊔ l2)
+  poset-Ordinal = (preorder-Ordinal , antisymmetric-leq-Ordinal)
+
+  is-set-type-Ordinal : is-set type-Ordinal
+  is-set-type-Ordinal = is-set-type-Poset poset-Ordinal
+
+  set-Ordinal : Set l1
+  set-Ordinal = (type-Ordinal , is-set-type-Ordinal)
 ```
