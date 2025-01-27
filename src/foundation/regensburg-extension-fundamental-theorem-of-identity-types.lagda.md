@@ -104,7 +104,7 @@ module _
           refl →
             is-in-subuniverse-equiv P
               ( compute-fiber-map-out-of-identity-type
-                ( ind-Id x (λ u _ → B u) y)
+                ( ind-Id a (λ u _ → B u) y)
                 ( x')
                 ( y'))
               ( K (ind-Id a (λ u _ → B u) y) x' y'))
