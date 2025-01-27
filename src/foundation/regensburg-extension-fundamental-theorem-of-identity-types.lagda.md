@@ -131,6 +131,10 @@ module _
 
 ### The unbased extended fundamental theorem of identity types
 
+The following is an unbased version of the extended fundamental theorem of
+identity types. For this formulation of the theorem we do not need to assume
+that `A` is inhabited.
+
 ```agda
 module _
   {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3)
