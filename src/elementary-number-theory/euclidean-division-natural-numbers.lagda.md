@@ -64,7 +64,7 @@ modulo `d` is the number `n` itself. The type of this data is therefore always
 
 ```agda
 euclidean-division-ℕ :
-  (k x : ℕ) → Σ ℕ (λ r → (cong-ℕ k x r) × (is-nonzero-ℕ k → le-ℕ r k))
+  (k x : ℕ) → Σ ℕ (λ r → (x ≡ r mod-ℕ k) × (is-nonzero-ℕ k → le-ℕ r k))
 pr1 (euclidean-division-ℕ zero-ℕ x) = x
 pr1 (pr2 (euclidean-division-ℕ zero-ℕ x)) = refl-cong-ℕ zero-ℕ x
 pr2 (pr2 (euclidean-division-ℕ zero-ℕ x)) f = ex-falso (f refl)
@@ -83,7 +83,7 @@ remainder-euclidean-division-ℕ k x =
   pr1 (euclidean-division-ℕ k x)
 
 cong-euclidean-division-ℕ :
-  (k x : ℕ) → cong-ℕ k x (remainder-euclidean-division-ℕ k x)
+  (k x : ℕ) → x ≡ remainder-euclidean-division-ℕ k x mod-ℕ k
 cong-euclidean-division-ℕ k x =
   pr1 (pr2 (euclidean-division-ℕ k x))
 
@@ -98,17 +98,16 @@ quotient-euclidean-division-ℕ k x =
 
 eq-quotient-euclidean-division-ℕ :
   (k x : ℕ) →
-  ( (quotient-euclidean-division-ℕ k x) *ℕ k) ＝
+  ( quotient-euclidean-division-ℕ k x *ℕ k) ＝
   ( dist-ℕ x (remainder-euclidean-division-ℕ k x))
 eq-quotient-euclidean-division-ℕ k x =
   pr2 (cong-euclidean-division-ℕ k x)
 
 eq-euclidean-division-ℕ :
   (k x : ℕ) →
-  ( add-ℕ
-    ( (quotient-euclidean-division-ℕ k x) *ℕ k)
-    ( remainder-euclidean-division-ℕ k x)) ＝
-  ( x)
+  quotient-euclidean-division-ℕ k x *ℕ k +ℕ
+  remainder-euclidean-division-ℕ k x ＝
+  x
 eq-euclidean-division-ℕ zero-ℕ x =
   ( inv
     ( ap
@@ -117,7 +116,7 @@ eq-euclidean-division-ℕ zero-ℕ x =
   ( left-unit-law-add-ℕ x)
 eq-euclidean-division-ℕ (succ-ℕ k) x =
   ( ap
-    ( _+ℕ (remainder-euclidean-division-ℕ (succ-ℕ k) x))
+    ( _+ℕ remainder-euclidean-division-ℕ (succ-ℕ k) x)
     ( ( pr2 (cong-euclidean-division-ℕ (succ-ℕ k) x)) ∙
       ( symmetric-dist-ℕ x
         ( remainder-euclidean-division-ℕ (succ-ℕ k) x)))) ∙

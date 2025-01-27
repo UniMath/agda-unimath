@@ -26,6 +26,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negated-equality
@@ -119,6 +120,18 @@ module _
   div-bounded-div-ℕ : bounded-div-ℕ m n → div-ℕ
   pr1 (div-bounded-div-ℕ H) = quotient-bounded-div-ℕ m n H
   pr2 (div-bounded-div-ℕ H) = eq-quotient-bounded-div-ℕ m n H
+
+concatenate-eq-div-ℕ :
+  {x y z : ℕ} → x ＝ y → div-ℕ y z → div-ℕ x z
+concatenate-eq-div-ℕ refl p = p
+
+concatenate-div-eq-ℕ :
+  {x y z : ℕ} → div-ℕ x y → y ＝ z → div-ℕ x z
+concatenate-div-eq-ℕ p refl = p
+
+concatenate-eq-div-eq-ℕ :
+  {x y z w : ℕ} → x ＝ y → div-ℕ y z → z ＝ w → div-ℕ x w
+concatenate-eq-div-eq-ℕ refl p refl = p
 ```
 
 ### The predicate of being a divisor of a natural number
@@ -130,7 +143,9 @@ is-divisor-ℕ n x = div-ℕ x n
 
 ## Properties
 
-### If `n` is divisible by a number `m` with proof of divisibility `(q , p)`, then `n` is divisible by the number `q`.
+### Divisibility and bounded divisibility are logically equivalent
+
+#### If `n` is divisible by a number `m` with proof of divisibility `(q , p)`, then `n` is divisible by the number `q`.
 
 ```agda
 div-pr1-div-ℕ :
@@ -139,7 +154,7 @@ pr1 (div-pr1-div-ℕ m n (u , p)) = m
 pr2 (div-pr1-div-ℕ m n (u , p)) = commutative-mul-ℕ m u ∙ p
 ```
 
-### If `x` is nonzero and `d | x`, then `d ≤ x`
+#### If `x` is nonzero and `d | x`, then `d ≤ x`
 
 ```agda
 leq-div-succ-ℕ : (d x : ℕ) → div-ℕ d (succ-ℕ x) → leq-ℕ d (succ-ℕ x)
@@ -154,28 +169,9 @@ leq-pr1-div-ℕ :
   (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) → leq-ℕ (pr1-div-ℕ d x H) x
 leq-pr1-div-ℕ d x f H =
   leq-div-ℕ (pr1-div-ℕ d x H) x f (div-pr1-div-ℕ d x H)
-
-leq-pr1-div-ℕ' :
-  (d x : ℕ) → is-nonzero-ℕ d → (H : div-ℕ d x) → leq-ℕ (pr1-div-ℕ d x H) x
-leq-pr1-div-ℕ' d zero-ℕ f (zero-ℕ , p) = star
-leq-pr1-div-ℕ' d zero-ℕ f (succ-ℕ n , p) =
-  f (is-zero-right-is-zero-add-ℕ _ d p)
-leq-pr1-div-ℕ' d (succ-ℕ x) f H =
-  leq-pr1-div-ℕ d (succ-ℕ x) (is-nonzero-succ-ℕ x) H
 ```
 
-### If `x` is nonzero, if `d | x` and `d ≠ x`, then `d < x`
-
-```agda
-le-div-succ-ℕ :
-  (d x : ℕ) → div-ℕ d (succ-ℕ x) → d ≠ succ-ℕ x → le-ℕ d (succ-ℕ x)
-le-div-succ-ℕ d x H f = le-leq-neq-ℕ (leq-div-succ-ℕ d x H) f
-
-le-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → d ≠ x → le-ℕ d x
-le-div-ℕ d x H K f = le-leq-neq-ℕ (leq-div-ℕ d x H K) f
-```
-
-### Divisibility is logically equivalent to bounded divisibility
+#### The logical equivalence of divisibility and bounded divisibility
 
 ```agda
 bounded-div-div-ℕ : (m n : ℕ) → div-ℕ m n → bounded-div-ℕ m n
@@ -191,7 +187,7 @@ pr2 (logical-equivalence-bounded-div-div-ℕ m n) =
   bounded-div-div-ℕ m n
 ```
 
-### The quotient of a natural number by a number it is divisible by
+#### The quotient of a natural number by a number it is divisible by
 
 ```agda
 module _
@@ -237,22 +233,6 @@ compute-quotient-div-ℕ q p H K =
     ( bounded-div-div-ℕ _ _ K)
 ```
 
-### Concatenating equality and divisibility
-
-```agda
-concatenate-eq-div-ℕ :
-  {x y z : ℕ} → x ＝ y → div-ℕ y z → div-ℕ x z
-concatenate-eq-div-ℕ refl p = p
-
-concatenate-div-eq-ℕ :
-  {x y z : ℕ} → div-ℕ x y → y ＝ z → div-ℕ x z
-concatenate-div-eq-ℕ p refl = p
-
-concatenate-eq-div-eq-ℕ :
-  {x y z w : ℕ} → x ＝ y → div-ℕ y z → z ＝ w → div-ℕ x w
-concatenate-eq-div-eq-ℕ refl p refl = p
-```
-
 ### The quotients of a natural number `n` by two natural numbers `c` and `d` are equal if `c` and `d` are equal
 
 Since the quotient is defined in terms of explicit proofs of divisibility, we
@@ -260,8 +240,7 @@ assume arbitrary proofs of dibisibility on both sides.
 
 ```agda
 eq-quotient-div-eq-divisor-ℕ :
-  (c d n : ℕ) → is-nonzero-ℕ c → c ＝ d →
-  (H : div-ℕ c n) → (I : div-ℕ d n) →
+  (c d n : ℕ) → is-nonzero-ℕ c → c ＝ d → (H : div-ℕ c n) (I : div-ℕ d n) →
   pr1-div-ℕ c n H ＝ pr1-div-ℕ d n I
 eq-quotient-div-eq-divisor-ℕ c d n N p H I =
   is-injective-left-mul-ℕ c N
@@ -299,36 +278,6 @@ eq-quotient-div-eq-is-nonzero-ℕ {zero-ℕ} N refl H K =
 eq-quotient-div-eq-is-nonzero-ℕ {succ-ℕ d} N refl H K =
   eq-quotient-div-eq-is-nonzero-divisor-ℕ
     ( is-nonzero-succ-ℕ d) refl H K
-```
-
-### Divisibility is decidable
-
-```agda
-is-decidable-div-ℕ :
-  (m n : ℕ) → is-decidable (div-ℕ m n)
-is-decidable-div-ℕ m n =
-  is-decidable-iff
-    ( div-bounded-div-ℕ m n)
-    ( bounded-div-div-ℕ m n)
-    ( is-decidable-bounded-div-ℕ m n)
-```
-
-### Divisibility is a property except at `(0,0)`
-
-```agda
-is-prop-div-ℕ :
-  (k x : ℕ) → is-nonzero-ℕ k + is-nonzero-ℕ x → is-prop (div-ℕ k x)
-is-prop-div-ℕ k x (inl H) = is-prop-map-is-emb (is-emb-right-mul-ℕ k H) x
-is-prop-div-ℕ zero-ℕ x (inr H) =
-  is-prop-is-proof-irrelevant
-    ( λ (q , p) → ex-falso (H (inv p ∙ right-zero-law-mul-ℕ q)))
-is-prop-div-ℕ (succ-ℕ k) x (inr H) =
-  is-prop-map-is-emb (is-emb-right-mul-ℕ (succ-ℕ k) (is-nonzero-succ-ℕ k)) x
-
-div-ℕ-Decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → Decidable-Prop lzero
-pr1 (div-ℕ-Decidable-Prop d x H) = div-ℕ d x
-pr1 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-prop-div-ℕ d x (inl H)
-pr2 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-decidable-div-ℕ d x
 ```
 
 ### The divisibility relation is a partial order on the natural numbers
@@ -404,7 +353,7 @@ div-is-zero-ℕ :
 div-is-zero-ℕ k .zero-ℕ refl = div-zero-ℕ k
 ```
 
-### `0 | x` implies `x = 0` and `x | 1` implies `x = 1`
+### `0 | x` implies `x = 0`
 
 ```agda
 is-zero-div-zero-ℕ : (x : ℕ) → div-ℕ zero-ℕ x → is-zero-ℕ x
@@ -412,6 +361,21 @@ is-zero-div-zero-ℕ x H = antisymmetric-div-ℕ x zero-ℕ (div-zero-ℕ x) H
 
 is-zero-is-zero-div-ℕ : (x y : ℕ) → div-ℕ x y → is-zero-ℕ x → is-zero-ℕ y
 is-zero-is-zero-div-ℕ .zero-ℕ y d refl = is-zero-div-zero-ℕ y d
+
+is-zero-quotient-div-is-zero-dividend-ℕ :
+  (x y : ℕ) (H : div-ℕ x y) → is-zero-ℕ y → is-zero-ℕ (quotient-div-ℕ x y H)
+is-zero-quotient-div-is-zero-dividend-ℕ x ._ H refl =
+  is-zero-leq-zero-ℕ
+    ( quotient-div-ℕ x 0 H)
+    ( upper-bound-quotient-div-ℕ x 0 H)
+
+is-zero-quotient-div-is-zero-divisor-ℕ :
+  (x y : ℕ) (H : div-ℕ x y) → is-zero-ℕ x → is-zero-ℕ (quotient-div-ℕ x y H)
+is-zero-quotient-div-is-zero-divisor-ℕ x y H p =
+  is-zero-quotient-div-is-zero-dividend-ℕ x y H
+    ( ( inv (eq-quotient-div-ℕ x y H)) ∙
+      ( ap (quotient-div-ℕ x y H *ℕ_) p) ∙
+      ( right-zero-law-mul-ℕ (quotient-div-ℕ x y H)))
 ```
 
 ### Any divisor of a nonzero number is nonzero
@@ -422,6 +386,16 @@ is-nonzero-div-ℕ :
 is-nonzero-div-ℕ .zero-ℕ x H K refl = K (is-zero-div-zero-ℕ x H)
 ```
 
+### If `d` divides a nonzero number `x`, then the quotient `x/d` is also nonzero
+
+```agda
+is-nonzero-quotient-div-ℕ :
+  {d x : ℕ} (H : div-ℕ d x) →
+  is-nonzero-ℕ x → is-nonzero-ℕ (quotient-div-ℕ d x H)
+is-nonzero-quotient-div-ℕ {d} {x} H K =
+  is-nonzero-quotient-bounded-div-ℕ d x K (bounded-div-div-ℕ d x H)
+```
+
 ### Any divisor of a number at least `1` is at least `1`
 
 ```agda
@@ -429,6 +403,24 @@ leq-one-div-ℕ :
   (d x : ℕ) → div-ℕ d x → leq-ℕ 1 x → leq-ℕ 1 d
 leq-one-div-ℕ d x H L =
   leq-one-is-nonzero-ℕ d (is-nonzero-div-ℕ d x H (is-nonzero-leq-one-ℕ x L))
+```
+
+### If `d` divides a number `1 ≤ x`, then `1 ≤ x/d`
+
+```agda
+leq-one-quotient-div-ℕ :
+  (d x : ℕ) (H : div-ℕ d x) → leq-ℕ 1 x → leq-ℕ 1 (quotient-div-ℕ d x H)
+leq-one-quotient-div-ℕ d x H K =
+  leq-one-div-ℕ
+    ( quotient-div-ℕ d x H)
+    ( x)
+    ( div-quotient-div-ℕ d x H)
+    ( K)
+
+leq-one-quotient-div-is-nonzero-ℕ :
+  (d x : ℕ) (H : div-ℕ d x) → is-nonzero-ℕ x → leq-ℕ 1 (quotient-div-ℕ d x H)
+leq-one-quotient-div-is-nonzero-ℕ d x H N =
+  leq-one-quotient-div-ℕ d x H (leq-one-is-nonzero-ℕ x N)
 ```
 
 ### If `x < d` and `d | x`, then `x` must be `0`
@@ -445,18 +437,124 @@ is-zero-div-ℕ d (succ-ℕ x) H (succ-ℕ k , p) =
         ( leq-add-ℕ' d (k *ℕ d)) p))
 ```
 
+### `a/a ＝ 1`
+
+```agda
+is-idempotent-quotient-div-ℕ :
+  (a : ℕ) → is-nonzero-ℕ a → (H : div-ℕ a a) → is-one-ℕ (quotient-div-ℕ a a H)
+is-idempotent-quotient-div-ℕ zero-ℕ nz (u , p) = ex-falso (nz refl)
+is-idempotent-quotient-div-ℕ (succ-ℕ a) nz (u , p) =
+  is-one-is-left-unit-mul-ℕ u a p
+```
+
+### If `x` is nonzero, if `d | x` and `d ≠ x`, then `d < x`
+
+```agda
+le-div-succ-ℕ :
+  (d x : ℕ) → div-ℕ d (succ-ℕ x) → d ≠ succ-ℕ x → le-ℕ d (succ-ℕ x)
+le-div-succ-ℕ d x H f = le-leq-neq-ℕ (leq-div-succ-ℕ d x H) f
+
+le-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → d ≠ x → le-ℕ d x
+le-div-ℕ d x H K f = le-leq-neq-ℕ (leq-div-ℕ d x H K) f
+```
+
 ### If `x` divides `y` then `x` divides any multiple of `y`
 
 ```agda
 div-mul-ℕ :
   (k x y : ℕ) → div-ℕ x y → div-ℕ x (k *ℕ y)
-div-mul-ℕ k x y H =
-  transitive-div-ℕ x y (k *ℕ y) (k , refl) H
+pr1 (div-mul-ℕ k x y H) = k *ℕ quotient-div-ℕ x y H
+pr2 (div-mul-ℕ k x y H) =
+  associative-mul-ℕ k (quotient-div-ℕ x y H) x ∙
+  ap (k *ℕ_) (eq-quotient-div-ℕ x y H)
 
 div-mul-ℕ' :
   (k x y : ℕ) → div-ℕ x y → div-ℕ x (y *ℕ k)
 div-mul-ℕ' k x y H =
   tr (div-ℕ x) (commutative-mul-ℕ k y) (div-mul-ℕ k x y H)
+```
+
+### Divisibility is decidable
+
+```agda
+is-decidable-div-ℕ :
+  (m n : ℕ) → is-decidable (div-ℕ m n)
+is-decidable-div-ℕ m n =
+  is-decidable-iff
+    ( div-bounded-div-ℕ m n)
+    ( bounded-div-div-ℕ m n)
+    ( is-decidable-bounded-div-ℕ m n)
+```
+
+### Divisibility is a property except at `(0,0)`
+
+```agda
+is-prop-div-ℕ :
+  (k x : ℕ) → is-nonzero-ℕ k + is-nonzero-ℕ x → is-prop (div-ℕ k x)
+is-prop-div-ℕ k x (inl H) = is-prop-map-is-emb (is-emb-right-mul-ℕ k H) x
+is-prop-div-ℕ zero-ℕ x (inr H) =
+  is-prop-is-proof-irrelevant
+    ( λ (q , p) → ex-falso (H (inv p ∙ right-zero-law-mul-ℕ q)))
+is-prop-div-ℕ (succ-ℕ k) x (inr H) =
+  is-prop-map-is-emb (is-emb-right-mul-ℕ (succ-ℕ k) (is-nonzero-succ-ℕ k)) x
+
+div-ℕ-Decidable-Prop : (d x : ℕ) → is-nonzero-ℕ d → Decidable-Prop lzero
+pr1 (div-ℕ-Decidable-Prop d x H) = div-ℕ d x
+pr1 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-prop-div-ℕ d x (inl H)
+pr2 (pr2 (div-ℕ-Decidable-Prop d x H)) = is-decidable-div-ℕ d x
+```
+
+### If `b` divides `a` and `c` divides `b`, then `a/b · b/c ＝ a/c`
+
+We use our convention that $0/0 = 0$ to avoid the hypothesis that $c$ is nonzero.
+
+```agda
+simplify-mul-quotient-div-ℕ :
+  (a b c : ℕ) →
+  (H : div-ℕ b a) (K : div-ℕ c b) (L : div-ℕ c a) →
+  quotient-div-ℕ b a H *ℕ quotient-div-ℕ c b K ＝ quotient-div-ℕ c a L
+simplify-mul-quotient-div-ℕ a b zero-ℕ H K L =
+  ( ap
+    ( quotient-div-ℕ b a H *ℕ_)
+    ( is-zero-quotient-div-is-zero-divisor-ℕ 0 b K refl)) ∙
+  ( right-zero-law-mul-ℕ (quotient-div-ℕ b a H)) ∙
+  ( inv (is-zero-quotient-div-is-zero-divisor-ℕ 0 a L refl))
+simplify-mul-quotient-div-ℕ a b (succ-ℕ c) H K L =
+  is-injective-right-mul-ℕ (succ-ℕ c) (is-nonzero-succ-ℕ c)
+    ( equational-reasoning
+      (a/b *ℕ b/c+1) *ℕ succ-ℕ c
+      ＝ a/b *ℕ (b/c+1 *ℕ succ-ℕ c)
+        by associative-mul-ℕ a/b b/c+1 (succ-ℕ c)
+      ＝ a/b *ℕ b
+        by ap (a/b *ℕ_) (eq-quotient-div-ℕ (succ-ℕ c) b K)
+      ＝ a
+        by eq-quotient-div-ℕ b a H
+      ＝ a/c+1 *ℕ succ-ℕ c
+        by inv (eq-quotient-div-ℕ (succ-ℕ c) a L))
+  where
+  a/b : ℕ
+  a/b = quotient-div-ℕ b a H
+  b/c+1 : ℕ
+  b/c+1 = quotient-div-ℕ (succ-ℕ c) b K
+  a/c+1 : ℕ
+  a/c+1 = quotient-div-ℕ (succ-ℕ c) a L
+```
+
+### Suppose `b | a` and `c | b`. If `d` divides `b/c` then `d` divides `a/c`
+
+```agda
+div-quotient-div-div-quotient-div-ℕ :
+  {a b c d : ℕ} (H : div-ℕ b a) (K : div-ℕ c b) (L : div-ℕ c a) →
+  div-ℕ d (quotient-div-ℕ c b K) → div-ℕ d (quotient-div-ℕ c a L)
+div-quotient-div-div-quotient-div-ℕ {a} {b} {c} {d} H K L M =
+  tr
+    ( div-ℕ d)
+    ( simplify-mul-quotient-div-ℕ a b c H K L)
+    ( div-mul-ℕ
+      ( quotient-div-ℕ b a H)
+      ( d)
+      ( quotient-div-ℕ c b K)
+      ( M))
 ```
 
 ### A 3-for-2 property of division with respect to addition
@@ -529,28 +627,43 @@ preserves-div-right-mul-ℕ k x y H =
 ### Multiplication by a nonzero number reflects divisibility
 
 ```agda
-reflects-div-mul-ℕ :
-  (k x y : ℕ) → is-nonzero-ℕ k → div-ℕ (k *ℕ x) (k *ℕ y) → div-ℕ x y
-pr1 (reflects-div-mul-ℕ k x y H (q , p)) = q
-pr2 (reflects-div-mul-ℕ k x y H (q , p)) =
-  is-injective-left-mul-ℕ k H
-    ( ( inv (associative-mul-ℕ k q x)) ∙
-      ( ( ap (_*ℕ x) (commutative-mul-ℕ k q)) ∙
-        ( ( associative-mul-ℕ q k x) ∙
-          ( p))))
+reflects-div-left-mul-ℕ :
+  (m a b : ℕ) → is-nonzero-ℕ m → div-ℕ (m *ℕ a) (m *ℕ b) → div-ℕ a b
+pr1 (reflects-div-left-mul-ℕ m a b H K) = quotient-div-ℕ (m *ℕ a) (m *ℕ b) K
+pr2 (reflects-div-left-mul-ℕ m a b H K) =
+  is-injective-left-mul-ℕ m H
+    ( ( left-swap-mul-ℕ m
+        ( quotient-div-ℕ (m *ℕ a) (m *ℕ b) K)
+        ( a)) ∙
+      ( eq-quotient-div-ℕ (m *ℕ a) (m *ℕ b) K))
+
+reflects-div-right-mul-ℕ :
+  (m a b : ℕ) → is-nonzero-ℕ m → div-ℕ (a *ℕ m) (b *ℕ m) → div-ℕ a b
+reflects-div-right-mul-ℕ m a b H K =
+  reflects-div-left-mul-ℕ m a b H
+    ( concatenate-eq-div-eq-ℕ
+      ( commutative-mul-ℕ m a)
+      ( K)
+      ( commutative-mul-ℕ b m))
 ```
 
-### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`
+### If `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`
+
+This logical equivalence holds for all integers, using the convention that `0/0 = 0`.
 
 ```agda
 div-quotient-div-div-ℕ :
-  (x y d : ℕ) (H : div-ℕ d y) → is-nonzero-ℕ d →
+  (x y d : ℕ) (H : div-ℕ d y) →
   div-ℕ (d *ℕ x) y → div-ℕ x (quotient-div-ℕ d y H)
-div-quotient-div-div-ℕ x y d H f K =
-  reflects-div-mul-ℕ d x
-    ( quotient-div-ℕ d y H)
-    ( f)
-    ( tr (div-ℕ (d *ℕ x)) (inv (eq-quotient-div-ℕ' d y H)) K)
+div-quotient-div-div-ℕ x y zero-ℕ H K =
+  div-is-zero-ℕ x
+    ( quotient-div-ℕ 0 y H)
+    ( is-zero-quotient-div-is-zero-divisor-ℕ 0 y H refl)
+div-quotient-div-div-ℕ x y (succ-ℕ d) H K =
+  reflects-div-left-mul-ℕ (succ-ℕ d) x
+    ( quotient-div-ℕ (succ-ℕ d) y H)
+    ( is-nonzero-succ-ℕ d)
+    ( tr (div-ℕ (succ-ℕ d *ℕ x)) (inv (eq-quotient-div-ℕ' (succ-ℕ d) y H)) K)
 
 div-div-quotient-div-ℕ :
   (x y d : ℕ) (H : div-ℕ d y) →
@@ -560,120 +673,22 @@ div-div-quotient-div-ℕ x y d H K =
     ( div-ℕ (d *ℕ x))
     ( eq-quotient-div-ℕ' d y H)
     ( preserves-div-left-mul-ℕ d x (quotient-div-ℕ d y H) K)
-```
 
-### If `d` divides a nonzero number `x`, then the quotient `x/d` is also nonzero
-
-```agda
-is-nonzero-quotient-div-ℕ :
-  {d x : ℕ} (H : div-ℕ d x) →
-  is-nonzero-ℕ x → is-nonzero-ℕ (quotient-div-ℕ d x H)
-is-nonzero-quotient-div-ℕ {d} {x} H K =
-  is-nonzero-quotient-bounded-div-ℕ d x K (bounded-div-div-ℕ d x H)
-```
-
-### If `d` divides a number `1 ≤ x`, then `1 ≤ x/d`
-
-```agda
-leq-one-quotient-div-ℕ :
-  (d x : ℕ) (H : div-ℕ d x) → leq-ℕ 1 x → leq-ℕ 1 (quotient-div-ℕ d x H)
-leq-one-quotient-div-ℕ d x H K =
-  leq-one-div-ℕ
-    ( quotient-div-ℕ d x H)
-    ( x)
-    ( div-quotient-div-ℕ d x H)
-    ( K)
-
-leq-one-quotient-div-is-nonzero-ℕ :
-  (d x : ℕ) (H : div-ℕ d x) → is-nonzero-ℕ x → leq-ℕ 1 (quotient-div-ℕ d x H)
-leq-one-quotient-div-is-nonzero-ℕ d x H N =
-  leq-one-quotient-div-ℕ d x H (leq-one-is-nonzero-ℕ x N)
-```
-
-### `a/a ＝ 1`
-
-```agda
-is-idempotent-quotient-div-ℕ :
-  (a : ℕ) → is-nonzero-ℕ a → (H : div-ℕ a a) → is-one-ℕ (quotient-div-ℕ a a H)
-is-idempotent-quotient-div-ℕ zero-ℕ nz (u , p) = ex-falso (nz refl)
-is-idempotent-quotient-div-ℕ (succ-ℕ a) nz (u , p) =
-  is-one-is-left-unit-mul-ℕ u a p
-```
-
-### If `b` divides `a` and `c` divides `b` and `c` is nonzero, then `a/b · b/c ＝ a/c`
-
-```agda
-simplify-mul-quotient-div-ℕ :
-  {a b c : ℕ} → is-nonzero-ℕ c →
-  (H : div-ℕ b a) (K : div-ℕ c b) (L : div-ℕ c a) →
-  quotient-div-ℕ b a H *ℕ quotient-div-ℕ c b K ＝ quotient-div-ℕ c a L
-simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K L =
-  is-injective-right-mul-ℕ c nz
-    ( equational-reasoning
-      (a/b *ℕ b/c) *ℕ c
-      ＝ a/b *ℕ (b/c *ℕ c)
-        by associative-mul-ℕ a/b b/c c
-      ＝ a/b *ℕ b
-        by ap (a/b *ℕ_) (eq-quotient-div-ℕ c b K)
-      ＝ a
-        by eq-quotient-div-ℕ b a H
-      ＝ a/c *ℕ c
-        by inv (eq-quotient-div-ℕ c a L))
-  where
-  a/b : ℕ
-  a/b = quotient-div-ℕ b a H
-  b/c : ℕ
-  b/c = quotient-div-ℕ c b K
-  a/c : ℕ
-  a/c = quotient-div-ℕ c a L
-```
-
-### If `d | a` and `d` is nonzero, then `x | a/d` if and only if `xd | a`
-
-```agda
 simplify-div-quotient-div-ℕ :
-  {a d x : ℕ} → is-nonzero-ℕ d → (H : div-ℕ d a) →
-  (div-ℕ x (quotient-div-ℕ d a H)) ↔ (div-ℕ (x *ℕ d) a)
-pr1 (pr1 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
-pr2 (pr1 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
-  equational-reasoning
-    u *ℕ (x *ℕ d)
-    ＝ (u *ℕ x) *ℕ d
-      by inv (associative-mul-ℕ u x d)
-    ＝ (quotient-div-ℕ d a H) *ℕ d
-      by ap (_*ℕ d) p
-    ＝ a
-      by eq-quotient-div-ℕ d a H
-pr1 (pr2 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
-pr2 (pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
-  is-injective-right-mul-ℕ d nz
-    ( equational-reasoning
-        (u *ℕ x) *ℕ d
-        ＝ u *ℕ (x *ℕ d)
-          by associative-mul-ℕ u x d
-        ＝ a
-          by p
-        ＝ (quotient-div-ℕ d a H) *ℕ d
-          by inv (eq-quotient-div-ℕ d a H))
-```
+  {a d x : ℕ} (H : div-ℕ d a) →
+  div-ℕ x (quotient-div-ℕ d a H) ↔ div-ℕ (d *ℕ x) a
+pr1 (simplify-div-quotient-div-ℕ {a} {d} {x} H) =
+  div-div-quotient-div-ℕ x a d H
+pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} H) =
+  div-quotient-div-div-ℕ x a d H
 
-### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero. If `d` divides `b/c` then `d` divides `a/c`
-
-```agda
-div-quotient-div-div-quotient-div-ℕ :
-  {a b c d : ℕ} → is-nonzero-ℕ c → (H : div-ℕ b a)
-  (K : div-ℕ c b) (L : div-ℕ c a) →
-  div-ℕ d (quotient-div-ℕ c b K) →
-  div-ℕ d (quotient-div-ℕ c a L)
-div-quotient-div-div-quotient-div-ℕ {a} {b} {c} {d} nz H K L M =
-  tr
-    ( div-ℕ d)
-    ( simplify-mul-quotient-div-ℕ nz H K L)
-    ( div-mul-ℕ
-      ( quotient-div-ℕ b a H)
-      ( d)
-      ( quotient-div-ℕ c b K)
-      ( M))
+simplify-div-quotient-div-ℕ' :
+  {a d x : ℕ} (H : div-ℕ d a) →
+  div-ℕ x (quotient-div-ℕ d a H) ↔ div-ℕ (x *ℕ d) a
+pr1 (simplify-div-quotient-div-ℕ' {a} {d} {x} H) =
+  tr (λ u → div-ℕ u a) (commutative-mul-ℕ d x) ∘ div-div-quotient-div-ℕ x a d H
+pr2 (simplify-div-quotient-div-ℕ' {a} {d} {x} H) =
+  div-quotient-div-div-ℕ x a d H ∘ tr (λ u → div-ℕ u a) (commutative-mul-ℕ x d)
 ```
 
 ### If `x` is nonzero and `d | x`, then `x/d ＝ 1` if and only if `d ＝ x`
@@ -714,7 +729,7 @@ is-one-divisor-ℕ d (succ-ℕ x) N (.(succ-ℕ x) , q) refl =
 
 ```agda
 le-quotient-div-ℕ :
-  (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) → ¬ (is-one-ℕ d) →
+  (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) → ¬ is-one-ℕ d →
   le-ℕ (quotient-div-ℕ d x H) x
 le-quotient-div-ℕ d x f H g =
   map-left-unit-law-coproduct-is-empty
@@ -725,29 +740,6 @@ le-quotient-div-ℕ d x f H g =
       ( quotient-div-ℕ d x H)
       ( x)
       ( upper-bound-quotient-div-ℕ d x H))
-```
-
-### If `m` is nonzero, then `a | b` if and only if `ma | mb`
-
-```agda
-reflects-div-left-mul-ℕ :
-  (m a b : ℕ) → is-nonzero-ℕ m → div-ℕ (m *ℕ a) (m *ℕ b) → div-ℕ a b
-pr1 (reflects-div-left-mul-ℕ m a b H K) = quotient-div-ℕ (m *ℕ a) (m *ℕ b) K
-pr2 (reflects-div-left-mul-ℕ m a b H K) =
-  is-injective-left-mul-ℕ m H
-    ( ( left-swap-mul-ℕ m
-        ( quotient-div-ℕ (m *ℕ a) (m *ℕ b) K)
-        ( a)) ∙
-      ( eq-quotient-div-ℕ (m *ℕ a) (m *ℕ b) K))
-
-reflects-div-right-mul-ℕ :
-  (m a b : ℕ) → is-nonzero-ℕ m → div-ℕ (a *ℕ m) (b *ℕ m) → div-ℕ a b
-reflects-div-right-mul-ℕ m a b H K =
-  reflects-div-left-mul-ℕ m a b H
-    ( concatenate-eq-div-eq-ℕ
-      ( commutative-mul-ℕ m a)
-      ( K)
-      ( commutative-mul-ℕ b m))
 ```
 
 ## See also
