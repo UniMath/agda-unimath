@@ -14,6 +14,7 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -22,11 +23,11 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
-open import foundation-core.discrete-types
 open import foundation-core.torsorial-type-families
 ```
 
@@ -146,6 +147,14 @@ is-decidable-is-not-one-ℕ :
   (x : ℕ) → is-decidable (is-not-one-ℕ x)
 is-decidable-is-not-one-ℕ x =
   is-decidable-neg (is-decidable-is-one-ℕ x)
+```
+
+### The type of natural numbers has tight apartness
+
+```agda
+ℕ-Type-With-Tight-Apartness : Type-With-Tight-Apartness lzero lzero
+ℕ-Type-With-Tight-Apartness =
+  type-with-tight-apartness-Discrete-Type ℕ-Discrete-Type
 ```
 
 ## The full characterization of the identity type of `ℕ`

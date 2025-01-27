@@ -148,8 +148,7 @@ The associated reflexive relation on an ordinal.
     refl-leq-Transitive-Well-Founded-Relation
       transitive-well-founded-relation-Ordinal
 
-  leq-eq-Ordinal :
-    {x y : type-Ordinal} → x ＝ y → leq-Ordinal x y
+  leq-eq-Ordinal : {x y : type-Ordinal} → x ＝ y → leq-Ordinal x y
   leq-eq-Ordinal =
     leq-eq-Transitive-Well-Founded-Relation
       transitive-well-founded-relation-Ordinal
@@ -166,7 +165,7 @@ The associated reflexive relation on an ordinal.
 
   antisymmetric-leq-Ordinal : is-antisymmetric leq-Ordinal
   antisymmetric-leq-Ordinal x y p q =
-    is-extensional-Ordinal x y (λ u → p u , q u)
+    is-extensional-Ordinal x y (λ u → (p u , q u))
 
   is-preorder-leq-Ordinal : is-preorder-Relation-Prop leq-prop-Ordinal
   is-preorder-leq-Ordinal = (refl-leq-Ordinal , transitive-leq-Ordinal)

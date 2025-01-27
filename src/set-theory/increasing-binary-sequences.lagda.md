@@ -7,6 +7,8 @@ module set-theory.increasing-binary-sequences where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.decidable-total-order-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -58,7 +60,7 @@ We follow formalizations from the TypeTopology library. {{#cite TypeTopology}}
 
 ## Definitions
 
-### Increasing binary sequences
+### The predicate on a binary sequence of being increasing
 
 ```agda
 is-increasing-binary-sequence-ℕ :
@@ -78,7 +80,7 @@ is-increasing-binary-sequence-ℕ-Prop x =
     is-prop-is-increasing-binary-sequence-ℕ x)
 ```
 
-### The generic convergent sequence
+### The type of increasing binary sequences
 
 ```agda
 increasing-binary-sequence-ℕ : UU lzero
@@ -136,16 +138,6 @@ cons-increasing-binary-sequence-ℕ :
   Maybe increasing-binary-sequence-ℕ → increasing-binary-sequence-ℕ
 cons-increasing-binary-sequence-ℕ (inl x) = succ-increasing-binary-sequence-ℕ x
 cons-increasing-binary-sequence-ℕ (inr x) = zero-increasing-binary-sequence-ℕ
-```
-
-### The canonical inclusion of the natural numbers
-
-```agda
-inclusion-increasing-binary-sequence-ℕ : ℕ → increasing-binary-sequence-ℕ
-inclusion-increasing-binary-sequence-ℕ =
-  rec-ℕ
-    ( zero-increasing-binary-sequence-ℕ)
-    ( λ _ → succ-increasing-binary-sequence-ℕ)
 ```
 
 ## Properties
@@ -323,7 +315,20 @@ retract-cantor-space-increasing-binary-sequence-ℕ =
 
 ### Increasing binary sequences are order preserving maps
 
-> TODO
+```agda
+preserves-order-increasing-binary-sequence-ℕ :
+  {x : increasing-binary-sequence-ℕ} →
+  preserves-order-Poset ℕ-Poset bool-Poset (pr1 x)
+preserves-order-increasing-binary-sequence-ℕ {x} =
+  preserves-order-ind-ℕ-Poset bool-Poset (pr1 x) (pr2 x)
+
+is-increasing-preserves-order-binary-sequence-ℕ :
+  {x : cantor-space} →
+  preserves-order-Poset ℕ-Poset bool-Poset x →
+  is-increasing-binary-sequence-ℕ x
+is-increasing-preserves-order-binary-sequence-ℕ H n =
+  H n (succ-ℕ n) (succ-leq-ℕ n)
+```
 
 ## See also
 
