@@ -125,7 +125,7 @@ This homotopy of cocones provides
     Aₙ ---------> X
     |      |      |
     |      ∨      |
- fₙ |     Bₙ₊₁    | g
+ fₙ |     Bₙ₊₁    | f∞
     |    ∧   \    |
     |  /       \  |
     ∨/           ∨∨

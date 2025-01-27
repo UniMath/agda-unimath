@@ -40,20 +40,19 @@ open import synthetic-homotopy-theory.dependent-cocones-under-sequential-diagram
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits
 open import synthetic-homotopy-theory.descent-data-pushouts
-open import synthetic-homotopy-theory.functoriality-sequential-colimits
-open import synthetic-homotopy-theory.identity-systems-descent-data-pushouts
 open import synthetic-homotopy-theory.families-descent-data-pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
+open import synthetic-homotopy-theory.functoriality-sequential-colimits
+open import synthetic-homotopy-theory.functoriality-stuff
+open import synthetic-homotopy-theory.identity-systems-descent-data-pushouts
 open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.sections-descent-data-pushouts
 open import synthetic-homotopy-theory.sequential-colimits
 open import synthetic-homotopy-theory.sequential-diagrams
 open import synthetic-homotopy-theory.shifts-sequential-diagrams
-open import synthetic-homotopy-theory.sections-descent-data-pushouts
+open import synthetic-homotopy-theory.stuff-over
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.zigzags-sequential-diagrams
-
-open import synthetic-homotopy-theory.functoriality-stuff
-open import synthetic-homotopy-theory.stuff-over
 ```
 
 </details>
@@ -66,7 +65,6 @@ colimits of pushouts.
 ## Definitions
 
 ```agda
-
 module _
   {l1 l2 l3 : Level} (𝒮 : span-diagram l1 l2 l3)
   where
@@ -290,19 +288,6 @@ module _
 ### TODO
 
 ```agda
-nat-lemma :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
-  {P : A → UU l3} {Q : B → UU l4}
-  (f : A → B) (h : (a : A) → P a → Q (f a))
-  {x y : A} {p : x ＝ y}
-  {q : f x ＝ f y} (α : ap f p ＝ q) →
-  coherence-square-maps
-    ( tr P p)
-    ( h x)
-    ( h y)
-    ( tr Q q)
-nat-lemma f h {p = p} refl x = substitution-law-tr _ f p ∙ inv (preserves-tr h p x)
-
 apd-lemma :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   (f : (a : A) → B a) (g : (a : A) → B a → C a) {x y : A} (p : x ＝ y) →
@@ -716,13 +701,26 @@ module _
               ( dep-cocone-b (right-map-span-diagram 𝒮 s))
               ( s , refl , p))))
 
-
     tB :
       (b : codomain-span-diagram 𝒮) (n : ℕ) (p : Path-to-b 𝒮 a₀ b n) →
       right-family-descent-data-pushout R
         ( b , map-cocone-standard-sequential-colimit n p)
     tB b zero-ℕ (map-raise ())
     tB b (succ-ℕ n) = dependent-cogap _ _ (pr1 (stages-cocones' n) b)
+
+    KB :
+      (b : codomain-span-diagram 𝒮) (n : ℕ) (p : Path-to-b 𝒮 a₀ b n) →
+      dependent-identification
+        ( ev-pair (right-family-descent-data-pushout R) b)
+        ( coherence-cocone-standard-sequential-colimit n p)
+        ( tB b n p)
+        ( tB b (succ-ℕ n) (inl-Path-to-b 𝒮 a₀ b n p))
+    KB b zero-ℕ (map-raise ())
+    KB b (succ-ℕ n) p =
+      inv
+        ( compute-inl-dependent-cogap _ _
+          ( pr1 (stages-cocones' (succ-ℕ n)) b)
+          ( p))
 
     tA :
       (a : domain-span-diagram 𝒮) (n : ℕ) (p : Path-to-a 𝒮 a₀ a n) →
@@ -731,47 +729,34 @@ module _
     tA .a₀ zero-ℕ (map-raise refl) = r₀
     tA a (succ-ℕ n) = dependent-cogap _ _ (pr1 (pr2 (stages-cocones' n)) a)
 
-    ind-singleton-zigzag-id-pushout' : section-descent-data-pushout R
-    pr1 ind-singleton-zigzag-id-pushout' (a , p) =
-      dependent-cogap-standard-sequential-colimit
-        ( tA a , KA)
-        ( p)
-      where
-      KA :
-        (n : ℕ) (p : Path-to-a 𝒮 a₀ a n) →
+    KA :
+      (a : domain-span-diagram 𝒮) (n : ℕ) (p : Path-to-a 𝒮 a₀ a n) →
         dependent-identification
           ( ev-pair (left-family-descent-data-pushout R) a)
           ( coherence-cocone-standard-sequential-colimit n p)
           ( tA a n p)
           ( tA a (succ-ℕ n) (inl-Path-to-a 𝒮 a₀ a n p))
-      KA zero-ℕ (map-raise refl) =
-        inv
-          ( compute-inl-dependent-cogap _ _
-            ( pr1 (pr2 (stages-cocones' 0)) a)
-            ( map-raise refl))
-      KA (succ-ℕ n) p =
-        inv
-          ( compute-inl-dependent-cogap _ _
-            ( pr1 (pr2 (stages-cocones' (succ-ℕ n))) a)
-            ( p))
+    KA a zero-ℕ (map-raise refl) =
+      inv
+        ( compute-inl-dependent-cogap _ _
+          ( pr1 (pr2 (stages-cocones' 0)) a)
+          ( map-raise refl))
+    KA a (succ-ℕ n) p =
+      inv
+        ( compute-inl-dependent-cogap _ _
+          ( pr1 (pr2 (stages-cocones' (succ-ℕ n))) a)
+          ( p))
+
+    ind-singleton-zigzag-id-pushout' : section-descent-data-pushout R
+    pr1 ind-singleton-zigzag-id-pushout' (a , p) =
+      dependent-cogap-standard-sequential-colimit
+        ( tA a , KA a)
+        ( p)
     pr1 (pr2 ind-singleton-zigzag-id-pushout') (b , p) =
       dependent-cogap-standard-sequential-colimit
-        ( tB b , KB)
+        ( tB b , KB b)
         ( p)
       where
-      KB :
-        (n : ℕ) (p : Path-to-b 𝒮 a₀ b n) →
-        dependent-identification
-          ( ev-pair (right-family-descent-data-pushout R) b)
-          ( coherence-cocone-standard-sequential-colimit n p)
-          ( tB b n p)
-          ( tB b (succ-ℕ n) (inl-Path-to-b 𝒮 a₀ b n p))
-      KB zero-ℕ (map-raise ())
-      KB (succ-ℕ n) p =
-        inv
-          ( compute-inl-dependent-cogap _ _
-            ( pr1 (stages-cocones' (succ-ℕ n)) b)
-            ( p))
     pr2 (pr2 ind-singleton-zigzag-id-pushout') (s , p) =
       dependent-cogap-standard-sequential-colimit
         ( tS , KS)
@@ -848,7 +833,8 @@ module _
         ( CB s n p)
         ( map-family-descent-data-pushout R _ (tA (left-map-span-diagram 𝒮 s) n p))) ＝
       ( tB (right-map-span-diagram 𝒮 s) (succ-ℕ n) (concat-s 𝒮 a₀ s n p))
-    tS-in-diagram s zero-ℕ (map-raise refl) = inv (compute-inr-dependent-cogap _ _ _ _)
+    tS-in-diagram s zero-ℕ (map-raise refl) =
+      inv (compute-inr-dependent-cogap _ _ _ _)
     tS-in-diagram s (succ-ℕ n) p = inv (compute-inr-dependent-cogap _ _ _ _)
 
     module vertices
@@ -857,11 +843,13 @@ module _
       PAn : (n : ℕ) → UU (l1 ⊔ l2 ⊔ l3)
       PAn = Path-to-a 𝒮 a₀ (left-map-span-diagram 𝒮 s)
       QAn : {n : ℕ} → PAn n → UU l5
-      QAn {n} p = left-family-descent-data-pushout R (left-map-span-diagram 𝒮 s , map-cocone-standard-sequential-colimit n p)
+      QAn {n} p =
+        left-family-descent-data-pushout R (left-map-span-diagram 𝒮 s , map-cocone-standard-sequential-colimit n p)
       PBn : (n : ℕ) → UU (l1 ⊔ l2 ⊔ l3)
       PBn = Path-to-b 𝒮 a₀ (right-map-span-diagram 𝒮 s) ∘ succ-ℕ
       QBn : {n : ℕ} → PBn n → UU l5
-      QBn {n} p = right-family-descent-data-pushout R (right-map-span-diagram 𝒮 s , map-cocone-standard-sequential-colimit (succ-ℕ n) p)
+      QBn {n} p =
+        right-family-descent-data-pushout R (right-map-span-diagram 𝒮 s , map-cocone-standard-sequential-colimit (succ-ℕ n) p)
       fn : {n : ℕ} → PAn n → PBn n
       fn = concat-s 𝒮 a₀ s _
       gn : {n : ℕ} → PAn n → PAn (succ-ℕ n)
@@ -1119,6 +1107,24 @@ module _
       (s : spanning-type-span-diagram 𝒮)
       (p : left-id-pushout 𝒮 a₀ (left-map-span-diagram 𝒮 s)) →
       {!!}
+       -- (pr1 (pr2 (pr2 R) (s , p))
+       --  (sect-family-sect-dd-sequential-colimit
+       --   up-standard-sequential-colimit
+       --   (λ y → pr1 R (pr1 (pr2 (pr2 (pr2 𝒮))) s , y))
+       --   (tA (pr1 (pr2 (pr2 (pr2 𝒮))) s) , KA (pr1 (pr2 (pr2 (pr2 𝒮))) s))
+       --   p)) ＝
+       -- (sect-family-sect-dd-sequential-colimit
+       --  (up-shift-cocone-sequential-diagram 1
+       --   up-standard-sequential-colimit)
+       --  (λ y → pr1 (pr2 R) (pr2 (pr2 (pr2 (pr2 𝒮))) s , y))
+       --  (tB (pr2 (pr2 (pr2 (pr2 𝒮))) s) ∘ succ-ℕ ,
+       --   KB (pr2 (pr2 (pr2 (pr2 𝒮))) s) ∘ succ-ℕ)
+       --  (big-thm.f∞ up-standard-sequential-colimit
+       --   (up-shift-cocone-sequential-diagram 1
+       --    up-standard-sequential-colimit)
+       --   (hom-diagram-zigzag-sequential-diagram
+       --    (zigzag-sequential-diagram-zigzag-id-pushout 𝒮 a₀ s))
+       --   p))
       -- map-family-descent-data-pushout R _ (pr1 ind-singleton-zigzag-id-pushout' (left-map-span-diagram 𝒮 s , p)) ＝
       -- pr1 (pr2 ind-singleton-zigzag-id-pushout') (right-map-span-diagram 𝒮 s , concat-s-inf 𝒮 a₀ s p)
     alt-ind-coherence s p =
@@ -1134,9 +1140,10 @@ module _
           ( right-family-descent-data-pushout R)
           ( right-map-span-diagram 𝒮 s))
         ( λ {p} → map-family-descent-data-pushout R (s , p))
-        ( {!!})
-        ( {!!})
-        ( {!!})
+        ( tA (left-map-span-diagram 𝒮 s) , KA (left-map-span-diagram 𝒮 s))
+        ( tB (right-map-span-diagram 𝒮 s) ∘ succ-ℕ ,
+          KB (right-map-span-diagram 𝒮 s) ∘ succ-ℕ)
+        ( tS-in-diagram s)
         ( {!!})
         ( p)
 

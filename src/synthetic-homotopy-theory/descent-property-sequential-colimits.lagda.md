@@ -158,7 +158,8 @@ module _
     {x y : A} (p : x ＝ y) (q : f x ＝ f y) (α : ap f p ＝ q) →
     (z : P x) →
     tr Q q (h x z) ＝ h y (tr P p z)
-  other-nat-lemma p q α z = inv (preserves-tr h p z ∙ (inv (substitution-law-tr Q f p) ∙ tr² Q α _))
+  other-nat-lemma p q α z =
+    inv (preserves-tr h p z ∙ (inv (substitution-law-tr Q f p) ∙ tr² Q α _))
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
   {A : sequential-diagram l1} {B : sequential-diagram l2}
