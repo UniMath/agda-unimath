@@ -40,7 +40,8 @@ module _
   where
 
   htpy-over : UU (l1 ⊔ l3 ⊔ l4)
-  htpy-over = {a : A} (a' : A' a) → dependent-identification B' (H a) (f' a') (g' a')
+  htpy-over =
+    {a : A} (a' : A' a) → dependent-identification B' (H a) (f' a') (g' a')
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -161,7 +162,6 @@ module _
     section-map-over (g ∘ f) (g' ∘ f') sA sC
   comp-section-map-over G F =
     g' ·l F ∙h G ·r f
-
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -497,7 +497,6 @@ module _
     H' (sA a) ∙ G a ＝
     ap (tr X' (H a) ∘ m') (F a) ∙ ap (tr X' (H a)) (M (f a)) ∙ apd sX (H a)
 
-
   equiv-get-section-triangle-over' :
     (H : coherence-triangle-maps' g m f) →
     (H' : htpy-over X' H (m' ∘ f') g') →
@@ -657,8 +656,10 @@ module _
              ( assoc-comp-section-map-over f1' m' f2' s1 s2 s3 s4 F1 M F2)
              ( [iv])))
       where
-        [i] = unget-section-triangle-over m g2 f2 m' g2' f2' s2 s3 s4 M G2 F2 B2 T2 S2
+        [i] =
+          unget-section-triangle-over m g2 f2 m' g2' f2' s2 s3 s4 M G2 F2 B2 T2 S2
         [ii] = right-whisk-section-htpy-over B2 T2 s2 s4 _ _ [i] f1 f1' s1 F1
-        [iii] = unget-section-triangle-over' f1 g1 m f1' g1' m' s1 s2 s3 F1 G1 M B1 T1 S1
+        [iii] =
+          unget-section-triangle-over' f1 g1 m f1' g1' m' s1 s2 s3 F1 G1 M B1 T1 S1
         [iv] = left-whisk-section-htpy-over B1 T1 s1 s3 _ _ [iii] f2 f2' s4 F2
 ```

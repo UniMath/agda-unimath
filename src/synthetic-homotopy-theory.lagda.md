@@ -51,6 +51,7 @@ open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
 open import synthetic-homotopy-theory.descent-data-equivalence-types-over-pushouts public
 open import synthetic-homotopy-theory.descent-data-function-types-over-pushouts public
+open import synthetic-homotopy-theory.descent-data-function-types-over-sequential-colimits public
 open import synthetic-homotopy-theory.descent-data-identity-types-over-pushouts public
 open import synthetic-homotopy-theory.descent-data-pushouts public
 open import synthetic-homotopy-theory.descent-data-sequential-colimits public
@@ -72,6 +73,7 @@ open import synthetic-homotopy-theory.flattening-lemma-sequential-colimits publi
 open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
 open import synthetic-homotopy-theory.functoriality-sequential-colimits public
+open import synthetic-homotopy-theory.functoriality-stuff public
 open import synthetic-homotopy-theory.functoriality-suspensions public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
 open import synthetic-homotopy-theory.hatchers-acyclic-type public
@@ -121,6 +123,7 @@ open import synthetic-homotopy-theory.smash-products-of-pointed-types public
 open import synthetic-homotopy-theory.spectra public
 open import synthetic-homotopy-theory.sphere-prespectrum public
 open import synthetic-homotopy-theory.spheres public
+open import synthetic-homotopy-theory.stuff-over public
 open import synthetic-homotopy-theory.suspension-prespectra public
 open import synthetic-homotopy-theory.suspension-structures public
 open import synthetic-homotopy-theory.suspensions-of-pointed-types public
@@ -142,5 +145,6 @@ open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-
 open import synthetic-homotopy-theory.wedges-of-pointed-types public
 open import synthetic-homotopy-theory.whitehead-principle-maps public
 open import synthetic-homotopy-theory.whitehead-principle-types public
+open import synthetic-homotopy-theory.zigzag-construction-identity-type-pushouts public
 open import synthetic-homotopy-theory.zigzags-sequential-diagrams public
 ```
