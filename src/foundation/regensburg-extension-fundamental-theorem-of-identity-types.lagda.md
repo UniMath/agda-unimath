@@ -25,7 +25,6 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.logical-equivalences
 open import foundation.maps-in-subuniverses
-open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.separated-types-subuniverses
 open import foundation.subuniverses
@@ -127,59 +126,6 @@ module _
       forward-implication-extended-fundamental-theorem-id H
     pr2 (extended-fundamental-theorem-id H) =
       backward-implication-extended-fundamental-theorem-id
-```
-
-### The unbased extended fundamental theorem of identity types
-
-The following is an unbased version of the extended fundamental theorem of
-identity types. For this formulation of the theorem we do not need to assume
-that `A` is inhabited.
-
-```agda
-module _
-  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3)
-  {A : UU l1} {B : A → UU l2}
-  where
-
-  abstract
-    forward-implication-extended-fundamental-theorem-unbased-id :
-      ( (x y : A) → mere-eq x y) →
-      ( (x : A) (f : (y : A) → (x ＝ y) → B y)
-        (y : A) → is-in-subuniverse-map P (f y)) →
-      is-separated P (Σ A B)
-    forward-implication-extended-fundamental-theorem-unbased-id
-      H K (x , b) (x' , b') =
-      apply-universal-property-trunc-Prop
-        ( H x x')
-        ( P ((x , b) ＝ (x' , b')))
-        ( λ where
-        refl →
-          is-in-subuniverse-equiv P
-            ( compute-fiber-map-out-of-identity-type
-              ( ind-Id x (λ u _ → B u) b)
-              ( x')
-              ( b'))
-            ( K x (ind-Id x (λ u _ → B u) b) x' b'))
-
-  abstract
-    backward-implication-extended-fundamental-theorem-unbased-id :
-      is-separated P (Σ A B) →
-      ( (x : A) (f : (y : A) → (x ＝ y) → B y)
-        (y : A) → is-in-subuniverse-map P (f y))
-    backward-implication-extended-fundamental-theorem-unbased-id K x f y b =
-      is-in-subuniverse-equiv' P
-        ( compute-fiber-map-out-of-identity-type f y b)
-        ( K (x , f x refl) (y , b))
-
-  abstract
-    extended-fundamental-theorem-unbased-id :
-      ( (x y : A) → mere-eq x y) →
-      ( (x : A) (f : (y : A) → (x ＝ y) → B y)
-        (y : A) → is-in-subuniverse-map P (f y)) ↔
-      is-separated P (Σ A B)
-    extended-fundamental-theorem-unbased-id H =
-      ( forward-implication-extended-fundamental-theorem-unbased-id H ,
-        backward-implication-extended-fundamental-theorem-unbased-id)
 ```
 
 ## Corollaries

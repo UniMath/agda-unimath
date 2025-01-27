@@ -211,6 +211,7 @@ open import foundation.functoriality-set-quotients public
 open import foundation.functoriality-set-truncation public
 open import foundation.functoriality-truncation public
 open import foundation.fundamental-theorem-of-identity-types public
+open import foundation.fundamental-theorem-of-identity-types-structures public
 open import foundation.global-choice public
 open import foundation.global-subuniverses public
 open import foundation.globular-type-of-dependent-functions public

@@ -355,12 +355,25 @@ module _
       is-section-map-inv-compute-fiber-map-out-of-identity-type
       is-retraction-map-inv-compute-fiber-map-out-of-identity-type
 
+  is-equiv-map-inv-compute-fiber-map-out-of-identity-type :
+    is-equiv map-inv-compute-fiber-map-out-of-identity-type
+  is-equiv-map-inv-compute-fiber-map-out-of-identity-type =
+    is-equiv-is-invertible
+      map-compute-fiber-map-out-of-identity-type
+      is-retraction-map-inv-compute-fiber-map-out-of-identity-type
+      is-section-map-inv-compute-fiber-map-out-of-identity-type
+
   compute-fiber-map-out-of-identity-type :
     fiber (f x) x' ≃ ((a , f a refl) ＝ (x , x'))
-  pr1 compute-fiber-map-out-of-identity-type =
-    map-compute-fiber-map-out-of-identity-type
-  pr2 compute-fiber-map-out-of-identity-type =
-    is-equiv-map-compute-fiber-map-out-of-identity-type
+  compute-fiber-map-out-of-identity-type =
+    ( map-compute-fiber-map-out-of-identity-type ,
+      is-equiv-map-compute-fiber-map-out-of-identity-type)
+
+  inv-compute-fiber-map-out-of-identity-type :
+    ((a , f a refl) ＝ (x , x')) ≃ fiber (f x) x'
+  inv-compute-fiber-map-out-of-identity-type =
+    ( map-inv-compute-fiber-map-out-of-identity-type ,
+      is-equiv-map-inv-compute-fiber-map-out-of-identity-type)
 ```
 
 ### Computation of fibers of families of unbased maps out of the identity type
