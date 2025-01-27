@@ -324,15 +324,15 @@ We show that `fiber (f x) y ≃ ((* , f * refl) ＝ (x , y))` for every `x : A` 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {a : A} {B : A → UU l2}
-  (f : (x : A) → (a ＝ x) → B x) (x : A) (y : B x)
+  (f : (x : A) → (a ＝ x) → B x) (x : A) (x' : B x)
   where
 
   map-compute-fiber-map-out-of-identity-type :
-    fiber (f x) y → ((a , f a refl) ＝ (x , y))
+    fiber (f x) x' → ((a , f a refl) ＝ (x , x'))
   map-compute-fiber-map-out-of-identity-type (refl , refl) = refl
 
   map-inv-compute-fiber-map-out-of-identity-type :
-    ((a , f a refl) ＝ (x , y)) → fiber (f x) y
+    ((a , f a refl) ＝ (x , x')) → fiber (f x) x'
   map-inv-compute-fiber-map-out-of-identity-type refl =
     refl , refl
 
@@ -356,9 +356,55 @@ module _
       is-retraction-map-inv-compute-fiber-map-out-of-identity-type
 
   compute-fiber-map-out-of-identity-type :
-    fiber (f x) y ≃ ((a , f a refl) ＝ (x , y))
+    fiber (f x) x' ≃ ((a , f a refl) ＝ (x , x'))
   pr1 compute-fiber-map-out-of-identity-type =
     map-compute-fiber-map-out-of-identity-type
   pr2 compute-fiber-map-out-of-identity-type =
     is-equiv-map-compute-fiber-map-out-of-identity-type
+```
+
+### Computation of fibers of families of unbased maps out of the identity type
+
+We show that `fiber (f x y) b ≃ ((x , f x x refl) ＝ (y , b))` for every
+`x y : A` and `b : B x y`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → A → UU l2}
+  (f : (x y : A) → x ＝ y → B x y) (x y : A) (b : B x y)
+  where
+
+  map-compute-fiber-unbased-map-out-of-identity-type :
+    fiber (f x y) b → (x , f x x refl) ＝ (y , b)
+  map-compute-fiber-unbased-map-out-of-identity-type (refl , refl) = refl
+
+  map-inv-compute-fiber-unbased-map-out-of-identity-type :
+    (x , f x x refl) ＝ (y , b) → fiber (f x y) b
+  map-inv-compute-fiber-unbased-map-out-of-identity-type refl = (refl , refl)
+
+  is-section-map-inv-compute-fiber-unbased-map-out-of-identity-type :
+    map-compute-fiber-unbased-map-out-of-identity-type ∘
+    map-inv-compute-fiber-unbased-map-out-of-identity-type ~ id
+  is-section-map-inv-compute-fiber-unbased-map-out-of-identity-type refl = refl
+
+  is-retraction-map-inv-compute-fiber-unbased-map-out-of-identity-type :
+    map-inv-compute-fiber-unbased-map-out-of-identity-type ∘
+    map-compute-fiber-unbased-map-out-of-identity-type ~ id
+  is-retraction-map-inv-compute-fiber-unbased-map-out-of-identity-type
+    ( refl , refl) =
+    refl
+
+  is-equiv-map-compute-fiber-unbased-map-out-of-identity-type :
+    is-equiv map-compute-fiber-unbased-map-out-of-identity-type
+  is-equiv-map-compute-fiber-unbased-map-out-of-identity-type =
+    is-equiv-is-invertible
+      map-inv-compute-fiber-unbased-map-out-of-identity-type
+      is-section-map-inv-compute-fiber-unbased-map-out-of-identity-type
+      is-retraction-map-inv-compute-fiber-unbased-map-out-of-identity-type
+
+  compute-fiber-unbased-map-out-of-identity-type :
+    fiber (f x y) b ≃ ((x , f x x refl) ＝ (y , b))
+  compute-fiber-unbased-map-out-of-identity-type =
+    ( map-compute-fiber-unbased-map-out-of-identity-type ,
+      is-equiv-map-compute-fiber-unbased-map-out-of-identity-type)
 ```
