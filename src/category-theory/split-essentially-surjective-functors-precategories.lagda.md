@@ -7,26 +7,26 @@ module category-theory.split-essentially-surjective-functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.essential-fibers-of-functors-precategories
-open import category-theory.essentially-surjective-functors-precategories
-open import category-theory.functors-precategories
-open import category-theory.fully-faithful-functors-precategories
-open import category-theory.pseudomonic-functors-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
 open import category-theory.categories
 open import category-theory.cores-precategories
+open import category-theory.essential-fibers-of-functors-precategories
+open import category-theory.essentially-surjective-functors-precategories
+open import category-theory.fully-faithful-functors-precategories
+open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-categories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
+open import category-theory.pseudomonic-functors-precategories
 
-open import foundation.dependent-pair-types
-open import foundation.sections
-open import foundation.function-types
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.retracts-of-types
-open import foundation.propositions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.retracts-of-types
+open import foundation.sections
 open import foundation.universe-levels
 ```
 
