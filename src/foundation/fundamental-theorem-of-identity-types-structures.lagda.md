@@ -38,6 +38,12 @@ open import foundation-core.torsorial-type-families
 
 ### The unbased fundamental theorem of identity types for structures
 
+Given a structure `𝒫` on types, then the following are logically equivalent:
+
+1. Every unbased map out of the identity types of `A` into the type family
+   `B : A → 𝒰` is `𝒫`-structured.
+2. The identity types of `Σ A B` are `𝒫`-structured.
+
 ```agda
 module _
   {l1 l2 l3 : Level} {𝒫 : UU (l1 ⊔ l2) → UU l3}
@@ -74,6 +80,12 @@ module _
 ```
 
 ### The unbased fundamental theorem of identity types for subuniverses
+
+Given a subuniverse `𝒫` then the following are logically equivalent:
+
+1. Every unbased map out of the identity types of `A` into the type family
+   `B : A → 𝒰` is in `𝒫`.
+2. The dependent sum `Σ A B` is `𝒫`-separated.
 
 ```agda
 module _
