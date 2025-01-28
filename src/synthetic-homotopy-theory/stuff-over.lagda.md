@@ -29,6 +29,23 @@ open import foundation.whiskering-homotopies-concatenation
 </details>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.functoriality-dependent-pair-types
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2}
+  {A' : A → UU l3} {B' : B → UU l4}
+  (f : A → B)
+  (f' : (a : A) → A' a → B' (f a))
+  where
+
+  tot-map-over : Σ A A' → Σ B B'
+  tot-map-over = map-Σ B' f f'
+
+  coh-tot-map-over : coherence-square-maps tot-map-over pr1 pr1 f
+  coh-tot-map-over = refl-htpy
+
 module _
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2}
@@ -662,4 +679,245 @@ module _
         [iii] =
           unget-section-triangle-over' f1 g1 m f1' g1' m' s1 s2 s3 F1 G1 M B1 T1 S1
         [iv] = left-whisk-section-htpy-over B1 T1 s1 s3 _ _ [iii] f2 f2' s4 F2
+```
+
+```agda
+open import foundation.sections
+open import foundation.transport-along-homotopies
+module _
+  {l1 l2 : Level}
+  {A : UU l1} (B : A → UU l2)
+  where
+
+  sect-section :
+    section (pr1 {B = B}) →
+    ((a : A) → B a)
+  sect-section (s , H) a = tr B (H a) (pr2 (s a))
+
+  section-sect :
+    ((a : A) → B a) →
+    section (pr1 {B = B})
+  section-sect = section-dependent-function
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {P : A → UU l2}
+  {B : UU l3} {Q : B → UU l4}
+  (f : A → B)
+  (f' : {a : A} → P a → Q (f a))
+  where
+
+  section-displayed-map-over : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  section-displayed-map-over =
+    Σ ( section (pr1 {B = P}))
+      ( λ sA →
+        Σ ( section (pr1 {B = Q}))
+          ( λ sB →
+            Σ ( coherence-square-maps f
+                ( map-section pr1 sA)
+                ( map-section pr1 sB)
+                ( tot-map-over f (λ a → f' {a})))
+              ( λ H →
+                ( ( pasting-vertical-coherence-square-maps
+                    ( f)
+                    ( map-section pr1 sA)
+                    ( map-section pr1 sB)
+                    ( tot-map-over f (λ a → f' {a}))
+                    ( pr1)
+                    ( pr1)
+                    ( f)
+                    ( H)
+                    ( refl-htpy))) ∙h
+                  ( is-section-map-section pr1 sB ·r f) ~
+                ( f ·l is-section-map-section pr1 sA) ∙h refl-htpy)))
+
+  sect-map-over-section-map-over :
+    (s : section-displayed-map-over) →
+    section-map-over f
+      ( f')
+      ( sect-section P (pr1 s))
+      ( sect-section Q (pr1 (pr2 s)))
+  sect-map-over-section-map-over (sA , sB , H , α) a =
+    preserves-tr (λ a → f' {a}) (σA a) (sA2 a) ∙
+    inv (substitution-law-tr Q f (σA a)) ∙
+    [i] ∙
+    tr-concat (H1 a) (σB (f a)) (f' (sA2 a)) ∙
+    ap
+      ( tr Q (σB (f a)))
+      ( substitution-law-tr Q pr1 (H a) ∙
+        apd pr2 (H a))
+    where
+      sA1 : A → A
+      sA1 = pr1 ∘ map-section pr1 sA
+      σA : sA1 ~ id
+      σA = is-section-map-section pr1 sA
+      sA2 : (a : A) → P (sA1 a)
+      sA2 = pr2 ∘ map-section pr1 sA
+      sB1 : B → B
+      sB1 = pr1 ∘ map-section pr1 sB
+      σB : sB1 ~ id
+      σB = is-section-map-section pr1 sB
+      H1 : f ∘ sA1 ~ sB1 ∘ f
+      H1 = pr1 ·l H
+      [i] :
+        tr Q (ap f (σA a)) (f' (sA2 a)) ＝
+        tr Q (H1 a ∙ σB (f a)) (f' (sA2 a))
+      [i] =
+        ap
+          ( λ p → tr Q p (f' (sA2 a)))
+          ( inv (α a ∙ right-unit))
+```
+
+```agda
+open import foundation.commuting-cubes-of-maps
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' l1'' l2'' l3'' l4'' : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
+  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  {A'' : UU l1''} {B'' : UU l2''} {C'' : UU l3''} {D'' : UU l4''}
+  (f'' : A'' → B'') (g'' : A'' → C'') (h'' : B'' → D'') (k'' : C'' → D'')
+  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
+  (hA' : A'' → A') (hB' : B'' → B') (hC' : C'' → C') (hD' : D'' → D')
+  (mid : (h' ∘ f') ~ (k' ∘ g'))
+  (bottom-back-left : (f ∘ hA) ~ (hB ∘ f'))
+  (bottom-back-right : (g ∘ hA) ~ (hC ∘ g'))
+  (bottom-front-left : (h ∘ hB) ~ (hD ∘ h'))
+  (bottom-front-right : (k ∘ hC) ~ (hD ∘ k'))
+  (bottom : (h ∘ f) ~ (k ∘ g))
+  (top : (h'' ∘ f'') ~ (k'' ∘ g''))
+  (top-back-left : (f' ∘ hA') ~ (hB' ∘ f''))
+  (top-back-right : (g' ∘ hA') ~ (hC' ∘ g''))
+  (top-front-left : (h' ∘ hB') ~ (hD' ∘ h''))
+  (top-front-right : (k' ∘ hC') ~ (hD' ∘ k''))
+  where
+
+  pasting-vertical-coherence-cube-maps :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      ( mid)
+      ( bottom-back-left)
+      ( bottom-back-right)
+      ( bottom-front-left)
+      ( bottom-front-right)
+      ( bottom) →
+    coherence-cube-maps f' g' h' k' f'' g'' h'' k'' hA' hB' hC' hD'
+      ( top)
+      ( top-back-left)
+      ( top-back-right)
+      ( top-front-left)
+      ( top-front-right)
+      ( mid) →
+    coherence-cube-maps f g h k f'' g'' h'' k''
+      ( hA ∘ hA') (hB ∘ hB') (hC ∘ hC') (hD ∘ hD')
+      ( top)
+      ( pasting-vertical-coherence-square-maps f'' hA' hB' f' hA hB f
+        ( top-back-left) (bottom-back-left))
+      ( pasting-vertical-coherence-square-maps g'' hA' hC' g' hA hC g
+        ( top-back-right) (bottom-back-right))
+      ( pasting-vertical-coherence-square-maps h'' hB' hD' h' hB hD h
+        ( top-front-left) (bottom-front-left))
+      ( pasting-vertical-coherence-square-maps k'' hC' hD' k' hC hD k
+        ( top-front-right) (bottom-front-right))
+      ( bottom)
+  pasting-vertical-coherence-cube-maps α β = {!!}
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {P1 : UU l1} {P2 : UU l2} {P3 : UU l3} {P4 : UU l4}
+  {Q1 : P1 → UU l5} {Q2 : P2 → UU l6} {Q3 : P3 → UU l7} {Q4 : P4 → UU l8}
+  (g1 : P1 → P3) (f1 : P1 → P2) (f2 : P3 → P4) (g2 : P2 → P4)
+  (g1' : (p : P1) → Q1 p → Q3 (g1 p))
+  (f1' : (p : P1) → Q1 p → Q2 (f1 p))
+  (f2' : (p : P3) → Q3 p → Q4 (f2 p))
+  (g2' : (p : P2) → Q2 p → Q4 (g2 p))
+  (bottom : g2 ∘ f1 ~ f2 ∘ g1)
+  (top : square-over g1 f1 f2 g2 (g1' _) (f1' _) (f2' _) (g2' _) bottom)
+  where
+
+  tot-square-over :
+    coherence-square-maps
+      ( tot-map-over g1 g1')
+      ( tot-map-over f1 f1')
+      ( tot-map-over {B' = Q4} f2 f2')
+      ( tot-map-over g2 g2')
+  tot-square-over =
+    coherence-square-maps-Σ Q4 g1' f1' f2' g2' (λ p → top {p})
+
+  coh-tot-square-over :
+    coherence-cube-maps f1 g1 g2 f2
+      ( map-Σ Q2 f1 f1')
+      ( map-Σ Q3 g1 g1')
+      ( map-Σ Q4 g2 g2')
+      ( map-Σ Q4 f2 f2')
+      ( pr1)
+      ( pr1)
+      ( pr1)
+      ( pr1)
+      ( tot-square-over)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( refl-htpy)
+      ( bottom)
+  coh-tot-square-over (p , q) =
+    ap-pr1-eq-pair-Σ (bottom p) (top q) ∙ inv right-unit
+
+  section-displayed-cube-over : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8)
+  section-displayed-cube-over =
+    Σ ( section-displayed-map-over {Q = Q2} f1 (f1' _))
+      ( λ sF1 →
+        Σ ( section-displayed-map-over {Q = Q4} f2 (f2' _))
+          ( λ sF2 →
+            Σ ( coherence-square-maps g1
+                ( map-section pr1 (pr1 sF1))
+                ( map-section pr1 (pr1 sF2))
+                ( tot-map-over g1 g1'))
+              ( λ G1 →
+                Σ ( coherence-square-maps g2
+                    ( map-section pr1 (pr1 (pr2 sF1)))
+                    ( map-section pr1 (pr1 (pr2 sF2)))
+                    ( tot-map-over g2 g2'))
+                  ( λ G2 →
+                    Σ ( coherence-cube-maps
+                        ( tot-map-over f1 f1')
+                        ( tot-map-over g1 g1')
+                        ( tot-map-over g2 g2')
+                        ( tot-map-over f2 f2')
+                        f1 g1 g2 f2
+                        ( map-section pr1 (pr1 sF1))
+                        ( map-section pr1 (pr1 (pr2 sF1)))
+                        ( map-section pr1 (pr1 sF2))
+                        ( map-section pr1 (pr1 (pr2 sF2)))
+                        ( bottom)
+                        ( pr1 (pr2 (pr2 sF1)))
+                        ( G1)
+                        ( G2)
+                        ( pr1 (pr2 (pr2 sF2)))
+                        ( tot-square-over))
+                      ( λ α →
+                        pasting-vertical-coherence-cube-maps f1 g1 g2 f2
+                          ( tot-map-over f1 f1')
+                          ( tot-map-over g1 g1')
+                          ( tot-map-over g2 g2')
+                          ( tot-map-over f2 f2')
+                          f1 g1 g2 f2
+                          pr1 pr1 pr1 pr1
+                          ( map-section pr1 (pr1 sF1))
+                          ( map-section pr1 (pr1 (pr2 sF1)))
+                          ( map-section pr1 (pr1 sF2))
+                          ( map-section pr1 (pr1 (pr2 sF2)))
+                          ( tot-square-over)
+                          refl-htpy refl-htpy refl-htpy refl-htpy
+                          ( bottom)
+                          ( bottom)
+                          ( pr1 (pr2 (pr2 sF1)))
+                          ( G1)
+                          ( G2)
+                          ( pr1 (pr2 (pr2 sF2)))
+                          ( coh-tot-square-over)
+                          ( α) ~ {!!}
+                          )))))
 ```
