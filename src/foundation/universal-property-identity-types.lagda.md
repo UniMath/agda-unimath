@@ -120,11 +120,11 @@ We first show that [injectivity](foundation-core.injective-maps.md) of the map
 ```
 
 for the identity types of `A` implies that the map `Id : A → (A → 𝒰)` is an
-[embedding](foundation.embeddings.md). Since the
-[univalence axiom](foundation.univalence.md) implies
-[the preunivalence axiom](foundation.preunivalence.md) implies injectivity of
-`equiv-eq`, it follows that `Id : A → (A → 𝒰)` is an embedding under the
-postulates of agda-unimath.
+[embedding](foundation.embeddings.md), a result due to Martín Escardó
+{{#cite TypeTopology}}. Since the [univalence axiom](foundation.univalence.md)
+implies [the preunivalence axiom](foundation.preunivalence.md) implies
+injectivity of `equiv-eq`, it follows that `Id : A → (A → 𝒰)` is an embedding
+under the postulates of agda-unimath.
 
 #### Injectivity of `equiv-eq` implies `Id : A → (A → 𝒰)` is an embedding
 
@@ -322,14 +322,16 @@ module _
 
 - In
   [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)
-  we will show that the fiber of `Id : A → (A → 𝒰)` at `B : A → 𝒰` is equivalent
-  to `is-torsorial B`.
+  we show that the fiber of `Id : A → (A → 𝒰)` at `B : A → 𝒰` is equivalent to
+  `is-torsorial B`.
 
 ## References
 
-- The fact that preunivalence, or axiom L, is sufficient to prove that
-  `Id : A → (A → 𝒰)` is an embedding was first observed and formalized by Martín
-  Escardó,
-  [https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html](https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html).
+It was first observed and proved by Evan Cavallo that preunivalence, or Axiom L,
+is sufficient to deduce that `Id : A → (A → 𝒰)` is an embedding. It was later
+observed and formalized by Martín Escardó that assuming the map
+`equiv-eq : (X ＝ Y) → (X ≃ Y)` is injective is enough. {{#cite TypeTopology}}
+Martín Escardó formalizations can be found here:
+[https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html](https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html).
 
-{{#bibliography}} {{#reference TypeTopology}}
+{{#bibliography}} {{#reference TypeTopology}} {{#reference Esc17YetAnother}}
