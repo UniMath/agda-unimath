@@ -131,10 +131,20 @@ module _
 
 ### The unbased extended fundamental theorem of identity types
 
+We can give a similar characterization for a binary family of types
+`B : A → A → 𝒰` over a not necessarily pointed or inhabited type `A` whose
+elements are all merely equal. In other words, `A` is any π₀-trivial type. The
+characterization asserts that the following are equivalent:
+
+1. For every `x : A` and every family of maps out of the identity types
+   `f : (y : A) → (x ＝ y) → B x y`, then for every `y : A` the `f y` is a
+   `P`-map.
+2. For every `x : A` the type `Σ A (B x)` is `P`-separated.
+
 ```agda
 module _
   {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3)
-  {A : UU l1} (a : A) {B : A → A → UU l2}
+  {A : UU l1} {B : A → A → UU l2}
   where
 
   abstract
