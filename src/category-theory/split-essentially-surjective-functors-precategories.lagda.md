@@ -182,9 +182,9 @@ module _
 This is Lemma 6.8 of {{#cite AKS15}}, although we give a different proof.
 
 **Proof.** Let `F : 𝒞 → 𝒟` be a functor of precategories, where `𝒞` is
-univalent. It suffices to assume `F` is fully faithful on isomorphism-sets.
-Then, to show that `is-split-essentially-surjective` is a proposition, i.e.,
-that
+univalent. It suffices to assume `F` is fully faithful on the
+[core](category-theory.cores-categories.md) of `𝒞`. Then, to show that
+`is-split-essentially-surjective` is a proposition, i.e., that
 
 ```text
   (d : 𝒟₀) → Σ (x : 𝒞₀), (Fx ≅ d)
@@ -194,7 +194,7 @@ is a proposition it is equivalent to show that if it has an element it is
 contractible, so assume `F` is split essentially surjective. Then, it suffices
 to show that for every `d : 𝒟₀`, the type `Σ (x : 𝒞₀), (Fx ≅ d)` is
 contractible. By split essential surjectivity there is an element `y : 𝒞₀` such
-that `Fy ≅ d` and since postcompositing by an isomorphism is an equivalence of
+that `Fy ≅ d` and since postcomposing by an isomorphism is an equivalence of
 isomorphism-sets, we have
 
 ```text
