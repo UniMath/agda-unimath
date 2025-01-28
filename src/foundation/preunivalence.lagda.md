@@ -107,5 +107,6 @@ preunivalence = preunivalence-axiom-univalence-axiom univalence
 - Preunivalence is sufficient to prove that `Id : A → (A → 𝒰)` is an embedding.
   This fact is proven in
   [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)
+- [The strong preunivalence axiom](foundation.strong-preunivalence.md)
 - [Preunivalent type families](foundation.preunivalent-type-families.md)
 - [Preunivalent categories](category-theory.preunivalent-categories.md)
