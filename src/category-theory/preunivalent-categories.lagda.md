@@ -48,15 +48,6 @@ however, that our definition of preunivalence here is a
 [strengthening](foundation.strong-preunivalence.md) of the
 [preunivalence axiom](foundation.preunivalence.md).
 
-The preunivalence condition on precategories states that every way to display
-the type of objects over the groupoid of isomorphisms is a subgroupoid. For
-univalent categories every way to display its objects over the groupoid of
-isomorphisms is trivial, while for strict categories the groupoid of objects is
-discrete. Indeed, in this sense preunivalence provides a generalization of both
-notions of "category" with _no more structure_. This is opposed to the even more
-general notion of precategory, where the homotopy structure on the objects can
-be almost completely unrelated to the homotopy structure of the morphisms.
-
 ## Definitions
 
 ### The predicate on precategories of being a preunivalent category
