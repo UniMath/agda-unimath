@@ -168,7 +168,7 @@ module _
   ap-pr1-eq-pair-Σ refl refl = refl
 ```
 
-### Transporting in `B` along the first projection of an identification in `Σ A B`
+### Transport in `B` along the first projection of an identification in `Σ A B`
 
 ```agda
 module _
