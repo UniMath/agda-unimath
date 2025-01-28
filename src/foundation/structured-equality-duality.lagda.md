@@ -16,17 +16,7 @@ open import foundation.structure
 open import foundation.subuniverses
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.families-of-equivalences
-open import foundation-core.fibers-of-maps
-open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.homotopies
-open import foundation-core.retractions
-open import foundation-core.retracts-of-types
-open import foundation-core.sections
-open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -36,11 +26,16 @@ open import foundation-core.torsorial-type-families
 Given a [structure](foundation.structure.md) `𝒫` on types that transfers along
 [equivalences](foundation-core.equivalences.md), then for every type `A` and
 type family `B : A → 𝒰` there is a
-[mutual correspondence](foundation.logical-equivalences.md) between
+[mutual correspondence](foundation.logical-equivalences.md) between the
+following:
 
-1. For every `x : A`, `𝒫`-structured families of maps
-   `f : (y : A) → (x ＝ y) → B y`.
+1. `𝒫`-structured binary families of maps `f : (y : A) → (x ＝ y) → B y`.
 2. `𝒫`-structures on the equality of `Σ A B`.
+
+Note that, by [univalence axiom](foundation.univalence.md), every structure
+[transfers along equivalences](foundation.transport-along-equivalences.md).
+However, we maintain this as an assumption, since for most common notions of
+structure this property is independent of the univalence axiom.
 
 ## Construction
 
@@ -118,3 +113,11 @@ module _
     subuniverse-equality-duality =
       structured-equality-duality (is-in-subuniverse-equiv 𝒫)
 ```
+
+## See also
+
+This duality is applied in
+
+- [The Regensburg extension of the fundamental theorem of identity types](foundation.regensburg-extension-fundamental-theorem-of-identity-types.md)
+- [The strong preunivalence axiom](foundation.strong-preunivalence.md)
+- [Preunivalent categories](category-theory.preunivalent-categories.md)

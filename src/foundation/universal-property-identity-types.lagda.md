@@ -38,9 +38,10 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-The {{#concept "universal property of identity types"}} characterizes families
-of maps out of the [identity type](foundation-core.identity-types.md). This
-universal property is also known as the **type theoretic Yoneda lemma**.
+The {{#concept "universal property of identity types" Agda=equiv-eq-refl}}
+characterizes families of maps out of the
+[identity type](foundation-core.identity-types.md). This universal property is
+also known as the **type theoretic Yoneda lemma**.
 
 ## Theorem
 
@@ -116,7 +117,7 @@ module _
 We first show that [injectivity](foundation-core.injective-maps.md) of the map
 
 ```text
-  equiv-eq : {X Y : 𝓤} → (X ＝ Y) → (X ≃ Y)
+  equiv-eq : {X Y : 𝒰} → (X ＝ Y) → (X ≃ Y)
 ```
 
 for the identity types of `A` implies that the map `Id : A → (A → 𝒰)` is an
@@ -238,12 +239,24 @@ module _
 #### `Id : A → (A → 𝒰)` is an embedding
 
 ```agda
-module _
-  {l : Level} (A : UU l)
-  where
+is-emb-Id : {l : Level} (A : UU l) → is-emb (Id {A = A})
+is-emb-Id = is-emb-Id-preunivalence-axiom preunivalence
+```
 
-  is-emb-Id : is-emb (Id {A = A})
-  is-emb-Id = is-emb-Id-preunivalence-axiom preunivalence A
+### Characteriation of equality of `Id`
+
+```agda
+equiv-Id :
+  {l : Level} {A : UU l} (a x : A) → (Id a ＝ Id x) ≃ (a ＝ x)
+equiv-Id a x =
+  ( equiv-ev-refl x) ∘e
+  ( equiv-fam-map-fam-equiv-is-torsorial x (is-torsorial-Id a)) ∘e
+  ( equiv-Π-equiv-family (λ _ → equiv-univalence)) ∘e
+  ( equiv-funext) ∘e
+  ( equiv-inv (Id a) (Id x))
+
+equiv-fiber-Id : {l : Level} {A : UU l} (a : A) → fiber' Id (Id a) ≃ Σ A (Id a)
+equiv-fiber-Id a = equiv-tot (equiv-Id a)
 ```
 
 #### For any type family `B` over `A`, the type of pairs `(a , e)` consisting of `a : A` and a family of equivalences `e : (x : A) → (a ＝ x) ≃ B x` is a proposition
@@ -324,7 +337,7 @@ It was first observed and proved by Evan Cavallo that preunivalence, or Axiom L,
 is sufficient to deduce that `Id : A → (A → 𝒰)` is an embedding. It was later
 observed and formalized by Martín Escardó that assuming the map
 `equiv-eq : (X ＝ Y) → (X ≃ Y)` is injective is enough. {{#cite TypeTopology}}
-Martín Escardó formalizations can be found here:
+Martín Escardó's formalizations can be found here:
 [https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html](https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html).
 
 {{#bibliography}} {{#reference TypeTopology}} {{#reference Esc17YetAnother}}

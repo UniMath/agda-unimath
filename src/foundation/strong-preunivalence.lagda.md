@@ -9,7 +9,6 @@ module foundation.strong-preunivalence where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.preunivalence
@@ -22,8 +21,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.identity-types
-open import foundation-core.subtypes
 ```
 
 </details>
