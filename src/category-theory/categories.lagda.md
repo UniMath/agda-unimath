@@ -17,6 +17,7 @@ open import foundation.1-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -170,8 +171,11 @@ module _
 
   is-preunivalent-category-Category :
     is-preunivalent-Precategory (precategory-Category C)
-  is-preunivalent-category-Category x y =
-    is-emb-is-equiv (is-category-Category C x y)
+  is-preunivalent-category-Category x =
+    is-set-is-contr
+      ( fundamental-theorem-id'
+        ( iso-eq-Precategory (precategory-Category C) x)
+        ( is-category-Category C x))
 
   preunivalent-category-Category : Preunivalent-Category l1 l2
   pr1 preunivalent-category-Category = precategory-Category C
@@ -301,7 +305,7 @@ module _
     is-surjective-iso-eq-C x y =
     is-equiv-is-emb-is-surjective
       ( is-surjective-iso-eq-C x y)
-      ( is-preunivalent-Preunivalent-Category C x y)
+      ( preunivalence-Preunivalent-Category C x y)
 
   is-surjective-iso-eq-is-category-Preunivalent-Category :
     is-category-Precategory (precategory-Preunivalent-Category C) →

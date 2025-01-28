@@ -15,6 +15,7 @@ open import category-theory.preunivalent-categories
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.sets
@@ -41,17 +42,13 @@ abstract
     {l1 l2 : Level} (C : Precategory l1 l2) →
     is-preunivalent-Precategory C →
     is-preunivalent-Precategory (opposite-Precategory C)
-  is-preunivalent-opposite-is-preunivalent-Precategory C is-preunivalent-C x y =
-    is-emb-htpy-emb
-      ( comp-emb
-        ( emb-equiv
-          ( compute-iso-opposite-Precategory C ∘e equiv-inv-iso-Precategory C))
-        ( _ , is-preunivalent-C x y))
-      ( λ where
-        refl →
-          eq-type-subtype
-            ( is-iso-prop-Precategory (opposite-Precategory C))
-            ( refl))
+  is-preunivalent-opposite-is-preunivalent-Precategory C is-preunivalent-C x =
+    is-set-equiv'
+      ( Σ (obj-opposite-Precategory C) (iso-Precategory C x))
+      ( equiv-tot
+        ( λ _ →
+          compute-iso-opposite-Precategory C ∘e equiv-inv-iso-Precategory C))
+      ( is-preunivalent-C x)
 
 abstract
   is-preunivalent-is-preunivalent-opposite-Precategory :

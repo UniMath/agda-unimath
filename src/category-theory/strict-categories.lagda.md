@@ -192,12 +192,10 @@ module _
   abstract
     is-preunivalent-Strict-Category :
       is-preunivalent-Precategory (precategory-Strict-Category C)
-    is-preunivalent-Strict-Category x y =
-      is-emb-is-injective
-        ( is-set-type-subtype
-          ( is-iso-prop-Precategory (precategory-Strict-Category C))
-          ( is-set-hom-Strict-Category C x y))
-        ( λ _ → eq-is-prop (is-set-obj-Strict-Category C x y))
+    is-preunivalent-Strict-Category x =
+      is-set-Σ
+        ( is-set-obj-Strict-Category C)
+        ( λ y → is-set-iso-Precategory (precategory-Strict-Category C) {x} {y})
 
   preunivalent-category-Strict-Category : Preunivalent-Category l1 l2
   pr1 preunivalent-category-Strict-Category = precategory-Strict-Category C

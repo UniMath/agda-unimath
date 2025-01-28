@@ -15,10 +15,13 @@ open import foundation.1-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
+open import foundation.structured-equality-duality
 open import foundation.universe-levels
 ```
 
@@ -26,33 +29,40 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **preunivalent category** is a [precategory](category-theory.precategories.md)
-for which the [identifications](foundation-core.identity-types.md) between the
-objects [embed](foundation-core.embeddings.md) into the
-[isomorphisms](category-theory.isomorphisms-in-precategories.md). More
-specifically, an equality between objects gives rise to an isomorphism between
-them, by the J-rule. A precategory is a preunivalent category if this function,
-called `iso-eq`, is an embedding.
+A {{#concept "preunivalent category" Agda=Preunivalent-Category}} `𝒞` is a
+[precategory](category-theory.precategories.md) for which every mapping of the
+concrete groupoid of objects into the groupoid of
+[isomorphisms](category-theory.isomorphisms-in-precategories.md) is an
+[embedding](foundation-core.embeddings.md). Equivalently, by
+[subuniverse equality duality](foundation.structured-equality-duality.md), a
+preunivalent category is a precategory whose based isomorphism types
+`Σ (x : 𝒞₀), (* ≅ x)` are [sets](foundation-core.sets.md).
 
-The idea of [preunivalence](foundation.preunivalence.md) is that it is a common
-generalization of univalent mathematics and mathematics with Axiom K. Hence
-preunivalent categories generalize both
-[(univalent) categories](category-theory.categories.md) and
+The main function of _preunivalence_ is to serve as a common generalization of
+univalent mathematics and mathematics with Axiom K by restricting the ways that
+identity and equivalence may interact. Hence preunivalent categories generalize
+both [(univalent) categories](category-theory.categories.md) and
 [strict categories](category-theory.strict-categories.md), which are
-precategories whose objects form a [set](foundation-core.sets.md).
+precategories whose objects form a [set](foundation-core.sets.md). Note,
+however, that our definition of preunivalence here is a
+[strengthening](foundation.strong-preunivalence.md) of the
+[preunivalence axiom](foundation.preunivalence.md).
 
-The preunivalence condition on precategories states that the type of objects is
-a subgroupoid of the [groupoid](category-theory.groupoids.md) of isomorphisms.
-For univalent categories the groupoid of objects is equivalent to the groupoid
-of isomorphisms, while for strict categories the groupoid of objects is
+The preunivalence condition on precategories states that every way to display
+the type of objects over the groupoid of isomorphisms is a subgroupoid. For
+univalent categories every way to display its objects over the groupoid of
+isomorphisms is trivial, while for strict categories the groupoid of objects is
 discrete. Indeed, in this sense preunivalence provides a generalization of both
-notions of "category", with _no more structure_. This is opposed to the even
-more general notion of precategory, where the homotopy structure on the objects
-can be almost completely unrelated to the homotopy structure of the morphisms.
+notions of "category" with _no more structure_. This is opposed to the even more
+general notion of precategory, where the homotopy structure on the objects can
+be almost completely unrelated to the homotopy structure of the morphisms.
 
 ## Definitions
 
 ### The predicate on precategories of being a preunivalent category
+
+We define preunivalence of a category `𝒞` to be the condition that every type of
+the form `Σ (x : 𝒞₀), (x ≅ y)` is a set.
 
 ```agda
 module _
@@ -64,12 +74,25 @@ module _
     Π-Prop
       ( obj-Precategory C)
       ( λ x →
-        Π-Prop
-          ( obj-Precategory C)
-          ( λ y → is-emb-Prop (iso-eq-Precategory C x y)))
+        is-set-Prop
+          ( Σ ( obj-Precategory C)
+              ( iso-Precategory C x)))
 
   is-preunivalent-Precategory : UU (l1 ⊔ l2)
   is-preunivalent-Precategory = type-Prop is-preunivalent-prop-Precategory
+
+  preunivalence-is-preunivalent-Precategory :
+    is-preunivalent-Precategory →
+    (x y : obj-Precategory C) →
+    is-emb (iso-eq-Precategory C x y)
+  preunivalence-is-preunivalent-Precategory H x y =
+    is-emb-is-prop-map
+      ( backward-implication-subuniverse-equality-duality
+        ( is-prop-Prop)
+        (H x)
+        ( x)
+        ( iso-eq-Precategory C x)
+        ( y))
 ```
 
 ### The type of preunivalent categories
@@ -168,13 +191,44 @@ module _
     is-preunivalent-Precategory precategory-Preunivalent-Category
   is-preunivalent-Preunivalent-Category = pr2 C
 
+  iso-Preunivalent-Category : (x y : obj-Preunivalent-Category) → UU l2
+  iso-Preunivalent-Category = iso-Precategory precategory-Preunivalent-Category
+
+  iso-eq-Preunivalent-Category :
+    (x y : obj-Preunivalent-Category) → x ＝ y → iso-Preunivalent-Category x y
+  iso-eq-Preunivalent-Category =
+    iso-eq-Precategory precategory-Preunivalent-Category
+
+  preunivalence-Preunivalent-Category :
+    (x y : obj-Preunivalent-Category) →
+    is-emb (iso-eq-Preunivalent-Category x y)
+  preunivalence-Preunivalent-Category =
+    preunivalence-is-preunivalent-Precategory
+      ( precategory-Preunivalent-Category)
+      ( is-preunivalent-Preunivalent-Category)
+
   emb-iso-eq-Preunivalent-Category :
     {x y : obj-Preunivalent-Category} →
     (x ＝ y) ↪ (iso-Precategory precategory-Preunivalent-Category x y)
-  pr1 (emb-iso-eq-Preunivalent-Category {x} {y}) =
-    iso-eq-Precategory precategory-Preunivalent-Category x y
-  pr2 (emb-iso-eq-Preunivalent-Category {x} {y}) =
-    is-preunivalent-Preunivalent-Category x y
+  emb-iso-eq-Preunivalent-Category {x} {y} =
+    ( iso-eq-Precategory precategory-Preunivalent-Category x y ,
+      preunivalence-Preunivalent-Category x y)
+```
+
+### The right-based isomorphism types of a preunivalent category are also sets
+
+```agda
+is-preunivalent-Preunivalent-Category' :
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2) →
+  ( x : obj-Preunivalent-Category C) →
+  is-set
+    ( Σ (obj-Preunivalent-Category C) (λ y → iso-Preunivalent-Category C y x))
+is-preunivalent-Preunivalent-Category' C x =
+  is-set-equiv
+    ( Σ (obj-Preunivalent-Category C) (iso-Preunivalent-Category C x))
+    ( equiv-tot
+      ( λ y → equiv-inv-iso-Precategory (precategory-Preunivalent-Category C)))
+    ( is-preunivalent-Preunivalent-Category C x)
 ```
 
 ### The total hom-type of a preunivalent category
@@ -255,7 +309,7 @@ module _
   is-1-type-obj-Preunivalent-Category x y =
     is-set-is-emb
       ( iso-eq-Precategory (precategory-Preunivalent-Category C) x y)
-      ( is-preunivalent-Preunivalent-Category C x y)
+      ( preunivalence-Preunivalent-Category C x y)
       ( is-set-iso-Precategory (precategory-Preunivalent-Category C))
 
   obj-1-type-Preunivalent-Category : 1-Type l1
