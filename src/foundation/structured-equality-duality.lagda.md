@@ -1,7 +1,7 @@
-# The fundamental theorem of identity types for structures
+# Structured equality duality
 
 ```agda
-module foundation.fundamental-theorem-of-identity-types-structures where
+module foundation.structured-equality-duality where
 ```
 
 <details><summary>Imports</summary>
@@ -33,18 +33,16 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-> TODO
+Given a [structure](foundation.structure.md) `𝒫` on types that transfers along
+[equivalences](foundation-core.equivalences.md), then for every type `A` and
+type family `B : A → 𝒰` there is a
+[mutual correspondence](foundation.logical-equivalences.md) between
 
-## Theorem
+1. For every `x : A`, `𝒫`-structured families of maps
+   `f : (y : A) → (x ＝ y) → B y`.
+2. `𝒫`-structures on the equality of `Σ A B`.
 
-### The unbased fundamental theorem of identity types for structures
-
-Given a structure `𝒫` on types that transports along equivalences, then the
-following are logically equivalent:
-
-1. For every `x : A`, every family of maps map out of the identity types of `A`,
-   `f : (y : A) → (x ＝ y) → B y` is `𝒫`-structured.
-2. The identity types of `Σ A B` are `𝒫`-structured.
+## Construction
 
 ```agda
 module _
@@ -53,37 +51,39 @@ module _
   {A : UU l1} {B : A → UU l2}
   where
 
-  forward-implication-fundamental-theorem-unbased-id-structure :
+  forward-implication-structured-equality-duality :
     ( (x : A) (f : (y : A) → (x ＝ y) → B y) (y : A) → structure-map 𝒫 (f y)) →
     structure-equality 𝒫 (Σ A B)
-  forward-implication-fundamental-theorem-unbased-id-structure
+  forward-implication-structured-equality-duality
     K (x , b) (x' , b') =
     tr-𝒫
       ( compute-fiber-map-out-of-identity-type (ind-Id x (λ u _ → B u) b) x' b')
       ( K x (ind-Id x (λ u _ → B u) b) x' b')
 
-  backward-implication-fundamental-theorem-unbased-id-structure :
+  backward-implication-structured-equality-duality :
     structure-equality 𝒫 (Σ A B) →
     ( (x : A) (f : (y : A) → (x ＝ y) → B y) (y : A) → structure-map 𝒫 (f y))
-  backward-implication-fundamental-theorem-unbased-id-structure K x f y b =
+  backward-implication-structured-equality-duality K x f y b =
     tr-𝒫
       ( inv-compute-fiber-map-out-of-identity-type f y b)
       ( K (x , f x refl) (y , b))
 
-  fundamental-theorem-unbased-id-structure :
+  structured-equality-duality :
     ( (x : A) (f : (y : A) → (x ＝ y) → B y) (y : A) → structure-map 𝒫 (f y)) ↔
     ( structure-equality 𝒫 (Σ A B))
-  fundamental-theorem-unbased-id-structure =
-    ( forward-implication-fundamental-theorem-unbased-id-structure ,
-      backward-implication-fundamental-theorem-unbased-id-structure)
+  structured-equality-duality =
+    ( forward-implication-structured-equality-duality ,
+      backward-implication-structured-equality-duality)
 ```
 
-### The unbased fundamental theorem of identity types for subuniverses
+## Corollaries
+
+### Subuniverse equality duality
 
 Given a subuniverse `𝒫` then the following are logically equivalent:
 
-1. Every unbased map out of the identity types of `A` into the type family
-   `B : A → 𝒰` is in `𝒫`.
+1. For every `x : A`, every family of maps `f : (y : A) → (x ＝ y) → B y` is a
+   family of `𝒫`-maps.
 2. The dependent sum `Σ A B` is `𝒫`-separated.
 
 ```agda
@@ -93,28 +93,28 @@ module _
   where
 
   abstract
-    forward-implication-fundamental-theorem-unbased-id-subuniverse :
+    forward-implication-subuniverse-equality-duality :
       ( (x : A) (f : (y : A) → (x ＝ y) → B y)
         (y : A) → is-in-subuniverse-map 𝒫 (f y)) →
       is-separated 𝒫 (Σ A B)
-    forward-implication-fundamental-theorem-unbased-id-subuniverse =
-      forward-implication-fundamental-theorem-unbased-id-structure
+    forward-implication-subuniverse-equality-duality =
+      forward-implication-structured-equality-duality
         ( is-in-subuniverse-equiv 𝒫)
 
   abstract
-    backward-implication-fundamental-theorem-unbased-id-subuniverse :
+    backward-implication-subuniverse-equality-duality :
       is-separated 𝒫 (Σ A B) →
       ( (x : A) (f : (y : A) → (x ＝ y) → B y)
         (y : A) → is-in-subuniverse-map 𝒫 (f y))
-    backward-implication-fundamental-theorem-unbased-id-subuniverse =
-      backward-implication-fundamental-theorem-unbased-id-structure
+    backward-implication-subuniverse-equality-duality =
+      backward-implication-structured-equality-duality
         ( is-in-subuniverse-equiv 𝒫)
 
   abstract
-    fundamental-theorem-unbased-id-subuniverse :
+    subuniverse-equality-duality :
       ( (x : A) (f : (y : A) → (x ＝ y) → B y)
         (y : A) → is-in-subuniverse-map 𝒫 (f y)) ↔
       is-separated 𝒫 (Σ A B)
-    fundamental-theorem-unbased-id-subuniverse =
-      fundamental-theorem-unbased-id-structure (is-in-subuniverse-equiv 𝒫)
+    subuniverse-equality-duality =
+      structured-equality-duality (is-in-subuniverse-equiv 𝒫)
 ```

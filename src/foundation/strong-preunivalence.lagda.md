@@ -12,12 +12,12 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types-structures
 open import foundation.preunivalence
 open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.small-types
+open import foundation.structured-equality-duality
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -83,7 +83,7 @@ based-preunivalence-instance-strong-preunivalence :
   instance-strong-preunivalence l X → based-preunivalence-axiom X
 based-preunivalence-instance-strong-preunivalence X L Y =
   is-emb-is-prop-map
-    ( backward-implication-fundamental-theorem-unbased-id-subuniverse
+    ( backward-implication-subuniverse-equality-duality
       ( is-prop-Prop)
       ( L)
       ( X)
