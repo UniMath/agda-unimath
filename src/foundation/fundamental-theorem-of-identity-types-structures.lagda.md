@@ -13,6 +13,7 @@ open import foundation.logical-equivalences
 open import foundation.maps-in-subuniverses
 open import foundation.separated-types-subuniverses
 open import foundation.subuniverses
+open import foundation.structure
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -38,10 +39,11 @@ open import foundation-core.torsorial-type-families
 
 ### The unbased fundamental theorem of identity types for structures
 
-Given a structure `𝒫` on types, then the following are logically equivalent:
+Given a structure `𝒫` on types that transports along equivalences, then the
+following are logically equivalent:
 
-1. Every unbased map out of the identity types of `A` into the type family
-   `B : A → 𝒰` is `𝒫`-structured.
+1. For every `x : A`, every family of maps map out of the identity types of `A`,
+   `f : (y : A) → (x ＝ y) → B y` is `𝒫`-structured.
 2. The identity types of `Σ A B` are `𝒫`-structured.
 
 ```agda
@@ -52,9 +54,8 @@ module _
   where
 
   forward-implication-fundamental-theorem-unbased-id-structure :
-    ( (x : A) (f : (y : A) → (x ＝ y) → B y)
-      (y : A) (b : B y) → 𝒫 (fiber (f y) b)) →
-    (p q : Σ A B) → 𝒫 (p ＝ q)
+    ( (x : A) (f : (y : A) → (x ＝ y) → B y) (y : A) → structure-map 𝒫 (f y)) →
+    structure-equality 𝒫 (Σ A B)
   forward-implication-fundamental-theorem-unbased-id-structure
     K (x , b) (x' , b') =
     tr-𝒫
@@ -62,18 +63,16 @@ module _
       ( K x (ind-Id x (λ u _ → B u) b) x' b')
 
   backward-implication-fundamental-theorem-unbased-id-structure :
-    ( (p q : Σ A B) → 𝒫 (p ＝ q)) →
-    ( (x : A) (f : (y : A) → (x ＝ y) → B y)
-      (y : A) (b : B y) → 𝒫 (fiber (f y) b))
+    structure-equality 𝒫 (Σ A B) →
+    ( (x : A) (f : (y : A) → (x ＝ y) → B y) (y : A) → structure-map 𝒫 (f y))
   backward-implication-fundamental-theorem-unbased-id-structure K x f y b =
     tr-𝒫
       ( inv-compute-fiber-map-out-of-identity-type f y b)
       ( K (x , f x refl) (y , b))
 
   fundamental-theorem-unbased-id-structure :
-    ( (x : A) (f : (y : A) → (x ＝ y) → B y)
-      (y : A) (b : B y) → 𝒫 (fiber (f y) b)) ↔
-    ( (p q : Σ A B) → 𝒫 (p ＝ q))
+    ( (x : A) (f : (y : A) → (x ＝ y) → B y) (y : A) → structure-map 𝒫 (f y)) ↔
+    ( structure-equality 𝒫 (Σ A B))
   fundamental-theorem-unbased-id-structure =
     ( forward-implication-fundamental-theorem-unbased-id-structure ,
       backward-implication-fundamental-theorem-unbased-id-structure)

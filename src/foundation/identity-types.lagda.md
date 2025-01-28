@@ -385,40 +385,12 @@ Given a map `f : (x y : A) → (x ＝ y) → B x y`, we show that
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → A → UU l2}
-  (f : (x y : A) → x ＝ y → B x y) (x y : A) (b : B x y)
+  (f : (x y : A) → x ＝ y → B x y)
   where
 
-  map-compute-fiber-unbased-map-out-of-identity-type :
-    fiber (f x y) b → (x , f x x refl) ＝ (y , b)
-  map-compute-fiber-unbased-map-out-of-identity-type (refl , refl) = refl
-
-  map-inv-compute-fiber-unbased-map-out-of-identity-type :
-    (x , f x x refl) ＝ (y , b) → fiber (f x y) b
-  map-inv-compute-fiber-unbased-map-out-of-identity-type refl = (refl , refl)
-
-  is-section-map-inv-compute-fiber-unbased-map-out-of-identity-type :
-    map-compute-fiber-unbased-map-out-of-identity-type ∘
-    map-inv-compute-fiber-unbased-map-out-of-identity-type ~ id
-  is-section-map-inv-compute-fiber-unbased-map-out-of-identity-type refl = refl
-
-  is-retraction-map-inv-compute-fiber-unbased-map-out-of-identity-type :
-    map-inv-compute-fiber-unbased-map-out-of-identity-type ∘
-    map-compute-fiber-unbased-map-out-of-identity-type ~ id
-  is-retraction-map-inv-compute-fiber-unbased-map-out-of-identity-type
-    ( refl , refl) =
-    refl
-
-  is-equiv-map-compute-fiber-unbased-map-out-of-identity-type :
-    is-equiv map-compute-fiber-unbased-map-out-of-identity-type
-  is-equiv-map-compute-fiber-unbased-map-out-of-identity-type =
-    is-equiv-is-invertible
-      map-inv-compute-fiber-unbased-map-out-of-identity-type
-      is-section-map-inv-compute-fiber-unbased-map-out-of-identity-type
-      is-retraction-map-inv-compute-fiber-unbased-map-out-of-identity-type
-
   compute-fiber-unbased-map-out-of-identity-type :
+    (x y : A) (b : B x y) →
     fiber (f x y) b ≃ ((x , f x x refl) ＝ (y , b))
-  compute-fiber-unbased-map-out-of-identity-type =
-    ( map-compute-fiber-unbased-map-out-of-identity-type ,
-      is-equiv-map-compute-fiber-unbased-map-out-of-identity-type)
+  compute-fiber-unbased-map-out-of-identity-type x =
+    compute-fiber-map-out-of-identity-type (f x)
 ```
