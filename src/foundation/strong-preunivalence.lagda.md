@@ -38,23 +38,23 @@ other universe `𝒱`, the [smallness predicate](foundation-core.small-types.md)
 
 The strong preunivalence axiom is a strengthening of
 [the preunivalence axiom](foundation.preunivalence.md) in the following way. If
-we restrict to `𝒱 ≐ 𝒰`, the
-[fundamental theorem of identity types for subuniverses](foundation.fundamental-theorem-of-identity-types-subuniverses.md)
-says that `Σ (Y : 𝒰), (X ≃ Y)` is a set if and only if _every_ binary family of
-maps
+we restrict to `𝒱 ≐ 𝒰`,
+[subuniverse equality duality](foundation.structured-equality-duality.md) says
+that `Σ (Y : 𝒰), (X ≃ Y)` is a set if and only if every binary family of maps
 
 ```text
-  (X Y : 𝒰) → (X ＝ Y) → (X ≃ Y)
+  (Z Y : 𝒰) → (Z ＝ Y) → (X ≃ Y)
 ```
 
-is a family of [embeddings](foundation-core.embeddings.md). The preunivalence
-axiom asserts that the particular binary family of maps defined by identity
-induction as `refl ↦ id-equiv` is an embedding.
+is a binary family of [embeddings](foundation-core.embeddings.md). The
+preunivalence axiom asserts that the particular family of maps
+`(Y : 𝒰) → (X ＝ Y) → (X ≃ Y)` defined by identity induction as
+`refl ↦ id-equiv` is a family of embeddings.
 
 While the strong preunivalence axiom is a strengthening of the preunivalence
 axiom, it is still common generalization of the
 [univalence axiom](foundation.univalence.md) and
-[axiom K](foundation-core.sets.md). If we assume the univalence axiom then
+[axiom K](foundation-core.sets.md): if we assume the univalence axiom then
 `is-small` is a proposition, and if we assume axiom K then every type is a set.
 
 ## Definitions

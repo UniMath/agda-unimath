@@ -131,10 +131,10 @@ module _
 
 ### The unbased extended fundamental theorem of identity types
 
-We can give a similar characterization for a binary family of types
-`B : A → A → 𝒰` over a not necessarily pointed or inhabited type `A` whose
-elements are all merely equal. In other words, `A` is any π₀-trivial type. The
-characterization asserts that the following are equivalent:
+We give a similar characterization for a binary family of types `B : A → A → 𝒰`
+over a not necessarily pointed or inhabited type `A` whose elements are all
+merely equal. In other words, `A` is any π₀-trivial type. The characterization
+asserts that the following are equivalent:
 
 1. For every `x : A` and every family of maps out of the identity types
    `f : (y : A) → (x ＝ y) → B x y`, then for every `y : A` the `f y` is a

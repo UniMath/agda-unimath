@@ -145,14 +145,15 @@ Since the codomain of this injection is contractible, the claim follows. The
 above injection is constructed as the following composite injection
 
 ```text
-  Σ (x : A), Id x ＝ Id a
+  Σ (x : A), Id a ＝ Id x
+  ≃ Σ (x : A), Id x ＝ Id a
   ≃ Σ (x : A), ((y : A) → (x ＝ y) ＝ (a ＝ y))
   ↣ Σ (x : A), ((y : A) → (x ＝ y) ≃ (a ＝ y))
-  ↪ Σ (x : A), ((y : A) → (x ＝ y) → (a ＝ y))
+  ≃ Σ (x : A), ((y : A) → (x ＝ y) → (a ＝ y))
   ≃ Σ (x : A), a ＝ x.
 ```
 
-In this composite, the injectivity of `equiv-eq` is used in the second step.
+In this composite, the injectivity of `equiv-eq` is used in the third step.
 
 ```agda
 module _
@@ -160,22 +161,21 @@ module _
   (L : (a x y : A) → is-injective (equiv-eq {A = Id x y} {B = Id a y}))
   where
 
+  injection-Id-is-injective-equiv-eq-Id :
+    (a x : A) → injection (Id a ＝ Id x) (a ＝ x)
+  injection-Id-is-injective-equiv-eq-Id a x =
+    comp-injection
+      ( injection-equiv
+        ( ( equiv-ev-refl x) ∘e
+          ( equiv-fam-map-fam-equiv-is-torsorial x (is-torsorial-Id a))))
+      ( comp-injection
+        ( injection-Π (λ y → _ , L a x y))
+        ( injection-equiv (equiv-funext ∘e equiv-inv (Id a) (Id x))))
+
   injection-fiber-Id-is-injective-equiv-eq-Id :
     (a : A) → injection (fiber' Id (Id a)) (Σ A (Id a))
   injection-fiber-Id-is-injective-equiv-eq-Id a =
-    comp-injection
-      ( comp-injection
-        ( injection-equiv
-          ( equiv-tot
-            ( λ x →
-              ( equiv-ev-refl x) ∘e
-              ( equiv-fam-map-fam-equiv-is-torsorial x (is-torsorial-Id a)))))
-        ( injection-tot
-          ( λ x →
-            comp-injection
-              ( injection-Π (λ y → _ , L a x y))
-              ( injection-equiv equiv-funext))))
-      ( injection-equiv (inv-equiv (equiv-fiber Id (Id a))))
+    injection-tot (injection-Id-is-injective-equiv-eq-Id a)
 
   is-emb-Id-is-injective-equiv-eq-Id : is-emb (Id {A = A})
   is-emb-Id-is-injective-equiv-eq-Id a =
@@ -206,21 +206,19 @@ module _
   (L : (a x y : A) → instance-preunivalence (Id x y) (Id a y))
   where
 
+  emb-Id-is-injective-equiv-eq-Id : (a x : A) → (Id a ＝ Id x) ↪ (a ＝ x)
+  emb-Id-is-injective-equiv-eq-Id a x =
+    comp-emb
+      ( emb-equiv
+        ( ( equiv-ev-refl x) ∘e
+          ( equiv-fam-map-fam-equiv-is-torsorial x (is-torsorial-Id a))))
+      ( comp-emb
+        ( emb-Π (λ y → _ , L a x y))
+        ( emb-equiv (equiv-funext ∘e equiv-inv (Id a) (Id x))))
+
   emb-fiber-Id-preunivalent-Id : (a : A) → fiber' Id (Id a) ↪ Σ A (Id a)
   emb-fiber-Id-preunivalent-Id a =
-    comp-emb
-      ( comp-emb
-        ( emb-equiv
-          ( equiv-tot
-            ( λ x →
-              ( equiv-ev-refl x) ∘e
-              ( equiv-fam-map-fam-equiv-is-torsorial x (is-torsorial-Id a)))))
-        ( emb-tot
-          ( λ x →
-            comp-emb
-              ( emb-Π (λ y → _ , L a x y))
-              ( emb-equiv equiv-funext))))
-      ( emb-equiv (inv-equiv (equiv-fiber Id (Id a))))
+    emb-tot (emb-Id-is-injective-equiv-eq-Id a)
 
   is-emb-Id-preunivalent-Id : is-emb (Id {A = A})
   is-emb-Id-preunivalent-Id =
@@ -295,15 +293,12 @@ module _
 
   abstract
     is-torsorial-pointed-fam-equiv-is-torsorial :
-      is-torsorial
-        ( λ (e : (x : A) → (a ＝ x) ≃ B x) →
-          map-equiv (e a) refl ＝ b)
+      is-torsorial (λ (e : (x : A) → (a ＝ x) ≃ B x) → map-equiv (e a) refl ＝ b)
     is-torsorial-pointed-fam-equiv-is-torsorial =
       is-contr-equiv'
-        ( fiber (ev-refl a {B = λ x _ → B x}) b)
+        ( fiber (ev-refl a) b)
         ( equiv-Σ _
-          ( inv-equiv
-            ( equiv-fam-map-fam-equiv-is-torsorial a is-torsorial-B))
+          ( inv-equiv (equiv-fam-map-fam-equiv-is-torsorial a is-torsorial-B))
           ( λ h →
             equiv-inv-concat
               ( inv
@@ -313,9 +308,7 @@ module _
                     ( equiv-fam-map-fam-equiv-is-torsorial a is-torsorial-B)
                     ( h))))
               ( b)))
-        ( is-contr-map-is-equiv
-          ( is-equiv-ev-refl a)
-          ( b))
+        ( is-contr-map-is-equiv (is-equiv-ev-refl a) b)
 ```
 
 ## See also
