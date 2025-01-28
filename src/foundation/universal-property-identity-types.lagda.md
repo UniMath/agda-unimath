@@ -17,6 +17,7 @@ open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.preunivalence
 open import foundation.univalence
 open import foundation.universe-levels
@@ -28,7 +29,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
@@ -38,9 +38,9 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-The **universal property of identity types** characterizes families of maps out
-of the [identity type](foundation-core.identity-types.md). This universal
-property is also known as the **type theoretic Yoneda lemma**.
+The {{#concept "universal property of identity types"}} characterizes families
+of maps out of the [identity type](foundation-core.identity-types.md). This
+universal property is also known as the **type theoretic Yoneda lemma**.
 
 ## Theorem
 
@@ -113,40 +113,92 @@ module _
 
 ### `Id : A → (A → 𝒰)` is an embedding
 
-We first show that [the preunivalence axiom](foundation.preunivalence.md)
-implies that the map `Id : A → (A → 𝒰)` is an
+We first show that [injectivity](foundation-core.injective-maps.md) of the map
+
+```text
+  equiv-eq : {X Y : 𝓤} → (X ＝ Y) → (X ≃ Y)
+```
+
+for the identity types of `A` implies that the map `Id : A → (A → 𝒰)` is an
 [embedding](foundation.embeddings.md). Since the
-[univalence axiom](foundation.univalence.md) implies preunivalence, it follows
-that `Id : A → (A → 𝒰)` is an embedding under the postulates of agda-unimath.
+[univalence axiom](foundation.univalence.md) implies
+[the preunivalence axiom](foundation.preunivalence.md) implies injectivity of
+`equiv-eq`, it follows that `Id : A → (A → 𝒰)` is an embedding under the
+postulates of agda-unimath.
 
-#### Preunivalence implies that `Id : A → (A → 𝒰)` is an embedding
+#### Injectivity of `equiv-eq` implies `Id : A → (A → 𝒰)` is an embedding
 
-The proof that preunivalence implies that `Id : A → (A → 𝒰)` is an embedding
-proceeds via the
+The proof that injectivity of `equiv-eq` implies that `Id : A → (A → 𝒰)` is an
+embedding proceeds via the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
 by showing that the [fiber](foundation.fibers-of-maps.md) of `Id` at `Id a` is
 [contractible](foundation.contractible-types.md) for each `a : A`. To see this,
 we first note that this fiber has an element `(a , refl)`. Therefore it suffices
 to show that this fiber is a proposition. We do this by constructing an
-embedding
+injection
 
 ```text
-  fiber Id (Id a) ↪ Σ A (Id a).
+  fiber Id (Id a) ↣ Σ A (Id a).
 ```
 
-Since the codomain of this embedding is contractible, the claim follows. The
-above embedding is constructed as the composite of the following embeddings
+Since the codomain of this injection is contractible, the claim follows. The
+above injection is constructed as the following composite injection
 
 ```text
   Σ (x : A), Id x ＝ Id a
-    ↪ Σ (x : A), (y : A) → (x ＝ y) ＝ (a ＝ y)
-    ↪ Σ (x : A), (y : A) → (x ＝ y) ≃ (a ＝ y)
-    ↪ Σ (x : A), Σ (e : (y : A) → (x ＝ y) → (a ＝ y)), (y : A) → is-equiv (e y)
-    ↪ Σ (x : A), (y : A) → (x ＝ y) → (a ＝ y)
-    ↪ Σ (x : A), a ＝ x.
+  ≃ Σ (x : A), ((y : A) → (x ＝ y) ＝ (a ＝ y))
+  ↣ Σ (x : A), ((y : A) → (x ＝ y) ≃ (a ＝ y))
+  ↪ Σ (x : A), ((y : A) → (x ＝ y) → (a ＝ y))
+  ≃ Σ (x : A), a ＝ x.
 ```
 
-In this composite, we used preunivalence at the second step.
+In this composite, the injectivity of `equiv-eq` is used in the second step.
+
+```agda
+module _
+  {l : Level} (A : UU l)
+  (L : (a x y : A) → is-injective (equiv-eq {A = Id x y} {B = Id a y}))
+  where
+
+  injection-fiber-Id-is-injective-equiv-eq-Id :
+    (a : A) → injection (fiber' Id (Id a)) (Σ A (Id a))
+  injection-fiber-Id-is-injective-equiv-eq-Id a =
+    comp-injection
+      ( comp-injection
+        ( injection-equiv
+          ( equiv-tot
+            ( λ x →
+              ( equiv-ev-refl x) ∘e
+              ( equiv-fam-map-fam-equiv-is-torsorial x (is-torsorial-Id a)))))
+        ( injection-tot
+          ( λ x →
+            comp-injection
+              ( injection-Π (λ y → _ , L a x y))
+              ( injection-equiv equiv-funext))))
+      ( injection-equiv (inv-equiv (equiv-fiber Id (Id a))))
+
+  is-emb-Id-is-injective-equiv-eq-Id : is-emb (Id {A = A})
+  is-emb-Id-is-injective-equiv-eq-Id a =
+    fundamental-theorem-id
+      ( ( a , refl) ,
+        ( λ _ →
+          pr2
+            ( injection-fiber-Id-is-injective-equiv-eq-Id a)
+            ( eq-is-contr (is-torsorial-Id a))))
+      ( λ _ → ap Id)
+```
+
+#### Preunivalence implies that `Id : A → (A → 𝒰)` is an embedding
+
+Assuming preunivalence, then in particular `equiv-eq` is injective and so the
+previous argument applies. However, in this case we do get a slightly stronger
+result, since now the fiber inclusion
+
+```text
+  fiber Id (Id a) → Σ A (Id a)
+```
+
+is a proper embedding.
 
 ```agda
 module _
@@ -154,8 +206,7 @@ module _
   (L : (a x y : A) → instance-preunivalence (Id x y) (Id a y))
   where
 
-  emb-fiber-Id-preunivalent-Id :
-    (a : A) → fiber' Id (Id a) ↪ Σ A (Id a)
+  emb-fiber-Id-preunivalent-Id : (a : A) → fiber' Id (Id a) ↪ Σ A (Id a)
   emb-fiber-Id-preunivalent-Id a =
     comp-emb
       ( comp-emb
@@ -172,14 +223,9 @@ module _
       ( emb-equiv (inv-equiv (equiv-fiber Id (Id a))))
 
   is-emb-Id-preunivalent-Id : is-emb (Id {A = A})
-  is-emb-Id-preunivalent-Id a =
-    fundamental-theorem-id
-      ( ( a , refl) ,
-        ( λ _ →
-          is-injective-emb
-            ( emb-fiber-Id-preunivalent-Id a)
-            ( eq-is-contr (is-torsorial-Id a))))
-      ( λ _ → ap Id)
+  is-emb-Id-preunivalent-Id =
+    is-emb-Id-is-injective-equiv-eq-Id A
+      ( λ a x y → is-injective-is-emb (L a x y))
 
 module _
   (L : preunivalence-axiom) {l : Level} (A : UU l)
@@ -187,7 +233,8 @@ module _
 
   is-emb-Id-preunivalence-axiom : is-emb (Id {A = A})
   is-emb-Id-preunivalence-axiom =
-    is-emb-Id-preunivalent-Id A (λ a x y → L (Id x y) (Id a y))
+    is-emb-Id-is-injective-equiv-eq-Id A
+      ( λ a x y → is-injective-is-emb (L (Id x y) (Id a y)))
 ```
 
 #### `Id : A → (A → 𝒰)` is an embedding

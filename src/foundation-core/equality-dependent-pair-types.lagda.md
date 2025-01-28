@@ -168,6 +168,17 @@ module _
   ap-pr1-eq-pair-Σ refl refl = refl
 ```
 
+### Transporting in `B` along the first projection of an identification in `Σ A B`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  tr-eq-Σ : {x y : Σ A B} (p : x ＝ y) → tr B (ap pr1 p) (pr2 x) ＝ pr2 y
+  tr-eq-Σ refl = refl
+```
+
 ## See also
 
 - Equality proofs in cartesian product types are characterized in
