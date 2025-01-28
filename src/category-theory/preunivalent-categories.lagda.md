@@ -52,8 +52,8 @@ however, that our definition of preunivalence here is a
 
 ### The predicate on precategories of being a preunivalent category
 
-We define preunivalence of a category `𝒞` to be the condition that every type of
-the form `Σ (x : 𝒞₀), (x ≅ y)` is a set.
+We define preunivalence of a precategory `𝒞` to be the condition that for every
+`x : 𝒞₀`, the type `Σ (y : 𝒞₀), (x ≅ y)` is a set.
 
 ```agda
 module _
