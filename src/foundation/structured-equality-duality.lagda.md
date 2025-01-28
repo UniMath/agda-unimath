@@ -29,10 +29,14 @@ type family `B : A → 𝒰` there is a
 [mutual correspondence](foundation.logical-equivalences.md) between the
 following:
 
-1. `𝒫`-structured binary families of maps `f : (y : A) → (x ＝ y) → B y`.
+1. `𝒫`-structured families of maps `f : (y : A) → (x ＝ y) → B y` for every
+   `x : A`.
 2. `𝒫`-structures on the equality of `Σ A B`.
 
-Note that, by [univalence axiom](foundation.univalence.md), every structure
+We refer to this as
+{{#concept "structured equality duality" Agda=structured-equality-duality}}.
+
+**Note.** by [univalence axiom](foundation.univalence.md), every structure
 [transfers along equivalences](foundation.transport-along-equivalences.md).
 However, we maintain this as an assumption, since for most common notions of
 structure this property is independent of the univalence axiom.
@@ -87,31 +91,28 @@ module _
   {A : UU l1} {B : A → UU l2}
   where
 
-  abstract
-    forward-implication-subuniverse-equality-duality :
-      ( (x : A) (f : (y : A) → (x ＝ y) → B y)
-        (y : A) → is-in-subuniverse-map 𝒫 (f y)) →
-      is-separated 𝒫 (Σ A B)
-    forward-implication-subuniverse-equality-duality =
-      forward-implication-structured-equality-duality
-        ( is-in-subuniverse-equiv 𝒫)
+  forward-implication-subuniverse-equality-duality :
+    ( (x : A) (f : (y : A) → (x ＝ y) → B y)
+      (y : A) → is-in-subuniverse-map 𝒫 (f y)) →
+    is-separated 𝒫 (Σ A B)
+  forward-implication-subuniverse-equality-duality =
+    forward-implication-structured-equality-duality
+      ( is-in-subuniverse-equiv 𝒫)
 
-  abstract
-    backward-implication-subuniverse-equality-duality :
-      is-separated 𝒫 (Σ A B) →
-      ( (x : A) (f : (y : A) → (x ＝ y) → B y)
-        (y : A) → is-in-subuniverse-map 𝒫 (f y))
-    backward-implication-subuniverse-equality-duality =
-      backward-implication-structured-equality-duality
-        ( is-in-subuniverse-equiv 𝒫)
+  backward-implication-subuniverse-equality-duality :
+    is-separated 𝒫 (Σ A B) →
+    ( (x : A) (f : (y : A) → (x ＝ y) → B y)
+      (y : A) → is-in-subuniverse-map 𝒫 (f y))
+  backward-implication-subuniverse-equality-duality =
+    backward-implication-structured-equality-duality
+      ( is-in-subuniverse-equiv 𝒫)
 
-  abstract
-    subuniverse-equality-duality :
-      ( (x : A) (f : (y : A) → (x ＝ y) → B y)
-        (y : A) → is-in-subuniverse-map 𝒫 (f y)) ↔
-      is-separated 𝒫 (Σ A B)
-    subuniverse-equality-duality =
-      structured-equality-duality (is-in-subuniverse-equiv 𝒫)
+  subuniverse-equality-duality :
+    ( (x : A) (f : (y : A) → (x ＝ y) → B y)
+      (y : A) → is-in-subuniverse-map 𝒫 (f y)) ↔
+    is-separated 𝒫 (Σ A B)
+  subuniverse-equality-duality =
+    structured-equality-duality (is-in-subuniverse-equiv 𝒫)
 ```
 
 ## See also
