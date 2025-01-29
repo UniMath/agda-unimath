@@ -49,10 +49,11 @@ preunivalence axiom asserts that the particular family of maps
 `refl ↦ id-equiv` is a family of embeddings.
 
 While the strong preunivalence axiom is a strengthening of the preunivalence
-axiom, it is still common generalization of the
+axiom, it is still a common generalization of the
 [univalence axiom](foundation.univalence.md) and
 [axiom K](foundation-core.sets.md): if we assume the univalence axiom then
-`is-small` is a proposition, and if we assume axiom K then every type is a set.
+`is-small 𝒱 X` is a proposition, and if we assume axiom K then every type is a
+set.
 
 ## Definitions
 
@@ -95,8 +96,8 @@ preunivalence-axiom-strong-preunivalence-axiom L X =
 
 ### The strong preunivalence axiom generalizes axiom K
 
-To show that preunivalence generalizes axiom K, we assume axiom K for the types
-in question and for the universe itself.
+To show that preunivalence generalizes axiom K, we assume axiom K for types of
+equivalences and for the universe itself.
 
 ```agda
 instance-strong-preunivalence-instance-axiom-K :

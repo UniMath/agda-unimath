@@ -36,12 +36,14 @@ following:
 We refer to this as
 {{#concept "structured equality duality" Agda=structured-equality-duality}}.
 
-**Note.** by [univalence axiom](foundation.univalence.md), every structure
+**Note.** by [the univalence axiom](foundation.univalence.md), every structure
 [transfers along equivalences](foundation.transport-along-equivalences.md).
 However, we maintain this as an assumption, since for most common notions of
 structure this property is independent of the univalence axiom.
 
-## Construction
+## Duality
+
+### Structured equality duality
 
 ```agda
 module _
@@ -75,11 +77,10 @@ module _
       backward-implication-structured-equality-duality)
 ```
 
-## Corollaries
-
 ### Subuniverse equality duality
 
-Given a subuniverse `𝒫` then the following are logically equivalent:
+Given a [subuniverse](foundation.subuniverses.m) `𝒫` then the following are
+logically equivalent:
 
 1. For every `x : A`, every family of maps `f : (y : A) → (x ＝ y) → B y` is a
    family of `𝒫`-maps.
