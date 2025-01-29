@@ -49,7 +49,7 @@ module _
   upper-cut-neg-ℝ : subtype l ℚ
   upper-cut-neg-ℝ q = lower-cut-ℝ x (neg-ℚ q)
 
-  inhabited-lower-cut-neg-ℝ : exists ℚ lower-cut-neg-ℝ
+  is-inhabited-lower-cut-neg-ℝ : exists ℚ lower-cut-neg-ℝ
   inhabited-lower-cut-neg-ℝ =
     elim-exists
       (∃ ℚ lower-cut-neg-ℝ)
@@ -59,8 +59,8 @@ module _
           (tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ q)) q-in-upper))
       (is-inhabited-upper-cut-ℝ x)
 
-  inhabited-upper-cut-neg-ℝ : exists ℚ upper-cut-neg-ℝ
-  inhabited-upper-cut-neg-ℝ =
+  is-inhabited-upper-cut-neg-ℝ : exists ℚ upper-cut-neg-ℝ
+  is-inhabited-upper-cut-neg-ℝ =
     elim-exists
       (∃ ℚ upper-cut-neg-ℝ)
       (λ q q-in-lower →
@@ -137,7 +137,7 @@ module _
     real-dedekind-cut
       lower-cut-neg-ℝ
       upper-cut-neg-ℝ
-      ((inhabited-lower-cut-neg-ℝ , inhabited-upper-cut-neg-ℝ) ,
+      ((is-inhabited-lower-cut-neg-ℝ , is-inhabited-upper-cut-neg-ℝ) ,
         (is-rounded-lower-cut-neg-ℝ , is-rounded-upper-cut-neg-ℝ) ,
           is-disjoint-cut-neg-ℝ , is-located-lower-upper-cut-neg-ℝ)
 
