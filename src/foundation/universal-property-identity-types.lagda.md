@@ -38,7 +38,7 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-The {{#concept "universal property of identity types" Agda=equiv-eq-refl}}
+The {{#concept "universal property of identity types" Agda=equiv-ev-refl}}
 characterizes families of maps out of the
 [identity type](foundation-core.identity-types.md). This universal property is
 also known as the **type theoretic Yoneda lemma**.
