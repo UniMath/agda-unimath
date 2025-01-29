@@ -24,8 +24,14 @@ open import foundation-core.equivalences
 ## Idea
 
 Given a [structure](foundation.structure.md) `𝒫` on types that transfers along
-[equivalences](foundation-core.equivalences.md), then for every type `A` and
-type family `B : A → 𝒰` there is a
+[equivalences](foundation-core.equivalences.md) in the sense that `𝒫` comes
+equipped with a family of maps
+
+```text
+  {X Y : 𝒰} → (X ≃ Y) → 𝒫 X → 𝒫 Y,
+```
+
+then for every type `A` and type family `B : A → 𝒰` there is a
 [mutual correspondence](foundation.logical-equivalences.md) between the
 following:
 
@@ -79,7 +85,7 @@ module _
 
 ### Subuniverse equality duality
 
-Given a [subuniverse](foundation.subuniverses.m) `𝒫` then the following are
+Given a [subuniverse](foundation.subuniverses.md) `𝒫` then the following are
 logically equivalent:
 
 1. For every `x : A`, every family of maps `f : (y : A) → (x ＝ y) → B y` is a
