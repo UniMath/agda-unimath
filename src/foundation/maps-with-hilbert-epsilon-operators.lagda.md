@@ -17,21 +17,24 @@ open import foundation-core.fibers-of-maps
 
 ## Idea
 
-We consider maps `f : A → B` [equippes](foundation.structure.md) with
+We consider maps `f : A → B` [equipped](foundation.structure.md) with
 [Hilbert ε-operators](foundation.hilberts-epsilon-operators.md) on its
 [fibers](foundation-core.fibers-of-maps.md). I.e., for every `y : B` there is an
 operator
 
 ```text
-  ε_y : ║ fiber f y ║₋₁ → fiber f y
+  ε_y : ║ fiber f y ║₋₁ → fiber f y.
 ```
+
+Some authors also refer to this as _split support_ {{#cite KECA17}}. Contrary to
+Hilbert, we do not assume that such an operator exists for every map.
 
 ## Definitions
 
-### The structure of an Hilbert ε-operator on a map
+### The structure of a Hilbert ε-operator on a map
 
 ```agda
-ε-operator-map-Hilbert :
+ε-operator-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-ε-operator-map-Hilbert {B = B} f = (y : B) → ε-operator-Hilbert (fiber f y)
+ε-operator-map {B = B} f = (y : B) → ε-operator-Hilbert (fiber f y)
 ```
