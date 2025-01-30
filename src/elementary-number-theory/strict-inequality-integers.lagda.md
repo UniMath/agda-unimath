@@ -19,8 +19,10 @@ open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.nonpositive-integers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -267,4 +269,24 @@ module _
           ( zero-ℤ)
           ( le-zero-is-negative-ℤ y H)
           ( I))
+```
+
+### Converting a natural number to an integer preserves strict inequality
+
+```agda
+le-natural-le-ℤ : (m n : ℕ) → le-ℕ m n → le-ℤ (int-ℕ m) (int-ℕ n)
+le-natural-le-ℤ zero-ℕ (succ-ℕ n) star =
+  le-zero-is-positive-ℤ
+    (int-ℕ (succ-ℕ n))
+    (is-positive-int-is-nonzero-ℕ (succ-ℕ n) λ ())
+le-natural-le-ℤ (succ-ℕ m) (succ-ℕ n) m<n =
+  binary-tr
+    le-ℤ
+    (succ-int-ℕ m)
+    (succ-int-ℕ n)
+    (preserves-le-right-add-ℤ
+      one-ℤ
+      (int-ℕ m)
+      (int-ℕ n)
+      (le-natural-le-ℤ m n m<n))
 ```
