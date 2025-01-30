@@ -14,21 +14,20 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.discrete-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.discrete-types
-open import foundation.tight-apartness-relations
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.tight-apartness-relations
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
-open import foundation-core.discrete-types
 open import foundation-core.torsorial-type-families
 ```
 
