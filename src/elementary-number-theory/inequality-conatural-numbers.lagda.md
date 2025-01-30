@@ -35,10 +35,10 @@ open import order-theory.preorders
 
 ## Idea
 
-The {{#concept "inequality relation"}} `≤` on the
+The {{#concept "inequality relation" Agda=_≤-ℕ∞_}} `≤` on the
 [conatural numbers](elementary-number-theory.conatural-numbers.md) is the unique
 relation such that `0` is less than any conatural number, and such that
-`m+1 ≤ n+1` is equivalent to `m ≤ n`.
+`m+1 ≤ n+1` is [equivalent](foundation-core.equivalences.md) to `m ≤ n`.
 
 ## Definitions
 

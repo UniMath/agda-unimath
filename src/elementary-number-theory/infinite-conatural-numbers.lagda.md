@@ -74,22 +74,3 @@ is-infinite-successor-condition-infinity-ℕ∞ :
 is-infinite-successor-condition-infinity-ℕ∞ =
   is-infinite-successor-condition-is-infinite-ℕ∞ is-infinite-infinity-ℕ∞
 ```
-
-### The point at infinity is unique
-
-```text
-eq-infinity-is-infinite-successor-condition-ℕ∞' :
-  (x : ℕ∞) →
-  is-infinite-successor-condition-ℕ∞ x →
-  x ＝ infinity-ℕ∞
-eq-infinity-is-infinite-successor-condition-ℕ∞' x p = {!  !}
-```
-
-```text
-eq-is-infinite-successor-condition-ℕ∞ :
-  (x y : ℕ∞) →
-  is-infinite-successor-condition-ℕ∞ x →
-  is-infinite-successor-condition-ℕ∞ y →
-  x ＝ y
-eq-is-infinite-successor-condition-ℕ∞ x y p q = {!   !}
-```
