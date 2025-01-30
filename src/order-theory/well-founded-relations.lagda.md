@@ -36,7 +36,7 @@ for all elements `y ∈ x`. More precisely, the **well-founded induction
 principle** is a function
 
 ```text
-  (x : X) → ((y : Y) → (y ∈ x) → P y) → P x.
+  (x : X) → ((y : X) → (y ∈ x) → P y) → P x.
 ```
 
 ## Definitions

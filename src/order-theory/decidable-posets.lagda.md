@@ -28,10 +28,10 @@ open import order-theory.similarity-of-elements-posets
 
 ## Idea
 
-A {{#concept "decidable poset"}} is a [poset](order-theory.posets.md) of which
-the ordering relation is [decidable](foundation.decidable-types.md). It follows
-that decidable posets have
-[decidable equality](foundation.decidable-equality.md).
+A {{#concept "decidable poset" Agda=Decidable-Poset}} is a
+[poset](order-theory.posets.md) of which the ordering relation is
+[decidable](foundation.decidable-types.md). It follows that decidable posets
+have [decidable equality](foundation.decidable-equality.md).
 
 ## Definitions
 

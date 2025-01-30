@@ -253,12 +253,9 @@ is-injective-cons-increasing-binary-sequence-ℕ =
     cons-increasing-binary-sequence-ℕ
     decons-increasing-binary-sequence-ℕ
     is-section-cons-increasing-binary-sequence-ℕ
-
--- is-injective-decons-increasing-binary-sequence-ℕ :
---   is-injective decons-increasing-binary-sequence-ℕ
--- is-injective-decons-increasing-binary-sequence-ℕ {x , H} {y , K} p =
---   eq-Eq-increasing-binary-sequence-ℕ (ind-ℕ {!   !} {!   !})
 ```
+
+> It remains to formalize the full equivalence.
 
 ### The type of increasing binary sequences as a retract of the cantor space
 
