@@ -1,7 +1,7 @@
 # The weak limited principle of omniscience
 
 ```agda
-module logic.weak-limited-principle-of-omniscience where
+module foundation.weak-limited-principle-of-omniscience where
 ```
 
 <details><summary>Imports</summary>
@@ -30,50 +30,23 @@ all `n : ℕ` or it is [not](foundation-core.negation.md). In particular, it is 
 restricted form of the
 [law of excluded middle](foundation.law-of-excluded-middle.md).
 
-## Definitions
-
-### The weak limited principle of omniscience with respect to a universe
-
 ```agda
-prop-level-WLPO : (l : Level) → Prop (lsuc l)
-prop-level-WLPO l =
-  ∀'
-    ( ℕ → Decidable-Prop l)
-    ( λ f → is-decidable-Prop (∀' ℕ (λ n → prop-Decidable-Prop (f n))))
-
-level-WLPO : (l : Level) → UU (lsuc l)
-level-WLPO l = type-Prop (prop-level-WLPO l)
-
-is-prop-level-WLPO : {l : Level} → is-prop (level-WLPO l)
-is-prop-level-WLPO {l} = is-prop-type-Prop (prop-level-WLPO l)
-```
-
-### The weak limited principle of omniscience
-
-```agda
-WLPO : UUω
-WLPO = {l : Level} → level-WLPO l
-```
-
-### The small weak limited principle of omniscience
-
-```agda
-prop-bool-WLPO : Prop lzero
-prop-bool-WLPO =
+prop-WLPO : Prop lzero
+prop-WLPO =
   ∀' (ℕ → bool) (λ f → is-decidable-Prop (∀' ℕ (λ n → is-true-Prop (f n))))
 
-bool-WLPO : UU lzero
-bool-WLPO = type-Prop prop-bool-WLPO
+WLPO : UU lzero
+WLPO = type-Prop prop-WLPO
 
-is-prop-bool-WLPO : is-prop bool-WLPO
-is-prop-bool-WLPO = is-prop-type-Prop prop-bool-WLPO
+is-prop-WLPO : is-prop WLPO
+is-prop-WLPO = is-prop-type-Prop prop-WLPO
 ```
 
 ## See also
 
-- [The principle of omniscience](logic.principle-of-omniscience.md)
-- [The limited principle of omniscience](logic.limited-principle-of-omniscience.md)
-- [The lesser limited principle of omniscience](logic.lesser-limited-principle-of-omniscience.md)
+- [The principle of omniscience](foundation.principle-of-omniscience.md)
+- [The limited principle of omniscience](foundation.limited-principle-of-omniscience.md)
+- [The lesser limited principle of omniscience](foundation.lesser-limited-principle-of-omniscience.md)
 - [Markov's principle](logic.markovs-principle.md)
 
 ## External links

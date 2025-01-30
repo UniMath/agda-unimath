@@ -1,7 +1,7 @@
 # The principle of omniscience
 
 ```agda
-module logic.principle-of-omniscience where
+module foundation.principle-of-omniscience where
 ```
 
 <details><summary>Imports</summary>
@@ -40,7 +40,7 @@ is-omniscient X = type-Prop (is-omniscient-Prop X)
 
 ## See also
 
-- [The limited principle of omniscience](logic.limited-principle-of-omniscience.md)
-- [The lesser limited principle of omniscience](logic.lesser-limited-principle-of-omniscience.md)
-- [The weak limited principle of omniscience](logic.weak-limited-principle-of-omniscience.md)
+- [The limited principle of omniscience](foundation.limited-principle-of-omniscience.md)
+- [The lesser limited principle of omniscience](foundation.lesser-limited-principle-of-omniscience.md)
+- [The weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
 - [Markov's principle](logic.markovs-principle.md)

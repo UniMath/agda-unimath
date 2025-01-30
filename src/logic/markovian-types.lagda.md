@@ -93,7 +93,7 @@ module _
 
 ## See also
 
-- [Markov's principle](logic.markovs-principle.md)
+- [Markov's principle](foundation.markovs-principle.md)
 
 ## External links
 

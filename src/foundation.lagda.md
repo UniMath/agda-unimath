@@ -262,7 +262,9 @@ open import foundation.large-locale-of-propositions public
 open import foundation.large-locale-of-subtypes public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
+open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.lifts-types public
+open import foundation.limited-principle-of-omniscience public
 open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
@@ -329,6 +331,7 @@ open import foundation.precomposition-functions-into-subuniverses public
 open import foundation.precomposition-type-families public
 open import foundation.preunivalence public
 open import foundation.preunivalent-type-families public
+open import foundation.principle-of-omniscience public
 open import foundation.product-decompositions public
 open import foundation.product-decompositions-subuniverse public
 open import foundation.products-binary-relations public
@@ -487,6 +490,7 @@ open import foundation.unordered-tuples-of-types public
 open import foundation.vectors-set-quotients public
 open import foundation.vertical-composition-spans-of-spans public
 open import foundation.weak-function-extensionality public
+open import foundation.weak-limited-principle-of-omniscience public
 open import foundation.weakly-constant-maps public
 open import foundation.whiskering-higher-homotopies-composition public
 open import foundation.whiskering-homotopies-composition public
