@@ -1,7 +1,7 @@
 # Markov's principle
 
 ```agda
-module foundation.markovs-principle where
+module logic.markovs-principle where
 ```
 
 <details><summary>Imports</summary>
