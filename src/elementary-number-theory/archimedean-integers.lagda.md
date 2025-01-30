@@ -60,3 +60,8 @@ archimedean-property-ℤ x y pos-x with decide-sign-ℤ {y}
             Σ ℕ (λ n → is-nonzero-ℕ n × (int-ℕ n ＝ z))
         pos-ℤ-to-ℕ (inr (inr n)) H = succ-ℕ n , (λ ()) , refl
 ```
+
+## External links
+
+- [Archimedean property](https://en.wikipedia.org/wiki/Archimedean_property)
+  at Wikipedia
