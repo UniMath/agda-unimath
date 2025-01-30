@@ -1,4 +1,4 @@
-# Signs of real numbers
+# Negation of real numbers
 
 ```agda
 module real-numbers.negation-real-numbers where
