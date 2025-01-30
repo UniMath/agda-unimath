@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.stuff-over where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-cubes-of-maps
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-identifications
@@ -22,6 +23,7 @@ open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.transposition-identifications-along-equivalences
 open import foundation.universe-levels
+open import foundation.whiskering-higher-homotopies-composition
 open import foundation.whiskering-homotopies-composition
 open import foundation.whiskering-homotopies-concatenation
 ```
@@ -738,14 +740,13 @@ module _
       ( sect-section P (pr1 s))
       ( sect-section Q (pr1 (pr2 s)))
   sect-map-over-section-map-over (sA , sB , H , α) a =
-    preserves-tr (λ a → f' {a}) (σA a) (sA2 a) ∙
-    inv (substitution-law-tr Q f (σA a)) ∙
-    [i] ∙
-    tr-concat (H1 a) (σB (f a)) (f' (sA2 a)) ∙
-    ap
+    ( preserves-tr (λ a → f' {a}) (σA a) (sA2 a)) ∙
+    ( inv (substitution-law-tr Q f (σA a))) ∙
+    ( ap (λ p → tr Q p (f' (sA2 a))) (inv (α a ∙ right-unit))) ∙
+    ( tr-concat (H1 a) (σB (f a)) (f' (sA2 a))) ∙
+    ( ap
       ( tr Q (σB (f a)))
-      ( substitution-law-tr Q pr1 (H a) ∙
-        apd pr2 (H a))
+      ( substitution-law-tr Q pr1 (H a) ∙ apd pr2 (H a)))
     where
       sA1 : A → A
       sA1 = pr1 ∘ map-section pr1 sA
@@ -759,71 +760,73 @@ module _
       σB = is-section-map-section pr1 sB
       H1 : f ∘ sA1 ~ sB1 ∘ f
       H1 = pr1 ·l H
-      [i] :
-        tr Q (ap f (σA a)) (f' (sA2 a)) ＝
-        tr Q (H1 a ∙ σB (f a)) (f' (sA2 a))
-      [i] =
-        ap
-          ( λ p → tr Q p (f' (sA2 a)))
-          ( inv (α a ∙ right-unit))
 ```
 
 ```agda
-open import foundation.commuting-cubes-of-maps
 module _
-  {l1 l2 l3 l4 l1' l2' l3' l4' l1'' l2'' l3'' l4'' : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
-  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
-  {A'' : UU l1''} {B'' : UU l2''} {C'' : UU l3''} {D'' : UU l4''}
-  (f'' : A'' → B'') (g'' : A'' → C'') (h'' : B'' → D'') (k'' : C'' → D'')
-  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (hA' : A'' → A') (hB' : B'' → B') (hC' : C'' → C') (hD' : D'' → D')
-  (mid : (h' ∘ f') ~ (k' ∘ g'))
-  (bottom-back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (bottom-back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (bottom-front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (bottom-front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g))
-  (top : (h'' ∘ f'') ~ (k'' ∘ g''))
-  (top-back-left : (f' ∘ hA') ~ (hB' ∘ f''))
-  (top-back-right : (g' ∘ hA') ~ (hC' ∘ g''))
-  (top-front-left : (h' ∘ hB') ~ (hD' ∘ h''))
-  (top-front-right : (k' ∘ hC') ~ (hD' ∘ k''))
+  {l1 l2 : Level}
+  {A : UU l1} {B : A → UU l2}
+  (s : (a : A) → B a)
   where
 
-  pasting-vertical-coherence-cube-maps :
-    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-      ( mid)
-      ( bottom-back-left)
-      ( bottom-back-right)
-      ( bottom-front-left)
-      ( bottom-front-right)
-      ( bottom) →
-    coherence-cube-maps f' g' h' k' f'' g'' h'' k'' hA' hB' hC' hD'
-      ( top)
-      ( top-back-left)
-      ( top-back-right)
-      ( top-front-left)
-      ( top-front-right)
-      ( mid) →
-    coherence-cube-maps f g h k f'' g'' h'' k''
-      ( hA ∘ hA') (hB ∘ hB') (hC ∘ hC') (hD ∘ hD')
-      ( top)
-      ( pasting-vertical-coherence-square-maps f'' hA' hB' f' hA hB f
-        ( top-back-left) (bottom-back-left))
-      ( pasting-vertical-coherence-square-maps g'' hA' hC' g' hA hC g
-        ( top-back-right) (bottom-back-right))
-      ( pasting-vertical-coherence-square-maps h'' hB' hD' h' hB hD h
-        ( top-front-left) (bottom-front-left))
-      ( pasting-vertical-coherence-square-maps k'' hC' hD' k' hC hD k
-        ( top-front-right) (bottom-front-right))
-      ( bottom)
-  pasting-vertical-coherence-cube-maps α β = {!!}
-```
+  ap-map-section-family-lemma :
+    {a a' : A} (p : a ＝ a') →
+    ap (map-section-family s) p ＝ eq-pair-Σ p (apd s p)
+  ap-map-section-family-lemma refl = refl
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : UU l2} {Q : B → UU l3}
+  (s : (b : B) → Q b)
+  {f g : A → B} (H : f ~ g)
+  where
 
-```agda
+  left-whisker-dependent-function-lemma :
+    (a : A) →
+    (map-section-family s ·l H) a ＝ eq-pair-Σ (H a) (apd s (H a))
+  left-whisker-dependent-function-lemma a = ap-map-section-family-lemma s (H a)
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2}
+  {A' : A → UU l3} {B' : B → UU l4}
+  {f : A → B} (f' : (a : A) → A' a → B' (f a))
+  where
+
+  ap-map-Σ-eq-fiber :
+    {a : A} (x y : A' a) (p : x ＝ y) →
+    ap (map-Σ B' f f') (eq-pair-eq-fiber p) ＝ eq-pair-eq-fiber (ap (f' a) p)
+  ap-map-Σ-eq-fiber x .x refl = refl
+
+  -- ap-map-Σ-eq-fiber' :
+  --   {a : A} (x y : A' a) (p : x ＝ y) →
+  --   ap (map-Σ B' f f') (eq-pair-eq-fiber p) ＝ eq-pair-eq-fiber (ap (f' a) p)
+  -- ap-map-Σ-eq-fiber' {a} x y p =
+  --   compute-ap-eq-pair-Σ (map-Σ B' f f') refl p ∙
+  --   ap-comp (pair (f a)) (f' a) p
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3}
+  {A' : A → UU l4} {B' : B → UU l5} {C' : C → UU l6}
+  {f : A → B} {g : B → C}
+  (f' : (a : A) → A' a → B' (f a))
+  (g' : (b : B) → B' b → C' (g b))
+  (sA : (a : A) → A' a) (sB : (b : B) → B' b) (sC : (c : C) → C' c)
+  (F : (a : A) → f' a (sA a) ＝ sB (f a)) (G : (b : B) → g' b (sB b) ＝ sC (g b))
+  where
+
+  pasting-horizontal-comp :
+    pasting-horizontal-coherence-square-maps f g
+      ( map-section-family sA) (map-section-family sB) (map-section-family sC)
+      ( tot-map-over f f') (tot-map-over g g')
+      ( eq-pair-eq-fiber ∘ F)
+      ( eq-pair-eq-fiber ∘ G) ~
+    eq-pair-eq-fiber ∘
+      ((g' _) ·l F ∙h G ·r f)
+  pasting-horizontal-comp a =
+    ap
+      ( _∙ eq-pair-eq-fiber (G (f a)))
+      ( inv (ap-comp (tot-map-over g g') (pair (f a)) (F a)) ∙
+        ap-comp (pair (g (f a))) (g' (f a)) (F a)) ∙
+    inv (ap-concat (pair (g (f a))) (ap (g' (f a)) (F a)) (G (f a)))
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   {P1 : UU l1} {P2 : UU l2} {P3 : UU l3} {P4 : UU l4}
@@ -852,15 +855,9 @@ module _
       ( map-Σ Q3 g1 g1')
       ( map-Σ Q4 g2 g2')
       ( map-Σ Q4 f2 f2')
-      ( pr1)
-      ( pr1)
-      ( pr1)
-      ( pr1)
+      pr1 pr1 pr1 pr1
       ( tot-square-over)
-      ( refl-htpy)
-      ( refl-htpy)
-      ( refl-htpy)
-      ( refl-htpy)
+      refl-htpy refl-htpy refl-htpy refl-htpy
       ( bottom)
   coh-tot-square-over (p , q) =
     ap-pr1-eq-pair-Σ (bottom p) (top q) ∙ inv right-unit
@@ -911,8 +908,7 @@ module _
                           ( map-section pr1 (pr1 (pr2 sF2)))
                           ( tot-square-over)
                           refl-htpy refl-htpy refl-htpy refl-htpy
-                          ( bottom)
-                          ( bottom)
+                          bottom bottom
                           ( pr1 (pr2 (pr2 sF1)))
                           ( G1)
                           ( G2)
@@ -920,4 +916,62 @@ module _
                           ( coh-tot-square-over)
                           ( α) ~ {!!}
                           )))))
+
+  module _
+    (s1 : (p : P1) → Q1 p) (s2 : (p : P2) → Q2 p)
+    (s3 : (p : P3) → Q3 p) (s4 : (p : P4) → Q4 p)
+    (G1 : (p : P1) → g1' p (s1 p) ＝ s3 (g1 p))
+    (F1 : (p : P1) → f1' p (s1 p) ＝ s2 (f1 p))
+    (F2 : (p : P3) → f2' p (s3 p) ＝ s4 (f2 p))
+    (G2 : (p : P2) → g2' p (s2 p) ＝ s4 (g2 p))
+    where
+    open import foundation.action-on-identifications-binary-functions
+
+    _ :
+      pasting-vertical-coherence-square-maps g1
+        ( map-section-family s1) (map-section-family s3)
+        ( tot-map-over g1 g1') (tot-map-over f1 f1')
+        ( tot-map-over {B' = Q4} f2 f2') (tot-map-over g2 g2')
+        ( eq-pair-eq-fiber ∘ G1)
+        ( coherence-square-maps-Σ Q4 g1' f1' f2' g2' (λ p → top {p})) ~
+      ( λ p → eq-pair-Σ (bottom p) (top (s1 p) ∙ ap (f2' (g1 p)) (G1 p)))
+    _ = λ p → ap (eq-pair-Σ (bottom p) (top (s1 p)) ∙_) ([i] p) ∙
+              {!!}
+        where
+        [i] =
+          λ (p : P1) →
+          inv (ap-comp (map-Σ Q4 f2 f2') (pair (g1 p)) (G1 p)) ∙
+          ap-comp (pair (f2 (g1 p))) (f2' (g1 p)) (G1 p)
+
+    section-cube-over-sect-square-over :
+      section-square-over g1 f1 f2 g2
+        ( g1' _) (f1' _) (f2' _) (g2' _)
+        s1 s2 s3 s4
+        G1 F1 F2 G2
+        bottom top →
+      section-displayed-cube-over
+    pr1 (section-cube-over-sect-square-over α) =
+      ( section-dependent-function s1) ,
+      ( section-dependent-function s2) ,
+      ( λ p → eq-pair-eq-fiber (F1 p)) ,
+      ( λ p → right-unit ∙ ap-pr1-eq-pair-Σ refl (F1 p))
+    pr1 (pr2 (section-cube-over-sect-square-over α)) =
+      ( section-dependent-function s3) ,
+      ( section-dependent-function s4) ,
+      ( λ p → eq-pair-eq-fiber (F2 p)) ,
+      ( λ p → right-unit ∙ ap-pr1-eq-pair-Σ refl (F2 p))
+    pr2 (pr2 (section-cube-over-sect-square-over α)) =
+      ( λ p → eq-pair-eq-fiber (G1 p)) ,
+      ( λ p → eq-pair-eq-fiber (G2 p)) ,
+      ( λ p →
+        ap-binary
+          ( _∙_)
+          ( pasting-horizontal-comp f1' g2' s1 s2 s4 F1 G2 p)
+          ( ap-map-section-family-lemma s4 (bottom p)) ∙
+        {!!} ∙
+        ap-binary
+          ( _∙_)
+          ( refl {x = eq-pair-Σ (bottom p) (top (s1 p))})
+          ( inv (pasting-horizontal-comp g1' f2' s1 s3 s4 G1 F2 p))) ,
+      ( {!!})
 ```
