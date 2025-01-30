@@ -942,11 +942,11 @@ For the inductive step we fill the following diagram as prescribed, in the
 notation of {{#cite Shu17}}:
 
 ```text
-              ξₙ₊₁               I aₙ₊₁             f (αₙ₊₁)⁻¹
-    f a₀ ------------> f (f aₙ₊₁) ---> f aₙ₊₁ --------------------> f (f aₙ₊₂)
-     |                    |                  [nat-htpy]  ___refl___/   |
-  (I⁻¹ a₀)    [Ξₙ]        |       I (f aₙ₊₂)            /         (f ∘ f)(αₙ₊₂)
-     ∨                    ∨         ------>           /                ∨
+              ξₙ₊₁                   I aₙ₊₁
+    f a₀ ------------> f (f aₙ₊₁) -----------> f aₙ₊₁
+     |                    |      [nat-htpy]      |
+  (I⁻¹ a₀)    [Ξₙ]        |       I (f aₙ₊₂)     | f (αₙ₊₁)⁻¹
+     ∨                    ∨         ------>      ∨
   f (f a₀) --------> f (f (f aₙ₊₂))   [J]   f (f aₙ₊₂) ----------> f (f (f aₙ₊₃))
      (f (ξₙ ∙ I aₙ₊₁ ∙ f αₙ₊₁))     ------>           (f ∘ f) (αₙ₊₂)
                                   f (I aₙ₊₂)
