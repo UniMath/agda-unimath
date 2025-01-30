@@ -16,6 +16,8 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.discrete-types
+open import foundation.tight-apartness-relations
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -178,4 +180,12 @@ is-equiv-Eq-eq-ℕ {m} {n} =
 ```agda
 equiv-unit-trunc-ℕ-Set : ℕ ≃ type-trunc-Set ℕ
 equiv-unit-trunc-ℕ-Set = equiv-unit-trunc-Set ℕ-Set
+```
+
+### The natural numbers have a tight apartness relation
+
+```agda
+ℕ-Type-With-Tight-Apartness : Type-With-Tight-Apartness lzero lzero
+ℕ-Type-With-Tight-Apartness =
+  type-with-tight-apartness-Discrete-Type ℕ-Discrete-Type
 ```
