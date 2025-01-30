@@ -73,10 +73,10 @@ markovs-principle-ascending-chains P H q = (0 , λ x → q (ind-ℕ x H))
 
 ## See also
 
-- [The principle of omniscience](foundation.principle-of-omniscience.md)
-- [The limited principle of omniscience](foundation.limited-principle-of-omniscience.md)
-- [The lesser limited principle of omniscience](foundation.lesser-limited-principle-of-omniscience.md)
-- [The weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)
+- [The principle of omniscience](logic.principle-of-omniscience.md)
+- [The limited principle of omniscience](logic.limited-principle-of-omniscience.md)
+- [The lesser limited principle of omniscience](logic.lesser-limited-principle-of-omniscience.md)
+- [The weak limited principle of omniscience](logic.weak-limited-principle-of-omniscience.md)
 
 ## External links
 

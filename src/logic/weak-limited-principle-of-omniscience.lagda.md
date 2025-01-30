@@ -1,7 +1,7 @@
 # The weak limited principle of omniscience
 
 ```agda
-module foundation.weak-limited-principle-of-omniscience where
+module logic.weak-limited-principle-of-omniscience where
 ```
 
 <details><summary>Imports</summary>
@@ -63,9 +63,9 @@ WLPO = {l : Level} → level-WLPO l
 
 ## See also
 
-- [The principle of omniscience](foundation.principle-of-omniscience.md)
-- [The limited principle of omniscience](foundation.limited-principle-of-omniscience.md)
-- [The lesser limited principle of omniscience](foundation.lesser-limited-principle-of-omniscience.md)
+- [The principle of omniscience](logic.principle-of-omniscience.md)
+- [The limited principle of omniscience](logic.limited-principle-of-omniscience.md)
+- [The lesser limited principle of omniscience](logic.lesser-limited-principle-of-omniscience.md)
 - [Markov's principle](logic.markovs-principle.md)
 
 ## External links
