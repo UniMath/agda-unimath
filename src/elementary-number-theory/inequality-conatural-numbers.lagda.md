@@ -46,9 +46,7 @@ relation such that `0` is less than any conatural number, and such that
 
 ```agda
 record leq-ℕ∞ (x y : ℕ∞) : UU lzero
-```
 
-```agda
 leq-Maybe-ℕ∞ : Maybe ℕ∞ → Maybe ℕ∞ → UU lzero
 leq-Maybe-ℕ∞ (inl x) (inl y) = leq-ℕ∞ x y
 leq-Maybe-ℕ∞ (inl x) (inr y) = empty

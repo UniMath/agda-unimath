@@ -56,9 +56,7 @@ definition passes Agda's termination checker.
 
 ```agda
 record Eq-ℕ∞ (x y : ℕ∞) : UU lzero
-```
 
-```agda
 Eq-Maybe-ℕ∞' : Maybe ℕ∞ → Maybe ℕ∞ → UU lzero
 Eq-Maybe-ℕ∞' (inl x) (inl y) = Eq-ℕ∞ x y
 Eq-Maybe-ℕ∞' (inl x) (inr _) = empty
@@ -319,6 +317,8 @@ is-set-ℕ∞ =
 ```
 
 ### The type of conaturals has a tight apartness relation
+
+> Agda's termination checker is unhappy with the following proof.
 
 ```text
 cases-is-cotransitive-Eq-Maybe-ℕ∞ :
