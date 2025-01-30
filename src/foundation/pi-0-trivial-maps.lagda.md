@@ -44,10 +44,11 @@ open import foundation-core.sections
 
 A [map](foundation-core.function-types.md) is said to be
 {{#concept "π₀-trivial" Disambiguation="map of types" Agda=is-π₀-trivial-map'}}
-if its [fibers](foundation-core.fibers-of-maps.md) are π₀-trivial. I.e., that
-their [set of connected components](foundation.connected-components.md) is a
-[proposition](foundation-core.propositions.md). Equivalently, a type is
-π₀-trivial if all its elements are [merely equal](foundation.mere-equality.md).
+if its [fibers](foundation-core.fibers-of-maps.md) are π₀-trivial types. I.e.,
+that their [set of connected components](foundation.connected-components.md) is
+a [proposition](foundation-core.propositions.md). Equivalently, a map is
+π₀-trivial if the elements of its fibers are
+[merely equal](foundation.mere-equality.md).
 
 ## Definitions
 

@@ -106,7 +106,7 @@ module _
 
 ## Properties
 
-### Double negation eliminating maps are closed under homotopy
+### Propositionally double negation eliminating maps are closed under homotopy
 
 ```agda
 abstract
