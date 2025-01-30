@@ -50,7 +50,7 @@ module _
   upper-cut-neg-ℝ q = lower-cut-ℝ x (neg-ℚ q)
 
   is-inhabited-lower-cut-neg-ℝ : exists ℚ lower-cut-neg-ℝ
-  inhabited-lower-cut-neg-ℝ =
+  is-inhabited-lower-cut-neg-ℝ =
     elim-exists
       (∃ ℚ lower-cut-neg-ℝ)
       (λ q q-in-upper →
