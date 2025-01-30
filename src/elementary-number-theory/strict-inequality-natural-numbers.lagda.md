@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -337,4 +338,29 @@ eq-translate-left-le-ℕ : (z x y : ℕ) → le-ℕ (z +ℕ x) (z +ℕ y) ＝ le
 eq-translate-left-le-ℕ z x y =
   ap-binary le-ℕ (commutative-add-ℕ z x) (commutative-add-ℕ z y) ∙
     eq-translate-right-le-ℕ z x y
+```
+
+### Addition on the natural numbers preserves strict inequality
+
+```agda
+preserves-le-right-add-ℕ : (z x y : ℕ) → le-ℕ x y → le-ℕ (x +ℕ z) (y +ℕ z)
+preserves-le-right-add-ℕ zero-ℕ x y I = I
+preserves-le-right-add-ℕ (succ-ℕ z) x y I = preserves-le-right-add-ℕ z x y I
+
+preserves-le-left-add-ℕ : (z x y : ℕ) → le-ℕ x y → le-ℕ (z +ℕ x) (z +ℕ y)
+preserves-le-left-add-ℕ z x y I =
+  binary-tr
+    le-ℕ
+    (commutative-add-ℕ x z)
+    (commutative-add-ℕ y z)
+    (preserves-le-right-add-ℕ z x y I)
+
+preserves-le-add-ℕ : {a b c d : ℕ} → le-ℕ a b → le-ℕ c d → le-ℕ (a +ℕ c) (b +ℕ d)
+preserves-le-add-ℕ {a} {b} {c} {d} H K =
+  transitive-le-ℕ
+    (a +ℕ c)
+    (b +ℕ c)
+    (b +ℕ d)
+    (preserves-le-right-add-ℕ c a b H)
+    (preserves-le-left-add-ℕ b c d K)
 ```
