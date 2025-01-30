@@ -30,17 +30,9 @@ all `n : ℕ` or it is [not](foundation-core.negation.md). In particular, it is 
 restricted form of the
 [law of excluded middle](foundation.law-of-excluded-middle.md).
 
-```agda
-prop-bool-WLPO : Prop lzero
-prop-bool-WLPO =
-  ∀' (ℕ → bool) (λ f → is-decidable-Prop (∀' ℕ (λ n → is-true-Prop (f n))))
+## Definitions
 
-bool-WLPO : UU lzero
-bool-WLPO = type-Prop prop-bool-WLPO
-
-is-prop-bool-WLPO : is-prop bool-WLPO
-is-prop-bool-WLPO = is-prop-type-Prop prop-bool-WLPO
-```
+### The weak limited principle of omniscience with respect to a universe
 
 ```agda
 prop-level-WLPO : (l : Level) → Prop (lsuc l)
@@ -56,9 +48,25 @@ is-prop-level-WLPO : {l : Level} → is-prop (level-WLPO l)
 is-prop-level-WLPO {l} = is-prop-type-Prop (prop-level-WLPO l)
 ```
 
+### The weak limited principle of omniscience
+
 ```agda
 WLPO : UUω
 WLPO = {l : Level} → level-WLPO l
+```
+
+### The small weak limited principle of omniscience
+
+```agda
+prop-bool-WLPO : Prop lzero
+prop-bool-WLPO =
+  ∀' (ℕ → bool) (λ f → is-decidable-Prop (∀' ℕ (λ n → is-true-Prop (f n))))
+
+bool-WLPO : UU lzero
+bool-WLPO = type-Prop prop-bool-WLPO
+
+is-prop-bool-WLPO : is-prop bool-WLPO
+is-prop-bool-WLPO = is-prop-type-Prop prop-bool-WLPO
 ```
 
 ## See also
