@@ -22,10 +22,11 @@ open import foundation-core.propositions
 ## Idea
 
 Given a type `X` with a [binary relation](foundation.binary-relations.md)
-`_<_ : X → X → Type` we say that `x : X` is **accessible** if `y` is accessible
-for all `y < x`. Note that the predicate of being an accessible element is a
-recursive condition. The accessibility predicate is therefore implemented as an
-inductive type with one constructor:
+`_<_ : X → X → Type` we say that `x : X` is
+{{#concept "accessible" Disambiguation="element with respect to a binary relation" Agda=is-accessible-element-Relation}}
+if, recursively, `y` is accessible for all `y < x`. Since the accessibility
+predicate is defined recursively, it is implemented as an inductive type with
+one constructor:
 
 ```text
   access : ((y : X) → y < x → is-accessible y) → is-accessible x
@@ -37,7 +38,7 @@ inductive type with one constructor:
 
 ```agda
 module _
-  {l1 l2} {X : UU l1} (_<_ : Relation l2 X)
+  {l1 l2 : Level} {X : UU l1} (_<_ : Relation l2 X)
   where
 
   data is-accessible-element-Relation (x : X) : UU (l1 ⊔ l2)
@@ -70,8 +71,7 @@ module _
   is-accessible-element-is-related-to-accessible-element-Relation :
     {x : X} → is-accessible-element-Relation _<_ x →
     {y : X} → y < x → is-accessible-element-Relation _<_ y
-  is-accessible-element-is-related-to-accessible-element-Relation (access f) =
-    f
+  is-accessible-element-is-related-to-accessible-element-Relation (access f) = f
 ```
 
 ### An induction principle for accessible elements
@@ -112,7 +112,9 @@ are equal. Therefore it follows that `f ＝ f'`, and we conclude that
 `access f ＝ access f'`.
 
 ```agda
-module _ {l1 l2} {X : UU l1} (_<_ : Relation l2 X) where
+module _
+  {l1 l2 : Level} {X : UU l1} (_<_ : Relation l2 X)
+  where
 
   all-elements-equal-is-accessible-element-Relation :
     (x : X) → all-elements-equal (is-accessible-element-Relation _<_ x)

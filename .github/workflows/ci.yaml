@@ -31,14 +31,14 @@ jobs:
     strategy:
       matrix:
         os: [macOS-13, ubuntu-latest]
-        agda: ['2.6.4']
+        agda: ['2.7.0']
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v3
         with:
           path: master
       - name: Setup Agda
-        uses: wenkokke/setup-agda@v2.1.0
+        uses: wenkokke/setup-agda@v2.5.0
         with:
           agda-version: ${{ matrix.agda }}
 
@@ -57,6 +57,7 @@ jobs:
       - name: Typecheck library
         run: |
           cd master
+          agda --version
           make check
 
       - name: Save Agda build cache
