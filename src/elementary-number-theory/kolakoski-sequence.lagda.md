@@ -14,7 +14,6 @@ open import elementary-number-theory.strong-induction-natural-numbers
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.logical-operations-booleans
 ```
 
 </details>

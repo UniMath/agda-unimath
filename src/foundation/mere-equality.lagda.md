@@ -25,10 +25,8 @@ open import foundation-core.sets
 
 ## Idea
 
-Two elements in a type are said to be {{#concept "merely equal" Agda=mere-eq}}
-if there is an element of the
-[propositionally truncated](foundation.propositional-truncations.md)
-[identity type](foundation-core.identity-types.md) between them.
+Two elements in a type are said to be merely equal if there is an element of the
+propositionally truncated identity type between them.
 
 ## Definition
 
@@ -115,17 +113,11 @@ module _
 ### If mere equality maps into the identity type of `A`, then `A` is a set
 
 ```agda
-is-prop-based-Id-based-mere-eq-in-id :
-  {l : Level} {A : UU l} (x : A) →
-  ((y : A) → mere-eq x y → x ＝ y) → (y : A) → is-prop (x ＝ y)
-is-prop-based-Id-based-mere-eq-in-id x =
-  is-prop-based-Id-prop-in-based-id x
-    ( mere-eq x)
-    ( is-prop-mere-eq x)
-    ( refl-mere-eq x)
-
 is-set-mere-eq-in-id :
   {l : Level} {A : UU l} → ((x y : A) → mere-eq x y → x ＝ y) → is-set A
 is-set-mere-eq-in-id =
-  is-set-prop-in-id mere-eq is-prop-mere-eq refl-mere-eq
+  is-set-prop-in-id
+    ( mere-eq)
+    ( is-prop-mere-eq)
+    ( refl-mere-eq)
 ```

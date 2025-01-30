@@ -82,7 +82,7 @@ Being `k`-path-cosplitting instead answers the question:
 > At which dimension is the action a
 > [retract](foundation-core.retracts-of-types.md)?
 
-Thus a _`-2`-path-cosplit map_ is a map equipped with a
+Thus a _-2-path-cosplit map_ is a map equipped with a
 [retraction](foundation-core.retractions.md). A _`k+1`-path-cosplit map_ is a
 map whose
 [action on identifications](foundation.action-on-identifications-functions.md)
@@ -94,56 +94,11 @@ induce retracts on higher homotopy groups.
 
 ## Definitions
 
-### The predicate on a map of being path-cosplit
-
 ```agda
 is-path-cosplit :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-path-cosplit neg-two-𝕋 f = retraction f
 is-path-cosplit (succ-𝕋 k) {A} f = (x y : A) → is-path-cosplit k (ap f {x} {y})
-```
-
-### The type of path-cosplit maps between two types
-
-```agda
-path-cosplit-map :
-  {l1 l2 : Level} → 𝕋 → UU l1 → UU l2 → UU (l1 ⊔ l2)
-path-cosplit-map k A B = Σ (A → B) (is-path-cosplit k)
-
-module _
-  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : path-cosplit-map k A B)
-  where
-
-  map-path-cosplit-map : A → B
-  map-path-cosplit-map = pr1 f
-
-  is-path-cosplit-path-cosplit-map : is-path-cosplit k map-path-cosplit-map
-  is-path-cosplit-path-cosplit-map = pr2 f
-```
-
-### The type of path-cosplittings of a type
-
-```agda
-path-cosplitting :
-  (l1 : Level) {l2 : Level} → 𝕋 → UU l2 → UU (lsuc l1 ⊔ l2)
-path-cosplitting l1 k B = Σ (UU l1) (λ A → path-cosplit-map k A B)
-
-module _
-  {l1 l2 : Level} {k : 𝕋} {B : UU l2} (H : path-cosplitting l1 k B)
-  where
-
-  type-path-cosplitting : UU l1
-  type-path-cosplitting = pr1 H
-
-  path-cosplit-map-path-cosplitting : path-cosplit-map k type-path-cosplitting B
-  path-cosplit-map-path-cosplitting = pr2 H
-
-  map-path-cosplitting : type-path-cosplitting → B
-  map-path-cosplitting = map-path-cosplit-map path-cosplit-map-path-cosplitting
-
-  is-path-cosplit-map-path-cosplitting : is-path-cosplit k map-path-cosplitting
-  is-path-cosplit-map-path-cosplitting =
-    is-path-cosplit-path-cosplit-map path-cosplit-map-path-cosplitting
 ```
 
 ## Properties
@@ -264,7 +219,7 @@ is-trunc-map-is-path-cosplit-is-trunc-codomain k is-trunc-B is-cosplit-f =
     ( is-trunc-B)
 ```
 
-### If the domain is `k+r+2`-truncated, the type of `k`-path-cosplittings of `f` is `r`-truncated
+### If the domain is `k+r+2`-truncated, the type of `k`-path-cosplittings is `r`-truncated
 
 ```agda
 is-trunc-is-path-cosplit-is-trunc-succ-domain :
@@ -279,7 +234,7 @@ is-trunc-is-path-cosplit-is-trunc-succ-domain {k = succ-𝕋 k} {r} is-trunc-A =
         ( λ y → is-trunc-is-path-cosplit-is-trunc-succ-domain (is-trunc-A x y)))
 ```
 
-### If the domain is `k+1`-truncated then `k`-path-cosplittings of `f` are unique
+### If the domain is `k+1`-truncated then `k`-path-cosplittings are unique
 
 ```agda
 is-prop-is-path-cosplit-is-trunc-succ-domain :
@@ -294,7 +249,7 @@ is-prop-is-path-cosplit-is-trunc-succ-domain {k = succ-𝕋 k} is-trunc-A =
         ( λ y → is-prop-is-path-cosplit-is-trunc-succ-domain (is-trunc-A x y)))
 ```
 
-### If the domain is `k`-truncated then there is a unique `k`-path-cosplitting of `f`
+### If the domain is `k`-truncated then there is a unique `k`-path-cosplitting
 
 ```agda
 is-contr-is-path-cosplit-is-trunc-domain :
@@ -591,6 +546,8 @@ is-path-cosplit-map-coproduct {k = succ-𝕋 k} =
 
 ## See also
 
-- In [Split-idempotent maps](foundation.split-idempotent-maps.md) we show that
-  locally small types are closed under `-1`-path-cosplit maps.
 - [Mere path-cosplit maps](foundation.mere-path-cosplit-maps.md)
+- [Path-split maps](foundation.path-cosplit-maps.md)
+- [Injective maps](foundation-core.injective-maps.md)
+- [Truncated maps](foundation-core.truncated-maps.md)
+- [Embeddings](foundation-core.embeddings.md)

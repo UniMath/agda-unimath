@@ -50,7 +50,6 @@ open import set-theory.cantors-diagonal-argument public
 open import set-theory.cardinalities public
 open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
-open import set-theory.increasing-binary-sequences public
 open import set-theory.infinite-sets public
 open import set-theory.russells-paradox public
 open import set-theory.uncountable-sets public

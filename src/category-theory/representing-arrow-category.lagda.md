@@ -12,20 +12,15 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.booleans
-open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
-open import foundation.inequality-booleans
 open import foundation.logical-equivalences
-open import foundation.logical-operations-booleans
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import order-theory.posets
 ```
 
 </details>
@@ -47,7 +42,9 @@ obj-representing-arrow-Category = bool
 
 hom-set-representing-arrow-Category :
   obj-representing-arrow-Category → obj-representing-arrow-Category → Set lzero
-hom-set-representing-arrow-Category x y = set-Prop (leq-bool-Prop x y)
+hom-set-representing-arrow-Category true true = unit-Set
+hom-set-representing-arrow-Category true false = empty-Set
+hom-set-representing-arrow-Category false _ = unit-Set
 
 hom-representing-arrow-Category :
   obj-representing-arrow-Category → obj-representing-arrow-Category → UU lzero
@@ -63,8 +60,8 @@ comp-hom-representing-arrow-Category :
   hom-representing-arrow-Category y z →
   hom-representing-arrow-Category x y →
   hom-representing-arrow-Category x z
-comp-hom-representing-arrow-Category {x} {y} {z} =
-  transitive-leq-bool {x} {y} {z}
+comp-hom-representing-arrow-Category {true} {true} {true} _ _ = star
+comp-hom-representing-arrow-Category {false} _ _ = star
 
 associative-comp-hom-representing-arrow-Category :
   {x y z w : obj-representing-arrow-Category} →
@@ -82,7 +79,8 @@ associative-comp-hom-representing-arrow-Category {false} h g f = refl
 
 id-hom-representing-arrow-Category :
   {x : obj-representing-arrow-Category} → hom-representing-arrow-Category x x
-id-hom-representing-arrow-Category {x} = refl-leq-bool {x}
+id-hom-representing-arrow-Category {true} = star
+id-hom-representing-arrow-Category {false} = star
 
 left-unit-law-comp-hom-representing-arrow-Category :
   {x y : obj-representing-arrow-Category} →
@@ -103,7 +101,16 @@ right-unit-law-comp-hom-representing-arrow-Category {true} {true} f = refl
 right-unit-law-comp-hom-representing-arrow-Category {false} f = refl
 
 representing-arrow-Precategory : Precategory lzero lzero
-representing-arrow-Precategory = precategory-Poset bool-Poset
+representing-arrow-Precategory =
+  make-Precategory
+    ( obj-representing-arrow-Category)
+    ( hom-set-representing-arrow-Category)
+    ( λ {x} {y} {z} → comp-hom-representing-arrow-Category {x} {y} {z})
+    ( λ x → id-hom-representing-arrow-Category {x})
+    ( λ {x} {y} {z} {w} →
+      associative-comp-hom-representing-arrow-Category {x} {y} {z} {w})
+    ( λ {x} {y} → left-unit-law-comp-hom-representing-arrow-Category {x} {y})
+    ( λ {x} {y} → right-unit-law-comp-hom-representing-arrow-Category {x} {y})
 ```
 
 ### The representing arrow category
@@ -111,11 +118,32 @@ representing-arrow-Precategory = precategory-Poset bool-Poset
 ```agda
 is-category-representing-arrow-Category :
   is-category-Precategory representing-arrow-Precategory
-is-category-representing-arrow-Category =
-  is-category-precategory-Poset bool-Poset
+is-category-representing-arrow-Category true true =
+    is-equiv-has-converse-is-prop
+    ( is-set-bool true true)
+    ( is-prop-type-subtype
+      ( is-iso-prop-Precategory representing-arrow-Precategory {true} {true})
+      ( is-prop-unit))
+    ( λ _ → refl)
+is-category-representing-arrow-Category true false =
+  is-equiv-is-empty
+    ( iso-eq-Precategory representing-arrow-Precategory true false)
+    ( hom-iso-Precategory representing-arrow-Precategory)
+is-category-representing-arrow-Category false true =
+  is-equiv-is-empty
+    ( iso-eq-Precategory representing-arrow-Precategory false true)
+    ( hom-inv-iso-Precategory representing-arrow-Precategory)
+is-category-representing-arrow-Category false false =
+  is-equiv-has-converse-is-prop
+    ( is-set-bool false false)
+    ( is-prop-type-subtype
+      ( is-iso-prop-Precategory representing-arrow-Precategory {false} {false})
+      ( is-prop-unit))
+    ( λ _ → refl)
 
 representing-arrow-Category : Category lzero lzero
-representing-arrow-Category = category-Poset bool-Poset
+pr1 representing-arrow-Category = representing-arrow-Precategory
+pr2 representing-arrow-Category = is-category-representing-arrow-Category
 ```
 
 ## Properties
