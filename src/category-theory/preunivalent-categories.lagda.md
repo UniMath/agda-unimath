@@ -38,14 +38,14 @@ concrete groupoid of objects into the groupoid of
 preunivalent category is a precategory whose based isomorphism types
 `Σ (x : 𝒞₀), (* ≅ x)` are [sets](foundation-core.sets.md).
 
-The main function of _preunivalence_ is to serve as a common generalization of
+The main purpose of _preunivalence_ is to serve as a common generalization of
 univalent mathematics and mathematics with Axiom K by restricting the ways that
 identity and equivalence may interact. Hence preunivalent categories generalize
 both [(univalent) categories](category-theory.categories.md) and
 [strict categories](category-theory.strict-categories.md), which are
 precategories whose objects form a [set](foundation-core.sets.md). Note,
-however, that our definition of preunivalence here is a
-[strengthening](foundation.strong-preunivalence.md) of the
+however, that our use of the term "preunivalence" here is in a
+[stronger](foundation.strong-preunivalence.md) sense its use in the
 [preunivalence axiom](foundation.preunivalence.md).
 
 ## Definitions

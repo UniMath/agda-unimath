@@ -37,15 +37,16 @@ The strong preunivalence axiom is a strengthening of
 [the preunivalence axiom](foundation.preunivalence.md) in the following way. If
 we restrict to `𝒱 ≐ 𝒰`,
 [subuniverse equality duality](foundation.structured-equality-duality.md) says
-that `Σ (Y : 𝒰), (X ≃ Y)` is a set if and only if every binary family of maps
+that, for every `X : 𝒰`, `Σ (Y : 𝒰), (X ≃ Y)` is a set if and only if every
+binary family of maps
 
 ```text
   (Z Y : 𝒰) → (Z ＝ Y) → (X ≃ Y)
 ```
 
 is a binary family of [embeddings](foundation-core.embeddings.md). The
-preunivalence axiom asserts that the particular family of maps
-`(Y : 𝒰) → (X ＝ Y) → (X ≃ Y)` defined by identity induction as
+preunivalence axiom asserts that the particular (unary) family of maps
+`(Y : 𝒰) → (X ＝ Y) → (X ≃ Y)` defined by identity induction by
 `refl ↦ id-equiv` is a family of embeddings.
 
 While the strong preunivalence axiom is a strengthening of the preunivalence
