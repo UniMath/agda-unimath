@@ -12,6 +12,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -323,4 +324,17 @@ le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
 ```agda
 le-one-mul-ℕ : (x y : ℕ) → 1 <-ℕ x → 1 <-ℕ y → 1 <-ℕ (x *ℕ y)
 le-one-mul-ℕ (succ-ℕ (succ-ℕ x)) (succ-ℕ (succ-ℕ y)) star star = star
+```
+
+### Strict inequality on the natural numbers is invariant by translation
+
+```agda
+eq-translate-right-le-ℕ : (z x y : ℕ) → le-ℕ (x +ℕ z) (y +ℕ z) ＝ le-ℕ x y
+eq-translate-right-le-ℕ zero-ℕ x y = refl
+eq-translate-right-le-ℕ (succ-ℕ z) x y = eq-translate-right-le-ℕ z x y
+
+eq-translate-left-le-ℕ : (z x y : ℕ) → le-ℕ (z +ℕ x) (z +ℕ y) ＝ le-ℕ x y
+eq-translate-left-le-ℕ z x y =
+  ap-binary le-ℕ (commutative-add-ℕ z x) (commutative-add-ℕ z y) ∙
+    eq-translate-right-le-ℕ z x y
 ```
