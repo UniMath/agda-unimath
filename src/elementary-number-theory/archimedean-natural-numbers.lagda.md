@@ -44,3 +44,8 @@ abstract
           r : ℕ
           r = remainder-euclidean-division-ℕ x y
 ```
+
+## External links
+
+- [Archimedean property](https://en.wikipedia.org/wiki/Archimedean_property)
+  at Wikipedia
