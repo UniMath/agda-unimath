@@ -271,7 +271,7 @@ module _
           ( I))
 ```
 
-### Converting a natural number to an integer preserves strict inequality
+### The inclusion of natural numbers preserves strict inequality
 
 ```agda
 le-natural-le-ℤ : (m n : ℕ) → le-ℕ m n → le-ℤ (int-ℕ m) (int-ℕ n)
