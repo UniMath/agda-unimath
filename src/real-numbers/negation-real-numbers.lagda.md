@@ -100,13 +100,13 @@ module _
     exists ℚ (λ q → (le-ℚ-Prop q r) ∧ (upper-cut-neg-ℝ q))
   pr1 (is-rounded-upper-cut-neg-ℝ r) in-neg-upper =
     elim-exists
-      (∃ ℚ (λ q → le-ℚ-Prop q r ∧ upper-cut-neg-ℝ q))
-      (λ q (-r<q , in-lower-q) →
+      ( ∃ ℚ (λ q → le-ℚ-Prop q r ∧ upper-cut-neg-ℝ q))
+      ( λ q (-r<q , in-lower-q) →
         intro-exists
           ( neg-ℚ q)
           ( tr (le-ℚ (neg-ℚ q)) (neg-neg-ℚ r) (neg-le-ℚ (neg-ℚ r) q -r<q) ,
             tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q)) in-lower-q))
-      (forward-implication (is-rounded-lower-cut-ℝ x (neg-ℚ r)) in-neg-upper)
+      ( forward-implication (is-rounded-lower-cut-ℝ x (neg-ℚ r)) in-neg-upper)
   pr2 (is-rounded-upper-cut-neg-ℝ r) exists-q =
     backward-implication
       ( is-rounded-lower-cut-ℝ x (neg-ℚ r))
