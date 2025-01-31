@@ -355,7 +355,8 @@ preserves-le-left-add-ℕ z x y I =
     (commutative-add-ℕ y z)
     (preserves-le-right-add-ℕ z x y I)
 
-preserves-le-add-ℕ : {a b c d : ℕ} → le-ℕ a b → le-ℕ c d → le-ℕ (a +ℕ c) (b +ℕ d)
+preserves-le-add-ℕ :
+  {a b c d : ℕ} → le-ℕ a b → le-ℕ c d → le-ℕ (a +ℕ c) (b +ℕ d)
 preserves-le-add-ℕ {a} {b} {c} {d} H K =
   transitive-le-ℕ
     (a +ℕ c)
