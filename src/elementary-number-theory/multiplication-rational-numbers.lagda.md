@@ -325,7 +325,7 @@ abstract
     ( ap ((x *ℚ z) +ℚ_) (left-negative-law-mul-ℚ y z))
 ```
 
-### Computing multiplication of rational numbers that come from integer fractions
+### The inclusion of integer fractions preserves multiplication
 
 ```agda
 abstract
