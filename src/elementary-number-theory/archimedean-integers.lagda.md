@@ -12,6 +12,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.nonnegative-integers
 open import elementary-number-theory.positive-and-negative-integers
 open import elementary-number-theory.positive-integers
 open import elementary-number-theory.strict-inequality-integers
@@ -30,29 +31,28 @@ open import foundation.unit-type
 
 ## Definition
 
-The Archimedean property of the integers is that for any positive integer `x` and integer `y`,
-there is an `n : ℕ` such that `y < int-ℕ n *ℤ x`.
+The Archimedean property of the integers is that for any positive integer `x`
+and integer `y`, there is an `n : ℕ` such that `y < int-ℕ n *ℤ x`.
 
 ```agda
-archimedean-property-ℤ : (x y : ℤ) → is-positive-ℤ x → Σ ℕ (λ n → le-ℤ y (int-ℕ n *ℤ x))
-archimedean-property-ℤ x y pos-x with decide-sign-ℤ {y}
+archimedean-property-ℤ :
+  (x y : ℤ) → is-positive-ℤ x → Σ ℕ (λ n → le-ℤ y (int-ℕ n *ℤ x))
+archimedean-property-ℤ x y pos-x with decide-is-negative-is-nonnegative-ℤ {y}
 ... | inl neg-y = zero-ℕ , le-zero-is-negative-ℤ y neg-y
-... | inr (inl refl) = 1 , le-zero-is-positive-ℤ x pos-x
-... | inr (inr pos-y) =
+... | inr nonneg-y =
     ind-Σ
       (λ nx (nonzero-nx , nx=x) →
         ind-Σ
-          (λ ny (_ , ny=y) →
-            ind-Σ
-              (λ n y<n*nx →
-                n ,
-                  binary-tr
-                    le-ℤ
-                    ny=y
-                    (inv (mul-int-ℕ n nx) ∙ ap (int-ℕ n *ℤ_) nx=x)
-                    (le-natural-le-ℤ ny (n *ℕ nx) y<n*nx))
-              (archimedean-property-ℕ nx ny nonzero-nx))
-          (pos-ℤ-to-ℕ y pos-y))
+          (λ n ny<n*nx →
+            n ,
+              binary-tr
+                le-ℤ
+                (ap pr1 (is-section-nat-nonnegative-ℤ (y , nonneg-y)))
+                (inv (mul-int-ℕ n nx) ∙ ap (int-ℕ n *ℤ_) nx=x)
+                (le-natural-le-ℤ
+                  (nat-nonnegative-ℤ (y , nonneg-y)) (n *ℕ nx) ny<n*nx))
+          (archimedean-property-ℕ
+            nx (nat-nonnegative-ℤ (y , nonneg-y)) nonzero-nx))
       (pos-ℤ-to-ℕ x pos-x)
   where pos-ℤ-to-ℕ :
           (z : ℤ) →
@@ -63,5 +63,5 @@ archimedean-property-ℤ x y pos-x with decide-sign-ℤ {y}
 
 ## External links
 
-- [Archimedean property](https://en.wikipedia.org/wiki/Archimedean_property)
-  at Wikipedia
+- [Archimedean property](https://en.wikipedia.org/wiki/Archimedean_property) at
+  Wikipedia

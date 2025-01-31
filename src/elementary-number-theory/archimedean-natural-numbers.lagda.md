@@ -22,8 +22,8 @@ open import foundation.transport-along-identifications
 
 ## Definition
 
-The Archimedean property of the natural numbers is that for any nonzero natural number `x` and natural number `y`,
-there is an `n : ℕ` such that `y < n *ℕ x`.
+The Archimedean property of the natural numbers is that for any nonzero natural
+number `x` and natural number `y`, there is an `n : ℕ` such that `y < n *ℕ x`.
 
 ```agda
 abstract
@@ -47,5 +47,5 @@ abstract
 
 ## External links
 
-- [Archimedean property](https://en.wikipedia.org/wiki/Archimedean_property)
-  at Wikipedia
+- [Archimedean property](https://en.wikipedia.org/wiki/Archimedean_property) at
+  Wikipedia
