@@ -51,7 +51,7 @@ both zero or, coinductively, their predecessors are equal.
 Since the conaturals `ℕ∞` is a coinductive type, it does not follow from the
 other postulates of agda-unimath that this description characterizes equality,
 and we therefore have to postulate that it does, just as we have for functions
-with [function extensionality](foundation.function-extensionality.md) and
+with [function extensionality](foundation.function-extensionality.md) and the
 universe with [univalence](foundation.univalence.md).
 
 ## Definitions
