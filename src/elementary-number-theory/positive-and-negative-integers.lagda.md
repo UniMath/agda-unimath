@@ -101,17 +101,6 @@ decide-is-nonpositive-is-nonpositive-neg-ℤ {inr (inl x)} = inl star
 decide-is-nonpositive-is-nonpositive-neg-ℤ {inr (inr x)} = inr star
 ```
 
-### Trichotomies
-
-#### An integer is negative, zero, or positive
-
-```agda
-decide-sign-ℤ : {x : ℤ} → is-negative-ℤ x + is-zero-ℤ x + is-positive-ℤ x
-decide-sign-ℤ {inr (inl star)} = inr (inl refl)
-decide-sign-ℤ {inr (inr _)} = inr (inr star)
-decide-sign-ℤ {inl _} = inl star
-```
-
 ### Positive integers are nonnegative
 
 ```agda
