@@ -331,8 +331,8 @@ abstract
 abstract
   mul-rational-fraction-ℤ :
     (x y : fraction-ℤ) →
-      rational-fraction-ℤ x *ℚ rational-fraction-ℤ y ＝
-        rational-fraction-ℤ (x *fraction-ℤ y)
+    rational-fraction-ℤ x *ℚ rational-fraction-ℤ y ＝
+    rational-fraction-ℤ (x *fraction-ℤ y)
   mul-rational-fraction-ℤ x y =
     eq-ℚ-sim-fraction-ℤ
       (mul-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y))
