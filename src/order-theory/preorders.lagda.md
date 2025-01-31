@@ -30,17 +30,23 @@ open import foundation.universe-levels
 A **preorder** is a type equipped with a reflexive, transitive relation that is
 valued in propositions.
 
-## Definition
+## Definitions
+
+### The predicate on a propositional relation of being a preorder
+
+```agda
+is-preorder-Relation-Prop :
+  {l1 l2 : Level} {X : UU l1} → Relation-Prop l2 X → UU (l1 ⊔ l2)
+is-preorder-Relation-Prop R =
+  is-reflexive-Relation-Prop R × is-transitive-Relation-Prop R
+```
+
+### The type of preorders
 
 ```agda
 Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Preorder l1 l2 =
-  Σ ( UU l1)
-    ( λ X →
-      Σ ( Relation-Prop l2 X)
-        ( λ R →
-          ( is-reflexive (type-Relation-Prop R)) ×
-          ( is-transitive (type-Relation-Prop R))))
+  Σ (UU l1) (λ X → Σ (Relation-Prop l2 X) (is-preorder-Relation-Prop))
 
 module _
   {l1 l2 : Level} (X : Preorder l1 l2)
