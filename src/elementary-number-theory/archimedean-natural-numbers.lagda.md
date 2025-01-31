@@ -32,13 +32,13 @@ abstract
   archimedean-property-ℕ x y nonzero-x =
     (succ-ℕ (quotient-euclidean-division-ℕ x y) ,
       tr
-        (λ z → le-ℕ z (succ-ℕ (quotient-euclidean-division-ℕ x y) *ℕ x))
-        (eq-euclidean-division-ℕ x y)
-        (preserves-le-left-add-ℕ
-          (quotient-euclidean-division-ℕ x y *ℕ x)
-          (remainder-euclidean-division-ℕ x y)
-          x
-          (strict-upper-bound-remainder-euclidean-division-ℕ x y nonzero-x)))
+        ( λ z → le-ℕ z (succ-ℕ (quotient-euclidean-division-ℕ x y) *ℕ x))
+        ( eq-euclidean-division-ℕ x y)
+        ( preserves-le-left-add-ℕ
+          ( quotient-euclidean-division-ℕ x y *ℕ x)
+          ( remainder-euclidean-division-ℕ x y)
+          ( x)
+          ( strict-upper-bound-remainder-euclidean-division-ℕ x y nonzero-x)))
 ```
 
 ## External links
