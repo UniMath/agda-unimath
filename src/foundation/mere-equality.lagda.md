@@ -10,13 +10,9 @@ module foundation.mere-equality where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
-open import foundation.retracts-of-types
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalence-relations
@@ -29,10 +25,12 @@ open import foundation-core.sets
 
 ## Idea
 
-Two elements in a type are said to be merely equal if there is an element of the
-propositionally truncated identity type between them.
+Two elements in a type are said to be {{#concept "merely equal" Agda=mere-eq}}
+if there is an element of the
+[propositionally truncated](foundation.propositional-truncations.md)
+[identity type](foundation-core.identity-types.md) between them.
 
-## Definitions
+## Definition
 
 ```agda
 module _
@@ -49,13 +47,6 @@ module _
   is-prop-mere-eq x y = is-prop-type-trunc-Prop
 ```
 
-### Types whose elements are merely equal
-
-```agda
-all-elements-merely-equal : {l : Level} → UU l → UU l
-all-elements-merely-equal A = (x y : A) → mere-eq x y
-```
-
 ## Properties
 
 ### Reflexivity
@@ -65,10 +56,6 @@ abstract
   refl-mere-eq :
     {l : Level} {A : UU l} → is-reflexive (mere-eq {l} {A})
   refl-mere-eq _ = unit-trunc-Prop refl
-
-mere-eq-eq :
-    {l : Level} {A : UU l} {x y : A} → x ＝ y → mere-eq x y
-mere-eq-eq = unit-trunc-Prop
 ```
 
 ### Symmetry
@@ -128,58 +115,17 @@ module _
 ### If mere equality maps into the identity type of `A`, then `A` is a set
 
 ```agda
+is-prop-based-Id-based-mere-eq-in-id :
+  {l : Level} {A : UU l} (x : A) →
+  ((y : A) → mere-eq x y → x ＝ y) → (y : A) → is-prop (x ＝ y)
+is-prop-based-Id-based-mere-eq-in-id x =
+  is-prop-based-Id-prop-in-based-id x
+    ( mere-eq x)
+    ( is-prop-mere-eq x)
+    ( refl-mere-eq x)
+
 is-set-mere-eq-in-id :
   {l : Level} {A : UU l} → ((x y : A) → mere-eq x y → x ＝ y) → is-set A
 is-set-mere-eq-in-id =
-  is-set-prop-in-id
-    ( mere-eq)
-    ( is-prop-mere-eq)
-    ( refl-mere-eq)
-```
-
-### Retracts of types with mere equality
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  all-elements-merely-equal-retract-of :
-    B retract-of A → all-elements-merely-equal A → all-elements-merely-equal B
-  all-elements-merely-equal-retract-of (i , r , R) H x y =
-    rec-trunc-Prop
-      ( mere-eq-Prop x y)
-      ( λ p → unit-trunc-Prop (inv (R x) ∙ ap r p ∙ R y))
-      ( H (i x) (i y))
-
-  all-elements-merely-equal-equiv :
-    B ≃ A → all-elements-merely-equal A → all-elements-merely-equal B
-  all-elements-merely-equal-equiv e =
-    all-elements-merely-equal-retract-of (retract-equiv e)
-
-  all-elements-merely-equal-equiv' :
-    A ≃ B → all-elements-merely-equal A → all-elements-merely-equal B
-  all-elements-merely-equal-equiv' e =
-    all-elements-merely-equal-retract-of (retract-inv-equiv e)
-```
-
-### Dependent sums of types with mere equality
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (mA : all-elements-merely-equal A)
-  (mB : (x : A) → all-elements-merely-equal (B x))
-  where
-
-  all-elements-merely-equal-Σ : all-elements-merely-equal (Σ A B)
-  all-elements-merely-equal-Σ x y =
-    rec-trunc-Prop
-      ( mere-eq-Prop x y)
-      ( λ p →
-        rec-trunc-Prop
-          ( mere-eq-Prop x y)
-          ( λ q → unit-trunc-Prop (eq-pair-Σ p q))
-          ( mB (pr1 y) (tr B p (pr2 x)) (pr2 y)))
-      ( mA (pr1 x) (pr1 y))
+  is-set-prop-in-id mere-eq is-prop-mere-eq refl-mere-eq
 ```

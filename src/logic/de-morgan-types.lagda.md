@@ -35,7 +35,6 @@ open import foundation-core.equivalences
 open import foundation-core.propositions
 
 open import logic.de-morgans-law
-open import logic.propositionally-decidable-types
 ```
 
 </details>

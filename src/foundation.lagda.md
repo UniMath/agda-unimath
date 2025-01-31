@@ -144,6 +144,7 @@ open import foundation.disjunction public
 open import foundation.double-arrows public
 open import foundation.double-negation public
 open import foundation.double-negation-modality public
+open import foundation.double-negation-stable-equality public
 open import foundation.double-negation-stable-propositions public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
@@ -234,6 +235,7 @@ open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
+open import foundation.inequality-booleans public
 open import foundation.infinitely-coherent-equivalences public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
@@ -268,9 +270,9 @@ open import foundation.limited-principle-of-omniscience public
 open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
+open import foundation.logical-operations-booleans public
 open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
-open import foundation.maps-with-hilbert-epsilon-operators public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
@@ -317,7 +319,6 @@ open import foundation.path-split-maps public
 open import foundation.path-split-type-families public
 open import foundation.perfect-images public
 open import foundation.permutations-spans-families-of-types public
-open import foundation.pi-0-trivial-maps public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public

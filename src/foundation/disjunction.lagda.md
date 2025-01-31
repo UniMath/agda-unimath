@@ -22,8 +22,6 @@ open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
-
-open import logic.propositionally-decidable-types
 ```
 
 </details>
@@ -310,6 +308,7 @@ module _
     is-decidable A → is-decidable B → is-decidable (disjunction-type A B)
   is-decidable-disjunction is-decidable-A is-decidable-B =
     is-decidable-trunc-Prop-is-merely-decidable
+      ( A + B)
       ( unit-trunc-Prop (is-decidable-coproduct is-decidable-A is-decidable-B))
 
 module _

@@ -41,11 +41,8 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is said to be
-{{#concept "0-connected" Disambiguation="type" Agda=is-0-connected}} if its type
-of [connected components](foundation.connected-components.md), i.e., its
-[set truncation](foundation.set-truncations.md), is
-[contractible](foundation-core.contractible-types.md).
+A type is said to be connected if its type of connected components, i.e., its
+set truncation, is contractible.
 
 ```agda
 is-0-connected-Prop : {l : Level} → UU l → Prop l
@@ -68,7 +65,7 @@ abstract
 
 abstract
   mere-eq-is-0-connected :
-    {l : Level} {A : UU l} → is-0-connected A → all-elements-merely-equal A
+    {l : Level} {A : UU l} → is-0-connected A → (x y : A) → mere-eq x y
   mere-eq-is-0-connected {A = A} H x y =
     apply-effectiveness-unit-trunc-Set (eq-is-contr H)
 
@@ -86,7 +83,7 @@ abstract
 abstract
   is-0-connected-mere-eq-is-inhabited :
     {l : Level} {A : UU l} →
-    is-inhabited A → all-elements-merely-equal A → is-0-connected A
+    is-inhabited A → ((x y : A) → mere-eq x y) → is-0-connected A
   is-0-connected-mere-eq-is-inhabited H K =
     apply-universal-property-trunc-Prop H
       ( is-0-connected-Prop _)

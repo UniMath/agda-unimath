@@ -36,7 +36,7 @@ for all elements `y ∈ x`. More precisely, the **well-founded induction
 principle** is a function
 
 ```text
-  (x : X) → ((y : Y) → y ∈ x → P y) → P x.
+  (x : X) → ((y : X) → (y ∈ x) → P y) → P x.
 ```
 
 ## Definitions
@@ -115,11 +115,11 @@ module _
 
 ### The associated reflexive relation of a well-founded relation
 
-Given a well-founded relation `R` on `X` there is an associated reflexive
+Given a well-founded relation $∈$ on $X$ there is an associated reflexive
 relation given by
 
 $$
-  (x ≤ y) := (u : X) → u ∈ x → u ∈ y.
+  (x ≤ y) := (u : X) → (u ∈ x) → (u ∈ y).
 $$
 
 ```agda
