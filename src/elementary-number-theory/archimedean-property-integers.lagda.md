@@ -44,16 +44,19 @@ abstract
       ind-Σ
         (λ nx (nonzero-nx , nx=x) →
           ind-Σ
-            (λ n ny<n*nx →
+            ( λ n ny<n*nx →
               n ,
                 binary-tr
-                  le-ℤ
-                  (ap pr1 (is-section-nat-nonnegative-ℤ (y , nonneg-y)))
-                  (inv (mul-int-ℕ n nx) ∙ ap (int-ℕ n *ℤ_) nx=x)
-                  (le-natural-le-ℤ
-                    (nat-nonnegative-ℤ (y , nonneg-y)) (n *ℕ nx) ny<n*nx))
-            (archimedean-property-ℕ
-              nx (nat-nonnegative-ℤ (y , nonneg-y)) nonzero-nx))
+                  ( le-ℤ)
+                  ( ap pr1 (is-section-nat-nonnegative-ℤ (y , nonneg-y)))
+                  ( inv (mul-int-ℕ n nx) ∙ ap (int-ℕ n *ℤ_) nx=x)
+                  ( le-natural-le-ℤ
+                    ( nat-nonnegative-ℤ (y , nonneg-y))
+                    ( n *ℕ nx)
+                    ( ny<n*nx)))
+            ( archimedean-property-ℕ
+              ( nx)
+              ( nat-nonnegative-ℤ (y , nonneg-y)) nonzero-nx))
         (pos-ℤ-to-ℕ x pos-x)
     where pos-ℤ-to-ℕ :
             (z : ℤ) →

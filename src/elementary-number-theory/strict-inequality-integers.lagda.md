@@ -281,12 +281,12 @@ le-natural-le-ℤ zero-ℕ (succ-ℕ n) star =
     (is-positive-int-is-nonzero-ℕ (succ-ℕ n) λ ())
 le-natural-le-ℤ (succ-ℕ m) (succ-ℕ n) m<n =
   binary-tr
-    le-ℤ
-    (succ-int-ℕ m)
-    (succ-int-ℕ n)
-    (preserves-le-right-add-ℤ
-      one-ℤ
-      (int-ℕ m)
-      (int-ℕ n)
-      (le-natural-le-ℤ m n m<n))
+    ( le-ℤ)
+    ( succ-int-ℕ m)
+    ( succ-int-ℕ n)
+    ( preserves-le-right-add-ℤ
+      ( one-ℤ)
+      ( int-ℕ m)
+      ( int-ℕ n)
+      ( le-natural-le-ℤ m n m<n))
 ```
