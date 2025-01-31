@@ -18,7 +18,6 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 open import foundation.transposition-identifications-along-equivalences
@@ -73,8 +72,7 @@ module _
   where
 
   inv-htpy-over : htpy-over B' H f' g' → htpy-over B' (inv-htpy H) g' f'
-  inv-htpy-over H' a' =
-    map-eq-transpose-equiv-inv (equiv-tr B' (H _)) (inv (H' a'))
+  inv-htpy-over H' {a} a' = inv-dependent-identification B' (H a) (H' a')
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -90,6 +88,20 @@ module _
 
   right-whisk-htpy-over : htpy-over B' (H ·r s) (f' ∘ s') (g' ∘ s')
   right-whisk-htpy-over a' = H' (s' a')
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2}
+  {A' : A → UU l3} {B' : B → UU l4}
+  where
+
+  left-whisk-dependent-identification :
+    {s : A → B} (s' : {a : A} → A' a → B' (s a))
+    {x y : A} (p : x ＝ y)
+    {x' : A' x} {y' : A' y} (q : dependent-identification A' p x' y') →
+    dependent-identification B' (ap s p) (s' x') (s' y')
+  left-whisk-dependent-identification s' refl q = ap s' q
+
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -110,34 +122,7 @@ module _
     tr X' (ap s (H a)) (s' (f' a')) ＝ s' (g'a')
 
   left-whisk-htpy-over : htpy-over X' (s ·l H) (s' ∘ f') (s' ∘ g')
-  left-whisk-htpy-over {a} a' =
-    ind-htpy f
-      ( LWMOTIF a')
-      ( ap s')
-      ( H)
-      ( H' a')
-
-module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3}
-  {A' : A → UU l4} {B' : B → UU l5} {X' : X → UU l6}
-  {f : A → B}
-  {f' g' : {a : A} → A' a → B' (f a)}
-  (H' : {a : A} → f' {a} ~ g')
-  {s : B → X} (s' : {b : B} → B' b → X' (s b))
-  where
-
-  compute-left-whisk-htpy-over :
-    {a : A} (a' : A' a) →
-    left-whisk-htpy-over {B' = B'} {X' = X'} {f = f} refl-htpy H' s' a' ＝ ap s' (H' a')
-  compute-left-whisk-htpy-over a' =
-    htpy-eq
-      ( htpy-eq-implicit
-        ( compute-ind-htpy f
-          ( LWMOTIF {B' = B'} {X' = X'} refl-htpy H' s' a')
-          ( ap s'))
-        ( g' a'))
-      ( H' a')
+  left-whisk-htpy-over {a} a' = left-whisk-dependent-identification s' (H a) (H' a')
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -183,6 +168,19 @@ module _
     g' ·l F ∙h G ·r f
 
 module _
+  {l1 l2 : Level}
+  {A : UU l1} {B : A → UU l2}
+  {x y : A} (p : x ＝ y)
+  {x' : B x} {y' : B y} (q : dependent-identification B p x' y')
+  (s : (a : A) → B a)
+  (F : x' ＝ s x) (G : y' ＝ s y)
+  where
+
+  section-dependent-identification : UU l2
+  section-dependent-identification =
+    q ∙ G ＝ ap (tr B p) F ∙ apd s p
+
+module _
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {A' : A → UU l3} {B' : B → UU l4}
   {f g : A → B}
@@ -198,9 +196,26 @@ module _
 
   section-htpy-over : UU (l1 ⊔ l4)
   section-htpy-over =
-    (a : A) →
-    H' (sA a) ∙ G a ＝
-    ap (tr B' (H a)) (F a) ∙ apd sB (H a)
+    (a : A) → section-dependent-identification (H a) (H' (sA a)) sB (F a) (G a)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  inv-section-identification-over :
+    {x y : A} (p : x ＝ y) →
+    {x' : B x} {y' : B y} (q : dependent-identification B p x' y') →
+    (s : (a : A) → B a) →
+    (F : x' ＝ s x) (G : y' ＝ s y) →
+    section-dependent-identification p q s F G →
+    section-dependent-identification
+      ( inv p)
+      ( inv-dependent-identification B p q)
+      ( s)
+      ( G)
+      ( F)
+  inv-section-identification-over refl refl s F G α =
+    inv (right-unit ∙ ap-id G ∙ α ∙ right-unit ∙ ap-id F)
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -225,34 +240,8 @@ module _
       ( sB)
       ( G)
       ( F)
-  inv-section-htpy-over α =
-    ind-htpy f
-      ( λ g H →
-        {g' : {a : A} → A' a → B' (g a)} →
-        (H' : htpy-over B' H f' g') →
-        (G : section-map-over g g' sA sB) →
-        section-htpy-over H H' sA sB F G →
-        section-htpy-over
-          ( inv-htpy H)
-          ( inv-htpy-over B' H f' g' H')
-          sA sB G F)
-      ( λ H' G α a →
-        ind-htpy f'
-          ( λ g'a H'a →
-            (Ga : g'a (sA a) ＝ sB (f a)) →
-            (αa : H'a (sA a) ∙ Ga ＝ ap (tr B' refl) (F a) ∙ apd sB refl) →
-            map-eq-transpose-equiv-inv (equiv-tr B' refl) (inv (H'a (sA a))) ∙ F a ＝
-            ap (tr B' refl) Ga ∙ apd sB refl)
-          ( λ Ga αa →
-            ap (_∙ F a) (compute-refl-eq-transpose-equiv-inv (equiv-tr B' refl)) ∙
-            inv (right-unit ∙ ap-id _ ∙ (αa ∙ right-unit ∙ ap-id _)))
-          ( H')
-          ( G a)
-          ( α a))
-      ( H)
-      ( H')
-      ( G)
-      ( α)
+  inv-section-htpy-over α a =
+    inv-section-identification-over (H a) (H' (sA a)) sB (F a) (G a) (α a)
 
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
@@ -315,6 +304,8 @@ module _
   (sX : (x : X) → X' x)
   (S : section-map-over s s' sX sA)
   where
+  open import foundation.commuting-squares-of-identifications
+  open import foundation.commuting-triangles-of-identifications
 
   right-whisk-section-htpy-over :
     section-htpy-over (H ·r s)
@@ -322,33 +313,45 @@ module _
       sX sB
       ( comp-section-map-over f s f' s' sX sA sB F S)
       ( comp-section-map-over g s g' s' sX sA sB G S)
-  right-whisk-section-htpy-over =
-    ind-htpy f
-      ( λ g H →
-          {g' : {a : A} → A' a → B' (g a)}
-          (H' : htpy-over B' H f' g')
-          (G : section-map-over g g' sA sB)
-          (α : section-htpy-over H H' sA sB F G) →
-          section-htpy-over (H ·r s)
-            ( right-whisk-htpy-over H H' s s')
-            sX sB
-            ( comp-section-map-over f s f' s' sX sA sB F S)
-            ( comp-section-map-over g s g' s' sX sA sB G S))
-      ( λ H' G α x →
-        ind-htpy (f' {s x})
-          ( λ g'sx H'sx →
-            (Gsx : g'sx (sA (s x)) ＝ sB (f (s x)))
-            (αsx : H'sx (sA (s x)) ∙ Gsx ＝ ap (tr B' refl) (F (s x)) ∙ apd sB refl) →
-            H'sx (s' (sX x)) ∙ ((ap g'sx (S x)) ∙ Gsx) ＝
-            ap (tr B' refl) (ap f' (S x) ∙ (F (s x))) ∙ apd sB refl)
-          ( λ Gsx αsx → inv (right-unit ∙ (ap-id _ ∙ ap (ap f' (S x) ∙_) (inv (αsx ∙ (right-unit ∙ ap-id _))))))
-          ( H')
-          ( G (s x))
-          ( α (s x)))
-      ( H)
-      ( H')
-      ( G)
-      ( α)
+  right-whisk-section-htpy-over x =
+    right-whisker-concat-coherence-square-identifications
+      ( ap (tr B' (H (s x)) ∘ f') (S x))
+      ( H' (s' (sX x)))
+      ( H' (sA (s x)))
+      ( ap g' (S x))
+      ( nat-htpy (H' {s x}) (S x))
+      ( G (s x)) ∙
+    ap (_∙ (H' (sA (s x)) ∙ G (s x))) (ap-comp (tr B' (H (s x))) f' (S x)) ∙
+    ap (ap (tr B' (H (s x))) (ap f' (S x)) ∙_) (α (s x)) ∙
+    right-whisker-concat-coherence-triangle-identifications'
+      ( ap (tr B' (H (s x))) (ap f' (S x) ∙ F (s x)))
+      ( ap (tr B' (H (s x))) (F (s x)))
+      ( ap (tr B' (H (s x))) (ap f' (S x)))
+      ( apd sB (H (s x)))
+      ( inv (ap-concat (tr B' (H (s x))) (ap f' (S x)) (F (s x))))
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {X : UU l2}
+  {A' : A → UU l3} {X' : X → UU l4}
+  where
+
+  left-whisk-section-dependent-identification :
+    {x y : A} (p : x ＝ y)
+    {x' : A' x} {y' : A' y} (q : dependent-identification A' p x' y')
+    (sA : (a : A) → A' a)
+    (F : x' ＝ sA x) (G : y' ＝ sA y)
+    (α : section-dependent-identification p q sA F G)
+    {s : A → X} (s' : {a : A} → A' a → X' (s a))
+    (sX : (x : X) → X' x)
+    (S : section-map-over s s' sA sX) →
+    section-dependent-identification
+      ( ap s p)
+      ( left-whisk-dependent-identification s' p q)
+      sX (ap s' F ∙ S x) (ap s' G ∙ S y)
+  left-whisk-section-dependent-identification {x} refl refl sA F G α s' sX S =
+    ap (λ p → ap s' p ∙ S x) (α ∙ right-unit ∙ ap-id F) ∙
+    inv (right-unit ∙ ap-id (ap s' F ∙ S x))
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -376,34 +379,30 @@ module _
       sA sX
       ( comp-section-map-over s f s' f' sA sB sX S F)
       ( comp-section-map-over s g s' g' sA sB sX S G)
-  left-whisk-section-htpy-over =
-    ind-htpy f
-      ( λ g H →
-        {g' : {a : A} → A' a → B' (g a)} →
-        (H' : htpy-over B' H f' g')
-        (G : section-map-over g g' sA sB)
-        (α : section-htpy-over H H' sA sB F G) →
-        section-htpy-over (s ·l H)
-          ( left-whisk-htpy-over H H' s')
-          sA sX
-          ( comp-section-map-over s f s' f' sA sB sX S F)
-          ( comp-section-map-over s g s' g' sA sB sX S G))
-      ( λ H' G α a →
-        ap (_∙ (ap s' (G a) ∙ S (f a)))
-          ( compute-left-whisk-htpy-over H' s' (sA a)) ∙
-        ind-htpy f'
-          ( λ g'a H'a →
-            (Ga : g'a (sA a) ＝ sB (f a)) →
-            (αa : H'a (sA a) ∙ Ga ＝ ap (tr B' refl) (F a) ∙ apd sB refl) →
-            ap s' (H'a (sA a)) ∙ (ap s' Ga ∙ S (f a)) ＝ ap (tr X' refl) (ap s' (F a) ∙ S (f a)) ∙ apd sX refl)
-          ( λ Ga αa → inv (right-unit ∙ (ap-id _ ∙ ap (_∙ S (f a)) (inv (ap (ap s') (αa ∙ (right-unit ∙ ap-id _)))))))
-          ( H')
-          ( G a)
-          ( α a))
+  left-whisk-section-htpy-over a =
+    left-whisk-section-dependent-identification (H a) (H' (sA a)) sB (F a) (G a) (α a) s' sX S
+
+module _
+  {l1 l2 : Level}
+  {A : UU l1} {B : A → UU l2}
+  where
+
+  concat-section-dependent-identification :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z)
+    {x' : B x} {y' : B y} {z' : B z}
+    (p' : dependent-identification B p x' y')
+    (q' : dependent-identification B q y' z')
+    (s : (a : A) → B a)
+    (F : x' ＝ s x) (G : y' ＝ s y) (H : z' ＝ s z)
+    (α : section-dependent-identification p p' s F G)
+    (β : section-dependent-identification q q' s G H) →
+    section-dependent-identification (p ∙ q)
+      ( concat-dependent-identification B p q p' q')
+      ( s)
+      ( F)
       ( H)
-      ( H')
-      ( G)
-      ( α)
+  concat-section-dependent-identification refl q refl q' s F G H α β =
+    β ∙ ap (λ p → ap (tr B q) p ∙ apd s q) (α ∙ right-unit ∙ ap-id F)
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -431,49 +430,9 @@ module _
       ( sB)
       ( F)
       ( I)
-  concat-section-htpy-over =
-    ind-htpy f
-      ( λ g H →
-        {i : A → B} (K : g ~ i)
-        {g' : {a : A} → A' a → B' (g a)}
-        {i' : {a : A} → A' a → B' (i a)}
-        (H' : htpy-over B' H f' g') (K' : htpy-over B' K g' i')
-        (G : section-map-over g g' sA sB)
-        (I : section-map-over i i' sA sB)
-        (α : section-htpy-over H H' sA sB F G)
-        (β : section-htpy-over K K' sA sB G I) →
-        section-htpy-over
-          ( H ∙h K)
-          ( concat-htpy-over H K H' K')
-          sA sB F I)
-      ( λ K H' K' G I α β a →
-        ind-htpy (f' {a})
-          ( λ g'a H' →
-            {ia : B} (K : f a ＝ ia)
-            {i'a : A' a → B' ia}
-            (K' : (a' : A' a) → dependent-identification B' K (g'a a') (i'a a'))
-            (G : g'a (sA a) ＝ sB (f a))
-            (I : i'a (sA a) ＝ sB ia)
-            (α : H' (sA a) ∙ G ＝ ap id (F a) ∙ refl)
-            (β : K' (sA a) ∙ I ＝ ap (tr B' K) G ∙ apd sB K) →
-              concat-dependent-identification B' refl K (H' (sA a)) (K' (sA a)) ∙ I ＝
-              ap (tr B' K) (F a) ∙ apd sB K)
-          ( λ K K' G I α β → β ∙ ap (λ p → ap (tr B' K) p ∙ apd sB K) (α ∙ (right-unit ∙ ap-id (F a))))
-          ( H' {a})
-          ( K a)
-          ( K' {a})
-          ( G a)
-          ( I a)
-          ( α a)
-          ( β a))
-      ( H)
-      ( K)
-      ( H')
-      ( K')
-      ( G)
-      ( I)
-      ( α)
-      ( β)
+  concat-section-htpy-over a =
+    concat-section-dependent-identification
+      ( H a) (K a) (H' (sA a)) (K' (sA a)) sB (F a) (G a) (I a) (α a) (β a)
 
 module _
   {l1 l2 l3 l4 l5 l6 : Level}
@@ -703,38 +662,97 @@ module _
 
 module _
   {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {A' : UU l3} {B' : UU l4}
+  (f : A → B) (f' : A' → B')
+  where
+
+  htpy-hom-map :
+    (hA : A' → A) (hB : B' → B) →
+    coherence-square-maps f' hA hB f →
+    (hA' : A' → A) (hB' : B' → B) →
+    coherence-square-maps f' hA' hB' f →
+    hA ~ hA' → hB ~ hB' →
+    UU (l2 ⊔ l3)
+  htpy-hom-map hA hB H hA' hB' H' σA σB = H ∙h (σB ·r f') ~ (f ·l σA) ∙h H'
+
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3}
+  {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (f : A → B) (g : B → C)
+  (f' : X → Y) (g' : Y → Z)
+  (hA hA' : X → A) (hB hB' : Y → B) (hC hC' : Z → C)
+  (σA : hA ~ hA') (σB : hB ~ hB') (σC : hC ~ hC')
+  (NL : coherence-square-maps f' hA hB f)
+  (FL : coherence-square-maps f' hA' hB' f)
+  (α : htpy-hom-map f f' hA hB NL hA' hB' FL σA σB)
+  (NR : coherence-square-maps g' hB hC g)
+  (FR : coherence-square-maps g' hB' hC' g)
+  (β : htpy-hom-map g g' hB hC NR hB' hC' FR σB σC)
+  where
+  open import foundation.commuting-squares-of-homotopies
+
+  comp-htpy-hom-map :
+    htpy-hom-map (g ∘ f) (g' ∘ f')
+      hA hC
+      ( pasting-horizontal-coherence-square-maps f' g' hA hB hC f g NL NR)
+      hA' hC'
+      ( pasting-horizontal-coherence-square-maps f' g' hA' hB' hC' f g FL FR)
+      σA σC
+  comp-htpy-hom-map =
+    left-whisker-concat-coherence-square-homotopies (g ·l NL)
+      ( g ·l σB ·r f') (NR ·r f') (FR ·r f') (σC ·r (g' ∘ f'))
+      ( β ·r f') ∙h
+    right-whisker-concat-htpy
+      ( inv-htpy
+          ( distributive-left-whisker-comp-concat g NL (σB ·r f')) ∙h
+        left-whisker-comp² g α ∙h
+        distributive-left-whisker-comp-concat g (f ·l σA) FL ∙h
+        right-whisker-concat-htpy
+          ( preserves-comp-left-whisker-comp g f σA)
+          ( g ·l FL))
+      ( FR ·r f') ∙h
+    assoc-htpy ((g ∘ f) ·l σA) (g ·l FL) (FR ·r f')
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {A' : UU l3} {B' : UU l4}
+  (f : A → B) (f' : A' → B')
+  (hA : A' → A) (hB : B' → B)
+  (H : coherence-square-maps f' hA hB f)
+  where
+
+  section-displayed-map-over : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  section-displayed-map-over =
+    Σ ( section hA)
+      ( λ sA →
+        Σ ( section hB)
+          ( λ sB →
+            Σ ( coherence-square-maps
+                f (map-section hA sA) (map-section hB sB) f')
+              ( λ K →
+                htpy-hom-map f f
+                  ( hA ∘ map-section hA sA)
+                  ( hB ∘ map-section hB sB)
+                  ( pasting-vertical-coherence-square-maps f
+                    ( map-section hA sA) (map-section hB sB) f' hA hB f K H)
+                  id id refl-htpy
+                  ( is-section-map-section hA sA)
+                  ( is-section-map-section hB sB))))
+
+module _
+  {l1 l2 l3 l4 : Level}
   {A : UU l1} {P : A → UU l2}
   {B : UU l3} {Q : B → UU l4}
   (f : A → B)
   (f' : {a : A} → P a → Q (f a))
   where
 
-  section-displayed-map-over : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  section-displayed-map-over =
-    Σ ( section (pr1 {B = P}))
-      ( λ sA →
-        Σ ( section (pr1 {B = Q}))
-          ( λ sB →
-            Σ ( coherence-square-maps f
-                ( map-section pr1 sA)
-                ( map-section pr1 sB)
-                ( tot-map-over f (λ a → f' {a})))
-              ( λ H →
-                ( ( pasting-vertical-coherence-square-maps
-                    ( f)
-                    ( map-section pr1 sA)
-                    ( map-section pr1 sB)
-                    ( tot-map-over f (λ a → f' {a}))
-                    ( pr1)
-                    ( pr1)
-                    ( f)
-                    ( H)
-                    ( refl-htpy))) ∙h
-                  ( is-section-map-section pr1 sB ·r f) ~
-                ( f ·l is-section-map-section pr1 sA) ∙h refl-htpy)))
-
   sect-map-over-section-map-over :
-    (s : section-displayed-map-over) →
+    (s :
+      section-displayed-map-over f
+        (tot-map-over f (λ a → f' {a}))
+        pr1 pr1 refl-htpy) →
     section-map-over f
       ( f')
       ( sect-section P (pr1 s))
@@ -785,6 +803,14 @@ module _
     (map-section-family s ·l H) a ＝ eq-pair-Σ (H a) (apd s (H a))
   left-whisker-dependent-function-lemma a = ap-map-section-family-lemma s (H a)
 module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+  concat-vertical-eq-pair :
+    {x y : A} (p : x ＝ y) {x' : B x} {y' z' : B y} →
+    (q : dependent-identification B p x' y') → (r : y' ＝ z') →
+    eq-pair-Σ p (q ∙ r) ＝ eq-pair-Σ p q ∙ eq-pair-eq-fiber r
+  concat-vertical-eq-pair {x} refl q r = ap-concat (pair x) q r
+module _
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2}
   {A' : A → UU l3} {B' : B → UU l4}
@@ -827,6 +853,254 @@ module _
       ( inv (ap-comp (tot-map-over g g') (pair (f a)) (F a)) ∙
         ap-comp (pair (g (f a))) (g' (f a)) (F a)) ∙
     inv (ap-concat (pair (g (f a))) (ap (g' (f a)) (F a)) (G (f a)))
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f g : A → B} {f' g' : X → Y}
+  (top : f' ~ g') (bottom : f ~ g)
+  {hA : X → A} {hB : Y → B}
+  (N : f ∘ hA ~ hB ∘ f') (F : g ∘ hA ~ hB ∘ g')
+  where
+
+  hom-htpy : UU (l2 ⊔ l3)
+  hom-htpy = N ∙h (hB ·l top) ~ (bottom ·r hA) ∙h F
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f g : A → B) (f' g' : X → Y)
+  (bottom : f ~ g) (top : f' ~ g')
+  (hA : X → A) (hB : Y → B)
+  (N : f ∘ hA ~ hB ∘ f') (F : g ∘ hA ~ hB ∘ g')
+  (α : hom-htpy top bottom N F)
+  (hA' : X → A) (hB' : Y → B)
+  (N' : f ∘ hA' ~ hB' ∘ f') (F' : g ∘ hA' ~ hB' ∘ g')
+  (β : hom-htpy top bottom N' F')
+  (σA : hA ~ hA') (σB : hB ~ hB')
+  (γN : htpy-hom-map f f' hA hB N hA' hB' N' σA σB)
+  (γF : htpy-hom-map g g' hA hB F hA' hB' F' σA σB)
+  where
+  open import foundation.commuting-squares-of-homotopies
+
+  nudged-α nudged-β :
+    (N ∙h (hB ·l top)) ∙h (σB ·r g') ~
+    (f ·l σA) ∙h ((bottom ·r hA') ∙h F')
+  nudged-α =
+    right-whisker-concat-htpy α (σB ·r g') ∙h
+    assoc-htpy (bottom ·r hA) F (σB ·r g') ∙h
+    left-whisker-concat-htpy (bottom ·r hA) γF ∙h
+    right-whisker-concat-coherence-square-homotopies
+      ( f ·l σA)
+      ( bottom ·r hA)
+      ( bottom ·r hA')
+      ( g ·l σA)
+      ( λ x → nat-htpy bottom (σA x))
+      ( F')
+  nudged-β =
+    left-whisker-concat-coherence-square-homotopies N
+      ( σB ·r f')
+      ( hB ·l top)
+      ( hB' ·l top)
+      ( σB ·r g')
+      ( λ x → inv (nat-htpy σB (top x))) ∙h
+    right-whisker-concat-htpy γN (hB' ·l top) ∙h
+    assoc-htpy (f ·l σA) N' (hB' ·l top) ∙h
+    left-whisker-concat-htpy (f ·l σA) β
+
+  htpy-hom-htpy : UU (l2 ⊔ l3)
+  htpy-hom-htpy = nudged-α ~ nudged-β
+
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
+  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  (top : h' ∘ f' ~ k' ∘ g')
+  (bottom : h ∘ f ~ k ∘ g)
+  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
+  (back-left : (f ∘ hA) ~ (hB ∘ f'))
+  (back-right : (g ∘ hA) ~ (hC ∘ g'))
+  (front-left : (h ∘ hB) ~ (hD ∘ h'))
+  (front-right : (k ∘ hC) ~ (hD ∘ k'))
+  (α :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      top back-left back-right front-left front-right bottom)
+  (hA' : A' → A) (hB' : B' → B) (hC' : C' → C) (hD' : D' → D)
+  (back-left' : (f ∘ hA') ~ (hB' ∘ f'))
+  (back-right' : (g ∘ hA') ~ (hC' ∘ g'))
+  (front-left' : (h ∘ hB') ~ (hD' ∘ h'))
+  (front-right' : (k ∘ hC') ~ (hD' ∘ k'))
+  (β :
+    coherence-cube-maps f g h k f' g' h' k' hA' hB' hC' hD'
+      top back-left' back-right' front-left' front-right' bottom)
+  (σA : hA ~ hA') (σB : hB ~ hB') (σC : hC ~ hC') (σD : hD ~ hD')
+  (back-left-H : htpy-hom-map f f' hA hB back-left hA' hB' back-left' σA σB)
+  (back-right-H : htpy-hom-map g g' hA hC back-right hA' hC' back-right' σA σC)
+  (front-left-H : htpy-hom-map h h' hB hD front-left hB' hD' front-left' σB σD)
+  (front-right-H : htpy-hom-map k k' hC hD front-right hC' hD' front-right' σC σD)
+  where
+  open import foundation.commuting-squares-of-homotopies
+
+  htpy-hom-square :
+    UU (l4 ⊔ l1')
+  htpy-hom-square =
+    htpy-hom-htpy (h ∘ f) (k ∘ g) (h' ∘ f') (k' ∘ g') bottom top hA hD
+      ( pasting-horizontal-coherence-square-maps f' h' hA hB hD f h back-left front-left)
+      ( pasting-horizontal-coherence-square-maps g' k' hA hC hD g k back-right front-right)
+      ( α)
+      hA' hD'
+      ( pasting-horizontal-coherence-square-maps f' h' hA' hB' hD' f h back-left' front-left')
+      ( pasting-horizontal-coherence-square-maps g' k' hA' hC' hD' g k back-right' front-right')
+      ( β)
+      σA σD
+      ( comp-htpy-hom-map f h f' h' hA hA' hB hB' hD hD' σA σB σD
+        back-left back-left' back-left-H
+        front-left front-left' front-left-H)
+      ( comp-htpy-hom-map g k g' k' hA hA' hC hC' hD hD' σA σC σD
+        back-right back-right' back-right-H
+        front-right front-right' front-right-H)
+
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  (H : coherence-square-maps g f k h)
+  where
+
+  id-cube :
+    coherence-cube-maps f g h k f g h k id id id id
+      H refl-htpy refl-htpy refl-htpy refl-htpy H
+  id-cube = left-unit-law-left-whisker-comp H ∙h inv-htpy-right-unit-htpy
+
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
+  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
+  (top : (h' ∘ f') ~ (k' ∘ g'))
+  (back-left : (f ∘ hA) ~ (hB ∘ f'))
+  (back-right : (g ∘ hA) ~ (hC ∘ g'))
+  (front-left : (h ∘ hB) ~ (hD ∘ h'))
+  (front-right : (k ∘ hC) ~ (hD ∘ k'))
+  (bottom : (h ∘ f) ~ (k ∘ g))
+  (α :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      top back-left back-right front-left front-right bottom)
+  where
+
+  section-displayed-cube-over : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l1' ⊔ l2' ⊔ l3' ⊔ l4')
+  section-displayed-cube-over =
+    Σ ( section-displayed-map-over f f' hA hB back-left)
+      ( λ sF →
+        Σ ( section-displayed-map-over k k' hC hD front-right)
+          ( λ sK →
+            Σ ( coherence-square-maps g
+                ( map-section hA (pr1 sF))
+                ( map-section hC (pr1 sK))
+                ( g'))
+              ( λ G →
+                Σ ( htpy-hom-map g g
+                    ( hA ∘ map-section hA (pr1 sF))
+                    ( hC ∘ map-section hC (pr1 sK))
+                    ( pasting-vertical-coherence-square-maps g
+                      ( map-section hA (pr1 sF))
+                      ( map-section hC (pr1 sK))
+                      g' hA hC g
+                      G back-right)
+                    id id refl-htpy
+                    ( is-section-map-section hA (pr1 sF))
+                    ( is-section-map-section hC (pr1 sK)))
+                  ( λ sG →
+                    Σ ( coherence-square-maps h
+                        ( map-section hB (pr1 (pr2 sF)))
+                        ( map-section hD (pr1 (pr2 sK)))
+                        ( h'))
+                      ( λ H →
+                        Σ ( htpy-hom-map h h
+                            ( hB ∘ map-section hB (pr1 (pr2 sF)))
+                            ( hD ∘ map-section hD (pr1 (pr2 sK)))
+                            ( pasting-vertical-coherence-square-maps h
+                              ( map-section hB (pr1 (pr2 sF)))
+                              ( map-section hD (pr1 (pr2 sK)))
+                              h' hB hD h
+                              H front-left)
+                            id id refl-htpy
+                            ( is-section-map-section hB (pr1 (pr2 sF)))
+                            ( is-section-map-section hD (pr1 (pr2 sK))))
+                          ( λ sH →
+                            Σ ( coherence-cube-maps f' g' h' k' f g h k
+                                ( map-section hA (pr1 sF))
+                                ( map-section hB (pr1 (pr2 sF)))
+                                ( map-section hC (pr1 sK))
+                                ( map-section hD (pr1 (pr2 sK)))
+                                ( bottom)
+                                ( pr1 (pr2 (pr2 sF)))
+                                ( G)
+                                ( H)
+                                ( pr1 (pr2 (pr2 sK)))
+                                ( top))
+                              ( λ β →
+                                htpy-hom-square f g h k f g h k bottom bottom
+                                  ( hA ∘ map-section hA (pr1 sF))
+                                  ( hB ∘ map-section hB (pr1 (pr2 sF)))
+                                  ( hC ∘ map-section hC (pr1 sK))
+                                  ( hD ∘ map-section hD (pr1 (pr2 sK)))
+                                  ( pasting-vertical-coherence-square-maps f
+                                    ( map-section hA (pr1 sF))
+                                    ( map-section hB (pr1 (pr2 sF)))
+                                    f' hA hB f
+                                    ( pr1 (pr2 (pr2 sF)))
+                                    ( back-left))
+                                  ( pasting-vertical-coherence-square-maps g
+                                    ( map-section hA (pr1 sF))
+                                    ( map-section hC (pr1 sK))
+                                    g' hA hC g
+                                    ( G)
+                                    ( back-right))
+                                  ( pasting-vertical-coherence-square-maps h
+                                    ( map-section hB (pr1 (pr2 sF)))
+                                    ( map-section hD (pr1 (pr2 sK)))
+                                    h' hB hD h
+                                    ( H)
+                                    ( front-left))
+                                  ( pasting-vertical-coherence-square-maps k
+                                    ( map-section hC (pr1 sK))
+                                    ( map-section hD (pr1 (pr2 sK)))
+                                    k' hC hD k
+                                    ( pr1 (pr2 (pr2 sK)))
+                                    ( front-right))
+                                  ( pasting-vertical-coherence-cube-maps f g h k
+                                    f' g' h' k' f g h k
+                                    hA hB hC hD
+                                    ( map-section hA (pr1 sF))
+                                    ( map-section hB (pr1 (pr2 sF)))
+                                    ( map-section hC (pr1 sK))
+                                    ( map-section hD (pr1 (pr2 sK)))
+                                    ( top)
+                                    back-left back-right front-left front-right bottom
+                                    ( bottom)
+                                    ( pr1 (pr2 (pr2 sF)))
+                                    ( G)
+                                    ( H)
+                                    ( pr1 (pr2 (pr2 sK)))
+                                    ( α)
+                                    ( β))
+                                  id id id id
+                                  refl-htpy refl-htpy refl-htpy refl-htpy
+                                  ( id-cube f g h k bottom)
+                                  ( is-section-map-section hA (pr1 sF))
+                                  ( is-section-map-section hB (pr1 (pr2 sF)))
+                                  ( is-section-map-section hC (pr1 sK))
+                                  ( is-section-map-section hD (pr1 (pr2 sK)))
+                                  ( pr2 (pr2 (pr2 sF)))
+                                  ( sG)
+                                  ( sH)
+                                  ( pr2 (pr2 (pr2 sK))))))))))
+
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
   {P1 : UU l1} {P2 : UU l2} {P3 : UU l3} {P4 : UU l4}
@@ -862,61 +1136,6 @@ module _
   coh-tot-square-over (p , q) =
     ap-pr1-eq-pair-Σ (bottom p) (top q) ∙ inv right-unit
 
-  section-displayed-cube-over : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8)
-  section-displayed-cube-over =
-    Σ ( section-displayed-map-over {Q = Q2} f1 (f1' _))
-      ( λ sF1 →
-        Σ ( section-displayed-map-over {Q = Q4} f2 (f2' _))
-          ( λ sF2 →
-            Σ ( coherence-square-maps g1
-                ( map-section pr1 (pr1 sF1))
-                ( map-section pr1 (pr1 sF2))
-                ( tot-map-over g1 g1'))
-              ( λ G1 →
-                Σ ( coherence-square-maps g2
-                    ( map-section pr1 (pr1 (pr2 sF1)))
-                    ( map-section pr1 (pr1 (pr2 sF2)))
-                    ( tot-map-over g2 g2'))
-                  ( λ G2 →
-                    Σ ( coherence-cube-maps
-                        ( tot-map-over f1 f1')
-                        ( tot-map-over g1 g1')
-                        ( tot-map-over g2 g2')
-                        ( tot-map-over f2 f2')
-                        f1 g1 g2 f2
-                        ( map-section pr1 (pr1 sF1))
-                        ( map-section pr1 (pr1 (pr2 sF1)))
-                        ( map-section pr1 (pr1 sF2))
-                        ( map-section pr1 (pr1 (pr2 sF2)))
-                        ( bottom)
-                        ( pr1 (pr2 (pr2 sF1)))
-                        ( G1)
-                        ( G2)
-                        ( pr1 (pr2 (pr2 sF2)))
-                        ( tot-square-over))
-                      ( λ α →
-                        pasting-vertical-coherence-cube-maps f1 g1 g2 f2
-                          ( tot-map-over f1 f1')
-                          ( tot-map-over g1 g1')
-                          ( tot-map-over g2 g2')
-                          ( tot-map-over f2 f2')
-                          f1 g1 g2 f2
-                          pr1 pr1 pr1 pr1
-                          ( map-section pr1 (pr1 sF1))
-                          ( map-section pr1 (pr1 (pr2 sF1)))
-                          ( map-section pr1 (pr1 sF2))
-                          ( map-section pr1 (pr1 (pr2 sF2)))
-                          ( tot-square-over)
-                          refl-htpy refl-htpy refl-htpy refl-htpy
-                          bottom bottom
-                          ( pr1 (pr2 (pr2 sF1)))
-                          ( G1)
-                          ( G2)
-                          ( pr1 (pr2 (pr2 sF2)))
-                          ( coh-tot-square-over)
-                          ( α) ~ {!!}
-                          )))))
-
   module _
     (s1 : (p : P1) → Q1 p) (s2 : (p : P2) → Q2 p)
     (s3 : (p : P3) → Q3 p) (s4 : (p : P4) → Q4 p)
@@ -927,7 +1146,7 @@ module _
     where
     open import foundation.action-on-identifications-binary-functions
 
-    _ :
+    lemma :
       pasting-vertical-coherence-square-maps g1
         ( map-section-family s1) (map-section-family s3)
         ( tot-map-over g1 g1') (tot-map-over f1 f1')
@@ -935,8 +1154,10 @@ module _
         ( eq-pair-eq-fiber ∘ G1)
         ( coherence-square-maps-Σ Q4 g1' f1' f2' g2' (λ p → top {p})) ~
       ( λ p → eq-pair-Σ (bottom p) (top (s1 p) ∙ ap (f2' (g1 p)) (G1 p)))
-    _ = λ p → ap (eq-pair-Σ (bottom p) (top (s1 p)) ∙_) ([i] p) ∙
-              {!!}
+    lemma = λ p → ap
+              ( eq-pair-Σ (bottom p) (top (s1 p)) ∙_)
+              ( [i] p) ∙
+              ( inv (concat-vertical-eq-pair (bottom p) (top (s1 p)) (ap (f2' (g1 p)) (G1 p))))
         where
         [i] =
           λ (p : P1) →
@@ -949,29 +1170,45 @@ module _
         s1 s2 s3 s4
         G1 F1 F2 G2
         bottom top →
-      section-displayed-cube-over
+      section-displayed-cube-over f1 g1 g2 f2
+        ( tot-map-over f1 f1')
+        ( tot-map-over g1 g1')
+        ( tot-map-over g2 g2')
+        ( tot-map-over f2 f2')
+        pr1 pr1 pr1 pr1
+        ( coherence-square-maps-Σ Q4 g1' f1' f2' g2' (λ p → top {p}))
+        refl-htpy refl-htpy refl-htpy refl-htpy
+        ( bottom)
+        ( coh-tot-square-over)
     pr1 (section-cube-over-sect-square-over α) =
       ( section-dependent-function s1) ,
       ( section-dependent-function s2) ,
-      ( λ p → eq-pair-eq-fiber (F1 p)) ,
+      ( eq-pair-eq-fiber ∘ F1) ,
       ( λ p → right-unit ∙ ap-pr1-eq-pair-Σ refl (F1 p))
     pr1 (pr2 (section-cube-over-sect-square-over α)) =
       ( section-dependent-function s3) ,
       ( section-dependent-function s4) ,
-      ( λ p → eq-pair-eq-fiber (F2 p)) ,
+      ( eq-pair-eq-fiber ∘ F2) ,
       ( λ p → right-unit ∙ ap-pr1-eq-pair-Σ refl (F2 p))
     pr2 (pr2 (section-cube-over-sect-square-over α)) =
-      ( λ p → eq-pair-eq-fiber (G1 p)) ,
-      ( λ p → eq-pair-eq-fiber (G2 p)) ,
+      ( eq-pair-eq-fiber ∘ G1) ,
+      ( λ p → right-unit ∙ ap-pr1-eq-pair-Σ refl (G1 p)) ,
+      ( eq-pair-eq-fiber ∘ G2) ,
+      ( λ p → right-unit ∙ ap-pr1-eq-pair-Σ refl (G2 p)) ,
       ( λ p →
         ap-binary
           ( _∙_)
           ( pasting-horizontal-comp f1' g2' s1 s2 s4 F1 G2 p)
           ( ap-map-section-family-lemma s4 (bottom p)) ∙
         {!!} ∙
+        ap (eq-pair-Σ (bottom p)) (inv (α p) ∙ assoc (top (s1 p)) (ap (f2' (g1 p)) (G1 p)) (F2 (g1 p))) ∙
+        concat-vertical-eq-pair
+          ( bottom p)
+          ( top (s1 p))
+          ( ap (f2' (g1 p)) (G1 p) ∙ F2 (g1 p)) ∙
         ap-binary
           ( _∙_)
           ( refl {x = eq-pair-Σ (bottom p) (top (s1 p))})
           ( inv (pasting-horizontal-comp g1' f2' s1 s3 s4 G1 F2 p))) ,
-      ( {!!})
+      {!!}
 ```
