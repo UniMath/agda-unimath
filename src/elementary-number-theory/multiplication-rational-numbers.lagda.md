@@ -346,7 +346,7 @@ abstract
 
 ## See also
 
-- The multiplicative monoid strucutre on the rational numbers is defined in
+- The multiplicative monoid structure on the rational numbers is defined in
   [`elementary-number-theory.multiplicative-monoid-of-rational-numbers`](elementary-number-theory.multiplicative-monoid-of-rational-numbers.md);
 - The multiplicative group structure on the rational numbers is defined in
   [`elementary-number-theory.multiplicative-group-of-rational-numbers`](elementary-number-theory.multiplicative-group-of-rational-numbers.md).
