@@ -83,7 +83,7 @@ module _
             (λ x → le-ℚ x (neg-ℚ r))
             (neg-neg-ℚ q)
             (neg-le-ℚ r (neg-ℚ q) r<-q) ,
-           tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ r)) in-upper-r))
+            tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ r)) in-upper-r))
       (forward-implication (is-rounded-upper-cut-ℝ x (neg-ℚ q)) in-neg-lower)
   pr2 (is-rounded-lower-cut-neg-ℝ q) exists-r =
     backward-implication

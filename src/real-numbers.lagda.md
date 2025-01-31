@@ -7,5 +7,6 @@ module real-numbers where
 
 open import real-numbers.dedekind-real-numbers public
 open import real-numbers.metric-space-of-real-numbers public
+open import real-numbers.negation-real-numbers public
 open import real-numbers.rational-real-numbers public
 ```
