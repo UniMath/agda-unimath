@@ -36,7 +36,7 @@ open import group-theory.abelian-groups
 ## Definition
 
 A cut `(L, U)` is arithmetically located if for any positive `ε : ℚ`, there
-exist `p, q : ℚ` such that `0 < q - p < ε`, `p ∈ L`, and `q ∈ U`.  Intuitively,
+exist `p, q : ℚ` such that `0 < q - p < ε`, `p ∈ L`, and `q ∈ U`. Intuitively,
 when `L , U` represent the Dedekind cuts of a real number `x`, `p` and `q` are
 rational approximations of `x` to within `ε`.
 
@@ -109,6 +109,7 @@ module _
             ( q -ℚ p)
             ( backward-implication (iff-translate-diff-le-zero-ℚ p q) p<q)))
 ```
+
 ## References
 
 This page follows parts of Section 11 in {{#cite TaylorP:dedras}}.
