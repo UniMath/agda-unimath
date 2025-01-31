@@ -325,6 +325,25 @@ abstract
     ( ap ((x *ℚ z) +ℚ_) (left-negative-law-mul-ℚ y z))
 ```
 
+### Computing multiplication of rational numbers that come from integer fractions
+
+```agda
+abstract
+  mul-rational-fraction-ℤ :
+    (x y : fraction-ℤ) →
+      rational-fraction-ℤ x *ℚ rational-fraction-ℤ y ＝
+        rational-fraction-ℤ (x *fraction-ℤ y)
+  mul-rational-fraction-ℤ x y =
+    eq-ℚ-sim-fraction-ℤ
+      (mul-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y))
+      (x *fraction-ℤ y)
+      (sim-fraction-mul-fraction-ℤ
+        (symmetric-sim-fraction-ℤ
+          x (reduce-fraction-ℤ x) (sim-reduced-fraction-ℤ x))
+        (symmetric-sim-fraction-ℤ
+          y (reduce-fraction-ℤ y) (sim-reduced-fraction-ℤ y)))
+```
+
 ## See also
 
 - The multiplicative monoid strucutre on the rational numbers is defined in
