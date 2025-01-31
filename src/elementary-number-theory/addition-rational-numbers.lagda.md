@@ -165,8 +165,8 @@ abstract
 abstract
   add-rational-fraction-ℤ :
     (x y : fraction-ℤ) →
-      rational-fraction-ℤ x +ℚ rational-fraction-ℤ y ＝
-        rational-fraction-ℤ (x +fraction-ℤ y)
+    rational-fraction-ℤ x +ℚ rational-fraction-ℤ y ＝
+    rational-fraction-ℤ (x +fraction-ℤ y)
   add-rational-fraction-ℤ x y =
     eq-ℚ-sim-fraction-ℤ
       ( add-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y))
