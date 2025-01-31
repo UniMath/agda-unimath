@@ -1,13 +1,13 @@
 # The Archimedean property of the integers
 
 ```agda
-module elementary-number-theory.archimedean-integers where
+module elementary-number-theory.archimedean-property-integers where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.archimedean-natural-numbers
+open import elementary-number-theory.archimedean-property-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
