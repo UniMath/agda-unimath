@@ -22,8 +22,11 @@ open import foundation.transport-along-identifications
 
 ## Definition
 
-The {{#concept "Archimedean property" Disambiguation="natural numbers" Agda=archimedean-property-ℕ}} of the [natural numbers](elementary-number-theory.natural-numbers.md) is that for any nonzero natural
-number `x` and any natural number `y`, there is an `n : ℕ` such that `y < n *ℕ x`.
+The
+{{#concept "Archimedean property" Disambiguation="natural numbers" Agda=archimedean-property-ℕ}}
+of the [natural numbers](elementary-number-theory.natural-numbers.md) is that
+for any nonzero natural number `x` and any natural number `y`, there is an
+`n : ℕ` such that `y < n *ℕ x`.
 
 ```agda
 abstract
