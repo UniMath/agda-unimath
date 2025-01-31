@@ -337,7 +337,7 @@ eq-translate-right-le-ℕ (succ-ℕ z) x y = eq-translate-right-le-ℕ z x y
 eq-translate-left-le-ℕ : (z x y : ℕ) → le-ℕ (z +ℕ x) (z +ℕ y) ＝ le-ℕ x y
 eq-translate-left-le-ℕ z x y =
   ap-binary le-ℕ (commutative-add-ℕ z x) (commutative-add-ℕ z y) ∙
-    eq-translate-right-le-ℕ z x y
+  eq-translate-right-le-ℕ z x y
 ```
 
 ### Addition on the natural numbers preserves strict inequality
