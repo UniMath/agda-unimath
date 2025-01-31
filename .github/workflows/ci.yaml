@@ -34,7 +34,7 @@ jobs:
         agda: ['2.7.0']
     steps:
       - name: Checkout our repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: master
       - name: Setup Agda
@@ -42,7 +42,7 @@ jobs:
         with:
           agda-version: ${{ matrix.agda }}
 
-      - uses: actions/cache/restore@v3
+      - uses: actions/cache/restore@v4
         id: cache-agda-formalization
         name: Restore Agda formalization cache
         with:
@@ -61,13 +61,13 @@ jobs:
           make check
 
       - name: Save Agda build cache
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: master/_build
           key: '${{ steps.cache-agda-formalization.outputs.cache-primary-key }}'
 
       # Install Python and friends for website generation only where needed
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         if: ${{ matrix.os == 'ubuntu-latest' }}
         with:
           python-version: '3.8'
@@ -92,7 +92,7 @@ jobs:
       # keep the same key for a branch and update it on pushes.
       - name: Save pre-website cache
         if: ${{ matrix.os == 'ubuntu-latest' }}
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           key: pre-website-${{ github.run_id }}
           path: master/docs
@@ -106,21 +106,21 @@ jobs:
       actions: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           path: master
 
-      - uses: peaceiris/actions-mdbook@v1
+      - uses: peaceiris/actions-mdbook@v2
         with:
           mdbook-version: '0.4.34'
 
-      - uses: baptiste0928/cargo-install@v2
+      - uses: baptiste0928/cargo-install@v3
         with:
           crate: mdbook-linkcheck
           version: '0.7.7'
 
       # Install Python and friends for website generation only where needed
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.8'
           check-latest: true
@@ -128,7 +128,7 @@ jobs:
 
       - run: python3 -m pip install -r master/scripts/requirements.txt
 
-      - uses: actions/cache/restore@v3
+      - uses: actions/cache/restore@v4
         with:
           key: pre-website-${{ github.run_id }}
           path: master/docs
@@ -162,9 +162,9 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.8'
           check-latest: true
@@ -172,4 +172,4 @@ jobs:
 
       - run: python3 -m pip install -r scripts/requirements.txt
 
-      - uses: pre-commit/action@v3.0.0
+      - uses: pre-commit/action@v3.0.1
