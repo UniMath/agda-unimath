@@ -175,7 +175,7 @@ linear-le-ℕ (succ-ℕ x) (succ-ℕ y) =
   map-coproduct id (map-coproduct (ap succ-ℕ) id) (linear-le-ℕ x y)
 ```
 
-### `n < m` if and only if there exists a nonzero natural number `l` such that `n + l = m`
+### `n < m` if and only if there exists a nonzero natural number `l` such that `l + n = m`
 
 ```agda
 subtraction-le-ℕ :
