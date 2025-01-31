@@ -159,6 +159,29 @@ abstract
       ( distributive-neg-add-fraction-ℤ x y))
 ```
 
+### The inclusion of integer fractions preserves addition
+
+```agda
+abstract
+  add-rational-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    rational-fraction-ℤ x +ℚ rational-fraction-ℤ y ＝
+    rational-fraction-ℤ (x +fraction-ℤ y)
+  add-rational-fraction-ℤ x y =
+    eq-ℚ-sim-fraction-ℤ
+      ( add-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y))
+      ( x +fraction-ℤ y)
+      ( sim-fraction-add-fraction-ℤ
+        ( symmetric-sim-fraction-ℤ
+          ( x)
+          ( reduce-fraction-ℤ x)
+          ( sim-reduced-fraction-ℤ x))
+        ( symmetric-sim-fraction-ℤ
+          ( y)
+          ( reduce-fraction-ℤ y)
+          ( sim-reduced-fraction-ℤ y)))
+```
+
 ## See also
 
 - The additive group structure on the rational numbers is defined in
