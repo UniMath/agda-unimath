@@ -18,6 +18,7 @@ open import foundation.maybe
 open import foundation.negated-equality
 open import foundation.retractions
 open import foundation.sections
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -41,6 +42,7 @@ initial algebra.
 record ℕ∞ : UU lzero
   where
   coinductive
+  constructor cons-ℕ∞
   field
     decons-ℕ∞ : Maybe ℕ∞
 
@@ -68,12 +70,11 @@ succ-ℕ∞ : ℕ∞ → ℕ∞
 decons-ℕ∞ (succ-ℕ∞ x) = unit-Maybe x
 ```
 
-### The constructor function for conatural numbers
+### Alternative definition of the constructor function for conatural numbers
 
 ```agda
-cons-ℕ∞ : Maybe ℕ∞ → ℕ∞
-cons-ℕ∞ (inl x) = succ-ℕ∞ x
-cons-ℕ∞ (inr x) = zero-ℕ∞
+cons-ℕ∞' : Maybe ℕ∞ → ℕ∞
+cons-ℕ∞' = rec-coproduct succ-ℕ∞ (λ _ → zero-ℕ∞)
 ```
 
 ### Alternative definition of the deconstructor function for conatural numbers
@@ -155,13 +156,21 @@ section-decons-ℕ∞' = cons-ℕ∞ , is-section-cons-ℕ∞'
 
 retraction-cons-ℕ∞' : retraction cons-ℕ∞
 retraction-cons-ℕ∞' = decons-ℕ∞' , is-section-cons-ℕ∞'
+
+is-section-cons-ℕ∞'' : is-section decons-ℕ∞' cons-ℕ∞'
+is-section-cons-ℕ∞'' (inl x) = refl
+is-section-cons-ℕ∞'' (inr x) = refl
+
+is-injective-cons-ℕ∞' : is-injective cons-ℕ∞'
+is-injective-cons-ℕ∞' =
+  is-injective-retraction cons-ℕ∞' (decons-ℕ∞' , is-section-cons-ℕ∞'')
 ```
 
 ### The successor function is injective
 
 ```agda
 is-injective-succ-ℕ∞ : is-injective succ-ℕ∞
-is-injective-succ-ℕ∞ p = is-injective-inl (is-injective-cons-ℕ∞ p)
+is-injective-succ-ℕ∞ p = is-injective-inl (is-injective-cons-ℕ∞' p)
 ```
 
 ## External links
