@@ -97,5 +97,3 @@ module _
         ( is-positive-le-zero-ℚ
           ( q -ℚ p) (backward-implication (iff-translate-diff-le-zero-ℚ p q) p<q)))
 ```
-
-### The cuts of Dedekind real numbers are arithmetically located
