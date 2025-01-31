@@ -42,7 +42,7 @@ abstract
   ... | inl neg-y = zero-ℕ , le-zero-is-negative-ℤ y neg-y
   ... | inr nonneg-y =
       ind-Σ
-        (λ nx (nonzero-nx , nx=x) →
+        ( λ nx (nonzero-nx , nx=x) →
           ind-Σ
             ( λ n ny<n*nx →
               n ,
