@@ -148,8 +148,8 @@ abstract
               ( (factorial-ℕ (succ-ℕ k) *ℕ factorial-ℕ l) *ℕ succ-ℕ l)))
           ( left-successor-law-add-ℕ k l ∙ inv (right-successor-law-add-ℕ k l))
       ＝ ( ( ( binomial-coefficient-ℕ (k +ℕ succ-ℕ l) k) *ℕ
-             ( factorial-ℕ k *ℕ factorial-ℕ (succ-ℕ l))) *ℕ
-           ( succ-ℕ k)) +ℕ
+            ( factorial-ℕ k *ℕ factorial-ℕ (succ-ℕ l))) *ℕ
+            ( succ-ℕ k)) +ℕ
         ( ( ( binomial-coefficient-ℕ (succ-ℕ k +ℕ l) (succ-ℕ k)) *ℕ
             ( factorial-ℕ (succ-ℕ k) *ℕ factorial-ℕ l)) *ℕ
           ( succ-ℕ l))
