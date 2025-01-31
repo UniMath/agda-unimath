@@ -279,8 +279,8 @@ module _
   neg-le-ℤ : le-ℤ (neg-ℤ y) (neg-ℤ x)
   neg-le-ℤ =
     tr
-      is-positive-ℤ
-      (ap (_+ℤ neg-ℤ x) (inv (neg-neg-ℤ y)) ∙
+      ( is-positive-ℤ)
+      ( ap (_+ℤ neg-ℤ x) (inv (neg-neg-ℤ y)) ∙
         commutative-add-ℤ (neg-ℤ (neg-ℤ y)) (neg-ℤ x))
       I
 ```
