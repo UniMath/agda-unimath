@@ -24,8 +24,6 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 
-open import foundation-core.identity-types
-
 open import univalent-combinatorics.standard-finite-types
 ```
 
