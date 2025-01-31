@@ -9,6 +9,7 @@ module foundation.commuting-cubes-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-hexagons-of-identifications
+open import foundation.commuting-squares-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
@@ -16,6 +17,7 @@ open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
+open import foundation.whiskering-homotopies-concatenation
 
 open import foundation-core.function-types
 open import foundation-core.identity-types
@@ -51,7 +53,7 @@ of maps has a top face, a back-left face, a back-right face, a front-left face,
 a front-right face, and a bottom face, all of which are homotopies. An element
 of type `coherence-cube-maps` is a homotopy filling the cube.
 
-## Definition
+## Definitions
 
 ```agda
 module _
@@ -315,6 +317,113 @@ expect to be able to construct a coherence
       ( g' , f ∘ hA , inv-htpy (rectangle-back-right-bottom-cube))
       ( refl-htpy' g')
       ( inv-htpy back-left)
+```
+
+### Vertical pasting of commuting cubes
+
+```agda
+module _
+  {l1 l2 l3 l4 l1' l2' l3' l4' l1'' l2'' l3'' l4'' : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
+  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  {A'' : UU l1''} {B'' : UU l2''} {C'' : UU l3''} {D'' : UU l4''}
+  (f'' : A'' → B'') (g'' : A'' → C'') (h'' : B'' → D'') (k'' : C'' → D'')
+  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
+  (hA' : A'' → A') (hB' : B'' → B') (hC' : C'' → C') (hD' : D'' → D')
+  (mid : (h' ∘ f') ~ (k' ∘ g'))
+  (bottom-back-left : (f ∘ hA) ~ (hB ∘ f'))
+  (bottom-back-right : (g ∘ hA) ~ (hC ∘ g'))
+  (bottom-front-left : (h ∘ hB) ~ (hD ∘ h'))
+  (bottom-front-right : (k ∘ hC) ~ (hD ∘ k'))
+  (bottom : (h ∘ f) ~ (k ∘ g))
+  (top : (h'' ∘ f'') ~ (k'' ∘ g''))
+  (top-back-left : (f' ∘ hA') ~ (hB' ∘ f''))
+  (top-back-right : (g' ∘ hA') ~ (hC' ∘ g''))
+  (top-front-left : (h' ∘ hB') ~ (hD' ∘ h''))
+  (top-front-right : (k' ∘ hC') ~ (hD' ∘ k''))
+  where
+
+  pasting-vertical-coherence-cube-maps :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      ( mid)
+      ( bottom-back-left)
+      ( bottom-back-right)
+      ( bottom-front-left)
+      ( bottom-front-right)
+      ( bottom) →
+    coherence-cube-maps f' g' h' k' f'' g'' h'' k'' hA' hB' hC' hD'
+      ( top)
+      ( top-back-left)
+      ( top-back-right)
+      ( top-front-left)
+      ( top-front-right)
+      ( mid) →
+    coherence-cube-maps f g h k f'' g'' h'' k''
+      ( hA ∘ hA') (hB ∘ hB') (hC ∘ hC') (hD ∘ hD')
+      ( top)
+      ( pasting-vertical-coherence-square-maps f'' hA' hB' f' hA hB f
+        ( top-back-left) (bottom-back-left))
+      ( pasting-vertical-coherence-square-maps g'' hA' hC' g' hA hC g
+        ( top-back-right) (bottom-back-right))
+      ( pasting-vertical-coherence-square-maps h'' hB' hD' h' hB hD h
+        ( top-front-left) (bottom-front-left))
+      ( pasting-vertical-coherence-square-maps k'' hC' hD' k' hC hD k
+        ( top-front-right) (bottom-front-right))
+      ( bottom)
+  pasting-vertical-coherence-cube-maps α β =
+    ( right-whisker-concat-htpy
+      ( commutative-pasting-vertical-pasting-horizontal-coherence-square-maps
+        f'' h'' hA' hB' hD' f' h' hA hB hD f h
+        top-back-left top-front-left bottom-back-left bottom-front-left)
+      ( (hD ∘ hD') ·l top)) ∙h
+    ( left-whisker-concat-coherence-square-homotopies
+      ( bottom-left-rect ·r hA')
+      ( hD ·l (mid ·r hA'))
+      ( hD ·l top-left-rect)
+      ( hD ·l top-right-rect)
+      ( (hD ∘ hD') ·l top)
+      ( ( left-whisker-concat-htpy
+          ( hD ·l top-left-rect)
+          ( inv-preserves-comp-left-whisker-comp hD hD' top)) ∙h
+        ( map-coherence-square-homotopies hD
+          ( mid ·r hA') (top-left-rect) (top-right-rect) (hD' ·l top)
+          ( β)))) ∙h
+    ( right-whisker-concat-htpy
+      ( α ·r hA')
+      ( hD ·l top-right-rect)) ∙h
+    ( assoc-htpy
+      ( bottom ·r (hA ∘ hA'))
+      ( bottom-right-rect ·r hA')
+      ( hD ·l top-right-rect)) ∙h
+    ( left-whisker-concat-htpy
+      ( bottom ·r (hA ∘ hA'))
+      ( inv-htpy
+        ( commutative-pasting-vertical-pasting-horizontal-coherence-square-maps
+          g'' k'' hA' hC' hD' g' k' hA hC hD g k
+          top-back-right top-front-right bottom-back-right bottom-front-right)))
+    where
+      bottom-left-rect : h ∘ f ∘ hA ~ hD ∘ h' ∘ f'
+      bottom-left-rect =
+        pasting-horizontal-coherence-square-maps f' h' hA hB hD f h
+          bottom-back-left bottom-front-left
+      bottom-right-rect : k ∘ g ∘ hA ~ hD ∘ k' ∘ g'
+      bottom-right-rect =
+        pasting-horizontal-coherence-square-maps g' k' hA hC hD g k
+          bottom-back-right bottom-front-right
+      top-left-rect : h' ∘ f' ∘ hA' ~ hD' ∘ h'' ∘ f''
+      top-left-rect =
+        pasting-horizontal-coherence-square-maps f'' h'' hA' hB' hD' f' h'
+          top-back-left top-front-left
+      top-right-rect : k' ∘ g' ∘ hA' ~ hD' ∘ k'' ∘ g''
+      top-right-rect =
+        pasting-horizontal-coherence-square-maps g'' k'' hA' hC' hD' g' k'
+          top-back-right top-front-right
+      back-left-rect : f ∘ hA ∘ hA' ~ hB ∘ hB' ∘ f''
+      back-left-rect =
+        pasting-vertical-coherence-square-maps f'' hA' hB' f' hA hB f
+          top-back-left bottom-back-left
 ```
 
 ### Any coherence of commuting cubes induces a coherence of parallel cones
