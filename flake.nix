@@ -2,9 +2,13 @@
   description = "agda-unimath";
 
   inputs = {
-    # Unstable is needed for Agda 2.6.4, latest stable 23.05 only has 2.6.3
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Stable 24.11 has Agda 2.7.0.1
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     flake-utils.url = "github:numtide/flake-utils";
+    # We aim to support Python 3.8 as long as Ubuntu 20.24 has LTS,
+    # since it ships with that version. Python 3.8 itself is already
+    # EOL, so it was dropped from nixpkgs 24.05
+    nixpkgs-python.url = "github:NixOS/nixpkgs/nixos-23.11";
     # Nixpkgs with tested versions of mdbook crates;
     # may be removed once we backport new mdbook assets to our
     # modified versions
@@ -15,13 +19,14 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-mdbook, flake-utils, mdbook-catppuccin }:
+  outputs = { self, nixpkgs, nixpkgs-mdbook, nixpkgs-python, flake-utils, mdbook-catppuccin }:
     flake-utils.lib.eachDefaultSystem
       (system:
         let
           pkgs = nixpkgs.legacyPackages."${system}";
           pkgs-mdbook = nixpkgs-mdbook.legacyPackages."${system}";
-          python = pkgs.python38.withPackages (p: with p; [
+          pkgs-python = nixpkgs-python.legacyPackages."${system}";
+          python = pkgs-python.python38.withPackages (p: with p; [
             # Keep in sync with scripts/requirements.txt
             # pre-commit <- not installed as a Python package but as a binary below
             pybtex

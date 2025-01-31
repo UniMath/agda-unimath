@@ -350,7 +350,7 @@ neg-le-fraction-ℤ :
   le-fraction-ℤ (neg-fraction-ℤ y) (neg-fraction-ℤ x)
 neg-le-fraction-ℤ (m , n , p) (m' , n' , p') H =
   binary-tr le-ℤ
-    (inv (left-negative-law-mul-ℤ m' n))
-    (inv (left-negative-law-mul-ℤ m n'))
-    (neg-le-ℤ (m *ℤ n') (m' *ℤ n) H)
+    ( inv (left-negative-law-mul-ℤ m' n))
+    ( inv (left-negative-law-mul-ℤ m n'))
+    ( neg-le-ℤ (m *ℤ n') (m' *ℤ n) H)
 ```
