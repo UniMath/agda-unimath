@@ -1,7 +1,7 @@
 # The Archimedean property of the natural numbers
 
 ```agda
-module elementary-number-theory.archimedean-natural-numbers where
+module elementary-number-theory.archimedean-property-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
