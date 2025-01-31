@@ -159,7 +159,7 @@ abstract
       ( distributive-neg-add-fraction-ℤ x y))
 ```
 
-### Computing addition of rational numbers that come from integer fractions
+### The inclusion of integer fractions preserves addition
 
 ```agda
 abstract
