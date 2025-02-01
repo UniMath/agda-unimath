@@ -34,7 +34,7 @@ open import real-numbers.dedekind-real-numbers
 
 ## Idea
 
-The negation of a Dedekind real number with cuts `L, U` has lower cut equal to
+The {{#concept "negation" Disambiguation="Dedekind real number" Agda=neg-ℝ}} of a [Dedekind real number](real-numbers.dedekind-real-numbers.md) with cuts `(L, U)` has lower cut equal to
 the negation of elements of `U`, and upper cut equal to the negation of elements
 in `L`.
 
@@ -118,13 +118,13 @@ module _
 
   is-disjoint-cut-neg-ℝ :
     (q : ℚ) →
-      ¬ (is-in-subtype lower-cut-neg-ℝ q × is-in-subtype upper-cut-neg-ℝ q)
+    ¬ (is-in-subtype lower-cut-neg-ℝ q × is-in-subtype upper-cut-neg-ℝ q)
   is-disjoint-cut-neg-ℝ q (in-lower-neg , in-upper-neg) =
     is-disjoint-cut-ℝ x (neg-ℚ q) (in-upper-neg , in-lower-neg)
 
   is-located-lower-upper-cut-neg-ℝ :
     (q r : ℚ) → le-ℚ q r →
-      type-disjunction-Prop (lower-cut-neg-ℝ q) (upper-cut-neg-ℝ r)
+    type-disjunction-Prop (lower-cut-neg-ℝ q) (upper-cut-neg-ℝ r)
   is-located-lower-upper-cut-neg-ℝ q r q<r =
     elim-disjunction
       ( disjunction-Prop (lower-cut-neg-ℝ q) (upper-cut-neg-ℝ r))

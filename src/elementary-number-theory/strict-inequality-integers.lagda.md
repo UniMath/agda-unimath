@@ -272,15 +272,10 @@ module _
 ### Negation reverses the order of strict inequality of integers
 
 ```agda
-module _
-  (x y : ℤ) (I : le-ℤ x y)
-  where
-
-  neg-le-ℤ : le-ℤ (neg-ℤ y) (neg-ℤ x)
-  neg-le-ℤ =
-    tr
-      ( is-positive-ℤ)
-      ( ap (_+ℤ neg-ℤ x) (inv (neg-neg-ℤ y)) ∙
-        commutative-add-ℤ (neg-ℤ (neg-ℤ y)) (neg-ℤ x))
-      I
+neg-le-ℤ : (x y : ℤ) → le-ℤ x y → le-ℤ (neg-ℤ y) (neg-ℤ x)
+neg-le-ℤ x y =
+  tr
+    ( is-positive-ℤ)
+    ( ap (_+ℤ neg-ℤ x) (inv (neg-neg-ℤ y)) ∙
+      commutative-add-ℤ (neg-ℤ (neg-ℤ y)) (neg-ℤ x))
 ```
