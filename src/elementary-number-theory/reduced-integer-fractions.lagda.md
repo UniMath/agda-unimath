@@ -21,6 +21,7 @@ open import elementary-number-theory.positive-integers
 open import elementary-number-theory.relatively-prime-integers
 
 open import foundation.action-on-identifications-functions
+open import foundation.action-on-identifications-binary-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -579,4 +580,33 @@ unique-reduce-fraction-ℤ x y H =
           ( unique-denominator-reduce-fraction-ℤ x y H)
           ( eq-is-prop
             ( is-prop-is-positive-ℤ (int-reduce-denominator-fraction-ℤ y))))))
+```
+
+### Reducing a reduced fraction is the identity
+
+```agda
+reduce-is-reduced-fraction-ℤ :
+  (x : fraction-ℤ) →
+  is-reduced-fraction-ℤ x →
+  reduce-fraction-ℤ x ＝ x
+reduce-is-reduced-fraction-ℤ x H =
+  ap-binary
+    ( pair)
+    ( eq-quotient-div-is-one-ℤ
+      ( gcd-ℤ
+        ( numerator-fraction-ℤ x)
+        ( denominator-fraction-ℤ x))
+      ( numerator-fraction-ℤ x)
+      ( H)
+      ( reduce-numerator-fraction-ℤ x))
+    (eq-positive-ℤ
+      ( positive-denominator-fraction-ℤ (reduce-fraction-ℤ x))
+      ( positive-denominator-fraction-ℤ x)
+      ( eq-quotient-div-is-one-ℤ
+        ( gcd-ℤ
+          ( numerator-fraction-ℤ x)
+          ( denominator-fraction-ℤ x))
+        ( denominator-fraction-ℤ x)
+        ( H)
+        ( reduce-denominator-fraction-ℤ x)))
 ```

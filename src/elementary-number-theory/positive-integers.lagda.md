@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.nonzero-integers
 
 open import foundation.action-on-identifications-functions
+open import foundation.action-on-identifications-binary-functions
 open import foundation.coproduct-types
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
@@ -87,6 +88,11 @@ module _
 
   is-positive-int-positive-ℤ : is-positive-ℤ int-positive-ℤ
   is-positive-int-positive-ℤ = pr2 p
+
+eq-positive-ℤ :
+  (x y : positive-ℤ) → int-positive-ℤ x ＝ int-positive-ℤ y → x ＝ y
+eq-positive-ℤ (x , pos-x) (.x , pos-y) refl =
+  ap (x ,_) (eq-is-prop' (is-prop-is-positive-ℤ x) pos-x pos-y)
 ```
 
 ### Positive constants
