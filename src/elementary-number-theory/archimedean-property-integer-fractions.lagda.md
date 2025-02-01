@@ -32,20 +32,21 @@ The Archimedean property of the integer fractions is that for any
 `y` is less than `n` as an integer fraction times `x`.
 
 ```agda
-archimedean-property-fraction-ℤ :
-  (x y : fraction-ℤ) →
-    is-positive-fraction-ℤ x →
-    Σ ℕ (λ n → le-fraction-ℤ y (in-fraction-ℤ (int-ℕ n) *fraction-ℤ x))
-archimedean-property-fraction-ℤ (px , qx , pos-qx) (py , qy , pos-qy) pos-px =
-  ind-Σ
-    ( λ n H →
-      n ,
-      tr
-        ( le-ℤ (py *ℤ qx))
-        ( inv (associative-mul-ℤ (int-ℕ n) px qy))
-        ( H))
-    (archimedean-property-ℤ
-      ( px *ℤ qy)
-      ( py *ℤ qx)
-      ( is-positive-mul-ℤ pos-px pos-qy))
+abstract
+  archimedean-property-fraction-ℤ :
+    (x y : fraction-ℤ) →
+      is-positive-fraction-ℤ x →
+      Σ ℕ (λ n → le-fraction-ℤ y (in-fraction-ℤ (int-ℕ n) *fraction-ℤ x))
+  archimedean-property-fraction-ℤ (px , qx , pos-qx) (py , qy , pos-qy) pos-px =
+    ind-Σ
+      ( λ n H →
+        n ,
+        tr
+          ( le-ℤ (py *ℤ qx))
+          ( inv (associative-mul-ℤ (int-ℕ n) px qy))
+          ( H))
+      (archimedean-property-ℤ
+        ( px *ℤ qy)
+        ( py *ℤ qx)
+        ( is-positive-mul-ℤ pos-px pos-qy))
 ```
