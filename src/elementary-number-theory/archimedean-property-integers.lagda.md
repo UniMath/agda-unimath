@@ -31,8 +31,11 @@ open import foundation.unit-type
 
 ## Definition
 
-The {{#concept "Archimedean property" Disambiguation="integers" Agda=archimedean-property-ℤ}} of the [integers](elementary-number-theory.integers.md) is that for any [positive integer](elementary-number-theory.positive-integers.md) `x`
-and integer `y`, there is an `n : ℕ` such that `y < int-ℕ n *ℤ x`.
+The
+{{#concept "Archimedean property" Disambiguation="integers" Agda=archimedean-property-ℤ}}
+of the [integers](elementary-number-theory.integers.md) is that for any
+[positive integer](elementary-number-theory.positive-integers.md) `x` and
+integer `y`, there is an `n : ℕ` such that `y < int-ℕ n *ℤ x`.
 
 ```agda
 abstract
