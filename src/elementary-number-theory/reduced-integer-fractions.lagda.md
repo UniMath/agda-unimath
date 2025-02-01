@@ -585,28 +585,29 @@ unique-reduce-fraction-ℤ x y H =
 ### Reducing a reduced fraction is the identity
 
 ```agda
-reduce-is-reduced-fraction-ℤ :
-  (x : fraction-ℤ) →
-  is-reduced-fraction-ℤ x →
-  reduce-fraction-ℤ x ＝ x
-reduce-is-reduced-fraction-ℤ x H =
-  ap-binary
-    ( pair)
-    ( eq-quotient-div-is-one-ℤ
-      ( gcd-ℤ
-        ( numerator-fraction-ℤ x)
-        ( denominator-fraction-ℤ x))
-      ( numerator-fraction-ℤ x)
-      ( H)
-      ( reduce-numerator-fraction-ℤ x))
-    (eq-positive-ℤ
-      ( positive-denominator-fraction-ℤ (reduce-fraction-ℤ x))
-      ( positive-denominator-fraction-ℤ x)
+abstract
+  reduce-is-reduced-fraction-ℤ :
+    (x : fraction-ℤ) →
+    is-reduced-fraction-ℤ x →
+    reduce-fraction-ℤ x ＝ x
+  reduce-is-reduced-fraction-ℤ x H =
+    ap-binary
+      ( pair)
       ( eq-quotient-div-is-one-ℤ
         ( gcd-ℤ
           ( numerator-fraction-ℤ x)
           ( denominator-fraction-ℤ x))
-        ( denominator-fraction-ℤ x)
+        ( numerator-fraction-ℤ x)
         ( H)
-        ( reduce-denominator-fraction-ℤ x)))
+        ( reduce-numerator-fraction-ℤ x))
+      (eq-positive-ℤ
+        ( positive-denominator-fraction-ℤ (reduce-fraction-ℤ x))
+        ( positive-denominator-fraction-ℤ x)
+        ( eq-quotient-div-is-one-ℤ
+          ( gcd-ℤ
+            ( numerator-fraction-ℤ x)
+            ( denominator-fraction-ℤ x))
+          ( denominator-fraction-ℤ x)
+          ( H)
+          ( reduce-denominator-fraction-ℤ x)))
 ```
