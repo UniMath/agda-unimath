@@ -28,8 +28,8 @@ open import foundation.transport-along-identifications
 ## Definition
 
 The Archimedean property of the integer fractions is that for any
-`x y : fraction-ℤ`, with positive `x`, there is an `n : ℕ` such that
-`y` is less than `n` as an integer fraction times `x`.
+`x y : fraction-ℤ`, with positive `x`, there is an `n : ℕ` such that `y` is less
+than `n` as an integer fraction times `x`.
 
 ```agda
 abstract
