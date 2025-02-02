@@ -131,23 +131,17 @@ module _
   where
 
   lemma : (p ε : ℚ) → (n : ℕ) → is-positive-ℚ ε → is-in-subtype L p → is-in-subtype U (p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)) →
-    exists (ℚ × ℚ) (λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r (q +ℚ (rational-ℤ (int-ℕ 2) *ℚ ε)) ∧ L q ∧ U r)
+    exists (ℚ × ℚ) (λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r (q +ℚ (ε +ℚ ε)) ∧ L q ∧ U r)
   lemma p ε zero-ℕ positive-ε p-in-L p-plus-1-ε-in-U =
     intro-exists
       (p , p +ℚ ε)
       ( le-right-add-rational-ℚ⁺ p (ε , positive-ε) ,
         tr
           (leq-ℚ (p +ℚ ε))
-          (equational-reasoning
-            (p +ℚ ε) +ℚ ε
-            ＝ p +ℚ (ε +ℚ ε)  by associative-add-ℚ p ε ε
-            ＝ p +ℚ ((one-ℚ *ℚ ε) +ℚ (one-ℚ *ℚ ε))
-              by ap (p +ℚ_) (inv (ap-add-ℚ (left-unit-law-mul-ℚ ε) (left-unit-law-mul-ℚ ε)))
-            ＝ p +ℚ (? *ℚ ε)
-              by ap (p +ℚ_) (inv (right-distributive-mul-add-ℚ one-ℚ one-ℚ ε)))
+          (associative-add-ℚ p ε ε)
           (leq-le-ℚ (le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε))) ,
         p-in-L ,
-        tr (is-in-subtype U) {!  ap (p +ℚ_) (left-unit-law-mul-ℚ ε) !} p-plus-1-ε-in-U)
+        tr (is-in-subtype U) (ap (p +ℚ_) (left-unit-law-mul-ℚ ε)) p-plus-1-ε-in-U)
 
   located-inhabited-arithmetically-located :
     is-arithmetically-located L U
