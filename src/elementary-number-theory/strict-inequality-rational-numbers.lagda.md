@@ -159,16 +159,17 @@ module _
   (p q : fraction-ℤ)
   where
 
-  preserves-le-rational-fraction-ℤ :
-    le-fraction-ℤ p q → le-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
-  preserves-le-rational-fraction-ℤ =
-    preserves-le-sim-fraction-ℤ
-      ( p)
-      ( q)
-      ( reduce-fraction-ℤ p)
-      ( reduce-fraction-ℤ q)
-      ( sim-reduced-fraction-ℤ p)
-      ( sim-reduced-fraction-ℤ q)
+  abstract
+    preserves-le-rational-fraction-ℤ :
+      le-fraction-ℤ p q → le-ℚ (rational-fraction-ℤ p) (rational-fraction-ℤ q)
+    preserves-le-rational-fraction-ℤ =
+      preserves-le-sim-fraction-ℤ
+        ( p)
+        ( q)
+        ( reduce-fraction-ℤ p)
+        ( reduce-fraction-ℤ q)
+        ( sim-reduced-fraction-ℤ p)
+        ( sim-reduced-fraction-ℤ q)
 
 module _
   (x : ℚ) (p : fraction-ℤ)
