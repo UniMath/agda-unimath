@@ -226,3 +226,19 @@ abstract
           ( inv (left-negative-law-mul-ℤ nx dy))
           ( inv (left-negative-law-mul-ℤ ny dx))))
 ```
+
+### The inclusion of integers preserves addition
+
+```agda
+abstract
+  add-in-fraction-ℤ :
+    (x y : ℤ) →
+    sim-fraction-ℤ
+      (in-fraction-ℤ x +fraction-ℤ in-fraction-ℤ y)
+      (in-fraction-ℤ (x +ℤ y))
+  add-in-fraction-ℤ x y =
+    ap-binary
+      ( λ a b → (a +ℤ b) *ℤ one-ℤ)
+      ( right-unit-law-mul-ℤ x)
+      ( right-unit-law-mul-ℤ y)
+```
