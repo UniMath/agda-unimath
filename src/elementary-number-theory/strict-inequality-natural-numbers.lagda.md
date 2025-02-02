@@ -12,7 +12,9 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -210,7 +212,7 @@ pr1 (pr2 (pr2 ℕ-Strictly-Ordered-Type)) = irreflexive-le-ℕ
 pr2 (pr2 (pr2 ℕ-Strictly-Ordered-Type)) = transitive-le-ℕ
 ```
 
-### `n < m` if and only if there exists a nonzero natural number `l` such that `n + l = m`
+### `n < m` if and only if there exists a nonzero natural number `l` such that `l + n = m`
 
 ```agda
 subtraction-le-ℕ :
@@ -443,6 +445,55 @@ preserves-strict-order-add-ℕ a b c d H K =
     ( b +ℕ d)
     ( preserves-strict-order-right-add-ℕ b c d K)
     ( preserves-strict-order-left-add-ℕ a b c H)
+```
+
+### Addition reflects the strict ordering
+
+```agda
+reflects-strict-order-left-add-ℕ :
+  (a b c : ℕ) → a +ℕ c <-ℕ b +ℕ c → a <-ℕ b
+reflects-strict-order-left-add-ℕ a b zero-ℕ H =
+  H
+reflects-strict-order-left-add-ℕ a b (succ-ℕ c) H =
+  reflects-strict-order-left-add-ℕ a b c H
+
+reflects-strict-order-right-add-ℕ :
+  (a c d : ℕ) → a +ℕ c <-ℕ a +ℕ d → c <-ℕ d
+reflects-strict-order-right-add-ℕ zero-ℕ c d H =
+  concatenate-eq-le-eq-ℕ c
+    ( 0 +ℕ c)
+    ( 0 +ℕ d)
+    ( d)
+    ( inv (left-unit-law-add-ℕ c))
+    ( H)
+    ( left-unit-law-add-ℕ d)
+reflects-strict-order-right-add-ℕ (succ-ℕ a) c d H =
+  reflects-strict-order-right-add-ℕ a
+    ( succ-ℕ c)
+    ( succ-ℕ d)
+    ( concatenate-eq-le-eq-ℕ
+      ( a +ℕ succ-ℕ c)
+      ( succ-ℕ a +ℕ c)
+      ( succ-ℕ a +ℕ d)
+      ( a +ℕ succ-ℕ d)
+      ( inv (left-successor-law-add-ℕ a c))
+      ( H)
+      ( left-successor-law-add-ℕ a d))
+```
+
+### Strict inequality on the natural numbers is translation invariant
+
+```agda
+right-translation-invariant-le-ℕ : (z x y : ℕ) → x +ℕ z <-ℕ y +ℕ z ＝ x <-ℕ y
+right-translation-invariant-le-ℕ zero-ℕ x y =
+  refl
+right-translation-invariant-le-ℕ (succ-ℕ z) x y =
+  right-translation-invariant-le-ℕ z x y
+
+left-translation-invariant-le-ℕ : (z x y : ℕ) → z +ℕ x <-ℕ z +ℕ y ＝ x <-ℕ y
+left-translation-invariant-le-ℕ z x y =
+  ap-binary le-ℕ (commutative-add-ℕ z x) (commutative-add-ℕ z y) ∙
+  right-translation-invariant-le-ℕ z x y
 ```
 
 ### Multiplication is strictly order preserving

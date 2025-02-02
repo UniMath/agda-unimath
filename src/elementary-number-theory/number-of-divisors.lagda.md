@@ -49,7 +49,7 @@ $$
 $$
 
 The number of divisors function is listed as A000005 in the
-[OEIS](literature.oeis.md) {{#cite OEIS}}.
+[OEIS](literature.oeis.md) {{#cite oeis}}.
 
 ## Definitions
 

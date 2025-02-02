@@ -107,7 +107,7 @@ module _
   is-largest-power-divisor-valuation-largest-power-divisor-ℕ :
     is-largest-power-divisor-ℕ m n valuation-largest-power-divisor-ℕ
   is-largest-power-divisor-valuation-largest-power-divisor-ℕ =
-    {!is-least-upper-bound-is-upper-bound-ℕ!}
+    {!!}
 ```
 
 ## See also

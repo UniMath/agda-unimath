@@ -84,6 +84,11 @@ module _
   section-retract : section map-retraction-retract
   pr1 section-retract = inclusion-retract
   pr2 section-retract = is-retraction-map-retraction-retract
+
+retract-section :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B) → section f → B retract-of A
+retract-section f s = (pr1 s , f , pr2 s)
 ```
 
 ### The type of retracts of a type

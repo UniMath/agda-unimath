@@ -90,37 +90,6 @@ module _
 
 ## Properties
 
-### The types of lists and arrays are equivalent
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
-
-  list-vec : (n : ℕ) → (vec A n) → list A
-  list-vec zero-ℕ _ = nil
-  list-vec (succ-ℕ n) (x ∷ l) = cons x (list-vec n l)
-
-  vec-list : (l : list A) → vec A (length-list l)
-  vec-list nil = empty-vec
-  vec-list (cons x l) = x ∷ vec-list l
-
-  is-section-vec-list : (λ l → list-vec (length-list l) (vec-list l)) ~ id
-  is-section-vec-list nil = refl
-  is-section-vec-list (cons x l) = ap (cons x) (is-section-vec-list l)
-
-  is-retraction-vec-list :
-    ( λ (x : Σ ℕ (λ n → vec A n)) →
-      ( length-list (list-vec (pr1 x) (pr2 x)) ,
-        vec-list (list-vec (pr1 x) (pr2 x)))) ~
-    id
-  is-retraction-vec-list (zero-ℕ , empty-vec) = refl
-  is-retraction-vec-list (succ-ℕ n , (x ∷ v)) =
-    ap
-      ( λ v → succ-ℕ (pr1 v) , (x ∷ (pr2 v)))
-      ( is-retraction-vec-list (n , v))
-```
-
 ```agda
 module _
   {l : Level} {A : UU l}

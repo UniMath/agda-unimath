@@ -28,6 +28,8 @@ open import linear-algebra.vectors
 
 open import lists.lists
 
+open import univalent-combinatorics.counting
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -146,101 +148,115 @@ module _
 Furthermore, there is a commuting triangle
 
 ```text
-            Fin (length l)
-             /          \
-            /            \ vec-list l
-           ∨              ∨
-  type-of-elements l ----> X
-                      pr1
+                   ≃
+  Fin (length l) ----> element l
+                \     /
+      vec-list l \   / pr1
+                  ∨ ∨
+                   X,
 ```
+
+where the top equivalence is the counting of the type of elements of `l`
 
 ```agda
 module _
   {l1 : Level} {A : UU l1}
   where
 
-  type-of-elements-list : list A → UU l1
-  type-of-elements-list l = Σ A (_∈-list l)
+  element-list : list A → UU l1
+  element-list l = Σ A (_∈-list l)
 
-  element-type-of-elements-list :
-    (l : list A) → type-of-elements-list l → A
-  element-type-of-elements-list l = pr1
+  element-element-list :
+    (l : list A) → element-list l → A
+  element-element-list l = pr1
 
-  cons-type-of-elements-list :
+  cons-element-list :
     (x : A) (l : list A) →
-    type-of-elements-list l → type-of-elements-list (cons x l)
-  cons-type-of-elements-list x l =
+    element-list l → element-list (cons x l)
+  cons-element-list x l =
     tot (λ z → is-in-tail z x l)
 
-  map-compute-type-of-elements-list :
-    (l : list A) → Fin (length-list l) → type-of-elements-list l
-  map-compute-type-of-elements-list (cons x l) (inl i) =
-    cons-type-of-elements-list x l (map-compute-type-of-elements-list l i)
-  map-compute-type-of-elements-list (cons x l) (inr _) =
+  map-compute-element-list :
+    (l : list A) → Fin (length-list l) → element-list l
+  map-compute-element-list (cons x l) (inl i) =
+    cons-element-list x l (map-compute-element-list l i)
+  map-compute-element-list (cons x l) (inr _) =
     (x , is-head x l)
 
-  coherence-square-cons-type-of-elements-list :
+  coherence-square-cons-element-list :
     (x : A) (l : list A) →
     coherence-square-maps
-      ( map-compute-type-of-elements-list l)
+      ( map-compute-element-list l)
       ( inl-Fin (length-list l))
-      ( cons-type-of-elements-list x l)
-      ( map-compute-type-of-elements-list (cons x l))
-  coherence-square-cons-type-of-elements-list x l a = refl
+      ( cons-element-list x l)
+      ( map-compute-element-list (cons x l))
+  coherence-square-cons-element-list x l a = refl
 
-  map-inv-compute-type-of-elements-list :
-    (l : list A) → type-of-elements-list l → Fin (length-list l)
-  map-inv-compute-type-of-elements-list (cons x l) (.x , is-head .x .l) =
+  map-inv-compute-element-list :
+    (l : list A) → element-list l → Fin (length-list l)
+  map-inv-compute-element-list (cons x l) (.x , is-head .x .l) =
     inr star
-  map-inv-compute-type-of-elements-list (cons x l) (a , is-in-tail .a .x .l H) =
-    inl (map-inv-compute-type-of-elements-list l (a , H))
+  map-inv-compute-element-list (cons x l) (a , is-in-tail .a .x .l H) =
+    inl (map-inv-compute-element-list l (a , H))
 
-  is-section-map-inv-compute-type-of-elements-list :
+  is-section-map-inv-compute-element-list :
     (l : list A) →
     is-section
-      ( map-compute-type-of-elements-list l)
-      ( map-inv-compute-type-of-elements-list l)
-  is-section-map-inv-compute-type-of-elements-list
+      ( map-compute-element-list l)
+      ( map-inv-compute-element-list l)
+  is-section-map-inv-compute-element-list
     ( cons x l)
     ( .x , is-head .x .l) =
     refl
-  is-section-map-inv-compute-type-of-elements-list
+  is-section-map-inv-compute-element-list
     ( cons x l)
     ( a , is-in-tail .a .x .l H) =
     ap
-      ( cons-type-of-elements-list x l)
-      ( is-section-map-inv-compute-type-of-elements-list l (a , H))
+      ( cons-element-list x l)
+      ( is-section-map-inv-compute-element-list l (a , H))
 
-  is-retraction-map-inv-compute-type-of-elements-list :
+  is-retraction-map-inv-compute-element-list :
     (l : list A) →
     is-retraction
-      ( map-compute-type-of-elements-list l)
-      ( map-inv-compute-type-of-elements-list l)
-  is-retraction-map-inv-compute-type-of-elements-list (cons x l) (inl i) =
-    ap inl (is-retraction-map-inv-compute-type-of-elements-list l i)
-  is-retraction-map-inv-compute-type-of-elements-list (cons x l) (inr star) =
+      ( map-compute-element-list l)
+      ( map-inv-compute-element-list l)
+  is-retraction-map-inv-compute-element-list (cons x l) (inl i) =
+    ap inl (is-retraction-map-inv-compute-element-list l i)
+  is-retraction-map-inv-compute-element-list (cons x l) (inr star) =
     refl
 
-  is-equiv-map-compute-type-of-elements-list :
-    (l : list A) → is-equiv (map-compute-type-of-elements-list l)
-  is-equiv-map-compute-type-of-elements-list l =
+  is-equiv-map-compute-element-list :
+    (l : list A) → is-equiv (map-compute-element-list l)
+  is-equiv-map-compute-element-list l =
     is-equiv-is-invertible
-      ( map-inv-compute-type-of-elements-list l)
-      ( is-section-map-inv-compute-type-of-elements-list l)
-      ( is-retraction-map-inv-compute-type-of-elements-list l)
+      ( map-inv-compute-element-list l)
+      ( is-section-map-inv-compute-element-list l)
+      ( is-retraction-map-inv-compute-element-list l)
 
-  compute-type-of-elements-list :
-    (l : list A) → Fin (length-list l) ≃ type-of-elements-list l
-  pr1 (compute-type-of-elements-list l) =
-    map-compute-type-of-elements-list l
-  pr2 (compute-type-of-elements-list l) =
-    is-equiv-map-compute-type-of-elements-list l
+  compute-element-list :
+    (l : list A) → Fin (length-list l) ≃ element-list l
+  pr1 (compute-element-list l) =
+    map-compute-element-list l
+  pr2 (compute-element-list l) =
+    is-equiv-map-compute-element-list l
 
-  triangle-compute-type-of-elements-list :
+  count-element-list :
+    (l : list A) → count (element-list l)
+  pr1 (count-element-list l) = length-list l
+  pr2 (count-element-list l) = compute-element-list l
+
+  is-finite-element-list :
+    (l : list A) → is-finite (element-list l)
+  is-finite-element-list l = is-finite-count (count-element-list l)
+
+  triangle-compute-element-list :
     (l : list A) →
     coherence-triangle-maps
-      {!functional-vec-list l!}
-      {!!}
-      {!!}
-  triangle-compute-type-of-elements-list = {!!}
+      ( functional-vec-list l)
+      ( element-element-list l)
+      ( map-compute-element-list l)
+  triangle-compute-element-list (cons x l) (inl i) =
+    triangle-compute-element-list l i
+  triangle-compute-element-list (cons x l) (inr star) =
+    refl
 ```

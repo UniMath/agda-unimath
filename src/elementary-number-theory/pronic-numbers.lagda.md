@@ -42,8 +42,8 @@ $$
   a_{n+1} = a_n + 2(n+1).
 $$
 
-The sequence `0, 2, 6, 12, 20, 30, 42, ⋯` of pronic numbers is listed as
-[A002378](https://oeis.org/A002378) in the OEIS {{#cite OEIS}}. The $n$th pronic
+The sequence `0, 2, 6, 12, 20, 30, 42, …` of pronic numbers is listed as
+[A002378](https://oeis.org/A002378) in the [OEIS](literature.oeis.md) {{#cite OEIS}}. The $n$th pronic
 number is [even](elementary-number-theory.parity-natural-numbers.md) for every
 $n$, and it is twice the $n$th
 [triangular number](elementary-number-theory.triangular-numbers.md).
@@ -55,6 +55,19 @@ $n$, and it is twice the $n$th
 ```agda
 pronic-number-ℕ : ℕ → ℕ
 pronic-number-ℕ n = n *ℕ succ-ℕ n
+```
+
+### The iterated pronic numbers
+
+The iterated pronic numbers are listed as [https://oeis.org/A007018) in the OEIS {{#cite OEIS}}. Saidak {{#cite Saidak2006}} used the fact that all distinct iterated pronic numbers are [relatively prime](elementary-number-theory.relatively-prime-natural-numbers.md) to give a new proof of the [infinitude of primes](elementary-number-theory.infinitude-of-primes.md), as of 2006.
+
+```agda
+iterated-pronic-number-ℕ :
+  ℕ → ℕ
+iterated-pronic-number-ℕ zero-ℕ =
+  1
+iterated-pronic-number-ℕ (succ-ℕ n) =
+  pronic-number-ℕ (iterated-pronic-number-ℕ n)
 ```
 
 ## Properties

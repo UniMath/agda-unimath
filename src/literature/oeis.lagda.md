@@ -300,6 +300,15 @@ open import elementary-number-theory.collatz-bijection using
 
 OEIS: [A006369](https://oeis.org/A006369)
 
+### A007018 -- The iterated pronic numbers
+
+```agda
+open import elementary-number-theory.pronic-numbers using
+  ( iterated-pronic-number-ℕ)
+```
+
+OEIS: [A007018](https://oeis.org/A007018)
+
 ### A027851 -- The number of semigroups of order `n` up to isomorphism
 
 ```agda
