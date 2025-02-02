@@ -35,7 +35,7 @@ open import group-theory.abelian-groups
 
 ## Definition
 
-A cut `(L, U)` is arithmetically located if for any positive `ε : ℚ`, there
+A [Dedekind cut](real-numbers.dedekind-real-numbers.md) `(L, U)` is {{#concept "arithmetically located" Disambiguation="Dedekind cut" Agda=is-arithmetically-located}} if for any positive [rational number](elementary-number-theory.rational-numbers.md) `ε : ℚ`, there
 exist `p, q : ℚ` such that `0 < q - p < ε`, `p ∈ L`, and `q ∈ U`. Intuitively,
 when `L , U` represent the Dedekind cuts of a real number `x`, `p` and `q` are
 rational approximations of `x` to within `ε`.
