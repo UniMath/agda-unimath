@@ -136,7 +136,16 @@ module _
     intro-exists
       (p , p +ℚ ε)
       ( le-right-add-rational-ℚ⁺ p (ε , positive-ε) ,
-        {!   !} ,
+        tr
+          (leq-ℚ (p +ℚ ε))
+          (equational-reasoning
+            (p +ℚ ε) +ℚ ε
+            ＝ p +ℚ (ε +ℚ ε)  by associative-add-ℚ p ε ε
+            ＝ p +ℚ ((one-ℚ *ℚ ε) +ℚ (one-ℚ *ℚ ε))
+              by ap (p +ℚ_) (inv (ap-add-ℚ (left-unit-law-mul-ℚ ε) (left-unit-law-mul-ℚ ε)))
+            ＝ p +ℚ (? *ℚ ε)
+              by ap (p +ℚ_) (inv (right-distributive-mul-add-ℚ one-ℚ one-ℚ ε)))
+          (leq-le-ℚ (le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε))) ,
         p-in-L ,
         tr (is-in-subtype U) {!  ap (p +ℚ_) (left-unit-law-mul-ℚ ε) !} p-plus-1-ε-in-U)
 
