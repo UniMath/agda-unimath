@@ -114,4 +114,6 @@ module _
             ( backward-implication (iff-translate-diff-le-zero-ℚ p q) p<q)))
 ```
 
+## References
+
 {{#bibliography}}
