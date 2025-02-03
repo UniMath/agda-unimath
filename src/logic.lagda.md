@@ -14,6 +14,7 @@ open import logic.de-morgan-propositions public
 open import logic.de-morgan-subtypes public
 open import logic.de-morgan-types public
 open import logic.de-morgans-law public
+open import logic.dirk-gentlys-principle public
 open import logic.double-negation-eliminating-maps public
 open import logic.double-negation-elimination public
 open import logic.double-negation-stable-embeddings public
