@@ -470,6 +470,9 @@ module _
     is-surjective g → is-surjective h → is-surjective (g ∘ h)
   is-surjective-comp {g} {h} =
     is-surjective-left-map-triangle (g ∘ h) g h refl-htpy
+
+  comp-surjection : B ↠ X → A ↠ B → A ↠ X
+  comp-surjection (g , G) (h , H) = g ∘ h , is-surjective-comp G H
 ```
 
 ### Functoriality of products preserves being surjective

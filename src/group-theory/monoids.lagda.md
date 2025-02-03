@@ -26,7 +26,8 @@ open import structured-types.wild-monoids
 
 ## Idea
 
-**Monoids** are [unital](foundation.unital-binary-operations.md)
+{{#concept "Monoids" WDID=Q208237 WD="monoid" Agda=Monoid}} are
+[unital](foundation.unital-binary-operations.md)
 [semigroups](group-theory.semigroups.md).
 
 ## Definition

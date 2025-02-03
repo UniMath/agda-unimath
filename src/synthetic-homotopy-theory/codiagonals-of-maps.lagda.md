@@ -103,12 +103,8 @@ module _
       ( fiber f b)
       ( unit)
       ( unit)
-      ( inv-equiv
-        ( terminal-map (fiber id b) ,
-        ( is-equiv-terminal-map-is-contr (is-torsorial-Id' b))))
-      ( inv-equiv
-        ( terminal-map (fiber id b) ,
-          ( is-equiv-terminal-map-is-contr (is-torsorial-Id' b))))
+      ( inv-equiv (equiv-unit-is-contr (is-torsorial-Id' b)))
+      ( inv-equiv (equiv-unit-is-contr (is-torsorial-Id' b)))
       ( id-equiv)
       ( terminal-map (fiber f b))
       ( terminal-map (fiber f b))
