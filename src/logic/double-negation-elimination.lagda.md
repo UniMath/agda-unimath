@@ -252,7 +252,7 @@ double-negation-elim-product f g h =
   has-double-negation-elim A →
   ε-operator-Hilbert A
 ε-operator-Hilbert-has-double-negation-elim {A = A} H =
-  H ∘ double-negation-double-negation-type-trunc-Prop A ∘ intro-double-negation
+  H ∘ double-negation-double-negation-type-trunc-Prop ∘ intro-double-negation
 ```
 
 ## See also

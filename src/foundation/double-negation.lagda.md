@@ -107,13 +107,18 @@ double-negation-extend {P = P} {Q = Q} f nnp nq = nnp (λ p → f p nq)
 
 ```agda
 abstract
+  intro-double-negation-type-trunc-Prop :
+    {l : Level} {A : UU l} → type-trunc-Prop A → ¬¬ A
+  intro-double-negation-type-trunc-Prop {A = A} =
+    map-universal-property-trunc-Prop
+      ( double-negation-type-Prop A)
+      ( intro-double-negation)
+
+abstract
   double-negation-double-negation-type-trunc-Prop :
-    {l : Level} (A : UU l) → ¬¬ (type-trunc-Prop A) → ¬¬ A
-  double-negation-double-negation-type-trunc-Prop A =
-    double-negation-extend
-      ( map-universal-property-trunc-Prop
-        ( double-negation-type-Prop A)
-        ( intro-double-negation))
+    {l : Level} {A : UU l} → ¬¬ (type-trunc-Prop A) → ¬¬ A
+  double-negation-double-negation-type-trunc-Prop =
+    double-negation-extend intro-double-negation-type-trunc-Prop
 
 abstract
   double-negation-type-trunc-Prop-double-negation :

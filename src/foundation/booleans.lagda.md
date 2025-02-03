@@ -147,6 +147,12 @@ neq-false-true-bool ()
 
 neq-true-false-bool : true ≠ false
 neq-true-false-bool ()
+
+is-decidable-Eq-bool : {x y : bool} → is-decidable (Eq-bool x y)
+is-decidable-Eq-bool {true} {true} = inl star
+is-decidable-Eq-bool {true} {false} = inr id
+is-decidable-Eq-bool {false} {true} = inr id
+is-decidable-Eq-bool {false} {false} = inl star
 ```
 
 ### The standard interpretation of booleans as decidable propositions
@@ -213,7 +219,14 @@ is-prop-is-true : (b : bool) → is-prop (is-true b)
 is-prop-is-true b = is-set-bool b true
 
 is-true-Prop : bool → Prop lzero
-is-true-Prop b = is-true b , is-prop-is-true b
+is-true-Prop b = (is-true b , is-prop-is-true b)
+
+is-decidable-prop-is-true : (b : bool) → is-decidable-prop (is-true b)
+is-decidable-prop-is-true b =
+  ( is-prop-is-true b , has-decidable-equality-bool b true)
+
+is-true-Decidable-Prop : bool → Decidable-Prop lzero
+is-true-Decidable-Prop b = (is-true b , is-decidable-prop-is-true b)
 ```
 
 ### The "is false" predicate on booleans
@@ -227,6 +240,13 @@ is-prop-is-false b = is-set-bool b false
 
 is-false-Prop : bool → Prop lzero
 is-false-Prop b = is-false b , is-prop-is-false b
+
+is-decidable-prop-is-false : (b : bool) → is-decidable-prop (is-false b)
+is-decidable-prop-is-false b =
+  ( is-prop-is-false b , has-decidable-equality-bool b false)
+
+is-false-Decidable-Prop : bool → Decidable-Prop lzero
+is-false-Decidable-Prop b = (is-false b , is-decidable-prop-is-false b)
 ```
 
 ### A boolean cannot be both true and false

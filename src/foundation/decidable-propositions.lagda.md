@@ -129,11 +129,11 @@ module _
     compute-equiv-bool-Decidable-Prop :
       (P : Decidable-Prop l) →
       type-Decidable-Prop P ≃ (map-equiv equiv-bool-Decidable-Prop P ＝ true)
-    compute-equiv-bool-Decidable-Prop (pair P (pair H (inl p))) =
+    compute-equiv-bool-Decidable-Prop (P , H , inl p) =
       equiv-is-contr
         ( is-proof-irrelevant-is-prop H p)
         ( is-proof-irrelevant-is-prop (is-set-bool true true) refl)
-    compute-equiv-bool-Decidable-Prop (pair P (pair H (inr np))) =
+    compute-equiv-bool-Decidable-Prop (P , H , inr np) =
       equiv-is-empty np neq-false-true-bool
 ```
 
