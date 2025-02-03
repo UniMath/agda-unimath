@@ -460,7 +460,8 @@ module _
     is-equiv-equiv-eq-Irrefutable-Surjection g
 
   eq-equiv-Irrefutable-Surjection :
-    (g : Irrefutable-Surjection l2 A) → equiv-Irrefutable-Surjection f g → f ＝ g
+    (g : Irrefutable-Surjection l2 A) →
+    equiv-Irrefutable-Surjection f g → f ＝ g
   eq-equiv-Irrefutable-Surjection g =
     map-inv-equiv (extensionality-Irrefutable-Surjection g)
 ```
