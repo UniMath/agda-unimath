@@ -17,6 +17,7 @@ open import foundation.empty-types
 open import foundation.evaluation-functions
 open import foundation.functoriality-propositional-truncation
 open import foundation.hilberts-epsilon-operators
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.mere-equality
 open import foundation.negation
@@ -179,28 +180,32 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  has-prop-double-negation-elim-Σ-all-elements-merely-equal-base :
-    all-elements-merely-equal A →
+  has-prop-double-negation-elim-Σ-all-elements-irrefutably-equal-base :
+    ((x y : A) → ¬¬ (x ＝ y)) →
     has-prop-double-negation-elim A →
     ((x : A) → has-prop-double-negation-elim (B x)) →
     has-prop-double-negation-elim (Σ A B)
-  has-prop-double-negation-elim-Σ-all-elements-merely-equal-base H f g nnab =
+  has-prop-double-negation-elim-Σ-all-elements-irrefutably-equal-base
+    H f g nnab =
     rec-trunc-Prop
       ( trunc-Prop (Σ A B))
       ( λ a →
         rec-trunc-Prop
           ( trunc-Prop (Σ A B))
           ( λ b → unit-trunc-Prop (a , b))
-          ( g
-            ( a)
-            ( λ nb →
-              nnab
-                ( λ x →
-                  rec-trunc-Prop
-                    ( empty-Prop)
-                    ( λ p → nb (tr B p (pr2 x)))
-                    ( H (pr1 x) a)))))
+          ( g a (λ nb → nnab (λ x → H (pr1 x) a (λ p → nb (tr B p (pr2 x)))))))
       ( f (map-double-negation pr1 nnab))
+
+  has-prop-double-negation-elim-Σ-all-elements-merely-equal-base :
+    all-elements-merely-equal A →
+    has-prop-double-negation-elim A →
+    ((x : A) → has-prop-double-negation-elim (B x)) →
+    has-prop-double-negation-elim (Σ A B)
+  has-prop-double-negation-elim-Σ-all-elements-merely-equal-base H =
+    has-prop-double-negation-elim-Σ-all-elements-irrefutably-equal-base
+      ( λ x y →
+        double-negation-double-negation-type-trunc-Prop
+          ( intro-double-negation (H x y)))
 
   has-prop-double-negation-elim-Σ-is-prop-base :
     is-prop A →
