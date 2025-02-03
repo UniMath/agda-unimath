@@ -22,6 +22,7 @@ open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation.functoriality-coproduct-types
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
@@ -212,15 +213,13 @@ module _
   is-decidable-is-decidable-prop-Σ =
     rec-coproduct
       ( λ x →
-        rec-coproduct
-          ( λ y → inl (x , y))
-          ( λ ny →
-            inr
-              ( λ xy →
-                ny
-                  ( tr Q
-                    ( eq-is-prop (is-prop-type-is-decidable-prop H))
-                    ( pr2 xy))))
+        map-coproduct
+          ( pair x)
+          ( λ ny xy →
+            ny
+              ( tr Q
+                ( eq-is-prop (is-prop-type-is-decidable-prop H))
+                ( pr2 xy)))
           ( is-decidable-type-is-decidable-prop (K x)))
       ( λ nx → inr (λ xy → nx (pr1 xy)))
       ( is-decidable-type-is-decidable-prop H)

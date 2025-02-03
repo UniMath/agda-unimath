@@ -36,6 +36,7 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
+open import foundation-core.retracts-of-types
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -150,26 +151,35 @@ module _
     tot (λ f → is-irrefutably-surjective-is-surjective)
 ```
 
-### Any map that has a section is surjective
+### Any map that has a section is irrefutably surjective
 
 ```agda
-abstract
-  is-irrefutably-surjective-has-section :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    section f → is-irrefutably-surjective f
-  is-irrefutably-surjective-has-section (g , G) b =
-    intro-double-negation (g b , G b)
+is-irrefutably-surjective-has-section :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  section f → is-irrefutably-surjective f
+is-irrefutably-surjective-has-section (g , G) b =
+  intro-double-negation (g b , G b)
+```
+
+### The underlying irrefutable surjection of a retract
+
+```agda
+irrefutable-surjection-retract :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  A retract-of B → B ↠¬¬ A
+irrefutable-surjection-retract R =
+  ( map-retraction-retract R ,
+    is-irrefutably-surjective-has-section (section-retract R))
 ```
 
 ### Any split surjective map is irrefutably surjective
 
 ```agda
-abstract
-  is-irrefutably-surjective-is-split-surjective :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    is-split-surjective f → is-irrefutably-surjective f
-  is-irrefutably-surjective-is-split-surjective H x =
-    intro-double-negation (H x)
+is-irrefutably-surjective-is-split-surjective :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-split-surjective f → is-irrefutably-surjective f
+is-irrefutably-surjective-is-split-surjective H =
+  intro-double-negation ∘ H
 ```
 
 ### Any equivalence is irrefutably surjective
@@ -209,7 +219,7 @@ module _
   is-irrefutably-surjective-id a = intro-double-negation (a , refl)
 ```
 
-### A (k+1)-connected map is surjective
+### A (k+1)-connected map is irrefutably surjective
 
 ```agda
 is-irrefutably-surjective-is-connected-map :
@@ -288,7 +298,7 @@ module _
     ( g ∘ h , is-irrefutably-surjective-comp G H)
 ```
 
-### Functoriality of products preserves being surjective
+### Functoriality of products preserves being irrefutably surjective
 
 ```agda
 module _
@@ -314,7 +324,7 @@ module _
       ( is-irrefutably-surjective-map-irrefutable-surjection g)
 ```
 
-### The composite of a surjective map before an equivalence is surjective
+### The composite of a surjective map before an equivalence is irrefutably surjective
 
 ```agda
 is-irrefutably-surjective-left-comp-equiv :
@@ -326,7 +336,7 @@ is-irrefutably-surjective-left-comp-equiv e =
   is-irrefutably-surjective-comp (is-irrefutably-surjective-map-equiv e)
 ```
 
-### The composite of a surjective map after an equivalence is surjective
+### The composite of a surjective map after an equivalence is irrefutably surjective
 
 ```agda
 is-irrefutably-surjective-right-comp-equiv :
