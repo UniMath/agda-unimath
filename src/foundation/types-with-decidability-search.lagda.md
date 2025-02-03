@@ -12,12 +12,15 @@ open import elementary-number-theory.natural-numbers
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
+open import foundation.double-negation
 open import foundation.coproduct-types
+open import foundation.propositional-truncations
 open import foundation.decidable-embeddings
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
 open import foundation.decidable-types
+open import logic.de-morgan-subtypes
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
@@ -47,6 +50,7 @@ open import foundation-core.contractible-types
 
 open import logic.complements-decidable-subtypes
 open import logic.irrefutably-surjective-maps
+open import logic.propositionally-decidable-types
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
@@ -169,7 +173,19 @@ is-decidable-type-has-decidability-search f =
 has-decidability-search-has-decidability-search-on-subtypes :
   {l1 : Level} {X : UU l1} →
   has-decidability-search-on-subtypes X → has-decidability-search X
-has-decidability-search-has-decidability-search-on-subtypes f P = {!   !}
+has-decidability-search-has-decidability-search-on-subtypes f P =
+  map-coproduct
+    ( λ xp →
+      pr1 xp ,
+      rec-coproduct
+        ( id)
+        ( ex-falso ∘ pr2 xp)
+        ( is-decidable-decidable-family P (pr1 xp)))
+    ( λ nxp xp → nxp (pr1 xp , intro-double-negation (pr2 xp)))
+    ( f ( λ x →
+          neg-type-Decidable-Prop
+            ( ¬ (family-decidable-family P x))
+            ( is-decidable-neg (is-decidable-decidable-family P x))))
 ```
 
 ### Types with decidability search are closed under retracts

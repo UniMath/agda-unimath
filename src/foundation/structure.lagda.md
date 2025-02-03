@@ -33,7 +33,7 @@ structure : {l1 l2 : Level} (𝒫 : UU l1 → UU l2) → UU (lsuc l1 ⊔ l2)
 structure {l1} 𝒫 = Σ (UU l1) 𝒫
 
 structure-family :
-  {l1 l2 l3 : Level} (𝒫 : UU l1 → UU l2) {A : UU l3}
+  {l1 l2 l3 : Level} (𝒫 : UU l1 → UU l2) {A : UU l3} →
   (A → UU l1) → UU (l2 ⊔ l3)
 structure-family 𝒫 {A} B = (x : A) → 𝒫 (B x)
 
@@ -71,3 +71,5 @@ has-structure-equiv' :
   {l1 l2 : Level} (𝒫 : UU l1 → UU l2) {X Y : UU l1} → X ≃ Y → 𝒫 Y → 𝒫 X
 has-structure-equiv' 𝒫 e = tr 𝒫 (inv (eq-equiv e))
 ```
+
+cl

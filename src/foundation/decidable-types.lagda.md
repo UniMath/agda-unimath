@@ -137,6 +137,14 @@ is-decidable-neg :
 is-decidable-neg d = is-decidable-function-type d is-decidable-empty
 ```
 
+### The double negation of a decidable type is decidable
+
+```agda
+is-decidable-double-negation :
+  {l : Level} {A : UU l} → is-decidable A → is-decidable (¬¬ A)
+is-decidable-double-negation d = is-decidable-neg (is-decidable-neg d)
+```
+
 ### Decidable types are closed under coinhabited types
 
 ```agda
@@ -261,11 +269,18 @@ elim-trunc-Prop-is-decidable (inr f) x =
 ### `is-decidable` is an idempotent operation
 
 ```agda
-idempotent-is-decidable :
-  {l : Level} (P : UU l) → is-decidable (is-decidable P) → is-decidable P
-idempotent-is-decidable P (inl (inl p)) = inl p
-idempotent-is-decidable P (inl (inr np)) = inr np
-idempotent-is-decidable P (inr np) = inr (λ p → np (inl p))
+module _
+  {l : Level} {P : UU l}
+  where
+
+  map-idempotent-is-decidable : is-decidable P → is-decidable (is-decidable P)
+  map-idempotent-is-decidable = inl
+
+  map-inv-idempotent-is-decidable :
+    is-decidable (is-decidable P) → is-decidable P
+  map-inv-idempotent-is-decidable (inl (inl p)) = inl p
+  map-inv-idempotent-is-decidable (inl (inr np)) = inr np
+  map-inv-idempotent-is-decidable (inr np) = inr (λ p → np (inl p))
 ```
 
 ### Any inhabited type is a fixed point for `is-decidable`
