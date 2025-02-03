@@ -43,9 +43,10 @@ $$
 $$
 
 The sequence `0, 2, 6, 12, 20, 30, 42, …` of pronic numbers is listed as
-[A002378](https://oeis.org/A002378) in the [OEIS](literature.oeis.md) {{#cite OEIS}}. The $n$th pronic
-number is [even](elementary-number-theory.parity-natural-numbers.md) for every
-$n$, and it is twice the $n$th
+[A002378](https://oeis.org/A002378) in the [OEIS](literature.oeis.md)
+{{#cite OEIS}}. The $n$th pronic number is
+[even](elementary-number-theory.parity-natural-numbers.md) for every $n$, and it
+is twice the $n$th
 [triangular number](elementary-number-theory.triangular-numbers.md).
 
 ## Definitions
@@ -59,7 +60,21 @@ pronic-number-ℕ n = n *ℕ succ-ℕ n
 
 ### The iterated pronic numbers
 
-The iterated pronic numbers are listed as [https://oeis.org/A007018) in the OEIS {{#cite OEIS}}. Saidak {{#cite Saidak2006}} used the fact that all distinct iterated pronic numbers are [relatively prime](elementary-number-theory.relatively-prime-natural-numbers.md) to give a new proof of the [infinitude of primes](elementary-number-theory.infinitude-of-primes.md), as of 2006.
+The iterated pronic numbers are listed as [https://oeis.org/A007018) in the OEIS
+{{#cite OEIS}}. Saidak {{#cite Saidak2006}} showed that the $n$th iterated
+pronic number has at least $n$ prime factors, to obtain a new proof of the
+[infinitude of primes](elementary-number-theory.infinitude-of-primes.md) as
+recently as 2006.
+
+Saidak's proof of the infinitude of primes is as follows. Write $N_n$ for the
+$n$th iterated pronic number. Then $N_0 = 1$, which has at least $0$
+[prime](elementary-number-theory.prime-numbers.md)
+[divisors](elementary-number-theory.divisibility-natural-numbers.md). Assume
+that $N_n$ has at least $n$ prime divisors. The number $N_n + 1$ is coprime to
+$N_n$, so its prime divisors are distinct from the prime divisors of $N_n$.
+Since $N_n + 1 > 1$, it has at least one prime divisor, so it follows that
+$N_n(N_n + 1)$ has at least $n+1$ prime divisors. Therefore, there are
+infinitely many primes.
 
 ```agda
 iterated-pronic-number-ℕ :
