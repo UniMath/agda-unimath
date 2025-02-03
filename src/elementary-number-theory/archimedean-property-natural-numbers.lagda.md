@@ -15,6 +15,7 @@ open import elementary-number-theory.nonzero-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.transport-along-identifications
 ```
 
@@ -31,10 +32,11 @@ for any nonzero natural number `x` and any natural number `y`, there is an
 ```agda
 abstract
   archimedean-property-ℕ :
-    (x y : ℕ) → is-nonzero-ℕ x → Σ ℕ (λ n → y <-ℕ n *ℕ x)
+    (x y : ℕ) → is-nonzero-ℕ x → exists ℕ (λ n → le-ℕ-Prop y (n *ℕ x))
   archimedean-property-ℕ x y nonzero-x =
-    (succ-ℕ (quotient-euclidean-division-ℕ x y) ,
-      tr
+    intro-exists
+      (succ-ℕ (quotient-euclidean-division-ℕ x y))
+      ( tr
         ( λ z → z <-ℕ succ-ℕ (quotient-euclidean-division-ℕ x y) *ℕ x)
         ( eq-euclidean-division-ℕ x y)
         ( preserves-le-left-add-ℕ

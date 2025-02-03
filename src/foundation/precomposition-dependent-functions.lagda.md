@@ -79,27 +79,43 @@ module _
   {g h : (b : B) → C b}
   where
 
-  compute-htpy-eq-ap-precomp-Π :
+  coherence-htpy-eq-ap-precomp-Π :
     coherence-square-maps
       ( ap (precomp-Π f C) {g} {h})
       ( htpy-eq)
       ( htpy-eq)
       ( precomp-Π f (eq-value g h))
-  compute-htpy-eq-ap-precomp-Π refl = refl
+  coherence-htpy-eq-ap-precomp-Π refl = refl
 
-  compute-eq-htpy-ap-precomp-Π :
+  coherence-htpy-eq-ap-precomp-Π' :
+    coherence-square-maps'
+      ( ap (precomp-Π f C) {g} {h})
+      ( htpy-eq)
+      ( htpy-eq)
+      ( precomp-Π f (eq-value g h))
+  coherence-htpy-eq-ap-precomp-Π' = inv-htpy coherence-htpy-eq-ap-precomp-Π
+
+  coherence-eq-htpy-ap-precomp-Π :
     coherence-square-maps
       ( precomp-Π f (eq-value g h))
       ( eq-htpy)
       ( eq-htpy)
       ( ap (precomp-Π f C) {g} {h})
-  compute-eq-htpy-ap-precomp-Π =
+  coherence-eq-htpy-ap-precomp-Π =
     vertical-inv-equiv-coherence-square-maps
       ( ap (precomp-Π f C))
       ( equiv-funext)
       ( equiv-funext)
       ( precomp-Π f (eq-value g h))
-      ( compute-htpy-eq-ap-precomp-Π)
+      ( coherence-htpy-eq-ap-precomp-Π)
+
+  coherence-eq-htpy-ap-precomp-Π' :
+    coherence-square-maps'
+      ( precomp-Π f (eq-value g h))
+      ( eq-htpy)
+      ( eq-htpy)
+      ( ap (precomp-Π f C) {g} {h})
+  coherence-eq-htpy-ap-precomp-Π' = inv-htpy coherence-eq-htpy-ap-precomp-Π
 ```
 
 ### Precomposing functions `Π B C` by `f : A → B` is `k+1`-truncated if and only if precomposing homotopies is `k`-truncated
@@ -118,7 +134,7 @@ is-trunc-map-succ-precomp-Π {k = k} {f = f} {C = C} H =
         ( htpy-eq)
         ( htpy-eq)
         ( precomp-Π f (eq-value g h))
-        ( compute-htpy-eq-ap-precomp-Π f)
+        ( coherence-htpy-eq-ap-precomp-Π f)
         ( funext g h)
         ( funext (g ∘ f) (h ∘ f))
         ( H g h))
