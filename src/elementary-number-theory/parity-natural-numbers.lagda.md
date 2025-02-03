@@ -515,6 +515,68 @@ is-nonzero-is-odd-ℕ :
 is-nonzero-is-odd-ℕ .zero-ℕ H refl = H is-even-zero-ℕ
 ```
 
+### A product $mn$ is odd if and only if both factors are odd
+
+```agda
+has-odd-expansion-mul-odd-number-ℕ :
+  (k l : ℕ) → has-odd-expansion-ℕ (odd-number-ℕ k *ℕ odd-number-ℕ l)
+pr1 (has-odd-expansion-mul-odd-number-ℕ k l) =
+  2 *ℕ (k *ℕ l) +ℕ k +ℕ l
+pr2 (has-odd-expansion-mul-odd-number-ℕ k l) =
+  ( ap
+    ( succ-ℕ)
+    ( ( left-distributive-mul-add-ℕ 2 (2 *ℕ (k *ℕ l) +ℕ k) l) ∙
+      ( ap-add-ℕ
+        ( ( left-distributive-mul-add-ℕ 2 (2 *ℕ (k *ℕ l)) k) ∙
+          ( ap-add-ℕ
+            ( ap (2 *ℕ_) (left-swap-mul-ℕ 2 k l) ∙
+              inv (associative-mul-ℕ 2 k (2 *ℕ l)))
+            ( inv (right-unit-law-mul-ℕ (2 *ℕ k)))))
+        ( inv (left-unit-law-mul-ℕ (2 *ℕ l)))))) ∙
+  ( inv (double-distributive-mul-add-ℕ (2 *ℕ k) 1 (2 *ℕ l) 1))
+
+has-odd-expansion-mul-has-odd-expansion-ℕ :
+  (m n : ℕ) → has-odd-expansion-ℕ m → has-odd-expansion-ℕ n →
+  has-odd-expansion-ℕ (m *ℕ n)
+has-odd-expansion-mul-has-odd-expansion-ℕ m n (k , refl) (l , refl) =
+  has-odd-expansion-mul-odd-number-ℕ k l
+
+is-odd-mul-is-odd-ℕ :
+  (m n : ℕ) → is-odd-ℕ m → is-odd-ℕ n → is-odd-ℕ (m *ℕ n)
+is-odd-mul-is-odd-ℕ m n H K =
+  is-odd-has-odd-expansion-ℕ
+    ( m *ℕ n)
+    ( has-odd-expansion-mul-has-odd-expansion-ℕ m n
+      ( has-odd-expansion-is-odd-ℕ m H)
+      ( has-odd-expansion-is-odd-ℕ n K))
+
+is-odd-left-factor-is-odd-mul-ℕ :
+  (m n : ℕ) → is-odd-ℕ (m *ℕ n) → is-odd-ℕ m
+is-odd-left-factor-is-odd-mul-ℕ m n H K =
+  H (is-even-div-is-even-ℕ m (m *ℕ n) K (n , commutative-mul-ℕ n m))
+
+is-odd-right-factor-is-odd-mul-ℕ :
+  (m n : ℕ) → is-odd-ℕ (m *ℕ n) → is-odd-ℕ n
+is-odd-right-factor-is-odd-mul-ℕ m n H K =
+  H (is-even-div-is-even-ℕ n (m *ℕ n) K (m , refl))
+```
+
+### If a product $mn$ is even and one of the factors is odd, then the other is even
+
+```agda
+is-even-left-factor-is-even-mul-ℕ :
+  (m n : ℕ) → is-even-ℕ (m *ℕ n) → is-odd-ℕ n → is-even-ℕ m
+is-even-left-factor-is-even-mul-ℕ m n H K =
+  is-even-is-not-odd-ℕ m (λ L → is-odd-mul-is-odd-ℕ m n L K H)
+
+is-even-right-factor-is-even-mul-ℕ :
+  (m n : ℕ) → is-even-ℕ (m *ℕ n) → is-odd-ℕ m → is-even-ℕ n
+is-even-right-factor-is-even-mul-ℕ m n H K =
+  is-even-is-not-odd-ℕ n (λ L → is-odd-mul-is-odd-ℕ m n K L H)
+```
+
+### If a power of $2$ divides $mn$ and one of the factors is odd, then the other is divisible by the power of $2$
+
 ## See also
 
 Further laws of parity are proven in other files, e.g.:

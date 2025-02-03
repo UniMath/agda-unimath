@@ -83,6 +83,10 @@ module _
   valuation-2-adic-decomposition-ℕ : ℕ
   valuation-2-adic-decomposition-ℕ = pr1 d
 
+  exp-valuation-2-adic-decomposition-ℕ : ℕ
+  exp-valuation-2-adic-decomposition-ℕ =
+    2 ^ℕ valuation-2-adic-decomposition-ℕ
+
   index-odd-factor-2-adic-decomposition-ℕ : ℕ
   index-odd-factor-2-adic-decomposition-ℕ = pr1 (pr2 d)
 
@@ -96,6 +100,34 @@ module _
       index-odd-factor-2-adic-decomposition-ℕ ＝
     n
   eq-2-adic-decomposition-ℕ = pr2 (pr2 d)
+
+  div-exp-valuation-2-adic-decomposition-ℕ :
+    div-ℕ exp-valuation-2-adic-decomposition-ℕ n
+  pr1 div-exp-valuation-2-adic-decomposition-ℕ =
+    odd-factor-2-adic-decomposition-ℕ
+  pr2 div-exp-valuation-2-adic-decomposition-ℕ =
+    commutative-mul-ℕ
+      odd-factor-2-adic-decomposition-ℕ
+      exp-valuation-2-adic-decomposition-ℕ ∙
+    eq-2-adic-decomposition-ℕ
+
+  is-power-divisor-exp-valuation-2-adic-decomposition-ℕ :
+    is-power-divisor-ℕ 2 n
+      exp-valuation-2-adic-decomposition-ℕ
+  pr1 (pr1 (is-power-divisor-exp-valuation-2-adic-decomposition-ℕ)) =
+    valuation-2-adic-decomposition-ℕ
+  pr2 (pr1 (is-power-divisor-exp-valuation-2-adic-decomposition-ℕ)) =
+    refl
+  pr2 (is-power-divisor-exp-valuation-2-adic-decomposition-ℕ) =
+    div-exp-valuation-2-adic-decomposition-ℕ
+
+  is-largest-power-divisor-2-adic-decomposition-ℕ :
+    is-largest-power-divisor-ℕ 2 n exp-valuation-2-adic-decomposition-ℕ
+  pr1 is-largest-power-divisor-2-adic-decomposition-ℕ =
+    is-power-divisor-exp-valuation-2-adic-decomposition-ℕ
+  pr2 is-largest-power-divisor-2-adic-decomposition-ℕ y ((k , refl) , K) =
+    {!!}
+
 ```
 
 ## Properties
@@ -150,7 +182,7 @@ module _
   div-exp-valuation-2-adic-decomposition-nat-ℕ :
     div-ℕ (2 ^ℕ valuation-2-adic-decomposition-nat-ℕ) n
   div-exp-valuation-2-adic-decomposition-nat-ℕ =
-    div-exp-valuation-largest-power-divisor-ℕ 2 n star H
+    div-largest-power-divisor-ℕ 2 n star H
 
   is-upper-bound-valuation-2-adic-decomposition-nat-ℕ :
     (k : ℕ) → div-ℕ (2 ^ℕ k) n → k ≤-ℕ valuation-2-adic-decomposition-nat-ℕ
@@ -220,14 +252,6 @@ module _
     index-odd-factor-2-adic-decomposition-nat-ℕ
   pr2 (pr2 2-adic-decomposition-nat-ℕ) =
     eq-2-adic-decomposition-nat-ℕ
-```
-
-### If $2^km$ is a $2$-adic decomposition of a number $n$, then $2^k$ is the largest power divisor of $n$ base $2$
-
-```agda
-largest-power-divisor-2-adic-decomposition-ℕ :
-  (n : ℕ) → 2-adic-decomposition-ℕ n → {!!}
-largest-power-divisor-2-adic-decomposition-ℕ = {!!}
 ```
 
 ### The type of 2-adic decompositions of any natural number is a proposition
