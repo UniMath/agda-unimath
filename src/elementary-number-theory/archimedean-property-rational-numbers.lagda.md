@@ -1,6 +1,8 @@
 # The Archimedean property of `ℚ`
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.archimedean-property-rational-numbers where
 ```
 
