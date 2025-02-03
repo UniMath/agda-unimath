@@ -26,8 +26,8 @@ open import foundation-core.propositions
 
 open import logic.de-morgan-propositions
 open import logic.de-morgan-subtypes
-open import logic.irrefutably-surjective-maps
 open import logic.double-negation-stable-subtypes
+open import logic.irrefutably-surjective-maps
 ```
 
 </details>

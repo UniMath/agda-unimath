@@ -101,6 +101,7 @@ open import foundation.coproducts-pullbacks public
 open import foundation.coslice public
 open import foundation.cospan-diagrams public
 open import foundation.cospans public
+open import foundation.decidability-search public
 open import foundation.decidable-dependent-function-types public
 open import foundation.decidable-dependent-pair-types public
 open import foundation.decidable-embeddings public
@@ -451,7 +452,6 @@ open import foundation.type-arithmetic-standard-pullbacks public
 open import foundation.type-arithmetic-unit-type public
 open import foundation.type-duality public
 open import foundation.type-theoretic-principle-of-choice public
-open import foundation.types-with-decidability-search public
 open import foundation.uniformly-decidable-type-families public
 open import foundation.unions-subtypes public
 open import foundation.uniqueness-image public

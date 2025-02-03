@@ -1,7 +1,7 @@
-# Types with decidability search
+# Decidability search
 
 ```agda
-module foundation.types-with-decidability-search where
+module foundation.decidability-search where
 ```
 
 <details><summary>Imports</summary>
@@ -12,18 +12,19 @@ open import elementary-number-theory.natural-numbers
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
-open import foundation.double-negation
 open import foundation.coproduct-types
-open import foundation.propositional-truncations
 open import foundation.decidable-embeddings
+open import foundation.decidable-maps
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-type-families
 open import foundation.decidable-types
-open import logic.de-morgan-subtypes
 open import foundation.dependent-pair-types
+open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.fibers-of-maps
 open import foundation.full-subtypes
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -32,7 +33,9 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.locally-small-types
 open import foundation.negation
+open import foundation.pi-0-trivial-maps
 open import foundation.propositional-extensionality
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.retracts-of-types
 open import foundation.small-types
@@ -49,6 +52,7 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 
 open import logic.complements-decidable-subtypes
+open import logic.de-morgan-subtypes
 open import logic.irrefutably-surjective-maps
 open import logic.propositionally-decidable-types
 
@@ -72,8 +76,7 @@ _exhaustively searchable_, _exhaustibly searchable_, _exhaustible_,
 _omniscient_, _satisfying the principle of omniscience_, _compact_, or
 _Σ-compact_. {{#cite Esc08}} {{#cite TypeTopology}} We reserve the term
 _decidability searchable_ for types for which there (merely)
-[exists](foundation.existential-quantification.md) a decidability search. A type
-for which there exists an
+[exists](foundation.existential-quantification.md) a decidability search.
 
 ## Definitions
 
@@ -218,6 +221,19 @@ has-decidability-search-equiv' :
   X ≃ Y → has-decidability-search X → has-decidability-search Y
 has-decidability-search-equiv' e =
   has-decidability-search-retract (retract-inv-equiv e)
+```
+
+### Types with decidability search are closed under decidable π₀-trivial maps
+
+```agda
+-- has-decidability-search-decidable-π₀-trivial-map' :
+--   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
+--   has-decidability-search X →
+--   {h : Y → X} →
+--   is-decidable-map h →
+--   is-π₀-trivial-map' h →
+--   has-decidability-search Y
+-- has-decidability-search-decidable-π₀-trivial-map' {X = X} f {h} H H' P = is-decidable-equiv {! associative-Σ X (fiber h) ?  !} {!   !}
 ```
 
 ### Decidable subtypes of types with decidability search have decidability search
