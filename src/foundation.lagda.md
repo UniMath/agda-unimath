@@ -110,6 +110,7 @@ open import foundation.decidable-maps public
 open import foundation.decidable-propositions public
 open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
+open import foundation.decidable-type-families public
 open import foundation.decidable-types public
 open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
