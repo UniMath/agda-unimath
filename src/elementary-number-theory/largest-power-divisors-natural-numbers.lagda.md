@@ -18,6 +18,7 @@ open import elementary-number-theory.upper-bounds-natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.universe-levels
 ```
@@ -41,6 +42,9 @@ of the form $m^k$ that
 ```agda
 is-power-divisor-ℕ : ℕ → ℕ → ℕ → UU lzero
 is-power-divisor-ℕ m n x = is-exponential-ℕ m x × div-ℕ x n
+
+valuation-is-power-divisor-ℕ : (m n x : ℕ) → is-power-divisor-ℕ m n x → ℕ
+valuation-is-power-divisor-ℕ m n x H = pr1 (pr1 H)
 ```
 
 ### The predicate of being the largest power divisor of a natural number
@@ -48,7 +52,11 @@ is-power-divisor-ℕ m n x = is-exponential-ℕ m x × div-ℕ x n
 ```agda
 is-largest-power-divisor-ℕ : ℕ → ℕ → ℕ → UU lzero
 is-largest-power-divisor-ℕ m n x =
-  (y : ℕ) → is-power-divisor-ℕ m n y ↔ div-ℕ y x
+  Σ ( is-power-divisor-ℕ m n x)
+    ( λ H →
+      (y : ℕ) (K : is-power-divisor-ℕ m n y) →
+      valuation-is-power-divisor-ℕ m n y K ≤-ℕ
+      valuation-is-power-divisor-ℕ m n x H)
 ```
 
 ### The largest power divisor of a natural number
@@ -79,21 +87,35 @@ module _
       ( is-structured-value-bound-input-ℕ (is-divisor-ℕ n) (m ^ℕ_) n)
       ( largest-power-divisor-ℕ)
 
-  upper-bound-exp-valuation-largest-power-divisor-ℕ :
+  nat-largest-power-divisor-ℕ :
+    ℕ
+  nat-largest-power-divisor-ℕ =
+    m ^ℕ valuation-largest-power-divisor-ℕ
+
+  upper-bound-nat-largest-power-divisor-ℕ :
     m ^ℕ valuation-largest-power-divisor-ℕ ≤-ℕ n
-  upper-bound-exp-valuation-largest-power-divisor-ℕ =
+  upper-bound-nat-largest-power-divisor-ℕ =
     pr1
       ( structure-maximal-element-ℕ
         ( is-structured-value-bound-input-ℕ (is-divisor-ℕ n) (m ^ℕ_) n)
         ( largest-power-divisor-ℕ))
 
-  div-exp-valuation-largest-power-divisor-ℕ :
+  div-largest-power-divisor-ℕ :
     div-ℕ (m ^ℕ valuation-largest-power-divisor-ℕ) n
-  div-exp-valuation-largest-power-divisor-ℕ =
+  div-largest-power-divisor-ℕ =
     pr2
       ( structure-maximal-element-ℕ
         ( is-structured-value-bound-input-ℕ (is-divisor-ℕ n) (m ^ℕ_) n)
         ( largest-power-divisor-ℕ))
+
+  is-power-divisor-largest-power-divisor-ℕ :
+    is-power-divisor-ℕ m n nat-largest-power-divisor-ℕ
+  pr1 (pr1 is-power-divisor-largest-power-divisor-ℕ) =
+    valuation-largest-power-divisor-ℕ
+  pr2 (pr1 is-power-divisor-largest-power-divisor-ℕ) =
+    refl
+  pr2 is-power-divisor-largest-power-divisor-ℕ =
+    div-largest-power-divisor-ℕ
 
   is-upper-bound-valuation-largest-power-divisor-ℕ :
     (k : ℕ) → div-ℕ (m ^ℕ k) n → k ≤-ℕ valuation-largest-power-divisor-ℕ
@@ -104,10 +126,12 @@ module _
       ( k)
       ( leq-div-ℕ (m ^ℕ k) n (is-nonzero-leq-one-ℕ n K) L , L)
 
-  is-largest-power-divisor-valuation-largest-power-divisor-ℕ :
-    is-largest-power-divisor-ℕ m n valuation-largest-power-divisor-ℕ
-  is-largest-power-divisor-valuation-largest-power-divisor-ℕ =
-    {!!}
+  is-largest-power-divisor-largest-power-divisor-ℕ :
+    is-largest-power-divisor-ℕ m n nat-largest-power-divisor-ℕ
+  pr1 is-largest-power-divisor-largest-power-divisor-ℕ =
+    is-power-divisor-largest-power-divisor-ℕ
+  pr2 is-largest-power-divisor-largest-power-divisor-ℕ y ((k , refl) , K) =
+    is-upper-bound-valuation-largest-power-divisor-ℕ k K
 ```
 
 ## See also
