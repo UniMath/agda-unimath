@@ -290,3 +290,19 @@ le-natural-le-ℤ (succ-ℕ m) (succ-ℕ n) m<n =
       ( int-ℕ n)
       ( le-natural-le-ℤ m n m<n))
 ```
+
+### Negation reverses the order of strict inequality of integers
+
+```agda
+module _
+  (x y : ℤ) (I : le-ℤ x y)
+  where
+
+  neg-le-ℤ : le-ℤ (neg-ℤ y) (neg-ℤ x)
+  neg-le-ℤ =
+    tr
+      ( is-positive-ℤ)
+      ( ap (_+ℤ neg-ℤ x) (inv (neg-neg-ℤ y)) ∙
+        commutative-add-ℤ (neg-ℤ (neg-ℤ y)) (neg-ℤ x))
+      I
+```
