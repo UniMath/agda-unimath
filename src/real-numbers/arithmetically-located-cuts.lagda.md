@@ -66,11 +66,10 @@ module _
 
   is-arithmetically-located : UU l
   is-arithmetically-located =
-    (ε : ℚ) →
-    is-positive-ℚ ε →
+    (ε : ℚ⁺) →
     exists
       ( ℚ × ℚ)
-      ( λ (p , q) → le-ℚ-Prop q (p +ℚ ε) ∧ L p ∧ U q)
+      ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε) ∧ L p ∧ U q)
 ```
 
 ### Arithmetically located cuts are located
@@ -121,10 +120,10 @@ module _
                 ( q'-in-u)))
             (decide-le-leq-ℚ p p'))
         ( arithmetically-located
-          ( q -ℚ p)
-          ( is-positive-le-zero-ℚ
-            ( q -ℚ p)
-            ( backward-implication (iff-translate-diff-le-zero-ℚ p q) p<q)))
+          ( q -ℚ p ,
+            ( is-positive-le-zero-ℚ
+              ( q -ℚ p)
+              ( backward-implication (iff-translate-diff-le-zero-ℚ p q) p<q))))
 ```
 
 ### Real numbers are arithmetically located
@@ -205,7 +204,7 @@ module _
   abstract
     arithmetically-located-ℝ :
       is-arithmetically-located (lower-cut-ℝ x) (upper-cut-ℝ x)
-    arithmetically-located-ℝ ε positive-ε =
+    arithmetically-located-ℝ (ε , positive-ε) =
       elim-exists
         ( claim)
         ( λ p0 p0-in-L →
