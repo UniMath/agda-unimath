@@ -12,16 +12,18 @@ module real-numbers.addition-real-numbers where
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
+open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.conjunction
-open import foundation.existential-quantification
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.transport-along-identifications
@@ -29,6 +31,7 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 
+open import real-numbers.arithmetically-located-cuts
 open import real-numbers.dedekind-real-numbers
 ```
 
@@ -104,7 +107,8 @@ module _
                 (forward-implication (is-rounded-lower-cut-ℝ y q) q-in-lower-y))
             (forward-implication (is-rounded-lower-cut-ℝ x p) p-in-lower-x))
       where
-        transp-leq-sum : (a p p' q q' : ℚ) → p +ℚ q ＝ a → le-ℚ p p' → le-ℚ q q' → le-ℚ a (p' +ℚ q')
+        transp-leq-sum :
+          (a p p' q q' : ℚ) → p +ℚ q ＝ a → le-ℚ p p' → le-ℚ q q' → le-ℚ a (p' +ℚ q')
         transp-leq-sum a p p' q q' p+q=a p<p' q<q' =
           tr
             (λ r → le-ℚ r (p' +ℚ q'))
@@ -119,9 +123,21 @@ module _
             (λ (p , q) (p-in-lower-x , q-in-lower-y , p+q=b) →
               intro-exists
                 ((p +ℚ (a -ℚ b) , q))
-                ({!   !} {- backward-implication
-                    (is-rounded-lower-cut-ℝ x (p +ℚ (a -ℚ b)))
-                    (intro-exists p (plus-neg-le-self-ℚ p (a -ℚ b) (translate-diff-zero-le-ℚ a b a<b) , p-in-lower-x)) -} ,
+                (le-lower-cut-ℝ x
+                  (p +ℚ (a -ℚ b))
+                  p
+                  (tr
+                    (le-ℚ (p +ℚ (a -ℚ b)))
+                    (equational-reasoning
+                      (p +ℚ (a -ℚ b)) +ℚ (b -ℚ a)
+                      ＝ p +ℚ ((a -ℚ b) +ℚ (b -ℚ a)) by associative-add-ℚ p (a -ℚ b) (b -ℚ a)
+                      ＝ p +ℚ ((a -ℚ b) +ℚ neg-ℚ (a -ℚ b))
+                        by ap (λ x → p +ℚ ((a -ℚ b) +ℚ x)) (inv (distributive-neg-diff-ℚ a b))
+                      ＝ p +ℚ zero-ℚ
+                        by ap (p +ℚ_) (right-inverse-law-add-ℚ (a -ℚ b))
+                      ＝ p by right-unit-law-add-ℚ p)
+                    (le-right-add-rational-ℚ⁺ (p +ℚ (a -ℚ b)) (b -ℚ a , is-positive-diff-le-ℚ a b a<b)))
+                  p-in-lower-x ,
                   q-in-lower-y ,
                   (right-swap-add-Ab abelian-group-add-ℚ p (a -ℚ b) q ∙
                     ap (_+ℚ (a -ℚ b)) p+q=b ∙
@@ -135,7 +151,8 @@ module _
                 (le-ℚ (s +ℚ t))
                 (right-unit-law-add-ℚ s)
                 (preserves-le-right-add-ℚ s t zero-ℚ t<0)
-            translate-diff-zero-le-ℚ : (s t : ℚ) → le-ℚ s t → le-ℚ (s -ℚ t) zero-ℚ
+            translate-diff-zero-le-ℚ :
+              (s t : ℚ) → le-ℚ s t → le-ℚ (s -ℚ t) zero-ℚ
             translate-diff-zero-le-ℚ s t s<t =
               tr
                 (λ u → le-ℚ u zero-ℚ)
@@ -165,7 +182,8 @@ module _
                 (forward-implication (is-rounded-upper-cut-ℝ y q) q-in-upper-y))
             (forward-implication (is-rounded-upper-cut-ℝ x p) p-in-upper-x))
       where
-        transp-leq-sum : (b p p' q q' : ℚ) → p +ℚ q ＝ b → le-ℚ p' p → le-ℚ q' q → le-ℚ (p' +ℚ q') b
+        transp-leq-sum :
+          (b p p' q q' : ℚ) → p +ℚ q ＝ b → le-ℚ p' p → le-ℚ q' q → le-ℚ (p' +ℚ q') b
         transp-leq-sum b p p' q q' p+q=b p'<p q'<q =
           tr
             (le-ℚ (p' +ℚ q'))
@@ -181,8 +199,26 @@ module _
               intro-exists
                 (p , q +ℚ (b -ℚ a))
                 (p-in-upper-x ,
-                  le-upper-cut-ℝ y q (q +ℚ (b -ℚ a)) {!   !} q-in-upper-y ,
-                  {!   !})
-            )
+                  le-upper-cut-ℝ y q (q +ℚ (b -ℚ a)) (le-right-add-rational-ℚ⁺ q (b -ℚ a , is-positive-diff-le-ℚ a b a<b)) q-in-upper-y ,
+                  (equational-reasoning
+                    p +ℚ (q +ℚ (b -ℚ a))
+                    ＝ (p +ℚ q) +ℚ (b -ℚ a) by inv (associative-add-ℚ p q (b -ℚ a))
+                    ＝ a +ℚ (b -ℚ a) by ap (_+ℚ (b -ℚ a)) p+q=a
+                    ＝ (a +ℚ b) -ℚ a by inv (associative-add-ℚ a b (neg-ℚ a))
+                    ＝ b by is-identity-conjugation-Ab abelian-group-add-ℚ a b)))
             a-in-upper-add)
+
+    arithmetically-located-add-ℝ : is-arithmetically-located lower-cut-add-ℝ upper-cut-add-ℝ
+    arithmetically-located-add-ℝ ε pos-ε =
+      elim-exists
+        ( claim)
+        {!  !}
+        (ind-Σ
+          (arithmetically-located-ℝ x)
+          (left-summand-split-ℚ⁺ (ε , pos-ε)))
+      where
+        claim : Prop l
+        claim = ∃
+          ( ℚ × ℚ)
+          ( λ (p , q) → le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-add-ℝ p ∧ upper-cut-add-ℝ q)
 ```
