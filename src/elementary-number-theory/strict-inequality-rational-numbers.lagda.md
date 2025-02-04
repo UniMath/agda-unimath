@@ -453,7 +453,6 @@ located-le-ℚ x y z H =
 ### Negation reverses the ordering of strict inequality on the rational numbers
 
 ```agda
-neg-le-ℚ :
-  (x y : ℚ) → le-ℚ x y → le-ℚ (neg-ℚ y) (neg-ℚ x)
+neg-le-ℚ : (x y : ℚ) → le-ℚ x y → le-ℚ (neg-ℚ y) (neg-ℚ x)
 neg-le-ℚ x y = neg-le-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```
