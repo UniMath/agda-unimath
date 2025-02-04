@@ -258,7 +258,6 @@ module _
 module _
   (x y : ℤ) (I : le-ℤ x y)
   where
-(l : Level) → ℝ l
   abstract
     is-negative-le-negative-ℤ : is-negative-ℤ y → is-negative-ℤ x
     is-negative-le-negative-ℤ H =

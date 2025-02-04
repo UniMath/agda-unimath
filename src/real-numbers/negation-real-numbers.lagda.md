@@ -1,6 +1,8 @@
 # Negation of real numbers
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.negation-real-numbers where
 ```
 
