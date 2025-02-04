@@ -1,7 +1,7 @@
 # Extensions of maps
 
 ```agda
-module orthogonal-factorization-systems.extensions-of-maps where
+module orthogonal-factorization-systems.extensions-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -9,13 +9,10 @@ module orthogonal-factorization-systems.extensions-of-maps where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.fibers-of-maps
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -25,7 +22,6 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.monomorphisms
 open import foundation.postcomposition-functions
-open import foundation.precomposition-dependent-functions
 open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
@@ -37,8 +33,6 @@ open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
 
 open import foundation-core.torsorial-type-families
-
-open import orthogonal-factorization-systems.types-local-at-maps
 ```
 
 </details>
@@ -369,67 +363,34 @@ module _
     is-prop-Π (λ x → is-set-P x (f x) (g (i x)))
 ```
 
-### Every map has a unique extension along `i` if and only if `P` is `i`-local
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (i : A → B)
-  {l : Level} (P : B → UU l)
-  where
-
-  equiv-fiber'-precomp-extension-dependent-type :
-    (f : (x : A) → P (i x)) →
-    fiber' (precomp-Π i P) f ≃ extension-dependent-type i P f
-  equiv-fiber'-precomp-extension-dependent-type f =
-    equiv-tot (λ g → equiv-funext {f = f} {g ∘ i})
-
-  equiv-fiber-precomp-extension-dependent-type :
-    (f : (x : A) → P (i x)) →
-    fiber (precomp-Π i P) f ≃ extension-dependent-type i P f
-  equiv-fiber-precomp-extension-dependent-type f =
-    ( equiv-fiber'-precomp-extension-dependent-type f) ∘e
-    ( equiv-fiber (precomp-Π i P) f)
-
-  equiv-is-contr-extension-dependent-type-is-local-dependent-type :
-    is-local-dependent-type i P ≃
-    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f))
-  equiv-is-contr-extension-dependent-type-is-local-dependent-type =
-    ( equiv-Π-equiv-family
-      ( equiv-is-contr-equiv ∘ equiv-fiber-precomp-extension-dependent-type)) ∘e
-    ( equiv-is-contr-map-is-equiv (precomp-Π i P))
-
-  is-contr-extension-dependent-type-is-local-dependent-type :
-    is-local-dependent-type i P →
-    (f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)
-  is-contr-extension-dependent-type-is-local-dependent-type =
-    map-equiv equiv-is-contr-extension-dependent-type-is-local-dependent-type
-
-  is-local-dependent-type-is-contr-extension-dependent-type :
-    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)) →
-    is-local-dependent-type i P
-  is-local-dependent-type-is-contr-extension-dependent-type =
-    map-inv-equiv
-      equiv-is-contr-extension-dependent-type-is-local-dependent-type
-```
-
 ## Examples
 
 ### Every map is an extension of itself along the identity
 
 ```agda
-is-extension-self :
-  {l1 l2 : Level} {A : UU l1} {P : A → UU l2}
-  (f : (x : A) → P x) → is-extension id f f
-is-extension-self _ = refl-htpy
+module _
+  {l1 l2 : Level} {A : UU l1} {P : A → UU l2} (f : (x : A) → P x)
+  where
+
+  is-extension-self : is-extension id f f
+  is-extension-self = refl-htpy
+
+  extension-self : extension-dependent-type id P f
+  extension-self = f , is-extension-self
 ```
 
 ### The identity is an extension of every map along themselves
 
 ```agda
-is-extension-along-self :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (f : A → B) → is-extension f f id
-is-extension-along-self _ = refl-htpy
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-extension-along-self : is-extension f f id
+  is-extension-along-self = refl-htpy
+
+  extension-along-self : extension f f
+  extension-along-self = id , is-extension-along-self
 ```
 
 ### Postcomposition of extensions by an embedding is an embedding
@@ -454,5 +415,5 @@ module _
 
 ## See also
 
-- [`orthogonal-factorization-systems.lifts-of-maps`](orthogonal-factorization-systems.lifts-of-maps.md)
+- [`orthogonal-factorization-systems.lifts-maps`](orthogonal-factorization-systems.lifts-maps.md)
   for the dual notion.

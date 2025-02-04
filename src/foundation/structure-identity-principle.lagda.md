@@ -23,10 +23,10 @@ open import foundation-core.torsorial-type-families
 ## Idea
 
 [Structure](foundation.structure.md) is presented in type theory by
-[dependent pair types](foundation.dependent-pair-types.md). The **structure
-identity principle** is a way to characterize the
-[identity type](foundation-core.identity-types.md) of a structure, using
-characterizations of the identity types of its components.
+[dependent pair types](foundation.dependent-pair-types.md). The
+{{#concept "structure identity principle" Disambiguation="for types" Agda=structure-identity-principle}}
+is a way to characterize the [identity type](foundation-core.identity-types.md)
+of a structure, using characterizations of the identity types of its components.
 
 ## Lemma
 
@@ -38,14 +38,14 @@ module _
 
   abstract
     is-torsorial-Eq-structure :
-      (is-contr-AC : is-torsorial C) (t : Σ A C) →
+      (is-torsorial-AC : is-torsorial C) (t : Σ A C) →
       is-torsorial (λ y → D (pr1 t) y (pr2 t)) →
       is-torsorial (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t)))
-    is-torsorial-Eq-structure is-contr-AC t is-contr-BD =
+    is-torsorial-Eq-structure is-torsorial-AC t is-torsorial-BD =
       is-contr-equiv
         ( Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))))
         ( interchange-Σ-Σ D)
-        ( is-contr-Σ is-contr-AC t is-contr-BD)
+        ( is-contr-Σ is-torsorial-AC t is-torsorial-BD)
 ```
 
 ## Theorem
@@ -54,7 +54,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} { A : UU l1} {B : A → UU l2} {Eq-A : A → UU l3}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {Eq-A : A → UU l3}
   (Eq-B : {x : A} → B x → Eq-A x → UU l4)
   {a : A} {b : B a} (refl-A : Eq-A a) (refl-B : Eq-B b refl-A)
   where
@@ -93,3 +93,10 @@ module _
       ( λ y → is-equiv-map-equiv (g y))
       ( z)
 ```
+
+## External links
+
+- [Structure Identity Principle](https://1lab.dev/1Lab.Univalence.SIP.html) at
+  1lab
+- [structure identity principle](https://ncatlab.org/nlab/show/structure+identity+principle)
+  at $n$Lab

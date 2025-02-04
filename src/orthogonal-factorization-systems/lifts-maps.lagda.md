@@ -1,7 +1,7 @@
 # Lifts of maps
 
 ```agda
-module orthogonal-factorization-systems.lifts-of-maps where
+module orthogonal-factorization-systems.lifts-maps where
 ```
 
 <details><summary>Imports</summary>
@@ -280,5 +280,5 @@ module _
 
 ## See also
 
-- [`orthogonal-factorization-systems.extensions-of-maps`](orthogonal-factorization-systems.extensions-of-maps.md)
+- [`orthogonal-factorization-systems.extensions-maps`](orthogonal-factorization-systems.extensions-maps.md)
   for the dual notion.

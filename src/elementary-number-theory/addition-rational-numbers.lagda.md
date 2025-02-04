@@ -10,7 +10,9 @@ module elementary-number-theory.addition-rational-numbers where
 
 ```agda
 open import elementary-number-theory.addition-integer-fractions
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
@@ -157,6 +159,55 @@ abstract
       ( neg-fraction-ℤ (x +fraction-ℤ y))
       ( add-fraction-ℤ (neg-fraction-ℤ x) (neg-fraction-ℤ y))
       ( distributive-neg-add-fraction-ℤ x y))
+```
+
+### The inclusion of integer fractions preserves addition
+
+```agda
+abstract
+  add-rational-fraction-ℤ :
+    (x y : fraction-ℤ) →
+    rational-fraction-ℤ x +ℚ rational-fraction-ℤ y ＝
+    rational-fraction-ℤ (x +fraction-ℤ y)
+  add-rational-fraction-ℤ x y =
+    eq-ℚ-sim-fraction-ℤ
+      ( add-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y))
+      ( x +fraction-ℤ y)
+      ( sim-fraction-add-fraction-ℤ
+        ( symmetric-sim-fraction-ℤ
+          ( x)
+          ( reduce-fraction-ℤ x)
+          ( sim-reduced-fraction-ℤ x))
+        ( symmetric-sim-fraction-ℤ
+          ( y)
+          ( reduce-fraction-ℤ y)
+          ( sim-reduced-fraction-ℤ y)))
+```
+
+### The inclusion of integers preserves addition
+
+```agda
+abstract
+  add-rational-ℤ :
+    (x y : ℤ) →
+    rational-ℤ x +ℚ rational-ℤ y ＝
+    rational-ℤ (x +ℤ y)
+  add-rational-ℤ x y = equational-reasoning
+    rational-ℤ x +ℚ rational-ℤ y
+    ＝ rational-fraction-ℤ (in-fraction-ℤ x) +ℚ
+      rational-fraction-ℤ (in-fraction-ℤ y)
+      by ap-add-ℚ
+        ( inv (is-retraction-rational-fraction-ℚ (rational-ℤ x)))
+        ( inv (is-retraction-rational-fraction-ℚ (rational-ℤ y)))
+    ＝ rational-fraction-ℤ (in-fraction-ℤ x +fraction-ℤ in-fraction-ℤ y)
+      by add-rational-fraction-ℤ (in-fraction-ℤ x) (in-fraction-ℤ y)
+    ＝ rational-fraction-ℤ (in-fraction-ℤ (x +ℤ y))
+      by eq-ℚ-sim-fraction-ℤ
+        ( in-fraction-ℤ x +fraction-ℤ in-fraction-ℤ y)
+        ( in-fraction-ℤ (x +ℤ y))
+        ( add-in-fraction-ℤ x y)
+    ＝ rational-ℤ (x +ℤ y)
+      by is-retraction-rational-fraction-ℚ (rational-ℤ (x +ℤ y))
 ```
 
 ## See also
