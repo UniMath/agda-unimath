@@ -9,6 +9,7 @@ module orthogonal-factorization-systems.types-local-at-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
+open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -16,9 +17,11 @@ open import foundation.dependent-universal-property-equivalences
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.families-of-equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -26,15 +29,19 @@ open import foundation.postcomposition-functions
 open import foundation.precomposition-dependent-functions
 open import foundation.precomposition-functions
 open import foundation.propositions
+open import foundation.retractions
 open import foundation.retracts-of-maps
 open import foundation.retracts-of-types
 open import foundation.sections
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universal-property-equivalences
 open import foundation.universe-levels
+
+open import orthogonal-factorization-systems.extensions-maps
 ```
 
 </details>
@@ -47,7 +54,7 @@ A dependent type `A` over `Y` is said to be
 [precomposition map](foundation-core.function-types.md)
 
 ```text
-  _∘ f : ((y : Y) → A y) → ((x : X) → A (f x))
+  - ∘ f : ((y : Y) → A y) → ((x : X) → A (f x))
 ```
 
 is an [equivalence](foundation-core.equivalences.md).
@@ -103,29 +110,66 @@ module _
 
 ## Properties
 
-### Locality distributes over Π-types
+### Every map has a unique extension along `i` if and only if `P` is `i`-local
 
 ```agda
 module _
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  {l : Level} (P : B → UU l)
   where
 
-  distributive-Π-is-local-dependent-type :
-    {l3 l4 : Level} {A : UU l3} (B : A → Y → UU l4) →
-    ((a : A) → is-local-dependent-type f (B a)) →
-    is-local-dependent-type f (λ x → (a : A) → B a x)
-  distributive-Π-is-local-dependent-type B f-loc =
-    is-equiv-map-equiv
-      ( ( equiv-swap-Π) ∘e
-        ( equiv-Π-equiv-family (λ a → precomp-Π f (B a) , (f-loc a))) ∘e
-        ( equiv-swap-Π))
+  equiv-fiber'-precomp-extension-dependent-type :
+    (f : (x : A) → P (i x)) →
+    fiber' (precomp-Π i P) f ≃ extension-dependent-type i P f
+  equiv-fiber'-precomp-extension-dependent-type f =
+    equiv-tot (λ g → equiv-funext {f = f} {g ∘ i})
 
-  distributive-Π-is-local :
-    {l3 l4 : Level} {A : UU l3} (B : A → UU l4) →
-    ((a : A) → is-local f (B a)) →
-    is-local f ((a : A) → B a)
-  distributive-Π-is-local B =
-    distributive-Π-is-local-dependent-type (λ a _ → B a)
+  equiv-fiber-precomp-extension-dependent-type :
+    (f : (x : A) → P (i x)) →
+    fiber (precomp-Π i P) f ≃ extension-dependent-type i P f
+  equiv-fiber-precomp-extension-dependent-type f =
+    ( equiv-fiber'-precomp-extension-dependent-type f) ∘e
+    ( equiv-fiber (precomp-Π i P) f)
+
+  equiv-is-contr-extension-dependent-type-is-local-dependent-type :
+    is-local-dependent-type i P ≃
+    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f))
+  equiv-is-contr-extension-dependent-type-is-local-dependent-type =
+    ( equiv-Π-equiv-family
+      ( equiv-is-contr-equiv ∘ equiv-fiber-precomp-extension-dependent-type)) ∘e
+    ( equiv-is-contr-map-is-equiv (precomp-Π i P))
+
+  is-contr-extension-dependent-type-is-local-dependent-type :
+    is-local-dependent-type i P →
+    (f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)
+  is-contr-extension-dependent-type-is-local-dependent-type =
+    map-equiv equiv-is-contr-extension-dependent-type-is-local-dependent-type
+
+  is-local-dependent-type-is-contr-extension-dependent-type :
+    ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f)) →
+    is-local-dependent-type i P
+  is-local-dependent-type-is-contr-extension-dependent-type =
+    map-inv-equiv
+      equiv-is-contr-extension-dependent-type-is-local-dependent-type
+```
+
+### Every map has a unique extension along `i` if and only if `P` is `i`-local
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (i : A → B)
+  {l : Level} {C : UU l}
+  where
+
+  is-contr-extension-is-local :
+    is-local i C → (f : A → C) → is-contr (extension i f)
+  is-contr-extension-is-local =
+    is-contr-extension-dependent-type-is-local-dependent-type i (λ _ → C)
+
+  is-local-is-contr-extension :
+    ((f : A → C) → is-contr (extension i f)) → is-local i C
+  is-local-is-contr-extension =
+    is-local-dependent-type-is-contr-extension-dependent-type i (λ _ → C)
 ```
 
 ### Local types are closed under equivalences
@@ -185,7 +229,7 @@ module _
       ( refl-htpy)
 ```
 
-### Locality is preserved by homotopies
+### Locality is preserved by homotopies of functions
 
 ```agda
 module _
@@ -288,11 +332,27 @@ module _
   pr1 (is-equiv-is-local-domains' section-precomp-X is-local-Y) =
     section-is-local-domains' section-precomp-X is-local-Y
   pr2 (is-equiv-is-local-domains' section-precomp-X is-local-Y) =
-    retraction-section-precomp-domain f section-precomp-X
+    retraction-map-section-precomp f section-precomp-X
 
   is-equiv-is-local-domains : is-local f X → is-local f Y → is-equiv f
   is-equiv-is-local-domains is-local-X =
     is-equiv-is-local-domains' (pr1 is-local-X)
+```
+
+### If `f` has a retraction and the codomain of `f` is `f`-local, then `f` is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
+  where
+
+  is-equiv-retraction-is-local-codomain :
+    retraction f → is-local f Y → is-equiv f
+  is-equiv-retraction-is-local-codomain r is-local-Y =
+    section-is-local-domains' f
+      ( section-precomp-retraction-map f r)
+      ( is-local-Y) ,
+    r
 ```
 
 ### Propositions are `f`-local if `- ∘ f` has a converse
@@ -319,7 +379,7 @@ module _
     is-local-dependent-type-is-prop (λ _ → A) (λ _ → is-prop-A)
 ```
 
-### All type families are local at equivalences
+### All types are local at equivalences
 
 ```agda
 module _
@@ -368,6 +428,96 @@ is-contr-is-local A is-local-A =
     ( empty → A)
     ( (precomp (λ _ → star) A , is-local-A) ∘e inv-left-unit-law-Π (λ _ → A))
     ( universal-property-empty' A)
+```
+
+### The 3-for-2 property of local types
+
+Given a [commuting triangle](foundation-core.commuting-triangles-of-maps.md) of
+maps
+
+```text
+        f
+   X ------> Y
+    \       /
+   h \     / g
+      \   /
+       ∨ ∨
+        Z,
+```
+
+then if `A` is local at two of the maps then it is local at all three.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3} {A : UU l4}
+  {f : X → Y} {g : Y → Z}
+  where
+
+  is-local-comp : is-local g A → is-local f A → is-local (g ∘ f) A
+  is-local-comp G F = is-equiv-comp (precomp f A) (precomp g A) G F
+
+  is-local-left-map-triangle :
+    {h : X → Z} → coherence-triangle-maps h g f →
+    is-local g A → is-local f A → is-local h A
+  is-local-left-map-triangle {h} K =
+    is-equiv-left-map-triangle
+      ( precomp h A)
+      ( precomp f A)
+      ( precomp g A)
+      ( htpy-precomp K A)
+
+  is-local-right-factor :
+    is-local (g ∘ f) A → is-local g A → is-local f A
+  is-local-right-factor = is-equiv-left-factor (precomp f A) (precomp g A)
+
+  is-local-top-map-triangle :
+    {h : X → Z} → coherence-triangle-maps h g f →
+    is-local h A → is-local g A → is-local f A
+  is-local-top-map-triangle {h} K =
+    is-equiv-right-map-triangle
+      ( precomp h A)
+      ( precomp f A)
+      ( precomp g A)
+      ( htpy-precomp K A)
+
+  is-local-left-factor :
+    is-local f A → is-local (g ∘ f) A → is-local g A
+  is-local-left-factor = is-equiv-right-factor (precomp f A) (precomp g A)
+
+  is-local-right-map-triangle :
+    {h : X → Z} → coherence-triangle-maps h g f →
+    is-local f A → is-local h A → is-local g A
+  is-local-right-map-triangle {h} K =
+    is-equiv-top-map-triangle
+      ( precomp h A)
+      ( precomp f A)
+      ( precomp g A)
+      ( htpy-precomp K A)
+```
+
+### Locality distributes over Π-types
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
+  where
+
+  distributive-Π-is-local-dependent-type :
+    {l3 l4 : Level} {A : UU l3} (B : A → Y → UU l4) →
+    ((a : A) → is-local-dependent-type f (B a)) →
+    is-local-dependent-type f (λ x → (a : A) → B a x)
+  distributive-Π-is-local-dependent-type B f-loc =
+    is-equiv-map-equiv
+      ( ( equiv-swap-Π) ∘e
+        ( equiv-Π-equiv-family (λ a → precomp-Π f (B a) , (f-loc a))) ∘e
+        ( equiv-swap-Π))
+
+  distributive-Π-is-local :
+    {l3 l4 : Level} {A : UU l3} (B : A → UU l4) →
+    ((a : A) → is-local f (B a)) →
+    is-local f ((a : A) → B a)
+  distributive-Π-is-local B =
+    distributive-Π-is-local-dependent-type (λ a _ → B a)
 ```
 
 ## See also

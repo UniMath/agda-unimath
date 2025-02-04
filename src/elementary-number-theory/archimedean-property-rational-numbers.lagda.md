@@ -1,6 +1,8 @@
 # The Archimedean property of `ℚ`
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.archimedean-property-rational-numbers where
 ```
 
@@ -18,6 +20,7 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-binary-functions
+open import foundation.existential-quantification
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -37,29 +40,28 @@ abstract
   archimedean-property-ℚ :
     (x y : ℚ) →
       is-positive-ℚ x →
-      Σ ℕ (λ n → le-ℚ y (rational-ℤ (int-ℕ n) *ℚ x))
-  archimedean-property-ℚ x y positive-x
-    with
-      archimedean-property-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y) positive-x
-  ... | n , nx<y =
-    n ,
-    binary-tr
-      le-ℚ
-      ( is-retraction-rational-fraction-ℚ y)
-      ( H)
-      ( preserves-le-rational-fraction-ℤ
+      exists ℕ (λ n → le-ℚ-Prop y (rational-ℤ (int-ℕ n) *ℚ x))
+  archimedean-property-ℚ x y positive-x =
+    elim-exists
+      ( ∃ ℕ (λ n → le-ℚ-Prop y (rational-ℤ (int-ℕ n) *ℚ x)))
+      ( λ n nx<y →
+        intro-exists
+          ( n)
+          ( binary-tr
+              le-ℚ
+              ( is-retraction-rational-fraction-ℚ y)
+              ( inv
+                ( mul-rational-fraction-ℤ
+                  ( in-fraction-ℤ (int-ℕ n))
+                  ( fraction-ℚ x)) ∙
+                ap-binary
+                  ( mul-ℚ)
+                  ( is-retraction-rational-fraction-ℚ (rational-ℤ (int-ℕ n)))
+                  ( is-retraction-rational-fraction-ℚ x))
+              ( preserves-le-rational-fraction-ℤ
+                ( fraction-ℚ y)
+                ( in-fraction-ℤ (int-ℕ n) *fraction-ℤ fraction-ℚ x) nx<y)))
+      ( archimedean-property-fraction-ℤ
+        ( fraction-ℚ x)
         ( fraction-ℚ y)
-        ( in-fraction-ℤ (int-ℕ n) *fraction-ℤ fraction-ℚ x) nx<y)
-    where
-      H :
-        rational-fraction-ℤ (in-fraction-ℤ (int-ℕ n) *fraction-ℤ fraction-ℚ x)
-        ＝ rational-ℤ (int-ℕ n) *ℚ x
-      H = inv
-            ( mul-rational-fraction-ℤ
-              ( in-fraction-ℤ (int-ℕ n))
-              ( fraction-ℚ x)) ∙
-          ap-binary
-            ( mul-ℚ)
-            ( is-retraction-rational-fraction-ℚ (rational-ℤ (int-ℕ n)))
-            ( is-retraction-rational-fraction-ℚ x)
-```
+        ( positive-x))

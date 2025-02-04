@@ -34,7 +34,7 @@ open import foundation-core.retractions
 open import foundation-core.sections
 open import foundation-core.transport-along-identifications
 
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.types-local-at-maps
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
@@ -82,8 +82,8 @@ unit-continuation = ev
 ### Maps into `continuation R A` extend along the unit
 
 Every `f` as in the following diagram
-[extends](orthogonal-factorization-systems.extensions-of-maps.md) along the unit
-of its domain
+[extends](orthogonal-factorization-systems.extensions-maps.md) along the unit of
+its domain
 
 ```text
                f

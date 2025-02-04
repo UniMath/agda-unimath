@@ -59,9 +59,9 @@ module _
   abstract
     fundamental-theorem-id :
       is-torsorial B → (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
-    fundamental-theorem-id is-contr-AB f =
+    fundamental-theorem-id is-torsorial-B f =
       is-fiberwise-equiv-is-equiv-tot
-        ( is-equiv-is-contr (tot f) (is-torsorial-Id a) is-contr-AB)
+        ( is-equiv-is-contr (tot f) (is-torsorial-Id a) is-torsorial-B)
 
   abstract
     fundamental-theorem-id' :
@@ -84,8 +84,8 @@ module _
   abstract
     fundamental-theorem-id-J :
       is-torsorial B → is-fiberwise-equiv (ind-Id a (λ x p → B x) b)
-    fundamental-theorem-id-J is-contr-AB =
-      fundamental-theorem-id is-contr-AB (ind-Id a (λ x p → B x) b)
+    fundamental-theorem-id-J is-torsorial-B =
+      fundamental-theorem-id is-torsorial-B (ind-Id a (λ x p → B x) b)
 
   abstract
     fundamental-theorem-id-J' :

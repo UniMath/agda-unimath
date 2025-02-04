@@ -1,6 +1,8 @@
 # The Archimedean property of integer fractions
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module elementary-number-theory.archimedean-property-integer-fractions where
 ```
 
@@ -19,6 +21,7 @@ open import elementary-number-theory.strict-inequality-integer-fractions
 open import elementary-number-theory.strict-inequality-integers
 
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.transport-along-identifications
 ```
@@ -35,18 +38,26 @@ than `n` as an integer fraction times `x`.
 abstract
   archimedean-property-fraction-ℤ :
     (x y : fraction-ℤ) →
-      is-positive-fraction-ℤ x →
-      Σ ℕ (λ n → le-fraction-ℤ y (in-fraction-ℤ (int-ℕ n) *fraction-ℤ x))
-  archimedean-property-fraction-ℤ (px , qx , pos-qx) (py , qy , pos-qy) pos-px =
-    ind-Σ
-      ( λ n H →
-        n ,
-        tr
-          ( le-ℤ (py *ℤ qx))
-          ( inv (associative-mul-ℤ (int-ℕ n) px qy))
-          ( H))
-      (archimedean-property-ℤ
-        ( px *ℤ qy)
-        ( py *ℤ qx)
-        ( is-positive-mul-ℤ pos-px pos-qy))
+    is-positive-fraction-ℤ x →
+    exists
+      ℕ
+      (λ n → le-fraction-ℤ-Prop y (in-fraction-ℤ (int-ℕ n) *fraction-ℤ x))
+  archimedean-property-fraction-ℤ
+    x@(px , qx , pos-qx) y@(py , qy , pos-qy) pos-px =
+      elim-exists
+        (∃
+          ( ℕ)
+          ( λ n →
+            le-fraction-ℤ-Prop y (in-fraction-ℤ (int-ℕ n) *fraction-ℤ x)))
+        ( λ n H →
+          intro-exists
+            ( n)
+            ( tr
+              ( le-ℤ (py *ℤ qx))
+              ( inv (associative-mul-ℤ (int-ℕ n) px qy))
+              ( H)))
+        ( archimedean-property-ℤ
+          ( px *ℤ qy)
+          ( py *ℤ qx)
+          ( is-positive-mul-ℤ pos-px pos-qy))
 ```
