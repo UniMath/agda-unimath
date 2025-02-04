@@ -17,6 +17,8 @@ open import elementary-number-theory.addition-natural-numbers public
 open import elementary-number-theory.addition-positive-and-negative-integers public
 open import elementary-number-theory.addition-rational-numbers public
 open import elementary-number-theory.additive-group-of-rational-numbers public
+open import elementary-number-theory.archimedean-property-integers public
+open import elementary-number-theory.archimedean-property-natural-numbers public
 open import elementary-number-theory.arithmetic-functions public
 open import elementary-number-theory.based-induction-natural-numbers public
 open import elementary-number-theory.based-strong-induction-natural-numbers public
@@ -51,6 +53,7 @@ open import elementary-number-theory.divisibility-integers public
 open import elementary-number-theory.divisibility-modular-arithmetic public
 open import elementary-number-theory.divisibility-natural-numbers public
 open import elementary-number-theory.divisibility-standard-finite-types public
+open import elementary-number-theory.equality-conatural-numbers public
 open import elementary-number-theory.equality-integers public
 open import elementary-number-theory.equality-natural-numbers public
 open import elementary-number-theory.euclid-mullin-sequence public
@@ -72,6 +75,7 @@ open import elementary-number-theory.group-of-integers public
 open import elementary-number-theory.half-integers public
 open import elementary-number-theory.hardy-ramanujan-number public
 open import elementary-number-theory.inclusion-natural-numbers-conatural-numbers public
+open import elementary-number-theory.inequality-conatural-numbers public
 open import elementary-number-theory.inequality-integer-fractions public
 open import elementary-number-theory.inequality-integers public
 open import elementary-number-theory.inequality-natural-numbers public

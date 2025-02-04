@@ -78,7 +78,7 @@ module _
     (h : C → A) (H : f ~ g) (S : UU l4) →
     precomp h S ·l htpy-precomp H S ~ htpy-precomp (H ·r h) S
   inv-distributive-htpy-precomp-right-whisker h H S i =
-    compute-eq-htpy-ap-precomp h (i ·l H)
+    coherence-eq-htpy-ap-precomp h (i ·l H)
 
   distributive-htpy-precomp-right-whisker :
     (h : C → A) (H : f ~ g) (S : UU l4) →

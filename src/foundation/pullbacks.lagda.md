@@ -9,17 +9,21 @@ open import foundation-core.pullbacks public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-cubes-of-maps
 open import foundation.cones-over-cospan-diagrams
 open import foundation.dependent-pair-types
 open import foundation.dependent-sums-pullbacks
 open import foundation.descent-equivalences
+open import foundation.equality-cartesian-product-types
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-function-types
 open import foundation.standard-pullbacks
+open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies-composition
@@ -86,6 +90,83 @@ module _
   is-pullback-Prop : (c : cone f g C) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   pr1 (is-pullback-Prop c) = is-pullback f g c
   pr2 (is-pullback-Prop c) = is-prop-is-pullback c
+```
+
+### The identity type as a pullback
+
+```agda
+module _
+  {l : Level} {A : UU l} (x y : A)
+  where
+
+  cone-Id : cone (point x) (point y) (x ＝ y)
+  cone-Id = terminal-map (x ＝ y) , terminal-map (x ＝ y) , id
+
+  is-pullback-Id : is-pullback (point x) (point y) cone-Id
+  is-pullback-Id =
+    is-equiv-is-invertible
+      coherence-square-standard-pullback
+      refl-htpy
+      refl-htpy
+```
+
+### The type of equivalences as a pullback
+
+The type of equivalences `A ≃ B` can be presented as the following pullback.
+
+```text
+             A ≃ B ----------------------> unit
+               | ⌟                          |
+               |                            |
+               |                            | * ↦ (id , id)
+               |                            |
+               |                            |
+               ∨                            ∨
+  (A → B) × (B → A) × (B → A) ----> (A → A) × (B → B)
+                    (f , g , h) ↦ (h ∘ f , f ∘ g)
+```
+
+This presentation can be found as Proposition 2.18 in {{#cite CORS20}} and
+Corollary 5.1.23 in {{#cite Rij19}}.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  cone-equiv :
+    cone
+      ( λ (f , g , h) → h ∘ f , f ∘ g)
+      ( point (id' A , id' B))
+      ( A ≃ B)
+  cone-equiv =
+      ( λ e →
+        map-equiv e , map-section-map-equiv e , map-retraction-map-equiv e) ,
+      ( terminal-map (A ≃ B)) ,
+      ( λ e →
+        eq-pair
+          ( eq-htpy (is-retraction-map-retraction-map-equiv e))
+          ( eq-htpy (is-section-map-section-map-equiv e)))
+
+  abstract
+    is-pullback-equiv :
+      is-pullback
+        ( λ (f , g , h) → h ∘ f , f ∘ g)
+        ( point (id' A , id' B))
+        ( cone-equiv)
+    is-pullback-equiv =
+      is-equiv-is-invertible
+        ( λ ((f , g , h) , * , H) →
+          f , (g , htpy-eq (pr2 (pair-eq H))) , (h , htpy-eq (pr1 (pair-eq H))))
+        ( λ (_ , * , H) →
+          eq-pair-eq-fiber
+            ( eq-pair-eq-fiber
+              ( ( ap-binary
+                  ( eq-pair)
+                  ( is-retraction-eq-htpy (ap pr1 H))
+                  ( is-retraction-eq-htpy (ap pr2 H))) ∙
+                ( is-section-pair-eq H))))
+        ( λ e → eq-type-subtype is-equiv-Prop refl)
 ```
 
 ### In a commuting cube where the front faces are pullbacks, either back face is a pullback iff the other back face is
@@ -440,6 +521,10 @@ module _
               ( is-torsorial-Id (vertical-map-cone f g c u))))
           ( v))
 ```
+
+## References
+
+{{#bibliography}}
 
 ## Table of files about pullbacks
 

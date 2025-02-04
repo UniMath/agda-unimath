@@ -8,14 +8,15 @@ module foundation.locally-small-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.inhabited-subtypes
 open import foundation.subuniverses
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -31,7 +32,9 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A type is said to be **locally small** with respect to a universe `UU l` if its
+A type is said to be
+{{#concept "locally small" Disambiguation="type" Agda=is-locally-small}} with
+respect to a [universe](foundation.universe-levels.md) `UU l` if its
 [identity types](foundation-core.identity-types.md) are
 [small](foundation-core.small-types.md) with respect to that universe.
 
@@ -114,6 +117,28 @@ pr2 (is-locally-small-Prop l A) = is-prop-is-locally-small l A
 ```agda
 is-locally-small' : {l : Level} {A : UU l} → is-locally-small l A
 is-locally-small' x y = is-small'
+```
+
+### Locally small types are closed under embeddings
+
+```agda
+is-locally-small-emb :
+  {l1 l2 l : Level} {A : UU l1} {B : UU l2} →
+  A ↪ B → is-locally-small l B → is-locally-small l A
+is-locally-small-emb f H x y =
+  is-small-equiv
+    ( map-emb f x ＝ map-emb f y)
+    ( equiv-ap-emb f)
+    ( H (map-emb f x) (map-emb f y))
+```
+
+### Locally small types are closed under equivalences
+
+```agda
+is-locally-small-equiv :
+  {l1 l2 l : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-locally-small l B → is-locally-small l A
+is-locally-small-equiv e = is-locally-small-emb (emb-equiv e)
 ```
 
 ### Any small type is locally small

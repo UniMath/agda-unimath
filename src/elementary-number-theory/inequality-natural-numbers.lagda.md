@@ -432,7 +432,7 @@ reflects-order-mul-ℕ' k m n H =
       ( commutative-mul-ℕ (succ-ℕ k) n))
 ```
 
-### Any number `x` is less than a nonzero multiple of itself
+### Any number `x` is less than or equal to a nonzero multiple of itself
 
 ```agda
 leq-mul-ℕ :
