@@ -9,6 +9,7 @@ module real-numbers.arithmetically-located-cuts where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
@@ -132,34 +133,68 @@ module _
   (located : (p q : ℚ) → le-ℚ p q → type-disjunction-Prop (L p) (U q))
   where
 
-  lemma : (p ε : ℚ) → (n : ℕ) → is-positive-ℚ ε → is-in-subtype L p → is-in-subtype U (p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)) →
-    exists (ℚ × ℚ) (λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r ((q +ℚ ε) +ℚ ε) ∧ L q ∧ U r)
-  lemma p ε zero-ℕ positive-ε p-in-L p-plus-1-ε-in-U =
+  arithmetic-location-in-arithmetic-sequence :
+    (p ε : ℚ) →
+    (n : ℕ) →
+    is-positive-ℚ ε →
+    is-in-subtype L p →
+    is-in-subtype U (p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)) →
+    exists
+      (ℚ × ℚ)
+      (λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r ((q +ℚ ε) +ℚ ε) ∧ L q ∧ U r)
+  arithmetic-location-in-arithmetic-sequence
+    p ε zero-ℕ positive-ε p-in-L p-plus-1-ε-in-U =
     intro-exists
-      (p , p +ℚ ε)
+      ( p , p +ℚ ε)
       ( le-right-add-rational-ℚ⁺ p (ε , positive-ε) ,
-        leq-le-ℚ (le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε)) ,
+        leq-le-ℚ
+          { p +ℚ ε}
+          { (p +ℚ ε) +ℚ ε}
+          ( le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε)) ,
         p-in-L ,
         tr (is-in-subtype U) (ap (p +ℚ_) (left-unit-law-mul-ℚ ε)) p-plus-1-ε-in-U)
-  lemma p ε (succ-ℕ n) positive-ε p-in-L p-plus-sn-ε-in-U =
+  arithmetic-location-in-arithmetic-sequence
+    p ε (succ-ℕ n) positive-ε p-in-L p-plus-sn-ε-in-U =
     elim-disjunction
-      (∃ (ℚ × ℚ) (λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r ((q +ℚ ε) +ℚ ε) ∧ L q ∧ U r))
+      (∃
+        ( ℚ × ℚ)
+        ( λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r ((q +ℚ ε) +ℚ ε) ∧ L q ∧ U r))
       (λ p+ε-in-L →
-        lemma
-          (p +ℚ ε)
-          ε
-          n
-          positive-ε
-          p+ε-in-L
-          (tr
-            (is-in-subtype U)
-            (equational-reasoning
+        arithmetic-location-in-arithmetic-sequence
+          ( p +ℚ ε)
+          ( ε)
+          ( n)
+          ( positive-ε)
+          ( p+ε-in-L)
+          ( tr
+            ( is-in-subtype U)
+            ( equational-reasoning
               p +ℚ (rational-ℤ (int-ℕ (succ-ℕ (succ-ℕ n))) *ℚ ε)
-              ＝ p +ℚ (rational-ℤ (succ-ℤ (int-ℕ (succ-ℕ n))) *ℚ ε)
+              ＝ p +ℚ (rational-ℤ (one-ℤ +ℤ int-ℕ (succ-ℕ n)) *ℚ ε)
                 by ap
-                    (λ x → p +ℚ (rational-ℤ x *ℚ ε))
-                    (inv (succ-int-ℕ (succ-ℕ n)))
-              ＝ {!   !} by {!   !})
+                    ( λ x → p +ℚ (rational-ℤ x *ℚ ε))
+                    ( inv (succ-int-ℕ (succ-ℕ n)))
+              ＝ p +ℚ ((one-ℚ +ℚ rational-ℤ (int-ℕ (succ-ℕ n))) *ℚ ε)
+                by ap
+                    (λ x → p +ℚ (x *ℚ ε))
+                    (inv (add-rational-ℤ one-ℤ (int-ℕ (succ-ℕ n))))
+              ＝ p +ℚ ((one-ℚ *ℚ ε) +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε))
+                by ap
+                  ( p +ℚ_)
+                  ( right-distributive-mul-add-ℚ
+                    ( one-ℚ)
+                    ( rational-ℤ (int-ℕ (succ-ℕ n)))
+                    ( ε))
+              ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε))
+                by ap
+                  ( λ x → p +ℚ (x +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)))
+                  ( left-unit-law-mul-ℚ ε)
+              ＝ (p +ℚ ε) +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
+                by inv
+                  ( associative-add-ℚ
+                    ( p)
+                    ( ε)
+                    ( rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)))
             p-plus-sn-ε-in-U))
       (λ p+2ε-in-U →
         intro-exists
