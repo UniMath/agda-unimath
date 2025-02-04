@@ -36,7 +36,6 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
-open import foundation-core.retracts-of-types
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
@@ -46,6 +45,7 @@ open import foundation-core.homotopies
 open import foundation-core.precomposition-dependent-functions
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.retracts-of-types
 open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.subtypes

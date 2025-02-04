@@ -13,6 +13,7 @@ open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
 open import foundation.coproduct-types
+open import foundation.decidable-dependent-pair-types
 open import foundation.decidable-embeddings
 open import foundation.decidable-maps
 open import foundation.decidable-propositions
@@ -21,7 +22,6 @@ open import foundation.decidable-type-families
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
-open import foundation.decidable-dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.existential-quantification
