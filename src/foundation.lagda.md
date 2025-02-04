@@ -181,6 +181,8 @@ open import foundation.exclusive-sum public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
 open import foundation.extensions-types public
+open import foundation.extensions-types-global-subuniverses public
+open import foundation.extensions-types-subuniverses public
 open import foundation.faithful-maps public
 open import foundation.families-of-equivalences public
 open import foundation.families-of-maps public
