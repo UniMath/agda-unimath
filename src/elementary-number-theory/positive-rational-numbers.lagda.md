@@ -637,7 +637,7 @@ le-right-add-rational-ℚ⁺ x d =
     ( le-left-add-rational-ℚ⁺ x d)
 ```
 
-### Subtraction by a positive rational number is a decreasing map
+### Subtraction by a positive rational number is a strictly deflationary map
 
 ```agda
 le-diff-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ (x -ℚ rational-ℚ⁺ d) x
