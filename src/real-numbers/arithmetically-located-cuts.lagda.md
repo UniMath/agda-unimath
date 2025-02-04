@@ -142,6 +142,7 @@ module _
           (leq-le-ℚ (le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε))) ,
         p-in-L ,
         tr (is-in-subtype U) (ap (p +ℚ_) (left-unit-law-mul-ℚ ε)) p-plus-1-ε-in-U)
+  lemma p ε (succ-ℕ n) positive-ε
 
   located-inhabited-arithmetically-located :
     is-arithmetically-located L U
