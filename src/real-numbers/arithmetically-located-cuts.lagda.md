@@ -108,12 +108,7 @@ module _
                   ( q'<p'+ε)
                   ( tr
                     ( leq-ℚ (p' +ℚ q -ℚ p))
-                    ( equational-reasoning
-                      p +ℚ (q -ℚ p)
-                      ＝ (p +ℚ q) -ℚ p
-                        by inv (associative-add-ℚ p q (neg-ℚ p))
-                      ＝ q
-                        by is-identity-conjugation-Ab abelian-group-add-ℚ p q)
+                    ( is-identity-conjugation-assoc-Ab abelian-group-add-ℚ p q)
                     ( backward-implication
                       ( iff-translate-right-leq-ℚ (q -ℚ p) p' p)
                       ( p'≤p))))
@@ -243,8 +238,7 @@ module _
                             ( p0 +ℚ rational-ℤ (int-ℕ n) *ℚ ε')
                             ( tr
                               ( λ r → le-ℚ r (p0 +ℚ rational-ℤ (int-ℕ n) *ℚ ε'))
-                              ( inv (associative-add-ℚ p0 q0 (neg-ℚ p0)) ∙
-                                is-identity-conjugation-Ab
+                              ( is-identity-conjugation-assoc-Ab
                                   ( abelian-group-add-ℚ)
                                   ( p0)
                                   ( q0))
