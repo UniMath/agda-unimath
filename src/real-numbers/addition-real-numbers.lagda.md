@@ -20,6 +20,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -209,16 +210,80 @@ module _
             a-in-upper-add)
 
     arithmetically-located-add-ℝ : is-arithmetically-located lower-cut-add-ℝ upper-cut-add-ℝ
-    arithmetically-located-add-ℝ ε pos-ε =
+    arithmetically-located-add-ℝ ε =
       elim-exists
         ( claim)
-        {!  !}
-        (ind-Σ
-          (arithmetically-located-ℝ x)
-          (left-summand-split-ℚ⁺ (ε , pos-ε)))
+        ( λ (px , qx) (qx<px+r , px-in-lower-x , qx-in-upper-x) →
+          elim-exists
+            ( claim)
+            (λ (py , qy) (qy<px+s , py-in-lower-y , qy-in-upper-y) →
+              intro-exists
+                (px +ℚ py , qx +ℚ qy)
+                (tr
+                  (le-ℚ (qx +ℚ qy))
+                  (equational-reasoning
+                    (px +ℚ rational-ℚ⁺ r) +ℚ (py +ℚ rational-ℚ⁺ s)
+                    ＝ (px +ℚ py) +ℚ (rational-ℚ⁺ r +ℚ rational-ℚ⁺ s)
+                      by interchange-add-add-Ab abelian-group-add-ℚ px (rational-ℚ⁺ r) py (rational-ℚ⁺ s)
+                    ＝ (px +ℚ py) +ℚ (rational-ℚ⁺ ε)
+                      by ap ((px +ℚ py) +ℚ_) (ap rational-ℚ⁺ (eq-add-split-ℚ⁺ ε)))
+                  (preserves-le-add-ℚ
+                    {qx}
+                    {px +ℚ rational-ℚ⁺ r}
+                    {qy}
+                    {py +ℚ rational-ℚ⁺ s}
+                    qx<px+r
+                    qy<px+s) ,
+                  intro-exists
+                    (px , py)
+                    (px-in-lower-x , py-in-lower-y , refl) ,
+                  intro-exists (qx , qy) (qx-in-upper-x , qy-in-upper-y , refl)))
+            (arithmetically-located-ℝ y s))
+        (arithmetically-located-ℝ x r)
       where
         claim : Prop l
         claim = ∃
           ( ℚ × ℚ)
-          ( λ (p , q) → le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-add-ℝ p ∧ upper-cut-add-ℝ q)
+          ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε) ∧ lower-cut-add-ℝ p ∧ upper-cut-add-ℝ q)
+        r : ℚ⁺
+        r = left-summand-split-ℚ⁺ ε
+        s : ℚ⁺
+        s = right-summand-split-ℚ⁺ ε
+
+    le-lower-cut-add-ℝ :
+      (p q : ℚ) → le-ℚ p q → is-in-subtype lower-cut-add-ℝ q → is-in-subtype lower-cut-add-ℝ p
+    le-lower-cut-add-ℝ p q p<q q-in-lower =
+      elim-exists
+        (lower-cut-add-ℝ p)
+        (λ (xq , yq) (xq-in-lower-x , yq-in-lower-y , xq+yq=q) →
+          intro-exists
+            (xq , yq -ℚ (q -ℚ p))
+            (xq-in-lower-x ,
+              le-lower-cut-ℝ
+                y
+                (yq -ℚ (q -ℚ p))
+                yq
+                {!   !}
+                yq-in-lower-y ,
+              (equational-reasoning
+                xq +ℚ (yq -ℚ (q -ℚ p))
+                ＝ (xq +ℚ yq) -ℚ (q -ℚ p)
+                  by inv (associative-add-ℚ xq yq (neg-ℚ (q -ℚ p)))
+                ＝ q -ℚ (q -ℚ p)
+                  by ap (_-ℚ (q -ℚ p)) xq+yq=q
+                ＝ q +ℚ (p -ℚ q)
+                  by ap (q +ℚ_) (distributive-neg-diff-ℚ q p)
+                ＝ (q +ℚ p) -ℚ q
+                  by inv (associative-add-ℚ q p (neg-ℚ q))
+                ＝ p by is-identity-conjugation-Ab abelian-group-add-ℚ q p)))
+        q-in-lower
+
+    located-add-ℝ : (p q : ℚ) → le-ℚ p q → type-disjunction-Prop (lower-cut-add-ℝ p) (upper-cut-add-ℝ q)
+    located-add-ℝ =
+      arithmetically-located-and-closed-located
+        lower-cut-add-ℝ
+        upper-cut-add-ℝ
+        arithmetically-located-add-ℝ
+        le-lower-cut-add-ℝ
+        {!   !}
 ```

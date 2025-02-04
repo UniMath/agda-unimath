@@ -552,23 +552,24 @@ module _
   (x : ℚ⁺)
   where
 
-  left-summand-split-ℚ⁺ : ℚ⁺
-  left-summand-split-ℚ⁺ = mediant-zero-ℚ⁺ x
+  abstract
+    left-summand-split-ℚ⁺ : ℚ⁺
+    left-summand-split-ℚ⁺ = mediant-zero-ℚ⁺ x
 
-  right-summand-split-ℚ⁺ : ℚ⁺
-  right-summand-split-ℚ⁺ =
-    le-diff-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
+    right-summand-split-ℚ⁺ : ℚ⁺
+    right-summand-split-ℚ⁺ =
+      le-diff-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
 
-  eq-add-split-ℚ⁺ :
-    left-summand-split-ℚ⁺ +ℚ⁺ right-summand-split-ℚ⁺ ＝ x
-  eq-add-split-ℚ⁺ =
-    right-diff-law-add-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
+    eq-add-split-ℚ⁺ :
+      left-summand-split-ℚ⁺ +ℚ⁺ right-summand-split-ℚ⁺ ＝ x
+    eq-add-split-ℚ⁺ =
+      right-diff-law-add-ℚ⁺ (mediant-zero-ℚ⁺ x) x (le-mediant-zero-ℚ⁺ x)
 
-  split-ℚ⁺ : Σ ℚ⁺ (λ u → Σ ℚ⁺ (λ v → u +ℚ⁺ v ＝ x))
-  split-ℚ⁺ =
-    left-summand-split-ℚ⁺ ,
-    right-summand-split-ℚ⁺ ,
-    eq-add-split-ℚ⁺
+    split-ℚ⁺ : Σ ℚ⁺ (λ u → Σ ℚ⁺ (λ v → u +ℚ⁺ v ＝ x))
+    split-ℚ⁺ =
+      left-summand-split-ℚ⁺ ,
+      right-summand-split-ℚ⁺ ,
+      eq-add-split-ℚ⁺
 ```
 
 ### Any two positive rational numbers have a positive rational number strictly less than both
