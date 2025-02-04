@@ -73,7 +73,7 @@ If a cut is arithmetically located and closed under strict inequality on the
 rational numbers, it is also located.
 
 ```agda
-{- module _
+module _
   {l : Level}
   (L : subtype l ℚ)
   (U : subtype l ℚ)
@@ -118,7 +118,7 @@ rational numbers, it is also located.
           ( q -ℚ p)
           ( is-positive-le-zero-ℚ
             ( q -ℚ p)
-            ( backward-implication (iff-translate-diff-le-zero-ℚ p q) p<q))) -}
+            ( backward-implication (iff-translate-diff-le-zero-ℚ p q) p<q)))
 ```
 
 ### Located cuts are arithmetically located
@@ -133,18 +133,48 @@ module _
   where
 
   lemma : (p ε : ℚ) → (n : ℕ) → is-positive-ℚ ε → is-in-subtype L p → is-in-subtype U (p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)) →
-    exists (ℚ × ℚ) (λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r (q +ℚ (ε +ℚ ε)) ∧ L q ∧ U r)
+    exists (ℚ × ℚ) (λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r ((q +ℚ ε) +ℚ ε) ∧ L q ∧ U r)
   lemma p ε zero-ℕ positive-ε p-in-L p-plus-1-ε-in-U =
     intro-exists
       (p , p +ℚ ε)
       ( le-right-add-rational-ℚ⁺ p (ε , positive-ε) ,
-        tr
-          (leq-ℚ (p +ℚ ε))
-          (associative-add-ℚ p ε ε)
-          (leq-le-ℚ (le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε))) ,
+        leq-le-ℚ (le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε)) ,
         p-in-L ,
         tr (is-in-subtype U) (ap (p +ℚ_) (left-unit-law-mul-ℚ ε)) p-plus-1-ε-in-U)
-  lemma p ε (succ-ℕ n) positive-ε
+  lemma p ε (succ-ℕ n) positive-ε p-in-L p-plus-sn-ε-in-U =
+    elim-disjunction
+      (∃ (ℚ × ℚ) (λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r ((q +ℚ ε) +ℚ ε) ∧ L q ∧ U r))
+      (λ p+ε-in-L →
+        lemma
+          (p +ℚ ε)
+          ε
+          n
+          positive-ε
+          p+ε-in-L
+          (tr
+            (is-in-subtype U)
+            (equational-reasoning
+              p +ℚ (rational-ℤ (int-ℕ (succ-ℕ (succ-ℕ n))) *ℚ ε)
+              ＝ p +ℚ (rational-ℤ (succ-ℤ (int-ℕ (succ-ℕ n))) *ℚ ε)
+                by ap
+                    (λ x → p +ℚ (rational-ℤ x *ℚ ε))
+                    (inv (succ-int-ℕ (succ-ℕ n)))
+              ＝ {!   !} by {!   !})
+            p-plus-sn-ε-in-U))
+      (λ p+2ε-in-U →
+        intro-exists
+          (p , (p +ℚ ε) +ℚ ε)
+          ( transitive-le-ℚ
+                p
+                (p +ℚ ε)
+                ((p +ℚ ε) +ℚ ε)
+                (le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε))
+                (le-right-add-rational-ℚ⁺ p (ε , positive-ε)) ,
+            refl-leq-ℚ ((p +ℚ ε) +ℚ ε) ,
+            p-in-L ,
+            p+2ε-in-U))
+      (located (p +ℚ ε) ((p +ℚ ε) +ℚ ε) (le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε)))
+
 
   located-inhabited-arithmetically-located :
     is-arithmetically-located L U
