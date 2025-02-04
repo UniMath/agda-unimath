@@ -36,9 +36,10 @@ open import real-numbers.dedekind-real-numbers
 
 ## Idea
 
-The {{#concept "negation" Disambiguation="Dedekind real number" Agda=neg-ℝ}} of a [Dedekind real number](real-numbers.dedekind-real-numbers.md) with cuts `(L, U)` has lower cut equal to
-the negation of elements of `U`, and upper cut equal to the negation of elements
-in `L`.
+The {{#concept "negation" Disambiguation="Dedekind real number" Agda=neg-ℝ}} of
+a [Dedekind real number](real-numbers.dedekind-real-numbers.md) with cuts
+`(L, U)` has lower cut equal to the negation of elements of `U`, and upper cut
+equal to the negation of elements in `L`.
 
 ```agda
 module _
