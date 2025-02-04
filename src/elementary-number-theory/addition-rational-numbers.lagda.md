@@ -208,8 +208,6 @@ abstract
         ( add-in-fraction-ℤ x y)
     ＝ rational-ℤ (x +ℤ y)
       by is-retraction-rational-fraction-ℚ (rational-ℤ (x +ℤ y))
-
-
 ```
 
 ## See also
