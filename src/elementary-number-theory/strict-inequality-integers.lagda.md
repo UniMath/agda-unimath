@@ -258,7 +258,6 @@ module _
 module _
   (x y : ℤ) (I : le-ℤ x y)
   where
-
   abstract
     is-negative-le-negative-ℤ : is-negative-ℤ y → is-negative-ℤ x
     is-negative-le-negative-ℤ H =
@@ -289,4 +288,15 @@ le-natural-le-ℤ (succ-ℕ m) (succ-ℕ n) m<n =
       ( int-ℕ m)
       ( int-ℕ n)
       ( le-natural-le-ℤ m n m<n))
+```
+
+### Negation reverses the order of strict inequality of integers
+
+```agda
+neg-le-ℤ : (x y : ℤ) → le-ℤ x y → le-ℤ (neg-ℤ y) (neg-ℤ x)
+neg-le-ℤ x y =
+  tr
+    ( is-positive-ℤ)
+    ( ap (_+ℤ neg-ℤ x) (inv (neg-neg-ℤ y)) ∙
+      commutative-add-ℤ (neg-ℤ (neg-ℤ y)) (neg-ℤ x))
 ```
