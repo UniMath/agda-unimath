@@ -614,23 +614,24 @@ module _
 ### Any positive rational number `p` has a `q` with `q + q < p`
 
 ```agda
-less-than-half-ℚ⁺ :
-  (p : ℚ⁺) →
-  Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
-less-than-half-ℚ⁺ p =
-  q ,
-  tr
-    ( le-ℚ⁺ (q +ℚ⁺ q))
-    ( eq-add-split-ℚ⁺ p)
-    ( preserves-le-add-ℚ
-      { rational-ℚ⁺ q}
-      { rational-ℚ⁺ (left-summand-split-ℚ⁺ p)}
-      { rational-ℚ⁺ q}
-      { rational-ℚ⁺ (right-summand-split-ℚ⁺ p)}
-      ( le-left-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p))
-      ( le-right-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p)))
-  where q : ℚ⁺
-        q = strict-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p)
+abstract
+  less-than-half-ℚ⁺ :
+    (p : ℚ⁺) →
+    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
+  less-than-half-ℚ⁺ p =
+    q ,
+    tr
+      ( le-ℚ⁺ (q +ℚ⁺ q))
+      ( eq-add-split-ℚ⁺ p)
+      ( preserves-le-add-ℚ
+        { rational-ℚ⁺ q}
+        { rational-ℚ⁺ (left-summand-split-ℚ⁺ p)}
+        { rational-ℚ⁺ q}
+        { rational-ℚ⁺ (right-summand-split-ℚ⁺ p)}
+        ( le-left-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p))
+        ( le-right-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p)))
+    where q : ℚ⁺
+          q = strict-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p)
 ```
 
 ### Addition with a positive rational number is an increasing map

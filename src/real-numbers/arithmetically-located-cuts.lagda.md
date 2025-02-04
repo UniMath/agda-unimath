@@ -12,6 +12,7 @@ module real-numbers.arithmetically-located-cuts where
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
+open import elementary-number-theory.archimedean-property-rational-numbers
 open import elementary-number-theory.difference-rational-numbers
 open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.integers
@@ -27,9 +28,11 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.subtypes
@@ -37,6 +40,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+
+open import real-numbers.dedekind-real-numbers
 ```
 
 </details>
@@ -65,7 +70,7 @@ module _
     is-positive-ℚ ε →
     exists
       ( ℚ × ℚ)
-      ( λ (p , q) → le-ℚ-Prop p q ∧ le-ℚ-Prop q (p +ℚ ε) ∧ L p ∧ U q)
+      ( λ (p , q) → le-ℚ-Prop q (p +ℚ ε) ∧ L p ∧ U q)
 ```
 
 ### Arithmetically located cuts are located
@@ -90,7 +95,7 @@ module _
       arithmetically-located lower-closed upper-closed p q p<q =
       elim-exists
         (L p ∨ U q)
-        (λ (p' , q') (p'<q' , q'<p'+ε , p'-in-l , q'-in-u) →
+        (λ (p' , q') (q'<p'+ε , p'-in-l , q'-in-u) →
           rec-coproduct
             (λ p<p' → inl-disjunction (lower-closed p p' p<p' p'-in-l))
             (λ p'≤p → inr-disjunction
@@ -122,105 +127,148 @@ module _
             ( backward-implication (iff-translate-diff-le-zero-ℚ p q) p<q)))
 ```
 
-### Located cuts are arithmetically located
+### Real numbers are arithmetically located
 
 ```agda
 module _
   {l : Level}
-  (L : subtype l ℚ)
-  (U : subtype l ℚ)
-  (inhabited-less : exists (ℚ × ℚ) (λ (p , q) → L p ∧ U q ∧ le-ℚ-Prop p q))
-  (located : (p q : ℚ) → le-ℚ p q → type-disjunction-Prop (L p) (U q))
+  (x : ℝ l)
   where
 
-  arithmetic-location-in-arithmetic-sequence :
-    (p ε : ℚ) →
-    (n : ℕ) →
-    is-positive-ℚ ε →
-    is-in-subtype L p →
-    is-in-subtype U (p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)) →
-    exists
-      (ℚ × ℚ)
-      (λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r ((q +ℚ ε) +ℚ ε) ∧ L q ∧ U r)
-  arithmetic-location-in-arithmetic-sequence
-    p ε zero-ℕ positive-ε p-in-L p-plus-1-ε-in-U =
-    intro-exists
-      ( p , p +ℚ ε)
-      ( le-right-add-rational-ℚ⁺ p (ε , positive-ε) ,
-        leq-le-ℚ
-          { p +ℚ ε}
-          { (p +ℚ ε) +ℚ ε}
-          ( le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε)) ,
-        p-in-L ,
-        tr (is-in-subtype U) (ap (p +ℚ_) (left-unit-law-mul-ℚ ε)) p-plus-1-ε-in-U)
-  arithmetic-location-in-arithmetic-sequence
-    p ε (succ-ℕ n) positive-ε p-in-L p-plus-sn-ε-in-U =
-    elim-disjunction
-      (∃
-        ( ℚ × ℚ)
-        ( λ (q , r) → le-ℚ-Prop q r ∧ leq-ℚ-Prop r ((q +ℚ ε) +ℚ ε) ∧ L q ∧ U r))
-      (λ p+ε-in-L →
-        arithmetic-location-in-arithmetic-sequence
+  abstract
+    arithmetic-location-in-arithmetic-sequence :
+      (p ε : ℚ) →
+      (n : ℕ) →
+      is-positive-ℚ ε →
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x (p +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)) →
+      exists ℚ ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ ε +ℚ ε))
+    arithmetic-location-in-arithmetic-sequence
+      p ε zero-ℕ positive-ε p-in-L p-plus-0-ε-in-U =
+      ex-falso
+        (is-disjoint-cut-ℝ
+          ( x)
+          ( p)
+          ( p-in-L ,
+            tr
+              ( is-in-upper-cut-ℝ x)
+              ( ap (p +ℚ_) (left-zero-law-mul-ℚ ε) ∙ right-unit-law-add-ℚ p)
+              ( p-plus-0-ε-in-U)))
+    arithmetic-location-in-arithmetic-sequence
+      p ε (succ-ℕ n) positive-ε p-in-L p-plus-sn-ε-in-U =
+      elim-disjunction
+        ( ∃ ℚ ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ ε +ℚ ε)))
+        ( λ p+ε-in-L →
+          arithmetic-location-in-arithmetic-sequence
+            ( p +ℚ ε)
+            ( ε)
+            ( n)
+            ( positive-ε)
+            ( p+ε-in-L)
+            ( tr
+              ( is-in-upper-cut-ℝ x)
+              ( equational-reasoning
+                p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
+                ＝ p +ℚ (rational-ℤ (one-ℤ +ℤ int-ℕ n) *ℚ ε)
+                  by ap
+                      ( λ x → p +ℚ (rational-ℤ x *ℚ ε))
+                      ( inv (succ-int-ℕ n))
+                ＝ p +ℚ ((one-ℚ +ℚ rational-ℤ (int-ℕ n)) *ℚ ε)
+                  by ap
+                      (λ x → p +ℚ (x *ℚ ε))
+                      (inv (add-rational-ℤ one-ℤ (int-ℕ n)))
+                ＝ p +ℚ ((one-ℚ *ℚ ε) +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
+                  by ap
+                    ( p +ℚ_)
+                    ( right-distributive-mul-add-ℚ
+                      ( one-ℚ)
+                      ( rational-ℤ (int-ℕ n))
+                      ( ε))
+                ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
+                  by ap
+                    ( λ x → p +ℚ (x +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)))
+                    ( left-unit-law-mul-ℚ ε)
+                ＝ (p +ℚ ε) +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)
+                  by inv
+                    ( associative-add-ℚ
+                      ( p)
+                      ( ε)
+                      ( rational-ℤ (int-ℕ n) *ℚ ε)))
+              p-plus-sn-ε-in-U))
+        (λ p+2ε-in-U → intro-exists p (p-in-L , p+2ε-in-U))
+        (is-located-lower-upper-cut-ℝ
+          ( x)
           ( p +ℚ ε)
-          ( ε)
-          ( n)
-          ( positive-ε)
-          ( p+ε-in-L)
-          ( tr
-            ( is-in-subtype U)
-            ( equational-reasoning
-              p +ℚ (rational-ℤ (int-ℕ (succ-ℕ (succ-ℕ n))) *ℚ ε)
-              ＝ p +ℚ (rational-ℤ (one-ℤ +ℤ int-ℕ (succ-ℕ n)) *ℚ ε)
-                by ap
-                    ( λ x → p +ℚ (rational-ℤ x *ℚ ε))
-                    ( inv (succ-int-ℕ (succ-ℕ n)))
-              ＝ p +ℚ ((one-ℚ +ℚ rational-ℤ (int-ℕ (succ-ℕ n))) *ℚ ε)
-                by ap
-                    (λ x → p +ℚ (x *ℚ ε))
-                    (inv (add-rational-ℤ one-ℤ (int-ℕ (succ-ℕ n))))
-              ＝ p +ℚ ((one-ℚ *ℚ ε) +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε))
-                by ap
-                  ( p +ℚ_)
-                  ( right-distributive-mul-add-ℚ
-                    ( one-ℚ)
-                    ( rational-ℤ (int-ℕ (succ-ℕ n)))
-                    ( ε))
-              ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε))
-                by ap
-                  ( λ x → p +ℚ (x +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)))
-                  ( left-unit-law-mul-ℚ ε)
-              ＝ (p +ℚ ε) +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
-                by inv
-                  ( associative-add-ℚ
-                    ( p)
-                    ( ε)
-                    ( rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)))
-            p-plus-sn-ε-in-U))
-      (λ p+2ε-in-U →
-        intro-exists
-          (p , (p +ℚ ε) +ℚ ε)
-          ( transitive-le-ℚ
-                p
-                (p +ℚ ε)
-                ((p +ℚ ε) +ℚ ε)
-                (le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε))
-                (le-right-add-rational-ℚ⁺ p (ε , positive-ε)) ,
-            refl-leq-ℚ ((p +ℚ ε) +ℚ ε) ,
-            p-in-L ,
-            p+2ε-in-U))
-      (located (p +ℚ ε) ((p +ℚ ε) +ℚ ε) (le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε)))
+          ( (p +ℚ ε) +ℚ ε)
+          ( le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε)))
 
-
-  located-inhabited-arithmetically-located :
-    is-arithmetically-located L U
-  located-inhabited-arithmetically-located ε positive-ε =
-    elim-exists
-      (∃  ( ℚ × ℚ)
-        ( λ (p , q) → le-ℚ-Prop p q ∧ le-ℚ-Prop q (p +ℚ ε) ∧ L p ∧ U q))
-      (λ (p0 , q0) (p0-in-L , q0-in-U , p<q) →
-      {!   !})
-      inhabited-less
-
+  abstract
+    arithmetically-located-ℝ :
+      is-arithmetically-located (lower-cut-ℝ x) (upper-cut-ℝ x)
+    arithmetically-located-ℝ ε positive-ε =
+      elim-exists
+        ( claim)
+        ( λ p0 p0-in-L →
+          elim-exists
+            ( claim)
+            ( λ q0 q0-in-U →
+              ind-Σ
+                ( λ (ε' , pos-ε') 2ε'<ε →
+                  elim-exists
+                    ( claim)
+                    ( λ n q0-p0<nε' →
+                      elim-exists
+                        ( claim)
+                        ( λ p (p-in-L , p+ε'+ε'-in-U) →
+                          intro-exists
+                            ( p , (p +ℚ ε') +ℚ ε')
+                            ( tr
+                                (λ x → le-ℚ x (p +ℚ ε))
+                                (inv (associative-add-ℚ p ε' ε'))
+                                (preserves-le-right-add-ℚ
+                                  ( p)
+                                  ( ε' +ℚ ε')
+                                  ( ε)
+                                  ( 2ε'<ε)) ,
+                              p-in-L ,
+                              p+ε'+ε'-in-U))
+                        (arithmetic-location-in-arithmetic-sequence
+                          ( p0)
+                          ( ε')
+                          ( n)
+                          ( pos-ε')
+                          ( p0-in-L)
+                          ( le-upper-cut-ℝ
+                            ( x)
+                            ( q0)
+                            ( p0 +ℚ rational-ℤ (int-ℕ n) *ℚ ε')
+                            ( tr
+                              ( λ r → le-ℚ r (p0 +ℚ rational-ℤ (int-ℕ n) *ℚ ε'))
+                              ( inv (associative-add-ℚ p0 q0 (neg-ℚ p0)) ∙
+                                is-identity-conjugation-Ab
+                                  ( abelian-group-add-ℚ)
+                                  ( p0)
+                                  ( q0))
+                              ( backward-implication
+                                ( iff-translate-left-le-ℚ
+                                  p0
+                                  (q0 -ℚ p0)
+                                  (rational-ℤ (int-ℕ n) *ℚ ε'))
+                                ( q0-p0<nε')))
+                            ( q0-in-U))))
+                    ( archimedean-property-ℚ ε' (q0 -ℚ p0) pos-ε'))
+                ( less-than-half-ℚ⁺ (ε , positive-ε)))
+              ( is-inhabited-upper-cut-ℝ x))
+        ( is-inhabited-lower-cut-ℝ x)
+      where
+        claim : Prop l
+        claim =
+          ∃
+            ( ℚ × ℚ)
+            ( λ (p , q) →
+              le-ℚ-Prop q (p +ℚ ε) ∧
+              lower-cut-ℝ x p ∧
+              upper-cut-ℝ x q)
 ```
 
 ## References
