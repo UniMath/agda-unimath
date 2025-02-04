@@ -65,28 +65,28 @@ module _
     lower-cut-inhabited-add-ℝ : exists ℚ lower-cut-add-ℝ
     lower-cut-inhabited-add-ℝ =
       elim-exists
-        (∃ ℚ lower-cut-add-ℝ)
-        (λ p p-in-lower-x →
+        ( ∃ ℚ lower-cut-add-ℝ)
+        ( λ p p-in-lower-x →
           elim-exists
-            (∃ ℚ lower-cut-add-ℝ)
-            (λ q q-in-lower-y →
+            ( ∃ ℚ lower-cut-add-ℝ)
+            ( λ q q-in-lower-y →
               intro-exists (p +ℚ q)
                 (intro-exists (p , q) (p-in-lower-x , q-in-lower-y , refl)))
-            (is-inhabited-lower-cut-ℝ y))
-        (is-inhabited-lower-cut-ℝ x)
+            ( is-inhabited-lower-cut-ℝ y))
+        ( is-inhabited-lower-cut-ℝ x)
 
     upper-cut-inhabited-add-ℝ : exists ℚ upper-cut-add-ℝ
     upper-cut-inhabited-add-ℝ =
       elim-exists
-        (∃ ℚ upper-cut-add-ℝ)
-        (λ p p-in-upper-x →
+        ( ∃ ℚ upper-cut-add-ℝ)
+        ( λ p p-in-upper-x →
           elim-exists
-            (∃ ℚ upper-cut-add-ℝ)
-            (λ q q-in-upper-y →
+            ( ∃ ℚ upper-cut-add-ℝ)
+            ( λ q q-in-upper-y →
               intro-exists (p +ℚ q)
-                (intro-exists (p , q) (p-in-upper-x , q-in-upper-y , refl)))
-            (is-inhabited-upper-cut-ℝ y))
-        (is-inhabited-upper-cut-ℝ x)
+                ( intro-exists (p , q) (p-in-upper-x , q-in-upper-y , refl)))
+            ( is-inhabited-upper-cut-ℝ y))
+        ( is-inhabited-upper-cut-ℝ x)
 
     is-rounded-lower-cut-add-ℝ :
       (a : ℚ) →
@@ -94,30 +94,36 @@ module _
       exists ℚ (λ b → (le-ℚ-Prop a b) ∧ (lower-cut-add-ℝ b))
     pr1 (is-rounded-lower-cut-add-ℝ a) =
       elim-exists
-        (∃ ℚ (λ b → (le-ℚ-Prop a b) ∧ (lower-cut-add-ℝ b)))
-        (λ (p , q) (p-in-lower-x , q-in-lower-y , p+q=a) →
+        ( ∃ ℚ (λ b → (le-ℚ-Prop a b) ∧ (lower-cut-add-ℝ b)))
+        ( λ (p , q) (p-in-lower-x , q-in-lower-y , p+q=a) →
           elim-exists
-            (∃ ℚ (λ b → (le-ℚ-Prop a b) ∧ (lower-cut-add-ℝ b)))
-            (λ p' (p<p' , p'-in-lower-x) →
+            ( ∃ ℚ (λ b → (le-ℚ-Prop a b) ∧ (lower-cut-add-ℝ b)))
+            ( λ p' (p<p' , p'-in-lower-x) →
               elim-exists
-                (∃ ℚ (λ b → (le-ℚ-Prop a b) ∧ (lower-cut-add-ℝ b)))
-                (λ q' (q<q' , q'-in-lower-y) →
+                ( ∃ ℚ (λ b → (le-ℚ-Prop a b) ∧ (lower-cut-add-ℝ b)))
+                ( λ q' (q<q' , q'-in-lower-y) →
                   intro-exists
-                    (p' +ℚ q')
-                    (transp-leq-sum a p p' q q' p+q=a p<p' q<q' ,
+                    ( p' +ℚ q')
+                    ( transp-leq-sum a p p' q q' p+q=a p<p' q<q' ,
                       intro-exists
-                        (p' , q')
-                        (p'-in-lower-x , q'-in-lower-y , refl)))
-                (forward-implication (is-rounded-lower-cut-ℝ y q) q-in-lower-y))
-            (forward-implication (is-rounded-lower-cut-ℝ x p) p-in-lower-x))
+                        ( p' , q')
+                        ( p'-in-lower-x , q'-in-lower-y , refl)))
+                ( forward-implication
+                  ( is-rounded-lower-cut-ℝ y q)
+                  ( q-in-lower-y)))
+            ( forward-implication (is-rounded-lower-cut-ℝ x p) p-in-lower-x))
       where
         transp-leq-sum :
-          (a p p' q q' : ℚ) → p +ℚ q ＝ a → le-ℚ p p' → le-ℚ q q' → le-ℚ a (p' +ℚ q')
+          (a p p' q q' : ℚ) →
+            p +ℚ q ＝ a →
+            le-ℚ p p' →
+            le-ℚ q q' →
+            le-ℚ a (p' +ℚ q')
         transp-leq-sum a p p' q q' p+q=a p<p' q<q' =
           tr
-            (λ r → le-ℚ r (p' +ℚ q'))
-            p+q=a
-            (preserves-le-add-ℚ {p} {p'} {q} {q'} p<p' q<q')
+            ( λ r → le-ℚ r (p' +ℚ q'))
+            ( p+q=a)
+            ( preserves-le-add-ℚ {p} {p'} {q} {q'} p<p' q<q')
     pr2 (is-rounded-lower-cut-add-ℝ a) =
       elim-exists
         (lower-cut-add-ℝ a)
