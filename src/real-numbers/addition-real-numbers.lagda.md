@@ -212,7 +212,8 @@ module _
                     ＝ b by is-identity-conjugation-Ab abelian-group-add-ℚ a b)))
             a-in-upper-add)
 
-    is-disjoint-cut-add-ℝ : (q : ℚ) → ¬ (is-in-subtype lower-cut-add-ℝ q × is-in-subtype upper-cut-add-ℝ q)
+    is-disjoint-cut-add-ℝ :
+      (q : ℚ) → ¬ (is-in-subtype lower-cut-add-ℝ q × is-in-subtype upper-cut-add-ℝ q)
     is-disjoint-cut-add-ℝ q (q-in-lower , q-in-upper) =
       elim-exists
         empty-Prop
@@ -236,7 +237,8 @@ module _
             q-in-upper)
         q-in-lower
 
-    arithmetically-located-add-ℝ : is-arithmetically-located lower-cut-add-ℝ upper-cut-add-ℝ
+    arithmetically-located-add-ℝ :
+      is-arithmetically-located lower-cut-add-ℝ upper-cut-add-ℝ
     arithmetically-located-add-ℝ ε =
       elim-exists
         ( claim)
@@ -328,7 +330,8 @@ module _
                 ＝ q by is-identity-conjugation-Ab abelian-group-add-ℚ p q))))
         p-in-upper
 
-    located-add-ℝ : (p q : ℚ) → le-ℚ p q → type-disjunction-Prop (lower-cut-add-ℝ p) (upper-cut-add-ℝ q)
+    located-add-ℝ :
+      (p q : ℚ) → le-ℚ p q → type-disjunction-Prop (lower-cut-add-ℝ p) (upper-cut-add-ℝ q)
     located-add-ℝ =
       arithmetically-located-and-closed-located
         lower-cut-add-ℝ
