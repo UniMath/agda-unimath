@@ -231,6 +231,33 @@ compute-quotient-div-ℕ q p H K =
   compute-quotient-bounded-div-ℕ q p
     ( bounded-div-div-ℕ _ _ H)
     ( bounded-div-div-ℕ _ _ K)
+
+compute-quotient-div-is-nonzero-dividend-ℕ :
+  {m m' n n' : ℕ} (q : m ＝ m') (p : n ＝ n')
+  (H : div-ℕ m n) (K : div-ℕ m' n') →
+  is-nonzero-ℕ n' → quotient-div-ℕ m n H ＝ pr1 K
+compute-quotient-div-is-nonzero-dividend-ℕ {m} {m'} {n} {zero-ℕ} q p H K f =
+  ex-falso (f refl)
+compute-quotient-div-is-nonzero-dividend-ℕ {m} {m'} {n} {succ-ℕ n'} q p H K f =
+  compute-quotient-div-ℕ q p H K
+
+compute-quotient-div-is-nonzero-divisor-ℕ :
+  {m m' n n' : ℕ} (q : m ＝ m') (p : n ＝ n')
+  (H : div-ℕ m n) (K : div-ℕ m' n') →
+  is-nonzero-ℕ m' → quotient-div-ℕ m n H ＝ pr1 K
+compute-quotient-div-is-nonzero-divisor-ℕ {m} {zero-ℕ} {n} {n'} q p H K f =
+  ex-falso (f refl)
+compute-quotient-div-is-nonzero-divisor-ℕ
+  {m} {succ-ℕ m'} {n} {zero-ℕ} q p H (zero-ℕ , K) f =
+  is-zero-leq-zero-ℕ
+    ( quotient-div-ℕ m n H)
+    ( concatenate-leq-eq-ℕ
+      ( quotient-div-ℕ m n H)
+      ( upper-bound-quotient-div-ℕ m n H)
+      ( p))
+compute-quotient-div-is-nonzero-divisor-ℕ
+  {m} {succ-ℕ m'} {n} {succ-ℕ n'} q p H K f =
+  compute-quotient-div-is-nonzero-dividend-ℕ q p H K (is-nonzero-succ-ℕ n')
 ```
 
 ### The quotients of a natural number `n` by two natural numbers `c` and `d` are equal if `c` and `d` are equal
@@ -472,6 +499,33 @@ div-mul-ℕ' :
   (k x y : ℕ) → div-ℕ x y → div-ℕ x (y *ℕ k)
 div-mul-ℕ' k x y H =
   tr (div-ℕ x) (commutative-mul-ℕ k y) (div-mul-ℕ k x y H)
+
+compute-quotient-div-mul-ℕ :
+  (k x y : ℕ) (H : div-ℕ x y) (K : div-ℕ x (k *ℕ y)) →
+  quotient-div-ℕ x (k *ℕ y) K ＝ k *ℕ quotient-div-ℕ x y H
+compute-quotient-div-mul-ℕ k zero-ℕ y H K =
+  is-zero-quotient-div-is-zero-divisor-ℕ 0 (k *ℕ y) K refl ∙
+  inv (right-zero-law-mul-ℕ k) ∙
+  ap (k *ℕ_) (inv (is-zero-quotient-div-is-zero-divisor-ℕ 0 y H refl))
+compute-quotient-div-mul-ℕ k (succ-ℕ x) y H K =
+  compute-quotient-div-is-nonzero-divisor-ℕ
+    ( refl)
+    ( refl)
+    ( K)
+    ( div-mul-ℕ k (succ-ℕ x) y H)
+    ( is-nonzero-succ-ℕ x)
+
+compute-quotient-div-mul-ℕ' :
+  (k x y : ℕ) (H : div-ℕ x y) (K : div-ℕ x (y *ℕ k)) →
+  quotient-div-ℕ x (y *ℕ k) K ＝ quotient-div-ℕ x y H *ℕ k
+compute-quotient-div-mul-ℕ' k x y H K =
+  ( compute-quotient-div-ℕ refl
+    ( commutative-mul-ℕ y k)
+    ( K)
+    ( concatenate-div-eq-ℕ K (commutative-mul-ℕ y k))) ∙
+  ( compute-quotient-div-mul-ℕ k x y H
+    ( concatenate-div-eq-ℕ K (commutative-mul-ℕ y k))) ∙
+  ( commutative-mul-ℕ k (quotient-div-ℕ x y H))
 ```
 
 ### Divisibility is decidable
@@ -673,6 +727,12 @@ div-div-quotient-div-ℕ x y d H K =
     ( div-ℕ (d *ℕ x))
     ( eq-quotient-div-ℕ' d y H)
     ( preserves-div-left-mul-ℕ d x (quotient-div-ℕ d y H) K)
+
+div-div-quotient-div-ℕ' :
+  (x y d : ℕ) (H : div-ℕ d y) →
+  ((K : div-ℕ d y) → div-ℕ x (quotient-div-ℕ d y K)) → div-ℕ (d *ℕ x) y
+div-div-quotient-div-ℕ' x y d H K =
+  div-div-quotient-div-ℕ x y d H (K H)
 
 simplify-div-quotient-div-ℕ :
   {a d x : ℕ} (H : div-ℕ d a) →

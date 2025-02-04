@@ -14,6 +14,7 @@ open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.euclidean-division-natural-numbers
+open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
@@ -576,6 +577,39 @@ is-even-right-factor-is-even-mul-ℕ m n H K =
 ```
 
 ### If a power of $2$ divides $mn$ and one of the factors is odd, then the other is divisible by the power of $2$
+
+The proof is by induction, and the base case is trivial. For the inductive step, assume that $2^{k+1} \mid mn$. Then the product $mn$ is even, and therefore $m$ is even. Let $m' := m/2$. Now it follows that $2^k \mid m'n$. By the inductive hypothesis, we conclude that $2^k \mid m'$, which is xequivalent to $2^{k+1} \mid m$.
+
+```agda
+div-exp-2-left-factor-div-exp-2-mul-ℕ :
+  (k m n : ℕ) → div-ℕ (2 ^ℕ k) (m *ℕ n) → is-odd-ℕ n → div-ℕ (2 ^ℕ k) m
+div-exp-2-left-factor-div-exp-2-mul-ℕ zero-ℕ m n H K =
+  div-one-ℕ m
+div-exp-2-left-factor-div-exp-2-mul-ℕ (succ-ℕ k) m n H K =
+  concatenate-eq-div-ℕ
+    ( exp-succ-ℕ' 2 k)
+    ( div-div-quotient-div-ℕ'
+      ( 2 ^ℕ k)
+      ( m)
+      ( 2)
+      ( is-even-left-factor-is-even-mul-ℕ m n
+        ( is-even-div-is-even-ℕ
+          ( 2 ^ℕ succ-ℕ k)
+          ( m *ℕ n)
+          ( 2 ^ℕ k , inv (exp-succ-ℕ 2 k))
+          ( H))
+        ( K))
+      ( λ L →
+        div-exp-2-left-factor-div-exp-2-mul-ℕ k
+          ( quotient-div-ℕ 2 m L)
+          ( n)
+          ( concatenate-div-eq-ℕ
+            {!!}
+            ( compute-quotient-div-mul-ℕ' n 2 m
+              {!!}
+              {!!}))
+          ( K)))
+```
 
 ## See also
 
