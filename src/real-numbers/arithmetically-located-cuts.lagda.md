@@ -1,6 +1,8 @@
 # Arithmetically located cuts
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module real-numbers.arithmetically-located-cuts where
 ```
 
