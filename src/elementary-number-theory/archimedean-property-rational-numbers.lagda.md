@@ -24,14 +24,13 @@ open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
-open import foundation.universe-levels
 ```
 
 </details>
 
 ## Definition
 
-The Archimedean property of `ℚ` is that for any `x y : ℚ`, with positive `x`,
+The {{#concept "Archimedean property" Disambiguation="rational numbers" Agda="archimedean-property-ℚ"}} of `ℚ` is that for any two [rational numbers](elementary-number-theory.rational-numbers.md) `x y : ℚ`, with [positive](elementary-number-theory.positive-rational-numbers.md) `x`,
 there is an `n : ℕ` such that `y` is less than `n` as a rational number times
 `x`.
 
