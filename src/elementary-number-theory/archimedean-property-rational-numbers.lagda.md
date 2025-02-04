@@ -31,7 +31,7 @@ open import foundation.identity-types
 ## Definition
 
 The
-{{#concept "Archimedean property" Disambiguation="rational numbers" Agda="archimedean-property-ℚ"}}
+{{#concept "Archimedean property" Disambiguation="rational numbers" Agda=archimedean-property-ℚ}}
 of `ℚ` is that for any two
 [rational numbers](elementary-number-theory.rational-numbers.md) `x y : ℚ`, with
 [positive](elementary-number-theory.positive-rational-numbers.md) `x`, there is
