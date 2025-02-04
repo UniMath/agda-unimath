@@ -601,6 +601,11 @@ module _
   is-identity-conjugation-Ab x y =
     ( ap (add-Ab' A (neg-Ab A x)) (commutative-add-Ab A x y)) ∙
     ( is-retraction-right-subtraction-Ab A x y)
+
+  is-identity-conjugation-assoc-Ab' :
+    (x : type-Ab A) → (add-Ab A x ∘ add-Ab' A (neg-Ab A x)) ~ id
+  is-identity-conjugation-assoc-Ab' x y =
+    inv (associative-add-Ab A x y (neg-Ab A x)) ∙ is-identity-conjugation-Ab x y
 ```
 
 ### Laws for conjugation and addition
