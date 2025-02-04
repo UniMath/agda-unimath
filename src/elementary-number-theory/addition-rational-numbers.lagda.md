@@ -10,7 +10,9 @@ module elementary-number-theory.addition-rational-numbers where
 
 ```agda
 open import elementary-number-theory.addition-integer-fractions
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
+open import elementary-number-theory.integers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
@@ -180,6 +182,32 @@ abstract
           ( y)
           ( reduce-fraction-ℤ y)
           ( sim-reduced-fraction-ℤ y)))
+```
+
+### The inclusion of integers preserves addition
+
+```agda
+abstract
+  add-rational-ℤ :
+    (x y : ℤ) →
+    rational-ℤ x +ℚ rational-ℤ y ＝
+    rational-ℤ (x +ℤ y)
+  add-rational-ℤ x y = equational-reasoning
+    rational-ℤ x +ℚ rational-ℤ y
+    ＝ rational-fraction-ℤ (in-fraction-ℤ x) +ℚ
+      rational-fraction-ℤ (in-fraction-ℤ y)
+      by ap-add-ℚ
+        ( inv (is-retraction-rational-fraction-ℚ (rational-ℤ x)))
+        ( inv (is-retraction-rational-fraction-ℚ (rational-ℤ y)))
+    ＝ rational-fraction-ℤ (in-fraction-ℤ x +fraction-ℤ in-fraction-ℤ y)
+      by add-rational-fraction-ℤ (in-fraction-ℤ x) (in-fraction-ℤ y)
+    ＝ rational-fraction-ℤ (in-fraction-ℤ (x +ℤ y))
+      by eq-ℚ-sim-fraction-ℤ
+        ( in-fraction-ℤ x +fraction-ℤ in-fraction-ℤ y)
+        ( in-fraction-ℤ (x +ℤ y))
+        ( add-in-fraction-ℤ x y)
+    ＝ rational-ℤ (x +ℤ y)
+      by is-retraction-rational-fraction-ℚ (rational-ℤ (x +ℤ y))
 ```
 
 ## See also
