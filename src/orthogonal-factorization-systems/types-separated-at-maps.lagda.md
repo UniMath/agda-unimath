@@ -21,7 +21,7 @@ A type `A` is said to be **separated** with respect to a map `f`, or
 **`f`-separated**, if its [identity types](foundation-core.identity-types.md)
 are [`f`-local](orthogonal-factorization-systems.types-local-at-maps.md).
 
-## Definition
+## Definitions
 
 ```agda
 module _

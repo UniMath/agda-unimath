@@ -27,6 +27,9 @@ areas. The concept of functions was first given a precise definition by Euler {{
 id : {l : Level} {A : UU l} → A → A
 id a = a
 
+id' : {l : Level} (A : UU l) → A → A
+id' A = id
+
 idω : {A : UUω} → A → A
 idω a = a
 ```
