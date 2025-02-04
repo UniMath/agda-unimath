@@ -615,23 +615,28 @@ module _
 
 ```agda
 abstract
-  less-than-half-ℚ⁺ :
+  double-le-ℚ⁺ :
     (p : ℚ⁺) →
     Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
-  less-than-half-ℚ⁺ p =
-    q ,
+  double-le-ℚ⁺ p =
+    s ,
     tr
-      ( le-ℚ⁺ (q +ℚ⁺ q))
+      ( le-ℚ⁺ (s +ℚ⁺ s))
       ( eq-add-split-ℚ⁺ p)
       ( preserves-le-add-ℚ
+        { rational-ℚ⁺ s}
         { rational-ℚ⁺ q}
-        { rational-ℚ⁺ (left-summand-split-ℚ⁺ p)}
-        { rational-ℚ⁺ q}
-        { rational-ℚ⁺ (right-summand-split-ℚ⁺ p)}
-        ( le-left-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p))
-        ( le-right-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p)))
-    where q : ℚ⁺
-          q = strict-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p)
+        { rational-ℚ⁺ s}
+        { rational-ℚ⁺ r}
+        ( le-left-min-ℚ⁺ q r)
+        ( le-right-min-ℚ⁺ q r))
+    where
+      q : ℚ⁺
+      q = left-summand-split-ℚ⁺ p
+      r : ℚ⁺
+      r = right-summand-split-ℚ⁺ p
+      s : ℚ⁺
+      s = strict-min-ℚ⁺ q r
 ```
 
 ### Addition with a positive rational number is an increasing map
@@ -658,6 +663,23 @@ le-right-add-rational-ℚ⁺ x d =
     ( le-ℚ x)
     ( commutative-add-ℚ x (rational-ℚ⁺ d))
     ( le-left-add-rational-ℚ⁺ x d)
+```
+
+### Subtraction by a positive rational number is a strictly deflationary map
+
+```agda
+le-diff-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ (x -ℚ rational-ℚ⁺ d) x
+le-diff-rational-ℚ⁺ x d =
+  tr
+    ( le-ℚ (x -ℚ rational-ℚ⁺ d))
+    ( equational-reasoning
+      (x -ℚ rational-ℚ⁺ d) +ℚ rational-ℚ⁺ d
+      ＝ x +ℚ (neg-ℚ (rational-ℚ⁺ d) +ℚ rational-ℚ⁺ d)
+        by associative-add-ℚ x (neg-ℚ (rational-ℚ⁺ d)) (rational-ℚ⁺ d)
+      ＝ x +ℚ zero-ℚ
+        by ap (x +ℚ_) (left-inverse-law-add-ℚ (rational-ℚ⁺ d))
+      ＝ x by right-unit-law-add-ℚ x)
+    ( le-right-add-rational-ℚ⁺ (x -ℚ rational-ℚ⁺ d) d)
 ```
 
 ### Characterization of inequality on the rational numbers by the additive action of `ℚ⁺`
