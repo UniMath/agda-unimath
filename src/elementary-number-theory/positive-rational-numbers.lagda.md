@@ -661,6 +661,23 @@ le-right-add-rational-ℚ⁺ x d =
     ( le-left-add-rational-ℚ⁺ x d)
 ```
 
+### Subtraction by a positive rational number is a decreasing map
+
+```agda
+le-diff-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ (x -ℚ rational-ℚ⁺ d) x
+le-diff-rational-ℚ⁺ x d =
+  tr
+    ( le-ℚ (x -ℚ rational-ℚ⁺ d))
+    ( equational-reasoning
+      (x -ℚ rational-ℚ⁺ d) +ℚ rational-ℚ⁺ d
+      ＝ x +ℚ (neg-ℚ (rational-ℚ⁺ d) +ℚ rational-ℚ⁺ d)
+        by associative-add-ℚ x (neg-ℚ (rational-ℚ⁺ d)) (rational-ℚ⁺ d)
+      ＝ x +ℚ zero-ℚ
+        by ap (x +ℚ_) (left-inverse-law-add-ℚ (rational-ℚ⁺ d))
+      ＝ x by right-unit-law-add-ℚ x)
+    ( le-right-add-rational-ℚ⁺ (x -ℚ rational-ℚ⁺ d) d)
+```
+
 ### Characterization of inequality on the rational numbers by the additive action of `ℚ⁺`
 
 For any `x y : ℚ`, the following conditions are equivalent:
