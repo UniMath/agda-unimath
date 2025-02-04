@@ -565,3 +565,8 @@ module _
 ### The type of surjections `A ↠¬¬ B` is equivalent to the type of families `P` of irrefutable types over `B` equipped with an equivalence `A ≃ Σ B P`
 
 > This remains to be shown.
+
+## External links
+
+- [TypeTopology.Density](https://martinescardo.github.io/TypeTopology/TypeTopology.Density.html)
+  at TypeTopology
