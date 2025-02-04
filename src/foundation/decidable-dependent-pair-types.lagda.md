@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.decidable-propositions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.negation
 
@@ -105,18 +106,6 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   (H : (x y : A) → ¬¬ (x ＝ y))
   where
-
-  is-decidable-Σ-all-elements-irrefutably-equal-base :
-    is-decidable A →
-    ((x : A) → is-decidable (B x)) →
-    is-decidable (Σ A B)
-  is-decidable-Σ-all-elements-irrefutably-equal-base (inl x) K =
-    map-coproduct
-      ( λ y → (x , y))
-      ( λ ny ab → H (pr1 ab) x (λ p → ny (tr B p (pr2 ab))))
-      ( K x)
-  is-decidable-Σ-all-elements-irrefutably-equal-base (inr nx) K =
-    inr (map-neg pr1 nx)
 
   is-inhabited-or-empty-Σ-all-elements-irrefutably-equal-base :
     is-inhabited-or-empty A →
