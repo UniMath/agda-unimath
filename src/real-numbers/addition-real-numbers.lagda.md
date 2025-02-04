@@ -17,13 +17,16 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -209,6 +212,30 @@ module _
                     ＝ b by is-identity-conjugation-Ab abelian-group-add-ℚ a b)))
             a-in-upper-add)
 
+    is-disjoint-cut-add-ℝ : (q : ℚ) → ¬ (is-in-subtype lower-cut-add-ℝ q × is-in-subtype upper-cut-add-ℝ q)
+    is-disjoint-cut-add-ℝ q (q-in-lower , q-in-upper) =
+      elim-exists
+        empty-Prop
+        (λ (lx , ly) (lx-in-lower-x , ly-in-lower-y , lx+ly=q) →
+          elim-exists
+            empty-Prop
+            (λ (ux , uy) (ux-in-upper-x , uy-in-upper-y , ux+uy=q) →
+              irreflexive-le-ℚ
+                q
+                (binary-tr
+                  le-ℚ
+                  lx+ly=q
+                 ux+uy=q
+                  (preserves-le-add-ℚ
+                    {lx}
+                    {ux}
+                    {ly}
+                    {uy}
+                    (le-lower-upper-cut-ℝ x lx ux lx-in-lower-x ux-in-upper-x)
+                    (le-lower-upper-cut-ℝ y ly uy ly-in-lower-y uy-in-upper-y))))
+            q-in-upper)
+        q-in-lower
+
     arithmetically-located-add-ℝ : is-arithmetically-located lower-cut-add-ℝ upper-cut-add-ℝ
     arithmetically-located-add-ℝ ε =
       elim-exists
@@ -263,7 +290,7 @@ module _
                 y
                 (yq -ℚ (q -ℚ p))
                 yq
-                {!   !}
+                (le-diff-rational-ℚ⁺ yq (positive-diff-le-ℚ p q p<q))
                 yq-in-lower-y ,
               (equational-reasoning
                 xq +ℚ (yq -ℚ (q -ℚ p))
@@ -278,6 +305,29 @@ module _
                 ＝ p by is-identity-conjugation-Ab abelian-group-add-ℚ q p)))
         q-in-lower
 
+    le-upper-cut-add-ℝ :
+      (p q : ℚ) → le-ℚ p q → is-in-subtype upper-cut-add-ℝ p → is-in-subtype upper-cut-add-ℝ q
+    le-upper-cut-add-ℝ p q p<q p-in-upper =
+      elim-exists
+        (upper-cut-add-ℝ q)
+        (λ (xp , yp) (xp-in-upper-x , yp-in-upper-y , xp+yp=p) →
+          intro-exists
+            (xp , yp +ℚ (q -ℚ p))
+            ((xp-in-upper-x ,
+              le-upper-cut-ℝ
+                y
+                yp
+                (yp +ℚ (q -ℚ p))
+                (le-right-add-rational-ℚ⁺ yp (positive-diff-le-ℚ p q p<q))
+                yp-in-upper-y ,
+              (equational-reasoning
+                xp +ℚ (yp +ℚ (q -ℚ p))
+                ＝ (xp +ℚ yp) +ℚ (q -ℚ p) by inv (associative-add-ℚ xp yp (q -ℚ p))
+                ＝ p +ℚ (q -ℚ p) by ap (_+ℚ (q -ℚ p)) xp+yp=p
+                ＝ (p +ℚ q) -ℚ p by inv (associative-add-ℚ p q (neg-ℚ p))
+                ＝ q by is-identity-conjugation-Ab abelian-group-add-ℚ p q))))
+        p-in-upper
+
     located-add-ℝ : (p q : ℚ) → le-ℚ p q → type-disjunction-Prop (lower-cut-add-ℝ p) (upper-cut-add-ℝ q)
     located-add-ℝ =
       arithmetically-located-and-closed-located
@@ -285,5 +335,14 @@ module _
         upper-cut-add-ℝ
         arithmetically-located-add-ℝ
         le-lower-cut-add-ℝ
-        {!   !}
+        le-upper-cut-add-ℝ
+
+  add-ℝ : ℝ l
+  add-ℝ =
+    real-dedekind-cut
+      lower-cut-add-ℝ
+      upper-cut-add-ℝ
+      ((lower-cut-inhabited-add-ℝ , upper-cut-inhabited-add-ℝ) ,
+        (is-rounded-lower-cut-add-ℝ , is-rounded-upper-cut-add-ℝ) ,
+        is-disjoint-cut-add-ℝ , located-add-ℝ)
 ```
