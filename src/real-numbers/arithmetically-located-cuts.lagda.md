@@ -256,7 +256,7 @@ module _
                                 ( q0-p0<nε')))
                             ( q0-in-U))))
                     ( archimedean-property-ℚ ε' (q0 -ℚ p0) pos-ε'))
-                ( less-than-half-ℚ⁺ (ε , positive-ε)))
+                ( double-le-ℚ⁺ (ε , positive-ε)))
               ( is-inhabited-upper-cut-ℝ x))
         ( is-inhabited-lower-cut-ℝ x)
       where
