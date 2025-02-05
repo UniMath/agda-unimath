@@ -348,22 +348,18 @@ abstract
           ( sim-reduced-fraction-ℤ y)))
 ```
 
-### `succ-ℤ x * p = p + (x * p)`
+### `succ-ℚ p * q = q + (p * q)`
 
 ```agda
-left-mul-succ-rational-ℤ :
-  (x : ℤ) →
-  (p : ℚ) →
-  rational-ℤ (succ-ℤ x) *ℚ p ＝ p +ℚ (rational-ℤ x *ℚ p)
-left-mul-succ-rational-ℤ x p =
+left-mul-succ-ℚ :
+  (p q : ℚ) →
+  (succ-ℚ p *ℚ q) ＝ q +ℚ (p *ℚ q)
+left-mul-succ-ℚ p q =
   equational-reasoning
-    rational-ℤ (succ-ℤ x) *ℚ p
-    ＝ (one-ℚ +ℚ rational-ℤ x) *ℚ p
-      by ap (_*ℚ p) (inv (add-rational-ℤ one-ℤ x))
-    ＝ (one-ℚ *ℚ p) +ℚ (rational-ℤ x *ℚ p)
-      by right-distributive-mul-add-ℚ one-ℚ (rational-ℤ x) p
-    ＝ p +ℚ (rational-ℤ x *ℚ p)
-      by ap-add-ℚ (left-unit-law-mul-ℚ p) refl
+    succ-ℚ p *ℚ q
+    ＝ (one-ℚ *ℚ q) +ℚ (p *ℚ q)
+      by right-distributive-mul-add-ℚ one-ℚ p q
+    ＝ q +ℚ (p *ℚ q) by ap-add-ℚ (left-unit-law-mul-ℚ q) refl
 ```
 
 ## See also
