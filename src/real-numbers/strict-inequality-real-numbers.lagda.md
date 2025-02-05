@@ -12,19 +12,16 @@ module real-numbers.strict-inequality-real-numbers where
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.transport-along-identifications
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
-open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
-open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 ```
 
@@ -120,8 +117,8 @@ module _
   transitive-le-ℝ : le-ℝ y z → le-ℝ x y → le-ℝ x z
   transitive-le-ℝ y<z =
     elim-exists
-      (le-ℝ-Prop x z)
-      (λ p (p-in-ux , p-in-ly) →
+      ( le-ℝ-Prop x z)
+      ( λ p (p-in-ux , p-in-ly) →
         elim-exists
           (le-ℝ-Prop x z)
           (λ q (q-in-uy , q-in-lz) →
