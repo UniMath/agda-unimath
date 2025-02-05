@@ -17,6 +17,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
@@ -168,6 +169,13 @@ module _
     elim-exists
       (le-ℝ-Prop x z)
       (λ p (p-in-upper-y , p-in-lower-z) →
-        intro-exists p ({!   !} , p-in-lower-z))
+        intro-exists
+          ( p)
+          ( forward-implication
+            ( leq-iff-ℝ' x y)
+            ( x≤y)
+            ( p)
+            ( p-in-upper-y) ,
+        p-in-lower-z))
       ( y<z)
 ```
