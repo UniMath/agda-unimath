@@ -629,7 +629,7 @@ abstract
     s : ℚ⁺
     s = strict-min-ℚ⁺ q r
     -- Inlining this blows up compile times for some unclear reason.
-    dependent-pair-result : Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
+    dependent-pair-result : Σ ℚ⁺ (λ x → le-ℚ⁺ (x +ℚ⁺ x) p)
     dependent-pair-result =
       s ,
       tr
