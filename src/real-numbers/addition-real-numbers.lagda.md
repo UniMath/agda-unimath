@@ -37,6 +37,7 @@ open import group-theory.abelian-groups
 
 open import real-numbers.arithmetically-located-cuts
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>
@@ -378,4 +379,44 @@ module _
 infixl 35 _+ℝ_
 _+ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 _+ℝ_ = add-ℝ
+```
+
+## Properties
+
+### Unit laws for addition
+
+```agda
+left-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → (zero-ℝ +ℝ x) ＝ x
+left-unit-law-add-ℝ x =
+  eq-eq-upper-cut-ℝ
+    ( zero-ℝ +ℝ x)
+    ( x)
+    ( eq-has-same-elements-subtype
+      ( upper-cut-ℝ (zero-ℝ +ℝ x))
+      ( upper-cut-ℝ x)
+      (λ p →
+        elim-exists
+          (upper-cut-ℝ x p)
+          (λ (q , r) (0<q , r-in-Ux , q+r=p) →
+            le-upper-cut-ℝ
+              x
+              r
+              p
+              (tr
+                (le-ℚ r)
+                q+r=p
+                (le-left-add-rational-ℚ⁺ r  (q , is-positive-le-zero-ℚ q 0<q) ))
+              r-in-Ux) ,
+        λ p-in-Ux →
+          elim-exists
+            (upper-cut-add-ℝ zero-ℝ x p)
+            (λ q (q<p , q-in-Ux) →
+              intro-exists
+                ( p -ℚ q , q)
+                ( le-zero-is-positive-ℚ
+                  ( p -ℚ q)
+                  ( is-positive-diff-le-ℚ q p q<p) ,
+                  q-in-Ux ,
+                  is-section-right-subtraction-Ab abelian-group-add-ℚ q p))
+            (forward-implication (is-rounded-upper-cut-ℝ x p) p-in-Ux)))
 ```
