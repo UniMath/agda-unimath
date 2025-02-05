@@ -13,6 +13,7 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -43,6 +44,20 @@ module _
 ```
 
 ## Properties
+
+### Equivalence with statements about upper cuts
+
+```agda
+  leq-ℝ-Prop' : Prop (l1 ⊔ l2)
+  leq-ℝ-Prop' = leq-prop-subtype (upper-cut-ℝ y) (upper-cut-ℝ x)
+
+  leq-ℝ' : UU (l1 ⊔ l2)
+  leq-ℝ' = type-Prop leq-ℝ-Prop'
+
+  leq-equivalence-ℝ' : leq-ℝ ↔ leq-ℝ'
+  pr1 (leq-equivalence-ℝ') lx⊆ly q q-in-uy =
+    subset-upper-cut-upper-complement-lower-cut-ℝ x q {!   !}
+```
 
 ### Inequality on the real numbers is reflexive
 
