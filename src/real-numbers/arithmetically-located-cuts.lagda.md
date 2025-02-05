@@ -230,7 +230,6 @@ module _
               ( q-in-U)))
         ( archimedean-property-ℚ ε (q -ℚ p) pos-ε)
 
-  abstract
     arithmetically-located-ℝ :
       is-arithmetically-located (lower-cut-ℝ x) (upper-cut-ℝ x)
     arithmetically-located-ℝ (ε , positive-ε) =
@@ -267,8 +266,7 @@ module _
       where
         claim : Prop l
         claim =
-          ∃
-            ( ℚ × ℚ)
+          ∃ ( ℚ × ℚ)
             ( λ (p , q) →
               le-ℚ-Prop q (p +ℚ ε) ∧
               lower-cut-ℝ x p ∧
