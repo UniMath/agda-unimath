@@ -386,8 +386,9 @@ _+ℝ_ = add-ℝ
 
 ```agda
 module _
-  {l : Level}
-  (x y : ℝ l)
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
   where
 
   commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
