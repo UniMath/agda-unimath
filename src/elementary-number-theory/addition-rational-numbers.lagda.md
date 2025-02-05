@@ -268,6 +268,14 @@ abstract
       by is-retraction-rational-fraction-ℚ (rational-ℤ (x +ℤ y))
 ```
 
+### The rational successor of an integer is the successor of the integer
+
+```agda
+abstract
+  succ-rational-ℤ : (x : ℤ) → succ-ℚ (rational-ℤ x) ＝ rational-ℤ (succ-ℤ x)
+  succ-rational-ℤ = add-rational-ℤ one-ℤ
+```
+
 ## See also
 
 - The additive group structure on the rational numbers is defined in
