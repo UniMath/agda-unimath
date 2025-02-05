@@ -37,10 +37,12 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -617,26 +619,29 @@ module _
 abstract
   double-le-ℚ⁺ :
     (p : ℚ⁺) →
-    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
-  double-le-ℚ⁺ p =
-    s ,
-    tr
-      ( le-ℚ⁺ (s +ℚ⁺ s))
-      ( eq-add-split-ℚ⁺ p)
-      ( preserves-le-add-ℚ
-        { rational-ℚ⁺ s}
-        { rational-ℚ⁺ q}
-        { rational-ℚ⁺ s}
-        { rational-ℚ⁺ r}
-        ( le-left-min-ℚ⁺ q r)
-        ( le-right-min-ℚ⁺ q r))
+    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
+  double-le-ℚ⁺ p = unit-trunc-Prop dependent-pair-result
     where
-      q : ℚ⁺
-      q = left-summand-split-ℚ⁺ p
-      r : ℚ⁺
-      r = right-summand-split-ℚ⁺ p
-      s : ℚ⁺
-      s = strict-min-ℚ⁺ q r
+    q : ℚ⁺
+    q = left-summand-split-ℚ⁺ p
+    r : ℚ⁺
+    r = right-summand-split-ℚ⁺ p
+    s : ℚ⁺
+    s = strict-min-ℚ⁺ q r
+    -- Inlining this blows up compile times for some unclear reason.
+    dependent-pair-result : Σ ℚ⁺ (λ x → le-ℚ⁺ (x +ℚ⁺ x) p)
+    dependent-pair-result =
+      s ,
+      tr
+        ( le-ℚ⁺ (s +ℚ⁺ s))
+        ( eq-add-split-ℚ⁺ p)
+        ( preserves-le-add-ℚ
+          { rational-ℚ⁺ s}
+          { rational-ℚ⁺ q}
+          { rational-ℚ⁺ s}
+          { rational-ℚ⁺ r}
+          ( le-left-min-ℚ⁺ q r)
+          ( le-right-min-ℚ⁺ q r))
 ```
 
 ### Addition with a positive rational number is an increasing map
