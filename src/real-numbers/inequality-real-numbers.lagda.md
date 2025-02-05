@@ -31,10 +31,9 @@ open import real-numbers.rational-real-numbers
 
 ## Idea
 
-The
-{{#concept "standard ordering" Disambiguation="real numbers" Agda=leq-ℝ}}
-on the [real numbers](real-numbers.dedekind-real-numbers.md) is defined as
-the lower cut of one being a subset of the lower cut of the other. This is the
+The {{#concept "standard ordering" Disambiguation="real numbers" Agda=leq-ℝ}} on
+the [real numbers](real-numbers.dedekind-real-numbers.md) is defined as the
+lower cut of one being a subset of the lower cut of the other. This is the
 definition used in {{#cite UF13}}, section 11.2.1.
 
 ```agda
@@ -116,6 +115,7 @@ antisymmetric-leq-ℝ x y x≤y y≤x =
     ( y)
     ( antisymmetric-leq-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) x≤y y≤x)
 ```
+
 ### Inequality on the real numbers is transitive
 
 ```agda
