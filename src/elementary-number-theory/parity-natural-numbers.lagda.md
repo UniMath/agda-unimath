@@ -580,6 +580,8 @@ is-even-right-factor-is-even-mul-ℕ m n H K =
 
 The proof is by induction, and the base case is trivial. For the inductive step, assume that $2^{k+1} \mid mn$. Then the product $mn$ is even, and therefore $m$ is even. Let $m' := m/2$. Now it follows that $2^k \mid m'n$. By the inductive hypothesis, we conclude that $2^k \mid m'$, which is xequivalent to $2^{k+1} \mid m$.
 
+**Note.** This result should eventually be formalized as an instance of the following lemma: If $a \mid bc$ and $\gcd(a,c)=1$, then $a\mid b$.
+
 ```agda
 div-exp-2-left-factor-div-exp-2-mul-ℕ :
   (k m n : ℕ) → div-ℕ (2 ^ℕ k) (m *ℕ n) → is-odd-ℕ n → div-ℕ (2 ^ℕ k) m
@@ -604,11 +606,29 @@ div-exp-2-left-factor-div-exp-2-mul-ℕ (succ-ℕ k) m n H K =
           ( quotient-div-ℕ 2 m L)
           ( n)
           ( concatenate-div-eq-ℕ
-            {!!}
-            ( compute-quotient-div-mul-ℕ' n 2 m
-              {!!}
-              {!!}))
+            ( div-quotient-div-div-ℕ
+              ( 2 ^ℕ k)
+              ( m *ℕ n)
+              ( 2)
+              ( is-even-div-is-even-ℕ
+                ( 2 ^ℕ succ-ℕ k)
+                ( m *ℕ n)
+                ( div-exp-ℕ 2 (succ-ℕ k) (is-nonzero-succ-ℕ k))
+                ( H))
+              ( concatenate-eq-div-ℕ (inv (exp-succ-ℕ' 2 k)) H))
+            ( compute-quotient-div-mul-ℕ' n 2 m L
+              ( is-even-div-is-even-ℕ
+                ( 2 ^ℕ succ-ℕ k)
+                ( m *ℕ n)
+                ( div-exp-ℕ 2 (succ-ℕ k) (is-nonzero-succ-ℕ k))
+                ( H))))
           ( K)))
+
+div-exp-2-right-factor-div-exp-2-mul-ℕ :
+  (k m n : ℕ) → div-ℕ (2 ^ℕ k) (m *ℕ n) → is-odd-ℕ m → div-ℕ (2 ^ℕ k) n
+div-exp-2-right-factor-div-exp-2-mul-ℕ k m n H =
+  div-exp-2-left-factor-div-exp-2-mul-ℕ k n m
+    ( concatenate-div-eq-ℕ H (commutative-mul-ℕ m n))
 ```
 
 ## See also
