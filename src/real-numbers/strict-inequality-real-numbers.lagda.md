@@ -12,16 +12,19 @@ module real-numbers.strict-inequality-real-numbers where
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.transport-along-identifications
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 ```
 
@@ -142,6 +145,26 @@ preserves-le-real-ℚ x y x<y =
   intro-exists
     ( mediant-ℚ x y)
     ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
+```
+
+### Negation reverses the order of real numbers
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  neg-le-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
+  neg-le-ℝ =
+    elim-exists
+      ( le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
+      ( λ p (p-in-ux , p-in-ly) →
+        intro-exists
+          ( neg-ℚ p)
+          ( tr (is-in-lower-cut-ℝ y) (inv (neg-neg-ℚ p)) p-in-ly ,
+            tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
 ```
 
 ## References
