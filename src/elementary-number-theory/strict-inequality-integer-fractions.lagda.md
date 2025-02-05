@@ -342,6 +342,29 @@ module _
             ( denominator-fraction-ℤ y))))
 ```
 
+### If `x < y` then `y ≰ x`
+
+```agda
+not-leq-le-fraction-ℤ :
+  (x y : fraction-ℤ) →
+  le-fraction-ℤ x y →
+  ¬ (leq-fraction-ℤ y x)
+not-leq-le-fraction-ℤ x y =
+  not-leq-le-ℤ
+    ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
+    ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x)
+```
+
+### If `x ≤ y` then `y ≮ x`
+
+```agda
+not-le-leq-fraction-ℤ :
+  (x y : fraction-ℤ) →
+  leq-fraction-ℤ x y →
+  ¬ (le-fraction-ℤ y x)
+not-le-leq-fraction-ℤ x y K H = not-leq-le-fraction-ℤ y x H K
+```
+
 ### Negation reverses the order of strict inequality on integer fractions
 
 ```agda
