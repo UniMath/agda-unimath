@@ -31,6 +31,12 @@ open import real-numbers.rational-real-numbers
 
 ## Idea
 
+The
+{{#concept "standard ordering" Disambiguation="real numbers" Agda=leq-ℝ}}
+on the [real numbers](real-numbers.dedekind-real-numbers.md) is defined as
+the lower cut of one being a subset of the lower cut of the other. This is the
+definition used in {{#cite UF13}}, section 11.2.1.
+
 ```agda
 module _
   {l1 l2 : Level}
@@ -47,7 +53,7 @@ module _
 
 ## Properties
 
-### Equivalence with statements about upper cuts
+### Equivalence with reversed containment of upper cuts
 
 ```agda
   leq-ℝ-Prop' : Prop (l1 ⊔ l2)
@@ -141,3 +147,7 @@ module _
 preserves-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
 preserves-leq-real-ℚ x y x≤y q q<x = concatenate-le-leq-ℚ q x y q<x x≤y
 ```
+
+## References
+
+{{#bibliography}}
