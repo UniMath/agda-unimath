@@ -55,7 +55,7 @@ open import foundation-core.truncation-levels
 
 open import logic.double-negation-stable-embeddings
 
-open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.extensions-maps
 ```
 
 </details>
@@ -63,8 +63,8 @@ open import orthogonal-factorization-systems.extensions-of-maps
 ## Idea
 
 A map `f : A → B` is
-{{#concept "irrefutably surjective" Agda=is-irrefutably-surjective}} if all of
-its [fibers](foundation-core.fibers-of-maps.md) are
+{{#concept "irrefutably surjective" Agda=is-irrefutably-surjective}}, or
+_dense_, if all of its [fibers](foundation-core.fibers-of-maps.md) are
 [irrefutable](logic.irrefutable-propositions.md). I.e., for every `y : B`, it is
 not not true that `y` has a preimage under `f`.
 

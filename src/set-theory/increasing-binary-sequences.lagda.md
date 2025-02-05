@@ -49,9 +49,8 @@ open import set-theory.cantor-space
 
 ## Idea
 
-The type of
-{{#concept "increasing binary sequences" Agda=increasing-binary-sequence-ℕ}}is
-the [subset](foundation-core.subtypes.md) of the
+The type of {{#concept "increasing binary sequences" Agda=ℕ∞↑}}is the
+[subset](foundation-core.subtypes.md) of the
 [cantor set](set-theory.cantor-space.md) consisting of increasing sequences of
 binary numbers. This type is equivalent to the
 [conatural numbers](elementary-number-theory.conatural-numbers.md).
@@ -63,44 +62,45 @@ We follow formalizations from the TypeTopology library. {{#cite TypeTopology}}
 ### The predicate on a binary sequence of being increasing
 
 ```agda
-is-increasing-binary-sequence-ℕ :
-  cantor-space → UU lzero
-is-increasing-binary-sequence-ℕ x =
-  (n : ℕ) → leq-bool (x n) (x (succ-ℕ n))
+is-increasing-binary-sequence : cantor-space → UU lzero
+is-increasing-binary-sequence x = (n : ℕ) → leq-bool (x n) (x (succ-ℕ n))
 
-is-prop-is-increasing-binary-sequence-ℕ :
-  (x : cantor-space) → is-prop (is-increasing-binary-sequence-ℕ x)
-is-prop-is-increasing-binary-sequence-ℕ x =
+is-prop-is-increasing-binary-sequence :
+  (x : cantor-space) → is-prop (is-increasing-binary-sequence x)
+is-prop-is-increasing-binary-sequence x =
   is-prop-Π (λ n → is-prop-leq-bool {x n} {x (succ-ℕ n)})
 
-is-increasing-binary-sequence-ℕ-Prop :
-  cantor-space → Prop lzero
-is-increasing-binary-sequence-ℕ-Prop x =
-  ( is-increasing-binary-sequence-ℕ x ,
-    is-prop-is-increasing-binary-sequence-ℕ x)
+is-increasing-binary-sequence-Prop : cantor-space → Prop lzero
+is-increasing-binary-sequence-Prop x =
+  ( is-increasing-binary-sequence x ,
+    is-prop-is-increasing-binary-sequence x)
 ```
 
 ### The type of increasing binary sequences
 
 ```agda
-increasing-binary-sequence-ℕ : UU lzero
-increasing-binary-sequence-ℕ = Σ cantor-space is-increasing-binary-sequence-ℕ
+ℕ∞↑ : UU lzero
+ℕ∞↑ = Σ cantor-space is-increasing-binary-sequence
 
-map-cantor-space-increasing-binary-sequence-ℕ :
-  increasing-binary-sequence-ℕ → cantor-space
-map-cantor-space-increasing-binary-sequence-ℕ = pr1
+sequence-ℕ∞↑ : ℕ∞↑ → cantor-space
+sequence-ℕ∞↑ = pr1
 
-emb-cantor-space-increasing-binary-sequence-ℕ :
-  increasing-binary-sequence-ℕ ↪ cantor-space
-emb-cantor-space-increasing-binary-sequence-ℕ =
-  emb-subtype is-increasing-binary-sequence-ℕ-Prop
+is-increasing-sequence-ℕ∞↑ :
+  (x : ℕ∞↑) → is-increasing-binary-sequence (sequence-ℕ∞↑ x)
+is-increasing-sequence-ℕ∞↑ = pr2
+
+emb-sequence-ℕ∞↑ : ℕ∞↑ ↪ cantor-space
+emb-sequence-ℕ∞↑ = emb-subtype is-increasing-binary-sequence-Prop
+
+is-injective-sequence-ℕ∞↑ : is-injective sequence-ℕ∞↑
+is-injective-sequence-ℕ∞↑ = is-injective-emb emb-sequence-ℕ∞↑
 ```
 
 ### The element at infinity
 
 ```agda
-infinity-increasing-binary-sequence-ℕ : increasing-binary-sequence-ℕ
-infinity-increasing-binary-sequence-ℕ = (const ℕ false , λ n → star)
+infinity-ℕ∞↑ : ℕ∞↑
+infinity-ℕ∞↑ = (const ℕ false , λ _ → star)
 ```
 
 ### The zero element
@@ -109,35 +109,32 @@ We interpret the constantly zero sequence as the zero element of the generic
 convergent sequence.
 
 ```agda
-zero-increasing-binary-sequence-ℕ : increasing-binary-sequence-ℕ
-zero-increasing-binary-sequence-ℕ = (const ℕ true , λ n → star)
+zero-ℕ∞↑ : ℕ∞↑
+zero-ℕ∞↑ = (const ℕ true , λ _ → star)
 ```
 
 ### The successor function
 
 ```agda
-succ-increasing-binary-sequence-ℕ :
-  increasing-binary-sequence-ℕ → increasing-binary-sequence-ℕ
-succ-increasing-binary-sequence-ℕ (x , H) =
-  (rec-ℕ false (λ n _ → x n) , ind-ℕ (min-leq-bool {x 0}) (λ n _ → H n))
+succ-ℕ∞↑ : ℕ∞↑ → ℕ∞↑
+succ-ℕ∞↑ (x , H) =
+  ( rec-ℕ false (λ n _ → x n) , ind-ℕ (leq-false-bool {x 0}) (λ n _ → H n))
 ```
 
 ### The predecessor function
 
 ```agda
-decons-increasing-binary-sequence-ℕ :
-  increasing-binary-sequence-ℕ → Maybe increasing-binary-sequence-ℕ
-decons-increasing-binary-sequence-ℕ (x , H) =
+decons-ℕ∞↑ : ℕ∞↑ → Maybe ℕ∞↑
+decons-ℕ∞↑ (x , H) =
   rec-bool exception-Maybe (unit-Maybe (x ∘ succ-ℕ , H ∘ succ-ℕ)) (x 0)
 ```
 
 ### The constructor function
 
 ```agda
-cons-increasing-binary-sequence-ℕ :
-  Maybe increasing-binary-sequence-ℕ → increasing-binary-sequence-ℕ
-cons-increasing-binary-sequence-ℕ (inl x) = succ-increasing-binary-sequence-ℕ x
-cons-increasing-binary-sequence-ℕ (inr x) = zero-increasing-binary-sequence-ℕ
+cons-ℕ∞↑ : Maybe ℕ∞↑ → ℕ∞↑
+cons-ℕ∞↑ (inl x) = succ-ℕ∞↑ x
+cons-ℕ∞↑ (inr x) = zero-ℕ∞↑
 ```
 
 ## Properties
@@ -145,114 +142,91 @@ cons-increasing-binary-sequence-ℕ (inr x) = zero-increasing-binary-sequence-�
 ### Equality on elements of the generic convergent sequence
 
 ```agda
-Eq-increasing-binary-sequence-ℕ :
-  increasing-binary-sequence-ℕ → increasing-binary-sequence-ℕ → UU lzero
-Eq-increasing-binary-sequence-ℕ x y = pr1 x ~ pr1 y
+Eq-ℕ∞↑ : ℕ∞↑ → ℕ∞↑ → UU lzero
+Eq-ℕ∞↑ x y = pr1 x ~ pr1 y
 
-refl-Eq-increasing-binary-sequence-ℕ :
-  (x : increasing-binary-sequence-ℕ) → Eq-increasing-binary-sequence-ℕ x x
-refl-Eq-increasing-binary-sequence-ℕ x = refl-htpy
+refl-Eq-ℕ∞↑ : (x : ℕ∞↑) → Eq-ℕ∞↑ x x
+refl-Eq-ℕ∞↑ x = refl-htpy
 
-extensionality-increasing-binary-sequence-ℕ :
-  (x y : increasing-binary-sequence-ℕ) →
-  (x ＝ y) ≃ Eq-increasing-binary-sequence-ℕ x y
-extensionality-increasing-binary-sequence-ℕ x y =
-  equiv-funext ∘e
-  equiv-ap-inclusion-subtype is-increasing-binary-sequence-ℕ-Prop
+extensionality-ℕ∞↑ : (x y : ℕ∞↑) → (x ＝ y) ≃ Eq-ℕ∞↑ x y
+extensionality-ℕ∞↑ x y =
+  equiv-funext ∘e equiv-ap-inclusion-subtype is-increasing-binary-sequence-Prop
 
-Eq-eq-increasing-binary-sequence-ℕ :
-  {x y : increasing-binary-sequence-ℕ} →
-  x ＝ y → Eq-increasing-binary-sequence-ℕ x y
-Eq-eq-increasing-binary-sequence-ℕ {x} {y} =
-  map-equiv (extensionality-increasing-binary-sequence-ℕ x y)
+Eq-eq-ℕ∞↑ : {x y : ℕ∞↑} → x ＝ y → Eq-ℕ∞↑ x y
+Eq-eq-ℕ∞↑ {x} {y} = map-equiv (extensionality-ℕ∞↑ x y)
 
-eq-Eq-increasing-binary-sequence-ℕ :
-  {x y : increasing-binary-sequence-ℕ} →
-  Eq-increasing-binary-sequence-ℕ x y → x ＝ y
-eq-Eq-increasing-binary-sequence-ℕ {x} {y} =
-  map-inv-equiv (extensionality-increasing-binary-sequence-ℕ x y)
+eq-Eq-ℕ∞↑ : {x y : ℕ∞↑} → Eq-ℕ∞↑ x y → x ＝ y
+eq-Eq-ℕ∞↑ {x} {y} = map-inv-equiv (extensionality-ℕ∞↑ x y)
 ```
 
 ### The tight apartness relation on increasing binary sequences
 
 ```agda
-tight-apartness-relation-increasing-binary-sequence-ℕ :
-  Tight-Apartness-Relation lzero increasing-binary-sequence-ℕ
-tight-apartness-relation-increasing-binary-sequence-ℕ =
+tight-apartness-relation-ℕ∞↑ : Tight-Apartness-Relation lzero ℕ∞↑
+tight-apartness-relation-ℕ∞↑ =
   type-subtype-Tight-Apartness-Relation
-    is-increasing-binary-sequence-ℕ-Prop
+    is-increasing-binary-sequence-Prop
     tight-apartness-relation-cantor-space
 
-increasing-binary-sequence-ℕ-Type-With-Tight-Apartness :
-  Type-With-Tight-Apartness lzero lzero
-increasing-binary-sequence-ℕ-Type-With-Tight-Apartness =
+ℕ∞↑-Type-With-Tight-Apartness : Type-With-Tight-Apartness lzero lzero
+ℕ∞↑-Type-With-Tight-Apartness =
   subtype-Type-With-Tight-Apartness
     cantor-space-Type-With-Tight-Apartness
-    is-increasing-binary-sequence-ℕ-Prop
+    is-increasing-binary-sequence-Prop
 ```
 
 ### The type of increasing binary sequences has double negation stable equality
 
 ```agda
-has-double-negation-stable-equality-increasing-binary-sequence-ℕ :
-  has-double-negation-stable-equality increasing-binary-sequence-ℕ
-has-double-negation-stable-equality-increasing-binary-sequence-ℕ =
+has-double-negation-stable-equality-ℕ∞↑ :
+  has-double-negation-stable-equality ℕ∞↑
+has-double-negation-stable-equality-ℕ∞↑ =
   has-double-negation-stable-equality-type-Type-With-Tight-Apartness
-    ( increasing-binary-sequence-ℕ-Type-With-Tight-Apartness)
+    ( ℕ∞↑-Type-With-Tight-Apartness)
 ```
 
 ### The type of increasing binary sequences is a set
 
 ```agda
-is-set-increasing-binary-sequence-ℕ : is-set increasing-binary-sequence-ℕ
-is-set-increasing-binary-sequence-ℕ =
-  is-set-type-Type-With-Tight-Apartness
-    ( increasing-binary-sequence-ℕ-Type-With-Tight-Apartness)
+abstract
+  is-set-ℕ∞↑ : is-set ℕ∞↑
+  is-set-ℕ∞↑ =
+    is-set-type-Type-With-Tight-Apartness ℕ∞↑-Type-With-Tight-Apartness
 ```
 
 ### The successor function is injective
 
 ```agda
-is-injective-succ-increasing-binary-sequence-ℕ :
-  is-injective succ-increasing-binary-sequence-ℕ
-is-injective-succ-increasing-binary-sequence-ℕ p =
-  eq-Eq-increasing-binary-sequence-ℕ
-    ( Eq-eq-increasing-binary-sequence-ℕ p ∘ succ-ℕ)
+is-injective-succ-ℕ∞↑ : is-injective succ-ℕ∞↑
+is-injective-succ-ℕ∞↑ p = eq-Eq-ℕ∞↑ (Eq-eq-ℕ∞↑ p ∘ succ-ℕ)
+
+abstract
+  is-emb-succ-ℕ∞↑ : is-emb succ-ℕ∞↑
+  is-emb-succ-ℕ∞↑ = is-emb-is-injective is-set-ℕ∞↑ is-injective-succ-ℕ∞↑
 ```
 
 ### Zero is not a successor of any increasing binary sequence
 
 ```agda
-neq-zero-succ-increasing-binary-sequence-ℕ :
-  {x : increasing-binary-sequence-ℕ} →
-  zero-increasing-binary-sequence-ℕ ≠ succ-increasing-binary-sequence-ℕ x
-neq-zero-succ-increasing-binary-sequence-ℕ p =
-  neq-true-false-bool (Eq-eq-increasing-binary-sequence-ℕ p 0)
+abstract
+  neq-zero-succ-ℕ∞↑ : {x : ℕ∞↑} → zero-ℕ∞↑ ≠ succ-ℕ∞↑ x
+  neq-zero-succ-ℕ∞↑ p = neq-true-false-bool (Eq-eq-ℕ∞↑ p 0)
 
-neq-succ-zero-increasing-binary-sequence-ℕ :
-  {x : increasing-binary-sequence-ℕ} →
-  succ-increasing-binary-sequence-ℕ x ≠ zero-increasing-binary-sequence-ℕ
-neq-succ-zero-increasing-binary-sequence-ℕ p =
-  neq-false-true-bool (Eq-eq-increasing-binary-sequence-ℕ p 0)
+abstract
+  neq-succ-zero-ℕ∞↑ : {x : ℕ∞↑} → succ-ℕ∞↑ x ≠ zero-ℕ∞↑
+  neq-succ-zero-ℕ∞↑ p = neq-false-true-bool (Eq-eq-ℕ∞↑ p 0)
 ```
 
 ### The type of increasing binary sequences is a fixed point of the maybe monad
 
 ```agda
-is-section-cons-increasing-binary-sequence-ℕ :
-  is-section
-    ( decons-increasing-binary-sequence-ℕ)
-    ( cons-increasing-binary-sequence-ℕ)
-is-section-cons-increasing-binary-sequence-ℕ (inl x) = refl
-is-section-cons-increasing-binary-sequence-ℕ (inr x) = refl
+is-section-cons-ℕ∞↑ : is-section decons-ℕ∞↑ cons-ℕ∞↑
+is-section-cons-ℕ∞↑ (inl x) = refl
+is-section-cons-ℕ∞↑ (inr x) = refl
 
-is-injective-cons-increasing-binary-sequence-ℕ :
-  is-injective cons-increasing-binary-sequence-ℕ
-is-injective-cons-increasing-binary-sequence-ℕ =
-  is-injective-has-retraction
-    cons-increasing-binary-sequence-ℕ
-    decons-increasing-binary-sequence-ℕ
-    is-section-cons-increasing-binary-sequence-ℕ
+is-injective-cons-ℕ∞↑ : is-injective cons-ℕ∞↑
+is-injective-cons-ℕ∞↑ =
+  is-injective-has-retraction cons-ℕ∞↑ decons-ℕ∞↑ is-section-cons-ℕ∞↑
 ```
 
 > It remains to formalize the full equivalence.
@@ -260,76 +234,88 @@ is-injective-cons-increasing-binary-sequence-ℕ =
 ### The type of increasing binary sequences as a retract of the cantor space
 
 ```agda
-force-increasing-binary-sequence-ℕ' : cantor-space → cantor-space
-force-increasing-binary-sequence-ℕ' x zero-ℕ = x zero-ℕ
-force-increasing-binary-sequence-ℕ' x (succ-ℕ n) =
-  or-bool (x (succ-ℕ n)) (force-increasing-binary-sequence-ℕ' x n)
-
-is-increasing-force-increasing-binary-sequence-ℕ :
-  (x : cantor-space) →
-  is-increasing-binary-sequence-ℕ (force-increasing-binary-sequence-ℕ' x)
-is-increasing-force-increasing-binary-sequence-ℕ x n =
-  leq-or-bool' {x (succ-ℕ n)} {force-increasing-binary-sequence-ℕ' x n}
-
-force-increasing-binary-sequence-ℕ : cantor-space → increasing-binary-sequence-ℕ
-force-increasing-binary-sequence-ℕ x =
-  ( force-increasing-binary-sequence-ℕ' x ,
-    is-increasing-force-increasing-binary-sequence-ℕ x)
+force-ℕ∞↑' : cantor-space → cantor-space
+force-ℕ∞↑' x zero-ℕ = x zero-ℕ
+force-ℕ∞↑' x (succ-ℕ n) = or-bool (x (succ-ℕ n)) (force-ℕ∞↑' x n)
 
 abstract
-  compute-force-increasing-binary-sequence-ℕ' :
-    (x : cantor-space) → is-increasing-binary-sequence-ℕ x →
-    force-increasing-binary-sequence-ℕ' x ~ x
-  compute-force-increasing-binary-sequence-ℕ' x H zero-ℕ = refl
-  compute-force-increasing-binary-sequence-ℕ' x H (succ-ℕ n) =
+  is-increasing-force-ℕ∞↑ :
+    (x : cantor-space) → is-increasing-binary-sequence (force-ℕ∞↑' x)
+  is-increasing-force-ℕ∞↑ x n = leq-or-bool' {x (succ-ℕ n)} {force-ℕ∞↑' x n}
+
+force-ℕ∞↑ : cantor-space → ℕ∞↑
+force-ℕ∞↑ x = (force-ℕ∞↑' x , is-increasing-force-ℕ∞↑ x)
+
+abstract
+  compute-force-ℕ∞↑' :
+    (x : cantor-space) → is-increasing-binary-sequence x → force-ℕ∞↑' x ~ x
+  compute-force-ℕ∞↑' x H zero-ℕ = refl
+  compute-force-ℕ∞↑' x H (succ-ℕ n) =
     ( ap
       ( or-bool (x (succ-ℕ n)))
-      ( compute-force-increasing-binary-sequence-ℕ' x H n)) ∙
+      ( compute-force-ℕ∞↑' x H n)) ∙
     ( antisymmetric-leq-bool
       ( leq-right-or-bool {x n} {x (succ-ℕ n)} (H n))
       ( leq-or-bool {x (succ-ℕ n)} {x n}))
 
-is-retraction-force-increasing-binary-sequence-ℕ :
-  is-retraction
-    map-cantor-space-increasing-binary-sequence-ℕ
-    force-increasing-binary-sequence-ℕ
-is-retraction-force-increasing-binary-sequence-ℕ (x , H) =
-  eq-Eq-increasing-binary-sequence-ℕ
-    ( compute-force-increasing-binary-sequence-ℕ' x H)
+abstract
+  is-retraction-force-ℕ∞↑ : is-retraction sequence-ℕ∞↑ force-ℕ∞↑
+  is-retraction-force-ℕ∞↑ (x , H) = eq-Eq-ℕ∞↑ (compute-force-ℕ∞↑' x H)
 
-retraction-map-cantor-space-increasing-binary-sequence-ℕ :
-  retraction map-cantor-space-increasing-binary-sequence-ℕ
-retraction-map-cantor-space-increasing-binary-sequence-ℕ =
-  ( force-increasing-binary-sequence-ℕ ,
-    is-retraction-force-increasing-binary-sequence-ℕ)
+retraction-sequence-ℕ∞↑ : retraction sequence-ℕ∞↑
+retraction-sequence-ℕ∞↑ = (force-ℕ∞↑ , is-retraction-force-ℕ∞↑)
 
-retract-cantor-space-increasing-binary-sequence-ℕ :
-  increasing-binary-sequence-ℕ retract-of cantor-space
-retract-cantor-space-increasing-binary-sequence-ℕ =
-  ( map-cantor-space-increasing-binary-sequence-ℕ ,
-    retraction-map-cantor-space-increasing-binary-sequence-ℕ)
+retract-cantor-space-ℕ∞↑ : ℕ∞↑ retract-of cantor-space
+retract-cantor-space-ℕ∞↑ = (sequence-ℕ∞↑ , retraction-sequence-ℕ∞↑)
 ```
 
 ### Increasing binary sequences are order preserving maps
 
 ```agda
-preserves-order-increasing-binary-sequence-ℕ :
-  {x : increasing-binary-sequence-ℕ} →
-  preserves-order-Poset ℕ-Poset bool-Poset (pr1 x)
-preserves-order-increasing-binary-sequence-ℕ {x} =
-  preserves-order-ind-ℕ-Poset bool-Poset (pr1 x) (pr2 x)
+abstract
+  preserves-order-ℕ∞↑ :
+    {x : ℕ∞↑} → preserves-order-Poset ℕ-Poset bool-Poset (sequence-ℕ∞↑ x)
+  preserves-order-ℕ∞↑ {x} =
+    preserves-order-ind-ℕ-Poset bool-Poset
+      ( sequence-ℕ∞↑ x)
+      ( is-increasing-sequence-ℕ∞↑ x)
 
-is-increasing-preserves-order-binary-sequence-ℕ :
-  {x : cantor-space} →
-  preserves-order-Poset ℕ-Poset bool-Poset x →
-  is-increasing-binary-sequence-ℕ x
-is-increasing-preserves-order-binary-sequence-ℕ H n =
-  H n (succ-ℕ n) (succ-leq-ℕ n)
+abstract
+  is-increasing-preserves-order-binary-sequence :
+    {x : cantor-space} →
+    preserves-order-Poset ℕ-Poset bool-Poset x →
+    is-increasing-binary-sequence x
+  is-increasing-preserves-order-binary-sequence H n =
+    H n (succ-ℕ n) (succ-leq-ℕ n)
 ```
+
+### If an increasing binary sequence is true at the first position, then it is the zero element
+
+```agda
+abstract
+  Eq-zero-is-zero-ℕ∞↑ :
+    (x : ℕ∞↑) → is-true (sequence-ℕ∞↑ x 0) → sequence-ℕ∞↑ x ~ const ℕ true
+  Eq-zero-is-zero-ℕ∞↑ x p zero-ℕ = p
+  Eq-zero-is-zero-ℕ∞↑ x p (succ-ℕ n) =
+    eq-leq-true-bool
+      ( transitive-leq-bool
+        { true}
+        { sequence-ℕ∞↑ x n}
+        { sequence-ℕ∞↑ x (succ-ℕ n)}
+        ( is-increasing-sequence-ℕ∞↑ x n)
+        ( leq-eq-bool (inv (Eq-zero-is-zero-ℕ∞↑ x p n))))
+
+abstract
+  eq-zero-is-zero-ℕ∞↑ : (x : ℕ∞↑) → is-true (sequence-ℕ∞↑ x 0) → x ＝ zero-ℕ∞↑
+  eq-zero-is-zero-ℕ∞↑ x p = eq-Eq-ℕ∞↑ (Eq-zero-is-zero-ℕ∞↑ x p)
+```
+
+### If two increasing binary sequences are nonequal, then they must differ at some position
 
 ## See also
 
 - [The conatural numbers](elementary-number-theory.conatural-numbers.md)
+- [Initial segments of the natural numbers](elementary-number-theory.initial-segments-natural-numbers.md)
 
 ## External links
 

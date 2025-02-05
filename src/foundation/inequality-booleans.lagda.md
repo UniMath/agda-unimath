@@ -126,12 +126,18 @@ linear-leq-bool {x} {y} = unit-trunc-Prop (cases-linear-leq-bool {x} {y})
 ### The maximal and minimal elements
 
 ```agda
-max-leq-bool : {x : bool} → leq-bool x true
-max-leq-bool {true} = star
-max-leq-bool {false} = star
+leq-true-bool : {x : bool} → leq-bool x true
+leq-true-bool {true} = star
+leq-true-bool {false} = star
 
-min-leq-bool : {x : bool} → leq-bool false x
-min-leq-bool = star
+leq-false-bool : {x : bool} → leq-bool false x
+leq-false-bool = star
+
+eq-leq-true-bool : {x : bool} → leq-bool true x → x ＝ true
+eq-leq-true-bool {true} p = refl
+
+eq-leq-false-bool : {x : bool} → leq-bool x false → x ＝ false
+eq-leq-false-bool {false} p = refl
 ```
 
 ### The decidable total order on booleans

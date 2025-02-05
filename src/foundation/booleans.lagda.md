@@ -252,13 +252,21 @@ is-false-Decidable-Prop b = (is-false b , is-decidable-prop-is-false b)
 ### A boolean cannot be both true and false
 
 ```agda
-not-is-false-is-true : (x : bool) → is-true x → ¬ (is-false x)
-not-is-false-is-true true t ()
-not-is-false-is-true false () f
+is-not-false-is-true : (x : bool) → is-true x → ¬ (is-false x)
+is-not-false-is-true true t ()
+is-not-false-is-true false () f
 
-not-is-true-is-false : (x : bool) → is-false x → ¬ (is-true x)
-not-is-true-is-false true () f
-not-is-true-is-false false t ()
+is-not-true-is-false : (x : bool) → is-false x → ¬ (is-true x)
+is-not-true-is-false true () f
+is-not-true-is-false false t ()
+
+is-false-is-not-true : (x : bool) → ¬ (is-true x) → is-false x
+is-false-is-not-true true np = ex-falso (np refl)
+is-false-is-not-true false np = refl
+
+is-true-is-not-false : (x : bool) → ¬ (is-false x) → is-true x
+is-true-is-not-false true np = refl
+is-true-is-not-false false np = ex-falso (np refl)
 ```
 
 ### The type of booleans is equivalent to `Fin 2`

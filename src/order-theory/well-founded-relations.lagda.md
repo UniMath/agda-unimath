@@ -94,23 +94,16 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {X : UU l1} ((_∈_ , w) : Well-Founded-Relation l2 X)
+  {l1 l2 : Level} {X : UU l1} (R@(_∈_ , w) : Well-Founded-Relation l2 X)
   where
 
   is-asymmetric-le-Well-Founded-Relation : is-asymmetric _∈_
   is-asymmetric-le-Well-Founded-Relation x y =
     is-asymmetric-is-accessible-element-Relation _∈_ (w x)
 
-module _
-  {l1 l2 : Level} {X : UU l1} (R : Well-Founded-Relation l2 X)
-  where
-
-  is-irreflexive-le-Well-Founded-Relation :
-    is-irreflexive (rel-Well-Founded-Relation R)
+  is-irreflexive-le-Well-Founded-Relation : is-irreflexive _∈_
   is-irreflexive-le-Well-Founded-Relation =
-    is-irreflexive-is-asymmetric
-      ( rel-Well-Founded-Relation R)
-      ( is-asymmetric-le-Well-Founded-Relation R)
+    is-irreflexive-is-asymmetric _∈_ is-asymmetric-le-Well-Founded-Relation
 ```
 
 ### The associated reflexive relation of a well-founded relation
