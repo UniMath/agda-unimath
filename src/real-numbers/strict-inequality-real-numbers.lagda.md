@@ -22,6 +22,7 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>
@@ -131,4 +132,14 @@ module _
                   ( le-lower-upper-cut-ℝ y p q p-in-ly q-in-uy)
                   ( q-in-lz)))
           ( y<z))
+```
+
+### The canonical map from rationals to reals preserves strict inequality
+
+```agda
+preserves-le-real-ℚ : (x y : ℚ) → le-ℚ x y → le-ℝ (real-ℚ x) (real-ℚ y)
+preserves-le-real-ℚ x y x<y =
+  intro-exists
+    ( mediant-ℚ x y)
+    ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
 ```
