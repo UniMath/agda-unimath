@@ -262,7 +262,7 @@ module _
     not-not-eq-second-point-zero-min-reporting :
       ¬¬ (Id second-point-min-repeating zero-ℕ)
     not-not-eq-second-point-zero-min-reporting np =
-      contradiction-le-ℕ
+      not-leq-le-ℕ
         ( pred-first)
         ( first-point-min-repeating)
         ( tr
@@ -881,7 +881,7 @@ module _
         ( is-nonzero-ℕ k × le-ℕ k (pr1 (minimal-element-iterate g a b pa))) →
         ( iterate k (map-equiv g) a ≠ a) × (iterate k (map-equiv g) a ≠ b)
       pr1 (neq-iterate-nonzero-le-minimal-element pa k (pair nz ineq)) q =
-        contradiction-le-ℕ
+        not-leq-le-ℕ
           ( pr1 pair-k2)
           ( pr1 (minimal-element-iterate g a b pa))
           ( le-subtraction-ℕ
@@ -909,7 +909,7 @@ module _
           (subtraction-le-ℕ k (pr1 (minimal-element-iterate g a b pa)) ineq)
       pr2 (neq-iterate-nonzero-le-minimal-element pa k (pair nz ineq)) r =
         ex-falso
-          ( contradiction-le-ℕ k (pr1 (minimal-element-iterate g a b pa))
+          ( not-leq-le-ℕ k (pr1 (minimal-element-iterate g a b pa))
             ineq (pr2 (pr2 (minimal-element-iterate g a b pa)) k r))
       equal-iterate-transposition-a :
         (pa : Σ ℕ (λ k → Id (iterate k (map-equiv g) a) b)) (k : ℕ) →
@@ -1018,7 +1018,7 @@ module _
         ( pa : Σ ℕ (λ k → Id (iterate k (map-equiv g) a) b)) (k : ℕ) →
         iterate k (map-equiv (composition-transposition-a-b g)) a ≠ b
       lemma3 pa k q =
-        contradiction-le-ℕ
+        not-leq-le-ℕ
           ( r)
           ( pr1 (minimal-element-iterate g a b pa))
           ( ineq)
@@ -1180,12 +1180,12 @@ module _
           ( λ k' p →
             pair
               ( λ q →
-                contradiction-le-ℕ k'
+                not-leq-le-ℕ k'
                   ( pr1 (minimal-element-iterate-2-a-b g pa))
                   ( p)
                   ( pr2 (pr2 (minimal-element-iterate-2-a-b g pa)) k' (inl q)))
               ( λ r →
-                contradiction-le-ℕ k'
+                not-leq-le-ℕ k'
                   ( pr1 (minimal-element-iterate-2-a-b g pa))
                   ( p)
                   ( pr2 (pr2 (minimal-element-iterate-2-a-b g pa)) k' (inr r))))
@@ -2192,7 +2192,7 @@ module _
         is-nonzero-ℕ k × le-ℕ k (pr1 minimal-element-iterate-repeating) →
         (iterate k (map-equiv g) a ≠ a) × (iterate k (map-equiv g) a ≠ b)
       pr1 (neq-iterate-nonzero-le-minimal-element k (pair nz ineq)) Q =
-        contradiction-le-ℕ k (pr1 minimal-element-iterate-repeating) ineq
+        not-leq-le-ℕ k (pr1 minimal-element-iterate-repeating) ineq
           (pr2 (pr2 minimal-element-iterate-repeating) k (pair nz Q))
       pr2 (neq-iterate-nonzero-le-minimal-element k (pair nz ineq)) R =
         NP (unit-trunc-Prop (pair k R))

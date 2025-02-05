@@ -344,7 +344,7 @@ pr1 (is-prime-least-nontrivial-divisor-ℕ n H x) (K , L) =
     ( is-one-ℕ x)
     ( le-ℕ 1 x)
     ( λ p →
-      contradiction-le-ℕ x l
+      not-leq-le-ℕ x l
         ( le-div-ℕ x l
           ( is-nonzero-least-nontrivial-divisor-ℕ n H)
           ( L)
@@ -746,7 +746,7 @@ is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ :
   y ∈-list l
 is-in-prime-decomposition-is-nontrivial-prime-divisor-ℕ x H nil D y d p =
   ex-falso
-    ( contradiction-le-ℕ
+    ( not-leq-le-ℕ
       ( 1)
       ( x)
       ( concatenate-le-leq-ℕ
@@ -874,7 +874,7 @@ eq-prime-decomposition-list-ℕ x H nil nil _ _ =
   refl
 eq-prime-decomposition-list-ℕ x H (cons y l) nil I J =
   ex-falso
-    ( contradiction-le-ℕ
+    ( not-leq-le-ℕ
       ( 1)
       ( x)
       ( le-one-is-nonempty-prime-decomposition-list-ℕ x H y l I)
@@ -884,7 +884,7 @@ eq-prime-decomposition-list-ℕ x H (cons y l) nil I J =
         ( inv ( is-decomposition-list-is-prime-decomposition-list-ℕ x nil J))))
 eq-prime-decomposition-list-ℕ x H nil (cons y l) I J =
   ex-falso
-    ( contradiction-le-ℕ
+    ( not-leq-le-ℕ
       ( 1)
       ( x)
       ( le-one-is-nonempty-prime-decomposition-list-ℕ x H y l J)

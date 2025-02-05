@@ -1308,7 +1308,7 @@ remainder-min-dist-succ-x-is-distance x y =
 
     quotient-min-dist-succ-x-nonzero : is-nonzero-ℕ q
     quotient-min-dist-succ-x-nonzero iszero =
-      contradiction-le-ℕ (succ-ℕ x) d le-x-d leq-d-x
+      not-leq-le-ℕ (succ-ℕ x) d le-x-d leq-d-x
       where
       x-r-equality : succ-ℕ x ＝ r
       x-r-equality =
@@ -1721,7 +1721,7 @@ remainder-min-dist-succ-x-is-not-nonzero :
         ( minimal-positive-distance (succ-ℕ x) y)
         ( succ-ℕ x)))
 remainder-min-dist-succ-x-is-not-nonzero x y nonzero =
-  contradiction-le-ℕ
+  not-leq-le-ℕ
     ( remainder-euclidean-division-ℕ
       ( minimal-positive-distance (succ-ℕ x) y)
       ( succ-ℕ x))

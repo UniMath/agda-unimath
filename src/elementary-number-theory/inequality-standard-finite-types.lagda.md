@@ -99,7 +99,7 @@ reflects-leq-nat-Fin (succ-ℕ k) {inl x} {inl y} H =
   reflects-leq-nat-Fin k H
 reflects-leq-nat-Fin (succ-ℕ k) {inr star} {inl y} H =
   ex-falso
-    ( contradiction-le-ℕ (nat-Fin k y) k (strict-upper-bound-nat-Fin k y) H)
+    ( not-leq-le-ℕ (nat-Fin k y) k (strict-upper-bound-nat-Fin k y) H)
 reflects-leq-nat-Fin (succ-ℕ k) {inl x} {inr star} H = star
 reflects-leq-nat-Fin (succ-ℕ k) {inr star} {inr star} H = star
 ```

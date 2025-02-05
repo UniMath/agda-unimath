@@ -78,7 +78,7 @@ leq-is-injective-Fin k l H =
 is-not-emb-le-Fin :
   (k l : ℕ) (f : Fin k → Fin l) → le-ℕ l k → ¬ (is-emb f)
 is-not-emb-le-Fin k l f p =
-  map-neg (leq-is-emb-Fin k l) (contradiction-le-ℕ l k p)
+  map-neg (leq-is-emb-Fin k l) (not-leq-le-ℕ l k p)
 ```
 
 #### If `l < k`, then any map `f : Fin k → Fin l` is not injective

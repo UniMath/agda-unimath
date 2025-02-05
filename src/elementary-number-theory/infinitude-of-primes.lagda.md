@@ -111,12 +111,13 @@ not-in-sieve-of-eratosthenes-is-proper-divisor-larger-prime-ℕ :
   (n x : ℕ) → is-proper-divisor-ℕ (larger-prime-ℕ n) x →
   ¬ (in-sieve-of-eratosthenes-ℕ n x)
 not-in-sieve-of-eratosthenes-is-proper-divisor-larger-prime-ℕ n x H K =
-  ex-falso
-    ( contradiction-le-ℕ x (larger-prime-ℕ n)
-      ( le-is-proper-divisor-ℕ x (larger-prime-ℕ n)
-        ( is-nonzero-larger-prime-ℕ n)
-        ( H))
-      ( is-lower-bound-larger-prime-ℕ n x K))
+  not-leq-le-ℕ
+    ( x)
+    ( larger-prime-ℕ n)
+    ( le-is-proper-divisor-ℕ x (larger-prime-ℕ n)
+      ( is-nonzero-larger-prime-ℕ n)
+      ( H))
+    ( is-lower-bound-larger-prime-ℕ n x K)
 
 is-one-is-proper-divisor-larger-prime-ℕ :
   (n : ℕ) → is-nonzero-ℕ n → is-one-is-proper-divisor-ℕ (larger-prime-ℕ n)

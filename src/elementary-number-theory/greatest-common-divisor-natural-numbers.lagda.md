@@ -242,7 +242,7 @@ is-zero-is-common-divisor-le-gcd-ℕ a b r l d with is-decidable-is-zero-ℕ r
 ... | inl H = H
 ... | inr x =
   ex-falso
-    ( contradiction-le-ℕ r (gcd-ℕ a b) l
+    ( not-leq-le-ℕ r (gcd-ℕ a b) l
       ( is-lower-bound-gcd-ℕ a b r (λ np → pair x d)))
 ```
 
