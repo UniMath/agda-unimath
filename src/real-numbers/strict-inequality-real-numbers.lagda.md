@@ -17,11 +17,14 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 ```
 
