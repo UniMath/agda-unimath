@@ -17,6 +17,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.logical-equivalences
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
@@ -145,6 +146,38 @@ preserves-le-real-ℚ x y x<y =
   intro-exists
     ( mediant-ℚ x y)
     ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
+```
+
+### The reals have no lower or upper bound
+
+```agda
+module _
+  {l : Level}
+  (x : ℝ l)
+  where
+
+  exists-lesser-ℝ : exists (ℝ lzero) (λ y → le-ℝ-Prop y x)
+  exists-lesser-ℝ =
+    elim-exists
+      ( ∃ (ℝ lzero) (λ y → le-ℝ-Prop y x))
+      ( λ q q-in-lx →
+        intro-exists
+          ( real-ℚ q)
+          ( forward-implication (is-rounded-lower-cut-ℝ x q) q-in-lx))
+      ( is-inhabited-lower-cut-ℝ x)
+
+  exists-greater-ℝ : exists (ℝ lzero) (λ y → le-ℝ-Prop x y)
+  exists-greater-ℝ =
+    elim-exists
+      ( ∃ (ℝ lzero) (λ y → le-ℝ-Prop x y))
+      ( λ q q-in-ux →
+        intro-exists
+          ( real-ℚ q)
+          ( elim-exists
+              ( le-ℝ-Prop x (real-ℚ q))
+              ( λ r (r<q , r-in-ux) → intro-exists r (r-in-ux , r<q))
+              ( forward-implication (is-rounded-upper-cut-ℝ x q) q-in-ux)))
+      ( is-inhabited-upper-cut-ℝ x)
 ```
 
 ### Negation reverses the strict ordering of real numbers

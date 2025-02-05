@@ -320,6 +320,15 @@ le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
   le-leq-neq-ℕ {x} {y} l (λ p → f (ap succ-ℕ p))
 ```
 
+### For any two natural numbers `x` and `y`, either `x < y` or `y ≤ x`
+
+```agda
+decide-le-leq-ℕ : (x y : ℕ) → le-ℕ x y + leq-ℕ y x
+decide-le-leq-ℕ x zero-ℕ = inr star
+decide-le-leq-ℕ zero-ℕ (succ-ℕ _) = inl star
+decide-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) = decide-le-leq-ℕ x y
+```
+
 ### If `1 < x` and `1 < y`, then `1 < xy`
 
 ```agda
