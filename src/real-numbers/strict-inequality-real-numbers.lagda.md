@@ -15,8 +15,10 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -210,8 +212,17 @@ module _
   (y : ℝ l2)
   where
 
-  not-le-leq-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
-  not-le-leq-ℝ x≮y p p-in-ly = {!   !}
+  leq-not-le-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
+  leq-not-le-ℝ x≮y p p∈ly =
+    elim-exists
+      ( lower-cut-ℝ x p)
+      ( λ q (p<q , q∈ly) →
+        elim-disjunction
+          ( lower-cut-ℝ x p)
+          ( id)
+          ( λ q∈ux → ex-falso (x≮y (intro-exists q (q∈ux , q∈ly))))
+          ( is-located-lower-upper-cut-ℝ x p q p<q))
+      ( forward-implication (is-rounded-lower-cut-ℝ y p) p∈ly)
 ```
 
 ## References
