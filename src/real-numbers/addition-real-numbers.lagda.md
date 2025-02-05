@@ -47,18 +47,20 @@ The lower cut (upper cut) of the sum of two real numbers is the set of sums of
 elements of their lower (upper) cuts.
 
 ```agda
-add-subtypes-ℚ : {l : Level} → subtype l ℚ → subtype l ℚ → subtype l ℚ
+add-subtypes-ℚ : {l1 l2 : Level} → subtype l1 ℚ → subtype l2 ℚ → subtype (l1 ⊔ l2) ℚ
 add-subtypes-ℚ A B q =
   ∃ (ℚ × ℚ) (λ (a , b) → A a ∧ B b ∧ (Id-Prop ℚ-Set (a +ℚ b) q))
 
 module _
-  {l : Level} (x y : ℝ l)
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
   where
 
-  lower-cut-add-ℝ : subtype l ℚ
+  lower-cut-add-ℝ : subtype (l1 ⊔ l2) ℚ
   lower-cut-add-ℝ = add-subtypes-ℚ (lower-cut-ℝ x) (lower-cut-ℝ y)
 
-  upper-cut-add-ℝ : subtype l ℚ
+  upper-cut-add-ℝ : subtype (l1 ⊔ l2) ℚ
   upper-cut-add-ℝ = add-subtypes-ℚ (upper-cut-ℝ x) (upper-cut-ℝ y)
 
   abstract
@@ -279,7 +281,7 @@ module _
             ( arithmetically-located-ℝ y s))
         ( arithmetically-located-ℝ x r)
       where
-        claim : Prop l
+        claim : Prop (l1 ⊔ l2)
         claim = ∃
           ( ℚ × ℚ)
           ( λ (p , q) →
@@ -363,7 +365,7 @@ module _
         ( le-lower-cut-add-ℝ)
         ( le-upper-cut-add-ℝ)
 
-  add-ℝ : ℝ l
+  add-ℝ : ℝ (l1 ⊔ l2)
   add-ℝ =
     real-dedekind-cut
       ( lower-cut-add-ℝ)
@@ -373,8 +375,8 @@ module _
         ( is-disjoint-cut-add-ℝ) ,
         ( located-add-ℝ))
 
-infixl 34 _+ℝ_
-_+ℝ_ : {l : Level} → ℝ l → ℝ l → ℝ l
+infixl 35 _+ℝ_
+_+ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 _+ℝ_ = add-ℝ
 ```
 

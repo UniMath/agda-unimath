@@ -37,10 +37,12 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -616,23 +618,31 @@ module _
 
 ```agda
 abstract
-  less-than-half-ℚ⁺ :
+  double-le-ℚ⁺ :
     (p : ℚ⁺) →
-    Σ ℚ⁺ (λ q → le-ℚ⁺ (q +ℚ⁺ q) p)
-  less-than-half-ℚ⁺ p =
-    q ,
-    tr
-      ( le-ℚ⁺ (q +ℚ⁺ q))
-      ( eq-add-split-ℚ⁺ p)
-      ( preserves-le-add-ℚ
-        { rational-ℚ⁺ q}
-        { rational-ℚ⁺ (left-summand-split-ℚ⁺ p)}
-        { rational-ℚ⁺ q}
-        { rational-ℚ⁺ (right-summand-split-ℚ⁺ p)}
-        ( le-left-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p))
-        ( le-right-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p)))
-    where q : ℚ⁺
-          q = strict-min-ℚ⁺ (left-summand-split-ℚ⁺ p) (right-summand-split-ℚ⁺ p)
+    exists ℚ⁺ (λ q → le-prop-ℚ⁺ (q +ℚ⁺ q) p)
+  double-le-ℚ⁺ p = unit-trunc-Prop dependent-pair-result
+    where
+    q : ℚ⁺
+    q = left-summand-split-ℚ⁺ p
+    r : ℚ⁺
+    r = right-summand-split-ℚ⁺ p
+    s : ℚ⁺
+    s = strict-min-ℚ⁺ q r
+    -- Inlining this blows up compile times for some unclear reason.
+    dependent-pair-result : Σ ℚ⁺ (λ x → le-ℚ⁺ (x +ℚ⁺ x) p)
+    dependent-pair-result =
+      s ,
+      tr
+        ( le-ℚ⁺ (s +ℚ⁺ s))
+        ( eq-add-split-ℚ⁺ p)
+        ( preserves-le-add-ℚ
+          { rational-ℚ⁺ s}
+          { rational-ℚ⁺ q}
+          { rational-ℚ⁺ s}
+          { rational-ℚ⁺ r}
+          ( le-left-min-ℚ⁺ q r)
+          ( le-right-min-ℚ⁺ q r))
 ```
 
 ### Addition with a positive rational number is an increasing map
@@ -661,7 +671,7 @@ le-right-add-rational-ℚ⁺ x d =
     ( le-left-add-rational-ℚ⁺ x d)
 ```
 
-### Subtraction by a positive rational number is a decreasing map
+### Subtraction by a positive rational number is a strictly deflationary map
 
 ```agda
 le-diff-rational-ℚ⁺ : (x : ℚ) (d : ℚ⁺) → le-ℚ (x -ℚ rational-ℚ⁺ d) x
