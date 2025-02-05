@@ -153,8 +153,8 @@ module _
   (y : ℝ l2)
   where
 
-  neg-le-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
-  neg-le-ℝ =
+  reverses-order-neg-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
+  reverses-order-neg-ℝ =
     elim-exists
       ( le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
       ( λ p (p-in-ux , p-in-ly) →
