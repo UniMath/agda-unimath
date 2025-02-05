@@ -160,32 +160,19 @@ module _
               ( is-in-upper-cut-ℝ x)
               ( equational-reasoning
                 p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
-                ＝ p +ℚ (rational-ℤ (one-ℤ +ℤ int-ℕ n) *ℚ ε)
+                ＝ p +ℚ (rational-ℤ (succ-ℤ (int-ℕ n)) *ℚ ε)
                   by ap
                       ( λ x → p +ℚ (rational-ℤ x *ℚ ε))
                       ( inv (succ-int-ℕ n))
-                ＝ p +ℚ ((one-ℚ +ℚ rational-ℤ (int-ℕ n)) *ℚ ε)
-                  by ap
-                      (λ x → p +ℚ (x *ℚ ε))
-                      (inv (add-rational-ℤ one-ℤ (int-ℕ n)))
-                ＝ p +ℚ ((one-ℚ *ℚ ε) +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
-                  by ap
-                    ( p +ℚ_)
-                    ( right-distributive-mul-add-ℚ
-                      ( one-ℚ)
-                      ( rational-ℤ (int-ℕ n))
-                      ( ε))
-                ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
-                  by ap
-                    ( λ x → p +ℚ (x +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)))
-                    ( left-unit-law-mul-ℚ ε)
+                ＝ p +ℚ (ε +ℚ rational-ℤ (int-ℕ n) *ℚ ε)
+                  by ap (p +ℚ_) (left-mul-succ-rational-ℤ (int-ℕ n) ε)
                 ＝ (p +ℚ ε) +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)
                   by inv
                     ( associative-add-ℚ
                       ( p)
                       ( ε)
                       ( rational-ℤ (int-ℕ n) *ℚ ε)))
-              p-plus-sn-ε-in-U))
+              ( p-plus-sn-ε-in-U)))
         ( λ p+2ε-in-U → intro-exists p (p-in-L , p+2ε-in-U))
         ( is-located-lower-upper-cut-ℝ
           ( x)
