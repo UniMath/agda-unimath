@@ -17,12 +17,15 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 ```
 
@@ -175,6 +178,26 @@ module _
               ( λ r (r<q , r-in-ux) → intro-exists r (r-in-ux , r<q))
               ( forward-implication (is-rounded-upper-cut-ℝ x q) q-in-ux)))
       ( is-inhabited-upper-cut-ℝ x)
+```
+
+### Negation reverses the strict ordering of real numbers
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  reverses-order-neg-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
+  reverses-order-neg-ℝ =
+    elim-exists
+      ( le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
+      ( λ p (p-in-ux , p-in-ly) →
+        intro-exists
+          ( neg-ℚ p)
+          ( tr (is-in-lower-cut-ℝ y) (inv (neg-neg-ℚ p)) p-in-ly ,
+            tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
 ```
 
 ## References
