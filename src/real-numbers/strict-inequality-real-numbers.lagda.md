@@ -59,7 +59,7 @@ module _
   irreflexive-le-ℝ =
     elim-exists
       ( empty-Prop)
-      λ q (q-in-ux , q-in-lx) → is-disjoint-cut-ℝ x q (q-in-lx , q-in-ux)
+      ( λ q (q-in-ux , q-in-lx) → is-disjoint-cut-ℝ x q (q-in-lx , q-in-ux))
 ```
 
 ### Strict inequality on the reals is asymmetric
@@ -125,3 +125,4 @@ module _
                   ( le-lower-upper-cut-ℝ y p q p-in-ly q-in-uy)
                   ( q-in-lz)))
           ( y<z))
+```
