@@ -269,6 +269,7 @@ module _
           ( le-zero-is-negative-ℤ y H)
           ( I))
 ```
+
 ### If `m < n` then `n ≰ m`
 
 ```agda
