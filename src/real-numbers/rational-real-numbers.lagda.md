@@ -92,6 +92,13 @@ real-ℚ x =
     ( is-dedekind-cut-le-ℚ x)
 ```
 
+#### Important real numbers
+
+```agda
+zero-ℝ : ℝ lzero
+zero-ℝ = real-ℚ zero-ℚ
+```
+
 ### The property of being a rational real number
 
 ```agda
