@@ -166,8 +166,8 @@ module _
   exists-greater-ℝ : exists (ℝ lzero) (λ y → le-ℝ-Prop x y)
   exists-greater-ℝ =
     elim-exists
-      (∃ (ℝ lzero) (λ y → le-ℝ-Prop x y))
-      (λ q q-in-ux →
+      ( ∃ (ℝ lzero) (λ y → le-ℝ-Prop x y))
+      ( λ q q-in-ux →
         intro-exists
           ( real-ℚ q)
           ( elim-exists
