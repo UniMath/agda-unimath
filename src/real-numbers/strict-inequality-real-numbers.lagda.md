@@ -28,6 +28,12 @@ open import real-numbers.dedekind-real-numbers
 
 ## Idea
 
+The
+{{#concept "standard strict ordering" Disambiguation="real numbers" Agda=le-ℝ}}
+on the [real numbers](real-numbers.dedekind-real-numbers.md) is defined as the
+presence of a [rational number](elementary-number-theory.rational-numbers.md)
+between them.
+
 ```agda
 module _
   {l1 l2 : Level}
