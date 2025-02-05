@@ -108,17 +108,14 @@ module _
                   ( q'<p'+ε)
                   ( tr
                     ( leq-ℚ (p' +ℚ q -ℚ p))
-                    ( is-identity-conjugation-assoc-Ab abelian-group-add-ℚ p q)
+                    ( is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)
                     ( backward-implication
                       ( iff-translate-right-leq-ℚ (q -ℚ p) p' p)
                       ( p'≤p))))
                 ( q'-in-u)))
             (decide-le-leq-ℚ p p'))
         ( arithmetically-located
-          ( q -ℚ p ,
-            ( is-positive-le-zero-ℚ
-              ( q -ℚ p)
-              ( backward-implication (iff-translate-diff-le-zero-ℚ p q) p<q))))
+            (positive-diff-le-ℚ p q p<q))
 ```
 
 ### Real numbers are arithmetically located
@@ -223,7 +220,7 @@ module _
               ( p +ℚ rational-ℤ (int-ℕ n) *ℚ ε)
               ( tr
                 ( λ r → le-ℚ r (p +ℚ rational-ℤ (int-ℕ n) *ℚ ε))
-                ( is-identity-conjugation-assoc-Ab abelian-group-add-ℚ p q)
+                ( is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)
                 ( preserves-le-right-add-ℚ
                   ( p)
                   ( q -ℚ p)
