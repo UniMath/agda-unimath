@@ -383,40 +383,81 @@ _+ℝ_ = add-ℝ
 
 ## Properties
 
+### Addition is commutative
+
+```agda
+module _
+  {l : Level}
+  (x y : ℝ l)
+  where
+
+  commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
+  commutative-add-ℝ =
+    eq-eq-lower-cut-ℝ
+      ( x +ℝ y)
+      ( y +ℝ x)
+      ( eq-has-same-elements-subtype
+        ( lower-cut-add-ℝ x y)
+        ( lower-cut-add-ℝ y x)
+        ( λ q →
+          elim-exists
+            ( lower-cut-add-ℝ y x q)
+            ( λ (lx , ly) (lx-in-lower-x , ly-in-lower-y , lx+ly=q) →
+              intro-exists
+                ( ly , lx)
+                ( ly-in-lower-y ,
+                  lx-in-lower-x ,
+                  commutative-add-ℚ ly lx ∙ lx+ly=q)) ,
+          elim-exists
+            ( lower-cut-add-ℝ x y q)
+            ( λ (ly , lx) (ly-in-lower-y , lx-in-lower-x , ly+lx=q) →
+              intro-exists
+                ( lx , ly)
+                ( lx-in-lower-x ,
+                  ly-in-lower-y ,
+                  commutative-add-ℚ lx ly ∙ ly+lx=q))))
+```
+
 ### Unit laws for addition
 
 ```agda
-left-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → (zero-ℝ +ℝ x) ＝ x
-left-unit-law-add-ℝ x =
-  eq-eq-upper-cut-ℝ
-    ( zero-ℝ +ℝ x)
-    ( x)
-    ( eq-has-same-elements-subtype
-      ( upper-cut-ℝ (zero-ℝ +ℝ x))
-      ( upper-cut-ℝ x)
-      (λ p →
-        elim-exists
-          (upper-cut-ℝ x p)
-          (λ (q , r) (0<q , r-in-Ux , q+r=p) →
-            le-upper-cut-ℝ
-              x
-              r
-              p
-              (tr
-                (le-ℚ r)
-                q+r=p
-                (le-left-add-rational-ℚ⁺ r  (q , is-positive-le-zero-ℚ q 0<q) ))
-              r-in-Ux) ,
-        λ p-in-Ux →
+abstract
+  left-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → (zero-ℝ +ℝ x) ＝ x
+  left-unit-law-add-ℝ x =
+    eq-eq-upper-cut-ℝ
+      ( zero-ℝ +ℝ x)
+      ( x)
+      ( eq-has-same-elements-subtype
+        ( upper-cut-ℝ (zero-ℝ +ℝ x))
+        ( upper-cut-ℝ x)
+        ( λ p →
           elim-exists
-            (upper-cut-add-ℝ zero-ℝ x p)
-            (λ q (q<p , q-in-Ux) →
-              intro-exists
-                ( p -ℚ q , q)
-                ( le-zero-is-positive-ℚ
-                  ( p -ℚ q)
-                  ( is-positive-diff-le-ℚ q p q<p) ,
-                  q-in-Ux ,
-                  is-section-right-subtraction-Ab abelian-group-add-ℚ q p))
-            (forward-implication (is-rounded-upper-cut-ℝ x p) p-in-Ux)))
+            (upper-cut-ℝ x p)
+            (λ (q , r) (0<q , r-in-Ux , q+r=p) →
+              le-upper-cut-ℝ
+                x
+                r
+                p
+                (tr
+                  (le-ℚ r)
+                  q+r=p
+                  (le-left-add-rational-ℚ⁺
+                    ( r)
+                    ( q , is-positive-le-zero-ℚ q 0<q)))
+                r-in-Ux) ,
+          λ p-in-Ux →
+            elim-exists
+              (upper-cut-add-ℝ zero-ℝ x p)
+              (λ q (q<p , q-in-Ux) →
+                intro-exists
+                  ( p -ℚ q , q)
+                  ( le-zero-is-positive-ℚ
+                    ( p -ℚ q)
+                    ( is-positive-diff-le-ℚ q p q<p) ,
+                    q-in-Ux ,
+                    is-section-right-subtraction-Ab abelian-group-add-ℚ q p))
+              (forward-implication (is-rounded-upper-cut-ℝ x p) p-in-Ux)))
+
+right-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → (x +ℝ zero-ℝ) ＝ x
+right-unit-law-add-ℝ x = left-unit-law-add-ℝ x ∙ commutative-add-ℝ x zero-ℝ
 ```
