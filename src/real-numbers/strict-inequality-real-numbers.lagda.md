@@ -144,7 +144,7 @@ preserves-le-real-ℚ x y x<y =
     ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
 ```
 
-### Negation reverses the order of real numbers
+### Negation reverses the strict ordering of real numbers
 
 ```agda
 module _
