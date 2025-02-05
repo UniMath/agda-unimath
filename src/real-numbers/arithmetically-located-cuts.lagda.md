@@ -137,7 +137,7 @@ module _
     arithmetic-location-in-arithmetic-sequence
       p ε zero-ℕ positive-ε p-in-L p-plus-0-ε-in-U =
       ex-falso
-        (is-disjoint-cut-ℝ
+        ( is-disjoint-cut-ℝ
           ( x)
           ( p)
           ( p-in-L ,
@@ -186,8 +186,8 @@ module _
                       ( ε)
                       ( rational-ℤ (int-ℕ n) *ℚ ε)))
               p-plus-sn-ε-in-U))
-        (λ p+2ε-in-U → intro-exists p (p-in-L , p+2ε-in-U))
-        (is-located-lower-upper-cut-ℝ
+        ( λ p+2ε-in-U → intro-exists p (p-in-L , p+2ε-in-U))
+        ( is-located-lower-upper-cut-ℝ
           ( x)
           ( p +ℚ ε)
           ( (p +ℚ ε) +ℚ ε)
