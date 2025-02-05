@@ -160,32 +160,17 @@ module _
               ( is-in-upper-cut-ℝ x)
               ( equational-reasoning
                 p +ℚ (rational-ℤ (int-ℕ (succ-ℕ n)) *ℚ ε)
-                ＝ p +ℚ (rational-ℤ (one-ℤ +ℤ int-ℕ n) *ℚ ε)
+                ＝ p +ℚ (rational-ℤ (succ-ℤ (int-ℕ n)) *ℚ ε)
                   by ap
                       ( λ x → p +ℚ (rational-ℤ x *ℚ ε))
                       ( inv (succ-int-ℕ n))
-                ＝ p +ℚ ((one-ℚ +ℚ rational-ℤ (int-ℕ n)) *ℚ ε)
-                  by ap
-                      (λ x → p +ℚ (x *ℚ ε))
-                      (inv (add-rational-ℤ one-ℤ (int-ℕ n)))
-                ＝ p +ℚ ((one-ℚ *ℚ ε) +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
-                  by ap
-                    ( p +ℚ_)
-                    ( right-distributive-mul-add-ℚ
-                      ( one-ℚ)
-                      ( rational-ℤ (int-ℕ n))
-                      ( ε))
-                ＝ p +ℚ (ε +ℚ (rational-ℤ (int-ℕ n) *ℚ ε))
-                  by ap
-                    ( λ x → p +ℚ (x +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)))
-                    ( left-unit-law-mul-ℚ ε)
+                ＝ p +ℚ (succ-ℚ (rational-ℤ (int-ℕ n)) *ℚ ε)
+                  by ap (p +ℚ_) (ap (_*ℚ ε) (inv (succ-rational-ℤ (int-ℕ n))))
+                ＝ p +ℚ (ε +ℚ rational-ℤ (int-ℕ n) *ℚ ε)
+                  by ap (p +ℚ_) (left-mul-succ-ℚ (rational-ℤ (int-ℕ n)) ε)
                 ＝ (p +ℚ ε) +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)
-                  by inv
-                    ( associative-add-ℚ
-                      ( p)
-                      ( ε)
-                      ( rational-ℤ (int-ℕ n) *ℚ ε)))
-              p-plus-sn-ε-in-U))
+                  by inv (associative-add-ℚ p ε (rational-ℤ (int-ℕ n) *ℚ ε)))
+              ( p-plus-sn-ε-in-U)))
         ( λ p+2ε-in-U → intro-exists p (p-in-L , p+2ε-in-U))
         ( is-located-lower-upper-cut-ℝ
           ( x)
@@ -231,7 +216,7 @@ module _
   abstract
     arithmetically-located-ℝ :
       is-arithmetically-located (lower-cut-ℝ x) (upper-cut-ℝ x)
-    arithmetically-located-ℝ (ε , positive-ε) =
+    arithmetically-located-ℝ ε⁺@(ε , positive-ε) =
       elim-exists
         ( claim)
         ( λ p p-in-L →
@@ -243,7 +228,7 @@ module _
                 ( λ (ε' , pos-ε') 2ε'<ε →
                   elim-exists
                     ( claim)
-                    ( λ r (r-in-L , r+2ε-in-U) →
+                    ( λ r (r-in-L , r+2ε'-in-U) →
                       intro-exists
                         ( r , r +ℚ ε' +ℚ ε')
                         ( tr
@@ -251,7 +236,7 @@ module _
                             (inv (associative-add-ℚ r ε' ε'))
                             (preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
                           r-in-L ,
-                          r+2ε-in-U))
+                          r+2ε'-in-U))
                     ( bounded-arithmetic-location-twice-ε
                       ( p)
                       ( q)
@@ -259,7 +244,7 @@ module _
                       ( pos-ε')
                       ( p-in-L)
                       ( q-in-U)))
-                ( double-le-ℚ⁺ (ε , positive-ε)))
+                ( double-le-ℚ⁺ ε⁺))
             ( is-inhabited-upper-cut-ℝ x))
         ( is-inhabited-lower-cut-ℝ x)
       where
