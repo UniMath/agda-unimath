@@ -348,6 +348,24 @@ abstract
           ( sim-reduced-fraction-ℤ y)))
 ```
 
+### `succ-ℤ x * p = p + (x * p)`
+
+```agda
+left-mul-succ-rational-ℤ :
+  (x : ℤ) →
+  (p : ℚ) →
+  rational-ℤ (succ-ℤ x) *ℚ p ＝ p +ℚ (rational-ℤ x *ℚ p)
+left-mul-succ-rational-ℤ x p =
+  equational-reasoning
+    rational-ℤ (succ-ℤ x) *ℚ p
+    ＝ (one-ℚ +ℚ rational-ℤ x) *ℚ p
+      by ap (_*ℚ p) (inv (add-rational-ℤ one-ℤ x))
+    ＝ (one-ℚ *ℚ p) +ℚ (rational-ℤ x *ℚ p)
+      by right-distributive-mul-add-ℚ one-ℚ (rational-ℤ x) p
+    ＝ p +ℚ (rational-ℤ x *ℚ p)
+      by ap-add-ℚ (left-unit-law-mul-ℚ p) refl
+```
+
 ## See also
 
 - The multiplicative monoid structure on the rational numbers is defined in
