@@ -25,6 +25,7 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 ```
@@ -198,6 +199,19 @@ module _
           ( neg-ℚ p)
           ( tr (is-in-lower-cut-ℝ y) (inv (neg-neg-ℚ p)) p-in-ly ,
             tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
+```
+
+### The absence of strict inequality implies inequality
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  not-le-leq-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
+  not-le-leq-ℝ x≮y p p-in-ly = {!   !}
 ```
 
 ## References
