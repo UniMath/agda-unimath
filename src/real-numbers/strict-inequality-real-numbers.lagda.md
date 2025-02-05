@@ -33,7 +33,7 @@ The
 {{#concept "standard strict ordering" Disambiguation="real numbers" Agda=le-ℝ}}
 on the [real numbers](real-numbers.dedekind-real-numbers.md) is defined as the
 presence of a [rational number](elementary-number-theory.rational-numbers.md)
-between them.
+between them.  This is the definition used in {{#cite UF13}}, section 11.2.1.
 
 ```agda
 module _
@@ -143,3 +143,7 @@ preserves-le-real-ℚ x y x<y =
     ( mediant-ℚ x y)
     ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
 ```
+
+## References
+
+{­{#bibliography}}
