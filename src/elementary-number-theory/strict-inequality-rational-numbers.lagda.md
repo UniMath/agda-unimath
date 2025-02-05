@@ -378,15 +378,10 @@ decide-le-leq-ℚ x y =
     ( decide-is-positive-is-nonpositive-ℤ)
 
 not-leq-le-ℚ : (x y : ℚ) → le-ℚ x y → ¬ leq-ℚ y x
-not-leq-le-ℚ x y H K =
-  is-not-positive-is-nonpositive-ℤ
-    ( tr
-      ( is-nonpositive-ℤ)
-      ( skew-commutative-cross-mul-diff-fraction-ℤ
-        ( fraction-ℚ y)
-        ( fraction-ℚ x))
-      ( is-nonpositive-neg-is-nonnegative-ℤ K))
-    ( H)
+not-leq-le-ℚ x y = not-leq-le-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
+
+not-le-leq-ℚ : (x y : ℚ) → leq-ℚ x y → ¬ le-ℚ y x
+not-le-leq-ℚ x y = not-le-leq-fraction-ℤ (fraction-ℚ x) (fraction-ℚ y)
 ```
 
 ### Trichotomy on the rationals
