@@ -270,6 +270,20 @@ module _
           ( I))
 ```
 
+### For any two integers `x` and `y`, either `x < y` or `y ≤ x`
+
+```agda
+decide-le-leq-ℤ : (x y : ℤ) → le-ℤ x y + leq-ℤ y x
+decide-le-leq-ℤ x y with decide-is-negative-is-nonnegative-ℤ {x -ℤ y}
+... | inr x-y-nonneg = inr x-y-nonneg
+... | inl x-y-neg =
+  inl
+    ( tr
+      ( is-positive-ℤ)
+      ( distributive-neg-diff-ℤ x y)
+      ( is-positive-neg-is-negative-ℤ x-y-neg))
+```
+
 ### If `m < n` then `n ≰ m`
 
 ```agda

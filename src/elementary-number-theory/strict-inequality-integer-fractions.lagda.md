@@ -91,13 +91,9 @@ le-fraction-ℤ-Decidable-Prop x y =
 decide-le-leq-fraction-ℤ :
   (x y : fraction-ℤ) → le-fraction-ℤ x y + leq-fraction-ℤ y x
 decide-le-leq-fraction-ℤ x y =
-  map-coproduct
-    ( id)
-    ( λ H →
-      is-nonnegative-eq-ℤ
-        ( skew-commutative-cross-mul-diff-fraction-ℤ x y)
-        ( is-nonnegative-neg-is-nonpositive-ℤ H))
-    ( decide-is-positive-is-nonpositive-ℤ)
+  decide-le-leq-ℤ
+    ( numerator-fraction-ℤ x *ℤ denominator-fraction-ℤ y)
+    ( numerator-fraction-ℤ y *ℤ denominator-fraction-ℤ x)
 ```
 
 ### Strict inequality on the integer fractions implies inequality
