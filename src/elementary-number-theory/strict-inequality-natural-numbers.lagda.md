@@ -231,16 +231,16 @@ concatenate-le-leq-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
 ### If `m < n` then `n ≰ m`
 
 ```agda
-contradiction-le-ℕ : (m n : ℕ) → le-ℕ m n → ¬ (n ≤-ℕ m)
-contradiction-le-ℕ zero-ℕ (succ-ℕ n) H K = K
-contradiction-le-ℕ (succ-ℕ m) (succ-ℕ n) H = contradiction-le-ℕ m n H
+not-leq-le-ℕ : (m n : ℕ) → le-ℕ m n → ¬ (n ≤-ℕ m)
+not-leq-le-ℕ zero-ℕ (succ-ℕ n) H K = K
+not-leq-le-ℕ (succ-ℕ m) (succ-ℕ n) H = not-leq-le-ℕ m n H
 ```
 
 ### If `n ≤ m` then `m ≮ n`
 
 ```agda
-contradiction-le-ℕ' : (m n : ℕ) → n ≤-ℕ m → ¬ (le-ℕ m n)
-contradiction-le-ℕ' m n K H = contradiction-le-ℕ m n H K
+not-le-leq-ℕ : (m n : ℕ) → n ≤-ℕ m → ¬ (le-ℕ m n)
+not-le-leq-ℕ m n K H = not-leq-le-ℕ m n H K
 ```
 
 ### If `m ≮ n` then `n ≤ m`

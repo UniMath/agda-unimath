@@ -269,6 +269,25 @@ module _
           ( le-zero-is-negative-ℤ y H)
           ( I))
 ```
+### If `m < n` then `n ≰ m`
+
+```agda
+not-leq-le-ℤ : (m n : ℤ) → le-ℤ m n → ¬ (n ≤-ℤ m)
+not-leq-le-ℤ m n n-m-is-positive m-n-is-nonnegative =
+  is-not-positive-is-nonpositive-ℤ
+    ( tr
+      ( is-nonpositive-ℤ)
+      ( distributive-neg-diff-ℤ m n)
+      ( is-nonpositive-neg-is-nonnegative-ℤ m-n-is-nonnegative))
+    ( n-m-is-positive)
+```
+
+### If `n ≤ m` then `m ≮ n`
+
+```agda
+not-le-leq-ℤ : (m n : ℤ) → n ≤-ℤ m → ¬ (le-ℤ m n)
+not-le-leq-ℤ m n K H = not-leq-le-ℤ m n H K
+```
 
 ### The inclusion of natural numbers preserves strict inequality
 

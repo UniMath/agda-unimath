@@ -254,7 +254,7 @@ is-zero-div-ℕ :
 is-zero-div-ℕ d zero-ℕ H D = refl
 is-zero-div-ℕ d (succ-ℕ x) H (pair (succ-ℕ k) p) =
   ex-falso
-    ( contradiction-le-ℕ
+    ( not-leq-le-ℕ
       ( succ-ℕ x) d H
       ( concatenate-leq-eq-ℕ d
         ( leq-add-ℕ' d (k *ℕ d)) p))
