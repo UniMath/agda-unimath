@@ -11,7 +11,9 @@ open import elementary-number-theory.inequality-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.complements-subtypes
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -54,9 +56,41 @@ module _
   leq-ℝ' : UU (l1 ⊔ l2)
   leq-ℝ' = type-Prop leq-ℝ-Prop'
 
-  leq-equivalence-ℝ' : leq-ℝ ↔ leq-ℝ'
-  pr1 (leq-equivalence-ℝ') lx⊆ly q q-in-uy =
-    subset-upper-cut-upper-complement-lower-cut-ℝ x q {!   !}
+  leq-iff-ℝ' : leq-ℝ ↔ leq-ℝ'
+  pr1 (leq-iff-ℝ') lx⊆ly q q-in-uy =
+    elim-exists
+      (upper-cut-ℝ x q)
+      (λ p (p<q , p∉ly) →
+        subset-upper-cut-upper-complement-lower-cut-ℝ
+          ( x)
+          ( q)
+          ( intro-exists
+            ( p)
+            ( p<q ,
+              complement-leq-subtype
+                ( lower-cut-ℝ x)
+                ( lower-cut-ℝ y)
+                ( lx⊆ly)
+                ( p)
+                ( p∉ly))))
+      (subset-upper-complement-lower-cut-upper-cut-ℝ y q q-in-uy)
+  pr2 (leq-iff-ℝ') uy⊆ux p p-in-lx =
+    elim-exists
+      ( lower-cut-ℝ y p)
+      ( λ q (p<q , q∉ux) →
+        subset-lower-cut-lower-complement-upper-cut-ℝ
+          ( y)
+          ( p)
+          ( intro-exists
+            ( q)
+            ( p<q ,
+              complement-leq-subtype
+                ( upper-cut-ℝ y)
+                ( upper-cut-ℝ x)
+                ( uy⊆ux)
+                ( q)
+                ( q∉ux))))
+      ( subset-lower-complement-upper-cut-lower-cut-ℝ x p p-in-lx)
 ```
 
 ### Inequality on the real numbers is reflexive
