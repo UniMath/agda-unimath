@@ -72,7 +72,7 @@ module _
           ( intro-exists
             ( p)
             ( p<q ,
-              complement-leq-subtype
+              reverses-order-complement-subtype
                 ( lower-cut-ℝ x)
                 ( lower-cut-ℝ y)
                 ( lx⊆ly)
@@ -89,7 +89,7 @@ module _
           ( intro-exists
             ( q)
             ( p<q ,
-              complement-leq-subtype
+              reverses-order-complement-subtype
                 ( upper-cut-ℝ y)
                 ( upper-cut-ℝ x)
                 ( uy⊆ux)
