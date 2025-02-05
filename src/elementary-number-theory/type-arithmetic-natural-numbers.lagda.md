@@ -167,6 +167,59 @@ equiv-iterated-coproduct-ℕ (succ-ℕ n) =
 
 ### The product `ℕ × ℕ` is equivalent to `ℕ`
 
+A pairing function is a bijection between `ℕ × ℕ` and `ℕ`.
+
+## Definition
+
+```text
+pairing-map : ℕ × ℕ → ℕ
+pairing-map (u , v) =
+  pr1 (is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v))
+```
+
+### Pairing function is split surjective
+
+```text
+is-split-surjective-pairing-map : is-split-surjective pairing-map
+is-split-surjective-pairing-map n =
+  (u , v) , is-injective-succ-ℕ (q ∙ s)
+  where
+  u = pr1 (pr1 (has-pair-expansion n))
+  v = pr2 (pr1 (has-pair-expansion n))
+  s = pr2 (has-pair-expansion n)
+  r = is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v)
+  q :
+    ( succ-ℕ (pairing-map (u , v))) ＝
+    ( (exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2)))
+  q = inv (pr2 r)
+```
+
+### Pairing function is injective
+
+```text
+is-injective-pairing-map : is-injective pairing-map
+is-injective-pairing-map {u , v} {u' , v'} p =
+  ( eq-pair' (is-pair-expansion-unique u u' v v' q))
+  where
+  r = is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v)
+  s = is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u' v')
+  q :
+    ( (exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2))) ＝
+    ( (exp-ℕ 2 u') *ℕ (succ-ℕ (v' *ℕ 2)))
+  q = (pr2 r) ∙ (ap succ-ℕ p ∙ inv (pr2 s))
+```
+
+### Pairing function is equivalence
+
+```text
+is-equiv-pairing-map : is-equiv pairing-map
+is-equiv-pairing-map =
+  is-equiv-is-split-surjective-is-injective
+    pairing-map
+    is-injective-pairing-map
+    is-split-surjective-pairing-map
+```
+
 ```agda
 ℕ×ℕ≃ℕ : (ℕ × ℕ) ≃ ℕ
 ℕ×ℕ≃ℕ = pair pairing-map is-equiv-pairing-map

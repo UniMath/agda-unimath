@@ -32,6 +32,7 @@ open import foundation.empty-types
 open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.negation
 open import foundation.transport-along-identifications
 open import foundation.unit-type
@@ -137,13 +138,31 @@ odd-number-succ-ℕ n =
   ap succ-ℕ (even-number-succ-ℕ n)
 ```
 
-### The `n`th even number is even
+### The $n$th even number is even
 
 ```agda
 is-even-even-number-ℕ :
   (n : ℕ) → is-even-ℕ (even-number-ℕ n)
 pr1 (is-even-even-number-ℕ n) = n
 pr2 (is-even-even-number-ℕ n) = commutative-mul-ℕ n 2
+```
+
+### The even number function is injective
+
+```agda
+is-injective-even-number-ℕ :
+  is-injective even-number-ℕ
+is-injective-even-number-ℕ =
+  is-injective-left-mul-ℕ 2 (is-nonzero-succ-ℕ 1)
+```
+
+### The odd number function is injective
+
+```agda
+is-injective-odd-number-ℕ :
+  is-injective odd-number-ℕ
+is-injective-odd-number-ℕ =
+  is-injective-comp is-injective-even-number-ℕ is-injective-succ-ℕ
 ```
 
 ### Even natural numbers are closed under equality
@@ -292,6 +311,9 @@ has-odd-expansion-is-odd-ℕ (succ-ℕ (succ-ℕ n)) p =
   where
   s : has-odd-expansion-ℕ n
   s = has-odd-expansion-is-odd-ℕ n (is-odd-is-odd-succ-succ-ℕ n p)
+
+is-odd-odd-number-ℕ : (n : ℕ) → is-odd-ℕ (odd-number-ℕ n)
+is-odd-odd-number-ℕ n = is-odd-has-odd-expansion-ℕ (odd-number-ℕ n) (n , refl)
 ```
 
 ### A number is even if and only if it is divisible by an even number

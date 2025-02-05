@@ -16,6 +16,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.upper-bounds-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -43,27 +44,65 @@ of the form $m^k$ that
 is-power-divisor-ℕ : ℕ → ℕ → ℕ → UU lzero
 is-power-divisor-ℕ m n x = is-exponential-ℕ m x × div-ℕ x n
 
-valuation-is-power-divisor-ℕ : (m n x : ℕ) → is-power-divisor-ℕ m n x → ℕ
-valuation-is-power-divisor-ℕ m n x H = pr1 (pr1 H)
+valuation-is-power-divisor-ℕ :
+  (m n x : ℕ) → is-power-divisor-ℕ m n x → ℕ
+valuation-is-power-divisor-ℕ m n x H =
+  pr1 (pr1 H)
+
+compute-exp-valuation-is-power-divisor-ℕ :
+  (m n x : ℕ) (H : is-power-divisor-ℕ m n x) →
+  m ^ℕ valuation-is-power-divisor-ℕ m n x H ＝ x
+compute-exp-valuation-is-power-divisor-ℕ m n x H =
+  pr2 (pr1 H)
 ```
 
 ### The predicate of being the largest power divisor of a natural number
 
 ```agda
-is-largest-power-divisor-ℕ : ℕ → ℕ → ℕ → UU lzero
-is-largest-power-divisor-ℕ m n x =
-  Σ ( is-power-divisor-ℕ m n x)
-    ( λ H →
-      (y : ℕ) (K : is-power-divisor-ℕ m n y) →
-      valuation-is-power-divisor-ℕ m n y K ≤-ℕ
-      valuation-is-power-divisor-ℕ m n x H)
+module _
+  (m n x : ℕ)
+  where
+  
+  is-largest-power-divisor-ℕ : UU lzero
+  is-largest-power-divisor-ℕ =
+    Σ ( is-power-divisor-ℕ m n x)
+      ( λ H →
+        (y : ℕ) (K : is-power-divisor-ℕ m n y) →
+        valuation-is-power-divisor-ℕ m n y K ≤-ℕ
+        valuation-is-power-divisor-ℕ m n x H)
+
+  is-power-divisor-is-largest-power-divisor-ℕ :
+    is-largest-power-divisor-ℕ → is-power-divisor-ℕ m n x
+  is-power-divisor-is-largest-power-divisor-ℕ =
+    pr1
+
+  valuation-is-largest-power-divisor-ℕ :
+    is-largest-power-divisor-ℕ → ℕ
+  valuation-is-largest-power-divisor-ℕ H =
+    valuation-is-power-divisor-ℕ m n x
+      ( is-power-divisor-is-largest-power-divisor-ℕ H)
+
+  compute-exp-valuation-is-largest-power-divisor-ℕ :
+    (H : is-largest-power-divisor-ℕ) →
+    m ^ℕ valuation-is-largest-power-divisor-ℕ H ＝ x
+  compute-exp-valuation-is-largest-power-divisor-ℕ H =
+    compute-exp-valuation-is-power-divisor-ℕ m n x
+      ( is-power-divisor-is-largest-power-divisor-ℕ H)
+
+  is-upper-bound-valuation-is-largest-power-divisor-ℕ :
+    (H : is-largest-power-divisor-ℕ) →
+    (y : ℕ) (K : is-power-divisor-ℕ m n y) →
+    valuation-is-power-divisor-ℕ m n y K ≤-ℕ
+    valuation-is-largest-power-divisor-ℕ H
+  is-upper-bound-valuation-is-largest-power-divisor-ℕ =
+    pr2
 ```
 
-### The largest power divisor of a natural number
+### The largest power divisor of a nonzero natural number
 
 ```agda
 module _
-  (m n : ℕ) (H : 1 <-ℕ m) (K : 1 ≤-ℕ n)
+  (m n : ℕ) (H : 1 <-ℕ m) (K : is-nonzero-ℕ n)
   where
 
   largest-power-divisor-ℕ :
@@ -77,7 +116,7 @@ module _
       ( is-finite-map-exp-ℕ m H)
       ( n)
       ( 0)
-      ( K)
+      ( leq-one-is-nonzero-ℕ n K)
       ( div-one-ℕ n)
 
   valuation-largest-power-divisor-ℕ :
@@ -124,7 +163,7 @@ module _
       ( is-structured-value-bound-input-ℕ (is-divisor-ℕ n) (m ^ℕ_) n)
       ( largest-power-divisor-ℕ)
       ( k)
-      ( leq-div-ℕ (m ^ℕ k) n (is-nonzero-leq-one-ℕ n K) L , L)
+      ( leq-div-ℕ (m ^ℕ k) n K L , L)
 
   is-largest-power-divisor-largest-power-divisor-ℕ :
     is-largest-power-divisor-ℕ m n nat-largest-power-divisor-ℕ
@@ -132,6 +171,36 @@ module _
     is-power-divisor-largest-power-divisor-ℕ
   pr2 is-largest-power-divisor-largest-power-divisor-ℕ y ((k , refl) , K) =
     is-upper-bound-valuation-largest-power-divisor-ℕ k K
+```
+
+### Any two largest power divisors are equal
+
+```agda
+module _
+  (m n x y : ℕ) (H : 1 <-ℕ m)
+  where
+
+  eq-valuation-is-largest-power-divisor-ℕ :
+    (H : is-largest-power-divisor-ℕ m n x)
+    (K : is-largest-power-divisor-ℕ m n y) →
+    valuation-is-largest-power-divisor-ℕ m n x H ＝
+    valuation-is-largest-power-divisor-ℕ m n y K
+  eq-valuation-is-largest-power-divisor-ℕ H K =
+    antisymmetric-leq-ℕ
+      ( valuation-is-largest-power-divisor-ℕ m n x H)
+      ( valuation-is-largest-power-divisor-ℕ m n y K)
+      ( is-upper-bound-valuation-is-largest-power-divisor-ℕ m n y K x
+        ( is-power-divisor-is-largest-power-divisor-ℕ m n x H))
+      ( is-upper-bound-valuation-is-largest-power-divisor-ℕ m n x H y
+        ( is-power-divisor-is-largest-power-divisor-ℕ m n y K))
+
+  eq-is-largest-power-divisor-ℕ :
+    is-largest-power-divisor-ℕ m n x → is-largest-power-divisor-ℕ m n y →
+    x ＝ y
+  eq-is-largest-power-divisor-ℕ H K =
+    inv (compute-exp-valuation-is-largest-power-divisor-ℕ m n x H) ∙
+    ap (m ^ℕ_) (eq-valuation-is-largest-power-divisor-ℕ H K) ∙
+    compute-exp-valuation-is-largest-power-divisor-ℕ m n y K
 ```
 
 ## See also
