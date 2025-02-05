@@ -17,7 +17,6 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.existential-quantification
-open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
 open import foundation.universe-levels
@@ -118,8 +117,8 @@ module _
   transitive-le-ℝ : le-ℝ y z → le-ℝ x y → le-ℝ x z
   transitive-le-ℝ y<z =
     elim-exists
-      (le-ℝ-Prop x z)
-      (λ p (p-in-ux , p-in-ly) →
+      ( le-ℝ-Prop x z)
+      ( λ p (p-in-ux , p-in-ly) →
         elim-exists
           (le-ℝ-Prop x z)
           (λ q (q-in-uy , q-in-lz) →
