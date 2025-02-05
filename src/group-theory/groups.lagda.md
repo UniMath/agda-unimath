@@ -504,14 +504,8 @@ module _
     y ＝ inv-Group G x
   unique-right-inv-Group x y xy=1 = equational-reasoning
     y
-    ＝ mul-Group G (unit-Group G) y
-      by inv (left-unit-law-mul-Group G y)
-    ＝ mul-Group G (mul-Group G (inv-Group G x) x) y
-      by ap (mul-Group' G y) (inv (left-inverse-law-mul-Group G x))
-    ＝ mul-Group G (inv-Group G x) (mul-Group G x y)
-      by associative-mul-Group G (inv-Group G x) x y
-    ＝ mul-Group G (inv-Group G x) (unit-Group G)
-      by ap (mul-Group G (inv-Group G x)) xy=1
+    ＝ left-div-Group x (unit-Group G)
+      by transpose-eq-mul-Group' xy=1
     ＝ inv-Group G x
       by right-unit-law-mul-Group G (inv-Group G x)
 ```
@@ -525,14 +519,8 @@ module _
     x ＝ inv-Group G y
   unique-left-inv-Group x y xy=1 = equational-reasoning
     x
-    ＝ mul-Group G x (unit-Group G)
-      by inv (right-unit-law-mul-Group G x)
-    ＝ mul-Group G x (mul-Group G y (inv-Group G y))
-      by ap (mul-Group G x) (inv (right-inverse-law-mul-Group G y))
-    ＝ mul-Group G (mul-Group G x y) (inv-Group G y)
-      by inv (associative-mul-Group G x y (inv-Group G y))
-    ＝ mul-Group G (unit-Group G) (inv-Group G y)
-      by ap (mul-Group' G (inv-Group G y)) xy=1
+    ＝ right-div-Group (unit-Group G) y
+      by transpose-eq-mul-Group xy=1
     ＝ inv-Group G y
       by left-unit-law-mul-Group G (inv-Group G y)
 ```
