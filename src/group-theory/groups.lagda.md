@@ -518,10 +518,13 @@ module _
     (x y : type-Group G) →
     is-unit-Group G (mul-Group G x y) →
     x ＝ inv-Group G y
-  unique-left-inv-Group x y xy=1 = equational-reasoning
-    x
-    ＝ right-div-Group (unit-Group G) y by transpose-eq-mul-Group xy=1
-    ＝ inv-Group G y by left-unit-law-mul-Group G (inv-Group G y)
+  unique-left-inv-Group x y xy=1 =
+    equational-reasoning
+      x
+      ＝ right-div-Group (unit-Group G) y
+        by transpose-eq-mul-Group xy=1
+      ＝ inv-Group G y
+        by left-unit-law-mul-Group G (inv-Group G y)
 ```
 
 ### The inverse of `x⁻¹y` is `y⁻¹x`
