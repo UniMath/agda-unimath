@@ -196,6 +196,7 @@ module _
           ( (p +ℚ ε) +ℚ ε)
           ( le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε)))
 
+  abstract
     bounded-arithmetic-location-twice-ε :
       (p q ε : ℚ) →
       is-positive-ℚ ε →
@@ -230,6 +231,7 @@ module _
               ( q-in-U)))
         ( archimedean-property-ℚ ε (q -ℚ p) pos-ε)
 
+  abstract
     arithmetically-located-ℝ :
       is-arithmetically-located (lower-cut-ℝ x) (upper-cut-ℝ x)
     arithmetically-located-ℝ (ε , positive-ε) =
