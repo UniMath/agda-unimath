@@ -460,5 +460,5 @@ abstract
               (forward-implication (is-rounded-upper-cut-ℝ x p) p-in-Ux)))
 
   right-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → (x +ℝ zero-ℝ) ＝ x
-  right-unit-law-add-ℝ x = left-unit-law-add-ℝ x ∙ commutative-add-ℝ x zero-ℝ
+  right-unit-law-add-ℝ x = commutative-add-ℝ x zero-ℝ ∙ left-unit-law-add-ℝ x
 ```
