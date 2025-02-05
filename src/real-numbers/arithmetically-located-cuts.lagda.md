@@ -196,62 +196,73 @@ module _
           ( (p +ℚ ε) +ℚ ε)
           ( le-right-add-rational-ℚ⁺ (p +ℚ ε) (ε , positive-ε)))
 
+    bounded-arithmetic-location-twice-ε :
+      (p q ε : ℚ) →
+      is-positive-ℚ ε →
+      is-in-lower-cut-ℝ x p →
+      is-in-upper-cut-ℝ x q →
+      exists
+        ℚ
+        ( λ r →
+          lower-cut-ℝ x r ∧
+          upper-cut-ℝ x (r +ℚ ε +ℚ ε))
+    bounded-arithmetic-location-twice-ε p q ε pos-ε p-in-L q-in-U =
+      elim-exists
+        ( ∃ ℚ ( λ r → lower-cut-ℝ x r ∧ upper-cut-ℝ x (r +ℚ ε +ℚ ε)))
+        ( λ n q-p<nε →
+          arithmetic-location-in-arithmetic-sequence
+            ( p)
+            ( ε)
+            ( n)
+            ( pos-ε)
+            ( p-in-L)
+            ( le-upper-cut-ℝ
+              ( x)
+              ( q)
+              ( p +ℚ rational-ℤ (int-ℕ n) *ℚ ε)
+              ( tr
+                ( λ r → le-ℚ r (p +ℚ rational-ℤ (int-ℕ n) *ℚ ε))
+                ( is-identity-conjugation-assoc-Ab abelian-group-add-ℚ p q)
+                ( preserves-le-right-add-ℚ
+                  ( p)
+                  ( q -ℚ p)
+                  ( rational-ℤ (int-ℕ n) *ℚ ε) q-p<nε))
+              ( q-in-U)))
+        ( archimedean-property-ℚ ε (q -ℚ p) pos-ε)
+
   abstract
     arithmetically-located-ℝ :
       is-arithmetically-located (lower-cut-ℝ x) (upper-cut-ℝ x)
     arithmetically-located-ℝ (ε , positive-ε) =
       elim-exists
         ( claim)
-        ( λ p0 p0-in-L →
+        ( λ p p-in-L →
           elim-exists
             ( claim)
-            ( λ q0 q0-in-U →
-              ind-Σ
+            ( λ q q-in-U →
+              elim-exists
+                ( claim)
                 ( λ (ε' , pos-ε') 2ε'<ε →
                   elim-exists
                     ( claim)
-                    ( λ n q0-p0<nε' →
-                      elim-exists
-                        ( claim)
-                        ( λ p (p-in-L , p+ε'+ε'-in-U) →
-                          intro-exists
-                            ( p , (p +ℚ ε') +ℚ ε')
-                            ( tr
-                                (λ x → le-ℚ x (p +ℚ ε))
-                                (inv (associative-add-ℚ p ε' ε'))
-                                (preserves-le-right-add-ℚ
-                                  ( p)
-                                  ( ε' +ℚ ε')
-                                  ( ε)
-                                  ( 2ε'<ε)) ,
-                              p-in-L ,
-                              p+ε'+ε'-in-U))
-                        (arithmetic-location-in-arithmetic-sequence
-                          ( p0)
-                          ( ε')
-                          ( n)
-                          ( pos-ε')
-                          ( p0-in-L)
-                          ( le-upper-cut-ℝ
-                            ( x)
-                            ( q0)
-                            ( p0 +ℚ rational-ℤ (int-ℕ n) *ℚ ε')
-                            ( tr
-                              ( λ r → le-ℚ r (p0 +ℚ rational-ℤ (int-ℕ n) *ℚ ε'))
-                              ( is-identity-conjugation-assoc-Ab
-                                  ( abelian-group-add-ℚ)
-                                  ( p0)
-                                  ( q0))
-                              ( backward-implication
-                                ( iff-translate-left-le-ℚ
-                                  p0
-                                  (q0 -ℚ p0)
-                                  (rational-ℤ (int-ℕ n) *ℚ ε'))
-                                ( q0-p0<nε')))
-                            ( q0-in-U))))
-                    ( archimedean-property-ℚ ε' (q0 -ℚ p0) pos-ε'))
+                    ( λ r (r-in-L , r+2ε-in-U) →
+                      intro-exists
+                        ( r , r +ℚ ε' +ℚ ε')
+                        ( tr
+                            ( λ s → le-ℚ s (r +ℚ ε))
+                            (inv (associative-add-ℚ r ε' ε'))
+                            (preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
+                          r-in-L ,
+                          r+2ε-in-U))
+                    ( bounded-arithmetic-location-twice-ε
+                      ( p)
+                      ( q)
+                      ( ε')
+                      ( pos-ε')
+                      ( p-in-L)
+                      ( q-in-U)))
                 ( double-le-ℚ⁺ (ε , positive-ε)))
-              ( is-inhabited-upper-cut-ℝ x))
+            ( is-inhabited-upper-cut-ℝ x))
         ( is-inhabited-lower-cut-ℝ x)
       where
         claim : Prop l
