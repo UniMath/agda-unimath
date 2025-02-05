@@ -348,18 +348,18 @@ le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
 
 ```agda
 eq-or-le-leq-ℕ :
-  (x y : ℕ) → x ≤-ℕ y → ((x ＝ y) + (x <-ℕ y))
+  (x y : ℕ) → x ≤-ℕ y → ((x ＝ y) + x <-ℕ y)
 eq-or-le-leq-ℕ zero-ℕ zero-ℕ H = inl refl
 eq-or-le-leq-ℕ zero-ℕ (succ-ℕ y) H = inr star
 eq-or-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) H =
   map-coproduct (ap succ-ℕ) id (eq-or-le-leq-ℕ x y H)
 
 eq-or-le-leq-ℕ' :
-  (x y : ℕ) → x ≤-ℕ y → ((y ＝ x) + (x <-ℕ y))
+  (x y : ℕ) → x ≤-ℕ y → ((y ＝ x) + x <-ℕ y)
 eq-or-le-leq-ℕ' x y H = map-coproduct inv id (eq-or-le-leq-ℕ x y H)
 
 leq-eq-or-le-ℕ :
-  (x y : ℕ) → ((x ＝ y) + (x <-ℕ y)) → x ≤-ℕ y
+  (x y : ℕ) → ((x ＝ y) + x <-ℕ y) → x ≤-ℕ y
 leq-eq-or-le-ℕ x .x (inl refl) = refl-leq-ℕ x
 leq-eq-or-le-ℕ x y (inr l) = leq-le-ℕ x y l
 ```
@@ -372,6 +372,15 @@ le-leq-neq-ℕ {zero-ℕ} {zero-ℕ} l f = ex-falso (f refl)
 le-leq-neq-ℕ {zero-ℕ} {succ-ℕ y} l f = star
 le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =
   le-leq-neq-ℕ {x} {y} l (λ p → f (ap succ-ℕ p))
+```
+
+### For any two natural numbers `x` and `y`, either `x < y` or `y ≤ x`
+
+```agda
+decide-le-leq-ℕ : (x y : ℕ) → x <-ℕ y + y ≤-ℕ x
+decide-le-leq-ℕ x zero-ℕ = inr star
+decide-le-leq-ℕ zero-ℕ (succ-ℕ _) = inl star
+decide-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) = decide-le-leq-ℕ x y
 ```
 
 ### `x < x + y` for any nonzero natural number `y`

@@ -22,15 +22,18 @@ open import elementary-number-theory.strong-induction-natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.split-surjective-maps
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -362,4 +365,33 @@ is-contr-2-adic-decomposition-ℕ n H =
   is-proof-irrelevant-is-prop
     ( is-prop-2-adic-decomposition-ℕ n)
     ( 2-adic-decomposition-is-nonzero-ℕ n H)
+```
+
+### The 2-adic composition function is a propositional map
+
+```agda
+is-prop-map-2-adic-composition-ℕ :
+  is-prop-map (λ x → 2-adic-composition-ℕ (pr1 x) (pr2 x))
+is-prop-map-2-adic-composition-ℕ n =
+  is-prop-equiv
+    ( associative-Σ ℕ _ _)
+    ( is-prop-2-adic-decomposition-ℕ n)
+```
+
+### The 2-adic composition function is an embedding
+
+```agda
+is-emb-2-adic-composition-ℕ :
+  is-emb (λ x → 2-adic-composition-ℕ (pr1 x) (pr2 x))
+is-emb-2-adic-composition-ℕ =
+  is-emb-is-prop-map is-prop-map-2-adic-composition-ℕ
+```
+
+### The 2-adic composition function is injective
+
+```agda
+is-injective-2-adic-composition-ℕ :
+  is-injective (λ x → 2-adic-composition-ℕ (pr1 x) (pr2 x))
+is-injective-2-adic-composition-ℕ =
+  is-injective-is-emb is-emb-2-adic-composition-ℕ
 ```

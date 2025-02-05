@@ -16,6 +16,7 @@ open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.2-adic-decomposition
 
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-maps
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
@@ -167,14 +168,28 @@ equiv-iterated-coproduct-ℕ (succ-ℕ n) =
 
 ### The product `ℕ × ℕ` is equivalent to `ℕ`
 
-A pairing function is a bijection between `ℕ × ℕ` and `ℕ`.
-
-## Definition
+The [2-adic composition map](elementary-number-theory.2-adic-decomposition.md) $\mathbb{N}\times\mathbb{N} \to \mathbb{N}$ is an [embedding](foundation-core.embeddings.md) which fits in a [commuting triangle](foundation-core.commuting-triangles-of-maps.md)
 
 ```text
-pairing-map : ℕ × ℕ → ℕ
-pairing-map (u , v) =
-  pr1 (is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v))
+                  ℕ × ℕ -----> ℕ
+                      \       /
+  2-adic-composition-ℕ \     / succ-ℕ
+                        \   /
+                         ∨ ∨
+                          ℕ.
+```
+
+Since the [image](foundation.images.md) of the 2-adic composition function consists precisely of the [nonzero natural numbers](elementary-number-theory.nonzero-natural-numbers.md), the top map in this triangle is an equivalence.
+
+```agda
+pairing-map-ℕ : ℕ × ℕ → ℕ
+pairing-map-ℕ (u , v) =
+  pr1 (is-successor-is-nonzero-ℕ (is-nonzero-2-adic-composition-ℕ u v))
+
+compute-succ-pairing-map-ℕ :
+  (x : ℕ × ℕ) → succ-ℕ (pairing-map-ℕ x) ＝ 2-adic-composition-ℕ (pr1 x) (pr2 x)
+compute-succ-pairing-map-ℕ (u , v) =
+  inv (pr2 (is-successor-is-nonzero-ℕ (is-nonzero-2-adic-composition-ℕ u v)))
 ```
 
 ### Pairing function is split surjective
@@ -220,7 +235,7 @@ is-equiv-pairing-map =
     is-split-surjective-pairing-map
 ```
 
-```agda
+```text
 ℕ×ℕ≃ℕ : (ℕ × ℕ) ≃ ℕ
 ℕ×ℕ≃ℕ = pair pairing-map is-equiv-pairing-map
 
@@ -233,7 +248,7 @@ is-equiv-map-ℕ-to-ℕ×ℕ = is-equiv-map-inv-is-equiv (pr2 ℕ×ℕ≃ℕ)
 
 ### The iterated coproduct `ℕ × ℕ × ... × ℕ` is equivalent to `ℕ` for any n
 
-```agda
+```text
 equiv-iterated-product-ℕ :
   (n : ℕ) → (iterate n (_×_ ℕ) ℕ) ≃ ℕ
 equiv-iterated-product-ℕ zero-ℕ = id-equiv
