@@ -19,8 +19,12 @@ open import elementary-number-theory.reduced-integer-fractions
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.interchange-law
+open import foundation.retractions
+open import foundation.sections
 ```
 
 </details>
@@ -47,6 +51,16 @@ _+ℚ_ = add-ℚ
 ap-add-ℚ :
   {x y x' y' : ℚ} → x ＝ x' → y ＝ y' → x +ℚ y ＝ x' +ℚ y'
 ap-add-ℚ p q = ap-binary add-ℚ p q
+```
+
+### The successor and predecessor functions on `ℚ`
+
+```agda
+succ-ℚ : ℚ → ℚ
+succ-ℚ = add-ℚ one-ℚ
+
+pred-ℚ : ℚ → ℚ
+pred-ℚ = add-ℚ neg-one-ℚ
 ```
 
 ## Properties
@@ -161,6 +175,50 @@ abstract
       ( distributive-neg-add-fraction-ℤ x y))
 ```
 
+### The successor and predecessor functions on ℚ are mutual inverses
+
+```agda
+abstract
+  is-retraction-pred-ℚ : is-retraction succ-ℚ pred-ℚ
+  is-retraction-pred-ℚ x =
+    equational-reasoning
+      neg-one-ℚ +ℚ (one-ℚ +ℚ x)
+      ＝ (neg-one-ℚ +ℚ one-ℚ) +ℚ x
+        by inv (associative-add-ℚ neg-one-ℚ one-ℚ x)
+      ＝ zero-ℚ +ℚ x
+        by ap (_+ℚ x) (left-inverse-law-add-ℚ one-ℚ)
+      ＝ x by left-unit-law-add-ℚ x
+
+  is-section-pred-ℚ : is-section succ-ℚ pred-ℚ
+  is-section-pred-ℚ x = equational-reasoning
+    one-ℚ +ℚ (neg-one-ℚ +ℚ x)
+    ＝ (one-ℚ +ℚ neg-one-ℚ) +ℚ x
+      by inv (associative-add-ℚ one-ℚ neg-one-ℚ x)
+    ＝ zero-ℚ +ℚ x
+      by ap (_+ℚ x) (right-inverse-law-add-ℚ one-ℚ)
+    ＝ x by left-unit-law-add-ℚ x
+
+  is-equiv-succ-ℚ : is-equiv succ-ℚ
+  pr1 (pr1 is-equiv-succ-ℚ) = pred-ℚ
+  pr2 (pr1 is-equiv-succ-ℚ) = is-section-pred-ℚ
+  pr1 (pr2 is-equiv-succ-ℚ) = pred-ℚ
+  pr2 (pr2 is-equiv-succ-ℚ) = is-retraction-pred-ℚ
+
+  is-equiv-pred-ℚ : is-equiv pred-ℚ
+  pr1 (pr1 is-equiv-pred-ℚ) = succ-ℚ
+  pr2 (pr1 is-equiv-pred-ℚ) = is-retraction-pred-ℚ
+  pr1 (pr2 is-equiv-pred-ℚ) = succ-ℚ
+  pr2 (pr2 is-equiv-pred-ℚ) = is-section-pred-ℚ
+
+equiv-succ-ℚ : ℚ ≃ ℚ
+pr1 equiv-succ-ℚ = succ-ℚ
+pr2 equiv-succ-ℚ = is-equiv-succ-ℚ
+
+equiv-pred-ℚ : ℚ ≃ ℚ
+pr1 equiv-pred-ℚ = pred-ℚ
+pr2 equiv-pred-ℚ = is-equiv-pred-ℚ
+```
+
 ### The inclusion of integer fractions preserves addition
 
 ```agda
@@ -208,6 +266,14 @@ abstract
         ( add-in-fraction-ℤ x y)
     ＝ rational-ℤ (x +ℤ y)
       by is-retraction-rational-fraction-ℚ (rational-ℤ (x +ℤ y))
+```
+
+### The rational successor of an integer is the successor of the integer
+
+```agda
+abstract
+  succ-rational-ℤ : (x : ℤ) → succ-ℚ (rational-ℤ x) ＝ rational-ℤ (succ-ℤ x)
+  succ-rational-ℤ = add-rational-ℤ one-ℤ
 ```
 
 ## See also
