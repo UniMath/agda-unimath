@@ -16,6 +16,7 @@ open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.function-types
@@ -212,6 +213,14 @@ module _
   (y : ℝ l2)
   where
 
+  not-leq-le-ℝ : le-ℝ x y → ¬ (leq-ℝ y x)
+  not-leq-le-ℝ x<y y≤x =
+    elim-exists
+      ( empty-Prop)
+      ( λ q (q-in-ux , q-in-ly) →
+        is-disjoint-cut-ℝ x q (y≤x q q-in-ly , q-in-ux))
+      ( x<y)
+
   leq-not-le-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
   leq-not-le-ℝ x≮y p p∈ly =
     elim-exists
@@ -223,6 +232,19 @@ module _
           ( λ q∈ux → ex-falso (x≮y (intro-exists q (q∈ux , q∈ly))))
           ( is-located-lower-upper-cut-ℝ x p q p<q))
       ( forward-implication (is-rounded-lower-cut-ℝ y p) p∈ly)
+
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  not-le-leq-ℝ : leq-ℝ x y → ¬ (le-ℝ y x)
+  not-le-leq-ℝ x≤y y<x = not-leq-le-ℝ y x y<x x≤y
+
+  leq-iff-not-le-ℝ : leq-ℝ x y ↔ ¬ (le-ℝ y x)
+  pr1 leq-iff-not-le-ℝ = not-le-leq-ℝ
+  pr2 leq-iff-not-le-ℝ = leq-not-le-ℝ y x
 ```
 
 ## References
