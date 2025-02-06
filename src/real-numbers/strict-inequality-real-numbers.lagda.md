@@ -235,6 +235,36 @@ module _
             tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
 ```
 
+### Strict inequality on the real numbers is dense
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  dense-le-ℝ : le-ℝ x y → exists (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
+  dense-le-ℝ =
+    elim-exists
+      ( claim)
+      ( λ q (q∈ux , q∈ly) →
+        elim-exists
+          ( claim)
+          ( λ p (p<q , p∈ux) →
+            elim-exists
+              ( claim)
+              ( λ r (q<r , r∈ly) →
+                intro-exists (real-ℚ q)
+                  ( intro-exists p (p∈ux , p<q) ,
+                    intro-exists r (q<r , r∈ly)))
+              ( forward-implication (is-rounded-lower-cut-ℝ y q) q∈ly))
+          ( forward-implication (is-rounded-upper-cut-ℝ x q) q∈ux))
+    where
+    claim : Prop (lsuc lzero ⊔ l1 ⊔ l2)
+    claim = ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
+```
+
 ## References
 
 {{#bibliography}}
