@@ -170,8 +170,8 @@ module _
   concatenate-leq-le-ℝ : leq-ℝ x y → le-ℝ y z → le-ℝ x z
   concatenate-leq-le-ℝ x≤y y<z =
     elim-exists
-      (le-ℝ-Prop x z)
-      (λ p (p-in-upper-y , p-in-lower-z) →
+      ( le-ℝ-Prop x z)
+      ( λ p (p-in-upper-y , p-in-lower-z) →
         intro-exists
           ( p)
           ( forward-implication
