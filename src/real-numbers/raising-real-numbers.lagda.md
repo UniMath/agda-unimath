@@ -18,8 +18,8 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.subtypes
 open import foundation.raising-universe-levels
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
@@ -37,7 +37,6 @@ module _
   {l1 : Level}
   (l : Level)
   (x : ℝ l1)
-
   where
 
   lower-cut-raise-ℝ : subtype (l1 ⊔ l) ℚ
