@@ -9,6 +9,7 @@ module foundation.law-of-excluded-middle where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
@@ -58,3 +59,26 @@ abstract
   no-global-decidability {l} d =
     is-not-decidable-type-2-Element-Type (λ X → d (pr1 X))
 ```
+
+## Truncated excluded middle
+
+The truncated law of excluded middle asserts that any
+[proposition](foundation-core.propositions.md) `P` is
+[merely decidable](foundation.decidable-types.md).
+
+```agda
+trunc-LEM : (l : Level) → UU (lsuc l)
+trunc-LEM l = (P : Prop l) → is-merely-decidable (type-Prop P)
+```
+
+### LEM implies the truncated LEM
+
+```agda
+trunc-LEM-LEM : (l : Level) → LEM l → trunc-LEM l
+trunc-LEM-LEM l lem P = unit-trunc-Prop (lem P)
+```
+
+## External links
+
+- [Law of excluded middle](https://ncatlab.org/nlab/show/excluded+middle) at
+  $n$Lab
