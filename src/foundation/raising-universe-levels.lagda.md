@@ -23,7 +23,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
-open import foundation-core.subtypes
 ```
 
 </details>
