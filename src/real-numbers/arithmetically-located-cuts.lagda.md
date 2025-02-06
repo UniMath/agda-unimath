@@ -93,11 +93,11 @@ module _
     arithmetically-located-and-closed-located
       arithmetically-located lower-closed upper-closed p q p<q =
       elim-exists
-        (L p ∨ U q)
-        (λ (p' , q') (q'<p'+ε , p'-in-l , q'-in-u) →
+        ( L p ∨ U q)
+        ( λ (p' , q') (q'<p'+ε , p'-in-l , q'-in-u) →
           rec-coproduct
-            (λ p<p' → inl-disjunction (lower-closed p p' p<p' p'-in-l))
-            (λ p'≤p → inr-disjunction
+            ( λ p<p' → inl-disjunction (lower-closed p p' p<p' p'-in-l))
+            ( λ p'≤p → inr-disjunction
               ( upper-closed
                 ( q')
                 ( q)
@@ -113,9 +113,9 @@ module _
                       ( iff-translate-right-leq-ℚ (q -ℚ p) p' p)
                       ( p'≤p))))
                 ( q'-in-u)))
-            (decide-le-leq-ℚ p p'))
+            ( decide-le-leq-ℚ p p'))
         ( arithmetically-located
-            (positive-diff-le-ℚ p q p<q))
+            ( positive-diff-le-ℚ p q p<q))
 ```
 
 ### Real numbers are arithmetically located
