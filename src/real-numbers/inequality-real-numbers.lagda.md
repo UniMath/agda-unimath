@@ -64,21 +64,21 @@ module _
   leq-iff-ℝ' : leq-ℝ ↔ leq-ℝ'
   pr1 (leq-iff-ℝ') lx⊆ly q q-in-uy =
     elim-exists
-      (upper-cut-ℝ x q)
-      (λ p (p<q , p∉ly) →
+      ( upper-cut-ℝ x q)
+      ( λ p (p<q , p∉ly) →
         subset-upper-cut-upper-complement-lower-cut-ℝ
           ( x)
           ( q)
           ( intro-exists
             ( p)
             ( p<q ,
-              complement-leq-subtype
+              reverses-order-complement-subtype
                 ( lower-cut-ℝ x)
                 ( lower-cut-ℝ y)
                 ( lx⊆ly)
                 ( p)
                 ( p∉ly))))
-      (subset-upper-complement-lower-cut-upper-cut-ℝ y q q-in-uy)
+      ( subset-upper-complement-lower-cut-upper-cut-ℝ y q q-in-uy)
   pr2 (leq-iff-ℝ') uy⊆ux p p-in-lx =
     elim-exists
       ( lower-cut-ℝ y p)
@@ -89,7 +89,7 @@ module _
           ( intro-exists
             ( q)
             ( p<q ,
-              complement-leq-subtype
+              reverses-order-complement-subtype
                 ( upper-cut-ℝ y)
                 ( upper-cut-ℝ x)
                 ( uy⊆ux)

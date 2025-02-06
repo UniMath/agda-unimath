@@ -88,6 +88,8 @@ module _
   (C : subtype l3 A)
   where
 
-  complement-leq-subtype : B ⊆ C → complement-subtype C ⊆ complement-subtype B
-  complement-leq-subtype B⊆C x x∉C x∈B = x∉C (B⊆C x x∈B)
+  reverses-order-complement-subtype :
+    B ⊆ C →
+    complement-subtype C ⊆ complement-subtype B
+  reverses-order-complement-subtype B⊆C x x∉C x∈B = x∉C (B⊆C x x∈B)
 ```
