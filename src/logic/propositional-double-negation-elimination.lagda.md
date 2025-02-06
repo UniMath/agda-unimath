@@ -18,6 +18,7 @@ open import foundation.evaluation-functions
 open import foundation.functoriality-propositional-truncation
 open import foundation.hilberts-epsilon-operators
 open import foundation.identity-types
+open import foundation.irrefutable-equality
 open import foundation.logical-equivalences
 open import foundation.mere-equality
 open import foundation.negation
@@ -181,7 +182,7 @@ module _
   where
 
   has-prop-double-negation-elim-Σ-all-elements-irrefutably-equal-base :
-    ((x y : A) → ¬¬ (x ＝ y)) →
+    all-elements-irrefutably-equal A →
     has-prop-double-negation-elim A →
     ((x : A) → has-prop-double-negation-elim (B x)) →
     has-prop-double-negation-elim (Σ A B)

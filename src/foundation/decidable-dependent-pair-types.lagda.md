@@ -13,6 +13,7 @@ open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.irrefutable-equality
 open import foundation.maybe
 open import foundation.mere-equality
 open import foundation.propositional-truncations
@@ -104,7 +105,7 @@ is-decidable-Σ-Maybe {A = A} {B} dA de =
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (H : (x y : A) → ¬¬ (x ＝ y))
+  (H : all-elements-irrefutably-equal A)
   where
 
   is-inhabited-or-empty-Σ-all-elements-irrefutably-equal-base :

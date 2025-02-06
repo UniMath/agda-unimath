@@ -114,13 +114,14 @@ antisymmetric-leq-bool {false} {false} p q = refl
 ### Linearity
 
 ```agda
-cases-linear-leq-bool : {x y : bool} → leq-bool x y + leq-bool y x
-cases-linear-leq-bool {true} {true} = inr star
-cases-linear-leq-bool {true} {false} = inr star
-cases-linear-leq-bool {false} {y} = inl star
+linear-leq-bool : {x y : bool} → leq-bool x y + leq-bool y x
+linear-leq-bool {true} {true} = inr star
+linear-leq-bool {true} {false} = inr star
+linear-leq-bool {false} {y} = inl star
 
-linear-leq-bool : {x y : bool} → disjunction-type (leq-bool x y) (leq-bool y x)
-linear-leq-bool {x} {y} = unit-trunc-Prop (cases-linear-leq-bool {x} {y})
+is-total-leq-bool :
+  (x y : bool) → disjunction-type (leq-bool x y) (leq-bool y x)
+is-total-leq-bool x y = unit-trunc-Prop (linear-leq-bool {x} {y})
 ```
 
 ### The maximal and minimal elements
@@ -154,12 +155,12 @@ bool-Poset : Poset lzero lzero
 bool-Poset = (bool-Preorder , (λ x y → antisymmetric-leq-bool {x} {y}))
 
 bool-Total-Order : Total-Order lzero lzero
-bool-Total-Order = (bool-Poset , (λ x y → linear-leq-bool {x} {y}))
+bool-Total-Order = (bool-Poset , is-total-leq-bool)
 
 bool-Decidable-Total-Order : Decidable-Total-Order lzero lzero
 bool-Decidable-Total-Order =
   ( bool-Poset ,
-    ( λ x y → linear-leq-bool {x} {y}) ,
+    ( is-total-leq-bool) ,
     ( λ x y → is-decidable-Decidable-Prop (leq-bool-Decidable-Prop x y)))
 ```
 

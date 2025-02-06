@@ -249,6 +249,7 @@ open import foundation.intersections-subtypes public
 open import foundation.inverse-sequential-diagrams public
 open import foundation.invertible-maps public
 open import foundation.involutions public
+open import foundation.irrefutable-equality public
 open import foundation.irrefutable-propositions public
 open import foundation.isolated-elements public
 open import foundation.isomorphisms-of-sets public

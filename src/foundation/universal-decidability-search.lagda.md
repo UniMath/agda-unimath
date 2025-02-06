@@ -33,6 +33,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.irrefutable-equality
 open import foundation.locally-small-types
 open import foundation.mere-equality
 open import foundation.negation
@@ -452,7 +453,7 @@ abstract
 abstract
   has-universal-decidability-search-is-decidable-all-elements-irrefutably-equal :
     {l : Level} {X : UU l} →
-    ((x y : X) → ¬¬ (x ＝ y)) →
+    all-elements-irrefutably-equal X →
     is-decidable X →
     has-universal-decidability-search X
   has-universal-decidability-search-is-decidable-all-elements-irrefutably-equal
@@ -469,7 +470,7 @@ abstract
     {l1 l2 : Level} {X : UU l1} →
     has-universal-decidability-search X →
     (P : decidable-family l2 X) →
-    ((x : X) → (p q : family-decidable-family P x) → ¬¬ (p ＝ q)) →
+    ((x : X) → all-elements-irrefutably-equal (P x)) →
     has-universal-decidability-search (Σ X (family-decidable-family P))
   has-universal-decidability-search-Σ-decidable-family-all-elements-irrefutably-equal
     f P H =

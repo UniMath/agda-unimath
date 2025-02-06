@@ -12,6 +12,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.functoriality-coproduct-types
+open import foundation.irrefutable-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.transport-along-identifications
@@ -202,7 +203,7 @@ module _
 ```agda
 is-decidable-Σ-all-elements-irrefutably-equal-base :
   {l1 l2 : Level} {P : UU l1} {Q : P → UU l2} →
-  ((x y : P) → ¬¬ (x ＝ y)) →
+  all-elements-irrefutably-equal P →
   is-decidable P →
   ((x : P) → is-decidable (Q x)) → is-decidable (Σ P Q)
 is-decidable-Σ-all-elements-irrefutably-equal-base {Q = Q} hP (inl p) dQ =

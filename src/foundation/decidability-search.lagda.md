@@ -32,6 +32,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
+open import foundation.irrefutable-equality
 open import foundation.locally-small-types
 open import foundation.negation
 open import foundation.pi-0-trivial-maps
@@ -348,7 +349,7 @@ has-decidability-search-equiv' e =
 
 ```agda
 has-decidability-search-is-decidable-all-elements-irrefutably-equal :
-  {l1 : Level} {X : UU l1} → ((x y : X) → ¬¬ (x ＝ y)) →
+  {l1 : Level} {X : UU l1} → all-elements-merely-equal X →
   is-decidable X → has-decidability-search X
 has-decidability-search-is-decidable-all-elements-irrefutably-equal H d P =
   is-decidable-Σ-all-elements-irrefutably-equal-base H d

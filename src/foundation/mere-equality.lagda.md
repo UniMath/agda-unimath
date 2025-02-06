@@ -121,8 +121,7 @@ module _
     reflecting-map-equivalence-relation
       ( mere-eq-equivalence-relation A)
       ( type-Set X)
-  pr1 reflecting-map-mere-eq = f
-  pr2 reflecting-map-mere-eq = reflects-mere-eq
+  reflecting-map-mere-eq = (f , reflects-mere-eq)
 ```
 
 ### If mere equality maps into the identity type of `A`, then `A` is a set
@@ -131,11 +130,11 @@ module _
 is-set-mere-eq-in-id :
   {l : Level} {A : UU l} → ((x y : A) → mere-eq x y → x ＝ y) → is-set A
 is-set-mere-eq-in-id =
-  is-set-prop-in-id
-    ( mere-eq)
-    ( is-prop-mere-eq)
-    ( refl-mere-eq)
+  is-set-prop-in-id mere-eq is-prop-mere-eq refl-mere-eq
 ```
+
+In other words, if equality on `A` has an
+[ε-operator](foundation.hilbert-epsilon-operators.md), then `A` is a set.
 
 ### Retracts of types with mere equality
 
@@ -177,9 +176,6 @@ module _
     rec-trunc-Prop
       ( mere-eq-Prop x y)
       ( λ p →
-        rec-trunc-Prop
-          ( mere-eq-Prop x y)
-          ( λ q → unit-trunc-Prop (eq-pair-Σ p q))
-          ( mB (pr1 y) (tr B p (pr2 x)) (pr2 y)))
+        map-trunc-Prop (eq-pair-Σ p) (mB (pr1 y) (tr B p (pr2 x)) (pr2 y)))
       ( mA (pr1 x) (pr1 y))
 ```

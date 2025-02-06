@@ -16,8 +16,10 @@ open import foundation.equality-cartesian-product-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.injective-maps
+open import foundation.irrefutable-equality
 open import foundation.negated-equality
 open import foundation.negation
+open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.transport-along-identifications
 open import foundation.unit-type
@@ -185,6 +187,26 @@ has-double-negation-stable-equality-Prop : {l1 : Level} → UU l1 → Prop l1
 has-double-negation-stable-equality-Prop X =
   ( has-double-negation-stable-equality X ,
     is-prop-has-double-negation-stable-equality)
+```
+
+### Any map into a type with double negation stable equality reflects irrefutable equality
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {X : UU l2}
+  (H : has-double-negation-stable-equality X) (f : A → X)
+  where
+
+  reflects-irrefutable-eq :
+    reflects-equivalence-relation (irrefutable-eq-equivalence-relation A) f
+  reflects-irrefutable-eq {x} {y} r =
+    H (f x) (f y) (map-double-negation (ap f) r)
+
+  reflecting-map-irrefutable-eq :
+    reflecting-map-equivalence-relation
+      ( irrefutable-eq-equivalence-relation A)
+      ( X)
+  reflecting-map-irrefutable-eq = (f , reflects-irrefutable-eq)
 ```
 
 ### A product of types with double negation stable equality has double negation stable equality
