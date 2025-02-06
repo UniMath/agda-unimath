@@ -148,7 +148,7 @@ module _
 
   irrefutable-surjection-surjection : (A ↠ B) → (A ↠¬¬ B)
   irrefutable-surjection-surjection =
-    tot (λ f → is-irrefutably-surjective-is-surjective)
+    tot (λ _ → is-irrefutably-surjective-is-surjective)
 ```
 
 ### Any map that has a section is irrefutably surjective

@@ -137,6 +137,19 @@ cons-ℕ∞↑ (inl x) = succ-ℕ∞↑ x
 cons-ℕ∞↑ (inr x) = zero-ℕ∞↑
 ```
 
+### Some other constants
+
+```agda
+one-ℕ∞↑ : ℕ∞↑
+one-ℕ∞↑ = succ-ℕ∞↑ zero-ℕ∞↑
+
+two-ℕ∞↑ : ℕ∞↑
+two-ℕ∞↑ = succ-ℕ∞↑ one-ℕ∞↑
+
+three-ℕ∞↑ : ℕ∞↑
+three-ℕ∞↑ = succ-ℕ∞↑ two-ℕ∞↑
+```
+
 ## Properties
 
 ### Equality on elements of the generic convergent sequence
@@ -309,6 +322,8 @@ abstract
   eq-zero-is-zero-ℕ∞↑ : (x : ℕ∞↑) → is-true (sequence-ℕ∞↑ x 0) → x ＝ zero-ℕ∞↑
   eq-zero-is-zero-ℕ∞↑ x p = eq-Eq-ℕ∞↑ (Eq-zero-is-zero-ℕ∞↑ x p)
 ```
+
+### Case analysis on zero
 
 ### If two increasing binary sequences are nonequal, then they must differ at some position
 

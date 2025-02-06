@@ -139,7 +139,7 @@ module _
     is-decidable (Σ A B)
   is-decidable-Σ-all-elements-merely-equal-base =
     is-decidable-Σ-all-elements-irrefutably-equal-base
-      ( λ x y → intro-double-negation-type-trunc-Prop (H x y))
+      ( all-elements-irrefutably-equal-all-elements-merely-equal H)
 
   is-inhabited-or-empty-Σ-all-elements-merely-equal-base :
     is-inhabited-or-empty A →
@@ -147,5 +147,5 @@ module _
     is-inhabited-or-empty (Σ A B)
   is-inhabited-or-empty-Σ-all-elements-merely-equal-base =
     is-inhabited-or-empty-Σ-all-elements-irrefutably-equal-base
-      ( λ x y → intro-double-negation-type-trunc-Prop (H x y))
+      ( all-elements-irrefutably-equal-all-elements-merely-equal H)
 ```

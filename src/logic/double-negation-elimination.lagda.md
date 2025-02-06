@@ -240,7 +240,7 @@ module _
     has-double-negation-elim (Σ A B)
   double-negation-elim-Σ-all-elements-merely-equal-base H =
     double-negation-elim-Σ-all-elements-irrefutably-equal-base
-      ( λ x y → intro-double-negation-type-trunc-Prop (H x y))
+      ( all-elements-irrefutably-equal-all-elements-merely-equal H)
 
   double-negation-elim-Σ-is-prop-base :
     is-prop A → has-double-negation-elim A →

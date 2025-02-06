@@ -16,6 +16,8 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.retracts-of-types
+open import foundation.double-negation
+open import foundation.irrefutable-equality
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -165,17 +167,28 @@ module _
 ### Dependent sums of types with mere equality
 
 ```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  (mA : all-elements-merely-equal A)
-  (mB : (x : A) → all-elements-merely-equal (B x))
-  where
+all-elements-merely-equal-Σ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  all-elements-merely-equal A →
+  ((x : A) → all-elements-merely-equal (B x)) →
+  all-elements-merely-equal (Σ A B)
+all-elements-merely-equal-Σ {B = B} mA mB x y =
+  rec-trunc-Prop
+    ( mere-eq-Prop x y)
+    ( λ p → map-trunc-Prop (eq-pair-Σ p) (mB (pr1 y) (tr B p (pr2 x)) (pr2 y)))
+    ( mA (pr1 x) (pr1 y))
+```
 
-  all-elements-merely-equal-Σ : all-elements-merely-equal (Σ A B)
-  all-elements-merely-equal-Σ x y =
-    rec-trunc-Prop
-      ( mere-eq-Prop x y)
-      ( λ p →
-        map-trunc-Prop (eq-pair-Σ p) (mB (pr1 y) (tr B p (pr2 x)) (pr2 y)))
-      ( mA (pr1 x) (pr1 y))
+### Mere equality implies irrefutable equality
+
+```agda
+irrefutable-eq-mere-eq :
+  {l : Level} {A : UU l} {x y : A} → mere-eq x y → irrefutable-eq x y
+irrefutable-eq-mere-eq = intro-double-negation-type-trunc-Prop
+
+all-elements-irrefutably-equal-all-elements-merely-equal :
+  {l : Level} {A : UU l} →
+  all-elements-merely-equal A → all-elements-irrefutably-equal A
+all-elements-irrefutably-equal-all-elements-merely-equal H x y =
+  irrefutable-eq-mere-eq (H x y)
 ```
