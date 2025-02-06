@@ -227,6 +227,75 @@ module _
     where open import foundation.action-on-identifications-binary-functions
 ```
 
+## Vertical pasting of cubes of stuff
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : sequential-diagram l1} {B : sequential-diagram l2}
+  {A' : sequential-diagram l3} {B' : sequential-diagram l4}
+  {A'' : sequential-diagram l5} {B'' : sequential-diagram l6}
+  (top : hom-sequential-diagram A'' B'')
+  (top-left : hom-sequential-diagram A'' A')
+  (top-right : hom-sequential-diagram B'' B')
+  (mid : hom-sequential-diagram A' B')
+  (bottom-left : hom-sequential-diagram A' A)
+  (bottom-right : hom-sequential-diagram B' B)
+  (bottom : hom-sequential-diagram A B)
+  (H :
+    htpy-hom-sequential-diagram B
+      ( comp-hom-sequential-diagram A' A B bottom bottom-left)
+      ( comp-hom-sequential-diagram A' B' B bottom-right mid))
+  (K :
+    htpy-hom-sequential-diagram B'
+      ( comp-hom-sequential-diagram A'' A' B' mid top-left)
+      ( comp-hom-sequential-diagram A'' B'' B' top-right top))
+  -- (faces-top :
+  --   (n : ℕ) →
+  --   coherence-square-maps
+  --     ( map-hom-sequential-diagram B'' top n)
+  --     ( map-hom-sequential-diagram A' top-left n)
+  --     ( map-hom-sequential-diagram B' top-right n)
+  --     ( map-hom-sequential-diagram B' mid n))
+  -- (faces-bottom :
+  --   (n : ℕ) → {!!})
+  -- (cubes-top :
+  --   (n : ℕ) → {!!})
+  -- (cubes-bottom :
+  --   (n : ℕ) → {!!})
+  -- -- (cubes :
+  -- --   (n : ℕ) →
+  -- --   coherence-cube-maps
+  -- --     ( map-hom-sequential-diagram B f n)
+  -- --     ( map-sequential-diagram A n)
+  -- --     ( map-sequential-diagram B n)
+  -- --     ( map-hom-sequential-diagram B f (succ-ℕ n))
+  -- --     ( map-hom-sequential-diagram Q f' n)
+  -- --     ( map-sequential-diagram P n)
+  -- --     ( map-sequential-diagram Q n)
+  -- --     ( map-hom-sequential-diagram Q f' (succ-ℕ n))
+  -- --     ( map-hom-sequential-diagram A g n)
+  -- --     ( map-hom-sequential-diagram B h n)
+  -- --     ( map-hom-sequential-diagram A g (succ-ℕ n))
+  -- --     ( map-hom-sequential-diagram B h (succ-ℕ n))
+  -- --     ( naturality-map-hom-sequential-diagram Q f' n)
+  -- --     ( faces n)
+  -- --     ( naturality-map-hom-sequential-diagram A g n)
+  -- --     ( naturality-map-hom-sequential-diagram B h n)
+  -- --     ( faces (succ-ℕ n))
+  -- --     ( naturality-map-hom-sequential-diagram B f n)) →
+  where
+
+  pasting-vertical-coherence-square-hom-sequential-diagram :
+    htpy-hom-sequential-diagram B
+      ( comp-hom-sequential-diagram A'' A B bottom
+        ( comp-hom-sequential-diagram A'' A' A bottom-left top-left))
+      ( comp-hom-sequential-diagram A'' B'' B
+        ( comp-hom-sequential-diagram B'' B' B bottom-right top-right)
+        ( top))
+  pasting-vertical-coherence-square-hom-sequential-diagram = {!!}
+```
+
 ## Whiskering of homotopies of morphisms of sequential diagrams
 
 ### Right whiskering
@@ -388,59 +457,143 @@ module _
   {l1 l2 l3 : Level}
   {A : sequential-diagram l1} {B : sequential-diagram l2}
   {X : sequential-diagram l3}
-  (h : hom-sequential-diagram B X)
   {f g : hom-sequential-diagram A B}
-  (H : htpy-hom-sequential-diagram B f g)
   where
   open import foundation.whiskering-identifications-concatenation
 
-  left-whisker-concat-htpy-hom-sequential-diagram :
-    htpy-hom-sequential-diagram X
+  module _
+    (h : hom-sequential-diagram B X)
+    (H : htpy-hom-sequential-diagram B f g)
+    where
+
+    left-whisker-concat-htpy-hom-sequential-diagram :
+      htpy-hom-sequential-diagram X
+        ( comp-hom-sequential-diagram A B X h f)
+        ( comp-hom-sequential-diagram A B X h g)
+    pr1 left-whisker-concat-htpy-hom-sequential-diagram n =
+      map-hom-sequential-diagram X h n ·l htpy-htpy-hom-sequential-diagram _ H n
+    pr2 left-whisker-concat-htpy-hom-sequential-diagram n a =
+      assoc _ _ _ ∙
+      left-whisker-concat
+        ( naturality-map-hom-sequential-diagram X h n (map-hom-sequential-diagram B f n a))
+        ( inv (ap-concat (map-hom-sequential-diagram X h (succ-ℕ n)) _ _) ∙
+          ap
+            ( ap (map-hom-sequential-diagram X h (succ-ℕ n)))
+            ( coherence-htpy-htpy-hom-sequential-diagram B H n a) ∙
+          ap-concat (map-hom-sequential-diagram X h (succ-ℕ n)) _ _) ∙
+      inv (assoc _ _ _) ∙
+      right-whisker-concat
+        ( left-whisker-concat
+            ( naturality-map-hom-sequential-diagram X h n
+              ( map-hom-sequential-diagram B f n a))
+            ( inv
+              ( ap-comp
+                ( map-hom-sequential-diagram X h (succ-ℕ n))
+                ( map-sequential-diagram B n)
+                ( htpy-htpy-hom-sequential-diagram B H n a))) ∙
+          nat-htpy
+            ( naturality-map-hom-sequential-diagram X h n)
+            ( htpy-htpy-hom-sequential-diagram B H n a) ∙
+          right-whisker-concat
+            ( ap-comp
+              ( map-sequential-diagram X n)
+              ( map-hom-sequential-diagram X h n)
+              ( htpy-htpy-hom-sequential-diagram B H n a))
+            ( naturality-map-hom-sequential-diagram X h n
+              ( map-hom-sequential-diagram B g n a)))
+        ( ap
+          ( map-hom-sequential-diagram X h (succ-ℕ n))
+          ( naturality-map-hom-sequential-diagram B g n a)) ∙
+      assoc _ _ _
+
+  htpy-eq-left-whisker-htpy-hom-sequential-diagram :
+    (h : hom-sequential-diagram B X) (p : f ＝ g) →
+    htpy-eq-sequential-diagram A X
       ( comp-hom-sequential-diagram A B X h f)
       ( comp-hom-sequential-diagram A B X h g)
-  pr1 left-whisker-concat-htpy-hom-sequential-diagram n =
-    map-hom-sequential-diagram X h n ·l htpy-htpy-hom-sequential-diagram _ H n
-  pr2 left-whisker-concat-htpy-hom-sequential-diagram n a =
-    assoc _ _ _ ∙
-    left-whisker-concat
-      ( naturality-map-hom-sequential-diagram X h n (map-hom-sequential-diagram B f n a))
-      ( inv (ap-concat (map-hom-sequential-diagram X h (succ-ℕ n)) _ _) ∙
-        ap
-          ( ap (map-hom-sequential-diagram X h (succ-ℕ n)))
-          ( coherence-htpy-htpy-hom-sequential-diagram B H n a) ∙
-        ap-concat (map-hom-sequential-diagram X h (succ-ℕ n)) _ _) ∙
-    inv (assoc _ _ _) ∙
-    right-whisker-concat
-      ( left-whisker-concat
-          ( naturality-map-hom-sequential-diagram X h n
-            ( map-hom-sequential-diagram B f n a))
-          ( inv
-            ( ap-comp
-              ( map-hom-sequential-diagram X h (succ-ℕ n))
-              ( map-sequential-diagram B n)
-              ( htpy-htpy-hom-sequential-diagram B H n a))) ∙
-        nat-htpy
-          ( naturality-map-hom-sequential-diagram X h n)
-          ( htpy-htpy-hom-sequential-diagram B H n a) ∙
-        right-whisker-concat
-          ( ap-comp
-            ( map-sequential-diagram X n)
-            ( map-hom-sequential-diagram X h n)
-            ( htpy-htpy-hom-sequential-diagram B H n a))
-          ( naturality-map-hom-sequential-diagram X h n
-            ( map-hom-sequential-diagram B g n a)))
+      ( ap (comp-hom-sequential-diagram A B X h) p) ＝
+    left-whisker-concat-htpy-hom-sequential-diagram h
+      ( htpy-eq-sequential-diagram A B f g p)
+  htpy-eq-left-whisker-htpy-hom-sequential-diagram h refl =
+    eq-pair-eq-fiber
+      ( eq-binary-htpy _ _
+        ( λ n a →
+          inv
+            ( right-unit ∙
+              ( ap-binary
+                ( λ p q →
+                  p ∙
+                  left-whisker-concat
+                    ( naturality-map-hom-sequential-diagram X h n
+                      ( map-hom-sequential-diagram B f n a))
+                    ( inv (ap-concat _ _ refl) ∙
+                      ap
+                        ( ap (map-hom-sequential-diagram X h (succ-ℕ n)))
+                        ( right-unit) ∙
+                      refl) ∙
+                  q ∙
+                  right-whisker-concat (right-unit ∙ refl) _)
+                ( right-unit-law-assoc _ (ap _ _) ∙
+                  left-whisker-concat right-unit (ap-inv _ right-unit))
+                ( ap inv (middle-unit-law-assoc _ _))) ∙
+              ( ap-binary
+                ( λ p q →
+                  right-unit ∙
+                  inv (left-whisker-concat _ right-unit) ∙
+                  left-whisker-concat _ p ∙
+                  inv (right-whisker-concat right-unit _) ∙
+                  right-whisker-concat q _)
+                ( right-unit ∙
+                  right-whisker-concat
+                    ( ap inv (compute-right-refl-ap-concat _ _) ∙
+                      distributive-inv-concat
+                        ( ap (ap _) right-unit)
+                        ( inv right-unit) ∙
+                      right-whisker-concat (inv-inv right-unit) _)
+                    ( ap (ap _) right-unit) ∙
+                  is-section-inv-concat' (ap (ap _) right-unit) right-unit)
+                ( right-unit)) ∙
+              is-section-inv-concat'
+                ( right-whisker-concat right-unit _)
+                ( right-unit ∙ inv _ ∙ _) ∙
+              is-section-inv-concat'
+                ( left-whisker-concat _ right-unit)
+                ( right-unit))))
+    where
+      open import foundation.action-on-identifications-binary-functions
+      open import foundation.binary-homotopies
+      open import foundation.path-algebra
+
+  eq-htpy-left-whisker-htpy-hom-sequential-diagram :
+    (h : hom-sequential-diagram B X) (H : htpy-hom-sequential-diagram B f g) →
+    eq-htpy-sequential-diagram A X
+      ( comp-hom-sequential-diagram A B X h f)
+      ( comp-hom-sequential-diagram A B X h g)
+      ( left-whisker-concat-htpy-hom-sequential-diagram h H) ＝
+    ap
+      ( comp-hom-sequential-diagram A B X h)
+      ( eq-htpy-sequential-diagram A B f g H)
+  eq-htpy-left-whisker-htpy-hom-sequential-diagram h H =
+    ap
+      ( eq-htpy-sequential-diagram A X _ _)
+      ( inv
+        ( htpy-eq-left-whisker-htpy-hom-sequential-diagram h
+            ( eq-htpy-sequential-diagram A B f g H) ∙
+          ap
+            ( left-whisker-concat-htpy-hom-sequential-diagram h)
+            ( is-section-map-inv-equiv
+              ( extensionality-hom-sequential-diagram A B f g)
+              ( H)))) ∙
+    is-retraction-map-inv-equiv
+      ( extensionality-hom-sequential-diagram A X
+        ( comp-hom-sequential-diagram A B X h f)
+        ( comp-hom-sequential-diagram A B X h g))
       ( ap
-        ( map-hom-sequential-diagram X h (succ-ℕ n))
-        ( naturality-map-hom-sequential-diagram B g n a)) ∙
-    assoc _ _ _
+        ( comp-hom-sequential-diagram A B X h)
+        ( eq-htpy-sequential-diagram A B f g H))
 ```
 
 ## Action on homotopies of morphisms of sequential diagrams preserves whiskering
-
-```agda
--- module _
---   {l1 l2 l3 l4 l5 l6 : Level}
-```
 
 ```agda
 module _
@@ -451,27 +604,80 @@ module _
   (up-b : universal-property-sequential-colimit b)
   {C : sequential-diagram l5} {Z : UU l6} (c : cocone-sequential-diagram C Z)
   {f g : hom-sequential-diagram B C}
-  (H : htpy-hom-sequential-diagram C f g)
-  (h : hom-sequential-diagram A B)
   where
 
+  coh-comp-hom-sequential-diagram :
+    (p : f ＝ g) (h : hom-sequential-diagram A B) →
+    ap
+      ( map-sequential-colimit-hom-sequential-diagram up-a c)
+      ( ap (λ f → comp-hom-sequential-diagram A B C f h) p) ∙
+    eq-htpy
+      ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-b c g h) ＝
+    eq-htpy
+      ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-b c f h) ∙
+    ap
+      ( _∘ map-sequential-colimit-hom-sequential-diagram up-a b h)
+      ( ap
+        ( map-sequential-colimit-hom-sequential-diagram up-b c)
+        ( p))
+  coh-comp-hom-sequential-diagram refl h = inv right-unit
+
   preserves-right-whisker-htpy-hom-sequential-diagram :
+    (H : htpy-hom-sequential-diagram C f g)
+    (h : hom-sequential-diagram A B) →
     ( ( htpy-map-sequential-colimit-htpy-hom-sequential-diagram up-a c
         ( right-whisker-concat-htpy-hom-sequential-diagram H h)) ∙h
       ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-b c g h)) ~
     ( ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-b c f h) ∙h
       ( htpy-map-sequential-colimit-htpy-hom-sequential-diagram up-b c H ·r
         map-sequential-colimit-hom-sequential-diagram up-a b h))
-  preserves-right-whisker-htpy-hom-sequential-diagram =
-    right-whisker-concat-htpy
-      ( htpy-eq
-        ( ap
+  preserves-right-whisker-htpy-hom-sequential-diagram H h =
+    htpy-eq
+      ( ( ap
           ( λ p →
             htpy-eq
-              ( ap (map-sequential-colimit-hom-sequential-diagram up-a c) p))
-          ( eq-htpy-right-whisker-htpy-hom-sequential-diagram H h)))
-      ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-b c g h) ∙h
-    {!!}
+              ( ap (map-sequential-colimit-hom-sequential-diagram up-a c) p) ∙h
+            preserves-comp-map-sequential-colimit-hom-sequential-diagram
+              up-a up-b c g h)
+          ( eq-htpy-right-whisker-htpy-hom-sequential-diagram H h)) ∙
+        ( inv [i]) ∙
+        ( ap htpy-eq
+          ( coh-comp-hom-sequential-diagram
+            ( eq-htpy-sequential-diagram B C f g H)
+            ( h))) ∙
+        ( htpy-eq-concat _ _) ∙
+        ( ap-binary
+          ( _∙h_)
+          ( is-section-eq-htpy
+            ( preserves-comp-map-sequential-colimit-hom-sequential-diagram
+              up-a up-b c f h))
+           ( htpy-eq-right-whisker
+             ( ap
+               ( map-sequential-colimit-hom-sequential-diagram up-b c)
+               ( eq-htpy-sequential-diagram B C f g H))
+             ( map-sequential-colimit-hom-sequential-diagram up-a b h))))
+     where
+       open import foundation.action-on-identifications-binary-functions
+       [i] =
+         htpy-eq-concat
+           ( ap
+             ( map-sequential-colimit-hom-sequential-diagram up-a c)
+             ( ap
+               ( λ f → comp-hom-sequential-diagram A B C f h)
+               ( eq-htpy-sequential-diagram B C f g H)))
+           ( eq-htpy
+             ( preserves-comp-map-sequential-colimit-hom-sequential-diagram
+               up-a up-b c g h)) ∙
+         ap
+           ( htpy-eq
+             ( ap
+               ( map-sequential-colimit-hom-sequential-diagram up-a c)
+               ( ap
+                 ( λ f → comp-hom-sequential-diagram A B C f h)
+                 ( eq-htpy-sequential-diagram B C f g H))) ∙h_)
+           ( is-section-eq-htpy
+             ( preserves-comp-map-sequential-colimit-hom-sequential-diagram
+               up-a up-b c g h))
 ```
 
 ```agda
@@ -484,17 +690,69 @@ module _
   {C : sequential-diagram l5} {Z : UU l6} (c : cocone-sequential-diagram C Z)
   (h : hom-sequential-diagram B C)
   {f g : hom-sequential-diagram A B}
-  (H : htpy-hom-sequential-diagram B f g)
   where
 
+  coh-comp-hom-sequential-diagram' :
+    (p : f ＝ g) →
+    ap
+      ( map-sequential-colimit-hom-sequential-diagram up-a c)
+      ( ap (comp-hom-sequential-diagram A B C h) p) ∙
+    eq-htpy
+      ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-b c h g) ＝
+    eq-htpy
+      ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-b c h f) ∙
+    ap
+      ( map-sequential-colimit-hom-sequential-diagram up-b c h ∘_)
+      ( ap
+        ( map-sequential-colimit-hom-sequential-diagram up-a b)
+        ( p))
+  coh-comp-hom-sequential-diagram' refl = inv right-unit
+
   preserves-left-whisker-htpy-hom-sequential-diagram :
+    (H : htpy-hom-sequential-diagram B f g) →
     ( ( htpy-map-sequential-colimit-htpy-hom-sequential-diagram up-a c
         ( left-whisker-concat-htpy-hom-sequential-diagram h H)) ∙h
       ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-b c h g)) ~
     ( ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-b c h f) ∙h
       ( map-sequential-colimit-hom-sequential-diagram up-b c h ·l
         htpy-map-sequential-colimit-htpy-hom-sequential-diagram up-a b H))
-  preserves-left-whisker-htpy-hom-sequential-diagram = {!!}
+  preserves-left-whisker-htpy-hom-sequential-diagram H =
+    htpy-eq
+      ( ap-binary
+          ( λ p q →
+            htpy-eq
+              ( ap (map-sequential-colimit-hom-sequential-diagram up-a c) p) ∙h
+            q)
+          ( eq-htpy-left-whisker-htpy-hom-sequential-diagram h H)
+          ( inv
+            ( is-section-eq-htpy
+              ( preserves-comp-map-sequential-colimit-hom-sequential-diagram
+                up-a up-b c h g))) ∙
+        inv
+          ( htpy-eq-concat
+            ( ap
+              ( map-sequential-colimit-hom-sequential-diagram up-a c)
+              ( ap
+                ( comp-hom-sequential-diagram A B C h)
+                ( eq-htpy-sequential-diagram A B f g H)))
+            ( eq-htpy
+              ( preserves-comp-map-sequential-colimit-hom-sequential-diagram
+                up-a up-b c h g))) ∙
+        ap htpy-eq
+          ( coh-comp-hom-sequential-diagram'
+            ( eq-htpy-sequential-diagram A B f g H)) ∙
+        htpy-eq-concat _ _ ∙
+        ap-binary _∙h_
+          ( is-section-eq-htpy
+            ( preserves-comp-map-sequential-colimit-hom-sequential-diagram
+              up-a up-b c h f))
+          ( htpy-eq-left-whisker
+            ( map-sequential-colimit-hom-sequential-diagram up-b c h)
+            ( ap
+              ( map-sequential-colimit-hom-sequential-diagram up-a b)
+              ( eq-htpy-sequential-diagram A B f g H))))
+     where
+       open import foundation.action-on-identifications-binary-functions
 ```
 
 ## Action on homotopies of morphisms of sequential diagrams preserves concatenation
@@ -536,6 +794,44 @@ module _
           ( ap
             ( map-sequential-colimit-hom-sequential-diagram up-a b)
             ( eq-htpy-sequential-diagram A B g h K))))
+```
+
+## Action on homotopies of morphisms of sequential diagrams preserves associativity
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {A : sequential-diagram l1} {X : UU l2} {a : cocone-sequential-diagram A X}
+  (up-a : universal-property-sequential-colimit a)
+  {B : sequential-diagram l3} {Y : UU l4} {b : cocone-sequential-diagram B Y}
+  (up-b : universal-property-sequential-colimit b)
+  {C : sequential-diagram l5} {Z : UU l6} {c : cocone-sequential-diagram C Z}
+  (up-c : universal-property-sequential-colimit c)
+  {D : sequential-diagram l7} {V : UU l8} (d : cocone-sequential-diagram D V)
+  (f : hom-sequential-diagram A B) (g : hom-sequential-diagram B C)
+  (h : hom-sequential-diagram C D)
+  where
+
+  coh-assoc-comp-hom-sequential-diagram :
+    {!!}
+  coh-assoc-comp-hom-sequential-diagram = {!!}
+
+  preserves-assoc-comp-hom-sequential-diagram :
+    ( ( htpy-map-sequential-colimit-htpy-hom-sequential-diagram up-a d
+        ( assoc-comp-hom-sequential-diagram f g h)) ∙h
+      ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-c d h
+        ( comp-hom-sequential-diagram A B C g f)) ∙h
+      ( map-sequential-colimit-hom-sequential-diagram up-c d h ·l
+        preserves-comp-map-sequential-colimit-hom-sequential-diagram
+          up-a up-b c g f)) ~
+    ( ( preserves-comp-map-sequential-colimit-hom-sequential-diagram up-a up-b d
+        ( comp-hom-sequential-diagram B C D h g)
+        ( f)) ∙h
+      ( preserves-comp-map-sequential-colimit-hom-sequential-diagram
+          up-b up-c d h g ·r
+        map-sequential-colimit-hom-sequential-diagram up-a b f))
+  preserves-assoc-comp-hom-sequential-diagram =
+    {!!}
 ```
 
 -- ```agda
