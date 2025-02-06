@@ -167,7 +167,7 @@ module _
                 ＝ p +ℚ (succ-ℚ (rational-ℤ (int-ℕ n)) *ℚ ε)
                   by ap (p +ℚ_) (ap (_*ℚ ε) (inv (succ-rational-ℤ (int-ℕ n))))
                 ＝ p +ℚ (ε +ℚ rational-ℤ (int-ℕ n) *ℚ ε)
-                  by ap (p +ℚ_) (left-mul-succ-ℚ (rational-ℤ (int-ℕ n)) ε)
+                  by ap (p +ℚ_) (mul-left-succ-ℚ (rational-ℤ (int-ℕ n)) ε)
                 ＝ (p +ℚ ε) +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)
                   by inv (associative-add-ℚ p ε (rational-ℤ (int-ℕ n) *ℚ ε)))
               ( p-plus-sn-ε-in-U)))
