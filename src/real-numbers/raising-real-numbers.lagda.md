@@ -29,7 +29,7 @@ open import real-numbers.dedekind-real-numbers
 
 ## Idea
 
-Real numbers have designated universe levels.  For any real number, we can
+Real numbers have designated universe levels. For any real number, we can
 construct an equivalent real number in any higher universe.
 
 ```agda
