@@ -101,6 +101,7 @@ open import foundation.coproducts-pullbacks public
 open import foundation.coslice public
 open import foundation.cospan-diagrams public
 open import foundation.cospans public
+open import foundation.decidability-search public
 open import foundation.decidable-dependent-function-types public
 open import foundation.decidable-dependent-pair-types public
 open import foundation.decidable-embeddings public
@@ -110,6 +111,7 @@ open import foundation.decidable-maps public
 open import foundation.decidable-propositions public
 open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
+open import foundation.decidable-type-families public
 open import foundation.decidable-types public
 open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
@@ -237,6 +239,7 @@ open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
 open import foundation.induction-principle-propositional-truncation public
+open import foundation.inequality-booleans public
 open import foundation.infinitely-coherent-equivalences public
 open import foundation.inhabited-subtypes public
 open import foundation.inhabited-types public
@@ -271,8 +274,10 @@ open import foundation.limited-principle-of-omniscience public
 open import foundation.locale-of-propositions public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
+open import foundation.logical-operations-booleans public
 open import foundation.maps-in-global-subuniverses public
 open import foundation.maps-in-subuniverses public
+open import foundation.maps-with-hilbert-epsilon-operators public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
@@ -319,6 +324,7 @@ open import foundation.path-split-maps public
 open import foundation.path-split-type-families public
 open import foundation.perfect-images public
 open import foundation.permutations-spans-families-of-types public
+open import foundation.pi-0-trivial-maps public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
 open import foundation.pointed-torsorial-type-families public
@@ -460,6 +466,7 @@ open import foundation.unital-binary-operations public
 open import foundation.univalence public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalent-type-families public
+open import foundation.universal-decidability-search public
 open import foundation.universal-property-booleans public
 open import foundation.universal-property-cartesian-product-types public
 open import foundation.universal-property-contractible-types public
