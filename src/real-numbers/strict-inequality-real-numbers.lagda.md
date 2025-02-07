@@ -204,7 +204,7 @@ module _
             tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
 ```
 
-### The absence of strict inequality implies inequality
+### Relationships between inequality, strict inequality, and their negations
 
 ```agda
 module _
