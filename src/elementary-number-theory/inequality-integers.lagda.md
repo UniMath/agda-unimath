@@ -22,6 +22,7 @@ open import elementary-number-theory.positive-integers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
@@ -72,13 +73,13 @@ We will introduce both orderings and prove that they are equivalent.
 
 ```agda
 leq-ℤ-Prop : ℤ → ℤ → Prop lzero
-leq-ℤ-Prop x y = subtype-nonnegative-ℤ (y -ℤ x)
+leq-ℤ-Prop a b = subtype-nonnegative-ℤ (b -ℤ a)
 
 leq-ℤ : ℤ → ℤ → UU lzero
-leq-ℤ x y = type-Prop (leq-ℤ-Prop x y)
+leq-ℤ a b = type-Prop (leq-ℤ-Prop a b)
 
-is-prop-leq-ℤ : (x y : ℤ) → is-prop (leq-ℤ x y)
-is-prop-leq-ℤ x y = is-prop-type-Prop (leq-ℤ-Prop x y)
+is-prop-leq-ℤ : (a b : ℤ) → is-prop (leq-ℤ a b)
+is-prop-leq-ℤ a b = is-prop-type-Prop (leq-ℤ-Prop a b)
 
 infix 30 _≤-ℤ_
 _≤-ℤ_ = leq-ℤ
@@ -112,45 +113,44 @@ succ-inductive-leq-ℤ' a b .(succ-ℤ b) refl H = succ-inductive-leq-ℤ a b H
 ### Inequality on the integers is reflexive, antisymmetric and transitive
 
 ```agda
-refl-leq-ℤ : (k : ℤ) → leq-ℤ k k
-refl-leq-ℤ k = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ k)) star
+refl-leq-ℤ : (a : ℤ) → a ≤-ℤ a
+refl-leq-ℤ a = tr is-nonnegative-ℤ (inv (right-inverse-law-add-ℤ a)) star
 
-antisymmetric-leq-ℤ : {x y : ℤ} → leq-ℤ x y → leq-ℤ y x → x ＝ y
-antisymmetric-leq-ℤ {x} {y} H K =
+antisymmetric-leq-ℤ : {a b : ℤ} → a ≤-ℤ b → b ≤-ℤ a → a ＝ b
+antisymmetric-leq-ℤ {a} {b} H K =
   eq-diff-ℤ
     ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ K
-      ( is-nonnegative-eq-ℤ (inv (distributive-neg-diff-ℤ x y)) H))
+      ( is-nonnegative-eq-ℤ (inv (distributive-neg-diff-ℤ a b)) H))
 
-transitive-leq-ℤ : (k l m : ℤ) → leq-ℤ l m → leq-ℤ k l → leq-ℤ k m
-transitive-leq-ℤ k l m H K =
+transitive-leq-ℤ : (a b c : ℤ) → b ≤-ℤ c → a ≤-ℤ b → a ≤-ℤ c
+transitive-leq-ℤ a b c H K =
   is-nonnegative-eq-ℤ
-    ( triangle-diff-ℤ m l k)
+    ( triangle-diff-ℤ c b a)
     ( is-nonnegative-add-ℤ H K)
 ```
 
 ### Inequality on the integers is decidable
 
 ```agda
-is-decidable-leq-ℤ : (x y : ℤ) → (leq-ℤ x y) + ¬ (leq-ℤ x y)
-is-decidable-leq-ℤ x y = is-decidable-is-nonnegative-ℤ (y -ℤ x)
+is-decidable-leq-ℤ : (a b : ℤ) → is-decidable (a ≤-ℤ b)
+is-decidable-leq-ℤ a b = is-decidable-is-nonnegative-ℤ (b -ℤ a)
 
-leq-ℤ-Decidable-Prop : (x y : ℤ) → Decidable-Prop lzero
-leq-ℤ-Decidable-Prop x y =
-  ( leq-ℤ x y ,
-    is-prop-leq-ℤ x y ,
-    is-decidable-leq-ℤ x y)
+leq-ℤ-Decidable-Prop : (a b : ℤ) → Decidable-Prop lzero
+pr1 (leq-ℤ-Decidable-Prop a b) = a ≤-ℤ b
+pr1 (pr2 (leq-ℤ-Decidable-Prop a b)) = is-prop-leq-ℤ a b
+pr2 (pr2 (leq-ℤ-Decidable-Prop a b)) = is-decidable-leq-ℤ a b
 ```
 
 ### Inequality on the integers is linear
 
 ```agda
-linear-leq-ℤ : (x y : ℤ) → (leq-ℤ x y) + (leq-ℤ y x)
-linear-leq-ℤ x y =
+linear-leq-ℤ : (a b : ℤ) → (a ≤-ℤ b) + (b ≤-ℤ a)
+linear-leq-ℤ a b =
   map-coproduct
     ( λ H →
       is-nonnegative-is-positive-ℤ
         ( is-positive-eq-ℤ
-          ( distributive-neg-diff-ℤ x y)
+          ( distributive-neg-diff-ℤ a b)
           ( is-positive-neg-is-negative-ℤ H)))
     ( id)
     ( decide-is-negative-is-nonnegative-ℤ)
@@ -171,7 +171,7 @@ pr2 ℤ-Decidable-Preorder = is-decidable-leq-ℤ
 
 ℤ-Poset : Poset lzero lzero
 pr1 ℤ-Poset = ℤ-Preorder
-pr2 ℤ-Poset x y = antisymmetric-leq-ℤ
+pr2 ℤ-Poset a b = antisymmetric-leq-ℤ
 
 ℤ-Decidable-Poset : Decidable-Poset lzero lzero
 pr1 ℤ-Decidable-Poset = ℤ-Poset
@@ -179,20 +179,20 @@ pr2 ℤ-Decidable-Poset = is-decidable-leq-ℤ
 
 ℤ-Total-Preorder : Total-Preorder lzero lzero
 pr1 ℤ-Total-Preorder = ℤ-Preorder
-pr2 ℤ-Total-Preorder x y = unit-trunc-Prop (linear-leq-ℤ x y)
+pr2 ℤ-Total-Preorder a b = unit-trunc-Prop (linear-leq-ℤ a b)
 
 ℤ-Decidable-Total-Preorder : Decidable-Total-Preorder lzero lzero
 pr1 ℤ-Decidable-Total-Preorder = ℤ-Preorder
-pr1 (pr2 ℤ-Decidable-Total-Preorder) x y = unit-trunc-Prop (linear-leq-ℤ x y)
+pr1 (pr2 ℤ-Decidable-Total-Preorder) a b = unit-trunc-Prop (linear-leq-ℤ a b)
 pr2 (pr2 ℤ-Decidable-Total-Preorder) = is-decidable-leq-ℤ
 
 ℤ-Total-Order : Total-Order lzero lzero
 pr1 ℤ-Total-Order = ℤ-Poset
-pr2 ℤ-Total-Order x y = unit-trunc-Prop (linear-leq-ℤ x y)
+pr2 ℤ-Total-Order a b = unit-trunc-Prop (linear-leq-ℤ a b)
 
 ℤ-Decidable-Total-Order : Decidable-Total-Order lzero lzero
 pr1 ℤ-Decidable-Total-Order = ℤ-Poset
-pr1 (pr2 ℤ-Decidable-Total-Order) x y = unit-trunc-Prop (linear-leq-ℤ x y)
+pr1 (pr2 ℤ-Decidable-Total-Order) a b = unit-trunc-Prop (linear-leq-ℤ a b)
 pr2 (pr2 ℤ-Decidable-Total-Order) = is-decidable-leq-ℤ
 ```
 
@@ -200,56 +200,31 @@ pr2 (pr2 ℤ-Decidable-Total-Order) = is-decidable-leq-ℤ
 
 ```agda
 concatenate-eq-leq-eq-ℤ :
-  {x' x y y' : ℤ} → x' ＝ x → leq-ℤ x y → y ＝ y' → leq-ℤ x' y'
+  {a b c d : ℤ} → a ＝ b → b ≤-ℤ c → c ＝ d → a ≤-ℤ d
 concatenate-eq-leq-eq-ℤ refl H refl = H
 
 concatenate-leq-eq-ℤ :
-  (x : ℤ) {y y' : ℤ} → leq-ℤ x y → y ＝ y' → leq-ℤ x y'
-concatenate-leq-eq-ℤ x H refl = H
+  (a : ℤ) {b c : ℤ} → a ≤-ℤ b → b ＝ c → a ≤-ℤ c
+concatenate-leq-eq-ℤ a H refl = H
 
 concatenate-eq-leq-ℤ :
-  {x x' : ℤ} (y : ℤ) → x' ＝ x → leq-ℤ x y → leq-ℤ x' y
-concatenate-eq-leq-ℤ y refl H = H
+  {a b : ℤ} (c : ℤ) → a ＝ b → b ≤-ℤ c → a ≤-ℤ c
+concatenate-eq-leq-ℤ c refl H = H
 ```
 
 ### An integer is lesser than its successor
 
 ```agda
-succ-leq-ℤ : (k : ℤ) → leq-ℤ k (succ-ℤ k)
-succ-leq-ℤ k =
+succ-leq-ℤ : (a : ℤ) → a ≤-ℤ succ-ℤ a
+succ-leq-ℤ a =
   is-nonnegative-eq-ℤ
     ( inv
-      ( ( left-successor-law-add-ℤ k (neg-ℤ k)) ∙
-        ( ap succ-ℤ (right-inverse-law-add-ℤ k))))
+      ( ( left-successor-law-add-ℤ a (neg-ℤ a)) ∙
+        ( ap succ-ℤ (right-inverse-law-add-ℤ a))))
     ( star)
 
-leq-succ-leq-ℤ : (k l : ℤ) → leq-ℤ k l → leq-ℤ k (succ-ℤ l)
-leq-succ-leq-ℤ k l = transitive-leq-ℤ k l (succ-ℤ l) (succ-leq-ℤ l)
-```
-
-### The inductively defined inequality on the integers is valued in propositions
-
-```agda
-contradiction-inductive-leq-ℤ :
-  (x y : ℤ) (p : x ＝ succ-ℤ y) → ¬ (inductive-leq-ℤ x y)
-contradiction-inductive-leq-ℤ x .x p (refl-inductive-leq-ℤ .x) =
-  has-no-fixed-points-succ-ℤ x (inv p)
-contradiction-inductive-leq-ℤ x .(succ-ℤ b) p (succ-inductive-leq-ℤ .x b H) = {!!}
-
-all-elements-equal-inductive-leq-ℤ :
-  (x y z : ℤ) (p : y ＝ z) (H : inductive-leq-ℤ x y) (K : inductive-leq-ℤ x z) →
-  tr (inductive-leq-ℤ x) p H ＝ K
-all-elements-equal-inductive-leq-ℤ x .x .x p
-  ( refl-inductive-leq-ℤ .x)
-  ( refl-inductive-leq-ℤ .x) =
-  ap
-    ( λ t → tr (inductive-leq-ℤ x) t (refl-inductive-leq-ℤ x))
-    ( eq-is-prop (is-set-ℤ x x) {p} {refl})
-all-elements-equal-inductive-leq-ℤ x .x ._ p
-  ( refl-inductive-leq-ℤ .x)
-  ( succ-inductive-leq-ℤ .x b K) = {!!}
-all-elements-equal-inductive-leq-ℤ x .(succ-ℤ b) .x p (succ-inductive-leq-ℤ .x b H) (refl-inductive-leq-ℤ .x) = {!!}
-all-elements-equal-inductive-leq-ℤ x .(succ-ℤ b) .(succ-ℤ b₁) p (succ-inductive-leq-ℤ .x b H) (succ-inductive-leq-ℤ .x b₁ K) = {!!}
+leq-succ-leq-ℤ : (a b : ℤ) → a ≤-ℤ b → a ≤-ℤ succ-ℤ b
+leq-succ-leq-ℤ a b = transitive-leq-ℤ a b (succ-ℤ b) (succ-leq-ℤ b)
 ```
 
 ### Inequality on the integers is equivalent to the inductively defined inequality on the integers
@@ -297,17 +272,17 @@ inductive-leq-leq-ℤ a b =
 
 ```agda
 preserves-order-left-add-ℤ :
-  (z x y : ℤ) → leq-ℤ x y → leq-ℤ (x +ℤ z) (y +ℤ z)
-preserves-order-left-add-ℤ z x y =
-  is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ y x z))
+  (c a b : ℤ) → a ≤-ℤ b → a +ℤ c ≤-ℤ b +ℤ c
+preserves-order-left-add-ℤ c a b =
+  is-nonnegative-eq-ℤ (inv (right-translation-diff-ℤ b a c))
 
 preserves-order-right-add-ℤ :
-  (z x y : ℤ) → leq-ℤ x y → leq-ℤ (z +ℤ x) (z +ℤ y)
-preserves-order-right-add-ℤ z x y =
-  is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ y x z))
+  (c a b : ℤ) → a ≤-ℤ b → c +ℤ a ≤-ℤ c +ℤ b
+preserves-order-right-add-ℤ c a b =
+  is-nonnegative-eq-ℤ (inv (left-translation-diff-ℤ b a c))
 
 preserves-order-add-ℤ :
-  {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (a +ℤ c) (b +ℤ d)
+  {a b c d : ℤ} → a ≤-ℤ b → c ≤-ℤ d → a +ℤ c ≤-ℤ b +ℤ d
 preserves-order-add-ℤ {a} {b} {c} {d} H K =
   transitive-leq-ℤ
     ( a +ℤ c)
@@ -321,30 +296,30 @@ preserves-order-add-ℤ {a} {b} {c} {d} H K =
 
 ```agda
 reflects-order-left-add-ℤ :
-  (z x y : ℤ) → leq-ℤ (x +ℤ z) (y +ℤ z) → leq-ℤ x y
-reflects-order-left-add-ℤ z x y =
-  is-nonnegative-eq-ℤ (right-translation-diff-ℤ y x z)
+  (c a b : ℤ) → a +ℤ c ≤-ℤ b +ℤ c → a ≤-ℤ b
+reflects-order-left-add-ℤ c a b =
+  is-nonnegative-eq-ℤ (right-translation-diff-ℤ b a c)
 
 reflects-order-right-add-ℤ :
-  (z x y : ℤ) → leq-ℤ (z +ℤ x) (z +ℤ y) → leq-ℤ x y
-reflects-order-right-add-ℤ z x y =
-  is-nonnegative-eq-ℤ (left-translation-diff-ℤ y x z)
+  (c a b : ℤ) → c +ℤ a ≤-ℤ c +ℤ b → a ≤-ℤ b
+reflects-order-right-add-ℤ c a b =
+  is-nonnegative-eq-ℤ (left-translation-diff-ℤ b a c)
 ```
 
 ### The inclusion of ℕ into ℤ preserves inequality
 
 ```agda
-leq-int-ℕ : (x y : ℕ) → leq-ℕ x y → leq-ℤ (int-ℕ x) (int-ℕ y)
-leq-int-ℕ zero-ℕ y H =
+leq-int-ℕ : (m n : ℕ) → m ≤-ℕ n → int-ℕ m ≤-ℤ int-ℕ n
+leq-int-ℕ zero-ℕ n H =
   tr
     ( is-nonnegative-ℤ)
-    ( inv (right-unit-law-add-ℤ (int-ℕ y)))
-    ( is-nonnegative-int-ℕ y)
-leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
-  ( inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x)) ∙
-    ( ap (_-ℤ (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
-      ap ((int-ℕ (succ-ℕ y)) -ℤ_) (succ-int-ℕ x)))
-  ( leq-int-ℕ x y H)
+    ( inv (right-unit-law-add-ℤ (int-ℕ n)))
+    ( is-nonnegative-int-ℕ n)
+leq-int-ℕ (succ-ℕ m) (succ-ℕ n) H = tr (is-nonnegative-ℤ)
+  ( inv (diff-succ-ℤ (int-ℕ n) (int-ℕ m)) ∙
+    ( ap (_-ℤ (succ-ℤ (int-ℕ m))) (succ-int-ℕ n) ∙
+      ap ((int-ℕ (succ-ℕ n)) -ℤ_) (succ-int-ℕ m)))
+  ( leq-int-ℕ m n H)
 ```
 
 ### Transposing summands in inequalities
@@ -456,57 +431,57 @@ transpose-left-neg-leq-ℤ a b H =
     ( concatenate-leq-eq-ℤ (neg-ℤ b) H (inv (neg-neg-ℤ a)))
 ```
 
-### An integer `x` is nonnegative if and only if `0 ≤ x`
+### An integer `a` is nonnegative if and only if `0 ≤ a`
 
 ```agda
 module _
-  (x : ℤ)
+  (a : ℤ)
   where
 
   abstract
-    leq-zero-is-nonnegative-ℤ : is-nonnegative-ℤ x → leq-ℤ zero-ℤ x
+    leq-zero-is-nonnegative-ℤ : is-nonnegative-ℤ a → zero-ℤ ≤-ℤ a
     leq-zero-is-nonnegative-ℤ =
-      is-nonnegative-eq-ℤ (inv (right-zero-law-diff-ℤ x))
+      is-nonnegative-eq-ℤ (inv (right-zero-law-diff-ℤ a))
 
-    is-nonnegative-leq-zero-ℤ : leq-ℤ zero-ℤ x → is-nonnegative-ℤ x
+    is-nonnegative-leq-zero-ℤ : zero-ℤ ≤-ℤ a → is-nonnegative-ℤ a
     is-nonnegative-leq-zero-ℤ =
-      is-nonnegative-eq-ℤ (right-zero-law-diff-ℤ x)
+      is-nonnegative-eq-ℤ (right-zero-law-diff-ℤ a)
 ```
 
 ### An integer greater than or equal to a nonnegative integer is nonnegative
 
 ```agda
 module _
-  (x y : ℤ) (I : leq-ℤ x y)
+  (a b : ℤ) (I : a ≤-ℤ b)
   where
 
   abstract
-    is-nonnegative-leq-nonnegative-ℤ : is-nonnegative-ℤ x → is-nonnegative-ℤ y
+    is-nonnegative-leq-nonnegative-ℤ : is-nonnegative-ℤ a → is-nonnegative-ℤ b
     is-nonnegative-leq-nonnegative-ℤ H =
-      is-nonnegative-leq-zero-ℤ y
+      is-nonnegative-leq-zero-ℤ b
         ( transitive-leq-ℤ
           ( zero-ℤ)
-          ( x)
-          ( y)
+          ( a)
+          ( b)
           ( I)
-          ( leq-zero-is-nonnegative-ℤ x H))
+          ( leq-zero-is-nonnegative-ℤ a H))
 ```
 
-### An integer `x` is nonpositive if and only if `x ≤ 0`
+### An integer `a` is nonpositive if and only if `a ≤ 0`
 
 ```agda
 module _
-  (x : ℤ)
+  (a : ℤ)
   where
 
   abstract
-    leq-zero-is-nonpositive-ℤ : is-nonpositive-ℤ x → leq-ℤ x zero-ℤ
+    leq-zero-is-nonpositive-ℤ : is-nonpositive-ℤ a → a ≤-ℤ zero-ℤ
     leq-zero-is-nonpositive-ℤ = is-nonnegative-neg-is-nonpositive-ℤ
 
-    is-nonpositive-leq-zero-ℤ : leq-ℤ x zero-ℤ → is-nonpositive-ℤ x
+    is-nonpositive-leq-zero-ℤ : a ≤-ℤ zero-ℤ → is-nonpositive-ℤ a
     is-nonpositive-leq-zero-ℤ H =
       is-nonpositive-eq-ℤ
-        ( neg-neg-ℤ x)
+        ( neg-neg-ℤ a)
         ( is-nonpositive-neg-is-nonnegative-ℤ H)
 ```
 
@@ -514,18 +489,18 @@ module _
 
 ```agda
 module _
-  (x y : ℤ) (I : leq-ℤ x y)
+  (a b : ℤ) (I : a ≤-ℤ b)
   where
 
   abstract
-    is-nonpositive-leq-nonpositive-ℤ : is-nonpositive-ℤ y → is-nonpositive-ℤ x
+    is-nonpositive-leq-nonpositive-ℤ : is-nonpositive-ℤ b → is-nonpositive-ℤ a
     is-nonpositive-leq-nonpositive-ℤ H =
-      is-nonpositive-leq-zero-ℤ x
+      is-nonpositive-leq-zero-ℤ a
         ( transitive-leq-ℤ
-          ( x)
-          ( y)
+          ( a)
+          ( b)
           ( zero-ℤ)
-          ( leq-zero-is-nonpositive-ℤ y H)
+          ( leq-zero-is-nonpositive-ℤ b H)
           ( I))
 ```
 
@@ -533,9 +508,9 @@ module _
 
 ```agda
 leq-zero-is-positive-ℤ :
-  (x : ℤ) → is-positive-ℤ x → zero-ℤ ≤-ℤ x
-leq-zero-is-positive-ℤ x H =
-  leq-zero-is-nonnegative-ℤ x (is-nonnegative-is-positive-ℤ H)
+  (a : ℤ) → is-positive-ℤ a → zero-ℤ ≤-ℤ a
+leq-zero-is-positive-ℤ a H =
+  leq-zero-is-nonnegative-ℤ a (is-nonnegative-is-positive-ℤ H)
 ```
 
 ## See also

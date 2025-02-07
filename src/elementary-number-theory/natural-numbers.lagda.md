@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
@@ -73,6 +74,10 @@ is-zero-ℕ' n = (zero-ℕ ＝ n)
 ```agda
 is-successor-ℕ : ℕ → UU lzero
 is-successor-ℕ n = Σ ℕ (λ y → n ＝ succ-ℕ y)
+
+fiber-succ-is-successor-ℕ :
+  {n : ℕ} → is-successor-ℕ n → fiber succ-ℕ n
+fiber-succ-is-successor-ℕ (x , p) = (x , inv p)
 
 pred-is-successor-ℕ :
   (n : ℕ) → is-successor-ℕ n → ℕ

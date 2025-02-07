@@ -9,6 +9,7 @@ module elementary-number-theory.type-arithmetic-natural-numbers where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
@@ -16,8 +17,10 @@ open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.2-adic-decomposition
 
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
@@ -168,7 +171,10 @@ equiv-iterated-coproduct-ℕ (succ-ℕ n) =
 
 ### The product `ℕ × ℕ` is equivalent to `ℕ`
 
-The [2-adic composition map](elementary-number-theory.2-adic-decomposition.md) $\mathbb{N}\times\mathbb{N} \to \mathbb{N}$ is an [embedding](foundation-core.embeddings.md) which fits in a [commuting triangle](foundation-core.commuting-triangles-of-maps.md)
+The [2-adic composition map](elementary-number-theory.2-adic-decomposition.md)
+$\mathbb{N}\times\mathbb{N} \to \mathbb{N}$ is an
+[embedding](foundation-core.embeddings.md) which fits in a
+[commuting triangle](foundation-core.commuting-triangles-of-maps.md)
 
 ```text
                   ℕ × ℕ -----> ℕ
@@ -179,88 +185,56 @@ The [2-adic composition map](elementary-number-theory.2-adic-decomposition.md) $
                           ℕ.
 ```
 
-Since the [image](foundation.images.md) of the 2-adic composition function consists precisely of the [nonzero natural numbers](elementary-number-theory.nonzero-natural-numbers.md), the top map in this triangle is an equivalence.
+Since the [image](foundation.images.md) of the 2-adic composition function
+consists precisely of the
+[nonzero natural numbers](elementary-number-theory.nonzero-natural-numbers.md),
+the top map in this triangle is an equivalence.
 
 ```agda
+pairing-equiv-ℕ : ℕ × ℕ ≃ ℕ
+pairing-equiv-ℕ =
+  equiv-domain-logical-equiv-fiber-emb
+    ( 2-adic-composition-emb-ℕ)
+    ( succ-emb-ℕ)
+    ( logical-equiv-fiber-2-adic-composition-fiber-succ-ℕ)
+
 pairing-map-ℕ : ℕ × ℕ → ℕ
-pairing-map-ℕ (u , v) =
-  pr1 (is-successor-is-nonzero-ℕ (is-nonzero-2-adic-composition-ℕ u v))
+pairing-map-ℕ = map-equiv pairing-equiv-ℕ
 
-compute-succ-pairing-map-ℕ :
-  (x : ℕ × ℕ) → succ-ℕ (pairing-map-ℕ x) ＝ 2-adic-composition-ℕ (pr1 x) (pr2 x)
-compute-succ-pairing-map-ℕ (u , v) =
-  inv (pr2 (is-successor-is-nonzero-ℕ (is-nonzero-2-adic-composition-ℕ u v)))
-```
+map-inv-pairing-equiv-ℕ : ℕ → ℕ × ℕ
+map-inv-pairing-equiv-ℕ = map-inv-equiv pairing-equiv-ℕ
 
-### Pairing function is split surjective
+is-equiv-map-inv-pairing-equiv-ℕ : is-equiv map-inv-pairing-equiv-ℕ
+is-equiv-map-inv-pairing-equiv-ℕ =
+  is-equiv-map-inv-equiv pairing-equiv-ℕ
 
-```text
-is-split-surjective-pairing-map : is-split-surjective pairing-map
-is-split-surjective-pairing-map n =
-  (u , v) , is-injective-succ-ℕ (q ∙ s)
-  where
-  u = pr1 (pr1 (has-pair-expansion n))
-  v = pr2 (pr1 (has-pair-expansion n))
-  s = pr2 (has-pair-expansion n)
-  r = is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v)
-  q :
-    ( succ-ℕ (pairing-map (u , v))) ＝
-    ( (exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2)))
-  q = inv (pr2 r)
-```
-
-### Pairing function is injective
-
-```text
-is-injective-pairing-map : is-injective pairing-map
-is-injective-pairing-map {u , v} {u' , v'} p =
-  ( eq-pair' (is-pair-expansion-unique u u' v v' q))
-  where
-  r = is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v)
-  s = is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u' v')
-  q :
-    ( (exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2))) ＝
-    ( (exp-ℕ 2 u') *ℕ (succ-ℕ (v' *ℕ 2)))
-  q = (pr2 r) ∙ (ap succ-ℕ p ∙ inv (pr2 s))
-```
-
-### Pairing function is equivalence
-
-```text
-is-equiv-pairing-map : is-equiv pairing-map
-is-equiv-pairing-map =
-  is-equiv-is-split-surjective-is-injective
-    pairing-map
-    is-injective-pairing-map
-    is-split-surjective-pairing-map
-```
-
-```text
-ℕ×ℕ≃ℕ : (ℕ × ℕ) ≃ ℕ
-ℕ×ℕ≃ℕ = pair pairing-map is-equiv-pairing-map
-
-map-ℕ-to-ℕ×ℕ : ℕ → ℕ × ℕ
-map-ℕ-to-ℕ×ℕ = map-inv-is-equiv (pr2 ℕ×ℕ≃ℕ)
-
-is-equiv-map-ℕ-to-ℕ×ℕ : is-equiv map-ℕ-to-ℕ×ℕ
-is-equiv-map-ℕ-to-ℕ×ℕ = is-equiv-map-inv-is-equiv (pr2 ℕ×ℕ≃ℕ)
+coherence-triangle-pairing-map-ℕ :
+  coherence-triangle-maps
+    ( λ x → 2-adic-composition-ℕ (pr1 x) (pr2 x))
+    ( succ-ℕ)
+    ( pairing-map-ℕ)
+coherence-triangle-pairing-map-ℕ =
+  coherence-triangle-equiv-domain-logical-equiv-fiber-emb
+    ( 2-adic-composition-emb-ℕ)
+    ( succ-emb-ℕ)
+    ( logical-equiv-fiber-2-adic-composition-fiber-succ-ℕ)
 ```
 
 ### The iterated coproduct `ℕ × ℕ × ... × ℕ` is equivalent to `ℕ` for any n
 
-```text
+```agda
 equiv-iterated-product-ℕ :
-  (n : ℕ) → (iterate n (_×_ ℕ) ℕ) ≃ ℕ
+  (n : ℕ) → iterate n (ℕ ×_) ℕ ≃ ℕ
 equiv-iterated-product-ℕ zero-ℕ = id-equiv
 equiv-iterated-product-ℕ (succ-ℕ n) =
-  ( ℕ×ℕ≃ℕ) ∘e
+  ( pairing-equiv-ℕ) ∘e
     ( equiv-product id-equiv (equiv-iterated-product-ℕ n))
 ```
 
 ### The coproduct `(Fin n) + ℕ` is equivalent to `N` for any standard finite `Fin n`
 
 ```agda
-equiv-coproduct-Fin-ℕ : (n : ℕ) → ((Fin n) + ℕ) ≃ ℕ
+equiv-coproduct-Fin-ℕ : (n : ℕ) → Fin n + ℕ ≃ ℕ
 equiv-coproduct-Fin-ℕ zero-ℕ = left-unit-law-coproduct ℕ
 equiv-coproduct-Fin-ℕ (succ-ℕ n) =
   ( equiv-coproduct-Fin-ℕ n) ∘e
@@ -271,7 +245,7 @@ equiv-coproduct-Fin-ℕ (succ-ℕ n) =
 ### The product `(Fin n) × ℕ` is equivalent to `N` for any standard finite `Fin n` where n is nonzero
 
 ```agda
-equiv-product-Fin-ℕ : (n : ℕ) → ((Fin (succ-ℕ n)) × ℕ) ≃ ℕ
+equiv-product-Fin-ℕ : (n : ℕ) → Fin (succ-ℕ n) × ℕ ≃ ℕ
 equiv-product-Fin-ℕ zero-ℕ =
   ( left-unit-law-coproduct ℕ) ∘e
     ( ( equiv-coproduct (left-absorption-product ℕ) left-unit-law-product) ∘e
