@@ -16,6 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
@@ -138,21 +139,15 @@ module _
   (y : ℝ l2)
   where
 
-  sim-ℝ-Prop : Prop (l1 ⊔ l2)
-  sim-ℝ-Prop =
-    leq-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) ∧
-    leq-prop-subtype (lower-cut-ℝ y) (lower-cut-ℝ x)
-
   sim-ℝ : UU (l1 ⊔ l2)
-  sim-ℝ = type-Prop sim-ℝ-Prop
+  sim-ℝ = sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
 ```
 
 ### Similarity is reflexive
 
 ```agda
 refl-sim-ℝ : {l : Level} → (x : ℝ l) → sim-ℝ x x
-pr1 (refl-sim-ℝ x) = refl-leq-subtype (lower-cut-ℝ x)
-pr2 (refl-sim-ℝ x) = refl-leq-subtype (lower-cut-ℝ x)
+refl-sim-ℝ x = refl-sim-subtype (lower-cut-ℝ x)
 ```
 
 ### Similarity is transitive
@@ -166,10 +161,24 @@ module _
   where
 
   transitive-sim-ℝ : sim-ℝ y z → sim-ℝ x y → sim-ℝ x z
-  pr1 (transitive-sim-ℝ y~z x~y) =
-    transitive-leq-subtype
+  transitive-sim-ℝ =
+    transitive-sim-subtype
       ( lower-cut-ℝ x)
       ( lower-cut-ℝ y)
       ( lower-cut-ℝ z)
-      ( pr1 y~z)
-      ( pr1 x~y)
+```
+
+### Similarity is antisymmetric at the same universe level
+
+```agda
+module _
+  {l : Level}
+  (x y : ℝ l)
+  where
+
+  antisymmetric-sim-ℝ : sim-ℝ x y → x ＝ y
+  antisymmetric-sim-ℝ x~y =
+    eq-eq-lower-cut-ℝ
+      ( x)
+      ( y)
+      ( antisymmetric-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) x~y)
