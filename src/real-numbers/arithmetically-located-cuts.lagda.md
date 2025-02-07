@@ -233,8 +233,8 @@ module _
                         ( r , r +ℚ ε' +ℚ ε')
                         ( tr
                             ( λ s → le-ℚ s (r +ℚ ε))
-                            (inv (associative-add-ℚ r ε' ε'))
-                            (preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
+                            ( inv (associative-add-ℚ r ε' ε'))
+                            ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
                           r-in-L ,
                           r+2ε'-in-U))
                     ( bounded-arithmetic-location-twice-ε
