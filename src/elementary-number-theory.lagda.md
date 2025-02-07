@@ -98,6 +98,7 @@ open import elementary-number-theory.maximum-standard-finite-types public
 open import elementary-number-theory.mediant-integer-fractions public
 open import elementary-number-theory.mersenne-primes public
 open import elementary-number-theory.minimum-natural-numbers public
+open import elementary-number-theory.minimum-rational-numbers public
 open import elementary-number-theory.minimum-standard-finite-types public
 open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.modular-arithmetic-standard-finite-types public
