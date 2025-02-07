@@ -114,6 +114,29 @@ module _
     map-inv-equiv (extensionality-subtype Q)
 ```
 
+### The containment relation is antisymmetric
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  equiv-antisymmetric-leq-subtype :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
+    (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
+  equiv-antisymmetric-leq-subtype P Q H K x =
+    equiv-iff-is-prop
+      ( is-prop-is-in-subtype P x)
+      ( is-prop-is-in-subtype Q x)
+      ( H x)
+      ( K x)
+
+  antisymmetric-leq-subtype :
+    {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → P ＝ Q
+  antisymmetric-leq-subtype P Q H K =
+    eq-has-same-elements-subtype P Q (λ x → (H x , K x))
+```
+
 ### Similarity of subtypes
 
 ```agda
@@ -138,27 +161,39 @@ module _
   pr2 (sim-has-same-elements-subtype P Q s) x = backward-implication (s x)
 ```
 
-### The containment relation is antisymmetric
+#### Similarity is reflexive
 
 ```agda
-module _
-  {l1 : Level} {A : UU l1}
-  where
+  refl-sim-subtype : {l2 : Level} → (P : subtype l2 A) → sim-subtype P P
+  refl-sim-subtype P = refl-leq-subtype P , refl-leq-subtype P
+```
 
-  equiv-antisymmetric-leq-subtype :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
-    (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
-  equiv-antisymmetric-leq-subtype P Q H K x =
-    equiv-iff-is-prop
-      ( is-prop-is-in-subtype P x)
-      ( is-prop-is-in-subtype Q x)
-      ( H x)
-      ( K x)
+#### Similarity is transitive
 
-  antisymmetric-leq-subtype :
-    {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → P ＝ Q
-  antisymmetric-leq-subtype P Q H K =
-    eq-has-same-elements-subtype P Q (λ x → (H x , K x))
+```agda
+  transitive-sim-subtype :
+    {l2 l3 l4 : Level} →
+    (P : subtype l2 A) →
+    (Q : subtype l3 A) →
+    (R : subtype l4 A) →
+    sim-subtype Q R →
+    sim-subtype P Q →
+    sim-subtype P R
+  pr1 (transitive-sim-subtype P Q R Q~R P~Q) =
+    transitive-leq-subtype P Q R (pr1 Q~R) (pr1 P~Q)
+  pr2 (transitive-sim-subtype P Q R Q~R P~Q) =
+    transitive-leq-subtype R Q P (pr2 P~Q) (pr2 Q~R)
+```
+
+#### Similarity is antisymmetric at the same universe level
+
+```agda
+  antisymmetric-sim-subtype :
+    {l2 : Level} →
+    (P Q : subtype l2 A) →
+    sim-subtype P Q →
+    P ＝ Q
+  antisymmetric-sim-subtype P Q = ind-Σ (antisymmetric-leq-subtype P Q)
 ```
 
 ### The type of all subtypes of a type is a set
