@@ -102,8 +102,12 @@ pr2 (raise-Set l A) =
 
 ```agda
 raise-subtype :
-  (l : Level) {l1 l2 : Level} → (A : UU l1) → subtype l2 A → subtype (l2 ⊔ l) A
-raise-subtype l A B x = raise-Prop l (B x)
+  (l : Level) →
+  {l1 l2 : Level} →
+  {A : UU l1} →
+  subtype l2 A →
+  subtype (l2 ⊔ l) A
+raise-subtype l B x = raise-Prop l (B x)
 ```
 
 ### Raising equivalent types

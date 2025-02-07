@@ -152,6 +152,40 @@ preserves-le-real-ℚ x y x<y =
     ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
 ```
 
+### Concatenation rules for inequality and strict inequality on the real numbers
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  (z : ℝ l3)
+  where
+
+  concatenate-le-leq-ℝ : le-ℝ x y → leq-ℝ y z → le-ℝ x z
+  concatenate-le-leq-ℝ x<y y≤z =
+    elim-exists
+      ( le-ℝ-Prop x z)
+      ( λ p (p-in-upper-x , p-in-lower-y) →
+        intro-exists p (p-in-upper-x , y≤z p p-in-lower-y))
+      ( x<y)
+
+  concatenate-leq-le-ℝ : leq-ℝ x y → le-ℝ y z → le-ℝ x z
+  concatenate-leq-le-ℝ x≤y y<z =
+    elim-exists
+      ( le-ℝ-Prop x z)
+      ( λ p (p-in-upper-y , p-in-lower-z) →
+        intro-exists
+          ( p)
+          ( forward-implication
+            ( leq-iff-ℝ' x y)
+            ( x≤y)
+            ( p)
+            ( p-in-upper-y) ,
+        p-in-lower-z))
+      ( y<z)
+```
+
 ### The reals have no lower or upper bound
 
 ```agda
@@ -249,4 +283,4 @@ module _
 
 ## References
 
-{­{#bibliography}}
+{{#bibliography}}

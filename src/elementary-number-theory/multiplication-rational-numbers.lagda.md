@@ -348,6 +348,32 @@ abstract
           ( sim-reduced-fraction-ℤ y)))
 ```
 
+### `succ-ℚ p * q = q + (p * q)`
+
+```agda
+abstract
+  mul-left-succ-ℚ :
+    (p q : ℚ) →
+    (succ-ℚ p *ℚ q) ＝ q +ℚ (p *ℚ q)
+  mul-left-succ-ℚ p q =
+    equational-reasoning
+      succ-ℚ p *ℚ q
+      ＝ (one-ℚ *ℚ q) +ℚ (p *ℚ q)
+        by right-distributive-mul-add-ℚ one-ℚ p q
+      ＝ q +ℚ (p *ℚ q) by ap-add-ℚ (left-unit-law-mul-ℚ q) refl
+
+  mul-right-succ-ℚ :
+    (p q : ℚ) →
+    (p *ℚ succ-ℚ q) ＝ p +ℚ (p *ℚ q)
+  mul-right-succ-ℚ p q =
+    equational-reasoning
+      p *ℚ succ-ℚ q
+      ＝ (p *ℚ one-ℚ) +ℚ (p *ℚ q)
+        by left-distributive-mul-add-ℚ p one-ℚ q
+      ＝ p +ℚ (p *ℚ q)
+        by ap-add-ℚ (right-unit-law-mul-ℚ p) refl
+```
+
 ## See also
 
 - The multiplicative monoid structure on the rational numbers is defined in
