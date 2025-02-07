@@ -235,6 +235,27 @@ module _
             tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
 ```
 
+### If a rational `q` is in the lower cut of real `x`, `real-ℚ q < x`
+
+```agda
+module _
+  {l : Level}
+  (q : ℚ)
+  (x : ℝ l)
+  where
+
+  le-lower-cut-real-ℚ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
+  le-lower-cut-real-ℚ =
+    forward-implication (is-rounded-lower-cut-ℝ x q)
+
+  le-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
+  le-upper-cut-real-ℚ H =
+    elim-exists
+      ( le-ℝ-Prop x (real-ℚ q))
+      ( λ p (p<q , p∈ux) → intro-exists p (p∈ux , p<q))
+      ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
+```
+
 ## References
 
 {{#bibliography}}
