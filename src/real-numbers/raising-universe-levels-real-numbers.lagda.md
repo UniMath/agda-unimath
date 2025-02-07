@@ -1,7 +1,7 @@
 # Raising the universe levels of real numbers
 
 ```agda
-module real-numbers.raising-real-numbers where
+module real-numbers.raising-universe-levels-real-numbers where
 ```
 
 <details><summary>Imports</summary>
