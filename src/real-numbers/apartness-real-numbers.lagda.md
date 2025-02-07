@@ -27,8 +27,8 @@ open import real-numbers.strict-inequality-real-numbers
 
 ## Idea
 
-Two real numbers are apart if one is strictly less than the other.
-This definition is used in Section 11.2 in {{#cite UF13}}.
+Two real numbers are apart if one is strictly less than the other. This
+definition is used in Section 11.2 in {{#cite UF13}}.
 
 ```agda
 module _
