@@ -18,6 +18,7 @@ open import foundation.existential-quantification
 open import foundation.function-types
 open import foundation.logical-equivalences
 open import foundation.negation
+open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -127,3 +128,48 @@ module _
         is-disjoint-cut-raise-ℝ ,
         is-located-lower-upper-cut-raise-ℝ)
 ```
+
+## Similarity across universe levels
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  sim-ℝ-Prop : Prop (l1 ⊔ l2)
+  sim-ℝ-Prop =
+    leq-prop-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) ∧
+    leq-prop-subtype (lower-cut-ℝ y) (lower-cut-ℝ x)
+
+  sim-ℝ : UU (l1 ⊔ l2)
+  sim-ℝ = type-Prop sim-ℝ-Prop
+```
+
+### Similarity is reflexive
+
+```agda
+refl-sim-ℝ : {l : Level} → (x : ℝ l) → sim-ℝ x x
+pr1 (refl-sim-ℝ x) = refl-leq-subtype (lower-cut-ℝ x)
+pr2 (refl-sim-ℝ x) = refl-leq-subtype (lower-cut-ℝ x)
+```
+
+### Similarity is transitive
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  (z : ℝ l3)
+  where
+
+  transitive-sim-ℝ : sim-ℝ y z → sim-ℝ x y → sim-ℝ x z
+  pr1 (transitive-sim-ℝ y~z x~y) =
+    transitive-leq-subtype
+      ( lower-cut-ℝ x)
+      ( lower-cut-ℝ y)
+      ( lower-cut-ℝ z)
+      ( pr1 y~z)
+      ( pr1 x~y)
