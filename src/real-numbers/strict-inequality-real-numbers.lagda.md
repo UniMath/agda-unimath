@@ -15,8 +15,10 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -233,6 +235,61 @@ module _
           ( neg-ℚ p)
           ( tr (is-in-lower-cut-ℝ y) (inv (neg-neg-ℚ p)) p-in-ly ,
             tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
+```
+
+### If `x < y`, `y ≰ x`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  not-leq-le-ℝ : le-ℝ x y → ¬ (leq-ℝ y x)
+  not-leq-le-ℝ x<y y≤x =
+    elim-exists
+      ( empty-Prop)
+      ( λ q (q-in-ux , q-in-ly) →
+        is-disjoint-cut-ℝ x q (y≤x q q-in-ly , q-in-ux))
+      ( x<y)
+```
+
+### If `x ≮ y`, `y ≤ x`
+
+```agda
+  leq-not-le-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
+  leq-not-le-ℝ x≮y p p∈ly =
+    elim-exists
+      ( lower-cut-ℝ x p)
+      ( λ q (p<q , q∈ly) →
+        elim-disjunction
+          ( lower-cut-ℝ x p)
+          ( id)
+          ( λ q∈ux → ex-falso (x≮y (intro-exists q (q∈ux , q∈ly))))
+          ( is-located-lower-upper-cut-ℝ x p q p<q))
+      ( forward-implication (is-rounded-lower-cut-ℝ y p) p∈ly)
+```
+
+### If `x ≤ y`, `y ≮ x`
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  not-le-leq-ℝ : leq-ℝ x y → ¬ (le-ℝ y x)
+  not-le-leq-ℝ x≤y y<x = not-leq-le-ℝ y x y<x x≤y
+```
+
+### `x ≤ y` if and only if `y ≮ x`
+
+```agda
+  leq-iff-not-le-ℝ : leq-ℝ x y ↔ ¬ (le-ℝ y x)
+  pr1 leq-iff-not-le-ℝ = not-le-leq-ℝ
+  pr2 leq-iff-not-le-ℝ = leq-not-le-ℝ y x
 ```
 
 ## References
