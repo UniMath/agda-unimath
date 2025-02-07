@@ -11,6 +11,7 @@ open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.minimal-structured-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.pisano-periods
@@ -79,7 +80,7 @@ least-multiple-of-cofibonacci m =
   well-ordering-principle-ℕ
     ( is-multiple-of-cofibonacci m)
     ( is-decidable-is-multiple-of-cofibonacci m)
-    ( cofibonacci-multiple m)
+    ( pr2 (cofibonacci-multiple m))
 
 cofibonacci : ℕ → ℕ
 cofibonacci m = pr1 (least-multiple-of-cofibonacci m)

@@ -17,6 +17,7 @@ open import foundation.universe-levels
 open import linear-algebra.vectors
 
 open import lists.arrays
+open import lists.elementhood-relation-lists
 open import lists.lists
 open import lists.sorted-vectors
 

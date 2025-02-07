@@ -9,6 +9,7 @@ module elementary-number-theory.nontrivial-divisors-natural-numbers where
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
+open import elementary-number-theory.minimal-structured-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
@@ -139,7 +140,7 @@ least-nontrivial-divisor-ℕ n H =
   well-ordering-principle-ℕ
     ( is-nontrivial-divisor-ℕ n)
     ( is-decidable-is-nontrivial-divisor-ℕ n)
-    ( n , is-nontrivial-divisor-diagonal-ℕ n H)
+    ( is-nontrivial-divisor-diagonal-ℕ n H)
 
 nat-least-nontrivial-divisor-ℕ : (n : ℕ) → le-ℕ 1 n → ℕ
 nat-least-nontrivial-divisor-ℕ n H = pr1 (least-nontrivial-divisor-ℕ n H)
@@ -213,7 +214,9 @@ pr1 (is-prime-least-nontrivial-divisor-ℕ n H x) (K , L) =
           ( L))
         ( leq-le-ℕ 1 n H)))
 pr1 (pr2 (is-prime-least-nontrivial-divisor-ℕ n H .1) refl) =
-  neq-le-ℕ (le-one-least-nontrivial-divisor-ℕ n H)
+  neq-le-ℕ 1
+    ( nat-least-nontrivial-divisor-ℕ n H)
+    ( le-one-least-nontrivial-divisor-ℕ n H)
 pr2 (pr2 (is-prime-least-nontrivial-divisor-ℕ n H .1) refl) =
   div-one-ℕ _
 ```

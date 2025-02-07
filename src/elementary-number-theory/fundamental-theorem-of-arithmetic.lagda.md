@@ -15,6 +15,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lists-of-prime-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.minimal-structured-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-lists-of-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
@@ -44,6 +45,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.concatenation-lists
+open import lists.elementhood-relation-lists
 open import lists.functoriality-lists
 open import lists.lists
 open import lists.permutation-lists
@@ -243,10 +245,7 @@ module _
   le-one-is-prime-decomposition-cons-list-ℕ :
     le-ℕ 1 x
   le-one-is-prime-decomposition-cons-list-ℕ =
-    concatenate-le-leq-ℕ
-      {x = 1}
-      {y = y}
-      {z = x}
+    concatenate-le-leq-ℕ 1 y x
       ( le-one-head-is-prime-decomposition-cons-list-ℕ)
       ( leq-div-ℕ
         ( y)

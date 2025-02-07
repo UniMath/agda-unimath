@@ -147,7 +147,7 @@ dist-fermat-number-two-ℕ :
   Π-ℕ n (λ k → fermat-number-ℕ (nat-Fin n k))
 dist-fermat-number-two-ℕ zero-ℕ = refl
 dist-fermat-number-two-ℕ (succ-ℕ n) =
-  ap (λ x → dist-ℕ x 1) (ap (2 ^ℕ_) (exp-succ-ℕ n 2) ∙ exp-mul-ℕ (2 ^ℕ n) 2) ∙
+  ap (λ x → dist-ℕ x 1) (ap (2 ^ℕ_) (exp-succ-ℕ 2 n) ∙ exp-mul-ℕ (2 ^ℕ n) 2) ∙
   distance-of-squares-ℕ (2 ^ℕ 2 ^ℕ n) 1 ∙
   ap (_*ℕ fermat-number-ℕ n) (dist-fermat-number-two-ℕ n)
 ```

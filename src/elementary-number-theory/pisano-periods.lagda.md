@@ -11,6 +11,7 @@ open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.fibonacci-sequence
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.lower-bounds-natural-numbers
+open import elementary-number-theory.minimal-structured-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
@@ -173,6 +174,9 @@ cases-is-repetition-of-zero-pisano-period k zero-ℕ y p q = refl
 cases-is-repetition-of-zero-pisano-period k (succ-ℕ x) zero-ℕ p q =
   ex-falso
     ( concatenate-eq-le-eq-ℕ
+      ( succ-ℕ x)
+      ( pr1 (is-ordered-repetition-pisano-period k))
+      ( pisano-period k) zero-ℕ
       ( inv p)
       ( pr1 (pr2 (is-ordered-repetition-pisano-period k)))
       ( q))
@@ -184,6 +188,10 @@ cases-is-repetition-of-zero-pisano-period k (succ-ℕ x) (succ-ℕ y) p q =
   R : is-ordered-repetition-fibonacci-pair-Fin k y
   R = triple x
         ( concatenate-eq-le-eq-ℕ
+          ( succ-ℕ x)
+          ( pr1 (is-ordered-repetition-pisano-period k))
+          ( pisano-period k)
+          ( succ-ℕ y)
           ( inv p)
           ( pr1 (pr2 (is-ordered-repetition-pisano-period k)))
           ( q))
@@ -219,16 +227,17 @@ le-zero-pisano-period :
   (k : ℕ) → le-ℕ zero-ℕ (pisano-period k)
 le-zero-pisano-period k =
   concatenate-eq-le-ℕ
-    { x = zero-ℕ}
-    { y = pr1 (is-ordered-repetition-pisano-period k)}
-    { z = pisano-period k}
+    ( zero-ℕ)
+    ( pr1 (is-ordered-repetition-pisano-period k))
+    ( pisano-period k)
     ( inv (is-repetition-of-zero-pisano-period k))
     ( pr1 (pr2 (is-ordered-repetition-pisano-period k)))
 
 is-nonzero-pisano-period :
   (k : ℕ) → is-nonzero-ℕ (pisano-period k)
 is-nonzero-pisano-period k p =
-  ex-falso (concatenate-le-eq-ℕ (le-zero-pisano-period k) p)
+  ex-falso
+    ( concatenate-le-eq-ℕ 0 (pisano-period k) 0 (le-zero-pisano-period k) p)
 ```
 
 ### `k + 1` divides the Fibonacci number at `pisano-period k`
