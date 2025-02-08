@@ -107,7 +107,7 @@ module _
   map-tot-exists g = map-exists C id g
 ```
 
-### The functorial action of existential quantification on maps of the base type
+### The functorial action of existential quantification on maps of the base
 
 ```agda
 module _
