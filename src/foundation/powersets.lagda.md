@@ -182,7 +182,6 @@ module _
   powerset-Suplattice = suplattice-Large-Suplattice powerset-Large-Suplattice
 ```
 
-
 ### Similarity of subtypes
 
 ```agda
