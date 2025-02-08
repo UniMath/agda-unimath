@@ -39,6 +39,8 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 
+open import logic.functoriality-existential-quantification
+
 open import real-numbers.dedekind-real-numbers
 ```
 
@@ -232,17 +234,19 @@ module _
               elim-exists
                 ( claim)
                 ( λ (ε' , pos-ε') 2ε'<ε →
-                  elim-exists
-                    ( claim)
+                  map-exists
+                    ( λ (p , q) →
+                      le-ℚ q (p +ℚ ε) ×
+                      is-in-lower-cut-ℝ x p ×
+                      is-in-upper-cut-ℝ x q)
+                    ( λ r → (r , r +ℚ ε' +ℚ ε'))
                     ( λ r (r-in-L , r+2ε'-in-U) →
-                      intro-exists
-                        ( r , r +ℚ ε' +ℚ ε')
-                        ( tr
-                            ( λ s → le-ℚ s (r +ℚ ε))
-                            ( inv (associative-add-ℚ r ε' ε'))
-                            ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
-                          r-in-L ,
-                          r+2ε'-in-U))
+                      tr
+                        ( λ s → le-ℚ s (r +ℚ ε))
+                        ( inv (associative-add-ℚ r ε' ε'))
+                        ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
+                      r-in-L ,
+                      r+2ε'-in-U)
                     ( bounded-arithmetic-location-twice-ε
                       ( p)
                       ( q)
