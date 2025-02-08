@@ -137,65 +137,6 @@ module _
     eq-has-same-elements-subtype P Q (λ x → (H x , K x))
 ```
 
-### Similarity of subtypes
-
-```agda
-module _
-  {l1 : Level} {A : UU l1}
-  where
-
-  sim-subtype :
-    {l2 l3 : Level} → subtype l2 A → subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
-  sim-subtype P Q = (P ⊆ Q) × (Q ⊆ P)
-
-  has-same-elements-sim-subtype :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
-    sim-subtype P Q → has-same-elements-subtype P Q
-  pr1 (has-same-elements-sim-subtype P Q s x) = pr1 s x
-  pr2 (has-same-elements-sim-subtype P Q s x) = pr2 s x
-
-  sim-has-same-elements-subtype :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) →
-    has-same-elements-subtype P Q → sim-subtype P Q
-  pr1 (sim-has-same-elements-subtype P Q s) x = forward-implication (s x)
-  pr2 (sim-has-same-elements-subtype P Q s) x = backward-implication (s x)
-```
-
-#### Similarity is reflexive
-
-```agda
-  refl-sim-subtype : {l2 : Level} → (P : subtype l2 A) → sim-subtype P P
-  refl-sim-subtype P = refl-leq-subtype P , refl-leq-subtype P
-```
-
-#### Similarity is transitive
-
-```agda
-  transitive-sim-subtype :
-    {l2 l3 l4 : Level} →
-    (P : subtype l2 A) →
-    (Q : subtype l3 A) →
-    (R : subtype l4 A) →
-    sim-subtype Q R →
-    sim-subtype P Q →
-    sim-subtype P R
-  pr1 (transitive-sim-subtype P Q R Q~R P~Q) =
-    transitive-leq-subtype P Q R (pr1 Q~R) (pr1 P~Q)
-  pr2 (transitive-sim-subtype P Q R Q~R P~Q) =
-    transitive-leq-subtype R Q P (pr2 P~Q) (pr2 Q~R)
-```
-
-#### Similarity is antisymmetric at the same universe level
-
-```agda
-  antisymmetric-sim-subtype :
-    {l2 : Level} →
-    (P Q : subtype l2 A) →
-    sim-subtype P Q →
-    P ＝ Q
-  antisymmetric-sim-subtype P Q = ind-Σ (antisymmetric-leq-subtype P Q)
-```
-
 ### The type of all subtypes of a type is a set
 
 ```agda
