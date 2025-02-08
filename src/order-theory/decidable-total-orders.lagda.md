@@ -7,6 +7,7 @@ module order-theory.decidable-total-orders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -197,11 +198,11 @@ module _
   where
 
   min-Decidable-Total-Order : type-Decidable-Total-Order T
-  min-Decidable-Total-Order =
-    rec-coproduct
-      ( λ x≤y → x)
-      ( λ y<x → y)
-      ( is-leq-or-strict-greater-Decidable-Total-Order T x y)
+  min-Decidable-Total-Order
+    with
+      is-leq-or-strict-greater-Decidable-Total-Order T x y
+  ... | inl x≤y = x
+  ... | inr y<x = y
 
   max-Decidable-Total-Order : type-Decidable-Total-Order T
   max-Decidable-Total-Order =
@@ -255,6 +256,54 @@ module _
   ... | inr y<x = pr2 y<x
 ```
 
+### If x is less than or equal to y, the minimum of x and y is x
+
+```agda
+  left-leq-right-min-Decidable-Total-Order :
+    leq-Decidable-Total-Order T x y → min-Decidable-Total-Order ＝ x
+  left-leq-right-min-Decidable-Total-Order H
+    with is-leq-or-strict-greater-Decidable-Total-Order T x y
+  ... | inl x≤y = refl
+  ... | inr y<x =
+    ex-falso
+      ( pr1 y<x (antisymmetric-leq-Decidable-Total-Order T y x (pr2 y<x) H))
+```
+
+### If y is less than or equal to x, the minimum of x and y is y
+
+```agda
+  right-leq-left-min-Decidable-Total-Order :
+    leq-Decidable-Total-Order T y x → min-Decidable-Total-Order ＝ y
+  right-leq-left-min-Decidable-Total-Order H
+    with is-leq-or-strict-greater-Decidable-Total-Order T x y
+  ... | inl x≤y = antisymmetric-leq-Decidable-Total-Order T x y x≤y H
+  ... | inr y<x = refl
+```
+
+### If x is less than or equal to y, the maximum of x and y is y
+
+```agda
+  left-leq-right-max-Decidable-Total-Order :
+    leq-Decidable-Total-Order T x y → max-Decidable-Total-Order ＝ y
+  left-leq-right-max-Decidable-Total-Order H
+    with is-leq-or-strict-greater-Decidable-Total-Order T x y
+  ... | inl x≤y = refl
+  ... | inr y<x =
+    ex-falso
+      ( pr1 y<x (antisymmetric-leq-Decidable-Total-Order T y x (pr2 y<x) H))
+```
+
+### If y is less than or equal to x, the maximum of x and y is x
+
+```agda
+  right-leq-left-max-Decidable-Total-Order :
+    leq-Decidable-Total-Order T y x → max-Decidable-Total-Order ＝ x
+  right-leq-left-max-Decidable-Total-Order H
+    with is-leq-or-strict-greater-Decidable-Total-Order T x y
+  ... | inl x≤y = antisymmetric-leq-Decidable-Total-Order T y x H x≤y
+  ... | inr y<x = refl
+```
+
 ### `min` is commutative
 
 ```agda
@@ -299,9 +348,204 @@ module _
         ( antisymmetric-leq-Decidable-Total-Order T x y (pr2 x<y) (pr2 y<x)))
 ```
 
+### The minimum operation is associative
+
+```agda
+associative-min-Decidable-Total-Order :
+  {l1 l2 : Level} →
+  (T : Decidable-Total-Order l1 l2) →
+  (x y z : type-Decidable-Total-Order T) →
+  min-Decidable-Total-Order T (min-Decidable-Total-Order T x y) z ＝
+  min-Decidable-Total-Order T x (min-Decidable-Total-Order T y z)
+associative-min-Decidable-Total-Order T x y z =
+  rec-coproduct
+    ( λ x≤y →
+      rec-coproduct
+        (λ y≤z →
+          equational-reasoning
+            min-Decidable-Total-Order T (min-Decidable-Total-Order T x y) z
+            ＝ min-Decidable-Total-Order T x z
+              by
+                ap-min-z-right
+                  ( left-leq-right-min-Decidable-Total-Order T x y x≤y)
+            ＝ x
+              by
+                left-leq-right-min-Decidable-Total-Order
+                  ( T)
+                  ( x)
+                  ( z)
+                  ( transitive-leq-Decidable-Total-Order T x y z y≤z x≤y)
+            ＝ min-Decidable-Total-Order T x y
+              by inv (left-leq-right-min-Decidable-Total-Order T x y x≤y)
+            ＝ min-Decidable-Total-Order T x (min-Decidable-Total-Order T y z)
+              by
+                ap
+                  ( min-Decidable-Total-Order T x)
+                  ( inv (left-leq-right-min-Decidable-Total-Order T y z y≤z)))
+        ( λ z<y →
+          equational-reasoning
+            min-Decidable-Total-Order T (min-Decidable-Total-Order T x y) z
+            ＝ min-Decidable-Total-Order T x z
+              by
+                ap-min-z-right
+                  ( left-leq-right-min-Decidable-Total-Order T x y x≤y)
+            ＝ min-Decidable-Total-Order T x (min-Decidable-Total-Order T y z)
+              by
+                ap
+                  ( min-Decidable-Total-Order T x)
+                  ( inv
+                    ( right-leq-left-min-Decidable-Total-Order
+                      ( T)
+                      ( y)
+                      ( z)
+                      ( pr2 z<y))))
+        (is-leq-or-strict-greater-Decidable-Total-Order T y z))
+    ( λ (_ , y≤x) →
+      rec-coproduct
+        ( λ y≤z →
+          equational-reasoning
+            min-Decidable-Total-Order T (min-Decidable-Total-Order T x y) z
+            ＝ min-Decidable-Total-Order T y z
+              by
+                ap-min-z-right
+                  ( right-leq-left-min-Decidable-Total-Order T x y y≤x)
+            ＝ y by left-leq-right-min-Decidable-Total-Order T y z y≤z
+            ＝ min-Decidable-Total-Order T x y
+              by
+                inv (right-leq-left-min-Decidable-Total-Order T x y y≤x)
+            ＝ min-Decidable-Total-Order T x (min-Decidable-Total-Order T y z)
+              by
+                ap
+                  ( min-Decidable-Total-Order T x)
+                  ( inv (left-leq-right-min-Decidable-Total-Order T y z y≤z)))
+        ( λ (_ , z≤y) →
+          equational-reasoning
+            min-Decidable-Total-Order T (min-Decidable-Total-Order T x y) z
+            ＝ min-Decidable-Total-Order T y z
+              by
+                ap-min-z-right
+                  (right-leq-left-min-Decidable-Total-Order T x y y≤x)
+            ＝ z by right-leq-left-min-Decidable-Total-Order T y z z≤y
+            ＝ min-Decidable-Total-Order T x z
+              by
+                inv
+                  ( right-leq-left-min-Decidable-Total-Order
+                    ( T)
+                    ( x)
+                    ( z)
+                    ( transitive-leq-Decidable-Total-Order T z y x y≤x z≤y))
+            ＝ min-Decidable-Total-Order T x (min-Decidable-Total-Order T y z)
+              by
+                ap
+                  ( min-Decidable-Total-Order T x)
+                  ( inv
+                    ( right-leq-left-min-Decidable-Total-Order T y z z≤y)))
+        ( is-leq-or-strict-greater-Decidable-Total-Order T y z))
+    ( is-leq-or-strict-greater-Decidable-Total-Order T x y)
+  where
+  ap-min-z-right = ap (λ w → min-Decidable-Total-Order T w z)
+```
+
+### The maximum operator is associative
+
+```agda
+associative-max-Decidable-Total-Order :
+  {l1 l2 : Level} →
+  (T : Decidable-Total-Order l1 l2) →
+  (x y z : type-Decidable-Total-Order T) →
+  max-Decidable-Total-Order T (max-Decidable-Total-Order T x y) z ＝
+  max-Decidable-Total-Order T x (max-Decidable-Total-Order T y z)
+associative-max-Decidable-Total-Order T x y z =
+  rec-coproduct
+    ( λ x≤y →
+      rec-coproduct
+        ( λ y≤z →
+          equational-reasoning
+            max-Decidable-Total-Order T (max-Decidable-Total-Order T x y) z
+            ＝ max-Decidable-Total-Order T y z
+              by
+                ap-max-z-right
+                  ( left-leq-right-max-Decidable-Total-Order T x y x≤y)
+            ＝ z
+              by left-leq-right-max-Decidable-Total-Order T y z y≤z
+            ＝ max-Decidable-Total-Order T x z
+              by
+                inv
+                  ( left-leq-right-max-Decidable-Total-Order
+                    ( T)
+                    ( x)
+                    ( z)
+                    ( transitive-leq-Decidable-Total-Order T x y z y≤z x≤y))
+            ＝ max-Decidable-Total-Order T x (max-Decidable-Total-Order T y z)
+              by
+                ap
+                  ( max-Decidable-Total-Order T x)
+                  ( inv (left-leq-right-max-Decidable-Total-Order T y z y≤z)))
+        ( λ (_ , z≤y) →
+          equational-reasoning
+          max-Decidable-Total-Order T (max-Decidable-Total-Order T x y) z
+          ＝ max-Decidable-Total-Order T y z
+            by
+              ap-max-z-right
+                ( left-leq-right-max-Decidable-Total-Order T x y x≤y)
+          ＝ y by right-leq-left-max-Decidable-Total-Order T y z z≤y
+          ＝ max-Decidable-Total-Order T x y
+            by inv (left-leq-right-max-Decidable-Total-Order T x y x≤y)
+          ＝ max-Decidable-Total-Order T x (max-Decidable-Total-Order T y z)
+            by
+              ap
+                ( max-Decidable-Total-Order T x)
+                ( inv ( right-leq-left-max-Decidable-Total-Order T y z z≤y)))
+        ( is-leq-or-strict-greater-Decidable-Total-Order T y z))
+    ( λ (_ , y≤x) →
+      rec-coproduct
+        (λ y≤z →
+          equational-reasoning
+            max-Decidable-Total-Order T (max-Decidable-Total-Order T x y) z
+            ＝ max-Decidable-Total-Order T x z
+              by
+                ap-max-z-right
+                  ( right-leq-left-max-Decidable-Total-Order T x y y≤x)
+            ＝ max-Decidable-Total-Order T x (max-Decidable-Total-Order T y z)
+              by
+                ap
+                  ( max-Decidable-Total-Order T x)
+                  ( inv (left-leq-right-max-Decidable-Total-Order T y z y≤z)))
+        ( λ (_ , z≤y) →
+          equational-reasoning
+            max-Decidable-Total-Order T (max-Decidable-Total-Order T x y) z
+            ＝ max-Decidable-Total-Order T x z
+              by
+                ap-max-z-right
+                  (right-leq-left-max-Decidable-Total-Order T x y y≤x)
+            ＝ x
+              by
+                right-leq-left-max-Decidable-Total-Order
+                  ( T)
+                  ( x)
+                  ( z)
+                  (transitive-leq-Decidable-Total-Order T z y x y≤x z≤y)
+            ＝ max-Decidable-Total-Order T x y
+              by inv (right-leq-left-max-Decidable-Total-Order T x y y≤x)
+            ＝ max-Decidable-Total-Order T x (max-Decidable-Total-Order T y z)
+              by
+                ap
+                  ( max-Decidable-Total-Order T x)
+                  (inv (right-leq-left-max-Decidable-Total-Order T y z z≤y)))
+        ( is-leq-or-strict-greater-Decidable-Total-Order T y z))
+    ( is-leq-or-strict-greater-Decidable-Total-Order T x y)
+    where
+    ap-max-z-right = ap (λ w → max-Decidable-Total-Order T w z)
+```
+
 ### `min x y` is the greatest lower bound of `x` and `y`
 
 ```agda
+module _
+  {l1 l2 : Level}
+  (T : Decidable-Total-Order l1 l2)
+  (x y : type-Decidable-Total-Order T)
+  where
   min-is-greatest-binary-lower-bound-Decidable-Total-Order :
     is-greatest-binary-lower-bound-Poset
       ( poset-Decidable-Total-Order T)
