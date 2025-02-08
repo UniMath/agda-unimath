@@ -26,7 +26,7 @@ together induce a map
 
 We call this the
 {{#concept "functorial action" Disambiguation="of existential quantification" Agda=map-exists}}
-of existential quantification.
+of [existential quantification](foundation.existential-quantification.md).
 
 ## Definitions
 
