@@ -235,13 +235,11 @@ module _
             tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
 ```
 
-### If a rational `q` is in the lower cut of real `x`, `real-ℚ q < x`
+### If a rational is in the lower cut of `x`, then it is strictly less than `x`
 
 ```agda
 module _
-  {l : Level}
-  (q : ℚ)
-  (x : ℝ l)
+  {l : Level} (q : ℚ) (x : ℝ l)
   where
 
   le-lower-cut-real-ℚ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
