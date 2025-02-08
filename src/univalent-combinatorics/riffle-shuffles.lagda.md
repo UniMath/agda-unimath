@@ -38,35 +38,38 @@ We show how to shuffle cards. A **`(p , q)`-riffle shuffle** of the
 `map-equiv s ∘ inl, map-equiv s ∘ inr` are
 [monotone](order-theory.order-preserving-maps-posets).
 
-## Definition
+## Definitions
+
+### Riffle shuffles on standard finite types
 
 ```agda
 module _
   (p q : ℕ)
   where
-  left-deck : Poset lzero lzero
-  left-deck = Fin-Poset p
 
-  right-deck : Poset lzero lzero
-  right-deck = Fin-Poset q
+  is-left-riffle-shuffle-prop-Fin :
+    (s : Fin p + Fin q ≃ Fin (p +ℕ q)) → Prop lzero
+  is-left-riffle-shuffle-prop-Fin s =
+    preserves-order-prop-Poset
+      ( Fin-Poset p)
+      ( Fin-Poset (p +ℕ q))
+      ( map-equiv s ∘ inl)
 
-  full-deck : Poset lzero lzero
-  full-deck = Fin-Poset (p +ℕ q)
+  is-right-riffle-shuffle-prop-Fin :
+    (s : Fin p + Fin q ≃ Fin (p +ℕ q)) → Prop lzero
+  is-right-riffle-shuffle-prop-Fin s =
+    preserves-order-prop-Poset
+      ( Fin-Poset q)
+      ( Fin-Poset (p +ℕ q))
+      ( map-equiv s ∘ inr)
 
-  is-shuffle-prop-left : (s : Fin p + Fin q ≃ Fin (p +ℕ q)) → Prop lzero
-  is-shuffle-prop-left s =
-    preserves-order-prop-Poset left-deck full-deck (map-equiv s ∘ inl)
+  is-riffle-shuffle-prop-Fin : (s : Fin p + Fin q ≃ Fin (p +ℕ q)) → Prop lzero
+  is-riffle-shuffle-prop-Fin s =
+    is-left-riffle-shuffle-prop-Fin s ∧ is-right-riffle-shuffle-prop-Fin s
 
-  is-shuffle-prop-right : (s : Fin p + Fin q ≃ Fin (p +ℕ q)) → Prop lzero
-  is-shuffle-prop-right s =
-    preserves-order-prop-Poset right-deck full-deck (map-equiv s ∘ inr)
+  is-riffle-shuffle-Fin : (s : Fin p + Fin q ≃ Fin (p +ℕ q)) → UU lzero
+  is-riffle-shuffle-Fin s = type-Prop (is-riffle-shuffle-prop-Fin s)
 
-  is-shuffle-prop : (s : Fin p + Fin q ≃ Fin (p +ℕ q)) → Prop lzero
-  is-shuffle-prop s = is-shuffle-prop-left s ∧ is-shuffle-prop-right s
-
-  is-shuffle : (s : Fin p + Fin q ≃ Fin (p +ℕ q)) → UU lzero
-  is-shuffle s = type-Prop (is-shuffle-prop s)
-
-  shuffle : UU lzero
-  shuffle = Σ (Fin p + Fin q ≃ Fin (p +ℕ q)) λ s → is-shuffle s
+  riffle-shuffle-Fin : UU lzero
+  riffle-shuffle-Fin = Σ (Fin p + Fin q ≃ Fin (p +ℕ q)) (is-riffle-shuffle-Fin)
 ```
