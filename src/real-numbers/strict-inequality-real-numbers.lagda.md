@@ -12,6 +12,7 @@ module real-numbers.strict-inequality-real-numbers where
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -23,6 +24,8 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -235,6 +238,27 @@ module _
             tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
 ```
 
+### If a rational is in the lower cut of `x`, then it is strictly less than `x`
+
+```agda
+le-lower-cut-real-ℚ :
+  {l : Level} (q : ℚ) (x : ℝ l) → is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
+le-lower-cut-real-ℚ q x =
+  forward-implication (is-rounded-lower-cut-ℝ x q)
+```
+
+### If a rational is in the upper cut of `x`, then it is strictly greater than `x`
+
+```agda
+le-upper-cut-real-ℚ :
+  {l : Level} (q : ℚ) (x : ℝ l) → is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
+le-upper-cut-real-ℚ q x H =
+  elim-exists
+    ( le-ℝ-Prop x (real-ℚ q))
+    ( λ p (p<q , p∈ux) → intro-exists p (p∈ux , p<q))
+    ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
+```
+
 ### Strict inequality on the real numbers is dense
 
 ```agda
@@ -247,22 +271,15 @@ module _
   dense-le-ℝ : le-ℝ x y → exists (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
   dense-le-ℝ =
     elim-exists
-      ( claim)
+      ( ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
       ( λ q (q∈ux , q∈ly) →
-        elim-exists
-          ( claim)
-          ( λ p (p<q , p∈ux) →
-            elim-exists
-              ( claim)
-              ( λ r (q<r , r∈ly) →
-                intro-exists (real-ℚ q)
-                  ( intro-exists p (p∈ux , p<q) ,
-                    intro-exists r (q<r , r∈ly)))
-              ( forward-implication (is-rounded-lower-cut-ℝ y q) q∈ly))
-          ( forward-implication (is-rounded-upper-cut-ℝ x q) q∈ux))
-    where
-    claim : Prop (lsuc lzero ⊔ l1 ⊔ l2)
-    claim = ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
+        map-binary-exists
+          ( λ z → le-ℝ x z × le-ℝ z y)
+          ( λ _ _ → real-ℚ q)
+          ( λ p r (p<q , p∈ux) (q<r , r∈ly) →
+            intro-exists p (p∈ux , p<q) , intro-exists r (q<r , r∈ly))
+          ( forward-implication (is-rounded-upper-cut-ℝ x q) q∈ux)
+          ( forward-implication (is-rounded-lower-cut-ℝ y q) q∈ly))
 ```
 
 ## References
