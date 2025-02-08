@@ -67,7 +67,7 @@ module _
   leq-ℝ' : UU (l1 ⊔ l2)
   leq-ℝ' = type-Prop leq-ℝ-Prop'
 
-  leq-iff-ℝ' : leq-ℝ ↔ leq-ℝ'
+  leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ'
   pr1 (leq-iff-ℝ') lx⊆ly q q-in-uy =
     elim-exists
       ( upper-cut-ℝ x q)
