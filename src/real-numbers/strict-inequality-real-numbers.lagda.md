@@ -292,7 +292,7 @@ module _
   where
 
   leq-iff-not-le-ℝ : leq-ℝ x y ↔ ¬ (le-ℝ y x)
-  pr1 leq-iff-not-le-ℝ = not-le-leq-ℝ
+  pr1 leq-iff-not-le-ℝ = not-le-leq-ℝ x y
   pr2 leq-iff-not-le-ℝ = leq-not-le-ℝ y x
 ```
 
