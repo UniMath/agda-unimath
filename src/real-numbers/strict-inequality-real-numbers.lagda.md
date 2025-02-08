@@ -296,6 +296,27 @@ module _
   pr2 leq-iff-not-le-ℝ = leq-not-le-ℝ y x
 ```
 
+### If a rational is in the lower cut of `x`, then it is strictly less than `x`
+
+```agda
+le-lower-cut-real-ℚ :
+  {l : Level} (q : ℚ) (x : ℝ l) → is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
+le-lower-cut-real-ℚ q x =
+  forward-implication (is-rounded-lower-cut-ℝ x q)
+```
+
+### If a rational is in the upper cut of `x`, then it is strictly greater than `x`
+
+```agda
+le-upper-cut-real-ℚ :
+  {l : Level} (q : ℚ) (x : ℝ l) → is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
+le-upper-cut-real-ℚ q x H =
+  elim-exists
+    ( le-ℝ-Prop x (real-ℚ q))
+    ( λ p (p<q , p∈ux) → intro-exists p (p∈ux , p<q))
+    ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
+```
+
 ## References
 
 {{#bibliography}}
