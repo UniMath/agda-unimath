@@ -25,8 +25,12 @@ open import real-numbers.inequality-real-numbers
 
 ## Idea
 
-Two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) are {{#concept "similar" Disambiguation="Dedekind real numbers" Agda=sim-ℝ}}
-if they are [less than or equal](real-numbers.inequality-real-numbers.md) to each other. The similarity relation on real numbers extends the [equality](foundation-core.identity-types.md) relation to real numbers of differing universe levels.
+Two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) are
+{{#concept "similar" Disambiguation="Dedekind real numbers" Agda=sim-ℝ}} if they
+are [less than or equal](real-numbers.inequality-real-numbers.md) to each other.
+The similarity relation on real numbers extends the
+[equality](foundation-core.identity-types.md) relation to real numbers of
+differing universe levels.
 
 ## Definition
 
