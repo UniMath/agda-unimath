@@ -255,7 +255,7 @@ module _
   ... | inr y<x = pr2 y<x
 ```
 
-### `min` is commutative
+### The minimum operation is commutative
 
 ```agda
 module _
@@ -280,7 +280,7 @@ module _
         ( antisymmetric-leq-Decidable-Total-Order T x y (pr2 x<y) (pr2 y<x)))
 ```
 
-### `max` is commutative
+### The maximum operation is commutative
 
 ```agda
   commutative-max-Decidable-Total-Order :
