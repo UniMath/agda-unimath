@@ -10,8 +10,8 @@ module real-numbers.similarity-real-numbers where
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.powersets
 open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.large-posets
