@@ -237,13 +237,11 @@ module _
             tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
 ```
 
-### If `x < y`, `y ≰ x`
+### If `x` is less than `y`, then `y` is not less than or equal to `x`
 
 ```agda
 module _
-  {l1 l2 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
   not-leq-le-ℝ : le-ℝ x y → ¬ (leq-ℝ y x)
@@ -255,9 +253,13 @@ module _
       ( x<y)
 ```
 
-### If `x ≮ y`, `y ≤ x`
+### If `x` is not less than `y`, then `y` is less than or equal to `x`
 
 ```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
   leq-not-le-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
   leq-not-le-ℝ x≮y p p∈ly =
     elim-exists
@@ -271,24 +273,26 @@ module _
       ( forward-implication (is-rounded-lower-cut-ℝ y p) p∈ly)
 ```
 
-### If `x ≤ y`, `y ≮ x`
+### If `x` is less than or equal to `y`, then `y` is not less than `x`
 
 ```agda
 module _
-  {l1 l2 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
   not-le-leq-ℝ : leq-ℝ x y → ¬ (le-ℝ y x)
   not-le-leq-ℝ x≤y y<x = not-leq-le-ℝ y x y<x x≤y
 ```
 
-### `x ≤ y` if and only if `y ≮ x`
+### `x` is less than or equal to `y` if and only if `y` is not less than `x`
 
 ```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
   leq-iff-not-le-ℝ : leq-ℝ x y ↔ ¬ (le-ℝ y x)
-  pr1 leq-iff-not-le-ℝ = not-le-leq-ℝ
+  pr1 leq-iff-not-le-ℝ = not-le-leq-ℝ x y
   pr2 leq-iff-not-le-ℝ = leq-not-le-ℝ y x
 ```
 
