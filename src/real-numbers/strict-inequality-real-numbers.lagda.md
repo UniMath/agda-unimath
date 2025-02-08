@@ -26,6 +26,8 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
@@ -322,19 +324,15 @@ module _
 
   le-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
   le-upper-cut-real-ℚ H =
-    elim-exists
-      ( le-ℝ-Prop x (real-ℚ q))
-      ( λ p (p<q , p∈ux) → intro-exists p (p∈ux , p<q))
+    map-tot-exists
+      ( λ p (p<q , p∈ux) → (p∈ux , p<q))
       ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
 
   upper-cut-real-le-ℚ : le-ℝ x (real-ℚ q) → is-in-upper-cut-ℝ x q
-  upper-cut-real-le-ℚ =
-    elim-exists
-      ( upper-cut-ℝ x q)
-      ( λ p (p>x , p<q) →
-        backward-implication
-        ( is-rounded-upper-cut-ℝ x q)
-        ( intro-exists p (p<q , p>x)))
+  upper-cut-real-le-ℚ H =
+    backward-implication
+      ( is-rounded-upper-cut-ℝ x q)
+      ( map-tot-exists (λ _ (p>x , p<q) → (p<q , p>x)) H)
 
   le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
   pr1 le-iff-upper-cut-real-ℚ = le-upper-cut-real-ℚ
