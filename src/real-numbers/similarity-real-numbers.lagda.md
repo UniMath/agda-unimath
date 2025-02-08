@@ -26,7 +26,7 @@ open import real-numbers.inequality-real-numbers
 ## Definition
 
 Two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) are similar
-if they are less than or equal to each other.  This is like equality, but two
+if they are less than or equal to each other. This is like equality, but two
 reals of different universe levels can be similar.
 
 ```agda
