@@ -1,15 +1,14 @@
-# Arithmetically located cuts
+# Arithmetically located Dedekind cuts
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module real-numbers.arithmetically-located-cuts where
+module real-numbers.arithmetically-located-dedekind-cuts where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-rational-numbers
 open import elementary-number-theory.additive-group-of-rational-numbers
 open import elementary-number-theory.archimedean-property-rational-numbers
@@ -32,7 +31,6 @@ open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.negation
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.subtypes
@@ -49,28 +47,31 @@ open import real-numbers.dedekind-real-numbers
 ## Definition
 
 A [Dedekind cut](real-numbers.dedekind-real-numbers.md) `(L, U)` is
-{{#concept "arithmetically located" Disambiguation="Dedekind cut" Agda=is-arithmetically-located}}
-if for any positive
-[rational number](elementary-number-theory.rational-numbers.md) `ε : ℚ`, there
-exist `p, q : ℚ` such that `0 < q - p < ε`, `p ∈ L`, and `q ∈ U`. Intuitively,
-when `L , U` represent the Dedekind cuts of a real number `x`, `p` and `q` are
-rational approximations of `x` to within `ε`. This follows parts of Section 11
-in {{#cite BauerTaylor2009}}.
+{{#concept "arithmetically located" Disambiguation="Dedekind cut"}} if for any
+positive [rational number](elementary-number-theory.rational-numbers.md)
+`ε : ℚ`, there exist `p, q : ℚ` such that `0 < q - p < ε`, `p ∈ L`, and `q ∈ U`.
+Intuitively, when `L , U` represent the Dedekind cuts of a real number `x`, `p`
+and `q` are rational approximations of `x` to within `ε`. This follows parts of
+Section 11 in {{#cite BauerTaylor2009}}.
+
+## Definitions
+
+### The predicate of being arithmetically located on pairs of subtypes of rational numbers
 
 ```agda
 module _
-  {l : Level}
-  (L : subtype l ℚ)
-  (U : subtype l ℚ)
+  {l : Level} (L : subtype l ℚ) (U : subtype l ℚ)
   where
 
-  is-arithmetically-located : UU l
-  is-arithmetically-located =
+  is-arithmetically-located-pair-of-subtypes-ℚ : UU l
+  is-arithmetically-located-pair-of-subtypes-ℚ =
     (ε : ℚ⁺) →
     exists
       ( ℚ × ℚ)
       ( λ (p , q) → le-ℚ-Prop q (p +ℚ rational-ℚ⁺ ε) ∧ L p ∧ U q)
 ```
+
+## Properties
 
 ### Arithmetically located cuts are located
 
@@ -79,43 +80,46 @@ rational numbers, it is also located.
 
 ```agda
 module _
-  {l : Level}
-  (L : subtype l ℚ)
-  (U : subtype l ℚ)
+  {l : Level} (L : subtype l ℚ) (U : subtype l ℚ)
   where
 
   abstract
-    arithmetically-located-and-closed-located :
-      is-arithmetically-located L U →
+    is-located-is-arithmetically-located-pair-of-subtypes-ℚ :
+      is-arithmetically-located-pair-of-subtypes-ℚ L U →
       ((p q : ℚ) → le-ℚ p q → is-in-subtype L q → is-in-subtype L p) →
       ((p q : ℚ) → le-ℚ p q → is-in-subtype U p → is-in-subtype U q) →
       (p q : ℚ) → le-ℚ p q → type-disjunction-Prop (L p) (U q)
-    arithmetically-located-and-closed-located
+    is-located-is-arithmetically-located-pair-of-subtypes-ℚ
       arithmetically-located lower-closed upper-closed p q p<q =
       elim-exists
         ( L p ∨ U q)
         ( λ (p' , q') (q'<p'+ε , p'-in-l , q'-in-u) →
           rec-coproduct
             ( λ p<p' → inl-disjunction (lower-closed p p' p<p' p'-in-l))
-            ( λ p'≤p → inr-disjunction
-              ( upper-closed
-                ( q')
-                ( q)
-                ( concatenate-le-leq-ℚ
+            ( λ p'≤p →
+              inr-disjunction
+                ( upper-closed
                   ( q')
-                  ( p' +ℚ (q -ℚ p))
                   ( q)
-                  ( q'<p'+ε)
-                  ( tr
-                    ( leq-ℚ (p' +ℚ q -ℚ p))
-                    ( is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)
-                    ( backward-implication
-                      ( iff-translate-right-leq-ℚ (q -ℚ p) p' p)
-                      ( p'≤p))))
-                ( q'-in-u)))
+                  ( concatenate-le-leq-ℚ
+                    ( q')
+                    ( p' +ℚ (q -ℚ p))
+                    ( q)
+                    ( q'<p'+ε)
+                    ( tr
+                      ( leq-ℚ (p' +ℚ q -ℚ p))
+                      ( equational-reasoning
+                        p +ℚ (q -ℚ p)
+                        ＝ (p +ℚ q) -ℚ p
+                          by inv (associative-add-ℚ p q (neg-ℚ p))
+                        ＝ q
+                          by is-identity-conjugation-Ab abelian-group-add-ℚ p q)
+                      ( backward-implication
+                        ( iff-translate-right-leq-ℚ (q -ℚ p) p' p)
+                        ( p'≤p))))
+                  ( q'-in-u)))
             ( decide-le-leq-ℚ p p'))
-        ( arithmetically-located
-            ( positive-diff-le-ℚ p q p<q))
+        ( arithmetically-located (positive-diff-le-ℚ p q p<q))
 ```
 
 ### Real numbers are arithmetically located
@@ -215,7 +219,9 @@ module _
 
   abstract
     arithmetically-located-ℝ :
-      is-arithmetically-located (lower-cut-ℝ x) (upper-cut-ℝ x)
+      is-arithmetically-located-pair-of-subtypes-ℚ
+        ( lower-cut-ℝ x)
+        ( upper-cut-ℝ x)
     arithmetically-located-ℝ ε⁺@(ε , positive-ε) =
       elim-exists
         ( claim)
