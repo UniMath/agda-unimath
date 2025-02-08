@@ -26,6 +26,8 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
 open import real-numbers.negation-real-numbers
@@ -296,25 +298,45 @@ module _
   pr2 leq-iff-not-le-ℝ = leq-not-le-ℝ y x
 ```
 
-### If a rational is in the lower cut of `x`, then it is strictly less than `x`
+### A rational is in the lower cut of `x` iff its real projection is less than `x`
 
 ```agda
-le-lower-cut-real-ℚ :
-  {l : Level} (q : ℚ) (x : ℝ l) → is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
-le-lower-cut-real-ℚ q x =
-  forward-implication (is-rounded-lower-cut-ℝ x q)
+module _
+  {l : Level} (q : ℚ) (x : ℝ l)
+  where
+
+  le-iff-lower-cut-real-ℚ : is-in-lower-cut-ℝ x q ↔ le-ℝ (real-ℚ q) x
+  le-iff-lower-cut-real-ℚ = is-rounded-lower-cut-ℝ x q
+
+  le-lower-cut-real-ℚ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
+  le-lower-cut-real-ℚ = forward-implication le-iff-lower-cut-real-ℚ
+
+  lower-cut-real-le-ℚ : le-ℝ (real-ℚ q) x → is-in-lower-cut-ℝ x q
+  lower-cut-real-le-ℚ = backward-implication le-iff-lower-cut-real-ℚ
 ```
 
-### If a rational is in the upper cut of `x`, then it is strictly greater than `x`
+### A rational is in the upper cut of `x` iff its real projection is greater than `x`
 
 ```agda
-le-upper-cut-real-ℚ :
-  {l : Level} (q : ℚ) (x : ℝ l) → is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
-le-upper-cut-real-ℚ q x H =
-  elim-exists
-    ( le-ℝ-Prop x (real-ℚ q))
-    ( λ p (p<q , p∈ux) → intro-exists p (p∈ux , p<q))
-    ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
+module _
+  {l : Level} (q : ℚ) (x : ℝ l)
+  where
+
+  le-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
+  le-upper-cut-real-ℚ H =
+    map-tot-exists
+      ( λ p (p<q , p∈ux) → (p∈ux , p<q))
+      ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
+
+  upper-cut-real-le-ℚ : le-ℝ x (real-ℚ q) → is-in-upper-cut-ℝ x q
+  upper-cut-real-le-ℚ H =
+    backward-implication
+      ( is-rounded-upper-cut-ℝ x q)
+      ( map-tot-exists (λ _ (p>x , p<q) → (p<q , p>x)) H)
+
+  le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
+  pr1 le-iff-upper-cut-real-ℚ = le-upper-cut-real-ℚ
+  pr2 le-iff-upper-cut-real-ℚ = upper-cut-real-le-ℚ
 ```
 
 ## References
