@@ -31,12 +31,13 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We show how to shuffle cards. A **`(p , q)`-riffle shuffle** of the
-[standard finite type](univalent-combinatorics.standard-finite-types.md)
-`Fin (p +ℕ q)` is an [equivalence](foundation.equivalences)
+A
+`(p , q)`-{{#concept "riffle shuffle" Disambiguation="on standard finite types" Agda=riffle-shuffle-Fin}}
+of the [standard finite type](univalent-combinatorics.standard-finite-types.md)
+`Fin (p +ℕ q)` is an [equivalence](foundation-core.equivalences.md)
 `s : Fin p + Fin q ≃ Fin (p +ℕ q)` such that the compositions
 `map-equiv s ∘ inl, map-equiv s ∘ inr` are
-[monotone](order-theory.order-preserving-maps-posets).
+[monotone](order-theory.order-preserving-maps-posets.md).
 
 ## Definitions
 
