@@ -249,4 +249,5 @@ sim-rational-ℝ :
   {l : Level} →
   (x : Rational-ℝ l) →
   sim-rational-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
+sim-rational-ℝ (x , q , x-is-q) = ?
 ```
