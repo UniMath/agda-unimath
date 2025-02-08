@@ -242,9 +242,14 @@ module _
   {l : Level} (q : ℚ) (x : ℝ l)
   where
 
+  le-iff-lower-cut-real-ℚ : is-in-lower-cut-ℝ x q ↔ le-ℝ (real-ℚ q) x
+  le-iff-lower-cut-real-ℚ = is-rounded-lower-cut-ℝ x q
+
   le-lower-cut-real-ℚ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
-  le-lower-cut-real-ℚ =
-    forward-implication (is-rounded-lower-cut-ℝ x q)
+  le-lower-cut-real-ℚ = forward-implication le-iff-lower-cut-real-ℚ
+
+  lower-cut-real-le-ℚ : le-ℝ (real-ℚ q) x → is-in-lower-cut-ℝ x q
+  lower-cut-real-le-ℚ = backward-implication le-iff-lower-cut-real-ℚ
 
   le-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
   le-upper-cut-real-ℚ H =
@@ -252,6 +257,19 @@ module _
       ( le-ℝ-Prop x (real-ℚ q))
       ( λ p (p<q , p∈ux) → intro-exists p (p∈ux , p<q))
       ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
+
+  upper-cut-real-ℚ-le-ℝ : le-ℝ x (real-ℚ q) → is-in-upper-cut-ℝ x q
+  upper-cut-real-ℚ-le-ℝ =
+    elim-exists
+      ( upper-cut-ℝ x q)
+      ( λ p (p>x , p<q) →
+        backward-implication
+        ( is-rounded-upper-cut-ℝ x q)
+        ( intro-exists p (p<q , p>x)))
+
+  le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
+  pr1 le-iff-upper-cut-real-ℚ = le-upper-cut-real-ℚ
+  pr2 le-iff-upper-cut-real-ℚ = upper-cut-real-ℚ-le-ℝ
 ```
 
 ## References
