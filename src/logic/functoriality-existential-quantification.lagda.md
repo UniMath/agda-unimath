@@ -18,7 +18,15 @@ open import foundation-core.function-types
 ## Idea
 
 Any map `f : A → B` and any family of maps `g : (x : A) → C x → D (f x)`
-together induce a map `map-exists D f g : ∃ A C → ∃ B D`.
+together induce a map
+
+```text
+  map-exists D f g : ∃ A C → ∃ B D,
+```
+
+we call this the
+{{#concept "functorial action" Disambiguation="of existential quantification" Agda=map-exists}}
+of existential quantification.
 
 ## Definitions
 
