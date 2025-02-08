@@ -20,6 +20,8 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import order-theory.large-posets
+open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 
@@ -131,14 +133,32 @@ module _
     transitive-leq-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) (lower-cut-ℝ z)
 ```
 
-### The partially ordered set of reals ordered by inequality
+### The large preorder of real numbers
+
+```agda
+ℝ-Large-Preorder : Large-Preorder lsuc _⊔_
+type-Large-Preorder ℝ-Large-Preorder = ℝ
+leq-prop-Large-Preorder ℝ-Large-Preorder = leq-ℝ-Prop
+refl-leq-Large-Preorder ℝ-Large-Preorder = refl-leq-ℝ
+transitive-leq-Large-Preorder ℝ-Large-Preorder = transitive-leq-ℝ
+```
+
+### The large poset of real numbers
+
+```agda
+ℝ-Large-Poset : Large-Poset lsuc _⊔_
+large-preorder-Large-Poset ℝ-Large-Poset = ℝ-Large-Preorder
+antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
+```
+
+### The partially ordered set of reals at a specific level
 
 ```agda
 ℝ-Preorder : (l : Level) → Preorder (lsuc l) l
-ℝ-Preorder l = (ℝ l , leq-ℝ-Prop , refl-leq-ℝ , transitive-leq-ℝ)
+ℝ-Preorder = preorder-Large-Preorder ℝ-Large-Preorder
 
 ℝ-Poset : (l : Level) → Poset (lsuc l) l
-ℝ-Poset l = (ℝ-Preorder l , antisymmetric-leq-ℝ)
+ℝ-Poset = poset-Large-Poset ℝ-Large-Poset
 ```
 
 ### The canonical map from rational numbers to the reals preserves inequality
