@@ -424,7 +424,7 @@ associative-min-Decidable-Total-Order T x y z =
             ＝ min-Decidable-Total-Order T y z
               by
                 ap-min-z-right
-                  (right-leq-left-min-Decidable-Total-Order T x y y≤x)
+                  ( right-leq-left-min-Decidable-Total-Order T x y y≤x)
             ＝ z by right-leq-left-min-Decidable-Total-Order T y z z≤y
             ＝ min-Decidable-Total-Order T x z
               by
@@ -517,7 +517,7 @@ associative-max-Decidable-Total-Order T x y z =
             ＝ max-Decidable-Total-Order T x z
               by
                 ap-max-z-right
-                  (right-leq-left-max-Decidable-Total-Order T x y y≤x)
+                  ( right-leq-left-max-Decidable-Total-Order T x y y≤x)
             ＝ x
               by
                 right-leq-left-max-Decidable-Total-Order
@@ -531,7 +531,7 @@ associative-max-Decidable-Total-Order T x y z =
               by
                 ap
                   ( max-Decidable-Total-Order T x)
-                  (inv (right-leq-left-max-Decidable-Total-Order T y z z≤y)))
+                  ( inv (right-leq-left-max-Decidable-Total-Order T y z z≤y)))
         ( is-leq-or-strict-greater-Decidable-Total-Order T y z))
     ( is-leq-or-strict-greater-Decidable-Total-Order T x y)
     where
