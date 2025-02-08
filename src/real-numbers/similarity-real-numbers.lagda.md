@@ -102,3 +102,12 @@ transitive-sim-ℝ = transitive-sim-Large-Poset ℝ-Large-Poset
 antisymmetric-sim-ℝ : {l : Level} → (x y : ℝ l) → sim-ℝ x y → x ＝ y
 antisymmetric-sim-ℝ = eq-sim-Large-Poset ℝ-Large-Poset
 ```
+### A rational real is similar to the canonical projection of its rational
+
+```agda
+sim-rational-ℝ :
+  {l : Level} →
+  (x : Rational-ℝ l) →
+  sim-rational-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
+sim-rational-ℝ (x , q , x-is-q) = ?
+```

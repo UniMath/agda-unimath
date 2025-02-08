@@ -241,13 +241,3 @@ pr2 equiv-rational-real =
   retraction-rational-rational-ℝ =
     (rational-real-ℚ , is-retraction-rational-real-ℚ)
 ```
-
-### A rational real is similar to the canonical projection of its rational
-
-```agda
-sim-rational-ℝ :
-  {l : Level} →
-  (x : Rational-ℝ l) →
-  sim-rational-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
-sim-rational-ℝ (x , q , x-is-q) = ?
-```
