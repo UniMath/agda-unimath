@@ -220,11 +220,7 @@ module _
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = refl-leq-Decidable-Total-Order T x
   ... | inr y<x = pr2 y<x
-```
 
-### The minimum of two values is less than or equal to the second
-
-```agda
   leq-right-min-Decidable-Total-Order :
     leq-Decidable-Total-Order T min-Decidable-Total-Order y
   leq-right-min-Decidable-Total-Order
@@ -233,7 +229,7 @@ module _
   ... | inr y<x = refl-leq-Decidable-Total-Order T y
 ```
 
-### The first of two values is less than or equal to their maximum
+### The maximum of two values is an upper bound
 
 ```agda
   leq-left-max-Decidable-Total-Order :
@@ -242,11 +238,7 @@ module _
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = x≤y
   ... | inr y<x = refl-leq-Decidable-Total-Order T x
-```
 
-### The second of two values is less than or equal to their maximum
-
-```agda
   leq-right-max-Decidable-Total-Order :
     leq-Decidable-Total-Order T y max-Decidable-Total-Order
   leq-right-max-Decidable-Total-Order
