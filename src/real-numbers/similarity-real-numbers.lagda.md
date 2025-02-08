@@ -1,4 +1,4 @@
-# Similarity on the real numbers
+# Similarity of real numbers
 
 ```agda
 module real-numbers.similarity-real-numbers where
@@ -23,11 +23,12 @@ open import real-numbers.inequality-real-numbers
 
 </details>
 
-## Definition
+## Idea
 
-Two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) are similar
-if they are less than or equal to each other. This is like equality, but two
-reals of different universe levels can be similar.
+Two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) are {{#concept "similar" Disambiguation="Dedekind real numbers" Agda=sim-ℝ}}
+if they are [less than or equal](real-numbers.inequality-real-numbers.md) to each other. The similarity relation on real numbers extends the [equality](foundation-core.identity-types.md) relation to real numbers of differing universe levels.
+
+## Definition
 
 ```agda
 sim-prop-ℝ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → Prop (l1 ⊔ l2)
