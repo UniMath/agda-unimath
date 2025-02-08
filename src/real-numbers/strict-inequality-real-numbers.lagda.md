@@ -237,7 +237,7 @@ module _
             tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
 ```
 
-### If `x` is strictly less than `y`, then `y` is not less than `x`
+### If `x` is less than `y`, then `y` is not less than or equal to `x`
 
 ```agda
 module _
@@ -253,7 +253,7 @@ module _
       ( x<y)
 ```
 
-### If `x` is not strictly less than `y`, then `y` is less than `x`
+### If `x` is not less than `y`, then `y` is less than or equal to `x`
 
 ```agda
 module _
@@ -273,7 +273,7 @@ module _
       ( forward-implication (is-rounded-lower-cut-ℝ y p) p∈ly)
 ```
 
-### If `x` is less than `y`, then `y` is not strictly less than `x`
+### If `x` is less than or equal to `y`, then `y` is not less than `x`
 
 ```agda
 module _
@@ -284,7 +284,7 @@ module _
   not-le-leq-ℝ x≤y y<x = not-leq-le-ℝ y x y<x x≤y
 ```
 
-### `x` is less than `y` if and only if `y` is not strictly less than `x`
+### `x` is less than or equal to `y` if and only if `y` is not less than `x`
 
 ```agda
 module _
