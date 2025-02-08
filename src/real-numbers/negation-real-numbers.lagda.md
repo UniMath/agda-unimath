@@ -29,6 +29,8 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import real-numbers.dedekind-real-numbers
 ```
 
@@ -54,22 +56,18 @@ module _
 
   is-inhabited-lower-cut-neg-ℝ : exists ℚ lower-cut-neg-ℝ
   is-inhabited-lower-cut-neg-ℝ =
-    elim-exists
-      ( ∃ ℚ lower-cut-neg-ℝ)
-      ( λ q q-in-upper →
-        intro-exists
-          (neg-ℚ q)
-          (tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ q)) q-in-upper))
+    map-exists
+      ( is-in-subtype lower-cut-neg-ℝ)
+      ( neg-ℚ)
+      ( λ q I → tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ q)) I)
       ( is-inhabited-upper-cut-ℝ x)
 
   is-inhabited-upper-cut-neg-ℝ : exists ℚ upper-cut-neg-ℝ
   is-inhabited-upper-cut-neg-ℝ =
-    elim-exists
-      ( ∃ ℚ upper-cut-neg-ℝ)
-      ( λ q q-in-lower →
-        intro-exists
-          (neg-ℚ q)
-          (tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q)) q-in-lower))
+    map-exists
+      ( is-in-subtype upper-cut-neg-ℝ)
+      ( neg-ℚ)
+      ( λ q I → tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q)) I)
       ( is-inhabited-lower-cut-ℝ x)
 
   is-rounded-lower-cut-neg-ℝ :
@@ -77,24 +75,23 @@ module _
     is-in-subtype lower-cut-neg-ℝ q ↔
     exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-neg-ℝ r))
   pr1 (is-rounded-lower-cut-neg-ℝ q) in-neg-lower =
-    elim-exists
-      ( ∃ ℚ (λ r → le-ℚ-Prop q r ∧ lower-cut-neg-ℝ r))
+    map-exists
+      ( λ r → le-ℚ q r × is-in-subtype lower-cut-neg-ℝ r)
+      ( neg-ℚ)
       ( λ r (r<-q , in-upper-r) →
-        intro-exists
-          ( neg-ℚ r)
-          ( tr
+        ( ( tr
             ( λ x → le-ℚ x (neg-ℚ r))
             ( neg-neg-ℚ q)
-            ( neg-le-ℚ r (neg-ℚ q) r<-q) ,
-            tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ r)) in-upper-r))
+            ( neg-le-ℚ r (neg-ℚ q) r<-q)) ,
+          ( tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ r)) in-upper-r)))
       ( forward-implication (is-rounded-upper-cut-ℝ x (neg-ℚ q)) in-neg-lower)
   pr2 (is-rounded-lower-cut-neg-ℝ q) exists-r =
     backward-implication
       ( is-rounded-upper-cut-ℝ x (neg-ℚ q))
-      ( elim-exists
-        ( ∃ ℚ (λ r → le-ℚ-Prop r (neg-ℚ q) ∧ upper-cut-ℝ x r))
-        ( λ r (q<r , in-neg-lower-r) →
-          intro-exists (neg-ℚ r) (neg-le-ℚ q r q<r , in-neg-lower-r))
+      ( map-exists
+        ( λ r → le-ℚ r (neg-ℚ q) × is-in-upper-cut-ℝ x r)
+        ( neg-ℚ)
+        ( λ r (q<r , in-neg-lower-r) → (neg-le-ℚ q r q<r , in-neg-lower-r))
         ( exists-r))
 
   is-rounded-upper-cut-neg-ℝ :
@@ -102,21 +99,20 @@ module _
     is-in-subtype upper-cut-neg-ℝ r ↔
     exists ℚ (λ q → (le-ℚ-Prop q r) ∧ (upper-cut-neg-ℝ q))
   pr1 (is-rounded-upper-cut-neg-ℝ r) in-neg-upper =
-    elim-exists
-      ( ∃ ℚ (λ q → le-ℚ-Prop q r ∧ upper-cut-neg-ℝ q))
+    map-exists
+      ( λ q → le-ℚ q r × is-in-subtype upper-cut-neg-ℝ q)
+      ( neg-ℚ)
       ( λ q (-r<q , in-lower-q) →
-        intro-exists
-          ( neg-ℚ q)
-          ( tr (le-ℚ (neg-ℚ q)) (neg-neg-ℚ r) (neg-le-ℚ (neg-ℚ r) q -r<q) ,
-            tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q)) in-lower-q))
+        ( ( tr (le-ℚ (neg-ℚ q)) (neg-neg-ℚ r) (neg-le-ℚ (neg-ℚ r) q -r<q)) ,
+          ( tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q)) in-lower-q)))
       ( forward-implication (is-rounded-lower-cut-ℝ x (neg-ℚ r)) in-neg-upper)
   pr2 (is-rounded-upper-cut-neg-ℝ r) exists-q =
     backward-implication
       ( is-rounded-lower-cut-ℝ x (neg-ℚ r))
-      ( elim-exists
-        ( ∃ ℚ (λ q → le-ℚ-Prop (neg-ℚ r) q ∧ lower-cut-ℝ x q))
-        ( λ q (q<r , in-neg-upper-q) →
-          intro-exists (neg-ℚ q) (neg-le-ℚ q r q<r , in-neg-upper-q))
+      ( map-exists
+        ( λ q → le-ℚ (neg-ℚ r) q × is-in-lower-cut-ℝ x q)
+        ( neg-ℚ)
+        ( λ q (q<r , in-neg-upper-q) → (neg-le-ℚ q r q<r , in-neg-upper-q))
         ( exists-q))
 
   is-disjoint-cut-neg-ℝ :

@@ -38,11 +38,11 @@ the [real numbers](real-numbers.dedekind-real-numbers.md) is defined as the
 lower cut of one being a subset of the lower cut of the other. This is the
 definition used in {{#cite UF13}}, section 11.2.1.
 
+## Definition
+
 ```agda
 module _
-  {l1 l2 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
   leq-ℝ-Prop : Prop (l1 ⊔ l2)
@@ -57,6 +57,10 @@ module _
 ### Equivalence with reversed containment of upper cuts
 
 ```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
   leq-ℝ-Prop' : Prop (l1 ⊔ l2)
   leq-ℝ-Prop' = leq-prop-subtype (upper-cut-ℝ y) (upper-cut-ℝ x)
 
