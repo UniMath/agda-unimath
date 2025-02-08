@@ -252,3 +252,8 @@ github = "djspacewhale"
 displayName = "Job Petrovčič"
 usernames = [ "Job Petrovčič", "JobPetrovcic" ]
 github = "JobPetrovcic"
+
+[[contributors]]
+displayName = "Louis Wasserman"
+usernames = [ "Louis Wasserman" ]
+github = "lowasser"
