@@ -59,7 +59,7 @@ module _
     map-exists
       ( is-in-subtype lower-cut-neg-ℝ)
       ( neg-ℚ)
-      ( λ q I → tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ q)) I)
+      ( λ q → tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ q)))
       ( is-inhabited-upper-cut-ℝ x)
 
   is-inhabited-upper-cut-neg-ℝ : exists ℚ upper-cut-neg-ℝ
@@ -67,7 +67,7 @@ module _
     map-exists
       ( is-in-subtype upper-cut-neg-ℝ)
       ( neg-ℚ)
-      ( λ q I → tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q)) I)
+      ( λ q → tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q)))
       ( is-inhabited-lower-cut-ℝ x)
 
   is-rounded-lower-cut-neg-ℝ :
