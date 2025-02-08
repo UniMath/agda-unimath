@@ -212,11 +212,7 @@ module _
   is-strict-category-is-preunivalent-indiscrete-Precategory H x y =
     is-prop-is-emb
       ( iso-eq-Precategory (indiscrete-Precategory X) x y)
-      ( preunivalence-is-preunivalent-Precategory
-        ( indiscrete-Precategory X)
-        ( H)
-        ( x)
-        ( y))
+      ( H x y)
       ( is-prop-Σ
         ( is-prop-unit)
         ( is-prop-is-iso-Precategory (indiscrete-Precategory X) {x} {y}))

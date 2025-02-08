@@ -128,4 +128,4 @@ This duality is applied in
 
 - [The Regensburg extension of the fundamental theorem of identity types](foundation.regensburg-extension-fundamental-theorem-of-identity-types.md)
 - [The strong preunivalence axiom](foundation.strong-preunivalence.md)
-- [Preunivalent categories](category-theory.preunivalent-categories.md)
+- [Strongly preunivalent categories](category-theory.strongly-preunivalent-categories.md)

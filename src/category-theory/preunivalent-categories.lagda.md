@@ -15,13 +15,10 @@ open import foundation.1-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.propositional-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
-open import foundation.structured-equality-duality
 open import foundation.universe-levels
 ```
 
@@ -29,61 +26,55 @@ open import foundation.universe-levels
 
 ## Idea
 
-A {{#concept "preunivalent category" Agda=Preunivalent-Category}} `𝒞` is a
-[precategory](category-theory.precategories.md) for which every mapping of the
-concrete groupoid of objects into the groupoid of
-[isomorphisms](category-theory.isomorphisms-in-precategories.md) is an
-[embedding](foundation-core.embeddings.md). Equivalently, by
-[subuniverse equality duality](foundation.structured-equality-duality.md), a
-preunivalent category is a precategory whose based isomorphism types
-`Σ (x : 𝒞₀), (* ≅ x)` are [sets](foundation-core.sets.md).
+A {{#concept "preunivalent category" Agda=Preunivalent-Category}} is a
+[precategory](category-theory.precategories.md) `𝒞` for which the
+[identifications](foundation-core.identity-types.md) between objects
+[embed](foundation-core.embeddings.md) into the
+[isomorphisms](category-theory.isomorphisms-in-precategories.md) via the
+particular inductively defined map
+
+```text
+  iso-eq : (x y : 𝒞₀) → x ＝ y → x ≅ y
+  iso-eq x .x refl := id-iso x.
+```
 
 The main purpose of _preunivalence_ is to serve as a common generalization of
 univalent mathematics and mathematics with Axiom K by restricting the ways that
 identity and equivalence may interact. Hence preunivalent categories generalize
 both [(univalent) categories](category-theory.categories.md) and
 [strict categories](category-theory.strict-categories.md), which are
-precategories whose objects form a [set](foundation-core.sets.md). Note,
-however, that our use of the term "preunivalence" here is in a
-[stronger](foundation.strong-preunivalence.md) sense its use in the
-[preunivalence axiom](foundation.preunivalence.md).
+precategories whose objects form a [set](foundation-core.sets.md).
+
+Notice, however, that while preunivalent categories are _a_ common
+generalization of univalent and strict categories, they are not the greatest
+common generalization. For instance, both univalent and strict categories
+satisfy the further property that _every_ map of type
+`(x y : 𝒞₀) → x ＝ y → x ≅ y` is an embedding. For univalent categories this
+follows by uniqueness of the identity family, and for strict categories this
+follows from the fact that equality is a proposition. This observation leads to
+a stronger generalization, called
+[strongly preunivalent categories](category-theory.strongly-preunivalent-categories.md).
 
 ## Definitions
 
 ### The predicate on precategories of being a preunivalent category
 
-We define preunivalence of a precategory `𝒞` to be the condition that for every
-`x : 𝒞₀`, the type `Σ (y : 𝒞₀), (x ≅ y)` is a set.
-
 ```agda
 module _
-  {l1 l2 : Level} (C : Precategory l1 l2)
+  {l1 l2 : Level} (𝒞 : Precategory l1 l2)
   where
 
   is-preunivalent-prop-Precategory : Prop (l1 ⊔ l2)
   is-preunivalent-prop-Precategory =
     Π-Prop
-      ( obj-Precategory C)
+      ( obj-Precategory 𝒞)
       ( λ x →
-        is-set-Prop
-          ( Σ ( obj-Precategory C)
-              ( iso-Precategory C x)))
+        Π-Prop
+          ( obj-Precategory 𝒞)
+          ( λ y → is-emb-Prop (iso-eq-Precategory 𝒞 x y)))
 
   is-preunivalent-Precategory : UU (l1 ⊔ l2)
   is-preunivalent-Precategory = type-Prop is-preunivalent-prop-Precategory
-
-  preunivalence-is-preunivalent-Precategory :
-    is-preunivalent-Precategory →
-    (x y : obj-Precategory C) →
-    is-emb (iso-eq-Precategory C x y)
-  preunivalence-is-preunivalent-Precategory H x y =
-    is-emb-is-prop-map
-      ( backward-implication-subuniverse-equality-duality
-        ( is-prop-Prop)
-        (H x)
-        ( x)
-        ( iso-eq-Precategory C x)
-        ( y))
 ```
 
 ### The type of preunivalent categories
@@ -94,11 +85,11 @@ Preunivalent-Category l1 l2 =
   Σ (Precategory l1 l2) (is-preunivalent-Precategory)
 
 module _
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
+  {l1 l2 : Level} (𝒞 : Preunivalent-Category l1 l2)
   where
 
   precategory-Preunivalent-Category : Precategory l1 l2
-  precategory-Preunivalent-Category = pr1 C
+  precategory-Preunivalent-Category = pr1 𝒞
 
   obj-Preunivalent-Category : UU l1
   obj-Preunivalent-Category = obj-Precategory precategory-Preunivalent-Category
@@ -180,62 +171,31 @@ module _
 
   is-preunivalent-Preunivalent-Category :
     is-preunivalent-Precategory precategory-Preunivalent-Category
-  is-preunivalent-Preunivalent-Category = pr2 C
-
-  iso-Preunivalent-Category : (x y : obj-Preunivalent-Category) → UU l2
-  iso-Preunivalent-Category = iso-Precategory precategory-Preunivalent-Category
-
-  iso-eq-Preunivalent-Category :
-    (x y : obj-Preunivalent-Category) → x ＝ y → iso-Preunivalent-Category x y
-  iso-eq-Preunivalent-Category =
-    iso-eq-Precategory precategory-Preunivalent-Category
-
-  preunivalence-Preunivalent-Category :
-    (x y : obj-Preunivalent-Category) →
-    is-emb (iso-eq-Preunivalent-Category x y)
-  preunivalence-Preunivalent-Category =
-    preunivalence-is-preunivalent-Precategory
-      ( precategory-Preunivalent-Category)
-      ( is-preunivalent-Preunivalent-Category)
+  is-preunivalent-Preunivalent-Category = pr2 𝒞
 
   emb-iso-eq-Preunivalent-Category :
     {x y : obj-Preunivalent-Category} →
     (x ＝ y) ↪ (iso-Precategory precategory-Preunivalent-Category x y)
-  emb-iso-eq-Preunivalent-Category {x} {y} =
-    ( iso-eq-Precategory precategory-Preunivalent-Category x y ,
-      preunivalence-Preunivalent-Category x y)
-```
-
-### The right-based isomorphism types of a preunivalent category are also sets
-
-```agda
-is-preunivalent-Preunivalent-Category' :
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2) →
-  ( x : obj-Preunivalent-Category C) →
-  is-set
-    ( Σ (obj-Preunivalent-Category C) (λ y → iso-Preunivalent-Category C y x))
-is-preunivalent-Preunivalent-Category' C x =
-  is-set-equiv
-    ( Σ (obj-Preunivalent-Category C) (iso-Preunivalent-Category C x))
-    ( equiv-tot
-      ( λ y → equiv-inv-iso-Precategory (precategory-Preunivalent-Category C)))
-    ( is-preunivalent-Preunivalent-Category C x)
+  pr1 (emb-iso-eq-Preunivalent-Category {x} {y}) =
+    iso-eq-Precategory precategory-Preunivalent-Category x y
+  pr2 (emb-iso-eq-Preunivalent-Category {x} {y}) =
+    is-preunivalent-Preunivalent-Category x y
 ```
 
 ### The total hom-type of a preunivalent category
 
 ```agda
 total-hom-Preunivalent-Category :
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2) → UU (l1 ⊔ l2)
-total-hom-Preunivalent-Category C =
-  total-hom-Precategory (precategory-Preunivalent-Category C)
+  {l1 l2 : Level} (𝒞 : Preunivalent-Category l1 l2) → UU (l1 ⊔ l2)
+total-hom-Preunivalent-Category 𝒞 =
+  total-hom-Precategory (precategory-Preunivalent-Category 𝒞)
 
 obj-total-hom-Preunivalent-Category :
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2) →
-  total-hom-Preunivalent-Category C →
-  obj-Preunivalent-Category C × obj-Preunivalent-Category C
-obj-total-hom-Preunivalent-Category C =
-  obj-total-hom-Precategory (precategory-Preunivalent-Category C)
+  {l1 l2 : Level} (𝒞 : Preunivalent-Category l1 l2) →
+  total-hom-Preunivalent-Category 𝒞 →
+  obj-Preunivalent-Category 𝒞 × obj-Preunivalent-Category 𝒞
+obj-total-hom-Preunivalent-Category 𝒞 =
+  obj-total-hom-Precategory (precategory-Preunivalent-Category 𝒞)
 ```
 
 ### Equalities induce morphisms
@@ -243,44 +203,44 @@ obj-total-hom-Preunivalent-Category C =
 ```agda
 module _
   {l1 l2 : Level}
-  (C : Preunivalent-Category l1 l2)
+  (𝒞 : Preunivalent-Category l1 l2)
   where
 
   hom-eq-Preunivalent-Category :
-    (x y : obj-Preunivalent-Category C) →
-    x ＝ y → hom-Preunivalent-Category C x y
+    (x y : obj-Preunivalent-Category 𝒞) →
+    x ＝ y → hom-Preunivalent-Category 𝒞 x y
   hom-eq-Preunivalent-Category =
-    hom-eq-Precategory (precategory-Preunivalent-Category C)
+    hom-eq-Precategory (precategory-Preunivalent-Category 𝒞)
 
   hom-inv-eq-Preunivalent-Category :
-    (x y : obj-Preunivalent-Category C) →
-    x ＝ y → hom-Preunivalent-Category C y x
+    (x y : obj-Preunivalent-Category 𝒞) →
+    x ＝ y → hom-Preunivalent-Category 𝒞 y x
   hom-inv-eq-Preunivalent-Category =
-    hom-inv-eq-Precategory (precategory-Preunivalent-Category C)
+    hom-inv-eq-Precategory (precategory-Preunivalent-Category 𝒞)
 ```
 
 ### Pre- and postcomposition by a morphism
 
 ```agda
 precomp-hom-Preunivalent-Category :
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
-  {x y : obj-Preunivalent-Category C}
-  (f : hom-Preunivalent-Category C x y)
-  (z : obj-Preunivalent-Category C) →
-  hom-Preunivalent-Category C y z →
-  hom-Preunivalent-Category C x z
-precomp-hom-Preunivalent-Category C =
-  precomp-hom-Precategory (precategory-Preunivalent-Category C)
+  {l1 l2 : Level} (𝒞 : Preunivalent-Category l1 l2)
+  {x y : obj-Preunivalent-Category 𝒞}
+  (f : hom-Preunivalent-Category 𝒞 x y)
+  (z : obj-Preunivalent-Category 𝒞) →
+  hom-Preunivalent-Category 𝒞 y z →
+  hom-Preunivalent-Category 𝒞 x z
+precomp-hom-Preunivalent-Category 𝒞 =
+  precomp-hom-Precategory (precategory-Preunivalent-Category 𝒞)
 
 postcomp-hom-Preunivalent-Category :
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
-  {x y : obj-Preunivalent-Category C}
-  (f : hom-Preunivalent-Category C x y)
-  (z : obj-Preunivalent-Category C) →
-  hom-Preunivalent-Category C z x →
-  hom-Preunivalent-Category C z y
-postcomp-hom-Preunivalent-Category C =
-  postcomp-hom-Precategory (precategory-Preunivalent-Category C)
+  {l1 l2 : Level} (𝒞 : Preunivalent-Category l1 l2)
+  {x y : obj-Preunivalent-Category 𝒞}
+  (f : hom-Preunivalent-Category 𝒞 x y)
+  (z : obj-Preunivalent-Category 𝒞) →
+  hom-Preunivalent-Category 𝒞 z x →
+  hom-Preunivalent-Category 𝒞 z y
+postcomp-hom-Preunivalent-Category 𝒞 =
+  postcomp-hom-Precategory (precategory-Preunivalent-Category 𝒞)
 ```
 
 ## Properties
@@ -293,18 +253,18 @@ identity type is a set.
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
+  {l1 l2 : Level} (𝒞 : Preunivalent-Category l1 l2)
   where
 
-  is-1-type-obj-Preunivalent-Category : is-1-type (obj-Preunivalent-Category C)
+  is-1-type-obj-Preunivalent-Category : is-1-type (obj-Preunivalent-Category 𝒞)
   is-1-type-obj-Preunivalent-Category x y =
     is-set-is-emb
-      ( iso-eq-Precategory (precategory-Preunivalent-Category C) x y)
-      ( preunivalence-Preunivalent-Category C x y)
-      ( is-set-iso-Precategory (precategory-Preunivalent-Category C))
+      ( iso-eq-Precategory (precategory-Preunivalent-Category 𝒞) x y)
+      ( is-preunivalent-Preunivalent-Category 𝒞 x y)
+      ( is-set-iso-Precategory (precategory-Preunivalent-Category 𝒞))
 
   obj-1-type-Preunivalent-Category : 1-Type l1
-  pr1 obj-1-type-Preunivalent-Category = obj-Preunivalent-Category C
+  pr1 obj-1-type-Preunivalent-Category = obj-Preunivalent-Category 𝒞
   pr2 obj-1-type-Preunivalent-Category = is-1-type-obj-Preunivalent-Category
 ```
 
@@ -312,21 +272,21 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
+  {l1 l2 : Level} (𝒞 : Preunivalent-Category l1 l2)
   where
 
   is-1-type-total-hom-Preunivalent-Category :
-    is-1-type (total-hom-Preunivalent-Category C)
+    is-1-type (total-hom-Preunivalent-Category 𝒞)
   is-1-type-total-hom-Preunivalent-Category =
     is-trunc-total-hom-is-trunc-obj-Precategory
-      ( precategory-Preunivalent-Category C)
-      ( is-1-type-obj-Preunivalent-Category C)
+      ( precategory-Preunivalent-Category 𝒞)
+      ( is-1-type-obj-Preunivalent-Category 𝒞)
 
   total-hom-1-type-Preunivalent-Category : 1-Type (l1 ⊔ l2)
   total-hom-1-type-Preunivalent-Category =
     total-hom-truncated-type-is-trunc-obj-Precategory
-      ( precategory-Preunivalent-Category C)
-      ( is-1-type-obj-Preunivalent-Category C)
+      ( precategory-Preunivalent-Category 𝒞)
+      ( is-1-type-obj-Preunivalent-Category 𝒞)
 ```
 
 ## See also

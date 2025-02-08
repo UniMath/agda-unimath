@@ -140,4 +140,4 @@ strong-preunivalence = strong-preunivalence-axiom-univalence-axiom univalence
 
 ## See also
 
-- [Preunivalent categories](category-theory.preunivalent-categories.md)
+- [Strongly preunivalent categories](category-theory.strongly-preunivalent-categories.md)
