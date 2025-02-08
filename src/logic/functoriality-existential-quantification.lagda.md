@@ -99,12 +99,11 @@ module _
   map-tot-exists g = map-exists C id g
 ```
 
-### The functorial action of existential quantification on families of binary maps
+### The functorial action of existential quantification on maps of the base type
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {B : UU l2} (C : B → UU l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3)
   where
 
   map-exists-map-base :
