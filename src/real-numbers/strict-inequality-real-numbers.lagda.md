@@ -139,7 +139,7 @@ module _
           ( y<z))
 ```
 
-### The canonical map from rationals to reals preserves strict inequality
+### The canonical map from rationals to reals preserves and reflects strict inequality
 
 ```agda
 module _
