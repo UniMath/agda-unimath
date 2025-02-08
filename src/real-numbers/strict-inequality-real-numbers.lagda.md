@@ -298,7 +298,7 @@ module _
   pr2 leq-iff-not-le-ℝ = leq-not-le-ℝ y x
 ```
 
-### A rational is in the lower cut of `x` if and only if its real projection is less than `x`
+### A rational is in the lower cut of `x` iff its real projection is less than `x`
 
 ```agda
 module _
@@ -315,7 +315,7 @@ module _
   lower-cut-real-le-ℚ = backward-implication le-iff-lower-cut-real-ℚ
 ```
 
-### A rational is in the upper cut of `x` if and only if its real projection is greater than `x`
+### A rational is in the upper cut of `x` iff its real projection is greater than `x`
 
 ```agda
 module _
