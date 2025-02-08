@@ -211,7 +211,7 @@ module _
       ( is-leq-or-strict-greater-Decidable-Total-Order T x y)
 ```
 
-### The minimum of two values is less than or equal to the first
+### The minimum is a lower bound
 
 ```agda
   leq-left-min-Decidable-Total-Order :
