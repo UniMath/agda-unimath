@@ -24,7 +24,6 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
-open import order-theory.similarity-of-elements-large-posets
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.rational-real-numbers
