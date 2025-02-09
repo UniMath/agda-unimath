@@ -148,10 +148,76 @@ module _
     minkowski-mul-inhabited-is-inhabited-Semigroup (semigroup-Monoid M)
 ```
 
+### Containment is preserved by Minkowski multiplication of monoid subsets
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Monoid l1)
+  (B : subset-Monoid l2 M)
+  (A : subset-Monoid l3 M)
+  (A' : subset-Monoid l4 M)
+  where
+
+  preserves-leq-left-minkowski-mul-Monoid :
+    A ⊆ A' → minkowski-mul-Monoid M A B ⊆ minkowski-mul-Monoid M A' B
+  preserves-leq-left-minkowski-mul-Monoid =
+    preserves-leq-left-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
+
+  preserves-leq-right-minkowski-mul-Monoid :
+    A ⊆ A' → minkowski-mul-Monoid M B A ⊆ minkowski-mul-Monoid M B A'
+  preserves-leq-right-minkowski-mul-Monoid =
+    preserves-leq-right-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
+```
+
+### Similarity is preserved by Minkowski multiplication of monoid subsets
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Monoid l1)
+  (B : subset-Monoid l2 M)
+  (A : subset-Monoid l3 M)
+  (A' : subset-Monoid l4 M)
+  where
+
+  preserves-sim-left-minkowski-mul-Monoid :
+    sim-subtype A A' →
+    sim-subtype (minkowski-mul-Monoid M A B) (minkowski-mul-Monoid M A' B)
+  preserves-sim-left-minkowski-mul-Monoid =
+    preserves-sim-left-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
+
+  preserves-sim-right-minkowski-mul-Monoid :
+    sim-subtype A A' →
+    sim-subtype (minkowski-mul-Monoid M B A) (minkowski-mul-Monoid M B A')
+  preserves-sim-right-minkowski-mul-Monoid =
+    preserves-sim-right-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
+
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (M : Monoid l1)
+  (A : subset-Monoid l2 M)
+  (A' : subset-Monoid l3 M)
+  (B : subset-Monoid l4 M)
+  (B' : subset-Monoid l5 M)
+  where
+
+  preserves-sim-minkowski-mul-Monoid :
+    sim-subtype A A' →
+    sim-subtype B B' →
+    sim-subtype
+      ( minkowski-mul-Monoid M A B)
+      ( minkowski-mul-Monoid M A' B')
+  preserves-sim-minkowski-mul-Monoid =
+    preserves-sim-minkowski-mul-Semigroup (semigroup-Monoid M) A A' B B'
+```
+
 ## See also
 
 - Minkowski multiplication on semigroups is defined in
   [`group-theory.minkowski-multiplication-semigroups`](group-theory.minkowski-multiplication-semigroups.md).
+- Minkowski multiplication on commutative monoids is defined in
+  [`group-theory.minkowski-multiplication-commutative-monoids`](group-theory.minkowski-multiplication-commutative-monoids.md).
 
 ## External links
 
