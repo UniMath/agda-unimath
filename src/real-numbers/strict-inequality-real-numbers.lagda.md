@@ -96,18 +96,14 @@ module _
       p , x<p , p<y ← x<y
       q , y<q , q<x ← y<x
       rec-coproduct
-        ( λ p<q →
-          asymmetric-le-ℚ
-            ( p)
+        ( asymmetric-le-ℚ
             ( q)
-            ( p<q)
+            ( p)
             ( le-lower-upper-cut-ℝ x q p q<x x<p))
-        ( λ q≤p →
-          not-leq-le-ℚ
+        ( not-leq-le-ℚ
             ( p)
             ( q)
-            ( le-lower-upper-cut-ℝ y p q p<y y<q)
-            ( q≤p))
+            ( le-lower-upper-cut-ℝ y p q p<y y<q))
         ( decide-le-leq-ℚ p q)
     where open elim-exists-do empty-Prop
 ```
@@ -341,8 +337,8 @@ module _
       p , p<q , x<p ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
       r , q<r , r<y ← forward-implication (is-rounded-lower-cut-ℝ y q) q<y
       intro-exists
-        (real-ℚ q)
-        (intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
+        ( real-ℚ q)
+        ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
     where
       open elim-exists-do (∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
 ```
