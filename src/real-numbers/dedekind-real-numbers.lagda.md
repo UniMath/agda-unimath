@@ -39,6 +39,9 @@ open import foundation.universe-levels
 open import foundation-core.truncation-levels
 
 open import logic.functoriality-existential-quantification
+
+open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
@@ -48,19 +51,12 @@ open import logic.functoriality-existential-quantification
 A
 {{#concept "Dedekind cut" Agda=is-dedekind-cut WD="dedekind cut" WDID=Q851333}}
 consists of a [pair](foundation.dependent-pair-types.md) `(L , U)` of
-[subtypes](foundation-core.subtypes.md) of
-[the rational numbers](elementary-number-theory.rational-numbers.md) `ℚ`,
-satisfying the following four conditions
+a [lower Dedekind cut](real-numbers.lower-dedekind-real-numbers)
+and an [upper Dedekind cut](real-numbers.upper-dedekind-real-numbers)
+that also satisfy the following conditions:
 
-1. _Inhabitedness_. Both `L` and `U` are
-   [inhabited](foundation.inhabited-subtypes.md) subtypes of `ℚ`.
-2. _Roundedness_. A rational number `q` is in `L`
-   [if and only if](foundation.logical-equivalences.md) there
-   [exists](foundation.existential-quantification.md) `q < r` such that `r ∈ L`,
-   and a rational number `r` is in `U` if and only if there exists `q < r` such
-   that `q ∈ U`.
-3. _Disjointness_. `L` and `U` are disjoint subsets of `ℚ`.
-4. _Locatedness_. If `q < r` then `q ∈ L` or `r ∈ U`.
+1. _Disjointness_. `L` and `U` are disjoint subsets of `ℚ`.
+2. _Locatedness_. If `q < r` then `q ∈ L` or `r ∈ U`.
 
 The type of {{#concept "Dedekind real numbers" Agda=ℝ}} is the type of all
 Dedekind cuts. The Dedekind real numbers will be taken as the standard
@@ -77,15 +73,10 @@ module _
 
   is-dedekind-cut-Prop : Prop (l1 ⊔ l2)
   is-dedekind-cut-Prop =
-    conjunction-Prop
-      ( (∃ ℚ L) ∧ (∃ ℚ U))
-      ( conjunction-Prop
-        ( conjunction-Prop
-          ( ∀' ℚ ( λ q → L q ⇔ ∃ ℚ (λ r → le-ℚ-Prop q r ∧ L r)))
-          ( ∀' ℚ ( λ r → U r ⇔ ∃ ℚ (λ q → le-ℚ-Prop q r ∧ U q))))
-        ( conjunction-Prop
-          ( ∀' ℚ (λ q → ¬' (L q ∧ U q)))
-          ( ∀' ℚ (λ q → ∀' ℚ (λ r → le-ℚ-Prop q r ⇒ (L q ∨ U r))))))
+    is-lower-dedekind-cut-Prop L ∧
+    is-upper-dedekind-cut-Prop U ∧
+    ( ∀' ℚ (λ q → ¬' (L q ∧ U q))) ∧
+    ( ∀' ℚ (λ q → ∀' ℚ (λ r → le-ℚ-Prop q r ⇒ (L q ∨ U r))))
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop
@@ -113,6 +104,12 @@ module _
   upper-cut-ℝ : subtype l ℚ
   upper-cut-ℝ = pr1 (pr2 x)
 
+  lower-real-ℝ : lower-ℝ l
+  lower-real-ℝ = lower-cut-ℝ , pr1 (pr2 (pr2 x))
+
+  upper-real-ℝ : upper-ℝ l
+  upper-real-ℝ = upper-cut-ℝ , pr1 (pr2 (pr2 (pr2 x)))
+
   is-in-lower-cut-ℝ : ℚ → UU l
   is-in-lower-cut-ℝ = is-in-subtype lower-cut-ℝ
 
@@ -123,34 +120,30 @@ module _
   is-dedekind-cut-cut-ℝ = pr2 (pr2 x)
 
   is-inhabited-lower-cut-ℝ : exists ℚ lower-cut-ℝ
-  is-inhabited-lower-cut-ℝ = pr1 (pr1 is-dedekind-cut-cut-ℝ)
+  is-inhabited-lower-cut-ℝ = is-inhabited-cut-lower-ℝ lower-real-ℝ
 
   is-inhabited-upper-cut-ℝ : exists ℚ upper-cut-ℝ
-  is-inhabited-upper-cut-ℝ = pr2 (pr1 is-dedekind-cut-cut-ℝ)
+  is-inhabited-upper-cut-ℝ = is-inhabited-cut-upper-ℝ upper-real-ℝ
 
   is-rounded-lower-cut-ℝ :
     (q : ℚ) →
     is-in-lower-cut-ℝ q ↔
     exists ℚ (λ r → (le-ℚ-Prop q r) ∧ (lower-cut-ℝ r))
-  is-rounded-lower-cut-ℝ =
-    pr1 (pr1 (pr2 is-dedekind-cut-cut-ℝ))
+  is-rounded-lower-cut-ℝ = is-rounded-cut-lower-ℝ lower-real-ℝ
 
   is-rounded-upper-cut-ℝ :
     (r : ℚ) →
     is-in-upper-cut-ℝ r ↔
     exists ℚ (λ q → (le-ℚ-Prop q r) ∧ (upper-cut-ℝ q))
-  is-rounded-upper-cut-ℝ =
-    pr2 (pr1 (pr2 is-dedekind-cut-cut-ℝ))
+  is-rounded-upper-cut-ℝ = is-rounded-cut-upper-ℝ upper-real-ℝ
 
   is-disjoint-cut-ℝ : (q : ℚ) → ¬ (is-in-lower-cut-ℝ q × is-in-upper-cut-ℝ q)
-  is-disjoint-cut-ℝ =
-    pr1 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
+  is-disjoint-cut-ℝ = pr1 (pr2 (pr2 (pr2 (pr2 x))))
 
   is-located-lower-upper-cut-ℝ :
     (q r : ℚ) → le-ℚ q r →
     type-disjunction-Prop (lower-cut-ℝ q) (upper-cut-ℝ r)
-  is-located-lower-upper-cut-ℝ =
-    pr2 (pr2 (pr2 is-dedekind-cut-cut-ℝ))
+  is-located-lower-upper-cut-ℝ = pr2 (pr2 (pr2 (pr2 (pr2 x))))
 
   cut-ℝ : subtype l ℚ
   cut-ℝ q =
