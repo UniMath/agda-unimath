@@ -12,9 +12,9 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.powersets
-open import foundation.unital-binary-operations
 open import foundation.subtypes
 open import foundation.transport-along-identifications
+open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.minkowski-multiplication-semigroups
@@ -27,11 +27,11 @@ open import group-theory.semigroups
 ## Idea
 
 For two [subtypes](foundation-core.subtypes.md) `A`, `B` of a
-[monoid](group-theory.monoids.md) `M`, the Minkowski multiplication of
-`A` and `B` is the set of elements that can be formed by multiplying an element
-of `A` and an element of `B`. (This is more usually referred to as a Minkowski
-sum, but as the operation on monoids is referred to as `mul`, we use
-multiplicative terminology.)
+[monoid](group-theory.monoids.md) `M`, the Minkowski multiplication of `A` and
+`B` is the set of elements that can be formed by multiplying an element of `A`
+and an element of `B`. (This is more usually referred to as a Minkowski sum, but
+as the operation on monoids is referred to as `mul`, we use multiplicative
+terminology.)
 
 ## Definition
 

@@ -26,10 +26,10 @@ open import group-theory.semigroups
 ## Idea
 
 For two [subtypes](foundation-core.subtypes.md) `A`, `B` of a
-[semigroup](group-theory.semigroups.md) `S`, the Minkowski multiplication of
-`A` and `B` is the set of elements that can be formed by multiplying an element
-of `A` and an element of `B`. (This is more usually referred to as a Minkowski
-sum, but as the operation on semigroups is referred to as `mul`, we use
+[semigroup](group-theory.semigroups.md) `S`, the Minkowski multiplication of `A`
+and `B` is the set of elements that can be formed by multiplying an element of
+`A` and an element of `B`. (This is more usually referred to as a Minkowski sum,
+but as the operation on semigroups is referred to as `mul`, we use
 multiplicative terminology.)
 
 ## Definition
