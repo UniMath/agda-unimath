@@ -26,8 +26,8 @@ open import ring-theory.subsets-semirings
 
 ## Idea
 
-A {{#concept "left ideal" Disambiguation="semiring" Agda=left-ideal-Semiring}} in a [semiring](ring-theory.semirings.md) `R` is a left submodule of
-`R`.
+A {{#concept "left ideal" Disambiguation="semiring" Agda=left-ideal-Semiring}}
+in a [semiring](ring-theory.semirings.md) `R` is a left submodule of `R`.
 
 ## Definitions
 

@@ -22,9 +22,10 @@ open import ring-theory.semirings
 
 ## Idea
 
-Consider a [semiring](ring-theory.semirings.md) $R$.
-A {{#concept "monoid with a left semiring action" Agda=Monoid-With-Left-Semiring-Action}}
-from $R$ consists of a [monoid](group-theory.monoids.md) $M$ and a binary operation $\mu : R \to M \to M$ satisfying the axioms of a ring action:
+Consider a [semiring](ring-theory.semirings.md) $R$. A
+{{#concept "monoid with a left semiring action" Agda=Monoid-With-Left-Semiring-Action}}
+from $R$ consists of a [monoid](group-theory.monoids.md) $M$ and a binary
+operation $\mu : R \to M \to M$ satisfying the axioms of a ring action:
 
 1. The action distributes from the left over monoid multiplication:
    $$

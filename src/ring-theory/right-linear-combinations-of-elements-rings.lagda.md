@@ -15,10 +15,10 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import lists.lists
+
 open import ring-theory.rings
 open import ring-theory.subsets-rings
-
-open import lists.lists
 
 open import structured-types.magmas
 ```
@@ -27,15 +27,20 @@ open import structured-types.magmas
 
 ## Idea
 
-Consider a [ring](ring-theory.rings.md) $R$ and a type $A$. A {#concept "right linear combination"}} of elements of $R$ is a [list](lists.lists.md) of pairs $(a,r)$ consisting of an element $a:A$ and an element $r:R$.
+Consider a [ring](ring-theory.rings.md) $R$ and a type $A$. A {#concept "right
+linear combination"}} of elements of $R$ is a [list](lists.lists.md) of pairs
+$(a,r)$ consisting of an element $a:A$ and an element $r:R$.
 
-Furthermore, if we are given an action $\mu : A \to R \to M$ taking values in a [unital magma](structured-types.magmas.md) $(M,+,0)$, then we can evaluate a right linear combination $((a_0,r_0),\ldots,(a_{n-1},r_{n-1}))$ by defining
+Furthermore, if we are given an action $\mu : A \to R \to M$ taking values in a
+[unital magma](structured-types.magmas.md) $(M,+,0)$, then we can evaluate a
+right linear combination $((a_0,r_0),\ldots,(a_{n-1},r_{n-1}))$ by defining
 
 $$
   ev((a_0,r_0),\ldots,(a_{n-1},r_{n-1})) := \sum_{i=0}^{n-1} \mu(a_i,r_i).
 $$
 
-To be explicit, right linear combinations of elements of a type $A$ have the ring coefficients on the right.
+To be explicit, right linear combinations of elements of a type $A$ have the
+ring coefficients on the right.
 
 ## Definitions
 

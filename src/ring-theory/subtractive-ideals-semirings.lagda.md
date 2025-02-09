@@ -19,7 +19,10 @@ open import ring-theory.subsets-semirings
 
 ## Idea
 
-An [ideal](ring-theory.ideals-semirings.md) $I$ of a [semiring](ring-theory.semirings.md) $R$ is said to be a {{#concept "subtractive ideal" Disambiguation="semirings" Agda=is-subtractive-ideal-Semiring}} if for every $a,b : R$ such that $a\in S$ and $a+b \in S$, we have $b \in S$. 
+An [ideal](ring-theory.ideals-semirings.md) $I$ of a
+[semiring](ring-theory.semirings.md) $R$ is said to be a
+{{#concept "subtractive ideal" Disambiguation="semirings" Agda=is-subtractive-ideal-Semiring}}
+if for every $a,b : R$ such that $a\in S$ and $a+b \in S$, we have $b \in S$.
 
 ## Definitions
 

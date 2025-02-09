@@ -20,13 +20,13 @@ open import foundation.universe-levels
 
 open import group-theory.monoids
 
-open import ring-theory.monoids-with-semiring-actions
-open import ring-theory.semirings
-open import ring-theory.subsets-semirings
-
 open import lists.concatenation-lists
 open import lists.functoriality-lists
 open import lists.lists
+
+open import ring-theory.monoids-with-semiring-actions
+open import ring-theory.semirings
+open import ring-theory.subsets-semirings
 
 open import structured-types.magmas
 ```
@@ -35,16 +35,20 @@ open import structured-types.magmas
 
 ## Idea
 
-Consider a [semiring](ring-theory.semirings.md) $R$ and a type $A$. A {#concept "left linear combination"}} of elements of $R$ is a [list](lists.lists.md) of pairs $(r,a)$ consisting of an element $r:R$ and an element $a:A$.
+Consider a [semiring](ring-theory.semirings.md) $R$ and a type $A$. A {#concept
+"left linear combination"}} of elements of $R$ is a [list](lists.lists.md) of
+pairs $(r,a)$ consisting of an element $r:R$ and an element $a:A$.
 
-Furthermore, if we are given an action $\mu : R \to A \to M$ taking values in a [unital magma](structured-types.magmas.md) $(M,+,0)$, then we can evaluate a left linear combination $((r_0,a_0),\ldots,(r_{n-1},a_{n-1}))$ by defining
+Furthermore, if we are given an action $\mu : R \to A \to M$ taking values in a
+[unital magma](structured-types.magmas.md) $(M,+,0)$, then we can evaluate a
+left linear combination $((r_0,a_0),\ldots,(r_{n-1},a_{n-1}))$ by defining
 
 $$
   ev((r_0,a_0),\ldots,(r_{n-1},a_{n-1})) := \sum_{i=0}^{n-1} \mu(r_i,a_i).
 $$
 
-To be explicit, left linear combinations of elements of a type $A$ have the semiring coefficients on the left.
-
+To be explicit, left linear combinations of elements of a type $A$ have the
+semiring coefficients on the left.
 
 ## Definitions
 
@@ -110,7 +114,7 @@ module _
   where
 
   is-left-linear-combination-Semiring :
-     (M : Unital-Magma l3) (μ : type-Semiring R → A → type-Unital-Magma M) →
+    (M : Unital-Magma l3) (μ : type-Semiring R → A → type-Unital-Magma M) →
     type-Unital-Magma M → UU (l1 ⊔ l2 ⊔ l3)
   is-left-linear-combination-Semiring M μ =
     fiber (ev-unital-magma-left-linear-combination-Semiring R M μ)
@@ -209,7 +213,8 @@ module _
 
 ### Given a left action of a semiring $R$ on a type $A$ with values in a monoid, the evaluation function preserves concatenation
 
-We assume a monoid here, because we need associativity for the multiplicative operation of the monoid.
+We assume a monoid here, because we need associativity for the multiplicative
+operation of the monoid.
 
 ```agda
 module _

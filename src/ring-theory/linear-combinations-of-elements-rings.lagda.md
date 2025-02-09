@@ -16,10 +16,10 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import lists.lists
+
 open import ring-theory.rings
 open import ring-theory.subsets-rings
-
-open import lists.lists
 
 open import structured-types.magmas
 ```
@@ -28,16 +28,22 @@ open import structured-types.magmas
 
 ## Idea
 
-Consider a [ring](ring-theory.rings.md) $R$ and a type $A$. A {#concept "linear combination"}} of elements of $A$ is a [list](lists.lists.md) of pairs $(r,a,s)$ consisting of an element $r,s:R$ and an element $a:A$.
+Consider a [ring](ring-theory.rings.md) $R$ and a type $A$. A {#concept "linear
+combination"}} of elements of $A$ is a [list](lists.lists.md) of pairs $(r,a,s)$
+consisting of an element $r,s:R$ and an element $a:A$.
 
-Furthermore, if we are given an action $\mu : R \to A \to R \to M$ taking values in a [unital magma](structured-types.magmas.md) $(M,+,0)$, then we can evaluate a linear combination $((r_0,a_0,s_0),\ldots,(r_{n-1},a_{n-1},s_{n-1}))$ by defining
+Furthermore, if we are given an action $\mu : R \to A \to R \to M$ taking values
+in a [unital magma](structured-types.magmas.md) $(M,+,0)$, then we can evaluate
+a linear combination $((r_0,a_0,s_0),\ldots,(r_{n-1},a_{n-1},s_{n-1}))$ by
+defining
 
 $$
   ev((r_0,a_0,s_0),\ldots,(r_{n-1},a_{n-1},s_{n-1})) :=
   \sum_{i=0}^{n-1} \mu(r_i,a_i,s_i).
 $$
 
-To be explicit, linear combinations of elements of a type $A$ have the ring coefficients on both sides.
+To be explicit, linear combinations of elements of a type $A$ have the ring
+coefficients on both sides.
 
 ## Definitions
 
@@ -168,13 +174,19 @@ module _
 
 ### Linear combinations of a single element in a ring
 
-Even though left linear combinations and right linear combinations of a single element $a$ in a ring $R$ can always be written in the form $(r,a)$ or $(a,r)$, resepectively, i.e., any element of the form $r_0a + \cdots + r_{n-1}a$ is equal to an element of the form $ra$ and similar for right linear combinations, the two-sided case is a bit different in that there might be rings in which an element of the form
+Even though left linear combinations and right linear combinations of a single
+element $a$ in a ring $R$ can always be written in the form $(r,a)$ or $(a,r)$,
+resepectively, i.e., any element of the form $r_0a + \cdots + r_{n-1}a$ is equal
+to an element of the form $ra$ and similar for right linear combinations, the
+two-sided case is a bit different in that there might be rings in which an
+element of the form
 
 $$
   r_0as_0 + \cdots + r_{n-1}as_{n-1}
 $$
 
-is not equal to an element of the form $ras$, because the distributivity laws don't apply in this more general case.
+is not equal to an element of the form $ras$, because the distributivity laws
+don't apply in this more general case.
 
 ```agda
 module _

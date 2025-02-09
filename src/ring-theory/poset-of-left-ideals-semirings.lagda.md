@@ -30,8 +30,8 @@ open import ring-theory.semirings
 ## Idea
 
 The [left ideals](ring-theory.left-ideals-semirings.md) of a
-[semiring](ring-theory.semirings.md) form a [large poset](order-theory.large-posets.md)
-ordered by inclusion.
+[semiring](ring-theory.semirings.md) form a
+[large poset](order-theory.large-posets.md) ordered by inclusion.
 
 ## Definition
 
@@ -146,7 +146,8 @@ module _
   eq-sim-left-ideal-Semiring :
     {l2 : Level}
     (I J : left-ideal-Semiring l2 R) → sim-left-ideal-Semiring I J → I ＝ J
-  eq-sim-left-ideal-Semiring = eq-sim-Large-Poset (left-ideal-Semiring-Large-Poset R)
+  eq-sim-left-ideal-Semiring =
+    eq-sim-Large-Poset (left-ideal-Semiring-Large-Poset R)
 ```
 
 ## Properties

@@ -27,8 +27,8 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-A {{#concept "left ideal" Disambiguation="rings" Agda=left-ideal-Ring}} in a [ring](ring-theory.rings.md) `R` is a left submodule of
-`R`.
+A {{#concept "left ideal" Disambiguation="rings" Agda=left-ideal-Ring}} in a
+[ring](ring-theory.rings.md) `R` is a left submodule of `R`.
 
 ## Definitions
 
