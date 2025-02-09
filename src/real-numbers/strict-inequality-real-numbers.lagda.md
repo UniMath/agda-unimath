@@ -12,6 +12,7 @@ module real-numbers.strict-inequality-real-numbers where
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -351,6 +352,29 @@ module _
   le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
   pr1 le-iff-upper-cut-real-ℚ = le-upper-cut-real-ℚ
   pr2 le-iff-upper-cut-real-ℚ = upper-cut-real-le-ℚ
+```
+
+### Strict inequality on the real numbers is dense
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  dense-le-ℝ : le-ℝ x y → exists (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
+  dense-le-ℝ =
+    elim-exists
+      ( ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
+      ( λ q (q∈ux , q∈ly) →
+        map-binary-exists
+          ( λ z → le-ℝ x z × le-ℝ z y)
+          ( λ _ _ → real-ℚ q)
+          ( λ p r (p<q , p∈ux) (q<r , r∈ly) →
+            intro-exists p (p∈ux , p<q) , intro-exists r (q<r , r∈ly))
+          ( forward-implication (is-rounded-upper-cut-ℝ x q) q∈ux)
+          ( forward-implication (is-rounded-lower-cut-ℝ y q) q∈ly))
 ```
 
 ## References
