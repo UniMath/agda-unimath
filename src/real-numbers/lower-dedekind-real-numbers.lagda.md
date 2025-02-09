@@ -5,19 +5,20 @@ module real-numbers.lower-dedekind-real-numbers where
 ```
 
 <details><summary>Imports</summary>
+
 ```agda
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
-open import foundation.dependent-pair-types
-open import foundation.subtypes
 open import foundation.conjunction
-open import foundation.identity-types
+open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.propositions
+open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.universe-levels
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universal-quantification
+open import foundation.universe-levels
 ```
 
 </details>
@@ -25,8 +26,7 @@ open import foundation.universal-quantification
 
 A lower
 {{#concept "Dedekind cut" Agda=is-dedekind-cut WD="dedekind cut" WDID=Q851333}}
-consists of a
-[subtype](foundation-core.subtypes.md) `L` of
+consists of a [subtype](foundation-core.subtypes.md) `L` of
 [the rational numbers](elementary-number-theory.rational-numbers.md) `ℚ`,
 satisfying the following two conditions:
 
@@ -35,8 +35,9 @@ satisfying the following two conditions:
    [if and only if](foundation.logical-equivalences.md) there
    [exists](foundation.existential-quantification.md) `q < r` such that `r ∈ L`.
 
-The type of all lower Dedekind real numbers is the type of all lower Dedekind cuts.
-A lower Dedekind cut is part of a [Dedekind real number](real-numbers.dedekind-real-numbers.md)
+The type of all lower Dedekind real numbers is the type of all lower Dedekind
+cuts. A lower Dedekind cut is part of a
+[Dedekind real number](real-numbers.dedekind-real-numbers.md)
 
 ## Definition
 
@@ -110,6 +111,7 @@ module _
 
 ## References
 
-This page follows the terminology used in the exercises of Section 11 in {{#cite UF13}}.
+This page follows the terminology used in the exercises of Section 11 in
+{{#cite UF13}}.
 
 {{#bibliography}}
