@@ -192,25 +192,23 @@ module _
   (X : Finite-Type l)
   where
 
-  structure-finite-commutative-monoid : UU l
-  structure-finite-commutative-monoid =
-    Σ ( structure-finite-monoid X)
+  structure-commutative-monoid-Finite-Type : UU l
+  structure-commutative-monoid-Finite-Type =
+    Σ ( structure-monoid-Finite-Type X)
       ( λ m →
         is-commutative-Finite-Monoid
-          ( finite-monoid-structure-finite-monoid X m))
+          ( finite-monoid-structure-monoid-Finite-Type X m))
 
-  finite-commutative-monoid-structure-finite-commutative-monoid :
-    structure-finite-commutative-monoid → Finite-Commutative-Monoid l
-  pr1 (finite-commutative-monoid-structure-finite-commutative-monoid (m , c)) =
-    finite-monoid-structure-finite-monoid X m
-  pr2 (finite-commutative-monoid-structure-finite-commutative-monoid (m , c)) =
-    c
+  finite-commutative-monoid-structure-commutative-monoid-Finite-Type :
+    structure-commutative-monoid-Finite-Type → Finite-Commutative-Monoid l
+  finite-commutative-monoid-structure-commutative-monoid-Finite-Type (m , c) =
+    finite-monoid-structure-monoid-Finite-Type X m , c
 
-  is-finite-structure-finite-commutative-monoid :
-    is-finite structure-finite-commutative-monoid
-  is-finite-structure-finite-commutative-monoid =
+  is-finite-structure-commutative-monoid-Finite-Type :
+    is-finite structure-commutative-monoid-Finite-Type
+  is-finite-structure-commutative-monoid-Finite-Type =
     is-finite-Σ
-      ( is-finite-structure-finite-monoid X)
+      ( is-finite-structure-monoid-Finite-Type X)
       ( λ m →
         is-finite-Π
           ( is-finite-type-Finite-Type X)

@@ -238,13 +238,14 @@ mere-equiv-number-of-semigroups-of-order n =
 ### There is a finite number of ways to equip a finite type with the structure of a semigroup
 
 ```agda
-structure-finite-semigroup :
+structure-semigroup-Finite-Type :
   {l1 : Level} → Finite-Type l1 → UU l1
-structure-finite-semigroup = has-associative-mul-Finite-Type
+structure-semigroup-Finite-Type = has-associative-mul-Finite-Type
 
-is-finite-structure-finite-semigroup :
-  {l : Level} → (X : Finite-Type l) → is-finite (structure-finite-semigroup X)
-is-finite-structure-finite-semigroup X =
+is-finite-structure-semigroup-Finite-Type :
+  {l : Level} (X : Finite-Type l) →
+  is-finite (structure-semigroup-Finite-Type X)
+is-finite-structure-semigroup-Finite-Type X =
   is-finite-Σ
     ( is-finite-Π
       ( is-finite-type-Finite-Type X)

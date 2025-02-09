@@ -649,25 +649,26 @@ module _
   (X : Finite-Type l1)
   where
 
-  structure-finite-commutative-ring :
+  structure-commutative-ring-Finite-Type :
     UU l1
-  structure-finite-commutative-ring =
-    Σ ( structure-finite-ring X)
+  structure-commutative-ring-Finite-Type =
+    Σ ( structure-ring-Finite-Type X)
       ( λ r →
-        is-commutative-Finite-Ring (finite-ring-structure-finite-ring X r))
+        is-commutative-Finite-Ring (finite-ring-structure-ring-Finite-Type X r))
 
-  finite-commutative-ring-structure-finite-commutative-ring :
-    structure-finite-commutative-ring →
+  finite-commutative-ring-structure-commutative-ring-Finite-Type :
+    structure-commutative-ring-Finite-Type →
     Finite-Commutative-Ring l1
-  pr1 (finite-commutative-ring-structure-finite-commutative-ring (r , c)) =
-    finite-ring-structure-finite-ring X r
-  pr2 (finite-commutative-ring-structure-finite-commutative-ring (r , c)) = c
+  pr1 (finite-commutative-ring-structure-commutative-ring-Finite-Type (r , c)) =
+    finite-ring-structure-ring-Finite-Type X r
+  pr2 (finite-commutative-ring-structure-commutative-ring-Finite-Type (r , c)) =
+    c
 
-  is-finite-structure-finite-commutative-ring :
-    is-finite structure-finite-commutative-ring
-  is-finite-structure-finite-commutative-ring =
+  is-finite-structure-commutative-ring-Finite-Type :
+    is-finite structure-commutative-ring-Finite-Type
+  is-finite-structure-commutative-ring-Finite-Type =
     is-finite-Σ
-      ( is-finite-structure-finite-ring X)
+      ( is-finite-structure-ring-Finite-Type X)
       ( λ r →
         is-finite-Π
           ( is-finite-type-Finite-Type X)

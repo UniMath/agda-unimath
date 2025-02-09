@@ -78,20 +78,20 @@ module _
   (X : Finite-Type l1)
   where
 
-  structure-finite-semisimple-commutative-ring :
+  structure-semisimple-commutative-ring-Finite-Type :
     UU (l1 ⊔ lsuc l2)
-  structure-finite-semisimple-commutative-ring =
-    Σ ( structure-finite-commutative-ring X)
+  structure-semisimple-commutative-ring-Finite-Type =
+    Σ ( structure-commutative-ring-Finite-Type X)
       ( λ r →
         is-semisimple-Finite-Commutative-Ring
           ( l2)
-          ( finite-commutative-ring-structure-finite-commutative-ring X r))
+          ( finite-commutative-ring-structure-commutative-ring-Finite-Type X r))
 
-  finite-semisimple-commutative-ring-structure-finite-semisimple-commutative-ring :
-    structure-finite-semisimple-commutative-ring →
+  finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-Finite-Type :
+    structure-semisimple-commutative-ring-Finite-Type →
     Semisimple-Finite-Commutative-Ring l1 l2
-  finite-semisimple-commutative-ring-structure-finite-semisimple-commutative-ring =
+  finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-Finite-Type =
     map-Σ-map-base
-      ( finite-commutative-ring-structure-finite-commutative-ring X)
+      ( finite-commutative-ring-structure-commutative-ring-Finite-Type X)
       ( is-semisimple-Finite-Commutative-Ring l2)
 ```

@@ -550,24 +550,24 @@ module _
   (X : Finite-Type l)
   where
 
-  structure-finite-ring : UU l
-  structure-finite-ring =
-    Σ ( structure-finite-abelian-group X)
+  structure-ring-Finite-Type : UU l
+  structure-ring-Finite-Type =
+    Σ ( structure-abelian-group-Finite-Type X)
       ( λ m →
         has-mul-Finite-Ab
-          ( finite-abelian-group-structure-finite-abelian-group X m))
+          ( finite-abelian-group-structure-abelian-group-Finite-Type X m))
 
-  finite-ring-structure-finite-ring :
-    structure-finite-ring → Finite-Ring l
-  pr1 (finite-ring-structure-finite-ring (m , c)) =
-    finite-abelian-group-structure-finite-abelian-group X m
-  pr2 (finite-ring-structure-finite-ring (m , c)) = c
+  finite-ring-structure-ring-Finite-Type :
+    structure-ring-Finite-Type → Finite-Ring l
+  pr1 (finite-ring-structure-ring-Finite-Type (m , c)) =
+    finite-abelian-group-structure-abelian-group-Finite-Type X m
+  pr2 (finite-ring-structure-ring-Finite-Type (m , c)) = c
 
-  is-finite-structure-finite-ring :
-    is-finite structure-finite-ring
-  is-finite-structure-finite-ring =
+  is-finite-structure-ring-Finite-Type :
+    is-finite structure-ring-Finite-Type
+  is-finite-structure-ring-Finite-Type =
     is-finite-Σ
-      ( is-finite-structure-finite-abelian-group X)
+      ( is-finite-structure-abelian-group-Finite-Type X)
       ( λ a →
         is-finite-Σ
           ( is-finite-Σ

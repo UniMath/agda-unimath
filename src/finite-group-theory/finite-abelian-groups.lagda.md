@@ -228,22 +228,23 @@ module _
   (X : Finite-Type l)
   where
 
-  structure-finite-abelian-group : UU l
-  structure-finite-abelian-group =
-    Σ ( structure-finite-group X)
-      ( λ g → is-abelian-Finite-Group (finite-group-structure-finite-group X g))
+  structure-abelian-group-Finite-Type : UU l
+  structure-abelian-group-Finite-Type =
+    Σ ( structure-group-Finite-Type X)
+      ( λ g →
+        is-abelian-Finite-Group (finite-group-structure-group-Finite-Type X g))
 
-  finite-abelian-group-structure-finite-abelian-group :
-    structure-finite-abelian-group → Finite-Ab l
-  pr1 (finite-abelian-group-structure-finite-abelian-group (m , c)) =
-    finite-group-structure-finite-group X m
-  pr2 (finite-abelian-group-structure-finite-abelian-group (m , c)) = c
+  finite-abelian-group-structure-abelian-group-Finite-Type :
+    structure-abelian-group-Finite-Type → Finite-Ab l
+  pr1 (finite-abelian-group-structure-abelian-group-Finite-Type (m , c)) =
+    finite-group-structure-group-Finite-Type X m
+  pr2 (finite-abelian-group-structure-abelian-group-Finite-Type (m , c)) = c
 
-  is-finite-structure-finite-abelian-group :
-    is-finite structure-finite-abelian-group
-  is-finite-structure-finite-abelian-group =
+  is-finite-structure-abelian-group-Finite-Type :
+    is-finite structure-abelian-group-Finite-Type
+  is-finite-structure-abelian-group-Finite-Type =
     is-finite-Σ
-      ( is-finite-structure-finite-group X)
+      ( is-finite-structure-group-Finite-Type X)
       ( λ g →
         is-finite-Π
           ( is-finite-type-Finite-Type X)

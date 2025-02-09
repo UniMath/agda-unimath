@@ -462,20 +462,21 @@ module _
   (X : Finite-Type l)
   where
 
-  structure-finite-group : UU l
-  structure-finite-group =
-    Σ (structure-finite-semigroup X) (λ s → is-group-Finite-Semigroup (X , s))
+  structure-group-Finite-Type : UU l
+  structure-group-Finite-Type =
+    Σ ( structure-semigroup-Finite-Type X)
+      ( λ s → is-group-Finite-Semigroup (X , s))
 
-  finite-group-structure-finite-group :
-    structure-finite-group → Finite-Group l
-  pr1 (finite-group-structure-finite-group (s , g)) = (X , s)
-  pr2 (finite-group-structure-finite-group (s , g)) = g
+  finite-group-structure-group-Finite-Type :
+    structure-group-Finite-Type → Finite-Group l
+  pr1 (finite-group-structure-group-Finite-Type (s , g)) = (X , s)
+  pr2 (finite-group-structure-group-Finite-Type (s , g)) = g
 
-  is-finite-structure-finite-group :
-    is-finite (structure-finite-group)
-  is-finite-structure-finite-group =
+  is-finite-structure-group-Finite-Type :
+    is-finite (structure-group-Finite-Type)
+  is-finite-structure-group-Finite-Type =
     is-finite-Σ
-      ( is-finite-structure-finite-semigroup X)
+      ( is-finite-structure-semigroup-Finite-Type X)
       ( λ s →
         is-finite-Σ
           ( is-finite-is-unital-Finite-Semigroup (X , s))
