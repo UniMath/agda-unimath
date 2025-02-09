@@ -382,6 +382,44 @@ _+ℝ_ = add-ℝ
 
 ## Properties
 
+### Addition is commutative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
+  commutative-add-ℝ =
+    eq-eq-lower-cut-ℝ
+      ( x +ℝ y)
+      ( y +ℝ x)
+      ( eq-has-same-elements-subtype
+        ( lower-cut-add-ℝ x y)
+        ( lower-cut-add-ℝ y x)
+        ( λ q →
+          elim-exists
+            ( lower-cut-add-ℝ y x q)
+            ( λ (lx , ly) (lx-in-lower-x , ly-in-lower-y , lx+ly=q) →
+              intro-exists
+                ( ly , lx)
+                ( ly-in-lower-y ,
+                  lx-in-lower-x ,
+                  commutative-add-ℚ ly lx ∙ lx+ly=q)) ,
+          elim-exists
+            ( lower-cut-add-ℝ x y q)
+            ( λ (ly , lx) (ly-in-lower-y , lx-in-lower-x , ly+lx=q) →
+              intro-exists
+                ( lx , ly)
+                ( lx-in-lower-x ,
+                  ly-in-lower-y ,
+                  commutative-add-ℚ lx ly ∙ ly+lx=q))))
+```
+
+## Properties
+
 ### Addition is associative
 
 ```agda
