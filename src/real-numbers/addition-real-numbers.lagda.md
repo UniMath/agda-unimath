@@ -55,7 +55,8 @@ The lower cut (upper cut) of the sum of two real numbers is the set of sums of
 elements of their lower (upper) cuts.
 
 ```agda
-add-subtypes-ℚ : {l1 l2 : Level} → subtype l1 ℚ → subtype l2 ℚ → subtype (l1 ⊔ l2) ℚ
+add-subtypes-ℚ :
+  {l1 l2 : Level} → subtype l1 ℚ → subtype l2 ℚ → subtype (l1 ⊔ l2) ℚ
 add-subtypes-ℚ A B q =
   ∃ (ℚ × ℚ) (λ (a , b) → A a ∧ B b ∧ (Id-Prop ℚ-Set (a +ℚ b) q))
 
@@ -452,7 +453,7 @@ abstract
                 le-zero-is-positive-ℚ
                   ( p -ℚ q)
                   ( is-positive-diff-le-ℚ q p q<p) ,
-                  ( x<q),
+                  ( x<q) ,
                   is-section-right-subtraction-Ab abelian-group-add-ℚ q p)
               ( forward-implication (is-rounded-upper-cut-ℝ x p) x<p))))
 
