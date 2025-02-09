@@ -36,11 +36,13 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.groups
 
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
 ```
@@ -543,4 +545,52 @@ module _
   pr2 right-sim-add-ℝ q =
     map-tot-exists
       ( λ (ly , lx') → map-product id (map-product (pr2 x≈x' lx') id))
+```
+
+### The negative of a real number is its additive inverse
+
+```agda
+module _
+  {l : Level} (x : ℝ l)
+  where
+
+  right-inverse-law-add-sim-ℝ : sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
+  pr1 right-inverse-law-add-sim-ℝ p =
+    elim-exists
+      ( le-ℚ-Prop p zero-ℚ)
+      ( λ (q , r) (q<x , x<-r , q+r=p) →
+        binary-tr
+          ( le-ℚ)
+          ( q+r=p)
+          ( left-inverse-law-add-ℚ r)
+          ( preserves-le-left-add-ℚ
+            ( r)
+            ( q)
+            ( neg-ℚ r)
+            ( le-lower-upper-cut-ℝ x q (neg-ℚ r) q<x x<-r)))
+  pr2 right-inverse-law-add-sim-ℝ p p<0 =
+    elim-exists
+      ( lower-cut-add-ℝ x (neg-ℝ x) p)
+      ( λ (q , r) (r<q-p , q<x , x<r) →
+        intro-exists
+          ( q , p -ℚ q)
+          ( q<x ,
+            le-upper-cut-ℝ
+              ( x)
+              ( r)
+              ( neg-ℚ (p -ℚ q))
+              ( tr (le-ℚ r) (inv (distributive-neg-diff-ℚ p q)) r<q-p)
+              ( x<r) ,
+            is-identity-right-conjugation-Ab abelian-group-add-ℚ q p))
+      ( arithmetically-located-lower-upper-cut-ℝ
+        ( x)
+        ( neg-ℚ p ,
+          is-positive-le-zero-ℚ (neg-ℚ p) (neg-le-ℚ p zero-ℚ p<0)))
+
+  left-inverse-law-add-sim-ℝ : sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
+  left-inverse-law-add-sim-ℝ =
+    tr
+      ( λ y → sim-ℝ y zero-ℝ)
+      ( commutative-add-ℝ x (neg-ℝ x))
+      ( right-inverse-law-add-sim-ℝ)
 ```
