@@ -154,7 +154,8 @@ is-finite-type-subset-Finite-Type X P =
   is-finite-type-decidable-subtype P (is-finite-type-Finite-Type X)
 
 finite-type-subset-Finite-Type :
-  {l1 l2 : Level} (X : Finite-Type l1) → subset-Finite-Type l2 X → Finite-Type (l1 ⊔ l2)
+  {l1 l2 : Level} (X : Finite-Type l1) →
+  subset-Finite-Type l2 X → Finite-Type (l1 ⊔ l2)
 pr1 (finite-type-subset-Finite-Type X P) = type-subset-Finite-Type X P
 pr2 (finite-type-subset-Finite-Type X P) = is-finite-type-subset-Finite-Type X P
 ```
@@ -179,12 +180,14 @@ has-decidable-equality-type-subset-Finite-Type X P =
 
 ```agda
 is-set-type-subset-Finite-Type :
-  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X) → is-set (type-subset-Finite-Type X P)
+  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X) →
+  is-set (type-subset-Finite-Type X P)
 is-set-type-subset-Finite-Type X P =
   is-set-type-decidable-subtype P (is-set-type-Finite-Type X)
 
 set-subset-Finite-Type :
-  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X) → Set (l1 ⊔ l2)
+  {l1 l2 : Level} (X : Finite-Type l1) (P : subset-Finite-Type l2 X) →
+  Set (l1 ⊔ l2)
 set-subset-Finite-Type X P = set-decidable-subset (set-Finite-Type X) P
 ```
 

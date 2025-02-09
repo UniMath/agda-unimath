@@ -33,7 +33,9 @@ of finite inhabited types defined for any finite inhabited type `k` as
 
 ```agda
 is-closed-under-products-function-from-Finite-Commutative-Ring :
-  {l1 l2 : Level} → (Finite-Commutative-Ring l1 → Finite-Type l2) → UU (lsuc l1 ⊔ l2)
+  {l1 l2 : Level} →
+  (Finite-Commutative-Ring l1 → Finite-Type l2) →
+  UU (lsuc l1 ⊔ l2)
 is-closed-under-products-function-from-Finite-Commutative-Ring {l1} {l2} S =
   (R1 R2 : Finite-Commutative-Ring l1) →
   ( type-Finite-Type (S (product-Finite-Commutative-Ring R1 R2))) ≃

@@ -195,7 +195,9 @@ module _
   structure-finite-commutative-monoid : UU l
   structure-finite-commutative-monoid =
     Σ ( structure-finite-monoid X)
-      ( λ m → is-commutative-Finite-Monoid (finite-monoid-structure-finite-monoid X m))
+      ( λ m →
+        is-commutative-Finite-Monoid
+          ( finite-monoid-structure-finite-monoid X m))
 
   finite-commutative-monoid-structure-finite-commutative-monoid :
     structure-finite-commutative-monoid → Finite-Commutative-Monoid l
@@ -212,5 +214,8 @@ module _
       ( λ m →
         is-finite-Π
           ( is-finite-type-Finite-Type X)
-          ( λ x → is-finite-Π ( is-finite-type-Finite-Type X) ( λ y → is-finite-eq-Finite-Type X)))
+          ( λ x →
+            is-finite-Π
+              ( is-finite-type-Finite-Type X)
+              ( λ y → is-finite-eq-Finite-Type X)))
 ```

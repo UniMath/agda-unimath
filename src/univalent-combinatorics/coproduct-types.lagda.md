@@ -195,7 +195,9 @@ coproduct-Finite-Type :
   {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
 pr1 (coproduct-Finite-Type X Y) = (type-Finite-Type X) + (type-Finite-Type Y)
 pr2 (coproduct-Finite-Type X Y) =
-  is-finite-coproduct (is-finite-type-Finite-Type X) (is-finite-type-Finite-Type Y)
+  is-finite-coproduct
+    ( is-finite-type-Finite-Type X)
+    ( is-finite-type-Finite-Type Y)
 
 abstract
   is-finite-left-summand :

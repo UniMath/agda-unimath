@@ -87,11 +87,13 @@ module _
     Σ ℕ (λ n → Id (iterate n (map-equiv e) x) y)
 
   natural-isomorphism-iterative-groupoid-automorphism-Finite-Type :
-    (x y : type-Finite-Type X) (f : iso-iterative-groupoid-automorphism-Finite-Type x y) → ℕ
+    (x y : type-Finite-Type X)
+    (f : iso-iterative-groupoid-automorphism-Finite-Type x y) → ℕ
   natural-isomorphism-iterative-groupoid-automorphism-Finite-Type x y = pr1
 
   id-iso-iterative-groupoid-automorphism-Finite-Type :
-    (x : type-Finite-Type X) → iso-iterative-groupoid-automorphism-Finite-Type x x
+    (x : type-Finite-Type X) →
+    iso-iterative-groupoid-automorphism-Finite-Type x x
   pr1 (id-iso-iterative-groupoid-automorphism-Finite-Type x) = 0
   pr2 (id-iso-iterative-groupoid-automorphism-Finite-Type x) = refl
 
@@ -100,9 +102,9 @@ module _
     iso-iterative-groupoid-automorphism-Finite-Type y z →
     iso-iterative-groupoid-automorphism-Finite-Type x y →
     iso-iterative-groupoid-automorphism-Finite-Type x z
-  pr1 (comp-iso-iterative-groupoid-automorphism-Finite-Type (pair n q) (pair m p)) =
+  pr1 (comp-iso-iterative-groupoid-automorphism-Finite-Type (n , q) (m , p)) =
     n +ℕ m
-  pr2 (comp-iso-iterative-groupoid-automorphism-Finite-Type (pair n q) (pair m p)) =
+  pr2 (comp-iso-iterative-groupoid-automorphism-Finite-Type (n , q) (m , p)) =
     iterate-add-ℕ n m (map-equiv e) _ ∙ (ap (iterate n (map-equiv e)) p ∙ q)
 ```
 

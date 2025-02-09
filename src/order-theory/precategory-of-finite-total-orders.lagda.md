@@ -45,7 +45,9 @@ Finite-Total-Order-Large-Precategory : Large-Precategory lsuc (_⊔_)
 Finite-Total-Order-Large-Precategory =
   large-precategory-Full-Large-Subprecategory
     ( Poset-Large-Precategory)
-    ( parametric-Finite-Total-Order-Full-Large-Subprecategory (λ l → l) (λ l → l))
+    ( parametric-Finite-Total-Order-Full-Large-Subprecategory
+      ( λ l → l)
+      ( λ l → l))
 ```
 
 ### The precategory of finite total orders of universe level `l`

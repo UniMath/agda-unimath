@@ -61,7 +61,8 @@ is-finite-field-Finite-Commutative-Ring A =
 
 Finite-Field : (l : Level) → UU (lsuc l)
 Finite-Field l =
-  Σ (Finite-Commutative-Ring l) (λ A → is-finite-field-Finite-Commutative-Ring A)
+  Σ ( Finite-Commutative-Ring l)
+    ( λ A → is-finite-field-Finite-Commutative-Ring A)
 
 module _
   {l : Level} (A : Finite-Field l)
@@ -72,7 +73,8 @@ module _
 
   commutative-ring-Finite-Field : Commutative-Ring l
   commutative-ring-Finite-Field =
-    commutative-ring-Finite-Commutative-Ring commutative-finite-ring-Finite-Field
+    commutative-ring-Finite-Commutative-Ring
+      commutative-finite-ring-Finite-Field
 
   finite-ring-Finite-Field : Finite-Ring l
   finite-ring-Finite-Field =
@@ -232,7 +234,9 @@ module _
 
 ```agda
   has-negatives-Finite-Field :
-    is-group-is-unital-Semigroup additive-semigroup-Finite-Field has-zero-Finite-Field
+    is-group-is-unital-Semigroup
+      additive-semigroup-Finite-Field
+      has-zero-Finite-Field
   has-negatives-Finite-Field = has-negatives-Ab ab-Finite-Field
 
   neg-Finite-Field : type-Finite-Field → type-Finite-Field
@@ -367,7 +371,8 @@ module _
       ( mul-Finite-Field x z)
       ( mul-Finite-Field y w)
   interchange-mul-mul-Finite-Field =
-    interchange-mul-mul-Finite-Commutative-Ring commutative-finite-ring-Finite-Field
+    interchange-mul-mul-Finite-Commutative-Ring
+      commutative-finite-ring-Finite-Field
 ```
 
 ### The zero laws for multiplication of a finite field
@@ -401,7 +406,8 @@ module _
 
   commutative-semiring-Finite-Field : Commutative-Semiring l
   commutative-semiring-Finite-Field =
-    commutative-semiring-Finite-Commutative-Ring commutative-finite-ring-Finite-Field
+    commutative-semiring-Finite-Commutative-Ring
+      commutative-finite-ring-Finite-Field
 ```
 
 ### Computing multiplication with minus one in a finite field

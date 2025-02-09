@@ -32,10 +32,12 @@ pr1 (is-small-Fin l k) = raise-Fin l k
 pr2 (is-small-Fin l k) = compute-raise-Fin l k
 
 is-small-is-finite :
-  {l1 : Level} (l2 : Level) → (A : Finite-Type l1) → is-small l2 (type-Finite-Type A)
+  {l1 : Level} (l2 : Level) (A : Finite-Type l1) →
+  is-small l2 (type-Finite-Type A)
 is-small-is-finite l2 A =
   apply-universal-property-trunc-Prop
     ( is-finite-type-Finite-Type A)
-    ( is-small l2 (type-Finite-Type A) , is-prop-is-small l2 (type-Finite-Type A))
+    ( is-small l2 (type-Finite-Type A) ,
+      is-prop-is-small l2 (type-Finite-Type A))
     ( λ p → is-small-equiv' (Fin (pr1 p)) (pr2 p) (is-small-Fin l2 (pr1 p)))
 ```

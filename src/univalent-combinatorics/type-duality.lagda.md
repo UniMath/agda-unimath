@@ -41,12 +41,16 @@ open import univalent-combinatorics.inhabited-finite-types
 ```agda
 equiv-surjection-finite-type-family-finite-inhabited-type :
   {l : Level} (A : Finite-Type l) (B : Finite-Type l) →
-  ( (type-Finite-Type A ↠ type-Finite-Type B) ≃
+  ( ( type-Finite-Type A ↠ type-Finite-Type B) ≃
     ( Σ ( (type-Finite-Type B) → Inhabited-Finite-Type l)
-        ( λ Y → (type-Finite-Type A) ≃ Σ (type-Finite-Type B) (λ b → type-Inhabited-Finite-Type (Y b)))))
+        ( λ Y →
+          (type-Finite-Type A) ≃
+          Σ (type-Finite-Type B) (λ b → type-Inhabited-Finite-Type (Y b)))))
 equiv-surjection-finite-type-family-finite-inhabited-type {l} A B =
   ( ( equiv-Σ
-      ( λ Y → type-Finite-Type A ≃ Σ (type-Finite-Type B) (λ b → type-Inhabited-Finite-Type (Y b)))
+      ( λ Y →
+        type-Finite-Type A ≃
+        Σ (type-Finite-Type B) (λ b → type-Inhabited-Finite-Type (Y b)))
       ( equiv-postcomp
         ( type-Finite-Type B)
         ( inv-associative-Σ ( UU l) is-finite ( λ X → is-inhabited (pr1 X)) ∘e
@@ -70,7 +74,9 @@ equiv-surjection-finite-type-family-finite-inhabited-type {l} A B =
           ( ( inv-equiv
               ( equiv-inclusion-is-full-subtype
                 ( λ f →
-                  Π-Prop (type-Finite-Type B) (λ b → is-finite-Prop (fiber (pr1 f) b)))
+                  Π-Prop
+                    ( type-Finite-Type B)
+                    ( λ b → is-finite-Prop (fiber (pr1 f) b)))
                 ( λ f →
                   is-finite-fiber
                     ( pr1 f)
@@ -84,7 +90,8 @@ Slice-Surjection-Finite-Type l A =
 
 equiv-Fiber-trunc-prop-Finite-Type :
   (l : Level) {l1 : Level} (A : Finite-Type l1) →
-  Slice-Surjection-Finite-Type (l1 ⊔ l) A ≃ (type-Finite-Type A → Inhabited-Finite-Type (l1 ⊔ l))
+  Slice-Surjection-Finite-Type (l1 ⊔ l) A ≃
+  (type-Finite-Type A → Inhabited-Finite-Type (l1 ⊔ l))
 equiv-Fiber-trunc-prop-Finite-Type l {l1} A =
   ( ( equiv-Π
       ( λ _ → Inhabited-Finite-Type _)

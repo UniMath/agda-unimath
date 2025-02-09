@@ -79,17 +79,22 @@ module _
 
 ```agda
 ferrers-diagram-Finite-Type :
-  {l1 : Level} (l2 l3 : Level) (A : Finite-Type l1) → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  {l1 : Level} (l2 l3 : Level) (A : Finite-Type l1) →
+  UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
 ferrers-diagram-Finite-Type {l} l2 l3 A =
   Σ ( Finite-Type l2)
     ( λ X →
       Σ ( type-Finite-Type X → Finite-Type l3)
         ( λ Y →
-          ((x : type-Finite-Type X) → type-trunc-Prop (type-Finite-Type (Y x))) ×
-          mere-equiv (type-Finite-Type A) (Σ (type-Finite-Type X) (λ x → type-Finite-Type (Y x)))))
+          ( (x : type-Finite-Type X) →
+            type-trunc-Prop (type-Finite-Type (Y x))) ×
+          mere-equiv
+            ( type-Finite-Type A)
+            ( Σ (type-Finite-Type X) (λ x → type-Finite-Type (Y x)))))
 
 module _
-  {l1 l2 l3 : Level} (A : Finite-Type l1) (D : ferrers-diagram-Finite-Type l2 l3 A)
+  {l1 l2 l3 : Level} (A : Finite-Type l1)
+  (D : ferrers-diagram-Finite-Type l2 l3 A)
   where
 
   row-ferrers-diagram-Finite-Type : Finite-Type l2
@@ -114,7 +119,8 @@ module _
     type-Finite-Type (dot-ferrers-diagram-Finite-Type x)
 
   is-finite-type-dot-ferrers-diagram-Finite-Type :
-    (x : type-row-ferrers-diagram-Finite-Type) → is-finite (type-dot-ferrers-diagram-Finite-Type x)
+    (x : type-row-ferrers-diagram-Finite-Type) →
+    is-finite (type-dot-ferrers-diagram-Finite-Type x)
   is-finite-type-dot-ferrers-diagram-Finite-Type x =
     is-finite-type-Finite-Type (dot-ferrers-diagram-Finite-Type x)
 
@@ -126,7 +132,8 @@ module _
   mere-equiv-ferrers-diagram-Finite-Type :
     mere-equiv
       ( type-Finite-Type A)
-      ( Σ (type-row-ferrers-diagram-Finite-Type) (type-dot-ferrers-diagram-Finite-Type))
+      ( Σ ( type-row-ferrers-diagram-Finite-Type)
+          ( type-dot-ferrers-diagram-Finite-Type))
   mere-equiv-ferrers-diagram-Finite-Type = pr2 (pr2 (pr2 D))
 
   ferrers-diagram-ferrers-diagram-Finite-Type :
@@ -199,11 +206,13 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : Finite-Type l1) (D : ferrers-diagram-Finite-Type l2 l3 A)
+  {l1 l2 l3 : Level} (A : Finite-Type l1)
+  (D : ferrers-diagram-Finite-Type l2 l3 A)
   where
 
   equiv-ferrers-diagram-Finite-Type :
-    {l4 l5 : Level} → ferrers-diagram-Finite-Type l4 l5 A → UU (l2 ⊔ l3 ⊔ l4 ⊔ l5)
+    {l4 l5 : Level} → ferrers-diagram-Finite-Type l4 l5 A →
+    UU (l2 ⊔ l3 ⊔ l4 ⊔ l5)
   equiv-ferrers-diagram-Finite-Type E =
     equiv-ferrers-diagram
       ( ferrers-diagram-ferrers-diagram-Finite-Type A D)
@@ -214,7 +223,8 @@ module _
     id-equiv-ferrers-diagram (ferrers-diagram-ferrers-diagram-Finite-Type A D)
 
   equiv-eq-ferrers-diagram-Finite-Type :
-    (E : ferrers-diagram-Finite-Type l2 l3 A) → Id D E → equiv-ferrers-diagram-Finite-Type E
+    (E : ferrers-diagram-Finite-Type l2 l3 A) →
+    Id D E → equiv-ferrers-diagram-Finite-Type E
   equiv-eq-ferrers-diagram-Finite-Type .D refl =
     id-equiv-ferrers-diagram-Finite-Type
 
@@ -249,14 +259,16 @@ module _
           ( mere-equiv-ferrers-diagram-Finite-Type A D)))
 
   is-equiv-equiv-eq-ferrers-diagram-Finite-Type :
-    (E : ferrers-diagram-Finite-Type l2 l3 A) → is-equiv (equiv-eq-ferrers-diagram-Finite-Type E)
+    (E : ferrers-diagram-Finite-Type l2 l3 A) →
+    is-equiv (equiv-eq-ferrers-diagram-Finite-Type E)
   is-equiv-equiv-eq-ferrers-diagram-Finite-Type =
     fundamental-theorem-id
       is-torsorial-equiv-ferrers-diagram-Finite-Type
       equiv-eq-ferrers-diagram-Finite-Type
 
   eq-equiv-ferrers-diagram-Finite-Type :
-    (E : ferrers-diagram-Finite-Type l2 l3 A) → equiv-ferrers-diagram-Finite-Type E → Id D E
+    (E : ferrers-diagram-Finite-Type l2 l3 A) →
+    equiv-ferrers-diagram-Finite-Type E → Id D E
   eq-equiv-ferrers-diagram-Finite-Type E =
     map-inv-is-equiv (is-equiv-equiv-eq-ferrers-diagram-Finite-Type E)
 ```

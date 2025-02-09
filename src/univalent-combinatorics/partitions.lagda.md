@@ -65,7 +65,8 @@ partition-Finite-Type l2 l3 X =
     ( λ Y →
       Σ ( type-Finite-Type Y → Finite-Type l3)
         ( λ Z →
-          ( (y : type-Finite-Type Y) → type-trunc-Prop (type-Finite-Type (Z y))) ×
+          ( (y : type-Finite-Type Y) →
+            type-trunc-Prop (type-Finite-Type (Z y))) ×
           ( equiv-Finite-Type X (Σ-Finite-Type Y Z))))
 
 module _
@@ -97,7 +98,8 @@ module _
     type-Finite-Type (finite-block-partition-Finite-Type i)
 
   is-finite-block-partition-Finite-Type :
-    (i : indexing-type-partition-Finite-Type) → is-finite (block-partition-Finite-Type i)
+    (i : indexing-type-partition-Finite-Type) →
+    is-finite (block-partition-Finite-Type i)
   is-finite-block-partition-Finite-Type i =
     is-finite-type-Finite-Type (finite-block-partition-Finite-Type i)
 
@@ -107,15 +109,20 @@ module _
     number-of-elements-is-finite (is-finite-block-partition-Finite-Type i)
 
   is-inhabited-block-partition-Finite-Type :
-    (i : indexing-type-partition-Finite-Type) → type-trunc-Prop (block-partition-Finite-Type i)
+    (i : indexing-type-partition-Finite-Type) →
+    type-trunc-Prop (block-partition-Finite-Type i)
   is-inhabited-block-partition-Finite-Type = pr1 (pr2 (pr2 P))
 
   conversion-partition-Finite-Type :
-    equiv-Finite-Type X (Σ-Finite-Type finite-indexing-type-partition-Finite-Type finite-block-partition-Finite-Type)
+    equiv-Finite-Type X
+      ( Σ-Finite-Type
+          finite-indexing-type-partition-Finite-Type
+          finite-block-partition-Finite-Type)
   conversion-partition-Finite-Type = pr2 (pr2 (pr2 P))
 
   map-conversion-partition-Finite-Type :
-    type-Finite-Type X → Σ indexing-type-partition-Finite-Type block-partition-Finite-Type
+    type-Finite-Type X →
+    Σ indexing-type-partition-Finite-Type block-partition-Finite-Type
   map-conversion-partition-Finite-Type =
     map-equiv conversion-partition-Finite-Type
 
@@ -161,12 +168,16 @@ module _
 ```agda
 equiv-partition-Finite-Type :
   {l1 l2 l3 l4 l5 : Level} (X : Finite-Type l1) →
-  partition-Finite-Type l2 l3 X → partition-Finite-Type l4 l5 X → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
+  partition-Finite-Type l2 l3 X →
+  partition-Finite-Type l4 l5 X →
+  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
 equiv-partition-Finite-Type X P Q =
-  Σ ( indexing-type-partition-Finite-Type X P ≃ indexing-type-partition-Finite-Type X Q)
+  Σ ( indexing-type-partition-Finite-Type X P ≃
+      indexing-type-partition-Finite-Type X Q)
     ( λ e →
       Σ ( (i : indexing-type-partition-Finite-Type X P) →
-          block-partition-Finite-Type X P i ≃ block-partition-Finite-Type X Q (map-equiv e i))
+          block-partition-Finite-Type X P i ≃
+          block-partition-Finite-Type X Q (map-equiv e i))
         ( λ f →
           htpy-equiv
             ( ( equiv-Σ (block-partition-Finite-Type X Q) e f) ∘e
@@ -181,30 +192,38 @@ pr1 (pr2 (id-equiv-partition-Finite-Type X P)) i = id-equiv
 pr2 (pr2 (id-equiv-partition-Finite-Type X P)) = refl-htpy
 
 extensionality-partition-Finite-Type :
-  {l1 l2 l3 : Level} (X : Finite-Type l1) (P Q : partition-Finite-Type l2 l3 X) →
+  {l1 l2 l3 : Level} (X : Finite-Type l1)
+  (P Q : partition-Finite-Type l2 l3 X) →
   Id P Q ≃ equiv-partition-Finite-Type X P Q
 extensionality-partition-Finite-Type X P =
   extensionality-Σ
     ( λ {Y} Zf e →
       Σ ( (i : indexing-type-partition-Finite-Type X P) →
-          block-partition-Finite-Type X P i ≃ type-Finite-Type (pr1 Zf (map-equiv e i)))
+          block-partition-Finite-Type X P i ≃
+          type-Finite-Type (pr1 Zf (map-equiv e i)))
         ( λ f →
           htpy-equiv
-            ( equiv-Σ (type-Finite-Type ∘ pr1 Zf) e f ∘e conversion-partition-Finite-Type X P)
+            ( equiv-Σ (type-Finite-Type ∘ pr1 Zf) e f ∘e
+              conversion-partition-Finite-Type X P)
             ( pr2 (pr2 Zf))))
     ( id-equiv)
     ( pair (λ i → id-equiv) refl-htpy)
-    ( extensionality-Finite-Type (finite-indexing-type-partition-Finite-Type X P))
+    ( extensionality-Finite-Type
+      ( finite-indexing-type-partition-Finite-Type X P))
     ( extensionality-Σ
       ( λ {Z} f α →
         htpy-equiv
-          ( equiv-Σ (type-Finite-Type ∘ Z) id-equiv α ∘e conversion-partition-Finite-Type X P)
+          ( equiv-Σ (type-Finite-Type ∘ Z) id-equiv α ∘e
+            conversion-partition-Finite-Type X P)
           ( pr2 f))
       ( λ i → id-equiv)
       ( refl-htpy)
-      ( extensionality-fam-Finite-Type (finite-block-partition-Finite-Type X P))
+      ( extensionality-fam-Finite-Type
+        ( finite-block-partition-Finite-Type X P))
       ( λ α →
-        ( ( extensionality-equiv (conversion-partition-Finite-Type X P) (pr2 α)) ∘e
+        ( ( extensionality-equiv
+            ( conversion-partition-Finite-Type X P)
+            ( pr2 α)) ∘e
           ( left-unit-law-product-is-contr
             ( is-prop-Π
               ( λ _ → is-prop-type-trunc-Prop)

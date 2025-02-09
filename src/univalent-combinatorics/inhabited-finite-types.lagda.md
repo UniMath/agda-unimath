@@ -109,7 +109,8 @@ Family-Of-Inhabited-Finite-Types l2 X =
   type-Finite-Type X → Inhabited-Finite-Type l2
 
 module _
-  {l1 l2 : Level} (X : Finite-Type l1) (Y : Family-Of-Inhabited-Finite-Types l2 X)
+  {l1 l2 : Level} (X : Finite-Type l1)
+  (Y : Family-Of-Inhabited-Finite-Types l2 X)
   where
 
   type-Family-Of-Inhabited-Finite-Types : type-Finite-Type X → UU l2
@@ -123,7 +124,8 @@ module _
     is-finite-Inhabited-Finite-Type (Y x)
 
   is-inhabited-type-Family-Of-Inhabited-Finite-Types :
-    (x : type-Finite-Type X) → is-inhabited (type-Family-Of-Inhabited-Finite-Types x)
+    (x : type-Finite-Type X) →
+    is-inhabited (type-Family-Of-Inhabited-Finite-Types x)
   is-inhabited-type-Family-Of-Inhabited-Finite-Types x =
     is-inhabited-type-Inhabited-Finite-Type (Y x)
 

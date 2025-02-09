@@ -67,7 +67,8 @@ hydrocarbon l1 l2 =
             ( ( (c c' : vertex-Finite-Undirected-Graph G) →
                 leq-ℕ
                   ( number-of-elements-is-finite
-                    ( is-finite-type-Finite-Type (pr2 G (standard-unordered-pair c c'))))
+                    ( is-finite-type-Finite-Type
+                      ( pr2 G (standard-unordered-pair c c'))))
                   ( 3)) ×
                 is-connected-Undirected-Graph
                   ( undirected-graph-Finite-Undirected-Graph G)))))

@@ -136,14 +136,23 @@ module _
         (is-finite-Π f g)
 
 Π-Finite-Type :
-  {l1 l2 : Level} (A : Finite-Type l1) (B : type-Finite-Type A → Finite-Type l2) → Finite-Type (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Finite-Type l1)
+  (B : type-Finite-Type A → Finite-Type l2) →
+  Finite-Type (l1 ⊔ l2)
 pr1 (Π-Finite-Type A B) = (x : type-Finite-Type A) → type-Finite-Type (B x)
 pr2 (Π-Finite-Type A B) =
-  is-finite-Π (is-finite-type-Finite-Type A) (λ x → is-finite-type-Finite-Type (B x))
+  is-finite-Π
+    ( is-finite-type-Finite-Type A)
+    ( λ x → is-finite-type-Finite-Type (B x))
 
 Π-Finite-Type' :
-  {l1 l2 : Level} (A : Finite-Type l1) (B : type-Finite-Type A → Finite-Type l2) → Finite-Type (l1 ⊔ l2)
+  {l1 l2 : Level}
+  (A : Finite-Type l1)
+  (B : type-Finite-Type A → Finite-Type l2) →
+  Finite-Type (l1 ⊔ l2)
 pr1 (Π-Finite-Type' A B) = {x : type-Finite-Type A} → type-Finite-Type (B x)
 pr2 (Π-Finite-Type' A B) =
-  is-finite-Π' (is-finite-type-Finite-Type A) (λ x → is-finite-type-Finite-Type (B x))
+  is-finite-Π'
+    ( is-finite-type-Finite-Type A)
+    ( λ x → is-finite-type-Finite-Type (B x))
 ```

@@ -41,7 +41,8 @@ ring.
 
 ```agda
 module _
-  {l1 l2 : Level} (I : Finite-Type l1) (A : type-Finite-Type I → Finite-Commutative-Ring l2)
+  {l1 l2 : Level} (I : Finite-Type l1)
+  (A : type-Finite-Type I → Finite-Commutative-Ring l2)
   where
 
   finite-ring-Π-Finite-Commutative-Ring : Finite-Ring (l1 ⊔ l2)
@@ -54,7 +55,9 @@ module _
 
   ab-Π-Finite-Commutative-Ring : Ab (l1 ⊔ l2)
   ab-Π-Finite-Commutative-Ring =
-    ab-Π-Commutative-Ring (type-Finite-Type I) (commutative-ring-Finite-Commutative-Ring ∘ A)
+    ab-Π-Commutative-Ring
+      ( type-Finite-Type I)
+      ( commutative-ring-Finite-Commutative-Ring ∘ A)
 
   multiplicative-commutative-monoid-Π-Finite-Commutative-Ring :
     Commutative-Monoid (l1 ⊔ l2)
@@ -71,7 +74,9 @@ module _
 
   type-Π-Finite-Commutative-Ring : UU (l1 ⊔ l2)
   type-Π-Finite-Commutative-Ring =
-    type-Π-Commutative-Ring (type-Finite-Type I) (commutative-ring-Finite-Commutative-Ring ∘ A)
+    type-Π-Commutative-Ring
+      ( type-Finite-Type I)
+      ( commutative-ring-Finite-Commutative-Ring ∘ A)
 
   finite-type-Π-Finite-Commutative-Ring : Finite-Type (l1 ⊔ l2)
   finite-type-Π-Finite-Commutative-Ring =
@@ -92,11 +97,15 @@ module _
     type-Π-Finite-Commutative-Ring → type-Π-Finite-Commutative-Ring →
     type-Π-Finite-Commutative-Ring
   add-Π-Finite-Commutative-Ring =
-    add-Π-Commutative-Ring (type-Finite-Type I) (commutative-ring-Finite-Commutative-Ring ∘ A)
+    add-Π-Commutative-Ring
+      ( type-Finite-Type I)
+      ( commutative-ring-Finite-Commutative-Ring ∘ A)
 
   zero-Π-Finite-Commutative-Ring : type-Π-Finite-Commutative-Ring
   zero-Π-Finite-Commutative-Ring =
-    zero-Π-Commutative-Ring (type-Finite-Type I) (commutative-ring-Finite-Commutative-Ring ∘ A)
+    zero-Π-Commutative-Ring
+      ( type-Finite-Type I)
+      ( commutative-ring-Finite-Commutative-Ring ∘ A)
 
   associative-add-Π-Finite-Commutative-Ring :
     (x y z : type-Π-Finite-Commutative-Ring) →
@@ -135,11 +144,15 @@ module _
     type-Π-Finite-Commutative-Ring → type-Π-Finite-Commutative-Ring →
     type-Π-Finite-Commutative-Ring
   mul-Π-Finite-Commutative-Ring =
-    mul-Π-Commutative-Ring (type-Finite-Type I) (commutative-ring-Finite-Commutative-Ring ∘ A)
+    mul-Π-Commutative-Ring
+      ( type-Finite-Type I)
+      ( commutative-ring-Finite-Commutative-Ring ∘ A)
 
   one-Π-Finite-Commutative-Ring : type-Π-Finite-Commutative-Ring
   one-Π-Finite-Commutative-Ring =
-    one-Π-Commutative-Ring (type-Finite-Type I) (commutative-ring-Finite-Commutative-Ring ∘ A)
+    one-Π-Commutative-Ring
+      ( type-Finite-Type I)
+      ( commutative-ring-Finite-Commutative-Ring ∘ A)
 
   associative-mul-Π-Finite-Commutative-Ring :
     (x y z : type-Π-Finite-Commutative-Ring) →
@@ -216,7 +229,9 @@ module _
 
   commutative-ring-Π-Finite-Commutative-Ring : Commutative-Ring (l1 ⊔ l2)
   commutative-ring-Π-Finite-Commutative-Ring =
-    Π-Commutative-Ring (type-Finite-Type I) (commutative-ring-Finite-Commutative-Ring ∘ A)
+    Π-Commutative-Ring
+      ( type-Finite-Type I)
+      ( commutative-ring-Finite-Commutative-Ring ∘ A)
 
   Π-Finite-Commutative-Ring : Finite-Commutative-Ring (l1 ⊔ l2)
   pr1 Π-Finite-Commutative-Ring = finite-ring-Π-Finite-Commutative-Ring

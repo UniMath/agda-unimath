@@ -461,7 +461,9 @@ pr1 (binomial-type-Finite-Type A B) =
 pr2 (binomial-type-Finite-Type A B) =
   is-finite-equiv
     ( compute-small-binomial-type (type-Finite-Type A) (type-Finite-Type B))
-    ( is-finite-binomial-type (is-finite-type-Finite-Type A) (is-finite-type-Finite-Type B))
+    ( is-finite-binomial-type
+      ( is-finite-type-Finite-Type A)
+      ( is-finite-type-Finite-Type B))
 ```
 
 ## References

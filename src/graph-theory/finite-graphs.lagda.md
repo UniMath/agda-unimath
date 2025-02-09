@@ -40,7 +40,8 @@ is also common to call such graphs _multigraphs_.
 ```agda
 Finite-Undirected-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Finite-Undirected-Graph l1 l2 =
-  Σ (Finite-Type l1) (λ X → unordered-pair (type-Finite-Type X) → Finite-Type l2)
+  Σ ( Finite-Type l1)
+    ( λ X → unordered-pair (type-Finite-Type X) → Finite-Type l2)
 
 module _
   {l1 l2 : Level} (G : Finite-Undirected-Graph l1 l2)
@@ -69,7 +70,8 @@ module _
 
   total-edge-Finite-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
   total-edge-Finite-Undirected-Graph =
-    Σ unordered-pair-vertices-Finite-Undirected-Graph edge-Finite-Undirected-Graph
+    Σ unordered-pair-vertices-Finite-Undirected-Graph
+      edge-Finite-Undirected-Graph
 
   undirected-graph-Finite-Undirected-Graph : Undirected-Graph l1 l2
   pr1 undirected-graph-Finite-Undirected-Graph = vertex-Finite-Undirected-Graph
@@ -85,9 +87,11 @@ Finite-Undirected-Graph' l1 l2 =
     ( λ V →
       Σ ( type-Finite-Type V → type-Finite-Type V → Finite-Type l2)
         ( λ E →
-          Σ ( (x y : type-Finite-Type V) → type-Finite-Type (E x y) ≃ type-Finite-Type (E y x))
+          Σ ( (x y : type-Finite-Type V) →
+              type-Finite-Type (E x y) ≃ type-Finite-Type (E y x))
             ( λ σ →
-              (x y : type-Finite-Type V) → map-equiv ((σ y x) ∘e (σ x y)) ~ id)))
+              (x y : type-Finite-Type V) →
+              map-equiv ((σ y x) ∘e (σ x y)) ~ id)))
 ```
 
 The degree of a vertex x of a graph G is the set of occurences of x as an

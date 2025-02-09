@@ -41,7 +41,8 @@ cyclic-partition-Finite-Type l2 l3 X =
             ( λ y → type-Cyclic-Type (succ-ℕ (pr1 (C y))) (pr2 (C y)))))
 
 module _
-  {l1 l2 l3 : Level} (X : Finite-Type l1) (C : cyclic-partition-Finite-Type l2 l3 X)
+  {l1 l2 l3 : Level} (X : Finite-Type l1)
+  (C : cyclic-partition-Finite-Type l2 l3 X)
   where
 
   finite-indexing-type-cyclic-partition-Finite-Type : Finite-Type l2
@@ -69,6 +70,8 @@ module _
       ( cycle-cyclic-partition-Finite-Type y)
 
   equiv-cyclic-partition-Finite-Type :
-    type-Finite-Type X ≃ Σ indexing-type-cyclic-partition-Finite-Type type-cycle-cyclic-partition-Finite-Type
+    type-Finite-Type X ≃
+    Σ indexing-type-cyclic-partition-Finite-Type
+      type-cycle-cyclic-partition-Finite-Type
   equiv-cyclic-partition-Finite-Type = pr2 (pr2 C)
 ```

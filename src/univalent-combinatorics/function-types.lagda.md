@@ -82,7 +82,9 @@ abstract
 _→𝔽_ : {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
 pr1 (A →𝔽 B) = type-Finite-Type A → type-Finite-Type B
 pr2 (A →𝔽 B) =
-  is-finite-function-type (is-finite-type-Finite-Type A) (is-finite-type-Finite-Type B)
+  is-finite-function-type
+    ( is-finite-type-Finite-Type A)
+    ( is-finite-type-Finite-Type B)
 ```
 
 ### The type of equivalences between finite types is finite
@@ -112,7 +114,9 @@ infix 6 _≃𝔽_
 _≃𝔽_ : {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
 pr1 (A ≃𝔽 B) = type-Finite-Type A ≃ type-Finite-Type B
 pr2 (A ≃𝔽 B) =
-  is-finite-type-equiv (is-finite-type-Finite-Type A) (is-finite-type-Finite-Type B)
+  is-finite-type-equiv
+    ( is-finite-type-Finite-Type A)
+    ( is-finite-type-Finite-Type B)
 ```
 
 ### The type of automorphisms on a finite type is finite

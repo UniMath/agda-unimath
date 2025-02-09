@@ -181,11 +181,15 @@ module _
 
   is-finite-type-Subgroup-Finite-Group : is-finite type-Subgroup-Finite-Group
   is-finite-type-Subgroup-Finite-Group =
-    is-finite-type-subset-Finite-Type (finite-type-Finite-Group G) decidable-subset-Subgroup-Finite-Group
+    is-finite-type-subset-Finite-Type
+      ( finite-type-Finite-Group G)
+      decidable-subset-Subgroup-Finite-Group
 
   finite-type-Subgroup-Finite-Group : Finite-Type (l1 ⊔ l2)
   finite-type-Subgroup-Finite-Group =
-    finite-type-subset-Finite-Type (finite-type-Finite-Group G) decidable-subset-Subgroup-Finite-Group
+    finite-type-subset-Finite-Type
+      ( finite-type-Finite-Group G)
+      decidable-subset-Subgroup-Finite-Group
 
   inclusion-Subgroup-Finite-Group :
     type-Subgroup-Finite-Group → type-Finite-Group G
@@ -207,7 +211,8 @@ module _
     is-in-Decidable-Subgroup (group-Finite-Group G) H
 
   is-in-subgroup-inclusion-Subgroup-Finite-Group :
-    (x : type-Subgroup-Finite-Group) → is-in-Subgroup-Finite-Group (inclusion-Subgroup-Finite-Group x)
+    (x : type-Subgroup-Finite-Group) →
+    is-in-Subgroup-Finite-Group (inclusion-Subgroup-Finite-Group x)
   is-in-subgroup-inclusion-Subgroup-Finite-Group =
     is-in-subgroup-inclusion-Decidable-Subgroup (group-Finite-Group G) H
 
@@ -217,7 +222,9 @@ module _
     is-prop-is-in-Decidable-Subgroup (group-Finite-Group G) H
 
   contains-unit-Subgroup-Finite-Group :
-    contains-unit-subset-Group (group-Finite-Group G) subset-Subgroup-Finite-Group
+    contains-unit-subset-Group
+      ( group-Finite-Group G)
+      subset-Subgroup-Finite-Group
   contains-unit-Subgroup-Finite-Group =
     contains-unit-Decidable-Subgroup (group-Finite-Group G) H
 
@@ -229,7 +236,9 @@ module _
     is-closed-under-multiplication-Decidable-Subgroup (group-Finite-Group G) H
 
   is-closed-under-inverses-Subgroup-Finite-Group :
-    is-closed-under-inverses-subset-Group (group-Finite-Group G) subset-Subgroup-Finite-Group
+    is-closed-under-inverses-subset-Group
+      ( group-Finite-Group G)
+      subset-Subgroup-Finite-Group
   is-closed-under-inverses-Subgroup-Finite-Group =
     is-closed-under-inverses-Decidable-Subgroup (group-Finite-Group G) H
 
@@ -262,7 +271,9 @@ module _
 
   eq-subgroup-eq-Finite-Group :
     {x y : type-Subgroup-Finite-Group G H} →
-    ( inclusion-Subgroup-Finite-Group G H x ＝ inclusion-Subgroup-Finite-Group G H y) → x ＝ y
+    ( inclusion-Subgroup-Finite-Group G H x ＝
+      inclusion-Subgroup-Finite-Group G H y) →
+    x ＝ y
   eq-subgroup-eq-Finite-Group =
     eq-decidable-subgroup-eq-group (group-Finite-Group G) H
 
@@ -285,12 +296,14 @@ module _
   unit-Subgroup-Finite-Group = unit-Decidable-Subgroup (group-Finite-Group G) H
 
   left-unit-law-mul-Subgroup-Finite-Group :
-    (x : type-Subgroup-Finite-Group G H) → mul-Subgroup-Finite-Group unit-Subgroup-Finite-Group x ＝ x
+    (x : type-Subgroup-Finite-Group G H) →
+    mul-Subgroup-Finite-Group unit-Subgroup-Finite-Group x ＝ x
   left-unit-law-mul-Subgroup-Finite-Group =
     left-unit-law-mul-Decidable-Subgroup (group-Finite-Group G) H
 
   right-unit-law-mul-Subgroup-Finite-Group :
-    (x : type-Subgroup-Finite-Group G H) → mul-Subgroup-Finite-Group x unit-Subgroup-Finite-Group ＝ x
+    (x : type-Subgroup-Finite-Group G H) →
+    mul-Subgroup-Finite-Group x unit-Subgroup-Finite-Group ＝ x
   right-unit-law-mul-Subgroup-Finite-Group =
     right-unit-law-mul-Decidable-Subgroup (group-Finite-Group G) H
 
@@ -300,13 +313,15 @@ module _
 
   left-inverse-law-mul-Subgroup-Finite-Group :
     ( x : type-Subgroup-Finite-Group G H) →
-    mul-Subgroup-Finite-Group (inv-Subgroup-Finite-Group x) x ＝ unit-Subgroup-Finite-Group
+    mul-Subgroup-Finite-Group (inv-Subgroup-Finite-Group x) x ＝
+    unit-Subgroup-Finite-Group
   left-inverse-law-mul-Subgroup-Finite-Group =
     left-inverse-law-mul-Decidable-Subgroup (group-Finite-Group G) H
 
   right-inverse-law-mul-Subgroup-Finite-Group :
     (x : type-Subgroup-Finite-Group G H) →
-    mul-Subgroup-Finite-Group x (inv-Subgroup-Finite-Group x) ＝ unit-Subgroup-Finite-Group
+    mul-Subgroup-Finite-Group x (inv-Subgroup-Finite-Group x) ＝
+    unit-Subgroup-Finite-Group
   right-inverse-law-mul-Subgroup-Finite-Group =
     right-inverse-law-mul-Decidable-Subgroup (group-Finite-Group G) H
 
@@ -333,12 +348,16 @@ module _
     right-inverse-law-mul-Subgroup-Finite-Group
 
 semigroup-Subgroup-Finite-Group :
-  {l1 l2 : Level} (G : Finite-Group l1) → Subgroup-Finite-Group l2 G → Semigroup (l1 ⊔ l2)
+  {l1 l2 : Level} (G : Finite-Group l1) →
+  Subgroup-Finite-Group l2 G →
+  Semigroup (l1 ⊔ l2)
 semigroup-Subgroup-Finite-Group G H =
   semigroup-Finite-Semigroup (finite-semigroup-Subgroup-Finite-Group G H)
 
 group-Subgroup-Finite-Group :
-  {l1 l2 : Level} (G : Finite-Group l1) → Subgroup-Finite-Group l2 G → Group (l1 ⊔ l2)
+  {l1 l2 : Level} (G : Finite-Group l1) →
+  Subgroup-Finite-Group l2 G →
+  Group (l1 ⊔ l2)
 group-Subgroup-Finite-Group G H =
   group-Finite-Group (finite-group-Subgroup-Finite-Group G H)
 ```
@@ -395,7 +414,8 @@ module _
     has-same-elements-Decidable-Subgroup (group-Finite-Group G) H
 
   extensionality-Subgroup-Finite-Group :
-    (K : Subgroup-Finite-Group l2 G) → (H ＝ K) ≃ has-same-elements-Subgroup-Finite-Group K
+    (K : Subgroup-Finite-Group l2 G) →
+    (H ＝ K) ≃ has-same-elements-Subgroup-Finite-Group K
   extensionality-Subgroup-Finite-Group =
     extensionality-Decidable-Subgroup (group-Finite-Group G) H
 ```

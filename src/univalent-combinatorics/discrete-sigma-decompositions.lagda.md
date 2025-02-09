@@ -105,5 +105,7 @@ pr2 ( is-contr-type-discrete-Σ-Decomposition-Finite-Type {l1} {l2} A) =
           ( A)
           ( pr1 x)
           ( discrete-Σ-Decomposition-Finite-Type l2 A)
-          ( equiv-discrete-is-discrete-Σ-Decomposition-Finite-Type A (pr1 x) (pr2 x)))))
+          ( equiv-discrete-is-discrete-Σ-Decomposition-Finite-Type A
+            ( pr1 x)
+            ( pr2 x)))))
 ```

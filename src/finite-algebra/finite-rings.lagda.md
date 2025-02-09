@@ -139,7 +139,9 @@ module _
 
   associative-add-Finite-Ring :
     (x y z : type-Finite-Ring R) →
-    Id (add-Finite-Ring (add-Finite-Ring x y) z) (add-Finite-Ring x (add-Finite-Ring y z))
+    Id
+      ( add-Finite-Ring (add-Finite-Ring x y) z)
+      ( add-Finite-Ring x (add-Finite-Ring y z))
   associative-add-Finite-Ring = associative-add-Ring (ring-Finite-Ring R)
 
   is-group-additive-semigroup-Finite-Ring :
@@ -160,12 +162,14 @@ module _
 
   right-swap-add-Finite-Ring :
     (x y z : type-Finite-Ring R) →
-    add-Finite-Ring (add-Finite-Ring x y) z ＝ add-Finite-Ring (add-Finite-Ring x z) y
+    add-Finite-Ring (add-Finite-Ring x y) z ＝
+    add-Finite-Ring (add-Finite-Ring x z) y
   right-swap-add-Finite-Ring = right-swap-add-Ring (ring-Finite-Ring R)
 
   left-swap-add-Finite-Ring :
     (x y z : type-Finite-Ring R) →
-    add-Finite-Ring x (add-Finite-Ring y z) ＝ add-Finite-Ring y (add-Finite-Ring x z)
+    add-Finite-Ring x (add-Finite-Ring y z) ＝
+    add-Finite-Ring y (add-Finite-Ring x z)
   left-swap-add-Finite-Ring = left-swap-add-Ring (ring-Finite-Ring R)
 
   is-equiv-add-Finite-Ring :
@@ -250,12 +254,14 @@ module _
   neg-Finite-Ring = neg-Ring (ring-Finite-Ring R)
 
   left-inverse-law-add-Finite-Ring :
-    (x : type-Finite-Ring R) → Id (add-Finite-Ring R (neg-Finite-Ring x) x) (zero-Finite-Ring R)
+    (x : type-Finite-Ring R) →
+    Id (add-Finite-Ring R (neg-Finite-Ring x) x) (zero-Finite-Ring R)
   left-inverse-law-add-Finite-Ring =
     left-inverse-law-add-Ring (ring-Finite-Ring R)
 
   right-inverse-law-add-Finite-Ring :
-    (x : type-Finite-Ring R) → Id (add-Finite-Ring R x (neg-Finite-Ring x)) (zero-Finite-Ring R)
+    (x : type-Finite-Ring R) →
+    Id (add-Finite-Ring R x (neg-Finite-Ring x)) (zero-Finite-Ring R)
   right-inverse-law-add-Finite-Ring =
     right-inverse-law-add-Ring (ring-Finite-Ring R)
 
@@ -265,7 +271,8 @@ module _
 
   distributive-neg-add-Finite-Ring :
     (x y : type-Finite-Ring R) →
-    neg-Finite-Ring (add-Finite-Ring R x y) ＝ add-Finite-Ring R (neg-Finite-Ring x) (neg-Finite-Ring y)
+    neg-Finite-Ring (add-Finite-Ring R x y) ＝
+    add-Finite-Ring R (neg-Finite-Ring x) (neg-Finite-Ring y)
   distributive-neg-add-Finite-Ring =
     distributive-neg-add-Ring (ring-Finite-Ring R)
 ```
@@ -295,7 +302,9 @@ module _
 
   associative-mul-Finite-Ring :
     (x y z : type-Finite-Ring R) →
-    Id (mul-Finite-Ring (mul-Finite-Ring x y) z) (mul-Finite-Ring x (mul-Finite-Ring y z))
+    Id
+      ( mul-Finite-Ring (mul-Finite-Ring x y) z)
+      ( mul-Finite-Ring x (mul-Finite-Ring y z))
   associative-mul-Finite-Ring = associative-mul-Ring (ring-Finite-Ring R)
 
   multiplicative-semigroup-Finite-Ring : Semigroup l
@@ -351,12 +360,14 @@ module _
   where
 
   left-zero-law-mul-Finite-Ring :
-    (x : type-Finite-Ring R) → Id (mul-Finite-Ring R (zero-Finite-Ring R) x) (zero-Finite-Ring R)
+    (x : type-Finite-Ring R) →
+    Id (mul-Finite-Ring R (zero-Finite-Ring R) x) (zero-Finite-Ring R)
   left-zero-law-mul-Finite-Ring =
     left-zero-law-mul-Ring (ring-Finite-Ring R)
 
   right-zero-law-mul-Finite-Ring :
-    (x : type-Finite-Ring R) → Id (mul-Finite-Ring R x (zero-Finite-Ring R)) (zero-Finite-Ring R)
+    (x : type-Finite-Ring R) →
+    Id (mul-Finite-Ring R x (zero-Finite-Ring R)) (zero-Finite-Ring R)
   right-zero-law-mul-Finite-Ring =
     right-zero-law-mul-Ring (ring-Finite-Ring R)
 ```
@@ -393,12 +404,14 @@ module _
   neg-one-Finite-Ring = neg-one-Ring (ring-Finite-Ring R)
 
   mul-neg-one-Finite-Ring :
-    (x : type-Finite-Ring R) → mul-Finite-Ring R neg-one-Finite-Ring x ＝ neg-Finite-Ring R x
+    (x : type-Finite-Ring R) →
+    mul-Finite-Ring R neg-one-Finite-Ring x ＝ neg-Finite-Ring R x
   mul-neg-one-Finite-Ring =
     mul-neg-one-Ring (ring-Finite-Ring R)
 
   mul-neg-one-Finite-Ring' :
-    (x : type-Finite-Ring R) → mul-Finite-Ring R x neg-one-Finite-Ring ＝ neg-Finite-Ring R x
+    (x : type-Finite-Ring R) →
+    mul-Finite-Ring R x neg-one-Finite-Ring ＝ neg-Finite-Ring R x
   mul-neg-one-Finite-Ring' =
     mul-neg-one-Ring' (ring-Finite-Ring R)
 
@@ -422,19 +435,22 @@ module _
 
   left-negative-law-mul-Finite-Ring :
     (x y : type-Finite-Ring R) →
-    mul-Finite-Ring R (neg-Finite-Ring R x) y ＝ neg-Finite-Ring R (mul-Finite-Ring R x y)
+    mul-Finite-Ring R (neg-Finite-Ring R x) y ＝
+    neg-Finite-Ring R (mul-Finite-Ring R x y)
   left-negative-law-mul-Finite-Ring =
     left-negative-law-mul-Ring (ring-Finite-Ring R)
 
   right-negative-law-mul-Finite-Ring :
     (x y : type-Finite-Ring R) →
-    mul-Finite-Ring R x (neg-Finite-Ring R y) ＝ neg-Finite-Ring R (mul-Finite-Ring R x y)
+    mul-Finite-Ring R x (neg-Finite-Ring R y) ＝
+    neg-Finite-Ring R (mul-Finite-Ring R x y)
   right-negative-law-mul-Finite-Ring =
     right-negative-law-mul-Ring (ring-Finite-Ring R)
 
   mul-neg-Finite-Ring :
     (x y : type-Finite-Ring R) →
-    mul-Finite-Ring R (neg-Finite-Ring R x) (neg-Finite-Ring R y) ＝ mul-Finite-Ring R x y
+    mul-Finite-Ring R (neg-Finite-Ring R x) (neg-Finite-Ring R y) ＝
+    mul-Finite-Ring R x y
   mul-neg-Finite-Ring =
     mul-neg-Ring (ring-Finite-Ring R)
 ```
@@ -451,16 +467,19 @@ module _
 
   ap-mul-nat-scalar-Finite-Ring :
     {m n : ℕ} {x y : type-Finite-Ring R} →
-    (m ＝ n) → (x ＝ y) → mul-nat-scalar-Finite-Ring m x ＝ mul-nat-scalar-Finite-Ring n y
+    (m ＝ n) → (x ＝ y) →
+    mul-nat-scalar-Finite-Ring m x ＝ mul-nat-scalar-Finite-Ring n y
   ap-mul-nat-scalar-Finite-Ring = ap-mul-nat-scalar-Ring (ring-Finite-Ring R)
 
   left-zero-law-mul-nat-scalar-Finite-Ring :
-    (x : type-Finite-Ring R) → mul-nat-scalar-Finite-Ring 0 x ＝ zero-Finite-Ring R
+    (x : type-Finite-Ring R) →
+    mul-nat-scalar-Finite-Ring 0 x ＝ zero-Finite-Ring R
   left-zero-law-mul-nat-scalar-Finite-Ring =
     left-zero-law-mul-nat-scalar-Ring (ring-Finite-Ring R)
 
   right-zero-law-mul-nat-scalar-Finite-Ring :
-    (n : ℕ) → mul-nat-scalar-Finite-Ring n (zero-Finite-Ring R) ＝ zero-Finite-Ring R
+    (n : ℕ) →
+    mul-nat-scalar-Finite-Ring n (zero-Finite-Ring R) ＝ zero-Finite-Ring R
   right-zero-law-mul-nat-scalar-Finite-Ring =
     right-zero-law-mul-nat-scalar-Ring (ring-Finite-Ring R)
 
@@ -486,14 +505,18 @@ module _
   left-distributive-mul-nat-scalar-add-Finite-Ring :
     (n : ℕ) (x y : type-Finite-Ring R) →
     mul-nat-scalar-Finite-Ring n (add-Finite-Ring R x y) ＝
-    add-Finite-Ring R (mul-nat-scalar-Finite-Ring n x) (mul-nat-scalar-Finite-Ring n y)
+    add-Finite-Ring R
+      ( mul-nat-scalar-Finite-Ring n x)
+      ( mul-nat-scalar-Finite-Ring n y)
   left-distributive-mul-nat-scalar-add-Finite-Ring =
     left-distributive-mul-nat-scalar-add-Ring (ring-Finite-Ring R)
 
   right-distributive-mul-nat-scalar-add-Finite-Ring :
     (m n : ℕ) (x : type-Finite-Ring R) →
     mul-nat-scalar-Finite-Ring (m +ℕ n) x ＝
-    add-Finite-Ring R (mul-nat-scalar-Finite-Ring m x) (mul-nat-scalar-Finite-Ring n x)
+    add-Finite-Ring R
+      ( mul-nat-scalar-Finite-Ring m x)
+      ( mul-nat-scalar-Finite-Ring n x)
   right-distributive-mul-nat-scalar-add-Finite-Ring =
     right-distributive-mul-nat-scalar-add-Ring (ring-Finite-Ring R)
 ```
@@ -530,7 +553,9 @@ module _
   structure-finite-ring : UU l
   structure-finite-ring =
     Σ ( structure-finite-abelian-group X)
-      ( λ m → has-mul-Finite-Ab (finite-abelian-group-structure-finite-abelian-group X m))
+      ( λ m →
+        has-mul-Finite-Ab
+          ( finite-abelian-group-structure-finite-abelian-group X m))
 
   finite-ring-structure-finite-ring :
     structure-finite-ring → Finite-Ring l

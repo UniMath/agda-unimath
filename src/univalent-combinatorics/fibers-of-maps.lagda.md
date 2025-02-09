@@ -97,11 +97,15 @@ abstract
           ( λ K → unit-trunc-Prop (count-fiber f H K y)))
 
 fiber-Finite-Type :
-  {l1 l2 : Level} (X : Finite-Type l1) (Y : Finite-Type l2) (f : type-Finite-Type X → type-Finite-Type Y) →
+  {l1 l2 : Level} (X : Finite-Type l1) (Y : Finite-Type l2)
+  (f : type-Finite-Type X → type-Finite-Type Y) →
   type-Finite-Type Y → Finite-Type (l1 ⊔ l2)
 pr1 (fiber-Finite-Type X Y f y) = fiber f y
 pr2 (fiber-Finite-Type X Y f y) =
-  is-finite-fiber f (is-finite-type-Finite-Type X) (is-finite-type-Finite-Type Y) y
+  is-finite-fiber f
+    ( is-finite-type-Finite-Type X)
+    ( is-finite-type-Finite-Type Y)
+    ( y)
 ```
 
 ###

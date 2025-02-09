@@ -31,7 +31,7 @@ module _
   where
 
   trivial-inhabited-Σ-Decomposition-Finite-Type :
-    (p : is-inhabited (type-Finite-Type A)) → Σ-Decomposition-Finite-Type l2 l1 A
+    is-inhabited (type-Finite-Type A) → Σ-Decomposition-Finite-Type l2 l1 A
   trivial-inhabited-Σ-Decomposition-Finite-Type p =
     map-Σ-Decomposition-Finite-Type-subtype-is-finite
       ( A)
@@ -92,7 +92,7 @@ module _
       ( is-trivial)
 
 is-contr-type-trivial-Σ-Decomposition-Finite-Type :
-  {l1 l2 : Level} (A : Finite-Type l1) → (p : is-inhabited (type-Finite-Type A)) →
+  {l1 l2 : Level} (A : Finite-Type l1) (p : is-inhabited (type-Finite-Type A)) →
   is-contr (type-trivial-Σ-Decomposition-Finite-Type {l1} {l2} {l1} A)
 pr1 ( is-contr-type-trivial-Σ-Decomposition-Finite-Type {l1} {l2} A p) =
   ( trivial-inhabited-Σ-Decomposition-Finite-Type l2 A p ,
@@ -105,5 +105,7 @@ pr2 ( is-contr-type-trivial-Σ-Decomposition-Finite-Type {l1} {l2} A p) x =
         ( A)
         ( pr1 x)
         ( trivial-inhabited-Σ-Decomposition-Finite-Type l2 A p)
-        ( equiv-trivial-is-trivial-Σ-Decomposition-Finite-Type A (pr1 x) (pr2 x))))
+        ( equiv-trivial-is-trivial-Σ-Decomposition-Finite-Type A
+          ( pr1 x)
+          ( pr2 x))))
 ```

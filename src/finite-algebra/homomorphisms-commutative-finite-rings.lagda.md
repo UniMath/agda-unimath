@@ -38,7 +38,8 @@ underlying rings.
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Finite-Commutative-Ring l1) (B : Finite-Commutative-Ring l2)
+  {l1 l2 : Level}
+  (A : Finite-Commutative-Ring l1) (B : Finite-Commutative-Ring l2)
   where
 
   is-commutative-finite-ring-homomorphism-hom-Ab-Prop :
@@ -72,12 +73,15 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Finite-Commutative-Ring l1) (B : Finite-Commutative-Ring l2)
+  {l1 l2 : Level}
+  (A : Finite-Commutative-Ring l1) (B : Finite-Commutative-Ring l2)
   where
 
   hom-set-Finite-Commutative-Ring : Set (l1 ⊔ l2)
   hom-set-Finite-Commutative-Ring =
-    hom-set-Ring (ring-Finite-Commutative-Ring A) (ring-Finite-Commutative-Ring B)
+    hom-set-Ring
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
 
   hom-Finite-Commutative-Ring : UU (l1 ⊔ l2)
   hom-Finite-Commutative-Ring =
@@ -85,7 +89,9 @@ module _
 
   is-set-hom-Finite-Commutative-Ring : is-set hom-Finite-Commutative-Ring
   is-set-hom-Finite-Commutative-Ring =
-    is-set-hom-Ring (ring-Finite-Commutative-Ring A) (ring-Finite-Commutative-Ring B)
+    is-set-hom-Ring
+      ( ring-Finite-Commutative-Ring A)
+      ( ring-Finite-Commutative-Ring B)
 
   module _
     (f : hom-Finite-Commutative-Ring)
@@ -94,7 +100,10 @@ module _
     hom-ab-hom-Finite-Commutative-Ring :
       hom-Ab (ab-Finite-Commutative-Ring A) (ab-Finite-Commutative-Ring B)
     hom-ab-hom-Finite-Commutative-Ring =
-      hom-ab-hom-Ring (ring-Finite-Commutative-Ring A) (ring-Finite-Commutative-Ring B) f
+      hom-ab-hom-Ring
+        ( ring-Finite-Commutative-Ring A)
+        ( ring-Finite-Commutative-Ring B)
+        ( f)
 
     hom-multiplicative-monoid-hom-Finite-Commutative-Ring :
       hom-Monoid
@@ -313,7 +322,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Finite-Commutative-Ring l1) (B : Finite-Commutative-Ring l2)
+  {l1 l2 : Level}
+  (A : Finite-Commutative-Ring l1) (B : Finite-Commutative-Ring l2)
   where
 
   htpy-hom-Finite-Commutative-Ring :
@@ -431,7 +441,10 @@ module _
   where
 
   left-unit-law-comp-hom-Finite-Commutative-Ring :
-    comp-hom-Finite-Commutative-Ring A B B (id-hom-Finite-Commutative-Ring B) f ＝ f
+    comp-hom-Finite-Commutative-Ring A B B
+      ( id-hom-Finite-Commutative-Ring B)
+      ( f) ＝
+    f
   left-unit-law-comp-hom-Finite-Commutative-Ring =
     left-unit-law-comp-hom-Ring
       ( ring-Finite-Commutative-Ring A)
@@ -439,7 +452,10 @@ module _
       ( f)
 
   right-unit-law-comp-hom-Finite-Commutative-Ring :
-    comp-hom-Finite-Commutative-Ring A A B f (id-hom-Finite-Commutative-Ring A) ＝ f
+    comp-hom-Finite-Commutative-Ring A A B
+      ( f)
+      ( id-hom-Finite-Commutative-Ring A) ＝
+    f
   right-unit-law-comp-hom-Finite-Commutative-Ring =
     right-unit-law-comp-hom-Ring
       ( ring-Finite-Commutative-Ring A)

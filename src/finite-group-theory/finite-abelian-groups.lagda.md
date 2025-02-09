@@ -106,11 +106,13 @@ module _
   pr2 ab-Finite-Ab = commutative-add-Finite-Ab
 
   ap-add-Finite-Ab :
-    {x y x' y' : type-Finite-Ab} → x ＝ x' → y ＝ y' → add-Finite-Ab x y ＝ add-Finite-Ab x' y'
+    {x y x' y' : type-Finite-Ab} →
+    x ＝ x' → y ＝ y' → add-Finite-Ab x y ＝ add-Finite-Ab x' y'
   ap-add-Finite-Ab = ap-add-Ab ab-Finite-Ab
 
   associative-add-Finite-Ab :
-    (x y z : type-Finite-Ab) → add-Finite-Ab (add-Finite-Ab x y) z ＝ add-Finite-Ab x (add-Finite-Ab y z)
+    (x y z : type-Finite-Ab) →
+    add-Finite-Ab (add-Finite-Ab x y) z ＝ add-Finite-Ab x (add-Finite-Ab y z)
   associative-add-Finite-Ab = associative-mul-Group group-Finite-Ab
 
   semigroup-Finite-Ab : Semigroup l
@@ -169,19 +171,23 @@ module _
       associative-add-Finite-Ab
 
   right-swap-add-Finite-Ab :
-    (a b c : type-Finite-Ab) → add-Finite-Ab (add-Finite-Ab a b) c ＝ add-Finite-Ab (add-Finite-Ab a c) b
+    (a b c : type-Finite-Ab) →
+    add-Finite-Ab (add-Finite-Ab a b) c ＝ add-Finite-Ab (add-Finite-Ab a c) b
   right-swap-add-Finite-Ab = right-swap-add-Ab ab-Finite-Ab
 
   left-swap-add-Finite-Ab :
-    (a b c : type-Finite-Ab) → add-Finite-Ab a (add-Finite-Ab b c) ＝ add-Finite-Ab b (add-Finite-Ab a c)
+    (a b c : type-Finite-Ab) →
+    add-Finite-Ab a (add-Finite-Ab b c) ＝ add-Finite-Ab b (add-Finite-Ab a c)
   left-swap-add-Finite-Ab = left-swap-add-Ab ab-Finite-Ab
 
   distributive-neg-add-Finite-Ab :
     (x y : type-Finite-Ab) →
-    neg-Finite-Ab (add-Finite-Ab x y) ＝ add-Finite-Ab (neg-Finite-Ab x) (neg-Finite-Ab y)
+    neg-Finite-Ab (add-Finite-Ab x y) ＝
+    add-Finite-Ab (neg-Finite-Ab x) (neg-Finite-Ab y)
   distributive-neg-add-Finite-Ab = distributive-neg-add-Ab ab-Finite-Ab
 
-  neg-neg-Finite-Ab : (x : type-Finite-Ab) → neg-Finite-Ab (neg-Finite-Ab x) ＝ x
+  neg-neg-Finite-Ab :
+    (x : type-Finite-Ab) → neg-Finite-Ab (neg-Finite-Ab x) ＝ x
   neg-neg-Finite-Ab = neg-neg-Ab ab-Finite-Ab
 
   neg-zero-Finite-Ab : neg-Finite-Ab zero-Finite-Ab ＝ zero-Finite-Ab

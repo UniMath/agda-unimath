@@ -88,7 +88,9 @@ module _
   where
 
   associative-comp-hom-finite-species :
-    (h : hom-finite-species H K) (g : hom-finite-species G H) (f : hom-finite-species F G) →
+    (h : hom-finite-species H K)
+    (g : hom-finite-species G H)
+    (f : hom-finite-species F G) →
     comp-hom-finite-species F G K (comp-hom-finite-species G H K h g) f ＝
     comp-hom-finite-species F H K h (comp-hom-finite-species F G H g f)
   associative-comp-hom-finite-species h g f = refl
@@ -156,8 +158,11 @@ is-set-hom-finite-species F G f g =
     ( is-prop-Π
       ( λ X →
         is-prop-Π
-          ( λ x p q →
-            is-set-is-finite (is-finite-type-Finite-Type (G X)) (f X x) (g X x) p q)))
+          ( λ x →
+            is-set-is-finite
+              ( is-finite-type-Finite-Type (G X))
+              ( f X x)
+              ( g X x))))
 
 hom-set-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3) →

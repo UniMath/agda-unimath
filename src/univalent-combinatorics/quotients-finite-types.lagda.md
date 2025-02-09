@@ -27,7 +27,8 @@ finite type. In this file we set up some infrastructure for such quotients.
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Finite-Type l1) (R : Decidable-Equivalence-Relation-Finite-Type l2 X)
+  {l1 l2 : Level} (X : Finite-Type l1)
+  (R : Decidable-Equivalence-Relation-Finite-Type l2 X)
   where
 
   equivalence-class-Decidable-Equivalence-Relation-Finite-Type :

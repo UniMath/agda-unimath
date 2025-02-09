@@ -59,7 +59,8 @@ module _
 
   vertex-complete-bipartite-Finite-Undirected-Graph : UU (l1 ⊔ l2)
   vertex-complete-bipartite-Finite-Undirected-Graph =
-    type-Finite-Type vertex-finite-type-complete-bipartite-Finite-Undirected-Graph
+    type-Finite-Type
+      vertex-finite-type-complete-bipartite-Finite-Undirected-Graph
 
   unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph :
     UU (lsuc lzero ⊔ l1 ⊔ l2)
@@ -67,7 +68,8 @@ module _
     unordered-pair vertex-complete-bipartite-Finite-Undirected-Graph
 
   edge-finite-type-complete-bipartite-Finite-Undirected-Graph :
-    unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph → Finite-Type (l1 ⊔ l2)
+    unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph →
+    Finite-Type (l1 ⊔ l2)
   edge-finite-type-complete-bipartite-Finite-Undirected-Graph p =
     product-Finite-Type
       ( Σ-Finite-Type X
@@ -86,9 +88,11 @@ module _
             ( inr y)))
 
   edge-complete-bipartite-Undirected-Graph :
-    unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph → UU (l1 ⊔ l2)
+    unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph →
+    UU (l1 ⊔ l2)
   edge-complete-bipartite-Undirected-Graph p =
-    type-Finite-Type (edge-finite-type-complete-bipartite-Finite-Undirected-Graph p)
+    type-Finite-Type
+      ( edge-finite-type-complete-bipartite-Finite-Undirected-Graph p)
 
   complete-bipartite-Finite-Undirected-Graph :
     Finite-Undirected-Graph (l1 ⊔ l2) (l1 ⊔ l2)

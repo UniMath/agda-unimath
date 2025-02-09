@@ -107,7 +107,8 @@ module _
 
   associative-mul-Finite-Monoid :
     (x y z : type-Finite-Monoid) →
-    mul-Finite-Monoid (mul-Finite-Monoid x y) z ＝ mul-Finite-Monoid x (mul-Finite-Monoid y z)
+    mul-Finite-Monoid (mul-Finite-Monoid x y) z ＝
+    mul-Finite-Monoid x (mul-Finite-Monoid y z)
   associative-mul-Finite-Monoid =
     associative-mul-Semigroup semigroup-Finite-Monoid
 
@@ -251,7 +252,8 @@ mere-equiv-number-of-monoids-of-order n =
 ```agda
 abstract
   is-prop-is-unital-Finite-Semigroup :
-    {l : Level} (G : Finite-Semigroup l) → is-prop (is-unital-Finite-Semigroup G)
+    {l : Level} (G : Finite-Semigroup l) →
+    is-prop (is-unital-Finite-Semigroup G)
   is-prop-is-unital-Finite-Semigroup G =
     is-prop-is-unital-Semigroup (semigroup-Finite-Semigroup G)
 
@@ -264,7 +266,8 @@ pr2 (is-unital-Finite-Semigroup-Prop G) = is-prop-is-unital-Finite-Semigroup G
 
 ```agda
 is-finite-is-unital-Finite-Semigroup :
-  {l : Level} (G : Finite-Semigroup l) → is-finite (is-unital-Finite-Semigroup G)
+  {l : Level} (G : Finite-Semigroup l) →
+  is-finite (is-unital-Finite-Semigroup G)
 is-finite-is-unital-Finite-Semigroup G =
   is-finite-Σ
     ( is-finite-type-Finite-Semigroup G)
@@ -287,7 +290,8 @@ structure-finite-monoid X =
   Σ (structure-finite-semigroup X) (λ p → is-unital-Finite-Semigroup (X , p))
 
 finite-monoid-structure-finite-monoid :
-  {l : Level} → (X : Finite-Type l) → structure-finite-monoid X → Finite-Monoid l
+  {l : Level} → (X : Finite-Type l) →
+  structure-finite-monoid X → Finite-Monoid l
 pr1 (finite-monoid-structure-finite-monoid X (a , u)) = X , a
 pr2 (finite-monoid-structure-finite-monoid X (a , u)) = u
 

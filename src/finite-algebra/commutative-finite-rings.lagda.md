@@ -72,7 +72,9 @@ is-prop-is-commutative-Finite-Ring A =
     ( λ x →
       is-prop-Π
       ( λ y →
-        is-set-type-Finite-Ring A (mul-Finite-Ring A x y) (mul-Finite-Ring A y x)))
+        is-set-type-Finite-Ring A
+          ( mul-Finite-Ring A x y)
+          ( mul-Finite-Ring A y x)))
 
 Finite-Commutative-Ring :
   ( l : Level) → UU (lsuc l)
@@ -128,12 +130,16 @@ module _
     has-associative-add-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   add-Finite-Commutative-Ring :
-    type-Finite-Commutative-Ring → type-Finite-Commutative-Ring → type-Finite-Commutative-Ring
+    type-Finite-Commutative-Ring →
+    type-Finite-Commutative-Ring →
+    type-Finite-Commutative-Ring
   add-Finite-Commutative-Ring =
     add-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   add-Finite-Commutative-Ring' :
-    type-Finite-Commutative-Ring → type-Finite-Commutative-Ring → type-Finite-Commutative-Ring
+    type-Finite-Commutative-Ring →
+    type-Finite-Commutative-Ring →
+    type-Finite-Commutative-Ring
   add-Finite-Commutative-Ring' =
     add-Finite-Ring' finite-ring-Finite-Commutative-Ring
 
@@ -192,12 +198,14 @@ module _
     left-swap-add-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   is-equiv-add-Finite-Commutative-Ring :
-    (x : type-Finite-Commutative-Ring) → is-equiv (add-Finite-Commutative-Ring x)
+    (x : type-Finite-Commutative-Ring) →
+    is-equiv (add-Finite-Commutative-Ring x)
   is-equiv-add-Finite-Commutative-Ring =
     is-equiv-add-Ab ab-Finite-Commutative-Ring
 
   is-equiv-add-Finite-Commutative-Ring' :
-    (x : type-Finite-Commutative-Ring) → is-equiv (add-Finite-Commutative-Ring' x)
+    (x : type-Finite-Commutative-Ring) →
+    is-equiv (add-Finite-Commutative-Ring' x)
   is-equiv-add-Finite-Commutative-Ring' =
     is-equiv-add-Ab' ab-Finite-Commutative-Ring
 
@@ -223,12 +231,14 @@ module _
     is-emb-add-Ab' ab-Finite-Commutative-Ring
 
   is-injective-add-Finite-Commutative-Ring :
-    (x : type-Finite-Commutative-Ring) → is-injective (add-Finite-Commutative-Ring x)
+    (x : type-Finite-Commutative-Ring) →
+    is-injective (add-Finite-Commutative-Ring x)
   is-injective-add-Finite-Commutative-Ring =
     is-injective-add-Ab ab-Finite-Commutative-Ring
 
   is-injective-add-Finite-Commutative-Ring' :
-    (x : type-Finite-Commutative-Ring) → is-injective (add-Finite-Commutative-Ring' x)
+    (x : type-Finite-Commutative-Ring) →
+    is-injective (add-Finite-Commutative-Ring' x)
   is-injective-add-Finite-Commutative-Ring' =
     is-injective-add-Ab' ab-Finite-Commutative-Ring
 ```
@@ -311,7 +321,9 @@ module _
   distributive-neg-add-Finite-Commutative-Ring :
     (x y : type-Finite-Commutative-Ring) →
     neg-Finite-Commutative-Ring (add-Finite-Commutative-Ring x y) ＝
-    add-Finite-Commutative-Ring (neg-Finite-Commutative-Ring x) (neg-Finite-Commutative-Ring y)
+    add-Finite-Commutative-Ring
+      ( neg-Finite-Commutative-Ring x)
+      ( neg-Finite-Commutative-Ring y)
   distributive-neg-add-Finite-Commutative-Ring =
     distributive-neg-add-Ab ab-Finite-Commutative-Ring
 ```
@@ -565,13 +577,15 @@ module _
     mul-nat-scalar-Finite-Commutative-Ring n zero-Finite-Commutative-Ring ＝
     zero-Finite-Commutative-Ring
   right-zero-law-mul-nat-scalar-Finite-Commutative-Ring =
-    right-zero-law-mul-nat-scalar-Finite-Ring finite-ring-Finite-Commutative-Ring
+    right-zero-law-mul-nat-scalar-Finite-Ring
+      finite-ring-Finite-Commutative-Ring
 
   left-unit-law-mul-nat-scalar-Finite-Commutative-Ring :
     (x : type-Finite-Commutative-Ring) →
     mul-nat-scalar-Finite-Commutative-Ring 1 x ＝ x
   left-unit-law-mul-nat-scalar-Finite-Commutative-Ring =
-    left-unit-law-mul-nat-scalar-Finite-Ring finite-ring-Finite-Commutative-Ring
+    left-unit-law-mul-nat-scalar-Finite-Ring
+      finite-ring-Finite-Commutative-Ring
 
   left-nat-scalar-law-mul-Finite-Commutative-Ring :
     (n : ℕ) (x y : type-Finite-Commutative-Ring) →
@@ -594,7 +608,8 @@ module _
       ( mul-nat-scalar-Finite-Commutative-Ring n x)
       ( mul-nat-scalar-Finite-Commutative-Ring n y)
   left-distributive-mul-nat-scalar-add-Finite-Commutative-Ring =
-    left-distributive-mul-nat-scalar-add-Finite-Ring finite-ring-Finite-Commutative-Ring
+    left-distributive-mul-nat-scalar-add-Finite-Ring
+      finite-ring-Finite-Commutative-Ring
 
   right-distributive-mul-nat-scalar-add-Finite-Commutative-Ring :
     (m n : ℕ) (x : type-Finite-Commutative-Ring) →
@@ -603,7 +618,8 @@ module _
       ( mul-nat-scalar-Finite-Commutative-Ring m x)
       ( mul-nat-scalar-Finite-Commutative-Ring n x)
   right-distributive-mul-nat-scalar-add-Finite-Commutative-Ring =
-    right-distributive-mul-nat-scalar-add-Finite-Ring finite-ring-Finite-Commutative-Ring
+    right-distributive-mul-nat-scalar-add-Finite-Ring
+      finite-ring-Finite-Commutative-Ring
 ```
 
 ### Addition of a list of elements in a commutative finite ring
@@ -637,7 +653,8 @@ module _
     UU l1
   structure-finite-commutative-ring =
     Σ ( structure-finite-ring X)
-      ( λ r → is-commutative-Finite-Ring (finite-ring-structure-finite-ring X r))
+      ( λ r →
+        is-commutative-Finite-Ring (finite-ring-structure-finite-ring X r))
 
   finite-commutative-ring-structure-finite-commutative-ring :
     structure-finite-commutative-ring →

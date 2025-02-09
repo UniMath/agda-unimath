@@ -77,7 +77,8 @@ is-finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type :
 is-finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type X =
   is-finite-equiv
     ( equiv-Σ-Decomposition-Inhabited-Finite-Type-Σ-Decomposition-Finite-Type X)
-    ( is-finite-Σ-Decomposition-Finite-Type (finite-type-Inhabited-Finite-Type X))
+    ( is-finite-Σ-Decomposition-Finite-Type
+      ( finite-type-Inhabited-Finite-Type X))
 
 finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type :
   {l : Level} (X : Inhabited-Finite-Type l) → Finite-Type (lsuc l)
@@ -93,7 +94,8 @@ module _
   where
 
   finite-small-cauchy-composition-species-subuniverse :
-    ( S T : species-Inhabited-Finite-Type l1 (l1 ⊔ l2)) (X : Inhabited-Finite-Type l1) →
+    ( S T : species-Inhabited-Finite-Type l1 (l1 ⊔ l2))
+    (X : Inhabited-Finite-Type l1) →
     Finite-Type (lsuc l1 ⊔ l2)
   finite-small-cauchy-composition-species-subuniverse S T X =
     Σ-Finite-Type
@@ -150,9 +152,11 @@ module _
     C3 : is-closed-under-Σ-subuniverse (is-finite-and-inhabited-Prop {l1})
     C3 X Y =
       is-finite-Σ
-        ( is-finite-Inhabited-Finite-Type (map-inv-compute-Inhabited-Finite-Type' X))
+        ( is-finite-Inhabited-Finite-Type
+          ( map-inv-compute-Inhabited-Finite-Type' X))
         ( λ x →
-          is-finite-Inhabited-Finite-Type (map-inv-compute-Inhabited-Finite-Type' (Y x))) ,
+          is-finite-Inhabited-Finite-Type
+            ( map-inv-compute-Inhabited-Finite-Type' (Y x))) ,
       is-inhabited-Σ
         ( is-inhabited-type-Inhabited-Finite-Type
           ( map-inv-compute-Inhabited-Finite-Type' X))
@@ -192,7 +196,8 @@ module _
                   ( type-Inhabited-Finite-Type
                     ( map-inv-compute-Inhabited-Finite-Type' X))))))
           ( is-decidable-is-contr-is-finite
-            ( is-finite-Inhabited-Finite-Type (map-inv-compute-Inhabited-Finite-Type' X))))
+            ( is-finite-Inhabited-Finite-Type
+              ( map-inv-compute-Inhabited-Finite-Type' X))))
 
   small-cauchy-composition-species-Inhabited-Finite-Type :
     species-Inhabited-Finite-Type l1 (l1 ⊔ l2) →

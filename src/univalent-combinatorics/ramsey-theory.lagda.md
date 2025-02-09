@@ -34,7 +34,8 @@ subset-of-size k X =
     ( λ P → has-cardinality k (Σ (type-Finite-Type X) (λ x → type-Prop (P x))))
 
 is-ramsey-set :
-  {l : Level} {k : ℕ} (q : Fin k → ℕ) (r : ℕ) (A : Finite-Type l) → UU (lsuc lzero ⊔ l)
+  {l : Level} {k : ℕ} (q : Fin k → ℕ) (r : ℕ) (A : Finite-Type l) →
+  UU (lsuc lzero ⊔ l)
 is-ramsey-set {l} {k} q r A =
   (c : coloring k (subset-of-size r A)) →
   Σ ( Fin k)
@@ -42,7 +43,9 @@ is-ramsey-set {l} {k} q r A =
       Σ ( subset-of-size (q i) A)
         ( λ P →
           (Q : subset-of-size r A) →
-          ((x : type-Finite-Type A) → type-Prop ((pr1 Q) x) → type-Prop ((pr1 P) x)) →
+          ( (x : type-Finite-Type A) →
+            type-Prop ((pr1 Q) x) →
+            type-Prop ((pr1 P) x)) →
           Id (c Q) i))
 {-
 is-ramsey-set-empty-coloring : (r : ℕ) → is-ramsey-set ex-falso r empty-Finite-Type

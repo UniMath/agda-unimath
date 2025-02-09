@@ -103,7 +103,8 @@ module _
     associative-mul-Semigroup semigroup-Finite-Semigroup
 
 finite-semigroup-is-finite-Semigroup :
-  {l : Level} → (G : Semigroup l) → is-finite (type-Semigroup G) → Finite-Semigroup l
+  {l : Level} (G : Semigroup l) → is-finite (type-Semigroup G) →
+  Finite-Semigroup l
 pr1 (pr1 (finite-semigroup-is-finite-Semigroup G f)) = type-Semigroup G
 pr2 (pr1 (finite-semigroup-is-finite-Semigroup G f)) = f
 pr2 (finite-semigroup-is-finite-Semigroup G f) = has-associative-mul-Semigroup G
@@ -114,7 +115,8 @@ module _
 
   ap-mul-Finite-Semigroup :
     {x x' y y' : type-Finite-Semigroup G} →
-    x ＝ x' → y ＝ y' → mul-Finite-Semigroup G x y ＝ mul-Finite-Semigroup G x' y'
+    x ＝ x' → y ＝ y' →
+    mul-Finite-Semigroup G x y ＝ mul-Finite-Semigroup G x' y'
   ap-mul-Finite-Semigroup = ap-mul-Semigroup (semigroup-Finite-Semigroup G)
 ```
 
@@ -246,7 +248,10 @@ is-finite-structure-finite-semigroup X =
   is-finite-Σ
     ( is-finite-Π
       ( is-finite-type-Finite-Type X)
-      ( λ _ → is-finite-Π (is-finite-type-Finite-Type X) (λ _ → is-finite-type-Finite-Type X)))
+      ( λ _ →
+        is-finite-Π
+          ( is-finite-type-Finite-Type X)
+          ( λ _ → is-finite-type-Finite-Type X)))
     ( λ m →
       is-finite-Π
         ( is-finite-type-Finite-Type X)

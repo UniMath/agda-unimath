@@ -56,7 +56,8 @@ Decidable-Equivalence-Relation-Finite-Type l2 X =
   Decidable-Equivalence-Relation l2 (type-Finite-Type X)
 
 module _
-  {l1 l2 : Level} (X : Finite-Type l1) (R : Decidable-Equivalence-Relation-Finite-Type l2 X)
+  {l1 l2 : Level} (X : Finite-Type l1)
+  (R : Decidable-Equivalence-Relation-Finite-Type l2 X)
   where
 
   decidable-relation-Decidable-Equivalence-Relation-Finite-Type :
@@ -75,12 +76,14 @@ module _
     sim-Decidable-Equivalence-Relation R
 
   is-prop-sim-Decidable-Equivalence-Relation-Finite-Type :
-    (x y : type-Finite-Type X) → is-prop (sim-Decidable-Equivalence-Relation-Finite-Type x y)
+    (x y : type-Finite-Type X) →
+    is-prop (sim-Decidable-Equivalence-Relation-Finite-Type x y)
   is-prop-sim-Decidable-Equivalence-Relation-Finite-Type =
     is-prop-sim-Decidable-Equivalence-Relation R
 
   is-decidable-sim-Decidable-Equivalence-Relation-Finite-Type :
-    (x y : type-Finite-Type X) → is-decidable (sim-Decidable-Equivalence-Relation-Finite-Type x y)
+    (x y : type-Finite-Type X) →
+    is-decidable (sim-Decidable-Equivalence-Relation-Finite-Type x y)
   is-decidable-sim-Decidable-Equivalence-Relation-Finite-Type =
     is-decidable-sim-Decidable-Equivalence-Relation R
 
@@ -110,11 +113,12 @@ module _
     transitive-Decidable-Equivalence-Relation R
 
 module _
-  {l1 l2 : Level} (A : Finite-Type l1) (R : Decidable-Relation l2 (type-Finite-Type A))
+  {l1 l2 : Level} (A : Finite-Type l1)
+  (R : Decidable-Relation l2 (type-Finite-Type A))
   where
 
   is-finite-relation-Decidable-Relation-Finite-Type :
-    (x : type-Finite-Type A) → (y : type-Finite-Type A) → is-finite (rel-Decidable-Relation R x y)
+    (x y : type-Finite-Type A) → is-finite (rel-Decidable-Relation R x y)
   is-finite-relation-Decidable-Relation-Finite-Type x y =
     unit-trunc-Prop
       ( count-type-Decidable-Prop
