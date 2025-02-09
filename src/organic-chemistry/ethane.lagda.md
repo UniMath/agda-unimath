@@ -56,7 +56,7 @@ module _
   where
 
   vertex-ethane-Finite-Type : Finite-Type lzero
-  vertex-ethane-Finite-Type = finite-type-Fin 2
+  vertex-ethane-Finite-Type = Fin-Finite-Type 2
 
   vertex-ethane : UU lzero
   vertex-ethane = type-Finite-Type vertex-ethane-Finite-Type

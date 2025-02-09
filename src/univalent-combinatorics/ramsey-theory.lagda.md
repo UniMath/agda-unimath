@@ -53,7 +53,7 @@ is-ramsey-set-empty-coloring zero-ℕ c = {!!}
 is-ramsey-set-empty-coloring (succ-ℕ r) c = {!!}
 
 is-ramsey-set-Fin-r :
-  {k : ℕ} (q : Fin k → ℕ) (r : ℕ) → fiber q r → is-ramsey-set q r (finite-type-Fin r)
+  {k : ℕ} (q : Fin k → ℕ) (r : ℕ) → fiber q r → is-ramsey-set q r (Fin-Finite-Type r)
 is-ramsey-set-Fin-r q .(q i) (pair i refl) c =
   pair
     ( c R)
@@ -61,7 +61,7 @@ is-ramsey-set-Fin-r q .(q i) (pair i refl) c =
       {!!}
       {!!})
     where
-    R : subset-of-size (q i) (finite-type-Fin (q i))
+    R : subset-of-size (q i) (Fin-Finite-Type (q i))
     R = pair
           ( full-subset (Fin (q i)))
           ( unit-trunc-Prop (inv-equiv right-unit-law-product))

@@ -273,9 +273,9 @@ abstract
   is-finite-Fin : (k : ℕ) → is-finite (Fin k)
   is-finite-Fin k = is-finite-count (count-Fin k)
 
-finite-type-Fin : ℕ → Finite-Type lzero
-pr1 (finite-type-Fin k) = Fin k
-pr2 (finite-type-Fin k) = is-finite-Fin k
+Fin-Finite-Type : ℕ → Finite-Type lzero
+pr1 (Fin-Finite-Type k) = Fin k
+pr2 (Fin-Finite-Type k) = is-finite-Fin k
 
 has-cardinality-raise-Fin :
   {l : Level} (k : ℕ) → has-cardinality k (raise-Fin l k)

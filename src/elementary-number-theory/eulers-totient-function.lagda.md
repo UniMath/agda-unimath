@@ -49,7 +49,7 @@ extend naturally to the first definition.
 eulers-totient-function-relatively-prime : ℕ → ℕ
 eulers-totient-function-relatively-prime n =
   number-of-elements-subset-Finite-Type
-    ( finite-type-Fin n)
+    ( Fin-Finite-Type n)
     ( λ x → is-relatively-prime-ℕ-Decidable-Prop (nat-Fin n x) n)
 ```
 
