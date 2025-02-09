@@ -16,7 +16,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import order-theory.strictly-preordered-types
+open import order-theory.strict-preorders
 ```
 
 </details>
@@ -24,9 +24,9 @@ open import order-theory.strictly-preordered-types
 ## Idea
 
 A {{#concept "strictly preordered set" Agda=Strictly-Preordered-Set}} is a
-[strictly preordered type](order-theory.strictly-preordered-types.md) whose
-underlying type is a [set](foundation-core.sets.md). More specifically, a
-strictly preordered set consists of a set $A$, a
+[strictly preordered type](order-theory.strict-preorders.md) whose underlying
+type is a [set](foundation-core.sets.md). More specifically, a strictly
+preordered set consists of a set $A$, a
 [binary relation](foundation.binary-relations.md) $<$ on $A$ valued in the
 [propositions](foundation-core.propositions.md), such that the relation $<$ is
 irreflexive and transitive:
@@ -93,15 +93,15 @@ module _
   is-transitive-le-Strictly-Preordered-Set =
     pr2 (pr2 (pr2 A))
 
-  strictly-preordered-type-Strictly-Preordered-Set :
-    Strictly-Preordered-Type l1 l2
-  pr1 strictly-preordered-type-Strictly-Preordered-Set =
+  strict-preorder-Strictly-Preordered-Set :
+    Strict-Preorder l1 l2
+  pr1 strict-preorder-Strictly-Preordered-Set =
     type-Strictly-Preordered-Set
-  pr1 (pr2 strictly-preordered-type-Strictly-Preordered-Set) =
+  pr1 (pr2 strict-preorder-Strictly-Preordered-Set) =
     le-prop-Strictly-Preordered-Set
-  pr1 (pr2 (pr2 strictly-preordered-type-Strictly-Preordered-Set)) =
+  pr1 (pr2 (pr2 strict-preorder-Strictly-Preordered-Set)) =
     is-irreflexive-le-Strictly-Preordered-Set
-  pr2 (pr2 (pr2 strictly-preordered-type-Strictly-Preordered-Set)) =
+  pr2 (pr2 (pr2 strict-preorder-Strictly-Preordered-Set)) =
     is-transitive-le-Strictly-Preordered-Set
 ```
 
@@ -117,6 +117,6 @@ module _
   is-antisymmetric-le-Strictly-Preordered-Set :
     is-antisymmetric (le-Strictly-Preordered-Set A)
   is-antisymmetric-le-Strictly-Preordered-Set =
-    is-antisymmetric-le-Strictly-Preordered-Type
-      ( strictly-preordered-type-Strictly-Preordered-Set A)
+    is-antisymmetric-le-Strict-Preorder
+      ( strict-preorder-Strictly-Preordered-Set A)
 ```
