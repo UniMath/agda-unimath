@@ -124,6 +124,86 @@ module _
     minkowski-mul-inhabited-is-inhabited-Monoid (monoid-Commutative-Monoid M)
 ```
 
+### Containment is preserved by Minkowski multiplication of monoid subsets
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Commutative-Monoid l1)
+  (B : subset-Commutative-Monoid l2 M)
+  (A : subset-Commutative-Monoid l3 M)
+  (A' : subset-Commutative-Monoid l4 M)
+  where
+
+  preserves-leq-left-minkowski-mul-Commutative-Monoid :
+    A ⊆ A' →
+    minkowski-mul-Commutative-Monoid M A B ⊆
+    minkowski-mul-Commutative-Monoid M A' B
+  preserves-leq-left-minkowski-mul-Commutative-Monoid =
+    preserves-leq-left-minkowski-mul-Monoid (monoid-Commutative-Monoid M) B A A'
+
+  preserves-leq-right-minkowski-mul-Commutative-Monoid :
+    A ⊆ A' →
+    minkowski-mul-Commutative-Monoid M B A ⊆
+    minkowski-mul-Commutative-Monoid M B A'
+  preserves-leq-right-minkowski-mul-Commutative-Monoid =
+    preserves-leq-right-minkowski-mul-Monoid
+      ( monoid-Commutative-Monoid M)
+      ( B)
+      ( A)
+      ( A')
+```
+
+### Similarity is preserved by Minkowski multiplication of monoid subsets
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Commutative-Monoid l1)
+  (B : subset-Commutative-Monoid l2 M)
+  (A : subset-Commutative-Monoid l3 M)
+  (A' : subset-Commutative-Monoid l4 M)
+  where
+
+  preserves-sim-left-minkowski-mul-Commutative-Monoid :
+    sim-subtype A A' →
+    sim-subtype
+      ( minkowski-mul-Commutative-Monoid M A B)
+      ( minkowski-mul-Commutative-Monoid M A' B)
+  preserves-sim-left-minkowski-mul-Commutative-Monoid =
+    preserves-sim-left-minkowski-mul-Monoid (monoid-Commutative-Monoid M) B A A'
+
+  preserves-sim-right-minkowski-mul-Commutative-Monoid :
+    sim-subtype A A' →
+    sim-subtype
+      ( minkowski-mul-Commutative-Monoid M B A)
+      ( minkowski-mul-Commutative-Monoid M B A')
+  preserves-sim-right-minkowski-mul-Commutative-Monoid =
+    preserves-sim-right-minkowski-mul-Monoid
+      ( monoid-Commutative-Monoid M)
+      ( B)
+      ( A)
+      ( A')
+
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (M : Commutative-Monoid l1)
+  (A : subset-Commutative-Monoid l2 M)
+  (A' : subset-Commutative-Monoid l3 M)
+  (B : subset-Commutative-Monoid l4 M)
+  (B' : subset-Commutative-Monoid l5 M)
+  where
+
+  preserves-sim-minkowski-mul-Commutative-Monoid :
+    sim-subtype A A' →
+    sim-subtype B B' →
+    sim-subtype
+      ( minkowski-mul-Commutative-Monoid M A B)
+      ( minkowski-mul-Commutative-Monoid M A' B')
+  preserves-sim-minkowski-mul-Commutative-Monoid =
+    preserves-sim-minkowski-mul-Monoid (monoid-Commutative-Monoid M) A A' B B'
+```
+
 ## See also
 
 - Minkowski multiplication on semigroups is defined in

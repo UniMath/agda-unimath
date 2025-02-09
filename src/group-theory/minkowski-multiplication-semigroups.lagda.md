@@ -12,6 +12,8 @@ open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.powersets
@@ -161,6 +163,79 @@ module _
       ( is-in-subtype (minkowski-mul-Semigroup G A B))
       ( mul-Semigroup G)
       λ a b a∈A b∈B → intro-exists (a , b) (a∈A , b∈B , refl)
+```
+
+### Containment is preserved by Minkowski multiplication of semigroup subtypes
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (G : Semigroup l1)
+  (B : subset-Semigroup l2 G)
+  (A : subset-Semigroup l3 G)
+  (A' : subset-Semigroup l4 G)
+  where
+
+  preserves-leq-left-minkowski-mul-Semigroup :
+    A ⊆ A' → minkowski-mul-Semigroup G A B ⊆ minkowski-mul-Semigroup G A' B
+  preserves-leq-left-minkowski-mul-Semigroup A⊆A' x =
+    map-tot-exists (λ (a , b) → map-product (A⊆A' a) id)
+
+  preserves-leq-right-minkowski-mul-Semigroup :
+    A ⊆ A' → minkowski-mul-Semigroup G B A ⊆ minkowski-mul-Semigroup G B A'
+  preserves-leq-right-minkowski-mul-Semigroup A⊆A' x =
+    map-tot-exists (λ (b , a) → map-product id (map-product (A⊆A' a) id))
+```
+
+### Similarity is preserved by Minkowski multiplication of semigroup subtypes
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (G : Semigroup l1)
+  (B : subset-Semigroup l2 G)
+  (A : subset-Semigroup l3 G)
+  (A' : subset-Semigroup l4 G)
+  where
+
+  preserves-sim-left-minkowski-mul-Semigroup :
+    sim-subtype A A' →
+    sim-subtype (minkowski-mul-Semigroup G A B) (minkowski-mul-Semigroup G A' B)
+  pr1 (preserves-sim-left-minkowski-mul-Semigroup (A⊆A' , _)) =
+    preserves-leq-left-minkowski-mul-Semigroup G B A A' A⊆A'
+  pr2 (preserves-sim-left-minkowski-mul-Semigroup (_ , A'⊆A)) =
+    preserves-leq-left-minkowski-mul-Semigroup G B A' A A'⊆A
+
+  preserves-sim-right-minkowski-mul-Semigroup :
+    sim-subtype A A' →
+    sim-subtype (minkowski-mul-Semigroup G B A) (minkowski-mul-Semigroup G B A')
+  pr1 (preserves-sim-right-minkowski-mul-Semigroup (A⊆A' , _)) =
+    preserves-leq-right-minkowski-mul-Semigroup G B A A' A⊆A'
+  pr2 (preserves-sim-right-minkowski-mul-Semigroup (_ , A'⊆A)) =
+    preserves-leq-right-minkowski-mul-Semigroup G B A' A A'⊆A
+
+module _
+  {l1 l2 l3 l4 l5 : Level}
+  (G : Semigroup l1)
+  (A : subset-Semigroup l2 G)
+  (A' : subset-Semigroup l3 G)
+  (B : subset-Semigroup l4 G)
+  (B' : subset-Semigroup l5 G)
+  where
+
+  preserves-sim-minkowski-mul-Semigroup :
+    sim-subtype A A' →
+    sim-subtype B B' →
+    sim-subtype
+      ( minkowski-mul-Semigroup G A B)
+      ( minkowski-mul-Semigroup G A' B')
+  preserves-sim-minkowski-mul-Semigroup A≈A' B≈B' =
+    transitive-sim-subtype
+      ( minkowski-mul-Semigroup G A B)
+      ( minkowski-mul-Semigroup G A B')
+      ( minkowski-mul-Semigroup G A' B')
+      ( preserves-sim-left-minkowski-mul-Semigroup G B' A A' A≈A')
+      ( preserves-sim-right-minkowski-mul-Semigroup G A B B' B≈B')
 ```
 
 ## External links
