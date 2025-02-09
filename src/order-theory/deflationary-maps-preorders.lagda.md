@@ -20,8 +20,7 @@ open import order-theory.preorders
 
 ## Idea
 
-A map $f : P → P$ on a [preorder](order-theory.preorders.md) $P$ is said to be
-a
+A map $f : P → P$ on a [preorder](order-theory.preorders.md) $P$ is said to be a
 {{#concept "deflationary map" Disambiguation="preorder" Agda=deflationary-map-Preorder}}
 if the inequality
 
