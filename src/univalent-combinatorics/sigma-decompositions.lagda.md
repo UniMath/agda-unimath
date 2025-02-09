@@ -45,8 +45,8 @@ open import univalent-combinatorics.type-duality
 Σ-Decomposition-𝔽 l1 l2 A =
   Σ ( 𝔽 l1)
     ( λ X →
-      Σ ( type-𝔽 X → Inhabited-𝔽 l2)
-        ( λ Y → type-𝔽 A ≃ (Σ (type-𝔽 X) (λ x → type-Inhabited-𝔽 (Y x)))))
+      Σ ( type-𝔽 X → Inhabited-Finite-Type l2)
+        ( λ Y → type-𝔽 A ≃ (Σ (type-𝔽 X) (λ x → type-Inhabited-Finite-Type (Y x)))))
 
 module _
   {l l1 l2 : Level} (A : 𝔽 l) (D : Σ-Decomposition-𝔽 l1 l2 A)
@@ -89,7 +89,7 @@ module _
     (x : type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽) →
     is-inhabited (cotype-Σ-Decomposition-𝔽 x)
   is-inhabited-cotype-Σ-Decomposition-𝔽 x =
-    is-inhabited-type-Inhabited-𝔽
+    is-inhabited-type-Inhabited-Finite-Type
       ( finite-inhabited-cotype-Σ-Decomposition-𝔽 x)
 
   inhabited-cotype-Σ-Decomposition-𝔽 :
@@ -243,9 +243,9 @@ module _
     Σ-Decomposition-𝔽 l2 l3 A → type-subtype is-finite-Σ-Decomposition
   map-inv-Σ-Decomposition-𝔽-subtype-is-finite ((X , fin-X) , (Y , e)) =
     ( ( X ,
-        ( ( λ x → inhabited-type-Inhabited-𝔽 (Y x)) ,
+        ( ( λ x → inhabited-type-Inhabited-Finite-Type (Y x)) ,
           ( e))) ,
-      (fin-X , (λ x → is-finite-Inhabited-𝔽 (Y x))))
+      (fin-X , (λ x → is-finite-Inhabited-Finite-Type (Y x))))
 
   equiv-Σ-Decomposition-𝔽-is-finite-subtype :
     type-subtype is-finite-Σ-Decomposition ≃ Σ-Decomposition-𝔽 l2 l3 A

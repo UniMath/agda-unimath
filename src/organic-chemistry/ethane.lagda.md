@@ -142,7 +142,7 @@ module _
   pr1 (edge-ethane-𝔽 p) = edge-ethane p
   pr2 (edge-ethane-𝔽 p) = is-finite-edge-ethane p
 
-  finite-graph-ethane : Undirected-Graph-𝔽 lzero lzero
+  finite-graph-ethane : Finite-Undirected-Graph lzero lzero
   pr1 finite-graph-ethane = vertex-ethane-𝔽
   pr2 finite-graph-ethane = edge-ethane-𝔽
 
@@ -253,7 +253,7 @@ module _
       ( tr
         ( λ x →
           walk-Undirected-Graph
-            ( undirected-graph-Undirected-Graph-𝔽 finite-graph-ethane)
+            ( undirected-graph-Finite-Undirected-Graph finite-graph-ethane)
             ( zero-Fin 1)
             ( element-standard-unordered-pair (zero-Fin 1) (one-Fin 1) x))
         ( compute-swap-2-Element-Type
@@ -272,7 +272,7 @@ module _
       ( tr
         ( λ x →
           walk-Undirected-Graph
-            ( undirected-graph-Undirected-Graph-𝔽 finite-graph-ethane)
+            ( undirected-graph-Finite-Undirected-Graph finite-graph-ethane)
             ( one-Fin 1)
             ( element-standard-unordered-pair (one-Fin 1) (zero-Fin 1) x))
         ( compute-swap-2-Element-Type

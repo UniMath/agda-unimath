@@ -58,10 +58,10 @@ equal to `1/n`.
 ## Definition
 
 ```agda
-dirichlet-series-species-Inhabited-𝔽 :
-  {l1 l2 l3 : Level} → species-Inhabited-𝔽 l1 l2 → UU l3 →
+dirichlet-series-species-Inhabited-Finite-Type :
+  {l1 l2 l3 : Level} → species-Inhabited-Finite-Type l1 l2 → UU l3 →
   UU (lsuc l1 ⊔ l2 ⊔ l3)
-dirichlet-series-species-Inhabited-𝔽 {l1} T S =
+dirichlet-series-species-Inhabited-Finite-Type {l1} T S =
   Σ ( ℕ)
     ( λ n →
       Σ ( UU-Fin l1 (succ-ℕ n))

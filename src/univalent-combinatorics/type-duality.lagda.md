@@ -42,11 +42,11 @@ open import univalent-combinatorics.inhabited-finite-types
 equiv-surjection-𝔽-family-finite-inhabited-type :
   {l : Level} (A : 𝔽 l) (B : 𝔽 l) →
   ( (type-𝔽 A ↠ type-𝔽 B) ≃
-    ( Σ ( (type-𝔽 B) → Inhabited-𝔽 l)
-        ( λ Y → (type-𝔽 A) ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-𝔽 (Y b)))))
+    ( Σ ( (type-𝔽 B) → Inhabited-Finite-Type l)
+        ( λ Y → (type-𝔽 A) ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-Finite-Type (Y b)))))
 equiv-surjection-𝔽-family-finite-inhabited-type {l} A B =
   ( ( equiv-Σ
-      ( λ Y → type-𝔽 A ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-𝔽 (Y b)))
+      ( λ Y → type-𝔽 A ≃ Σ (type-𝔽 B) (λ b → type-Inhabited-Finite-Type (Y b)))
       ( equiv-postcomp
         ( type-𝔽 B)
         ( inv-associative-Σ ( UU l) is-finite ( λ X → is-inhabited (pr1 X)) ∘e
@@ -82,10 +82,10 @@ Slice-Surjection-𝔽 l A = Σ (𝔽 l) (λ X → (type-𝔽 X) ↠ type-𝔽 A)
 
 equiv-Fiber-trunc-Prop-𝔽 :
   (l : Level) {l1 : Level} (A : 𝔽 l1) →
-  Slice-Surjection-𝔽 (l1 ⊔ l) A ≃ (type-𝔽 A → Inhabited-𝔽 (l1 ⊔ l))
+  Slice-Surjection-𝔽 (l1 ⊔ l) A ≃ (type-𝔽 A → Inhabited-Finite-Type (l1 ⊔ l))
 equiv-Fiber-trunc-Prop-𝔽 l {l1} A =
   ( ( equiv-Π
-      ( λ _ → Inhabited-𝔽 _)
+      ( λ _ → Inhabited-Finite-Type _)
       ( id-equiv)
       ( λ a → inv-associative-Σ _ _ _) ∘e
       ( ( equiv-Fiber-structure

@@ -325,7 +325,7 @@ is-unbounded-π-finite-UU-Fin n =
     is-unbounded-π-finite-equiv
       ( equiv-equiv-eq-UU-Fin n x y)
       ( is-unbounded-π-finite-is-finite
-        ( is-finite-≃
+        ( is-finite-type-equiv
           ( is-finite-has-finite-cardinality (n , pr2 x))
           ( is-finite-has-finite-cardinality (n , pr2 y))))
 ```

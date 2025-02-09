@@ -312,7 +312,7 @@ pr2 (is-untruncated-π-finite-UU-Fin (succ-ℕ k) n) x y =
   is-untruncated-π-finite-equiv k
     ( equiv-equiv-eq-UU-Fin n x y)
     ( is-untruncated-π-finite-is-finite k
-      ( is-finite-≃
+      ( is-finite-type-equiv
         ( is-finite-has-finite-cardinality (n , pr2 x))
         ( is-finite-has-finite-cardinality (n , pr2 y))))
 ```

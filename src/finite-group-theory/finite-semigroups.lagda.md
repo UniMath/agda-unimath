@@ -55,67 +55,67 @@ has-associative-mul-𝔽 X = has-associative-mul (type-𝔽 X)
 ### Finite semigroups
 
 ```agda
-Semigroup-𝔽 : (l : Level) → UU (lsuc l)
-Semigroup-𝔽 l = Σ (𝔽 l) (has-associative-mul-𝔽)
+Finite-Semigroup : (l : Level) → UU (lsuc l)
+Finite-Semigroup l = Σ (𝔽 l) (has-associative-mul-𝔽)
 
 module _
-  {l : Level} (G : Semigroup-𝔽 l)
+  {l : Level} (G : Finite-Semigroup l)
   where
 
-  finite-type-Semigroup-𝔽 : 𝔽 l
-  finite-type-Semigroup-𝔽 = pr1 G
+  finite-type-Finite-Semigroup : 𝔽 l
+  finite-type-Finite-Semigroup = pr1 G
 
-  set-Semigroup-𝔽 : Set l
-  set-Semigroup-𝔽 = set-𝔽 finite-type-Semigroup-𝔽
+  set-Finite-Semigroup : Set l
+  set-Finite-Semigroup = set-𝔽 finite-type-Finite-Semigroup
 
-  type-Semigroup-𝔽 : UU l
-  type-Semigroup-𝔽 = type-𝔽 finite-type-Semigroup-𝔽
+  type-Finite-Semigroup : UU l
+  type-Finite-Semigroup = type-𝔽 finite-type-Finite-Semigroup
 
-  is-finite-type-Semigroup-𝔽 : is-finite type-Semigroup-𝔽
-  is-finite-type-Semigroup-𝔽 =
-    is-finite-type-𝔽 finite-type-Semigroup-𝔽
+  is-finite-type-Finite-Semigroup : is-finite type-Finite-Semigroup
+  is-finite-type-Finite-Semigroup =
+    is-finite-type-𝔽 finite-type-Finite-Semigroup
 
-  is-set-type-Semigroup-𝔽 : is-set type-Semigroup-𝔽
-  is-set-type-Semigroup-𝔽 =
-    is-set-type-𝔽 finite-type-Semigroup-𝔽
+  is-set-type-Finite-Semigroup : is-set type-Finite-Semigroup
+  is-set-type-Finite-Semigroup =
+    is-set-type-𝔽 finite-type-Finite-Semigroup
 
-  has-associative-mul-Semigroup-𝔽 :
-    has-associative-mul type-Semigroup-𝔽
-  has-associative-mul-Semigroup-𝔽 = pr2 G
+  has-associative-mul-Finite-Semigroup :
+    has-associative-mul type-Finite-Semigroup
+  has-associative-mul-Finite-Semigroup = pr2 G
 
-  semigroup-Semigroup-𝔽 : Semigroup l
-  pr1 semigroup-Semigroup-𝔽 = set-Semigroup-𝔽
-  pr2 semigroup-Semigroup-𝔽 = has-associative-mul-Semigroup-𝔽
+  semigroup-Finite-Semigroup : Semigroup l
+  pr1 semigroup-Finite-Semigroup = set-Finite-Semigroup
+  pr2 semigroup-Finite-Semigroup = has-associative-mul-Finite-Semigroup
 
-  mul-Semigroup-𝔽 :
-    type-Semigroup-𝔽 → type-Semigroup-𝔽 → type-Semigroup-𝔽
-  mul-Semigroup-𝔽 = mul-Semigroup semigroup-Semigroup-𝔽
+  mul-Finite-Semigroup :
+    type-Finite-Semigroup → type-Finite-Semigroup → type-Finite-Semigroup
+  mul-Finite-Semigroup = mul-Semigroup semigroup-Finite-Semigroup
 
-  mul-Semigroup-𝔽' :
-    type-Semigroup-𝔽 → type-Semigroup-𝔽 → type-Semigroup-𝔽
-  mul-Semigroup-𝔽' = mul-Semigroup' semigroup-Semigroup-𝔽
+  mul-Finite-Semigroup' :
+    type-Finite-Semigroup → type-Finite-Semigroup → type-Finite-Semigroup
+  mul-Finite-Semigroup' = mul-Semigroup' semigroup-Finite-Semigroup
 
-  associative-mul-Semigroup-𝔽 :
-    (x y z : type-Semigroup-𝔽) →
-    ( mul-Semigroup-𝔽 (mul-Semigroup-𝔽 x y) z) ＝
-    ( mul-Semigroup-𝔽 x (mul-Semigroup-𝔽 y z))
-  associative-mul-Semigroup-𝔽 =
-    associative-mul-Semigroup semigroup-Semigroup-𝔽
+  associative-mul-Finite-Semigroup :
+    (x y z : type-Finite-Semigroup) →
+    ( mul-Finite-Semigroup (mul-Finite-Semigroup x y) z) ＝
+    ( mul-Finite-Semigroup x (mul-Finite-Semigroup y z))
+  associative-mul-Finite-Semigroup =
+    associative-mul-Semigroup semigroup-Finite-Semigroup
 
 finite-semigroup-is-finite-Semigroup :
-  {l : Level} → (G : Semigroup l) → is-finite (type-Semigroup G) → Semigroup-𝔽 l
+  {l : Level} → (G : Semigroup l) → is-finite (type-Semigroup G) → Finite-Semigroup l
 pr1 (pr1 (finite-semigroup-is-finite-Semigroup G f)) = type-Semigroup G
 pr2 (pr1 (finite-semigroup-is-finite-Semigroup G f)) = f
 pr2 (finite-semigroup-is-finite-Semigroup G f) = has-associative-mul-Semigroup G
 
 module _
-  {l : Level} (G : Semigroup-𝔽 l)
+  {l : Level} (G : Finite-Semigroup l)
   where
 
-  ap-mul-Semigroup-𝔽 :
-    {x x' y y' : type-Semigroup-𝔽 G} →
-    x ＝ x' → y ＝ y' → mul-Semigroup-𝔽 G x y ＝ mul-Semigroup-𝔽 G x' y'
-  ap-mul-Semigroup-𝔽 = ap-mul-Semigroup (semigroup-Semigroup-𝔽 G)
+  ap-mul-Finite-Semigroup :
+    {x x' y y' : type-Finite-Semigroup G} →
+    x ＝ x' → y ＝ y' → mul-Finite-Semigroup G x y ＝ mul-Finite-Semigroup G x' y'
+  ap-mul-Finite-Semigroup = ap-mul-Semigroup (semigroup-Finite-Semigroup G)
 ```
 
 ### Semigroups of order `n`

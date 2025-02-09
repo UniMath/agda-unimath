@@ -64,14 +64,14 @@ is-finite-total-order-Poset-Prop P =
 
 Total-Order-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Total-Order-𝔽 l1 l2 =
-  Σ ( Poset-𝔽 l1 l2)
-    ( λ P → is-total-Poset (poset-Poset-𝔽 P))
+  Σ ( Finite-Poset l1 l2)
+    ( λ P → is-total-Poset (poset-Finite-Poset P))
 
-poset-𝔽-Total-Order-𝔽 : {l1 l2 : Level} → Total-Order-𝔽 l1 l2 → Poset-𝔽 l1 l2
-poset-𝔽-Total-Order-𝔽 = pr1
+finite-poset-Total-Order-𝔽 : {l1 l2 : Level} → Total-Order-𝔽 l1 l2 → Finite-Poset l1 l2
+finite-poset-Total-Order-𝔽 = pr1
 
 poset-Total-Order-𝔽 : {l1 l2 : Level} → Total-Order-𝔽 l1 l2 → Poset l1 l2
-poset-Total-Order-𝔽 = poset-Poset-𝔽 ∘ poset-𝔽-Total-Order-𝔽
+poset-Total-Order-𝔽 = poset-Finite-Poset ∘ finite-poset-Total-Order-𝔽
 
 is-total-Total-Order-𝔽 :
   {l1 l2 : Level} (P : Total-Order-𝔽 l1 l2) →

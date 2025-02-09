@@ -79,9 +79,9 @@ abstract
           ( compute-number-of-elements-is-finite d K)
           ( compute-number-of-elements-is-finite c H))
 
-_→-𝔽_ : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
-pr1 (A →-𝔽 B) = type-𝔽 A → type-𝔽 B
-pr2 (A →-𝔽 B) =
+_→𝔽_ : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
+pr1 (A →𝔽 B) = type-𝔽 A → type-𝔽 B
+pr2 (A →𝔽 B) =
   is-finite-function-type (is-finite-type-𝔽 A) (is-finite-type-𝔽 B)
 ```
 
@@ -89,10 +89,10 @@ pr2 (A →-𝔽 B) =
 
 ```agda
 abstract
-  is-finite-≃ :
+  is-finite-type-equiv :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-finite A → is-finite B → is-finite (A ≃ B)
-  is-finite-≃ f g =
+  is-finite-type-equiv f g =
     is-finite-Σ
       ( is-finite-function-type f g)
       ( λ h →
@@ -108,15 +108,15 @@ abstract
               is-finite-Π f
                 ( λ x → is-finite-eq (has-decidable-equality-is-finite f)))))
 
-infix 6 _≃-𝔽_
-_≃-𝔽_ : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
-pr1 (A ≃-𝔽 B) = type-𝔽 A ≃ type-𝔽 B
-pr2 (A ≃-𝔽 B) = is-finite-≃ (is-finite-type-𝔽 A) (is-finite-type-𝔽 B)
+infix 6 _≃𝔽_
+_≃𝔽_ : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
+pr1 (A ≃𝔽 B) = type-𝔽 A ≃ type-𝔽 B
+pr2 (A ≃𝔽 B) = is-finite-type-equiv (is-finite-type-𝔽 A) (is-finite-type-𝔽 B)
 ```
 
 ### The type of automorphisms on a finite type is finite
 
 ```agda
-Aut-𝔽 : {l : Level} → 𝔽 l → 𝔽 l
-Aut-𝔽 A = A ≃-𝔽 A
+Aut-Finite-Type : {l : Level} → 𝔽 l → 𝔽 l
+Aut-Finite-Type A = A ≃𝔽 A
 ```
