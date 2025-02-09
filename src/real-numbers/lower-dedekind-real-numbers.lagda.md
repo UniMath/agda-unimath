@@ -36,8 +36,7 @@ satisfying the following two conditions:
    [exists](foundation.existential-quantification.md) `q < r` such that `r ∈ L`.
 
 The type of all lower Dedekind real numbers is the type of all lower Dedekind
-cuts. A lower Dedekind cut is part of a
-[Dedekind real number](real-numbers.dedekind-real-numbers.md)
+cuts.
 
 ## Definition
 
@@ -108,6 +107,13 @@ module _
   eq-eq-cut-lower-ℝ : cut-lower-ℝ x ＝ cut-lower-ℝ y → x ＝ y
   eq-eq-cut-lower-ℝ = eq-type-subtype is-lower-dedekind-cut-Prop
 ```
+
+## See also
+
+- Upper Dedekind cuts, the dual structure, are defined in
+  [`real-numbers.upper-dedekind-real-numbers`](real-numbers.upper-dedekind-real-numbers.md).
+- Dedekind cuts, which form the usual real numbers, are defined in
+  [`real-numbers.dedekind-real-numbers`](real-numbers.dedekind-real-numbers.md)
 
 ## References
 
