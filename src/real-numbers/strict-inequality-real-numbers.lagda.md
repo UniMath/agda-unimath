@@ -105,7 +105,7 @@ module _
             ( q)
             ( le-lower-upper-cut-ℝ y p q p<y y<q))
         ( decide-le-leq-ℚ p q)
-    where open elim-exists-do empty-Prop
+    where open do-syntax-elim-exists empty-Prop
 ```
 
 ### Strict inequality on the reals is transitive
@@ -127,7 +127,7 @@ module _
         ( p)
         ( x<p ,
           le-lower-cut-ℝ z p q (le-lower-upper-cut-ℝ y p q p<y y<q) q<z)
-    where open elim-exists-do (le-ℝ-Prop x z)
+    where open do-syntax-elim-exists (le-ℝ-Prop x z)
 ```
 
 ### The canonical map from rationals to reals preserves and reflects strict inequality
@@ -196,7 +196,7 @@ module _
       q , x<q ← is-inhabited-upper-cut-ℝ x
       r , r<q , x<r ← forward-implication (is-rounded-upper-cut-ℝ x q) x<q
       intro-exists (real-ℚ q) (intro-exists r (x<r , r<q))
-    where open elim-exists-do (∃ (ℝ lzero) (le-ℝ-Prop x))
+    where open do-syntax-elim-exists (∃ (ℝ lzero) (le-ℝ-Prop x))
 ```
 
 ### Negation reverses the strict ordering of real numbers
@@ -209,16 +209,14 @@ module _
   where
 
   reverses-order-neg-ℝ : le-ℝ x y → le-ℝ (neg-ℝ y) (neg-ℝ x)
-  reverses-order-neg-ℝ =
-    map-exists
-      ( λ p →
-        is-in-subtype (upper-cut-neg-ℝ y) p ×
-        is-in-subtype (lower-cut-neg-ℝ x) p)
-      ( neg-ℚ)
-      ( λ p (x<p , p<y) →
-        tr (is-in-lower-cut-ℝ y) (inv (neg-neg-ℚ p)) p<y ,
-        tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) x<p)
-    where open elim-exists-do (le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
+  reverses-order-neg-ℝ x<y =
+    do
+      p , x<p , p<y ← x<y
+      intro-exists
+        (neg-ℚ p)
+        ( tr (is-in-lower-cut-ℝ y) (inv (neg-neg-ℚ p)) p<y ,
+          tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) x<p)
+    where open do-syntax-elim-exists (le-ℝ-Prop (neg-ℝ y) (neg-ℝ x))
 ```
 
 ### If `x` is less than `y`, then `y` is not less than or equal to `x`
@@ -340,7 +338,9 @@ module _
         ( real-ℚ q)
         ( intro-exists p (x<p , p<q) , intro-exists r (q<r , r<y))
     where
-      open elim-exists-do (∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
+      open
+        do-syntax-elim-exists
+          ( ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
 ```
 
 ## References

@@ -334,10 +334,32 @@ module _
 ## Existential quantification `do` syntax
 
 When eliminating a chain of existential quantifications, which may be
-interdependent, Agda's `do` syntax can eliminate many levels of nesting.
+interdependent, [Agda's `do` syntax](https://agda.readthedocs.io/en/stable/language/syntactic-sugar.html#do-notation) can eliminate many levels of nesting.
+
+For example, suppose we have
+
+```text
+R : Prop l
+
+exists-a-p : exists A P
+a-p-implies-b-q-exists : (a : A) → P a → exists B Q
+a-b-p-q-implies-r : (a : A) (b : B) → P a → Q b → R
+```
+
+To deduce `R`, we could write
+
+```text
+do
+  a , pa ← exists-a-p
+  b , qb ← a-p-implies-b-q-exists a pa
+  a-b-p-q-implies-r a b pa qb
+where open do-syntax-elim-exists R
+```
+
+instead of a nested chain of `elim-exists`.
 
 ```agda
-module elim-exists-do
+module do-syntax-elim-exists
   {l : Level}
   (P : Prop l)
   where
