@@ -52,15 +52,27 @@ open import real-numbers.similarity-real-numbers
 
 ## Idea
 
-The lower cut (upper cut) of the sum of two real numbers is the set of sums of
-elements of their lower (upper) cuts.
+Given two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and `y`, then {{#concept "sum" Disambiguation="of Dedekind real numbers" Agda=add-ℝ}} `x + y` is a Dedekind real number such that
+
+1. A rational number `r` is in the lower cut of `x + y` if it can be written as a sum `r = p + q` where `p` is in the lower cut of `x` and `q` is in the lower cut of `y`.
+2. A rational number `r` is in the upper cut of `x + y` if it can be written as a sum `r = p + q` where `p` is in the upper cut of `x` and `q` is in the upper cut of `y`.
+
+Addition is an ordered abelian group structure on the reals.
+
+## Definitions
+
+### Addition on subtypes of rational numbers
 
 ```agda
 add-subtypes-ℚ :
   {l1 l2 : Level} → subtype l1 ℚ → subtype l2 ℚ → subtype (l1 ⊔ l2) ℚ
 add-subtypes-ℚ A B q =
   ∃ (ℚ × ℚ) (λ (a , b) → A a ∧ B b ∧ (Id-Prop ℚ-Set (a +ℚ b) q))
+```
 
+### The lower and upper cut of the sum of two real numbers
+
+```agda
 module _
   {l1 l2 : Level}
   (x : ℝ l1)
@@ -91,7 +103,11 @@ module _
         ( λ p q x<p y<q → intro-exists (p , q) (x<p , y<q , refl))
         ( is-inhabited-upper-cut-ℝ x)
         ( is-inhabited-upper-cut-ℝ y)
+```
 
+### The lower cut of the sum of two real numbers is rounded
+
+```agda
     is-rounded-lower-cut-add-ℝ :
       (a : ℚ) →
       is-in-subtype lower-cut-add-ℝ a ↔
@@ -154,7 +170,11 @@ module _
                           ( b)
                           ( a))))
             ( b-in-lower-add))
+```
 
+### The upper cut of the sum of two real numbers is rounded
+
+```agda
     is-rounded-upper-cut-add-ℝ :
       (b : ℚ) →
       is-in-subtype upper-cut-add-ℝ b ↔
@@ -209,7 +229,11 @@ module _
                           ( a)
                           ( b))))
             ( x+y<a))
+```
 
+### The lower and upper cut of the sum of two real numbers are disjoint
+
+```agda
     is-disjoint-cut-add-ℝ :
       (q : ℚ) →
       ¬ (is-in-subtype lower-cut-add-ℝ q × is-in-subtype upper-cut-add-ℝ q)
