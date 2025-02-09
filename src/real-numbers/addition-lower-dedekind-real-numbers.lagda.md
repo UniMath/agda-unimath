@@ -45,8 +45,14 @@ module _
   is-in-add-lower-ℝ-cut : ℚ → UU (l1 ⊔ l2)
   is-in-add-lower-ℝ-cut = is-in-subtype cut-add-lower-ℝ
 
-  -- is-inhabited-add-lower-ℝ : exists ℚ cut-add-lower-ℝ
-  -- is-inhabited-add-lower-ℝ
+  is-inhabited-add-lower-ℝ : exists ℚ cut-add-lower-ℝ
+  is-inhabited-add-lower-ℝ =
+    minkowski-mul-inhabited-is-inhabited-Commutative-Monoid
+      ( commutative-monoid-add-ℚ)
+      (cut-lower-ℝ x)
+      (cut-lower-ℝ y)
+      {!  is-inhabited-cut-lower-ℝ x !}
+      {!   !}
 ```
 
 ## Properties
