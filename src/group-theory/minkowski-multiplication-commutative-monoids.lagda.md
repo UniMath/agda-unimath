@@ -17,13 +17,14 @@ open import foundation.universe-levels
 open import group-theory.commutative-monoids
 open import group-theory.minkowski-multiplication-monoids
 open import group-theory.monoids
+open import group-theory.subsets-commutative-monoids
 ```
 
 </details>
 
 ## Idea
 
-For two [subtypes](foundation-core.subtypes.md) `A`, `B` of a
+For two [subsets](group-theory.subsets-commutative-monoids.md) `A`, `B` of a
 [commutative monoid](group-theory.commutative-monoids.md) `M`, the Minkowski
 multiplication of `A` and `B` is the set of elements that can be formed by
 multiplying an element of `A` and an element of `B`. (This is more usually
@@ -36,12 +37,12 @@ referred to as `mul`, we use multiplicative terminology.)
 module _
   {l1 l2 l3 : Level}
   (M : Commutative-Monoid l1)
-  (A : subtype l2 (type-Commutative-Monoid M))
-  (B : subtype l3 (type-Commutative-Monoid M))
+  (A : subset-Commutative-Monoid l2 M)
+  (B : subset-Commutative-Monoid l3 M)
   where
 
   minkowski-mul-Commutative-Monoid :
-    subtype (l1 ⊔ l2 ⊔ l3) (type-Commutative-Monoid M)
+    subset-Commutative-Monoid (l1 ⊔ l2 ⊔ l3) M
   minkowski-mul-Commutative-Monoid =
     minkowski-mul-Monoid (monoid-Commutative-Monoid M) A B
 ```
@@ -54,8 +55,8 @@ module _
 module _
   {l1 l2 l3 : Level}
   (M : Commutative-Monoid l1)
-  (A : subtype l2 (type-Commutative-Monoid M))
-  (B : subtype l3 (type-Commutative-Monoid M))
+  (A : subset-Commutative-Monoid l2 M)
+  (B : subset-Commutative-Monoid l3 M)
   where
 
   commutative-minkowski-mul-leq-Commutative-Monoid :
@@ -72,8 +73,8 @@ module _
 module _
   {l1 l2 l3 : Level}
   (M : Commutative-Monoid l1)
-  (A : subtype l2 (type-Commutative-Monoid M))
-  (B : subtype l3 (type-Commutative-Monoid M))
+  (A : subset-Commutative-Monoid l2 M)
+  (B : subset-Commutative-Monoid l3 M)
   where
 
   commutative-minkowski-mul-Commutative-Monoid :

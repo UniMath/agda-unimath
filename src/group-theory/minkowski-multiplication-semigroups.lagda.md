@@ -13,19 +13,21 @@ open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.semigroups
+open import group-theory.subsets-semigroups
 ```
 
 </details>
 
 ## Idea
 
-For two [subtypes](foundation-core.subtypes.md) `A`, `B` of a
+For two [subsets](group-theory.subsets-semigroups.md) `A`, `B` of a
 [semigroup](group-theory.semigroups.md) `S`, the Minkowski multiplication of `A`
 and `B` is the set of elements that can be formed by multiplying an element of
 `A` and an element of `B`. (This is more usually referred to as a Minkowski sum,
@@ -38,11 +40,11 @@ multiplicative terminology.)
 module _
   {l1 l2 l3 : Level}
   (G : Semigroup l1)
-  (A : subtype l2 (type-Semigroup G))
-  (B : subtype l3 (type-Semigroup G))
+  (A : subset-Semigroup l2 G)
+  (B : subset-Semigroup l3 G)
   where
 
-  minkowski-mul-Semigroup : subtype (l1 ⊔ l2 ⊔ l3) (type-Semigroup G)
+  minkowski-mul-Semigroup : subset-Semigroup (l1 ⊔ l2 ⊔ l3) G
   minkowski-mul-Semigroup c =
     ∃
       ( type-Semigroup G × type-Semigroup G)
@@ -52,22 +54,22 @@ module _
 
 ## Properties
 
-### Minkowski multiplication of semigroup subtypes is associative
+### Minkowski multiplication of semigroup subsets is associative
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   (G : Semigroup l1)
-  (A : subtype l2 (type-Semigroup G))
-  (B : subtype l3 (type-Semigroup G))
-  (C : subtype l4 (type-Semigroup G))
+  (A : subset-Semigroup l2 G)
+  (B : subset-Semigroup l3 G)
+  (C : subset-Semigroup l4 G)
   where
 
-  associative-minkowski-mul-has-same-elements-subtype-Semigroup :
-    has-same-elements-subtype
+  associative-minkowski-mul-sim-Semigroup :
+    sim-subtype
       ( minkowski-mul-Semigroup G (minkowski-mul-Semigroup G A B) C)
       ( minkowski-mul-Semigroup G A (minkowski-mul-Semigroup G B C))
-  pr1 (associative-minkowski-mul-has-same-elements-subtype-Semigroup x) =
+  pr1 associative-minkowski-mul-sim-Semigroup x =
     elim-exists
       ( claim)
       ( λ (ab , c) (ab∈AB , c∈C , x=ab*c) →
@@ -89,7 +91,7 @@ module _
     where
       claim =
         minkowski-mul-Semigroup G A (minkowski-mul-Semigroup G B C) x
-  pr2 (associative-minkowski-mul-has-same-elements-subtype-Semigroup x) =
+  pr2 associative-minkowski-mul-sim-Semigroup x =
     elim-exists
       ( claim)
       ( λ (a , bc) (a∈A , bc∈BC , x=a*bc) →
@@ -116,13 +118,13 @@ module _
     minkowski-mul-Semigroup G (minkowski-mul-Semigroup G A B) C ＝
     minkowski-mul-Semigroup G A (minkowski-mul-Semigroup G B C)
   associative-minkowski-mul-Semigroup =
-    eq-has-same-elements-subtype
+    antisymmetric-sim-subtype
       ( minkowski-mul-Semigroup G (minkowski-mul-Semigroup G A B) C)
       ( minkowski-mul-Semigroup G A (minkowski-mul-Semigroup G B C))
-      ( associative-minkowski-mul-has-same-elements-subtype-Semigroup)
+      ( associative-minkowski-mul-sim-Semigroup)
 ```
 
-### Minkowski multiplication of subtypes of a semigroup forms a semigroup
+### Minkowski multiplication of subsets of a semigroup forms a semigroup
 
 ```agda
 module _

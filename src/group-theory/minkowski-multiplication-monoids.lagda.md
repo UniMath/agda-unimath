@@ -20,13 +20,14 @@ open import foundation.universe-levels
 open import group-theory.minkowski-multiplication-semigroups
 open import group-theory.monoids
 open import group-theory.semigroups
+open import group-theory.subsets-monoids
 ```
 
 </details>
 
 ## Idea
 
-For two [subtypes](foundation-core.subtypes.md) `A`, `B` of a
+For two [subsets](group-theory.subsets-monoids.md) `A`, `B` of a
 [monoid](group-theory.monoids.md) `M`, the Minkowski multiplication of `A` and
 `B` is the set of elements that can be formed by multiplying an element of `A`
 and an element of `B`. (This is more usually referred to as a Minkowski sum, but
@@ -39,23 +40,23 @@ terminology.)
 module _
   {l1 l2 l3 : Level}
   (M : Monoid l1)
-  (A : subtype l2 (type-Monoid M))
-  (B : subtype l3 (type-Monoid M))
+  (A : subset-Monoid l2 M)
+  (B : subset-Monoid l3 M)
   where
 
-  minkowski-mul-Monoid : subtype (l1 ⊔ l2 ⊔ l3) (type-Monoid M)
+  minkowski-mul-Monoid : subset-Monoid (l1 ⊔ l2 ⊔ l3) M
   minkowski-mul-Monoid = minkowski-mul-Semigroup (semigroup-Monoid M) A B
 ```
 
 ## Properties
 
-### Unit laws for Minkowski multiplication of semigroup subtypes
+### Unit laws for Minkowski multiplication of monoid subsets
 
 ```agda
 module _
   {l1 l2 : Level}
   (M : Monoid l1)
-  (A : subtype l2 (type-Monoid M))
+  (A : subset-Monoid l2 M)
   where
 
   left-unit-law-minkowski-mul-Monoid :
