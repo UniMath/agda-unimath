@@ -95,7 +95,9 @@ module _
 
   le-cut-lower-ℝ : le-ℚ p q → is-in-cut-lower-ℝ x q → is-in-cut-lower-ℝ x p
   le-cut-lower-ℝ p<q q<x =
-    backward-implication (is-rounded-cut-lower-ℝ x p) (intro-exists q (p<q , q<x))
+    backward-implication
+      ( is-rounded-cut-lower-ℝ x p)
+      ( intro-exists q (p<q , q<x))
 ```
 
 ### Two lower real numbers with the same cut are equal
