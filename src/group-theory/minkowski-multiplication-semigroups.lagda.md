@@ -25,7 +25,8 @@ open import group-theory.semigroups
 
 ## Idea
 
-For two subtypes `A`, `B` of a semigroup `S`, the Minkowski multiplication of
+For two [subtypes](foundation-core.subtypes.md) `A`, `B` of a
+[semigroup](group-theory.semigroups.md) `S`, the Minkowski multiplication of
 `A` and `B` is the set of elements that can be formed by multiplying an element
 of `A` and an element of `B`. (This is more usually referred to as a Minkowski
 sum, but as the operation on semigroups is referred to as `mul`, we use
@@ -125,16 +126,14 @@ module _
 
 ```agda
 module _
-  {l1 : Level}
-  (G : Semigroup l1)
+  {l : Level}
+  (G : Semigroup l)
   where
 
-  semigroup-minkowski-mul-Semigroup :
-    (l : Level) → Semigroup (lsuc l1 ⊔ lsuc l)
-  pr1 (semigroup-minkowski-mul-Semigroup l) =
-    subtype-Set (l1 ⊔ l) (type-Semigroup G)
-  pr1 (pr2 (semigroup-minkowski-mul-Semigroup l)) = minkowski-mul-Semigroup G
-  pr2 (pr2 (semigroup-minkowski-mul-Semigroup l)) =
+  semigroup-minkowski-mul-Semigroup : Semigroup (lsuc l)
+  pr1 semigroup-minkowski-mul-Semigroup = subtype-Set l (type-Semigroup G)
+  pr1 (pr2 semigroup-minkowski-mul-Semigroup) = minkowski-mul-Semigroup G
+  pr2 (pr2 semigroup-minkowski-mul-Semigroup) =
     associative-minkowski-mul-Semigroup G
 ```
 
