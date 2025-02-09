@@ -334,7 +334,9 @@ module _
 ## Existential quantification `do` syntax
 
 When eliminating a chain of existential quantifications, which may be
-interdependent, [Agda's `do` syntax](https://agda.readthedocs.io/en/stable/language/syntactic-sugar.html#do-notation) can eliminate many levels of nesting.
+interdependent,
+[Agda's `do` syntax](https://agda.readthedocs.io/en/stable/language/syntactic-sugar.html#do-notation)
+can eliminate many levels of nesting.
 
 For example, suppose we have
 
