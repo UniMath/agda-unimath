@@ -1,7 +1,7 @@
-# Inflationary maps on a strictly preordered type
+# Strictly inflationary maps on a strictly preordered type
 
 ```agda
-module order-theory.inflationary-maps-strictly-preordered-types where
+module order-theory.strictly-inflationary-maps-strictly-preordered-types where
 ```
 
 <details><summary>Imports</summary>
@@ -22,8 +22,8 @@ open import order-theory.strictly-preordered-types
 
 A map $f : P → P$ on a
 [strictly preordered type](order-theory.strictly-preordered-types.md) $P$ is
-said to be an
-{{#concept "inflationary map" Disambiguation="strictly preordered type" Agda=inflationary-map-Strictly-Preordered-Type}}
+said to be a
+{{#concept "strictly inflationary map" Disambiguation="strictly preordered type" Agda=strictly-inflationary-map}}
 if the inequality
 
 $$
@@ -32,12 +32,12 @@ $$
 
 holds for any element $x : P$. If $f$ is also
 [order preserving](order-theory.strict-order-preserving-maps.md) we say that $f$
-is an
-{{#concept "inflationary morphism" Disambiguation="strictly preordered type" Agda=inflationary-hom-Strictly-Preordered-Type}}.
+is a
+{{#concept "strictly inflationary morphism" Disambiguation="strictly preordered type" Agda=inflationary-hom-Strictly-Preordered-Type}}.
 
 ## Definitions
 
-### The predicate of being an inflationary map
+### The predicate of being a strictly inflationary map
 
 ```agda
 module _
@@ -45,22 +45,22 @@ module _
   (f : type-Strictly-Preordered-Type P → type-Strictly-Preordered-Type P)
   where
 
-  is-inflationary-prop-map-Strictly-Preordered-Type :
+  is-strictly-inflationary-map-prop-Strictly-Preordered-Type :
     Prop (l1 ⊔ l2)
-  is-inflationary-prop-map-Strictly-Preordered-Type =
+  is-strictly-inflationary-map-prop-Strictly-Preordered-Type =
     Π-Prop
       ( type-Strictly-Preordered-Type P)
       ( λ x → le-prop-Strictly-Preordered-Type P x (f x))
 
-  is-inflationary-map-Strictly-Preordered-Type :
+  is-strictly-inflationary-map-Strictly-Preordered-Type :
     UU (l1 ⊔ l2)
-  is-inflationary-map-Strictly-Preordered-Type =
-    type-Prop is-inflationary-prop-map-Strictly-Preordered-Type
+  is-strictly-inflationary-map-Strictly-Preordered-Type =
+    type-Prop is-strictly-inflationary-map-prop-Strictly-Preordered-Type
 
-  is-prop-is-inflationary-map-Strictly-Preordered-Type :
-    is-prop is-inflationary-map-Strictly-Preordered-Type
-  is-prop-is-inflationary-map-Strictly-Preordered-Type =
-    is-prop-type-Prop is-inflationary-prop-map-Strictly-Preordered-Type
+  is-prop-is-strictly-inflationary-map-Strictly-Preordered-Type :
+    is-prop is-strictly-inflationary-map-Strictly-Preordered-Type
+  is-prop-is-strictly-inflationary-map-Strictly-Preordered-Type =
+    is-prop-type-Prop is-strictly-inflationary-map-prop-Strictly-Preordered-Type
 ```
 
 ### The type of inflationary maps on a strictly preordered type
@@ -70,25 +70,25 @@ module _
   {l1 l2 : Level} (P : Strictly-Preordered-Type l1 l2)
   where
 
-  inflationary-map-Strictly-Preordered-Type :
+  strictly-inflationary-map-Strictly-Preordered-Type :
     UU (l1 ⊔ l2)
-  inflationary-map-Strictly-Preordered-Type =
-    type-subtype (is-inflationary-prop-map-Strictly-Preordered-Type P)
+  strictly-inflationary-map-Strictly-Preordered-Type =
+    type-subtype (is-strictly-inflationary-map-prop-Strictly-Preordered-Type P)
 
 module _
   {l1 l2 : Level} (P : Strictly-Preordered-Type l1 l2)
-  (f : inflationary-map-Strictly-Preordered-Type P)
+  (f : strictly-inflationary-map-Strictly-Preordered-Type P)
   where
 
-  map-inflationary-map-Strictly-Preordered-Type :
+  map-strictly-inflationary-map-Strictly-Preordered-Type :
     type-Strictly-Preordered-Type P → type-Strictly-Preordered-Type P
-  map-inflationary-map-Strictly-Preordered-Type =
+  map-strictly-inflationary-map-Strictly-Preordered-Type =
     pr1 f
 
-  is-inflationary-inflationary-map-Strictly-Preordered-Type :
-    is-inflationary-map-Strictly-Preordered-Type P
-      ( map-inflationary-map-Strictly-Preordered-Type)
-  is-inflationary-inflationary-map-Strictly-Preordered-Type =
+  is-inflationary-strictly-inflationary-map-Strictly-Preordered-Type :
+    is-strictly-inflationary-map-Strictly-Preordered-Type P
+      ( map-strictly-inflationary-map-Strictly-Preordered-Type)
+  is-inflationary-strictly-inflationary-map-Strictly-Preordered-Type =
     pr2 f
 ```
 
@@ -103,19 +103,19 @@ module _
   is-inflationary-prop-hom-Strictly-Preordered-Type :
     Prop (l1 ⊔ l2)
   is-inflationary-prop-hom-Strictly-Preordered-Type =
-    is-inflationary-prop-map-Strictly-Preordered-Type P
+    is-strictly-inflationary-map-prop-Strictly-Preordered-Type P
       ( map-hom-Strictly-Preordered-Type P P f)
 
   is-inflationary-hom-Strictly-Preordered-Type :
     UU (l1 ⊔ l2)
   is-inflationary-hom-Strictly-Preordered-Type =
-    is-inflationary-map-Strictly-Preordered-Type P
+    is-strictly-inflationary-map-Strictly-Preordered-Type P
       ( map-hom-Strictly-Preordered-Type P P f)
 
   is-prop-is-inflationary-hom-Strictly-Preordered-Type :
     is-prop is-inflationary-hom-Strictly-Preordered-Type
   is-prop-is-inflationary-hom-Strictly-Preordered-Type =
-    is-prop-is-inflationary-map-Strictly-Preordered-Type P
+    is-prop-is-strictly-inflationary-map-Strictly-Preordered-Type P
       ( map-hom-Strictly-Preordered-Type P P f)
 ```
 
@@ -155,13 +155,13 @@ module _
       ( hom-inflationary-hom-Strictly-Preordered-Type)
 
   is-inflationary-inflationary-hom-Strictly-Preordered-Type :
-    is-inflationary-map-Strictly-Preordered-Type P
+    is-strictly-inflationary-map-Strictly-Preordered-Type P
       ( map-inflationary-hom-Strictly-Preordered-Type)
   is-inflationary-inflationary-hom-Strictly-Preordered-Type =
     pr2 f
 
   inflationary-map-inflationary-hom-Strictly-Preordered-Type :
-    inflationary-map-Strictly-Preordered-Type P
+    strictly-inflationary-map-Strictly-Preordered-Type P
   pr1 inflationary-map-inflationary-hom-Strictly-Preordered-Type =
     map-inflationary-hom-Strictly-Preordered-Type
   pr2 inflationary-map-inflationary-hom-Strictly-Preordered-Type =
