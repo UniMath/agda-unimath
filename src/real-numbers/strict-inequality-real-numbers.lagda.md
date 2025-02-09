@@ -15,14 +15,18 @@ open import elementary-number-theory.strict-inequality-rational-numbers
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
@@ -235,25 +239,104 @@ module _
             tr (is-in-upper-cut-ℝ x) (inv (neg-neg-ℚ p)) p-in-ux))
 ```
 
-### If a rational is in the lower cut of `x`, then it is strictly less than `x`
+### If `x` is less than `y`, then `y` is not less than or equal to `x`
 
 ```agda
-le-lower-cut-real-ℚ :
-  {l : Level} (q : ℚ) (x : ℝ l) → is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
-le-lower-cut-real-ℚ q x =
-  forward-implication (is-rounded-lower-cut-ℝ x q)
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  not-leq-le-ℝ : le-ℝ x y → ¬ (leq-ℝ y x)
+  not-leq-le-ℝ x<y y≤x =
+    elim-exists
+      ( empty-Prop)
+      ( λ q (q-in-ux , q-in-ly) →
+        is-disjoint-cut-ℝ x q (y≤x q q-in-ly , q-in-ux))
+      ( x<y)
 ```
 
-### If a rational is in the upper cut of `x`, then it is strictly greater than `x`
+### If `x` is not less than `y`, then `y` is less than or equal to `x`
 
 ```agda
-le-upper-cut-real-ℚ :
-  {l : Level} (q : ℚ) (x : ℝ l) → is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
-le-upper-cut-real-ℚ q x H =
-  elim-exists
-    ( le-ℝ-Prop x (real-ℚ q))
-    ( λ p (p<q , p∈ux) → intro-exists p (p∈ux , p<q))
-    ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  leq-not-le-ℝ : ¬ (le-ℝ x y) → leq-ℝ y x
+  leq-not-le-ℝ x≮y p p∈ly =
+    elim-exists
+      ( lower-cut-ℝ x p)
+      ( λ q (p<q , q∈ly) →
+        elim-disjunction
+          ( lower-cut-ℝ x p)
+          ( id)
+          ( λ q∈ux → ex-falso (x≮y (intro-exists q (q∈ux , q∈ly))))
+          ( is-located-lower-upper-cut-ℝ x p q p<q))
+      ( forward-implication (is-rounded-lower-cut-ℝ y p) p∈ly)
+```
+
+### If `x` is less than or equal to `y`, then `y` is not less than `x`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  not-le-leq-ℝ : leq-ℝ x y → ¬ (le-ℝ y x)
+  not-le-leq-ℝ x≤y y<x = not-leq-le-ℝ y x y<x x≤y
+```
+
+### `x` is less than or equal to `y` if and only if `y` is not less than `x`
+
+```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
+  leq-iff-not-le-ℝ : leq-ℝ x y ↔ ¬ (le-ℝ y x)
+  pr1 leq-iff-not-le-ℝ = not-le-leq-ℝ x y
+  pr2 leq-iff-not-le-ℝ = leq-not-le-ℝ y x
+```
+
+### A rational is in the lower cut of `x` iff its real projection is less than `x`
+
+```agda
+module _
+  {l : Level} (q : ℚ) (x : ℝ l)
+  where
+
+  le-iff-lower-cut-real-ℚ : is-in-lower-cut-ℝ x q ↔ le-ℝ (real-ℚ q) x
+  le-iff-lower-cut-real-ℚ = is-rounded-lower-cut-ℝ x q
+
+  le-lower-cut-real-ℚ : is-in-lower-cut-ℝ x q → le-ℝ (real-ℚ q) x
+  le-lower-cut-real-ℚ = forward-implication le-iff-lower-cut-real-ℚ
+
+  lower-cut-real-le-ℚ : le-ℝ (real-ℚ q) x → is-in-lower-cut-ℝ x q
+  lower-cut-real-le-ℚ = backward-implication le-iff-lower-cut-real-ℚ
+```
+
+### A rational is in the upper cut of `x` iff its real projection is greater than `x`
+
+```agda
+module _
+  {l : Level} (q : ℚ) (x : ℝ l)
+  where
+
+  le-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q → le-ℝ x (real-ℚ q)
+  le-upper-cut-real-ℚ H =
+    map-tot-exists
+      ( λ p (p<q , p∈ux) → (p∈ux , p<q))
+      ( forward-implication (is-rounded-upper-cut-ℝ x q) H)
+
+  upper-cut-real-le-ℚ : le-ℝ x (real-ℚ q) → is-in-upper-cut-ℝ x q
+  upper-cut-real-le-ℚ H =
+    backward-implication
+      ( is-rounded-upper-cut-ℝ x q)
+      ( map-tot-exists (λ _ (p>x , p<q) → (p<q , p>x)) H)
+
+  le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
+  pr1 le-iff-upper-cut-real-ℚ = le-upper-cut-real-ℚ
+  pr2 le-iff-upper-cut-real-ℚ = upper-cut-real-le-ℚ
 ```
 
 ## References
