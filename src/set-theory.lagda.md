@@ -45,12 +45,16 @@ theory, and [Russell's paradox](set-theory.russells-paradox.md).
 module set-theory where
 
 open import set-theory.baire-space public
+open import set-theory.bounded-increasing-binary-sequences public
 open import set-theory.cantor-space public
 open import set-theory.cantors-diagonal-argument public
 open import set-theory.cardinalities public
 open import set-theory.countable-sets public
 open import set-theory.cumulative-hierarchy public
+open import set-theory.finite-elements-increasing-binary-sequences public
+open import set-theory.inclusion-natural-numbers-increasing-binary-sequences public
 open import set-theory.increasing-binary-sequences public
+open import set-theory.inequality-increasing-binary-sequences public
 open import set-theory.infinite-sets public
 open import set-theory.russells-paradox public
 open import set-theory.uncountable-sets public
