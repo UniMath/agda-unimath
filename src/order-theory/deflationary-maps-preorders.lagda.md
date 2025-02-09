@@ -21,7 +21,7 @@ open import order-theory.preorders
 ## Idea
 
 A map $f : P → P$ on a [preorder](order-theory.preorders.md) $P$ is said to be
-an
+a
 {{#concept "deflationary map" Disambiguation="preorder" Agda=deflationary-map-Preorder}}
 if the inequality
 
@@ -31,12 +31,12 @@ $$
 
 holds for any element $x : P$. If $f$ is also
 [order preserving](order-theory.order-preserving-maps-preorders.md) we say that
-$f$ is an
+$f$ is a
 {{#concept "deflationary morphism" Disambiguation="preorder" Agda=deflationary-hom-Preorder}}.
 
 ## Definitions
 
-### The predicate of being an deflationary map
+### The predicate of being a deflationary map
 
 ```agda
 module _

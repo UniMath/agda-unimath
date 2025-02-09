@@ -21,7 +21,7 @@ open import order-theory.posets
 
 ## Idea
 
-A map $f : P → P$ on a [poset](order-theory.posets.md) $P$ is said to be an
+A map $f : P → P$ on a [poset](order-theory.posets.md) $P$ is said to be a
 {{#concept "deflationary map" Disambiguation="poset" Agda=deflationary-map-Poset}}
 if the inequality
 
@@ -33,12 +33,12 @@ holds for any element $x : P$. In other words, a map on a poset is deflationary
 precisely when the map on its underlying [preorder](order-theory.preorders.md)
 is [deflationary](order-theory.deflationary-maps-preorders.md). If $f$ is also
 [order preserving](order-theory.order-preserving-maps-posets.md) we say that $f$
-is an
+is a
 {{#concept "deflationary morphism" Disambiguation="poset" Agda=deflationary-hom-Poset}}.
 
 ## Definitions
 
-### The predicate of being an deflationary map
+### The predicate of being a deflationary map
 
 ```agda
 module _
