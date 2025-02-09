@@ -379,3 +379,60 @@ infixl 35 _+ℝ_
 _+ℝ_ : {l1 l2 : Level} → ℝ l1 → ℝ l2 → ℝ (l1 ⊔ l2)
 _+ℝ_ = add-ℝ
 ```
+
+## Properties
+
+### Addition is associative
+
+```agda
+module _
+  {l : Level}
+  (x y z : ℝ l)
+  where
+
+  associative-add-ℝ : (x +ℝ y) +ℝ z ＝ x +ℝ (y +ℝ z)
+  associative-add-ℝ =
+    eq-eq-lower-cut-ℝ
+      ( (x +ℝ y) +ℝ z)
+      ( x +ℝ (y +ℝ z))
+      ( eq-has-same-elements-subtype
+        ( lower-cut-ℝ ((x +ℝ y) +ℝ z))
+        ( lower-cut-ℝ (x +ℝ (y +ℝ z)))
+        ( λ q →
+          elim-exists
+            ( lower-cut-ℝ (x +ℝ (y +ℝ z)) q)
+            ( λ (lx+ly , lz) (lx+ly-in-lower-x+y , lz-in-lower-z , lx+ly+lz=q) →
+              elim-exists
+                ( lower-cut-ℝ (x +ℝ (y +ℝ z)) q)
+                ( λ (lx , ly) (lx-in-lower-x , ly-in-lower-y , lx+ly=lx+ly) →
+                  intro-exists
+                    ( lx , ly +ℚ lz)
+                    ( lx-in-lower-x ,
+                      intro-exists
+                        ( ly , lz)
+                        ( ly-in-lower-y , lz-in-lower-z , refl) ,
+                      (equational-reasoning
+                        lx +ℚ (ly +ℚ lz)
+                        ＝ (lx +ℚ ly) +ℚ lz by inv (associative-add-ℚ lx ly lz)
+                        ＝ lx+ly +ℚ lz by ap (_+ℚ lz) lx+ly=lx+ly
+                        ＝ q by lx+ly+lz=q)))
+                ( lx+ly-in-lower-x+y)) ,
+          elim-exists
+            ( lower-cut-ℝ ((x +ℝ y) +ℝ z) q)
+            ( λ (lx , ly+lz) (lx-in-lower-x , ly+lz-in-lower-y+z , lx+ly+lz=q) →
+              elim-exists
+                ( lower-cut-ℝ ((x +ℝ y) +ℝ z) q)
+                ( λ (ly , lz) (ly-in-lower-y , lz-in-lower-z , ly+lz=ly+lz) →
+                  intro-exists
+                    ( lx +ℚ ly , lz)
+                    ( intro-exists
+                      ( lx , ly)
+                      ( lx-in-lower-x , ly-in-lower-y , refl) ,
+                      lz-in-lower-z ,
+                      ( equational-reasoning
+                        (lx +ℚ ly) +ℚ lz
+                        ＝ lx +ℚ (ly +ℚ lz) by associative-add-ℚ lx ly lz
+                        ＝ lx +ℚ ly+lz by ap (lx +ℚ_) ly+lz=ly+lz
+                        ＝ q by lx+ly+lz=q)))
+                ( ly+lz-in-lower-y+z))))
+```
