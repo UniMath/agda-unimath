@@ -29,7 +29,7 @@ underlying type is a [set](foundation-core.sets.md). More specifically, a
 strictly preordered set consists of a set $A$, a
 [binary relation](foundation.binary-relations.md) $<$ on $A$ valued in the
 [propositions](foundation-core.propositions.md), such that the relation $<$ is
-{{#concept "irreflexive"}} and transitive:
+irreflexive and transitive:
 
 - For any $x:A$ we have $x \nle x$.
 - For any $x,y,z:A$ we have $y<z \to x<y \to x<z$.
