@@ -96,9 +96,9 @@ transitive-sim-ℝ :
 transitive-sim-ℝ = transitive-sim-Large-Poset ℝ-Large-Poset
 ```
 
-### Antisymmetry at the same universe level
+### Similar real numbers in the same universe are equal
 
 ```agda
-antisymmetric-sim-ℝ : {l : Level} → (x y : ℝ l) → sim-ℝ x y → x ＝ y
-antisymmetric-sim-ℝ = eq-sim-Large-Poset ℝ-Large-Poset
+eq-sim-ℝ : {l : Level} → (x y : ℝ l) → sim-ℝ x y → x ＝ y
+eq-sim-ℝ = eq-sim-Large-Poset ℝ-Large-Poset
 ```
