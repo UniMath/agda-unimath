@@ -1,0 +1,87 @@
+# Inequality on the lower Dedekind real numbers
+
+```agda
+module real-numbers.inequality-lower-dedekind-real-numbers where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.inequality-rational-numbers
+open import elementary-number-theory.rational-numbers
+open import elementary-number-theory.strict-inequality-rational-numbers
+
+open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.logical-equivalences
+open import foundation.powersets
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
+
+open import order-theory.large-posets
+open import order-theory.large-preorders
+
+open import real-numbers.lower-dedekind-real-numbers
+open import real-numbers.rational-lower-dedekind-real-numbers
+```
+
+</details>
+
+## Idea
+
+The {{#concept "standard ordering" Disambiguation="lower Dedekind real numbers" Agda=leq-lower-ℝ}} on
+the [lower real numbers](real-numbers.lower-dedekind-real-numbers.md) is defined as the
+cut of one being a subset of the cut of the other.
+
+## Definition
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : lower-ℝ l1)
+  (y : lower-ℝ l2)
+  where
+
+  leq-lower-ℝ-Prop : Prop (l1 ⊔ l2)
+  leq-lower-ℝ-Prop = leq-prop-subtype (cut-lower-ℝ x) (cut-lower-ℝ y)
+
+  leq-lower-ℝ : UU (l1 ⊔ l2)
+  leq-lower-ℝ = type-Prop leq-lower-ℝ-Prop
+```
+
+## Properties
+
+### Inequality on lower Dedekind reals is a large poset
+
+```agda
+lower-ℝ-Large-Preorder : Large-Preorder lsuc _⊔_
+lower-ℝ-Large-Preorder = powerset-Large-Preorder ℚ
+
+lower-ℝ-Large-Poset : Large-Poset lsuc _⊔_
+lower-ℝ-Large-Poset = powerset-Large-Poset ℚ
+```
+
+### The canonical map from the rational numbers to the lower reals preserves inequality
+
+```agda
+preserves-leq-lower-real-ℚ :
+  (p q : ℚ) → leq-ℚ p q → leq-lower-ℝ (lower-real-ℚ p) (lower-real-ℚ q)
+preserves-leq-lower-real-ℚ p q p≤q r r<p = concatenate-le-leq-ℚ r p q r<p p≤q
+
+reflects-leq-lower-real-ℚ :
+  (p q : ℚ) → leq-lower-ℝ (lower-real-ℚ p) (lower-real-ℚ q) → leq-ℚ p q
+reflects-leq-lower-real-ℚ p q r<p→r<q with decide-le-leq-ℚ q p
+... | inr p≤q = p≤q
+... | inl q<p = ex-falso (irreflexive-le-ℚ q (r<p→r<q q q<p))
+
+iff-leq-lower-real-ℚ :
+  (p q : ℚ) → leq-ℚ p q ↔ leq-lower-ℝ (lower-real-ℚ p) (lower-real-ℚ q)
+pr1 (iff-leq-lower-real-ℚ p q) = preserves-leq-lower-real-ℚ p q
+pr2 (iff-leq-lower-real-ℚ p q) = reflects-leq-lower-real-ℚ p q
+```
+
+## References
+
+{{#bibliography}}
