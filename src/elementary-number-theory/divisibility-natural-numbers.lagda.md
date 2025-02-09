@@ -807,5 +807,6 @@ le-quotient-div-ℕ d x f H g =
 - [Bounded divisibility of natural numbers](elementary-number-theory.bounded-divisibility-natural-numbers.md)
 - [Greatest common divisors of natural numbers](elementary-number-theory.greatest-common-divisors-natural-numbers.md)
 - [Nontrivial divisors of natural numbers](elementary-number-theory.nontrivial-divisors-natural-numbers.md)
+- [Prime divisors](elementary-number-theory.prime-divisors-natural-numbers.md)
 - [Proper divisors of natural numbers](elementary-number-theory.proper-divisors-natural-numbers.md)
 - [The poset of natural numbers ordered by divisibility](elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility.md)
