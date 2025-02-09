@@ -47,6 +47,12 @@ We refer to this as
 However, we maintain this as an assumption, since for most common notions of
 structure this property is independent of the univalence axiom.
 
+One potential but crude justification for using the term "duality" for this
+principle is as follows. The principle gives a correspondence between structures
+on families of _maps mapping into_ the **type family** `B`, and structures on
+the binary family of equality over the _dependent sum_ `Σ A B`, and so, in a
+certain sense, one is trading one straightened dimension for another.
+
 ## Duality
 
 ### Structured equality duality
