@@ -120,16 +120,16 @@ module _
         ( relation-Decidable-Relation R x y)
         ( is-decidable-Decidable-Relation R x y))
 
-  is-finite-is-reflexive-Decidable-Relation-Prop-𝔽 :
+  is-finite-is-reflexive-Decidable-Relation-Finite-Type :
     is-finite (is-reflexive-Relation-Prop (relation-Decidable-Relation R))
-  is-finite-is-reflexive-Decidable-Relation-Prop-𝔽 =
+  is-finite-is-reflexive-Decidable-Relation-Finite-Type =
     is-finite-Π
       ( is-finite-type-Finite-Type A)
       (λ x → is-finite-relation-Decidable-Relation-Finite-Type x x)
 
-  is-finite-is-symmetric-Decidable-Relation-Prop-𝔽 :
+  is-finite-is-symmetric-Decidable-Relation-Finite-Type :
     is-finite (is-symmetric-Relation-Prop (relation-Decidable-Relation R))
-  is-finite-is-symmetric-Decidable-Relation-Prop-𝔽 =
+  is-finite-is-symmetric-Decidable-Relation-Finite-Type =
     is-finite-Π
       ( is-finite-type-Finite-Type A)
       ( λ x →
@@ -140,9 +140,9 @@ module _
               ( is-finite-relation-Decidable-Relation-Finite-Type x y)
               ( is-finite-relation-Decidable-Relation-Finite-Type y x)))
 
-  is-finite-is-transitive-Decidable-Relation-Prop-𝔽 :
+  is-finite-is-transitive-Decidable-Relation-Finite-Type :
     is-finite (is-transitive-Relation-Prop (relation-Decidable-Relation R))
-  is-finite-is-transitive-Decidable-Relation-Prop-𝔽 =
+  is-finite-is-transitive-Decidable-Relation-Finite-Type =
     is-finite-Π
       ( is-finite-type-Finite-Type A)
       ( λ x →
@@ -158,14 +158,14 @@ module _
                     ( is-finite-relation-Decidable-Relation-Finite-Type x y)
                     ( is-finite-relation-Decidable-Relation-Finite-Type x z)))))
 
-  is-finite-is-equivalence-Decidable-Relation-Prop-𝔽 :
+  is-finite-is-equivalence-Decidable-Relation-Finite-Type :
     is-finite (is-equivalence-relation (relation-Decidable-Relation R))
-  is-finite-is-equivalence-Decidable-Relation-Prop-𝔽 =
+  is-finite-is-equivalence-Decidable-Relation-Finite-Type =
     is-finite-product
-      ( is-finite-is-reflexive-Decidable-Relation-Prop-𝔽)
+      ( is-finite-is-reflexive-Decidable-Relation-Finite-Type)
       ( is-finite-product
-          is-finite-is-symmetric-Decidable-Relation-Prop-𝔽
-          is-finite-is-transitive-Decidable-Relation-Prop-𝔽)
+          is-finite-is-symmetric-Decidable-Relation-Finite-Type
+          is-finite-is-transitive-Decidable-Relation-Finite-Type)
 ```
 
 ## Properties
@@ -247,7 +247,7 @@ is-finite-Decidable-Equivalence-Relation-Finite-Type :
 is-finite-Decidable-Equivalence-Relation-Finite-Type A =
   is-finite-Σ
     ( is-finite-Decidable-Relation-Finite-Type A)
-    ( is-finite-is-equivalence-Decidable-Relation-Prop-𝔽 A)
+    ( is-finite-is-equivalence-Decidable-Relation-Finite-Type A)
 ```
 
 ### The number of decidable equivalence relations on a finite type is a Stirling number of the second kind
