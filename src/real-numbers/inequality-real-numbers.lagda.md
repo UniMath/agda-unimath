@@ -12,7 +12,9 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.complements-subtypes
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -165,11 +167,20 @@ antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
 ℝ-Poset = poset-Large-Poset ℝ-Large-Poset
 ```
 
-### The canonical map from rational numbers to the reals preserves inequality
+### The canonical map from rational numbers to the reals preserves and reflects inequality
 
 ```agda
 preserves-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
 preserves-leq-real-ℚ x y x≤y q q<x = concatenate-le-leq-ℚ q x y q<x x≤y
+
+reflects-leq-real-ℚ : (x y : ℚ) → leq-ℝ (real-ℚ x) (real-ℚ y) → leq-ℚ x y
+reflects-leq-real-ℚ x y rx≤ry with decide-le-leq-ℚ y x
+... | inl y<x = ex-falso (irreflexive-le-ℚ y (rx≤ry y y<x))
+... | inr x≤y = x≤y
+
+iff-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
+pr1 (iff-leq-real-ℚ x y) = preserves-leq-real-ℚ x y
+pr2 (iff-leq-real-ℚ x y) = reflects-leq-real-ℚ x y
 ```
 
 ## References
