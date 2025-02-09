@@ -294,7 +294,8 @@ is-untruncated-π-finite-is-finite k {A} H =
     ( is-untruncated-π-finite-Prop k A)
     ( is-untruncated-π-finite-count k)
 
-π-finite-type-Finite-Type : {l : Level} (k : ℕ) → Finite-Type l → Untruncated-π-Finite-Type l k
+π-finite-type-Finite-Type :
+  {l : Level} (k : ℕ) → Finite-Type l → Untruncated-π-Finite-Type l k
 pr1 (π-finite-type-Finite-Type k A) = type-Finite-Type A
 pr2 (π-finite-type-Finite-Type k A) =
   is-untruncated-π-finite-is-finite k (is-finite-type-Finite-Type A)

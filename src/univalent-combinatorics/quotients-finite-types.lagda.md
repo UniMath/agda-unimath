@@ -43,7 +43,8 @@ module _
       ( has-decidable-equality-Subset-Finite-Type X)
 
   quotient-Finite-Type : Finite-Type (l1 ⊔ lsuc l2)
-  pr1 quotient-Finite-Type = equivalence-class-Decidable-Equivalence-Relation-Finite-Type
+  pr1 quotient-Finite-Type =
+    equivalence-class-Decidable-Equivalence-Relation-Finite-Type
   pr2 quotient-Finite-Type =
     is-finite-equivalence-class-Decidable-Equivalence-Relation-Finite-Type'
 ```

@@ -96,17 +96,22 @@ module _
   row-ferrers-diagram-Finite-Type = pr1 D
 
   type-row-ferrers-diagram-Finite-Type : UU l2
-  type-row-ferrers-diagram-Finite-Type = type-Finite-Type row-ferrers-diagram-Finite-Type
+  type-row-ferrers-diagram-Finite-Type =
+    type-Finite-Type row-ferrers-diagram-Finite-Type
 
-  is-finite-type-row-ferrers-diagram-Finite-Type : is-finite type-row-ferrers-diagram-Finite-Type
+  is-finite-type-row-ferrers-diagram-Finite-Type :
+    is-finite type-row-ferrers-diagram-Finite-Type
   is-finite-type-row-ferrers-diagram-Finite-Type =
     is-finite-type-Finite-Type row-ferrers-diagram-Finite-Type
 
-  dot-ferrers-diagram-Finite-Type : type-row-ferrers-diagram-Finite-Type → Finite-Type l3
+  dot-ferrers-diagram-Finite-Type :
+    type-row-ferrers-diagram-Finite-Type → Finite-Type l3
   dot-ferrers-diagram-Finite-Type = pr1 (pr2 D)
 
-  type-dot-ferrers-diagram-Finite-Type : type-row-ferrers-diagram-Finite-Type → UU l3
-  type-dot-ferrers-diagram-Finite-Type x = type-Finite-Type (dot-ferrers-diagram-Finite-Type x)
+  type-dot-ferrers-diagram-Finite-Type :
+    type-row-ferrers-diagram-Finite-Type → UU l3
+  type-dot-ferrers-diagram-Finite-Type x =
+    type-Finite-Type (dot-ferrers-diagram-Finite-Type x)
 
   is-finite-type-dot-ferrers-diagram-Finite-Type :
     (x : type-row-ferrers-diagram-Finite-Type) → is-finite (type-dot-ferrers-diagram-Finite-Type x)
@@ -124,9 +129,12 @@ module _
       ( Σ (type-row-ferrers-diagram-Finite-Type) (type-dot-ferrers-diagram-Finite-Type))
   mere-equiv-ferrers-diagram-Finite-Type = pr2 (pr2 (pr2 D))
 
-  ferrers-diagram-ferrers-diagram-Finite-Type : ferrers-diagram l2 l3 (type-Finite-Type A)
-  pr1 ferrers-diagram-ferrers-diagram-Finite-Type = type-row-ferrers-diagram-Finite-Type
-  pr1 (pr2 ferrers-diagram-ferrers-diagram-Finite-Type) = type-dot-ferrers-diagram-Finite-Type
+  ferrers-diagram-ferrers-diagram-Finite-Type :
+    ferrers-diagram l2 l3 (type-Finite-Type A)
+  pr1 ferrers-diagram-ferrers-diagram-Finite-Type =
+    type-row-ferrers-diagram-Finite-Type
+  pr1 (pr2 ferrers-diagram-ferrers-diagram-Finite-Type) =
+    type-dot-ferrers-diagram-Finite-Type
   pr1 (pr2 (pr2 ferrers-diagram-ferrers-diagram-Finite-Type)) =
     is-inhabited-dot-ferrers-diagram-Finite-Type
   pr2 (pr2 (pr2 ferrers-diagram-ferrers-diagram-Finite-Type)) =
@@ -207,7 +215,8 @@ module _
 
   equiv-eq-ferrers-diagram-Finite-Type :
     (E : ferrers-diagram-Finite-Type l2 l3 A) → Id D E → equiv-ferrers-diagram-Finite-Type E
-  equiv-eq-ferrers-diagram-Finite-Type .D refl = id-equiv-ferrers-diagram-Finite-Type
+  equiv-eq-ferrers-diagram-Finite-Type .D refl =
+    id-equiv-ferrers-diagram-Finite-Type
 
   is-torsorial-equiv-ferrers-diagram-Finite-Type :
     is-torsorial equiv-ferrers-diagram-Finite-Type

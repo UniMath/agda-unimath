@@ -76,9 +76,11 @@ module _
   finite-indexing-type-partition-Finite-Type = pr1 P
 
   indexing-type-partition-Finite-Type : UU l2
-  indexing-type-partition-Finite-Type = type-Finite-Type finite-indexing-type-partition-Finite-Type
+  indexing-type-partition-Finite-Type =
+    type-Finite-Type finite-indexing-type-partition-Finite-Type
 
-  is-finite-indexing-type-partition-Finite-Type : is-finite indexing-type-partition-Finite-Type
+  is-finite-indexing-type-partition-Finite-Type :
+    is-finite indexing-type-partition-Finite-Type
   is-finite-indexing-type-partition-Finite-Type =
     is-finite-type-Finite-Type finite-indexing-type-partition-Finite-Type
 
@@ -86,18 +88,21 @@ module _
   number-of-elements-indexing-type-partition-Finite-Type =
     number-of-elements-is-finite is-finite-indexing-type-partition-Finite-Type
 
-  finite-block-partition-Finite-Type : indexing-type-partition-Finite-Type → Finite-Type l3
+  finite-block-partition-Finite-Type :
+    indexing-type-partition-Finite-Type → Finite-Type l3
   finite-block-partition-Finite-Type = pr1 (pr2 P)
 
   block-partition-Finite-Type : indexing-type-partition-Finite-Type → UU l3
-  block-partition-Finite-Type i = type-Finite-Type (finite-block-partition-Finite-Type i)
+  block-partition-Finite-Type i =
+    type-Finite-Type (finite-block-partition-Finite-Type i)
 
   is-finite-block-partition-Finite-Type :
     (i : indexing-type-partition-Finite-Type) → is-finite (block-partition-Finite-Type i)
   is-finite-block-partition-Finite-Type i =
     is-finite-type-Finite-Type (finite-block-partition-Finite-Type i)
 
-  number-of-elements-block-partition-Finite-Type : indexing-type-partition-Finite-Type → ℕ
+  number-of-elements-block-partition-Finite-Type :
+    indexing-type-partition-Finite-Type → ℕ
   number-of-elements-block-partition-Finite-Type i =
     number-of-elements-is-finite (is-finite-block-partition-Finite-Type i)
 
@@ -111,9 +116,11 @@ module _
 
   map-conversion-partition-Finite-Type :
     type-Finite-Type X → Σ indexing-type-partition-Finite-Type block-partition-Finite-Type
-  map-conversion-partition-Finite-Type = map-equiv conversion-partition-Finite-Type
+  map-conversion-partition-Finite-Type =
+    map-equiv conversion-partition-Finite-Type
 
-  rel-partition-prop-Finite-Type : type-Finite-Type X → type-Finite-Type X → Prop l2
+  rel-partition-prop-Finite-Type :
+    type-Finite-Type X → type-Finite-Type X → Prop l2
   rel-partition-prop-Finite-Type x y =
     Id-Prop
       ( set-Finite-Type finite-indexing-type-partition-Finite-Type)
@@ -125,7 +132,8 @@ module _
 
   is-prop-rel-partition-Finite-Type :
     (x y : type-Finite-Type X) → is-prop (rel-partition-Finite-Type x y)
-  is-prop-rel-partition-Finite-Type x y = is-prop-type-Prop (rel-partition-prop-Finite-Type x y)
+  is-prop-rel-partition-Finite-Type x y =
+    is-prop-type-Prop (rel-partition-prop-Finite-Type x y)
 
   refl-rel-partition-Finite-Type : is-reflexive rel-partition-Finite-Type
   refl-rel-partition-Finite-Type x = refl
@@ -138,10 +146,14 @@ module _
 
   equivalence-relation-partition-Finite-Type :
     equivalence-relation l2 (type-Finite-Type X)
-  pr1 equivalence-relation-partition-Finite-Type = rel-partition-prop-Finite-Type
-  pr1 (pr2 equivalence-relation-partition-Finite-Type) = refl-rel-partition-Finite-Type
-  pr1 (pr2 (pr2 equivalence-relation-partition-Finite-Type)) = symmetric-rel-partition-Finite-Type
-  pr2 (pr2 (pr2 equivalence-relation-partition-Finite-Type)) = transitive-rel-partition-Finite-Type
+  pr1 equivalence-relation-partition-Finite-Type =
+    rel-partition-prop-Finite-Type
+  pr1 (pr2 equivalence-relation-partition-Finite-Type) =
+    refl-rel-partition-Finite-Type
+  pr1 (pr2 (pr2 equivalence-relation-partition-Finite-Type)) =
+    symmetric-rel-partition-Finite-Type
+  pr2 (pr2 (pr2 equivalence-relation-partition-Finite-Type)) =
+    transitive-rel-partition-Finite-Type
 ```
 
 ### Equivalences of partitions

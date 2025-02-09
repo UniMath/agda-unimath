@@ -597,13 +597,15 @@ pr2 (trunc-prop-Finite-Type A) =
 ### We characterize the identity type of Finite-Type
 
 ```agda
-equiv-Finite-Type : {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → UU (l1 ⊔ l2)
+equiv-Finite-Type :
+  {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → UU (l1 ⊔ l2)
 equiv-Finite-Type X Y = type-Finite-Type X ≃ type-Finite-Type Y
 
 id-equiv-Finite-Type : {l : Level} → (X : Finite-Type l) → equiv-Finite-Type X X
 id-equiv-Finite-Type X = id-equiv
 
-extensionality-Finite-Type : {l : Level} → (X Y : Finite-Type l) → Id X Y ≃ equiv-Finite-Type X Y
+extensionality-Finite-Type :
+  {l : Level} → (X Y : Finite-Type l) → Id X Y ≃ equiv-Finite-Type X Y
 extensionality-Finite-Type = extensionality-subuniverse is-finite-Prop
 
 is-torsorial-equiv-Finite-Type :
@@ -614,10 +616,12 @@ is-torsorial-equiv-Finite-Type {l} X =
     ( equiv-tot (extensionality-Finite-Type X))
     ( is-torsorial-Id X)
 
-equiv-eq-Finite-Type : {l : Level} → (X Y : Finite-Type l) → Id X Y → equiv-Finite-Type X Y
+equiv-eq-Finite-Type :
+  {l : Level} → (X Y : Finite-Type l) → Id X Y → equiv-Finite-Type X Y
 equiv-eq-Finite-Type X Y = map-equiv (extensionality-Finite-Type X Y)
 
-eq-equiv-Finite-Type : {l : Level} → (X Y : Finite-Type l) → equiv-Finite-Type X Y → Id X Y
+eq-equiv-Finite-Type :
+  {l : Level} → (X Y : Finite-Type l) → equiv-Finite-Type X Y → Id X Y
 eq-equiv-Finite-Type X Y = map-inv-equiv (extensionality-Finite-Type X Y)
 ```
 
@@ -626,7 +630,8 @@ eq-equiv-Finite-Type X Y = map-inv-equiv (extensionality-Finite-Type X Y)
 ```agda
 equiv-fam-Finite-Type :
   {l1 l2 : Level} {X : UU l1} (Y Z : X → Finite-Type l2) → UU (l1 ⊔ l2)
-equiv-fam-Finite-Type Y Z = equiv-fam (type-Finite-Type ∘ Y) (type-Finite-Type ∘ Z)
+equiv-fam-Finite-Type Y Z =
+  equiv-fam (type-Finite-Type ∘ Y) (type-Finite-Type ∘ Z)
 
 id-equiv-fam-Finite-Type :
   {l1 l2 : Level} {X : UU l1} → (Y : X → Finite-Type l2) → equiv-fam-Finite-Type Y Y
