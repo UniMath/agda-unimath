@@ -130,55 +130,10 @@ module _
         is-located-lower-upper-cut-raise-ℝ)
 ```
 
-## Similarity across universe levels
+## Properties
+
+### Reals are similar to their raised-universe equivalents
 
 ```agda
-module _
-  {l1 l2 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
-  where
-
-  sim-ℝ : UU (l1 ⊔ l2)
-  sim-ℝ = sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y)
+sim-raise-ℝ : {l1 : Level} → (l : Level) → (x : ℝ l1) → sim-ℝ x (raise-ℝ l x)
 ```
-
-### Similarity is reflexive
-
-```agda
-refl-sim-ℝ : {l : Level} → (x : ℝ l) → sim-ℝ x x
-refl-sim-ℝ x = refl-sim-subtype (lower-cut-ℝ x)
-```
-
-### Similarity is transitive
-
-```agda
-module _
-  {l1 l2 l3 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
-  (z : ℝ l3)
-  where
-
-  transitive-sim-ℝ : sim-ℝ y z → sim-ℝ x y → sim-ℝ x z
-  transitive-sim-ℝ =
-    transitive-sim-subtype
-      ( lower-cut-ℝ x)
-      ( lower-cut-ℝ y)
-      ( lower-cut-ℝ z)
-```
-
-### Similarity is antisymmetric at the same universe level
-
-```agda
-module _
-  {l : Level}
-  (x y : ℝ l)
-  where
-
-  antisymmetric-sim-ℝ : sim-ℝ x y → x ＝ y
-  antisymmetric-sim-ℝ x~y =
-    eq-eq-lower-cut-ℝ
-      ( x)
-      ( y)
-      ( antisymmetric-sim-subtype (lower-cut-ℝ x) (lower-cut-ℝ y) x~y)
