@@ -1,7 +1,7 @@
 # Strictly ordered pairs of natural numbers
 
 ```agda
-module elementary-number-theory.strictly-ordered-pairs-of-natural-numbers where
+module elementary-number-theory.strictly-preordered-pairs-of-natural-numbers where
 ```
 
 <details><summary>Imports</summary>
@@ -32,22 +32,22 @@ A strictly ordered pair of natural numbers consists of `x y : ℕ` such that
 ## Definition
 
 ```agda
-strictly-ordered-pair-ℕ : UU lzero
-strictly-ordered-pair-ℕ = Σ ℕ (λ x → Σ ℕ (λ y → le-ℕ x y))
+strictly-preordered-pair-ℕ : UU lzero
+strictly-preordered-pair-ℕ = Σ ℕ (λ x → Σ ℕ (λ y → le-ℕ x y))
 
 module _
-  (p : strictly-ordered-pair-ℕ)
+  (p : strictly-preordered-pair-ℕ)
   where
 
-  first-strictly-ordered-pair-ℕ : ℕ
-  first-strictly-ordered-pair-ℕ = pr1 p
+  first-strictly-preordered-pair-ℕ : ℕ
+  first-strictly-preordered-pair-ℕ = pr1 p
 
-  second-strictly-ordered-pair-ℕ : ℕ
-  second-strictly-ordered-pair-ℕ = pr1 (pr2 p)
+  second-strictly-preordered-pair-ℕ : ℕ
+  second-strictly-preordered-pair-ℕ = pr1 (pr2 p)
 
-  strict-inequality-strictly-ordered-pair-ℕ :
-    le-ℕ first-strictly-ordered-pair-ℕ second-strictly-ordered-pair-ℕ
-  strict-inequality-strictly-ordered-pair-ℕ = pr2 (pr2 p)
+  strict-inequality-strictly-preordered-pair-ℕ :
+    le-ℕ first-strictly-preordered-pair-ℕ second-strictly-preordered-pair-ℕ
+  strict-inequality-strictly-preordered-pair-ℕ = pr2 (pr2 p)
 ```
 
 ## Properties
@@ -55,34 +55,34 @@ module _
 ### Strictly ordered pairs of natural numbers are pairs of distinct elements
 
 ```agda
-pair-of-distinct-elements-strictly-ordered-pair-ℕ :
-  strictly-ordered-pair-ℕ → pair-of-distinct-elements ℕ
-pair-of-distinct-elements-strictly-ordered-pair-ℕ (a , b , H) =
+pair-of-distinct-elements-strictly-preordered-pair-ℕ :
+  strictly-preordered-pair-ℕ → pair-of-distinct-elements ℕ
+pair-of-distinct-elements-strictly-preordered-pair-ℕ (a , b , H) =
   (a , b , neq-le-ℕ H)
 ```
 
 ### Any pair of distinct elements of natural numbers can be strictly ordered
 
 ```agda
-strictly-ordered-pair-pair-of-distinct-elements-ℕ' :
-  (a b : ℕ) → a ≠ b → strictly-ordered-pair-ℕ
-strictly-ordered-pair-pair-of-distinct-elements-ℕ' zero-ℕ zero-ℕ H =
+strictly-preordered-pair-pair-of-distinct-elements-ℕ' :
+  (a b : ℕ) → a ≠ b → strictly-preordered-pair-ℕ
+strictly-preordered-pair-pair-of-distinct-elements-ℕ' zero-ℕ zero-ℕ H =
   ex-falso (H refl)
-strictly-ordered-pair-pair-of-distinct-elements-ℕ' zero-ℕ (succ-ℕ b) H =
+strictly-preordered-pair-pair-of-distinct-elements-ℕ' zero-ℕ (succ-ℕ b) H =
   (0 , succ-ℕ b , star)
-strictly-ordered-pair-pair-of-distinct-elements-ℕ' (succ-ℕ a) zero-ℕ H =
+strictly-preordered-pair-pair-of-distinct-elements-ℕ' (succ-ℕ a) zero-ℕ H =
   (0 , succ-ℕ a , star)
-strictly-ordered-pair-pair-of-distinct-elements-ℕ' (succ-ℕ a) (succ-ℕ b) H =
+strictly-preordered-pair-pair-of-distinct-elements-ℕ' (succ-ℕ a) (succ-ℕ b) H =
   map-Σ
     ( λ x → Σ ℕ (λ y → le-ℕ x y))
     ( succ-ℕ)
     ( λ x →
       map-Σ (le-ℕ (succ-ℕ x)) succ-ℕ (λ y → id))
-    ( strictly-ordered-pair-pair-of-distinct-elements-ℕ' a b
+    ( strictly-preordered-pair-pair-of-distinct-elements-ℕ' a b
       ( λ p → H (ap succ-ℕ p)))
 
-strictly-ordered-pair-pair-of-distinct-elements-ℕ :
-  pair-of-distinct-elements ℕ → strictly-ordered-pair-ℕ
-strictly-ordered-pair-pair-of-distinct-elements-ℕ (a , b , H) =
-  strictly-ordered-pair-pair-of-distinct-elements-ℕ' a b H
+strictly-preordered-pair-pair-of-distinct-elements-ℕ :
+  pair-of-distinct-elements ℕ → strictly-preordered-pair-ℕ
+strictly-preordered-pair-pair-of-distinct-elements-ℕ (a , b , H) =
+  strictly-preordered-pair-pair-of-distinct-elements-ℕ' a b H
 ```

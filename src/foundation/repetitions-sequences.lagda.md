@@ -8,7 +8,7 @@ module foundation.repetitions-sequences where
 
 ```agda
 open import elementary-number-theory.natural-numbers
-open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers
+open import elementary-number-theory.strictly-preordered-pairs-of-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -84,14 +84,14 @@ module _
 
 ```agda
 is-ordered-repetition-of-values-ℕ :
-  {l1 : Level} {A : UU l1} (f : ℕ → A) (x : strictly-ordered-pair-ℕ) → UU l1
+  {l1 : Level} {A : UU l1} (f : ℕ → A) (x : strictly-preordered-pair-ℕ) → UU l1
 is-ordered-repetition-of-values-ℕ f x =
-  f (first-strictly-ordered-pair-ℕ x) ＝ f (second-strictly-ordered-pair-ℕ x)
+  f (first-strictly-preordered-pair-ℕ x) ＝ f (second-strictly-preordered-pair-ℕ x)
 
 ordered-repetition-of-values-ℕ :
   {l1 : Level} {A : UU l1} (f : ℕ → A) → UU l1
 ordered-repetition-of-values-ℕ f =
-  Σ strictly-ordered-pair-ℕ (is-ordered-repetition-of-values-ℕ f)
+  Σ strictly-preordered-pair-ℕ (is-ordered-repetition-of-values-ℕ f)
 
 ordered-repetition-of-values-comp-ℕ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (g : A → B) {f : ℕ → A} →
