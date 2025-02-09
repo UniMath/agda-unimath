@@ -31,7 +31,7 @@ $$
 $$
 
 holds for any element $x : P$. If $f$ is also
-[order preserving](order-theory.order-preserving-maps-strictly-ordered-types.md)
+[order preserving](order-theory.strict-order-preserving-maps.md)
 we say that $f$ is an
 {{#concept "inflationary morphism" Disambiguation="strictly ordered type" Agda=inflationary-hom-Strictly-Ordered-Type}}.
 
