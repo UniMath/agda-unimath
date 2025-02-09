@@ -250,7 +250,7 @@ module _
       _>>=_ :
         {l1 l2 : Level} {A : UU l1} {B : A -> UU l2} →
         exists-structure A B →
-        (Σ A B -> type-Prop claim) -> type-Prop claim
+        (Σ A B -> type-Prop claim) → type-Prop claim
       x >>= f = elim-exists claim (ev-pair f) x
 ```
 
