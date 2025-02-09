@@ -20,8 +20,8 @@ open import order-theory.strict-preorders
 
 ## Idea
 
-A map $f : P → P$ on a
-[strict preorder](order-theory.strict-preorders.md) $P$ is said to be a
+A map $f : P → P$ on a [strict preorder](order-theory.strict-preorders.md) $P$
+is said to be a
 {{#concept "strictly inflationary map" Disambiguation="strict preorder" Agda=strictly-inflationary-map-Strict-Preorder}}
 if the inequality
 

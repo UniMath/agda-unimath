@@ -13,16 +13,16 @@ open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import order-theory.strictly-preordered-sets
 open import order-theory.strict-preorders
+open import order-theory.strictly-preordered-sets
 ```
 
 </details>
 
 ## Idea
 
-Consider two [strict preorders](order-theory.strict-preorders.md) $P$
-and $Q$, with orderings $<_P$ and $<_Q$ respectively. A
+Consider two [strict preorders](order-theory.strict-preorders.md) $P$ and $Q$,
+with orderings $<_P$ and $<_Q$ respectively. A
 {{#concept "strict order preserving map" Agda=hom-Strict-Preorder}} consists of
 map $f : P → Q$ between their underlying types such that for any two elements
 $x<_P y$ in $P$ we have $f(x)<_Q f(y)$ in $Q$.
