@@ -331,6 +331,24 @@ module _
     eq-distributive-product-exists-structure P
 ```
 
+## Existential quantification `do` syntax
+
+When eliminating a chain of existential quantifications, which may be
+interdependent, Agda's `do` syntax can eliminate many levels of nesting.
+
+```agda
+module elim-exists-do
+  {l : Level}
+  (P : Prop l)
+  where
+
+  _>>=_ :
+    {l1 l2 : Level}  {A : UU l1} {B : A -> UU l2} →
+    exists-structure A B →
+    (Σ A B -> type-Prop P) -> type-Prop P
+  x >>= f = elim-exists P (ev-pair f) x
+```
+
 ## See also
 
 - Existential quantification is the indexed counterpart to
