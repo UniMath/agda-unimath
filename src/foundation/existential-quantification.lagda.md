@@ -343,7 +343,7 @@ module elim-exists-do
   where
 
   _>>=_ :
-    {l1 l2 : Level}  {A : UU l1} {B : A -> UU l2} →
+    {l1 l2 : Level} {A : UU l1} {B : A -> UU l2} →
     exists-structure A B →
     (Σ A B -> type-Prop P) -> type-Prop P
   x >>= f = elim-exists P (ev-pair f) x
