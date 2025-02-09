@@ -22,6 +22,7 @@ open import foundation.universe-levels
 ```
 
 </details>
+
 ## Idea
 
 A lower
