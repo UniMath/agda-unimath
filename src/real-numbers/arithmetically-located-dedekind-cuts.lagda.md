@@ -141,18 +141,18 @@ module _
       is-in-upper-cut-ℝ x (p +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)) →
       exists ℚ ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ ε +ℚ ε))
     arithmetic-location-in-arithmetic-sequence
-      p ε zero-ℕ positive-ε p-in-L p-plus-0-ε-in-U =
+      p ε zero-ℕ positive-ε p<x p-plus-0-ε-in-U =
       ex-falso
         ( is-disjoint-cut-ℝ
           ( x)
           ( p)
-          ( p-in-L ,
+          ( p<x ,
             tr
               ( is-in-upper-cut-ℝ x)
               ( ap (p +ℚ_) (left-zero-law-mul-ℚ ε) ∙ right-unit-law-add-ℚ p)
               ( p-plus-0-ε-in-U)))
     arithmetic-location-in-arithmetic-sequence
-      p ε (succ-ℕ n) positive-ε p-in-L p-plus-sn-ε-in-U =
+      p ε (succ-ℕ n) positive-ε p<x p-plus-sn-ε-in-U =
       elim-disjunction
         ( ∃ ℚ ( λ q → lower-cut-ℝ x q ∧ upper-cut-ℝ x (q +ℚ ε +ℚ ε)))
         ( λ p+ε-in-L →
@@ -177,7 +177,7 @@ module _
                 ＝ (p +ℚ ε) +ℚ (rational-ℤ (int-ℕ n) *ℚ ε)
                   by inv (associative-add-ℚ p ε (rational-ℤ (int-ℕ n) *ℚ ε)))
               ( p-plus-sn-ε-in-U)))
-        ( λ p+2ε-in-U → intro-exists p (p-in-L , p+2ε-in-U))
+        ( λ p+2ε-in-U → intro-exists p (p<x , p+2ε-in-U))
         ( is-located-lower-upper-cut-ℝ
           ( x)
           ( p +ℚ ε)
@@ -195,7 +195,7 @@ module _
         ( λ r →
           lower-cut-ℝ x r ∧
           upper-cut-ℝ x (r +ℚ ε +ℚ ε))
-    bounded-arithmetic-location-twice-ε p q ε pos-ε p-in-L q-in-U =
+    bounded-arithmetic-location-twice-ε p q ε pos-ε p<x x<q =
       elim-exists
         ( ∃ ℚ ( λ r → lower-cut-ℝ x r ∧ upper-cut-ℝ x (r +ℚ ε +ℚ ε)))
         ( λ n q-p<nε →
@@ -204,7 +204,7 @@ module _
             ( ε)
             ( n)
             ( pos-ε)
-            ( p-in-L)
+            ( p<x)
             ( le-upper-cut-ℝ
               ( x)
               ( q)
@@ -216,55 +216,43 @@ module _
                   ( p)
                   ( q -ℚ p)
                   ( rational-ℤ (int-ℕ n) *ℚ ε) q-p<nε))
-              ( q-in-U)))
+              ( x<q)))
         ( archimedean-property-ℚ ε (q -ℚ p) pos-ε)
 
   abstract
-    arithmetically-located-ℝ :
+    arithmetically-located-lower-upper-cut-ℝ :
       is-arithmetically-located-pair-of-subtypes-ℚ
         ( lower-cut-ℝ x)
         ( upper-cut-ℝ x)
-    arithmetically-located-ℝ ε⁺@(ε , positive-ε) =
+    arithmetically-located-lower-upper-cut-ℝ ε⁺@(ε , positive-ε) =
       elim-exists
-        ( claim)
-        ( λ p p-in-L →
-          elim-exists
-            ( claim)
-            ( λ q q-in-U →
-              elim-exists
-                ( claim)
-                ( λ (ε' , pos-ε') 2ε'<ε →
-                  map-exists
-                    ( λ (p , q) →
-                      le-ℚ q (p +ℚ ε) ×
-                      is-in-lower-cut-ℝ x p ×
-                      is-in-upper-cut-ℝ x q)
-                    ( λ r → (r , r +ℚ ε' +ℚ ε'))
-                    ( λ r (r-in-L , r+2ε'-in-U) →
-                      tr
-                        ( λ s → le-ℚ s (r +ℚ ε))
-                        ( inv (associative-add-ℚ r ε' ε'))
-                        ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,
-                      r-in-L ,
-                      r+2ε'-in-U)
-                    ( bounded-arithmetic-location-twice-ε
-                      ( p)
-                      ( q)
-                      ( ε')
-                      ( pos-ε')
-                      ( p-in-L)
-                      ( q-in-U)))
-                ( double-le-ℚ⁺ ε⁺))
-            ( is-inhabited-upper-cut-ℝ x))
-        ( is-inhabited-lower-cut-ℝ x)
-      where
-        claim : Prop l
-        claim =
-          ∃ ( ℚ × ℚ)
+        ( ∃
+          ( ℚ × ℚ)
+          ( λ (p , q) →
+            le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q))
+        ( λ (p , q , ε' , pos-ε') (p<x , x<q , 2ε'<ε) →
+          map-exists
             ( λ (p , q) →
-              le-ℚ-Prop q (p +ℚ ε) ∧
-              lower-cut-ℝ x p ∧
-              upper-cut-ℝ x q)
+              le-ℚ q (p +ℚ ε) ×
+              is-in-lower-cut-ℝ x p ×
+              is-in-upper-cut-ℝ x q)
+            ( λ r → (r , r +ℚ ε' +ℚ ε'))
+            ( λ r →
+              tr
+                ( λ s → le-ℚ s (r +ℚ ε))
+                ( inv (associative-add-ℚ r ε' ε'))
+                ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,_)
+            ( bounded-arithmetic-location-twice-ε p q ε' pos-ε' p<x x<q))
+        ( map-ternary-exists
+          ( λ (p , q , ε'⁺) →
+            is-in-lower-cut-ℝ x p ×
+            is-in-upper-cut-ℝ x q ×
+            le-ℚ⁺ (ε'⁺ +ℚ⁺ ε'⁺) ε⁺)
+          ( λ p q ε'⁺ → p , q , ε'⁺)
+          ( λ _ _ _ p∈lx q∈ux 2ε'<ε → p∈lx , q∈ux , 2ε'<ε)
+          ( is-inhabited-lower-cut-ℝ x)
+          ( is-inhabited-upper-cut-ℝ x)
+          ( double-le-ℚ⁺ ε⁺))
 ```
 
 ## References
