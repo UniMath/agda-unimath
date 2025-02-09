@@ -12,7 +12,9 @@ open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
 open import foundation.complements-subtypes
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -38,11 +40,11 @@ the [real numbers](real-numbers.dedekind-real-numbers.md) is defined as the
 lower cut of one being a subset of the lower cut of the other. This is the
 definition used in {{#cite UF13}}, section 11.2.1.
 
+## Definition
+
 ```agda
 module _
-  {l1 l2 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
   where
 
   leq-ℝ-Prop : Prop (l1 ⊔ l2)
@@ -57,13 +59,17 @@ module _
 ### Equivalence with reversed containment of upper cuts
 
 ```agda
+module _
+  {l1 l2 : Level} (x : ℝ l1) (y : ℝ l2)
+  where
+
   leq-ℝ-Prop' : Prop (l1 ⊔ l2)
   leq-ℝ-Prop' = leq-prop-subtype (upper-cut-ℝ y) (upper-cut-ℝ x)
 
   leq-ℝ' : UU (l1 ⊔ l2)
   leq-ℝ' = type-Prop leq-ℝ-Prop'
 
-  leq-iff-ℝ' : leq-ℝ ↔ leq-ℝ'
+  leq-iff-ℝ' : leq-ℝ x y ↔ leq-ℝ'
   pr1 (leq-iff-ℝ') lx⊆ly q q-in-uy =
     elim-exists
       ( upper-cut-ℝ x q)
@@ -161,11 +167,20 @@ antisymmetric-leq-Large-Poset ℝ-Large-Poset = antisymmetric-leq-ℝ
 ℝ-Poset = poset-Large-Poset ℝ-Large-Poset
 ```
 
-### The canonical map from rational numbers to the reals preserves inequality
+### The canonical map from rational numbers to the reals preserves and reflects inequality
 
 ```agda
 preserves-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y → leq-ℝ (real-ℚ x) (real-ℚ y)
 preserves-leq-real-ℚ x y x≤y q q<x = concatenate-le-leq-ℚ q x y q<x x≤y
+
+reflects-leq-real-ℚ : (x y : ℚ) → leq-ℝ (real-ℚ x) (real-ℚ y) → leq-ℚ x y
+reflects-leq-real-ℚ x y rx≤ry with decide-le-leq-ℚ y x
+... | inl y<x = ex-falso (irreflexive-le-ℚ y (rx≤ry y y<x))
+... | inr x≤y = x≤y
+
+iff-leq-real-ℚ : (x y : ℚ) → leq-ℚ x y ↔ leq-ℝ (real-ℚ x) (real-ℚ y)
+pr1 (iff-leq-real-ℚ x y) = preserves-leq-real-ℚ x y
+pr2 (iff-leq-real-ℚ x y) = reflects-leq-real-ℚ x y
 ```
 
 ## References
