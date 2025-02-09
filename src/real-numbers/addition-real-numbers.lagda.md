@@ -38,6 +38,7 @@ open import group-theory.abelian-groups
 open import real-numbers.arithmetically-located-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>
@@ -383,6 +384,42 @@ _+ℝ_ = add-ℝ
 
 ## Properties
 
+### Addition is commutative
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
+  commutative-add-ℝ =
+    eq-eq-lower-cut-ℝ
+      ( x +ℝ y)
+      ( y +ℝ x)
+      ( eq-has-same-elements-subtype
+        ( lower-cut-add-ℝ x y)
+        ( lower-cut-add-ℝ y x)
+        ( λ q →
+          elim-exists
+            ( lower-cut-add-ℝ y x q)
+            ( λ (lx , ly) (lx-in-lower-x , ly-in-lower-y , lx+ly=q) →
+              intro-exists
+                ( ly , lx)
+                ( ly-in-lower-y ,
+                  lx-in-lower-x ,
+                  commutative-add-ℚ ly lx ∙ lx+ly=q)) ,
+          elim-exists
+            ( lower-cut-add-ℝ x y q)
+            ( λ (ly , lx) (ly-in-lower-y , lx-in-lower-x , ly+lx=q) →
+              intro-exists
+                ( lx , ly)
+                ( lx-in-lower-x ,
+                  ly-in-lower-y ,
+                  commutative-add-ℚ lx ly ∙ ly+lx=q))))
+```
+
 ### Unit laws for addition
 
 ```agda
@@ -425,42 +462,6 @@ abstract
 
   right-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → (x +ℝ zero-ℝ) ＝ x
   right-unit-law-add-ℝ x = commutative-add-ℝ x zero-ℝ ∙ left-unit-law-add-ℝ x
-```
-
-### Addition is commutative
-
-```agda
-module _
-  {l1 l2 : Level}
-  (x : ℝ l1)
-  (y : ℝ l2)
-  where
-
-  commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
-  commutative-add-ℝ =
-    eq-eq-lower-cut-ℝ
-      ( x +ℝ y)
-      ( y +ℝ x)
-      ( eq-has-same-elements-subtype
-        ( lower-cut-add-ℝ x y)
-        ( lower-cut-add-ℝ y x)
-        ( λ q →
-          elim-exists
-            ( lower-cut-add-ℝ y x q)
-            ( λ (lx , ly) (lx-in-lower-x , ly-in-lower-y , lx+ly=q) →
-              intro-exists
-                ( ly , lx)
-                ( ly-in-lower-y ,
-                  lx-in-lower-x ,
-                  commutative-add-ℚ ly lx ∙ lx+ly=q)) ,
-          elim-exists
-            ( lower-cut-add-ℝ x y q)
-            ( λ (ly , lx) (ly-in-lower-y , lx-in-lower-x , ly+lx=q) →
-              intro-exists
-                ( lx , ly)
-                ( lx-in-lower-x ,
-                  ly-in-lower-y ,
-                  commutative-add-ℚ lx ly ∙ ly+lx=q))))
 ```
 
 ### Addition is associative
@@ -516,4 +517,14 @@ module _
                         ＝ lx +ℚ ly+lz by ap (lx +ℚ_) ly+lz=ly+lz
                         ＝ q by lx+ly+lz=q)))
                 ( ly+lz-in-lower-y+z))))
+```
+
+### Addition preserves similarity
+
+```agda
+left-sim-add-ℝ :
+  {l1 l2 l3 : Level} →
+  (x : ℝ l1) (x' : ℝ l2) (y : ℝ l3) →
+  sim-ℝ x x' →
+  sim-ℝ (x +ℝ y) (x' +ℝ y)
 ```
