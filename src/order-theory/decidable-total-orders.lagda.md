@@ -211,7 +211,7 @@ module _
       ( is-leq-or-strict-greater-Decidable-Total-Order T x y)
 ```
 
-### `min x y ≤ x`
+### The minimum is a lower bound
 
 ```agda
   leq-left-min-Decidable-Total-Order :
@@ -220,11 +220,7 @@ module _
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = refl-leq-Decidable-Total-Order T x
   ... | inr y<x = pr2 y<x
-```
 
-### `min x y ≤ y`
-
-```agda
   leq-right-min-Decidable-Total-Order :
     leq-Decidable-Total-Order T min-Decidable-Total-Order y
   leq-right-min-Decidable-Total-Order
@@ -233,7 +229,7 @@ module _
   ... | inr y<x = refl-leq-Decidable-Total-Order T y
 ```
 
-### `x ≤ max x y`
+### The maximum of two values is an upper bound
 
 ```agda
   leq-left-max-Decidable-Total-Order :
@@ -242,11 +238,7 @@ module _
     with is-leq-or-strict-greater-Decidable-Total-Order T x y
   ... | inl x≤y = x≤y
   ... | inr y<x = refl-leq-Decidable-Total-Order T x
-```
 
-### `y ≤ max x y`
-
-```agda
   leq-right-max-Decidable-Total-Order :
     leq-Decidable-Total-Order T y max-Decidable-Total-Order
   leq-right-max-Decidable-Total-Order
@@ -255,7 +247,7 @@ module _
   ... | inr y<x = pr2 y<x
 ```
 
-### `min` is commutative
+### The minimum operation is commutative
 
 ```agda
 module _
@@ -280,7 +272,7 @@ module _
         ( antisymmetric-leq-Decidable-Total-Order T x y (pr2 x<y) (pr2 y<x)))
 ```
 
-### `max` is commutative
+### The maximum operation is commutative
 
 ```agda
   commutative-max-Decidable-Total-Order :
@@ -299,7 +291,7 @@ module _
         ( antisymmetric-leq-Decidable-Total-Order T x y (pr2 x<y) (pr2 y<x)))
 ```
 
-### `min x y` is the greatest lower bound of `x` and `y`
+### The minimum of two values is their greatest lower bound
 
 ```agda
   min-is-greatest-binary-lower-bound-Decidable-Total-Order :
@@ -329,7 +321,7 @@ module _
     min-is-greatest-binary-lower-bound-Decidable-Total-Order
 ```
 
-### `max x y` is the least upper bound of `x` and `y`
+### The maximum of two values is their least upper bound
 
 ```agda
   max-is-least-binary-upper-bound-Decidable-Total-Order :
