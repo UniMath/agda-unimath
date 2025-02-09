@@ -13,6 +13,7 @@ open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.powersets
 open import foundation.subtypes
+open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
@@ -49,6 +50,74 @@ module _
 ```
 
 ## Properties
+
+### Minkowski multiplication of commutative monoid subsets is associative
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Commutative-Monoid l1)
+  (A : subset-Commutative-Monoid l2 M)
+  (B : subset-Commutative-Monoid l3 M)
+  (C : subset-Commutative-Monoid l4 M)
+  where
+
+  associative-minkowski-mul-Commutative-Monoid :
+    minkowski-mul-Commutative-Monoid
+      ( M)
+      ( minkowski-mul-Commutative-Monoid M A B)
+      ( C) ＝
+    minkowski-mul-Commutative-Monoid
+      ( M)
+      ( A)
+      ( minkowski-mul-Commutative-Monoid M B C)
+  associative-minkowski-mul-Commutative-Monoid =
+    associative-minkowski-mul-Monoid (monoid-Commutative-Monoid M) A B C
+```
+
+### Minkowski multiplication of commutative monoid subsets is unital
+
+```agda
+module _
+  {l1 l2 : Level}
+  (M : Commutative-Monoid l1)
+  (A : subset-Commutative-Monoid l2 M)
+  where
+
+  left-unit-law-minkowski-mul-Commutative-Monoid :
+    sim-subtype
+      ( minkowski-mul-Commutative-Monoid
+        ( M)
+        ( is-unit-prop-Commutative-Monoid M)
+        ( A))
+      ( A)
+  left-unit-law-minkowski-mul-Commutative-Monoid =
+    left-unit-law-minkowski-mul-Monoid (monoid-Commutative-Monoid M) A
+
+  right-unit-law-minkowski-mul-Commutative-Monoid :
+    sim-subtype
+      ( minkowski-mul-Commutative-Monoid
+        ( M)
+        ( A)
+        ( is-unit-prop-Commutative-Monoid M))
+      ( A)
+  right-unit-law-minkowski-mul-Commutative-Monoid =
+    right-unit-law-minkowski-mul-Monoid (monoid-Commutative-Monoid M) A
+```
+
+### Minkowski multiplication on a commutative monoid is unital
+
+```agda
+module _
+  {l : Level}
+  (M : Commutative-Monoid l)
+  where
+
+  is-unital-minkowski-mul-Commutative-Monoid :
+    is-unital (minkowski-mul-Commutative-Monoid {l} {l} {l} M)
+  is-unital-minkowski-mul-Commutative-Monoid =
+    is-unital-minkowski-mul-Monoid (monoid-Commutative-Monoid M)
+```
 
 ### Minkowski multiplication on a commutative monoid is commutative
 
