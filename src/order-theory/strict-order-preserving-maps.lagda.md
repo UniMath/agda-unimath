@@ -21,7 +21,11 @@ open import order-theory.strictly-ordered-types
 
 ## Idea
 
-Consider two [strictly ordered types](order-theory.strictly-ordered-types.md) $P$ and $Q$, with orderings $<_P$ and $<_Q$ respectively. A {{#concept "strict order preserving map" Agda=hom-Strictly-Ordered-Type}} consists of map $f : P → Q$ between their underlying types such that for any two elements $x<_P y$ in $P$ we have $f(x)<_Q f(y)$ in $Q$.
+Consider two [strictly ordered types](order-theory.strictly-ordered-types.md)
+$P$ and $Q$, with orderings $<_P$ and $<_Q$ respectively. A
+{{#concept "strict order preserving map" Agda=hom-Strictly-Ordered-Type}}
+consists of map $f : P → Q$ between their underlying types such that for any two
+elements $x<_P y$ in $P$ we have $f(x)<_Q f(y)$ in $Q$.
 
 ## Definitions
 

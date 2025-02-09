@@ -20,14 +20,20 @@ open import order-theory.strictly-ordered-types
 
 ## Idea
 
-A map $f : P → P$ on a [strictly ordered type](order-theory.strictly-ordered-types.md) $P$ is said to be an
-{{#concept "inflationary map" Disambiguation="strictly ordered type" Agda=inflationary-map-Strictly-Ordered-Type}} if the inequality
+A map $f : P → P$ on a
+[strictly ordered type](order-theory.strictly-ordered-types.md) $P$ is said to
+be an
+{{#concept "inflationary map" Disambiguation="strictly ordered type" Agda=inflationary-map-Strictly-Ordered-Type}}
+if the inequality
 
 $$
   x < f(x)
 $$
 
-holds for any element $x : P$. If $f$ is also [order preserving](order-theory.order-preserving-maps-strictly-ordered-types.md) we say that $f$ is an {{#concept "inflationary morphism" Disambiguation="strictly ordered type" Agda=inflationary-hom-Strictly-Ordered-Type}}.
+holds for any element $x : P$. If $f$ is also
+[order preserving](order-theory.order-preserving-maps-strictly-ordered-types.md)
+we say that $f$ is an
+{{#concept "inflationary morphism" Disambiguation="strictly ordered type" Agda=inflationary-hom-Strictly-Ordered-Type}}.
 
 ## Definitions
 

@@ -20,14 +20,19 @@ open import order-theory.preorders
 
 ## Idea
 
-A map $f : P → P$ on a [preorder](order-theory.preorders.md) $P$ is said to be an
-{{#concept "deflationary map" Disambiguation="preorder" Agda=deflationary-map-Preorder}} if the inequality
+A map $f : P → P$ on a [preorder](order-theory.preorders.md) $P$ is said to be
+an
+{{#concept "deflationary map" Disambiguation="preorder" Agda=deflationary-map-Preorder}}
+if the inequality
 
 $$
   f(x) \leq x
 $$
 
-holds for any element $x : P$. If $f$ is also [order preserving](order-theory.order-preserving-maps-preorders.md) we say that $f$ is an {{#concept "deflationary morphism" Disambiguation="preorder" Agda=deflationary-hom-Preorder}}.
+holds for any element $x : P$. If $f$ is also
+[order preserving](order-theory.order-preserving-maps-preorders.md) we say that
+$f$ is an
+{{#concept "deflationary morphism" Disambiguation="preorder" Agda=deflationary-hom-Preorder}}.
 
 ## Definitions
 
