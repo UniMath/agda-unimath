@@ -64,7 +64,8 @@ abstract
           ( is-finite-Prop (Σ A B))
           ( is-finite-count ∘ (count-Σ e)))
 
-Σ-Finite-Type : {l1 l2 : Level} (A : Finite-Type l1) (B : type-Finite-Type A → Finite-Type l2) → Finite-Type (l1 ⊔ l2)
+Σ-Finite-Type :
+  {l1 l2 : Level} (A : Finite-Type l1) (B : type-Finite-Type A → Finite-Type l2) → Finite-Type (l1 ⊔ l2)
 pr1 (Σ-Finite-Type A B) = Σ (type-Finite-Type A) (λ a → type-Finite-Type (B a))
 pr2 (Σ-Finite-Type A B) =
   is-finite-Σ

@@ -118,7 +118,8 @@ module _
   type-Finite-Group = type-Group group-Finite-Group
 
   is-finite-type-Finite-Group : is-finite type-Finite-Group
-  is-finite-type-Finite-Group = is-finite-type-Finite-Type finite-type-Finite-Group
+  is-finite-type-Finite-Group =
+    is-finite-type-Finite-Type finite-type-Finite-Group
 
   has-decidable-equality-Finite-Group : has-decidable-equality type-Finite-Group
   has-decidable-equality-Finite-Group =
@@ -227,12 +228,14 @@ module _
   is-section-left-div-Finite-Group :
     (x : type-Finite-Group) →
     ( mul-Finite-Group x ∘ mul-Finite-Group (inv-Finite-Group x)) ~ id
-  is-section-left-div-Finite-Group = is-section-left-div-Group group-Finite-Group
+  is-section-left-div-Finite-Group =
+    is-section-left-div-Group group-Finite-Group
 
   is-retraction-left-div-Finite-Group :
     (x : type-Finite-Group) →
     ( mul-Finite-Group (inv-Finite-Group x) ∘ mul-Finite-Group x) ~ id
-  is-retraction-left-div-Finite-Group = is-retraction-left-div-Group group-Finite-Group
+  is-retraction-left-div-Finite-Group =
+    is-retraction-left-div-Group group-Finite-Group
 
   is-equiv-mul-Finite-Group :
     (x : type-Finite-Group) → is-equiv (mul-Finite-Group x)
@@ -245,12 +248,14 @@ module _
   is-section-right-div-Finite-Group :
     (x : type-Finite-Group) →
     (mul-Finite-Group' x ∘ mul-Finite-Group' (inv-Finite-Group x)) ~ id
-  is-section-right-div-Finite-Group = is-section-right-div-Group group-Finite-Group
+  is-section-right-div-Finite-Group =
+    is-section-right-div-Group group-Finite-Group
 
   is-retraction-right-div-Finite-Group :
     (x : type-Finite-Group) →
     (mul-Finite-Group' (inv-Finite-Group x) ∘ mul-Finite-Group' x) ~ id
-  is-retraction-right-div-Finite-Group = is-retraction-right-div-Group group-Finite-Group
+  is-retraction-right-div-Finite-Group =
+    is-retraction-right-div-Group group-Finite-Group
 
   is-equiv-mul-Finite-Group' :
     (x : type-Finite-Group) → is-equiv (mul-Finite-Group' x)

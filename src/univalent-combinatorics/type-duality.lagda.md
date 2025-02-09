@@ -39,12 +39,12 @@ open import univalent-combinatorics.inhabited-finite-types
 ### Subtype duality
 
 ```agda
-equiv-surjection-𝔽-family-finite-inhabited-type :
+equiv-surjection-finite-type-family-finite-inhabited-type :
   {l : Level} (A : Finite-Type l) (B : Finite-Type l) →
   ( (type-Finite-Type A ↠ type-Finite-Type B) ≃
     ( Σ ( (type-Finite-Type B) → Inhabited-Finite-Type l)
         ( λ Y → (type-Finite-Type A) ≃ Σ (type-Finite-Type B) (λ b → type-Inhabited-Finite-Type (Y b)))))
-equiv-surjection-𝔽-family-finite-inhabited-type {l} A B =
+equiv-surjection-finite-type-family-finite-inhabited-type {l} A B =
   ( ( equiv-Σ
       ( λ Y → type-Finite-Type A ≃ Σ (type-Finite-Type B) (λ b → type-Inhabited-Finite-Type (Y b)))
       ( equiv-postcomp
@@ -77,8 +77,10 @@ equiv-surjection-𝔽-family-finite-inhabited-type {l} A B =
                     ( is-finite-type-Finite-Type A)
                     ( is-finite-type-Finite-Type B)))))))))
 
-Slice-Surjection-Finite-Type : (l : Level) {l1 : Level} (A : Finite-Type l1) → UU (lsuc l ⊔ l1)
-Slice-Surjection-Finite-Type l A = Σ (Finite-Type l) (λ X → (type-Finite-Type X) ↠ type-Finite-Type A)
+Slice-Surjection-Finite-Type :
+  (l : Level) {l1 : Level} (A : Finite-Type l1) → UU (lsuc l ⊔ l1)
+Slice-Surjection-Finite-Type l A =
+  Σ (Finite-Type l) (λ X → (type-Finite-Type X) ↠ type-Finite-Type A)
 
 equiv-Fiber-trunc-prop-Finite-Type :
   (l : Level) {l1 : Level} (A : Finite-Type l1) →

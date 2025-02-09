@@ -73,9 +73,11 @@ is-finite-eq-is-finite H = is-finite-eq (has-decidable-equality-is-finite H)
 
 is-finite-eq-Finite-Type :
   {l : Level} → (X : Finite-Type l) {x y : type-Finite-Type X} → is-finite (x ＝ y)
-is-finite-eq-Finite-Type X = is-finite-eq-is-finite (is-finite-type-Finite-Type X)
+is-finite-eq-Finite-Type X =
+  is-finite-eq-is-finite (is-finite-type-Finite-Type X)
 
-Id-Finite-Type : {l : Level} → (X : Finite-Type l) (x y : type-Finite-Type X) → Finite-Type l
+Id-Finite-Type :
+  {l : Level} → (X : Finite-Type l) (x y : type-Finite-Type X) → Finite-Type l
 pr1 (Id-Finite-Type X x y) = Id x y
 pr2 (Id-Finite-Type X x y) = is-finite-eq-Finite-Type X
 ```

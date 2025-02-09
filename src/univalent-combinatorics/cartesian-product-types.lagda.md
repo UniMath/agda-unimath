@@ -140,7 +140,8 @@ abstract
           ( is-finite-Prop (X × Y))
           ( is-finite-count ∘ (count-product e)))
 
-product-Finite-Type : {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
+product-Finite-Type :
+  {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
 pr1 (product-Finite-Type X Y) = (type-Finite-Type X) × (type-Finite-Type Y)
 pr2 (product-Finite-Type X Y) =
   is-finite-product (is-finite-type-Finite-Type X) (is-finite-type-Finite-Type Y)

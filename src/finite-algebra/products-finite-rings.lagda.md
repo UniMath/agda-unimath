@@ -40,10 +40,12 @@ module _
   where
 
   set-product-Finite-Ring : Set (l1 ⊔ l2)
-  set-product-Finite-Ring = set-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+  set-product-Finite-Ring =
+    set-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   type-product-Finite-Ring : UU (l1 ⊔ l2)
-  type-product-Finite-Ring = type-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+  type-product-Finite-Ring =
+    type-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   is-set-type-product-Finite-Ring : is-set type-product-Finite-Ring
   is-set-type-product-Finite-Ring =
@@ -59,13 +61,16 @@ module _
 
   add-product-Finite-Ring :
     type-product-Finite-Ring → type-product-Finite-Ring → type-product-Finite-Ring
-  add-product-Finite-Ring = add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+  add-product-Finite-Ring =
+    add-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   zero-product-Finite-Ring : type-product-Finite-Ring
-  zero-product-Finite-Ring = zero-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+  zero-product-Finite-Ring =
+    zero-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   neg-product-Finite-Ring : type-product-Finite-Ring → type-product-Finite-Ring
-  neg-product-Finite-Ring = neg-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+  neg-product-Finite-Ring =
+    neg-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   left-unit-law-add-product-Finite-Ring :
     (x : type-product-Finite-Ring) → Id (add-product-Finite-Ring zero-product-Finite-Ring x) x
@@ -105,10 +110,12 @@ module _
 
   mul-product-Finite-Ring :
     type-product-Finite-Ring → type-product-Finite-Ring → type-product-Finite-Ring
-  mul-product-Finite-Ring = mul-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+  mul-product-Finite-Ring =
+    mul-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   one-product-Finite-Ring : type-product-Finite-Ring
-  one-product-Finite-Ring = one-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+  one-product-Finite-Ring =
+    one-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   associative-mul-product-Finite-Ring :
     (x y z : type-product-Finite-Ring) →
@@ -149,13 +156,16 @@ module _
     semigroup-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   group-product-Finite-Ring : Group (l1 ⊔ l2)
-  group-product-Finite-Ring = group-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+  group-product-Finite-Ring =
+    group-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   ab-product-Finite-Ring : Ab (l1 ⊔ l2)
-  ab-product-Finite-Ring = ab-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+  ab-product-Finite-Ring =
+    ab-product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   ring-product-Finite-Ring : Ring (l1 ⊔ l2)
-  ring-product-Finite-Ring = product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
+  ring-product-Finite-Ring =
+    product-Ring (ring-Finite-Ring R1) (ring-Finite-Ring R2)
 
   product-Finite-Ring : Finite-Ring (l1 ⊔ l2)
   product-Finite-Ring =

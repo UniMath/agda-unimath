@@ -39,7 +39,8 @@ A homomorphism between two finite species is a pointwise family of maps.
 hom-finite-species :
   {l1 l2 l3 : Level} → finite-species l1 l2 → finite-species l1 l3 →
   UU (lsuc l1 ⊔ l2 ⊔ l3)
-hom-finite-species {l1} F G = (X : Finite-Type l1) → type-Finite-Type (F X) → type-Finite-Type (G X)
+hom-finite-species {l1} F G =
+  (X : Finite-Type l1) → type-Finite-Type (F X) → type-Finite-Type (G X)
 ```
 
 ### The identity morphisms of finite species

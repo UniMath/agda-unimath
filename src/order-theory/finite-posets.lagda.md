@@ -57,7 +57,8 @@ Finite-Poset l1 l2 =
   Σ ( Finite-Preorder l1 l2)
     ( λ P → is-antisymmetric-leq-Preorder (preorder-Finite-Preorder P))
 
-finite-preorder-Finite-Poset : {l1 l2 : Level} → Finite-Poset l1 l2 → Finite-Preorder l1 l2
+finite-preorder-Finite-Poset :
+  {l1 l2 : Level} → Finite-Poset l1 l2 → Finite-Preorder l1 l2
 finite-preorder-Finite-Poset = pr1
 
 preorder-Finite-Poset : {l1 l2 : Level} → Finite-Poset l1 l2 → Preorder l1 l2

@@ -19,7 +19,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-{{#concept "Dedekind finite sets" Agda=set-Finite-Type-Dedekind}} are
+{{#concept "Dedekind finite sets" Agda=set-Dedekind-Finite-Set}} are
 [sets](foundation-core.sets.md) `X` with the
 [property](foundation-core.propositions.md) that every
 [embedding](foundation-core.embeddings.md) `X ↪ X` is an
@@ -37,24 +37,25 @@ is-dedekind-finite-set-Prop X =
 is-dedekind-finite-set : {l : Level} → Set l → UU l
 is-dedekind-finite-set X = type-Prop (is-dedekind-finite-set-Prop X)
 
-𝔽-Dedekind : (l : Level) → UU (lsuc l)
-𝔽-Dedekind l = Σ (Set l) is-dedekind-finite-set
+Dedekind-Finite-Set : (l : Level) → UU (lsuc l)
+Dedekind-Finite-Set l = Σ (Set l) is-dedekind-finite-set
 
 module _
-  {l : Level} (X : 𝔽-Dedekind l)
+  {l : Level} (X : Dedekind-Finite-Set l)
   where
 
-  set-Finite-Type-Dedekind : Set l
-  set-Finite-Type-Dedekind = pr1 X
+  set-Dedekind-Finite-Set : Set l
+  set-Dedekind-Finite-Set = pr1 X
 
-  type-𝔽-Dedekind : UU l
-  type-𝔽-Dedekind = type-Set set-Finite-Type-Dedekind
+  type-Dedekind-Finite-Set : UU l
+  type-Dedekind-Finite-Set = type-Set set-Dedekind-Finite-Set
 
-  is-set-type-𝔽-Dedekind : is-set type-𝔽-Dedekind
-  is-set-type-𝔽-Dedekind = is-set-type-Set set-Finite-Type-Dedekind
+  is-set-type-Dedekind-Finite-Set : is-set type-Dedekind-Finite-Set
+  is-set-type-Dedekind-Finite-Set = is-set-type-Set set-Dedekind-Finite-Set
 
-  is-dedekind-finite-set-Finite-Type-Dedekind : is-dedekind-finite-set set-Finite-Type-Dedekind
-  is-dedekind-finite-set-Finite-Type-Dedekind = pr2 X
+  is-dedekind-finite-set-Dedekind-Finite-Set :
+    is-dedekind-finite-set set-Dedekind-Finite-Set
+  is-dedekind-finite-set-Dedekind-Finite-Set = pr2 X
 ```
 
 ## See also

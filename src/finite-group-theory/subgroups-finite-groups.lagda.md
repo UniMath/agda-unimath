@@ -92,7 +92,8 @@ module _
       ( group-Finite-Group G)
       ( P)
 
-  is-closed-under-multiplication-prop-decidable-subset-Finite-Group : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-prop-decidable-subset-Finite-Group :
+    Prop (l1 ⊔ l2)
   is-closed-under-multiplication-prop-decidable-subset-Finite-Group =
     is-closed-under-multiplication-prop-decidable-subset-Group
       ( group-Finite-Group G)
@@ -157,12 +158,14 @@ module _
   {l1 l2 : Level} (G : Finite-Group l1) (H : Subgroup-Finite-Group l2 G)
   where
 
-  decidable-subset-Subgroup-Finite-Group : decidable-subset-Group l2 (group-Finite-Group G)
+  decidable-subset-Subgroup-Finite-Group :
+    decidable-subset-Group l2 (group-Finite-Group G)
   decidable-subset-Subgroup-Finite-Group =
     decidable-subset-Decidable-Subgroup (group-Finite-Group G) H
 
   subset-Subgroup-Finite-Group : subset-Group l2 (group-Finite-Group G)
-  subset-Subgroup-Finite-Group = subset-Decidable-Subgroup (group-Finite-Group G) H
+  subset-Subgroup-Finite-Group =
+    subset-Decidable-Subgroup (group-Finite-Group G) H
 
   is-subgroup-subset-Subgroup-Finite-Group :
     is-subgroup-subset-Group (group-Finite-Group G) subset-Subgroup-Finite-Group
@@ -170,7 +173,8 @@ module _
     is-subgroup-subset-Decidable-Subgroup (group-Finite-Group G) H
 
   subgroup-Subgroup-Finite-Group : Subgroup l2 (group-Finite-Group G)
-  subgroup-Subgroup-Finite-Group = subgroup-Decidable-Subgroup (group-Finite-Group G) H
+  subgroup-Subgroup-Finite-Group =
+    subgroup-Decidable-Subgroup (group-Finite-Group G) H
 
   type-Subgroup-Finite-Group : UU (l1 ⊔ l2)
   type-Subgroup-Finite-Group = type-Decidable-Subgroup (group-Finite-Group G) H
@@ -183,19 +187,24 @@ module _
   finite-type-Subgroup-Finite-Group =
     finite-type-subset-Finite-Type (finite-type-Finite-Group G) decidable-subset-Subgroup-Finite-Group
 
-  inclusion-Subgroup-Finite-Group : type-Subgroup-Finite-Group → type-Finite-Group G
-  inclusion-Subgroup-Finite-Group = inclusion-Decidable-Subgroup (group-Finite-Group G) H
+  inclusion-Subgroup-Finite-Group :
+    type-Subgroup-Finite-Group → type-Finite-Group G
+  inclusion-Subgroup-Finite-Group =
+    inclusion-Decidable-Subgroup (group-Finite-Group G) H
 
-  is-emb-inclusion-Subgroup-Finite-Group : is-emb inclusion-Subgroup-Finite-Group
+  is-emb-inclusion-Subgroup-Finite-Group :
+    is-emb inclusion-Subgroup-Finite-Group
   is-emb-inclusion-Subgroup-Finite-Group =
     is-emb-inclusion-Decidable-Subgroup (group-Finite-Group G) H
 
-  emb-inclusion-Subgroup-Finite-Group : type-Subgroup-Finite-Group ↪ type-Finite-Group G
+  emb-inclusion-Subgroup-Finite-Group :
+    type-Subgroup-Finite-Group ↪ type-Finite-Group G
   emb-inclusion-Subgroup-Finite-Group =
     emb-inclusion-Decidable-Subgroup (group-Finite-Group G) H
 
   is-in-Subgroup-Finite-Group : type-Finite-Group G → UU l2
-  is-in-Subgroup-Finite-Group = is-in-Decidable-Subgroup (group-Finite-Group G) H
+  is-in-Subgroup-Finite-Group =
+    is-in-Decidable-Subgroup (group-Finite-Group G) H
 
   is-in-subgroup-inclusion-Subgroup-Finite-Group :
     (x : type-Subgroup-Finite-Group) → is-in-Subgroup-Finite-Group (inclusion-Subgroup-Finite-Group x)
@@ -243,11 +252,13 @@ module _
 
   map-inclusion-group-Subgroup-Finite-Group :
     type-group-Subgroup-Finite-Group → type-Finite-Group G
-  map-inclusion-group-Subgroup-Finite-Group = inclusion-Subgroup-Finite-Group G H
+  map-inclusion-group-Subgroup-Finite-Group =
+    inclusion-Subgroup-Finite-Group G H
 
   is-emb-inclusion-group-Subgroup-Finite-Group :
     is-emb map-inclusion-group-Subgroup-Finite-Group
-  is-emb-inclusion-group-Subgroup-Finite-Group = is-emb-inclusion-Subgroup-Finite-Group G H
+  is-emb-inclusion-group-Subgroup-Finite-Group =
+    is-emb-inclusion-Subgroup-Finite-Group G H
 
   eq-subgroup-eq-Finite-Group :
     {x y : type-Subgroup-Finite-Group G H} →
@@ -256,9 +267,11 @@ module _
     eq-decidable-subgroup-eq-group (group-Finite-Group G) H
 
   set-group-Subgroup-Finite-Group : Set (l1 ⊔ l2)
-  set-group-Subgroup-Finite-Group = set-group-Decidable-Subgroup (group-Finite-Group G) H
+  set-group-Subgroup-Finite-Group =
+    set-group-Decidable-Subgroup (group-Finite-Group G) H
 
-  mul-Subgroup-Finite-Group : (x y : type-Subgroup-Finite-Group G H) → type-Subgroup-Finite-Group G H
+  mul-Subgroup-Finite-Group :
+    (x y : type-Subgroup-Finite-Group G H) → type-Subgroup-Finite-Group G H
   mul-Subgroup-Finite-Group = mul-Decidable-Subgroup (group-Finite-Group G) H
 
   associative-mul-Subgroup-Finite-Group :
@@ -281,7 +294,8 @@ module _
   right-unit-law-mul-Subgroup-Finite-Group =
     right-unit-law-mul-Decidable-Subgroup (group-Finite-Group G) H
 
-  inv-Subgroup-Finite-Group : type-Subgroup-Finite-Group G H → type-Subgroup-Finite-Group G H
+  inv-Subgroup-Finite-Group :
+    type-Subgroup-Finite-Group G H → type-Subgroup-Finite-Group G H
   inv-Subgroup-Finite-Group = inv-Decidable-Subgroup (group-Finite-Group G) H
 
   left-inverse-law-mul-Subgroup-Finite-Group :
@@ -297,15 +311,21 @@ module _
     right-inverse-law-mul-Decidable-Subgroup (group-Finite-Group G) H
 
   finite-semigroup-Subgroup-Finite-Group : Finite-Semigroup (l1 ⊔ l2)
-  pr1 finite-semigroup-Subgroup-Finite-Group = finite-type-Subgroup-Finite-Group G H
+  pr1 finite-semigroup-Subgroup-Finite-Group =
+    finite-type-Subgroup-Finite-Group G H
   pr1 (pr2 finite-semigroup-Subgroup-Finite-Group) = mul-Subgroup-Finite-Group
-  pr2 (pr2 finite-semigroup-Subgroup-Finite-Group) = associative-mul-Subgroup-Finite-Group
+  pr2 (pr2 finite-semigroup-Subgroup-Finite-Group) =
+    associative-mul-Subgroup-Finite-Group
 
   finite-group-Subgroup-Finite-Group : Finite-Group (l1 ⊔ l2)
-  pr1 finite-group-Subgroup-Finite-Group = finite-semigroup-Subgroup-Finite-Group
-  pr1 (pr1 (pr2 finite-group-Subgroup-Finite-Group)) = unit-Subgroup-Finite-Group
-  pr1 (pr2 (pr1 (pr2 finite-group-Subgroup-Finite-Group))) = left-unit-law-mul-Subgroup-Finite-Group
-  pr2 (pr2 (pr1 (pr2 finite-group-Subgroup-Finite-Group))) = right-unit-law-mul-Subgroup-Finite-Group
+  pr1 finite-group-Subgroup-Finite-Group =
+    finite-semigroup-Subgroup-Finite-Group
+  pr1 (pr1 (pr2 finite-group-Subgroup-Finite-Group)) =
+    unit-Subgroup-Finite-Group
+  pr1 (pr2 (pr1 (pr2 finite-group-Subgroup-Finite-Group))) =
+    left-unit-law-mul-Subgroup-Finite-Group
+  pr2 (pr2 (pr1 (pr2 finite-group-Subgroup-Finite-Group))) =
+    right-unit-law-mul-Subgroup-Finite-Group
   pr1 (pr2 (pr2 finite-group-Subgroup-Finite-Group)) = inv-Subgroup-Finite-Group
   pr1 (pr2 (pr2 (pr2 finite-group-Subgroup-Finite-Group))) =
     left-inverse-law-mul-Subgroup-Finite-Group
@@ -319,7 +339,8 @@ semigroup-Subgroup-Finite-Group G H =
 
 group-Subgroup-Finite-Group :
   {l1 l2 : Level} (G : Finite-Group l1) → Subgroup-Finite-Group l2 G → Group (l1 ⊔ l2)
-group-Subgroup-Finite-Group G H = group-Finite-Group (finite-group-Subgroup-Finite-Group G H)
+group-Subgroup-Finite-Group G H =
+  group-Finite-Group (finite-group-Subgroup-Finite-Group G H)
 ```
 
 ### The inclusion homomorphism of the underlying finite group of a finite subgroup into the ambient group
@@ -389,7 +410,8 @@ module _
   where
 
   right-sim-Subgroup-Finite-Group : (x y : type-Finite-Group G) → UU l2
-  right-sim-Subgroup-Finite-Group = right-sim-Decidable-Subgroup (group-Finite-Group G) H
+  right-sim-Subgroup-Finite-Group =
+    right-sim-Decidable-Subgroup (group-Finite-Group G) H
 
   is-prop-right-sim-Subgroup-Finite-Group :
     (x y : type-Finite-Group G) → is-prop (right-sim-Subgroup-Finite-Group x y)
@@ -401,15 +423,18 @@ module _
   prop-right-equivalence-relation-Subgroup-Finite-Group =
     prop-right-equivalence-relation-Decidable-Subgroup (group-Finite-Group G) H
 
-  refl-right-sim-Subgroup-Finite-Group : is-reflexive right-sim-Subgroup-Finite-Group
+  refl-right-sim-Subgroup-Finite-Group :
+    is-reflexive right-sim-Subgroup-Finite-Group
   refl-right-sim-Subgroup-Finite-Group =
     refl-right-sim-Decidable-Subgroup (group-Finite-Group G) H
 
-  symmetric-right-sim-Subgroup-Finite-Group : is-symmetric right-sim-Subgroup-Finite-Group
+  symmetric-right-sim-Subgroup-Finite-Group :
+    is-symmetric right-sim-Subgroup-Finite-Group
   symmetric-right-sim-Subgroup-Finite-Group =
     symmetric-right-sim-Decidable-Subgroup (group-Finite-Group G) H
 
-  transitive-right-sim-Subgroup-Finite-Group : is-transitive right-sim-Subgroup-Finite-Group
+  transitive-right-sim-Subgroup-Finite-Group :
+    is-transitive right-sim-Subgroup-Finite-Group
   transitive-right-sim-Subgroup-Finite-Group =
     transitive-right-sim-Decidable-Subgroup (group-Finite-Group G) H
 
@@ -427,26 +452,31 @@ module _
   where
 
   left-sim-Subgroup-Finite-Group : (x y : type-Finite-Group G) → UU l2
-  left-sim-Subgroup-Finite-Group = left-sim-Decidable-Subgroup (group-Finite-Group G) H
+  left-sim-Subgroup-Finite-Group =
+    left-sim-Decidable-Subgroup (group-Finite-Group G) H
 
   is-prop-left-sim-Subgroup-Finite-Group :
     (x y : type-Finite-Group G) → is-prop (left-sim-Subgroup-Finite-Group x y)
   is-prop-left-sim-Subgroup-Finite-Group =
     is-prop-left-sim-Decidable-Subgroup (group-Finite-Group G) H
 
-  prop-left-equivalence-relation-Subgroup-Finite-Group : (x y : type-Finite-Group G) → Prop l2
+  prop-left-equivalence-relation-Subgroup-Finite-Group :
+    (x y : type-Finite-Group G) → Prop l2
   prop-left-equivalence-relation-Subgroup-Finite-Group =
     prop-left-equivalence-relation-Decidable-Subgroup (group-Finite-Group G) H
 
-  refl-left-sim-Subgroup-Finite-Group : is-reflexive left-sim-Subgroup-Finite-Group
+  refl-left-sim-Subgroup-Finite-Group :
+    is-reflexive left-sim-Subgroup-Finite-Group
   refl-left-sim-Subgroup-Finite-Group =
     refl-left-sim-Decidable-Subgroup (group-Finite-Group G) H
 
-  symmetric-left-sim-Subgroup-Finite-Group : is-symmetric left-sim-Subgroup-Finite-Group
+  symmetric-left-sim-Subgroup-Finite-Group :
+    is-symmetric left-sim-Subgroup-Finite-Group
   symmetric-left-sim-Subgroup-Finite-Group =
     symmetric-left-sim-Decidable-Subgroup (group-Finite-Group G) H
 
-  transitive-left-sim-Subgroup-Finite-Group : is-transitive left-sim-Subgroup-Finite-Group
+  transitive-left-sim-Subgroup-Finite-Group :
+    is-transitive left-sim-Subgroup-Finite-Group
   transitive-left-sim-Subgroup-Finite-Group =
     transitive-left-sim-Decidable-Subgroup (group-Finite-Group G) H
 

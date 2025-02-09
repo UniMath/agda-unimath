@@ -454,8 +454,10 @@ abstract
         ( has-finite-cardinality-is-finite H)
         ( has-finite-cardinality-is-finite K))
 
-binomial-type-Finite-Type : {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
-pr1 (binomial-type-Finite-Type A B) = small-binomial-type (type-Finite-Type A) (type-Finite-Type B)
+binomial-type-Finite-Type :
+  {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → Finite-Type (l1 ⊔ l2)
+pr1 (binomial-type-Finite-Type A B) =
+  small-binomial-type (type-Finite-Type A) (type-Finite-Type B)
 pr2 (binomial-type-Finite-Type A B) =
   is-finite-equiv
     ( compute-small-binomial-type (type-Finite-Type A) (type-Finite-Type B))

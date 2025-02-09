@@ -86,20 +86,24 @@ module _
   finite-ring-Finite-Commutative-Ring = pr1 A
 
   ring-Finite-Commutative-Ring : Ring l
-  ring-Finite-Commutative-Ring = ring-Finite-Ring (finite-ring-Finite-Commutative-Ring)
+  ring-Finite-Commutative-Ring =
+    ring-Finite-Ring (finite-ring-Finite-Commutative-Ring)
 
   commutative-ring-Finite-Commutative-Ring : Commutative-Ring l
   pr1 commutative-ring-Finite-Commutative-Ring = ring-Finite-Commutative-Ring
   pr2 commutative-ring-Finite-Commutative-Ring = pr2 A
 
   ab-Finite-Commutative-Ring : Ab l
-  ab-Finite-Commutative-Ring = ab-Finite-Ring finite-ring-Finite-Commutative-Ring
+  ab-Finite-Commutative-Ring =
+    ab-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   set-Finite-Commutative-Ring : Set l
-  set-Finite-Commutative-Ring = set-Finite-Ring finite-ring-Finite-Commutative-Ring
+  set-Finite-Commutative-Ring =
+    set-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   type-Finite-Commutative-Ring : UU l
-  type-Finite-Commutative-Ring = type-Finite-Ring finite-ring-Finite-Commutative-Ring
+  type-Finite-Commutative-Ring =
+    type-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   is-set-type-Finite-Commutative-Ring : is-set type-Finite-Commutative-Ring
   is-set-type-Finite-Commutative-Ring =
@@ -109,7 +113,8 @@ module _
   finite-type-Finite-Commutative-Ring =
     finite-type-Finite-Ring finite-ring-Finite-Commutative-Ring
 
-  is-finite-type-Finite-Commutative-Ring : is-finite (type-Finite-Commutative-Ring)
+  is-finite-type-Finite-Commutative-Ring :
+    is-finite (type-Finite-Commutative-Ring)
   is-finite-type-Finite-Commutative-Ring =
     is-finite-type-Finite-Ring finite-ring-Finite-Commutative-Ring
 ```
@@ -124,17 +129,20 @@ module _
 
   add-Finite-Commutative-Ring :
     type-Finite-Commutative-Ring → type-Finite-Commutative-Ring → type-Finite-Commutative-Ring
-  add-Finite-Commutative-Ring = add-Finite-Ring finite-ring-Finite-Commutative-Ring
+  add-Finite-Commutative-Ring =
+    add-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   add-Finite-Commutative-Ring' :
     type-Finite-Commutative-Ring → type-Finite-Commutative-Ring → type-Finite-Commutative-Ring
-  add-Finite-Commutative-Ring' = add-Finite-Ring' finite-ring-Finite-Commutative-Ring
+  add-Finite-Commutative-Ring' =
+    add-Finite-Ring' finite-ring-Finite-Commutative-Ring
 
   ap-add-Finite-Commutative-Ring :
     {x x' y y' : type-Finite-Commutative-Ring} →
     (x ＝ x') → (y ＝ y') →
     add-Finite-Commutative-Ring x y ＝ add-Finite-Commutative-Ring x' y'
-  ap-add-Finite-Commutative-Ring = ap-add-Finite-Ring finite-ring-Finite-Commutative-Ring
+  ap-add-Finite-Commutative-Ring =
+    ap-add-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   associative-add-Finite-Commutative-Ring :
     (x y z : type-Finite-Commutative-Ring) →
@@ -144,7 +152,8 @@ module _
     associative-add-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   additive-semigroup-Finite-Commutative-Ring : Semigroup l
-  additive-semigroup-Finite-Commutative-Ring = semigroup-Ab ab-Finite-Commutative-Ring
+  additive-semigroup-Finite-Commutative-Ring =
+    semigroup-Ab ab-Finite-Commutative-Ring
 
   is-group-additive-semigroup-Finite-Commutative-Ring :
     is-group-Semigroup additive-semigroup-Finite-Commutative-Ring
@@ -154,7 +163,8 @@ module _
   commutative-add-Finite-Commutative-Ring :
     (x y : type-Finite-Commutative-Ring) →
     Id (add-Finite-Commutative-Ring x y) (add-Finite-Commutative-Ring y x)
-  commutative-add-Finite-Commutative-Ring = commutative-add-Ab ab-Finite-Commutative-Ring
+  commutative-add-Finite-Commutative-Ring =
+    commutative-add-Ab ab-Finite-Commutative-Ring
 
   interchange-add-add-Finite-Commutative-Ring :
     (x y x' y' : type-Finite-Commutative-Ring) →
@@ -183,18 +193,23 @@ module _
 
   is-equiv-add-Finite-Commutative-Ring :
     (x : type-Finite-Commutative-Ring) → is-equiv (add-Finite-Commutative-Ring x)
-  is-equiv-add-Finite-Commutative-Ring = is-equiv-add-Ab ab-Finite-Commutative-Ring
+  is-equiv-add-Finite-Commutative-Ring =
+    is-equiv-add-Ab ab-Finite-Commutative-Ring
 
   is-equiv-add-Finite-Commutative-Ring' :
     (x : type-Finite-Commutative-Ring) → is-equiv (add-Finite-Commutative-Ring' x)
-  is-equiv-add-Finite-Commutative-Ring' = is-equiv-add-Ab' ab-Finite-Commutative-Ring
+  is-equiv-add-Finite-Commutative-Ring' =
+    is-equiv-add-Ab' ab-Finite-Commutative-Ring
 
   is-binary-equiv-add-Finite-Commutative-Ring :
     is-binary-equiv add-Finite-Commutative-Ring
-  pr1 is-binary-equiv-add-Finite-Commutative-Ring = is-equiv-add-Finite-Commutative-Ring'
-  pr2 is-binary-equiv-add-Finite-Commutative-Ring = is-equiv-add-Finite-Commutative-Ring
+  pr1 is-binary-equiv-add-Finite-Commutative-Ring =
+    is-equiv-add-Finite-Commutative-Ring'
+  pr2 is-binary-equiv-add-Finite-Commutative-Ring =
+    is-equiv-add-Finite-Commutative-Ring
 
-  is-binary-emb-add-Finite-Commutative-Ring : is-binary-emb add-Finite-Commutative-Ring
+  is-binary-emb-add-Finite-Commutative-Ring :
+    is-binary-emb add-Finite-Commutative-Ring
   is-binary-emb-add-Finite-Commutative-Ring =
     is-binary-emb-add-Ab ab-Finite-Commutative-Ring
 
@@ -204,7 +219,8 @@ module _
 
   is-emb-add-Finite-Commutative-Ring' :
     (x : type-Finite-Commutative-Ring) → is-emb (add-Finite-Commutative-Ring' x)
-  is-emb-add-Finite-Commutative-Ring' = is-emb-add-Ab' ab-Finite-Commutative-Ring
+  is-emb-add-Finite-Commutative-Ring' =
+    is-emb-add-Ab' ab-Finite-Commutative-Ring
 
   is-injective-add-Finite-Commutative-Ring :
     (x : type-Finite-Commutative-Ring) → is-injective (add-Finite-Commutative-Ring x)
@@ -221,13 +237,16 @@ module _
 
 ```agda
   has-zero-Finite-Commutative-Ring : is-unital add-Finite-Commutative-Ring
-  has-zero-Finite-Commutative-Ring = has-zero-Finite-Ring finite-ring-Finite-Commutative-Ring
+  has-zero-Finite-Commutative-Ring =
+    has-zero-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   zero-Finite-Commutative-Ring : type-Finite-Commutative-Ring
-  zero-Finite-Commutative-Ring = zero-Finite-Ring finite-ring-Finite-Commutative-Ring
+  zero-Finite-Commutative-Ring =
+    zero-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   is-zero-Finite-Commutative-Ring : type-Finite-Commutative-Ring → UU l
-  is-zero-Finite-Commutative-Ring = is-zero-Finite-Ring finite-ring-Finite-Commutative-Ring
+  is-zero-Finite-Commutative-Ring =
+    is-zero-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   is-nonzero-Finite-Commutative-Ring : type-Finite-Commutative-Ring → UU l
   is-nonzero-Finite-Commutative-Ring =
@@ -237,7 +256,8 @@ module _
   is-zero-commutative-finite-ring-Prop =
     is-zero-commutative-ring-Prop commutative-ring-Finite-Commutative-Ring
 
-  is-nonzero-commutative-finite-ring-Prop : type-Finite-Commutative-Ring → Prop l
+  is-nonzero-commutative-finite-ring-Prop :
+    type-Finite-Commutative-Ring → Prop l
   is-nonzero-commutative-finite-ring-Prop =
     is-nonzero-commutative-ring-Prop commutative-ring-Finite-Commutative-Ring
 
@@ -261,10 +281,13 @@ module _
     is-group-is-unital-Semigroup
       ( additive-semigroup-Finite-Commutative-Ring)
       ( has-zero-Finite-Commutative-Ring)
-  has-negatives-Finite-Commutative-Ring = has-negatives-Ab ab-Finite-Commutative-Ring
+  has-negatives-Finite-Commutative-Ring =
+    has-negatives-Ab ab-Finite-Commutative-Ring
 
-  neg-Finite-Commutative-Ring : type-Finite-Commutative-Ring → type-Finite-Commutative-Ring
-  neg-Finite-Commutative-Ring = neg-Finite-Ring finite-ring-Finite-Commutative-Ring
+  neg-Finite-Commutative-Ring :
+    type-Finite-Commutative-Ring → type-Finite-Commutative-Ring
+  neg-Finite-Commutative-Ring =
+    neg-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   left-inverse-law-add-Finite-Commutative-Ring :
     (x : type-Finite-Commutative-Ring) →
@@ -303,11 +326,13 @@ module _
 
   mul-Finite-Commutative-Ring :
     (x y : type-Finite-Commutative-Ring) → type-Finite-Commutative-Ring
-  mul-Finite-Commutative-Ring = mul-Finite-Ring finite-ring-Finite-Commutative-Ring
+  mul-Finite-Commutative-Ring =
+    mul-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   mul-Finite-Commutative-Ring' :
     (x y : type-Finite-Commutative-Ring) → type-Finite-Commutative-Ring
-  mul-Finite-Commutative-Ring' = mul-Finite-Ring' finite-ring-Finite-Commutative-Ring
+  mul-Finite-Commutative-Ring' =
+    mul-Finite-Ring' finite-ring-Finite-Commutative-Ring
 
   ap-mul-Finite-Commutative-Ring :
     {x x' y y' : type-Finite-Commutative-Ring} (p : Id x x') (q : Id y y') →
@@ -322,7 +347,8 @@ module _
     associative-mul-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   multiplicative-semigroup-Finite-Commutative-Ring : Semigroup l
-  pr1 multiplicative-semigroup-Finite-Commutative-Ring = set-Finite-Commutative-Ring
+  pr1 multiplicative-semigroup-Finite-Commutative-Ring =
+    set-Finite-Commutative-Ring
   pr2 multiplicative-semigroup-Finite-Commutative-Ring =
     has-associative-mul-Finite-Commutative-Ring
 
@@ -354,14 +380,16 @@ module _
 
 ```agda
   is-unital-Finite-Commutative-Ring : is-unital mul-Finite-Commutative-Ring
-  is-unital-Finite-Commutative-Ring = is-unital-Finite-Ring finite-ring-Finite-Commutative-Ring
+  is-unital-Finite-Commutative-Ring =
+    is-unital-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   multiplicative-monoid-Finite-Commutative-Ring : Monoid l
   multiplicative-monoid-Finite-Commutative-Ring =
     multiplicative-monoid-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   one-Finite-Commutative-Ring : type-Finite-Commutative-Ring
-  one-Finite-Commutative-Ring = one-Finite-Ring finite-ring-Finite-Commutative-Ring
+  one-Finite-Commutative-Ring =
+    one-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   left-unit-law-mul-Finite-Commutative-Ring :
     (x : type-Finite-Commutative-Ring) →
@@ -433,7 +461,8 @@ module _
 ### Commutative rings are commutative finite semirings
 
 ```agda
-  multiplicative-commutative-monoid-Finite-Commutative-Ring : Commutative-Monoid l
+  multiplicative-commutative-monoid-Finite-Commutative-Ring :
+    Commutative-Monoid l
   pr1 multiplicative-commutative-monoid-Finite-Commutative-Ring =
     multiplicative-monoid-Finite-Ring finite-ring-Finite-Commutative-Ring
   pr2 multiplicative-commutative-monoid-Finite-Commutative-Ring =
@@ -454,7 +483,8 @@ module _
 
 ```agda
   neg-one-Finite-Commutative-Ring : type-Finite-Commutative-Ring
-  neg-one-Finite-Commutative-Ring = neg-one-Finite-Ring finite-ring-Finite-Commutative-Ring
+  neg-one-Finite-Commutative-Ring =
+    neg-one-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   mul-neg-one-Finite-Commutative-Ring :
     (x : type-Finite-Commutative-Ring) →
@@ -504,7 +534,8 @@ module _
       ( neg-Finite-Commutative-Ring x)
       ( neg-Finite-Commutative-Ring y) ＝
     mul-Finite-Commutative-Ring x y
-  mul-neg-Finite-Commutative-Ring = mul-neg-Finite-Ring finite-ring-Finite-Commutative-Ring
+  mul-neg-Finite-Commutative-Ring =
+    mul-neg-Finite-Ring finite-ring-Finite-Commutative-Ring
 ```
 
 ### Scalar multiplication of elements of a commutative finite ring by natural numbers
@@ -580,7 +611,8 @@ module _
 ```agda
   add-list-Finite-Commutative-Ring :
     list type-Finite-Commutative-Ring → type-Finite-Commutative-Ring
-  add-list-Finite-Commutative-Ring = add-list-Finite-Ring finite-ring-Finite-Commutative-Ring
+  add-list-Finite-Commutative-Ring =
+    add-list-Finite-Ring finite-ring-Finite-Commutative-Ring
 
   preserves-concat-add-list-Finite-Commutative-Ring :
     (l1 l2 : list type-Finite-Commutative-Ring) →

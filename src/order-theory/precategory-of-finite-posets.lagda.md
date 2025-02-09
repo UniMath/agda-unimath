@@ -52,5 +52,6 @@ Finite-Poset-Large-Precategory =
 
 ```agda
 Finite-Poset-Precategory : (l : Level) → Precategory (lsuc l) l
-Finite-Poset-Precategory = precategory-Large-Precategory Finite-Poset-Large-Precategory
+Finite-Poset-Precategory =
+  precategory-Large-Precategory Finite-Poset-Large-Precategory
 ```

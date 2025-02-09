@@ -52,8 +52,10 @@ module _
   {l1 l2 : Level} (X : Finite-Type l1) (Y : Finite-Type l2)
   where
 
-  vertex-finite-type-complete-bipartite-Finite-Undirected-Graph : Finite-Type (l1 ⊔ l2)
-  vertex-finite-type-complete-bipartite-Finite-Undirected-Graph = coproduct-Finite-Type X Y
+  vertex-finite-type-complete-bipartite-Finite-Undirected-Graph :
+    Finite-Type (l1 ⊔ l2)
+  vertex-finite-type-complete-bipartite-Finite-Undirected-Graph =
+    coproduct-Finite-Type X Y
 
   vertex-complete-bipartite-Finite-Undirected-Graph : UU (l1 ⊔ l2)
   vertex-complete-bipartite-Finite-Undirected-Graph =

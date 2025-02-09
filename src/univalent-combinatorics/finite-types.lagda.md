@@ -401,7 +401,8 @@ module _
     pr2 (has-finite-cardinality-is-finite H)
 
 number-of-elements-Finite-Type : {l : Level} → Finite-Type l → ℕ
-number-of-elements-Finite-Type X = number-of-elements-is-finite (is-finite-type-Finite-Type X)
+number-of-elements-Finite-Type X =
+  number-of-elements-is-finite (is-finite-type-Finite-Type X)
 ```
 
 ### If a type has cardinality `k` and cardinality `l`, then `k = l`
@@ -448,7 +449,8 @@ abstract
       ( is-set-Prop X)
       ( λ e → is-set-count e)
 
-is-set-type-Finite-Type : {l : Level} (X : Finite-Type l) → is-set (type-Finite-Type X)
+is-set-type-Finite-Type :
+  {l : Level} (X : Finite-Type l) → is-set (type-Finite-Type X)
 is-set-type-Finite-Type X = is-set-is-finite (is-finite-type-Finite-Type X)
 
 set-Finite-Type : {l : Level} → Finite-Type l → Set l
@@ -588,48 +590,51 @@ abstract
 
 trunc-prop-Finite-Type : {l : Level} → Finite-Type l → Finite-Type l
 pr1 (trunc-prop-Finite-Type A) = type-trunc-Prop (type-Finite-Type A)
-pr2 (trunc-prop-Finite-Type A) = is-finite-type-trunc-Prop (is-finite-type-Finite-Type A)
+pr2 (trunc-prop-Finite-Type A) =
+  is-finite-type-trunc-Prop (is-finite-type-Finite-Type A)
 ```
 
 ### We characterize the identity type of Finite-Type
 
 ```agda
-equiv-𝔽 : {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → UU (l1 ⊔ l2)
-equiv-𝔽 X Y = type-Finite-Type X ≃ type-Finite-Type Y
+equiv-Finite-Type : {l1 l2 : Level} → Finite-Type l1 → Finite-Type l2 → UU (l1 ⊔ l2)
+equiv-Finite-Type X Y = type-Finite-Type X ≃ type-Finite-Type Y
 
-id-equiv-𝔽 : {l : Level} → (X : Finite-Type l) → equiv-𝔽 X X
-id-equiv-𝔽 X = id-equiv
+id-equiv-Finite-Type : {l : Level} → (X : Finite-Type l) → equiv-Finite-Type X X
+id-equiv-Finite-Type X = id-equiv
 
-extensionality-𝔽 : {l : Level} → (X Y : Finite-Type l) → Id X Y ≃ equiv-𝔽 X Y
-extensionality-𝔽 = extensionality-subuniverse is-finite-Prop
+extensionality-Finite-Type : {l : Level} → (X Y : Finite-Type l) → Id X Y ≃ equiv-Finite-Type X Y
+extensionality-Finite-Type = extensionality-subuniverse is-finite-Prop
 
-is-torsorial-equiv-𝔽 :
-  {l : Level} → (X : Finite-Type l) → is-torsorial (λ (Y : Finite-Type l) → equiv-𝔽 X Y)
-is-torsorial-equiv-𝔽 {l} X =
+is-torsorial-equiv-Finite-Type :
+  {l : Level} → (X : Finite-Type l) → is-torsorial (λ (Y : Finite-Type l) → equiv-Finite-Type X Y)
+is-torsorial-equiv-Finite-Type {l} X =
   is-contr-equiv'
     ( Σ (Finite-Type l) (Id X))
-    ( equiv-tot (extensionality-𝔽 X))
+    ( equiv-tot (extensionality-Finite-Type X))
     ( is-torsorial-Id X)
 
-equiv-eq-𝔽 : {l : Level} → (X Y : Finite-Type l) → Id X Y → equiv-𝔽 X Y
-equiv-eq-𝔽 X Y = map-equiv (extensionality-𝔽 X Y)
+equiv-eq-Finite-Type : {l : Level} → (X Y : Finite-Type l) → Id X Y → equiv-Finite-Type X Y
+equiv-eq-Finite-Type X Y = map-equiv (extensionality-Finite-Type X Y)
 
-eq-equiv-𝔽 : {l : Level} → (X Y : Finite-Type l) → equiv-𝔽 X Y → Id X Y
-eq-equiv-𝔽 X Y = map-inv-equiv (extensionality-𝔽 X Y)
+eq-equiv-Finite-Type : {l : Level} → (X Y : Finite-Type l) → equiv-Finite-Type X Y → Id X Y
+eq-equiv-Finite-Type X Y = map-inv-equiv (extensionality-Finite-Type X Y)
 ```
 
 ### We characterize the identity type of families of finite types
 
 ```agda
-equiv-fam-𝔽 : {l1 l2 : Level} {X : UU l1} (Y Z : X → Finite-Type l2) → UU (l1 ⊔ l2)
-equiv-fam-𝔽 Y Z = equiv-fam (type-Finite-Type ∘ Y) (type-Finite-Type ∘ Z)
+equiv-fam-Finite-Type :
+  {l1 l2 : Level} {X : UU l1} (Y Z : X → Finite-Type l2) → UU (l1 ⊔ l2)
+equiv-fam-Finite-Type Y Z = equiv-fam (type-Finite-Type ∘ Y) (type-Finite-Type ∘ Z)
 
-id-equiv-fam-𝔽 : {l1 l2 : Level} {X : UU l1} → (Y : X → Finite-Type l2) → equiv-fam-𝔽 Y Y
-id-equiv-fam-𝔽 Y x = id-equiv
+id-equiv-fam-Finite-Type :
+  {l1 l2 : Level} {X : UU l1} → (Y : X → Finite-Type l2) → equiv-fam-Finite-Type Y Y
+id-equiv-fam-Finite-Type Y x = id-equiv
 
-extensionality-fam-𝔽 :
-  {l1 l2 : Level} {X : UU l1} (Y Z : X → Finite-Type l2) → Id Y Z ≃ equiv-fam-𝔽 Y Z
-extensionality-fam-𝔽 = extensionality-fam-subuniverse is-finite-Prop
+extensionality-fam-Finite-Type :
+  {l1 l2 : Level} {X : UU l1} (Y Z : X → Finite-Type l2) → Id Y Z ≃ equiv-fam-Finite-Type Y Z
+extensionality-fam-Finite-Type = extensionality-fam-subuniverse is-finite-Prop
 ```
 
 ### We characterize the identity type of `UU-Fin`

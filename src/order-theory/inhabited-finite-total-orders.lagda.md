@@ -33,12 +33,14 @@ module _
   where
 
   is-inhabited-Finite-Total-Order-Prop : Prop l1
-  is-inhabited-Finite-Total-Order-Prop = is-inhabited-Prop (type-Finite-Total-Order P)
+  is-inhabited-Finite-Total-Order-Prop =
+    is-inhabited-Prop (type-Finite-Total-Order P)
 
   is-inhabited-Finite-Total-Order : UU (l1 ⊔ l2)
   is-inhabited-Finite-Total-Order = is-finite-Poset (poset-Finite-Total-Order P)
 
-  is-property-is-inhabited-Finite-Total-Order : is-prop is-inhabited-Finite-Total-Order
+  is-property-is-inhabited-Finite-Total-Order :
+    is-prop is-inhabited-Finite-Total-Order
   is-property-is-inhabited-Finite-Total-Order =
     is-prop-is-finite-Poset (poset-Finite-Total-Order P)
 

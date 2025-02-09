@@ -294,9 +294,10 @@ is-untruncated-π-finite-is-finite k {A} H =
     ( is-untruncated-π-finite-Prop k A)
     ( is-untruncated-π-finite-count k)
 
-π-finite-𝔽 : {l : Level} (k : ℕ) → Finite-Type l → Untruncated-π-Finite-Type l k
-pr1 (π-finite-𝔽 k A) = type-Finite-Type A
-pr2 (π-finite-𝔽 k A) = is-untruncated-π-finite-is-finite k (is-finite-type-Finite-Type A)
+π-finite-type-Finite-Type : {l : Level} (k : ℕ) → Finite-Type l → Untruncated-π-Finite-Type l k
+pr1 (π-finite-type-Finite-Type k A) = type-Finite-Type A
+pr2 (π-finite-type-Finite-Type k A) =
+  is-untruncated-π-finite-is-finite k (is-finite-type-Finite-Type A)
 ```
 
 ### The type of all `n`-element types in `UU l` is untruncated π-finite

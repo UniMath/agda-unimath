@@ -28,7 +28,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A {{#concept "Kuratowski finite set" agda=𝔽-Kuratowski}} is a
+A {{#concept "Kuratowski finite set" agda=Kuratowski-Finite-Set}} is a
 [set](foundation-core.sets.md) `X` for which there exists a
 [surjection](foundation.surjective-maps.md) into `X` from a standard finite
 type. In other words, the Kuratowski finite set are the
@@ -45,21 +45,21 @@ is-kuratowski-finite-set-Prop X =
 is-kuratowski-finite-set : {l : Level} → Set l → UU l
 is-kuratowski-finite-set X = type-Prop (is-kuratowski-finite-set-Prop X)
 
-𝔽-Kuratowski : (l : Level) → UU (lsuc l)
-𝔽-Kuratowski l = Σ (Set l) is-kuratowski-finite-set
+Kuratowski-Finite-Set : (l : Level) → UU (lsuc l)
+Kuratowski-Finite-Set l = Σ (Set l) is-kuratowski-finite-set
 
 module _
-  {l : Level} (X : 𝔽-Kuratowski l)
+  {l : Level} (X : Kuratowski-Finite-Set l)
   where
 
   set-Finite-Type-Kuratowski : Set l
   set-Finite-Type-Kuratowski = pr1 X
 
-  type-𝔽-Kuratowski : UU l
-  type-𝔽-Kuratowski = type-Set set-Finite-Type-Kuratowski
+  type-Kuratowski-Finite-Set : UU l
+  type-Kuratowski-Finite-Set = type-Set set-Finite-Type-Kuratowski
 
-  is-set-type-𝔽-Kuratowski : is-set type-𝔽-Kuratowski
-  is-set-type-𝔽-Kuratowski = is-set-type-Set set-Finite-Type-Kuratowski
+  is-set-type-Kuratowski-Finite-Set : is-set type-Kuratowski-Finite-Set
+  is-set-type-Kuratowski-Finite-Set = is-set-type-Set set-Finite-Type-Kuratowski
 
   is-kuratowski-finite-set-Finite-Type-Kuratowski :
     is-kuratowski-finite-set set-Finite-Type-Kuratowski
@@ -71,21 +71,21 @@ module _
 ### A Kuratowski finite set is finite if and only if it has decidable equality
 
 ```agda
-is-finite-has-decidable-equality-type-𝔽-Kuratowski :
-  {l : Level} (X : 𝔽-Kuratowski l) →
-  has-decidable-equality (type-𝔽-Kuratowski X) →
-  is-finite (type-𝔽-Kuratowski X)
-is-finite-has-decidable-equality-type-𝔽-Kuratowski X H =
+is-finite-has-decidable-equality-type-Kuratowski-Finite-Set :
+  {l : Level} (X : Kuratowski-Finite-Set l) →
+  has-decidable-equality (type-Kuratowski-Finite-Set X) →
+  is-finite (type-Kuratowski-Finite-Set X)
+is-finite-has-decidable-equality-type-Kuratowski-Finite-Set X H =
   apply-universal-property-trunc-Prop
     ( is-kuratowski-finite-set-Finite-Type-Kuratowski X)
-    ( is-finite-Prop (type-𝔽-Kuratowski X))
+    ( is-finite-Prop (type-Kuratowski-Finite-Set X))
     ( λ (n , f , s) → is-finite-codomain (is-finite-Fin n) s H)
 
-has-decidable-equality-is-finite-type-𝔽-Kuratowski :
-  {l : Level} (X : 𝔽-Kuratowski l) →
-  is-finite (type-𝔽-Kuratowski X) →
-  has-decidable-equality (type-𝔽-Kuratowski X)
-has-decidable-equality-is-finite-type-𝔽-Kuratowski X =
+has-decidable-equality-is-finite-type-Kuratowski-Finite-Set :
+  {l : Level} (X : Kuratowski-Finite-Set l) →
+  is-finite (type-Kuratowski-Finite-Set X) →
+  has-decidable-equality (type-Kuratowski-Finite-Set X)
+has-decidable-equality-is-finite-type-Kuratowski-Finite-Set X =
   has-decidable-equality-is-finite
 ```
 

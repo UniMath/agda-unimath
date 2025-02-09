@@ -122,12 +122,14 @@ module _
   where
 
   has-associative-add-Finite-Ring : has-associative-mul-Set (set-Finite-Ring R)
-  has-associative-add-Finite-Ring = has-associative-add-Ring (ring-Finite-Ring R)
+  has-associative-add-Finite-Ring =
+    has-associative-add-Ring (ring-Finite-Ring R)
 
   add-Finite-Ring : type-Finite-Ring R → type-Finite-Ring R → type-Finite-Ring R
   add-Finite-Ring = add-Ring (ring-Finite-Ring R)
 
-  add-Finite-Ring' : type-Finite-Ring R → type-Finite-Ring R → type-Finite-Ring R
+  add-Finite-Ring' :
+    type-Finite-Ring R → type-Finite-Ring R → type-Finite-Ring R
   add-Finite-Ring' = add-Ring' (ring-Finite-Ring R)
 
   ap-add-Finite-Ring :
@@ -166,14 +168,17 @@ module _
     add-Finite-Ring x (add-Finite-Ring y z) ＝ add-Finite-Ring y (add-Finite-Ring x z)
   left-swap-add-Finite-Ring = left-swap-add-Ring (ring-Finite-Ring R)
 
-  is-equiv-add-Finite-Ring : (x : type-Finite-Ring R) → is-equiv (add-Finite-Ring x)
+  is-equiv-add-Finite-Ring :
+    (x : type-Finite-Ring R) → is-equiv (add-Finite-Ring x)
   is-equiv-add-Finite-Ring = is-equiv-add-Ring (ring-Finite-Ring R)
 
-  is-equiv-add-Finite-Ring' : (x : type-Finite-Ring R) → is-equiv (add-Finite-Ring' x)
+  is-equiv-add-Finite-Ring' :
+    (x : type-Finite-Ring R) → is-equiv (add-Finite-Ring' x)
   is-equiv-add-Finite-Ring' = is-equiv-add-Ring' (ring-Finite-Ring R)
 
   is-binary-equiv-add-Finite-Ring : is-binary-equiv add-Finite-Ring
-  is-binary-equiv-add-Finite-Ring = is-binary-equiv-add-Ring (ring-Finite-Ring R)
+  is-binary-equiv-add-Finite-Ring =
+    is-binary-equiv-add-Ring (ring-Finite-Ring R)
 
   is-binary-emb-add-Finite-Ring : is-binary-emb add-Finite-Ring
   is-binary-emb-add-Finite-Ring = is-binary-emb-add-Ring (ring-Finite-Ring R)
@@ -181,13 +186,16 @@ module _
   is-emb-add-Finite-Ring : (x : type-Finite-Ring R) → is-emb (add-Finite-Ring x)
   is-emb-add-Finite-Ring = is-emb-add-Ring (ring-Finite-Ring R)
 
-  is-emb-add-Finite-Ring' : (x : type-Finite-Ring R) → is-emb (add-Finite-Ring' x)
+  is-emb-add-Finite-Ring' :
+    (x : type-Finite-Ring R) → is-emb (add-Finite-Ring' x)
   is-emb-add-Finite-Ring' = is-emb-add-Ring' (ring-Finite-Ring R)
 
-  is-injective-add-Finite-Ring : (x : type-Finite-Ring R) → is-injective (add-Finite-Ring x)
+  is-injective-add-Finite-Ring :
+    (x : type-Finite-Ring R) → is-injective (add-Finite-Ring x)
   is-injective-add-Finite-Ring = is-injective-add-Ring (ring-Finite-Ring R)
 
-  is-injective-add-Finite-Ring' : (x : type-Finite-Ring R) → is-injective (add-Finite-Ring' x)
+  is-injective-add-Finite-Ring' :
+    (x : type-Finite-Ring R) → is-injective (add-Finite-Ring' x)
   is-injective-add-Finite-Ring' = is-injective-add-Ring' (ring-Finite-Ring R)
 ```
 
@@ -243,19 +251,23 @@ module _
 
   left-inverse-law-add-Finite-Ring :
     (x : type-Finite-Ring R) → Id (add-Finite-Ring R (neg-Finite-Ring x) x) (zero-Finite-Ring R)
-  left-inverse-law-add-Finite-Ring = left-inverse-law-add-Ring (ring-Finite-Ring R)
+  left-inverse-law-add-Finite-Ring =
+    left-inverse-law-add-Ring (ring-Finite-Ring R)
 
   right-inverse-law-add-Finite-Ring :
     (x : type-Finite-Ring R) → Id (add-Finite-Ring R x (neg-Finite-Ring x)) (zero-Finite-Ring R)
-  right-inverse-law-add-Finite-Ring = right-inverse-law-add-Ring (ring-Finite-Ring R)
+  right-inverse-law-add-Finite-Ring =
+    right-inverse-law-add-Ring (ring-Finite-Ring R)
 
-  neg-neg-Finite-Ring : (x : type-Finite-Ring R) → neg-Finite-Ring (neg-Finite-Ring x) ＝ x
+  neg-neg-Finite-Ring :
+    (x : type-Finite-Ring R) → neg-Finite-Ring (neg-Finite-Ring x) ＝ x
   neg-neg-Finite-Ring = neg-neg-Ring (ring-Finite-Ring R)
 
   distributive-neg-add-Finite-Ring :
     (x y : type-Finite-Ring R) →
     neg-Finite-Ring (add-Finite-Ring R x y) ＝ add-Finite-Ring R (neg-Finite-Ring x) (neg-Finite-Ring y)
-  distributive-neg-add-Finite-Ring = distributive-neg-add-Ring (ring-Finite-Ring R)
+  distributive-neg-add-Finite-Ring =
+    distributive-neg-add-Ring (ring-Finite-Ring R)
 ```
 
 ### Multiplication in a ring
@@ -266,12 +278,14 @@ module _
   where
 
   has-associative-mul-Finite-Ring : has-associative-mul-Set (set-Finite-Ring R)
-  has-associative-mul-Finite-Ring = has-associative-mul-Ring (ring-Finite-Ring R)
+  has-associative-mul-Finite-Ring =
+    has-associative-mul-Ring (ring-Finite-Ring R)
 
   mul-Finite-Ring : type-Finite-Ring R → type-Finite-Ring R → type-Finite-Ring R
   mul-Finite-Ring = mul-Ring (ring-Finite-Ring R)
 
-  mul-Finite-Ring' : type-Finite-Ring R → type-Finite-Ring R → type-Finite-Ring R
+  mul-Finite-Ring' :
+    type-Finite-Ring R → type-Finite-Ring R → type-Finite-Ring R
   mul-Finite-Ring' = mul-Ring' (ring-Finite-Ring R)
 
   ap-mul-Finite-Ring :
@@ -314,7 +328,8 @@ module _
   is-unital-Finite-Ring = is-unital-Ring (ring-Finite-Ring R)
 
   multiplicative-monoid-Finite-Ring : Monoid l
-  multiplicative-monoid-Finite-Ring = multiplicative-monoid-Ring (ring-Finite-Ring R)
+  multiplicative-monoid-Finite-Ring =
+    multiplicative-monoid-Ring (ring-Finite-Ring R)
 
   one-Finite-Ring : type-Finite-Ring R
   one-Finite-Ring = one-Ring (ring-Finite-Ring R)

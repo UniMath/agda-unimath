@@ -67,10 +67,12 @@ Finite-Total-Order l1 l2 =
   Σ ( Finite-Poset l1 l2)
     ( λ P → is-total-Poset (poset-Finite-Poset P))
 
-finite-poset-Finite-Total-Order : {l1 l2 : Level} → Finite-Total-Order l1 l2 → Finite-Poset l1 l2
+finite-poset-Finite-Total-Order :
+  {l1 l2 : Level} → Finite-Total-Order l1 l2 → Finite-Poset l1 l2
 finite-poset-Finite-Total-Order = pr1
 
-poset-Finite-Total-Order : {l1 l2 : Level} → Finite-Total-Order l1 l2 → Poset l1 l2
+poset-Finite-Total-Order :
+  {l1 l2 : Level} → Finite-Total-Order l1 l2 → Poset l1 l2
 poset-Finite-Total-Order = poset-Finite-Poset ∘ finite-poset-Finite-Total-Order
 
 is-total-Finite-Total-Order :

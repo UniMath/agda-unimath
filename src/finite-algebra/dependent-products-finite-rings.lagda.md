@@ -43,7 +43,8 @@ module _
   where
 
   semiring-Π-Finite-Ring : Semiring (l1 ⊔ l2)
-  semiring-Π-Finite-Ring = semiring-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
+  semiring-Π-Finite-Ring =
+    semiring-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   ab-Π-Finite-Ring : Ab (l1 ⊔ l2)
   ab-Π-Finite-Ring = ab-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
@@ -52,7 +53,8 @@ module _
   group-Π-Finite-Ring = group-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   semigroup-Π-Finite-Ring : Semigroup (l1 ⊔ l2)
-  semigroup-Π-Finite-Ring = semigroup-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
+  semigroup-Π-Finite-Ring =
+    semigroup-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   multiplicative-monoid-Π-Finite-Ring : Monoid (l1 ⊔ l2)
   multiplicative-monoid-Π-Finite-Ring =
@@ -73,9 +75,11 @@ module _
   pr2 finite-type-Π-Finite-Ring = is-finite-type-Π-Finite-Ring
 
   is-set-type-Π-Finite-Ring : is-set type-Π-Finite-Ring
-  is-set-type-Π-Finite-Ring = is-set-type-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
+  is-set-type-Π-Finite-Ring =
+    is-set-type-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
-  add-Π-Finite-Ring : type-Π-Finite-Ring → type-Π-Finite-Ring → type-Π-Finite-Ring
+  add-Π-Finite-Ring :
+    type-Π-Finite-Ring → type-Π-Finite-Ring → type-Π-Finite-Ring
   add-Π-Finite-Ring = add-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   zero-Π-Finite-Ring : type-Π-Finite-Ring
@@ -115,7 +119,8 @@ module _
   commutative-add-Π-Finite-Ring =
     commutative-add-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
-  mul-Π-Finite-Ring : type-Π-Finite-Ring → type-Π-Finite-Ring → type-Π-Finite-Ring
+  mul-Π-Finite-Ring :
+    type-Π-Finite-Ring → type-Π-Finite-Ring → type-Π-Finite-Ring
   mul-Π-Finite-Ring = mul-Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   one-Π-Finite-Ring : type-Π-Finite-Ring
@@ -156,5 +161,6 @@ module _
   ring-Π-Finite-Ring = Π-Ring (type-Finite-Type I) (ring-Finite-Ring ∘ A)
 
   Π-Finite-Ring : Finite-Ring (l1 ⊔ l2)
-  Π-Finite-Ring = finite-ring-is-finite-Ring ring-Π-Finite-Ring is-finite-type-Π-Finite-Ring
+  Π-Finite-Ring =
+    finite-ring-is-finite-Ring ring-Π-Finite-Ring is-finite-type-Π-Finite-Ring
 ```

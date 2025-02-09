@@ -54,7 +54,8 @@ because only nonzero elements are assumed to be invertible.
 ## Definition
 
 ```agda
-is-finite-field-Finite-Commutative-Ring : {l : Level} → Finite-Commutative-Ring l → UU l
+is-finite-field-Finite-Commutative-Ring :
+  {l : Level} → Finite-Commutative-Ring l → UU l
 is-finite-field-Finite-Commutative-Ring A =
   is-division-Ring (ring-Finite-Commutative-Ring A)
 
@@ -211,7 +212,8 @@ module _
   is-zero-field-finite-Prop = is-zero-finite-ring-Prop finite-ring-Finite-Field
 
   is-nonzero-field-finite-Prop : type-Finite-Field → Prop l
-  is-nonzero-field-finite-Prop = is-nonzero-finite-ring-Prop finite-ring-Finite-Field
+  is-nonzero-field-finite-Prop =
+    is-nonzero-finite-ring-Prop finite-ring-Finite-Field
 
   left-unit-law-add-Finite-Field :
     (x : type-Finite-Field) →

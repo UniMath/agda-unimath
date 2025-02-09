@@ -30,7 +30,8 @@ module _
   {l1 l2 : Level} (X : Finite-Type l1) (R : Decidable-Equivalence-Relation-Finite-Type l2 X)
   where
 
-  equivalence-class-Decidable-Equivalence-Relation-Finite-Type : UU (l1 ⊔ lsuc l2)
+  equivalence-class-Decidable-Equivalence-Relation-Finite-Type :
+    UU (l1 ⊔ lsuc l2)
   equivalence-class-Decidable-Equivalence-Relation-Finite-Type =
     im (decidable-relation-Decidable-Equivalence-Relation-Finite-Type X R)
 
@@ -41,7 +42,8 @@ module _
       ( is-finite-type-Finite-Type X)
       ( has-decidable-equality-Subset-Finite-Type X)
 
-  quotient-𝔽 : Finite-Type (l1 ⊔ lsuc l2)
-  pr1 quotient-𝔽 = equivalence-class-Decidable-Equivalence-Relation-Finite-Type
-  pr2 quotient-𝔽 = is-finite-equivalence-class-Decidable-Equivalence-Relation-Finite-Type'
+  quotient-Finite-Type : Finite-Type (l1 ⊔ lsuc l2)
+  pr1 quotient-Finite-Type = equivalence-class-Decidable-Equivalence-Relation-Finite-Type
+  pr2 quotient-Finite-Type =
+    is-finite-equivalence-class-Decidable-Equivalence-Relation-Finite-Type'
 ```

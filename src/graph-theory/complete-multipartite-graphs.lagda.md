@@ -49,7 +49,8 @@ module _
   {l1 l2 : Level} (X : Finite-Type l1) (Y : type-Finite-Type X → Finite-Type l2)
   where
 
-  vertex-finite-type-complete-multipartite-Finite-Undirected-Graph : Finite-Type (l1 ⊔ l2)
+  vertex-finite-type-complete-multipartite-Finite-Undirected-Graph :
+    Finite-Type (l1 ⊔ l2)
   vertex-finite-type-complete-multipartite-Finite-Undirected-Graph =
     Σ-Finite-Type X Y
 
@@ -81,7 +82,8 @@ module _
   edge-complete-multipartite-Finite-Undirected-Graph p =
     type-Finite-Type (edge-finite-type-complete-multipartite-Finite-Undirected-Graph p)
 
-  complete-multipartite-Finite-Undirected-Graph : Finite-Undirected-Graph (l1 ⊔ l2) l1
+  complete-multipartite-Finite-Undirected-Graph :
+    Finite-Undirected-Graph (l1 ⊔ l2) l1
   pr1 complete-multipartite-Finite-Undirected-Graph =
     vertex-finite-type-complete-multipartite-Finite-Undirected-Graph
   pr2 complete-multipartite-Finite-Undirected-Graph =

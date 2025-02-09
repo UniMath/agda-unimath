@@ -72,16 +72,19 @@ module _
   finite-semigroup-Finite-Monoid = pr1 M
 
   semigroup-Finite-Monoid : Semigroup l
-  semigroup-Finite-Monoid = semigroup-Finite-Semigroup finite-semigroup-Finite-Monoid
+  semigroup-Finite-Monoid =
+    semigroup-Finite-Semigroup finite-semigroup-Finite-Monoid
 
   finite-type-Finite-Monoid : Finite-Type l
-  finite-type-Finite-Monoid = finite-type-Finite-Semigroup finite-semigroup-Finite-Monoid
+  finite-type-Finite-Monoid =
+    finite-type-Finite-Semigroup finite-semigroup-Finite-Monoid
 
   type-Finite-Monoid : UU l
   type-Finite-Monoid = type-Finite-Semigroup finite-semigroup-Finite-Monoid
 
   is-finite-type-Finite-Monoid : is-finite type-Finite-Monoid
-  is-finite-type-Finite-Monoid = is-finite-type-Finite-Semigroup finite-semigroup-Finite-Monoid
+  is-finite-type-Finite-Monoid =
+    is-finite-type-Finite-Semigroup finite-semigroup-Finite-Monoid
 
   set-Finite-Monoid : Set l
   set-Finite-Monoid = set-Semigroup semigroup-Finite-Monoid
@@ -89,10 +92,12 @@ module _
   is-set-type-Finite-Monoid : is-set type-Finite-Monoid
   is-set-type-Finite-Monoid = is-set-type-Semigroup semigroup-Finite-Monoid
 
-  mul-Finite-Monoid : type-Finite-Monoid → type-Finite-Monoid → type-Finite-Monoid
+  mul-Finite-Monoid :
+    type-Finite-Monoid → type-Finite-Monoid → type-Finite-Monoid
   mul-Finite-Monoid = mul-Semigroup semigroup-Finite-Monoid
 
-  mul-Finite-Monoid' : type-Finite-Monoid → type-Finite-Monoid → type-Finite-Monoid
+  mul-Finite-Monoid' :
+    type-Finite-Monoid → type-Finite-Monoid → type-Finite-Monoid
   mul-Finite-Monoid' y x = mul-Finite-Monoid x y
 
   ap-mul-Finite-Monoid :
@@ -103,7 +108,8 @@ module _
   associative-mul-Finite-Monoid :
     (x y z : type-Finite-Monoid) →
     mul-Finite-Monoid (mul-Finite-Monoid x y) z ＝ mul-Finite-Monoid x (mul-Finite-Monoid y z)
-  associative-mul-Finite-Monoid = associative-mul-Semigroup semigroup-Finite-Monoid
+  associative-mul-Finite-Monoid =
+    associative-mul-Semigroup semigroup-Finite-Monoid
 
   has-unit-Finite-Monoid : is-unital mul-Finite-Monoid
   has-unit-Finite-Monoid = pr2 M
@@ -117,11 +123,13 @@ module _
 
   left-unit-law-mul-Finite-Monoid :
     (x : type-Finite-Monoid) → mul-Finite-Monoid unit-Finite-Monoid x ＝ x
-  left-unit-law-mul-Finite-Monoid = left-unit-law-mul-Monoid monoid-Finite-Monoid
+  left-unit-law-mul-Finite-Monoid =
+    left-unit-law-mul-Monoid monoid-Finite-Monoid
 
   right-unit-law-mul-Finite-Monoid :
     (x : type-Finite-Monoid) → mul-Finite-Monoid x unit-Finite-Monoid ＝ x
-  right-unit-law-mul-Finite-Monoid = right-unit-law-mul-Monoid monoid-Finite-Monoid
+  right-unit-law-mul-Finite-Monoid =
+    right-unit-law-mul-Monoid monoid-Finite-Monoid
 ```
 
 ### Monoids of order `n`

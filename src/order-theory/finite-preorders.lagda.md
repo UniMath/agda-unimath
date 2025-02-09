@@ -230,7 +230,8 @@ module _
 
   type-finite-Subpreorder-Finite-Preorder : Finite-Type (l1 ⊔ l3)
   pr1 type-finite-Subpreorder-Finite-Preorder = type-finite-Subpreorder P S
-  pr2 type-finite-Subpreorder-Finite-Preorder = is-finite-type-finite-Subpreorder P S
+  pr2 type-finite-Subpreorder-Finite-Preorder =
+    is-finite-type-finite-Subpreorder P S
 
   finite-Subpreorder : Finite-Preorder (l1 ⊔ l3) l2
   pr1 finite-Subpreorder = type-finite-Subpreorder-Finite-Preorder

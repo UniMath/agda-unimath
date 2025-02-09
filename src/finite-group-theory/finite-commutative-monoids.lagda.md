@@ -63,7 +63,8 @@ module _
   type-Finite-Commutative-Monoid =
     type-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  is-finite-type-Finite-Commutative-Monoid : is-finite type-Finite-Commutative-Monoid
+  is-finite-type-Finite-Commutative-Monoid :
+    is-finite type-Finite-Commutative-Monoid
   is-finite-type-Finite-Commutative-Monoid =
     is-finite-type-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
@@ -90,7 +91,8 @@ module _
 
   mul-Finite-Commutative-Monoid :
     (x y : type-Finite-Commutative-Monoid) → type-Finite-Commutative-Monoid
-  mul-Finite-Commutative-Monoid = mul-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
+  mul-Finite-Commutative-Monoid =
+    mul-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
   mul-Finite-Commutative-Monoid' :
     (x y : type-Finite-Commutative-Monoid) → type-Finite-Commutative-Monoid
@@ -117,7 +119,8 @@ module _
   commutative-mul-Finite-Commutative-Monoid = pr2 M
 
   commutative-monoid-Finite-Commutative-Monoid : Commutative-Monoid l
-  pr1 commutative-monoid-Finite-Commutative-Monoid = monoid-Finite-Commutative-Monoid
+  pr1 commutative-monoid-Finite-Commutative-Monoid =
+    monoid-Finite-Commutative-Monoid
   pr2 commutative-monoid-Finite-Commutative-Monoid =
     commutative-mul-Finite-Commutative-Monoid
 
@@ -157,12 +160,14 @@ module _
   {l : Level} (M : Finite-Commutative-Monoid l)
   where
 
-  has-unit-Finite-Commutative-Monoid : is-unital (mul-Finite-Commutative-Monoid M)
+  has-unit-Finite-Commutative-Monoid :
+    is-unital (mul-Finite-Commutative-Monoid M)
   has-unit-Finite-Commutative-Monoid =
     has-unit-Monoid (monoid-Finite-Commutative-Monoid M)
 
   unit-Finite-Commutative-Monoid : type-Finite-Commutative-Monoid M
-  unit-Finite-Commutative-Monoid = unit-Monoid (monoid-Finite-Commutative-Monoid M)
+  unit-Finite-Commutative-Monoid =
+    unit-Monoid (monoid-Finite-Commutative-Monoid M)
 
   left-unit-law-mul-Finite-Commutative-Monoid :
     (x : type-Finite-Commutative-Monoid M) →
@@ -196,7 +201,8 @@ module _
     structure-finite-commutative-monoid → Finite-Commutative-Monoid l
   pr1 (finite-commutative-monoid-structure-finite-commutative-monoid (m , c)) =
     finite-monoid-structure-finite-monoid X m
-  pr2 (finite-commutative-monoid-structure-finite-commutative-monoid (m , c)) = c
+  pr2 (finite-commutative-monoid-structure-finite-commutative-monoid (m , c)) =
+    c
 
   is-finite-structure-finite-commutative-monoid :
     is-finite structure-finite-commutative-monoid

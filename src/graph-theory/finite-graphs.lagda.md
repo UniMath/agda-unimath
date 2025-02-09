@@ -39,7 +39,8 @@ is also common to call such graphs _multigraphs_.
 
 ```agda
 Finite-Undirected-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Finite-Undirected-Graph l1 l2 = Σ (Finite-Type l1) (λ X → unordered-pair (type-Finite-Type X) → Finite-Type l2)
+Finite-Undirected-Graph l1 l2 =
+  Σ (Finite-Type l1) (λ X → unordered-pair (type-Finite-Type X) → Finite-Type l2)
 
 module _
   {l1 l2 : Level} (G : Finite-Undirected-Graph l1 l2)
@@ -52,7 +53,8 @@ module _
   unordered-pair-vertices-Finite-Undirected-Graph =
     unordered-pair vertex-Finite-Undirected-Graph
 
-  is-finite-vertex-Finite-Undirected-Graph : is-finite vertex-Finite-Undirected-Graph
+  is-finite-vertex-Finite-Undirected-Graph :
+    is-finite vertex-Finite-Undirected-Graph
   is-finite-vertex-Finite-Undirected-Graph = is-finite-type-Finite-Type (pr1 G)
 
   edge-Finite-Undirected-Graph :
@@ -62,7 +64,8 @@ module _
   is-finite-edge-Finite-Undirected-Graph :
     (p : unordered-pair-vertices-Finite-Undirected-Graph) →
     is-finite (edge-Finite-Undirected-Graph p)
-  is-finite-edge-Finite-Undirected-Graph p = is-finite-type-Finite-Type (pr2 G p)
+  is-finite-edge-Finite-Undirected-Graph p =
+    is-finite-type-Finite-Type (pr2 G p)
 
   total-edge-Finite-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
   total-edge-Finite-Undirected-Graph =

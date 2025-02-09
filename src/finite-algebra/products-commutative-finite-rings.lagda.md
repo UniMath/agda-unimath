@@ -66,7 +66,8 @@ module _
       ( finite-ring-Finite-Commutative-Ring R2)
 
   finite-type-product-Finite-Commutative-Ring : Finite-Type (l1 ⊔ l2)
-  pr1 finite-type-product-Finite-Commutative-Ring = type-product-Finite-Commutative-Ring
+  pr1 finite-type-product-Finite-Commutative-Ring =
+    type-product-Finite-Commutative-Ring
   pr2 finite-type-product-Finite-Commutative-Ring =
     is-finite-type-product-Finite-Commutative-Ring
 
@@ -254,5 +255,6 @@ module _
     product-Finite-Ring
       ( finite-ring-Finite-Commutative-Ring R1)
       ( finite-ring-Finite-Commutative-Ring R2)
-  pr2 product-Finite-Commutative-Ring = commutative-mul-product-Finite-Commutative-Ring
+  pr2 product-Finite-Commutative-Ring =
+    commutative-mul-product-Finite-Commutative-Ring
 ```

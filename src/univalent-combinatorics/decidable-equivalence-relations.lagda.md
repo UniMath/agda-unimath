@@ -69,7 +69,8 @@ module _
   relation-Decidable-Equivalence-Relation-Finite-Type =
     relation-Decidable-Equivalence-Relation R
 
-  sim-Decidable-Equivalence-Relation-Finite-Type : type-Finite-Type X → type-Finite-Type X → UU l2
+  sim-Decidable-Equivalence-Relation-Finite-Type :
+    type-Finite-Type X → type-Finite-Type X → UU l2
   sim-Decidable-Equivalence-Relation-Finite-Type =
     sim-Decidable-Equivalence-Relation R
 

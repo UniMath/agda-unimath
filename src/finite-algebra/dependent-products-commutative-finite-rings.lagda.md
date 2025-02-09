@@ -77,7 +77,8 @@ module _
   finite-type-Π-Finite-Commutative-Ring =
     finite-type-Π-Finite-Ring I (finite-ring-Finite-Commutative-Ring ∘ A)
 
-  is-finite-type-Π-Finite-Commutative-Ring : is-finite type-Π-Finite-Commutative-Ring
+  is-finite-type-Π-Finite-Commutative-Ring :
+    is-finite type-Π-Finite-Commutative-Ring
   is-finite-type-Π-Finite-Commutative-Ring =
     is-finite-type-Π-Finite-Ring I (finite-ring-Finite-Commutative-Ring ∘ A)
 

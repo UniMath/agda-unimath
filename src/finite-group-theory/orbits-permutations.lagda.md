@@ -81,7 +81,8 @@ module _
   {l : Level} (X : Finite-Type l) (e : type-Finite-Type X ≃ type-Finite-Type X)
   where
 
-  iso-iterative-groupoid-automorphism-Finite-Type : (x y : type-Finite-Type X) → UU l
+  iso-iterative-groupoid-automorphism-Finite-Type :
+    (x y : type-Finite-Type X) → UU l
   iso-iterative-groupoid-automorphism-Finite-Type x y =
     Σ ℕ (λ n → Id (iterate n (map-equiv e) x) y)
 

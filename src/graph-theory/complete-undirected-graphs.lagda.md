@@ -34,7 +34,8 @@ of its vertices.
 ## Definition
 
 ```agda
-complete-Finite-Undirected-Graph : {l : Level} → Finite-Type l → Finite-Undirected-Graph l l
+complete-Finite-Undirected-Graph :
+  {l : Level} → Finite-Type l → Finite-Undirected-Graph l l
 complete-Finite-Undirected-Graph X =
   complete-multipartite-Finite-Undirected-Graph X (λ x → unit-Finite-Type)
 ```

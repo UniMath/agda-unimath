@@ -97,7 +97,8 @@ module _
   add-Finite-Ab' : type-Finite-Ab → type-Finite-Ab → type-Finite-Ab
   add-Finite-Ab' = mul-Group' group-Finite-Ab
 
-  commutative-add-Finite-Ab : (x y : type-Finite-Ab) → Id (add-Finite-Ab x y) (add-Finite-Ab y x)
+  commutative-add-Finite-Ab :
+    (x y : type-Finite-Ab) → Id (add-Finite-Ab x y) (add-Finite-Ab y x)
   commutative-add-Finite-Ab = pr2 A
 
   ab-Finite-Ab : Ab l
@@ -127,19 +128,23 @@ module _
   is-zero-Finite-Ab : type-Finite-Ab → UU l
   is-zero-Finite-Ab = is-unit-Group group-Finite-Ab
 
-  is-prop-is-zero-Finite-Ab : (x : type-Finite-Ab) → is-prop (is-zero-Finite-Ab x)
+  is-prop-is-zero-Finite-Ab :
+    (x : type-Finite-Ab) → is-prop (is-zero-Finite-Ab x)
   is-prop-is-zero-Finite-Ab = is-prop-is-unit-Group group-Finite-Ab
 
   is-zero-prop-Finite-Ab : type-Finite-Ab → Prop l
   is-zero-prop-Finite-Ab = is-unit-prop-Group group-Finite-Ab
 
-  left-unit-law-add-Finite-Ab : (x : type-Finite-Ab) → add-Finite-Ab zero-Finite-Ab x ＝ x
+  left-unit-law-add-Finite-Ab :
+    (x : type-Finite-Ab) → add-Finite-Ab zero-Finite-Ab x ＝ x
   left-unit-law-add-Finite-Ab = left-unit-law-mul-Group group-Finite-Ab
 
-  right-unit-law-add-Finite-Ab : (x : type-Finite-Ab) → add-Finite-Ab x zero-Finite-Ab ＝ x
+  right-unit-law-add-Finite-Ab :
+    (x : type-Finite-Ab) → add-Finite-Ab x zero-Finite-Ab ＝ x
   right-unit-law-add-Finite-Ab = right-unit-law-mul-Group group-Finite-Ab
 
-  has-negatives-Finite-Ab : is-group-is-unital-Semigroup semigroup-Finite-Ab has-zero-Finite-Ab
+  has-negatives-Finite-Ab :
+    is-group-is-unital-Semigroup semigroup-Finite-Ab has-zero-Finite-Ab
   has-negatives-Finite-Ab = has-inverses-Group group-Finite-Ab
 
   neg-Finite-Ab : type-Finite-Ab → type-Finite-Ab
@@ -190,16 +195,20 @@ module _
   {l : Level} (A : Finite-Ab l)
   where
 
-  equiv-conjugation-Finite-Ab : (x : type-Finite-Ab A) → type-Finite-Ab A ≃ type-Finite-Ab A
+  equiv-conjugation-Finite-Ab :
+    (x : type-Finite-Ab A) → type-Finite-Ab A ≃ type-Finite-Ab A
   equiv-conjugation-Finite-Ab = equiv-conjugation-Group (group-Finite-Ab A)
 
-  conjugation-Finite-Ab : (x : type-Finite-Ab A) → type-Finite-Ab A → type-Finite-Ab A
+  conjugation-Finite-Ab :
+    (x : type-Finite-Ab A) → type-Finite-Ab A → type-Finite-Ab A
   conjugation-Finite-Ab = conjugation-Group (group-Finite-Ab A)
 
-  equiv-conjugation-Finite-Ab' : (x : type-Finite-Ab A) → type-Finite-Ab A ≃ type-Finite-Ab A
+  equiv-conjugation-Finite-Ab' :
+    (x : type-Finite-Ab A) → type-Finite-Ab A ≃ type-Finite-Ab A
   equiv-conjugation-Finite-Ab' = equiv-conjugation-Group' (group-Finite-Ab A)
 
-  conjugation-Finite-Ab' : (x : type-Finite-Ab A) → type-Finite-Ab A → type-Finite-Ab A
+  conjugation-Finite-Ab' :
+    (x : type-Finite-Ab A) → type-Finite-Ab A → type-Finite-Ab A
   conjugation-Finite-Ab' = conjugation-Group' (group-Finite-Ab A)
 ```
 

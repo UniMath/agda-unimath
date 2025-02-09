@@ -77,7 +77,8 @@ module _
 
   cotype-Σ-Decomposition-Finite-Type :
     type-Finite-Type finite-indexing-type-Σ-Decomposition-Finite-Type → UU l2
-  cotype-Σ-Decomposition-Finite-Type x = type-Finite-Type (finite-cotype-Σ-Decomposition-Finite-Type x)
+  cotype-Σ-Decomposition-Finite-Type x =
+    type-Finite-Type (finite-cotype-Σ-Decomposition-Finite-Type x)
 
   is-finite-cotype-Σ-Decomposition-Finite-Type :
     (x : type-Finite-Type finite-indexing-type-Σ-Decomposition-Finite-Type) →
@@ -188,7 +189,7 @@ module _
     equiv-Σ
       ( λ B → type-Finite-Type A ↠ type-Finite-Type B)
       ( id-equiv)
-      ( λ X → inv-equiv (equiv-surjection-𝔽-family-finite-inhabited-type A X))
+      ( λ X → inv-equiv (equiv-surjection-finite-type-family-finite-inhabited-type A X))
 ```
 
 ### Equivalence between finite decidable equivalence relations and finite Σ-decompositions

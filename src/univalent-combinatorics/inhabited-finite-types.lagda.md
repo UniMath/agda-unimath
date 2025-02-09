@@ -43,7 +43,8 @@ that comes equipped with a term of its
 
 ```agda
 Inhabited-Finite-Type : (l : Level) → UU (lsuc l)
-Inhabited-Finite-Type l = Σ (Finite-Type l) (λ X → is-inhabited (type-Finite-Type X))
+Inhabited-Finite-Type l =
+  Σ (Finite-Type l) (λ X → is-inhabited (type-Finite-Type X))
 
 module _
   {l : Level} (X : Inhabited-Finite-Type l)
@@ -53,17 +54,21 @@ module _
   finite-type-Inhabited-Finite-Type = pr1 X
 
   type-Inhabited-Finite-Type : UU l
-  type-Inhabited-Finite-Type = type-Finite-Type finite-type-Inhabited-Finite-Type
+  type-Inhabited-Finite-Type =
+    type-Finite-Type finite-type-Inhabited-Finite-Type
 
   is-finite-Inhabited-Finite-Type : is-finite type-Inhabited-Finite-Type
-  is-finite-Inhabited-Finite-Type = is-finite-type-Finite-Type finite-type-Inhabited-Finite-Type
+  is-finite-Inhabited-Finite-Type =
+    is-finite-type-Finite-Type finite-type-Inhabited-Finite-Type
 
-  is-inhabited-type-Inhabited-Finite-Type : is-inhabited type-Inhabited-Finite-Type
+  is-inhabited-type-Inhabited-Finite-Type :
+    is-inhabited type-Inhabited-Finite-Type
   is-inhabited-type-Inhabited-Finite-Type = pr2 X
 
   inhabited-type-Inhabited-Finite-Type : Inhabited-Type l
   pr1 inhabited-type-Inhabited-Finite-Type = type-Inhabited-Finite-Type
-  pr2 inhabited-type-Inhabited-Finite-Type = is-inhabited-type-Inhabited-Finite-Type
+  pr2 inhabited-type-Inhabited-Finite-Type =
+    is-inhabited-type-Inhabited-Finite-Type
 
 compute-Inhabited-Finite-Type :
   {l : Level} →
@@ -100,7 +105,8 @@ map-inv-compute-Inhabited-Finite-Type' = map-inv-associative-Σ _ _ _
 ```agda
 Family-Of-Inhabited-Finite-Types :
   {l1 : Level} → (l2 : Level) → (X : Finite-Type l1) → UU (l1 ⊔ lsuc l2)
-Family-Of-Inhabited-Finite-Types l2 X = type-Finite-Type X → Inhabited-Finite-Type l2
+Family-Of-Inhabited-Finite-Types l2 X =
+  type-Finite-Type X → Inhabited-Finite-Type l2
 
 module _
   {l1 l2 : Level} (X : Finite-Type l1) (Y : Family-Of-Inhabited-Finite-Types l2 X)
@@ -109,9 +115,12 @@ module _
   type-Family-Of-Inhabited-Finite-Types : type-Finite-Type X → UU l2
   type-Family-Of-Inhabited-Finite-Types x = type-Inhabited-Finite-Type (Y x)
 
-  finite-type-Family-Of-Inhabited-Finite-Types : type-Finite-Type X → Finite-Type l2
-  pr1 (finite-type-Family-Of-Inhabited-Finite-Types x) = type-Family-Of-Inhabited-Finite-Types x
-  pr2 (finite-type-Family-Of-Inhabited-Finite-Types x) = is-finite-Inhabited-Finite-Type (Y x)
+  finite-type-Family-Of-Inhabited-Finite-Types :
+    type-Finite-Type X → Finite-Type l2
+  pr1 (finite-type-Family-Of-Inhabited-Finite-Types x) =
+    type-Family-Of-Inhabited-Finite-Types x
+  pr2 (finite-type-Family-Of-Inhabited-Finite-Types x) =
+    is-finite-Inhabited-Finite-Type (Y x)
 
   is-inhabited-type-Family-Of-Inhabited-Finite-Types :
     (x : type-Finite-Type X) → is-inhabited (type-Family-Of-Inhabited-Finite-Types x)
@@ -119,7 +128,8 @@ module _
     is-inhabited-type-Inhabited-Finite-Type (Y x)
 
   total-Family-Of-Inhabited-Finite-Types : Finite-Type (l1 ⊔ l2)
-  total-Family-Of-Inhabited-Finite-Types = Σ-Finite-Type X finite-type-Family-Of-Inhabited-Finite-Types
+  total-Family-Of-Inhabited-Finite-Types =
+    Σ-Finite-Type X finite-type-Family-Of-Inhabited-Finite-Types
 
 compute-Fam-Inhabited-Finite-Type :
   {l1 l2 : Level} → (X : Finite-Type l1) →
@@ -145,7 +155,7 @@ eq-equiv-Inhabited-Finite-Type :
 eq-equiv-Inhabited-Finite-Type X Y e =
   eq-type-subtype
     ( λ X → is-inhabited-Prop (type-Finite-Type X))
-    ( eq-equiv-𝔽
+    ( eq-equiv-Finite-Type
       ( finite-type-Inhabited-Finite-Type X)
       ( finite-type-Inhabited-Finite-Type Y)
       ( e))

@@ -48,17 +48,21 @@ module _
   transition-Petri-Net : UU l2
   transition-Petri-Net = type-Finite-Type transition-finite-type-Petri-Net
 
-  incoming-arc-finite-type-Petri-Net : place-Petri-Net → transition-Petri-Net → Finite-Type l3
+  incoming-arc-finite-type-Petri-Net :
+    place-Petri-Net → transition-Petri-Net → Finite-Type l3
   incoming-arc-finite-type-Petri-Net = pr1 (pr2 (pr2 P))
 
   incoming-arc-Petri-Net : place-Petri-Net → transition-Petri-Net → UU l3
-  incoming-arc-Petri-Net s t = type-Finite-Type (incoming-arc-finite-type-Petri-Net s t)
+  incoming-arc-Petri-Net s t =
+    type-Finite-Type (incoming-arc-finite-type-Petri-Net s t)
 
-  outgoing-arc-finite-type-Petri-Net : transition-Petri-Net → place-Petri-Net → Finite-Type l4
+  outgoing-arc-finite-type-Petri-Net :
+    transition-Petri-Net → place-Petri-Net → Finite-Type l4
   outgoing-arc-finite-type-Petri-Net = pr2 (pr2 (pr2 P))
 
   outgoing-arc-Petri-Net : transition-Petri-Net → place-Petri-Net → UU l4
-  outgoing-arc-Petri-Net t s = type-Finite-Type (outgoing-arc-finite-type-Petri-Net t s)
+  outgoing-arc-Petri-Net t s =
+    type-Finite-Type (outgoing-arc-finite-type-Petri-Net t s)
 ```
 
 [1]: https://arxiv.org/abs/2005.05108

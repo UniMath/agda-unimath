@@ -307,9 +307,11 @@ is-unbounded-π-finite-is-finite {A = A} H =
   .is-unbounded-π-finite-Id-is-unbounded-π-finite x y →
     is-unbounded-π-finite-is-finite (is-finite-eq-is-finite H)
 
-unbounded-π-finite-𝔽 : {l : Level} → Finite-Type l → Unbounded-π-Finite-Type l
-unbounded-π-finite-𝔽 A =
-  ( type-Finite-Type A , is-unbounded-π-finite-is-finite (is-finite-type-Finite-Type A))
+unbounded-π-finite-type-Finite-Type :
+  {l : Level} → Finite-Type l → Unbounded-π-Finite-Type l
+unbounded-π-finite-type-Finite-Type A =
+  ( type-Finite-Type A ,
+    is-unbounded-π-finite-is-finite (is-finite-type-Finite-Type A))
 ```
 
 ### The type of all `n`-element types in `UU l` is unbounded π-finite

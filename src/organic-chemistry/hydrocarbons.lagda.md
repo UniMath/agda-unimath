@@ -92,7 +92,8 @@ module _
   unordered-pair-vertices-hydrocarbon : UU (lsuc lzero ⊔ l1)
   unordered-pair-vertices-hydrocarbon = unordered-pair vertex-hydrocarbon
 
-  edge-hydrocarbon-Finite-Type : unordered-pair-vertices-hydrocarbon → Finite-Type l2
+  edge-hydrocarbon-Finite-Type :
+    unordered-pair-vertices-hydrocarbon → Finite-Type l2
   edge-hydrocarbon-Finite-Type = pr2 finite-graph-hydrocarbon
 
   edge-hydrocarbon : unordered-pair-vertices-hydrocarbon → UU l2
