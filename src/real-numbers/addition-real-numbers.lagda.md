@@ -16,6 +16,7 @@ open import elementary-number-theory.positive-rational-numbers
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
@@ -212,7 +213,7 @@ module _
     is-disjoint-cut-add-ℝ :
       (q : ℚ) →
       ¬ (is-in-subtype lower-cut-add-ℝ q × is-in-subtype upper-cut-add-ℝ q)
-    is-disjoint-cut-add-ℝ q (q-in-lower , q-in-upper) =
+    is-disjoint-cut-add-ℝ q (q<x+y , q-in-upper) =
       elim-exists
         ( empty-Prop)
         ( λ (lx , ly) (lx<x , ly<y , lx+ly=q) →
@@ -233,7 +234,7 @@ module _
                     ( le-lower-upper-cut-ℝ x lx ux lx<x x<ux)
                     ( le-lower-upper-cut-ℝ y ly uy ly<y y<uy))))
             ( q-in-upper))
-        ( q-in-lower)
+        ( q<x+y)
 
     arithmetically-located-add-ℝ :
       is-arithmetically-located-pair-of-subtypes-ℚ
@@ -300,13 +301,13 @@ module _
       le-ℚ p q →
       is-in-subtype lower-cut-add-ℝ q →
       is-in-subtype lower-cut-add-ℝ p
-    le-lower-cut-add-ℝ p q p<q q-in-lower =
+    le-lower-cut-add-ℝ p q p<q q<x+y =
       elim-exists
         ( lower-cut-add-ℝ p)
-        ( λ (xq , yq) (xq-in-lower-x , yq<y , xq+yq=q) →
+        ( λ (xq , yq) (xq<x+y-x , yq<y , xq+yq=q) →
           intro-exists
             ( xq , yq -ℚ (q -ℚ p))
-            ( xq-in-lower-x ,
+            ( xq<x+y-x ,
               le-lower-cut-ℝ
                 ( y)
                 ( yq -ℚ (q -ℚ p))
@@ -323,14 +324,14 @@ module _
                   by ap (q +ℚ_) (distributive-neg-diff-ℚ q p)
                 ＝ p
                   by is-identity-right-conjugation-Ab abelian-group-add-ℚ q p)))
-        ( q-in-lower)
+        ( q<x+y)
 
     le-upper-cut-add-ℝ :
       (p q : ℚ) →
       le-ℚ p q →
       is-in-subtype upper-cut-add-ℝ p →
       is-in-subtype upper-cut-add-ℝ q
-    le-upper-cut-add-ℝ p q p<q p-in-upper =
+    le-upper-cut-add-ℝ p q p<q x+y<p =
       elim-exists
         ( upper-cut-add-ℝ q)
         ( λ (xp , yp) (x<p , y<yp , xp+yp=p) →
@@ -350,7 +351,7 @@ module _
                 ＝ p +ℚ (q -ℚ p) by ap (_+ℚ (q -ℚ p)) xp+yp=p
                 ＝ q
                   by is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)))
-        ( p-in-upper)
+        ( x+y<p)
 
     located-add-ℝ :
       (p q : ℚ) →
@@ -390,29 +391,34 @@ module _
   (y : ℝ l2)
   where
 
-  commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
-  commutative-add-ℝ =
-    eq-sim-ℝ
-      ( x +ℝ y)
-      ( y +ℝ x)
-      ( (λ q →
-          map-exists
-            ( λ (ly , lx) →
-              is-in-lower-cut-ℝ y ly × is-in-lower-cut-ℝ x lx × (ly +ℚ lx ＝ q))
-            ( λ (lx , ly) → ly , lx)
-            ( λ (lx , ly) (lx<x , ly<y , lx+ly=q) →
-              ly<y ,
-              lx<x ,
-              commutative-add-ℚ ly lx ∙ lx+ly=q)) ,
-        (λ q →
-          map-exists
-            ( λ (lx , ly) →
-              is-in-lower-cut-ℝ x lx × is-in-lower-cut-ℝ y ly × (lx +ℚ ly ＝ q))
-            ( λ (ly , lx) → lx , ly)
-            ( λ (ly , lx) (ly<y , lx<x , ly+lx=q) →
-              lx<x ,
-              ly<y ,
-              commutative-add-ℚ lx ly ∙ ly+lx=q)))
+  abstract
+    commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
+    commutative-add-ℝ =
+      eq-sim-ℝ
+        ( x +ℝ y)
+        ( y +ℝ x)
+        ( (λ q →
+            map-exists
+              ( λ (ly , lx) →
+                is-in-lower-cut-ℝ y ly ×
+                is-in-lower-cut-ℝ x lx ×
+                (ly +ℚ lx ＝ q))
+              ( λ (lx , ly) → ly , lx)
+              ( λ (lx , ly) (lx<x , ly<y , lx+ly=q) →
+                ly<y ,
+                lx<x ,
+                commutative-add-ℚ ly lx ∙ lx+ly=q)) ,
+          (λ q →
+            map-exists
+              ( λ (lx , ly) →
+                is-in-lower-cut-ℝ x lx ×
+                is-in-lower-cut-ℝ y ly ×
+                (lx +ℚ ly ＝ q))
+              ( λ (ly , lx) → lx , ly)
+              ( λ (ly , lx) (ly<y , lx<x , ly+lx=q) →
+                lx<x ,
+                ly<y ,
+                commutative-add-ℚ lx ly ∙ ly+lx=q)))
 ```
 
 ### Unit laws for addition
@@ -464,13 +470,11 @@ abstract
 ### Addition is associative
 
 ```agda
-module _
-  {l : Level}
-  (x y z : ℝ l)
-  where
-
-  associative-add-ℝ : (x +ℝ y) +ℝ z ＝ x +ℝ (y +ℝ z)
-  associative-add-ℝ =
+abstract
+  associative-add-ℝ :
+    {l1 l2 l3 : Level} → (x : ℝ l1) (y : ℝ l2) (z : ℝ l3) →
+    (x +ℝ y) +ℝ z ＝ x +ℝ (y +ℝ z)
+  associative-add-ℝ x y z =
     eq-sim-ℝ
       ( (x +ℝ y) +ℝ z)
       ( x +ℝ (y +ℝ z))
@@ -540,47 +544,72 @@ module _
 ### The negative of a real number is its additive inverse
 
 ```agda
-module _
-  {l : Level} (x : ℝ l)
-  where
-
-  right-inverse-law-add-sim-ℝ : sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
-  pr1 right-inverse-law-add-sim-ℝ p =
-    elim-exists
-      ( le-ℚ-Prop p zero-ℚ)
-      ( λ (q , r) (q<x , x<-r , q+r=p) →
-        binary-tr
-          ( le-ℚ)
-          ( q+r=p)
-          ( left-inverse-law-add-ℚ r)
-          ( preserves-le-left-add-ℚ
-            ( r)
-            ( q)
-            ( neg-ℚ r)
-            ( le-lower-upper-cut-ℝ x q (neg-ℚ r) q<x x<-r)))
-  pr2 right-inverse-law-add-sim-ℝ p p<0 =
-    elim-exists
-      ( lower-cut-add-ℝ x (neg-ℝ x) p)
-      ( λ (q , r) (r<q-p , q<x , x<r) →
-        intro-exists
-          ( q , p -ℚ q)
-          ( q<x ,
-            le-upper-cut-ℝ
+abstract
+  right-inverse-law-add-sim-ℝ :
+    {l : Level} → (x : ℝ l) → sim-ℝ (x +ℝ neg-ℝ x) zero-ℝ
+  right-inverse-law-add-sim-ℝ x =
+    sim-rational-ℝ
+      ( x +ℝ neg-ℝ x ,
+        zero-ℚ ,
+        elim-exists
+          ( empty-Prop)
+          ( λ (p , q) (p<x , x<-q , p+q=0) →
+            is-disjoint-cut-ℝ
               ( x)
-              ( r)
-              ( neg-ℚ (p -ℚ q))
-              ( tr (le-ℚ r) (inv (distributive-neg-diff-ℚ p q)) r<q-p)
-              ( x<r) ,
-            is-identity-right-conjugation-Ab abelian-group-add-ℚ q p))
-      ( arithmetically-located-lower-upper-cut-ℝ
-        ( x)
-        ( neg-ℚ p ,
-          is-positive-le-zero-ℚ (neg-ℚ p) (neg-le-ℚ p zero-ℚ p<0)))
+              ( p)
+              ( p<x ,
+                tr
+                  ( is-in-upper-cut-ℝ x)
+                  ( inv (unique-left-inv-Group group-add-ℚ p q p+q=0)) x<-q)) ,
+        elim-exists
+          ( empty-Prop)
+          ( λ (p , q) (x<p , -q<x , p+q=0) →
+            is-disjoint-cut-ℝ
+              ( x)
+              ( p)
+              ( tr
+                  ( is-in-lower-cut-ℝ x)
+                  ( inv (unique-left-inv-Group group-add-ℚ p q p+q=0))
+                  ( -q<x) ,
+                x<p)))
 
-  left-inverse-law-add-sim-ℝ : sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
-  left-inverse-law-add-sim-ℝ =
+  left-inverse-law-add-sim-ℝ :
+    {l : Level} → (x : ℝ l) → sim-ℝ (neg-ℝ x +ℝ x) zero-ℝ
+  left-inverse-law-add-sim-ℝ x =
     tr
       ( λ y → sim-ℝ y zero-ℝ)
       ( commutative-add-ℝ x (neg-ℝ x))
-      ( right-inverse-law-add-sim-ℝ)
+      ( right-inverse-law-add-sim-ℝ x)
+```
+
+### The inclusion of rational numbers preserves addition
+
+```agda
+abstract
+  add-real-ℚ : (x y : ℚ) → real-ℚ x +ℝ real-ℚ y ＝ real-ℚ (x +ℚ y)
+  add-real-ℚ x y =
+    eq-sim-ℝ
+      ( real-ℚ x +ℝ real-ℚ y)
+      ( real-ℚ (x +ℚ y))
+      ( sim-rational-ℝ
+        ( real-ℚ x +ℝ real-ℚ y ,
+          x +ℚ y ,
+          elim-exists
+            ( empty-Prop)
+            ( λ (p , q) (p<x , q<y , p+q=x+y) →
+              irreflexive-le-ℚ
+                ( x +ℚ y)
+                ( tr
+                  ( λ p → le-ℚ p (x +ℚ y))
+                  ( p+q=x+y)
+                  ( preserves-le-add-ℚ {p} {x} {q} {y} p<x q<y))) ,
+          elim-exists
+            ( empty-Prop)
+            ( λ (p , q) (x<p , y<q , p+q=x+y) →
+              irreflexive-le-ℚ
+                ( x +ℚ y)
+                ( tr
+                  ( le-ℚ (x +ℚ y))
+                  ( p+q=x+y)
+                  ( preserves-le-add-ℚ {x} {p} {y} {q} x<p y<q)))))
 ```

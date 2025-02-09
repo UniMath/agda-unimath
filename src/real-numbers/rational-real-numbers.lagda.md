@@ -91,11 +91,17 @@ real-ℚ x =
     ( is-dedekind-cut-le-ℚ x)
 ```
 
-#### Important real numbers
+#### Zero, one, and negative one
 
 ```agda
+neg-one-ℝ : ℝ lzero
+neg-one-ℝ = real-ℚ neg-one-ℚ
+
 zero-ℝ : ℝ lzero
 zero-ℝ = real-ℚ zero-ℚ
+
+one-ℝ : ℝ lzero
+one-ℝ = real-ℚ one-ℚ
 ```
 
 ### The property of being a rational real number
