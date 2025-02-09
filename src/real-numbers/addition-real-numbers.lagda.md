@@ -52,10 +52,17 @@ open import real-numbers.similarity-real-numbers
 
 ## Idea
 
-Given two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and `y`, then {{#concept "sum" Disambiguation="of Dedekind real numbers" Agda=add-ℝ}} `x + y` is a Dedekind real number such that
+Given two [Dedekind real numbers](real-numbers.dedekind-real-numbers.md) `x` and
+`y`, then
+{{#concept "sum" Disambiguation="of Dedekind real numbers" Agda=add-ℝ}} `x + y`
+is a Dedekind real number such that
 
-1. A rational number `r` is in the lower cut of `x + y` if it can be written as a sum `r = p + q` where `p` is in the lower cut of `x` and `q` is in the lower cut of `y`.
-2. A rational number `r` is in the upper cut of `x + y` if it can be written as a sum `r = p + q` where `p` is in the upper cut of `x` and `q` is in the upper cut of `y`.
+1. A rational number `r` is in the lower cut of `x + y` if it can be written as
+   a sum `r = p + q` where `p` is in the lower cut of `x` and `q` is in the
+   lower cut of `y`.
+2. A rational number `r` is in the upper cut of `x + y` if it can be written as
+   a sum `r = p + q` where `p` is in the upper cut of `x` and `q` is in the
+   upper cut of `y`.
 
 Addition is an ordered abelian group structure on the reals.
 
