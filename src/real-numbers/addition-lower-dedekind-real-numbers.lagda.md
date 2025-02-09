@@ -191,10 +191,16 @@ module _
 module _
   {l1 l2 l3 : Level} (x : lower-ℝ l1) (y : lower-ℝ l2) (z : lower-ℝ l3)
   where
-{-
+
   associative-add-lower-ℝ :
     add-lower-ℝ (add-lower-ℝ x y) z ＝ add-lower-ℝ x (add-lower-ℝ y z)
   associative-add-lower-ℝ =
     eq-eq-cut-lower-ℝ
-      --(add-lower-ℝ (add-lower-ℝ  -}
+      ( add-lower-ℝ (add-lower-ℝ x y) z)
+      ( add-lower-ℝ x (add-lower-ℝ y z))
+      ( associative-minkowski-mul-Commutative-Monoid
+        ( commutative-monoid-add-ℚ)
+        ( cut-lower-ℝ x)
+        ( cut-lower-ℝ y)
+        ( cut-lower-ℝ z))
 ```
