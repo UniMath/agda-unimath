@@ -159,10 +159,10 @@ module _
                       ( q))))
             ( r<x+y))
 
-    add-lower-ℝ : lower-ℝ (l1 ⊔ l2)
-    pr1 add-lower-ℝ = cut-add-lower-ℝ
-    pr1 (pr2 add-lower-ℝ) = is-inhabited-cut-add-lower-ℝ
-    pr2 (pr2 add-lower-ℝ) = is-rounded-cut-add-lower-ℝ
+  add-lower-ℝ : lower-ℝ (l1 ⊔ l2)
+  pr1 add-lower-ℝ = cut-add-lower-ℝ
+  pr1 (pr2 add-lower-ℝ) = is-inhabited-cut-add-lower-ℝ
+  pr2 (pr2 add-lower-ℝ) = is-rounded-cut-add-lower-ℝ
 ```
 
 ## Properties
@@ -174,5 +174,27 @@ module _
   {l1 l2 : Level} (x : lower-ℝ l1) (y : lower-ℝ l2)
   where
 
---   commutative-add-lower-ℝ :
+  commutative-add-lower-ℝ : add-lower-ℝ x y ＝ add-lower-ℝ y x
+  commutative-add-lower-ℝ =
+    eq-eq-cut-lower-ℝ
+      ( add-lower-ℝ x y)
+      ( add-lower-ℝ y x)
+      ( commutative-minkowski-mul-Commutative-Monoid
+        ( commutative-monoid-add-ℚ)
+        ( cut-lower-ℝ x)
+        ( cut-lower-ℝ y))
+```
+
+### Addition of lower Dedekind real numbers is associative
+
+```agda
+module _
+  {l1 l2 l3 : Level} (x : lower-ℝ l1) (y : lower-ℝ l2) (z : lower-ℝ l3)
+  where
+{-
+  associative-add-lower-ℝ :
+    add-lower-ℝ (add-lower-ℝ x y) z ＝ add-lower-ℝ x (add-lower-ℝ y z)
+  associative-add-lower-ℝ =
+    eq-eq-cut-lower-ℝ
+      --(add-lower-ℝ (add-lower-ℝ  -}
 ```
