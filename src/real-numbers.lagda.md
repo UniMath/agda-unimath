@@ -14,4 +14,5 @@ open import real-numbers.negation-real-numbers public
 open import real-numbers.rational-real-numbers public
 open import real-numbers.similarity-real-numbers public
 open import real-numbers.strict-inequality-real-numbers public
+open import real-numbers.upper-dedekind-real-numbers public
 ```
