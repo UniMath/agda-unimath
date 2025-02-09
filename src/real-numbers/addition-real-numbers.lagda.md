@@ -97,13 +97,13 @@ module _
     pr1 (is-rounded-lower-cut-add-ℝ a) =
       elim-exists
         ( ∃ ℚ (λ b → (le-ℚ-Prop a b) ∧ (lower-cut-add-ℝ b)))
-        ( λ (p , q) (p-in-lower-x , q-in-lower-y , p+q=a) →
+        ( λ (p , q) (p<x , q<y , p+q=a) →
           elim-exists
             ( ∃ ℚ (λ b → (le-ℚ-Prop a b) ∧ (lower-cut-add-ℝ b)))
-            ( λ p' (p<p' , p'-in-lower-x) →
+            ( λ p' (p<p' , p'<x) →
               elim-exists
                 ( ∃ ℚ (λ b → (le-ℚ-Prop a b) ∧ (lower-cut-add-ℝ b)))
-                ( λ q' (q<q' , q'-in-lower-y) →
+                ( λ q' (q<q' , q'<y) →
                   intro-exists
                     ( p' +ℚ q')
                     ( tr
@@ -112,26 +112,26 @@ module _
                       ( preserves-le-add-ℚ {p} {p'} {q} {q'} p<p' q<q') ,
                       ( intro-exists)
                         ( p' , q')
-                        ( p'-in-lower-x , q'-in-lower-y , refl)))
+                        ( p'<x , q'<y , refl)))
                 ( forward-implication
                   ( is-rounded-lower-cut-ℝ y q)
-                  ( q-in-lower-y)))
-            ( forward-implication (is-rounded-lower-cut-ℝ x p) p-in-lower-x))
+                  ( q<y)))
+            ( forward-implication (is-rounded-lower-cut-ℝ x p) p<x))
     pr2 (is-rounded-lower-cut-add-ℝ a) =
       elim-exists
         ( lower-cut-add-ℝ a)
         ( λ b (a<b , b-in-lower-add) →
           elim-exists
             ( lower-cut-add-ℝ a)
-            ( λ (p , q) (p-in-lower-x , q-in-lower-y , p+q=b) →
+            ( λ (p , q) (p<x , q<y , p+q=b) →
               intro-exists
                 ( (p -ℚ (b -ℚ a) , q))
                 ( le-lower-cut-ℝ x
                   ( p -ℚ (b -ℚ a))
                   ( p)
                   ( le-diff-rational-ℚ⁺ p (positive-diff-le-ℚ a b a<b))
-                  ( p-in-lower-x) ,
-                  q-in-lower-y ,
+                  ( p<x) ,
+                  q<y ,
                   (equational-reasoning
                     (p -ℚ (b -ℚ a)) +ℚ q
                     ＝ (p +ℚ q) -ℚ (b -ℚ a)
@@ -145,10 +145,12 @@ module _
                       by ap (_-ℚ (b -ℚ a)) p+q=b
                     ＝ b +ℚ (a -ℚ b)
                       by ap (b +ℚ_) (distributive-neg-diff-ℚ b a)
-                    ＝ (b +ℚ a) -ℚ b
-                      by inv (associative-add-ℚ b a (neg-ℚ b))
-                    ＝ a by
-                      is-identity-conjugation-Ab abelian-group-add-ℚ b a)))
+                    ＝ a
+                      by
+                        is-identity-right-conjugation-Ab
+                          ( abelian-group-add-ℚ)
+                          ( b)
+                          ( a))))
             ( b-in-lower-add))
 
     is-rounded-upper-cut-add-ℝ :
@@ -158,7 +160,7 @@ module _
     pr1 (is-rounded-upper-cut-add-ℝ b) =
       elim-exists
         ( ∃ ℚ (λ a → (le-ℚ-Prop a b) ∧ (upper-cut-add-ℝ a)))
-        ( λ (p , q) (p-in-upper-x , q-in-upper-y , p+q=b) →
+        ( λ (p , q) (x<p , y<q , p+q=b) →
           elim-exists
             ( ∃ ℚ (λ a → (le-ℚ-Prop a b) ∧ (upper-cut-add-ℝ a)))
             ( λ p' ( p'<p , p'-in-upper-x) →
@@ -174,37 +176,37 @@ module _
                       intro-exists
                         ( p' , q')
                         ( p'-in-upper-x , q'-in-upper-y , refl)))
-                ( forward-implication
-                  ( is-rounded-upper-cut-ℝ y q)
-                  ( q-in-upper-y)))
-            ( forward-implication (is-rounded-upper-cut-ℝ x p) p-in-upper-x))
+                ( forward-implication (is-rounded-upper-cut-ℝ y q) y<q))
+            ( forward-implication (is-rounded-upper-cut-ℝ x p) x<p))
     pr2 (is-rounded-upper-cut-add-ℝ b) =
       elim-exists
         ( upper-cut-add-ℝ b)
-        ( λ a (a<b , a-in-upper-add) →
+        ( λ a (a<b , x+y<a) →
           elim-exists
             ( upper-cut-add-ℝ b)
-            ( λ (p , q) (p-in-upper-x , q-in-upper-y , p+q=a) →
+            ( λ (p , q) (x<p , y<q , p+q=a) →
               intro-exists
                 ( p , q +ℚ (b -ℚ a))
-                ( p-in-upper-x ,
+                ( x<p ,
                   le-upper-cut-ℝ
                     ( y)
                     ( q)
                     ( q +ℚ (b -ℚ a))
                     ( le-right-add-rational-ℚ⁺ q (positive-diff-le-ℚ a b a<b))
-                    ( q-in-upper-y) ,
+                    ( y<q) ,
                   ( equational-reasoning
                     p +ℚ (q +ℚ (b -ℚ a))
                     ＝ (p +ℚ q) +ℚ (b -ℚ a)
                       by inv (associative-add-ℚ p q (b -ℚ a))
                     ＝ a +ℚ (b -ℚ a)
                       by ap (_+ℚ (b -ℚ a)) p+q=a
-                    ＝ (a +ℚ b) -ℚ a
-                      by inv (associative-add-ℚ a b (neg-ℚ a))
                     ＝ b
-                      by is-identity-conjugation-Ab abelian-group-add-ℚ a b)))
-            ( a-in-upper-add))
+                      by
+                        is-identity-right-conjugation-Ab
+                          ( abelian-group-add-ℚ)
+                          ( a)
+                          ( b))))
+            ( x+y<a))
 
     is-disjoint-cut-add-ℝ :
       (q : ℚ) →
@@ -212,10 +214,10 @@ module _
     is-disjoint-cut-add-ℝ q (q-in-lower , q-in-upper) =
       elim-exists
         ( empty-Prop)
-        ( λ (lx , ly) (lx-in-lower-x , ly-in-lower-y , lx+ly=q) →
+        ( λ (lx , ly) (lx<x , ly<y , lx+ly=q) →
           elim-exists
             ( empty-Prop)
-            ( λ (ux , uy) (ux-in-upper-x , uy-in-upper-y , ux+uy=q) →
+            ( λ (ux , uy) (x<ux , y<uy , ux+uy=q) →
               irreflexive-le-ℚ
                 ( q)
                 ( binary-tr
@@ -227,13 +229,8 @@ module _
                     { ux}
                     { ly}
                     { uy}
-                    ( le-lower-upper-cut-ℝ x lx ux lx-in-lower-x ux-in-upper-x)
-                    ( le-lower-upper-cut-ℝ
-                      ( y)
-                      ( ly)
-                      ( uy)
-                      ( ly-in-lower-y)
-                      ( uy-in-upper-y)))))
+                    ( le-lower-upper-cut-ℝ x lx ux lx<x x<ux)
+                    ( le-lower-upper-cut-ℝ y ly uy ly<y y<uy))))
             ( q-in-upper))
         ( q-in-lower)
 
@@ -305,7 +302,7 @@ module _
     le-lower-cut-add-ℝ p q p<q q-in-lower =
       elim-exists
         ( lower-cut-add-ℝ p)
-        ( λ (xq , yq) (xq-in-lower-x , yq-in-lower-y , xq+yq=q) →
+        ( λ (xq , yq) (xq-in-lower-x , yq<y , xq+yq=q) →
           intro-exists
             ( xq , yq -ℚ (q -ℚ p))
             ( xq-in-lower-x ,
@@ -314,7 +311,7 @@ module _
                 ( yq -ℚ (q -ℚ p))
                 ( yq)
                 ( le-diff-rational-ℚ⁺ yq (positive-diff-le-ℚ p q p<q))
-                ( yq-in-lower-y) ,
+                ( yq<y) ,
               ( equational-reasoning
                 xq +ℚ (yq -ℚ (q -ℚ p))
                 ＝ (xq +ℚ yq) -ℚ (q -ℚ p)
@@ -323,9 +320,8 @@ module _
                   by ap (_-ℚ (q -ℚ p)) xq+yq=q
                 ＝ q +ℚ (p -ℚ q)
                   by ap (q +ℚ_) (distributive-neg-diff-ℚ q p)
-                ＝ (q +ℚ p) -ℚ q
-                  by inv (associative-add-ℚ q p (neg-ℚ q))
-                ＝ p by is-identity-conjugation-Ab abelian-group-add-ℚ q p)))
+                ＝ p
+                  by is-identity-right-conjugation-Ab abelian-group-add-ℚ q p)))
         ( q-in-lower)
 
     le-upper-cut-add-ℝ :
@@ -336,23 +332,23 @@ module _
     le-upper-cut-add-ℝ p q p<q p-in-upper =
       elim-exists
         ( upper-cut-add-ℝ q)
-        ( λ (xp , yp) (xp-in-upper-x , yp-in-upper-y , xp+yp=p) →
+        ( λ (xp , yp) (x<p , y<yp , xp+yp=p) →
           intro-exists
             ( xp , yp +ℚ (q -ℚ p))
-            ( xp-in-upper-x ,
+            ( x<p ,
               le-upper-cut-ℝ
                 ( y)
                 ( yp)
                 ( yp +ℚ (q -ℚ p))
                 ( le-right-add-rational-ℚ⁺ yp (positive-diff-le-ℚ p q p<q))
-                ( yp-in-upper-y) ,
+                ( y<yp) ,
               (equational-reasoning
                 xp +ℚ (yp +ℚ (q -ℚ p))
                 ＝ (xp +ℚ yp) +ℚ (q -ℚ p)
                   by inv (associative-add-ℚ xp yp (q -ℚ p))
                 ＝ p +ℚ (q -ℚ p) by ap (_+ℚ (q -ℚ p)) xp+yp=p
-                ＝ (p +ℚ q) -ℚ p by inv (associative-add-ℚ p q (neg-ℚ p))
-                ＝ q by is-identity-conjugation-Ab abelian-group-add-ℚ p q)))
+                ＝ q
+                  by is-identity-right-conjugation-Ab abelian-group-add-ℚ p q)))
         ( p-in-upper)
 
     located-add-ℝ :
@@ -395,28 +391,26 @@ module _
 
   commutative-add-ℝ : x +ℝ y ＝ y +ℝ x
   commutative-add-ℝ =
-    eq-eq-lower-cut-ℝ
+    eq-sim-ℝ
       ( x +ℝ y)
       ( y +ℝ x)
-      ( eq-has-same-elements-subtype
-        ( lower-cut-add-ℝ x y)
-        ( lower-cut-add-ℝ y x)
-        ( λ q →
+      ( (λ q →
           map-exists
             ( λ (ly , lx) →
               is-in-lower-cut-ℝ y ly × is-in-lower-cut-ℝ x lx × (ly +ℚ lx ＝ q))
             ( λ (lx , ly) → ly , lx)
-            ( λ (lx , ly) (lx-in-lower-x , ly-in-lower-y , lx+ly=q) →
-              ly-in-lower-y ,
-              lx-in-lower-x ,
-              commutative-add-ℚ ly lx ∙ lx+ly=q) ,
+            ( λ (lx , ly) (lx<x , ly<y , lx+ly=q) →
+              ly<y ,
+              lx<x ,
+              commutative-add-ℚ ly lx ∙ lx+ly=q)) ,
+        (λ q →
           map-exists
             ( λ (lx , ly) →
               is-in-lower-cut-ℝ x lx × is-in-lower-cut-ℝ y ly × (lx +ℚ ly ＝ q))
             ( λ (ly , lx) → lx , ly)
-            ( λ (ly , lx) (ly-in-lower-y , lx-in-lower-x , ly+lx=q) →
-              lx-in-lower-x ,
-              ly-in-lower-y ,
+            ( λ (ly , lx) (ly<y , lx<x , ly+lx=q) →
+              lx<x ,
+              ly<y ,
               commutative-add-ℚ lx ly ∙ ly+lx=q)))
 ```
 
@@ -476,49 +470,47 @@ module _
 
   associative-add-ℝ : (x +ℝ y) +ℝ z ＝ x +ℝ (y +ℝ z)
   associative-add-ℝ =
-    eq-eq-lower-cut-ℝ
+    eq-sim-ℝ
       ( (x +ℝ y) +ℝ z)
       ( x +ℝ (y +ℝ z))
-      ( eq-has-same-elements-subtype
-        ( lower-cut-ℝ ((x +ℝ y) +ℝ z))
-        ( lower-cut-ℝ (x +ℝ (y +ℝ z)))
-        ( λ q →
+      ( (λ q →
           elim-exists
             ( lower-cut-ℝ (x +ℝ (y +ℝ z)) q)
-            ( λ (lx+ly , lz) (lx+ly-in-lower-x+y , lz-in-lower-z , lx+ly+lz=q) →
+            ( λ (lx+ly , lz) (lx+ly<x+y , lz<z , lx+ly+lz=q) →
               elim-exists
                 ( lower-cut-ℝ (x +ℝ (y +ℝ z)) q)
-                ( λ (lx , ly) (lx-in-lower-x , ly-in-lower-y , lx+ly=lx+ly) →
+                ( λ (lx , ly) (lx<x , ly<y , lx+ly=lx+ly) →
                   intro-exists
                     ( lx , ly +ℚ lz)
-                    ( lx-in-lower-x ,
+                    ( lx<x ,
                       intro-exists
                         ( ly , lz)
-                        ( ly-in-lower-y , lz-in-lower-z , refl) ,
+                        ( ly<y , lz<z , refl) ,
                       (equational-reasoning
                         lx +ℚ (ly +ℚ lz)
                         ＝ (lx +ℚ ly) +ℚ lz by inv (associative-add-ℚ lx ly lz)
                         ＝ lx+ly +ℚ lz by ap (_+ℚ lz) lx+ly=lx+ly
                         ＝ q by lx+ly+lz=q)))
-                ( lx+ly-in-lower-x+y)) ,
+                ( lx+ly<x+y))) ,
+        (λ q →
           elim-exists
             ( lower-cut-ℝ ((x +ℝ y) +ℝ z) q)
-            ( λ (lx , ly+lz) (lx-in-lower-x , ly+lz-in-lower-y+z , lx+ly+lz=q) →
+            ( λ (lx , ly+lz) (lx<x , ly+lz<y+z , lx+ly+lz=q) →
               elim-exists
                 ( lower-cut-ℝ ((x +ℝ y) +ℝ z) q)
-                ( λ (ly , lz) (ly-in-lower-y , lz-in-lower-z , ly+lz=ly+lz) →
+                ( λ (ly , lz) (ly<y , lz<z , ly+lz=ly+lz) →
                   intro-exists
                     ( lx +ℚ ly , lz)
                     ( intro-exists
                       ( lx , ly)
-                      ( lx-in-lower-x , ly-in-lower-y , refl) ,
-                      lz-in-lower-z ,
+                      ( lx<x , ly<y , refl) ,
+                      lz<z ,
                       ( equational-reasoning
                         (lx +ℚ ly) +ℚ lz
                         ＝ lx +ℚ (ly +ℚ lz) by associative-add-ℚ lx ly lz
                         ＝ lx +ℚ ly+lz by ap (lx +ℚ_) ly+lz=ly+lz
                         ＝ q by lx+ly+lz=q)))
-                ( ly+lz-in-lower-y+z))))
+                ( ly+lz<y+z))))
 ```
 
 ### Addition preserves similarity
