@@ -13,6 +13,7 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.powersets
 open import foundation.subtypes
+open import foundation.inhabited-subtypes
 open import foundation.transport-along-identifications
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
@@ -127,6 +128,26 @@ module _
     semigroup-minkowski-mul-Semigroup (semigroup-Monoid M)
   pr2 monoid-minkowski-mul-Monoid = is-unital-minkowski-mul-Monoid
 ```
+
+### The Minkowski multiplication of two inhabited subsets of a monoid is inhabited
+
+```agda
+module _
+  {l1 : Level}
+  (M : Monoid l1)
+  where
+
+  minkowski-mul-inhabited-is-inhabited-Monoid :
+    {l2 l3 : Level} →
+    (A : subset-Monoid l2 M) →
+    (B : subset-Monoid l3 M) →
+    is-inhabited-subtype A →
+    is-inhabited-subtype B →
+    is-inhabited-subtype (minkowski-mul-Monoid M A B)
+  minkowski-mul-inhabited-is-inhabited-Monoid =
+    minkowski-mul-inhabited-is-inhabited-Semigroup (semigroup-Monoid M)
+```
+
 
 ## See also
 
