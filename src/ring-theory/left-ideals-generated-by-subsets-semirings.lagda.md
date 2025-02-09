@@ -89,7 +89,8 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (R : Semiring l1) {U : UU l2} (a : U → type-Semiring R)
-  (I : left-ideal-Semiring l3 R) (H : (α : U) → is-in-left-ideal-Semiring R I (a α))
+  (I : left-ideal-Semiring l3 R)
+  (H : (α : U) → is-in-left-ideal-Semiring R I (a α))
   where
 
   is-left-ideal-generated-by-family-of-elements-Semiring : UUω
@@ -127,7 +128,7 @@ module _
 
   is-closed-under-addition-left-ideal-subset-Semiring :
     is-closed-under-addition-subset-Semiring R subset-left-ideal-subset-Semiring
-  is-closed-under-addition-left-ideal-subset-Semiring x y H K =
+  is-closed-under-addition-left-ideal-subset-Semiring H K =
     apply-twice-universal-property-trunc-Prop H K
       ( subset-left-ideal-subset-Semiring _)
       ( λ H' K' →
@@ -135,8 +136,8 @@ module _
           ( is-left-linear-combination-mul-monoid-Semiring R
             ( additive-monoid-Semiring R)
             ( λ r (s , p) → mul-Semiring R r s)
-            ( x)
-            ( y)
+            ( _)
+            ( _)
             ( H')
             ( K')))
 
@@ -187,8 +188,6 @@ module _
   contains-left-linear-combinations-left-ideal-subset-Semiring I H
     ( cons (r , (s , K)) l) =
     is-closed-under-addition-left-ideal-Semiring R I
-      ( mul-Semiring R r s)
-      ( ev-left-linear-combination-subset-Semiring R S l)
       ( is-closed-under-left-multiplication-left-ideal-Semiring R I r s (H s K))
       ( contains-left-linear-combinations-left-ideal-subset-Semiring I H l)
 
@@ -341,7 +340,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (R : Semiring l1) {U : UU l2} (S : U → subset-Semiring l3 R)
+  {l1 l2 l3 : Level} (R : Semiring l1)
+  {U : UU l2} (S : U → subset-Semiring l3 R)
   where
 
   generating-subset-left-ideal-family-of-subsets-Semiring :
@@ -453,18 +453,18 @@ module _
   where
 
   cases-forward-inclusion-idempotent-left-ideal-subset-Semiring :
-    (l : left-linear-combination-subset-Semiring R (subset-left-ideal-Semiring R I)) →
+    (l :
+      left-linear-combination-subset-Semiring R
+        ( subset-left-ideal-Semiring R I)) →
     is-in-left-ideal-Semiring R I
-      ( ev-left-linear-combination-subset-Semiring R (subset-left-ideal-Semiring R I) l)
+      ( ev-left-linear-combination-subset-Semiring R
+        ( subset-left-ideal-Semiring R I)
+        ( l))
   cases-forward-inclusion-idempotent-left-ideal-subset-Semiring nil =
     contains-zero-left-ideal-Semiring R I
   cases-forward-inclusion-idempotent-left-ideal-subset-Semiring
     ( cons (x , y , u) l) =
     is-closed-under-addition-left-ideal-Semiring R I
-      ( mul-Semiring R x y)
-      ( ev-left-linear-combination-subset-Semiring R
-        ( subset-left-ideal-Semiring R I)
-        ( l))
       ( is-closed-under-left-multiplication-left-ideal-Semiring R I x y u)
       ( cases-forward-inclusion-idempotent-left-ideal-subset-Semiring l)
 

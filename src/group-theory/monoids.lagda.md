@@ -18,8 +18,8 @@ open import foundation.universe-levels
 
 open import group-theory.semigroups
 
-open import structured-types.magmas
 open import structured-types.h-spaces
+open import structured-types.magmas
 open import structured-types.wild-monoids
 ```
 

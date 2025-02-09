@@ -104,14 +104,19 @@ module _
     is-set-type-Monoid monoid-Monoid-With-Left-Semiring-Action
 
   mul-Monoid-With-Left-Semiring-Action :
-    (x y : type-Monoid-With-Left-Semiring-Action) → type-Monoid-With-Left-Semiring-Action
+    (x y : type-Monoid-With-Left-Semiring-Action) →
+    type-Monoid-With-Left-Semiring-Action
   mul-Monoid-With-Left-Semiring-Action =
     mul-Monoid monoid-Monoid-With-Left-Semiring-Action
 
   associative-mul-Monoid-With-Left-Semiring-Action :
     (x y z : type-Monoid-With-Left-Semiring-Action) →
-    mul-Monoid-With-Left-Semiring-Action (mul-Monoid-With-Left-Semiring-Action x y) z ＝
-    mul-Monoid-With-Left-Semiring-Action x (mul-Monoid-With-Left-Semiring-Action y z)
+    mul-Monoid-With-Left-Semiring-Action
+      ( mul-Monoid-With-Left-Semiring-Action x y)
+      ( z) ＝
+    mul-Monoid-With-Left-Semiring-Action
+      ( x)
+      ( mul-Monoid-With-Left-Semiring-Action y z)
   associative-mul-Monoid-With-Left-Semiring-Action =
     associative-mul-Monoid monoid-Monoid-With-Left-Semiring-Action
 
