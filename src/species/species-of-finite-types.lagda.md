@@ -18,7 +18,7 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A **species of finite types** is a map from `𝔽` to a `𝔽`.
+A **species of finite types** is a map from `Finite-Type` to a `Finite-Type`.
 
 ## Definition
 

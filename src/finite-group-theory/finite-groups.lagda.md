@@ -110,7 +110,7 @@ module _
   pr1 group-Finite-Group = semigroup-Finite-Group
   pr2 group-Finite-Group = is-group-Finite-Group
 
-  finite-type-Finite-Group : 𝔽 l
+  finite-type-Finite-Group : Finite-Type l
   finite-type-Finite-Group =
     finite-type-Finite-Semigroup finite-semigroup-Finite-Group
 
@@ -118,7 +118,7 @@ module _
   type-Finite-Group = type-Group group-Finite-Group
 
   is-finite-type-Finite-Group : is-finite type-Finite-Group
-  is-finite-type-Finite-Group = is-finite-type-𝔽 finite-type-Finite-Group
+  is-finite-type-Finite-Group = is-finite-type-Finite-Type finite-type-Finite-Group
 
   has-decidable-equality-Finite-Group : has-decidable-equality type-Finite-Group
   has-decidable-equality-Finite-Group =
@@ -454,7 +454,7 @@ mere-equiv-number-of-groups-of-order n =
 ```agda
 module _
   {l : Level}
-  (X : 𝔽 l)
+  (X : Finite-Type l)
   where
 
   structure-finite-group : UU l
@@ -477,16 +477,16 @@ module _
           ( λ u →
             is-finite-Σ
               ( is-finite-Π
-                ( is-finite-type-𝔽 X)
-                ( λ _ → is-finite-type-𝔽 X))
+                ( is-finite-type-Finite-Type X)
+                ( λ _ → is-finite-type-Finite-Type X))
               ( λ i →
                 is-finite-product
                   ( is-finite-Π
-                    ( is-finite-type-𝔽 X)
-                    ( λ x → is-finite-eq-𝔽 X))
+                    ( is-finite-type-Finite-Type X)
+                    ( λ x → is-finite-eq-Finite-Type X))
                   ( is-finite-Π
-                    ( is-finite-type-𝔽 X)
-                    ( λ x → is-finite-eq-𝔽 X)))))
+                    ( is-finite-type-Finite-Type X)
+                    ( λ x → is-finite-eq-Finite-Type X)))))
 ```
 
 ## References

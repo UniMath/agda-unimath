@@ -39,7 +39,7 @@ A homomorphism between two finite species is a pointwise family of maps.
 hom-finite-species :
   {l1 l2 l3 : Level} → finite-species l1 l2 → finite-species l1 l3 →
   UU (lsuc l1 ⊔ l2 ⊔ l3)
-hom-finite-species {l1} F G = (X : 𝔽 l1) → type-𝔽 (F X) → type-𝔽 (G X)
+hom-finite-species {l1} F G = (X : Finite-Type l1) → type-Finite-Type (F X) → type-Finite-Type (G X)
 ```
 
 ### The identity morphisms of finite species
@@ -67,7 +67,7 @@ htpy-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3) →
   (hom-finite-species F G) → (hom-finite-species F G) →
   UU (lsuc l1 ⊔ l2 ⊔ l3)
-htpy-hom-finite-species {l1} F G f g = (X : 𝔽 l1) → (f X) ~ (g X)
+htpy-hom-finite-species {l1} F G f g = (X : Finite-Type l1) → (f X) ~ (g X)
 
 refl-htpy-hom-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3) →
@@ -156,7 +156,7 @@ is-set-hom-finite-species F G f g =
       ( λ X →
         is-prop-Π
           ( λ x p q →
-            is-set-is-finite (is-finite-type-𝔽 (G X)) (f X x) (g X x) p q)))
+            is-set-is-finite (is-finite-type-Finite-Type (G X)) (f X x) (g X x) p q)))
 
 hom-set-finite-species :
   {l1 l2 l3 : Level} (F : finite-species l1 l2) (G : finite-species l1 l3) →

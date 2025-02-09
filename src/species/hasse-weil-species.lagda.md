@@ -33,25 +33,25 @@ of finite inhabited types defined for any finite inhabited type `k` as
 
 ```agda
 is-closed-under-products-function-from-Finite-Commutative-Ring :
-  {l1 l2 : Level} → (Finite-Commutative-Ring l1 → 𝔽 l2) → UU (lsuc l1 ⊔ l2)
+  {l1 l2 : Level} → (Finite-Commutative-Ring l1 → Finite-Type l2) → UU (lsuc l1 ⊔ l2)
 is-closed-under-products-function-from-Finite-Commutative-Ring {l1} {l2} S =
   (R1 R2 : Finite-Commutative-Ring l1) →
-  ( type-𝔽 (S (product-Finite-Commutative-Ring R1 R2))) ≃
-  ( type-𝔽 (S R1) × type-𝔽 (S R2))
+  ( type-Finite-Type (S (product-Finite-Commutative-Ring R1 R2))) ≃
+  ( type-Finite-Type (S R1) × type-Finite-Type (S R2))
 ```
 
 ```text
 module _
   {l1 l2 : Level}
   (l3 l4 : Level)
-  (S : Finite-Commutative-Ring l1 → 𝔽 l2)
+  (S : Finite-Commutative-Ring l1 → Finite-Type l2)
   (C : is-closed-under-products-function-from-Finite-Commutative-Ring S)
   where
 
   hasse-weil-species-Inhabited-Finite-Type :
     species-Inhabited-Finite-Type l1 (l1 ⊔ l2 ⊔ lsuc l3 ⊔ lsuc l4)
   hasse-weil-species-Inhabited-Finite-Type ( k , (f , i)) =
-    Σ-𝔽 {!!}
+    Σ-Finite-Type {!!}
         ( λ p →
           S
             ( commutative-finite-ring-Semisimple-Finite-Commutative-Ring

@@ -55,11 +55,11 @@ module _
   (t : tetrahedron-in-3-space) (v : vertex-tetrahedron-in-3-space t)
   where
 
-  vertex-ethane-𝔽 : 𝔽 lzero
-  vertex-ethane-𝔽 = Fin-𝔽 2
+  vertex-ethane-Finite-Type : Finite-Type lzero
+  vertex-ethane-Finite-Type = finite-type-Fin 2
 
   vertex-ethane : UU lzero
-  vertex-ethane = type-𝔽 vertex-ethane-𝔽
+  vertex-ethane = type-Finite-Type vertex-ethane-Finite-Type
 
   edge-ethane-Prop : unordered-pair vertex-ethane → Prop lzero
   edge-ethane-Prop p =
@@ -138,13 +138,13 @@ module _
             ( edge-ethane-Prop p)
             ( is-decidable-edge-ethane-eq-Fin-two p (inv (eq-equiv e))))
 
-  edge-ethane-𝔽 : unordered-pair vertex-ethane → 𝔽 lzero
-  pr1 (edge-ethane-𝔽 p) = edge-ethane p
-  pr2 (edge-ethane-𝔽 p) = is-finite-edge-ethane p
+  edge-ethane-Finite-Type : unordered-pair vertex-ethane → Finite-Type lzero
+  pr1 (edge-ethane-Finite-Type p) = edge-ethane p
+  pr2 (edge-ethane-Finite-Type p) = is-finite-edge-ethane p
 
   finite-graph-ethane : Finite-Undirected-Graph lzero lzero
-  pr1 finite-graph-ethane = vertex-ethane-𝔽
-  pr2 finite-graph-ethane = edge-ethane-𝔽
+  pr1 finite-graph-ethane = vertex-ethane-Finite-Type
+  pr2 finite-graph-ethane = edge-ethane-Finite-Type
 
   bonding-ethane :
     (c : vertex-ethane) →

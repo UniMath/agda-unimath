@@ -79,39 +79,39 @@ module _
 
 ```agda
 ferrers-diagram-𝔽 :
-  {l1 : Level} (l2 l3 : Level) (A : 𝔽 l1) → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  {l1 : Level} (l2 l3 : Level) (A : Finite-Type l1) → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
 ferrers-diagram-𝔽 {l} l2 l3 A =
-  Σ ( 𝔽 l2)
+  Σ ( Finite-Type l2)
     ( λ X →
-      Σ ( type-𝔽 X → 𝔽 l3)
+      Σ ( type-Finite-Type X → Finite-Type l3)
         ( λ Y →
-          ((x : type-𝔽 X) → type-trunc-Prop (type-𝔽 (Y x))) ×
-          mere-equiv (type-𝔽 A) (Σ (type-𝔽 X) (λ x → type-𝔽 (Y x)))))
+          ((x : type-Finite-Type X) → type-trunc-Prop (type-Finite-Type (Y x))) ×
+          mere-equiv (type-Finite-Type A) (Σ (type-Finite-Type X) (λ x → type-Finite-Type (Y x)))))
 
 module _
-  {l1 l2 l3 : Level} (A : 𝔽 l1) (D : ferrers-diagram-𝔽 l2 l3 A)
+  {l1 l2 l3 : Level} (A : Finite-Type l1) (D : ferrers-diagram-𝔽 l2 l3 A)
   where
 
-  row-ferrers-diagram-𝔽 : 𝔽 l2
+  row-ferrers-diagram-𝔽 : Finite-Type l2
   row-ferrers-diagram-𝔽 = pr1 D
 
   type-row-ferrers-diagram-𝔽 : UU l2
-  type-row-ferrers-diagram-𝔽 = type-𝔽 row-ferrers-diagram-𝔽
+  type-row-ferrers-diagram-𝔽 = type-Finite-Type row-ferrers-diagram-𝔽
 
   is-finite-type-row-ferrers-diagram-𝔽 : is-finite type-row-ferrers-diagram-𝔽
   is-finite-type-row-ferrers-diagram-𝔽 =
-    is-finite-type-𝔽 row-ferrers-diagram-𝔽
+    is-finite-type-Finite-Type row-ferrers-diagram-𝔽
 
-  dot-ferrers-diagram-𝔽 : type-row-ferrers-diagram-𝔽 → 𝔽 l3
+  dot-ferrers-diagram-𝔽 : type-row-ferrers-diagram-𝔽 → Finite-Type l3
   dot-ferrers-diagram-𝔽 = pr1 (pr2 D)
 
   type-dot-ferrers-diagram-𝔽 : type-row-ferrers-diagram-𝔽 → UU l3
-  type-dot-ferrers-diagram-𝔽 x = type-𝔽 (dot-ferrers-diagram-𝔽 x)
+  type-dot-ferrers-diagram-𝔽 x = type-Finite-Type (dot-ferrers-diagram-𝔽 x)
 
   is-finite-type-dot-ferrers-diagram-𝔽 :
     (x : type-row-ferrers-diagram-𝔽) → is-finite (type-dot-ferrers-diagram-𝔽 x)
   is-finite-type-dot-ferrers-diagram-𝔽 x =
-    is-finite-type-𝔽 (dot-ferrers-diagram-𝔽 x)
+    is-finite-type-Finite-Type (dot-ferrers-diagram-𝔽 x)
 
   is-inhabited-dot-ferrers-diagram-𝔽 :
     (x : type-row-ferrers-diagram-𝔽) →
@@ -120,11 +120,11 @@ module _
 
   mere-equiv-ferrers-diagram-𝔽 :
     mere-equiv
-      ( type-𝔽 A)
+      ( type-Finite-Type A)
       ( Σ (type-row-ferrers-diagram-𝔽) (type-dot-ferrers-diagram-𝔽))
   mere-equiv-ferrers-diagram-𝔽 = pr2 (pr2 (pr2 D))
 
-  ferrers-diagram-ferrers-diagram-𝔽 : ferrers-diagram l2 l3 (type-𝔽 A)
+  ferrers-diagram-ferrers-diagram-𝔽 : ferrers-diagram l2 l3 (type-Finite-Type A)
   pr1 ferrers-diagram-ferrers-diagram-𝔽 = type-row-ferrers-diagram-𝔽
   pr1 (pr2 ferrers-diagram-ferrers-diagram-𝔽) = type-dot-ferrers-diagram-𝔽
   pr1 (pr2 (pr2 ferrers-diagram-ferrers-diagram-𝔽)) =
@@ -191,7 +191,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : 𝔽 l1) (D : ferrers-diagram-𝔽 l2 l3 A)
+  {l1 l2 l3 : Level} (A : Finite-Type l1) (D : ferrers-diagram-𝔽 l2 l3 A)
   where
 
   equiv-ferrers-diagram-𝔽 :
@@ -232,7 +232,7 @@ module _
         ( λ x →
           is-prop-product
             ( is-prop-Π (λ x → is-prop-type-trunc-Prop))
-            ( is-prop-mere-equiv (type-𝔽 A) _))
+            ( is-prop-mere-equiv (type-Finite-Type A) _))
         ( dot-ferrers-diagram-𝔽 A D)
         ( λ x → id-equiv)
         ( pair

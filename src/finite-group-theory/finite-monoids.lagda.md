@@ -74,7 +74,7 @@ module _
   semigroup-Finite-Monoid : Semigroup l
   semigroup-Finite-Monoid = semigroup-Finite-Semigroup finite-semigroup-Finite-Monoid
 
-  finite-type-Finite-Monoid : 𝔽 l
+  finite-type-Finite-Monoid : Finite-Type l
   finite-type-Finite-Monoid = finite-type-Finite-Semigroup finite-semigroup-Finite-Monoid
 
   type-Finite-Monoid : UU l
@@ -264,27 +264,27 @@ is-finite-is-unital-Finite-Semigroup G =
       is-finite-product
         ( is-finite-Π
           ( is-finite-type-Finite-Semigroup G)
-          ( λ x → is-finite-eq-𝔽 (finite-type-Finite-Semigroup G)))
+          ( λ x → is-finite-eq-Finite-Type (finite-type-Finite-Semigroup G)))
         ( is-finite-Π
           ( is-finite-type-Finite-Semigroup G)
-          ( λ x → is-finite-eq-𝔽 (finite-type-Finite-Semigroup G))))
+          ( λ x → is-finite-eq-Finite-Type (finite-type-Finite-Semigroup G))))
 ```
 
 ### There is a finite number of ways to equip a finite type with the structure of a monoid
 
 ```agda
 structure-finite-monoid :
-  {l1 : Level} → 𝔽 l1 → UU l1
+  {l1 : Level} → Finite-Type l1 → UU l1
 structure-finite-monoid X =
   Σ (structure-finite-semigroup X) (λ p → is-unital-Finite-Semigroup (X , p))
 
 finite-monoid-structure-finite-monoid :
-  {l : Level} → (X : 𝔽 l) → structure-finite-monoid X → Finite-Monoid l
+  {l : Level} → (X : Finite-Type l) → structure-finite-monoid X → Finite-Monoid l
 pr1 (finite-monoid-structure-finite-monoid X (a , u)) = X , a
 pr2 (finite-monoid-structure-finite-monoid X (a , u)) = u
 
 is-finite-structure-finite-monoid :
-  {l : Level} → (X : 𝔽 l) → is-finite (structure-finite-monoid X)
+  {l : Level} → (X : Finite-Type l) → is-finite (structure-finite-monoid X)
 is-finite-structure-finite-monoid X =
   is-finite-Σ
     ( is-finite-structure-finite-semigroup X)

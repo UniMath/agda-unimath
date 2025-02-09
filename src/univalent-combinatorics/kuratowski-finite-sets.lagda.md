@@ -52,18 +52,18 @@ module _
   {l : Level} (X : 𝔽-Kuratowski l)
   where
 
-  set-𝔽-Kuratowski : Set l
-  set-𝔽-Kuratowski = pr1 X
+  set-Finite-Type-Kuratowski : Set l
+  set-Finite-Type-Kuratowski = pr1 X
 
   type-𝔽-Kuratowski : UU l
-  type-𝔽-Kuratowski = type-Set set-𝔽-Kuratowski
+  type-𝔽-Kuratowski = type-Set set-Finite-Type-Kuratowski
 
   is-set-type-𝔽-Kuratowski : is-set type-𝔽-Kuratowski
-  is-set-type-𝔽-Kuratowski = is-set-type-Set set-𝔽-Kuratowski
+  is-set-type-𝔽-Kuratowski = is-set-type-Set set-Finite-Type-Kuratowski
 
-  is-kuratowski-finite-set-𝔽-Kuratowski :
-    is-kuratowski-finite-set set-𝔽-Kuratowski
-  is-kuratowski-finite-set-𝔽-Kuratowski = pr2 X
+  is-kuratowski-finite-set-Finite-Type-Kuratowski :
+    is-kuratowski-finite-set set-Finite-Type-Kuratowski
+  is-kuratowski-finite-set-Finite-Type-Kuratowski = pr2 X
 ```
 
 ## Properties
@@ -77,7 +77,7 @@ is-finite-has-decidable-equality-type-𝔽-Kuratowski :
   is-finite (type-𝔽-Kuratowski X)
 is-finite-has-decidable-equality-type-𝔽-Kuratowski X H =
   apply-universal-property-trunc-Prop
-    ( is-kuratowski-finite-set-𝔽-Kuratowski X)
+    ( is-kuratowski-finite-set-Finite-Type-Kuratowski X)
     ( is-finite-Prop (type-𝔽-Kuratowski X))
     ( λ (n , f , s) → is-finite-codomain (is-finite-Fin n) s H)
 

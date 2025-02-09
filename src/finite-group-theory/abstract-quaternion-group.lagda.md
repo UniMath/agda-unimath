@@ -926,7 +926,7 @@ count-Q8 = pair 8 equiv-count-Q8
 is-finite-Q8 : is-finite Q8
 is-finite-Q8 = unit-trunc-Prop count-Q8
 
-finite-type-Q8 : 𝔽 lzero
+finite-type-Q8 : Finite-Type lzero
 finite-type-Q8 = pair Q8 is-finite-Q8
 
 has-cardinality-eight-Q8 : has-cardinality 8 Q8

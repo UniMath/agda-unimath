@@ -49,15 +49,15 @@ consisting of:
 
 ```agda
 module _
-  {l1 l2 : Level} (X : 𝔽 l1) (Y : 𝔽 l2)
+  {l1 l2 : Level} (X : Finite-Type l1) (Y : Finite-Type l2)
   where
 
-  vertex-finite-type-complete-bipartite-Finite-Undirected-Graph : 𝔽 (l1 ⊔ l2)
-  vertex-finite-type-complete-bipartite-Finite-Undirected-Graph = coproduct-𝔽 X Y
+  vertex-finite-type-complete-bipartite-Finite-Undirected-Graph : Finite-Type (l1 ⊔ l2)
+  vertex-finite-type-complete-bipartite-Finite-Undirected-Graph = coproduct-Finite-Type X Y
 
   vertex-complete-bipartite-Finite-Undirected-Graph : UU (l1 ⊔ l2)
   vertex-complete-bipartite-Finite-Undirected-Graph =
-    type-𝔽 vertex-finite-type-complete-bipartite-Finite-Undirected-Graph
+    type-Finite-Type vertex-finite-type-complete-bipartite-Finite-Undirected-Graph
 
   unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph :
     UU (lsuc lzero ⊔ l1 ⊔ l2)
@@ -65,28 +65,28 @@ module _
     unordered-pair vertex-complete-bipartite-Finite-Undirected-Graph
 
   edge-finite-type-complete-bipartite-Finite-Undirected-Graph :
-    unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph → 𝔽 (l1 ⊔ l2)
+    unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph → Finite-Type (l1 ⊔ l2)
   edge-finite-type-complete-bipartite-Finite-Undirected-Graph p =
-    product-𝔽
-      ( Σ-𝔽 X
+    product-Finite-Type
+      ( Σ-Finite-Type X
         ( λ x →
-          fiber-𝔽
+          fiber-Finite-Type
             ( finite-type-2-Element-Type (pr1 p))
-            ( coproduct-𝔽 X Y)
+            ( coproduct-Finite-Type X Y)
             ( element-unordered-pair p)
             ( inl x)))
-      ( Σ-𝔽 Y
+      ( Σ-Finite-Type Y
         ( λ y →
-          fiber-𝔽
+          fiber-Finite-Type
             ( finite-type-2-Element-Type (pr1 p))
-            ( coproduct-𝔽 X Y)
+            ( coproduct-Finite-Type X Y)
             ( element-unordered-pair p)
             ( inr y)))
 
   edge-complete-bipartite-Undirected-Graph :
     unordered-pair-vertices-complete-bipartite-Finite-Undirected-Graph → UU (l1 ⊔ l2)
   edge-complete-bipartite-Undirected-Graph p =
-    type-𝔽 (edge-finite-type-complete-bipartite-Finite-Undirected-Graph p)
+    type-Finite-Type (edge-finite-type-complete-bipartite-Finite-Undirected-Graph p)
 
   complete-bipartite-Finite-Undirected-Graph :
     Finite-Undirected-Graph (l1 ⊔ l2) (l1 ⊔ l2)

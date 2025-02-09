@@ -48,36 +48,36 @@ Finite semigroups are semigroups of which the underlying type is finite.
 ### The predicate of having an associative multiplication operation on finite types
 
 ```agda
-has-associative-mul-𝔽 : {l : Level} (X : 𝔽 l) → UU l
-has-associative-mul-𝔽 X = has-associative-mul (type-𝔽 X)
+has-associative-mul-Finite-Type : {l : Level} (X : Finite-Type l) → UU l
+has-associative-mul-Finite-Type X = has-associative-mul (type-Finite-Type X)
 ```
 
 ### Finite semigroups
 
 ```agda
 Finite-Semigroup : (l : Level) → UU (lsuc l)
-Finite-Semigroup l = Σ (𝔽 l) (has-associative-mul-𝔽)
+Finite-Semigroup l = Σ (Finite-Type l) (has-associative-mul-Finite-Type)
 
 module _
   {l : Level} (G : Finite-Semigroup l)
   where
 
-  finite-type-Finite-Semigroup : 𝔽 l
+  finite-type-Finite-Semigroup : Finite-Type l
   finite-type-Finite-Semigroup = pr1 G
 
   set-Finite-Semigroup : Set l
-  set-Finite-Semigroup = set-𝔽 finite-type-Finite-Semigroup
+  set-Finite-Semigroup = set-Finite-Type finite-type-Finite-Semigroup
 
   type-Finite-Semigroup : UU l
-  type-Finite-Semigroup = type-𝔽 finite-type-Finite-Semigroup
+  type-Finite-Semigroup = type-Finite-Type finite-type-Finite-Semigroup
 
   is-finite-type-Finite-Semigroup : is-finite type-Finite-Semigroup
   is-finite-type-Finite-Semigroup =
-    is-finite-type-𝔽 finite-type-Finite-Semigroup
+    is-finite-type-Finite-Type finite-type-Finite-Semigroup
 
   is-set-type-Finite-Semigroup : is-set type-Finite-Semigroup
   is-set-type-Finite-Semigroup =
-    is-set-type-𝔽 finite-type-Finite-Semigroup
+    is-set-type-Finite-Type finite-type-Finite-Semigroup
 
   has-associative-mul-Finite-Semigroup :
     has-associative-mul type-Finite-Semigroup
@@ -237,34 +237,34 @@ mere-equiv-number-of-semigroups-of-order n =
 
 ```agda
 structure-finite-semigroup :
-  {l1 : Level} → 𝔽 l1 → UU l1
-structure-finite-semigroup = has-associative-mul-𝔽
+  {l1 : Level} → Finite-Type l1 → UU l1
+structure-finite-semigroup = has-associative-mul-Finite-Type
 
 is-finite-structure-finite-semigroup :
-  {l : Level} → (X : 𝔽 l) → is-finite (structure-finite-semigroup X)
+  {l : Level} → (X : Finite-Type l) → is-finite (structure-finite-semigroup X)
 is-finite-structure-finite-semigroup X =
   is-finite-Σ
     ( is-finite-Π
-      ( is-finite-type-𝔽 X)
-      ( λ _ → is-finite-Π (is-finite-type-𝔽 X) (λ _ → is-finite-type-𝔽 X)))
+      ( is-finite-type-Finite-Type X)
+      ( λ _ → is-finite-Π (is-finite-type-Finite-Type X) (λ _ → is-finite-type-Finite-Type X)))
     ( λ m →
       is-finite-Π
-        ( is-finite-type-𝔽 X)
+        ( is-finite-type-Finite-Type X)
         ( λ x →
           is-finite-Π
-            ( is-finite-type-𝔽 X)
+            ( is-finite-type-Finite-Type X)
             ( λ y →
               is-finite-Π
-                ( is-finite-type-𝔽 X)
+                ( is-finite-type-Finite-Type X)
                 ( λ z →
                   is-finite-is-decidable-Prop
                     ( (m (m x y) z ＝ m x (m y z)) ,
                       is-set-is-finite
-                        ( is-finite-type-𝔽 X)
+                        ( is-finite-type-Finite-Type X)
                         ( m (m x y) z)
                         ( m x (m y z)))
                     ( has-decidable-equality-is-finite
-                      ( is-finite-type-𝔽 X)
+                      ( is-finite-type-Finite-Type X)
                       ( m (m x y) z)
                       ( m x (m y z)))))))
 ```

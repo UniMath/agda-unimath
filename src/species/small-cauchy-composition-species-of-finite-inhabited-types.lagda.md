@@ -44,13 +44,13 @@ open import univalent-combinatorics.small-types
 ## Definition
 
 ```agda
-equiv-Σ-Decomposition-Inhabited-Finite-Type-Σ-Decomposition-𝔽 :
+equiv-Σ-Decomposition-Inhabited-Finite-Type-Σ-Decomposition-Finite-Type :
   {l : Level} (X : Inhabited-Finite-Type l) →
-  Σ-Decomposition-𝔽 l l (finite-type-Inhabited-Finite-Type X) ≃
+  Σ-Decomposition-Finite-Type l l (finite-type-Inhabited-Finite-Type X) ≃
   Σ-Decomposition-Subuniverse
     ( is-finite-and-inhabited-Prop)
     ( map-compute-Inhabited-Finite-Type' X)
-equiv-Σ-Decomposition-Inhabited-Finite-Type-Σ-Decomposition-𝔽 X =
+equiv-Σ-Decomposition-Inhabited-Finite-Type-Σ-Decomposition-Finite-Type X =
   ( inv-equiv
     ( equiv-total-is-in-subuniverse-Σ-Decomposition
       ( is-finite-and-inhabited-Prop)
@@ -65,7 +65,7 @@ equiv-Σ-Decomposition-Inhabited-Finite-Type-Σ-Decomposition-𝔽 X =
                 ( pr1 ∘ map-matching-correspondence-Relaxed-Σ-Decomposition D)
                 ( is-inhabited-type-Inhabited-Finite-Type X)))
           ( id-equiv))) ∘e
-    ( ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽
+    ( ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-Finite-Type
         (finite-type-Inhabited-Finite-Type X))))
 
 is-finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type :
@@ -76,11 +76,11 @@ is-finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type :
       ( map-compute-Inhabited-Finite-Type' X))
 is-finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type X =
   is-finite-equiv
-    ( equiv-Σ-Decomposition-Inhabited-Finite-Type-Σ-Decomposition-𝔽 X)
-    ( is-finite-Σ-Decomposition-𝔽 (finite-type-Inhabited-Finite-Type X))
+    ( equiv-Σ-Decomposition-Inhabited-Finite-Type-Σ-Decomposition-Finite-Type X)
+    ( is-finite-Σ-Decomposition-Finite-Type (finite-type-Inhabited-Finite-Type X))
 
 finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type :
-  {l : Level} (X : Inhabited-Finite-Type l) → 𝔽 (lsuc l)
+  {l : Level} (X : Inhabited-Finite-Type l) → Finite-Type (lsuc l)
 pr1 (finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type {l} X) =
   Σ-Decomposition-Subuniverse
     ( is-finite-and-inhabited-Prop {l})
@@ -94,17 +94,17 @@ module _
 
   finite-small-cauchy-composition-species-subuniverse :
     ( S T : species-Inhabited-Finite-Type l1 (l1 ⊔ l2)) (X : Inhabited-Finite-Type l1) →
-    𝔽 (lsuc l1 ⊔ l2)
+    Finite-Type (lsuc l1 ⊔ l2)
   finite-small-cauchy-composition-species-subuniverse S T X =
-    Σ-𝔽
+    Σ-Finite-Type
       ( finite-Σ-Decomposition-Subuniverse-Inhabited-Finite-Type X)
       ( λ D →
-        product-𝔽
+        product-Finite-Type
           ( S ( subuniverse-indexing-type-Σ-Decomposition-Subuniverse
                 ( is-finite-and-inhabited-Prop)
                 ( map-compute-Inhabited-Finite-Type' X)
                 ( D)))
-          ( Π-𝔽
+          ( Π-Finite-Type
             ( finite-type-Inhabited-Finite-Type
               ( map-inv-compute-Inhabited-Finite-Type'
                 ( subuniverse-indexing-type-Σ-Decomposition-Subuniverse
@@ -141,7 +141,7 @@ module _
     C2 S T X =
       is-finite-equiv
         ( equiv-is-small (C1 S T X))
-        ( is-finite-type-𝔽
+        ( is-finite-type-Finite-Type
           ( finite-small-cauchy-composition-species-subuniverse
             ( S)
             ( T)

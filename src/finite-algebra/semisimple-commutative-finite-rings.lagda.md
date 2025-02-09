@@ -75,7 +75,7 @@ module _
 module _
   {l1 : Level}
   (l2 : Level)
-  (X : 𝔽 l1)
+  (X : Finite-Type l1)
   where
 
   structure-finite-semisimple-commutative-ring :

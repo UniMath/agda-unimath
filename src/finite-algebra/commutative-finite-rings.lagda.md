@@ -105,7 +105,7 @@ module _
   is-set-type-Finite-Commutative-Ring =
     is-set-type-Finite-Ring finite-ring-Finite-Commutative-Ring
 
-  finite-type-Finite-Commutative-Ring : 𝔽 l
+  finite-type-Finite-Commutative-Ring : Finite-Type l
   finite-type-Finite-Commutative-Ring =
     finite-type-Finite-Ring finite-ring-Finite-Commutative-Ring
 
@@ -598,7 +598,7 @@ module _
 ```agda
 module _
   {l1 : Level}
-  (X : 𝔽 l1)
+  (X : Finite-Type l1)
   where
 
   structure-finite-commutative-ring :
@@ -621,9 +621,9 @@ module _
       ( is-finite-structure-finite-ring X)
       ( λ r →
         is-finite-Π
-          ( is-finite-type-𝔽 X)
+          ( is-finite-type-Finite-Type X)
           ( λ _ →
             is-finite-Π
-              ( is-finite-type-𝔽 X)
-              ( λ _ → is-finite-eq-𝔽 X)))
+              ( is-finite-type-Finite-Type X)
+              ( λ _ → is-finite-eq-Finite-Type X)))
 ```

@@ -177,11 +177,11 @@ module _
 
   is-finite-type-Subgroup-Finite-Group : is-finite type-Subgroup-Finite-Group
   is-finite-type-Subgroup-Finite-Group =
-    is-finite-type-subset-𝔽 (finite-type-Finite-Group G) decidable-subset-Subgroup-Finite-Group
+    is-finite-type-subset-Finite-Type (finite-type-Finite-Group G) decidable-subset-Subgroup-Finite-Group
 
-  finite-type-Subgroup-Finite-Group : 𝔽 (l1 ⊔ l2)
+  finite-type-Subgroup-Finite-Group : Finite-Type (l1 ⊔ l2)
   finite-type-Subgroup-Finite-Group =
-    finite-type-subset-𝔽 (finite-type-Finite-Group G) decidable-subset-Subgroup-Finite-Group
+    finite-type-subset-Finite-Type (finite-type-Finite-Group G) decidable-subset-Subgroup-Finite-Group
 
   inclusion-Subgroup-Finite-Group : type-Subgroup-Finite-Group → type-Finite-Group G
   inclusion-Subgroup-Finite-Group = inclusion-Decidable-Subgroup (group-Finite-Group G) H

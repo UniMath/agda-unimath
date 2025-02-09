@@ -82,7 +82,7 @@ module _
   pr1 ring-Finite-Ring = ab-Finite-Ring
   pr2 ring-Finite-Ring = pr2 R
 
-  finite-type-Finite-Ring : 𝔽 l
+  finite-type-Finite-Ring : Finite-Type l
   finite-type-Finite-Ring = finite-type-Finite-Ab finite-ab-Finite-Ring
 
   type-Finite-Ring : UU l
@@ -509,7 +509,7 @@ module _
 ```agda
 module _
   {l : Level}
-  (X : 𝔽 l)
+  (X : Finite-Type l)
   where
 
   structure-finite-ring : UU l
@@ -532,41 +532,41 @@ module _
         is-finite-Σ
           ( is-finite-Σ
             ( is-finite-Π
-              ( is-finite-type-𝔽 X)
+              ( is-finite-type-Finite-Type X)
               ( λ _ →
                 is-finite-Π
-                  ( is-finite-type-𝔽 X)
-                  ( λ _ → is-finite-type-𝔽 X)))
+                  ( is-finite-type-Finite-Type X)
+                  ( λ _ → is-finite-type-Finite-Type X)))
             ( λ m →
               is-finite-Π
-                ( is-finite-type-𝔽 X)
+                ( is-finite-type-Finite-Type X)
                 ( λ x →
                   is-finite-Π
-                    ( is-finite-type-𝔽 X)
+                    ( is-finite-type-Finite-Type X)
                     ( λ y →
                       is-finite-Π
-                        ( is-finite-type-𝔽 X)
-                        ( λ z → is-finite-eq-𝔽 X)))))
+                        ( is-finite-type-Finite-Type X)
+                        ( λ z → is-finite-eq-Finite-Type X)))))
           ( λ a →
             is-finite-product
               ( is-finite-is-unital-Finite-Semigroup (X , a))
               ( is-finite-product
                 ( is-finite-Π
-                  ( is-finite-type-𝔽 X)
+                  ( is-finite-type-Finite-Type X)
                   ( λ _ →
                     is-finite-Π
-                      ( is-finite-type-𝔽 X)
+                      ( is-finite-type-Finite-Type X)
                       ( λ _ →
                         is-finite-Π
-                          ( is-finite-type-𝔽 X)
-                          ( λ _ → is-finite-eq-𝔽 X))))
+                          ( is-finite-type-Finite-Type X)
+                          ( λ _ → is-finite-eq-Finite-Type X))))
                 ( is-finite-Π
-                  ( is-finite-type-𝔽 X)
+                  ( is-finite-type-Finite-Type X)
                   ( λ _ →
                     is-finite-Π
-                      ( is-finite-type-𝔽 X)
+                      ( is-finite-type-Finite-Type X)
                       ( λ _ →
                         is-finite-Π
-                          ( is-finite-type-𝔽 X)
-                          ( λ _ → is-finite-eq-𝔽 X)))))))
+                          ( is-finite-type-Finite-Type X)
+                          ( λ _ → is-finite-eq-Finite-Type X)))))))
 ```

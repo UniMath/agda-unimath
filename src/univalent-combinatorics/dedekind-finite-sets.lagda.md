@@ -19,7 +19,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-{{#concept "Dedekind finite sets" Agda=set-𝔽-Dedekind}} are
+{{#concept "Dedekind finite sets" Agda=set-Finite-Type-Dedekind}} are
 [sets](foundation-core.sets.md) `X` with the
 [property](foundation-core.propositions.md) that every
 [embedding](foundation-core.embeddings.md) `X ↪ X` is an
@@ -44,17 +44,17 @@ module _
   {l : Level} (X : 𝔽-Dedekind l)
   where
 
-  set-𝔽-Dedekind : Set l
-  set-𝔽-Dedekind = pr1 X
+  set-Finite-Type-Dedekind : Set l
+  set-Finite-Type-Dedekind = pr1 X
 
   type-𝔽-Dedekind : UU l
-  type-𝔽-Dedekind = type-Set set-𝔽-Dedekind
+  type-𝔽-Dedekind = type-Set set-Finite-Type-Dedekind
 
   is-set-type-𝔽-Dedekind : is-set type-𝔽-Dedekind
-  is-set-type-𝔽-Dedekind = is-set-type-Set set-𝔽-Dedekind
+  is-set-type-𝔽-Dedekind = is-set-type-Set set-Finite-Type-Dedekind
 
-  is-dedekind-finite-set-𝔽-Dedekind : is-dedekind-finite-set set-𝔽-Dedekind
-  is-dedekind-finite-set-𝔽-Dedekind = pr2 X
+  is-dedekind-finite-set-Finite-Type-Dedekind : is-dedekind-finite-set set-Finite-Type-Dedekind
+  is-dedekind-finite-set-Finite-Type-Dedekind = pr2 X
 ```
 
 ## See also

@@ -96,12 +96,12 @@ abstract
           ( is-finite-Prop (fiber f y))
           ( λ K → unit-trunc-Prop (count-fiber f H K y)))
 
-fiber-𝔽 :
-  {l1 l2 : Level} (X : 𝔽 l1) (Y : 𝔽 l2) (f : type-𝔽 X → type-𝔽 Y) →
-  type-𝔽 Y → 𝔽 (l1 ⊔ l2)
-pr1 (fiber-𝔽 X Y f y) = fiber f y
-pr2 (fiber-𝔽 X Y f y) =
-  is-finite-fiber f (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y) y
+fiber-Finite-Type :
+  {l1 l2 : Level} (X : Finite-Type l1) (Y : Finite-Type l2) (f : type-Finite-Type X → type-Finite-Type Y) →
+  type-Finite-Type Y → Finite-Type (l1 ⊔ l2)
+pr1 (fiber-Finite-Type X Y f y) = fiber f y
+pr2 (fiber-Finite-Type X Y f y) =
+  is-finite-fiber f (is-finite-type-Finite-Type X) (is-finite-type-Finite-Type Y) y
 ```
 
 ###
@@ -144,8 +144,8 @@ is-decidable-fiber-Fin {k} {l} f y =
 ```agda
 equiv-is-finite-domain-is-finite-fiber :
   {l1 l2 : Level} {A : UU l1} →
-  (B : 𝔽 l2) (f : A → (type-𝔽 B)) →
-  ((b : type-𝔽 B) → is-finite (fiber f b)) ≃ is-finite A
+  (B : Finite-Type l2) (f : A → (type-Finite-Type B)) →
+  ((b : type-Finite-Type B) → is-finite (fiber f b)) ≃ is-finite A
 equiv-is-finite-domain-is-finite-fiber {A = A} B f =
   equiv-iff-is-prop
     ( is-prop-Π (λ b → is-prop-is-finite (fiber f b)))
@@ -153,6 +153,6 @@ equiv-is-finite-domain-is-finite-fiber {A = A} B f =
     ( λ P →
       is-finite-equiv
         ( equiv-total-fiber f)
-        ( is-finite-Σ (is-finite-type-𝔽 B) P))
-    ( λ P → is-finite-fiber f P (is-finite-type-𝔽 B))
+        ( is-finite-Σ (is-finite-type-Finite-Type B) P))
+    ( λ P → is-finite-fiber f P (is-finite-type-Finite-Type B))
 ```

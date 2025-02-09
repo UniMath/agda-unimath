@@ -67,12 +67,12 @@ module _
 
 Finite-Preorder : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Finite-Preorder l1 l2 =
-  Σ ( 𝔽 l1)
+  Σ ( Finite-Type l1)
     ( λ P →
-      Σ ( (x y : type-𝔽 P) → Decidable-Prop l2)
+      Σ ( (x y : type-Finite-Type P) → Decidable-Prop l2)
         ( λ R →
-          ( (x : type-𝔽 P) → type-Decidable-Prop (R x x)) ×
-          ( (x y z : type-𝔽 P) →
+          ( (x : type-Finite-Type P) → type-Decidable-Prop (R x x)) ×
+          ( (x y z : type-Finite-Type P) →
             type-Decidable-Prop (R y z) → type-Decidable-Prop (R x y) →
             type-Decidable-Prop (R x z))))
 
@@ -96,15 +96,15 @@ module _
   {l1 l2 : Level} (P : Finite-Preorder l1 l2)
   where
 
-  finite-type-Finite-Preorder : 𝔽 l1
+  finite-type-Finite-Preorder : Finite-Type l1
   finite-type-Finite-Preorder = pr1 P
 
   type-Finite-Preorder : UU l1
-  type-Finite-Preorder = type-𝔽 finite-type-Finite-Preorder
+  type-Finite-Preorder = type-Finite-Type finite-type-Finite-Preorder
 
   is-finite-type-Finite-Preorder : is-finite type-Finite-Preorder
   is-finite-type-Finite-Preorder =
-    is-finite-type-𝔽 finite-type-Finite-Preorder
+    is-finite-type-Finite-Type finite-type-Finite-Preorder
 
   number-of-types-Finite-Preorder : ℕ
   number-of-types-Finite-Preorder =
@@ -228,12 +228,12 @@ module _
   (S : type-Finite-Preorder P → Decidable-Prop l3)
   where
 
-  type-finite-Subpreorder-𝔽 : 𝔽 (l1 ⊔ l3)
-  pr1 type-finite-Subpreorder-𝔽 = type-finite-Subpreorder P S
-  pr2 type-finite-Subpreorder-𝔽 = is-finite-type-finite-Subpreorder P S
+  type-finite-Subpreorder-Finite-Preorder : Finite-Type (l1 ⊔ l3)
+  pr1 type-finite-Subpreorder-Finite-Preorder = type-finite-Subpreorder P S
+  pr2 type-finite-Subpreorder-Finite-Preorder = is-finite-type-finite-Subpreorder P S
 
   finite-Subpreorder : Finite-Preorder (l1 ⊔ l3) l2
-  pr1 finite-Subpreorder = type-finite-Subpreorder-𝔽
+  pr1 finite-Subpreorder = type-finite-Subpreorder-Finite-Preorder
   pr1 (pr2 finite-Subpreorder) = leq-finite-Subpreorder-Decidable-Prop P S
   pr1 (pr2 (pr2 finite-Subpreorder)) = refl-leq-finite-Subpreorder P S
   pr2 (pr2 (pr2 finite-Subpreorder)) = transitive-leq-finite-Subpreorder P S

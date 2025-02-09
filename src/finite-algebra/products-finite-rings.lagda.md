@@ -53,7 +53,7 @@ module _
   is-finite-type-product-Finite-Ring =
     is-finite-product (is-finite-type-Finite-Ring R1) (is-finite-type-Finite-Ring R2)
 
-  finite-type-product-Finite-Ring : 𝔽 (l1 ⊔ l2)
+  finite-type-product-Finite-Ring : Finite-Type (l1 ⊔ l2)
   pr1 finite-type-product-Finite-Ring = type-product-Finite-Ring
   pr2 finite-type-product-Finite-Ring = is-finite-type-product-Finite-Ring
 

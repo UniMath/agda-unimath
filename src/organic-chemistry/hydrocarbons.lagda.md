@@ -67,7 +67,7 @@ hydrocarbon l1 l2 =
             ( ( (c c' : vertex-Finite-Undirected-Graph G) →
                 leq-ℕ
                   ( number-of-elements-is-finite
-                    ( is-finite-type-𝔽 (pr2 G (standard-unordered-pair c c'))))
+                    ( is-finite-type-Finite-Type (pr2 G (standard-unordered-pair c c'))))
                   ( 3)) ×
                 is-connected-Undirected-Graph
                   ( undirected-graph-Finite-Undirected-Graph G)))))
@@ -79,8 +79,8 @@ module _
   finite-graph-hydrocarbon : Finite-Undirected-Graph l1 l2
   finite-graph-hydrocarbon = pr1 H
 
-  vertex-hydrocarbon-𝔽 : 𝔽 l1
-  vertex-hydrocarbon-𝔽 = pr1 finite-graph-hydrocarbon
+  vertex-hydrocarbon-Finite-Type : Finite-Type l1
+  vertex-hydrocarbon-Finite-Type = pr1 finite-graph-hydrocarbon
 
   vertex-hydrocarbon : UU l1
   vertex-hydrocarbon = vertex-Finite-Undirected-Graph finite-graph-hydrocarbon
@@ -92,8 +92,8 @@ module _
   unordered-pair-vertices-hydrocarbon : UU (lsuc lzero ⊔ l1)
   unordered-pair-vertices-hydrocarbon = unordered-pair vertex-hydrocarbon
 
-  edge-hydrocarbon-𝔽 : unordered-pair-vertices-hydrocarbon → 𝔽 l2
-  edge-hydrocarbon-𝔽 = pr2 finite-graph-hydrocarbon
+  edge-hydrocarbon-Finite-Type : unordered-pair-vertices-hydrocarbon → Finite-Type l2
+  edge-hydrocarbon-Finite-Type = pr2 finite-graph-hydrocarbon
 
   edge-hydrocarbon : unordered-pair-vertices-hydrocarbon → UU l2
   edge-hydrocarbon = edge-Finite-Undirected-Graph finite-graph-hydrocarbon

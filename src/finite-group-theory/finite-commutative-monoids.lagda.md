@@ -55,7 +55,7 @@ module _
   monoid-Finite-Commutative-Monoid =
     monoid-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
-  finite-type-Finite-Commutative-Monoid : 𝔽 l
+  finite-type-Finite-Commutative-Monoid : Finite-Type l
   finite-type-Finite-Commutative-Monoid =
     finite-type-Finite-Monoid finite-monoid-Finite-Commutative-Monoid
 
@@ -184,7 +184,7 @@ module _
 ```agda
 module _
   {l : Level}
-  (X : 𝔽 l)
+  (X : Finite-Type l)
   where
 
   structure-finite-commutative-monoid : UU l
@@ -205,6 +205,6 @@ module _
       ( is-finite-structure-finite-monoid X)
       ( λ m →
         is-finite-Π
-          ( is-finite-type-𝔽 X)
-          ( λ x → is-finite-Π ( is-finite-type-𝔽 X) ( λ y → is-finite-eq-𝔽 X)))
+          ( is-finite-type-Finite-Type X)
+          ( λ x → is-finite-Π ( is-finite-type-Finite-Type X) ( λ y → is-finite-eq-Finite-Type X)))
 ```

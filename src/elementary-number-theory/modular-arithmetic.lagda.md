@@ -130,7 +130,7 @@ abstract
   is-finite-ℤ-Mod {zero-ℕ} H = ex-falso (H refl)
   is-finite-ℤ-Mod {succ-ℕ k} H = is-finite-Fin (succ-ℕ k)
 
-finite-type-ℤ-Mod : (k : ℕ) → is-nonzero-ℕ k → 𝔽 lzero
+finite-type-ℤ-Mod : (k : ℕ) → is-nonzero-ℕ k → Finite-Type lzero
 pr1 (finite-type-ℤ-Mod k H) = ℤ-Mod k
 pr2 (finite-type-ℤ-Mod k H) = is-finite-ℤ-Mod H
 ```

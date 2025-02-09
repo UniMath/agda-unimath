@@ -58,42 +58,42 @@ Ferrers diagram), because it only uses
 ### Partitions
 
 ```agda
-partition-𝔽 : {l1 : Level} (l2 l3 : Level) → 𝔽 l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+partition-𝔽 : {l1 : Level} (l2 l3 : Level) → Finite-Type l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
 partition-𝔽 l2 l3 X =
-  Σ ( 𝔽 l2)
+  Σ ( Finite-Type l2)
     ( λ Y →
-      Σ ( type-𝔽 Y → 𝔽 l3)
+      Σ ( type-Finite-Type Y → Finite-Type l3)
         ( λ Z →
-          ( (y : type-𝔽 Y) → type-trunc-Prop (type-𝔽 (Z y))) ×
-          ( equiv-𝔽 X (Σ-𝔽 Y Z))))
+          ( (y : type-Finite-Type Y) → type-trunc-Prop (type-Finite-Type (Z y))) ×
+          ( equiv-𝔽 X (Σ-Finite-Type Y Z))))
 
 module _
-  {l1 l2 l3 : Level} (X : 𝔽 l1) (P : partition-𝔽 l2 l3 X)
+  {l1 l2 l3 : Level} (X : Finite-Type l1) (P : partition-𝔽 l2 l3 X)
   where
 
-  finite-indexing-type-partition-𝔽 : 𝔽 l2
+  finite-indexing-type-partition-𝔽 : Finite-Type l2
   finite-indexing-type-partition-𝔽 = pr1 P
 
   indexing-type-partition-𝔽 : UU l2
-  indexing-type-partition-𝔽 = type-𝔽 finite-indexing-type-partition-𝔽
+  indexing-type-partition-𝔽 = type-Finite-Type finite-indexing-type-partition-𝔽
 
   is-finite-indexing-type-partition-𝔽 : is-finite indexing-type-partition-𝔽
   is-finite-indexing-type-partition-𝔽 =
-    is-finite-type-𝔽 finite-indexing-type-partition-𝔽
+    is-finite-type-Finite-Type finite-indexing-type-partition-𝔽
 
   number-of-elements-indexing-type-partition-𝔽 : ℕ
   number-of-elements-indexing-type-partition-𝔽 =
     number-of-elements-is-finite is-finite-indexing-type-partition-𝔽
 
-  finite-block-partition-𝔽 : indexing-type-partition-𝔽 → 𝔽 l3
+  finite-block-partition-𝔽 : indexing-type-partition-𝔽 → Finite-Type l3
   finite-block-partition-𝔽 = pr1 (pr2 P)
 
   block-partition-𝔽 : indexing-type-partition-𝔽 → UU l3
-  block-partition-𝔽 i = type-𝔽 (finite-block-partition-𝔽 i)
+  block-partition-𝔽 i = type-Finite-Type (finite-block-partition-𝔽 i)
 
   is-finite-block-partition-𝔽 :
     (i : indexing-type-partition-𝔽) → is-finite (block-partition-𝔽 i)
-  is-finite-block-partition-𝔽 i = is-finite-type-𝔽 (finite-block-partition-𝔽 i)
+  is-finite-block-partition-𝔽 i = is-finite-type-Finite-Type (finite-block-partition-𝔽 i)
 
   number-of-elements-block-partition-𝔽 : indexing-type-partition-𝔽 → ℕ
   number-of-elements-block-partition-𝔽 i =
@@ -104,24 +104,24 @@ module _
   is-inhabited-block-partition-𝔽 = pr1 (pr2 (pr2 P))
 
   conversion-partition-𝔽 :
-    equiv-𝔽 X (Σ-𝔽 finite-indexing-type-partition-𝔽 finite-block-partition-𝔽)
+    equiv-𝔽 X (Σ-Finite-Type finite-indexing-type-partition-𝔽 finite-block-partition-𝔽)
   conversion-partition-𝔽 = pr2 (pr2 (pr2 P))
 
   map-conversion-partition-𝔽 :
-    type-𝔽 X → Σ indexing-type-partition-𝔽 block-partition-𝔽
+    type-Finite-Type X → Σ indexing-type-partition-𝔽 block-partition-𝔽
   map-conversion-partition-𝔽 = map-equiv conversion-partition-𝔽
 
-  rel-partition-𝔽-Prop : type-𝔽 X → type-𝔽 X → Prop l2
+  rel-partition-𝔽-Prop : type-Finite-Type X → type-Finite-Type X → Prop l2
   rel-partition-𝔽-Prop x y =
     Id-Prop
-      ( set-𝔽 finite-indexing-type-partition-𝔽)
+      ( set-Finite-Type finite-indexing-type-partition-𝔽)
       ( pr1 (map-conversion-partition-𝔽 x))
       ( pr1 (map-conversion-partition-𝔽 y))
 
-  rel-partition-𝔽 : type-𝔽 X → type-𝔽 X → UU l2
+  rel-partition-𝔽 : type-Finite-Type X → type-Finite-Type X → UU l2
   rel-partition-𝔽 x y = type-Prop (rel-partition-𝔽-Prop x y)
 
-  is-prop-rel-partition-𝔽 : (x y : type-𝔽 X) → is-prop (rel-partition-𝔽 x y)
+  is-prop-rel-partition-𝔽 : (x y : type-Finite-Type X) → is-prop (rel-partition-𝔽 x y)
   is-prop-rel-partition-𝔽 x y = is-prop-type-Prop (rel-partition-𝔽-Prop x y)
 
   refl-rel-partition-𝔽 : is-reflexive rel-partition-𝔽
@@ -133,7 +133,7 @@ module _
   transitive-rel-partition-𝔽 : is-transitive rel-partition-𝔽
   transitive-rel-partition-𝔽 x y z r s = s ∙ r
 
-  equivalence-relation-partition-𝔽 : equivalence-relation l2 (type-𝔽 X)
+  equivalence-relation-partition-𝔽 : equivalence-relation l2 (type-Finite-Type X)
   pr1 equivalence-relation-partition-𝔽 = rel-partition-𝔽-Prop
   pr1 (pr2 equivalence-relation-partition-𝔽) = refl-rel-partition-𝔽
   pr1 (pr2 (pr2 equivalence-relation-partition-𝔽)) = symmetric-rel-partition-𝔽
@@ -144,7 +144,7 @@ module _
 
 ```agda
 equiv-partition-𝔽 :
-  {l1 l2 l3 l4 l5 : Level} (X : 𝔽 l1) →
+  {l1 l2 l3 l4 l5 : Level} (X : Finite-Type l1) →
   partition-𝔽 l2 l3 X → partition-𝔽 l4 l5 X → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
 equiv-partition-𝔽 X P Q =
   Σ ( indexing-type-partition-𝔽 X P ≃ indexing-type-partition-𝔽 X Q)
@@ -158,23 +158,23 @@ equiv-partition-𝔽 X P Q =
             ( conversion-partition-𝔽 X Q)))
 
 id-equiv-partition-𝔽 :
-  {l1 l2 l3 : Level} (X : 𝔽 l1)
+  {l1 l2 l3 : Level} (X : Finite-Type l1)
   (P : partition-𝔽 l2 l3 X) → equiv-partition-𝔽 X P P
 pr1 (id-equiv-partition-𝔽 X P) = id-equiv
 pr1 (pr2 (id-equiv-partition-𝔽 X P)) i = id-equiv
 pr2 (pr2 (id-equiv-partition-𝔽 X P)) = refl-htpy
 
 extensionality-partition-𝔽 :
-  {l1 l2 l3 : Level} (X : 𝔽 l1) (P Q : partition-𝔽 l2 l3 X) →
+  {l1 l2 l3 : Level} (X : Finite-Type l1) (P Q : partition-𝔽 l2 l3 X) →
   Id P Q ≃ equiv-partition-𝔽 X P Q
 extensionality-partition-𝔽 X P =
   extensionality-Σ
     ( λ {Y} Zf e →
       Σ ( (i : indexing-type-partition-𝔽 X P) →
-          block-partition-𝔽 X P i ≃ type-𝔽 (pr1 Zf (map-equiv e i)))
+          block-partition-𝔽 X P i ≃ type-Finite-Type (pr1 Zf (map-equiv e i)))
         ( λ f →
           htpy-equiv
-            ( equiv-Σ (type-𝔽 ∘ pr1 Zf) e f ∘e conversion-partition-𝔽 X P)
+            ( equiv-Σ (type-Finite-Type ∘ pr1 Zf) e f ∘e conversion-partition-𝔽 X P)
             ( pr2 (pr2 Zf))))
     ( id-equiv)
     ( pair (λ i → id-equiv) refl-htpy)
@@ -182,7 +182,7 @@ extensionality-partition-𝔽 X P =
     ( extensionality-Σ
       ( λ {Z} f α →
         htpy-equiv
-          ( equiv-Σ (type-𝔽 ∘ Z) id-equiv α ∘e conversion-partition-𝔽 X P)
+          ( equiv-Σ (type-Finite-Type ∘ Z) id-equiv α ∘e conversion-partition-𝔽 X P)
           ( pr2 f))
       ( λ i → id-equiv)
       ( refl-htpy)

@@ -73,7 +73,7 @@ module _
   group-Finite-Ab : Group l
   group-Finite-Ab = group-Finite-Group finite-group-Finite-Ab
 
-  finite-type-Finite-Ab : 𝔽 l
+  finite-type-Finite-Ab : Finite-Type l
   finite-type-Finite-Ab = finite-type-Finite-Group finite-group-Finite-Ab
 
   type-Finite-Ab : UU l
@@ -210,7 +210,7 @@ module _
 ```agda
 module _
   {l : Level}
-  (X : 𝔽 l)
+  (X : Finite-Type l)
   where
 
   structure-finite-abelian-group : UU l
@@ -231,9 +231,9 @@ module _
       ( is-finite-structure-finite-group X)
       ( λ g →
         is-finite-Π
-          ( is-finite-type-𝔽 X)
+          ( is-finite-type-Finite-Type X)
           ( λ x →
             is-finite-Π
-              ( is-finite-type-𝔽 X)
-              ( λ y → is-finite-eq-𝔽 X)))
+              ( is-finite-type-Finite-Type X)
+              ( λ y → is-finite-eq-Finite-Type X)))
 ```
