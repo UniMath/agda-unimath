@@ -225,34 +225,33 @@ module _
         ( lower-cut-ℝ x)
         ( upper-cut-ℝ x)
     arithmetically-located-lower-upper-cut-ℝ ε⁺@(ε , positive-ε) =
-      elim-exists
-        ( ∃
-          ( ℚ × ℚ)
-          ( λ (p , q) →
-            le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q))
-        ( λ (p , q , ε' , pos-ε') (p<x , x<q , 2ε'<ε) →
-          map-exists
-            ( λ (p , q) →
-              le-ℚ q (p +ℚ ε) ×
-              is-in-lower-cut-ℝ x p ×
-              is-in-upper-cut-ℝ x q)
-            ( λ r → (r , r +ℚ ε' +ℚ ε'))
-            ( λ r →
+      do
+        (ε' , pos-ε') , 2ε'<ε ← double-le-ℚ⁺ ε⁺
+        p , p<x ← is-inhabited-lower-cut-ℝ x
+        q , x<q ← is-inhabited-upper-cut-ℝ x
+        r , r<x , x<r+2ε' ←
+          bounded-arithmetic-location-twice-ε p q ε' pos-ε' p<x x<q
+        let r' : ℚ
+            r' = r +ℚ ε' +ℚ ε'
+            r'<r+ε : le-ℚ r' (r +ℚ ε)
+            r'<r+ε =
               tr
                 ( λ s → le-ℚ s (r +ℚ ε))
                 ( inv (associative-add-ℚ r ε' ε'))
-                ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε) ,_)
-            ( bounded-arithmetic-location-twice-ε p q ε' pos-ε' p<x x<q))
-        ( map-ternary-exists
-          ( λ (p , q , ε'⁺) →
-            is-in-lower-cut-ℝ x p ×
-            is-in-upper-cut-ℝ x q ×
-            le-ℚ⁺ (ε'⁺ +ℚ⁺ ε'⁺) ε⁺)
-          ( λ p q ε'⁺ → p , q , ε'⁺)
-          ( λ _ _ _ p∈lx q∈ux 2ε'<ε → p∈lx , q∈ux , 2ε'<ε)
-          ( is-inhabited-lower-cut-ℝ x)
-          ( is-inhabited-upper-cut-ℝ x)
-          ( double-le-ℚ⁺ ε⁺))
+                ( preserves-le-right-add-ℚ r (ε' +ℚ ε') ε 2ε'<ε)
+        intro-exists (r , r') (r'<r+ε , r<x , x<r+2ε')
+      where
+      claim : Prop l
+      claim =
+        ∃
+          ( ℚ × ℚ)
+          ( λ (p , q) →
+            le-ℚ-Prop q (p +ℚ ε) ∧ lower-cut-ℝ x p ∧ upper-cut-ℝ x q)
+      _>>=_ :
+        {l1 l2 : Level} {A : UU l1} {B : A -> UU l2} →
+        exists-structure A B →
+        (Σ A B -> type-Prop claim) -> type-Prop claim
+      x >>= f = elim-exists claim (ev-pair f) x
 ```
 
 ## References
