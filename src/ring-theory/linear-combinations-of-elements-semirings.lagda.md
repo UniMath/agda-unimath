@@ -54,7 +54,7 @@ module _
     list (type-Semiring R × A × type-Semiring R)
 ```
 
-### Evaluating linear combinations of elements in magmas
+### Evaluating linear combinations of elements in unital magmas
 
 ```agda
 module _
