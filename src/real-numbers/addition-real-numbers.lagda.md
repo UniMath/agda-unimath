@@ -134,7 +134,7 @@ module _
                   ( le-diff-rational-ℚ⁺ p (positive-diff-le-ℚ a b a<b))
                   ( p<x) ,
                   q<y ,
-                  (equational-reasoning
+                  ( equational-reasoning
                     (p -ℚ (b -ℚ a)) +ℚ q
                     ＝ (p +ℚ q) -ℚ (b -ℚ a)
                       by

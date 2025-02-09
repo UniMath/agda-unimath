@@ -190,13 +190,14 @@ module _
   (x y : ℚ) (H : le-ℚ x y)
   where
 
-  is-positive-diff-le-ℚ : is-positive-ℚ (y -ℚ x)
-  is-positive-diff-le-ℚ =
-    is-positive-le-zero-ℚ
-      ( y -ℚ x)
-      ( backward-implication
-        ( iff-translate-diff-le-zero-ℚ x y)
-        ( H))
+  abstract
+    is-positive-diff-le-ℚ : is-positive-ℚ (y -ℚ x)
+    is-positive-diff-le-ℚ =
+      is-positive-le-zero-ℚ
+        ( y -ℚ x)
+        ( backward-implication
+          ( iff-translate-diff-le-zero-ℚ x y)
+          ( H))
 
   positive-diff-le-ℚ : ℚ⁺
   positive-diff-le-ℚ = y -ℚ x , is-positive-diff-le-ℚ
