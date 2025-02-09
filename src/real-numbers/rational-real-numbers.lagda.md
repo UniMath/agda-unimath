@@ -33,6 +33,8 @@ open import foundation.subtypes
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import logic.functoriality-existential-quantification
+
 open import real-numbers.dedekind-real-numbers
 ```
 
@@ -75,10 +77,7 @@ is-dedekind-cut-le-ℚ x =
       (a b : ℚ) →
       exists ℚ (λ r → le-ℚ-Prop a r ∧ le-ℚ-Prop r b) →
       exists ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r)
-    α a b =
-      elim-exists
-        ( ∃ ℚ (λ r → le-ℚ-Prop r b ∧ le-ℚ-Prop a r))
-        ( λ r ( p , q) → intro-exists r ( q , p))
+    α a b = map-tot-exists (λ r (p , q) → (q , p))
 ```
 
 ### The canonical map from `ℚ` to `ℝ`

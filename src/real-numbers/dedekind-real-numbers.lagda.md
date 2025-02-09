@@ -37,6 +37,8 @@ open import foundation.universal-quantification
 open import foundation.universe-levels
 
 open import foundation-core.truncation-levels
+
+open import logic.functoriality-existential-quantification
 ```
 
 </details>
@@ -304,15 +306,8 @@ module _
   subset-lower-complement-upper-cut-lower-cut-ℝ :
     lower-cut-ℝ x ⊆ lower-complement-upper-cut-ℝ x
   subset-lower-complement-upper-cut-lower-cut-ℝ p H =
-    elim-exists
-      ( lower-complement-upper-cut-ℝ x p)
-      ( λ q I →
-        intro-exists
-          ( q)
-          ( map-product
-            ( id)
-            ( λ L U → is-disjoint-cut-ℝ x q (L , U))
-            ( I)))
+    map-tot-exists
+      ( λ q → map-product id (λ L U → is-disjoint-cut-ℝ x q (L , U)))
       ( pr1 (is-rounded-lower-cut-ℝ x p) H)
 
   eq-lower-cut-lower-complement-upper-cut-ℝ :
@@ -361,15 +356,8 @@ module _
   subset-upper-complement-lower-cut-upper-cut-ℝ :
     upper-cut-ℝ x ⊆ upper-complement-lower-cut-ℝ x
   subset-upper-complement-lower-cut-upper-cut-ℝ q H =
-    elim-exists
-      ( upper-complement-lower-cut-ℝ x q)
-      ( λ p I →
-        intro-exists
-          ( p)
-          ( map-product
-            ( id)
-            ( λ U L → is-disjoint-cut-ℝ x p (L , U))
-            ( I)))
+    map-tot-exists
+      ( λ p → map-product id (λ U L → is-disjoint-cut-ℝ x p (L , U)))
       ( pr1 (is-rounded-upper-cut-ℝ x q) H)
 
   eq-upper-cut-upper-complement-lower-cut-ℝ :
@@ -396,10 +384,7 @@ module _
       ( _⊆_)
       ( eq-lower-cut-lower-complement-upper-cut-ℝ x)
       ( eq-lower-cut-lower-complement-upper-cut-ℝ y)
-      ( λ p →
-        elim-exists
-          ( lower-complement-upper-cut-ℝ y p)
-          ( λ q → intro-exists q ∘ tot (λ _ K → K ∘ H q)))
+      ( λ p → map-tot-exists (λ q → tot (λ _ K → K ∘ H q)))
 
   subset-upper-cut-lower-cut-ℝ :
     lower-cut-ℝ x ⊆ lower-cut-ℝ y → upper-cut-ℝ y ⊆ upper-cut-ℝ x
@@ -408,10 +393,7 @@ module _
       ( _⊆_)
       ( eq-upper-cut-upper-complement-lower-cut-ℝ y)
       ( eq-upper-cut-upper-complement-lower-cut-ℝ x)
-      ( λ q →
-        elim-exists
-          ( upper-complement-lower-cut-ℝ x q)
-          ( λ p → intro-exists p ∘ tot (λ _ K → K ∘ H p)))
+      ( λ q → map-tot-exists (λ p → tot (λ _ K → K ∘ H p)))
 
 module _
   {l : Level} (x y : ℝ l)
