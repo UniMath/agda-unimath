@@ -24,6 +24,8 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.function-types
+open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -35,7 +37,9 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 
-open import real-numbers.arithmetically-located-cuts
+open import logic.functoriality-existential-quantification
+
+open import real-numbers.arithmetically-located-dedekind-cuts
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.rational-real-numbers
 open import real-numbers.similarity-real-numbers
@@ -68,29 +72,21 @@ module _
   abstract
     lower-cut-inhabited-add-ℝ : exists ℚ lower-cut-add-ℝ
     lower-cut-inhabited-add-ℝ =
-      elim-exists
-        ( ∃ ℚ lower-cut-add-ℝ)
-        ( λ p p-in-lower-x →
-          elim-exists
-            ( ∃ ℚ lower-cut-add-ℝ)
-            ( λ q q-in-lower-y →
-              intro-exists (p +ℚ q)
-                (intro-exists (p , q) (p-in-lower-x , q-in-lower-y , refl)))
-            ( is-inhabited-lower-cut-ℝ y))
+      map-binary-exists
+        ( is-in-subtype lower-cut-add-ℝ)
+        ( add-ℚ)
+        ( λ p q p<x q<y → intro-exists (p , q) (p<x , q<y , refl))
         ( is-inhabited-lower-cut-ℝ x)
+        ( is-inhabited-lower-cut-ℝ y)
 
     upper-cut-inhabited-add-ℝ : exists ℚ upper-cut-add-ℝ
     upper-cut-inhabited-add-ℝ =
-      elim-exists
-        ( ∃ ℚ upper-cut-add-ℝ)
-        ( λ p p-in-upper-x →
-          elim-exists
-            ( ∃ ℚ upper-cut-add-ℝ)
-            ( λ q q-in-upper-y →
-              intro-exists (p +ℚ q)
-                ( intro-exists (p , q) (p-in-upper-x , q-in-upper-y , refl)))
-            ( is-inhabited-upper-cut-ℝ y))
+      map-binary-exists
+        ( is-in-subtype upper-cut-add-ℝ)
+        ( add-ℚ)
+        ( λ p q x<p y<q → intro-exists (p , q) (x<p , y<q , refl))
         ( is-inhabited-upper-cut-ℝ x)
+        ( is-inhabited-upper-cut-ℝ y)
 
     is-rounded-lower-cut-add-ℝ :
       (a : ℚ) →
@@ -240,7 +236,9 @@ module _
         ( q-in-lower)
 
     arithmetically-located-add-ℝ :
-      is-arithmetically-located lower-cut-add-ℝ upper-cut-add-ℝ
+      is-arithmetically-located-pair-of-subtypes-ℚ
+        ( lower-cut-add-ℝ)
+        ( upper-cut-add-ℝ)
     arithmetically-located-add-ℝ ε =
       elim-exists
         ( claim)
@@ -280,8 +278,8 @@ module _
                   intro-exists
                     ( qx , qy)
                     ( qx-in-upper-x , qy-in-upper-y , refl)))
-            ( arithmetically-located-ℝ y s))
-        ( arithmetically-located-ℝ x r)
+            ( arithmetically-located-lower-upper-cut-ℝ y s))
+        ( arithmetically-located-lower-upper-cut-ℝ x r)
       where
         claim : Prop (l1 ⊔ l2)
         claim = ∃
@@ -360,7 +358,7 @@ module _
       le-ℚ p q →
       type-disjunction-Prop (lower-cut-add-ℝ p) (upper-cut-add-ℝ q)
     located-add-ℝ =
-      arithmetically-located-and-closed-located
+      is-located-is-arithmetically-located-pair-of-subtypes-ℚ
         ( lower-cut-add-ℝ)
         ( upper-cut-add-ℝ)
         ( arithmetically-located-add-ℝ)
@@ -402,22 +400,22 @@ module _
         ( lower-cut-add-ℝ x y)
         ( lower-cut-add-ℝ y x)
         ( λ q →
-          elim-exists
-            ( lower-cut-add-ℝ y x q)
+          map-exists
+            ( λ (ly , lx) →
+              is-in-lower-cut-ℝ y ly × is-in-lower-cut-ℝ x lx × (ly +ℚ lx ＝ q))
+            ( λ (lx , ly) → ly , lx)
             ( λ (lx , ly) (lx-in-lower-x , ly-in-lower-y , lx+ly=q) →
-              intro-exists
-                ( ly , lx)
-                ( ly-in-lower-y ,
-                  lx-in-lower-x ,
-                  commutative-add-ℚ ly lx ∙ lx+ly=q)) ,
-          elim-exists
-            ( lower-cut-add-ℝ x y q)
+              ly-in-lower-y ,
+              lx-in-lower-x ,
+              commutative-add-ℚ ly lx ∙ lx+ly=q) ,
+          map-exists
+            ( λ (lx , ly) →
+              is-in-lower-cut-ℝ x lx × is-in-lower-cut-ℝ y ly × (lx +ℚ ly ＝ q))
+            ( λ (ly , lx) → lx , ly)
             ( λ (ly , lx) (ly-in-lower-y , lx-in-lower-x , ly+lx=q) →
-              intro-exists
-                ( lx , ly)
-                ( lx-in-lower-x ,
-                  ly-in-lower-y ,
-                  commutative-add-ℚ lx ly ∙ ly+lx=q))))
+              lx-in-lower-x ,
+              ly-in-lower-y ,
+              commutative-add-ℚ lx ly ∙ ly+lx=q)))
 ```
 
 ### Unit laws for addition
@@ -435,30 +433,32 @@ abstract
         ( λ p →
           elim-exists
             (upper-cut-ℝ x p)
-            (λ (q , r) (0<q , r-in-Ux , q+r=p) →
+            (λ (q , r) (0<q , x<r , q+r=p) →
               le-upper-cut-ℝ
-                x
-                r
-                p
-                (tr
-                  (le-ℚ r)
-                  q+r=p
-                  (le-left-add-rational-ℚ⁺
+                ( x)
+                ( r)
+                ( p)
+                ( tr
+                  ( le-ℚ r)
+                  ( q+r=p)
+                  ( le-left-add-rational-ℚ⁺
                     ( r)
                     ( q , is-positive-le-zero-ℚ q 0<q)))
-                r-in-Ux) ,
-          λ p-in-Ux →
-            elim-exists
-              (upper-cut-add-ℝ zero-ℝ x p)
-              (λ q (q<p , q-in-Ux) →
-                intro-exists
-                  ( p -ℚ q , q)
-                  ( le-zero-is-positive-ℚ
-                    ( p -ℚ q)
-                    ( is-positive-diff-le-ℚ q p q<p) ,
-                    q-in-Ux ,
-                    is-section-right-subtraction-Ab abelian-group-add-ℚ q p))
-              (forward-implication (is-rounded-upper-cut-ℝ x p) p-in-Ux)))
+                ( x<r)) ,
+          ( λ x<p →
+            map-exists
+              ( λ (a , b) →
+                is-in-upper-cut-ℝ zero-ℝ a ×
+                is-in-upper-cut-ℝ x b ×
+                (a +ℚ b ＝ p))
+              ( λ q → (p -ℚ q , q))
+              ( λ q (q<p , x<q) →
+                le-zero-is-positive-ℚ
+                  ( p -ℚ q)
+                  ( is-positive-diff-le-ℚ q p q<p) ,
+                  ( x<q),
+                  is-section-right-subtraction-Ab abelian-group-add-ℚ q p)
+              ( forward-implication (is-rounded-upper-cut-ℝ x p) x<p))))
 
   right-unit-law-add-ℝ : {l : Level} → (x : ℝ l) → (x +ℝ zero-ℝ) ＝ x
   right-unit-law-add-ℝ x = commutative-add-ℝ x zero-ℝ ∙ left-unit-law-add-ℝ x
@@ -522,9 +522,25 @@ module _
 ### Addition preserves similarity
 
 ```agda
-left-sim-add-ℝ :
-  {l1 l2 l3 : Level} →
-  (x : ℝ l1) (x' : ℝ l2) (y : ℝ l3) →
-  sim-ℝ x x' →
-  sim-ℝ (x +ℝ y) (x' +ℝ y)
+module _
+  {l1 l2 l3 : Level} (x : ℝ l1) (x' : ℝ l2) (y : ℝ l3) (x≈x' : sim-ℝ x x')
+  where
+
+  left-sim-add-ℝ :
+    sim-ℝ (x +ℝ y) (x' +ℝ y)
+  pr1 left-sim-add-ℝ q =
+    map-tot-exists
+      ( λ (lx , ly) → map-product (pr1 x≈x' lx) id)
+  pr2 left-sim-add-ℝ q =
+    map-tot-exists
+      ( λ (lx' , ly) → map-product (pr2 x≈x' lx') id)
+
+  right-sim-add-ℝ :
+    sim-ℝ (y +ℝ x) (y +ℝ x')
+  pr1 right-sim-add-ℝ q =
+    map-tot-exists
+      ( λ (ly , lx) → map-product id (map-product (pr1 x≈x' lx) id))
+  pr2 right-sim-add-ℝ q =
+    map-tot-exists
+      ( λ (ly , lx') → map-product id (map-product (pr2 x≈x' lx') id))
 ```
