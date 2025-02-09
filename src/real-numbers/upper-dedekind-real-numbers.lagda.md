@@ -75,13 +75,13 @@ module _
   is-in-cut-upper-ℝ : ℚ → UU l
   is-in-cut-upper-ℝ = is-in-subtype cut-upper-ℝ
 
-  is-inhabited-upper-ℝ : exists ℚ cut-upper-ℝ
-  is-inhabited-upper-ℝ = pr1 (pr2 x)
+  is-inhabited-cut-upper-ℝ : exists ℚ cut-upper-ℝ
+  is-inhabited-cut-upper-ℝ = pr1 (pr2 x)
 
-  is-rounded-upper-ℝ :
+  is-rounded-cut-upper-ℝ :
     (q : ℚ) →
     is-in-cut-upper-ℝ q ↔ exists ℚ (λ p → le-ℚ-Prop p q ∧ cut-upper-ℝ p)
-  is-rounded-upper-ℝ = pr2 (pr2 x)
+  is-rounded-cut-upper-ℝ = pr2 (pr2 x)
 ```
 
 ## Properties
@@ -95,7 +95,9 @@ module _
 
   le-cut-upper-ℝ : le-ℚ p q → is-in-cut-upper-ℝ x p → is-in-cut-upper-ℝ x q
   le-cut-upper-ℝ p<q p<x =
-    backward-implication (is-rounded-upper-ℝ x q) (intro-exists p (p<q , p<x))
+    backward-implication
+      ( is-rounded-cut-upper-ℝ x q)
+      ( intro-exists p (p<q , p<x))
 ```
 
 ### Two upper real numbers with the same cut are equal
