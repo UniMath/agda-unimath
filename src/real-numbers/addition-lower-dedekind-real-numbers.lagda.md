@@ -61,8 +61,8 @@ module _
   is-in-cut-add-lower-ℝ : ℚ → UU (l1 ⊔ l2)
   is-in-cut-add-lower-ℝ = is-in-subtype cut-add-lower-ℝ
 
-  is-inhabited-add-lower-ℝ : exists ℚ cut-add-lower-ℝ
-  is-inhabited-add-lower-ℝ =
+  is-inhabited-cut-add-lower-ℝ : exists ℚ cut-add-lower-ℝ
+  is-inhabited-cut-add-lower-ℝ =
     minkowski-mul-inhabited-is-inhabited-Commutative-Monoid
       ( commutative-monoid-add-ℚ)
       ( cut-lower-ℝ x)
@@ -161,7 +161,7 @@ module _
 
     add-lower-ℝ : lower-ℝ (l1 ⊔ l2)
     pr1 add-lower-ℝ = cut-add-lower-ℝ
-    pr1 (pr2 add-lower-ℝ) = is-inhabited-add-lower-ℝ
+    pr1 (pr2 add-lower-ℝ) = is-inhabited-cut-add-lower-ℝ
     pr2 (pr2 add-lower-ℝ) = is-rounded-cut-add-lower-ℝ
 ```
 
