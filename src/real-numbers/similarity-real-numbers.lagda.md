@@ -7,9 +7,15 @@ module real-numbers.similarity-real-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.strict-inequality-rational-numbers
+
 open import foundation.dependent-pair-types
+open import foundation.disjunction
+open import foundation.empty-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.transport-along-identifications
 open import foundation.powersets
 open import foundation.propositions
 open import foundation.universe-levels
@@ -19,6 +25,7 @@ open import order-theory.similarity-of-elements-large-posets
 
 open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>
@@ -102,12 +109,25 @@ transitive-sim-ℝ = transitive-sim-Large-Poset ℝ-Large-Poset
 antisymmetric-sim-ℝ : {l : Level} → (x y : ℝ l) → sim-ℝ x y → x ＝ y
 antisymmetric-sim-ℝ = eq-sim-Large-Poset ℝ-Large-Poset
 ```
+
 ### A rational real is similar to the canonical projection of its rational
 
 ```agda
 sim-rational-ℝ :
   {l : Level} →
   (x : Rational-ℝ l) →
-  sim-rational-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
-sim-rational-ℝ (x , q , x-is-q) = ?
+  sim-ℝ (real-rational-ℝ x) (real-ℚ (rational-rational-ℝ x))
+pr1 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p∈lx =
+  trichotomy-le-ℚ
+    ( p)
+    ( q)
+    ( id)
+    ( λ p=q → ex-falso (q∉lx (tr (is-in-lower-cut-ℝ x) p=q p∈lx)))
+    ( λ q<p → ex-falso (q∉lx (le-lower-cut-ℝ x q p q<p p∈lx)))
+pr2 (sim-rational-ℝ (x , q , q∉lx , q∉ux)) p p<q =
+  elim-disjunction
+    ( lower-cut-ℝ x p)
+    ( id)
+    ( ex-falso ∘ q∉ux)
+    ( is-located-lower-upper-cut-ℝ x p q p<q)
 ```
