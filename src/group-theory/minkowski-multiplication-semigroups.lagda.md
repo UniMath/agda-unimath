@@ -13,6 +13,7 @@ open import foundation.conjunction
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets
@@ -21,6 +22,8 @@ open import foundation.universe-levels
 
 open import group-theory.semigroups
 open import group-theory.subsets-semigroups
+
+open import logic.functoriality-existential-quantification
 ```
 
 </details>
@@ -137,6 +140,27 @@ module _
   pr1 (pr2 semigroup-minkowski-mul-Semigroup) = minkowski-mul-Semigroup G
   pr2 (pr2 semigroup-minkowski-mul-Semigroup) =
     associative-minkowski-mul-Semigroup G
+```
+
+### The Minkowski multiplication of two inhabited subsets of a semigroup is inhabited
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  (G : Semigroup l1)
+  (A : subset-Semigroup l2 G)
+  (B : subset-Semigroup l3 G)
+  where
+
+  minkowski-mul-inhabited-is-inhabited-Semigroup :
+    is-inhabited-subtype A →
+    is-inhabited-subtype B →
+    is-inhabited-subtype (minkowski-mul-Semigroup G A B)
+  minkowski-mul-inhabited-is-inhabited-Semigroup =
+    map-binary-exists
+      ( is-in-subtype (minkowski-mul-Semigroup G A B))
+      ( mul-Semigroup G)
+      λ a b a∈A b∈B → intro-exists (a , b) (a∈A , b∈B , refl)
 ```
 
 ## External links

@@ -10,6 +10,7 @@ module group-theory.minkowski-multiplication-commutative-monoids where
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.powersets
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -102,6 +103,25 @@ module _
     monoid-minkowski-mul-Monoid (monoid-Commutative-Monoid M)
   pr2 commutative-monoid-minkowski-mul-Commutative-Monoid =
     commutative-minkowski-mul-Commutative-Monoid M
+```
+
+### The Minkowski multiplication of two inhabited subsets of a commutative monoid is inhabited
+
+```agda
+module _
+  {l1 : Level}
+  (M : Commutative-Monoid l1)
+  where
+
+  minkowski-mul-inhabited-is-inhabited-Commutative-Monoid :
+    {l2 l3 : Level} →
+    (A : subset-Commutative-Monoid l2 M) →
+    (B : subset-Commutative-Monoid l3 M) →
+    is-inhabited-subtype A →
+    is-inhabited-subtype B →
+    is-inhabited-subtype (minkowski-mul-Commutative-Monoid M A B)
+  minkowski-mul-inhabited-is-inhabited-Commutative-Monoid =
+    minkowski-mul-inhabited-is-inhabited-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ## See also
