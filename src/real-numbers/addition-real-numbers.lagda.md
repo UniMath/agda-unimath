@@ -523,17 +523,14 @@ module _
   left-sim-add-ℝ :
     sim-ℝ (x +ℝ y) (x' +ℝ y)
   pr1 left-sim-add-ℝ q =
-    map-tot-exists
-      ( λ (lx , ly) → map-product (pr1 x≈x' lx) id)
+    map-tot-exists (λ (lx , ly) → map-product (pr1 x≈x' lx) id)
   pr2 left-sim-add-ℝ q =
-    map-tot-exists
-      ( λ (lx' , ly) → map-product (pr2 x≈x' lx') id)
+    map-tot-exists (λ (lx' , ly) → map-product (pr2 x≈x' lx') id)
 
   right-sim-add-ℝ :
     sim-ℝ (y +ℝ x) (y +ℝ x')
   pr1 right-sim-add-ℝ q =
-    map-tot-exists
-      ( λ (ly , lx) → map-product id (map-product (pr1 x≈x' lx) id))
+    map-tot-exists (λ (ly , lx) → map-product id (map-product (pr1 x≈x' lx) id))
   pr2 right-sim-add-ℝ q =
     map-tot-exists
       ( λ (ly , lx') → map-product id (map-product (pr2 x≈x' lx') id))
