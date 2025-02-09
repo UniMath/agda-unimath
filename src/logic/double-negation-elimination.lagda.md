@@ -294,6 +294,19 @@ module _
     ( f (map-double-negation pr1 h) , g (map-double-negation pr2 h))
 ```
 
+### Double negation elimination for dependent products
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  double-negation-elim-Π :
+    ((x : A) → has-double-negation-elim (B x)) →
+    has-double-negation-elim ((x : A) → B x)
+  double-negation-elim-Π dnb nnb x = dnb x (λ nb → nnb (λ b → nb (b x)))
+```
+
 ### If a type satisfies untruncated double negation elimination then it has a Hilbert ε-operator
 
 ```agda

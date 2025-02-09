@@ -10,14 +10,14 @@ module foundation.mere-equality where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.double-negation
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
+open import foundation.irrefutable-equality
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.retracts-of-types
-open import foundation.double-negation
-open import foundation.irrefutable-equality
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
