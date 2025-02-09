@@ -20,6 +20,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
@@ -32,6 +33,7 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.rational-real-numbers
 ```
 
 </details>
@@ -140,7 +142,13 @@ module _
         ( is-rounded-lower-cut-neg-ℝ , is-rounded-upper-cut-neg-ℝ) ,
           is-disjoint-cut-neg-ℝ ,
           is-located-lower-upper-cut-neg-ℝ)
+```
 
+## Properties
+
+### The negation function on real numbers is an involution
+
+```agda
 neg-neg-ℝ : {l : Level} → (x : ℝ l) → neg-ℝ (neg-ℝ x) ＝ x
 neg-neg-ℝ x =
   eq-eq-lower-cut-ℝ
@@ -152,4 +160,15 @@ neg-neg-ℝ x =
       ( λ q →
         tr (is-in-lower-cut-ℝ x) (neg-neg-ℚ q) ,
         tr (is-in-lower-cut-ℝ x) (inv (neg-neg-ℚ q))))
+```
+
+### Negation preserves rationality
+
+```agda
+neg-Rational-ℝ : {l : Level} → Rational-ℝ l → Rational-ℝ l
+neg-Rational-ℝ (x , q , q≮x , x≮q) =
+  neg-ℝ x ,
+  neg-ℚ q ,
+  x≮q ∘ tr (is-in-upper-cut-ℝ x) (neg-neg-ℚ q) ,
+  q≮x ∘ tr (is-in-lower-cut-ℝ x) (neg-neg-ℚ q)
 ```
