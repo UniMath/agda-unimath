@@ -143,14 +143,28 @@ module _
           ( y<z))
 ```
 
-### The canonical map from rationals to reals preserves strict inequality
+### The canonical map from rationals to reals preserves and reflects strict inequality
 
 ```agda
-preserves-le-real-ℚ : (x y : ℚ) → le-ℚ x y → le-ℝ (real-ℚ x) (real-ℚ y)
-preserves-le-real-ℚ x y x<y =
-  intro-exists
-    ( mediant-ℚ x y)
-    ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
+module _
+  (x y : ℚ)
+  where
+
+  preserves-le-real-ℚ : le-ℚ x y → le-ℝ (real-ℚ x) (real-ℚ y)
+  preserves-le-real-ℚ x<y =
+    intro-exists
+      ( mediant-ℚ x y)
+      ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
+
+  reflects-le-real-ℚ : le-ℝ (real-ℚ x) (real-ℚ y) → le-ℚ x y
+  reflects-le-real-ℚ =
+    elim-exists
+      ( le-ℚ-Prop x y)
+      ( λ q (x<q , q<y) → transitive-le-ℚ x q y q<y x<q)
+
+  iff-le-real-ℚ : le-ℚ x y ↔ le-ℝ (real-ℚ x) (real-ℚ y)
+  pr1 iff-le-real-ℚ = preserves-le-real-ℚ
+  pr2 iff-le-real-ℚ = reflects-le-real-ℚ
 ```
 
 ### Concatenation rules for inequality and strict inequality on the real numbers
