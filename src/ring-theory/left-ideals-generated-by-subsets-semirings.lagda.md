@@ -453,7 +453,7 @@ module _
   where
 
   cases-forward-inclusion-idempotent-left-ideal-subset-Semiring :
-    (l :
+    ( l :
       left-linear-combination-subset-Semiring R
         ( subset-left-ideal-Semiring R I)) →
     is-in-left-ideal-Semiring R I
