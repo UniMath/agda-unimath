@@ -377,8 +377,6 @@ pr2 (finite-Π-π-Finite-Type k A B) =
 
 ### Dependent sums of π-finite types are π-finite
 
-### Finite products of π-finite types are π-finite
-
 ```agda
 is-π-finite-Σ :
   {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
