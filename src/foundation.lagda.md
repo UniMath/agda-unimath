@@ -238,6 +238,7 @@ open import foundation.images-subtypes public
 open import foundation.implicit-function-types public
 open import foundation.impredicative-encodings public
 open import foundation.impredicative-universes public
+open import foundation.indiscrete-types public
 open import foundation.induction-principle-propositional-truncation public
 open import foundation.inequality-booleans public
 open import foundation.infinitely-coherent-equivalences public
