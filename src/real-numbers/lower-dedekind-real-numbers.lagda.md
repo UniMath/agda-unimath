@@ -74,13 +74,13 @@ module _
   is-in-cut-lower-ℝ : ℚ → UU l
   is-in-cut-lower-ℝ = is-in-subtype cut-lower-ℝ
 
-  is-inhabited-lower-ℝ : exists ℚ cut-lower-ℝ
-  is-inhabited-lower-ℝ = pr1 (pr2 x)
+  is-inhabited-cut-lower-ℝ : exists ℚ cut-lower-ℝ
+  is-inhabited-cut-lower-ℝ = pr1 (pr2 x)
 
-  is-rounded-lower-ℝ :
+  is-rounded-cut-lower-ℝ :
     (q : ℚ) →
     is-in-cut-lower-ℝ q ↔ exists ℚ (λ r → le-ℚ-Prop q r ∧ cut-lower-ℝ r)
-  is-rounded-lower-ℝ = pr2 (pr2 x)
+  is-rounded-cut-lower-ℝ = pr2 (pr2 x)
 ```
 
 ## Properties
@@ -94,7 +94,7 @@ module _
 
   le-cut-lower-ℝ : le-ℚ p q → is-in-cut-lower-ℝ x q → is-in-cut-lower-ℝ x p
   le-cut-lower-ℝ p<q q<x =
-    backward-implication (is-rounded-lower-ℝ x p) (intro-exists q (p<q , q<x))
+    backward-implication (is-rounded-cut-lower-ℝ x p) (intro-exists q (p<q , q<x))
 ```
 
 ### Two lower real numbers with the same cut are equal
