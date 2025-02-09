@@ -51,6 +51,24 @@ module _
 
 ## Properties
 
+### Minkowski multiplication of monoid subsets is associative
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (M : Monoid l1)
+  (A : subset-Monoid l2 M)
+  (B : subset-Monoid l3 M)
+  (C : subset-Monoid l4 M)
+  where
+
+  associative-minkowski-mul-Monoid :
+    minkowski-mul-Monoid M (minkowski-mul-Monoid M A B) C ＝
+    minkowski-mul-Monoid M A (minkowski-mul-Monoid M B C)
+  associative-minkowski-mul-Monoid =
+    associative-minkowski-mul-Semigroup (semigroup-Monoid M) A B C
+```
+
 ### Unit laws for Minkowski multiplication of monoid subsets
 
 ```agda
