@@ -25,6 +25,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import real-numbers.dedekind-real-numbers
+open import real-numbers.similarity-real-numbers
 ```
 
 </details>
@@ -136,4 +137,6 @@ module _
 
 ```agda
 sim-raise-ℝ : {l1 : Level} → (l : Level) → (x : ℝ l1) → sim-ℝ x (raise-ℝ l x)
+pr1 (sim-raise-ℝ l x) _ = map-raise
+pr2 (sim-raise-ℝ l x) _ = map-inv-raise
 ```
