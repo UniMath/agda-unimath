@@ -213,22 +213,22 @@ module _
   (X : 𝔽 l)
   where
 
-  structure-abelian-group-𝔽 : UU l
-  structure-abelian-group-𝔽 =
-    Σ ( structure-group-𝔽 X)
-      ( λ g → is-abelian-Finite-Group (finite-group-structure-group-𝔽 X g))
+  structure-finite-abelian-group : UU l
+  structure-finite-abelian-group =
+    Σ ( structure-finite-group X)
+      ( λ g → is-abelian-Finite-Group (finite-group-structure-finite-group X g))
 
-  finite-abelian-group-structure-abelian-group-𝔽 :
-    structure-abelian-group-𝔽 → Finite-Ab l
-  pr1 (finite-abelian-group-structure-abelian-group-𝔽 (m , c)) =
-    finite-group-structure-group-𝔽 X m
-  pr2 (finite-abelian-group-structure-abelian-group-𝔽 (m , c)) = c
+  finite-abelian-group-structure-finite-abelian-group :
+    structure-finite-abelian-group → Finite-Ab l
+  pr1 (finite-abelian-group-structure-finite-abelian-group (m , c)) =
+    finite-group-structure-finite-group X m
+  pr2 (finite-abelian-group-structure-finite-abelian-group (m , c)) = c
 
-  is-finite-structure-abelian-group-𝔽 :
-    is-finite structure-abelian-group-𝔽
-  is-finite-structure-abelian-group-𝔽 =
+  is-finite-structure-finite-abelian-group :
+    is-finite structure-finite-abelian-group
+  is-finite-structure-finite-abelian-group =
     is-finite-Σ
-      ( is-finite-structure-group-𝔽 X)
+      ( is-finite-structure-finite-group X)
       ( λ g →
         is-finite-Π
           ( is-finite-type-𝔽 X)

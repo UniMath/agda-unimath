@@ -273,21 +273,21 @@ is-finite-is-unital-Finite-Semigroup G =
 ### There is a finite number of ways to equip a finite type with the structure of a monoid
 
 ```agda
-structure-monoid-𝔽 :
+structure-finite-monoid :
   {l1 : Level} → 𝔽 l1 → UU l1
-structure-monoid-𝔽 X =
-  Σ (structure-semigroup-𝔽 X) (λ p → is-unital-Finite-Semigroup (X , p))
+structure-finite-monoid X =
+  Σ (structure-finite-semigroup X) (λ p → is-unital-Finite-Semigroup (X , p))
 
-finite-monoid-structure-monoid-𝔽 :
-  {l : Level} → (X : 𝔽 l) → structure-monoid-𝔽 X → Finite-Monoid l
-pr1 (finite-monoid-structure-monoid-𝔽 X (a , u)) = X , a
-pr2 (finite-monoid-structure-monoid-𝔽 X (a , u)) = u
+finite-monoid-structure-finite-monoid :
+  {l : Level} → (X : 𝔽 l) → structure-finite-monoid X → Finite-Monoid l
+pr1 (finite-monoid-structure-finite-monoid X (a , u)) = X , a
+pr2 (finite-monoid-structure-finite-monoid X (a , u)) = u
 
-is-finite-structure-monoid-𝔽 :
-  {l : Level} → (X : 𝔽 l) → is-finite (structure-monoid-𝔽 X)
-is-finite-structure-monoid-𝔽 X =
+is-finite-structure-finite-monoid :
+  {l : Level} → (X : 𝔽 l) → is-finite (structure-finite-monoid X)
+is-finite-structure-finite-monoid X =
   is-finite-Σ
-    ( is-finite-structure-semigroup-𝔽 X)
+    ( is-finite-structure-finite-semigroup X)
     ( λ m → is-finite-is-unital-Finite-Semigroup (X , m))
 ```
 

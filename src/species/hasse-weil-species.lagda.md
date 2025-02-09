@@ -26,7 +26,7 @@ types that preserves cartesian products. The **Hasse-Weil species** is a species
 of finite inhabited types defined for any finite inhabited type `k` as
 
 ```text
-Σ (p : structure-semisimple-commutative-ring-𝔽 k) ; S (commutative-finite-ring-finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-𝔽 k p)
+Σ (p : structure-finite-semisimple-commutative-ring k) ; S (commutative-finite-ring-finite-semisimple-commutative-ring-structure-finite-semisimple-commutative-ring k p)
 ```
 
 ## Definitions
@@ -55,7 +55,7 @@ module _
         ( λ p →
           S
             ( commutative-finite-ring-Semisimple-Finite-Commutative-Ring
-              ( finite-semisimple-commutative-ring-structure-semisimple-commutative-ring-𝔽
+              ( finite-semisimple-commutative-ring-structure-finite-semisimple-commutative-ring
                 ( l3)
                 ( l4)
                 ( k , f)
