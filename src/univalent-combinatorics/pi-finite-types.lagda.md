@@ -1,8 +1,6 @@
 # π-finite types
 
 ```agda
-{-# OPTIONS --guardedness #-}
-
 module univalent-combinatorics.pi-finite-types where
 ```
 
@@ -40,7 +38,6 @@ open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.retracts-of-finite-types
 open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.unbounded-pi-finite-types
 open import univalent-combinatorics.untruncated-pi-finite-types
 ```
 
@@ -151,22 +148,6 @@ is-π-finite-is-untruncated-π-finite zero-ℕ H K =
 pr1 (is-π-finite-is-untruncated-π-finite (succ-ℕ k) H K) = pr1 K
 pr2 (is-π-finite-is-untruncated-π-finite (succ-ℕ k) H K) x y =
   is-π-finite-is-untruncated-π-finite k (H x y) (pr2 K x y)
-```
-
-### π-finite types are unbounded π-finite
-
-```agda
-is-unbounded-π-finite-is-π-finite :
-  {l : Level} (k : ℕ) {A : UU l} →
-  is-π-finite k A → is-unbounded-π-finite A
-is-unbounded-π-finite-is-π-finite zero-ℕ =
-  is-unbounded-π-finite-is-finite
-is-unbounded-π-finite-is-π-finite (succ-ℕ k) H =
-  λ where
-  .has-finitely-many-connected-components-is-unbounded-π-finite →
-    pr1 H
-  .is-unbounded-π-finite-Id-is-unbounded-π-finite x y →
-    is-unbounded-π-finite-is-π-finite k (pr2 H x y)
 ```
 
 ### πₙ-finite types are closed under retracts
@@ -388,9 +369,8 @@ is-π-finite-Σ k hA hB =
       ( is-trunc-is-π-finite k hA)
       ( is-trunc-is-π-finite k ∘ hB))
     ( is-untruncated-π-finite-Σ k
-      ( is-untruncated-π-finite-is-unbounded-π-finite
-        ( is-unbounded-π-finite-is-π-finite k hA)
-        ( succ-ℕ k))
+      ( is-untruncated-π-finite-is-π-finite (succ-ℕ k)
+        ( is-π-finite-succ-is-π-finite k hA))
       ( is-untruncated-π-finite-is-π-finite k ∘ hB))
 
 Σ-π-Finite-Type :

@@ -32,6 +32,7 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.finitely-many-connected-components
 open import univalent-combinatorics.function-types
+open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.standard-finite-types
 open import univalent-combinatorics.untruncated-pi-finite-types
 ```
@@ -338,6 +339,22 @@ is-finite-is-unbounded-π-finite H K =
   is-finite-equiv'
     ( equiv-unit-trunc-Set (_ , H))
     ( has-finitely-many-connected-components-is-unbounded-π-finite K)
+```
+
+### π-finite types are unbounded π-finite
+
+```agda
+is-unbounded-π-finite-is-π-finite :
+  {l : Level} (k : ℕ) {A : UU l} →
+  is-π-finite k A → is-unbounded-π-finite A
+is-unbounded-π-finite-is-π-finite zero-ℕ =
+  is-unbounded-π-finite-is-finite
+is-unbounded-π-finite-is-π-finite (succ-ℕ k) H =
+  λ where
+  .has-finitely-many-connected-components-is-unbounded-π-finite →
+    pr1 H
+  .is-unbounded-π-finite-Id-is-unbounded-π-finite x y →
+    is-unbounded-π-finite-is-π-finite k (pr2 H x y)
 ```
 
 ### Unbounded π-finite types are types that are untruncated πₙ-finite for all `n`
