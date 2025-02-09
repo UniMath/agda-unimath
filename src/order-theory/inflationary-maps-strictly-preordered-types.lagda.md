@@ -144,7 +144,8 @@ module _
   map-inflationary-hom-Strictly-Preordered-Type :
     type-Strictly-Preordered-Type P → type-Strictly-Preordered-Type P
   map-inflationary-hom-Strictly-Preordered-Type =
-    map-hom-Strictly-Preordered-Type P P hom-inflationary-hom-Strictly-Preordered-Type
+    map-hom-Strictly-Preordered-Type P P
+      ( hom-inflationary-hom-Strictly-Preordered-Type)
 
   preserves-order-inflationary-hom-Strictly-Preordered-Type :
     preserves-strict-order-map-Strictly-Preordered-Type P P

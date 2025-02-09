@@ -63,7 +63,8 @@ module _
     type-Relation-Prop le-prop-Strictly-Preordered-Type
 
   is-prop-le-Strictly-Preordered-Type :
-    (x y : type-Strictly-Preordered-Type) → is-prop (le-Strictly-Preordered-Type x y)
+    (x y : type-Strictly-Preordered-Type) →
+    is-prop (le-Strictly-Preordered-Type x y)
   is-prop-le-Strictly-Preordered-Type =
     is-prop-type-Relation-Prop le-prop-Strictly-Preordered-Type
 
