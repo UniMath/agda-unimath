@@ -20,10 +20,10 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import logic.functoriality-existential-quantification
-
 open import group-theory.semigroups
 open import group-theory.subsets-semigroups
+
+open import logic.functoriality-existential-quantification
 ```
 
 </details>

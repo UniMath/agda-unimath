@@ -10,8 +10,8 @@ module group-theory.minkowski-multiplication-commutative-monoids where
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
-open import foundation.powersets
 open import foundation.inhabited-subtypes
+open import foundation.powersets
 open import foundation.subtypes
 open import foundation.universe-levels
 

@@ -11,9 +11,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.inhabited-subtypes
 open import foundation.powersets
 open import foundation.subtypes
-open import foundation.inhabited-subtypes
 open import foundation.transport-along-identifications
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
@@ -147,7 +147,6 @@ module _
   minkowski-mul-inhabited-is-inhabited-Monoid =
     minkowski-mul-inhabited-is-inhabited-Semigroup (semigroup-Monoid M)
 ```
-
 
 ## See also
 
