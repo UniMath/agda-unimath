@@ -26,7 +26,7 @@ an
 if the inequality
 
 $$
-  x \leq f(x)
+  x ≤ f(x)
 $$
 
 holds for any element $x : P$. If $f$ is also

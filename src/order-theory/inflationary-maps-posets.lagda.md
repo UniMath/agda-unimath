@@ -26,7 +26,7 @@ A map $f : P → P$ on a [poset](order-theory.posets.md) $P$ is said to be an
 if the inequality
 
 $$
-  x \leq f(x)
+  x ≤ f(x)
 $$
 
 holds for any element $x : P$. In other words, a map on a poset is inflationary

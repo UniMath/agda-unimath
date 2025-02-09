@@ -25,7 +25,7 @@ A map $f : P → P$ on a [preorder](order-theory.preorders.md) $P$ is said to be
 if the inequality
 
 $$
-  f(x) \leq x
+  f(x) ≤ x
 $$
 
 holds for any element $x : P$. If $f$ is also
