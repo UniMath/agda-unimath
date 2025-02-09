@@ -81,14 +81,14 @@ module _
         ( large-poset-Large-Suplattice L)
         ( hom-large-poset-hom-Large-Suplattice f)
 
-    preserves-order-map-hom-Large-Suplattice :
+    preserves-order-hom-Large-Suplattice :
       {l1 l2 : Level}
       (x : type-Large-Suplattice K l1) (y : type-Large-Suplattice K l2) →
       leq-Large-Suplattice K x y →
       leq-Large-Suplattice L
         ( map-hom-Large-Suplattice x)
         ( map-hom-Large-Suplattice y)
-    preserves-order-map-hom-Large-Suplattice =
+    preserves-order-hom-Large-Suplattice =
       preserves-order-hom-Large-Poset
         ( large-poset-Large-Suplattice K)
         ( large-poset-Large-Suplattice L)
