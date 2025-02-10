@@ -122,7 +122,7 @@ module _
     is-unital-minkowski-mul-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Minkowski multiplication on a commutative monoid is commutative
+### Minkowski multiplication on subsets of a commutative monoid is commutative
 
 ```agda
 module _
