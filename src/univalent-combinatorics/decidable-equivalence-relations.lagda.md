@@ -50,14 +50,14 @@ each `R x y` is a
 ## Definition
 
 ```agda
-Decidable-Equivalence-Relation-Finite-Type :
+type-Decidable-Equivalence-Relation-Finite-Type :
   {l1 : Level} (l2 : Level) (X : Finite-Type l1) → UU (l1 ⊔ lsuc l2)
-Decidable-Equivalence-Relation-Finite-Type l2 X =
+type-Decidable-Equivalence-Relation-Finite-Type l2 X =
   Decidable-Equivalence-Relation l2 (type-Finite-Type X)
 
 module _
   {l1 l2 : Level} (X : Finite-Type l1)
-  (R : Decidable-Equivalence-Relation-Finite-Type l2 X)
+  (R : type-Decidable-Equivalence-Relation-Finite-Type l2 X)
   where
 
   decidable-relation-Decidable-Equivalence-Relation-Finite-Type :
@@ -180,7 +180,7 @@ module _
 ```agda
 equiv-Surjection-Finite-Type-Decidable-Equivalence-Relation-Finite-Type :
   {l1 : Level} (A : Finite-Type l1) →
-  Decidable-Equivalence-Relation-Finite-Type l1 A ≃
+  type-Decidable-Equivalence-Relation-Finite-Type l1 A ≃
   Surjection-Finite-Type l1 A
 equiv-Surjection-Finite-Type-Decidable-Equivalence-Relation-Finite-Type {l1} A =
   ( equiv-Σ-equiv-base
@@ -236,9 +236,9 @@ equiv-Surjection-Finite-Type-Decidable-Equivalence-Relation-Finite-Type {l1} A =
 
 ```agda
 is-finite-Decidable-Relation-Finite-Type :
-  {l1 : Level} (A : Finite-Type l1) →
-  is-finite (Decidable-Relation l1 (type-Finite-Type A))
-is-finite-Decidable-Relation-Finite-Type A =
+  {l1 : Level} (l2 : Level) (A : Finite-Type l1) →
+  is-finite (Decidable-Relation l2 (type-Finite-Type A))
+is-finite-Decidable-Relation-Finite-Type l2 A =
   is-finite-Π
     ( is-finite-type-Finite-Type A)
     ( λ a →
@@ -246,13 +246,19 @@ is-finite-Decidable-Relation-Finite-Type A =
         ( is-finite-type-Finite-Type A)
         ( λ b → is-finite-Decidable-Prop))
 
-is-finite-Decidable-Equivalence-Relation-Finite-Type :
-  {l1 : Level} (A : Finite-Type l1) →
-  is-finite (Decidable-Equivalence-Relation-Finite-Type l1 A)
-is-finite-Decidable-Equivalence-Relation-Finite-Type A =
+is-finite-type-Decidable-Equivalence-Relation-Finite-Type :
+  {l1 : Level} (l2 : Level) (A : Finite-Type l1) →
+  is-finite (type-Decidable-Equivalence-Relation-Finite-Type l2 A)
+is-finite-type-Decidable-Equivalence-Relation-Finite-Type l2 A =
   is-finite-Σ
-    ( is-finite-Decidable-Relation-Finite-Type A)
+    ( is-finite-Decidable-Relation-Finite-Type l2 A)
     ( is-finite-is-equivalence-Decidable-Relation-Finite-Type A)
+
+Decidable-Equivalence-Relation-Finite-Type :
+  {l1 : Level} (l2 : Level) → Finite-Type l1 → Finite-Type (l1 ⊔ lsuc l2)
+Decidable-Equivalence-Relation-Finite-Type l2 A =
+  ( type-Decidable-Equivalence-Relation-Finite-Type l2 A ,
+    is-finite-type-Decidable-Equivalence-Relation-Finite-Type l2 A)
 ```
 
 ### The number of decidable equivalence relations on a finite type is a Stirling number of the second kind

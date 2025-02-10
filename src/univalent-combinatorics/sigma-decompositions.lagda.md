@@ -211,7 +211,7 @@ module _
 ```agda
   equiv-Decidable-Equivalence-Relation-Finite-Type-Σ-Decomposition-Finite-Type :
     Σ-Decomposition-Finite-Type l l A ≃
-    Decidable-Equivalence-Relation-Finite-Type l A
+    type-Decidable-Equivalence-Relation-Finite-Type l A
   equiv-Decidable-Equivalence-Relation-Finite-Type-Σ-Decomposition-Finite-Type =
     inv-equiv
       ( equiv-Surjection-Finite-Type-Decidable-Equivalence-Relation-Finite-Type
@@ -228,7 +228,7 @@ module _
     is-finite-equiv
       ( inv-equiv
           equiv-Decidable-Equivalence-Relation-Finite-Type-Σ-Decomposition-Finite-Type)
-      ( is-finite-Decidable-Equivalence-Relation-Finite-Type A)
+      ( is-finite-type-Decidable-Equivalence-Relation-Finite-Type l A)
 ```
 
 ### Characterization of the equality of finite Σ-decompositions
