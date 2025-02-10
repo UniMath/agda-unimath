@@ -50,11 +50,10 @@ module _
   where
 
   minkowski-mul-Semigroup : subset-Semigroup (l1 ⊔ l2 ⊔ l3) G
-  minkowski-mul-Semigroup c =
-    ∃
-      ( type-Semigroup G × type-Semigroup G)
-      ( λ (a , b) →
-        A a ∧ B b ∧ Id-Prop (set-Semigroup G) c (mul-Semigroup G a b))
+  minkowski-mul-Semigroup c = ∃
+    ( type-Semigroup G × type-Semigroup G)
+    ( λ (a , b) →
+      A a ∧ B b ∧ Id-Prop (set-Semigroup G) c (mul-Semigroup G a b))
 ```
 
 ## Properties
@@ -70,11 +69,11 @@ module _
   (C : subset-Semigroup l4 G)
   where
 
-  associative-minkowski-mul-sim-Semigroup :
+  sim-associative-minkowski-mul-Semigroup :
     sim-subtype
       ( minkowski-mul-Semigroup G (minkowski-mul-Semigroup G A B) C)
       ( minkowski-mul-Semigroup G A (minkowski-mul-Semigroup G B C))
-  pr1 associative-minkowski-mul-sim-Semigroup x =
+  pr1 sim-associative-minkowski-mul-Semigroup x =
     elim-exists
       ( claim)
       ( λ (ab , c) (ab∈AB , c∈C , x=ab*c) →
@@ -96,7 +95,7 @@ module _
     where
       claim =
         minkowski-mul-Semigroup G A (minkowski-mul-Semigroup G B C) x
-  pr2 associative-minkowski-mul-sim-Semigroup x =
+  pr2 sim-associative-minkowski-mul-Semigroup x =
     elim-exists
       ( claim)
       ( λ (a , bc) (a∈A , bc∈BC , x=a*bc) →
@@ -126,7 +125,7 @@ module _
     antisymmetric-sim-subtype
       ( minkowski-mul-Semigroup G (minkowski-mul-Semigroup G A B) C)
       ( minkowski-mul-Semigroup G A (minkowski-mul-Semigroup G B C))
-      ( associative-minkowski-mul-sim-Semigroup)
+      ( sim-associative-minkowski-mul-Semigroup)
 ```
 
 ### Minkowski multiplication of subsets of a semigroup forms a semigroup
@@ -162,7 +161,7 @@ module _
     map-binary-exists
       ( is-in-subtype (minkowski-mul-Semigroup G A B))
       ( mul-Semigroup G)
-      λ a b a∈A b∈B → intro-exists (a , b) (a∈A , b∈B , refl)
+      ( λ a b a∈A b∈B → intro-exists (a , b) (a∈A , b∈B , refl))
 ```
 
 ### Containment is preserved by Minkowski multiplication of semigroup subtypes
