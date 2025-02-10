@@ -55,7 +55,7 @@ module _
 
 ## Properties
 
-### Minkowski multiplication of commutative monoid subsets is associative
+### Minkowski multiplication on subsets of a commutative monoid is associative
 
 ```agda
 module _
