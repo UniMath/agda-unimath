@@ -12,11 +12,13 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.nonunital-precategories
 open import category-theory.precategories
 open import category-theory.preunivalent-categories
+open import category-theory.strongly-preunivalent-categories
 
 open import foundation.1-types
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -161,21 +163,24 @@ module _
     nonunital-precategory-Precategory (precategory-Category C)
 ```
 
-### The underlying preunivalent category of a category
+### The underlying strongly preunivalent category of a category
 
 ```agda
 module _
   {l1 l2 : Level} (C : Category l1 l2)
   where
 
-  is-preunivalent-category-Category :
-    is-preunivalent-Precategory (precategory-Category C)
-  is-preunivalent-category-Category x y =
-    is-emb-is-equiv (is-category-Category C x y)
+  is-strongly-preunivalent-category-Category :
+    is-strongly-preunivalent-Precategory (precategory-Category C)
+  is-strongly-preunivalent-category-Category x =
+    is-set-is-contr
+      ( fundamental-theorem-id'
+        ( iso-eq-Precategory (precategory-Category C) x)
+        ( is-category-Category C x))
 
-  preunivalent-category-Category : Preunivalent-Category l1 l2
-  pr1 preunivalent-category-Category = precategory-Category C
-  pr2 preunivalent-category-Category = is-preunivalent-category-Category
+  strongly-preunivalent-category-Category : Strongly-Preunivalent-Category l1 l2
+  strongly-preunivalent-category-Category =
+    ( precategory-Category C , is-strongly-preunivalent-category-Category)
 ```
 
 ### The total hom-type of a category
@@ -237,11 +242,13 @@ module _
 
   is-1-type-obj-Category : is-1-type (obj-Category C)
   is-1-type-obj-Category =
-    is-1-type-obj-Preunivalent-Category (preunivalent-category-Category C)
+    is-1-type-obj-Strongly-Preunivalent-Category
+      ( strongly-preunivalent-category-Category C)
 
   obj-1-type-Category : 1-Type l1
   obj-1-type-Category =
-    obj-1-type-Preunivalent-Category (preunivalent-category-Category C)
+    obj-1-type-Strongly-Preunivalent-Category
+      ( strongly-preunivalent-category-Category C)
 ```
 
 ### The total hom-type of a category is a 1-type
@@ -254,11 +261,13 @@ module _
   is-1-type-total-hom-Category :
     is-1-type (total-hom-Category C)
   is-1-type-total-hom-Category =
-    is-1-type-total-hom-Preunivalent-Category (preunivalent-category-Category C)
+    is-1-type-total-hom-Strongly-Preunivalent-Category
+      ( strongly-preunivalent-category-Category C)
 
   total-hom-1-type-Category : 1-Type (l1 ⊔ l2)
   total-hom-1-type-Category =
-    total-hom-1-type-Preunivalent-Category (preunivalent-category-Category C)
+    total-hom-1-type-Strongly-Preunivalent-Category
+      ( strongly-preunivalent-category-Category C)
 ```
 
 ### A preunivalent category is a category if and only if `iso-eq` is surjective

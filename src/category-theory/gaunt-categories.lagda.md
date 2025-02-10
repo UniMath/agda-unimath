@@ -14,9 +14,9 @@ open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.nonunital-precategories
 open import category-theory.precategories
-open import category-theory.preunivalent-categories
 open import category-theory.rigid-objects-categories
 open import category-theory.strict-categories
+open import category-theory.strongly-preunivalent-categories
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
@@ -24,6 +24,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.strictly-involutive-identity-types
+open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
 
@@ -55,7 +56,7 @@ diagram relating the different notions of "category":
           \           /
             \       /
               ∨   ∨
-      Preunivalent categories
+  Strongly Preunivalent categories
                 |
                 |
                 ∨
@@ -231,13 +232,13 @@ precategory-Gaunt-Category :
 precategory-Gaunt-Category C = precategory-Category (category-Gaunt-Category C)
 ```
 
-### The underlying preunivalent category of a gaunt category
+### The underlying strongly preunivalent category of a gaunt category
 
 ```agda
-preunivalent-category-Gaunt-Category :
-  {l1 l2 : Level} → Gaunt-Category l1 l2 → Preunivalent-Category l1 l2
-preunivalent-category-Gaunt-Category C =
-  preunivalent-category-Category (category-Gaunt-Category C)
+strongly-preunivalent-category-Gaunt-Category :
+  {l1 l2 : Level} → Gaunt-Category l1 l2 → Strongly-Preunivalent-Category l1 l2
+strongly-preunivalent-category-Gaunt-Category C =
+  strongly-preunivalent-category-Category (category-Gaunt-Category C)
 ```
 
 ### The total hom-type of a gaunt category
@@ -280,12 +281,13 @@ module _
 ### Preunivalent categories whose isomorphism-sets are propositions are strict categories
 
 ```agda
-is-strict-category-is-prop-iso-Preunivalent-Category :
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2) →
-  is-prop-iso-Precategory (precategory-Preunivalent-Category C) →
-  is-strict-category-Preunivalent-Category C
-is-strict-category-is-prop-iso-Preunivalent-Category C is-prop-iso-C x y =
-  is-prop-emb (emb-iso-eq-Preunivalent-Category C) (is-prop-iso-C x y)
+is-strict-category-is-prop-iso-Strongly-Preunivalent-Category :
+  {l1 l2 : Level} (C : Strongly-Preunivalent-Category l1 l2) →
+  is-prop-iso-Precategory (precategory-Strongly-Preunivalent-Category C) →
+  is-strict-category-Strongly-Preunivalent-Category C
+is-strict-category-is-prop-iso-Strongly-Preunivalent-Category
+  C is-prop-iso-C x y =
+  is-prop-emb (emb-iso-eq-Strongly-Preunivalent-Category C) (is-prop-iso-C x y)
 ```
 
 ### Gaunt categories are strict
@@ -295,8 +297,8 @@ is-strict-category-is-gaunt-Category :
   {l1 l2 : Level} (C : Category l1 l2) →
   is-gaunt-Category C → is-strict-category-Category C
 is-strict-category-is-gaunt-Category C =
-  is-strict-category-is-prop-iso-Preunivalent-Category
-    ( preunivalent-category-Category C)
+  is-strict-category-is-prop-iso-Strongly-Preunivalent-Category
+    ( strongly-preunivalent-category-Category C)
 ```
 
 ### A strict category is gaunt if `iso-eq` is surjective
@@ -309,9 +311,13 @@ module _
   is-category-is-surjective-iso-eq-Strict-Category :
     is-surjective-iso-eq-Precategory (precategory-Strict-Category C) →
     is-category-Precategory (precategory-Strict-Category C)
-  is-category-is-surjective-iso-eq-Strict-Category =
-    is-category-is-surjective-iso-eq-Preunivalent-Category
-      ( preunivalent-category-Strict-Category C)
+  is-category-is-surjective-iso-eq-Strict-Category H x y =
+    is-equiv-is-emb-is-surjective
+      ( H x y)
+      ( is-preunivalent-Strongly-Preunivalent-Category
+        ( strongly-preunivalent-category-Strict-Category C)
+        ( x)
+        ( y))
 
   is-prop-iso-is-category-Strict-Category :
     is-category-Precategory (precategory-Strict-Category C) →
