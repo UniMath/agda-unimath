@@ -31,9 +31,10 @@ open import real-numbers.rational-lower-dedekind-real-numbers
 
 ## Idea
 
-The {{#concept "standard ordering" Disambiguation="lower Dedekind real numbers" Agda=leq-lower-ℝ}} on
-the [lower real numbers](real-numbers.lower-dedekind-real-numbers.md) is defined as the
-cut of one being a subset of the cut of the other.
+The
+{{#concept "standard ordering" Disambiguation="lower Dedekind real numbers" Agda=leq-lower-ℝ}}
+on the [lower real numbers](real-numbers.lower-dedekind-real-numbers.md) is
+defined as the cut of one being a subset of the cut of the other.
 
 ## Definition
 
@@ -57,10 +58,20 @@ module _
 
 ```agda
 lower-ℝ-Large-Preorder : Large-Preorder lsuc _⊔_
-lower-ℝ-Large-Preorder = powerset-Large-Preorder ℚ
+type-Large-Preorder lower-ℝ-Large-Preorder = lower-ℝ
+leq-prop-Large-Preorder lower-ℝ-Large-Preorder = leq-lower-ℝ-Prop
+refl-leq-Large-Preorder lower-ℝ-Large-Preorder x =
+  refl-leq-subtype (cut-lower-ℝ x)
+transitive-leq-Large-Preorder lower-ℝ-Large-Preorder x y z =
+  transitive-leq-subtype (cut-lower-ℝ x) (cut-lower-ℝ y) (cut-lower-ℝ z)
 
 lower-ℝ-Large-Poset : Large-Poset lsuc _⊔_
-lower-ℝ-Large-Poset = powerset-Large-Poset ℚ
+large-preorder-Large-Poset lower-ℝ-Large-Poset = lower-ℝ-Large-Preorder
+antisymmetric-leq-Large-Poset lower-ℝ-Large-Poset x y x≤y y≤x =
+  eq-eq-cut-lower-ℝ
+    ( x)
+    ( y)
+    ( antisymmetric-leq-subtype (cut-lower-ℝ x) (cut-lower-ℝ y) x≤y y≤x)
 ```
 
 ### The canonical map from the rational numbers to the lower reals preserves inequality

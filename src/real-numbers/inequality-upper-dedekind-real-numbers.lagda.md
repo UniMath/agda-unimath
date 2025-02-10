@@ -23,17 +23,18 @@ open import foundation.universe-levels
 open import order-theory.large-posets
 open import order-theory.large-preorders
 
-open import real-numbers.upper-dedekind-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
 
 ## Idea
 
-The {{#concept "standard ordering" Disambiguation="upper Dedekind real numbers" Agda=leq-upper-ℝ}} on
-the [upper real numbers](real-numbers.upper-dedekind-real-numbers.md) is defined as the
-cut of the second being a subset of the cut of the first.
+The
+{{#concept "standard ordering" Disambiguation="upper Dedekind real numbers" Agda=leq-upper-ℝ}}
+on the [upper real numbers](real-numbers.upper-dedekind-real-numbers.md) is
+defined as the cut of the second being a subset of the cut of the first.
 
 ## Definition
 
@@ -57,10 +58,20 @@ module _
 
 ```agda
 upper-ℝ-Large-Preorder : Large-Preorder lsuc _⊔_
-upper-ℝ-Large-Preorder = powerset-Large-Preorder ℚ
+type-Large-Preorder upper-ℝ-Large-Preorder = upper-ℝ
+leq-prop-Large-Preorder upper-ℝ-Large-Preorder = leq-upper-ℝ-Prop
+refl-leq-Large-Preorder upper-ℝ-Large-Preorder x =
+  refl-leq-subtype (cut-upper-ℝ x)
+transitive-leq-Large-Preorder upper-ℝ-Large-Preorder x y z y≤z x≤y =
+  transitive-leq-subtype (cut-upper-ℝ z) (cut-upper-ℝ y) (cut-upper-ℝ x) x≤y y≤z
 
 upper-ℝ-Large-Poset : Large-Poset lsuc _⊔_
-upper-ℝ-Large-Poset = powerset-Large-Poset ℚ
+large-preorder-Large-Poset upper-ℝ-Large-Poset = upper-ℝ-Large-Preorder
+antisymmetric-leq-Large-Poset upper-ℝ-Large-Poset x y x≤y y≤x =
+  eq-eq-cut-upper-ℝ
+    ( x)
+    ( y)
+    ( antisymmetric-leq-subtype (cut-upper-ℝ x) (cut-upper-ℝ y) y≤x x≤y)
 ```
 
 ### The canonical map from the rational numbers to the upper reals preserves inequality

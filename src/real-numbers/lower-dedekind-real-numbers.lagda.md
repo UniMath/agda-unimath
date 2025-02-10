@@ -75,6 +75,9 @@ module _
   is-in-cut-lower-ℝ : ℚ → UU l
   is-in-cut-lower-ℝ = is-in-subtype cut-lower-ℝ
 
+  is-lower-dedekind-cut-lower-ℝ : is-lower-dedekind-cut cut-lower-ℝ
+  is-lower-dedekind-cut-lower-ℝ = pr2 x
+
   is-inhabited-cut-lower-ℝ : exists ℚ cut-lower-ℝ
   is-inhabited-cut-lower-ℝ = pr1 (pr2 x)
 

@@ -75,6 +75,9 @@ module _
   is-in-cut-upper-ℝ : ℚ → UU l
   is-in-cut-upper-ℝ = is-in-subtype cut-upper-ℝ
 
+  is-upper-dedekind-cut-upper-ℝ : is-upper-dedekind-cut cut-upper-ℝ
+  is-upper-dedekind-cut-upper-ℝ = pr2 x
+
   is-inhabited-cut-upper-ℝ : exists ℚ cut-upper-ℝ
   is-inhabited-cut-upper-ℝ = pr1 (pr2 x)
 

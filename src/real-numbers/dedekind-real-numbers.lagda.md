@@ -50,10 +50,10 @@ open import real-numbers.upper-dedekind-real-numbers
 
 A
 {{#concept "Dedekind cut" Agda=is-dedekind-cut WD="dedekind cut" WDID=Q851333}}
-consists of a [pair](foundation.dependent-pair-types.md) `(L , U)` of
-a [lower Dedekind cut](real-numbers.lower-dedekind-real-numbers)
-and an [upper Dedekind cut](real-numbers.upper-dedekind-real-numbers)
-that also satisfy the following conditions:
+consists of a [pair](foundation.dependent-pair-types.md) `(L , U)` of a
+[lower Dedekind cut](real-numbers.lower-dedekind-real-numbers) and an
+[upper Dedekind cut](real-numbers.upper-dedekind-real-numbers) that also satisfy
+the following conditions:
 
 1. _Disjointness_. `L` and `U` are disjoint subsets of `ℚ`.
 2. _Locatedness_. If `q < r` then `q ∈ L` or `r ∈ U`.
@@ -71,12 +71,24 @@ module _
   {l1 l2 : Level} (L : subtype l1 ℚ) (U : subtype l2 ℚ)
   where
 
+  is-disjoint-cut-Prop : Prop (l1 ⊔ l2)
+  is-disjoint-cut-Prop = ∀' ℚ (λ q → ¬' (L q ∧ U q))
+
+  is-disjoint-cut : UU (l1 ⊔ l2)
+  is-disjoint-cut = type-Prop is-disjoint-cut-Prop
+
+  is-located-cut-Prop : Prop (l1 ⊔ l2)
+  is-located-cut-Prop = ∀' ℚ (λ q → ∀' ℚ (λ r → le-ℚ-Prop q r ⇒ (L q ∨ U r)))
+
+  is-located-cut : UU (l1 ⊔ l2)
+  is-located-cut = type-Prop is-located-cut-Prop
+
   is-dedekind-cut-Prop : Prop (l1 ⊔ l2)
   is-dedekind-cut-Prop =
     is-lower-dedekind-cut-Prop L ∧
     is-upper-dedekind-cut-Prop U ∧
-    ( ∀' ℚ (λ q → ¬' (L q ∧ U q))) ∧
-    ( ∀' ℚ (λ q → ∀' ℚ (λ r → le-ℚ-Prop q r ⇒ (L q ∨ U r))))
+    is-disjoint-cut-Prop ∧
+    is-located-cut-Prop
 
   is-dedekind-cut : UU (l1 ⊔ l2)
   is-dedekind-cut = type-Prop is-dedekind-cut-Prop
@@ -93,6 +105,15 @@ module _
 
 real-dedekind-cut : {l : Level} (L U : subtype l ℚ) → is-dedekind-cut L U → ℝ l
 real-dedekind-cut L U H = L , U , H
+
+real-lower-upper-ℝ :
+  {l : Level} →
+  (L : lower-ℝ l) (U : upper-ℝ l) →
+  is-disjoint-cut (cut-lower-ℝ L) (cut-upper-ℝ U) →
+  is-located-cut (cut-lower-ℝ L) (cut-upper-ℝ U) →
+  ℝ l
+real-lower-upper-ℝ (L , lower-dedekind-L) (U , lower-dedekind-U) H K =
+  L , U , lower-dedekind-L , lower-dedekind-U , H , K
 
 module _
   {l : Level} (x : ℝ l)

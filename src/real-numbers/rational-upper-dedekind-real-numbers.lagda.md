@@ -24,8 +24,9 @@ open import real-numbers.upper-dedekind-real-numbers
 
 ## Idea
 
-There is a canonical mapping from the [rational numbers](elementary-number-theory.rational-numbers.md)
-to the [upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md).
+There is a canonical mapping from the
+[rational numbers](elementary-number-theory.rational-numbers.md) to the
+[upper Dedekind real numbers](real-numbers.upper-dedekind-real-numbers.md).
 
 ## Definition
 
