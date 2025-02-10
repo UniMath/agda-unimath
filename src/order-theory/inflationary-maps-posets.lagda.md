@@ -22,13 +22,19 @@ open import order-theory.posets
 ## Idea
 
 A map $f : P → P$ on a [poset](order-theory.posets.md) $P$ is said to be an
-{{#concept "inflationary map" Disambiguation="poset" Agda=inflationary-map-Poset}} if the inequality
+{{#concept "inflationary map" Disambiguation="poset" Agda=inflationary-map-Poset}}
+if the inequality
 
 $$
-  x \leq f(x)
+  x ≤ f(x)
 $$
 
-holds for any element $x : P$. In other words, a map on a poset is inflationary precisely when the map on its underlying [preorder](order-theory.preorders.md) is [inflationary](order-theory.inflationary-maps-preorders.md). If $f$ is also [order preserving](order-theory.order-preserving-maps-posets.md) we say that $f$ is an {{#concept "inflationary morphism" Disambiguation="poset" Agda=inflationary-hom-Poset}}.
+holds for any element $x : P$. In other words, a map on a poset is inflationary
+precisely when the map on its underlying [preorder](order-theory.preorders.md)
+is [inflationary](order-theory.inflationary-maps-preorders.md). If $f$ is also
+[order preserving](order-theory.order-preserving-maps-posets.md) we say that $f$
+is an
+{{#concept "inflationary morphism" Disambiguation="poset" Agda=inflationary-hom-Poset}}.
 
 ## Definitions
 

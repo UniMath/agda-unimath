@@ -20,14 +20,19 @@ open import order-theory.preorders
 
 ## Idea
 
-A map $f : P → P$ on a [preorder](order-theory.preorders.md) $P$ is said to be an
-{{#concept "inflationary map" Disambiguation="preorder" Agda=inflationary-map-Preorder}} if the inequality
+A map $f : P → P$ on a [preorder](order-theory.preorders.md) $P$ is said to be
+an
+{{#concept "inflationary map" Disambiguation="preorder" Agda=inflationary-map-Preorder}}
+if the inequality
 
 $$
-  x \leq f(x)
+  x ≤ f(x)
 $$
 
-holds for any element $x : P$. If $f$ is also [order preserving](order-theory.order-preserving-maps-preorders.md) we say that $f$ is an {{#concept "inflationary morphism" Disambiguation="preorder" Agda=inflationary-hom-Preorder}}.
+holds for any element $x : P$. If $f$ is also
+[order preserving](order-theory.order-preserving-maps-preorders.md) we say that
+$f$ is an
+{{#concept "inflationary morphism" Disambiguation="preorder" Agda=inflationary-hom-Preorder}}.
 
 ## Definitions
 
