@@ -133,14 +133,12 @@ module _
     minkowski-mul-Commutative-Monoid M A B ⊆
     minkowski-mul-Commutative-Monoid M B A
   commutative-minkowski-mul-leq-Commutative-Monoid x =
-    map-exists
-      ( λ (b , a) →
-        is-in-subtype B b ×
-        is-in-subtype A a ×
-        (x ＝ mul-Commutative-Monoid M b a))
-      ( λ (a , b) → (b , a))
-      ( λ (b , a) (a∈A , b∈B , x=ab) →
-        ( b∈B , a∈A , x=ab ∙ commutative-mul-Commutative-Monoid M b a))
+    elim-exists
+      ( minkowski-mul-Commutative-Monoid M B A x)
+      ( λ (a , b) (a∈A , b∈B , x=ab) →
+        intro-exists
+          ( b , a)
+          ( b∈B , a∈A , x=ab ∙ commutative-mul-Commutative-Monoid M a b))
 
 module _
   {l1 l2 l3 : Level}
