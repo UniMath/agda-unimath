@@ -20,20 +20,6 @@ open import order-theory.preorders
 
 ## Idea
 
-<<<<<<< HEAD
-A map $f : P → P$ on a [preorder](order-theory.preorders.md) $P$ is said to be an
-{{#concept "deflationary map" Disambiguation="preorder" Agda=deflationary-map-Preorder}} if the inequality
-
-$$
-  f(x) \leq x
-$$
-
-holds for any element $x : P$. If $f$ is also [order preserving](order-theory.order-preserving-maps-preorders.md) we say that $f$ is an {{#concept "deflationary morphism" Disambiguation="preorder" Agda=deflationary-hom-Preorder}}.
-
-## Definitions
-
-### The predicate of being an deflationary map
-=======
 A map $f : P → P$ on a [preorder](order-theory.preorders.md) $P$ is said to be a
 {{#concept "deflationary map" Disambiguation="preorder" Agda=deflationary-map-Preorder}}
 if the inequality
@@ -50,7 +36,6 @@ $f$ is a
 ## Definitions
 
 ### The predicate of being a deflationary map
->>>>>>> a9ee07030da6be910bd6b703862ac69aaeab205f
 
 ```agda
 module _
