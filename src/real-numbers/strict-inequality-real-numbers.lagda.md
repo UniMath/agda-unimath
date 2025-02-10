@@ -12,6 +12,7 @@ module real-numbers.strict-inequality-real-numbers where
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.strict-inequality-rational-numbers
 
+open import foundation.cartesian-product-types
 open import foundation.conjunction
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -143,14 +144,28 @@ module _
           ( y<z))
 ```
 
-### The canonical map from rationals to reals preserves strict inequality
+### The canonical map from rationals to reals preserves and reflects strict inequality
 
 ```agda
-preserves-le-real-ℚ : (x y : ℚ) → le-ℚ x y → le-ℝ (real-ℚ x) (real-ℚ y)
-preserves-le-real-ℚ x y x<y =
-  intro-exists
-    ( mediant-ℚ x y)
-    ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
+module _
+  (x y : ℚ)
+  where
+
+  preserves-le-real-ℚ : le-ℚ x y → le-ℝ (real-ℚ x) (real-ℚ y)
+  preserves-le-real-ℚ x<y =
+    intro-exists
+      ( mediant-ℚ x y)
+      ( le-left-mediant-ℚ x y x<y , le-right-mediant-ℚ x y x<y)
+
+  reflects-le-real-ℚ : le-ℝ (real-ℚ x) (real-ℚ y) → le-ℚ x y
+  reflects-le-real-ℚ =
+    elim-exists
+      ( le-ℚ-Prop x y)
+      ( λ q (x<q , q<y) → transitive-le-ℚ x q y q<y x<q)
+
+  iff-le-real-ℚ : le-ℚ x y ↔ le-ℝ (real-ℚ x) (real-ℚ y)
+  pr1 iff-le-real-ℚ = preserves-le-real-ℚ
+  pr2 iff-le-real-ℚ = reflects-le-real-ℚ
 ```
 
 ### Concatenation rules for inequality and strict inequality on the real numbers
@@ -337,6 +352,29 @@ module _
   le-iff-upper-cut-real-ℚ : is-in-upper-cut-ℝ x q ↔ le-ℝ x (real-ℚ q)
   pr1 le-iff-upper-cut-real-ℚ = le-upper-cut-real-ℚ
   pr2 le-iff-upper-cut-real-ℚ = upper-cut-real-le-ℚ
+```
+
+### Strict inequality on the real numbers is dense
+
+```agda
+module _
+  {l1 l2 : Level}
+  (x : ℝ l1)
+  (y : ℝ l2)
+  where
+
+  dense-le-ℝ : le-ℝ x y → exists (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y)
+  dense-le-ℝ =
+    elim-exists
+      ( ∃ (ℝ lzero) (λ z → le-ℝ-Prop x z ∧ le-ℝ-Prop z y))
+      ( λ q (q∈ux , q∈ly) →
+        map-binary-exists
+          ( λ z → le-ℝ x z × le-ℝ z y)
+          ( λ _ _ → real-ℚ q)
+          ( λ p r (p<q , p∈ux) (q<r , r∈ly) →
+            intro-exists p (p∈ux , p<q) , intro-exists r (q<r , r∈ly))
+          ( forward-implication (is-rounded-upper-cut-ℝ x q) q∈ux)
+          ( forward-implication (is-rounded-lower-cut-ℝ y q) q∈ly))
 ```
 
 ## References
