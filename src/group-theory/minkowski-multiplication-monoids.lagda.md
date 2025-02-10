@@ -28,12 +28,13 @@ open import group-theory.subsets-monoids
 
 ## Idea
 
-For two [subsets](group-theory.subsets-monoids.md) `A`, `B` of a
-[monoid](group-theory.monoids.md) `M`, the Minkowski multiplication of `A` and
-`B` is the set of elements that can be formed by multiplying an element of `A`
-and an element of `B`. (This is more usually referred to as a Minkowski sum, but
-as the operation on monoids is referred to as `mul`, we use multiplicative
-terminology.)
+Given two [subsets](group-theory.subsets-monoids.md) `A` and `B` of a
+[monoid](group-theory.monoids.md) `M`, the
+{{#concept "Minkowski multiplication" Disambiguation="on subsets of a monoid" WD="Minkowski addition" WDID=Q1322294  Agda=minkowski-mul-Monoid}}
+of `A` and `B` is the [set](foundation-core.sets.md) of elements that can be
+formed by multiplying an element of `A` and an element of `B`. This binary
+operation defines a monoid structure on the [powerset](foundation.powersets.md)
+of `M`.
 
 ## Definition
 
