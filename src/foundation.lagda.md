@@ -395,9 +395,11 @@ open import foundation.standard-ternary-pullbacks public
 open import foundation.strict-symmetrization-binary-relations public
 open import foundation.strictly-involutive-identity-types public
 open import foundation.strictly-right-unital-concatenation-identifications public
+open import foundation.strong-preunivalence public
 open import foundation.strongly-extensional-maps public
 open import foundation.structure public
 open import foundation.structure-identity-principle public
+open import foundation.structured-equality-duality public
 open import foundation.structured-type-duality public
 open import foundation.subsingleton-induction public
 open import foundation.subterminal-types public
