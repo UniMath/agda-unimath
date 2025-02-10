@@ -135,7 +135,7 @@ asserts that the following are equivalent:
 2. For every `x : A` the type `Σ A (B x)` is `𝒫`-separated.
 
 This unbased extension of the fundamental theorem was not stated or proved at
-the Regensburg summer school, but later contributed by
+the Regensburg summer school, but was later contributed by
 [Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke) in January 2025.
 
 ```agda
