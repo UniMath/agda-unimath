@@ -1,4 +1,4 @@
-# Minkowski multiplication of commutative monoid subtypes
+# Minkowski multiplication of subsets of a commutative monoid
 
 ```agda
 module group-theory.minkowski-multiplication-commutative-monoids where
