@@ -41,8 +41,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-The {{#concept "Regensburg extension" Agda=extended-fundamental-theorem-id}} of
-the
+The
+{{#concept "Regensburg extension" Disambiguation="of the fundamental theorem of identity types" Agda=extended-fundamental-theorem-id}}
+of the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
 asserts that for any [subuniverse](foundation.subuniverses.md) `P`, and any
 [pointed](structured-types.pointed-types.md)
@@ -129,10 +130,13 @@ over a not necessarily pointed or inhabited type `A` whose elements are all
 merely equal. In other words, `A` is any π₀-trivial type. The characterization
 asserts that the following are equivalent:
 
-1. For every `x : A` and every family of maps out of the identity types
-   `f : (y : A) → (x ＝ y) → B x y`, then for every `y : A` the `f y` is a
-   `𝒫`-map.
+1. For every `x : A`, every family of maps out of the identity types
+   `f : (y : A) → (x ＝ y) → B x y`, is a family of `𝒫`-maps.
 2. For every `x : A` the type `Σ A (B x)` is `𝒫`-separated.
+
+This unbased extension of the fundamental theorem was not stated or proved at
+the Regensburg summer school, but later contributed by
+[Fredrik Bakke](https://www.ntnu.edu/employees/fredrik.bakke) in January 2025.
 
 ```agda
 module _
