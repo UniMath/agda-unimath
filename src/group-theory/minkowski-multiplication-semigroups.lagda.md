@@ -1,4 +1,4 @@
-# Minkowski multiplication of semigroup subtypes
+# Minkowski multiplication on subsets of a semigroup
 
 ```agda
 module group-theory.minkowski-multiplication-semigroups where
@@ -32,12 +32,10 @@ open import logic.functoriality-existential-quantification
 
 ## Idea
 
-For two [subsets](group-theory.subsets-semigroups.md) `A`, `B` of a
-[semigroup](group-theory.semigroups.md) `S`, the Minkowski multiplication of `A`
-and `B` is the set of elements that can be formed by multiplying an element of
-`A` and an element of `B`. (This is more usually referred to as a Minkowski sum,
-but as the operation on semigroups is referred to as `mul`, we use
-multiplicative terminology.)
+Given two [subsets](group-theory.subsets-semigroups.md) `A` and `B` of a
+[semigroup](group-theory.semigroups.md) `S`, the {{#concept "Minkowski multiplication" Disambiguation="on subsets of a semigroup" WD="Minkowski addition" WDID=Q1322294 Agda=minkowski-mul-Semigroup}} of `A`
+and `B` is the [set](foundation-core.sets.md) of elements that can be formed by multiplying an element of
+`A` and an element of `B`. This binary operation defines a semigroup structure on the [powerset](foundation.powersets.md) of `S`.
 
 ## Definition
 
@@ -58,7 +56,7 @@ module _
 
 ## Properties
 
-### Minkowski multiplication of semigroup subsets is associative
+### Minkowski multiplication on subsets of a semigroup is associative
 
 ```agda
 module _
@@ -128,7 +126,7 @@ module _
       ( sim-associative-minkowski-mul-Semigroup)
 ```
 
-### Minkowski multiplication of subsets of a semigroup forms a semigroup
+### Minkowski multiplication on subsets of a semigroup forms a semigroup
 
 ```agda
 module _
@@ -164,7 +162,7 @@ module _
       ( λ a b a∈A b∈B → intro-exists (a , b) (a∈A , b∈B , refl))
 ```
 
-### Containment is preserved by Minkowski multiplication of semigroup subtypes
+### Containment of subsets is preserved by Minkowski multiplication
 
 ```agda
 module _
@@ -186,7 +184,7 @@ module _
     map-tot-exists (λ (b , a) → map-product id (map-product (A⊆A' a) id))
 ```
 
-### Similarity is preserved by Minkowski multiplication of semigroup subtypes
+### Similarity of subsets is preserved by Minkowski multiplication
 
 ```agda
 module _
