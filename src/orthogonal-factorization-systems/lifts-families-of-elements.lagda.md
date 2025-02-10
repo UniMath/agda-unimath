@@ -167,14 +167,14 @@ module _
 Given a map `a : I → A`, and a homotopy `H : f ~ g`, where `f, g : J → I`, we
 know that there is an identification `a ∘ f ＝ a ∘ g`. Transporting along this
 identification in the type of lifts of families of elements into a type family
-`B : A → 𝓤`, we get a map
+`B : A → 𝒰`, we get a map
 
 ```text
   ((j : J) → B (a (f j))) → ((j : J) → B (a (g j))) .
 ```
 
 We show that this map is homotopic to transporting along `H` in the type family
-`B ∘ a : I → 𝓤`.
+`B ∘ a : I → 𝒰`.
 
 ```agda
 module _
