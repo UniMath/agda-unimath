@@ -29,12 +29,9 @@ open import logic.functoriality-existential-quantification
 
 ## Idea
 
-For two [subsets](group-theory.subsets-commutative-monoids.md) `A`, `B` of a
-[commutative monoid](group-theory.commutative-monoids.md) `M`, the Minkowski
-multiplication of `A` and `B` is the set of elements that can be formed by
-multiplying an element of `A` and an element of `B`. (This is more usually
-referred to as a Minkowski sum, but as the operation on commutative monoids is
-referred to as `mul`, we use multiplicative terminology.)
+Given two [subsets](group-theory.subsets-commutative-monoids.md) `A` and `B` of a
+[commutative monoid](group-theory.commutative-monoids.md) `M`, the {{#concept "Minkowski multiplication" Disambiguation="on subsets of a commutative monoid" WD="Minkowski addition" WDID=Q1322294 Agda=minkowski-mul-Commutative-Monoid}} of `A` and `B` is the [set](foundation-core.sets.md) of elements that can be formed by
+multiplying an element of `A` and an element of `B`. This binary operation defines a commutative monoid structure on the [powerset](foundation.powersets.md) of `M`.
 
 ## Definition
 
