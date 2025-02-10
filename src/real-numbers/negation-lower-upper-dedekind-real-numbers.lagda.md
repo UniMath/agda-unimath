@@ -29,17 +29,17 @@ open import foundation.universe-levels
 open import logic.functoriality-existential-quantification
 
 open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
 open import real-numbers.rational-lower-dedekind-real-numbers
 open import real-numbers.rational-upper-dedekind-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
 
 ## Idea
 
-The negation of a lower Dedekind real is an upper Dedekind real containing
-the negations of elements in the lower cut, and vice versa.
+The negation of a lower Dedekind real is an upper Dedekind real containing the
+negations of elements in the lower cut, and vice versa.
 
 ## Definition
 
@@ -126,7 +126,7 @@ module _
             ( λ x → le-ℚ x (neg-ℚ p))
             ( neg-neg-ℚ q)
             ( neg-le-ℚ p (neg-ℚ q) p<-q) ,
-          tr (is-in-cut-upper-ℝ x) (inv (neg-neg-ℚ p)) x<p )
+          tr (is-in-cut-upper-ℝ x) (inv (neg-neg-ℚ p)) x<p)
         ( forward-implication (is-rounded-cut-upper-ℝ x (neg-ℚ q)) x<-q)
     pr2 (is-rounded-cut-neg-upper-ℝ q) =
       elim-exists
@@ -186,7 +186,8 @@ abstract
 ### The negation of a rational projected to a lower real is the projection of its negation as an upper real
 
 ```agda
-neg-lower-real-ℚ : (q : ℚ) → neg-lower-ℝ (lower-real-ℚ q) ＝ upper-real-ℚ (neg-ℚ q)
+neg-lower-real-ℚ :
+  (q : ℚ) → neg-lower-ℝ (lower-real-ℚ q) ＝ upper-real-ℚ (neg-ℚ q)
 neg-lower-real-ℚ q =
   eq-eq-cut-upper-ℝ
     ( neg-lower-ℝ (lower-real-ℚ q))

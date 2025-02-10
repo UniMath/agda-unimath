@@ -33,9 +33,9 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
 open import real-numbers.upper-dedekind-real-numbers
-open import real-numbers.dedekind-real-numbers
 ```
 
 </details>
@@ -48,8 +48,8 @@ is {{#concept "arithmetically located" Disambiguation="Dedekind cut"}} if for
 any positive [rational number](elementary-number-theory.rational-numbers.md)
 `ε : ℚ`, there exist `p, q : ℚ` such that `0 < q - p < ε`, `p ∈ L`, and `q ∈ U`.
 Intuitively, when `L , U` represent the cuts of a real number `x`, `p` and `q`
-are rational approximations of `x` to within `ε`. This follows parts of
-Section 11 in {{#cite BauerTaylor2009}}.
+are rational approximations of `x` to within `ε`. This follows parts of Section
+11 in {{#cite BauerTaylor2009}}.
 
 ## Definitions
 

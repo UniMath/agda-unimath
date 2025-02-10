@@ -27,14 +27,14 @@ open import order-theory.large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 
+open import real-numbers.dedekind-real-numbers
 open import real-numbers.inequality-lower-dedekind-real-numbers
 open import real-numbers.inequality-upper-dedekind-real-numbers
 open import real-numbers.lower-dedekind-real-numbers
-open import real-numbers.upper-dedekind-real-numbers
-open import real-numbers.negation-real-numbers
 open import real-numbers.negation-lower-upper-dedekind-real-numbers
-open import real-numbers.dedekind-real-numbers
+open import real-numbers.negation-real-numbers
 open import real-numbers.rational-real-numbers
+open import real-numbers.upper-dedekind-real-numbers
 ```
 
 </details>
