@@ -265,9 +265,8 @@ number-of-elements-Decidable-Prop =
       ( count-Decidable-Prop)
       ( is-finite-Decidable-Prop))
 
-decidable-prop-Finite-Type : (l : Level) → Finite-Type (lsuc l)
-pr1 (decidable-prop-Finite-Type l) = Decidable-Prop l
-pr2 (decidable-prop-Finite-Type l) = is-finite-Decidable-Prop
+Decidable-Prop-Finite-Type : (l : Level) → Finite-Type (lsuc l)
+Decidable-Prop-Finite-Type l = (Decidable-Prop l , is-finite-Decidable-Prop)
 ```
 
 ### Decidable propositions are closed under retracts
