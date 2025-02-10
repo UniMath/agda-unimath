@@ -157,7 +157,7 @@ module _
         commutative-minkowski-mul-leq-Commutative-Monoid M B A)
 ```
 
-### Minkowski multiplication on a commutative monoid is a commutative monoid
+### Minkowski multiplication on subsets of a commutative monoid is a commutative monoid
 
 ```agda
 module _
@@ -173,7 +173,7 @@ module _
     commutative-minkowski-mul-Commutative-Monoid M
 ```
 
-### The Minkowski multiplication of two inhabited subsets of a commutative monoid is inhabited
+### The Minkowski multiplication of two inhabited subsets is inhabited
 
 ```agda
 module _
@@ -192,7 +192,7 @@ module _
     minkowski-mul-inhabited-is-inhabited-Monoid (monoid-Commutative-Monoid M)
 ```
 
-### Containment is preserved by Minkowski multiplication of monoid subsets
+### Containment of subsets is preserved by Minkowski multiplication
 
 ```agda
 module _
@@ -222,7 +222,7 @@ module _
       ( A')
 ```
 
-### Similarity is preserved by Minkowski multiplication of monoid subsets
+### Similarity of subsets is preserved by Minkowski multiplication
 
 ```agda
 module _

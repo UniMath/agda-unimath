@@ -1,4 +1,4 @@
-# Minkowski multiplication of monoid subtypes
+# Minkowski multiplication on subsets of a monoid
 
 ```agda
 module group-theory.minkowski-multiplication-monoids where
@@ -51,7 +51,7 @@ module _
 
 ## Properties
 
-### Minkowski multiplication of monoid subsets is associative
+### Minkowski multiplication on subsets of a monoid is associative
 
 ```agda
 module _
@@ -69,7 +69,7 @@ module _
     associative-minkowski-mul-Semigroup (semigroup-Monoid M) A B C
 ```
 
-### Unit laws for Minkowski multiplication of monoid subsets
+### Unit laws for Minkowski multiplication on subsets of a monoid
 
 ```agda
 module _
@@ -119,7 +119,7 @@ module _
       ( a∈A , refl , inv (right-unit-law-mul-Monoid M a))
 ```
 
-### Minkowski multiplication of subtypes of a monoid forms a monoid
+### Minkowski multiplication on subsets of a monoid forms a monoid
 
 ```agda
 module _
@@ -166,7 +166,7 @@ module _
     minkowski-mul-inhabited-is-inhabited-Semigroup (semigroup-Monoid M)
 ```
 
-### Containment is preserved by Minkowski multiplication of monoid subsets
+### Containment of subsets is preserved by Minkowski multiplication
 
 ```agda
 module _
@@ -188,7 +188,7 @@ module _
     preserves-leq-right-minkowski-mul-Semigroup (semigroup-Monoid M) B A A'
 ```
 
-### Similarity is preserved by Minkowski multiplication of monoid subsets
+### Similarity of subsets is preserved by Minkowski multiplication
 
 ```agda
 module _
