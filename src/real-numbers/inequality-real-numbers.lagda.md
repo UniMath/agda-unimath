@@ -62,7 +62,7 @@ module _
 
 ## Properties
 
-### Equivalence with reversed containment of upper cuts
+### Equivalence with inequality on upper cuts
 
 ```agda
 module _
