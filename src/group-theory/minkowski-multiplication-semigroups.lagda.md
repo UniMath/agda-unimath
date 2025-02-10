@@ -33,9 +33,12 @@ open import logic.functoriality-existential-quantification
 ## Idea
 
 Given two [subsets](group-theory.subsets-semigroups.md) `A` and `B` of a
-[semigroup](group-theory.semigroups.md) `S`, the {{#concept "Minkowski multiplication" Disambiguation="on subsets of a semigroup" WD="Minkowski addition" WDID=Q1322294 Agda=minkowski-mul-Semigroup}} of `A`
-and `B` is the [set](foundation-core.sets.md) of elements that can be formed by multiplying an element of
-`A` and an element of `B`. This binary operation defines a semigroup structure on the [powerset](foundation.powersets.md) of `S`.
+[semigroup](group-theory.semigroups.md) `S`, the
+{{#concept "Minkowski multiplication" Disambiguation="on subsets of a semigroup" WD="Minkowski addition" WDID=Q1322294 Agda=minkowski-mul-Semigroup}}
+of `A` and `B` is the [set](foundation-core.sets.md) of elements that can be
+formed by multiplying an element of `A` and an element of `B`. This binary
+operation defines a semigroup structure on the
+[powerset](foundation.powersets.md) of `S`.
 
 ## Definition
 
