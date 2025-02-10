@@ -79,7 +79,7 @@ module _
     associative-minkowski-mul-Monoid (monoid-Commutative-Monoid M) A B C
 ```
 
-### Minkowski multiplication of commutative monoid subsets is unital
+### Minkowski multiplication on subsets of a commutative monoid is unital
 
 ```agda
 module _
