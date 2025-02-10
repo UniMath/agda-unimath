@@ -25,7 +25,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A upper
+An upper
 {{#concept "Dedekind cut" Agda=is-dedekind-cut WD="dedekind cut" WDID=Q851333}}
 consists of a [subtype](foundation-core.subtypes.md) `U` of
 [the rational numbers](elementary-number-theory.rational-numbers.md) `ℚ`,
