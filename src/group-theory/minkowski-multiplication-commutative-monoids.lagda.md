@@ -7,6 +7,7 @@ module group-theory.minkowski-multiplication-commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
@@ -20,6 +21,8 @@ open import group-theory.commutative-monoids
 open import group-theory.minkowski-multiplication-monoids
 open import group-theory.monoids
 open import group-theory.subsets-commutative-monoids
+
+open import logic.functoriality-existential-quantification
 ```
 
 </details>
@@ -134,10 +137,13 @@ module _
     minkowski-mul-Commutative-Monoid M B A
   commutative-minkowski-mul-leq-Commutative-Monoid x =
     map-exists
-      ( minkowski-mul-Commutative-Monoid M B A x)
-      ( λ (a, b) → (b , a))
+      ( λ (b , a) →
+        is-in-subtype B b ×
+        is-in-subtype A a ×
+        (x ＝ mul-Commutative-Monoid M b a))
+      ( λ (a , b) → (b , a))
       ( λ (b , a) (a∈A , b∈B , x=ab) →
-        ( b∈B , a∈A , x=ab ∙ commutative-mul-Commutative-Monoid M a b))
+        ( b∈B , a∈A , x=ab ∙ commutative-mul-Commutative-Monoid M b a))
 
 module _
   {l1 l2 l3 : Level}
