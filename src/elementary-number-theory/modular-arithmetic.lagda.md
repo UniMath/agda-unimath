@@ -131,9 +131,9 @@ abstract
   is-finite-ℤ-Mod {zero-ℕ} H = ex-falso (H refl)
   is-finite-ℤ-Mod {succ-ℕ k} H = is-finite-Fin (succ-ℕ k)
 
-ℤ-Mod-𝔽 : (k : ℕ) → is-nonzero-ℕ k → 𝔽 lzero
-pr1 (ℤ-Mod-𝔽 k H) = ℤ-Mod k
-pr2 (ℤ-Mod-𝔽 k H) = is-finite-ℤ-Mod H
+ℤ-Mod-Finite-Type : (k : ℕ) → is-nonzero-ℕ k → Finite-Type lzero
+pr1 (ℤ-Mod-Finite-Type k H) = ℤ-Mod k
+pr2 (ℤ-Mod-Finite-Type k H) = is-finite-ℤ-Mod H
 ```
 
 ## The inclusion of the integers modulo `k` into ℤ
