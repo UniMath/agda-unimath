@@ -34,7 +34,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A **concrete group** is a [pointed](structured-types.pointed-types.md)
+A {{#concept "concrete group" WD="group" WDID=Q83478 Agda=Concrete-Group}} is a
+[pointed](structured-types.pointed-types.md)
 [connected](foundation.0-connected-types.md)
 [1-type](foundation-core.1-types.md).
 
@@ -168,15 +169,15 @@ module _
     (x : type-Concrete-Group G) →
     mul-Concrete-Group x (inv-Concrete-Group x) ＝ unit-Concrete-Group
   right-inverse-law-mul-Concrete-Group =
-    right-inverse-law-mul-∞-Group ∞-group-Concrete-Group
+    right-inverse-law-mul-∞-Group (∞-group-Concrete-Group G)
 
   has-associative-mul-Concrete-Group :
-    has-associative-mul-Set set-Concrete-Group
+    has-associative-mul-Set (set-Concrete-Group G)
   pr1 has-associative-mul-Concrete-Group = mul-Concrete-Group
   pr2 has-associative-mul-Concrete-Group = associative-mul-Concrete-Group
 
   semigroup-Concrete-Group : Semigroup l
-  pr1 semigroup-Concrete-Group = set-Concrete-Group
+  pr1 semigroup-Concrete-Group = set-Concrete-Group G
   pr2 semigroup-Concrete-Group = has-associative-mul-Concrete-Group
 
   is-unital-Concrete-Group : is-unital-Semigroup semigroup-Concrete-Group
@@ -188,19 +189,16 @@ module _
   pr1 monoid-Concrete-Group = semigroup-Concrete-Group
   pr2 monoid-Concrete-Group = is-unital-Concrete-Group
 
-  is-group-Concrete-Group :
-    is-group semigroup-Concrete-Group
-  pr1 is-group-Concrete-Group = is-unital-Concrete-Group
-  pr1 (pr2 is-group-Concrete-Group) = inv-Concrete-Group
-  pr1 (pr2 (pr2 is-group-Concrete-Group)) = left-inverse-law-mul-Concrete-Group
-  pr2 (pr2 (pr2 is-group-Concrete-Group)) = right-inverse-law-mul-Concrete-Group
-
-  abstract-group-Concrete-Group : Group l
-  pr1 abstract-group-Concrete-Group = semigroup-Concrete-Group
-  pr2 abstract-group-Concrete-Group = is-group-Concrete-Group
+  is-group-Concrete-Group' :
+    is-group-is-unital-Semigroup
+      ( semigroup-Concrete-Group)
+      ( is-unital-Concrete-Group)
+  pr1 is-group-Concrete-Group' = inv-Concrete-Group
+  pr1 (pr2 is-group-Concrete-Group') = left-inverse-law-mul-Concrete-Group
+  pr2 (pr2 is-group-Concrete-Group') = right-inverse-law-mul-Concrete-Group
 
   is-group-Concrete-Group : is-group-Semigroup semigroup-Concrete-Group
-  pr1 is-group-Concrete-Group = is-unital-semigroup-Concrete-Group
+  pr1 is-group-Concrete-Group = is-unital-Concrete-Group
   pr2 is-group-Concrete-Group = is-group-Concrete-Group'
 
   group-Concrete-Group : Group l

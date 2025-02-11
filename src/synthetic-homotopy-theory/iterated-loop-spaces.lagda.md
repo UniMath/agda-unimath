@@ -22,8 +22,9 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-The **iterated loop space** `ΩⁿA` of a
-[pointed type](structured-types.pointed-types.md) `A` is obtained by
+The
+{{#concept "iterated loop space" Disambiguation="of a pointed type" Agda=iterated-loop-space}}
+`ΩⁿA` of a [pointed type](structured-types.pointed-types.md) `A` is obtained by
 [iteratively](foundation.iterating-functions.md) applying the
 [loop space](synthetic-homotopy-theory.loop-spaces.md) operation `Ω` to `A`.
 

@@ -14,6 +14,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.subtype-identity-principle
 open import foundation.torsorial-type-families
@@ -30,7 +31,10 @@ open import higher-group-theory.higher-groups
 
 ## Idea
 
-The **concrete automorphism group** of an element `a` of a [1-type](foundation.1-types.md) `A` is the [connected component](foundation.connected-components.md) of `a`.
+The concrete
+{{#concept "automorphism group" Disambiguation="of a 1-type at a point" WD="automorphism group" WDID=Q60790315 Agda=Automorphism-Group}}
+of an element `a` of a [1-type](foundation.1-types.md) `A` is the
+[connected component](foundation.connected-components.md) of `a`.
 
 ## Definitions
 
@@ -55,8 +59,8 @@ module _
       ( type-1-Type A)
       ( a)
       ( is-1-type-type-1-Type A)
-      ( pair a (unit-trunc-Prop refl))
-      ( pair a (unit-trunc-Prop refl))
+      ( a , refl-mere-eq a)
+      ( a , refl-mere-eq a)
 
   ∞-group-Automorphism-Group : ∞-Group l
   ∞-group-Automorphism-Group = ∞-group-Concrete-Group Automorphism-Group
@@ -130,3 +134,7 @@ module _
   equiv-eq-Automorphism-Group refl =
     id-equiv-Concrete-Group (Automorphism-Group A _)
 ```
+
+## See also
+
+- [Automorphism $∞$-groups](higher-group-theory.automorphism-groups.md)

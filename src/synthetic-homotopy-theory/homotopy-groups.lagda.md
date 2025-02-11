@@ -26,20 +26,34 @@ open import synthetic-homotopy-theory.iterated-loop-spaces
 
 ## Idea
 
-The **(abstract) homotopy groups** of a [pointed type](structured-types.pointed-types.md)
-`A` are a sequence `i ↦ πᵢ A` where
-- `π₀ A` is the [set](foundation.sets.md) of [connected components](foundation.connected-components.md) of `A`, and
-- `πᵢ₊₁ A` is  the set `πᵢ ΩA` equipped with the [group structure](group-theory.groups.md) obtained from the [loop space](synthetic-homotopy theory.loop-spaces.md).
+The
+{{#concept "(abstract) homotopy groups" Disambiguation="of a pointed type" Agda=?}}
+of a [pointed type](structured-types.pointed-types.md) `A` are a
+[sequence](foundation.sequences.md) `i ↦ πᵢ A` of [sets](foundation.sets.md)
+where
 
-For `i ≥ 2`, the `i`-th homotopy group `πᵢ A` of `A` is [abelian](group-theory.abelian-groups.md) by the [Eckmann-Hilton argument](synthetic-homotopy-theory.eckmann-hilton-argument.md).
+- `π₀ A` is the set of
+  [connected components](foundation.connected-components.md) of `A`, and
+- `πᵢ₊₁ A` is the set `πᵢ ΩA` equipped with the
+  [group structure](group-theory.groups.md) obtained from the [loop
+  space](synthetic-homotopy theory.loop-spaces.md).
 
-Alternatively, we can define the **concrete homotopy groups** of a pointed type `A` to be the [sequence](foundation.sequences.md) `ℕ → Concrete-Group`, given by
+For `i ≥ 2`, the `i`-th homotopy group `πᵢ A` of `A` is
+[abelian](group-theory.abelian-groups.md) by the
+[Eckmann-Hilton argument](synthetic-homotopy-theory.eckmann-hilton-argument.md).
+
+Alternatively, we can define the
+{{#concept "concrete homotopy groups" Disambiguation="of a pointed type"}} of a
+pointed type `A` to be the sequence `ℕ → Concrete-Group`, given by
 
 ```text
   i ↦ concrete-group-Pointed-Type (iterated-loop-space i A)
 ```
 
-However, note that there is an [Obi-wan error](https://www.urbandictionary.com/define.php?term=Obi-wan+error) in this definition: The `0`-th concrete homotopy group corresponds to the first abstract homotopy group.
+However, note that there is an
+[Obi-wan error](https://www.urbandictionary.com/define.php?term=Obi-wan+error)
+in this definition: The `0`-th concrete homotopy group corresponds to the first
+abstract homotopy group.
 
 ## Definitions
 

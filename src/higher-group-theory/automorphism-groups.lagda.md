@@ -17,6 +17,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -32,7 +33,9 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The **automorphim group** of an element `a : A` is the
+The
+{{#concept "automorphim ∞-group" Disambiguation="of a pointed type" Agda=Automorphism-∞-Group}}
+of an element `a` of a type `A` is the
 [∞-group](higher-group-theory.higher-groups.md) of
 [symmetries](foundation-core.identity-types.md) of `a` in `A`.
 
@@ -87,14 +90,14 @@ module _
     Eq-classifying-type-Automorphism-∞-Group X X
   refl-Eq-classifying-type-Automorphism-∞-Group X = refl
 
-  is-contr-total-Eq-classifying-type-Automorphism-∞-Group :
+  is-torsorial-Eq-classifying-type-Automorphism-∞-Group :
     (X : classifying-type-Automorphism-∞-Group a) →
     is-contr
       ( Σ ( classifying-type-Automorphism-∞-Group a)
           ( Eq-classifying-type-Automorphism-∞-Group X))
-  is-contr-total-Eq-classifying-type-Automorphism-∞-Group X =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-path (pr1 X))
+  is-torsorial-Eq-classifying-type-Automorphism-∞-Group X =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-Id (pr1 X))
       ( λ a → is-prop-type-trunc-Prop)
       ( pr1 X)
       ( refl)
@@ -111,7 +114,7 @@ module _
     is-equiv (Eq-eq-classifying-type-Automorphism-∞-Group X Y)
   is-equiv-Eq-eq-classifying-type-Automorphism-∞-Group X =
     fundamental-theorem-id
-      ( is-contr-total-Eq-classifying-type-Automorphism-∞-Group X)
+      ( is-torsorial-Eq-classifying-type-Automorphism-∞-Group X)
       ( Eq-eq-classifying-type-Automorphism-∞-Group X)
 
   extensionality-classifying-type-Automorphism-∞-Group :
@@ -139,6 +142,10 @@ module _
   equiv-eq-Automorphism-∞-Group :
     {x y : A} (p : x ＝ y) →
     equiv-∞-Group (Automorphism-∞-Group x) (Automorphism-∞-Group y)
-  equiv-eq-Automorphism-∞-Group refl =
-    id-equiv-∞-Group (Automorphism-∞-Group _)
+  equiv-eq-Automorphism-∞-Group {x} refl =
+    id-equiv-∞-Group (Automorphism-∞-Group x)
 ```
+
+## See also
+
+- [Automorphism groups of 1-types](group-theory.automorphism-groups.md)
