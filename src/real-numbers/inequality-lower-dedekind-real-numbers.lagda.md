@@ -111,7 +111,3 @@ iff-leq-lower-real-ℚ :
 pr1 (iff-leq-lower-real-ℚ p q) = preserves-leq-lower-real-ℚ p q
 pr2 (iff-leq-lower-real-ℚ p q) = reflects-leq-lower-real-ℚ p q
 ```
-
-## References
-
-{{#bibliography}}
