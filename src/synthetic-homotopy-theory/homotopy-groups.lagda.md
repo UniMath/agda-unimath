@@ -13,8 +13,11 @@ open import foundation.connected-components
 open import foundation.dependent-pair-types
 open import foundation.set-truncations
 open import foundation.sets
+open import foundation.truncation-levels
+open import foundation.truncations
 open import foundation.universe-levels
 
+open import group-theory.automorphism-groups
 open import group-theory.concrete-groups
 
 open import structured-types.pointed-types
@@ -89,5 +92,8 @@ module _
   where
 
   concrete-homotopy-group : Concrete-Group l
-  concrete-homotopy-group = {!concrete-group-∞-Group!}
+  concrete-homotopy-group =
+    Automorphism-Group
+      ( trunc one-𝕋 (type-iterated-loop-space n A))
+      ( unit-trunc (point-iterated-loop-space n A))
 ```
