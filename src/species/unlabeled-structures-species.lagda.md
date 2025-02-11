@@ -60,7 +60,7 @@ module _
       k
       type-of-cardinality-unlabeled-structure-species-types
 
-  finite-type-unlabeled-structure-species-types : 𝔽 l1
+  finite-type-unlabeled-structure-species-types : Finite-Type l1
   finite-type-unlabeled-structure-species-types =
     finite-type-UU-Fin k type-of-cardinality-unlabeled-structure-species-types
 

@@ -29,7 +29,7 @@ types `T` is the formal series in `s` :
 If `s` is a negative integer, the categorified version of this formula is
 
 ```text
-Σ (F : 𝔽 ∖ {∅}), T (F) × (S → F)
+Σ (F : Finite-Type ∖ {∅}), T (F) × (S → F)
 ```
 
 We can generalize it to species of types as
