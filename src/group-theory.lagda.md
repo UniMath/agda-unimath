@@ -116,6 +116,9 @@ open import group-theory.large-semigroups public
 open import group-theory.loop-groups-sets public
 open import group-theory.mere-equivalences-concrete-group-actions public
 open import group-theory.mere-equivalences-group-actions public
+open import group-theory.minkowski-multiplication-commutative-monoids public
+open import group-theory.minkowski-multiplication-monoids public
+open import group-theory.minkowski-multiplication-semigroups public
 open import group-theory.monoid-actions public
 open import group-theory.monoids public
 open import group-theory.monomorphisms-concrete-groups public
