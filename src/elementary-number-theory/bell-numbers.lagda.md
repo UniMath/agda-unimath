@@ -28,7 +28,7 @@ $$
 $$
 
 The Bell numbers are listed as sequence A000110 in the
-[OEIS](literature.oeis.md) {{#cite OEIS}}
+[OEIS](literature.oeis.md) {{#cite OEIS}}.
 
 ## Definitions
 
