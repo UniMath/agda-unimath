@@ -101,12 +101,12 @@ abstract
         ( x)))
 ```
 
-### Inclusion of `compute-coproduct-Fin` into the natural numbers
+### Computing the inclusion of a coproduct of standard finite types into the natural numbers
 
 ```agda
 abstract
   nat-coproduct-Fin :
-    (n m : ℕ) → (x : Fin n + Fin m) →
+    (n m : ℕ) (x : Fin n + Fin m) →
     nat-Fin (n +ℕ m) (map-compute-coproduct-Fin n m x) ＝
     ind-coproduct _ (nat-Fin n) (λ i → n +ℕ (nat-Fin m i)) x
   nat-coproduct-Fin n zero-ℕ (inl x) = refl
